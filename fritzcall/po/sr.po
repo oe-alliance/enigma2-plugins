@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-20 10:41+0100\n"
+"POT-Creation-Date: 2019-01-19 17:00+0100\n"
 "PO-Revision-Date: 2009-09-10 22:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -214,9 +214,6 @@ msgstr "Uredi"
 #. TRANSLATORS: this is a window title.
 msgid "Edit selected entry"
 msgstr "Uredi izabrani unos"
-
-msgid "Enter Search Terms"
-msgstr "Unesi termin za pretragu"
 
 msgid "Entry incomplete."
 msgstr "Unos nekompletan."
@@ -651,6 +648,9 @@ msgstr ""
 msgid "Update available"
 msgstr ""
 
+msgid "Use HTTPS to communicate with FRITZ!Box"
+msgstr ""
+
 msgid "Use internal PhoneBook"
 msgstr "Koristi interni tel. imenik"
 
@@ -812,6 +812,9 @@ msgstr ""
 
 #~ msgid "Debug"
 #~ msgstr "Debag"
+
+#~ msgid "Enter Search Terms"
+#~ msgstr "Unesi termin za pretragu"
 
 #~ msgid "FRITZ!Box - Could not load phonebook: %s"
 #~ msgstr "\"FRITZ!Box - Ne mogu učitati imenik: %s"

@@ -259,7 +259,7 @@ msgid "Search type"
 msgstr "Keresés típusa"
 
 #: src/EPGSearchSetup.py:96
-msgid "Set type of match used to compare program titles with the search string"
+msgid "Set type of match used to compare program titles with the search string."
 msgstr ""
 "Állítsa be a keresésben használt szöveg egyezés, illeszkedés típusát. A "
 "'pontos egyezés, illeszkedés' csak a Teljes szóra, a 'részleges egyezés, "
@@ -270,7 +270,7 @@ msgid "Search strictness"
 msgstr "Keresés pontosabban"
 
 #: src/EPGSearchSetup.py:97
-msgid "Is the search case-sensitive or case-insensitive"
+msgid "Is the search case-sensitive or case-insensitive?"
 msgstr "A keresés a kis-és nagybetűkre érzékeny"
 
 #: src/EPGSearchSetup.py:98

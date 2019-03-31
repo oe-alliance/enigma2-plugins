@@ -613,7 +613,7 @@ msgstr "Rajoita \"ohjelman jälkeen\" toiminto tiettyyn aikajaksoon?"
 
 msgid ""
 "Restrict autotimer to bouquets.\n"
-"Use the blue key to edit the bouquet filter"
+"Use the blue key to edit the bouquet filter."
 msgstr ""
 "Rajoita autotimer tiettyihin kanaviin.\n"
 "Käytä sinistä nappia muokataksesi hakuehtoja."
@@ -659,7 +659,7 @@ msgstr "Haun tarkkuus"
 msgid "Search type"
 msgstr "Haun tyyppi"
 
-msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description"
+msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description."
 msgstr "Valitset \"täysin sama\" pakottaaksesi \"Hae ohjelmanimi\" hakemaan juuri sitä nimeä, \"osittainen vastaavuus\" jos haluat hakea vain osaa osaa ohjelman nimestä tai \"kuvaus\" jos haluat hakea osaa ohjelman kuvaustekstistä"
 
 msgid "Select a timer to import"

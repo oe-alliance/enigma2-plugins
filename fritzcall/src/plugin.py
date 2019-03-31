@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 1534 $
-$Date: 2018-08-17 14:16:52 +0200 (Fri, 17 Aug 2018) $
-$Id: plugin.py 1534 2018-08-17 12:16:52Z michael $
+$Revision: 1549 $
+$Date: 2019-01-19 16:58:28 +0100 (Sat, 19 Jan 2019) $
+$Id: plugin.py 1549 2019-01-19 15:58:28Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -32,7 +32,8 @@ from enigma import getDesktop
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.NumericalTextInputHelpDialog import NumericalTextInputHelpDialog
-from Screens.InputBox import InputBox
+# from Screens.InputBox import InputBox
+from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens import Standby
 from Screens.HelpMenu import HelpableScreen
 from Screens.LocationBox import LocationBox
@@ -156,6 +157,7 @@ config.plugins.FritzCall.advancedSkin = ConfigYesNo(default = False)
 config.plugins.FritzCall.guestSSID = ConfigText(default = "FRITZ!Box Gastzugang", fixed_size = False)
 config.plugins.FritzCall.guestSecure = ConfigYesNo(default = True)
 config.plugins.FritzCall.guestPassword = ConfigPassword(default = encode("guestguest!!!"), fixed_size = False)
+config.plugins.FritzCall.useHttps = ConfigYesNo(default = False)
 
 guestWLANUptime = [(None, _('Not deactivating after time')), "15", "30", "45", "60", "90", "120", "180", "240", "300", "360", "480", "600", "720", "900", "1080", "1260"]
 config.plugins.FritzCall.guestUptime = ConfigSelection(choices = guestWLANUptime, default = "30")
@@ -367,8 +369,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 1534 $"[1:-2] + "\n" +
-							"$Date: 2018-08-17 14:16:52 +0200 (Fri, 17 Aug 2018) $"[1:23] + "\n"
+							"$Revision: 1549 $"[1:-2] + "\n" +
+							"$Date: 2019-01-19 16:58:28 +0100 (Sat, 19 Jan 2019) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -2147,7 +2149,7 @@ class FritzCallPhonebook(object):
 				"red": self.delete,
 				"green": self.add,
 				"yellow": self.edit,
-				"blue": self.search,
+				"blue": self.mySearch,
 				"cancel": self.exit,
 				"ok": self.showEntry, }, -2)
 
@@ -2408,12 +2410,12 @@ class FritzCallPhonebook(object):
 			else:
 				self.add(self, cur[2], cur[0])
 
-		def search(self):
+		def mySearch(self):
 			debug("[FritzDisplayPhonebook]")
-			self.help_window = self.session.instantiateDialog(NumericalTextInputHelpDialog, self)
-			self.help_window.show()
+			# self.help_window = self.session.instantiateDialog(NumericalTextInputHelpDialog, self)
+			# self.help_window.show()
 			# VirtualKeyboard instead of InputBox?
-			self.session.openWithCallback(self.doSearch, InputBox, _("Enter Search Terms"), _("Search phonebook"))
+			self.session.openWithCallback(self.doSearch, VirtualKeyBoard, title = _("Search phonebook"))
 
 		def doSearch(self, searchTerms):
 			if not searchTerms:
@@ -2622,7 +2624,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1534 $"[1:-1] + "$Date: 2018-08-17 14:16:52 +0200 (Fri, 17 Aug 2018) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1549 $"[1:-1] + "$Date: 2019-01-19 16:58:28 +0100 (Sat, 19 Jan 2019) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2702,6 +2704,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			self.list.append(getConfigListEntry(_("Ignore callers with no phone number"), config.plugins.FritzCall.ignoreUnknown))
 			self.list.append(getConfigListEntry(_("Log level"), config.plugins.FritzCall.debug))
 			self.list.append(getConfigListEntry(_("Make it more skin friendly"), config.plugins.FritzCall.advancedSkin))
+			self.list.append(getConfigListEntry(_("Use HTTPS to communicate with FRITZ!Box"), config.plugins.FritzCall.useHttps))
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
@@ -3230,7 +3233,7 @@ class FritzReverseLookupAndNotifier(object):
 
 class FritzProtocol(LineReceiver):  # pylint: disable=W0223
 	def __init__(self):
-		info("[FritzProtocol] " + "$Revision: 1534 $"[1:-1] + "$Date: 2018-08-17 14:16:52 +0200 (Fri, 17 Aug 2018) $"[7:23] + " starting")
+		info("[FritzProtocol] " + "$Revision: 1549 $"[1:-1] + "$Date: 2019-01-19 16:58:28 +0100 (Sat, 19 Jan 2019) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'

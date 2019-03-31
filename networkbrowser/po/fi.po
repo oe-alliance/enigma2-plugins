@@ -314,6 +314,6 @@ msgstr "Verkkoliitoksesi on poistettu."
 msgid "Your network mount has been updated."
 msgstr "Verkkoliitoksesi on päivitetty."
 
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr "Käytä korvaavana kovalevynä"
 

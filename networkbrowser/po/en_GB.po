@@ -311,8 +311,8 @@ msgstr "Your network mount has been removed."
 msgid "Your network mount has been updated."
 msgstr "Your network mount has been updated."
 
-msgid "use as HDD replacement"
-msgstr "use as HDD replacement"
+msgid "Use as HDD replacement"
+msgstr "Use as HDD replacement"
 
 #~ msgid "Enigma2 (mount using enigma2"
 #~ msgstr "Enigma2 (mount using enigma2"

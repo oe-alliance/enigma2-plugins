@@ -288,7 +288,7 @@ msgstr "Twoje montowanie sieci zostało usunięte."
 msgid "Your network mount has been updated."
 msgstr "Twoje montowanie sieci zostało zaktualizowane."
 
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr "Użyj jako wymiany HDD"
 
 msgid "Mount manager"

@@ -151,7 +151,7 @@ msgstr "Hõlma/eira vasteid seda tüüpi allikalt"
 msgid "Include/exclude sources"
 msgstr "Hõlma/eira allikaid"
 
-msgid "Is the search case-sensitive or case-insensitive"
+msgid "Is the search case-sensitive or case-insensitive?"
 msgstr "Tõusutundlik või tõusutundetu otsing"
 
 msgid "Length of history"
@@ -223,7 +223,7 @@ msgstr "Vali taimer, mida otsida"
 msgid "Select text to search for"
 msgstr "Vali taimer, mida otsida"
 
-msgid "Set type of match used to compare program titles with the search string"
+msgid "Set type of match used to compare program titles with the search string."
 msgstr "Määra saatenimede ja otsisõnade võrdlemisel kasutatav vastete tüüp"
 
 msgid "Sets the default search scope when the user is asked."

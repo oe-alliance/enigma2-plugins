@@ -113,7 +113,7 @@ msgid "OK"
 msgstr "Gerai"
 
 #: EPGRefreshChannelEditor.py:81
-msgid "delete"
+msgid "Delete"
 msgstr "šalinti"
 
 #: EPGRefreshChannelEditor.py:82
@@ -316,11 +316,11 @@ msgstr ""
 "Kai čia įjungta, turėsite galimybę pradėti EPG atnaujinimą iš plėtinių lango."
 
 #: EPGRefreshConfiguration.py:169
-msgid "Show 'EPGRefresh Start now' in extension menu"
+msgid "Show 'EPGRefresh Start now' in extension menu."
 msgstr "Rodyti 'EPG atnaujinti dabar' plėtinių naršyklėje"
 
 #: EPGRefreshConfiguration.py:170
-msgid "Show popup when refresh starts and ends"
+msgid "Show popup when refresh starts and ends."
 msgstr "Rodyti iškylantį pranešimą, kai atnaujinimas prasideda ir baigiasi"
 
 #: EPGRefreshConfiguration.py:170
@@ -340,11 +340,11 @@ msgstr ""
 "būsenos. Kitaip, jis turi būti įjungtas iš anksto."
 
 #: EPGRefreshConfiguration.py:171
-msgid "Wake up from standby for EPG refresh"
+msgid "Wake up from standby for EPG refresh."
 msgstr "Prižadinti EPG atnaujinimui"
 
 #: EPGRefreshConfiguration.py:172
-msgid "Force scan even if receiver is in use"
+msgid "Force scan even if receiver is in use."
 msgstr "Paleisti skenavimą, net jei imtuvas užimtas"
 
 #: EPGRefreshConfiguration.py:172
@@ -356,7 +356,7 @@ msgstr ""
 "veikia (arba ne budėjimo, ar įrašymo būsenoje)."
 
 #: EPGRefreshConfiguration.py:173
-msgid "Shutdown after EPG refresh"
+msgid "Shutdown after EPG refresh."
 msgstr "Po EPG atnaujinimo, išjungti"
 
 #: EPGRefreshConfiguration.py:173

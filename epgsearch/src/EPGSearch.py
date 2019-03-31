@@ -17,7 +17,7 @@ from Screens.EpgSelection import EPGSelection
 from Screens.MessageBox import MessageBox
 from Screens.HelpMenu import HelpableScreen
 from Screens.Screen import Screen
-from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard
+from Screens.VirtualKeyBoard import VirtualKeyBoard
 
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.Button import Button
@@ -432,7 +432,7 @@ class EPGSearch(EPGSelection):
 		self.close()
 
 	def yellowButtonPressed(self):
-		self.session.openWithCallback(self.searchEPG, NTIVirtualKeyBoard, title=_("Enter text to search for"))
+		self.session.openWithCallback(self.searchEPG, VirtualKeyBoard, title=_("Enter text to search for"), text=self.currSearch)
 
 	def menu(self):
 		options = [

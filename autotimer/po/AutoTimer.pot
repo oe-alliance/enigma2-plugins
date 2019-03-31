@@ -17,6 +17,26 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: ../src/__init__.py:75
+msgid "If specified services"
+msgstr ""
+
+#: ../src/__init__.py:76
+msgid "If specified bouquets"
+msgstr ""
+
+#: ../src/__init__.py:77
+msgid "If specified services or bouquets"
+msgstr ""
+
+#: ../src/AutoTimerList.py:148
+msgid "[S]  "
+msgstr ""
+
+#: ../src/AutoTimerList.py:151
+msgid "[B]  "
+msgstr ""
+
 #: ../src/AutoTimerList.py:170
 msgid "  Any time"
 msgstr ""
@@ -725,6 +745,14 @@ msgstr ""
 msgid "Only add timer for next x days"
 msgstr ""
 
+#: ../src/AutoTimerSettings.py:45
+msgid "Allow double timer for different services"
+msgstr ""
+
+#: ../src/AutoTimerSettings.py:45
+msgid "Here you can specify whether simultaneous timers of the same program can be created. This allows simultaneous recording of a program with different resolutions. (e.g. SD service and HD service)"
+msgstr ""
+
 #: ../src/AutoTimerEditor.py:554 ../src/AutoTimerWizard.py:97
 #: ../src/AutoTimerEditor.py:598
 msgid "Only match during timespan"
@@ -860,7 +888,7 @@ msgstr ""
 #: ../src/AutoTimerEditor.py:573
 msgid ""
 "Restrict autotimer to bouquets.\n"
-"Use the blue key to edit the bouquet filter"
+"Use the blue key to edit the bouquet filter."
 msgstr ""
 
 #: ../src/AutoTimerEditor.py:574
@@ -917,7 +945,7 @@ msgid ""
 "Select \"exact match\" to enforce \"Match title\" to match exactly, "
 "\"partial match\" if you only want to search for a part of the event title "
 "or \"description match\" if you only want to search for a part of the event "
-"description"
+"description."
 msgstr ""
 
 #: ../src/AutoTimerImporter.py:60 ../src/AutoTimerImporter.py:61

@@ -160,4 +160,7 @@ class EPGRefreshTimer(timer.Timer):
 	def isActive(self):
 		return len(self.timer_list) > 0
 
+	def saveTimer(self):
+		pass
+
 epgrefreshtimer = EPGRefreshTimer()

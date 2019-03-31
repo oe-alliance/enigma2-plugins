@@ -502,7 +502,7 @@ msgstr "جستجوی بهتر "
 msgid "Search type"
 msgstr "نوع جستجو"
 
-msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description"
+msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description."
 msgstr ""
 
 msgid "Select a timer to import"

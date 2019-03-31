@@ -576,7 +576,7 @@ msgid ""
 "Select \"exact match\" to enforce \"Match title\" to match exactly, "
 "\"partial match\" if you only want to search for a part of the event title "
 "or \"description match\" if you only want to search for a part of the event "
-"description"
+"description."
 msgstr ""
 
 msgid "Select a timer to import"

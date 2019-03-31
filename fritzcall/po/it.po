@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2  - FRITZ!Box\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-20 10:41+0100\n"
+"POT-Creation-Date: 2019-01-19 17:00+0100\n"
 "PO-Revision-Date: 2015-04-14 23:22+0200\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -215,9 +215,6 @@ msgstr "Mod."
 #. TRANSLATORS: this is a window title.
 msgid "Edit selected entry"
 msgstr "Mod. voce selezionata"
-
-msgid "Enter Search Terms"
-msgstr "Inserire criteri di ricerca"
 
 msgid "Entry incomplete."
 msgstr "Voce incompleta."
@@ -676,6 +673,9 @@ msgstr ""
 msgid "Update available"
 msgstr ""
 
+msgid "Use HTTPS to communicate with FRITZ!Box"
+msgstr ""
+
 msgid "Use internal PhoneBook"
 msgstr "Usare la rubrica interna"
 
@@ -834,6 +834,9 @@ msgstr "Utente o password errati?"
 
 #~ msgid "Debug"
 #~ msgstr "Debug"
+
+#~ msgid "Enter Search Terms"
+#~ msgstr "Inserire criteri di ricerca"
 
 #~ msgid "FRITZ!Box - Could not load phonebook: %s"
 #~ msgstr "FRITZ!Box - Impossibile caricare la rubrica: %s"

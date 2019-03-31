@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgrefresh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-09 23:22+0000\n"
-"PO-Revision-Date: 2017-11-10 14:46+0100\n"
+"POT-Creation-Date: 2019-03-08 05:46+0000\n"
+"PO-Revision-Date: 2019-03-08 14:47+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #, python-format
 msgid "%d more services"
@@ -61,6 +61,9 @@ msgstr "Gefeliciteerd"
 
 msgid "Delay if not in standby (minutes)"
 msgstr "Vertraging indien niet in standby (minuten)"
+
+msgid "Delete"
+msgstr "Verwijder"
 
 msgid "Display more Options"
 msgstr "Toon meer opties"
@@ -135,6 +138,9 @@ msgstr "Wat wil je bewerken"
 msgid "Editing the service list"
 msgstr "Bewerk de service lijst"
 
+msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
+msgstr "Schakel dit in om alle EPG-data te verwijderen alvorens een nieuwe EPG-refresh cyclus te starten."
+
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr "Toon EPG-refresh instellingsmenu in het extensiemenu."
 
@@ -147,11 +153,14 @@ msgstr "Breidt de lijst met kanalen uit met die kanalen die AutoTimers gebruikt?
 msgid "Fake recording"
 msgstr "Nep opname"
 
+msgid "Flush EPG before refresh"
+msgstr "Verwijder EPG voor refresh"
+
 msgid "Following Services have to be scanned:"
 msgstr "De volgende kanalen moeten worden gescand:"
 
-msgid "Force scan even if receiver is in use"
-msgstr "Zoeken wanneer de ontvanger in gebruik is"
+msgid "Force scan even if receiver is in use."
+msgstr "Forceer de scan, zelfs als de ontvanger in gebruik is."
 
 msgid "Foreground also"
 msgstr "Ook op voorgrond"
@@ -200,7 +209,7 @@ msgid "OK"
 msgstr "Ok"
 
 msgid "Pending Services"
-msgstr "Nog niet afgewerkte kanalen."
+msgstr "Nog niet afgewerkte kanalen"
 
 msgid "PiP available now."
 msgstr "PiP is nu beschikbaar."
@@ -241,8 +250,8 @@ msgstr "Kies zender om te vernieuwen"
 msgid "Should protected services be skipped if refresh was started in interactive-mode?"
 msgstr "Moeten met kinderslot beschermde kanalen overgeslageb worden als de interactieve modus gebruikt wordt?"
 
-msgid "Show 'EPGRefresh Start now' in extension menu"
-msgstr "Toon 'EPG-refresh nu starten' in het extensiemenu."
+msgid "Show 'EPGRefresh Start now' in extension menu."
+msgstr "Toon 'EPGRefresh Start nu' in extensies."
 
 msgid "Show Advanced Options"
 msgstr "Toon geavanceerde opties"
@@ -256,14 +265,14 @@ msgstr "Toon tijdstip laatste EPG verversen"
 msgid "Show more Functions"
 msgstr "Toon meer functies"
 
-msgid "Show popup when refresh starts and ends"
-msgstr "Toon popup als refresh begint en eindigt"
+msgid "Show popup when refresh starts and ends."
+msgstr "Toon popup als de refresh begint en klaar is."
 
 msgid "Show the pending Services for refresh"
-msgstr "Toon de nog niet afgewerkte kanalen."
+msgstr "Toon de nog niet afgewerkte kanalen"
 
-msgid "Shutdown after EPG refresh"
-msgstr "Ontvanger uitschakelen na EPG-refresh"
+msgid "Shutdown after EPG refresh."
+msgstr "STB afsluiten na EPG refresh."
 
 msgid "Skip protected Services"
 msgstr "Sla met kinderslot beschermde kanalen over"
@@ -334,8 +343,8 @@ msgstr "Tenzij dit is ingeschakeld, zal EPG-refresh niet automatisch starten, ma
 msgid "Version"
 msgstr "Versie"
 
-msgid "Wake up from standby for EPG refresh"
-msgstr "Voer EPG-verversing ook uit indien in standby"
+msgid "Wake up from standby for EPG refresh."
+msgstr "Wake-up vanuit stand-by voor EPG refresh."
 
 msgid "Welcome to EPGRefresh"
 msgstr "Welkom bij EPG-refresh"
@@ -372,9 +381,6 @@ msgstr ""
 msgid "add to EPGRefresh"
 msgstr "toevoegen aan EPG-refresh"
 
-msgid "delete"
-msgstr "Verwijderen"
-
 msgid "never"
 msgstr "nooit"
 
@@ -390,11 +396,23 @@ msgstr "nooit"
 #~ msgid "EXTENSIONNAME_SETUP"
 #~ msgstr "EXTENSIONNAME_SETUP"
 
+#~ msgid "Force scan even if receiver is in use"
+#~ msgstr "Zoeken wanneer de ontvanger in gebruik is"
+
 #~ msgid "If this is enabled, the plugin will wake up the receiver from deep standby if possible. Otherwise it needs to be switched on already."
 #~ msgstr "Als dit is ingeschakeld, zal de plugin de ontvanger uit deep sleep halen. Anders moet de ontvanger al ingeschakeld zijn."
 
+#~ msgid "Show 'EPGRefresh Start now' in extension menu"
+#~ msgstr "Toon 'EPG-refresh nu starten' in het extensiemenu."
+
 #~ msgid "Show in extension menu"
 #~ msgstr "Toon in extensie menu"
+
+#~ msgid "Show popup when refresh starts and ends"
+#~ msgstr "Toon popup als refresh begint en eindigt"
+
+#~ msgid "Shutdown after EPG refresh"
+#~ msgstr "Ontvanger uitschakelen na EPG-refresh"
 
 #~ msgid "Stop Refresh"
 #~ msgstr "Stop verversen"
@@ -425,6 +443,9 @@ msgstr "nooit"
 #~ msgid "Wake up from deep standby for EPG refresh"
 #~ msgstr "Ontwaken uit deep standby voor EPG refresh"
 
+#~ msgid "Wake up from standby for EPG refresh"
+#~ msgstr "Voer EPG-verversing ook uit indien in standby"
+
 #~ msgid ""
 #~ "You now know how to do your first steps in EPGRefresh.\n"
 #~ "\n"
@@ -435,3 +456,6 @@ msgstr "nooit"
 #~ "\n"
 #~ "Als laatste wil ik u wijzen op het feit dat deze plugin niets uit zichzelf zal doen als u daarvoor geen opdracht heeft gegeven. Dus als u wilt dat de refresh automatisch op de achtergrond plaatsvindt, moet u dienovereenkomstige instellingen maken.\n"
 #~ "Hierdoor heeft u een volledige keuze vrijheid."
+
+#~ msgid "delete"
+#~ msgstr "Verwijderen"

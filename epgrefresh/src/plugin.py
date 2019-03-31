@@ -56,6 +56,7 @@ config.plugins.epgrefresh.parse_autotimer = ConfigSelection(choices = [
 		("ask_no", _("Ask default No")),
 	], default = "never"
 )
+config.plugins.epgrefresh.erase = ConfigYesNo(default = False)
 
 adapter_choices = [("main", _("Main Picture"))]
 if SystemInfo.get("NumVideoDecoders", 1) > 1:

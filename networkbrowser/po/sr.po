@@ -310,7 +310,7 @@ msgstr "Vaš mrežni maunt je uklonjen."
 msgid "Your network mount has been updated."
 msgstr "Vaš mrežni maunt je ažuriran."
 
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr ""
 
 #~ msgid "MountManager"

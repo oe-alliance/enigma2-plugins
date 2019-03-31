@@ -78,7 +78,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 		# Initialize StaticTexts
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
-		self["key_yellow"] = StaticText(_("delete"))
+		self["key_yellow"] = StaticText(_("Delete"))
 		self["key_blue"] = StaticText(_("New"))
 
 		# Define Actions

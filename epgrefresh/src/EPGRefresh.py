@@ -341,7 +341,11 @@ class EPGRefresh:
 		except:
 			print("[EPGRefresh] Error while adding 'Stop Running EPG-Refresh' to Extensionmenu")
 			print_exc(file=stdout)
-			
+		if config.plugins.epgrefresh.erase.value:
+			print("[EPGRefresh] flushing EPG cache...")
+			from enigma import eEPGCache
+			epgcache = eEPGCache.getInstance()
+			epgcache.flushEPG()			
 		self.refresh()
 
 	def cleanUp(self):

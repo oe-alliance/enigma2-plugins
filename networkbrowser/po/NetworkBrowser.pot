@@ -82,7 +82,7 @@ msgid "Server share"
 msgstr ""
 
 #: MountEdit.py:235
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr ""
 
 #: MountEdit.py:237

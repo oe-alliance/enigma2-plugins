@@ -93,8 +93,8 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 		if allowShowOrbital:
 			configList.append(getConfigListEntry(_("Show orbital position"), config.plugins.epgsearch.showorbital, _("Show satellite orbital positions in the search results.")))
 		configList += [
-			getConfigListEntry(_("Search type"), config.plugins.epgsearch.search_type, _("Set type of match used to compare program titles with the search string")),
-			getConfigListEntry(_("Search strictness"), config.plugins.epgsearch.search_case, _("Is the search case-sensitive or case-insensitive")),
+			getConfigListEntry(_("Search type"), config.plugins.epgsearch.search_type, _("Set type of match used to compare program titles with the search string.")),
+			getConfigListEntry(_("Search strictness"), config.plugins.epgsearch.search_case, _("Is the search case-sensitive or case-insensitive?")),
 			getConfigListEntry(_("Show in plugin browser"), config.plugins.epgsearch.showinplugins, _("Enable this to allow access to EPG Search from within the plugin browser.")),
 			getConfigListEntry(_("Length of history"), config.plugins.epgsearch.history_length, _("Maximum number of entries in the search history. Set this to 0 to disable search history.")),
 			getConfigListEntry(_("Search encoding"), config.plugins.epgsearch.encoding, _("Choose the encoding type for searches, helpful for foreign languages.")),

@@ -301,7 +301,7 @@ msgstr "مونت شبکه شما پاک گردید"
 msgid "Your network mount has been updated."
 msgstr "مونت شبکه شما به روز رسانی گردید"
 
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr ""
 
 #~ msgid "Change the hostname of your Dreambox."

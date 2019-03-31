@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-20 10:41+0100\n"
+"POT-Creation-Date: 2019-01-19 17:00+0100\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -213,9 +213,6 @@ msgstr "Bewerken"
 #. TRANSLATORS: this is a window title.
 msgid "Edit selected entry"
 msgstr "Gesel. regel bewerken"
-
-msgid "Enter Search Terms"
-msgstr "Geef de zoekterm in"
 
 msgid "Entry incomplete."
 msgstr "Regel incompleet"
@@ -651,6 +648,9 @@ msgstr ""
 msgid "Update available"
 msgstr ""
 
+msgid "Use HTTPS to communicate with FRITZ!Box"
+msgstr ""
+
 msgid "Use internal PhoneBook"
 msgstr "Gebruik het interne telefoonboek"
 
@@ -823,6 +823,9 @@ msgstr ""
 
 #~ msgid "Dialling failed - Error: %s"
 #~ msgstr "FRITZ!Box Login mislukt! - Error: %s"
+
+#~ msgid "Enter Search Terms"
+#~ msgstr "Geef de zoekterm in"
 
 #, fuzzy
 #~ msgid "FRITZ!Box - Could not load phonebook: %s"

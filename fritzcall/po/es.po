@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-20 10:41+0100\n"
+"POT-Creation-Date: 2019-01-19 17:00+0100\n"
 "PO-Revision-Date: 2018-02-20 10:46+0100\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -212,9 +212,6 @@ msgstr "Editar"
 #. TRANSLATORS: this is a window title.
 msgid "Edit selected entry"
 msgstr "Editar entrada seleccionada"
-
-msgid "Enter Search Terms"
-msgstr "Introduzca Términos de Búsqueda"
 
 msgid "Entry incomplete."
 msgstr "Entrada incompleta."
@@ -651,6 +648,9 @@ msgstr ""
 msgid "Update available"
 msgstr ""
 
+msgid "Use HTTPS to communicate with FRITZ!Box"
+msgstr ""
+
 msgid "Use internal PhoneBook"
 msgstr "Usar Agenda interna"
 
@@ -847,6 +847,9 @@ msgstr ""
 #~ "con\n"
 #~ "\n"
 #~ "%(newname)s?"
+
+#~ msgid "Enter Search Terms"
+#~ msgstr "Introduzca Términos de Búsqueda"
 
 #, fuzzy
 #~ msgid "FRITZ!Box - Could not load phonebook: %s"

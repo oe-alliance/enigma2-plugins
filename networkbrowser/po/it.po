@@ -310,7 +310,7 @@ msgstr "Mount di rete rimosso."
 msgid "Your network mount has been updated."
 msgstr "Mount di rete aggiornato."
 
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr "Usare in sostituzione HDD"
 
 #~ msgid "MountManager"

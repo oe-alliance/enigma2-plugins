@@ -1,34 +1,23 @@
-# Signed-off-by: Dario Croci <spaeleus@croci.org>
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2 - moviecut\n"
+"Project-Id-Version: MovieCut Italian language translation - enigma2 plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
-"PO-Revision-Date: 2012-02-29 22:46+0100\n"
-"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"POT-Creation-Date: 2018-11-19 14:18+0000\n"
+"PO-Revision-Date: 2019-01-05 17:52+0000\n"
+"Last-Translator: William <ghenessior@gmail.com>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
-"Language: \n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Italian\n"
-"X-Poedit-Country: ITALY\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .../enigma2-plugins/moviecut\n"
+"X-Generator: Poedit 2.2\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/moviecut\n"
 
 msgid "Advanced cut specification..."
 msgstr "Specifiche di taglio avanzate..."
-
-#, python-format
-msgid ""
-"Another movie is currently cut.\n"
-"The movie \"%s\" will be cut in the background after it."
-msgstr ""
-"E' già in corso il taglio di una registrazione.\n"
-"Il taglio di \"%s\" sarà effettuato in background successivamente."
 
 msgid "Bad arguments"
 msgstr "Argomento errato!"
@@ -69,11 +58,9 @@ msgstr "Elenco tagli"
 msgid "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
 msgstr "Tagli (una sequenza di IN OUT IN OUT ... in ore:min:sec)"
 
-#, python-format
 msgid "Cutting failed for movie \"%s\""
 msgstr "Taglio della registrazione \"%s\" fallito!"
 
-#, python-format
 msgid "Cutting was aborted for movie \"%s\""
 msgstr "Taglio della registrazione \"%s\" annullato"
 
@@ -86,7 +73,6 @@ msgstr "File .ap vuoto!"
 msgid "Execute cuts..."
 msgstr "Eseguire tagli"
 
-#, python-format
 msgid "How would you like to cut \"%s\"?"
 msgstr "Come tagliare \"%s\"?"
 
@@ -115,7 +101,7 @@ msgid "OK"
 msgstr "Ok"
 
 msgid "Place the cut movie in a new file ending with \" cut\""
-msgstr "Salvare la registrazione tagliata in nuovo file con estensione \"cut\""
+msgstr "Salvare il lavoro in nuovo file con estensione .cut"
 
 msgid "Read/write error (disk full?)"
 msgstr "Errore Lettura/Scrittura! (disco pieno?)"
@@ -126,11 +112,6 @@ msgstr "Sostituire l'originale:"
 msgid "Replace the original movie with the cut movie"
 msgstr "Sostituire la registrazione originale con quella tagliata"
 
-#, python-format
-msgid "The movie \"%s\" is cut in the background."
-msgstr "Il taglio di \"%s\" verrà eseguito in background."
-
-#, python-format
 msgid "The movie \"%s\" is successfully cut"
 msgstr "Taglio della registrazione \"%s terminato con successo"
 

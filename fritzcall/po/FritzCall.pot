@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-17 15:25+0200\n"
+"POT-Creation-Date: 2019-01-19 17:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -200,9 +200,6 @@ msgstr ""
 #. TRANSLATORS: keep it short, this is a help text
 #. TRANSLATORS: this is a window title.
 msgid "Edit selected entry"
-msgstr ""
-
-msgid "Enter Search Terms"
 msgstr ""
 
 msgid "Entry incomplete."
@@ -636,6 +633,9 @@ msgid "Unknown"
 msgstr ""
 
 msgid "Update available"
+msgstr ""
+
+msgid "Use HTTPS to communicate with FRITZ!Box"
 msgstr ""
 
 msgid "Use internal PhoneBook"

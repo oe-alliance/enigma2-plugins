@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-20 10:41+0100\n"
-"PO-Revision-Date: 2018-02-20 10:43+0100\n"
+"POT-Creation-Date: 2019-01-19 17:00+0100\n"
+"PO-Revision-Date: 2019-01-21 08:53+0100\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "Language: de\n"
@@ -214,9 +214,6 @@ msgstr "Ändern"
 #. TRANSLATORS: this is a window title.
 msgid "Edit selected entry"
 msgstr "Eintrag bearbeiten"
-
-msgid "Enter Search Terms"
-msgstr "Suchbegriffe"
 
 msgid "Entry incomplete."
 msgstr "Eintrag unvollständig."
@@ -678,6 +675,9 @@ msgstr "Unbekannt"
 
 msgid "Update available"
 msgstr "Update verfügbar"
+
+msgid "Use HTTPS to communicate with FRITZ!Box"
+msgstr "Benutze HTTPS für Kommunikation mit FRITZ!Box"
 
 msgid "Use internal PhoneBook"
 msgstr "Benutze internes Telefonbuch"

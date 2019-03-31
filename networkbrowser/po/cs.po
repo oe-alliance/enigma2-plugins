@@ -307,7 +307,7 @@ msgstr "Vaše síťová připojení bylo odebráno."
 msgid "Your network mount has been updated."
 msgstr "Vaše síťová připojení byl aktualizováno."
 
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr "použít jako náhradu HDD"
 
 #~ msgid "Do you want to enter a username and password for this host?\n"

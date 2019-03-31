@@ -88,7 +88,7 @@ msgid "OK"
 msgstr "Ok"
 
 #: .../EPGRefreshChannelEditor.py:81
-msgid "delete"
+msgid "Delete"
 msgstr "Cancellare"
 
 #: .../EPGRefreshChannelEditor.py:82
@@ -290,7 +290,7 @@ msgstr ""
 "EPGRefresh dal menu estensioni."
 
 #: .../EPGRefreshConfiguration.py:169
-msgid "Show 'EPGRefresh Start now' in extension menu"
+msgid "Show 'EPGRefresh Start now' in extension menu."
 msgstr "Mostrare \"Avviare aggiornamento\" nel menu estensioni"
 
 #: .../EPGRefreshConfiguration.py:169
@@ -302,7 +302,7 @@ msgstr ""
 "EPGRefresh dal menu estensioni."
 
 #: .../EPGRefreshConfiguration.py:170
-msgid "Show popup when refresh starts and ends"
+msgid "Show popup when refresh starts and ends."
 msgstr "Mostrare popup su avvio e termine aggiornamento"
 
 #: .../EPGRefreshConfiguration.py:170
@@ -314,7 +314,7 @@ msgstr ""
 "al termine di un aggiornamento."
 
 #: .../EPGRefreshConfiguration.py:171
-msgid "Wake up from standby for EPG refresh"
+msgid "Wake up from standby for EPG refresh."
 msgstr "Riattivare da Deep-Standby per aggiornare EPG"
 
 #: .../EPGRefreshConfiguration.py:171
@@ -326,7 +326,7 @@ msgstr ""
 "dal deep-standby, se possibile. In caso contrario, dovrà essere già attivo."
 
 #: .../EPGRefreshConfiguration.py:172
-msgid "Force scan even if receiver is in use"
+msgid "Force scan even if receiver is in use."
 msgstr "Forzare la scansione anche se il ricevitore è in uso"
 
 #: .../EPGRefreshConfiguration.py:172
@@ -338,7 +338,7 @@ msgstr ""
 "decoder è in uso (non in standby o in registrazione)."
 
 #: .../EPGRefreshConfiguration.py:173
-msgid "Shutdown after EPG refresh"
+msgid "Shutdown after EPG refresh."
 msgstr "Spegnere dopo aggiornamento EPG"
 
 #: .../EPGRefreshConfiguration.py:173

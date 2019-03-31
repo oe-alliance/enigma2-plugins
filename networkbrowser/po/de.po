@@ -84,7 +84,7 @@ msgid "Server share"
 msgstr "Server Freigabe"
 
 #: MountEdit.py:235
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr "Als HDD Ersatz benutzen"
 
 #: MountEdit.py:237
@@ -198,7 +198,7 @@ msgstr "Verwalten, bearbeiten oder löschen Sie Benutzernamen und Passwörter"
 
 #: MountManager.py:102
 msgid "Change hostname"
-msgstr "Netzwerkname ändern"
+msgstr "Netzwerknamen ändern"
 
 #: MountManager.py:102
 msgid "Change the hostname of your Receiver."

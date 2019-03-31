@@ -321,7 +321,7 @@ msgstr "Tu punto de montaje de red ha sido eliminado."
 msgid "Your network mount has been updated."
 msgstr "Tu punto de montaje de red ha sido actualizado."
 
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr "Usar como reemplazo de HDD"
 
 msgid "The harddisk"

@@ -137,7 +137,7 @@ msgstr "Valeäänitys"
 msgid "Following Services have to be scanned:"
 msgstr "Seuraavat palvelut pitää päivittää"
 
-msgid "Force scan even if receiver is in use"
+msgid "Force scan even if receiver is in use."
 msgstr "Pakota päivitys vaikka vastaanotin on käytössä"
 
 msgid "Foreground also"
@@ -231,7 +231,7 @@ msgstr "Valitse virkistettävä kanava"
 msgid "Should protected services be skipped if refresh was started in interactive-mode?"
 msgstr "Pitäisikö suojatut kanavat ohittaa jos virkistys on käynnistetty interactive -tilassa?"
 
-msgid "Show 'EPGRefresh Start now' in extension menu"
+msgid "Show 'EPGRefresh Start now' in extension menu."
 msgstr "Näytä ''EPGRefresh käynnistyy nyt' laajennukset -valikossa"
 
 msgid "Show Advanced Options"
@@ -246,13 +246,13 @@ msgstr "Näytä viimeisin EPGrefresh - Aika"
 msgid "Show more Functions"
 msgstr "Näytä lisää toimintoja"
 
-msgid "Show popup when refresh starts and ends"
+msgid "Show popup when refresh starts and ends."
 msgstr "Näytä popup kun virkistys alkaa ja loppuu"
 
 msgid "Show the pending Services for refresh"
 msgstr "Näytä virkistystä odottavat palvelut"
 
-msgid "Shutdown after EPG refresh"
+msgid "Shutdown after EPG refresh."
 msgstr "Sammuta EPG:n virkistyksen jälkeen"
 
 msgid "Skip protected Services"
@@ -298,7 +298,7 @@ msgstr "Ellei tämä ole aktivoituna, EPGRefresh ei käynnisty automaattisesti, 
 msgid "Version"
 msgstr "Versio"
 
-msgid "Wake up from standby for EPG refresh"
+msgid "Wake up from standby for EPG refresh."
 msgstr "Herää valmiustilasta EPG:n virkistykseen"
 
 msgid "Yes"
@@ -307,7 +307,7 @@ msgstr "Kyllä"
 msgid "add to EPGRefresh"
 msgstr "Lisää  EPGRefresh:iin"
 
-msgid "delete"
+msgid "Delete"
 msgstr "poista"
 
 msgid "never"

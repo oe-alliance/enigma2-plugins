@@ -111,7 +111,7 @@ msgid "OK"
 msgstr "OK"
 
 #: EPGRefreshChannelEditor.py:81
-msgid "delete"
+msgid "Delete"
 msgstr "Löschen"
 
 #: EPGRefreshChannelEditor.py:82
@@ -324,11 +324,11 @@ msgstr ""
 "Erweiterungsmenü heraus aufgerufen werden können?"
 
 #: EPGRefreshConfiguration.py:169
-msgid "Show 'EPGRefresh Start now' in extension menu"
+msgid "Show 'EPGRefresh Start now' in extension menu."
 msgstr "\"Aktualisierung starten\" im Erweiterungsmenü anzeigen"
 
 #: EPGRefreshConfiguration.py:170
-msgid "Show popup when refresh starts and ends"
+msgid "Show popup when refresh starts and ends."
 msgstr "Meldung zeigen, wenn Aktualisierung startet/endet"
 
 #: EPGRefreshConfiguration.py:170
@@ -348,11 +348,11 @@ msgstr ""
 "sofern möglich. Andernfalls muss die Box schon eingeschaltet sein."
 
 #: EPGRefreshConfiguration.py:171
-msgid "Wake up from standby for EPG refresh"
+msgid "Wake up from standby for EPG refresh."
 msgstr "Aus dem Standby hochfahren"
 
 #: EPGRefreshConfiguration.py:172
-msgid "Force scan even if receiver is in use"
+msgid "Force scan even if receiver is in use."
 msgstr "Aktualisierung erzwingen"
 
 #: EPGRefreshConfiguration.py:172
@@ -364,7 +364,7 @@ msgstr ""
 "nicht im Standby oder bei aktiver Aufnahme)?"
 
 #: EPGRefreshConfiguration.py:173
-msgid "Shutdown after EPG refresh"
+msgid "Shutdown after EPG refresh."
 msgstr "Nach EPG Aktualisierung herunterfahren"
 
 #: EPGRefreshConfiguration.py:173
@@ -518,6 +518,14 @@ msgstr "Zu EPGRefresh hinzufügen"
 #: plugin.py:292
 msgid "PLUGINNAME_EPGRefresh"
 msgstr "EPGRefresh"
+
+#: EPGRefreshConfiguration.py
+msgid "Flush EPG before refresh"
+msgstr "EPG-Daten vor dem Aktualisieren löschen"
+
+#: EPGRefreshConfiguration.py
+msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
+msgstr "Aktivieren Sie diese Option, wenn vor der EPG-Aktualisierung, die kompletten EPG-Daten gelöscht werden sollen."
 
 #~ msgid "Restore EPG-Backups (Date)"
 #~ msgstr "Backup wiederherstellen (Datum)"

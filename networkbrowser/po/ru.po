@@ -265,7 +265,7 @@ msgstr "Подключение было удалено."
 msgid "Your network mount has been updated."
 msgstr "Подключение было обновлено."
 
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr "Использовать в качестве HDD"
 
 msgid "Change the hostname of your STB_BOX."

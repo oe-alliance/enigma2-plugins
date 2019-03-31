@@ -315,5 +315,5 @@ msgstr "A montagem de rede foi removida"
 msgid "Your network mount has been updated."
 msgstr "A montagem de rede foi atualizada."
 
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr "usar como substituição do HDD"
