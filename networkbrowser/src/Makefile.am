@@ -1,7 +1,7 @@
 installdir = $(libdir)/enigma2/python/Plugins/SystemPlugins/NetworkBrowser
 
-install_PYTHON = *.py
+install_PYTHON = $(wildcard @srcdir@/*.py)
 
-install_DATA = *.info LICENSE
+install_DATA = $(wildcard @srcdir@/*.info) LICENSE
 
-SUBDIRS = icons lib
+SUBDIRS = icons
