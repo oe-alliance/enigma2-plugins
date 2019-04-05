@@ -96,11 +96,10 @@ void freeNetInfo(netinfo *nInfo)
 #define MAX 255
 
 int netzInfo(char *pythonIp, netinfo *nInfo) {
-  int timeout=10000, verbose=0, use137=0, bandwidth=0, send_ok=0, hr=0;
+  int timeout=10000, use137=0, bandwidth=0, send_ok=0;
   extern char *optarg;
   extern int optind;
   char* target_string;
-  char* sf=NULL;
   char* filename =NULL;
   struct ip_range range;
   void *buff;
@@ -126,9 +125,6 @@ int netzInfo(char *pythonIp, netinfo *nInfo) {
   char errmsg[80];
   char str[80];
   FILE* targetlist=NULL;
-	hr =0;
-	sf=optarg;
-	verbose = 1;
 
 	if((target_string=strdup(pythonIp))==NULL)
 	{

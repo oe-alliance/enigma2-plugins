@@ -47,8 +47,6 @@
 #define MNTPATHLEN 1024
 #define MNTNAMLEN 255
 
-static int	headers = 1;
-
 typedef char *dirpath;
 typedef char *name;
 
@@ -166,7 +164,7 @@ nfsinfo * newNfsInfo()
 	nfsinfo *nfsInfo = malloc(sizeof(nfsinfo)*255);
 	if(!nfsInfo)
 		exit(0); // TODO: besser machen
-		memset(nfsInfo,0,sizeof(nfsinfo)*255);
+	memset(nfsInfo,0,sizeof(nfsinfo)*255);
 	return nfsInfo;
 }
 
@@ -186,8 +184,7 @@ int showNfsShare(char *pythonIp, nfsinfo *nfsInfo)
 	struct timeval pertry_timeout;
 	CLIENT *mclient;
 	groups grouplist;
-	exports exportlist, exl;
-	int n;
+	exports exportlist;
 	int pos = 0;
 
 	if (pythonIp != NULL)

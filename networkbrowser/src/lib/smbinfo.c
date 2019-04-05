@@ -261,7 +261,7 @@ void strlower(char *s)
 	{
 		if (isupper(*s))
 			*s = tolower(*s);
-			s++;
+		s++;
 	}
 }
 
@@ -274,7 +274,7 @@ void strupper(char *s)
 	{
 		if (islower(*s))
 			*s = toupper(*s);
-			s++;
+		s++;
 	}
 }
 
