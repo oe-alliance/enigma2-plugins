@@ -16,9 +16,8 @@ from Components.Console import Console
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_ACTIVE_SKIN, fileExists
 from Tools.LoadPixmap import LoadPixmap
 from cPickle import dump, load
-from os import path as os_path, stat, mkdir, remove
-from time import time
-from stat import ST_MTIME
+import os
+import time
 
 import subprocess
 
@@ -35,11 +34,11 @@ def formatIp(ip):
 
 def write_cache(cache_file, cache_data):
 	#Does a cPickle dump
-	if not os_path.isdir( os_path.dirname(cache_file) ):
+	if not os.path.isdir(os.path.dirname(cache_file)):
 		try:
-			mkdir( os_path.dirname(cache_file) )
-		except OSError:
-			print os_path.dirname(cache_file), '[Networkbrowser] is a file'
+			os.mkdir(os.path.dirname(cache_file))
+		except OSError as e:
+			print "[Networkbrowser] Can not create cache file directory %s: %s" % (os.path.dirname(cache_file), str(e))
 	fd = open(cache_file, 'w')
 	dump(cache_data, fd, -1)
 	fd.close()
@@ -47,10 +46,10 @@ def write_cache(cache_file, cache_data):
 def valid_cache(cache_file, cache_ttl):
 	#See if the cache file exists and is still living
 	try:
-		mtime = stat(cache_file)[ST_MTIME]
+		mtime = os.stat(cache_file).st_mtime
 	except:
 		return 0
-	curr_time = time()
+	curr_time = time.time()
 	if (curr_time - mtime) > cache_ttl:
 		return 0
 	else:
@@ -185,8 +184,8 @@ class NetworkBrowser(Screen):
 		self.setTitle(_("Browse network neighbourhood"))
 
 	def keyYellow(self):
-		if os_path.exists(self.cache_file):
-			remove(self.cache_file)
+		if os.path.exists(self.cache_file):
+			os.remove(self.cache_file)
 		self.startRun()
 
 	def keyBlue(self):
@@ -210,7 +209,7 @@ class NetworkBrowser(Screen):
 		if status:
 			self.statuslist = []
 			if status == 'update':
-				if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/update.png")):
+				if os.path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/update.png")):
 					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/update.png"))
 				else:
 					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/update.png"))
@@ -219,7 +218,7 @@ class NetworkBrowser(Screen):
 				name = _("Searching your network. Please wait...")
 				desc = name
 			elif status == 'error':
-				if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/error.png")):
+				if os.path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/error.png")):
 					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/error.png"))
 				else:
 					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/error.png"))
@@ -303,14 +302,14 @@ class NetworkBrowser(Screen):
 			self.setStatus('error')
 		self["shortcuts"].setEnabled(True)
 
-	def getNetworkShares(self,hostip,hostname,devicetype):
+	def getNetworkShares(self, hostip, hostname, devicetype):
 		sharelist = []
 		self.sharecache_file = None
 		self.sharecache_file = '/etc/enigma2/' + hostname.strip() + '.cache' #Path to cache directory
 		username = ""
 		password = ""
-		if os_path.exists(self.sharecache_file):
-			print '[Networkbrowser] Loading userinfo from ',self.sharecache_file
+		if os.path.exists(self.sharecache_file):
+			print '[Networkbrowser] Loading userinfo from ', self.sharecache_file
 			try:
 				self.hostdata = load_cache(self.sharecache_file)
 				username = self.hostdata['username']
@@ -350,7 +349,7 @@ class NetworkBrowser(Screen):
 		for x in self.network.keys():
 			hostentry = self.network[x][0][1]
 			name = hostentry[2] + " ( " +hostentry[1].strip() + " )"
-			if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png")):
+			if os.path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png")):
 				expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png"))
 			else:
 				expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
@@ -383,7 +382,7 @@ class NetworkBrowser(Screen):
 				networkshares = self.getNetworkShares(x,self.network[x][0][1][1].strip(),self.device)
 				hostentry = self.network[x][0][1]
 				name = hostentry[2] + " ( " +hostentry[1].strip() + " )"
-				if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png")):
+				if os.path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png")):
 					expandedIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png"))
 				else:
 					expandedIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
@@ -393,7 +392,7 @@ class NetworkBrowser(Screen):
 			else: # HOSTLIST - VIEW
 				hostentry = self.network[x][0][1]
 				name = hostentry[2] + " ( " +hostentry[1].strip() + " )"
-				if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png")):
+				if os.path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png")):
 					expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png"))
 				else:
 					expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
@@ -408,7 +407,7 @@ class NetworkBrowser(Screen):
 		self["list"].setIndex(self.listindex)
 
 	def BuildNetworkShareEntry(self,share):
-		if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/verticalLine.png")):
+		if os.path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/verticalLine.png")):
 			verticallineIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/verticalLine.png"))
 		else:
 			verticallineIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/verticalLine.png"))
@@ -424,12 +423,12 @@ class NetworkBrowser(Screen):
 			sharedescription = share[3]
 
 		if sharetype == 'nfsShare':
-			if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/i-nfs.png")):
+			if os.path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/i-nfs.png")):
 				newpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/i-nfs.png"))
 			else:
 				newpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/i-nfs.png"))
 		else:
-			if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/i-smb.png")):
+			if os.path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/i-smb.png")):
 				newpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/i-smb.png"))
 			else:
 				newpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/i-smb.png"))
@@ -447,12 +446,12 @@ class NetworkBrowser(Screen):
 						if sharedata["isMounted"] is True:
 							self.isMounted = True
 		if self.isMounted is True:
-			if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/ok.png")):
+			if os.path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/ok.png")):
 				isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/ok.png"))
 			else:
 				isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/ok.png"))
 		else:
-			if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/cancel.png")):
+			if os.path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/cancel.png")):
 				isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/cancel.png"))
 			else:
 				isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/cancel.png"))
@@ -513,7 +512,7 @@ class NetworkBrowser(Screen):
 		selectedhostname = sel[0][1]
 
 		self.hostcache_file = '/etc/enigma2/' + selectedhostname.strip() + '.cache' #Path to cache directory
-		if os_path.exists(self.hostcache_file):
+		if os.path.exists(self.hostcache_file):
 			try:
 				self.hostdata = load_cache(self.hostcache_file)
 			except:
@@ -577,7 +576,7 @@ class NetworkBrowser(Screen):
 				self.sharecache_file = '/etc/enigma2/' + selection[1].strip() + '.cache' #Path to cache directory
 				data['username'] = ""
 				data['password'] = ""
-				if os_path.exists(self.sharecache_file):
+				if os.path.exists(self.sharecache_file):
 					print '[Networkbrowser] Loading userinfo from ',self.sharecache_file
 					try:
 						self.hostdata = load_cache(self.sharecache_file)
