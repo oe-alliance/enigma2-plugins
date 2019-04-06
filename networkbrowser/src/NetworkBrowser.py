@@ -230,7 +230,7 @@ class NetworkBrowser(Screen):
 			if fileExists("/usr/bin/nmap"):
 				strIP = self.makeStrIP()
 				if strIP:
-					self.Console.ePopen("nmap -oX - " + strIP + ' -sP 2>/dev/null', self.nmapComplete)
+					self.Console.ePopen("nmap -oX - " + strIP + ' -p 445,2049 2>/dev/null', self.nmapComplete)
 				else:
 					self.session.open(MessageBox, _("Your network interface %s is not properly configured, so a network scan can not be done.\nPlease configure the interface and try again.") % self.iface, type=MessageBox.TYPE_ERROR)
 					self.setStatus('error')
@@ -252,16 +252,22 @@ class NetworkBrowser(Screen):
 		dom = xml.dom.minidom.parseString(result)
 		scan_result = []
 		for dhost in dom.getElementsByTagName('host'):
-			entry = ['host', "localhost", "127.0.0.1", '00:00:00:00:00:00']
-			for addr in dhost.getElementsByTagName('address'):
-				if addr.getAttribute("addrtype") == "mac":
-					entry[3] = str(addr.getAttribute("addr"))
-				elif addr.getAttribute("addrtype") == "ipv4":
-					entry[2] = str(addr.getAttribute("addr"))
-			for dhostname in dhost.getElementsByTagName('hostname'):
-				hostname = dhostname.getAttributeNode('name').value
-				entry[1] = str(hostname.split('.')[0])
-			scan_result.append(entry)
+			isServer = False
+			for portstate in dhost.getElementsByTagName("state"):
+				if portstate.getAttribute("state") == "open":
+					isServer = True
+					break
+			if isServer:
+				entry = ["host", "", "127.0.0.1", "00:00:00:00:00:00"]
+				for addr in dhost.getElementsByTagName("address"):
+					if addr.getAttribute("addrtype") == "mac":
+						entry[3] = str(addr.getAttribute("addr"))
+					elif addr.getAttribute("addrtype") == "ipv4":
+						entry[2] = str(addr.getAttribute("addr"))
+				for dhostname in dhost.getElementsByTagName("hostname"):
+					hostname = dhostname.getAttributeNode("name").value
+					entry[1] = str(hostname.split('.')[0])
+				scan_result.append(entry)
 
 		self.networklist = scan_result
 		write_cache(self.cache_file, self.networklist)
