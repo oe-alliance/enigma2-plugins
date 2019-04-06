@@ -252,17 +252,18 @@ class NetworkBrowser(Screen):
 		dom = xml.dom.minidom.parseString(result)
 		scan_result = []
 		for dhost in dom.getElementsByTagName('host'):
-			isServer = False
-			for portstate in dhost.getElementsByTagName("state"):
-				if portstate.getAttribute("state") == "open":
-					isServer = True
-					break
-			if isServer:
-				entry = ["host", "", "127.0.0.1", "00:00:00:00:00:00"]
+			services = set()
+			for port in dhost.getElementsByTagName("port"):
+				for portstate in port.getElementsByTagName("state"):
+					if portstate.getAttribute("state") == "open":
+						if port.getAttribute("portid") == "445":
+							services.add("smb")
+						if port.getAttribute("portid") == "2049":
+							services.add("nfs")
+			if services:
+				entry = ["host", "", "127.0.0.1", ",".join(services)]
 				for addr in dhost.getElementsByTagName("address"):
-					if addr.getAttribute("addrtype") == "mac":
-						entry[3] = str(addr.getAttribute("addr"))
-					elif addr.getAttribute("addrtype") == "ipv4":
+					if addr.getAttribute("addrtype") == "ipv4":
 						entry[2] = str(addr.getAttribute("addr"))
 				for dhostname in dhost.getElementsByTagName("hostname"):
 					hostname = dhostname.getAttributeNode("name").value
@@ -293,7 +294,10 @@ class NetworkBrowser(Screen):
 			print '[Networkbrowser] Running %s failed with %s' % (str(cmd), str(e))
 		return result
 
-	def getNetworkShares(self, hostip, hostname):
+	def getNetworkShares(self, hostentry):
+		hostip = hostentry[2]
+		hostname = hostentry[1]
+		services = hostentry[3]
 		sharelist = []
 		self.sharecache_file = None
 		self.sharecache_file = '/etc/enigma2/' + hostip.strip() + '.cache'  # Path to cache directory
@@ -308,31 +312,33 @@ class NetworkBrowser(Screen):
 			except:
 				pass
 
-		cmd = ["showmount", "--no-headers", "-e", hostip]
-		try:
-			p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-			(out, err) = p.communicate()
-			for line in out.split('\n'):
-				item = line.strip().split(' ')
-				if item[0]:
-					sharelist.append(["nfsShare", hostname, hostip, item[0], item[0], ""])
-		except OSError as e:
-			print '[Networkbrowser] Running %s failed with %s' % (str(cmd), str(e))
+		if "nfs" in services:
+			cmd = ["showmount", "--no-headers", "-e", hostip]
+			try:
+				p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+				(out, err) = p.communicate()
+				for line in out.split('\n'):
+					item = line.strip().split(' ')
+					if item[0]:
+						sharelist.append(["nfsShare", hostname, hostip, item[0], item[0], ""])
+			except OSError as e:
+				print '[Networkbrowser] Running %s failed with %s' % (str(cmd), str(e))
 
-		if username:
-			cmd = ["/usr/bin/smbclient", "-m SMB3", "-g", "-U", "%s%%%s" % (username, password), "-L", hostip]
-		else:
-			cmd = ["/usr/bin/smbclient", "-m SMB3", "-g", "-N", "-L", hostip]
+		if "smb" in services:
+			if username:
+				cmd = ["/usr/bin/smbclient", "-m SMB3", "-g", "-U", "%s%%%s" % (username, password), "-L", hostip]
+			else:
+				cmd = ["/usr/bin/smbclient", "-m SMB3", "-g", "-N", "-L", hostip]
 
-		try:
-			p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-			(out, err) = p.communicate()
-			for line in out.split('\n'):
-				item = line.split('|')
-				if len(item) == 3 and item[0] == "Disk" and not item[1].endswith("$"):
-					sharelist.append(["smbShare", hostname, hostip, item[1], item[0], item[2]])
-		except OSError as e:
-			print '[Networkbrowser] Running %s failed with %s' % (str(cmd), str(e))
+			try:
+				p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+				(out, err) = p.communicate()
+				for line in out.split('\n'):
+					item = line.split('|')
+					if len(item) == 3 and item[0] == "Disk" and not item[1].endswith("$"):
+						sharelist.append(["smbShare", hostname, hostip, item[1], item[0], item[2]])
+			except OSError as e:
+				print '[Networkbrowser] Running %s failed with %s' % (str(cmd), str(e))
 		return sharelist
 
 	def updateHostsList(self):
@@ -506,20 +512,21 @@ class NetworkBrowser(Screen):
 
 	def passwordQuestion(self, ret=False):
 		sel = self["list"].getCurrent()
-		selectedhost = sel[0][2]
-		selectedhostname = sel[0][1]
+		hostentry = sel[0]
+		selectedhost = hostentry[2]
+		selectedhostname = hostentry[1]
 		if (ret):
 			self.session.openWithCallback(self.UserDialogClosed, UserDialog, self.skin_path, selectedhostname.strip())
 		else:
-			if sel[0][0] == 'host': # host entry selected
+			if hostentry[0] == 'host': # host entry selected
 				if selectedhost in self.expanded:
 					del self.expanded[selectedhost]
 				else:
-					self.expanded[selectedhost] = self.getNetworkShares(selectedhost, selectedhostname)
+					self.expanded[selectedhost] = self.getNetworkShares(hostentry)
 
 				self.updateNetworkList()
-			elif sel[0][0] in ('nfsShare', 'smbShare'): # share entry selected
-				self.openMountEdit(sel[0])
+			elif hostentry[0] in ('nfsShare', 'smbShare'): # share entry selected
+				self.openMountEdit(hostentry)
 
 	def UserDialogClosed(self, *ret):
 		if ret is not None and len(ret):
