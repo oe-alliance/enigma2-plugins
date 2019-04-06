@@ -267,6 +267,8 @@ class NetworkBrowser(Screen):
 				for dhostname in dhost.getElementsByTagName("hostname"):
 					hostname = dhostname.getAttributeNode("name").value
 					entry[1] = str(hostname.split('.')[0])
+				if not entry[1]:
+					entry[1] = self.nmblookup(entry[1])
 				scan_result.append(entry)
 
 		self.networklist = scan_result
@@ -276,6 +278,20 @@ class NetworkBrowser(Screen):
 		else:
 			self.setStatus('error')
 		self["shortcuts"].setEnabled(True)
+
+	def nmblookup(self, hostip):
+		result = hostip
+		cmd = ["nmblookup", "-A", hostip]
+		try:
+			p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+			(out, err) = p.communicate()
+			for line in out.split('\n'):
+				item = line.strip().split(' ')
+				if "<20>" in item:
+					result = item[0]
+		except OSError as e:
+			print '[Networkbrowser] Running %s failed with %s' % (str(cmd), str(e))
+		return result
 
 	def getNetworkShares(self, hostip, hostname):
 		sharelist = []
