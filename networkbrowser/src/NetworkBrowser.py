@@ -280,7 +280,7 @@ class NetworkBrowser(Screen):
 	def getNetworkShares(self, hostip, hostname):
 		sharelist = []
 		self.sharecache_file = None
-		self.sharecache_file = '/etc/enigma2/' + hostname.strip() + '.cache'  # Path to cache directory
+		self.sharecache_file = '/etc/enigma2/' + hostip.strip() + '.cache'  # Path to cache directory
 		username = ""
 		password = ""
 		if os.path.exists(self.sharecache_file):
@@ -478,7 +478,7 @@ class NetworkBrowser(Screen):
 		selectedhost = sel[0][2]
 		selectedhostname = sel[0][1]
 
-		self.hostcache_file = '/etc/enigma2/' + selectedhostname.strip() + '.cache' #Path to cache directory
+		self.hostcache_file = '/etc/enigma2/' + selectedhost.strip() + '.cache' #Path to cache directory
 		if os.path.exists(self.hostcache_file):
 			try:
 				self.hostdata = load_cache(self.hostcache_file)
@@ -543,7 +543,7 @@ class NetworkBrowser(Screen):
 				data['options'] = "rw,utf8,vers=2.1"
 				data['username'] = ""
 				data['password'] = ""
-				self.sharecache_file = '/etc/enigma2/' + selection[1].strip() + '.cache'
+				self.sharecache_file = '/etc/enigma2/' + selection[2].strip() + '.cache'
 				if os.path.exists(self.sharecache_file):
 					print '[Networkbrowser] Loading userinfo from ', self.sharecache_file
 					try:
