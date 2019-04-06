@@ -297,9 +297,9 @@ class NetworkBrowser(Screen):
 			p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
 			(out, err) = p.communicate()
 			for line in out.split('\n'):
-				item = line.split(' ')
-				if len(item) == 2:
-					sharelist.append(["nfsShare", hostname, hostip, item[1], item[0], ""])
+				item = line.strip().split(' ')
+				if item[0]:
+					sharelist.append(["nfsShare", hostname, hostip, item[0], item[0], ""])
 		except OSError as e:
 			print '[Networkbrowser] Running %s failed with %s' % (str(cmd), str(e))
 
