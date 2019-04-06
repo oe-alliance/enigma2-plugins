@@ -484,8 +484,8 @@ class NetworkBrowser(Screen):
 
 	def setCredentials(self):
 		sel = self["list"].getCurrent()
-		selectedhostname = sel[0][1]
-		self.session.openWithCallback(self.credentialsDone, UserDialog, self.skin_path, selectedhostname.strip())
+		selectedhost = sel[0][2]
+		self.session.openWithCallback(self.credentialsDone, UserDialog, self.skin_path, selectedhost.strip())
 
 	def credentialsDone(self, ret=None):
 		self.updateNetworkList()
@@ -514,9 +514,8 @@ class NetworkBrowser(Screen):
 		sel = self["list"].getCurrent()
 		hostentry = sel[0]
 		selectedhost = hostentry[2]
-		selectedhostname = hostentry[1]
 		if (ret):
-			self.session.openWithCallback(self.UserDialogClosed, UserDialog, self.skin_path, selectedhostname.strip())
+			self.session.openWithCallback(self.UserDialogClosed, UserDialog, self.skin_path, selectedhost.strip())
 		else:
 			if hostentry[0] == 'host': # host entry selected
 				if selectedhost in self.expanded:

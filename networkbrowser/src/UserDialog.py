@@ -2,9 +2,7 @@
 # for localized messages
 from __init__ import _
 from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
-from Components.ActionMap import ActionMap
 from Components.config import ConfigText, ConfigPassword, NoSave, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.Boolean import Boolean
@@ -13,32 +11,18 @@ from Components.Pixmap import Pixmap
 from Components.ActionMap import ActionMap, NumberActionMap
 from enigma import ePoint
 from cPickle import dump, load
-from os import path as os_path, unlink, stat, mkdir
-from time import time
-from stat import ST_MTIME
+import os
 
 def write_cache(cache_file, cache_data):
 	#Does a cPickle dump
-	if not os_path.isdir( os_path.dirname(cache_file) ):
+	if not os.path.isdir(os.path.dirname(cache_file)):
 		try:
-			mkdir( os_path.dirname(cache_file) )
-		except OSError:
-			print os_path.dirname(cache_file), 'is a file'
+			os.mkdir(os.path.dirname(cache_file))
+		except OSError as e:
+			print "[Networkbrowser] Can not create cache file directory %s: %s" % (os.path.dirname(cache_file), str(e))
 	fd = open(cache_file, 'w')
 	dump(cache_data, fd, -1)
 	fd.close()
-
-def valid_cache(cache_file, cache_ttl):
-	#See if the cache file exists and is still living
-	try:
-		mtime = stat(cache_file)[ST_MTIME]
-	except:
-		return 0
-	curr_time = time()
-	if (curr_time - mtime) > cache_ttl:
-		return 0
-	else:
-		return 1
 
 def load_cache(cache_file):
 	#Does a cPickle load
@@ -61,13 +45,12 @@ class UserDialog(Screen, ConfigListScreen):
 			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="410,330" zPosition="1" size="1,1" transparent="1" alphatest="on" />	
 		</screen>"""
 
-	def __init__(self, session, plugin_path, hostinfo = None ):
+	def __init__(self, session, plugin_path, hostinfo=None):
 		self.skin_path = plugin_path
 		self.session = session
 		Screen.__init__(self, self.session)
 		self.hostinfo = hostinfo
-		self.cache_ttl = 86400 #600 is default, 0 disables, Seconds cache is considered valid
-		self.cache_file = '/etc/enigma2/' + self.hostinfo + '.cache' #Path to cache directory
+		self.cache_file = '/etc/enigma2/' + self.hostinfo + '.cache'  # Path to cache directory
 		self.createConfig()
 
 		self["actions"] = NumberActionMap(["SetupActions"],
@@ -94,7 +77,7 @@ class UserDialog(Screen, ConfigListScreen):
 		self["key_red"] = StaticText(_("Close"))
 
 	def layoutFinished(self):
-		self.setTitle(_("Enter user and password for host: ")+ self.hostinfo)
+		self.setTitle(_("Enter user and password for ") + self.hostinfo)
 
 	# helper function to convert ips from a sring to a list of ints
 	def convertIP(self, ip):
@@ -110,7 +93,7 @@ class UserDialog(Screen, ConfigListScreen):
 		username = ""
 		password = ""
 
-		if os_path.exists(self.cache_file):
+		if os.path.exists(self.cache_file):
 			print 'Loading user cache from', self.cache_file
 			try:
 				self.hostdata = load_cache(self.cache_file)
@@ -165,7 +148,6 @@ class UserDialog(Screen, ConfigListScreen):
 			current[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
 
 	def ok(self):
-		current = self["config"].getCurrent()
 		self.hostdata = { 'username': self.username.value, 'password': self.password.value }
 		write_cache(self.cache_file, self.hostdata)
 		self.close(True)
