@@ -269,7 +269,7 @@ class NetworkBrowser(Screen):
 					hostname = dhostname.getAttributeNode("name").value
 					entry[1] = str(hostname.split('.')[0])
 				if not entry[1]:
-					entry[1] = self.nmblookup(entry[1])
+					entry[1] = self.nmblookup(entry[2])
 				scan_result.append(entry)
 
 		self.networklist = scan_result
