@@ -248,7 +248,7 @@ def opensettings(session, **kwargs):
 	session.open(ThreeDSettings)
 
 def settings(menuid, **kwargs):
-	if getImageDistro() in ('openhdf'):
+	if getImageDistro() in ('openhdf', ):
 		if menuid != "video_menu":
 			return [ ]
 	else:

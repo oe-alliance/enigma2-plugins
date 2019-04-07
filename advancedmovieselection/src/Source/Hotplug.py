@@ -49,7 +49,7 @@ class Hotplug():
     
     def hotplugNotifier(self, dev, media_state):
         print "[hotplugNotifier]", dev, media_state
-        if len(dev) > 2 and dev[0:2] in ("sd") and dev[-1].isdigit():
+        if len(dev) > 2 and dev[0:2] == "sd" and dev[-1].isdigit():
             if media_state == "add":
                 self.hotplugChanged(self.NTFS_3G_DRIVER_DELAY)
             else:

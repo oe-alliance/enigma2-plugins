@@ -1757,7 +1757,7 @@ class PermanentTimeShiftSetup(Screen, ConfigListScreen):
 #################################################
 
 def startSetup(menuid):
-	if getImageDistro() in ('openhdf'):
+	if getImageDistro() in ('openhdf', ):
 		if menuid != "record_menu":
 			return [ ]
 	else:

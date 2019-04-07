@@ -145,7 +145,7 @@ def setPWM(fanid, value):
 #Configuration
 config.plugins.FanControl = ConfigSubsection()
 
-if getImageDistro() in ('openspa') and getBoxType() in ('vusolo2'):
+if getImageDistro() in ('openspa', ) and getBoxType() in ('vusolo2', ):
 	config.plugins.FanControl.Fan = ConfigSelection(choices = [("disabled", _("disabled")), ("aus", _("Control disabled")), ("3pin", _("3Pin")), ("4pin", _("4Pin")), ("4pinREG", _("4Pin (PID)"))], default = "3pin")
 	config.plugins.FanControl.StandbyOff = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))], default="true")
 	config.plugins.FanControl.minRPM = ConfigSlider(default = 900, increment = 50, limits = (0, 1500))
@@ -154,7 +154,7 @@ if getImageDistro() in ('openspa') and getBoxType() in ('vusolo2'):
 	config.plugins.FanControl.tempmax = ConfigSlider(default = 50, increment = 1, limits = (35, 55))
 	config.plugins.FanControl.pwm = ConfigSlider(default = 30, increment = 5, limits = (0, 255))
 	config.plugins.FanControl.vlt = ConfigSlider(default = 30, increment = 5, limits = (0, 255))
-elif getImageDistro() in ('openspa') and getBoxType() in ('vuduo2'):
+elif getImageDistro() in ('openspa', ) and getBoxType() in ('vuduo2', ):
 	config.plugins.FanControl.Fan = ConfigSelection(choices = [("disabled", _("disabled")), ("aus", _("Control disabled")), ("3pin", _("3Pin")), ("4pin", _("4Pin")), ("4pinREG", _("4Pin (PID)"))], default = "4pin")
 	config.plugins.FanControl.StandbyOff = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))], default="true")
 	config.plugins.FanControl.minRPM = ConfigSlider(default = 750, increment = 50, limits = (0, 1500))
@@ -1291,10 +1291,10 @@ def autostart(reason, **kwargs):
 		session.open(FanControl2)
 
 def selSetup(menuid, **kwargs):
-	if getImageDistro() in ('openhdf'):
+	if getImageDistro() in ('openhdf', ):
 		if menuid != "devices_menu":
 			return [ ]
-	elif getImageDistro() in ('openatv'):
+	elif getImageDistro() in ('openatv', ):
 		if menuid != "extended":
 			return []
 	else:

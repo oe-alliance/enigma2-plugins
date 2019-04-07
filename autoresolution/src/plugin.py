@@ -296,7 +296,7 @@ class AutoRes(Screen):
 					new_mode = 'p1080_%s' % frate
 				elif (576 < height < 900 or 720 < width < 1600) and frate == '24' and prog == 'p': # 720p24 content
 					new_mode = 'p720_24'
-				elif frate in ('24'): # always 1080p24 content
+				elif frate in ('24', ): # always 1080p24 content
 					new_mode = 'p1080_24'
 				elif (576 < height < 900 or 720 < width < 1600) and frate == '50' and prog == 'p': # 720p50 content
 					new_mode = 'p720_50'
