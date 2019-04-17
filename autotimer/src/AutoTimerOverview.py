@@ -153,11 +153,17 @@ class AutoTimerOverview(Screen, HelpableScreen):
 				AutoTimerWizard,
 				newTimer
 			)
-		else:
+		elif config.plugins.autotimer.editor.value == "epg":
 			self.session.openWithCallback(
 				self.refresh,
 				AutoTimerChannelSelection,
 				self.autotimer
+			)
+		else:
+			self.session.openWithCallback(
+				self.addCallback,
+				AutoTimerEditor,
+				newTimer
 			)
 
 	def editCallback(self, ret):
@@ -256,18 +262,15 @@ class AutoTimerOverview(Screen, HelpableScreen):
 			(_("Import from EPG"), "import_epg"),
 			(_("Setup"), "setup"),
 			(_("Edit new timer defaults"), "defaults"),
-			(_("Clone selected timer"), "clone")
+			(_("Clone selected timer"), "clone"),
+			(_("Create a new timer using the classic editor"), "newplain"),
+			(_("Create a new timer using the wizard"), "newwizard")
 		]
 
 		from plugin import autotimerHelp
 		if autotimerHelp:
 			list.insert(0, (_("Help"), "help"))
 			list.insert(1, (_("Frequently asked questions") , "faq"))
-
-		if config.plugins.autotimer.editor.value == "wizard":
-			list.append((_("Create a new timer using the classic editor"), "newplain"))
-		else:
-			list.append((_("Create a new timer using the wizard"), "newwizard"))
 
 		self.session.openWithCallback(
 			self.menuCallback,

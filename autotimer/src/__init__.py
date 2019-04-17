@@ -55,6 +55,7 @@ config.plugins.autotimer.refresh = ConfigSelection(choices=[
 )
 config.plugins.autotimer.try_guessing = ConfigEnableDisable(default=True)
 config.plugins.autotimer.editor = ConfigSelection(choices=[
+		("epg", _("Import from EPG")),
 		("plain", _("Classic")),
 		("wizard", _("Wizard"))
 	], default = "plain"
