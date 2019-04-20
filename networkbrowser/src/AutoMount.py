@@ -34,6 +34,7 @@ class AutoMount():
 		self.callback = None
 		self.timer = eTimer()
 		self.timer.callback.append(self.mountTimeout)
+		self.autofsreload = None
 
 		self.getAutoMountPoints()
 
@@ -272,6 +273,10 @@ class AutoMount():
 		return options
 
 	def CheckMountPoint(self, item, callback, restart):
+		self.autofsreload = None
+		self.doCheckMountPoint(item, callback, restart)
+
+	def doCheckMountPoint(self, item, callback, restart):
 		data = self.automounts[item]
 		if not self.MountConsole:
 			self.MountConsole = Console()
@@ -285,14 +290,12 @@ class AutoMount():
 		else:
 			path = os.path.join('/media/net', data['sharename'])
 		if data['mountusing'] == 'autofs' and restart:
-			unmountcommand.append("/etc/init.d/autofs stop")
+			self.autofsreload = "/etc/init.d/autofs reload"
 		if os.path.ismount(path) and 'autofs' not in path:
 			unmountcommand.append('umount -fl '+ path)
 		if self.activeMountsCounter != 0:
 			if data['active'] == 'True' or data['active'] is True:
-				if data['mountusing'] == 'autofs' and restart:
-					mountcommand = "/etc/init.d/autofs start"
-				elif data['mountusing'] == 'fstab':
+				if data['mountusing'] == 'fstab':
 					if data['mounttype'] == 'nfs':
 						tmpcmd = 'mount ' + data['ip'] + ':/' + data['sharedir']
 					elif data['mounttype'] == 'cifs':
@@ -313,17 +316,21 @@ class AutoMount():
 							tmpcmd = 'mount -t cifs -o ' + self.sanitizeOptions(data['options'], cifs=True) +',noatime,noserverino,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
 							mountcommand = tmpcmd.encode("UTF-8")
 
-		if len(unmountcommand) > 0 or mountcommand is not None:
-			if len(unmountcommand) > 0:
-				for x in unmountcommand:
-					command.append(x)
-			if not os.path.exists(path) and data['mountusing'] != 'autofs':
-				command.append('mkdir -p ' + path)
-			if command is not None:
+		for x in unmountcommand:
+			command.append(x)
+		if not os.path.exists(path) and data['mountusing'] != 'autofs':
+			command.append('mkdir -p ' + path)
+		if mountcommand:
+			if command:
 				command.append('sleep 2')
-			if mountcommand is not None:
-				command.append(mountcommand)
-			print 'command',command
+			command.append(mountcommand)
+		if not self.checkList and self.autofsreload is not None:
+			if command:
+				command.append('sleep 2')
+			command.append(self.autofsreload)
+			self.autofsreload = None
+		print 'command',command
+		if command:
 			self.MountConsole.eBatch(command, self.CheckMountPointFinished, [data, callback, restart], debug=True)
 		else:
 			self.CheckMountPointFinished([data, callback, restart])
@@ -371,7 +378,7 @@ class AutoMount():
 							print "Failed to remove", path, "Error:", ex
 		if self.checkList:
 			# Go to next item in list...
-			self.CheckMountPoint(self.checkList.pop(), callback, restart)
+			self.doCheckMountPoint(self.checkList.pop(), callback, restart)
 		if self.MountConsole:
 			if len(self.MountConsole.appContainers) == 0:
 				if callback is not None:
@@ -548,9 +555,8 @@ class AutoMount():
 		command = []
 		autofsstop = None
 		if sharedata['mountusing'] == 'autofs':
-			command.append("/etc/init.d/autofs stop")
-			command.append("sleep 2")
-			command.append("/etc/init.d/autofs start")
+			# With a short sleep to allow time for the reload
+			command.append("/etc/init.d/autofs reload; sleep 2")
 		else:
 			command.append('umount -fl '+ path)
 # 		print "[NetworkBrowser] UMOUNT-CMD--->",umountcmd
