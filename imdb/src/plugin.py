@@ -638,7 +638,7 @@ class IMDB(Screen, HelpableScreen):
 				self["statusbar"].setText(_("Query IMDb: %s") % (self.eventName))
 				localfile = "/tmp/imdbquery.html"
 				fetchurl = "http://imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
-				print("[IMDB] getIMDB() Downloading Query " + fetchurl + " to " + localfile)
+				#print("[IMDB] getIMDB() Downloading Query " + fetchurl + " to " + localfile)
 				download = downloadWithProgress(fetchurl,localfile)
 				download.start().addCallback(self.IMDBquery).addErrback(self.http_failed)
 
