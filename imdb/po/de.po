@@ -115,6 +115,9 @@ msgid "Lookup"
 msgstr "Suchen"
 
 msgid "No IMDb match:"
+msgstr "Keine passenden Einträge gefunden:"
+
+msgid "No IMDb match."
 msgstr "Keine passenden Einträge gefunden."
 
 msgid "No cast list found in the database."
