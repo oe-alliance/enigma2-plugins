@@ -307,14 +307,12 @@ class AutoMount():
 						tmpdir = tmpsharedir.replace("$", "\\$")
 						tmpsharedir = tmpdir
 					if data['mounttype'] == 'nfs':
-						if not os.path.ismount(path):
-							tmpcmd = 'mount -t nfs -o ' + self.sanitizeOptions(data['options']) + ' ' + data['ip'] + ':/' + tmpsharedir + ' ' + path
-							mountcommand = tmpcmd.encode("UTF-8")
+						tmpcmd = 'mount -t nfs -o ' + self.sanitizeOptions(data['options']) + ' ' + data['ip'] + ':/' + tmpsharedir + ' ' + path
+						mountcommand = tmpcmd.encode("UTF-8")
 					elif data['mounttype'] == 'cifs':
-						if not os.path.ismount(path):
-							tmpusername = data['username'].replace(" ", "\\ ")
-							tmpcmd = 'mount -t cifs -o ' + self.sanitizeOptions(data['options'], cifs=True) +',noatime,noserverino,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
-							mountcommand = tmpcmd.encode("UTF-8")
+						tmpusername = data['username'].replace(" ", "\\ ")
+						tmpcmd = 'mount -t cifs -o ' + self.sanitizeOptions(data['options'], cifs=True) +',noatime,noserverino,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
+						mountcommand = tmpcmd.encode("UTF-8")
 
 		for x in unmountcommand:
 			command.append(x)
