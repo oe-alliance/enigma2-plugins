@@ -105,6 +105,9 @@ msgstr "Erneuten Download ausgeführt"
 msgid "IMDb setup"
 msgstr "IMDb-Einstellungen"
 
+msgid "IMDb Setup"
+msgstr "IMDb-Einstellungen"
+
 msgid "Settings for Internet Movie Database searches"
 msgstr "Einstellungen für die Suche in der Internet Movie Database"
 
