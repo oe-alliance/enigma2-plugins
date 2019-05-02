@@ -105,6 +105,9 @@ msgstr "Erneuten Download ausgeführt"
 msgid "IMDb setup"
 msgstr "IMDb-Einstellungen"
 
+msgid "IMDb Setup"
+msgstr "IMDb-Einstellungen"
+
 msgid "Settings for Internet Movie Database searches"
 msgstr "Einstellungen für die Suche in der Internet Movie Database"
 
@@ -115,6 +118,9 @@ msgid "Lookup"
 msgstr "Suchen"
 
 msgid "No IMDb match:"
+msgstr "Keine passenden Einträge gefunden:"
+
+msgid "No IMDb match."
 msgstr "Keine passenden Einträge gefunden."
 
 msgid "No cast list found in the database."
