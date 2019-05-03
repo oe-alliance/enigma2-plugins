@@ -38,6 +38,46 @@ class AutoMount():
 
 		self.getAutoMountPoints()
 
+	def makeAutoMountPoint(self, mountusing, mounttype, mount):
+
+		def getValue(definitions, default):
+			# Return last definition or default if none
+			return definitions and definitions[-1].text or default
+
+		try:
+			default_options = {
+				"nfs": "rw,nolock,tcp",
+				"cifs": "rw,utf8,vers=2.1",
+			}[mounttype]
+			default_sharedir = "/media/hdd/"
+			if mounttype == 'cifs':
+				username = getValue(mount.findall("username"), "guest").encode("UTF-8")
+				password = getValue(mount.findall("password"), "").encode("UTF-8")
+			else:
+				username = False
+				password = False
+			data = {
+				'isMounted': False,
+				'mountusing': mountusing.encode("UTF-8"),
+				'mounttype': mounttype.encode("UTF-8"),
+				'active': getValue(mount.findall("active"), "False").encode("UTF-8"),
+				'hdd_replacement': getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8"),
+				'ip': getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8"),
+				'sharedir': getValue(mount.findall("sharedir"), default_sharedir).encode("UTF-8"),
+				'sharename': getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8"),
+				'options': getValue(mount.findall("options"), default_options).encode("UTF-8"),
+				'username': username,
+				'password': password,
+			}
+		except Exception, e:
+			print "[MountManager] Error reading Mounts:", e
+		else:
+			self.automounts[data['sharename']] = data
+
+			if data["active"] == 'True' or data["active"] == True:
+				self.activeMountsCounter += 1
+
+
 	def getAutoMountPoints(self, callback = None, restart=False):
 		# Initialize mounts to empty list
 		automounts = []
@@ -49,170 +89,23 @@ class AutoMount():
 		tree = cet_parse(file).getroot()
 		file.close()
 
-		def getValue(definitions, default):
-			# Initialize Output
-			ret = ""
-			# How many definitions are present
-			Len = len(definitions)
-			return Len > 0 and definitions[Len-1].text or default
-		mountusing = 0 # 0=old_enigma2, 1 =fstab, 2=enigma2
 		# Config is stored in "mountmanager" element
-		# Read out NFS Mounts
-		for autofs in tree.findall("autofs"):
-			mountusing = 1
-			for nfs in autofs.findall("nfs"):
-				for mount in nfs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
-					try:
-						data['mountusing'] = 'autofs'.encode("UTF-8")
-						data['mounttype'] = 'nfs'.encode("UTF-8")
-						data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
-						if data["active"] == 'True' or data["active"] == True:
-							self.activeMountsCounter +=1
-						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
-						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
-						data['sharedir'] = getValue(mount.findall("sharedir"), "/media/hdd/").encode("UTF-8")
-						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp").encode("UTF-8")
-						self.automounts[data['sharename']] = data
-					except Exception, e:
-						print "[MountManager] Error reading Mounts:", e
-			for cifs in autofs.findall("cifs"):
-				for mount in cifs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
-					try:
-						data['mountusing'] = 'autofs'.encode("UTF-8")
-						data['mounttype'] = 'cifs'.encode("UTF-8")
-						data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
-						if data["active"] == 'True' or data["active"] == True:
-							self.activeMountsCounter +=1
-						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
-						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
-						data['sharedir'] = getValue(mount.findall("sharedir"), "/media/hdd/").encode("UTF-8")
-						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,utf8,vers=2.1").encode("UTF-8")
-						data['username'] = getValue(mount.findall("username"), "guest").encode("UTF-8")
-						data['password'] = getValue(mount.findall("password"), "").encode("UTF-8")
-						self.automounts[data['sharename']] = data
-					except Exception, e:
-						print "[MountManager] Error reading Mounts:", e
+		for mountusing in ("autofs", "fstab", "enigma2"):
+			for mountusingnode in tree.findall(mountusing):
+				for mounttype in ("nfs", "cifs"):
+					for fs in mountusingnode.findall(mounttype):
+						for mount in fs.findall("mount"):
+							self.makeAutoMountPoint(mountusing, mounttype, mount)
 
-		for fstab in tree.findall("fstab"):
-			mountusing = 2
-			for nfs in fstab.findall("nfs"):
-				for mount in nfs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
-					try:
-						data['mountusing'] = 'fstab'.encode("UTF-8")
-						data['mounttype'] = 'nfs'.encode("UTF-8")
-						data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
-						if data["active"] == 'True' or data["active"] == True:
-							self.activeMountsCounter +=1
-						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
-						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
-						data['sharedir'] = getValue(mount.findall("sharedir"), "/media/hdd/").encode("UTF-8")
-						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp").encode("UTF-8")
-						self.automounts[data['sharename']] = data
-					except Exception, e:
-						print "[MountManager] Error reading Mounts:", e
-			for cifs in fstab.findall("cifs"):
-				for mount in cifs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
-					try:
-						data['mountusing'] = 'fstab'.encode("UTF-8")
-						data['mounttype'] = 'cifs'.encode("UTF-8")
-						data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
-						if data["active"] == 'True' or data["active"] == True:
-							self.activeMountsCounter +=1
-						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
-						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
-						data['sharedir'] = getValue(mount.findall("sharedir"), "/media/hdd/").encode("UTF-8")
-						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,utf8,vers=2.1").encode("UTF-8")
-						data['username'] = getValue(mount.findall("username"), "guest").encode("UTF-8")
-						data['password'] = getValue(mount.findall("password"), "").encode("UTF-8")
-						self.automounts[data['sharename']] = data
-					except Exception, e:
-						print "[MountManager] Error reading Mounts:", e
-
-		for enigma2 in tree.findall("enigma2"):
-			mountusing = 3
-			for nfs in enigma2.findall("nfs"):
-				for mount in nfs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
-					try:
-						data['mountusing'] = 'enigma2'.encode("UTF-8")
-						data['mounttype'] = 'nfs'.encode("UTF-8")
-						data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
-						if data["active"] == 'True' or data["active"] == True:
-							self.activeMountsCounter +=1
-						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
-						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
-						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
-						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp").encode("UTF-8")
-						self.automounts[data['sharename']] = data
-					except Exception, e:
-						print "[MountManager] Error reading Mounts:", e
-				# Read out CIFS Mounts
-			for cifs in enigma2.findall("cifs"):
-				for mount in cifs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
-					try:
-						data['mountusing'] = 'enigma2'.encode("UTF-8")
-						data['mounttype'] = 'cifs'.encode("UTF-8")
-						data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
-						if data["active"] == 'True' or data["active"] == True:
-							self.activeMountsCounter +=1
-						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
-						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
-						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
-						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,utf8,vers=2.1").encode("UTF-8")
-						data['username'] = getValue(mount.findall("username"), "guest").encode("UTF-8")
-						data['password'] = getValue(mount.findall("password"), "").encode("UTF-8")
-						self.automounts[data['sharename']] = data
-					except Exception, e:
-						print "[MountManager] Error reading Mounts:", e
-
-		if mountusing == 0:
-			for nfs in tree.findall("nfs"):
-				for mount in nfs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
-					try:
-						data['mountusing'] = 'old_enigma2'.encode("UTF-8")
-						data['mounttype'] = 'nfs'.encode("UTF-8")
-						data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
-						if data["active"] == 'True' or data["active"] == True:
-							self.activeMountsCounter +=1
-						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
-						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
-						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
-						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp").encode("UTF-8")
-						self.automounts[data['sharename']] = data
-					except Exception, e:
-						print "[MountManager] Error reading Mounts:", e
-			for cifs in tree.findall("cifs"):
-				for mount in cifs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
-					try:
-						data['mountusing'] = 'old_enigma2'.encode("UTF-8")
-						data['mounttype'] = 'cifs'.encode("UTF-8")
-						data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
-						if data["active"] == 'True' or data["active"] == True:
-							self.activeMountsCounter +=1
-						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
-						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
-						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
-						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,utf8,vers=2.1").encode("UTF-8")
-						data['username'] = getValue(mount.findall("username"), "guest").encode("UTF-8")
-						data['password'] = getValue(mount.findall("password"), "").encode("UTF-8")
-						self.automounts[data['sharename']] = data
-					except Exception, e:
-						print "[MountManager] Error reading Mounts:", e
+		# Process mounts using "old_enigma2" and convert them to "enigma2"
+		old_enigma2_converted = False
+		for mounttype in ("nfs", "cifs"):
+			for fs in tree.findall(mounttype):
+				for mount in fs.findall("mount"):
+					old_enigma2_converted = True
+					self.makeAutoMountPoint("enigma2", mounttype, mount)
+		if old_enigma2_converted:
+			self.writeAutoMountsXML()
 
 		self.checkList = self.automounts.keys()
 		if not self.checkList:
@@ -301,7 +194,7 @@ class AutoMount():
 					elif data['mounttype'] == 'cifs':
 						tmpcmd = 'mount //' + data['ip'] + '/' + data['sharedir']
 					mountcommand = tmpcmd.encode("UTF-8")
-				elif data['mountusing'] == 'enigma2' or data['mountusing'] == 'old_enigma2':
+				elif data['mountusing'] == 'enigma2':
 					tmpsharedir = data['sharedir'].replace(" ", "\\ ")
 					if tmpsharedir[-1:] == "$":
 						tmpdir = tmpsharedir.replace("$", "\\$")
@@ -438,8 +331,7 @@ class AutoMount():
 		res = []
 		mounttype = self.escape(sharedata['mounttype'])
 		mountusing = self.escape(sharedata['mountusing'])
-		if mountusing != 'old_enigma2':
-			res.append('<' + mountusing + '>\n')
+		res.append('<' + mountusing + '>\n')
 		res.append(' <' + mounttype + '>\n')
 		res.append('  <mount>\n')
 		res.append('   <active>' + self.escape(str(sharedata['active'])) + '</active>\n')
@@ -453,15 +345,30 @@ class AutoMount():
 			res.append("   <password>" + self.escape(sharedata['password']) + "</password>\n")
 		res.append('  </mount>\n')
 		res.append(' </' + mounttype + '>\n')
-		if mountusing != 'old_enigma2':
-			res.append('</' + mountusing + '>\n')
+		res.append('</' + mountusing + '>\n')
 		return res
 
+	def writeAutoMountsXML(self):
+		# XML header & open Mountmanager Tag
+		# Generate List in RAM
+		xmldata = ['<?xml version="1.0" ?>\n<mountmanager>\n']
+		for sharedata in self.automounts.itervalues():
+			xmldata += self.generateMountXML(sharedata)
+		# Close Mountmanager Tag
+		xmldata.append('</mountmanager>\n')
+
+		# Try Saving to Flash
+		try:
+			f = open(XML_FSTAB, "w")
+			f.writelines(xmldata)
+			f.close()
+			# print "[NetworkBrowser] Saving Mounts List:"
+		except Exception, e:
+			print "[NetworkBrowser] Error Saving Mounts List:", e
 
 	def writeMountsConfig(self):
-		# Generate List in RAM
-		list = ['<?xml version="1.0" ?>\n<mountmanager>\n']
-		for sharename, sharedata in self.automounts.items():
+		self.writeAutoMountsXML()
+		for sharedata in self.automounts.itervalues():
 			mounttype = sharedata['mounttype']
 			mountusing = sharedata['mountusing']
 
@@ -482,7 +389,6 @@ class AutoMount():
 				self.removeEntryFromAutofsMap(sharedata['sharename'], ":" + sharetemp+'\n', '/etc/auto.network')
 				self.removeEntryFromFile(sharetemp, '/etc/fstab')
 
-			list += self.generateMountXML(sharedata)
 			if mountusing == 'autofs':
 				if sharedata['active'] == True or sharedata['active'] == 'True':
 					out = open('/etc/auto.network', 'a')
@@ -504,18 +410,6 @@ class AutoMount():
 						line = '//' + sharedata['ip'] + '/' + sharedata['sharedir'] + '\t' + path + '\tcifs\tuser=' + sharedata['username'] + ',pass=' + sharedata['password'] + ',_netdev,' + self.sanitizeOptions(sharedata['options'], cifs=True, fstab=True) + '\t0 0\n'
 					out.write(line)
 					out.close()
-
-		# Close Mountmanager Tag
-		list.append('</mountmanager>\n')
-
-		# Try Saving to Flash
-		try:
-			f = open(XML_FSTAB, "w")
-			f.writelines(list)
-			f.close()
-			# print "[NetworkBrowser] Saving Mounts List:"
-		except Exception, e:
-			print "[NetworkBrowser] Error Saving Mounts List:", e
 
 	def stopMountConsole(self):
 		if self.MountConsole is not None:

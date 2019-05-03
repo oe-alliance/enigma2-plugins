@@ -127,7 +127,6 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		self.mountusing.append(("autofs", _("AUTOFS (mount as needed)")))
 		self.mountusing.append(("fstab", _("FSTAB (mount at boot)")))
 		self.mountusing.append(("enigma2", _("Enigma2 (mount using enigma2)")))
-		self.mountusing.append(("old_enigma2", _("Enigma2 old format (mount using linux)")))
 
 		self.sharetypelist = []
 		self.sharetypelist.append(("cifs", _("CIFS share")))
