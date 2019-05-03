@@ -97,10 +97,15 @@ class AutoMount():
 						for mount in fs.findall("mount"):
 							self.makeAutoMountPoint(mountusing, mounttype, mount)
 
+		# Process mounts using "old_enigma2" and convert them to "enigma2"
+		old_enigma2_converted = False
 		for mounttype in ("nfs", "cifs"):
 			for fs in tree.findall(mounttype):
 				for mount in fs.findall("mount"):
-					self.makeAutoMountPoint("old_enigma2", mounttype, mount)
+					old_enigma2_converted = True
+					self.makeAutoMountPoint("enigma2", mounttype, mount)
+		if old_enigma2_converted:
+			self.writeAutoMountsXML()
 
 		self.checkList = self.automounts.keys()
 		if not self.checkList:
@@ -189,7 +194,7 @@ class AutoMount():
 					elif data['mounttype'] == 'cifs':
 						tmpcmd = 'mount //' + data['ip'] + '/' + data['sharedir']
 					mountcommand = tmpcmd.encode("UTF-8")
-				elif data['mountusing'] == 'enigma2' or data['mountusing'] == 'old_enigma2':
+				elif data['mountusing'] == 'enigma2':
 					tmpsharedir = data['sharedir'].replace(" ", "\\ ")
 					if tmpsharedir[-1:] == "$":
 						tmpdir = tmpsharedir.replace("$", "\\$")
@@ -326,8 +331,7 @@ class AutoMount():
 		res = []
 		mounttype = self.escape(sharedata['mounttype'])
 		mountusing = self.escape(sharedata['mountusing'])
-		if mountusing != 'old_enigma2':
-			res.append('<' + mountusing + '>\n')
+		res.append('<' + mountusing + '>\n')
 		res.append(' <' + mounttype + '>\n')
 		res.append('  <mount>\n')
 		res.append('   <active>' + self.escape(str(sharedata['active'])) + '</active>\n')
@@ -341,15 +345,30 @@ class AutoMount():
 			res.append("   <password>" + self.escape(sharedata['password']) + "</password>\n")
 		res.append('  </mount>\n')
 		res.append(' </' + mounttype + '>\n')
-		if mountusing != 'old_enigma2':
-			res.append('</' + mountusing + '>\n')
+		res.append('</' + mountusing + '>\n')
 		return res
 
+	def writeAutoMountsXML(self):
+		# XML header & open Mountmanager Tag
+		# Generate List in RAM
+		xmldata = ['<?xml version="1.0" ?>\n<mountmanager>\n']
+		for sharedata in self.automounts.itervalues():
+			xmldata += self.generateMountXML(sharedata)
+		# Close Mountmanager Tag
+		xmldata.append('</mountmanager>\n')
+
+		# Try Saving to Flash
+		try:
+			f = open(XML_FSTAB, "w")
+			f.writelines(xmldata)
+			f.close()
+			# print "[NetworkBrowser] Saving Mounts List:"
+		except Exception, e:
+			print "[NetworkBrowser] Error Saving Mounts List:", e
 
 	def writeMountsConfig(self):
-		# Generate List in RAM
-		list = ['<?xml version="1.0" ?>\n<mountmanager>\n']
-		for sharename, sharedata in self.automounts.items():
+		self.writeAutoMountsXML()
+		for sharedata in self.automounts.itervalues():
 			mounttype = sharedata['mounttype']
 			mountusing = sharedata['mountusing']
 
@@ -370,7 +389,6 @@ class AutoMount():
 				self.removeEntryFromAutofsMap(sharedata['sharename'], ":" + sharetemp+'\n', '/etc/auto.network')
 				self.removeEntryFromFile(sharetemp, '/etc/fstab')
 
-			list += self.generateMountXML(sharedata)
 			if mountusing == 'autofs':
 				if sharedata['active'] == True or sharedata['active'] == 'True':
 					out = open('/etc/auto.network', 'a')
@@ -392,18 +410,6 @@ class AutoMount():
 						line = '//' + sharedata['ip'] + '/' + sharedata['sharedir'] + '\t' + path + '\tcifs\tuser=' + sharedata['username'] + ',pass=' + sharedata['password'] + ',_netdev,' + self.sanitizeOptions(sharedata['options'], cifs=True, fstab=True) + '\t0 0\n'
 					out.write(line)
 					out.close()
-
-		# Close Mountmanager Tag
-		list.append('</mountmanager>\n')
-
-		# Try Saving to Flash
-		try:
-			f = open(XML_FSTAB, "w")
-			f.writelines(list)
-			f.close()
-			# print "[NetworkBrowser] Saving Mounts List:"
-		except Exception, e:
-			print "[NetworkBrowser] Error Saving Mounts List:", e
 
 	def stopMountConsole(self):
 		if self.MountConsole is not None:
