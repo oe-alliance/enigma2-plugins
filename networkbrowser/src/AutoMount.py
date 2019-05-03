@@ -89,28 +89,18 @@ class AutoMount():
 		tree = cet_parse(file).getroot()
 		file.close()
 
-		mountusing = 0 # 0=old_enigma2, 1 =fstab, 2=enigma2
 		# Config is stored in "mountmanager" element
-		mountusing_values = {
-			"autofs": 1,
-			"fstab": 2,
-			"enigma2": 3,
-			"old_enigma2": 0,
-		}
-		for mntusing in ("autofs", "fstab", "enigma2"):
-			for mountusingnode in tree.findall(mntusing):
-				mountusing = mountusing_values[mntusing]
-
+		for mountusing in ("autofs", "fstab", "enigma2"):
+			for mountusingnode in tree.findall(mountusing):
 				for mounttype in ("nfs", "cifs"):
 					for fs in mountusingnode.findall(mounttype):
 						for mount in fs.findall("mount"):
-							self.makeAutoMountPoint(mntusing, mounttype, mount)
+							self.makeAutoMountPoint(mountusing, mounttype, mount)
 
-		if mountusing == 0:
-			for mounttype in ("nfs", "cifs"):
-				for fs in tree.findall(mounttype):
-					for mount in fs.findall("mount"):
-						self.makeAutoMountPoint("old_enigma2", mounttype, mount)
+		for mounttype in ("nfs", "cifs"):
+			for fs in tree.findall(mounttype):
+				for mount in fs.findall("mount"):
+					self.makeAutoMountPoint("old_enigma2", mounttype, mount)
 
 		self.checkList = self.automounts.keys()
 		if not self.checkList:
