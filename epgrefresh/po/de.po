@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Enigma2 EPGRefresh Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-12 10:30+CEST\n"
-"PO-Revision-Date: 2015-03-06 21:35+0100\n"
-"Last-Translator: mike99 <mike99@mail.to>\n"
+"PO-Revision-Date: 2019-05-03 14:14+0200\n"
+"Last-Translator: Schimmelreiter\n"
 "Language-Team: none\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 2.2\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
 #: EPGBackupSupport.py:52
@@ -154,21 +154,13 @@ msgstr "EPGRefresh Konfiguration Hilfe"
 msgid "Stop running refresh"
 msgstr "Laufende Aktualisierung stoppen"
 
-#: EPGRefreshConfiguration.py:57
+#: EPGRefreshConfiguration.py:57 plugin.py:240
 msgid "Pending Services"
 msgstr "Ausstehende Kanäle"
 
-#: plugin.py:240
-msgid "EPG-Refresh_Pending Services"
-msgstr "EPG-Refresh ausstehende Kanäle"
-
-#: EPGRefreshConfiguration.py:59
+#: EPGRefreshConfiguration.py:59 plugin.py:238
 msgid "Refresh now"
 msgstr " Jetzt aktualisieren"
-
-#: plugin.py:238
-msgid "EPG-Refresh_Refresh now"
-msgstr "EPG-Refresh jetzt aktualisieren"
 
 #: EPGRefreshConfiguration.py:62
 msgid "EPGRefresh Functions"
@@ -303,6 +295,12 @@ msgstr ""
 msgid "Skip protected Services"
 msgstr "überspringe geschützte Kanäle"
 
+msgid ""
+"Enable this to be able to access the EPGRefresh configuration from within "
+"the plugin menu."
+msgstr ""
+"Soll die Konfiguration direkt von den Plugins aus aufgerufen werden können?"
+
 #: EPGRefreshConfiguration.py:168
 msgid ""
 "Enable this to be able to access the EPGRefresh configuration from within "
@@ -310,6 +308,9 @@ msgid ""
 msgstr ""
 "Soll die Konfiguration direkt aus dem Erweiterungsmenü heraus aufgerufen "
 "werden können?"
+
+msgid "Show Setup in plugins"
+msgstr "\"Einstellungen\" bei den Plugins anzeigen"
 
 #: EPGRefreshConfiguration.py:168
 msgid "Show Setup in extension menu"
@@ -488,8 +489,8 @@ msgid "EXTENSIONMENU_PREFIX"
 msgstr "EPGRefresh"
 
 #: plugin.py:237
-msgid "EPG-Refresh_SetUp"
-msgstr "EPG-Refresh Konfiguration"
+msgid "EXTENSIONNAME_SETUP"
+msgstr ""
 
 #: plugin.py:237 plugin.py:293
 msgid "Automatically refresh EPG"
@@ -500,8 +501,8 @@ msgid "Start EPGrefresh immediately"
 msgstr "Eine Aktualisierung sofort starten"
 
 #: plugin.py:239
-msgid "EPG-Refresh_Stop Refresh"
-msgstr "EPG-Refresh Aktualisierung stoppen"
+msgid "Stop Refresh"
+msgstr "Refresh anhalten"
 
 #: plugin.py:239
 msgid "Stop Running EPG-refresh"
@@ -519,13 +520,30 @@ msgstr "Zu EPGRefresh hinzufügen"
 msgid "PLUGINNAME_EPGRefresh"
 msgstr "EPGRefresh"
 
-#: EPGRefreshConfiguration.py
-msgid "Flush EPG before refresh"
-msgstr "EPG-Daten vor dem Aktualisieren löschen"
+#~ msgid "Show Setup in plugin menu"
+#~ msgstr "\"Einstellungen\" unter Plugins anzeigen"
 
-#: EPGRefreshConfiguration.py
-msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
-msgstr "Aktivieren Sie diese Option, wenn vor der EPG-Aktualisierung, die kompletten EPG-Daten gelöscht werden sollen."
+#~ msgid "EPG-Refresh_Pending Services"
+#~ msgstr "EPG-Refresh ausstehende Kanäle"
+
+#~ msgid "EPG-Refresh_Refresh now"
+#~ msgstr "EPG-Refresh jetzt aktualisieren"
+
+#~ msgid "EPG-Refresh_SetUp"
+#~ msgstr "EPG-Refresh Konfiguration"
+
+#~ msgid "EPG-Refresh_Stop Refresh"
+#~ msgstr "EPG-Refresh Aktualisierung stoppen"
+
+#~ msgid "Flush EPG before refresh"
+#~ msgstr "EPG-Daten vor dem Aktualisieren löschen"
+
+#~ msgid ""
+#~ "Enable this item to flush all EPG data before starting a new EPG refresh "
+#~ "cycle"
+#~ msgstr ""
+#~ "Aktivieren Sie diese Option, wenn vor der EPG-Aktualisierung, die "
+#~ "kompletten EPG-Daten gelöscht werden sollen."
 
 #~ msgid "Restore EPG-Backups (Date)"
 #~ msgstr "Backup wiederherstellen (Datum)"
