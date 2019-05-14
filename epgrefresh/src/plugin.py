@@ -68,7 +68,10 @@ config.plugins.epgrefresh.adapter = ConfigSelection(choices = adapter_choices, d
 
 config.plugins.epgrefresh.show_in_extensionsmenu = ConfigYesNo(default = False)
 config.plugins.epgrefresh.show_run_in_extensionsmenu = ConfigYesNo(default = True)
-config.plugins.epgrefresh.show_in_plugins = ConfigYesNo(default = False)
+if getImageDistro() in ("openatv"):
+	config.plugins.epgrefresh.show_in_plugins = ConfigYesNo(default = False)
+else:
+	config.plugins.epgrefresh.show_in_plugins = ConfigYesNo(default = True)
 config.plugins.epgrefresh.show_help = ConfigYesNo(default = True)
 config.plugins.epgrefresh.wakeup_time = ConfigInteger(default=-1)
 config.plugins.epgrefresh.showadvancedoptions = NoSave(ConfigYesNo(default = False))
