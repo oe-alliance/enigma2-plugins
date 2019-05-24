@@ -203,7 +203,7 @@ def Plugins(**kwargs):
 
 def timermenu(menuid):
 	if menuid == "timermenu":
-		if getImageDistro() in ('openhdf'):
+		if getImageDistro() in ('openhdf', ):
 			return [(_("Auto Timer"), main, "autotimer_setup", None)]
 		else:
 			return [(_("AutoTimers"), main, "autotimer_setup", None)]

@@ -33,7 +33,7 @@ def pluginOpen(session, **kwargs):
     session.open(VideoColorSpace)
 
 def startSetup(menuid):
-    if getImageDistro() in ('openhdf'):
+    if getImageDistro() in ('openhdf', ):
         if menuid != "video_menu":
             return [ ]
     else:

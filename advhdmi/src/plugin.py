@@ -163,7 +163,7 @@ def main(session, **kwargs):
 		session.open(AdvHdmiCecSetup)
 
 def showinSetup(menuid):
-	if getImageDistro() in ('openhdf'):
+	if getImageDistro() in ('openhdf', ):
 		if menuid != "video_menu":
 			return [ ]
 	else:

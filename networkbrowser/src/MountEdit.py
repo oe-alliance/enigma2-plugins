@@ -104,6 +104,10 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			ip.append(int(x))
 		return ip
 
+	def cleanSharename(self, sharename):
+		# "\W" matches everything that is "not numbers, letters, or underscores", where the alphabet defaults to ASCII.
+		return re_sub("\W", "", sharename)
+
 	def exit(self):
 		self.close()
 
@@ -123,7 +127,6 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		self.mountusing.append(("autofs", _("AUTOFS (mount as needed)")))
 		self.mountusing.append(("fstab", _("FSTAB (mount at boot)")))
 		self.mountusing.append(("enigma2", _("Enigma2 (mount using enigma2)")))
-		self.mountusing.append(("old_enigma2", _("Enigma2 old format (mount using linux)")))
 
 		self.sharetypelist = []
 		self.sharetypelist.append(("cifs", _("CIFS share")))
@@ -167,9 +170,9 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			defaultOptions = "rw,nolock,tcp"
 		else:
 			defaultOptions = "rw,utf8,vers=2.1"
-		if self.mountinfo['sharename'] and self.mountinfo.has_key('sharename'):
-			sharename = re_sub("\W", "", self.mountinfo['sharename'])
-			self.old_sharename = sharename
+		if self.mountinfo.get('sharename'):
+			sharename = self.cleanSharename(self.mountinfo['sharename'])
+			self.old_sharename = self.mountinfo['sharename']
 		else:
 			sharename = ""
 			self.old_sharename = None
@@ -321,7 +324,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			if current[1].help_window.instance is not None:
 				current[1].help_window.instance.hide()
 
-		sharename = re_sub("\W", "", self.sharenameConfigEntry.value)
+		sharename = self.cleanSharename(self.sharenameConfigEntry.value)
 		if self.sharedirConfigEntry.value.startswith("/"):
 			sharedir = self.sharedirConfigEntry.value[1:]
 		else:
@@ -333,9 +336,9 @@ class AutoMountEdit(Screen, ConfigListScreen):
 				sharexists = True
 				break
 
-		if not self.newmount and self.old_sharename and self.old_sharename != self.sharenameConfigEntry.value:
+		if not self.newmount and self.old_sharename and self.old_sharename != sharename:
 			self.session.openWithCallback(self.updateConfig, MessageBox, _("You have changed the share name!\nUpdate existing entry and continue?\n"), default=False )
-		elif not self.newmount and self.old_sharename and self.old_sharename == self.sharenameConfigEntry.value and sharexists:
+		elif not self.newmount and self.old_sharename and self.old_sharename == sharename and sharexists:
 			self.session.openWithCallback(self.updateConfig, MessageBox, _("A mount entry with this name already exists!\nUpdate existing entry and continue?\n"), default=False )
 		else:
 			self.session.openWithCallback(self.applyConfig, MessageBox, _("Are you sure you want to save this network mount?\n\n") )
@@ -343,17 +346,15 @@ class AutoMountEdit(Screen, ConfigListScreen):
 	def updateConfig(self, ret = False):
 		if (ret == True):
 			sharedir = None
-			if self.old_sharename != self.sharenameConfigEntry.value:
-				xml_sharename = self.old_sharename
-			else:
-				xml_sharename = self.sharenameConfigEntry.value
+			sharename = self.cleanSharename(self.sharenameConfigEntry.value)
+			xml_sharename = self.old_sharename
 
 			if self.sharedirConfigEntry.value.startswith("/"):
 				sharedir = self.sharedirConfigEntry.value[1:]
 			else:
 				sharedir = self.sharedirConfigEntry.value
 			iAutoMount.setMountsAttribute(xml_sharename, "mountusing", self.mountusingConfigEntry.value)
-			iAutoMount.setMountsAttribute(xml_sharename, "sharename", self.sharenameConfigEntry.value)
+			iAutoMount.setMountsAttribute(xml_sharename, "sharename", sharename)
 			iAutoMount.setMountsAttribute(xml_sharename, "active", self.activeConfigEntry.value)
 			iAutoMount.setMountsAttribute(xml_sharename, "ip", self.ipConfigEntry.getText())
 			iAutoMount.setMountsAttribute(xml_sharename, "sharedir", sharedir)
@@ -390,8 +391,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			data['mountusing'] = self.mountusingConfigEntry.value
 			data['active'] = self.activeConfigEntry.value
 			data['ip'] = self.ipConfigEntry.getText()
-			data['sharename'] = re_sub("\W", "", self.sharenameConfigEntry.value)
-			# "\W" matches everything that is "not numbers, letters, or underscores",where the alphabet defaults to ASCII.
+			data['sharename'] = self.cleanSharename(self.sharenameConfigEntry.value)
 			if self.sharedirConfigEntry.value.startswith("/"):
 				data['sharedir'] = self.sharedirConfigEntry.value[1:]
 			else:

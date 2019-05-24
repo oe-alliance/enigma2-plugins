@@ -549,7 +549,7 @@ class NetworkBrowser(Screen):
 			if selection[0] == 'nfsShare':
 				# add data
 				data['mounttype'] = 'nfs'
-				data['sharename'] = selection[1]
+				data['sharename'] = (selection[1] or selection[2]) + '_' + (os.path.basename(selection[4]) or "root")
 				data['sharedir'] = selection[4]
 				data['options'] = "rw,nolock,tcp"
 
@@ -560,7 +560,7 @@ class NetworkBrowser(Screen):
 			elif selection[0] == 'smbShare':
 				# add data
 				data['mounttype'] = 'cifs'
-				data['sharename'] = selection[3] + "@" + selection[1]
+				data['sharename'] = (selection[1] or selection[2]) + '_' + selection[3]
 				data['sharedir'] = selection[3]
 				data['options'] = "rw,utf8,vers=2.1"
 				data['username'] = ""
