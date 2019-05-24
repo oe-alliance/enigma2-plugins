@@ -68,6 +68,10 @@ config.plugins.epgrefresh.adapter = ConfigSelection(choices = adapter_choices, d
 
 config.plugins.epgrefresh.show_in_extensionsmenu = ConfigYesNo(default = False)
 config.plugins.epgrefresh.show_run_in_extensionsmenu = ConfigYesNo(default = True)
+if getImageDistro() in ("openatv"):
+	config.plugins.epgrefresh.show_in_plugins = ConfigYesNo(default = False)
+else:
+	config.plugins.epgrefresh.show_in_plugins = ConfigYesNo(default = True)
 config.plugins.epgrefresh.show_help = ConfigYesNo(default = True)
 config.plugins.epgrefresh.wakeup_time = ConfigInteger(default=-1)
 config.plugins.epgrefresh.showadvancedoptions = NoSave(ConfigYesNo(default = False))
@@ -245,6 +249,7 @@ extSetupDescriptor = PluginDescriptor( _("EPG-Refresh_SetUp"), description = _("
 extRunDescriptor = PluginDescriptor( _("EPG-Refresh_Refresh now"), description = _("Start EPGrefresh immediately"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = forceRefresh, needsRestart = False)
 extStopDescriptor = PluginDescriptor( _("EPG-Refresh_Stop Refresh"), description = _("Stop Running EPG-refresh"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = stopRunningRefresh, needsRestart = False)
 extPendingServDescriptor = PluginDescriptor( _("EPG-Refresh_Pending Services"), description = _("Show the pending Services for refresh"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = showPendingServices, needsRestart = False)
+extPluginDescriptor = PluginDescriptor(	name = _("EPGRefresh"), description = _("Automatically refresh EPG"), 	where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main, icon = "EPGRefresh.png", needsRestart = False)
 
 def AdjustExtensionsmenu(enable, PlugDescriptor):
 	if enable:
@@ -260,7 +265,9 @@ def AdjustExtensionsmenu(enable, PlugDescriptor):
 def housekeepingExtensionsmenu(configentry, force=False):
 	if force or (epgrefresh != None and not epgrefresh.isRunning()):
 		PlugDescriptor = None
-		if configentry == config.plugins.epgrefresh.show_in_extensionsmenu:
+		if configentry == config.plugins.epgrefresh.show_in_plugins:
+			PlugDescriptor = extPluginDescriptor
+		elif configentry == config.plugins.epgrefresh.show_in_extensionsmenu:
 			PlugDescriptor = extSetupDescriptor
 		elif configentry == config.plugins.epgrefresh.show_run_in_extensionsmenu:
 			PlugDescriptor = extRunDescriptor
@@ -268,11 +275,12 @@ def housekeepingExtensionsmenu(configentry, force=False):
 		if PlugDescriptor is not None:
 			AdjustExtensionsmenu(configentry.value, PlugDescriptor)
 
+config.plugins.epgrefresh.show_in_plugins.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = True)
 config.plugins.epgrefresh.show_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = True)
 config.plugins.epgrefresh.show_run_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = True)
 
 def menu_main(menuid, **kwargs):
-	if getImageDistro() in ("openvix", "openatv", "openspa"):
+	if getImageDistro() in ("openvix", "openatv", "openspa", "openhdf"):
 		if menuid != "epg":
 			return []
 	else:
@@ -305,14 +313,6 @@ def Plugins(**kwargs):
 			fnc = eventinfo,
 			needsRestart = needsRestart,
 		),
-		PluginDescriptor(
-			name = _("EPGRefresh"),
-			description = _("Automatically refresh EPG"),
-			where = PluginDescriptor.WHERE_PLUGINMENU, 
-			fnc = main,
-			icon = "EPGRefresh.png",
-			needsRestart = needsRestart,
-		),
 	]
 	list.append(PluginDescriptor(name = _("EPGRefresh"),
 					description = _("Automatically refresh EPG"),
@@ -326,5 +326,8 @@ def Plugins(**kwargs):
 	if config.plugins.epgrefresh.show_run_in_extensionsmenu.value:
 		extRunDescriptor.needsRestart = needsRestart
 		list.append(extRunDescriptor)
+	if config.plugins.epgrefresh.show_in_plugins.value:
+		extPluginDescriptor.needsRestart = needsRestart
+		list.append(extPluginDescriptor)
 
 	return list

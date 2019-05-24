@@ -165,6 +165,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 			if config.plugins.epgrefresh.showadvancedoptions.value:
 				if config.ParentalControl.servicepinactive.value:
 					self.list.append(getConfigListEntry(_("Skip protected Services"), config.plugins.epgrefresh.skipProtectedServices, _("Should protected services be skipped if refresh was started in interactive-mode?"), False))
+				self.list.append(getConfigListEntry(_("Show Setup in plugins"), config.plugins.epgrefresh.show_in_plugins, _("Enable this to be able to access the EPGRefresh configuration from within the plugin menu."), False))
 				self.list.append(getConfigListEntry(_("Show Setup in extension menu"), config.plugins.epgrefresh.show_in_extensionsmenu, _("Enable this to be able to access the EPGRefresh configuration from within the extension menu."), False))
 				self.list.append(getConfigListEntry(_("Show 'EPGRefresh Start now' in extension menu."), config.plugins.epgrefresh.show_run_in_extensionsmenu, _("Enable this to be able to start the EPGRefresh from within the extension menu."), False))
 				self.list.append(getConfigListEntry(_("Show popup when refresh starts and ends."), config.plugins.epgrefresh.enablemessage, _("This setting controls whether or not an informational message will be shown at start and completion of refresh."), False))

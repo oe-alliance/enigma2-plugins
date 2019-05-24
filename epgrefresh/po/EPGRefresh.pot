@@ -254,8 +254,14 @@ msgstr ""
 msgid "Skip protected Services"
 msgstr ""
 
+msgid "Enable this to be able to access the EPGRefresh configuration from within the plugin menu."
+msgstr ""
+
 #: EPGRefreshConfiguration.py:168
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
+msgstr ""
+
+msgid "Show Setup in plugins"
 msgstr ""
 
 #: EPGRefreshConfiguration.py:168
