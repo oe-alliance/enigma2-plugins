@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: AutoTimer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-02 16:57+0100\n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: 2019-06-09 20:39+0200\n"
 "Last-Translator: kvinto <badsystem@ukr.net>\n"
 "Language-Team: <sat-ukraine.info>\n"
 "MIME-Version: 1.0\n"
@@ -472,6 +472,21 @@ msgstr "Скидання лічильника"
 msgid "Restrict \"after event\" to a certain timespan?"
 msgstr "Обмежити «Після події» для певного проміжку часу?"
 
+msgid "Restrict autotimer to bouquets.\n"
+"Use the blue key to edit the bouquet filter."
+msgstr "Обмежують автотаймер до фаворитів.\n"
+"Використовуйте синю кнопку для редагування фільтра фаворитів."
+
+msgid "Restrict autotimer to specific days.\n"
+"Use the yellow key to edit the day filter."
+msgstr "Обмежити автотаймер на певні дні.\n"
+"Використовуйте жовту кнопку для редагування фільтра днів."
+
+msgid "Restrict autotimer to specific services, channels.\n"
+"Use the blue key to edit the service filter."
+msgstr "Обмежити автотаймер на конкретні передачі, канали.\n"
+"Використовуйте синю кнопку для редагування фільтра каналів."
+
 msgid "Restriction to certain bouquets (edit in services menu)"
 msgstr "Обмеження певних фаворитів (редагування в меню каналів)"
 
@@ -806,3 +821,6 @@ msgstr "невідомий"
 
 msgid "zap"
 msgstr "переключення"
+
+msgid "zap and record"
+msgstr "переключення і запис"
