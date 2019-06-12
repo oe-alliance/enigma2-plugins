@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: AutoTimer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-02 16:57+0100\n"
-"PO-Revision-Date: 2019-06-09 20:39+0200\n"
+"PO-Revision-Date: 2019-06-11 15:34+0200\n"
 "Last-Translator: kvinto <badsystem@ukr.net>\n"
 "Language-Team: <sat-ukraine.info>\n"
 "MIME-Version: 1.0\n"
@@ -15,6 +15,9 @@ msgstr ""
 "Language: uk_UK\n"
 "X-Generator: Poedit 2.2.3\n"
 "X-Poedit-SearchPath-0: ../src\n"
+
+msgid " (if services are enabled, bouquets are ignored.)."
+msgstr " (якщо канали включені, фаворити ігноруються.)."
 
 msgid "  Any time"
 msgstr "  У будь-який час"
@@ -69,6 +72,9 @@ msgstr "Після події"
 msgid "All channels"
 msgstr "Всі канали"
 
+msgid "All non-repeating timers"
+msgstr "Всі таймери без повторень"
+
 msgid "Amount of recordings left"
 msgstr "Залишилося записів"
 
@@ -108,6 +114,9 @@ msgstr "АвтоТаймер був видалений"
 msgid "AutoTimers"
 msgstr "АвтоТаймери"
 
+msgid "Auto Timer"
+msgstr "Авто Таймер"
+
 msgid "Auto Timers"
 msgstr "Авто Таймери"
 
@@ -145,7 +154,7 @@ msgid "Check for uniqueness in"
 msgstr "Перевірка на унікальність в"
 
 msgid "Choose target folder"
-msgstr "Виберіть папку"
+msgstr "Виберіть цільову папку"
 
 msgid "Clone selected timer"
 msgstr "Клонування обраного таймера"
@@ -291,6 +300,9 @@ msgstr "Оприділяти існуючий таймер на основі п�
 msgid "Help"
 msgstr "Допомога"
 
+msgid "Hour"
+msgstr "Година"
+
 msgid "If a timer conflict occurs, AutoTimer will search outside the timespan for a similar event and add it."
 msgstr "Якщо виникає конфлікт таймера, АвтоТаймер буде шукати подібну передачу щоб додати її."
 
@@ -299,6 +311,15 @@ msgstr "Якщо включено, то запит буде пропущено, 
 
 msgid "If enabled, the polling will be skipped if a recording is in progress."
 msgstr "Якщо включено, то запит буде пропущено, якщо в даний час працює запис."
+
+msgid "If specified bouquets"
+msgstr "Якщо вказані фаворити"
+
+msgid "If specified services"
+msgstr "Якщо вказані канали"
+
+msgid "If specified services or bouquets"
+msgstr "Якщо вказані канали або фаворити"
 
 msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80% of the it."
 msgstr "Якщо ця опція включена, існуючий таймер буде розглядати виконання запису, якщо він запише щонайменше 80%."
@@ -367,6 +388,9 @@ msgstr ""
 "Повідомлення\n"
 "Ви дійсно хочете видалити %s?"
 
+msgid "Minute"
+msgstr "Хвилина"
+
 msgid "Modify existing timers"
 msgstr "Зміна існуючих таймерів"
 
@@ -411,6 +435,9 @@ msgstr "Для любого каналу"
 
 msgid "On same service"
 msgstr "Для цього ж каналу"
+
+msgid "Only AutoTimers created during this session"
+msgstr "Під час цього сеансу створено лише АвтоТаймери"
 
 msgid "Only add timer for next x days"
 msgstr "Додати таймер тільки для наступних х днів"
@@ -547,6 +574,9 @@ msgstr "Встановити максимальну тривалість"
 msgid "Set this NO to disable this AutoTimer."
 msgstr "Встановіть НІ для відключення даного автотаумеру."
 
+msgid "Set timer type: zap, simple record, zap+record (always zap to service before start record)."
+msgstr "Встановіть тип таймера: переключення, простий запис, переключення+запис (завжди зап в службу до початку запису)."
+
 msgid "Setup"
 msgstr "Налаштування"
 
@@ -600,6 +630,9 @@ msgstr "Теги"
 
 msgid "Tags the Timer/Recording will have."
 msgstr "Матимиме теги Таймер/Запис."
+
+msgid "The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "
+msgstr "Файл автотаймера (/etc/enigma2/autotimer.xml) пошкоджений. Створено новий порожній файл. Резервну копію можна знайти тут (/etc/enigma2/autotimer.xml_old) "
 
 msgid "The counter can automatically be reset to the limit at certain intervals."
 msgstr "Лічильник можна автоматично скидаюти через певні інтервали часу."
@@ -711,6 +744,9 @@ msgstr "З цією опцією канал для запису буде обр�
 
 msgid "With this option you can restrict the AutoTimer to a certain amount of scheduled recordings. Set this to 0 to disable this functionality."
 msgstr "За допомогою цієї опції Ви можете обмежити АвтоТаймер на певну кількість запланованих записів. Встановіть значення 0, щоб відключити цю функцію."
+
+msgid "'Wizard"
+msgstr "Помічник"
 
 msgid "Yes, and delete all timers generated by this autotimer"
 msgstr "Так, і видалити всі таймери, згенеровані даним автотаймером"
