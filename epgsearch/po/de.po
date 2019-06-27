@@ -35,14 +35,17 @@ msgstr "Wähle die Text-Kodierung. Das ist hilfreich für fremde Sprachen."
 msgid "Could not read AutoTimer timer list: %s"
 msgstr "Liste der AutoTimer konnte nicht abgerufen werden: %s"
 
+msgid "EPGSearch Setup"
+msgstr "EPG-Suche-Einstellungen"
+
 msgid "EPG Search"
-msgstr "EPG Suche"
+msgstr "EPG-Suche"
 
 msgid "EPGSearch"
-msgstr "EPG Suche"
+msgstr "EPG-Suche"
 
 msgid "EPG Search setup"
-msgstr "EPG Such Einrichtung"
+msgstr "EPG-Suche einrichten"
 
 msgid "Enable this to allow access to EPG Search from within the plugin browser."
 msgstr "EPG Suche in Erweiterungen aufführen"
@@ -99,10 +102,10 @@ msgid "Select text to search for"
 msgstr "Zu suchenden Text auswählen"
 
 msgid "Setup"
-msgstr "Suche einrichten"
+msgstr "Einstellungen"
 
 msgid "Show in plugin browser"
-msgstr "Zeige EPG Suche unter Erweiterungen"
+msgstr "Zeige EPG-Suche unter Erweiterungen"
 
 msgid "Show search history"
 msgstr "Zeige Suchverlauf"
