@@ -1,0 +1,255 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-24 04:13+0200\n"
+"PO-Revision-Date: 2019-06-03 10:31+0300\n"
+"Last-Translator: kvinto <badsystem@ukr.net>\n"
+"Language-Team: <sat-ukraine.info>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.2.3\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+msgid "%ssearch EPG"
+msgstr "%sпошук ЕПГ"
+
+msgid "%ssearch EPG from history..."
+msgstr "%sпошук ЕПГ в історії..."
+
+msgid "Add/remove/edit timer for highlighted event"
+msgstr "Додати/видалити/редагувати таймер для виділеної події"
+
+msgid "Add AutoTimer"
+msgstr "Додати АвтоТаймер"
+
+msgid "Add Timer"
+msgstr "Додати Таймер"
+
+msgid "Add a record timer for highlighted event"
+msgstr "Додати запис таймера для виділеної події"
+
+msgid "Add a zap timer for highlighted event"
+msgstr "Додати переключення таймера для виділеної події"
+
+msgid "Add an AutoTimer for highlighted event"
+msgstr "Додати АвтоТаймер для виділеної події"
+
+msgid "All bouquets"
+msgstr "Всі фаворити"
+
+msgid "All services"
+msgstr "Всі канали"
+
+msgid "Cancel"
+msgstr "Відміна"
+
+msgid "Channel Selection"
+msgstr "Вибір каналу"
+
+msgid "Close dialog"
+msgstr "Закрити діалогове вікно"
+
+msgid "Choose the encoding type for searches, helpful for foreign languages."
+msgstr "Виберіть тип кодування для пошуку, корисно для іноземних мов."
+
+msgid "Control where to search in the EPG. When 'all bouquets' is set, all bouquets are searched, even if 'Enable multiple bouquets' is disabled."
+msgstr "Вказати де шукати в ЕПГ. Коли встановлено «всі фаворити», буде проведено пошук, навіть коли відключена функція «Дозволити декілька фаворитів»."
+
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "Could not read AutoTimer timer list: %s"
+
+msgid "Current bouquet"
+msgstr "Поточний фаворит"
+
+msgid "Current service"
+msgstr "Поточний канал"
+
+msgid "Default scope when asked"
+msgstr "Запит меж за замовчуванням"
+
+msgid "EPG Search"
+msgstr "ЕПГ Пошук"
+
+msgid "EPG Search setup"
+msgstr "Налаштування ЕПГ-Пошук"
+
+msgid "EPGSearch"
+msgstr "ЕПГ-Пошук"
+
+msgid "EPGSearch Setup"
+msgstr "Налаштування ЕПГ-Пошук"
+
+msgid "Enable this to allow access to EPG Search from within the plugin browser."
+msgstr "Увімкніть цю опцію, щоб дозволити доступ до ЕПГ-Пошуку всередині браузера додатків."
+
+msgid "Enter new search"
+msgstr "Введіть новий пошук"
+
+msgid "Enter text to search for"
+msgstr "Введіть текст для пошуку"
+
+msgid "Exclude results from"
+msgstr "Виключити результати з"
+
+msgid "Exit EPG Search"
+msgstr "Вихід з ЕПГ-Пошуку"
+
+msgid "Filter results by source"
+msgstr "Фільтр результатів"
+
+msgid "IMDb Search"
+msgstr "IMDb пошук"
+
+msgid "IMDB search for highlighted event"
+msgstr "Пошук IMDB для виділеної події"
+
+msgid "Import from AutoTimer"
+msgstr "Імпортувати з АвтоТаймера"
+
+msgid "Import from EPG"
+msgstr "Імпортувати з ЕПГ"
+
+msgid "Import from Timer"
+msgstr "Імпортувати з таймерів"
+
+msgid "Include/exclude search results from this type of source"
+msgstr "Включити/виключити результати пошуку даного типу джерела"
+
+msgid "Include/exclude sources"
+msgstr "Включити/виключити джерела"
+
+msgid "Include or exclude results depending on their source (e.g. by satellite)"
+msgstr "Включити або виключити результати в залежності від їх джерела (наприклад, супутники)"
+
+msgid "Include results from"
+msgstr "Ввімкнути результати з"
+
+msgid "Is the search case-sensitive or case-insensitive"
+msgstr "Вказати чи пошук має бути чутливим до регістру"
+
+msgid "Length of history"
+msgstr "Кількість записів в історії"
+
+msgid "Maximum number of entries in the search history. Set this to 0 to disable search history."
+msgstr "Максимальна кількість записів в історії пошуку. Встановіть значення 0, щоб відключити історію пошуку."
+
+msgid "Move down"
+msgstr "Переміститися вниз"
+
+msgid "Move down a page"
+msgstr "Переміститися на сторінку вниз"
+
+msgid "Move up"
+msgstr "Переміститися вверх"
+
+msgid "Move up a page"
+msgstr "Переміститися на сторінку вверх"
+
+msgid "New Search"
+msgstr "Новий пошук"
+
+msgid "No history"
+msgstr "Немає історії"
+
+msgid "Number of filters for inclusion/exclusion of results"
+msgstr "Кількість фільтрів для включення/виключення результатів"
+
+msgid "Number of inclusions/exclusions"
+msgstr "Кількість включень/виключень"
+
+msgid "Open selected in IMDb"
+msgstr "Відкрити вибране в IMDb"
+
+msgid "Save search as AutoTimer"
+msgstr "Зберегти пошук як АвтоТаймер"
+
+msgid "Search"
+msgstr "Пошук"
+
+msgid "Search EPG"
+msgstr "Пошук ЕПГ"
+
+msgid "Search encoding"
+msgstr "Пошук кодування"
+
+msgid "Search in..."
+msgstr "Пошук в..."
+
+msgid "Search scope"
+msgstr "Межі пошуку"
+
+msgid "Search strictness"
+msgstr "Відповідність пошуку"
+
+msgid "Search type"
+msgstr "Тип пошуку"
+
+msgid "Searching..."
+msgstr "Пошук..."
+
+msgid "Select a timer to search"
+msgstr "Виберіть таймер для пошуку"
+
+msgid "Select text to search for"
+msgstr "Виберіть текст для пошуку"
+
+msgid "Set type of match used to compare program titles with the search string"
+msgstr "Встановити тип використання відповідності для порівняння назв програм з пошуковим рядком"
+
+msgid "Sets the default search scope when the user is asked."
+msgstr "Встановлює масштаб пошуку за замовчуванням, коли буде запропоновано користувачем."
+
+msgid "Setup"
+msgstr "Налаштування"
+
+msgid "Setup menu"
+msgstr "Меню налаштування"
+
+msgid "Show AutoTimer list"
+msgstr "Показати список АвтоТаймерів"
+
+msgid "Show detailed event information"
+msgstr "Показати детальну інформацію про подію"
+
+msgid "Show in plugin browser"
+msgstr "Показати в переглядачі додатків"
+
+msgid "Show orbital position"
+msgstr "Показати орбітальну позицію"
+
+msgid "Show satellite orbital positions in the search results."
+msgstr "Показати супутникову орбітальну позицію в результатах пошуку."
+
+msgid "Show search history"
+msgstr "Показати історію пошуків"
+
+msgid "Stream"
+msgstr "Потік"
+
+msgid "Use source restrictions below to only include results from the sources, or exclude them."
+msgstr "Використовуйте обмеження джерела, щоб включати або виключати результати з джерел."
+
+msgid "Zap to channel"
+msgstr "Переключити на канал"
+
+msgid "all bouquets"
+msgstr "всі фаворити"
+
+msgid "all services"
+msgstr "всі канали"
+
+msgid "current bouquet"
+msgstr "вибраний фаворит"
+
+msgid "include"
+msgstr "включати"
+
+msgid "search EPG"
+msgstr "пошук ЕПГ"
+
+msgid "search EPG from history..."
+msgstr "пошук ЕПГ в історії..."
