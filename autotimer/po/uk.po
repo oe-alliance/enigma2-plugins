@@ -484,8 +484,6 @@ msgstr "Інші фільтри (редагування в меню фільтр
 msgid "Please provide a Text to match"
 msgstr "Будь ласка, введіть текст для пошуку"
 
-msgid "Poll automatically"
-msgstr "Автоматичний пошук"
 
 msgid "Poll Interval (in %s)"
 msgstr "Інтервал між пошуками (в %s)"
