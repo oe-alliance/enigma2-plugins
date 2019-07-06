@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2009-09-22 13:17+0200\n"
-"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Last-Translator: esmos <kucukogul@gmail.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -22,10 +22,10 @@ msgid " as "
 msgstr " : "
 
 msgid "Ambiguous results"
-msgstr "Muhtemel eşleşen başlıklar"
+msgstr "Belirsiz sonuçlar"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Çıkış"
 
 msgid "Cast: "
 msgstr "Oyuncular: "
@@ -34,42 +34,42 @@ msgid "Channel Selection"
 msgstr "Kanal Seçimi"
 
 msgid "Could't get event name"
-msgstr "Program adı alınamıyor"
+msgstr "Etkinlik adı alınamadı"
 
 msgid "Details"
 msgstr "Detaylar"
 
 #, python-format
 msgid "Downloading Movie Poster: %s..."
-msgstr "%s posteri indiriliyor."
+msgstr "Film Afişi indiriliyor: %s...."
 
 msgid ""
 "Enable this to be able to access the IMDb from within the plugin browser."
-msgstr ""
+msgstr "IMDb'ye eklenti tarayıcısının içinden erişebilmek için bunu etkinleştirin."
 
 msgid "Enter search"
-msgstr ""
+msgstr "Aramayı gir"
 
 msgid "Enter text to search for"
-msgstr ""
+msgstr "Aranacak metni girin"
 
 msgid "Exit"
 msgstr "Çıkış"
 
 msgid "Extra Info"
-msgstr "Detay bilgi"
+msgstr "Fazladan Bilgi"
 
 msgid "IMDb Details"
-msgstr "IMDb Ayrıntıları"
+msgstr "IMDb Detayları"
 
 msgid "IMDb Details parsed"
 msgstr "IMDb detayları ayrıştırıldı"
 
 msgid "IMDb Download completed"
-msgstr "IMDb indirmesi tamamlandı"
+msgstr "IMDb İndirme tamamlandı"
 
 msgid "IMDb Download failed"
-msgstr "IMDb indirmesi tamamlanamadı!"
+msgstr "IMDb İndirme tamamlanamadı!"
 
 msgid "IMDb Plugin"
 msgstr "IMDb Eklentisi"
@@ -78,63 +78,63 @@ msgid "IMDb Re-Download completed"
 msgstr "IMDb yeniden indirme tamamlandı"
 
 msgid "IMDb Setup"
-msgstr ""
+msgstr "IMDb Kurulumu"
 
 msgid "IMDb query failed!"
-msgstr "IMDb sorgusunda hata oluştu."
+msgstr "IMDb sorgusu başarısız oldu!"
 
 msgid "Lookup"
 msgstr "Sorgula"
 
 msgid "No IMDb match:"
-msgstr "IMDb eşleşmesi bulunamadı."
+msgstr "IMDb eşleşmesi yok:"
 
 msgid "No cast list found in the database."
 msgstr "Oyuncu listesi veritabanında bulunamadı."
 
 msgid "No details found."
-msgstr "Detay bilgisi bulunamadı."
+msgstr "Veritabanında döküm listesi bulunamadı."
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Play Trailer"
-msgstr ""
+msgstr "Fragmanı Oynat"
 
 msgid "Please select the matching entry"
-msgstr "Lütfen aradığınız başlığı seçin"
+msgstr "Lütfen eşleşen girişi seçin"
 
 #, python-format
 msgid "Query IMDb: %s..."
 msgstr "%s IMDb'de sorgulanıyor..."
 
 msgid "Query details from the Internet Movie Database"
-msgstr "Film detaylarını imdb.com'dan sorgulayın"
+msgstr "İnternet Film Veritabanından sorgu detayları"
 
 #, python-format
 msgid "Re-Query IMDb: %s..."
 msgstr "%s IMDb'de yeniden sorgulanıyor..."
 
 msgid "Search Trailer"
-msgstr ""
+msgstr "Fragmanı Ara"
 
 msgid "Select from EPG"
-msgstr ""
+msgstr "EPG'den seç"
 
 msgid "Setup"
-msgstr ""
+msgstr "Kurulum"
 
 msgid "Show in plugin browser"
-msgstr ""
+msgstr "Eklenti tarayıcısında göster"
 
 msgid "The Internet Movie Database"
 msgstr "Internet Film Veritabanı (imdb.com)"
 
 msgid "Title Menu"
-msgstr "Filmler"
+msgstr "Başlık Menüsü"
 
 msgid "User Rating"
-msgstr "Puan"
+msgstr "Kullanıcı oyu (Puan)"
 
 msgid "no user rating yet"
-msgstr "puan verilmemiş"
+msgstr "kullanıcı değerlendirmesi yok"
