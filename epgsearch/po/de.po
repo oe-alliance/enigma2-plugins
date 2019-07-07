@@ -187,7 +187,7 @@ msgstr "In der Suche Groß- und Kleinschreibung beachten ?"
 
 #. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
 msgid "search EPG"
-msgstr "Suche in EPG"
+msgstr "Suche im EPG"
 
 #. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
 msgid "search EPG..."
@@ -248,7 +248,7 @@ msgid "%ssearch EPG from history..."
 msgstr "%sDurchsuche EPG aus Verlauf..."
 
 msgid "%ssearch EPG"
-msgstr "%sSuche in EPG"
+msgstr "%sSuche im EPG"
 
 msgid "Searching..."
 msgstr "Suche..."
