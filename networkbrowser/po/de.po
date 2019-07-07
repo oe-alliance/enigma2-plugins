@@ -292,6 +292,10 @@ msgstr "Ihre Netzwerkfreigabe wurde entfernt."
 msgid "Mount manager"
 msgstr "Mount Manager"
 
+#: NetworkBrowser.py
+msgid "Your network interface %s is not properly configured, so a network scan cannot be done.\nPlease configure the interface and try again."
+msgstr "Ihre Netzwerkschnittstelle %s ist nicht richtig konfiguriert, daher kann kein Netzwerkscan durchgeführt werden.\nKonfigurieren Sie die Schnittstelle und versuchen Sie es erneut."
+
 #: NetworkBrowser.py:118
 msgid "Rescan"
 msgstr "Erneute Suche"
