@@ -1,5 +1,0 @@
-Package: enigma2-plugin-extensions-oscaminfo
-Version: 0.6
-Description: Show Information over Oscam-Servers
-Maintainer: Unicorn0815
-Depends: enigma2 (>= 2.6git20090615)

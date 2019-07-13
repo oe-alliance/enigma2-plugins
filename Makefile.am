@@ -96,7 +96,6 @@ SUBDIRS = \
 	zaphistorybrowser \
 	zapstatistic \
 	zdfmediathek \
-	oscaminfo \
 	esame \
 	schiffe \
 	sudoku \

@@ -557,11 +557,6 @@ orfteletext/Makefile
 orfteletext/meta/Makefile
 orfteletext/src/Makefile
 
-oscaminfo/Makefile
-oscaminfo/meta/Makefile
-oscaminfo/po/Makefile
-oscaminfo/src/Makefile
-
 partnerbox/Makefile
 partnerbox/meta/Makefile
 partnerbox/po/Makefile
