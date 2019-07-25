@@ -57,11 +57,6 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			"green": self.ok,
 		}, -2)
 
-		self["VirtualKB"] = ActionMap(["VirtualKeyboardActions"],
-		{
-			"showVirtualKeyboard": self.KeyText,
-		}, -2)
-
 		self.list = []
 		ConfigListScreen.__init__(self, self.list,session = self.session)
 		self.createSetup()
@@ -72,7 +67,6 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		self["introduction"] = StaticText(_("Press OK to activate the settings."))
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
-		self.selectionChanged()
 
 	# for summary:
 	def changedEntry(self):
@@ -250,7 +244,6 @@ class AutoMountEdit(Screen, ConfigListScreen):
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
-		self["config"].onSelectionChanged.append(self.selectionChanged)
 
 	def newConfig(self):
 		if self["config"].getCurrent() == self.mounttypeEntry:
@@ -305,18 +298,6 @@ class AutoMountEdit(Screen, ConfigListScreen):
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
 		self.newConfig()
-
-	def selectionChanged(self):
-		current = self["config"].getCurrent()
-		if current == self.mountusingEntry or current == self.activeEntry or current == self.ipEntry or current == self.mounttypeEntry or current == self.hdd_replacementEntry:
-			self["VKeyIcon"].boolean = False
-			self["VirtualKB"].setEnabled(False)
-		else:
-			helpwindowpos = self["HelpWindow"].getPosition()
-			if current[1].help_window.instance is not None:
-				current[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
-				self["VKeyIcon"].boolean = True
-				self["VirtualKB"].setEnabled(True)
 
 	def ok(self):
 		current = self["config"].getCurrent()
