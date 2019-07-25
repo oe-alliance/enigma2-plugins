@@ -271,6 +271,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 	def KeyText(self):
 		current = self["config"].getCurrent()
 		if current in self.kbentries:
+			self.HideHelp()
 			self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title=self.kbentries[current], text=current[1].value)
 
 	def VirtualKeyBoardCallback(self, callback=None):
@@ -278,6 +279,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			current = self["config"].getCurrent()[1]
 			current.value = callback
 			self["config"].invalidate(current)
+		self.ShowHelp()
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
