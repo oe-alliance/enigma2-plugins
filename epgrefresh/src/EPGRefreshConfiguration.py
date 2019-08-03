@@ -79,7 +79,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 
 		<widget name="config" position="5,50" size="690,275" scrollbarMode="showOnDemand" />
 		<ePixmap pixmap="skin_default/div-h.png" position="5,335" zPosition="1" size="690,2" />
-		<widget source="help" render="Label" position="5,345" size="690,105" font="Regular;21" />
+		<widget source="description" render="Label" position="5,345" size="690,105" font="Regular;21" />
 	</screen>"""
 	
 	def __init__(self, session):
@@ -109,7 +109,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 		self["key_yellow"] = StaticText(_("Functions"))
 		self["key_blue"] = StaticText(_("Edit Services"))
 
-		self["help"] = StaticText()
+		self["help"] = self["description"] = StaticText()
 
 		# Define Actions
 		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
@@ -244,7 +244,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 	def updateHelp(self):
 		cur = self["config"].getCurrent()
 		if cur:
-			self["help"].text = cur[2]
+			self["description"].text = cur[2]
 
 	def showFunctionMenu(self):
 		self.session.openWithCallback(self._FunctionMenuCB, EPGFunctionMenu)
