@@ -106,7 +106,7 @@ class PornCenterBuffer(Screen):
 	skin = """
 		<screen position="center,center" size="520,80" title="%s" >
 			<widget name="info" position="5,5" size="510,40" font="Regular;18" halign="center" valign="center" />
-			<widget name="progress" position="100,50" size="320,14" pixmap="skin_default/progress_big.png" borderWidth="2" borderColor="#cccccc" />
+			<widget name="progress" position="100,50" size="320,14" pixmap="progress_big.png" borderWidth="2" borderColor="#cccccc" />
 		</screen>""" % _("Porn Center")
 
 	def __init__(self, session, url, file):
@@ -182,10 +182,10 @@ class ChangedMoviePlayer(MoviePlayer):
 class PornCenterLocationSelection(Screen):
 	skin = """
 	<screen position="center,center" size="560,300" title="%s">
-		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" transparent="1" alphatest="on" />
 		<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
 		<widget name="filelist" position="10,45" size="550,255" scrollbarMode="showOnDemand" />
 	</screen>""" % _("Porn Center")

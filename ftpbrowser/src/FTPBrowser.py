@@ -136,11 +136,11 @@ class FTPFileList(FileList):
 class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 	skin = """
 		<screen name="FTPBrowser" position="center,center" size="600,440" title="FTP Browser">
-			<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap position="420,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-			<ePixmap position="565,10" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
+			<ePixmap position="0,0" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="140,0" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap position="280,0" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap position="420,0" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+			<ePixmap position="565,10" size="35,25" pixmap="buttons/key_menu.png" alphatest="on" />
 			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />

@@ -1100,10 +1100,10 @@ class TeleTextTransponderMenu(Screen):
         <widget name="zapped"  position="365,7" size="20,20"  zPosition="5" valign="center" halign="right" font="Regular;21" transparent="1" foregroundColor="#888888"/>
         <widget name="next"    position="385,5" size="35,25"  zPosition="4" pixmap="%s" alphatest="on"/>
 
-        <ePixmap pixmap="skin_default/div-h.png" position="0,32" zPosition="1" size="420,2" />
+        <ePixmap pixmap="div-h.png" position="0,32" zPosition="1" size="420,2" />
 
-        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,35"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <ePixmap pixmap="skin_default/buttons/green.png"  position="280,35" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="buttons/red.png"    position="0,35"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="buttons/green.png"  position="280,35" zPosition="0" size="140,40" transparent="1" alphatest="on" />
         <widget name="key_r" position="0,35"   size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
         <widget name="key_g" position="280,35" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
       </screen>""" % (left, top, width, height, _("Select teletext"), resolveFilename(SCOPE_PLUGINS, "Extensions/TeleText/key_lt.png"), resolveFilename(SCOPE_PLUGINS, "Extensions/TeleText/key_gt.png"))
@@ -1196,12 +1196,12 @@ class TeleTextTransponderSummary(Screen):
 
     TeleTextTransponderSummary.skin = ("""<screen name="TeleTextTransponderSummary" position="0,0" size="132,64" id="1">
       <widget name="c_service" position="0,5"   size="100,20" font="Regular;20" halign="left"/>
-      <ePixmap pixmap="skin_default/div-h.png" position="46,32" size="40,2" zPosition="1"/>
+      <ePixmap pixmap="div-h.png" position="46,32" size="40,2" zPosition="1"/>
       <widget name="n_service" position="32,39" size="100,20" font="Regular;20" halign="right"/>
     </screen>""",
     """<screen name="TeleTextTransponderSummary" position="0,0" size="96,64" id="2">
       <widget name="c_service" position="0,5"   size="90,20" font="Regular;20" halign="left"/>
-      <ePixmap pixmap="skin_default/div-h.png" position="28,32" size="40,2" zPosition="1"/>
+      <ePixmap pixmap="div-h.png" position="28,32" size="40,2" zPosition="1"/>
       <widget name="n_service" position="6,39" size="90,20" font="Regular;20" halign="right"/>
     </screen>""")
 
@@ -1237,12 +1237,12 @@ class TeleTextMenu(ConfigListScreen, Screen):
     log("[menu] screen rect %s %s %s %s" % (left, top, width, height))
     TeleTextMenu.skin = """<screen position="%d,%d" size="%d,%d" title="%s">
         <widget name="config" position="0,0"   size="492,335" scrollbarMode="showOnDemand" zPosition="1"/>
-        <ePixmap pixmap="skin_default/div-h.png" position="0,338" zPosition="1" size="492,2" />
+        <ePixmap pixmap="div-h.png" position="0,338" zPosition="1" size="492,2" />
         <widget name="label"  position="0,340" size="492,70" font="Regular;16" zPosition="1" halign="left" valign="top"/>
-        <ePixmap pixmap="skin_default/div-h.png" position="0,415" zPosition="1" size="492,2" />
-        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,420"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <ePixmap pixmap="skin_default/buttons/green.png"  position="176,420" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <ePixmap pixmap="skin_default/buttons/yellow.png" position="352,420" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="div-h.png" position="0,415" zPosition="1" size="492,2" />
+        <ePixmap pixmap="buttons/red.png"    position="0,420"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="buttons/green.png"  position="176,420" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="buttons/yellow.png" position="352,420" zPosition="0" size="140,40" transparent="1" alphatest="on" />
         <widget name="key_r" position="0,420"   size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
         <widget name="key_g" position="176,420" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
         <widget name="key_y" position="352,420" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -1617,24 +1617,24 @@ class TeleTextFavoritesMenu(Screen):
     top = (dsk_height - height)>>1
     log("[fav-menu] screen rect %s %s %s %s" % (left, top, width, height))
     TeleTextFavoritesMenu.skin = """<screen position="%d,%d" size="%d,%d" title="%s [%s]">
-        <ePixmap pixmap="skin_default/buttons/key_1.png" position="0,0"   zPosition="1" size="35,25" transparent="1" alphatest="on"/>
-        <ePixmap pixmap="skin_default/buttons/key_2.png" position="0,25"  zPosition="1" size="35,25" transparent="1" alphatest="on"/>
-        <ePixmap pixmap="skin_default/buttons/key_3.png" position="0,50"  zPosition="1" size="35,25" transparent="1" alphatest="on"/>
-        <ePixmap pixmap="skin_default/buttons/key_4.png" position="0,75"  zPosition="1" size="35,25" transparent="1" alphatest="on"/>
-        <ePixmap pixmap="skin_default/buttons/key_5.png" position="0,100" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
-        <ePixmap pixmap="skin_default/buttons/key_6.png" position="0,125" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
-        <ePixmap pixmap="skin_default/buttons/key_7.png" position="0,150" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
-        <ePixmap pixmap="skin_default/buttons/key_8.png" position="0,175" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
-        <ePixmap pixmap="skin_default/buttons/key_9.png" position="0,200" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
-        <ePixmap pixmap="skin_default/buttons/key_0.png" position="0,225" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="buttons/key_1.png" position="0,0"   zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="buttons/key_2.png" position="0,25"  zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="buttons/key_3.png" position="0,50"  zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="buttons/key_4.png" position="0,75"  zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="buttons/key_5.png" position="0,100" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="buttons/key_6.png" position="0,125" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="buttons/key_7.png" position="0,150" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="buttons/key_8.png" position="0,175" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="buttons/key_9.png" position="0,200" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="buttons/key_0.png" position="0,225" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
         <widget name="fav_list" position="40,0"   size="550,250" zPosition="1"/>
 
-        <ePixmap pixmap="skin_default/div-h.png" position="0,255" zPosition="1" size="590,2"/>
+        <ePixmap pixmap="div-h.png" position="0,255" zPosition="1" size="590,2"/>
 
-        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,260"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <ePixmap pixmap="skin_default/buttons/green.png"  position="150,260" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <ePixmap pixmap="skin_default/buttons/yellow.png" position="300,260" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <ePixmap pixmap="skin_default/buttons/blue.png"   position="450,260" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="buttons/red.png"    position="0,260"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="buttons/green.png"  position="150,260" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="buttons/yellow.png" position="300,260" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="buttons/blue.png"   position="450,260" zPosition="0" size="140,40" transparent="1" alphatest="on" />
         <widget name="key_r" position="0,260"   size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
         <widget name="key_g" position="150,260" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
         <widget name="key_y" position="300,260" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />

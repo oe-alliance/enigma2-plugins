@@ -422,10 +422,10 @@ class NcidClientPhonebook:
 						fontHeight, # itemHeight
 						self.height - 40 - 5, # eLabel position vertical
 						self.entriesWidth, # eLabel width
-						buttonGap, self.height - 40, "skin_default/buttons/red.png", # ePixmap red
-						2 * buttonGap + 140, self.height - 40, "skin_default/buttons/green.png", # ePixmap green
-						3 * buttonGap + 2 * 140, self.height - 40, "skin_default/buttons/yellow.png", # ePixmap yellow
-						4 * buttonGap + 3 * 140, self.height - 40, "skin_default/buttons/blue.png", # ePixmap blue
+						buttonGap, self.height - 40, "buttons/red.png", # ePixmap red
+						2 * buttonGap + 140, self.height - 40, "buttons/green.png", # ePixmap green
+						3 * buttonGap + 2 * 140, self.height - 40, "buttons/yellow.png", # ePixmap yellow
+						4 * buttonGap + 3 * 140, self.height - 40, "buttons/blue.png", # ePixmap blue
 						buttonGap, self.height - 40, scaleV(22, 21), # widget red
 						2 * buttonGap + 140, self.height - 40, scaleV(22, 21), # widget green
 						3 * buttonGap + 2 * 140, self.height - 40, scaleV(22, 21), # widget yellow
@@ -564,8 +564,8 @@ class NcidClientPhonebook:
 						</screen>""" % (
 										width, height,
 										width - 5 - 5, height - 5 - 40 - 5,
-										buttonsGap, buttonsVPos, "skin_default/buttons/red.png",
-										buttonsGap + 140 + buttonsGap, buttonsVPos, "skin_default/buttons/green.png",
+										buttonsGap, buttonsVPos, "buttons/red.png",
+										buttonsGap + 140 + buttonsGap, buttonsVPos, "buttons/green.png",
 										buttonsGap, buttonsVPos,
 										buttonsGap + 140 + buttonsGap, buttonsVPos,
 										)
@@ -682,8 +682,8 @@ class NcidClientSetup(Screen, ConfigListScreen):
 						scaleH(width - 80, width - 10), scaleV(453, 328), # config size
 						scaleV(518, 390), # eLabel position vertical
 						width, # eLabel width
-						scaleH(20, 0), scaleV(525, 395), "skin_default/buttons/red.png", # pixmap red
-						scaleH(20 + 140 + 90, 140), scaleV(525, 395), "skin_default/buttons/green.png", # pixmap green
+						scaleH(20, 0), scaleV(525, 395), "buttons/red.png", # pixmap red
+						scaleH(20 + 140 + 90, 140), scaleV(525, 395), "buttons/green.png", # pixmap green
 						scaleH(20, 0), scaleV(525, 395), scaleV(21, 21), # widget red
 						scaleH(20 + (140 + 90), 140), scaleV(525, 395), scaleV(21, 21), # widget green
 													)

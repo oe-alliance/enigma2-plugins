@@ -104,10 +104,10 @@ class AutomaticCleanupSetup(Screen, ConfigListScreen): # config
 
 	skin = """
 		<screen name="SystemCleanup" position="center,center" size="630,315" title="Automatic System Cleanup Setup" >
-			<ePixmap pixmap="skin_default/buttons/red.png" position="5,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="165,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="325,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/blue.png" position="485,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="5,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="165,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/yellow.png" position="325,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/blue.png" position="485,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			
 			<widget render="Label" source="key_red" position="5,5" size="140,40" zPosition="2" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_green" position="165,5" size="140,40" zPosition="2" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -115,7 +115,7 @@ class AutomaticCleanupSetup(Screen, ConfigListScreen): # config
 
 			<widget name="config" position="5,60" size="620,155" scrollbarMode="showOnDemand" />
 
-			<ePixmap pixmap="skin_default/div-h.png" position="0,220" zPosition="1" size="630,2" />
+			<ePixmap pixmap="div-h.png" position="0,220" zPosition="1" size="630,2" />
 			<widget source="help" render="Label" position="5,235" size="620,75" font="Regular;21" /> 
 		</screen>"""
 

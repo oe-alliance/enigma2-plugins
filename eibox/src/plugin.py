@@ -324,7 +324,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 				self[EIB_object.object_id] = MultiPixmap()
 
 				if EIB_object.object_type == EIB_DIMMER:
-					skin += '\t\t\t<widget source="%s_progress" render="Progress" pixmap="skin_default/progress_small.png" position="%s" size="32,5" backgroundColor="#4f74BB" zPosition="1" />\n' % (EIB_object.object_id, EIB_object.getPos([offset[0],offset[1]-iconsize[1]]))
+					skin += '\t\t\t<widget source="%s_progress" render="Progress" pixmap="progress_small.png" position="%s" size="32,5" backgroundColor="#4f74BB" zPosition="1" />\n' % (EIB_object.object_id, EIB_object.getPos([offset[0],offset[1]-iconsize[1]]))
 					self[EIB_object.object_id+"_progress"] = Progress()
 					self[EIB_object.object_id+"_progress"].range = 255
 			

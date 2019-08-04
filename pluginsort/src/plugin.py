@@ -43,7 +43,7 @@ config.plugins.pluginsort.show_help = ConfigYesNo(default=True)
 
 def MyPluginEntryComponent(plugin, backcolor_sel=None):
 	if plugin.icon is None:
-		png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/plugin.png"))
+		png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "icons/plugin.png"))
 	else:
 		png = plugin.icon
 

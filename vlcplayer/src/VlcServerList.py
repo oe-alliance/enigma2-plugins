@@ -80,10 +80,10 @@ class VlcServerListScreen(Screen):
 		<screen position="80,100" size="560,400" title="Select VLC-Server Profile" >
 			<widget name="serverlabel" position="10,10" size="550,20" font="Regular;17"/>
 			<widget name="serverlist" position="10,35" size="550,310"  scrollbarMode="showOnDemand"/>
-			<ePixmap name="red"    position="0,355"   zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green"  position="140,355" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="280,355" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue"   position="420,355" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<ePixmap name="red"    position="0,355"   zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green"  position="140,355" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="yellow" position="280,355" zPosition="4" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap name="blue"   position="420,355" zPosition="4" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
 			<widget name="key_red" position="0,355" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_green" position="140,355" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_yellow" position="280,355" zPosition="5" size="140,40" valign="center" halign="center"  font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />

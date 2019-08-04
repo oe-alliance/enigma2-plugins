@@ -27,8 +27,8 @@
 		<!-- HelpableScreen: Add help button -->
 		<widget source="Title" render="Label" position="60,72" size="900,30" zPosition="3" font="Regular;26" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget source="session.VideoPicture" render="Pig" position="65,115" size="256,144" zPosition="3" backgroundColor="#ff000000" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,330" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,380" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,330" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,380" size="21,21" alphatest="blend" />
 		<widget source="key_red" render="Label" position="90,328" size="300,28" font="Regular;24" halign="left" valign="top" transparent="1" />
 		<widget source="key_green" render="Label" position="90,378" size="300,28" font="Regular;24" halign="left" valign="top" transparent="1" />
 		<widget name="list" position="450,110" size="770,540" scrollbarMode="showOnDemand" transparent="1" enableWrapAround="1" />
@@ -37,16 +37,16 @@
 		<!-- HelpableScreen: Add help button -->
 		<widget source="Title" render="Label" position="60,72" size="700,30" zPosition="3" font="Regular;22" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget source="session.VideoPicture" render="Pig" position="65,115" size="256,144" zPosition="3" backgroundColor="#ff000000" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,330" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,380" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,330" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,380" size="21,21" alphatest="blend" />
 		<widget source="key_red" render="Label" position="90,328" size="300,28" font="Regular;22" halign="left" valign="top" transparent="1" />
 		<widget source="key_green" render="Label" position="90,378" size="300,28" font="Regular;22" halign="left" valign="top" transparent="1" />
 		<widget name="list" position="450,110" size="514,500" scrollbarMode="showOnDemand" transparent="1" enableWrapAround="1" />
 	</screen>
 	<screen name="SelectionListScreenSD" position="center,center" size="600,310">
 		<!-- HelpableScreen: Add help button -->
-		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="0,0" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,0" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="#ffffff" shadowColor="#000000" shadowOffset="-1,-1" />
 		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="#ffffff" shadowColor="#000000" shadowOffset="-1,-1" />
 		<widget source="info" render="Label" position="5,40" size="590,28" font="Regular;18" halign="center" valign="top" transparent="1" />
@@ -56,8 +56,8 @@
 		<!-- HelpableScreen: Add help button -->
 		<widget source="Title" render="Label" position="60,60" size="1160,30" font="Regular;26" transparent="1" />
 		<widget source="session.VideoPicture" render="Pig" position="60,100" size="380,215" zPosition="3" backgroundColor="#ff000000" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,330" size="30,30" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,380" size="30,30" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,330" size="30,30" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,380" size="30,30" transparent="1" alphatest="on" />
 		<widget name="key_red" position="80,328" zPosition="1" size="300,28" font="Regular;24" valign="center" halign="left" transparent="1" />
 		<widget name="key_green" position="80,378" zPosition="1" size="300,28" font="Regular;24" valign="center" halign="left" transparent="1" />
 		<widget name="list" position="450,170" size="770,465" zPosition="2" scrollbarMode="showOnDemand" enableWrapAround="1" />
@@ -66,16 +66,16 @@
 		<!-- HelpableScreen: Add help button -->
 		<widget source="Title" render="Label" position="60,60" size="804,30" font="Regular;24" transparent="1" />
 		<widget source="session.VideoPicture" render="Pig" position="60,100" size="254,144" zPosition="3" backgroundColor="#ff000000" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,270" size="15,16" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,300" size="15,16" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,270" size="15,16" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,300" size="15,16" transparent="1" alphatest="on" />
 		<widget name="key_red" position="80,268" zPosition="1" size="230,24" font="Regular;20" valign="top" halign="left" transparent="1" />
 		<widget name="key_green" position="80,298" zPosition="1" size="230,24" font="Regular;20" valign="top" halign="left" transparent="1" />
 		<widget name="list" position="330,100" size="634,310" scrollbarMode="showOnDemand" enableWrapAround="1" />
 	</screen>
 	<screen name="MoveCopyProgressSD" position="center,center" size="660,500" title=" ">
 		<!-- HelpableScreen: Add help button -->
-		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="0,0" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,0" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
 		<widget name="key_red" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;18" transparent="1" foregroundColor="#ffffff" shadowColor="#000000" shadowOffset="-1,-1" />
 		<widget name="key_green" position="140,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;18" transparent="1" foregroundColor="#ffffff" shadowColor="#000000" shadowOffset="-1,-1" />
 		<widget name="list" position="0,50" size="660,465" zPosition="2" scrollbarMode="showOnDemand" />
@@ -84,9 +84,9 @@
 		<widget source="Title" render="Label" position="60,60" size="1160,30" font="Regular;26" transparent="1" />
 		<widget source="session.VideoPicture" render="Pig" position="60,100" size="380,215" zPosition="3" backgroundColor="#ff000000" />
 		<widget name="config" position="470,100" size="750,400" scrollbarMode="showOnDemand" enableWrapAround="1" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,330" size="30,30" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,380" size="30,30" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="60,430" size="30,30" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,330" size="30,30" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,380" size="30,30" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="60,430" size="30,30" transparent="1" alphatest="on" />
 		<widget source="key_red" render="Label" position="80,328" zPosition="1" size="300,28" font="Regular;24" valign="center" halign="left" transparent="1" />
 		<widget source="key_green" render="Label" position="80,378" zPosition="1" size="300,28" font="Regular;24" valign="center" halign="left" transparent="1" />
 		<widget source="key_yellow" render="Label" position="80,428" zPosition="1" size="300,28" font="Regular;24" valign="center" halign="left" transparent="1" />
@@ -95,25 +95,25 @@
 		<widget source="Title" render="Label" position="60,60" size="804,30" font="Regular;24" transparent="1" />
 		<widget source="session.VideoPicture" render="Pig" position="60,100" size="254,144" zPosition="3" backgroundColor="#ff000000" />
 		<widget name="config" position="330,100" size="634,250" scrollbarMode="showOnDemand" enableWrapAround="1" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,270" size="15,16" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,300" size="15,16" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="60,330" size="15,16" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,270" size="15,16" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,300" size="15,16" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="60,330" size="15,16" transparent="1" alphatest="on" />
 		<widget source="key_red" render="Label" position="80,268" zPosition="1" size="230,24" font="Regular;20" valign="top" halign="left" transparent="1" />
 		<widget source="key_green" render="Label" position="80,298" zPosition="1" size="230,24" font="Regular;20" valign="top" halign="left" transparent="1" />
 		<widget source="key_yellow" render="Label" position="80,328" zPosition="1" size="230,24" font="Regular;20" valign="top" halign="left" transparent="1" />
 	</screen>
 	<screen name="BackupRestoreSD" position="center,center" size="620,470" title=" ">
 		<widget name="config" position="0,40" size="620,300" enableWrapAround="1" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="skin_default/buttons/red.png" zPosition="1" position="0,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" zPosition="1" position="140,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/yellow.png" zPosition="1" position="280,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/red.png" zPosition="1" position="0,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/green.png" zPosition="1" position="140,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/yellow.png" zPosition="1" position="280,0" size="140,40" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,0" zPosition="2" size="135,40" halign="center" valign="center" font="Regular;16" transparent="1" shadowColor="#000000" shadowOffset="-1,-1" />
 		<widget source="key_green" render="Label" position="140,0" zPosition="2" size="135,40" halign="center" valign="center" font="Regular;16" transparent="1" shadowColor="#000000" shadowOffset="-1,-1" />
 		<widget source="key_yellow" render="Label" position="280,0" zPosition="2" size="135,40" halign="center" valign="center" font="Regular;16" transparent="1" shadowColor="#000000" shadowOffset="-1,-1" />
 	</screen>
 	<!-- AdvancedKeyBoardHD and AdvancedTextInputHelpDialogHD will be shown together -->
 	<screen name="AdvancedKeyBoardHD" position="center,center" size="560,550" zPosition="99" title="Virtual KeyBoard">
-		<ePixmap pixmap="skin_default/vkey_text.png" position="9,50" zPosition="-4" size="542,52" alphatest="on" />
+		<ePixmap pixmap="vkey_text.png" position="9,50" zPosition="-4" size="542,52" alphatest="on" />
 		<widget source="country" render="Pixmap" position="490,0" size="60,40" alphatest="on" borderWidth="2" borderColor="yellow">
 			<convert type="ValueToPixmap">LanguageCode</convert>
 		</widget>
@@ -138,7 +138,7 @@
 	</screen>
 	<!-- AdvancedKeyBoardXD and AdvancedTextInputHelpDialogXD will be shown together -->
 	<screen name="AdvancedKeyBoardXD" position="center,center" size="560,550" zPosition="99" title="Virtual KeyBoard">
-		<ePixmap pixmap="skin_default/vkey_text.png" position="9,45" zPosition="-4" size="542,52" alphatest="on" />
+		<ePixmap pixmap="vkey_text.png" position="9,45" zPosition="-4" size="542,52" alphatest="on" />
 		<widget source="country" render="Pixmap" position="490,0" size="60,40" alphatest="on" borderWidth="2" borderColor="yellow">
 			<convert type="ValueToPixmap">LanguageCode</convert>
 		</widget>
@@ -163,7 +163,7 @@
 	</screen>
 	<!-- AdvancedKeyBoardSD and AdvancedTextInputHelpDialogSD will be shown together -->
 	<screen name="AdvancedKeyBoardSD" position="center,center" size="560,550" zPosition="99" title="Virtual KeyBoard">
-		<ePixmap pixmap="skin_default/vkey_text.png" position="9,45" zPosition="-4" size="542,52" alphatest="on" />
+		<ePixmap pixmap="vkey_text.png" position="9,45" zPosition="-4" size="542,52" alphatest="on" />
 		<widget source="country" render="Pixmap" position="490,0" size="60,40" alphatest="on" borderWidth="2" borderColor="yellow">
 			<convert type="ValueToPixmap">LanguageCode</convert>
 		</widget>
@@ -221,10 +221,10 @@
 		<widget name="warning" position="345,102" size="875,28" zPosition="3" font="Regular;20" halign="center" foregroundColor="#ffcc00" backgroundColor="#605F5E" transparent="1" />
 		<widget name="list" position="345,130" size="875,314" zPosition="3" scrollbarMode="showAlways" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,340" size="30,30" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,370" size="30,30" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="60,400" size="30,30" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="60,430" size="30,30" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,340" size="30,30" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,370" size="30,30" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="60,400" size="30,30" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="60,430" size="30,30" zPosition="3" alphatest="blend" />
 		<widget name="key_red" position="90,338" size="265,28" font="Regular;24" zPosition="3" halign="left" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="key_green" position="90,368" size="265,28" font="Regular;24" zPosition="3" halign="left" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="key_yellow" position="90,398" size="265,28" font="Regular;24" zPosition="3" halign="left" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
@@ -252,10 +252,10 @@
 		<widget name="warning" position="345,102" size="875,28" zPosition="3" font="Regular;20" halign="center" foregroundColor="#ffcc00" backgroundColor="#605F5E" transparent="1" />
 		<widget name="list" position="345,130" size="875,470" zPosition="3" scrollbarMode="showAlways" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,340" size="30,30" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,370" size="30,30" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="60,400" size="30,30" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="60,430" size="30,30" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,340" size="30,30" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,370" size="30,30" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="60,400" size="30,30" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="60,430" size="30,30" zPosition="3" alphatest="blend" />
 		<widget name="key_red" position="90,338" size="265,28" font="Regular;24" zPosition="3" halign="left" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="key_green" position="90,368" size="265,28" font="Regular;24" zPosition="3" halign="left" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="key_yellow" position="90,398" size="265,28" font="Regular;24" zPosition="3" halign="left" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
@@ -303,10 +303,10 @@
 		<widget name="warning" position="345,102" size="875,28" zPosition="3" font="Regular;20" halign="center" foregroundColor="#ffcc00" backgroundColor="#605F5E" transparent="1" />
 		<widget name="list" position="60,130" size="1160,314" zPosition="3" scrollbarMode="showAlways" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,640" size="30,30" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="220,640" size="30,30" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="500,640" size="30,30" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="740,640" size="30,30" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,640" size="30,30" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="220,640" size="30,30" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="500,640" size="30,30" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="740,640" size="30,30" zPosition="3" alphatest="blend" />
 		<widget name="key_red" position="80,635" size="265,28" font="Regular;24" zPosition="3" halign="left" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="key_green" position="240,635" size="265,28" font="Regular;24" zPosition="3" halign="left" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="key_yellow" position="520,635" size="265,28" font="Regular;24" zPosition="3" halign="left" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
@@ -333,10 +333,10 @@
 		<widget name="warning" position="345,102" size="875,28" zPosition="3" font="Regular;20" halign="center" foregroundColor="#ffcc00" backgroundColor="#605F5E" transparent="1" />
 		<widget name="list" position="60,130" size="1160,470" zPosition="3" scrollbarMode="showAlways" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,640" size="30,30" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="220,640" size="30,30" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="500,640" size="30,30" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="740,640" size="30,30" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,640" size="30,30" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="220,640" size="30,30" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="500,640" size="30,30" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="740,640" size="30,30" zPosition="3" alphatest="blend" />
 		<widget name="key_red" position="80,635" size="265,28" font="Regular;24" zPosition="3" halign="left" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="key_green" position="240,635" size="265,28" font="Regular;24" zPosition="3" halign="left" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="key_yellow" position="520,635" size="265,28" font="Regular;24" zPosition="3" halign="left" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
@@ -383,10 +383,10 @@
 		<widget name="waitingtext" position="250,110" size="714,300" zPosition="3" font="Regular;26" halign="center" valign="center" backgroundColor="#605F5E" foregroundColor="#ffffff" transparent="1" />
 		<widget name="list" position="250,98" size="714,312" zPosition="3" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,315" size="21,21" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,340" size="21,21" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="60,365" size="21,21" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="60,390" size="21,21" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,315" size="21,21" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,340" size="21,21" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="60,365" size="21,21" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="60,390" size="21,21" zPosition="3" alphatest="blend" />
 		<widget name="key_red" position="80,313" size="300,26" zPosition="3" font="Regular;18" halign="left" valign="top" backgroundColor="#605F5E" foregroundColor="#ffffff" transparent="1" />
 		<widget name="key_green" position="80,338" size="300,26" zPosition="3" font="Regular;18" halign="left" valign="top" backgroundColor="#605F5E" foregroundColor="#ffffff" transparent="1" />
 		<widget name="key_yellow" position="80,362" size="300,26" zPosition="3" font="Regular;18" halign="left" valign="top" backgroundColor="#605F5E" foregroundColor="#ffffff" transparent="1" />
@@ -414,10 +414,10 @@
 		<widget name="waitingtext" position="300,110" size="664,300" zPosition="3" font="Regular;26" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="list" position="300,115" size="664,390" zPosition="3" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,315" size="21,21" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,340" size="21,21" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="60,365" size="21,21" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="60,390" size="21,21" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,315" size="21,21" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,340" size="21,21" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="60,365" size="21,21" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="60,390" size="21,21" zPosition="3" alphatest="blend" />
 		<widget name="key_red" position="80,313" size="300,26" zPosition="3" font="Regular;18" halign="left" valign="top" backgroundColor="#605F5E" foregroundColor="#ffffff" transparent="1" />
 		<widget name="key_green" position="80,338" size="300,26" zPosition="3" font="Regular;18" halign="left" valign="top" backgroundColor="#605F5E" foregroundColor="#ffffff" transparent="1" />
 		<widget name="key_yellow" position="80,362" size="300,26" zPosition="3" font="Regular;18" halign="left" valign="top" backgroundColor="#605F5E" foregroundColor="#ffffff" transparent="1" />
@@ -461,10 +461,10 @@
 		<widget name="waitingtext" position="300,110" size="664,300" zPosition="3" font="Regular;26" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="list" position="300,115" size="664,390" zPosition="3" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,518" size="21,21" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="190,518" size="21,21" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="450,518" size="21,21" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="700,518" size="21,21" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,518" size="21,21" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="190,518" size="21,21" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="450,518" size="21,21" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="700,518" size="21,21" zPosition="3" alphatest="blend" />
 		<widget name="key_red" position="85,516" size="300,26" zPosition="3" font="Regular;20" halign="left" valign="top" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="key_green" position="215,516" size="300,26" zPosition="3" font="Regular;20" halign="left" valign="top" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="key_yellow" position="475,516" size="300,26" zPosition="3" font="Regular;20" halign="left" valign="top" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
@@ -491,10 +491,10 @@
 		<widget name="waitingtext" position="300,110" size="664,300" zPosition="3" font="Regular;26" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="list" position="60,115" size="904,390" zPosition="3" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,518" size="21,21" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="190,518" size="21,21" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="400,518" size="21,21" zPosition="3" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="590,518" size="21,21" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,518" size="21,21" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="190,518" size="21,21" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="400,518" size="21,21" zPosition="3" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="590,518" size="21,21" zPosition="3" alphatest="blend" />
 		<widget name="key_red" position="85,516" size="300,26" zPosition="3" font="Regular;18" halign="left" valign="top" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="key_green" position="215,516" size="300,26" zPosition="3" font="Regular;18" halign="left" valign="top" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="key_yellow" position="425,516" size="300,26" zPosition="3" font="Regular;18" halign="left" valign="top" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
@@ -511,7 +511,7 @@
 		<widget source="session.VideoPicture" render="Pig" position="60,100" size="380,215" zPosition="3" backgroundColor="#ff000000" />
 		<widget name="version_list" position="470,100" zPosition="2" size="750,330" scrollbarMode="showOnDemand" transparent="1" enableWrapAround="1" />
 		<widget name="details" position="60,450" zPosition="3" size="1160,210" font="Regular;22" transparent="1" />
-		<widget name="red" pixmap="skin_default/buttons/button_red.png" position="60,330" size="15,16" transparent="1" alphatest="on" />
+		<widget name="red" pixmap="buttons/button_red.png" position="60,330" size="15,16" transparent="1" alphatest="on" />
 		<widget source="key_red" render="Label" position="90,326" zPosition="2" size="300,28" font="Regular;24" valign="top" halign="left" />
 		<widget name="bouquet+" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/buttons/key_bouquet+.png" position="60,400" size="35,25" transparent="1" alphatest="blend" />
 		<widget name="bouquet-" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/buttons/key_bouquet-.png" position="100,400" size="35,25" transparent="1" alphatest="blend" />
@@ -521,13 +521,13 @@
 		<widget source="session.VideoPicture" render="Pig" position="60,100" size="304,175" zPosition="3" backgroundColor="#ff000000" />
 		<widget name="version_list" position="380,100" zPosition="2" size="584,180" scrollbarMode="showOnDemand" transparent="1" enableWrapAround="1" />
 		<widget name="details" position="60,290" zPosition="3" size="904,205" font="Regular;20" transparent="1" />
-		<widget name="red" pixmap="skin_default/buttons/button_red.png" position="60,500" size="15,16" transparent="1" alphatest="on" />
+		<widget name="red" pixmap="buttons/button_red.png" position="60,500" size="15,16" transparent="1" alphatest="on" />
 		<widget source="key_red" render="Label" position="90,496" zPosition="2" size="200,28" font="Regular;24" valign="top" halign="left" />
 		<widget name="bouquet+" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/buttons/key_bouquet+.png" position="889,498" size="35,25" transparent="1" alphatest="on" />
 		<widget name="bouquet-" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/buttons/key_bouquet-.png" position="929,498" size="35,25" transparent="1" alphatest="on" />
 	</screen>
 	<screen name="AdvancedMovieSelectionAboutDetails_SD" position="center,center" title=" " size="560,400">
-		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" halign="center" valign="center" font="Regular;17" transparent="1" shadowColor="#000000" shadowOffset="-1,-1" />
 		<widget name="bouquet+" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/buttons/key_bouquet+.png" position="485,7" size="35,25" transparent="1" alphatest="on" />
 		<widget name="bouquet-" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/buttons/key_bouquet-.png" position="525,7" size="35,25" transparent="1" alphatest="on" />
@@ -551,10 +551,10 @@
 		<widget name="description_episode" position="60,355" zPosition="2" size="1160,300" font="Regular;24" transparent="1" />
 		<widget name="status" position="0,0" size="1280,720" zPosition="2" font="Regular;24" transparent="1" valign="center" halign="center" />
 		<widget name="seperator" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/seperator.png" position="60,650" size="1160,2" alphatest="on" />
-		<widget name="button_red" pixmap="skin_default/buttons/button_red.png" position="60,657" size="15,16" alphatest="on" />
-		<widget name="button_green" pixmap="skin_default/buttons/button_green.png" position="360,657" size="15,16" alphatest="on" />
-		<widget name="button_yellow" pixmap="skin_default/buttons/button_yellow.png" position="650,657" size="15,16" alphatest="on" />
-		<widget name="button_blue" pixmap="skin_default/buttons/button_blue.png" position="900,657" size="15,16" alphatest="on" />
+		<widget name="button_red" pixmap="buttons/button_red.png" position="60,657" size="15,16" alphatest="on" />
+		<widget name="button_green" pixmap="buttons/button_green.png" position="360,657" size="15,16" alphatest="on" />
+		<widget name="button_yellow" pixmap="buttons/button_yellow.png" position="650,657" size="15,16" alphatest="on" />
+		<widget name="button_blue" pixmap="buttons/button_blue.png" position="900,657" size="15,16" alphatest="on" />
 		<widget source="key_red" render="Label" position="80,652" zPosition="1" size="300,28" font="Regular;24" halign="left" transparent="1" />
 		<widget source="key_green" render="Label" position="380,652" zPosition="1" size="300,28" font="Regular;24" halign="left" transparent="1" />
 		<widget source="key_yellow" render="Label" position="670,652" zPosition="1" size="300,28" font="Regular;24" halign="left" transparent="1" />
@@ -577,10 +577,10 @@
 		<widget name="description_episode" position="60,310" zPosition="2" size="904,210" font="Regular;20" transparent="1" />
 		<widget name="status" position="0,0" size="1024,576" zPosition="2" font="Regular;22" transparent="1" valign="center" halign="center" />
 		<widget name="seperator" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/seperator.png" position="60,518" size="904,2" alphatest="on" />
-		<widget name="button_red" pixmap="skin_default/buttons/button_red.png" position="60,525" size="15,16" alphatest="on" />
-		<widget name="button_green" pixmap="skin_default/buttons/button_green.png" position="320,525" size="15,16" alphatest="on" />
-		<widget name="button_yellow" pixmap="skin_default/buttons/button_yellow.png" position="550,525" size="15,16" alphatest="on" />
-		<widget name="button_blue" pixmap="skin_default/buttons/button_blue.png" position="730,525" size="15,16" alphatest="on" />
+		<widget name="button_red" pixmap="buttons/button_red.png" position="60,525" size="15,16" alphatest="on" />
+		<widget name="button_green" pixmap="buttons/button_green.png" position="320,525" size="15,16" alphatest="on" />
+		<widget name="button_yellow" pixmap="buttons/button_yellow.png" position="550,525" size="15,16" alphatest="on" />
+		<widget name="button_blue" pixmap="buttons/button_blue.png" position="730,525" size="15,16" alphatest="on" />
 		<widget source="key_red" render="Label" position="80,520" zPosition="1" size="300,28" font="Regular;20" halign="left" transparent="1" />
 		<widget source="key_green" render="Label" position="340,520" zPosition="1" size="300,28" font="Regular;20" halign="left" transparent="1" />
 		<widget source="key_yellow" render="Label" position="570,520" zPosition="1" size="300,28" font="Regular;20" halign="left" transparent="1" />
@@ -588,10 +588,10 @@
 	</screen>
 	<screen name="TheTVDBMainSD" position="center,center" title=" " size="560,445">
 		<widget name="seperator" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/seperator.png" position="0,0" size="0,0" alphatest="on" />
-		<widget name="button_red" pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-		<widget name="button_green" pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-		<widget name="button_yellow" pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-		<widget name="button_blue" pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+		<widget name="button_red" pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		<widget name="button_green" pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+		<widget name="button_yellow" pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+		<widget name="button_blue" pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 		<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
@@ -624,9 +624,9 @@
 		<widget name="config" position="470,170" size="750,75" scrollbarMode="showOnDemand" enableWrapAround="1" />
 		<widget source="clienttxt" render="Label" position="470,255" size="750,28" font="Regular;24" valign="top" halign="center" transparent="1" />
 		<widget name="list" position="470,290" size="750,300" scrollbarMode="showOnDemand" zPosition="2" enableWrapAround="1" transparent="1" selectionDisabled="1" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,330" size="21,21" alphatest="on" />
-		<widget name="green_button" pixmap="skin_default/buttons/button_green.png" position="60,380" size="21,21" alphatest="on" />
-		<widget name="yellow_button" pixmap="skin_default/buttons/button_yellow.png" position="60,430" size="21,21" alphatest="on" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,330" size="21,21" alphatest="on" />
+		<widget name="green_button" pixmap="buttons/button_green.png" position="60,380" size="21,21" alphatest="on" />
+		<widget name="yellow_button" pixmap="buttons/button_yellow.png" position="60,430" size="21,21" alphatest="on" />
 		<widget name="key_red" position="90,328" size="300,28" font="Regular;24" halign="left" valign="top" transparent="1" />
 		<widget source="key_green" render="Label" position="90,378" size="300,28" font="Regular;24" halign="left" valign="top" transparent="1" />
 		<widget source="key_yellow" render="Label" position="90,428" size="300,28" font="Regular;24" halign="left" valign="top" transparent="1" />
@@ -645,18 +645,18 @@
 		<widget name="config" position="330,140" size="634,75" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
 		<widget source="clienttxt" render="Label" position="330,220" size="750,24" font="Regular;20" valign="top" halign="center" transparent="1" />
 		<widget name="list" position="330,250" size="634,200" scrollbarMode="showOnDemand" zPosition="2" enableWrapAround="1" transparent="1" selectionDisabled="1" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,270" size="15,16" transparent="1" alphatest="on" />
-		<widget name="green_button" pixmap="skin_default/buttons/button_green.png" position="60,300" size="15,16" transparent="1" alphatest="on" />
-		<widget name="yellow_button" pixmap="skin_default/buttons/button_yellow.png" position="60,330" size="15,16" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,270" size="15,16" transparent="1" alphatest="on" />
+		<widget name="green_button" pixmap="buttons/button_green.png" position="60,300" size="15,16" transparent="1" alphatest="on" />
+		<widget name="yellow_button" pixmap="buttons/button_yellow.png" position="60,330" size="15,16" transparent="1" alphatest="on" />
 		<widget name="key_red" position="80,268" size="300,28" font="Regular;20" halign="left" valign="top" transparent="1" />
 		<widget source="key_green" render="Label" position="80,298" size="300,28" font="Regular;20" halign="left" valign="top" transparent="1" />
 		<widget source="key_yellow" render="Label" position="80,328" size="300,28" font="Regular;20" halign="left" valign="top" transparent="1" />
 		<widget source="help" render="Label" position="330,470" size="634,46" font="Regular;20" valign="top" halign="center" transparent="1" />
 	</screen>
 	<screen name="AdvancedMovieSelection_ClientSetup_SD" position="center,center" size="550,400" title=" ">
-		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-		<widget name="green_button" pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-		<widget name="yellow_button" pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		<widget name="green_button" pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+		<widget name="yellow_button" pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
 		<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;18" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 		<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
@@ -677,11 +677,11 @@
 		<widget source="session.VideoPicture" render="Pig" position="65,115" size="256,144" zPosition="3" backgroundColor="#ff000000" />
 		<widget name="Path" position="450,110" size="770,28" font="Regular;24" halign="center" transparent="1" />
 		<widget name="config" position="450,170" size="770,450" zPosition="3" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,330" size="30,30" alphatest="on" zPosition="2" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,380" size="30,30" alphatest="on" zPosition="2" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,330" size="30,30" alphatest="on" zPosition="2" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,380" size="30,30" alphatest="on" zPosition="2" />
 		<widget source="key_red" render="Label" position="90,328" size="265,26" zPosition="2" font="Regular;24" halign="left" transparent="1" />
 		<widget source="key_green" render="Label" position="90,378" size="265,26" zPosition="2" font="Regular;24" halign="left" transparent="1" />
-		<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="550,350" zPosition="1" size="1,1" transparent="1" alphatest="on" />
+		<widget name="HelpWindow" pixmap="vkey_icon.png" position="550,350" zPosition="1" size="1,1" transparent="1" alphatest="on" />
 	</screen>
 	<screen name="AdvancedMovieSelection_Rename_XD" position="center,center" size="1040,576" title=" " flags="wfNoBorder">
 		<widget source="Title" render="Label" position="60,40" size="840,26" zPosition="3" font="Regular;26" transparent="1" />
@@ -692,22 +692,22 @@
 			<convert type="ClockToText">Date</convert>
 		</widget>
 		<widget source="session.VideoPicture" render="Pig" position="65,115" size="171,96" zPosition="3" backgroundColor="#ff000000" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,270" size="30,30" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,300" size="30,30" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,270" size="30,30" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,300" size="30,30" transparent="1" alphatest="on" />
 		<widget source="key_red" render="Label" position="90,268" zPosition="1" size="230,24" font="Regular;20" valign="top" halign="left" transparent="1" />
 		<widget source="key_green" render="Label" position="90,298" zPosition="1" size="230,24" font="Regular;20" valign="top" halign="left" transparent="1" />
 		<widget name="Path" position="330,100" size="634,25" font="Regular;22" halign="center" transparent="1" />
 		<widget name="config" position="330,130" size="634,250" scrollbarMode="showOnDemand" enableWrapAround="1" />
-		<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="480,380" zPosition="1" size="1,1" transparent="1" alphatest="on" />
+		<widget name="HelpWindow" pixmap="vkey_icon.png" position="480,380" zPosition="1" size="1,1" transparent="1" alphatest="on" />
 	</screen>
 	<screen name="AdvancedMovieSelection_Rename_SD" position="center,center" size="560,400" title=" ">
-		<ePixmap pixmap="skin_default/buttons/red.png" zPosition="1" position="0,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" zPosition="1" position="150,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/red.png" zPosition="1" position="0,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/green.png" zPosition="1" position="150,0" size="140,40" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,0" zPosition="2" size="140,40" halign="center" valign="center" font="Regular;20" transparent="1" shadowColor="#000000" shadowOffset="-1,-1" />
 		<widget source="key_green" render="Label" position="150,0" zPosition="2" size="140,40" halign="center" valign="center" font="Regular;16" transparent="1" shadowColor="#000000" shadowOffset="-1,-1" />
 		<widget name="Path" position="0,50" size="560,22" font="Regular;18" halign="center" transparent="1" />
 		<widget name="config" position="0,80" size="560,100" zPosition="3" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="170,360" zPosition="1" size="1,1" transparent="1" alphatest="on" />
+		<widget name="HelpWindow" pixmap="vkey_icon.png" position="170,360" zPosition="1" size="1,1" transparent="1" alphatest="on" />
 	</screen>
 	<screen name="TMDbMainHD" position="center,center" size="1280,720" title=" " flags="wfNoBorder">
 		<widget source="Title" render="Label" position="60,40" size="1160,30" font="Regular;26" transparent="1" />
@@ -722,10 +722,10 @@
 		<widget name="status" position="60,0" size="1160,720" zPosition="2" font="Regular;22" transparent="1" valign="center" halign="center" />
 		<widget name="tmdblogo" position="1145,598" zPosition="4" size="75,50" transparent="1" alphatest="blend" />
 		<widget name="seperator" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/seperator.png" position="60,650" size="1160,2" alphatest="on" />
-		<widget name="button_red" pixmap="skin_default/buttons/button_red.png" position="60,657" size="15,16" alphatest="on" />
-		<widget name="button_green" pixmap="skin_default/buttons/button_green.png" position="360,657" size="15,16" alphatest="on" />
-		<widget name="button_yellow" pixmap="skin_default/buttons/button_yellow.png" position="650,657" size="15,16" alphatest="on" />
-		<widget name="button_blue" pixmap="skin_default/buttons/button_blue.png" position="900,657" size="15,16" alphatest="on" />
+		<widget name="button_red" pixmap="buttons/button_red.png" position="60,657" size="15,16" alphatest="on" />
+		<widget name="button_green" pixmap="buttons/button_green.png" position="360,657" size="15,16" alphatest="on" />
+		<widget name="button_yellow" pixmap="buttons/button_yellow.png" position="650,657" size="15,16" alphatest="on" />
+		<widget name="button_blue" pixmap="buttons/button_blue.png" position="900,657" size="15,16" alphatest="on" />
 		<widget source="key_red" render="Label" position="80,652" zPosition="1" size="300,28" font="Regular;24" halign="left" transparent="1" />
 		<widget source="key_green" render="Label" position="380,652" zPosition="1" size="300,28" font="Regular;24" halign="left" transparent="1" />
 		<widget source="key_yellow" render="Label" position="670,652" zPosition="1" size="300,28" font="Regular;24" halign="left" transparent="1" />
@@ -744,10 +744,10 @@
 		<widget name="status" position="60,0" size="904,576" zPosition="2" font="Regular;20" transparent="1" valign="center" halign="center" />
 		<widget name="tmdblogo" position="889,461" zPosition="4" size="75,50" transparent="1" alphatest="on" />
 		<widget name="seperator" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/seperator.png" position="60,513" size="904,2" alphatest="on" />
-		<widget name="button_red" pixmap="skin_default/buttons/button_red.png" position="60,520" zPosition="4" size="15,16" transparent="1" alphatest="blend" />
-		<widget name="button_green" pixmap="skin_default/buttons/button_green.png" position="290,520" zPosition="4" size="15,16" transparent="1" alphatest="blend" />
-		<widget name="button_yellow" pixmap="skin_default/buttons/button_yellow.png" position="550,520" zPosition="4" size="15,16" transparent="1" alphatest="blend" />
-		<widget name="button_blue" pixmap="skin_default/buttons/button_blue.png" position="780,520" zPosition="4" size="15,16" transparent="1" alphatest="blend" />
+		<widget name="button_red" pixmap="buttons/button_red.png" position="60,520" zPosition="4" size="15,16" transparent="1" alphatest="blend" />
+		<widget name="button_green" pixmap="buttons/button_green.png" position="290,520" zPosition="4" size="15,16" transparent="1" alphatest="blend" />
+		<widget name="button_yellow" pixmap="buttons/button_yellow.png" position="550,520" zPosition="4" size="15,16" transparent="1" alphatest="blend" />
+		<widget name="button_blue" pixmap="buttons/button_blue.png" position="780,520" zPosition="4" size="15,16" transparent="1" alphatest="blend" />
 		<widget source="key_red" render="Label" position="80,516" size="350,28" zPosition="5" valign="top" halign="left" font="Regular;20" transparent="1" />
 		<widget source="key_green" render="Label" position="310,516" size="250,28" zPosition="5" valign="top" halign="left" font="Regular;20" transparent="1" />
 		<widget source="key_yellow" render="Label" position="570,516" size="250,28" zPosition="5" valign="top" halign="left" font="Regular;20" transparent="1" />
@@ -764,10 +764,10 @@
 		<widget name="extended" position="0,260" size="560,180" zPosition="2" font="Regular;14" transparent="1" />
 		<widget name="status" position="0,0" size="560,445" zPosition="2" font="Regular;18" transparent="1" valign="center" halign="center" />
 		<widget name="seperator" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/seperator.png" position="0,0" size="0,0" alphatest="on" />
-		<widget name="button_red" pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-		<widget name="button_green" pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-		<widget name="button_yellow" pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-		<widget name="button_blue" pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+		<widget name="button_red" pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		<widget name="button_green" pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+		<widget name="button_yellow" pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+		<widget name="button_blue" pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 		<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
@@ -813,10 +813,10 @@
 		<eLabel position="60,465" size="1160,2" backgroundColor="#ffffff" />
 		<eLabel position="190,465" size="2,195" backgroundColor="#ffffff" />
 		<eLabel position="60,660" size="1160,2" backgroundColor="#ffffff" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,310" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,350" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="60,390" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="60,430" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,310" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,350" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="60,390" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="60,430" size="21,21" alphatest="blend" />
 		<widget name="key_red" position="90,308" size="300,26" font="Regular;24" halign="left" valign="top" transparent="1" />
 		<widget name="key_green" position="90,348" size="300,26" font="Regular;24" halign="left" valign="top" transparent="1" />
 		<widget name="key_yellow" position="90,388" size="300,26" font="Regular;24" halign="left" valign="top" transparent="1" />
@@ -866,10 +866,10 @@
 			transparent="1" enableWrapAround="1" />
 		<eLabel position="60,415" size="904,2" backgroundColor="#ffffff" />
 		<eLabel position="60,510" size="904,2" backgroundColor="#ffffff" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,518" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="190,518" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="380,518" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="570,518" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,518" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="190,518" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="380,518" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="570,518" size="21,21" alphatest="blend" />
 		<widget name="key_red" position="85,516" size="300,26" font="Regular;20" halign="left" valign="top" transparent="1" />
 		<widget name="key_green" position="215,516" size="300,26" font="Regular;20" halign="left" valign="top" transparent="1" />
 		<widget name="key_yellow" position="405,516" size="300,26" font="Regular;20" halign="left" valign="top" transparent="1" />
@@ -884,10 +884,10 @@
 	<screen name="AdvancedMovieSelectionSD" position="center,center" size="560,445" title=" ">
 		<!--widget source="global.MovieDir" render="Label" position="0,0" size="560,24" zPosition="3" font="Regular;20" foregroundColor="#ffffff" transparent="1"/ -->
 		<widget name="warning" position="0,45" size="560,22" zPosition="4" font="Regular;18" halign="center" foregroundColor="#ffcc00" transparent="1" />
-		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 		<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 		<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 		<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
@@ -895,7 +895,7 @@
 		<widget name="waitingtext" position="0,45" size="560,395" zPosition="4" font="Regular;22" halign="center" valign="center" />
 		<widget name="list" position="130,70" size="430,338" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
-		<widget name="DescriptionBorder" pixmap="skin_default/border_eventinfo.png" position="0,316" zPosition="1" size="560,103" transparent="1" alphatest="on" />
+		<widget name="DescriptionBorder" pixmap="border_eventinfo.png" position="0,316" zPosition="1" size="560,103" transparent="1" alphatest="on" />
 		<widget source="Service" render="Label" position="5,318" zPosition="1" size="480,35" font="Regular;17" foregroundColor="#cccccc">
 			<convert type="MovieInfo">ShortDescription</convert>
 		</widget>
@@ -950,10 +950,10 @@
 		<widget name="list" position="345,126" size="875,468" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<eLabel position="60,627" size="1160,2" backgroundColor="#ffffff" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,643" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="290,643" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="580,643" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="870,643" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,643" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="290,643" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="580,643" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="870,643" size="21,21" alphatest="blend" />
 		<widget name="key_red" position="90,641" size="300,26" font="Regular;24" halign="left" valign="top" transparent="1" />
 		<widget name="key_green" position="320,641" size="300,26" font="Regular;24" halign="left" valign="top" transparent="1" />
 		<widget name="key_yellow" position="610,641" size="300,26" font="Regular;24" halign="left" valign="top" transparent="1" />
@@ -997,10 +997,10 @@
 		<widget name="list" position="300,115" size="664,390" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<eLabel position="60,510" size="904,2" backgroundColor="#ffffff" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,518" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="190,518" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="380,518" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="570,518" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,518" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="190,518" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="380,518" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="570,518" size="21,21" alphatest="blend" />
 		<widget name="key_red" position="85,516" size="300,26" font="Regular;20" halign="left" valign="top" transparent="1" />
 		<widget name="key_green" position="215,516" size="300,26" font="Regular;20" halign="left" valign="top" transparent="1" />
 		<widget name="key_yellow" position="405,516" size="300,26" font="Regular;20" halign="left" valign="top" transparent="1" />
@@ -1014,10 +1014,10 @@
 	<screen name="AdvancedMovieSelection1SD" position="center,center" size="560,445" title=" ">
 		<!--widget source="global.MovieDir" render="Label" position="0,0" size="560,24" zPosition="3" font="Regular;20" foregroundColor="#ffffff" transparent="1"/ -->
 		<widget name="warning" position="0,45" size="560,22" zPosition="4" font="Regular;18" halign="center" foregroundColor="#ffcc00" transparent="1" />
-		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 		<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 		<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 		<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
@@ -1025,7 +1025,7 @@
 		<widget name="waitingtext" position="0,45" size="560,395" zPosition="4" font="Regular;22" halign="center" valign="center" />
 		<widget name="list" position="130,71" size="430,312" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
-		<widget name="DescriptionBorder" pixmap="skin_default/border_eventinfo.png" position="0,316" zPosition="1" size="560,103" transparent="1" alphatest="on" />
+		<widget name="DescriptionBorder" pixmap="border_eventinfo.png" position="0,316" zPosition="1" size="560,103" transparent="1" alphatest="on" />
 		<widget source="Service" render="Label" position="5,318" zPosition="1" size="480,35" font="Regular;17" foregroundColor="#cccccc">
 			<convert type="MovieInfo">ShortDescription</convert>
 		</widget>
@@ -1056,9 +1056,9 @@
 		<widget name="poster" position="450,195" size="100,180" zPosition="2" alphatest="on" />
 		<widget name="list" position="560,195" size="660,180" scrollbarMode="showOnDemand" zPosition="2" enableWrapAround="1" />
 		<widget name="description" position="450,375" size="770,228" zPosition="2" foregroundColor="#ffffff" font="Regular;22" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,330" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,380" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="60,430" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,330" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,380" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="60,430" size="21,21" alphatest="blend" />
 		<widget name="key_red" position="90,328" size="300,26" font="Regular;24" halign="left" valign="top" transparent="1" />
 		<widget name="key_green" position="90,378" size="300,26" font="Regular;24" halign="left" valign="top" transparent="1" />
 		<widget name="key_yellow" position="90,428" size="300,26" font="Regular;24" halign="left" valign="top" transparent="1" />
@@ -1078,9 +1078,9 @@
 		<widget name="poster" position="350,200" size="100,180" zPosition="2" alphatest="on" />
 		<widget name="list" position="470,200" size="494,180" scrollbarMode="showOnDemand" zPosition="2" enableWrapAround="1" />
 		<widget name="description" position="350,380" size="614,115" zPosition="2" foregroundColor="#ffffff" font="Regular;16" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,330" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,380" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="60,430" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,330" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,380" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="60,430" size="21,21" alphatest="blend" />
 		<widget name="key_red" position="90,326" size="300,26" font="Regular;20" halign="left" valign="top" transparent="1" />
 		<widget name="key_green" position="90,376" size="300,26" font="Regular;20" halign="left" valign="top" transparent="1" />
 		<widget name="key_yellow" position="90,428" size="300,26" font="Regular;20" halign="left" valign="top" transparent="1" />
@@ -1092,9 +1092,9 @@
 		<widget name="poster" position="0,120" size="100,180" zPosition="2" alphatest="on" />
 		<widget name="list" position="110,120" size="450,180" scrollbarMode="showOnDemand" zPosition="2" enableWrapAround="1" />
 		<widget name="description" position="0,305" size="560,98" zPosition="2" foregroundColor="#ffffff" font="Regular;16" />
-		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
 		<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 		<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;18" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 		<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;18" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
@@ -1104,10 +1104,10 @@
 		<widget source="Title" render="Label" position="60,60" size="1160,30" font="Regular;26" transparent="1" />
 		<widget source="session.VideoPicture" render="Pig" position="60,100" size="380,215" zPosition="3" backgroundColor="#ff000000" />
 		<widget name="config" position="470,100" size="750,400" scrollbarMode="showOnDemand" enableWrapAround="1" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,330" size="30,30" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,380" size="30,30" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="60,430" size="30,30" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="60,480" size="30,30" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,330" size="30,30" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,380" size="30,30" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="60,430" size="30,30" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_blue.png" position="60,480" size="30,30" transparent="1" alphatest="on" />
 		<widget source="key_red" render="Label" position="80,328" zPosition="1" size="300,28" font="Regular;24" valign="center" halign="left" transparent="1" />
 		<widget source="key_green" render="Label" position="80,378" zPosition="1" size="300,28" font="Regular;24" valign="center" halign="left" transparent="1" />
 		<widget source="key_yellow" render="Label" position="80,428" zPosition="1" size="300,28" font="Regular;24" valign="center" halign="left" transparent="1" />
@@ -1123,10 +1123,10 @@
 		<widget source="Title" render="Label" position="60,60" size="804,30" font="Regular;24" transparent="1" />
 		<widget source="session.VideoPicture" render="Pig" position="60,100" size="254,144" zPosition="3" backgroundColor="#ff000000" />
 		<widget name="config" position="330,100" size="634,250" scrollbarMode="showOnDemand" enableWrapAround="1" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,270" size="15,16" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,300" size="15,16" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="60,330" size="15,16" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="60,360" size="15,16" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,270" size="15,16" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,300" size="15,16" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="60,330" size="15,16" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_blue.png" position="60,360" size="15,16" transparent="1" alphatest="on" />
 		<widget source="key_red" render="Label" position="80,268" zPosition="1" size="230,24" font="Regular;20" valign="top" halign="left" transparent="1" />
 		<widget source="key_green" render="Label" position="80,298" zPosition="1" size="230,24" font="Regular;20" valign="top" halign="left" transparent="1" />
 		<widget source="key_yellow" render="Label" position="80,328" zPosition="1" size="230,24" font="Regular;20" valign="top" halign="left" transparent="1" />
@@ -1140,10 +1140,10 @@
 	</screen>
 	<screen name="AdvancedMovieSelectionSetupSD" position="center,center" size="620,470" title=" ">
 		<widget name="config" position="0,40" size="620,300" enableWrapAround="1" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="skin_default/buttons/red.png" zPosition="1" position="0,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" zPosition="1" position="140,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/yellow.png" zPosition="1" position="280,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/blue.png" zPosition="1" position="420,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/red.png" zPosition="1" position="0,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/green.png" zPosition="1" position="140,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/yellow.png" zPosition="1" position="280,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/blue.png" zPosition="1" position="420,0" size="140,40" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,0" zPosition="2" size="135,40" halign="center" valign="center" font="Regular;16" transparent="1" shadowColor="#000000" shadowOffset="-1,-1" />
 		<widget source="key_green" render="Label" position="140,0" zPosition="2" size="135,40" halign="center" valign="center" font="Regular;16" transparent="1" shadowColor="#000000" shadowOffset="-1,-1" />
 		<widget source="key_yellow" render="Label" position="280,0" zPosition="2" size="135,40" halign="center" valign="center" font="Regular;16" transparent="1" shadowColor="#000000" shadowOffset="-1,-1" />
@@ -1159,9 +1159,9 @@
 		<widget source="Title" render="Label" position="60,60" size="1160,30" font="Regular;26" transparent="1" />
 		<widget source="session.VideoPicture" render="Pig" position="60,100" size="380,215" zPosition="3" backgroundColor="#ff000000" />
 		<widget name="config" position="470,100" size="750,550" scrollbarMode="showOnDemand" enableWrapAround="1" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,330" size="15,16" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,380" size="15,16" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="60,430" size="15,16" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,330" size="15,16" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,380" size="15,16" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="60,430" size="15,16" transparent="1" alphatest="on" />
 		<widget name="key_red" position="80,328" zPosition="1" size="300,28" font="Regular;24" valign="center" halign="left" />
 		<widget name="key_green" position="80,378" zPosition="1" size="300,28" font="Regular;24" valign="center" halign="left" />
 		<widget name="key_yellow" position="80,428" zPosition="1" size="380,28" font="Regular;24" valign="center" halign="left" />
@@ -1174,9 +1174,9 @@
 		<widget name="key_red" position="80,268" zPosition="1" size="230,24" font="Regular;20" valign="top" halign="left" transparent="1" />
 		<widget name="key_green" position="80,298" zPosition="1" size="230,24" font="Regular;20" valign="top" halign="left" transparent="1" />
 		<widget name="key_yellow" position="80,328" zPosition="1" size="300,24" font="Regular;20" valign="top" halign="left" transparent="1" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,270" size="15,16" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,300" size="15,16" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="60,330" size="15,16" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,270" size="15,16" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,300" size="15,16" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="60,330" size="15,16" transparent="1" alphatest="on" />
 		<widget name="OKIcon" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/buttons/key_ok.png" position="60,480" zPosition="10" size="35,25" transparent="1" alphatest="on" />
 	</screen>
 	<screen name="AdvancedMovieSelectionButtonSetupSD" position="center,center" size="560,400" title=" ">
@@ -1184,41 +1184,41 @@
 		<widget name="key_red" position="0,350" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#ffffff" font="Regular;15" />
 		<widget name="key_green" position="140,350" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#ffffff" font="Regular;15" />
 		<widget name="key_yellow" position="280,350" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#ffffff" font="Regular;15" />
-		<ePixmap name="red" pixmap="skin_default/buttons/red.png" position="0,350" size="140,40" zPosition="4" transparent="1" alphatest="on" />
-		<ePixmap name="green" pixmap="skin_default/buttons/green.png" position="140,350" size="140,40" zPosition="4" transparent="1" alphatest="on" />
-		<ePixmap name="#ffcc00" pixmap="skin_default/buttons/yellow.png" position="280,350" size="140,40" zPosition="4" transparent="1" alphatest="on" />
+		<ePixmap name="red" pixmap="buttons/red.png" position="0,350" size="140,40" zPosition="4" transparent="1" alphatest="on" />
+		<ePixmap name="green" pixmap="buttons/green.png" position="140,350" size="140,40" zPosition="4" transparent="1" alphatest="on" />
+		<ePixmap name="#ffcc00" pixmap="buttons/yellow.png" position="280,350" size="140,40" zPosition="4" transparent="1" alphatest="on" />
 		<widget name="OKIcon" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/buttons/key_ok.png" position="520,357" zPosition="10" size="35,25" transparent="1" alphatest="on" />
 	</screen>
 	<screen name="AdvancedMovieSelectionOwnButtonNameHD" position="center,center" size="1280,720" title=" " flags="wfNoBorder">
 		<widget source="Title" render="Label" position="60,60" size="1160,30" font="Regular;26" transparent="1" />
 		<widget source="session.VideoPicture" render="Pig" position="60,100" size="380,215" zPosition="3" backgroundColor="#ff000000" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,330" size="15,16" transparent="1" alphatest="on" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,330" size="15,16" transparent="1" alphatest="on" />
 		<widget source="key_red" render="Label" position="80,328" zPosition="1" size="328,28" font="Regular;24" halign="left" transparent="1" />
 		<widget name="VKeyIcon" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/buttons/key_text.png" position="60,380" zPosition="10" size="35,25" transparent="1" alphatest="on" />
 		<widget name="config" position="470,100" size="750,200" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
-		<ePixmap pixmap="skin_default/div-h.png" position="470,310" zPosition="1" size="750,2" />
+		<ePixmap pixmap="div-h.png" position="470,310" zPosition="1" size="750,2" />
 		<widget source="help" render="Label" position="470,320" size="750,163" font="Regular;21" />
-		<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="550,500" zPosition="1" size="1,1" transparent="1" alphatest="on" />
+		<widget name="HelpWindow" pixmap="vkey_icon.png" position="550,500" zPosition="1" size="1,1" transparent="1" alphatest="on" />
 	</screen>
 	<screen name="AdvancedMovieSelectionOwnButtonNameXD" position="center,center" size="1024,576" title=" " flags="wfNoBorder">
 		<widget source="Title" render="Label" position="60,60" size="804,30" font="Regular;24" transparent="1" />
 		<widget source="session.VideoPicture" render="Pig" position="60,100" size="254,144" zPosition="3" backgroundColor="#ff000000" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,270" size="15,16" alphatest="on" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,270" size="15,16" alphatest="on" />
 		<widget source="key_red" render="Label" position="80,268" zPosition="1" size="230,24" font="Regular;20" valign="top" halign="left" transparent="1" />
 		<widget name="VKeyIcon" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/buttons/key_text.png" position="60,300" zPosition="10" size="35,25" transparent="1" alphatest="on" />
 		<widget name="config" position="330,100" size="634,120" scrollbarMode="showOnDemand" enableWrapAround="1" />
-		<ePixmap pixmap="skin_default/div-h.png" position="330,220" zPosition="1" size="634,2" />
+		<ePixmap pixmap="div-h.png" position="330,220" zPosition="1" size="634,2" />
 		<widget source="help" render="Label" position="330,240" size="634,163" font="Regular;20" />
-		<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="480,380" zPosition="1" size="1,1" transparent="1" alphatest="on" />
+		<widget name="HelpWindow" pixmap="vkey_icon.png" position="480,380" zPosition="1" size="1,1" transparent="1" alphatest="on" />
 	</screen>
 	<screen name="AdvancedMovieSelectionOwnButtonNameSD" position="center,center" size="560,400" title=" ">
-		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" halign="center" valign="center" font="Regular;15" transparent="1" shadowColor="#000000" shadowOffset="-1,-1" />
 		<widget name="VKeyIcon" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/buttons/key_text.png" position="150,7" zPosition="10" size="35,25" transparent="1" alphatest="on" />
 		<widget name="config" position="5,50" size="550,250" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
-		<ePixmap pixmap="skin_default/div-h.png" position="5,163" zPosition="1" size="550,2" />
+		<ePixmap pixmap="div-h.png" position="5,163" zPosition="1" size="550,2" />
 		<widget source="help" render="Label" position="5,180" size="550,80" font="Regular;18" />
-		<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="170,360" zPosition="1" size="1,1" transparent="1" alphatest="on" />
+		<widget name="HelpWindow" pixmap="vkey_icon.png" position="170,360" zPosition="1" size="1,1" transparent="1" alphatest="on" />
 	</screen>
 	<screen name="AdvancedMovieSelectionAboutHD" position="center,center" title=" " size="1280,720" flags="wfNoBorder">
 		<widget source="Title" render="Label" position="60,60" size="1160,30" font="Regular;26" transparent="1" />
@@ -1229,9 +1229,9 @@
 		<widget source="thanks" render="Label" position="60,500" size="930,130" font="Regular;22" transparent="1" zPosition="1" halign="left" valign="top" />
 		<widget source="license" render="Label" position="60,430" size="930,130" font="Regular;22" transparent="1" zPosition="1" halign="left" valign="top" />
 		<ePixmap position="1000,500" size="200,92" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/gp3.png" transparent="1" alphatest="blend" />
-		<widget name="red" pixmap="skin_default/buttons/button_red.png" position="60,330" size="15,16" transparent="1" alphatest="on" />
+		<widget name="red" pixmap="buttons/button_red.png" position="60,330" size="15,16" transparent="1" alphatest="on" />
 		<widget source="key_red" render="Label" position="80,328" zPosition="1" size="300,28" font="Regular;24" valign="center" halign="left" />
-		<widget name="green" pixmap="skin_default/buttons/button_green.png" position="60,380" size="15,16" transparent="1" alphatest="on" />
+		<widget name="green" pixmap="buttons/button_green.png" position="60,380" size="15,16" transparent="1" alphatest="on" />
 		<widget source="key_green" render="Label" position="80,378" zPosition="1" size="300,28" font="Regular;24" valign="center" halign="left" />
 	</screen>
 	<screen name="AdvancedMovieSelectionAboutXD" position="center,center" title=" " size="1024,576" flags="wfNoBorder">
@@ -1243,16 +1243,16 @@
 		<widget source="thanks" render="Label" position="60,450" size="650,130" font="Regular;18" transparent="1" zPosition="1" halign="left" valign="top" />
 		<widget source="license" render="Label" position="60,350" size="650,100" font="Regular;18" transparent="1" zPosition="1" halign="left" valign="center" />
 		<ePixmap position="744,400" size="200,92" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/gp3.png" transparent="1" alphatest="blend" />
-		<widget name="red" pixmap="skin_default/buttons/button_red.png" position="60,270" size="15,16" transparent="1" alphatest="on" />
+		<widget name="red" pixmap="buttons/button_red.png" position="60,270" size="15,16" transparent="1" alphatest="on" />
 		<widget source="key_red" render="Label" position="80,268" zPosition="1" size="230,24" font="Regular;20" valign="top" halign="left" transparent="1" />
-		<widget name="green" pixmap="skin_default/buttons/button_green.png" position="60,300" size="15,16" transparent="1" alphatest="on" />
+		<widget name="green" pixmap="buttons/button_green.png" position="60,300" size="15,16" transparent="1" alphatest="on" />
 		<widget source="key_green" render="Label" position="80,298" zPosition="1" size="230,24" font="Regular;20" valign="top" halign="left" transparent="1" />
 	</screen>
 	<screen name="AdvancedMovieSelectionAboutSD" position="center,center" title=" " size="560,400">
 		<ePixmap position="300,40" size="200,92" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/gp3.png" transparent="1" alphatest="blend" />
-		<widget name="red" pixmap="skin_default/buttons/red.png" zPosition="1" position="0,0" size="140,40" alphatest="on" />
+		<widget name="red" pixmap="buttons/red.png" zPosition="1" position="0,0" size="140,40" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,0" zPosition="2" size="135,40" halign="center" valign="center" font="Regular;20" transparent="1" shadowColor="#000000" shadowOffset="-1,-1" />
-		<widget name="green" pixmap="skin_default/buttons/green.png" zPosition="1" position="150,0" size="140,40" alphatest="on" />
+		<widget name="green" pixmap="buttons/green.png" zPosition="1" position="150,0" size="140,40" alphatest="on" />
 		<widget source="key_green" render="Label" position="150,0" zPosition="2" size="135,40" halign="center" valign="center" font="Regular;16" transparent="1" shadowColor="#000000" shadowOffset="-1,-1" />
 		<widget source="version" render="Label" position="10,70" size="200,50" font="Regular;22" transparent="1" zPosition="1" halign="left" valign="center" />
 		<widget source="author" render="Label" position="40,130" size="400,50" font="Regular;22" transparent="1" zPosition="1" halign="left" valign="center" />
@@ -1290,10 +1290,10 @@
 		<widget name="epg_description" position="345,170" size="875,450" zPosition="1" font="Regular;26" foregroundColor="#ffffff" transparent="1" />
 		<widget name="CoverPreview" position="60,265" size="256,360" zPosition="2" alphatest="blend" />
 		<eLabel position="60,627" size="1160,2" backgroundColor="#444444" />
-		<widget name="red_button" pixmap="skin_default/buttons/button_red.png" position="60,643" size="30,30" alphatest="blend" />
-		<widget name="green_button" pixmap="skin_default/buttons/button_green.png" position="390,643" size="30,30" alphatest="blend" />
-		<widget name="yellow_button" pixmap="skin_default/buttons/button_yellow.png" position="680,643" size="30,30" alphatest="blend" />
-		<widget name="blue_button" pixmap="skin_default/buttons/button_blue.png" position="970,643" size="30,30" alphatest="blend" />
+		<widget name="red_button" pixmap="buttons/button_red.png" position="60,643" size="30,30" alphatest="blend" />
+		<widget name="green_button" pixmap="buttons/button_green.png" position="390,643" size="30,30" alphatest="blend" />
+		<widget name="yellow_button" pixmap="buttons/button_yellow.png" position="680,643" size="30,30" alphatest="blend" />
+		<widget name="blue_button" pixmap="buttons/button_blue.png" position="970,643" size="30,30" alphatest="blend" />
 		<widget source="key_red" render="Label" position="90,641" size="220,26" font="Regular;24" halign="left" backgroundColor="#000000" transparent="1" />
 		<widget source="key_green" render="Label" position="420,641" size="220,26" font="Regular;24" halign="left" backgroundColor="#000000" transparent="1" />
 		<widget source="key_yellow" render="Label" position="710,641" size="220,26" font="Regular;24" halign="left" backgroundColor="#000000" transparent="1" />
@@ -1329,10 +1329,10 @@
 		<widget name="epg_description" position="345,175" size="619,335" zPosition="1" font="Regular;22" foregroundColor="#ffffff" transparent="1" />
 		<widget name="CoverPreview" position="60,255" size="256,260" zPosition="2" alphatest="blend" />
 		<eLabel position="60,515" size="904,2" backgroundColor="#444444" />
-		<widget name="red_button" pixmap="skin_default/buttons/button_red.png" position="60,518" size="21,21" alphatest="blend" />
-		<widget name="green_button" pixmap="skin_default/buttons/button_green.png" position="290,518" size="21,21" alphatest="blend" />
-		<widget name="yellow_button" pixmap="skin_default/buttons/button_yellow.png" position="480,518" size="21,21" alphatest="blend" />
-		<widget name="blue_button" pixmap="skin_default/buttons/button_blue.png" position="670,518" size="21,21" alphatest="blend" />
+		<widget name="red_button" pixmap="buttons/button_red.png" position="60,518" size="21,21" alphatest="blend" />
+		<widget name="green_button" pixmap="buttons/button_green.png" position="290,518" size="21,21" alphatest="blend" />
+		<widget name="yellow_button" pixmap="buttons/button_yellow.png" position="480,518" size="21,21" alphatest="blend" />
+		<widget name="blue_button" pixmap="buttons/button_blue.png" position="670,518" size="21,21" alphatest="blend" />
 		<widget source="key_red" render="Label" position="85,516" size="300,26" font="Regular;20" halign="left" valign="top" transparent="1" />
 		<widget source="key_green" render="Label" position="315,516" size="300,26" font="Regular;20" halign="left" valign="top" transparent="1" />
 		<widget source="key_yellow" render="Label" position="505,516" size="300,26" font="Regular;20" halign="left" valign="top" transparent="1" />
@@ -1360,10 +1360,10 @@
 		</widget>
 		<widget name="epg_description" position="130,120" size="430,245" zPosition="1" font="Regular;18" foregroundColor="#ffffff" transparent="1" />
 		<widget name="CoverPreview" position="0,185" size="120,180" zPosition="2" alphatest="blend" />
-		<widget name="red_button" pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-		<widget name="green_button" pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-		<widget name="yellow_button" pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-		<widget name="blue_button" pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+		<widget name="red_button" pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		<widget name="green_button" pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+		<widget name="yellow_button" pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+		<widget name="blue_button" pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 		<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
@@ -1499,10 +1499,10 @@
 		<eLabel position="60,430" size="1160,2" backgroundColor="#ffffff" />
 		<eLabel position="190,430" size="2,195" backgroundColor="#ffffff" />
 		<eLabel position="60,627" size="1160,2" backgroundColor="#ffffff" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,643" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="290,643" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="580,643" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="870,643" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,643" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="290,643" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="580,643" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="870,643" size="21,21" alphatest="blend" />
 		<widget name="key_red" position="90,641" size="300,26" font="Regular;24" halign="left" valign="top" transparent="1" />
 		<widget name="key_green" position="320,641" size="300,26" font="Regular;24" halign="left" valign="top" transparent="1" />
 		<widget name="key_yellow" position="610,641" size="300,26" font="Regular;24" halign="left" valign="top" transparent="1" />
@@ -1550,10 +1550,10 @@
 			transparent="1" enableWrapAround="1" />
 		<eLabel position="60,430" size="1160,2" backgroundColor="#ffffff" />
 		<eLabel position="60,627" size="1160,2" backgroundColor="#ffffff" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,643" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="290,643" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="580,643" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="870,643" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,643" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="290,643" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="580,643" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="870,643" size="21,21" alphatest="blend" />
 		<widget name="key_red" position="90,641" size="300,26" font="Regular;24" halign="left" valign="top" transparent="1" />
 		<widget name="key_green" position="320,641" size="300,26" font="Regular;24" halign="left" valign="top" transparent="1" />
 		<widget name="key_yellow" position="610,641" size="300,26" font="Regular;24" halign="left" valign="top" transparent="1" />
@@ -1601,10 +1601,10 @@
 		<eLabel position="60,348" size="904,2" backgroundColor="#ffffff" />
 		<eLabel position="190,348" size="2,162" backgroundColor="#ffffff" />
 		<eLabel position="60,510" size="904,2" backgroundColor="#ffffff" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,518" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="190,518" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="380,518" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="570,518" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,518" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="190,518" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="380,518" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="570,518" size="21,21" alphatest="blend" />
 		<widget name="key_red" position="85,516" size="300,26" font="Regular;20" halign="left" valign="top" transparent="1" />
 		<widget name="key_green" position="215,516" size="300,26" font="Regular;20" halign="left" valign="top" transparent="1" />
 		<widget name="key_yellow" position="405,516" size="300,26" font="Regular;20" halign="left" valign="top" transparent="1" />
@@ -1652,10 +1652,10 @@
 			transparent="1" enableWrapAround="1" />
 		<eLabel position="60,348" size="904,2" backgroundColor="#ffffff" />
 		<eLabel position="60,510" size="904,2" backgroundColor="#ffffff" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,518" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="190,518" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="380,518" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="570,518" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,518" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="190,518" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="380,518" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="570,518" size="21,21" alphatest="blend" />
 		<widget name="key_red" position="85,516" size="300,26" font="Regular;20" halign="left" valign="top" transparent="1" />
 		<widget name="key_green" position="215,516" size="300,26" font="Regular;20" halign="left" valign="top" transparent="1" />
 		<widget name="key_yellow" position="405,516" size="300,26" font="Regular;20" halign="left" valign="top" transparent="1" />
@@ -1669,10 +1669,10 @@
 	<screen name="AdvancedMovieSelection_noMiniTV_SD" position="center,center" size="560,445" title=" ">
 		<!--widget source="global.MovieDir" render="Label" position="0,0" size="560,24" zPosition="3" font="Regular;20" foregroundColor="#ffffff" transparent="1"/ -->
 		<widget name="warning" position="0,45" size="560,22" zPosition="4" font="Regular;18" halign="center" foregroundColor="#ffcc00" transparent="1" />
-		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 		<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 		<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 		<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
@@ -1680,7 +1680,7 @@
 		<widget name="waitingtext" position="0,45" size="560,395" zPosition="4" font="Regular;22" halign="center" valign="center" />
 		<widget name="list" position="130,71" size="430,312" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
-		<widget name="DescriptionBorder" pixmap="skin_default/border_eventinfo.png" position="0,316" zPosition="1" size="560,103" transparent="1" alphatest="on" />
+		<widget name="DescriptionBorder" pixmap="border_eventinfo.png" position="0,316" zPosition="1" size="560,103" transparent="1" alphatest="on" />
 		<widget source="Service" render="Label" position="5,318" zPosition="1" size="480,35" font="Regular;17" foregroundColor="#cccccc">
 			<convert type="MovieInfo">ShortDescription</convert>
 		</widget>
@@ -1700,17 +1700,17 @@
 	<screen name="AdvancedMovieSelection1_noMiniTV_SD" position="center,center" size="560,445" title=" ">
 		<!--widget source="global.MovieDir" render="Label" position="0,0" size="560,24" zPosition="3" font="Regular;20" foregroundColor="#ffffff" transparent="1"/ -->
 		<widget name="warning" position="0,45" size="560,22" zPosition="4" font="Regular;18" halign="center" foregroundColor="#ffcc00" transparent="1" />
-		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 		<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 		<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 		<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
 		<widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
 		<widget name="waitingtext" position="0,45" size="560,395" zPosition="4" font="Regular;22" halign="center" valign="center" />
 		<widget name="list" position="0,71" size="560,312" zPosition="2" scrollbarMode="showOnDemand" enableWrapAround="1" />
-		<widget name="DescriptionBorder" pixmap="skin_default/border_eventinfo.png" position="0,316" zPosition="1" size="560,103" transparent="1" alphatest="on" />
+		<widget name="DescriptionBorder" pixmap="border_eventinfo.png" position="0,316" zPosition="1" size="560,103" transparent="1" alphatest="on" />
 		<widget source="Service" render="Label" position="5,318" zPosition="1" size="480,35" font="Regular;17" foregroundColor="#cccccc">
 			<convert type="MovieInfo">ShortDescription</convert>
 		</widget>
@@ -1735,10 +1735,10 @@
 			<convert type="ClockToText">Date</convert>
 		</widget>
 		<widget source="session.VideoPicture" render="Pig" position="65,115" size="256,144" zPosition="3" backgroundColor="#ff000000" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,330" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,380" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="60,430" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="60,480" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,330" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,380" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="60,430" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="60,480" size="21,21" alphatest="blend" />
 		<widget source="key_red" render="Label" position="90,328" size="300,28" font="Regular;24" halign="left" valign="top" transparent="1" />
 		<widget source="key_green" render="Label" position="90,378" size="300,28" font="Regular;24" halign="left" valign="top" transparent="1" />
 		<widget source="key_yellow" render="Label" position="90,428" size="300,28" font="Regular;24" halign="left" valign="top" transparent="1" />
@@ -1756,10 +1756,10 @@
 			<convert type="ClockToText">Date</convert>
 		</widget>
 		<widget source="session.VideoPicture" render="Pig" position="65,115" size="256,144" zPosition="3" backgroundColor="#ff000000" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,330" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,380" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="60,430" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="60,480" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,330" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,380" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="60,430" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="60,480" size="21,21" alphatest="blend" />
 		<widget source="key_red" render="Label" position="90,328" size="300,28" font="Regular;22" halign="left" valign="top" transparent="1" />
 		<widget source="key_green" render="Label" position="90,378" size="300,28" font="Regular;22" halign="left" valign="top" transparent="1" />
 		<widget source="key_yellow" render="Label" position="90,428" size="300,28" font="Regular;22" halign="left" valign="top" transparent="1" />
@@ -1769,15 +1769,15 @@
 		<widget name="list" position="450,170" size="514,346" scrollbarMode="showOnDemand" transparent="1" enableWrapAround="1" />
 	</screen>
 	<screen name="AdvancedMovieSelectionTagEditorSD" position="center,center" size="600,310">
-		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="420,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<ePixmap position="0,0" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,0" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,0" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,0" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="#ffffff" shadowColor="#000000" shadowOffset="-1,-1" />
 		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="#ffffff" shadowColor="#000000" shadowOffset="-1,-1" />
 		<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="#ffffff" shadowColor="#000000" shadowOffset="-1,-1" />
 		<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="#ffffff" shadowColor="#000000" shadowOffset="-1,-1" />
-		<ePixmap position="562,10" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
+		<ePixmap position="562,10" size="35,25" pixmap="buttons/key_menu.png" alphatest="on" />
 		<widget source="info" render="Label" position="5,40" size="590,28" font="Regular;18" halign="center" valign="top" transparent="1" />
 		<widget name="list" position="5,70" size="590,240" scrollbarMode="showOnDemand" enableWrapAround="1" />
 	</screen>
@@ -1857,10 +1857,10 @@
 		<widget name="warning" position="345,590" size="875,28" zPosition="3" font="Regular;24" halign="center" foregroundColor="#ffcc00" transparent="1" />
 		<widget name="autoemptylast" position="345,620" size="875,28" zPosition="3" font="Regular;24" halign="center" foregroundColor="#ffcc00" transparent="1" />
 		<widget name="autoemptynext" position="345,650" size="875,28" zPosition="3" font="Regular;24" halign="center" foregroundColor="#ffcc00" transparent="1" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,310" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,350" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="60,390" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="60,430" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,310" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,350" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="60,390" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="60,430" size="21,21" alphatest="blend" />
 		<widget name="MenuIcon" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/buttons/key_menu.png" position="60,530" size="35,25" transparent="1" alphatest="blend" />
 		<widget name="key_red" position="90,308" size="300,26" font="Regular;24" halign="left" valign="top" transparent="1" />
 		<widget name="key_green" position="90,336" size="300,54" font="Regular;24" halign="left" valign="top" transparent="1" />
@@ -1885,10 +1885,10 @@
 		<widget name="warning" position="250,440" size="714,28" zPosition="3" font="Regular;20" halign="center" foregroundColor="#ffcc00" transparent="1" />
 		<widget name="autoemptylast" position="250,470" size="714,28" zPosition="3" font="Regular;20" halign="center" foregroundColor="#ffcc00" transparent="1" />
 		<widget name="autoemptynext" position="250,500" size="714,28" zPosition="3" font="Regular;20" halign="center" foregroundColor="#ffcc00" transparent="1" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,280" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,330" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="60,380" size="21,21" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/button_blue.png" position="60,430" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_red.png" position="60,280" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_green.png" position="60,330" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_yellow.png" position="60,380" size="21,21" alphatest="blend" />
+		<ePixmap pixmap="buttons/button_blue.png" position="60,430" size="21,21" alphatest="blend" />
 		<widget name="MenuIcon" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/buttons/key_menu.png" position="60,230" size="35,25" transparent="1" alphatest="blend" />
 		<widget name="key_red" position="85,268" size="170,45" font="Regular;20" halign="left" valign="center" transparent="1" />
 		<widget name="key_green" position="85,318" size="170,45" font="Regular;20" halign="left" valign="center" transparent="1" />
@@ -1896,10 +1896,10 @@
 		<widget name="key_blue" position="85,418" size="170,45" font="Regular;20" halign="left" valign="center" transparent="1" />
 	</screen>
 	<screen name="AdvancedMovieSelectionTrashSD" position="center,center" size="560,445" title=" ">
-		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="420,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<ePixmap position="0,0" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,0" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,0" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,0" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
 		<widget name="key_red" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;18" transparent="1" foregroundColor="#ffffff" shadowColor="#000000" shadowOffset="-1,-1" />
 		<widget name="key_green" position="140,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;18" transparent="1" foregroundColor="#ffffff" shadowColor="#000000" shadowOffset="-1,-1" />
 		<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;18" transparent="1" foregroundColor="#ffffff" shadowColor="#000000" shadowOffset="-1,-1" />

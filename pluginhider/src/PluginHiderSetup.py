@@ -28,16 +28,16 @@ LIST_EXTENSIONS = 1
 LIST_EVENTINFO = 2
 class PluginHiderSetup(Screen, HelpableScreen):
 	skin = """<screen name="PluginHiderSetup" title="PluginHider Setup" position="center,center" size="565,395">
-		<ePixmap position="0,358" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,358" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,358" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="420,358" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<ePixmap position="0,358" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,358" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,358" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,358" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,358" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_green" render="Label" position="140,358" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_yellow" render="Label" position="280,358" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_blue" render="Label" position="420,358" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<ePixmap size="551,336" alphatest="on" position="5,21" pixmap="skin_default/border_epg.png" zPosition="3" />
-		<widget size="320,25" alphatest="on" position="5,1" zPosition="1" name="tabbar" pixmaps="skin_default/epg_now.png,skin_default/epg_next.png,skin_default/epg_more.png" />
+		<ePixmap size="551,336" alphatest="on" position="5,21" pixmap="border_epg.png" zPosition="3" />
+		<widget size="320,25" alphatest="on" position="5,1" zPosition="1" name="tabbar" pixmaps="epg_now.png,skin_default/epg_next.png,skin_default/epg_more.png" />
 		<widget valign="center" transparent="1" size="108,22" backgroundColor="#25062748" position="5,1" zPosition="2" source="plugins" render="Label" halign="center" font="Regular;18" />
 		<widget valign="center" transparent="1" size="108,22" backgroundColor="#25062748" position="111,1" zPosition="2" source="extensions" render="Label" halign="center" font="Regular;18" />
 		<widget valign="center" transparent="1" size="108,22" backgroundColor="#25062748" position="216,1" zPosition="2" source="eventinfo" render="Label" halign="center" font="Regular;18" />

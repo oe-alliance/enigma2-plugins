@@ -5,7 +5,7 @@
 			</widget>
 		
 			<widget name="frontendstatuswidget_SNR"  position="0,50" size="50,25" font="Regular;18" halign="center" valign="center"  />
-			<widget source="session.FrontendStatus" render="Progress" position="50,50" size="100,25" pixmap="skin_default/bar_snr.png" borderWidth="1" borderColor="#000000">
+			<widget source="session.FrontendStatus" render="Progress" position="50,50" size="100,25" pixmap="bar_snr.png" borderWidth="1" borderColor="#000000">
 				<convert type="FrontendInfo">SNR</convert>
 			</widget>
 			<widget source="session.FrontendStatus" render="Label" position="150,50" size="50,25" font="Regular;21">
@@ -13,7 +13,7 @@
 			</widget>
 			
 			<widget name="frontendstatuswidget_AGC"  position="0,75" size="50,25" font="Regular;18" halign="center" valign="center"  />
-			<widget source="session.FrontendStatus" render="Progress" position="50,75" size="100,25" pixmap="skin_default/bar_snr.png" borderWidth="1" borderColor="#000000">
+			<widget source="session.FrontendStatus" render="Progress" position="50,75" size="100,25" pixmap="bar_snr.png" borderWidth="1" borderColor="#000000">
 				<convert type="FrontendInfo">AGC</convert>
 			</widget>
 			<widget source="session.FrontendStatus" render="Label" position="150,75" size="50,25" font="Regular;21">
@@ -21,7 +21,7 @@
 			</widget>
 			
 			<widget name="frontendstatuswidget_BER"  position="0,100" size="50,25" font="Regular;18" halign="center" valign="center" />
-			<widget source="session.FrontendStatus" render="Progress" position="50,100" size="100,25" pixmap="skin_default/bar_snr.png" borderWidth="1" borderColor="#000000">
+			<widget source="session.FrontendStatus" render="Progress" position="50,100" size="100,25" pixmap="bar_snr.png" borderWidth="1" borderColor="#000000">
 				<convert type="FrontendInfo">BER</convert>
 			</widget>
 			<widget source="session.FrontendStatus" render="Label" position="150,100" size="50,25" font="Regular;21">

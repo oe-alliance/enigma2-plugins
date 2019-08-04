@@ -65,9 +65,9 @@ class genuineDreambox(Screen):
 		<widget name="resulttext" position="10,160" zPosition="1" size="600,110" font="Regular;20" halign="center" valign="center" />
 		<widget name="infotext2" position="10,280" zPosition="1" size="600,80" font="Regular;20" halign="center" valign="center" />
 		<widget name="kRed" position="185,365" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />	   
-		<ePixmap name="red" position="185,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap name="red" position="185,365" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
 		<widget name="kGreen" position="330,365" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<ePixmap name="green" position="330,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap name="green" position="330,365" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
 		</screen>"""% _("Genuine Dreambox")
 
 	def __init__(self, session):

@@ -79,13 +79,13 @@ class RemoteTimerScreen(Screen):
 		<screen position="center,center" size="585,410" title="Remote-Timer digest" >
 			<widget name="text" position="0,10" zPosition="1" size="585,20" font="Regular;20" halign="center" valign="center" />
 			<widget name="timerlist" position="5,40" size="560,275" scrollbarMode="showOnDemand" />
-			<ePixmap name="key_red" position="5,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="key_red" position="5,365" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
 			<widget name="key_red" position="5,365" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<ePixmap name="key_green" position="150,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="key_green" position="150,365" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
 			<widget name="key_green" position="150,365" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<ePixmap name="key_yellow" position="295,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap name="key_yellow" position="295,365" zPosition="4" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
 			<widget name="key_yellow" position="295,365" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<ePixmap name="key_blue" position="440,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<ePixmap name="key_blue" position="440,365" zPosition="4" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
 			<widget name="key_blue" position="440,365" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 
@@ -221,8 +221,8 @@ class RemoteTimerSetup(Screen, ConfigListScreen):
 	skin = """
 		<screen position="center,center" size="560,410" title="Settings" >
 			<widget name="config" position="5,40" size="480,335" scrollbarMode="showOnDemand" />
-			<ePixmap name="key_red" position="120,280" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="key_green" position="320,280" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="key_red" position="120,280" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="key_green" position="320,280" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
 			<widget name="key_red" position="120,280" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_green" position="320,280" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""

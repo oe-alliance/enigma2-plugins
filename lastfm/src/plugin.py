@@ -126,15 +126,15 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
             <widget name="button_green" position="140,360" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"3\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\"/>            
             <widget name="button_yellow" position="280,360" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"3\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\" />            
             <widget name="button_blue" position="420,360" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"3\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\" />             
-            <ePixmap pixmap="skin_default/buttons/red.png" position="0,360" zPosition="2" size="140,40" transparent="1" alphatest="on" />
-            <ePixmap pixmap="skin_default/buttons/green.png" position="140,360" zPosition="2" size="140,40" transparent="1" alphatest="on" />
-            <ePixmap pixmap="skin_default/buttons/yellow.png" position="280,360" zPosition="2" size="140,40" transparent="1" alphatest="on" />
-            <ePixmap pixmap="skin_default/buttons/blue.png" position="420,360" zPosition="2" size="140,40" transparent="1" alphatest="on" />
-            <ePixmap position="570,370" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
+            <ePixmap pixmap="buttons/red.png" position="0,360" zPosition="2" size="140,40" transparent="1" alphatest="on" />
+            <ePixmap pixmap="buttons/green.png" position="140,360" zPosition="2" size="140,40" transparent="1" alphatest="on" />
+            <ePixmap pixmap="buttons/yellow.png" position="280,360" zPosition="2" size="140,40" transparent="1" alphatest="on" />
+            <ePixmap pixmap="buttons/blue.png" position="420,360" zPosition="2" size="140,40" transparent="1" alphatest="on" />
+            <ePixmap position="570,370" size="35,25" pixmap="buttons/key_menu.png" alphatest="on" />
             <widget name="infolabel" position="10,410" size="500,20" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;16\" />           
         </screen>""" %(config.plugins.LastFM.name.value + " "  + _("Ver.") + " " + lastfm_pluginversion) # title
          
-    noCoverArtPNG = "/usr/share/enigma2/skin_default/no_coverArt.png"
+    noCoverArtPNG = "no_coverArt.png"
     
     def __init__(self, session,streamplayer, args = 0):
         self.skin = LastFMScreenMain.skin
@@ -535,7 +535,7 @@ class LastFMSaveScreen(Screen):
                 <widget name="cover" position="50,50" size="200,200" />          
               </screen>"""
               
-    noCoverArtPNG = "/usr/share/enigma2/skin_default/no_coverArt.png"
+    noCoverArtPNG = "no_coverArt.png"
     coverartsize= [200,200]
     lastcreator=""
     
