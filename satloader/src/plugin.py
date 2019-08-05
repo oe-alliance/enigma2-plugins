@@ -33,17 +33,17 @@ class Satloader(Screen):
 	elif framewidth == 720:
 		skin = """
 			<screen position="center,center" size="560,460" title="Satloader Plugin" >
-				<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 				<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="list" position="10,50" size="540,350" scrollbarMode="showOnDemand" />
 				<widget name="info" position="10,410" size="485,40" zPosition="1" font="Regular;20" valign="center" halign="center" />
-				<ePixmap position="505,418" size="35,25" zPosition="2" pixmap="/usr/share/enigma2/skin_default/buttons/key_info.png" alphatest="on" />
+				<ePixmap position="505,418" size="35,25" zPosition="2" pixmap="buttons/key_info.png" alphatest="on" />
 			</screen>"""
 
 	def __init__(self, session):
@@ -147,10 +147,10 @@ class SatloaderBouquet(Screen):
 	elif framewidth == 720:
 		skin = """
 			<screen position="center,center" size="560,460" title="Satloader Bouquet">
-				<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 				<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="list" position="10,50" size="540,350" scrollbarMode="showOnDemand" />
@@ -262,10 +262,10 @@ class SatloaderMultiSat(Screen):
 	elif framewidth == 720:
 		skin = """
 			<screen position="center,center" size="560,460" title="Satloader MultiSat">
-				<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 				<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
@@ -389,10 +389,10 @@ class TransponderSelection(Screen):
 	elif framewidth == 720:
 		skin = """
 			<screen position="center,center" size="560,460" title="%s">
-				<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 				<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="list" position="10,50" size="540,350" scrollbarMode="showOnDemand" />
@@ -507,9 +507,9 @@ def SatListEntry(description, value, index, selected):
 			(eListboxPythonMultiContent.TYPE_TEXT, 40, 0, 730, 25, 0, RT_HALIGN_LEFT, description)
 		]
 		if selected == True:
-			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 0, 25, 24,  LoadPixmap(cached=True, path="/usr/share/enigma2/skin_default/icons/lock_on.png")))
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 0, 25, 24,  LoadPixmap(cached=True, path="icons/lock_on.png")))
 		elif selected == False:
-			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 0, 25, 24,  LoadPixmap(cached=True, path="/usr/share/enigma2/skin_default/icons/lock_off.png")))
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 0, 25, 24,  LoadPixmap(cached=True, path="icons/lock_off.png")))
 		return res
 
 #######################

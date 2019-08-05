@@ -25,15 +25,15 @@ class AdvHdmiCecSetup(Screen, ConfigListScreen):
 	skin = """
 		<screen name="adv_hdmi_setup" position="center,center" size="580,480" title="Advanced HDMI-Cec Setup" >
 			<widget name="config" position="10,0" size="560,250" scrollbarMode="showOnDemand" enableWrapAround="1" />
-			<ePixmap pixmap="skin_default/div-h.png" position="0,250" zPosition="1" size="550,2" />
+			<ePixmap pixmap="div-h.png" position="0,250" zPosition="1" size="550,2" />
 			<widget source="help" render="Label" position="5,250" size="580,120" font="Regular;21" />
-			<ePixmap pixmap="skin_default/buttons/red.png" position="10,430" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="10,430" size="140,40" transparent="1" alphatest="on" />
 			<widget render="Label" source="key_red" position="10,430" size="140,40" transparent="1" halign="center" valign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="180,430" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="180,430" size="140,40" transparent="1" alphatest="on" />
 			<widget render="Label" source="key_green" position="180,430" size="140,40" transparent="1" halign="center" valign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="350,430" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/yellow.png" position="350,430" size="140,40" transparent="1" alphatest="on" />
 			<widget render="Label" source="key_yellow" position="350,430" size="140,40" transparent="1" halign="center" valign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
-			<ePixmap pixmap="skin_default/buttons/key_info.png" position="520,440" size="40,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/key_info.png" position="520,440" size="40,40" transparent="1" alphatest="on" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -194,10 +194,10 @@ class TimeSpanListScreen(Screen):
 			<widget name="key_green" position="170,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="green" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_yellow" position="335,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="yellow" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_blue" position="500,350" zPosition="5" size="140,40" valign="center" halign="center" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<ePixmap name="red" position="5,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green" position="170,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="335,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue" position="500,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<ePixmap name="red" position="5,350" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green" position="170,350" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="yellow" position="335,350" zPosition="4" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap name="blue" position="500,350" zPosition="4" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -276,13 +276,13 @@ class TimeSpanConfigScreen(Screen, ConfigListScreen):
 	skin = """
 		<screen name="adv_hdmi_timespan_config" position="center,center" size="550,430" title="ignoreit" >
 			<widget name="config" position="10,0" size="530,210" scrollbarMode="showOnDemand" enableWrapAround="1" />
-			<ePixmap pixmap="skin_default/div-h.png" position="0,210" zPosition="1" size="550,2" />
+			<ePixmap pixmap="div-h.png" position="0,210" zPosition="1" size="550,2" />
 			<widget source="help" render="Label" position="5,220" size="550,120" font="Regular;21" />
 			
 			<widget source="key_red" render="Label" position="10,380" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget source="key_green" render="Label" position="180,380" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="green" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<ePixmap name="red" position="10,380" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green" position="180,380" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="red" position="10,380" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green" position="180,380" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
 		</screen>"""
 
 	def __init__(self, session, entry, callbackfnc=None):

@@ -798,10 +798,10 @@ class ReconnectScriptSelector(ChangedScreen):
 class RSConfig(ConfigListScreen, ChangedScreen):
 	skin = """
 		<screen position="center,center" size="560,450" title="RS Downloader">
-			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" transparent="1" alphatest="on" />
 			<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget name="config" position="0,45" size="560,400" scrollbarMode="showOnDemand" />
 		</screen>"""
@@ -1254,10 +1254,10 @@ class UnrarPackageSelector(ChangedScreen):
 class UnrarManager(ChangedScreen):
 	skin = """
 		<screen position="center,center" size="560,450" title="RS Downloader">
-			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" transparent="1" alphatest="on" />
 			<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget name="list" position="0,40" size="560,375" scrollbarMode="showNever" />
@@ -1318,8 +1318,8 @@ def RSListEntry(download):
 	res = [(download)]
 	res.append(MultiContentEntryText(pos=(0, 0), size=(170, 25), font=0, text=download.name))
 	res.append(MultiContentEntryText(pos=(175, 0), size=(75, 25), font=0, text="%d%s"%(download.size, "MB"), flags=RT_HALIGN_CENTER))
-	res.append(MultiContentEntryPixmapAlphaTest(pos=(260, 9), size=(84, 7), png=LoadPixmap(cached=True, path=resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/progress_bg.png"))))
-	res.append(MultiContentEntryPixmapAlphaTest(pos=(260, 10), size=(int(0.84 * download.progress), 5), png=LoadPixmap(cached=True, path=resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/progress_small.png"))))
+	res.append(MultiContentEntryPixmapAlphaTest(pos=(260, 9), size=(84, 7), png=LoadPixmap(cached=True, path=resolveFilename(SCOPE_SKIN_IMAGE, "progress_bg.png"))))
+	res.append(MultiContentEntryPixmapAlphaTest(pos=(260, 10), size=(int(0.84 * download.progress), 5), png=LoadPixmap(cached=True, path=resolveFilename(SCOPE_SKIN_IMAGE, "progress_small.png"))))
 	res.append(MultiContentEntryText(pos=(360, 0), size=(60, 25), font=0, text="%d%s"%(download.progress, "%"), flags=RT_HALIGN_CENTER))
 	res.append(MultiContentEntryText(pos=(420, 0), size=(140, 25), font=0, text=download.status, flags=RT_HALIGN_RIGHT))
 	return res
@@ -1329,11 +1329,11 @@ def RSListEntry(download):
 class RSMain(ChangedScreen):
 	skin = """
 		<screen position="center,center" size="560,450" title="RS Downloader">
-			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/key_menu.png" position="10,420" size="35,25" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/key_menu.png" position="10,420" size="35,25" transparent="1" alphatest="on" />
 			<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />

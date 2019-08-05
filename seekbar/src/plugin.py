@@ -46,9 +46,9 @@ class Seekbar(ConfigListScreen, Screen):
 	skin = """
 	<screen position="center,center" size="560,160" title="%s">
 		<widget name="config" position="10,10" size="540,100" scrollbarMode="showOnDemand" />
-		<widget name="cursor" position="0,125" size="8,18" pixmap="skin_default/position_arrow.png" alphatest="on" />
+		<widget name="cursor" position="0,125" size="8,18" pixmap="position_arrow.png" alphatest="on" />
 
-		<widget source="session.CurrentService" render="PositionGauge" position="145,140" size="270,10" zPosition="2" pointer="skin_default/position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
+		<widget source="session.CurrentService" render="PositionGauge" position="145,140" size="270,10" zPosition="2" pointer="position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
 			<convert type="ServicePosition">Gauge</convert>
 		</widget>
 		<widget name="time" position="50,130" size="100,20" font="Regular;20" halign="left" backgroundColor="#4e5a74" transparent="1" />

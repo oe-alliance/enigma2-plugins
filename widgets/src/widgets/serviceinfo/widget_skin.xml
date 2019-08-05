@@ -75,23 +75,23 @@
 			</widget>
 					
 			<!--  -->
-			<widget source="session.CurrentService"  render="Pixmap" pixmap="skin_default/icons/icon_format.png"  position="70,20" size="30,20" zPosition="2">
+			<widget source="session.CurrentService"  render="Pixmap" pixmap="icons/icon_format.png"  position="70,20" size="30,20" zPosition="2">
 				<convert type="ServiceInfo">SubservicesAvailable</convert>
 				<convert type="ConditionalShowHide" />
 			</widget>			
-			<widget source="session.CurrentService"  render="Pixmap" pixmap="skin_default/icons/icon_format.png"  position="100,20" size="30,20" zPosition="2">
+			<widget source="session.CurrentService"  render="Pixmap" pixmap="icons/icon_format.png"  position="100,20" size="30,20" zPosition="2">
 				<convert type="ServiceInfo">IsWidescreen</convert>
 				<convert type="ConditionalShowHide" />
 			</widget>			
-			<widget source="session.CurrentService"  render="Pixmap" pixmap="skin_default/icons/icon_txt.png"  position="130,20" size="30,20" zPosition="2">
+			<widget source="session.CurrentService"  render="Pixmap" pixmap="icons/icon_txt.png"  position="130,20" size="30,20" zPosition="2">
 				<convert type="ServiceInfo">HasTelext</convert>
 				<convert type="ConditionalShowHide" />
 			</widget>			
-			<widget source="session.CurrentService"  render="Pixmap" pixmap="skin_default/icons/icon_crypt.png"  position="160,20" size="20,20" zPosition="2">
+			<widget source="session.CurrentService"  render="Pixmap" pixmap="icons/icon_crypt.png"  position="160,20" size="20,20" zPosition="2">
 				<convert type="ServiceInfo">IsMultichannel</convert>
 				<convert type="ConditionalShowHide" />
 			</widget>			
-			<widget source="session.CurrentService"  render="Pixmap" pixmap="skin_default/icons/icon_crypt.png"  position="180,20" size="20,20" zPosition="2">
+			<widget source="session.CurrentService"  render="Pixmap" pixmap="icons/icon_crypt.png"  position="180,20" size="20,20" zPosition="2">
 				<convert type="ServiceInfo">IsCrypted</convert>
 				<convert type="ConditionalShowHide" />
 			</widget>

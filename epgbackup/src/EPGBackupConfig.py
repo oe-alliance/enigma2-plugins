@@ -28,13 +28,13 @@ from plugin import epgbackup
 class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 	skin = """
 		<screen name="EPGBackupSetup" position="center,center" size="700,520" >
-			<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="0,0" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
 			<widget  position="0,0" size="140,40" source="key_red" render="Label" transparent="1" halign="center" valign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
-			<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap position="140,0" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
 			<widget  position="140,0" size="140,40" render="Label" source="key_green" transparent="1" halign="center" valign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
-			<ePixmap position="282,10" zPosition="1" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
+			<ePixmap position="282,10" zPosition="1" size="35,25" pixmap="buttons/key_menu.png" alphatest="on" />
 			<widget  position="5,45" size="690,335" name="config" scrollbarMode="showOnDemand" enableWrapAround="1" />
-			<ePixmap position="0,390" size="700,2" pixmap="skin_default/div-h.png" zPosition="1" />
+			<ePixmap position="0,390" size="700,2" pixmap="div-h.png" zPosition="1" />
 			<widget  position="5,400" size="690,120" source="help" render="Label" font="Regular;21" />
 		</screen>"""
 

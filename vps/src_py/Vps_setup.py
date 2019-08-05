@@ -13,15 +13,15 @@ VERSION = "1.3"
 class VPS_Setup(Screen, ConfigListScreen):
 
 	skin = """<screen name="vpsConfiguration" title="VPS-Plugin" position="center,center" size="600,370">
-		<ePixmap position="5,5" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="155,5" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="305,5" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="455,5" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<ePixmap position="5,5" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="155,5" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="305,5" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="455,5" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
 		<widget source="key_red" render="Label" position="5,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_green" render="Label" position="155,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_blue" render="Label" position="455,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="config" position="5,50" size="590,185" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="skin_default/div-h.png" position="0,236" zPosition="1" size="600,2" />
+		<ePixmap pixmap="div-h.png" position="0,236" zPosition="1" size="600,2" />
 		<widget source="help" render="Label" position="5,245" size="590,125" font="Regular;21" />
 	</screen>"""
 	

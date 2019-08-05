@@ -100,7 +100,7 @@ class EPGSearchList(EPGList):
 		self.pboxDistance = 80
 
 		def loadPixmap(name):
-			pixmap = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/%s" % name))
+			pixmap = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/%s" % name))
 			if pixmap is None:
 				pixmap = LoadPixmap("/usr/lib/enigma2/python/Plugins/Extensions/EPGSearch/icons/%s" % name)
 			return pixmap

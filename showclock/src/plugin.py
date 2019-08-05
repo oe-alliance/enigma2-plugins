@@ -88,10 +88,10 @@ class ShowClockSetup(Screen, ConfigListScreen): # config
 
 	skin = """
 		<screen name="ShowClock" position="center,center" size="600,290" title="Show Clock Setup" >
-			<ePixmap pixmap="skin_default/buttons/red.png" position="5,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="155,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="305,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/blue.png" position="455,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="5,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="155,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/yellow.png" position="305,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/blue.png" position="455,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			
 			<widget render="Label" source="key_red" position="5,5" size="140,40" zPosition="2" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_green" position="155,5" size="140,40" zPosition="2" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -100,7 +100,7 @@ class ShowClockSetup(Screen, ConfigListScreen): # config
 
 			<widget name="config" position="5,60" size="590,105" scrollbarMode="showOnDemand" />
 
-			<ePixmap pixmap="skin_default/div-h.png" position="0,170" zPosition="1" size="600,2" />
+			<ePixmap pixmap="div-h.png" position="0,170" zPosition="1" size="600,2" />
 			<widget source="help" render="Label" position="5,185" size="590,100" font="Regular;21" /> 
 		</screen>"""
 

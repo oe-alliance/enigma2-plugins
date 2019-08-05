@@ -91,11 +91,11 @@ class AspectRatioSwitchSetup(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="550,500" title="AspectRatioSwitch Setup">
 			<widget name="config" position="10,0" size="530,335" scrollbarMode="showOnDemand" enableWrapAround="1" />
-			<ePixmap pixmap="skin_default/div-h.png" position="0,340" zPosition="1" size="550,2" />
+			<ePixmap pixmap="div-h.png" position="0,340" zPosition="1" size="550,2" />
 			<widget name="label" position="10,355" size="530,100" font="Regular;18" halign="left"  />
-			<ePixmap pixmap="skin_default/buttons/red.png" position="10,460" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="10,460" size="140,40" transparent="1" alphatest="on" />
 			<widget render="Label" source="key_red" position="10,460" size="140,40" transparent="1" halign="center" valign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="180,460" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="180,460" size="140,40" transparent="1" alphatest="on" />
 			<widget render="Label" source="key_green" position="180,460" size="140,40" transparent="1" halign="center" valign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
  		</screen>"""
 

@@ -118,8 +118,8 @@
 		<widget name="green" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/repeatoffgreen.png" position="420,640" zPosition="2" size="40,40" transparent="1" alphatest="blend"/>
 		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/playlistaddyellow.png" position="820,640" zPosition="2" size="40,40" transparent="1" alphatest="blend"/>
 		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/settingsblue.png" position="970,650" zPosition="2" size="40,40" transparent="1" alphatest="blend"/>
-		<ePixmap pixmap="skin_default/buttons/key_info.png" position="1050,660" zPosition="2" size="36,25" transparent="1" alphatest="on"/>
-		<ePixmap pixmap="skin_default/buttons/key_text.png" position="1100,660" zPosition="2" size="36,25" transparent="1" alphatest="on"/>
+		<ePixmap pixmap="buttons/key_info.png" position="1050,660" zPosition="2" size="36,25" transparent="1" alphatest="on"/>
+		<ePixmap pixmap="buttons/key_text.png" position="1100,660" zPosition="2" size="36,25" transparent="1" alphatest="on"/>
 		<widget name="text" zPosition="6" transparent="1" halign="center" position="943,690" size="300,400" font="Regular;15" foregroundColor="#f0f0f0"/>
 		<widget name="coverArt" position="745,184" size="393,224" zPosition="6" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/no_coverArt.png" transparent="1" alphatest="on"/>
 		<widget name="filelist" enableWrapAround="1" transparent="1" position="90,208" zPosition="6" size="475,320" scrollbarMode="showNever"/>
@@ -546,9 +546,9 @@
 		<widget render="Label" source="key_green" position="140,10" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="green" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget render="Label" source="key_yellow" position="280,10" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="yellow" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget render="Label" source="key_blue" position="420,10" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<ePixmap position="0,10" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,10" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,10" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="420,10" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<ePixmap position="0,10" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,10" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,10" zPosition="4" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,10" zPosition="4" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
 	</screen>
 </skin>
