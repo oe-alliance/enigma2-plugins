@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"PO-Revision-Date: 2019-08-15 10:09+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.3\n"
+"Last-Translator: pololoko\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Language: pl\n"
+
+#: ../src/plugin.py:51
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: ../src/plugin.py:25
+msgid "Change Root Password"
+msgstr "Zmień Hasło Roota"
+
+#: ../src/plugin.py:130
+msgid "Change or reset the root password of your dreambox"
+msgstr "Zmień lub zresetuj hasło roota twojego odbiornika"
+
+#: ../src/plugin.py:73
+msgid "Enter new Password"
+msgstr "Wprowadź nowe hasło"
+
+#: ../src/plugin.py:113
+msgid "Enter your password here:"
+msgstr "Wpisz swoje hasło tutaj:"
+
+#: ../src/plugin.py:52
+msgid "Set Password"
+msgstr "Ustaw Hasło"
+
+#: ../src/plugin.py:88
+msgid "Sucessfully changed password for root user to: "
+msgstr "Pomyślnie zmieniono hasło użytkownika root:"
+
+#: ../src/plugin.py:90
+msgid "Unable to change/reset password for root user"
+msgstr "Nie można zmienić / zresetować hasła dla użytkownika root"
+
+#: ../src/plugin.py:53
+msgid "new Random"
+msgstr "Losowe Hasło"
+
+#: ../src/plugin.py:54
+msgid "virt. Keyboard"
+msgstr "wirt. Klawiatura"
