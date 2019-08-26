@@ -1,0 +1,92 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-06 03:02+0100\n"
+"PO-Revision-Date: 2018-12-08 11:45+0300\n"
+"Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
+"Language-Team: mosad - مساعد الجعيد\n"
+"Language: ar_SA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.2\n"
+
+msgid "Add AutoTimer"
+msgstr "أضف المؤقت التلقائي"
+
+msgid "Add Timer"
+msgstr "أضف مؤقت"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Channel Selection"
+msgstr "إختيار القناة"
+
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "لا يمكن قراءة المؤقت التلقائي من القائمة: %s"
+
+msgid "EPG Search"
+msgstr "البحدث في دليل البرامج الإلكتروني"
+
+msgid "EPGSearch"
+msgstr "البحث في دليل البرامج الإلكتروني"
+
+msgid "EPGSearch Setup"
+msgstr "ضبط البحث في دليل البرامج الإلكترونية"
+
+msgid "Enter text to search for"
+msgstr "أدخل النص للبحث عن"
+
+msgid "IMDb Search"
+msgstr "البحث في قاعدة بيانات معلومات الأفلام"
+
+msgid "Import from AutoTimer"
+msgstr "إستيراد من المؤقت التلقائي"
+
+msgid "Import from EPG"
+msgstr "إستيراد من دليل البرامج الإلكترونية"
+
+msgid "Import from Timer"
+msgstr "إستيراد من المؤقت"
+
+msgid "New Search"
+msgstr "بحث جديد"
+
+msgid "No history"
+msgstr "بدون تاريخ"
+
+msgid "OK"
+msgstr "موافق"
+
+msgid "Open selected in IMDb"
+msgstr "فتح الحدث المختار من قاعدة بيانات معلومات الأفلام"
+
+msgid "Save search as AutoTimer"
+msgstr "حفظ البحث حسب المؤقت التلقائي"
+
+msgid "Search"
+msgstr "بحث"
+
+msgid "Search EPG"
+msgstr "البحث في دليل البرامج الإلكترونية"
+
+msgid "Select a timer to search"
+msgstr "إختيار مؤقت البحث"
+
+msgid "Select text to search for"
+msgstr "تحديد النص للبحث عن"
+
+msgid "Setup"
+msgstr "الضبـط"
+
+msgid "Show in plugin browser"
+msgstr "عرض متصفح البلج إنز"
+
+msgid "Show search history"
+msgstr "عرض تاريخ البحث"
+
+msgid "search EPG"
+msgstr "البحث في دليل البرامج الإلكترونية"

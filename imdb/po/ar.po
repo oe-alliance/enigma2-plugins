@@ -1,0 +1,234 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma 2 IMDb Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-02 13:33+0000\n"
+"PO-Revision-Date: 2018-12-05 00:28+0300\n"
+"Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
+"Language-Team: mosad - مساعد الجعيد\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+msgid " as "
+msgstr " مثل "
+
+msgid "* = Restart Required"
+msgstr "* = إعادة التشغيل مطلوبة"
+
+msgid "Ambiguous results"
+msgstr "نتائج غامضة"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Cast: "
+msgstr "الممثلين: "
+
+msgid "Channel Selection"
+msgstr "إختيار القناة"
+
+msgid "Content:"
+msgstr "المحتوى:"
+
+msgid "Could't get event name"
+msgstr "لا يمكن الحصول علي اسم الحدث"
+
+msgid "Details"
+msgstr "تفاصيل"
+
+msgid "Downloading Movie Poster: %s..."
+msgstr "تحميل ملصق الفيلم: %s..."
+
+msgid ""
+"Enable this to be able to access IMDb search setup from within the plugin "
+"browser."
+msgstr ""
+"قم بتمكين هذا لتتمكن من الوصول إلى إعداد بحث قاعدة بيانات معلومات الافلام من "
+"داخل متصفح البلج إنز."
+
+msgid ""
+"Enable this to be able to access IMDb searches from within the movie list."
+msgstr ""
+"قم بتمكين هذا لتتمكن من الوصول إلى عمليات بحث قاعدة بيانات معلومات الأفلام "
+"من داخل قائمة الأفلام."
+
+msgid ""
+"Enable this to be able to access IMDb searches from within the plugin "
+"browser."
+msgstr ""
+"قم بتمكين هذا لتتمكن من الوصول إلى عمليات بحث قاعدة بيانات معلومات الأفلام "
+"من داخل متصفح البلج إنز."
+
+msgid "Enter search"
+msgstr "ادخل البحث"
+
+msgid "Enter text to search for"
+msgstr "ادخل نصا للبحث عنه"
+
+msgid "Exit"
+msgstr "تسجيل الخروج"
+
+msgid "Exit IMDb search"
+msgstr "خروج من بحث قاعدة بيانات معلومات الأفلام"
+
+msgid "Extra Info"
+msgstr "معلومات إضافية"
+
+msgid "IMDb Details parsed"
+msgstr "تحليل تفاصيل قاعدة بيانات معلومات الأفلام"
+
+msgid "IMDb Download completed"
+msgstr "إكتمال تحميل قاعدة بيانات معلومات الأفلام"
+
+msgid "IMDb Download failed"
+msgstr "فشل تحميل قاعدة بيانات معلومات الأفلام"
+
+msgid "IMDb Menu"
+msgstr "قائمة قاعدة بيانات معلومات الأفلام"
+
+msgid "IMDb Plugin"
+msgstr "بلج إنز قاعدة بيانات معلومات الأفلام"
+
+msgid "IMDb Re-Download completed"
+msgstr "إكتمال إعادة تحميل قاعدة بيانات معلومات الأفلام"
+
+msgid "IMDb query failed!"
+msgstr "فشل الاستعلام قاعدة بيانات معلومات الأفلام!"
+
+msgid "IMDb search"
+msgstr "البحث في قاعدة بيانات معلومات الأفلام"
+
+msgid "IMDb setup"
+msgstr "ضبط قاعدة بيانات معلومات الأفلام"
+
+msgid "Lookup"
+msgstr "المشاهدة"
+
+msgid "Menu"
+msgstr "قائمة"
+
+msgid "No IMDb match:"
+msgstr "لا يوجد تطابق في قاعدة بيانات معلومات الأفلام:"
+
+msgid "No cast list found in the database."
+msgstr "لا توجد قائمة موجودة للممثلين في قاعدة البيانات."
+
+msgid "No details found."
+msgstr "لم يتم العثور علي تفاصيل."
+
+msgid "Page down"
+msgstr "يسار الصفحة"
+
+msgid "Page up"
+msgstr "أعلى الصفحة"
+
+msgid "Play Trailer"
+msgstr "تشغيل المقطع المختصر"
+
+msgid "Please select the matching entry"
+msgstr "من فضلك حدد النتائج المتطابقة"
+
+msgid "Production Countries:"
+msgstr "البلدان المنتجة:"
+
+msgid "Re-Query IMDb: %s..."
+msgstr "إعادة الاستعلام عن قاعدة بيانات معلومات الأفلام: %s..."
+
+msgid "Release Date:"
+msgstr "تاريخ الإصدار:"
+
+msgid "Runtime:"
+msgstr "وقت التشغيل:"
+
+msgid "Save current Details as .html for offline use"
+msgstr "حفظ التفاصيل الحالية بتنسيق .html للاستخدام دون اتصال"
+
+msgid "Save current Details as .txt"
+msgstr "حفظ التفاصيل الحالية بصيغه .txt"
+
+msgid "Save current Poster and Details as .txt"
+msgstr "حفظ الملصق الحالي والتفاصيل بصيغه .txt"
+
+msgid "Search Trailer"
+msgstr "بحث عن المقطع المختصر"
+
+msgid "Search for details from the Internet Movie Database"
+msgstr "البحث عن التفاصيل من قاعده بيانات الأفلام على الإنترنت"
+
+msgid "Select from EPG"
+msgstr "حدد من دليل البرامج الإلكترونية"
+
+msgid "Settings for Internet Movie Database searches"
+msgstr "إعدادات لعمليات البحث في قاعدة بيانات الأفلام على الإنترنت"
+
+msgid "Setup"
+msgstr "الضبط"
+
+msgid ""
+"Show episode and year information for cast when available. Takes effect "
+"after the next fetch of show details."
+msgstr ""
+"عرض معلومات الحلقة والسنة ومعلومات الممثلين عندما تكون متوفرة. تؤتي ثمارها "
+"بعد الحصول على تفاصيل العرض القادم."
+
+msgid "Show episode and year information in cast list"
+msgstr "عرض الحلقة و السنة في قائمة الممثلين"
+
+msgid "Show full movie or series name in title menu"
+msgstr "عرض أسم الفلم كامل أو المسلسلات في قائمة العناوين"
+
+msgid "Show in movie list"
+msgstr "عرض في قائمة الأفلام"
+
+msgid "Show list of matched movies an series"
+msgstr "عرض قائمة الأفلام والمسلسلات المتطابقة"
+
+msgid "Show movie and series basic details"
+msgstr "عرض التفاصيل الأساسية للأفلام والمسلسلات"
+
+msgid "Show movie and series extra details"
+msgstr "عرض تفاصيل إضافية للأفلام والمسلسلات"
+
+msgid "Show search in plugin browser"
+msgstr "عرض البحث في متصفح البلج إنز"
+
+msgid "Show setup in plugin browser"
+msgstr "عرض الضبط في متصفح البلج إنز"
+
+msgid ""
+"Show the whole IMDb title information for a movie or series, including, for "
+"example, alternative names and whether it's a series. Takes effect after the "
+"next search of IMDb for a show name."
+msgstr ""
+"عرض معلومات عنوان قاعدة بيانات معلومات الأفلام بالكامل لفيلم أو المسلسل ، "
+"بما في ذلك ، على سبيل المثال ، أسماء بديلة وما إذا كان مسلسل. يأخذ بعد البحث "
+"القادم من قاعدة بيانات معلومات الأفلام أسم المعرض."
+
+msgid "The Internet Movie Database"
+msgstr "قاعده بيانات الفيلم علي الإنترنت"
+
+msgid ""
+"This option allows you add words/phrases for IMDb to ignore when searching. "
+"Please separate the words/phrases with commas."
+msgstr ""
+"يتيح لك هذا الخيار إضافة كلمات / عبارات قاعدة بيانات معلومات الأفلام "
+"لتجاهلها عند البحث. يرجى فصل الكلمات / العبارات باستخدام الفواصل."
+
+msgid "Title Menu"
+msgstr "قائمه العناوين"
+
+msgid "User Rating"
+msgstr "تقييم المستخدم"
+
+msgid "Words / phrases to ignore "
+msgstr "الكلمات/العبارات تجاهلها "
+
+msgid "no user rating yet"
+msgstr "لا تقييم المستخدم حتى الآن"
