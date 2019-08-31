@@ -21,10 +21,10 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 msgid "Change Root Password"
-msgstr "Root Passwort aendern"
+msgstr "Passwort für root ändern"
 
 msgid "Change or reset the root password of your dreambox"
-msgstr "Aendern oder resetten sie das RootPasswort ihrer Receiver"
+msgstr "Ändern oder setzen sie das root Passwort ihrer Receiver zurück"
 
 msgid "Enter new Password"
 msgstr "Neues Passwort eingeben"
@@ -33,16 +33,16 @@ msgid "Enter your password here:"
 msgstr "Neues Passwort hier eingeben:"
 
 msgid "Set Password"
-msgstr "Passwd setzten"
+msgstr "Passwort setzen"
 
 msgid "Sucessfully changed password for root user to: "
-msgstr "Passwort fuer root wurde erfolgreich geaendert auf: "
+msgstr "Passwort für root wurde erfolgreich geändert auf: "
 
 msgid "Unable to change/reset password for root user"
-msgstr "Konnte das Passwort nicht aendern"
+msgstr "Konnte das Passwort nicht ändern"
 
 msgid "new Random"
-msgstr "Zufallspasswd"
+msgstr "Zufallspasswort"
 
 msgid "virt. Keyboard"
-msgstr ""
+msgstr "virt. Tastatur"
