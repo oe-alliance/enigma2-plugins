@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgrefresh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 05:46+0000\n"
-"PO-Revision-Date: 2019-03-08 14:47+0100\n"
+"POT-Creation-Date: 2019-09-04 17:40+0000\n"
+"PO-Revision-Date: 2019-09-06 13:11+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 
 #, python-format
 msgid "%d more services"
@@ -144,6 +144,9 @@ msgstr "Schakel dit in om alle EPG-data te verwijderen alvorens een nieuwe EPG-r
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr "Toon EPG-refresh instellingsmenu in het extensiemenu."
 
+msgid "Enable this to be able to access the EPGRefresh configuration from within the plugin menu."
+msgstr "Schakel dit in om de EPGRefresh-instellingen in applicaties te zien."
+
 msgid "Enable this to be able to start the EPGRefresh from within the extension menu."
 msgstr "Schakel dit in om EPG-refresh vanuit het extensiemenu te kunnen starten."
 
@@ -258,6 +261,9 @@ msgstr "Toon geavanceerde opties"
 
 msgid "Show Setup in extension menu"
 msgstr "Toon instellingen in extensies"
+
+msgid "Show Setup in plugins"
+msgstr "Toon Instellingen in plugins"
 
 msgid "Show last EPGRefresh - Time"
 msgstr "Toon tijdstip laatste EPG verversen"
