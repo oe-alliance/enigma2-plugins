@@ -192,7 +192,7 @@ msgstr "AutoTimer został usunięty"
 
 #: ../src/plugin.py:206
 msgid "AutoTimers"
-msgstr "AutoTimer`y"
+msgstr "AutoTimery"
 
 #: ../src/AutoTimerEditor.py:597 ../src/AutoTimerEditor.py:641
 msgid "Begin of \"after event\" timespan"
