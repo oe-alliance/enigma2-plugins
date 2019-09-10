@@ -144,6 +144,9 @@ msgstr "Ponów montowanie"
 msgid "Mount Manager"
 msgstr "Menadzer Montowania"
 
+msgid "Your network interface %s is not properly configured, so a network scan cannot be done.\nPlease configure the interface and try again."
+msgstr "Interfejs sieciowy %s nie jest poprawnie skonfigurowany, więc nie można wykonać skanowania sieci.\nSkonfiguruj interfejs i spróbuj ponownie."
+
 msgid "Mount Viewer"
 msgstr "Odbiorca Montowania"
 
