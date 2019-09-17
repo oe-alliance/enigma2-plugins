@@ -1,1757 +1,2655 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Enigma2 translation Autotimer\n"
+"Project-Id-Version: Italian translation for EnhancedMovieCenter Enigma2 "
+"plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-23 15:36+0000\n"
-"PO-Revision-Date: 2019-03-04 10:44+0000\n"
+"POT-Creation-Date: 2017-04-02 23:08+0200\n"
+"PO-Revision-Date: 2019-09-17 23:17+0100\n"
 "Last-Translator: William <ghenessior@gmail.com>\n"
-"Language-Team: insanity - alexwilmac <vuplus-community>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-Bookmarks: 106,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit 2.2.3\n"
+"Language-Team: \n"
+"X-Poedit-SearchPath-0: src\n"
 
-#: ../src/AutoTimerList.py:170
-msgid "  Any time"
-msgstr "  Qualsiasi orario"
+msgid " (without counting cover range)"
+msgstr " (senza contare il range delle copertina)"
 
-#: ../src/AutoPoller.py:41 ../src/AutoTimer.py:703
-#, python-format
+msgid " - "
+msgstr "-"
+
 msgid ""
-"%d conflict(s) encountered when trying to add new timers:\n"
+" Deleting remotely recorded and it will display an rec-error dialog on the "
+"other DB."
+msgstr ""
+" Cancellazione reg. remota in corso: sarà visualizzato un messaggio di "
+"errore sul ricevitore remoto."
+
+msgid " all selected video files?"
+msgstr " tutti i file video selezionati?"
+
+msgid ""
+" all selected video files? The currently playing movie is also one of the "
+"selections and its playback will be stopped."
+msgstr ""
+" tutti i file video selezionati? Anche la riproduzione in corso è stata "
+"selezionata e verrà arrestata."
+
+msgid " currently played?"
+msgstr " attualmente in riproduzione?"
+
+msgid " files\n"
+msgstr "File\n"
+
+msgid " permanently"
+msgstr " in modo permanente"
+
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d secondi"
+msgstr[1] "%d secondi"
+
+msgid "%s not removed. Write protect?"
+msgstr "%s non rimosso. E' protetto da scrittura?"
+
+msgid "%s removed."
+msgstr "%s rimossi."
+
+msgid "( # )"
+msgstr "( # )"
+
+msgid "( # / GB )"
+msgstr "( # / GB )"
+
+msgid "( GB )"
+msgstr "( GB )"
+
+msgid "(Un-)Lock Directory"
+msgstr "(S-)Blocca cartella"
+
+msgid "(show optional DVD audio menu)"
+msgstr "(mostra menu audio DVD opzionale)"
+
+msgid "*** Multiselection active ***"
+msgstr "*** Multi selezione attiva ***"
+
+msgid ".../foldername.jpg"
+msgstr ".../nomecartella.jpg"
+
+msgid ".../foldername/folder.jpg"
+msgstr "../nomecartella/cartella.jpg"
+
+msgid ".../foldername/foldername.jpg"
+msgstr ".../nomecartella/nomecartella.jpg"
+
+msgid ""
+"ATTENTION\n"
+"\n"
+"This option will move all finished movies in Movie Home automatically to "
+"Your trashcan at the given time.\n"
+"At next trashcan cleanup all movies will be deleted.\n"
+"\n"
+"Confirm this with the blue key followed by the green key."
+msgstr ""
+"ATTENZIONE\n"
+"\n"
+"Quest'opzione sposterà automaticamente nel cestino all'orario impostato  "
+"tutti i film della cartella Movie predefinita GIÀ VISTI.\n"
+"Alla prossima pulizia del cestino tutti i film saranno eliminati.\n"
+"\n"
+"Conferma premendo il tasto BLU e poi VERDE."
+
+msgid "AUDIO METADATA"
+msgstr "METADATI AUDIO"
+
+msgid "AUTOSTART"
+msgstr "AVVIO AUTOMATICO"
+
+msgid "About"
+msgstr "Informazioni"
+
+msgid "Add directory to E2 Bookmarks"
+msgstr "Aggiungi la cartella ai segnalibri di sistema"
+
+msgid "Add directory to EMC Bookmarks"
+msgstr "Aggiungi la cartella ai segnalibri di EMC"
+
+msgid "Add to Playlist"
+msgstr "Aggiungi alla playlist"
+
+msgid "Add to current Playlist"
+msgstr "Aggiungi alla playlist corrente"
+
+msgid "After file OPs only re-scan affected dirs"
+msgstr "Dopo le operaz. sui file scansiona solo cartelle inerenti"
+
+msgid "Age of finished movies in movie folder (days)"
+msgstr "Permanenza in giorni dei film terminati nella cartella film"
+
+msgid "Album:"
+msgstr "Album:"
+
+msgid "Alpha sort"
+msgstr "Ord.alfabet."
+
+msgid "Alpha sort ascending (AZ)"
+msgstr "Alfabet.CRESC (AZ)"
+
+msgid "Alpha sort ascending with meta (AZM)"
+msgstr "Alfabet.CRESC+meta(AZM)"
+
+msgid "Alpha sort ascending with meta, Date descending (AZMD-)"
+msgstr "Alfab.CRESC+meta,data decresc.(AZMD-)"
+
+msgid "Alpha sort ascending, Date descending (AZD-)"
+msgstr "Alfabet.CRESC,data DECRESC.(AZD-)"
+
+msgid "Alpha sort date newest"
+msgstr "Ordine alfab.,data recente"
+
+msgid "Alpha sort descending (ZA)"
+msgstr "Data decresc.(ZA)"
+
+msgid "Alpha sort descending with meta (ZAM)"
+msgstr "Alfabet.DECRESC.+meta (ZAM)"
+
+msgid "Alpha sort descending with meta, Date ascending (ZAMD+)"
+msgstr "Alfabet.DECRESC.+meta,data cresc.(ZAMD+)"
+
+msgid "Alpha sort descending, Date ascending (ZAD+)"
+msgstr "Alfabet.DECRESC.,data cresc.(ZAD+)"
+
+msgid "Alpha sort meta"
+msgstr "Ord.alfabet. META"
+
+msgid "Alpha sort meta date newest"
+msgstr "Ord.alfabet. META,data recente"
+
+msgid "Always save current Playlist"
+msgstr "Salva sempre la playlist corrente"
+
+msgid "Always save last played progress as marker"
+msgstr "Salva come contrass. la posiz. dell'ultimo file visto"
+
+msgid "An error occured! Internet connection broken?"
+msgstr "Errore: connessione Internet assente?"
+
+msgid "Artist:"
+msgstr "Artista:"
+
+msgid "Automatic timers list cleaning"
+msgstr "Pulizia automatica dell'elenco timer"
+
+msgid "Available plugins menu"
+msgstr "Menu plugin disponibili"
+
+msgid "Black"
+msgstr "Nero"
+
+msgid "Blue button function"
+msgstr "Funzione del tasto BLU"
+
+msgid "Bookmark"
+msgstr "Segnalibro"
+
+msgid "Both"
+msgstr "Entrambi"
+
+msgid "Bouquet buttons behaviour"
+msgstr "Comportamento tasto Bouquet"
+
+msgid "Button disabled"
+msgstr "Tasto disabilitato"
+
+msgid "CSFD"
+msgstr "CSFD"
+
+msgid "CSFD Info"
+msgstr "Informazioni CSFD"
+
+msgid "Can not save "
+msgstr "impossibile salvare"
+
+msgid "Can not save Cover in "
+msgstr "impossibile salvare la copertina in"
+
+msgid "Can not save current Playlist!"
+msgstr "Impossibile salvare la playlist corrente!"
+
+msgid ""
+"Can not write Movie Information File\n"
+"\n"
 "%s"
 msgstr ""
-"Il tentativo di aggiungere nuovi timer ha generato %d conflitti.\n"
+"Impossibile scrivere il file informazioni del film\n"
+"\n"
 "%s"
 
-#: ../src/AutoPoller.py:49 ../src/AutoTimer.py:710
-#, python-format
 msgid ""
-"%d conflict(s) solved with similar timer(s):\n"
-"%s"
+"Can not write Movie Information and Cover File\n"
+"\n"
+"%(info)s\n"
+"%(file)s"
 msgstr ""
-"Conflitti risolti con timer simili: %d\n"
-"%s"
+"Impossibile scrivere file informazioni e copertina del film\n"
+"\n"
+"%(info)s\n"
+"%(file)s"
 
-#: ../src/AutoTimerEditor.py:232 ../src/AutoTimerEditor.py:233 ../src/AutoTimerEditor.py:227
-#: ../src/AutoTimerEditor.py:228
-msgid "%d.%B %Y"
-msgstr "%d.%B %Y"
-
-#: ../src/AutoPoller.py:41 ../src/AutoPoller.py:49 ../src/AutoTimer.py:703
-#: ../src/AutoTimer.py:710
-#, python-format
-msgid "%s: %s at %s"
-msgstr "%s: %s alle %s"
-
-#: ../src/autotimerwizard.xml
-msgid "Abort this Wizard."
-msgstr "Annullare la procedura guidata."
-
-#: ../src/AutoTimerEditor.py:622 ../src/AutoTimerEditor.py:666
-msgid "Activate VPS"
-msgstr "Attivare VPS"
-
-#: ../src/AutoTimerOverview.py:73 ../src/AutoTimerOverview.py:88
-msgid "Add"
-msgstr "Aggiungi"
-
-#: ../src/AutoTimerEditor.py:490
-msgid "Add filters"
-msgstr "Aggiungi filtri"
-
-#: ../src/AutoTimerOverview.py:101 ../src/AutoTimerOverview.py:116
-msgid "Add new AutoTimer"
-msgstr "Aggiungere nuovo AutoTimer"
-
-#: ../src/AutoTimerEditor.py:505
-msgid "Add services"
-msgstr "Agg. canali"
-
-#: ../src/AutoTimerSettings.py:45 ../src/AutoTimerSettings.py:72 ../src/AutoTimerSettings.py:55
-msgid "Add similar timer on conflict"
-msgstr "Aggiungi un timer simile se c’è un conflitto"
-
-#: ../src/AutoTimerSettings.py:46 ../src/AutoTimerSettings.py:73 ../src/AutoTimerSettings.py:56
-msgid "Add timer as disabled on conflict"
-msgstr "Aggiunge il timer disabilitato se c’è un conflitto"
-
-#: ../src/AutoTimerEditor.py:506
-msgid "Add zap timer instead of record timer?"
-msgstr "Aggiungo un timer di zap invece che di registrazione?"
-
-#: ../src/AutoTimerEditor.py:588 ../src/AutoTimerImporter.py:182 ../src/AutoTimerEditor.py:632
-#: ../src/AutoTimerImporter.py:198
-msgid "After event"
-msgstr "Dopo l'evento"
-
-#: ../src/AutoTimerList.py:147
-msgid "All channels"
-msgstr "Tutti i canali"
-
-#: ../src/plugin.py:22
-msgid "All non-repeating timers"
-msgstr "Tutti i timer non ripetuti"
-
-#: ../src/AutoTimerSettings.py:84 ../src/AutoTimerSettings.py:67
-msgid "Always write config"
-msgstr "Scrivi sempre la configurazione"
-
-#: ../src/AutoTimerEditor.py:606 ../src/AutoTimerEditor.py:650
-msgid "Amount of recordings left"
-msgstr "Numero di registrazioni residue"
-
-#: ../src/AutoTimerEditor.py:319 ../src/AutoTimerEditor.py:314
-msgid "Any service/recording"
-msgstr "Ogni canale/registrazione"
-
-#: ../src/plugin.py:204
-msgid "Auto Timer"
-msgstr "Auto Timer"
-
-#: ../src/plugin.py:193
-msgid "Auto Timers"
-msgstr "Timer automatici"
-
-#: ../src/AutoTimer.py:280
-msgid "AutoTimer"
-msgstr "AutoTimer"
-
-#: ../src/AutoTimerOverview.py:275
-msgid "AutoTimer Context Menu"
-msgstr "AutoTimer Menu Contestuale"
-
-#: ../src/AutoTimerEditor.py:411 ../src/AutoTimerEditor.py:432
-msgid "AutoTimer Editor"
-msgstr "Editor degli Autotimer"
-
-#: ../src/faq.xml:2
-msgid "AutoTimer FAQ"
-msgstr "FAQ sugli AutoTimer"
-
-#: ../src/AutoTimerEditor.py:871 ../src/AutoTimerEditor.py:1064
-msgid "AutoTimer Filters"
-msgstr "Filtri Autotimer"
-
-#: ../src/mphelp.xml:1
-msgid "AutoTimer Help"
-msgstr "Aiuto AutoTimer"
-
-#: ../src/AutoTimerEditor.py:1075 ../src/AutoTimerEditor.py:1286
-msgid "AutoTimer Services"
-msgstr "Canali Autotimer"
-
-#: ../src/AutoTimerSettings.py:33 ../src/AutoTimerSettings.py:51 ../src/AutoTimerSettings.py:97
-msgid "AutoTimer Settings"
-msgstr "Configurazione di Autotimer"
-
-#: ../src/AutoTimerOverview.py:116 ../src/AutoTimerOverview.py:132
-msgid "AutoTimer overview"
-msgstr "Riepilogo AutoTimer"
-
-#: ../src/AutoTimerResource.py:353 ../src/AutoTimerResource.py:384
-#: ../src/AutoTimerResource.py:386
-msgid "AutoTimer was added successfully"
-msgstr "AutoTimer aggiunto correttamente"
-
-#: ../src/AutoTimerResource.py:355 ../src/AutoTimerResource.py:386
-#: ../src/AutoTimerResource.py:388
-msgid "AutoTimer was changed successfully"
-msgstr "AutoTimer modificato correttamente"
-
-#: ../src/AutoTimerResource.py:132 ../src/AutoTimerResource.py:154
-#: ../src/AutoTimerResource.py:156
-msgid "AutoTimer was removed"
-msgstr "AutoTimer rimosso"
-
-#: ../src/plugin.py:206
-msgid "AutoTimers"
-msgstr "AutoTimer"
-
-#: ../src/AutoTimerEditor.py:597 ../src/AutoTimerEditor.py:641
-msgid "Begin of \"after event\" timespan"
-msgstr "Inizio Intervallo dopo l'evento"
-
-#: ../src/AutoTimerEditor.py:560 ../src/AutoTimerWizard.py:103 ../src/AutoTimerEditor.py:604
-msgid "Begin of timespan"
-msgstr "Inizio intervallo"
-
-#: ../src/AutoTimerEditor.py:1086 ../src/AutoTimerEditor.py:1297
-msgid "Bouquets"
-msgstr "Bouquet"
-
-#: ../src/AutoTimerEditor.py:512 ../src/AutoTimerEditor.py:551
-msgid "By enabling this events will not be matched if they don't occur on certain dates."
-msgstr ""
-"Abilitando questa funzione verranno considerati solo gli eventi previsti in date determinate."
-
-#: ../src/AutoTimerSettings.py:48 ../src/AutoTimerSettings.py:77 ../src/AutoTimerSettings.py:60
-msgid ""
-"By enabling this you will be notified about similar timers added during automated polling. "
-"There is no intelligence involved, so it might bother you about the same conflict over and "
-"over."
-msgstr ""
-"Abilitando l'opzione si verrà informati della presenza di timer simili aggiunti durante la "
-"ricerca nell’EPG. Non viene applicato alcun controllo in proposito, perciò si potrebbero "
-"ricevere avvisi circa lo stesso conflitto più e più volte."
-
-#: ../src/AutoTimerSettings.py:47 ../src/AutoTimerSettings.py:76 ../src/AutoTimerSettings.py:59
-msgid ""
-"By enabling this you will be notified about timer conflicts found during automated polling. "
-"There is no intelligence involved, so it might bother you about the same conflict over and "
-"over."
-msgstr ""
-"Abilitando l'opzione si verrà informati della presenza di conflitti durante la ricerca "
-"nell’EPG. Non viene applicato alcun controllo in proposito, perciò si potrebbero ricevere "
-"avvisi circa lo stesso conflitto più e più volte."
-
-#: ../src/AutoTimerEditor.py:435 ../src/AutoTimerEditor.py:892 ../src/AutoTimerEditor.py:1095
-#: ../src/AutoTimerImporter.py:45 ../src/AutoTimerImporter.py:119 ../src/AutoTimerPreview.py:59
-#: ../src/AutoTimerSettings.py:68 ../src/AutoTimerEditor.py:456 ../src/AutoTimerEditor.py:1089
-#: ../src/AutoTimerEditor.py:1306 ../src/AutoTimerImporter.py:46 ../src/AutoTimerImporter.py:135
-#: ../src/AutoTimerPreview.py:84 ../src/AutoTimerSettings.py:102 ../src/AutoTimerSettings.py:128
 msgid "Cancel"
 msgstr "Annulla"
 
-#: ../src/AutoTimerEditor.py:515 ../src/AutoTimerEditor.py:554
-msgid "Change default recording offset?"
-msgstr "Cambiare i margini registrazione predefiniti?"
+msgid "Cannot delete the parent directory."
+msgstr "Non è possibile eliminare la cartella superiore."
 
-#: ../src/AutoTimerEditor.py:92 ../src/AutoTimerEditor.py:86
-msgid "Channel Selection"
-msgstr "Selezione canale"
+msgid "Change File/Moviename and/or Description"
+msgstr "Cambia il nome del file (o del film) o la sua descrizione"
 
-#: ../src/AutoTimerEditor.py:1085 ../src/AutoTimerEditor.py:1296
-msgid "Channels"
-msgstr "Canali"
+msgid "Change Folder"
+msgstr "Cambia cartella"
 
-#: ../src/AutoTimerEditor.py:612 ../src/AutoTimerEditor.py:656
-msgid "Check for uniqueness in"
-msgstr "Verificare corrispondenze univoche in"
+msgid "Change Foldername"
+msgstr "Cambia nome cartella"
 
-#: ../src/AutoTimerSettings.py:83 ../src/AutoTimerSettings.py:66
+msgid "Change the filename to save current Playlist:"
+msgstr "Cambia il nome del file per salvare la playlist corrente:"
+
+msgid "Chap."
+msgstr "Cap."
+
+msgid "Chapter"
+msgstr "Capitolo"
+
+msgid "Check for dead links"
+msgstr "Ricerca link mancanti"
+
+msgid "Choose Directory:"
+msgstr "Scegli la cartella:"
+
+msgid "Choose bookmark"
+msgstr "Seleziona il segnalibro"
+
+msgid "Choose directory"
+msgstr "Scegli la cartella"
+
+msgid "Choose operation"
+msgstr "Scegliere operazione"
+
+msgid "Choose plugin"
+msgstr "Scegliere il plugin"
+
+msgid "Choose script"
+msgstr "Seleziona script"
+
+msgid "Close EMC"
+msgstr "Chiudere EMC"
+
+msgid "Close EMC and do power button action"
+msgstr "Chiudi EMC ed usa il pulsante ON/OFF"
+
+msgid "Collection"
+msgstr "Raccolta"
+
+msgid "Configured directories at the top of movielist"
+msgstr "Cartelle personalizzate in cima alla \"Lista film\""
+
+msgid "Content:"
+msgstr "Contenuto:"
+
+msgid "Copy File"
+msgstr "Copia file"
+
+msgid "Copy Files"
+msgstr "Copia i file"
+
+msgid "Copy file(s):"
+msgstr "Copia il/i file:"
+
 msgid ""
-"Check the event id (eit) and remove the timer if there is no corresponding EPG event. Due to "
-"compatibility issues with SerienRecorder and IPRec, only timer created by AutoTimer are "
-"affected."
+"Cover %s exists!\n"
+"\n"
+"Do you want to replace the existing cover?"
 msgstr ""
-"Controlla l’id dell’evento (EIT) e rimuove il timer se non c’è corrispondenza con eventi "
-"nella EPG. A causa di incompatibilità con i plugin “SerienRecorder” e “IPRec”, il controllo "
-"agisce solo su timer creati da AutoTimer."
+"La copertina %s esiste!\n"
+"\n"
+"Vuoi ripristinare la copertina esistente?"
 
-#: ../src/AutoTimerEditor.py:369 ../src/AutoTimerEditor.py:373
-msgid "Choose target folder"
-msgstr "Scegliere cartella destinazione"
+msgid "Cover Search"
+msgstr "Ricerca copertina"
 
-#: ../src/plugin.py:27
-msgid "Classic"
-msgstr "Classico"
+msgid "Cover background"
+msgstr "Sfondo copertina"
 
-#: ../src/AutoTimerOverview.py:259
-msgid "Clone selected timer"
-msgstr "Clona il timer selezionato"
+msgid "Cover delay in ms"
+msgstr "Ritardo copertina in ms"
 
-#: ../src/AutoTimerOverview.py:85
-msgid "Close"
-msgstr "Esci"
+msgid "Cover disabled in EMC-Setup"
+msgstr "copertine disabilitate nelle impostazioni EMC"
 
-#: ../src/AutoTimerOverview.py:86 ../src/AutoTimerOverview.py:101
-msgid "Close and forget changes"
-msgstr "Esci senza salvare le modifiche"
+msgid "Cover is Saved."
+msgstr "Copertina salvata."
 
-#: ../src/AutoTimerOverview.py:99 ../src/AutoTimerOverview.py:114
-msgid "Close and save changes"
-msgstr "Esci e salva le modifiche"
+msgid "Cover search"
+msgstr "Ricerca copertina"
 
-#: ../src/AutoTimerSettings.py:85 ../src/AutoTimerSettings.py:120
-#: ../src/AutoTimerSettings.py:146
-msgid "Configure AutoTimer behavior"
-msgstr "Configura il comportamento di AutoTimer"
-
-#: ../src/mphelp.xml:17
-msgid "Congratulations"
-msgstr "Congratulazioni"
-
-#: ../src/AutoTimerEditor.py:624 ../src/AutoTimerEditor.py:668
-msgid "Control recording completely by service"
-msgstr "Controllo completo registrazioni dal canale"
-
-#: ../src/AutoTimerResource.py:139 ../src/AutoTimerResource.py:141
-msgid "Couldn't load config file!"
-msgstr "Couldn't load config file!"
-
-#: ../src/autotimerwizard.xml
-msgid "Create a new AutoTimer."
-msgstr "Creare un nuovo AutoTimer."
-
-#: ../src/AutoTimerOverview.py:231 ../src/AutoTimerOverview.py:268
-msgid "Create a new timer using the classic editor"
-msgstr "Creare un nuovo timer con l'Editor classico"
-
-#: ../src/AutoTimerOverview.py:233 ../src/AutoTimerOverview.py:270
-msgid "Create a new timer using the wizard"
-msgstr "Creare un nuovo timer con la Config.Guidata"
-
-#: ../src/AutoTimerEditor.py:311 ../src/AutoTimerEditor.py:306
-#, python-format
-msgid "Custom (%s)"
-msgstr "Personalizzata (%s)"
-
-#: ../src/AutoTimerEditor.py:617 ../src/AutoTimerEditor.py:661
-msgid "Custom location"
-msgstr "Destinazione personalizzata"
-
-#: ../src/AutoTimerEditor.py:573 ../src/AutoTimerEditor.py:617
-msgid "Custom offset"
-msgstr "Margine personalizzato"
-
-#: ../src/AutoTimerEditor.py:528 ../src/AutoTimerEditor.py:567
 msgid ""
-"Defines where to search for duplicates (only title, short description or even extended "
-"description)"
+"Cover search with all Files in Subdirectories?\n"
+"\n"
+"This may take a while on huge Disks, or Directories!"
 msgstr ""
-"Definire gli ambiti di ricerca duplicati (solo titolo, descrizione breve o descrizione estesa)"
+"Ricerca copertina con tutti i file nelle sottocartelle?\n"
+"\n"
+"Questa operazione potrebbe richiedere un po' su dischi o cartelle enormi!"
 
-#: ../src/AutoTimerOverview.py:72 ../src/AutoTimerEditor.py:1091 ../src/AutoTimerEditor.py:1308
-#: ../src/AutoTimerOverview.py:87
+msgid "Coversize"
+msgstr "Dimensioni copertina"
+
+msgid "Create Link"
+msgstr "Crea link"
+
+msgid "Create directory"
+msgstr "Crea cartella"
+
+msgid "Create link"
+msgstr "Crea link"
+
+msgid "Creating Search List.."
+msgstr "Sto creando la “Lista di ricerca”"
+
+msgid "Current Playlist saved successfully!"
+msgstr "Playlist corrente salvata con successo!"
+
+msgid "Cursor predictive move after selection"
+msgstr "Movimento cursore predittivo dopo la selezione"
+
+msgid "Custom"
+msgstr "Personalizzato"
+
+msgid "DD.MM. HH:MM"
+msgstr "GG.MM. OO:MM"
+
+msgid "DD.MM.YYYY"
+msgstr "GG.MM.AAAA"
+
+msgid "DD.MM.YYYY HH:MM"
+msgstr "GG.MM.AAAA OO:MM"
+
+msgid "DEBUG"
+msgstr "DEBUG"
+
+msgid "DELAYS"
+msgstr "RITARDI"
+
+msgid "DISPLAY-SETTINGS"
+msgstr "IMPOST. DISPLAY"
+
+msgid "DVD / BLU-RAY / FOLDERS"
+msgstr "CARTELLE DVD/BLURAY"
+
+msgid "Daily cleanup time"
+msgstr "Ora di svuotamento giornaliero"
+
+msgid "Dark green"
+msgstr "Verde scuro"
+
+msgid "Dark grey"
+msgstr "Grigio scuro"
+
+msgid "Dark orange"
+msgstr "Aracione scuro"
+
+msgid "Dark red"
+msgstr "Rosso scuro"
+
+msgid "Date format"
+msgstr "Formato data"
+
+msgid "Date sort"
+msgstr "Ord. per data"
+
+msgid "Date sort ascending (D+)"
+msgstr "Ordinam.per data crescente (D+)"
+
+msgid "Date sort descending (D-)"
+msgstr "Ordinam. per data decrescente (D-)"
+
+msgid "Day"
+msgstr "Giorno"
+
+msgid "Days"
+msgstr "Giorni"
+
+msgid "Debug output file name"
+msgstr "Nome del file di output"
+
+msgid "DeepStandby"
+msgstr "DeepStandby"
+
+msgid "Default"
+msgstr "Predefinito"
+
+msgid ""
+"Default Playlist is not empty!\n"
+"\n"
+"Save default Playlist?"
+msgstr ""
+"La playlist predefinita non è vuota!\n"
+"\n"
+"Salvo la playlist predifinita?"
+
+msgid "Default Playlist name"
+msgstr "Nome playlist predefinita"
+
+msgid "Default Playlist path"
+msgstr "Percorso playlist predefinita"
+
+msgid "Default sort mode"
+msgstr "Ordinam.predefinito"
+
 msgid "Delete"
-msgstr "Cancella"
+msgstr "Elimina"
 
-#: ../src/AutoTimerEditor.py:540 ../src/AutoTimerWizard.py:111 ../src/AutoTimerEditor.py:584
+msgid "Delete All"
+msgstr "Elimina tutto"
+
+msgid "Delete Entry"
+msgstr "Elimina elemento"
+
+msgid "Delete current Playlist"
+msgstr "Elimina la playlist corrente"
+
+msgid "Delete cut file(s)"
+msgstr "Elimina file con punti di taglio (.cuts)"
+
+msgid "Delete error:\n"
+msgstr "Errore in eliminazione:\n"
+
+msgid ""
+"Delete failed because the trashcan directory does not exist. Attempt to "
+"create it now?"
+msgstr "Eliminazione fallita! La cartella Cestino non esiste. Crearla ora?"
+
+msgid "Delete failed!"
+msgstr "Eliminazione fallita!"
+
+msgid "Delete permanently"
+msgstr "Elimina definitivamente"
+
+msgid "Delete validation"
+msgstr "Conferma eliminazione"
+
 msgid "Description"
 msgstr "Descrizione"
 
-#: ../src/AutoTimerOverview.py:189
-#, python-format
-msgid "Do you really want to delete %s?"
-msgstr "Vuoi veramente cancellare %s?"
+msgid "Description field update delay"
+msgstr "Ritardo aggiornamento campo descrizione"
 
-#: ../src/AutoTimerEditor.py:545 ../src/AutoTimerEditor.py:589
-msgid "EPG encoding"
-msgstr "Codifica EPG"
+msgid "Description:"
+msgstr "Descrizione:"
 
-#: ../src/AutoTimerEditor.py:463 ../src/AutoTimerEditor.py:484
-msgid "Edit AutoTimer"
-msgstr "Modifica AutoTimer"
+msgid "Directory"
+msgstr "Cartella"
 
-#: ../src/AutoTimerEditor.py:913 ../src/AutoTimerEditor.py:1114
-msgid "Edit AutoTimer filters"
-msgstr "Mod. filtri AutoTimer"
+msgid "Directory %s already exists!"
+msgstr "La cartella %s esiste già!"
 
-#: ../src/AutoTimerEditor.py:1116 ../src/AutoTimerEditor.py:1327
-msgid "Edit AutoTimer services"
-msgstr "Modificare i canali AutoTimer"
+msgid "Directory back"
+msgstr "Cartella precedente"
 
-#. TRANSLATORS: description of AutoTimer in PluginBrowser
-#: ../src/plugin.py:224 ../src/plugin.py:231 ../src/plugin.py:181 ../src/plugin.py:183
-#: ../src/plugin.py:193
-msgid "Edit Timers and scan for new Events"
-msgstr "Modificare timer e cercare nuovi eventi"
+msgid "Directory forward"
+msgstr "Cartella successiva "
 
-#: ../src/AutoTimerEditor.py:488
-msgid "Edit filters"
-msgstr "Modificare filtri"
+msgid "Directory is not empty! Do you really want to delete it?"
+msgstr "La cartella non è vuota! Vuoi veramente eliminarla ?"
 
-#: ../src/AutoTimerOverview.py:222 ../src/AutoTimerOverview.py:258
-msgid "Edit new timer defaults"
-msgstr "Modificare parametri predefiniti nuovo timer"
+msgid "Directory up"
+msgstr "Cartella superiore"
 
-#: ../src/AutoTimerOverview.py:85 ../src/AutoTimerOverview.py:100
-msgid "Edit selected AutoTimer"
-msgstr "Modifica AutoTimer selezionato"
+msgid "Directory-Cover search"
+msgstr "Ricerca cartella copertine"
 
-#: ../src/AutoTimerEditor.py:503
-msgid "Edit services"
-msgstr "Modifica canali"
+msgid "Disable EMC"
+msgstr "Disabilita EMC"
 
-#: ../src/AutoTimerEditor.py:1138 ../src/AutoTimerEditor.py:1349
-msgid "Editing"
-msgstr "Modificare"
+msgid "Display directory reading text"
+msgstr "Mostrare il testo lettura cartella"
 
-#: ../src/AutoTimerSettings.py:49 ../src/AutoTimerSettings.py:78 ../src/AutoTimerSettings.py:61
-msgid "Editor for new AutoTimers"
-msgstr "Editor nuovi AutoTimer"
-
-#: ../src/AutoTimerEditor.py:957 ../src/AutoTimerEditor.py:1157
-msgid "Enable Filtering"
-msgstr "Abilitare Filtri"
-
-#: ../src/AutoTimerEditor.py:1137 ../src/AutoTimerEditor.py:1348
-msgid "Enable Service Restriction"
-msgstr "Abilitare Restrizione canale"
-
-#: ../src/AutoTimerSettings.py:42 ../src/AutoTimerSettings.py:69 ../src/AutoTimerSettings.py:52
-msgid "Enable this to be able to access the AutoTimer Overview from within the extension menu."
-msgstr ""
-"Abilitando l'opzione, si avrà accesso all’elenco degli AutoTimer attraverso il menu "
-"estensioni."
-
-#: ../src/AutoTimerSettings.py:68 ../src/AutoTimerSettings.py:51
-msgid "Enable this to be able to access the AutoTimer Overview from within the plugin browser."
-msgstr ""
-"Abilitando l'opzione, si avrà accesso all’elenco degli AutoTimer attraverso il pannello dei "
-"plugin."
-
-#: ../src/AutoTimerEditor.py:539 ../src/AutoTimerImporter.py:130 ../src/AutoTimerWizard.py:110
-#: ../src/AutoTimerEditor.py:583 ../src/AutoTimerImporter.py:146
-msgid "Enabled"
-msgstr "Abilitato"
-
-#: ../src/AutoTimerEditor.py:503 ../src/AutoTimerEditor.py:542
 msgid ""
-"Encoding the channel uses for it's EPG data. You only need to change this if you're searching "
-"for special characters like the german umlauts."
+"Do you really want to delete the cut file?\n"
+"If you have selected a directory, all cut files within the folder and its "
+"subfolders will be deleted!"
 msgstr ""
-"Codifica caratteri utilizzata dal canale per i dati EPG. Potrebbe essere necessario "
-"modificarla solo per caratteri speciali (es: dieresi tedesca)."
+"Vuoi veramente eliminare il file cut?\n"
+"Se hai selezionato una cartella, tutti i file cut nella cartella e relative "
+"sottocartelle saranno eliminati!"
 
-#: ../src/AutoTimerEditor.py:598 ../src/AutoTimerEditor.py:642
-msgid "End of \"after event\" timespan"
-msgstr "Fine intervallo dopo l'evento"
+msgid "Do you really want to lock the directory %s and all its subfolders?"
+msgstr "Vuoi veramente bloccare la cartella %s e tutte le sue sottocartelle?"
 
-#: ../src/AutoTimerEditor.py:561 ../src/AutoTimerWizard.py:104 ../src/AutoTimerEditor.py:605
-msgid "End of timespan"
-msgstr "Fine intervallo"
-
-#: ../src/AutoTimerList.py:206
-msgid "Everyday"
-msgstr "Ogni giorno"
-
-#: ../src/AutoTimerImporter.py:146 ../src/AutoTimerImporter.py:162
-msgid "Exact match"
-msgstr "Corrispondenza esatta"
-
-#: ../src/AutoTimerEditor.py:966 ../src/AutoTimerEditor.py:983 ../src/AutoTimerEditor.py:1008
-#: ../src/AutoTimerEditor.py:1171 ../src/AutoTimerEditor.py:1188 ../src/AutoTimerEditor.py:1213
-msgid "Exclude"
-msgstr "Escludere"
-
-#: ../src/AutoTimerEditor.py:592 ../src/AutoTimerEditor.py:636
-msgid "Execute \"after event\" during timespan"
-msgstr "Eseguire \"dopo l'evento\" ma durante l'intervallo"
-
-#: ../src/AutoTimerEditor.py:958 ../src/AutoTimerEditor.py:1159
-msgid "Filter"
-msgstr "Filtra"
-
-#: ../src/autotimerwizard.xml
 msgid ""
-"Filters are another powerful tool when matching events. An AutoTimer can be restricted to "
-"certain Weekdays or only match an event with a text inside eg it's Description.\n"
-"Press BLUE to add a new restriction and YELLOW to remove the selected one."
+"Do you really want to remove your bookmark\n"
+"%s?"
 msgstr ""
-"I filtri rappresentano un potente strumento per la ricerca di eventi. Un Autotimer può essere "
-"circoscritto a determinati giorni della settimana o creato in base a corrispondenze nel testo "
-"della descrizione.\n"
-"BLU >> aggiunge una nuova regola, GIALLO >> la cancella."
+"Vuoi veramente rimuovere i tuoi segnalibri\n"
+"%s?"
 
-#: ../src/AutoTimerEditor.py:513 ../src/AutoTimerEditor.py:552
-msgid "First day to match events. No event that begins before this date will be matched."
-msgstr ""
-"Inizio corrispondenza eventi. Deve essere previsto il loro inizio dopo questa data.matched."
-
-#: ../src/AutoTimerResource.py:43 ../src/AutoTimer.py:717 ../src/AutoTimerResource.py:45
-#, python-format
 msgid ""
-"Found a total of %d matching Events.\n"
-"%d Timer were added and\n"
-"%d modified,\n"
-"%d conflicts encountered,\n"
-"%d unchanged,\n"
-"%d similars added."
+"Do you really want to remove your directory\n"
+"%s?"
 msgstr ""
-"Trovati un totale di %d eventi corrispondenti.\n"
-"Ho aggiunto %d timer\n"
-"e ne ho modificati %d.\n"
-"%d conflitti rilevati,\n"
-"%d invariati,\n"
-"%d simili aggiunti."
+"Vuoi veramente rimuovere le tue cartelle\n"
+"%s?"
 
-#: ../src/AutoTimerOverview.py:228 ../src/AutoTimerOverview.py:265
-msgid "Frequently asked questions"
-msgstr "FAQ (Domande Frequenti)"
-
-#: ../src/faq.xml:3
-msgid "Frequently asked questions about the AutoTimer"
-msgstr "Domande frequenti (FAQ) su AutoTimer"
-
-#: ../src/AutoTimerList.py:196
-msgid "Fri"
-msgstr "Ven"
-
-#: ../src/AutoTimerEditor.py:48 ../src/AutoTimerEditor.py:49
-msgid "Friday"
-msgstr "Venerdì"
-
-#: ../src/mphelp.xml:11
-msgid "Generic setup"
-msgstr "Impostazione generica"
-
-#: ../src/AutoTimerSettings.py:44 ../src/AutoTimerSettings.py:71 ../src/AutoTimerSettings.py:54
-msgid "Guess existing timer based on begin/end"
-msgstr "Calcola i timer esistenti basandoli su inizio/fine"
-
-#: ../src/AutoTimerOverview.py:227 ../src/AutoTimerOverview.py:264
-msgid "Help"
-msgstr "Aiuto"
-
-#: ../src/AutoTimerSettings.py:82 ../src/AutoTimerSettings.py:65
-msgid "If 0, the popup will remain open."
-msgstr "Se 0 il messaggio rimarrà aperto."
-
-#: ../src/AutoTimerSettings.py:45 ../src/AutoTimerSettings.py:72 ../src/AutoTimerSettings.py:55
 msgid ""
-"If a timer conflict occurs, AutoTimer will search outside the timespan for a similar event "
-"and add it."
+"Do you really want to remove your link\n"
+"%s?"
 msgstr ""
-"Se si verifica un conflitto di timer, AutoTImer cercherà un evento al di fuori "
-"dell’intervallo di controllo e lo aggiungerà."
+"Vuoi veramente rimuovere i tuoi collegamenti\n"
+"%s?"
 
-#: ../src/AutoTimerSettings.py:81 ../src/AutoTimerSettings.py:64
-msgid "If enabled, the polling will be skipped if EPGRefresh is currently running."
-msgstr "Se abilitato, la ricerca sarà saltata se vi è già in esecuzione EPGRefresh."
+msgid "Do you want to resume this playback?"
+msgstr "Vuoi riprendere questa riproduzione?"
 
-#: ../src/AutoTimerSettings.py:80 ../src/AutoTimerSettings.py:63
-msgid "If enabled, the polling will be skipped if a recording is in progress."
-msgstr "Se abilitato, la ricerca sarà saltata se è in corso una registrazione."
+msgid "Does not contain any scripts."
+msgstr "Non contiene alcuno script."
 
-#: ../src/AutoTimerSettings.py:71 ../src/AutoTimerSettings.py:54
-#, python-format
+msgid "Don't auto scan size of dirs from emc-noscan.cfg"
+msgstr "Scansione autom. cartelle in emc-noscan.cfg?"
+
+msgid "Download Movie Info"
+msgstr "Scarica info film"
+
+msgid "Download Movie Information"
+msgstr "Scarica le informazioni sul film"
+
+msgid "Download Mutagen-package for audio metadata"
+msgstr "Scarica il pacchetto Mutagen per i metadata audio"
+
+msgid "Download cutlist from Cutlist.at"
+msgstr "Scarica lista tagli da Cutlist.at"
+
+msgid "Download: %s"
+msgstr "Download: %s"
+
+msgid "E2 Bookmark"
+msgstr "Segnalibro di sistema"
+
+msgid "E2 Bookmarks"
+msgstr "Segnalibri di sistema"
+
+msgid "E2 Restart"
+msgstr "Riavvia il sistema"
+
 msgid ""
-"If this is enabled an existing timer will also be considered recording an event if it records "
-"at least 80%s of the it."
-msgstr "Se abilitato, un timer esistente sarà aggiunto se copre almeno l’80%s dell’evento."
+"EMC\n"
+"Zap to Live TV of record"
+msgstr ""
+"EMC\n"
+"Vai alla Live TV della registrazione"
 
-#: ../src/AutoTimerSettings.py:44
-#, python-format
+msgid "EMC Bookmarks"
+msgstr "Segnalibri EMC"
+
+msgid "EMC Cover Selecter"
+msgstr "Selettore copertina EMC"
+
+msgid "EMC Cover search"
+msgstr "Ricerca copertina EMC"
+
+msgid "EMC Cover search setup"
+msgstr "Impostazioni ricerca copertina EMC"
+
+msgid "EMC Filebrowser"
+msgstr "Navigazione cartelle di EMC"
+
+msgid "EMC Playlist - current playlist"
+msgstr "Playlist EMC - playlist corrente"
+
+msgid "EMC Playlist Menu"
+msgstr "Menu playlist EMC"
+
+msgid "EMC Playlist Setup"
+msgstr "Impostazioni playlist EMC"
+
+msgid "EMC Setup"
+msgstr "Impostazioni EMC"
+
+msgid "EMC Trashcan Cleanup failed!"
+msgstr "Pulizia del cestino di EMC fallita!"
+
+msgid "EMC always reload after open"
+msgstr "EMC: ricaricare sempre l'elenco all'avvio"
+
+msgid "EMC output directory"
+msgstr "EMC: cartella di output"
+
+msgid "EMC path access limit"
+msgstr "EMC: limiti accesso percorso"
+
+msgid "EMC re-open list after Movie end"
+msgstr "EMC: riapri elenco registrazioni a fine riproduzione"
+
+msgid "EMC re-open list after STOP-press"
+msgstr "EMC: riapri elenco registrazioni dopo STOP"
+
+msgid "EMC-TMDB Info"
+msgstr "Informazioni EMC-TMDB"
+
 msgid ""
-"If this is enabled an existing timer will also be considered recording an event if it records "
-"at least 80%% of the it."
-msgstr "Se abilitato, un timer esistente sarà aggiunto se copre almeno l’80%% dell’evento."
+"EMC: Skipping Trashcan Cleanup\n"
+"Movie Home Path is equal to or a subfolder of the Trashcan"
+msgstr ""
+"EMC: Salta lo svuotamento cestino\n"
+"Il percorso Home dei Film è il Cestino opp. una sua sottocartella"
 
-#: ../src/AutoTimerSettings.py:75 ../src/AutoTimerSettings.py:58
+msgid "Empty trashcan"
+msgstr "Svuotare il cestino"
+
+msgid "Enable EMC debug output"
+msgstr "EMC: abilitare debug output"
+
+msgid "Enable daily trashcan cleanup"
+msgstr "Abilitare svuotamento giornaliero cestino"
+
+msgid "Enable playback AC3-track first"
+msgstr "Abilita riproduzione prima traccia AC3"
+
+msgid "Enable playback auto-language selection"
+msgstr "Abilita la selezione automatica della lingua"
+
+msgid "Enable playback auto-subtitling"
+msgstr "Abilitare riproduzione con sottotitoli automatici"
+
+msgid "Enable remote recordings"
+msgstr "Abilita registrazioni remote"
+
+msgid "English"
+msgstr "Inglese"
+
+msgid "Enter Name for Playlist"
+msgstr "Inserisci il nome per la playlist"
+
+msgid "Enter name for new directory:"
+msgstr "Inserisci il nome per la nuova cartella:"
+
+msgid "Exist"
+msgstr "Esiste"
+
+msgid "Exist: %s"
+msgstr "Esistente: %s"
+
+msgid "Extra support for language"
+msgstr "Supporto extra per la lingua selezionata"
+
+msgid "File added to current Playlist."
+msgstr "File aggiunto nella playlist corrente."
+
+msgid "File exists in current Playlist."
+msgstr "File esistente nella playlist corrente."
+
+msgid "File not available."
+msgstr "File non disponibile."
+
+msgid "Filename:"
+msgstr "Nome File:"
+
+msgid "Files added to current Playlist."
+msgstr "Files aggiunti nella playlist corrente."
+
 msgid ""
-"If this is selected, the name of the respective AutoTimer will be added as a tag to timers "
-"created by this plugin."
+"Files added to current Playlist:\n"
+"%(add)s\n"
+"\n"
+"Files exists in current Playlist:\n"
+"%(exist)s"
 msgstr ""
-"Se è selezionato, il nome del rispettivo AutoTimer sarà aggiunto come tag (etichetta) ai "
-"timer creati da questo plugin."
+"File aggiunti alla playlist corrente:\n"
+"%s\n"
+"\n"
+"File già esistenti nella playlist corrente:\n"
+"%s"
 
-#: ../src/AutoTimerSettings.py:74 ../src/AutoTimerSettings.py:57
 msgid ""
-"If this is selected, the tag \"AutoTimer\" will be given to timers created by this plugin."
+"Files exists in current Playlist:\n"
+"%s"
 msgstr ""
-"Se è selezionato, l’etichetta “AutoTimer” sarà assegnata ai timer creati da questo plugin."
+"File esistenti nella playlist corrente:\n"
+"%s"
 
-#: ../src/AutoTimerImporter.py:229 ../src/AutoTimerImporter.py:245
-msgid "Import AutoTimer"
-msgstr "Importa AutoTimer"
+msgid "Finished watching percent"
+msgstr "Limite visualizzazione completa (%)"
 
-#: ../src/AutoTimerOverview.py:219 ../src/AutoTimerOverview.py:255
-msgid "Import existing Timer"
-msgstr "Importa timer esistente"
+msgid "Foldername:"
+msgstr "Nome Cartella:"
 
-#: ../src/AutoTimerOverview.py:220 ../src/AutoTimerOverview.py:256
-msgid "Import from EPG"
-msgstr "Importare da EPG"
+msgid "Force standby after auto-restart"
+msgstr "Forzare lo standby dopo il riavvio automatico"
 
-#: ../src/AutoTimerEditor.py:971 ../src/AutoTimerEditor.py:988 ../src/AutoTimerEditor.py:1009
-#: ../src/AutoTimerEditor.py:1176 ../src/AutoTimerEditor.py:1193 ../src/AutoTimerEditor.py:1214
-msgid "Include"
-msgstr "Incluso"
+msgid "Format AVSwitch"
+msgstr "Formato AVSwitch"
 
-#: ../src/AutoTimerSettings.py:74 ../src/AutoTimerSettings.py:57
-msgid "Include \"AutoTimer\" in tags"
-msgstr "Include “AutoTimer” nelle etichette (tag)"
-
-#: ../src/AutoTimerSettings.py:75 ../src/AutoTimerSettings.py:58
-msgid "Include AutoTimer name in tags"
-msgstr "Include il nome dell’AutoTimer nelle etichette"
-
-#: ../src/autotimerwizard.xml
 msgid ""
-"It's possible to restrict an AutoTimer to certain Services or Bouquets or to deny specific "
-"ones.\n"
-"An Event will only match this AutoTimer if it's on a specific and not denied Service (inside "
-"a Bouquet).\n"
-"Press BLUE to add a new restriction and YELLOW to remove the selected one."
+"Found rogue files:\n"
+"\n"
 msgstr ""
-"E' possibile restringere o escludere la ricerca di un AutoTimer a determinati canali o "
-"bouquet.\n"
-"Un evento abbinerà questo AutoTimer solo se si trova su un servizio specifico non escluso  "
-"interno in un bouquet.\n"
-">> BLU per aggiungere una nuova restrizione, >> GIALLO per cancellarla."
+"Trovati file rogue:\n"
+"\n"
 
-#: ../src/AutoTimerEditor.py:571
-msgid "Label Timers with season, episode and title, according to the SeriesPlugin settings."
+msgid "Free: "
+msgstr "Libero"
+
+msgid "French"
+msgstr "Francese"
+
+msgid "GENERAL"
+msgstr "GENERALE"
+
+msgid "Genre:"
+msgstr "Genere:"
+
+msgid "German"
+msgstr "Tedesco"
+
+msgid "Given path %s does not exist. Please change."
+msgstr "Il percorso %s non esiste. Cambiarlo."
+
+msgid "Go to trashcan"
+msgstr "Vai al cestino"
+
+msgid "Green"
+msgstr "Verde"
+
+msgid "Grey"
+msgstr "Grigio"
+
+msgid "HELP_About"
+msgstr "Apre la finestra Informazioni"
+
+msgid "HELP_Advanced Skin options separator"
+msgstr "Impostazioni avanzate Skin"
+
+msgid "HELP_Advanced audio metadata options separator"
+msgstr "Opzioni audio metadata avanzate"
+
+msgid "HELP_Advanced options separator"
+msgstr "Impostazioni Avanzate"
+
+msgid "HELP_After file OPs only re-scan affected dirs"
 msgstr ""
-"Etichetta i timer con Stagione, Episodio e titolo coerentemente alle config. del plugin."
+"Dopo aver eseguito un'operazione sui file (copia, sposta, elimina, etc) "
+"esegue una scansione solo delle cartelle inerenti l'operazione."
 
-#: ../src/AutoTimerEditor.py:671
-msgid "Label series"
-msgstr "Etichetta le serie"
-
-#: ../src/AutoTimerEditor.py:514 ../src/AutoTimerEditor.py:553
-msgid "Last day to match events. Events have to begin before this date to be matched."
+msgid "HELP_Age of finished movies in movie folder (days)"
 msgstr ""
-"Termine corrispondenza eventi. Deve essere previsto il loro inizio prima di questa data."
+"Permanenza (in giorni) delle registrazioni già viste nella cartella \"Home\" "
+"dei film."
 
-#: ../src/AutoTimerImporter.py:200 ../src/AutoTimerImporter.py:216
-msgid "Location"
-msgstr "Destinazione"
+msgid "HELP_Always save last played progress as marker"
+msgstr ""
+"Con questa opzione viene impostato un contrassegno della posizione ogni "
+"volta che si ferma la riproduzione.\n"
+"Quando si riavvia la riproduzione possono essere usati i tasti < > per "
+"saltare a questa posizione."
 
-#: ../src/AutoTimerEditor.py:522 ../src/AutoTimerEditor.py:561
-msgid "Lower bound of timespan."
-msgstr "Limite inferiore intervallo."
+msgid "HELP_Automatic timers list cleaning"
+msgstr ""
+"I timer conclusi saranno rimossi automaticamente dalla lista dei timer."
 
-#: ../src/AutoTimerEditor.py:510 ../src/AutoTimerEditor.py:549
+msgid "HELP_Blue button function"
+msgstr "Selezionare una funzione da assegnare al tasto BLU"
+
+msgid "HELP_Bouquet buttons behaviour"
+msgstr "Selezionare il comportamento del tasto Bouquet"
+
+msgid "HELP_Check for dead links"
+msgstr "Verifica collegamenti inesistenti"
+
+msgid "HELP_Configure in etc\\enigma2\\emc-topdir.cfg"
+msgstr ""
+"Indicare le cartelle personalizzate nel file etc\\enigma2\\emc-topdir.cfg"
+
+msgid "HELP_Cover background"
+msgstr "Sfondo copertina"
+
+msgid "HELP_Cover delay in ms"
+msgstr "Ritardo copertina in ms"
+
+msgid "HELP_Cursor predictive move after selection"
+msgstr ""
+"Dopo la selezione con il pulsanti [VIDEO/PVR] il cursore si sposterà nella "
+"direzione specificata.\n"
+" Con \"SU/GIÙ\" il cursore seguirà l'ultima direzione applicata."
+
+msgid "HELP_Daily auto-start"
+msgstr ""
+"Permette di eseguire giornalmente l'operazione indicata nella fascia di "
+"orario impostate nelle opzioni successive"
+
+msgid "HELP_Daily cleanup time"
+msgstr ""
+"Ora in cui EMC elimina tutti i file nel cestino quando superano il limite di "
+"permanenza."
+
+msgid "HELP_Date format"
+msgstr ""
+"Selezionare il formato della data e dell'ora che verrà visualizzato in coda "
+"ai file."
+
+msgid "HELP_Debug output file name"
+msgstr "Nome del file di registro degli errori."
+
+msgid "HELP_Delete validation"
+msgstr ""
+"Se attivato e il cestino è usato, EMC non chiederà comunque la conferma."
+
+msgid "HELP_Description field update delay"
+msgstr ""
+"Ritardo di visualizzazione delle descrizioni nelle liste film.\n"
+"(Aumenta la velocità di navigazione quando vengono premuti ripetutamente i "
+"tasti SU/GIÙ perché la descrizione viene caricata solo al termine del "
+"ritardo selezionato.)"
+
+msgid "HELP_Disable EMC"
+msgstr ""
+"Disabilita completamente la \"Lista film\" EMC. Alcune funzioni speciali "
+"come [Pulizia lista Timer],[Pulizia cestino] e [Auto riavvio] rimangono "
+"attive in background."
+
+msgid "HELP_Display directory reading text"
+msgstr ""
+"Mostra il messaggio \"Lettura cartella...\" durante il caricamento della "
+"cartella."
+
+msgid "HELP_Don't auto scan size of dirs from emc-noscan.cfg"
+msgstr ""
+"Non eseguire la scansione automatica di cartelle indicate nel file emc-"
+"noscan.cfg"
+
+msgid "HELP_Download Mutagen-package for audio metadata"
+msgstr "Scarica il pacchetto Mutagen per i metadata audio"
+
+msgid "HELP_Download cutlist from Cutlist.at"
+msgstr "Scarica lista tagli da Cutlist.at"
+
+msgid "HELP_Dynamic trashcan"
+msgstr ""
+"Mostra il numero di registrazioni o il relativo spazio utilizzato nel "
+"cestino."
+
+msgid "HELP_EMC always reload after open"
+msgstr ""
+"La cartella viene riletta ad ogni avvio di EMC.\n"
+"(Altrimenti viene letta dalla cache dal secondo avvio.)"
+
+msgid "HELP_EMC output directory"
+msgstr "Cartella HELP_EMC"
+
+msgid "HELP_EMC path access limit"
+msgstr ""
+"Limita il percorso di accesso fuori dalla tua \"Home\" delle registrazioni.\n"
+"Con i tasti [<] e [>] (ai lati del tasto 0) è possibile superare questo "
+"limite."
+
+msgid "HELP_EMC re-open list after Movie end"
+msgstr ""
+"Se la riproduzione raggiunge il termine viene visualizzata la lista Film "
+"EMC.\n"
+"(Altrimenti viene riattivata la Modalità TV)"
+
+msgid "HELP_EMC re-open list after STOP-press"
+msgstr ""
+"Se la riproduzione viene interrotta viene visualizzata la lista Film EMC.\n"
+"(Altrimenti viene riattivata la Modalità TV)"
+
+msgid "HELP_Enable EMC debug output"
+msgstr ""
+"Attiva il debugging di EMC. Il file di registro sarà salvato nella cartella "
+"\"Cartella output EMC”.\n"
+"ATTIVARE SOLO IN CASO DI PROBLEMI !!!"
+
+msgid "HELP_Enable daily trashcan cleanup"
+msgstr ""
+"EMC Elimina i vecchi file nel cestino quando raggiungono il tempo limite di "
+"permanenza impostato nei parametri successivi."
+
+msgid "HELP_Enable playback AC3-track first"
+msgstr "Abilita la selezione prioritaria della traccia audio AC3"
+
+msgid "HELP_Enable playback auto-language selection"
+msgstr "Attiva la selezione automatica del canale audio."
+
+msgid "HELP_Enable playback auto-subtitling"
+msgstr "Attiva la selezione automatica dei sottotitoli."
+
+msgid "HELP_Enable remote recordings"
+msgstr ""
+"Abilita le registrazioni fatte da un altro ricevitore verso un’unità "
+"condivisa.\n"
+"Queste registrazioni avranno un'icona particolare"
+
+msgid "HELP_Extra support for selected language"
+msgstr "Abilita il supporto aggiuntivo per la lingua selezionata"
+
+msgid "HELP_Fallback Cover"
+msgstr "Mostra copertina di riserva"
+
+msgid "HELP_Finished watching percent"
+msgstr ""
+"Specifica dopo quale percentuale di visione un film viene classificato come "
+"\"visto\". \n"
+"La barra di avanzamento cambierà in verde."
+
+msgid "HELP_Force standby after auto-start"
+msgstr ""
+"Mette in standby il decoder dopo che viene eseguito un riavvio automatico a "
+"seguito di una operazione di auto-start. "
+
+msgid "HELP_Hide movies being deleted"
+msgstr ""
+"La registrazione sarà nascosta dalla “Lista film” mentre viene eliminata.\n"
+"(Tuttavia l'eliminazione avverrà in background.)"
+
+msgid "HELP_Hide movies being moved"
+msgstr ""
+"La registrazione sarà nascosta dalla “Lista film” mentre viene spostata.\n"
+"(Tuttavia lo spostamento avverrà in background.)"
+
+msgid "HELP_Horizontal alignment for count / size"
+msgstr ""
+"Selezionare il tipo di allineamento orizzontale da utilizzare per "
+"conteggio / dimensione"
+
+msgid "HELP_Horizontal alignment for date"
+msgstr ""
+"Selezionare il tipo di allineamento orizzontale da utilizzare per le date"
+
+msgid "HELP_How many days files may remain in trashcan"
+msgstr ""
+"Imposta quanti giorni i file possono rimanere nella cestino prima che EMC li "
+"elimini in modo permanente.\n"
+"(se impostato a [0] i file verranno eliminati immediatamente)."
+
+msgid "HELP_Icon shown for initially unknown count / size"
+msgstr ""
+"Indicare se visualizzare inizialmente le icone conteggio/dimensione se "
+"questi sono sconosciuti"
+
+msgid "HELP_Install Mutagen-package for audio metadata"
+msgstr "Installa il pacchetto Mutagen per i metadati audio"
+
+msgid "HELP_Jump to first mark when playing movie"
+msgstr ""
+"Salta automaticamente al primo contrassegno disponibile all'inizio della "
+"registrazione.\n"
+"(Può aiutare a riprendere la visione dov’era stata interrotta.)"
+
+msgid "HELP_Key assignment Separator"
+msgstr "Assegnazione tasti"
+
+msgid "HELP_Key period value (50-900)"
+msgstr ""
+"Tempo in ms di ritardo ripetizione dei tasti quando il pulsante rimane "
+"premuto."
+
+msgid "HELP_Key repeat value (250-900)"
+msgstr "Velocità di ripetizione dei tasti quando un pulsante rimane premuto."
+
+msgid "HELP_Language Separator"
+msgstr "Impostazioni lingue"
+
+msgid "HELP_Latest Recordings directory limit"
+msgstr "Limite cartella “Registrazioni recenti”"
+
+msgid "HELP_Latest Recordings directory use emc-noscan.cfg"
+msgstr ""
+"Usa le impostazioni in “emc-noscan.cfg” per la cartella “Registrazioni "
+"recenti”"
+
+msgid "HELP_Leave Movie with Exit"
+msgstr ""
+"La riproduzione può essere interrotta sia con il pulsante EXIT che con STOP."
+
+msgid "HELP_Limit file operations in dirs from emc-noscan.cfg"
+msgstr ""
+"Limita le operazioni su file nelle cartelle specificate in emc-noscan.cfg"
+
+msgid "HELP_List entries to skip"
+msgstr "Lista elementi da saltare"
+
+msgid "HELP_Listbox is skin able"
+msgstr ""
+"Verranno usate le impostazioni della skin (se disponibili) per la "
+"visualizzazione della \"Lista film\" (solo <widget name=\"list\").\n"
+"Altrimenti saranno applicate le impostazioni di EMC."
+
+msgid "HELP_Load all for non showing titles from .meta files"
+msgstr "Carica tutto per i titoli mancanti dal file .meta"
+
+msgid "HELP_Long Blue button function"
+msgstr "Selezionare una funzione da assegnare al tasto BLU prolungato"
+
+msgid "HELP_Long Red button function"
+msgstr "Selezionare una funzione da assegnare al tasto ROSSO prolungato"
+
+msgid "HELP_Long Yellow button function"
+msgstr "Selezionare una funzione da assegnare al tasto GIALLO prolungato"
+
+msgid "HELP_LongInfo Button"
+msgstr "Funzione per tasto INFO prolungato"
+
+msgid "HELP_Mark new recordings with a star"
+msgstr "Marca le nuove registrazioni con una stella"
+
+msgid "HELP_Minimum file cache limit"
+msgstr "Limite minimo file cache (0=cache tutto)"
+
+msgid "HELP_Move finished movies in trashcan"
+msgstr ""
+"Sposta tutte le registrazioni finite (viste) nel cestino quando raggiungono "
+"il limite di permanenza impostato nella voce successiva."
+
+msgid "HELP_Movie home at start"
+msgstr ""
+"EMC parte sempre dalla cartella “Home\" delle registrazioni.\n"
+"(nelle voci successive è possibile impostare la cartella \"Home\" per le "
+"registrazioni)."
+
+msgid "HELP_Movie home home path"
+msgstr "Imposta il percorso della cartella “Home\" delle registrazioni."
+
+msgid "HELP_Movie preview delay in ms"
+msgstr "Ritardo dell'anteprima dei film in ms"
+
+msgid "HELP_Movie preview offset in seconds"
+msgstr "Durata dell'anteprima dei film in secondi"
+
+msgid "HELP_No resume below 10 seconds"
+msgstr ""
+"Ignora contrassegno di avvio sotto i 10 secondi.\n"
+"Se la riproduzione viene fermata durante i primi 10 secondi, ripartirà "
+"dall’inizio la volta successiva."
+
+msgid "HELP_Own Path to movie picons"
+msgstr "Percorso personalizzato per le picon dei film"
+
+msgid "HELP_Path to movie picons"
+msgstr "Percorso delle picon dei film"
+
+msgid "HELP_Position movie picons"
+msgstr "Posizione picon dei film"
+
+msgid "HELP_Preferred EPG language"
+msgstr "Qui puoi specificare la lingua preferita per l'EPG."
+
+msgid "HELP_Primary playback audio language"
+msgstr ""
+"La prima traccia audio che dovrà essere selezionata prioritariamente, se "
+"disponibile."
+
+msgid "HELP_Primary playback subtitle language"
+msgstr ""
+"La lingua per i sottotitoli che dovrà essere selezionata prioritariamente, "
+"se disponibile."
+
+msgid "HELP_Red button function"
+msgstr "Selezionare una funzione da assegnare al tasto Rosso"
+
+msgid "HELP_Replace special chars in title"
+msgstr "Sostituisci “trattino basso” e punti nel titolo con degli spazi."
+
+msgid "HELP_Resolve links and show real path"
+msgstr "Il percorso dei collegamenti sarà sostituito con quello REALE"
+
+msgid "HELP_Rewind finished movies before playing"
+msgstr ""
+"Se una registrazione con lo stato di \"visto\" viene riavviata, il film "
+"verrà riprodotto dall'inizio."
+
+msgid "HELP_Scan for DVD structures"
+msgstr ""
+"Disattiva l'analisi delle strutture DVD in tutte le cartelle.\n"
+"Questo evita risvegli inaspettati dei dischi di rete."
+
+msgid "HELP_Scan for bluray structures"
+msgstr "Scansiona le strutture bluray"
+
+msgid "HELP_Scan for bluray structures in .iso"
+msgstr "Scansiona le strutture bluray in .iso"
+
+msgid "HELP_Scan for movie structures"
+msgstr "Scansiona le strutture del film"
+
+msgid "HELP_Secondary playback audio language"
+msgstr ""
+"È la traccia audio che dovrà essere selezionata come seconda opzione, se "
+"disponibile."
+
+msgid "HELP_Secondary playback subtitle language"
+msgstr ""
+"È la lingua per i sottotitoli che dovrà essere selezionata come seconda "
+"opzione, se disponibile."
+
+msgid "HELP_Short watching percent"
+msgstr ""
+"Specifica a che percentuale di avanzamento il film viene classificato come "
+"\"in visione\". \n"
+"La barra di avanzamento cambierà in blu."
+
+msgid "HELP_Show Bookmarks in movielist"
+msgstr "Mostra i segnalibri nella “Lista film”"
+
+msgid "HELP_Show Cover"
+msgstr "Mostra la copertina"
+
+msgid "HELP_Show Cut-Nr if exist"
+msgstr ""
+"Se il sistema viene riavviato durante una registrazione, questa riprende "
+"automaticamente con un nuovo file con un numero indice alla fine del nome.\n"
+"Con questa opzione viene aggiunto l'indice al titolo."
+
+msgid "HELP_Show EMC in extensions menu"
+msgstr ""
+"Mostra o nasconde EMC nel menu estensioni.\n"
+"Il menu estensioni è normalmente accessibile tramite il tasto [BLU]."
+
+msgid "HELP_Show EMC in main menu"
+msgstr "Mostra o nasconde EMC nel Menu principale"
+
+msgid "HELP_Show Latest Recordings directory"
+msgstr ""
+"Mostra una cartella virtuale nella \"Home\" delle registrazioni (e nelle sue "
+"sottocartelle) con una lista delle Registrazioni recenti.\n"
+"(Solo una pagina)"
+
+msgid "HELP_Show Movie Format"
+msgstr "L'estensione del file (formato file) sarà aggiunta al titolo."
+
+msgid "HELP_Show Path if no extended description available"
+msgstr "Mostra il percorso se non è disponibile una descrizione estesa"
+
+msgid "HELP_Show VLC directory"
+msgstr ""
+"Mostra o nasconde la cartella VLC se è installato il plugin "
+"VlcPlayerExtended."
+
+msgid "HELP_Show audio metadata"
+msgstr "Mostra i metadati audio"
+
+msgid "HELP_Show audio metadata (needs skin-changes)"
+msgstr "Mostra i metadati audio (la skin richiede modifiche)"
+
+msgid "HELP_Show directories"
+msgstr "Mostra o nasconde le cartelle"
+
+msgid "HELP_Show directories information"
+msgstr ""
+"Mostra il numero delle registrazioni o quanto spazio occupano su disco."
+
+msgid "HELP_Show directories within movielist"
+msgstr "Mostra cartelle contenute all'interno della \"Lista film\""
+
+msgid "HELP_Show directory size in skin"
+msgstr "Mostra la dimensione della cartella nella skin"
+
+msgid "HELP_Show experimental options"
+msgstr "Mostra le opzioni sperimentali"
+
+msgid "HELP_Show link arrow"
+msgstr "Visualizza i link mediante una freccia"
+
+msgid "HELP_Show message if file added to playlist"
+msgstr "Mostra un messaggio quando un file viene aggiunto alla playlist"
+
+msgid "HELP_Show movie icons"
+msgstr "Nell'elenco filmati verrà visualizzata un'icona corrispondente."
+
+msgid "HELP_Show movie picons"
+msgstr "Mostra picon dei film"
+
+msgid "HELP_Show movie preview"
+msgstr "Mostra l’anteprima registrazione"
+
+msgid "HELP_Show movie progress"
+msgstr "Viene visualizzata una barra di avanzamento prima del nome del film."
+
+msgid "HELP_Show plugin config in extensions menu"
+msgstr ""
+"Mostra o nasconde le impostazioni EMC nel menu estensioni.\n"
+"Il menu estensioni è normalmente accessibile tramite il tasto [BLU]."
+
+msgid "HELP_Show real length of running records"
+msgstr "Mostra la lunghezza reale dei filmati che si stanno riproducendo"
+
+msgid "HELP_Show symlinks"
+msgstr "Mostra o nasconde i link simbolici"
+
+msgid "HELP_Show trashcan directory"
+msgstr ""
+"Mostra la cartella del cestino in EMC.\n"
+"(Se è nascosto, puoi comunque accedere al cestino attraverso il Menu EMC)"
+
+msgid "HELP_Sort mode at startup"
+msgstr "Tipo ordinamento all'avvio"
+
+msgid "HELP_Start EMC with"
+msgstr "Imposta il tasto diretto per aprire EMC."
+
+msgid "HELP_Style for original EMC-skin (needs reopen)"
+msgstr ""
+"Stile per la skin EMC originale ***ATTENZIONE: serve un riavvio della GUI"
+
+msgid "HELP_Tertiary playback audio language"
+msgstr ""
+"Traccia audio che dovrà essere selezionata come terza opzione, se "
+"disponibile."
+
+msgid "HELP_Tertiary playback subtitle language"
+msgstr ""
+"Lingua per i sottotitoli che dovrà essere selezionata come terza opzione, se "
+"disponibile."
+
+msgid "HELP_Text shown for initially unknown count and size"
+msgstr ""
+"Indicare il testo visualizzato se conteggio e dimensione sono inizialmente "
+"sconosciuti"
+
+msgid "HELP_Text shown for initially unknown directory size"
+msgstr ""
+"Indicare il testo visualizzato se la dimensione di una cartella è "
+"inizialmente sconosciuta."
+
+msgid "HELP_Text shown for initially unknown file count"
+msgstr ""
+"Indicare il testo visualizzato se il conteggio dei file è inizialmente "
+"sconosciuto"
+
+msgid "HELP_Trashcan enable"
+msgstr ""
+"Abilita la funzionalità Cestino. All’eliminazione, tutti i file vengono "
+"spostati nella cartella del cestino."
+
+msgid "HELP_Trashcan path"
+msgstr ""
+"Imposta il percorso del Cestino.\n"
+"Selezionando [Elimina] dal menu, le registrazioni verranno spostate nel "
+"cestino (se attivo) invece di essere eliminate immediatamente."
+
+msgid "HELP_Try to load extra title and more from .meta files"
+msgstr "Prova a ottenere informazioni aggiuntive dai file .meta"
+
+msgid "HELP_Try to load titles from .eit files"
+msgstr ""
+"I titoli saranno caricati dai file .eit se disponibili.\n"
+"Altrimenti il titolo sarà ricavato dal nome del file.\n"
+"(se .meta ed .eit sono entrambi attivi, il .eit verrà letto prima.)"
+
+msgid "HELP_Try to load titles from .meta files"
+msgstr ""
+"I titoli saranno caricati dai file .meta, se disponibili.\n"
+"Altrimenti il titolo sarà ricavato dal nome del file.\n"
+"(Se .meta e .eit sono entrambi attivi, il .meta verrà letto prima.)"
+
+msgid "HELP_Upgrade/Download Mutagen v1.28(experimental)"
+msgstr "Aggiorna/scarica Mutagen v1.28 (sperimentale)"
+
+msgid "HELP_Use cache for files and directories"
+msgstr "Usa la cache per file e cartelle"
+
+msgid "HELP_Use original EMC-skin (needs reopen)"
+msgstr ""
+"Usa la skin integrata di EMC e non quella della skin dell'immagine corrente."
+
+msgid "HELP_Wake device when entering dir from emc-noscan.cfg"
+msgstr ""
+"Riattiva il dispositivo se sfogli una cartella indicata nel file emc-noscan."
+"cfg"
+
+msgid "HELP_Yellow button function"
+msgstr "Selezionare una funzione da assegnare al tasto Giallo"
+
+msgid "HELP_Zap to channel after record EOF"
+msgstr ""
+"Se il player raggiunge la fine di una registrazione a causa dell'avanzamento "
+"veloce o di un salto avanti, chiude EMC e si sposta direttamente sul canale "
+"live della registrazione."
+
+msgid "HELP_auto-start window begin"
+msgstr "Orario minimo di partenza dell'operazione di auto-start"
+
+msgid "HELP_auto-start window end"
+msgstr "Orario massimo in cui eseguire l'operazione di auto-start"
+
+msgid "HELP_cfghide_enable"
+msgstr ""
+"Nascondi file e cartelle indicate in '/etc/enigma2/emc-hide.cfg'.\n"
+"Il cambio di questa impostazione richiede il riavvio del sistema!"
+
+msgid "HELP_cfgscan_suppress"
+msgstr ""
+"Non analizzare le strutture DVD nelle sottocartelle per i percorsi indicati "
+"in '/etc/enigma2/emc-noscan.cfg'. Questo evita risvegli inaspettati di "
+"dischi di rete.\n"
+"Il cambio di questa impostazione richiede un riavvio del sistema!"
+
+msgid "HELP_hide_MiniTV"
+msgstr "Nascondi MiniTV"
+
+msgid "HELP_hide_MiniTV cover"
+msgstr "Nasconde la MiniTV se è disponibile la copertina del film"
+
+msgid "HELP_hide_MiniTV_method"
+msgstr "Metodo per nascondere la MiniTV"
+
+msgid "HELP_scan_linked"
+msgstr ""
+"Disabilita l'analisi per le strutture DVD in symlink che si riferiscono a "
+"sottocartelle.\n"
+"Questo evita risvegli inaspettati di dischi di rete."
+
+msgid "HELP_separator_Trashcan settings"
+msgstr "Impostazioni per il cestino"
+
+msgid "HELP_separator_hide&performance"
+msgstr "Impostazioni per nascondere file (o cartelle) e prestazioni."
+
+msgid "Hide Cover"
+msgstr "Nascondi la copertina"
+
+msgid "Hide MiniTV"
+msgstr "Nascondi la MiniTV"
+
+msgid "Hide MiniTV if Cover is shown"
+msgstr "Nascondi la MiniTV se c'è la copertina"
+
+msgid "Hide configured entries"
+msgstr "Nascondi gli elementi configurati"
+
+msgid "Hide movies being deleted"
+msgstr "Nascondi le registrazioni in eliminazione"
+
+msgid "Hide movies being moved"
+msgstr "Nascondi le registrazioni in spostamento"
+
+msgid "HomeEnd"
+msgstr "InizioFine"
+
+msgid "Horizontal alignment for count / size"
+msgstr "Allineamento orizzont. per num./dimens."
+
+msgid "Horizontal alignment for date"
+msgstr "Allineamento orizzontale per data"
+
+msgid "How many days files may remain in trashcan"
+msgstr "Permanenza file nel cestino (giorni)"
+
 msgid ""
-"Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into "
-"account!"
+"How to copy files:\n"
+"Select some movies with the VIDEO-button, move the cursor on top of the "
+"destination directory and press yellow long."
 msgstr ""
-"Limite inferiore intervallo. Non verrà confrontato quel che è prima di questo limite. I "
-"margini registrazione non saranno considerati!"
+"Come copiare file:\n"
+"Seleziona alcuni film con il tasto VIDEO, sposta il cursore sulla cartella "
+"di destinazione e premi giallo prolungato."
 
-#: ../src/AutoTimerImporter.py:157 ../src/AutoTimerImporter.py:173
-#, python-format
-msgid "Match Timespan: %02d:%02d - %02d:%02d"
-msgstr "Intervallo di confronto: %02d:%02d - %02d:%02d"
-
-#: ../src/AutoTimerEditor.py:541 ../src/AutoTimerWizard.py:112 ../src/AutoTimerEditor.py:585
-msgid "Match title"
-msgstr "Stringa di confronto"
-
-#: ../src/AutoTimerImporter.py:139 ../src/AutoTimerImporter.py:155
-#, python-format
-msgid "Match title: %s"
-msgstr "Stringa di confronto: %s"
-
-#: ../src/AutoTimerEditor.py:586 ../src/AutoTimerEditor.py:630
-msgid "Maximum duration (in m)"
-msgstr "Durata massima (min.)"
-
-#: ../src/AutoTimerEditor.py:519 ../src/AutoTimerEditor.py:558
 msgid ""
-"Maximum event duration to match. If an event is longer than this amount of time (without "
-"offset) it won't be matched."
+"How to move files:\n"
+"Select some movies with the VIDEO-button, move the cursor on top of the "
+"destination directory and press yellow."
 msgstr ""
-"Durata massima di un evento da confrontare. Se la durata di un evento è superiore a quanto "
-"indicato (margini esclusi) non sarà accettato."
+"Come spostare file:\n"
+"Seleziona alcuni film con il tasto VIDEO, sposta il cursore sulla cartella "
+"di destinazione e premi giallo."
 
-#: ../src/AutoTimerOverview.py:186 ../src/AutoTimerOverview.py:202
-#, python-format
+msgid "IMDBSearch / EMC-TMDBInfo / TMDBInfo / TMBDInfo / CSFDInfo"
+msgstr "IMDBSearch / EMC-TMDBInfo / TMDBInfo / TMBDInfo / CSFDInfo"
+
+msgid "IMDb"
+msgstr "IMDb"
+
+msgid "IMDb Search"
+msgstr "Ricerca in IMDb"
+
+msgid "Icon shown for initially unknown count / size"
+msgstr "Icona per num./dimensioni inizialm. ignoti"
+
+msgid "Information"
+msgstr "Informazioni"
+
+msgid "Install Mutagen-package for audio metadata"
+msgstr "Installa il pacchetto Mutagen per i metadati audio"
+
+msgid "Installing Mutagen-package"
+msgstr "Installo il pacchetto Mutagen"
+
+msgid "Italian"
+msgstr "Italiano"
+
+msgid "Jump to first mark when playing movie"
+msgstr "Vai al primo contrassegno quando riproduci film"
+
+msgid "KEYMAPPING"
+msgstr "MAPPATURA DEI TASTI"
+
+msgid "Key period value (50-900)"
+msgstr "Ritardo ripetizione tasti (50-900)"
+
+msgid "Key repeat value (250-900)"
+msgstr "Velocità  ripetizione tasti (250-900)"
+
+msgid "LANGUAGE"
+msgstr "LINGUAGGIO"
+
+msgid "Language:"
+msgstr "Lingua:"
+
+msgid "Last played movie/playlist not available..."
+msgstr "Ultima registrazione/playlist non disponibile..."
+
+msgid "Latest"
+msgstr "Recenti"
+
+msgid "Latest Recordings"
+msgstr "Registrazioni recenti"
+
+msgid "Latest Recordings directory limit"
+msgstr "Limite cartella “Registrazioni recenti”"
+
+msgid "Latest Recordings directory use emc-noscan.cfg"
+msgstr "Usa emc-noscan.cfg per la cartella “Registrazioni recenti”"
+
+msgid "Leave Movie with Exit"
+msgstr "Abbandonare la riproduzione con EXIT"
+
+msgid "Light green"
+msgstr "Verde chiaro"
+
+msgid "Light grey"
+msgstr "Grigio chiaro"
+
+msgid "Light orange"
+msgstr "Arancione chiaro"
+
+msgid "Light red"
+msgstr "Rosa"
+
+msgid "Limit file operations in dirs from emc-noscan.cfg"
+msgstr "Limita operaz. su file in cartelle di emc-noscan.cfg"
+
+msgid "Link"
+msgstr "Link"
+
+msgid "List entries to skip"
+msgstr "Lista elementi da saltare"
+
+msgid "Listbox is skin able"
+msgstr "Usa skin per la listbox"
+
+msgid "Load Genre:"
+msgstr "Carica Genere:"
+
+msgid "Load Production Countries:"
+msgstr "Carica Paese di produzione:"
+
+msgid "Load Release Date:"
+msgstr "Carica Data di uscita:"
+
+msgid "Load Runtime:"
+msgstr "Carica Durata:"
+
+msgid "Load Vote:"
+msgstr "Carica Valutazione:"
+
+msgid "Load all for non showing titles from .meta files"
+msgstr "Se manca il titolo, carica tutto dal file .meta"
+
+msgid "Load default settings will overwrite all settings, really load them?"
+msgstr ""
+"Il caricamento delle impostazioni predefinite sovrascriverà tutte le "
+"impostazioni: confermi ?"
+
 msgid ""
-"Message\n"
-"Do you really want to delete %s?"
+"Locate rogue files and remove them? (permanently if no trashcan available, "
+"may take a minute or so)"
 msgstr ""
-"Messaggio:\n"
-"Vuoi davvero cancellare %s?"
+"Individuare file rogue e rimuoverli? (definitivamente se il cestino non è "
+"attivo: occorrerà circa un minuto)"
 
-#: ../src/AutoTimerSettings.py:43 ../src/AutoTimerSettings.py:70 ../src/AutoTimerSettings.py:53
-msgid "Modify existing timers"
-msgstr "Modifica timer esistenti"
+msgid "Location:"
+msgstr "Posizione:"
 
-#: ../src/AutoTimerList.py:192
-msgid "Mon"
-msgstr "LUN"
+msgid "Long Blue button function"
+msgstr "Funzione del tasto Blu prolungato"
 
-#: ../src/AutoTimerEditor.py:44 ../src/AutoTimerEditor.py:45
-msgid "Monday"
-msgstr "Lunedì"
+msgid "Long Red button function"
+msgstr "Funzione del tasto Rosso prolungato"
 
-#: ../src/AutoTimerEditor.py:309 ../src/AutoTimerEditor.py:304
-msgid "Monthly"
-msgstr "Mensile"
+msgid "Long Yellow button function"
+msgstr "Funzione del tasto Giallo prolungato"
 
-#: ../src/AutoTimerEditor.py:309 ../src/AutoTimerEditor.py:304
-msgid "Never"
-msgstr "Mai"
+msgid "LongInfo Button"
+msgstr "Tasto Info prolungato"
 
-#: ../src/AutoTimerEditor.py:895 ../src/AutoTimerEditor.py:1098 ../src/AutoTimerEditor.py:1092
-#: ../src/AutoTimerEditor.py:1309
-msgid "New"
-msgstr "Nuovo"
+msgid "MM/DD HH:MM"
+msgstr "MM/GG OO:MM"
 
-#: ../src/AutoTimerEditor.py:316 ../src/autotimerwizard.xml ../src/AutoTimerEditor.py:311
-#: ../src/AutoTimerOverview.py:205
+msgid "Manage Cover"
+msgstr "Gestisci copertina"
+
+msgid "Mark all movies"
+msgstr "Marca tutti i filmati"
+
+msgid "Mark new recordings with a star"
+msgstr "Marca le nuove registrazioni con una stella"
+
+msgid "Method of hiding MiniTV"
+msgstr "Metodo per nascondere la MiniTV"
+
+msgid "Minimum file cache limit (0=cache everything)"
+msgstr "Limite minimo cache file (0=tutto in cache)"
+
+msgid "Minutes"
+msgstr "Minuti"
+
+msgid "Month"
+msgstr "Mese"
+
+msgid "Months"
+msgstr "Mesi"
+
+msgid "Move Cover to:"
+msgstr "Sposta la copertina in:"
+
+msgid "Move Directory:"
+msgstr "Sposta la cartella:"
+
+msgid "Move File"
+msgstr "Sposta il file"
+
+msgid "Move Files"
+msgstr "Sposta i file"
+
+msgid "Move cursor down"
+msgstr "Cursore GIÙ"
+
+msgid "Move cursor page down"
+msgstr "Cursore a pag. successiva"
+
+msgid "Move cursor page up"
+msgstr "Cursore a pag. precedente"
+
+msgid ""
+"Move cursor to the end / Move cursor x entries down / Switch Folders in "
+"Movie Home (down)"
+msgstr ""
+"Sposta il cursore alla fine / Sposta il cursore alla voce succ.. / Passa "
+"alla cartella Home dei film (GIÙ)"
+
+msgid ""
+"Move cursor to the top / Move cursor x entries up / Switch Folders in Movie "
+"Home (up)"
+msgstr ""
+"Sposta il cursore in cima / Sposta il cursore alla voce preced. / Passa alla "
+"cartella Home dei film (su)"
+
+msgid "Move cursor up"
+msgstr "Cursore su"
+
+msgid "Move file(s):"
+msgstr "Sposta il/i file in:"
+
+msgid "Move finished movies in trashcan"
+msgstr "Sposta i film terminati nel cestino"
+
+msgid "Movie Color"
+msgstr "Colore film"
+
+msgid ""
+"Movie Cover downloaded successfully!\n"
+"\n"
+"Can not write Movie Information File\n"
+"\n"
+"%s"
+msgstr ""
+"copertina del film scaricata!\n"
+"\n"
+"Impossibile scrivere il file delle informazioni sul film\n"
+"\n"
+"%s"
+
+msgid "Movie Info"
+msgstr "Informazioni film"
+
+msgid "Movie Information Download (TMDb)"
+msgstr "Scarica Informazioni film (TMDb)"
+
+msgid "Movie Information Download Setup"
+msgstr "Impostazioni download Informazioni film"
+
+msgid "Movie Information Preview"
+msgstr "Anteprima Informazioni film"
+
+msgid "Movie Information Preview for:"
+msgstr "Anteprima Informazioni film per:"
+
+msgid "Movie Information TMDb"
+msgstr "Informazioni film TMDb"
+
+msgid "Movie Information and Cover downloaded successfully!"
+msgstr "Informazioni film e copertina scaricati con successo!"
+
+msgid "Movie Information downloaded successfully!"
+msgstr "Informazioni film scaricate con successo!"
+
+msgid ""
+"Movie Information downloaded successfully!\n"
+"\n"
+"Can not write Movie Cover File\n"
+"\n"
+"%s"
+msgstr ""
+"Informazioni film scaricate!\n"
+"\n"
+"Impossibile salvare il file della copertina del film\n"
+"\n"
+"%s"
+
+msgid "Movie Selection Menu"
+msgstr "Menu selezione registrazioni"
+
+msgid "Movie home"
+msgstr "“Home” registraz."
+
+msgid "Movie home at start"
+msgstr "Avvio dalla cartella “Home\" delle registrazioni"
+
+msgid "Movie home home path"
+msgstr "Percorso cartella “Home\" registrazioni"
+
+msgid "Movie information"
+msgstr "Informazione film"
+
+msgid "Movie preview delay in ms"
+msgstr "Ritardo dell'anteprima dei film in ms"
+
+msgid "Movies"
+msgstr "Film"
+
+msgid "Movietitle:"
+msgstr "Titolo film:"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "Next auto-start in "
+msgstr "Prossimo auto-avvio in"
+
 msgid "No"
 msgstr "No"
 
-#: ../src/autotimerwizard.xml
-msgid "No, remove them."
-msgstr "No: rimuoverli."
+msgid "No Cover: %s"
+msgstr "Nessuna copertina: %s"
 
-#: ../src/AutoTimerEditor.py:350 ../src/AutoTimerEditor.py:377 ../src/plugin.py:20
-#: ../src/AutoTimerEditor.py:345 ../src/AutoTimerEditor.py:381
-msgid "None"
-msgstr "Nessuna"
+msgid "No DVD-Player found!"
+msgstr "Player DVD non trovato!"
 
-#: ../src/AutoTimerEditor.py:570 ../src/AutoTimerEditor.py:614
-msgid "Not after"
-msgstr "Non oltre"
+msgid "No Movies found!"
+msgstr "Nessun film trovato!"
 
-#: ../src/AutoTimerEditor.py:569 ../src/AutoTimerEditor.py:613
-msgid "Not before"
-msgstr "Non prima"
+msgid "No functionality set..."
+msgstr "Nessuna funzione associata..."
 
-#: ../src/AutoTimerEditor.py:525 ../src/AutoTimerEditor.py:564
-msgid "Number of scheduled recordings left."
-msgstr "Registrazioni programmate ancora da effettuare."
+msgid "No limit"
+msgstr "Nessun limite"
 
-#: ../src/AutoTimerEditor.py:436 ../src/AutoTimerEditor.py:1096 ../src/AutoTimerImporter.py:46
-#: ../src/AutoTimerImporter.py:120 ../src/AutoTimerSettings.py:67 ../src/AutoTimerEditor.py:457
-#: ../src/AutoTimerEditor.py:1307 ../src/AutoTimerImporter.py:47 ../src/AutoTimerImporter.py:136
-#: ../src/AutoTimerSettings.py:101 ../src/AutoTimerSettings.py:127
+msgid "No override"
+msgstr "Non configurare"
+
+msgid "No resume below 10 seconds"
+msgstr "Non riprendere sotto 10 secondi"
+
+msgid "No rogue files found."
+msgstr "Nessun file rogue individuato."
+
+msgid "No script operation for VLC streams."
+msgstr "Nessuna operazione script per gli stream VLC."
+
+msgid "Not all timers have been stopped. Modify them with the timer editor."
+msgstr ""
+"Non sono stati arrestati tutti i timer. Modificali con la gestione Timer"
+
+msgid "Not stopping any repeating timers. Modify them with the timer editor."
+msgstr "Non arrestare i timer ripetuti. Modificarli attraverso l'editor timer."
+
+msgid "Nothing was found !"
+msgstr "Non è stato trovato nulla!"
+
 msgid "OK"
-msgstr "Ok"
+msgstr "OK"
 
-#: ../src/AutoTimerEditor.py:579 ../src/AutoTimerEditor.py:623
-msgid "Offset after recording (in m)"
-msgstr "Margine fine registrazione (min.)"
+msgid "OSError - please reload list (EMC menu)"
+msgstr "Errore OS - per favore ricarica la lista (Menu EMC)"
 
-#: ../src/AutoTimerEditor.py:578 ../src/AutoTimerEditor.py:622
-msgid "Offset before recording (in m)"
-msgstr "Margine inizio registrazione (min.)"
+msgid "OTHER"
+msgstr "ALTRO"
 
-#: ../src/AutoTimerEditor.py:318 ../src/AutoTimerEditor.py:313
-msgid "On any service"
-msgstr "Su tutti i canali"
+msgid "Off"
+msgstr "Spento"
 
-#: ../src/AutoTimerEditor.py:317 ../src/AutoTimerEditor.py:312
-msgid "On same service"
-msgstr "Sullo stesso canale"
+msgid "Open"
+msgstr "Apri"
 
-#: ../src/plugin.py:21
-msgid "Only AutoTimers created during this session"
-msgstr "Solo AutoTimer creati durante questa sessione"
+msgid "Open E2 Bookmark path"
+msgstr "Apri percorso segnalibro di Sistema"
 
-#: ../src/AutoTimerSettings.py:41 ../src/AutoTimerSettings.py:67 ../src/AutoTimerSettings.py:50
-msgid "Only add timer for next x days"
-msgstr "Aggiungere timer solo per i prossimi n giorni"
+msgid "Open E2 bookmarks"
+msgstr "Apri segnalibri di Sistema"
 
-#: ../src/AutoTimerEditor.py:554 ../src/AutoTimerWizard.py:97 ../src/AutoTimerEditor.py:598
-msgid "Only match during timespan"
-msgstr "Confrontare solo nell'intervallo"
+msgid "Open EMC Bookmark path"
+msgstr "Apri percorso segnalibro EMC"
 
-#: ../src/AutoTimerImporter.py:173 ../src/AutoTimerImporter.py:189
-#, python-format
-msgid "Only on Service: %s"
-msgstr "Solo sul canale: %s"
+msgid "Open Timer List"
+msgstr "Apri la Lista Timer"
 
-#: ../src/AutoTimerImporter.py:164 ../src/AutoTimerImporter.py:180
-#, python-format
-msgid "Only on Weekday: %s"
-msgstr "Solo nei giorni feriali: %s"
+msgid "Open menu"
+msgstr "Aprire menu"
 
-#: ../src/AutoTimerSettings.py:58 ../src/AutoTimerSettings.py:40
-msgid "Only poll while in standby"
-msgstr "Ricerca eventi solo in modalità standby"
+msgid "Orange"
+msgstr "Arancione"
 
-#: ../src/AutoTimerOverview.py:92 ../src/AutoTimerOverview.py:107
-msgid "Open Context Menu"
-msgstr "Aprire Menu contestuale"
+msgid "Own Path to movie picons"
+msgstr "Percorso pesonalizzato per le picon dei film"
 
-#: ../src/AutoTimerEditor.py:553
-msgid "Override found with alternative service"
-msgstr "Sovrascrivi quello trovato con il canale alternativo"
+msgid "Path to movie picons"
+msgstr "Percorso delle picon dei film"
 
-#: ../src/AutoTimerImporter.py:316 ../src/AutoTimerImporter.py:332
-msgid "Please provide a Text to match"
-msgstr "Introdurre una stringa di confronto"
+msgid "Percent (%)"
+msgstr "Percentuale (%)"
 
-#: ../src/AutoTimerSettings.py:40 ../src/AutoTimerSettings.py:31
-msgid "Poll Interval (in h)"
-msgstr "Intervallo fra due ricerche di eventi (in ore)"
+msgid "Performance"
+msgstr "Prestazione"
 
-#: ../src/AutoTimerSettings.py:64 ../src/AutoTimerSettings.py:35
-msgid "Poll Interval (in mins)"
-msgstr "Intervallo tra due ricerche di eventi (in minuti)"
+msgid "Permanently delete all files in trashcan?"
+msgstr "Rimuovere definitivamente i file nel cestino?"
 
-#: ../src/AutoTimerSettings.py:39 ../src/AutoTimerSettings.py:57
-msgid "Poll automatically"
-msgstr "Ricerca automatica"
+msgid "Play All"
+msgstr "Riprodurre tutti"
 
-#: ../src/AutoTimerSettings.py:82 ../src/AutoTimerSettings.py:65
-msgid "Popup timeout in seconds"
-msgstr "Durata del messaggio in secondi"
+msgid "Play All starting"
+msgstr "Riproduci tutto all'avvio"
 
-#: ../src/AutoTimerEditor.py:520 ../src/AutoTimerEditor.py:559
+msgid "Play current Playlist"
+msgstr "Riproduci playlist corrente"
+
+msgid "Play last"
+msgstr "Riproduci l'ultimo"
+
+msgid "Play last movie starting"
+msgstr "Riproduci l'ultimo film all'avvio"
+
+msgid "Play random current Playlist"
+msgstr "Riproduci casualmente la playlist corrente"
+
+msgid "Play selected movie(s)"
+msgstr "Riprodurre registrazione"
+
+msgid "Playlist Options"
+msgstr "Opzioni playlist"
+
+msgid "Playlist Setup"
+msgstr "Impostazioni playlist"
+
+msgid "Playlist open"
+msgstr "Apri playlist"
+
 msgid ""
-"Power state to change to after recordings. Select \"standard\" to not change the default "
-"behavior of enigma2 or values changed by yourself."
+"Playlist with same name exists!\n"
+"\n"
+"Try to save the Playlist with another name?"
 msgstr ""
-"Stato del decoder al termine di una registrazione. \"Standard\" equivale all'opzione prevista "
-"nella configurazione del sistema."
+"Esiste una playlist con lo stesso nome!\n"
+"\n"
+"Provo a salvare la playlist con un altro nome?"
 
-#: ../src/AutoTimerOverview.py:218 ../src/AutoTimerOverview.py:254
-msgid "Preview"
-msgstr "Riepilogo"
+msgid "Portuguese"
+msgstr "Portoghese"
 
-#: ../src/AutoTimerPreview.py:76 ../src/AutoTimerPreview.py:101
-msgid "Preview AutoTimer"
-msgstr "Riepilogo AutoTimer"
+msgid "Position movie picons"
+msgstr "Posizione picon dei film"
 
-#: ../src/faq.xml:7
-msgid ""
-"Question: I found a problem with the AutoTimer, can you fix it?/nAnswer: First try the "
-"AutoTimer version in a recent (experimental) Image to see if the problem was fixed. Then read "
-"the Help again and the upcoming FAQs to make sure that this is actually a problem and not "
-"expected behavior./nIf you still think there is something wrong with the AutoTimer, please "
-"visit http://www.dream-multimedia-tv.de/board and post your problem there./n/nQ: The plugin "
-"only adds timers when leaving the configuration, not automatically. What can I do?/nA: From "
-"the Overview press MENU and enter the 'Setup'. In this screen enable 'Poll automatically' and "
-"you should be good to go."
-msgstr ""
-"Domanda: ho trovato un problema con AutoTimer; potete risolverlo?/nRisposta: Prima prova "
-"AutoTimer con un’immagine più recente (o sperimentale) per vedere se il problema è stato "
-"risolto. Quindi, rileggi l’Aiuto e le FAQ successive per essere sicuro che si tratti di un "
-"problema reale e non di un fatto occasionale./nSe ancora ritieni vi sia un problema, visita "
-"http://www.dream-multimedia-tv.de/board e poni una domanda lì./n/nD: Il plugin aggiunge i "
-"timer solo quando si esce dalla configurazione, non automaticamente: cosa posso fare?/nR: Dal "
-"‘Riepilogo’ premi MENU e vai a “Configurazione”. Lì abilita “Ricerca automatica” (la prima "
-"opzione) e, così, dovresti risolvere."
+msgid "Preferred EPG language"
+msgstr "Lingua EPG preferita"
 
-#: ../src/faq.xml:10
-msgid ""
-"Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: Check 'Search "
-"type' and 'Search strictness' for the given AutoTimer./n/nQ: The show I'm trying to record "
-"contains umlauts in its title. AutoTimer does not find it./nA: Check the 'EPG encoding' for "
-"the given AutoTimer. For german stations 'UTF-8' should be selected./n/nQ: I seem to be "
-"unable to record two subsequent events. There is only a single timer created that spans (part "
-"of) both events./nA: From the Overview press MENU and enter the 'Setup'. In this screen "
-"disable 'Guess existing timer based on begin/end'."
-msgstr ""
-"Domanda: Il mio AutoTimer per termine “Notizie” non trova “Ultime notizie”./nRisposta: "
-"controlla “Tipo di corrispondenza” e se era stata scelta l’opzione “Corrispondenza esatta”, "
-"che non va bene in questo caso./n/n.Domanda: l’evento che vorrei registrare contiene la "
-"dieresi nel titolo. AutoTimer perciò non lo trova./nRisp.: Controlla la “Codifica EPG” per "
-"quell’AutoTimer. Bisognerebbe selezionare ‘UTF-8’ per i canali di lingua tedesca./n/nDom: "
-"Sembra che non riesca a registrare due eventi consecutivi: viene creato solo un timer che "
-"copre (parte) dei due eventi./nRisp.: Dalla Lista AutoTimer premere MENU e entrare nella "
-"Configurazione. Là devi disabilitare “Calcolare i timer basandosi su Inizio/Fine"
+msgid "Preferred cover resolution (if possible):"
+msgstr "Risoluzione preferita per le copertine (se utilizzabile):"
 
-#: ../src/faq.xml:13
-msgid ""
-"Question: You keep talking about help being provided for each parameter. I'm unable to read "
-"it (in part or in full)./nAnswer: Try using the default skin and if it works ask the creator "
-"of your regular skin. If it still does not work your image might not provide the actual "
-"default skin so contact the creator of your image."
-msgstr ""
-"Domanda: Voi continuate a parlare dell’aiuto che viene dato per ogni parametro ma io non "
-"riesco a leggerlo (in parte o tutto)./nRisposta: Usa la skin di default sistema e, se si "
-"legge con quella, contatta l’autore della skin che utilizzavi. Se, invece, non funziona "
-"neppure con la skin di default, la tua immagine potrebbe non fornire la vera skin di default "
-"per cui contatta il creatore della tua immagine."
+msgid "Press green button to start search"
+msgstr "Premi il pulsante VERDE per avviare la ricerca"
 
-#: ../src/AutoTimerEditor.py:695 ../src/AutoTimerEditor.py:1038 ../src/AutoTimerEditor.py:1209
-#: ../src/AutoTimerImporter.py:235 ../src/AutoTimerOverview.py:203 ../src/AutoTimerEditor.py:753
-#: ../src/AutoTimerEditor.py:1247 ../src/AutoTimerEditor.py:1420 ../src/AutoTimerImporter.py:251
-#: ../src/AutoTimerOverview.py:239
+msgid "Primary playback audio language"
+msgstr "Lingua: opzione preferenziale"
+
+msgid "Primary playback subtitle language"
+msgstr "Lingua sottotitoli: opzione preferenziale"
+
+msgid "Production Countries:"
+msgstr "Paese di produzione:"
+
+msgid "Progress sort"
+msgstr "Ordinam. per Avanzamento"
+
+msgid "Progress sort ascending (P+)"
+msgstr "Ordinam. per Avanzam. cresc.(P+)"
+
+msgid "Progress sort descending (P-)"
+msgstr "Ordinam. per Avanzam. decresc.(P-)"
+
+msgid "ProgressBar"
+msgstr "Barra avanzamento"
+
+msgid "Quick-button"
+msgstr "Quick-button"
+
+msgid "Radio-button"
+msgstr "Tasto RADIO"
+
+msgid "Reading directory..."
+msgstr "Lettura cartelle…"
+
 msgid "Really close without saving settings?"
-msgstr "Chiudere senza salvare le modifiche?"
+msgstr "Chiudo senza salvare le impostazioni: confermi?"
 
-#: ../src/AutoTimerEditor.py:601 ../src/AutoTimerEditor.py:645
-msgid "Record a maximum of x times"
-msgstr "Registrare per un massimo di \"nr.\" volte"
+msgid "Reboot"
+msgstr "Riavvia decoder"
 
-#: ../src/AutoTimerEditor.py:1147 ../src/AutoTimerEditor.py:1201 ../src/AutoTimerEditor.py:1358
-#: ../src/AutoTimerEditor.py:1412
-msgid "Record on"
-msgstr "Registrare da"
+msgid "Red"
+msgstr "Rosso"
 
-#: ../src/AutoTimerSettings.py:83 ../src/AutoTimerSettings.py:66
-msgid "Remove not existing events"
-msgstr "Rimuovi eventi non presenti"
+msgid "Red button function"
+msgstr "Funzione del tasto Rosso"
 
-#: ../src/AutoTimerOverview.py:100 ../src/AutoTimerOverview.py:115
-msgid "Remove selected AutoTimer"
-msgstr "Cancellare AutoTimer selezionato"
+msgid "Release Date:"
+msgstr "Data di uscita:"
 
-#: ../src/AutoTimerEditor.py:609 ../src/AutoTimerEditor.py:653
-msgid "Require description to be unique"
-msgstr "Richiesta descrizione univoca"
+msgid "Reload current directory"
+msgstr "Ricarica la cartella corrente"
 
-#: ../src/AutoTimerEditor.py:607 ../src/AutoTimerEditor.py:651
-msgid "Reset count"
-msgstr "Azzerare conteggio"
+msgid "Reload movie file list"
+msgstr "Ricaricare elenco registrazioni"
 
-#: ../src/AutoTimerEditor.py:521 ../src/AutoTimerEditor.py:560
-msgid "Restrict \"after event\" to a certain timespan?"
-msgstr "Limitare \"dopo l'evento\" a un preciso intervallo?"
+msgid "Remove all cut file marker permanently?"
+msgstr "Rimuovere definitivamente i contrassegni di taglio?"
 
-#: ../src/AutoTimerEditor.py:573
-msgid ""
-"Restrict autotimer to bouquets.\n"
-"Use the blue key to edit the bouquet filter."
-msgstr ""
-"Limitare l’autotimer a dei bouquet.\n"
-"Usa il tasto BLU per modificare il filtro sui bouquet."
+msgid "Remove all marker permanently?"
+msgstr "Rimuovere pemanentemente tutti i contrassegni?"
 
-#: ../src/AutoTimerEditor.py:574
-msgid ""
-"Restrict autotimer to specific days.\n"
-"Use the yellow key to edit the day filter."
-msgstr ""
-"Limitare l’autotimer a giorni specifici.\n"
-"Usa il tasto GIALLO per modificare il filtro."
+msgid "Remove cut list marker"
+msgstr "Rimuovere i contrassegni di taglio"
 
-#: ../src/AutoTimerEditor.py:572
-msgid ""
-"Restrict autotimer to specific services, channels.\n"
-"Use the blue key to edit the service filter."
-msgstr ""
-"Limitare l’autotimer a canali specifici.\n"
-"Usa il tasto BLU per modificare il filtro"
+msgid "Remove directory from E2 Bookmarks"
+msgstr "Rimuovi cartella dai segnalibri di Sistema"
 
-#: ../src/AutoTimerEditor.py:680
-msgid "Restrict to days"
-msgstr "Limita ai giorni"
+msgid "Remove directory from EMC Bookmarks"
+msgstr "Rimuovi le cartelle dai segnalibri EMC"
 
-#: ../src/AutoTimerEditor.py:564 ../src/AutoTimerEditor.py:608
-msgid "Restrict to events on certain dates"
-msgstr "Limitarsi agli eventi in date determinate"
+msgid "Remove permanent sort"
+msgstr "Rimuovi ordinamento permanente"
 
-#: ../src/AutoTimerEditor.py:679
-msgid "Restrict to specific bouquets"
-msgstr "Limitare a specifici bouquet"
+msgid "Remove permanent sort from parent"
+msgstr "Rimuovi ordinamento permanente dalla cartella madre"
 
-#: ../src/AutoTimerEditor.py:678
-msgid "Restrict to specific services"
-msgstr "Limita a specifici canali"
+msgid "Remove rogue files"
+msgstr "Rimuovere i file rogue"
 
-#: ../src/AutoTimerList.py:197
-msgid "Sat"
-msgstr "SAB"
+msgid "Remove selected E2 Bookmark"
+msgstr "Rimuovi i segnalibri di sistema selezionati"
 
-#: ../src/AutoTimerEditor.py:49 ../src/AutoTimerEditor.py:50
-msgid "Saturday"
-msgstr "Sabato"
+msgid "Remove selected EMC Bookmark"
+msgstr "Rimuovi i segnalibri EMC selezionati"
 
-#: ../src/AutoTimerEditor.py:893 ../src/AutoTimerOverview.py:71 ../src/AutoTimerEditor.py:1090
-#: ../src/AutoTimerOverview.py:86
+msgid "Remove service selection"
+msgstr "Rimuovere la selezione canali"
+
+msgid "Rename selected movie(s)"
+msgstr "Rinomina i film selezionati"
+
+msgid "Replace special chars in title"
+msgstr "Sostituisci i caratteri speciali nel titolo"
+
+msgid "Reset marker from selected movie(s)"
+msgstr "Azzera i marker dai film selezionati"
+
+msgid "Resolve links and show real path"
+msgstr "Sostit. collegamenti con il percorso reale"
+
+msgid "Resume position at %s"
+msgstr "Riprendi dalla posizione %s"
+
+msgid "Resuming playback"
+msgstr "Riprendi playback"
+
+msgid "Rewind finished movies before playing"
+msgstr "Riavvolgi i film finiti prima di riprodurre"
+
+msgid "Runtime:"
+msgstr "Durata:"
+
+msgid "SKIN-SETTINGS"
+msgstr "IMPOSTAZIONI SKIN"
+
 msgid "Save"
 msgstr "Salva"
 
-#: ../src/AutoTimerEditor.py:547 ../src/AutoTimerEditor.py:591
-msgid "Search strictness"
-msgstr "Rigore ricerca"
+msgid "Save Cover"
+msgstr "Salva la copertina"
 
-#: ../src/AutoTimerEditor.py:546 ../src/AutoTimerEditor.py:590
-msgid "Search type"
-msgstr "Tipo di ricerca"
+msgid "Save current Playlist"
+msgstr "Salva la playlist corrente"
 
-#: ../src/AutoTimerEditor.py:504 ../src/AutoTimerEditor.py:543
-msgid ""
-"Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you "
-"only want to search for a part of the event title or \"description match\" if you only want "
-"to search for a part of the event description."
-msgstr ""
-"Seleziona \"Corrispondenza esatta\" per costringere ad una uguaglianza perfetta del titolo; "
-"\"Corrispondenza parziale\" se volete che corrisponda solo una parte del titolo; "
-"\"Corrispondenza descrizione\" se volete cercare una parte della descrizione eventi."
+msgid "Save description to movie.txt file:"
+msgstr "Salvo descrizione nel file movie.txt:"
 
-#: ../src/AutoTimerImporter.py:60 ../src/AutoTimerImporter.py:61
-msgid "Select a timer to import"
-msgstr "Selezionare un timer da importare"
+msgid "Scan for DVD structures"
+msgstr "Scansiona le strutture DVD"
 
-#: ../src/AutoTimerEditor.py:1185 ../src/AutoTimerEditor.py:1396
-msgid "Select bouquet to record on"
-msgstr "Selezionare il bouquet da cui registrare"
+msgid "Scan for bluray structures"
+msgstr "Scansiona le strutture bluray"
 
-#: ../src/AutoTimerEditor.py:1179 ../src/AutoTimerEditor.py:1390
-msgid "Select channel to record on"
-msgstr "Selezionare il canale da cui registrare"
+msgid "Scan for bluray structures in .iso"
+msgstr "Scansiona le strutture bluray in .iso"
 
-#: ../src/AutoTimerEditor.py:530 ../src/AutoTimerEditor.py:569
-msgid "Select the location to save the recording to."
-msgstr "Selezionare la destinazione della registrazione."
+msgid "Scan for movie structures"
+msgstr "Scansiona le strutture del film"
 
-#: ../src/AutoTimerEditor.py:1006 ../src/AutoTimerEditor.py:1211
-msgid "Select type of Filter"
-msgstr "Selezionare il tipo di filtro"
+msgid "Scan linked folders"
+msgstr "Scansione delle cartelle collegate"
 
-#: ../src/AutoTimerEditor.py:505 ../src/AutoTimerEditor.py:544
-msgid "Select whether or not you want to enforce case correctness."
-msgstr "Scegliere se il confronto debba o meno considerare maiuscole/minuscole."
+msgid "Search"
+msgstr "Cerca"
 
-#: ../src/AutoTimerEditor.py:551 ../src/AutoTimerEditor.py:595
-msgid "Set End Time"
-msgstr "Imposta ora fine"
+msgid "Search Results per Search Site%s:"
+msgstr "Risultati ricerca per i Siti di ricerca %s:"
 
-#: ../src/AutoTimerEditor.py:507 ../src/AutoTimerEditor.py:546
-msgid ""
-"Set an end time for the timer. If you do, the timespan of the event might be blocked for "
-"recordings."
-msgstr ""
-"Introdurre un'ora termine per il timer. Se introdotta, l'intervallo relativo ad un evento "
-"potrebbe essere bloccato per le registrazioni."
+msgid "Search Site:"
+msgstr "Sito ricerca:"
 
-#: ../src/AutoTimerEditor.py:582 ../src/AutoTimerEditor.py:626
-msgid "Set maximum duration"
-msgstr "Configurazione durata massima"
+msgid "Search filter for matching existing terms in the title:"
+msgstr "Filtro ricerca per trovare termini esatti nel titolo:"
 
-#: ../src/AutoTimerEditor.py:500 ../src/AutoTimerEditor.py:539
-msgid "Set this NO to disable this AutoTimer."
-msgstr "Selezionare NO per disabilitare AutoTimer."
+msgid "Search results for:"
+msgstr "Risultati ricerca per:"
 
-#: ../src/AutoTimerEditor.py:545
-msgid ""
-"Set timer type: zap, simple record, zap+record (always zap to service before start record)."
-msgstr ""
-"Scegli il tipo di timer: solo registrazione, cambia canale (zap), zap+registrazione (cambia "
-"canale e registra)."
+msgid "Searching for %s"
+msgstr "Ricerca per %s"
 
-#: ../src/AutoTimerOverview.py:221 ../src/AutoTimerOverview.py:257
+msgid "Searching..."
+msgstr "Ricerca..."
+
+msgid "Secondary playback audio language"
+msgstr "Lingua: opzione secondaria"
+
+msgid "Secondary playback subtitle language"
+msgstr "Lingua sottotitoli: opzione secondaria"
+
+msgid "Seek backward"
+msgstr "Cerca indietro"
+
+msgid "Seek forward"
+msgstr "Cerca avanti"
+
+msgid "Select Location"
+msgstr "Imposta posizione"
+
+msgid "Set path to save the folder Cover:"
+msgstr "Imposta il percorso per la cartella delle copertine:"
+
+msgid "Set permanent sort"
+msgstr "Imposta ordinamento permanente"
+
+msgid "Settings have been Saved."
+msgstr "Le impostazioni sono state salvate."
+
 msgid "Setup"
-msgstr "Configurazione"
+msgstr "Impostazioni"
 
-#: ../src/AutoTimerEditor.py:509 ../src/AutoTimerEditor.py:548
-msgid "Should this AutoTimer be restricted to a timespan?"
-msgstr "Scegliere se l'AutoTimer selezionato debba essere circoscritto a un intervallo."
+msgid "Setup open"
+msgstr "Apri Impostazioni"
 
-#: ../src/AutoTimerEditor.py:518 ../src/AutoTimerEditor.py:557
-msgid "Should this AutoTimer only match up to a certain event duration?"
-msgstr ""
-"Scegliere se l'AutoTimer selezionato debba essere circoscritto a una durata evento specifica?"
+msgid "Short watching percent"
+msgstr "Limite inizio visualizzazione (in %)"
 
-#: ../src/AutoTimerEditor.py:529 ../src/AutoTimerEditor.py:568
-msgid "Should timers created by this AutoTimer be recorded to a custom location?"
-msgstr ""
-"Scegliere se il timer creato con AutoTimer debba essere registrato in una destinazione "
-"specifica."
+msgid "Show Bookmarks in movielist"
+msgstr "Mostra i segnalibri nella “Lista film”"
 
-#: ../src/AutoTimerSettings.py:42 ../src/AutoTimerSettings.py:69 ../src/AutoTimerSettings.py:52
-msgid "Show in extension menu"
-msgstr "Mostrare nel menu estensioni"
+msgid "Show Cover"
+msgstr "Mostra copertina"
 
-#: ../src/AutoTimerSettings.py:68 ../src/AutoTimerSettings.py:51
-msgid "Show in plugin browser"
-msgstr "Mostra nel pannello dei plugin"
+msgid "Show Cut-Nr if exist"
+msgstr "Mostra num. tagli, se esiste"
 
-#: ../src/AutoTimerSettings.py:47 ../src/AutoTimerSettings.py:76 ../src/AutoTimerSettings.py:59
-msgid "Show notification on conflicts"
-msgstr "Mostrare avviso in caso di conflitti"
+msgid "Show EMC in extensions menu"
+msgstr "Mostra EMC nel Menu estensioni"
 
-#: ../src/AutoTimerSettings.py:48 ../src/AutoTimerSettings.py:77 ../src/AutoTimerSettings.py:60
-msgid "Show notification on similars"
-msgstr "Mostrare avviso in caso di simili"
+msgid "Show EMC in main menu"
+msgstr "Mostra EMC nel Menu principale"
 
-#: ../src/AutoTimerSettings.py:81 ../src/AutoTimerSettings.py:64
-msgid "Skip poll during epg refresh"
-msgstr "Salta la ricerca di eventi durante l’aggiornamento della EPG (Guida TV)"
+msgid "Show Latest Recordings directory"
+msgstr "Mostra la cartella “Registrazioni recenti”"
 
-#: ../src/AutoTimerSettings.py:80 ../src/AutoTimerSettings.py:63
-msgid "Skip poll during records"
-msgstr "Salta la ricerca di eventi mentre registra"
+msgid "Show Movie Format"
+msgstr "Mostra formato registrazione"
 
-#: ../src/AutoTimerPreview.py:82 ../src/AutoTimerPreview.py:107
-msgid "Sort AutoTimer"
-msgstr "Ord. Autotimer"
+msgid "Show Path if no extended description available"
+msgstr "Mostra percorso se non è disponib. descriz. estesa"
 
-#: ../src/AutoTimerPreview.py:80 ../src/AutoTimerPreview.py:105
-msgid "Sort Time"
-msgstr "Ord. per ora"
+msgid "Show VLC directory"
+msgstr "Mostra la cartella VLC"
 
-#: ../src/AutoTimerSettings.py:61 ../src/AutoTimerSettings.py:43
-msgid "Startup delay (in min)"
-msgstr "Ritardo inizio (in minuti)"
+msgid "Show audio metadata"
+msgstr "Mostra i metadati audio"
 
-#: ../src/AutoTimerList.py:198
-msgid "Sun"
-msgstr "DOM"
+msgid "Show audio metadata (needs skin-changes)"
+msgstr "Mostra i metadata audio (la skin richiede modifiche)"
 
-#: ../src/AutoTimerEditor.py:50 ../src/AutoTimerEditor.py:51
-msgid "Sunday"
-msgstr "Domenica"
+msgid "Show current Playlist"
+msgstr "Mostra la playlist corrente"
 
-#: ../src/AutoTimerSettings.py:50 ../src/AutoTimerSettings.py:79 ../src/AutoTimerSettings.py:62
-msgid "Support \"Fast Scan\"?"
-msgstr "Supportare \"Fast Scan\"?"
+msgid "Show directories"
+msgstr "Mostra le cartelle"
 
-#: ../src/AutoTimerEditor.py:619 ../src/AutoTimerImporter.py:209 ../src/AutoTimerEditor.py:663
-#: ../src/AutoTimerImporter.py:225
-msgid "Tags"
-msgstr "Etichette"
+msgid "Show directories information"
+msgstr "Mostra informazioni cartella"
 
-#: ../src/AutoTimerEditor.py:531 ../src/AutoTimerEditor.py:570
-msgid "Tags the Timer/Recording will have."
-msgstr "Etichette da assegnare al timer o alla registrazione."
+msgid "Show directories within movielist"
+msgstr "Mostra cartella all'interno della \"Lista film\""
 
-#: ../src/autotimerwizard.xml
+msgid "Show directory size in skin"
+msgstr "Mostra la dimensione cartelle nella skin"
+
+msgid "Show event info"
+msgstr "Mostra informazioni evento"
+
+msgid "Show experimental options"
+msgstr "Mostra opzioni sperimentali"
+
+msgid "Show fallback cover"
+msgstr "Mostra copertina di riserva"
+
+msgid "Show info at the bottom"
+msgstr "Mostra info in fondo"
+
+msgid "Show info at the bottom (with MiniTV)"
+msgstr "Info in fondo + MiniTV"
+
+msgid "Show info on the left"
+msgstr "Info a sinistra"
+
+msgid "Show info on the left (with MiniTV)"
+msgstr "Info a sinistra + MiniTV"
+
+msgid "Show link arrow"
+msgstr "Mostra link mediante una freccia"
+
+msgid "Show message if file added to playlist"
+msgstr "Mostra un messaggio se un file è aggiunto alla playlist"
+
+msgid "Show movie icons"
+msgstr "Mostra le icone dei video"
+
+msgid "Show movie picons"
+msgstr "Mostra le picon dei film"
+
+msgid "Show movie preview"
+msgstr "Mostra anteprima registrazione"
+
+msgid "Show movie progress"
+msgstr "Mostra progresso riproduzione"
+
+msgid "Show plugin config in extensions menu"
+msgstr "Mostra Impostazioni EMC nel Menu estensioni"
+
+msgid "Show real length of running records"
+msgstr "Mostra la vera lunghezza delle registraz. in riproduz."
+
+msgid "Show symlinks"
+msgstr "Mostra i symlink"
+
+msgid "Show trashcan directory"
+msgstr "Mostra la cartella del cestino"
+
+msgid "Show trashcan information"
+msgstr "Mostra informazioni cestino"
+
+msgid "Shuffle All"
+msgstr "Riproduzione casuale"
+
+msgid "Shuffle All starting"
+msgstr "Riproduzione casuale all'avvio"
+
+msgid "Single Search:"
+msgstr "Ricerca singola"
+
+msgid "Single search"
+msgstr "Ricerca singola"
+
+msgid "Skip"
+msgstr "Salta"
+
 msgid ""
-"Thank you for using the wizard. Your new AutoTimer has been added to the List.\n"
-"Please press OK to continue."
+"Skipping movie, the file does not exist.\n"
+"\n"
 msgstr ""
-"Grazie per aver utilizzato la procedura guidata.\n"
-"Il nuovo AutoTimer è stato creato.\n"
-"Premere OK per continuare."
+"Salto il film: file non trovato.\n"
+"\n"
 
-#: ../src/mphelp.xml:5
-msgid "The 'Overview'"
-msgstr "Il 'Riepilogo'"
+msgid "Some settings changes require GUI restart to take effect."
+msgstr "Per attivare le modifiche è necessario riavviare la GUI!"
 
-#: ../src/mphelp.xml:6
+msgid "Sort Mode"
+msgstr "Metodo ordinamento"
+
+msgid "Sort Options"
+msgstr "Opzioni ordinamento"
+
+msgid "Sort Order"
+msgstr "Ordinamento"
+
+msgid "Spanish"
+msgstr "Spagnolo"
+
+msgid "Standby"
+msgstr "Standby"
+
+msgid "Start / end multiselection"
+msgstr "Avviare/arrestare selezione multipla"
+
+msgid "Start EMC with"
+msgstr "Avvia EMC con"
+
+msgid "Start movie preview before last position"
+msgstr "Avviare l'anteprima del film prima dell'ultima posizione"
+
+msgid "Stop ongoing recording?\n"
+msgstr "Arrestare la registrazione in corso?\n"
+
+msgid "Stop playback"
+msgstr "Arrestare la riproduzione"
+
+msgid "Style for original EMC-skin (needs reopen)"
+msgstr "Stile skin EMC originale (***)"
+
+msgid "Suppress scan in selected folders"
+msgstr "Non scansionare nelle cartelle selezionate"
+
+msgid "Switch complete to new Version"
+msgstr "Passaggio completo alla nuova versione"
+
+msgid "TMBD Info"
+msgstr "Informazioni TMBD"
+
+msgid "TMDB Info"
+msgstr "Informazioni TMDB"
+
+msgid "TMDb"
+msgstr "TMDb"
+
+msgid "TRASHCAN"
+msgstr "CESTINO"
+
+msgid "TV Shows"
+msgstr "Trasmissioni"
+
+msgid "TV-button"
+msgstr "Tasto TV"
+
+msgid "Tertiary playback audio language"
+msgstr "Lingua: terza opzione"
+
+msgid "Tertiary playback subtitle language"
+msgstr "Lingua sottotitoli: terza opzione"
+
+msgid "Text shown for initially unknown count and size"
+msgstr "Indicatore se numero e dimens. sono ignoti"
+
+msgid "Text shown for initially unknown directory size"
+msgstr "Indicatore se dimens. cartelle è ignota"
+
+msgid "Text shown for initially unknown file count"
+msgstr "Indicatore se conteggio file è ignoto"
+
 msgid ""
-"The AutoTimer overview is the standard entry point to this plugin./n/nIf AutoTimers are "
-"configured you can choose them from a list to change them (OK button on your remote) or "
-"remove them (YELLOW button on your remote)./nNew Timers can be added by pressing the BLUE "
-"button and the control menu can be opened using the MENU button./n/nWhen leaving the plugin "
-"using the GREEN button it will search the EPG for matching events ONCE. To configure a "
-"regular search interval of the plugin to search for events open the control menu and enter "
-"the plugin setup."
+"The directory %s is already locked. Do you want to unlock it and all its "
+"subfolders?"
 msgstr ""
-"Il Riepilogo degli AutoTimer è il normale punto di partenza di questo plugin./n/nSe vi sono "
-"AutoTimer configurati, puoi selezionarli dalla lista per modificarli (con OK) o rimuoverli "
-"(pulsante GIALLO)./nBLU aggiunge un nuovo AutoTimer, mentre MENU apre, appunto, il Menu di "
-"controllo./n/nQuando esci dal plugin con VERDE, esso lancerà una UNICA ricerca nella EPG di "
-"eventuali eventi specificati dagli AutoTimer. Per configurare una ricerca ripetuta a "
-"intervalli regolari, apri il Menu di controllo e vai alla Configurazione."
+"La cartella %s è già bloccata. Vuoi sbloccarla insieme alle relative "
+"sottocartelle?"
 
-#: ../src/autotimerwizard.xml
 msgid ""
-"The Timer will not be added to the List.\n"
-"Please press OK to close this Wizard."
+"The following files are used for other entrys in List !\n"
+"\n"
+"Also delete these files?\n"
+"\n"
+"%s"
 msgstr ""
-"Il timer non sarà aggiunto alla lista.\n"
-"Premere OK per chiudere la configurazione."
+"I file seguenti sono usati per altri elementi della Lista !\n"
+"\n"
+"Elimino anche questi file?\n"
+"\n"
+"%s"
 
-#: ../src/autotimerwizard.xml
-msgid ""
-"The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an "
-"event will only match this AutoTimer if it lies inside of this timespan."
+msgid "The python-mutagen package is not available on the feed."
+msgstr "Il pacchetto python-mutagen non è disponibile fra le fonti"
+
+msgid "This element belongs to a locked folder and cannot be deleted!"
 msgstr ""
-"L'Intervallo di un AutoTimer è il primo parametro avanzato. Se viene specificato un "
-"intervallo verranno considerati validi solo gli eventi previsti all'interno di tale "
-"intervallo temporale"
+"Questo elemento appartiene a una cartella bloccata e non può essere "
+"eliminato!"
 
-#: ../src/AutoTimer.py:151
-msgid ""
-"The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was "
-"created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "
+msgid "This folder is locked or contains a locked subfolder, unlock it first!"
 msgstr ""
-"Il file contenente gli autotimer (/etc/enigma2/autotimer.xml) è corrotto. Ho creato un nuovo "
-"file vuoto. Il backup del vecchio si trova in /etc/enigma2/autotimer.xml_old "
+"Questa cartella è bloccata o contiene sottocartelle bloccate: prima "
+"sbloccale!"
 
-#: ../src/mphelp.xml:9
-msgid ""
-"The control menu hides less frequently used options of the plugin, including the "
-"configuration and default settings for new AutoTimers./n/nWhile you can just open the menu "
-"and take a look for yourself, let's go through the available options:/n - Help:/n   What you "
-"are looking at right now/n - Preview:/n   Simulate EPG search, helps finding errors in your "
-"setup./n - Import existing Timer:/n   Create a new AutoTimer based on an existing regular "
-"timer./n - Import from EPG:/n   Create an AutoTimer based on an EPG event./n - Setup:/n   "
-"Generic configuration of the plugin./n - Edit new timer defaults:/n   Configure default "
-"values for new AutoTimers./n - Create a new timer using the wizard/classic editor:/n   Use "
-"the non-default editor to create a new AutoTimer."
-msgstr ""
-"Il Menu di controllo nasconde le opzioni del plugin usate meno frequentemente, incluse le "
-"configurazioni e le impostazioni di default per i nuovi AutoTimer./n/nIl consiglio è di "
-"aprire il menu e dare un’occhiata da voi stessi, scorrendo le varie opzioni disponibili.:/n - "
-"Aiuto:/n   Ciò che state leggendo in questo preciso momento/n - Riepilogo:/n   Simula la "
-"ricerca nell'EPG per aiutare a trovare errori nell’impostazione./n - Importa un Timer "
-"esistente:/n   Crea un nuovo AutoTimer a partire da un timer normale già impostato./n - "
-"Importa dalla EPG:/n   Crea un AutoTimer a partire da un evento nella EPG./n - Impostazioni:/"
-"n   Configurazione generale del plugin./n - Parametri di default:/n   Configura i valori di "
-"default dei nuovi AutoTimer./n - Crea un nuovo timer usando la procedura guidata o con "
-"l’Editor classico:/n   Crea un nuovo AutoTimer con una procedura guidata o nel modo “manuale” "
-"classico."
+msgid "Timeshift-button"
+msgstr "Tasto timeshift"
 
-#: ../src/AutoTimerEditor.py:526 ../src/AutoTimerEditor.py:565
-msgid "The counter can automatically be reset to the limit at certain intervals."
-msgstr "Il contatore può essere resettato automaticamente a intervalli prefissati."
-
-#: ../src/AutoTimerSettings.py:49 ../src/AutoTimerSettings.py:78 ../src/AutoTimerSettings.py:61
-msgid ""
-"The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
-msgstr ""
-"Editor utilizzato per aggiungere nuovi AutoTimer. Possono essere usati indifferentemente "
-"l'editor classico o la Procedura guidata."
-
-#: ../src/AutoTimerEditor.py:712 ../src/AutoTimerEditor.py:770
-msgid "The match attribute is mandatory."
-msgstr "La stringa di confronto è obbligatoria."
-
-#: ../src/faq.xml:4
-msgid ""
-"This FAQ is supposed to help everyone unwilling to help themselves by reading all the "
-"provided help available, and those who did not find a solution to their problems within the "
-"provided documentation./n/nTo make these hints a little easier to read, they are split up on "
-"multiple pages. You can go to the next page using the BLUE button on your remote control and "
-"back using the YELLOW one. Pressing the RED button or EXIT will close the FAQ."
-msgstr ""
-"Queste FAQ (domande frequenti) si suppone aiutino chiunque non voglia leggersi da solo "
-"l’Aiuto in linea del plugin nonché coloro che non hanno trovato una soluzione ai loro "
-"problemi e risposta ai dubbi all’interno della documentazione in linea./n/nPer rendere questi "
-"suggerimenti un po’ più semplici da leggere, essi sono suddivisi in varie pagine. Con il "
-"tasto BLU andate alla pagina SUCCESSIVA, con GIALLO alla PRECEDENTE. Con il tasto ROSSO si "
-"esce dalle FAQ."
-
-#: ../src/AutoTimerEditor.py:575
-msgid ""
-"This allows you to apply other filters.\n"
-"Use the yellow key to edit other filters."
-msgstr "Questo permette di applicare altri filtri: premi GIALLO per impostarli."
-
-#: ../src/mphelp.xml:3
-msgid ""
-"This help screen is supposed to give you a quick look at everything the AutoTimer has to "
-"offer./nYou can abort it at any time by pressing the RED or EXIT button on your remote "
-"control or bring it up at a later point by selecting it from the control menu using the MENU "
-"button from the regular entry point of the plugin (more on that later)./n/n/nBut you really "
-"should consider to take the few minutes it takes to read these help pages."
-msgstr ""
-"Questa schermata di aiuto vi permette di dare un rapido sguardo a tutto ciò che il plugin "
-"AutoTImers ha da offrirvi./nPotete uscirne in qualsiasi momento premendo EXIT o il tasto "
-"ROSSO e potete richiamarlo in qualsiasi momento selezionandolo dal Menu di controllo, ossia "
-"premendo MENU dopo essere entrati nella schermata di Riepilogo, quella che elenca gli "
-"AutoTimer esistenti./n/n/nMa dovreste davvero prendere in considerazione di concedervi adesso "
-"i pochi minuti che servono per leggere queste pagine d’aiuto."
-
-#: ../src/AutoTimerEditor.py:501 ../src/AutoTimerEditor.py:540
-msgid ""
-"This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."
-msgstr ""
-"È possibile assegnare un nome all'AutoTimer. Sarà mostrato nel Riepilogo e nell'Anteprima."
-
-#: ../src/mphelp.xml:15
-msgid ""
-"This is mostly a matter of taste./nThe Wizard provides you with a reduced set of options and "
-"presents them in smaller sets at a time. It is mostly aimed at users not very experienced "
-"with this plugin or the 'expert' level features of enigma2./n/nYou can check out the "
-"'classic' editor by opening an existing timer from the overview and if you prefer this view "
-"over the wizard you can change the default editor in the setup dialog."
-msgstr ""
-"Questa è, più che altro, una questione di gusti./nLa Procedura guidata vi propone un "
-"pacchetto di opzioni più limitato di quelle complessivamente disponibili e, inoltre, le "
-"presenta a piccoli gruppi. È rivolta soprattutto a utenti non espertissimi di questo plugin./"
-"n/nPotete dare un’occhiata all’editor classico semplicemente aprendo un timer esistente dal "
-"Riepilogo generale e, se preferite quest'approccio rispetto alla Procedura guidata, potrete "
-"cambiare l’Editor predefinito nella finestra delle Impostazioni."
-
-#: ../src/AutoTimerSettings.py:40 ../src/AutoTimerSettings.py:32
-msgid ""
-"This is the delay in hours that the AutoTimer will wait after a search to search the EPG "
-"again."
-msgstr "Questo è il ritardo (in ore) fra una ricerca e l’altra nella EPG."
-
-#: ../src/AutoTimerSettings.py:64 ../src/AutoTimerSettings.py:36
-msgid ""
-"This is the delay in minutes that the AutoTimer will wait after a search to search the EPG "
-"again."
-msgstr "Questo è il ritardo (in minuti) fra una ricerca e l’altra nella EPG."
-
-#: ../src/AutoTimerSettings.py:61 ../src/AutoTimerSettings.py:43
-msgid ""
-"This is the delay in minutes that the AutoTimer will wait on initial launch to not delay "
-"enigma2 startup time."
-msgstr ""
-"Questo è il ritardo con cui sarà lanciato AutoTimer dopo l’avvio del sistema, per non "
-"rallentarlo."
-
-#: ../src/AutoTimerEditor.py:502 ../src/AutoTimerEditor.py:541
-msgid ""
-"This is what will be looked for in event titles. Note that looking for e.g. german umlauts "
-"can be tricky as you have to know the encoding the channel uses."
-msgstr ""
-"Termini usati nella ricerca nei titoli. Attenzione: caratteri speciali (es. la dieresi "
-"tedesca) richiedono di conoscere la codifica caratteri utilizzata dal canale."
-
-#: ../src/mphelp.xml:12
-msgid ""
-"This screen should be pretty straight-forward. If the option name does not give its meaning "
-"away there should be an explanation for each of them when you select them. If there is no "
-"visible explanation this is most likely a skin issue and please try if the default skin fixes "
-"the issue./n/nA lot of effort has been put in making the parameters as easy to understand as "
-"possible, so give reading them a try ;-)."
-msgstr ""
-"Questa schermata dovrebbe essere piuttosto intuitiva. Se il nome dell’opzione non vi "
-"rivelasse già il suo significato, dovrebbe esserci una spiegazione per ciascuna di esse "
-"quando la selezionate. Se non vi è alcuna spiegazione visibile si tratta, molto "
-"probabilmente, di un problema con la vostra skin per cui provate a usare quella di default "
-"per vedere se, con quella, il problema non si presenta./n/nAbbiamo fatto un grande sforzo per "
-"rendere le opzioni il più semplici possibile da comprendere; quindi fate almeno un tentativo "
-"di leggerle :-)"
-
-#: ../src/AutoTimerSettings.py:43 ../src/AutoTimerSettings.py:70 ../src/AutoTimerSettings.py:53
-msgid "This setting controls the behavior when a timer matches a found event."
-msgstr ""
-"Indicare il comportamento da adottare nel caso in cui un timer corrisponda a un evento "
-"trovato."
-
-#: ../src/AutoTimerSettings.py:46 ../src/AutoTimerSettings.py:73 ../src/AutoTimerSettings.py:56
-msgid ""
-"This toggles the behavior on timer conflicts. If an AutoTimer matches an event that conflicts "
-"with an existing timer it will not ignore this event but add it disabled."
-msgstr ""
-"Indicare il comportamento da tenere in caso di conflitto di timer. Se una corrispondenza con "
-"un evento genera un conflitto di timer, l'evento non sarà ignorato ma sarà aggiunto come "
-"disabilitato."
-
-#: ../src/AutoTimerList.py:195
-msgid "Thur"
-msgstr "GIO"
-
-#: ../src/AutoTimerEditor.py:47 ../src/AutoTimerEditor.py:48
-msgid "Thursday"
-msgstr "Giovedi"
-
-#: ../src/AutoTimerEditor.py:517 ../src/AutoTimerEditor.py:556
-msgid "Time in minutes to append to recording."
-msgstr "Orario in minuti da aggiungere alla registrazione."
-
-#: ../src/AutoTimerEditor.py:516 ../src/AutoTimerEditor.py:555
-msgid "Time in minutes to prepend to recording."
-msgstr "Orario in minuti da anteporre alla registrazione."
-
-#: ../src/AutoTimerEditor.py:548 ../src/AutoTimerImporter.py:191 ../src/AutoTimerWizard.py:113
-#: ../src/AutoTimerEditor.py:592 ../src/AutoTimerImporter.py:207
-msgid "Timer type"
-msgstr "Tipo timer"
-
-#: ../src/AutoTimerEditor.py:326 ../src/AutoTimerEditor.py:321
 msgid "Title"
 msgstr "Titolo"
 
-#: ../src/AutoTimerEditor.py:327 ../src/AutoTimerEditor.py:322
-msgid "Title and Short description"
-msgstr "Titolo e breve descrizione"
+msgid "Toggle Cover Button"
+msgstr "Abilita pulsante copertina"
 
-#: ../src/AutoTimerEditor.py:328 ../src/AutoTimerEditor.py:323
-msgid "Title and all descriptions"
-msgstr "Title and all descriptions"
+msgid "Toggle service selection"
+msgstr "Selezione canali On/Off"
 
-#: ../src/AutoTimerList.py:193
-msgid "Tue"
-msgstr "MAR"
+msgid "Toggle viewed / not viewed"
+msgstr "Commutare visto/non visto"
 
-#: ../src/AutoTimerEditor.py:45 ../src/AutoTimerEditor.py:46
-msgid "Tuesday"
-msgstr "Martedì"
+msgid "Total"
+msgstr "Totale"
 
-#: ../src/AutoTimerSettings.py:39 ../src/AutoTimerSettings.py:57
-msgid ""
-"Unless this is enabled AutoTimer will NOT automatically look for events matching your "
-"AutoTimers but only when you leave the GUI with the green button."
-msgstr ""
-"A meno che questo non sia abilitato, AutoTimer NON cercherà automaticamente eventi "
-"corrispondenti nella EPG, ma lo farà solo quando lascerai la schermata premendo VERDE."
+msgid "Trashcan"
+msgstr "Cestino"
 
-#: ../src/AutoTimerEditor.py:523 ../src/AutoTimerEditor.py:562
-msgid "Upper bound of timespan."
-msgstr "Limite superiore dell’intervallo."
+msgid "Trashcan create failed. Check mounts and permissions."
+msgstr "Creazione cestino fallita! Controllare mount e permessi."
 
-#: ../src/AutoTimerEditor.py:511 ../src/AutoTimerEditor.py:550
-msgid ""
-"Upper bound of timespan. Nothing after this time will be matched. Offsets are not taken into "
-"account!"
-msgstr ""
-"Limite superiore dell’intervallo. Dopo questo limite non verrà confrontato nulla. I margini "
-"registrazione non saranno considerati!"
+msgid "Trashcan enable"
+msgstr "Abilita cestino"
 
-#: ../src/AutoTimerEditor.py:615 ../src/AutoTimerEditor.py:659
-msgid "Use a custom location"
-msgstr "Usare destinazione personalizzata"
+msgid "Trashcan path"
+msgstr "Percorso cestino"
 
-#: ../src/AutoTimerEditor.py:597
-msgid "Use automatic selection of alternates."
-msgstr "Usa una selezione automatica delle alternative."
+msgid "Try to load extra title and more from .meta files"
+msgstr "Prova a ottenere info extra dai file .meta"
 
-#: ../src/AutoTimerEditor.py:681
-msgid "Use other filters"
-msgstr "Usa altri filtri"
+msgid "Try to load titles from .eit files"
+msgstr "Prova a ottenere i titoli dai file .eit"
 
-#: ../src/AutoTimerList.py:194
-msgid "Wed"
-msgstr "MER"
+msgid "Try to load titles from .meta files"
+msgstr "Tentare caricamento dei titoli dal file .meta"
 
-#: ../src/AutoTimerEditor.py:46 ../src/AutoTimerEditor.py:47
-msgid "Wednesday"
-msgstr "Mercoledì"
+msgid "UNKNOWN"
+msgstr "SCONOSCIUTO"
 
-#: ../src/AutoTimerEditor.py:52 ../src/AutoTimerEditor.py:53 ../src/AutoTimerList.py:200
-msgid "Weekday"
-msgstr "Giorno feriale"
+msgid "Up"
+msgstr "Su"
 
-#: ../src/AutoTimerEditor.py:51 ../src/AutoTimerEditor.py:52 ../src/AutoTimerList.py:199
-msgid "Weekend"
-msgstr "Fine settimana"
+msgid "Upgrade/Download Mutagen v1.28(experimental)"
+msgstr "Aggiorna/Scarica Mutagen v1.28 (sperimentale)"
 
-#: ../src/AutoTimerEditor.py:309 ../src/AutoTimerEditor.py:304
-msgid "Weekly (Monday)"
-msgstr "Settimanale (lunedì)"
+msgid "Use cache for files and directories"
+msgstr "Usa la cache per file e cartelle"
 
-#: ../src/AutoTimerEditor.py:309 ../src/AutoTimerEditor.py:304
-msgid "Weekly (Sunday)"
-msgstr "Settimanale (domenica)"
+msgid "Use original EMC-skin (needs reopen)"
+msgstr "Usa skin integrata EMC (serve riavvio di EMC)"
 
-#: ../src/mphelp.xml:2
-msgid "Welcome to the AutoTimer-Plugin"
-msgstr "Benvenuti nel plugin AutoTimer"
+msgid "VLC"
+msgstr "VLC"
 
-#: ../src/autotimerwizard.xml
-msgid ""
-"Welcome.\n"
-"\n"
-"This Wizard will help you to create a new AutoTimer by providing descriptions for common "
-"settings."
-msgstr ""
-"Benvenuto.\n"
-"\n"
-"La Procedura guidata vi aiuterà nella creazione di un nuovo AutoTimer fornendo la descrizione "
-"delle opzioni più comuni."
+msgid "VLC Server not reachable"
+msgstr "Server VLC non raggiungibile"
 
-#: ../src/mphelp.xml:8
-msgid "What is this 'control menu' you keep talking about?"
-msgstr "Che cos’è questo Menu di controllo di cui continuate a parlare?"
+msgid "VLC-Dir"
+msgstr "Dir-VLC"
 
-#: ../src/AutoTimerSettings.py:50 ../src/AutoTimerSettings.py:79 ../src/AutoTimerSettings.py:62
-msgid ""
-"When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this "
-"unless your Image supports \"Fast Scan\" and you are using it."
-msgstr ""
-"Se 'Fast Scan' è abilitato il tipo di servizio viene ignorato. Non è necessario abilitare il "
-"parametro, a meno che l'immagine lo supporti e voi lo stiate utilizzando."
+msgid "VLC-Server"
+msgstr "Server-VLC"
 
-#: ../src/AutoTimerSettings.py:58 ../src/AutoTimerSettings.py:40
-msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."
-msgstr ""
-"Quando questa opzione è attivata, AutoTimer controllerà solo eventuali nuovi eventi mentre in "
-"standby."
+msgid "Video-button"
+msgstr "Tasto VIDEO"
 
-#: ../src/AutoTimerEditor.py:527 ../src/AutoTimerEditor.py:566
-msgid ""
-"When this option is enabled the AutoTimer won't match events where another timer with the "
-"same description already exists in the timer list."
-msgstr ""
-"Abilitando questa funzione, AutoTimer non considererà eventi per cui esiste già un timer con "
-"la medesima descrizione."
+msgid "Vote:"
+msgstr "Voto:"
 
-#: ../src/AutoTimerEditor.py:508
-msgid ""
-"With this option enabled the channel to record on can be changed to a alternative service it "
-"is restricted to."
-msgstr ""
-"Con questa opzione il canale da registrare può essere sostituito da un’alternativa presente "
-"nella lista ristretta dei canali prescelti."
+msgid "WD DD.MM. HH:MM"
+msgstr "giorno GG.MM. OO:MM"
 
-#: ../src/AutoTimerEditor.py:547
-msgid ""
-"With this option enabled the channel to record will be selected automaticliy using your list "
-"of alternates."
-msgstr ""
-"Con questa opzione il canale da registrare può essere automaticamente selezionato fra la "
-"vostra lista di alternative."
+msgid "WD DD.MM.YYYY"
+msgstr "giorno GG.MM.AAAA"
 
-#: ../src/AutoTimerEditor.py:524 ../src/AutoTimerEditor.py:563
-msgid ""
-"With this option you can restrict the AutoTimer to a certain amount of scheduled recordings. "
-"Set this to 0 to disable this functionality."
-msgstr ""
-"Tramite l'opzione è possibile restringere AutoTimer ad un certo numero di registrazioni "
-"programmate. 0 -> DISABILITA la funzione."
+msgid "WD DD.MM.YYYY HH:MM"
+msgstr "giorno GG.MM.AAAA OO:MM"
 
-#: ../src/plugin.py:28
-msgid "Wizard"
-msgstr "Procedura guidata"
+msgid "WD MM/DD HH:MM"
+msgstr "giorno GG/MM OO:MM"
 
-#: ../src/mphelp.xml:14
-msgid "Wizard or Classic Editor?"
-msgstr "Proced. guidata o Editor classico?"
+msgid "WD YYYY/MM/DD"
+msgstr "giorno AAAA/MM/GG"
 
-#: ../src/AutoTimerSettings.py:84 ../src/AutoTimerSettings.py:67
-msgid "Write the config file after every change which the user quits by saving."
-msgstr ""
-"Salva la configurazione dopo ogni cambiamento solo se l’utente esce salvando espressamente."
+msgid "WD YYYY/MM/DD HH:MM"
+msgstr "giorno AAAA/MM/GG OO:MM"
 
-#: ../src/autotimerwizard.xml
+msgid "Wake device when entering dir from emc-noscan.cfg"
+msgstr "Sveglia dispositivo se usi cartelle di emc-noscan.cfg"
+
+msgid "Week"
+msgstr "Settimana"
+
+msgid "Weeks"
+msgstr "Settimane"
+
+msgid "White"
+msgstr "Bianco"
+
+msgid "YYYY/MM/DD"
+msgstr "AAAA/MM/GG"
+
+msgid "YYYY/MM/DD HH:MM"
+msgstr "AAAA/MM/DD OO:MM"
+
+msgid "Yellow button function"
+msgstr "Funzione del tasto Giallo"
+
 msgid "Yes"
-msgstr "SI"
+msgstr "Si"
 
-#: ../src/AutoTimerOverview.py:187 ../src/AutoTimerOverview.py:203
-msgid "Yes, and delete all timers generated by this autotimer"
-msgstr "Sì, e CANCELLA tutti i timer creati da questo AutoTimer"
+msgid "Yes, everything"
+msgstr "Tutto"
 
-#: ../src/AutoTimerOverview.py:188 ../src/AutoTimerOverview.py:204
-msgid "Yes, but keep timers generated by this autotimer"
-msgstr "Sì, ma MANTIENI tutti i timer creati da questo AutoTimer"
+msgid "Yes, only extra title"
+msgstr "Solo titoli extra"
 
-#: ../src/autotimerwizard.xml
-msgid "Yes, keep them."
-msgstr "Si: mantenerli."
+msgid "Yes, with Message"
+msgstr "Si, con conferma"
 
-#: ../src/AutoTimerSettings.py:41 ../src/AutoTimerSettings.py:67 ../src/AutoTimerSettings.py:50
+msgid "Yes, without Message"
+msgstr "Si, senza conferma"
+
 msgid ""
-"You can control for how many days in the future timers are added. Set this to 0 to disable "
-"this feature."
+"Your Box is about to go into DeepStandby, continue?\n"
+" Select no to delay one hour"
 msgstr ""
-"E' possibile controllare per quanti giorni a venire possano essere aggiunti dei timer.\n"
-"0 -> DISABILITA la funzione."
+"Il tuo box sta per andare in DeepStandby: continuo?\n"
+" Seleziona NO per rinviare di un'ora"
 
-#: ../src/autotimerwizard.xml
 msgid ""
-"You can set the basic properties of an AutoTimer here.\n"
-"While 'Name' is just a human-readable name displayed in the Overview, 'Match in title' is "
-"what is looked for in the EPG."
+"Your Box is about to go into E2 Restart, continue?\n"
+" Select no to delay one hour"
 msgstr ""
-"Verranno configurate le proprietà fondamentali per un AutoTimer.\n"
-"[Descrizione] rappresenta solo la voce mostrata nel Riepilogo, mentre [Stringa di confronto] "
-"rappresenta la voce utilizzata per la ricerca nell'EPG."
+"Il sistema sta per essere riavviato: continuo?\n"
+" Seleziona NO per rinviare di un'ora"
 
-#: ../src/autotimerwizard.xml
 msgid ""
-"You did not provide a valid 'Match in title' Attribute for your new AutoTimer.\n"
-"As this is a mandatory Attribute you cannot continue without doing so."
+"Your Box is about to go into Reboot, continue?\n"
+" Select no to delay one hour"
 msgstr ""
-"Non è stata fornita una \"Stringa di confronto\" valida per il nuovo AutoTimer!\n"
-"Questo attributo è obbligatorio: non sarà possibile proseguire senza fornirlo."
+"Il tuo box sta per essere riavviato: continuo?\n"
+" Seleziona NO per rinviare di un'ora"
 
-#: ../src/AutoTimerEditor.py:721 ../src/AutoTimerImporter.py:250 ../src/AutoTimerEditor.py:779
-#: ../src/AutoTimerImporter.py:266
-#, python-format
 msgid ""
-"You entered \"%s\" as Text to match.\n"
-"Do you want to remove trailing whitespaces?"
+"Your Box is about to go into Standby, continue?\n"
+" Select no to delay one hour"
 msgstr ""
-"Il testo inserito per il confronto è \"%s\"\n"
-"Rimuovere gli spazi vuoti finali?"
+"Il tuo box sta per andare in Standby: continuo?\n"
+" Seleziona NO per rinviare di un’ora"
 
-#: ../src/mphelp.xml:18
+msgid "Zap to channel after record EOF"
+msgstr "Torna alla TV alla fine della riproduzione"
+
+msgid "after reload list"
+msgstr "dopo il ricaricamento della lista"
+
+msgid "after standby"
+msgstr "dopo lo Standby"
+
+msgid "all"
+msgstr "tutti"
+
+msgid "always"
+msgstr "sempre"
+
+msgid "always hide"
+msgstr "nascondi sempre"
+
+msgid "auto-start is currently not active."
+msgstr "Auto-avvio non è attualmente attivo."
+
+msgid "auto-start window begin"
+msgstr "Auto-start: inizio fascia oraria "
+
+msgid "auto-start window end"
+msgstr "Auto-start: fine fascia oraria "
+
+msgid "center"
+msgstr "centro"
+
+msgid "configuration"
+msgstr "Configurazione"
+
+msgid "covers in"
+msgstr "copertina in"
+
+msgid "csfd.cz"
+msgstr "csfd.cz"
+
+msgid "daily auto-start"
+msgstr "Auto-start giornaliero"
+
+msgid "down"
+msgstr "GIÙ"
+
+msgid "every single one"
+msgstr "ogni singolo"
+
+msgid "exception "
+msgstr "eccezione"
+
+msgid "forward to the next chapter"
+msgstr "avanti al prossimo capitolo"
+
+msgid "found"
+msgstr "trovato"
+
+msgid "from"
+msgstr "da"
+
+msgid "hide live TV"
+msgstr "nascondi live TV"
+
+msgid "hide live TV and timeshift"
+msgstr "nascondi live TV e timeshift"
+
+msgid "hide playback"
+msgstr "nascondi riproduzione"
+
+msgid "imdb.com"
+msgstr "imdb.com"
+
+msgid "jump back to the previous title"
+msgstr "Salta indietro al titolo precedente"
+
+msgid "jump forward to the next title"
+msgstr "Salta avanti al titolo successivo"
+
+msgid "jump to next marked position"
+msgstr "Salta alla posizione contrassegnata successiva"
+
+msgid "jump to previous marked position"
+msgstr "Salto alla posizione contrassegnata precedente"
+
+msgid "left"
+msgstr "sinistra"
+
+msgid "left from Name"
+msgstr "a sinistra del nome"
+
+msgid "movie manipulation list"
+msgstr "Elenco gestione registrazioni"
+
+msgid "movies found!"
+msgstr "Trovati film!"
+
+msgid "movies in"
+msgstr "Filmati in"
+
+msgid "never hide"
+msgstr "non nascondere"
+
+msgid "no"
+msgstr "no"
+
+msgid "no limit"
+msgstr "Nessun limite"
+
+msgid "off"
+msgstr "Off"
+
+msgid "only initially"
+msgstr "solo inizialmente"
+
+msgid "overall"
+msgstr "complessivo"
+
+msgid "rewind to the previous chapter"
+msgstr "indietro al capitolo precedente"
+
+msgid "right"
+msgstr "destra"
+
+msgid "right from Name"
+msgstr "a destra del nome"
+
+msgid "sec"
+msgstr "sec"
+
+msgid "sec found. Avg. Speed:"
+msgstr "sec.ricerca. Vel.Media:"
+
+msgid "sec."
+msgstr "sec."
+
+msgid "show DVD main menu"
+msgstr "mostra menu principale DVD"
+
+msgid "single pixel TV, muted"
+msgstr "single pixel TV, spento"
+
+msgid "standard cover"
+msgstr "copertina standard"
+
+msgid "stop service"
+msgstr "ferma servizio"
+
+msgid "switch to the next angle"
+msgstr "Passare all'angolo successivo"
+
+msgid "switch to the next audio track"
+msgstr "Passare alla traccia audio successiva"
+
+msgid "switch to the next subtitle language"
+msgstr "Passare al sottotitolo successivo"
+
+msgid "themoviedb.org"
+msgstr "themoviedb.org"
+
+msgid "themoviedb.org + thetvdb.com"
+msgstr "themoviedb.org + thetvdb.com"
+
+msgid "themoviedb.org + thetvdb.com + imdb.com"
+msgstr "themoviedb.org + thetvdb.com + imdb.com"
+
 msgid ""
-"You now know almost everything there is to know about the AutoTimer-Plugin./n/nAs a final "
-"hint I can't stress how important it is to take a look at the help texts that are shown in "
-"the setup dialogs as they cover the most frequently asked questions. Surprisingly even after "
-"the hints were added ;-)."
+"themoviedb.org for movies + thetvdb.com for series (e.g. 'S01E01' in title)"
 msgstr ""
-"Adesso sapete praticamente tutto ciò che c’è da sapere a proposito del plugin AutoTimer./n/"
-"nCome suggerimento finale non posso non sottolineare quanto sia importante dare un’occhiata "
-"ai testi dell’Aiuto presentati nelle finestre di dialogo delle impostazioni poiché esse "
-"toccano le questioni più rilevanti; e ciò, sorprendentemente, anche dopo che sono stati "
-"aggiunti questi suggerimenti ;-)"
+"themoviedb.org per i film + thetvdb.com per le serie (es. 'S01E01' in titolo)"
 
-#: ../src/autotimerwizard.xml
-msgid ""
-"You successfully configured a new AutoTimer. Do you want to add it to the list?\n"
-"\n"
-"You can go back a step by pressing EXIT on your remote."
-msgstr ""
-"Un nuovo AutoTimer è stato configurato con successo. Aggiungerlo alla lista?\n"
-"\n"
-"Per tornare al passo precedente, premere EXIT sul telecomando."
+msgid "thetvdb cover number (standard cover):"
+msgstr "Numero copertina “thetvdb” (copertina standard):"
 
-#: ../src/autotimerwizard.xml
-msgid ""
-"Your 'Match in title' Attribute ends with a Whitespace.\n"
-"Please confirm if this was intentional, if not they will be removed."
-msgstr ""
-"La stringa di confronto fornita termina con uno spazio.\n"
-"Confermare se la cosa era voluta; diversamente sarà rimosso."
+msgid "thetvdb cover range per title:"
+msgstr "intervallo copertina “thetvdb” per titolo:"
 
-#: ../src/plugin.py:146 ../src/plugin.py:115
-#, python-format
-msgid ""
-"Your config file is not well-formed:\n"
-"%s"
-msgstr ""
-"Il tuo file di config non è ben compilato:\n"
-"%s"
+msgid "thetvdb.com"
+msgstr "thetvdb.com"
 
-#. TRANSLATORS: AutoTimer title in MovieList (automatically opens importer, I consider this no further interaction)
-#: ../src/plugin.py:233 ../src/plugin.py:190
-msgid "add AutoTimer"
-msgstr "aggiungi un'AutoTimer"
+msgid "three contiguous"
+msgstr "tre contigui"
 
-#. TRANSLATORS: AutoTimer title in EventInfo dialog (requires the user to select an event to base the AutoTimer on)
-#: ../src/plugin.py:235 ../src/plugin.py:192
-msgid "add AutoTimer..."
-msgstr "aggiungi un'AutoTimer…"
+msgid "toggle a cut mark at the current position"
+msgstr "Imposta contrassegno di taglio alla posizione corrente"
 
-#: ../src/AutoTimerEditor.py:469
-msgid "add filters"
-msgstr "aggiungo dei filtri"
+msgid "trashcan"
+msgstr "cestino"
 
-#: ../src/AutoTimerEditor.py:475
-msgid "add services"
-msgstr "aggiungo dei canali"
+msgid "two contiguous"
+msgstr "due contigui"
 
-#: ../src/AutoTimerEditor.py:265 ../src/AutoTimerImporter.py:30 ../src/AutoTimerEditor.py:260
-msgid "auto"
-msgstr "auto"
+msgid "type 1 - OSD + black (#00000000)"
+msgstr "#1-OSD + nero"
 
-#: ../src/AutoTimerResource.py:166 ../src/AutoTimerResource.py:187
-#: ../src/AutoTimerResource.py:189
-msgid "autotimers need a match attribute"
-msgstr "autoTimer richiede una corrispondenza"
+msgid "type 2 - transparent + white (#FFFFFFFF)"
+msgstr "#2-traspar+BIANCO"
 
-#: ../src/AutoTimerEditor.py:188 ../src/AutoTimerEditor.py:183
-msgid "case-insensitive search"
-msgstr "NON distinguere Maiusc. - minusc."
+msgid "type 3 - OSD + black (#00FFFFFF)"
+msgstr "#3-OSD+nero2"
 
-#: ../src/AutoTimerEditor.py:188 ../src/AutoTimerEditor.py:183
-msgid "case-sensitive search"
-msgstr "Distinguere Maiusc. - minusc."
+msgid "type 4 - transparent + black (#FF000000)"
+msgstr "#4-traspar. + nero3"
 
-#: ../src/AutoTimerResource.py:409 ../src/AutoTimerResource.py:460
-#: ../src/AutoTimerResource.py:458
-msgid "config changed."
-msgstr "configurazione modificata."
-
-#: ../src/AutoTimerEditor.py:894 ../src/AutoTimerEditor.py:1097
-msgid "delete"
-msgstr "cancella"
-
-#: ../src/AutoTimerEditor.py:187 ../src/AutoTimerEditor.py:182
-msgid "description match"
-msgstr "corrispondenza descrizione"
-
-#: ../src/AutoTimerImporter.py:130 ../src/AutoTimerImporter.py:146
-msgid "disable"
-msgstr "disabilitare"
-
-#: ../src/AutoTimerEditor.py:494 ../src/AutoTimerEditor.py:498 ../src/AutoTimerEditor.py:509
-#: ../src/AutoTimerEditor.py:513
-msgid "disabled"
-msgstr "disabilitato"
-
-#: ../src/AutoTimerEditor.py:262 ../src/AutoTimerImporter.py:27 ../src/AutoTimerEditor.py:257
-msgid "do nothing"
-msgstr "non fare nulla"
-
-#: ../src/AutoTimerEditor.py:467
-msgid "edit filters"
-msgstr "modifica filtri"
-
-#: ../src/AutoTimerEditor.py:473
-msgid "edit services"
-msgstr "modifica canali"
-
-#: ../src/AutoTimerImporter.py:130 ../src/AutoTimerImporter.py:146
-msgid "enable"
-msgstr "abilitare"
-
-#: ../src/AutoTimerEditor.py:492 ../src/AutoTimerEditor.py:496 ../src/AutoTimerEditor.py:507
-#: ../src/AutoTimerEditor.py:511
-msgid "enabled"
-msgstr "abilitato"
-
-#: ../src/AutoTimerEditor.py:187 ../src/AutoTimerEditor.py:182
-msgid "exact match"
-msgstr "corrispondenza esatta"
-
-#: ../src/AutoTimerEditor.py:264 ../src/AutoTimerImporter.py:28 ../src/AutoTimerEditor.py:259
-msgid "go to deep standby"
-msgstr "spegnere (Deep Standby)"
-
-#: ../src/AutoTimerEditor.py:263 ../src/AutoTimerImporter.py:29 ../src/AutoTimerEditor.py:258
-msgid "go to standby"
-msgstr "vai in Standby"
-
-#: ../src/AutoTimerEditor.py:877 ../src/AutoTimerEditor.py:1070
-msgid "in Description"
-msgstr "nella descrizione"
-
-#: ../src/AutoTimerEditor.py:876 ../src/AutoTimerEditor.py:1069
-msgid "in Shortdescription"
-msgstr "nella descrizione breve"
-
-#: ../src/AutoTimerEditor.py:875 ../src/AutoTimerEditor.py:1068
-msgid "in Title"
-msgstr "nel titolo"
-
-#: ../src/AutoTimerPreview.py:52 ../src/AutoTimerPreview.py:77
-msgid "mins"
-msgstr "minuti"
-
-#: ../src/AutoTimerResource.py:134 ../src/AutoTimerResource.py:156
-#: ../src/AutoTimerResource.py:158
-msgid "missing parameter \"id\""
-msgstr "parametro \"id\" mancante."
-
-#: ../src/AutoTimerEditor.py:878 ../src/AutoTimerEditor.py:1071
-msgid "on Weekday"
-msgstr "nei giorni feriali"
-
-#: ../src/AutoTimerEditor.py:187 ../src/AutoTimerEditor.py:182
-msgid "partial match"
-msgstr "corrispondenza parziale"
-
-#: ../src/AutoTimerEditor.py:194 ../src/AutoTimerImporter.py:191 ../src/AutoTimerEditor.py:189
-#: ../src/AutoTimerImporter.py:207
-msgid "record"
-msgstr "registrazione"
-
-#: ../src/AutoTimerEditor.py:262 ../src/AutoTimerEditor.py:257
-msgid "standard"
-msgstr "azione predefinita"
-
-#: ../src/AutoTimerEditor.py:182
-msgid "title starts with"
-msgstr "il titolo inizia per"
-
-#: ../src/AutoTimerResource.py:160 ../src/AutoTimerResource.py:181
-#: ../src/AutoTimerResource.py:183
-#, python-format
-msgid "unable to find timer with id %i"
-msgstr "impossibile trovare il timer con ID %i"
-
-#: ../src/AutoTimerEditor.py:355 ../src/AutoTimerEditor.py:356 ../src/AutoTimerEditor.py:357
-#: ../src/AutoTimerEditor.py:358
 msgid "unknown"
 msgstr "sconosciuto"
 
-#: ../src/AutoTimerEditor.py:194 ../src/AutoTimerImporter.py:191 ../src/AutoTimerEditor.py:189
-#: ../src/AutoTimerImporter.py:207
-msgid "zap"
-msgstr "zap"
+msgid "up/down"
+msgstr "SU/GIÙ"
 
-#: ../src/AutoTimerEditor.py:189
-msgid "zap and record"
-msgstr "zap + registrazione"
+msgid "view extensions..."
+msgstr "Visualizza estensioni..."
 
-#: ../src/AutoTimerSettings.py:146
-msgid " - Version: "
-msgstr " - Versione: "
+msgid "yes"
+msgstr "sì"
 
-msgid "Add Autotimer"
-msgstr "Aggiungi AutoTimer"
+msgid "Default color for unwatched movie"
+msgstr "Colore di default per i film non visti"
 
-msgid ""
-"If this is disabled AutoTimer will NOT automatically look for events matching your AutoTimers "
-"but only when you leave the GUI with the green button."
-msgstr ""
-"Se non abilitata, AutoTimer NON verificherà subito una corrispondenza fra gli eventi. Tale "
-"verifica sarà eseguita solo dopo la pressione del tasto verde."
+msgid "Default color for partially watched movie"
+msgstr "Colore di default per i film visti parzialmente"
 
-msgid "Poll Interval (in %s)"
-msgstr "Intervallo di ricerca (in %s)"
+msgid "Default color for watched movie"
+msgstr "Colore di default per i film visti"
 
-msgid "Poll unit"
-msgstr "Unità di ricerca"
+msgid "Default color for recording movie"
+msgstr "Colore di default per i film in registrazione"
 
-msgid "Poll unit selects whether the poll interval should be interpreted in hours or minutes."
-msgstr "L'unità di ricerca seleziona se l'intervallo deve essere interpretato in ore o minuti."
+msgid "Default color for highlighted movie"
+msgstr "Colore di default per i film evidenziati"
 
-msgid ""
-"Startup delay is the number of minutes before polling after a reboot, so as to not delay "
-"enigma2 startup time."
-msgstr ""
-"Ritardo in minuti all’avvio automatico di AutoTimer, applicato per non gravare sui tempi di "
-"avvio del sistema."
+msgid "HELP_Default color unwatched"
+msgstr "Colore di default per i film ancora non visti"
 
-msgid ""
-"This is the delay in %s that the AutoTimer will wait after doing a search before searching "
-"the EPG again."
-msgstr "Questo è l’intervallo in %s fra una ricerca e l’altra di eventi corrispondenti in EPG."
+msgid "HELP_Default color partially watched"
+msgstr "Colore di default per i film visti solo in parte"
 
-msgid "hours"
-msgstr "ore"
+msgid "HELP_Default color watched"
+msgstr "Colore di default per i film già visti"
 
-msgid "minutes"
-msgstr "minuti"
+msgid "HELP_Default color recording"
+msgstr "Colore di default per i film in fase di registrazione"
 
-msgid " (if services are enabled, bouquets are ignored.)."
-msgstr " (se i servizi sono abilitati, i bouquet vengono ignorati)."
-
+msgid "HELP_Default color highlighted"
+msgstr "Colore di default per i film evidenziati"
