@@ -24,7 +24,7 @@ from UserManager import UserManager
 class AutoMountManager(Screen):
 	skin = """
 		<screen name="AutoMountManager" position="center,center" size="560,400" title="AutoMountManager">
-			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 			<widget source="config" render="Listbox" position="5,50" size="540,300" scrollbarMode="showOnDemand" >
 				<convert type="TemplatedMultiContent">
@@ -38,7 +38,7 @@ class AutoMountManager(Screen):
 					}
 				</convert>
 			</widget>
-			<ePixmap pixmap="div-h.png" position="0,360" zPosition="1" size="560,2" />
+			<ePixmap pixmap="skin_default/div-h.png" position="0,360" zPosition="1" size="560,2" />
 			<widget source="introduction" render="Label" position="10,370" size="540,21" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1"/>
 		</screen>"""
 	def __init__(self, session, iface ,plugin_path):

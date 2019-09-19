@@ -29,11 +29,11 @@ class ChangePasswdScreen(Screen):
 	skin = """
 		<screen position="65,160" size="585,250" title="%s" >
 		<widget name="passwd" position="10,10" size="565,200" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="div-h.png" position="10,205" size="565,2" transparent="1" alphatest="on" />
-		<ePixmap pixmap="buttons/red.png" position="5,210" size="140,40" alphatest="on" />
-		<ePixmap pixmap="buttons/green.png" position="150,210" size="140,40" alphatest="on" />
-		<ePixmap pixmap="buttons/yellow.png" position="295,210" size="140,40" alphatest="on" />
-		<ePixmap pixmap="buttons/blue.png" position="440,210" size="140,40" alphatest="on" />
+		<ePixmap pixmap="skin_default/div-h.png" position="10,205" size="565,2" transparent="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/red.png" position="5,210" size="140,40" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/green.png" position="150,210" size="140,40" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/yellow.png" position="295,210" size="140,40" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/blue.png" position="440,210" size="140,40" alphatest="on" />
 		<widget source="key_red" render="Label" position="5,210" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 		<widget source="key_green" render="Label" position="150,210" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 		<widget source="key_yellow" render="Label" position="295,210" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />

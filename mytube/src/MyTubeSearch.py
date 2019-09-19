@@ -290,8 +290,8 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 			<widget name="config" zPosition="2" position="60,120" size="610,370" scrollbarMode="showOnDemand" transparent="1" />
 
 			<ePixmap position="100,500" size="100,40" zPosition="0" pixmap="~/plugin.png" alphatest="on" transparent="1" />
-			<ePixmap position="220,500" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap position="360,500" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap position="220,500" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="360,500" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 			<widget name="key_red" position="220,500" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_green" position="360,500" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
@@ -466,7 +466,7 @@ class MyTubeTasksScreen(Screen):
 				</convert>
 			</widget>
 			<ePixmap position="100,500" size="100,40" zPosition="0" pixmap="~/plugin.png" alphatest="on" transparent="1" />
-			<ePixmap position="220,500" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="220,500" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 			<widget name="key_red" position="220,500" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 

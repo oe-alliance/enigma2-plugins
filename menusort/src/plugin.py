@@ -169,7 +169,7 @@ class SortableMenuList(MenuList):
 
 class SortableMenu(Menu, HelpableScreen):
 	skin = """<screen name="SortableMenu" position="center,center" size="210,280">
-		<ePixmap position="0,0" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 		<widget source="key_blue" render="Label" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="menu" position="5,45" size="200,225" scrollbarMode="showOnDemand" font="Regular;23" />
 		</screen>"""

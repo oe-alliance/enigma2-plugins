@@ -53,8 +53,8 @@ class vierg(Screen):
 				<widget source="Canvas" render="Canvas" position="10,0" size="358,358" zPosition="1" />
 				<ePixmap name="layout" position="0,0" zPosition="2" size="378,440" pixmap="%s" transparent="1" alphatest="on" />
 				<widget name="message" position="0,360" size="378,30" zPosition="3" backgroundColor="#062748" valign="center" halign="center" font="Regular;26"/>
-				<ePixmap name="red"   position=" 10,390" zPosition="3" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-				<ePixmap name="green" position="228,390" zPosition="3" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
+				<ePixmap name="red"   position=" 10,390" zPosition="3" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+				<ePixmap name="green" position="228,390" zPosition="3" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 				<widget name="key_red"   position=" 10,390" zPosition="4" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="key_green" position="228,390" zPosition="4" size="140,40" valign="center" halign="center"  font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			</screen>""" % (VERSION, layout)

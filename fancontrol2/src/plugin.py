@@ -638,12 +638,12 @@ class FanControl2SpezialSetup(Screen, ConfigListScreen):
 class FanControl2Plugin(ConfigListScreen,Screen):
 	skin = """
 		<screen position="center,center" size="600,450" title="Fan Control 2">
-			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/key_info.png" position="560,0" zPosition="4" size="35,25"  transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/key_menu.png" position="560,20" zPosition="4" size="35,25"  transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/key_info.png" position="560,0" zPosition="4" size="35,25"  transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/key_menu.png" position="560,20" zPosition="4" size="35,25"  transparent="1" alphatest="on" />
 			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
@@ -651,9 +651,9 @@ class FanControl2Plugin(ConfigListScreen,Screen):
 			<widget source="Version" render="Label" position="5,430" size="60,20" zPosition="1" font="Regular;11" halign="left" valign="center" backgroundColor="#25062748" transparent="1" />
 
 			<widget name="config" position="10,50" size="580,200" scrollbarMode="showOnDemand" />
-			<ePixmap position="20,260" size="560,3" pixmap="div-h.png" transparent="1" alphatest="on" />
+			<ePixmap position="20,260" size="560,3" pixmap="skin_default/div-h.png" transparent="1" alphatest="on" />
 			<widget source="introduction" render="Label" position="5,262" size="580,30" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
-			<ePixmap position="20,290" size="560,3" pixmap="div-h.png" transparent="1" alphatest="on" />
+			<ePixmap position="20,290" size="560,3" pixmap="skin_default/div-h.png" transparent="1" alphatest="on" />
 			<widget source="TxtTemp" render="Label" position="5,310" size="200,25" zPosition="1" font="Regular;17" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />
 			<widget source="TxtZielRPM" render="Label" position="5,330" size="200,25" zPosition="1" font="Regular;17" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />
 			<widget source="TxtRPM" render="Label" position="5,350" size="200,25" zPosition="1" font="Regular;17" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />

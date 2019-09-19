@@ -6,10 +6,10 @@
 
 	<screen name = "YouTubeAddPlaylistDialog" position = "80,85" size = "560,315" title = "Edit YouTube Playlists">
 		<widget name = "config" position = "10,10" size = "540,250" scrollbarMode = "showOnDemand" />
-		<ePixmap name = "red"    position = "0,275"   zPosition = "4" size = "140,40" pixmap = "buttons/red.png" transparent = "1" alphatest = "on" />
-		<ePixmap name = "green"  position = "140,275" zPosition = "4" size = "140,40" pixmap = "buttons/green.png" transparent = "1" alphatest = "on" />
-		<ePixmap name = "yellow" position = "280,275" zPosition = "4" size = "140,40" pixmap = "buttons/yellow.png" transparent = "1" alphatest = "on" />
-		<ePixmap name = "blue"   position = "420,275" zPosition = "4" size = "140,40" pixmap = "buttons/blue.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "red"    position = "0,275"   zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/red.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "green"  position = "140,275" zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/green.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "yellow" position = "280,275" zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/yellow.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "blue"   position = "420,275" zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/blue.png" transparent = "1" alphatest = "on" />
 		<widget name = "key_red" position = "0,275" zPosition = "5" size = "140,40" valign = "center" halign = "center" font = "Regular;21" transparent = "1" foregroundColor = "white" shadowColor = "black" shadowOffset = "-1,-1" />
 		<widget name = "key_green" position = "140,275" zPosition = "5" size = "140,40" valign = "center" halign = "center" font = "Regular;21" transparent = "1" foregroundColor = "white" shadowColor = "black" shadowOffset = "-1,-1" />
 		<widget name = "key_yellow" position = "280,275" zPosition = "5" size = "140,40" valign = "center" halign = "center"  font = "Regular;21" transparent = "1" foregroundColor = "white" shadowColor = "black" shadowOffset = "-1,-1" />
@@ -43,7 +43,7 @@
 		<widget name = "video_category" position = "250,90" size = "300,20" valign = "left" font = "Regular;20"/>
 		<widget name = "label_video_tags" position = "150,110" size = "95,20" font = "Regular;20" halign = "right" />
 		<widget name = "video_tags" position = "250,110" size = "300,60" valign = "left" font = "Regular;20"/>
-		<ePixmap pixmap = "div-h.png" position = "150,179" zPosition = "1" size = "400,2" />
+		<ePixmap pixmap = "skin_default/div-h.png" position = "150,179" zPosition = "1" size = "400,2" />
 		<widget name = "video_description" position = "150,190" size = "400,210" font = "Regular;20" />
 	</screen>
 
@@ -52,28 +52,28 @@
 		<widget name = "total_results" position = "170,13" size = "110,20" font = "Regular;20" />
 		<widget name = "label_currently_shown" position = "280,13" size = "110,20" font = "Regular;20" halign = "right" />
 		<widget name = "currently_shown" position = "400,13" size = "160,20" font = "Regular;20" />
-		<ePixmap pixmap = "div-h.png" position = "0,44" zPosition = "1" size = "560,2" />
+		<ePixmap pixmap = "skin_default/div-h.png" position = "0,44" zPosition = "1" size = "560,2" />
 		<widget name = "list" position = "5,55" size = "550,315" scrollbarMode = "showOnDemand" />
-		<ePixmap name = "key_red" position = "40,370" zPosition = "1" size = "200,40" pixmap = "buttons/red-big.png" transparent = "1" alphatest = "on" />
-		<ePixmap name = "key_green" position = "320,370" zPosition = "1" size = "200,40" pixmap = "buttons/green-big.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "key_red" position = "40,370" zPosition = "1" size = "200,40" pixmap = "skin_default/buttons/red-big.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "key_green" position = "320,370" zPosition = "1" size = "200,40" pixmap = "skin_default/buttons/green-big.png" transparent = "1" alphatest = "on" />
 		<widget name = "red" position = "40,370" size = "200,40" font = "Regular;19" valign = "center" halign = "center" transparent = "1" zPosition = "2" />
 		<widget name = "green" position = "320,370" size = "200,40" font = "Regular;19" valign = "center" halign = "center" transparent = "1" zPosition = "2" />
 	</screen>
 
 	<screen name = "YouTubePlaylistScreen" position = "80,85" size = "560,410" title = "YouTube Playlists" transparent = "0">
 		<widget name = "list" position = "5,10" size = "550,350" scrollbarMode = "showOnDemand" />
-		<ePixmap name = "key_red" position = "40,370" zPosition = "1" size = "200,40" pixmap = "buttons/red-big.png" transparent = "1" alphatest = "on" />
-		<ePixmap name = "key_green" position = "320,370" zPosition = "1" size = "200,40" pixmap = "buttons/green-big.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "key_red" position = "40,370" zPosition = "1" size = "200,40" pixmap = "skin_default/buttons/red-big.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "key_green" position = "320,370" zPosition = "1" size = "200,40" pixmap = "skin_default/buttons/green-big.png" transparent = "1" alphatest = "on" />
 		<widget name = "red" position = "40,370" size = "200,40" font = "Regular;19" valign = "center" halign = "center" transparent = "1" zPosition = "2" />
 		<widget name = "green" position = "320,370" size = "200,40" font = "Regular;19" valign = "center" halign = "center" transparent = "1" zPosition = "2" />
 	</screen>
 
 	<screen name = "YouTubeSearchDialog" position = "80,85" size = "560,315" title = "YouTube Player">
 		<widget name = "config" position = "10,10" size = "540,250" scrollbarMode = "showOnDemand" />
-		<ePixmap name = "red"    position = "0,275"   zPosition = "4" size = "140,40" pixmap = "buttons/red.png" transparent = "1" alphatest = "on" />
-		<ePixmap name = "green"  position = "140,275" zPosition = "4" size = "140,40" pixmap = "buttons/green.png" transparent = "1" alphatest = "on" />
-		<ePixmap name = "yellow" position = "280,275" zPosition = "4" size = "140,40" pixmap = "buttons/yellow.png" transparent = "1" alphatest = "on" />
-		<ePixmap name = "blue"   position = "420,275" zPosition = "4" size = "140,40" pixmap = "buttons/blue.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "red"    position = "0,275"   zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/red.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "green"  position = "140,275" zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/green.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "yellow" position = "280,275" zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/yellow.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "blue"   position = "420,275" zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/blue.png" transparent = "1" alphatest = "on" />
 		<widget name = "key_red" position = "0,275" zPosition = "5" size = "140,40" valign = "center" halign = "center" font = "Regular;21" transparent = "1" foregroundColor = "white" shadowColor = "black" shadowOffset = "-1,-1" />
 		<widget name = "key_green" position = "140,275" zPosition = "5" size = "140,40" valign = "center" halign = "center" font = "Regular;21" transparent = "1" foregroundColor = "white" shadowColor = "black" shadowOffset = "-1,-1" />
 		<widget name = "key_yellow" position = "280,275" zPosition = "5" size = "140,40" valign = "center" halign = "center"  font = "Regular;21" transparent = "1" foregroundColor = "white" shadowColor = "black" shadowOffset = "-1,-1" />
@@ -88,10 +88,10 @@
 
 	<screen name = "YouTubeUserConfigScreen" position = "80,85" size = "560,315" title = "Edit YouTube User-Profiles">
 		<widget name = "config" position = "10,10" size = "540,250" scrollbarMode = "showOnDemand" />
-		<ePixmap name = "red"    position = "0,275"   zPosition = "4" size = "140,40" pixmap = "buttons/red.png" transparent = "1" alphatest = "on" />
-		<ePixmap name = "green"  position = "140,275" zPosition = "4" size = "140,40" pixmap = "buttons/green.png" transparent = "1" alphatest = "on" />
-		<ePixmap name = "yellow" position = "280,275" zPosition = "4" size = "140,40" pixmap = "buttons/yellow.png" transparent = "1" alphatest = "on" />
-		<ePixmap name = "blue"   position = "420,275" zPosition = "4" size = "140,40" pixmap = "buttons/blue.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "red"    position = "0,275"   zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/red.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "green"  position = "140,275" zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/green.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "yellow" position = "280,275" zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/yellow.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "blue"   position = "420,275" zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/blue.png" transparent = "1" alphatest = "on" />
 		<widget name = "key_red" position = "0,275" zPosition = "5" size = "140,40" valign = "center" halign = "center" font = "Regular;21" transparent = "1" foregroundColor = "white" shadowColor = "black" shadowOffset = "-1,-1" />
 		<widget name = "key_green" position = "140,275" zPosition = "5" size = "140,40" valign = "center" halign = "center" font = "Regular;21" transparent = "1" foregroundColor = "white" shadowColor = "black" shadowOffset = "-1,-1" />
 		<widget name = "key_yellow" position = "280,275" zPosition = "5" size = "140,40" valign = "center" halign = "center"  font = "Regular;21" transparent = "1" foregroundColor = "white" shadowColor = "black" shadowOffset = "-1,-1" />
@@ -100,12 +100,12 @@
 
 	<screen name = "YouTubeUserListScreen" position = "80,85" size = "560,410" title = "YouTube User-Profiles" >
 		<widget name = "label_info" position = "10,9" size = "540,42" halign = "center" valign = "center" font = "Regular;21" />
-		<ePixmap pixmap = "div-h.png" position = "0,56" zPosition = "1" size = "560,2" />
+		<ePixmap pixmap = "skin_default/div-h.png" position = "0,56" zPosition = "1" size = "560,2" />
 		<widget name = "userlist" position = "10,62" size = "540,283"  scrollbarMode = "showOnDemand"/>
-		<ePixmap name = "red"    position = "0,370"   zPosition = "4" size = "140,40" pixmap = "buttons/red.png" transparent = "1" alphatest = "on" />
-		<ePixmap name = "green"  position = "140,370" zPosition = "4" size = "140,40" pixmap = "buttons/green.png" transparent = "1" alphatest = "on" />
-		<ePixmap name = "yellow" position = "280,370" zPosition = "4" size = "140,40" pixmap = "buttons/yellow.png" transparent = "1" alphatest = "on" />
-		<ePixmap name = "blue"   position = "420,370" zPosition = "4" size = "140,40" pixmap = "buttons/blue.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "red"    position = "0,370"   zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/red.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "green"  position = "140,370" zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/green.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "yellow" position = "280,370" zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/yellow.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "blue"   position = "420,370" zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/blue.png" transparent = "1" alphatest = "on" />
 		<widget name = "key_red" position = "0,370" zPosition = "5" size = "140,40" valign = "center" halign = "center" font = "Regular;21" transparent = "1" foregroundColor = "white" shadowColor = "black" shadowOffset = "-1,-1" />
 		<widget name = "key_green" position = "140,370" zPosition = "5" size = "140,40" valign = "center" halign = "center" font = "Regular;21" transparent = "1" foregroundColor = "white" shadowColor = "black" shadowOffset = "-1,-1" />
 		<widget name = "key_yellow" position = "280,370" zPosition = "5" size = "140,40" valign = "center" halign = "center"  font = "Regular;21" transparent = "1" foregroundColor = "white" shadowColor = "black" shadowOffset = "-1,-1" />

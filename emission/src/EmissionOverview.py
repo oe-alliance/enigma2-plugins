@@ -78,22 +78,22 @@ class TorrentLocationBox(LocationBox):
 
 class EmissionOverview(Screen, HelpableScreen):
 	skin = """<screen name="EmissionOverview" title="Torrent Overview" position="75,135" size="565,330">
-		<ePixmap position="0,0" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,0" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,0" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="420,0" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget size="320,25" alphatest="on" position="5,45" zPosition="1" name="all_sel" pixmap="epg_now.png" />
+		<widget size="320,25" alphatest="on" position="5,45" zPosition="1" name="all_sel" pixmap="skin_default/epg_now.png" />
 		<widget valign="center" transparent="1" size="108,22" backgroundColor="#25062748" position="5,47" zPosition="2" source="all_text" render="Label" halign="center" font="Regular;18" />
-		<widget size="320,25" alphatest="on" position="5,45" zPosition="1" name="downloading_sel" pixmap="epg_next.png" />
+		<widget size="320,25" alphatest="on" position="5,45" zPosition="1" name="downloading_sel" pixmap="skin_default/epg_next.png" />
 		<widget valign="center" transparent="1" size="108,22" backgroundColor="#25062748" position="111,47" zPosition="2" source="downloading_text" render="Label" halign="center" font="Regular;18" />
-		<widget size="320,25" alphatest="on" position="5,45" zPosition="1" name="seeding_sel" pixmap="epg_more.png" />
+		<widget size="320,25" alphatest="on" position="5,45" zPosition="1" name="seeding_sel" pixmap="skin_default/epg_more.png" />
 		<widget valign="center" transparent="1" size="108,22" backgroundColor="#25062748" position="212,47" zPosition="2" source="seeding_text" render="Label" halign="center" font="Regular;18" />
 		<widget source="torrents" render="Label" size="240,22" position="320,47" halign="right" font="Regular;18" />
-		<!--ePixmap size="550,230" alphatest="on" position="5,65" pixmap="border_epg.png" /-->
+		<!--ePixmap size="550,230" alphatest="on" position="5,65" pixmap="skin_default/border_epg.png" /-->
 		<widget source="list" render="Listbox" position="5,70" size="550,225" scrollbarMode="showAlways">
 			<convert type="TemplatedMultiContent">
 				{"template": [

@@ -41,10 +41,10 @@ class AutomaticVolumeAdjustmentConfigScreen(ConfigListScreen, Screen):
 	skin = """
 		<screen name="AutomaticVolumeAdjustmentConfigScreen" position="center,center" size="550,400">
 			<widget name="config" position="20,10" size="520,330" scrollbarMode="showOnDemand" />
-			<ePixmap position="0,350" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap position="140,350" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap position="280,350" zPosition="4" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap position="420,350" zPosition="4" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+			<ePixmap position="0,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="140,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap position="280,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap position="420,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 
 			<widget source="key_red" render="Label" position="0,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget source="key_green" render="Label" position="140,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -127,10 +127,10 @@ class AutomaticVolumeAdjustmentEntriesListConfigScreen(Screen):
 			<widget source="key_green" render="Label" position="140,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_yellow" position="280,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="yellow" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_blue" position="420,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<ePixmap position="0,350" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap position="140,350" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap position="280,350" zPosition="4" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap position="420,350" zPosition="4" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+			<ePixmap position="0,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="140,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap position="280,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap position="420,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 		</screen>"""
 
 	def __init__(self, session, configVA):
@@ -228,10 +228,10 @@ class AutomaticVolumeAdjustmentEntryConfigScreen(ConfigListScreen, Screen):
 	skin = """
 		<screen name="AutomaticVolumeAdjustmentEntryConfigScreen" position="center,center" size="550,400">
 			<widget name="config" position="20,10" size="520,330" scrollbarMode="showOnDemand" />
-			<ePixmap position="0,350" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap position="140,350" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap position="280,350" zPosition="4" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap position="420,350" zPosition="4" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+			<ePixmap position="0,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="140,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap position="280,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap position="420,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 
 			<widget source="key_red" render="Label" position="0,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget source="key_green" render="Label" position="140,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />

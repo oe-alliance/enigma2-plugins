@@ -59,8 +59,8 @@ class RemoteTimerEntry(Screen, ConfigListScreen):
 	if HD:
 		skin = """
 			<screen name="RemoteTimerEntry" position="center,center" size="760,430" title="Timer entry">
-				<widget name="cancel" pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-				<widget name="ok" pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+				<widget name="cancel" pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+				<widget name="ok" pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 				<widget name="canceltext" position="0,0" zPosition="2" size="140,40" halign="center" valign="center" font="Regular;21" backgroundColor="#9f1313" transparent="1" />
 				<widget name="oktext" position="140,0" zPosition="2" size="140,40" halign="center" valign="center" font="Regular;21" backgroundColor="#1f771f" transparent="1" />
 				<widget name="config" position="10,45" size="740,385" scrollbarMode="showOnDemand" />
@@ -68,10 +68,10 @@ class RemoteTimerEntry(Screen, ConfigListScreen):
 	else:
 		skin = """
 			<screen name="RemoteTimerEntry" position="center,center" size="560,430" title="Timer entry">
-				<widget name="cancel" pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-				<widget name="ok" pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+				<widget name="cancel" pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+				<widget name="ok" pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 				<widget name="canceltext" position="0,0" zPosition="2" size="140,40" halign="center" valign="center" font="Regular;21" backgroundColor="#9f1313" transparent="1" />
 				<widget name="oktext" position="140,0" zPosition="2" size="140,40" halign="center" valign="center" font="Regular;21" backgroundColor="#1f771f" transparent="1" />
 				<widget name="config" position="10,45" size="540,385" scrollbarMode="showOnDemand" />

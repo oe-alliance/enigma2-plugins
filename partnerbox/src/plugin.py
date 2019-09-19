@@ -245,10 +245,10 @@ class RemoteTimer(Screen):
 	if HD:
 		skin = """
 			<screen name="RemoteTimer" position="center,center" size="560,455" title="RemoteTimer Timerlist">
-				<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on"/>
-				<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on"/>
-				<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on"/>
-				<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on"/>
+				<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on"/>
+				<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on"/>
+				<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on"/>
+				<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on"/>
 				<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#9f1313" transparent="1"/>
 				<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#1f771f" transparent="1"/>
 				<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#a08500" transparent="1"/>
@@ -260,10 +260,10 @@ class RemoteTimer(Screen):
 	else:
 		skin = """
 			<screen name="RemoteTimer" position="center,center" size="560,455" title="RemoteTimer Timerlist">
-				<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on"/>
-				<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on"/>
-				<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on"/>
-				<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on"/>
+				<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on"/>
+				<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on"/>
+				<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on"/>
+				<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on"/>
 				<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#9f1313" transparent="1"/>
 				<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#1f771f" transparent="1"/>
 				<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#a08500" transparent="1"/>
@@ -579,10 +579,10 @@ class RemoteTimerChannelList(Screen):
 	if HD:
 		skin = """
 			<screen name="RemoteTimerChannelList" position="center,center" size="560,430" title ="Bouquet List">
-				<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 				<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 				<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
@@ -593,10 +593,10 @@ class RemoteTimerChannelList(Screen):
 	else:
 		skin = """
 			<screen name="RemoteTimerChannelList" position="center,center" size="560,430" title ="Bouquet List">
-				<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 				<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 				<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
@@ -1190,10 +1190,10 @@ class RemoteTimerEPGList(Screen):
 	if HD:
 		skin = """
 			<screen name="RemoteTimerEPGList" position="center,center" size="760,540" title ="EPG Selection">
-				<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="buttons/green.png" position="190,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="buttons/yellow.png" position="370,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="buttons/blue.png" position="520,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/green.png" position="190,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/yellow.png" position="370,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/blue.png" position="520,0" size="140,40" alphatest="on" />
 				<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;18" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 				<widget name="key_green" position="190,0" zPosition="1" size="140,40" font="Regular;18" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="key_yellow" position="370,0" zPosition="1" size="140,40" font="Regular;18" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
@@ -1204,10 +1204,10 @@ class RemoteTimerEPGList(Screen):
 	else:
 		skin = """
 			<screen name="RemoteTimerEPGList" position="center,center" size="560,440" title ="EPG Selection">
-				<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-				<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 				<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 				<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
@@ -1502,13 +1502,13 @@ class E2TimerMenu(GUIComponent, object):
 		self.l.setItemHeight(font[2])
 		font = skin.fonts.get("PartnerBoxE2TimerMenu1", ("Regular", 18))
 		self.l.setFont(1, gFont(font[0], font[1]))
-		self.iconWait = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "icons/timer_wait.png"))
-		self.iconRecording = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "icons/timer_rec.png"))
-		self.iconPrepared = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "icons/timer_prep.png"))
-		self.iconDone = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "icons/timer_done.png"))
-		self.iconRepeat = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "icons/timer_rep.png"))
-		self.iconZapped = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "icons/timer_zap.png"))
-		self.iconDisabled = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "icons/timer_off.png"))
+		self.iconWait = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/timer_wait.png"))
+		self.iconRecording = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/timer_rec.png"))
+		self.iconPrepared = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/timer_prep.png"))
+		self.iconDone = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/timer_done.png"))
+		self.iconRepeat = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/timer_rep.png"))
+		self.iconZapped = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/timer_zap.png"))
+		self.iconDisabled = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/timer_off.png"))
 
 	def buildEntry(self, timer):
 		width = self.l.getItemSize().width()
@@ -1572,7 +1572,7 @@ class E2TimerMenu(GUIComponent, object):
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, width-x, y, w, h, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, state))
 
 		#if timer.disabled:
-		#	png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "icons/redx.png"))
+		#	png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/redx.png"))
 		#	x, y, w, h = skin.parameters.get("PartnerBoxE2TimerIcon",(490, 5, 40, 40))
 		#	res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, x, y, w, h, png))
 		if icon:
@@ -1979,10 +1979,10 @@ class RemoteTimerEventView(Screen):
 	REMOVE_TIMER = 2
 	skin = """
 		<screen name="RemoteTimerEventView" position="center,center" size="560,430" title="Eventview">
-			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 			<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 			<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />

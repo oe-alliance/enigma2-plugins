@@ -290,22 +290,22 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 	</screen>
 	
 	<screen name="VirtualKeyBoard" position="center,center" size="560,350" title="Virtual KeyBoard" zPosition="99">
-		<ePixmap alphatest="on" pixmap="vkey_text.png" position="9,35" size="542,52" zPosition="-4"/>
+		<ePixmap alphatest="on" pixmap="skin_default/vkey_text.png" position="9,35" size="542,52" zPosition="-4"/>
 		<widget font="Regular;20" name="header" noWrap="1" position="10,7" size="500,26" transparent="1"/>
 		<widget font="Regular;24" halign="right" name="text" noWrap="1" position="12,35" size="536,34" transparent="1" valign="center"/>
 		<widget name="list" position="10,95" selectionDisabled="1" size="540,225" transparent="1"/>
 	</screen>
 	
 	<screen backgroundColor="transparent" flags="wfNoBorder" name="Dish" position="50,50" size="130,160" title="Dish" zPosition="100">
-		<widget alphatest="off" name="Dishpixmap" pixmap="icons/dish.png" position="0,0" size="130,160"/>
+		<widget alphatest="off" name="Dishpixmap" pixmap="skin_default/icons/dish.png" position="0,0" size="130,160"/>
 	</screen>
 	
 	<screen backgroundColor="transparent" flags="wfNoBorder" name="UnhandledKey" position="1200,50" size="34,45" title="UnhandledKey" zPosition="100">
-		<widget alphatest="off" name="UnhandledKeyPixmap" pixmap="unhandled-key.png" position="0,0" size="34,45"/>
+		<widget alphatest="off" name="UnhandledKeyPixmap" pixmap="skin_default/unhandled-key.png" position="0,0" size="34,45"/>
 	</screen>
 	
 	<screen backgroundColor="transpBlack" flags="wfNoBorder" name="SubservicesQuickzap" position="center,center" size="470,64" title="Subservices">
-		<widget alphatest="on" pixmap="icons/record.png" position="450,3" render="Pixmap" size="14,14" source="session.RecordState" zPosition="2">
+		<widget alphatest="on" pixmap="skin_default/icons/record.png" position="450,3" render="Pixmap" size="14,14" source="session.RecordState" zPosition="2">
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
 		<eLabel backgroundColor="background" font="Regular;13" position="0,0" size="470,20" text="Subservices"/>
@@ -370,7 +370,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 		<widget borderColor="#0033333a" borderWidth="2" pixmap="Ai.HD/pbar.png" position="220,105" render="Progress" size="840,8" source="session.Event_Now" transparent="1" zPosition="2">
 			<convert type="EventTime">Progress</convert>
 		</widget>
-		<widget alphatest="on" pixmap="icons/rass_logo.png" position="60,60" render="Pixmap" size="100,60" source="RdsDecoder" zPosition="2">
+		<widget alphatest="on" pixmap="skin_default/icons/rass_logo.png" position="60,60" render="Pixmap" size="100,60" source="RdsDecoder" zPosition="2">
 			<convert type="RdsInfo">RasInteractiveAvailable</convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
@@ -663,8 +663,8 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 		<widget font="Regular;20" foregroundColor="grey" halign="right" position="15,370" render="Label" size="270,25" source="Adaptertext" transparent="1" zPosition="10"/>
 		<widget font="Regular;20" halign="left" position="300,370" render="Label" size="400,25" source="Adapter" transparent="1" zPosition="10"/>
 		<widget font="Regular;20" halign="center" position="50,410" render="Label" size="800,27" source="introduction2" transparent="1" valign="center" zPosition="10"/>
-		<widget alphatest="on" name="VKeyIcon" pixmap="buttons/key_text.png" position="10,410" size="35,25" transparent="1" zPosition="10"/>
-		<widget alphatest="on" name="HelpWindow" pixmap="vkey_icon.png" position="50,410" size="1,1" transparent="1" zPosition="1"/>
+		<widget alphatest="on" name="VKeyIcon" pixmap="skin_default/buttons/key_text.png" position="10,410" size="35,25" transparent="1" zPosition="10"/>
+		<widget alphatest="on" name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="50,410" size="1,1" transparent="1" zPosition="1"/>
 	</screen>
 	
 	<screen name="NameserverSetup" position="center,center" size="900,450" title="Nameserver Setup">
@@ -711,23 +711,23 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 		<widget font="Regular;19" foregroundColors="#8c8c93,#1cff1c" halign="left" name="Adaptertext" position="50,70" size="800,23" zPosition="1"/>
 		<widget font="Regular;19" foregroundColors="#8c8c93,#f23d21,#1cff1c" halign="center" name="Adapter" position="280,70" size="306,23" transparent="1" zPosition="2"/>
 		<widget font="Regular;19" foregroundColors="#8c8c93,#000000,#1cff1c" name="AdapterInfo_Text" position="630,70" size="200,23" transparent="1" zPosition="2"/>
-		<widget alphatest="on" name="AdapterInfo_OK" pixmap="icons/lock_on.png" position="590,65" size="38,31" zPosition="2"/>
+		<widget alphatest="on" name="AdapterInfo_OK" pixmap="skin_default/icons/lock_on.png" position="590,65" size="38,31" zPosition="2"/>
 		<widget font="Regular;19" foregroundColors="#8c8c93,#1cff1c" halign="left" name="Networktext" position="50,120" size="800,23" zPosition="1"/>
 		<widget font="Regular;19" foregroundColors="#8c8c93,#f23d21,#1cff1c" halign="center" name="Network" position="280,120" size="306,23" transparent="1" zPosition="2"/>
 		<widget font="Regular;19" foregroundColors="#8c8c93,#000000,#1cff1c" name="NetworkInfo_Text" position="630,120" size="200,23" transparent="1" zPosition="2"/>
-		<widget alphatest="on" name="NetworkInfo_Check" pixmaps="icons/lock_on.png,skin_default/icons/lock_error.png" position="590,115" size="38,31" zPosition="2"/>
+		<widget alphatest="on" name="NetworkInfo_Check" pixmaps="skin_default/icons/lock_on.png,skin_default/icons/lock_error.png" position="590,115" size="38,31" zPosition="2"/>
 		<widget font="Regular;19" foregroundColors="#8c8c93,#1cff1c" halign="left" name="Dhcptext" position="50,170" size="800,23" zPosition="1"/>
 		<widget font="Regular;19" foregroundColors="#8c8c93,#f23d21,#1cff1c" halign="center" name="Dhcp" position="280,170" size="306,23" transparent="1" zPosition="2"/>
 		<widget font="Regular;19" foregroundColors="#8c8c93,#000000,#1cff1c" name="DhcpInfo_Text" position="630,170" size="200,23" transparent="1" zPosition="2"/>
-		<widget alphatest="on" name="DhcpInfo_Check" pixmaps="icons/lock_on.png,skin_default/icons/lock_error.png" position="590,165" size="38,31" zPosition="2"/>
+		<widget alphatest="on" name="DhcpInfo_Check" pixmaps="skin_default/icons/lock_on.png,skin_default/icons/lock_error.png" position="590,165" size="38,31" zPosition="2"/>
 		<widget font="Regular;19" foregroundColors="#8c8c93,#1cff1c" halign="left" name="IPtext" position="50,220" size="800,23" zPosition="1"/>
 		<widget font="Regular;19" foregroundColors="#8c8c93,#f23d21,#1cff1c" halign="center" name="IP" position="280,220" size="306,23" transparent="1" zPosition="2"/>
 		<widget font="Regular;19" foregroundColors="#8c8c93,#000000,#1cff1c" name="IPInfo_Text" position="630,220" size="200,23" transparent="1" zPosition="2"/>
-		<widget alphatest="on" name="IPInfo_Check" pixmaps="icons/lock_on.png,skin_default/icons/lock_error.png" position="590,215" size="38,31" zPosition="2"/>
+		<widget alphatest="on" name="IPInfo_Check" pixmaps="skin_default/icons/lock_on.png,skin_default/icons/lock_error.png" position="590,215" size="38,31" zPosition="2"/>
 		<widget font="Regular;19" foregroundColors="#8c8c93,#1cff1c" halign="left" name="DNStext" position="50,270" size="800,23" zPosition="1"/>
 		<widget font="Regular;19" foregroundColors="#8c8c93,#f23d21,#1cff1c" halign="center" name="DNS" position="280,270" size="306,23" transparent="1" zPosition="2"/>
 		<widget font="Regular;19" foregroundColors="#8c8c93,#000000,#1cff1c" name="DNSInfo_Text" position="630,270" size="200,23" transparent="1" zPosition="2"/>
-		<widget alphatest="on" name="DNSInfo_Check" pixmaps="icons/lock_on.png,skin_default/icons/lock_error.png" position="590,265" size="38,31" zPosition="2"/>
+		<widget alphatest="on" name="DNSInfo_Check" pixmaps="skin_default/icons/lock_on.png,skin_default/icons/lock_error.png" position="590,265" size="38,31" zPosition="2"/>
 		<widget alphatest="on" name="EditSettingsButton" pixmaps="Ai.HD/grey.png,Ai.HD/blue.png" position="590,330" size="35,35" transparent="1" zPosition="1"/>
 		<widget font="Regular;19" foregroundColors="#000000,#8c8c93,#1cff1c" name="EditSettings_Text" position="630,335" size="200,23" transparent="1" zPosition="2"/>
 		<widget font="Regular;21" name="InfoText" position="15,50" size="866,256" zPosition="25"/>
@@ -813,13 +813,13 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 			<convert type="StringList"/>
 		</widget>
 		<widget name="config" position="50,340" scrollbarMode="showOnDemand" size="440,200" transparent="1" zPosition="1"/>
-		<ePixmap alphatest="on" pixmap="buttons/button_red.png" position="40,35" size="15,16"/>
+		<ePixmap alphatest="on" pixmap="skin_default/buttons/button_red.png" position="40,35" size="15,16"/>
 		<widget font="Regular;18" name="languagetext" position="60,30" size="200,30"/>
-		<widget alphatest="on" name="rc" pixmaps="rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="540,10" size="154,500" zPosition="10"/>
-		<widget alphatest="on" name="arrowdown" pixmap="arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
-		<widget alphatest="on" name="arrowdown2" pixmap="arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
-		<widget alphatest="on" name="arrowup" pixmap="arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
-		<widget alphatest="on" name="arrowup2" pixmap="arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="rc" pixmaps="skin_default/rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="540,10" size="154,500" zPosition="10"/>
+		<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowdown2" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
 	</screen>
 	
 	<screen name="DefaultWizard" position="center,78" size="720,576" title="Wizard...">
@@ -827,14 +827,14 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 			<widget position="50,300" render="Listbox" scrollbarMode="showOnDemand" size="440,200" source="list">
 				<convert type="StringList"/>
 			</widget>
-			<ePixmap alphatest="on" pixmap="buttons/button_red.png" position="40,225" size="15,16"/>
+			<ePixmap alphatest="on" pixmap="skin_default/buttons/button_red.png" position="40,225" size="15,16"/>
 			<widget font="Regular;18" name="languagetext" position="55,225" size="95,30"/>
 			<widget name="config" position="50,300" scrollbarMode="showOnDemand" size="440,200" transparent="1" zPosition="1"/>            
-			<widget alphatest="on" name="wizard" pixmap="wizard.png" position="40,50" size="110,174" transparent="1" zPosition="10"/>
-			<widget alphatest="on" name="rc" pixmap="rc0.png" position="500,600" size="154,471" transparent="1" zPosition="10"/>
-			<widget alphatest="on" name="arrowdown" pixmap="arrowdown.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
-			<widget alphatest="on" name="arrowup" pixmap="arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
-			<widget alphatest="on" name="arrowup2" pixmap="arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="wizard" pixmap="skin_default/wizard.png" position="40,50" size="110,174" transparent="1" zPosition="10"/>
+			<widget alphatest="on" name="rc" pixmap="skin_default/rc0.png" position="500,600" size="154,471" transparent="1" zPosition="10"/>
+			<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
 	</screen>
 	
 	<screen name="DefaultSatLists" position="center,78" size="720,576" title="Default Sat-Lists...">
@@ -842,14 +842,14 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 			<widget position="50,300" render="Listbox" scrollbarMode="showOnDemand" size="440,200" source="list">
 				<convert type="StringList"/>
 			</widget>
-			<ePixmap alphatest="on" pixmap="buttons/button_red.png" position="40,225" size="15,16"/>
+			<ePixmap alphatest="on" pixmap="skin_default/buttons/button_red.png" position="40,225" size="15,16"/>
 			<widget font="Regular;18" name="languagetext" position="55,225" size="95,30"/>
 			<widget name="config" position="50,300" scrollbarMode="showOnDemand" size="440,200" transparent="1" zPosition="1"/>            
-			<widget alphatest="on" name="wizard" pixmap="wizard.png" position="40,50" size="110,174" transparent="1" zPosition="10"/>
-			<widget alphatest="on" name="rc" pixmap="rc0.png" position="500,600" size="154,471" transparent="1" zPosition="10"/>
-			<widget alphatest="on" name="arrowdown" pixmap="arrowdown.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
-			<widget alphatest="on" name="arrowup" pixmap="arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
-			<widget alphatest="on" name="arrowup2" pixmap="arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="wizard" pixmap="skin_default/wizard.png" position="40,50" size="110,174" transparent="1" zPosition="10"/>
+			<widget alphatest="on" name="rc" pixmap="skin_default/rc0.png" position="500,600" size="154,471" transparent="1" zPosition="10"/>
+			<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
 	</screen>
 	
 	<screen name="DreamPackageWizard" position="center,78" size="720,576" title="Dream-Package Wizard...">
@@ -857,14 +857,14 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 			<widget position="50,300" render="Listbox" scrollbarMode="showOnDemand" size="440,200" source="list">
 				<convert type="StringList"/>
 			</widget>
-			<ePixmap alphatest="on" pixmap="buttons/button_red.png" position="40,225" size="15,16"/>
+			<ePixmap alphatest="on" pixmap="skin_default/buttons/button_red.png" position="40,225" size="15,16"/>
 			<widget font="Regular;18" name="languagetext" position="55,225" size="95,30"/>
 			<widget name="config" position="50,300" scrollbarMode="showOnDemand" size="440,200" transparent="1" zPosition="1"/>            
-			<widget alphatest="on" name="wizard" pixmap="wizard.png" position="40,50" size="110,174" transparent="1" zPosition="10"/>
-			<widget alphatest="on" name="rc" pixmap="rc0.png" position="500,600" size="154,471" transparent="1" zPosition="10"/>
-			<widget alphatest="on" name="arrowdown" pixmap="arrowdown.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
-			<widget alphatest="on" name="arrowup" pixmap="arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
-			<widget alphatest="on" name="arrowup2" pixmap="arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="wizard" pixmap="skin_default/wizard.png" position="40,50" size="110,174" transparent="1" zPosition="10"/>
+			<widget alphatest="on" name="rc" pixmap="skin_default/rc0.png" position="500,600" size="154,471" transparent="1" zPosition="10"/>
+			<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
 	</screen>
 	
 	<screen name="LanguageWizard" position="center,78" size="720,576" title="Language Wizard...">
@@ -880,22 +880,22 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 				}
 			</convert>
 		</widget>
-		<widget alphatest="on" name="wizard" pixmap="wizard.png" position="40,50" size="110,174" zPosition="10"/>
-		<widget alphatest="on" name="rc" pixmaps="rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="500,50" size="154,500" zPosition="10"/>
-		<widget alphatest="on" name="arrowdown" pixmap="arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
-		<widget alphatest="on" name="arrowdown2" pixmap="arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
-		<widget alphatest="on" name="arrowup" pixmap="arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
-		<widget alphatest="on" name="arrowup2" pixmap="arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="wizard" pixmap="skin_default/wizard.png" position="40,50" size="110,174" zPosition="10"/>
+		<widget alphatest="on" name="rc" pixmaps="skin_default/rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="500,50" size="154,500" zPosition="10"/>
+		<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowdown2" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
 	</screen>
 	
 	<screen name="HelpMenu" position="center,78" size="720,576" title="Help...">
 		<eLabel font="Regular;40" position="50,30" size="220,60" text="help..."/>
 		<widget name="list" position="50,100" scrollbarMode="showOnDemand" size="450,380"/>
-		<widget alphatest="on" name="rc" pixmaps="rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="540,10" size="154,500" zPosition="10"/>
-		<widget alphatest="on" name="arrowdown" pixmap="arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
-		<widget alphatest="on" name="arrowdown2" pixmap="arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
-		<widget alphatest="on" name="arrowup" pixmap="arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
-		<widget alphatest="on" name="arrowup2" pixmap="arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="rc" pixmaps="skin_default/rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="540,10" size="154,500" zPosition="10"/>
+		<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowdown2" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
 		<widget font="Regular;25" foregroundColor="yellow" halign="right" name="long_key" position="320,520" size="350,50"/>
 	</screen>
 	
@@ -905,15 +905,15 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 				<convert type="StringList"/>
 			</widget>
 			<widget name="config" position="50,300" scrollbarMode="showOnDemand" size="440,200" transparent="1" zPosition="1"/>
-			<widget alphatest="on" name="wizard" pixmap="wizard.png" position="40,50" size="110,174" transparent="1" zPosition="10"/>
-			<ePixmap alphatest="on" pixmap="buttons/button_red.png" position="40,225" size="15,16" transparent="1" zPosition="0"/>
+			<widget alphatest="on" name="wizard" pixmap="skin_default/wizard.png" position="40,50" size="110,174" transparent="1" zPosition="10"/>
+			<ePixmap alphatest="on" pixmap="skin_default/buttons/button_red.png" position="40,225" size="15,16" transparent="1" zPosition="0"/>
 			<widget font="Regular;18" name="languagetext" position="55,225" size="95,30"/>
 			<widget alphatest="on" name="portpic" pixmap="%s" position="50,300" size="150,150" transparent="1" zPosition="10"/>
-			<widget alphatest="on" name="rc" pixmaps="rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="500,50" size="154,500" transparent="1" zPosition="10"/>
-			<widget alphatest="on" name="arrowdown" pixmap="arrowdown.png" position="0,0" size="37,70" transparent="1" zPosition="11"/>
-			<widget alphatest="on" name="arrowdown2" pixmap="arrowdown.png" position="0,0" size="37,70" transparent="1" zPosition="11"/>
-			<widget alphatest="on" name="arrowup" pixmap="arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
-			<widget alphatest="on" name="arrowup2" pixmap="arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="rc" pixmaps="skin_default/rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="500,50" size="154,500" transparent="1" zPosition="10"/>
+			<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="0,0" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="arrowdown2" pixmap="skin_default/arrowdown.png" position="0,0" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
 	</screen>
 	
 	<screen name="ImageWizard" position="center,78" size="720,576" title="Welcome...">
@@ -922,14 +922,14 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 				<convert type="StringList"/>
 			</widget>
 			<widget name="config" position="53,340" scrollbarMode="showOnDemand" size="440,180" transparent="1" zPosition="1"/>
-			<ePixmap alphatest="on" pixmap="buttons/button_red.png" position="40,225" size="15,16" transparent="1" zPosition="0"/>
+			<ePixmap alphatest="on" pixmap="skin_default/buttons/button_red.png" position="40,225" size="15,16" transparent="1" zPosition="0"/>
 			<widget font="Regular;18" name="languagetext" position="55,225" size="95,30"/>
-			<widget alphatest="on" name="wizard" pixmap="wizard.png" position="40,50" size="110,174" zPosition="10"/>
-			<widget alphatest="on" name="rc" pixmaps="rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="530,50" size="154,500" zPosition="10"/>
-			<widget alphatest="on" name="arrowdown" pixmap="arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
-			<widget alphatest="on" name="arrowdown2" pixmap="arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
-			<widget alphatest="on" name="arrowup" pixmap="arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
-			<widget alphatest="on" name="arrowup2" pixmap="arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
+			<widget alphatest="on" name="wizard" pixmap="skin_default/wizard.png" position="40,50" size="110,174" zPosition="10"/>
+			<widget alphatest="on" name="rc" pixmaps="skin_default/rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="530,50" size="154,500" zPosition="10"/>
+			<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
+			<widget alphatest="on" name="arrowdown2" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
+			<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
+			<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
 		</screen>
 	
 	
@@ -988,7 +988,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 		<widget backgroundColor="noTransBG" font="Regular;20" name="album" position="410,555" size="580,25" transparent="1" valign="top"/>
 		<widget backgroundColor="noTransBG" font="Regular;20" foregroundColor="darkgrey" name="yeartext" position="300,585" size="100,25" transparent="1" valign="top"/>
 		<widget backgroundColor="noTransBG" font="Regular;20" name="year" position="410,585" size="580,25" transparent="1" valign="top"/>
-		<widget alphatest="blend" name="coverArt" pixmap="no_coverArt.png" position="120,490" size="116,116" transparent="1"/>
+		<widget alphatest="blend" name="coverArt" pixmap="skin_default/no_coverArt.png" position="120,490" size="116,116" transparent="1"/>
 		<eLabel backgroundColor="darkgrey" position="80,620" size="1120,2" zPosition="1"/>
 		<ePixmap alphatest="on" backgroundColor="noTransBG" pixmap="Ai.HD/mpslider.png" position="200,647" size="600,16" zPosition="13"/>
 		<widget name="PositionGauge" pointer="Ai.HD/pointer.png:13,3" position="220,648" size="560,14" transparent="0" zPosition="12"/>
@@ -1067,7 +1067,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" position="280,1" render="Label" size="140,40" source="key_yellow" transparent="1" valign="center" zPosition="1"/>
 		<widget backgroundColor="#254177" font="Regular;18" halign="center" position="420,1" render="Label" size="140,40" source="key_blue" transparent="1" valign="center" zPosition="1"/>
 		<widget itemHeight="28" name="config" position="5,45" scrollbarMode="showOnDemand" size="555,280"/>
-		<ePixmap pixmap="div-h.png" position="0,327" size="565,2" zPosition="1"/>
+		<ePixmap pixmap="skin_default/div-h.png" position="0,327" size="565,2" zPosition="1"/>
 		<widget font="Regular;21" position="5,333" render="Label" size="555,83" source="help"/>
 	</screen>
 	
@@ -1099,7 +1099,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 					}
 				</convert>
 			</widget>
-			<widget backgroundColor="#505555" foregroundColor="black" name="Timeline" pointer="position_arrow.png:3,5" position="210,625" size="615,20"/>
+			<widget backgroundColor="#505555" foregroundColor="black" name="Timeline" pointer="skin_default/position_arrow.png:3,5" position="210,625" size="615,20"/>
 			<ePixmap alphatest="on" pixmap="Ai.HD/dvr.png" position="45,625" size="150,20" transparent="1" zPosition="2"/>
 	</screen>
 	

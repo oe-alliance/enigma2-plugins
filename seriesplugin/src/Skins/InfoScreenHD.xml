@@ -11,10 +11,10 @@
 	<widget name="channel"           position="700,620" size="520,30"   font="Regular;22" halign="right"/>
 	
 	<!-- Buttons -->
-	<ePixmap pixmap="buttons/red.png"    position="70,660"  size="24,24" alphatest="on" />
-	<ePixmap pixmap="buttons/green.png"  position="350,660" size="24,24" alphatest="on" />
-	<ePixmap pixmap="buttons/yellow.png" position="630,660" size="24,24" alphatest="on" />
-	<ePixmap pixmap="buttons/blue.png"   position="910,660" size="24,24" alphatest="on" />
+	<ePixmap pixmap="skin_default/buttons/red.png"    position="70,660"  size="24,24" alphatest="on" />
+	<ePixmap pixmap="skin_default/buttons/green.png"  position="350,660" size="24,24" alphatest="on" />
+	<ePixmap pixmap="skin_default/buttons/yellow.png" position="630,660" size="24,24" alphatest="on" />
+	<ePixmap pixmap="skin_default/buttons/blue.png"   position="910,660" size="24,24" alphatest="on" />
 	<widget name="key_red"    position="110,660" size="240,30" zPosition="1" font="Regular;22" halign="left" backgroundColor="#9f1313" transparent="1"/>
 	<widget name="key_green"  position="390,660" size="240,30" zPosition="1" font="Regular;22" halign="left" backgroundColor="#1f771f" transparent="1"/>
 	<widget name="key_yellow" position="670,660" size="240,30" zPosition="1" font="Regular;22" halign="left" backgroundColor="#a08500" transparent="1"/>

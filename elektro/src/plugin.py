@@ -364,8 +364,8 @@ class ElektroProfile(ConfigListScreen,Screen):
 			<widget name="key_red" position="0,360" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;18" transparent="1"/>
 			<widget name="key_green" position="140,360" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;18" transparent="1"/>
 
-			<ePixmap name="red" position="0,360" zPosition="2" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green" position="140,360" zPosition="2" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="red" position="0,360" zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green" position="140,360" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		</screen>"""
 
 	def __init__(self, session, args = 0):
@@ -418,8 +418,8 @@ class ElektroIP(ConfigListScreen,Screen):
 			<widget name="key_red" position="0,360" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;18" transparent="1"/>
 			<widget name="key_green" position="140,360" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;18" transparent="1"/>
 
-			<ePixmap name="red" position="0,360" zPosition="2" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green" position="140,360" zPosition="2" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="red" position="0,360" zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green" position="140,360" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		</screen>"""
 
 	def __init__(self, session, args = 0):
@@ -493,9 +493,9 @@ class ElektroNAS(ConfigListScreen,Screen):
 			<widget name="key_green" position="140,360" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;18" transparent="1"/>
 			<widget name="key_yellow" position="280,360" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;18" transparent="1"/>
 
-			<ePixmap name="red" position="0,360" zPosition="2" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green" position="140,360" zPosition="2" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="280,360" zPosition="2" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap name="red" position="0,360" zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green" position="140,360" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="yellow" position="280,360" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
 		</screen>"""
 
 	def __init__(self, session, args = 0):
@@ -548,14 +548,14 @@ class Elektro(ConfigListScreen,Screen):
 			<widget name="key_yellow" position="325,5" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;18" transparent="1"/>
 			<widget name="key_blue" position="485,5" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;18" transparent="1"/>
 
-			<ePixmap name="red" position="5,5" zPosition="2" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green" position="165,5" zPosition="2" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="325,5" zPosition="2" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue" position="485,5" zPosition="2" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+			<ePixmap name="red" position="5,5" zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green" position="165,5" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="yellow" position="325,5" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap name="blue" position="485,5" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 
 			<widget name="config" position="5,50" size="620,275" scrollbarMode="showOnDemand" />
 
-			<ePixmap pixmap="div-h.png" position="0,330" zPosition="1" size="630,2" />
+			<ePixmap pixmap="skin_default/div-h.png" position="0,330" zPosition="1" size="630,2" />
 			<widget source="help" render="Label" position="5,335" size="620,153" font="Regular;21" />
 		</screen>"""
 

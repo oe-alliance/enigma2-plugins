@@ -25,17 +25,17 @@ from . import _
 class VlcMediaListScreen(Screen):
 	skin ="""
 		<screen size="560,400" position="80,100" name="VLC Media List" >
-			<ePixmap name="red"    position="0,355"   zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green"  position="140,355" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="280,355" zPosition="4" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue"   position="420,355" zPosition="4" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+			<ePixmap name="red"    position="0,355"   zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green"  position="140,355" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="yellow" position="280,355" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap name="blue"   position="420,355" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 			<widget name="key_red" position="0,355" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_green" position="140,355" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_yellow" position="280,355" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_blue" position="420,355" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<ePixmap size="551,325" alphatest="on" position="5,30" pixmap="border_epg.png" />
-			<widget size="320,25" alphatest="on" position="5,10" zPosition="1" name="filelist_button_sel" pixmap="epg_now.png" />
-			<widget size="320,25" alphatest="on" position="5,10" zPosition="1" name="playlist_button_sel" pixmap="epg_next.png" />
+			<ePixmap size="551,325" alphatest="on" position="5,30" pixmap="skin_default/border_epg.png" />
+			<widget size="320,25" alphatest="on" position="5,10" zPosition="1" name="filelist_button_sel" pixmap="skin_default/epg_now.png" />
+			<widget size="320,25" alphatest="on" position="5,10" zPosition="1" name="playlist_button_sel" pixmap="skin_default/epg_next.png" />
 			<widget valign="center" transparent="1" size="108,22" backgroundColor="#25062748" position="5,10" zPosition="2" name="filelist_text" halign="center" font="Regular;18" />
 			<widget valign="center" transparent="1" size="108,22" backgroundColor="#25062748" position="111,10" zPosition="2" name="playlist_text" halign="center" font="Regular;18" />
 			<widget size="540,320" scrollbarMode="showOnDemand" position="11,35" name="filelist" />

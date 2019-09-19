@@ -18,7 +18,7 @@ from Tools.BoundFunction import boundFunction
 from Tools.LoadPixmap import LoadPixmap
 
 from Tools.Directories import resolveFilename, SCOPE_SKIN
-SkinDefaultPath = resolveFilename(SCOPE_SKIN, "")
+SkinDefaultPath = resolveFilename(SCOPE_SKIN, "skin_default/")
 
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigSelection, NoSave
@@ -177,8 +177,8 @@ class Ceparted(Screen):
 
 class AddPart(Screen, ConfigListScreen):
 	skin = """<screen name="AddPart" position="center,center" size="600,190" title="add Partition" >
-			<ePixmap pixmap="buttons/red.png" position="5,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="155,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="5,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="155,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<widget render="Label" source="key_red" position="5,5" size="140,40" zPosition="2" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" />
 			<widget render="Label" source="key_green" position="155,5" size="140,40" zPosition="2" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" />
 			<widget name="config" position="5,60" size="590,120" scrollbarMode="showOnDemand" />
@@ -256,11 +256,11 @@ class Cpart(Screen):
 				}
 			</convert>
 			</widget>
-			<widget name="PixmapRed" position="25,170" size="15,16" pixmaps="buttons/button_red_off.png,skin_default/buttons/button_red.png" transparent="1" alphatest="on" />
+			<widget name="PixmapRed" position="25,170" size="15,16" pixmaps="skin_default/buttons/button_red_off.png,skin_default/buttons/button_red.png" transparent="1" alphatest="on" />
 			<widget name="LabelRed" position="50,160" size="150,40" font="Regular;19" valign="center" />
-			<widget name="PixmapGreen" position="225,170" size="15,16" pixmaps="buttons/button_green_off.png,skin_default/buttons/button_green.png" transparent="1" alphatest="on" />
+			<widget name="PixmapGreen" position="225,170" size="15,16" pixmaps="skin_default/buttons/button_green_off.png,skin_default/buttons/button_green.png" transparent="1" alphatest="on" />
 			<widget name="LabelGreen" position="250,160" size="150,40" font="Regular;19" valign="center" />
-			<widget name="PixmapBlue" position="425,170" size="15,16" pixmaps="buttons/button_blue_off.png,skin_default/buttons/button_blue.png" transparent="1" alphatest="on" />
+			<widget name="PixmapBlue" position="425,170" size="15,16" pixmaps="skin_default/buttons/button_blue_off.png,skin_default/buttons/button_blue.png" transparent="1" alphatest="on" />
 			<widget name="LabelBlue" position="450,160" size="150,40" font="Regular;19" valign="center" />
 		</screen>"""
 
@@ -501,7 +501,7 @@ class Cpartexe(Screen):
 				}
 			</convert>
 			</widget>
-			<widget name="PixmapButton" position="25,370" size="15,16" pixmaps="buttons/button_green.png,skin_default/buttons/button_green_off.png" transparent="1" alphatest="on" />
+			<widget name="PixmapButton" position="25,370" size="15,16" pixmaps="skin_default/buttons/button_green.png,skin_default/buttons/button_green_off.png" transparent="1" alphatest="on" />
 			<widget name="LabelButton" position="50,360" size="620,40" font="Regular;19" valign="center" />
 		</screen>"""
 

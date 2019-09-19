@@ -230,17 +230,17 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				</convert>
 			</widget>
 
-			<ePixmap pixmap="buttons/key_info.png" position="50,500" zPosition="4" size="35,25" alphatest="on" transparent="1" />
-			<ePixmap pixmap="buttons/key_menu.png" position="50,520" zPosition="4" size="35,25" alphatest="on" transparent="1" />
+			<ePixmap pixmap="skin_default/buttons/key_info.png" position="50,500" zPosition="4" size="35,25" alphatest="on" transparent="1" />
+			<ePixmap pixmap="skin_default/buttons/key_menu.png" position="50,520" zPosition="4" size="35,25" alphatest="on" transparent="1" />
 			<ePixmap position="90,500" size="100,40" zPosition="4" pixmap="~/plugin.png" alphatest="on" transparent="1" />
-			<ePixmap position="190,500" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap position="330,500" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap position="470,500" zPosition="4" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap position="190,500" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="330,500" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap position="470,500" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
 			<widget name="key_red" position="190,500" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_green" position="330,500" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_yellow" position="470,500" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="ButtonBlue" pixmap="buttons/button_blue.png" position="610,510" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-			<widget source="VKeyIcon" render="Pixmap" pixmap="vkey_icon.png" position="620,495" zPosition="10" size="60,48" transparent="1" alphatest="on">
+			<widget name="ButtonBlue" pixmap="skin_default/buttons/button_blue.png" position="610,510" zPosition="10" size="15,16" transparent="1" alphatest="on" />
+			<widget source="VKeyIcon" render="Pixmap" pixmap="skin_default/vkey_icon.png" position="620,495" zPosition="10" size="60,48" transparent="1" alphatest="on">
 				<convert type="ConditionalShowHide" />
 			</widget>
 			<widget name="thumbnail" position="0,0" size="100,75" alphatest="on"/> # fake entry for dynamic thumbnail resizing, currently there is no other way doing this.
@@ -1381,7 +1381,7 @@ class MyTubeVideoInfoScreen(Screen):
 			<widget name="tags" position="60,270" size="600,20" zPosition="10" font="Regular;21" transparent="1" halign="left" valign="top" />
 			<widget name="detailtext" position="60,300" size="610,200" zPosition="10" font="Regular;21" transparent="1" halign="left" valign="top"/>
 			<ePixmap position="100,500" size="100,40" zPosition="0" pixmap="~/plugin.png" alphatest="on" transparent="1" />
-			<ePixmap position="220,500" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="220,500" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 			<widget name="key_red" position="220,500" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="thumbnail" position="0,0" size="130,98" alphatest="on"/> # fake entry for dynamic thumbnail resizing, currently there is no other way doing this.
 		</screen>"""
@@ -1570,7 +1570,7 @@ class MyTubeVideoHelpScreen(Screen):
 			<widget name="title" position="60,50" size="600,50" zPosition="5" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="detailtext" position="60,120" size="610,370" zPosition="10" font="Regular;21" transparent="1" halign="left" valign="top"/>
 			<ePixmap position="100,500" size="100,40" zPosition="0" pixmap="~/plugin.png" alphatest="on" transparent="1" />
-			<ePixmap position="220,500" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="220,500" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 			<widget name="key_red" position="220,500" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 
@@ -1625,10 +1625,10 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	ALLOW_SUSPEND = True
 
 	skin = """<screen name="MyTubePlayer" flags="wfNoBorder" position="0,380" size="720,160" title="InfoBar" backgroundColor="transparent">
-		<ePixmap position="0,0" pixmap="info-bg_mp.png" zPosition="-1" size="720,160" />
-		<ePixmap position="29,40" pixmap="screws_mp.png" size="665,104" alphatest="on" />
-		<ePixmap position="48,70" pixmap="icons/mp_buttons.png" size="108,13" alphatest="on" />
-		<ePixmap pixmap="icons/icon_event.png" position="207,78" size="15,10" alphatest="on" />
+		<ePixmap position="0,0" pixmap="skin_default/info-bg_mp.png" zPosition="-1" size="720,160" />
+		<ePixmap position="29,40" pixmap="skin_default/screws_mp.png" size="665,104" alphatest="on" />
+		<ePixmap position="48,70" pixmap="skin_default/icons/mp_buttons.png" size="108,13" alphatest="on" />
+		<ePixmap pixmap="skin_default/icons/icon_event.png" position="207,78" size="15,10" alphatest="on" />
 		<widget source="session.CurrentService" render="Label" position="230,73" size="360,40" font="Regular;20" backgroundColor="#263c59" shadowColor="#1d354c" shadowOffset="-1,-1" transparent="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>
@@ -1638,7 +1638,7 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		<widget source="session.CurrentService" render="Label" position="205,129" size="100,20" font="Regular;18" halign="center" valign="center" backgroundColor="#06224f" shadowColor="#1d354c" shadowOffset="-1,-1" transparent="1">
 			<convert type="ServicePosition">Position</convert>
 		</widget>
-		<widget source="session.CurrentService" render="PositionGauge" position="300,133" size="270,10" zPosition="2" pointer="position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
+		<widget source="session.CurrentService" render="PositionGauge" position="300,133" size="270,10" zPosition="2" pointer="skin_default/position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
 			<convert type="ServicePosition">Gauge</convert>
 		</widget>
 		<widget source="session.CurrentService" render="Label" position="576,129" size="100,20" font="Regular;18" halign="center" valign="center" backgroundColor="#06224f" shadowColor="#1d354c" shadowOffset="-1,-1" transparent="1">

@@ -136,11 +136,11 @@ class IMDBEPGSelection(EPGSelection):
 class IMDB(Screen, HelpableScreen):
 	skin = """
 		<screen name="IMDB" position="center,center" size="600,420" title="Internet Movie Database Details Plugin" >
-			<ePixmap pixmap="buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/key_menu.png" position="565,5" zPosition="0" size="35,25" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/key_menu.png" position="565,5" zPosition="0" size="35,25" alphatest="on" />
 			<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#9f1313" transparent="1" />
 			<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#a08500" transparent="1" />
@@ -887,12 +887,12 @@ class IMDbLCDScreen(Screen):
 
 class IMDbSetup(Screen, ConfigListScreen):
 	skin = """<screen name="EPGSearchSetup" position="center,center" size="565,370">
-		<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 		<widget name="config" position="5,50" size="555,250" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="div-h.png" position="0,301" zPosition="1" size="565,2" />
+		<ePixmap pixmap="skin_default/div-h.png" position="0,301" zPosition="1" size="565,2" />
 		<widget source="help" render="Label" position="5,305" size="555,63" font="Regular;21" />
 	</screen>"""
 

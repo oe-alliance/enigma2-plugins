@@ -18,15 +18,15 @@ from re import sub as re_sub
 class AutoMountEdit(Screen, ConfigListScreen):
 	skin = """
 		<screen name="AutoMountEdit" position="center,center" size="560,450" title="MountEdit">
-			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 			<widget name="config" position="5,50" size="550,250" zPosition="1" scrollbarMode="showOnDemand" />
-			<ePixmap pixmap="div-h.png" position="0,420" zPosition="1" size="560,2" />
+			<ePixmap pixmap="skin_default/div-h.png" position="0,420" zPosition="1" size="560,2" />
 			<widget source="introduction" render="Label" position="10,430" size="540,21" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1"/>
-			<widget source="VKeyIcon" render="Pixmap" pixmap="buttons/key_text.png" position="10,430" zPosition="10" size="35,25" transparent="1" alphatest="on">
+			<widget source="VKeyIcon" render="Pixmap" pixmap="skin_default/buttons/key_text.png" position="10,430" zPosition="10" size="35,25" transparent="1" alphatest="on">
 				<convert type="ConditionalShowHide" />
 			</widget>
-			<widget name="HelpWindow" pixmap="vkey_icon.png" position="160,350" zPosition="1" size="1,1" transparent="1" alphatest="on" />	
+			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="160,350" zPosition="1" size="1,1" transparent="1" alphatest="on" />	
 		</screen>"""
 
 	def __init__(self, session, plugin_path, mountinfo = None ):

@@ -241,10 +241,10 @@ pathToDatabase = PathToDatabase()
 
 class iDreamAddToDatabase(Screen):
 	skin = """<screen name="iDreamAddToDatabase" position="center,center" size="560,320" title="Add music files to iDream database">
-			<ePixmap pixmap="buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<widget name="output" position="10,10" size="540,300" valign="center" halign="center" font="Regular;22" />
 			<widget render="Label" source="key_red" position="0,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_green" position="140,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -1690,10 +1690,10 @@ class iDreamMerlin(Screen):
 		skin = """
 			<screen name="iDreamMerlin" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="#00000000" title="iDream">
 				<ePixmap alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/mmpborderHD.png" position="128,72" size="1024,576"/>
-				<ePixmap position="178,102" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-				<ePixmap position="328,102" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-				<ePixmap position="478,102" zPosition="4" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-				<ePixmap position="628,102" zPosition="4" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+				<ePixmap position="178,102" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+				<ePixmap position="328,102" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+				<ePixmap position="478,102" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+				<ePixmap position="628,102" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 				<widget render="Label" source="key_red" position="178,102" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget render="Label" source="key_green" position="328,102" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget render="Label" source="key_yellow" position="478,102" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -1704,10 +1704,10 @@ class iDreamMerlin(Screen):
 	elif sz_w == 1024:
 		skin = """
 			<screen name="iDreamMerlin" position="0,0" size="1024,576" flags="wfNoBorder" backgroundColor="#00000000" title="iDream">
-				<ePixmap position="50,30" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-				<ePixmap position="200,30" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-				<ePixmap position="350,30" zPosition="4" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-				<ePixmap position="500,30" zPosition="4" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+				<ePixmap position="50,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+				<ePixmap position="200,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+				<ePixmap position="350,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+				<ePixmap position="500,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 				<widget render="Label" source="key_red" position="50,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget render="Label" source="key_green" position="200,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget render="Label" source="key_yellow" position="350,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -1718,10 +1718,10 @@ class iDreamMerlin(Screen):
 	else:
 		skin = """
 			<screen name="iDreamMerlin" position="0,0" size="720,576" flags="wfNoBorder" backgroundColor="#00000000" title="iDream">
-				<ePixmap position="50,30" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-				<ePixmap position="200,30" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-				<ePixmap position="350,30" zPosition="4" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-				<ePixmap position="500,30" zPosition="4" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+				<ePixmap position="50,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+				<ePixmap position="200,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+				<ePixmap position="350,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+				<ePixmap position="500,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 				<widget render="Label" source="key_red" position="50,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget render="Label" source="key_green" position="200,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget render="Label" source="key_yellow" position="350,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -2729,7 +2729,7 @@ class MerlinMediaPixmap(Pixmap):
 					noCoverFile = value
 					break
 		if noCoverFile is None:
-			noCoverFile = resolveFilename(SCOPE_CURRENT_SKIN, "no_coverArt.png")
+			noCoverFile = resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/no_coverArt.png")
 		self.noCoverPixmap = LoadPixmap(noCoverFile)
 		return Pixmap.applySkin(self, desktop, screen)
 
@@ -2778,10 +2778,10 @@ class MerlinMediaPixmap(Pixmap):
 
 class SelectPath(Screen):
 	skin = """<screen name="SelectPath" position="center,center" size="560,320" title="Select path">
-			<ePixmap pixmap="buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<widget name="target" position="0,60" size="540,22" valign="center" font="Regular;22" />
 			<widget name="filelist" position="0,100" zPosition="1" size="560,220" scrollbarMode="showOnDemand"/>
 			<widget render="Label" source="key_red" position="0,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -2893,8 +2893,8 @@ class MerlinMusicPlayerSetup(Screen, ConfigListScreen):
 		skin = """
 			<screen position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="#00000000" title="Merlin Music Player Setup" >
 				<ePixmap alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/mmpborderHD.png" position="128,72" size="1024,576"/>
-				<ePixmap position="178,102" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-				<ePixmap position="328,102" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
+				<ePixmap position="178,102" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+				<ePixmap position="328,102" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 				<widget render="Label" source="key_red" position="178,102" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget render="Label" source="key_green" position="328,102" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="config" position="178,152" size="924,350" backgroundColor="#00000000" scrollbarMode="showOnDemand" />
@@ -2903,8 +2903,8 @@ class MerlinMusicPlayerSetup(Screen, ConfigListScreen):
 	elif sz_w == 1024:
 		skin = """
 			<screen position="0,0" size="1024,576" flags="wfNoBorder" backgroundColor="#00000000" title="Merlin Music Player Setup" >
-				<ePixmap position="50,30" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-				<ePixmap position="200,30" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
+				<ePixmap position="50,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+				<ePixmap position="200,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 				<widget render="Label" source="key_red" position="50,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget render="Label" source="key_green" position="200,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="config" position="50,80" size="924,350" backgroundColor="#00000000" scrollbarMode="showOnDemand" />
@@ -2912,8 +2912,8 @@ class MerlinMusicPlayerSetup(Screen, ConfigListScreen):
 	else:
 		skin = """
 			<screen position="0,0" size="720,576" flags="wfNoBorder" backgroundColor="#00000000" title="Merlin Music Player Setup">
-				<ePixmap position="50,30" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-				<ePixmap position="200,30" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
+				<ePixmap position="50,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+				<ePixmap position="200,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 				<widget render="Label" source="key_red" position="50,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget render="Label" source="key_green" position="200,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="config" position="50,80" size="620,350" backgroundColor="#00000000" scrollbarMode="showOnDemand" />

@@ -93,8 +93,8 @@ class eSame(Screen):
 		"<widget name=\"lbBoard\" position=\"175,"+str(size_h-85)+"\" size=\"140,40\" valign=\"center\" font=\"Regular;17\" />" +\
 		"<widget name=\"lbMarked\" position=\"310,"+str(size_h-85)+"\" size=\"100,40\" valign=\"center\" font=\"Regular;17\" />" +\
 		"<widget name=\"lbScore\" position=\"410,"+str(size_h-85)+"\" size=\"110,40\" valign=\"center\" font=\"Regular;17\" />" +\
-		"<ePixmap name=\"green\" position=\"5,"+str(size_h-45)+"\" zPosition=\"3\" size=\"140,40\" pixmap=\"buttons/green.png\" transparent=\"1\" alphatest=\"on\" /> \n" +\
-		"<ePixmap name=\"yellow\" position=\""+str(size_w-145)+","+str(size_h-45)+"\" zPosition=\"3\" size=\"140,40\" pixmap=\"buttons/yellow.png\" transparent=\"1\" alphatest=\"on\" /> \n" +\
+		"<ePixmap name=\"green\" position=\"5,"+str(size_h-45)+"\" zPosition=\"3\" size=\"140,40\" pixmap=\"skin_default/buttons/green.png\" transparent=\"1\" alphatest=\"on\" /> \n" +\
+		"<ePixmap name=\"yellow\" position=\""+str(size_w-145)+","+str(size_h-45)+"\" zPosition=\"3\" size=\"140,40\" pixmap=\"skin_default/buttons/yellow.png\" transparent=\"1\" alphatest=\"on\" /> \n" +\
 		"<widget name=\"key_green\" position=\"5,"+str(size_h-45)+"\" zPosition=\"4\" size=\"140,40\" valign=\"center\" halign=\"center\" font=\"Regular;18\" transparent=\"1\" foregroundColor=\"white\" shadowColor=\"black\" shadowOffset=\"-1,-1\" /> \n" +\
 		"<widget name=\"key_yellow\" position=\""+str(size_w-145)+","+str(size_h-45)+"\" zPosition=\"4\" size=\"140,40\" valign=\"center\" halign=\"center\" font=\"Regular;18\" transparent=\"1\" foregroundColor=\"white\" shadowColor=\"black\" shadowOffset=\"-1,-1\" /> \n" +\
 		skincontent + "</screen>"

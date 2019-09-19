@@ -681,7 +681,7 @@ class ZDFMediathek(Screen, HelpableScreen):
 					}
 					</convert>
 				</widget>
-				<ePixmap pixmap="buttons/key_menu.png" position="20,520" size="35,25" transparent="1" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/key_menu.png" position="20,520" size="35,25" transparent="1" alphatest="on" />
 				<widget name="serverName" position="60,520" size="160,20" font="Regular;18" backgroundColor="#252525" foregroundColor="#f47d19" />
 				<widget name="fakeList" position="0,0" size="0,0" />
 			</screen>"""
@@ -705,7 +705,7 @@ class ZDFMediathek(Screen, HelpableScreen):
 					}
 					</convert>
 				</widget>
-				<ePixmap pixmap="buttons/key_menu.png" position="20,540" size="35,25" transparent="1" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/key_menu.png" position="20,540" size="35,25" transparent="1" alphatest="on" />
 				<widget name="serverName" position="60,540" size="160,20" font="Regular;18" backgroundColor="#252525" foregroundColor="#f47d19" />
 				<widget name="fakeList" position="0,0" size="0,0" />
 			</screen>"""

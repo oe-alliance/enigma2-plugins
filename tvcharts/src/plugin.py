@@ -109,10 +109,10 @@ class TVChartsMain(Screen):
 	<screen position="center,center" size="620,510" title="TV Charts">
 		<widget name="channellist" position="10,10" zPosition="1" size="600,458" scrollbarMode="showOnDemand" />
 		<widget name="info" position="0,447" zPosition="2" size="620,20" font="Regular;18" noWrap="1" foregroundColor="#ffffff" transparent="1" halign="center" valign="center" />
-		<ePixmap name="red"    position="22,470"  zPosition="3" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap name="green"  position="167,470" zPosition="3" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap name="yellow" position="312,470" zPosition="3" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap name="blue"   position="457,470" zPosition="3" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+		<ePixmap name="red"    position="22,470"  zPosition="3" size="140,40" pixmap="/usr/share/enigma2/skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap name="green"  position="167,470" zPosition="3" size="140,40" pixmap="/usr/share/enigma2/skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap name="yellow" position="312,470" zPosition="3" size="140,40" pixmap="/usr/share/enigma2/skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap name="blue"   position="457,470" zPosition="3" size="140,40" pixmap="/usr/share/enigma2/skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 		<widget name="key_red" position="22,470" zPosition="4" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="key_green" position="167,470" zPosition="4" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="key_yellow" position="312,470" zPosition="4" size="140,40" valign="center" halign="center"  font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />

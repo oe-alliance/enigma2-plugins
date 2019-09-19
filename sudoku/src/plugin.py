@@ -232,10 +232,10 @@ class Sudoku(Screen):
 			<screen position="%d,%d" size="520,390" title="Sudoku 0.1" >
 				<widget source="Canvas" render="Canvas" position="10,20" size="354,354" />
 				<widget name="gamelevel" position="380,25" size="140,40" font="Regular;21"/>
-				<ePixmap name="green"    position="375,98"   zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-				<ePixmap name="yellow"  position="375,178" zPosition="4" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-				<ePixmap name="blue" position="375,258" zPosition="4" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
-				<ePixmap name="red"   position="375,338" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+				<ePixmap name="green"    position="375,98"   zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+				<ePixmap name="yellow"  position="375,178" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+				<ePixmap name="blue" position="375,258" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+				<ePixmap name="red"   position="375,338" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 				<widget name="key_green"    position="375,98"   zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="key_yellow"  position="375,178" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="key_blue" position="375,258" zPosition="5" size="140,40" valign="center" halign="center"  font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />

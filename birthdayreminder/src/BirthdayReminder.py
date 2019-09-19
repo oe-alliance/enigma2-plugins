@@ -158,10 +158,10 @@ class BirthdayStore:
 class BirthdayReminder(Screen, HelpableScreen):
 	skin = """
 		<screen position="center,center" size="560,320" title="%s" >
-			<ePixmap pixmap="buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<widget render="Label" source="key_red" position="0,0" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_green" position="140,0" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_yellow" position="280,0" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -532,10 +532,10 @@ class BirthdayList(List):
 class EditBirthdayScreen(Screen, ConfigListScreen, HelpableScreen):
 	skin = """
 		<screen position="center,center" size="560,320" >
-			<ePixmap pixmap="buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<widget render="Label" source="key_red" position="0,0" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_green" position="140,0" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="config" position="5,45" size="550,235" scrollbarMode="showOnDemand" />
@@ -625,10 +625,10 @@ class EditBirthdayScreen(Screen, ConfigListScreen, HelpableScreen):
 class BirthdayReminderSettings(Screen, ConfigListScreen, HelpableScreen):
 	skin = """
 		<screen position="center,center" size="560,320" title="%s" >
-			<ePixmap pixmap="buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<widget render="Label" source="key_red" position="0,0" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_green" position="140,0" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_blue" position="420,0" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -734,10 +734,10 @@ class BirthdayReminderSettings(Screen, ConfigListScreen, HelpableScreen):
 class PathSelectionScreen(Screen):
 	skin = """
 		<screen position="center,center" size="560,320" title="%s" >
-			<ePixmap pixmap="buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<widget render="Label" source="key_red" position="0,0" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_green" position="140,0" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="target" position="5,45" size="550,30" valign="center" font="Regular;21" />

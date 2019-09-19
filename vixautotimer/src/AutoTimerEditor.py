@@ -388,16 +388,16 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 	"""Edit AutoTimer"""
 
 	skin = """<screen name="AutoTimerEditor" title="Edit AutoTimer" position="center,center" size="565,350">
-		<ePixmap position="0,5" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,5" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,5" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="420,5" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+		<ePixmap position="0,5" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,5" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,5" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,5" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_green" render="Label" position="140,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_yellow" render="Label" position="280,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_blue" render="Label" position="420,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="config" position="5,50" size="555,225" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="div-h.png" position="0,275" zPosition="1" size="565,2" />
+		<ePixmap pixmap="skin_default/div-h.png" position="0,275" zPosition="1" size="565,2" />
 		<widget source="help" render="Label" position="5,280" size="555,63" font="Regular;21" />
 	</screen>"""
 
@@ -988,10 +988,10 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 	"""Edit AutoTimer Filter"""
 
 	skin = """<screen name="AutoTimerFilterEditor" title="Edit AutoTimer Filters" position="center,center" size="565,280">
-		<ePixmap position="0,0" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,0" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,0" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="420,0" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -1204,10 +1204,10 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 	"""Edit allowed Services of a AutoTimer"""
 
 	skin = """<screen name="AutoTimerServiceEditor" title="Edit AutoTimer Services" position="center,center" size="565,280">
-		<ePixmap position="0,0" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,0" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,0" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="420,0" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />

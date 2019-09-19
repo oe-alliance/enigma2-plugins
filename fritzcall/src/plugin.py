@@ -414,15 +414,15 @@ class FritzMenu(Screen, HelpableScreen):
 					<widget name="FBFMailbox" position="%d,%d" size="%d,%d" font="Regular;%d" />
 					<widget name="mailbox_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="blend"/>
 					<widget name="mailbox_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="blend"/>
-					<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="blend" />
+					<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="blend" />
 					<widget name="key_yellow" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 					""" % (
 							40, 5 + 2 * fontSize + 10 + varLinePos * fontSize + 10,  # position mailbox
 							width - 40 - 20, fontSize,  # size mailbox
 							fontSize - 2,
-							"buttons/button_green_off.png",
+							"skin_default/buttons/button_green_off.png",
 							20, 5 + 2 * fontSize + 10 + varLinePos * fontSize + 10 + (fontSize - 16) / 2,  # position button mailbox
-							"buttons/button_green.png",
+							"skin_default/buttons/button_green.png",
 							20, 5 + 2 * fontSize + 10 + varLinePos * fontSize + 10 + (fontSize - 16) / 2,  # position button mailbox
 							noButtons * buttonsGap + (noButtons - 1) * 140, buttonsVPos,
 							noButtons * buttonsGap + (noButtons - 1) * 140, buttonsVPos,
@@ -440,9 +440,9 @@ class FritzMenu(Screen, HelpableScreen):
 							40, 5 + 2 * fontSize + 10 + varLinePos * fontSize + 10,  # position dect
 							width - 40 - 20, fontSize,  # size dect
 							fontSize - 2,
-							"buttons/button_green_off.png",
+							"skin_default/buttons/button_green_off.png",
 							20, 5 + 2 * fontSize + 10 + varLinePos * fontSize + 10 + (fontSize - 16) / 2,  # position button dect
-							"buttons/button_green.png",
+							"skin_default/buttons/button_green.png",
 							20, 5 + 2 * fontSize + 10 + varLinePos * fontSize + 10 + (fontSize - 16) / 2,  # position button dect
 					)
 				varLinePos += 1
@@ -458,9 +458,9 @@ class FritzMenu(Screen, HelpableScreen):
 							40, 5 + 2 * fontSize + 10 + varLinePos * fontSize + 10,  # position dect
 							width - 40 - 20, fontSize,  # size dect
 							fontSize - 2,
-							"buttons/button_green_off.png",
+							"skin_default/buttons/button_green_off.png",
 							20, 5 + 2 * fontSize + 10 + varLinePos * fontSize + 10 + (fontSize - 16) / 2,  # position button dect
-							"buttons/button_green.png",
+							"skin_default/buttons/button_green.png",
 							20, 5 + 2 * fontSize + 10 + varLinePos * fontSize + 10 + (fontSize - 16) / 2,  # position button dect
 					)
 				varLinePos += 1
@@ -476,9 +476,9 @@ class FritzMenu(Screen, HelpableScreen):
 							40, 5 + 2 * fontSize + 10 + varLinePos * fontSize + 10,  # position dect
 							width - 40 - 20, fontSize,  # size dect
 							fontSize - 2,
-							"buttons/button_green_off.png",
+							"skin_default/buttons/button_green_off.png",
 							20, 5 + 2 * fontSize + 10 + varLinePos * fontSize + 10 + (fontSize - 16) / 2,  # position button dect
-							"buttons/button_green.png",
+							"skin_default/buttons/button_green.png",
 							20, 5 + 2 * fontSize + 10 + varLinePos * fontSize + 10 + (fontSize - 16) / 2,  # position button dect
 					)
 				varLinePos += 1
@@ -513,30 +513,30 @@ class FritzMenu(Screen, HelpableScreen):
 							40, 5 + 2 * fontSize + 10,  # position internet
 							width - 40, 2 * fontSize,  # size internet
 							fontSize - 2,
-							"buttons/button_green_off.png",
+							"skin_default/buttons/button_green_off.png",
 							20, 5 + 2 * fontSize + 10 + (fontSize - 16) / 2,  # position button internet
-							"buttons/button_green.png",
+							"skin_default/buttons/button_green.png",
 							20, 5 + 2 * fontSize + 10 + (fontSize - 16) / 2,  # position button internet
 							40, 5 + 2 * fontSize + 10 + 2 * fontSize + 10,  # position dsl
 							width - 40 - 20, fontSize,  # size dsl
 							fontSize - 2,
-							"buttons/button_green_off.png",
+							"skin_default/buttons/button_green_off.png",
 							20, 5 + 2 * fontSize + 10 + 2 * fontSize + 10 + (fontSize - 16) / 2,  # position button dsl
-							"buttons/button_green.png",
+							"skin_default/buttons/button_green.png",
 							20, 5 + 2 * fontSize + 10 + 2 * fontSize + 10 + (fontSize - 16) / 2,  # position button dsl
 							40, 5 + 2 * fontSize + 10 + 3 * fontSize + 10,  # position wlan
 							width - 40 - 20, fontSize,  # size wlan
 							fontSize - 2,
-							"buttons/button_green_off.png",
+							"skin_default/buttons/button_green_off.png",
 							20, 5 + 2 * fontSize + 10 + 3 * fontSize + 10 + (fontSize - 16) / 2,  # position button wlan
-							"buttons/button_green.png",
+							"skin_default/buttons/button_green.png",
 							20, 5 + 2 * fontSize + 10 + 3 * fontSize + 10 + (fontSize - 16) / 2,  # position button wlan
 							mailboxLine,
 							dectLine,
 							faxLine,
 							rufumlLine,
-							buttonsGap, buttonsVPos, "buttons/red.png", buttonsGap, buttonsVPos,
-							buttonsGap + 140 + buttonsGap, buttonsVPos, "buttons/green.png", buttonsGap + 140 + buttonsGap, buttonsVPos,
+							buttonsGap, buttonsVPos, "skin_default/buttons/red.png", buttonsGap, buttonsVPos,
+							buttonsGap + 140 + buttonsGap, buttonsVPos, "skin_default/buttons/green.png", buttonsGap + 140 + buttonsGap, buttonsVPos,
 							)
 
 			Screen.__init__(self, session)
@@ -684,54 +684,54 @@ class FritzMenu(Screen, HelpableScreen):
 								40, 5 + 2 * fontSize + 10,  # position internet
 								width - 40, 2 * fontSize,  # size internet
 								fontSize - 2,
-								"buttons/button_green_off.png",
+								"skin_default/buttons/button_green_off.png",
 								20, 5 + 2 * fontSize + 10 + (fontSize - 16) / 2,  # position button internet
-								"buttons/button_green.png",
+								"skin_default/buttons/button_green.png",
 								20, 5 + 2 * fontSize + 10 + (fontSize - 16) / 2,  # position button internet
 								40, 5 + 2 * fontSize + 10 + 2 * fontSize + 10,  # position dsl
 								width - 40 - 20, fontSize,  # size dsl
 								fontSize - 2,
-								"buttons/button_green_off.png",
+								"skin_default/buttons/button_green_off.png",
 								20, 5 + 2 * fontSize + 10 + 2 * fontSize + 10 + (fontSize - 16) / 2,  # position button dsl
-								"buttons/button_green.png",
+								"skin_default/buttons/button_green.png",
 								20, 5 + 2 * fontSize + 10 + 2 * fontSize + 10 + (fontSize - 16) / 2,  # position button dsl
 								40, 5 + 2 * fontSize + 10 + 3 * fontSize + 10,  # position wlan
 								width - 40 - 20, fontSize,  # size wlan
 								fontSize - 2,
-								"buttons/button_green_off.png",
+								"skin_default/buttons/button_green_off.png",
 								20, 5 + 2 * fontSize + 10 + 3 * fontSize + 10 + (fontSize - 16) / 2,  # position button wlan
-								"buttons/button_green.png",
+								"skin_default/buttons/button_green.png",
 								20, 5 + 2 * fontSize + 10 + 3 * fontSize + 10 + (fontSize - 16) / 2,  # position button wlan
 								40, 5 + 2 * fontSize + 10 + 4 * fontSize + 10,  # position dect
 								width - 40 - 20, fontSize,  # size dect
 								fontSize - 2,
-								"buttons/button_green_off.png",
+								"skin_default/buttons/button_green_off.png",
 								20, 5 + 2 * fontSize + 10 + 4 * fontSize + 10 + (fontSize - 16) / 2,  # position button dect
-								"buttons/button_green.png",
+								"skin_default/buttons/button_green.png",
 								20, 5 + 2 * fontSize + 10 + 4 * fontSize + 10 + (fontSize - 16) / 2,  # position button dect
 								40, 5 + 2 * fontSize + 10 + 5 * fontSize + 10,  # position fax
 								width - 40 - 20, fontSize,  # size fax
 								fontSize - 2,
-								"buttons/button_green_off.png",
+								"skin_default/buttons/button_green_off.png",
 								20, 5 + 2 * fontSize + 10 + 5 * fontSize + 10 + (fontSize - 16) / 2,  # position button fax
-								"buttons/button_green.png",
+								"skin_default/buttons/button_green.png",
 								20, 5 + 2 * fontSize + 10 + 5 * fontSize + 10 + (fontSize - 16) / 2,  # position button fax
 								40, 5 + 2 * fontSize + 10 + 6 * fontSize + 10,  # position rufuml
 								width - 40 - 20, fontSize,  # size rufuml
 								fontSize - 2,
-								"buttons/button_green_off.png",
+								"skin_default/buttons/button_green_off.png",
 								20, 5 + 2 * fontSize + 10 + 6 * fontSize + 10 + (fontSize - 16) / 2,  # position button rufuml
-								"buttons/button_green.png",
+								"skin_default/buttons/button_green.png",
 								20, 5 + 2 * fontSize + 10 + 6 * fontSize + 10 + (fontSize - 16) / 2,  # position button rufuml
 								40, 5 + 2 * fontSize + 10 + 7 * fontSize + 10,  # position gast
 								width - 40 - 20, fontSize,  # size gast
 								fontSize - 2,
-								"buttons/button_green_off.png",
+								"skin_default/buttons/button_green_off.png",
 								20, 5 + 2 * fontSize + 10 + 7 * fontSize + 10 + (fontSize - 16) / 2,  # position button gast
-								"buttons/button_green.png",
+								"skin_default/buttons/button_green.png",
 								20, 5 + 2 * fontSize + 10 + 7 * fontSize + 10 + (fontSize - 16) / 2,  # position button gast
-								buttonsGap, buttonsVPos, "buttons/green.png", buttonsGap, buttonsVPos,
-								2 * buttonsGap + 140, buttonsVPos, "buttons/yellow.png", 2 * buttonsGap + 140, buttonsVPos,
+								buttonsGap, buttonsVPos, "skin_default/buttons/green.png", buttonsGap, buttonsVPos,
+								2 * buttonsGap + 140, buttonsVPos, "skin_default/buttons/yellow.png", 2 * buttonsGap + 140, buttonsVPos,
 								)
 			else:
 				if DESKTOP_WIDTH <= 720:
@@ -1220,10 +1220,10 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 							itemHeight,  # itemHeight
 							buttonV - 5,  # eLabel position vertical
 							self.width,  # eLabel width
-							buttonGap, buttonV, "buttons/red.png",  # widget red
-							2 * buttonGap + 140, buttonV, "buttons/green.png",  # widget green
-							3 * buttonGap + 2 * 140, buttonV, "buttons/yellow.png",  # widget yellow
-							4 * buttonGap + 3 * 140, buttonV, "buttons/blue.png",  # widget blue
+							buttonGap, buttonV, "skin_default/buttons/red.png",  # widget red
+							2 * buttonGap + 140, buttonV, "skin_default/buttons/green.png",  # widget green
+							3 * buttonGap + 2 * 140, buttonV, "skin_default/buttons/yellow.png",  # widget yellow
+							4 * buttonGap + 3 * 140, buttonV, "skin_default/buttons/blue.png",  # widget blue
 							buttonGap, buttonV, scaleV(22, 21),  # widget red
 							2 * buttonGap + 140, buttonV, scaleV(22, 21),  # widget green
 							3 * buttonGap + 2 * 140, buttonV, scaleV(22, 21),  # widget yellow
@@ -1496,9 +1496,9 @@ class FritzOfferAction(Screen):
 				</screen>""" % (
 								DESKTOP_WIDTH, DESKTOP_HEIGHT, scaleV(25, 22),  # set maximum size
 								DESKTOP_WIDTH, DESKTOP_HEIGHT,  # set maximum size
-								140, 40, "buttons/red.png",
-								140, 40, "buttons/green.png",
-								140, 40, "buttons/yellow.png",
+								140, 40, "skin_default/buttons/red.png",
+								140, 40, "skin_default/buttons/green.png",
+								140, 40, "skin_default/buttons/yellow.png",
 								140, 40, scaleV(21, 21),
 								140, 40, scaleV(21, 21),
 								140, 40, scaleV(21, 21),
@@ -2019,10 +2019,10 @@ class FritzCallPhonebook(object):
 							fontHeight,  # itemHeight
 							self.height - 40 - 5,  # eLabel position vertical
 							self.entriesWidth,  # eLabel width
-							buttonGap, self.height - 40, "buttons/red.png",  # ePixmap red
-							2 * buttonGap + 140, self.height - 40, "buttons/green.png",  # ePixmap green
-							3 * buttonGap + 2 * 140, self.height - 40, "buttons/yellow.png",  # ePixmap yellow
-							4 * buttonGap + 3 * 140, self.height - 40, "buttons/blue.png",  # ePixmap blue
+							buttonGap, self.height - 40, "skin_default/buttons/red.png",  # ePixmap red
+							2 * buttonGap + 140, self.height - 40, "skin_default/buttons/green.png",  # ePixmap green
+							3 * buttonGap + 2 * 140, self.height - 40, "skin_default/buttons/yellow.png",  # ePixmap yellow
+							4 * buttonGap + 3 * 140, self.height - 40, "skin_default/buttons/blue.png",  # ePixmap blue
 							buttonGap, self.height - 40, scaleV(22, 21),  # widget red
 							2 * buttonGap + 140, self.height - 40, scaleV(22, 21),  # widget green
 							3 * buttonGap + 2 * 140, self.height - 40, scaleV(22, 21),  # widget yellow
@@ -2275,8 +2275,8 @@ class FritzCallPhonebook(object):
 							</screen>""" % (
 											width, height,
 											width - 5 - 5, height - 5 - 40 - 5,
-											buttonsGap, buttonsVPos, "buttons/red.png",
-											buttonsGap + 140 + buttonsGap, buttonsVPos, "buttons/green.png",
+											buttonsGap, buttonsVPos, "skin_default/buttons/red.png",
+											buttonsGap + 140 + buttonsGap, buttonsVPos, "skin_default/buttons/green.png",
 											buttonsGap, buttonsVPos,
 											buttonsGap + 140 + buttonsGap, buttonsVPos,
 											)
@@ -2468,16 +2468,16 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 							scaleH(width - 80, width - 10), scaleV(453, 328),  # config size
 							scaleV(518, 390),  # eLabel position vertical
 							width,  # eLabel width
-							scaleH(20, 0), scaleV(525, 395), "buttons/red.png",  # pixmap red
-							scaleH(20 + 140 + 90, 140), scaleV(525, 395), "buttons/green.png",  # pixmap green
-							scaleH(20 + 2 * (140 + 90), 2 * 140), scaleV(525, 395), "buttons/yellow.png",  # pixmap yellow
-							scaleH(20 + 3 * (140 + 90), 3 * 140), scaleV(525, 395), "buttons/blue.png",  # pixmap blue
+							scaleH(20, 0), scaleV(525, 395), "skin_default/buttons/red.png",  # pixmap red
+							scaleH(20 + 140 + 90, 140), scaleV(525, 395), "skin_default/buttons/green.png",  # pixmap green
+							scaleH(20 + 2 * (140 + 90), 2 * 140), scaleV(525, 395), "skin_default/buttons/yellow.png",  # pixmap yellow
+							scaleH(20 + 3 * (140 + 90), 3 * 140), scaleV(525, 395), "skin_default/buttons/blue.png",  # pixmap blue
 							scaleH(20, 0), scaleV(525, 395), scaleV(21, 21),  # widget red
 							scaleH(20 + (140 + 90), 140), scaleV(525, 395), scaleV(21, 21),  # widget green
 							scaleH(20 + 2 * (140 + 90), 2 * 140), scaleV(525, 395), scaleV(21, 21),  # widget yellow
 							scaleH(20 + 3 * (140 + 90), 3 * 140), scaleV(525, 395), scaleV(21, 21),  # widget blue
-							scaleH(20 + 4 * (140 + 90), 4 * 140), scaleV(532, 402), "buttons/key_info.png",  # button information
-							scaleH(20 + 4 * (140 + 90) + (35 + 40), 4 * 140 + 35), scaleV(532, 402), "buttons/key_menu.png",  # button menu
+							scaleH(20 + 4 * (140 + 90), 4 * 140), scaleV(532, 402), "skin_default/buttons/key_info.png",  # button information
+							scaleH(20 + 4 * (140 + 90) + (35 + 40), 4 * 140 + 35), scaleV(532, 402), "skin_default/buttons/key_menu.png",  # button menu
 							)
 		else:
 			if DESKTOP_WIDTH <= 720:
@@ -2945,7 +2945,7 @@ class MessageBoxPixmap(Screen):
 		</screen>
 			""" % (
 				# scaleH(350, 60), scaleV(175, 245),
-				scaleV(25, 22), resolveFilename(SCOPE_CURRENT_SKIN, "icons/input_info.png")
+				scaleV(25, 22), resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/input_info.png")
 				)
 			debug("[FritzCall] MessageBoxPixmap number: %s", number)
 		else:

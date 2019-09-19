@@ -28,7 +28,7 @@ class PictureView(Screen):
 	skin = """
 		<screen position="center,center" size="720,576" flags="wfNoBorder" title="UWZ" >
 			<eLabel position="0,0" zPosition="1" size="720,576" backgroundColor="black" />
-			<ePixmap position="655,540" zPosition="2" size="36,20" pixmap="buttons/key_info.png" alphatest="on" />
+			<ePixmap position="655,540" zPosition="2" size="36,20" pixmap="skin_default/buttons/key_info.png" alphatest="on" />
 			<widget name="picture" position="80,10" zPosition="2" size="550,550" />
 		</screen>"""
 
@@ -70,9 +70,9 @@ class HelpPictureView(Screen):
 	skin = """
 		<screen position="center,center" size="700,320" title="Warnstufen" >
 			<eLabel position="0,0" zPosition="1" size="700,320" backgroundColor="black" />
-			<ePixmap position="80,270" zPosition="2" size="45,45" pixmap="vkey_left.png" alphatest="on" />
-			<ePixmap position="328,270" zPosition="2" size="45,45" pixmap="vkey_esc.png" alphatest="on" />
-			<ePixmap position="575,270" zPosition="2" size="45,45" pixmap="vkey_right.png" alphatest="on" />
+			<ePixmap position="80,270" zPosition="2" size="45,45" pixmap="skin_default/vkey_left.png" alphatest="on" />
+			<ePixmap position="328,270" zPosition="2" size="45,45" pixmap="skin_default/vkey_esc.png" alphatest="on" />
+			<ePixmap position="575,270" zPosition="2" size="45,45" pixmap="skin_default/vkey_right.png" alphatest="on" />
 			<widget name="picture" position="5,20" zPosition="2" size="690,225" />
 		</screen>"""
 
@@ -134,7 +134,7 @@ class UnwetterMain(Screen):
 			<widget name="hmenu" position="5,0" zPosition="1" size="530,220" scrollbarMode="showOnDemand" />
 			<widget name="thumbnail" position="185,250" zPosition="2" size="140,150" />
 			<widget name="thumbland" position="435,390" zPosition="2" size="90,40" />
-			<ePixmap position="20,380" zPosition="2" size="36,20" pixmap="buttons/key_menu.png" alphatest="on" />
+			<ePixmap position="20,380" zPosition="2" size="36,20" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
 			<widget name="statuslabel" position="5,410" zPosition="2" size="530,20" font="Regular;16" halign="left"/>
 		</screen>"""
 

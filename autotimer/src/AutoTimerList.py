@@ -216,7 +216,7 @@ class AutoTimerList(MenuList):
 		try:
 			devide = LoadPixmap(resolveFilename(SCOPE_ACTIVE_SKIN, "div-h.png"))
 		except:
-			devide = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "div-h.png"))
+			devide = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/div-h.png"))
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 0, height-2, width, 2, devide))
 		return res
 

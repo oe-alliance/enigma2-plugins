@@ -25,9 +25,9 @@ class dirSelectDlg(Screen): # 90,140
 		<screen name="dirSelectDlg" position="center,center" size="560,360">
 			<widget name="filelist" position="10,10" size="540,210" scrollbarMode="showOnDemand" />
 			<widget name="ButtonGreentext" position="70,270" size="460,25" halign="left" zPosition="10" font="Regular;21" transparent="1" />
-			<widget name="ButtonGreen" pixmap="buttons/button_green.png" position="30,270" zPosition="10" size="35,25" transparent="1" alphatest="on" />
+			<widget name="ButtonGreen" pixmap="skin_default/buttons/button_green.png" position="30,270" zPosition="10" size="35,25" transparent="1" alphatest="on" />
 			<widget name="ButtonRedtext" position="70,300" size="460,25" halign="left" zPosition="10" font="Regular;21" transparent="1" />
-			<widget name="ButtonRed" pixmap="buttons/button_red.png" position="30,300" zPosition="10" size="35,25" transparent="1" alphatest="on" />
+			<widget name="ButtonRed" pixmap="skin_default/buttons/button_red.png" position="30,300" zPosition="10" size="35,25" transparent="1" alphatest="on" />
 			<widget name="ButtonOKtext" position="70,330" size="460,25" halign="left" zPosition="10" font="Regular;21" transparent="1" />
 			<widget name="ButtonOK" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/fstabEditor/ok.png" position="30,330" zPosition="10" size="35,25" transparent="1" alphatest="on" />
 		</screen>"""

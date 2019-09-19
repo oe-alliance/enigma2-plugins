@@ -134,9 +134,9 @@ class Schiffe(Screen):
 			<screen position="center,center" size="%d,%d" title="Schiffe versenken %s" >
 				<widget source="Canvas" render="Canvas" position="5,20" size="%d,%d" />
 				<widget name="message" position="%d,%d" size="140,40" valign="center" halign="center" font="Regular;21"/>
-				<ePixmap name="green"    position="%d,%d"   zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-				<ePixmap name="blue" position="%d,%d" zPosition="4" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
-				<ePixmap name="red"   position="%d,%d" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+				<ePixmap name="green"    position="%d,%d"   zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+				<ePixmap name="blue" position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+				<ePixmap name="red"   position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 				<widget name="key_green"    position="%d,%d"   zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="key_blue" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center"  font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="key_red"   position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />

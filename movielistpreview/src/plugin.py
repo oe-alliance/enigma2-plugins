@@ -130,10 +130,10 @@ movielistpreview = MovielistPreview()
 class MovielistPreviewPositionerCoordinateEdit(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="560,110" title="%s">
-			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" transparent="1" alphatest="on" />
 			<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget name="config" position="0,45" size="560,60" scrollbarMode="showOnDemand" />
 		</screen>""" % _("Movielist Preview")
@@ -293,11 +293,11 @@ class MovielistPreviewManualCreator(Screen, InfoBarBase, InfoBarSeek, InfoBarCue
 	skin = """
 		<screen position="center,center" size="560,380" title="%s">
 			<widget name="video" position="100,20" size="360,288" backgroundColor="transparent" />
-			<widget source="session.CurrentService" render="PositionGauge" position="145,330" size="270,10" pointer="position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
+			<widget source="session.CurrentService" render="PositionGauge" position="145,330" size="270,10" pointer="skin_default/position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
 				<convert type="ServicePosition">Gauge</convert>
 			</widget>
 			<widget name="seekState" position="40,320" size="60,25" halign="right" font="Regular;18" valign="center" />
-			<ePixmap pixmap="icons/mp_buttons.png" position="225,350" size="109,13" alphatest="on" />
+			<ePixmap pixmap="skin_default/icons/mp_buttons.png" position="225,350" size="109,13" alphatest="on" />
 		</screen>""" % _("Movielist Preview")
 
 	def __init__(self, session, service):

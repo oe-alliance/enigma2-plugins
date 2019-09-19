@@ -20,21 +20,21 @@ class MovieTagger(Screen):
 	skin = """
 		<screen position="center,70" size="600,460" title="Movie Tagger" >
 			<widget name="moviename" position="10,0" size="580,60" valign="top" font="Regular;25"/>
-			<ePixmap pixmap="div-h.png" position="0,62" zPosition="1" size="600,2" />
+			<ePixmap pixmap="skin_default/div-h.png" position="0,62" zPosition="1" size="600,2" />
 			<widget name="assignedTags" position="10,65" size="260,30" valign="top" halign="left" zPosition="2" foregroundColor="white" font="Regular;23"/>
 			<widget name="cTaglist" position="10,100" size="260,250" scrollbarMode="showOnDemand"/>
 			<widget name="definedTags" position="300,65" size="290,30" valign="top" halign="left" zPosition="2" foregroundColor="white" font="Regular;23"/>
 			<widget name="aTaglist" position="290,100" size="300,250" scrollbarMode="showOnDemand"/>
                 
-			<ePixmap pixmap="div-h.png" position="0,358" zPosition="1" size="600,2" />
+			<ePixmap pixmap="skin_default/div-h.png" position="0,358" zPosition="1" size="600,2" />
 			<widget name="usedTag" position="10,365" size="185,50" valign="top" halign="center" zPosition="2" foregroundColor="#ffff00" font="Regular;21"/>
 			<widget name="userTag" position="200,365" size="185,50" valign="top" halign="center" zPosition="2" foregroundColor="#ff0000" font="Regular;21"/>
 			<widget name="preTag" position="400,365" size="190,50" valign="top" halign="center" zPosition="2" foregroundColor="#00ff00" font="Regular;21"/>
 
-			<ePixmap pixmap="buttons/red.png" position="0,420" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="155,420" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="305,420" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="455,420" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,420" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="155,420" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="305,420" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="455,420" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 
 			<widget name="buttonred" position="0,420" size="140,40" valign="center" halign="center" zPosition="2" foregroundColor="white" transparent="1" font="Regular;18"/>
 			<widget name="buttongreen" position="155,420" size="140,40" valign="center" halign="center" zPosition="2" foregroundColor="white" transparent="1" font="Regular;18"/>

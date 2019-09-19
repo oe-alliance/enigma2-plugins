@@ -57,10 +57,10 @@ class dreamIRCMainMenu(Screen):
 				<widget name="chat.desc" position="10,10" size="460,20" font="Regular;16" />
 				<widget name="buddy.desc" position="940,10" size="120,20" font="Regular;16" />
 				<widget name="input.desc" position="10,520" size="360,18" font="Regular;16" />
-				<widget name="red.pic" position="910,511" size="15,15" pixmap="buttons/button_red.png" transparent="1" alphatest="on"/>
-				<widget name="green.pic" position="910,531" size="15,15" pixmap="buttons/button_green.png" transparent="1" alphatest="on"/>
-				<widget name="yellow.pic" position="910,551" size="15,15" pixmap="buttons/button_yellow.png" transparent="1" alphatest="on"/>
-				<widget name="blue.pic" position="910,571" size="15,15" pixmap="buttons/button_blue.png" transparent="1" alphatest="on"/>
+				<widget name="red.pic" position="910,511" size="15,15" pixmap="skin_default/buttons/button_red.png" transparent="1" alphatest="on"/>
+				<widget name="green.pic" position="910,531" size="15,15" pixmap="skin_default/buttons/button_green.png" transparent="1" alphatest="on"/>
+				<widget name="yellow.pic" position="910,551" size="15,15" pixmap="skin_default/buttons/button_yellow.png" transparent="1" alphatest="on"/>
+				<widget name="blue.pic" position="910,571" size="15,15" pixmap="skin_default/buttons/button_blue.png" transparent="1" alphatest="on"/>
 				<widget name="disconnect.desc" position="940,510" size="110,20" font="Regular;16" />
 				<widget name="connect.desc" position="940,530" size="110,20" font="Regular;16" />
 				<widget name="settings.desc" position="940,550" size="110,20" font="Regular;16" />
@@ -75,10 +75,10 @@ class dreamIRCMainMenu(Screen):
 				<widget name="chat.desc" position="10,10" size="460,20" font="Regular;16" />
 				<widget name="buddy.desc" position="480,10" size="120,20" font="Regular;16" />
 				<widget name="input.desc" position="10,370" size="360,18" font="Regular;16" />
-				<widget name="red.pic" position="470,362" size="15,15" pixmap="buttons/button_red.png" transparent="1" alphatest="on"/>
-				<widget name="green.pic" position="470,382" size="15,15" pixmap="buttons/button_green.png" transparent="1" alphatest="on"/>
-				<widget name="yellow.pic" position="470,402" size="15,15" pixmap="buttons/button_yellow.png" transparent="1" alphatest="on"/>
-				<widget name="blue.pic" position="470,422" size="15,15" pixmap="buttons/button_blue.png" transparent="1" alphatest="on"/>
+				<widget name="red.pic" position="470,362" size="15,15" pixmap="skin_default/buttons/button_red.png" transparent="1" alphatest="on"/>
+				<widget name="green.pic" position="470,382" size="15,15" pixmap="skin_default/buttons/button_green.png" transparent="1" alphatest="on"/>
+				<widget name="yellow.pic" position="470,402" size="15,15" pixmap="skin_default/buttons/button_yellow.png" transparent="1" alphatest="on"/>
+				<widget name="blue.pic" position="470,422" size="15,15" pixmap="skin_default/buttons/button_blue.png" transparent="1" alphatest="on"/>
 				<widget name="disconnect.desc" position="490,360" size="110,20" font="Regular;16" />
 				<widget name="connect.desc" position="490,380" size="110,20" font="Regular;16" />
 				<widget name="settings.desc" position="490,400" size="110,20" font="Regular;16" />

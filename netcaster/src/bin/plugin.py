@@ -45,10 +45,10 @@ class NETcasterScreenBrowser(Screen):
         <screen position="80,73" size="560,440" title="SHOUTcaster" >
         <widget name="streamlist" position="0,0" size="560,360" scrollbarMode="showOnDemand" />
         <widget name="metadata"     position="0,360" size="560,40" transparent="1" valign="left" halign="center" zPosition="5"  foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font="Regular;21" />
-        <ePixmap name="red"    position="0,400"   zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-        <ePixmap name="green"  position="140,400" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-        <ePixmap name="yellow" position="280,400" zPosition="4" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-        <ePixmap name="blue"   position="420,400" zPosition="4" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+        <ePixmap name="red"    position="0,400"   zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+        <ePixmap name="green"  position="140,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+        <ePixmap name="yellow" position="280,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+        <ePixmap name="blue"   position="420,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
         <widget name="pixred"     position="0,400" size="140,40" transparent="1" valign="center" halign="center" zPosition="5"  foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font="Regular;21" />
         <widget name="pixgreen"     position="140,400" size="140,40" transparent="1" valign="center" halign="center" zPosition="5"  foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font="Regular;21"/>
         <widget name="pixyellow" position="280,400" size="140,40" transparent="1" valign="center" halign="center" zPosition="5"  foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font="Regular;21" />

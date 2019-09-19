@@ -316,10 +316,10 @@ class ScreenMailView(Screen):
 			<widget name="subject" position="%d,%d" size="%d,%d"  font="Regular;%d" />
 			<eLabel position="%d,%d" size="%d,2" backgroundColor="#aaaaaa" />
 			<widget name="body" position="%d,%d" size="%d,%d"  font="Regular;%d" />
-			<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+			<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 			<widget name="buttonred" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="buttongreen" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="buttonyellow" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -943,10 +943,10 @@ class EmailAccountList(Screen):
 		self.skin = """
 			<screen position="%d,%d" size="%d,%d" title="Accounts list" >
 			<widget name="accounts" position="0,0" size="%d,%d" scrollbarMode="showOnDemand" />
-			<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap position="%d,%d" 	size="35,25" pixmap="buttons/key_menu.png" 	alphatest="on" />
+			<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap position="%d,%d" 	size="35,25" pixmap="skin_default/buttons/key_menu.png" 	alphatest="on" />
 			<widget name="buttonred" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="buttongreen" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="buttonyellow" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
