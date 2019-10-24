@@ -1,0 +1,206 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-11 10:58+0200\n"
+"PO-Revision-Date: 2018-02-12 18:02+0200\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <Dima-73@inbox.lv>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.4\n"
+
+msgid "'dvbdate' is not installed!"
+msgstr "'dvbdate' не установлен!"
+
+msgid "'ntpdate' is not installed!"
+msgstr "'ntpdate' не установлен!"
+
+msgid "1 hour"
+msgstr "1 час"
+
+msgid "12 hours"
+msgstr "12 часов"
+
+msgid "15 mins"
+msgstr "15 минут"
+
+msgid "2 hours"
+msgstr "2 часа"
+
+msgid "24 hours"
+msgstr "24 часа"
+
+msgid "30 mins"
+msgstr "30 минут"
+
+msgid "4 hours"
+msgstr "4 часа"
+
+msgid "48 hours"
+msgstr "48 часов"
+
+msgid "5 mins"
+msgstr "5 минут"
+
+msgid "After receiver's boot, wait for the specified delay before connecting to the NTP server. This allows the Wi-Fi connection to be fully established."
+msgstr "При загрузке ресивера, дождаться указанной задержки перед подключением к серверу NTP. Это позволяет полностью установить соединение Wi-Fi."
+
+msgid "Apply new system time?"
+msgstr "Применить новое системное время?"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Change system time in enigma2 box"
+msgstr "Изменение системного времени ресивера"
+
+msgid "Delay (in seconds) when using Wi-Fi"
+msgstr "Задержка (в сек.) при использовании Wi-Fi"
+
+msgid "Enter a user defined date and time."
+msgstr "Введите нужную дату и время."
+
+msgid "Enter new system time and press OK!"
+msgstr "Введите новое время и нажмите ОК!"
+
+msgid "Get current time from the specified DVB transponder."
+msgstr "Получение текущего времени с выбранного DVB транспондера."
+
+msgid "Get current time from the specified NTP server."
+msgstr "Получение текущего времени с выбранного сервера NTP."
+
+#, python-format
+msgid "Invalid input in day: %s"
+msgstr "Недопустимый ввод дня: %s"
+
+#, python-format
+msgid "Invalid input in hour: %s"
+msgstr "Недопустимый ввод часа: %s"
+
+#, python-format
+msgid "Invalid input in minute: %s"
+msgstr "Недопустимый ввод минуты: %s"
+
+#, python-format
+msgid "Invalid input in month: %s"
+msgstr "Недопустимый ввод месяца: %s"
+
+#, python-format
+msgid "Invalid input in year: %s"
+msgstr "Недопустимый ввод года: %s"
+
+msgid "Invalid time format."
+msgstr "Недопустимый ввод формата времени."
+
+msgid "NTP"
+msgstr "NTP"
+
+msgid "NTP cold start"
+msgstr "Синхронизировать с NTP при старте ресивера"
+
+msgid "NTP server"
+msgstr "Сервер NTP"
+
+msgid "No answer given."
+msgstr "Нет ответа."
+
+msgid "No change detected."
+msgstr "Не обнаружено изменений."
+
+msgid "No confirmation given."
+msgstr "Не подверждено."
+
+#, python-format
+msgid ""
+"Old time: %(oldtime)s\n"
+"New time: %(newtime)s\n"
+"\n"
+"Offset: %(offset)s seconds"
+msgstr ""
+"Старое время: %(oldtime)s\n"
+"Новое время: %(newtime)s\n"
+"\n"
+"Смещение: %(offset)s секунд"
+
+msgid "On receiver 'cold start', allow any required time adjustments to be 'stepped'."
+msgstr "Получать время с сервера NTP, при включении ресивера из режима глубокого ожидания."
+
+msgid "Press OK"
+msgstr "Нажмите ОК"
+
+msgid "Restart GUI"
+msgstr "Рестарт GUI"
+
+msgid "Restart GUI now?"
+msgstr "Выполнить рестарт GUI сейчас?"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Script 'set-rtctime' not found!"
+msgstr "Скрипт 'set-rtctime' не найден!"
+
+msgid "Select the preferred method for syncing time on your receiver. Network Time Protocol requires internet connection. Transponder time might not be very accurate."
+msgstr "Выберите предпочтительный метод синхронизации времени на вашем ресивере. Протокол сетевого времени требует подключения к Интернету. Время с транспондера может быть не очень точным."
+
+msgid "Select transponder"
+msgstr "Выбор транспондера"
+
+msgid "Set how often the receiver will connect to the NTP server to sync time."
+msgstr "Установите интервал подключения к серверу NTP, для синхронизации времени."
+
+msgid "Set system time manually"
+msgstr "Установка системного времени вручную"
+
+msgid "Set the IP address of the preferred NTP server. Default is pool.ntp.org."
+msgstr "Установите IP-адрес предпочтительного сервера NTP. По умолчанию используется pool.ntp.org."
+
+msgid "Sync NTP every"
+msgstr "Синхронизировать с NTP каждые"
+
+msgid "Sync now with NTP server"
+msgstr "Синхронизация сейчас с сервера NTP"
+
+msgid "Sync now with current transponder"
+msgstr "Синхронизация сейчас с текущего транспондера"
+
+msgid "Sync time using"
+msgstr "Синхронизация времени с помощью"
+
+msgid "Syncing with NTP server..."
+msgstr "Синхронизация с NTP сервера..."
+
+msgid "Syncing with current transponder..."
+msgstr "Синхронизация с текущего транспондера..."
+
+msgid "Syncing... Please wait."
+msgstr "Синхронизация... Пожалуйста, подождите..."
+
+msgid "System time"
+msgstr "Системное время"
+
+msgid "System time setup"
+msgstr "Настройки системного времени"
+
+#, python-format
+msgid ""
+"System time was not applied.\n"
+"%s"
+msgstr ""
+"Системное время не применено.\n"
+"%s"
+
+msgid "Time string too short."
+msgstr "Строка времени слишком короткая."
+
+msgid "Transponder"
+msgstr "Транспордер"
+
+msgid "Use RTC time from deep standby"
+msgstr "Использовать время RTC при старте ресивера"
+
+msgid "When the receiver starts from deep standby, use the time provided by the Real Time Clock, if it appears to be valid."
+msgstr "Когда Вы включаете ресивер из режима глубоком ожидания, используйте время, предоставляемое Real Time Clock, если время окажется действительным."

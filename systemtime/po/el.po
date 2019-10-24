@@ -1,0 +1,214 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SystemTime\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-11 10:58+0200\n"
+"PO-Revision-Date: 2019-10-16 16:17+0300\n"
+"Last-Translator: nautilus7\n"
+"Language-Team: \n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.2.4\n"
+"X-Poedit-Basepath: ../src\n"
+"X-Poedit-SearchPath-0: plugin.py\n"
+
+msgid "'dvbdate' is not installed!"
+msgstr "Το 'dvbdate' δεν είναι εγκατεστημένο!"
+
+msgid "'ntpdate' is not installed!"
+msgstr "Το 'ntpdate' δεν είναι εγκατεστημένο!"
+
+msgid "1 hour"
+msgstr "1 ώρα"
+
+msgid "12 hours"
+msgstr "12 ώρες"
+
+msgid "15 mins"
+msgstr "15 λεπτά"
+
+msgid "2 hours"
+msgstr "2 ώρες"
+
+msgid "24 hours"
+msgstr "24 ώρες"
+
+msgid "30 mins"
+msgstr "30 λεπτά"
+
+msgid "4 hours"
+msgstr "4 ώρες"
+
+msgid "48 hours"
+msgstr "48 ώρες"
+
+msgid "5 mins"
+msgstr "5 λεπτά"
+
+msgid "After receiver's boot, wait for the specified delay before connecting to the NTP server. This allows the Wi-Fi connection to be fully established."
+msgstr "Κατά την εκκίνηση, αναμονή για το προκαθορισμένο χρονικό διάστημα πριν την επικοινωνία με τον διακομιστή NTP. Αυτό επιτρέπει στη σύνδεση μέσω Wi-Fi να εδραιωθεί πλήρως."
+
+msgid "Apply new system time?"
+msgstr "Εφαρμογή νέας ώρας συστήματος;"
+
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+msgid "Change system time in enigma2 box"
+msgstr "Ρυθμίστε την ώρα στον enigma2 δέκτη σας"
+
+msgid "Delay (in seconds) when using Wi-Fi"
+msgstr "Καθυστέρηση (σε δευτερόλεπτα) κατά τη σύνδεση μέσω Wi-Fi"
+
+msgid "Enter a user defined date and time."
+msgstr "Εισάγετε την ώρα και ημερομηνία της προτίμησής σας."
+
+msgid "Enter new system time and press OK!"
+msgstr "Εισάγετε νέα ώρα συστήματος και πατήστε ΟΚ!"
+
+msgid "Get current time from the specified DVB transponder."
+msgstr "Λάβετε την τρέχουσα ώρα από τον επιλεγμένο αναμεταδότη."
+
+msgid "Get current time from the specified NTP server."
+msgstr "Λάβετε την τρέχουσα ώρα από τον επιλεγμένο διακομιστή NTP."
+
+#, python-format
+msgid "Invalid input in day: %s"
+msgstr "Λανθασμένη εισαγωγή ημέρας: %s"
+
+#, python-format
+msgid "Invalid input in hour: %s"
+msgstr "Λανθασμένη εισαγωγή ώρας: %s"
+
+#, python-format
+msgid "Invalid input in minute: %s"
+msgstr "Λανθασμένη εισαγωγή λεπτού: %s"
+
+#, python-format
+msgid "Invalid input in month: %s"
+msgstr "Λανθασμένη εισαγωγή μήνα: %s"
+
+#, python-format
+msgid "Invalid input in year: %s"
+msgstr "Λανθασμένη εισαγωγή έτους: %s"
+
+msgid "Invalid time format."
+msgstr "Η μορφή ώρας δεν είναι έγκυρη."
+
+msgid "NTP"
+msgstr "NTP"
+
+msgid "NTP cold start"
+msgstr "NTP cold start"
+
+msgid "NTP server"
+msgstr "Διακομιστής NTP"
+
+msgid "No answer given."
+msgstr "Δε δόθηκε απάντηση."
+
+msgid "No change detected."
+msgstr "Δεν εντοπίστηκε αλλαγή."
+
+msgid "No confirmation given."
+msgstr "Δεν έγινε επιβεβαίωση."
+
+#, python-format
+msgid ""
+"Old time: %(oldtime)s\n"
+"New time: %(newtime)s\n"
+"\n"
+"Offset: %(offset)s seconds"
+msgstr ""
+"Παλιά ώρα: %(oldtime)s\n"
+"Νέα ώρα: %(newtime)s\n"
+"\n"
+"Διαφορά: %(offset)s δευτερόλεπτα"
+
+msgid "On receiver 'cold start', allow any required time adjustments to be 'stepped'."
+msgstr "Κατά την εκκίνηση από κατάσταση εκτός λειτουργίας (cold start), η ενδεχόμενη διόρθωση της ώρας να γίνεται άμεσα (stepped)."
+
+msgid "Press OK"
+msgstr "Πατήστε ΟΚ"
+
+msgid "Restart GUI"
+msgstr "Επανεκκίνηση GUI"
+
+msgid "Restart GUI now?"
+msgstr "Επανεκκίνηση GUI τώρα;"
+
+msgid "Save"
+msgstr "Αποθήκευση"
+
+msgid "Script 'set-rtctime' not found!"
+msgstr "Το 'set-rtctime' δε βρέθηκε!"
+
+msgid "Select the preferred method for syncing time on your receiver. Network Time Protocol requires internet connection. Transponder time might not be very accurate."
+msgstr "Επιλέξτε την προτιμώμενη μέθοδο για τον συγχρονισμό της ώρας στον δέκτη σας. Το Network Time Protocol απαιτεί σύνδεση στο ίντερνετ. Η ώρα μέσω του αναμεταδότη μπορεί να μην είναι ακριβής."
+
+msgid "Select transponder"
+msgstr "Επιλογή αναμεταδότη"
+
+msgid "Set how often the receiver will connect to the NTP server to sync time."
+msgstr "Ρυθμίστε πόσο συχνά θα γίνεται συγχρονισμός μέσω του διακομιστή NTP."
+
+msgid "Set system time manually"
+msgstr "Ορισμός ώρας χειροκίνητα"
+
+msgid "Set the IP address of the preferred NTP server. Default is pool.ntp.org."
+msgstr "Ορίστε την διεύθυνση IP του διακομιστή NTP. Η προεπιλεγμένη διεύθυνση είναι pool.ntp.org."
+
+msgid "Sync NTP every"
+msgstr "Συγχρονισμός NTP κάθε"
+
+msgid "Sync now with NTP server"
+msgstr "Συγχρονισμός τώρα με διακομιστή NTP"
+
+msgid "Sync now with current transponder"
+msgstr "Συγχρονισμός τώρα με τρέχοντα αναμεταδότη"
+
+msgid "Sync time using"
+msgstr "Συγχρονισμός ώρας μέσω"
+
+msgid "Syncing with NTP server..."
+msgstr "Γίνεται συγχρονισμός με διακομιστή NTP..."
+
+msgid "Syncing with current transponder..."
+msgstr "Γίνεται συγχρονισμός με τρέχοντα αναμεταδότη..."
+
+msgid "Syncing... Please wait."
+msgstr "Γίνεται συγχρονισμός... Παρακαλώ περιμένετε."
+
+msgid "System time"
+msgstr "Ώρα συστήματος"
+
+msgid "System time setup"
+msgstr "Ρύθμιση ώρας συστήματος"
+
+#, python-format
+msgid ""
+"System time was not applied.\n"
+"%s"
+msgstr ""
+"Η ώρα συστήματος δεν εφαρμόστηκε:\n"
+"%s"
+
+msgid "Time string too short."
+msgstr "Η μορφή ώρας είναι πολύ σύντομη."
+
+msgid "Transponder"
+msgstr "Αναμεταδότη"
+
+msgid "Use RTC time from deep standby"
+msgstr "Χρήση RTC κατά την εκκίνηση από deep standby"
+
+msgid "When the receiver starts from deep standby, use the time provided by the Real Time Clock, if it appears to be valid."
+msgstr "Κατά την εκκίνηση από κατάσταση εκτός λειτουργίας (deep standby), χρησιμοποιήστε την ώρα που παρέχεται από το Real Time Clock, αν μοιάζει έγκυρη."

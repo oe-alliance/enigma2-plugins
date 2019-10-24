@@ -1,0 +1,5 @@
+Package: enigma2-plugin-systemplugins-systemtime
+Version: 1.9-git
+Description: Change system time in enigma2 box
+Maintainer: OpenPLi team <forum@openpli.org>
+Depends: ntpdate

@@ -1,0 +1,212 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-11 10:58+0200\n"
+"PO-Revision-Date: 2018-05-17 14:01+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.7\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "'dvbdate' is not installed!"
+msgstr "'dvbdate' n'est pas installé!"
+
+msgid "'ntpdate' is not installed!"
+msgstr "'ntpdate' n'est pas installé!"
+
+msgid "1 hour"
+msgstr "1 heure"
+
+msgid "12 hours"
+msgstr "12 heures"
+
+msgid "15 mins"
+msgstr "15 mins"
+
+msgid "2 hours"
+msgstr "2 heures"
+
+msgid "24 hours"
+msgstr "24 heures"
+
+msgid "30 mins"
+msgstr "30 mins"
+
+msgid "4 hours"
+msgstr "4 heures"
+
+msgid "48 hours"
+msgstr "48 heures"
+
+msgid "5 mins"
+msgstr "5 mins"
+
+msgid "After receiver's boot, wait for the specified delay before connecting to the NTP server. This allows the Wi-Fi connection to be fully established."
+msgstr "Après le démarrage du récepteur, attend le délai spécifié avant de se connecter au serveur NTP. Cela permet que la connexion Wi-Fi soit pleinement établie."
+
+msgid "Apply new system time?"
+msgstr "Appliquer la nouvelle heure système?"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Change system time in enigma2 box"
+msgstr "Modifier l’heure système du récepteur enigma2"
+
+msgid "Delay (in seconds) when using Wi-Fi"
+msgstr "Délai (en secondes) lorsque vous utilisez une connexion Wi-Fi"
+
+msgid "Enter a user defined date and time."
+msgstr "Entrer une heure et une date définie par l’utilisateur."
+
+msgid "Enter new system time and press OK!"
+msgstr "Entrer la nouvelle heure système et appuyez sur OK !"
+
+msgid "Get current time from the specified DVB transponder."
+msgstr "Obtenir l’heure actuelle depuis le transpondeur DVB spécifié."
+
+msgid "Get current time from the specified NTP server."
+msgstr "Obtenir l’heure actuelle depuis le serveur NTP spécifié."
+
+#, python-format
+msgid "Invalid input in day: %s"
+msgstr "Entrée incorrecte pour le jour:%s"
+
+#, python-format
+msgid "Invalid input in hour: %s"
+msgstr "Entrée incorrecte pour l’heure:%s"
+
+#, python-format
+msgid "Invalid input in minute: %s"
+msgstr "Entrée incorrecte pour la minute:%s"
+
+#, python-format
+msgid "Invalid input in month: %s"
+msgstr "Entrée incorrecte pour le mois: %s"
+
+#, python-format
+msgid "Invalid input in year: %s"
+msgstr "Entrée incorrecte pour l’année: %s"
+
+msgid "Invalid time format."
+msgstr "Format d’heure non valide"
+
+msgid "NTP"
+msgstr "NTP"
+
+msgid "NTP cold start"
+msgstr "NTP démarrage à froid"
+
+msgid "NTP server"
+msgstr "NTP serveur"
+
+msgid "No answer given."
+msgstr "Pas de réponse donnée."
+
+msgid "No change detected."
+msgstr "Aucun changement constaté."
+
+msgid "No confirmation given."
+msgstr "Aucune confirmation donnée."
+
+#, python-format
+msgid ""
+"Old time: %(oldtime)s\n"
+"New time: %(newtime)s\n"
+"\n"
+"Offset: %(offset)s seconds"
+msgstr ""
+"Ancienne heure: %(oldtime)s\n"
+"Nouvelle heure: %(newtime)s\n"
+"\n"
+"Décalage: %(offset)s seconds"
+
+msgid "On receiver 'cold start', allow any required time adjustments to be 'stepped'."
+msgstr "Lors d’un ‘démarrage à froid’, permet que l’ajustement de l’heure se fasse ‘progressivement’."
+
+msgid "Press OK"
+msgstr "Appuyez sur OK"
+
+msgid "Restart GUI"
+msgstr "Redémarrer l’IGU"
+
+msgid "Restart GUI now?"
+msgstr "Redémarrer l’IGU maintenant?"
+
+msgid "Save"
+msgstr "Sauvegarder"
+
+msgid "Script 'set-rtctime' not found!"
+msgstr "Le scripte 'set-rtctime' non trouvé!"
+
+msgid "Select the preferred method for syncing time on your receiver. Network Time Protocol requires internet connection. Transponder time might not be very accurate."
+msgstr "Sélectionnez la méthode recommandée pour la synchronisation de temps sur votre récepteur. Le protocole de temps réseau nécessite la connexion internet. L’heure du transpondeur peut ne pas être très précis."
+
+msgid "Select transponder"
+msgstr "Choisir le transpondeur"
+
+msgid "Set how often the receiver will connect to the NTP server to sync time."
+msgstr "Définissez à quelle fréquence le récepteur se connectera au serveur NTP pour synchronise l’heure."
+
+msgid "Set system time manually"
+msgstr "Définir le temps système manuellement"
+
+msgid "Set the IP address of the preferred NTP server. Default is pool.ntp.org."
+msgstr "Définir l’adresse IP du serveur NTP préféré. Par défaut c’est pool.ntp.org."
+
+msgid "Sync NTP every"
+msgstr "NTP synchro chaque"
+
+msgid "Sync now with NTP server"
+msgstr "Synchroniser maintenant avec le serveur NTP"
+
+msgid "Sync now with current transponder"
+msgstr "Synchroniser maintenant avec le transpondeur actuel"
+
+msgid "Sync time using"
+msgstr "Synchro le temps en utilisant"
+
+msgid "Syncing with NTP server..."
+msgstr "Synchronisation avec le serveur NTP ..."
+
+msgid "Syncing with current transponder..."
+msgstr "Synchronisation avec le transpondeur actuel ..."
+
+msgid "Syncing... Please wait."
+msgstr "Synchronisation... Veuillez patienter."
+
+msgid "System time"
+msgstr "Temps système"
+
+msgid "System time setup"
+msgstr "Réglage de l’horloge système"
+
+#, python-format
+msgid ""
+"System time was not applied.\n"
+"%s"
+msgstr ""
+"L’heure système n’a pas été appliquée.\n"
+"%s"
+
+msgid "Time string too short."
+msgstr "la chaîne de caractères pour le temps est trop courte"
+
+msgid "Transponder"
+msgstr "Transpondeur"
+
+msgid "Use RTC time from deep standby"
+msgstr "Utiliser l’heure RTC depuis la veille profonde"
+
+msgid "When the receiver starts from deep standby, use the time provided by the Real Time Clock, if it appears to be valid."
+msgstr "Lorsque le récepteur démarre depuis la veille profonde, utilisez l’heure indiquée par l’horloge temps réel, s’il lui semble être valide."
