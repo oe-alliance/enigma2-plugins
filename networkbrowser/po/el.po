@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-06-25 18:59+0200\n"
-"PO-Revision-Date: 2016-07-17 03:06+0200\n"
-"Last-Translator: MCelliot_g <mcelliot_g@hotmail.com>\n"
+"PO-Revision-Date: 2019-10-24 12:57+0300\n"
+"Last-Translator: MCelliotG <mcelliotg@gmail.com>\n"
 "Language-Team: \n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.7\n"
+"X-Generator: Poedit 2.2.4\n"
 
 #: MountEdit.py:69
 msgid "Press OK to activate the settings."
@@ -82,7 +82,7 @@ msgstr "Κοινόχρηστο στοιχείο διακομιστή"
 
 #: MountEdit.py:235
 msgid "Use as HDD replacement"
-msgstr "Χρήση ως HDD"
+msgstr "Χρήση ως σκληρός δίσκος"
 
 #: MountEdit.py:237
 msgid "Mount options"
@@ -98,11 +98,11 @@ msgstr "Κωδικός"
 
 #: MountEdit.py:267
 msgid "Enter share name:"
-msgstr "Εισαγωγή ονόματος κοινόχρηστου:"
+msgstr "Εισαγωγή ονόματος κοινόχρηστου στοιχείου:"
 
 #: MountEdit.py:269
 msgid "Enter share directory:"
-msgstr "Εισαγωγή φακέλου κοινόχρηστου:"
+msgstr "Εισαγωγή φακέλου κοινόχρηστου στοιχείου:"
 
 #: MountEdit.py:271
 msgid "Enter options:"
@@ -167,7 +167,7 @@ msgstr "Πιέστε ΟΚ για επιλογή."
 
 #: MountManager.py:87 plugin.py:101
 msgid "Mount Manager"
-msgstr "Διαχείριση Προσαρτήσεων"
+msgstr "Διαχείριση προσαρτήσεων"
 
 #: MountManager.py:99
 msgid "Add new network mount point"
@@ -175,7 +175,7 @@ msgstr "Προσθήκη νέου σημείου προσάρτησης"
 
 #: MountManager.py:99
 msgid "Add a new NFS or CIFS mount point to your Receiver."
-msgstr "Προσθήκη ενός νέου σημείου προσάρτησης NFS ή CIFS στο Δέκτη σας."
+msgstr "Προσθήκη ενός νέου σημείου προσάρτησης NFS ή CIFS στον δέκτη σας."
 
 #: MountManager.py:100
 msgid "Mountpoints management"
@@ -183,7 +183,7 @@ msgstr "Διαχείριση σημείων προσάρτησης"
 
 #: MountManager.py:100
 msgid "View, edit or delete mountpoints on your Receiver."
-msgstr "Επισκόπηση, επεξεργασία ή διαγραφή σημείων προσάρτησης στο Δέκτη σας."
+msgstr "Επισκόπηση, επεξεργασία ή διαγραφή σημείων προσάρτησης στον δέκτη σας."
 
 #: MountManager.py:101
 msgid "User management"
@@ -195,15 +195,15 @@ msgstr "Επισκόπηση, επεξεργασία ή διαγραφή ονο�
 
 #: MountManager.py:102
 msgid "Change hostname"
-msgstr "Αλλαγή ονόματος host"
+msgstr "Αλλαγή ονόματος συσκευής δικτύου"
 
 #: MountManager.py:102
 msgid "Change the hostname of your Receiver."
-msgstr "Αλλαγή του ονόματος host του Δέκτη σας."
+msgstr "Αλλαγή του ονόματος δικτύου του δέκτη σας."
 
 #: MountManager.py:103 MountManager.py:182
 msgid "Setup Mount Again"
-msgstr "Επαναρύθμιση Προσάρτησης"
+msgstr "Επαναρύθμιση προσάρτησης"
 
 #: MountManager.py:103
 msgid "Schedule a auto remount of your network shares."
@@ -211,11 +211,11 @@ msgstr "Προγραμματισμός αυτόματης επαναπροσάρ
 
 #: MountManager.py:139
 msgid "Enter new hostname for your Receiver"
-msgstr "Εισαγωγή νέου ονόματος host για το Δέκτη σας"
+msgstr "Εισαγωγή του νέου ονόματος δικτύου του δέκτη σας"
 
 #: MountManager.py:152
 msgid "Please wait while your network is restarting..."
-msgstr "Παρακαλώ περιμένετε, επανεκκίνηση δικτύου..."
+msgstr "Παρακαλώ περιμένετε καθώς γίνεται επανεκκίνηση του δικτύου σας..."
 
 #: MountManager.py:165
 msgid "Finished restarting your network"
@@ -223,11 +223,11 @@ msgstr "Ολοκλήρωση επανεκκίνησης δικτύου"
 
 #: MountManager.py:206 MountManager.py:214
 msgid "Schedule MountAgain"
-msgstr "Προγραμματισμός Επαναπροσάρτησης"
+msgstr "Προγραμματισμός επαναπροσάρτησης"
 
 #: MountManager.py:208
 msgid "Re-mount network shares every (in hours)"
-msgstr "Επαναπροσάρτηση κοινόχρηστων δικτύου κάθε (σε ώρες)"
+msgstr "Επαναπροσάρτηση κοινόχρηστων στοιχείων κάθε (σε ώρες)"
 
 #: MountManager.py:245
 msgid "Really close without saving settings?"
@@ -235,7 +235,7 @@ msgstr "Έξοδος χωρίς αποθήκευση ρυθμίσεων;"
 
 #: MountView.py:49
 msgid "Mount Viewer"
-msgstr "Επισκόπηση Προσαρτήσεων"
+msgstr "Επισκόπηση προσαρτήσεων"
 
 #: MountView.py:60
 msgid ""
@@ -275,11 +275,11 @@ msgstr "Φακ:"
 
 #: MountView.py:155
 msgid "Are you sure you want to remove your network mount ?"
-msgstr "Σίγουρα θέλετε να αφαιρεθεί η προσάρτηση δικτύου ;"
+msgstr "Θέλετε σίγουρα να αποθηκευτεί αυτό το σημείο προσάρτησης;"
 
 #: MountView.py:166
 msgid "Please wait while removing your network mount..."
-msgstr "Παρακαλώ περιμένετε καθώς αφαιρείται η προσάρτηση δικτύου..."
+msgstr "Παρακαλώ περιμένετε να αφαιρεθεί η προσάρτηση..."
 
 #: MountView.py:190
 msgid "Your network mount has been removed."
@@ -347,7 +347,7 @@ msgstr "Εισαγωγή IP προς σάρωση..."
 
 #: plugin.py:35 plugin.py:100
 msgid "Network Browser"
-msgstr "Πλοηγός Δικτύου"
+msgstr "Πλοηγός δικτύου"
 
 #: plugin.py:42
 msgid "Mounting network shares..."
@@ -363,15 +363,15 @@ msgstr "Ανίχνευση κοινόχρηστων στοιχείων δικτ�
 
 #: plugin.py:100
 msgid "Search for network shares..."
-msgstr "Ανίχνευση κοινόχρηστων στοιχείων δικτύου..."
+msgstr "Αναζήτηση για κοινόχρηστα στοιχεία..."
 
 #: plugin.py:101
 msgid "Manage network shares"
-msgstr "Διαχείριση κοινόχρηστων στοιχείων δικτύου"
+msgstr "Διαχείριση κοινόχρηστων στοιχείων στο δίκτυο"
 
 #: plugin.py:101
 msgid "Manage your network shares..."
-msgstr "Διαχείριση κοινόχρηστων στοιχείων δικτύου..."
+msgstr "Διαχείριση των κοινόχρηστων στοιχείων στο δίκτυο..."
 
 #: plugin.py:102
 msgid "Mount Again"
@@ -395,7 +395,7 @@ msgstr "Πιέστε ΟΚ για αποθήκευση των ρυθμίσεων.
 
 #: UserDialog.py:94
 msgid "Enter user and password for host: "
-msgstr "Εισαγωγή χρήστη και κωδικού για το host: "
+msgstr "Εισαγωγή χρήστη και κωδικού για τη συσκευή δικτύου: "
 
 #: UserManager.py:51
 msgid "Press OK to edit selected settings."
@@ -410,10 +410,10 @@ msgid "Usermanager"
 msgstr "Διαχείριση χρηστών"
 
 msgid "Network Neighbourhood"
-msgstr "Οικείο Δίκτυο"
+msgstr "Οικείο δίκτυο"
 
 msgid "MountManager"
-msgstr "Διαχείριση Προσαρτήσεων"
+msgstr "Διαχείριση προσαρτήσεων"
 
 msgid "NetworkBrowser"
-msgstr "Πλοηγός Δικτύου"
+msgstr "Πλοηγός δικτύου"
