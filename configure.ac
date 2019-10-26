@@ -691,6 +691,12 @@ svdrp/Makefile
 svdrp/meta/Makefile
 svdrp/src/Makefile
 
+systemtime/Makefile
+systemtime/meta/Makefile
+systemtime/po/Makefile
+systemtime/src/Makefile
+systemtime/src/images/Makefile
+
 tageditor/Makefile
 tageditor/meta/Makefile
 tageditor/po/Makefile
