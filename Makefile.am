@@ -77,7 +77,6 @@ SUBDIRS = \
 	simplerss \
 	subsdownloader2 \
 	svdrp \
-	systemtime \
 	tageditor \
 	teletext \
 	toolkit \
