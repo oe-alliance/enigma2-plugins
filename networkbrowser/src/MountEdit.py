@@ -57,11 +57,6 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			"green": self.ok,
 		}, -2)
 
-		self["VirtualKB"] = ActionMap(["VirtualKeyboardActions"],
-		{
-			"showVirtualKeyboard": self.KeyText,
-		}, -2)
-
 		self.list = []
 		ConfigListScreen.__init__(self, self.list,session = self.session)
 		self.createSetup()
@@ -72,7 +67,6 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		self["introduction"] = StaticText(_("Press OK to activate the settings."))
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
-		self.selectionChanged()
 
 	# for summary:
 	def changedEntry(self):
@@ -250,7 +244,14 @@ class AutoMountEdit(Screen, ConfigListScreen):
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
-		self["config"].onSelectionChanged.append(self.selectionChanged)
+
+		self.kbentries = {
+			self.sharenameEntry: _("Enter share name:"),
+			self.sharedirEntry: _("Enter share directory:"),
+			self.optionsEntry: _("Enter options:"),
+			self.usernameEntry: _("Enter username:"),
+			self.passwordEntry: _("Enter password:"),
+		}
 
 	def newConfig(self):
 		if self["config"].getCurrent() == self.mounttypeEntry:
@@ -268,35 +269,17 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			self.createSetup()
 
 	def KeyText(self):
-		print "Green Pressed"
-		if self["config"].getCurrent() == self.sharenameEntry:
-			self.session.openWithCallback(lambda x : self.VirtualKeyBoardCallback(x, 'sharename'), VirtualKeyBoard, title = (_("Enter share name:")), text = self.sharenameConfigEntry.value)
-		if self["config"].getCurrent() == self.sharedirEntry:
-			self.session.openWithCallback(lambda x : self.VirtualKeyBoardCallback(x, 'sharedir'), VirtualKeyBoard, title = (_("Enter share directory:")), text = self.sharedirConfigEntry.value)
-		if self["config"].getCurrent() == self.optionsEntry:
-			self.session.openWithCallback(lambda x : self.VirtualKeyBoardCallback(x, 'options'), VirtualKeyBoard, title = (_("Enter options:")), text = self.optionsConfigEntry.value)
-		if self["config"].getCurrent() == self.usernameEntry:
-			self.session.openWithCallback(lambda x : self.VirtualKeyBoardCallback(x, 'username'), VirtualKeyBoard, title = (_("Enter username:")), text = self.usernameConfigEntry.value)
-		if self["config"].getCurrent() == self.passwordEntry:
-			self.session.openWithCallback(lambda x : self.VirtualKeyBoardCallback(x, 'password'), VirtualKeyBoard, title = (_("Enter password:")), text = self.passwordConfigEntry.value)
+		current = self["config"].getCurrent()
+		if current in self.kbentries:
+			self.HideHelp()
+			self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title=self.kbentries[current], text=current[1].value)
 
-	def VirtualKeyBoardCallback(self, callback = None, entry = None):
-		if callback is not None and len(callback) and entry is not None and len(entry):
-			if entry == 'sharename':
-				self.sharenameConfigEntry.setValue(callback)
-				self["config"].invalidate(self.sharenameConfigEntry)
-			if entry == 'sharedir':
-				self.sharedirConfigEntry.setValue(callback)
-				self["config"].invalidate(self.sharedirConfigEntry)
-			if entry == 'options':
-				self.optionsConfigEntry.setValue(callback)
-				self["config"].invalidate(self.optionsConfigEntry)
-			if entry == 'username':
-				self.usernameConfigEntry.setValue(callback)
-				self["config"].invalidate(self.usernameConfigEntry)
-			if entry == 'password':
-				self.passwordConfigEntry.setValue(callback)
-				self["config"].invalidate(self.passwordConfigEntry)
+	def VirtualKeyBoardCallback(self, callback=None):
+		if callback is not None and len(callback):
+			current = self["config"].getCurrent()[1]
+			current.value = callback
+			self["config"].invalidate(current)
+		self.ShowHelp()
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -305,18 +288,6 @@ class AutoMountEdit(Screen, ConfigListScreen):
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
 		self.newConfig()
-
-	def selectionChanged(self):
-		current = self["config"].getCurrent()
-		if current == self.mountusingEntry or current == self.activeEntry or current == self.ipEntry or current == self.mounttypeEntry or current == self.hdd_replacementEntry:
-			self["VKeyIcon"].boolean = False
-			self["VirtualKB"].setEnabled(False)
-		else:
-			helpwindowpos = self["HelpWindow"].getPosition()
-			if current[1].help_window.instance is not None:
-				current[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
-				self["VKeyIcon"].boolean = True
-				self["VirtualKB"].setEnabled(True)
 
 	def ok(self):
 		current = self["config"].getCurrent()
