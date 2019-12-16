@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 1548 $
-$Date: 2019-01-19 16:20:14 +0100 (Sat, 19 Jan 2019) $
-$Id: FritzCallFBF.py 1548 2019-01-19 15:20:14Z michael $
+$Revision: 1552 $
+$Date: 2019-04-23 09:40:35 +0200 (Tue, 23 Apr 2019) $
+$Id: FritzCallFBF.py 1552 2019-04-23 07:40:35Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -3759,35 +3759,45 @@ class FritzCallFBF_upnp():
 					dslState[1] = dslState[1] + "; Internet: " + internetSpeed
 		self.info("dslState: " + repr(dslState))
 
+		wlan24 = None
 		wlan24NetName = ""
 		if "wlan24" in boxData:
 			wlan24 = boxData["wlan24"]
-			if wlan24:
-				wlan24NetName = re.sub(r".*: ", "", wlan24["txt"]).encode("utf-8")
-				if wlan24["led"] == "led_green":
-					wlanState = ['1', '', '', "2,4GHz " + _("on") + ": " + wlan24NetName]
-				else:
-					wlanState = ['0', '', '', "2,4GHz " + _("off") + ": " + wlan24NetName]
+		elif "wlan24GHz" in boxData:
+			wlan24 = boxData["wlan24GHz"]
+
+		if wlan24:
+			wlan24NetName = re.sub(r".*: ", "", wlan24["txt"]).encode("utf-8")
+			if wlan24["led"] == "led_green":
+				wlanState = ['1', '', '', "2,4GHz " + _("on") + ": " + wlan24NetName]
+			else:
+				wlanState = ['0', '', '', "2,4GHz " + _("off") + ": " + wlan24NetName]
 		self.info("wlanState24: " + repr(wlanState))
 
+		wlan5 = None
 		if "wlan5" in boxData:
 			wlan5 = boxData["wlan5"]
-			if wlan5:
-				# self.info("wlanState5/1: " + repr(wlanState))
-				netName = re.sub(r".*: ", "", wlan5["txt"]).encode("utf-8")
-				# self.info("wlanState5/2: " + repr(netName))
-				if not wlanState:
-					if wlan5["led"] == "led_green":
-						wlanState = ['1', '', '', "5GHz " + _("on") + ": " + netName]
-					else:
-						wlanState = ['0', '', '', "5GHz " + _("off") + ": " + netName]
+		elif "wlan5GHz" in boxData:
+			wlan5 = boxData["wlan5GHz"]
+		elif "wlan5GHzScnd" in boxData:
+			wlan5 = boxData["wlan5GHzScnd"]
+
+		if wlan5:
+			# self.info("wlanState5/1: " + repr(wlanState))
+			netName = re.sub(r".*: ", "", wlan5["txt"]).encode("utf-8")
+			# self.info("wlanState5/2: " + repr(netName))
+			if not wlanState:
+				if wlan5["led"] == "led_green":
+					wlanState = ['1', '', '', "5GHz " + _("on") + ": " + netName]
 				else:
-					if wlan5["led"] == "led_green":
-						wlanState[0] = '1'
-						if netName == wlan24NetName:
-							wlanState[3] = "2,4GHz/5GHz " + _("on") + ": " + netName
-						else:
-							wlanState[3] = wlanState[3] + ", 5GHz " + _("on") + ": " + netName
+					wlanState = ['0', '', '', "5GHz " + _("off") + ": " + netName]
+			else:
+				if wlan5["led"] == "led_green":
+					wlanState[0] = '1'
+					if netName == wlan24NetName:
+						wlanState[3] = "2,4GHz/5GHz " + _("on") + ": " + netName
+					else:
+						wlanState[3] = wlanState[3] + ", 5GHz " + _("on") + ": " + netName
 		self.info("wlanState5: " + repr(wlanState))
 		# self.info("wlanState5/3: " + repr(wlanState))
 
@@ -4165,11 +4175,13 @@ class FritzCallFBF_upnp():
 			return
 
 		if statusGuestAccess.find('WLAN') != -1:
+			self.debug("WLAN")
 			if "WLANConfiguration:3" in self.fc.services.keys():
 				self.fc.call_action(lambda x: self._general_cb(x, callback), "WLANConfiguration:3", "SetEnable", NewEnable=0)
 			else:
 				self.fc.call_action(lambda x: self._general_cb(x, callback), "WLANConfiguration:2", "SetEnable", NewEnable=0)
 		else:
+			self.debug("no WLAN")
 			if "WLANConfiguration:3" in self.fc.services.keys():
 				self.fc.call_action(lambda x: self._general_cb(x, callback), "WLANConfiguration:3", "SetEnable", NewEnable=1)
 			else:

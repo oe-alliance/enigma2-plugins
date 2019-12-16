@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 1549 $
-$Date: 2019-01-19 16:58:28 +0100 (Sat, 19 Jan 2019) $
-$Id: plugin.py 1549 2019-01-19 15:58:28Z michael $
+$Revision: 1553 $
+$Date: 2019-04-25 09:36:05 +0200 (Thu, 25 Apr 2019) $
+$Id: plugin.py 1553 2019-04-25 07:36:05Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -369,8 +369,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 1549 $"[1:-2] + "\n" +
-							"$Date: 2019-01-19 16:58:28 +0100 (Sat, 19 Jan 2019) $"[1:23] + "\n"
+							"$Revision: 1553 $"[1:-2] + "\n" +
+							"$Date: 2019-04-25 09:36:05 +0200 (Thu, 25 Apr 2019) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -1139,7 +1139,7 @@ class FritzMenu(Screen, HelpableScreen):
 
 	def _toggleGast(self):
 		self["FBFInfo"].setText(_("Setting...") + ' ' + _("Guest access"))
-		if fritzbox.information[FBF_wlanState][0] != '1':
+		if not self._wlanActive:
 			self["FBFInfo"].setText(_("WLAN not active"))
 			# self._toggleWlan(self._toggleGast)
 			return
@@ -2624,7 +2624,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1549 $"[1:-1] + "$Date: 2019-01-19 16:58:28 +0100 (Sat, 19 Jan 2019) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1553 $"[1:-1] + "$Date: 2019-04-25 09:36:05 +0200 (Thu, 25 Apr 2019) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2896,7 +2896,7 @@ def findFace(number, name):
 	facesFile = None
 
 	if not os.path.isdir(facesDir):
-		error("[FritzCall] findFace facesdir does not exist: %s", facesDir)
+		info("[FritzCall] findFace facesdir does not exist: %s", facesDir)
 	else:
 		files = os.listdir(facesDir)
 		# debug("[FritzCall] listdir: %s" %repr(files))
@@ -3233,7 +3233,7 @@ class FritzReverseLookupAndNotifier(object):
 
 class FritzProtocol(LineReceiver):  # pylint: disable=W0223
 	def __init__(self):
-		info("[FritzProtocol] " + "$Revision: 1549 $"[1:-1] + "$Date: 2019-01-19 16:58:28 +0100 (Sat, 19 Jan 2019) $"[7:23] + " starting")
+		info("[FritzProtocol] " + "$Revision: 1553 $"[1:-1] + "$Date: 2019-04-25 09:36:05 +0200 (Thu, 25 Apr 2019) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
