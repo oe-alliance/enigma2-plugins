@@ -15,7 +15,7 @@ from Tools.IO import saveFile
 
 from twisted.internet import reactor, ssl
 from twisted.internet.error import CannotListenError
-from twisted.web import server, http, util, static, resource, version
+from twisted.web import server, http, util, static, resource#, version
 
 from zope.interface import Interface, implements
 from socket import gethostname as socket_gethostname, has_ipv6
@@ -265,7 +265,7 @@ def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usess
 		root = HTTPRootResource(toplevel)
 		site = server.Site(root)
 
-	if has_ipv6 and fileExists('/proc/net/if_inet6') and version.major >= 12:
+	if has_ipv6 and fileExists('/proc/net/if_inet6') #and version.major >= 12:
 		if ipaddress == '0.0.0.0':
 			ipaddress='::'
 		elif ipaddress == '127.0.0.1':
