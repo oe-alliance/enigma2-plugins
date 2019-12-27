@@ -5,10 +5,16 @@
 	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 	
 	<title>Receiver WebControl</title>
+	<link rel="stylesheet" type="text/css" href="/web-data/css/font-awesome.min.css">
 	
 	<!-- <link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet"> -->
-	<link rel="stylesheet" type="text/css" id="style_dark" title="dark" href="/web-data/tpl/default/style.min.css">
+	<link rel="stylesheet" type="text/css" id="style_modern" title="modern" href="/web-data/tpl/default/style_modern.min.css">
+	<link rel="alternate stylesheet" type="text/css" id="style_merlin_dark" title="Merlin Dark" href="/web-data/tpl/default/style_merlin_dark.min.css" disabled>
+<!--
+	<link rel="alternate stylesheet" type="text/css" id="style_dark" title="dark" href="/web-data/tpl/default/style.min.css" disabled>
 	<link rel="alternate stylesheet" type="text/css" id="style_light" title="light" href="/web-data/tpl/default/style_light.min.css" disabled>
+ -->
+
 	<link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico">
 	<!--
 	<script type="text/javascript" src="/web-data/lib/prototype.js"></script>
@@ -76,7 +82,21 @@
 		}
 
 		function getAjaxLoad(){
-			return ('<center><img style="padding-top: 50px;" src="/web-data/gfx/ajaxload.gif" alt="loading..."></center>');
+			return ('<center><div style="padding-top: 50px"><i class="fa fa-circle-o-notch fa-spin fa-3x" alt="loading..."></i></div></center>');
+		}
+
+		function getBulletToggleClass(isOpen){
+			if(isOpen)
+				return "fa-minus-square-o";
+			else
+				return "fa-plus-square-o";
+		}
+
+		function getEnabledDisabledClass(isEnabled){
+			if(isEnabled)
+				return "fa-check-circle";
+			else
+				return "fa-minus-circle";
 		}
 	</script>
 
@@ -97,17 +117,30 @@
 		<div id="banner" class="rounded">
 			<span id="notification"><div></div></span>
 			<div id="bannerLeft">
-				<div id="ajaxLoad" style="display:none;"></div>
+				<div id="ajaxLoad" style="display:none;"><i class="fa fa-circle-o-notch fa-spin fa-2x" alt="loading..."></i></div>
 				<div id="bannerText" style="font-size: 24px;">
 					<div class="bannerHeader"></div>
 				</div>
 				<ul id="mainMenu">
-					<li class="roundedNav navmenu" data-mode="tv"><a class="roundedNav" href="#!/tv"><span id="mainMenuItemTv" >TeleVision</span></a></li>
-					<li class="roundedNav navmenu" data-mode="radio"><a class="roundedNav" href="#!/radio"><span id="mainMenuItemRadio">Radio</span></a></li>
+					<li class="roundedNav navmenu" data-mode="tv"><a class="roundedNav" href="#!/tv/bouquets"><span id="mainMenuItemTv" >TeleVision</span></a></li>
+					<li class="roundedNav navmenu" data-mode="radio"><a class="roundedNav" href="#!/radio/bouquets"><span id="mainMenuItemRadio">Radio</span></a></li>
 					<li class="roundedNav navmenu" data-mode="movies"><a class="roundedNav" href="#!/movies/list/filter//"><span id="mainMenuItemMovies">Movies</span></a></li>
 					<li class="roundedNav navmenu" data-mode="timer"><a class="roundedNav" href="#!/timer/list"><span id="mainMenuItemTimer">Timer</span></a></li>
 					<li class="roundedNav navmenu" data-mode="control"><a class="roundedNav" href="#!/control"><span id="mainMenuItemBoxControl">BoxControl</span></a></li>
 					<li class="roundedNav navmenu" data-mode="extras"><a class="roundedNav" href="#!/extras"><span id="mainMenuItemExtras">Extras</span></a></li>
+					<li id="menuPower" class="roundedNav navmenu">
+						<div class="group">
+							<a class="roundedNav dropdown-toggle" href="#">
+								<span>Power</span>
+							</a>
+							<ul class="dropdown-menu" style="display:none;">
+								<li><a href="#" class="powerState" data-state="toggle">Idle</a></li>
+								<li><a href="#" class="powerState" data-state="deep">Shutdown</a></li>
+								<li><a href="#" class="powerState" data-state="reboot">Reboot</a></li>
+								<li><a href="#" class="powerState" data-state="gui">Restart GUI</a></li>
+							</ul>
+						</div>
+					</li>
 					<li class="roundedNav navmenu"><a class="roundedNav" href="#" id="webTv"><span id="mainMenuItemWebTV">WebTV</span></a></li>
 				</ul>
 			</div>
@@ -115,31 +148,22 @@
 				<table style="width: 100%">
 					<tr>
 						<td><a id="openSignalPanel" href="#" >
-							<img id="openSignalPanelImg" border="0" src="/web-data/img/transmit_blue.png" alt="Signal" title="Show Signal Panel">
+							<i id="openSignalPanelImg" class="fa fa-border fa-fw fa-signal" alt="Signal" title="Show Signal Panel"></i>
 						</a></td>
 					</tr>
 					<tr>
-						<td><a id="instantRecord" href="#">
-								<img  id="instantRecordImg" border="0" src="/web-data/img/clock_red.png" alt="R" title="Instant Record">
+						<td class="group">
+							<a id="instantRecord" class="dropdown-toggle" href="#">
+								<i id="instantRecordImg" class="fa fa-border fa-fw fa-clock-o" alt="R" title="Instant Record"></i>
 							</a>
+							<ul id="instantRecordMenu" class="dropdown-menu right-aligned" style="display: none;">
+								<li id="instantRecordHd">Instant record</li>
+								<li><button id="instantRecordCurrentEvent" class="doInstantRecord" data-type="current">Record current event</button></li>
+								<li><button id="instantRecordInfinite" class="doInstantRecord" data-type="infinite">Start infinite recording</button></li>
+							</ul>
 						</td>
-
 					</tr>
 				</table>
-				<div id="instantRecordMenu" class="rounded" style="display: none;">
-					<table>
-						<tr>
-							<th id="instantRecordHd">Instant record</th>
-						</tr>
-						<tr>
-							<td colspan="2"><button id="instantRecordCurrentEvent" class="doInstantRecord" data-type="current">Record current event</button></td>
-						</tr>
-						<tr>
-							<td colspan="2"><button id="instantRecordInfinite" class="doInstantRecord" data-type="infinite">Start infinite recording</button></td>
-						</tr>
-					</table>
-
-				</div>
 			</div>
 		</div>
 		<div id="current" class="rounded">
@@ -166,7 +190,7 @@
 					<div class="boxContent">
 						<form id="epgSearchForm" action="">
 							<input type="text" id="epgSearch" />
-							<img id="epgSearchClear" style="vertical-align:middle" src="/web-data/img/cross.png" alt="clear..." title="Clear Search"/>
+							<i id="epgSearchClear" class="fa fa-lg fa-times" alt="clear..." title="Clear Search"></i>
 						</form>
 					</div>
 				</div>

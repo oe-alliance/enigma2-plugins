@@ -62,11 +62,11 @@ function url() {
 
 var URL = new url();
 
-var bouquetsTv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM BOUQUET "bouquets.tv" ORDER BY bouquet';
-var bouquetsRadio = '1:7:2:0:0:0:0:0:0:0:(type == 2)FROM BOUQUET "bouquets.radio" ORDER BY bouquet';
-var providerTv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM PROVIDERS ORDER BY name';
-var providerRadio ='1:7:2:0:0:0:0:0:0:0:(type == 2) FROM PROVIDERS ORDER BY name';
-var satellitesTv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM SATELLITES ORDER BY name';
-var satellitesRadio ='1:7:2:0:0:0:0:0:0:0:(type == 2) FROM SATELLITES ORDER BY name';
-var allTv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) ORDER BY name';
-var allRadio = '1:7:2:0:0:0:0:0:0:0:(type == 2) ORDER BY name';
+var bouquetsTv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 22) || (type == 25) || (type == 31) || (type == 134) || (type == 195) FROM BOUQUET "bouquets.tv" ORDER BY bouquet';
+var bouquetsRadio = '1:7:2:0:0:0:0:0:0:0:(type == 2) || (type == 10) FROM BOUQUET "bouquets.radio" ORDER BY bouquet';
+var providerTv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 22) || (type == 25) || (type == 31) || (type == 134) || (type == 195) FROM PROVIDERS ORDER BY name';
+var providerRadio ='1:7:2:0:0:0:0:0:0:0:(type == 2) || (type == 10) FROM PROVIDERS ORDER BY name';
+var satellitesTv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 22) || (type == 25) || (type == 31) || (type == 134) || (type == 195) FROM SATELLITES ORDER BY name';
+var satellitesRadio ='1:7:2:0:0:0:0:0:0:0:(type == 2) || (type == 10) FROM SATELLITES ORDER BY name';
+var allTv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 22) || (type == 25) || (type == 31) || (type == 134) || (type == 195) ORDER BY name';
+var allRadio = '1:7:2:0:0:0:0:0:0:0:(type == 2) || (type == 10) ORDER BY name';

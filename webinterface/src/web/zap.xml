@@ -1,5 +1,5 @@
 <e2:screen name="SwitchServiceWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
-<e2:element source="SwitchService" id="sRef,title">
+<e2:element source="SwitchService" id="sRef,title,root">
 	<e2:convert type="web:Null" />
 </e2:element>
 <e2simplexmlresult>

@@ -3,6 +3,8 @@ table{font-family:inherit;font-size:inherit;font-weight:inherit;color:inherit;bo
 input[type="text"],input[type="password"],select{font-family:Tahoma,Sans-Serif;font-size:14px;font-weight:bold;border:1px solid #DDD;background-color:#FFF;color:#444;border: 1px solid #DDD;}
 a,a:visited,a:active{color:#444;text-decoration:none}
 img{border:0}
+a.fa,a.fa:visited,a.fa:active{color:#ddd;}
+.fa a,.fa A:visited,.fa a:active{color:#ddd;}
 form{margin:2px}
 #notification{color:#444;width:50%;height:32px;position:absolute;top:0;left:25%;text-align:center;vertical-align:bottom;z-index:2}
 .wap a,.wap a:visited,.wap a:active{color:#333}
@@ -23,8 +25,12 @@ a.underline{text-decoration:underline}
 .rightCol{float:right;width:50%}
 .right{text-align:right}
 .liHeader{border-top:#444;border-bottom:#444}
+.group{position:relative !important;}
+.right-aligned{left:auto !important;right:0 !important;}
+.dropdown-menu{min-width:160px;position:absolute !important;top:100%;left:0;list-style:none outside none;padding:5px 0px;z-index:1000;background:#FFF !important;border:1px solid #ccc !important;color:#444 !important;text-align:left;border-radius: 4px !important;-moz-border-radius:4px !important;-webkit-border-radius:4px !important;box-shadow:0px 6px 12px rgba(0, 0, 0, 0.176) !important;}
+.dropdown-menu li{float:none !important;}
 td.screenShot{text-align:center;}
-td.screenShot img{border:1px solid #555;background:#DDD;}
+td.screenShot img{border:1px solid #555;background:#DDD;width:100%;}
 #banner{width:1000px;height:67px;background-color:#F2F2F2;padding-left:5px;margin-bottom:8px;position:relative;border:1px solid #DDD}
 #banner a,#banner a:visited,#banner a:active{color:#333;text-decoration:none}
 #bannerText{padding-left:2px}
@@ -48,10 +54,11 @@ td.screenShot img{border:1px solid #555;background:#DDD;}
 #mainMenu a{display:block;height:100%}
 #mainMenu span{display:block;padding-top: 2px}
 #mainMenu li.navselected{background:#D2D2D2;position:relative;z-index:3}
-#instantRecordMenu{z-index:1000;position:relative;top:5px;right:165px;background-color:#F2F2F2;color:#444;width:205px;border:1px solid #AAA;opacity:.98;text-align:left}
+#menuPower{display:none;}
+#instantRecordMenu li{margin:3px;}
 #instantRecordMenu button{width:200px;text-align:center}
 #navContainer{float:left;width:160px}
-#nav{width:100%;height:250px;background-color:#F2F2F2;padding-left:5px;border:1px solid #AAA;position:relative}
+#nav{width:100%;height:250px;background:#F2F2F2;padding-left:5px;border:1px solid #AAA;position:relative}
 #nav a{display:block;height:20px;padding:2px}
 #nav a:hover{padding:1px;border: 1px solid #AAA}
 #nav li div{display:table-cell;height:20px;vertical-align:middle}
@@ -65,7 +72,7 @@ td.screenShot img{border:1px solid #555;background:#DDD;}
 #navVolume{width:100%;height:75px;background-color:#F2F2F2;margin-top:8px;border:1px solid #AAA;position:relative;border:1px solid #DDD}
 #volHd{background-color:#F2F2F2;text-align:center;width:150px;border-bottom:1px solid #DDD}
 #main{overflow:hidden;margin:0;padding:0}
-#content{float:left;background-color:#F2F2F2;width:837px;min-height:360dpx;margin-left:8px;border:1px solid #DDD;position:relative}
+#content{float:left;background-color:#F2F2F2;width:834px;min-height:360dpx;margin-left:8px;border:1px solid #DDD;position:relative}
 #contentHd{background-color:#F2F2F2;width:527px}
 table.contentHd{background-color: #F2F2F2;width:100%;margin:0px; padding:0px;border-bottom:1px solid #DDD;}
 #contentHd div{background:#F2F2F2;}
@@ -80,10 +87,13 @@ table.contentHd{background-color: #F2F2F2;width:100%;margin:0px; padding:0px;bor
 .bListSLink {display:block;margin-right:5px;color:#444;padding:4px;}
 .bListSLink:hover{display:block;background-color:#BBB;color:#444;padding:3px;border:1px solid #AAA}
 .sListSName a{display:block;margin-right:5px;color:#444;padding:4px}
-.sListSName a:hover{display:block;background-color:#BBB;color:#444;padding:3px;border:1px solid #AAA}
+a.sListSLink {color:#444;display:block;font-size:15px;padding:4px;display: block;width:99%;}
+a.sListSLink:hover{display:block;background-color:#BBB;color:#444;padding:3px;border:1px solid #AAA}
 .sListMarker{background-color:#F2F2F2;color:#333}
 .sListEPGItem{font-size:12px;margin:0;padding:0}
-.sListSProgress{display:inline-block;margin:4px 1px 1px 1px;border:1px solid #444;width:50px;height:10px;padding:1px}
+.sListProgress {width: 60px; float: left }
+.sListSActions{position: absolute; right: 0px; top: 5px;}
+.sListSProgress{display:inline-block;border:1px solid #444;width:50px;height:10px;padding:1px}
 .sListSProgressBar{margin:0;background-color:#60aef2;width:0;height:100%}
 .sListExtEpg{display: block;padding:1px}
 .header{padding-top:2px;padding-left:4px;padding-right:4px;display:block;height:22px}
@@ -92,15 +102,15 @@ table.contentHd{background-color: #F2F2F2;width:100%;margin:0px; padding:0px;bor
 #contentServices{vertical-align:top;width:575px}
 #contentServices table{scrollbar:auto}
 #bouquetTable{width:100%;margin:0;padding:0}
-#bouquetTable li{list-style:none;margin:3px;padding:3px;position:relative;display:block;clear:both}
+#bouquetTable li{display:table;list-style:none;position:relative;}
 .bouquetIcons{float:left;width:40px;padding-top:3px}
-.bouquetName{float:right;width:158px}
+.bouquetName{float:right;width:215px;}
 #contentBouquets{border-right:1px solid #DDD;vertical-align:top;width:220px}
 #contentMain{padding:8px;margin-bottom:5px;min-height:360px;clear:both;overflow-y:auto;width:815px;color:#444}
 #contentMain div table{float:left;width:599px}
 .sListItem{width:570px !important;color:#444}
+.sListItem td{position: relative;}
 .mListItem{width:780px;color:#444}
-.mpListItem{mListItem}
 .epgStart{width:50px;color:#444}
 .epgTitle{width:420px;color:#444}
 .epgLength{width:100px;text-align:right;color:#444}

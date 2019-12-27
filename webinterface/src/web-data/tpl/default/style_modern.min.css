@@ -1,0 +1,217 @@
+@import url("/web-data/fonts/fonts.css");
+#ajaxLoad{position:absolute;right:78px;top:2px;z-index:10;}
+#banner{background-color:#FFF;border:1px solid #DDD;display:inline-block;margin-bottom:8px;position:relative;width:1000px;}
+#banner a,#banner a:visited,#banner a:active{color:#333;text-decoration:none;}
+#bannerLeft{float:left;width:940px;}
+#bannerRight{float:left;height:60px;text-align:right;width:50px;}
+#bannerRight img{padding-top:5px;}
+#bannerText{padding-left:2px;}
+#bouquetTable li{display:table;list-style:none;position:relative;}
+#container{text-align:left;width:1007px;margin:0 auto;}
+#content{background-color:#FFF;border:1px solid #DDD;float:left;margin-left:8px;min-height:360px;position:relative;width:834px;}
+#contentBouquets{border-right:1px solid #DDD;vertical-align:top;width:220px;}
+#contentHd{width:527px;padding:5px;display:table-cell;vertical-align:middle;}
+#contentHdExt{margin-right: 2px;}
+#contentHdExt input,#contentHdExt li div,#contentHdExt select{color:#444;padding:5px;}
+#contentMain{clear:both;color:#444;margin-bottom:5px;min-height:360px;overflow-y:auto;width:815px;padding:8px;}
+#contentMain div table{float:left;width:599px;}
+#contentServices{vertical-align:top;width:575px;}
+#contentServices table{scrollbar:auto;}
+#contentTable{scrollbar:auto;width:785px;margin:0 auto;}
+#current{background-color:#FFF;border:1px solid #DDD;margin-bottom:8px;padding-bottom:1px;padding-left:3px;padding-right:3px;position:relative;width:999px;}
+#epgSearch{width:115px;}
+#instantRecordMenu{padding:5px;}
+#instantRecordMenu li{margin:3px;}
+#instantRecordMenu button{text-align:center;width:200px;}
+#main{overflow:hidden;margin:0;padding:0;}
+#mainMenu{background-color:#FFF;text-align:center;width:940px;margin:0;padding:0;}
+#mainMenu a{display:block;height:100%;padding:10px;}
+#mainMenu li:hover{background:#ededed;position:relative;z-index:3;box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.26);transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);}
+#mainMenu li{background:#FFF;float:left;list-style:none;margin-bottom:0;margin-top:6px;position:relative;z-index:2;padding:0;}
+#mainMenu li.navselected{background:#efefef;position:relative;z-index:3;}
+#mainMenu span{display:block;padding-top:2px;}
+#mpListSLink{color: #000; display:block;}
+#nav{background-color:#FFF;border:1px solid #DDD;min-height:350px;padding-left:0;padding-right:0;position:relative;width:100%;}
+#nav a{display:block;}
+#nav li div{display:table-cell;vertical-align:middle;padding:10px;}
+#navContainer{float:left;width:160px;}
+#navContent{color:#444;padding:0;}
+#navExternalsContainer{margin:0;padding:0;}
+#navHd,#searchHd,#volHd{border-bottom:1px solid #DDD;text-align:center;width:150px;padding:5px;display:table-cell;vertical-align:middle;}
+#navMovies li{text-align:center;margin:5px;}
+#navPower{display:none;}
+#navSearch{background-color:#FFF;border:1px solid #DDD;margin-top:8px;position:relative;width:100%;}
+#navVolume{background-color:#FFF;border:1px solid #DDD;margin-top:8px;position:relative;width:100%;}
+#notification{color:#444;height:32px;left:25%;position:absolute;text-align:center;top:0;vertical-align:bottom;width:50%;z-index:2;}
+#powerState{border:0;margin-left:93px;text-align:right;}
+#tags{width:90%;}
+#timerEditForm table{cell-spacing:1px;}
+#tools h1,#about h1{font-size:14px;}
+#tools,#about{font-size:12px;text-align:center;}
+.tools a:hover{color:#66AFE9;}
+.tools tr{font-weight:normal;}
+#trExtCurrent{font-weight:normal;}
+* html #banner{height:78px;width:1007px;}
+* html #bannerRight{height:60px;width:120px;}
+* html #nav{background-color:#FFF;height:250px;padding-left:5px;width:99%;}
+* html .navTable{width:95%;}
+* html a.date-picker-control{width:16px;}
+* html div.datePicker table td{background-image:none;}
+* html div.datePicker table td.date-picker-unused{background:#FFF;}
+.about td{font-size:12px;padding:5px;}
+.aboutElementLeft{font-weight:bold;text-align:left;width:50%;}
+.aboutElementRight{width:50%;}
+.aboutHeader{color:#333;font-weight:bold;width:100%;}
+.bListSLink{padding:10px 3px;}
+.bListSLink:hover, a.sListSLink:hover {background-color:#ededed;display:block;box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.26);transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);}
+.bannerHeader{background-image:url(/web-data/img/dreamboxweb_modern.png);height:16px;width:780px;margin:7px;padding:0;}
+.bold{font-weight:bold;}
+.bottom,#current img{vertical-align:bottom;}
+.bouquetIcons{float:left;padding-top:5px;margin:2px;}
+.bouquetIcons a{display:inline-block;vertical-align:middle;}
+.bouquetName{float:right;width:215px;}
+.boxContent{color:#444;padding:3px;}
+.center,td.screenShot,.textCenter{text-align:center;}
+.dp-disabled,.dp-disabled td,.dp-disabled th,.dp-disabled th span{cursor:default!important;}
+.dropdown-menu{min-width:160px;position:absolute !important;top:100%;left:0;list-style:none outside none;padding:5px 0px;margin:3px 0px;z-index:1000;background:#FFF !important;border:1px solid #ccc !important;color:#444 !important;text-align:left;border-radius: 4px !important;-moz-border-radius:4px !important;-webkit-border-radius:4px !important;box-shadow:0px 6px 12px rgba(0, 0, 0, 0.176) !important;}
+.dropdown-menu li{float:none !important;}
+.dropdown-toggle.active{background:#ededed;);}
+.epgLength{color:#444;text-align:right;width:100px;}
+.epgListItem{font-weight:400;padding:3px;border:1px soid #DDD;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;margin-bottom:10px;}
+.epgListItem td{padding: 3px;}
+.epgStart{color:#444;width:50px;}
+.epgTitle{color:#444;width:420px;padding:3px;}
+.externals{border-bottom:1px solid #DDD;border-top:1px solid #DDD;}
+.fd-screen-reader{-moz-outline:0 none;height:1px;left:-999em;outline:0 none;overflow:hidden;position:absolute;top:0;width:1px;}
+.fullwidth,#currentTable{width:100%;}
+.group{position:relative !important;}
+.header{display:block;height:22px;padding-left:4px;padding-right:4px;padding-top:2px;}
+.item_enabled{color:#66AFE9 !important;}
+.leftCol{float:left;width:50%;}
+.liHeader{border-bottom:#444;border-top:#444;}
+.mLength{color:#444;text-align:right;width:90px;}
+.mListDetail{color:#444;font-size:12px;}
+.mListItem{border-bottom:1px solid #DDD;color:#444;width:780px;}
+.mStart{color:#444;width:160px;}
+.mTitle{color:#444;width:650px;}
+.navTable a:hover{background-color:#ededed;color:#444;display:block;box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.26);transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);}
+.navTable li{display:block;list-style:none;position:relative;margin:0;padding:0;}
+.navTable,#bouquetTable{width:100%;margin:0;padding:0;}
+.oneliner{height:16px;margin-top:-8px;position:absolute;top:50%;}
+.right,#currentDuration,.textRight{text-align:right;}
+.rightCol{float:right;width:50%;}
+.right-aligned{left:auto !important;right:0 !important;}
+.rounded{-moz-border-bottom-colors:none;-moz-border-left-colors:none;-moz-border-right-colors:none;-moz-border-top-colors:none;background-color:#FFF;border-image:none;border-left:1px solid #D8D8D8;border-radius:2px;border-right:2px solid #D8D8D8;box-sizing:border-box;vertical-align:top;border-color:#D8D8D8;border-style:solid;border-width:0 1px 2px;margin:2px;}
+.roundedNav{background-color:transparent;border:none;vertical-align:top;margin:0;padding:0;}
+.sListEPGItem{font-size:13px;margin:0;padding:0;}
+.sListExtEpg{display:block;padding:1px;}
+.sListItem{border-bottom:1px solid #DDD;color:#444;width:570px!important;}
+.sListItem td{position: relative;}
+.sListSName a{color:#444;display:block;font-size:15px;padding:5px 3px;}
+.sListProgress {width: 60px; float: left }
+a.sListSLink {color:#444;display:block;font-size:15px;padding:5px 3px;display: block;width:100%;}
+.sListSActions{position: absolute; right: 0px; top: 5px;}
+.sListSProgress{border:1px solid #DDD;height:15px;width:50px;padding:1px;}
+.sListSProgressBar{background-color:#66AFE9;height:100%;width:0;margin:0;}
+.small{font-size:11px;font-weight:400;}
+.tListAfter,.tListType{text-align:left;width:85px;}
+.tListBegin,.tListEnd{text-align:left;width:170px;}
+.tListButton{font-size:10px;height:100%;vertical-align:middle;width:50px;margin:0;}
+.tListButton div{display:none;}
+.tListDelete{bottom:2px;position:absolute;right:1px;margin:0;padding:0;}
+.tListItem{font-size:13px;font-weight:bold;}
+.tListItemTable{background:none!important;left:0;margin-left:22px;position:relative;top:0;width:585px!important;}
+.tListOption{text-align:right;vertical-align:bottom;z-index:9999;}
+.tListRepeat,.tListDuration{text-align:left;width:120px;}
+.tListTitle,.tListDescr{text-align:left;width:150px;}
+.tListToggleDisabled{bottom:2px;position:absolute;right:55px;margin:0;padding:0;}
+.techInfo{font-size:10px;}
+.timerState{display:block;height:100%;left:0;position:absolute;top:0;width:10px;padding:0;}
+.timerState0{background:#333;color:#FFF;}
+.timerState1{background:#BD282D;color:#000;}
+.timerState2{background:#2DBD28;color:#000;}
+.timerState3{background:#282DBD;color:#FFF;}
+.tools td{font-size:12px;vertical-align:top;padding:5px;}
+.tools,.about{border-radius:2px;border:1px solid #DDD;width:100%;margin:0;padding:0;}
+.toolsElementCenter,.textLeft,.tListSName{text-align:left;}
+.toolsElementLeft{font-weight:bold;text-align:left;width:15%;}
+.toolsElementRight{text-align:left;width:10%;}
+.toolsHeader{color:#333;font-weight:bold;}
+.w200h50{height:50px;width:200px;}
+.volume .fa{padding: 0;}
+.wap a,.wap a:visited,.wap a:active,.black,#current a,.sListMarker{color:#333;}
+:-o-prefocus{outline:0;}
+a,a:visited,a:active{color:#444;text-decoration:none;outline:0;}
+.fa{ color: #666;padding:1px;vertical-align:middle;text-align:center;margin:0px;}
+.fa-border:hover{border: 0.08em solid #66AFE9;box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.26);transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1) 0s;}
+.fa-border{border: 0.08em solid #CECECE;}
+a.date-picker-control{display:inline-block;}
+a.date-picker-control span{display:block;height:16px;width:16px;margin:auto 0;}
+a.date-picker-control:focus,div.datePicker table td:focus{-moz-outline:0 none;color:#6482aa!important;outline:0 none;overflow:hidden;}
+a.date-picker-control:hover,a.date-picker-control:active,a.date-picker-control:focus,a.dp-button-active:link,a.dp-button-active:visited,a.dp-button-active:hover,a.dp-button-active:active,a.dp-button-active:focus{background:transparent url(/web-data/lib/datepicker/media/cal.gif) no-repeat 50% 50%!important;}
+a.date-picker-control:link,a.date-picker-control:visited{background:transparent url(/web-data/lib/datepicker/media/cal-grey.gif) no-repeat 50% 50%;border:0 none;cursor:pointer;display:0;line-height:1;min-width:16px;position:relative;text-decoration:none;vertical-align:top;visibility:visible;margin:0 0 0 4px;padding:0;}
+a.dp-disabled,.dp-disabled table{filter:alpha(opacity=40);opacity:.3!important;}
+a.selected{background:#ededed;}
+a.tEditTag{border-radius:2px;border:1px solid #ededed;display:inline-block;margin:3px 0;padding:5px;transition:background .15s ease-in-out 0;}
+a.tListEdit{display:block;margin:0;padding:1px;}
+a.tListEdit:hover,#nav a:hover{background:#ededed;box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.26);transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);}
+a.underline,.tools a,.tools a:hover,.tools a:visited,#about a,#about a:hover,#about a:visited{text-decoration:underline;}
+body.fd-drag-active{-webkit-user-select:none;}
+button{background:#FFF;border-radius:2px;border:1px solid #DDD;padding:5px;}
+button:hover,a.tEditTag:hover{border: 1px solid #66AFE9;box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.26);transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);}
+div.datePicker{-khtml-user-select:none;-moz-user-select:none;color:#444;font-size:11px;position:absolute;text-align:center;z-index:9999;background:#FFF;padding:0;}
+div.datePicker table{-moz-box-shadow:0 0 5px #ededed;border-collapse:separate;border-spacing:1px;border:1px solid #ededed;empty-cells:show;height:auto;text-align:center;width:auto;margin:0;padding:0;}
+div.datePicker table tbody td.date-picker-highlight,div.datePicker table thead th.date-picker-highlight{color:#a86666!important;}
+div.datePicker table tbody td.date-picker-hover{background-color:#FFF url(/web-data/lib/datepicker/media/bg_header.jpg) no-repeat 0 0;color:#6482aa;cursor:pointer;text-shadow:0 1px 1px #333;-webkit-box-shadow:0 0 1px #6482aa;border-color:#6482aa!important;}
+div.datePicker table tbody td.date-picker-selected-date{color:#333!important;border-color:#333!important;}
+div.datePicker table tbody td.date-picker-today{background-color:#FFF url(/web-data/lib/datepicker/media/bullet2.gif) no-repeat 0 0;color:#646464!important;}
+div.datePicker table tbody td.date-picker-unused{background-color:#FFF url(/web-data/lib/datepicker/media/backstripes.gif);cursor:default!important;border-color:#dcdcdc;}
+div.datePicker table tbody td.day-disabled{background-color:#FFF url(/web-data/lib/datepicker/media/backstripes.gif) no-repeat 0 0;color:#ededed!important;cursor:default;text-decoration:line-through;}
+div.datePicker table tbody td.month-out{background-color:#FFF url(/web-data/lib/datepicker/media/gradient-e5e5e5-ffffff.gif) repeat-x 0 0;color:#ededed!important;border-color:#ddd;}
+div.datePicker table tbody td.month-out.date-picker-highlight{color:#a86!important;}
+div.datePicker table tbody td.not-selectable{filter:alpha(opacity=80);opacity:.8;}
+div.datePicker table tbody td.out-of-range,div.datePicker table tbody td.not-selectable{background:#fcfcfc!important;color:#DDD!important;cursor:default!important;font-style:oblique;}
+div.datePicker table tbody th{border:1px solid #dcdcdc;}
+div.datePicker table tbody th,div.datePicker table td{border:1px solid #DDD;cursor:pointer;height:2em;outline:transparent none 0;overflow:hidden;text-align:center;text-transform:none;vertical-align:middle;width:2em;padding:0;}
+div.datePicker table tbody th.month-out,div.datePicker table tbody th.out-of-range{background:#fcfcfc!important;color:#ededed!important;font-style:oblique;}
+div.datePicker table tbody th.out-of-range{filter:alpha(opacity=60);opacity:.6;}
+div.datePicker table tbody tr{display:table-row;}
+div.datePicker table tbody tr td:focus,div.datePicker table tbody td.date-picker-hover{-moz-outline:0 none;-o-highlight:0 none;color:#6482aa!important;outline:0 solid red;overflow:hidden;}
+div.datePicker table td,div.datePicker table tbody th{padding:.1em;}
+div.datePicker table td:focus,div.datePicker table td:active{outline:0 none red;}
+div.datePicker table tfoot sup{height:0;letter-spacing:normal;line-height:1;position:relative;text-transform:none;top:-.2em;vertical-align:baseline!important;}
+div.datePicker table th{border:0 none;color:#444;font-weight:bold;text-align:center;text-transform:none;vertical-align:middle;padding:0;}
+div.datePicker table thead th{height:auto!important;}
+div.datePicker table thead th.date-picker-day-header{cursor:help;height:auto;text-transform:lowercase;}
+div.datePicker table thead th.date-picker-title{color:#333;height:auto;width:auto;padding:.4em 0;}
+div.datePicker table thead th.date-picker-week-header{border:0 none;cursor:help;padding:0 0 .2em;}
+div.datePicker table thead th.date-picker-week-header,div.datePicker table tbody th.date-picker-week-header{background:transparent;color:#DDD;cursor:default;font-style:oblique;}
+div.datePicker table,div.datepicker-focus table{-webkit-box-shadow:0 0 5px #ededed;}
+div.datePicker tfoot th{border:0 none;cursor:default;font-weight:400;height:2.8em;letter-spacing:.1em;text-transform:uppercase;}
+div.datePicker tfoot th.drag-enabled,div.datePicker thead th.drag-enabled,div.datePicker thead th.drag-enabled span{cursor:move;}
+div.datePicker th span.fd-day-header{cursor:pointer;font-size:11px;text-align:center;text-decoration:none;text-transform:lowercase;margin:0;}
+div.datePicker th span.month-display,div.datePicker th span.year-display{cursor:default;display:inline;font-size:13px;letter-spacing:1px;text-transform:uppercase;}
+div.datePicker th span.prev-but,div.datePicker th span.next-but{cursor:pointer!important;font-size:13px;font-weight:lighter;}
+div.datePicker th span.prev-but:hover,div.datePicker th span.next-but:hover,div.datePicker th span.today-but:hover{color:#a84444;}
+div.datePicker th span.today-but{cursor:pointer!important;font-size:13px;padding-top:.3em;text-align:center;text-decoration:none;text-transform:uppercase;vertical-align:middle;width:100%;margin:0;}
+div.datePicker thead th span{background:transparent;border:0 none;cursor:pointer;display:block;font-weight:700;line-height:1em;text-align:center;margin:0;padding:0;}
+div.datepicker-focus table{-moz-box-shadow:0 0 5px #ededed;outline:0;}
+div.datepicker-focus table.datePickerTable{border-color:#999!important;}
+div.dp-disabled th span.prev-but,div.dp-disabled th span.next-but,div.dp-disabled th span.today-but,div.dp-disabled th span.prev-but:hover,div.dp-disabled th span.next-but:hover,div.dp-disabled th span.today-but:hover,div.datePicker th span.prev-but.fd-disabled:hover,div.datePicker th span.next-but.fd-disabled:hover,div.datePicker thead th span.fd-disabled,div.datePicker th span.fd-disabled:hover{color:#ededed;cursor:default!important;opacity:1;}
+div.legendCol{float:left;padding-left:2px;width:100px;}
+div.legendRow{height:auto;overflow:auto;}
+div.static-datepicker{left:0;position:relative;top:5px;}
+div.static-datepicker table{-moz-box-shadow:0 0 0 transparent;}
+form{margin:2px;}
+html,body{background:#e8e8e8;color:#333;font-family:'Roboto',sans-serif;font-weight:normal;font-size:14px;}
+iframe.iehack{border:0;display:none;position:absolute;z-index:9998;margin:0;padding:0;}
+img{border:0;}
+input,select,textarea{background-color:#FFF;border-radius:2px;border:1px solid #DDD;color:#444;font-size:14px;transition:border-color .15s ease-in-out 0 box-shadow .15s ease-in-out 0;padding:5px;}
+input.fd-hidden-input,select.fd-hidden-input{display:none;}
+input:focus,textarea:focus,select:focus{box-shadow:0 1px 1px rgba(0,0,0,0.075) inset, 0 0 8px rgba(102,175,233,0.6);outline:0 none;border-color:#66AFE9;}
+li.roundedNav{background:none;border:none;}
+table{border-collapse:collapse;border-spacing:0;color:inherit;font-family:inherit;font-size:inherit;font-weight:inherit;}
+table.contentHd{border-bottom:1px solid #DDD;width:100%;margin:0;padding:0;}
+td.screenShot img{background:#DDD;border:1px solid #555;;width:100%;}
+td.timerList{border-bottom:1px solid #ededed;display:block;position:relative;width:100%;margin:0;padding:0;}
+small{font-weight:normal;}

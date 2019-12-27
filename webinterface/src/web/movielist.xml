@@ -14,5 +14,11 @@
 	&lt;/e2movie>
 	</e2:convert>
 	<e2:convert type="web:TextToHTML" /></e2:element>
+	<e2locations>
+	<e2:element source="MovieListSubdir" id="dirname,tag"><e2:convert type="web:SimpleListFiller">
+		&lt;e2location><e2:item name="" filter="xml" />&lt;/e2location>
+		</e2:convert><e2:convert type="web:TextToHTML" />
+	</e2:element>
+	</e2locations>
 </e2movielist>
 </e2:screen>

@@ -5,6 +5,7 @@
 	<head>
 		<meta content="text/html; charset=UTF-8" http-equiv="content-type">
 		<title>Enigma2 WebControl - MultiEPG</title>
+		<link rel="stylesheet" type="text/css" href="/web-data/css/font-awesome.min.css">
 		<link href="/web-data/tpl/default/multiepg.css" type="text/css" rel="stylesheet">
 		<script type="text/javascript" src="/web-data/lib/libs_minified.js"></script>
 		<script type="text/javascript" src="/web-data/helpers.js"></script>
@@ -53,8 +54,8 @@
 								data-description="${e.description.e()}"
 								data-extdescription="${e.extdescription.e()}">
 
-								<p class="mEpgCell cBlack">${e.starttime} - ${e.endtime}</p>
-								<p class="mEpgCell">${e.title} (${e.remaining} min.)</p>
+								<p class="mEpgCell time">${e.starttime} - ${e.endtime}</p>
+								<p class="mEpgCell title">${e.title} (${e.remaining} min.)</p>
 								<p class="mEpgCell">${e.description}&nbsp;</p>
 							</a>{/for}
 						</td>

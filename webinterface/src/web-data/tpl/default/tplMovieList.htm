@@ -1,6 +1,6 @@
 
 <!-- tplMovieList -->
-						<table id="contentTable" class="movieList">
+						<table id="contentTable">
 							{for movie in movies}
 							<tr>
 								<td class="${movie.cssclass}" >
@@ -20,14 +20,14 @@
 												</div>
 											</td>
 											<td style="text-align: right;">
-												<a target="_blank" class="small" href="/web/ts.m3u?file=${movie.filename}" title="${strings.stream_channel.format(movie.title)}" >
-													<img src="/web-data/img/screen.png" alt="${strings.do_stream}" border="0">
+												<a target="_blank" href="/web/ts.m3u?file=${movie.filename}" title="${strings.stream_channel.format(movie.title)}" >
+													<i class="fa fa-border fa-fw fa-tv" alt="${strings.do_stream}"></i>
 												</a>
-												<a target="_blank" class="small" href="/file?file=${movie.filename}" title="${strings.download_item.format(movie.title)}">
-													<img src="/web-data/img/film_save.png" alt="${strings.download}" border="0">
+												<a target="_blank" href="/file?file=${movie.filename}" title="${strings.download_item.format(movie.title)}">
+													<i class="fa fa-border fa-fw fa-download" alt="${strings.download}"></i>
 												</a>
 												<a href="#" class="mListDelete" title="${strings.delete_item.format(movie.title)}">
-													<img src="/web-data/img/delete.png" border="0">
+													<i class="fa fa-border fa-fw fa-trash"></i>
 												</a>
 											</td>
 										</tr>

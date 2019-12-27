@@ -28,16 +28,7 @@
 												<td class="tListRepeat">${t.repeatedReadable}</td>
 												<td class="tListBegin">${t.beginDate}</td>
 												<td class="tListType">${t.justplayReadable}</td>
-												<td rowspan="2" class="tListOption">
-												<!--
-													<button class="tListDelete" title="Delete timer ${t.name}">
-														<img src="/web-data/img/delete.png" border="0" />
-													</button>
-													<button class="tListToggleDisabled" title="${t.enDis} timer ${t.name}">
-														<img src="/web-data/img/${t.onOff}.png" border="0">
-													</button>
-												 -->
-												</td>
+												<td rowspan="2" class="tListOption"></td>
 											</tr>
 											<tr class="tListItem">
 												<td class="tListDuration">${t.duration}&nbsp;Min</td>
@@ -48,10 +39,11 @@
 									</a>
 									<span class="timerState${t.state} timerState">&nbsp;</span>
 									<a href="#" class="tListDelete" title="${strings.delete_timer} ${t.name}">
-										<button class="tListButton"><img src="/web-data/img/delete.png" border="0" />${strings.delete}</button>
+										<button class="tListButton"><i class="fa fa-2x fa-trash"></i><div>${strings.delete}</div></button>
 									</a>
 									<a href="#" class="tListToggleDisabled" title="${t.enDis} ${strings.timer} ${t.name}">
-										<button class="tListButton"><img src="/web-data/img/${t.onOff}.png" border="0">${t.enDis}</button>
+										<button class="tListButton"><i class="fa fa-2x 
+											{if t.disabled == '1'}fa-minus-circle{else}fa-check-circle{/if}"></i><div>${t.enDis}</div></button>
 									</a>
 								</td>
 							</tr>

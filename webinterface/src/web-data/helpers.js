@@ -382,6 +382,7 @@ function EPGEvent(xml, number){
 	this.duration = parseNr(getNodeContent(xml, 'e2eventduration', ''));
 	this.currentTime = parseNr(getNodeContent(xml, 'e2eventcurrenttime')),
 	this.title = getNodeContent(xml, 'e2eventtitle', '');
+	this.bouquetRef = getNodeContent(xml, 'e2eventbouquetreference', '');
 	this.serviceRef = getNodeContent(xml, 'e2eventservicereference', '');
 	this.serviceName = getNodeContent(xml, 'e2eventservicename', '');
 	this.fileName = getNodeContent(xml, 'e2filename', '');
@@ -413,7 +414,7 @@ function EPGEvent(xml, number){
 		return h+":"+m;
 	};
 	this.getTimeDay = function() {
-		var weekday = ["So", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+		var weekday = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 		var wday = weekday[this.getTimeStart().getDay()];
 		var day = this.getTimeStart().getDate();
 		var month = this.getTimeStart().getMonth()+1;
@@ -475,6 +476,9 @@ function EPGEvent(xml, number){
 	this.getServiceReference = function() {
 		return encodeURIComponent(this.serviceRef);
 	};
+	this.getBouquetReference = function() {
+		return encodeURIComponent(this.bouquetRef);
+	};
 	this.getServiceName = function() {
 		return this.serviceName;
 	};
@@ -486,6 +490,7 @@ function EPGEvent(xml, number){
 		'date': this.getTimeDay(),
 		'eventid': this.getEventId(),
 		'servicereference': this.getServiceReference(),
+		'bouquetreference': this.getBouquetReference(),
 		'servicename': quotes2html(this.getServiceName()),
 		'ismarker' : this.isMarker(),
 		'title': quotes2html(this.getTitle()),
@@ -786,8 +791,8 @@ function Movie(xml, cssclass){
 	};
 
 	this.getTimeDay = function() {
-		var Wochentag = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
-		var wday = Wochentag[this.getTimeStart().getDay()];
+		var weekday = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+		var wday = weekday[this.getTimeStart().getDay()];
 		var day = this.getTimeStart().getDate();
 		var month = this.getTimeStart().getMonth()+1;
 		var year = this.getTimeStart().getFullYear();
@@ -1116,7 +1121,12 @@ function DeviceInfo(xml){
 			var hdd = hddnodes.item(i);
 
 			var model 	= hdd.getElementsByTagName('e2model').item(0).firstChild.data;
-			var capacity = hdd.getElementsByTagName('e2capacity').item(0).firstChild.data;
+			var capacity;
+			try {
+				capacity = hdd.getElementsByTagName('e2capacity').item(0).firstChild.data;
+			} catch (e) {
+				capacity = 0;
+			}
 			var free		= hdd.getElementsByTagName('e2free').item(0).firstChild.data;
 
 			this.hdds[i] = {

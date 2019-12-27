@@ -4,7 +4,7 @@ from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os, gettext, hashlib
 
-__version__ = "1.7.5"
+__version__ = "1.9.0"
 
 PluginLanguageDomain = "WebInterface"
 PluginLanguagePath = "Extensions/WebInterface/locale"

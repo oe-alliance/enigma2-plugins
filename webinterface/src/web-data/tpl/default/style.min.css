@@ -23,8 +23,12 @@ a.underline{text-decoration:underline}
 .rightCol{float:right;width:50%}
 .right{text-align:right}
 .liHeader{border-top:#000;border-bottom:#000}
+.group{position:relative !important;}
+.right-aligned{left:auto !important;right:0 !important;}
+.dropdown-menu{min-width:160px;position:absolute !important;top:100%;left:0;list-style:none outside none;padding:5px 0px;z-index:1000;background:#FFF !important;border:1px solid #ccc !important;color:#444 !important;text-align:left;border-radius: 4px !important;-moz-border-radius:4px !important;-webkit-border-radius:4px !important;box-shadow:0px 6px 12px rgba(0, 0, 0, 0.176) !important;}
+.dropdown-menu li{float:none !important;}
 td.screenShot{text-align:center;}
-td.screenShot img{border:1px solid #555;background:#DDD;}
+td.screenShot img{border:1px solid #555;background:#DDD;;width:100%;}
 #banner{width:1000px;height:67px;background:#000;padding-left:5px;margin-bottom:8px;position:relative}
 #banner a,#banner a:visited,#banner a:active{color:#FFF;text-decoration:none}
 #bannerText{padding-left:2px}
@@ -47,7 +51,8 @@ td.screenShot img{border:1px solid #555;background:#DDD;}
 #mainMenu a{display:block;height:100%}
 #mainMenu span{display:block;padding-top: 3px}
 #mainMenu li.navselected{background:#AAA;position:relative;z-index:3}
-#instantRecordMenu{z-index:1000;position:relative;top:5px;right:165px;background:#FFF;color:#485052;width:205px;border:1px solid #000;opacity:.98;text-align:left}
+#menuPower{display:none;}
+#instantRecordMenu li{margin:3px;}
 #instantRecordMenu button{width:200px;text-align:center}
 #navContainer{float:left;width:160px}
 #nav{width:100%;height:250px;background:#000;padding-left:5px;border:2px solid #000;position:relative}
@@ -77,11 +82,13 @@ table.contentHd{background-color: #000;width:100%;margin:0px; padding:0px;}
 .navTable a:hover{background-color:#DDD;color:#485052;display:block}
 .bListSLink {display:block;margin-right:5px;color:#485052;padding:4px;}
 .bListSLink:hover{display:block;background-color:#DDD;color:#485052;padding:3px;border:1px solid #AAA}
-.sListSName a{display:block;margin-right:5px;color:#485052;padding:4px}
-.sListSName a:hover{display:block;background-color:#DDD;color:#485052;padding:3px;border:1px solid #AAA}
+a.sListSLink {color:#485052;display:block;font-size:15px;padding:4px;display: block;width:99%;}
+a.sListSLink:hover{display:block;background-color:#DDD;color:#485052;padding:3px;border:1px solid #AAA}
 .sListMarker{background-color:#485052;color:#FFF}
 .sListEPGItem{font-size:12px;margin:0;padding:0}
-.sListSProgress{display:inline-block;margin:4px 1px 1px 1px;border:1px solid #485052;width:50px;height:10px;padding:1px}
+.sListProgress {width: 60px; float: left }
+.sListSActions{position: absolute; right: 0px; top: 5px;}
+.sListSProgress{display:inline-block;border:1px solid #485052;width:50px;height:10px;padding:1px}
 .sListSProgressBar{margin:0;background-color:#60aef2;width:0;height:100%}
 .sListExtEpg{display: block;padding:1px}
 .header{padding-top:2px;padding-left:4px;padding-right:4px;display:block;height:22px}
@@ -90,15 +97,15 @@ table.contentHd{background-color: #000;width:100%;margin:0px; padding:0px;}
 #contentServices{vertical-align:top;width:575px}
 #contentServices table{scrollbar:auto}
 #bouquetTable{width:100%;margin:0;padding:0}
-#bouquetTable li{list-style:none;margin:3px;padding:3px;position:relative;display:block;clear:both}
+#bouquetTable li{list-style:none;position:relative;display:table}
 .bouquetIcons{float:left;width:40px;padding-top:3px}
-.bouquetName{float:right;width:158px}
+.bouquetName{float:right;width:215px}
 #contentBouquets{border-right:1px solid #DDD;vertical-align:top;width:220px}
 #contentMain{padding:8px;margin-bottom:5px;min-height:365px;clear:both;overflow-y:auto;width:815px;color:#485052}
 #contentMain div table{float:left;width:599px}
 .sListItem{width:570px !important;color:#485052}
+.sListItem td{position: relative;}
 .mListItem{width:780px;color:#485052}
-.mpListItem{mListItem}
 .epgStart{width:50px;color:#485052}
 .epgTitle{width:420px;color:#485052}
 .epgLength{width:100px;text-align:right;color:#485052}

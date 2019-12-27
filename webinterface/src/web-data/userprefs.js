@@ -11,11 +11,14 @@ var userprefs = {
 		var the_cookie = document.cookie.split(';');
 
 		var idx = 0;
-		if(the_cookie[idx].startsWith("TWISTED_SESSION")){
-			idx = 1;
-		}
-		if (the_cookie[idx]) {
-			this.data = unescape(the_cookie[idx]).evalJSON();
+		while(idx < the_cookie.length) {
+			if (!the_cookie[idx].trim().startsWith("dmweb=")) {
+				idx++;
+				continue;
+			}
+			var data = the_cookie[idx].split("=")[1]
+			this.data = JSON.parse(unescape(data));
+			break;
 		}
 		return this.data;
 	},
@@ -23,7 +26,7 @@ var userprefs = {
 	save : function(expires, path) {
 		var d = expires || new Date(2222, 01, 01);
 		var p = path || '/';
-		document.cookie = escape( Object.toJSON(this.data) ) + ';path=' + p
+		document.cookie = "dmweb=" + escape( JSON.stringify(this.data) ) + ';path=' + p
 				+ ';expires=' + d.toUTCString();
 	}
 };

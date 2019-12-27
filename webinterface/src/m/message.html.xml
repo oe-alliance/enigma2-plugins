@@ -33,7 +33,7 @@
 		<p><e2:element source="Message"><e2:convert type="SimpleResult">ResultText</e2:convert><e2:convert type="web:TextToXML" /></e2:element></p>
 	</div><!-- /content -->
 	<div data-role="footer">
-		<h1>© 2012 Dream Multimedia GmbH</h1>
+		<h1>© 2012 Dream Property GmbH</h1>
 	</div><!-- /footer -->
 </div><!-- /main -->
 </body>

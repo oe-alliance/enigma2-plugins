@@ -448,7 +448,7 @@ var MovieListHandler  = Class.create(AbstractContentHandler, {
 		*/
 		var parent = element.up('.mListItem');
 		var m = {
-				servicereference : unescape(parent.readAttribute('data-servicereference')),
+				servicereference : decodeURIComponent(parent.readAttribute('data-servicereference')),
 				servicename : unescape(parent.readAttribute('data-servicename')),
 				title : unescape(parent.readAttribute('data-title')),
 				description : unescape(parent.readAttribute('data-description'))
@@ -467,8 +467,7 @@ var MovieListHandler  = Class.create(AbstractContentHandler, {
 	 * @description - the description of the movie
 	 */
 	del: function(element){
-		movie = this.getData(element);
-
+		var movie = this.getData(element);
 		var result = confirm( "Are you sure want to delete the Movie?\n" +
 				"Servicename: " + movie.servicename + "\n" +
 				"Title: " + movie.title + "\n" +
@@ -505,7 +504,7 @@ var MovieNavHandler = Class.create(AbstractContentHandler,{
 	},
 
 	load: function(locations, tags){
-		data = { 'locations' : locations, 'tags' : tags};
+		var data = { 'locations' : locations, 'tags' : tags};
 		this.show(data);
 		this.showLocations(data);
 	},

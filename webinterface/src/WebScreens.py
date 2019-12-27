@@ -192,6 +192,7 @@ class MovieWebScreen(WebScreen):
 		self["MovieList"] = Movie(session, movielist, func=Movie.LIST)
 		self["MovieFileDel"] = Movie(session, movielist, func=Movie.DEL)
 		self["MovieFileMove"] = Movie(session, movielist, func=Movie.MOVE)
+		self["MovieListSubdir"] = Movie(session, None, func=Movie.DIRS)
 
 class MediaPlayerWebScreen(WebScreen):
 	def __init__(self, session, request):

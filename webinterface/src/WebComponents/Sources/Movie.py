@@ -2,23 +2,25 @@ from enigma import eServiceReference, iServiceInformation, eServiceCenter
 from Components.Sources.Source import Source
 from Components.config import config
 from ServiceReference import ServiceReference
-from Tools.Directories import resolveFilename, SCOPE_HDD
+from Tools.Directories import resolveFilename, SCOPE_HDD, pathExists, fileExists
 from Tools.FuzzyDate import FuzzyTime
-
 from os import stat as os_stat
+import os
 
 class Movie(Source):
 	LIST = 0
 	DEL = 1
 	MOVE = 2
+	DIRS = 3
 
 	def __init__(self, session, movielist, func=LIST):
 		Source.__init__(self)
 		self.func = func
 		self.session = session
-		self.tagfilter = []
-		self.root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + resolveFilename(SCOPE_HDD))
-		self.movielist = movielist #MovieList(self.root)
+		if func != self.DIRS:
+			self.tagfilter = []
+			self.root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + resolveFilename(SCOPE_HDD))
+			self.movielist = movielist #MovieList(self.root)
 		self.res = ( False, _("Missing or Wrong Argument") )
 
 	def handleCommand(self, cmd):
@@ -32,6 +34,8 @@ class Movie(Source):
 				self.res = self.delMovie(cmd)
 			elif func is self.MOVE:
 				self.res = self.moveMovie(cmd)
+			elif func is self.DIRS:
+				self.dirname = cmd['dirname']
 
 	def delMovie(self, param):
 #		print "[WebComponents.delMovie] %s" %param
@@ -204,6 +208,23 @@ class Movie(Source):
 			))
 		return lst
 
+	def getMovieSubdirs(self):
+		if not pathExists(self.dirname):
+			return []
+		locations = []
+		for child in os.listdir(self.dirname):
+			if os.path.isdir(child):
+				sep = "" if self.dirname.endswith("/") else "/"
+				locations.append("%s%s%s/" %(self.dirname, sep, child))
+		return locations
+
+	def checkStreamServerSeek(self):
+		streamServerSeekInstalled = "False"
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/StreamServerSeek/plugin.pyo"):
+			streamServerSeekInstalled = "True"
+		print "streamServerSeekInstalled", streamServerSeekInstalled
+		return streamServerSeekInstalled
+
 	def getResult(self):
 		if self.func is self.DEL:
 			return self.res
@@ -214,6 +235,7 @@ class Movie(Source):
 
 	result = property(getResult)
 
+	simplelist = property(getMovieSubdirs)
 	list = property(getMovieList)
 	lut = {"ServiceReference": 0
 			, "Title": 1

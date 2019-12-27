@@ -6,7 +6,9 @@
 		<meta content="text/html; charset=UTF-8" http-equiv="content-type">
 		<title>Enigma2 WebControl - EPG</title>
 
-		<link href="/web-data/tpl/default/style.min.css" type="text/css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="/web-data/css/font-awesome.min.css">
+		<link href="/web-data/tpl/default/style_modern.min.css" type="text/css" rel="stylesheet">
+
 		<script type="text/javascript" src="/web-data/lib/prototype.js"></script>
 	</head>
 	<body style="scrollbar: auto; color: #485052;">
@@ -23,34 +25,31 @@
 							data-title="${e.title}"
 							data-description="${e.description}">
 
-						<tr style="background-color: #DDDDDD;">
+						<tr class="bold" style="background-color: #fff;">
 							<td width="10%">${e.date}</td>
 							<td width="30%">${e.servicename}</td>
 							<td>${e.title}</td>
 						</tr>
 
-						<tr style="background-color: #DDDDDD;">
-							<td>${e.starttime}</td>
+						<tr style="background-color: #fff;">
+							<td class="bold">${e.starttime}</td>
 							<td>${e.duration} min.</td>
 							<td>${e.description}</td>
 						</tr>
 
-						<tr style="background-color: #DDDDDD;">
-							<td valign="top">${e.endtime}</td>
+						<tr style="background-color: #fff;">
+							<td class="bold" valign="top">${e.endtime}</td>
 							<td colspan="2"rowspan="2" id="extdescription${e.number}">${e.extdescription}</td>
 						</tr>
 
-						<tr style="background-color: #DDDDDD;">
+						<tr style="background-color: #fff;">
 							<td>
-								<a href="#" class="eListAddTimer"><img src="/web-data/img/clock.png" title="${strings.add_timer}" onClick="return false;" border="0"></a>&nbsp;&nbsp;
-								<a href="#" class="eListZapTimer"><img src="/web-data/img/clock_play.png" title="${strings.add_zap_timer}" onClick="return false;" border="0"></a>&nbsp;&nbsp;
-								<a href="#" class="eListEditTimer"><img src="/web-data/img/clock_edit.png" title="${strings.edit_timer}" onClick="return false;" border="0"></a><br/><br/>
-								<a target="_blank" href="/web/epgsearch.rss?search=${e.title}" ><img src="/web-data/img/feed.png" title="RSS-Feed" border="0"></a>&nbsp;
-								<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=${e.titleESC}" ><img src="/web-data/img/imdb.png" title="${strings.imdb_lookup}" border="0"></a><br/>
+								<a href="#" class="eListAddTimer"><i class="fa fa-border fa-plus-square-o" title="${strings.add_timer}" onClick="return false;"></i></a>&nbsp;&nbsp;
+								<a href="#" class="eListZapTimer"><i class="fa fa-border fa-caret-square-o-right" title="${strings.add_zap_timer}" onClick="return false;"></i></a>&nbsp;&nbsp;
+								<a href="#" class="eListEditTimer"><i class="fa fa-border fa-pencil-square-o" title="${strings.edit_timer}" onClick="return false;"></i></a><br/><br/>
+								<a target="_blank" href="/web/epgsearch.rss?search=${e.title}" ><i class="fa fa-border fa-rss-square" title="RSS-Feed"></i></a>&nbsp;
+								<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=${e.titleESC}" ><i class="fa fa-border fa-film" title="${strings.imdb_lookup}"></i></a><br/>
 							</td>
-						</tr>
-						<tr>
-							<td colspan="3">&nbsp;</td>
 						</tr>
 					</table>
 					{forelse}

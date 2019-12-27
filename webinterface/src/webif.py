@@ -273,15 +273,15 @@ class ListFiller(Converter):
 	text = property(getText)
 
 def appendListItem(item, filternum, append):
-	if filternum == 2:
+	if filternum == webifHandler.FILTER_JAVASCRIPT:
 		append(item.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
-	elif filternum == 3:
+	elif filternum == webifHandler.FILTER_XML:
 		append( escape_xml( item ))
-	elif filternum == 4:
+	elif filternum == webifHandler.FILTER_URI:
 		append(item.replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
-	elif filternum == 5:
+	elif filternum == webifHandler.FILTER_URLENCODE:
 		append(quote(item))
-	elif filternum == 6:
+	elif filternum == webifHandler.FILTER_DATE:
 		from time import localtime
 		time = 0
 		try:
@@ -290,7 +290,7 @@ def appendListItem(item, filternum, append):
 			append("%04d-%02d-%02d" % (t.tm_year, t.tm_mon, t.tm_mday))
 		except:
 			append("---")
-	elif filternum == 7:
+	elif filternum == webifHandler.FILTER_TIME:
 		from time import localtime
 		time = 0
 		try:
@@ -299,21 +299,21 @@ def appendListItem(item, filternum, append):
 			append("%02d:%02d" % (t.tm_hour, t.tm_min))
 		except:
 			append("--:--")
-	elif filternum == 8:
+	elif filternum == webifHandler.FILTER_MINUTES:
 		time = 0
 		try:
 			time = int(item)
 			append("%d min" % (time / 60))
 		except:
 			append("-- min")
-	elif filternum == 9:
+	elif filternum == webifHandler.FILTER_URI_ATTRIB:
 		append(quote(item).replace("\"", "%22"))
-	elif filternum == 10:
+	elif filternum == webifHandler.FILTER_HTML:
 		if item == "None":
 			append("n/a")
 		else:
 			append(item.replace("\n", "<br />"))
-	elif filternum == 11:
+	elif filternum == webifHandler.FILTER_ATTRIBUTE:
 		append( item.replace("\"", "&quot;"))
 	else:
 		append(item)
@@ -325,6 +325,18 @@ def appendListItem(item, filternum, append):
 # It looks up the source, instantiates the Element and Calls the Converter
 #===============================================================================
 class webifHandler(ContentHandler):
+	FILTER_NONE = 1
+	FILTER_JAVASCRIPT = 2
+	FILTER_XML = 3
+	FILTER_URI = 4
+	FILTER_URLENCODE = 5
+	FILTER_DATE = 6
+	FILTER_TIME = 7
+	FILTER_MINUTES = 8
+	FILTER_URI_ATTRIB = 9
+	FILTER_HTML = 10
+	FILTER_ATTRIBUTE = 11
+
 	def __init__(self, session, request):
 		self.res = [ ]
 		self.mode = 0
@@ -405,7 +417,19 @@ class webifHandler(ContentHandler):
 
 	def parse_item(self, attrs):
 		if "name" in attrs:
-			filter = {"": 1, "javascript_escape": 2, "xml": 3, "uri": 4, "urlencode": 5, "date": 6, "time": 7, "minutes": 8, "uriAttribute": 9, "html": 10, "attribute" : 11}[attrs.get("filter", "")]
+			filter = {
+				""					: webifHandler.FILTER_NONE,
+				"javascript_escape"	: webifHandler.FILTER_JAVASCRIPT,
+				"xml"				: webifHandler.FILTER_XML,
+				"uri"				: webifHandler.FILTER_URI,
+				"urlencode"			: webifHandler.FILTER_URLENCODE,
+				"date"				: webifHandler.FILTER_DATE,
+				"time"				: webifHandler.FILTER_TIME,
+				"minutes"			: webifHandler.FILTER_MINUTES,
+				"uriAttribute"		: webifHandler.FILTER_URI_ATTRIB,
+				"html"				: webifHandler.FILTER_HTML,
+				"attribute" 		: webifHandler.FILTER_ATTRIBUTE
+			}[attrs.get("filter", "")]
 			self.sub.append(ListItem(attrs["name"], filter))
 		else:
 			assert "macro" in attrs, "e2:item must have a name= or macro= attribute!"

@@ -2,25 +2,25 @@
 						{for state in volume.states}
 						<a href="#" class="volume" data-volume="set${state.percent}">
 							{if state.enabled}
-							<img src='/web-data/img/led_on.png' title="${state.percent}%" alt="${state.percent}%">
+							<i class="fa fa-minus item_enabled" title="${state.percent}%" alt="${state.percent}%"></i>
 							{elseif}
-							<img src='/web-data/img/led_off.png' title="${state.percent}%" alt="${state.percent}%">
+							<i class="fa fa-minus" title="${state.percent}%" alt="${state.percent}%"></i>
 							{/if}
 						</a>
 						{/for}
 						<br>
 						<!-- Volume Control -->
 						<a href="#" class="volume" data-volume="down">
-							<img src='/web-data/img/minus.png' title="${strings.volume_down}" alt="${strings.down}">
+							<i class="fa fa-border fa-fw fa-volume-down" title="${strings.volume_down}" alt="${strings.down}"></i>
 						</a>&nbsp;
 						<a href="#" class="volume" data-volume="mute">
 							{if volume.isMuted}
-							<img id='speaker' src='/web-data/img/sound_mute.png' title="${strings.unmute}" alt="${strings.unmute}">
+							<i id='speaker' class="fa fa-border fa-fw fa-volume-off" title="${strings.unmute}" alt="${strings.unmute}"></i>
 							{elseif}
-							<img id='speaker' src='/web-data/img/sound.png' title="${strings.mute}" alt="${strings.mute}">
+							<i id='speaker' class="fa fa-border fa-fw fa-volume-off" title="${strings.mute}" alt="${strings.mute}"></i>
 							{/if}
 						</a>&nbsp;
 						<a href="#" class="volume" data-volume="up">
-							<img src='/web-data/img/plus.png' title="${strings.volume_up}" alt="${strings.up}">
+							<i class="fa fa-border fa-fw fa-volume-up" title="${strings.volume_up}" alt="${strings.up}"></i>
 						</a>
 <!-- /tplVolume -->

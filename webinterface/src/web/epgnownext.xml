@@ -10,6 +10,7 @@
 		&lt;e2eventdescription><e2:item name="Description" filter="xml"/>&lt;/e2eventdescription>
 		&lt;e2eventdescriptionextended><e2:item name="DescriptionExtended" filter="xml"/>&lt;/e2eventdescriptionextended>
 		&lt;e2eventservicereference><e2:item name="ServiceReference" filter="xml"/>&lt;/e2eventservicereference>
+		&lt;e2eventbouquetreference><e2:item name="BouquetReference" filter="xml"/>&lt;/e2eventbouquetreference>
 		&lt;e2eventservicename><e2:item name="ServiceName" filter="xml"/>&lt;/e2eventservicename>
 	&lt;/e2event>
 	</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>

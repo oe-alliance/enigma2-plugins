@@ -265,7 +265,7 @@ def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usess
 		root = HTTPRootResource(toplevel)
 		site = server.Site(root)
 
-	if has_ipv6 and fileExists('/proc/net/if_inet6') #and version.major >= 12:
+	if has_ipv6 and fileExists('/proc/net/if_inet6'): #and version.major >= 12:
 		if ipaddress == '0.0.0.0':
 			ipaddress='::'
 		elif ipaddress == '127.0.0.1':

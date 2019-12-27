@@ -97,15 +97,12 @@ var Current = Class.create(Controller, {
 		var ext = $('trExtCurrent');
 		if(ext){
 			var bullet = element.down('.currentBulletToggle');
-			if(ext.visible()){
-				bullet.src = '/web-data/img/toggle_expand.png';
-				bullet.alt = "+";
+			var visible = ext.visible();
+			core.toggleBullet(bullet, !visible);
+			if(visible)
 				ext.hide();
-			}else{
-				bullet.src = '/web-data/img/toggle_collapse.png';
-				bullet.alt = "-";
+			else
 				ext.show();
-			}
 			this.display = ext.style.display;
 			setMaxHeight('contentMain');
 		}
@@ -117,13 +114,7 @@ var Current = Class.create(Controller, {
 		if(ext){
 			ext.style.display = this.display;
 			var bullet = $('currentName').down('.currentBulletToggle');
-			if(ext.visible()){
-				bullet.src = '/web-data/img/toggle_collapse.png';
-				bullet.alt = "-";
-			}else{
-				bullet.src = '/web-data/img/toggle_expand.png';
-				bullet.alt = "+";
-			}
+			core.toggleBullet(bullet, ext.visible());
 		}
 		core.currentData = this.handler.data;
 	}
@@ -738,8 +729,8 @@ var Services = Class.create(Controller, {
 		this.cachedServiceElements = null;
 	},
 
-	zap: function(sRef, callback){
-		this.handler.zap({'sRef' : sRef}, callback);
+	zap: function(sRef, sRoot, callback){
+		this.handler.zap({'sRef' : sRef, 'root' : sRoot}, callback);
 	},
 
 	load: function(sRef){
@@ -1056,8 +1047,8 @@ var BaseCore = Class.create({
 		this.popUpBlockerHinted = false;
 		this.hideNotifierTimeout = '';
 		this.sessionProvider = new SessionProvider( this.onSessionAvailable.bind(this) );
-		if(userprefs.data.style != "dark" && userprefs.data.style != "light"){
-			userprefs.data.style = "dark";
+		if(userprefs.data.style != "merlin_dark" && userprefs.data.style != "modern"){
+			userprefs.data.style = "modern";
 			userprefs.save();
 		}
 	},
@@ -1152,14 +1143,17 @@ var BaseCore = Class.create({
 			return "";
 		}
 	},
-	
+
 	styleChanged: function(){
-		if(userprefs.data.style == 'light'){
-			$('style_light').disabled = false;
-			$('style_dark').disabled = true;
-		} else {
-			$('style_dark').disabled = false;
-			$('style_light').disabled = true;
+		switch(userprefs.data.style){
+			case 'merlin_dark':
+				$('style_merlin_dark').disabled = false;
+				$('style_modern').disabled = true;
+				break;
+			default:
+				$('style_merlin_dark').disabled = true;
+				$('style_modern').disabled = false;
+				break;
 		}
 	}
 });
@@ -1255,10 +1249,13 @@ var E2WebCore = Class.create(BaseCore, {
 	},
 
 	onPowerStateAvailable: function(isStandby){
+		var signal = $('openSignalPanelImg');
 		if(isStandby){
-			$('openSignalPanelImg').src="/web-data/img/transmit_grey.png";
+			if(signal.hasClassName("item_enabled"))
+				signal.removeClassName("item_enabled")
 		} else {
-			$('openSignalPanelImg').src="/web-data/img/transmit_blue.png";
+			if(!signal.hasClassName("item_enabled"))
+				signal.addClassName("item_enabled")
 		}
 	},
 
@@ -1419,35 +1416,26 @@ var E2WebCore = Class.create(BaseCore, {
 		this.startUpdateCurrentPoller();
 	},
 
+	toggleBullet: function(bullet, isOpen) {
+		var open_class = getBulletToggleClass(true);
+		var closed_class = getBulletToggleClass(false);
+		if(isOpen) {
+			if(bullet.hasClassName(closed_class))
+				bullet.removeClassName(closed_class);
+			if(!bullet.hasClassName(open_class))
+				bullet.addClassName(open_class);
+			bullet.alt = "-";
+		} else {
+			if(bullet.hasClassName(open_class))
+				bullet.removeClassName(open_class);
+			if(!bullet.hasClassName(closed_class))
+				bullet.addClassName(closed_class);
+			bullet.alt = "+";
+		}
+	},
+
 	registerEvents: function(){
 		debug("[E2WebCore].registerEvents");
-		//Hash-Reload-Fix
-		//HACK :: THIS IS EVIL VOODOO, DON'T TRY THIS AT HOME!
-		document.on(
-			'click',
-			'a',
-			function(event, element){
-				var parts = element.href.split('#');
-				var curHost = window.location.href.split('#')[0];
-				//Don't do this crazy stuff when the target is another host!
-				if(curHost == parts[0]){
-					if (parts.length > 1){
-						if(parts[1] != ''){
-							if(window.location == element.href){
-								this.onHashChanged(true);
-								return;
-							}else{
-								window.location == element.href;
-								return;
-							}
-						} else {
-							element.href = window.location;
-						}
-						return false;
-					}
-				}
-			}.bind(this)
-		);
 		//Header
 		$('openSignalPanel').on(
 			'click',
@@ -1476,6 +1464,9 @@ var E2WebCore = Class.create(BaseCore, {
 				this.timers.recordNow(
 					element.readAttribute('data-type'),
 					function(result){
+						var toggle = menu.up('.group').down('.dropdown-toggle');
+						toggle.removeClassName("active");
+						menu.removeClassName("open");
 						menu.hide();
 					}
 				);
@@ -1631,7 +1622,7 @@ var E2WebCore = Class.create(BaseCore, {
 			}.bind(this)
 		);
 		//Powerstate
-		content.on(
+		document.on(
 			'click',
 			'.powerState',
 			function(event, element){
@@ -1699,8 +1690,9 @@ var E2WebCore = Class.create(BaseCore, {
 			'click',
 			'a.sListSLink',
 			function(event, element){
+				var root = unescape( element.readAttribute('data-bouquetreference') );
 				var ref = decodeURIComponent( element.id );
-				this.services.zap(ref, this.delayedUpdateItems.bind(this));
+				this.services.zap(ref, root, this.delayedUpdateItems.bind(this));
 				event.stop();
 			}.bind(this)
 		);
@@ -1718,18 +1710,14 @@ var E2WebCore = Class.create(BaseCore, {
 			'a.sListExtEpg',
 			function(event, element){
 				var target = element.up('.sListEPGItem').down('.sListExtEpgLong');
-
 				if(target){
 					var bullet = element.down('.sListBulletToggle');
-					if(target.visible()){
+					var visible = target.visible();
+					this.toggleBullet(bullet, !visible);
+					if(visible)
 						target.hide();
-						bullet.src = "/web-data/img/toggle_expand_small.png";
-						bullet.alt = "+";
-					} else {
+					else
 						target.show();
-						bullet.src = "/web-data/img/toggle_collapse_small.png";
-						bullet.alt = "-";
-					}
 				}
 				event.stop();
 			}.bind(this)
@@ -1897,6 +1885,35 @@ var E2WebCore = Class.create(BaseCore, {
 				event.stop();
 			}.bind(this)
 		);
+		//Hash-Reload-Fix
+		//HACK :: THIS IS EVIL VOODOO, DON'T TRY THIS AT HOME!
+		document.on(
+			'click',
+			'a',
+			function(event, element){
+				if(event.stopped)
+					return;
+				var parts = element.href.split('#');
+				var curHost = window.location.href.split('#')[0];
+				//Don't do this crazy stuff when the target is another host!
+				if(curHost == parts[0]){
+					if (parts.length > 1){
+						if(parts[1] != ''){
+							if(window.location == element.href){
+								this.onHashChanged(true);
+								return;
+							}else{
+								window.location == element.href;
+								return;
+							}
+						} else {
+							element.href = window.location;
+						}
+						return;
+					}
+				}
+			}.bind(this)
+		);
 	},
 
 	/*
@@ -1989,6 +2006,7 @@ var E2WebCore = Class.create(BaseCore, {
 		userprefs.load();
 		var changed = false;
 
+
 		var l = $('interfaceStyle');
 		var style = l.options[l.selectedIndex].value;
 		if(style != userprefs.data.style){
@@ -1996,7 +2014,7 @@ var E2WebCore = Class.create(BaseCore, {
 			changed = true;
 			this.styleChanged();
 		}
-		
+
 		var debug = $('enableDebug').checked;
 		if(debug != undefined){
 			if( userprefs.data.debug != debug ){
@@ -2023,7 +2041,6 @@ var E2WebCore = Class.create(BaseCore, {
 
 		if( userprefs.data.updateBouquetInterval != updateBouquetInterval){
 			userprefs.data.updateBouquetInterval = updateBouquetInterval;
-
 			changed = true;
 			this.startUpdateBouquetItemsPoller();
 		}
@@ -2036,4 +2053,56 @@ var E2WebCore = Class.create(BaseCore, {
 		}
 	}
 });
+
+DropDownHandler = Class.create({
+	initialize: function(){
+		this.registerEvents();
+	},
+
+	show: function(toggle, menu){
+		toggle.addClassName("active");
+		menu.addClassName("open");
+		menu.show();
+	},
+
+	hide: function(toggle, menu){
+		toggle.removeClassName("active");
+		menu.removeClassName("open");
+		menu.hide();
+	},
+
+	onClick: function(event, toggle){
+		event.stop();
+		var menu = toggle.up('.group').down('.dropdown-menu');
+		if(menu.visible()){
+			this.hide(toggle, menu);
+		} else {
+			this.show(toggle, menu)
+		}
+	},
+
+	registerEvents: function(){
+		document.on(
+			'click',
+			'.dropdown-toggle',
+			this.onClick.bind(this)
+		);
+		document.on(
+			'click',
+			function(event, element){
+				if(event.stopped)
+					return;
+				$$('.open').each(function(menu){
+					if(element != menu && element.up('.open') != menu){
+						var toggle = menu.up('.group').down('.dropdown-toggle');
+						this.hide(toggle, menu);
+					}
+				}.bind(this));
+			}.bind(this)
+		);
+	}
+});
+
+var dropDownHandler = new DropDownHandler();
+
 var core = new E2WebCore();

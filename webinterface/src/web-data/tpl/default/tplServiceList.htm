@@ -11,35 +11,32 @@
 											<td class="${item.cssclass}">
 												<table class="sListItem">
 													<tr>
-														<td id="PROGRESS${item.now.servicereference}" style="width: 60px;">
-															<div class="sListSProgress" title="${item.now.progress}%"><div class="sListSProgressBar" style="width: ${item.now.progress}%"></div></div>
-														</td>
-														<td style="width: 460px;">
-															<div class="sListSName">
-
-																<a href="#" id="${item.now.servicereference}" class="sListSLink" title="${strings.zap_to_channel.format(item.now.servicename)}">${item.now.servicename}</a>
+														<td>
+															<a href="#" id="${item.now.servicereference}" data-bouquetreference="${item.now.bouquetreference}" class="sListSLink" title="${strings.zap_to_channel.format(item.now.servicename)}">
+																<div class="sListProgress" id="PROGRESS${item.now.servicereference}">
+																	<div class="sListSProgress" title="${item.now.progress}%"><div class="sListSProgressBar" style="width: ${item.now.progress}%"></div></div>
+																</div>
+																<div class="sListSName">${item.now.servicename}</div>
+															</a>
+															<div class="sListSActions" >
+																<a href="#" class="sListServiceEpg right" data-servicereference="${item.now.servicereference}">
+																	<i class="fa fa-border fa-tasks" title="${strings.show_epg_for.format(item.now.servicename)}"></i>
+																</a>
+																<a class="right" target="_blank" href="${item.now.streamurl}">
+																	<i class="fa fa-border fa-tv" title="${strings.stream_channel.format(item.now.servicename)}"></i>
+																</a>
 															</div>
-														</td>
-														<td>
-															<a href="#" class="sListServiceEpg right block" data-servicereference="${item.now.servicereference}">
-																<img src="/web-data/img/epg.png" border="0" title="${strings.show_epg_for.format(item.now.servicename)}"/>
-															</a>
-														</td>
-														<td>
-															<a class="right block" target="_blank" href="/web/stream.m3u?ref=${item.now.servicereference}">
-																<img src="/web-data/img/screen.png" title="${strings.stream_channel.format(item.now.servicename)}" border="0" />
-															</a>
 														</td>
 													</tr>
 													<tr class="sListEPGNow">
-														<td id="NOW${item.now.servicereference}" class="sListEPGItem" colspan="4">
+														<td id="NOW${item.now.servicereference}" class="sListEPGItem">
 															{if item.now.title != ''}
 															<table cellspacing="0">
 																<tr>
 																	<td class="epgStart">${item.now.starttime}</td>
 																	<td class="epgTitle">
 																		<a href="#" class="sListExtEpg" title="${strings.show_hide_extended_desc}">
-																			<img class="sListBulletToggle" src="/web-data/img/toggle_expand_small.png" alt="+">&nbsp;${item.now.title}
+																			<i class="sListBulletToggle fa fa-plus-square-o" alt="+"></i>&nbsp;${item.now.title}
 																		</a>
 																	</td>
 																	{if item.now.duration != item.now.remaining}
@@ -58,13 +55,13 @@
 																		data-title="${item.now.title}"
 																		data-description="${item.now.description}">${item.now.extdescription}<br>
 																		<div class="leftCol">
-																			<a target="_blank" href="/web/epgsearch.rss?search=${item.now.title}" ><img src="/web-data/img/feed.png" title="RSS-Feed (${item.now.title.e()})" border="0"></a>&nbsp;&nbsp;
-																			<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=${item.now.titleESC}" ><img src="/web-data/img/imdb.png" title="${strings.imdb_lookup}" border="0"></a>
+																			<a target="_blank" href="/web/epgsearch.rss?search=${item.now.title}" ><i class="fa fa-border fa-rss-square" title="RSS-Feed (${item.now.title.e()})"></i></a>&nbsp;&nbsp;
+																			<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=${item.now.titleESC}" ><i class="fa fa-border fa-film" title="${strings.imdb_lookup}"></i></a>
 																		</div>
 																		<div class="right rightCol">
-																			<a href="#" class="sListAddTimer"><img src="/web-data/img/clock.png" title="${strings.add_timer}" onClick="return false;" border="0"></a>&nbsp;&nbsp;
-																			<a href="#" class="sListZapTimer"><img src="/web-data/img/clock_play.png" title="${strings.add_zap_timer}" onClick="return false;" border="0"></a>&nbsp;&nbsp;
-																			<a href="#" class="sListEditTimer"><img src="/web-data/img/clock_edit.png" title="${strings.edit_timer}" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																			<a href="#" class="sListAddTimer"><i class="fa fa-border fa-plus-square-o" title="${strings.add_timer}" onClick="return false;"></i></a>&nbsp;&nbsp;
+																			<a href="#" class="sListZapTimer"><i class="fa fa-border fa-caret-square-o-right" title="${strings.add_zap_timer}" onClick="return false;"></i></a>&nbsp;&nbsp;
+																			<a href="#" class="sListEditTimer"><i class="fa fa-border fa-pencil-square-o" title="${strings.edit_timer}" onClick="return false;"></i></a>&nbsp;&nbsp;
 																		</div>
 																	</td>
 																</tr>
@@ -73,14 +70,14 @@
 														</td>
 													</tr>
 													<tr class="sListEPGNext">
-														<td id="NEXT${item.now.servicereference}" class="sListEPGItem" colspan="4">
+														<td id="NEXT${item.now.servicereference}" class="sListEPGItem">
 															{if item.next.title != ''}
 															<table cellspacing="0">
 																<tr>
 																	<td class="epgStart">${item.next.starttime}</td>
 																	<td class="epgTitle">
 																		<a href="#" class="sListExtEpg" title="${strings.show_hide_extended_desc}">
-																			<img class="sListBulletToggle" src="/web-data/img/toggle_expand_small.png" alt="+">&nbsp;${item.next.title}
+																			<i class="sListBulletToggle fa fa-plus-square-o" alt="+"></i>&nbsp;${item.next.title}
 																		</a>
 																	</td>
 																	{if item.next.duration != item.next.remaining}
@@ -99,13 +96,13 @@
 																		data-title="${item.next.title}"
 																		data-description="${item.next.description}">${item.next.extdescription}<br>
 																		<div class="leftCol">
-																			<a target="_blank" href="/web/epgsearch.rss?search=${item.next.title}" ><img src="/web-data/img/feed.png" title="RSS-Feed (${item.now.title.e()})" border="0"></a>&nbsp;&nbsp;
-																			<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=${item.next.titleESC}" ><img src="/web-data/img/imdb.png" title="${strings.imdb_lookup}" border="0"></a>
+																			<a target="_blank" href="/web/epgsearch.rss?search=${item.next.title}" ><i class="fa fa-border fa-rss-square" title="RSS-Feed (${item.next.title.e()})"></i></a>&nbsp;&nbsp;
+																			<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=${item.next.titleESC}" ><i class="fa fa-border fa-film" title="${strings.imdb_lookup}"></i></a>
 																		</div>
 																		<div class="right rightCol">
-																			<a href="#" class="sListAddTimer"><img src="/web-data/img/clock.png" title="${strings.add_timer}" onClick="return false;" border="0"></a>&nbsp;&nbsp;
-																			<a href="#" class="sListZapTimer"><img src="/web-data/img/clock_play.png" title="${strings.add_zap_timer}" onClick="return false;" border="0"></a>&nbsp;&nbsp;
-																			<a href="#" class="sListEditTimer"><img src="/web-data/img/clock_edit.png" title="${strings.edit_timer}" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																			<a href="#" class="sListAddTimer"><i class="fa fa-border fa-plus-square-o" title="${strings.add_timer}" onClick="return false;"></i></a>&nbsp;&nbsp;
+																			<a href="#" class="sListZapTimer"><i class="fa fa-border fa-caret-square-o-right" title="${strings.add_zap_timer}" onClick="return false;"></i></a>&nbsp;&nbsp;
+																			<a href="#" class="sListEditTimer"><i class="fa fa-border fa-pencil-square-o" title="${strings.edit_timer}" onClick="return false;"></i></a>&nbsp;&nbsp;
 																		</div>
 																</tr>
 															</table>
@@ -113,7 +110,7 @@
 														</td>
 													</tr>
 													<tr id="trSUB${item.now.servicereference}" class="sListSubService" style="display:none;">
-														<td id="SUB${item.now.servicereference}" colspan="4"></td>
+														<td id="SUB${item.now.servicereference}"></td>
 													</tr>
 												</table>
 											</td>

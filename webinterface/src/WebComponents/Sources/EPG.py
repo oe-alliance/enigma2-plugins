@@ -22,6 +22,7 @@ class EPG(Source):
 		self.command = None
 		self.endtime = endtm
 		self.search = False
+		self.isBouquet = False
 
 	def handleCommand(self, cmd):
 		print "[WebComponents.EPG] setting command to '%s' " %cmd
@@ -29,6 +30,7 @@ class EPG(Source):
 
 	def do_func(self):
 		if not self.command is None:
+			self.isBouquet = False
 			if self.func is self.SEARCHSIMILAR:
 				func = self.searchSimilarEvent
 			elif self.func is self.SEARCH:
@@ -78,11 +80,12 @@ class EPG(Source):
 			events = self.epgcache.lookupEvent(['IBDCTSERNX', (ref, type, -1)])
 		else:
 			serviceHandler = eServiceCenter.getInstance()
-			list = serviceHandler.list(eServiceReference(ref))
-			services = list and list.getContent('S', True)
+			lst = serviceHandler.list(eServiceReference(ref))
+			services = lst and lst.getContent('S', True)
 			search = ['IBDCTSERNX']
 
 			if services: # It's a Bouquet
+				self.isBouquet = True
 				if type == -1: #Now AND Next at once!
 					append = search.append
 					for service in services:
@@ -92,6 +95,13 @@ class EPG(Source):
 					search.extend([(service, type, -1) for service in services])
 			events = self.epgcache.lookupEvent(search)
 
+		if self.isBouquet:
+			evts = []
+			for event in events:
+				event = list(event)
+				event.append(ref)
+				evts.append(event)
+			return evts
 		return events or ()
 
 	def getEPGofService(self, param, options='IBDCTSERN'):
@@ -258,6 +268,8 @@ class EPG(Source):
 					"ServiceReference": 7,
 					"ServiceName": 8
 				}
+		if self.isBouquet:
+			lut["BouquetReference"] = len(lut)
 		return lut
 
 	list = property(do_func)

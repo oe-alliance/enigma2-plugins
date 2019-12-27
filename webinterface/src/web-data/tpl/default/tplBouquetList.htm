@@ -3,15 +3,15 @@
 									<ul id="bouquetTable">
 										{for bouquet in services}
 										<li>
-											<div class="bouquetIcons">
-												<a target="_blank" href="/web/services.m3u?bRef=${bouquet.servicereference}">
-													<img src="/web-data/img/screen.png" title="${strings.playlist_for.format(bouquet.servicename)}" border="0" alt="${strings.playlist}">
-												</a>
-												<a href="#" class="bListEpg" data-servicereference="${bouquet.servicereference}">
-													<img src="/web-data/img/epg.png" title="${strings.open_multi_epg_for.format(bouquet.servicename)}" border="0" alt="Multi EPG">
-												</a>
-											</div>
 											<div class="bouquetName">
+												<div class="bouquetIcons">
+													<a href="#" class="bListEpg" data-servicereference="${bouquet.servicereference}">
+														<i class="fa fa-border fa-tasks" title="${strings.open_multi_epg_for.format(bouquet.servicename)}" alt="Multi EPG"></i>
+													</a>
+													<a target="_blank" href="/web/services.m3u?bRef=${bouquet.servicereference}">
+														<i class="fa fa-border fa-tv" title="${strings.playlist_for.format(bouquet.servicename)}" alt="${strings.playlist}"></i>
+													</a>
+												</div>
 												<a 	href="${hash}/${bouquet.servicereference}"
 													id="${bouquet.servicereference}"
 													class="bListSLink"
