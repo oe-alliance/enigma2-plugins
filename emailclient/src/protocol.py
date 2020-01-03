@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from twisted.internet import reactor, protocol, ssl
 from twisted.mail import imap4
 

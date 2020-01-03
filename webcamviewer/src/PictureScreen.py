@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from enigma import ePicLoad, eTimer, getDesktop
 
 from Screens.Screen import Screen

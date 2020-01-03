@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from enigma import eServiceReference
 from enigma import iPlayableService
 from Components.ServiceEventTracker import ServiceEventTracker

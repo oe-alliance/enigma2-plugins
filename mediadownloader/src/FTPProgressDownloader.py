@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from twisted.internet import reactor, defer
 from twisted.internet.protocol import Protocol, ClientCreator
 from twisted.protocols.ftp import FTPClient, FTPFileListProtocol

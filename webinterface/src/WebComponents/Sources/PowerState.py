@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from Components.Sources.Source import Source
 
 

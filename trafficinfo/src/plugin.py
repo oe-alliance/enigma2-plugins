@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # by 3c5x9@2007
 from enigma import eTimer, getDesktop
 from Screens.Screen import Screen

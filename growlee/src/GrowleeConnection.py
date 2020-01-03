@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from Components.config import config
 from Tools import Notifications
 from Screens.MessageBox import MessageBox

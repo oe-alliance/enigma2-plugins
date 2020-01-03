@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from Plugins.Plugin import PluginDescriptor
 from Tools.BoundFunction import boundFunction
 from Screens.MessageBox import MessageBox

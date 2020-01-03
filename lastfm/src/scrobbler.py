@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from re import sub
 from datetime import datetime
 from md5 import md5

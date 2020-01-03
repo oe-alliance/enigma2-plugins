@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #
 #  SHOUTcast E2
 #

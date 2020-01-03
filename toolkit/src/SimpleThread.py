@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from enigma import ePythonMessagePump
 import threading
 from twisted.internet import defer

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #
 #  Birthday Reminder E2 Plugin
 #

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from twisted.internet.defer import Deferred
 from twisted.internet.protocol import ClientFactory, ServerFactory
 from twisted.internet import reactor

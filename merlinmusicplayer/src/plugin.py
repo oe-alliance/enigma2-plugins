@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #
 #  Merlin Music Player E2
 #
