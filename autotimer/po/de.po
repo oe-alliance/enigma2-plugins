@@ -138,7 +138,7 @@ msgstr "Automatische Timer"
 
 #: ../src/plugin.py:193
 msgid "Auto Timers"
-msgstr "Auto Timer"
+msgstr "AutoTimer"
 
 #: ../src/AutoTimer.py:280
 msgid "AutoTimer"
