@@ -213,9 +213,10 @@ class Movie(Source):
 			return []
 		locations = []
 		for child in os.listdir(self.dirname):
-			if os.path.isdir(child):
-				sep = "" if self.dirname.endswith("/") else "/"
-				locations.append("%s%s%s/" %(self.dirname, sep, child))
+			sep = "" if self.dirname.endswith("/") else "/"
+			ch = "%s%s%s/" % (self.dirname, sep, child)
+			if os.path.isdir(ch):
+				locations.append(ch)
 		return locations
 
 	def checkStreamServerSeek(self):
