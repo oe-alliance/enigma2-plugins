@@ -1,0 +1,388 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 EPGRefresh Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-23 10:24+0000\n"
+"PO-Revision-Date: 2020-03-07 10:13+0300\n"
+"Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
+"Language-Team: mosad - مساعد الجعيد\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+msgid "%d more services"
+msgstr "% d قنوات أكثر"
+
+msgid ""
+"After a successful refresh the AutoTimer will automatically search for new "
+"matches if this is enabled. The options 'Ask*' has only affect on a manually "
+"refresh. If EPG-Refresh was called in background the default-Answer will be "
+"executed!"
+msgstr ""
+"بعد التحديث الناجح سوف يعمل تلقائياً المؤقت التلقائي والبحث عن تطابقات جديدة "
+"إذا تم تمكين هذا. الخيارات 'اسأل *' قد يؤثر على التحديث يدوياً. إذا تم استدعاء "
+"تحديث لدليل البرامج الإلكترونية-تحديث في الخلفية سينفذ الإجابة الافتراضية!"
+
+msgid ""
+"An automated refresh will start after this time of day, but before the time "
+"specified in next setting."
+msgstr ""
+"سوف يبدء التحديث الآلي بعد هذا الوقت من اليوم، ولكن قبل الوقت المحدد في "
+"الإعدادات القادمة."
+
+msgid ""
+"An automated refresh will start before this time of day, but after the time "
+"specified in previous setting."
+msgstr ""
+"سوف يبدء التحديث الآلي قبل هذا الوقت من اليوم، ولكن بعد الوقت المحدد في "
+"الإعدادات السابقة."
+
+msgid "Ask default No"
+msgstr "اسأل الافتراضي لا"
+
+msgid "Ask default Yes"
+msgstr "اسأل الافتراضي نعم"
+
+msgid "AutoTimer failed with error %s"
+msgstr "فشل التوقيت التلقائي مع الخطأ %s"
+
+msgid "Automatically refresh EPG"
+msgstr "التحديث التلقائي لدليل البرامج اليومي"
+
+msgid "Background only"
+msgstr "الخلفية فقط"
+
+msgid "Bouquets"
+msgstr "الباقات"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Channels"
+msgstr "قنوات"
+
+msgid "Close and forget changes"
+msgstr "أغلق وتجاهل التغيرات"
+
+msgid "Close and save changes"
+msgstr "أغلق وأحفظ التغيرات"
+
+msgid "Delay if not in standby (minutes)"
+msgstr "تأخير إن لم يكن في وضع الاستعداد (دقائق)"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Display more Options"
+msgstr "عرض المزيد من الخيارات"
+
+msgid "Duration to stay on service (seconds)"
+msgstr "مدة البقاء في القناة (بالثواني)"
+
+msgid "EPG refresh auto-start earliest (hh:mm)"
+msgstr "تحديث دليل البرامج الإلكترونية تلقائيا - تشغيل مبكر (ساعات: دقائق)"
+
+msgid "EPG refresh auto-start latest (hh:mm)"
+msgstr "تحديث دليل البرامج الإلكترونية تلقائيا - تشغيل أخر (ساعات: دقائق)"
+
+msgid "EPG refresh finished."
+msgstr "تم الانتهاء من تحديث دليل البرامج الإلكترونية."
+
+msgid ""
+"EPG refresh finished.\n"
+"Should AutoTimer be search for new matches?"
+msgstr ""
+"تم الانتهاء من تحديث دليل البرامج الإلكتروني.\n"
+"هل يجب البحث عن المؤقتات التلقائية المتطابقة الجديدة؟"
+
+msgid "EPG refresh started in background."
+msgstr "تشغيل تحديث دليل البرامج الإلكترونية في الخلفية."
+
+msgid "EPG refresh starts scanning channels."
+msgstr "تحديث دليل البرامج الإلكترونية يبدأ بالبحث في القنوات."
+
+msgid "EPG-Refresh_Pending Services"
+msgstr "تحديث دليل البرامج الإلكترونية_القنوات المعلقة"
+
+msgid "EPG-Refresh_Refresh now"
+msgstr "تحديث-دليل البرامج الإلكترونية_التحديث الأن"
+
+msgid "EPG-Refresh_SetUp"
+msgstr "تحديث-دليل البرامج الإلكترونية_الضبط"
+
+msgid "EPG-Refresh_Stop Refresh"
+msgstr "تحديث دليل البرامج الإلكترونية_إيقاف التحديث"
+
+msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
+msgstr "تحديث دليل البرامج الإلكترونية_تنبيهات_نطاق"
+
+msgid "EPGRefresh Configuration"
+msgstr "إعدادات تحديث دليل البرامج الإلكترونية"
+
+msgid "EPGRefresh Configuration Help"
+msgstr "المساعدة في إعدادات تحديث دليل البرامج الإلكترونية"
+
+msgid "EPGRefresh Functions"
+msgstr "وظائف تحديث دليل البرامج الإلكترونية"
+
+msgid "EPGRefresh Services"
+msgstr "قنوات تحديث دليل البرامج الإلكترونية"
+
+msgid "Edit Services"
+msgstr "تحرير"
+
+msgid "Edit Services to refresh"
+msgstr "تعديل تحديث القنوات"
+
+msgid "Editing"
+msgstr "التحرير"
+
+msgid ""
+"Enable this item to flush all EPG data before starting a new EPG refresh cycle"
+msgstr ""
+"تمكين هذا العنصر لمسح كافة بيانات دليل البرامج الإلكتروني قبل بدء تحديث دليل "
+"البرامج الإلكتروني الجديد"
+
+msgid ""
+"Enable this to be able to access the EPGRefresh configuration from within the "
+"extension menu."
+msgstr ""
+"تمكين هذا ليكون قادر على الوصول إلى إعدادات تحديث دليل البرامج الإلكترونية من "
+"خلال قائمة الملحقات."
+
+msgid ""
+"Enable this to be able to access the EPGRefresh configuration from within the "
+"plugin menu."
+msgstr ""
+"تمكين هذا لتكون قادر على الوصول إلى إعدادات تحديث دليل البرامج الإلكتروني من "
+"داخل القائمة البرنامج المساعد."
+
+msgid ""
+"Enable this to be able to start the EPGRefresh from within the extension menu."
+msgstr ""
+"تمكين هذا ليكون قادر على تشغيل تحديث دليل البرامج الإلكترونية من خلال قائمة "
+"الملحقات."
+
+msgid "Extend the list of services to refresh by those your AutoTimers use?"
+msgstr "توسيع قائمة القنوات لتحديث باستخدام المؤقتات التلقائية الخاص بك؟"
+
+msgid "Fake recording"
+msgstr "تسجيل وهمي"
+
+msgid "Flush EPG before refresh"
+msgstr "مسح دليل البرامج الإلكتروني قبل التحديث"
+
+msgid "Following Services have to be scanned:"
+msgstr "القنوات التالية يجب أن يتم فحصها:"
+
+msgid "Force scan even if receiver is in use."
+msgstr "التركيز على البحث حتى لو كان الرسيفر مشغولا."
+
+msgid "Foreground also"
+msgstr "المقدمة أيضا"
+
+msgid "Functions"
+msgstr "الوظائف"
+
+msgid "General Help"
+msgstr "مساعدة عامّة"
+
+msgid ""
+"If the receiver currently isn't in standby, this is the duration which "
+"EPGRefresh will wait before retry."
+msgstr ""
+"إذا لم يكن جهاز الاستقبال في وضع الاستعداد حاليًا، فهذه هي المدة التي سينتظرها "
+"تحديث دليل البرامج الإلكترونية قبل إعادة المحاولة."
+
+msgid ""
+"If this is enabled, the plugin will wake up the receiver from standby if "
+"possible. Otherwise it needs to be switched on already."
+msgstr ""
+"إذا تم تمكين هذا البلج إنز سوف تستيقظ المتلقي من وضع الاستعداد إذا كان ذلك "
+"ممكناً. إلا أنها تحتاج إلى أن تحول الفعل."
+
+msgid ""
+"If you want to refresh the EPG in background, you can choose the method which "
+"best suits your needs here, e.g. hidden, fake reocrding or regular Picture in "
+"Picture."
+msgstr ""
+"إذا كنت ترغب في تحديث دليل البرامج الإلكترونية في الخلفية ، يمكنك اختيار "
+"الطريقة التي تناسب احتياجاتك \n"
+"هنا ، على سبيل المثال مخفية ، وهمية التسجيل أو تشغيل قناة داخل قناة."
+
+msgid "Inherit Services from AutoTimer"
+msgstr "القنوات من المؤقت التلقائي"
+
+msgid "Key Help"
+msgstr "مفتاح المساعدة"
+
+msgid "Last refresh was %s"
+msgstr "آخر تحديث كان %s"
+
+msgid "Main Picture"
+msgstr "الصورة الرئيسية"
+
+msgid "Move page down"
+msgstr "نقل الصفحة لأسفل"
+
+msgid "Move page up"
+msgstr "نقل الصفحة لأعلى"
+
+msgid "New"
+msgstr "جديد"
+
+msgid "No"
+msgstr "لا"
+
+msgid "OK"
+msgstr "موافق"
+
+msgid "Pending Services"
+msgstr "القنوات المعلقة"
+
+msgid "PiP available now."
+msgstr "خاصية صورة داخل صورة متوفرة الأن."
+
+msgid "Picture in Picture"
+msgstr "صورة داخل صورة"
+
+msgid "Picture in Picture (hidden)"
+msgstr "قناة داخل داخل (مخفي)"
+
+msgid "Please don't use PiP meanwhile!"
+msgstr "من فضلك لا تستخدم خاصية صورة داخل صورة في الوقت نفسه!"
+
+msgid "Really close without saving settings?"
+msgstr "هل تريد الإغلاق بدون حفظ الإعدادات؟"
+
+msgid "Refresh EPG automatically"
+msgstr "تحديث دليل البرامج الإلكترونية تلقائياً"
+
+msgid "Refresh EPG using"
+msgstr "تحديث دليل البرامج الإلكترونية قيد الإستخدام"
+
+msgid "Refresh now"
+msgstr "التحديث الآن"
+
+msgid "Refreshing"
+msgstr "محدث"
+
+msgid "Run AutoTimer after refresh"
+msgstr "تشغيل المؤقت التلقائي بعد التحديث"
+
+msgid "Select bouquet to refresh"
+msgstr "حدد باقة للتحديث"
+
+msgid "Select channel to refresh"
+msgstr "حدد قناة التحديث"
+
+msgid ""
+"Should protected services be skipped if refresh was started in interactive-"
+"mode?"
+msgstr "هل ينبغي تخطي القنوات المحمية إذا بدأ التحديث في وضع تفاعلي؟"
+
+msgid "Show 'EPGRefresh Start now' in extension menu."
+msgstr "عرض 'تشغيل تحديث دليل البرامج الإلكتروني الأن' في قائمة الإضافات."
+
+msgid "Show Advanced Options"
+msgstr "عرض الخيارات المتقدمة"
+
+msgid "Show Setup in extension menu"
+msgstr "عرض الضبط في قائمة الملحقات"
+
+msgid "Show Setup in plugins"
+msgstr "عرض الضبط في الإضافات"
+
+msgid "Show last EPGRefresh - Time"
+msgstr "عرض أخر تحديث لدليل البرامج الإلكترونية-الوقت"
+
+msgid "Show more Functions"
+msgstr "عرض المزيد من المهام"
+
+msgid "Show popup when refresh starts and ends."
+msgstr "إظهار النافذة المنبثقة عند بدء التحديث وانتهاءه."
+
+msgid "Show the pending Services for refresh"
+msgstr "عرض أخر تحديث للقنوات معلق"
+
+msgid "Shutdown after EPG refresh."
+msgstr "إيقاف التشغيل بعد تحديث دليل البرامج الإلكتروني."
+
+msgid "Skip protected Services"
+msgstr "تخطي حماية القنوات"
+
+msgid "Start EPGrefresh immediately"
+msgstr "التشغيل الفوري لتحديث دليل البرامج الإلكترونية"
+
+msgid "Stop Running EPG-refresh"
+msgstr "إيقاف تشغيل تحديث دليل البرامج الإلكترونية"
+
+msgid "Stop running refresh"
+msgstr "إيقاف تشغيل التحديث"
+
+msgid ""
+"There is still a refresh running. The Operation isn't allowed at this moment."
+msgstr "لا يزال هناك تحديثات قيد التشغيل. العملية غير مسموح بها في هذه اللحظة."
+
+msgid ""
+"This is the duration each service/channel will stay active during a refresh."
+msgstr "هذه هي مدة كل خدمة/القناة ستبقى نشطة أثناء التحديث."
+
+msgid ""
+"This setting controls whether or not an informational message will be shown "
+"at start and completion of refresh."
+msgstr ""
+"يتحكم في إعداد ما إذا كان سيظهر رسالة معلوماتية في البدء والانتهاء من التحديث."
+
+msgid ""
+"This setting controls whether or not the refresh will be initiated even "
+"though the receiver is active (either not in standby or currently recording)."
+msgstr ""
+"يتحكم في إعداد في ما إذا كان سيتم بدء التحديث أم لا على الرغم من أن جهاز "
+"الاستقبال نشط (إما في وضع الاستعداد أو في وضع التسجيل حاليا)."
+
+msgid ""
+"This setting controls whether the receiver should be set to standby after "
+"refresh is completed."
+msgstr ""
+"يتحكم في إعداد ما إذا كان يجب تعيين المتلقي إلى وضع الاستعداد بعد اكتمال "
+"التحديث."
+
+msgid ""
+"To apply your Changes the GUI has to be restarted.\n"
+"Do you want to restart the GUI now?"
+msgstr ""
+"لتطبيق التغييرات الخاصة بك يجب إعادة تشغيل واجهة المستخدم الرسومية.\n"
+"هل تريد إعادة تشغيل واجهة المستخدم الرسومية الآن؟"
+
+msgid ""
+"Unless this is enabled, EPGRefresh won't automatically run but needs to be "
+"explicitly started by the yellow button in this menu."
+msgstr ""
+"ما لم يتم تمكين ذلك، لن يتم تشغيل تحديث دليل البرامج الإلكتروني تلقائيًا ولكن "
+"يجب أن يتم تشغيله بشكل صريح بواسطة الزر الأصفر في هذه القائمة."
+
+msgid "Version"
+msgstr "الإصدار"
+
+msgid "Wake up from standby for EPG refresh."
+msgstr "عند تشغيل الجهاز سيبدء تحديث دليل البرامج الإلكتروني."
+
+msgid "Yes"
+msgstr "نعم"
+
+msgid "add to EPGRefresh"
+msgstr "إضافة إلى تحديث دليل البرامج الإلكترونية"
+
+msgid "never"
+msgstr "أبدا"
+
+msgid "EPGRefresh"
+msgstr "تحديث دليل البرامج الإلكترونية"
