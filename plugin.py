@@ -157,6 +157,11 @@ class Series2FolderActionsBase(object):
         self.conf_striprepeattags = config.plugins.seriestofolder.striprepeattags.value
         self.conf_repeatstr = config.plugins.seriestofolder.repeatstr.value
 
+        # Update rootdir in case defaultMoviePath changes during
+        # the lifetime of a persistent instance
+
+        self.rootdir = defaultMoviePath()
+
         # Selection if called on a specific recording
         self.moveSelection = None
 
