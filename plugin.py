@@ -254,10 +254,10 @@ class Series2FolderActionsBase(object):
         base1, ext1 = splitext(f)
         if ext1 in self.TSEXTS:
             base2, ext2 = splitext(base1)
-	    if base2[-4:-3] == '_' and base2[-3:].isdigit():
+            if base2[-4:-3] == '_' and base2[-3:].isdigit():
                 base2 = base2[0:-4]
             return base2 + suffix + ext2 + ext1
-	if base1[-4:-3] == '_' and base1[-3:].isdigit():
+        if base1[-4:-3] == '_' and base1[-3:].isdigit():
             base1 = base1[0:-4]
         return base1 + suffix + ext1
 
