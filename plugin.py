@@ -7,7 +7,7 @@ an option to do the processing automatically in the background.
 Mike Griffin  8/02/2015
 '''
 
-__version__ = "1.8"
+__version__ = "1.9"
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
@@ -46,11 +46,11 @@ def menu(session, service, **kwargs):
 
 def buttonSeries2Folder(session, service, **kwargs):
     actions = Series2FolderActions(session)
-    actions.doMoves()
+    actions.doMoves(service)
 
 def buttonSelSeries2Folder(session, service, **kwargs):
     actions = Series2FolderActions(session)
-    actions.doMoves(service)
+    actions.doMoves(service, selectedOnly=True)
 
 def autoSeries2Folder(reason, session, **kwargs):
     global _autoSeries2Folder
@@ -148,7 +148,7 @@ class Series2FolderActionsBase(object):
         self.moves = []
         self.errMess = []
 
-    def prepare(self, service):
+    def prepare(self, service, selectedOnly=False):
         # Get local copies of config variables in case they change during a run
         self.conf_autofolder = config.plugins.seriestofolder.autofolder.value
         self.conf_movies = config.plugins.seriestofolder.movies.value
@@ -156,6 +156,11 @@ class Series2FolderActionsBase(object):
         self.conf_portablenames = config.plugins.seriestofolder.portablenames.value
         self.conf_striprepeattags = config.plugins.seriestofolder.striprepeattags.value
         self.conf_repeatstr = config.plugins.seriestofolder.repeatstr.value
+
+        # Update rootdir in case defaultMoviePath changes during
+        # the lifetime of a persistent instance
+
+        self.rootdir = defaultMoviePath()
 
         # Selection if called on a specific recording
         self.moveSelection = None
@@ -168,13 +173,14 @@ class Series2FolderActionsBase(object):
         self.errMess = []
 
         if service is not None:
-                dir, fullname = splitpath(service.getPath())
-                if dir + '/' == self.rootdir and fullname:
-                    showname, __, date_time, err = self.getShowInfo(self.rootdir, fullname)
-                    if showname:
-                        self.moveSelection = self.cleanName(self.stripRepeat(showname))
-                    elif err:
-                        self.errMess.append(err)
+            dir, fullname = splitpath(service.getPath())
+            self.rootdir = dir
+            if fullname and selectedOnly:
+                showname, __, date_time, err = self.getShowInfo(self.rootdir, fullname)
+                if showname:
+                    self.moveSelection = self.cleanName(self.stripRepeat(showname))
+                elif err:
+                    self.errMess.append(err)
 
         # Full pathnames of current recordings' .ts files
         self.isRecording = set([timer.Filename + self.TS for timer in self.session.nav.RecordTimer.timer_list if timer.state in (timer.StatePrepared, timer.StateRunning) and not timer.justplay and hasattr(timer, "Filename")])
@@ -254,10 +260,10 @@ class Series2FolderActionsBase(object):
         base1, ext1 = splitext(f)
         if ext1 in self.TSEXTS:
             base2, ext2 = splitext(base1)
-	    if base2[-4:-3] == '_' and base2[-3:].isdigit():
+            if base2[-4:-3] == '_' and base2[-3:].isdigit():
                 base2 = base2[0:-4]
             return base2 + suffix + ext2 + ext1
-	if base1[-4:-3] == '_' and base1[-3:].isdigit():
+        if base1[-4:-3] == '_' and base1[-3:].isdigit():
             base1 = base1[0:-4]
         return base1 + suffix + ext1
 
@@ -400,7 +406,7 @@ class Series2FolderActions(Series2FolderActionsBase):
     def __init__(self, session):
         super(Series2FolderActions, self).__init__(session)
 
-    def doMoves(self, service=None):
+    def doMoves(self, service=None, selectedOnly=False):
 
         if Screens.Standby.inTryQuitMainloop:
             self.MsgBox(_("Your %s %s is trying to shut down. No recordings moved.") % (getMachineBrand(), getMachineName()), timeout=10)
@@ -414,7 +420,7 @@ class Series2FolderActions(Series2FolderActionsBase):
             self.MsgBox(_("Series to Folder is already running in the background."), timeout=10)
             return
 
-        self.prepare(service)
+        self.prepare(service, selectedOnly=selectedOnly)
 
         try:
             contents = os.listdir(self.rootdir)
@@ -575,15 +581,18 @@ class Series2FolderAutoActions(Series2FolderActionsBase):
 class Series2Folder(ChoiceBox):
     def __init__(self, session, service):
         list = [
-            (_("Move series recordings to folders"), "CALLFUNC", self.doMoves),
-            (_("Move selected series recording to folder"), "CALLFUNC", self.doMoves, service),
+            (_("Move series recordings to folders"), "CALLFUNC", self.doMoves, service),
+            (_("Move selected series recording to folder"), "CALLFUNC", self.doMovesSel, service),
             (_("Configure move series recordings to folders"), "CALLFUNC", self.doConfig),
         ]
         super(Series2Folder, self).__init__(session, _("Series to Folder"), list=list, selection=0)
         self.actions = Series2FolderActions(session)
 
-    def doMoves(self, service):
-        self.actions.doMoves(service)
+    def doMovesSel(self, service):
+        self.doMoves(service, selectedOnly=True)
+
+    def doMoves(self, service, selectedOnly=False):
+        self.actions.doMoves(service, selectedOnly)
         self.close()
 
     def doConfig(self, arg):
