@@ -11,6 +11,7 @@ from Components.Sources.StaticText import StaticText
 from enigma import iPlayableService, iServiceInformation, eTimer, getDesktop
 from Plugins.Plugin import PluginDescriptor
 from Tools import Notifications
+from . import _
 import os
 
 from boxbranding import getImageDistro, getBoxType
