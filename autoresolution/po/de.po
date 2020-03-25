@@ -1,71 +1,98 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Automatic Screen Resolution V. 0.1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: \n"
-"Last-Translator: JuSt611 <Software@Strasdas.de>\n"
-"Language-Team: JuSt611\n"
-"Language: \n"
+"Project-Id-Version: \n"
+"PO-Revision-Date: 2020-03-24 00:58+0100\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: _(\n"
-"X-Poedit-Basepath: .\n"
-"X-Poedit-Language: German\n"
-"X-Poedit-Country: GERMANY\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: ../src\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: Pike_Bishop <alfredzngr023@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
+
+msgid "Alternative resolution when native not supported"
+msgstr "Alternative Auflösung wenn nativ nicht unterstützt wird"
+
+msgid "Ask before changing videomode"
+msgstr "Vor Wechsel des Videomodus nachfragen"
+
+msgid "Auto frame rate (refresh need 'multi')"
+msgstr "Auto Bildwiederholrate (refresh need 'multi')"
 
 msgid "Autoresolution"
-msgstr "Autoresolution"
+msgstr "Auto-Auflösung"
 
-#, python-format
 msgid ""
 "Autoresolution Plugin Testmode:\n"
 "Is %s OK?"
 msgstr ""
-"Autoresolution Plugin Testmodus:\n"
-"Ist %s OK?"
+"Auto-Auflösung Testmodus:\n"
+"ist %s OK ?"
 
 msgid "Autoresolution Switch"
-msgstr "Autoresolution Umschaltung"
+msgstr "Auto-Auflösung Wechsel"
 
 msgid "Autoresolution is not working in Scart/DVI-PC Mode"
-msgstr "Autoresolution läuft nicht im Scart/DVI-PC Modus"
-
-msgid "Autoresolution settings"
-msgstr "Autoresolution Einstellungen"
+msgstr "Auto-Auflösung im Scart/DVI-PC Modus nicht möglich"
 
 msgid "Autoresolution videomode setup"
-msgstr "Autoresolution Videomodus einstellen"
+msgstr "Auto-Auflösung Videomodus Einstellungen"
 
 msgid "Cancel"
 msgstr "Abbrechen"
+
+msgid ""
+"Changing framerate for current service?\n"
+"Current framerate: %s\n"
+"New framerate: %s\n"
+msgstr ""
+"Bildwiederholrate wechseln für aktuelles Programm ?\n"
+"Aktuelle Bildwiederholrate: %s\n"
+"Neue Bildwiederholrate: %s\n"
 
 msgid "Deinterlacer mode for interlaced content"
 msgstr "Deinterlacer Modus für interlaced Inhalt"
 
 msgid "Deinterlacer mode for progressive content"
-msgstr "Deinterlacer Modus für progressive Inhalt"
+msgstr "Deinterlacer Modus für progressiven Inhalt"
 
 msgid "Delay x seconds after service started"
-msgstr "Verzögerung von x Sekunden nach Umschaltung"
+msgstr "Verzögere x Sekunden nach der Umschaltung"
 
 msgid "Enable 1080p24 Mode"
-msgstr "Modus 1080p24 aktivieren"
+msgstr "Aktiviere 1080p24 Modus"
 
 msgid "Enable 1080p25 Mode"
-msgstr "Modus 1080p25 aktivieren"
+msgstr "Aktiviere 1080p25 Modus"
 
 msgid "Enable 1080p30 Mode"
-msgstr "Modus 1080p30 aktivieren"
+msgstr "Aktiviere 1080p30 Modus"
+
+msgid "Enable 2160p24 Mode"
+msgstr "Aktiviere 2160p24 Modus"
+
+msgid "Enable 2160p25 Mode"
+msgstr "Aktiviere 2160p25 Modus"
+
+msgid "Enable 2160p30 Mode"
+msgstr "Aktiviere 2160p30 Modus"
 
 msgid "Enable 720p24 Mode"
-msgstr "Modus 720p24 aktivieren"
+msgstr "Aktiviere 720p24 Modus"
+
+msgid "Enable 720p50 Mode"
+msgstr "Aktiviere 720p50 Modus"
 
 msgid "Enable Autoresolution"
-msgstr "Autoresolution aktivieren"
+msgstr "Auto-Auflösung einschalten"
+
+msgid "Exit"
+msgstr "Beenden"
+
+msgid "FHD 50/60HZ Progressive Mode"
+msgstr "FHD 50/60HZ Progressiv Modus"
 
 msgid "HD Interlace Mode"
 msgstr "HD Interlace Modus"
@@ -73,17 +100,38 @@ msgstr "HD Interlace Modus"
 msgid "HD Progressive Mode"
 msgstr "HD Progressiv Modus"
 
+msgid "Lock timeout"
+msgstr "Kein Timeout"
+
+msgid "Manual resolution"
+msgstr "Manuelle Aufl."
+
+msgid "Manual resolution is not working in Scart/DVI-PC mode!"
+msgstr "Manuelle Auflösung im Scart/DVI-PC Modus nicht möglich !"
+
+msgid "Message timeout"
+msgstr "Timeout bei Nachrichten"
+
+msgid "Mode"
+msgstr "Modus"
+
 msgid "OK"
 msgstr "OK"
 
+msgid "Please select a resolution..."
+msgstr "Bitte die Auflösung wählen..."
+
 msgid "Refresh Rate"
-msgstr "Auflösung"
+msgstr "Bildwiederholrate"
+
+msgid "Return back without confirmation after 10 sec."
+msgstr "Ohne Bestätigung nach 10 Sekunden zurück."
 
 msgid "Running in testmode"
-msgstr "Läuft im Testbetrieb"
+msgstr "Läuft im Testmodus"
 
 msgid "SD 24HZ Progressive mode"
-msgstr ""
+msgstr "SD 24HZ Progressiv Modus"
 
 msgid "SD 25/50HZ Interlace Mode"
 msgstr "SD 25/50HZ Interlace Modus"
@@ -97,23 +145,53 @@ msgstr "SD 30/60HZ Interlace Modus"
 msgid "SD 30/60HZ Progressive Mode"
 msgstr "SD 30/60HZ Progressiv Modus"
 
+msgid "Show 'Manual resolution' in extensions menu"
+msgstr "Zeige 'Manuelle Aufl.' im Erweiterten Menü"
+
 msgid "Show info screen"
-msgstr "Info zeigen"
+msgstr "Zeige Info im Bild"
+
+msgid "This resolution is OK?"
+msgstr "Ist diese Auflösung ok ?"
+
+msgid "UHD Interlace Mode"
+msgstr "UHD Interlace Modus"
+
+msgid "UHD Progressive Mode"
+msgstr "UHD Progressiv Modus"
+
+msgid "Use 60HZ instead 30HZ"
+msgstr "Verwende 60HZ statt 30HZ"
+
+msgid "Video: "
+msgstr "Video: "
+
+msgid "Videocontent: %sx%s%s %sHZ"
+msgstr "Videoinhalt: %sx%s%s %sHZ"
+
+msgid "Videomode: %s"
+msgstr "Videomodus: %s"
+
+msgid "Videomode: %s %s %s"
+msgstr "Videomodus: %s %s %s"
 
 msgid "auto"
 msgstr "automatisch"
 
 msgid "bob"
-msgstr "bestmöglich"
+msgstr "bob"
 
 msgid "default"
 msgstr "Standard"
 
+msgid "manual"
+msgstr "Manuell"
+
 msgid "off"
-msgstr "aus"
+msgstr "Aus"
 
 msgid "on"
-msgstr "ein"
+msgstr "Ein"
 
 msgid "second"
 msgstr "Sekunde"
