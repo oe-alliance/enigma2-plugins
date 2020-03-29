@@ -7,7 +7,7 @@ an option to do the processing automatically in the background.
 Mike Griffin  8/02/2015
 '''
 
-__version__ = "1.9"
+__version__ = "1.10"
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
@@ -19,6 +19,7 @@ import Screens.Standby
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Pixmap import Pixmap
+from Components.Sources.Boolean import Boolean
 from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
 from Components.Task import job_manager as JobManager
@@ -26,7 +27,7 @@ from Components.UsageConfig import defaultMoviePath
 from Components.config import config, ConfigText, getConfigListEntry
 from Tools import Notifications
 import NavigationInstance
-from enigma import eTimer, iRecordableService, iPlayableService
+from enigma import eTimer, iRecordableService, iPlayableService, ePoint
 from time import time, localtime, strftime
 from boxbranding import getMachineBrand, getMachineName
 from collections import defaultdict
@@ -611,24 +612,28 @@ class Series2FolderConfig(ConfigListScreen, Screen):
     <widget name="description" position="20,e-106" size="600,66" font="Regular;18" foregroundColor="grey" halign="left" valign="top" />
     <ePixmap name="red" position="20,e-28" size="15,16" pixmap="skin_default/buttons/button_red.png" alphatest="blend" />
     <ePixmap name="green" position="170,e-28" size="15,16" pixmap="skin_default/buttons/button_green.png" alphatest="blend" />
-    <widget name="VKeyIcon" position="470,e-28" size="15,16" pixmap="skin_default/buttons/button_blue.png" alphatest="blend" />
+    <widget source="VKeyIcon" position="470,e-28" size="15,16" render="Pixmap" pixmap="skin_default/buttons/button_blue.png" alphatest="blend" zPosition="1" >
+        <convert type="ConditionalShowHide" />
+    </widget>
     <widget name="key_red" position="40,e-30" size="150,25" valign="top" halign="left" font="Regular;20" />
     <widget name="key_green" position="190,e-30" size="150,25" valign="top" halign="left" font="Regular;20" />
     <widget name="key_yellow" position="340,e-30" size="150,25" valign="top" halign="left" font="Regular;20" />
-    <widget name="key_blue" position="490,e-30" size="150,25" valign="top" halign="left" font="Regular;20" />
-</screen>"""
+    <widget source="VKeyIcon" position="490,e-30" size="150,25" render="FixedLabel" text="%s" valign="top" halign="left" font="Regular;20" >
+        <convert type="ConditionalShowHide" />
+    </widget>
+    <widget name="HelpWindow" conditional="HelpWindow" position="0,0" size="1,1" transparent="1" alphatest="on"/>
+</screen>""" % _("Keyboard")
 
     def __init__(self, session):
         self.session = session
         Screen.__init__(self, session)
         self["description"] = Label()
-        self["HelpWindow"] = Label()
         self["key_red"] = Label(_("Cancel"))
         self["key_green"] = Label(_("Save"))
         self["key_yellow"] = Label()
-        self["key_blue"] = Label(_("Keyboard"))
-        self["VKeyIcon"] = Pixmap()
+        self["VKeyIcon"] = Boolean(False)
         self.list = []
+        self.noShowHelp = True
 
         if self.__layoutFinished not in self.onLayoutFinish:
             self.onLayoutFinish.append(self.__layoutFinished)
@@ -698,27 +703,40 @@ class Series2FolderConfig(ConfigListScreen, Screen):
 
         self.createConfig(self["config"])
 
+        if self.noShowHelp:
+            self["HelpWindow"] = Label()
+
     def createConfig(self, configList):
-        list = [
+        list = []
+        disabled = []
+
+        def addConditional(cond, item):
+            (list if cond[1].value else disabled).append(item)
+
+        list += [
             self._confShowmovebutton,
             self._confShowselmovebutton,
             self._confAutofolder,
             self._confStripRepeats,
         ]
-        if self._confStripRepeats[1].value:
-            list.append(self._confRepeatStr)
+        addConditional(self._confStripRepeats, self._confRepeatStr)
         list += [
             self._confPortableNames,
             self._confMovies,
         ]
-        if self._confMovies[1].value:
-            list.append(self._confMoviesfolder)
+        addConditional(self._confMovies, self._confMoviesfolder)
         list.append(self._confAuto)
-        if self._confAuto[1].value:
-            list.append(self._confAutoNotifications)
+        addConditional(self._confAuto, self._confAutoNotifications)
+
         self.list = list
         configList.list = list
         configList.l.setList(list)
+
+        self.noShowHelp = False
+        for confItem in list + disabled:
+            if isinstance(confItem[1], ConfigText) and (not hasattr(confItem[1], "show_help") or confItem[1].show_help):
+                self.noShowHelp = True
+                break
 
     def updateConfig(self):
         currConf = self["config"].getCurrent()
@@ -727,6 +745,9 @@ class Series2FolderConfig(ConfigListScreen, Screen):
 
     def __layoutFinished(self):
         self.title += " v" + __version__
+        screen_size = self.session.desktop.size()
+        if self.noShowHelp:
+                self["HelpWindow"].instance.move(ePoint(screen_size.width(), screen_size.height()))
 
     def keyLeft(self):
         ConfigListScreen.keyLeft(self)

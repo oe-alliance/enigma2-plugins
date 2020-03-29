@@ -15,12 +15,21 @@ config.plugins.seriestofolder.autofolder = ConfigSelection([
     ("10", _("10 recordings")),
 ], default="2")
 config.plugins.seriestofolder.movies = ConfigEnableDisable(default=False)
-config.plugins.seriestofolder.moviesfolder = ConfigText(default="Movies", show_help=False)
+# Some images (e.g. OpenATV don't support a show_help parameter for ConfigText
+__defaultMoviesStr = "Movies"
+try:
+    config.plugins.seriestofolder.moviesfolder = ConfigText(default=__defaultMoviesStr, show_help=False)
+except TypeError:
+    config.plugins.seriestofolder.moviesfolder = ConfigText(default=__defaultMoviesStr)
 config.plugins.seriestofolder.portablenames = ConfigYesNo(default=True)
 config.plugins.seriestofolder.showmovebutton = ConfigYesNo(default=True)
 config.plugins.seriestofolder.showselmovebutton = ConfigYesNo(default=True)
 config.plugins.seriestofolder.striprepeattags = ConfigYesNo(default=False)
-config.plugins.seriestofolder.repeatstr = ConfigText(default="[R]", show_help=False)
+__defaultRepeatStr = "[R]"
+try:
+    config.plugins.seriestofolder.repeatstr = ConfigText(default=__defaultRepeatStr, show_help=False)
+except TypeError:
+    config.plugins.seriestofolder.repeatstr = ConfigText(default=__defaultRepeatStr)
 config.plugins.seriestofolder.auto = ConfigYesNo(default=False)
 config.plugins.seriestofolder.autonotifications = ConfigSelection([
     ("all", _("all")),
