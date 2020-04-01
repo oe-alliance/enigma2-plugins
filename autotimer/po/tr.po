@@ -864,7 +864,7 @@ msgstr ""
 "Bu çoğunlukla bir zevk meselesidir./nSihirbaz size "
 "seçenekleri bir araya getirir ve bir kerede daha küçük kümeler halinde sunar. Çoğunlukla "
 "bu eklenti veya uzman düzeyinde çok deneyimli olmayan kullanıcılara yöneliktir "
-"enigma2'nin özellikleri./n/n"Klasik" düzenleyiciye bir "
+"enigma2'nin özellikleri./n/nKlasik düzenleyiciye bir "
 "genel bakışta mevcut zamanlayıcı ve bu görünümü sihirbazda tercih ediyorsanız "
 "varsayılan düzenleyiciyi ayarlar iletişim kutusundan değiştirebilirsiniz."
 
