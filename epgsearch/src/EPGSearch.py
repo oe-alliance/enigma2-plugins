@@ -201,7 +201,9 @@ class EPGSearch(EPGSelection):
 
 	def __init__(self, session, *args, **kwargs):
 		Screen.__init__(self, session)
-		self.skinName = [self.skinName, "EPGSelection"]
+		if not isinstance(self.skinName, list):
+			self.skinName = [self.skinName]
+		self.skinName.append("EPGSelection")
 		if isinstance(self, HelpableScreen):
 			HelpableScreen.__init__(self)
 
@@ -876,7 +878,9 @@ class EPGSearchChannelSelection(SimpleChannelSelection):
 class EPGSearchEPGSelection(EPGSelection):
 	def __init__(self, session, ref, openPlugin, eventid=None):
 		EPGSelection.__init__(self, session, ref.toString(), eventid=eventid)
-		self.skinName = [self.skinName, "EPGSelection"]
+		if not isinstance(self.skinName, list):
+			self.skinName = [self.skinName]
+		self.skinName.append("EPGSelection")
 		self["key_green"].text = _("Search")
 		self.openPlugin = openPlugin
 
