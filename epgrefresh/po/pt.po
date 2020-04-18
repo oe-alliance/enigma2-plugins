@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: EPGRefresh Portuguese translation \n"
+"Project-Id-Version: EPGRefresh Portuguese translation\n"
 "POT-Creation-Date: 2014-04-12 10:30+CEST\n"
-"PO-Revision-Date: 2017-10-11 01:08+0100\n"
+"PO-Revision-Date: 2020-04-18 16:23+0100\n"
 "Language-Team: BH Team\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: Poedit 2.0.4\n"
-"Last-Translator: \n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: BH Team <nunigaia@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: pt\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -33,7 +33,7 @@ msgid ""
 "To load the Backupfile the GUI has to be restarted.\n"
 "Do you want to restart the GUI now?"
 msgstr ""
-"Para carregar o Backupfile o GUI tem de ser reiniciado.\n"
+"Para carregar o ficheiro de BackUp o GUI tem de ser reiniciado.\n"
 "Você quer reiniciar o GUI agora?"
 
 #: EPGBackupSupport.py:81
@@ -49,11 +49,8 @@ msgid "FILELIST_FORCED"
 msgstr "LISTA_DE_FICHEIROS_OBRIGATÓRIA"
 
 #: EPGRefresh.py:277
-msgid ""
-"There is still a refresh running. The Operation isn't allowed at this moment."
-msgstr ""
-"Há ainda uma atualização executando. A operação não é permitida neste "
-"momento."
+msgid "There is still a refresh running. The Operation isn't allowed at this moment."
+msgstr "Há ainda uma atualização em execução. A operação não é permitida neste momento."
 
 #: EPGRefresh.py:367
 msgid ""
@@ -61,7 +58,7 @@ msgid ""
 "Should AutoTimer be search for new matches?"
 msgstr ""
 "Atualização do EPG terminou.\n"
-"Deveria o AutoTimer pesquisar por correspondências novas?"
+"Deve o AutoTimer pesquisar por correspondências novas?"
 
 #: EPGRefresh.py:408
 msgid "AutoTimer failed with error %s"
@@ -91,7 +88,7 @@ msgstr "%d mais serviços"
 
 #: EPGRefresh.py:547
 msgid "Following Services have to be scanned:"
-msgstr "Os seguintes serviços tem de ser pesquisados:"
+msgstr "Os seguintes serviços têm de ser pesquisados:"
 
 #: EPGRefreshChannelEditor.py:59
 msgid "EPGRefresh Services"
@@ -103,7 +100,7 @@ msgstr "Canais"
 
 #: EPGRefreshChannelEditor.py:70
 msgid "Bouquets"
-msgstr "Bouquets"
+msgstr "Buquês"
 
 #: EPGRefreshChannelEditor.py:80 EPGRefreshConfiguration.py:108
 msgid "OK"
@@ -111,7 +108,7 @@ msgstr "OK"
 
 #: EPGRefreshChannelEditor.py:81
 msgid "Delete"
-msgstr "apagar"
+msgstr "Apagar"
 
 #: EPGRefreshChannelEditor.py:82
 msgid "New"
@@ -127,7 +124,7 @@ msgstr "A editar"
 
 #: EPGRefreshChannelEditor.py:129 EPGRefreshChannelEditor.py:177
 msgid "Refreshing"
-msgstr "A actualizar"
+msgstr "A atualizar"
 
 #: EPGRefreshChannelEditor.py:164
 msgid "Select channel to refresh"
@@ -187,11 +184,11 @@ msgstr "Mostrar último EPGRefresh - Tempo"
 
 #: EPGRefreshConfiguration.py:128
 msgid "Move page up"
-msgstr "Mover página para cima"
+msgstr "Mover página acima"
 
 #: EPGRefreshConfiguration.py:129
 msgid "Move page down"
-msgstr "Mover página para baixo"
+msgstr "Mover página abaixo"
 
 #: EPGRefreshConfiguration.py:139
 msgid "Close and forget changes"
@@ -206,69 +203,44 @@ msgid "Refresh EPG automatically"
 msgstr "Atualizar automaticamente o EPG"
 
 #: EPGRefreshConfiguration.py:156
-msgid ""
-"Unless this is enabled, EPGRefresh won't automatically run but needs to be "
-"explicitly started by the yellow button in this menu."
-msgstr ""
-"Se isso não for habilitado, EPGRefresh não será executado automaticamente, "
-"mas precisa ser explicitamente indicado pelo botão amarelo neste menu."
+msgid "Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu."
+msgstr "A não ser que esteja habilitado, o EPGRefresh não será executado automaticamente, mas precisa ser explicitamente iniciado pelo botão amarelo neste menu."
 
 #: EPGRefreshConfiguration.py:158
 msgid "Duration to stay on service (seconds)"
 msgstr "Duração de permanecer no serviço (segundos)"
 
 #: EPGRefreshConfiguration.py:158
-msgid ""
-"This is the duration each service/channel will stay active during a refresh."
-msgstr ""
-"Esta é a duração de cada serviço / canal irá permanecer ativo durante uma "
-"atualização."
+msgid "This is the duration each service/channel will stay active during a refresh."
+msgstr "Esta é a duração que cada serviço / canal irá permanecer ativo durante uma atualização."
 
 #: EPGRefreshConfiguration.py:159
-msgid ""
-"An automated refresh will start after this time of day, but before the time "
-"specified in next setting."
-msgstr ""
-"Uma atualização automática iniciará após esta hora do dia, mas antes do "
-"tempo especificado na seguinte configuração."
+msgid "An automated refresh will start after this time of day, but before the time specified in next setting."
+msgstr "Uma atualização automática iniciará após esta hora do dia, mas antes do tempo especificado na seguinte configuração."
 
 #: EPGRefreshConfiguration.py:159
 msgid "EPG refresh auto-start earliest (hh:mm)"
 msgstr "EPG atualizar início automático recente (hh: mm)"
 
 #: EPGRefreshConfiguration.py:160
-msgid ""
-"An automated refresh will start before this time of day, but after the time "
-"specified in previous setting."
-msgstr ""
-"Uma atualização automatizada vai começar antes deste horário do dia, mas "
-"após o tempo especificado na configuração anterior."
+msgid "An automated refresh will start before this time of day, but after the time specified in previous setting."
+msgstr "Uma atualização automatizada vai começar antes deste horário do dia, mas após o tempo especificado na configuração anterior."
 
 #: EPGRefreshConfiguration.py:160
 msgid "EPG refresh auto-start latest (hh:mm)"
-msgstr "EPG atualizar início automático último (hh: mm)"
+msgstr "Última atualização do EPG automática (hh: mm)"
 
 #: EPGRefreshConfiguration.py:161
 msgid "Delay if not in standby (minutes)"
 msgstr "Atraso se não estiver no modo Standby (minutos)"
 
 #: EPGRefreshConfiguration.py:161
-msgid ""
-"If the receiver currently isn't in standby, this is the duration which "
-"EPGRefresh will wait before retry."
-msgstr ""
-"Se o recetor no momento não está em Standby, este é o tempo em que "
-"EPGRefresh irá esperar antes da nova tentativa."
+msgid "If the receiver currently isn't in standby, this is the duration which EPGRefresh will wait before retry."
+msgstr "Se o recetor no momento não está em Standby, este é o tempo em que EPGRefresh irá esperar antes da nova tentativa."
 
 #: EPGRefreshConfiguration.py:163
-msgid ""
-"If you want to refresh the EPG in background, you can choose the method "
-"which best suits your needs here, e.g. hidden, fake reocrding or regular "
-"Picture in Picture."
-msgstr ""
-"Se quiser atualizar o EPG em segundo plano, pode escolher o método que "
-"melhor se adapte às suas necessidades, por exemplo, oculto, gravação falso "
-"ou PiP."
+msgid "If you want to refresh the EPG in background, you can choose the method which best suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture."
+msgstr "Se quiser atualizar o EPG em segundo plano, pode escolher o método que melhor se adapte às suas necessidades, por exemplo, oculto, gravação simulada ou PiP."
 
 #: EPGRefreshConfiguration.py:163
 msgid "Refresh EPG using"
@@ -283,58 +255,40 @@ msgid "Show Advanced Options"
 msgstr "Mostrar opções avançadas"
 
 #: EPGRefreshConfiguration.py:167
-msgid ""
-"Should protected services be skipped if refresh was started in interactive-"
-"mode?"
-msgstr ""
-"Serviços protegidos devem ser ignorados se a atualização for iniciada no "
-"modo interativo?"
+msgid "Should protected services be skipped if refresh was started in interactive-mode?"
+msgstr "Serviços protegidos devem ser ignorados se a atualização for iniciada no modo interativo?"
 
 #: EPGRefreshConfiguration.py:167
 msgid "Skip protected Services"
 msgstr "Saltar serviços protegidos"
 
 #: EPGRefreshConfiguration.py:168
-msgid ""
-"Enable this to be able to access the EPGRefresh configuration from within "
-"the extension menu."
-msgstr ""
-"Habilitar isto para que seja capaz de aceder à configuração de EPGRefresh "
-"através do menu extensões."
+msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
+msgstr "Habilitar isto para que seja capaz de aceder à configuração de EPGRefresh através do menu extensões."
 
 #: EPGRefreshConfiguration.py:168
 msgid "Show Setup in extension menu"
-msgstr "Mostrar Definições no menu de extensão"
+msgstr "Mostrar definições no menu de extensões"
 
 #: EPGRefreshConfiguration.py:169
-msgid ""
-"Enable this to be able to start the EPGRefresh from within the extension "
-"menu."
+msgid "Enable this to be able to start the EPGRefresh from within the extension menu."
 msgstr "Habilitar isto para iniciar o EPGRefresh através do menu extensões."
 
 #: EPGRefreshConfiguration.py:169
 msgid "Show 'EPGRefresh Start now' in extension menu."
-msgstr "Mostrar 'iniciar agora EPGRefresh' no menu de extensões"
+msgstr "Mostrar 'iniciar agora EPGRefresh' em Extensões"
 
 #: EPGRefreshConfiguration.py:170
 msgid "Show popup when refresh starts and ends."
-msgstr "Mostrar popup quando atualização começar e terminar"
+msgstr "Mostrar popup quando a atualização iniciar e terminar"
 
 #: EPGRefreshConfiguration.py:170
-msgid ""
-"This setting controls whether or not an informational message will be shown "
-"at start and completion of refresh."
-msgstr ""
-"Esta configuração controla se ou não uma mensagem informativa será exibida "
-"no início e conclusão da atualização."
+msgid "This setting controls whether or not an informational message will be shown at start and completion of refresh."
+msgstr "Esta configuração controla, se ou não, uma mensagem informativa será exibida no início e conclusão da atualização."
 
 #: EPGRefreshConfiguration.py:171
-msgid ""
-"If this is enabled, the plugin will wake up the receiver from standby if "
-"possible. Otherwise it needs to be switched on already."
-msgstr ""
-"Se essa opção estiver habilitada, o plugin vai acordar o recetor do modo de "
-"espera se possível. Caso contrário, ele precisa ser ligado já."
+msgid "If this is enabled, the plugin will wake up the receiver from standby if possible. Otherwise it needs to be switched on already."
+msgstr "Se essa opção estiver habilitada, o plugin vai acordar o recetor do modo de espera se possível. Caso contrário, ele precisa de estar já ligado."
 
 #: EPGRefreshConfiguration.py:171
 msgid "Wake up from standby for EPG refresh."
@@ -342,49 +296,31 @@ msgstr "Acordar do modo de espera para atualização do EPG"
 
 #: EPGRefreshConfiguration.py:172
 msgid "Force scan even if receiver is in use."
-msgstr "Forçar a verificação, mesmo se o receptor estiver em uso"
+msgstr "Forçar a procura, mesmo que o receptor esteja em uso"
 
 #: EPGRefreshConfiguration.py:172
-msgid ""
-"This setting controls whether or not the refresh will be initiated even "
-"though the receiver is active (either not in standby or currently recording)."
-msgstr ""
-"Esta configuração controla se ou não a atualização será iniciada mesmo que o "
-"recetor esteja ativo (ou não em modo de espera ou a gravar)."
+msgid "This setting controls whether or not the refresh will be initiated even though the receiver is active (either not in standby or currently recording)."
+msgstr "Esta configuração controla, se ou não, a atualização será iniciada mesmo que o recetor esteja ativo (ou não, em modo de espera ou a gravar)."
 
 #: EPGRefreshConfiguration.py:173
 msgid "Shutdown after EPG refresh."
 msgstr "Desligar após atualização do EPG"
 
 #: EPGRefreshConfiguration.py:173
-msgid ""
-"This setting controls whether the receiver should be set to standby after "
-"refresh is completed."
-msgstr ""
-"Esta configuração controla se o receptor deve ser definido como modo de "
-"espera após a atualização estar concluída."
+msgid "This setting controls whether the receiver should be set to standby after refresh is completed."
+msgstr "Esta configuração controla se o receptor deve ser definido como modo de espera após a atualização estar concluída."
 
 #: EPGRefreshConfiguration.py:178
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
-msgstr ""
-"Ampliar a lista de serviços para atualizar por aqueles que os seus "
-"AutoTimers usam?"
+msgstr "Ampliar a lista de serviços para atualizar por aqueles que os seus AutoTimers usam?"
 
 #: EPGRefreshConfiguration.py:178
 msgid "Inherit Services from AutoTimer"
 msgstr "Herdar de serviços de AutoTimer"
 
 #: EPGRefreshConfiguration.py:180
-msgid ""
-"After a successful refresh the AutoTimer will automatically search for new "
-"matches if this is enabled. The options 'Ask*' has only affect on a manually "
-"refresh. If EPG-Refresh was called in background the default-Answer will be "
-"executed!"
-msgstr ""
-"Após uma atualização bem-sucedida o AutoTimer irá automaticamente procurar "
-"por novas correspondências se estiver habilitado. As opções 'Perguntar *' "
-"apenas afetam a atualização manual. Se o EPG-Refresh foi chamado em segundo "
-"plano a resposta-padrão será executada!"
+msgid "After a successful refresh the AutoTimer will automatically search for new matches if this is enabled. The options 'Ask*' has only affect on a manually refresh. If EPG-Refresh was called in background the default-Answer will be executed!"
+msgstr "Após uma atualização bem-sucedida o AutoTimer irá automaticamente procurar por novas correspondências se estiver habilitado. As opções 'Perguntar *' apenas afetam a atualização manual. Se o EPG-Refresh foi chamado em segundo plano a resposta-padrão será executada!"
 
 #: EPGRefreshConfiguration.py:180
 msgid "Run AutoTimer after refresh"
@@ -460,7 +396,7 @@ msgstr "PIP-Imagem na Imagem (escondido)"
 
 #: plugin.py:59
 msgid "Fake recording"
-msgstr "Gravação falsa"
+msgstr "Gravação simulada"
 
 #: plugin.py:102
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
@@ -509,3 +445,14 @@ msgstr "adicionar ao EPGRefresh"
 #: plugin.py:292
 msgid "PLUGINNAME_EPGRefresh"
 msgstr "PLUGINNAME_EPGRefresh"
+
+#: plugin.py:168
+msgid "Show Setup in plugins"
+msgstr "Mostrar configuração em plugins"
+
+msgid "Enable this to be able to access the EPGRefresh configuration from within the plugin menu."
+msgstr "Habilitar isto para que seja capaz de aceder à configuração de EPGRefresh através do menu extensões."
+
+#: plugin.py:
+msgid "Close"
+msgstr "Fechar"
