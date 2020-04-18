@@ -330,6 +330,8 @@ epgrefresh/meta/Makefile
 epgrefresh/po/Makefile
 epgrefresh/src/Makefile
 epgrefresh/src/localehelp/Makefile
+epgrefresh/src/localehelp/de/Makefile
+epgrefresh/src/localehelp/pt/Makefile
 
 esame/Makefile
 esame/meta/Makefile
