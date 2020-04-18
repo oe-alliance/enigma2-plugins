@@ -1,0 +1,14 @@
+<mphelp skin="EPGRefreshHelp" caption="Ajuda do EPGRefresh">
+	<page title="Bem Vindo ao EPG Refresh">
+		<text value="  BEM VINDO AO EPG REFRESH/n/n/n    Este ecrã de ajuda deve dar-lhe umas dicas rápidas em tudo o que o EPGRefresh tem para lhe oferecer.\n\n    Pode cancelá-lo a qualquer momento, pressionando a tecla VERMELHA ou EXIT no telecomando ou trazê-lo de volta mais à frente, pressionando a tecla HELP do telecomando no menu de configuração (pode fazê-lo a qualquer momento).\n\n    É recomendável, considerar perder uns minutos e ler estas páginas de ajuda.\n\n\n\nTecla AMARELA ( Página anterior ) e tecla AZUL ( Página seguinte )"/>
+	</page>
+	<page title="O Menu de Configuração">
+		<text value="  MENU DE CONFIGURAÇÂO/n/n/n    Este é o ponto de entrada do EPGRefresh. A partir deste menu pode configurar todos os aspetos do plugin.\n\n    Cada opção de configuração tem uma explicação que deve ajudá-lo a entender melhor os seus efeitos. Por favor, lê-los, podem ajudá-lo a economizar muito tempo.\n\n    Usando a tecla AMARELA, pode iniciar uma atualização manualmente. Também poderá habilitar as funcionalidades no menu Extensão.\n\n    A tecla INFO exibe a data em que a última atualização foi concluída com sucesso.\n\n    Também encontrará um Menu de Extensão-Entrada para impedir uma atualização em execução.\n\n\n\nTecla AMARELA ( Página anterior ) e tecla AZUL ( Página seguinte )"/>
+	</page>
+	<page title="Editar a lista de Serviços">
+		<text value="  EDITAR A LISTA DE SERVIÇOS/n/n/n    Enquanto o ecrã não o exibir imediatamente, ele tem muito a oferecer.\n\n    A linha superior permite que escolha entre o editor de canais e buquês e as seguintes linhas contêm os canais / buquê que escolheu para refrescar.\n\n    Pode usar a tecla AZUL para adicionar uma nova entrada para a lista, ou a tecla AMARELA para remover uma lista já existente.\n\n    Para a maioria dos utilizadores deve ser suficiente para adicionar o buquê 'Favoritos', selecionar 'buquês' na primeira linha e adicioná-lo(s) usando a tecla AZUL.\n\n\n\nTecla AMARELA ( Página anterior ) e tecla AZUL ( Página seguinte )"/>
+	</page>
+	<page title="Parabéns">
+		<text value="  PARABÉNS/n/n/n    Como NOTA FINAL, quero sugerir que este plugin nada fará sem a sua ajuda.\n\n    Então, se quiser que a atualização seja efetuada automaticamente em segundo plano, necessita de configurar o plugin.\n\n    Isto não foi feito para lhe causar qualquer inconveniente, mas sim para lhe dar a liberdade de escolha.\n\n\n\nTecla AMARELA ( Página anterior )"/>
+	</page>
+</mphelp>
