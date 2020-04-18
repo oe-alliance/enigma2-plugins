@@ -1,1 +1,1 @@
-SUBDIRS = de pt
+SUBDIRS = de it pt
