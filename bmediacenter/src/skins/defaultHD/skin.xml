@@ -1,7 +1,4 @@
 <skin>
-	<output id="0">
-		<resolution xres="1280" yres="720" bpp="32"/>
-	</output>
 <!--DMC Main Menu-->
 	<screen name="DMC_MainMenu" position="0,0" size="1280,720" title="Home" flags="wfNoBorder" backgroundColor="#000">
 		<ePixmap name="mb_bg" position="0,0" zPosition="0" size="1280,720" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/background.png"/>
