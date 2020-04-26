@@ -1,0 +1,437 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: EPGSearch enigma2 plugin portuguese trasnlation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-07 12:46+0200\n"
+"PO-Revision-Date: 2020-04-22 14:21+0100\n"
+"Language-Team: BH team\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"X-Poedit-Basepath: ..\n"
+"Last-Translator: BH Team <nunigaia@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: pt\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: src/EPGSearch.py:141
+msgid "%e/%m, %H:%M"
+msgstr "%e/%m, %H:%M"
+
+#: src/EPGSearch.py:180
+msgid "Stream"
+msgstr "Transmissão"
+
+#: src/EPGSearch.py:183
+msgid "DVB-T"
+msgstr "DVB-T"
+
+#: src/EPGSearch.py:185
+msgid "DVB-C"
+msgstr "DVB-C"
+
+#: src/EPGSearch.py:213
+msgid "New Search"
+msgstr "Nova Busca"
+
+#: src/EPGSearch.py:214
+msgid "Add AutoTimer"
+msgstr "Adic. AutoTimer"
+
+#: src/EPGSearch.py:234
+msgid "IMDb Search"
+msgstr "IMDb Procura"
+
+#: src/EPGSearch.py:235
+msgid "Add Timer"
+msgstr "Adicionar Timer"
+
+#: src/EPGSearch.py:241
+msgid "Close dialog"
+msgstr "Fechar diálogo"
+
+#: src/EPGSearch.py:247
+msgid "Exit EPG Search"
+msgstr "Sair da busca EPG"
+
+#: src/EPGSearch.py:248
+msgid "Zap to channel"
+msgstr "Zap para o canal"
+
+#: src/EPGSearch.py:249 src/EPGSearch.py:274 src/EPGSearch.py:275
+#: src/EPGSearch.py:276
+msgid "Show detailed event information"
+msgstr "Mostrar informações detalhadas do evento"
+
+#: src/EPGSearch.py:254
+msgid "IMDB search for highlighted event"
+msgstr "IMDB busca evento em destaque"
+
+#: src/EPGSearch.py:255
+msgid "Add/remove/edit timer for highlighted event"
+msgstr "Adicionar/remover/editar temporizador para evento em destaque"
+
+#: src/EPGSearch.py:256
+msgid "Enter new search"
+msgstr "Insira nova pesquisa"
+
+#: src/EPGSearch.py:257 src/EPGSearch.py:441
+msgid "Show search history"
+msgstr "Mostrar histórico de pesquisa"
+
+#: src/EPGSearch.py:258
+msgid "Add an AutoTimer for highlighted event"
+msgstr "Adicione um AutoTimer para evento em destaque"
+
+#: src/EPGSearch.py:259
+msgid "Show AutoTimer list"
+msgstr "Mostrar lista AutoTimer"
+
+#: src/EPGSearch.py:264
+msgid "Add a record timer for highlighted event"
+msgstr ""
+"Adicionar Timer de gravação\n"
+" para este evento"
+
+#: src/EPGSearch.py:265
+msgid "Add a zap timer for highlighted event"
+msgstr "Adcionar Timer ZAP para este evento"
+
+#: src/EPGSearch.py:270 src/EPGSearch.py:273 src/EPGSearch.py:283
+msgid "Move down a page"
+msgstr "Mover uma página para baixo"
+
+#: src/EPGSearch.py:271 src/EPGSearch.py:272 src/EPGSearch.py:282
+msgid "Move up a page"
+msgstr "Mover uma página para cima"
+
+#: src/EPGSearch.py:277
+msgid "Setup menu"
+msgstr "Menu de Definições"
+
+#: src/EPGSearch.py:284
+msgid "Move up"
+msgstr "Mover para cima"
+
+#: src/EPGSearch.py:285
+msgid "Move down"
+msgstr "Mover para baixo"
+
+#: src/EPGSearch.py:321
+msgid "EPG Search"
+msgstr "EPG Procura"
+
+#: src/EPGSearch.py:435
+msgid "Enter text to search for"
+msgstr "Digite o texto para procurar"
+
+#: src/EPGSearch.py:439
+msgid "Import from Timer"
+msgstr "Importar de Timer"
+
+#: src/EPGSearch.py:440
+msgid "Import from EPG"
+msgstr "Importar de EPG"
+
+#: src/EPGSearch.py:446
+msgid "Import from AutoTimer"
+msgstr "Importar de AutoTimer"
+
+#: src/EPGSearch.py:447
+msgid "Save search as AutoTimer"
+msgstr "Salvar pesquisa como AutoTimer"
+
+#: src/EPGSearch.py:450
+msgid "Open selected in IMDb"
+msgstr "Abrir o IMDb selecionado"
+
+#: src/EPGSearch.py:451 src/EPGSearch.py:573
+msgid "Setup"
+msgstr "Definições"
+
+#: src/EPGSearch.py:453
+msgid "EPG Search setup"
+msgstr "Configuração de pesquisa Epg"
+
+#: src/EPGSearch.py:479
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "Não foi possível ler a lista de temporizador AutoTimer:% s"
+
+#: src/EPGSearch.py:485 src/EPGSearch.py:541
+msgid "Select text to search for"
+msgstr "Selecione texto para pesquisar"
+
+#: src/EPGSearch.py:543
+msgid "No history"
+msgstr "Sem histórico"
+
+#: src/EPGSearch.py:569
+msgid "All services"
+msgstr "Todos Serviços"
+
+#: src/EPGSearch.py:570
+msgid "All bouquets"
+msgstr "Todos os buquês"
+
+#: src/EPGSearch.py:571
+msgid "Current bouquet"
+msgstr "Buquê atual"
+
+#: src/EPGSearch.py:572
+msgid "Current service"
+msgstr "Serviço atual"
+
+#: src/EPGSearch.py:576
+msgid "Search in..."
+msgstr "Pesquise em..."
+
+#: src/EPGSearch.py:600
+msgid "Searching..."
+msgstr "A Procurar..."
+
+#: src/EPGSearch.py:800 src/EPGSearchSetup.py:145 src/__init__.py:184
+msgid "include"
+msgstr "incluir"
+
+#: src/EPGSearch.py:818 src/EPGSearchSetup.py:76
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/EPGSearch.py:819 src/EPGSearchSetup.py:77
+msgid "OK"
+msgstr "OK"
+
+#: src/EPGSearch.py:832
+msgid "Select a timer to search"
+msgstr "Selecionar um timer a procurar"
+
+#: src/EPGSearch.py:855
+msgid "Channel Selection"
+msgstr "Seleção de Canais"
+
+#: src/EPGSearch.py:877
+msgid "Search"
+msgstr "Procura"
+
+#: src/EPGSearchSetup.py:50
+msgid "EPGSearch Setup"
+msgstr "Configuração de Pesquisa EPG"
+
+#: src/EPGSearchSetup.py:89
+msgid "Search scope"
+msgstr "Abrangência da Pesquisa"
+
+#: src/EPGSearchSetup.py:89
+msgid ""
+"Control where to search in the EPG. When 'all bouquets' is set, all bouquets "
+"are searched, even if 'Enable multiple bouquets' is disabled."
+msgstr ""
+"Controle onde procurar no EPG. Quando 'todos os buquês' são definidos, todos "
+"os buquês são pesquisados, mesmo que 'Habilitar vários buquês' seja "
+"desativado."
+
+#: src/EPGSearchSetup.py:92
+msgid "Default scope when asked"
+msgstr "Escopo padrão quando solicitado"
+
+#: src/EPGSearchSetup.py:92
+msgid "Sets the default search scope when the user is asked."
+msgstr "Define o escopo de pesquisa padrão quando solicitado pelo utilizador."
+
+#: src/EPGSearchSetup.py:94
+msgid "Show orbital position"
+msgstr "Mostrar posição orbital"
+
+#: src/EPGSearchSetup.py:94
+msgid "Show satellite orbital positions in the search results."
+msgstr "Mostre posições orbitais via satélite nos resultados da pesquisa."
+
+#: src/EPGSearchSetup.py:96
+msgid "Search type"
+msgstr "Tipo de pesquisa"
+
+#: src/EPGSearchSetup.py:96
+msgid ""
+"Set type of match used to compare program titles with the search string."
+msgstr ""
+"Definir o tipo de correspondência usado para comparar títulos do programa "
+"com a seqüência de pesquisa."
+
+#: src/EPGSearchSetup.py:97
+msgid "Search strictness"
+msgstr "Pesquisa rigorosa"
+
+#: src/EPGSearchSetup.py:97
+msgid "Is the search case-sensitive or case-insensitive?"
+msgstr "A busca é sensível ao caso ou insensível ao caso?"
+
+#: src/EPGSearchSetup.py:98
+msgid "Show in plugin browser"
+msgstr "Visualizar o plugin no browser "
+
+#: src/EPGSearchSetup.py:98
+msgid ""
+"Enable this to allow access to EPG Search from within the plugin browser."
+msgstr ""
+"Habilite isso para permitir o acesso ao EPG Search dentro do navegador "
+"plugin."
+
+#: src/EPGSearchSetup.py:99
+msgid "Length of history"
+msgstr "Duração da história"
+
+#: src/EPGSearchSetup.py:99
+msgid ""
+"Maximum number of entries in the search history. Set this to 0 to disable "
+"search history."
+msgstr ""
+"Número máximo de entradas no histórico de pesquisa. Defina isso como 0 para "
+"desativar o histórico de pesquisa."
+
+#: src/EPGSearchSetup.py:100
+msgid "Search encoding"
+msgstr "Codificação de pesquisa"
+
+#: src/EPGSearchSetup.py:100
+msgid "Choose the encoding type for searches, helpful for foreign languages."
+msgstr ""
+"Escolha o tipo de codificação para pesquisas, útil para línguas estrangeiras."
+
+#: src/EPGSearchSetup.py:128 src/plugin.py:56
+msgid "EPGSearch"
+msgstr "Pesquisa do EPG"
+
+#: src/EPGSearchSetup.py:139
+msgid "Filter results by source"
+msgstr "Filtrar resultados por fonte"
+
+#: src/EPGSearchSetup.py:139
+msgid ""
+"Include or exclude results depending on their source (e.g. by satellite)"
+msgstr ""
+"Incluir ou excluir resultados dependendo de sua fonte (por exemplo, por "
+"satélite)"
+
+#: src/EPGSearchSetup.py:142
+msgid "Include/exclude sources"
+msgstr "Incluir/excluir fontes"
+
+#: src/EPGSearchSetup.py:142
+msgid ""
+"Use source restrictions below to only include results from the sources, or "
+"exclude them."
+msgstr ""
+"Use as restrições de origem abaixo para incluir apenas os resultados das "
+"fontes ou excluí-las."
+
+#: src/EPGSearchSetup.py:143
+msgid "Number of inclusions/exclusions"
+msgstr "Número de inclusões/exclusões"
+
+#: src/EPGSearchSetup.py:143
+msgid "Number of filters for inclusion/exclusion of results"
+msgstr "Número de filtros para inclusão/exclusão de resultados"
+
+#: src/EPGSearchSetup.py:146
+msgid "Include results from"
+msgstr "Incluir resultados de"
+
+#: src/EPGSearchSetup.py:148
+msgid "Exclude results from"
+msgstr "Exclua os resultados de"
+
+#: src/EPGSearchSetup.py:149
+msgid "Include/exclude search results from this type of source"
+msgstr "Incluir/excluir resultados de pesquisa deste tipo de fonte"
+
+#: src/__init__.py:30 src/__init__.py:31
+msgid "all services"
+msgstr "todos os serviços"
+
+#: src/__init__.py:30 src/__init__.py:31
+msgid "all bouquets"
+msgstr "todos os buquês"
+
+#: src/__init__.py:30 src/__init__.py:31
+msgid "current bouquet"
+msgstr "buquê atual"
+
+#: src/__init__.py:30 src/__init__.py:31
+msgid "current service"
+msgstr "serviço atual"
+
+#: src/__init__.py:30
+msgid "ask user"
+msgstr "perguntar ao utilizador"
+
+#: src/__init__.py:32
+msgid "partial match"
+msgstr "correspondência parcial"
+
+#: src/__init__.py:32
+msgid "exact match"
+msgstr "correspondência exata"
+
+#: src/__init__.py:32
+msgid "title starts with"
+msgstr "título começa com"
+
+#: src/__init__.py:33
+msgid "case-insensitive search"
+msgstr "pesquisa não diferencia maiúsculas de minúsculas"
+
+#: src/__init__.py:33
+msgid "case-sensitive search"
+msgstr "pesquisa que diferencia maiúsculas de minúsculas"
+
+#: src/__init__.py:63
+msgid "disabled"
+msgstr "desativado"
+
+#: src/__init__.py:73
+msgid "DVB-T Terrestrial services"
+msgstr "DVB-T Serviços Terrestres"
+
+#: src/__init__.py:75
+msgid "DVB-C Cable services"
+msgstr "Serviços de cabo DVB-C"
+
+#: src/__init__.py:184
+msgid "exclude"
+msgstr "excluir"
+
+#: src/plugin.py:56
+msgid "Search EPG"
+msgstr "Pesquisar EPG"
+
+#. TRANSLATORS: EPGSearch title in EventInfo dialog (does not require further user interaction)
+#. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#: src/plugin.py:63
+#, python-format
+msgid "%ssearch EPG"
+msgstr "%sprocura EPG"
+
+#. TRANSLATORS: EPGSearch search from search history in EventInfo dialog (requires the user to select a history item to search for)
+#. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#: src/plugin.py:71
+#, python-format
+msgid "%ssearch EPG from history..."
+msgstr "%sprocura EPG da história..."
+
+#. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
+#: src/plugin.py:78 src/plugin.py:79
+msgid "search EPG"
+msgstr "pesquisar EPG"
+
+#. TRANSLATORS: EPGSearch search from search history in MovieList (requires the user to select a history item to search for)
+#: src/plugin.py:86 src/plugin.py:87
+msgid "search EPG from history..."
+msgstr "pesquisar EPG a partir do histórico..."
