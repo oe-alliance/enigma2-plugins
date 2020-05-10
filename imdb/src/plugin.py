@@ -288,6 +288,11 @@ class IMDB(Screen, HelpableScreen):
 			'(?:.*?<h4 class="inline">(?P<g_keywords>Plot Keywords):</h4>(?P<keywords>.+?)(?:(?:Mehr|See All) \(\d+\)</a>|</div>))?'
 			'(?:.*?<h4 class="inline">(?P<g_tagline>Werbezeile|Taglines?):</h4>\s*(?P<tagline>.+?)<)?'
 			'(?:.*?<h4 class="inline">(?P<g_cert>Altersfreigabe|Certificate):</h4>\s*<span itemprop="contentRating">(?P<cert>.+?)</span>)?'
+			'(?:.*?<h4>(?P<g_trivia>Dies und das|Trivia)</h4>\s*(?P<trivia>.+?)(?:Mehr|See more</a>|</div>))*'
+			'(?:.*?<h4>(?P<g_goofs>Pannen|Goofs)</h4>\s*(?P<goofs>.+?)(?:Mehr|See more</a>|</div>))*'
+			'(?:.*?<h4>(?P<g_quotes>Dialogzitate|Quotes)</h4>\s*(?P<quotes>.+?)(?:Mehr|See more</a>|</div>))?'
+			'(?:.*?<h4>(?P<g_connections>Bez\S*?ge zu anderen Titeln|Connections)</h4>\s*(?P<connections>.+?)(?:Mehr|See more</a>|</div>))?'
+			'(?:.*?<h2>(?P<g_comments>Nutzerkommentare|User Reviews)</h2>.*?<strong>(?P<commenttitle>.*?)</strong>.*?<div class="comment-meta">(?P<commenter>.+?)</span></a>.*?<p.*?>(?P<comment>.+?)</p>)?'
 			'(?:.*?<h4 class="inline">(?P<g_language>Sprache|Language):</h4>\s*(?P<language>.+?)</div>)?'
 			'(?:.*?<h4 class="inline">(?P<g_locations>Drehorte|Filming Locations):</h4>.*?<a.*?>(?P<locations>.+?)</a>)?'
 			'(?:.*?<h4 class="inline">(?P<g_company>Firma|Production Co):</h4>\s*(?P<company>.+?)(?:Mehr|See more</a>|</div>))?'
@@ -295,11 +300,6 @@ class IMDB(Screen, HelpableScreen):
 			'(?:.*?<h4 class="inline">(?P<g_sound>Tonverfahren|Sound Mix):</h4>\s*(?P<sound>.+?)</div>)?'
 			'(?:.*?<h4 class="inline">(?P<g_color>Farbe|Color):</h4>\s*(?P<color>.+?)</div>)?'
 			'(?:.*?<h4 class="inline">(?P<g_aspect>Seitenverh\S*?ltnis|Aspect Ratio):</h4>\s*(?P<aspect>.+?)(?:Mehr|See more</a>|</div>))?'
-			'(?:.*?<h4>(?P<g_trivia>Dies und das|Trivia)</h4>\s*(?P<trivia>.+?)(?:Mehr|See more</a>|</div>))*'
-			'(?:.*?<h4>(?P<g_goofs>Pannen|Goofs)</h4>\s*(?P<goofs>.+?)(?:Mehr|See more</a>|</div>))*'
-			'(?:.*?<h4>(?P<g_quotes>Dialogzitate|Quotes)</h4>\s*(?P<quotes>.+?)(?:Mehr|See more</a>|</div>))?'
-			'(?:.*?<h4>(?P<g_connections>Bez\S*?ge zu anderen Titeln|Connections)</h4>\s*(?P<connections>.+?)(?:Mehr|See more</a>|</div>))?'
-			'(?:.*?<h2>(?P<g_comments>Nutzerkommentare|User Reviews)</h2>.*?<strong>(?P<commenttitle>.*?)</strong>.*?<div class="comment-meta">(?P<commenter>.+?)</span></a>.*?<p.*?>(?P<comment>.+?)</p>)?'
 			, re.DOTALL)
 
 			self.genreblockmask = re.compile('<h4 class="inline">Genres?:</h4>\s*?(.*?)\s+?(?:Mehr|See more|</p|<a class|</div>)', re.DOTALL)
