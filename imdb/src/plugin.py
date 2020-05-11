@@ -309,6 +309,8 @@ class IMDB(Screen, HelpableScreen):
 			self.postermask = re.compile('<div class="poster">.*?<img .*?src=\"(http.*?)\"', re.DOTALL)
 
 		self.htmltags = re.compile('<.*?>', re.DOTALL)
+		self.fontescapes = re.compile('\\\\([cnrt])')
+		self.fontescsub = '\\\\\\r\\1'
 
 	def resetLabels(self):
 		self["detailslabel"].setText("")
@@ -747,6 +749,8 @@ class IMDB(Screen, HelpableScreen):
 			Titeltext = self.generalinfos.group("title").replace(self.NBSP, ' ').strip()
 			if len(Titeltext) > 57:
 				Titeltext = Titeltext[0:54] + "..."
+
+			Titeltext = self.fontescapes.sub(self.fontescsub, Titeltext)
 			self["title"].setText(Titeltext)
 
 			Detailstext = ""
@@ -796,6 +800,8 @@ class IMDB(Screen, HelpableScreen):
 					Casttext = _("Cast: ") + Casttext
 				else:
 					Casttext = _("No cast list found in the database.")
+
+				Casttext = self.fontescapes.sub(self.fontescsub, Casttext)
 				self["castlabel"].setText(Casttext)
 
 			posterurl = self.postermask.search(self.inhtml)
@@ -845,9 +851,12 @@ class IMDB(Screen, HelpableScreen):
 					Extratext += "\n" + extrainfos.group("g_comments") + ":\n" + extrainfos.group("commenttitle") + " [" + ' '.join(self.htmltags.sub('',extrainfos.group("commenter")).split()) + "]: " + self.htmltags.sub('',extrainfos.group("comment").replace("\n",' ').replace(self.NBSP, ' ').replace("<br>", '\n').replace("<br/>",'\n').replace("<br />",'\n')) + "\n"
 
 			if Extratext:
+				Extratext = self.fontescapes.sub(self.fontescsub, Extratext)
 				self["extralabel"].setText(Extratext)
 				self["extralabel"].hide()
 				self["key_blue"].setText(_("Extra Info"))
+
+		Detailstext = self.fontescapes.sub(self.fontescsub, Detailstext)
 
 		self["detailslabel"].setText(Detailstext)
 		self.callbackData = Detailstext
