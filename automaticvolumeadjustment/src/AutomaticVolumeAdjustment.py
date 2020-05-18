@@ -79,7 +79,7 @@ class AutomaticVolumeAdjustment(Screen):
 		if self.pluginStarted and self.enabled:
 			if self.modus == "0": # Automatic volume adjust mode
 				# if played service had AC3||DTS audio and volume value was changed with RC, take new delta value from the config
-				if self.currentVolume and self.volctrl.getVolume() != self.currentVolume:
+				if self.currentVolume and self.session.nav.getCurrentlyPlayingServiceReference() and self.volctrl.getVolume() != self.currentVolume:
 					self.lastAdjustedValue = self.serviceList.get(self.session.nav.getCurrentlyPlayingServiceReference().toString(), self.defaultValue)
 			else: # Remember channel volume mode
 					# save current volume in dict, but for valid ref only
