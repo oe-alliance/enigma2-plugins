@@ -1,7 +1,7 @@
 from Components.Sources.Source import Source
 from Components.Network import iNetwork
 from Tools.Directories import fileExists
-from twisted.web import version
+from twisted import version
 from socket import has_ipv6, AF_INET6, inet_ntop, inet_pton
 
 def normalize_ipv6(orig):
