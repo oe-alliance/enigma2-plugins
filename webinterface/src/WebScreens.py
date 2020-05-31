@@ -87,7 +87,11 @@ class AboutWebScreen(WebScreen):
 			self["ImageVersion"] = StaticText(about.getVersionString())
 		self["WebIfVersion"] = StaticText(config.plugins.Webinterface.version.value)
 		self["FpVersion"] = StaticText(str(getFPVersion()))
-		self["DeviceName"] = StaticText(hw.get_device_name())
+		try:
+			model = hw.get_device_model()
+		except:
+			model = hw.get_device_name()
+		self["DeviceName"] = StaticText(model)
 
 class VolumeWebScreen(WebScreen):
 	def __init__(self, session, request):

@@ -14,8 +14,8 @@ class About(Source):
 		ConvertIP = lambda l: "%s.%s.%s.%s" % tuple(l) if len(l) == 4 else "0.0.0.0"
 
 		if iNetwork.getNumberOfAdapters > 0:
-			iface = iNetwork.getAdapterList()[0]
-			print "[WebComponents.About] iface: %s" % iface
+			iface = "eth0" # iNetwork.getAdapterList()[0]
+			# print "[WebComponents.About] iface: %s" % iface
 			l = (
 				iNetwork.getAdapterAttribute(iface, "mac"),
 				iNetwork.getAdapterAttribute(iface, "dhcp"),
