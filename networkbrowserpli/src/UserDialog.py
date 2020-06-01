@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # for localized messages
+from __future__ import print_function
 from __init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -23,7 +24,7 @@ def write_cache(cache_file, cache_data):
 		try:
 			mkdir( os_path.dirname(cache_file) )
 		except OSError:
-			print os_path.dirname(cache_file), 'is a file'
+			print(os_path.dirname(cache_file), 'is a file')
 	fd = open(cache_file, 'w')
 	dump(cache_data, fd, -1)
 	fd.close()
@@ -84,7 +85,7 @@ class UserDialog(Screen, ConfigListScreen):
 		}, -2)
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list,session = self.session)
+		ConfigListScreen.__init__(self, self.list, session = self.session)
 		self.createSetup()
 		self.onLayoutFinish.append(self.layoutFinished)
 		# Initialize Buttons
@@ -111,7 +112,7 @@ class UserDialog(Screen, ConfigListScreen):
 		self.password = None
 
 		if os_path.exists(self.cache_file):
-			print 'Loading user cache from ',self.cache_file
+			print('Loading user cache from ', self.cache_file)
 			try:
 				self.hostdata = load_cache(self.cache_file)
 				username = self.hostdata['username']
@@ -166,7 +167,7 @@ class UserDialog(Screen, ConfigListScreen):
 		current = self["config"].getCurrent()
 		helpwindowpos = self["HelpWindow"].getPosition()
 		if current[1].help_window.instance is not None:
-			current[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
+			current[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
 
 	def ok(self):
 		current = self["config"].getCurrent()

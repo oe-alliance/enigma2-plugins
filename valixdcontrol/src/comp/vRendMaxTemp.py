@@ -47,7 +47,7 @@ class vRendMaxTemp(Renderer, VariableText):
 							maxtemp = tt
 				except:
 					pass
-				self.text = str(maxtemp) + "°C"
+				self.text = str(maxtemp) + "Â°C"
 			else:
 				loada = 0
 				try:

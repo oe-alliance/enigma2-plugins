@@ -1,3 +1,4 @@
+from __future__ import print_function
 
 #  Partnerbox E2
 #
@@ -135,7 +136,7 @@ def Partnerbox_EPGSelection_zapTo(self):
 					(_("Partnerbox RemoteTimer"), "partnerboxremotetimer"),
 					(_("Partnerbox Setup"), "partnerboxsetup"),
 					]
-					dlg = self.session.openWithCallback(self.RedCallback,ChoiceBox,title= _("Select action:"), list = list)
+					dlg = self.session.openWithCallback(self.RedCallback, ChoiceBox, title= _("Select action:"), list = list)
 					dlg.setTitle(_("Choice list Partnerbox"))
 				else:
 					baseEPGSelection_zapTo(self)
@@ -216,7 +217,7 @@ def Partnerbox_timerAdd(self):
 			event = cur[0]
 			serviceref = cur[1]
 			if event is not None:
-				timerentry = isInTimerList(event.getBeginTime(), event.getDuration(),serviceref.ref.toString(), event.getEventId(), partnerboxfunctions.remote_timer_list)
+				timerentry = isInTimerList(event.getBeginTime(), event.getDuration(), serviceref.ref.toString(), event.getEventId(), partnerboxfunctions.remote_timer_list)
 				if timerentry is not None:
 					proceed = False
 					if int(self.partnerboxentry.enigma.value) == 0:
@@ -258,7 +259,7 @@ def Partnerbox_timerAdd(self):
 
 def remoteTimerMenu(self, timerentry):
 	try:
-		menu = [(_("Delete timer"), "delete"),(_("Timer Overview"), "timerlist")]
+		menu = [(_("Delete timer"), "delete"), (_("Timer Overview"), "timerlist")]
 		buttons = ["red", "green"]
 		title_text = timerentry.repeated and _("Attention, this is repeated timer!\n") or ""
 		def remoteTimerAction(choice):
@@ -275,7 +276,7 @@ def remoteTimerMenu(self, timerentry):
 
 def Partnerbox_finishedAdd(self, answer):
 	try:
-		basefinishedAdd(self,answer)
+		basefinishedAdd(self, answer)
 		self.CheckRemoteTimer()
 		self.setRedbutton()
 	except:
@@ -295,12 +296,12 @@ def GetPartnerboxTimerlist(self):
 		if self.partnerboxentry is not None:
 			ip = "%d.%d.%d.%d" % tuple(self.partnerboxentry.ip.value)
 			port = self.partnerboxentry.port.value
-			http = "http://%s:%d" % (ip,port)
+			http = "http://%s:%d" % (ip, port)
 			if int(self.partnerboxentry.enigma.value) == 0:
 				sCommand = http + "/web/timerlist"
 			else:
 				sCommand = http + "/xml/timers"
-			sendPartnerBoxWebCommand(sCommand, None,3, "root", self.partnerboxentry.password.value).addCallback(self.GetPartnerboxTimerlistCallback).addErrback(GetPartnerboxTimerlistCallbackError)
+			sendPartnerBoxWebCommand(sCommand, None, 3, "root", self.partnerboxentry.password.value).addCallback(self.GetPartnerboxTimerlistCallback).addErrback(GetPartnerboxTimerlistCallbackError)
 	except:
 		pass
 
@@ -324,7 +325,7 @@ def GetPartnerboxTimerlistCallback(self, sxml = None):
 def GetPartnerboxTimerlistCallbackError(self, error = None):
 	try:
 		if error is not None:
-			print str(error.getErrorMessage())
+			print(str(error.getErrorMessage()))
 	except:
 		pass
 
@@ -337,7 +338,7 @@ def CheckRemoteTimer(self):
 			event = cur[0]
 			serviceref = cur[1]
 			if event is not None:
-				timerentry = isInTimerList(event.getBeginTime(), event.getDuration(),serviceref.ref.toString(),event.getEventId(), partnerboxfunctions.remote_timer_list)
+				timerentry = isInTimerList(event.getBeginTime(), event.getDuration(), serviceref.ref.toString(), event.getEventId(), partnerboxfunctions.remote_timer_list)
 				if timerentry is not None:
 					self["key_green"].setText(_("Timer menu"))
 					self.key_green_choice = self.REMOVE_TIMER
@@ -349,13 +350,13 @@ def DeleteTimerConfirmed(self, timerentry, answer):
 		if answer:
 			ip = "%d.%d.%d.%d" % tuple(self.partnerboxentry.ip.value)
 			port = self.partnerboxentry.port.value
-			http = "http://%s:%d" % (ip,port)
+			http = "http://%s:%d" % (ip, port)
 			if int(self.partnerboxentry.enigma.value) == 0:
 				refstr = ':'.join(str(timerentry.servicereference).split(':')[:11])
 				sCommand = http + "/web/timerdelete?sRef=" + refstr + "&begin=" + ("%s"%(timerentry.timebegin)) + "&end=" +("%s"%(timerentry.timeend))
 			else:
 				sCommand = http + "/deleteTimerEvent?ref=" + timerentry.servicereference + "&start=" + ("%s"%(timerentry.timebegin)) + "&type=" +("%s"%(timerentry.type)) + "&force=yes"
-			sendPartnerBoxWebCommand(sCommand, None,3, "root", self.partnerboxentry.password.value).addCallback(self.DeleteTimerCallback).addErrback(DeleteTimerCallbackError)
+			sendPartnerBoxWebCommand(sCommand, None, 3, "root", self.partnerboxentry.password.value).addCallback(self.DeleteTimerCallback).addErrback(DeleteTimerCallbackError)
 	except:
 		pass
 
@@ -373,6 +374,6 @@ def DeleteTimerCallback(self, callback = None):
 def DeleteTimerCallbackError(self, error = None):
 	try:
 		if error is not None:
-			self.session.open(MessageBox,str(_(error.getErrorMessage())),MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, str(_(error.getErrorMessage())), MessageBox.TYPE_INFO)
 	except:
 		pass

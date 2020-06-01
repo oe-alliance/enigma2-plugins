@@ -7,6 +7,7 @@ $Revision$
 $Date$
 $Modified: sreichholf
 '''
+from __future__ import print_function
 
 import re, sys, os
 import htmlentitydefs
@@ -44,7 +45,7 @@ def html2unicode(in_html, charset):
 			uml = unichr(int(codepoint))
 			debug("[nrzuname] html2utf8: replace %s with %s in %s" %(repr(key), repr(uml), repr(in_html[0:20]+'...')))
 			in_html = in_html.replace(key, uml)
-		except ValueError, e:
+		except ValueError as e:
 			debug("[nrzuname] html2utf8: ValueError " + repr(key) + ":" + repr(codepoint) + " (" + str(e) + ")")
 	return in_html
 
@@ -91,7 +92,7 @@ def out(number, caller):
 	print(name)
 
 def simpleout(number, caller): #@UnusedVariable # pylint: disable-msg=W0613
-	print caller
+	print(caller)
 
 try:
 	from Tools.Directories import resolveFilename, SCOPE_PLUGINS
@@ -126,7 +127,7 @@ class ReverseLookupAndNotify:
 			dom = parse(reverseLookupFileName)
 			for top in dom.getElementsByTagName("reverselookup"):
 				for country in top.getElementsByTagName("country"):
-					code = country.getAttribute("code").replace("+","00")
+					code = country.getAttribute("code").replace("+", "00")
 					countries[code] = country.getElementsByTagName("website")
 
 		self.countrycode = countrycode
@@ -142,18 +143,18 @@ class ReverseLookupAndNotify:
 			return
 
 		if self.number[:2] == "00":
-			if countries.has_key(self.number[:3]):	 #	e.g. USA
+			if self.number[:3] in countries:	 #	e.g. USA
 				self.countrycode = self.number[:3]
-			elif countries.has_key(self.number[:4]):
+			elif self.number[:4] in countries:
 				self.countrycode = self.number[:4]
-			elif countries.has_key(self.number[:5]):
+			elif self.number[:5] in countries:
 				self.countrycode = self.number[:5]
 			else:
 				debug("[ReverseLookupAndNotify] Country cannot be reverse handled")
 				self.notifyAndReset()
 				return
 
-		if countries.has_key(self.countrycode):
+		if self.countrycode in countries:
 			debug("[ReverseLookupAndNotify] Found website for reverse lookup")
 			self.websites = countries[self.countrycode]
 			self.nextWebsiteNo = 1
@@ -166,7 +167,7 @@ class ReverseLookupAndNotify:
 	def handleWebsite(self, website):
 		debug("[ReverseLookupAndNotify] handleWebsite: " + website.getAttribute("name"))
 		if self.number[:2] == "00":
-			number = website.getAttribute("prefix") + self.number.replace(self.countrycode,"")
+			number = website.getAttribute("prefix") + self.number.replace(self.countrycode, "")
 		else:
 			number = self.number
 
@@ -185,10 +186,10 @@ class ReverseLookupAndNotify:
 			url = url.replace("$AREACODE", number[:areaCodeLen]).replace("$NUMBER", number[areaCodeLen:])
 		elif re.search('\\$PFXAREACODE', url) and website.hasAttribute("pfxareacode"):
 			areaCodeLen = int(website.getAttribute("pfxareacode"))
-			url = url.replace("$PFXAREACODE","%(pfxareacode)s").replace("$NUMBER", "%(number)s")
+			url = url.replace("$PFXAREACODE", "%(pfxareacode)s").replace("$NUMBER", "%(number)s")
 			url = url % { 'pfxareacode': number[:areaCodeLen], 'number': number[areaCodeLen:] }
 		elif re.search('\\$NUMBER', url): 
-			url = url.replace("$NUMBER","%s") %number
+			url = url.replace("$NUMBER", "%s") %number
 		else:
 			debug("[ReverseLookupAndNotify] handleWebsite: cannot handle websites with no $NUMBER in url")
 			# self.caller = _("UNKNOWN")
@@ -204,7 +205,7 @@ class ReverseLookupAndNotify:
 
 	def _gotPage(self, page):
 		def cleanName(text):
-			item = text.replace("%20"," ").replace("&nbsp;"," ").replace("</b>","").replace(","," ").replace('\n',' ').replace('\t',' ')
+			item = text.replace("%20", " ").replace("&nbsp;", " ").replace("</b>", "").replace(",", " ").replace('\n', ' ').replace('\t', ' ')
 
 			item = html2unicode(item, self.charset)
 			#===================================================================
@@ -233,10 +234,10 @@ class ReverseLookupAndNotify:
 		found = re.match('.*<meta http-equiv="Content-Type" content="(?:application/xhtml\+xml|text/html); charset=([^"]+)" />', page, re.S)
 		if found:
 			debug("[ReverseLookupAndNotify] Charset: " + found.group(1))
-			page = page.replace("\xa0"," ").decode(found.group(1), "replace")
+			page = page.replace("\xa0", " ").decode(found.group(1), "replace")
 		else:
 			debug("[ReverseLookupAndNotify] Default Charset: iso-8859-1")
-			page = page.replace("\xa0"," ").decode("ISO-8859-1", "replace")
+			page = page.replace("\xa0", " ").decode("ISO-8859-1", "replace")
 
 		for entry in self.currentWebsite.getElementsByTagName("entry"):
 			#

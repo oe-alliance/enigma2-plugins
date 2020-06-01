@@ -61,9 +61,9 @@ class EPGSearchList(EPGList):
 		self.listSizeWidth = None
 		self.screenwidth = getDesktop(0).size().width()
 		if self.screenwidth and self.screenwidth == 1920:
-			self.posx, self.posy , self.picx, self.picy, self.gap = skinparameter.get("EpgListIcon", (2,13,25,25,2))
+			self.posx, self.posy, self.picx, self.picy, self.gap = skinparameter.get("EpgListIcon", (2, 13, 25, 25, 2))
 		else:
-			self.posx, self.posy , self.picx, self.picy, self.gap = skinparameter.get("EpgListIcon", (1,11,23,23,1))
+			self.posx, self.posy, self.picx, self.picy, self.gap = skinparameter.get("EpgListIcon", (1, 11, 23, 23, 1))
 		self.l.setBuildFunc(self.buildEPGSearchEntry)
 
 		if PartnerBoxIconsEnabled:

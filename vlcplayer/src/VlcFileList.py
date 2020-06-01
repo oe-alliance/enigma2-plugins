@@ -9,6 +9,7 @@
 # version.
 #===============================================================================
 
+from __future__ import print_function
 import re
 
 from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, gFont
@@ -57,7 +58,7 @@ class VlcFileList(MenuList):
 		if self.skinAttributes is not None:
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "font":
-					self.font = parseFont(value, ((1,1),(1,1)))
+					self.font = parseFont(value, ((1, 1), (1, 1)))
 					self.l.setFont(0, self.font)
 				elif attrib == "itemHeight":
 					self.l.setItemHeight(int(value))
@@ -79,9 +80,9 @@ class VlcFileList(MenuList):
 		else:
 			extension = name.split('.')
 			extension = extension[-1].lower()
-			if MEDIA_EXTENSIONS.has_key(extension):
+			if extension in MEDIA_EXTENSIONS:
 				png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "extensions/" + MEDIA_EXTENSIONS[extension] + ".png"))
-			elif PLAYLIST_EXTENSIONS.has_key(extension):
+			elif extension in PLAYLIST_EXTENSIONS:
 				png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/VlcPlayer/") + PLAYLIST_EXTENSIONS[extension])
 			else:
 				png = None
@@ -132,8 +133,8 @@ class VlcFileList(MenuList):
 			else:
 				self.currentDirectory = previousDirectory
 				ret = None, None
-		except ExpatError, e:
-			print e
+		except ExpatError as e:
+			print(e)
 			self.currentDirectory = previousDirectory
 			self.update()
 			ret = None, self.currentDirectory

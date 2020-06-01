@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Mosaic by AliAbdul
+from __future__ import print_function
 from Components.ActionMap import NumberActionMap
 from Components.config import config, ConfigSubsection, ConfigInteger
 from Components.Console import Console
@@ -41,7 +42,7 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
 language.addCallback(localeInit())
@@ -121,7 +122,7 @@ class Mosaic(Screen):
 
 	skin += """<widget name="countdown" position="80,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (height-50, windowWidth)
 	skin += """<widget name="count" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" halign="right" />
-	</screen>""" % (positions[2][0] ,height-50, windowWidth)
+	</screen>""" % (positions[2][0], height-50, windowWidth)
 
 	def __init__(self, session, services):
 		Screen.__init__(self, session)
@@ -198,7 +199,7 @@ class Mosaic(Screen):
 		self.close()
 
 	def deleteConsoleCallbacks(self):
-		if self.Console.appContainers.has_key(self.consoleCmd):
+		if self.consoleCmd in self.Console.appContainers:
 			del self.Console.appContainers[self.consoleCmd].dataAvail[:]
 			del self.Console.appContainers[self.consoleCmd].appClosed[:]
 			del self.Console.appContainers[self.consoleCmd]
@@ -303,7 +304,7 @@ class Mosaic(Screen):
 			self.working = False
 			self.updateTimer.start(1, 1)
 		else:
-			print "[Mosaic] retval: %d result: %s" % (retval, result)
+			print("[Mosaic] retval: %d result: %s" % (retval, result))
 
 			try:
 				f = open(grab_errorlog, "w")

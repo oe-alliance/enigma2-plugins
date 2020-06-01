@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 
+from __future__ import print_function
 from . import _
 from enigma import eEPGCache, eServiceReference, eServiceCenter, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, eRect, getDesktop, \
 		RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, eListboxPythonMultiContent, gFont, ePicLoad
@@ -95,7 +96,7 @@ class EPGSearchList(EPGList):
 		self.skinColumns = False
 		self.tw = 90
 		self.dy = 0
-		self.piconSize = 50,30
+		self.piconSize = 50, 30
 		self.piconDistance = 5
 		self.pboxDistance = 80
 
@@ -347,19 +348,19 @@ class EPGSearchList(EPGList):
 					None, # no private data needed
 					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r1.left(), r1.top()+ dy, self.piconSize[0], self.piconSize[1], png),
 					(eListboxPythonMultiContent.TYPE_TEXT, r1.left() + dx, r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, self.days[t[6]]),
-					(eListboxPythonMultiContent.TYPE_TEXT, r2.left() + dx, r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
+					(eListboxPythonMultiContent.TYPE_TEXT, r2.left() + dx, r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d"%(t[2], t[1], t[3], t[4]))
 				]
 			else:
 				res = [
 					None, # no private data needed
 					(eListboxPythonMultiContent.TYPE_TEXT, r1.left() + dx, r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, self.days[t[6]]),
-					(eListboxPythonMultiContent.TYPE_TEXT, r2.left() + dx, r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
+					(eListboxPythonMultiContent.TYPE_TEXT, r2.left() + dx, r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d"%(t[2], t[1], t[3], t[4]))
 				]
 		else:
 			res = [
 				None, # no private data needed
 				(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, self.days[t[6]]),
-				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
+				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d"%(t[2], t[1], t[3], t[4]))
 			]
 		if config.plugins.epgsearch.picons.value:
 			if rec1 or rec2:
@@ -492,7 +493,7 @@ class EPGSearchList(EPGList):
 			sname = ':'.join(service.split(':')[:11])
 			pos = sname.rfind(':')
 			if pos != -1:
-				sname = sname[:pos].rstrip(':').replace(':','_')
+				sname = sname[:pos].rstrip(':').replace(':', '_')
 				for path in self.searchPiconPaths:
 					pngname = path + sname + ".png"
 					if fileExists(pngname):
@@ -501,11 +502,11 @@ class EPGSearchList(EPGList):
 
 	def applySkin(self, desktop, parent):
 		def warningWrongSkinParameter(string):
-			print "[EPGList] wrong '%s' skin parameters" % string
+			print("[EPGList] wrong '%s' skin parameters" % string)
 		def setEventItemFont(value):
-			self.eventItemFont = parseFont(value, ((1,1),(1,1)))
+			self.eventItemFont = parseFont(value, ((1, 1), (1, 1)))
 		def setEventTimeFont(value):
-			self.eventTimeFont = parseFont(value, ((1,1),(1,1)))
+			self.eventTimeFont = parseFont(value, ((1, 1), (1, 1)))
 		def setIconDistance(value):
 			self.iconDistance = int(value)
 		def setIconShift(value):
@@ -718,7 +719,7 @@ class EPGSearch(EPGSelection):
 				(_("Lookup in TMBD"), "runtmbd"),
 				(_("Partnerbox Entries"), "partnerbox"),
 				]
-				dlg = self.session.openWithCallback(self.RedbuttonCallback,ChoiceBox,title= _("Select action:"), list = list)
+				dlg = self.session.openWithCallback(self.RedbuttonCallback, ChoiceBox, title= _("Select action:"), list = list)
 				dlg.setTitle(_("Choice list RED Button"))
 			else:
 				self.zapTo()
@@ -746,7 +747,7 @@ class EPGSearch(EPGSelection):
 			if cur[0] is not None:
 				name2 = cur[0].getEventName() or ''
 				name3 = name2.split("(")[0].strip()
-				eventname = name3.replace('"', '').replace('Õ/Ô', '').replace('Ì/Ô', '').replace('Õ/ô', '').replace('.', '')
+				eventname = name3.replace('"', '').replace('Ã•/Ã”', '').replace('ÃŒ/Ã”', '').replace('Ã•/Ã´', '').replace('.', '')
 				eventname = eventname.replace('0+', '').replace('(0+)', '').replace('6+', '').replace('(6+)', '').replace('7+', '').replace('(7+)', '').replace('12+', '').replace('(12+)', '').replace('16+', '').replace('(16+)', '').replace('18+', '').replace('(18+)', '')
 				try:
 					tmbdsearch = config.plugins.tmbd.profile.value

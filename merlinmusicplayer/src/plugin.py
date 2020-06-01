@@ -21,12 +21,13 @@
 #  distributed other than under the conditions noted above.
 
 # for localized messages
+from __future__ import print_function
 from . import _
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Label import Label
-from enigma import RT_VALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, gFont, eListbox,ePoint, eListboxPythonMultiContent
+from enigma import RT_VALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, gFont, eListbox, ePoint, eListboxPythonMultiContent
 from Components.FileList import FileList
 from enigma import eServiceReference, eTimer
 from os import path as os_path, mkdir as os_mkdir, listdir as os_listdir, walk as os_walk, access as os_access, W_OK as os_W_OK
@@ -93,7 +94,7 @@ config.plugins.merlinmusicplayer.databasepath = ConfigDirectory(default = "/medi
 #config.plugins.merlinmusicplayer.usegoogleimage = ConfigYesNo(default = False)
 config.plugins.merlinmusicplayer.googleimagepath = ConfigDirectory(default = "/media/hdd/")
 config.plugins.merlinmusicplayer.usescreensaver = ConfigYesNo(default = True)
-config.plugins.merlinmusicplayer.screensaverwait = ConfigInteger(1,limits = (1, 60))
+config.plugins.merlinmusicplayer.screensaverwait = ConfigInteger(1, limits = (1, 60))
 config.plugins.merlinmusicplayer.idreamextendedpluginlist = ConfigYesNo(default = True)
 config.plugins.merlinmusicplayer.merlinmusicplayerextendedpluginlist = ConfigYesNo(default = True)
 config.plugins.merlinmusicplayer.defaultfilebrowserpath = ConfigDirectory(default = "/media/hdd/")
@@ -174,53 +175,53 @@ class PathToDatabase(Thread):
 					for filename in files:
 						if self.__cancel:
 							break
-						cursor.execute('SELECT song_id FROM Songs WHERE filename = "%s";' % os_path.join(root,filename))
+						cursor.execute('SELECT song_id FROM Songs WHERE filename = "%s";' % os_path.join(root, filename))
 						row = cursor.fetchone()
 						if row is None:
-							audio, isAudio, title, genre,artist,album,tracknr,track,date,length,bitrate = getID3Tags(root,filename)
+							audio, isAudio, title, genre, artist, album, tracknr, track, date, length, bitrate = getID3Tags(root, filename)
 							if  audio:	
 								# 1. Artist
 								artistID = -1
-								cursor.execute('SELECT artist_id FROM Artists WHERE artist = "%s";' % (artist.replace('"','""')))
+								cursor.execute('SELECT artist_id FROM Artists WHERE artist = "%s";' % (artist.replace('"', '""')))
 
 								row = cursor.fetchone()
 								if row is None:
-										cursor.execute('INSERT INTO Artists (artist) VALUES("%s");' % (artist.replace('"','""')))
+										cursor.execute('INSERT INTO Artists (artist) VALUES("%s");' % (artist.replace('"', '""')))
 										artistID = cursor.lastrowid
 								else:
 										artistID = row[0]
 								# 2. Album
 								albumID = -1
-								cursor.execute('SELECT album_id FROM Album WHERE album_text = "%s";' % (album.replace('"','""')))
+								cursor.execute('SELECT album_id FROM Album WHERE album_text = "%s";' % (album.replace('"', '""')))
 								row = cursor.fetchone()
 								if row is None:
-										cursor.execute('INSERT INTO Album (album_text) VALUES("%s");' % (album.replace('"','""')))
+										cursor.execute('INSERT INTO Album (album_text) VALUES("%s");' % (album.replace('"', '""')))
 										albumID = cursor.lastrowid
 								else:
 										albumID = row[0]
 
 								# 3. Genre
 								genreID = -1
-								cursor.execute('SELECT genre_id FROM Genre WHERE genre_text = "%s";' % (genre.replace('"','""')))
+								cursor.execute('SELECT genre_id FROM Genre WHERE genre_text = "%s";' % (genre.replace('"', '""')))
 								row = cursor.fetchone()
 								if row is None:
-										cursor.execute('INSERT INTO Genre (genre_text) VALUES("%s");' % (genre.replace('"','""')))
+										cursor.execute('INSERT INTO Genre (genre_text) VALUES("%s");' % (genre.replace('"', '""')))
 										genreID = cursor.lastrowid
 								else:
 										genreID = row[0]
 
 								# 4. Songs
 								try:
-									cursor.execute("INSERT INTO Songs (filename,title,artist_id,album_id,genre_id,tracknumber, bitrate, length, track, date) VALUES(?,?,?,?,?,?,?,?,?,?);" , (os_path.join(root,filename),title,artistID,albumID,genreID, tracknr, bitrate, length, track, date))
-									self.__messages.push((THREAD_WORKING, _("%s\n added to database") % os_path.join(root,filename)))
+									cursor.execute("INSERT INTO Songs (filename,title,artist_id,album_id,genre_id,tracknumber, bitrate, length, track, date) VALUES(?,?,?,?,?,?,?,?,?,?);", (os_path.join(root, filename), title, artistID, albumID, genreID, tracknr, bitrate, length, track, date))
+									self.__messages.push((THREAD_WORKING, _("%s\n added to database") % os_path.join(root, filename)))
 									mp.send(0)
 									counter +=1
 								except sqlite.IntegrityError:
-									self.__messages.push((THREAD_WORKING, _("%s\n already exists in database!") % os_path.join(root,filename)))
+									self.__messages.push((THREAD_WORKING, _("%s\n already exists in database!") % os_path.join(root, filename)))
 									mp.send(0)
 								audio = None
 						elif time() - checkTime >= 0.1: # update interval for gui
-							self.__messages.push((THREAD_WORKING, _("%s\n already exists in database!") % os_path.join(root,filename)))
+							self.__messages.push((THREAD_WORKING, _("%s\n already exists in database!") % os_path.join(root, filename)))
 							mp.send(0)
 							checkTime = time()
 
@@ -290,7 +291,7 @@ class myHTTPClientFactory(HTTPClientFactory):
 	agent="SHOUTcast", timeout=0, cookies=None,
 	followRedirect=1, lastModified=None, etag=None):
 		HTTPClientFactory.__init__(self, url, method=method, postdata=postdata,
-		headers=headers, agent=agent, timeout=timeout, cookies=cookies,followRedirect=followRedirect)
+		headers=headers, agent=agent, timeout=timeout, cookies=cookies, followRedirect=followRedirect)
 
 def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
 	if hasattr(client, '_parse'):
@@ -360,18 +361,18 @@ class Item:
 		self.PTS = PTS
 
 def OpenDatabase():
-		connectstring = os_path.join(config.plugins.merlinmusicplayer.databasepath.value ,"iDream.db")
+		connectstring = os_path.join(config.plugins.merlinmusicplayer.databasepath.value, "iDream.db")
 		db_exists = False
 		if os_path.exists(connectstring):
 			db_exists = True
 		try:
 			connection = sqlite.connect(connectstring)
 			if not os_access(connectstring, os_W_OK):
-				print "[MerlinMusicPlayer] Error: database file needs to be writable, can not open %s for writing..." % connectstring
+				print("[MerlinMusicPlayer] Error: database file needs to be writable, can not open %s for writing..." % connectstring)
 				connection.close()
 				return None
 		except:
-			print "[MerlinMusicPlayer] unable to open database file: %s" % connectstring
+			print("[MerlinMusicPlayer] unable to open database file: %s" % connectstring)
 			return None
 		if not db_exists:
 				connection.execute('CREATE TABLE IF NOT EXISTS Songs (song_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, filename TEXT NOT NULL UNIQUE, title TEXT, artist_id INTEGER, album_id INTEGER, genre_id INTEGER, tracknumber INTEGER, bitrate INTEGER, length TEXT, track TEXT, date TEXT, lyrics TEXT);')
@@ -397,7 +398,7 @@ def getEncodedString(value):
 				returnValue = "n/a"
 	return returnValue
 
-def getID3Tags(root,filename):
+def getID3Tags(root, filename):
 	audio = None
 	isFlac = False
 	isAudio = True
@@ -411,18 +412,18 @@ def getID3Tags(root,filename):
 	length = ""
 	bitrate = None
 	if filename.lower().endswith(".mp3"):
-		try: audio = MP3(os_path.join(root,filename), ID3 = EasyID3)
+		try: audio = MP3(os_path.join(root, filename), ID3 = EasyID3)
 		except: audio = None
 	elif filename.lower().endswith(".flac"):
 		try: 
-			audio = FLAC(os_path.join(root,filename))
+			audio = FLAC(os_path.join(root, filename))
 			isFlac = True
 		except: audio = None
 	elif filename.lower().endswith(".m4a"):
-		try: audio = EasyMP4(os_path.join(root,filename))
+		try: audio = EasyMP4(os_path.join(root, filename))
 		except: audio = None
 	elif filename.lower().endswith(".ogg"):
-		try: audio = OggVorbis(os_path.join(root,filename))
+		try: audio = OggVorbis(os_path.join(root, filename))
 		except: audio = None
 	else:
 		isAudio = False
@@ -461,7 +462,7 @@ def getID3Tags(root,filename):
 			length = ""
 			bitrate = None
 
-	return audio, isAudio, title, genre ,artist, album, tracknr, track, date, length, bitrate
+	return audio, isAudio, title, genre, artist, album, tracknr, track, date, length, bitrate
 
 class MerlinMusicPlayerScreenSaver(Screen):
 
@@ -520,10 +521,10 @@ class MerlinMusicPlayerScreenSaver(Screen):
 		self["display"].setText(text)
 
 	def updateLCD(self, text, line):
-		self.summaries.setText(text,line)
+		self.summaries.setText(text, line)
 
 	def updateCover(self, filename = None, modus = 0):
-		print "[MerlinMusicPlayerScreenSaver] updating coverart with filename = %s and modus = %d" % (filename, modus)
+		print("[MerlinMusicPlayerScreenSaver] updating coverart with filename = %s and modus = %d" % (filename, modus))
 		if modus == 0:
 			if filename:
 				self["coverArt"].showCoverFromFile(filename)
@@ -541,8 +542,8 @@ class MerlinMusicPlayerScreenSaver(Screen):
 	def moveCoverArt(self):
 		x = randrange(getDesktop(0).size().width()-238)
 		y = randrange(getDesktop(0).size().height()-238-28)
-		self["coverArt"].move(ePoint(x,y))
-		self["display"].move(ePoint(x,y+240))
+		self["coverArt"].move(ePoint(x, y))
+		self["display"].move(ePoint(x, y+240))
 		self.coverMoveTimer.start(15000)
 
 	def createSummary(self):
@@ -566,7 +567,7 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 			<widget backgroundColor="transparent" name="video" position="0,0" size="%d,%d" zPosition="1"/>
 			<widget name="coverArt" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/no_coverArt.png" position="%d,%d" size="64,64" transparent="1" alphatest="blend" zPosition="2" />
 			<widget name="display" position="%d,%d" size="%d,24" zPosition="2" backgroundColor="#33000000" font="Regular;20" foregroundColor="#fcc000" />
-		</screen>""" % (w,h,w,h,cx,cy,dx,dy,dw)
+		</screen>""" % (w, h, w, h, cx, cy, dx, dy, dw)
 
 	def __init__(self, session, currentService, servicelist):
 		self.session = session
@@ -829,7 +830,7 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 
 	def playService(self, service):
 		current_service = service
-		n_service = self.pipServiceRelation.get(service.toString(),None)
+		n_service = self.pipServiceRelation.get(service.toString(), None)
 		if n_service is not None:
 			service = eServiceReference(n_service)
 		if service and (service.flags & eServiceReference.isGroup):
@@ -947,10 +948,10 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			"right": self.playNext,
 			"left": self.playPrevious,
 			"up": self.showPlaylist,
-			"down" : self.showPlaylist,
+			"down": self.showPlaylist,
 			"prevBouquet": self.shuffleList,
 			"nextBouquet": self.repeatSong,
-			"info" : self.showLyrics,
+			"info": self.showLyrics,
 			"yellow": self.pauseEntry,
 			"green": self.play,
 			"menu": self.config,
@@ -1018,8 +1019,8 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			if not self.screenSaverScreen:
 				self.screenSaverScreen = self.session.instantiateDialog(MerlinMusicPlayerScreenSaver)
 				self.session.execDialog(self.screenSaverScreen)
-				self.screenSaverScreen.updateLCD(self.currentTitle,1)
-				self.screenSaverScreen.updateLCD(self.nextTitle,4)
+				self.screenSaverScreen.updateLCD(self.currentTitle, 1)
+				self.screenSaverScreen.updateLCD(self.nextTitle, 4)
 				album = self["album"].getText()
 				if album:
 					text = "%s - %s" % (self["title"].getText(), album)
@@ -1040,8 +1041,8 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			self["coverArt"].onShow()
 			self.playSong(self.songList[self.currentIndex][0].filename)
 		else:
-			self.summaries.setText(self.currentTitle,1)
-			self.summaries.setText(self.nextTitle,4)
+			self.summaries.setText(self.currentTitle, 1)
+			self.summaries.setText(self.nextTitle, 4)
 			if self.screenSaverScreen:
 				self.screenSaverScreen.doClose()
 				self.screenSaverScreen = None
@@ -1065,8 +1066,8 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 				self.screenSaverScreen = None
 			self.screenSaverScreen = self.session.instantiateDialog(MerlinMusicPlayerTV, self.currentService, self.serviceList)
 			self.session.execDialog(self.screenSaverScreen)
-			self.screenSaverScreen.updateLCD(self.currentTitle,1)
-			self.screenSaverScreen.updateLCD(self.nextTitle,4)
+			self.screenSaverScreen.updateLCD(self.currentTitle, 1)
+			self.screenSaverScreen.updateLCD(self.nextTitle, 4)
 			album = self["album"].getText()
 			if album:
 				text = "%s - %s" % (self["title"].getText(), album)
@@ -1095,7 +1096,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 				cursor = connection.cursor()
 				cursor.execute("Delete from CurrentSongList;")
 				for song in self.origSongList:
-					cursor.execute("INSERT INTO CurrentSongList (song_id, filename,title,artist,album,genre, bitrate, length, track, date, PTS) VALUES(?,?,?,?,?,?,?,?,?,?,?);" , (song[0].songID, song[0].filename,song[0].title,song[0].artist,song[0].album,song[0].genre, song[0].bitrate, song[0].length, song[0].track, song[0].date, song[0].PTS))
+					cursor.execute("INSERT INTO CurrentSongList (song_id, filename,title,artist,album,genre, bitrate, length, track, date, PTS) VALUES(?,?,?,?,?,?,?,?,?,?,?);", (song[0].songID, song[0].filename, song[0].title, song[0].artist, song[0].album, song[0].genre, song[0].bitrate, song[0].length, song[0].track, song[0].date, song[0].PTS))
 				connection.commit()
 				cursor.close()
 				connection.close()
@@ -1139,11 +1140,11 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		self.updateSingleMusicInformation("artist", self.songList[self.currentIndex][0].artist, True)
 		self.updateSingleMusicInformation("title", self.songList[self.currentIndex][0].title, True)
 		self.updateSingleMusicInformation("album", self.songList[self.currentIndex][0].album, True)
-		self.summaries.setText(self.songList[self.currentIndex][0].title,1)
+		self.summaries.setText(self.songList[self.currentIndex][0].title, 1)
 		if self.screenSaverScreen:
-			self.screenSaverScreen.updateLCD(self.songList[self.currentIndex][0].title,1)
+			self.screenSaverScreen.updateLCD(self.songList[self.currentIndex][0].title, 1)
 			if self.songList[self.currentIndex][0].album:
-				self.screenSaverScreen.updateDisplayText("%s - %s" % (self.songList[self.currentIndex][0].title,self.songList[self.currentIndex][0].album))
+				self.screenSaverScreen.updateDisplayText("%s - %s" % (self.songList[self.currentIndex][0].title, self.songList[self.currentIndex][0].album))
 			else:
 				self.screenSaverScreen.updateDisplayText(self.songList[self.currentIndex][0].title)
 		self.updateCover(self.songList[self.currentIndex][0].artist, self.songList[self.currentIndex][0].album, self.songList[self.currentIndex][0].title)
@@ -1185,11 +1186,11 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			# for lyrics
 			self.songList[self.currentIndex][0].title = title
 			self.songList[self.currentIndex][0].artist = artist
-		self.summaries.setText(title,1)
+		self.summaries.setText(title, 1)
 		if self.screenSaverScreen:
-			self.screenSaverScreen.updateLCD(title,1)
+			self.screenSaverScreen.updateLCD(title, 1)
 			if album:
-				self.screenSaverScreen.updateDisplayText("%s - %s" % (title,album))
+				self.screenSaverScreen.updateDisplayText("%s - %s" % (title, album))
 			else:
 				self.screenSaverScreen.updateDisplayText(title)
 		self.updateCover(artist, album, title)
@@ -1260,16 +1261,16 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			if (title == "" or title == "n/a"):
 				self["coverArt"].showDefaultCover()
 			else:
-				url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0" + imagesize + "&q=%s+%s" % (quote(title),quote(artist))
-				sendUrlCommand(url, None,10).addCallback(boundFunction(self.googleImageCallback, artist, album, title, imagesize)).addErrback(boundFunction(self.coverDownloadFailed, [], album, title))
+				url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0" + imagesize + "&q=%s+%s" % (quote(title), quote(artist))
+				sendUrlCommand(url, None, 10).addCallback(boundFunction(self.googleImageCallback, artist, album, title, imagesize)).addErrback(boundFunction(self.coverDownloadFailed, [], album, title))
 		else:
-			url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0" + imagesize + "&q=%s+%s" % (quote(album),quote(artist))
-			sendUrlCommand(url, None,10).addCallback(boundFunction(self.googleImageCallback, artist, album, title, imagesize)).addErrback(boundFunction(self.coverDownloadFailed, [], album, title))
+			url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0" + imagesize + "&q=%s+%s" % (quote(album), quote(artist))
+			sendUrlCommand(url, None, 10).addCallback(boundFunction(self.googleImageCallback, artist, album, title, imagesize)).addErrback(boundFunction(self.coverDownloadFailed, [], album, title))
 
 	def googleImageCallback(self, artist, album, title, imgsize, result):
 		urls = re.findall("unescapedUrl\":\"(.*?)\",\"url\":\"", result)
 		if (len(urls) == 0):
-			print "[MerlinMusicPlayer] No medium images found. Search for all images"
+			print("[MerlinMusicPlayer] No medium images found. Search for all images")
 			getGoogleCover(artist, album, title, "")
 			return
 		self.coverDownload(urls, album, title)
@@ -1285,17 +1286,17 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			self.currentGoogleCoverFile = filename
 			filename = self.googleDownloadDir + filename
 			if os_path.exists(filename):
-				print "[MerlinMusicPlayer] using cover from %s " % filename
+				print("[MerlinMusicPlayer] using cover from %s " % filename)
 				self["coverArt"].showCoverFromFile(filename)
 				if self.screenSaverScreen:
 					self.screenSaverScreen.updateCover(filename = filename, modus = 4)
 			else:
 				urls.pop(0)
-				print "[MerlinMusicPlayer] downloading cover from %s " % url
-				downloadPage(url , filename).addCallback(boundFunction(self.coverDownloadFinished, filename)).addErrback(boundFunction(self.coverDownloadFailed, urls, album, title))
+				print("[MerlinMusicPlayer] downloading cover from %s " % url)
+				downloadPage(url, filename).addCallback(boundFunction(self.coverDownloadFinished, filename)).addErrback(boundFunction(self.coverDownloadFailed, urls, album, title))
 
 	def coverDownloadFailed(self, urls, album, title, result):
-		print "[MerlinMusicPlayer] cover download failed: %s " % result
+		print("[MerlinMusicPlayer] cover download failed: %s " % result)
 		if (len(urls) > 0):
 			self.coverDownload(urls, album, title)
 			return
@@ -1303,8 +1304,8 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		if self.screenSaverScreen:
 			self.screenSaverScreen.updateCover(modus = 1)
 
-	def coverDownloadFinished(self,filename, result):
-		print "[MerlinMusicPlayer] cover download finished"
+	def coverDownloadFinished(self, filename, result):
+		print("[MerlinMusicPlayer] cover download finished")
 		self["coverArt"].showCoverFromFile(filename)
 		if self.screenSaverScreen:
 			self.screenSaverScreen.updateCover(filename = filename, modus = 4)
@@ -1312,14 +1313,14 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 	def __evAudioDecodeError(self):
 		currPlay = self.session.nav.getCurrentService()
 		sAudioType = currPlay.info().getInfoString(iServiceInformation.sUser+10)
-		print "[MerlinMusicPlayer] audio-codec %s can't be decoded by hardware" % (sAudioType)
-		self.session.open(MessageBox, _("This Receiver can't decode %s streams!") % sAudioType, type = MessageBox.TYPE_INFO,timeout = 20 )
+		print("[MerlinMusicPlayer] audio-codec %s can't be decoded by hardware" % (sAudioType))
+		self.session.open(MessageBox, _("This Receiver can't decode %s streams!") % sAudioType, type = MessageBox.TYPE_INFO, timeout = 20 )
 
 	def __evPluginError(self):
 		currPlay = self.session.nav.getCurrentService()
 		message = currPlay.info().getInfoString(iServiceInformation.sUser+12)
-		print "[MerlinMusicPlayer]" , message
-		self.session.open(MessageBox, message, type = MessageBox.TYPE_INFO,timeout = 20 )
+		print("[MerlinMusicPlayer]", message)
+		self.session.open(MessageBox, message, type = MessageBox.TYPE_INFO, timeout = 20 )
 
 	def doEofInternal(self, playing):
 		if playing:
@@ -1410,8 +1411,8 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			if self.songList[index][0].filename.lower().startswith("http://"):
 				text = self.songList[index][0].filename
 			else:
-				path,filename = os_path.split(self.songList[index][0].filename)
-				audio, isAudio, title, genre,artist,album,tracknr,track,date,length,bitrate = getID3Tags(path,filename)
+				path, filename = os_path.split(self.songList[index][0].filename)
+				audio, isAudio, title, genre, artist, album, tracknr, track, date, length, bitrate = getID3Tags(path, filename)
 				if audio:
 					if artist:
 						text = "%s - %s" % (title, artist)
@@ -1421,9 +1422,9 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 					text = title
 				audio = None
 		self.nextTitle = text
-		self.summaries.setText(text,4)
+		self.summaries.setText(text, 4)
 		if self.screenSaverScreen:
-			self.screenSaverScreen.updateLCD(text,4)
+			self.screenSaverScreen.updateLCD(text, 4)
 		return str(text)
 
 	def shuffleList(self):
@@ -1443,7 +1444,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 				index += 1
 			self["nextTitle"].setText(self.getNextTitle())
 		else:
-			self.session.open(MessageBox, _("Shuffle is not available yet with cue-files!"), type = MessageBox.TYPE_INFO,timeout = 20 )
+			self.session.open(MessageBox, _("Shuffle is not available yet with cue-files!"), type = MessageBox.TYPE_INFO, timeout = 20 )
 		self.resetScreenSaverTimer()
 
 	def repeatSong(self):
@@ -1455,7 +1456,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 				self["repeat"].setPixmapNum(0)
 			self["nextTitle"].setText(self.getNextTitle())
 		else:
-			self.session.open(MessageBox, _("Repeat is not available yet with cue-files!"), type = MessageBox.TYPE_INFO,timeout = 20 )
+			self.session.open(MessageBox, _("Repeat is not available yet with cue-files!"), type = MessageBox.TYPE_INFO, timeout = 20 )
 		self.resetScreenSaverTimer()
 
 	def showPlaylist(self):
@@ -1553,17 +1554,17 @@ class MerlinMusicPlayerLyrics(Screen):
 			audio = ID3(self.currentSong.filename)
 		except:
 			audio = None
-		text = getEncodedString(self.getLyricsFromID3Tag(audio)).replace("\r\n","\n")
-		text = text.replace("\r","\n")
+		text = getEncodedString(self.getLyricsFromID3Tag(audio)).replace("\r\n", "\n")
+		text = text.replace("\r", "\n")
 		self["lyric_text"].setText(text)
  
-	def getLyricsFromID3Tag(self,tag):
+	def getLyricsFromID3Tag(self, tag):
 		if tag:
 			for frame in tag.values():
 				if frame.FrameID == "USLT":
 					return frame.text
 		url = "http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist=%s&song=%s" % (quote(self.currentSong.artist), quote(self.currentSong.title))
-		sendUrlCommand(url, None,10).addCallback(self.gotLyrics).addErrback(self.urlError)
+		sendUrlCommand(url, None, 10).addCallback(self.gotLyrics).addErrback(self.urlError)
 		return "No lyrics found in id3-tag, trying api.chartlyrics.com..."
 
 	def urlError(self, error = None):
@@ -1578,7 +1579,7 @@ class MerlinMusicPlayerLyrics(Screen):
 		self["lyric_text"].setText(lyrictext)
 		title = root.findtext("{http://api.chartlyrics.com/}LyricSong").encode("utf-8", 'ignore')
 		artist = root.findtext("{http://api.chartlyrics.com/}LyricArtist").encode("utf-8", 'ignore')
-		result = _("Response -> lyrics for: %s (%s)") % (title,artist)
+		result = _("Response -> lyrics for: %s (%s)") % (title, artist)
 		self["resulttext"].setText(result)
 		if not lyrictext:
 			self["resulttext"].setText(_("No lyrics found"))
@@ -1660,26 +1661,26 @@ class MerlinMusicPlayerSongList(Screen):
 			songlist = self["list"].getList()
 			mode =  self.iDreamMode or songlist[index][0].PTS
 			if mode:
-				self.summaries.setText(songlist[index][0].title,1)
+				self.summaries.setText(songlist[index][0].title, 1)
 			else:
-				self.summaries.setText(songlist[index][0].text,1)
+				self.summaries.setText(songlist[index][0].text, 1)
 			count = self["list"].getItemCount()
 			# voheriges
 			index -= 1
 			if index < 0:
 				index = count
 			if mode:
-				self.summaries.setText(songlist[index][0].title,3)
+				self.summaries.setText(songlist[index][0].title, 3)
 			else:
-				self.summaries.setText(songlist[index][0].text,3)
+				self.summaries.setText(songlist[index][0].text, 3)
 			# naechstes
 			index = self["list"].getCurrentIndex() + 1
 			if index > count:
 				index = 0
 			if mode:
-				self.summaries.setText(songlist[index][0].title,4)
+				self.summaries.setText(songlist[index][0].title, 4)
 			else:
-				self.summaries.setText(songlist[index][0].text,4)
+				self.summaries.setText(songlist[index][0].text, 4)
 		except: pass
 
 	def createSummary(self):
@@ -1744,7 +1745,7 @@ class iDreamMerlin(Screen):
 			"yellow": self.yellow_pressed,
 			"blue": self.blue_pressed,
 			"menu": self.menu_pressed,
-			"info" : self.info_pressed,
+			"info": self.info_pressed,
 		}, -1)
 
 		self["actions2"] = NumberActionMap(["InputActions"],
@@ -1815,13 +1816,13 @@ class iDreamMerlin(Screen):
 		if answer:
 			playList = self.getPlayList()
 			if len(playList):
-				self.session.openWithCallback(methodName, ChoiceBox,list = playList)
+				self.session.openWithCallback(methodName, ChoiceBox, list = playList)
 			else:
 				self.session.openWithCallback(self.createPlaylistConfirmed, MessageBox, _("There are no playlists defined.\nDo you want to create a new playlist?"))
 
 	def menu_pressed(self):
 		self.startMerlinPlayerScreenTimer.stop()
-		options = [(_("Configuration"), self.config),(_("Search in iDream database"), self.searchInIDreamDatabase),]
+		options = [(_("Configuration"), self.config), (_("Search in iDream database"), self.searchInIDreamDatabase),]
 		options.extend(((_("Scan path for music files and add them to database"), self.scanDir),))
 		if self.mode != 1:
 			options.extend(((_("Create new playlist"), self.createPlaylist),))
@@ -1848,18 +1849,18 @@ class iDreamMerlin(Screen):
 				options.extend(((_("Add all songs from selected album to a playlist"), self.addAlbumToPlaylist),))
 			elif self.mode == 13:
 				options.extend(((_("Add all songs from selected genre to a playlist"), self.addGenreToPlaylist),))
-		self.session.openWithCallback(self.menuCallback, ChoiceBox,list = options)
+		self.session.openWithCallback(self.menuCallback, ChoiceBox, list = options)
 
 	def menuCallback(self, ret):
 		ret and ret[1]()
 
 	def scanDir(self):
 		SelectPath
-		self.session.openWithCallback(self.pathSelected,SelectPath,"/media/")
+		self.session.openWithCallback(self.pathSelected, SelectPath, "/media/")
 
 	def pathSelected(self, res):
 		if res is not None:
-			self.session.openWithCallback(self.filesAdded, iDreamAddToDatabase,res)
+			self.session.openWithCallback(self.filesAdded, iDreamAddToDatabase, res)
 
 	def filesAdded(self):
 		if pathToDatabase.isRunning:
@@ -1868,13 +1869,13 @@ class iDreamMerlin(Screen):
 			self.red_pressed()
 
 	def addGenreToPlaylist(self):
-		self.session.openWithCallback(boundFunction(self.addListToPlaylistConfirmed,self.addGenreToPlaylistConfirmedCallback), MessageBox, _("Do you really want to add all songs from that genre to a playlist?"))
+		self.session.openWithCallback(boundFunction(self.addListToPlaylistConfirmed, self.addGenreToPlaylistConfirmedCallback), MessageBox, _("Do you really want to add all songs from that genre to a playlist?"))
 
 	def addGenreToPlaylistConfirmedCallback(self, ret):
 		if ret:
 			sel = self.getCurrentSelection()
 			if sel:
-				self.sqlCommand("INSERT INTO Playlist_Songs (playlist_id,song_id) select %d, song_id from songs where genre_id=%d order by album_id,tracknumber,title,filename;" % (ret[1],sel.genreID))
+				self.sqlCommand("INSERT INTO Playlist_Songs (playlist_id,song_id) select %d, song_id from songs where genre_id=%d order by album_id,tracknumber,title,filename;" % (ret[1], sel.genreID))
 				self.clearCache()
 
 	def addArtistToPlaylist(self):
@@ -1884,7 +1885,7 @@ class iDreamMerlin(Screen):
 		if ret:
 			sel = self.getCurrentSelection()
 			if sel:
-				self.sqlCommand("INSERT INTO Playlist_Songs (playlist_id,song_id) select %d, song_id from songs where artist_id=%d order by album_id,tracknumber,title,filename;" % (ret[1],sel.artistID))
+				self.sqlCommand("INSERT INTO Playlist_Songs (playlist_id,song_id) select %d, song_id from songs where artist_id=%d order by album_id,tracknumber,title,filename;" % (ret[1], sel.artistID))
 				self.clearCache()
 
 	def addAlbumToPlaylist(self):
@@ -1894,7 +1895,7 @@ class iDreamMerlin(Screen):
 		if ret:
 			sel = self.getCurrentSelection()
 			if sel:
-				self.sqlCommand("INSERT INTO Playlist_Songs (playlist_id,song_id) select %d, song_id from songs where album_id=%d order by tracknumber,title,filename;" % (ret[1],sel.albumID))
+				self.sqlCommand("INSERT INTO Playlist_Songs (playlist_id,song_id) select %d, song_id from songs where album_id=%d order by tracknumber,title,filename;" % (ret[1], sel.albumID))
 				self.clearCache()
 
 	def deletePlaylist(self):
@@ -1935,7 +1936,7 @@ class iDreamMerlin(Screen):
 	def addSongToPlaylist(self):
 		playList = self.getPlayList()
 		if len(playList):
-			self.session.openWithCallback(self.addSongToPlaylistCallback, ChoiceBox,list = playList)
+			self.session.openWithCallback(self.addSongToPlaylistCallback, ChoiceBox, list = playList)
 		else:
 			self.session.openWithCallback(self.createPlaylistConfirmed, MessageBox, _("There are no playlists defined.\nDo you want to create a new playlist?"))
 
@@ -1943,11 +1944,11 @@ class iDreamMerlin(Screen):
 		if val:
 			self.createPlaylist()
 
-	def addSongToPlaylistCallback(self,ret):
+	def addSongToPlaylistCallback(self, ret):
 		if ret:
 			sel = self.getCurrentSelection()
 			if sel:
-				self.sqlCommand("INSERT INTO Playlist_Songs (playlist_id,song_id) VALUES(%d,%d);" % (ret[1],sel.songID))
+				self.sqlCommand("INSERT INTO Playlist_Songs (playlist_id,song_id) VALUES(%d,%d);" % (ret[1], sel.songID))
 				self.clearCache()
 
 	def createPlaylist(self):
@@ -1964,11 +1965,11 @@ class iDreamMerlin(Screen):
 			(_("search for artist"), 2),
 			(_("search for album"), 3),
 			(_("search in all of them"), 4),]
-		self.session.openWithCallback(self.enterSearchText, ChoiceBox,list = options)
+		self.session.openWithCallback(self.enterSearchText, ChoiceBox, list = options)
 
 	def enterSearchText(self, ret):
 		if ret:
-			self.session.openWithCallback(boundFunction(self.enterSearchTextFinished,ret[1]), VirtualKeyBoard, title = _("Enter search text"))
+			self.session.openWithCallback(boundFunction(self.enterSearchTextFinished, ret[1]), VirtualKeyBoard, title = _("Enter search text"))
 
 	def enterSearchTextFinished(self, searchType, searchText = None):
 		if searchText:
@@ -1983,7 +1984,7 @@ class iDreamMerlin(Screen):
 				sql_where = "where album_text like '%s'" % search
 				text = _('Search results for "%s" in all albums') % searchText
 			else:
-				sql_where = "where (title like '%s' or artists.artist like '%s' or album_text like '%s')"  % (search,search,search)
+				sql_where = "where (title like '%s' or artists.artist like '%s' or album_text like '%s')"  % (search, search, search)
 				text = _('Search results for "%s" in title, artist or album') % searchText
 			self.setButtons(red = True, yellow = True, blue = True)
 			oldmode = self.mode
@@ -2204,7 +2205,7 @@ class iDreamMerlin(Screen):
 				self.player.doClose()
 				self.player = None
 			self.startMerlinPlayerScreenTimer.stop()
-			self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,self["list"].getList()[1:], self["list"].getCurrentIndex() -1, True, self.currentService, self.serviceList)
+			self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen, self["list"].getList()[1:], self["list"].getCurrentIndex() -1, True, self.currentService, self.serviceList)
 			self.session.execDialog(self.player)
 
 	def red_pressed(self):
@@ -2447,18 +2448,18 @@ class iDreamMerlin(Screen):
 		if pathToDatabase.isRunning:
 			self.showScanner = eTimer()
 			self.showScanner.callback.append(self.showScannerCallback)
-			self.showScanner.start(0,1)
+			self.showScanner.start(0, 1)
 		else:
 			if config.plugins.merlinmusicplayer.startlastsonglist.value:
 				self.startPlayerTimer = eTimer()
 				self.startPlayerTimer.callback.append(self.startPlayerTimerCallback)
-				self.startPlayerTimer.start(0,1)
+				self.startPlayerTimer.start(0, 1)
 			self.mode = 0
 			self["list"].setMode(self.mode)
 			self.buildMainMenuList()
 
 	def showScannerCallback(self):
-		self.session.openWithCallback(self.filesAdded, iDreamAddToDatabase,None)
+		self.session.openWithCallback(self.filesAdded, iDreamAddToDatabase, None)
 
 	def startPlayerTimerCallback(self):
 		connection = OpenDatabase()
@@ -2484,7 +2485,7 @@ class iDreamMerlin(Screen):
 				index = config.plugins.merlinmusicplayer.lastsonglistindex.value
 				if index >= count:
 					index = 0
-				self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,SongList, index, iDreamMode, self.currentService, self.serviceList)
+				self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen, SongList, index, iDreamMode, self.currentService, self.serviceList)
 				self.session.execDialog(self.player)
 
 	def config(self):
@@ -2517,23 +2518,23 @@ class iDreamMerlin(Screen):
 				if self.player is not None:
 					self.player.doClose()
 					self.player = None
-				self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,SongList, 0, True, self.currentService, self.serviceList)
+				self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen, SongList, 0, True, self.currentService, self.serviceList)
 				self.player.playSong(self.player.songList[self.player.currentIndex][0].filename)
 				self.player["coverArt"].onShow()
 				self.player.init = 1
 			else:
 				self.player["nextTitle"].setText(self.player.getNextTitle())
-				self.session.open(MessageBox, _("%s\nappended to songlist") % sel.title, type = MessageBox.TYPE_INFO,timeout = 3)
+				self.session.open(MessageBox, _("%s\nappended to songlist") % sel.title, type = MessageBox.TYPE_INFO, timeout = 3)
 
 	def insertFileToSongList(self):
 		sel = self.getCurrentSelection()
 		if sel:
 			if self.player is not None and self.player.songList:
 				index = self.player.currentIndex
-				self.player.songList.insert(index+1,(sel,))
-				self.player.origSongList.insert(index+1,(sel,))
+				self.player.songList.insert(index+1, (sel,))
+				self.player.origSongList.insert(index+1, (sel,))
 				self.player["nextTitle"].setText(self.player.getNextTitle())
-				self.session.open(MessageBox, _("%s\ninserted and will be played as next song") % sel.title, type = MessageBox.TYPE_INFO,timeout = 3)
+				self.session.open(MessageBox, _("%s\ninserted and will be played as next song") % sel.title, type = MessageBox.TYPE_INFO, timeout = 3)
 			else:
 				self.appendFileToSongList()
 
@@ -2563,17 +2564,17 @@ class iDreamMerlin(Screen):
 			count = self["list"].getItemCount()
 			index = self["list"].getCurrentIndex()
 			iDreamList = self["list"].getList()
-			self.summaries.setText(iDreamList[index][0].title or iDreamList[index][0].text,1)
+			self.summaries.setText(iDreamList[index][0].title or iDreamList[index][0].text, 1)
 			# voheriges
 			index -= 1
 			if index < 0:
 				index = count
-			self.summaries.setText(iDreamList[index][0].title or iDreamList[index][0].text,3)
+			self.summaries.setText(iDreamList[index][0].title or iDreamList[index][0].text, 3)
 			# naechstes
 			index = self["list"].getCurrentIndex() + 1
 			if index > count:
 				index = 0
-			self.summaries.setText(iDreamList[index][0].title or iDreamList[index][0].text,4)
+			self.summaries.setText(iDreamList[index][0].title or iDreamList[index][0].text, 4)
 		except: pass
 
 	def createSummary(self):
@@ -2755,7 +2756,7 @@ class MerlinMediaPixmap(Pixmap):
 		if self.coverArtFileName != new_coverArtFileName:
 			if new_coverArtFileName:
 				self.coverArtFileName = new_coverArtFileName
-				print "[MerlinMusicPlayer] using cover from %s " % self.coverArtFileName
+				print("[MerlinMusicPlayer] using cover from %s " % self.coverArtFileName)
 				self.picload.startDecode(self.coverArtFileName)
 				back = True
 		else:
@@ -2772,7 +2773,7 @@ class MerlinMediaPixmap(Pixmap):
 		self.picload.startDecode(self.coverArtFileName)
 
 	def embeddedCoverArt(self):
-		print "[embeddedCoverArt] found"
+		print("[embeddedCoverArt] found")
 		self.coverArtFileName = "/tmp/.id3coverart"
 		self.picload.startDecode(self.coverArtFileName)
 
@@ -2959,11 +2960,11 @@ class MerlinMusicPlayerSetup(Screen, ConfigListScreen):
 	def keySelect(self):
 		cur = self["config"].getCurrent()
 		if cur == self.database:
-			self.session.openWithCallback(self.pathSelectedDatabase,SelectPath,config.plugins.merlinmusicplayer.databasepath.value)
+			self.session.openWithCallback(self.pathSelectedDatabase, SelectPath, config.plugins.merlinmusicplayer.databasepath.value)
 		elif cur == self.defaultFileBrowserPath:
-			self.session.openWithCallback(self.pathSelectedFilebrowser,SelectPath,config.plugins.merlinmusicplayer.defaultfilebrowserpath.value)
+			self.session.openWithCallback(self.pathSelectedFilebrowser, SelectPath, config.plugins.merlinmusicplayer.defaultfilebrowserpath.value)
 		elif cur == self.googleimage:
-			self.session.openWithCallback(self.pathSelectedGoogleImage,SelectPath,config.plugins.merlinmusicplayer.googleimagepath.value)
+			self.session.openWithCallback(self.pathSelectedGoogleImage, SelectPath, config.plugins.merlinmusicplayer.googleimagepath.value)
 
 	def pathSelectedGoogleImage(self, res):
 		if res is not None:
@@ -3033,15 +3034,15 @@ class MerlinMusicPlayerFileList(Screen):
 			"ok": self.ok,
 			"back": self.close,
 			"menu": self.menu_pressed,
-			"info" : self.info_pressed,
+			"info": self.info_pressed,
 			"green": self.green_pressed,
 			"up": self.moveup,
 			"down": self.movedown,
 			"right": self.moveright,
-			"left" : self.moveleft,
-			"blue" : self.appendFileToSongList,
-			"yellow" : self.insertFileToSongList,
-			"red" : self.stopPlayingAndAppendFileToSongList,
+			"left": self.moveleft,
+			"blue": self.appendFileToSongList,
+			"yellow": self.insertFileToSongList,
+			"red": self.stopPlayingAndAppendFileToSongList,
 		}, -1)
 		self.serviceList = servicelist
 		self["headertext"] = Label()
@@ -3059,7 +3060,7 @@ class MerlinMusicPlayerFileList(Screen):
 		if config.plugins.merlinmusicplayer.startlastsonglist.value:
 			self.startPlayerTimer = eTimer()
 			self.startPlayerTimer.callback.append(self.startPlayerTimerCallback)
-			self.startPlayerTimer.start(0,1)
+			self.startPlayerTimer.start(0, 1)
 
 	def startPlayerTimerCallback(self):
 		connection = OpenDatabase()
@@ -3085,7 +3086,7 @@ class MerlinMusicPlayerFileList(Screen):
 				index = config.plugins.merlinmusicplayer.lastsonglistindex.value
 				if index >= count:
 					index = 0
-				self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,SongList, index, iDreamMode, self.currentService, self.serviceList)
+				self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen, SongList, index, iDreamMode, self.currentService, self.serviceList)
 				self.session.execDialog(self.player)
 
 	def readCUE(self, filename):
@@ -3134,7 +3135,7 @@ class MerlinMusicPlayerFileList(Screen):
 					m1 = msts_re.search(m.group('track_index'))
 					if m1:
 						pts = (int(m1.group('mins')) * 60 + int(m1.group('secs'))) * 90000
-						SongList.append((Item(text = title, filename = songfilename, title = title, artist = performer, album = album,join = False, PTS = pts),))
+						SongList.append((Item(text = title, filename = songfilename, title = title, artist = performer, album = album, join = False, PTS = pts),))
 		cuefile.close()
 		return SongList
 
@@ -3149,14 +3150,14 @@ class MerlinMusicPlayerFileList(Screen):
 			entry = line.strip()
 			if entry != "":
 				if entry.startswith("#EXTINF:"):
-					extinf = entry.split(',',1)
+					extinf = entry.split(',', 1)
 					if len(extinf) > 1:
 						displayname = extinf[1]
 				elif entry[0] != "#":
 					if entry[0] == "/":
 						songfilename = entry
 					else:
-						songfilename = os_path.join(os_path.dirname(filename),entry)
+						songfilename = os_path.join(os_path.dirname(filename), entry)
 					if displayname:
 						text = displayname
 						displayname = None
@@ -3195,17 +3196,17 @@ class MerlinMusicPlayerFileList(Screen):
 			files.sort()
 			for filename in files:
 				if filename.lower().endswith(".mp3") or filename.lower().endswith(".flac") or filename.lower().endswith(".m4a") or filename.lower().endswith(".ogg"):
-					SongList.append((Item(text = filename, filename = os_path.join(root,filename)),))
+					SongList.append((Item(text = filename, filename = os_path.join(root, filename)),))
 		if self.player is not None:
 			self.player.doClose()
 			self.player = None
 		self.startMerlinPlayerScreenTimer.stop()
 		count = len(SongList)
 		if count:
-			self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,SongList, 0, False, self.currentService, self.serviceList)
+			self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen, SongList, 0, False, self.currentService, self.serviceList)
 			self.session.execDialog(self.player)
 		else:
-			self.session.open(MessageBox, _("No music files found!"), type = MessageBox.TYPE_INFO,timeout = 20 )
+			self.session.open(MessageBox, _("No music files found!"), type = MessageBox.TYPE_INFO, timeout = 20 )
 
 	def ok(self):
 		if self["list"].canDescent():
@@ -3218,17 +3219,17 @@ class MerlinMusicPlayerFileList(Screen):
 			index = 0
 			currentFilename = self["list"].getFilename()
  			if currentFilename.lower().endswith(".m3u"):
-				SongList = self.readM3U(os_path.join(self["list"].getCurrentDirectory(),currentFilename))
+				SongList = self.readM3U(os_path.join(self["list"].getCurrentDirectory(), currentFilename))
 			elif currentFilename.lower().endswith(".pls"):
-				SongList = self.readPLS(os_path.join(self["list"].getCurrentDirectory(),currentFilename))
+				SongList = self.readPLS(os_path.join(self["list"].getCurrentDirectory(), currentFilename))
 			elif currentFilename.lower().endswith(".cue"):
-				SongList = self.readCUE(os_path.join(self["list"].getCurrentDirectory(),currentFilename))
+				SongList = self.readCUE(os_path.join(self["list"].getCurrentDirectory(), currentFilename))
 			else:
 				files = os_listdir(self["list"].getCurrentDirectory())
 				files.sort()
 				for filename in files:
 					if filename.lower().endswith(".mp3") or filename.lower().endswith(".flac") or filename.lower().endswith(".m4a") or filename.lower().endswith(".ogg"):
-						SongList.append((Item(text = filename, filename = os_path.join(self["list"].getCurrentDirectory(),filename)),))
+						SongList.append((Item(text = filename, filename = os_path.join(self["list"].getCurrentDirectory(), filename)),))
 						if self["list"].getFilename() == filename:
 							foundIndex = index
 						index += 1
@@ -3242,7 +3243,7 @@ class MerlinMusicPlayerFileList(Screen):
 				self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen, SongList, foundIndex, False, self.currentService, self.serviceList)
 				self.session.execDialog(self.player)
 			else:
-				self.session.open(MessageBox, _("No music files found!"), type = MessageBox.TYPE_INFO,timeout = 20 )
+				self.session.open(MessageBox, _("No music files found!"), type = MessageBox.TYPE_INFO, timeout = 20 )
 
 	def config(self):
 		self.startMerlinPlayerScreenTimer.stop()
@@ -3258,7 +3259,7 @@ class MerlinMusicPlayerFileList(Screen):
 				options.extend(((_("Append file to current songlist"), self.appendFileToSongList),))
 				if self.player is not None and self.player.songList:
 					options.extend(((_("Insert file to current songlist and play next"), self.insertFileToSongList),))
-		self.session.openWithCallback(self.menuCallback, ChoiceBox,list = options)
+		self.session.openWithCallback(self.menuCallback, ChoiceBox, list = options)
 
 	def menuCallback(self, ret):
 		ret and ret[1]()
@@ -3276,7 +3277,7 @@ class MerlinMusicPlayerFileList(Screen):
 		filename = self["list"].getFilename()
 		if filename.lower().endswith(".mp3") or filename.lower().endswith(".flac") or filename.lower().endswith(".m4a") or filename.lower().endswith(".ogg"):
 			SongList = []
-			a = Item(text = filename, filename = os_path.join(self["list"].getCurrentDirectory(),filename))
+			a = Item(text = filename, filename = os_path.join(self["list"].getCurrentDirectory(), filename))
 			if playerAvailable:
 				self.player.songList.append((a,))
 				self.player.origSongList.append((a,))
@@ -3286,24 +3287,24 @@ class MerlinMusicPlayerFileList(Screen):
 				if self.player is not None:
 					self.player.doClose()
 					self.player = None
-				self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,SongList, 0, False, self.currentService, self.serviceList)
+				self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen, SongList, 0, False, self.currentService, self.serviceList)
 				self.player.playSong(self.player.songList[self.player.currentIndex][0].filename)
 				self.player["coverArt"].onShow()
 				self.player.init = 1
 			else:
 				self.player["nextTitle"].setText(self.player.getNextTitle())
-				self.session.open(MessageBox, _("%s\nappended to songlist")%a.text, type = MessageBox.TYPE_INFO,timeout = 3 )
+				self.session.open(MessageBox, _("%s\nappended to songlist")%a.text, type = MessageBox.TYPE_INFO, timeout = 3 )
 
 	def insertFileToSongList(self):
 		if self.player is not None and self.player.songList:
 			index = self.player.currentIndex
 			filename = self["list"].getFilename()
 			if filename.lower().endswith(".mp3") or filename.lower().endswith(".flac") or filename.lower().endswith(".m4a") or filename.lower().endswith(".ogg"):
-				a = Item(text = filename, filename = os_path.join(self["list"].getCurrentDirectory(),filename))
-				self.player.songList.insert(index+1,(a,))
-				self.player.origSongList.insert(index+1,(a,))
+				a = Item(text = filename, filename = os_path.join(self["list"].getCurrentDirectory(), filename))
+				self.player.songList.insert(index+1, (a,))
+				self.player.origSongList.insert(index+1, (a,))
 				self.player["nextTitle"].setText(self.player.getNextTitle())
-				self.session.open(MessageBox, _("%s\ninserted and will be played as next song")%a.text, type = MessageBox.TYPE_INFO,timeout = 3 )
+				self.session.open(MessageBox, _("%s\ninserted and will be played as next song")%a.text, type = MessageBox.TYPE_INFO, timeout = 3 )
 		else:
 			self.appendFileToSongList()
 
@@ -3343,7 +3344,7 @@ class MerlinMusicPlayerFileList(Screen):
 		text = sel[1][7]
 		if sel[0][1] == True:
 			text = "/" + text
-		self.summaries.setText(text,1)
+		self.summaries.setText(text, 1)
 		# voheriges
 		index -= 1
 		if index < 0:
@@ -3352,7 +3353,7 @@ class MerlinMusicPlayerFileList(Screen):
 		text = sel[1][7]
 		if sel[0][1] == True:
 			text = "/" + text
-		self.summaries.setText(text,3)
+		self.summaries.setText(text, 3)
 		# naechstes
 		index = self["list"].getSelectionIndex() + 1
 		if index > (len(self["list"].list) -1):
@@ -3361,7 +3362,7 @@ class MerlinMusicPlayerFileList(Screen):
 		text = sel[1][7]
 		if sel[0][1] == True:
 			text = "/" + text
-		self.summaries.setText(text,4)
+		self.summaries.setText(text, 4)
 
 	def __onClose(self):
 		self.startMerlinPlayerScreenTimer.stop()

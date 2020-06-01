@@ -52,7 +52,7 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
     site_name = "Subtitulos"
 
     def __init__(self, config, cache_folder_path):
-        super(Subtitulos, self).__init__(langs=None,revertlangs=LANGUAGES)
+        super(Subtitulos, self).__init__(langs=None, revertlangs=LANGUAGES)
         #http://www.subtitulos.es/dexter/4x01
         self.host = "http://www.subtitulos.es"
         self.release_pattern = re.compile("Versi&oacute;n (.+) ([0-9]+).([0-9])+ megabytes")
@@ -108,10 +108,10 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
 
             nexts = subs.findAll("ul", {"class":"sslist"})
             for lang_html in nexts:
-                langLI = lang_html.findNext("li",{"class":"li-idioma"} )
+                langLI = lang_html.findNext("li", {"class":"li-idioma"} )
                 lang = self.getLG(langLI.find("strong").contents[0].string.strip())
         
-                statusLI = lang_html.findNext("li",{"class":"li-estado green"} )
+                statusLI = lang_html.findNext("li", {"class":"li-estado green"} )
                 status = statusLI.contents[0].string.strip()
 
                 link = statusLI.findNext("span", {"class":"descargar green"}).find("a")["href"]

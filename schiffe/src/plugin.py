@@ -8,6 +8,7 @@
 # version.
 #===============================================================================
 
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -27,7 +28,7 @@ XMAX  = 10
 YMAX  = 10
 XYMAX = 100
 
-def RGB(r,g,b):
+def RGB(r, g, b):
 	return (r<<16)|(g<<8)|b
 
 def main(session,**kwargs):
@@ -65,10 +66,10 @@ class GameCell:
 		self.hide_ = f
 
 	def paint(self):
-		fg    = RGB(255,255,255) # foreground
-		blue  = RGB(  0,  0,255) # background water
-		focus = RGB(192,192,  0) # background focus
-		green = RGB(  0,255,  0) # background Ship
+		fg    = RGB(255, 255, 255) # foreground
+		blue  = RGB(  0,  0, 255) # background water
+		focus = RGB(192, 192,  0) # background focus
+		green = RGB(  0, 255,  0) # background Ship
 		red   = RGB(255,  0,  0) # background Ship hit
 
 		if self.value_ == 0:
@@ -271,7 +272,7 @@ class Schiffe(Screen):
 						cell.setHide(False)
 						cell.paint()
 		else:
-			print "Game over, start new game!"
+			print("Game over, start new game!")
 
 	def up_pressed(self):
 		if self.Focus > XMAX-1:
@@ -546,7 +547,7 @@ def calcNewField(field):
 
 	lx = -1
 	i = 0
-	while 1:
+	while True:
 		if i+1<XYMAX:
 			x = rand() % XMAX
 			y = 2 * (rand() % (YMAX / 2)) + (x % 2)

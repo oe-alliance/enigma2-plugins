@@ -1,3 +1,4 @@
+from __future__ import print_function
 ##
 ## ORF.at IPTV
 ## by AliAbdul
@@ -259,7 +260,7 @@ class ORFMain(Screen):
 		getPage(self.mainUrl).addCallback(self.downloadListCallback).addErrback(self.downloadListError)
 
 	def downloadListError(self, error=""):
-		print "[ORF.at] Fehler beim Verbindungsversuch:", str(error)
+		print("[ORF.at] Fehler beim Verbindungsversuch:", str(error))
 		self.working = False
 		self.session.open(MessageBox, "Fehler beim Verbindungsversuch!", MessageBox.TYPE_ERROR)
 
@@ -311,7 +312,7 @@ class ORFMain(Screen):
 		self.working = False
 
 	def downloadPicError(self, error=""):
-		print str(error)
+		print(str(error))
 		self["pic"].hide()
 		self.working = False
 		self.session.open(MessageBox, "Fehler beim Herunterladen des Eintrags!", MessageBox.TYPE_ERROR)

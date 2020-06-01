@@ -103,11 +103,11 @@ class GrowlTalk(DatagramProtocol):
 			if digest != checksum.digest():
 				return
 
-			nlen, tlen, dlen, alen = unpack("!HHHH",str(data[4:12]))
+			nlen, tlen, dlen, alen = unpack("!HHHH", str(data[4:12]))
 			notification, title, description = unpack("%ds%ds%ds" % (nlen, tlen, dlen), data[12:Len-alen-16])
 		# type == GROWL_TYPE_NOTIFICATION_NOAUTH
 		elif data[1] == '\x05':
-			nlen, tlen, dlen, alen = unpack("!HHHH",str(data[4:12]))
+			nlen, tlen, dlen, alen = unpack("!HHHH", str(data[4:12]))
 			notification, title, description = unpack("%ds%ds%ds" % (nlen, tlen, dlen), data[12:Len-alen])
 		else:
 			# don't handle any other packet yet

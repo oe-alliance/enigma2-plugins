@@ -24,9 +24,9 @@ class External(Source):
 
 	list = property(getList)
 	lut = {
-				"Path":0,
-				"Name":1,
-				"Version":2,
-				"HasGUI":3,
-				"GUITarget":4,
+				"Path": 0,
+				"Name": 1,
+				"Version": 2,
+				"HasGUI": 3,
+				"GUITarget": 4,
 	}

@@ -93,9 +93,9 @@ class MovableScreen():
 
     def moveKeyNumber(self, number):
         #x- Positioning
-        if number in (1,4,7):
+        if number in (1, 4, 7):
             iPosX = self.moveMinMargin
-        elif number in (2,5,8,0):
+        elif number in (2, 5, 8, 0):
             iPosX = (self.desktopWidth - self.screenSize_x)/2
         else:
             iPosX = self.desktopWidth - self.moveMinMargin - self.screenSize_x
@@ -103,11 +103,11 @@ class MovableScreen():
         self.configRoot.position_x.value = iPosX
 
         #y- positioning
-        if number in (0,1,2,3):
+        if number in (0, 1, 2, 3):
             iPosY = self.moveMinMargin
-        elif number in (4,5,6):
+        elif number in (4, 5, 6):
             iPosY = (self.desktopHeight - self.screenSize_y)/2
-        elif number in (7,8,9):    
+        elif number in (7, 8, 9):    
             iPosY = self.desktopHeight - self.moveMinMargin - self.screenSize_y
             
         self.configRoot.position_y.value = iPosY
@@ -122,7 +122,7 @@ class MovableScreen():
         self.configRoot.position_y.cancel()
         self.setEnableMoveKeymap(False)
 
-    def setEnableMoveKeymap(self,enabled):
+    def setEnableMoveKeymap(self, enabled):
         self["MovableScreenActions"].setEnabled(enabled)
         for keymap in self.disableKeymaps:
             keymap.setEnabled(not(enabled))

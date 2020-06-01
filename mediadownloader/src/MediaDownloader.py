@@ -27,7 +27,7 @@ def _parse(url, defaultPort = None):
 	url = url.strip()
 	parsed = urlparse(url)
 	scheme = parsed[0]
-	path = urlunparse(('','')+parsed[2:])
+	path = urlunparse(('', '')+parsed[2:])
 
 	if defaultPort is None:
 		if scheme == 'https':

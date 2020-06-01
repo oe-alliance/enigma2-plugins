@@ -19,6 +19,7 @@
 #  distributed other than under the conditions noted above.
 #
 
+from __future__ import print_function
 import os
 from LocaleInit import _
 from ServiceUtils import diskUsage, getDirSize, realSize
@@ -115,11 +116,11 @@ class DirectoryInfo():
 
     def write(self):
         if self.meta_file == '/.meta':
-            print "[AdvancedMovieSelection] Write new meta skipped"
+            print("[AdvancedMovieSelection] Write new meta skipped")
             return
         metafile = None
         try:
-            print "[AdvancedMovieSelection] Write new meta:", self.meta_file, self.sort_type, self.used
+            print("[AdvancedMovieSelection] Write new meta:", self.meta_file, self.sort_type, self.used)
             metafile = open(self.meta_file, "w")
             metafile.write(str(self.name) + '\n')
             metafile.write(str(self.sort_type) + '\n')
@@ -144,13 +145,13 @@ class DirectoryInfo():
         total, used, free = diskUsage(self.dir_path)
         result = self.used != used
         if result and update:
-            print "[AdvancedMovieSelection] update disc usage:", total, self.used, used, free
+            print("[AdvancedMovieSelection] update disc usage:", total, self.used, used, free)
             self.used = used
         return result
 
     def updateFolderSize(self):
         self.dir_size = getDirSize(self.dir_path)
-        print "scanned folder size", self.dir_size
+        print("scanned folder size", self.dir_size)
     
     def getmount(self, path=None):
         path = path and path or self.dir_path

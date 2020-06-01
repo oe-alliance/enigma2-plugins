@@ -32,7 +32,7 @@ class ConfigMutable(ConfigElement):
 	def __init__(self, configElementDict, defaultKey):
 		ConfigElement.__init__(self)
 		self.configElementDict = configElementDict
-		if self.configElementDict.has_key(defaultKey):
+		if defaultKey in self.configElementDict:
 			self.currentConfig = self.configElementDict[defaultKey]
 			self.currentKey = defaultKey
 			self.defaultKey = self.currentKey
@@ -41,7 +41,7 @@ class ConfigMutable(ConfigElement):
 		self.elements[key] = configElement
 
 	def setAsCurrent(self, key):
-		if self.configElementDict.has_key(key):
+		if key in self.configElementDict:
 			self.currentConfig = self.configElementDict[key]
 			self.currentKey = key
 			self.saved_value = self.currentConfig.saved_value
@@ -152,10 +152,10 @@ class __VlcServerConfig():
 				 ("IP", _("IP-Address"))
 				], "IP")
 		newServerConfigSubsection.hostip = ConfigMutable(
-				{"IP": ConfigIP([192,168,1,1]),
+				{"IP": ConfigIP([192, 168, 1, 1]),
 				 "FQDN": ConfigText("fqdname", False)
 				}, newServerConfigSubsection.addressType.value)
-		newServerConfigSubsection.httpport = ConfigInteger(8080, (0,65535))
+		newServerConfigSubsection.httpport = ConfigInteger(8080, (0, 65535))
 		newServerConfigSubsection.vlctype = ConfigYesNo(False)
 		newServerConfigSubsection.basedir = ConfigText("/", False)
 		newServerConfigSubsection.pingonopen = ConfigYesNo(True)
@@ -233,24 +233,24 @@ class __VlcServerConfig():
 				], "language")
 		newServerConfigSubsection.typeAudio = ConfigMutable(
 				{"track": ConfigSelection([
-							("-1","-1"),
-							("0","0"),
-							("1","1"),
-							("2","2"),
-							("3","3"),
-							("4","4"),
-							("5","5"),
-							("6","6"),
-							("7","7"),
-							("8","8"),
-							("9","9"),
-							("10","10"),
-							("11","11"),
-							("12","12"),
-							("13","13"),
-							("14","14"),
-							("15","15")
-							],"-1"),
+							("-1", "-1"),
+							("0", "0"),
+							("1", "1"),
+							("2", "2"),
+							("3", "3"),
+							("4", "4"),
+							("5", "5"),
+							("6", "6"),
+							("7", "7"),
+							("8", "8"),
+							("9", "9"),
+							("10", "10"),
+							("11", "11"),
+							("12", "12"),
+							("13", "13"),
+							("14", "14"),
+							("15", "15")
+							], "-1"),
 				 "language": ConfigSelection([
 							("---", "None"),
 							("ara", "Arabic"),
@@ -281,28 +281,28 @@ class __VlcServerConfig():
 							("spa", "Spanish"),
 							("swe", "Swedish"),
 							("tur", "Turkish")
-							],"---")
+							], "---")
 				}, newServerConfigSubsection.langInputType.value)
 		newServerConfigSubsection.typeSubtitles = ConfigMutable(
 				{"track": ConfigSelection([
-							("-1","-1"),
-							("0","0"),
-							("1","1"),
-							("2","2"),
-							("3","3"),
-							("4","4"),
-							("5","5"),
-							("6","6"),
-							("7","7"),
-							("8","8"),
-							("9","9"),
-							("10","10"),
-							("11","11"),
-							("12","12"),
-							("13","13"),
-							("14","14"),
-							("15","15")
-							],"-1"),
+							("-1", "-1"),
+							("0", "0"),
+							("1", "1"),
+							("2", "2"),
+							("3", "3"),
+							("4", "4"),
+							("5", "5"),
+							("6", "6"),
+							("7", "7"),
+							("8", "8"),
+							("9", "9"),
+							("10", "10"),
+							("11", "11"),
+							("12", "12"),
+							("13", "13"),
+							("14", "14"),
+							("15", "15")
+							], "-1"),
 				 "language": ConfigSelection([
 							("---", "None"),
 							("ara", "Arabic"),
@@ -333,7 +333,7 @@ class __VlcServerConfig():
 							("spa", "Spanish"),
 							("swe", "Swedish"),
 							("tur", "Turkish")
-							],"---")
+							], "---")
 				}, newServerConfigSubsection.langInputType.value)
 
 		newServer = VlcServer(newServerConfigSubsection)

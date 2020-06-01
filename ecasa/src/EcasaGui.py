@@ -121,10 +121,10 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 			"nextPage": (self.nextPage, _("show next page")),
 			"prevPage": (self.prevPage, _("show previous page")),
 			"select": self.select,
-			"exit":self.close,
-			"albums":(self.albums, _("show your albums (if logged in)")),
-			"search":(self.search, _("start a new search")),
-			"contextMenu":(self.contextMenu, _("open context menu")),
+			"exit": self.close,
+			"albums": (self.albums, _("show your albums (if logged in)")),
+			"search": (self.search, _("start a new search")),
+			"contextMenu": (self.contextMenu, _("open context menu")),
 			}, -1)
 
 		self.offset = 0
@@ -514,10 +514,10 @@ class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 		self['key_blue'] = StaticText(_("User history"))
 
 		self["albumviewActions"] = HelpableActionMap(self, "EcasaAlbumviewActions", {
-			"select":(self.select, _("show album")),
-			"exit":(self.close, _("Close")),
-			"users":(self.users, _("Change user")),
-			"history":(self.history, _("User history")),
+			"select": (self.select, _("show album")),
+			"exit": (self.close, _("Close")),
+			"users": (self.users, _("Change user")),
+			"history": (self.history, _("User history")),
 		}, -1)
 
 		self.acquireAlbumsForUser(user)
@@ -608,7 +608,7 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 			<widget source="summary" render="Label" position="25,60" zPosition="1" size="{labelwidth},100" valign="top" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
 			<widget source="keywords" render="Label" position="25,160" zPosition="1" size="{labelwidth},40" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
 			<widget source="camera" render="Label" position="25,180" zPosition="1" size="{labelwidth},40" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
-		</screen>""".format(size_w=size_w,size_h=size_h,labelwidth=size_w-50)
+		</screen>""".format(size_w=size_w, size_h=size_h, labelwidth=size_w-50)
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		InfoBarNotifications.__init__(self)
@@ -628,7 +628,7 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		self["pictureActions"] = HelpableActionMap(self, "EcasaPictureActions", {
 			"info": (self.info, _("show metadata")),
 			"exit": (self.close, _("Close")),
-			"contextMenu":(self.contextMenu, _("open context menu")),
+			"contextMenu": (self.contextMenu, _("open context menu")),
 			}, -1)
 		if prevFunc and nextFunc:
 			self["directionActions"] = HelpableActionMap(self, "DirectionActions", {

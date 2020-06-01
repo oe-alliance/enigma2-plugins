@@ -79,7 +79,7 @@ class Poller( object ):
     def apply(self, data, set_nones=True):
         # apply data directly, bypassing callable function
         unfilled = False
-        for k,v in self.lookup.items():
+        for k, v in self.lookup.items():
             if (k in data) and \
                     ((data[k] is not None) if callable(self.func) else True):
                 # argument received data, populate it
@@ -286,7 +286,7 @@ class ElementType( type ):
                         # extract copies of each defined Poller function
                         # from parent classes
                         pollers[k] = attr.func
-        for k,attr in attrs.items():
+        for k, attr in attrs.items():
             if isinstance(attr, Data):
                 data[k] = attr
         if '_populate' in attrs:
@@ -295,9 +295,9 @@ class ElementType( type ):
         # process all defined Data attribues, testing for use as an initial
         # argument, and building a list of what Pollers are used to populate
         # which Data points
-        pollermap = dict([(k,[]) for k in pollers])
+        pollermap = dict([(k, []) for k in pollers])
         initargs = []
-        for k,v in data.items():
+        for k, v in data.items():
             v.name = k
             if v.initarg:
                 initargs.append(v)
@@ -313,7 +313,7 @@ class ElementType( type ):
 
         # wrap each used poller function with a Poller class, and push into
         # the new class attributes
-        for k,v in pollermap.items():
+        for k, v in pollermap.items():
             if len(v) == 0:
                 continue
             lookup = dict([(attr.field, attr.name) for attr in v])
@@ -354,7 +354,7 @@ class ElementType( type ):
             if len(args) != len(cls._InitArgs):
                 raise TypeError('__init__() takes exactly {0} arguments ({1} given)'\
                             .format(len(cls._InitArgs)+1, len(args)+1))
-            for a,v in zip(cls._InitArgs, args):
+            for a, v in zip(cls._InitArgs, args):
                 setattr(obj, a, v)
 
         obj.__init__()

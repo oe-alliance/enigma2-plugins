@@ -38,10 +38,10 @@ class SubtitleDB(object):
     def __init__(self, langs, revertlangs = None):
         if langs:
             self.langs = langs
-            self.revertlangs = dict(map(lambda item: (item[1],item[0]), self.langs.items()))
+            self.revertlangs = dict(map(lambda item: (item[1], item[0]), self.langs.items()))
         if revertlangs:
             self.revertlangs = revertlangs
-            self.langs = dict(map(lambda item: (item[1],item[0]), self.revertlangs.items()))
+            self.langs = dict(map(lambda item: (item[1], item[0]), self.revertlangs.items()))
         #self.tvshowRegex = re.compile('(?P<show>.*)S(?P<season>[0-9]{2})E(?P<episode>[0-9]{2}).(?P<teams>.*)', re.IGNORECASE)
         #self.tvshowRegex2 = re.compile('(?P<show>.*).(?P<season>[0-9]{1,2})x(?P<episode>[0-9]{1,2}).(?P<teams>.*)', re.IGNORECASE)
         #self.movieRegex = re.compile('(?P<movie>.*)[\.|\[|\(| ]{1}(?P<year>(?:(?:19|20)[0-9]{2}))(?P<teams>.*)', re.IGNORECASE)
@@ -67,7 +67,7 @@ class SubtitleDB(object):
         fname = self.getFileName(filepath)
         try:
             return self.query(fname, langs)
-        except Exception, e:
+        except Exception as e:
             log.exception("Error occured")
             return []
         
@@ -111,9 +111,9 @@ class SubtitleDB(object):
             content = f.read()
             f.close()
             return content
-        except urllib2.HTTPError, e:
+        except urllib2.HTTPError as e:
             log.warning("HTTP Error: %s - %s" % (e.code, url))
-        except urllib2.URLError, e:
+        except urllib2.URLError as e:
             log.warning("URL Error: %s - %s" % (e.reason, url))
 
     def downloadFile(self, url, filename):
@@ -122,20 +122,20 @@ class SubtitleDB(object):
         dump = open(filename, "wb")
         dump.write(content)
         dump.close()
-        log.debug("Download finished to file %s. Size : %s"%(filename,os.path.getsize(filename)))
+        log.debug("Download finished to file %s. Size : %s"%(filename, os.path.getsize(filename)))
         
     def getLG(self, language):
         ''' Returns the short (two-character) representation of the long language name'''
         try:
             return self.revertlangs[language]
-        except KeyError, e:
+        except KeyError as e:
             log.warn("Ooops, you found a missing language in the config file of %s: %s. Send a bug report to have it added." %(self.__class__.__name__, language))
         
     def getLanguage(self, lg):
         ''' Returns the long naming of the language on a two character code '''
         try:
             return self.langs[lg]
-        except KeyError, e:
+        except KeyError as e:
             log.warn("Ooops, you found a missing language in the config file of %s: %s. Send a bug report to have it added." %(self.__class__.__name__, lg))
     
     def query(self, token):

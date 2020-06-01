@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from Components.Sources.Source import Source
 
 class PkgList(Source):
@@ -27,7 +28,7 @@ class PkgList(Source):
 		try:
 			out = os_popen("opkg update")
 			for line in out:
-				print "[loadOpkgfeed]",line
+				print("[loadOpkgfeed]", line)
 				
 			out = os_popen("opkg list")
 			for line in out:
@@ -41,23 +42,23 @@ class PkgList(Source):
 						self.err=True
 						return
 					
-				if map.has_key(package[PKG_NAME]):
+				if package[PKG_NAME] in map:
 					if map[package[PKG_NAME]][0] > package[PKG_REL]:
 						continue
 				map.update( { package[PKG_NAME] : [ (package[PKG_REL][:-1] if len(package) < 3 else package[PKG_REL]),
 					("" if len(package) < 3 else package[PKG_INFO][:-1]),
-					 "0" , 
+					 "0", 
 					 "0"] } )
 			out = os_popen("opkg list-installed")
 			for line in out:
 				package = line.split(' - ')
-				if map.has_key(package[PKG_NAME]):
+				if package[PKG_NAME] in map:
 					map[package[PKG_NAME]][2] = "1"
 		
 			out = os_popen("opkg list-upgradable")
 			for line in out:
 				package = line.split(' - ')
-				if map.has_key(package[PKG_NAME]):
+				if package[PKG_NAME] in map:
 					map[package[PKG_NAME]][0] = package[PKG_REL].replace("experimental-", "exp. ") + " -> " + package[PKG_INFO][:-1].replace("experimental-", "exp. ")
 					map[package[PKG_NAME]][3] = "1"
 		
@@ -65,8 +66,8 @@ class PkgList(Source):
 			keys.sort()
 			
 			return [ (name, map[name][0], map[name][1], map[name][2], map[name][3]) for name in keys ]
-		except Exception, e:
-			print "[PkgList] except: ",str(e)
+		except Exception as e:
+			print("[PkgList] except: ", str(e))
 			return []
 		
 	def getOpkgfeed(self):
@@ -121,9 +122,9 @@ class PkgList(Source):
 			return PKGCACHE
 
 	list = property(getOpkgfeed)
-	lut = {"Packagename" : 0,
-		"Release" : 1,
-		"Info" : 2,
-		"State" : 3,
-		"Update" : 4,
+	lut = {"Packagename": 0,
+		"Release": 1,
+		"Info": 2,
+		"State": 3,
+		"Update": 4,
 	}

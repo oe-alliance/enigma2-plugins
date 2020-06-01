@@ -224,10 +224,10 @@ class EmissionOverview(Screen, HelpableScreen):
 			self.sortCallback,
 			ChoiceBox,
 			_("Which sorting method do you prefer?"),
-			[(_("by eta") ,SORT_TYPE_TIME),
-			(_("by progress") ,SORT_TYPE_PROGRESS),
-			(_("by age") ,SORT_TYPE_ADDED),
-			(_("by speed") ,SORT_TYPE_SPEED)]
+			[(_("by eta"), SORT_TYPE_TIME),
+			(_("by progress"), SORT_TYPE_PROGRESS),
+			(_("by age"), SORT_TYPE_ADDED),
+			(_("by speed"), SORT_TYPE_SPEED)]
 		)
 
 	def pauseShown(self):

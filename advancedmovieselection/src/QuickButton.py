@@ -19,6 +19,7 @@
 #  modify it (if you keep the license), but it may not be commercially 
 #  distributed other than under the conditions noted above.
 #
+from __future__ import print_function
 from __init__ import _
 from Components.config import config
 from Components.ActionMap import HelpableActionMap
@@ -150,12 +151,12 @@ class QuickButton:
         sort = config.AdvancedMovieSelection.sort_functions.value.split()
         # TODO: remove printout after beta tests
         if len(sort) < 1:
-            print "default sort list"
+            print("default sort list")
             sort = [MovieList.SORT_ALPHANUMERIC, MovieList.SORT_DESCRIPTION, MovieList.SORT_DATE_DESC, MovieList.SORT_DATE_ASC]
-        print "sorting:", sort
-        print "current:", str(config.movielist.moviesort.value)
+        print("sorting:", sort)
+        print("current:", str(config.movielist.moviesort.value))
         newType = int(self.getNextFromList(sort, config.movielist.moviesort.value))
-        print "next:", str(newType)
+        print("next:", str(newType))
         return newType
 
     def findButton(self, function):
@@ -201,19 +202,19 @@ class QuickButton:
         self.startPlugin(qButtons.getFunction("blue"), self["key_blue"])
  
     def redpressedlong(self):
-        print "red long"
+        print("red long")
         self.startPlugin(qButtons.getFunction("red_long"), None)
 
     def greenpressedlong(self):
-        print "green long"
+        print("green long")
         self.startPlugin(qButtons.getFunction("green_long"), None)
 
     def yellowpressedlong(self):
-        print "yellow long"
+        print("yellow long")
         self.startPlugin(qButtons.getFunction("yellow_long"), None)
 
     def bluepressedlong(self):
-        print "blue long"
+        print("blue long")
         self.startPlugin(qButtons.getFunction("blue_long"), None)
 
     def updateGUI(self):
@@ -229,7 +230,7 @@ class QuickButton:
             key_number.setText(caption)
     
     def startPlugin(self, pname, key_number):
-        print "qButtonFX:", str(pname)
+        print("qButtonFX:", str(pname))
         # notify action map
         self["ColorActions"].execEnd()
         self["ColorActions"].execBegin()
@@ -446,9 +447,9 @@ class QuickButton:
         else:
             l = serviceHandler.list(self.list.root)
             if not l:
-                print "list movies for filter failed"
+                print("list movies for filter failed")
                 return
-            while 1:
+            while True:
                 serviceref = l.getNext()
                 if not serviceref.valid():
                     break
@@ -477,7 +478,7 @@ class QuickButton:
             if item[0] == current:
                 selection = index
                 break
-        print "open filter choice", str(selection), str(descr)
+        print("open filter choice", str(selection), str(descr))
         self.session.openWithCallback(self.filterByDescription, ChoiceBox, title=_("Select movie by description:"), list=descr, selection=selection)
 
     def filterByDescription(self, answer):
@@ -486,8 +487,8 @@ class QuickButton:
             return
         if answer[0] == _(SHOW_ALL_MOVIES):
             self.list.filter_description = None
-            print "clear filter choice"
+            print("clear filter choice")
         else:
             self.list.filter_description = answer[0]
-            print "set filter choice", str(answer[0])
+            print("set filter choice", str(answer[0]))
         self.reloadList()

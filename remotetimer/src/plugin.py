@@ -15,6 +15,7 @@
 # $Id$
 #===============================================================================
 
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 
@@ -47,7 +48,7 @@ import urllib
 #------------------------------------------------------------------------------------------
 
 config.plugins.remoteTimer = ConfigSubsection()
-config.plugins.remoteTimer.httphost = ConfigText(default = "" , fixed_size = False)
+config.plugins.remoteTimer.httphost = ConfigText(default = "", fixed_size = False)
 config.plugins.remoteTimer.httpip = ConfigIP(default = [0, 0, 0, 0])
 config.plugins.remoteTimer.httpport = ConfigNumber(default = 80)
 config.plugins.remoteTimer.username = ConfigText(default = "root", fixed_size = False)
@@ -133,14 +134,14 @@ class RemoteTimerScreen(Screen):
 		self["text"].setText(info)
 
 	def errorLoad(self, error):
-		print "[RemoteTimer] errorLoad ERROR:", error.getErrorMessage()
+		print("[RemoteTimer] errorLoad ERROR:", error.getErrorMessage())
 
 	def clean(self):
 		try:
 			url = "http://%s/web/timercleanup?cleanup=true" % (self.remoteurl)
 			localGetPage(url).addCallback(self.getInfo).addErrback(self.errorLoad)
 		except:
-			print "[RemoteTimer] ERROR Cleanup"
+			print("[RemoteTimer] ERROR Cleanup")
 
 	def delete(self):
 		sel = self["timerlist"].getCurrent()
@@ -166,8 +167,8 @@ class RemoteTimerScreen(Screen):
 	def generateTimerE2(self, data):
 		try:
 			root = cElementTree_fromstring(data)
-		except Exception, e:
-			print "[RemoteTimer] error: %s", e
+		except Exception as e:
+			print("[RemoteTimer] error: %s", e)
 			self["text"].setText(_("error parsing incoming data."))
 		else:
 			return [
@@ -342,13 +343,13 @@ def newnigma2KeyGo(self):
 		if end < begin:
 			end += 86400
 
-		rt_name = urllib.quote(self.timerentry_name.value.decode('utf8').encode('utf8','ignore'))
-		rt_description = urllib.quote(self.timerentry_description.value.decode('utf8').encode('utf8','ignore'))
+		rt_name = urllib.quote(self.timerentry_name.value.decode('utf8').encode('utf8', 'ignore'))
+		rt_description = urllib.quote(self.timerentry_description.value.decode('utf8').encode('utf8', 'ignore'))
 		rt_disabled = 0 # XXX: do we really want to hardcode this? why do we offer this option then?
 		rt_repeated = 0 # XXX: same here
 
 		if config.plugins.remoteTimer.remotedir.value:
-			rt_dirname = urllib.quote(self.timerentry_dirname.value.decode('utf8').encode('utf8','ignore'))
+			rt_dirname = urllib.quote(self.timerentry_dirname.value.decode('utf8').encode('utf8', 'ignore'))
 		else:
 			rt_dirname = "None"
 
@@ -380,7 +381,7 @@ def newnigma2KeyGo(self):
 			rt_repeated,
 			rt_dirname
 		)
-		print "[RemoteTimer] debug remote", remoteurl
+		print("[RemoteTimer] debug remote", remoteurl)
 
 		defer = localGetPage(remoteurl)
 		defer.addCallback(boundFunction(_gotPageLoad, self.session, self))
@@ -429,7 +430,7 @@ def autostart(reason, **kwargs):
 			if config.plugins.remoteTimer.httpip.value:
 				timerInit()
 		except:
-			print "[RemoteTimer] NO remoteTimer.httpip.value"
+			print("[RemoteTimer] NO remoteTimer.httpip.value")
 
 
 def timermenu(menuid, **kwargs):
@@ -446,7 +447,7 @@ def Plugins(**kwargs):
 	if getImageDistro() in ("openvix", "openatv", "openxta"):
 		plugin.append(PluginDescriptor(name=_("Remote Timer"), description = _("Remote Timer Setup"), where=PluginDescriptor.WHERE_MENU, fnc=timermenu))
 	else:
-		plugin.append(PluginDescriptor(name="Remote Timer",description="Remote Timer Setup", where = [ PluginDescriptor.WHERE_PLUGINMENU ], icon="remotetimer.png", fnc = main))
+		plugin.append(PluginDescriptor(name="Remote Timer", description="Remote Timer Setup", where = [ PluginDescriptor.WHERE_PLUGINMENU ], icon="remotetimer.png", fnc = main))
 	plugin.append(PluginDescriptor(name="Remote Timer", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main))
 	plugin.append(PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart))
 	return plugin

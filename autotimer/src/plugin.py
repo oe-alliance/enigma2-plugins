@@ -26,7 +26,7 @@ try:
 	file.close()
 	autotimerHelp = registerHelp(*reader)
 except Exception as e:
-	print("[AutoTimer] Unable to initialize MPHelp:", e,"- Help not available!")
+	print("[AutoTimer] Unable to initialize MPHelp:", e, "- Help not available!")
 	autotimerHelp = None
 #pragma mark -
 
@@ -96,7 +96,7 @@ def sessionstart(reason, **kwargs):
 			root.putChild('set', AutoTimerChangeSettingsResource())
 			root.putChild('simulate', AutoTimerSimulateResource())
 			root.putChild('test', AutoTimerTestResource())
-			addExternalChild( ("autotimer", root , "AutoTimer-Plugin", API_VERSION, False) )
+			addExternalChild( ("autotimer", root, "AutoTimer-Plugin", API_VERSION, False) )
 
 			# webgui
 			session = kwargs["session"]

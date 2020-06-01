@@ -1,3 +1,4 @@
+from __future__ import print_function
 #
 # Power Save Plugin by gutemine
 #
@@ -81,7 +82,7 @@ elektroShutdownThreshold = 60 * 20 # we only go to sleep if and only if we won't
 
 #Configuration
 if debug:
-	print pluginPrintname, "Setting config defaults"
+	print(pluginPrintname, "Setting config defaults")
 config.plugins.elektro = ConfigSubsection()
 config.plugins.elektro.nextday = ConfigClock(default = ((6 * 60 + 0) * 60) )
 config.plugins.elektro.nextday2 = ConfigClock(default = ((6 * 60 + 0) * 60) )
@@ -144,7 +145,7 @@ weekdays = [
 #global ElektroWakeUpTime
 ElektroWakeUpTime = -1
 
-def NASpowerdown(Nname,Nuser,Npass,Ncommand,Nport):
+def NASpowerdown(Nname, Nuser, Npass, Ncommand, Nport):
 	from telnetlib import Telnet
 	if Nname == "":
 		return _("no Name")
@@ -153,25 +154,25 @@ def NASpowerdown(Nname,Nuser,Npass,Ncommand,Nport):
 		tn = Telnet(Nname, Nport, 5)
 		l=""
 		if Nuser != "":
-			l = l + tn.expect(['ogin:','sername'],10)[2]
+			l = l + tn.expect(['ogin:', 'sername'], 10)[2]
 			l = l + tn.read_very_lazy()
 			tn.write('%s\r' % Nuser)
 		if Npass != "":
-			l = l + tn.read_until('assword:',10)
+			l = l + tn.read_until('assword:', 10)
 			l = l + tn.read_very_lazy()
 			tn.write('%s\r' % Npass)
-		l = l + tn.expect(['#',">"],10)[2]
+		l = l + tn.expect(['#', ">"], 10)[2]
 		l = l + tn.read_very_lazy()
 		tn.write('%s\r' % Ncommand)
-		l = l + tn.expect(['#',">"],20)[2]
+		l = l + tn.expect(['#', ">"], 20)[2]
 		l = l + tn.read_very_lazy()
 		if config.plugins.elektro.NASwait.value == True:
 			tt = time() + 90
 			l = l + "\n waiting...\n"
-			while tt>time() and ping.doOne(Nname,1) != None:
+			while tt>time() and ping.doOne(Nname, 1) != None:
 				sleep(2)
 		tn.write('exit\r')
-		l = l + tn.expect(['#',">"],5)[2]
+		l = l + tn.expect(['#', ">"], 5)[2]
 		l = l + tn.read_very_lazy()
 		tn.close()
 	finally:
@@ -180,7 +181,7 @@ def NASpowerdown(Nname,Nuser,Npass,Ncommand,Nport):
 
 def autostart(reason, **kwargs):
 	global session
-	if reason == 0 and kwargs.has_key("session"):
+	if reason == 0 and "session" in kwargs:
 		session = kwargs["session"]
 		session.open(DoElektro)
 
@@ -208,7 +209,7 @@ def getReltime(time):
 
 def setNextWakeuptime():
 	if debug:
-		print pluginPrintname, "Entering setNextWakeuptime()"
+		print(pluginPrintname, "Entering setNextWakeuptime()")
 	# Do not set a wakeup time if
 	#  - Elektro isn't enabled
 	#  - Elektro shouldn't wake up
@@ -218,14 +219,14 @@ def setNextWakeuptime():
 				or config.plugins.elektro.holiday.value == True):
 		global ElektroWakeUpTime
 		ElektroWakeUpTime = -1
-		print pluginPrintname, "ElektroWakeUpTime is now", ElektroWakeUpTime
+		print(pluginPrintname, "ElektroWakeUpTime is now", ElektroWakeUpTime)
 		return
 
 	time_s = getTime()
 	ltime = localtime()
 	if debug:
-		print pluginPrintname, "Current time in seconds since midnight", time_s
-		print pluginPrintname, "Local time", strftime("%a, %d %b %Y %H:%M:%S", ltime)
+		print(pluginPrintname, "Current time in seconds since midnight", time_s)
+		print(pluginPrintname, "Local time", strftime("%a, %d %b %Y %H:%M:%S", ltime))
 	if config.plugins.elektro.profile.value == "1":
 		config_wakeup = config.plugins.elektro.wakeup
 		config_sleep = config.plugins.elektro.sleep
@@ -235,35 +236,35 @@ def setNextWakeuptime():
 		config_sleep = config.plugins.elektro.sleep2
 		config_nextday = config.plugins.elektro.nextday2
 	if debug:
-		print pluginPrintname, "Wakeup", config_wakeup
-		print pluginPrintname, "Sleep", config_sleep
-		print pluginPrintname, "Nextday", config_nextday
+		print(pluginPrintname, "Wakeup", config_wakeup)
+		print(pluginPrintname, "Sleep", config_sleep)
+		print(pluginPrintname, "Nextday", config_nextday)
 
 	# If it isn't past next-day time we need yesterday's settings
 	#
 	if time_s < clkToTime(config_nextday):
 		day = (ltime.tm_wday - 1) % 7
 		if debug:
-			print pluginPrintname, "Yesterday's settings"
+			print(pluginPrintname, "Yesterday's settings")
 	else:
 		day = ltime.tm_wday
 		if debug:
-			print pluginPrintname, "Today's settings"
+			print(pluginPrintname, "Today's settings")
 	if debug:
-		print pluginPrintname, "Resulting day of Week (Monday=0)", day
+		print(pluginPrintname, "Resulting day of Week (Monday=0)", day)
 
 	# Check whether we wake up today or tomorrow
 	# Relative Time is needed for this
 	time_s = getReltime(time_s)
 	if debug:
-		print pluginPrintname, "Current Time in seconds since nextday", time_s
+		print(pluginPrintname, "Current Time in seconds since nextday", time_s)
 	wakeuptime = getReltime(clkToTime(config_wakeup[day]))
 
 	# Lets see if we already woke up today
 	if time_s > (wakeuptime + elektroTimerWakeupThreshold):
 		#yes we did -> Next wakeup is tomorrow
 		if debug:
-			print pluginPrintname, "Wakeup tomorrow"
+			print(pluginPrintname, "Wakeup tomorrow")
 		day = (day + 1) % 7
 		wakeuptime = getReltime(clkToTime(config_wakeup[day]))
 
@@ -271,55 +272,55 @@ def setNextWakeuptime():
 	if time_s > (wakeuptime + elektroTimerWakeupThreshold):
 		wakeuptime = wakeuptime + 24 * 60 * 60
 	if debug:
-		print pluginPrintname, "Wakeup Time in seconds since nextday", wakeuptime
+		print(pluginPrintname, "Wakeup Time in seconds since nextday", wakeuptime)
 
 	# The next wakeup will be in wakupin seconds
 	wakeupin = wakeuptime - time_s
 	if debug:
-		print pluginPrintname, "Next wakeup in seconds", wakeupin
+		print(pluginPrintname, "Next wakeup in seconds", wakeupin)
 	# Now add this to the current time to get the wakeuptime
 	wakeuptime = (int)(time()) + wakeupin
 
 	#Write everything to the global variable
 	ElektroWakeUpTime = wakeuptime
-	print pluginPrintname, "ElektroWakeUpTime is now", ElektroWakeUpTime
+	print(pluginPrintname, "ElektroWakeUpTime is now", ElektroWakeUpTime)
 
 
 def getNextWakeup():
 	global ElektroWakeUpTime
 
 	if debug:
-		print pluginPrintname, "Entering getNextWakeup()"
+		print(pluginPrintname, "Entering getNextWakeup()")
 
 	# Update wakeup time from potential most recent changes in parameters.
 	setNextWakeuptime()
 
 	#it might happen, that session does not exist. I don't know why. :-(
 	if session is None:
-		print pluginPrintname, "No session found; Will wake up at", strftime("%a:%H:%M:%S", localtime(ElektroWakeUpTime))
+		print(pluginPrintname, "No session found; Will wake up at", strftime("%a:%H:%M:%S", localtime(ElektroWakeUpTime)))
 		return ElektroWakeUpTime;
 
 	nextTimer = session.nav.RecordTimer.getNextRecordingTime()
 	if debug:
-		print pluginPrintname, "Now:", strftime("%a:%H:%M:%S", localtime(time()))
+		print(pluginPrintname, "Now:", strftime("%a:%H:%M:%S", localtime(time())))
 	if (nextTimer < 1):
 		if debug:
-			print pluginPrintname, "No next recording timer configured"
+			print(pluginPrintname, "No next recording timer configured")
 	else:
 		if debug:
-			print pluginPrintname, "Next recording timer:", strftime("%a:%H:%M:%S", localtime(nextTimer))
+			print(pluginPrintname, "Next recording timer:", strftime("%a:%H:%M:%S", localtime(nextTimer)))
 	if (nextTimer < 1) or (nextTimer > ElektroWakeUpTime):
-		print pluginPrintname, "Wake up due to Elektro at", strftime("%a:%H:%M:%S", localtime(ElektroWakeUpTime))
+		print(pluginPrintname, "Wake up due to Elektro at", strftime("%a:%H:%M:%S", localtime(ElektroWakeUpTime)))
 		return ElektroWakeUpTime
 
 	#We have to make sure, that the Box will wake up because of us
 	# and not because of the timer
-	print pluginPrintname, "Wake up due to next recording timer at", strftime("%a:%H:%M:%S", localtime(nextTimer))
+	print(pluginPrintname, "Wake up due to next recording timer at", strftime("%a:%H:%M:%S", localtime(nextTimer)))
 	return nextTimer - 1
 
 def Plugins(**kwargs):
 	if debug:
-		print pluginPrintname, "Setting entry points"
+		print(pluginPrintname, "Setting entry points")
 	list = [
 		PluginDescriptor(
 			name = config.plugins.elektro.name.value,
@@ -354,9 +355,9 @@ def main(session,**kwargs):
 	try:
 	 	session.open(Elektro)
 	except:
-		print pluginPrintname, "Pluginexecution failed"
+		print(pluginPrintname, "Pluginexecution failed")
 
-class ElektroProfile(ConfigListScreen,Screen):
+class ElektroProfile(ConfigListScreen, Screen):
 	skin = """
 			<screen position="center,center" size="600,400" title="Elektro Power Save Profile Times" >
 			<widget name="config" position="0,0" size="600,360" scrollbarMode="showOnDemand" />
@@ -402,15 +403,15 @@ class ElektroProfile(ConfigListScreen,Screen):
 		#print "saving"
 		for x in self["config"].list:
 			x[1].save()
-		self.close(False,self.session)
+		self.close(False, self.session)
 
 	def cancel(self):
 		#print "cancel"
 		for x in self["config"].list:
 			x[1].cancel()
-		self.close(False,self.session)
+		self.close(False, self.session)
 
-class ElektroIP(ConfigListScreen,Screen):
+class ElektroIP(ConfigListScreen, Screen):
 	skin = """
 			<screen position="center,center" size="600,400" title="Elektro Power Save IP Addresses to wait" >
 			<widget name="config" position="0,0" size="600,360" scrollbarMode="showOnDemand" />
@@ -429,7 +430,7 @@ class ElektroIP(ConfigListScreen,Screen):
 		self.list = []
 
 		for i in range(10):
-			self.list.append(getConfigListEntry(_("IP Address") , config.plugins.elektro.ip[i]))
+			self.list.append(getConfigListEntry(_("IP Address"), config.plugins.elektro.ip[i]))
 
 		ConfigListScreen.__init__(self, self.list)
 
@@ -448,15 +449,15 @@ class ElektroIP(ConfigListScreen,Screen):
 		#print "saving"
 		for x in self["config"].list:
 			x[1].save()
-		self.close(False,self.session)
+		self.close(False, self.session)
 
 	def cancel(self):
 		#print "cancel"
 		for x in self["config"].list:
 			x[1].cancel()
-		self.close(False,self.session)
+		self.close(False, self.session)
 
-class ElektroNASrun(ConfigListScreen,Screen):
+class ElektroNASrun(ConfigListScreen, Screen):
 	skin = """
 		<screen name="ElektroNASrun" position="center,center" size="600,400" zPosition="1" title="Powerdown...">
 		<widget source="TextTest" render="Label" position="10,0" size="580,400" font="Regular;20" transparent="1" />
@@ -478,13 +479,13 @@ class ElektroNASrun(ConfigListScreen,Screen):
 		}, -1)
 
 	def cancel(self):
-		self.close(False,self.session)
+		self.close(False, self.session)
 
 	def DoNASrun(self):
 		ret = NASpowerdown(config.plugins.elektro.NASname.value, config.plugins.elektro.NASuser.value, config.plugins.elektro.NASpass.value, config.plugins.elektro.NAScommand.value, config.plugins.elektro.NASport.value)
 		self["TextTest"].setText(ret)
 
-class ElektroNAS(ConfigListScreen,Screen):
+class ElektroNAS(ConfigListScreen, Screen):
 	skin = """
 			<screen name="ElektroNAS" position="center,center" size="600,400" title="Elektro Power Save IP Telnet - Poweroff" >
 			<widget name="config" position="0,0" size="600,360" scrollbarMode="showOnDemand" />
@@ -532,15 +533,15 @@ class ElektroNAS(ConfigListScreen,Screen):
 		#print "saving"
 		for x in self["config"].list:
 			x[1].save()
-		self.close(False,self.session)
+		self.close(False, self.session)
 
 	def cancel(self):
 		#print "cancel"
 		for x in self["config"].list:
 			x[1].cancel()
-		self.close(False,self.session)
+		self.close(False, self.session)
 
-class Elektro(ConfigListScreen,Screen):
+class Elektro(ConfigListScreen, Screen):
 	skin = """
 		<screen name ="Elektro" position="center,center" size="630,480" title="Elektro Power Save" >
 			<widget name="key_red" position="4,5" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;18" transparent="1"/>
@@ -564,14 +565,14 @@ class Elektro(ConfigListScreen,Screen):
 		self.session = session
 		Screen.__init__(self, session)
 		if debug:
-			print pluginPrintname, "Displays config screen"
+			print(pluginPrintname, "Displays config screen")
 
 		self.onChangedEntry = []
 
 		self.list = [
 			getConfigListEntry(_("Active Time Profile"), config.plugins.elektro.profile,
 				_("The active Time Profile is (1 or 2).")),
-			getConfigListEntry(_("Enable Elektro Power Save"),config.plugins.elektro.enable,
+			getConfigListEntry(_("Enable Elektro Power Save"), config.plugins.elektro.enable,
 				_("Unless this is enabled, this plugin won't run automatically.")),
 			getConfigListEntry(_("Use both profiles alternately"), config.plugins.elektro.profileShift,
 				_("Both profiles are used alternately. When shutting down the other profile is enabled. This allows two time cycles per day. Do not overlap the times.")),
@@ -666,7 +667,7 @@ class Elektro(ConfigListScreen,Screen):
 		return str(self["config"].getCurrent()[1].getText())
 
 	def help(self):
-		self.session.open(Console,_("Showing Elektro readme.txt"),["cat /usr/lib/enigma2/python/Plugins/Extensions/Elektro/%s" % _("readme.txt")])
+		self.session.open(Console, _("Showing Elektro readme.txt"), ["cat /usr/lib/enigma2/python/Plugins/Extensions/Elektro/%s" % _("readme.txt")])
 
 	def profile(self):
 		self.session.open(ElektroProfile)
@@ -674,10 +675,10 @@ class Elektro(ConfigListScreen,Screen):
 class DoElektro(Screen):
 	skin = """ <screen position="center,center" size="300,300" title="Elektro Plugin Menu" > </screen>"""
 
-	def __init__(self,session):
-		Screen.__init__(self,session)
+	def __init__(self, session):
+		Screen.__init__(self, session)
 
-		print pluginPrintname, "Starting up Version", elektro_pluginversion
+		print(pluginPrintname, "Starting up Version", elektro_pluginversion)
 
 		self.session = session
 
@@ -703,13 +704,13 @@ class DoElektro(Screen):
 		# Did we wake up by Elektro?
 		# Is ElektroWakeUpTime within elektroTimerWakeupThreshold -> woken up by Elektro plugin
 		if debug:
-			print pluginPrintname, "ElektroWakeUpTime:", strftime("%a, %d %b %Y %H:%M:%S", localtime(ElektroWakeUpTime))
-			print pluginPrintname, "Current Time:", strftime("%a, %d %b %Y %H:%M:%S", localtime(time()))
-			print pluginPrintname, "Time Difference to ElektroWakeUpTime:", abs(ElektroWakeUpTime - time())
+			print(pluginPrintname, "ElektroWakeUpTime:", strftime("%a, %d %b %Y %H:%M:%S", localtime(ElektroWakeUpTime)))
+			print(pluginPrintname, "Current Time:", strftime("%a, %d %b %Y %H:%M:%S", localtime(time())))
+			print(pluginPrintname, "Time Difference to ElektroWakeUpTime:", abs(ElektroWakeUpTime - time()))
 		if abs(ElektroWakeUpTime - time()) <= elektroTimerWakeupThreshold:
 			timerWakeup = True
 
-		print pluginPrintname, "Woken Up by a Timer?", timerWakeup
+		print(pluginPrintname, "Woken Up by a Timer?", timerWakeup)
 
 		# If the was a manual wakeup: Don't go to sleep
 		if timerWakeup == False:
@@ -728,27 +729,27 @@ class DoElektro(Screen):
 			self.TimerStandby = eTimer()
 			self.TimerStandby.callback.append(self.CheckStandby)
 			self.TimerStandby.startLongTimer(elektrosleeptime)
-			print pluginPrintname, "Set up 'Go to standby now' timer (CheckStandby)"
+			print(pluginPrintname, "Set up 'Go to standby now' timer (CheckStandby)")
 
 		self.TimerSleep = eTimer()
 		self.TimerSleep.callback.append(self.CheckElektro)
 		self.TimerSleep.startLongTimer(elektrostarttime)
-		print pluginPrintname, "Set up main timer (CheckElectro)"
+		print(pluginPrintname, "Set up main timer (CheckElectro)")
 		if debug:
-			print pluginPrintname, "Translation test:", _("Standby on boot")
+			print(pluginPrintname, "Translation test:", _("Standby on boot"))
 
 	def CheckStandby(self):
-		print pluginPrintname, "Showing Standby Sceen"
+		print(pluginPrintname, "Showing Standby Sceen")
 		try:
-			self.session.openWithCallback(self.DoElektroStandby,MessageBox,_("Go to Standby now?"),type = MessageBox.TYPE_YESNO,
+			self.session.openWithCallback(self.DoElektroStandby, MessageBox, _("Go to Standby now?"), type = MessageBox.TYPE_YESNO,
 					timeout = config.plugins.elektro.standbyOnBootTimeout.value)
 		except:
 			# Couldn't be shown. Restart timer.
-			print pluginPrintname, "Failed Showing Standby Sceen"
+			print(pluginPrintname, "Failed Showing Standby Sceen")
 			self.TimerStandby.startLongTimer(elektrostarttime)
 
 
-	def DoElektroStandby(self,retval):
+	def DoElektroStandby(self, retval):
 		if (retval):
 			# Yes, go to standby
 			Notifications.AddNotification(Standby.Standby)
@@ -772,24 +773,24 @@ class DoElektro(Screen):
 
 		# Which day is it? The next day starts at nextday
 		if debug:
-			print pluginPrintname, "Current Weekday:", str(ltime.tm_wday)
+			print(pluginPrintname, "Current Weekday:", str(ltime.tm_wday))
 		if time_s < clkToTime(config_nextday):
 			day = (ltime.tm_wday - 1) % 7
 		else:
 			day = ltime.tm_wday
 		if debug:
-			print pluginPrintname, "Weekday after nextday processing:", str(day)
+			print(pluginPrintname, "Weekday after nextday processing:", str(day))
 
 		# Let's get the day
 		wakeuptime = clkToTime(config_wakeup[day])
 		sleeptime = clkToTime(config_sleep[day])
 
 		if debug:
-			print pluginPrintname, "Profile:", config.plugins.elektro.profile.value
-			print pluginPrintname, "Nextday:", getPrintTime(clkToTime(config.plugins.elektro.nextday))
-			print pluginPrintname, "Current time:", getPrintTime(time_s)
-			print pluginPrintname, "Wakeup time:", getPrintTime(wakeuptime)
-			print pluginPrintname, "Sleep time:", getPrintTime(sleeptime)
+			print(pluginPrintname, "Profile:", config.plugins.elektro.profile.value)
+			print(pluginPrintname, "Nextday:", getPrintTime(clkToTime(config.plugins.elektro.nextday)))
+			print(pluginPrintname, "Current time:", getPrintTime(time_s))
+			print(pluginPrintname, "Wakeup time:", getPrintTime(wakeuptime))
+			print(pluginPrintname, "Sleep time:", getPrintTime(sleeptime))
 
 		# Convert into relative Times (seconds after day start at nextday)
 		time_s = getReltime(time_s)
@@ -797,102 +798,102 @@ class DoElektro(Screen):
 		sleeptime = getReltime(sleeptime)
 
 		if debug:
-			print pluginPrintname, "Current Rel-time:", getPrintTime(time_s)
-			print pluginPrintname, "Wakeup Rel-time:", getPrintTime(wakeuptime)
-			print pluginPrintname, "Sleep Rel-time:", getPrintTime(sleeptime)
+			print(pluginPrintname, "Current Rel-time:", getPrintTime(time_s))
+			print(pluginPrintname, "Wakeup Rel-time:", getPrintTime(wakeuptime))
+			print(pluginPrintname, "Sleep Rel-time:", getPrintTime(sleeptime))
 
 
 		# let's see if we should be sleeping
 		trysleep = False
 		if time_s < (wakeuptime - elektroShutdownThreshold): # Wakeup is in the future -> sleep!
 			trysleep = True
-			print pluginPrintname, "Wakeup is in the future -> Sleep:", str(time_s), " <", str(wakeuptime)
+			print(pluginPrintname, "Wakeup is in the future -> Sleep:", str(time_s), " <", str(wakeuptime))
 		if sleeptime < time_s : #Sleep is in the past -> sleep!
 			trysleep = True
-			print pluginPrintname, "Sleep is in the past -> Sleep:", str(sleeptime), " <", str(time_s)
+			print(pluginPrintname, "Sleep is in the past -> Sleep:", str(sleeptime), " <", str(time_s))
 
 		if debug:
-			print pluginPrintname, "(1) trysleep:", trysleep
+			print(pluginPrintname, "(1) trysleep:", trysleep)
 		# We are not tying to go to sleep anymore -> maybe go to sleep again the next time
 		if trysleep == False:
 			self.dontsleep = False
 			if debug:
-				print pluginPrintname, "setting dontsleep to false"
+				print(pluginPrintname, "setting dontsleep to false")
 
 		if debug:
-			print pluginPrintname, "(2) trysleep:", trysleep
+			print(pluginPrintname, "(2) trysleep:", trysleep)
 		# The User aborted to got to sleep -> Don't go to sleep.
 		if self.dontsleep:
-			print pluginPrintname, "dontsleep is true, setting trysleep to false"
+			print(pluginPrintname, "dontsleep is true, setting trysleep to false")
 			trysleep = False
 
 		# If we are in holydaymode we should try to got to sleep anyway
 		# This should be set after self.dontsleep has been handled
 		if debug:
-			print pluginPrintname, "(3) trysleep:", trysleep
+			print(pluginPrintname, "(3) trysleep:", trysleep)
 		if config.plugins.elektro.holiday.value:
-			print pluginPrintname, "holiday mode, setting trysleep to true"
+			print(pluginPrintname, "holiday mode, setting trysleep to true")
 			trysleep = True
 
 		# We are not enabled -> Dont go to sleep (This could have been catched earlier!)
 		if debug:
-			print pluginPrintname, "(4) trysleep:", trysleep
+			print(pluginPrintname, "(4) trysleep:", trysleep)
 		if config.plugins.elektro.enable.value == False:
-			print pluginPrintname, "plugin not enabled, setting trysleep to false"
+			print(pluginPrintname, "plugin not enabled, setting trysleep to false")
 			trysleep = False
 
 		# Only go to sleep if we are in standby or sleep is forced by settings
 		if debug:
-			print pluginPrintname, "(5) trysleep:", trysleep
-			print pluginPrintname, "in standby returns", Standby.inStandby
-			print pluginPrintname, "forecesleep is", config.plugins.elektro.force.value
+			print(pluginPrintname, "(5) trysleep:", trysleep)
+			print(pluginPrintname, "in standby returns", Standby.inStandby)
+			print(pluginPrintname, "forecesleep is", config.plugins.elektro.force.value)
 		if not ((Standby.inStandby) or (config.plugins.elektro.force.value == True) ):
-			print pluginPrintname, "not in standby and not enforcing to sleep, so setting trysleep to false"
+			print(pluginPrintname, "not in standby and not enforcing to sleep, so setting trysleep to false")
 			trysleep = False
 
 		# No Sleep while recording
 		if debug:
-			print pluginPrintname, "(6) trysleep:", trysleep
+			print(pluginPrintname, "(6) trysleep:", trysleep)
 		if self.session.nav.RecordTimer.isRecording():
-			print pluginPrintname, "isRecording is true, setting trysleep to false"
+			print(pluginPrintname, "isRecording is true, setting trysleep to false")
 			trysleep = False
 
 		# Will there be a recording in a short while?
 		if debug:
-			print pluginPrintname, "(7) trysleep:", trysleep
+			print(pluginPrintname, "(7) trysleep:", trysleep)
 		nextRecTime = self.session.nav.RecordTimer.getNextRecordingTime()
 		if (nextRecTime > 0) and (nextRecTime - (long)(time()) < elektroShutdownThreshold):
-			print pluginPrintname, "recording about to start", nextRecTime, "-> setting trysleep to false"
+			print(pluginPrintname, "recording about to start", nextRecTime, "-> setting trysleep to false")
 			trysleep = False
 
 		if debug:
-			print pluginPrintname, "(8) trysleep:", trysleep
+			print(pluginPrintname, "(8) trysleep:", trysleep)
 		# No Sleep on HDD running - joergm6
 		if (trysleep == True) and (config.plugins.elektro.hddsleep.value == True) and (harddiskmanager.HDDCount() > 0):
 			hddlist = harddiskmanager.HDDList()
 			if hddlist[0][1].model().startswith("ATA"):
 				if not hddlist[0][1].isSleeping():
-					print pluginPrintname, hddlist[0][1].model(), "online -> setting trysleep to false"
+					print(pluginPrintname, hddlist[0][1].model(), "online -> setting trysleep to false")
 					trysleep = False
 
 		if debug:
-			print pluginPrintname, "(9) trysleep:", trysleep
+			print(pluginPrintname, "(9) trysleep:", trysleep)
 		# No Sleep on Online IPs - joergm6
 		if (trysleep == True) and (config.plugins.elektro.IPenable.value == True):
 			for i in range(10):
 				ip = "%d.%d.%d.%d" % tuple(config.plugins.elektro.ip[i].value)
 				if ip != "0.0.0.0":
-					if ping.doOne(ip,0.1) != None:
-						print pluginPrintname, ip, "online -> don't sleep"
+					if ping.doOne(ip, 0.1) != None:
+						print(pluginPrintname, ip, "online -> don't sleep")
 						trysleep = False
 						break
 
-		print pluginPrintname, "About to go to sleep now?", trysleep
+		print(pluginPrintname, "About to go to sleep now?", trysleep)
 
 		# Looks like there really is a reason to go to sleep -> Lets try it!
 		if trysleep:
 			try:
-				self.session.openWithCallback(self.DoElektroSleep, MessageBox, _("Go to sleep now?"),type = MessageBox.TYPE_YESNO,timeout = 60)
+				self.session.openWithCallback(self.DoElektroSleep, MessageBox, _("Go to sleep now?"), type = MessageBox.TYPE_YESNO, timeout = 60)
 			except:
 				# reset the timer and try again
 				self.TimerSleep.startLongTimer(elektrostarttime)
@@ -901,7 +902,7 @@ class DoElektro(Screen):
 		self.TimerSleep.startLongTimer(elektrostarttime)
 
 
-	def DoElektroSleep(self,retval):
+	def DoElektroSleep(self, retval):
 		config_NASenable = True if config.plugins.elektro.NASenable.value == config.plugins.elektro.profile.value else False
 		if config.plugins.elektro.profileShift.value == True:
 			config.plugins.elektro.profile.value = "1" if config.plugins.elektro.profile.value == "2" else "2"

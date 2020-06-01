@@ -1,3 +1,4 @@
+from __future__ import print_function
 ##
 ## Movielist Preview
 ## by AliAbdul
@@ -45,7 +46,7 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
 language.addCallback(localeInit())
@@ -282,7 +283,7 @@ class PreviewCreator:
 
 	def grabDone(self, result, retval, extra_args):
 		if retval != 0:
-			print result
+			print(result)
 		if self.callback:
 			self.callback()
 previewcreator = PreviewCreator()
@@ -340,7 +341,7 @@ class MovielistPreviewManualCreator(Screen, InfoBarBase, InfoBarSeek, InfoBarCue
 
 	def grabDone(self):
 		self.working = False
-		self.session.open(MessageBox,_("Preview created."), MessageBox.TYPE_INFO, timeout=5)
+		self.session.open(MessageBox, _("Preview created."), MessageBox.TYPE_INFO, timeout=5)
 
 	def exit(self):
 		if not self.working:
@@ -543,7 +544,7 @@ try:
 	Show2 = MovieSelectionSP.show
 	MovieSelectionSP.show = showMovieSelection2
 except ImportError:
-	print "[Movielist Preview] Could not import Suomipoeka Plugin, maybe not installed or too old version?"
+	print("[Movielist Preview] Could not import Suomipoeka Plugin, maybe not installed or too old version?")
 
 ##############################################################################
 

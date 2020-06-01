@@ -1,3 +1,4 @@
+from __future__ import print_function
 from enigma import ePicLoad, eTimer, getDesktop, iPlayableService, eServiceReference
 from Screens.Screen import Screen
 from Screens.ServiceInfo import ServiceInfoList, ServiceInfoListEntry
@@ -24,8 +25,8 @@ config.plugins.mc_pp.lastDir = ConfigText(default=resolveFilename(SCOPE_MEDIA))
 config.plugins.mc_pp.rotate = ConfigSelection(default="0", choices = [("0", _("none")), ("1", _("manual")), ("2", _("by Exif"))])
 config.plugins.mc_pp.ThumbWidth = ConfigInteger(default=145, limits=(1, 999))
 config.plugins.mc_pp.ThumbHeight = ConfigInteger(default=120, limits=(1, 999))
-config.plugins.mc_pp.bgcolor = ConfigSelection(default="#00000000", choices = [("#00000000", _("black")),("#009eb9ff", _("blue")),("#00ff5a51", _("red")), ("#00ffe875", _("yellow")), ("#0038FF48", _("green"))])
-config.plugins.mc_pp.textcolor = ConfigSelection(default="#0038FF48", choices = [("#00000000", _("black")),("#009eb9ff", _("blue")),("#00ff5a51", _("red")), ("#00ffe875", _("yellow")), ("#0038FF48", _("green"))])
+config.plugins.mc_pp.bgcolor = ConfigSelection(default="#00000000", choices = [("#00000000", _("black")), ("#009eb9ff", _("blue")), ("#00ff5a51", _("red")), ("#00ffe875", _("yellow")), ("#0038FF48", _("green"))])
+config.plugins.mc_pp.textcolor = ConfigSelection(default="#0038FF48", choices = [("#00000000", _("black")), ("#009eb9ff", _("blue")), ("#00ff5a51", _("red")), ("#00ffe875", _("yellow")), ("#0038FF48", _("green"))])
 config.plugins.mc_pp.framesize = ConfigInteger(default=30, limits=(5, 99))
 config.plugins.mc_pp.infoline = ConfigEnableDisable(default=True)
 config.plugins.mc_pp.loop = ConfigEnableDisable(default=True)
@@ -66,7 +67,7 @@ class MC_PictureViewer(Screen, HelpableScreen):
 		self["currentfolder"].setText(str(currDir))
 		self.filelist = []
 		self["filelist"] = []
-		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib" , "/proc", "/ram", "/root" , "/sbin", "/sys", "/tmp", "/usr", "/var"]
+		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib", "/proc", "/ram", "/root", "/sbin", "/sys", "/tmp", "/usr", "/var"]
 		self.filelist = FileList(currDir, showDirectories = True, showFiles = True, showMountpoints = True, isTop = False, matchingPattern = "(?i)^.*\.(jpeg|jpg|jpe|png|bmp)", inhibitDirs = inhibitDirs)
 		self["filelist"] = self.filelist
 		self["filelist"].show()
@@ -79,7 +80,7 @@ class MC_PictureViewer(Screen, HelpableScreen):
 		#self.picload.PictureData.get().append(self.showPic)
 
 	def startslideshow(self):
-		self.session.openWithCallback(self.returnVal , MC_PicView, self.filelist.getFileList(), self.filelist.getSelectionIndex(), self.filelist.getCurrentDirectory(), True)
+		self.session.openWithCallback(self.returnVal, MC_PicView, self.filelist.getFileList(), self.filelist.getSelectionIndex(), self.filelist.getCurrentDirectory(), True)
 
 	def up(self):
 		self["filelist"].up()
@@ -426,7 +427,7 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 			self.PlayPause();
 			if config.plugins.mc_pp.musicenable.value == True and config.plugins.mc_pp.music.value != "none":
 				if pathExists(config.plugins.mc_pp.music.value):
-					self.session.nav.playService(eServiceReference(4097,0,config.plugins.mc_pp.music.value))
+					self.session.nav.playService(eServiceReference(4097, 0, config.plugins.mc_pp.music.value))
 
 	def setPicloadConf(self):
 		sc = getScale()
@@ -450,7 +451,7 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 		self.session.nav.stopService()
 		if config.plugins.mc_pp.musicenable.value == True and config.plugins.mc_pp.music.value != "none":
 			if pathExists(config.plugins.mc_pp.music.value):
-				self.session.nav.playService(eServiceReference(4097,0,config.plugins.mc_pp.music.value))
+				self.session.nav.playService(eServiceReference(4097, 0, config.plugins.mc_pp.music.value))
 
 	def ShowPicture(self):
 		if self.shownow and len(self.currPic):
@@ -468,7 +469,7 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 		if ptr != None:
 			text = ""
 			try:
-				text = picInfo.split('\n',1)
+				text = picInfo.split('\n', 1)
 				text = "(" + str(self.index+1) + "/" + str(self.maxentry+1) + ") " + text[0].split('/')[-1]
 			except:
 				pass
@@ -493,7 +494,7 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 			self.index = self.maxentry
 
 	def slidePic(self):
-		print "slide to next Picture index=" + str(self.lastindex)
+		print("slide to next Picture index=" + str(self.lastindex))
 		if config.plugins.mc_pp.loop.value==False and self.lastindex == self.maxentry:
 			self.PlayPause()
 		self.shownow = True
@@ -565,7 +566,7 @@ class MC_PicSetup(Screen, ConfigListScreen):
 		self.onChangedEntry = []
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
-		self["actions"] = ActionMap(["SetupActions","DirectionActions"],
+		self["actions"] = ActionMap(["SetupActions", "DirectionActions"],
 			{
 				"cancel": self.exit,
 				"save": self.exit,
@@ -634,7 +635,7 @@ class Selectmusic(Screen):
 		currDir = config.plugins.mc_ap.lastDir.value
 		if not pathExists(currDir):
 			currDir = "/"
-		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib" , "/proc", "/ram", "/root" , "/sbin", "/sys", "/tmp", "/usr", "/var"]		
+		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib", "/proc", "/ram", "/root", "/sbin", "/sys", "/tmp", "/usr", "/var"]		
 		self.filelist = FileList(currDir, useServiceRef = True, showDirectories = True, showFiles = True, matchingPattern = "(?i)^.*\.(m3u|mp2|mp3|wav|wave|pls|wma|m4a|ogg|ra|flac)", inhibitDirs = inhibitDirs)
 		self["filelist"] = self.filelist
 		self["currentfolder"] = Label()

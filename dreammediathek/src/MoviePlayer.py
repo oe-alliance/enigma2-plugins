@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Tools.BoundFunction import boundFunction
 from Screens.MessageBox import MessageBox
@@ -8,14 +9,14 @@ from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Sources.StaticText import StaticText
 from Components.Sources.List import List
 from Components.AVSwitch import AVSwitch
-from Components.config import config, Config, ConfigSelection, ConfigSubsection, ConfigText, getConfigListEntry, ConfigYesNo, ConfigIP, ConfigNumber,ConfigLocations
+from Components.config import config, Config, ConfigSelection, ConfigSubsection, ConfigText, getConfigListEntry, ConfigYesNo, ConfigIP, ConfigNumber, ConfigLocations
 from Components.config import KEY_DELETE, KEY_BACKSPACE, KEY_LEFT, KEY_RIGHT, KEY_HOME, KEY_END, KEY_TOGGLEOW, KEY_ASCII, KEY_TIMEOUT
 from Components.ConfigList import ConfigListScreen
 from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
 
 from Tools.Directories import pathExists, fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_HDD, SCOPE_CURRENT_PLUGIN, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
-from enigma import eTimer, quitMainloop,eListbox,ePoint, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent, eListbox, gFont, getDesktop, ePicLoad, eServiceCenter, iServiceInformation, eServiceReference,iSeekableService,iServiceInformation, iPlayableService, iPlayableServicePtr
+from enigma import eTimer, quitMainloop, eListbox, ePoint, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent, eListbox, gFont, getDesktop, ePicLoad, eServiceCenter, iServiceInformation, eServiceReference, iSeekableService, iServiceInformation, iPlayableService, iPlayableServicePtr
 from os import path as os_path, system as os_system, unlink, stat, mkdir, popen, makedirs, listdir, access, rename, remove, W_OK, R_OK, F_OK
 from twisted.web import client
 from twisted.internet import reactor
@@ -73,7 +74,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 		self.screen_timeout = 5000
 		self.nextservice = None
 
-		print "evEOF=%d" % iPlayableService.evEOF
+		print("evEOF=%d" % iPlayableService.evEOF)
 		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
 			{
 				iPlayableService.evSeekableStatusChanged: self.__seekableStatusChanged,
@@ -112,8 +113,8 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 		self.session.nav.stopService()
 
 	def __evEOF(self):
-		print "evEOF=%d" % iPlayableService.evEOF
-		print "Event EOF"
+		print("evEOF=%d" % iPlayableService.evEOF)
+		print("Event EOF")
 		self.handleLeave(config.plugins.dreamMediathek.general.on_movie_stop.value)
 
 	def __setHideTimer(self):
@@ -144,10 +145,10 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 
 
 	def playNextFile(self):
-		print "playNextFile"
+		print("playNextFile")
 		if self.nextCallback() is not None:
-			nextservice,error = self.nextCallback()
-			print "nextservice--->",nextservice
+			nextservice, error = self.nextCallback()
+			print("nextservice--->", nextservice)
 			if nextservice is None:
 				self.handleLeave(config.plugins.dreamMediathek.general.on_movie_stop.value, error)
 			else:
@@ -155,9 +156,9 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 				self.showInfobar()
 
 	def playPrevFile(self):
-		print "playPrevFile"
+		print("playPrevFile")
 		if self.prevCallback() is not None:
-			prevservice,error = self.prevCallback()
+			prevservice, error = self.prevCallback()
 			if prevservice is None:
 				self.handleLeave(config.plugins.dreamMediathek.general.on_movie_stop.value, error)
 			else:
@@ -165,7 +166,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 				self.showInfobar()
 
 	def playagain(self):
-		print "playagain"
+		print("playagain")
 		if self.state != self.STATE_IDLE:
 			self.stopCurrent()
 		self.play()
@@ -186,24 +187,24 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 			self.__setHideTimer()
 
 	def stopCurrent(self):
-		print "stopCurrent"
+		print("stopCurrent")
 		self.session.nav.stopService()
 		self.state = self.STATE_IDLE
 
 	def playpauseService(self):
-		print "playpauseService"
+		print("playpauseService")
 		if self.state == self.STATE_PLAYING:
 			self.pauseService()
 		elif self.state == self.STATE_PAUSED:
 			self.unPauseService()
 
 	def pauseService(self):
-		print "pauseService"
+		print("pauseService")
 		if self.state == self.STATE_PLAYING:
 			self.setSeekState(self.STATE_PAUSED)
 		
 	def unPauseService(self):
-		print "unPauseService"
+		print("unPauseService")
 		if self.state == self.STATE_PAUSED:
 			self.setSeekState(self.STATE_PLAYING)
 
@@ -226,42 +227,42 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 		return True
 
 	def __seekableStatusChanged(self):
-		print "seekable status changed!"
+		print("seekable status changed!")
 		if not self.isSeekable():
 			self.setSeekState(self.STATE_PLAYING)
 		else:
-			print "seekable"
+			print("seekable")
 
 	def __serviceStarted(self):
 		self.state = self.STATE_PLAYING
 		self.__seekableStatusChanged()
 
 	def setSeekState(self, wantstate):
-		print "setSeekState"
+		print("setSeekState")
 		if wantstate == self.STATE_PAUSED:
-			print "trying to switch to Pause- state:",self.STATE_PAUSED
+			print("trying to switch to Pause- state:", self.STATE_PAUSED)
 		elif wantstate == self.STATE_PLAYING:
-			print "trying to switch to playing- state:",self.STATE_PLAYING
+			print("trying to switch to playing- state:", self.STATE_PLAYING)
 		service = self.session.nav.getCurrentService()
 		if service is None:
-			print "No Service found"
+			print("No Service found")
 			return False
 		pauseable = service.pause()
 		if pauseable is None:
-			print "not pauseable."
+			print("not pauseable.")
 			self.state = self.STATE_PLAYING
 
 		if pauseable is not None:
-			print "service is pausable"
+			print("service is pausable")
 			if wantstate == self.STATE_PAUSED:
-				print "WANT TO PAUSE"
+				print("WANT TO PAUSE")
 				pauseable.pause()
 				self.state = self.STATE_PAUSED
 				if not self.shown:
 					self.hidetimer.stop()
 					self.show()
 			elif wantstate == self.STATE_PLAYING:
-				print "WANT TO PLAY"
+				print("WANT TO PLAY")
 				pauseable.unpause()
 				self.state = self.STATE_PLAYING
 				if self.shown:

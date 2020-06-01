@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screens.Screen import Screen
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigText
 from Components.ConfigList import ConfigListScreen
@@ -8,7 +9,7 @@ from Components.ActionMap import ActionMap
 from . import _
 
        
-class LastFMConfigScreen(ConfigListScreen,Screen):
+class LastFMConfigScreen(ConfigListScreen, Screen):
 
     config.plugins.LastFM = ConfigSubsection()
     config.plugins.LastFM.name = ConfigText(default = _("Last.FM"))
@@ -64,7 +65,7 @@ class LastFMConfigScreen(ConfigListScreen,Screen):
         }, -2)
 
     def save(self):
-        print "saving"
+        print("saving")
 
         
         for x in self["config"].list:
@@ -72,7 +73,7 @@ class LastFMConfigScreen(ConfigListScreen,Screen):
         self.close(True)
 
     def cancel(self):
-        print "cancel"
+        print("cancel")
         for x in self["config"].list:
             x[1].cancel()
         self.close(False)

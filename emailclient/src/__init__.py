@@ -2,6 +2,7 @@
 '''
 Common functions for EmailClient
 '''
+from __future__ import print_function
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from Components.Language import language
 from Components.config import config
@@ -17,7 +18,7 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
 language.addCallback(localeInit())
@@ -34,7 +35,7 @@ def debug(message):
 			deb = open("/tmp/EmailClient.log", "aw")
 			deb.write(time.ctime() + ': ' + message + "\n")
 			deb.close()
-		except Exception, e:
+		except Exception as e:
 			debug("%s (retried debug: %s)" %(repr(message), str(e)))
 
 from enigma import getDesktop

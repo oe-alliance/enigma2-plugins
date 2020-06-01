@@ -8,6 +8,7 @@
 #          TMDb v3 API
 #-----------------------
 
+from __future__ import print_function
 from tmdb_exceptions import *
 from locales import get_locale
 from cache import Cache
@@ -55,12 +56,12 @@ class Request( urllib2.Request ):
         """Return a request object, using specified API path and arguments."""
         kwargs['api_key'] = self.api_key
         self._url = url.lstrip('/')
-        self._kwargs = dict([(kwa,kwv) for kwa,kwv in kwargs.items()
+        self._kwargs = dict([(kwa, kwv) for kwa, kwv in kwargs.items()
                                         if kwv is not None])
 
         locale = get_locale()
         kwargs = {}
-        for k,v in self._kwargs.items():
+        for k, v in self._kwargs.items():
             kwargs[k] = locale.encode(v)
         url = '{0}{1}?{2}'.format(self._base_url, self._url, urlencode(kwargs))
 
@@ -71,7 +72,7 @@ class Request( urllib2.Request ):
     def new(self, **kwargs):
         """Create a new instance of the request, with tweaked arguments."""
         args = dict(self._kwargs)
-        for k,v in kwargs.items():
+        for k, v in kwargs.items():
             if v is None:
                 if k in args:
                     del args[k]
@@ -89,11 +90,11 @@ class Request( urllib2.Request ):
         """Open a file object to the specified URL."""
         try:
             if DEBUG:
-                print 'loading '+self.get_full_url()
+                print('loading '+self.get_full_url())
                 if self.has_data():
-                    print '  '+self.get_data()
+                    print('  '+self.get_data())
             return urllib2.urlopen(self)
-        except urllib2.HTTPError, e:
+        except urllib2.HTTPError as e:
             raise TMDBHTTPError(e)
 
     def read(self):
@@ -107,7 +108,7 @@ class Request( urllib2.Request ):
         try:
             # catch HTTP error from open()
             data = json.load(self.open())
-        except TMDBHTTPError, e:
+        except TMDBHTTPError as e:
             try:
                 # try to load whatever was returned
                 data = json.loads(e.response)

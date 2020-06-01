@@ -109,7 +109,7 @@ class eSame(Screen):
 			"right": self.key_right,
 			"up": self.key_up,
 			"down": self.key_down,
-			"green" : self.key_green,
+			"green": self.key_green,
 			"yellow": self.key_yellow,
 		}, -1)
 
@@ -182,7 +182,7 @@ class eSame(Screen):
 		sy = i / 15;
 		sx = i - sy * 15;
 		if self.stonefield.remove(sx, sy):
-			marked = self.stonefield.mark1(sx,sy)
+			marked = self.stonefield.mark1(sx, sy)
 			self.printMarked(marked)
 			self.printScore()
 			self.printColors()
@@ -198,7 +198,7 @@ class eSame(Screen):
 			txt1 = "There are no more removeable stones.\nYou got a score of %d in total." % self.stonefield.getScore()
 			txt2 = "Game over!"
 
-		msg = self.session.open(MessageBox,txt1, MessageBox.TYPE_INFO)
+		msg = self.session.open(MessageBox, txt1, MessageBox.TYPE_INFO)
 		msg.setTitle(txt2)
 
 	def printColors(self):

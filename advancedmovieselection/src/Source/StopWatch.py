@@ -6,6 +6,7 @@
 # This software is licensed as described in the file COPYING, which
 # you should have received as part of this distribution.
 
+from __future__ import print_function
 import time
 
 """stopwatch is a very simple Python module for measuring time.
@@ -95,7 +96,7 @@ def clockit(func):
         t = StopWatch()
         retval = func(*args, **kw)
         t.stop()
-        print '%s in %s' % (func.__name__, t)
+        print('%s in %s' % (func.__name__, t))
         del t
         return retval
     return new

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from Components.Sources.Source import Source
 
 
@@ -38,7 +39,7 @@ class PowerState(Source):
 				return self.getStandby()
 
 			elif type == 0:
-				print "[PowerState.py] Standby 0"
+				print("[PowerState.py] Standby 0")
 				if inStandby is None:
 					self.session.open(Standby)
 					return "true"
@@ -47,35 +48,35 @@ class PowerState(Source):
 					return "false"
 
 			elif type == 4:
-				print "[PowerState.py] Standby 4"
+				print("[PowerState.py] Standby 4")
 				if inStandby is not None:
 					inStandby.Power()
 					return "false"
 				else:
 					return "true"
 			elif type == 5:
-				print "[PowerState.py] Standby 5"
+				print("[PowerState.py] Standby 5")
 				if inStandby is None:
 					self.session.open(Standby)
 					return "true"
 				else:
 					return "false"
 			elif type == 6:
-				print "[PowerState.py] Standby 6"
+				print("[PowerState.py] Standby 6")
 				from twisted.internet import reactor
 				import os
 				reactor.callLater(1, os.popen, 'killall -9 enigma2')
 				return "true"
 
 			elif 0 < type < 4:
-				print "[PowerState.py] TryQuitMainloop"
+				print("[PowerState.py] TryQuitMainloop")
 				from Screens.Standby import TryQuitMainloop
 				from twisted.internet import reactor
 				reactor.callLater(1, self.session.open, TryQuitMainloop, type)
 				return "true"
 
 			else:
-				print "[PowerState.py] cmd unknown" % type
+				print("[PowerState.py] cmd unknown" % type)
 				return "error"
 
 		except ValueError:

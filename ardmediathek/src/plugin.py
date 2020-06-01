@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 # ARD Mediathek by AliAbdul
+from __future__ import print_function
 from Components.ActionMap import ActionMap
 from Components.AVSwitch import AVSwitch
 from Components.Label import Label
@@ -320,7 +321,7 @@ class ARDMediathek(Screen):
 		getPage(url).addCallback(self.gotPage).addErrback(self.error)
 
 	def error(self, err=""):
-		print "[ARD Mediathek] Error:", err
+		print("[ARD Mediathek] Error:", err)
 		self.working = False
 		self.deactivateCacheDialog()
 
@@ -372,7 +373,7 @@ class ARDMediathek(Screen):
 				elif 'image/png' in contentType:
 					self.thumb = "/tmp/ard.png"
 				else:
-					print "[ARD Mediathek] Unknown thumbnail content-type:", contentType
+					print("[ARD Mediathek] Unknown thumbnail content-type:", contentType)
 					self.thumb = None
 			else:
 				self.thumb = None
@@ -385,7 +386,7 @@ class ARDMediathek(Screen):
 			self.deactivateCacheDialog()
 
 	def downloadThumbnailError(self, err):
-		print "[ARD Mediathek] Error:", err
+		print("[ARD Mediathek] Error:", err)
 		self.buildEntry(None)
 
 	def downloadThumbnailCallback(self, txt=""):

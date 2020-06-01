@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # for localized messages     
+from __future__ import print_function
 from . import _x
 
 from Screens.Screen import Screen
@@ -38,13 +39,13 @@ def setPreferredTagEditor(te):
 	try:
 		if preferredTagEditor == None:
 			preferredTagEditor = te
-			print "Preferred tag editor changed to ", preferredTagEditor
+			print("Preferred tag editor changed to ", preferredTagEditor)
 		else:
-			print "Preferred tag editor already set to ", preferredTagEditor
-			print "ignoring ", te
+			print("Preferred tag editor already set to ", preferredTagEditor)
+			print("ignoring ", te)
 	except:
 		preferredTagEditor = te
-		print "Preferred tag editor set to ", preferredTagEditor
+		print("Preferred tag editor set to ", preferredTagEditor)
 
 def getPreferredTagEditor():
 	global preferredTagEditor
@@ -193,7 +194,7 @@ class MovieContextMenu(Screen):
 
 class SelectionEventInfo:
 	def __init__(self):
-		print "[SF-Plugin] SF:SelectionEventInfo init"
+		print("[SF-Plugin] SF:SelectionEventInfo init")
 		self["Service"] = ServiceEvent()
 		self.list.connectSelChanged(self.__selectionChanged)
 		self.timer = eTimer()

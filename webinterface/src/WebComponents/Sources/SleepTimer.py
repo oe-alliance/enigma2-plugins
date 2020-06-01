@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Components.Sources.Source import Source
 from Components.config import config
 
@@ -16,11 +17,11 @@ class SleepTimer(Source):
 					_("Obligatory parameters missing [cmd [set,get], time [0-999], action [standby,shutdown], enabled [True,False]") )
 
 	def handleCommand(self, cmd):
-		print "[WebComponents.SleepTimer].handleCommand"
+		print("[WebComponents.SleepTimer].handleCommand")
 		self.res = self.setSleeptimer(cmd)
 
 	def setSleeptimer(self, cmd):
-		print "[WebComponents.SleepTimer].setSleeptimer, cmd=%s" %cmd
+		print("[WebComponents.SleepTimer].setSleeptimer, cmd=%s" %cmd)
 
 		from Screens.Standby import inStandby
 

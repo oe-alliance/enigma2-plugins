@@ -19,6 +19,7 @@
 #  modify it (if you keep the license), but it may not be commercially 
 #  distributed other than under the conditions noted above.
 #
+from __future__ import print_function
 from __init__ import _
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
@@ -56,7 +57,7 @@ class MoveCopyNotifier():
         pass
     
     def __timeout(self):
-        print "MoveCopyNotifier", str(serviceUtil.getJobs())
+        print("MoveCopyNotifier", str(serviceUtil.getJobs()))
         for job in serviceUtil.getJobs():
             if job.isFinished():
                 openDialog(job, self.session)
@@ -174,8 +175,8 @@ class ProgressList(GUIComponent):
     
             res.append(MultiContentEntryText(pos=(width - 200, 9), size=(195, 26), font=0, flags=RT_HALIGN_RIGHT, text=realSize(copied)))
             #res.append(MultiContentEntryText(pos=(width - 150, 32), size=(145, 22), font=1, flags=RT_HALIGN_RIGHT, text=etime))
-        except Exception, e:
-            print e
+        except Exception as e:
+            print(e)
         return res
 
     def moveToIndex(self, index):
@@ -406,7 +407,7 @@ class MovieMove(ChoiceBox):
             serviceUtil.clear()
             text = []
             for s in services:
-                print s.getName()
+                print(s.getName())
                 text.append(s.getName())
             self.session.open(MessageBox, _("Movie(s) are already in the destination directory. Operation cancelled!") + "\r\n\r\n" + "\r\n".join(text), MessageBox.TYPE_INFO)
             return

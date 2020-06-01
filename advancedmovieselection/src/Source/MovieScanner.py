@@ -19,6 +19,7 @@
 #  distributed other than under the conditions noted above.
 #
 
+from __future__ import print_function
 import os
 from datetime import datetime
 from ServiceProvider import ServiceCenter, eServiceReferenceDvd, eServiceReferenceBludisc
@@ -43,10 +44,10 @@ AUDIO_EXCLUDE = ("mp3", "ogg", "wav", "m4a")
 def getDirectories(l, root, hidden=False):
     root = os.path.realpath(root) + os.sep
     if not autoNetwork.isMountOnline(root):
-        print "not connected:", root
+        print("not connected:", root)
         return
     if not os.path.exists(root):
-        print "path not exists:", root
+        print("path not exists:", root)
         return
     if not root in l:
         l.append(root)
@@ -60,7 +61,7 @@ def getDirectories(l, root, hidden=False):
             dir_path = os.path.realpath(dir_path) + os.sep
             # Skip excluded directories here
             if any(item.lower() in dir_path.lower() for item in SCAN_EXCLUDE):
-                print "skip folder: \"%s\"" % (dir_path)
+                print("skip folder: \"%s\"" % (dir_path))
                 continue
             dvd = detectDVDStructure(dir_path)
             bludisc = detectBludiscStructure(dir_path)
@@ -86,7 +87,7 @@ class MovieScanner():
     
     def setEnabled(self, enabled):
         self.enabled = enabled
-        print "[AdvancedMovieSelection] Set MovieScanner:", str(enabled)
+        print("[AdvancedMovieSelection] Set MovieScanner:", str(enabled))
         if enabled:
             recordTimerEvent.appendCallback(self.timerStateChanged)
             self.addHotplugNotifier()
@@ -113,7 +114,7 @@ class MovieScanner():
     
     def reloadMoviesAsync(self, dir_list=None, delay=0):
         if self.isWorking:
-            print "[AdvancedMovieSelection] MovieScanner action canceled! reload in progress"
+            print("[AdvancedMovieSelection] MovieScanner action canceled! reload in progress")
             return
         from thread import start_new_thread
         start_new_thread(self.updateMovieList, (dir_list, delay))
@@ -136,12 +137,12 @@ class MovieScanner():
     
     @clockit
     def updateMovieList(self, dir_list=None, delay=0):
-        print "[AdvancedMovieSelection] Start scanning movies"
+        print("[AdvancedMovieSelection] Start scanning movies")
         try:
             # print dir_list
             self.isWorking = True
             if delay > 0:
-                print "waiting", str(delay)
+                print("waiting", str(delay))
                 import time
                 time.sleep(delay)
             self.updateReloadTime()
@@ -168,7 +169,7 @@ class MovieScanner():
             printStackTrace()
         self.isWorking = False
         directories, movies = self.movielibrary.getFullCount()
-        print "[AdvancedMovieSelection] Finished scanning movies", str(directories), str(movies)
+        print("[AdvancedMovieSelection] Finished scanning movies", str(directories), str(movies))
 
     def scanForMovies(self, root):
         # print "[AdvancedMovieSelection] scan folder:", root
@@ -176,12 +177,12 @@ class MovieScanner():
         scan_service = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + root)
         root_list = self.serviceHandler.list(scan_service)
         if root_list is None:
-            print "listing of movies failed"
+            print("listing of movies failed")
             return
         tags = set()
         l = []
         dirs = []
-        while 1:
+        while True:
             serviceref = root_list.getNext()
             if not serviceref.valid():
                 break
@@ -277,11 +278,11 @@ class MovieScanner():
     def timerStateChanged(self, timer):
         try:
             from timer import TimerEntry 
-            print "timer.event", timer.name
-            print "timer.state", timer.state
+            print("timer.event", timer.name)
+            print("timer.state", timer.state)
             if timer.state == TimerEntry.StateRunning:
-                print "TimerEntry", timer.name
-                print timer.Filename + ".ts"
+                print("TimerEntry", timer.name)
+                print(timer.Filename + ".ts")
                 mi = MovieInfo(timer.name, None, file_name=timer.Filename + ".ts")
                 serviceref = mi.createService()
                 mi.info = self.serviceHandler.info(serviceref)
@@ -289,21 +290,21 @@ class MovieScanner():
                 movie_path = os.path.dirname(mi.serviceref.getPath()) + os.sep
                 self.movielibrary.addMovie(movie_path, mi)
                 self.updateReloadTime()
-                print "add:", mi
+                print("add:", mi)
         except:
             printStackTrace()
 
     def needFullUpdate(self):
         videodirs = config.AdvancedMovieSelection.videodirs.value[:]
         config.AdvancedMovieSelection.videodirs.load()
-        print "checking directories"
-        print videodirs
-        print config.AdvancedMovieSelection.videodirs.value
+        print("checking directories")
+        print(videodirs)
+        print(config.AdvancedMovieSelection.videodirs.value)
         if len(videodirs) < len(config.AdvancedMovieSelection.videodirs.value):
-            print "size changed"
+            print("size changed")
             return True
         if len(videodirs) == len(config.AdvancedMovieSelection.videodirs.value) and videodirs != config.AdvancedMovieSelection.videodirs.value:
-            print "path changed"
+            print("path changed")
             return True
         return False
 
@@ -311,11 +312,11 @@ class MovieScanner():
     def checkAllAvailable(self):
         # print "*" * 80
         if self.isWorking:
-            print "canceled, scan in progress"
+            print("canceled, scan in progress")
             return
 
         if self.needFullUpdate():
-            print "need update"
+            print("need update")
             not_in_db = self.movielibrary.getMissingLocations(config.AdvancedMovieSelection.videodirs.value)
             new_list = []
             for p in not_in_db:
@@ -335,22 +336,22 @@ class MovieScanner():
             return
         if serviceref.flags & eServiceReference.mustDescent:
             return
-        print "update service info", serviceref.toString()
+        print("update service info", serviceref.toString())
         movie_info = self.movielibrary.findMoviePath(serviceref)
         if movie_info is not None:
             movie_info.info = self.serviceHandler.info(serviceref)
             movie_info.name = movie_info.info.getName(serviceref)
-            print movie_info
+            print(movie_info)
 
     def addHotplugNotifier(self):
         if not self.checkAllAvailable in hotplug.notifier:
-            print "add hotplugNotifier" 
+            print("add hotplugNotifier") 
             hotplug.notifier.append(self.checkAllAvailable)
             hotplug.hotplugChanged()
         
     def removeHotplugNotifier(self):
         if self.checkAllAvailable in hotplug.notifier:
-            print "remove hotplugNotifier" 
+            print("remove hotplugNotifier") 
             hotplug.notifier.remove(self.checkAllAvailable)
     
 

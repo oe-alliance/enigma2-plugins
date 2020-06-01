@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Plugins.Extensions.Widgets.Widget import Widget
 from enigma import ePicLoad, ePixmap, getDesktop, eTimer
 from Components.Pixmap import Pixmap
@@ -35,7 +36,7 @@ class WebPixmap(Pixmap):
     def load(self, url = None):
         tmpfile = ''.join((self.cachedir, quote_plus(url), ''))
         if os_path_isdir(self.cachedir) is False:
-            print "cachedir not existing, creating it"
+            print("cachedir not existing, creating it")
             os_mkdir(self.cachedir)
         if os_isfile(tmpfile):
             self.tmpfile = tmpfile
@@ -44,17 +45,17 @@ class WebPixmap(Pixmap):
             self.tmpfile = tmpfile
             head = { }
             agt = "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.0.2) Gecko/2008091620 Firefox/3.0.2"
-            downloadPage(url,self.tmpfile,headers=head,agent=agt).addCallback(self.onLoadFinished).addErrback(self.onLoadFailed)
+            downloadPage(url, self.tmpfile, headers=head, agent=agt).addCallback(self.onLoadFinished).addErrback(self.onLoadFailed)
         elif self.default:
             self.picload.startDecode(self.default)
 
-    def onLoadFinished(self,result):
+    def onLoadFinished(self, result):
         self.picload.startDecode(self.tmpfile)
 
-    def onLoadFailed(self,error):
-        print "WebPixmap:onLoadFAILED", error
+    def onLoadFailed(self, error):
+        print("WebPixmap:onLoadFAILED", error)
         if self.default and self.instance:
-            print "showing 404", self.default
+            print("showing 404", self.default)
             self.picload.startDecode(self.default)
         if os_isfile(self.tmpfile):
             os_remove(self.tmpfile)
@@ -68,14 +69,14 @@ class WebPixmap(Pixmap):
         
 
 class ImageswitchWidget(Widget):
-    def __init__(self,session):
-        Widget.__init__(self,session,name="Image Switch Widget",description="Example of a simple Widget images from the web",version="0.1",author="3c5x9",homepage="cvs://schwerkraft")
+    def __init__(self, session):
+        Widget.__init__(self, session, name="Image Switch Widget", description="Example of a simple Widget images from the web", version="0.1", author="3c5x9", homepage="cvs://schwerkraft")
         self.elements["imageswitch_pixmap"] = WebPixmap()
         self.Timer = eTimer()
         self.Timer.callback.append(self.TimerFire)
         self.last = False
        
-    def onLoadFinished(self,instance):
+    def onLoadFinished(self, instance):
         self.instance = instance
         self.TimerFire()
         

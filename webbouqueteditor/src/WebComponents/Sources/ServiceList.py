@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Components.Sources.Source import Source
 from enigma import eServiceCenter, eServiceReference
 from Components.ParentalControl import parentalControl, IMG_WHITESERVICE, IMG_WHITEBOUQUET, IMG_BLACKSERVICE, IMG_BLACKBOUQUET
@@ -44,7 +45,7 @@ class ServiceList(Source):
 						#(unlocked -B-)
 						isProtected = "5"
 					
-			list.append((item[0].toString(),item[1],isGroup,isMarker,isProtected))
+			list.append((item[0].toString(), item[1], isGroup, isMarker, isProtected))
 		return list
 
 	def getServiceList(self):
@@ -65,9 +66,9 @@ class ServiceList(Source):
 		return ref in self.getServicesAsList("S")
 
 	def handleCommand(self, cmd):
-		print "ServiceList handle command"
+		print("ServiceList handle command")
 		if self.validate_commands and not self.validateReference(cmd):
-			print "Service reference did not validate!"
+			print("Service reference did not validate!")
 			return
 		ref = eServiceReference(cmd)
 		if self.command_func:

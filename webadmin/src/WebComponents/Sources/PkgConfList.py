@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from Components.Sources.Source import Source
 from os import popen as os_popen, statvfs as os_statvfs, path as os_path
 from shutil import move as sh_move
@@ -24,7 +25,7 @@ class PkgConfList(Source):
 			elif self.func is self.LIST:
 				pass
 			
-	def switch(self,cmd):
+	def switch(self, cmd):
 		if cmd:
 			try:
 				file = cmd["file"]
@@ -34,7 +35,7 @@ class PkgConfList(Source):
 				else:
 					sh_move("/etc/opkg/" + file + ".off", "/etc/opkg/" + file)
 					return (True, file)
-			except Exception, e:
+			except Exception as e:
 				return (False, str(e))
 			
 	def getMem(self):
@@ -51,11 +52,11 @@ class PkgConfList(Source):
 		for n in files:
 			file = n[:-1]
 			if file.endswith(".conf") or file.endswith(".off"):
-				print "[PkgConfList] file ", file
+				print("[PkgConfList] file ", file)
 				text =""
 				with open("/etc/opkg/" + file) as f:
 					text = f.read()
-					print "[PkgConfList] text ",text
+					print("[PkgConfList] text ", text)
 					f.close()
 				list.append((file, text))
 		return list

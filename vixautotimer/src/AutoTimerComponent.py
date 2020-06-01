@@ -107,7 +107,7 @@ class AutoTimerComponent(object):
 		else:
 			self._bouquets = []
 
-	bouquets = property(lambda self: self._bouquets , setBouquets)
+	bouquets = property(lambda self: self._bouquets, setBouquets)
 
 	def setEncoding(self, encoding):
 		if encoding == '(null)':
@@ -418,7 +418,7 @@ class AutoTimerComponent(object):
 				myref = eServiceReference(str(bouquet))
 				mylist = serviceHandler.list(myref)
 				if mylist is not None:
-					while 1:
+					while True:
 						s = mylist.getNext()
 						# TODO: I wonder if its sane to assume we get services here (and not just new lists)
 						# We can ignore markers & directorys here because they won't match any event's service :-)
@@ -452,7 +452,7 @@ class AutoTimerComponent(object):
 				if myref.flags & eServiceReference.isGroup:
 					mylist = serviceHandler.list(myref)
 					if mylist is not None:
-						while 1:
+						while True:
 							s = mylist.getNext()
 							if s.valid():
 								# strip all after last :
@@ -656,7 +656,7 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 				myref = eServiceReference(str(bouquet))
 				mylist = serviceHandler.list(myref)
 				if mylist is not None:
-					while 1:
+					while True:
 						s = mylist.getNext()
 						# TODO: I wonder if its sane to assume we get services here (and not just new lists)
 						# We can ignore markers & directorys here because they won't match any event's service :-)
@@ -697,7 +697,7 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 				if myref.flags & eServiceReference.isGroup:
 					mylist = serviceHandler.list(myref)
 					if mylist is not None:
-						while 1:
+						while True:
 							s = mylist.getNext()
 							if s.valid():
 								# strip all after last :

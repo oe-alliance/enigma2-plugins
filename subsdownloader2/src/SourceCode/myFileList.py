@@ -73,7 +73,7 @@ def FileEntryComponent(name, absolute = None, isDir = False):
 	else:
 		extension = name.split('.')
 		extension = extension[-1].lower()
-		if EXTENSIONS.has_key(extension):
+		if extension in EXTENSIONS:
 			png = LoadPixmap("/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/res/" + EXTENSIONS[extension] + ".png")
 		else:
 			png = None
@@ -177,7 +177,7 @@ class FileList(MenuList):
 				root.setName(self.additional_extensions)
 			serviceHandler = eServiceCenter.getInstance()
 			list = serviceHandler.list(root)
-			while 1:
+			while True:
 				s = list.getNext()
 				if not s.valid():
 					del list
@@ -231,7 +231,7 @@ class FileList(MenuList):
 					EXext = "nothing"
 				if (self.matchingPattern is None) or (EXext in self.matchingPattern):
 					if nx is None:
-						self.list.append(FileEntryComponent(name = name, absolute = x , isDir = False))
+						self.list.append(FileEntryComponent(name = name, absolute = x, isDir = False))
 					else:
 						res = [ (x, False) ]
 						res.append((eListboxPythonMultiContent.TYPE_TEXT, 40, 2, 1000, 22, 0, RT_HALIGN_LEFT, name + " [" + self.getTSLength(path) + "]"))

@@ -1209,7 +1209,7 @@ class FritzCallFBF_05_27(object):
 				challenge = None
 				self.debug("[FritzCallFBF_05_27] _md5Login: login necessary and no challenge! That is terribly wrong.")
 			parms = urlencode({
-							'getpage':'../html/de/menus/menu2.html',  # 'var:pagename':'home', 'var:menu':'home',
+							'getpage': '../html/de/menus/menu2.html',  # 'var:pagename':'home', 'var:menu':'home',
 							'login:command/response': buildResponse(challenge, self.password),
 							})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
@@ -1291,7 +1291,7 @@ class FritzCallFBF_05_27(object):
 				return
 		# look for phonebook called dreambox or Dreambox
 		parms = urlencode({
-						'sid':self._md5Sid,
+						'sid': self._md5Sid,
 						})
 		url = "http://%s/fon_num/fonbook_select.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug("[FritzCallFBF_05_27] _selectPhonebook: '" + url + "' parms: '" + parms + "'")
@@ -1312,8 +1312,8 @@ class FritzCallFBF_05_27(object):
 			bookid = 1
 		# http://192.168.178.1/fon_num/fonbook_list.lua?sid=2faec13b0000f3a2
 		parms = urlencode({
-						'bookid':bookid,
-						'sid':self._md5Sid,
+						'bookid': bookid,
+						'sid': self._md5Sid,
 						})
 		url = "http://%s/fon_num/fonbook_list.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug("[FritzCallFBF_05_27] _loadFritzBoxPhonebookNew: '" + url + "' parms: '" + parms + "'")
@@ -1964,7 +1964,7 @@ class FritzCallFBF_05_50(object):
 
 	def _selectFritzBoxPhonebook(self, md5Sid, html = None):  # @UnusedVariable  pylint: disable=W0613
 		parms = urlencode({
-						'sid':md5Sid,
+						'sid': md5Sid,
 						})
 		url = "http://%s/fon_num/fonbook_select.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug(url + "?" + parms)
@@ -1986,10 +1986,10 @@ class FritzCallFBF_05_50(object):
 
 		# http://192.168.178.1/fon_num/fonbook_list.lua?sid=2faec13b0000f3a2
 		parms = urlencode({
-						'bookid':bookid,
-						'sid':md5Sid,
-						'cancel':'',
-						'apply':'uiApply',
+						'bookid': bookid,
+						'sid': md5Sid,
+						'cancel': '',
+						'apply': 'uiApply',
 						})
 		url = "http://%s/fon_num/fonbook_select.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug(url + "?" + parms)
@@ -2285,28 +2285,28 @@ class FritzCallFBF_05_50(object):
 		}
 		if statusGuestAccess.find('WLAN') != -1:
 			parms.update({
-					'print':'',
+					'print': '',
 			})
 		else:
 			parms.update({
-					'activate_guest_access':'on',
-					'guest_ssid':config.plugins.FritzCall.guestSSID.value,
-					'disconnect_guest_access':'on',
+					'activate_guest_access': 'on',
+					'guest_ssid': config.plugins.FritzCall.guestSSID.value,
+					'disconnect_guest_access': 'on',
 					})
 			if config.plugins.FritzCall.guestUptime.value:
 				parms.update({
-							'down_time_activ':'on',
-							'down_time_value':config.plugins.FritzCall.guestUptime.value,
-							'disconnect_guest_access':'on',
+							'down_time_activ': 'on',
+							'down_time_value': config.plugins.FritzCall.guestUptime.value,
+							'disconnect_guest_access': 'on',
 					})
 			if config.plugins.FritzCall.guestSecure.value:
 				parms.update({
-							'sec_mode':'4',
+							'sec_mode': '4',
 							'wpa_key': self.guestPassword,
 							})
 			else:
 				parms.update({
-							'sec_mode':'5',
+							'sec_mode': '5',
 							})
 		parms = urlencode(parms)
 
@@ -3029,20 +3029,20 @@ class FritzCallFBF_06_35(object):
 
 	def _changeGuestAccessWLAN(self, statusGuestAccess, callback, md5Sid):
 		parms = {
-			'sid':md5Sid,
-			'autoupdate':'on',
-			'apply':'',
-			'oldpage':'/wlan/guest_access.lua',
+			'sid': md5Sid,
+			'autoupdate': 'on',
+			'apply': '',
+			'oldpage': '/wlan/guest_access.lua',
 			}
 
 		if statusGuestAccess.find('WLAN') != -1:
 			parms.update({
-				'print':'',
+				'print': '',
 				})
 		else:
 			parms.update({
-				'activate_guest_access':'on',
-				'guest_ssid':config.plugins.FritzCall.guestSSID.value,
+				'activate_guest_access': 'on',
+				'guest_ssid': config.plugins.FritzCall.guestSSID.value,
 				})
 			if config.plugins.FritzCall.guestUptime.value:
 				parms.update({
@@ -3052,12 +3052,12 @@ class FritzCallFBF_06_35(object):
 							})
 			if config.plugins.FritzCall.guestSecure.value:
 				parms.update({
-					'sec_mode':'3',
+					'sec_mode': '3',
 					'wpa_key': self.guestPassword,
 					})
 			else:
 				parms.update({
-					'sec_mode':'5',
+					'sec_mode': '5',
 					})
 		parms = urlencode(parms)
 

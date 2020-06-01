@@ -1,3 +1,4 @@
+from __future__ import print_function
 ############################################################################
 #    Copyright (C) 2008 by Volker Christian                                #
 #    Volker.Christian@fh-hagenberg.at                                      #
@@ -47,18 +48,18 @@ class GoogleSuggestions():
 			try:
 				self.conn.request("GET", querry)
 			except (httplib.CannotSendRequest, socket.gaierror, socket.error):
-				print "[YTB] Can not send request for suggestions"
+				print("[YTB] Can not send request for suggestions")
 				self.callback(None)
 			else:
 				try:
 					response = self.conn.getresponse()
 				except httplib.BadStatusLine:
-					print "[YTB] Can not get a response from google"
+					print("[YTB] Can not get a response from google")
 					self.callback(None)
 				else:
 					if response.status == 200:
 						data = response.read()
-						exec data
+						exec(data)
 					else:
 						self.callback(None)
 			self.conn.close()

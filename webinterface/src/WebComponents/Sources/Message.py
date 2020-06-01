@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Components.Sources.Source import Source
 from Screens.MessageBox import MessageBox
 from os import system, path
@@ -25,7 +26,7 @@ class Message(Source):
 			self.res = self.getYesNoAnswer(cmd)
 
 	def printMessage(self, param):
-		print "printMessage"
+		print("printMessage")
 
 		if self.cmd['text'] == "" or self.cmd['text'] is None:
 			return ( False, _("No Messagetext given") )
@@ -34,7 +35,7 @@ class Message(Source):
 
 		try:
 			typeint = int(self.cmd['type'])
-		except (ValueError, TypeError), e:
+		except (ValueError, TypeError) as e:
 			return ( False, _("type %s is not a number") % self.cmd['type'] )
 
 		if typeint == MessageBox.TYPE_YESNO:
@@ -51,18 +52,18 @@ class Message(Source):
 
 		try:
 			mtimeout = int(self.cmd['timeout'])
-		except (ValueError, TypeError), e:
+		except (ValueError, TypeError) as e:
 			mtimeout = -1
 
 		if typeint == MessageBox.TYPE_YESNO:
 			self.session.openWithCallback(self.yesNoAnswer, MessageBox, mtext, type=mtype, timeout=mtimeout)
 		else:
-			self.session.open(MessageBox, mtext, type=mtype , timeout=mtimeout)
+			self.session.open(MessageBox, mtext, type=mtype, timeout=mtimeout)
 
 		return ( True, _("Message sent successfully!") )
 
 	def yesNoAnswer(self, confirmed):
-		print "yesNoAnswer", confirmed
+		print("yesNoAnswer", confirmed)
 		#self.session.messageboxanswer = confirmed
 
 		yesnoFile = self.yesnoFile
@@ -74,7 +75,7 @@ class Message(Source):
 		system(cmdstr)
 
 	def getYesNoAnswer(self, param):
-		print "getYesNoAnswer"#,self.session.messageboxanswer
+		print("getYesNoAnswer")#,self.session.messageboxanswer
 		yesnoFile = self.yesnoFile
 		if path.exists(yesnoFile) == True:
 			file = open(yesnoFile, "r")
@@ -82,7 +83,7 @@ class Message(Source):
 			file.close()
 			cmdstr = "rm %s" % yesnoFile
 			system(cmdstr)
-			print "Answer: (%s)" % lines[0]
+			print("Answer: (%s)" % lines[0])
 			if lines[0] == "yes":
 				return ( True, "Answer is YES!" )
 			else:

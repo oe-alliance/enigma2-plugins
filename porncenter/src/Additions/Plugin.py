@@ -1,3 +1,4 @@
+from __future__ import print_function
 # PornCenter by AliAbdul
 from Components.AVSwitch import AVSwitch
 from enigma import ePicLoad, eTimer
@@ -62,7 +63,7 @@ class Movie:
 				downloadPage(thumb, self.thumbnailFile).addCallback(self.decodeThumbnail).addErrback(self.error)
 
 	def error(self, error=None):
-		if error: print error
+		if error: print(error)
 
 	def decodeThumbnail(self, str=None):
 		self.picload = ePicLoad()
@@ -107,29 +108,28 @@ class Plugin:
 
 	def getPageError(self, error=None):
 		if error:
-			print "[%s] Error: %s" % (self.name, error)
+			print("[%s] Error: %s" % (self.name, error))
 
 ##################################################
 
 def getPlugins():
 	try:
-		files = listdir(resolveFilename(SCOPE_PLUGINS)+"/Extensions/PornCenter/Additions")
-		files.sort()
-	except Exception, exc:
-		print "[PornCenter] failed to search for plugins:", exc
+		files = sorted(listdir(resolveFilename(SCOPE_PLUGINS)+"/Extensions/PornCenter/Additions"))
+	except Exception as exc:
+		print("[PornCenter] failed to search for plugins:", exc)
 		files = []
 	plugins = []
 	for file in files:
 		if file.endswith(".py") and not file in ["__init__.py", "Plugin.py", "Podcast.py"]:
 			try:
 				plugin = my_import('.'.join(["Plugins", "Extensions", "PornCenter", "Additions", file[:-3]]))
-				if not plugin.__dict__.has_key("getPlugin"):
-					print "Plugin %s doesn't have 'getPlugin'-call." % file
+				if "getPlugin" not in plugin.__dict__:
+					print("Plugin %s doesn't have 'getPlugin'-call." % file)
 					continue
 				p = plugin.getPlugin()
 				if p:
 					plugins.append(p)
-			except Exception, exc:
-				print "Plugin %s failed to load: %s" % (file, exc)
+			except Exception as exc:
+				print("Plugin %s failed to load: %s" % (file, exc))
 				continue
 	return plugins

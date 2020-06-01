@@ -1,3 +1,4 @@
+from __future__ import print_function
 import sys
 import urllib
 import tempfile
@@ -37,7 +38,7 @@ class NapiProjekt():
         self.error_ = 0
         pass
         
-    def f(self,z):
+    def f(self, z):
         idx = [ 0xe, 0x3,  0x6, 0x8, 0x2 ]
         mul = [   2,   2,    5,   4,   3 ]
         add = [   0, 0xd, 0x10, 0xb, 0x5 ]
@@ -77,27 +78,27 @@ class NapiProjekt():
                     http_code = self.sub.getcode() 
                     self.sub = self.sub.read()
                     self.error_ = 0
-            except (IOError, OSError), e:
-                print >> sys.stderr, "%s: %d/%d: Fetching subtitle failed: %s" % (prog, i, i_total, e)
+            except (IOError, OSError) as e:
+                print("%s: %d/%d: Fetching subtitle failed: %s" % (prog, i, i_total, e), file=sys.stderr)
                 time.sleep(0.5)
                 self.error_ = 1
                 continue
 
             if http_code != 200:
-                print >> sys.stderr, "%s: %d/%d: Fetching subtitle failed, HTTP code: %s" % (prog, i, i_total, str(http_code))
+                print("%s: %d/%d: Fetching subtitle failed, HTTP code: %s" % (prog, i, i_total, str(http_code)), file=sys.stderr)
                 time.sleep(0.5)
                 self.error_ = 1
                 continue
     
             if self.sub.startswith('NPc'):
-                print >> sys.stderr, "%s: %d/%d: Subtitle NOT FOUND" % (prog, i, i_total)
+                print("%s: %d/%d: Subtitle NOT FOUND" % (prog, i, i_total), file=sys.stderr)
                 repeat = -1
                 self.error_ = 1
                 continue
                 repeat = 0
 
             if self.sub is None or self.sub == "":
-                print >> sys.stderr, "%s: %d/%d: Subtitle download FAILED" % (prog, i, i_total)
+                print("%s: %d/%d: Subtitle download FAILED" % (prog, i, i_total), file=sys.stderr)
                 self.error_ = 1
                 continue
 
@@ -111,7 +112,7 @@ class NapiProjekt():
         else:
             #subFilePath = str(self.filename).split(".")[0]+'.srt'
             subFilePath = str(self.filename).rsplit(".", 1)[0]+'.srt'
-            savefile = open(subFilePath,"w")
+            savefile = open(subFilePath, "w")
             savefile.write(self.sub)
             savefile.close()
             return subFilePath

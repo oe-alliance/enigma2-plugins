@@ -82,7 +82,7 @@ class EmissionDetailview(Screen, HelpableScreen):
 		{
 			"yellow": (self.toggleStatus, _("toggle download status")),
 			"green": (self.bandwidth, _("open bandwidth settings")),
-			"blue": (self.remove , _("remove torrent")),
+			"blue": (self.remove, _("remove torrent")),
 		})
 
 		self["key_red"] = StaticText(_("Close"))

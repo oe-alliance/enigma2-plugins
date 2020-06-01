@@ -108,7 +108,7 @@ class AutoTimerComponent(object):
 		else:
 			self._bouquets = []
 
-	bouquets = property(lambda self: self._bouquets , setBouquets)
+	bouquets = property(lambda self: self._bouquets, setBouquets)
 
 	def setEncoding(self, encoding):
 		if encoding == '(null)':
@@ -712,7 +712,7 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 				if myref.flags & eServiceReference.isGroup:
 					mylist = serviceHandler.list(myref)
 					if mylist is not None:
-						while 1:
+						while True:
 							s = mylist.getNext()
 							if s.valid():
 								# strip all after last :

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from PKG import PKGConsoleStream
 
 from twisted.web import server, resource, http
@@ -15,7 +16,7 @@ class Script(resource.Resource):
 	def execCmd(self, request):
 		cmd = self.command.split("+")
 		cmd[0] = "/usr/script/" + cmd[0]
-		print "[Script] cmd: %s" % cmd
+		print("[Script] cmd: %s" % cmd)
 		request.setResponseCode(http.OK)
 		PKGConsoleStream(request, cmd)
 

@@ -4,6 +4,7 @@
 ## by AliAbdul
 ##
 ##
+from __future__ import print_function
 from base64 import encodestring
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigClock, ConfigInteger, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry
@@ -83,7 +84,7 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
 language.addCallback(localeInit())
@@ -105,7 +106,7 @@ def _parse(url):
 	url = url.strip()
 	parsed = urlparse(url)
 	scheme = parsed[0]
-	path = urlunparse(('','') + parsed[2:])
+	path = urlunparse(('', '') + parsed[2:])
 	host, port = parsed[1], 80
 	if '@' in host:
 		username, host = host.split('@')
@@ -131,7 +132,7 @@ class ProgressDownload:
 			basicAuth = encodestring("%s:%s"%(username, password))
 			authHeader = "Basic " + basicAuth.strip()
 			AuthHeaders = {"Authorization": authHeader}
-			if kwargs.has_key("headers"):
+			if "headers" in kwargs:
 				kwargs["headers"].update(AuthHeaders)
 			else:
 				kwargs["headers"] = AuthHeaders
@@ -1079,7 +1080,7 @@ class UnrarEntry:
 			f.write(result)
 			f.close()
 		except:
-			print "[RS Downloader] Result of unrar:", result
+			print("[RS Downloader] Result of unrar:", result)
 		self.finishCallback(self.name)
 
 	def allDownloaded(self):

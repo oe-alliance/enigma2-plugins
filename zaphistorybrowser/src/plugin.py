@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 ## Zap-History Browser by AliAbdul
+from __future__ import print_function
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigInteger, ConfigSelection, \
 		ConfigYesNo, ConfigSet, ConfigSubsection, getConfigListEntry
@@ -31,7 +32,7 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
 language.addCallback(localeInit())
@@ -57,7 +58,7 @@ def addToHistory(instance, ref):
 		tmp = instance.servicePath[:]
 		tmp.append(ref)
 		try: del instance.history[instance.history_pos+1:]
-		except Exception, e: pass
+		except Exception as e: pass
 		if config.plugins.ZapHistoryConfigurator.e1_like_history.value and tmp in instance.history:
 			instance.history.remove(tmp)
 		instance.history.append(tmp)
@@ -120,7 +121,7 @@ class ZapHistoryConfigurator(ConfigListScreen, Screen):
 			from Screens.InfoBar import InfoBar
 			try:
 				csel = InfoBar.instance.servicelist
-			except AttributeError, e:
+			except AttributeError as e:
 				pass
 			else:
 				config.plugins.ZapHistoryConfigurator.history_tv.value = [[y.toString() for y in x] for x in csel.history_tv]

@@ -104,9 +104,9 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		
 		# Create temporary identifier config elements
 		identifiers = self.seriesPlugin.modules
-		identifiers_elapsed = [k for k,v in identifiers.items() if v.knowsElapsed()]
-		identifiers_today   = [k for k,v in identifiers.items() if v.knowsToday()]
-		identifiers_future  = [k for k,v in identifiers.items() if v.knowsFuture()]
+		identifiers_elapsed = [k for k, v in identifiers.items() if v.knowsElapsed()]
+		identifiers_today   = [k for k, v in identifiers.items() if v.knowsToday()]
+		identifiers_future  = [k for k, v in identifiers.items() if v.knowsFuture()]
 		if config.plugins.seriesplugin.identifier_elapsed.value in identifiers_elapsed:
 			self.cfg_identifier_elapsed = NoSave( ConfigSelection(choices = identifiers_elapsed, default = config.plugins.seriesplugin.identifier_elapsed.value) )
 		else:
@@ -159,14 +159,14 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		#    _config list entry
 		#    _                                                                                     , config element
 		
-		self.list.append( getConfigListEntry(  _("Enable SeriesPlugin")                            , config.plugins.seriesplugin.enabled ) )
+		self.list.append( getConfigListEntry(  _("Enable SeriesPlugin"), config.plugins.seriesplugin.enabled ) )
 		
 		if config.plugins.seriesplugin.enabled.value:
 			
 			# Check if xmltvimport exists
 			if os.path.exists("/etc/epgimport"):
 				log.debug("Config: Found epgimport")
-				self.list.append( getConfigListEntry(  _("Enable support for EPGImport")           , config.plugins.seriesplugin.epgimport ) )
+				self.list.append( getConfigListEntry(  _("Enable support for EPGImport"), config.plugins.seriesplugin.epgimport ) )
 			elif config.plugins.seriesplugin.epgimport.value:
 				self.changesMade = True
 				config.plugins.seriesplugin.epgimport.value = False
@@ -174,18 +174,18 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 			# Check if xmltvimport exists
 			if os.path.exists("/etc/xmltvimport"):
 				log.debug("Config: Found xmltvimport")
-				self.list.append( getConfigListEntry(  _("Enable support for XMLTVImport")         , config.plugins.seriesplugin.xmltvimport ) )
+				self.list.append( getConfigListEntry(  _("Enable support for XMLTVImport"), config.plugins.seriesplugin.xmltvimport ) )
 			elif config.plugins.seriesplugin.xmltvimport.value:
 				self.changesMade = True
 				config.plugins.seriesplugin.xmltvimport.value = False
 			
-			self.list.append( getConfigListEntry(  _("Show in info menu")                          , config.plugins.seriesplugin.menu_info ) )
-			self.list.append( getConfigListEntry(  _("Show in extensions menu")                    , config.plugins.seriesplugin.menu_extensions ) )
-			self.list.append( getConfigListEntry(  _("Show in epg menu")                           , config.plugins.seriesplugin.menu_epg ) )
-			self.list.append( getConfigListEntry(  _("Show in channel menu")                       , config.plugins.seriesplugin.menu_channel ) )
-			self.list.append( getConfigListEntry(  _("Show Info in movie list menu")               , config.plugins.seriesplugin.menu_movie_info ) )
-			self.list.append( getConfigListEntry(  _("Show Rename in movie list menu")             , config.plugins.seriesplugin.menu_movie_rename ) )
-			self.list.append( getConfigListEntry(  _("Check timer list from extension menu")       , config.plugins.seriesplugin.check_timer_list ) )
+			self.list.append( getConfigListEntry(  _("Show in info menu"), config.plugins.seriesplugin.menu_info ) )
+			self.list.append( getConfigListEntry(  _("Show in extensions menu"), config.plugins.seriesplugin.menu_extensions ) )
+			self.list.append( getConfigListEntry(  _("Show in epg menu"), config.plugins.seriesplugin.menu_epg ) )
+			self.list.append( getConfigListEntry(  _("Show in channel menu"), config.plugins.seriesplugin.menu_channel ) )
+			self.list.append( getConfigListEntry(  _("Show Info in movie list menu"), config.plugins.seriesplugin.menu_movie_info ) )
+			self.list.append( getConfigListEntry(  _("Show Rename in movie list menu"), config.plugins.seriesplugin.menu_movie_rename ) )
+			self.list.append( getConfigListEntry(  _("Check timer list from extension menu"), config.plugins.seriesplugin.check_timer_list ) )
 			
 			#if len( config.plugins.seriesplugin.identifier_elapsed.choices ) > 1:
 			#self.list.append( getConfigListEntry(  _("Select identifier for elapsed events")       , self.cfg_identifier_elapsed ) )
@@ -194,75 +194,75 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 			#if len( config.plugins.seriesplugin.identifier_future.choices ) > 1:
 			#self.list.append( getConfigListEntry(  _("Select identifier for future events")        , self.cfg_identifier_future ) )
 			
-			self.list.append( getConfigListEntry(  _("Record title episode pattern")               , self.cfg_pattern_title ) )
-			self.list.append( getConfigListEntry(  _("Record description episode pattern")         , self.cfg_pattern_description ) )
+			self.list.append( getConfigListEntry(  _("Record title episode pattern"), self.cfg_pattern_title ) )
+			self.list.append( getConfigListEntry(  _("Record description episode pattern"), self.cfg_pattern_description ) )
 			
-			self.list.append( getConfigListEntry(  "E2: "+_("Composition of the recording filenames") , config.recording.filename_composition ) )
-			self.list.append( getConfigListEntry(  _("Record directory pattern")                   , self.cfg_pattern_directory ) )
+			self.list.append( getConfigListEntry(  "E2: "+_("Composition of the recording filenames"), config.recording.filename_composition ) )
+			self.list.append( getConfigListEntry(  _("Record directory pattern"), self.cfg_pattern_directory ) )
 			
-			self.list.append( getConfigListEntry(  _("Default season")                             , config.plugins.seriesplugin.default_season ) )
-			self.list.append( getConfigListEntry(  _("Default episode")                            , config.plugins.seriesplugin.default_episode ) )
+			self.list.append( getConfigListEntry(  _("Default season"), config.plugins.seriesplugin.default_season ) )
+			self.list.append( getConfigListEntry(  _("Default episode"), config.plugins.seriesplugin.default_episode ) )
 			
-			self.list.append( getConfigListEntry(  _("Replace special characters in title")        , config.plugins.seriesplugin.replace_chars ) )
+			self.list.append( getConfigListEntry(  _("Replace special characters in title"), config.plugins.seriesplugin.replace_chars ) )
 			
-			self.list.append( getConfigListEntry(  _("Main bouquet for channel editor")            , self.cfg_bouquet_main ) )
+			self.list.append( getConfigListEntry(  _("Main bouquet for channel editor"), self.cfg_bouquet_main ) )
 			
-			self.list.append( getConfigListEntry(  _("Rename files")                               , config.plugins.seriesplugin.rename_file ) )
+			self.list.append( getConfigListEntry(  _("Rename files"), config.plugins.seriesplugin.rename_file ) )
 			if config.plugins.seriesplugin.rename_file.value:
-				self.list.append( getConfigListEntry(  _("Use legacy filenames") + " (ä to ae)"    , config.plugins.seriesplugin.rename_legacy ) )
-				self.list.append( getConfigListEntry(  _("Append '_' if file exist")               , config.plugins.seriesplugin.rename_existing_files ) )
+				self.list.append( getConfigListEntry(  _("Use legacy filenames") + " (ä to ae)", config.plugins.seriesplugin.rename_legacy ) )
+				self.list.append( getConfigListEntry(  _("Append '_' if file exist"), config.plugins.seriesplugin.rename_existing_files ) )
 			
-			self.list.append( getConfigListEntry(  _("Max time drift to match episode")            , config.plugins.seriesplugin.max_time_drift ) )
-			self.list.append( getConfigListEntry(  _("Title search depths")                        , config.plugins.seriesplugin.search_depths ) )
+			self.list.append( getConfigListEntry(  _("Max time drift to match episode"), config.plugins.seriesplugin.max_time_drift ) )
+			self.list.append( getConfigListEntry(  _("Title search depths"), config.plugins.seriesplugin.search_depths ) )
 			
-			self.list.append( getConfigListEntry(  _("Skip search if pattern matches")             , config.plugins.seriesplugin.skip_pattern_match ) )
-			self.list.append( getConfigListEntry(  _("Skip search during records")                 , config.plugins.seriesplugin.skip_during_records ) )
+			self.list.append( getConfigListEntry(  _("Skip search if pattern matches"), config.plugins.seriesplugin.skip_pattern_match ) )
+			self.list.append( getConfigListEntry(  _("Skip search during records"), config.plugins.seriesplugin.skip_during_records ) )
 			
-			self.list.append( getConfigListEntry(  _("AutoTimer independent mode")                 , config.plugins.seriesplugin.autotimer_independent ) )
+			self.list.append( getConfigListEntry(  _("AutoTimer independent mode"), config.plugins.seriesplugin.autotimer_independent ) )
 			if config.plugins.seriesplugin.autotimer_independent.value:
-				self.list.append( getConfigListEntry(  _("Check timer every x minutes")            , config.plugins.seriesplugin.independent_cycle ) )
+				self.list.append( getConfigListEntry(  _("Check timer every x minutes"), config.plugins.seriesplugin.independent_cycle ) )
 			
-			self.list.append( getConfigListEntry(  _("Check Timer for corresponding EPG events")   , config.plugins.seriesplugin.timer_eit_check ) )
-			self.list.append( getConfigListEntry(  _("Add tag 'SeriesPlugin' to timer")            , config.plugins.seriesplugin.timer_add_tag ) )
+			self.list.append( getConfigListEntry(  _("Check Timer for corresponding EPG events"), config.plugins.seriesplugin.timer_eit_check ) )
+			self.list.append( getConfigListEntry(  _("Add tag 'SeriesPlugin' to timer"), config.plugins.seriesplugin.timer_add_tag ) )
 			
-			self.list.append( getConfigListEntry(  _("Socket timeout")                             , config.plugins.seriesplugin.socket_timeout ) )
+			self.list.append( getConfigListEntry(  _("Socket timeout"), config.plugins.seriesplugin.socket_timeout ) )
 			
-			self.list.append( getConfigListEntry(  _("Timeout for Success Popups")                 , config.plugins.seriesplugin.popups_success_timeout  ) )
-			self.list.append( getConfigListEntry(  _("Timeout for Warnings Popups")                , config.plugins.seriesplugin.popups_warning_timeout  ) )
+			self.list.append( getConfigListEntry(  _("Timeout for Success Popups"), config.plugins.seriesplugin.popups_success_timeout  ) )
+			self.list.append( getConfigListEntry(  _("Timeout for Warnings Popups"), config.plugins.seriesplugin.popups_warning_timeout  ) )
 			
 			#self.list.append( getConfigListEntry(  _("Use local caching")                         , config.plugins.seriesplugin.caching ) )
 			#if config.plugins.seriesplugin.caching.value:
 			#	self.list.append( getConfigListEntry(  _("Cache expires after x hours")            , config.plugins.seriesplugin.caching_expiration ) )
 			
-			self.list.append( getConfigListEntry(  _("Channel matching file")                      , config.plugins.seriesplugin.channel_file ) )
-			self.list.append( getConfigListEntry(  _("Episode pattern file")                       , config.plugins.seriesplugin.pattern_file ) )
-			self.list.append( getConfigListEntry(  _("Directory pattern file")                     , config.plugins.seriesplugin.pattern_file_directories ) )
+			self.list.append( getConfigListEntry(  _("Channel matching file"), config.plugins.seriesplugin.channel_file ) )
+			self.list.append( getConfigListEntry(  _("Episode pattern file"), config.plugins.seriesplugin.pattern_file ) )
+			self.list.append( getConfigListEntry(  _("Directory pattern file"), config.plugins.seriesplugin.pattern_file_directories ) )
 			
 			try:
-				self.list.append( getConfigListEntry( "AT: "+_("Poll automatically")                 , config.plugins.autotimer.autopoll ) )
-				self.list.append( getConfigListEntry( "AT: "+_("Startup delay (in min)")             , config.plugins.autotimer.delay ) )
-				self.list.append( getConfigListEntry( "AT: "+_("Poll Interval (in h)")               , config.plugins.autotimer.interval ) )
-				self.list.append( getConfigListEntry( "AT: "+_("Timeout (in min)")                   , config.plugins.autotimer.timeout ) )
+				self.list.append( getConfigListEntry( "AT: "+_("Poll automatically"), config.plugins.autotimer.autopoll ) )
+				self.list.append( getConfigListEntry( "AT: "+_("Startup delay (in min)"), config.plugins.autotimer.delay ) )
+				self.list.append( getConfigListEntry( "AT: "+_("Poll Interval (in h)"), config.plugins.autotimer.interval ) )
+				self.list.append( getConfigListEntry( "AT: "+_("Timeout (in min)"), config.plugins.autotimer.timeout ) )
 			except:
 				pass
 			
-			self.list.append( getConfigListEntry(  _("Debug: Print debug messages (Shell)")          , config.plugins.seriesplugin.debug_prints ) )
-			self.list.append( getConfigListEntry(  _("Debug: Write Log")                             , config.plugins.seriesplugin.write_log ) )
+			self.list.append( getConfigListEntry(  _("Debug: Print debug messages (Shell)"), config.plugins.seriesplugin.debug_prints ) )
+			self.list.append( getConfigListEntry(  _("Debug: Write Log"), config.plugins.seriesplugin.write_log ) )
 			if config.plugins.seriesplugin.write_log.value:
-				self.list.append( getConfigListEntry(  _("Debug: Log file path")                     , config.plugins.seriesplugin.log_file ) )
+				self.list.append( getConfigListEntry(  _("Debug: Log file path"), config.plugins.seriesplugin.log_file ) )
 				#self.list.append( getConfigListEntry(  _("Debug: Forum user name")                  , config.plugins.seriesplugin.log_reply_user ) )
 				#self.list.append( getConfigListEntry(  _("Debug: User mail address")                , config.plugins.seriesplugin.log_reply_mail ) )
 			
 			try:
-				self.list.append( getConfigListEntry( "AT: "+_("Send debug messages to shell")       , config.plugins.autotimer.log_shell ) )
-				self.list.append( getConfigListEntry( "AT: "+ _("Write debug messages into file")    , config.plugins.autotimer.log_write ) )
+				self.list.append( getConfigListEntry( "AT: "+_("Send debug messages to shell"), config.plugins.autotimer.log_shell ) )
+				self.list.append( getConfigListEntry( "AT: "+ _("Write debug messages into file"), config.plugins.autotimer.log_write ) )
 				if config.plugins.autotimer.log_write.value:
-					self.list.append( getConfigListEntry( "AT: "+_("Location and name of log file")  , config.plugins.autotimer.log_file ) )
+					self.list.append( getConfigListEntry( "AT: "+_("Location and name of log file"), config.plugins.autotimer.log_file ) )
 			except:
 				pass
 			
 			try:
-				self.list.append( getConfigListEntry( "E2: "+_("Enable recording debug (Timer log)") , config.recording.debug ) )
+				self.list.append( getConfigListEntry( "E2: "+_("Enable recording debug (Timer log)"), config.recording.debug ) )
 			except:
 				pass
 

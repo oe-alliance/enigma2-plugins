@@ -30,9 +30,9 @@ SEVERITY = {
 
 try:
 	dict.iteritems
-	reverse = lambda map: dict((v,k) for k,v in map.iteritems())
+	reverse = lambda map: dict((v, k) for k, v in map.iteritems())
 except AttributeError:
-	reverse = lambda map: dict((v,k) for k,v in map.items())
+	reverse = lambda map: dict((v, k) for k, v in map.items())
 
 SEVERITYMAP = {
 	-1: SEVERITY['info'],

@@ -1,3 +1,4 @@
+from __future__ import print_function
 #
 #  AutomaticTimerlistCleanup E2
 #
@@ -33,7 +34,7 @@ from timer import TimerEntry
 from . import _
 
 config.plugins.automatictimerlistcleanup = ConfigSubsection()
-config.plugins.automatictimerlistcleanup.type = ConfigSelection(default = "-1", choices = [("-1",_("disabled")), ("0",_("immediately after recording")),("1",_("older than 1 day")),("3",_("older than 3 days")),("7",_("older than 1 week")),("14",_("older than 2 weeks")),("28",_("older than 4 weeks")),("42",_("older than 6 weeks"))])
+config.plugins.automatictimerlistcleanup.type = ConfigSelection(default = "-1", choices = [("-1", _("disabled")), ("0", _("immediately after recording")), ("1", _("older than 1 day")), ("3", _("older than 3 days")), ("7", _("older than 1 week")), ("14", _("older than 2 weeks")), ("28", _("older than 4 weeks")), ("42", _("older than 6 weeks"))])
 
 class AutomaticTimerlistCleanUpSetup(Screen, ConfigListScreen): # config
 
@@ -75,7 +76,7 @@ class AutomaticTimerlistCleanUp:
 	TIMER_INTERVAL = 86400 # check timerlist every 24 hour
 	def __init__(self, session):
 		self.session = session
-		print "[AutomaticTimerlistCleanUp] Starting AutomaticTimerlistCleanUp..."
+		print("[AutomaticTimerlistCleanUp] Starting AutomaticTimerlistCleanUp...")
 		self.timer = eTimer() # check timer
 		self.timer.callback.append(self.cleanupTimerlist)
 		self.cleanupTimerlist() # always check immediately after starting plugin
@@ -85,27 +86,27 @@ class AutomaticTimerlistCleanUp:
 	def cleanupTimerlist(self):
 		if int(config.plugins.automatictimerlistcleanup.type.value) > -1: # check only if feature is enabled
 			value = time() - int(config.plugins.automatictimerlistcleanup.type.value) * 86400 # calculate end time for comparison with processed timers
-			print "[AutomaticTimerlistCleanUp] Cleaning up timerlist-entries older than ",strftime("%c", localtime(value))
+			print("[AutomaticTimerlistCleanUp] Cleaning up timerlist-entries older than ", strftime("%c", localtime(value)))
 			self.session.nav.RecordTimer.processed_timers = [ timerentry for timerentry in self.session.nav.RecordTimer.processed_timers if timerentry.disabled or (timerentry.end and timerentry.end > value) ] # cleanup timerlist
-			print "[AutomaticTimerlistCleanUp] Next automatic timerlist cleanup at ", strftime("%c", localtime(time()+self.TIMER_INTERVAL))
+			print("[AutomaticTimerlistCleanUp] Next automatic timerlist cleanup at ", strftime("%c", localtime(time()+self.TIMER_INTERVAL)))
 			self.timer.startLongTimer(self.TIMER_INTERVAL) # check again in x secs
 		else:
-			print "[AutomaticTimerlistCleanUp] disabled"
+			print("[AutomaticTimerlistCleanUp] disabled")
 		
 	def configChange(self, configElement = None):
 		# config was changed in setup
 		if self.timer.isActive(): # stop timer if running
 			self.timer.stop()
-		print "[AutomaticTimerlistCleanUp] Setup values have changed"
+		print("[AutomaticTimerlistCleanUp] Setup values have changed")
 		if int(config.plugins.automatictimerlistcleanup.type.value) > -1:
-			print "[AutomaticTimerlistCleanUp] Next automatic timerlist cleanup at ", strftime("%c", localtime(time()+120))
+			print("[AutomaticTimerlistCleanUp] Next automatic timerlist cleanup at ", strftime("%c", localtime(time()+120)))
 			self.timer.startLongTimer(120) # check timerlist in 2 minutes after changing 
 		else:
-			print "[AutomaticTimerlistCleanUp] disabled"
+			print("[AutomaticTimerlistCleanUp] disabled")
 		
 	def timerentryOnStateChange(self, timer):
 		if int(config.plugins.automatictimerlistcleanup.type.value) > -1 and timer.state == TimerEntry.StateEnded and timer.cancelled is not True: #if enabled, timerentry ended and it was not cancelled by user
-			print "[AutomaticTimerlistCleanUp] Timerentry has been changed to StateEnd"
+			print("[AutomaticTimerlistCleanUp] Timerentry has been changed to StateEnd")
 			if self.timer.isActive(): # stop timer if running
 				self.timer.stop()
 			self.cleanupTimerlist() # and check if entries have to be cleaned up in the timerlist

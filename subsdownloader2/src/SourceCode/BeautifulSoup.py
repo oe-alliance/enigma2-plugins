@@ -77,7 +77,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE, DAMMIT.
 
 """
 from __future__ import generators
+from __future__ import print_function
 
+from future.utils import raise_
 __author__ = "Leonard Richardson (leonardr@segfault.org)"
 __version__ = "3.2.0"
 __copyright__ = "Copyright (c) 2004-2010 Leonard Richardson"
@@ -445,7 +447,7 @@ class NavigableString(unicode, PageElement):
         if attr == 'string':
             return self
         else:
-            raise AttributeError, "'%s' object has no attribute '%s'" % (self.__class__.__name__, attr)
+            raise_(AttributeError, "'%s' object has no attribute '%s'" % (self.__class__.__name__, attr))
 
     def __unicode__(self):
         return str(self).decode(DEFAULT_OUTPUT_ENCODING)
@@ -483,7 +485,7 @@ class Tag(PageElement):
     def _invert(h):
         "Cheap function to invert a hash."
         i = {}
-        for k,v in h.items():
+        for k, v in h.items():
             i[v] = k
         return i
 
@@ -543,10 +545,10 @@ class Tag(PageElement):
         self.escapeUnrecognizedEntities = parser.escapeUnrecognizedEntities
 
         # Convert any HTML, XML, or numeric entities in the attribute values.
-        convert = lambda(k, val): (k,
+        convert = lambda k_val: (k_val[0],
                                    re.sub("&(#\d+|#x[0-9a-fA-F]+|\w+);",
                                           self._convertEntities,
-                                          val))
+                                          k_val[1]))
         self.attrs = map(convert, self.attrs)
 
     def getString(self):
@@ -593,7 +595,7 @@ class Tag(PageElement):
         raise ValueError("Tag.index: element not in tag")
 
     def has_key(self, key):
-        return self._getAttrMap().has_key(key)
+        return key in self._getAttrMap()
 
     def __getitem__(self, key):
         """tag[key] returns the value of the 'key' attribute for the tag,
@@ -637,7 +639,7 @@ class Tag(PageElement):
                 #We don't break because bad HTML can define the same
                 #attribute multiple times.
             self._getAttrMap()
-            if self.attrMap.has_key(key):
+            if key in self.attrMap:
                 del self.attrMap[key]
 
     def __call__(self, *args, **kwargs):
@@ -652,7 +654,7 @@ class Tag(PageElement):
             return self.find(tag[:-3])
         elif tag.find('__') != 0:
             return self.find(tag)
-        raise AttributeError, "'%s' object has no attribute '%s'" % (self.__class__, tag)
+        raise_(AttributeError, "'%s' object has no attribute '%s'" % (self.__class__, tag))
 
     def __eq__(self, other):
         """Returns true iff this tag has the same name, the same attributes,
@@ -931,7 +933,7 @@ class SoupStrainer:
                             markupAttrMap = markupAttrs
                          else:
                             markupAttrMap = {}
-                            for k,v in markupAttrs:
+                            for k, v in markupAttrs:
                                 markupAttrMap[k] = v
                     attrValue = markupAttrMap.get(attr)
                     if not self._matches(attrValue, matchAgainst):
@@ -967,8 +969,8 @@ class SoupStrainer:
             if self._matches(markup, self.text):
                 found = markup
         else:
-            raise Exception, "I don't know how to match against a %s" \
-                  % markup.__class__
+            raise_(Exception, "I don't know how to match against a %s" \
+                  % markup.__class__)
         return found
 
     def _matches(self, markup, matchAgainst):
@@ -992,7 +994,7 @@ class SoupStrainer:
             elif hasattr(matchAgainst, '__iter__'): # list-like
                 result = markup in matchAgainst
             elif hasattr(matchAgainst, 'items'):
-                result = markup.has_key(matchAgainst)
+                result = matchAgainst in markup
             elif matchAgainst and isinstance(markup, basestring):
                 if isinstance(markup, unicode):
                     matchAgainst = unicode(matchAgainst)
@@ -1020,7 +1022,7 @@ def buildTagMap(default, *args):
     for portion in args:
         if hasattr(portion, 'items'):
             #It's a map. Merge it.
-            for k,v in portion.items():
+            for k, v in portion.items():
                 built[k] = v
         elif hasattr(portion, '__iter__'): # is a list
             #It's a list. Map each item to the default.
@@ -1205,8 +1207,8 @@ class BeautifulStoneSoup(Tag, SGMLParser):
     def isSelfClosingTag(self, name):
         """Returns true iff the given string is the name of a
         self-closing tag according to this parser."""
-        return self.SELF_CLOSING_TAGS.has_key(name) \
-               or self.instanceSelfClosingTags.has_key(name)
+        return name in self.SELF_CLOSING_TAGS \
+               or name in self.instanceSelfClosingTags
 
     def reset(self):
         Tag.__init__(self, self, self.ROOT_TAG_NAME)
@@ -1298,7 +1300,7 @@ class BeautifulStoneSoup(Tag, SGMLParser):
 
         nestingResetTriggers = self.NESTABLE_TAGS.get(name)
         isNestable = nestingResetTriggers != None
-        isResetNesting = self.RESET_NESTING_TAGS.has_key(name)
+        isResetNesting = name in self.RESET_NESTING_TAGS
         popTo = None
         inclusive = True
         for i in range(len(self.tagStack)-1, 0, -1):
@@ -1311,7 +1313,7 @@ class BeautifulStoneSoup(Tag, SGMLParser):
             if (nestingResetTriggers is not None
                 and p.name in nestingResetTriggers) \
                 or (nestingResetTriggers is None and isResetNesting
-                    and self.RESET_NESTING_TAGS.has_key(p.name)):
+                    and p.name in self.RESET_NESTING_TAGS):
 
                 #If we encounter one of the nesting reset triggers
                 #peculiar to this tag, or we encounter another tag
@@ -1513,13 +1515,13 @@ class BeautifulSoup(BeautifulStoneSoup):
     BeautifulStoneSoup before writing your own subclass."""
 
     def __init__(self, *args, **kwargs):
-        if not kwargs.has_key('smartQuotesTo'):
+        if 'smartQuotesTo' not in kwargs:
             kwargs['smartQuotesTo'] = self.HTML_ENTITIES
         kwargs['isHTML'] = True
         BeautifulStoneSoup.__init__(self, *args, **kwargs)
 
     SELF_CLOSING_TAGS = buildTagMap(None,
-                                    ('br' , 'hr', 'input', 'img', 'meta',
+                                    ('br', 'hr', 'input', 'img', 'meta',
                                     'spacer', 'link', 'frame', 'base', 'col'))
 
     PRESERVE_WHITESPACE_TAGS = set(['pre', 'textarea'])
@@ -1546,13 +1548,13 @@ class BeautifulSoup(BeautifulStoneSoup):
                            'dt' : ['dl'] }
 
     #Tables can contain other tables, but there are restrictions.
-    NESTABLE_TABLE_TAGS = {'table' : [],
-                           'tr' : ['table', 'tbody', 'tfoot', 'thead'],
-                           'td' : ['tr'],
-                           'th' : ['tr'],
-                           'thead' : ['table'],
-                           'tbody' : ['table'],
-                           'tfoot' : ['table'],
+    NESTABLE_TABLE_TAGS = {'table': [],
+                           'tr': ['table', 'tbody', 'tfoot', 'thead'],
+                           'td': ['tr'],
+                           'th': ['tr'],
+                           'thead': ['table'],
+                           'tbody': ['table'],
+                           'tfoot': ['table'],
                            }
 
     NON_NESTABLE_BLOCK_TAGS = ('address', 'form', 'p', 'pre')
@@ -1696,7 +1698,7 @@ class BeautifulSOAP(BeautifulStoneSoup):
             parent._getAttrMap()
             if (isinstance(tag, Tag) and len(tag.contents) == 1 and
                 isinstance(tag.contents[0], NavigableString) and
-                not parent.attrMap.has_key(tag.name)):
+                tag.name not in parent.attrMap):
                 parent[tag.name] = tag.contents[0]
         BeautifulStoneSoup.popTag(self)
 
@@ -1821,7 +1823,7 @@ class UnicodeDammit:
                                                       "iso-8859-1",
                                                       "iso-8859-2"):
             markup = re.compile("([\x80-\x9f])").sub \
-                     (lambda(x): self._subMSChar(x.group(1)),
+                     (lambda x: self._subMSChar(x.group(1)),
                       markup)
 
         try:
@@ -1829,7 +1831,7 @@ class UnicodeDammit:
             u = self._toUnicode(markup, proposed)
             self.markup = u
             self.originalEncoding = proposed
-        except Exception, e:
+        except Exception as e:
             # print "That didn't work!"
             # print e
             return None
@@ -1949,60 +1951,60 @@ class UnicodeDammit:
     def _ebcdic_to_ascii(self, s):
         c = self.__class__
         if not c.EBCDIC_TO_ASCII_MAP:
-            emap = (0,1,2,3,156,9,134,127,151,141,142,11,12,13,14,15,
-                    16,17,18,19,157,133,8,135,24,25,146,143,28,29,30,31,
-                    128,129,130,131,132,10,23,27,136,137,138,139,140,5,6,7,
-                    144,145,22,147,148,149,150,4,152,153,154,155,20,21,158,26,
-                    32,160,161,162,163,164,165,166,167,168,91,46,60,40,43,33,
-                    38,169,170,171,172,173,174,175,176,177,93,36,42,41,59,94,
-                    45,47,178,179,180,181,182,183,184,185,124,44,37,95,62,63,
-                    186,187,188,189,190,191,192,193,194,96,58,35,64,39,61,34,
-                    195,97,98,99,100,101,102,103,104,105,196,197,198,199,200,
-                    201,202,106,107,108,109,110,111,112,113,114,203,204,205,
-                    206,207,208,209,126,115,116,117,118,119,120,121,122,210,
-                    211,212,213,214,215,216,217,218,219,220,221,222,223,224,
-                    225,226,227,228,229,230,231,123,65,66,67,68,69,70,71,72,
-                    73,232,233,234,235,236,237,125,74,75,76,77,78,79,80,81,
-                    82,238,239,240,241,242,243,92,159,83,84,85,86,87,88,89,
-                    90,244,245,246,247,248,249,48,49,50,51,52,53,54,55,56,57,
-                    250,251,252,253,254,255)
+            emap = (0, 1, 2, 3, 156, 9, 134, 127, 151, 141, 142, 11, 12, 13, 14, 15,
+                    16, 17, 18, 19, 157, 133, 8, 135, 24, 25, 146, 143, 28, 29, 30, 31,
+                    128, 129, 130, 131, 132, 10, 23, 27, 136, 137, 138, 139, 140, 5, 6, 7,
+                    144, 145, 22, 147, 148, 149, 150, 4, 152, 153, 154, 155, 20, 21, 158, 26,
+                    32, 160, 161, 162, 163, 164, 165, 166, 167, 168, 91, 46, 60, 40, 43, 33,
+                    38, 169, 170, 171, 172, 173, 174, 175, 176, 177, 93, 36, 42, 41, 59, 94,
+                    45, 47, 178, 179, 180, 181, 182, 183, 184, 185, 124, 44, 37, 95, 62, 63,
+                    186, 187, 188, 189, 190, 191, 192, 193, 194, 96, 58, 35, 64, 39, 61, 34,
+                    195, 97, 98, 99, 100, 101, 102, 103, 104, 105, 196, 197, 198, 199, 200,
+                    201, 202, 106, 107, 108, 109, 110, 111, 112, 113, 114, 203, 204, 205,
+                    206, 207, 208, 209, 126, 115, 116, 117, 118, 119, 120, 121, 122, 210,
+                    211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224,
+                    225, 226, 227, 228, 229, 230, 231, 123, 65, 66, 67, 68, 69, 70, 71, 72,
+                    73, 232, 233, 234, 235, 236, 237, 125, 74, 75, 76, 77, 78, 79, 80, 81,
+                    82, 238, 239, 240, 241, 242, 243, 92, 159, 83, 84, 85, 86, 87, 88, 89,
+                    90, 244, 245, 246, 247, 248, 249, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                    250, 251, 252, 253, 254, 255)
             import string
             c.EBCDIC_TO_ASCII_MAP = string.maketrans( \
             ''.join(map(chr, range(256))), ''.join(map(chr, emap)))
         return s.translate(c.EBCDIC_TO_ASCII_MAP)
 
-    MS_CHARS = { '\x80' : ('euro', '20AC'),
-                 '\x81' : ' ',
-                 '\x82' : ('sbquo', '201A'),
-                 '\x83' : ('fnof', '192'),
-                 '\x84' : ('bdquo', '201E'),
-                 '\x85' : ('hellip', '2026'),
-                 '\x86' : ('dagger', '2020'),
-                 '\x87' : ('Dagger', '2021'),
-                 '\x88' : ('circ', '2C6'),
-                 '\x89' : ('permil', '2030'),
-                 '\x8A' : ('Scaron', '160'),
-                 '\x8B' : ('lsaquo', '2039'),
-                 '\x8C' : ('OElig', '152'),
-                 '\x8D' : '?',
-                 '\x8E' : ('#x17D', '17D'),
-                 '\x8F' : '?',
-                 '\x90' : '?',
-                 '\x91' : ('lsquo', '2018'),
-                 '\x92' : ('rsquo', '2019'),
-                 '\x93' : ('ldquo', '201C'),
-                 '\x94' : ('rdquo', '201D'),
-                 '\x95' : ('bull', '2022'),
-                 '\x96' : ('ndash', '2013'),
-                 '\x97' : ('mdash', '2014'),
-                 '\x98' : ('tilde', '2DC'),
-                 '\x99' : ('trade', '2122'),
-                 '\x9a' : ('scaron', '161'),
-                 '\x9b' : ('rsaquo', '203A'),
-                 '\x9c' : ('oelig', '153'),
-                 '\x9d' : '?',
-                 '\x9e' : ('#x17E', '17E'),
-                 '\x9f' : ('Yuml', ''),}
+    MS_CHARS = { '\x80': ('euro', '20AC'),
+                 '\x81': ' ',
+                 '\x82': ('sbquo', '201A'),
+                 '\x83': ('fnof', '192'),
+                 '\x84': ('bdquo', '201E'),
+                 '\x85': ('hellip', '2026'),
+                 '\x86': ('dagger', '2020'),
+                 '\x87': ('Dagger', '2021'),
+                 '\x88': ('circ', '2C6'),
+                 '\x89': ('permil', '2030'),
+                 '\x8A': ('Scaron', '160'),
+                 '\x8B': ('lsaquo', '2039'),
+                 '\x8C': ('OElig', '152'),
+                 '\x8D': '?',
+                 '\x8E': ('#x17D', '17D'),
+                 '\x8F': '?',
+                 '\x90': '?',
+                 '\x91': ('lsquo', '2018'),
+                 '\x92': ('rsquo', '2019'),
+                 '\x93': ('ldquo', '201C'),
+                 '\x94': ('rdquo', '201D'),
+                 '\x95': ('bull', '2022'),
+                 '\x96': ('ndash', '2013'),
+                 '\x97': ('mdash', '2014'),
+                 '\x98': ('tilde', '2DC'),
+                 '\x99': ('trade', '2122'),
+                 '\x9a': ('scaron', '161'),
+                 '\x9b': ('rsaquo', '203A'),
+                 '\x9c': ('oelig', '153'),
+                 '\x9d': '?',
+                 '\x9e': ('#x17E', '17E'),
+                 '\x9f': ('Yuml', ''),}
 
 #######################################################################
 
@@ -2011,4 +2013,4 @@ class UnicodeDammit:
 if __name__ == '__main__':
     import sys
     soup = BeautifulSoup(sys.stdin)
-    print soup.prettify()
+    print(soup.prettify())

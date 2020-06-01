@@ -72,8 +72,8 @@ class AdvHdmiCecSetup(Screen, ConfigListScreen):
 				"save": self.keySave,
 				"yellowshort": self.EditTimeSpanEntries,
 				"infoshort": self.showInfo,
-				"nextBouquet":self.bouquetPlus,
-				"prevBouquet":self.bouquetMinus,
+				"nextBouquet": self.bouquetPlus,
+				"prevBouquet": self.bouquetMinus,
 			}
 		)
 
@@ -134,7 +134,7 @@ class AdvHdmiCecSetup(Screen, ConfigListScreen):
 		infoMsg = _("Version: ") + ADVHDMI_VERSION + "\n\n"
 		if advhdmiHooks:
 			infoMsg += _("Registered HDMI-Cec-Hooks:") + "\n"
-			for hookKey,hook in advhdmiHooks.iteritems():
+			for hookKey, hook in advhdmiHooks.iteritems():
 				infoMsg += _("Hook") + " '" + str(hookKey) + "':\n"
 				infoMsg += str(hook.hookDescription) + "\n\n"
 		else:
@@ -214,14 +214,14 @@ class TimeSpanListScreen(Screen):
 		self["key_yellow"] = Button(_("Edit"))
 		self["key_blue"] = Button(_("Delete"))
 
-		self["actions"] = ActionMap(["WizardActions","MenuActions","ShortcutActions"],
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
 		{
-			"ok"    : self.keyOK,
-			"back"  : self.keyClose,
-			"red"   : self.keyAdd,
-			"green" : self.keyClose,
+			"ok": self.keyOK,
+			"back": self.keyClose,
+			"red": self.keyAdd,
+			"green": self.keyClose,
 			"yellow": self.keyEdit,
-			"blue"  : self.keyDelete,
+			"blue": self.keyDelete,
 		}, -1)
 		
 		self._updateList()
@@ -240,7 +240,7 @@ class TimeSpanListScreen(Screen):
 		self.keyEdit()
 
 	def keyAdd(self):
-		self.session.open(TimeSpanConfigScreen,None,self._updateList)
+		self.session.open(TimeSpanConfigScreen, None, self._updateList)
 
 	def keyEdit(self):
 		try:
@@ -249,7 +249,7 @@ class TimeSpanListScreen(Screen):
 			sel = None
 		if sel is None:
 			return
-		self.session.openWithCallback(self._updateList,TimeSpanConfigScreen,sel)
+		self.session.openWithCallback(self._updateList, TimeSpanConfigScreen, sel)
 
 	def keyDelete(self):
 		try:

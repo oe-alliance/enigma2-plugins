@@ -6,6 +6,7 @@ $Author: michael $
 $Revision: 1451 $
 $Date: 2017-06-08 18:35:18 +0200 (Thu, 08 Jun 2017) $
 '''
+from __future__ import print_function
 
 # C0111 (Missing docstring)
 # C0103 (Invalid name)
@@ -43,7 +44,7 @@ except ValueError:
 
 	def debug(message):
 		if debugVal:
-			print message
+			print(message)
 
 import htmlentitydefs
 
@@ -97,7 +98,7 @@ def html2unicode(in_html):
 			uml = unichr(int(codepoint))
 			debug("replace %s with %s in %s", repr(key), repr(uml), repr(in_html[0:20] + '...'))
 			in_html = in_html.replace(key, uml)
-		except ValueError, e:
+		except ValueError as e:
 			warn("html2utf8: ValueError " + repr(key) + ":" + repr(codepoint) + " (" + str(e) + ")")
 	return in_html
 
@@ -141,10 +142,10 @@ def out(number, caller):
 	elif ort:
 		name += ort
 
-	print name
+	print(name)
 
 def simpleout(number, caller):  # @UnusedVariable # pylint: disable=W0613
-	print caller
+	print(caller)
 
 try:
 	reverseLookupFileName = resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/reverselookup.xml")

@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Plugins.Extensions.NETcaster.StreamInterface import StreamInterface
 from Plugins.Extensions.NETcaster.StreamInterface import Stream
 from Screens.ChoiceBox import ChoiceBox
@@ -7,7 +8,7 @@ class Interface(StreamInterface):
     nameshort = "SHOUTcast"
     description = "This is a Plugin to browse www.shoutcast.com and listen to webradios listed there."
     def __init__(self,session,cbListLoaded=None):
-        StreamInterface.__init__(self,session,cbListLoaded=cbListLoaded)
+        StreamInterface.__init__(self, session, cbListLoaded=cbListLoaded)
         self.genrefeed = GenreFeed()
     
     def getList(self):
@@ -15,17 +16,17 @@ class Interface(StreamInterface):
         #self.genrefeed.fetch_genres()
         self.genrefeed.parse_genres()
         for i in self.genrefeed.genre_list:            
-            glist.append((str(i),i))
-        self.session.openWithCallback(self.GenreSelected,ChoiceBox,_("select Genre to search for streams"),glist)
+            glist.append((str(i), i))
+        self.session.openWithCallback(self.GenreSelected, ChoiceBox, _("select Genre to search for streams"), glist)
 
-    def GenreSelected(self,selectedGenre):
+    def GenreSelected(self, selectedGenre):
         if selectedGenre is not None:
             feed = ShoutcastFeed(selectedGenre[1])
             #feed.fetch_stations()
             feed.parse_stations()
             self.list=[]
             for station in feed.station_list:
-                stream = Stream(str(station['Name']),"Bitrate: "+str(station['Bitrate'])+", Type: "+str(station['MimeType']),str(station['PLS_URL']),type="pls")
+                stream = Stream(str(station['Name']), "Bitrate: "+str(station['Bitrate'])+", Type: "+str(station['MimeType']), str(station['PLS_URL']), type="pls")
                 self.list.append(stream)
         self.OnListLoaded()
 
@@ -53,7 +54,7 @@ from urllib import FancyURLopener
 from xml.sax import parseString
 from xml.sax.handler import ContentHandler
 from os import stat, mkdir
-from os.path import dirname,isdir
+from os.path import dirname, isdir
 import time
 from stat import ST_MTIME
 
@@ -68,7 +69,7 @@ def write_cache(cache_file, cache_data):
         try:
             mkdir( dirname(cache_file) )
         except OSError:
-            print dirname(cache_file), 'is a file'
+            print(dirname(cache_file), 'is a file')
     fd = open(cache_file, 'w')
     dump(cache_data, fd, -1)
     fd.close()
@@ -96,7 +97,7 @@ class StationParser(ContentHandler):
     """
     SAX handler for xml feed, not for public consumption
     """
-    def __init__(self,min_bitrate):
+    def __init__(self, min_bitrate):
         self.isStationList = False
         self.isTuneIn = False
         self.isStation = False
@@ -127,7 +128,7 @@ class StationParser(ContentHandler):
             self.nowPlaying = attrs.get('ct', None)
             self.Listeners = attrs.get('lc', None)
             self.Genre = attrs.get('genre', None)
-    def endElement(self,name):
+    def endElement(self, name):
         if name == 'station':
             self.isStation = False
         if name == 'tunein':
@@ -141,7 +142,7 @@ class StationParser(ContentHandler):
         if name == 'stationlist':
             self.isStationList = False
             if DEBUG == 1:
-                print 'Parsed ', self.count, ' stations'
+                print('Parsed ', self.count, ' stations')
 
 class GenreParse(ContentHandler):
     def __init__( self ):
@@ -187,7 +188,7 @@ class GenreFeed:
                 ct = None
         if not ct or (time.time() - ct) > self.cache_ttl:
             if DEBUG == 1:
-                print 'Getting fresh feed'
+                print('Getting fresh feed')
             try:
 	        parseXML = GenreParse()
 	        self.genres = self.fetch_genres()
@@ -195,7 +196,7 @@ class GenreFeed:
 	        self.genre_list = parseXML.genreList
 	        write_cache(self.cache_file, self.genre_list)
 	    except:
-	    	print "Failed to get genres from server, sorry."
+	    	print("Failed to get genres from server, sorry.")
         return self.genre_list
 
 class ShoutcastFeed:
@@ -232,7 +233,7 @@ class ShoutcastFeed:
             try:
                 self.station_list = load_cache(self.cache_file)
             except:
-            	print "Failed to load cache."
+            	print("Failed to load cache.")
         if not ct or (time.time() - ct) > self.cache_ttl:
             try:
                 parseXML = StationParser(self.min_bitrate)
@@ -241,5 +242,5 @@ class ShoutcastFeed:
                 self.station_list = parseXML.station_list
                 write_cache(self.cache_file, self.station_list)
             except:
-            	print "Failed to get a new station list, sorry."
+            	print("Failed to get a new station list, sorry.")
         return self.station_list

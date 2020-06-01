@@ -15,7 +15,7 @@ class GetFPS(object):
     #    return round(self.fps(),3)
         
     def fps(self):
-        self.file = open(self.filename,"r+b")
+        self.file = open(self.filename, "r+b")
         s = self.file.read(4)
         if s == "\x1a\x45\xdf\xa3":
             return self.get_mkv_fps()
@@ -47,7 +47,7 @@ class GetFPS(object):
     def get_mkv_fps(self):
         track = 0
         self.file.seek(0)
-        while 1:
+        while True:
                 class_id, length = self.eblm()
                 # print "class_id: %X length %i position:%i" % (class_id, length,self.file.tell())
                 if (class_id == 0x83):
@@ -56,6 +56,6 @@ class GetFPS(object):
                         break
                 elif (class_id not in [ 0x18538067, 0x1654AE6B, 0xAE, 0x83 ]):  
 #Segment,Tracks,TrackEntry,TrackType
-                        self.file.seek(length,1)
+                        self.file.seek(length, 1)
 
         return ( 1000000000/ float( struct.unpack('>I', self.file.read(4))[0] ))

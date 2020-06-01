@@ -1,3 +1,4 @@
+from __future__ import print_function
 #
 #  Birthday Reminder E2 Plugin
 #
@@ -69,8 +70,9 @@ class BirthdayStore:
 				f = open(fileName, "r")
 				data = f.read()
 				f.close()
-			except IOError, (error_no, error_str):
-				print "[Birthday Reminder] ERROR reading from file %s. Error: %s, %s" % (fileName, error_no, error_str)
+			except IOError as xxx_todo_changeme:
+				(error_no, error_str) = xxx_todo_changeme.args
+				print("[Birthday Reminder] ERROR reading from file %s. Error: %s, %s" % (fileName, error_no, error_str))
 				text = _("Error reading file %s.\n\nError: %s, %s") % (fileName, error_no, error_str)
 				Notifications.AddNotification(MessageBox, text, type = MessageBox.TYPE_ERROR)
 				
@@ -82,15 +84,16 @@ class BirthdayStore:
 			f = open(fileName, "wb")
 			f.write(data)
 			f.close()
-		except IOError, (error_no, error_str):
-			print "[Birthday Reminder] ERROR writing to file %s. Error: %s, %s" % (fileName, error_no, error_str)
+		except IOError as xxx_todo_changeme2:
+			(error_no, error_str) = xxx_todo_changeme2.args
+			print("[Birthday Reminder] ERROR writing to file %s. Error: %s, %s" % (fileName, error_no, error_str))
 			text = _("Error writing file %s.\n\nError: %s, %s") % (fileName, error_no, error_str)
 			Notifications.AddNotification(MessageBox, text, type = MessageBox.TYPE_ERROR)
 			
 	# read the birthday information from file
 	def load(self):
 		fileName = config.plugins.birthdayreminder.file.value
-		print "[Birthday Reminder] reading from file", fileName
+		print("[Birthday Reminder] reading from file", fileName)
 		
 		tmpList = []
 		if isfile(fileName):
@@ -98,21 +101,22 @@ class BirthdayStore:
 				f = open(fileName, "r")
 				tmpList = pickle_load(f)
 				f.close()
-			except IOError, (error_no, error_str):
-				print "[Birthday Reminder] ERROR reading from file %s. Error: %s, %s" % (fileName, error_no, error_str)
+			except IOError as xxx_todo_changeme1:
+				(error_no, error_str) = xxx_todo_changeme1.args
+				print("[Birthday Reminder] ERROR reading from file %s. Error: %s, %s" % (fileName, error_no, error_str))
 				text = _("Error reading file %s.\n\nError: %s, %s") % (fileName, error_no, error_str)
 				Notifications.AddNotification(MessageBox, text, type = MessageBox.TYPE_ERROR)
 				
-			print "[Birthday Reminder] read %s birthdays" % len(tmpList)
+			print("[Birthday Reminder] read %s birthdays" % len(tmpList))
 		else:
-			print "[Birthday Reminder] File %s not found." % fileName
+			print("[Birthday Reminder] File %s not found." % fileName)
 			
 		self.bDayList = tmpList
 			
 	# write the birthday information to file
 	def save(self, data = None):
 		fileName = config.plugins.birthdayreminder.file.value
-		print "[Birthday Reminder] writing to file", fileName
+		print("[Birthday Reminder] writing to file", fileName)
 		
 		try:
 			f = open(fileName, "wb")
@@ -121,9 +125,10 @@ class BirthdayStore:
 			else:
 				pickle_dump(self.getBirthdayList(), f)
 			f.close()
-			print "[Birthday Reminder] wrote %s birthdays to %s" % (self.getSize(), fileName)
-		except IOError, (error_no, error_str):
-			print "[Birthday Reminder] ERROR writing to file %s. Error: %s, %s" % (fileName, error_no, error_str)
+			print("[Birthday Reminder] wrote %s birthdays to %s" % (self.getSize(), fileName))
+		except IOError as xxx_todo_changeme3:
+			(error_no, error_str) = xxx_todo_changeme3.args
+			print("[Birthday Reminder] ERROR writing to file %s. Error: %s, %s" % (fileName, error_no, error_str))
 			text = _("Error writing file %s.\n\nError: %s, %s") % (fileName, error_no, error_str)
 			Notifications.AddNotification(MessageBox, text, type = MessageBox.TYPE_ERROR)
 			
@@ -429,7 +434,7 @@ class BirthdayReminder(Screen, HelpableScreen):
 			return ageX - ageY
 			
 	def saveCSV(self):
-		print "[Birthday Reminder] exporting CSV file", CSVFILE
+		print("[Birthday Reminder] exporting CSV file", CSVFILE)
 		try:
 			csvFile = open(CSVFILE, "wb")
 			writer = csv_writer(csvFile)
@@ -440,7 +445,7 @@ class BirthdayReminder(Screen, HelpableScreen):
 			self.session.open(MessageBox, _("Can't write CSV file %s.") % CSVFILE, MessageBox.TYPE_ERROR)
 			
 	def loadCSV(self):
-		print "[Birthday Reminder] importing CSV file", CSVFILE
+		print("[Birthday Reminder] importing CSV file", CSVFILE)
 		
 		if not isfile(CSVFILE):
 			text = _("Can't find CSV file %s!") % CSVFILE
@@ -449,7 +454,8 @@ class BirthdayReminder(Screen, HelpableScreen):
 			
 		try:
 			csvFile = open(CSVFILE, "r")
-		except IOError, (error_no, error_str):
+		except IOError as xxx_todo_changeme4:
+			(error_no, error_str) = xxx_todo_changeme4.args
 			text = _("Error reading file %s.\n\nError: %s, %s") % (CSVFILE, error_no, error_str)
 			self.session.open(MessageBox, text, MessageBox.TYPE_ERROR)
 			return
@@ -487,7 +493,7 @@ class BirthdayReminder(Screen, HelpableScreen):
 		self.session.open(MessageBox, _("CSV import successful!"), MessageBox.TYPE_INFO)
 		
 	def sendListOffer(self):
-		print "[Birthday Reminder] broadcasting list offer"
+		print("[Birthday Reminder] broadcasting list offer")
 		self.birthdaytimer.broadcastProtocol.sendBroadcast("offeringList")
 		
 class BirthdayList(List):

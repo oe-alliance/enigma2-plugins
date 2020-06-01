@@ -19,6 +19,7 @@
 #  distributed other than under the conditions noted above.
 #
 
+from __future__ import print_function
 import os
 from ServiceProvider import ServiceCenter, eServiceReferenceMarker
 from ServiceDescriptor import MovieInfo
@@ -74,7 +75,7 @@ class MovieDatabase(dict, SortProvider):
         self['db'] = {}
     
     def clearAll(self):
-        print "database clear all"
+        print("database clear all")
         self.tags = []
         self['db'].clear()
 
@@ -86,7 +87,7 @@ class MovieDatabase(dict, SortProvider):
         return self.tags
     
     def getCreate(self, location):
-        if not self["db"].has_key(location):
+        if location not in self["db"]:
             #print "new locatio:", location
             item = {}
             item["movies"] = []
@@ -97,7 +98,7 @@ class MovieDatabase(dict, SortProvider):
         return self["db"][location]
     
     def addMovieList(self, location, movie_list, dir_size):
-        print "database add:", location
+        print("database add:", location)
         item = self.getCreate(location)
         item["movies"].extend(movie_list)
         item["dir_size"] = dir_size
@@ -107,7 +108,7 @@ class MovieDatabase(dict, SortProvider):
         item["sort_type"] = sort_type
 
     def getSortType(self, location):
-        if not self["db"].has_key(location):
+        if location not in self["db"]:
             return -1
         return self["db"][location]["sort_type"]
         
@@ -117,7 +118,7 @@ class MovieDatabase(dict, SortProvider):
         self["db"][location]["dir_size"] += size
 
     def removeLocation(self, location):
-        print "database remove", location
+        print("database remove", location)
         return self["db"].pop(location, None)
 
     def removeMovie(self, file_service_list):
@@ -126,13 +127,13 @@ class MovieDatabase(dict, SortProvider):
         for service in file_service_list:
             file_name = isinstance(file_service_list, str) and service or service.getPath()
             file_name = os.path.realpath(file_name)
-            print "try remove from database:", file_name
+            print("try remove from database:", file_name)
             for key, item in self["db"].iteritems():
                 if not file_name.startswith(key):
                     continue
                 for index, movie_info in enumerate(item["movies"]):
                     if movie_info.serviceref.getPath() == file_name:
-                        print "remove", str(index), item["movies"][index]
+                        print("remove", str(index), item["movies"][index])
                         size = movie_info.info.getInfoObject(movie_info.serviceref, iServiceInformation.sFileSize)
                         self["db"][key]["dir_size"] -= size
                         del item["movies"][index]
@@ -154,7 +155,7 @@ class MovieDatabase(dict, SortProvider):
         l1.insert(0, (mi,))
         
     def getMovieListPerMountDir(self, sort_type, filter_tags=None, filter_description=None):
-        print "getMovieListPerMountDir", str(sort_type), str(filter_tags), str(filter_description)
+        print("getMovieListPerMountDir", str(sort_type), str(filter_tags), str(filter_description))
         l = []
         dirs = self.getDirectoryList(True)
         movie_count = 0
@@ -179,7 +180,7 @@ class MovieDatabase(dict, SortProvider):
                     movie_count += 1
                 
             if sort_type & SortProvider.SORT_WITH_DIRECTORIES:
-                print "sorting", str(len(l1)), root
+                print("sorting", str(len(l1)), root)
                 self.sortMovieList(l1, sort_type)
                 if len(l1) >= config.AdvancedMovieSelection.db_show_mark_cnt.value:
                     self.insertMarker(l1, root)
@@ -188,13 +189,13 @@ class MovieDatabase(dict, SortProvider):
 
         if not sort_type & SortProvider.SORT_WITH_DIRECTORIES:
             self.sortMovieList(l, sort_type)
-        print "collected movies", str(movie_count)
+        print("collected movies", str(movie_count))
         return l
 
     def getMovieList(self, sort_type, filter_tags=None, filter_description=None):
         if config.AdvancedMovieSelection.db_mark.value and sort_type & SortProvider.SORT_WITH_DIRECTORIES:
             return self.getMovieListPerMountDir(sort_type, filter_tags, filter_description)
-        print "getMovieList", str(sort_type), str(filter_tags), str(filter_description)
+        print("getMovieList", str(sort_type), str(filter_tags), str(filter_description))
         l = []
         dirs = self.getDirectoryList(True)
         for location in dirs:
@@ -213,7 +214,7 @@ class MovieDatabase(dict, SortProvider):
                 l1.append((i,))
             
             if sort_type & SortProvider.SORT_WITH_DIRECTORIES:
-                print "sorting", str(len(l1)), location
+                print("sorting", str(len(l1)), location)
                 self.sortMovieList(l1, sort_type)
                 if len(l1) >= config.AdvancedMovieSelection.db_show_mark_cnt.value:
                     self.insertMarker(l1, location)
@@ -221,7 +222,7 @@ class MovieDatabase(dict, SortProvider):
             l.extend(l1)
         if not sort_type & SortProvider.SORT_WITH_DIRECTORIES:
             self.sortMovieList(l, sort_type)
-        print "collected movies", str(len(l))
+        print("collected movies", str(len(l)))
         return l
     
     def getDirectoryList(self, sort=False):
@@ -233,15 +234,15 @@ class MovieDatabase(dict, SortProvider):
         l = []
         for location in dir_list:
             root = os.path.realpath(location) + os.sep
-            print "?", root
-            if not self["db"].has_key(root):
+            print("?", root)
+            if root not in self["db"]:
                 l.append(location) 
-        print "missing locations", l
+        print("missing locations", l)
         return sorted(l)
 
     def getSubDirectories(self, location):
         l = []
-        if not self["db"].has_key(location):
+        if location not in self["db"]:
             return l
         for key, item in self["db"].iteritems():
             if key.startswith(location):
@@ -269,7 +270,7 @@ class MovieDatabase(dict, SortProvider):
 
     def getInfo(self, location):
         location = os.path.realpath(location) + os.sep
-        if not self["db"].has_key(location):
+        if location not in self["db"]:
             return
         movie_cnt = 0
         dir_cnt = -1
@@ -325,7 +326,7 @@ class dict2xml(object):
             self.build(self.root, structure[rootName])
 
     def build(self, father, structure):
-        if type(structure) == dict:
+        if isinstance(structure, dict):
             for k in structure:
                 if "/" in k:
                     tag = self.doc.createElement("location")
@@ -337,7 +338,7 @@ class dict2xml(object):
                     father.appendChild(tag)
                     self.build(tag, structure[k])
 
-        elif type(structure) == list:
+        elif isinstance(structure, list):
             grandFather = father.parentNode
             tagName = father.tagName
             grandFather.removeChild(father)
@@ -359,7 +360,7 @@ class dict2xml(object):
             father.appendChild(tag)
 
     def display(self):
-        print self.doc.toprettyxml(indent="  ")
+        print(self.doc.toprettyxml(indent="  "))
     
     def write(self, file_name):
         try:

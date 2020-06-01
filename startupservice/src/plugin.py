@@ -113,8 +113,8 @@ def startUpService__init__(self, session, csel):
 	if csel.bouquet_mark_edit == 0 and not csel.movemode:
 		if not inBouquetRootList:
 			if not (current.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
-				self["menu"].list.insert(1, ChoiceEntryComponent(text = (_("set as startup service"), boundFunction(self.startUpServiceContextMenuCallback,True))))
-				self["menu"].list.insert(2, ChoiceEntryComponent(text = (_("reset startup service"), boundFunction(self.startUpServiceContextMenuCallback,False))))
+				self["menu"].list.insert(1, ChoiceEntryComponent(text = (_("set as startup service"), boundFunction(self.startUpServiceContextMenuCallback, True))))
+				self["menu"].list.insert(2, ChoiceEntryComponent(text = (_("reset startup service"), boundFunction(self.startUpServiceContextMenuCallback, False))))
 
 def startUpServiceContextMenuCallback(self, add):
 	if add:
@@ -127,7 +127,7 @@ def startUpServiceContextMenuCallback(self, add):
 				(_("reset startup service for booting..."), boundFunction(self.resetStartUpService, config.startupservice)),
 				(_("reset startup service for leaving standby mode..."), boundFunction(self.resetStartUpService, config.startupserviceleavingstandbymode)),
 			]
-	self.session.openWithCallback(self.startUpServiceMenuCallback, ChoiceBox,list = options)
+	self.session.openWithCallback(self.startUpServiceMenuCallback, ChoiceBox, list = options)
 
 def startUpServiceMenuCallback(self, ret):
 	ret and ret[1]()

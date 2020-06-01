@@ -9,10 +9,11 @@
 # version.
 #===============================================================================
 
+from __future__ import print_function
 import re
 import posixpath
 import urllib
-from sys import maxint
+from sys import maxsize
 from random import randint, seed
 from urllib import urlencode, quote_plus
 from urllib2 import urlopen
@@ -24,7 +25,7 @@ seed()
 def normpath(path):
 	if path is None:
 		return None
-	path = path.replace("\\","/").replace("//", "/")
+	path = path.replace("\\", "/").replace("//", "/")
 	if path == "/..":
 		return None
 	if len(path) > 0 and path[0] != '/':
@@ -204,7 +205,7 @@ class VlcServer:
 		except:
 			resp = None
 		if resp is None:
-			raise IOError, "No response from Server"
+			raise IOError("No response from Server")
 		xml = parse(resp)
 		resp.close()
 		return xml
@@ -265,7 +266,7 @@ class VlcServer:
 			videoNormList = self.getVideoNorm().split(",")
 			# Video settings
 			transcode.append("vcodec=%s,vb=%d,venc=ffmpeg,fps=%s" % (
-				self.getVideoCodec(),self.getVideoBitrate(),
+				self.getVideoCodec(), self.getVideoBitrate(),
 				videoNormList[3]
 			))
 			#New canvas - since VLC 0.9
@@ -346,15 +347,15 @@ class VlcServer:
 			input +=  " " + sout + parameters
 			sout = ""
 		else:
-			params = "".join((sout,parameters)).split(' ')
+			params = "".join((sout, parameters)).split(' ')
 			sout = ""
 			for par in params:
 				sout +="&option=%s" % quote_plus(par.lstrip(':'))
 
-		print "[VLC] playfile", input
-		print "[VLC] sout", sout
+		print("[VLC] playfile", input)
+		print("[VLC] sout", sout)
 
-		xml = self.__xmlRequest("status", [("command", "in_play"),("input", input)], sout)
+		xml = self.__xmlRequest("status", [("command", "in_play"), ("input", input)], sout)
 
 		error = xml.getElementsByTagName("error")
 		if error is not None and len(error) > 0:
@@ -362,7 +363,7 @@ class VlcServer:
 			if len(self.lastError) == 0:
 				self.lastError = None
 			else:
-				print "[VLC] VlcControl error:", self.lastError
+				print("[VLC] VlcControl error:", self.lastError)
 			return None
 		else:
 			self.lastError = None
@@ -381,7 +382,7 @@ class VlcServer:
 		self.__xmlRequest("status", [("command", "pl_delete"), ("id", str(id))])
 
 	def deleteCurrentTree(self):
-		print "[VLC] delete current tree"
+		print("[VLC] delete current tree")
 		currentElement = self.getCurrentElement()
 		while currentElement is not None and currentElement.parentNode.getAttribute("ro") != "ro":
 			currentElement = currentElement.parentNode

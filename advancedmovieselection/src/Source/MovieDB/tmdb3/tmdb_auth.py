@@ -52,9 +52,9 @@ class datetime( _pydatetime ):
             if match.group('tz') == 'Z':
                 tz = cls._tzinfo()
             elif match.group('tzmin'):
-                tz = cls._tzinfo(*match.group('tzdirec','tzhour','tzmin'))
+                tz = cls._tzinfo(*match.group('tzdirec', 'tzhour', 'tzmin'))
             else:
-                tz = cls._tzinfo(*match.group('tzdirec','tzhour'))
+                tz = cls._tzinfo(*match.group('tzdirec', 'tzhour'))
             dt.append(0)
             dt.append(tz)
         return cls(*dt)

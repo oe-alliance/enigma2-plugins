@@ -1,3 +1,4 @@
+from __future__ import print_function
 #
 #  MerlinEPGCenter E2 Plugin
 #
@@ -157,7 +158,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		self.epgcache = eEPGCache.getInstance()
 		
 		self.piconLoader = PiconLoader()
-		self.piconSize = eSize(50,30)
+		self.piconSize = eSize(50, 30)
 		
 		self.blinkTimer = BlinkTimer(session)
 		
@@ -945,17 +946,17 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		if cur and isinstance(cur, RecordTimerEntry):
 			t = cur
 			if t.disabled:
-				print "try to ENABLE timer"
+				print("try to ENABLE timer")
 				t.enable()
 				timersanitycheck = TimerSanityCheck(self.session.nav.RecordTimer.timer_list, cur)
 				if not timersanitycheck.check():
 					t.disable()
-					print "Sanity check failed"
+					print("Sanity check failed")
 					simulTimerList = timersanitycheck.getSimulTimerList()
 					if simulTimerList is not None:
 						self.session.openWithCallback(self.finishedEdit, TimerSanityConflict, simulTimerList)
 				else:
-					print "Sanity check passed"
+					print("Sanity check passed")
 					if timersanitycheck.doubleCheck():
 						t.disable()
 			else:
@@ -1075,13 +1076,13 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 				if len(sel.includedDays):
 					days = ""
 					for day in sel.includedDays:
-						days = ''.join([days, [y[1] for x,y in enumerate(weekdays) if y[0] == day][0], ", "])
+						days = ''.join([days, [y[1] for x, y in enumerate(weekdays) if y[0] == day][0], ", "])
 					days = days.rstrip(", ")
 					description = ''.join([description, _("Included days:"), " ", days, "\n"])
 				if len(sel.excludedDays):
 					days = ""
 					for day in sel.excludedDays:
-						days = ''.join([days, [y[1] for x,y in enumerate(weekdays) if y[0] == day][0], ", "])
+						days = ''.join([days, [y[1] for x, y in enumerate(weekdays) if y[0] == day][0], ", "])
 					days = days.rstrip(", ")
 					description = ''.join([description, _("Excluded days:"), " ", days, "\n"])
 				description = ''.join([description, _("Record a maximum of x times:"), " ", str(sel.counter), "\n",

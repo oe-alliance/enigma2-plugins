@@ -4,6 +4,7 @@
 #
 
 """Base classes for Instance Messenger clients."""
+from __future__ import print_function
 from enigma import *
 from Screens.Screen import Screen
 
@@ -45,12 +46,12 @@ class ContactsList:
 
         @type person: L{Person<interfaces.IPerson>}
         """
-        if not self.contacts.has_key(person.name):
+        if person.name not in self.contacts:
             self.contacts[person.name] = person
-        if not self.onlineContacts.has_key(person.name) and \
+        if person.name not in self.onlineContacts and \
             (person.status == ONLINE or person.status == AWAY):
             self.onlineContacts[person.name] = person
-        if self.onlineContacts.has_key(person.name) and \
+        if person.name in self.onlineContacts and \
            person.status == OFFLINE:
             del self.onlineContacts[person.name]
 
@@ -73,11 +74,11 @@ class ContactsList:
 
     def contactChangedNick(self, person, newnick):
         oldname = person.name
-        if self.contacts.has_key(oldname):
+        if oldname in self.contacts:
             del self.contacts[oldname]
             person.name = newnick
             self.contacts[newnick] = person
-            if self.onlineContacts.has_key(oldname):
+            if oldname in self.onlineContacts:
                 del self.onlineContacts[oldname]
                 self.onlineContacts[newnick] = person
 
@@ -259,11 +260,11 @@ class GroupConversation:
         
     def refreshMemberList(self):
         self.pipe.clearBuddyList()
-        self.members.sort(lambda x,y: cmp(string.lower(x), string.lower(y)))
+        self.members.sort(lambda x, y: cmp(string.lower(x), string.lower(y)))
         self.pipe.getCannelName(self.group.name)
         for member in self.members:
             self.pipe.buildBuddyList(str(member))
-        print "Buddylist of #%s : \n%s" % (self.group.name, self.pipe.showBuddyList())
+        print("Buddylist of #%s : \n%s" % (self.group.name, self.pipe.showBuddyList()))
         self.pipe.updateBuddyWindow()
         
 class ChatUI:
@@ -409,7 +410,7 @@ class ChatUI:
         @type oldnick: string
         @type newnick: string
         """
-        if self.persons.has_key((person.name, person.account)):
+        if (person.name, person.account) in self.persons:
             conv = self.conversations.get(person)
             if conv:
                 conv.contactChangedNick(person, newnick)
@@ -421,7 +422,7 @@ class ChatUI:
             self.persons[person.name, person.account] = person
 
     def sendOutPipe(self):
-        print "groupchat %s" % self.pipe.OutText
+        print("groupchat %s" % self.pipe.OutText)
         if len(self.pipe.OutText()) > 0:
             self.sendText(self.pipe.OutText())
             self.pipe.clearOutText()

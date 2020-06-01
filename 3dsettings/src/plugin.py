@@ -1,3 +1,4 @@
+from __future__ import print_function
 #
 #  3D Settings E2-Plugin
 #
@@ -55,10 +56,10 @@ def getmode():
 def toggleDisplay(configElement):
 	from Components.Lcd import LCD
 	if configElement.value == False: # turn display on
-		print "[3D Settings] turning display on"
+		print("[3D Settings] turning display on")
 		LCD().setBright(config.lcd.bright.value)
 	elif (config.plugins.threed.disableDisplay.value == True) and (getmode() != THREE_D_OFF): # turn display off
-		print "[3D Settings] turning display off"
+		print("[3D Settings] turning display off")
 		LCD().setBright(0)
 	eDBoxLCD.getInstance().update()
 
@@ -74,11 +75,11 @@ config.plugins.threed.showSBSmenu = ConfigYesNo(default = False)
 config.plugins.threed.showTBmenu = ConfigYesNo(default = False)
 config.plugins.threed.zoffset = ConfigSlider(default = 0, increment = 1, limits = [0, 10])
 config.plugins.threed.zoffset.addNotifier(setZOffset)
-config.plugins.threed.autothreed = ConfigSelection(default="0", choices = [("0", _("off")),("1", _("on with side by side")),("2", _("on with top/bottom"))])
+config.plugins.threed.autothreed = ConfigSelection(default="0", choices = [("0", _("off")), ("1", _("on with side by side")), ("2", _("on with top/bottom"))])
 
 def switchmode(mode):
 	if mode in modes.keys():
-		print "[3D Settings] switching to mode ", mode
+		print("[3D Settings] switching to mode ", mode)
 		open("/proc/stb/fb/primary/3d", "w").write(modes[mode])
 		AutoThreeD.instance.setLastMode(mode)
 		if eDBoxLCD.getInstance().detected(): # display found, update it

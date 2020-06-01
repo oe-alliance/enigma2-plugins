@@ -1,3 +1,4 @@
+from __future__ import print_function
 # l10n
 from . import _
 

@@ -23,7 +23,7 @@ import xml.etree.cElementTree
 
 SAVEFILE = "/usr/lib/enigma2/python/Plugins/Extensions/Sudoku/Sudoku.sav"
 
-def RGB(r,g,b):
+def RGB(r, g, b):
 	return (r<<16)|(g<<8)|b
 
 
@@ -48,13 +48,13 @@ class board:
 		random.seed()
 
 		# setup board
-		row = [0,0,0,0,0,0,0,0,0]
+		row = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 		for i in range(0, 9):
 			self.boardlist.append(row[:])
 
 		for j in range(0, 9):
 			for i in range(0, 9):
-				slots.append((i,j))
+				slots.append((i, j))
 
 		self.search(slots, 0)
 		
@@ -182,11 +182,11 @@ class SudokuCell:
 
 
 	def paint(self):
-		fg    = RGB(255,255,255) # foreground
+		fg    = RGB(255, 255, 255) # foreground
 		black = RGB(  0,  0,  0) # background readonly
-		focus = RGB(192,192,  0) # background focus
+		focus = RGB(192, 192,  0) # background focus
 		grey  = RGB( 70, 70, 70) # background not readonly
-		green = RGB(  0,255,  0) # background solved
+		green = RGB(  0, 255,  0) # background solved
 		red   = RGB(255,  0,  0) # background error
 
 		b  = 2
@@ -298,26 +298,26 @@ class Sudoku(Screen):
 
 		self["actions"] = ActionMap(["WizardActions", "ColorActions", "SetupActions"],
 		{
-			"0"     : self.bt_0_pressed,
-			"1"     : self.bt_1_pressed,
-			"2"     : self.bt_2_pressed,
-			"3"     : self.bt_3_pressed,
-			"4"     : self.bt_4_pressed,
-			"5"     : self.bt_5_pressed,
-			"6"     : self.bt_6_pressed,
-			"7"     : self.bt_7_pressed,
-			"8"     : self.bt_8_pressed,
-			"9"     : self.bt_9_pressed,
-			"up"    : self.up_pressed,
-			"down"  : self.down_pressed,
-			"left"  : self.left_pressed,
-			"right" : self.right_pressed,
-			"red"   : self.bt_solve_game,
-			"green" : self.bt_new_game,
+			"0": self.bt_0_pressed,
+			"1": self.bt_1_pressed,
+			"2": self.bt_2_pressed,
+			"3": self.bt_3_pressed,
+			"4": self.bt_4_pressed,
+			"5": self.bt_5_pressed,
+			"6": self.bt_6_pressed,
+			"7": self.bt_7_pressed,
+			"8": self.bt_8_pressed,
+			"9": self.bt_9_pressed,
+			"up": self.up_pressed,
+			"down": self.down_pressed,
+			"left": self.left_pressed,
+			"right": self.right_pressed,
+			"red": self.bt_solve_game,
+			"green": self.bt_new_game,
 			"yellow": self.bt_check_game,
-			"blue"  : self.bt_restart_game,
+			"blue": self.bt_restart_game,
 			"cancel": self.quit,
-			"deleteForward" : self.next_pressed,
+			"deleteForward": self.next_pressed,
 			"deleteBackward": self.previous_pressed,
 		})
 		# fill canvas with background color...
@@ -340,7 +340,7 @@ class Sudoku(Screen):
 				tmp.append(cell)
 			self.board_cells.append(tmp)
 
-		row = [0,0,0,0,0,0,0,0,0]
+		row = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 		for i in range(0, 9):
 			self.board_values.append(row[:])
 

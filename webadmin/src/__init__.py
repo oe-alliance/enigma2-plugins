@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os, gettext
@@ -14,12 +15,12 @@ def localeInit():
 def _(txt):
 	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		t = gettext.gettext(txt)
 	return t
 
 def bin2long(s):
-	return reduce( lambda x,y:(x<<8L)+y, map(ord, s))
+	return reduce( lambda x, y:(x<<8)+y, map(ord, s))
 
 def long2bin(l):
 	res = ""

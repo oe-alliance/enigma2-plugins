@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
@@ -67,7 +68,7 @@ class NETcasterScreenBrowser(Screen):
         self["pixgreen"] = Label(_("Play"))
         self["pixyellow"] = Label("")
         self["pixblue"] = Label(_("Select"))
-        self["actions"] = ActionMap(["WizardActions", "DirectionActions","MenuActions","ShortcutActions","GlobalActions","HelpActions"],
+        self["actions"] = ActionMap(["WizardActions", "DirectionActions", "MenuActions", "ShortcutActions", "GlobalActions", "HelpActions"],
             {
              "ok": self.ok,
              "back": self.exit,
@@ -99,42 +100,42 @@ class NETcasterScreenBrowser(Screen):
         global streamplayer
         try:
              streamplayer.metadatachangelisteners.remove(self.onMetadataChanged)
-        except Exception,e:
+        except Exception as e:
             pass
         try:
              streamplayer.onStop.remove(self._onStop)
-        except Exception,e:
+        except Exception as e:
             pass
 
-    def onMetadataChanged(self,title):
+    def onMetadataChanged(self, title):
         try:
              self["metadata"].setText(title)
-        except Exception,e:
+        except Exception as e:
             self.disconnectFromMetadataUpdates()
 
     def getInterfaceList(self):
         self.pluginlist = []
-        global plugin_path,myname
+        global plugin_path, myname
         interfacepath = plugin_path+"/interface"
         for iface in os_listdir(interfacepath):
             if iface.endswith(".py") and not iface.startswith("_"):
-                pluginp = '.'.join(["Plugins", "Extensions", myname, "interface",iface.replace(".py","")])
+                pluginp = '.'.join(["Plugins", "Extensions", myname, "interface", iface.replace(".py", "")])
                 plugin = my_import(pluginp)
-                self.pluginlist.append(plugin.Interface(self.session,cbListLoaded=self.onStreamlistLoaded))
+                self.pluginlist.append(plugin.Interface(self.session, cbListLoaded=self.onStreamlistLoaded))
 
     def updateTitle(self):
 		try:
-			self.setTitle("%s (%s)"%(myname,self.currentPlugin.nameshort))
+			self.setTitle("%s (%s)"%(myname, self.currentPlugin.nameshort))
 		except:	
 			pass
 
     def selectPlugin(self):
         glist=[]
         for i in self.pluginlist:
-            glist.append((i.name,i))
-        self.session.openWithCallback(self.selectedPlugin,ChoiceBox,_("select Plugin"),glist)
+            glist.append((i.name, i))
+        self.session.openWithCallback(self.selectedPlugin, ChoiceBox, _("select Plugin"), glist)
 
-    def selectedPlugin(self,splugin):
+    def selectedPlugin(self, splugin):
         if splugin is not None:
             self.setCurrentPlugin(splugin[1])
             self.updateTitle()
@@ -157,12 +158,12 @@ class NETcasterScreenBrowser(Screen):
 
     def _onStop(self):
         self["pixred"].setText("")
-        self.setTitle("%s (%s)"%(myname,self.currentPlugin.nameshort))
+        self.setTitle("%s (%s)"%(myname, self.currentPlugin.nameshort))
 
     def stream_stop(self):
         global streamplayer
         if streamplayer.is_playing:
-            print "[",myname,"] stream_startstop -> stop"
+            print("[", myname, "] stream_startstop -> stop")
             streamplayer.stop()
             self.disconnectFromMetadataUpdates()
             self._onStop()
@@ -176,7 +177,7 @@ class NETcasterScreenBrowser(Screen):
             self["pixred"].setText(_("Stop"))
             self.setTitle("%s"%(stream.getName()))
 
-    def onStreamlistLoaded(self,list):
+    def onStreamlistLoaded(self, list):
        self["streamlist"].buildList(list)
 
     def showMainMenu(self):
@@ -187,13 +188,13 @@ class NETcasterScreenBrowser(Screen):
              selectedStream = None
         # generic menuitems
         for p in self.pluginlist:
-            for i in p.getMenuItems(selectedStream,generic=True):
-                menu.append((i[0],i[1]))
+            for i in p.getMenuItems(selectedStream, generic=True):
+                menu.append((i[0], i[1]))
 
         # non generic menuitems
         if self.currentPlugin is not None:
             for i in self.currentPlugin.getMenuItems(selectedStream):
-                menu.append((i[0],i[1]))
+                menu.append((i[0], i[1]))
 
         # std menuitems
         menu.append((_("hide"), self.hide))
@@ -201,12 +202,12 @@ class NETcasterScreenBrowser(Screen):
         menu.append((_("help"), self.showHelp));
         self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_("Menu"), list=menu)
 
-    def menuCallback(self,choice):
+    def menuCallback(self, choice):
         if choice is not None:
             choice[1]()
 
     def showAbout(self):
-        self.session.open(MessageBox,_("%s Enigma2 Plugin V%s (Patched)" % (myname,myversion)), MessageBox.TYPE_INFO)
+        self.session.open(MessageBox, _("%s Enigma2 Plugin V%s (Patched)" % (myname, myversion)), MessageBox.TYPE_INFO)
 
     def showHelp(self):
         self.session.open(NETcasterScreenHelp)
@@ -232,7 +233,7 @@ class NETcasterScreenHelp(Screen):
         else:
             text = "sorry, cant load helptext from file "+readme
         self["help"] = ScrollLabel(text)
-        self["actions"] = ActionMap(["WizardActions", "DirectionActions","MenuActions"],
+        self["actions"] = ActionMap(["WizardActions", "DirectionActions", "MenuActions"],
             {
              "ok": self.close,
              "back": self.close,
@@ -251,7 +252,7 @@ class StreamMenu(MenuList):
         MenuList.postWidgetCreate(self, instance)
         instance.setItemHeight(50)
 
-    def buildList(self,listnew):
+    def buildList(self, listnew):
         list=[]
         for stream in listnew:
             res = [ stream ]
@@ -269,15 +270,15 @@ class NETcasterScreenStreamDelete(Screen):
         streams = self.config.getStreams()
         streamlist = []
         for stream in streams:
-            streamlist.append((_(stream.getName()),stream.getName()))
-        self.session.openWithCallback(self.stream2deleteSelected,ChoiceBox,_("select stream to delete"),streamlist)
+            streamlist.append((_(stream.getName()), stream.getName()))
+        self.session.openWithCallback(self.stream2deleteSelected, ChoiceBox, _("select stream to delete"), streamlist)
 
-    def stream2deleteSelected(self,selectedstreamname):
+    def stream2deleteSelected(self, selectedstreamname):
         if selectedstreamname is not None:
             self.stream2delete = selectedstreamname[1]
-            self.session.openWithCallback(self.userIsSure,MessageBox,_("are you shure to delete the stream?\n\n%s" % self.stream2delete), MessageBox.TYPE_YESNO)
+            self.session.openWithCallback(self.userIsSure, MessageBox, _("are you shure to delete the stream?\n\n%s" % self.stream2delete), MessageBox.TYPE_YESNO)
 
-    def userIsSure(self,answer):
+    def userIsSure(self, answer):
         if answer is None:
             self.cancelWizzard()
         if answer is False:

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # for localized messages
+from __future__ import print_function
 from . import _x
 
 import os
@@ -24,7 +25,7 @@ class SerienFilmCfg(Screen):
 		</screen>"""
 
 	def __init__(self, session, args = None):
-		print "[SF-Plugin] SerienFilmCfg init"
+		print("[SF-Plugin] SerienFilmCfg init")
 		self.session = session
 		Screen.__init__(self, session)
 		self["myLabel"] = Label(_x("This plugin is configured by the MENU key in the movielist\n\nApplication details provides the HELP key in the movielist"))

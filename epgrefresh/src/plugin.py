@@ -22,7 +22,7 @@ from sys import stdout
 from time import time, localtime, mktime
 now = localtime()
 begin = mktime((
-	now.tm_year, now.tm_mon, now.tm_mday, 07, 30, \
+	now.tm_year, now.tm_mon, now.tm_mday, 0o7, 30, \
 	0, now.tm_wday, now.tm_yday, now.tm_isdst)
 )
 end = mktime((
@@ -68,7 +68,7 @@ config.plugins.epgrefresh.adapter = ConfigSelection(choices = adapter_choices, d
 
 config.plugins.epgrefresh.show_in_extensionsmenu = ConfigYesNo(default = False)
 config.plugins.epgrefresh.show_run_in_extensionsmenu = ConfigYesNo(default = True)
-if getImageDistro() in ("openatv","openvix",):
+if getImageDistro() in ("openatv", "openvix",):
 	config.plugins.epgrefresh.show_in_plugins = ConfigYesNo(default = False)
 else:
 	config.plugins.epgrefresh.show_in_plugins = ConfigYesNo(default = True)
@@ -103,7 +103,7 @@ try:
 	reader = XMLHelpReader(helpfile)
 	epgrefreshHelp = registerHelp(*reader)
 except Exception as e:
-	print("[EPGRefresh] Unable to initialize MPHelp:", e,"- Help not available!")
+	print("[EPGRefresh] Unable to initialize MPHelp:", e, "- Help not available!")
 	epgrefreshHelp = None
 #pragma mark -
 

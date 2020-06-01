@@ -18,6 +18,7 @@
 #  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
+from __future__ import print_function
 from __init__ import _
 from Components.config import config
 from Plugins.Plugin import PluginDescriptor
@@ -26,7 +27,7 @@ from boxbranding import getImageDistro
 
 def autostart(reason, **kwargs):
     if reason == 0:
-        print "[VideoColorSpace] startup..."
+        print("[VideoColorSpace] startup...")
         initializeConfig()
 
 def pluginOpen(session, **kwargs):

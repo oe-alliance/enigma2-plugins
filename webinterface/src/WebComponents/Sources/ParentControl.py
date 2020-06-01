@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Components.Sources.Source import Source
 from Components.ParentalControl import parentalControl
 from Components.config import config
@@ -9,7 +10,7 @@ class ParentControl(Source):
 		self.session = session
 
 	def command(self):
-		print "ParentControl was called"
+		print("ParentControl was called")
 
 		if config.ParentalControl.servicepinactive.value:
 			parentalControl.open()
@@ -22,7 +23,7 @@ class ParentControl(Source):
 		else:
 			list = []
 
-		print "list", list
+		print("list", list)
 		return list
 
 	list = property(command)

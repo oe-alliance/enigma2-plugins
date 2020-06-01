@@ -1,3 +1,4 @@
+from __future__ import print_function
 from enigma import eActionMap
 from Components.Sources.Source import Source
 from Tools.HardwareInfo import HardwareInfo
@@ -29,7 +30,7 @@ class RemoteControl(Source):
 		else:
 			self.remotetype = self.TYPE_STANDARD
 
-		print "[RemoteControl.__init__] Configured RCU-Type is '%s'" %(self.remotetype)
+		print("[RemoteControl.__init__] Configured RCU-Type is '%s'" %(self.remotetype))
 
 	def handleCommand(self, cmd):
 		self.cmd = cmd
@@ -37,18 +38,18 @@ class RemoteControl(Source):
 
 	def sendEvent(self):
 		if not self.cmd:
-			print "[RemoteControl.sendEvent] cmd is empty or None"
+			print("[RemoteControl.sendEvent] cmd is empty or None")
 			return self.res
 
 		key = self.cmd.get("command", None)
 		if key is None:
-			print "[RemoteControl.sendEvent] Obligatory parameter 'command' is missing!"
+			print("[RemoteControl.sendEvent] Obligatory parameter 'command' is missing!")
 			return ( False, _("Obligatory parameter 'command' is missing!" ))
 
 		key = int(key)
 
 		if key <= 0:
-			print "[RemoteControl.sendEvent] command <= 0 (%s)" % key
+			print("[RemoteControl.sendEvent] command <= 0 (%s)" % key)
 			return ( False, _("the command was not > 0") )
 
 		#type can be "long" or "ascii", everything else will result in FLAG_MAKE
@@ -81,7 +82,7 @@ class RemoteControl(Source):
 		#Release the key
 		self.eam.keyPressed(remotetype, key, self.FLAG_BREAK)
 
-		print "[RemoteControl.sendEvent] command was was sent (key: %s, flag: %s)" %(key, flag)
+		print("[RemoteControl.sendEvent] command was was sent (key: %s, flag: %s)" %(key, flag))
 		return ( True, _("RC command '%s' has been issued") %str(key))
 
 	result = property(lambda self: self.res)

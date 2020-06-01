@@ -101,7 +101,7 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
     def __init__(self, config, cache_folder_path):
         super(OpenSubtitle, self).__init__(OS_LANGS)
         self.server_url = 'http://api.opensubtitles.org/xml-rpc'
-        self.revertlangs = dict(map(lambda item: (item[1],item[0]), self.langs.items()))
+        self.revertlangs = dict(map(lambda item: (item[1], item[0]), self.langs.items()))
 
     def process(self, filepath, langs):
         ''' main method to call on the plugin, pass the filename and the wished 
@@ -175,7 +175,7 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
             hash = hash & 0xFFFFFFFFFFFFFFFF #to remain as 64bit number  
                  
 
-        f.seek(max(0,filesize-65536),0) 
+        f.seek(max(0, filesize-65536), 0) 
         for x in range(65536/bytesize): 
             buffer = f.read(bytesize) 
             (l_value,)= struct.unpack(longlongformat, buffer)  
@@ -208,7 +208,7 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
         self.server = xmlrpclib.Server(self.server_url)
         socket.setdefaulttimeout(10)
         try:
-            log_result = self.server.LogIn("","","eng","periscope")
+            log_result = self.server.LogIn("", "", "eng", "periscope")
             logging.debug(log_result)
             token = log_result["token"]
         except Exception:
@@ -239,7 +239,7 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
         try:
             if search:
                 results = self.server.SearchSubtitles(token, [search])
-        except Exception, e:
+        except Exception as e:
             logging.error("Could not query the server OpenSubtitles")
             logging.debug(e)
             return []
@@ -256,7 +256,7 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
                 result["link"] = r['SubDownloadLink']
                 result["page"] = r['SubDownloadLink']
                 result["lang"] = self.getLG(r['SubLanguageID'])
-                if search.has_key("query") : #We are using the guessed file name, let's remove some results
+                if "query" in search : #We are using the guessed file name, let's remove some results
                     if r["MovieReleaseName"].startswith(self.filename):
                         sublinks.append(result)
                     else:

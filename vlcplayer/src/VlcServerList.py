@@ -39,7 +39,7 @@ class VlcServerList(MenuList):
 		if self.skinAttributes is not None:
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "font":
-					self.font = parseFont(value, ((1,1),(1,1)))
+					self.font = parseFont(value, ((1, 1), (1, 1)))
 					self.l.setFont(0, self.font)
 				elif attrib == "itemHeight":
 					self.l.setItemHeight(int(value))

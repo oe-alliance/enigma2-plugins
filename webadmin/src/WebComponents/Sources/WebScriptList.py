@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from Components.Sources.Source import Source
 from os import popen as os_popen, path as os_path
 
@@ -29,11 +30,11 @@ class WebScriptList(Source):
 		for n in files:
 			file = n[:-1]
 			if file.endswith(".sh"):
-				print "[WebScriptList] file ", file
+				print("[WebScriptList] file ", file)
 				text =""
 				with open("/usr/script/" + file) as f:
 					text = f.read()
-					print "[WebScriptList] text ",text
+					print("[WebScriptList] text ", text)
 					f.close()
 				list.append((file, text))
 		return list

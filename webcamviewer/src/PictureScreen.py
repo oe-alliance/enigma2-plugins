@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from enigma import ePicLoad, eTimer, getDesktop
 
 from Screens.Screen import Screen
@@ -16,7 +17,7 @@ def _parse(url, defaultPort = None):
 	url = url.strip()
 	parsed = urlparse(url)
 	scheme = parsed[0]
-	path = urlunparse(('','')+parsed[2:])
+	path = urlunparse(('', '')+parsed[2:])
 
 	if defaultPort is None:
 		if scheme == 'https':
@@ -86,7 +87,7 @@ def download(url, file, contextFactory = None, *args, **kwargs):
 		authHeader = "Basic " + basicAuth.strip()
 		AuthHeaders = {"Authorization": authHeader}
 
-		if kwargs.has_key("headers"):
+		if "headers" in kwargs:
 			kwargs["headers"].update(AuthHeaders)
 		else:
 			kwargs["headers"] = AuthHeaders
@@ -116,7 +117,7 @@ class PictureScreen(Screen):
 		self.skin = """
 		<screen position="0,0" size="%i,%i" title="%s" flags=\"wfNoBorder\">
 			 <widget name="pixmap" position="0,0" size="%i,%i" backgroundColor=\"black\"/>
-		</screen>""" % (size_w,size_h,filename,size_w,size_h)
+		</screen>""" % (size_w, size_h, filename, size_w, size_h)
 		Screen.__init__(self, session)
 
 		self.picload = ePicLoad()
@@ -127,7 +128,7 @@ class PictureScreen(Screen):
 
 		self.paused = False
 
-		self["actions"] = ActionMap(["WizardActions", "DirectionActions","ChannelSelectBaseActions","ShortcutActions"],
+		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ChannelSelectBaseActions", "ShortcutActions"],
 			{
 			 "ok": self.do,
 			 "back": self.exit,
@@ -175,16 +176,16 @@ class PictureScreen(Screen):
 	def fetchFile(self, url):
 		self.processing = True
 		self.setTitle("loading File")
-		print "fetching URL", url
+		print("fetching URL", url)
 		self.sourcefile = "/tmp/loadedfile"
 		download(url, self.sourcefile).addCallback(self.fetchFinished).addErrback(self.fetchFailed)
 
-	def fetchFailed(self,string):
-		print "fetch failed", string
+	def fetchFailed(self, string):
+		print("fetch failed", string)
 		self.setTitle("fetch failed: "+string)
 
-	def fetchFinished(self,string):
-		print "fetching finished"
+	def fetchFinished(self, string):
+		print("fetching finished")
 		self.setPicture(self.sourcefile)
 
 	def setPicture(self, string):
@@ -206,7 +207,7 @@ class PictureScreen(Screen):
 		elif self.slideshowcallback is not None:
 				self.closetimer = eTimer()
 				self.closetimer.timeout.get().append(self.slideshowcallback)
-				print "waiting", config.plugins.pictureviewer.slideshowtime.value, "seconds for next picture"
+				print("waiting", config.plugins.pictureviewer.slideshowtime.value, "seconds for next picture")
 				if not self.paused:
 					self.closetimer.start(int(config.plugins.pictureviewer.slideshowtime.value))
 

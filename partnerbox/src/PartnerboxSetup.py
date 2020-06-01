@@ -36,11 +36,11 @@ def initPartnerboxEntryConfig():
 	config.plugins.Partnerbox.Entries.append(ConfigSubsection())
 	i = len(config.plugins.Partnerbox.Entries) -1
 	config.plugins.Partnerbox.Entries[i].name = ConfigText(default = "Remote box", visible_width = 50, fixed_size = False)
-	config.plugins.Partnerbox.Entries[i].ip = ConfigIP(default = [192,168,0,98])
+	config.plugins.Partnerbox.Entries[i].ip = ConfigIP(default = [192, 168, 0, 98])
 	config.plugins.Partnerbox.Entries[i].port = ConfigInteger(default=80, limits=(1, 65555))
-	config.plugins.Partnerbox.Entries[i].enigma = ConfigSelection(default="0", choices = [("0", _("Enigma 2")),("1", _("Enigma 1"))])
+	config.plugins.Partnerbox.Entries[i].enigma = ConfigSelection(default="0", choices = [("0", _("Enigma 2")), ("1", _("Enigma 1"))])
 	config.plugins.Partnerbox.Entries[i].password = ConfigText(default = "root", visible_width = 50, fixed_size = False)
-	config.plugins.Partnerbox.Entries[i].useinternal = ConfigSelection(default="1", choices = [("0", _("use external")),("1", _("use internal"))])
+	config.plugins.Partnerbox.Entries[i].useinternal = ConfigSelection(default="1", choices = [("0", _("use external")), ("1", _("use internal"))])
 	config.plugins.Partnerbox.Entries[i].zaptoservicewhenstreaming = ConfigYesNo(default = True)
 	return config.plugins.Partnerbox.Entries[i]
 
@@ -187,11 +187,11 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		self["key_green"] = Button(_("Power"))
 		self["key_blue"] = Button(_("Delete"))
 		self["entrylist"] = PartnerboxEntryList([])
-		self["actions"] = ActionMap(["WizardActions","MenuActions","ShortcutActions"],
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
 			{
-			 "ok"	:	self.keyOK,
-			 "back"	:	self.keyClose,
-			 "red"	:	self.keyRed,
+			 "ok":	self.keyOK,
+			 "back":	self.keyClose,
+			 "red":	self.keyRed,
 			 "yellow":	self.keyYellow,
 			 "blue": 	self.keyDelete,
 			 "green":	self.powerMenu,
@@ -206,7 +206,7 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		self.close(self.session, self.what, None)
 
 	def keyRed(self):
-		self.session.openWithCallback(self.updateList,PartnerboxEntryConfigScreen,None)
+		self.session.openWithCallback(self.updateList, PartnerboxEntryConfigScreen, None)
 
 	def keyOK(self):
 		try:sel = self["entrylist"].l.getCurrentSelection()[0]
@@ -223,7 +223,7 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		except: sel = None
 		if sel is None:
 			return
-		self.session.openWithCallback(self.updateList,PartnerboxEntryConfigScreen,sel)
+		self.session.openWithCallback(self.updateList, PartnerboxEntryConfigScreen, sel)
 
 	def keyDelete(self):
 		try:sel = self["entrylist"].l.getCurrentSelection()[0]
@@ -250,15 +250,15 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		if sel is None:
 			return
 		menu = []
-		menu.append((_("Wakeup"),0))
-		menu.append((_("Standby"),1))
-		menu.append((_("Restart enigma"),2))
-		menu.append((_("Restart"),3))
+		menu.append((_("Wakeup"), 0))
+		menu.append((_("Standby"), 1))
+		menu.append((_("Restart enigma"), 2))
+		menu.append((_("Restart"), 3))
 		if int(sel.enigma.value) == 0:
-			menu.append((_("Toggle Standby"),4))
-			menu.append((_("Deep Standby"),5))
+			menu.append((_("Toggle Standby"), 4))
+			menu.append((_("Deep Standby"), 5))
 		else:
-			menu.append((_("Shutdown"),4))
+			menu.append((_("Shutdown"), 4))
 		from Screens.ChoiceBox import ChoiceBox
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=(_("Select operation for partnerbox")+": "+"%s" % (sel.name.value)), list=menu)
 
@@ -273,7 +273,7 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		username = "root"
 		ip = "%d.%d.%d.%d" % tuple(sel.ip.value)
 		port = sel.port.value
-		http = "http://%s:%d" % (ip,port)
+		http = "http://%s:%d" % (ip, port)
 		enigma_type = int(sel.enigma.value)
 		sCommand = http
 		sCommand += enigma_type and "/cgi-bin/admin?command=" or "/web/powerstate?newstate="
@@ -294,7 +294,7 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		else:
 			return
 		from PartnerboxFunctions import sendPartnerBoxWebCommand
-		sendPartnerBoxWebCommand(sCommand, None,3, username, password)
+		sendPartnerBoxWebCommand(sCommand, None, 3, username, password)
 
 class PartnerboxEntryList(MenuList):
 	def __init__(self, list, enableWrapAround = True):
@@ -312,19 +312,19 @@ class PartnerboxEntryList(MenuList):
 		self.list=[]
 		for c in config.plugins.Partnerbox.Entries:
 			res = [c]
-			x, y, w, h = skin.parameters.get("PartnerBoxEntryListName",(5, 0, 150, 20))
+			x, y, w, h = skin.parameters.get("PartnerBoxEntryListName", (5, 0, 150, 20))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(c.name.value)))
 			ip = "%d.%d.%d.%d" % tuple(c.ip.value)
-			x, y, w, h = skin.parameters.get("PartnerBoxEntryListIP",(120, 0, 150, 20))
+			x, y, w, h = skin.parameters.get("PartnerBoxEntryListIP", (120, 0, 150, 20))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(ip)))
 			port = "%d"%(c.port.value)
-			x, y, w, h = skin.parameters.get("PartnerBoxEntryListPort",(270, 0, 100, 20))
+			x, y, w, h = skin.parameters.get("PartnerBoxEntryListPort", (270, 0, 100, 20))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(port)))
 			if int(c.enigma.value) == 0:
 				e_type = "Enigma2"
 			else:
 				e_type = "Enigma1"
-			x, y, w, h = skin.parameters.get("PartnerBoxEntryListType",(410, 0, 100, 20))
+			x, y, w, h = skin.parameters.get("PartnerBoxEntryListType", (410, 0, 100, 20))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(e_type)))
 			self.list.append(res)
 		self.l.setList(self.list)

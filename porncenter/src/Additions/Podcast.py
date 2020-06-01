@@ -1,3 +1,4 @@
+from __future__ import print_function
 # podcast plugin by AliAbdul
 from Plugin import Movie, Plugin
 import re
@@ -54,4 +55,4 @@ class Podcast(Plugin):
 		self.callback(movies)
 
 	def getPageError(self, error=None):
-		if error: print error
+		if error: print(error)

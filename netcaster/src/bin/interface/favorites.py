@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Plugins.Extensions.NETcaster.StreamInterface import StreamInterface
 from Plugins.Extensions.NETcaster.StreamInterface import Stream
 from Plugins.Extensions.NETcaster.plugin import myname
@@ -32,12 +33,12 @@ class Interface(StreamInterface):
         return list
     
     def deleteStream(self):
-        print "favorites deleteStream"
+        print("favorites deleteStream")
         if self.selectedStream is not None:
             SHOUTcasterFavorites().deleteStreamWithName(self.selectedStream.getName())
         self.getList()
     def addStream(self):
-        print "favorites addStream"
+        print("favorites addStream")
         if self.selectedStream is not None:
             SHOUTcasterFavorites().addStream(self.selectedStream)
         #self.getList()
@@ -50,18 +51,18 @@ class SHOUTcasterFavorites:
     def getStreams(self):
         streams=[]
         sections = self.configparser.sections()
-        print sections
+        print(sections)
         for section in sections:
                 stream = self.getStreamByName(section)
                 streams.append(stream)
         return streams
-    def isStream(self,streamname):
+    def isStream(self, streamname):
         if self.configparser.has_section(streamname) is True:
             return True
         else:
             return False
-    def getStreamByName(self,streamname):
-        print "["+myname+"] load "+streamname+" from config"
+    def getStreamByName(self, streamname):
+        print("["+myname+"] load "+streamname+" from config")
         if self.isStream(streamname) is True:
             stream = Stream(
                         streamname,
@@ -75,18 +76,18 @@ class SHOUTcasterFavorites:
             return False
 
     def addStream(self, stream):
-        print "["+myname+"] adding "+stream.getName()+" to config"
+        print("["+myname+"] adding "+stream.getName()+" to config")
         try:
             self.configparser.add_section(stream.getName())
-        except DuplicateSectionError,e:
-            print "["+myname+"] error while adding stream to config:",e
-            return False,e
+        except DuplicateSectionError as e:
+            print("["+myname+"] error while adding stream to config:", e)
+            return False, e
         else:
             # XXX: I hope this still works properly if we make a optimistic
             # return here since otherwise the interface would need to be changed
             # to work with a callback
             stream.getURL(boundFunction(self.addStreamCb, stream))
-            return True,"Stream added"
+            return True, "Stream added"
 
     def addStreamCb(self, stream, url = None):
         self.configparser.set(stream.getName(), "description", stream.getDescription())
@@ -94,23 +95,23 @@ class SHOUTcasterFavorites:
         self.configparser.set(stream.getName(), "type", stream.getType())
         self.writeConfig()
 
-    def changeStream(self,streamold,streamnew):
+    def changeStream(self, streamold, streamnew):
         if self.configparser.has_section(streamold.getName()) is False:
-            return False,"stream not found in config"
+            return False, "stream not found in config"
         elif self.configparser.has_section(streamnew.getName()) is True:
-            return False,"stream with that name exists already"
+            return False, "stream with that name exists already"
         else:    
            self.configparser.remove_section(streamold.getName())
            return self.addStream(streamnew); 
         
-    def deleteStreamWithName(self,streamname):
+    def deleteStreamWithName(self, streamname):
         self.configparser.remove_section(streamname)
         self.writeConfig()
         
     def writeConfig(self):
-        print "["+myname+"] writing config to "+self.configfile
+        print("["+myname+"] writing config to "+self.configfile)
         
-        fp = open(self.configfile,"w")
+        fp = open(self.configfile, "w")
         self.configparser.write(fp)
         fp.close()
             

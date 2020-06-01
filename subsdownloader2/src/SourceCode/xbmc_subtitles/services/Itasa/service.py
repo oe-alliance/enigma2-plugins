@@ -36,18 +36,18 @@ subtitle_download_pattern = '<a href=\'http://www\.italiansubs\.net/(index\.php\
 #====================================================================================================================
 
 def geturl(url):
-    log( __name__ , " Getting url: %s" % (url))
+    log( __name__, " Getting url: %s" % (url))
     try:
         response = urllib2.urlopen(url)
         content = response.read()
     except:
-        log( __name__ , " Failed to get url:%s" % (url))
+        log( __name__, " Failed to get url:%s" % (url))
         content = None
     return(content)
 
 
 def login(username, password):
-    log( __name__ , " Logging in with username '%s' ..." % (username))
+    log( __name__, " Logging in with username '%s' ..." % (username))
     content= geturl(main_url + 'index.php')
     if content is not None:
         match = re.search('logouticon.png', content, re.IGNORECASE | re.DOTALL)
@@ -64,7 +64,7 @@ def login(username, password):
                 my_opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
                 my_opener.addheaders = [('Referer', main_url)]
                 urllib2.install_opener(my_opener)
-                request = urllib2.Request(main_url + 'index.php',login_postdata)
+                request = urllib2.Request(main_url + 'index.php', login_postdata)
                 response = urllib2.urlopen(request).read()
                 match = re.search('logouticon.png', response, re.IGNORECASE | re.DOTALL)
                 if match:
@@ -88,7 +88,7 @@ def search_subtitles( file_original_path, title, tvshow, year, season, episode, 
             username = config.plugins.subsdownloader.ItasaUser.value
             password = config.plugins.subsdownloader.ItasaPassword.value
             if login(username, password):
-                log( __name__ , " Login successful")
+                log( __name__, " Login successful")
                 content= geturl(main_url + 'index.php?option=com_remository&Itemid=6')
                 if content is not None:
                     match = re.search(show_pattern % tvshow, content, re.IGNORECASE | re.DOTALL)
@@ -96,12 +96,12 @@ def search_subtitles( file_original_path, title, tvshow, year, season, episode, 
                         tvshow = tvshow[:-7]
                         match = re.search(show_pattern % tvshow, content, re.IGNORECASE | re.DOTALL)
                     if match:
-                        log( __name__ ," Tv show '%s' found" % tvshow)
+                        log( __name__, " Tv show '%s' found" % tvshow)
                         content= geturl(main_url + match.group(1))
                         if content is not None:
                             match = re.search(season_pattern % season, content, re.IGNORECASE | re.DOTALL)
                             if match:
-                                log( __name__ ," Season %s of tv show '%s' found" % (season, tvshow))
+                                log( __name__, " Season %s of tv show '%s' found" % (season, tvshow))
                                 category = 'normal'
                                 categorypage = match.group(1)
                                 content= geturl(main_url + categorypage)
@@ -109,28 +109,28 @@ def search_subtitles( file_original_path, title, tvshow, year, season, episode, 
                                     for matches in re.finditer(subtitle_pattern % (tvshow, int(season), int(episode)), content, re.IGNORECASE | re.DOTALL):
                                         filename = matches.group(3)
                                         id = matches.group(2)
-                                        log( __name__ ," Adding '%s' to list of subtitles" % filename)
+                                        log( __name__, " Adding '%s' to list of subtitles" % filename)
                                         subtitles_list.append({'rating': '0', 'no_files': 1, 'filename': filename, 'sync': False, 'id' : id, 'link' : categorypage, 'language_flag': 'flags/it.gif', 'language_name': 'Italian'})
                                     for matches in re.finditer(category_pattern, content, re.IGNORECASE | re.DOTALL):
                                         categorypage = matches.group(1)
                                         category = matches.group(2)
-                                        log( __name__ ," Page for category '%s' found" % category)
+                                        log( __name__, " Page for category '%s' found" % category)
                                         content= geturl(main_url + categorypage)
                                         if content is not None:
                                             for matches in re.finditer(subtitle_pattern % (tvshow, int(season), int(episode)), content, re.IGNORECASE | re.DOTALL):
                                                 id = matches.group(2)
                                                 filename = matches.group(3)
-                                                log( __name__ ," Adding '%s (%s)' to list of subtitles" % (filename, category))
+                                                log( __name__, " Adding '%s (%s)' to list of subtitles" % (filename, category))
                                                 subtitles_list.append({'rating': '0', 'no_files': 1, 'filename': "%s (%s)" % (filename, category), 'sync': False, 'id' : id, 'link' : categorypage, 'language_flag': 'flags/it.gif', 'language_name': 'Italian'})
                             else:
-                                log( __name__ ," Season %s of tv show '%s' not found" % (season, tvshow))
+                                log( __name__, " Season %s of tv show '%s' not found" % (season, tvshow))
                                 msg = "Season %s of tv show '%s' not found" % (season, tvshow)
                     else:
-                        log( __name__ ," Tv show '%s' not found." % tvshow)
+                        log( __name__, " Tv show '%s' not found." % tvshow)
                         msg = "Tv show '%s' not found" % tvshow
             else:
                 #log( __name__ ," Login to Itasa failed. Check your username/password at the addon configuration.")
-                screen_session.open(MessageBox,_(" Login to Itasa failed. Check your username/password at the configuration menu."), MessageBox.TYPE_INFO, timeout = 5)
+                screen_session.open(MessageBox, _(" Login to Itasa failed. Check your username/password at the configuration menu."), MessageBox.TYPE_INFO, timeout = 5)
                                
                 msg = "Login to Itasa failed. Check your username/password at the addon configuration."
         else:
@@ -148,7 +148,7 @@ def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, 
     password = config.plugins.subsdownloader.ItasaPassword.value
     
     if login(username, password):
-        log( __name__ , " Login successful")
+        log( __name__, " Login successful")
         id = subtitles_list[pos][ "id" ]
         link = subtitles_list[pos][ "link" ] 
         
@@ -157,7 +157,7 @@ def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, 
 
         if match:
             language = subtitles_list[pos][ "language_name" ]
-            log( __name__ ," Fetching subtitles using url %s" % (main_url + match.group(1)))
+            log( __name__, " Fetching subtitles using url %s" % (main_url + match.group(1)))
             content = geturl(main_url + match.group(1))
             if content is not None:
                 header = content[:4]
@@ -171,14 +171,14 @@ def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, 
                     local_tmp_file = os.path.join(tmp_sub_dir, "undertexter.srt") # assume unpacked subtitels file is an '.srt'
                     subs_file = local_tmp_file
                     packed = False
-                log( __name__ ," Saving subtitles to '%s'" % (local_tmp_file))
+                log( __name__, " Saving subtitles to '%s'" % (local_tmp_file))
                                 
                 try:
                     local_file_handle = open(local_tmp_file, "wb")
                     local_file_handle.write(content)
                     local_file_handle.close()
                 except:
-                    log( __name__ ," Failed to save subtitles to '%s'" % (local_tmp_file))
+                    log( __name__, " Failed to save subtitles to '%s'" % (local_tmp_file))
                 if packed:
                     if header == 'PK':
                         zipped_file = zip_extractor(local_tmp_file, tmp_sub_dir)
@@ -187,9 +187,9 @@ def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, 
                     if header == 'Rar!':
                         if os.path.exists("/usr/bin/unrar"): 
                             files_before_unrar = list_directory_files(tmp_sub_dir)
-                            os.system('unrar -p- -y x %s %s' % (local_tmp_file,tmp_sub_dir))
+                            os.system('unrar -p- -y x %s %s' % (local_tmp_file, tmp_sub_dir))
                             files_after_unrar = list_directory_files(tmp_sub_dir)
-                            subs_file = new_file_in_directory(files_before_unrar,files_after_unrar)
+                            subs_file = new_file_in_directory(files_before_unrar, files_after_unrar)
                             os.remove(local_tmp_file)
                         else:
                             from Components.Ipkg import IpkgComponent
@@ -200,8 +200,8 @@ def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, 
                     
                 return False, language, subs_file #standard output
     #log( __name__ ," Login to Itasa failed. Check your username/password at the addon configuration.")
-    screen_session.open(MessageBox,_(" Login to Itasa failed. Check your username/password at the configuration menu."), MessageBox.TYPE_INFO, timeout = 5)
+    screen_session.open(MessageBox, _(" Login to Itasa failed. Check your username/password at the configuration menu."), MessageBox.TYPE_INFO, timeout = 5)
     return False, "None", []
 
 def __restartMessage__(screen_session, callback = None):
-        screen_session.open(MessageBox,_("Please restart GUI to apply changes.\n\n If UNRAR package haven't been installed it means that Your image doesn't have it. \n You can download package from project Google Code page or unpack rar manually and make local convertion."), MessageBox.TYPE_INFO, timeout = 25)
+        screen_session.open(MessageBox, _("Please restart GUI to apply changes.\n\n If UNRAR package haven't been installed it means that Your image doesn't have it. \n You can download package from project Google Code page or unpack rar manually and make local convertion."), MessageBox.TYPE_INFO, timeout = 25)

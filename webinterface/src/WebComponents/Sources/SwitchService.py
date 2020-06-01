@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Components.Sources.Source import Source
 from Components.Converter import ServiceName
 from Components.config import config
@@ -15,7 +16,7 @@ class SwitchService(Source):
 		self.res = self.switchService(cmd)
 
 	def switchService(self, cmd):
-		print "[SwitchService] ref=%s" % cmd["sRef"]
+		print("[SwitchService] ref=%s" % cmd["sRef"])
 		if config.plugins.Webinterface.allowzapping.value:
 			from Screens.Standby import inStandby
 			if inStandby == None:

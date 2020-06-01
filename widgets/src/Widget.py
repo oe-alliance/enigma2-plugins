@@ -1,3 +1,4 @@
+from __future__ import print_function
 import skin
 from Components.Label import Label
 
@@ -16,20 +17,20 @@ class Widget:
         self.prefix = "" # the prefix of the name of the elements after it is patched into the main screen skin depending on its place in the widgetdesktop 
         self.wname = "" # the place name, the widget is placed and running in
         
-    def setDir(self,directory):
+    def setDir(self, directory):
         """ called after the import """
         self.dir = directory
             
-    def setPositionname(self,wname):
+    def setPositionname(self, wname):
         """ called after the widget is placed at a place at the widgetdesktop """
         self.wname = wname
         self.prefix = wname+"_e_"
     
-    def getElement(self,elementname):
+    def getElement(self, elementname):
         """ returns the intance of an element of self.elements """
         return self.instance[self.prefix+elementname]  
     
-    def onLoadFinished(self,instance):
+    def onLoadFinished(self, instance):
         """ overwrite this in your widget to do things after the widget is shown on the widgetdesktop """
         self.instance = instance
     
@@ -39,4 +40,4 @@ class Widget:
     
     def onInfo(self):
         """ overwrite this, if you whant to do something if the user presses the info-key and your widget is selected """
-        print "unhandled infokey"
+        print("unhandled infokey")

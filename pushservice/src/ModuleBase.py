@@ -1,3 +1,4 @@
+from __future__ import print_function
 #######################################################################
 #
 #    Push Service for Enigma-2
@@ -83,15 +84,15 @@ class ModuleBase(object):
 		for key, value in options:
 			try:
 				default = self.getValue(key)
-				if type(default) is str:
+				if isinstance(default, str):
 					self.setValue(key, value)
-				elif type(default) is bool:
+				elif isinstance(default, bool):
 					self.setValue(key, eval(value))
-				elif type(default) is int:
+				elif isinstance(default, int):
 					self.setValue(key, int(value))
 			except:
-				print _("PushService Module %s:\n") % ( self.getName() )
-				print _("Skipping config option:") + str(key) + " " + str(value)
+				print(_("PushService Module %s:\n") % ( self.getName() ))
+				print(_("Skipping config option:") + str(key) + " " + str(value))
 				continue
 
 	def getUniqueID(self):

@@ -1,3 +1,4 @@
+from __future__ import print_function
 #######################################################################
 #
 #    EasyMedia for Dreambox-Enigma2
@@ -261,7 +262,7 @@ class AddPlug(Screen):
 
 	def save(self):
 		plugin = self["pluginlist"].getCurrent()[0]
-		print plugin
+		print(plugin)
 		plugin.icon = None
 		if not fileExists("/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/" + plugin.name + ".plug"):
 			try:
@@ -419,11 +420,11 @@ class EasyMedia(Screen):
 			"ok": self.go,
 			"back": self.cancel,
 			"menu": self.emContextMenu,
-			"showMovies": lambda: self.go2(MPaskList,0),
-			"green": lambda: self.go2(MPaskList,2),
-			"red": lambda: self.go2(MPaskList,1),
-			"blue": lambda: self.go2(MPaskList,4),
-			"yellow": lambda: self.go2(MPaskList,3)
+			"showMovies": lambda: self.go2(MPaskList, 0),
+			"green": lambda: self.go2(MPaskList, 2),
+			"red": lambda: self.go2(MPaskList, 1),
+			"blue": lambda: self.go2(MPaskList, 4),
+			"yellow": lambda: self.go2(MPaskList, 3)
 		}, -1)
 
 	def cancel(self):

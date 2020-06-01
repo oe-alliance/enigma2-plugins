@@ -10,6 +10,7 @@
 #===============================================================================
 
 
+from __future__ import print_function
 from time import time
 from . import _
 from enigma import iPlayableServicePtr
@@ -42,28 +43,28 @@ ENIGMA_SERVICETS_ID = 0x1002
 
 ENIGMA_SERVICE_ID = 0
 
-print "[VLC] Checking for buildin servicets ... ",
+print("[VLC] Checking for buildin servicets ... ", end=' ')
 if isValidServiceId(ENIGMA_SERVICETS_ID):
-	print "yes"
+	print("yes")
 	ENIGMA_SERVICE_ID = ENIGMA_SERVICETS_ID
 	STOP_BEFORE_UNPAUSE = False
 else:
-	print "no"
-	print "[VLC] Checking for existing and usable servicets.so ... ",
+	print("no")
+	print("[VLC] Checking for existing and usable servicets.so ... ", end=' ')
 	try:
 		import servicets
-	except Exception, e:
-		print e
-		print "[VLC] Checking for usable gstreamer service ... ",
+	except Exception as e:
+		print(e)
+		print("[VLC] Checking for usable gstreamer service ... ", end=' ')
 		if isValidServiceId(ENIGMA_SERVICEGS_ID):
-			print "yes"
+			print("yes")
 			ENIGMA_SERVICE_ID = ENIGMA_SERVICEGS_ID
 			STOP_BEFORE_UNPAUSE = True
 		else:
-			print "no"
-			print "[VLC] No valid VLC-Service found - VLC-streaming not supported"
+			print("no")
+			print("[VLC] No valid VLC-Service found - VLC-streaming not supported")
 	else:
-		print "yes"
+		print("yes")
 		ENIGMA_SERVICE_ID = ENIGMA_SERVICETS_ID
 		STOP_BEFORE_UNPAUSE = False
 
@@ -143,14 +144,14 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 		if self.server is None:
 			self.stats = None
 			return
-		print "[VLC] refresh"
+		print("[VLC] refresh")
 		try:
 			self.stats = self.server.status()
 			self.lastrefresh = time()
-			if self.stats and self.stats.has_key("time"):
-				print "Time: ", self.stats["time"]
-		except Exception, e:
-			print e
+			if self.stats and "time" in self.stats:
+				print("Time: ", self.stats["time"])
+		except Exception as e:
+			print(e)
 
 	def refresh(self):
 		self.__onRefresh()
@@ -163,7 +164,7 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 		return self
 
 	def getPlayPosition(self):
-		if self.stats and self.stats.has_key("time"):
+		if self.stats and "time" in self.stats:
 			pos = float(self.stats["time"])
 			if self.player.state == VlcPlayer.STATE_PLAYING:
 				pos += time() - self.lastrefresh
@@ -172,7 +173,7 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 			return (True, 0)
 
 	def getLength(self):
-		if self.stats and self.stats.has_key("length"):
+		if self.stats and "length" in self.stats:
 			return (False, int(self.stats["length"])*90000)
 		else:
 			return (True, 0)
@@ -291,7 +292,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 				"subtitles": self.subtitleSelection
 			}, -2)
 
-		print "[VLC] evEOF=%d" % iPlayableService.evEOF
+		print("[VLC] evEOF=%d" % iPlayableService.evEOF)
 		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
 			{
 				iPlayableService.evEOF: self.__evEOF,
@@ -299,7 +300,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 			})
 
 	def createSummary(self):
-		print "[VLC] createSummary"
+		print("[VLC] createSummary")
 		return VlcPlayerSummary
 
 	def __onClose(self):
@@ -308,7 +309,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 
 	def choiceJumping(self):
 		try:
-			self.session.openWithCallback(self.choicesCallback, ChoiceBox, title=_("Choice of minutes to jump"), list=[(_("1 minute"), "1"), (_("3 minutes"), "3"),(_("5 minutes"), "5"), (_("10 minutes"), "10"),(_("15 minutes"), "15"), (_("20 minutes"), "20"),(_("30 minutes"), "30"),])
+			self.session.openWithCallback(self.choicesCallback, ChoiceBox, title=_("Choice of minutes to jump"), list=[(_("1 minute"), "1"), (_("3 minutes"), "3"), (_("5 minutes"), "5"), (_("10 minutes"), "10"), (_("15 minutes"), "15"), (_("20 minutes"), "20"), (_("30 minutes"), "30"),])
 		except:
 			pass
 
@@ -341,11 +342,11 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 			pass
 
 	def __evEOF(self):
-		print "[VLC] Event EOF"
+		print("[VLC] Event EOF")
 		self.stop()
 
 	def __evSOF(self):
-		print "[VLC] Event SOF"
+		print("[VLC] Event SOF")
 		self.vlcservice.refresh()
 
 	def playfile(self, path, name):
@@ -362,7 +363,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 		if self.state == self.STATE_PAUSED:
 			self.unpause()
 			return
-		print "[VLC] setupStream: " + self.filename
+		print("[VLC] setupStream: " + self.filename)
 		if ENIGMA_SERVICE_ID == 0:
 			self.hide()
 			self.session.open(
@@ -372,8 +373,8 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 			return
 		try:
 			url = self.server.playFile(self.filename, DEFAULT_VIDEO_PID, DEFAULT_AUDIO_PID)
-			print "[VLC] url: " + url
-		except Exception, e:
+			print("[VLC] url: " + url)
+		except Exception as e:
 			self.hide()
 			self.session.open(
 					MessageBox, (_("Error with VLC server:\n%s") % e), MessageBox.TYPE_ERROR
@@ -394,7 +395,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 		if answer[1] == "dirplay":
 			url = self.url
 			sref = eServiceReference(ENIGMA_SERVICE_ID, 0, url)
-			print "sref valid=", sref.valid()
+			print("sref valid=", sref.valid())
 			sref.setData(0, DEFAULT_VIDEO_PID)
 			sref.setData(1, DEFAULT_AUDIO_PID)
 			self.session.nav.playService(sref)
@@ -414,15 +415,15 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 			f.write(pcport)
 			f.close()
 			url = self.url
-			print " svfile  =", svfile
-			print " url  =", url
+			print(" svfile  =", svfile)
+			print(" url  =", url)
 			cmd = "rm " + svfile
 			system(cmd)
 			cmd1 = "wget -c '" + url + "' -O '" + svfile + "' &"
 			system(cmd1)
 			url = self.url
 			sref = eServiceReference(ENIGMA_SERVICE_ID, 0, url)
-			print "sref valid=", sref.valid()
+			print("sref valid=", sref.valid())
 			sref.setData(0, DEFAULT_VIDEO_PID)
 			sref.setData(1, DEFAULT_AUDIO_PID)
 			self.session.nav.playService(sref)
@@ -432,7 +433,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 			self.vlcservice.setServer(self.server)
 
 	def pause(self):
-		print "[VLC] pause"
+		print("[VLC] pause")
 		if self.state == self.STATE_PLAYING:
 			self.session.nav.pause(True)
 			self.server.pause()
@@ -455,11 +456,11 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 				pass
 
 	def unpause(self):
-		print "[VLC] unpause"
+		print("[VLC] unpause")
 		try:
 			self.server.seek("-2")
 			self.server.unpause()
-		except Exception, e:
+		except Exception as e:
 			self.session.open(
 				MessageBox, (_("Error with VLC server:\n%s") % e), MessageBox.TYPE_ERROR
 			)
@@ -479,7 +480,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 			self.__setHideTimer()
 
 	def stopCurrent(self):
-		print "[VLC] stopCurrent"
+		print("[VLC] stopCurrent")
 		self.session.nav.stopService()
 		if self.state == self.STATE_IDLE:
 			self.close()
@@ -487,7 +488,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 		try:
 			self.server.stop()
 			self.server.deleteCurrentTree()
-		except Exception, e:
+		except Exception as e:
 			#self.session.open(
 			#	MessageBox, _("Error with VLC server:\n%s" % e), MessageBox.TYPE_ERROR
 			#)
@@ -497,7 +498,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 		self.vlcservice.refresh()
 
 	def stop(self):
-		print "[VLC] stop"
+		print("[VLC] stop")
 		self.stopCurrent()
 		self.close()
 
@@ -523,7 +524,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 			self.showInfobar()
 
 	def playNextFile(self):
-		print "[VLC] playNextFile"
+		print("[VLC] playNextFile")
 		if isDvdUrl(self.filename):
 			url, track, chapter = splitDvdUrl(self.filename)
 			if track is None:
@@ -550,7 +551,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 					self.showInfobar()
 
 	def playPrevFile(self):
-		print "[VLC] playPrevFile"
+		print("[VLC] playPrevFile")
 		if isDvdUrl(self.filename):
 			url, track, chapter = splitDvdUrl(self.filename)
 			if track is None:

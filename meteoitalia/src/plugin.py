@@ -93,9 +93,9 @@ class meteoitMain(Screen):
 		req = Request(myurl)
 		try:
     			handler = urlopen(req)
-		except HTTPError, e:
+		except HTTPError as e:
     			maintext = "Error: connection failed !"
-		except URLError, e:
+		except URLError as e:
     			maintext = "Error: Page not available !"
 		else:
 			xml_response = handler.read()
@@ -111,7 +111,7 @@ class meteoitMain(Screen):
     				weather_dom = dom.getElementsByTagName('weather')[0]
     				data_structure = { 
         				'forecast_information': ('postal_code', 'current_date_time'),
-        				'current_conditions': ('condition','temp_c', 'humidity', 'wind_condition', 'icon')
+        				'current_conditions': ('condition', 'temp_c', 'humidity', 'wind_condition', 'icon')
     				}
     				for (tag, list_of_tags2) in data_structure.iteritems():
         				tmp_conditions = {}
@@ -247,7 +247,7 @@ class meteoitMain(Screen):
 		url2 = "Roma"
 		cfgfile = pluginpath + "/" + "meteoitalia.cfg"
 		if fileExists(cfgfile):
-			f = open(cfgfile,'r')
+			f = open(cfgfile, 'r')
 			line = f.readline()
 			url2 = line.strip()
 			f.close()
@@ -279,18 +279,18 @@ class MeteoitSelectCity(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
-		self.list = ["Agrigento","Alessandria","Ancona","Andria","Aosta","Arezzo","Ascoli Piceno","Asti","Avellino","Bari",
-				"Barletta","Belluno","Benevento","Bergamo","Biella","Bologna","Bolzano","Brescia","Brindisi","Cagliari",
-				"Caltanissetta","Campobasso","Carbonia","Caserta","Catania","Catanzaro","Chieti","Como","Cosenza",
-				"Cremona","Crotone","Cuneo","Enna","Fermo","Ferrara","Firenze","Foggia","Forli","Frosinone","Genova",
-				"Gorizia","Grosseto","Iglesias","Imperia","Isernia","La Spezia","L'Aquila","Lanusei","Latina","Lecce",
-				"Lecco","Livorno","Lodi","Lucca","Macerata","Mantova","Massa","Matera","Messina","Milano","Modena",
-				"Monza","Napoli","Novara","Nuoro","Ogliastra","Olbia","Oristano","Padova","Palermo","Parma","Pavia",
-				"Perugia","Pesaro","Pescara","Piacenza","Pisa","Pistoia","Pordenone","Potenza","Prato","Ragusa","Ravenna",
-				"Reggio Calabria","Reggio Emilia","Rieti","Rimini","Roma","Rovigo","Salerno","Sanluri","Sassari","Savona",
-				"Siena","Siracusa","Sondrio","Taranto","Tempio Pausania","Teramo","Terni","Torino","Trani","Trapani",
-				"Trento","Treviso","Trieste","Udine","Urbino","Varese","Venezia","Verbania","Vercelli","Verona",
-				"Vibo Valenzia","Villacidro","Vicenza","Viterbo"]
+		self.list = ["Agrigento", "Alessandria", "Ancona", "Andria", "Aosta", "Arezzo", "Ascoli Piceno", "Asti", "Avellino", "Bari",
+				"Barletta", "Belluno", "Benevento", "Bergamo", "Biella", "Bologna", "Bolzano", "Brescia", "Brindisi", "Cagliari",
+				"Caltanissetta", "Campobasso", "Carbonia", "Caserta", "Catania", "Catanzaro", "Chieti", "Como", "Cosenza",
+				"Cremona", "Crotone", "Cuneo", "Enna", "Fermo", "Ferrara", "Firenze", "Foggia", "Forli", "Frosinone", "Genova",
+				"Gorizia", "Grosseto", "Iglesias", "Imperia", "Isernia", "La Spezia", "L'Aquila", "Lanusei", "Latina", "Lecce",
+				"Lecco", "Livorno", "Lodi", "Lucca", "Macerata", "Mantova", "Massa", "Matera", "Messina", "Milano", "Modena",
+				"Monza", "Napoli", "Novara", "Nuoro", "Ogliastra", "Olbia", "Oristano", "Padova", "Palermo", "Parma", "Pavia",
+				"Perugia", "Pesaro", "Pescara", "Piacenza", "Pisa", "Pistoia", "Pordenone", "Potenza", "Prato", "Ragusa", "Ravenna",
+				"Reggio Calabria", "Reggio Emilia", "Rieti", "Rimini", "Roma", "Rovigo", "Salerno", "Sanluri", "Sassari", "Savona",
+				"Siena", "Siracusa", "Sondrio", "Taranto", "Tempio Pausania", "Teramo", "Terni", "Torino", "Trani", "Trapani",
+				"Trento", "Treviso", "Trieste", "Udine", "Urbino", "Varese", "Venezia", "Verbania", "Vercelli", "Verona",
+				"Vibo Valenzia", "Villacidro", "Vicenza", "Viterbo"]
 				
 		self["list"] = List(self.list)
 		self["lab1"] = Label("Ok per confermare")

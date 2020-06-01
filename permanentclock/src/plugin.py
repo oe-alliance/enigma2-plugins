@@ -46,8 +46,8 @@ config.plugins.PermanentClock.position_x = ConfigInteger(default=500)
 config.plugins.PermanentClock.position_y = ConfigInteger(default=35)
 config.plugins.PermanentClock.analog = ConfigYesNo(default=False)
 config.plugins.PermanentClock.show_hide = ConfigYesNo(default=False)
-config.plugins.PermanentClock.color_analog = ConfigSelection([("1", _("black-yellow")),("2", _("black-blue")),("3", _("blue")),("4", _("black-white")),("5", _("white")),("6", _("transparent")),("7", _("PLi-transparent"))], default="1")
-config.plugins.PermanentClock.color_digital = ConfigSelection([("0", _("yellow")),("1", _("white")), ("2", _("large yellow")), ("3", _("large white"))], default="1")
+config.plugins.PermanentClock.color_analog = ConfigSelection([("1", _("black-yellow")), ("2", _("black-blue")), ("3", _("blue")), ("4", _("black-white")), ("5", _("white")), ("6", _("transparent")), ("7", _("PLi-transparent"))], default="1")
+config.plugins.PermanentClock.color_digital = ConfigSelection([("0", _("yellow")), ("1", _("white")), ("2", _("large yellow")), ("3", _("large white"))], default="1")
 
 ##############################################################################
 SKIN1 = """
@@ -369,7 +369,7 @@ class PermanentClockPositioner(Screen):
 		self.movePosition()
 
 	def ok(self):
-		menu = [(_("Save"), "save"),(_("Set slider"), "slider")]
+		menu = [(_("Save"), "save"), (_("Set slider"), "slider")]
 		def extraAction(choice):
 			if choice is not None:
 				if choice[1] == "slider":

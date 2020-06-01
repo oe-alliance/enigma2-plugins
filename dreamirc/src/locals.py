@@ -1,3 +1,4 @@
+from __future__ import print_function
 # Copyright (c) 2001-2004 Twisted Matrix Laboratories.
 # See LICENSE for details.
 
@@ -23,5 +24,5 @@ ONLINE = Enum('Online')
 AWAY = Enum('Away')
 
 class OfflineError(Exception):
-    print "[dreamIRC] offline - %s" % Exception
+    print("[dreamIRC] offline - %s" % Exception)
     """The requested action can't happen while offline."""

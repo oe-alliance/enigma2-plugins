@@ -119,7 +119,7 @@ except ImportError:
         if filename.startswith('~'):
             # check for home directory
             return os.path.expanduser(filename)
-        elif (ord(filename[0]) in (range(65,91)+range(99,123))) \
+        elif (ord(filename[0]) in (range(65, 91)+range(99, 123))) \
                 and (filename[1:3] == ':\\'):
             # check for absolute drive path (e.g. C:\...)
             return filename
@@ -127,7 +127,7 @@ except ImportError:
             # check for absolute UNC path (e.g. \\server\...)
             return filename
         # return path with temp directory prepended
-        return os.path.expandvars(os.path.join('%TEMP%',filename))
+        return os.path.expandvars(os.path.join('%TEMP%', filename))
 
 
 class FileCacheObject( CacheObject ):
@@ -151,7 +151,7 @@ class FileCacheObject( CacheObject ):
     @property
     def size(self):
         if self._size is None:
-            self._buff.seek(0,2)
+            self._buff.seek(0, 2)
             size = self._buff.tell()
             if size == 0:
                 if (self._key is None) or (self._data is None):
@@ -311,7 +311,7 @@ class FileEngine( CacheEngine ):
             return []
 
         # get end of file
-        self.cachefd.seek(0,2)
+        self.cachefd.seek(0, 2)
         position = self.cachefd.tell()
         newobjs = []
         emptycount = 0
@@ -349,7 +349,7 @@ class FileEngine( CacheEngine ):
             data = data[-1]
 
             # determine write position of data in cache
-            self.cachefd.seek(0,2)
+            self.cachefd.seek(0, 2)
             end = self.cachefd.tell()
             data.position = end
 

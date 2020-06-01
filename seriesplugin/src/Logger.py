@@ -17,6 +17,7 @@
 #
 #######################################################################
 
+from __future__ import print_function
 from . import _
 
 import logging
@@ -92,7 +93,7 @@ class Logger(object):
 			self.instance.info(strargs)
 		
 		elif config.plugins.seriesplugin.debug_prints.value:
-			print strargs
+			print(strargs)
 		
 		if int(config.plugins.seriesplugin.popups_success_timeout.value) != 0:
 			AddPopup(
@@ -111,7 +112,7 @@ class Logger(object):
 			self.instance.info(strargs)
 		
 		elif config.plugins.seriesplugin.debug_prints.value:
-			print strargs
+			print(strargs)
 
 	def debug(self, *args):
 		strargs = " ".join( [ str(arg) for arg in args ] )
@@ -120,7 +121,7 @@ class Logger(object):
 			self.instance.debug(strargs)
 		
 		elif config.plugins.seriesplugin.debug_prints.value:
-			print strargs
+			print(strargs)
 		
 		if sys.exc_info()[0]:
 			self.instance.debug( str(sys.exc_info()[0]) )
@@ -136,7 +137,7 @@ class Logger(object):
 			self.instance.warning(strargs)
 		
 		elif config.plugins.seriesplugin.debug_prints.value:
-			print strargs
+			print(strargs)
 		
 		if int(config.plugins.seriesplugin.popups_warning_timeout.value) != 0:
 			AddPopup(
@@ -155,7 +156,7 @@ class Logger(object):
 			self.instance.error(strargs)
 		
 		elif config.plugins.seriesplugin.debug_prints.value:
-			print strargs
+			print(strargs)
 
 		AddPopup(
 					strargs,
@@ -173,7 +174,7 @@ class Logger(object):
 			self.instance.exception(strargs)
 		
 		elif config.plugins.seriesplugin.debug_prints.value:
-			print strargs
+			print(strargs)
 		
 		AddPopup(
 					strargs,

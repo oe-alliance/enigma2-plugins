@@ -20,6 +20,7 @@
 #  distributed other than under the conditions noted above.
 #
 
+from __future__ import print_function
 from LocaleInit import _
 from Tools.Directories import resolveFilename, SCOPE_HDD
 from Components.config import config, ConfigSubsection, ConfigText, ConfigYesNo, ConfigInteger, ConfigSelection, ConfigClock, ConfigLocations, ConfigBoolean
@@ -33,7 +34,7 @@ config.usage.on_movie_eof = ConfigSelection(default="ask", choices=[("ask", _("A
 
 config.AdvancedMovieSelection = ConfigSubsection()
 config.AdvancedMovieSelection.last_selected_service = ConfigText(default = "")
-config.AdvancedMovieSelection.wastelist_buildtype = ConfigSelection(default="listMovies" , choices=[("listMovies", _("Only current location")), ("listAllMovies", _("Current location and all subdirectories")), ("listAllMoviesMedia", _("All directorys below '/media'")) ])
+config.AdvancedMovieSelection.wastelist_buildtype = ConfigSelection(default="listMovies", choices=[("listMovies", _("Only current location")), ("listAllMovies", _("Current location and all subdirectories")), ("listAllMoviesMedia", _("All directorys below '/media'")) ])
 config.AdvancedMovieSelection.use_wastebasket = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.overwrite_left_right = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.sensibility = ConfigInteger(default=10, limits=(1, 100))
@@ -49,11 +50,11 @@ config.AdvancedMovieSelection.showmovietagsinmenu = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.usefoldername = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.minitv = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.shownew = ConfigYesNo(default=True)
-config.AdvancedMovieSelection.dateformat = ConfigSelection(default="6" , choices=[("6" , _("German (without Year)")), ("1" , _("German (with Year)")), ("3" , _("German (with Starttime)")), ("2" , _("Enigma 2 default")), ("7" , _("English (without Year)")), ("4" , _("English (with Year)")), ("5" , _("English (with Starttime)"))])
-config.AdvancedMovieSelection.color1 = ConfigSelection(default="yellow" , choices=[("yellow" , _("Yellow")), ("blue" , _("Blue")), ("red" , _("Red")), ("black" , _("Black")), ("green" , _("Green"))])
-config.AdvancedMovieSelection.color2 = ConfigSelection(default="green" , choices=[("green" , _("Green")), ("blue" , _("Blue")), ("red" , _("Red")), ("black" , _("Black")), ("yellow" , _("Yellow"))])
-config.AdvancedMovieSelection.color3 = ConfigSelection(default="red" , choices=[("red" , _("Red")), ("blue" , _("Blue")), ("green" , _("Green")), ("black" , _("Black")), ("yellow" , _("Yellow"))])
-config.AdvancedMovieSelection.color4 = ConfigSelection(default="grey" , choices=[("grey" , _("Grey")), ("red" , _("Red")), ("blue" , _("Blue")), ("green" , _("Green")), ("black" , _("Black")), ("yellow" , _("Yellow")), ("orange" , _("Orange")), ])
+config.AdvancedMovieSelection.dateformat = ConfigSelection(default="6", choices=[("6", _("German (without Year)")), ("1", _("German (with Year)")), ("3", _("German (with Starttime)")), ("2", _("Enigma 2 default")), ("7", _("English (without Year)")), ("4", _("English (with Year)")), ("5", _("English (with Starttime)"))])
+config.AdvancedMovieSelection.color1 = ConfigSelection(default="yellow", choices=[("yellow", _("Yellow")), ("blue", _("Blue")), ("red", _("Red")), ("black", _("Black")), ("green", _("Green"))])
+config.AdvancedMovieSelection.color2 = ConfigSelection(default="green", choices=[("green", _("Green")), ("blue", _("Blue")), ("red", _("Red")), ("black", _("Black")), ("yellow", _("Yellow"))])
+config.AdvancedMovieSelection.color3 = ConfigSelection(default="red", choices=[("red", _("Red")), ("blue", _("Blue")), ("green", _("Green")), ("black", _("Black")), ("yellow", _("Yellow"))])
+config.AdvancedMovieSelection.color4 = ConfigSelection(default="grey", choices=[("grey", _("Grey")), ("red", _("Red")), ("blue", _("Blue")), ("green", _("Green")), ("black", _("Black")), ("yellow", _("Yellow")), ("orange", _("Orange")), ])
 config.AdvancedMovieSelection.moviepercentseen = ConfigInteger(default=80, limits=(50, 100))
 config.AdvancedMovieSelection.showfoldersinmovielist = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.showprogessbarinmovielist = ConfigYesNo(default=False)
@@ -154,7 +155,7 @@ config.AdvancedMovieSelection.empty_wastebasket_time = ConfigClock(default=10800
 config.AdvancedMovieSelection.empty_wastebasket_min_age = ConfigInteger(default=0, limits=(0, 999))
 config.AdvancedMovieSelection.last_auto_empty_wastebasket = ConfigInteger(default=0)
 config.AdvancedMovieSelection.next_auto_empty_wastebasket = ConfigInteger(default=0)
-config.AdvancedMovieSelection.next_empty_check = ConfigInteger(default=30, limits=(01, 60))
+config.AdvancedMovieSelection.next_empty_check = ConfigInteger(default=30, limits=(0o1, 60))
 config.AdvancedMovieSelection.show_update_genre = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.show_begintime = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.show_date_shortdesc = ConfigYesNo(default=False)
@@ -179,7 +180,7 @@ config.AdvancedMovieSelection.video_preview_autostart = ConfigYesNo(default=True
 config.AdvancedMovieSelection.video_preview_fullscreen = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.epg_extension = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.show_set_vsr = ConfigYesNo(default=False)
-config.AdvancedMovieSelection.keyboard = ConfigSelection(default="virtual_numerical" , choices=[("virtual_numerical" , _("Virtual and Numerical")), ("virtual" , _("Virtual")), ("numerical" , _("Numerical"))])
+config.AdvancedMovieSelection.keyboard = ConfigSelection(default="virtual_numerical", choices=[("virtual_numerical", _("Virtual and Numerical")), ("virtual", _("Virtual")), ("numerical", _("Numerical"))])
 config.AdvancedMovieSelection.show_filter_by_description = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.show_backup_restore = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.cover_auto_download = ConfigYesNo(default=True)
@@ -230,12 +231,12 @@ class QuickButtons():
         
     def updateOldVersion(self):
         try:
-            print "update older config version"
+            print("update older config version")
             self.setFunction('red', config.AdvancedMovieSelection.red.value)
             self.setFunction('green', config.AdvancedMovieSelection.green.value)
             self.setFunction('yellow', config.AdvancedMovieSelection.yellow.value)
             self.setFunction('blue', config.AdvancedMovieSelection.blue.value)
-            print self.qlist
+            print(self.qlist)
         except:
             printStackTrace()
     
@@ -248,13 +249,13 @@ CONFIG_BACKUP = ("AdvancedMovieSelection", "movielist")
 BACKUP_FILE_NAME = "AMS.settings.backup"
 
 def getChanges(config_entry, changes):
-    print "get changes for:", config_entry
+    print("get changes for:", config_entry)
     entry = config.content.items[config_entry]
     for item in entry.dict():
         conf = entry.__getattr__(item)
         if conf.default != conf.value: 
             txt = "config.%s.%s=%s" % (config_entry, item, conf.saved_value)
-            print txt
+            print(txt)
             changes.append(txt)
 
 def createBackup(path="/media/hdd/"):
@@ -264,7 +265,7 @@ def createBackup(path="/media/hdd/"):
 
     import os
     file_name = os.path.join(path, BACKUP_FILE_NAME)
-    print "create backup", file_name
+    print("create backup", file_name)
     try: 
         backup = open(file_name, 'wb')
         backup.write("\n".join(changes))
@@ -275,14 +276,14 @@ def createBackup(path="/media/hdd/"):
     return file_name
 
 def loadBackup(file_name):
-    print "load backup", file_name 
+    print("load backup", file_name) 
     backup = open(file_name, 'rb')
     for line in backup.readlines():
         try:
             config_entry = line.split(".")[1]
             config_item = line.split(".")[2].split("=")[0]
             value = line.split("=")[-1].strip()
-            print config_entry, config_item, value
+            print(config_entry, config_item, value)
             entry = config.content.items[config_entry]
             conf = entry.__getattr__(config_item)
             conf.saved_value = conf._value = value

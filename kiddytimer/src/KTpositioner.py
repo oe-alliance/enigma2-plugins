@@ -31,13 +31,13 @@ class KiddyTimerPositioner(Screen, MovableScreen):
             self["TimerSlider"].show()
             self["TimerSliderText"].show()
 
-        self["actions"] = ActionMap(["OkCancelActions"] , 
+        self["actions"] = ActionMap(["OkCancelActions"], 
         {
          "ok":      self.keyOK,
          "cancel":  self.keyCancel
         }, -1)
 
-        MovableScreen.__init__(self, config.plugins.KiddyTimer, [], 82 , 82)
+        MovableScreen.__init__(self, config.plugins.KiddyTimer, [], 82, 82)
         self.startMoving()
         
     def keyOK(self):

@@ -48,7 +48,7 @@ class MP(Source):
 			mp = self.session.mediaplayer
 			try:
 				len(mp.playlist)
-			except Exception, e:
+			except Exception as e:
 				pass
 			else:
 				return mp
@@ -57,7 +57,7 @@ class MP(Source):
 		try:
 			from Plugins.Extensions.MediaPlayer.plugin import MediaPlayer, MyPlayList
 		# nope, bail out
-		except ImportError, ie:
+		except ImportError as ie:
 			return None
 		else:
 			# mp installed, see if it's running

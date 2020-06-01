@@ -39,7 +39,7 @@ def getAdapterIPv6(interface):
 				tmpaddr = ""
 				tmp = line.split()
 				if interface == tmp[5]:
-					tmpaddr = ":".join([ tmp[0][i:i+4] for i in range(0,len(tmp[0]),4) ])
+					tmpaddr = ":".join([ tmp[0][i:i+4] for i in range(0, len(tmp[0]), 4) ])
 
 					if tmp[2].lower() != "ff":
 						tmpaddr = "%s/%s" % (tmpaddr, int(tmp[2].lower(), 16))
@@ -111,11 +111,11 @@ class Network(Source):
 
 	lut = {
 			"Name": 0,
-			"Mac" : 1,
-			"Dhcp" : 2,
-			"Ip" : 3,
-			"Netmask" : 4,
-			"Gateway" : 5,
-			"Ipv6" : 6,
+			"Mac": 1,
+			"Dhcp": 2,
+			"Ip": 3,
+			"Netmask": 4,
+			"Gateway": 5,
+			"Ipv6": 6,
 		   }
 

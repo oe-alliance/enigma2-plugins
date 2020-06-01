@@ -19,6 +19,7 @@
 #  distributed other than under the conditions noted above.
 #
 
+from __future__ import print_function
 import os
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
@@ -42,7 +43,7 @@ class AboutParser:
     @classmethod
     def setLocale(self, lng, path=resolveFilename(SCOPE_PLUGINS)+"Extensions/AdvancedMovieSelection/"):
         global CHANGES
-        print "[AdvancedMovieSelection] Set changes locale to", lng
+        print("[AdvancedMovieSelection] Set changes locale to", lng)
         CHANGES = {}
         CHANGES['locale'] = lng
         CHANGES['path'] = (path + "changes_%s.txt") % (lng)

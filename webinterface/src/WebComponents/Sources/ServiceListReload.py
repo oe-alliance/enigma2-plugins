@@ -1,3 +1,4 @@
+from __future__ import print_function
 from enigma import eDVBDB
 from Components.NimManager import nimmanager
 from Components.Sources.Source import Source
@@ -35,20 +36,20 @@ class ServiceListReload(Source):
 			elif self.cmd is self.PARENTAL:
 				Components.ParentalControl.parentalControl.open()
 				self.res = ( True, 'reloaded parentalcontrol white-/blacklist' )
-		except Exception, e:
+		except Exception as e:
 			pass
 
 	def reloadLameDB(self):
-		print "[ServiceListReload] reloading lamedb"
+		print("[ServiceListReload] reloading lamedb")
 		self.eDVBDB.removeServices()
 		self.eDVBDB.reloadServicelist()
 
 	def reloadUserBouquets(self):
-		print "[ServiceListReload] reloading userbouquets"
+		print("[ServiceListReload] reloading userbouquets")
 		self.eDVBDB.reloadBouquets()
 
 	def reloadTransponders(self):
-		print "[ServiceListReload] reloading transponders"
+		print("[ServiceListReload] reloading transponders")
 		nimmanager.readTransponders()
 
 	def getResult(self):

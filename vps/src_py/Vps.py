@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 from enigma import eTimer, eConsoleAppContainer, getBestPlayableServiceReference, eServiceReference, eEPGCache, eEnv
 from time import time, strftime, localtime
 from Components.config import config
@@ -286,7 +287,7 @@ class vps_timer:
 
 			# eigenen Timer überprüfen, wenn Zeiten nicht überschrieben werden dürfen
 			if not self.timer.vpsplugin_overwrite and evt_begin <= self.timer.end:
-				check_already_existing = [x for (x,y) in self.next_events if y == neweventid]
+				check_already_existing = [x for (x, y) in self.next_events if y == neweventid]
 				if len(check_already_existing) > 0:
 					start = check_already_existing.pop()
 					if start == evt_begin:
@@ -558,7 +559,7 @@ class vps:
 					elif (timer.begin - now) > 4*3600:
 						break
 			except AttributeError:
-				print "[VPS-Plugin] AttributeError in Vps.py"
+				print("[VPS-Plugin] AttributeError in Vps.py")
 				return
 		else:
 			nextExecution = 14400
@@ -576,7 +577,7 @@ class vps:
 			nextExecution = 1
 
 		self.timer.startLongTimer(nextExecution)
-		print "[VPS-Plugin] next execution in "+ str(nextExecution) +" sec"
+		print("[VPS-Plugin] next execution in "+ str(nextExecution) +" sec")
 
 	def addTimerToList(self, timer):
 		self.vpstimers.append(vps_timer(timer, self.session))

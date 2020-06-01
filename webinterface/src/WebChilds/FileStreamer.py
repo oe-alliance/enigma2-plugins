@@ -1,3 +1,4 @@
+from __future__ import print_function
 from twisted.web import resource, http, server, static
 from urllib import unquote
 from os import path as os_path
@@ -22,7 +23,7 @@ class FileStreamer(resource.Resource):
 			if not os_path.exists(path):
 				path = resolveFilename(SCOPE_HDD, filename)
 
-			print "[WebChilds.FileStreamer] path is %s" %path
+			print("[WebChilds.FileStreamer] path is %s" %path)
 
 			if os_path.exists(path):
 				basename = filename.decode('utf-8', 'ignore').encode('ascii', 'ignore')

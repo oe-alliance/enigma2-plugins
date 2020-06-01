@@ -3,6 +3,7 @@
 ## Seekbar
 ## by AliAbdul
 ##
+from __future__ import print_function
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigInteger, ConfigNumber, ConfigSelection, ConfigSubsection, ConfigYesNo, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
@@ -35,7 +36,7 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
 language.addCallback(localeInit())
@@ -212,9 +213,9 @@ def doBind(instance):
 	if not instance.bound:
 		for ctx in instance.contexts:
 			if ctx == "InfobarSeekActions":
-				if instance.actions.has_key("seekFwdManual"):
+				if "seekFwdManual" in instance.actions:
 					instance.actions["seekbarRight"] = instance.actions["seekFwdManual"]
-				if instance.actions.has_key("seekBackManual"):
+				if "seekBackManual" in instance.actions:
 					instance.actions["seekbarLeft"] = instance.actions["seekBackManual"]
 			DoBind(instance)
 

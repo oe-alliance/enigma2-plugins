@@ -1,4 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
+from __future__ import print_function
 import os, sys, traceback
 
 # Localization
@@ -15,7 +16,7 @@ from Logger import log
 EPGSelection_enterDateTime = None
 #EPGSelection_openOutdatedEPGSelection = None
 def SPEPGSelectionInit():
-	print "[SeriesPlugin] override EPGSelection"
+	print("[SeriesPlugin] override EPGSelection")
 	global EPGSelection_enterDateTime #, EPGSelection_openOutdatedEPGSelection
 	if EPGSelection_enterDateTime is None: # and EPGSelection_openOutdatedEPGSelection is None:
 		from Screens.EpgSelection import EPGSelection
@@ -26,7 +27,7 @@ def SPEPGSelectionInit():
 		EPGSelection.SPcloseafterfinish = closeafterfinish
 
 def SPEPGSelectionUndo():
-	print "[SeriesPlugin] undo override EPGSelection"
+	print("[SeriesPlugin] undo override EPGSelection")
 	global EPGSelection_enterDateTime #, EPGSelection_openOutdatedEPGSelection
 	if EPGSelection_enterDateTime: # and EPGSelection_openOutdatedEPGSelection:
 		from Screens.EpgSelection import EPGSelection
@@ -36,7 +37,7 @@ def SPEPGSelectionUndo():
 		#EPGSelection_openOutdatedEPGSelection = None
 
 def enterDateTime(self):
-	from Screens.EpgSelection import EPG_TYPE_SINGLE,EPG_TYPE_MULTI,EPG_TYPE_SIMILAR
+	from Screens.EpgSelection import EPG_TYPE_SINGLE, EPG_TYPE_MULTI, EPG_TYPE_SIMILAR
 	event = self["Event"].event
 	if self.type == EPG_TYPE_SINGLE:
 		service = self.currentService

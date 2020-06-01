@@ -19,6 +19,7 @@
 #  modify it (if you keep the license), but it may not be commercially 
 #  distributed other than under the conditions noted above.
 #
+from __future__ import print_function
 from __init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -166,7 +167,7 @@ class DownloadMovies(Screen):
         if len(results) == 0:
             self.setTitle(_("Nothing found for: %s") % (movie_title))
             self["key_green"].setText(_("OK"))
-            print "No info found for: " + movie_title
+            print("No info found for: " + movie_title)
             return False
 
         self.l = []
@@ -206,8 +207,8 @@ class DownloadMovies(Screen):
                 sc = AVSwitch().getFramebufferScale()
                 self.picload.setPara((self["poster"].instance.size().width(), self["poster"].instance.size().height(), sc[0], sc[1], False, 1, "#ff000000"))
                 self.picload.startDecode(jpg_file)
-            except Exception, e:
-                print e
+            except Exception as e:
+                print(e)
         
     def pageUp(self):
         self["description"].pageUp()

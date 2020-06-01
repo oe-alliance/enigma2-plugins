@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from os import rename as os_rename,\
 	chmod as os_chmod,\
 	write as os_write,\
@@ -42,42 +43,42 @@ class UploadPkgResource(resource.Resource):
 			
 	def render_POST(self, req):
 		data = req.args['file'][0]
-		print "[filename req.args]", req.args['filename'][0]
+		print("[filename req.args]", req.args['filename'][0])
 		filename = mbasename(req.args['filename'][0])
-		print "[filename]", filename
+		print("[filename]", filename)
 		if not filename.endswith(".ipk"):
-			return self.res % (_("wrong filetype!") ,_("Close"), _("Add"))
+			return self.res % (_("wrong filetype!"), _("Close"), _("Add"))
 		
 		if not data:
 			req.setResponseCode(http.OK)
-			return self.res % ( _("filesize was 0, not uploaded") ,
+			return self.res % ( _("filesize was 0, not uploaded"),
 					_("Close"),
 					 _("Add")
 					)
 		
-		fd,fn = mkstemp(dir = "/tmp/")
+		fd, fn = mkstemp(dir = "/tmp/")
 		cnt = os_write(fd, data)
 		os_close(fd)
-		os_chmod(fn, 0755)
+		os_chmod(fn, 0o755)
 		
 		if cnt <= 0: # well, actually we should check against len(data) but lets assume we fail big time or not at all
 			try:
 				os_unlink(fn)
-			except OSError, oe:
+			except OSError as oe:
 				pass
 			req.setResponseCode(http.OK)
-			return  self.res % (_("error writing to disk, not uploaded"),_("Close"), _("Add"))
+			return  self.res % (_("error writing to disk, not uploaded"), _("Close"), _("Add"))
 		
 		else:
 			file = "/tmp/" + filename
-			os_rename(fn,(file))
+			os_rename(fn, (file))
 			if file is not None:
 				out = os_popen("opkg install %s" %file)
 				debug = ""
 				for line in out:
 					debug += line
 			else:
-				return  self.res % (_("error writing to disk, not uploaded"),_("Close"), _("Add"))
+				return  self.res % (_("error writing to disk, not uploaded"), _("Close"), _("Add"))
 
 			req.setResponseCode(http.OK)
 			return self.res % ((debug),

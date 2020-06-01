@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Tools.BoundFunction import boundFunction
 from Screens.MessageBox import MessageBox
@@ -8,14 +9,14 @@ from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Sources.StaticText import StaticText
 from Components.Sources.List import List
 from Components.AVSwitch import AVSwitch
-from Components.config import config, Config, ConfigSelection, ConfigSubsection, ConfigText, getConfigListEntry, ConfigYesNo, ConfigIP, ConfigNumber,ConfigLocations
+from Components.config import config, Config, ConfigSelection, ConfigSubsection, ConfigText, getConfigListEntry, ConfigYesNo, ConfigIP, ConfigNumber, ConfigLocations
 from Components.config import KEY_DELETE, KEY_BACKSPACE, KEY_LEFT, KEY_RIGHT, KEY_HOME, KEY_END, KEY_TOGGLEOW, KEY_ASCII, KEY_TIMEOUT
 from Components.ConfigList import ConfigListScreen
 from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
 
 from Tools.Directories import pathExists, fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_HDD, SCOPE_CURRENT_PLUGIN, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
-from enigma import eTimer, quitMainloop,eListbox,ePoint, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent, eListbox, gFont, getDesktop, ePicLoad, eServiceCenter, iServiceInformation, eServiceReference,iSeekableService,iServiceInformation, iPlayableService, iPlayableServicePtr
+from enigma import eTimer, quitMainloop, eListbox, ePoint, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent, eListbox, gFont, getDesktop, ePicLoad, eServiceCenter, iServiceInformation, eServiceReference, iSeekableService, iServiceInformation, iPlayableService, iPlayableServicePtr
 from os import path as os_path, system as os_system, unlink, stat, mkdir, popen, makedirs, listdir, access, rename, remove, W_OK, R_OK, F_OK
 from twisted.web import client
 from twisted.internet import reactor
@@ -120,7 +121,7 @@ class dreamMediathekStationsScreen(Screen):
 			self.leavePlayerConfirmed([True, how])
 
 	def leavePlayer(self):
-		print "leavePlayer"
+		print("leavePlayer")
 		self.handleLeave(config.plugins.dreamMediathek.general.on_exit.value)
 
 	def leavePlayerConfirmed(self, answer):
@@ -136,20 +137,20 @@ class dreamMediathekStationsScreen(Screen):
 		self.close()
 			
 	def keyOK(self):
-		print "self.currentList im KeyOK",self.currentList
+		print("self.currentList im KeyOK", self.currentList)
 		if self.currentList == "streamlist":
 			current = self["streamlist"].getCurrent()
 			if current:
-				print current
+				print(current)
 				url = current[2]
 				title = current[1]
-				myreference = eServiceReference(4097,0,url)
+				myreference = eServiceReference(4097, 0, url)
 				myreference.setName(title)
 				#self.session.open(dreamMediathekPlayer, myreference, self.lastservice, infoCallback = self.showVideoInfo, nextCallback = self.getNextEntry, prevCallback = self.getPrevEntry )
 				self.session.open(dreamMediathekPlayer, myreference, self.lastservice)
 
 	def getStationsList(self):
-		print "getStationsList"
+		print("getStationsList")
 		iWebTVStations.getWebTVStations()
 		self.buildStationsList()
 
@@ -157,11 +158,11 @@ class dreamMediathekStationsScreen(Screen):
 		provider = None
 		title = None
 		streamurl = None
-		if iWebTVStations.webtv_stations[station].has_key("provider"):
+		if "provider" in iWebTVStations.webtv_stations[station]:
 			provider = iWebTVStations.webtv_stations[station]["provider"]
-		if iWebTVStations.webtv_stations[station].has_key("title"):
+		if "title" in iWebTVStations.webtv_stations[station]:
 			title = iWebTVStations.webtv_stations[station]["title"]
-		if iWebTVStations.webtv_stations[station].has_key("streamurl"):
+		if "streamurl" in iWebTVStations.webtv_stations[station]:
 			streamurl = iWebTVStations.webtv_stations[station]["streamurl"]			
 		return((provider, title, streamurl ))	
 
@@ -171,7 +172,7 @@ class dreamMediathekStationsScreen(Screen):
 		if self.tvstations and len(self.tvstations):
 			self.streamlist = []
 			for station in self.tvstations:
-				print "GOT station:",station
+				print("GOT station:", station)
 				self.streamlist.append(self.buildStationsComponent(station))
 			if len(self.streamlist):
 				self["streamlist"].setList(self.streamlist)

@@ -1,3 +1,4 @@
+from __future__ import print_function
 #######################################################################
 #
 #    Push Service for Enigma-2
@@ -56,40 +57,40 @@ class Modules(object):
 			
 			try:
 				fp, pathname, description = imp.find_module(name, [path])
-			except Exception, e:
-				print _("PushService Find module exception: ") + str(e)
+			except Exception as e:
+				print(_("PushService Find module exception: ") + str(e))
 				fp = None
 			
 			if not fp:
-				print _("PushService No module found: ") + str(name)
+				print(_("PushService No module found: ") + str(name))
 				continue
 			
 			try:
 				module = imp.load_module( name, fp, pathname, description)
-			except Exception, e:
-				print _("PushService Load exception: ") + str(e)
+			except Exception as e:
+				print(_("PushService Load exception: ") + str(e))
 			finally:
 				# Since we may exit via an exception, close fp explicitly.
 				if fp: fp.close()
 			
 			if not module:
-				print _("PushService No module available: ") + str(name)
+				print(_("PushService No module available: ") + str(name))
 				continue
 			
 			# Continue only if the attribute is available
 			if not hasattr(module, name):
-				print _("PushService Warning attribute not available: ") + str(name)
+				print(_("PushService Warning attribute not available: ") + str(name))
 				continue
 			
 			# Continue only if attr is a class
 			attr = getattr(module, name)
 			if not inspect.isclass(attr):
-				print _("PushService Warning no class definition: ") + str(name)
+				print(_("PushService Warning no class definition: ") + str(name))
 				continue
 			
 			# Continue only if the class is a subclass of the corresponding base class
 			if not issubclass( attr, base):
-				print _("PushService Warning no subclass of base: ") + str(name)
+				print(_("PushService Warning no subclass of base: ") + str(name))
 				continue
 			
 			# Add module to the module list
@@ -101,11 +102,11 @@ class Modules(object):
 			# Create instance
 			try:
 				return module()
-			except Exception, e:
-				print _("PushService Instantiate exception: ") + str(module) + "\n" + str(e)
+			except Exception as e:
+				print(_("PushService Instantiate exception: ") + str(module) + "\n" + str(e))
 				if sys.exc_info()[0]:
-					print _("Unexpected error: "), sys.exc_info()[0]
+					print(_("Unexpected error: "), sys.exc_info()[0])
 					traceback.print_exc(file=sys.stdout)
 		else:
-			print _("PushService Module is not callable")
+			print(_("PushService Module is not callable"))
 			return None

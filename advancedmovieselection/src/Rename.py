@@ -20,6 +20,7 @@
 #  distributed other than under the conditions noted above.
 #
 # for localized messages
+from __future__ import print_function
 from __init__ import _
 from Screens.Screen import Screen
 from Components.config import ConfigText, getConfigListEntry
@@ -98,7 +99,7 @@ class MovieRetitle(Screen, ConfigListScreen):
         if hasattr(current[1], 'help_window'):
             if current[1].help_window.instance is not None:
                 current[1].help_window.instance.show()
-                current[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
+                current[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
         
     def setCustomTitle(self):
         if self.is_vdir:
@@ -196,7 +197,7 @@ class MovieRetitle(Screen, ConfigListScreen):
                 for index, item in enumerate(self.movieConfig.rename):
                     i = item.split("\t")
                     if i[0] == dir_name:
-                        print dir_name + "\t" + name
+                        print(dir_name + "\t" + name)
                         del self.movieConfig.rename[index]
             else:
                 for index, item in enumerate(self.movieConfig.rename):

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # code by GeminiTeam
 
+from __future__ import print_function
 from enigma import eTimer
 
 from Screens.Screen import Screen
@@ -85,7 +86,7 @@ def parseCmd(result):
 							l.insert(0, LIST_TYPE_DEV)
 							entry.append(l)
 	except:
-		print "[eParted] <parse error>"
+		print("[eParted] <parse error>")
 		return []
 	return devlist
 
@@ -97,7 +98,7 @@ def myExecute(cmd, session, test=False):
 	else:
 		res = os_system(cmd)
 		result = (res >> 8)
-	print "[eParted]", result, cmd
+	print("[eParted]", result, cmd)
 	if result != 0 and session is not None:
 		session.open(MessageBox, _("Error command '%s'") % cmd, MessageBox.TYPE_ERROR, timeout=8)
 	return result
@@ -395,7 +396,7 @@ class Cpart(Screen):
 				#	if x[LIST_TYPE]==LIST_TYPE_PAR:
 				#		print x
 			except:
-				print "[eParted] <remove part>"
+				print("[eParted] <remove part>")
 			self.__Filllist()
 			
 	def KeyGreen(self):
@@ -425,7 +426,7 @@ class Cpart(Screen):
 		if mkpart:
 			fs = val[PA_FS]
 			com = "parted -s -a optimal %s mkpart primary %s %s%s %s%s" % (self.__devpath, fs, val[PA_START], self.__unit, val[PA_END], self.__unit)
-			list.append((com , _("create partition %s") % partnr, None))
+			list.append((com, _("create partition %s") % partnr, None))
 		
 		mountdev = None
 		if val[PA_FS] == "linux-swap":
@@ -441,7 +442,7 @@ class Cpart(Screen):
 				mkfs += " -f"
 
 		com = "%s %s%s" % (mkfs, self.__devpath, partnr)
-		list.append((com , _("make filesystem '%s' on partition %s (%d %s)") % (val[PA_FS], partnr, val[PA_SIZE], self.__unit), mountdev))
+		list.append((com, _("make filesystem '%s' on partition %s (%d %s)") % (val[PA_FS], partnr, val[PA_SIZE], self.__unit), mountdev))
 		
 	def __delPart2Comlist(self, list, val):
 		partnr = val[PA_NR]
@@ -522,7 +523,7 @@ class Cpartexe(Screen):
 		self.mountlist = []
 		list = []
 		for x in comlist:
-			print x
+			print(x)
 			list.append((x[1], None, x[0]))
 			if x[2] is not None:
 				self.mountlist.append(x[2])
@@ -543,7 +544,7 @@ class Cpartexe(Screen):
 			else:
 				return (device, device[5:])
 		except:
-			print "[eParted] <error get UUID>"
+			print("[eParted] <error get UUID>")
 		return None
 		
 	def __mountDevice(self):

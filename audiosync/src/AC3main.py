@@ -5,7 +5,7 @@ from AC3utils import AC3, PCM, AC3GLOB, PCMGLOB, AC3PCM, SKIN
 from AC3delay import AC3delay
 from enigma import ePoint
 from HelpableNumberActionMap import HelpableNumberActionMap
-from Components.Label import Label,MultiColorLabel
+from Components.Label import Label, MultiColorLabel
 from Components.Pixmap import MultiPixmap
 from Components.ProgressBar import ProgressBar
 from Components.config import config
@@ -126,7 +126,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
 
     def setActiveSlider(self):
         # Reset colors of all tabs
-        if self.AC3delay.whichAudio in (AC3,PCM):
+        if self.AC3delay.whichAudio in (AC3, PCM):
             self["ChannelImg"].setPixmapNum(1)
             self["GlobalImg"].setPixmapNum(0)
             self["ChannelLabel"].setForegroundColorNum(1)
@@ -176,7 +176,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
 
         self.changeSliderValue(iStep)
 
-    def changeSliderValue(self,iValue):
+    def changeSliderValue(self, iValue):
         sAudio = self.AC3delay.whichAudio
         iSliderValue = int(self["AudioSliderBar"].getValue())
         iSliderValue += iValue
@@ -193,7 +193,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
     def keyCancel(self):
         for sAudio in AC3PCM:
             iSliderValue = self.currentValue[sAudio]
-            if iSliderValue <> self.savedValue[sAudio]:
+            if iSliderValue != self.savedValue[sAudio]:
                 self.AC3delay.whichAudio = sAudio
                 self.AC3delay.setSystemDelay(sAudio, self.savedValue[sAudio], False)
         self.close()
@@ -202,10 +202,10 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
         sAudio = self.AC3delay.whichAudio
         iDelay = self["AudioSliderBar"].getValue()+self.lowerBound
         keyList = [
-            (_("Move plugin screen"),"1")
+            (_("Move plugin screen"), "1")
         ]
 
-        self.session.openWithCallback(self.DoShowMenu,ChoiceBox,_("Menu"),keyList)
+        self.session.openWithCallback(self.DoShowMenu, ChoiceBox, _("Menu"), keyList)
     
     def DoShowMenu(self, answer):
         if answer is not None:
@@ -214,13 +214,13 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
             else:
                 sResponse = _("Invalid selection")
                 iType = MessageBox.TYPE_ERROR
-                self.session.open(MessageBox, sResponse , iType)
+                self.session.open(MessageBox, sResponse, iType)
                 
     def menuSaveDelayToKey(self):
         sAudio = self.AC3delay.whichAudio
         iDelay = self["AudioSliderBar"].getValue()+self.lowerBound
 
-        AC3SetCustomValue(self.session,iDelay,self.keyStep)
+        AC3SetCustomValue(self.session, iDelay, self.keyStep)
         
     def setSliderInfo(self, iDelay):
         sAudio = self.AC3delay.whichAudio
@@ -241,19 +241,19 @@ class AC3SetCustomValue:
         self.keyStep = keyStep
         self.session = session
         self.iDelay = iDelay
-        self.session.openWithCallback(self.DoSetCustomValue,ChoiceBox,_("Select the key you want to set to %i ms") %(iDelay),self.getKeyList())
+        self.session.openWithCallback(self.DoSetCustomValue, ChoiceBox, _("Select the key you want to set to %i ms") %(iDelay), self.getKeyList())
 
     def getKeyList(self):
         keyList = []
-        for i,iValue in self.keyStep.iteritems():
+        for i, iValue in self.keyStep.iteritems():
             if i != "0":
-                keyList.append((_("Key %(key)s (current value: %(value)i ms)") %dict(key=i, value=iValue),i))
+                keyList.append((_("Key %(key)s (current value: %(value)i ms)") %dict(key=i, value=iValue), i))
         return keyList
 
-    def DoSetCustomValue(self,answer):
+    def DoSetCustomValue(self, answer):
         if answer is None:
-            self.session.open(MessageBox,_("Setting key canceled"), MessageBox.TYPE_INFO)
-        elif answer[1] in ("2" , "5" , "8"):
+            self.session.open(MessageBox, _("Setting key canceled"), MessageBox.TYPE_INFO)
+        elif answer[1] in ("2", "5", "8"):
             if answer[1] == "2":
                 config.plugins.AC3LipSync.absoluteStep2.setValue(self.iDelay)
                 config.plugins.AC3LipSync.absoluteStep2.save()
@@ -264,6 +264,6 @@ class AC3SetCustomValue:
                 config.plugins.AC3LipSync.absoluteStep8.setValue(self.iDelay)
                 config.plugins.AC3LipSync.absoluteStep8.save()
             self.keyStep[answer[1]] = self.iDelay
-            self.session.open(MessageBox,_("Key %(Key)s successfully set to %(delay)i ms") %dict(Key=answer[1],delay=self.iDelay), MessageBox.TYPE_INFO, 5)
+            self.session.open(MessageBox, _("Key %(Key)s successfully set to %(delay)i ms") %dict(Key=answer[1], delay=self.iDelay), MessageBox.TYPE_INFO, 5)
         else:
-            self.session.open(MessageBox,_("Invalid selection"), MessageBox.TYPE_ERROR, 5)
+            self.session.open(MessageBox, _("Invalid selection"), MessageBox.TYPE_ERROR, 5)

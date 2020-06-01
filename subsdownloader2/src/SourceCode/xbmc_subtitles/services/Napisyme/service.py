@@ -28,16 +28,16 @@ def getallsubs(content, title, subtitles_list, file_original_path):
       else:
           jezyk = jezyk
       link = "%s%s/" % (down_url, numer_napisu)
-      log( __name__ ,"Subtitles found: %s %s (link=%s)" % (tytul, wydanie, link))
+      log( __name__, "Subtitles found: %s %s (link=%s)" % (tytul, wydanie, link))
       obraz_flagi = "flags/%s.gif" % (jezyk)
       lang = twotofull(jezyk)
       tytul_pelny = '%s %s' % (tytul, wydanie)
-      wydanie_sclean = wydanie.replace(" ","")
-      wydanie_clean = wydanie_sclean.replace(",",";")
+      wydanie_sclean = wydanie.replace(" ", "")
+      wydanie_clean = wydanie_sclean.replace(",", ";")
       wydanie_srednik = '%s;' % (wydanie_clean)
       for wydania in re.finditer('(.+?);', wydanie_srednik):
           wydania = wydania.group()
-      wydania_clean = wydania.replace(";","")
+      wydania_clean = wydania.replace(";", "")
       wydania_upper = wydania_clean.upper()
       filepatch_upper = file_original_path.upper()
       if wydania_upper in filepatch_upper:
@@ -57,7 +57,7 @@ def search_subtitles( file_original_path, title, tvshow, year, season, episode, 
               tvshow = tvshow.replace(rok, "")
           else:
               continue
-      tvshow_plus = tvshow.replace(" ","+")
+      tvshow_plus = tvshow.replace(" ", "+")
       if len(str(season)) < 2:
         season_full = '0%s' % (season)
       else:
@@ -69,10 +69,10 @@ def search_subtitles( file_original_path, title, tvshow, year, season, episode, 
       url = '%s%s+%sx%s' % (main_url, tvshow_plus, season_full, episode_full)
     else:
       original_title = title #xbmc.getInfoLabel("VideoPlayer.OriginalTitle")
-      log( __name__ ,"Original title: [%s]" % (original_title))
-      movie_title_plus = original_title.replace(" ","+")
+      log( __name__, "Original title: [%s]" % (original_title))
+      movie_title_plus = original_title.replace(" ", "+")
       url = '%s%s' % (main_url, movie_title_plus)
-    log( __name__ , "Pobieram z [ %s ]" % (url))     
+    log( __name__, "Pobieram z [ %s ]" % (url))     
     response = urllib2.urlopen(url)
     content = response.read()
     getallsubs(content, title, subtitles_list, file_original_path)
@@ -85,7 +85,7 @@ def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, 
     language = subtitles_list[pos][ "language_name" ]
    
     local_tmp_file = os.path.join(tmp_sub_dir, "zipsubs.zip")
-    log( __name__ ,"Saving subtitles to '%s'" % (local_tmp_file))
+    log( __name__, "Saving subtitles to '%s'" % (local_tmp_file))
     
     local_file = open(zip_subs, "w" + "b")
     local_file.write(f.read())
@@ -93,4 +93,4 @@ def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, 
     zipped_file = zip_extractor(zip_subs, destination_dir = tmp_sub_dir)
     subs_file = zipped_file.extract_zipped_file() 
     os.remove(zip_subs)   
-    return True,language, subs_file #standard output
+    return True, language, subs_file #standard output

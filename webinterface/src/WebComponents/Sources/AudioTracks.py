@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Components.config import config
 from Components.Sources.Source import Source
 from Components.SystemInfo import SystemInfo
@@ -31,7 +32,7 @@ class AudioTracks(Source):
 			except ValueError:
 				cmd = -1
 
-			print "COMMAND is %s" % self.cmd
+			print("COMMAND is %s" % self.cmd)
 			if self.session.nav.getCurrentService().audioTracks().getNumberOfTracks() > cmd and cmd >= 0:
 				audio.selectTrack(cmd)
 				return _("Success")
@@ -64,7 +65,7 @@ class AudioTracks(Source):
 			currentTrack = audio.getCurrentTrack()
 
 			if n > 0:
-				print "[AudioTracks.py] got %s Audiotracks!" % (n)
+				print("[AudioTracks.py] got %s Audiotracks!" % (n))
 
 				x = 0
 				while x < n:
@@ -79,7 +80,7 @@ class AudioTracks(Source):
 					for lang in languages:
 						if cnt:
 							language += ' / '
-						if LanguageCodes.has_key(lang):
+						if lang in LanguageCodes:
 							language += LanguageCodes[lang][0]
 						else:
 							language += lang

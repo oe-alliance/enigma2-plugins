@@ -1,3 +1,4 @@
+from __future__ import print_function
 # Timer
 from enigma import eTimer
 
@@ -16,7 +17,7 @@ class AutoPoller:
 
 	def __init__(self):
 		# Init Timer
-		print "[AutoTimer] Auto Poll Enabled"
+		print("[AutoTimer] Auto Poll Enabled")
 		self.timer = eTimer()
 
 	def start(self):
@@ -32,12 +33,12 @@ class AutoPoller:
 	def query(self):
 		self.timer.stop()
 		from Screens.Standby import inStandby
-		print "[AutoTimer] Auto Poll"
+		print("[AutoTimer] Auto Poll")
 		if config.plugins.autotimer.skip_during_records.getValue() and NavigationInstance.instance.RecordTimer.isRecording():
 			print("[AutoTimer] Skip check during running records")
 		else:
 			if config.plugins.autotimer.onlyinstandby.value and inStandby:
-				print "[AutoTimer] Auto Poll Started"
+				print("[AutoTimer] Auto Poll Started")
 				# Ignore any program errors
 				try:
 					ret = autotimer.parseEPG(autoPoll = True)
@@ -46,7 +47,7 @@ class AutoPoller:
 					import traceback, sys
 					traceback.print_exc(file=sys.stdout)
 			elif not config.plugins.autotimer.onlyinstandby.value:
-				print "[AutoTimer] Auto Poll Started"
+				print("[AutoTimer] Auto Poll Started")
 				# Ignore any program errors
 				try:
 					ret = autotimer.parseEPG(autoPoll = True)

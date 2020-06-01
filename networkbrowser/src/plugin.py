@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # for localized messages
+from __future__ import print_function
 from __init__ import _
 
 import Components.Task
@@ -38,14 +39,14 @@ class MountAgainCheckPoller:
 			service = self.session.nav.getCurrentlyPlayingServiceReference()
 			isPlaying = service.toString()
 			if not self.session.nav.RecordTimer.isRecording() and not isPlaying.startswith('1:0:0:0:0:0:0:0:0:0:'):
-				print '[Networkbrowser MountAgain] Mounting network shares...'
+				print('[Networkbrowser MountAgain] Mounting network shares...')
 				task = Components.Task.PythonTask(job, _("Mounting network shares..."))
 				task.work = self.JobEpgCache
 				task.weighting = 1
 			elif self.session.nav.RecordTimer.isRecording():
-				print '[Networkbrowser MountAgain] Skipping, as recording is in place.'
+				print('[Networkbrowser MountAgain] Skipping, as recording is in place.')
 			elif isPlaying.startswith('1:0:0:0:0:0:0:0:0:0:'):
-				print '[Networkbrowser MountAgain] Skipping, as watching a movie file is in place.'
+				print('[Networkbrowser MountAgain] Skipping, as watching a movie file is in place.')
 		except:
 			pass
 		task = Components.Task.PythonTask(job, _("Adding schedule..."))
@@ -54,7 +55,7 @@ class MountAgainCheckPoller:
 		return job
 
 	def JobEpgCache(self):
-		print '[Networkbrowser MountAgain] mounting network shares.'
+		print('[Networkbrowser MountAgain] mounting network shares.')
 		iAutoMount.getAutoMountPoints() 
 
 	def JobSched(self):
@@ -71,7 +72,7 @@ def autostart(reason, session=None, **kwargs):
 		# session.nav.RecordTimer.isRecording()
 
 def NetworkBrowserMain(session, iface = None, **kwargs):
-	session.open(NetworkBrowser,iface, plugin_path)
+	session.open(NetworkBrowser, iface, plugin_path)
 
 def MountManagerMain(session, iface = None, **kwargs):
 	session.open(AutoMountManager, iface, plugin_path)
@@ -96,7 +97,7 @@ def Plugins(path, **kwargs):
 	global plugin_path
 	plugin_path = path
 	return [
-		PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART,PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart),
+		PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart),
 		PluginDescriptor(name=_("Network Browser"), description=_("Search for network shares"), where = PluginDescriptor.WHERE_NETWORKMOUNTS, fnc={"ifaceSupported": NetworkBrowserCallFunction, "menuEntryName": lambda x: _("Network Browser"), "menuEntryDescription": lambda x: _("Search for network shares...")}),
 		PluginDescriptor(name=_("Mount Manager"), description=_("Manage network shares"), where = PluginDescriptor.WHERE_NETWORKMOUNTS, fnc={"ifaceSupported": MountManagerCallFunction, "menuEntryName": lambda x: _("Mount Manager"), "menuEntryDescription": lambda x: _("Manage your network shares...")}),
 		PluginDescriptor(name=_("Mount Again"), description=_("Attempt to mount shares again"), where = PluginDescriptor.WHERE_NETWORKMOUNTS, fnc={"ifaceSupported": RemountCallFunction, "menuEntryName": lambda x: _("Mount again"), "menuEntryDescription": lambda x: _("Attempt to recover lost mounts (in background)")})

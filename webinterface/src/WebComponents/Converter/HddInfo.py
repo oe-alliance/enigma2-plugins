@@ -9,9 +9,9 @@ class HddInfo(Converter):
 		Converter.__init__(self, type)
 
 		self.type = {
-					 "Model" : self.MODEL,
-					 "Capacity" : self.CAPACITY,
-					 "Free" : self.FREE,
+					 "Model": self.MODEL,
+					 "Capacity": self.CAPACITY,
+					 "Free": self.FREE,
 					 }[type]
 
 	def getText(self):

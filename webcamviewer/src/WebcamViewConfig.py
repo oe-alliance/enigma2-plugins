@@ -1,10 +1,11 @@
+from __future__ import print_function
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.config import config, getConfigListEntry
 from Components.ActionMap import ActionMap
 
-class WebcamViewerMenu(ConfigListScreen,Screen):
+class WebcamViewerMenu(ConfigListScreen, Screen):
 	skin = """
 		<screen position="100,100" size="550,400" title="Setup" >
 		<widget name="config" position="0,0" size="550,360" scrollbarMode="showOnDemand" />
@@ -31,14 +32,14 @@ class WebcamViewerMenu(ConfigListScreen,Screen):
 		}, -2)
 
 	def save(self):
-		print "saving"
+		print("saving")
 		for x in self["config"].list:
 			x[1].save()
-		self.close(True,self.session)
+		self.close(True, self.session)
 
 	def cancel(self):
-		print "cancel"
+		print("cancel")
 		for x in self["config"].list:
 			x[1].cancel()
-		self.close(False,self.session)
+		self.close(False, self.session)
 

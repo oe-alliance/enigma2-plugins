@@ -1,5 +1,6 @@
+from __future__ import print_function
 from Components.Sources.Source import Source
-from Screens.ChannelSelection import service_types_tv, service_types_radio, FLAG_SERVICE_NEW_FOUND,MODE_TV, MODE_RADIO
+from Screens.ChannelSelection import service_types_tv, service_types_radio, FLAG_SERVICE_NEW_FOUND, MODE_TV, MODE_RADIO
 from enigma import eServiceReference, eServiceCenter
 from Tools.HardwareInfo import HardwareInfo
 service_types_tv_hd = '1:7:1:0:0:0:0:0:0:0:(type == 17) || (type == 25) || (type == 134) || (type == 195)'
@@ -25,7 +26,7 @@ class SatellitesList(Source):
 		return func(self.mode)
 
 	def buildList(self, mode):
-		print "[WebComponents.SatellitesList] buildList with param = %d" % mode
+		print("[WebComponents.SatellitesList] buildList with param = %d" % mode)
 		if mode == MODE_TV:
 			s_type = service_types_tv
 		else:

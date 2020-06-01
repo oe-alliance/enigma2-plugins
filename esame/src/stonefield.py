@@ -28,7 +28,7 @@ class StoneField:
 			tmp = Stone()
 			self.field.append(tmp)
 
-		self.newGame(board,colors)
+		self.newGame(board, colors)
 		self.m_gotBonus = False
 
 	def count(self, color):

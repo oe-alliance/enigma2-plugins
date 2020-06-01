@@ -1,3 +1,4 @@
+from __future__ import print_function
 Version = '$Header$';
 
 from __init__ import *
@@ -90,13 +91,13 @@ class WebIfConfigScreen(ConfigListScreen, Screen):
 		self.setTitle(_("Webinterface: Main Setup"))
 
 	def save(self):
-		print "[Webinterface] Saving Configuration"
+		print("[Webinterface] Saving Configuration")
 		for x in self["config"].list:
 			x[1].save()
 		self.close(True, self.session)
 
 	def cancel(self):
-		print "[Webinterface] Cancel setup changes"
+		print("[Webinterface] Cancel setup changes")
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close(False, self.session)

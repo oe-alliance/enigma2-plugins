@@ -87,11 +87,11 @@ class PipServiceRelationSetup(Screen):
 		self["key_yellow"] = StaticText(_("Add"))
 		self["key_blue"] = StaticText(_("Edit"))
 		self["entrylist"] = PipServiceRelationEntryList([])
-		self["actions"] = ActionMap(["WizardActions","MenuActions","ShortcutActions"],
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
 			{
-			 "ok"	:	self.keyBlue,
-			 "back"	:	self.keyClose,
-			 "red"	:	self.keyDelete,
+			 "ok":	self.keyBlue,
+			 "back":	self.keyClose,
+			 "red":	self.keyDelete,
 			 "green":	self.keyClose,
 			 "yellow":	self.keyYellow,
 			 "blue": 	self.keyBlue,
@@ -110,10 +110,10 @@ class PipServiceRelationSetup(Screen):
 		except: sel = None
 		if sel is None:
 			return
-		self.session.openWithCallback(self.updateList,PipServiceRelationEntryConfigScreen,sel, self["entrylist"].configPSR)
+		self.session.openWithCallback(self.updateList, PipServiceRelationEntryConfigScreen, sel, self["entrylist"].configPSR)
 
 	def keyYellow(self):
-		self.session.openWithCallback(self.updateList,PipServiceRelationEntryConfigScreen,None, self["entrylist"].configPSR)
+		self.session.openWithCallback(self.updateList, PipServiceRelationEntryConfigScreen, None, self["entrylist"].configPSR)
 
 	def keyDelete(self):
 		try:sel = self["entrylist"].l.getCurrentSelection()[0]
@@ -153,7 +153,7 @@ class PipServiceRelationEntryList(MenuList):
 			res = [
 				c,
 				(eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 320, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, ServiceReference(eServiceReference(c[0])).getServiceName()),
-				(eListboxPythonMultiContent.TYPE_TEXT, 330, 0,320, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, ServiceReference(eServiceReference(c[1])).getServiceName()),
+				(eListboxPythonMultiContent.TYPE_TEXT, 330, 0, 320, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, ServiceReference(eServiceReference(c[1])).getServiceName()),
 			]
 			list.append(res)
 		self.list = list
@@ -216,7 +216,7 @@ class PipServiceRelationEntryConfigScreen(ConfigListScreen, Screen):
 			else:
 				sname = ""
 			descr = _("Related PiP service for %s") % sname
-		self.session.openWithCallback(boundFunction(self.channelSelected,index), SimpleChannelSelection, descr)
+		self.session.openWithCallback(boundFunction(self.channelSelected, index), SimpleChannelSelection, descr)
 			
 	def channelSelected(self, index, ref = None):
 		if ref:
@@ -257,7 +257,7 @@ def PictureInPicture__init__(self, session):
 
 def playService(self, service):
 	current_service = service
-	n_service = self.pipServiceRelation.get(service.toString(),None)
+	n_service = self.pipServiceRelation.get(service.toString(), None)
 	if n_service is not None:
 		service = eServiceReference(n_service)
 	if service and (service.flags & eServiceReference.isGroup):

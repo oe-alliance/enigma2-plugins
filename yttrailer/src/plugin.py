@@ -1,3 +1,4 @@
+from __future__ import print_function
 #  YTTrailer
 #
 #  Coded by Dr.Best (c) 2011
@@ -47,9 +48,9 @@ from . import _
 
 config.plugins.yttrailer = ConfigSubsection()
 config.plugins.yttrailer.show_in_extensionsmenu = ConfigYesNo(default = False)
-config.plugins.yttrailer.best_resolution = ConfigSelection(default="2", choices = [("0", _("1080p")),("1", _("720p")), ("2", _("No HD streaming"))])
+config.plugins.yttrailer.best_resolution = ConfigSelection(default="2", choices = [("0", _("1080p")), ("1", _("720p")), ("2", _("No HD streaming"))])
 config.plugins.yttrailer.ext_descr = ConfigText(default="german", fixed_size = False)
-config.plugins.yttrailer.max_results =  ConfigInteger(5,limits = (1, 10))
+config.plugins.yttrailer.max_results =  ConfigInteger(5, limits = (1, 10))
 config.plugins.yttrailer.close_player_with_exit =  ConfigYesNo(default = False)
 
 from Screens.EventView import EventViewBase
@@ -176,7 +177,7 @@ class YTTrailer:
 	def setServiceReference(self, entry):
 		url = self.getVideoUrl(entry)
 		if url:
-			ref = eServiceReference(4097,0,url)
+			ref = eServiceReference(4097, 0, url)
 			ref.setName(entry.media.title.text)
 		else:
 			ref = None
@@ -203,9 +204,9 @@ class YTTrailer:
 		}
 
 		VIDEO_FMT_PRIORITY_MAP = {
-			'18' : 4, #MP4 360p
-			'35' : 5, #FLV 480p
-			'34' : 6, #FLV 360p
+			'18': 4, #MP4 360p
+			'35': 5, #FLV 480p
+			'34': 6, #FLV 360p
 		}
 
 		if int(config.plugins.yttrailer.best_resolution.value) <= 1:
@@ -223,10 +224,10 @@ class YTTrailer:
 		watch_url = 'http://www.youtube.com/watch?v=%s&gl=US&hl=en' % video_id
 		watchrequest = Request(watch_url, None, std_headers)
 		try:
-			print "[YTTrailer] trying to find out if a HD Stream is available",watch_url
+			print("[YTTrailer] trying to find out if a HD Stream is available", watch_url)
 			watchvideopage = urlopen2(watchrequest).read()
-		except (URLError, HTTPException, socket_error), err:
-			print "[YTTrailer] Error: Unable to retrieve watchpage - Error code: ", str(err)
+		except (URLError, HTTPException, socket_error) as err:
+			print("[YTTrailer] Error: Unable to retrieve watchpage - Error code: ", str(err))
 			return video_url
 
 		# Get video info
@@ -238,33 +239,33 @@ class YTTrailer:
 				videoinfo = parse_qs(infopage)
 				if ('url_encoded_fmt_stream_map' or 'fmt_url_map') in videoinfo:
 					break
-			except (URLError, HTTPException, socket_error), err:
-				print "[YTTrailer] Error: unable to download video infopage",str(err)
+			except (URLError, HTTPException, socket_error) as err:
+				print("[YTTrailer] Error: unable to download video infopage", str(err))
 				return video_url
 
 		if ('url_encoded_fmt_stream_map' or 'fmt_url_map') not in videoinfo:
 			# Attempt to see if YouTube has issued an error message
 			if 'reason' not in videoinfo:
-				print '[YTTrailer] Error: unable to extract "url_encoded_fmt_stream_map" or "fmt_url_map" parameter for unknown reason'
+				print('[YTTrailer] Error: unable to extract "url_encoded_fmt_stream_map" or "fmt_url_map" parameter for unknown reason')
 			else:
 				reason = unquote_plus(videoinfo['reason'][0])
-				print '[YTTrailer] Error: YouTube said: %s' % reason.decode('utf-8')
+				print('[YTTrailer] Error: YouTube said: %s' % reason.decode('utf-8'))
 			return video_url
 
 		video_fmt_map = {}
 		fmt_infomap = {}
 
-		if videoinfo.has_key('url_encoded_fmt_stream_map'):
+		if 'url_encoded_fmt_stream_map' in videoinfo:
 			tmp_fmtUrlDATA = videoinfo['url_encoded_fmt_stream_map'][0].split(',')
 		else:
 			tmp_fmtUrlDATA = videoinfo['fmt_url_map'][0].split(',')
 		for fmtstring in tmp_fmtUrlDATA:
 			fmturl = fmtid = ""
-			if videoinfo.has_key('url_encoded_fmt_stream_map'):
+			if 'url_encoded_fmt_stream_map' in videoinfo:
 				try:
 					for arg in fmtstring.split('&'):
 						if arg.find('=') >= 0:
-							print arg.split('=')
+							print(arg.split('='))
 							key, value = arg.split('=')
 							if key == 'itag':
 								if len(value) > 3:
@@ -273,20 +274,20 @@ class YTTrailer:
 							elif key == 'url':
 								fmturl = value
 
-					if fmtid != "" and fmturl != "" and VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
+					if fmtid != "" and fmturl != "" and fmtid in VIDEO_FMT_PRIORITY_MAP:
 						video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
 						fmt_infomap[int(fmtid)] = "%s" %(unquote_plus(fmturl))
 					fmturl = fmtid = ""
 
 				except:
-					print "error parsing fmtstring:",fmtstring
+					print("error parsing fmtstring:", fmtstring)
 
 			else:
-				(fmtid,fmturl) = fmtstring.split('|')
-			if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid) and fmtid != "":
+				(fmtid, fmturl) = fmtstring.split('|')
+			if fmtid in VIDEO_FMT_PRIORITY_MAP and fmtid != "":
 				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
 				fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
-		print "[YTTrailer] got",sorted(fmt_infomap.iterkeys())
+		print("[YTTrailer] got", sorted(fmt_infomap.iterkeys()))
 		if video_fmt_map and len(video_fmt_map):
 			if self.l3cert:
 				l3key = validate_cert(self.l3cert, l2key)
@@ -295,10 +296,10 @@ class YTTrailer:
 					val = etpm.computeSignature(rnd)
 					result = decrypt_block(val, l3key)
 					if result[80:88] == rnd:
-						print "[YTTrailer] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
+						print("[YTTrailer] found best available video format:", video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid'])
 						best_video = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]
 						video_url = "%s" %(best_video['fmturl'].split(';')[0])
-						print "[YTTrailer] found best available video url:",video_url
+						print("[YTTrailer] found best available video url:", video_url)
 
 		return video_url
 
@@ -354,8 +355,8 @@ class TrailerList(GUIComponent, object):
 	def buildList(self, entry):
 		width = self.l.getItemSize().width()
 		res = [ None ]
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width , 24, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, entry.media.title.text))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 28, width , 40, 1, RT_WRAP, entry.media.description.text))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, 24, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, entry.media.title.text))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 28, width, 40, 1, RT_WRAP, entry.media.description.text))
 		return res
 
 	def getCurrent(self):

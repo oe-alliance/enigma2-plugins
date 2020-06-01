@@ -55,7 +55,7 @@ class VersionList(GUIComponent):
     def buildMovieSelectionListEntry(self, version):
         width = self.l.getItemSize().width()
         res = [ None ]        
-        res.append((eListboxPythonMultiContent.TYPE_TEXT, 5, 2, width - 30 , 23, 0, RT_HALIGN_LEFT, "%s" % version.getVersion()))
+        res.append((eListboxPythonMultiContent.TYPE_TEXT, 5, 2, width - 30, 23, 0, RT_HALIGN_LEFT, "%s" % version.getVersion()))
         return res
 
     GUI_WIDGET = eListbox

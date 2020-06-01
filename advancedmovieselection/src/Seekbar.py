@@ -187,9 +187,9 @@ def doBind(instance):
     if not instance.bound:
         for ctx in instance.contexts:
             if ctx == "InfobarSeekActions":
-                if instance.actions.has_key("seekFwdManual"):
+                if "seekFwdManual" in instance.actions:
                     instance.actions["seekbarRight"] = instance.actions["seekFwdManual"]
-                if instance.actions.has_key("seekBackManual"):
+                if "seekBackManual" in instance.actions:
                     instance.actions["seekbarLeft"] = instance.actions["seekBackManual"]
             DoBind(instance)
 

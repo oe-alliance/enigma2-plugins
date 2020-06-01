@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from enigma import eServiceReference
 from enigma import iPlayableService
 from Components.ServiceEventTracker import ServiceEventTracker
@@ -22,7 +23,7 @@ class StreamPlayer:
         self.session = session
         self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
         self.onStateChanged = []
-        self.__event_tracker = ServiceEventTracker(screen=self,eventmap=
+        self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
             {
                 iPlayableService.evStart: self.__onStart,
                 iPlayableService.evEOF: self.__onStop,
@@ -33,15 +34,15 @@ class StreamPlayer:
     def __onStop(self):
         self.stop()
         
-    def setSession(self,session):
+    def setSession(self, session):
         self.session = session
         
-    def setPlaylist(self,playlist):
+    def setPlaylist(self, playlist):
         if self.playlist is not None:
             self.currentplaylistitemnumber = 0 
         self.playlist = playlist
         
-    def stateChanged(self,reason):
+    def stateChanged(self, reason):
         for i in self.onStateChanged:
             i(reason)   
 
@@ -53,12 +54,12 @@ class StreamPlayer:
             remaining = int((track["duration"]/1000) - (time() - self.trackstarttime))
             minutes = int(remaining/60)
             seconds = int(remaining-(minutes*60))
-            def shiftchars(integer,char):
-                if integer in range(0,10):
+            def shiftchars(integer, char):
+                if integer in range(0, 10):
                     return char+str(integer)
                 else:
                     return str(integer)
-            return "-%s:%s"%(shiftchars(minutes," "), shiftchars(seconds,"0"))
+            return "-%s:%s"%(shiftchars(minutes, " "), shiftchars(seconds, "0"))
     
     def play(self,tracknumber=False):
         if tracknumber is False:
@@ -68,13 +69,13 @@ class StreamPlayer:
         
         track = self.playlist.getTrack(self.currentplaylistitemnumber)
         if track is False:
-            print "no track to play"
+            print("no track to play")
         elif track['location'] != "no location":
-            print "playing item "+str(self.currentplaylistitemnumber) +"/"+str(self.playlist.length)+" with url ",track['location']
-            reactor.callLater(1, self._delayedPlay, eServiceReference(4097,0,track['location']))
+            print("playing item "+str(self.currentplaylistitemnumber) +"/"+str(self.playlist.length)+" with url ", track['location'])
+            reactor.callLater(1, self._delayedPlay, eServiceReference(4097, 0, track['location']))
             self.is_playing = True
 
-    def _delayedPlay(self,sref):
+    def _delayedPlay(self, sref):
         if self.is_playing: # making sure, that no one presses stop while we had wait 
             self.session.nav.playService(sref)
     
@@ -101,7 +102,7 @@ class StreamPlayer:
             x()
         self.stop()
     
-    def getMetadata(self,key):
+    def getMetadata(self, key):
         try:
             track = self.playlist.getTrack(self.currentplaylistitemnumber)
             return track[key]

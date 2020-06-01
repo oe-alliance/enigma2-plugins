@@ -1641,7 +1641,7 @@ def addAutotimerFromEventSilent(session, evt = None, service = None):
 	newTimer.name = name
 	newTimer.match = name
 	if newTimer.timespan[0]:
-		newTimer.timespan = ((begin[3], begin[4]), (end[3], end[4]),False)
+		newTimer.timespan = ((begin[3], begin[4]), (end[3], end[4]), False)
 	
 	if newTimer.include:
 		includes = [

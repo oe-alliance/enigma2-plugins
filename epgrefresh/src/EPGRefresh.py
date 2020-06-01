@@ -85,7 +85,7 @@ class EPGRefresh:
 
 	def removeFinishNotifier(self, notifier):
 		notifierKey = str(notifier)
-		if self.finishNotifiers.has_key(notifierKey):
+		if notifierKey in self.finishNotifiers:
 			self.finishNotifiers.pop(notifierKey)
 
 	def readConfiguration(self):
@@ -268,7 +268,7 @@ class EPGRefresh:
 			myref = eServiceReference(bouquet.sref)
 			list = serviceHandler.list(myref)
 			if list is not None:
-				while 1:
+				while True:
 					s = list.getNext()
 					# TODO: I wonder if its sane to assume we get services here (and not just new lists)
 					if s.valid():

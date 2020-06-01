@@ -19,6 +19,7 @@
 #  modify it (if you keep the license), but it may not be commercially 
 #  distributed other than under the conditions noted above.
 #
+from __future__ import print_function
 from __init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -128,7 +129,7 @@ class ClientSetupList(GUIComponent):
         self.list = []
         for client in getClients():
             self.list.append((client,))
-            print client.getAddress()
+            print(client.getAddress())
         self.l.setList(self.list)
 
     def remove(self, x):

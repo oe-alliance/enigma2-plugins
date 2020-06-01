@@ -21,6 +21,7 @@
 #
 
 # for localized messages
+from __future__ import print_function
 from . import _
 
 from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, \
@@ -79,11 +80,11 @@ class MSNWeatherPluginEntriesListConfigScreen(Screen):
 		self["key_yellow"] = StaticText(_("Edit"))
 		self["key_blue"] = StaticText(_("Delete"))
 		self["entrylist"] = WeatherPluginEntryList([])
-		self["actions"] = ActionMap(["WizardActions","MenuActions","ShortcutActions"],
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
 			{
-			 "ok"	:	self.keyOK,
-			 "back"	:	self.keyClose,
-			 "red"	:	self.keyClose,
+			 "ok":	self.keyOK,
+			 "back":	self.keyClose,
+			 "red":	self.keyClose,
 			 "green":	self.keyGreen,			 
 			 "yellow":	self.keyYellow,
 			 "blue": 	self.keyDelete,
@@ -97,7 +98,7 @@ class MSNWeatherPluginEntriesListConfigScreen(Screen):
 		self.close(-1, None)
 
 	def keyGreen(self):
-		self.session.openWithCallback(self.updateList,MSNWeatherPluginEntryConfigScreen,None)
+		self.session.openWithCallback(self.updateList, MSNWeatherPluginEntryConfigScreen, None)
 
 	def keyOK(self):
 		try:sel = self["entrylist"].l.getCurrentSelection()[0]
@@ -109,7 +110,7 @@ class MSNWeatherPluginEntriesListConfigScreen(Screen):
 		except: sel = None
 		if sel is None:
 			return
-		self.session.openWithCallback(self.updateList,MSNWeatherPluginEntryConfigScreen,sel)
+		self.session.openWithCallback(self.updateList, MSNWeatherPluginEntryConfigScreen, sel)
 
 	def keyDelete(self):
 		try:sel = self["entrylist"].l.getCurrentSelection()[0]
@@ -204,7 +205,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 		
 	def searchLocation(self):
 		if self.current.city.value != "":
-			language = config.osd.language.value.replace("_","-")
+			language = config.osd.language.value.replace("_", "-")
 			if language == "en-EN": # hack
 				language = "en-US"
 			elif language == "no-NO": # hack
@@ -257,7 +258,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 			errormessage = ""
 			root = cet_fromstring(xmlstring)
 			for childs in root:
-				if childs.tag == "weather" and childs.attrib.has_key("errormessage"):
+				if childs.tag == "weather" and "errormessage" in childs.attrib:
 					errormessage = childs.attrib.get("errormessage").encode("utf-8", 'ignore')
 					break
 			if len(errormessage) !=0:
@@ -267,7 +268,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 			
 	def error(self, error = None):
 		if error is not None:
-			print error
+			print(error)
 		
 	def searchCallback(self, result):
 		if result:
@@ -294,11 +295,11 @@ class MSNWeatherPluginSearch(Screen):
 		self["key_red"] = StaticText(_("Back"))
 		self["key_green"] = StaticText(_("OK"))		
 		self["entrylist"] = MSNWeatherPluginSearchResultList([])
-		self["actions"] = ActionMap(["WizardActions","MenuActions","ShortcutActions"],
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
 			{
-			 "ok"	:	self.keyOK,
+			 "ok":	self.keyOK,
 			 "green": self.keyOK,
-			 "back"	:	self.keyClose,
+			 "back":	self.keyClose,
 			 "red": self.keyClose,
 			 }, -1)
 		self.updateList(xmlstring)

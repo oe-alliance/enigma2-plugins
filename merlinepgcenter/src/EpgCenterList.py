@@ -690,7 +690,7 @@ class EpgCenterList(GUIComponent):
 		if searchString == None:
 			self.list = []
 		else:
-			searchString = searchString.decode('utf-8').encode("iso-8859-1","replace")
+			searchString = searchString.decode('utf-8').encode("iso-8859-1", "replace")
 			self.list = self.epgcache.search(('0IRBDTSE', 1024, eEPGCache.PARTIAL_TITLE_SEARCH, searchString, eEPGCache.NO_CASE_CHECK)) or []
 			if config.plugins.merlinEpgCenter.limitSearchToBouquetServices.value:
 				for item in self.list[:]:

@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Plugins.Extensions.WebInterface.WebComponents.Sources.Timer import Timer
 from Plugins.SystemPlugins.vps.Vps import vps_timers
 import time
@@ -21,7 +22,7 @@ class Vps(Timer):
 					vpsplugin_time = None
 			for timer in self.recordtimer.timer_list + self.recordtimer.processed_timers:
 				if sRef == str(timer.service_ref) and eit == timer.eit:
-					print "[WebComponents.Vps] addTimerByEventID: Found new timer, changing!"
+					print("[WebComponents.Vps] addTimerByEventID: Found new timer, changing!")
 					timer.vpsplugin_enabled = vpsplugin_enabled
 					timer.vpsplugin_overwrite = vpsplugin_overwrite
 					timer.vpsplugin_time = vpsplugin_time
@@ -56,7 +57,7 @@ class Vps(Timer):
 				if sRef == str(timer.service_ref) and begin == int(timer.begin) \
 						and end == int(timer.end) and name == timer.name \
 						and description == timer.description:
-					print "[WebComponents.Vps] editTimer: Timer changed!"
+					print("[WebComponents.Vps] editTimer: Timer changed!")
 					timer.vpsplugin_enabled = vpsplugin_enabled
 					timer.vpsplugin_overwrite = vpsplugin_overwrite
 					timer.vpsplugin_time = vpsplugin_time
@@ -81,7 +82,7 @@ class Vps(Timer):
 			curappend(item.vpsplugin_time or -1)
 			append(curlist)
 			i += 1
-		print newlist
+		print(newlist)
 		return newlist
 	list = property(getList)
 

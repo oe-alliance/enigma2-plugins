@@ -16,6 +16,7 @@
 #    along with periscope; if not, write to the Free Software
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from __future__ import print_function
 import urllib
 import urllib2
 import logging
@@ -29,16 +30,16 @@ from Plugins.Extensions.SubsDownloader2.SourceCode.periscope import SubtitleData
 log = logging.getLogger(__name__)
 
 exceptions = {
-    'the office' : 10358,
-    'the office us' : 10358,
-    'greys anatomy' : 3733,
-    'sanctuary us' : 7904,
-    'human target 2010' : 12986,
-    'csi miami' : 2187,
-    'castle 2009' : 12708,
-    'chase 2010' : 14228,
-    'the defenders 2010' : 14225,
-    'hawaii five-0 2010' : 14211,
+    'the office': 10358,
+    'the office us': 10358,
+    'greys anatomy': 3733,
+    'sanctuary us': 7904,
+    'human target 2010': 12986,
+    'csi miami': 2187,
+    'castle 2009': 12708,
+    'chase 2010': 14228,
+    'the defenders 2010': 14225,
+    'hawaii five-0 2010': 14211,
 }
 
 class BierDopje(SubtitleDatabase.SubtitleDB):
@@ -87,7 +88,7 @@ class BierDopje(SubtitleDatabase.SubtitleDB):
          
         try:
             subs = self.query(fname, langs)
-            print str(subs)
+            print(str(subs))
             
             
             if not subs and fname.rfind(".[") > 0:
@@ -97,7 +98,7 @@ class BierDopje(SubtitleDatabase.SubtitleDB):
                 return subs
             else:
                 return subs
-        except Exception, e:
+        except Exception as e:
             log.exception("Error raised by plugin")
             return []
             
@@ -128,9 +129,9 @@ class BierDopje(SubtitleDatabase.SubtitleDB):
         
         # Query the show to get the show id
         showName = guessedData['name'].lower()
-        if exceptions.has_key(showName):
+        if showName in exceptions:
             show_id = exceptions.get(showName)
-        elif self.cache['showids'].has_key(showName):
+        elif showName in self.cache['showids']:
             show_id = self.cache['showids'].get(showName)
         else :
             getShowId_url = "%sGetShowByName/%s" %(self.api, urllib.quote(showName))

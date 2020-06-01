@@ -39,7 +39,7 @@ class PictureView(Screen):
 
 		self["picture"] = Pixmap()
 
-		self["actions"] = ActionMap(["OkCancelActions","MovieSelectionActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "MovieSelectionActions"],
 		{
 			"cancel": self.exit,
 			"ok": self.exit,
@@ -170,18 +170,18 @@ class UnwetterMain(Screen):
 
 		self.switchDeA(load=True)
 
-	def hauptmenu(self,output):
+	def hauptmenu(self, output):
 		self.loadinginprogress = False
 		trans = { '&szlig;' : 'ß' , '&auml;' : 'ä' , '&ouml;' : 'ö' , '&uuml;' : 'ü' , '&Auml;' : 'Ä', '&Ouml;' : 'Ö' , '&Uuml;' : 'Ü'}
-		output= util.unescape(output,trans)
+		output= util.unescape(output, trans)
 
 		if self.land == "de":
 			startpos = output.find('<div id="navigation">')
 			endpos = output.find('<a class="section-link" title="FAQ"', startpos)
 			bereich = output[startpos:endpos]
-			a = findall(r'href=(?P<text>.*?)</a>',bereich)
+			a = findall(r'href=(?P<text>.*?)</a>', bereich)
 			for x in a:
-				x = x.replace('">',"#").replace('"',"").split('#')
+				x = x.replace('">', "#").replace('"', "").split('#')
 				if not len(x) > 1:
 					break
 				if x[0] == "index.html":
@@ -197,9 +197,9 @@ class UnwetterMain(Screen):
 			startpos = output.find('<div id="select_dropdownprovinces"')
 			endpos = output.find('</div>', startpos)
 			bereich = output[startpos:endpos]
-			a = findall(r'<a href=(?P<text>.*?)</a>',bereich)
+			a = findall(r'<a href=(?P<text>.*?)</a>', bereich)
 			for x in a[1:13]:
-				x = x.replace('">',"#").replace('"',"")
+				x = x.replace('">', "#").replace('"', "")
 				if x != '#&nbsp;':
 						x = x.split('#')
 						if not len(x) > 1:
@@ -304,29 +304,29 @@ class UnwetterMain(Screen):
 		else:
 			self["thumbnail"].hide()
 
-	def getPicUrl(self,output):
+	def getPicUrl(self, output):
 		self.loadinginprogress = False
 		if self.land == "de":
 			startpos = output.find('<!-- Anfang msg_Box Content -->')
 			endpos = output.find('<!-- Ende msg_Box Content -->', startpos)
 			bereich = output[startpos:endpos]
-			picurl = search(r'<img src="(?P<text>.*?)" width=',bereich)
+			picurl = search(r'<img src="(?P<text>.*?)" width=', bereich)
 			picurl = self.baseurl + picurl.group(1)
 		else:
 			picurl = search(r'<img class="map mapper" src="(?P<url>.*?)" lang=', output)
-			picurl = self.baseurl + picurl.group(1).replace('&amp;','&')
+			picurl = self.baseurl + picurl.group(1).replace('&amp;', '&')
 		self.downloadPic(picurl)
 
-	def getPic(self,output):
+	def getPic(self, output):
 		self.loadinginprogress = False
 		f = open(self.picfile, "wb")
 		f.write(output)
 		f.close()
 
-	def getWeatherReport(self,output):
+	def getWeatherReport(self, output):
 		self.loadinginprogress = False
 		trans = { '&szlig;' : 'ß' , '&auml;' : 'ä' , '&ouml;' : 'ö' , '&uuml;' : 'ü' , '&Auml;' : 'Ä', '&Ouml;' : 'Ö' , '&Uuml;' : 'Ü'}
-		output= util.unescape(output,trans)
+		output= util.unescape(output, trans)
 		if self.land == "de":
 			startpos = output.find('<!-- Anfang msg_Box Content -->')
 			endpos = output.find('<!-- Ende msg_Box Content -->')
@@ -337,18 +337,18 @@ class UnwetterMain(Screen):
 			endpos = output.find('</div>', startpos)
 			bereich = output[startpos:endpos]
 
-		bereich = sub('<br\s*/?>',"\n",bereich)
-		bereich = sub('<[^>]*>',"",bereich)
-		bereich = sub('Fronten- und Isobarenkarte.*',"",bereich)
+		bereich = sub('<br\s*/?>', "\n", bereich)
+		bereich = sub('<[^>]*>', "", bereich)
+		bereich = sub('Fronten- und Isobarenkarte.*', "", bereich)
 		bereich = bereich.strip()
 		bereich = sub("\n[\s\n]+", "\n\n", bereich)
 
 		f = open(self.reportfile, "w")
 		f.write("%s" % bereich)
 		f.close()
-		self.session.open(Console,_("Warnlagebericht"),["cat %s" % self.reportfile])
+		self.session.open(Console, _("Warnlagebericht"), ["cat %s" % self.reportfile])
 
-	def downloadError(self,output):
+	def downloadError(self, output):
 		self.loadinginprogress = False
 		self["statuslabel"].setText("Fehler beim Download")
 
@@ -356,11 +356,11 @@ class UnwetterMain(Screen):
 		self.loadinginprogress = True
 		getPage(self.menuurl).addCallback(self.hauptmenu).addErrback(self.downloadError)
 
-	def downloadPicUrl(self,url):
+	def downloadPicUrl(self, url):
 		self.loadinginprogress = True
 		getPage(url).addCallback(self.getPicUrl).addErrback(self.downloadError)
 
-	def downloadPic(self,picurl):
+	def downloadPic(self, picurl):
 		headers = {}
 		self.loadinginprogress = True
 #		self["statuslabel"].setText("Lade Bild: %s" % picurl)
@@ -378,7 +378,7 @@ class UnwetterMain(Screen):
 	def switchDeA(self, load=False):
 		if load:
 			try:
-				f = open(pluginpath + "/last.cfg","r")
+				f = open(pluginpath + "/last.cfg", "r")
 				self.land = f.read()
 				f.close
 			except:
@@ -399,7 +399,7 @@ class UnwetterMain(Screen):
 			self.weatherreporturl = self.baseurl + "lagebericht.html"
 
 		if not load:
-			f = open(pluginpath + "/last.cfg","w")
+			f = open(pluginpath + "/last.cfg", "w")
 			f.write(self.land)
 			f.close
 
@@ -408,7 +408,7 @@ class UnwetterMain(Screen):
 
 	def exit(self):
 		if self.loadinginprogress:
-			reactor.callLater(1,self.exit)
+			reactor.callLater(1, self.exit)
 		else:
 			try:
 				unlink(self.picfile)

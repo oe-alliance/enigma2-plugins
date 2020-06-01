@@ -1,3 +1,4 @@
+from __future__ import print_function
 from enigma import eTimer, loadPic, getDesktop
 
 from Screens.Screen import Screen
@@ -37,22 +38,22 @@ config.plugins.LastFM.description = ConfigText(default = _("Listen to Last.FM In
 config.plugins.LastFM.showcoverart = ConfigYesNo(default = True)
 config.plugins.LastFM.username = ConfigText("user", fixed_size = False)
 config.plugins.LastFM.password = ConfigPassword(default = "passwd", fixed_size = False)
-config.plugins.LastFM.timeoutstatustext = ConfigInteger(3,limits = (0, 10))
-config.plugins.LastFM.timeouttabselect = ConfigInteger(2,limits = (0, 10))
-config.plugins.LastFM.metadatarefreshinterval = ConfigInteger(1,limits = (0, 100))
-config.plugins.LastFM.recommendedlevel = ConfigInteger(3,limits = (0, 100))
+config.plugins.LastFM.timeoutstatustext = ConfigInteger(3, limits = (0, 10))
+config.plugins.LastFM.timeouttabselect = ConfigInteger(2, limits = (0, 10))
+config.plugins.LastFM.metadatarefreshinterval = ConfigInteger(1, limits = (0, 100))
+config.plugins.LastFM.recommendedlevel = ConfigInteger(3, limits = (0, 100))
 config.plugins.LastFM.sendSubmissions = ConfigYesNo(default = False)
 
 config.plugins.LastFM.useproxy = ConfigYesNo(default = False)
-config.plugins.LastFM.proxyport = ConfigInteger(6676,limits = (1, 65536))
+config.plugins.LastFM.proxyport = ConfigInteger(6676, limits = (1, 65536))
 
 config.plugins.LastFM.sreensaver = ConfigSubsection()
 config.plugins.LastFM.sreensaver.use = ConfigYesNo(default = True)
-config.plugins.LastFM.sreensaver.wait = ConfigInteger(30,limits = (0, 1000))
+config.plugins.LastFM.sreensaver.wait = ConfigInteger(30, limits = (0, 1000))
 config.plugins.LastFM.sreensaver.showcoverart = ConfigYesNo(default = True)
 config.plugins.LastFM.sreensaver.coverartanimation = ConfigYesNo(default = True)
-config.plugins.LastFM.sreensaver.coverartspeed = ConfigInteger(10,limits = (0, 100))
-config.plugins.LastFM.sreensaver.coverartinterval = ConfigInteger(10,limits = (0, 100))
+config.plugins.LastFM.sreensaver.coverartspeed = ConfigInteger(10, limits = (0, 100))
+config.plugins.LastFM.sreensaver.coverartinterval = ConfigInteger(10, limits = (0, 100))
 
 ###############################################################################        
     
@@ -63,7 +64,7 @@ def main(session,**kwargs):
     else:
         streamplayer = StreamPlayer(session)
         
-    session.openWithCallback(LastFMScreenMainCB,LastFMScreenMain,streamplayer)    
+    session.openWithCallback(LastFMScreenMainCB, LastFMScreenMain, streamplayer)    
 
 def LastFMScreenMainCB():
     pass
@@ -77,7 +78,7 @@ def startScrobbler(reason, **kwargs):
             streamplayer.setSession(kwargs["session"])
         
         from scrobbler import EventListener
-        evl = EventListener(kwargs["session"],streamplayer)
+        evl = EventListener(kwargs["session"], streamplayer)
         evl.startListenToEvents()
         
 def Plugins(path,**kwargs):
@@ -105,7 +106,7 @@ def Plugins(path,**kwargs):
     return list
 
 ############################################################################### 
-class LastFMScreenMain(Screen,HelpableScreen,LastFM):
+class LastFMScreenMain(Screen, HelpableScreen, LastFM):
     skin = """
         <screen name="LastFM" position="center,center" size="600,440" title="%s" >
             
@@ -144,21 +145,21 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         self.session = session
         self.streamplayer = streamplayer#StreamPlayer(session)
         self.streamplayer.onStateChanged.append(self.onStreamplayerStateChanged)
-        self.imageconverter = ImageConverter(116,116,self.setCoverArt)
+        self.imageconverter = ImageConverter(116, 116, self.setCoverArt)
         Screen.__init__(self, session)
         
-        self.tabs=[(_("Personal Stations"),self.loadPersonalStations)
-                   ,(_("Global Tags"),self.loadGlobalTags)
-                   ,(_("Top Tracks"),self.loadTopTracks)
-                   ,(_("Recent Tracks"),self.loadRecentTracks)
-                   ,(_("Loved Tracks"),self.loadLovedTracks)
-                   ,(_("Banned Tracks"),self.loadBannedTracks)
-                   ,(_("Friends"),self.loadFriends)
-                   ,(_("Neighbours"),self.loadNeighbours)
+        self.tabs=[(_("Personal Stations"), self.loadPersonalStations)
+                   , (_("Global Tags"), self.loadGlobalTags)
+                   , (_("Top Tracks"), self.loadTopTracks)
+                   , (_("Recent Tracks"), self.loadRecentTracks)
+                   , (_("Loved Tracks"), self.loadLovedTracks)
+                   , (_("Banned Tracks"), self.loadBannedTracks)
+                   , (_("Friends"), self.loadFriends)
+                   , (_("Neighbours"), self.loadNeighbours)
                    ]
         tablist =[]
         for tab in self.tabs:
-            tablist.append((tab[0],tab))
+            tablist.append((tab[0], tab))
         self.tablist = MenuList(tablist)
         self.tablist.onSelectionChanged.append(self.action_TabChanged)
         
@@ -181,14 +182,14 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         self["button_blue"] = Label(_("Ban"))
         self["infolabel"] = Label("")
         
-        self["actions"] = ActionMap(["InfobarChannelSelection","WizardActions", "DirectionActions","MenuActions","ShortcutActions","GlobalActions","HelpActions","NumberActions"], 
+        self["actions"] = ActionMap(["InfobarChannelSelection", "WizardActions", "DirectionActions", "MenuActions", "ShortcutActions", "GlobalActions", "HelpActions", "NumberActions"], 
             {
              "ok": self.action_ok,
              "back": self.action_exit,
              "red": self.action_startstop,
              "green": self.skipTrack,
              "yellow": self.love,
-             "blue": self.banTrack ,
+             "blue": self.banTrack,
              "historyNext": self.action_nextTab,
              "historyBack": self.action_prevTab,
              
@@ -230,68 +231,68 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
 
     def initLastFM(self):
         self.setInfoLabel(_("logging into last.FM"))
-        self.connect(config.plugins.LastFM.username.value,config.plugins.LastFM.password.value)
+        self.connect(config.plugins.LastFM.username.value, config.plugins.LastFM.password.value)
         
-    def onStreamplayerStateChanged(self,reason):
+    def onStreamplayerStateChanged(self, reason):
         if reason is self.streamplayer.STATE_PLAYLISTENDS:
             self.loadPlaylist()
         else:
             pass
-    def onConnectSuccessful(self,text):
+    def onConnectSuccessful(self, text):
         self.setInfoLabel(_("login successful"))
     
-    def onConnectFailed(self,text):
-        self.setInfoLabel(_("login failed! ")+text,timeout=False)
+    def onConnectFailed(self, text):
+        self.setInfoLabel(_("login failed! ")+text, timeout=False)
 
-    def onTrackSkiped(self,reason):
+    def onTrackSkiped(self, reason):
         self.setInfoLabel(_("Track skipped"))
 
-    def onTrackLoved(self,reason):
+    def onTrackLoved(self, reason):
         self.setInfoLabel(_("Track loved"))
     
-    def onTrackBanned(self,reason):
+    def onTrackBanned(self, reason):
         self.setInfoLabel(_("Track banned"))       
     
-    def onCommandFailed(self,reason):
+    def onCommandFailed(self, reason):
         self.setInfoLabel(reason)
 
-    def onGlobalTagsLoaded(self,tags):
+    def onGlobalTagsLoaded(self, tags):
         self.setInfoLabel(_("Global Tags loaded"))
         self.buildMenuList(tags)
 
-    def onTopTracksLoaded(self,tracks):
+    def onTopTracksLoaded(self, tracks):
         self.setInfoLabel(_("Top Tracks loaded"))
         self.buildMenuList(tracks)
 
-    def onRecentTracksLoaded(self,tracks):
+    def onRecentTracksLoaded(self, tracks):
         self.setInfoLabel(_("Recent Tracks loaded"))
         self.buildMenuList(tracks)
         
-    def onRecentBannedTracksLoaded(self,tracks):
+    def onRecentBannedTracksLoaded(self, tracks):
         self.setInfoLabel(_("Banned Tracks loaded"))
         self.buildMenuList(tracks)
 
-    def onRecentLovedTracksLoaded(self,tracks):
+    def onRecentLovedTracksLoaded(self, tracks):
         self.setInfoLabel(_("Loved Tracks loaded"))
         self.buildMenuList(tracks)
 
-    def onNeighboursLoaded(self,user):
+    def onNeighboursLoaded(self, user):
         self.setInfoLabel(_("Neighbours loaded"))
         self.buildMenuList(user)
 
-    def onFriendsLoaded(self,user):
+    def onFriendsLoaded(self, user):
         self.setInfoLabel(_("Friends loaded"))
         self.buildMenuList(user)
     
-    def onStationChanged(self,reason):
+    def onStationChanged(self, reason):
         self.setInfoLabel(reason) 
         self.loadPlaylist() 
         
-    def onMetadataLoaded(self,metadata):
+    def onMetadataLoaded(self, metadata):
         self.updateGUI()
         self.guiupdatetimer.start(config.plugins.LastFM.metadatarefreshinterval.value*1000)
     
-    def onPlaylistLoaded(self,reason):
+    def onPlaylistLoaded(self, reason):
         self.streamplayer.setPlaylist(self.playlist)
         self.streamplayer.play()
 
@@ -326,7 +327,7 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
     def startScreensaver(self):
         if config.plugins.LastFM.sreensaver.use.value:
             self.screensavertimer.stop()
-            self.session.openWithCallback(self.updateGUI, LastFMSaveScreen,self)
+            self.session.openWithCallback(self.updateGUI, LastFMSaveScreen, self)
             
     def action_nextTab(self):
         self.tablist.down()
@@ -367,8 +368,8 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
                 self.changeStation(x[1])
                 self.resetScreensaverTimer()
 
-    def onTextForCustomStationEntered(self,text):
-        print "onTextForCustomStationEntered",text,self.customstationtype
+    def onTextForCustomStationEntered(self, text):
+        print("onTextForCustomStationEntered", text, self.customstationtype)
         if text is not None:
             if self.customstationtype =="artist":
                 self.changeStation(urllib2_qoute("lastfm://artist/%s/similarartists"%text))
@@ -383,7 +384,7 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
             self.streamplayer.stop(force=True)
             self.setInfoLabel(_("Stream stopped"))
         else:
-            self.setInfoLabel(_("Starting stream"),timeout=True)
+            self.setInfoLabel(_("Starting stream"), timeout=True)
             self.loadPlaylist()
             self.updateGUI() #forcing guiupdate, so we dont wait till guiupdatetimer fired
             self.guiupdatetimer.start(config.plugins.LastFM.metadatarefreshinterval.value*1000)
@@ -445,7 +446,7 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         tags = []
         x= {}
         x["_display"] = _("Personal Recommendations")
-        x["stationurl"] = self.getPersonalURL(config.plugins.LastFM.username.value,level=config.plugins.LastFM.recommendedlevel.value)
+        x["stationurl"] = self.getPersonalURL(config.plugins.LastFM.username.value, level=config.plugins.LastFM.recommendedlevel.value)
         tags.append(x)
 
         x= {}
@@ -521,10 +522,10 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         self.setInfoLabel(_("Loading Friends"))
         tracks = self.getFriends(config.plugins.LastFM.username.value)
 
-    def buildMenuList(self,items):
+    def buildMenuList(self, items):
         menuliste = []
         for i in items:
-            menuliste.append((i['_display'],i['stationurl']))
+            menuliste.append((i['_display'], i['stationurl']))
         self["streamlist"].l.setList(menuliste) 
 
     def createSummary(self):
@@ -536,31 +537,31 @@ class LastFMSaveScreen(Screen):
               </screen>"""
               
     noCoverArtPNG = "/usr/share/enigma2/skin_default/no_coverArt.png"
-    coverartsize= [200,200]
+    coverartsize= [200, 200]
     lastcreator=""
     
-    def __init__(self,session,parent):
+    def __init__(self, session, parent):
         size_w = getDesktop(0).size().width()    
         size_h = getDesktop(0).size().height()
         self.skin = """<screen position="0,0" size="%i,%i" flags="wfNoBorder" title="LastFMSaveScreen" >
                 <widget name="cover" position="50,50" size="%i,%i" />          
-              </screen>"""%(size_w,size_h,self.coverartsize[0],self.coverartsize[1])
+              </screen>"""%(size_w, size_h, self.coverartsize[0], self.coverartsize[1])
     
-        Screen.__init__(self,session)
-        self.imageconverter = ImageConverter(self.coverartsize[0],self.coverartsize[1],self.setCoverArt)
+        Screen.__init__(self, session)
+        self.imageconverter = ImageConverter(self.coverartsize[0], self.coverartsize[1], self.setCoverArt)
         self.session = session
         self.streamplayer = parent.streamplayer
         self.parent = parent
         self["cover"] = MovingPixmap()
                         
-        self["actions"] = ActionMap(["InfobarChannelSelection","WizardActions", "DirectionActions","MenuActions","ShortcutActions","GlobalActions","HelpActions"], 
+        self["actions"] = ActionMap(["InfobarChannelSelection", "WizardActions", "DirectionActions", "MenuActions", "ShortcutActions", "GlobalActions", "HelpActions"], 
             {
              "ok": self.action_exit,
              "back": self.action_exit,
 			 "red": self.parent.action_startstop,
              "green": self.parent.skipTrack,
              "yellow": self.parent.love,
-             "blue": self.parent.banTrack ,
+             "blue": self.parent.banTrack,
              }, -1)
         
         self.onLayoutFinish.append(self.update)
@@ -626,22 +627,22 @@ class ImageConverter:
     
     lastURL = ""
 
-    def __init__(self,width,height,callBack):
+    def __init__(self, width, height, callBack):
         self.callBack = callBack
         self.width = width
         self.height = height
         self.targetfile= "/tmp/coverart"+str(randrange(5000))
     
         
-    def convert(self,sourceURL):
+    def convert(self, sourceURL):
         if self.lastURL != sourceURL:
             extension = sourceURL.split(".")[-1]
             self.tmpfile = self.targetfile+"."+extension
-            downloadPage(sourceURL,self.tmpfile).addCallback(self.onImageLoaded)
+            downloadPage(sourceURL, self.tmpfile).addCallback(self.onImageLoaded)
             self.lastURL = sourceURL
 
-    def onImageLoaded(self,dummy):
-            self.currPic = loadPic(self.tmpfile, self.width, self.height, 0,1, 0,1)
+    def onImageLoaded(self, dummy):
+            self.currPic = loadPic(self.tmpfile, self.width, self.height, 0, 1, 0, 1)
             os_remove(self.tmpfile)
             self.callBack(pixmap=self.currPic)
             

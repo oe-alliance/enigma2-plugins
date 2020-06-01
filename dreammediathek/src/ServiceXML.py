@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from re import compile as re_compile
 from os import path as os_path, symlink, listdir, unlink, readlink, remove
 
@@ -10,7 +11,7 @@ WEBTV_STATIONS = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/dreamMediathe
 class WebTVStations():
 	"""Manages WebTVStations declared in a XML-Document."""
 	def __init__(self):
-		print "[WebTVStations] INIT"
+		print("[WebTVStations] INIT")
 		self.webtv_stations = {}
 
 	def getWebTVStations(self, callback = None):
@@ -33,10 +34,10 @@ class WebTVStations():
 				data['title'] = getValue(tvstation.findall("title"), False).encode("UTF-8")
 				data['streamurl'] = getValue(tvstation.findall("streamurl"), False).encode("UTF-8")
 
-				print "TVSTATION--->",data
+				print("TVSTATION--->", data)
 				self.webtv_stations[data['title']] = data
-			except Exception, e:
-				print "[WebTVStations] Error reading Stations:", e
+			except Exception as e:
+				print("[WebTVStations] Error reading Stations:", e)
 
 	def getWebTVStationsList(self):
 		return sorted(self.webtv_stations.iterkeys())

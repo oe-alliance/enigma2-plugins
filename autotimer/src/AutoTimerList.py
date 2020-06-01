@@ -93,11 +93,11 @@ class AutoTimerList(MenuList):
 		def itemHeight(value):
 			self.itemHeight = int(value)
 		def ServiceNameFont(value):
-			self.ServiceNameFont = parseFont(value, ((1,1),(1,1)))
+			self.ServiceNameFont = parseFont(value, ((1, 1), (1, 1)))
 		def EventNameFont(value):
-			self.EventNameFont = parseFont(value, ((1,1),(1,1)))
+			self.EventNameFont = parseFont(value, ((1, 1), (1, 1)))
 		def DayNameFont(value):
-			self.DayNameFont = parseFont(value, ((1,1),(1,1)))
+			self.DayNameFont = parseFont(value, ((1, 1), (1, 1)))
 		def rowHeight(value):
 			self.rowHeight = int(value)
 		def rowSplit1(value):
@@ -156,13 +156,13 @@ class AutoTimerList(MenuList):
 		res = [ None ]
 		if icon:
 			if skinparms:
-				x, y, w, h = parameters.get("AutotimerEnabledIcon",(iconMargin, 0, statusIconHeight, statusIconWidth))
+				x, y, w, h = parameters.get("AutotimerEnabledIcon", (iconMargin, 0, statusIconHeight, statusIconWidth))
 			else:
 				x, y, w, h = (iconMargin, 0, statusIconHeight, statusIconWidth)
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, x, y, w, h, icon))
 		if rectypeicon:
 			if skinparms:
-				x, y, w, h = parameters.get("AutotimerRecordIcon",(iconMargin+statusIconWidth+iconMargin, 3, statusIconHeight, typeIconWidth))
+				x, y, w, h = parameters.get("AutotimerRecordIcon", (iconMargin+statusIconWidth+iconMargin, 3, statusIconHeight, typeIconWidth))
 			else:
 				x, y, w, h = (iconMargin+statusIconWidth+iconMargin, 3, statusIconHeight, typeIconWidth)
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, x, y, w, h, rectypeicon))
