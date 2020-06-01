@@ -234,7 +234,7 @@ class GoogleSuggestions():
 
 	def getSuggestions(self, queryString):
 		self.prepareQuery()
-		if queryString is not "":
+		if queryString != "":
 			query = self.prepQuerry + quote(queryString)
 			self.conn = HTTPConnection("google.com")
 			try:

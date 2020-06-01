@@ -87,12 +87,12 @@ class MoviePlayerExtended_summary(Screen):
         self["Title"].setText(title)
 
     def showSeperator(self):
-		self["Seperator1"].show()
-		self["Seperator2"].show()
+        self["Seperator1"].show()
+        self["Seperator2"].show()
 
     def hideSeperator(self):
-		self["Seperator1"].hide()   
-		self["Seperator2"].hide()   
+        self["Seperator1"].hide()   
+        self["Seperator2"].hide()   
     
 class SelectionEventInfo:
     def __init__(self):

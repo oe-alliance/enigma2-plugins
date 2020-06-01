@@ -3218,7 +3218,7 @@ class MerlinMusicPlayerFileList(Screen):
 			count = 0
 			index = 0
 			currentFilename = self["list"].getFilename()
- 			if currentFilename.lower().endswith(".m3u"):
+			if currentFilename.lower().endswith(".m3u"):
 				SongList = self.readM3U(os_path.join(self["list"].getCurrentDirectory(), currentFilename))
 			elif currentFilename.lower().endswith(".pls"):
 				SongList = self.readPLS(os_path.join(self["list"].getCurrentDirectory(), currentFilename))

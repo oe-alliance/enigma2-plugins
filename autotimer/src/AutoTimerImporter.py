@@ -135,7 +135,7 @@ class AutoTimerImporter(Screen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 		self["key_yellow"] = StaticText()
- 		self["key_blue"] = StaticText()
+		self["key_blue"] = StaticText()
 
 		entries = []
 		append = entries.append

@@ -993,17 +993,17 @@ class NcidLineReceiver(LineReceiver):
 				self.line = items[i + 1]
 			elif item == 'NMBR':
 				self.number = items[i + 1]
-                        elif item == 'NAME':
-                                self.myName = items[i + 1]
+			elif item == 'NAME':
+				self.myName = items[i + 1]
 
-                if not self.myName:
-                        self.myName = _("UNKNOWN")
+			if not self.myName:
+				self.myName = _("UNKNOWN")
 
-                date = None
-                try:
-                        date = datetime.strptime("%s - %s" % (self.date, self.time), "%d%m%Y - %H%M")
-                except:
-                        date = datetime.strptime("%s - %s" % (self.date, self.time), "%m%d%Y - %H%M")
+			date = None
+			try:
+				date = datetime.strptime("%s - %s" % (self.date, self.time), "%d%m%Y - %H%M")
+			except:
+				date = datetime.strptime("%s - %s" % (self.date, self.time), "%m%d%Y - %H%M")
 
 		self.date = date.strftime("%d.%m.%Y - %H:%M")
 

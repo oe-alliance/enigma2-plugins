@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 ###############################################################################
 # $Id$
 #
@@ -64,9 +65,6 @@ Class is available under the open-source GDAL license (www.gdal.org).
 """
 
 import math
-
-from __future__ import print_function
-
 
 class GlobalMercator(object):
     """

@@ -347,7 +347,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 			self.updateDescription()
 
 	def updateHDDData(self):
- 		self.reloadList(self.selectedmovie)
+		self.reloadList(self.selectedmovie)
 		self["waitingtext"].visible = False
 
 	def moveTo(self):
@@ -445,7 +445,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 		self.setTitle(title)
 		self["list"].saveTitle(title)
 #		print "[SF-Plugin] MovieSelection:setTitle(%s)" % (str(title))
- 		if not (sel and self["list"].moveTo(sel)):
+		if not (sel and self["list"].moveTo(sel)):
 			if home:
 				self["list"].moveToIndex(0)
 		self.updateTags()

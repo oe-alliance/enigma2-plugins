@@ -360,17 +360,17 @@ class RestartWebScreen(WebScreen):
 
 class GetPidWebScreen(WebScreen):
 	def __init__(self, session, request):
-		 WebScreen.__init__(self, session, request)
-		 from Components.Sources.StaticText import StaticText
-		 from enigma import iServiceInformation
-		 pids = self.session.nav.getCurrentService()
-		 if pids is not None:
-		 	pidinfo = pids.info()
-		 	VPID = hex(pidinfo.getInfo(iServiceInformation.sVideoPID))
+		WebScreen.__init__(self, session, request)
+		from Components.Sources.StaticText import StaticText
+		from enigma import iServiceInformation
+		pids = self.session.nav.getCurrentService()
+		if pids != None:
+			pidinfo = pids.info()
+			VPID = hex(pidinfo.getInfo(iServiceInformation.sVideoPID))
 			APID = hex(pidinfo.getInfo(iServiceInformation.sAudioPID))
 			PPID = hex(pidinfo.getInfo(iServiceInformation.sPMTPID))
 			self["pids"] = StaticText("%s,%s,%s" % (PPID.lstrip("0x"), VPID.lstrip("0x"), APID.lstrip("0x")))
-		 else:
+		else:
 			self["pids"] = StaticText("0x,0x,0x")
 
 class DeviceInfoWebScreen(WebScreen):

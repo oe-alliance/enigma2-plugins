@@ -5,12 +5,12 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os, gettext
 
 # Config
-from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
+from Components.config import config, ConfigSubsection, ConfigEnableDisable
 
 import six
 
 
-	ConfigNumber, ConfigSelection, ConfigYesNo
+ConfigNumber, ConfigSelection, ConfigYesNo
 
 config.plugins.autotimer = ConfigSubsection()
 config.plugins.autotimer.autopoll = ConfigEnableDisable(default=True)

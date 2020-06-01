@@ -124,10 +124,10 @@ class NETcasterScreenBrowser(Screen):
                 self.pluginlist.append(plugin.Interface(self.session, cbListLoaded=self.onStreamlistLoaded))
 
     def updateTitle(self):
-		try:
-			self.setTitle("%s (%s)"%(myname, self.currentPlugin.nameshort))
-		except:	
-			pass
+        try:
+            self.setTitle("%s (%s)"%(myname, self.currentPlugin.nameshort))
+        except:
+            pass
 
     def selectPlugin(self):
         glist=[]

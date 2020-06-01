@@ -22,7 +22,6 @@ SUBDIRS = \
 	dreammediathek \
 	dvdbackup \
 	easyinfo \
-	easymedia \
 	ecasa \
 	eibox \
 	emailclient \
@@ -75,7 +74,6 @@ SUBDIRS = \
 	shoutcast \
 	showclock \
 	simplerss \
-	subsdownloader2 \
 	svdrp \
 	tageditor \
 	teletext \

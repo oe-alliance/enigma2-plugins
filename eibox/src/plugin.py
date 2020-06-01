@@ -256,28 +256,28 @@ class EIBObjects(object):
 			dom = xml.dom.minidom.parseString(knxdata)
 			for node in dom.childNodes[0].childNodes:
 				if node.nodeType == xml.dom.minidom.Element.nodeType:
-				    if node.tagName == 'objects':
-					for subnode in node.childNodes:
-					    if subnode.nodeType == xml.dom.minidom.Element.nodeType:
-						if subnode.tagName == 'object':
-						    i = 0
-						    object_id = None
-						    value = None
-						    while i < subnode.attributes.length:
-						      item = subnode.attributes.item(i)
-						      key = item.name.encode("utf-8")
-						      if key == "id":
-							object_id = item.nodeValue
-						      elif key == "value":
-							value = item.nodeValue
-						      i += 1
-						    if object_id and value != None and object_id in self.ids:
-							  EIBObject = self.ids[object_id]
-							  EIBObject.value = value
-							  if config.eib.debug.value:
-								print("[parseMultiRead]", EIBObject.object_id, " := ", EIBObject.value)
-					            elif config.eib.debug.value:
-							  print("[parseMultiRead] couldn't parse persistence object", object_id, value)
+					if node.tagName == 'objects':
+						for subnode in node.childNodes:
+							if subnode.nodeType == xml.dom.minidom.Element.nodeType:
+								if subnode.tagName == 'object':
+									i = 0
+									object_id = None
+									value = None
+									while i < subnode.attributes.length:
+										item = subnode.attributes.item(i)
+										key = item.name.encode("utf-8")
+										if key == "id":
+											object_id = item.nodeValue
+										elif key == "value":
+											value = item.nodeValue
+											i += 1
+										if object_id and value != None and object_id in self.ids:
+											EIBObject = self.ids[object_id]
+											EIBObject.value = value
+										if config.eib.debug.value:
+											print("[parseMultiRead]", EIBObject.object_id, " := ", EIBObject.value)
+										elif config.eib.debug.value:
+											print("[parseMultiRead] couldn't parse persistence object", object_id, value)
 		except xml.parsers.expat.ExpatError:
 			print ("[parseMultiRead] XML parser error") 
 
@@ -475,7 +475,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		if config.eib.debug.value:
 			print("[updateIcon]", EIB_object.getInfo())
 		if EIB_object.object_type == EIB_MULTISWITCH:
-		        if EIB_object.value in EIB_object.custom_values:
+			if EIB_object.value in EIB_object.custom_values:
 				idx = int(EIB_object.custom_values.index(EIB_object.value))
 				if len(EIB_object.custom_img) > idx:
 					self[EIB_object.object_id].setPixmapNum(idx)
@@ -571,35 +571,35 @@ class EIBox(Screen, ConfigListScreen):
 			file.close()
 			projectfiledom = xml.dom.minidom.parseString(data)
 			for node in projectfiledom.childNodes[0].childNodes:
-			  if node.nodeType == xml.dom.minidom.Element.nodeType:
-			    if node.tagName == 'zones':
-			      for subnode in node.childNodes:
-				if subnode.nodeType == xml.dom.minidom.Element.nodeType:
-				  if subnode.tagName == 'zone':
-				    zone_id = str(subnode.getAttribute("id"))
-				    zone_img = str(subnode.getAttribute("img"))
-				    zone_name = str(subnode.getAttribute("name"))
-				    filename = img_prefix + zone_img
-				    if not zone_img or not fileExists(filename):
-					print("[loadXML] ", filename, " not found! using default image")
-					zone_img = "default_bg.png"
-    				    self.EIB_zones[zone_id] = EIBObjects(zone_id, zone_name, zone_img)
-				    if config.eib.debug.value:
-					print("[loadXML] new EIB_zone", zone_id, zone_name, zone_img, self.EIB_zones[zone_id])
-				    self.xmlGetZoneNode(subnode, zone_id)
-				    if self.gotoZone == None:
-					self.gotoZone = zone_id
-				    #self.EIB_zones[zone_id].EIBreadAll()
-			    if node.tagName == 'settings':
-				config.eib.host.value = node.getAttribute("host")
-				config.eib.port.value = int(node.getAttribute("port"))
-				config.eib.refresh.value = int(node.getAttribute("refresh"))
-				debug = False
-				if node.getAttribute("debug") == "true":
-					debug = True
-				config.eib.debug.setValue(debug)
-				if config.eib.debug.value:
-					print("[loadXML] parsed settings! host:", config.eib.host.value, "port:", config.eib.port.value, "refresh:", config.eib.refresh.value, "debug:", config.eib.debug.value)
+				if node.nodeType == xml.dom.minidom.Element.nodeType:
+					if node.tagName == 'zones':
+						for subnode in node.childNodes:
+							if subnode.nodeType == xml.dom.minidom.Element.nodeType:
+								if subnode.tagName == 'zone':
+									zone_id = str(subnode.getAttribute("id"))
+									zone_img = str(subnode.getAttribute("img"))
+									zone_name = str(subnode.getAttribute("name"))
+									filename = img_prefix + zone_img
+								if not zone_img or not fileExists(filename):
+									print("[loadXML] ", filename, " not found! using default image")
+									zone_img = "default_bg.png"
+									self.EIB_zones[zone_id] = EIBObjects(zone_id, zone_name, zone_img)
+								if config.eib.debug.value:
+									print("[loadXML] new EIB_zone", zone_id, zone_name, zone_img, self.EIB_zones[zone_id])
+									self.xmlGetZoneNode(subnode, zone_id)
+								if self.gotoZone == None:
+									self.gotoZone = zone_id
+									#self.EIB_zones[zone_id].EIBreadAll()
+								if node.tagName == 'settings':
+									config.eib.host.value = node.getAttribute("host")
+									config.eib.port.value = int(node.getAttribute("port"))
+									config.eib.refresh.value = int(node.getAttribute("refresh"))
+									debug = False
+								if node.getAttribute("debug") == "true":
+									debug = True
+								config.eib.debug.setValue(debug)
+								if config.eib.debug.value:
+									print("[loadXML] parsed settings! host:", config.eib.host.value, "port:", config.eib.port.value, "refresh:", config.eib.refresh.value, "debug:", config.eib.debug.value)
 		except:
 			self.errorOut("[loadXML] " + str(filename) + ' ' + _("parser error"))
 

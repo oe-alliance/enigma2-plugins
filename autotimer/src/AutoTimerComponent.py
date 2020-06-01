@@ -406,7 +406,7 @@ class AutoTimerComponent(object):
 		bouquets = self.bouquets
 		if services:
 			bouquets = []
- 		if services or bouquets:
+		if services or bouquets:
 			addbouquets = []
 
 			for service in services:

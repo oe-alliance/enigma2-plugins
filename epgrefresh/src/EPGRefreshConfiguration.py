@@ -64,8 +64,8 @@ class EPGFunctionMenu(FixedMenu):
 
 class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 	"""Configuration of EPGRefresh"""
-        
-        skin = """<screen name="EPGRefreshConfiguration" position="center,center" size="700,450">
+
+	skin = """<screen name="EPGRefreshConfiguration" position="center,center" size="700,450">
 		<ePixmap position="0,5" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap position="140,5" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<ePixmap position="280,5" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />

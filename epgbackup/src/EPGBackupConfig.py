@@ -1,3 +1,4 @@
+from __future__ import print_function
 # Screens
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
@@ -19,8 +20,6 @@ from Components.ConfigList import ConfigListScreen
 from Components.config import KEY_OK
 
 # Error-print()
-
-from __future__ import print_function
 
 from EPGBackupTools import debugOut, PLUGIN_VERSION
 from traceback import format_exc

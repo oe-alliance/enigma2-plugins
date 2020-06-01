@@ -90,7 +90,7 @@ mcpath = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/"
 def PlaylistEntryComponent(serviceref):
 	res = [ serviceref ]
 	text = serviceref.getName()
-	if text is "":
+	if text == "":
 		text = os_path.split(serviceref.getPath().split('/')[-1])[1]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 25, 1, 470, 22, 0, RT_VALIGN_CENTER, text))
 	return res

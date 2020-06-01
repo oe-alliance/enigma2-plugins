@@ -360,20 +360,20 @@ class LDIFParser:
         if attr_type=='dn':
           # attr type and value pair was DN of LDIF record
           if dn!=None:
-	    raise ValueError('Two lines starting with dn: in one record.')
+             raise ValueError('Two lines starting with dn: in one record.')
           if not is_dn(attr_value):
-	    raise_(ValueError, 'No valid string-representation of distinguished name %s.' % (repr(attr_value)))
+             raise (ValueError, 'No valid string-representation of distinguished name %s.' % (repr(attr_value)))
           dn = attr_value
         elif attr_type=='version' and dn is None:
           version = 1
         elif attr_type=='changetype':
           # attr type and value pair was DN of LDIF record
           if dn is None:
-	    raise ValueError('Read changetype: before getting valid dn: line.')
+            raise ValueError('Read changetype: before getting valid dn: line.')
           if changetype!=None:
-	    raise ValueError('Two lines starting with changetype: in one record.')
+             raise ValueError('Two lines starting with changetype: in one record.')
           if attr_value not in valid_changetype_dict:
-	    raise_(ValueError, 'changetype value %s is invalid.' % (repr(attr_value)))
+             raise (ValueError, 'changetype value %s is invalid.' % (repr(attr_value)))
           changetype = attr_value
         elif attr_value!=None and \
              attr_type.lower() not in self._ignored_attr_types:

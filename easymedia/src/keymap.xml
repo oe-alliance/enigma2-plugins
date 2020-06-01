@@ -1,5 +1,0 @@
-<keymap>
-	<map context="EasyMediaActions">
-		<key id="KEY_VIDEO" mapto="video_but" flags="m" />
-	</map>
-</keymap>

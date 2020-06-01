@@ -211,7 +211,7 @@ class OFDB(Screen):
 			self["extralabel"].pageDown()
 
 	def showMenu(self):
-		if ( self.Page is 1 or self.Page is 2 ) and self.resultlist:
+		if ( self.Page == 1 or self.Page == 2 ) and self.resultlist:
 			self["menu"].show()
 			self["stars"].hide()
 			self["starsbg"].hide()
@@ -274,8 +274,8 @@ class OFDB(Screen):
 	def channelSelectionClosed(self, ret = None):
 		if ret:
 			self.eventName = ret
- 			self.Page = 0
- 			self.resultlist = []
+			self.Page = 0
+			self.resultlist = []
 			self["menu"].hide()
 			self["ratinglabel"].show()
 			self["castlabel"].show()
@@ -287,14 +287,14 @@ class OFDB(Screen):
 
 	def getOFDB(self):
 		self.resetLabels()
-		if self.eventName is "":
+		if self.eventName == "":
 			s = self.session.nav.getCurrentService()
 			info = s and s.info()
 			event = info and info.getEvent(0) # 0 = now, 1 = next
 			if event:
 				self.eventName = event.getEventName()
 
-		if self.eventName is not "":
+		if self.eventName != "":
 			try:
 				pos = self.eventName.index(" (")
 				self.eventName=self.eventName[0:pos]
@@ -434,7 +434,7 @@ class OFDB(Screen):
 				if cast:
 					for x in cast:
 						Casttext += "\n" + self.htmltags.sub('', x.group(1))
-					if Casttext is not "":
+					if Casttext != "":
 						Casttext = _("Cast: ") + Casttext
 					else:
 						Casttext = _("No cast list found in the database.")

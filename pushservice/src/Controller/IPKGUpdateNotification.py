@@ -65,7 +65,7 @@ class IPKGUpdateNotification(ControllerBase):
 	def getUpdateInfosCB(self, callback, errback, retval = None):
 		if retval is not None:
 			if retval is True:
-				if iSoftwareTools.available_updates is not 0:
+				if iSoftwareTools.available_updates != 0:
 					# _("There are at least ") + str(iSoftwareTools.available_updates) + _(" updates available.")
 					print("Updates available.")
 					return self.buildList(callback, errback)

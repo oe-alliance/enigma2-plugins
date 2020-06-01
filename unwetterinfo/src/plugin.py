@@ -425,7 +425,7 @@ def main(session, **kwargs):
 def Plugins(path,**kwargs):
 	global pluginpath
 	pluginpath = path
- 	return PluginDescriptor(
+	return PluginDescriptor(
 		name="Unwetterzentrale",
 		description="www.unwetterzentrale.de und www.uwz.at",
 		icon="uwz.png",

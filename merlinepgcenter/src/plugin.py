@@ -92,21 +92,21 @@ class InfoBarFunctionSaver:
 	def setInfoBarActionMap(self, configElement = None):
 		if configElement == config.plugins.merlinEpgCenter.replaceInfobarChannelUp:
 			value = int(config.plugins.merlinEpgCenter.replaceInfobarChannelUp.value)
-			if value is -1: # disabled
+			if value == -1: # disabled
 				if InfoBar.instance["ChannelSelectActions"].actions["switchChannelUp"] is not self.infoBarSwitchChannelUp:
 					InfoBar.instance["ChannelSelectActions"].actions["switchChannelUp"] = self.infoBarSwitchChannelUp
 			else:
 				InfoBar.instance["ChannelSelectActions"].actions["switchChannelUp"] = self.channelUpStarter
 		elif configElement == config.plugins.merlinEpgCenter.replaceInfobarChannelDown:
 			value = int(config.plugins.merlinEpgCenter.replaceInfobarChannelDown.value)
-			if value is -1:
+			if value == -1:
 				if InfoBar.instance["ChannelSelectActions"].actions["switchChannelDown"] is not self.infoBarSwitchChannelDown:
 					InfoBar.instance["ChannelSelectActions"].actions["switchChannelDown"] = self.infoBarSwitchChannelDown
 			else:
 				InfoBar.instance["ChannelSelectActions"].actions["switchChannelDown"] = self.channelDownStarter
 		elif configElement == config.plugins.merlinEpgCenter.replaceShowEventView:
 			value = int(config.plugins.merlinEpgCenter.replaceShowEventView.value)
-			if value is -1:
+			if value == -1:
 				if InfoBar.instance["EPGActions"].actions["showEventInfo"] is not self.infoBarEventView:
 					InfoBar.instance["EPGActions"].actions["showEventInfo"] = self.infoBarEventView
 			else:

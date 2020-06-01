@@ -285,11 +285,6 @@ easyinfo/Makefile
 easyinfo/meta/Makefile
 easyinfo/src/Makefile
 
-easymedia/Makefile
-easymedia/meta/Makefile
-easymedia/po/Makefile
-easymedia/src/Makefile
-
 ecasa/Makefile
 ecasa/meta/Makefile
 ecasa/src/Makefile
@@ -667,24 +662,6 @@ simplerss/Makefile
 simplerss/meta/Makefile
 simplerss/po/Makefile
 simplerss/src/Makefile
-
-subsdownloader2/Makefile
-subsdownloader2/meta/Makefile
-subsdownloader2/src/Makefile
-subsdownloader2/src/pic/Makefile
-subsdownloader2/src/pic/buttons/Makefile
-subsdownloader2/src/pic/buttons/HD/Makefile
-subsdownloader2/src/pic/res/Makefile
-subsdownloader2/src/SourceCode/Makefile
-subsdownloader2/src/SourceCode/chardet/Makefile
-subsdownloader2/src/SourceCode/periscope/Makefile
-subsdownloader2/src/SourceCode/periscope/services/Makefile
-subsdownloader2/src/SourceCode/periscope/services/BierDopje/Makefile
-subsdownloader2/src/SourceCode/periscope/services/OpenSubtitle/Makefile
-subsdownloader2/src/SourceCode/periscope/services/Subtitulos/Makefile
-subsdownloader2/src/SourceCode/xbmc_subtitles/Makefile
-subsdownloader2/src/SourceCode/xbmc_subtitles/services/Makefile
-subsdownloader2/src/SourceCode/xbmc_subtitles/services/Itasa/Makefile
 
 sudoku/Makefile
 sudoku/meta/Makefile

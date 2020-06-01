@@ -104,19 +104,19 @@ class DynDNSService:
 		print("[DynDNS] IP change, setting new one", self.lastip)
 		try:
 			url = "http://members.dyndns.org/nic/update?system=dyndns&hostname=%s&myip=%s&wildcard=ON&offline=NO"%(config.plugins.DynDNS.hostname.value, self.lastip)
-			if self.getURL(url).find("good") is not -1:
+			if self.getURL(url).find("good") != -1:
 				print("[DynDNS] ip changed")
 		except Exception as e:
 			print("[DynDNS] ip was not changed", e)
 
 	def getURL(self, url):
 		request =  Request(url)
-   		base64string = encodestring('%s:%s' % (config.plugins.DynDNS.user.value, config.plugins.DynDNS.password.value))[:-1]
-   		request.add_header("Authorization", "Basic %s" % base64string)
-   		htmlFile = urlopen(request)
-   		htmlData = htmlFile.read()
-   		htmlFile.close()
-   		return htmlData
+		base64string = encodestring('%s:%s' % (config.plugins.DynDNS.user.value, config.plugins.DynDNS.password.value))[:-1]
+		request.add_header("Authorization", "Basic %s" % base64string)
+		htmlFile = urlopen(request)
+		htmlData = htmlFile.read()
+		htmlFile.close()
+		return htmlData
 
 def onPluginStart(session, **kwargs):
 	session.openWithCallback(onPluginStartCB, DynDNSScreenMain)

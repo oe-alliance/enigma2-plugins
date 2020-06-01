@@ -1362,7 +1362,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 				sRef = cur[2]
 				if self["picon"].instance is not None:
 					fileName = findDefaultPicon(sRef)
-					if fileName is not "":
+					if fileName != "":
 						picon = LoadPixmap(fileName)
 						self["picon"].instance.setPixmap(picon)
 						

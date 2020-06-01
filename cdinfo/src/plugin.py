@@ -103,11 +103,11 @@ class Query:
 		self.albuminfo = {}
 
 	def getText(self, nodelist):
-	    rc = ""
-	    for node in nodelist:
-		if node.nodeType == node.TEXT_NODE:
-		    rc = rc + node.data
-	    return rc.encode("utf-8")
+		rc = ""
+		for node in nodelist:
+			if node.nodeType == node.TEXT_NODE:
+				rc = rc + node.data
+			return rc.encode("utf-8")
 
 	def xml_parse_output(self, string):
 		data = string.decode("utf-8", "replace").replace('&', "&amp;").encode("ascii", 'xmlcharrefreplace')
@@ -124,53 +124,53 @@ class Query:
 		return True
 
 	def xml_parse_query(self, queries_xml):
-	    for queries in queries_xml:
-		if queries.nodeType == xml.dom.minidom.Element.nodeType:
-		    if queries.tagName == 'query':
-			print("[xml_parse_query] cdinfo source is %s, hit %s of %s" % (queries.getAttribute("source"), queries.getAttribute("match"), queries.getAttribute("num_matches")))
-			for query in queries.childNodes:
-			    if query.nodeType == xml.dom.minidom.Element.nodeType:
-				if query.tagName == 'albuminfo':
-				    self.xml_parse_albuminfo(query.childNodes)
-				elif query.tagName == 'tracklisting':
-				    self.xml_parse_tracklisting(query.childNodes)
+		for queries in queries_xml:
+			if queries.nodeType == xml.dom.minidom.Element.nodeType:
+				if queries.tagName == 'query':
+					print("[xml_parse_query] cdinfo source is %s, hit %s of %s" % (queries.getAttribute("source"), queries.getAttribute("match"), queries.getAttribute("num_matches")))
+					for query in queries.childNodes:
+						if query.nodeType == xml.dom.minidom.Element.nodeType:
+							if query.tagName == 'albuminfo':
+								self.xml_parse_albuminfo(query.childNodes)
+							elif query.tagName == 'tracklisting':
+								self.xml_parse_tracklisting(query.childNodes)
 
 	def xml_parse_albuminfo(self, albuminfo_xml):
-	    for albuminfo in albuminfo_xml:
-		if albuminfo.nodeType == xml.dom.minidom.Element.nodeType:
-		    if albuminfo.tagName == 'PERFORMER' or albuminfo.tagName == 'artist':
-			artist = self.getText(albuminfo.childNodes)
-			self.albuminfo["artist"] = artist
-		    elif albuminfo.tagName.upper() == 'TITLE':
-			title = self.getText(albuminfo.childNodes)
-			self.albuminfo["title"] = title
-		    elif albuminfo.tagName.upper() == 'YEAR':
-			year = self.getText(albuminfo.childNodes)
-			self.albuminfo["year"] = year
-		    elif albuminfo.tagName.upper() == 'GENRE':
-			genre = self.getText(albuminfo.childNodes)
-			self.albuminfo["genre"] = genre
-		    elif albuminfo.tagName == 'category' and not "GENRE" in self.albuminfo:
-			category = self.getText(albuminfo.childNodes)
-			self.albuminfo["genre"] = category
+		for albuminfo in albuminfo_xml:
+			if albuminfo.nodeType == xml.dom.minidom.Element.nodeType:
+				if albuminfo.tagName == 'PERFORMER' or albuminfo.tagName == 'artist':
+					artist = self.getText(albuminfo.childNodes)
+					self.albuminfo["artist"] = artist
+				elif albuminfo.tagName.upper() == 'TITLE':
+					title = self.getText(albuminfo.childNodes)
+					self.albuminfo["title"] = title
+				elif albuminfo.tagName.upper() == 'YEAR':
+					year = self.getText(albuminfo.childNodes)
+					self.albuminfo["year"] = year
+				elif albuminfo.tagName.upper() == 'GENRE':
+					genre = self.getText(albuminfo.childNodes)
+					self.albuminfo["genre"] = genre
+				elif albuminfo.tagName == 'category' and not "GENRE" in self.albuminfo:
+					category = self.getText(albuminfo.childNodes)
+					self.albuminfo["genre"] = category
 
 	def xml_parse_tracklisting(self, tracklisting_xml):
-	    for tracklist in tracklisting_xml:
-		if tracklist.nodeType == xml.dom.minidom.Element.nodeType:
-		    if tracklist.tagName == 'track':
-			index = int(tracklist.getAttribute("number"))
-			trackinfo = {}
-			for track in tracklist.childNodes:
-			    if track.nodeType == xml.dom.minidom.Element.nodeType:
-				if track.tagName == 'PERFORMER' or track.tagName == 'artist':
-				    artist = self.getText(track.childNodes)
-				    trackinfo["artist"] = artist
-				if track.tagName.upper() == 'TITLE':
-				    title = self.getText(track.childNodes)
-				    trackinfo["title"] = title
-				#elif track.tagName == 'length':
-				    #tracktext += "Dauer=%ss " % self.getText(track.childNodes)
-			self.tracklisting[index]=trackinfo
+		for tracklist in tracklisting_xml:
+			if tracklist.nodeType == xml.dom.minidom.Element.nodeType:
+				if tracklist.tagName == 'track':
+					index = int(tracklist.getAttribute("number"))
+					trackinfo = {}
+					for track in tracklist.childNodes:
+						if track.nodeType == xml.dom.minidom.Element.nodeType:
+							if track.tagName == 'PERFORMER' or track.tagName == 'artist':
+								artist = self.getText(track.childNodes)
+								trackinfo["artist"] = artist
+							if track.tagName.upper() == 'TITLE':
+								title = self.getText(track.childNodes)
+								trackinfo["title"] = title
+							#elif track.tagName == 'length':
+								#tracktext += "Dauer=%ss " % self.getText(track.childNodes)
+							self.tracklisting[index]=trackinfo
 
 	def updateAlbuminfo(self, replace = False):
 		for tag in self.albuminfo:
@@ -195,9 +195,9 @@ class Query:
 
 	def scan(self):
 		if config.plugins.CDInfo.useCDTEXT.value:
-		    self.cdtext_scan()
+			self.cdtext_scan()
 		if config.plugins.CDInfo.useCDDB.value:
-		    self.cddb_scan()
+			self.cddb_scan()
 
 	def cdtext_scan(self):
 		cmd = "cdtextinfo -xalT"

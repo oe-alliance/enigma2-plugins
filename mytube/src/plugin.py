@@ -403,7 +403,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			current[1].help_window.instance.hide()
 
 		l3cert = etpm.getData(eTPM.DT_LEVEL3_CERT)
-		if l3cert is None or l3cert is "":
+		if l3cert is None or l3cert == "":
 			self["videoactions"].setEnabled(False)
 			self["searchactions"].setEnabled(False)
 			self["config_actions"].setEnabled(False)
@@ -462,7 +462,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 
 
 	def tryUserLogin(self):
-		if config.plugins.mytube.general.username.value is "" or config.plugins.mytube.general.password.value is "":
+		if config.plugins.mytube.general.username.value == "" or config.plugins.mytube.general.password.value == "":
 			return
 
 		try:
@@ -1194,17 +1194,17 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		Description = entry.getDescription()
 		myTubeID = TubeID
 		PublishedDate = entry.getPublishedDate()
-		if PublishedDate is not "unknown":
+		if PublishedDate != "unknown":
 			published = PublishedDate.split("T")[0]
 		else:
 			published = "unknown"
 		Views = entry.getViews()
-		if Views is not "not available":
+		if Views != "not available":
 			views = Views
 		else:
 			views = "not available"
 		Duration = entry.getDuration()
-		if Duration is not 0:
+		if Duration != 0:
 			durationInSecs = int(Duration)
 			mins = int(durationInSecs / 60)
 			secs = durationInSecs - mins * 60
@@ -1212,7 +1212,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		else:
 			duration = "not available"
 		Ratings = entry.getNumRaters()
-		if Ratings is not "":
+		if Ratings != "":
 			ratings = Ratings
 		else:
 			ratings = ""
@@ -1439,30 +1439,30 @@ class MyTubeVideoInfoScreen(Screen):
 		if Description is not None:
 			self["detailtext"].setText(Description.strip())
 
-		if self.videoinfo["RatingAverage"] is not 0:
+		if self.videoinfo["RatingAverage"] != 0:
 			ratingStars = int(round(20 * float(self.videoinfo["RatingAverage"]), 0))
 			self["stars"].setValue(ratingStars)
 		else:
 			self["stars"].hide()
 			self["starsbg"].hide()
 
-		if self.videoinfo["Duration"] is not 0:
+		if self.videoinfo["Duration"] != 0:
 			durationInSecs = int(self.videoinfo["Duration"])
 			mins = int(durationInSecs / 60)
 			secs = durationInSecs - mins * 60
 			duration = "%d:%02d" % (mins, secs)
 			self["duration"].setText(_("Duration: ") + str(duration))
 
-		if self.videoinfo["Author"] is not None or '':
+		if self.videoinfo["Author"] != None or '':
 			self["author"].setText(_("Author: ") + self.videoinfo["Author"])
 
-		if self.videoinfo["Published"] is not "unknown":
+		if self.videoinfo["Published"] != "unknown":
 			self["published"].setText(_("Added: ") + self.videoinfo["Published"].split("T")[0])
 
-		if self.videoinfo["Views"] is not "not available":
+		if self.videoinfo["Views"] != "not available":
 			self["views"].setText(_("Views: ") + str(self.videoinfo["Views"]))
 
-		if self.videoinfo["Tags"] is not "not available":
+		if self.videoinfo["Tags"] != "not available":
 			self["tags"].setText(_("Tags: ") + str(self.videoinfo["Tags"]))
 
 	def setWindowTitle(self):

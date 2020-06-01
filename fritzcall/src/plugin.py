@@ -67,6 +67,7 @@ from twisted.protocols.basic import LineReceiver  # @UnresolvedImport
 import FritzOutlookCSV, FritzLDIF
 from nrzuname import ReverseLookupAndNotifier
 from . import _, __  # @UnresolvedImport # pylint: disable=W0611,F0401
+global standbyMode
 
 # import codecs
 # encode = lambda x : codecs.encode(x, "rot13")
@@ -2818,7 +2819,6 @@ class FritzCallList(object):
 
 	def display(self):
 		debug("[FritzCallList]")
-		global standbyMode
 		standbyMode = False
 		# Standby.inStandby.onClose.remove(self.display) object does not exist anymore...
 		# build screen from call list
@@ -3152,7 +3152,6 @@ def notifyCall(event, date, number, caller, phone, connID): # @UnusedVariable # 
 		#
 		# if not yet done, register function to show call list
 		if not standbyMode:
-			global standbyMode
 			standbyMode = True
 			Standby.inStandby.onHide.append(callList.display)  # @UndefinedVariable
 		# add text/timeout to call list

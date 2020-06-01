@@ -101,12 +101,12 @@ def encodeUrl(url):
 	return url
 
 def getText(nodelist):
-    	rc = []
+	rc = []
 	for node in nodelist:
-        	if node.nodeType == node.TEXT_NODE:
-                	rc.append(node.data)
+		if node.nodeType == node.TEXT_NODE:
+			rc.append(node.data)
 	return ''.join(rc)
-                                
+
 ###################################################
 
 class BufferThread():
@@ -410,7 +410,7 @@ class PodcastXML(Screen):
 			
 			if source:
 				try:
-			 		xml = parse(source).getroot()
+					xml = parse(source).getroot()
 					for language in xml.findall("language"):
 						name = language.get("name") or None
 						name = name.encode("UTF-8") or name
@@ -481,11 +481,11 @@ class PodcastFeedly(Screen):
 
 		self["list"] = MenuList(list)
 
-        def ok(self):
+	def ok(self):
 		if len(self.urls) > 0:
-                	cur = self.urls[self["list"].getSelectedIndex()]
-                        self.session.open(PodcastMovies, cur)
-                                                                        			
+			cur = self.urls[self["list"].getSelectedIndex()]
+			self.session.open(PodcastMovies, cur)
+
 ###################################################
 
 class LocationSelection(Screen):
@@ -631,8 +631,8 @@ class Podcast(Screen):
 		cur = self["list"].getCurrent()
 		if cur == _("from xml"):
 			self.session.open(PodcastXML)
-                elif cur == _("Feedly OPML"):
-                        self.session.open(PodcastFeedly)
+		elif cur == _("Feedly OPML"):
+			self.session.open(PodcastFeedly)
 		else:
 			self.session.open(PodcastConfig)
 

@@ -85,13 +85,13 @@ class AutoMountManager(Screen):
 	def keyOK(self, returnValue = None):
 		if returnValue == None:
 			returnValue = self["config"].getCurrent()[1]
-			if returnValue is "add":
+			if returnValue == "add":
 				self.addMount()
-			elif returnValue is "view":
+			elif returnValue == "view":
 				self.viewMounts()
-			elif returnValue is "user":
+			elif returnValue == "user":
 				self.userEdit()
-			elif returnValue is "hostname":
+			elif returnValue == "hostname":
 				self.hostEdit()
 
 	def addMount(self):

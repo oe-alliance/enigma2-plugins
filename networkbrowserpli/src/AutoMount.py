@@ -132,7 +132,7 @@ class AutoMount():
 				command = "umount -fl '%s'" % path
 
 			elif data['active'] == 'True' or data['active'] is True:
-			        try:
+				try:
 					if not os.path.exists(path):
 						os.makedirs(path)
 					if data['mounttype'] == 'nfs':
@@ -151,7 +151,7 @@ class AutoMount():
 							tmpcmd = "mount -t cifs -o %s '//%s/%s' '%s'" % (options, data['ip'], data['sharedir'], path)
 							command = tmpcmd.encode("UTF-8")
 				except Exception as ex:
-				        print("[AutoMount.py] Failed to create", path, "Error:", ex)
+					print("[AutoMount.py] Failed to create", path, "Error:", ex)
 					command = None
 			if command:
 				print("[AutoMount.py] U/MOUNTCMD--->", command)
@@ -176,7 +176,7 @@ class AutoMount():
 					self.automounts[data['sharename']]['isMounted'] = False
 				if os.path.exists(path):
 					if not os.path.ismount(path):
-					        try:
+						try:
 							os.rmdir(path)
 							harddiskmanager.removeMountedPartition(path)
 						except Exception as ex:
@@ -206,7 +206,7 @@ class AutoMount():
 			print("[AutoMount.py] add symlink fails!", ex)
 		movie = os.path.join(hdd_dir, 'movie')
 		if not os.path.exists(movie):
-		        try:
+			try:
 				os.mkdir(movie)
 			except Exception as ex:
 				print("[AutoMount.py] Failed to create ", movie, "Error:", ex)
@@ -286,7 +286,7 @@ class AutoMount():
 		(path, callback ) = extra_args
 		if os.path.exists(path):
 			if not os.path.ismount(path):
-			        try:
+				try:
 					os.rmdir(path)
 					harddiskmanager.removeMountedPartition(path)
 				except Exception as ex:

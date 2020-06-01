@@ -45,7 +45,7 @@ class GoogleSuggestions():
 
 
 	def getSuggestions(self, querryString):
-		if querryString is not "":
+		if querryString != "":
 			querry = self.prepQuerry + urllib.quote(querryString)
 			try:
 				self.conn.request("GET", querry)

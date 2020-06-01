@@ -341,7 +341,7 @@ class IMDB(Screen, HelpableScreen):
 			self["extralabel"].pageDown()
 
 	def showMenu(self):
-		if ( self.Page is 1 or self.Page is 2 ) and self.resultlist:
+		if ( self.Page == 1 or self.Page == 2 ) and self.resultlist:
 			self["menu"].show()
 			self["stars"].hide()
 			self["starsbg"].hide()

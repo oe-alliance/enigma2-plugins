@@ -635,7 +635,7 @@ class AutoFrameRate(Screen):
 		seekable = self.getSeek()
 		if seekable is None:
 			return
- 		seekable.seekRelative(pts < 0 and -1 or 1, abs(pts))
+		seekable.seekRelative(pts < 0 and -1 or 1, abs(pts))
 
 class ManualResolution(Screen):
 	def __init__(self, session):

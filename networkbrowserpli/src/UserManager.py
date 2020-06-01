@@ -78,7 +78,7 @@ class UserManager(Screen):
 		if cur:
 			returnValue = cur[1]
 			hostinfo = cur[0]
-			if returnValue is "edit":
+			if returnValue == "edit":
 				self.session.open(UserDialog, self.skin_path, hostinfo)
 
 	def delete(self, returnValue = None):
