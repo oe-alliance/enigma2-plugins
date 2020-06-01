@@ -21,6 +21,9 @@ from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_
 from Components.MenuList import MenuList
 from Tools.BoundFunction import boundFunction
 
+import six
+
+
 class AdvHdmiCecSetup(Screen, ConfigListScreen):
 	skin = """
 		<screen name="adv_hdmi_setup" position="center,center" size="580,480" title="Advanced HDMI-Cec Setup" >
@@ -134,7 +137,7 @@ class AdvHdmiCecSetup(Screen, ConfigListScreen):
 		infoMsg = _("Version: ") + ADVHDMI_VERSION + "\n\n"
 		if advhdmiHooks:
 			infoMsg += _("Registered HDMI-Cec-Hooks:") + "\n"
-			for hookKey, hook in advhdmiHooks.iteritems():
+			for hookKey, hook in six.iteritems(advhdmiHooks):
 				infoMsg += _("Hook") + " '" + str(hookKey) + "':\n"
 				infoMsg += str(hook.hookDescription) + "\n\n"
 		else:

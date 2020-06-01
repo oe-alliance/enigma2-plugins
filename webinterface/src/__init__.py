@@ -5,6 +5,9 @@ from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os, gettext, hashlib
 
+from six.moves import reduce
+
+
 __version__ = "1.9.0"
 
 PluginLanguageDomain = "WebInterface"

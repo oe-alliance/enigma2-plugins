@@ -18,7 +18,7 @@ from EPGRefreshTimer import epgrefreshtimer, EPGRefreshTimerEntry, checkTimespan
 # To calculate next timer execution
 from time import time
 
-# Error-print
+# Error-print()
 from traceback import print_exc
 from sys import stdout
 

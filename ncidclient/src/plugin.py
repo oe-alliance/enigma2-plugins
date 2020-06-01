@@ -190,6 +190,11 @@ def handleReverseLookupResult(name):
 	return name
 
 from xml.dom.minidom import parse
+
+import six
+from six.moves import reload_module
+
+
 cbcInfos = {}
 def initCbC():
 	callbycallFileName = resolveFilename(SCOPE_PLUGINS, "Extensions/NcidClient/callbycall_world.xml")
@@ -249,7 +254,7 @@ class NcidClientPhonebook:
 		self.phonebook = {}
 		self.reload()
 
-	def reload(self):
+	def reload_module(self):
 		debug("[NcidClientPhonebook] reload")
 		# Beware: strings in phonebook.phonebook have to be in utf-8!
 		self.phonebook = {}
@@ -293,7 +298,7 @@ class NcidClientPhonebook:
 					os.rename(phonebookFilename, phonebookFilename + ".bck")
 					fNew = open(phonebookFilename, 'w')
 					# Beware: strings in phonebook.phonebook are utf-8!
-					for (number, name) in self.phonebook.iteritems():
+					for (number, name) in six.iteritems(self.phonebook):
 						# Beware: strings in PhoneBook.txt have to be in utf-8!
 						fNew.write(number + "#" + name.encode("utf-8"))
 					fNew.close()
@@ -470,7 +475,7 @@ class NcidClientPhonebook:
 			debug("[NcidClientPhonebook] displayPhonebook/display")
 			self.sortlist = []
 			# Beware: strings in phonebook.phonebook are utf-8!
-			sortlistHelp = sorted((name.lower(), name, number) for (number, name) in phonebook.phonebook.iteritems())
+			sortlistHelp = sorted((name.lower(), name, number) for (number, name) in six.iteritems(phonebook.phonebook))
 			for (low, name, number) in sortlistHelp:
 				if number == "01234567890":
 					continue

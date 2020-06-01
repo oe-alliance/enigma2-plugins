@@ -29,21 +29,21 @@ import os, re
 try:
 	import htmlentitydefs
 	from urllib import quote_plus
-	iteritems = lambda d: d.iteritems()
+	iteritems = lambda d: six.iteritems(d)
 except ImportError as ie:
 	from html import entities as htmlentitydefs
 	from urllib.parse import quote_plus
 	iteritems = lambda d: d.items()
 	unichr = chr
 import os, gettext
+import six
+from six.moves.html_parser import HTMLParser
 
 # Configuration
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo, ConfigText
 from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-
-from HTMLParser import HTMLParser
 
 def transHTML(text):
 	h = HTMLParser()
@@ -159,9 +159,9 @@ class IMDB(Screen, HelpableScreen):
 		</screen>"""
 
 	# Some HTML entities as utf-8
-	NBSP = unichr(htmlentitydefs.name2codepoint['nbsp']).encode("utf8")
-	RAQUO = unichr(htmlentitydefs.name2codepoint['raquo']).encode("utf8")
-	HELLIP = unichr(htmlentitydefs.name2codepoint['hellip']).encode("utf8")
+	NBSP = six.unichr(htmlentitydefs.name2codepoint['nbsp']).encode("utf8")
+	RAQUO = six.unichr(htmlentitydefs.name2codepoint['raquo']).encode("utf8")
+	HELLIP = six.unichr(htmlentitydefs.name2codepoint['hellip']).encode("utf8")
 
 	def __init__(self, session, eventName, callbackNeeded=False, save=False, savepath=None, localpath=None):
 		Screen.__init__(self, session)
@@ -613,7 +613,7 @@ class IMDB(Screen, HelpableScreen):
 
 	def getIMDB(self, search=False):
 		self.resetLabels()
-		if not isinstance(self.eventName, basestring):
+		if not isinstance(self.eventName, six.string_types):
 			self["statusbar"].setText("")
 			return
 		if not self.eventName:
@@ -673,12 +673,12 @@ class IMDB(Screen, HelpableScreen):
 
 		if 'charset="utf-8"' in in_html or 'charset=utf-8' in in_html:
 			for key, codepoint in iteritems(entitydict):
-				in_html = in_html.replace(key, unichr(int(codepoint)).encode('utf8'))
+				in_html = in_html.replace(key, six.unichr(int(codepoint)).encode('utf8'))
 			self.inhtml = in_html
 			return
 
 		for key, codepoint in iteritems(entitydict):
-			in_html = in_html.replace(key, unichr(int(codepoint)).encode('latin-1', 'ignore'))
+			in_html = in_html.replace(key, six.unichr(int(codepoint)).encode('latin-1', 'ignore'))
 		self.inhtml = in_html.decode('latin-1').encode('utf8')
 
 	def IMDBquery(self, string):

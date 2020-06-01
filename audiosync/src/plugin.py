@@ -8,6 +8,9 @@ from Screens.MessageBox import MessageBox
 import AC3main
 import AC3setup
 
+from six.moves import reload_module
+
+
 config.plugins.AC3LipSync = ConfigSubsection()
 config.plugins.AC3LipSync.outerBounds = ConfigInteger(default = 1000, limits = (-10000, 10000))
 config.plugins.AC3LipSync.arrowStepSize = ConfigInteger(default = 5, limits = (-10000, 10000))
@@ -22,7 +25,7 @@ config.plugins.AC3LipSync.position_x = ConfigInteger(default=0)
 config.plugins.AC3LipSync.position_y = ConfigInteger(default=0)
 
 def main(session, **kwargs):
-#	 reload(AC3main)
+#	 reload_module(AC3main)
 	session.open(AC3main.AC3LipSync, plugin_path)
 
 def startSetup(menuid, **kwargs):
@@ -43,11 +46,11 @@ def startSetup(menuid, **kwargs):
 			return []
 
 def setup(session, **kwargs):
-#	 reload(AC3setup)
+#	 reload_module(AC3setup)
 	session.open(AC3setup.AC3LipSyncSetup, plugin_path)
 
 def audioMenu(session, **kwargs):
-#	 reload(AC3setup)
+#	 reload_module(AC3setup)
 	session.open(AC3main.AC3LipSync, plugin_path)
 
 def Plugins(path,**kwargs):

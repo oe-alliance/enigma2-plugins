@@ -22,6 +22,9 @@ from urllib2 import Request, urlopen, URLError, HTTPError
 from xml.dom import minidom, Node
 from enigma import loadPic, eTimer
 
+import six
+
+
 METEOITALIA_ABOUT_TXT = "Meteo Italia Info Plugin v 0.1\n\nAuthor(s): Bacicciosat - Lupomeo\nGraphics: Army\nPackage Maintainer: Spaeleus\nRss Meteo: www.google.it\n"
 
 class meteoitMain(Screen):
@@ -113,7 +116,7 @@ class meteoitMain(Screen):
         				'forecast_information': ('postal_code', 'current_date_time'),
         				'current_conditions': ('condition', 'temp_c', 'humidity', 'wind_condition', 'icon')
     				}
-    				for (tag, list_of_tags2) in data_structure.iteritems():
+    				for (tag, list_of_tags2) in six.iteritems(data_structure):
         				tmp_conditions = {}
        					for tag2 in list_of_tags2:
             					try: 

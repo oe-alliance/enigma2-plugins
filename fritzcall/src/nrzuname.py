@@ -46,11 +46,14 @@ except ValueError:
 		if debugVal:
 			print(message)
 
-import htmlentitydefs
 
+import six
 from twisted.web.client import getPage  # @UnresolvedImport
 from twisted.internet import reactor  # @UnresolvedImport
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+
+
+from six.moves import html_entities
 
 
 def html2unicode(in_html):
@@ -84,7 +87,7 @@ def html2unicode(in_html):
 		entitydict[x.group(1)] = x.group(2)
 	for key, name in entitydict.items():
 		try:
-			entitydict[key] = htmlentitydefs.name2codepoint[str(name)]
+			entitydict[key] = html_entities.name2codepoint[str(name)]
 		except KeyError:
 			warn("KeyError " + key + "/" + name)
 
@@ -95,7 +98,7 @@ def html2unicode(in_html):
 		entitydict[x.group(1)] = x.group(2)
 	for key, codepoint in entitydict.items():
 		try:
-			uml = unichr(int(codepoint))
+			uml = six.unichr(int(codepoint))
 			debug("replace %s with %s in %s", repr(key), repr(uml), repr(in_html[0:20] + '...'))
 			in_html = in_html.replace(key, uml)
 		except ValueError as e:

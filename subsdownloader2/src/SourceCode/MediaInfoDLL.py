@@ -32,6 +32,9 @@ import os
 import sys
 from ctypes import *
 
+import six
+
+
 if os.name == "nt" or os.name == "dos" or os.name == "os2" or os.name == "ce":
 	MediaInfoDLL_Handler = windll.MediaInfo
 	MustUseAnsi = 0
@@ -208,25 +211,25 @@ class MediaInfo:
 	#General information
 	def Inform(self):
 		if MustUseAnsi:
-			return unicode(self.MediaInfoA_Inform(self.Handle, 0), "utf_8") 
+			return six.text_type(self.MediaInfoA_Inform(self.Handle, 0), "utf_8") 
 		else:
 			return self.MediaInfo_Inform(self.Handle, 0)
 	def Get(self, StreamKind, StreamNumber, Parameter, InfoKind=Info.Text, SearchKind=Info.Name):
 		if isinstance(Parameter, str):
-			return unicode(self.MediaInfoA_Get(self.Handle, StreamKind, StreamNumber, Parameter, InfoKind, SearchKind), "utf_8") 
+			return six.text_type(self.MediaInfoA_Get(self.Handle, StreamKind, StreamNumber, Parameter, InfoKind, SearchKind), "utf_8") 
 		elif MustUseAnsi:
-			return unicode(self.MediaInfoA_Get(self.Handle, StreamKind, StreamNumber, Parameter.encode("utf-8"), InfoKind, SearchKind), "utf_8") 
+			return six.text_type(self.MediaInfoA_Get(self.Handle, StreamKind, StreamNumber, Parameter.encode("utf-8"), InfoKind, SearchKind), "utf_8") 
 		else:
 			return self.MediaInfo_Get(self.Handle, StreamKind, StreamNumber, Parameter, InfoKind, SearchKind)
 	def GetI(self, StreamKind, StreamNumber, Parameter, InfoKind=Info.Text):
 		if MustUseAnsi:
-			return unicode(self.MediaInfoA_GetI(self.Handle, StreamKind, StreamNumber, Parameter, InfoKind), "utf_8") 
+			return six.text_type(self.MediaInfoA_GetI(self.Handle, StreamKind, StreamNumber, Parameter, InfoKind), "utf_8") 
 		else:
 			return self.MediaInfo_GetI(self.Handle, StreamKind, StreamNumber, Parameter, InfoKind)
 	def Set(self, ToSet, StreamKind, StreamNumber, Parameter, OldParameter=u""):
-		if isinstance(Parameter, str) and isinstance(OldParameter, unicode):
+		if isinstance(Parameter, str) and isinstance(OldParameter, six.text_type):
 			Parameter=Parameter.decode("utf-8")
-		if isinstance(Parameter, unicode) and isinstance(OldParameter, str):
+		if isinstance(Parameter, six.text_type) and isinstance(OldParameter, str):
 			OldParameter=OldParameter.decode("utf-8")
 		if isinstance(Parameter, str):
 			return self.MediaInfoA_Set(self.Handle, ToSet, StreamKind, StreamNumber, Parameter, OldParameter)
@@ -242,25 +245,25 @@ class MediaInfo:
 
 	#Options
 	def Option(self, Option, Value=u""):
-		if isinstance(Option, str) and isinstance(Value, unicode):
+		if isinstance(Option, str) and isinstance(Value, six.text_type):
 			Option=Option.decode("utf-8")
-		if isinstance(Option, unicode) and isinstance(Value, str):
+		if isinstance(Option, six.text_type) and isinstance(Value, str):
 			Value=Value.decode("utf-8")
 		if isinstance(Option, str):
-			return unicode(self.MediaInfoA_Option(self.Handle, Option.encode("utf-8"), Value.encode("utf-8")), "utf_8") 
+			return six.text_type(self.MediaInfoA_Option(self.Handle, Option.encode("utf-8"), Value.encode("utf-8")), "utf_8") 
 		elif MustUseAnsi:
-			return unicode(self.MediaInfoA_Option(self.Handle, Option.encode("utf-8"), Value.encode("utf-8")), "utf_8") 
+			return six.text_type(self.MediaInfoA_Option(self.Handle, Option.encode("utf-8"), Value.encode("utf-8")), "utf_8") 
 		else:
 			return self.MediaInfo_Option(self.Handle, Option, Value)
 	def Option_Static(self, Option, Value=u""):
-		if isinstance(Option, str) and isinstance(Value, unicode):
+		if isinstance(Option, str) and isinstance(Value, six.text_type):
 			Option=Option.decode("utf-8")
-		if isinstance(Option, unicode) and isinstance(Value, str):
+		if isinstance(Option, six.text_type) and isinstance(Value, str):
 			Value=Value.decode("utf-8")
 		if isinstance(Option, str):
-			return unicode(self.MediaInfoA_Option(None, Option, Value), "utf_8") 
+			return six.text_type(self.MediaInfoA_Option(None, Option, Value), "utf_8") 
 		elif MustUseAnsi:
-			return unicode(self.MediaInfoA_Option(None, Option.encode("utf-8"), Value.encode("utf-8")), "utf_8") 
+			return six.text_type(self.MediaInfoA_Option(None, Option.encode("utf-8"), Value.encode("utf-8")), "utf_8") 
 		else:
 			return self.MediaInfo_Option(None, Option, Value)
 	def State_Get(self):

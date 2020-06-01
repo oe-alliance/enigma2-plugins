@@ -1,6 +1,6 @@
 """
 The gntp.config module is provided as an extended GrowlNotifier object that takes
-advantage of the ConfigParser module to allow us to setup some default values
+advantage of the configparser module to allow us to setup some default values
 (such as hostname, password, and port) in a more global way to be shared among
 programs using gntp
 
@@ -9,9 +9,11 @@ from the gntp.notifier class since I do not know of an easy way to reuse the
 code yet fire using the copy of GrowlNotifier in this module
 """
 import os
-import ConfigParser
 import gntp.notifier
 import logging
+
+from six.moves import configparser
+
 
 __all__ = [
 	'mini',
@@ -57,7 +59,7 @@ def mini(description, applicationName='PythonMini', noteType="Message",
 
 class GrowlNotifier(gntp.notifier.GrowlNotifier):
 	"""
-	ConfigParser enhanced GrowlNotifier object
+	configparser enhanced GrowlNotifier object
 
 	For right now, we are only interested in letting users overide certain
 	values from ~/.gntp
@@ -72,7 +74,7 @@ class GrowlNotifier(gntp.notifier.GrowlNotifier):
 	def __init__(self, applicationName='Python GNTP', notifications=[],
 			defaultNotifications=None, applicationIcon=None, hostname='localhost',
 			password=None, port=23053):
-		config = ConfigParser.RawConfigParser({
+		config = configparser.RawConfigParser({
 			'hostname': hostname,
 			'password': password,
 			'port': port,

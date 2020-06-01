@@ -243,7 +243,7 @@ class FetchingMovies(Thread):
             for item_list in self.items:
                 try:
                     if self.cancel:
-                        #print "Movie download cancelled"
+                        #print("Movie download cancelled")
                         self.finish()
                         return
                     service = item_list[0]
@@ -267,7 +267,7 @@ class FetchingMovies(Thread):
         global fetchingMovies, this_session, is_hidden
         fetchingMovies = None
         current = total
-        #print "Movie download finished"
+        #print("Movie download finished")
         if is_hidden == True:
             this_session.open(MessageBox, (_("Download and save from movie infos and covers complete.")), MessageBox.TYPE_INFO) # Topfi: removed last parameter
             this_session = None

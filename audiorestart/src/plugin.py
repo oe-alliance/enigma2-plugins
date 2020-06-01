@@ -12,6 +12,9 @@ from Screens.Screen import Screen
 from __init__ import _
 import NavigationInstance
 
+from six.moves import reload_module
+
+
 config.plugins.AudioRestart = ConfigSubsection()
 config.plugins.AudioRestart.restartSelection = ConfigSelection( default = "disabled", choices = [("disabled", _("disabled")), ("restart", _("after restart")), ("standby", _("after standby")), ("both", _("after restart/standby"))])
 config.plugins.AudioRestart.restartDelay = ConfigInteger(default = 5, limits = (0, 30))
@@ -134,7 +137,7 @@ def sessionstart(reason, **kwargs):
         AudioRestart()
 
 def setup(session, **kwargs):
-#    reload(AC3setup)
+#    reload_module(AC3setup)
     session.open(AudioRestartSetup, plugin_path)
         
 def Plugins(path,**kwargs):

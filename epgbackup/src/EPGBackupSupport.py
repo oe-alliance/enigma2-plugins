@@ -12,7 +12,10 @@ from Tools.HardwareInfo import HardwareInfo
 
 from . import _
 
-# Error-print
+# Error-print()
+
+from __future__ import print_function
+
 from EPGBackupTools import debugOut, _getLogFilename, EPGBACKUP_NOTIFICATIONDOMAIN
 from traceback import format_exc
 

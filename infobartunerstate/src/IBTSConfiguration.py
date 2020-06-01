@@ -33,6 +33,9 @@ from Screens.Setup import SetupSummary
 from InfoBarTunerState import InfoBarTunerState, addExtension, removeExtension, overwriteInfoBar, recoverInfoBar
 
 
+import six
+
+
 #######################################################
 # Configuration screen
 class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
@@ -98,11 +101,11 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 			(  separator, config.infobartunerstate.about ),
 		]
 		
-		for i, configinfobartunerstatefield in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
+		for i, configinfobartunerstatefield in enumerate( six.itervalues(config.infobartunerstate.fields.dict()) ):
 			self.config.append(
 			(  _("Field %d content") % (i), configinfobartunerstatefield )
 			)
-		for i, configinfobartunerstatefieldwidth in enumerate( config.infobartunerstate.fieldswidth.dict().itervalues() ):
+		for i, configinfobartunerstatefieldwidth in enumerate( six.itervalues(config.infobartunerstate.fieldswidth.dict()) ):
 			self.config.append(
 			(  _("Field %d width") % (i), configinfobartunerstatefieldwidth )
 			)
@@ -168,7 +171,7 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 		fieldicon = []
 		fieldprogress = []
 		text = ""
-		for i, c in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
+		for i, c in enumerate( six.itervalues(config.infobartunerstate.fields.dict()) ):
 			if c.value == "Name":
 				fieldname.append( i )
 			if c.value == "TypeIcon":

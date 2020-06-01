@@ -15,8 +15,8 @@ from os import mkdir
 mcpath = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/"
 #try:
 #	from enigma import evfd
-#except Exception, e:
-#	print "Media Center: Import evfd failed"
+#except Exception as e:
+#	print("Media Center: Import evfd failed")
 class MC_Settings(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)

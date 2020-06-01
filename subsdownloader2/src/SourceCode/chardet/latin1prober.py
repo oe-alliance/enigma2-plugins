@@ -30,6 +30,9 @@ from charsetprober import CharSetProber
 import constants
 import operator
 
+from six.moves import reduce
+
+
 FREQ_CAT_NUM = 4
 
 UDF = 0 # undefined

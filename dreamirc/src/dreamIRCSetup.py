@@ -82,7 +82,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 
 	def load(self):
 		self.reloadFile()
-		self.accounts=[ircsupport.IRCAccount(self.type, string.atoi(self.nr), str(self.nick), str(self.passwd), str(self.server1), string.atoi(self.port), str(self.channel))]
+		self.accounts=[ircsupport.IRCAccount(self.type, int(self.nr), str(self.nick), str(self.passwd), str(self.server1), int(self.port), str(self.channel))]
 		print(self.accounts)
 		return self.accounts
 
@@ -121,7 +121,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 		self.dreamIRCconf.server1 = ConfigText(default = self.server1, fixed_size = False)
 		self.dreamIRCconf.server2 = ConfigText(default = self.server2, fixed_size = False)
 		self.dreamIRCconf.server3 = ConfigText(default = self.server3, fixed_size = False)
-		self.dreamIRCconf.port = ConfigInteger(default = string.atoi(self.port), limits = (0, 99999))
+		self.dreamIRCconf.port = ConfigInteger(default = int(self.port), limits = (0, 99999))
 		self.dreamIRCconf.channel = ConfigText(default = self.channel, fixed_size = False)
 		self.dreamIRCconf.debug = ConfigSelection(default=self.debug, choices = ["False", "True"])
 
@@ -245,7 +245,7 @@ class dreamIRCConfig:
 			return False
 		else:
 			print(" account = type: %s login:%s nick:%s passwd:%s server:%s ip:%s port:%s channel:%s debug:%s " % (self.type, self.login, self.nick, self.passwd, self.server, self.ip, self.port, self.channel, self.debug))
-			self.accounts=[ircsupport.IRCAccount(self.type, string.atoi(self.login), str(self.nick), str(self.passwd), str(self.ip), string.atoi(self.port), str(self.channel))]
+			self.accounts=[ircsupport.IRCAccount(self.type, int(self.login), str(self.nick), str(self.passwd), str(self.ip), int(self.port), str(self.channel))]
 			print(self.accounts)
 			return self.accounts
 	

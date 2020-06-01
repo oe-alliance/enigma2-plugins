@@ -64,7 +64,7 @@ class TCPHandler(SocketServer.BaseRequestHandler):
             # self.request is the TCP socket connected to the client
             data = self.request.recv(1024).strip()
             #print str(self.client_address[0]), "wrote"
-            #print data
+            #print(data)
             self.request.send(MessageQueue.getRequest(data))
         except Exception as e:
             print(e)

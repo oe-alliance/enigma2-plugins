@@ -1,3 +1,6 @@
+import six
+
+
 # Backport of OrderedDict() class that runs on Python 2.4, 2.5, 2.6, 2.7 and pypy.
 # Passes Python2.7's test suite and incorporates all the latest updates.
 
@@ -78,7 +81,7 @@ class OrderedDict(dict):
     def clear(self):
         'od.clear() -> None.  Remove all items from od.'
         try:
-            for node in self.__map.itervalues():
+            for node in six.itervalues(self.__map):
                 del node[:]
             root = self.__root
             root[:] = [root, root, None]
@@ -125,7 +128,7 @@ class OrderedDict(dict):
         return [(key, self[key]) for key in self]
 
     def iterkeys(self):
-        'od.iterkeys() -> an iterator over the keys in od'
+        'six.iterkeys(od) -> an iterator over the keys in od'
         return iter(self)
 
     def itervalues(self):

@@ -35,6 +35,9 @@ from Tools.XMLTools import stringToXML
 
 from shutil import copyfile, Error
 
+import six
+
+
 XML_CONFIG = "/etc/enigma2/pluginsort.xml"
 DEBUG = False
 
@@ -93,7 +96,7 @@ del pdict
 
 try:
 	dict.iteritems
-	iteritems = lambda d: d.iteritems()
+	iteritems = lambda d: six.iteritems(d)
 except AttributeError:
 	iteritems = lambda d: d.items()
 reverse = lambda map: dict((v, k) for k, v in iteritems(map))

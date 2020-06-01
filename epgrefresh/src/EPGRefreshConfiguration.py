@@ -28,7 +28,7 @@ from EPGRefresh import epgrefresh
 from Components.NimManager import nimmanager
 from Screens.MessageBox import MessageBox
 
-# Error-print
+# Error-print()
 from traceback import print_exc
 from sys import stdout
 import os

@@ -139,7 +139,7 @@ class MovieScanner():
     def updateMovieList(self, dir_list=None, delay=0):
         print("[AdvancedMovieSelection] Start scanning movies")
         try:
-            # print dir_list
+            # print(dir_list)
             self.isWorking = True
             if delay > 0:
                 print("waiting", str(delay))
@@ -152,7 +152,7 @@ class MovieScanner():
             
             # print "-" * 80
             # for p in dir_list:
-            #    print p
+            #    print(p)
             # print "-" * 80
             
             for p in dir_list:
@@ -187,7 +187,7 @@ class MovieScanner():
             if not serviceref.valid():
                 break
             dvd = None
-            # print serviceref.getPath()
+            # print(serviceref.getPath())
             # dvd structure
             if serviceref.flags & eServiceReference.mustDescent:
                 dvd = detectDVDStructure(serviceref.getPath())

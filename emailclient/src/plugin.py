@@ -1067,6 +1067,10 @@ class EmailAccountList(Screen):
 
 from Tools.Directories import resolveFilename, SCOPE_SYSETC, SCOPE_CONFIG, SCOPE_PLUGINS
 import csv
+
+from six.moves import reduce
+
+
 MAILCONF = resolveFilename(SCOPE_CONFIG, "EmailClient.csv")
 
 #

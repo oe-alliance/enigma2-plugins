@@ -37,6 +37,9 @@ from urlparse import urlparse, urlunparse
 from xml.etree.cElementTree import parse
 import os, gettext, re, socket, sys, urllib, urllib2
 
+import six
+
+
 ##############################################################################
 
 config.plugins.RSDownloader = ConfigSubsection()
@@ -1168,7 +1171,7 @@ class Unrar:
 
 	def decode_charset(self, str, charset):
 		try:
-			uni = unicode(str, charset, 'strict')
+			uni = six.text_type(str, charset, 'strict')
 		except:
 			uni = str
 		return uni

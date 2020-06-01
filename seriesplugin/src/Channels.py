@@ -37,6 +37,9 @@ from . import _
 from XMLFile import XMLFile, indent
 from Logger import log
 
+import six
+
+
 try:
 	#Python >= 2.7
 	from collections import OrderedDict
@@ -294,7 +297,7 @@ class ChannelsBase(XMLFile):
 				# Build Body
 				def build(root, channels):
 					if channels:
-						for reference, namealternatives in channels.iteritems():
+						for reference, namealternatives in six.iteritems(channels):
 							name, alternatives = namealternatives[:]
 							if alternatives:
 								# Add channel

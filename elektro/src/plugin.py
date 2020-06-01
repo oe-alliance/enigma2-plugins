@@ -400,13 +400,13 @@ class ElektroProfile(ConfigListScreen, Screen):
 		}, -2)
 
 	def save(self):
-		#print "saving"
+		#print("saving")
 		for x in self["config"].list:
 			x[1].save()
 		self.close(False, self.session)
 
 	def cancel(self):
-		#print "cancel"
+		#print("cancel")
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close(False, self.session)
@@ -446,13 +446,13 @@ class ElektroIP(ConfigListScreen, Screen):
 		}, -2)
 
 	def save(self):
-		#print "saving"
+		#print("saving")
 		for x in self["config"].list:
 			x[1].save()
 		self.close(False, self.session)
 
 	def cancel(self):
-		#print "cancel"
+		#print("cancel")
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close(False, self.session)
@@ -530,13 +530,13 @@ class ElektroNAS(ConfigListScreen, Screen):
 		self.session.open(ElektroNASrun)
 
 	def save(self):
-		#print "saving"
+		#print("saving")
 		for x in self["config"].list:
 			x[1].save()
 		self.close(False, self.session)
 
 	def cancel(self):
-		#print "cancel"
+		#print("cancel")
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close(False, self.session)

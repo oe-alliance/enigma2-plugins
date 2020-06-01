@@ -25,6 +25,9 @@ from . import EmissionBandwidth
 from . import EmissionDetailview
 from . import EmissionSetup
 
+from six.moves import reload_module
+
+
 LIST_TYPE_ALL = 0
 LIST_TYPE_DOWNLOADING = 1
 LIST_TYPE_SEEDING = 2
@@ -267,7 +270,7 @@ class EmissionOverview(Screen, HelpableScreen):
 			)
 
 	def configure(self):
-		#reload(EmissionSetup)
+		#reload_module(EmissionSetup)
 		self.timer.stop()
 		self.session.openWithCallback(
 			self.configureCallback,
@@ -347,7 +350,7 @@ class EmissionOverview(Screen, HelpableScreen):
 		if self.transmission is None:
 			return
 
-		#reload(EmissionBandwidth)
+		#reload_module(EmissionBandwidth)
 		self.timer.stop()
 		try:
 			sess = self.transmission.get_session()
@@ -462,7 +465,7 @@ class EmissionOverview(Screen, HelpableScreen):
 	def ok(self):
 		cur = self['list'].getCurrent()
 		if self.transmission is not None and cur:
-			#reload(EmissionDetailview)
+			#reload_module(EmissionDetailview)
 			self.timer.stop()
 			self.session.openWithCallback(
 				self.updateList,

@@ -66,6 +66,10 @@ from skin import parseColor, parseFont
 from netstat import netstat
 
 
+import six
+from six.moves import range
+
+
 # Extenal plugins: WebInterface
 try:
 	from Plugins.Extensions.WebInterface.WebScreens import StreamingWebScreen 
@@ -392,7 +396,7 @@ class InfoBarTunerState(object):
 				
 #				# Workaround to retrieve the client ip
 #				# Change later and use the WebScreens getActiveStreamingClients if implemented
-#				ipports = [ (win.ip, win.port) for win in self.entries.itervalues() ]
+#				ipports = [ (win.ip, win.port) for win in six.itervalues(self.entries) ]
 #				for conn in netstat(getstate='ESTABLISHED', getuid=False, getpid=False, readable=False):
 #					# Check if it is a streaming connection
 #					if conn[3] == '8001':
@@ -706,10 +710,10 @@ class InfoBarTunerState(object):
 			#print "IBTS overwidth", overwidth
 			
 			# Order windows
-			#wins = sorted( self.entries.itervalues(), key=lambda x: (x.type, x.endless, x.timeleft, x.begin), reverse=False )
+			#wins = sorted( six.itervalues(self.entries), key=lambda x: (x.type, x.endless, x.timeleft, x.begin), reverse=False )
 			
 			#TEST 1
-			#wins = sorted( self.entries.itervalues(), key=lambda x: (x.type, x.endless, x.timeleft, x.begin), reverse=config.infobartunerstate.list_goesup.value )
+			#wins = sorted( six.itervalues(self.entries), key=lambda x: (x.type, x.endless, x.timeleft, x.begin), reverse=config.infobartunerstate.list_goesup.value )
 			
 			#TEST 2
 			#wins = []
@@ -721,7 +725,7 @@ class InfoBarTunerState(object):
 			#	wins.reverse()
 			
 			#TEST 3
-			wins = sorted( self.entries.itervalues(), key=lambda x: (x.type, x.endless, x.begin), reverse=config.infobartunerstate.list_goesup.value )
+			wins = sorted( six.itervalues(self.entries), key=lambda x: (x.type, x.endless, x.begin), reverse=config.infobartunerstate.list_goesup.value )
 			
 			# Resize, move and show windows
 			for win in wins:
@@ -743,7 +747,7 @@ class InfoBarTunerState(object):
 
 	def update(self):
 		print("IBTS updating")
-		#for win in self.entries.itervalues():
+		#for win in six.itervalues(self.entries):
 		#	#TODO Update also names, width, order, type ...
 		#	win.update()
 		self.tunerShow()
@@ -758,7 +762,7 @@ class InfoBarTunerState(object):
 
 	def tunerHide(self):
 		print("IBTS tunerHide")
-		for win in self.entries.itervalues():
+		for win in six.itervalues(self.entries):
 			win.hide()
 		if self.info:
 			self.info.hide()
@@ -793,8 +797,8 @@ class TunerStateBase(Screen):
 		self["Type"] = MultiPixmap()
 		self["Progress"] = ProgressBar()
 		
-		for i in xrange( len( config.infobartunerstate.fields.dict() ) ):
-		#for i, c in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
+		for i in range( len( config.infobartunerstate.fields.dict() ) ):
+		#for i, c in enumerate( six.itervalues(config.infobartunerstate.fields.dict()) ):
 			label = Label()
 			#fieldid = "Field"+str(i)
 			self[ "Field"+str(i) ] = label
@@ -839,7 +843,7 @@ class TunerStateBase(Screen):
 		px = padding
 		py = 0
 		sh = self.instance.size().height()
-		#print self.widths
+		#print(self.widths)
 		
 		fieldwidths = config.infobartunerstate.fieldswidth.dict().values()
 		
@@ -917,8 +921,8 @@ class TunerStateInfo(TunerStateBase):
 		
 		self["Progress"].hide()
 		
-		#for i, c in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
-		for i in xrange( len( config.infobartunerstate.fields.dict() ) ):
+		#for i, c in enumerate( six.itervalues(config.infobartunerstate.fields.dict()) ):
+		for i in range( len( config.infobartunerstate.fields.dict() ) ):
 			fieldid = "Field"+str(i)
 			
 			if fieldid == "Field0":
@@ -937,15 +941,15 @@ class TunerStateInfo(TunerStateBase):
 		
 		height = self.instance.size().height()
 		
-		#for i, c in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
-		for i in xrange( len( config.infobartunerstate.fields.dict() ) ):
+		#for i, c in enumerate( six.itervalues(config.infobartunerstate.fields.dict()) ):
+		for i in range( len( config.infobartunerstate.fields.dict() ) ):
 			fieldid = "Field"+str(i)
 			
 			#Workaround#1 Set default size
 			self[fieldid].instance.resize( eSize(1000, height) )
 			
 			width = max(self[fieldid].instance.calculateSize().width(), 0)
-			#print width
+			#print(width)
 			
 			#Workaround#2 Expand the calculate size
 			width = int( width * 1.10 )
@@ -1117,7 +1121,7 @@ class TunerState(TunerStateBase):
 		self["Type"].hide()
 		self["Progress"].hide()
 		
-		for i, c in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
+		for i, c in enumerate( six.itervalues(config.infobartunerstate.fields.dict()) ):
 			fieldid = "Field"+str(i)
 			field = c.value
 			text = ""
@@ -1259,7 +1263,7 @@ class TunerState(TunerStateBase):
 			self[fieldid].instance.resize( eSize(1000, height) )
 			
 			width = max(self[fieldid].instance.calculateSize().width(), 0)
-			#print width
+			#print(width)
 			
 			#Workaround#2
 			width = int( width * 1.10 )

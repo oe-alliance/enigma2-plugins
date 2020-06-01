@@ -16,6 +16,9 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from __init__ import _
 
+import six
+
+
 class AC3LipSync(Screen, HelpableScreen, MovableScreen):
 
     def __init__(self, session, plugin_path):
@@ -245,7 +248,7 @@ class AC3SetCustomValue:
 
     def getKeyList(self):
         keyList = []
-        for i, iValue in self.keyStep.iteritems():
+        for i, iValue in six.iteritems(self.keyStep):
             if i != "0":
                 keyList.append((_("Key %(key)s (current value: %(value)i ms)") %dict(key=i, value=iValue), i))
         return keyList

@@ -21,6 +21,9 @@ import struct
 import socket # For timeout purposes
 import re
 
+import six
+
+
 global tvshowRegex
 global tvshowRegex2 
 global movieRegex
@@ -157,7 +160,7 @@ class SubtitleDB(object):
         return fname
         
     def guessFileData(self, filename):
-        filename = unicode(self.getFileName(filename).lower())
+        filename = six.text_type(self.getFileName(filename).lower())
         matches_tvshow = self.tvshowRegex.match(filename)
         if matches_tvshow: # It looks like a tv show
             (tvshow, season, episode, teams) = matches_tvshow.groups()

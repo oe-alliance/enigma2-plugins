@@ -18,7 +18,10 @@ from Components.config import config, getConfigListEntry, configfile, NoSave
 from Components.ConfigList import ConfigListScreen
 from Components.config import KEY_OK
 
-# Error-print
+# Error-print()
+
+from __future__ import print_function
+
 from EPGBackupTools import debugOut, PLUGIN_VERSION
 from traceback import format_exc
 

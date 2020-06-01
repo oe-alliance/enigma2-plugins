@@ -66,7 +66,7 @@ def findNumber(number, filename):
 	if not fileD:
 		return
 	addrs = csv.reader(fileD, delimiter=',', quotechar='"')
-	addrs.next() # skip header
+	next(addrs) # skip header
 	for row in addrs:
 		row = map(lambda w: w.decode('cp1252').encode('utf-8'), row)
 		name = u""
@@ -152,7 +152,7 @@ def readNumbers(filename, outFun):
 	if not fileD:
 		return
 	addrs = csv.reader(fileD, delimiter=',', quotechar='"')
-	addrs.next() # skip header
+	next(addrs) # skip header
 	for row in addrs:
 		row = map(lambda w: w.decode('cp1252'), row)
 		name = u""

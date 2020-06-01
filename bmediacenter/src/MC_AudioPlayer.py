@@ -46,8 +46,8 @@ config.plugins.mc_ap.whichjpg = ConfigSelection(screensaverlist)
 playlist = []
 #try:
 #	from enigma import evfd
-#except Exception, e:
-#	print "Media Center: Import evfd failed"
+#except Exception as e:
+#	print("Media Center: Import evfd failed")
 radirl = "http://ipkserver.hdmedia-universe.com/bmcradio/"
 #for lyrics
 def getEncodedString(value):

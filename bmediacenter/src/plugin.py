@@ -23,7 +23,7 @@ loadSkin("/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultH
 #	config.plugins.mc_global.vfd.value = 'on'
 #	config.plugins.mc_global.save()
 #except Exception as e:
-#	print 'Media Center: Import evfd failed'
+#	print('Media Center: Import evfd failed')
 try:
 	from Plugins.Extensions.DVDPlayer.plugin import *
 	dvdplayer = True

@@ -14,7 +14,7 @@ from boxbranding import getImageDistro
 from Components.SystemInfo import SystemInfo
 from Components.NimManager import nimmanager
 
-# Error-print
+# Error-print()
 from traceback import print_exc
 from sys import stdout
 

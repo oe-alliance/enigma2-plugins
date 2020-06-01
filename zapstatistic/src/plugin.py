@@ -19,6 +19,9 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE
 from xml.etree.cElementTree import parse
 import os, gettext
 
+import six
+
+
 ###########################################################
 
 PluginLanguageDomain = "ZapStatistic"
@@ -40,7 +43,7 @@ language.addCallback(localeInit())
 
 def decode_charset(str, charset):
 	try:
-		uni = unicode(str, charset, 'strict')
+		uni = six.text_type(str, charset, 'strict')
 	except:
 		uni = str
 	return uni

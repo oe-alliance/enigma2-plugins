@@ -146,9 +146,9 @@ from types import *
 # Internal stuff
 
 try:
-    unicode
+    six.text_type
 except NameError:
-    unicode = None # unicode support not available
+    six.text_type = None # unicode support not available
 
 try:
     import datetime
@@ -162,8 +162,8 @@ except NameError:
 
 def _decode(data, encoding, is8bit=re.compile("[\x80-\xff]").search):
     # decode non-ascii string (if possible)
-    if unicode and encoding and is8bit(data):
-        data = unicode(data, encoding)
+    if six.text_type and encoding and is8bit(data):
+        data = six.text_type(data, encoding)
     return data
 
 def escape(s, replace=string.replace):
@@ -171,7 +171,7 @@ def escape(s, replace=string.replace):
     s = replace(s, "<", "&lt;")
     return replace(s, ">", "&gt;",)
 
-if unicode:
+if six.text_type:
     def _stringify(string):
         # convert to 7-bit ascii if possible
         try:
@@ -387,7 +387,7 @@ class DateTime:
         elif datetime and isinstance(other, datetime.datetime):
             s = self.value
             o = other.strftime("%Y%m%dT%H:%M:%S")
-        elif isinstance(other, (str, unicode)):
+        elif isinstance(other, six.string_types):
             s = self.value
             o = other
         elif hasattr(other, "timetuple"):
@@ -445,7 +445,7 @@ class DateTime:
 
     def decode(self, data):
         data = str(data)
-        self.value = string.strip(data)
+        self.value = data.strip()
 
     def encode(self, out):
         out.write("<value><dateTime.iso8601>")
@@ -469,6 +469,10 @@ def _datetime_type(data):
 # @param data An 8-bit string containing arbitrary data.
 
 import base64
+
+import six
+
+
 try:
     import cStringIO as StringIO
 except ImportError:
@@ -679,7 +683,7 @@ class Marshaller:
                 dump(v, write)
                 write("</param>\n")
             write("</params>\n")
-        result = string.join(out, "")
+        result = out.join("")
         return result
 
     def __dump(self, value, write):
@@ -742,7 +746,7 @@ class Marshaller:
         write("</string></value>\n")
     dispatch[StringType] = dump_string
 
-    if unicode:
+    if six.text_type:
         def dump_unicode(self, value, write, escape=escape):
             value = value.encode(self.encoding)
             write("<value><string>")
@@ -774,7 +778,7 @@ class Marshaller:
         for k, v in value.items():
             write("<member>\n")
             if not isinstance(k, StringType):
-                if unicode and isinstance(k, UnicodeType):
+                if six.text_type and isinstance(k, UnicodeType):
                     k = k.encode(self.encoding)
                 else:
                     raise TypeError("dictionary key must be string")
@@ -1159,7 +1163,7 @@ def dumps(params, methodname=None, methodresponse=None, encoding=None,
             )
     else:
         return data # return as is
-    return string.join(data, "")
+    return data.join("")
 
 ##
 # Convert an XML-RPC packet to a Python object.  If the XML-RPC packet
@@ -1284,7 +1288,7 @@ class Transport:
         if auth:
             import base64
             auth = base64.encodestring(urllib.unquote(auth))
-            auth = string.join(string.split(auth), "") # get rid of whitespace
+            auth = auth.split().join("") # get rid of whitespace
             extra_headers = [
                 ("Authorization", "Basic " + auth)
                 ]

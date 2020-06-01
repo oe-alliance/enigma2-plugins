@@ -16,11 +16,11 @@ from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.Console import Console
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_ACTIVE_SKIN, fileExists
 from Tools.LoadPixmap import LoadPixmap
-from cPickle import dump, load
 from os import path as os_path, stat, mkdir, remove
 from time import time
 from stat import ST_MTIME
 
+from six.moves.cPickle import dump, load
 import subprocess
 
 import netscan

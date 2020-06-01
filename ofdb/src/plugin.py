@@ -17,9 +17,12 @@ from Components.Language import language
 from Components.ProgressBar import ProgressBar
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 import re
-import htmlentitydefs
 import urllib
 import os, gettext
+
+import six
+from six.moves import html_entities
+
 
 PluginLanguageDomain = "OFDb"
 PluginLanguagePath = "Extensions/OFDb/locale"
@@ -330,7 +333,7 @@ class OFDB(Screen):
 			entitydict[x.group(1)] = x.group(2)
 
 		for key, name in entitydict.items():
-			entitydict[key] = htmlentitydefs.name2codepoint[name]
+			entitydict[key] = html_entities.name2codepoint[name]
 
 		entities = htmlentitynumbermask.finditer(in_html)
 
@@ -338,7 +341,7 @@ class OFDB(Screen):
 			entitydict[x.group(1)] = x.group(2)
 
 		for key, codepoint in entitydict.items():
-			in_html = in_html.replace(key, (unichr(int(codepoint)).encode('utf8')))
+			in_html = in_html.replace(key, (six.unichr(int(codepoint)).encode('utf8')))
 
 		self.inhtml = in_html
 

@@ -33,7 +33,6 @@ from urllib2 import urlopen, Request, URLError, HTTPError
 #, quote, unquote, unquote_plus
 from urllib import quote, unquote_plus, unquote
 
-from httplib import HTTPConnection, HTTPException
 
 from urlparse import parse_qs
 
@@ -41,6 +40,9 @@ from socket import gaierror, error
 
 import os
 import re
+
+from six.moves.http_client import HTTPConnection, HTTPException
+
 
 # http://code.google.com/apis/youtube/reference.html#youtube_data_api_tag_media:group
 

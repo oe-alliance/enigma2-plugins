@@ -36,7 +36,7 @@ class IRCPerson(e2support.AbstractPerson):
     def sendMessage(self, text, meta=None):
         if self.account.client is None:
             return 0
-        for line in string.split(text, '\n'):
+        for line in text.split('\n'):
             if meta and meta.get("style", None) == "emote":
                 self.account.client.ctcpMakeQuery(self.name, [('ACTION', line)])
             else:
@@ -78,7 +78,7 @@ class IRCGroup(e2support.AbstractGroup):
             self.account.client.me(self.name, text)
             return succeed(text)
         #standard shmandard, clients don't support plain escaped newlines!
-        for line in string.split(text, '\n'):
+        for line in text.split('\n'):
             self.account.client.say(self.name, line)
         return succeed(text)
 
@@ -106,7 +106,7 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
         self.pipe = dreamIRCTools.MessagePipe()
 
     def getGroupConversation(self, name, hide=0):
-        name=string.lower(name)
+        name=name.lower()
         return self.chat.getGroupConversation(self.chat.getGroup(name, self),
                                               stayHidden=hide)
 
@@ -159,7 +159,7 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
     def privmsg(self, username, channel, message, metadata=None):
         if metadata is None:
             metadata = {}
-        username=string.split(username, '!', 1)[0]
+        username=username.split('!', 1)[0]
         if username==self.name: return
         if channel[0]=='#':
             group=channel[1:]
@@ -168,7 +168,7 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
         self.chat.getConversation(self.getPerson(username)).showMessage(message, metadata)
 
     def action(self, username, channel, emote):
-        username=string.split(username, '!', 1)[0]
+        username=username.split('!', 1)[0]
         if username==self.name: return
         meta={'style':'emote'}
         if channel[0]=='#':
@@ -183,8 +183,8 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
         >> NAMES #bnl
         << :Arlington.VA.US.Undernet.Org 353 z3p = #bnl :pSwede Dan-- SkOyg AG
         """
-        group=string.lower(params[2][1:])
-        users=string.split(params[3])
+        group=params[2][1:].lower()
+        users=params[3].split()
         for ui in range(len(users)):
             while users[ui][0] in ["@", "+"]: # channel modes
                 users[ui]=users[ui][1:]
@@ -199,8 +199,8 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
 
     def irc_RPL_ENDOFNAMES(self, prefix, params):
         group=params[1][1:]
-        self.getGroupConversation(group).setGroupMembers(self._namreplies[string.lower(group)])
-        del self._namreplies[string.lower(group)]
+        self.getGroupConversation(group).setGroupMembers(self._namreplies[group.lower()])
+        del self._namreplies[group.lower()]
 
     def irc_RPL_TOPIC(self, prefix, params):
         self._topics[params[1][1:]]=params[2]
@@ -211,14 +211,14 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
         del self._topics[group]
 
     def irc_TOPIC(self, prefix, params):
-        nickname = string.split(prefix, "!")[0]
+        nickname = prefix.split("!")[0]
         group = params[0][1:]
         topic = params[1]
         self.getGroupConversation(group).setTopic(topic, nickname)
 
     def irc_JOIN(self, prefix, params):
-        nickname=string.split(prefix, "!")[0]
-        group=string.lower(params[0][1:])
+        nickname=prefix.split("!")[0]
+        group=params[0][1:].lower()
         if nickname!=self.nickname:
             try:
                 self._ingroups[nickname].append(group)
@@ -227,8 +227,8 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
             self.getGroupConversation(group).memberJoined(nickname)
 
     def irc_PART(self, prefix, params):
-        nickname=string.split(prefix, "!")[0]
-        group=string.lower(params[0][1:])
+        nickname=prefix.split("!")[0]
+        group=params[0][1:].lower()
         if nickname!=self.nickname:
             if group in self._ingroups[nickname]:
                 self._ingroups[nickname].remove(group)
@@ -237,7 +237,7 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
                 self.pipe.debug("%s left %s, but wasn't in the room."%(nickname, group))
 
     def irc_QUIT(self, prefix, params):
-        nickname=string.split(prefix, "!")[0]
+        nickname=prefix.split("!")[0]
         if nickname in self._ingroups:
             for group in self._ingroups[nickname]:
                 self.getGroupConversation(group).memberLeft(nickname)
@@ -246,7 +246,7 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
             self.pipe.debug('*** WARNING: ingroups had no such key %s' % nickname)
 
     def irc_NICK(self, prefix, params):
-        fromNick = string.split(prefix, "!")[0]
+        fromNick = prefix.split("!")[0]
         toNick = params[0]
         if fromNick not in self._ingroups:
             self.pipe.debug("%s changed nick to %s. But she's not in any groups!?" % (fromNick, toNick))
@@ -273,7 +273,7 @@ class IRCAccount(e2support.AbstractAccount):
 
     def __init__(self, accountName, autoLogin, username, password, host, port, channels=''):
         e2support.AbstractAccount.__init__(self, accountName, autoLogin, username, password, host, port)
-        self.channels = map(string.strip, string.split(channels, ','))
+        self.channels = map(string.strip, channels.split(','))
         if self.channels == ['']:
             self.channels = []
 

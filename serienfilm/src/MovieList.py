@@ -16,6 +16,10 @@ import copy
 import os.path
 
 from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformation, \
+
+from six.moves import reload_module
+
+
 	RT_HALIGN_LEFT, RT_HALIGN_RIGHT, eServiceReference, eServiceCenter
 
 class MovieList(GUIComponent):
@@ -256,7 +260,7 @@ class MovieList(GUIComponent):
 		instance.setContent(None)
 		instance.selectionChanged.get().remove(self.selectionChanged)
 
-	def reload(self, root = None, filter_tags = None):
+	def reload_module(self, root = None, filter_tags = None):
 		if root is not None:
 			self.load(root, filter_tags)
 		else:

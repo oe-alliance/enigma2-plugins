@@ -27,7 +27,6 @@
 
 import types
 import os.path
-from cStringIO import StringIO
 from OpenSSL.SSL import SSLv3_METHOD
 
 from email import Encoders
@@ -35,6 +34,7 @@ from email.MIMEText import MIMEText
 from email.MIMEBase import MIMEBase
 from email.MIMEMultipart import MIMEMultipart
 from email.Utils import COMMASPACE, formatdate
+from six.moves import cStringIO as StringIO
 
 from twisted.internet import reactor
 from twisted.internet.defer import Deferred

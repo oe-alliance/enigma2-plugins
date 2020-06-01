@@ -2,12 +2,14 @@ from __future__ import print_function
 from enigma import ePicLoad, ePixmap, getDesktop
 from Components.Pixmap import Pixmap
 from twisted.web.client import downloadPage
-from urllib import quote_plus
 from os import remove as os_remove, mkdir as os_mkdir
 from os.path import isdir as os_path_isdir, isfile as os_isfile
 
 from Components.AVSwitch import AVSwitch
 from Components.config import config
+
+from six.moves.urllib.parse import quote_plus
+
 
 def getAspect():
 	val = AVSwitch().getAspectRatioSetting()

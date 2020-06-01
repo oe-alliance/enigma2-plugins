@@ -8,9 +8,13 @@ from time import localtime
 from OrderedSet import OrderedSet
 from ServiceReference import ServiceReference
 from Tools.XMLTools import stringToXML
+
+import six
+
+
 try:
 	from urllib import unquote
-	iteritems = lambda d: d.iteritems()
+	iteritems = lambda d: six.iteritems(d)
 except ImportError as ie:
 	from urllib.parse import unquote
 	iteritems = lambda d: d.items()

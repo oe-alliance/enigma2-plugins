@@ -1,5 +1,4 @@
 from __future__ import print_function
-import httplib
 import xml.dom.minidom
 import time
 import re
@@ -8,6 +7,9 @@ from urllib import quote
 from operator import itemgetter#, attrgetter
 from Plugins.Extensions.SubsDownloader2.SourceCode.archives_extractor import zip_extractor
 from Plugins.Extensions.SubsDownloader2.SourceCode.periscope import SubtitleDatabase
+
+from six.moves import http_client
+
 
 #  Copyright (C) 2011 Dawid Bankowski <enigma2subsdownloader at gmail.com>
 #
@@ -117,7 +119,7 @@ class Napisy24_pl(XML_to_Dict, zip_extractor):
 	self.XML_String = None
 	self.zip_string = None
 	try:
-	    conn = httplib.HTTPConnection(self.NAPISY24_url)
+	    conn = http_client.HTTPConnection(self.NAPISY24_url)
 	    conn.request("GET", get_operatoin)
 	    r1 = conn.getresponse()
 	    print(r1.status, r1.reason)

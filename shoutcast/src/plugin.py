@@ -668,10 +668,10 @@ class SHOUTcastWidget(Screen):
 	def callbackPLS(self, result):
 		self["headertext"].setText(self.headerTextString)
 		found = False
-		parts = string.split(result, "\n")
+		parts = result.split("\n")
 		for lines in parts:
 			if lines.find("File1=") != -1:
-				line = string.split(lines, "File1=")
+				line = lines.split("File1=")
 				found = True
 				self.playServiceStream(line[-1].rstrip().strip())
 				

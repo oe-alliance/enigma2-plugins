@@ -46,7 +46,9 @@ import urllib
 import urllib2
 import mimetools, mimetypes
 import os, stat
-from cStringIO import StringIO
+
+from six.moves import cStringIO as StringIO
+
 
 class Callable:
     def __init__(self, anycallable):

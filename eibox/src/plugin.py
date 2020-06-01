@@ -18,6 +18,7 @@ from Tools.LoadPixmap import LoadPixmap
 from enigma import eTimer, eListbox, gFont, eListboxPythonMultiContent, \
 	RT_HALIGN_LEFT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, eRect, eTimer
 
+import six
 from socket import *
 import xml.dom.minidom
 
@@ -198,7 +199,7 @@ class EIBObjects(object):
 
 	def EIBreadAll(self):
 		persist_request_cmd = '<read><objects>'
-		for EIBObject in self.ids.itervalues():
+		for EIBObject in six.itervalues(self.ids):
 			if EIBObject.object_type != EIB_GOTO:
 				persist_request_cmd += '<object id="%s"/>' % EIBObject.object_id
 		persist_request_cmd += '</objects></read>\n\x04'
@@ -281,7 +282,7 @@ class EIBObjects(object):
 			print ("[parseMultiRead] XML parser error") 
 
 	def __iter__ (self):
-		list = self.ids.itervalues()
+		list = six.itervalues(self.ids)
 		return iter(sorted(list, key=lambda EIBObject: EIBObject.order))
 		
 class EIBoxZoneScreen(Screen, ConfigListScreen):

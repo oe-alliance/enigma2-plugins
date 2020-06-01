@@ -14,10 +14,10 @@ from Components.MultiContent import MultiContentEntryText
 from Components.Task import job_manager
 from Tools.Directories import resolveFilename, SCOPE_HDD
 
+from six import StringIO
 from threading import Thread
 from ThreadQueue import ThreadQueue
 from xml.etree.cElementTree import fromstring as cet_fromstring
-from StringIO import StringIO
 #import urllib
 from urllib import FancyURLopener
 import json

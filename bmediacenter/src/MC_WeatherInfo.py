@@ -11,7 +11,6 @@ from Components.Sources.StaticText import StaticText
 from xml.etree.cElementTree import fromstring as cet_fromstring
 from twisted.internet import defer
 from twisted.web.client import getPage, downloadPage
-from urllib import quote
 from urllib import quote as urllib_quote
 from Components.Pixmap import Pixmap
 from GlobalFunctions import Showiframe
@@ -23,6 +22,9 @@ from Components.ConfigList import ConfigList, ConfigListScreen
 import time
 import os
 import commands
+
+from six.moves.urllib.parse import quote
+
 
 config.plugins.mc_wi = ConfigSubsection()
 config.plugins.mc_wi.entrycount =  ConfigInteger(0)

@@ -10,6 +10,9 @@ import os, gettext
 # Config
 from Components.config import config, configfile, ConfigSet, ConfigSubsection, ConfigSelection, ConfigSelectionNumber, ConfigYesNo, ConfigSatlist
 
+import six
+
+
 PluginLanguageDomain = "EPGSearch"
 PluginLanguagePath = "Extensions/EPGSearch/locale"
 
@@ -88,7 +91,7 @@ def isOrbposName(name):
 
 def doSave():
 	saveFile = False
-	for name, confItem in config.plugins.epgsearch.dict().iteritems():
+	for name, confItem in six.iteritems(config.plugins.epgsearch.dict()):
 		if (name == "numorbpos" or isOrbposName(name)) and confItem.isChanged():
 			saveFile = True
 			confItem.save()
@@ -98,7 +101,7 @@ def doSave():
 def unusedOrbPosConfList():
 	numorbpos = int(config.plugins.epgsearch.numorbpos.value)
 	return [
-		item for item in config.plugins.epgsearch.dict().iteritems()
+		item for item in six.iteritems(config.plugins.epgsearch.dict())
 		if isOrbposName(item[0]) and int(item[0][6:]) >= numorbpos
 	]
 

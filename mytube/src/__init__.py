@@ -4,6 +4,9 @@ from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os, gettext, hashlib
 
+from six.moves import reduce
+
+
 PluginLanguageDomain = "MyTube"
 PluginLanguagePath = "Extensions/MyTube/locale"
 

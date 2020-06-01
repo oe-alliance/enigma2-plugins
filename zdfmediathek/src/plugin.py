@@ -27,7 +27,10 @@ from twisted.web.client import downloadPage, getPage
 import htmlentitydefs, re, urllib2
 from urllib2 import Request, URLError, urlopen as urlopen2
 from socket import error
-from httplib import HTTPConnection, HTTPException
+
+import six
+from six.moves.http_client import HTTPConnection, HTTPException
+
 
 HTTPConnection.debuglevel = 1
 
@@ -80,20 +83,20 @@ except ImportError:
 def decode(line):
 	pat = re.compile(r'\\u(....)')
 	def sub(mo):
-		return unichr(fromHex(mo.group(1)))
-	return pat.sub(sub, unicode(line))
+		return six.unichr(fromHex(mo.group(1)))
+	return pat.sub(sub, six.text_type(line))
 
 def decode2(line):
 	pat = re.compile(r'&#(\d+);')
 	def sub(mo):
-		return unichr(int(mo.group(1)))
-	return decode3(pat.sub(sub, unicode(line)))
+		return six.unichr(int(mo.group(1)))
+	return decode3(pat.sub(sub, six.text_type(line)))
 
 def decode3(line):
 	dic = htmlentitydefs.name2codepoint
 	for key in dic.keys():
 		entity = "&" + key + ";"
-		line = line.replace(entity, unichr(dic[key]))
+		line = line.replace(entity, six.unichr(dic[key]))
 	return line
 
 def fromHex(h):
@@ -1012,7 +1015,7 @@ class ZDFMediathek(Screen, HelpableScreen):
 	def down(self):
 		if not self.working:
 			if self.currentList == LIST_LEFT:
-				self["leftList"].next()
+				next(self["leftList"])
 			elif self.currentList == LIST_RIGHT and self["rightList"].active:
 				self["rightList"].selectNext()
 

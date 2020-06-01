@@ -49,7 +49,6 @@ class Interface(StreamInterface):
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-from cPickle import dump, load
 from urllib import FancyURLopener
 from xml.sax import parseString
 from xml.sax.handler import ContentHandler
@@ -57,6 +56,9 @@ from os import stat, mkdir
 from os.path import dirname, isdir
 import time
 from stat import ST_MTIME
+
+from six.moves.cPickle import dump, load
+
 
 tmpxml='shout.xml'
 DEBUG=0

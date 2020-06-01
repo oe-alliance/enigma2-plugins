@@ -4,7 +4,7 @@
 # Name: tmdb_request.py
 # Python Library
 # Author: Raymond Wagner
-# Purpose: Wrapped urllib2.Request class pre-configured for accessing the
+# Purpose: Wrapped urllib.request.Request class pre-configured for accessing the
 #          TMDb v3 API
 #-----------------------
 
@@ -13,10 +13,12 @@ from tmdb_exceptions import *
 from locales import get_locale
 from cache import Cache
 
-from urllib import urlencode
-import urllib2
 import json
 import os
+from six.moves.urllib.parse import urlencode
+
+from six.moves import urllib
+
 
 DEBUG = False
 cache = Cache(filename='pytmdb3.cache')
@@ -41,7 +43,7 @@ def set_cache(engine=None, *args, **kwargs):
     """Specify caching engine and properties."""
     cache.configure(engine, *args, **kwargs)
 
-class Request( urllib2.Request ):
+class Request( urllib.request.Request ):
     _api_key = None
     _base_url = "http://api.themoviedb.org/3/"
 
@@ -65,7 +67,7 @@ class Request( urllib2.Request ):
             kwargs[k] = locale.encode(v)
         url = '{0}{1}?{2}'.format(self._base_url, self._url, urlencode(kwargs))
 
-        urllib2.Request.__init__(self, url)
+        urllib.request.Request.__init__(self, url)
         self.add_header('Accept', 'application/json')
         self.lifetime = 3600 # 1hr
 
@@ -84,7 +86,7 @@ class Request( urllib2.Request ):
 
     def add_data(self, data):
         """Provide data to be sent with POST."""
-        urllib2.Request.add_data(self, urlencode(data))
+        urllib.request.Request.add_data(self, urlencode(data))
 
     def open(self):
         """Open a file object to the specified URL."""
@@ -93,15 +95,15 @@ class Request( urllib2.Request ):
                 print('loading '+self.get_full_url())
                 if self.has_data():
                     print('  '+self.get_data())
-            return urllib2.urlopen(self)
-        except urllib2.HTTPError as e:
+            return urllib.request.urlopen(self)
+        except urllib.error.HTTPError as e:
             raise TMDBHTTPError(e)
 
     def read(self):
         """Return result from specified URL as a string."""
         return self.open().read()
 
-    @cache.cached(urllib2.Request.get_full_url)
+    @cache.cached(urllib.request.Request.get_full_url)
     def readJSON(self):
         """Parse result from specified URL as JSON data."""
         url = self.get_full_url()

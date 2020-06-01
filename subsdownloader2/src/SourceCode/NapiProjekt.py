@@ -7,6 +7,9 @@ import os
 import getopt
 
 
+from six.moves import range
+
+
 #  Copyright (C) 2009 Arkadiusz Miskiewicz <arekm@pld-linux.org>
 #
 #  This program is free software: you can redistribute it and/or modify
@@ -44,7 +47,7 @@ class NapiProjekt():
         add = [   0, 0xd, 0x10, 0xb, 0x5 ]
         
         b = []
-        for i in xrange(len(idx)):
+        for i in range(len(idx)):
             a = add[i]
             m = mul[i]
             i = idx[i]

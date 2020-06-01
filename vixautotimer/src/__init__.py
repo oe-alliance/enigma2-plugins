@@ -6,6 +6,10 @@ import os, gettext
 
 # Config
 from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
+
+import six
+
+
 	ConfigNumber, ConfigSelection, ConfigYesNo
 
 config.plugins.autotimer = ConfigSubsection()
@@ -55,8 +59,8 @@ language.addCallback(localeInit())
 
 try:
 	xrange = xrange
-	iteritems = lambda d: d.iteritems()
-	itervalues = lambda d: d.itervalues()
+	iteritems = lambda d: six.iteritems(d)
+	itervalues = lambda d: six.itervalues(d)
 except NameError:
 	xrange = range
 	iteritems = lambda d: d.items()

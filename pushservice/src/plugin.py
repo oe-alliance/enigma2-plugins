@@ -31,6 +31,10 @@ from Components.config import config, ConfigSubsection, ConfigNothing, ConfigEna
 # Plugin internal
 from __init__ import _
 from PushService import PushService
+
+from six.moves import reload_module
+
+
 #from ConfigScreen import ConfigScreen
 
 
@@ -74,7 +78,7 @@ def setup(session, **kwargs):
 	try:
 		### For testing only
 		import ConfigScreen
-		reload(ConfigScreen)
+		reload_module(ConfigScreen)
 		###
 		session.open(ConfigScreen.ConfigScreen)
 	except Exception as e:

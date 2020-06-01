@@ -33,6 +33,7 @@ from enigma import iPlayableService, iServiceInformation, eServiceCenter, eServi
 from ServiceReference import ServiceReference
 from os.path import basename as os_basename
 from boxbranding import getImageDistro
+import six
 
 # for localized messages
 from . import _
@@ -44,7 +45,7 @@ THREE_D_TOP_BOTTOM = 2
 modes = {	THREE_D_OFF: "off",
 			THREE_D_SIDE_BY_SIDE: "sbs",
 			THREE_D_TOP_BOTTOM: "tab" }
-reversemodes = dict((value, key) for key, value in modes.iteritems())
+reversemodes = dict((value, key) for key, value in six.iteritems(modes))
 
 def setZOffset(configElement):
 	open("/proc/stb/fb/primary/zoffset", "w").write(str(configElement.value))

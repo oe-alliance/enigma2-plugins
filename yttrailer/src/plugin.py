@@ -34,7 +34,6 @@ import gdata.youtube.service
 from socket import gaierror, error as sorcket_error
 from urllib2 import Request, URLError, urlopen as urlopen2
 from urllib import unquote_plus
-from httplib import HTTPException
 from urlparse import parse_qs
 
 from Components.config import config, ConfigSubsection, ConfigSelection, getConfigListEntry, configfile, ConfigText, ConfigInteger, ConfigYesNo
@@ -57,6 +56,11 @@ from Screens.EventView import EventViewBase
 baseEventViewBase__init__ = None
 
 from Screens.EpgSelection import EPGSelection
+
+import six
+from six.moves.http_client import HTTPException
+
+
 baseEPGSelection__init__ = None
 etpm = eTPM()
 
@@ -287,7 +291,7 @@ class YTTrailer:
 			if fmtid in VIDEO_FMT_PRIORITY_MAP and fmtid != "":
 				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
 				fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
-		print("[YTTrailer] got", sorted(fmt_infomap.iterkeys()))
+		print("[YTTrailer] got", sorted(six.iterkeys(fmt_infomap)))
 		if video_fmt_map and len(video_fmt_map):
 			if self.l3cert:
 				l3key = validate_cert(self.l3cert, l2key)
@@ -296,8 +300,8 @@ class YTTrailer:
 					val = etpm.computeSignature(rnd)
 					result = decrypt_block(val, l3key)
 					if result[80:88] == rnd:
-						print("[YTTrailer] found best available video format:", video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid'])
-						best_video = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]
+						print("[YTTrailer] found best available video format:", video_fmt_map[sorted(six.iterkeys(video_fmt_map))[0]]['fmtid'])
+						best_video = video_fmt_map[sorted(six.iterkeys(video_fmt_map))[0]]
 						video_url = "%s" %(best_video['fmturl'].split(';')[0])
 						print("[YTTrailer] found best available video url:", video_url)
 

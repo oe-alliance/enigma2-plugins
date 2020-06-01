@@ -104,7 +104,7 @@ def simplerss_handle_callback(el):
 config.plugins.emission.autodownload_from_simplerss.addNotifier(simplerss_handle_callback, immediate_feedback = False)
 
 def main(session, **kwargs):
-	#reload(EmissionOverview)
+	#reload_module(EmissionOverview)
 	session.open(
 		EmissionOverview.EmissionOverview
 	)
@@ -138,6 +138,10 @@ def filescan_open(item, session, **kwargs):
 	)
 
 from mimetypes import add_type
+
+from six.moves import reload_module
+
+
 add_type("application/x-bittorrent", ".tor")
 add_type("application/x-bittorrent", ".torrent")
 

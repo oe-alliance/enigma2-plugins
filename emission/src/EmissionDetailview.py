@@ -16,6 +16,9 @@ from enigma import eTimer
 
 from . import EmissionBandwidth
 
+from six.moves import reload_module
+
+
 class EmissionDetailview(Screen, HelpableScreen):
 	skin = """<screen name="EmissionDetailview" title="Torrent View" position="75,75" size="565,450">
 		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
@@ -124,7 +127,7 @@ class EmissionDetailview(Screen, HelpableScreen):
 		self.updateList()
 
 	def bandwidth(self):
-		#reload(EmissionBandwidth)
+		#reload_module(EmissionBandwidth)
 		self.timer.stop()
 		id = self.torrentid
 		try:

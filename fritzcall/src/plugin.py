@@ -383,6 +383,11 @@ class FritzAbout(Screen):
 		self.close()
 
 from FritzCallFBF import FBF_dectActive, FBF_faxActive, FBF_rufumlActive, FBF_tamActive, FBF_wlanState  # wrong-import-position # pylint: disable=
+
+import six
+from six.moves import reload_module
+
+
 class FritzMenu(Screen, HelpableScreen):
 	def __init__(self, session):
 		if not fritzbox or not fritzbox.information:
@@ -1749,7 +1754,7 @@ class FritzCallPhonebook(object):
 			self.loop.start(config.plugins.FritzCall.reloadPhonebookTime.value * OneHour, False)
 		self.reload()
 
-	def reload(self):
+	def reload_module(self):
 		debug("[FritzCallPhonebook] " + time.ctime())
 
 		# Beware: strings in phonebook.phonebook have to be in utf-8!
@@ -1811,7 +1816,7 @@ class FritzCallPhonebook(object):
 						os.rename(phonebookFilenameOld, phonebookFilenameOld + ".bck")
 						fNew = open(phonebookFilenameOld, 'w')
 						# Beware: strings in phonebook.phonebook are utf-8!
-						for (number, name) in self.phonebook.iteritems():
+						for (number, name) in six.iteritems(self.phonebook):
 							# Beware: strings in PhoneBook.txt have to be in utf-8!
 							fNew.write(number + "#" + name.encode("utf-8"))
 						fNew.close()
@@ -2181,7 +2186,7 @@ class FritzCallPhonebook(object):
 			debug("[FritzDisplayPhonebook]")
 			self.sortlist = []
 			# Beware: strings in phonebook.phonebook are utf-8!
-			sortlistHelp = sorted((name.lower(), name, number) for (number, name) in phonebook.phonebook.iteritems())
+			sortlistHelp = sorted((name.lower(), name, number) for (number, name) in six.iteritems(phonebook.phonebook))
 			for (low, name, number) in sortlistHelp:
 				if number == "01234567890":
 					continue
@@ -3128,7 +3133,7 @@ def registerUserAction(fun):
 	# 	from Plugins.Extensions.FritzCall.plugin import registerUserAction as FritzCallRegisterUserAction
 	# 	FritzCallRegisterUserAction(FritzCallEvent)
 	# except:
-	# 	print "import of FritzCall failed"
+	# 	print("import of FritzCall failed")
 	#===========================================================================
 	info("[FritzCall] register: %s", fun.__name__)
 	userActionList.append(fun)

@@ -7,10 +7,12 @@ from Components.ActionMap import ActionMap
 from enigma import eTimer
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, getConfigListEntry, ConfigText, ConfigSelection, ConfigSubsection, ConfigYesNo
-from urllib2 import Request, urlopen
 from base64 import encodestring
 global sessions
 from twisted.internet import reactor
+
+from six.moves.urllib.request import Request, urlopen
+
 
 sessions = []
 

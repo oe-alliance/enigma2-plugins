@@ -1,6 +1,7 @@
 from twisted.web import resource, http, server, static
 
 from Plugins.Extensions.WebInterface import webif
+import six
 
 from os import path as os_path
 
@@ -12,7 +13,7 @@ AppTextHeaderFiles = frozenset(('stream.m3u.xml', 'ts.m3u.xml', 'streamcurrent.m
 
 """
 Actualy, the TextHtmlHeaderFiles should contain the updates.html.xml, but the IE then
-has problems with unicode-characters
+has problems with six.text_type-characters
 """
 TextHtmlHeaderFiles = frozenset(('wapremote.xml', 'stream.xml', ))
 

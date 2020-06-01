@@ -36,6 +36,9 @@ from Tools.Notifications import AddPopup
 from collections import deque
 from Plugins.SystemPlugins.Toolkit.SimpleThread import SimpleThread
 
+from six.moves import range
+
+
 try:
 	xrange = xrange
 except NameError:
@@ -107,7 +110,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		self["key_green"] = StaticText(_("Albums"))
 		self["key_yellow"] = StaticText()
 		self["key_blue"] = StaticText(_("Search"))
-		for i in xrange(self.PICS_PER_PAGE):
+		for i in range(self.PICS_PER_PAGE):
 			self['image%d' % i] = Pixmap()
 			self['title%d' % i] = StaticText()
 		self["highlight"] = MovingPixmap()
@@ -206,7 +209,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		self["highlight"].show()
 		self.queue.clear()
 		pictures = self.pictures
-		for i in xrange(self.PICS_PER_PAGE):
+		for i in range(self.PICS_PER_PAGE):
 			try:
 				our_print("trying to initiate download of idx", i+self.offset)
 				picture = pictures[i+self.offset]
@@ -445,7 +448,7 @@ class EcasaOverview(EcasaPictureWall):
 		if api != self.api:
 			self.pictures = ()
 			self["highlight"].hide()
-			for i in xrange(self.PICS_PER_PAGE):
+			for i in range(self.PICS_PER_PAGE):
 				self['image%d' % i].instance.setPixmap(None)
 			self["waitingtext"].show()
 

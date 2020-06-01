@@ -41,10 +41,12 @@ from Components.ActionMap import NumberActionMap
 from Components.Harddisk import harddiskmanager
 
 from threading import Thread, Lock
-import Queue
-Briefkasten = Queue.Queue()
+Briefkasten = queue.Queue()
 
 from boxbranding import getBoxType, getImageDistro
+
+
+from six.moves import queue
 
 
 def main(session,**kwargs):
@@ -1055,7 +1057,7 @@ class FanControl2(Screen):
 				if Briefkasten.qsize()<=3:
 					Briefkasten.put(1) 
 				else:
-					FClog("Queue full, Thread hanging?")
+					FClog("queue full, Thread hanging?")
 			else:
 				self.queryRun()
 			if ZielRPM > 0 and AktRPM == 0:

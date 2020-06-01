@@ -88,9 +88,14 @@ __license__ = "New-style BSD"
 from sgmllib import SGMLParser, SGMLParseError
 import codecs
 import markupbase
+import six
 import types
 import re
 import sgmllib
+
+import six
+
+
 try:
   from htmlentitydefs import name2codepoint
 except ImportError:
@@ -189,7 +194,7 @@ class PageElement(object):
         return lastChild
 
     def insert(self, position, newChild):
-        if isinstance(newChild, basestring) \
+        if isinstance(newChild, six.string_types) \
             and not isinstance(newChild, NavigableString):
             newChild = NavigableString(newChild)
 
@@ -344,7 +349,7 @@ class PageElement(object):
                 return [element for element in generator()
                         if isinstance(element, Tag)]
             # findAll*('tag-name')
-            elif isinstance(name, basestring):
+            elif isinstance(name, six.string_types):
                 return [element for element in generator()
                         if isinstance(element, Tag) and
                         element.name == name]
@@ -357,7 +362,7 @@ class PageElement(object):
         g = generator()
         while True:
             try:
-                i = g.next()
+                i = next(g)
             except StopIteration:
                 break
             if i:
@@ -408,22 +413,22 @@ class PageElement(object):
     def toEncoding(self, s, encoding=None):
         """Encodes an object to a string in some encoding, or to Unicode.
         ."""
-        if isinstance(s, unicode):
+        if isinstance(s, six.text_type):
             if encoding:
                 s = s.encode(encoding)
         elif isinstance(s, str):
             if encoding:
                 s = s.encode(encoding)
             else:
-                s = unicode(s)
+                s = six.text_type(s)
         else:
             if encoding:
                 s  = self.toEncoding(str(s), encoding)
             else:
-                s = unicode(s)
+                s = six.text_type(s)
         return s
 
-class NavigableString(unicode, PageElement):
+class NavigableString(six.text_type, PageElement):
 
     def __new__(cls, value):
         """Create a new NavigableString.
@@ -433,9 +438,9 @@ class NavigableString(unicode, PageElement):
         passed in to the superclass's __new__ or the superclass won't know
         how to handle non-ASCII characters.
         """
-        if isinstance(value, unicode):
-            return unicode.__new__(cls, value)
-        return unicode.__new__(cls, value, DEFAULT_OUTPUT_ENCODING)
+        if isinstance(value, six.text_type):
+            return six.text_type.__new__(cls, value)
+        return six.text_type.__new__(cls, value, DEFAULT_OUTPUT_ENCODING)
 
     def __getnewargs__(self):
         return (NavigableString.__str__(self),)
@@ -504,7 +509,7 @@ class Tag(PageElement):
         escaped."""
         x = match.group(1)
         if self.convertHTMLEntities and x in name2codepoint:
-            return unichr(name2codepoint[x])
+            return six.unichr(name2codepoint[x])
         elif x in self.XML_ENTITIES_TO_SPECIAL_CHARS:
             if self.convertXMLEntities:
                 return self.XML_ENTITIES_TO_SPECIAL_CHARS[x]
@@ -513,9 +518,9 @@ class Tag(PageElement):
         elif len(x) > 0 and x[0] == '#':
             # Handle numeric entities
             if len(x) > 1 and x[1] == 'x':
-                return unichr(int(x[2:], 16))
+                return six.unichr(int(x[2:], 16))
             else:
-                return unichr(int(x[1:]))
+                return six.unichr(int(x[1:]))
 
         elif self.escapeUnrecognizedEntities:
             return u'&amp;%s;' % x
@@ -707,7 +712,7 @@ class Tag(PageElement):
         if self.attrs:
             for key, val in self.attrs:
                 fmt = '%s="%s"'
-                if isinstance(val, basestring):
+                if isinstance(val, six.string_types):
                     if self.containsSubstitutions and '%SOUP-ENCODING%' in val:
                         val = self.substituteEncoding(val, encoding)
 
@@ -891,7 +896,7 @@ class SoupStrainer:
 
     def __init__(self, name=None, attrs={}, text=None, **kwargs):
         self.name = name
-        if isinstance(attrs, basestring):
+        if isinstance(attrs, six.string_types):
             kwargs['class'] = _match_css_class(attrs)
             attrs = None
         if kwargs:
@@ -965,7 +970,7 @@ class SoupStrainer:
                 found = self.searchTag(markup)
         # If it's text, make sure the text matches.
         elif isinstance(markup, NavigableString) or \
-                 isinstance(markup, basestring):
+                 isinstance(markup, six.string_types):
             if self._matches(markup, self.text):
                 found = markup
         else:
@@ -985,8 +990,8 @@ class SoupStrainer:
             #other ways of matching match the tag name as a string.
             if isinstance(markup, Tag):
                 markup = markup.name
-            if markup and not isinstance(markup, basestring):
-                markup = unicode(markup)
+            if markup and not isinstance(markup, six.string_types):
+                markup = six.text_type(markup)
             #Now we know that chunk is either a string, or None.
             if hasattr(matchAgainst, 'match'):
                 # It's a regexp object.
@@ -995,9 +1000,9 @@ class SoupStrainer:
                 result = markup in matchAgainst
             elif hasattr(matchAgainst, 'items'):
                 result = matchAgainst in markup
-            elif matchAgainst and isinstance(markup, basestring):
-                if isinstance(markup, unicode):
-                    matchAgainst = unicode(matchAgainst)
+            elif matchAgainst and isinstance(markup, six.string_types):
+                if isinstance(markup, six.text_type):
+                    matchAgainst = six.text_type(matchAgainst)
                 else:
                     matchAgainst = str(matchAgainst)
 
@@ -1161,14 +1166,14 @@ class BeautifulStoneSoup(Tag, SGMLParser):
     def _feed(self, inDocumentEncoding=None, isHTML=False):
         # Convert the document to Unicode.
         markup = self.markup
-        if isinstance(markup, unicode):
+        if isinstance(markup, six.text_type):
             if not hasattr(self, 'originalEncoding'):
                 self.originalEncoding = None
         else:
             dammit = UnicodeDammit\
                      (markup, [self.fromEncoding, inDocumentEncoding],
                       smartQuotesTo=self.smartQuotesTo, isHTML=isHTML)
-            markup = dammit.unicode
+            markup = dammit.six.text_type
             self.originalEncoding = dammit.originalEncoding
             self.declaredHTMLEncoding = dammit.declaredHTMLEncoding
         if markup:
@@ -1394,7 +1399,7 @@ class BeautifulStoneSoup(Tag, SGMLParser):
     def handle_charref(self, ref):
         "Handle character references as data."
         if self.convertEntities:
-            data = unichr(int(ref))
+            data = six.unichr(int(ref))
         else:
             data = '&#%s;' % ref
         self.handle_data(data)
@@ -1406,7 +1411,7 @@ class BeautifulStoneSoup(Tag, SGMLParser):
         data = None
         if self.convertHTMLEntities:
             try:
-                data = unichr(name2codepoint[ref])
+                data = six.unichr(name2codepoint[ref])
             except KeyError:
                 pass
 
@@ -1772,9 +1777,9 @@ class UnicodeDammit:
                      self._detectEncoding(markup, isHTML)
         self.smartQuotesTo = smartQuotesTo
         self.triedEncodings = []
-        if markup == '' or isinstance(markup, unicode):
+        if markup == '' or isinstance(markup, six.text_type):
             self.originalEncoding = None
-            self.unicode = unicode(markup)
+            self.six.text_type = six.text_type(markup)
             return
 
         u = None
@@ -1787,7 +1792,7 @@ class UnicodeDammit:
                 if u: break
 
         # If no luck and we have auto-detection library, try that:
-        if not u and chardet and not isinstance(self.markup, unicode):
+        if not u and chardet and not isinstance(self.markup, six.text_type):
             u = self._convertFrom(chardet.detect(self.markup)['encoding'])
 
         # As a last resort, try utf-8 and windows-1252:
@@ -1796,7 +1801,7 @@ class UnicodeDammit:
                 u = self._convertFrom(proposed_encoding)
                 if u: break
 
-        self.unicode = u
+        self.six.text_type = u
         if not u: self.originalEncoding = None
 
     def _subMSChar(self, orig):
@@ -1849,7 +1854,7 @@ class UnicodeDammit:
             data = data[2:]
         elif (len(data) >= 4) and (data[:2] == '\xff\xfe') \
                  and (data[2:4] != '\x00\x00'):
-            encoding = 'utf-16le'
+            encoding = 'utf-16e'
             data = data[2:]
         elif data[:3] == '\xef\xbb\xbf':
             encoding = 'utf-8'
@@ -1858,9 +1863,9 @@ class UnicodeDammit:
             encoding = 'utf-32be'
             data = data[4:]
         elif data[:4] == '\xff\xfe\x00\x00':
-            encoding = 'utf-32le'
+            encoding = 'utf-32e'
             data = data[4:]
-        newdata = unicode(data, encoding)
+        newdata = six.text_type(data, encoding)
         return newdata
 
     def _detectEncoding(self, xml_data, isHTML=False):
@@ -1873,41 +1878,41 @@ class UnicodeDammit:
             elif xml_data[:4] == '\x00\x3c\x00\x3f':
                 # UTF-16BE
                 sniffed_xml_encoding = 'utf-16be'
-                xml_data = unicode(xml_data, 'utf-16be').encode('utf-8')
+                xml_data = six.text_type(xml_data, 'utf-16be').encode('utf-8')
             elif (len(xml_data) >= 4) and (xml_data[:2] == '\xfe\xff') \
                      and (xml_data[2:4] != '\x00\x00'):
                 # UTF-16BE with BOM
                 sniffed_xml_encoding = 'utf-16be'
-                xml_data = unicode(xml_data[2:], 'utf-16be').encode('utf-8')
+                xml_data = six.text_type(xml_data[2:], 'utf-16be').encode('utf-8')
             elif xml_data[:4] == '\x3c\x00\x3f\x00':
-                # UTF-16LE
-                sniffed_xml_encoding = 'utf-16le'
-                xml_data = unicode(xml_data, 'utf-16le').encode('utf-8')
+                # UTF-16E
+                sniffed_xml_encoding = 'utf-16e'
+                xml_data = six.text_type(xml_data, 'utf-16e').encode('utf-8')
             elif (len(xml_data) >= 4) and (xml_data[:2] == '\xff\xfe') and \
                      (xml_data[2:4] != '\x00\x00'):
-                # UTF-16LE with BOM
-                sniffed_xml_encoding = 'utf-16le'
-                xml_data = unicode(xml_data[2:], 'utf-16le').encode('utf-8')
+                # UTF-16E with BOM
+                sniffed_xml_encoding = 'utf-16e'
+                xml_data = six.text_type(xml_data[2:], 'utf-16e').encode('utf-8')
             elif xml_data[:4] == '\x00\x00\x00\x3c':
                 # UTF-32BE
                 sniffed_xml_encoding = 'utf-32be'
-                xml_data = unicode(xml_data, 'utf-32be').encode('utf-8')
+                xml_data = six.text_type(xml_data, 'utf-32be').encode('utf-8')
             elif xml_data[:4] == '\x3c\x00\x00\x00':
-                # UTF-32LE
-                sniffed_xml_encoding = 'utf-32le'
-                xml_data = unicode(xml_data, 'utf-32le').encode('utf-8')
+                # UTF-32E
+                sniffed_xml_encoding = 'utf-32e'
+                xml_data = six.text_type(xml_data, 'utf-32e').encode('utf-8')
             elif xml_data[:4] == '\x00\x00\xfe\xff':
                 # UTF-32BE with BOM
                 sniffed_xml_encoding = 'utf-32be'
-                xml_data = unicode(xml_data[4:], 'utf-32be').encode('utf-8')
+                xml_data = six.text_type(xml_data[4:], 'utf-32be').encode('utf-8')
             elif xml_data[:4] == '\xff\xfe\x00\x00':
-                # UTF-32LE with BOM
-                sniffed_xml_encoding = 'utf-32le'
-                xml_data = unicode(xml_data[4:], 'utf-32le').encode('utf-8')
+                # UTF-32E with BOM
+                sniffed_xml_encoding = 'utf-32e'
+                xml_data = six.text_type(xml_data[4:], 'utf-32e').encode('utf-8')
             elif xml_data[:3] == '\xef\xbb\xbf':
                 # UTF-8 with BOM
                 sniffed_xml_encoding = 'utf-8'
-                xml_data = unicode(xml_data[3:], 'utf-8').encode('utf-8')
+                xml_data = six.text_type(xml_data[3:], 'utf-8').encode('utf-8')
             else:
                 sniffed_xml_encoding = 'ascii'
                 pass

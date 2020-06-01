@@ -10,6 +10,9 @@ import re
 import threading
 import collections
 
+import six
+
+
 our_print = lambda *args, **kwargs: print("[growlee.GNTP]", *args, **kwargs)
 
 try:
@@ -27,7 +30,7 @@ GNTP_TCP_PORT = 23053
 
 try:
 	dict.iteritems
-	iteritems = lambda d: d.iteritems()
+	iteritems = lambda d: six.iteritems(d)
 except AttributeError:
 	iteritems = lambda d: d.items()
 

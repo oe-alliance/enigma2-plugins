@@ -23,8 +23,8 @@ def chardetOutputTranslation(recognizedCoding):
 		return "UTF-8"
 	elif supposedEncoding == "windows-1255" :
 		return "cp1255"
-	elif supposedEncoding == "utf-16le":
-		return "UTF-16LE"	
+	elif supposedEncoding == "utf-16e":
+		return "UTF-16E"	
 	else:
 		"""Encodings not supportef Yet:
 		Big5, GB2312/GB18030, EUC-TW, HZ-GB-2312, and ISO-2022-CN (Traditional and Simplified Chinese)

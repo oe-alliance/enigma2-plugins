@@ -5,6 +5,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os, gettext
 
 from boxbranding import getImageDistro
+import six
 
 # Config
 from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
@@ -85,8 +86,8 @@ config.plugins.autotimer.skip_during_epgrefresh = ConfigYesNo(default=False)
 
 try:
 	xrange = xrange
-	iteritems = lambda d: d.iteritems()
-	itervalues = lambda d: d.itervalues()
+	iteritems = lambda d: six.iteritems(d)
+	itervalues = lambda d: six.itervalues(d)
 except NameError:
 	xrange = range
 	iteritems = lambda d: d.items()

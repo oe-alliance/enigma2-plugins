@@ -8,7 +8,10 @@ from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
 from Tools.BoundFunction import boundFunction
 
-# Error-print
+# Error-print()
+
+from __future__ import print_function
+
 from EPGBackupTools import debugOut, PLUGIN_VERSION
 from traceback import format_exc
 

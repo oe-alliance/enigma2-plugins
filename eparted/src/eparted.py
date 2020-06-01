@@ -307,7 +307,7 @@ class Cpart(Screen):
 		index = self["list"].getIndex()
 		for x in self.__new_part_list:
 			if x[LIST_TYPE] == LIST_TYPE_PAR:
-				#print x
+				#print(x)
 				p0 = "%s: %s" % (_("Nr"), x[PA_NR])
 				p1 = "%s: %d%s" % (_("Start"), x[PA_START], self.__unit)
 				p2 = "%s: %d%s" % (_("End"), x[PA_END], self.__unit)
@@ -394,7 +394,7 @@ class Cpart(Screen):
 					self.__addFreePart(self.__new_part_list, lastPartEnd)
 				#for x in self.__new_part_list:
 				#	if x[LIST_TYPE]==LIST_TYPE_PAR:
-				#		print x
+				#		print(x)
 			except:
 				print("[eParted] <remove part>")
 			self.__Filllist()
@@ -421,7 +421,7 @@ class Cpart(Screen):
 			self.__Filllist()
 			
 	def __addPart2Comlist(self, list, val, mkpart=True):
-		#print val
+		#print(val)
 		partnr = val[PA_NR]
 		if mkpart:
 			fs = val[PA_FS]

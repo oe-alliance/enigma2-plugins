@@ -22,7 +22,6 @@ $Id: FritzCallFBF.py 1552 2019-04-23 07:40:35Z michael $
 # pylint: disable=C0111,C0103,C0301,W0603,W0403,C0302,W0611,F0401,E0611
 
 import re, time, hashlib, logging, StringIO, csv, json
-from urllib import urlencode
 import xml.etree.ElementTree as ET
 
 
@@ -37,6 +36,9 @@ from plugin import config, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, 
 from nrzuname import html2unicode
 from FritzConnection import FritzConnection
 from twisted.python.failure import Failure
+
+from six.moves.urllib.parse import urlencode
+
 
 FBF_boxInfo = 0
 FBF_upTime = 1
@@ -2111,8 +2113,8 @@ class FritzCallFBF_05_50(object):
 
 		# 0: direct; 1: date; 2: Name; 3: Nummer; 4: Nebenstelle; 5: Eigene Rufnumme; 6: Dauer
 		calls = csv.reader(StringIO.StringIO(csvString), delimiter = ';')
-		calls.next()  # skip sep
-		calls.next()  # skip header line
+		next(calls)  # skip sep
+		next(calls)  # skip header line
 		for call in calls:
 			if len(call) != 7:
 				self.warn("skip %s len: %s", repr(call), str(len(call)))
@@ -2879,8 +2881,8 @@ class FritzCallFBF_06_35(object):
 
 		# 0: direct; 1: date; 2: Name; 3: Nummer; 4: Nebenstelle; 5: Eigene Rufnumme; 6: Dauer
 		calls = csv.reader(StringIO.StringIO(csvString), delimiter = ';')
-		calls.next()  # skip sep
-		calls.next()  # skip header line
+		next(calls)  # skip sep
+		next(calls)  # skip header line
 
 		for call in calls:
 			if len(call) != 7:

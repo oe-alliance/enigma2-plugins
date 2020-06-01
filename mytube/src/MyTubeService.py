@@ -14,10 +14,13 @@ from urllib2 import Request, URLError, urlopen as urlopen2
 from socket import gaierror, error
 import os, socket, httplib, urllib, urllib2, re, json
 from urllib import quote, unquote_plus, unquote, urlencode
-from httplib import HTTPConnection, CannotSendRequest, BadStatusLine, HTTPException
 
 from urlparse import parse_qs, parse_qsl
 from threading import Thread
+
+import six
+from six.moves.http_client import HTTPConnection, CannotSendRequest, BadStatusLine, HTTPException
+
 
 HTTPConnection.debuglevel = 1
 
@@ -496,10 +499,10 @@ class MyTubeFeedEntry():
 			if fmtid in VIDEO_FMT_PRIORITY_MAP and fmtid != "":
 				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
 				fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
-		print("[MyTube] got", sorted(fmt_infomap.iterkeys()))
+		print("[MyTube] got", sorted(six.iterkeys(fmt_infomap)))
 		if video_fmt_map and len(video_fmt_map):
-			print("[MyTube] found best available video format:", video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid'])
-			best_video = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]
+			print("[MyTube] found best available video format:", video_fmt_map[sorted(six.iterkeys(video_fmt_map))[0]]['fmtid'])
+			best_video = video_fmt_map[sorted(six.iterkeys(video_fmt_map))[0]]
 			video_url = "%s" %(best_video['fmturl'].split(';')[0])
 			print("[MyTube] found best available video url:", video_url)
 

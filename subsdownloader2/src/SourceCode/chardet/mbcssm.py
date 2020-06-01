@@ -439,7 +439,7 @@ UCS2LESMModel = {'classTable': UCS2LE_cls,
                  'classFactor': 6,
                  'stateTable': UCS2LE_st,
                  'charLenTable': UCS2LECharLenTable,
-                 'name': 'UTF-16LE'}
+                 'name': 'UTF-16E'}
 
 # UTF-8
 

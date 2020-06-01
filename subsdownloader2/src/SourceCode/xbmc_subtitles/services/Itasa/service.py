@@ -82,7 +82,7 @@ def search_subtitles( file_original_path, title, tvshow, year, season, episode, 
     msg = ""
     if len(tvshow) > 0:
         italian = 0
-        if (string.lower(lang1) == "italian") or (string.lower(lang2) == "italian") or (string.lower(lang3) == "italian") or (string.lower(lang1) == "all") or (string.lower(lang2) == "all") or (string.lower(lang3) == "all"):
+        if (lang1.lower() == "italian") or (lang2.lower() == "italian") or (lang3.lower() == "italian") or (lang1.lower() == "all") or (lang2.lower() == "all") or (lang3.lower() == "all"):
             #username = __settings__.getSetting( "ITuser" )
             #password = __settings__.getSetting( "ITpass" )
             username = config.plugins.subsdownloader.ItasaUser.value
