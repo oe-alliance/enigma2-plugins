@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # for localized messages
+from __future__ import absolute_import
 from __future__ import print_function
-from __init__ import _
+from .__init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
@@ -13,7 +14,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.Pixmap import Pixmap
 from Components.ActionMap import ActionMap, NumberActionMap
 from enigma import ePoint
-from AutoMount import iAutoMount, AutoMount
+from .AutoMount import iAutoMount, AutoMount
 from re import sub as re_sub
 
 from boxbranding import getImageDistro

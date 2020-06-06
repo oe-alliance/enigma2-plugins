@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # for localized messages
+from __future__ import absolute_import
 from __future__ import print_function
-from __init__ import _
+from .__init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.Sources.StaticText import StaticText
@@ -10,8 +11,8 @@ from Components.Network import iNetwork
 from Components.Sources.List import List
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_ACTIVE_SKIN, fileExists
-from AutoMount import iAutoMount, AutoMount
-from MountEdit import AutoMountEdit
+from .AutoMount import iAutoMount, AutoMount
+from .MountEdit import AutoMountEdit
 
 class AutoMountView(Screen):
 	skin = """
