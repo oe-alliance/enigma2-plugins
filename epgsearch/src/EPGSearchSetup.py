@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # for localized messages
 from . import _, allowShowOrbital, updateOrbposConfig, purgeOrbposConfig, getOrbposConfList, orbposChoicelist
 
