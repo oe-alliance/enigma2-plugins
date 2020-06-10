@@ -19,6 +19,6 @@ def _(txt):
 
 language.addCallback(localeInit())
 
-from plugin import *
-from MPHelp import HelpPage
-from XMLHelp import *
+from Plugins.Plugin import *
+from .MPHelp import HelpPage
+from .XMLHelp import *

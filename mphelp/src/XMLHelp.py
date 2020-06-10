@@ -1,7 +1,9 @@
+from __future__ import absolute_import
+
 # for localized messages
 from . import _
 
-from MPHelp import HelpPage
+from .MPHelp import HelpPage
 from xml.etree.cElementTree import parse as cet_parse
 
 class XMLHelpPage(HelpPage):

@@ -1,8 +1,10 @@
+from __future__ import absolute_import
+
 # for localized messages
 from . import _
 
 #from Plugins.Plugin import PluginDescriptor
-from MPHelp import MPHelp
+from .MPHelp import MPHelp
 
 from collections import Callable
 

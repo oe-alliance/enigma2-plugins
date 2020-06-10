@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 # for localized messages
 from . import _
 
