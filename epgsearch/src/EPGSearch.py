@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+from __future__ import division
 # for localized messages
 from . import _, allowShowOrbital, getOrbposConfList
 
@@ -192,7 +193,7 @@ class EPGSearchList(EPGList):
 		if op > 1800:
 			op = 3600 - op
 			direction = "W"
-		return ("%d.%d\xc2\xb0%s") % (op // 10, op % 10, direction)
+		return ("%d.%d\xb0%s") % (op // 10, op % 10, direction)
 
 # main class of plugin
 class EPGSearch(EPGSelection):
@@ -603,7 +604,7 @@ class EPGSearch(EPGSelection):
 		l.instance.setSelectionEnable(False)
 		# Match an RIBDT search for dummy entries
 		invalSref = eServiceReference().toString()
-		searching = [(invalSref, -1, -1, -1, "")] * (config.epgselection.enhanced_itemsperpage.value / 2)
+		searching = [(invalSref, -1, -1, -1, "")] * (config.epgselection.enhanced_itemsperpage.value // 2)
 		searching.append((invalSref, -1, -1, -1, _("Searching...")))
 		l.list = searching
 		l.l.setList(searching)
