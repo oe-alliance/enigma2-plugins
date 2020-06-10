@@ -1,12 +1,12 @@
 from __future__ import print_function
-
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
 # Plugins Config
 from xml.etree.cElementTree import parse as cet_parse, fromstring as cet_fromstring
 from os import path as os_path, rename as os_rename
-from AutoTimerConfiguration import parseConfig, buildConfig
+from .AutoTimerConfiguration import parseConfig, buildConfig
 
 # Tasks
 import Components.Task
@@ -32,7 +32,7 @@ from Tools.FuzzyDate import FuzzyTime
 from enigma import eEPGCache, eServiceReference, eServiceCenter, iServiceInformation
 
 # AutoTimer Component
-from AutoTimerComponent import preferredAutoTimerComponent
+from .AutoTimerComponent import preferredAutoTimerComponent
 
 from itertools import chain
 from collections import defaultdict

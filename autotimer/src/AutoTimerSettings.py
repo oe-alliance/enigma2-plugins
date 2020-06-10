@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -14,7 +15,7 @@ from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 
 # info
-from plugin import AUTOTIMER_VERSION
+from .plugin import AUTOTIMER_VERSION
 
 # Configuration
 from Components.config import config, configfile, getConfigListEntry

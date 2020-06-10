@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -31,7 +32,7 @@ from RecordTimer import AFTEREVENT
 from time import localtime, mktime
 
 # Show ServiceName instead of ServiceReference
-from ServiceReference import ServiceReference
+from Tools.ServiceReference import ServiceReference
 
 # addAutotimerFromService, AutoTimerChannelSelection
 from enigma import eServiceCenter, eServiceReference, iServiceInformation, getDesktop

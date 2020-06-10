@@ -1,5 +1,5 @@
 from __future__ import print_function
-
+from __future__ import absolute_import
 from . import _, config
 
 # GUI (Screens)
@@ -11,7 +11,7 @@ from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 from boxbranding import getImageDistro
 
-from AutoTimer import AutoTimer
+from .AutoTimer import AutoTimer
 autotimer = AutoTimer()
 autopoller = None
 
@@ -37,7 +37,7 @@ def autostart(reason, **kwargs):
 	# Startup
 	if reason == 0 and config.plugins.autotimer.autopoll.value:
 		# Start Poller
-		from AutoPoller import AutoPoller
+		from .AutoPoller import AutoPoller
 		autopoller = AutoPoller()
 		autopoller.start()
 
@@ -70,7 +70,7 @@ def sessionstart(reason, **kwargs):
 			from twisted.python import util
 			from WebChilds.UploadResource import UploadResource
 
-			from AutoTimerResource import AutoTimerDoParseResource, \
+			from .AutoTimerResource import AutoTimerDoParseResource, \
 				AutoTimerListAutoTimerResource, AutoTimerAddOrEditAutoTimerResource, \
 				AutoTimerRemoveAutoTimerResource, AutoTimerChangeSettingsResource, \
 				AutoTimerSettingsResource, AutoTimerSimulateResource, AutoTimerTestResource, \
@@ -125,7 +125,7 @@ def main(session, **kwargs):
 	if autopoller is not None:
 		autopoller.stop()
 
-	from AutoTimerOverview import AutoTimerOverview
+	from .AutoTimerOverview import AutoTimerOverview
 	session.openWithCallback(
 		editCallback,
 		AutoTimerOverview,
@@ -148,7 +148,7 @@ def editCallback(session):
 	# Start autopoller again if wanted
 	if config.plugins.autotimer.autopoll.value:
 		if autopoller is None:
-			from AutoPoller import AutoPoller
+			from .AutoPoller import AutoPoller
 			autopoller = AutoPoller()
 		autopoller.start()
 	# Remove instance if not running in background
@@ -157,12 +157,12 @@ def editCallback(session):
 
 # Movielist
 def movielist(session, service, **kwargs):
-	from AutoTimerEditor import addAutotimerFromService
+	from .AutoTimerEditor import addAutotimerFromService
 	addAutotimerFromService(session, service)
 
 # Event Info
 def eventinfo(session, servicelist, **kwargs):
-	from AutoTimerEditor import AutoTimerEPGSelection
+	from .AutoTimerEditor import AutoTimerEPGSelection
 	ref = session.nav.getCurrentlyPlayingServiceReference()
 	session.open(AutoTimerEPGSelection, ref)
 

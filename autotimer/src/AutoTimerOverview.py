@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # for localized messages
 from . import _, config
 
@@ -6,14 +7,14 @@ from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
-from AutoTimerEditor import AutoTimerEditor, AutoTimerChannelSelection
-from AutoTimerImporter import AutoTimerImportSelector
-from AutoTimerPreview import AutoTimerPreview
-from AutoTimerSettings import AutoTimerSettings
-from AutoTimerWizard import AutoTimerWizard
+from .AutoTimerEditor import AutoTimerEditor, AutoTimerChannelSelection
+from .AutoTimerImporter import AutoTimerImportSelector
+from .AutoTimerPreview import AutoTimerPreview
+from .AutoTimerSettings import AutoTimerSettings
+from .AutoTimerWizard import AutoTimerWizard
 
 # GUI (Components)
-from AutoTimerList import AutoTimerList
+from .AutoTimerList import AutoTimerList
 from Components.ActionMap import HelpableActionMap
 from Components.Sources.StaticText import StaticText
 from enigma import getDesktop

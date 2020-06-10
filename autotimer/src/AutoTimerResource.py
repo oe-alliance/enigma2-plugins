@@ -1,21 +1,19 @@
+from __future__ import absolute_import
 # -*- coding: UTF-8 -*-
 from AutoTimer import AutoTimer
-from AutoTimerConfiguration import CURRENT_CONFIG_VERSION
+from .AutoTimerConfiguration import CURRENT_CONFIG_VERSION
 from RecordTimer import AFTEREVENT
 from twisted.internet import reactor
 from twisted.web import http, resource, server
 import threading
-try:
-	from urllib import unquote
-except ImportError as ie:
-	from urllib.parse import unquote
+from six.moves.urllib.parse import unquote
 from ServiceReference import ServiceReference
 from Tools.XMLTools import stringToXML
 from enigma import eServiceReference
 from . import _, config, iteritems, plugin
-from plugin import autotimer, AUTOTIMER_VERSION
+from .plugin import autotimer, AUTOTIMER_VERSION
 
-from AutoTimerSettings import getAutoTimerSettingsDefinitions
+from .AutoTimerSettings import getAutoTimerSettingsDefinitions
 
 API_VERSION = "1.6"
 
