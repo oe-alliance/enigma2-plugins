@@ -6,6 +6,7 @@ from RecordTimer import AFTEREVENT
 from twisted.internet import reactor
 from twisted.web import http, resource, server
 import threading
+import six
 from six.moves.urllib.parse import unquote
 from ServiceReference import ServiceReference
 from Tools.XMLTools import stringToXML
@@ -23,16 +24,16 @@ class AutoTimerBaseResource(resource.Resource):
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 
-		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
+		return six.ensure_binary("""<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2simplexmlresult>
 	<e2state>%s</e2state>
 	<e2statetext>%s</e2statetext>
-</e2simplexmlresult>""" % ('True' if state else 'False', statetext)
+</e2simplexmlresult>""" % ('True' if state else 'False', statetext))
 
 class AutoTimerDoParseResource(AutoTimerBaseResource):
 	def parsecallback(self, ret):
 		rets = self.renderBackground (self.req, ret)
-		self.req.write(rets)
+		self.req.write(six.ensure_binary(rets))
 		self.req.finish()
 	def render(self, req):
 		self.req = req
@@ -45,8 +46,8 @@ class AutoTimerDoParseResource(AutoTimerBaseResource):
 
 class AutoTimerSimulateResource(AutoTimerBaseResource):
 	def parsecallback(self, timers, skipped):
-		ret = self.renderBackground (self.req, timers)
-		self.req.write(ret)
+		rets = self.renderBackground (self.req, timers)
+		self.req.write(six.ensure_binary(rets))
 		self.req.finish()
 	def render(self, req):
 		self.req = req
@@ -79,8 +80,8 @@ class AutoTimerSimulateResource(AutoTimerBaseResource):
 #TODO
 class AutoTimerTestResource(AutoTimerBaseResource):
 	def parsecallback(self, timers, skipped):
-		ret = self.renderBackground (self.req, timers, skipped)
-		self.req.write(ret)
+		rets = self.renderBackground (self.req, timers, skipped)
+		self.req.write(six.ensure_binary(rets))
 		self.req.finish()
 	def render(self, req):
 		self.req = req
@@ -144,7 +145,7 @@ class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
-		return ''.join(autotimer.getXml(webif))
+		return six.ensure_binary(''.join(autotimer.getXml(webif)))
 
 class AutoTimerRemoveAutoTimerResource(AutoTimerBaseResource):
 	def render(self, req):
@@ -534,5 +535,5 @@ class AutoTimerSettingsResource(resource.Resource):
 				</e2setting>
 			</e2settings>""" % (hasVps, hasSeriesPlugin, CURRENT_CONFIG_VERSION, API_VERSION, AUTOTIMER_VERSION )
 
-		return resultstr
+		return six.ensure_binary(resultstr)
 
