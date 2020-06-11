@@ -1,3 +1,5 @@
+from __future__ import division
+
 # Format counter
 from time import strftime
 
@@ -281,7 +283,7 @@ class AutoTimerComponent(object):
 	# XXX: as this function was not added by me (ritzMo) i'll leave it like this but i'm not really sure if this is right ;-)
 	getDestination = lambda self: self.destination is not None
 
-	getDuration = lambda self: self.maxduration/60
+	getDuration = lambda self: self.maxduration//60
 
 	getEnabled = lambda self: self.enabled and "yes" or "no"
 
@@ -307,8 +309,8 @@ class AutoTimerComponent(object):
 	getMatch = lambda self: self.match
 	getName = lambda self: self.name
 
-	getOffsetBegin = lambda self: self.offset[0]/60
-	getOffsetEnd = lambda self: self.offset[1]/60
+	getOffsetBegin = lambda self: self.offset[0]//60
+	getOffsetEnd = lambda self: self.offset[1]//60
 
 	getOverrideAlternatives = lambda self: self.overrideAlternatives and "1" or "0"
 

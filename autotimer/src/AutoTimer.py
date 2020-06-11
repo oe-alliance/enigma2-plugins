@@ -1,5 +1,4 @@
-from __future__ import print_function
-from __future__ import absolute_import
+from __future__ import print_function, absolute_import, division
 # for localized messages
 from . import _
 
@@ -82,11 +81,11 @@ def timeSimilarityPercent(rtimer, evtBegin, evtEnd, timer=None):
 	else:
 		commonTime = 0
 	if evtBegin != evtEnd:
-		commonTime_percent = 100*commonTime/(evtEnd - evtBegin)
+		commonTime_percent = 100*commonTime//(evtEnd - evtBegin)
 	else:
 		return 0
 	if rtimerEnd != rtimerBegin:
-		durationMatch_percent = 100*(evtEnd - evtBegin)/(rtimerEnd - rtimerBegin)
+		durationMatch_percent = 100*(evtEnd - evtBegin)//(rtimerEnd - rtimerBegin)
 	else:
 		return 0
 	#print("commonTime_percent = ",commonTime_percent,", durationMatch_percent = ",durationMatch_percent)
@@ -349,7 +348,7 @@ class AutoTimer:
 		match = timer.match.replace('\xc2\x86', '').replace('\xc2\x87', '')
 		if timer.encoding != 'UTF-8':
 			try:
-				match = match.decode('UTF-8').encode(timer.encoding)
+				match = match.decode('UTF-8').encode(timer.encoding) #FIXME PY3
 			except UnicodeDecodeError:
 				pass
 

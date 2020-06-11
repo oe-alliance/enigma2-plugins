@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 # -*- coding: UTF-8 -*-
-from AutoTimer import AutoTimer
+from .AutoTimer import AutoTimer
 from .AutoTimerConfiguration import CURRENT_CONFIG_VERSION
 from RecordTimer import AFTEREVENT
 from twisted.internet import reactor
