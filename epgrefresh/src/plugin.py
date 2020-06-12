@@ -1,5 +1,5 @@
-from __future__ import print_function
-
+# -*- coding: UTF-8 -*-
+from __future__ import print_function, absolute_import
 # for localized messages
 from . import _, NOTIFICATIONDOMAIN
 
@@ -91,7 +91,8 @@ if config.plugins.epgrefresh.interval.value != 2:
 #pragma mark - Help
 try:
 	from Components.Language import language
-	from Plugins.SystemPlugins.MPHelp import registerHelp, XMLHelpReader
+	from Plugins.SystemPlugins.MPHelp import XMLHelpReader
+	from Plugins.SystemPlugins.MPHelp.plugin import registerHelp
 	from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileExists
 	lang = language.getLanguage()[:2]
 	
@@ -117,8 +118,8 @@ except Exception as e:
 	#print("[EPGRefresh] Error registering Notification-Domain:", e)
 	
 # Plugin
-from EPGRefresh import epgrefresh
-from EPGRefreshService import EPGRefreshService
+from .EPGRefresh import epgrefresh
+from .EPGRefreshService import EPGRefreshService
 
 # Plugins
 from Components.PluginComponent import plugins

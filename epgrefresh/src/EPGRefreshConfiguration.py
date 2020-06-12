@@ -1,4 +1,5 @@
-from __future__ import print_function
+# -*- coding: UTF-8 -*-
+from __future__ import print_function, absolute_import
 
 # for localized messages
 from . import _
@@ -9,7 +10,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Components.ConfigList import ConfigListScreen
 from Components.config import KEY_OK
 from Screens.LocationBox import LocationBox
-from EPGRefreshChannelEditor import EPGRefreshServiceEditor
+from .EPGRefreshChannelEditor import EPGRefreshServiceEditor
 
 # GUI (Summary)
 from Screens.Setup import SetupSummary
@@ -24,7 +25,7 @@ from Components.config import config, getConfigListEntry, configfile, NoSave
 from Screens.FixedMenu import FixedMenu
 from Tools.BoundFunction import boundFunction
 
-from EPGRefresh import epgrefresh
+from .EPGRefresh import epgrefresh
 from Components.NimManager import nimmanager
 from Screens.MessageBox import MessageBox
 
