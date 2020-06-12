@@ -19,7 +19,8 @@ AUTOTIMER_VERSION = "4.3.2"
 
 #pragma mark - Help
 try:
-	from Plugins.SystemPlugins.MPHelp import registerHelp, XMLHelpReader
+	from Plugins.SystemPlugins.MPHelp import XMLHelpReader
+	from Plugins.SystemPlugins.MPHelp.plugin import registerHelp
 	from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 	file = open(resolveFilename(SCOPE_PLUGINS, "Extensions/AutoTimer/mphelp.xml"), 'r')
 	reader = XMLHelpReader(file)
