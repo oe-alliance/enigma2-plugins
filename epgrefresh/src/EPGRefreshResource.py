@@ -38,11 +38,11 @@ class EPGRefreshStartRefreshResource(resource.Resource):
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 
-		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
+		return six.ensure_binary("""<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2simplexmlresult>
  <e2state>%s</e2state>
  <e2statetext>%s</e2statetext>
-</e2simplexmlresult>""" % ('true' if state else 'false', output)
+</e2simplexmlresult>""" % ('true' if state else 'false', output))
 
 class EPGRefreshAddRemoveServiceResource(resource.Resource):
 	TYPE_ADD = 0
@@ -132,11 +132,11 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 		
-		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
+		return six.ensure_binary("""<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2simplexmlresult>
  <e2state>%s</e2state>
  <e2statetext>%s</e2statetext>
-</e2simplexmlresult> """ % ('True' if state else 'False', output)
+</e2simplexmlresult> """ % ('True' if state else 'False', output))
 
 class EPGRefreshListServicesResource(resource.Resource):
 	def render(self, req):
@@ -144,7 +144,7 @@ class EPGRefreshListServicesResource(resource.Resource):
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
-		return ''.join(epgrefresh.buildConfiguration(webif = True))
+		return six.ensure_binary(''.join(epgrefresh.buildConfiguration(webif = True)))
 
 class EPGRefreshPreviewServicesResource(resource.Resource):
 	def render(self, req):
@@ -195,7 +195,7 @@ class EPGRefreshPreviewServicesResource(resource.Resource):
 				' </e2service>\n',
 			))
 		returnlist.append('\n</e2servicelist>')
-		return ''.join(returnlist)
+		return six.ensure_binary(''.join(returnlist))
 
 class EPGRefreshChangeSettingsResource(resource.Resource):
 	def render(self, req):
@@ -257,11 +257,11 @@ class EPGRefreshChangeSettingsResource(resource.Resource):
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 
-		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
+		return six.ensure_binary("""<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2simplexmlresult>
  <e2state>true</e2state>
  <e2statetext>%s</e2statetext>
-</e2simplexmlresult>""" % (statetext,)
+</e2simplexmlresult>""" % (statetext,))
 
 class EPGRefreshSettingsResource(resource.Resource):
 	def render(self, req):
@@ -289,7 +289,7 @@ class EPGRefreshSettingsResource(resource.Resource):
 			hasAutoTimer = True
 		except ImportError as ie: pass
 
-		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
+		return six.ensure_binary("""<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2settings>
  <e2setting>
   <e2settingname>config.plugins.epgrefresh.enabled</e2settingname>
@@ -377,5 +377,5 @@ class EPGRefreshSettingsResource(resource.Resource):
 				canDoBackgroundRefresh,
 				hasAutoTimer,
 				API_VERSION,
-			)
+			))
 
