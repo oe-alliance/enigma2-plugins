@@ -56,7 +56,7 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 		do_add = self.type == self.TYPE_ADD
 		state = False
 
-		if 'multi' in req.args:
+		if b'multi' in req.args:
 			if epgrefresh.services[0]:
 				epgrefresh.services[0].clear()
 				state = True
@@ -64,14 +64,15 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 				epgrefresh.services[1].clear()
 				state = True
 
-		if 'sref' in req.args:
-			duration = req.args.get("duration", None)
+		if b'sref' in req.args:
+			duration = req.args.get(b"duration", None)
 			try:
 				duration = duration and int(duration)
 			except ValueError as ve:
 				output = 'invalid value for "duration": ' + str(duration)
 			else:
-				for sref in req.args.get('sref'):
+				for _sref in req.args.get(b'sref'):
+					sref = six.ensure_str(_sref)
 					sref = unquote(sref)
 					ref = eServiceReference(sref)
 					if not ref.valid():
@@ -125,7 +126,7 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 		else:
 			output = 'missing argument "sref"'
 
-		if 'multi' in req.args:
+		if b'multi' in req.args:
 			output = 'service restriction changed'
 
 		req.setResponseCode(http.OK)
@@ -152,10 +153,11 @@ class EPGRefreshPreviewServicesResource(resource.Resource):
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 
-		if 'sref' in req.args:
+		if b'sref' in req.args:
 			services = OrderedSet()
 			bouquets = OrderedSet()
-			for sref in req.args.get('sref'):
+			for _sref in req.args.get(b'sref'):
+				sref = six.ensure_str(_sref)
 				sref = unquote(sref)
 				ref = eServiceReference(sref)
 				if not ref.valid():
@@ -200,8 +202,9 @@ class EPGRefreshPreviewServicesResource(resource.Resource):
 class EPGRefreshChangeSettingsResource(resource.Resource):
 	def render(self, req):
 		statetext = "config changed."
-		for key, value in iteritems(req.args):
-			value = value[0]
+		for _key, _value in iteritems(req.args):
+			value = six.ensure_str(_value[0])
+			key = six.ensure_str(_key)
 			if key == "enabled":
 				config.plugins.epgrefresh.enabled.value = True if value == "true" else False
 			elif key == "enablemessage":
