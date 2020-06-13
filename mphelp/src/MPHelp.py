@@ -84,7 +84,7 @@ class MPHelp(Screen):
 			text = "You managed to jump to an invalid page. Stop it :-)"
 			newPage = self.curPage
 		self["title"].text = six.ensure_str(_(title), errors='ignore')
-		self["detailtext"].setText(six.ensure_str(_(text), errors='ignore')
+		self["detailtext"].setText(six.ensure_str(_(text), errors='ignore'))
 		self.curPage = newPage
 	
 	def pageUp(self):
