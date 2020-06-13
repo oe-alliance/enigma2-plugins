@@ -32,7 +32,7 @@ from RecordTimer import AFTEREVENT
 from time import localtime, mktime
 
 # Show ServiceName instead of ServiceReference
-from Tools.ServiceReference import ServiceReference
+from ServiceReference import ServiceReference
 
 # addAutotimerFromService, AutoTimerChannelSelection
 from enigma import eServiceCenter, eServiceReference, iServiceInformation, getDesktop

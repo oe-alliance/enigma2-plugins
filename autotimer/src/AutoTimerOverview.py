@@ -122,14 +122,14 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		self.onFirstExecBegin.append(self.firstExec)
 
 	def firstExec(self):
-		from plugin import autotimerHelp
+		from .plugin import autotimerHelp
 		if config.plugins.autotimer.show_help.value and autotimerHelp:
 			config.plugins.autotimer.show_help.value = False
 			config.plugins.autotimer.show_help.save()
 			autotimerHelp.open(self.session)
 
 	def setCustomTitle(self):
-		from plugin import AUTOTIMER_VERSION
+		from .plugin import AUTOTIMER_VERSION
 		self.setTitle(_("AutoTimer overview") + _(" - Version: ") + AUTOTIMER_VERSION)
 
 	def createSummary(self):
