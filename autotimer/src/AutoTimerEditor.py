@@ -200,18 +200,18 @@ class AutoTimerEditorBase:
 			default = True
 			now[3] = timer.timespan[0][0]
 			now[4] = timer.timespan[0][1]
-			begin = mktime(now)
+			begin = mktime(tuple(now))
 			now[3] = timer.timespan[1][0]
 			now[4] = timer.timespan[1][1]
-			end = mktime(now)
+			end = mktime(tuple(now))
 		else:
 			default = False
 			now[3] = 20
 			now[4] = 15
-			begin = mktime(now)
+			begin = mktime(tuple(now))
 			now[3] = 23
 			now[4] = 15
-			end = mktime(now)
+			end = mktime(tuple(now))
 		self.timespan = NoSave(ConfigEnableDisable(default = default))
 		self.timespanbegin = NoSave(ConfigClock(default = begin))
 		self.timespanend = NoSave(ConfigClock(default = end))
@@ -226,7 +226,7 @@ class AutoTimerEditorBase:
 			now = [x for x in localtime()]
 			now[3] = 0
 			now[4] = 0
-			begin = mktime(now)
+			begin = mktime(tuple(now))
 			end = begin + 604800 # today + 7d
 		self.timeframe = NoSave(ConfigEnableDisable(default = default))
 		self.timeframebegin = NoSave(ConfigDateTime(begin, _("%d.%B %Y"), increment = 86400))
@@ -269,18 +269,18 @@ class AutoTimerEditorBase:
 			default = True
 			now[3] = timer.afterevent[0][1][0][0]
 			now[4] = timer.afterevent[0][1][0][1]
-			begin = mktime(now)
+			begin = mktime(tuple(now))
 			now[3] = timer.afterevent[0][1][1][0]
 			now[4] = timer.afterevent[0][1][1][1]
-			end = mktime(now)
+			end = mktime(tuple(now))
 		else:
 			default = False
 			now[3] = 23
 			now[4] = 15
-			begin = mktime(now)
+			begin = mktime(tuple(now))
 			now[3] = 7
 			now[4] = 0
-			end = mktime(now)
+			end = mktime(tuple(now))
 		self.afterevent_timespan = NoSave(ConfigEnableDisable(default = default))
 		self.afterevent_timespanbegin = NoSave(ConfigClock(default = begin))
 		self.afterevent_timespanend = NoSave(ConfigClock(default = end))
