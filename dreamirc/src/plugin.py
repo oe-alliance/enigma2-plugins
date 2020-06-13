@@ -216,7 +216,7 @@ class dreamIRCMainMenu(Screen):
 			self.pipe.addOutText("/QUIT")
 			try:
 				timestamp = time.strftime("%Y%m%d_%H%M%S", time.localtime(time.time()))
-				fp = file("/var/log/dreamIRC.log", 'r')
+				fp = open("/var/log/dreamIRC.log", 'r')
 				fp.close()
 				os.rename("/var/log/dreamIRC.log", "/var/log/dreamIRC_%s.log"%timestamp)
 			except IOError:

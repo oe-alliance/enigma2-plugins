@@ -270,7 +270,7 @@ class FEconf(Screen):
 				fstype = val[2]
 
 				#fstab editieren
-				mounts = file('/etc/fstab').read().split('\n')
+				mounts = open('/etc/fstab').read().split('\n')
 				newlines = []
 				for x in mounts:
 					if x.startswith(devPath) or x.startswith("/dev/hdc1"):#/dev/hdc1 wegen 7025+
@@ -284,7 +284,7 @@ class FEconf(Screen):
 					newlines.append("%s\t/usr\t%s\trw,nolock,timeo=14,intr\t0 0" %(devPath, fstype))
 				else:
 					newlines.append("%s\t/usr\tauto\tdefaults\t0 0" %(uuidPath))
-				fp = file("/etc/fstab", 'w')
+				fp = open("/etc/fstab", 'w')
 				fp.write("#automatically edited by FlashExpander\n")
 				for x in newlines:
 					fp.write(x + "\n")

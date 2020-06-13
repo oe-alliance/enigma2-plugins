@@ -229,4 +229,4 @@ class MSNWeather:
 			self.callback(self.OK, None)
 		
 def download(item):
-	return downloadPage(item.url, file(item.filename, 'wb'))
+	return downloadPage(item.url, open(item.filename, 'wb'))

@@ -52,7 +52,7 @@ class WeatherIconItem:
 		self.index = index
 		self.error = error
 def download(item):
-	return downloadPage(item.url, file(item.filename, 'wb'))
+	return downloadPage(item.url, open(item.filename, 'wb'))
 class MC_WeatherInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)

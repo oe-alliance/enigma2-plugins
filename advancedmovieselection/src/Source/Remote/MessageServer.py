@@ -33,7 +33,7 @@ def getIpAddress(iface):
     interfaces = []
     # parse the interfaces-file
     try:
-        fp = file('/etc/network/interfaces', 'r')
+        fp = open('/etc/network/interfaces', 'r')
         interfaces = fp.readlines()
         fp.close()
     except:

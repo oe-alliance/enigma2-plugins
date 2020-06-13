@@ -197,7 +197,7 @@ class MessageLogger:
 
 def readLogFile(args):
 	try:
-		fp = file(args[0], 'r')
+		fp = open(args[0], 'r')
 		lines = fp.readlines()
 		fp.close()
 		output = ""
