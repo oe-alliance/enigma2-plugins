@@ -791,7 +791,7 @@ class EPGSearch(EPGSelection):
 		if not service or not service.valid:
 			return None
 		serviceRefMap = defaultdict(set)
-		triple = tuple(service.getUnsignedData(i) for i in listrange(1, 4)))
+		triple = tuple(service.getUnsignedData(i) for i in list(range(1, 4)))
 		serviceRefMap[triple] = set((service.toString(), ))
 		return serviceRefMap
 
