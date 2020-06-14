@@ -15,8 +15,7 @@ from skin import applyAllAttributes, dom_skins
 		
 from Widget import Widget
 from widgets import importWidgets, importSingleWidget
-		
-
+from six.moves import range
 
 
 SIBbase__init__ = None

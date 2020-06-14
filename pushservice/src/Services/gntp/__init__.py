@@ -134,7 +134,7 @@ class _GNTPBase(object):
 		:return string: Hex string
 		"""
 		result = ''
-		for i in range(0, len(value), 2):
+		for i in list(range(0, len(value), 2)):
 			tmp = int(value[i:i + 2], 16)
 			result += chr(tmp)
 		return result

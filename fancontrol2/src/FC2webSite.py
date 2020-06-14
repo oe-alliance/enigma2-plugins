@@ -57,7 +57,7 @@ class FC2web(resource.Resource):
 		html += "<td>%s °C</td>\n" % _("Sensors")
 		templist = sensors.getSensorsList(sensors.TYPE_TEMPERATURE)
 		tempcount = len(templist)
-		for count in range(tempcount):
+		for count in list(range(tempcount)):
 			if sensors.getSensorName(count) == "undefined":
 				N = TempName[count]
 			else:
@@ -70,11 +70,11 @@ class FC2web(resource.Resource):
 
 		html += "<table border=\"1\" width=\"500\">\n"
 		html += "<tr>\n"
-		for count in range(0, 12):
+		for count in list(range(0, 12)):
 			tmp = ("<BR>-" if FC2stunde[count] == "-" else FC2stunde[count])
 			html +="<td><p align=\"center\"><font size=\"1\">%02d:00<br><font color=\"#FFCC00\">%s</font></font></td>\n" % (count, tmp)
 		html += "</tr><tr>\n"
-		for count in range(12, 24):
+		for count in list(range(12, 24)):
 			tmp = ("<BR>-" if FC2stunde[count] == "-" else FC2stunde[count])
 			html +="<td><p align=\"center\"><font size=\"1\">%02d:00<br><font color=\"#FFCC00\">%s</font></font></td>\n" % (count, tmp)
 		html += "</tr></table>\n"

@@ -156,7 +156,7 @@ def resolveNumberWithAvon(number, countrycode):
 		return ""
 
 	# debug('normNumer: ' + normNumber)
-	for i in reversed(range(min(10, len(number)))):
+	for i in reversed(list(range(min(10, len(number))))):
 		if normNumber[:i] in avon:
 			return '[' + avon[normNumber[:i]].strip() + ']'
 	return ""
@@ -982,7 +982,7 @@ class NcidLineReceiver(LineReceiver):
 
 		items = line.split('*')
 
-		for i in range(0, len(items)):
+		for i in list(range(0, len(items))):
 			item = items[i]
 
 			if item == 'DATE':

@@ -63,7 +63,7 @@ class Mosaic(Screen):
 	positions = []
 	x = 80
 	y = 50
-	for i in range(1, 10):
+	for i in list(range(1, 10)):
 		positions.append([x, y])
 		x += windowWidth
 		x += ((width - 160) - (windowWidth * 3)) / 2
@@ -141,7 +141,7 @@ class Mosaic(Screen):
 		self.state = self.PLAY
 
 		self["playState"] = Pixmap()
-		for i in range(1, 10):
+		for i in list(range(1, 10)):
 			self["window" + str(i)] = Pixmap()
 			self["video" + str(i)] = VideoWindow(decoder=0, fb_width=self.width, fb_height=self.height)
 			self["video" + str(i)].hide()

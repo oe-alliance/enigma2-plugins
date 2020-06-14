@@ -83,7 +83,7 @@ InfoBarHide = None
 
 
 # Type Enum
-INFO, RECORD, STREAM, FINISHED = range( 4 )
+INFO, RECORD, STREAM, FINISHED = list(range(4))
 
 
 # Constants
@@ -797,7 +797,7 @@ class TunerStateBase(Screen):
 		self["Type"] = MultiPixmap()
 		self["Progress"] = ProgressBar()
 		
-		for i in range( len( config.infobartunerstate.fields.dict() ) ):
+		for i in list(range( len( config.infobartunerstate.fields.dict() ) )):
 		#for i, c in enumerate( six.itervalues(config.infobartunerstate.fields.dict()) ):
 			label = Label()
 			#fieldid = "Field"+str(i)
@@ -922,7 +922,7 @@ class TunerStateInfo(TunerStateBase):
 		self["Progress"].hide()
 		
 		#for i, c in enumerate( six.itervalues(config.infobartunerstate.fields.dict()) ):
-		for i in range( len( config.infobartunerstate.fields.dict() ) ):
+		for i in list(range( len( config.infobartunerstate.fields.dict() ) )):
 			fieldid = "Field"+str(i)
 			
 			if fieldid == "Field0":
@@ -942,7 +942,7 @@ class TunerStateInfo(TunerStateBase):
 		height = self.instance.size().height()
 		
 		#for i, c in enumerate( six.itervalues(config.infobartunerstate.fields.dict()) ):
-		for i in range( len( config.infobartunerstate.fields.dict() ) ):
+		for i in list(range( len( config.infobartunerstate.fields.dict() ) )):
 			fieldid = "Field"+str(i)
 			
 			#Workaround#1 Set default size

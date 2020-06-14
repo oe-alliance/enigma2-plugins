@@ -53,7 +53,7 @@ class eSame(Screen):
 		self.maps = []
 		for color in ["red", "blue", "green"]:
 			tmp = []
-			for x in range(self.maxslices):
+			for x in list(range(self.maxslices)):
 				tmp.append(LoadPixmap(path + color + str(x) + ".png"))
 			self.maps.append(tmp)
 
@@ -62,7 +62,7 @@ class eSame(Screen):
 		skincontent = ""
 
 		posX = -1
-		for x in range(self.maxstones):
+		for x in list(range(self.maxstones)):
 			posY = x / self.stonesX
 			posX += 1
 			if posX >= self.stonesX:
@@ -120,7 +120,7 @@ class eSame(Screen):
 		self["lbScore"] = Label()
 		self["key_green"] = Button("new game")
 		self["key_yellow"] = Button("reset game")
-		for x in range(self.maxstones):
+		for x in list(range(self.maxstones)):
 			self["stone"+str(x)] = Pixmap()
 
 		self.maxentry = self.maxstones - 1

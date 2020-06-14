@@ -46,7 +46,7 @@ Briefkasten = queue.Queue()
 from boxbranding import getBoxType, getImageDistro
 
 
-from six.moves import queue
+from six.moves import queue, range
 
 
 def main(session,**kwargs):

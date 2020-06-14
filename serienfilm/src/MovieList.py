@@ -288,7 +288,7 @@ class MovieList(GUIComponent):
 		repeats = 0		# update repeatcount "#x" of surviving movies
 		ele0 = 0
 #		print "[SF-Plugin] removeService: searching " + tinfo[2]
-		for i in range(1, len(self.list)):
+		for i in list(range(1, len(self.list))):
 			m = self.list[i]
 			t = m[3]
 #			print "[SF-Plugin] removeService try: %x, %s -- %s" % (m[0].flags,  str(t[1]), str(t[2]))
@@ -475,7 +475,7 @@ class MovieList(GUIComponent):
 		return film
 
 	def update_repcnt(self, serlst, repcnt):
-		for i in range(repcnt + 1):
+		for i in list(range(repcnt + 1)):
 			serlst[-( i+1 )][3][1] =  "#" + str(i)
 
 	def createSublists(self):

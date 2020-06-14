@@ -241,7 +241,7 @@ class ZapHistoryBrowser(Screen, ProtectedScreen):
 
 	def clear(self):
 		if self.allowChanges:
-			for i in range(0, len(self.servicelist.history)):
+			for i in list(range(0, len(self.servicelist.history))):
 				del self.servicelist.history[0]
 			self.buildList()
 			self.servicelist.history_pos = 0

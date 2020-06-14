@@ -56,7 +56,7 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
             getConfigListEntry(_("Style of timer"), config.plugins.KiddyTimer.timerStyle ),
             getConfigListEntry(_("Timeout for activation dialog"), config.plugins.KiddyTimer.activationDialogTimeout )
             ]
-        for i in range(0, 7):
+        for i in list(range(0, 7)):
             self.list.append(getConfigListEntry(KTglob.DAYNAMES[i], config.plugins.KiddyTimer.dayTimes[i].timeValue))                
 
         ConfigListScreen.__init__(self, self.list)

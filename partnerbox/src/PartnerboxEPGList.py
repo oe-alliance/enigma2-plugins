@@ -353,7 +353,7 @@ def isInTimer(self, eventid, begin, duration, service):
 				sref.setUnsignedData(2, tsid)
 				sref.setUnsignedData(5, parent_sid)
 				sref.setUnsignedData(6, parent_tsid)
-				for cnt in range(num):
+				for cnt in list(range(num)):
 					subservice = event.getLinkageService(sref, cnt)
 					if sref.toCompareString() == subservice.toCompareString():
 						check = True
@@ -516,7 +516,7 @@ def isInRemoteTimer(self, begin, duration, service):
 					chktimecmp = chktime.tm_wday * 1440 + chktime.tm_hour * 60 + chktime.tm_min
 					chktimecmp_end = chktimecmp + (duration / 60)
 				time = localtime(x.timebegin)
-				for y in range(7):
+				for y in list(range(7)):
 					if x.repeated & (2 ** y):
 						timecmp = y * 1440 + time.tm_hour * 60 + time.tm_min
 						if timecmp <= chktimecmp < (timecmp + ((x.timeend - x.timebegin) / 60)):

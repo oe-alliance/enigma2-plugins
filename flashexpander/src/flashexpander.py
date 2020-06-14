@@ -112,7 +112,7 @@ class FEconf(Screen):
 			if x[0:2] == 'sd' or x[0:2] == 'hd':
 				print("[FlashExpander] device", x)
 				devices = Harddisk(x)
-				for y in range(devices.numPartitions()):
+				for y in list(range(devices.numPartitions())):
 					fstype = self.__getPartitionType(devices.partitionPath(str(y+1)))
 					if fstype==False:
 						fstype = self.__getPartitionType(devices.partitionPath(str(y+1)))

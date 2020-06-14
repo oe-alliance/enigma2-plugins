@@ -20,7 +20,7 @@ from Tools.Directories import SCOPE_PLUGINS, resolveFilename
 from __init__ import _
 
 class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
-	STATE_DISCONNECTED, STATE_CONNECTING, STATE_PLAYING, STATE_PAUSED, STATE_FAILURE = range(5)
+	STATE_DISCONNECTED, STATE_CONNECTING, STATE_PLAYING, STATE_PAUSED, STATE_FAILURE = list(range(5))
 	STATE_NAMES = [_("disconnected"), _("connecting..."), _("LIVE"), _("pause"), _("No Connection")]
 	STREAM_DIM = (768, 576)
 	PIP_DIM = (432, 324)

@@ -69,6 +69,8 @@ from nrzuname import ReverseLookupAndNotifier
 from . import _, __  # @UnresolvedImport # pylint: disable=W0611,F0401
 global standbyMode
 
+from six.moves import range
+
 # import codecs
 # encode = lambda x : codecs.encode(x, "rot13")
 # decode = lambda x : codecs.decode(x, "rot13")

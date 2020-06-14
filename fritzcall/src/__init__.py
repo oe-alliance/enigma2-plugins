@@ -39,7 +39,7 @@ def __(text, front=True):
 	#	return '.....' 
 	#===========================================================================
 	out =""
-	for i in range(len(text)/2):
+	for i in list(range(len(text)/2)):
 		out = out + text[i*2] + '.'
 	return out
 

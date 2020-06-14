@@ -11,7 +11,7 @@ import os, gettext
 from Components.config import config, configfile, ConfigSet, ConfigSubsection, ConfigSelection, ConfigSelectionNumber, ConfigYesNo, ConfigSatlist
 
 import six
-
+from six.moves import range
 
 PluginLanguageDomain = "EPGSearch"
 PluginLanguagePath = "Extensions/EPGSearch/locale"

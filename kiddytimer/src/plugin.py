@@ -23,7 +23,7 @@ config.plugins.KiddyTimer.pin = ConfigPIN(default = 1111, censor = "*")
 config.plugins.KiddyTimer.remainingTime = ConfigInteger(default=int(KTglob.ONEHOUR), limits = (0, 86400) )
 
 config.plugins.KiddyTimer.dayTimes = ConfigSubList()
-for i in range(0, 7):
+for i in list(range(0, 7)):
     s = ConfigSubsection()
     s.timeValue = ConfigClock(default=KTglob.ONEOCLOCK)
     config.plugins.KiddyTimer.dayTimes.append(s)

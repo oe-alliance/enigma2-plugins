@@ -46,7 +46,7 @@ from ControllerBase import ControllerBase
 
 
 # States
-(MAIN, SERVICES, CONTROLLERS) = range(3)
+(MAIN, SERVICES, CONTROLLERS) = list(range(3))
 #IDEA combine into one screen
 #(MAIN, SERVICES, ADDSERVICE, REMOVESERVICE, CONTROLLERS, ADDCONTROLLER, REMOVECONTROLLER) = range(7)
 

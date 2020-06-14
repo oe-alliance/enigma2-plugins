@@ -151,7 +151,7 @@ class fstabViewerScreen(Screen, HelpableScreen):
 		if returnvalue != 0:
 			os.system("cp /etc/fstab /etc/fstab.backup")
 			configFile = open('/etc/fstab', 'w')
-			for i in range(len(entryList)):
+			for i in list(range(len(entryList))):
 				line = "%*s %*s %*s %*s %s %s\n" %(int(lengthList[0])*-1, entryList[i][0], int(lengthList[1])*-1, entryList[i][1], int(lengthList[2])*-1, entryList[i][2], int(lengthList[3])*-1, entryList[i][3], str(entryList[i][4]), str(entryList[i][5]))
 				configFile.write(line)
 			configFile.close()

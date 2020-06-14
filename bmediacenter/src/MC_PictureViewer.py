@@ -17,6 +17,8 @@ from Components.AVSwitch import AVSwitch
 import os
 from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
 from Screens.InfoBarGenerics import InfoBarSeek, InfoBarNotifications
+from six.moves import range
+
 config.plugins.mc_pp = ConfigSubsection()
 config.plugins.mc_pp.slidetime = ConfigInteger(default=10, limits=(5, 60))
 config.plugins.mc_pp.resize = ConfigSelection(default="0", choices = [("0", _("simple")), ("1", _("better"))])

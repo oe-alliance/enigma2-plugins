@@ -1525,7 +1525,7 @@ class E2TimerMenu(GUIComponent, object):
 		if timer.repeated:
 			flags = timer.repeated
 			count = 0
-			for x in range(0, 7):
+			for x in list(range(0, 7)):
 					if (flags & 1 == 1):
 						if (count != 0):
 							repeatedtext += ", "
@@ -1596,7 +1596,7 @@ class E2TimerMenu(GUIComponent, object):
 		if timer.type & PlaylistEntry.isRepeating :
 			mask = PlaylistEntry.Su
 			count = 0
-			for x in range(0, 7):
+			for x in list(range(0, 7)):
 				if timer.type & mask:
 					if (count != 0):
 						repeatedtext += ", "
@@ -1867,7 +1867,7 @@ class E2EPGList(MenuList):
 						chktimecmp = chktime.tm_wday * 1440 + chktime.tm_hour * 60 + chktime.tm_min
 						chktimecmp_end = chktimecmp + (duration / 60)
 					time = localtime(x.timebegin)
-					for y in range(7):
+					for y in list(range(7)):
 						if x.repeated & (2 ** y):
 							timecmp = y * 1440 + time.tm_hour * 60 + time.tm_min
 							if timecmp <= chktimecmp < (timecmp + ((x.timeend - x.timebegin) / 60)):

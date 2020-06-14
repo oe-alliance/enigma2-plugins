@@ -89,7 +89,7 @@ class __VlcManager():
 		bytelen = struct.unpack('iL', fcntl.ioctl(sck.fileno(), SIOCGIFCONF, struct.pack('iL', BYTES, names.buffer_info()[0])))[0]
 		sck.close()
 		namestr = names.tostring()
-		return [namestr[i:i+32].split('\0', 1)[0] for i in range(0, bytelen, 32)]
+		return [namestr[i:i+32].split('\0', 1)[0] for i in list(range(0, bytelen, 32))]
 
 	def medialistClosed(self, proceed = False):
 		print("[VLC] medialistClosed")

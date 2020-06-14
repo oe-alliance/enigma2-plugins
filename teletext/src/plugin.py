@@ -970,7 +970,7 @@ class TeleText(Screen):
     if len(self.pid_list) > 0:
       service = self.pid_list[self.pid_index]
       log("get favorites of service %s [%s]"%(service[1], service[0]))
-      for i in range(10):
+      for i in list(range(10)):
         text = self.favorites.getFavorite(service[0], i)
         if text is not None:
           page = int(text[0])

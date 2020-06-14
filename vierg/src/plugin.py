@@ -21,6 +21,7 @@ from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN
 from enigma import eTimer
 import xml.etree.cElementTree
 import random
+from six.moves import range
 
 #good old C function :D
 def rand():

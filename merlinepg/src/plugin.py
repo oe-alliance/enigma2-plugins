@@ -56,7 +56,7 @@ if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/EPGSearch/EPGSearch.py
 else:
 	epgSpresent=False
 
-
+from six.moves import range
 
 config.plugins.MerlinEPG = ConfigSubsection()
 config.plugins.MerlinEPG.Columns = ConfigYesNo(default=True)

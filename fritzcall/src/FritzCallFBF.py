@@ -38,7 +38,7 @@ from FritzConnection import FritzConnection
 from twisted.python.failure import Failure
 
 from six.moves.urllib.parse import urlencode
-
+from six.moves import range
 
 FBF_boxInfo = 0
 FBF_upTime = 1

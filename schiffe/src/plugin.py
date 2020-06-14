@@ -20,6 +20,7 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_CURRENT_PLUGIN,
 from enigma import eTimer, gFont, getDesktop, RT_HALIGN_CENTER, RT_VALIGN_CENTER
 import xml.etree.cElementTree
 import random
+from six.moves import range
 
 VERSION = "0.2r0"
 SAVEFILE = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/Schiffe/Schiffe.sav")

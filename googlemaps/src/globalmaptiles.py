@@ -250,7 +250,7 @@ class GlobalMercator(object):
     def ZoomForPixelSize(self, pixelSize ):
         "Maximal scaledown zoom of the pyramid closest to the pixelSize."
         
-        for i in range(30):
+        for i in list(range(30)):
             if pixelSize > self.Resolution(i):
                 return i-1 if i!=0 else 0 # We don't want to scale up
 
@@ -265,7 +265,7 @@ class GlobalMercator(object):
         
         quadKey = ""
         ty = (2**zoom - 1) - ty
-        for i in range(zoom, 0, -1):
+        for i in list(range(zoom, 0, -1)):
             digit = 0
             mask = 1 << (i-1)
             if (tx & mask) != 0:

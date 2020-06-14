@@ -312,7 +312,7 @@ def newnigma2KeyGo(self):
 					ref = self.session.nav.getCurrentlyPlayingServiceReference()
 					parent = service_ref.ref
 					selection = 0
-					for x in range(n):
+					for x in list(range(n)):
 						i = event.getLinkageService(parent, x)
 						if i.toString() == ref.toString():
 							selection = x

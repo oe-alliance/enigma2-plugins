@@ -50,7 +50,7 @@ class Services( Source ):
 		self.servicelist = ServiceList(ref, command_func = self.getServiceList, validate_commands=False)
 		list = self.servicelist.getServicesAsList()
 		E2List = [] 
-		for index in range(len(list)): 
+		for index in list(range(len(list))):
 			item = list[index]
 			servicereference = item[0]
 			servicename = item[1]
