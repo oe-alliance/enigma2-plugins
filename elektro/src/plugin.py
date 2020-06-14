@@ -65,6 +65,7 @@ from time import localtime, asctime, time, gmtime, sleep
 # Enigma system functions
 from enigma import quitMainloop, eTimer
 
+from six.moves import range
 
 ###############################################################################
 

@@ -178,7 +178,7 @@ class Query:
 				self.mp.AudioCD_albuminfo[tag] = self.albuminfo[tag]
 	
 	def updatePlaylist(self, replace = False):
-		for idx in range(len(self.playlist)):
+		for idx in list(range(len(self.playlist))):
 			ref = self.playlist.getServiceRefList()[idx]
 			track = idx+1
 			if idx < len(self.tracklisting):

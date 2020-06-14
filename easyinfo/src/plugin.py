@@ -916,7 +916,7 @@ class EasyPG(EPGSelection, Screen):
 		global EINposition
 		EINposition = 0
 		allbouq = InfoBar_instance.servicelist.getBouquetList()
-		for newpos in range(0, len(allbouq)):
+		for newpos in list(range(0, len(allbouq))):
 			if InfoBar_instance.servicelist.getRoot() == allbouq[newpos][1]:
 				EINposition = newpos
 				break
@@ -1143,7 +1143,7 @@ class EasySelection(EPGSelection, Screen):
 		global EINposition
 		EINposition = 0
 		allbouq = InfoBar_instance.servicelist.getBouquetList()
-		for newpos in range(0, len(allbouq)):
+		for newpos in list(range(0, len(allbouq))):
 			if InfoBar_instance.servicelist.getRoot() == allbouq[newpos][1]:
 				EINposition = newpos
 				break

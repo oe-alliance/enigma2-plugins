@@ -117,7 +117,7 @@ class WAPfunctions(Source):
 
 	def fillOptionListAny(self, input, start, end):
 		returnList = []
-		for i in range(start, end + 1, 1):
+		for i in list(range(start, end + 1, 1)):
 			returnList1 = []
 			j = str(i)
 			if len(j) == 1:
@@ -280,7 +280,7 @@ class WAPfunctions(Source):
 			dirname = resolveFilename(SCOPE_HDD)
 		if not dirname in lst:
 			lst = [dirname] + lst
-		returnList = [[lst[i], i, dirname == lst[i] and "selected" or ""] for i in range(len(lst))]
+		returnList = [[lst[i], i, dirname == lst[i] and "selected" or ""] for i in list(range(len(lst)))]
 		return returnList
 
 	def tagList(self, param):
@@ -298,7 +298,7 @@ class WAPfunctions(Source):
 			taglist = [tag] + taglist
 		if not "" in taglist:
 			taglist.append("")
-		returnList = [[taglist[i], i, tag == taglist[i] and "selected" or ""] for i in range(len(taglist))]
+		returnList = [[taglist[i], i, tag == taglist[i] and "selected" or ""] for i in list(range(len(taglist)))]
 		return returnList
 
 	def fillOptionList(self, param):

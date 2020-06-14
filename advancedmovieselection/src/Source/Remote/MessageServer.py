@@ -119,7 +119,7 @@ class MessageServer():
         self.active_clients = []
         ip = self.host.split(".")
         ip = "%s.%s.%s" % (ip[0], ip[1], ip[2])
-        for x in range(self.ip_from, self.ip_to + 1):
+        for x in list(range(self.ip_from, self.ip_to + 1)):
             try:
                 # Connect to server and send data
                 host = "%s.%s" % (ip, x)

@@ -456,7 +456,7 @@ class Cpart(Screen):
 	def __createCommandList(self):
 		self.__comlist = []
 		#welche parts sollen gelöscht werden
-		for x in range(len(self.__old_part_list)):
+		for x in list(range(len(self.__old_part_list))):
 			if self.__old_part_list[x][LIST_TYPE] == LIST_TYPE_PAR:
 				if bool(self.__old_part_list[x][PA_TYPE] & self.PA_TYPE_FREE) == False:
 					if len(self.__new_part_list) > x:
@@ -467,7 +467,7 @@ class Cpart(Screen):
 						self.__delPart2Comlist(self.__comlist, self.__old_part_list[x])
 
 		#welche parts sollen erstellt werden
-		for x in range(len(self.__new_part_list)):
+		for x in list(range(len(self.__new_part_list))):
 			if self.__new_part_list[x][LIST_TYPE] == LIST_TYPE_PAR:
 				if bool(self.__new_part_list[x][PA_TYPE] & self.PA_TYPE_FREE) == False:
 					if len(self.__old_part_list) > x and bool(self.__old_part_list[x][PA_TYPE] & self.PA_TYPE_FREE) == False:

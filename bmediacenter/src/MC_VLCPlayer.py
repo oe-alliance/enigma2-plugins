@@ -48,7 +48,7 @@ def addFavoriteVLCFolders():
 	config.plugins.mc_vlc.foldercount.value = i+1
 	return i
 
-for i in range(0, config.plugins.mc_vlc.foldercount.value):
+for i in list(range(0, config.plugins.mc_vlc.foldercount.value)):
 	addFavoriteVLCFolders()
 
 class MC_VLCServerlist(Screen):
@@ -498,7 +498,7 @@ class MC_VLCFavoriteFolders(Screen):
 		Screen.__init__(self, session)
 
 		self.list = []
-		for i in range(0, config.plugins.mc_vlc.foldercount.value):
+		for i in list(range(0, config.plugins.mc_vlc.foldercount.value)):
 			cfg = config.plugins.mc_vlc.folders[i]
 			self.list.append((cfg.name.value, int(i), cfg.basedir.value, "50"))
 
@@ -556,7 +556,7 @@ class MC_VLCFavoriteFolders(Screen):
 		config.plugins.mc_vlc.foldercount.save()
 
 		#for i in range(0, len(config.plugins.mc_vlc.folders)):
-		for i in range(0, 100):
+		for i in list(range(0, 100)):
 			try:
 				del(config.plugins.mc_vlc.folders[i])
 			except Exception as e:

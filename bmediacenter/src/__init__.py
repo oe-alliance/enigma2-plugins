@@ -42,7 +42,7 @@ def addFavoriteFolders():
 	config.plugins.mc_favorites.folders[i].basedir = ConfigText("/", False)
 	config.plugins.mc_favorites.foldercount.value = i+1
 	return i
-for i in range(0, config.plugins.mc_favorites.foldercount.value):
+for i in list(range(0, config.plugins.mc_favorites.foldercount.value)):
 	addFavoriteFolders()
 # VLC PLAYER CONFIG
 config.plugins.mc_vlc = ConfigSubsection()
@@ -76,5 +76,5 @@ def addVlcServerConfig():
 	config.plugins.mc_vlc.servers[i].basedir = ConfigText("/", False)
 	config.plugins.mc_vlc.servercount.value = i+1
 	return i
-for i in range(0, config.plugins.mc_vlc.servercount.value):
+for i in list(range(0, config.plugins.mc_vlc.servercount.value)):
 	addVlcServerConfig()

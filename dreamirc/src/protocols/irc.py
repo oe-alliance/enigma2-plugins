@@ -933,7 +933,7 @@ class IRCClient(basic.LineReceiver):
 
         if text is None:
             chars = string.letters + string.digits + string.punctuation
-            key = ''.join([random.choice(chars) for i in range(12)])
+            key = ''.join([random.choice(chars) for i in list(range(12))])
         else:
             key = str(text)
         self._pings[(user, key)] = time.time()
@@ -944,7 +944,7 @@ class IRCClient(basic.LineReceiver):
             byValue = [(v, k) for (k, v) in self._pings.items()]
             byValue.sort()
             excess = self._MAX_PINGRING - len(self._pings)
-            for i in range(excess):
+            for i in list(range(excess)):
                 del self._pings[byValue[i][1]]
 
     def dccSend(self, user, file):
@@ -1943,7 +1943,7 @@ def ctcpExtract(message):
     normal_messages[:] = filter(None, normal_messages)
 
     extended_messages[:] = map(ctcpDequote, extended_messages)
-    for i in range(len(extended_messages)):
+    for i in list(range(len(extended_messages))):
         m = extended_messages[i].split(SPC, 1)
         tag = m[0]
         if len(m) > 1:

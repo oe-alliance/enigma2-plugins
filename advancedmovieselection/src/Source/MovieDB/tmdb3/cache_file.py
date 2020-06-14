@@ -121,7 +121,7 @@ except ImportError:
         if filename.startswith('~'):
             # check for home directory
             return os.path.expanduser(filename)
-        elif (ord(filename[0]) in (range(65, 91)+range(99, 123))) \
+        elif (ord(filename[0]) in (list(range(65, 91))+list(range(99, 123)))) \
                 and (filename[1:3] == ':\\'):
             # check for absolute drive path (e.g. C:\...)
             return filename
@@ -380,7 +380,7 @@ class FileEngine( CacheEngine ):
                 d.dumpslot(self.cachefd)
                 prev = d
             # fill in allocated slots
-            for i in range(2**8):
+            for i in list(range(2**8)):
                 self.cachefd.write(FileCacheObject._struct.pack(0, 0, 0))
             # write stored data
             for d in data:
