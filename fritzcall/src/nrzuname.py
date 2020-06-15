@@ -85,7 +85,7 @@ def html2unicode(in_html):
 	for x in entities:
 		# debug("mask: found %s" %repr(x.group(2)))
 		entitydict[x.group(1)] = x.group(2)
-	for key, name in entitydict.items():
+	for key, name in list(entitydict.items()):
 		try:
 			entitydict[key] = html_entities.name2codepoint[str(name)]
 		except KeyError:
@@ -96,7 +96,7 @@ def html2unicode(in_html):
 	for x in entities:
 		# debug("found %s" %x.group(1))
 		entitydict[x.group(1)] = x.group(2)
-	for key, codepoint in entitydict.items():
+	for key, codepoint in list(entitydict.items()):
 		try:
 			uml = six.unichr(int(codepoint))
 			debug("replace %s with %s in %s", repr(key), repr(uml), repr(in_html[0:20] + '...'))

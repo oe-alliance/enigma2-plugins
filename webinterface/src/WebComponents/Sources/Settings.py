@@ -16,7 +16,7 @@ class Settings(Source):
 		return result
 
 	def pickle_this(self, prefix, topickle, result):
-		for (key, val) in topickle.items():
+		for (key, val) in list(topickle.items()):
 			name = prefix + "." + key
 			if isinstance(val, dict):
 				self.pickle_this(name, val, result)

@@ -149,7 +149,7 @@ class PipServiceRelationEntryList(MenuList):
 		
 	def buildList(self):
 		list = []
-		for c in self.configPSR.items():
+		for c in list(self.configPSR.items()):
 			res = [
 				c,
 				(eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 320, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, ServiceReference(eServiceReference(c[0])).getServiceName()),

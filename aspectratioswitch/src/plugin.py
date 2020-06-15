@@ -138,7 +138,7 @@ class AspectRatioSwitchSetup(ConfigListScreen, Screen):
 	def save(self):
 		global aspect_ratio_switch
 		
-		if len([modeconf for modeconf in config.plugins.AspectRatioSwitch.modes.values() if modeconf.value]) < 2:
+		if len([modeconf for modeconf in list(config.plugins.AspectRatioSwitch.modes.values()) if modeconf.value]) < 2:
 			self.session.open(MessageBox, _("You need to include at least %d aspect ratio modes!") % 2, MessageBox.TYPE_ERROR)
 			return
 
@@ -181,7 +181,7 @@ class AspectRatioSwitch:
 		globalActionMap.actions['switchAspectDown'] = self.switchAspectRatioDown
 
 	def unload_keymap(self):
-		for keymap in KEYMAPPINGS.values():
+		for keymap in list(KEYMAPPINGS.values()):
 			keymapparser.removeKeymap(keymap)
 		
 		global globalActionMap

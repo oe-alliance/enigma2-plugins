@@ -111,10 +111,10 @@ class ModuleBase(object):
 		return str(self.enable.value)
 
 	def getStringOptions(self):
-		return [ ( str(key), str(option.value), str(description) ) for ( key, ( option, description ) ) in self.options.items() ]
+		return [ ( str(key), str(option.value), str(description) ) for ( key, ( option, description ) ) in list(self.options.items()) ]
 
 	def getConfigOptions(self):
-		return [ ( key, option, description) for ( key, ( option, description ) ) in self.options.items() ]
+		return [ ( key, option, description) for ( key, ( option, description ) ) in list(self.options.items()) ]
 
 
 	################################################

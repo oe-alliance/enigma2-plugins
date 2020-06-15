@@ -152,7 +152,7 @@ class LDIFWriter:
     entry
         dictionary holding an entry
     """
-    attr_types = entry.keys()[:]
+    attr_types = list(entry.keys())[:]
     attr_types.sort()
     for attr_type in attr_types:
       for attr_value in entry[attr_type]:

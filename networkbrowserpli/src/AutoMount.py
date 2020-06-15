@@ -92,7 +92,7 @@ class AutoMount():
 				except Exception as e:
 					print("[MountManager] Error reading Mounts:", e)
 
-		self.checkList = self.automounts.keys()
+		self.checkList = list(self.automounts.keys())
 		if not self.checkList:
 			print("[AutoMount.py] self.automounts without mounts", self.automounts)
 			if callback is not None:
@@ -235,7 +235,7 @@ class AutoMount():
 	def writeMountsConfig(self):
 		# Generate List in RAM
 		list = ['<?xml version="1.0" ?>\n<mountmanager>\n']
-		for sharename, sharedata in self.automounts.items():
+		for sharename, sharedata in list(self.automounts.items()):
 			mtype = sharedata['mounttype']
 			list.append('<' + mtype + '>\n')
 			list.append(' <mount>\n')
@@ -269,7 +269,7 @@ class AutoMount():
 	def removeMount(self, mountpoint, callback = None):
 		print("[AutoMount.py] removing mount: ", mountpoint)
 		self.newautomounts = {}
-		for sharename, sharedata in self.automounts.items():
+		for sharename, sharedata in list(self.automounts.items()):
 			if sharename is not mountpoint.strip():
 				self.newautomounts[sharename] = sharedata
 		self.automounts.clear()

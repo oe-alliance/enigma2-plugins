@@ -89,7 +89,7 @@ class LastFMScrobbler(object):
     
     def encode(self, postdict):
         result=[]
-        for key, value in postdict.items():
+        for key, value in list(postdict.items()):
             result.append(key+"="+value)
         return "&".join(result)
 

@@ -355,7 +355,7 @@ class __VlcServerConfig():
 
 	# Edit has been canceled
 	def cancel(self, server):
-		for element in server.getCfg().dict().values():
+		for element in list(server.getCfg().dict().values()):
 			element.cancel()
 
 	def getServerlist(self):

@@ -58,12 +58,12 @@ class Request( urllib.request.Request ):
         """Return a request object, using specified API path and arguments."""
         kwargs['api_key'] = self.api_key
         self._url = url.lstrip('/')
-        self._kwargs = dict([(kwa, kwv) for kwa, kwv in kwargs.items()
+        self._kwargs = dict([(kwa, kwv) for kwa, kwv in list(kwargs.items())
                                         if kwv is not None])
 
         locale = get_locale()
         kwargs = {}
-        for k, v in self._kwargs.items():
+        for k, v in list(self._kwargs.items()):
             kwargs[k] = locale.encode(v)
         url = '{0}{1}?{2}'.format(self._base_url, self._url, urlencode(kwargs))
 
@@ -74,7 +74,7 @@ class Request( urllib.request.Request ):
     def new(self, **kwargs):
         """Create a new instance of the request, with tweaked arguments."""
         args = dict(self._kwargs)
-        for k, v in kwargs.items():
+        for k, v in list(kwargs.items()):
             if v is None:
                 if k in args:
                     del args[k]

@@ -39,7 +39,7 @@ not_found_pic = "404.png"
 not_found_pic_overlay = "404_transparent.png"
 
 def applySkinVars(skin, dict):
-    for key in dict.keys():
+    for key in list(dict.keys()):
         try:
             skin = skin.replace('{'+key+'}', dict[key])
         except Exception as e:

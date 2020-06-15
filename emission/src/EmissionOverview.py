@@ -246,7 +246,7 @@ class EmissionOverview(Screen, HelpableScreen):
 			return
 
 		try:
-			self.transmission.stop([x.id for x in self.transmission.list().values()])
+			self.transmission.stop([x.id for x in list(self.transmission.list().values())])
 		except TransmissionError as te:
 			self.session.open(
 				MessageBox,
@@ -260,7 +260,7 @@ class EmissionOverview(Screen, HelpableScreen):
 			return
 
 		try:
-			self.transmission.start([x.id for x in self.transmission.list().values()])
+			self.transmission.start([x.id for x in list(self.transmission.list().values())])
 		except TransmissionError as te:
 			self.session.open(
 				MessageBox,

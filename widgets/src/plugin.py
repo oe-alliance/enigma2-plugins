@@ -187,7 +187,7 @@ class WidgetDesktop(Screen):
 		self.onClose.append(self._onClose )
 	
 	def importWidgetElements(self, widget, wname):
-		for elementname in widget[1].elements.keys():
+		for elementname in list(widget[1].elements.keys()):
 			self[wname+"_e_"+elementname] = widget[1].elements[elementname]
 
 	def importWidgetSkin(self, scr, widget, wname):

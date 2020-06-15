@@ -79,7 +79,7 @@ class Poller( object ):
     def apply(self, data, set_nones=True):
         # apply data directly, bypassing callable function
         unfilled = False
-        for k, v in self.lookup.items():
+        for k, v in list(self.lookup.items()):
             if (k in data) and \
                     ((data[k] is not None) if callable(self.func) else True):
                 # argument received data, populate it
@@ -275,7 +275,7 @@ class ElementType( type ):
 
         for base in reversed(bases):
             if isinstance(base, mcs):
-                for k, attr in base.__dict__.items():
+                for k, attr in list(base.__dict__.items()):
                     if isinstance(attr, Data):
                         # extract copies of each defined Data element from
                         # parent classes
@@ -286,7 +286,7 @@ class ElementType( type ):
                         # extract copies of each defined Poller function
                         # from parent classes
                         pollers[k] = attr.func
-        for k, attr in attrs.items():
+        for k, attr in list(attrs.items()):
             if isinstance(attr, Data):
                 data[k] = attr
         if '_populate' in attrs:
@@ -297,7 +297,7 @@ class ElementType( type ):
         # which Data points
         pollermap = dict([(k, []) for k in pollers])
         initargs = []
-        for k, v in data.items():
+        for k, v in list(data.items()):
             v.name = k
             if v.initarg:
                 initargs.append(v)
@@ -313,7 +313,7 @@ class ElementType( type ):
 
         # wrap each used poller function with a Poller class, and push into
         # the new class attributes
-        for k, v in pollermap.items():
+        for k, v in list(pollermap.items()):
             if len(v) == 0:
                 continue
             lookup = dict([(attr.field, attr.name) for attr in v])

@@ -143,7 +143,7 @@ class FritzAction(object):
 			# self.debug(repr(kwargs))
 			arguments = [
 				self.argument_template % {'name': k, 'value': v}
-				for k, v in kwargs.items()
+				for k, v in list(kwargs.items())
 			]
 			p['arguments'] = ''.join(arguments)
 		body = self.body_template.strip() % p
@@ -243,7 +243,7 @@ class FritzAction(object):
 				self.error("ErrorCode: %s, errorDescription: %s", repr(errorCode), repr(errorDescription))
 			else:
 				self.error("ErrorCode: %s, no errorDescription", repr(errorCode))
-		for argument in self.arguments.values():
+		for argument in list(self.arguments.values()):
 			# self.debug("Argument: " + argument.name)
 			try:
 				value = root.find('.//%s' % argument.name).text
@@ -555,7 +555,7 @@ class FritzConnection(object):
 		"""
 		actions = []
 		for service_name in sorted(self.services.keys()):
-			action_names = self.services[service_name].actions.keys()
+			action_names = list(self.services[service_name].actions.keys())
 			for action_name in sorted(action_names):
 				actions.append((service_name, action_name))
 		return actions

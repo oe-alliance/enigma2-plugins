@@ -146,7 +146,7 @@ class PluginWeights:
 		extend = lst.extend
 
 		idmap = reverse(WHEREMAP)
-		for key in self.plugins.keys():
+		for key in list(self.plugins.keys()):
 			whereplugins = self.plugins.get(key, None)
 			if not whereplugins:
 				continue

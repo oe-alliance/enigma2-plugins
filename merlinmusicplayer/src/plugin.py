@@ -1560,7 +1560,7 @@ class MerlinMusicPlayerLyrics(Screen):
  
 	def getLyricsFromID3Tag(self, tag):
 		if tag:
-			for frame in tag.values():
+			for frame in list(tag.values()):
 				if frame.FrameID == "USLT":
 					return frame.text
 		url = "http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist=%s&song=%s" % (quote(self.currentSong.artist), quote(self.currentSong.title))

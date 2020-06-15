@@ -118,7 +118,7 @@ def initOrbposConfigs():
 	# If the list got smaller, try to preserve the values of as
 	# many entries as possible in the new list.
 	orbPosList = []
-	for name in (name for name in config.plugins.epgsearch.getSavedValue().keys() if isOrbposName(name)):
+	for name in (name for name in list(config.plugins.epgsearch.getSavedValue().keys()) if isOrbposName(name)):
 		setattr(config.plugins.epgsearch, name, ConfigSatlist(choiceList, default=orbposDisabled))
 		if listShrank:
 			orbPosList.append((getattr(config.plugins.epgsearch, name), int(name[6:])))

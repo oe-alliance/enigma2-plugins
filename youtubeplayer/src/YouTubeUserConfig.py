@@ -91,7 +91,7 @@ class __YouTubeUserConfig():
 
 	# Edit has been canceled
 	def cancel(self, user):
-		for element in user.getCfg().dict().values():
+		for element in list(user.getCfg().dict().values()):
 			element.cancel()
 
 	def getUserlist(self):

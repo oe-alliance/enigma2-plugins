@@ -214,7 +214,7 @@ class AutoMount():
 					except Exception as e:
 						print("[MountManager] Error reading Mounts:", e)
 
-		self.checkList = self.automounts.keys()
+		self.checkList = list(self.automounts.keys())
 		if not self.checkList:
 			# print "[NetworkBrowser] self.automounts without mounts",self.automounts
 			if callback is not None:
@@ -440,7 +440,7 @@ class AutoMount():
 	def writeMountsConfig(self):
 		# Generate List in RAM
 		list = ['<?xml version="1.0" ?>\n<mountmanager>\n']
-		for sharename, sharedata in self.automounts.items():
+		for sharename, sharedata in list(self.automounts.items()):
 			mounttype = sharedata['mounttype']
 			mountusing = sharedata['mountusing']
 
@@ -503,7 +503,7 @@ class AutoMount():
 	def removeMount(self, mountpoint, callback = None):
 # 		print "[NetworkBrowser] removing mount: ",mountpoint
 		self.newautomounts = {}
-		for sharename, sharedata in self.automounts.items():
+		for sharename, sharedata in list(self.automounts.items()):
 			sharepath = os.path.join('/media/net', sharedata['sharename'])
 			if sharedata['mountusing'] == 'autofs':
 				sharepath = os.path.join('/media/autofs', sharedata['sharename'])

@@ -110,7 +110,7 @@ class _GNTPBase(object):
 			self.info['encryptionAlgorithmID'] = None
 			self.info['keyHashAlgorithm'] = None
 			return
-		if not self.encryptAlgo in hash.keys():
+		if not self.encryptAlgo in list(hash.keys()):
 			raise UnsupportedError('INVALID HASH "%s"' % self.encryptAlgo)
 
 		hashfunction = hash.get(self.encryptAlgo)

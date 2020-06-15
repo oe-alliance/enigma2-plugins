@@ -264,7 +264,7 @@ class EmissionDetailview(Screen, HelpableScreen):
 
 			l = []
 			files = torrent.files()
-			for id, x in files.items():
+			for id, x in list(files.items()):
 				completed = x['completed']
 				size = x['size'] or 1 # to avoid division by zero ;-)
 				l.append((id, x['priority'], str(completed/1048576) + " MB", \
@@ -293,7 +293,7 @@ class EmissionDetailview(Screen, HelpableScreen):
 				if cur[3]:
 					files[cur[0]]['selected'] = False
 					atLeastOneSelected = False
-					for file in files.values():
+					for file in list(files.values()):
 						if file['selected']:
 							atLeastOneSelected = True
 							break

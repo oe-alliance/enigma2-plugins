@@ -24,7 +24,7 @@ class GrabResource(resource.Resource):
 		videoOnly = False
 		save = False
 
-		for key, value in request.args.items():
+		for key, value in list(request.args.items()):
 			if key in GrabResource.SPECIAL_ARGS:
 				if key == 'format':
 					format = value[0]

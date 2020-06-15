@@ -483,7 +483,7 @@ class InfoBarTunerState(object):
 		number_pending_records = int( config.infobartunerstate.number_pending_records.value )
 		print("IBTS updateNextTimer", number_pending_records)
 		
-		nextwins = [ id for id in self.entries.keys() if id.startswith('next')]
+		nextwins = [ id for id in list(self.entries.keys()) if id.startswith('next')]
 		
 		if number_pending_records:
 			timer_list = getNextPendingRecordTimers()[:number_pending_records]
@@ -588,7 +588,7 @@ class InfoBarTunerState(object):
 			#  if entry reached timeout
 			#  if number of entries is reached
 			numberfinished = 0
-			for id, win in sorted( self.entries.items(), key=lambda x: (x[1].end), reverse=True ):
+			for id, win in sorted( list(self.entries.items()), key=lambda x: (x[1].end), reverse=True ):
 				if win.type == FINISHED:
 					numberfinished += 1
 				if win.toberemoved == True \
@@ -600,7 +600,7 @@ class InfoBarTunerState(object):
 			# Update windows
 			# Dynamic column resizing and repositioning
 			widths = []
-			for id, win in self.entries.items():
+			for id, win in list(self.entries.items()):
 				if win.type == RECORD:
 					#TODO Avolid blocking - avoid using getTimer to update the timer times use timer.time_changed if possible
 					timer = getTimer( id )
@@ -774,7 +774,7 @@ class InfoBarTunerState(object):
 		self.unbindInfoBar()
 		self.removeEvents()
 		self.hide()
-		for id, win in self.entries.items():
+		for id, win in list(self.entries.items()):
 			self.session.deleteDialog(win)
 			del self.entries[id]
 		from Plugins.Extensions.InfoBarTunerState.plugin import gInfoBarTunerState
@@ -845,9 +845,9 @@ class TunerStateBase(Screen):
 		sh = self.instance.size().height()
 		#print(self.widths)
 		
-		fieldwidths = config.infobartunerstate.fieldswidth.dict().values()
+		fieldwidths = list(config.infobartunerstate.fieldswidth.dict().values())
 		
-		for i, (c, width) in enumerate( zip( config.infobartunerstate.fields.dict().values(), widths ) ):
+		for i, (c, width) in enumerate( zip( list(config.infobartunerstate.fields.dict().values()), widths ) ):
 			fieldid = "Field"+str(i)
 			field = c.value
 			if field == "TypeIcon":

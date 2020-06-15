@@ -79,7 +79,7 @@ config.plugins.threed.zoffset.addNotifier(setZOffset)
 config.plugins.threed.autothreed = ConfigSelection(default="0", choices = [("0", _("off")), ("1", _("on with side by side")), ("2", _("on with top/bottom"))])
 
 def switchmode(mode):
-	if mode in modes.keys():
+	if mode in list(modes.keys()):
 		print("[3D Settings] switching to mode ", mode)
 		open("/proc/stb/fb/primary/3d", "w").write(modes[mode])
 		AutoThreeD.instance.setLastMode(mode)

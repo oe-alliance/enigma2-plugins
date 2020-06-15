@@ -343,7 +343,7 @@ class AppleTrailer( Element ):
     sources = Datadict('sources', handler=Trailer, attr='size')
 
     def sizes(self):
-        return self.sources.keys()
+        return list(self.sources.keys())
 
     def geturl(self, size=None):
         if size is None:

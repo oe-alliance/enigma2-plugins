@@ -201,7 +201,7 @@ class MSNWeatherPlugin(Screen):
 		else:
 			self["caption"].text = self.weatherData.city
 			self.webSite = self.weatherData.url
-			for weatherData in self.weatherData.weatherItems.items():
+			for weatherData in list(self.weatherData.weatherItems.items()):
 				item = weatherData[1]
 				if weatherData[0] == "-1": # current
 					self["currentTemp"].text = "%s°%s" % (item.temperature, self.weatherData.degreetype)

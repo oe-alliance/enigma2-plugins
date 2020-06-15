@@ -363,7 +363,7 @@ class FileEngine( CacheEngine ):
         else:
             # rewrite cache file from scratch
             # pull data from parent cache
-            data.extend(self.parent()._data.values())
+            data.extend(list(self.parent()._data.values()))
             data.sort(key=lambda x: x.creation)
             # write header
             size = len(data) + self.preallocate

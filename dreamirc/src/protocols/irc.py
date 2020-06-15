@@ -941,7 +941,7 @@ class IRCClient(basic.LineReceiver):
 
         if len(self._pings) > self._MAX_PINGRING:
             # Remove some of the oldest entries.
-            byValue = [(v, k) for (k, v) in self._pings.items()]
+            byValue = [(v, k) for (k, v) in list(self._pings.items())]
             byValue.sort()
             excess = self._MAX_PINGRING - len(self._pings)
             for i in list(range(excess)):
@@ -1967,7 +1967,7 @@ mQuoteTable = {
     }
 
 mDequoteTable = {}
-for k, v in mQuoteTable.items():
+for k, v in list(mQuoteTable.items()):
     mDequoteTable[v[-1]] = k
 del k, v
 
@@ -1998,7 +1998,7 @@ xQuoteTable = {
 
 xDequoteTable = {}
 
-for k, v in xQuoteTable.items():
+for k, v in list(xQuoteTable.items()):
     xDequoteTable[v[-1]] = k
 
 xEscape_re = re.compile('%s.' % (re.escape(X_QUOTE),), re.DOTALL)
@@ -2331,5 +2331,5 @@ symbolic_to_numeric = {
 }
 
 numeric_to_symbolic = {}
-for k, v in symbolic_to_numeric.items():
+for k, v in list(symbolic_to_numeric.items()):
     numeric_to_symbolic[v] = k

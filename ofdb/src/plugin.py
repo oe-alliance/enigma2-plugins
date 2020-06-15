@@ -332,7 +332,7 @@ class OFDB(Screen):
 		for x in entities:
 			entitydict[x.group(1)] = x.group(2)
 
-		for key, name in entitydict.items():
+		for key, name in list(entitydict.items()):
 			entitydict[key] = html_entities.name2codepoint[name]
 
 		entities = htmlentitynumbermask.finditer(in_html)
@@ -340,7 +340,7 @@ class OFDB(Screen):
 		for x in entities:
 			entitydict[x.group(1)] = x.group(2)
 
-		for key, codepoint in entitydict.items():
+		for key, codepoint in list(entitydict.items()):
 			in_html = in_html.replace(key, (six.unichr(int(codepoint)).encode('utf8')))
 
 		self.inhtml = in_html

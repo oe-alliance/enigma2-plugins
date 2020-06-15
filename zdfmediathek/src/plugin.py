@@ -94,7 +94,7 @@ def decode2(line):
 
 def decode3(line):
 	dic = htmlentitydefs.name2codepoint
-	for key in dic.keys():
+	for key in list(dic.keys()):
 		entity = "&" + key + ";"
 		line = line.replace(entity, six.unichr(dic[key]))
 	return line

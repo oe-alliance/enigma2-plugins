@@ -227,7 +227,7 @@ class MovieDatabase(dict, SortProvider):
     
     def getDirectoryList(self, sort=False):
         if not sort:
-            return self["db"].keys()
+            return list(self["db"].keys())
         return sorted(self["db"].keys())
 
     def getMissingLocations(self, dir_list):

@@ -3523,7 +3523,7 @@ class FritzCallFBF_upnp():
 		if self._loginFailure:
 			self.debug("skip because of login failure")
 		self._infoCallback = callback
-		if "DeviceConfig:1" in self.fc.services.keys():
+		if "DeviceConfig:1" in list(self.fc.services.keys()):
 			self.fc.call_action(self._getInfo, "DeviceConfig", "X_AVM-DE_CreateUrlSID")
 		else:
 			try:
@@ -3534,9 +3534,9 @@ class FritzCallFBF_upnp():
 			self._timerTick()
 
 	def _timerTick(self):
-		self.debug(repr(self.fc.services.keys()))
+		self.debug(repr(list(self.fc.services.keys())))
 		self._timeout -= 1
-		if "DeviceConfig:1" in self.fc.services.keys():
+		if "DeviceConfig:1" in list(self.fc.services.keys()):
 			if self._loginFailure:
 				self.debug("skip because of login failure")
 			else:
@@ -3913,7 +3913,7 @@ class FritzCallFBF_upnp():
 			self.debug("skip because of login failure")
 		self._callScreen = callScreen
 		self._callType = callType
-		if "X_AVM-DE_OnTel:1" in self.fc.services.keys():
+		if "X_AVM-DE_OnTel:1" in list(self.fc.services.keys()):
 			self.fc.call_action(lambda x: self._getCalls_cb1(x, callback), "X_AVM-DE_OnTel", "GetCallList")
 		else:
 			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type = MessageBox.TYPE_ERROR, timeout = config.plugins.FritzCall.timeout.value)
@@ -4032,7 +4032,7 @@ class FritzCallFBF_upnp():
 
 		# newer OE versions don't have the callback
 		self._phonebook_timeout -= 1
-		if "X_AVM-DE_OnTel:1" in self.fc.services.keys():
+		if "X_AVM-DE_OnTel:1" in list(self.fc.services.keys()):
 			self.fc.call_action(self._loadFritzBoxPhonebook_cb1, "X_AVM-DE_OnTel", "GetPhonebookList")
 		else:
 			try:
@@ -4043,9 +4043,9 @@ class FritzCallFBF_upnp():
 			self._phonebook_timerTick()
 
 	def _phonebook_timerTick(self):
-		self.debug(repr(self.fc.services.keys()))
+		self.debug(repr(list(self.fc.services.keys())))
 		self._phonebook_timeout -= 1
-		if "X_AVM-DE_OnTel:1" in self.fc.services.keys():
+		if "X_AVM-DE_OnTel:1" in list(self.fc.services.keys()):
 			if self._loginFailure:
 				self.debug("skip because of login failure")
 			else:
@@ -4152,12 +4152,12 @@ class FritzCallFBF_upnp():
 		if not statusWLAN or (statusWLAN != '1' and statusWLAN != '0'):
 			return
 
-		if "WLANConfiguration:1" not in self.fc.services.keys():
+		if "WLANConfiguration:1" not in list(self.fc.services.keys()):
 			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type = MessageBox.TYPE_ERROR, timeout = config.plugins.FritzCall.timeout.value)
 			return
 
-		if "WLANConfiguration:3" in self.fc.services.keys():
-			if "WLANConfiguration:2" in self.fc.services.keys():
+		if "WLANConfiguration:3" in list(self.fc.services.keys()):
+			if "WLANConfiguration:2" in list(self.fc.services.keys()):
 				self.fc.call_action(None, "WLANConfiguration:2", "SetEnable", NewEnable=int(statusWLAN))
 		self.fc.call_action(lambda x: self._general_cb(x, callback), "WLANConfiguration:1", "SetEnable", NewEnable=int(statusWLAN))
 
@@ -4172,19 +4172,19 @@ class FritzCallFBF_upnp():
 		if self._loginFailure:
 			self.debug("skip because of login failure")
 
-		if "WLANConfiguration:2" not in self.fc.services.keys():
+		if "WLANConfiguration:2" not in list(self.fc.services.keys()):
 			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type = MessageBox.TYPE_ERROR, timeout = config.plugins.FritzCall.timeout.value)
 			return
 
 		if statusGuestAccess.find('WLAN') != -1:
 			self.debug("WLAN")
-			if "WLANConfiguration:3" in self.fc.services.keys():
+			if "WLANConfiguration:3" in list(self.fc.services.keys()):
 				self.fc.call_action(lambda x: self._general_cb(x, callback), "WLANConfiguration:3", "SetEnable", NewEnable=0)
 			else:
 				self.fc.call_action(lambda x: self._general_cb(x, callback), "WLANConfiguration:2", "SetEnable", NewEnable=0)
 		else:
 			self.debug("no WLAN")
-			if "WLANConfiguration:3" in self.fc.services.keys():
+			if "WLANConfiguration:3" in list(self.fc.services.keys()):
 				self.fc.call_action(lambda x: self._general_cb(x, callback), "WLANConfiguration:3", "SetEnable", NewEnable=1)
 			else:
 				self.fc.call_action(lambda x: self._general_cb(x, callback), "WLANConfiguration:2", "SetEnable", NewEnable=1)
@@ -4213,7 +4213,7 @@ class FritzCallFBF_upnp():
 			self.debug("skip because of login failure")
 
 		self.blacklist = ([], [])
-		if "X_AVM-DE_OnTel:1" not in self.fc.services.keys():
+		if "X_AVM-DE_OnTel:1" not in list(self.fc.services.keys()):
 			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type = MessageBox.TYPE_ERROR, timeout = config.plugins.FritzCall.timeout.value)
 			return
 		self.fc.call_action(self._readBlacklist_cb, "X_AVM-DE_OnTel", "GetDeflections")
@@ -4286,7 +4286,7 @@ class FritzCallFBF_upnp():
 					self.blacklist[0].append("")
 				if deflection.find("./Type").text == "fromPB":
 					self.debug("get phonebook for blacklist")
-					if "X_AVM-DE_OnTel:1" in self.fc.services.keys():
+					if "X_AVM-DE_OnTel:1" in list(self.fc.services.keys()):
 						pbId = deflection.find("./PhonebookID").text
 						if pbId:
 							self.fc.call_action(_readPhonebookForBlacklist, "X_AVM-DE_OnTel", "GetPhonebook", NewPhonebookId=pbId)
@@ -4316,7 +4316,7 @@ class FritzCallFBF_upnp():
 		if self._loginFailure:
 			self.debug("skip because of login failure")
 
-		if "DeviceConfig:1" in self.fc.services.keys():
+		if "DeviceConfig:1" in list(self.fc.services.keys()):
 			self.fc.call_action(self._getInfo, "DeviceConfig", "Reboot")
 		else:
 			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type = MessageBox.TYPE_ERROR, timeout = config.plugins.FritzCall.timeout.value)
