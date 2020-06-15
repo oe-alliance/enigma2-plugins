@@ -31,6 +31,8 @@ from . import _, initLog, debug, scaleH, scaleV, DESKTOP_WIDTH, DESKTOP_HEIGHT #
 mailAccounts = [] # contains all EmailAccount objects
 from EmailConfig import EmailConfigOptions, EmailConfigAccount
 
+from functools import reduce
+
 config.plugins.emailimap = ConfigSubsection()
 config.plugins.emailimap.showDeleted = ConfigEnableDisable(default=False)
 config.plugins.emailimap.timeout = ConfigInteger(default=0, limits=(0, 90)) # in seconds
