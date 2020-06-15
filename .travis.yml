@@ -27,7 +27,6 @@ matrix:
         - python -m compileall .
         - echo done!
 
-  include:
     - name: "Python 3.8"
       python: 3.8
 
