@@ -1,8 +1,5 @@
 language: python
 
-sudo: required
-dist: trusty
-
 git:
   depth: 1
 
