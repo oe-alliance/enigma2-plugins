@@ -241,7 +241,7 @@ class VideoPreview():
                         if self.service.getPath().endswith('ts'):
                             seekable.seekTo(last)
                         else:
-                            self.minutes = long(last / 90000 / 60)
+                            self.minutes = int(last / 90000 / 60)
                             if isinstance(self.service, eServiceReferenceDvd):
                                 self.resume_point = last
                                 self.dvd_preview_timer.start(1000, True)

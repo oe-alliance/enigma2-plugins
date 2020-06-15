@@ -166,18 +166,18 @@ class TrashMovieList(GUIComponent):
     def getDate(self, serviceref):
         dvd_path = detectDVDStructure(serviceref.getPath() + "/")
         if dvd_path:
-            begin = long(os.stat(dvd_path).st_mtime)
+            begin = int(os.stat(dvd_path).st_mtime)
         else:
-            begin = long(os.stat(serviceref.getPath()).st_mtime)
+            begin = int(os.stat(serviceref.getPath()).st_mtime)
         d = datetime.fromtimestamp(begin)
         return d.strftime("%d.%m.%Y")
 
     def getTime(self, serviceref):
         dvd_path = detectDVDStructure(serviceref.getPath() + "/")
         if dvd_path:
-            begin = long(os.stat(dvd_path).st_mtime)
+            begin = int(os.stat(dvd_path).st_mtime)
         else:
-            begin = long(os.stat(serviceref.getPath()).st_mtime)
+            begin = int(os.stat(serviceref.getPath()).st_mtime)
         d = datetime.fromtimestamp(begin)
         return d.strftime("%H:%M")
     

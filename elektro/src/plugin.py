@@ -863,7 +863,7 @@ class DoElektro(Screen):
 		if debug:
 			print(pluginPrintname, "(7) trysleep:", trysleep)
 		nextRecTime = self.session.nav.RecordTimer.getNextRecordingTime()
-		if (nextRecTime > 0) and (nextRecTime - (long)(time()) < elektroShutdownThreshold):
+		if (nextRecTime > 0) and (nextRecTime - (int)(time()) < elektroShutdownThreshold):
 			print(pluginPrintname, "recording about to start", nextRecTime, "-> setting trysleep to false")
 			trysleep = False
 

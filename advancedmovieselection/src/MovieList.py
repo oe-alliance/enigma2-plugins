@@ -911,7 +911,7 @@ class MovieList(GUIComponent):
             info = self.serviceHandler.info(serviceref)
             
             if dvd is not None:
-                begin = long(os.stat(dvd).st_mtime)
+                begin = int(os.stat(dvd).st_mtime)
             else:
                 begin = info.getInfo(serviceref, iServiceInformation.sTimeCreate)
 
@@ -1146,7 +1146,7 @@ class MovieList(GUIComponent):
                 if status:
                     x = self.list[cur_idx]
                     length = x[0].info.getLength(x[0].serviceref)
-                    new = (long(length * 90000), 3)
+                    new = (int(length * 90000), 3)
                     cutList.append(new)
                 result = cue.setCutList(cutList)
                 self.l.invalidateEntry(cur_idx)

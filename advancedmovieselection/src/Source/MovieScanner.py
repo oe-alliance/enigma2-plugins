@@ -238,7 +238,7 @@ class MovieScanner():
 
             # get begin time
             if dvd is not None:
-                begin = long(os.stat(dvd).st_mtime)
+                begin = int(os.stat(dvd).st_mtime)
             else:
                 begin = info.getInfo(serviceref, iServiceInformation.sTimeCreate)
 
