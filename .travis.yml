@@ -3,24 +3,36 @@ language: python
 sudo: required
 dist: trusty
 
-addons:
-  apt:
-    packages:
-    - git
-    - build-essential
-    - automake
-    - libtool
-    - python-dev
-    - gettext
-    - swig
-
-python:
-  - "2.7"
-
 git:
   depth: 1
 
-script:
-- echo compiling enigma2 plugins
-- python -m compileall .
-- echo done!
+#addons:
+#  apt:
+#    packages:
+#    - git
+#    - build-essential
+#    - automake
+#    - libtool
+#    - python-dev
+#    - gettext
+#    - swig
+
+matrix:
+  include:
+    - name: "Python 2.7"
+      python: 2.7
+
+      script:
+        - echo compiling enigma2 plugins
+        - python -m compileall .
+        - echo done!
+
+  include:
+    - name: "Python 3.8"
+      python: 3.8
+
+      script:
+        - echo compiling enigma2 plugins
+        - python -m compileall .
+        - echo done!
+
