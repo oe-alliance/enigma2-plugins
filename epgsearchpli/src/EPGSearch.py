@@ -514,13 +514,13 @@ class EPGSearchList(EPGList):
 		def setTimeWidth(value):
 			self.tw = int(value)
 		def setColWidths(value):
-			self.col = map(int, value.split(','))
+			self.col = list(map(int, value.split(',')))
 			if len(self.col) == 2:
 				self.skinColumns = True
 			else:
 				warningWrongSkinParameter(attrib)
 		def setPiconSize(value):
-			self.piconSize = map(int, value.split(','))
+			self.piconSize = list(map(int, value.split(',')))
 			if len(self.piconSize) == 2:
 				self.skinColumns = True
 			else:

@@ -686,7 +686,7 @@ class InfoBarTunerState(object):
 					win.update()
 				
 				# Calculate field width
-				widths = map( lambda w1_w2: max( w1_w2[0], w1_w2[1] ), zip_longest( widths, win.widths ) )
+				widths = [max( w1_w2[0], w1_w2[1] ) for w1_w2 in zip_longest( widths, win.widths )]
 		
 		#if self.entries:
 			# Get initial padding / offset position and apply user offset

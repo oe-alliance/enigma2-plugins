@@ -68,7 +68,7 @@ def findNumber(number, filename):
 	addrs = csv.reader(fileD, delimiter=',', quotechar='"')
 	next(addrs) # skip header
 	for row in addrs:
-		row = map(lambda w: w.decode('cp1252').encode('utf-8'), row)
+		row = [w.decode('cp1252').encode('utf-8') for w in row]
 		name = u""
 		nameB = u""
 		address = u""
@@ -154,7 +154,7 @@ def readNumbers(filename, outFun):
 	addrs = csv.reader(fileD, delimiter=',', quotechar='"')
 	next(addrs) # skip header
 	for row in addrs:
-		row = map(lambda w: w.decode('cp1252'), row)
+		row = [w.decode('cp1252') for w in row]
 		name = u""
 		nameB = u""
 		address = u""

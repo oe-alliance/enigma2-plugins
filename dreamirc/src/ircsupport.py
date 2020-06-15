@@ -273,7 +273,7 @@ class IRCAccount(e2support.AbstractAccount):
 
     def __init__(self, accountName, autoLogin, username, password, host, port, channels=''):
         e2support.AbstractAccount.__init__(self, accountName, autoLogin, username, password, host, port)
-        self.channels = map(string.strip, channels.split(','))
+        self.channels = list(map(string.strip, channels.split(',')))
         if self.channels == ['']:
             self.channels = []
 

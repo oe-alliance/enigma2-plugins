@@ -46,7 +46,7 @@ config.plugins.epgsearch.add_search_to_epg = ConfigYesNo(default = True)
 orbposDisabled = 3600
 
 def getNamespaces(namespaces):
-	lamedbServices = eServiceReference("1:7:1:0:0:0:0:0:0:0:" + " || ".join(map(lambda x: '(satellitePosition == %d)' % (x >> 16), namespaces)))
+	lamedbServices = eServiceReference("1:7:1:0:0:0:0:0:0:0:" + " || ".join(['(satellitePosition == %d)' % (x >> 16) for x in namespaces]))
 	hasNamespaces = set()
 	if not namespaces:
 		return hasNamespaces
