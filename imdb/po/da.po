@@ -1,0 +1,240 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma 2 IMDb Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-12 05:32+0000\n"
+"PO-Revision-Date: 2020-06-07 16:07+0200\n"
+"Last-Translator: JC 2020 <dk-translation@protonmail.com>\n"
+"Language-Team: Danskholdet <dk-translation@pm.me>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Language: da\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+msgid " as "
+msgstr " som "
+
+msgid "* = Restart Required"
+msgstr "* = Genstart påkrævet"
+
+msgid "Ambiguous results"
+msgstr "Tvetydige resultater"
+
+msgid "Cancel"
+msgstr "Afbryd"
+
+msgid "Cast: "
+msgstr "Rolleliste: "
+
+msgid "Channel Selection"
+msgstr "Kanalvalg"
+
+msgid "Content:"
+msgstr "Indhold:"
+
+msgid "Could't get event name"
+msgstr "Kan ikke få fat i begivenhedsnavn"
+
+msgid "Details"
+msgstr "Detaljer"
+
+msgid "Downloading Movie Poster: %s..."
+msgstr "Downloading Filmopslag: %s..."
+
+msgid ""
+"Enable this to be able to access IMDb search setup from within the plugin "
+"browser."
+msgstr ""
+"Aktiver dette for at være i stand til tilgå Søg i IMDb opsætningen inde fra "
+"Plugin browseren."
+
+msgid ""
+"Enable this to be able to access IMDb searches from within the movie list."
+msgstr ""
+"Aktiver dette for at være i stand til at tilgå Søg i IMDb inde fra "
+"Filmlisten."
+
+msgid ""
+"Enable this to be able to access IMDb searches from within the plugin "
+"browser."
+msgstr ""
+"Aktiver dette for at være i stand til at tilgå Søg i IMDb inde fra Plugin "
+"browseren."
+
+msgid "Enter search"
+msgstr "Indtast søgning"
+
+msgid "Enter text to search for"
+msgstr "Indtast tekst der skal søges efter"
+
+msgid "Exit"
+msgstr "Afslut"
+
+msgid "Exit IMDb search"
+msgstr "Afslut Søg i IMDb"
+
+msgid "Extra Info"
+msgstr "Ekstra Info"
+
+msgid "IMDb Details parsed"
+msgstr "Fortolket IMDb detaljer"
+
+msgid "IMDb Download completed"
+msgstr "IMDb Download fuldført"
+
+msgid "IMDb Download failed"
+msgstr "IMDb Download mislykkedes"
+
+msgid "IMDb Menu"
+msgstr "IMDb Menu"
+
+msgid "IMDb Plugin"
+msgstr "IMDb Plugin"
+
+msgid "IMDb Re-Download completed"
+msgstr "IMDb Gen-Download fuldført"
+
+msgid "IMDb Setup"
+msgstr "IMDb opsætning"
+
+msgid "IMDb query failed!"
+msgstr "IMDb forespørgsel mislykkedes!"
+
+msgid "IMDb search"
+msgstr "Søg i IMDb"
+
+msgid "IMDb setup"
+msgstr "IMDb opsætning"
+
+msgid "Lookup"
+msgstr "Slå op"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "No IMDb match."
+msgstr "Ingen i IMDb svare til."
+
+msgid "No IMDb match:"
+msgstr "Ingen IMDb overensstemmelse:"
+
+msgid "No cast list found in the database."
+msgstr "Ingen rolleliste fundet i databasen."
+
+msgid "No details found."
+msgstr "Ingen detaljer fundet."
+
+msgid "Page down"
+msgstr "Side ned"
+
+msgid "Page up"
+msgstr "Side op"
+
+msgid "Play Trailer"
+msgstr "Afspil forfilm"
+
+msgid "Please select the matching entry"
+msgstr "Vælg venligst en tilsvarende post"
+
+msgid "Production Countries:"
+msgstr "Produktionslande:"
+
+msgid "Re-Query IMDb: %s..."
+msgstr "Spørg IMDb igen: %s..."
+
+msgid "Release Date:"
+msgstr "Frigivelsesdato:"
+
+msgid "Runtime:"
+msgstr "Kørselstid:"
+
+msgid "Save current Details as .html for offline use"
+msgstr "Gem nuværende Detaljer som .html til offline brug"
+
+msgid "Save current Details as .txt"
+msgstr "Gem nuværende Detaljer som .txt"
+
+msgid "Save current Poster and Details as .txt"
+msgstr "Gem nuværende Poster og Detaljer som .txt"
+
+msgid "Search Trailer"
+msgstr "Søg i Forfilm"
+
+msgid "Search for details from the Internet Movie Database"
+msgstr "Søg efter detaljer i Internet Film Databasen"
+
+msgid "Select from EPG"
+msgstr "Vælg fra EPG"
+
+msgid "Settings for Internet Movie Database searches"
+msgstr "Indstillinger for Internet Film Database søgninger"
+
+msgid "Setup"
+msgstr "Opsætning"
+
+msgid ""
+"Show episode and year information for cast when available. Takes effect "
+"after the next fetch of show details."
+msgstr ""
+"Vis episode information og årstal for castet når tilgængelig. Får virkning "
+"næste gang show-detaljer hentes."
+
+msgid "Show episode and year information in cast list"
+msgstr "Vis episode og årstal i cast-liste"
+
+msgid "Show full movie or series name in title menu"
+msgstr "Vis fulde film- eller serienavne i titelmenu"
+
+msgid "Show in movie list"
+msgstr "Søg i filmliste"
+
+msgid "Show list of matched movies an series"
+msgstr "Vis en liste over identiske film og serier"
+
+msgid "Show movie and series basic details"
+msgstr "Vis basale detaljer for film og serie"
+
+msgid "Show movie and series extra details"
+msgstr "Vis ekstra detaljer for  film og serie"
+
+msgid "Show search in plugin browser"
+msgstr "Vis søgning i Plugin browser"
+
+msgid "Show setup in plugin browser"
+msgstr "Vis opsætning i Plugin browser"
+
+msgid ""
+"Show the whole IMDb title information for a movie or series, including, for "
+"example, alternative names and whether it's a series. Takes effect after the "
+"next search of IMDb for a show name."
+msgstr ""
+"Vis alt IMDb titelinformation for en film eller serie, inklusiv f.eks. "
+"alternative navne og om det er en serie. Får virkning efter næste søgning af "
+"IMDb efter et show-navn."
+
+msgid "The Internet Movie Database"
+msgstr "Internet Filmdatabasen"
+
+msgid ""
+"This option allows you add words/phrases for IMDb to ignore when searching. "
+"Please separate the words/phrases with commas."
+msgstr ""
+"Denne mulighed tillader dig at tilføje ord/udtryk som IMDb ignorer ved "
+"søgning. Opdel venligst ord/udtryk med kommaer."
+
+msgid "Title Menu"
+msgstr "Titelmenu"
+
+msgid "User Rating"
+msgstr "Brugervurdering"
+
+msgid "Words / phrases to ignore "
+msgstr "Ord/udtryk der ignoreres "
+
+msgid "no user rating yet"
+msgstr "ingen brugervurdering endnu"
