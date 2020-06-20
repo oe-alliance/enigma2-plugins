@@ -21,7 +21,8 @@ from __init__ import _
 import string
 import sys 
 import time
-from random import Random 
+from random import Random
+import six
 
 from boxbranding import getImageDistro
 title=_("Change Root Password")
@@ -94,6 +95,7 @@ class ChangePasswdScreen(Screen):
 			self.session.open(MessageBox, message, MessageBox.TYPE_ERROR)
 
 	def dataAvail(self, data):
+		data = six.ensure_str(data)
 		self.output_line += data
 		while True:
 			i = self.output_line.find('\n')

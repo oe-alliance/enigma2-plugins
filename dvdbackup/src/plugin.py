@@ -24,6 +24,7 @@ from time import time
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 import gettext, os, stat
+import six
 
 #################################################
 
@@ -166,6 +167,7 @@ class DVDBackup:
 				self.finished()
 
 	def genisoimageProgress(self, name, data):
+		data = six.ensure_str(data)
 		if data.__contains__("%"):
 			for x in data.split("\n"):
 				if x.__contains__("%"):

@@ -14,6 +14,7 @@ from Components.TimerSanityCheck import TimerSanityCheck
 from Tools.StbHardware import getFPWasTimerWakeup
 import Screens.Standby
 import NavigationInstance
+import six
 
 vps_exe = eEnv.resolve("${libdir}/enigma2/python/Plugins/SystemPlugins/vps/vps")
 if not access(vps_exe, X_OK):
@@ -49,6 +50,7 @@ class vps_timer:
 			self.stop_simulation()
 
 	def program_dataAvail(self, str):
+		str = six.ensure_str(str)
 		if self.timer is None or self.timer.state == TimerEntry.StateEnded or self.timer.cancelled:
 			self.program_abort()
 			self.stop_simulation()

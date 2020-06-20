@@ -51,6 +51,7 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.Input import Input
 from Screens.InputBox import InputBox
 from Components.FileList import FileList
+import six
 # for localized messages
 from . import _
 
@@ -422,6 +423,7 @@ class SHOUTcastWidget(Screen):
 		self["key_red"].setText(_("Record"))
 
 	def streamripperDataAvail(self, data):
+		data = six.ensure_str(data)
 		sData = data.replace('\n', '')
 		self["console"].setText(sData)
 

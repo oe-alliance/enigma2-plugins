@@ -9,6 +9,7 @@ from Components.Button import Button
 from Screens.Screen import Screen
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
+import six
 
 config.plugins.CDInfo = ConfigSubsection()
 config.plugins.CDInfo.useCDTEXT = ConfigYesNo(default = True)
@@ -216,9 +217,11 @@ class Query:
 		self.cddb_container.execute(cmd)
 
 	def cddb_avail(self, string):
+		string = six.ensure_str(string)
 		self.cddb_output += string
 
 	def cdtext_avail(self, string):
+		string = six.ensure_str(string)
 		self.cdtext_output += string
 
 	def cddb_finished(self, retval):
