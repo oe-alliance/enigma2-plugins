@@ -43,6 +43,8 @@ from Tools import Directories
 # Tags
 from Screens.MovieSelection import getPreferredTagEditor
 
+import six
+
 weekdays = [
 	("0", _("Monday")),
 	("1", _("Tuesday")),
@@ -1169,9 +1171,9 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 			if item[1].value == "" or idx < 2:
 				continue
 			elif idx < self.lenExcludes:
-				self.excludes[self.idx].append(item[1].value.encode("UTF-8"))
+				self.excludes[self.idx].append(six.ensure_str(item[1].value))
 			else:
-				self.includes[self.idx].append(item[1].value.encode("UTF-8"))
+				self.includes[self.idx].append(six.ensure_str(item[1].value))
 
 	def refresh(self, *args, **kwargs):
 		self.saveCurrent()

@@ -1,6 +1,6 @@
 from __future__ import print_function, absolute_import, division
 # for localized messages
-from . import _
+from . import _, removeBad
 
 # Plugins Config
 from xml.etree.cElementTree import parse as cet_parse, fromstring as cet_fromstring
@@ -345,7 +345,7 @@ class AutoTimer:
 		dest = timer.destination or config.usage.default_path.value
 
 		# Workaround to allow search for umlauts if we know the encoding
-		match = timer.match.replace('\xc2\x86', '').replace('\xc2\x87', '')
+		match = removeBad(timer.match)
 		if timer.encoding != 'UTF-8':
 			try:
 				match = match.decode('UTF-8').encode(timer.encoding) #FIXME PY3

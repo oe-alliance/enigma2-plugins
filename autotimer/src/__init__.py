@@ -14,6 +14,12 @@ from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
 PluginLanguageDomain = "AutoTimer"
 PluginLanguagePath = "Extensions/AutoTimer/locale"
 
+def removeBad(val):
+	if six.PY3:
+		return val.replace('\x86', '').replace('\x87', '')
+	else:
+		return val.replace('\xc2\x86', '').replace('\xc2\x87', '')
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
