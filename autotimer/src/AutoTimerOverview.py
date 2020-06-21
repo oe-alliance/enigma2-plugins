@@ -268,7 +268,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 			(_("Create a new timer using the wizard"), "newwizard")
 		]
 
-		from plugin import autotimerHelp
+		from .plugin import autotimerHelp
 		if autotimerHelp:
 			list.insert(0, (_("Help"), "help"))
 			list.insert(1, (_("Frequently asked questions"), "faq"))
@@ -290,7 +290,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		ret = ret and ret[1]
 		if ret:
 			if ret == "help":
-				from plugin import autotimerHelp
+				from .plugin import autotimerHelp
 				autotimerHelp.open(self.session)
 			elif ret == "faq":
 				from Plugins.SystemPlugins.MPHelp import PluginHelp, XMLHelpReader
