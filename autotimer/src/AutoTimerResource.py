@@ -138,9 +138,9 @@ class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 		except Exception as e:
 			return self.returnResult(req, False, _("Couldn't load config file!") + '\n' + str(e))
 		webif = True
-		p = req.args.get('webif')
+		p = req.args.get(b'webif')
 		if p:
-			webif = not(p[0] == "false")
+			webif = not(p[0] == b"false")
 		# show xml
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')
@@ -149,7 +149,7 @@ class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 
 class AutoTimerRemoveAutoTimerResource(AutoTimerBaseResource):
 	def render(self, req):
-		id = req.args.get("id")
+		id = req.args.get(b"id")
 		if id:
 			autotimer.remove(int(id[0]))
 			if config.plugins.autotimer.always_write_config.value:
@@ -162,8 +162,8 @@ class AutoTimerAddXMLAutoTimerResource(AutoTimerBaseResource):
 	def render_POST(self, req):
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml;' )
-		req.setHeader('charset', 'UTF-8')	
-		autotimer.readXmlTimer(req.args['xml'][0])
+		req.setHeader('charset', 'UTF-8')
+		autotimer.readXmlTimer(six.ensure_str(req.args[b'xml'][0]))
 		if config.plugins.autotimer.always_write_config.value:
 			autotimer.writeXml()
 		return self.returnResult(req, True, _("AutoTimer was added successfully"))
@@ -173,7 +173,7 @@ class AutoTimerUploadXMLConfigurationAutoTimerResource(AutoTimerBaseResource):
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml;' )
 		req.setHeader('charset', 'UTF-8')	
-		autotimer.readXml(xml_string=req.args['xml'][0])
+		autotimer.readXml(xml_string=six.ensure_str(req.args[b'xml'][0]))
 		if config.plugins.autotimer.always_write_config.value:
 			autotimer.writeXml()
 		return self.returnResult(req, True, _("AutoTimers were changed successfully."))	
@@ -183,8 +183,9 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 	# TODO: allow to edit defaults?
 	def render(self, req):
 		def get(name, default=None):
+			name = six.ensure_binary(name)
 			ret = req.args.get(name)
-			return ret[0] if ret else default
+			return six.ensure_str(ret[0]) if ret else default
 
 		id = get("id")
 		timer = None
@@ -416,8 +417,11 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 
 class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 	def render(self, req):
-		for key, value in iteritems(req.args):
-			value = value[0]
+		for key, value in six.iteritems(req.args):
+			key = six.ensure_str(key)
+			if value:
+				value = value[0]
+				value = six.ensure_str(value)
 			if key == "autopoll":
 				config.plugins.autotimer.autopoll.value = True if value == "true" else False
 			elif key == "unit":
