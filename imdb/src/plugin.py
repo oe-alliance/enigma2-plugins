@@ -159,10 +159,14 @@ class IMDB(Screen, HelpableScreen):
 		</screen>"""
 
 	# Some HTML entities as utf-8
-	NBSP = six.unichr(htmlentitydefs.name2codepoint['nbsp']).encode("utf8")
-	RAQUO = six.unichr(htmlentitydefs.name2codepoint['raquo']).encode("utf8")
-	HELLIP = six.unichr(htmlentitydefs.name2codepoint['hellip']).encode("utf8")
-
+	NBSP = six.unichr(htmlentitydefs.name2codepoint['nbsp'])
+	RAQUO = six.unichr(htmlentitydefs.name2codepoint['raquo'])
+	HELLIP = six.unichr(htmlentitydefs.name2codepoint['hellip'])
+	if six.PY2:
+		NBSP = NBSP.encode("utf8")
+		RAQUO = RAQUO.encode("utf8")
+		HELLIP = HELLIP.encode("utf8")
+		
 	def __init__(self, session, eventName, callbackNeeded=False, save=False, savepath=None, localpath=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
@@ -672,14 +676,23 @@ class IMDB(Screen, HelpableScreen):
 				entitydict[key] = x.group(1)
 
 		if 'charset="utf-8"' in in_html or 'charset=utf-8' in in_html:
-			for key, codepoint in iteritems(entitydict):
-				in_html = in_html.replace(key, six.unichr(int(codepoint)).encode('utf8'))
+			for key, codepoint in six.iteritems(entitydict):
+				cp = six.unichr(int(codepoint))
+				if six.PY2:
+					cp = cp.encode('utf8')
+				in_html = in_html.replace(key, cp)
 			self.inhtml = in_html
 			return
 
-		for key, codepoint in iteritems(entitydict):
-			in_html = in_html.replace(key, six.unichr(int(codepoint)).encode('latin-1', 'ignore'))
-		self.inhtml = in_html.decode('latin-1').encode('utf8')
+		for key, codepoint in six.iteritems(entitydict):
+			cp = six.unichr(int(codepoint))
+			if six.PY2:
+				cp = cp.encode('latin-1', 'ignore')
+			in_html = in_html.replace(key, cp)
+		if six.PY2:
+			self.inhtml = in_html.decode('latin-1').encode('utf8')
+		else:
+			self.inhtml = in_html.decode('latin-1')
 
 	def IMDBquery(self, string):
 		self["statusbar"].setText(_("IMDb Download completed"))
@@ -1065,7 +1078,11 @@ def movielistSearch(session, serviceref, **kwargs):
 	eventName = info and info.getName(serviceref) or ''
 	(root, ext) = os.path.splitext(eventName)
 	if ext in KNOWN_EXTENSIONS:
-		eventName = re.sub("[\W_]+", ' ', root.decode("utf8"), 0, re.LOCALE|re.UNICODE).encode("utf8")
+		if six.PY2:
+			_root = root.decode("utf8")
+		eventName = re.sub("[\W_]+", ' ', _root, 0, re.LOCALE|re.UNICODE)
+		if six.PY2:
+			eventName = eventName.encode("utf8")
 	session.open(IMDB, eventName)
 
 pluginlist = (
