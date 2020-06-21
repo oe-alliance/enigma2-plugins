@@ -191,7 +191,7 @@ def setConfigWakeupTime(value):
 # Mainfunction
 def main(session, **kwargs):
 	try:
-		from EPGRefreshConfiguration import EPGRefreshConfiguration
+		from .EPGRefreshConfiguration import EPGRefreshConfiguration
 		session.openWithCallback(
 			doneConfiguring,
 			EPGRefreshConfiguration

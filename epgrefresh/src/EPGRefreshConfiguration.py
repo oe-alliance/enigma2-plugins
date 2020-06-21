@@ -187,7 +187,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 		self["config"].setList(self.list)
 
 	def firstExec(self):
-		from plugin import epgrefreshHelp
+		from .plugin import epgrefreshHelp
 		if config.plugins.epgrefresh.show_help.value and epgrefreshHelp:
 			config.plugins.epgrefresh.show_help.value = False
 			config.plugins.epgrefresh.show_help.save()
@@ -235,7 +235,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 			self._showKeyhelp()
 	
 	def _showMainHelp(self):
-		from plugin import epgrefreshHelp
+		from .plugin import epgrefreshHelp
 		if epgrefreshHelp:
 			epgrefreshHelp.open(self.session)
 	
