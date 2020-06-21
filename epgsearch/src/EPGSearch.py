@@ -41,6 +41,8 @@ from skin import parameters as skinparameter
 import six
 from six.moves import reduce
 
+SIGN = '°' if six.PY3 else str('\xc2\xb0')
+
 
 # Partnerbox installed and icons in epglist enabled?
 try:
@@ -193,7 +195,7 @@ class EPGSearchList(EPGList):
 		if op > 1800:
 			op = 3600 - op
 			direction = "W"
-		return ("%d.%d\xb0%s") % (op // 10, op % 10, direction)
+		return ("%d.%d" + SIGN + "%s") % (op // 10, op % 10, direction)
 
 # main class of plugin
 class EPGSearch(EPGSelection):

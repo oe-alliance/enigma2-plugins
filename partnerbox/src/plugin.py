@@ -64,6 +64,9 @@ from Components.config import ConfigSubsection, ConfigSubList, ConfigIP, ConfigI
 
 from Components.GUIComponent import GUIComponent
 import skin
+import six
+
+SIGN = '°' if six.PY3 else str('\xc2\xb0')
 
 # for localized messages
 from . import _
@@ -1660,7 +1663,7 @@ class E2TimerMenu(GUIComponent, object):
 			if op > 1800:
 				op = 3600 - op
 				direction = 'W'
-			return ("%d.%d\xc2\xb0%s") % (op // 10, op % 10, direction)
+			return ("%d.%d" + SIGN + "%s") % (op // 10, op % 10, direction)
 		except:
 			return ''
 
