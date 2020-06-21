@@ -12,7 +12,6 @@ from ServiceReference import ServiceReference
 
 from enigma import eServiceReference
 import six
-from curses.ascii import SI
 
 """
 Configuration Version.
