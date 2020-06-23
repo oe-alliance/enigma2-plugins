@@ -458,7 +458,7 @@ class IMDB(Screen, HelpableScreen):
 			if self.savingpath is not None:
 				getTXT = self.IMDBsavetxt()
 				if getTXT is not None:
-					file(self.savingpath + ".txt", 'w').write(getTXT)
+					open(self.savingpath + ".txt", 'w').write(getTXT)
 				else:
 					from Screens.MessageBox import MessageBox
 					self.session.open(MessageBox, (_('IMDb can not get Movie Information to write to .txt file!')), MessageBox.TYPE_INFO, 10)
@@ -470,7 +470,7 @@ class IMDB(Screen, HelpableScreen):
 			if self.savingpath is not None:
 				getTXT = self.IMDBsavetxt(True)
 				if getTXT is not None:
-					file(self.savingpath + ".txt", 'w').write(getTXT)
+					open(self.savingpath + ".txt", 'w').write(getTXT)
 				else:
 					from Screens.MessageBox import MessageBox
 					self.session.open(MessageBox, (_('IMDb can not get Movie Information to write to .jpg and .txt files!')), MessageBox.TYPE_INFO, 10)
