@@ -27,7 +27,7 @@ from MountEdit import AutoMountEdit
 from UserDialog import UserDialog
 
 from six.moves.cPickle import dump, load
-
+import six
 
 def write_cache(cache_file, cache_data):
 	#Does a cPickle dump
@@ -258,6 +258,7 @@ class NetworkBrowser(Screen):
 	def Stage1SettingsComplete(self, result, retval, extra_args):
 		import xml.dom.minidom
 
+		result = six.ensure_str(result)
 		dom = xml.dom.minidom.parseString(result)
 		scan_result = []
 		for dhost in dom.getElementsByTagName('host'):

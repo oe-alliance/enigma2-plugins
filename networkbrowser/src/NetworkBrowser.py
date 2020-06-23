@@ -20,7 +20,7 @@ from Tools.LoadPixmap import LoadPixmap
 from os import path as os_path, stat, mkdir, remove
 from time import time
 from stat import ST_MTIME
-
+import six
 from six.moves.cPickle import dump, load
 import subprocess
 
@@ -291,6 +291,7 @@ class NetworkBrowser(Screen):
 	def Stage1SettingsComplete(self, result, retval, extra_args):
 		import xml.dom.minidom
 
+		result = six.ensure_str(result)
 		dom = xml.dom.minidom.parseString(result)
 		scan_result = []
 		for dhost in dom.getElementsByTagName('host'):

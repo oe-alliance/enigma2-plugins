@@ -1080,6 +1080,7 @@ class UnrarEntry:
 		try:
 			fileName = ("%s/%s_unrar.txt"%(config.plugins.RSDownloader.downloads_directory.value, self.name)).replace("//", "/")
 			f = open(fileName, "w")
+			result = six.ensure_str(result)
 			f.write(result)
 			f.close()
 		except:

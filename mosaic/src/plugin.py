@@ -16,6 +16,7 @@ from Screens.Screen import Screen
 from Tools.Directories import resolveFilename, SCOPE_SKIN_IMAGE, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 import os, gettext
+import six
 
 ################################################
 
@@ -304,6 +305,7 @@ class Mosaic(Screen):
 			self.working = False
 			self.updateTimer.start(1, 1)
 		else:
+			result = six.ensure_str(result)
 			print("[Mosaic] retval: %d result: %s" % (retval, result))
 
 			try:

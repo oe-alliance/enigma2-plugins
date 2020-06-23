@@ -27,7 +27,7 @@ config.plugins.eparted = ConfigSubsection()
 
 from locale import _
 from os import system as os_system, path as os_path, listdir
-
+import six
 #from Plugins.Bp.geminimain.gTools import cleanexit
 
 LIST_TYPE_DEV = 0
@@ -162,6 +162,7 @@ class Ceparted(Screen):
 		#cleanexit(__name__)
 
 	def __FinishedConsole(self, result, retval, extra_args=None):
+		result = six.ensure_str(result)
 		if retval == 0 and '\n' in result:
 			list = []
 			for x in parseCmd(result):
@@ -339,6 +340,7 @@ class Cpart(Screen):
 		plist.append(x)
 		
 	def __FinishedConsole(self, result, retval, extra_args=None):
+		result = six.ensure_str(result)
 		if retval == 0 and '\n' in result:
 			tlist = parseCmd(result)
 			if len(tlist):

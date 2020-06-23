@@ -116,6 +116,7 @@ class DVDBackup:
 		self.console.ePopen("dvdbackup --info -i %s"%config.plugins.DVDBackup.device.value, self.gotInfo)
 
 	def gotInfo(self, result, retval, extra_args):
+		result = six.ensure_str(result)
 		if result and result.__contains__("File Structure DVD") and result.__contains__("Main feature:"):
 			result = result[result.index("File Structure DVD"): result.index("Main feature:")]
 			lines = result.split("\n")
@@ -402,6 +403,7 @@ class DVDBackupScreen(ConfigListScreen, Screen):
 	def gotInfo(self, result, retval, extra_args):
 		config.plugins.DVDBackup.name.value = _("Name of DVD")
 		if result:
+			result = six.ensure_str(result)
 			lines = result.split("\n")
 			for line in lines:
 				if line.startswith("DVD-Video information of the DVD with title "):
