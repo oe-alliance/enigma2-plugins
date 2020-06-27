@@ -72,7 +72,7 @@ def write_cache(cache_file, cache_data):
             mkdir( dirname(cache_file) )
         except OSError:
             print(dirname(cache_file), 'is a file')
-    fd = open(cache_file, 'w')
+    fd = open(cache_file, 'wb')
     dump(cache_data, fd, -1)
     fd.close()
 
@@ -90,7 +90,7 @@ def load_cache(cache_file):
     """
     Does a cPickle load
     """
-    fd = open(cache_file)
+    fd = open(cache_file,'rb')
     cache_data = load(fd)
     fd.close()
     return cache_data

@@ -28,7 +28,7 @@ def write_cache(cache_file, cache_data):
 			mkdir( os_path.dirname(cache_file) )
 		except OSError:
 			print(os_path.dirname(cache_file), 'is a file')
-	fd = open(cache_file, 'w')
+	fd = open(cache_file, 'wb')
 	dump(cache_data, fd, -1)
 	fd.close()
 
@@ -46,7 +46,7 @@ def valid_cache(cache_file, cache_ttl):
 
 def load_cache(cache_file):
 	#Does a cPickle load
-	fd = open(cache_file)
+	fd = open(cache_file,'rb')
 	cache_data = load(fd)
 	fd.close()
 	return cache_data
