@@ -9,6 +9,7 @@ from Components.Console import Console
 from Components.Harddisk import harddiskmanager #global harddiskmanager
 from xml.etree.cElementTree import parse as cet_parse
 from shutil import rmtree
+import six
 
 XML_FSTAB = "/etc/enigma2/automounts.xml"
 
@@ -331,22 +332,23 @@ class AutoMount():
 # 		print "[NetworkBrowser] CheckMountPointFinished"
 		(data, callback, restart) = extra_args
 		hdd_dir = '/media/hdd'
-		sharepath = os.path.join('/media/net', data['sharename'])
-		if data['mountusing'] == 'autofs':
-			sharepath = os.path.join('/media/autofs', data['sharename'])
-			path = os.path.join('/media/autofs', data['sharename'])
-		elif data['hdd_replacement'] == 'True' or data['hdd_replacement'] is True:
+		sharename = six.ensure_str(data['sharename'])
+		sharepath = os.path.join('/media/net', sharename)
+		if data['mountusing'] == b'autofs':
+			sharepath = os.path.join('/media/autofs', sharename)
+			path = os.path.join('/media/autofs', sharename)
+		elif data['hdd_replacement'] == b'True' or data['hdd_replacement'] is True:
 			path = os.path.join('/media/hdd')
 		else:
-			path = os.path.join('/media/net', data['sharename'])
+			path = os.path.join('/media/net', sharename)
 
 		if os.path.exists(path):
-			if data['mountusing'] == 'autofs':
-				if data['sharename'] in self.automounts:
-					self.automounts[data['sharename']]['isMounted'] = True
-					desc = data['sharename']
+			if data['mountusing'] == b'autofs':
+				if sharename in self.automounts:
+					self.automounts[sharename]['isMounted'] = True
+					desc = sharename
 					harddiskmanager.addMountedPartition(sharepath, desc)
-				if data['hdd_replacement'] == 'True' or data['hdd_replacement'] is True:
+				if data['hdd_replacement'] == b'True' or data['hdd_replacement'] is True:
 					if os.path.islink(hdd_dir):
 						if os.readlink(hdd_dir) != path:
 							os.unlink(hdd_dir)
@@ -354,13 +356,13 @@ class AutoMount():
 					elif not os.path.exists(hdd_dir):
 						os.symlink(path, hdd_dir)
 			elif os.path.ismount(path):
-				if data['sharename'] in self.automounts:
-					self.automounts[data['sharename']]['isMounted'] = True
-					desc = data['sharename']
+				if sharename in self.automounts:
+					self.automounts[sharename]['isMounted'] = True
+					desc = sharename
 					harddiskmanager.addMountedPartition(path, desc)
 			else:
-				if data['sharename'] in self.automounts:
-					self.automounts[data['sharename']]['isMounted'] = False
+				if sharename in self.automounts:
+					self.automounts[sharename]['isMounted'] = False
 				if os.path.exists(path):
 					if not os.path.ismount(path):
 						try:
@@ -542,6 +544,7 @@ class AutoMount():
 
 	def removeMountPointFinished(self, extra_args):
 		(path, callback ) = extra_args
+		path = six.ensure_str(path)
 		if os.path.exists(path):
 			if not os.path.ismount(path):
 				try:
