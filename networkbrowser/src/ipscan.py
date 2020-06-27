@@ -9,6 +9,7 @@ import sys
 import types
 import xml.dom.minidom
 import shlex
+import six
 
 try:
 	from multiprocessing import Process
@@ -51,6 +52,8 @@ class PortScanner(object):
 		# wait until finished
 		# get output
 		(self._nmap_last_output, nmap_err) = p.communicate()
+		nmap_err = six.ensure_str(nmap_err)
+		self._nmap_last_output = six.ensure_str(self._nmap_last_output)
 
 		# If there was something on stderr, there was a problem so abort...
 		if len(nmap_err) > 0:

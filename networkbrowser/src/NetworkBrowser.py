@@ -340,6 +340,7 @@ class NetworkBrowser(Screen):
 		try:
 			p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
 			(out, err) = p.communicate()
+			out = six.ensure_str(out)
 			for line in out.split('\n'):
 				item = line.split('|')
 				if len(item) == 3 and item[0] == "Disk" and not item[1].endswith("$"):
