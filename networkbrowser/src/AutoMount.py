@@ -441,7 +441,7 @@ class AutoMount():
 
 	def writeMountsConfig(self):
 		# Generate List in RAM
-		list = ['<?xml version="1.0" ?>\n<mountmanager>\n']
+		_list = ['<?xml version="1.0" ?>\n<mountmanager>\n']
 		for sharename, sharedata in list(self.automounts.items()):
 			mounttype = sharedata['mounttype']
 			mountusing = sharedata['mountusing']
@@ -463,7 +463,7 @@ class AutoMount():
 				self.removeEntryFromFile(":" + sharetemp+'\n', '/etc/auto.network', ' ')
 				self.removeEntryFromFile(sharetemp, '/etc/fstab')
 
-			list += self.generateMountXML(sharedata)
+			_list += self.generateMountXML(sharedata)
 			if mountusing == 'autofs':
 				if sharedata['active'] == True or sharedata['active'] == 'True':
 					out = open('/etc/auto.network', 'a')
@@ -487,12 +487,12 @@ class AutoMount():
 					out.close()
 
 		# Close Mountmanager Tag
-		list.append('</mountmanager>\n')
+		_list.append('</mountmanager>\n')
 
 		# Try Saving to Flash
 		try:
 			f = open(XML_FSTAB, "w")
-			f.writelines(list)
+			f.writelines(_list)
 			f.close()
 			# print "[NetworkBrowser] Saving Mounts List:"
 		except Exception as e:
