@@ -25,7 +25,7 @@ from os import remove as os_remove
 from os.path import exists as os_path_exists
 from datetime import datetime
 
-from urllib import quote as urllib_quote
+from six.moves.urllib.parse import quote as urllib_quote
 #########################################
 
 class TravelWebcamviewer(Screen):

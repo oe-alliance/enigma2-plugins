@@ -36,7 +36,7 @@ from Components.config import ConfigSubsection, ConfigText, ConfigSelection, \
 	getConfigListEntry, config, configfile
 from xml.etree.cElementTree import fromstring as cet_fromstring
 from twisted.web.client import getPage
-from urllib import quote as urllib_quote
+from six.moves.urllib.parse import quote as urllib_quote
 
 def initWeatherPluginEntryConfig():
 	s = ConfigSubsection()

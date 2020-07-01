@@ -10,10 +10,10 @@ from gdata.service import BadAuthentication
 
 from twisted.web import client
 from twisted.internet import reactor
-from urllib2 import Request, URLError, urlopen as urlopen2
 from socket import gaierror, error
-import os, socket, httplib, urllib, urllib2, re, json
-from urllib import quote, unquote_plus, unquote, urlencode
+import os, socket, httplib, re, json
+from six.moves.urllib.parse import quote, unquote_plus, unquote, urlencode
+from six.moves.urllib.request import Request, urlopen, URLError
 
 from urlparse import parse_qs, parse_qsl
 from threading import Thread
@@ -125,9 +125,9 @@ class CVevoSignAlgoExtractor:
         # use algoCache
         if playerUrl not in self.algoCache:
             # get player HTML 5 sript
-            request = urllib2.Request(playerUrl)
+            request = Request(playerUrl)
             try:
-                self.playerData = urllib2.urlopen(request).read()
+                self.playerData = urlopen(request).read()
                 self.playerData = self.playerData.decode('utf-8', 'ignore')
             except:
                 printDBG('Unable to download playerUrl webpage')
@@ -439,7 +439,7 @@ class MyTubeFeedEntry():
 		
 		try:
 			print("[MyTube] trying to find out if a HD Stream is available", watch_url)
-			result = urlopen2(watchrequest).read()
+			result = urlopen(watchrequest).read()
 		except (URLError, HTTPException, socket.error) as err:
 			print("[MyTube] Error: Unable to retrieve watchpage - Error code: ", str(err))
 			return video_url
@@ -449,7 +449,7 @@ class MyTubeFeedEntry():
 			info_url = ('http://www.youtube.com/get_video_info?&video_id=%s%s&ps=default&eurl=&gl=US&hl=en' % (video_id, el))
 			request = Request(info_url, None, std_headers)
 			try:
-				infopage = urlopen2(request).read()
+				infopage = urlopen(request).read()
 				videoinfo = parse_qs(infopage)
 				if ('url_encoded_fmt_stream_map' or 'fmt_url_map') in videoinfo:
 					break

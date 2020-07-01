@@ -26,13 +26,14 @@ from Components.Sources.Boolean import Boolean
 from Components.MovieList import KNOWN_EXTENSIONS
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 import os, re
+
+from six.moves.urllib.parse import quote_plus
+
 try:
 	import htmlentitydefs
-	from urllib import quote_plus
 	iteritems = lambda d: six.iteritems(d)
 except ImportError as ie:
 	from html import entities as htmlentitydefs
-	from urllib.parse import quote_plus
 	iteritems = lambda d: d.items()
 	unichr = chr
 import os, gettext

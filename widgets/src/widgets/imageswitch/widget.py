@@ -3,7 +3,7 @@ from Plugins.Extensions.Widgets.Widget import Widget
 from enigma import ePicLoad, ePixmap, getDesktop, eTimer
 from Components.Pixmap import Pixmap
 from twisted.web.client import downloadPage
-from urllib import quote_plus
+from six.moves.urllib.parse import quote_plus
 from os import remove as os_remove, mkdir as os_mkdir
 from os.path import isdir as os_path_isdir, isfile as os_isfile
 

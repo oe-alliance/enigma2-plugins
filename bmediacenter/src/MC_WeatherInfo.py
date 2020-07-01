@@ -11,7 +11,6 @@ from Components.Sources.StaticText import StaticText
 from xml.etree.cElementTree import fromstring as cet_fromstring
 from twisted.internet import defer
 from twisted.web.client import getPage, downloadPage
-from urllib import quote as urllib_quote
 from Components.Pixmap import Pixmap
 from GlobalFunctions import Showiframe
 from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER, ePicLoad, eEnv
@@ -430,7 +429,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 			language = config.osd.language.value.replace("_", "-")
 			if language == "en-EN": # hack
 				language = "en-US"
-			url = "http://weather.service.msn.com/find.aspx?outputview=search&weasearchstr=%s&culture=%s" % (urllib_quote(self.current.city.value), language)
+			url = "http://weather.service.msn.com/find.aspx?outputview=search&weasearchstr=%s&culture=%s" % (quote(self.current.city.value), language)
 			getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
 		else:
 			self.session.open(MessageBox, _("You need to enter a valid city name before you can search for the location code."), MessageBox.TYPE_ERROR)

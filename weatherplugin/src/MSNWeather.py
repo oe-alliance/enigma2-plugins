@@ -30,7 +30,8 @@ from enigma import eEnv
 from os import path as os_path, mkdir as os_mkdir, remove as os_remove, listdir as os_listdir
 from Components.config import config
 from Tools.Directories import resolveFilename, SCOPE_SKIN
-from urllib import quote as urllib_quote
+from six.moves.urllib.parse import quote as urllib_quote
+
 
 class WeatherIconItem:
 	def __init__(self, url = "", filename = "", index = -1, error = False):

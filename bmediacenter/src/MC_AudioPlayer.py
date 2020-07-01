@@ -1286,7 +1286,7 @@ class Lyrics(Screen):
 				titlely = curPlay.info().getName().split('/')[-1]
 			if artistly == "":
 				artistly = titlely
-		from urllib import quote
+		from six.moves.urllib.parse import quote
 		url = "http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist=%s&song=%s" % (quote(artistly), quote(titlely))
 		sendUrlCommand(url, None, 10).addCallback(self.gotLyrics).addErrback(self.urlError)
 		return "No lyrics found in id3-tag, trying api.chartlyrics.com..."

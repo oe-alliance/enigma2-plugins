@@ -18,7 +18,7 @@ from xml.sax.handler import ContentHandler, feature_namespaces
 from xml.sax.saxutils import escape as escape_xml
 from twisted.python import util
 from twisted.web import http, resource
-from urllib2 import quote
+from six.moves.urllib.parse import quote
 from time import time
 
 #DO NOT REMOVE THIS IMPORT

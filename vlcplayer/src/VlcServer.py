@@ -15,10 +15,10 @@ import posixpath
 import urllib
 from sys import maxsize
 from random import randint, seed
-from urllib import urlencode, quote_plus
-from urllib2 import urlopen
 from xml.dom.minidom import parse
 from VlcPlayer import VlcPlayer, isDvdUrl
+from six.moves.urllib.parse import urlencode, quote_plus
+from six.moves.urllib.request import urlopen
 
 seed()
 
