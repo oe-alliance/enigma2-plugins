@@ -9,6 +9,7 @@
 # version.
 #===============================================================================
 
+from __future__ import absolute_import
 from future.utils import raise_
 from Components.ActionMap import ActionMap
 from Components.Label import Label
@@ -19,8 +20,8 @@ from Screens.Screen import Screen
 
 from pyexpat import ExpatError
 
-from VlcFileList import VlcFileList
-from VlcPlayList import VlcPlayList
+from .VlcFileList import VlcFileList
+from .VlcPlayList import VlcPlayList
 from . import _
 
 class VlcMediaListScreen(Screen):
@@ -180,7 +181,7 @@ class VlcMediaListScreen(Screen):
 				MessageBox, _("Error loading playlist into server %(server)s:\n%(error)s") % (
 						{"server" : self.server.getName(), "error" : e }
 					), MessageBox.TYPE_ERROR)
-			raise (ExpatError, e)
+			raise ExpatError
 		except Exception as e:
 			self.session.open(
 				MessageBox, _("Error loading filelist into server %(server)s:\n%(error)s") % (

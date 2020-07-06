@@ -21,6 +21,7 @@
 #  distributed other than under the conditions noted above.
 #
 # for localized messages
+from __future__ import absolute_import
 from . import _
 
 from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER, eServiceReference
@@ -33,8 +34,8 @@ from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigListScreen
 from Components.config import getConfigListEntry, config
 from ServiceReference import ServiceReference
-from AutomaticVolumeAdjustment import AutomaticVolumeAdjustment
-from AutomaticVolumeAdjustmentConfig import AutomaticVolumeAdjustmentConfig
+from .AutomaticVolumeAdjustment import AutomaticVolumeAdjustment
+from .AutomaticVolumeAdjustmentConfig import AutomaticVolumeAdjustmentConfig
 
 		
 class AutomaticVolumeAdjustmentConfigScreen(ConfigListScreen, Screen):

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from __future__ import print_function
+from __future__ import absolute_import
 from enigma import *
 from Screens.Screen import Screen
 
@@ -30,10 +31,10 @@ import time
 import datetime
 import sys
 
-import plugin
-from plugin import *
+from . import plugin
+from .plugin import *
 
-import ircsupport
+from . import ircsupport
 import xml.dom.minidom
 from xml.dom.minidom import Node
 from Tools import XMLTools

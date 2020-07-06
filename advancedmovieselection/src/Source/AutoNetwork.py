@@ -24,8 +24,9 @@
 #
 
 from __future__ import print_function
+from __future__ import absolute_import
 import os
-import ping
+from . import ping
 
 class Network():
     AUTO_NETORK = "/etc/auto.network"

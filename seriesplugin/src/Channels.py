@@ -17,6 +17,7 @@
 #
 #######################################################################
 
+from __future__ import absolute_import
 import os
 import re
 
@@ -34,8 +35,8 @@ from Tools.XMLTools import stringToXML
 
 # Plugin internal
 from . import _
-from XMLFile import XMLFile, indent
-from Logger import log
+from .XMLFile import XMLFile, indent
+from .Logger import log
 
 import six
 
@@ -44,7 +45,7 @@ try:
 	#Python >= 2.7
 	from collections import OrderedDict
 except:
-	from OrderedDict import OrderedDict
+	from .OrderedDict import OrderedDict
 
 
 ChannelReplaceDict = OrderedDict([
@@ -288,7 +289,7 @@ class ChannelsBase(XMLFile):
 				#TEST Do we need to write the xml header node
 				
 				# Build Header
-				from plugin import NAME, VERSION
+				from .plugin import NAME, VERSION
 				root = Element("channels")
 				root.set('version', VERSION)
 				root.set('created_by', NAME)

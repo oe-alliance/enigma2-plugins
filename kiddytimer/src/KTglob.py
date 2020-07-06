@@ -1,4 +1,5 @@
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 from Components.config import config
 import time
 

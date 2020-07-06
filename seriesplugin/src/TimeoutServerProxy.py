@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # by http://stackoverflow.com/questions/372365/set-timeout-for-xmlrpc_client-serverproxy
 
+from __future__ import absolute_import
 import socket
 
 from time import time
@@ -8,7 +9,7 @@ from time import time
 from Components.config import config
 
 # Internal
-from Logger import log
+from .Logger import log
 
 
 from six.moves import xmlrpc_client

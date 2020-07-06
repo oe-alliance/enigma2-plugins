@@ -5,6 +5,7 @@
 ##
 ##
 from __future__ import print_function
+from __future__ import absolute_import
 from base64 import encodestring
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigClock, ConfigInteger, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry
@@ -16,7 +17,7 @@ from Components.Language import language
 from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.ScrollLabel import ScrollLabel
-from container.decrypt import decrypt
+from .container.decrypt import decrypt
 from enigma import eListboxPythonMultiContent, eTimer, gFont, RT_HALIGN_CENTER, RT_HALIGN_RIGHT
 from os import listdir, remove, system
 from Plugins.Plugin import PluginDescriptor

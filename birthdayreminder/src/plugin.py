@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 #
 #  Birthday Reminder E2 Plugin
 #
@@ -23,8 +24,8 @@
 
 
 # OWN IMPORTS
-from BirthdayReminder import BirthdayReminder, BirthdayReminderSettings
-from BirthdayTimer import BirthdayTimer
+from .BirthdayReminder import BirthdayReminder, BirthdayReminderSettings
+from .BirthdayTimer import BirthdayTimer
 
 # ENIGMA IMPORTS
 from Components.config import config, ConfigSubsection, ConfigText, ConfigSelection, ConfigYesNo, NoSave, ConfigClock, ConfigInteger

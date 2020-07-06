@@ -20,7 +20,8 @@
 ############################################################################
 
 from __future__ import print_function
-from YouTubeInterface import interface
+from __future__ import absolute_import
+from .YouTubeInterface import interface
 
 from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
@@ -45,17 +46,17 @@ from Plugins.Extensions.VlcPlayer.VlcServerConfig import vlcServerConfig
 from Plugins.Extensions.VlcPlayer.VlcServer import VlcServer
 from Plugins.Extensions.VlcPlayer.VlcServerList import VlcServerListScreen
 
-from YouTubeContextMenu import YouTubeEntryContextMenu, YouTubeEntryContextMenuList
+from .YouTubeContextMenu import YouTubeEntryContextMenu, YouTubeEntryContextMenuList
 
 from Tools.BoundFunction import boundFunction
 from Tools.HardwareInfo import HardwareInfo
 
-from YouTubePlayer import YouTubePlayer
-from DirectYouTubePlayer import DirectYouTubePlayer
+from .YouTubePlayer import YouTubePlayer
+from .DirectYouTubePlayer import DirectYouTubePlayer
 
-from YouTubeUserConfig import youTubeUserConfig
-from YouTubeUserList import YouTubeUserListScreen
-from YouTubePlayList import YouTubePlaylistScreen
+from .YouTubeUserConfig import youTubeUserConfig
+from .YouTubeUserList import YouTubeUserListScreen
+from .YouTubePlayList import YouTubePlaylistScreen
 
 #from Screens.InfoBar import MoviePlayer
 #from enigma import eServiceReference

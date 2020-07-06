@@ -1,6 +1,7 @@
-from HelpableNumberActionMap import HelpableNumberActionMap
+from __future__ import absolute_import
+from .HelpableNumberActionMap import HelpableNumberActionMap
 from Components.config import config
-from __init__ import _
+from .__init__ import _
 from enigma import ePoint, eTimer, getDesktop
 
 class MovableScreen():

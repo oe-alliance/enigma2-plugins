@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
-from PKG import PKGConsoleStream
+from __future__ import absolute_import
+from .PKG import PKGConsoleStream
 
 from twisted.web import server, resource, http
 

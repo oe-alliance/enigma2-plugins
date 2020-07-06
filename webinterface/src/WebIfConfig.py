@@ -1,7 +1,8 @@
 from __future__ import print_function
+from __future__ import absolute_import
 Version = '$Header$';
 
-from __init__ import *
+from .__init__ import *
 
 from enigma import eListboxPythonMultiContent, gFont
 from Screens.Screen import Screen

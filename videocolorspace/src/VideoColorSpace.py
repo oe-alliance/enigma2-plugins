@@ -19,10 +19,11 @@
 #  distributed other than under the conditions noted above.
 #
 from __future__ import print_function
+from __future__ import absolute_import
 import commands
 from os import system
 
-from __init__ import _
+from .__init__ import _
 from Components.ConfigList import ConfigListScreen
 from Components.config import getConfigListEntry, config, ConfigSubsection, ConfigSelection
 from Components.ActionMap import ActionMap

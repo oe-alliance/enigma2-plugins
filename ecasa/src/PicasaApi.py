@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 
 #pragma mark - Picasa API
 
@@ -16,7 +17,7 @@ from twisted.web.client import downloadPage
 #_PicasaApi__returnPhotos = lambda photos: [(photo.title.text, photo) for photo in photos.entry]
 _PicasaApi__returnPhotos = lambda photos: photos.entry
 
-from PictureApi import PictureApi
+from .PictureApi import PictureApi
 class PicasaApi(PictureApi):
 	"""Wrapper around gdata/picasa API to make our life a little easier."""
 	def __init__(self, email=None, password=None, cache='/tmp/ecasa'):

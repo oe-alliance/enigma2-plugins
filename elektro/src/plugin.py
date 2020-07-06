@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 #
 # Power Save Plugin by gutemine
 #
@@ -25,7 +26,7 @@ from __future__ import print_function
 #
 
 
-from __init__ import _
+from .__init__ import _
 
 from Screens.InfoBarGenerics import *
 
@@ -56,7 +57,7 @@ from Components.config import configfile, getConfigListEntry, ConfigEnableDisabl
 # Startup/shutdown notification
 from Tools import Notifications
 
-import ping
+from . import ping
 import os
 
 # Timer, etc

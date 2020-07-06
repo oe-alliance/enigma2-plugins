@@ -9,6 +9,7 @@
 #          access.
 #-----------------------
 
+from __future__ import absolute_import
 import struct
 import errno
 import json
@@ -17,8 +18,8 @@ import os
 import io
 
 
-from tmdb_exceptions import *
-from cache_engine import CacheEngine, CacheObject
+from .tmdb_exceptions import *
+from .cache_engine import CacheEngine, CacheObject
 
 from six.moves import cStringIO as StringIO
 

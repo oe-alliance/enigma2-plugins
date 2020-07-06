@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 
 #pragma mark - Flickr API
 
-import flickrapi
+from . import flickrapi
 import os
 import shutil
 import types
@@ -99,7 +100,7 @@ class PictureGenerator:
 	def index(self, obj):
 		return self.__list.index(obj.obj)
 
-from PictureApi import PictureApi
+from .PictureApi import PictureApi
 class FlickrApi(PictureApi):
 	"""Wrapper around flickr API to make our life a little easier."""
 	def __init__(self, api_key=None, cache='/tmp/ecasa'):
@@ -129,7 +130,7 @@ class FlickrApi(PictureApi):
 
 	def getAlbum(self, album):
 		# workaround to allow displaying the photostream without changes to the gui. we use it as a virtual album (or 'set' in flickr) and use the nsid as album object
-		if isinstance(album, types.StringType):
+		if isinstance(album, bytes):
 			photos = self.flickr_api.people_getPublicPhotos(user_id=album, per_page='500', total='500', extras='url_l,url_o,url_m,url_s,url_t,description')
 			pset = photos.find('photos')
 		else:

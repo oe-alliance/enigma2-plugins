@@ -2,6 +2,7 @@
 '''
 $Author: sreichholf $
 '''
+from __future__ import absolute_import
 from enigma import eTimer, eSize, ePoint, getDesktop, eDVBVolumecontrol, eBackgroundFileEraser
 
 from Screens.Screen import Screen
@@ -36,7 +37,7 @@ import re, os
 from datetime import datetime
 
 from . import debug, _
-from reverselookup import ReverseLookupAndNotify
+from .reverselookup import ReverseLookupAndNotify
 
 my_global_session = None
 

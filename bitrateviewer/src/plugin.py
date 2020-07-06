@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 #
 #  BitrateViewer E2
 #
@@ -25,7 +26,7 @@ from Screens.Screen import Screen
 from Components.Sources.StaticText import StaticText
 from Components.ActionMap import ActionMap
 from enigma import iServiceInformation, getDesktop
-from bitratecalc import eBitrateCalculator
+from .bitratecalc import eBitrateCalculator
 
 class BitrateCalculator(Screen):
 	sz_w = getDesktop(0).size().width()

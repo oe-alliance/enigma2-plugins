@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 #
 #  Partnerbox E2
 #
@@ -47,16 +48,16 @@ import SocketServer
 ENIGMA_WEBSERVICE_ID = 0x1012
 from Screens.InfoBarGenerics import InfoBarAudioSelection
 from Screens.InfoBar import InfoBar
-from RemoteTimerEntry import RemoteTimerEntry, RemoteTimerInit
-from PartnerboxEPGSelection import Partnerbox_EPGSelectionInit
+from .RemoteTimerEntry import RemoteTimerEntry, RemoteTimerInit
+from .PartnerboxEPGSelection import Partnerbox_EPGSelectionInit
 
-from PartnerboxFunctions import PlaylistEntry, FillE1TimerList, E2Timer, FillE2TimerList, SetPartnerboxTimerlist, sendPartnerBoxWebCommand, isInTimerList
+from .PartnerboxFunctions import PlaylistEntry, FillE1TimerList, E2Timer, FillE2TimerList, SetPartnerboxTimerlist, sendPartnerBoxWebCommand, isInTimerList
 
-from PartnerboxEPGList import Partnerbox_EPGListInit
-from PartnerboxSetup import PartnerboxSetup, PartnerboxEntriesListConfigScreen, PartnerboxEntryList, PartnerboxEntryConfigScreen, initPartnerboxEntryConfig, initConfig
+from .PartnerboxEPGList import Partnerbox_EPGListInit
+from .PartnerboxSetup import PartnerboxSetup, PartnerboxEntriesListConfigScreen, PartnerboxEntryList, PartnerboxEntryConfigScreen, initPartnerboxEntryConfig, initConfig
 import time
 
-from Services import Services, E2EPGListAllData, E2ServiceList
+from .Services import Services, E2EPGListAllData, E2ServiceList
 from Screens.ChannelSelection import service_types_tv
 
 from Components.ConfigList import ConfigList, ConfigListScreen

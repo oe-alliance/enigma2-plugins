@@ -6,6 +6,7 @@ $Revision: 1552 $
 $Date: 2019-04-23 09:40:35 +0200 (Tue, 23 Apr 2019) $
 $Id: FritzCallFBF.py 1552 2019-04-23 07:40:35Z michael $
 '''
+from __future__ import absolute_import
 
 # C0111 (Missing docstring)
 # C0103 (Invalid name)
@@ -31,10 +32,10 @@ from twisted.web.client import getPage
 from enigma import eTimer #@UnresolvedImport
 
 from . import _, __ #@UnresolvedImport
-from plugin import config, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS, FBF_BLOCKED_CALLS, \
+from .plugin import config, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS, FBF_BLOCKED_CALLS, \
 	decode
-from nrzuname import html2unicode
-from FritzConnection import FritzConnection
+from .nrzuname import html2unicode
+from .FritzConnection import FritzConnection
 from twisted.python.failure import Failure
 
 from six.moves.urllib.parse import urlencode

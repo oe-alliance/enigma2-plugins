@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 # Screens
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
@@ -21,11 +22,11 @@ from Components.config import KEY_OK
 
 # Error-print()
 
-from EPGBackupTools import debugOut, PLUGIN_VERSION
+from .EPGBackupTools import debugOut, PLUGIN_VERSION
 from traceback import format_exc
 
-from plugin import gUserScriptExists
-from plugin import epgbackup
+from .plugin import gUserScriptExists
+from .plugin import epgbackup
 			
 class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 	skin = """
@@ -110,7 +111,7 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 			debugOut("removeNotifiers-Error:\n" + str(format_exc()), forced=True)
 	
 	def showMainHelp(self):
-		from plugin import epgBackuphHelp
+		from .plugin import epgBackuphHelp
 		if epgBackuphHelp:
 			epgBackuphHelp.open(self.session)
 

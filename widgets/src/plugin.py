@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from Screens.Screen import Screen
 from Screens.InfoBarGenerics import InfoBarPlugins
 from Screens.InfoBar import InfoBar
@@ -13,8 +14,8 @@ from enigma import getDesktop, eSize, ePoint, eEnv
 from skin import applyAllAttributes, dom_skins
 
 		
-from Widget import Widget
-from widgets import importWidgets, importSingleWidget
+from .Widget import Widget
+from .widgets import importWidgets, importSingleWidget
 from six.moves import range
 
 

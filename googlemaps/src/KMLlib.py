@@ -1,5 +1,6 @@
 from __future__ import print_function
-from globalmaptiles import GlobalMercator
+from __future__ import absolute_import
+from .globalmaptiles import GlobalMercator
 from xml.dom.minidom import parse
 from os import listdir
 

@@ -23,7 +23,8 @@ must pass on to the recipients the same freedoms that you received. You must mak
 that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 '''
 from __future__ import print_function
-from Globals import printStackTrace
+from __future__ import absolute_import
+from .Globals import printStackTrace
 
 class RecordTimerEvent():
     def __init__(self):

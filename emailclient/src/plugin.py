@@ -6,6 +6,7 @@ $Date$
 $Id$
 '''
 from __future__ import print_function
+from __future__ import absolute_import
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Screens.MessageBox import MessageBox
@@ -24,12 +25,12 @@ from zope.interface import implements
 import email, re, os
 from email.header import decode_header
 import time
-from TagStrip import strip_readable
-from protocol import createFactory
+from .TagStrip import strip_readable
+from .protocol import createFactory
 
 from . import _, initLog, debug, scaleH, scaleV, DESKTOP_WIDTH, DESKTOP_HEIGHT #@UnresolvedImport # pylint: disable-msg=F0401
 mailAccounts = [] # contains all EmailAccount objects
-from EmailConfig import EmailConfigOptions, EmailConfigAccount
+from .EmailConfig import EmailConfigOptions, EmailConfigAccount
 
 from functools import reduce
 

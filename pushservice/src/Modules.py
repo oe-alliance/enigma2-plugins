@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 #######################################################################
 #
 #    Push Service for Enigma-2
@@ -24,9 +25,9 @@ import imp, inspect
 
 # Plugin internal
 from . import _
-from ModuleBase import ModuleBase
-from ServiceBase import ServiceBase
-from ControllerBase import ControllerBase
+from .ModuleBase import ModuleBase
+from .ServiceBase import ServiceBase
+from .ControllerBase import ControllerBase
 
 
 class Modules(object):

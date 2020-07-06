@@ -21,10 +21,11 @@
 #
 
 from __future__ import print_function
-from LocaleInit import _
+from __future__ import absolute_import
+from .LocaleInit import _
 from Tools.Directories import resolveFilename, SCOPE_HDD
 from Components.config import config, ConfigSubsection, ConfigText, ConfigYesNo, ConfigInteger, ConfigSelection, ConfigClock, ConfigLocations, ConfigBoolean
-from Globals import printStackTrace
+from .Globals import printStackTrace
 
 # configurations from enigma2 /Components/UsageConfig.py !!!don't edit default values from source!!!
 config.usage.load_length_of_movies_in_moviellist = ConfigYesNo(default=True)
@@ -125,7 +126,7 @@ config.AdvancedMovieSelection.showpreview = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.showrename = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.description = ConfigYesNo(default=True)
 poster_sizes = (u'w92', u'w154', u'w185', u'w342', u'w500', u'original')
-from MovieDB.tmdb import poster_sizes, setPosterSize
+from .MovieDB.tmdb import poster_sizes, setPosterSize
 poster_choices = [
                   (poster_sizes[0], _("Thumb (92x138)")),
                   (poster_sizes[2], _("Cover (185x278)")),

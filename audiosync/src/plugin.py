@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -5,8 +6,8 @@ from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSub
 from boxbranding import getImageDistro
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
-import AC3main
-import AC3setup
+from . import AC3main
+from . import AC3setup
 
 from six.moves import reload_module
 

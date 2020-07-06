@@ -9,9 +9,10 @@
 #-----------------------
 
 from __future__ import print_function
-from tmdb_exceptions import *
-from locales import get_locale
-from cache import Cache
+from __future__ import absolute_import
+from .tmdb_exceptions import *
+from .locales import get_locale
+from .cache import Cache
 
 import json
 import os

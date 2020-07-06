@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import absolute_import
 from . import _
 from enigma import eTimer, eConsoleAppContainer, getBestPlayableServiceReference, eServiceReference, eEPGCache
 from Screens.Screen import Screen
@@ -11,7 +12,7 @@ from Tools.XMLTools import stringToXML
 from Tools import Directories
 from time import time
 from Components.config import config
-from Vps import vps_exe, vps_timers
+from .Vps import vps_exe, vps_timers
 import NavigationInstance
 from xml.etree.cElementTree import parse as xml_parse
 import six

@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -48,16 +49,16 @@ def main(session, **kwargs):
 
 	# Create one if we have none (no autostart)
 	if rssPoller is None:
-		from RSSPoller import RSSPoller
+		from .RSSPoller import RSSPoller
 		rssPoller = RSSPoller()
 
 	# Show Overview when we have feeds (or retrieving them from google)
 	if rssPoller.feeds or config.plugins.simpleRSS.enable_google_reader.value:
-		from RSSScreens import RSSOverview
+		from .RSSScreens import RSSOverview
 		session.openWithCallback(closed, RSSOverview, rssPoller)
 	# Show Setup otherwise
 	else:
-		from RSSSetup import RSSSetup
+		from .RSSSetup import RSSSetup
 		session.openWithCallback(closed, RSSSetup, rssPoller)
 
 # Plugin window has been closed
@@ -77,7 +78,7 @@ def autostart(reason, **kwargs):
 	global rssPoller
 
 	if "session" in kwargs and config.plugins.simpleRSS.update_notification.value == "ticker":
-		import RSSTickerView as tv
+		from . import RSSTickerView as tv
 		if tv.tickerView is None:
 			tv.tickerView = kwargs["session"].instantiateDialog(tv.RSSTickerView)
 
@@ -85,7 +86,7 @@ def autostart(reason, **kwargs):
 	if reason == 0 and config.plugins.simpleRSS.autostart.value and \
 		(not plugins.firstRun or "session" in kwargs):
 
-		from RSSPoller import RSSPoller
+		from .RSSPoller import RSSPoller
 		rssPoller = RSSPoller()
 	elif reason == 1:
 		if rssPoller is not None:
@@ -94,7 +95,7 @@ def autostart(reason, **kwargs):
 
 # Filescan
 def filescan_open(item, session, **kwargs):
-	from RSSSetup import addFeed
+	from .RSSSetup import addFeed
 
 	# Add earch feed
 	for each in item:

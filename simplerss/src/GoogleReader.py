@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 try:
 	from urllib import urlencode
 except ImportError as ie:
 	from urllib.parse import urlencode
 
 from twisted.web.client import getPage
-from RSSFeed import UniversalFeed
+from .RSSFeed import UniversalFeed
 from twisted.internet.defer import Deferred
 from xml.etree.cElementTree import fromstring as cet_fromstring
 

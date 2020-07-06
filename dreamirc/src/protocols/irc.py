@@ -948,7 +948,7 @@ class IRCClient(basic.LineReceiver):
                 del self._pings[byValue[i][1]]
 
     def dccSend(self, user, file):
-        if isinstance(file, types.StringType):
+        if isinstance(file, bytes):
             file = open(file, 'r')
 
         size = fileSize(file)
@@ -1568,7 +1568,7 @@ class DccSendProtocol(protocol.Protocol, styles.Ephemeral):
     connected = 0
 
     def __init__(self, file):
-        if isinstance(file, types.StringType):
+        if isinstance(file, bytes):
             self.file = open(file, 'r')
 
     def connectionMade(self):
@@ -2030,7 +2030,7 @@ def ctcpStringify(messages):
     coded_messages = []
     for (tag, data) in messages:
         if data:
-            if not isinstance(data, types.StringType):
+            if not isinstance(data, bytes):
                 try:
                     # data as list-of-strings
                     data = " ".join(map(str, data))

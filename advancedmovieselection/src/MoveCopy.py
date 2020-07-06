@@ -20,13 +20,14 @@
 #  distributed other than under the conditions noted above.
 #
 from __future__ import print_function
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.LocationBox import MovieLocationBox
 from Components.config import config
-from Source.ServiceUtils import serviceUtil, realSize, diskUsage
-from Source.ServiceProvider import ServiceCenter
+from .Source.ServiceUtils import serviceUtil, realSize, diskUsage
+from .Source.ServiceProvider import ServiceCenter
 from enigma import eTimer
 import os, time
 
@@ -36,7 +37,7 @@ def openDialog(job, session):
     if not session:
         return
     # update movie list to show new copied or moved movies 
-    from MovieSelection import MovieSelection
+    from .MovieSelection import MovieSelection
     if isinstance(session.current_dialog, MovieSelection):
         session.current_dialog.updateList(job)
         if not error:
@@ -233,7 +234,7 @@ from Screens.HelpMenu import HelpableScreen
 from enigma import eTimer
 from Components.ActionMap import HelpableActionMap
 from Components.Button import Button
-from Source.Globals import SkinResolutionHelper
+from .Source.Globals import SkinResolutionHelper
 
 class MoveCopyProgress(Screen, HelpableScreen, SkinResolutionHelper):
     def __init__(self, session):

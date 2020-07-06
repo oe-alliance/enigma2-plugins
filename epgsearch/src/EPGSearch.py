@@ -40,6 +40,7 @@ from skin import parameters as skinparameter
 
 import six
 from six.moves import reduce
+from functools import reduce
 
 SIGN = '°' if six.PY3 else str('\xc2\xb0')
 

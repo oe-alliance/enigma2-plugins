@@ -17,6 +17,7 @@
 #
 #######################################################################
 
+from __future__ import absolute_import
 import os
 import re
 
@@ -56,9 +57,9 @@ from skin import loadSkin
 from enigma import getDesktop
 
 # Plugin internal
-from SeriesPlugin import getInstance
-from Logger import log
-from Channels import getChannel
+from .SeriesPlugin import getInstance
+from .Logger import log
+from .Channels import getChannel
 
 # Constants
 PIXMAP_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Logos/" )
@@ -440,7 +441,7 @@ class SeriesPluginInfoScreen(Screen):
 		if ref and self.data:
 			path = ref.getPath()
 			if path and os.path.exists(path):
-				from SeriesPluginRenamer import rename
+				from .SeriesPluginRenamer import rename
 				if rename(path, self.name, self.short, self.data) is True:
 					self["key_red"].setText("")
 					self.redButtonFunction = None
@@ -468,7 +469,7 @@ class SeriesPluginInfoScreen(Screen):
 				#newEntry = RecordTimerEntry(ServiceReference(ref), checkOldTimers = True, dirname = preferredTimerPath(), *parseEvent(self.event))
 				begin, end, name, description, eit = parseEvent(self.event)
 				
-				from SeriesPlugin import refactorTitle, refactorDescription
+				from .SeriesPlugin import refactorTitle, refactorDescription
 				if self.data:
 					name = refactorTitle(name, self.data)
 					description = refactorDescription(description, self.data)

@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 #######################################################################
 #
 #    InfoBar Tuner State for Enigma-2
@@ -63,7 +64,7 @@ from enigma import eDVBResourceManager, eActionMap, eListboxPythonMultiContent, 
 from skin import parseColor, parseFont
 
 # Plugin internal
-from netstat import netstat
+from .netstat import netstat
 
 
 import six

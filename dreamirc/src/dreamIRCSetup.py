@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 ##
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -16,7 +17,7 @@ from Tools.XMLTools import elementsWithTag, mergeText
 
 from socket import gethostbyname_ex
 
-from dreamIRCTools import *
+from .dreamIRCTools import *
 
 class dreamIRCSetupScreen(ConfigListScreen, Screen):
 	from enigma import getDesktop

@@ -1,9 +1,10 @@
 # -*- coding: iso-8859-1 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 from enigma import ePythonMessagePump
 
-from __init__ import decrypt_block
-from ThreadQueue import ThreadQueue
+from .__init__ import decrypt_block
+from .ThreadQueue import ThreadQueue
 import gdata.youtube
 import gdata.youtube.service
 from gdata.service import BadAuthentication

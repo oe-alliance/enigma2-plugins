@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 #from Source.LocaleInit import _
 
 # Andy Blackburn: [Translation] begin
@@ -7,7 +8,7 @@ from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os, gettext
 
-from skin import loadSkin
+from .skin import loadSkin
 loadSkin(resolveFilename(SCOPE_PLUGINS) + "Extensions/AdvancedMovieSelection/skin/skin.xml")
 
 PluginLanguageDomain = "AdvancedMovieSelection"

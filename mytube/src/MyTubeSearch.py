@@ -1,6 +1,7 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from enigma import eTimer, ePythonMessagePump
-from MyTubeService import GoogleSuggestions
+from .MyTubeService import GoogleSuggestions
 from Screens.Screen import Screen
 from Screens.LocationBox import MovieLocationBox
 from Components.config import config, ConfigText, getConfigListEntry
@@ -16,7 +17,7 @@ from Tools.Directories import resolveFilename, SCOPE_HDD
 
 from six import StringIO
 from threading import Thread
-from ThreadQueue import ThreadQueue
+from .ThreadQueue import ThreadQueue
 from xml.etree.cElementTree import fromstring as cet_fromstring
 #import urllib
 from urllib import FancyURLopener

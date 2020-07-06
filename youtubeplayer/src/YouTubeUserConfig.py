@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 ############################################################################
 #    Copyright (C) 2008 by Volker Christian                                #
 #    Volker.Christian@fh-hagenberg.at                                      #
@@ -29,7 +30,7 @@ from Components.config import ConfigText
 from Components.config import config
 from Components.config import getConfigListEntry
 from Screens.Screen import Screen
-from YouTubeInterface import YouTubeUser
+from .YouTubeInterface import YouTubeUser
 
 from . import _
 

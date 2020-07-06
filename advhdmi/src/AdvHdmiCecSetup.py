@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Screens
+from __future__ import absolute_import
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Components.Label import Label
@@ -289,7 +290,7 @@ class TimeSpanConfigScreen(Screen, ConfigListScreen):
 		</screen>"""
 
 	def __init__(self, session, entry, callbackfnc=None):
-		from plugin import TimeSpanEntryInit
+		from .plugin import TimeSpanEntryInit
 		self.session = session
 		Screen.__init__(self, session)
 

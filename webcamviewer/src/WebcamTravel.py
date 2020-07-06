@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 from Screens.Screen import Screen
 from Components.Sources.List import List
 from Components.Button import Button
@@ -14,7 +15,7 @@ from Tools.BoundFunction import boundFunction
 
 from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, ePicLoad, eTimer
 
-from PictureScreen import PictureScreen
+from .PictureScreen import PictureScreen
 
 from twisted.web.client import getPage, downloadPage
 #from twisted.internet import reactor

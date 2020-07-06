@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 #######################################################################
 #
 #    Push Service for Enigma-2
@@ -28,7 +29,7 @@ from Tools.BoundFunction import boundFunction
 
 # Plugin internal
 from . import _
-from PushServiceBase import PushServiceBase
+from .PushServiceBase import PushServiceBase
 
 
 # States

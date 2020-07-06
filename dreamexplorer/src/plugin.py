@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 #######################################################################
 #
 #    Dream-ExplorerII for Dreambox-Enigma2
@@ -37,7 +38,7 @@ from Components.config import config, ConfigSubsection, ConfigText
 from Tools.Directories import fileExists, pathExists
 from Tools.HardwareInfo import HardwareInfo
 from ServiceReference import ServiceReference
-from myFileList import FileList as myFileList
+from .myFileList import FileList as myFileList
 #from vInputBox import vInputBox
 from Screens.InputBox import InputBox
 if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/PicturePlayer/plugin.pyo") or fileExists("/usr/lib/enigma2/python/Plugins/Extensions/PicturePlayer/plugin.pyc"):

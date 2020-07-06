@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from enigma import eListbox
 from enigma import eListboxPythonMultiContent
 from enigma import ePicLoad
@@ -32,9 +33,9 @@ from pyexpat import ExpatError
 import xml.dom.minidom
 
 ### my
-from WebcamViewConfig import WebcamViewerMenu
-from PictureScreen import PictureScreen
-from WebcamTravel import TravelWebcamviewer
+from .WebcamViewConfig import WebcamViewerMenu
+from .PictureScreen import PictureScreen
+from .WebcamTravel import TravelWebcamviewer
 ###
 myname = "Webcam/Picture Viewer"
 myversion = "1.1"

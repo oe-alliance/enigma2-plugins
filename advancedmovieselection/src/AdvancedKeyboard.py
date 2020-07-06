@@ -19,13 +19,14 @@
 #  modify it (if you keep the license), but it may not be commercially 
 #  distributed other than under the conditions noted above.
 #
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config, ConfigText, KEY_0, KEY_TIMEOUT, KEY_NUMBERS
 from Tools.NumericalTextInput import NumericalTextInput
 from enigma import eTimer
-from Source.Globals import SkinResolutionHelper
+from .Source.Globals import SkinResolutionHelper
 
 from Screens.NumericalTextInputHelpDialog import NumericalTextInputHelpDialog
 class AdvancedTextInputHelpDialog(NumericalTextInputHelpDialog, SkinResolutionHelper):

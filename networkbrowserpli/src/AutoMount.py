@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # for localized messages
 from __future__ import print_function
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 import os
 from enigma import eTimer
 from Components.Console import Console

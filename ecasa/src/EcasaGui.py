@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 
 #pragma mark - GUI
 
@@ -10,7 +11,7 @@ from Screens.InfoBarGenerics import InfoBarNotifications
 from Screens.LocationBox import LocationBox
 from Screens.MessageBox import MessageBox
 from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard
-from EcasaSetup import EcasaSetup
+from .EcasaSetup import EcasaSetup
 
 #pragma mark Components
 from Components.ActionMap import HelpableActionMap

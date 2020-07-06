@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # for localized messages
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 
 from Plugins.Plugin import PluginDescriptor
-from NetworkBrowser import NetworkBrowser
+from .NetworkBrowser import NetworkBrowser
 from Components.Network import iNetwork
-from MountManager import AutoMountManager
+from .MountManager import AutoMountManager
 
 plugin_path = ""
 
@@ -26,7 +27,7 @@ def MountManagerCallFunction(iface):
 	return MountManagerMain
 
 def RemountMain(session, iface = None, **kwargs):
-	from AutoMount import iAutoMount
+	from .AutoMount import iAutoMount
 	iAutoMount.getAutoMountPoints() 
 
 def RemountCallFunction(iface):

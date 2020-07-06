@@ -6,6 +6,7 @@ $Revision: 1553 $
 $Date: 2019-04-25 09:36:05 +0200 (Thu, 25 Apr 2019) $
 $Id: plugin.py 1553 2019-04-25 07:36:05Z michael $
 '''
+from __future__ import absolute_import
 
 # C0111 (Missing docstring)
 # C0103 (Invalid name)
@@ -64,8 +65,8 @@ from twisted.internet import reactor  # @UnresolvedImport
 from twisted.internet.protocol import ReconnectingClientFactory  # @UnresolvedImport
 from twisted.protocols.basic import LineReceiver  # @UnresolvedImport
 
-import FritzOutlookCSV, FritzLDIF
-from nrzuname import ReverseLookupAndNotifier
+from . import FritzOutlookCSV, FritzLDIF
+from .nrzuname import ReverseLookupAndNotifier
 from . import _, __  # @UnresolvedImport # pylint: disable=W0611,F0401
 global standbyMode
 
@@ -297,7 +298,7 @@ def stripCbCPrefix(number, countrycode):
 				return number[length:]
 	return number
 
-import FritzCallFBF  # wrong-import-position # pylint: disable=
+from . import FritzCallFBF  # wrong-import-position # pylint: disable=
 
 class FritzAbout(Screen):
 
@@ -385,7 +386,7 @@ class FritzAbout(Screen):
 	def exit(self):
 		self.close()
 
-from FritzCallFBF import FBF_dectActive, FBF_faxActive, FBF_rufumlActive, FBF_tamActive, FBF_wlanState  # wrong-import-position # pylint: disable=
+from .FritzCallFBF import FBF_dectActive, FBF_faxActive, FBF_rufumlActive, FBF_tamActive, FBF_wlanState  # wrong-import-position # pylint: disable=
 
 import six
 from six.moves import reload_module

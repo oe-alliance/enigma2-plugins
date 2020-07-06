@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 
 from twisted.internet.protocol import DatagramProtocol
 from twisted.internet import reactor
@@ -11,7 +12,7 @@ from Screens.MessageBox import MessageBox
 from Tools import Notifications
 import six
 
-from GrowleeConnection import emergencyDisable
+from .GrowleeConnection import emergencyDisable
 from . import NOTIFICATIONID
 
 SYSLOG_UDP_PORT = 514

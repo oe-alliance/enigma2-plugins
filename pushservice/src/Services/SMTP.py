@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 #######################################################################
 #
 #    Push Service for Enigma-2
@@ -25,7 +26,7 @@ from Plugins.Extensions.PushService.__init__ import _
 from Plugins.Extensions.PushService.ServiceBase import ServiceBase
 
 # Plugin specific
-from mail.mail import Message, sendmail
+from .mail.mail import Message, sendmail
 
 
 # Constants

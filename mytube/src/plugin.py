@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from . import _
 
 from Components.AVSwitch import AVSwitch
@@ -16,8 +17,8 @@ from Components.Sources.List import List
 from Components.Task import Task, Job, job_manager
 from Components.config import config, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry, ConfigPassword
 #, ConfigIP, ConfigNumber, ConfigLocations
-from MyTubeSearch import ConfigTextWithGoogleSuggestions, MyTubeSettingsScreen, MyTubeTasksScreen, MyTubeHistoryScreen
-from MyTubeService import validate_cert, get_rnd, myTubeService
+from .MyTubeSearch import ConfigTextWithGoogleSuggestions, MyTubeSettingsScreen, MyTubeTasksScreen, MyTubeHistoryScreen
+from .MyTubeService import validate_cert, get_rnd, myTubeService
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
 from Screens.InfoBarGenerics import InfoBarNotifications, InfoBarSeek
@@ -28,7 +29,7 @@ from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_HDD, SCOPE_CURRENT_PLUGIN
 from Tools.Downloader import downloadWithProgress
 
-from __init__ import decrypt_block
+from .__init__ import decrypt_block
 
 from enigma import eTPM, eTimer, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, gFont, ePicLoad, eServiceReference, iPlayableService
 from os import path as os_path, remove as os_remove

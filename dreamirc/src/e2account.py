@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # -*- Python -*-
 #
 # Copyright (c) 2001-2004 Twisted Matrix Laboratories.
@@ -5,8 +6,8 @@
 
 #
 import string
-import ircsupport
-import e2chat, dreamIRCTools, dreamIRCSetup
+from . import ircsupport
+from . import e2chat, dreamIRCTools, dreamIRCSetup
 
 
 class AccountManager:

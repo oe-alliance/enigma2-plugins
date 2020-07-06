@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 Version = '$Header$';
 
 from enigma import eConsoleAppContainer, eTPM
@@ -8,8 +9,8 @@ from Plugins.Plugin import PluginDescriptor
 from Components.config import config, ConfigBoolean, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigEnableDisable
 from Components.Network import iNetwork
 from Screens.MessageBox import MessageBox
-from WebIfConfig import WebIfConfigScreen
-from WebChilds.Toplevel import getToplevel
+from .WebIfConfig import WebIfConfigScreen
+from .WebChilds.Toplevel import getToplevel
 from Tools.HardwareInfo import HardwareInfo
 
 from Tools.Directories import copyfile, resolveFilename, SCOPE_PLUGINS, SCOPE_CONFIG, fileExists
@@ -26,8 +27,8 @@ from OpenSSL import SSL, crypto
 from time import gmtime
 from os.path import isfile as os_isfile, exists as os_exists
 
-from __init__ import _, __version__, decrypt_block
-from webif import get_random, validate_certificate
+from .__init__ import _, __version__, decrypt_block
+from .webif import get_random, validate_certificate
 
 import random, uuid, time, hashlib
 

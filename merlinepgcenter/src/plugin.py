@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 #
 #  MerlinEPGCenter E2 Plugin
 #
@@ -30,8 +31,8 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.InfoBar import InfoBar
 
 # OWN IMPORTS
-from MerlinEPGCenter import MerlinEPGCenter
-from EpgCenterList import MULTI_EPG_NOW, SINGLE_EPG
+from .MerlinEPGCenter import MerlinEPGCenter
+from .EpgCenterList import MULTI_EPG_NOW, SINGLE_EPG
 
 
 infoBarFunctionSaver = None

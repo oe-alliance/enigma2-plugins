@@ -5,13 +5,14 @@
 
 """IRC support for Instance Messenger."""
 from __future__ import print_function
+from __future__ import absolute_import
 
 import string
 
-from protocols import irc
+from .protocols import irc
 from twisted.internet import defer, reactor, protocol
 from twisted.internet.defer import succeed
-import e2support, interfaces, dreamIRCTools
+from . import e2support, interfaces, dreamIRCTools
 from zope.interface import implements
 
 class IRCPerson(e2support.AbstractPerson):

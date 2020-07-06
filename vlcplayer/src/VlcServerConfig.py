@@ -10,6 +10,7 @@
 #===============================================================================
 
 
+from __future__ import absolute_import
 from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.ConfigList import ConfigListScreen
@@ -25,7 +26,7 @@ from Components.config import ConfigYesNo
 from Components.config import config
 from Components.config import getConfigListEntry
 from Screens.Screen import Screen
-from VlcServer import VlcServer
+from .VlcServer import VlcServer
 from . import _
 
 class ConfigMutable(ConfigElement):

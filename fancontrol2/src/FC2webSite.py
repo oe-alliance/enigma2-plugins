@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
 from twisted.web import resource, http
-from globals import *
-from plugin import *
-from Sensors import sensors
-from __init__ import _
+from .globals import *
+from .plugin import *
+from .Sensors import sensors
+from .__init__ import _
 from Components.config import configfile, config
 
 import os

@@ -2,6 +2,7 @@
 # code by GeminiTeam
 
 from __future__ import print_function
+from __future__ import absolute_import
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
@@ -13,7 +14,7 @@ from Components.Console import Console
 from Tools.Directories import createDir
 from Tools.BoundFunction import boundFunction
 
-from locale import _
+from .locale import _
 
 from enigma import quitMainloop
 from os import system, listdir, path, statvfs, remove, popen as os_popen

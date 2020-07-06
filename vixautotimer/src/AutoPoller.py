@@ -1,10 +1,11 @@
 from __future__ import print_function
+from __future__ import absolute_import
 # Timer
 from enigma import eTimer
 
 # Config
 from Components.config import config
-from plugin import autotimer
+from .plugin import autotimer
 
 # Notifications
 from Tools.FuzzyDate import FuzzyTime

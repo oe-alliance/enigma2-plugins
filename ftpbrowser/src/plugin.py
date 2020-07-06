@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 #
 # POC FTP Browser for Enigma2
 #
@@ -28,8 +29,8 @@ while i < config.plugins.ftpbrowser.servercount.value:
 
 del append, i
 
-from FTPBrowser import FTPBrowser
-from FTPServerManager import ftpserverFromURI
+from .FTPBrowser import FTPBrowser
+from .FTPServerManager import ftpserverFromURI
 
 ftpbrowser = None
 

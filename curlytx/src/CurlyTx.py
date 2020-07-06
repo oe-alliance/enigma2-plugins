@@ -3,6 +3,7 @@
 # Copyright (C) 2011 Christian Weiske <cweiske@cweiske.de>
 # License: GPLv3 or later
 
+from __future__ import absolute_import
 from . import _
 
 from Screens.Screen import Screen
@@ -215,7 +216,7 @@ class CurlyTx(Screen, HelpableScreen):
             self.showingHeaders = True
 
     def showSettings(self):
-        from CurlyTxSettings import CurlyTxSettings
+        from .CurlyTxSettings import CurlyTxSettings
         self.session.openWithCallback(self.onSettingsChanged, CurlyTxSettings)
 
     def onSettingsChanged(self):

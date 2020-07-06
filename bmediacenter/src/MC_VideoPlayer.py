@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from Screens.Screen import Screen
 from Screens.ServiceInfo import ServiceInfoList, ServiceInfoListEntry
 from enigma import iPlayableService, eRect, eServiceReference, iServiceInformation
@@ -11,8 +12,8 @@ from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import *
 from Screens.InfoBar import MoviePlayer as OrgMoviePlayer
 from Tools.Directories import resolveFilename, pathExists, fileExists, SCOPE_MEDIA
-from MC_Filelist import FileList
-from GlobalFunctions import shortname, MC_VideoInfoView, Showiframe
+from .MC_Filelist import FileList
+from .GlobalFunctions import shortname, MC_VideoInfoView, Showiframe
 import re
 import os
 config.plugins.mc_vp = ConfigSubsection()

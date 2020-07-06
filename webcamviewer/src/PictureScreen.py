@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 from enigma import ePicLoad, eTimer, getDesktop
 
 from Screens.Screen import Screen
@@ -8,7 +9,7 @@ from Components.config import config
 from Components.Pixmap import Pixmap
 from Components.ActionMap import ActionMap
 
-from FTPDownloader import FTPDownloader
+from .FTPDownloader import FTPDownloader
 from twisted.web.client import HTTPDownloader
 from twisted.internet import reactor
 from urlparse import urlparse, urlunparse

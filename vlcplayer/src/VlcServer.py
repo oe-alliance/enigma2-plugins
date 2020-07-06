@@ -10,13 +10,14 @@
 #===============================================================================
 
 from __future__ import print_function
+from __future__ import absolute_import
 import re
 import posixpath
 import urllib
 from sys import maxsize
 from random import randint, seed
 from xml.dom.minidom import parse
-from VlcPlayer import VlcPlayer, isDvdUrl
+from .VlcPlayer import VlcPlayer, isDvdUrl
 from six.moves.urllib.parse import urlencode, quote_plus
 from six.moves.urllib.request import urlopen
 

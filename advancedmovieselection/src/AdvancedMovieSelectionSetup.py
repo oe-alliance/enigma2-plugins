@@ -20,11 +20,12 @@
 #  distributed other than under the conditions noted above.
 #
 from __future__ import print_function
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 from enigma import ePoint
 from Screens.Screen import Screen
-from RecordPaths import RecordPathsSettings
-from About import AdvancedMovieSelectionAbout
+from .RecordPaths import RecordPathsSettings
+from .About import AdvancedMovieSelectionAbout
 from Components.Pixmap import Pixmap
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
@@ -36,14 +37,14 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.LocationBox import MovieLocationBox
 from Components.UsageConfig import preferredPath
 from Screens.MessageBox import MessageBox
-from MessageBoxEx import MessageBox as MessageBoxEx
+from .MessageBoxEx import MessageBox as MessageBoxEx
 from Components.Sources.Boolean import Boolean
 from Components.Sources.List import List
 from Components.ActionMap import ActionMap, NumberActionMap
 from enigma import getDesktop, quitMainloop
-from ClientSetup import ClientSetup
-from Source.Globals import pluginPresent, SkinTools
-from Source.Config import qButtons
+from .ClientSetup import ClientSetup
+from .Source.Globals import pluginPresent, SkinTools
+from .Source.Config import qButtons
 
 class ConfigList(eConfigList.ConfigList):
     def __init__(self, list, session=None):
@@ -107,7 +108,7 @@ class ConfigListScreen(eConfigList.ConfigListScreen):
         if not self.handleInputHelpers in self["config"].onSelectionChanged:
             self["config"].onSelectionChanged.append(self.handleInputHelpers)
 
-from Source.Globals import SkinResolutionHelper
+from .Source.Globals import SkinResolutionHelper
 class BackupRestore(ConfigListScreen, Screen, SkinResolutionHelper):
     def __init__(self, session, csel=None):
         Screen.__init__(self, session)
@@ -147,7 +148,7 @@ class BackupRestore(ConfigListScreen, Screen, SkinResolutionHelper):
         return self.backup_config_path.getValue()
     
     def backup(self):
-        from Source.Config import createBackup
+        from .Source.Config import createBackup
         path = self.getBackupPath()
         result = createBackup(path)
         if result:
@@ -157,14 +158,14 @@ class BackupRestore(ConfigListScreen, Screen, SkinResolutionHelper):
             self.session.open(MessageBox, _("Error creating settings backup!"), type=MessageBox.TYPE_ERROR)
     
     def openFilebrowser(self):
-        from FileBrowser import FileBrowser
+        from .FileBrowser import FileBrowser
         path = self.getBackupPath()
         self.session.openWithCallback(self.restoreCallback, FileBrowser, path)
 
     def restoreCallback(self, answer):
         print(answer)
         if answer:
-            from Source.Config import loadBackup
+            from .Source.Config import loadBackup
             loadBackup(answer)
             self.session.open(MessageBox, _("Some settings changes require close/reopen the movielist to take effect."), type=MessageBox.TYPE_INFO)
             self.close()
@@ -352,7 +353,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
                 self["MenuIcon"].hide()            
         if config.AdvancedMovieSelection.debug.isChanged():
             config.AdvancedMovieSelection.debug.save()
-            from Source.Debug import Debug
+            from .Source.Debug import Debug
             if config.AdvancedMovieSelection.debug.value:
                 Debug.enable("/tmp/enigma2_stdout.log")
             else:
@@ -526,7 +527,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
             self.close()
 
     def keySave(self):
-        from Wastebasket import configChange
+        from .Wastebasket import configChange
         configChange()
         if not config.AdvancedMovieSelection.use_wastebasket.value:
             config.AdvancedMovieSelection.server_enabled.setValue(False)
@@ -544,7 +545,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
         if config.AdvancedMovieSelection.use_original_movieplayer_summary.isChanged():
             self.needsE2restartFlag = True
         if config.AdvancedMovieSelection.server_enabled.isChanged():
-            from Source.Remote.MessageServer import serverInstance
+            from .Source.Remote.MessageServer import serverInstance
             if config.AdvancedMovieSelection.server_enabled.value:
                 serverInstance.setPort(config.AdvancedMovieSelection.server_port.value)
                 serverInstance.start()
@@ -554,7 +555,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
                 serverInstance.shutdown()
                 serverInstance.active_clients = []
         
-        from Source.EpgListExtension import epgListExtension
+        from .Source.EpgListExtension import epgListExtension
         epgListExtension.setEnabled(config.AdvancedMovieSelection.epg_extension.value)
         
         if self.csel:
@@ -885,7 +886,7 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
         currentry = self["config"].getCurrent()
         self.lastvideodirs = config.movielist.videodirs.value
         if currentry[1].getValue() == "Sort":
-            from MovieList import MovieList
+            from .MovieList import MovieList
             sorts = [] 
             sorts.append((str(MovieList.SORT_ALPHANUMERIC), _("Alphabetic sort")))
             sorts.append((str(MovieList.SORT_DATE_ASC), _("Sort by date (ascending)")))
@@ -896,7 +897,7 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
             if len(sels) == 0:
                 for s in sorts:
                     sels.append(s[0])
-            from SelectionListScreen import SelectionListScreen
+            from .SelectionListScreen import SelectionListScreen
             self.session.openWithCallback(self.sortTypeSelected, SelectionListScreen, _("Select sort functions"), sorts, sels)
         elif currentry == self.homepath:
             self.entrydirname = self.homepath_dirname

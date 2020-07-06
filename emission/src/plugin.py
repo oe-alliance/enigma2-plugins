@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config, ConfigSubsection, ConfigText, \
 	ConfigNumber, ConfigYesNo, ConfigSelection
 
 from . import EmissionOverview
-from EmissionOverview import LIST_TYPE_ALL, SORT_TYPE_ADDED
+from .EmissionOverview import LIST_TYPE_ALL, SORT_TYPE_ADDED
 
 config.plugins.emission = ConfigSubsection()
 config.plugins.emission.hostname = ConfigText(default = "localhost", fixed_size = False)

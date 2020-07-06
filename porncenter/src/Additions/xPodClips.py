@@ -1,5 +1,6 @@
+from __future__ import absolute_import
 # xPodClips plugin by AliAbdul
-from Podcast import Podcast
+from .Podcast import Podcast
 
 ##################################################
 

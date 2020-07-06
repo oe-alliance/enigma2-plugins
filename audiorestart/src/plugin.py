@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSelection, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import NumberActionMap
@@ -9,7 +10,7 @@ from enigma import eTimer
 from Plugins.Plugin import PluginDescriptor
 from Screens import Standby
 from Screens.Screen import Screen
-from __init__ import _
+from .__init__ import _
 import NavigationInstance
 
 from six.moves import reload_module

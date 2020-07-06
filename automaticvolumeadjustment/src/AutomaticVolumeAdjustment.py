@@ -21,6 +21,7 @@
 #  distributed other than under the conditions noted above.
 #
 from __future__ import print_function
+from __future__ import absolute_import
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
@@ -29,7 +30,7 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from enigma import iPlayableService, iServiceInformation, eDVBVolumecontrol, eServiceCenter, eServiceReference
 from ServiceReference import ServiceReference
 from Components.VolumeControl import VolumeControl
-from AutomaticVolumeAdjustmentConfig import AutomaticVolumeAdjustmentConfig, getVolumeDict
+from .AutomaticVolumeAdjustmentConfig import AutomaticVolumeAdjustmentConfig, getVolumeDict
 
 class AutomaticVolumeAdjustment(Screen):
 	instance = None

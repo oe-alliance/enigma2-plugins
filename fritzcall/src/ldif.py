@@ -199,9 +199,9 @@ class LDIFWriter:
     # Start with line containing the distinguished name
     self._unparseAttrTypeandValue('dn', dn)
     # Dispatch to record type specific writers
-    if isinstance(record, types.DictType):
+    if isinstance(record, dict):
       self._unparseEntryRecord(record)
-    elif isinstance(record, types.ListType):
+    elif isinstance(record, list):
       self._unparseChangeRecord(record)
     else:
       raise ValueError("Argument record must be dictionary or list")
@@ -362,7 +362,7 @@ class LDIFParser:
           if dn!=None:
              raise ValueError('Two lines starting with dn: in one record.')
           if not is_dn(attr_value):
-             raise (ValueError, 'No valid string-representation of distinguished name %s.' % (repr(attr_value)))
+             raise ValueError
           dn = attr_value
         elif attr_type=='version' and dn is None:
           version = 1
@@ -373,7 +373,7 @@ class LDIFParser:
           if changetype!=None:
              raise ValueError('Two lines starting with changetype: in one record.')
           if attr_value not in valid_changetype_dict:
-             raise (ValueError, 'changetype value %s is invalid.' % (repr(attr_value)))
+             raise ValueError
           changetype = attr_value
         elif attr_value!=None and \
              attr_type.lower() not in self._ignored_attr_types:

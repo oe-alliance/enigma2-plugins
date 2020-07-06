@@ -6,9 +6,10 @@
 # Author: Raymond Wagner
 #-----------------------
 
+from __future__ import absolute_import
 from copy import copy
-from locales import get_locale
-from tmdb_auth import get_session
+from .locales import get_locale
+from .tmdb_auth import get_session
 
 class NameRepr( object ):
     """Mixin for __repr__ methods using 'name' attribute."""

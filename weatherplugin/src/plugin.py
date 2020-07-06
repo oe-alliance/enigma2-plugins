@@ -21,6 +21,7 @@
 #
 
 # for localized messages
+from __future__ import absolute_import
 from . import _
 
 from Plugins.Plugin import PluginDescriptor
@@ -31,8 +32,8 @@ from Components.Pixmap import Pixmap
 from enigma import ePicLoad, eRect, eSize, gPixmapPtr
 from Components.AVSwitch import AVSwitch
 from Components.config import ConfigSubsection, ConfigSubList, ConfigInteger, config
-from setup import initConfig, MSNWeatherPluginEntriesListConfigScreen
-from MSNWeather import MSNWeather
+from .setup import initConfig, MSNWeatherPluginEntriesListConfigScreen
+from .MSNWeather import MSNWeather
 import time
 
 try:

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # for localized messages
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
@@ -13,10 +14,10 @@ from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_ACTIVE_SKIN, fileExists
 from os import path as os_path
 
-from MountView import AutoMountView
-from MountEdit import AutoMountEdit
-from AutoMount import iAutoMount, AutoMount
-from UserManager import UserManager
+from .MountView import AutoMountView
+from .MountEdit import AutoMountEdit
+from .AutoMount import iAutoMount, AutoMount
+from .UserManager import UserManager
 
 class AutoMountManager(Screen):
 	skin = """

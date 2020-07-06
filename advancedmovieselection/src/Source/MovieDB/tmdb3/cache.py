@@ -7,14 +7,15 @@
 # Purpose: Caching framework to store TMDb API results
 #-----------------------
 
+from __future__ import absolute_import
 import time
 import os
 
-from tmdb_exceptions import *
-from cache_engine import Engines
+from .tmdb_exceptions import *
+from .cache_engine import Engines
 
-import cache_null
-import cache_file
+from . import cache_null
+from . import cache_file
 
 class Cache( object ):
     """

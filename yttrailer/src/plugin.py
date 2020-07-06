@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 #  YTTrailer
 #
 #  Coded by Dr.Best (c) 2011
@@ -19,7 +20,7 @@ from __future__ import print_function
 #  This applies to the source code as a whole as well as to parts of it, unless
 #  explicitely stated otherwise.
 
-from __init__ import decrypt_block, validate_cert, read_random, rootkey, l2key
+from .__init__ import decrypt_block, validate_cert, read_random, rootkey, l2key
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import ActionMap, HelpableActionMap

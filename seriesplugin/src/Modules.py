@@ -17,6 +17,7 @@
 #
 #######################################################################
 
+from __future__ import absolute_import
 import os, sys, traceback
 
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
@@ -26,7 +27,7 @@ import imp, inspect
 
 # Plugin internal
 from . import _
-from Logger import log
+from .Logger import log
 
 # Constants
 IDENTIFIER_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Identifiers/" )
@@ -35,7 +36,7 @@ IDENTIFIER_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/Seri
 class Modules(object):
 
 	def __init__(self):
-		from IdentifierBase import IdentifierBase2
+		from .IdentifierBase import IdentifierBase2
 		self.modules = self.loadModules(IDENTIFIER_PATH, IdentifierBase2)
 		log.debug("SP Modules:", self.modules)
 

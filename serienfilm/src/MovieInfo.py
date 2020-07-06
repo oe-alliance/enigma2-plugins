@@ -1,8 +1,9 @@
+from __future__ import absolute_import
 from Components.Converter.Converter import Converter
 from Components.Element import cached, ElementError
 from enigma import iServiceInformation, eServiceReference
 from ServiceReference import ServiceReference
-from MovieList import MovieList
+from .MovieList import MovieList
 
 class MovieInfo(Converter, object):
 	MOVIE_SHORT_DESCRIPTION = 0 # meta description when available.. when not .eit short description

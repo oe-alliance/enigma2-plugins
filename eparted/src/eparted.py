@@ -2,6 +2,7 @@
 # code by GeminiTeam
 
 from __future__ import print_function
+from __future__ import absolute_import
 from enigma import eTimer
 
 from Screens.Screen import Screen
@@ -25,7 +26,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigSelection, NoSave
 config.plugins.eparted = ConfigSubsection()
 
-from locale import _
+from .locale import _
 from os import system as os_system, path as os_path, listdir
 import six
 #from Plugins.Bp.geminimain.gTools import cleanexit

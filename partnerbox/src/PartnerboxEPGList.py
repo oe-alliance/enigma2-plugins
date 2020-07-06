@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 #
 #  Partnerbox E2
 #
@@ -25,8 +26,8 @@ from skin import parameters as skinparameter
 
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, SCOPE_ACTIVE_SKIN
 from Tools.LoadPixmap import LoadPixmap
-import PartnerboxFunctions as partnerboxfunctions
-from PartnerboxFunctions import getServiceRef
+from . import PartnerboxFunctions as partnerboxfunctions
+from .PartnerboxFunctions import getServiceRef
 
 baseEPGList__init__ = None
 basebuildSingleEntry = None

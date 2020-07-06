@@ -2,14 +2,15 @@
 
 # for localized messages
 from __future__ import print_function
+from __future__ import absolute_import
 from . import _x
 
 from Plugins.Plugin import PluginDescriptor
-from SerienFilm import SerienFilmVersion, SerienFilmCfg
+from .SerienFilm import SerienFilmVersion, SerienFilmCfg
 from traceback import print_exc
 from sys import stdout, exc_info
 from Screens.InfoBar import MoviePlayer
-from MovieSelection import MovieSelection
+from .MovieSelection import MovieSelection
 
 
 def pluginConfig(session, **kwargs):
@@ -94,7 +95,7 @@ def autostart(reason, **kwargs):
 					gLeavePlayerConfirmed = MoviePlayer.leavePlayerConfirmed
 				MoviePlayer.leavePlayerConfirmed = leavePlayerConfirmedMP
 
-				Session.doInstantiateDialog.im_class.doInstantiateDialog = doInstantiateDialogSF
+				Session.doInstantiateDialog.__self__.__class__.doInstantiateDialog = doInstantiateDialogSF
 				modname = Session.doInstantiateDialog.__module__
 				print("[SF-Plugin] mytest.Session.doInstantiateDialog modname = %s = %s" % (str(type(modname)), str(modname)))
 				

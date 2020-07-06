@@ -7,6 +7,7 @@
 # Support: www.dreambox-plugins.de
 #####################################################
 from __future__ import print_function
+from __future__ import absolute_import
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import config, configfile, getConfigListEntry, ConfigSubsection, ConfigYesNo, ConfigInteger, ConfigSelection, NoSave
@@ -978,7 +979,7 @@ class InfoBar(InfoBarOrg):
 	def ptsCreateEITFile(self, filename):
 		if self.pts_curevent_eventid is not None:
 			try:
-				import eitsave
+				from . import eitsave
 				serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).ref.toString()
 				eitsave.SaveEIT(serviceref, filename+".eit", self.pts_curevent_eventid, -1, -1)
 			except Exception as errormsg:

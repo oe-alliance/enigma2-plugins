@@ -6,6 +6,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os, gettext, hashlib
 
 from six.moves import reduce
+from functools import reduce
 
 
 __version__ = "1.9.0"

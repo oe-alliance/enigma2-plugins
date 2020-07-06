@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 #######################################################################
 #
 #    Push Service for Enigma-2
@@ -17,7 +18,7 @@
 #######################################################################
 
 
-from ModuleBase import ModuleBase
+from .ModuleBase import ModuleBase
 
 
 # Plugin base class

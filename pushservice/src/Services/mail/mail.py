@@ -45,7 +45,7 @@ class Message(object):
     def __init__(self, from_addr, to_addrs, subject, message, mime="text/plain", charset="utf-8"):
         self.subject = subject
         self.from_addr = from_addr
-        self.to_addrs = isinstance(to_addrs, types.StringType) and [to_addrs] or to_addrs
+        self.to_addrs = isinstance(to_addrs, bytes) and [to_addrs] or to_addrs
   
         self.msg = None
         self.__cache = None
@@ -60,7 +60,7 @@ class Message(object):
             content = fd.read()
             fd.close()
   
-        if not isinstance(content, types.StringType):
+        if not isinstance(content, bytes):
             raise TypeError("don't know how to handle content: %s" % type(content))
   
         part = MIMEBase("application", "octet-stream")
@@ -109,14 +109,14 @@ def sendmail(mailconf, message):
     mailconf["retries"] = 0 (optional, default 0)
     mailconf["timeout"] = 30 (optional, default 30)
     """
-    if not isinstance(mailconf, types.DictType):
+    if not isinstance(mailconf, dict):
         raise TypeError("mailconf must be a regular python dictionary")
     
     if not isinstance(message, Message):
         raise TypeError("message must be an instance of nuswit.mail.Message")
     
     host = mailconf.get("host")
-    if not isinstance(host, types.StringType):
+    if not isinstance(host, bytes):
         raise ValueError("mailconf requires a 'host' configuration")
     
     ssl = mailconf.get("ssl", True)
@@ -132,7 +132,7 @@ def sendmail(mailconf, message):
     retries = mailconf.get("retries", 0)
     timeout = mailconf.get("timeout", 30)
     
-    if not isinstance(port, types.IntType):
+    if not isinstance(port, int):
         raise ValueError("mailconf requires a proper 'port' configuration")
     
     deferred = Deferred()

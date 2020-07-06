@@ -1,9 +1,10 @@
 from __future__ import print_function
+from __future__ import absolute_import
 
 #pragma mark - Plugin
 
 def main(session, *args, **kwargs):
-	import EcasaGui
+	from . import EcasaGui
 	session.open(EcasaGui.EcasaOverview)
 
 def Plugins(**kwargs):
@@ -20,7 +21,7 @@ def Plugins(**kwargs):
 
 if __name__ == '__main__':
 	import sys
-	import PicasaApi
+	from . import PicasaApi
 	if len(sys.argv) > 2:
 		un = sys.argv[1]
 		pw = sys.argv[2]

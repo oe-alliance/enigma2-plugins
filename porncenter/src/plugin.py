@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # Porn Center by AliAbdul
 from __future__ import print_function
-from Additions.Plugin import cache, getPlugins
+from __future__ import absolute_import
+from .Additions.Plugin import cache, getPlugins
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry
 from Components.ConfigList import ConfigListScreen

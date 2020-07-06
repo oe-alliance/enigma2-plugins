@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 # for localized messages
+from __future__ import absolute_import
 from . import _
 
 # GUI (Screens)
@@ -19,7 +20,7 @@ from RecordTimer import AFTEREVENT
 
 # Needed to convert our timestamp back and forth
 from time import localtime
-from AutoTimerEditor import weekdays
+from .AutoTimerEditor import weekdays
 
 from enigma import eServiceReference
 

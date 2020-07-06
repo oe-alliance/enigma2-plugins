@@ -20,7 +20,8 @@
 #  distributed other than under the conditions noted above.
 #
 from __future__ import print_function
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.Label import Label
@@ -32,13 +33,13 @@ from threading import Thread
 from enigma import eServiceReference, ePicLoad
 from timer import eTimer
 from Components.MenuList import MenuList
-from Source.ServiceProvider import ServiceCenter
-from Source.EventInformationTable import createEIT
-from Source.MovieDB import tmdb, downloadCover
+from .Source.ServiceProvider import ServiceCenter
+from .Source.EventInformationTable import createEIT
+from .Source.MovieDB import tmdb, downloadCover
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.ScrollLabel import ScrollLabel
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUGIN
-from Source.Globals import SkinTools, printStackTrace
+from .Source.Globals import SkinTools, printStackTrace
 import os
 
 is_hidden = False

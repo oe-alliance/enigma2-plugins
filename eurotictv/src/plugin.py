@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -17,7 +18,7 @@ from Components.config import config, getConfigListEntry, ConfigSubsection, Conf
 from enigma import eListboxPythonMultiContent, eServiceReference, getDesktop, iPlayableService, eSize, ePicLoad, iServiceInformation
 from ServiceReference import ServiceReference
 from Tools.Directories import SCOPE_PLUGINS, resolveFilename
-from __init__ import _
+from .__init__ import _
 
 class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 	STATE_DISCONNECTED, STATE_CONNECTING, STATE_PLAYING, STATE_PAUSED, STATE_FAILURE = list(range(5))

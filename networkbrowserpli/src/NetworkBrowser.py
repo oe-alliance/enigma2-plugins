@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # for localized messages
 from __future__ import print_function
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 from enigma import eTimer, getDesktop
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -21,10 +22,10 @@ from time import time
 from stat import ST_MTIME
 
 import netscan
-from MountManager import AutoMountManager
-from AutoMount import iAutoMount
-from MountEdit import AutoMountEdit
-from UserDialog import UserDialog
+from .MountManager import AutoMountManager
+from .AutoMount import iAutoMount
+from .MountEdit import AutoMountEdit
+from .UserDialog import UserDialog
 
 from six.moves.cPickle import dump, load
 import six

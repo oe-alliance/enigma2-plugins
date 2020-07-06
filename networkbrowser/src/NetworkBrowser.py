@@ -61,7 +61,7 @@ def valid_cache(cache_file, cache_ttl):
 
 def load_cache(cache_file):
 	#Does a cPickle load
-	fd = open(cache_file,'rb')
+	fd = open(cache_file, 'rb')
 	cache_data = load(fd)
 	fd.close()
 	return cache_data

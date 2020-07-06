@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 #######################################################################
 #
 #    InfoBar Tuner State for Enigma-2
@@ -30,7 +31,7 @@ from Screens.Screen import Screen
 from Screens.Setup import SetupSummary
 
 # Plugin internal
-from InfoBarTunerState import InfoBarTunerState, addExtension, removeExtension, overwriteInfoBar, recoverInfoBar
+from .InfoBarTunerState import InfoBarTunerState, addExtension, removeExtension, overwriteInfoBar, recoverInfoBar
 
 
 import six
@@ -203,7 +204,7 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 		
 		# We need assign / "write" access import the plugin module
 		# global won't work across module scope
-		import plugin
+		from . import plugin
 		if config.infobartunerstate.enabled.value:
 			# Plugin should be enabled
 			#TODO use a separate init function similar to the close
@@ -260,7 +261,7 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 	
 	# Overwrite Screen close function
 	def close(self):
-		from plugin import ABOUT
+		from .plugin import ABOUT
 		self.session.openWithCallback(self.closeConfirm, MessageBox, ABOUT, MessageBox.TYPE_INFO)
 
 	def closeConfirm(self, dummy=None):

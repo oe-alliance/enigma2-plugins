@@ -18,7 +18,8 @@
 #  modify it (if you keep the license), but it may not be commercially 
 #  distributed other than under the conditions noted above.
 #
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 from Screens.Screen import Screen
 from Components.config import ConfigText, KEY_0, KEY_TIMEOUT, KEY_NUMBERS
 from Screens.NumericalTextInputHelpDialog import NumericalTextInputHelpDialog

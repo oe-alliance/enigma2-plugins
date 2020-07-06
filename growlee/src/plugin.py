@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 
 from Tools import Notifications
@@ -11,7 +12,7 @@ from Components.config import config, getConfigListEntry, ConfigSubsection, \
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 
-from GrowleeConnection import gotNotification, emergencyDisable, growleeConnection
+from .GrowleeConnection import gotNotification, emergencyDisable, growleeConnection
 
 from . import NOTIFICATIONID
 

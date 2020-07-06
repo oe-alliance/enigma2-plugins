@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 
@@ -14,7 +15,7 @@ from . import _
 
 # Error-print()
 
-from EPGBackupTools import debugOut, _getLogFilename, EPGBACKUP_NOTIFICATIONDOMAIN
+from .EPGBackupTools import debugOut, _getLogFilename, EPGBACKUP_NOTIFICATIONDOMAIN
 from traceback import format_exc
 
 # SH-Script

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 
 # for localized messages
 from . import _
@@ -7,7 +8,7 @@ from . import _
 # Plugins Config
 from xml.etree.cElementTree import parse as cet_parse
 from os import path as os_path
-from AutoTimerConfiguration import parseConfig, buildConfig
+from .AutoTimerConfiguration import parseConfig, buildConfig
 
 # Tasks
 import Components.Task
@@ -38,7 +39,7 @@ from enigma import eEPGCache, eServiceReference, eServiceCenter, iServiceInforma
 # import Queue
 
 # AutoTimer Component
-from AutoTimerComponent import preferredAutoTimerComponent
+from .AutoTimerComponent import preferredAutoTimerComponent
 
 from itertools import chain
 from collections import defaultdict

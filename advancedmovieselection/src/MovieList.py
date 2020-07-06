@@ -20,7 +20,8 @@
 #  distributed other than under the conditions noted above.
 #
 from __future__ import print_function
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 from Components.GUIComponent import GUIComponent
 from Tools.FuzzyDate import FuzzyTime
 from ServiceReference import ServiceReference
@@ -30,29 +31,29 @@ from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformat
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN
 import os
-from skin import parseColor
+from .skin import parseColor
 import NavigationInstance
 from timer import TimerEntry
 from stat import ST_MTIME as stat_ST_MTIME
 from time import time as time_time
 from math import fabs as math_fabs
 from datetime import datetime
-from Source.Globals import printStackTrace
-from Source.ServiceProvider import Info, ServiceCenter, getServiceInfoValue
-from Source.ServiceProvider import detectDVDStructure, eServiceReferenceDvd
-from Source.ServiceProvider import detectBludiscStructure, eServiceReferenceBludisc
-from Source.ServiceProvider import eServiceReferenceVDir, eServiceReferenceBackDir, eServiceReferenceListAll, eServiceReferenceHotplug, eServiceReferenceMarker
-from Source.ServiceUtils import serviceUtil, realSize, diskUsage
-from Source.CueSheetSupport import hasLastPosition, CueSheet
-from Source.AutoNetwork import autoNetwork 
-from Source.Trashcan import TRASH_NAME
-from Source.EventInformationTable import EventInformationTable, appendShortDescriptionToMeta
-from Source.AccessRestriction import accessRestriction
-from Source.MovieScanner import movieScanner
-from Source.Hotplug import hotplug
-from Source.ServiceDescriptor import MovieInfo
-from Source.MovieConfig import MovieConfig
-from Source.PicLoader import PicLoader
+from .Source.Globals import printStackTrace
+from .Source.ServiceProvider import Info, ServiceCenter, getServiceInfoValue
+from .Source.ServiceProvider import detectDVDStructure, eServiceReferenceDvd
+from .Source.ServiceProvider import detectBludiscStructure, eServiceReferenceBludisc
+from .Source.ServiceProvider import eServiceReferenceVDir, eServiceReferenceBackDir, eServiceReferenceListAll, eServiceReferenceHotplug, eServiceReferenceMarker
+from .Source.ServiceUtils import serviceUtil, realSize, diskUsage
+from .Source.CueSheetSupport import hasLastPosition, CueSheet
+from .Source.AutoNetwork import autoNetwork 
+from .Source.Trashcan import TRASH_NAME
+from .Source.EventInformationTable import EventInformationTable, appendShortDescriptionToMeta
+from .Source.AccessRestriction import accessRestriction
+from .Source.MovieScanner import movieScanner
+from .Source.Hotplug import hotplug
+from .Source.ServiceDescriptor import MovieInfo
+from .Source.MovieConfig import MovieConfig
+from .Source.PicLoader import PicLoader
 
 from six.moves import reload_module
 

@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 #######################################################################
 #
 #    InfoBar Tuner State for Enigma-2
@@ -30,8 +31,8 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
 
 # Plugin internal
-from IBTSConfiguration import InfoBarTunerStateConfiguration
-from InfoBarTunerState import InfoBarTunerState, TunerStateInfo
+from .IBTSConfiguration import InfoBarTunerStateConfiguration
+from .InfoBarTunerState import InfoBarTunerState, TunerStateInfo
 
 
 # Contants

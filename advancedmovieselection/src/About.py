@@ -19,17 +19,18 @@
 #  modify it (if you keep the license), but it may not be commercially 
 #  distributed other than under the conditions noted above.
 #
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 from Screens.Screen import Screen
 from Components.Sources.StaticText import StaticText
 from Components.Pixmap import Pixmap
 from Components.ActionMap import ActionMap
-from Source.AboutParser import AboutParser
+from .Source.AboutParser import AboutParser
 from Components.GUIComponent import GUIComponent
 from enigma import RT_HALIGN_LEFT, gFont, eListbox, eListboxPythonMultiContent
 from Components.ScrollLabel import ScrollLabel
-from Source.Globals import SkinTools
-import Version
+from .Source.Globals import SkinTools
+from . import Version
 
 class VersionList(GUIComponent):
     def __init__(self):
