@@ -22,7 +22,11 @@ from __future__ import absolute_import
 # pylint: disable=C0111,C0103,C0301,W0603,W0403,C0302,W0312
 
 import re, time, os, traceback, json
-from itertools import cycle, izip
+try:
+    from itertools import izip as zip
+except ImportError: # will be 3.x series
+    pass
+from itertools import cycle
 import base64
 from logging import NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL
 import logging
@@ -78,9 +82,9 @@ from six.moves import range
 
 # decode = encode = lambda x : ''.join(chr(ord(c)^ord(k)) for c,k in izip(x, cycle('secret key')))
 def encode(x):
-	return base64.encodestring(''.join(chr(ord(c) ^ ord(k)) for c, k in izip(x, cycle('secret key')))).strip()
+	return base64.encodestring(''.join(chr(ord(c) ^ ord(k)) for c, k in list(zip(x, cycle('secret key'))))).strip()
 def decode(x):
-	return ''.join(chr(ord(c) ^ ord(k)) for c, k in izip(base64.decodestring(x), cycle('secret key')))
+	return ''.join(chr(ord(c) ^ ord(k)) for c, k in list(zip(base64.decodestring(x), cycle('secret key'))))
 
 DESKTOP_WIDTH = getDesktop(0).size().width()
 DESKTOP_HEIGHT = getDesktop(0).size().height()
