@@ -6,6 +6,7 @@ from twisted.web.client import getPage
 from .RSSFeed import UniversalFeed
 from twisted.internet.defer import Deferred
 from xml.etree.cElementTree import fromstring as cet_fromstring
+import six
 
 class GoogleReader:
 	def __init__(self, username = None, password = None):
@@ -20,7 +21,7 @@ class GoogleReader:
 			'Authorization': 'GoogleLogin auth='+self.auth,
 		}
 
-		return getPage(url, headers=headers)
+		return getPage(six.ensure_binary(url), headers=headers)
 
 	def login(self):
 		print("[GoogleReader] login")
@@ -37,7 +38,7 @@ class GoogleReader:
 		}
 
 		defer = Deferred()
-		getPage('https://www.google.com/accounts/ClientLogin', method = 'POST', headers = headers, postdata = urlencode(data)).addCallback(self.loginFinished, defer).addErrback(self.loginFailed, defer)
+		getPage(b'https://www.google.com/accounts/ClientLogin', method = 'POST', headers = headers, postdata = urlencode(data)).addCallback(self.loginFinished, defer).addErrback(self.loginFailed, defer)
 		return defer
 
 	def loginFinished(self, res = None, defer = None):

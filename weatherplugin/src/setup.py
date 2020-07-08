@@ -37,6 +37,7 @@ from Components.config import ConfigSubsection, ConfigText, ConfigSelection, \
 from xml.etree.cElementTree import fromstring as cet_fromstring
 from twisted.web.client import getPage
 from six.moves.urllib.parse import quote as urllib_quote
+import six
 
 def initWeatherPluginEntryConfig():
 	s = ConfigSubsection()
@@ -211,7 +212,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 			elif language == "no-NO": # hack
 				language = "nn-NO"
 			url = "http://weather.service.msn.com/find.aspx?src=windows&outputview=search&weasearchstr=%s&culture=%s" % (urllib_quote(self.current.city.value), language)
-			getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
+			getPage(six.ensure_binary(url)).addCallback(self.xmlCallback).addErrback(self.error)
 		else:
 			self.session.open(MessageBox, _("You need to enter a valid city name before you can search for the location code."), MessageBox.TYPE_ERROR)
 

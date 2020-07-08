@@ -5,7 +5,6 @@ from twisted.internet.defer import Deferred
 from twisted.internet import reactor
 
 from six.moves.urllib.parse import urlencode
-
 from .GrowleeConnection import emergencyDisable
 from . import NOTIFICATIONID
 
@@ -27,7 +26,7 @@ class ProwlAPI:
 			'priority': priority,
 		}
 
-		getPage('https://prowl.weks.net/publicapi/add/', method = 'POST', headers = headers, postdata = urlencode(data)).addErrback(emergencyDisable)
+		getPage(b'https://prowl.weks.net/publicapi/add/', method = 'POST', headers = headers, postdata = urlencode(data)).addErrback(emergencyDisable)
 
 	def stop(self):
 		defer = Deferred()

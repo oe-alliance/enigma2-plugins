@@ -39,6 +39,7 @@ import logging, re, md5
 import xml.etree.ElementTree as ET
 from Components.config import config
 from twisted.web.client import getPage
+import six
 
 USERAGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
 
@@ -167,7 +168,7 @@ class FritzAction(object):
 			url = 'http://%s:%s%s' % (self.address, self.port, self.control_url)
 
 		# self.debug("url: " + url + "\n" + data)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = headers,
@@ -209,7 +210,7 @@ class FritzAction(object):
 			url = 'http://%s:%s%s' % (self.address, self.port, self.control_url)
 
 		# self.debug("url: " + url + "\n" + data)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = headers,
@@ -323,7 +324,7 @@ class FritzXmlParser(object):
 			else:
 				source = 'http://{0}:{1}/{2}'.format(address, port, filename)
 			self.debug("source: %s", source)
-			getPage(source,
+			getPage(six.ensure_binary(source),
  				method = "GET",).addCallback(self._okInit).addErrback(self._errorInit)
 
 	def _okInit(self, source):
@@ -342,7 +343,7 @@ class FritzXmlParser(object):
 		config.plugins.FritzCall.useHttps.save()
 		source = 'http://{0}:{1}/{2}'.format(address, port, filename)
 		self.debug("source: %s", source)
-		getPage(source,
+		getPage(six.ensure_binary(source),
 				method = "GET",).addCallback(self._okInit).addErrback(self._errorInit)
 		
 

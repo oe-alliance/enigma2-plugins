@@ -5,7 +5,7 @@
 
 from twisted.web.client import getPage
 from xml.etree.cElementTree import fromstring
-
+import six
 class AtomFeed:
     """ Simple XML parser that extracts pages from a atom feed """
     ns = "{http://www.w3.org/2005/Atom}"
@@ -14,10 +14,11 @@ class AtomFeed:
 
         Parsed pages are sent back to callback by parse()
         """
-        getPage(url).addCallback(self.parse, callback).addErrback(errorCallback)
+        getPage(six.ensure_binary(url)).addCallback(self.parse, callback).addErrback(errorCallback)
 
     def parse(self, data, callback):
         """ Parse atom feed data into pages list and run callback """
+        data = six.ensure_str(data)
         xml = fromstring(data)
         pages = []
         for entry in xml.findall("{0}entry".format(self.ns)):

@@ -8,7 +8,7 @@ from Tools.Import import my_import
 from Tools.LoadPixmap import LoadPixmap
 from twisted.web.client import downloadPage, getPage
 from six.moves.urllib.request import Request, urlopen
-
+import six
 ##################################################
 
 class Cache:
@@ -60,7 +60,7 @@ class Movie:
 			else:
 				self.thumbnailFile = None
 			if self.thumbnailFile:
-				downloadPage(thumb, self.thumbnailFile).addCallback(self.decodeThumbnail).addErrback(self.error)
+				downloadPage(six.ensure_binary(thumb), self.thumbnailFile).addCallback(self.decodeThumbnail).addErrback(self.error)
 
 	def error(self, error=None):
 		if error: print(error)
@@ -101,7 +101,7 @@ class Plugin:
 		pass
 
 	def getPage(self, url):
-		getPage(url).addCallback(self.getPageCallback).addErrback(self.getPageError)
+		getPage(six.ensure_binary(url)).addCallback(self.getPageCallback).addErrback(self.getPageError)
 
 	def getPageCallback(self, page):
 		pass

@@ -43,6 +43,7 @@ from twisted.web.client import getPage
 from xml.etree.cElementTree import fromstring as cElementTree_fromstring
 from base64 import encodestring
 from six.moves.urllib.parse import quote
+import six
 
 #------------------------------------------------------------------------------------------
 
@@ -65,7 +66,7 @@ def localGetPage(url):
 	else:
 		headers = {}
 
-	return getPage(url, headers = headers)
+	return getPage(six.ensure_binary(url), headers = headers)
 
 class RemoteService:
 	def __init__(self, sref, sname):

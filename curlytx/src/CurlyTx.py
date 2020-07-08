@@ -20,6 +20,7 @@ from enigma import gFont
 
 from . import config
 from Components.config import config
+import six
 
 class CurlyTx(Screen, HelpableScreen):
     skin = """
@@ -184,13 +185,14 @@ class CurlyTx(Screen, HelpableScreen):
         self.setTextFont()
         self["text"].setText(_("Loading ...") + "\n" + url);
 
-        self.getPageWebClient(url).addCallback(self.urlLoaded).addErrback(self.urlFailed, url)
+        self.getPageWebClient(six.ensure_binary(url)).addCallback(self.urlLoaded).addErrback(self.urlFailed, url)
 
     def setTextFont(self):
         if self["text"].long_text is not None:
             self["text"].long_text.setFont(gFont("Console", self.currentFontSize))
 
     def urlLoaded(self, html):
+        html = six.ensure_str(html)
         self["text"].setText(html)
 
     def urlFailed(self, error, url):

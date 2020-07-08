@@ -40,7 +40,7 @@ import os
 import re
 
 from six.moves.http_client import HTTPConnection, HTTPException
-
+import six
 
 # http://code.google.com/apis/youtube/reference.html#youtube_data_api_tag_media:group
 
@@ -224,7 +224,7 @@ class YouTubeEntry():
 			thumbnailFile = "/tmp/" + self.getYouTubeId() + "_" + str(index) + ".jpg"
 			self.thumbnail[str(index)] = None
 			cookie = {"entry" : self, "file" : thumbnailFile, "callback" : callback, "index" : index}
-			downloadPage(thumbnailUrl, thumbnailFile).addCallback(fetchFinished, cookie).addErrback(fetchFailed, cookie)
+			downloadPage(six.ensure_binary(thumbnailUrl), thumbnailFile).addCallback(fetchFinished, cookie).addErrback(fetchFailed, cookie)
 
 
 	def loadThumbnails(self, callback):

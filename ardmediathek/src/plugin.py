@@ -22,7 +22,7 @@ from Tools.LoadPixmap import LoadPixmap
 from twisted.web.client import downloadPage, getPage
 import re
 from six.moves.urllib.request import Request, urlopen
-
+import six
 ###################################################
 
 MAIN_PAGE = "http://www.ardmediathek.de"
@@ -319,7 +319,7 @@ class ARDMediathek(Screen):
 		if not url:
 			self.mainpage = True
 			url = MAIN_PAGE + "/ard/servlet/"
-		getPage(url).addCallback(self.gotPage).addErrback(self.error)
+		getPage(six.ensure_binary(url)).addCallback(self.gotPage).addErrback(self.error)
 
 	def error(self, err=""):
 		print("[ARD Mediathek] Error:", err)
@@ -379,7 +379,7 @@ class ARDMediathek(Screen):
 			else:
 				self.thumb = None
 			if self.thumb:
-				downloadPage(thumbUrl, self.thumb).addCallback(self.downloadThumbnailCallback).addErrback(self.downloadThumbnailError)
+				downloadPage(six.ensure_binary(thumbUrl), self.thumb).addCallback(self.downloadThumbnailCallback).addErrback(self.downloadThumbnailError)
 			else:
 				self.buildEntry(None)
 		else:

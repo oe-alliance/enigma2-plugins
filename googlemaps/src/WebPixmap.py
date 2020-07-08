@@ -9,7 +9,7 @@ from Components.AVSwitch import AVSwitch
 from Components.config import config
 
 from six.moves.urllib.parse import quote_plus
-
+import six
 
 def getAspect():
 	val = AVSwitch().getAspectRatioSetting()
@@ -57,7 +57,7 @@ class WebPixmap(Pixmap):
 				"Connection":"keep-alive"
 			}
 			agt = "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.0.2) Gecko/2008091620 Firefox/3.0.2"
-			downloadPage(url, self.tmpfile, headers=head, agent=agt).addCallback(self.onLoadFinished).addErrback(self.onLoadFailed)
+			downloadPage(six.ensure_binary(url), self.tmpfile, headers=head, agent=agt).addCallback(self.onLoadFinished).addErrback(self.onLoadFailed)
 		elif self.default:
 			self.picload.startDecode(self.default)
 

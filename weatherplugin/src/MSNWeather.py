@@ -31,7 +31,7 @@ from os import path as os_path, mkdir as os_mkdir, remove as os_remove, listdir 
 from Components.config import config
 from Tools.Directories import resolveFilename, SCOPE_SKIN
 from six.moves.urllib.parse import quote as urllib_quote
-
+import six
 
 class WeatherIconItem:
 	def __init__(self, url = "", filename = "", index = -1, error = False):
@@ -126,7 +126,7 @@ class MSNWeather:
 		self.callbackShowIcon  = callbackShowIcon
 		self.callbackAllIconsDownloaded = callbackAllIconsDownloaded
 		url = "http://weather.service.msn.com/data.aspx?src=windows&weadegreetype=%s&culture=%s&wealocations=%s" % (degreetype, language, urllib_quote(locationcode))
-		getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
+		getPage(six.ensure_binary(url)).addCallback(self.xmlCallback).addErrback(self.error)
 		
 	def getDefaultWeatherData(self, callback = None, callbackAllIconsDownloaded = None):
 		self.initialize()
@@ -230,4 +230,4 @@ class MSNWeather:
 			self.callback(self.OK, None)
 		
 def download(item):
-	return downloadPage(item.url, open(item.filename, 'wb'))
+	return downloadPage(six.ensure_binary(item.url), open(item.filename, 'wb'))

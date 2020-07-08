@@ -79,6 +79,7 @@ from Screens.EpgSelection import EPGSelection
 from Screens.EventView import  EventViewEPGSelect
 from enigma import ePoint, eEPGCache
 from Screens.InfoBarGenerics import NumberZap
+import six
 try:
 	from Plugins.SystemPlugins.PiPServiceRelation.plugin import getRelationDict, CONFIG_FILE
 	plugin_PiPServiceRelation_installed = True
@@ -1293,7 +1294,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			else:
 				urls.pop(0)
 				print("[MerlinMusicPlayer] downloading cover from %s " % url)
-				downloadPage(url, filename).addCallback(boundFunction(self.coverDownloadFinished, filename)).addErrback(boundFunction(self.coverDownloadFailed, urls, album, title))
+				downloadPage(six.ensure_binary(url), filename).addCallback(boundFunction(self.coverDownloadFinished, filename)).addErrback(boundFunction(self.coverDownloadFailed, urls, album, title))
 
 	def coverDownloadFailed(self, urls, album, title, result):
 		print("[MerlinMusicPlayer] cover download failed: %s " % result)

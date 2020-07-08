@@ -12,7 +12,7 @@ import types
 from twisted.internet import reactor
 from twisted.internet.defer import Deferred
 from twisted.web.client import downloadPage
-
+import six
 our_print = lambda *args, **kwargs: print("[FlickrApi]", *args, **kwargs)
 
 class FakeExif:
@@ -166,7 +166,7 @@ class FlickrApi(PictureApi):
 		if os.path.exists(fullname):
 			reactor.callLater(0, d.callback, (fullname, photo))
 		else:
-			downloadPage(url, fullname).addCallbacks(
+			downloadPage(six.ensure_binary(url), fullname).addCallbacks(
 				lambda value:d.callback((fullname, photo)),
 				lambda error:d.errback((error, photo)))
 		return d

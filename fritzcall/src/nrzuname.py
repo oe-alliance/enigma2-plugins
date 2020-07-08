@@ -253,9 +253,9 @@ class ReverseLookupAndNotifier(object):
 			self.notifyAndReset()
 			return
 		info("Url to query: " + url)
-		url = url.encode("UTF-8", "replace")
+		url = url.encode("UTF-8", "replace") # FIXME PY3
 		self.currentWebsite = website
-		getPage(url, agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5").addCallback(self._gotPage).addErrback(self._gotError)
+		getPage(six.ensure_binary(url), agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5").addCallback(self._gotPage).addErrback(self._gotError)
 
 	def _gotPage(self, page):
 		def cleanName(text):

@@ -923,7 +923,7 @@ class RSSearch(Screen):
 				self.session.open(MessageBox, (_("Error while adding %s to the download-list!") % url), MessageBox.TYPE_ERROR)
 
 	def search(self):
-		getPage("http://rapidshare-search-engine.com/index-s_submit=Search&sformval=1&s_type=0&what=1&s=%s&start=%d.html"%(self.searchFor, self.curPage)).addCallback(self.searchCallback).addErrback(self.searchError)
+		getPage(six.ensure_binary("http://rapidshare-search-engine.com/index-s_submit=Search&sformval=1&s_type=0&what=1&s=%s&start=%d.html"%(self.searchFor, self.curPage))).addCallback(self.searchCallback).addErrback(self.searchError)
 
 	def searchCallback(self, html=""):
 		list = []

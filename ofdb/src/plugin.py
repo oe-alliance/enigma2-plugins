@@ -239,7 +239,7 @@ class OFDB(Screen):
 			localfile = "/tmp/ofdbquery2.html"
 			fetchurl = "http://www.ofdb.de/film/" + link
 			print("[OFDb] downloading query " + fetchurl + " to " + localfile)
-			downloadPage(fetchurl, localfile).addCallback(self.OFDBquery2).addErrback(self.fetchFailed)
+			downloadPage(six.ensure_binary(fetchurl), localfile).addCallback(self.OFDBquery2).addErrback(self.fetchFailed)
 			self["menu"].hide()
 			self.resetLabels()
 			self.Page = 1
@@ -314,7 +314,7 @@ class OFDB(Screen):
 			localfile = "/tmp/ofdbquery.html"
 			fetchurl = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=DTitel&SText=" + self.eventName
 			print("[OFDb] Downloading Query " + fetchurl + " to " + localfile)
-			downloadPage(fetchurl, localfile).addCallback(self.OFDBquery).addErrback(self.fetchFailed)
+			downloadPage(six.ensure_binary(fetchurl), localfile).addCallback(self.OFDBquery).addErrback(self.fetchFailed)
 		else:
 			self["statusbar"].setText(_("Could't get Eventname"))
 
@@ -447,7 +447,7 @@ class OFDB(Screen):
 				self["statusbar"].setText(_("Downloading Movie Poster: %s...") % (posterurl))
 				localfile = "/tmp/poster.jpg"
 				print("[OFDb] downloading poster " + posterurl + " to " + localfile)
-				downloadPage(posterurl, localfile).addCallback(self.OFDBPoster).addErrback(self.fetchFailed)
+				downloadPage(six.ensure_binary(posterurl), localfile).addCallback(self.OFDBPoster).addErrback(self.fetchFailed)
 			else:
 				print("no jpg poster!")
 				self.OFDBPoster(noPoster = True)

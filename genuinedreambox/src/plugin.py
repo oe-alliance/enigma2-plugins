@@ -43,6 +43,7 @@ import base64
 import os
 
 from twisted.web.client import getPage
+import six
 
 TPMD_DT_RESERVED = 0x00
 TPMD_DT_PROTOCOL_VERSION = 0x01
@@ -104,7 +105,7 @@ class genuineDreambox(Screen):
 			if (self.stepFirst(TPMD_CMD_GET_DATA, [TPMD_DT_PROTOCOL_VERSION, TPMD_DT_TPM_VERSION, TPMD_DT_SERIAL])):
 				try:  
 					url = ("https://www.dream-multimedia-tv.de/verify/challenge?serial=%s&version=%s" % (self.serial, self.tpmdVersion))
-					getPage(url).addCallback(self._gotPageLoadRandom).addErrback(self.errorLoad)
+					getPage(six.ensure_binary(url)).addCallback(self._gotPageLoadRandom).addErrback(self.errorLoad)
 				except:
 					self["resulttext"].setText(_("Can't connect to server. Please check your network!"))
 
@@ -117,7 +118,7 @@ class genuineDreambox(Screen):
 			url = self.buildUrlUpdate()
 			#url = ("https://www.dream-multimedia-tv.de/verify/challenge?serial=%s&version=%s" % (self.serial,self.tpmdVersion))
 			self["resulttext"].setText(_("Updating, please wait..."))
-			getPage(url).addCallback(self._gotPageLoadUpdate).addErrback(self.errorLoad)
+			getPage(six.ensure_binary(url)).addCallback(self._gotPageLoadUpdate).addErrback(self.errorLoad)
 		else:
 			print("not updating")
 
@@ -143,7 +144,7 @@ class genuineDreambox(Screen):
 		if (self.stepSecond(TPMD_CMD_GET_DATA, [TPMD_DT_PROTOCOL_VERSION, TPMD_DT_TPM_VERSION, TPMD_DT_SERIAL, TPMD_DT_LEVEL2_CERT,
 				TPMD_DT_LEVEL3_CERT, TPMD_DT_FAB_CA_CERT, TPMD_DT_DATABLOCK_SIGNED] )):
 			url = self.buildUrl()
-			getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)
+			getPage(six.ensure_binary(url)).addCallback(self._gotPageLoad).addErrback(self.errorLoad)
 			
 	def _gotPageLoadUpdate(self, data):
 		updatedata = base64.decodestring(data)

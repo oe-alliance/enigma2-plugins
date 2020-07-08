@@ -24,7 +24,7 @@ import os
 import commands
 
 from six.moves.urllib.parse import quote
-
+import six
 
 config.plugins.mc_wi = ConfigSubsection()
 config.plugins.mc_wi.entrycount =  ConfigInteger(0)
@@ -52,7 +52,7 @@ class WeatherIconItem:
 		self.index = index
 		self.error = error
 def download(item):
-	return downloadPage(item.url, open(item.filename, 'wb'))
+	return downloadPage(six.ensure_binary(item.url), open(item.filename, 'wb'))
 class MC_WeatherInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -106,7 +106,7 @@ class MC_WeatherInfo(Screen):
 		if self.weatherPluginEntry is not None:
 			self["statustext"].text = _("Loading information...")
 			url = "http://weather.service.msn.com/data.aspx?weadegreetype=%s&culture=%s&wealocations=%s" % (self.weatherPluginEntry.degreetype.value, self.language, self.weatherPluginEntry.weatherlocationcode.value)
-			getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
+			getPage(six.ensure_binary(url)).addCallback(self.xmlCallback).addErrback(self.error)
 		else:
 			self["statustext"].text = _("No locations defined...\nPress 'Blue' to do that.")
 	def mvidown(self, stadt):
@@ -115,12 +115,12 @@ class MC_WeatherInfo(Screen):
 		stadd = stadt
 		if fileExists(downname):
 			os.system("rm -rf "+ downname)
-		downloadPage(downlink, downname).addCallback(self.jpgdown, stadd).addErrback(self.error)
+		downloadPage(six.ensure_binary(downlink), downname).addCallback(self.jpgdown, stadd).addErrback(self.error)
 	def jpgdown(self, value, stadd):
 		downlink = commands.getoutput("cat /tmp/.stadtindex | grep \"background-image:url('http://mytown.de/\" | cut -d \"'\" -f2")
 		stadt = stadd
 		downname = "/tmp/"+ stadt +".jpg"
-		downloadPage(downlink, downname).addCallback(self.makemvi, stadt).addErrback(self.error)
+		downloadPage(six.ensure_binary(downlink), downname).addCallback(self.makemvi, stadt).addErrback(self.error)
 	def makemvi(self, value, stadt):
 		mviname = "/tmp/"+ stadt +".m1v"
 		if fileExists(mviname) is False:
@@ -431,7 +431,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 			if language == "en-EN": # hack
 				language = "en-US"
 			url = "http://weather.service.msn.com/find.aspx?outputview=search&weasearchstr=%s&culture=%s" % (quote(self.current.city.value), language)
-			getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
+			getPage(six.ensure_binary(url)).addCallback(self.xmlCallback).addErrback(self.error)
 		else:
 			self.session.open(MessageBox, _("You need to enter a valid city name before you can search for the location code."), MessageBox.TYPE_ERROR)
 	def keySave(self):

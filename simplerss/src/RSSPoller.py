@@ -14,6 +14,7 @@ from .RSSFeed import BaseFeed, UniversalFeed
 
 from twisted.web.client import getPage
 from xml.etree.cElementTree import fromstring as cElementTree_fromstring
+import six
 
 from .GoogleReader import GoogleReader
 
@@ -160,7 +161,7 @@ class RSSPoller:
 		self.next_feed()
 
 	def singlePoll(self, id, callback = False, errorback = None):
-		getPage(self.feeds[id].uri).addCallback(self._gotPage, id, callback, errorback).addErrback(errorback)
+		getPage(six.ensure_binary(self.feeds[id].uri)).addCallback(self._gotPage, id, callback, errorback).addErrback(errorback)
 
 	def poll(self):
 		# Reloading, reschedule
@@ -244,7 +245,7 @@ class RSSPoller:
 			feed = self.feeds[self.current_feed]
 
 			if feed.autoupdate:
-				getPage(feed.uri).addCallback(self._gotPage).addErrback(self.error)
+				getPage(six.ensure_binary(feed.uri)).addCallback(self._gotPage).addErrback(self.error)
 			# Go to next feed
 			else:
 				print("[SimpleRSS] passing feed")

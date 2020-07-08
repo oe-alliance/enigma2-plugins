@@ -12,7 +12,7 @@ from enigma import getDesktop, eListbox, eListboxPythonMultiContent, gFont, RT_H
 from Tools.LoadPixmap import LoadPixmap
 from Plugins.Plugin import PluginDescriptor
 import os
-
+import six
 #######################
 
 class Satloader(Screen):
@@ -85,7 +85,7 @@ class Satloader(Screen):
 	def btnOK(self):
 		self["info"].setText("%s" %(_("Please wait...")))
 		saturl = self["list"].l.getCurrentSelection()[0][1]+"/satellites.xml"
-		downloadPage(saturl, "/etc/tuxbox/satellites.xml").addCallback(self.downloadListSATCallback).addErrback(self.downloadListError)
+		downloadPage(six.ensure_binary(saturl), "/etc/tuxbox/satellites.xml").addCallback(self.downloadListSATCallback).addErrback(self.downloadListError)
 
 	def btnYellow(self):
 		self.session.open(SatloaderBouquet)
@@ -103,6 +103,9 @@ class Satloader(Screen):
 		self.session.open(MessageBox, "%s" %(_("Downloading satellites failed!")), MessageBox.TYPE_ERROR)
 
 	def downloadListSATCallback(self, ret):
+		if six.PY3:
+			u = open("/etc/tuxbox/satellites.xml","rb").read().encode("utf-8")
+			open("/etc/tuxbox/satellites.xml","w").write(u)
 		restart = self.session.openWithCallback(self.restart, MessageBox, "%s\n%s\n\n%s\n%s" %(_("satellites.xml is updated"), str(self["list"].l.getCurrentSelection()[0][0]), _("GUI needs a restart to apply changes."), _("Do you want to restart the GUI now?")), MessageBox.TYPE_YESNO)
 		restart.setTitle("%s" %(_("Restart GUI now?")))
 
@@ -178,7 +181,7 @@ class SatloaderBouquet(Screen):
 
 	def onLayoutFinished(self):
 		self["info"].setText("%s" %(_("Please wait...")))
-		downloadPage("http://satellites.satloader.net/bouquet.tar.gz", "/tmp/bouquet.tar.gz").addCallback(self.downloadListBouquetCallback).addErrback(self.downloadListError)
+		downloadPage(b"http://satellites.satloader.net/bouquet.tar.gz", "/tmp/bouquet.tar.gz").addCallback(self.downloadListBouquetCallback).addErrback(self.downloadListError)
 
 	def btnRed(self):
 		print("\n[SatloaderBouquet] cancel\n")
@@ -300,7 +303,7 @@ class SatloaderMultiSat(Screen):
 
 	def onLayoutFinished(self):
 		self["info"].setText("%s %s" %(_("Download:"), self.satname))
-		downloadPage(self.saturl, "/tmp/multisat.tar.gz").addCallback(self.downloadListMultiSatCallback).addErrback(self.downloadListError)
+		downloadPage(six.ensure_binary(self.saturl), "/tmp/multisat.tar.gz").addCallback(self.downloadListMultiSatCallback).addErrback(self.downloadListError)
 
 	def btnRed(self):
 		print("\n[SatloaderMultiSat] cancel\n")

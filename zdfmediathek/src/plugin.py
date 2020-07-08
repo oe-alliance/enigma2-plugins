@@ -549,7 +549,7 @@ class RightMenuList(List):
 					self.downloadThumbnailCallback(None, thumbFile, thumbID)
 				else:
 					if self.png_cache.get(thumbID, None) is None:
-						downloadPage(thumbUrl, thumbFile).addCallback(self.downloadThumbnailCallback, thumbFile, thumbID).addErrback(self.downloadThumbnailError, thumbID)
+						downloadPage(six.ensure_binary(thumbUrl), thumbFile).addCallback(self.downloadThumbnailCallback, thumbFile, thumbID).addErrback(self.downloadThumbnailError, thumbID)
 					else:
 						self.updateEntry(thumbID, thumbFile)
 
@@ -764,7 +764,7 @@ class ZDFMediathek(Screen, HelpableScreen):
 		if not page:
 			page = "/ZDFmediathek/hauptnavigation/startseite?flash=off"
 		url = "%s%s"%(MAIN_PAGE, page)
-		getPage(url).addCallback(self.gotPage).addErrback(self.error)
+		getPage(six.ensure_binary(url)).addCallback(self.gotPage).addErrback(self.error)
 
 	def error(self, err=""):
 		print("[ZDF Mediathek] Error:", err)

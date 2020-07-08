@@ -201,7 +201,7 @@ class ReverseLookupAndNotify:
 		debug("[ReverseLookupAndNotify] Url to query: " + url)
 		url = url.encode("UTF-8", "replace")
 		self.currentWebsite = website
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5"
 			).addCallback(self._gotPage).addErrback(self._gotError)
 

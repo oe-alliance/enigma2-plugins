@@ -19,7 +19,7 @@ from .LastFM import LastFM
 from twisted.web.client import downloadPage
 from os import remove as os_remove, system as os_system
 from random import randrange
-
+import six
 # for localized messages
 from . import _
 
@@ -638,7 +638,7 @@ class ImageConverter:
         if self.lastURL != sourceURL:
             extension = sourceURL.split(".")[-1]
             self.tmpfile = self.targetfile+"."+extension
-            downloadPage(sourceURL, self.tmpfile).addCallback(self.onImageLoaded)
+            downloadPage(six.ensure_binary(sourceURL), self.tmpfile).addCallback(self.onImageLoaded)
             self.lastURL = sourceURL
 
     def onImageLoaded(self, dummy):

@@ -40,6 +40,7 @@ from twisted.python.failure import Failure
 
 from six.moves.urllib.parse import urlencode
 from six.moves import range
+import six
 
 FBF_boxInfo = 0
 FBF_upTime = 1
@@ -151,7 +152,7 @@ class FritzCallFBF(object):
 			parms = urlencode({'getpage': '../html/login_sid.xml'})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
 			self.debug("'" + url + "' parms: '" + parms + "'")
-			getPage(url,
+			getPage(six.ensure_binary(url),
 				method="POST",
 				headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))},
 				postdata=parms).addCallback(lambda x: self._md5Login(callback, x)).addErrback(lambda x: self._oldLogin(callback, x))
@@ -163,7 +164,7 @@ class FritzCallFBF(object):
 			parms = "login:command/password=%s" % self.password
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
 			self.debug("'" + url + "' parms: '" + parms + "'")
-			getPage(url,
+			getPage(six.ensure_binary(url),
 				method="POST",
 				agent=USERAGENT,
 				headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))},
@@ -211,7 +212,7 @@ class FritzCallFBF(object):
 							})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
 			self.debug("'" + url + "' parms: '" + parms + "'")
-			getPage(url,
+			getPage(six.ensure_binary(url),
 				method="POST",
 				agent=USERAGENT,
 				headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))},
@@ -254,7 +255,7 @@ class FritzCallFBF(object):
 							})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
 			self.debug("'" + url + "' parms: '" + parms + "'")
-			getPage(url,
+			getPage(six.ensure_binary(url),
 				method="POST",
 				agent=USERAGENT,
 				headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))},
@@ -296,7 +297,7 @@ class FritzCallFBF(object):
 						})
 		url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
 		self.debug("'" + url + "' parms: '" + parms + "'")
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method="POST",
 			agent=USERAGENT,
 			headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))},
@@ -487,7 +488,7 @@ class FritzCallFBF(object):
 			self._callScreen.updateStatus(_("preparing"))
 		parms = urlencode({'getpage': '../html/de/menus/menu2.html', 'var:lang': 'de', 'var:pagename': 'foncalls', 'var:menu': 'fon', 'sid': self._md5Sid})
 		url = "http://%s/cgi-bin/webcm?%s" % (config.plugins.FritzCall.hostname.value, parms)
-		getPage(url).addCallback(lambda x: self._getCalls1(callback)).addErrback(self._errorCalls)  # @UnusedVariable # pylint: disable=W0613
+		getPage(six.ensure_binary(url)).addCallback(lambda x: self._getCalls1(callback)).addErrback(self._errorCalls)  # @UnusedVariable # pylint: disable=W0613
 
 	def _getCalls1(self, callback):
 		#
@@ -498,7 +499,7 @@ class FritzCallFBF(object):
 			self._callScreen.updateStatus(_("finishing"))
 		parms = urlencode({'getpage': '../html/de/FRITZ!Box_Anrufliste.csv', 'sid': self._md5Sid})
 		url = "http://%s/cgi-bin/webcm?%s" % (config.plugins.FritzCall.hostname.value, parms)
-		getPage(url).addCallback(lambda x: self._gotPageCalls(callback, x)).addErrback(self._errorCalls)
+		getPage(six.ensure_binary(url)).addCallback(lambda x: self._gotPageCalls(callback, x)).addErrback(self._errorCalls)
 
 	def _gotPageCalls(self, callback, csvIn=""):
 
@@ -602,7 +603,7 @@ class FritzCallFBF(object):
 			'sid': self._md5Sid
 			})
 		self.debug("url: '" + url + "' parms: '" + parms + "'")
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method="POST",
 			agent=USERAGENT,
 			headers={
@@ -648,7 +649,7 @@ class FritzCallFBF(object):
 			'sid': self._md5Sid
 			})
 		self.debug("url: '" + url + "' parms: '" + parms + "'")
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method="POST",
 			agent=USERAGENT,
 			headers={
@@ -697,7 +698,7 @@ class FritzCallFBF(object):
 					'sid': self._md5Sid
 					})
 				self.debug("url: '" + url + "' parms: '" + parms + "'")
-				getPage(url,
+				getPage(six.ensure_binary(url),
 					method="POST",
 					agent=USERAGENT,
 					headers={
@@ -716,7 +717,7 @@ class FritzCallFBF(object):
 				'sid': self._md5Sid
 				})
 			self.debug("url: '" + url + "' parms: '" + parms + "'")
-			getPage(url,
+			getPage(six.ensure_binary(url),
 				method="POST",
 				agent=USERAGENT,
 				headers={
@@ -764,7 +765,7 @@ class FritzCallFBF(object):
 			'sid':self._md5Sid
 			})
 		self.debug("url: '" + url + "' parms: '" + parms + "'")
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method="POST",
 			agent=USERAGENT,
 			headers={
@@ -798,7 +799,7 @@ class FritzCallFBF(object):
 					'sid':self._md5Sid
 					})
 				# self.debug("get coninfo: url: '" + url + "' parms: '" + parms + "'")
-				getPage(url,
+				getPage(six.ensure_binary(url),
 					method = "POST",
 					agent = USERAGENT,
 					headers = {
@@ -840,7 +841,7 @@ class FritzCallFBF(object):
 					'sid':self._md5Sid
 					})
 				# self.debug("get coninfo: url: '" + url + "' parms: '" + parms + "'")
-				getPage(url,
+				getPage(six.ensure_binary(url),
 					method = "POST",
 					agent = USERAGENT,
 					headers = {
@@ -881,7 +882,7 @@ class FritzCallFBF(object):
 					'sid':self._md5Sid
 					})
 				# self.debug("get dsl state: url: '" + url + "' parms: '" + parms + "'")
-				getPage(url,
+				getPage(six.ensure_binary(url),
 					method = "POST",
 					agent = USERAGENT,
 					headers = {
@@ -907,7 +908,7 @@ class FritzCallFBF(object):
 					'sid':self._md5Sid
 					})
 				# self.debug("get wlan state: url: '" + url + "' parms: '" + parms + "'")
-				getPage(url,
+				getPage(six.ensure_binary(url),
 					method = "POST",
 					agent = USERAGENT,
 					headers = {
@@ -1049,7 +1050,7 @@ class FritzCallFBF(object):
 			'sid':self._md5Sid
 			})
 		self.debug("url: '" + url + "' parms: '" + parms + "'")
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -1091,7 +1092,7 @@ class FritzCallFBF(object):
 			'sid':self._md5Sid
 			})
 		self.debug("url: '" + url + "' parms: '" + parms + "'")
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -1173,7 +1174,7 @@ class FritzCallFBF_05_27(object):
 			parms = urlencode({'getpage':'../html/login_sid.xml'})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
 			self.debug("[FritzCallFBF_05_27] _login: '" + url + "?" + parms + "'")
-			getPage(url,
+			getPage(six.ensure_binary(url),
 				method = "POST",
 				headers = {'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))},
 				postdata = parms).addCallback(self._md5Login).addErrback(self._errorLogin)
@@ -1217,7 +1218,7 @@ class FritzCallFBF_05_27(object):
 							})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
 			self.debug("[FritzCallFBF_05_27] _md5Login: '" + url + "?" + parms + "'")
-			getPage(url,
+			getPage(six.ensure_binary(url),
 				method = "POST",
 				agent = USERAGENT,
 				headers = {'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))},
@@ -1269,7 +1270,7 @@ class FritzCallFBF_05_27(object):
 							})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
 			self.debug("[FritzCallFBF_05_27] logout: '" + url + "' parms: '" + parms + "'")
-			getPage(url,
+			getPage(six.ensure_binary(url),
 				method = "POST",
 				agent = USERAGENT,
 				headers = {'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))},
@@ -1298,7 +1299,7 @@ class FritzCallFBF_05_27(object):
 						})
 		url = "http://%s/fon_num/fonbook_select.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug("[FritzCallFBF_05_27] _selectPhonebook: '" + url + "' parms: '" + parms + "'")
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))},
@@ -1320,7 +1321,7 @@ class FritzCallFBF_05_27(object):
 						})
 		url = "http://%s/fon_num/fonbook_list.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug("[FritzCallFBF_05_27] _loadFritzBoxPhonebookNew: '" + url + "' parms: '" + parms + "'")
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))},
@@ -1416,7 +1417,7 @@ class FritzCallFBF_05_27(object):
 		# http://192.168.178.1/fon_num/foncalls_list.lua?sid=da78ab0797197dc7
 		parms = urlencode({'sid':self._md5Sid})
 		url = "http://%s/fon_num/foncalls_list.lua?%s" % (config.plugins.FritzCall.hostname.value, parms)
-		getPage(url).addCallback(lambda x:self._gotPageCalls(callback, x)).addErrback(self._errorCalls)
+		getPage(six.ensure_binary(url)).addCallback(lambda x:self._gotPageCalls(callback, x)).addErrback(self._errorCalls)
 
 	def _gotPageCalls(self, callback, html = ""):
 
@@ -1522,7 +1523,7 @@ class FritzCallFBF_05_27(object):
 			'sid':self._md5Sid
 			})
 		self.debug("[FritzCallFBF_05_27] dial url: '" + url + "' parms: '" + parms + "'")
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -1569,7 +1570,7 @@ class FritzCallFBF_05_27(object):
 			'sid':self._md5Sid
 			})
 		self.debug("[FritzCallFBF] changeWLAN url: '" + url + "' parms: '" + parms + "'")
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -1624,7 +1625,7 @@ class FritzCallFBF_05_27(object):
 			'sid':self._md5Sid
 			})
 		self.debug("[FritzCallFBF_05_27] _getInfo url: '" + url + "' parms: '" + parms + "'")
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -1762,7 +1763,7 @@ class FritzCallFBF_05_27(object):
 			'sid':self._md5Sid
 			})
 		self.debug("[FritzCallFBF_05_27] _reset url: '" + url + "' parms: '" + parms + "'")
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -1785,7 +1786,7 @@ class FritzCallFBF_05_27(object):
 			'sid':self._md5Sid
 			})
 		self.debug("[FritzCallFBF_05_27] _readBlacklist url: '" + url + "' parms: '" + parms + "'")
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -1847,7 +1848,7 @@ class FritzCallFBF_05_50(object):
 		# http://fritz.box/login_lua.xml
 		url = "http://%s/login_sid.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug(time.ctime() + " :" + url)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "GET",
 			headers = {'Content-Type': "application/x-www-form-urlencoded"}).addCallback(self._md5Login, callback).addErrback(self._errorLogin)
 
@@ -1901,7 +1902,7 @@ class FritzCallFBF_05_50(object):
 						})
 		url = "http://%s/login_sid.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug(url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))},
@@ -1950,7 +1951,7 @@ class FritzCallFBF_05_50(object):
 						})
 		url = "http://%s/login_sid.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug("(" + what + ") " + time.ctime() + ": " + url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))},
@@ -1971,7 +1972,7 @@ class FritzCallFBF_05_50(object):
 						})
 		url = "http://%s/fon_num/fonbook_select.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug(url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))},
@@ -1996,7 +1997,7 @@ class FritzCallFBF_05_50(object):
 						})
 		url = "http://%s/fon_num/fonbook_select.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug(url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))},
@@ -2091,7 +2092,7 @@ class FritzCallFBF_05_50(object):
 		# besser csv mit: https://fritz.box/fon_num/foncalls_list.lua?sid=dea373c2d0257a41&csv=
 		parms = urlencode({'sid':md5Sid, 'csv':''})
 		url = "http://%s/fon_num/foncalls_list.lua?%s" % (config.plugins.FritzCall.hostname.value, parms)
-		getPage(url).addCallback(lambda x:self._gotPageCalls(callback, x, md5Sid)).addErrback(self._errorCalls, md5Sid)
+		getPage(six.ensure_binary(url)).addCallback(lambda x:self._gotPageCalls(callback, x, md5Sid)).addErrback(self._errorCalls, md5Sid)
 
 	def _gotPageCalls(self, callback, csvString = "", md5Sid = ""):
 
@@ -2195,7 +2196,7 @@ class FritzCallFBF_05_50(object):
 			'sid':md5Sid
 			})
 		self.info("url: " + url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -2251,7 +2252,7 @@ class FritzCallFBF_05_50(object):
 
 		url = "http://%s//wlan/wlan_settings.lua" % config.plugins.FritzCall.hostname.value
 		self.debug("url: " + url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -2315,7 +2316,7 @@ class FritzCallFBF_05_50(object):
 
 		url = "http://%s/wlan/guest_access.lua" % config.plugins.FritzCall.hostname.value
 		self.debug("url: " + url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -2357,7 +2358,7 @@ class FritzCallFBF_05_50(object):
 			'sid':md5Sid
 			})
 		self.debug("url: " + url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -2544,7 +2545,7 @@ class FritzCallFBF_05_50(object):
 			'sid':md5Sid
 			})
 		self.debug("url: " + url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -2577,7 +2578,7 @@ class FritzCallFBF_05_50(object):
 			'sid':md5Sid
 			})
 		self.debug("url: " + url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -2653,7 +2654,7 @@ class FritzCallFBF_06_35(object):
 		# http://fritz.box/login_lua.xml
 		url = "http://%s/login_sid.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug(time.ctime() + " :" + url)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "GET",
 			headers = {'Content-Type': "application/x-www-form-urlencoded"}).addCallback(self._md5Login, callback).addErrback(self._errorLogin)
 
@@ -2707,7 +2708,7 @@ class FritzCallFBF_06_35(object):
 						})
 		url = "http://%s/login_sid.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug(url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))},
@@ -2756,7 +2757,7 @@ class FritzCallFBF_06_35(object):
 						})
 		url = "http://%s/login_sid.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug("(" + what + ") " + time.ctime() + ": " + url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))},
@@ -2779,7 +2780,7 @@ class FritzCallFBF_06_35(object):
 						})
 		url = "http://%s/data.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug(url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))},
@@ -2859,7 +2860,7 @@ class FritzCallFBF_06_35(object):
 		# besser csv mit: https://fritz.box/fon_num/foncalls_list.lua?sid=dea373c2d0257a41&csv=
 		parms = urlencode({'sid':md5Sid, 'csv':''})
 		url = "http://%s/fon_num/foncalls_list.lua?%s" % (config.plugins.FritzCall.hostname.value, parms)
-		getPage(url).addCallback(lambda x:self._gotPageCalls(callback, x, md5Sid)).addErrback(self._errorCalls, md5Sid)
+		getPage(six.ensure_binary(url)).addCallback(lambda x:self._gotPageCalls(callback, x, md5Sid)).addErrback(self._errorCalls, md5Sid)
 
 	def _gotPageCalls(self, callback, csvString = "", md5Sid = ""):
 
@@ -2996,7 +2997,7 @@ class FritzCallFBF_06_35(object):
 
 		url = "http://%s//wlan/wlan_settings.lua" % config.plugins.FritzCall.hostname.value
 		self.debug("url: " + url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -3066,7 +3067,7 @@ class FritzCallFBF_06_35(object):
 
 		url = "http://%s/data.lua" % config.plugins.FritzCall.hostname.value
 		self.debug("url: " + url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -3117,7 +3118,7 @@ class FritzCallFBF_06_35(object):
 			'type':'all'
 			})
 		self.debug("url: " + url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -3399,7 +3400,7 @@ class FritzCallFBF_06_35(object):
 			'sid':md5Sid
 			})
 		self.debug("url: " + url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -3434,7 +3435,7 @@ class FritzCallFBF_06_35(object):
 			'page':'callLock'
 			})
 		self.debug("url: " + url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -3573,7 +3574,7 @@ class FritzCallFBF_upnp():
 			'type':'all'
 			})
 		self.debug("url: " + url + "?" + parms)
-		getPage(url,
+		getPage(six.ensure_binary(url),
 			method = "POST",
 			agent = USERAGENT,
 			headers = {
@@ -3931,7 +3932,7 @@ class FritzCallFBF_upnp():
 		if self._callScreen:
 			self._callScreen.updateStatus(_("preparing"))
 		url = result["NewCallListURL"]
-		getPage(url).addCallback(self._getCalls_cb2, callback)
+		getPage(six.ensure_binary(url)).addCallback(self._getCalls_cb2, callback)
 
 	def _getCalls_cb2(self, result, callback):
 		# self.debug("")
@@ -4088,7 +4089,7 @@ class FritzCallFBF_upnp():
 			return
 
 		if result["NewPhonebookName"] == config.plugins.FritzCall.fritzphonebookName.value:
-			getPage(result["NewPhonebookURL"]).addCallback(self._loadFritzBoxPhonebook_cb3)
+			getPage(six.ensure_binary(result["NewPhonebookURL"])).addCallback(self._loadFritzBoxPhonebook_cb3)
 
 	def _loadFritzBoxPhonebook_cb3(self, result):
 		root = ET.fromstring(result)
@@ -4233,7 +4234,7 @@ class FritzCallFBF_upnp():
 				self._notify(text)
 				return
 	
-			getPage(result["NewPhonebookURL"]).addCallback(_readPhonebookForBlacklist_cb)
+			getPage(six.ensure_binary(result["NewPhonebookURL"])).addCallback(_readPhonebookForBlacklist_cb)
 	
 		def _readPhonebookForBlacklist_cb(result):
 			root = ET.fromstring(result)

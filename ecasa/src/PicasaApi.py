@@ -13,7 +13,7 @@ import shutil
 from twisted.internet import reactor
 from twisted.internet.defer import Deferred
 from twisted.web.client import downloadPage
-
+import six
 #_PicasaApi__returnPhotos = lambda photos: [(photo.title.text, photo) for photo in photos.entry]
 _PicasaApi__returnPhotos = lambda photos: photos.entry
 
@@ -81,7 +81,7 @@ class PicasaApi(PictureApi):
 		if os.path.exists(fullname):
 			reactor.callLater(0, d.callback, (fullname, photo))
 		else:
-			downloadPage(url, fullname).addCallbacks(
+			downloadPage(six.ensure_binary(url), fullname).addCallbacks(
 				lambda value:d.callback((fullname, photo)),
 				lambda error:d.errback((error, photo)))
 		return d

@@ -28,7 +28,7 @@ from xml.etree.cElementTree import parse
 from xml.dom.minidom import parseString as xmlparseString, parse as xmlparse
 import gettext, re
 from six.moves.urllib.request import urlopen
-
+import six
 ###################################################
 
 configDir = eEnv.resolve("${sysconfdir}") + "/podcast/"
@@ -264,7 +264,7 @@ class PodcastMovies(Screen):
 			self.close()
 
 	def downloadMovies(self):
-		getPage(self.url).addCallback(self.showMovies).addErrback(self.error)
+		getPage(six.ensure_binary(self.url)).addCallback(self.showMovies).addErrback(self.error)
 
 	def showMovies(self, page):
 		if '<item>' in page:

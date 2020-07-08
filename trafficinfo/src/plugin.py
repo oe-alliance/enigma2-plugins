@@ -15,7 +15,7 @@ import xml.dom.minidom
 
 from twisted.web.client import getPage
 from twisted.internet import reactor
-
+import six
 ###############################################################################        
 class TrafficInfoMain(Screen):
     skin_SD = """
@@ -126,7 +126,7 @@ class TrafficInfoMain(Screen):
     def getSections(self):
         self.setStatusLabel("loading sections")
         self.loadinginprogress = True    
-        getPage("http://wap.verkehrsinfo.de/wvindex.php3").addCallback(self.sectionsLoaded).addErrback(self.sectionsLoadingFaild)
+        getPage(b"http://wap.verkehrsinfo.de/wvindex.php3").addCallback(self.sectionsLoaded).addErrback(self.sectionsLoadingFaild)
     
     def sectionsLoadingFaild(self, raw):
         self.loadinginprogress = False
@@ -173,7 +173,7 @@ class TrafficInfoMain(Screen):
         print("loading section", section.name, section.link)
         self.setStatusLabel("loading messages "+section.name)
         self.loadinginprogress = True    
-        getPage("http://wap.verkehrsinfo.de"+section.link).addCallback(self.trafficitemsLoaded).addErrback(self.trafficitemsLoadingFaild)
+        getPage(six.ensure_binary("http://wap.verkehrsinfo.de"+section.link)).addCallback(self.trafficitemsLoaded).addErrback(self.trafficitemsLoadingFaild)
 
     def trafficitemsLoadingFaild(self, raw):
         self.loadinginprogress = False

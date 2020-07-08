@@ -2,7 +2,7 @@
 from __future__ import print_function
 from twisted.internet import reactor
 from twisted.web import client
-
+import six
 valid_types = ("MP3", "PLS") #list of playable mediatypes
 
 def getPage(url, contextFactory=None, *args, **kwargs):
@@ -113,7 +113,7 @@ class Stream:
 
     def getPLSContent(self):
         print("loading PLS of stream ", self.name, self.url)
-        getPage(self.url).addCallback(self._gotPLSContent).addErrback(self._errorPLSContent)
+        getPage(six.ensure_binary(self.url)).addCallback(self._gotPLSContent).addErrback(self._errorPLSContent)
 
     def _gotPLSContent(self, lines):
         if lines.startswith("ICY "):

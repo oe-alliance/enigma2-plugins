@@ -27,6 +27,7 @@ from os.path import exists as os_path_exists
 from datetime import datetime
 
 from six.moves.urllib.parse import quote as urllib_quote
+import six
 #########################################
 
 class TravelWebcamviewer(Screen):
@@ -160,7 +161,7 @@ class TravelWebcamviewer(Screen):
 	def downloadThumbnails(self):
 		for cam in self.list:
 			self.pixmaps_to_load.append(cam.webcamid)
-			downloadPage(cam.thumbnail_url, "/tmp/"+str(cam.webcamid)+"_thumb.jpg").addCallback(self.fetchFinished, cam.webcamid).addErrback(self.fetchFailed, cam.webcamid)
+			downloadPage(six.ensure_binary(cam.thumbnail_url), "/tmp/"+str(cam.webcamid)+"_thumb.jpg").addCallback(self.fetchFinished, cam.webcamid).addErrback(self.fetchFailed, cam.webcamid)
 
 	def fetchFailed(self, string, webcamid):
 		print("fetchFailed", webcamid, string.getErrorMessage())
@@ -286,7 +287,7 @@ class WebcamTravelerAPI:
 			print(key, kwargs[key])
 			url +="&"+str(key)+"="+str(kwargs[key])
 		print(url)
-		cb = getPage(url).addCallback(callback)
+		cb = getPage(six.ensure_binary(url)).addCallback(callback)
 		if errorback!=None:
 			cb.addErrback(errorback)
 		else:
