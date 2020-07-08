@@ -2,7 +2,8 @@ from __future__ import print_function
 from __future__ import absolute_import
 # mp4porn plugin by AliAbdul
 from .Plugin import Movie, Plugin
-import re, urllib2
+import re
+from six.moves.urllib.request import urlopen
 
 ##################################################
 
@@ -12,7 +13,7 @@ class MP4PornMovie(Movie):
 
 	def getVideoUrl(self):
 		try:
-			data = urllib2.urlopen(self.url).read()
+			data = urlopen(self.url).read()
 		except:
 			data = ""
 		reonecat = re.compile(r'\| <a href="(.+?).m4v"')

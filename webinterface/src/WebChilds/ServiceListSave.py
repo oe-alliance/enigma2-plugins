@@ -4,8 +4,8 @@ from enigma import eDVBDB
 from Tools.Directories import resolveFilename, SCOPE_CONFIG
 import os
 from xml.dom.minidom import parseString as xml_dom_minidom_parseString
-from urllib import unquote as urllib_unquote
 import Components.ParentalControl
+from six.moves.urllib.parse import unquote as urllib_unquote
 
 ##########################
 class ServiceList(resource.Resource):

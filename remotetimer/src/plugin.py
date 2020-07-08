@@ -42,8 +42,7 @@ from Tools.BoundFunction import boundFunction
 from twisted.web.client import getPage
 from xml.etree.cElementTree import fromstring as cElementTree_fromstring
 from base64 import encodestring
-
-import urllib
+from six.moves.urllib.parse import quote
 
 #------------------------------------------------------------------------------------------
 
@@ -343,13 +342,13 @@ def newnigma2KeyGo(self):
 		if end < begin:
 			end += 86400
 
-		rt_name = urllib.quote(self.timerentry_name.value.decode('utf8').encode('utf8', 'ignore'))
-		rt_description = urllib.quote(self.timerentry_description.value.decode('utf8').encode('utf8', 'ignore'))
+		rt_name = quote(self.timerentry_name.value.decode('utf8').encode('utf8', 'ignore'))
+		rt_description = quote(self.timerentry_description.value.decode('utf8').encode('utf8', 'ignore'))
 		rt_disabled = 0 # XXX: do we really want to hardcode this? why do we offer this option then?
 		rt_repeated = 0 # XXX: same here
 
 		if config.plugins.remoteTimer.remotedir.value:
-			rt_dirname = urllib.quote(self.timerentry_dirname.value.decode('utf8').encode('utf8', 'ignore'))
+			rt_dirname = quote(self.timerentry_dirname.value.decode('utf8').encode('utf8', 'ignore'))
 		else:
 			rt_dirname = "None"
 

@@ -8,7 +8,7 @@ from enigma import iServiceInformation, iPlayableService
 from Components.config import config
 from twisted.web.client import getPage
 
-from urllib import  urlencode as urllib_urlencode
+from six.moves.urllib.parse import urlencode as urllib_urlencode
 
 # for localized messages
 from . import _

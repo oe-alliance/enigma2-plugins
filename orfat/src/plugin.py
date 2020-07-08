@@ -17,7 +17,8 @@ from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 from twisted.web.client import downloadPage, getPage
-import re, urllib2
+import re
+from six.moves.urllib.request import urlopen
 
 ##########################################################
 
@@ -140,7 +141,7 @@ class ORFMain(Screen):
 
 	def getVideoUrl(self, url):
 		try:
-			f = urllib2.urlopen(url)
+			f = urlopen(url)
 			txt = f.read()
 			f.close()
 		except:

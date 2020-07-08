@@ -33,9 +33,10 @@ from enigma import eServiceReference,  RT_WRAP, RT_VALIGN_CENTER, RT_HALIGN_LEFT
 import gdata.youtube
 import gdata.youtube.service
 from socket import gaierror, error as sorcket_error
-from urllib2 import Request, URLError, urlopen as urlopen2
-from urllib import unquote_plus
-from urlparse import parse_qs
+from six.moves.urllib.parse import unquote_plus, parse_qs
+from six.moves.urllib.request import Request, urlopen as urlopen2
+from six.moves.urllib.error import URLError
+
 
 from Components.config import config, ConfigSubsection, ConfigSelection, getConfigListEntry, configfile, ConfigText, ConfigInteger, ConfigYesNo
 from Components.ConfigList import ConfigListScreen

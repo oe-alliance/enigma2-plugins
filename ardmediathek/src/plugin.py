@@ -20,7 +20,8 @@ from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 from twisted.web.client import downloadPage, getPage
-import re, urllib2
+import re
+from six.moves.urllib.request import Request, urlopen
 
 ###################################################
 
@@ -147,7 +148,7 @@ def getMovies(html):
 
 def getMovieUrls(url):
 	try:
-		f = urllib2.urlopen(url)
+		f = urlopen(url)
 		html = f.read()
 		f.close()
 	except:
@@ -359,8 +360,8 @@ class ARDMediathek(Screen):
 			movie = self.movies[0]
 			thumbUrl = movie[4]
 			try:
-				req = urllib2.Request(thumbUrl)
-				url_handle = urllib2.urlopen(req)
+				req = Request(thumbUrl)
+				url_handle = urlopen(req)
 				headers = url_handle.info()
 				contentType = headers.getheader("content-type")
 			except:

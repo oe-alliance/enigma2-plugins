@@ -2,7 +2,7 @@
 from __future__ import absolute_import
 from .__init__ import _
 
-import sys, os, base64, re, time, shutil, datetime, codecs, urllib2
+import sys, os, base64, re, time, shutil, datetime, codecs
 
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.MenuList import MenuList
@@ -20,8 +20,8 @@ from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, 
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUGIN
 from twisted.web import client, error as weberror
 from twisted.internet import reactor, defer
-from urllib import urlencode
 from skin import parseColor, parseFont, parseSize
+from six.moves.urllib.parse import urlencode
 
 try:
 	from skin import TemplatedListFonts

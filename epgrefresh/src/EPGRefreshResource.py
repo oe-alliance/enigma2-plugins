@@ -12,14 +12,13 @@ from .OrderedSet import OrderedSet
 from ServiceReference import ServiceReference
 from Tools.XMLTools import stringToXML
 
+from six.moves.urllib.parse import unquote
 import six
 
 
 try:
-	from urllib import unquote
 	iteritems = lambda d: six.iteritems(d)
 except ImportError as ie:
-	from urllib.parse import unquote
 	iteritems = lambda d: d.items()
 
 API_VERSION = "1.4"

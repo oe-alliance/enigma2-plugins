@@ -28,7 +28,8 @@ __all__ = [
   'LDIFCopy',
 ]
 
-import urlparse, urllib, base64, re, types
+import urlparse, base64, re, types
+from six.moves.urllib.request import urlopen
 
 try:
   from cStringIO import StringIO
@@ -335,7 +336,7 @@ class LDIFParser:
       if self._process_url_schemes:
         u = urlparse.urlparse(url)
         if u[0] in self._process_url_schemes:
-          attr_value = urllib.urlopen(url).read()
+          attr_value = urlopen(url).read()
     elif value_spec==':\r\n' or value_spec=='\n':
       attr_value = ''
     else:

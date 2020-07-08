@@ -18,7 +18,9 @@ from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Tools.Directories import fileExists
 
-from urllib2 import Request, urlopen, URLError, HTTPError
+from six.moves.urllib.request import Request, urlopen
+from six.moves.urllib.error import URLError, HTTPError
+
 from xml.dom import minidom, Node
 from enigma import loadPic, eTimer
 

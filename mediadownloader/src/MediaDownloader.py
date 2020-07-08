@@ -17,10 +17,7 @@ from Components.Sources.StaticText import StaticText
 from .VariableProgressSource import VariableProgressSource
 
 from Components.config import config
-try:
-	from urlparse import urlparse, urlunparse
-except ImportError as ie:
-	from urllib.parse import urlparse, urlunparse
+from six.moves.urllib.parse import urlparse, urlunparse
 
 import time
 

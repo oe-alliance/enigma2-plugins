@@ -19,8 +19,7 @@ from six import StringIO
 from threading import Thread
 from .ThreadQueue import ThreadQueue
 from xml.etree.cElementTree import fromstring as cet_fromstring
-#import urllib
-from urllib import FancyURLopener
+from six.moves.urllib.request import FancyURLopener
 import json
 
 class MyOpener(FancyURLopener):

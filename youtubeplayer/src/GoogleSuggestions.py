@@ -19,10 +19,9 @@ from __future__ import print_function
 #    59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             #
 ############################################################################
 
-import urllib
 import socket
 
-
+from six.moves.urllib.parse import quote
 from six.moves import http_client
 
 
@@ -46,7 +45,7 @@ class GoogleSuggestions():
 
 	def getSuggestions(self, querryString):
 		if querryString != "":
-			querry = self.prepQuerry + urllib.quote(querryString)
+			querry = self.prepQuerry + quote(querryString)
 			try:
 				self.conn.request("GET", querry)
 			except (http_client.CannotSendRequest, socket.gaierror, socket.error):

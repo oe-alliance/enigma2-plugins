@@ -24,12 +24,12 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUG
 from Tools.HardwareInfo import HardwareInfo
 from Tools.LoadPixmap import LoadPixmap
 from twisted.web.client import downloadPage, getPage
-import htmlentitydefs, re, urllib2
-from urllib2 import Request, URLError, urlopen as urlopen2
+import htmlentitydefs, re
 from socket import error
-
-import six
+from six.moves.urllib.request import Request, urlopen as urlopen2
 from six.moves.http_client import HTTPConnection, HTTPException
+from six.moves.urllib.error import URLError, HTTPError
+import six
 
 
 HTTPConnection.debuglevel = 1
@@ -527,8 +527,8 @@ class RightMenuList(List):
 			if not thumbUrl.startswith("http://"):
 				thumbUrl = "%s%s"%(MAIN_PAGE, thumbUrl)
 			try:
-				req = urllib2.Request(thumbUrl)
-				url_handle = urllib2.urlopen(req)
+				req = Request(thumbUrl)
+				url_handle = urlopen(req)
 				headers = url_handle.info()
 				contentType = headers.getheader("content-type")
 			except:

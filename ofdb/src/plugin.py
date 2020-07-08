@@ -17,7 +17,7 @@ from Components.Language import language
 from Components.ProgressBar import ProgressBar
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 import re
-import urllib
+from six.moves.urllib.parse import quote
 import os, gettext
 
 import six
@@ -308,9 +308,9 @@ class OFDB(Screen):
 
 			self["statusbar"].setText(_("Query OFDb: %s...") % (self.eventName))
 			try:
-				self.eventName = urllib.quote(self.eventName)
+				self.eventName = quote(self.eventName)
 			except:
-				self.eventName = urllib.quote(self.eventName.decode('utf8').encode('ascii', 'ignore'))
+				self.eventName = quote(self.eventName.decode('utf8').encode('ascii', 'ignore'))
 			localfile = "/tmp/ofdbquery.html"
 			fetchurl = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=DTitel&SText=" + self.eventName
 			print("[OFDb] Downloading Query " + fetchurl + " to " + localfile)
