@@ -77,7 +77,7 @@ class MSNWeatherPluginEntriesListConfigScreen(Screen):
 		self["city"] = StaticText(_("City"))
 		self["degreetype"] = StaticText(_("System"))
 		self["key_red"] = StaticText(_("Back"))
-		self["key_green"] = StaticText(_("Add"))		
+		self["key_green"] = StaticText(_("Add"))
 		self["key_yellow"] = StaticText(_("Edit"))
 		self["key_blue"] = StaticText(_("Delete"))
 		self["entrylist"] = WeatherPluginEntryList([])
@@ -86,7 +86,7 @@ class MSNWeatherPluginEntriesListConfigScreen(Screen):
 			 "ok":	self.keyOK,
 			 "back":	self.keyClose,
 			 "red":	self.keyClose,
-			 "green":	self.keyGreen,			 
+			 "green":	self.keyGreen,
 			 "yellow":	self.keyYellow,
 			 "blue": 	self.keyDelete,
 			 }, -1)
@@ -203,7 +203,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 		]
 
 		ConfigListScreen.__init__(self, cfglist, session)
-		
+
 	def searchLocation(self):
 		if self.current.city.value != "":
 			language = config.osd.language.value.replace("_", "-")
@@ -239,7 +239,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 	def keyDelete(self):
 		if self.newmode == 1:
 			self.keyCancel()
-		else:		
+		else:
 			self.session.openWithCallback(self.deleteConfirm, MessageBox, _("Really delete this WeatherPlugin Entry?"))
 
 	def deleteConfirm(self, result):
@@ -260,13 +260,13 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 			root = cet_fromstring(xmlstring)
 			for childs in root:
 				if childs.tag == "weather" and "errormessage" in childs.attrib:
-					errormessage = childs.attrib.get("errormessage").encode("utf-8", 'ignore')
+					errormessage = six.ensure_str(childs.attrib.get("errormessage"), errors='ignore')
 					break
 			if len(errormessage) !=0:
-				self.session.open(MessageBox, errormessage, MessageBox.TYPE_ERROR)					
+				self.session.open(MessageBox, errormessage, MessageBox.TYPE_ERROR)
 			else:
 				self.session.openWithCallback(self.searchCallback, MSNWeatherPluginSearch, xmlstring)
-			
+
 	def error(self, error = None):
 		if error is not None:
 			print(error)
@@ -275,9 +275,8 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 		if result:
 			self.current.weatherlocationcode.value = result[0]
 			self.current.city.value = result[1]
-	
-		
-		
+
+
 class MSNWeatherPluginSearch(Screen):
 	skin = """
 		<screen name="MSNWeatherPluginSearch" position="center,center" size="550,400">
@@ -294,7 +293,7 @@ class MSNWeatherPluginSearch(Screen):
 		Screen.__init__(self, session)
 		self.title = _("MSN location search result")
 		self["key_red"] = StaticText(_("Back"))
-		self["key_green"] = StaticText(_("OK"))		
+		self["key_green"] = StaticText(_("OK"))
 		self["entrylist"] = MSNWeatherPluginSearchResultList([])
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
 			{
@@ -339,9 +338,9 @@ class MSNWeatherPluginSearchResultList(MenuList):
 		list = []
 		for childs in root:
 			if childs.tag == "weather":
-				searchlocation = childs.attrib.get("weatherlocationname").encode("utf-8", 'ignore')
-				searchresult = childs.attrib.get("weatherfullname").encode("utf-8", 'ignore')
-				weatherlocationcode = childs.attrib.get("weatherlocationcode").encode("utf-8", 'ignore')
+				searchlocation = six.ensure_str(childs.attrib.get("weatherlocationname"), errors='ignore')
+				searchresult = six.ensure_str(childs.attrib.get("weatherfullname"), errors='ignore')
+				weatherlocationcode = six.ensure_str(childs.attrib.get("weatherlocationcode"), errors='ignore')
 				res = [
 					(weatherlocationcode, searchlocation),
 					(eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 500, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, searchlocation),
