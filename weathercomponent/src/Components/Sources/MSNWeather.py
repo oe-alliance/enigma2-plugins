@@ -21,7 +21,7 @@
 #
 
 import time
-from Source import Source
+from Components.Sources.Source import Source
 from Components.WeatherMSN import weathermsn
 
 class MSNWeather(Source):
