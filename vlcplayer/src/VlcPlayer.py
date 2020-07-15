@@ -43,30 +43,9 @@ ENIGMA_SERVICETS_ID = 0x1002
 
 ENIGMA_SERVICE_ID = 0
 
-print("[VLC] Checking for buildin servicets ... ", end=' ')
-if isValidServiceId(ENIGMA_SERVICETS_ID):
-	print("yes")
-	ENIGMA_SERVICE_ID = ENIGMA_SERVICETS_ID
-	STOP_BEFORE_UNPAUSE = False
-else:
-	print("no")
-	print("[VLC] Checking for existing and usable servicets.so ... ", end=' ')
-	try:
-		import servicets
-	except Exception as e:
-		print(e)
-		print("[VLC] Checking for usable gstreamer service ... ", end=' ')
-		if isValidServiceId(ENIGMA_SERVICEGS_ID):
-			print("yes")
-			ENIGMA_SERVICE_ID = ENIGMA_SERVICEGS_ID
-			STOP_BEFORE_UNPAUSE = True
-		else:
-			print("no")
-			print("[VLC] No valid VLC-Service found - VLC-streaming not supported")
-	else:
-		print("yes")
-		ENIGMA_SERVICE_ID = ENIGMA_SERVICETS_ID
-		STOP_BEFORE_UNPAUSE = False
+ENIGMA_SERVICE_ID = ENIGMA_SERVICEGS_ID
+STOP_BEFORE_UNPAUSE = True
+
 
 DEFAULT_VIDEO_PID = 0x44
 DEFAULT_AUDIO_PID = 0x45
