@@ -114,7 +114,7 @@ class AutoTimer:
 		# Initialize
 		self.timers = []
 		self.configMtime = -1
-		self.uniqueTimerId = 0
+		self.nextTimerId = 1
 		self.defaultTimer = preferredAutoTimerComponent(
 			0,		# Id
 			"",		# Name
@@ -122,7 +122,7 @@ class AutoTimer:
 			True 	# Enabled
 		)
 
-# Configuration
+	# Configuration
 	def readXml(self, **kwargs):
 		if "xml_string" in kwargs:
 			# reset time
@@ -186,7 +186,9 @@ class AutoTimer:
 			0,
 			self.defaultTimer
 		)
-		self.uniqueTimerId = len(self.timers)
+		self.nextTimerId = int(configuration.get("nextTimerId", "0"))
+		if not self.nextTimerId:
+			self.nextTimerId = len(self.timers) + 1
 
 	def getXml(self, webif = True):
 		return buildConfig(self.defaultTimer, self.timers, webif)
@@ -202,20 +204,19 @@ class AutoTimer:
 	def readXmlTimer(self, xml_string):
 		# Parse xml string
 		configuration = cet_fromstring(xml_string)
-		
+
 		parseConfig(
 			configuration,
 			self.timers,
 			configuration.get("version"),
-			self.uniqueTimerId,
+			self.getUniqueId(),
 			self.defaultTimer
 		)
-		self.uniqueTimerId += 1
-		
+
 		# reset time
 		self.configMtime = -1
 
-# Manage List
+	# Manage List
 	def add(self, timer):
 		self.timers.append(timer)
 
@@ -235,8 +236,9 @@ class AutoTimer:
 		return [(x,) for x in lst]
 
 	def getUniqueId(self):
-		self.uniqueTimerId += 1
-		return self.uniqueTimerId
+		newId = self.nextTimerId
+		self.nextTimerId += 1
+		return newId
 
 	def remove(self, uniqueId):
 		idx = 0
@@ -597,7 +599,7 @@ class AutoTimer:
 						if timer.avoidDuplicateDescription >= 2:
 							if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
 								oldExists = True
-#								print("[AutoTimer] We found a timer (any service) with same description, skipping event")
+								# print("[AutoTimer] We found a timer (any service) with same description, skipping event")
 								break
 				if oldExists:
 					continue
@@ -611,9 +613,8 @@ class AutoTimer:
 				newEntry.log(509, "[AutoTimer] Timer start on: %s" % ctime(begin))
 				
 				# Mark this entry as AutoTimer (only AutoTimers will have this Attribute set)
-				# It is only temporarily, after a restart it will be lost,
-				# because it won't be stored in the timer xml file
 				newEntry.isAutoTimer = True
+				newEntry.autoTimerId = timer.id
 
 			# Apply afterEvent
 			if timer.hasAfterEvent():

@@ -79,6 +79,11 @@ def parseEntry(element, baseTimer, defaults = False):
 			print('[AutoTimer] Erroneous config is missing attribute "match", skipping entry')
 			return False
 
+		# Read out id
+		id = int(element.get("id", "0"))
+		if id:
+			baseTimer.id = id
+
 		# Read out name
 		baseTimer.name = six.ensure_str(element.get("name", ""))
 		if not baseTimer.name:
@@ -528,7 +533,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 
 def buildConfig(defaultTimer, timers, webif = False):
 	# Generate List in RAM
-	list = ['<?xml version="1.0" ?>\n<autotimer version="', CURRENT_CONFIG_VERSION, '">\n\n']
+	list = ['<?xml version="1.0" ?>\n<autotimer version="', CURRENT_CONFIG_VERSION, '" nextTimerId="', "1", '">\n\n']
 	append = list.append
 	extend = list.extend
 	defaultEncoding = getDefaultEncoding()
@@ -673,7 +678,7 @@ def buildConfig(defaultTimer, timers, webif = False):
 			extend(('  <tag>', stringToXML(tag), '</tag>\n'))
 
 	# Keep the list clean
-	if len(list) == 5:
+	if len(list) == 7:
 		list.pop() # >
 		list.pop() # <defaults
 	else:
@@ -683,8 +688,7 @@ def buildConfig(defaultTimer, timers, webif = False):
 	for timer in timers:
 		# Common attributes (match, enabled)
 		extend((' <timer name="', stringToXML(timer.name), '" match="', stringToXML(timer.match), '" enabled="', timer.getEnabled(), '"'))
-		if webif:
-			extend((' id="', str(timer.getId()), '"'))
+		extend((' id="', str(timer.getId()), '"'))
 
 		# Timespan
 		if timer.hasTimespan():
@@ -835,6 +839,7 @@ def buildConfig(defaultTimer, timers, webif = False):
 	# End of Configuration
 	append('</autotimer>\n')
 
+	from .plugin import autotimer
+	list[3] = str(autotimer.nextTimerId)
+
 	return list
-
-
