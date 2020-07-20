@@ -1539,6 +1539,42 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 		[]			# Proposed tags
 	)
 
+def addAutotimerFromTimer(session, timer):
+	from AutoTimerComponent import preferredAutoTimerComponent
+	from AutoTimerImporter import AutoTimerImporter
+	from plugin import autotimer
+
+	autotimer.readXml()
+
+	match = timer.name
+	sref = timer.service_ref
+	# timespan defaults to +- 1h
+	begin = timer.begin + config.recording.margin_before.value * 60 - 3600
+	end = timer.end - config.recording.margin_after.value * 60 + 7200
+
+	# XXX: we might want to make sure that we actually collected any data because the importer does not do so :-)
+
+	newTimer = autotimer.defaultTimer.clone()
+	newTimer.id = autotimer.getUniqueId()
+	newTimer.name = match
+	newTimer.match = ''
+	newTimer.enabled = True
+
+	session.openWithCallback(
+		importerCallback,
+		AutoTimerImporter,
+		newTimer,
+		match,		# Proposed Match
+		begin,		# Proposed Begin
+		end,		# Proposed End
+		None,		# Proposed Disabled
+		sref,		# Proposed ServiceReference
+		None,		# Proposed afterEvent
+		None,		# Proposed justplay
+		None,		# Proposed dirname
+		[]			# Proposed tags
+	)
+
 def addAutotimerFromService(session, service = None):
 	from AutoTimerComponent import preferredAutoTimerComponent
 	from AutoTimerImporter import AutoTimerImporter
@@ -1597,6 +1633,16 @@ def addAutotimerFromService(session, service = None):
 		path,		# Proposed dirname
 		tags		# Proposed tags
 	)
+
+def editAutotimerFromTimer(session, timer):
+	from plugin import autotimer
+
+	autotimer.readXml()
+
+	for search in autotimer.getTimerList():
+		if search.id == timer.autoTimerId:
+			session.openWithCallback(editorCallback, AutoTimerEditor, search)
+			break
 
 def importerCallback(ret):
 	if ret:

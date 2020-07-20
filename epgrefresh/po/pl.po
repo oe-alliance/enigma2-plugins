@@ -1,0 +1,521 @@
+# FIRST AUTHOR <pololoko111@o2.pl>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: epgrefresh\n"
+"POT-Creation-Date: 2014-04-12 10:30+CEST\n"
+"PO-Revision-Date: 2020-07-03 11:59+0100\n"
+"Last-Translator: pololoko111\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 2.3.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
+"|| n%100>14) ? 1 : 2);\n"
+"Language: pl_PL\n"
+
+#: EPGBackupSupport.py:52
+msgid "No Backupfiles found"
+msgstr "Nie znaleziono plików kopii zapasowych"
+
+#: EPGBackupSupport.py:53 EPGRefreshChannelEditor.py:79
+#: EPGRefreshConfiguration.py:44 EPGRefreshConfiguration.py:60
+#: EPGRefreshConfiguration.py:107
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: EPGBackupSupport.py:55
+msgid "Select a file to force a Backup"
+msgstr "Wybierz plik, aby wymusić utworzenie kopii zapasowej"
+
+#: EPGBackupSupport.py:65
+msgid ""
+"To load the Backupfile the GUI has to be restarted.\n"
+"Do you want to restart the GUI now?"
+msgstr ""
+"Aby załadować plik kopii zapasowej, należy ponownie uruchomić GUI.\n"
+"Czy chcesz teraz ponownie uruchomić GUI?"
+
+#: EPGBackupSupport.py:81
+msgid "FILELIST_BIGGEST"
+msgstr ""
+
+#: EPGBackupSupport.py:82
+msgid "FILELIST_YOUNGEST"
+msgstr ""
+
+#: EPGBackupSupport.py:83
+msgid "FILELIST_FORCED"
+msgstr ""
+
+#: EPGRefresh.py:277
+msgid ""
+"There is still a refresh running. The Operation isn't allowed at this moment."
+msgstr "Nadal trwa odświeżanie. Operacja nie jest w tej chwili dozwolona."
+
+#: EPGRefresh.py:367
+msgid ""
+"EPG refresh finished.\n"
+"Should AutoTimer be search for new matches?"
+msgstr ""
+"Odświeżanie EPG zakończone.\n"
+"Czy AutoTimer powinien wyszukiwać nowe wyniki?"
+
+#: EPGRefresh.py:408
+msgid "AutoTimer failed with error %s"
+msgstr "AutoTimer z błędem %s"
+
+#: EPGRefresh.py:417
+msgid ""
+"Found a total of %d matching Events.\n"
+"%d Timer were added and\n"
+"%d modified,\n"
+"%d conflicts encountered,\n"
+"%d similars added."
+msgstr ""
+"Znaleziono w sumie %d pasujących zdarzeń.\n"
+"%d  Timer został dodany i  \n"
+"%d  zmodyfikowany, \n"
+"%d  napotkane konflikty,\n"
+"%d  dodano podobne."
+
+#: EPGRefresh.py:431 PipAdapter.py:79
+msgid "EPG refresh finished."
+msgstr "Odświeżanie EPG zakończone."
+
+#: EPGRefresh.py:546
+msgid "%d more services"
+msgstr "%d więcej usług"
+
+#: EPGRefresh.py:547
+msgid "Following Services have to be scanned:"
+msgstr "Należy przeskanować następujące usługi:"
+
+#: EPGRefreshChannelEditor.py:59
+msgid "EPGRefresh Services"
+msgstr "Usługi odświeżania EPG"
+
+#: EPGRefreshChannelEditor.py:69
+msgid "Channels"
+msgstr "Kanały"
+
+#: EPGRefreshChannelEditor.py:70
+msgid "Bouquets"
+msgstr "Bukiety"
+
+#: EPGRefreshChannelEditor.py:80 EPGRefreshConfiguration.py:108
+msgid "OK"
+msgstr "OK"
+
+#: EPGRefreshChannelEditor.py:81
+msgid "Delete"
+msgstr "Usuń"
+
+#: EPGRefreshChannelEditor.py:82
+msgid "New"
+msgstr "Nowy"
+
+#: EPGRefreshChannelEditor.py:100
+msgid "Edit Services to refresh"
+msgstr "Edytuj usługi, aby odświeżyć"
+
+#: EPGRefreshChannelEditor.py:120
+msgid "Editing"
+msgstr "Edytowanie"
+
+#: EPGRefreshChannelEditor.py:129 EPGRefreshChannelEditor.py:177
+msgid "Refreshing"
+msgstr "Odświeżanie"
+
+#: EPGRefreshChannelEditor.py:164
+msgid "Select channel to refresh"
+msgstr "Wybierz kanał do odświeżenia"
+
+#: EPGRefreshChannelEditor.py:170
+msgid "Select bouquet to refresh"
+msgstr "Wybierz bukiet do odświeżenia"
+
+#: EPGRefreshConfiguration.py:42
+msgid "General Help"
+msgstr "Ogólna pomoc"
+
+#: EPGRefreshConfiguration.py:43
+msgid "Key Help"
+msgstr "Kluczowa pomoc"
+
+#: EPGRefreshConfiguration.py:46
+msgid "EPGRefresh Configuration Help"
+msgstr "EPG  Pomoc konfiguracji"
+
+#: EPGRefreshConfiguration.py:56
+msgid "Stop running refresh"
+msgstr "Zatrzymaj odświeżanie"
+
+#: EPGRefreshConfiguration.py:57 plugin.py:240
+msgid "Pending Services"
+msgstr "Oczekujące usługi"
+
+#: EPGRefreshConfiguration.py:59 plugin.py:238
+msgid "Refresh now"
+msgstr "Odśwież teraz"
+
+#: EPGRefreshConfiguration.py:62
+msgid "EPGRefresh Functions"
+msgstr "EPG Funkcje"
+
+#: EPGRefreshConfiguration.py:90 EPGRefreshConfiguration.py:195
+msgid "EPGRefresh Configuration"
+msgstr "EPG Konfiguracja"
+
+#: EPGRefreshConfiguration.py:109
+msgid "Functions"
+msgstr "Funkcje"
+
+#: EPGRefreshConfiguration.py:110 EPGRefreshConfiguration.py:118
+msgid "Edit Services"
+msgstr "Edytuj Usługi"
+
+#: EPGRefreshConfiguration.py:117
+msgid "Show more Functions"
+msgstr "Pokaż więcej funkcji"
+
+#: EPGRefreshConfiguration.py:123
+msgid "Show last EPGRefresh - Time"
+msgstr "Pokaż ostatnie odświeżenie - czas"
+
+#: EPGRefreshConfiguration.py:128
+msgid "Move page up"
+msgstr "Przenieś stronę w górę"
+
+#: EPGRefreshConfiguration.py:129
+msgid "Move page down"
+msgstr "Przenieś stronę w dół"
+
+#: EPGRefreshConfiguration.py:139
+msgid "Close and forget changes"
+msgstr "Zamknij i pomiń zmiany"
+
+#: EPGRefreshConfiguration.py:140
+msgid "Close and save changes"
+msgstr "Zamknij i zapisz zmiany"
+
+#: EPGRefreshConfiguration.py:156
+msgid "Refresh EPG automatically"
+msgstr "Odśwież EPG automatycznie"
+
+#: EPGRefreshConfiguration.py:156
+msgid ""
+"Unless this is enabled, EPGRefresh won't automatically run but needs to be "
+"explicitly started by the yellow button in this menu."
+msgstr ""
+"O ile nie jest to włączone, EPGRefresh nie uruchomi się automatycznie, ale "
+"musi zostać wyraźnie uruchomiony przez żółty przycisk w tym menu."
+
+#: EPGRefreshConfiguration.py:158
+msgid "Duration to stay on service (seconds)"
+msgstr "Czas pozostawania w usłudze (sekundy)"
+
+#: EPGRefreshConfiguration.py:158
+msgid ""
+"This is the duration each service/channel will stay active during a refresh."
+msgstr ""
+"Jest to czas, przez jaki każda usługa / kanał pozostanie aktywny podczas "
+"odświeżania."
+
+#: EPGRefreshConfiguration.py:159
+msgid ""
+"An automated refresh will start after this time of day, but before the time "
+"specified in next setting."
+msgstr ""
+"Automatyczne odświeżanie rozpocznie się o tej porze dnia, ale przed czasem "
+"określonym w następnym ustawieniu."
+
+#: EPGRefreshConfiguration.py:159
+msgid "EPG refresh auto-start earliest (hh:mm)"
+msgstr "Automatyczne uruchamianie odświeżania EPG najwcześniej (gg:mm)"
+
+#: EPGRefreshConfiguration.py:160
+msgid ""
+"An automated refresh will start before this time of day, but after the time "
+"specified in previous setting."
+msgstr ""
+"Automatyczne odświeżanie rozpocznie się przed tą porą dnia, ale po czasie "
+"określonym w poprzednim ustawieniu."
+
+#: EPGRefreshConfiguration.py:160
+msgid "EPG refresh auto-start latest (hh:mm)"
+msgstr "Najnowsze automatyczne odświeżanie EPG (gg: mm)"
+
+#: EPGRefreshConfiguration.py:161
+msgid "Delay if not in standby (minutes)"
+msgstr "Opóźnienie, jeśli nie jest w trybie gotowości (minuty)"
+
+#: EPGRefreshConfiguration.py:161
+msgid ""
+"If the receiver currently isn't in standby, this is the duration which "
+"EPGRefresh will wait before retry."
+msgstr ""
+"Jeśli odbiornik aktualnie nie jest w trybie gotowości, jest to czas "
+"oczekiwania EPGRefresh przed ponowną próbą."
+
+#: EPGRefreshConfiguration.py:163
+msgid ""
+"If you want to refresh the EPG in background, you can choose the method "
+"which best suits your needs here, e.g. hidden, fake reocrding or regular "
+"Picture in Picture."
+msgstr ""
+"Jeśli chcesz odświeżyć EPG w tle, możesz tutaj wybrać metodę, która "
+"najlepiej odpowiada Twoim potrzebom, np. ukryte, fałszywe nagrywanie lub "
+"zwykłe PiP."
+
+#: EPGRefreshConfiguration.py:163
+msgid "Refresh EPG using"
+msgstr "Odśwież EPG za pomocą"
+
+#: EPGRefreshConfiguration.py:164
+msgid "Display more Options"
+msgstr "Wyświetl więcej opcji"
+
+#: EPGRefreshConfiguration.py:164
+msgid "Show Advanced Options"
+msgstr "Pokaż Ustawienia Zaawansowane"
+
+#: EPGRefreshConfiguration.py:167
+msgid ""
+"Should protected services be skipped if refresh was started in interactive-"
+"mode?"
+msgstr ""
+"Czy chronione usługi powinny być pomijane, jeśli odświeżanie zostało "
+"uruchomione w trybie interaktywnym?"
+
+#: EPGRefreshConfiguration.py:167
+msgid "Skip protected Services"
+msgstr "Pomiń chronione usługi"
+
+msgid ""
+"Enable this to be able to access the EPGRefresh configuration from within "
+"the plugin menu."
+msgstr ""
+"Włącz tę opcję, aby uzyskać dostęp do konfiguracji EPGRefresh z poziomu menu "
+"wtyczki."
+
+#: EPGRefreshConfiguration.py:168
+msgid ""
+"Enable this to be able to access the EPGRefresh configuration from within "
+"the extension menu."
+msgstr ""
+"Włącz tę opcję, aby uzyskać dostęp do konfiguracji EPGRefresh z poziomu menu "
+"rozszerzenia."
+
+msgid "Show Setup in plugins"
+msgstr "Pokaż ustawienia we wtyczkach"
+
+#: EPGRefreshConfiguration.py:168
+msgid "Show Setup in extension menu"
+msgstr "Pokaż ustawienia w menu rozszerzenia"
+
+#: EPGRefreshConfiguration.py:169
+msgid ""
+"Enable this to be able to start the EPGRefresh from within the extension "
+"menu."
+msgstr "Włącz to, aby móc uruchomić EPGRefresh z poziomu menu rozszerzenia."
+
+#: EPGRefreshConfiguration.py:169
+msgid "Show 'EPGRefresh Start now' in extension menu."
+msgstr "Pokaż „EPGRefresh Start now” w menu rozszerzenia."
+
+#: EPGRefreshConfiguration.py:170
+msgid "Show popup when refresh starts and ends."
+msgstr "Pokaż wyskakujące okienko po rozpoczęciu i zakończeniu odświeżania."
+
+#: EPGRefreshConfiguration.py:170
+msgid ""
+"This setting controls whether or not an informational message will be shown "
+"at start and completion of refresh."
+msgstr ""
+"To ustawienie kontroluje, czy komunikat informacyjny będzie wyświetlany na "
+"początku i po zakończeniu odświeżania."
+
+#: EPGRefreshConfiguration.py:171
+msgid ""
+"If this is enabled, the plugin will wake up the receiver from standby if "
+"possible. Otherwise it needs to be switched on already."
+msgstr ""
+"Jeśli ta opcja jest włączona, wtyczka budzi odbiornik ze stanu gotowości, "
+"jeśli to możliwe. W przeciwnym razie należy go już włączyć."
+
+#: EPGRefreshConfiguration.py:171
+msgid "Wake up from standby for EPG refresh."
+msgstr "Wybudź się ze stanu gotowości do odświeżenia EPG."
+
+#: EPGRefreshConfiguration.py:172
+msgid "Force scan even if receiver is in use."
+msgstr "Wymuś odświeżanie, nawet jeśli odbiornik jest w użyciu."
+
+#: EPGRefreshConfiguration.py:172
+msgid ""
+"This setting controls whether or not the refresh will be initiated even "
+"though the receiver is active (either not in standby or currently recording)."
+msgstr ""
+"To ustawienie kontroluje, czy odświeżanie zostanie zainicjowane, nawet jeśli "
+"odbiornik jest aktywny (nie w trybie gotowości lub aktualnie nagrywa)."
+
+#: EPGRefreshConfiguration.py:173
+msgid "Shutdown after EPG refresh."
+msgstr "Wyłącz po odświeżeniu EPG."
+
+#: EPGRefreshConfiguration.py:173
+msgid ""
+"This setting controls whether the receiver should be set to standby after "
+"refresh is completed."
+msgstr ""
+"To ustawienie kontroluje, czy odbiornik powinien przejść w tryb gotowości po "
+"zakończeniu odświeżania."
+
+#: EPGRefreshConfiguration.py:178
+msgid "Extend the list of services to refresh by those your AutoTimers use?"
+msgstr ""
+"Rozszerzyć listę usług, aby odświeżyć je o te, których używają AutoTimery?"
+
+#: EPGRefreshConfiguration.py:178
+msgid "Inherit Services from AutoTimer"
+msgstr "Dziedzicz usługi od AutoTimer"
+
+#: EPGRefreshConfiguration.py:180
+msgid ""
+"After a successful refresh the AutoTimer will automatically search for new "
+"matches if this is enabled. The options 'Ask*' has only affect on a manually "
+"refresh. If EPG-Refresh was called in background the default-Answer will be "
+"executed!"
+msgstr ""
+"Po udanym odświeżeniu AutoTimer automatycznie wyszuka nowe dopasowania, "
+"jeśli jest to włączone. Opcje „Zapytaj *” mają wpływ tylko na ręczne "
+"odświeżanie. Jeśli EPG-Refresh został wywołany w tle, domyślna odpowiedź "
+"zostanie wykonana!"
+
+#: EPGRefreshConfiguration.py:180
+msgid "Run AutoTimer after refresh"
+msgstr "Uruchom AutoTimer po odświeżeniu"
+
+#: EPGRefreshConfiguration.py:195
+msgid "Version"
+msgstr "Wersja"
+
+#: EPGRefreshConfiguration.py:328
+msgid "never"
+msgstr "nigdy"
+
+#: EPGRefreshConfiguration.py:332
+msgid "Last refresh was %s"
+msgstr "Ostatnie odświeżenie to %s"
+
+#: EPGRefreshConfiguration.py:348
+msgid "Really close without saving settings?"
+msgstr "Naprawdę zamknąć bez zapisywania ustawień?"
+
+#: MainPictureAdapter.py:21
+msgid "EPG refresh starts scanning channels."
+msgstr "Odświeżanie EPG rozpoczyna skanowanie kanałów."
+
+#: PipAdapter.py:32
+msgid "Please don't use PiP meanwhile!"
+msgstr "W międzyczasie nie używaj PiP!"
+
+#: PipAdapter.py:32 RecordAdapter.py:29
+msgid "EPG refresh started in background."
+msgstr "Odświeżanie EPG rozpoczęło się w tle."
+
+#: PipAdapter.py:79
+msgid "PiP available now."
+msgstr "PiP już dostępny."
+
+#: plugin.py:40 plugin.py:50
+msgid "Background only"
+msgstr "Tylko w tle"
+
+#: plugin.py:41
+msgid "Foreground also"
+msgstr "Pierwszy plan również"
+
+#: plugin.py:48
+msgid "Yes"
+msgstr "Tak"
+
+#: plugin.py:49
+msgid "No"
+msgstr "Nie"
+
+#: plugin.py:51
+msgid "Ask default Yes"
+msgstr "Zapytaj domyślnie Tak"
+
+#: plugin.py:52
+msgid "Ask default No"
+msgstr "Zapytaj domyślnie Nie"
+
+#: plugin.py:56
+msgid "Main Picture"
+msgstr "Główny Obraz"
+
+#: plugin.py:57
+msgid "Picture in Picture"
+msgstr "PiP"
+
+#: plugin.py:58
+msgid "Picture in Picture (hidden)"
+msgstr "PiP (ukryty)"
+
+#: plugin.py:59
+msgid "Fake recording"
+msgstr "Fałszywe nagrywanie"
+
+#: plugin.py:102
+msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
+msgstr ""
+
+#: plugin.py:202
+msgid ""
+"To apply your Changes the GUI has to be restarted.\n"
+"Do you want to restart the GUI now?"
+msgstr ""
+"Aby zastosować zmiany, należy ponownie uruchomić GUI.\n"
+"Czy chcesz teraz ponownie uruchomić GUI?"
+
+#: plugin.py:236
+msgid "EXTENSIONMENU_PREFIX"
+msgstr ""
+
+#: plugin.py:237
+msgid "EXTENSIONNAME_SETUP"
+msgstr ""
+
+#: plugin.py:237 plugin.py:293
+msgid "Automatically refresh EPG"
+msgstr "Automatycznie odśwież EPG"
+
+#: plugin.py:238
+msgid "Start EPGrefresh immediately"
+msgstr "Natychmiast uruchom odświeżanie EPG"
+
+#: plugin.py:239
+msgid "Stop Refresh"
+msgstr "Zatrzymaj odświeżanie"
+
+#: plugin.py:239
+msgid "Stop Running EPG-refresh"
+msgstr "Przestań uruchamiać odświeżanie EPG"
+
+#: plugin.py:240
+msgid "Show the pending Services for refresh"
+msgstr "Pokaż oczekujące usługi do odświeżenia"
+
+#: plugin.py:286
+msgid "add to EPGRefresh"
+msgstr "dodaj do EPG Odśwież"
+
+#: plugin.py:292
+msgid "PLUGINNAME_EPGRefresh"
+msgstr "Odświeżanie  EPG"

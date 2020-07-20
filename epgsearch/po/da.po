@@ -1,0 +1,261 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-12 05:32+0000\n"
+"PO-Revision-Date: 2020-06-07 16:07+0200\n"
+"Last-Translator: JC 2020 <dk-translation@protonmail.com>\n"
+"Language-Team: Danskholdet <dk-translation@pm.me>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+
+msgid "%e/%m, %H:%M"
+msgstr "%e/%m, %H:%M"
+
+msgid "%ssearch EPG"
+msgstr "%sSøg i EPG"
+
+msgid "%ssearch EPG from history..."
+msgstr "%sSøg i EPG fra historik..."
+
+msgid "Add AutoTimer"
+msgstr "Tilføj AutoTimer"
+
+msgid "Add Timer"
+msgstr "Tilføj Timer"
+
+msgid "Add a record timer for highlighted event"
+msgstr "Tilføj en Optagetimer for fremhævet begivenhed"
+
+msgid "Add a zap timer for highlighted event"
+msgstr "Tilføj en Zap-timer for fremhævet begivenhed"
+
+msgid "Add an AutoTimer for highlighted event"
+msgstr "Tilføj en AutoTimer for fremhævet begivenhed"
+
+msgid "Add/remove/edit timer for highlighted event"
+msgstr "Tilføj/fjern/rediger Timer for fremhævet begivenhed"
+
+msgid "All bouquets"
+msgstr "Alle Buketter"
+
+msgid "All services"
+msgstr "Alle kanaler"
+
+msgid "Cancel"
+msgstr "Afbryd"
+
+msgid "Channel Selection"
+msgstr "Kanalvalg"
+
+msgid "Choose the encoding type for searches, helpful for foreign languages."
+msgstr "Vælg indkodningstypen for søgninger, hjælpsom for fremmedsprog."
+
+msgid "Close dialog"
+msgstr "Luk vindue"
+
+msgid ""
+"Control where to search in the EPG. When 'all bouquets' is set, all bouquets "
+"are searched, even if 'Enable multiple bouquets' is disabled."
+msgstr ""
+"Styre hvor der søges i EPG. Alle buketter gennemsøges når alle buketter er "
+"valgt, også selvom 'Aktiver flere buketter' er deaktiveret."
+
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "Kunne ikke læse AutoTimer timerliste: %s"
+
+msgid "Current bouquet"
+msgstr "Nuværende Buket"
+
+msgid "Current service"
+msgstr "Nuværende kanal"
+
+msgid "Default scope when asked"
+msgstr "Standardområde når adspurgt"
+
+msgid "EPG Search"
+msgstr "EPG søgning"
+
+msgid "EPG Search setup"
+msgstr "EPG søgning opsætning"
+
+msgid "EPGSearch"
+msgstr "EPG Søgning"
+
+msgid "EPGSearch Setup"
+msgstr "EPG søgning opsætning"
+
+msgid ""
+"Enable this to allow access to EPG Search from within the plugin browser."
+msgstr ""
+"Aktiver dette for at tillade adgang til EPG søgning indefra Plugin browseren."
+
+msgid "Enter new search"
+msgstr "Indtast ny søgning"
+
+msgid "Enter text to search for"
+msgstr "Indtast teksten der skal søges efter"
+
+msgid "Exit EPG Search"
+msgstr "Afslut EPG søgning"
+
+msgid "IMDB search for highlighted event"
+msgstr "IMDb søgning efter fremhævet begivenhed"
+
+msgid "IMDb Search"
+msgstr "IMDb søgning"
+
+msgid "Import from AutoTimer"
+msgstr "Importer fra AutoTimer"
+
+msgid "Import from EPG"
+msgstr "Importer fra EPG"
+
+msgid "Import from Timer"
+msgstr "Importer fra Timer"
+
+msgid "Is the search case-sensitive or case-insensitive?"
+msgstr "Er der forskel på små og store bogstaver ved søgning?"
+
+msgid "Length of history"
+msgstr "Længde af historik"
+
+msgid ""
+"Maximum number of entries in the search history. Set this to 0 to disable "
+"search history."
+msgstr ""
+"Maksimum antal poster i søgehistorik. Sættes til 0 for at deaktivere "
+"søgehistorik."
+
+msgid "Move down"
+msgstr "Flyt ned"
+
+msgid "Move down a page"
+msgstr "Flyt en side ned"
+
+msgid "Move up"
+msgstr "Flyt op"
+
+msgid "Move up a page"
+msgstr "Flyt en side op"
+
+msgid "New Search"
+msgstr "Ny søgning"
+
+msgid "No history"
+msgstr "Ingen historik"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Open selected in IMDb"
+msgstr "Åben valgte i IMDb"
+
+msgid "Save search as AutoTimer"
+msgstr "Gem søgning som AutoTimer"
+
+msgid "Search"
+msgstr "Søg"
+
+msgid "Search EPG"
+msgstr "Søg i EPG"
+
+msgid "Search encoding"
+msgstr "Søge indkodning"
+
+msgid "Search in..."
+msgstr "Søg i..."
+
+msgid "Search scope"
+msgstr "Søgeområde"
+
+msgid "Search strictness"
+msgstr "Søgestrenghed"
+
+msgid "Search type"
+msgstr "Søgetype"
+
+msgid "Searching..."
+msgstr "Søger..."
+
+msgid "Select a timer to search"
+msgstr "Vælg den Timer der søges efter"
+
+msgid "Select text to search for"
+msgstr "Vælg tekst der søges efter"
+
+msgid ""
+"Set type of match used to compare program titles with the search string."
+msgstr ""
+"Sæt type af overensstemmelse der bruges til at sammenligne udsendelsestitler "
+"med søgestreng."
+
+msgid "Sets the default search scope when the user is asked."
+msgstr "Sæt søgeområde som standard når bruger spørges."
+
+msgid "Setup"
+msgstr "Opsætning"
+
+msgid "Setup menu"
+msgstr "Opsætningsmenu"
+
+msgid "Show AutoTimer list"
+msgstr "Vis AutoTimerliste"
+
+msgid "Show detailed event information"
+msgstr "Vis detaljeret begivenhedsinformation"
+
+msgid "Show in plugin browser"
+msgstr "Vis i Plugin browser"
+
+msgid "Show orbital position"
+msgstr "Vis orbital placering"
+
+msgid "Show satellite orbital positions in the search results."
+msgstr "Vis orbital placering for satellit i søgeresultater."
+
+msgid "Show search history"
+msgstr "Vis søgehistorik"
+
+msgid "Zap to channel"
+msgstr "Zap til kanal"
+
+msgid "all bouquets"
+msgstr "Alle buketter"
+
+msgid "all services"
+msgstr "Alle kanaler"
+
+msgid "ask user"
+msgstr "Spørg bruger"
+
+msgid "case-insensitive search"
+msgstr "Ikke-versalfølsom søgning"
+
+msgid "case-sensitive search"
+msgstr "Versalfølsom søgning"
+
+msgid "current bouquet"
+msgstr "Nuværende Buket"
+
+msgid "current service"
+msgstr "Nuværende kanal"
+
+msgid "exact match"
+msgstr "Helt identisk"
+
+msgid "partial match"
+msgstr "Delvis identisk"
+
+msgid "search EPG"
+msgstr "Søg i EPG"
+
+msgid "search EPG from history..."
+msgstr "Søg i EPG fra historik..."
+
+msgid "title starts with"
+msgstr "Titel begynder med"

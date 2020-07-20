@@ -4,9 +4,9 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2012-02-21 19:19+0100\n"
-"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
-"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
-"Language: \n"
+"Last-Translator: Alexwilmac\n"
+"Language-Team: Alexwilmac & insanity <vuplus-community.net>\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,8 +17,22 @@ msgstr ""
 "X-Poedit-Basepath: .../enigma2-plugins/epgsearch\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/epgsearch\n"
 
+#. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
+msgid "search EPG"
+msgstr "Cerca nell'EPG"
+
+#. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
+msgid "search EPG..."
+msgstr "Cerca nell'EPG..."
+
+msgid "search EPG from history..."
+msgstr "Cerca nella cronologia dell'EPG"
+
+msgid "Search EPG"
+msgstr "Cerca in EPG"
+
 msgid "Add AutoTimer"
-msgstr ""
+msgstr "Aggiungi AutoTimer"
 
 msgid "Add Timer"
 msgstr "Agg. timer"
@@ -30,7 +44,7 @@ msgid "Channel Selection"
 msgstr "Selezione canale"
 
 msgid "Choose the encode type for search, helpful for foreign languages."
-msgstr ""
+msgstr "Scegli il tipo di codifica testo per le ricerche (utile per certe lingue)"
 
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
@@ -40,7 +54,7 @@ msgid "EPG Search"
 msgstr "Ricerca EPG"
 
 msgid "EPGSearch"
-msgstr ""
+msgstr "Ricerca in EPG"
 
 msgid "EPGSearch Setup"
 msgstr "Configurazione EPGSearch"
@@ -48,7 +62,7 @@ msgstr "Configurazione EPGSearch"
 msgid ""
 "Enable this to be able to access the EPG-Search from within the plugin "
 "browser."
-msgstr ""
+msgstr "Abilita per poter accedere a EPG-Search lanciando plugin"
 
 msgid "Enter text to search for"
 msgstr "Inserire il testo da cercare"
@@ -61,7 +75,7 @@ msgstr ""
 "l'opzione history."
 
 msgid "IMDb Search"
-msgstr ""
+msgstr "Ricerca nell'IMDb"
 
 msgid "Import from AutoTimer"
 msgstr "Importare da AutoTimer"
@@ -93,11 +107,8 @@ msgstr "Salvare la ricerca come AutoTimer"
 msgid "Search"
 msgstr "Cercare"
 
-msgid "Search EPG"
-msgstr "Cercare EPG"
-
 msgid "Search Encoding"
-msgstr ""
+msgstr "Ricerca di codifica"
 
 msgid "Select a timer to search"
 msgstr "Selezionare un timer da cercare"
@@ -109,18 +120,10 @@ msgid "Setup"
 msgstr "Configurazione"
 
 msgid "Show in plugin browser"
-msgstr ""
+msgstr "Mostra nel pannello dei plugin"
 
 msgid "Show search history"
-msgstr ""
-
-#. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
-msgid "search EPG"
-msgstr "Ricercare EPG"
-
-#. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
-msgid "search EPG..."
-msgstr "ricerca EPG..."
+msgstr "Mostra la cronologia delle ricerche"
 
 #~ msgid "Add \"Search\" Button to EPG"
 #~ msgstr "Aggiungere il pulsante \"Ricerca\" all'EPG"
