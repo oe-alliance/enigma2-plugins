@@ -351,6 +351,9 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 		else:
 			self.close(self.session, False)
 	
+	def closeRecursive(self):
+		self.keyCancel()
+
 	def _saveConfiguration(self):
 		epgrefresh.services = (set(self.services[0]), set(self.services[1]))
 		epgrefresh.saveConfiguration()
