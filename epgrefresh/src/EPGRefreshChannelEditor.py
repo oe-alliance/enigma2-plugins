@@ -89,7 +89,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 				"save": self.save,
 				"yellow": self.removeService,
 				"blue": self.newService
-			}
+			}, prio=-2
 		)
 
 		# Trigger change
@@ -185,6 +185,9 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 
 	def cancel(self):
 		self.close(None)
+
+	def closeRecursive(self):
+		self.cancel()
 
 	def save(self):
 		self.saveCurrent()
