@@ -167,10 +167,10 @@ class UserDialog(Screen, ConfigListScreen):
 		ConfigListScreen.keyRight(self)
 
 	def selectionChanged(self):
-		current = self["config"].getCurrent()
-		helpwindowpos = self["HelpWindow"].getPosition()
-		if current[1].help_window.instance is not None:
-			current[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
+		pass
+#		if self["config"].getCurrent()[1].help_window and self["config"].getCurrent()[1].help_window.instance is not None:
+#			helpwindowpos = self["HelpWindow"].getPosition()
+#			self["config"].getCurrent()[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
 
 	def ok(self):
 		current = self["config"].getCurrent()
