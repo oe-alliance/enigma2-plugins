@@ -85,7 +85,7 @@ def MountManagerCallFunction(iface):
 	return MountManagerMain
 
 def RemountMain(session, iface = None, **kwargs):
-	from AutoMount import iAutoMount
+	from .AutoMount import iAutoMount
 	iAutoMount.getAutoMountPoints() 
 
 def RemountCallFunction(iface):
