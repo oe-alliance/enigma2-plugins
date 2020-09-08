@@ -18,6 +18,7 @@ from Screens.Screen import Screen
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from enigma import eServiceReference, getDesktop
 import os, gettext
+from skin import parameters as skinparameter
 
 ################################################
 
@@ -144,25 +145,32 @@ class ZapHistoryBrowserList(MenuList):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		DESKTOP_WIDTH = getDesktop(0).size().width()
 		if DESKTOP_WIDTH <= 1280:
+			font1, size1 = skinparameter.get("ZapHistoryBrowserListFont1", ('Regular',20))
+			font2, size2 = skinparameter.get("ZapHistoryBrowserListFont2", ('Regular',18))
+			self.l.setFont(0, gFont(font1, size1))
+			self.l.setFont(1, gFont(font2, size2))
 			self.l.setItemHeight(40)
-			self.l.setFont(0, gFont("Regular", 20))
-			self.l.setFont(1, gFont("Regular", 18))
 		else:
+			font1, size1 = skinparameter.get("ZapHistoryBrowserListFont1", ('Regular',30))
+			font2, size2 = skinparameter.get("ZapHistoryBrowserListFont2", ('Regular',27))
+			self.l.setFont(0, gFont(font1, size1))
+			self.l.setFont(1, gFont(font2, size2))
 			self.l.setItemHeight(75)
-			self.l.setFont(0, gFont("Regular", 30))
-			self.l.setFont(1, gFont("Regular", 27))
 
 
 def ZapHistoryBrowserListEntry(serviceName, eventName):
 	res = [serviceName]
 	DESKTOP_WIDTH = getDesktop(0).size().width()
 	if DESKTOP_WIDTH <= 1280:
-		res.append(MultiContentEntryText(pos=(0, 0), size=(560, 22), font=0, text=serviceName))
-		res.append(MultiContentEntryText(pos=(0, 22), size=(560, 18), font=1, text=eventName))
+		x1, y1, w1, h1 = skinparameter.get("ZapHistoryBrowserServiceName", (0, 0, 560, 22))
+		x2, y2, w2, h2 = skinparameter.get("ZapHistoryBrowserEventName", (0, 22, 560, 18))
+		res.append(MultiContentEntryText(pos=(x1, y1), size=(w1, h1), font=0, text=serviceName))
+		res.append(MultiContentEntryText(pos=(x2, y2), size=(w2, h2), font=1, text=eventName))
 	else:
-		res.append(MultiContentEntryText(pos=(2, 1), size=(840, 38), font=0, text=serviceName))
-		res.append(MultiContentEntryText(pos=(2, 40), size=(840, 33), font=1, text=eventName))
-
+		x1, y1, w1, h1 = skinparameter.get("ZapHistoryBrowserServiceName", (2, 1, 840, 38))
+		x2, y2, w2, h2 = skinparameter.get("ZapHistoryBrowserEventName", (2, 40, 840, 33))
+		res.append(MultiContentEntryText(pos=(x1, y1), size=(w1, h1), font=0, text=serviceName))
+		res.append(MultiContentEntryText(pos=(x2, y2), size=(w2, h2), font=1, text=eventName))
 	return res
 
 ################################################
