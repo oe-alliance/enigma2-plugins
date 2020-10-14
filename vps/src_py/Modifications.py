@@ -3,6 +3,7 @@
 from . import _
 from RecordTimer import RecordTimerEntry, RecordTimer
 from Screens.TimerEntry import TimerEntry
+from Components.ConfigList import ConfigList
 from Components.config import config, ConfigSelection, ConfigText, ConfigSubList, ConfigDateTime, ConfigClock, ConfigYesNo, getConfigListEntry
 from Tools import Directories
 from Tools.XMLTools import stringToXML
@@ -16,7 +17,25 @@ from Vps_setup import VPS_show_info
 
 vps_already_registered = False
 
+# Allow VPS to work with new Setup-based timers, but retain
+# backwards-compatibility with old ConfigListScreen-based timers, in
+# both Py2 and Py3. It's ugly.
 
+import inspect
+
+def __getargs(fn):
+	return inspect.getargspec(fn).args
+
+try:
+	import six
+
+	if six.PY3:
+		def __getargs(fn):
+			return inspect.getfullargspec(fn).args
+except ImportError:
+	pass
+
+__vps_TimerEntry_createSetup_has_widget = len(__getargs(TimerEntry.createSetup)) > 1
 
 def new_RecordTimer_saveTimer(self):
 	self._saveTimer_old_rn_vps()
@@ -151,9 +170,12 @@ def new_TimerEntry_createConfig(self):
 	# added by VPS-Plugin
 
 
-def new_TimerEntry_createSetup(self, widget):
-	self._createSetup_old_rn_vps(widget)
-	
+def new_TimerEntry_createSetup(self, widget="config"):
+	if __vps_TimerEntry_createSetup_has_widget:
+		self._createSetup_old_rn_vps(widget)
+	else:
+		self._createSetup_old_rn_vps()
+
 	# added by VPS-Plugin
 	self.timerVps_enabled_Entry = None
 	try:
@@ -277,10 +299,14 @@ def register_vps():
 		
 		TimerEntry._createSetup_old_rn_vps = TimerEntry.createSetup
 		TimerEntry.createSetup = new_TimerEntry_createSetup
-		
-		TimerEntry._newConfig_old_rn_vps = TimerEntry.newConfig
-		TimerEntry.newConfig = new_TimerEntry_newConfig
-		
+
+		if hasattr(TimerEntry, "newConfig"):
+			TimerEntry._newConfig_old_rn_vps = TimerEntry.newConfig
+			TimerEntry.newConfig = new_TimerEntry_newConfig
+		else:
+			TimerEntry._newConfig_old_rn_vps = TimerEntry.changedEntry
+			TimerEntry.newConfig = new_TimerEntry_newConfig
+
 		TimerEntry._keyGo_old_rn_vps = TimerEntry.keyGo
 		TimerEntry.keyGo = new_TimerEntry_keyGo
 		
