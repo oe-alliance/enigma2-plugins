@@ -1,0 +1,114 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-09 03:05+0000\n"
+"PO-Revision-Date: 2020-09-23 22:26+0200\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.1\n"
+"Last-Translator: \n"
+"Language: it\n"
+
+msgid "Autoresolution"
+msgstr "Risoluzione Automatica"
+
+msgid ""
+"Autoresolution Plugin Testmode:\n"
+"Is %s OK?"
+msgstr ""
+"Plugin Risoluzione Automatica Modalità test:\n"
+"%s é corretto?"
+
+msgid "Autoresolution Switch"
+msgstr ""
+
+msgid "Autoresolution is not working in Scart/DVI-PC Mode"
+msgstr ""
+
+msgid "Autoresolution videomode setup"
+msgstr "Impostazioni Risoluzione Automatiìca"
+
+msgid "Cancel"
+msgstr "Annulla"
+
+msgid "Deinterlacer mode for interlaced content"
+msgstr "Modalità deinterlacciamento per contenuti Interlacciati"
+
+msgid "Deinterlacer mode for progressive content"
+msgstr "Modalità deinterlacciamento per contenuti Progressive"
+
+msgid "Delay x seconds after service started"
+msgstr ""
+
+msgid "Enable 1080p24 Mode"
+msgstr "Abilita modalità 1080p24"
+
+msgid "Enable 1080p25 Mode"
+msgstr "Abilita modalità 1080p25"
+
+msgid "Enable 1080p30 Mode"
+msgstr "Abilita modalità 1080p30"
+
+msgid "Enable 720p24 Mode"
+msgstr "Abilita modalità 720p24"
+
+msgid "Enable Autoresolution"
+msgstr "Abilita Risoluzione Automatica"
+
+msgid "HD Interlace Mode"
+msgstr "Modalità HD Interlacciata"
+
+msgid "HD Progressive Mode"
+msgstr "Modalità HD Progressive"
+
+msgid "OK"
+msgstr ""
+
+msgid "Refresh Rate"
+msgstr "Frequenza di Refresh"
+
+msgid "Running in testmode"
+msgstr "Funzionamento in modalità test"
+
+msgid "SD 24HZ Progressive mode"
+msgstr "Modalità SD 24HZ Progressive"
+
+msgid "SD 25/50HZ Interlace Mode"
+msgstr "Modalità SD 25/50HZ Interlacciata"
+
+msgid "SD 25/50HZ Progressive Mode"
+msgstr "Modalità SD 25/50HZ Progressive"
+
+msgid "SD 30/60HZ Interlace Mode"
+msgstr "Modalità SD 30/60HZ Interlacciata"
+
+msgid "SD 30/60HZ Progressive Mode"
+msgstr "Modalità SD 30/60HZ Progressive"
+
+msgid "Show info screen"
+msgstr "Mostrare schermata impostazioni"
+
+msgid "auto"
+msgstr ""
+
+msgid "bob"
+msgstr ""
+
+msgid "default"
+msgstr "predefinito"
+
+msgid "off"
+msgstr ""
+
+msgid "on"
+msgstr ""
+
+msgid "second"
+msgstr "secondo"
+
+msgid "seconds"
+msgstr "secondi"
