@@ -846,7 +846,7 @@ class AutoTimer:
 				if ch.isalnum():
 					pSretVal += ch.lower()
 					Flag = True
-				elif ch != "'": #completely ignore apostrophe 
+				elif ch != "'": #completely ignore apostrophe
 					if Flag:
 						pSretVal += "_"
 					Flag = False
@@ -870,14 +870,39 @@ class AutoTimer:
 
 		def descMatch(p1, p2): # Tests two descriptions for a match
 
-			sp1 = p1.strip()
-			sp2 = p2.strip()
+			ignLeadings = ["New.", "Brand new series", "New series", "Brand new"] # Any of these at the beginning of descriptions will be ignored
+			ignTrailings = ["[S]", "[AD]", "[AD,S]", "[S,AD]", "[HD]", "Also in HD."] # Any of these at the end of descriptions will be ignored (note: I'm NOT currently including [SL] or combinations with SL)
+												# Yes I know all the above are at best very English language specific at worst very UK specific
 
-			if sp1[0:4].lower() == "new.":	# Yes I know "New." is English language specific maybe even UK specific
-				sp1 = sp1[4:].lstrip()
+			def stripLeadings(d):
+				desc = d.strip()
+				done = False
+				while not done:
+					done = True
+					for tr in ignLeadings:
+						tl = len(tr)
+						if desc[0:tl].lower() == tr.lower():
+							desc = desc[tl:].lstrip(" .,-")
+							done = False
+				return desc
 
-			if sp2[0:4].lower() == "new.":	# Yes I know "New." is English language specific maybe even UK specific
-				sp2 = sp2[4:].lstrip()
+			def stripTrailings(d):
+				desc = d.strip()
+				done = False
+				while not done:
+					done = True
+					for tr in ignTrailings:
+						tl = len(tr)
+						if desc[-tl:].lower() == tr.lower():
+							desc = desc[:-tl].rstrip(" -")
+							done = False
+				return desc
+
+			sp1 = stripLeadings(p1)
+			sp2 = stripLeadings(p2)
+
+			sp1 = stripTrailings(sp1)
+			sp2 = stripTrailings(sp2)
 
 			return prepString(sp1) == prepString(sp2) # In this case I decided two blank strings will count as a match because
 					# in the worst case it's kind of equivalent to the case were all descriptions are 100% identical
