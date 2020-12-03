@@ -27,14 +27,14 @@ msgstr "Abbrechen"
 
 #: EPGBackupSupport.py:55
 msgid "Select a file to force a Backup"
-msgstr "Eine Datei auswählen um ein Backup zu starten"
+msgstr "Eine Datei auswählen, um ein Backup zu starten"
 
 #: EPGBackupSupport.py:65
 msgid ""
 "To load the Backupfile the GUI has to be restarted.\n"
 "Do you want to restart the GUI now?"
 msgstr ""
-"Um die Backupdatei zu laden muss die GUI neu gestartet werden.\n"
+"Um die Backupdatei zu laden, muss die GUI neu gestartet werden.\n"
 "Wollen Sie die GUI jetzt neu starten?"
 
 #: EPGBackupSupport.py:81
@@ -62,7 +62,7 @@ msgid ""
 "Should AutoTimer be search for new matches?"
 msgstr ""
 "EPG-Aktualisierung abgeschlossen.\n"
-"Soll Auto Timer nach neuen Ereignissen suchen?"
+"Soll AutoTimer nach neuen Ereignissen suchen?"
 
 #: EPGRefresh.py:408
 msgid "AutoTimer failed with error %s"
@@ -250,7 +250,7 @@ msgstr "Späteste Zeit für Aktualisierung (hh:mm)"
 
 #: EPGRefreshConfiguration.py:161
 msgid "Delay if not in standby (minutes)"
-msgstr "Verzögerung sofern nicht im Standby (min)"
+msgstr "Verzögerung, sofern nicht im Standby (Minuten)"
 
 #: EPGRefreshConfiguration.py:161
 msgid ""
@@ -268,8 +268,8 @@ msgid ""
 "Picture in Picture."
 msgstr ""
 "Wählen Sie hier die Methode für die Aktualisierung im Hintergrund, die am "
-"besten Ihren Anforderungen entspricht: versteckt, Pseudo- Aufnahme oder "
-"normales Bild in Bild."
+"besten Ihren Anforderungen entspricht: versteckt, Pseudoaufnahme oder "
+"normales Bild im Bild."
 
 #: EPGRefreshConfiguration.py:163
 msgid "Refresh EPG using"
@@ -288,7 +288,7 @@ msgid ""
 "Should protected services be skipped if refresh was started in interactive-"
 "mode?"
 msgstr ""
-"Sollen geschützte Kanäle bei einer manuellen Aktualisierung übersprpungen "
+"Sollen geschützte Kanäle bei einer manuellen Aktualisierung übersprungen "
 "werden?"
 
 #: EPGRefreshConfiguration.py:167
@@ -321,7 +321,7 @@ msgid ""
 "Enable this to be able to start the EPGRefresh from within the extension "
 "menu."
 msgstr ""
-"Soll der Menüpunkt \"EPGRefresh Jetzt Aktualisieren\" direkt aus dem "
+"Soll der Menüpunkt \"EPGRefresh jetzt aktualisieren\" direkt aus dem "
 "Erweiterungsmenü heraus aufgerufen werden können?"
 
 #: EPGRefreshConfiguration.py:169
@@ -422,7 +422,7 @@ msgstr "EPG Aktualisierung startet den Kanalscan."
 
 #: PipAdapter.py:32
 msgid "Please don't use PiP meanwhile!"
-msgstr "Bitte PiP in der Zwischenzeit nicht verwenden!"
+msgstr "Bitte Bild im Bild (PiP) in der Zwischenzeit nicht verwenden!"
 
 #: PipAdapter.py:32 RecordAdapter.py:29
 msgid "EPG refresh started in background."
@@ -430,7 +430,7 @@ msgstr "EPG Aktualisierung wurde im Hintergrund gestartet"
 
 #: PipAdapter.py:79
 msgid "PiP available now."
-msgstr "PiP ist wieder verfügbar."
+msgstr "Bild im Bild (PiP) ist wieder verfügbar."
 
 #: plugin.py:40 plugin.py:50
 msgid "Background only"
@@ -462,11 +462,11 @@ msgstr "Hauptbild"
 
 #: plugin.py:57
 msgid "Picture in Picture"
-msgstr "Bild in Bild (PiP)"
+msgstr "Bild im Bild (PiP)"
 
 #: plugin.py:58
 msgid "Picture in Picture (hidden)"
-msgstr "Bild in Bild (versteckt)"
+msgstr "Bild im Bild (PiP) (versteckt)"
 
 #: plugin.py:59
 msgid "Fake recording"
