@@ -556,7 +556,7 @@ class AutoTimer:
 					if eit == preveit:
 						break
 					
-					if (evtBegin - offsetBegin != rtimer.begin) or (evtEnd + offsetEnd != rtimer.end) or (shortdesc != rtimer.description) or (rtimer.vps_enabled != timer.vps_enabled) or (rtimer.vpsplugin_overwrite != timer.vpsplugin_overwrite):
+					if (evtBegin - offsetBegin != rtimer.begin) or (evtEnd + offsetEnd != rtimer.end) or (shortdesc != rtimer.description) or (hasattr(rtimer, "vps_enabled") and rtimer.vps_enabled != timer.vps_enabled) or (hasattr(rtimer, "vpsplugin_overwrite") and rtimer.vpsplugin_overwrite != timer.vpsplugin_overwrite):
 						if rtimer.isAutoTimer and eit == rtimer.eit:
 							print ("[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
 							# rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
