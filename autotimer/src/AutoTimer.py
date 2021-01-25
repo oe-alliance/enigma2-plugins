@@ -556,8 +556,8 @@ class AutoTimer:
 					if eit == preveit:
 						break
 					try: # protect against vps plugin not being present
-						vps_changed = rtimer.vps_enabled != timer.vps_enabled or rtimer.vpsplugin_overwrite != timer.vpsplugin_overwrite
-					except AttributeError as err:
+						vps_changed = rtimer.vpsplugin_enabled != timer.vps_enabled or rtimer.vpsplugin_overwrite != timer.vps_overwrite
+					except AttributeError:
 						vps_changed = False
 					if (evtBegin - offsetBegin != rtimer.begin) or (evtEnd + offsetEnd != rtimer.end) or (shortdesc != rtimer.description) or vps_changed:
 						if rtimer.isAutoTimer and eit == rtimer.eit:
