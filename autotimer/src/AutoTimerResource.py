@@ -28,7 +28,7 @@ class AutoTimerBaseResource(resource.Resource):
 <e2simplexmlresult>
 	<e2state>%s</e2state>
 	<e2statetext>%s</e2statetext>
-</e2simplexmlresult>""" % ('True' if state else 'False', statetext))
+</e2simplexmlresult>\n""" % ('True' if state else 'False', statetext))
 
 class AutoTimerDoParseResource(AutoTimerBaseResource):
 	def parsecallback(self, ret):
