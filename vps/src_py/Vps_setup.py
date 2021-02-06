@@ -8,7 +8,7 @@ from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Components.config import config, getConfigListEntry
 
-VERSION = "1.3"
+VERSION = "1.31"
 
 class VPS_Setup(Screen, ConfigListScreen):
 
@@ -24,7 +24,7 @@ class VPS_Setup(Screen, ConfigListScreen):
 		<ePixmap pixmap="skin_default/div-h.png" position="0,236" zPosition="1" size="600,2" />
 		<widget source="help" render="Label" position="5,245" size="590,125" font="Regular;21" />
 	</screen>"""
-	
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
@@ -37,7 +37,7 @@ class VPS_Setup(Screen, ConfigListScreen):
 		self.vps_allow_seeking_multiple_pdc = getConfigListEntry(_("Seeking connected events"), config.plugins.vps.allow_seeking_multiple_pdc)
 		self.vps_default = getConfigListEntry(_("VPS enabled by default"), config.plugins.vps.vps_default)
 		self.vps_instanttimer = getConfigListEntry(_("Enable VPS on instant records"), config.plugins.vps.instanttimer)
-		
+
 		self.list = []
 		self.list.append(self.vps_enabled)
 		self.list.append(self.vps_initial_time)
@@ -64,12 +64,12 @@ class VPS_Setup(Screen, ConfigListScreen):
 				"blue": self.show_info,
 			}
 		)
-		
+
 		self.onLayoutFinish.append(self.setCustomTitle)
-		
+
 	def setCustomTitle(self):
 		self.setTitle(self.setup_title)
-	
+
 	def updateHelp(self):
 		cur = self["config"].getCurrent()
 		if cur == self.vps_enabled:
@@ -87,7 +87,7 @@ class VPS_Setup(Screen, ConfigListScreen):
 
 	def show_info(self):
 		VPS_show_info(self.session)
-	
+
 	def cancelConfirm(self, result):
 		if not result:
 			return
@@ -121,29 +121,28 @@ class VPS_Screen_Info(Screen):
 	skin = """<screen name="vpsInfo" position="center,center" size="550,400" title="VPS-Plugin Information">
 		<widget name="text" position="10,10" size="540,390" font="Regular;22" />
 	</screen>"""
-	
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		
+
 		#Summary
 		self.info_title = _("VPS-Plugin Information")
-		
+
 		self["text"] = ScrollLabel(_("VPS-Plugin can react on delays arising in the startTime or endTime of a programme. VPS is only supported by certain channels!\n\nIf you enable VPS, the recording will only start, when the channel flags the programme as running.\n\nIf you select \"yes (safe mode)\", the recording is definitely starting at the latest at the startTime you defined. The recording may start earlier or last longer.\n\n\nSupported channels\n\nGermany:\n ARD and ZDF\n\nAustria:\n ORF\n\nSwitzerland:\n SF\n\nCzech Republic:\n CT\n\nIf a timer is programmed manually (not via EPG), it is necessary to set a VPS-Time to enable VPS. VPS-Time (also known as PDC) is the first published start time, e.g. given in magazines. If you set a VPS-Time, you have to leave timer name empty."))
-		
-		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"], 
+
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"],
 			{
 				"cancel": self.close,
 				"ok": self.close,
 				"up": self["text"].pageUp,
 				"down": self["text"].pageDown,
 			}, -1)
-		
+
 		self.onLayoutFinish.append(self.setCustomTitle)
-		
+
 	def setCustomTitle(self):
 		self.setTitle(self.info_title)
-		
-	
+
+
 def VPS_show_info(session):
 	session.open(VPS_Screen_Info)
-	
