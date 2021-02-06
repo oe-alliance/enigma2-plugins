@@ -67,19 +67,16 @@ def doneConfig(session, **kwargs):
 	vps_timers.checkTimer()
 
 def startSetup(menuid):
-    if getImageDistro() in ('teamblue'):
-        if menuid != "general_menu":
-            return [ ]
-    elif getImageDistro() in ('openhdf'):
-        if menuid != "record_menu":
-            return [ ]
-    elif getImageDistro() in ('openvix'):
-        if menuid != "rec":
-            return [ ]
-    else:
-        if menuid != "system":
-            return []
-    return [(_("VPS Settings"), setup, "vps", 50)]
+	if getImageDistro() in ('teamblue'):
+		if menuid != "general_menu":
+			return [ ]
+	elif getImageDistro() in ('openhdf'):
+		if menuid != "record_menu":
+			return [ ]
+	else:
+		if menuid != "system":
+			return []
+	return [(_("VPS Settings"), setup, "vps", 50)]
 
 def getNextWakeup():
 	return vps_timers.NextWakeup()
