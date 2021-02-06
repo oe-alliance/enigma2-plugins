@@ -73,6 +73,9 @@ def startSetup(menuid):
 	elif getImageDistro() in ('openhdf'):
 		if menuid != "record_menu":
 			return [ ]
+	elif getImageDistro() in ('openvix'):
+		if menuid != "rec":
+			return [ ]
 	else:
 		if menuid != "system":
 			return []
