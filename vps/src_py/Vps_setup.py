@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from . import _
+from enigma import getDesktop
 from Screens.Screen import Screen
 from Components.ScrollLabel import ScrollLabel
 from Components.ConfigList import ConfigListScreen
@@ -12,19 +13,33 @@ VERSION = "1.3"
 
 class VPS_Setup(Screen, ConfigListScreen):
 
-	skin = """<screen name="vpsConfiguration" title="VPS-Plugin" position="center,center" size="600,370">
-		<ePixmap position="5,5" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="155,5" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="305,5" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="455,5" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget source="key_red" render="Label" position="5,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget source="key_green" render="Label" position="155,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget source="key_blue" render="Label" position="455,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="config" position="5,50" size="590,185" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="skin_default/div-h.png" position="0,236" zPosition="1" size="600,2" />
-		<widget source="help" render="Label" position="5,245" size="590,125" font="Regular;21" />
-	</screen>"""
-	
+	if getDesktop(0).size().width() <= 1280:
+		skin = """<screen name="vpsConfiguration" title="VPS-Plugin" position="center,center" size="600,370">
+			<ePixmap position="5,5" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="155,5" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap position="305,5" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap position="455,5" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<widget source="key_red" render="Label" position="5,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_green" render="Label" position="155,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_blue" render="Label" position="455,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="config" position="5,50" size="590,185" scrollbarMode="showOnDemand" />
+			<ePixmap pixmap="skin_default/div-h.png" position="0,236" zPosition="1" size="600,2" />
+			<widget source="help" render="Label" position="5,245" size="590,125" font="Regular;21" />
+		</screen>"""
+	else:
+		skin = """<screen name="vpsConfiguration" title="VPS-Plugin" position="center,center" size="990,590">
+			<ePixmap position="5,5" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="285,5" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap position="565,5" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap position="845,5" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<widget source="key_red" render="Label" position="5,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_green" render="Label" position="285,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_blue" render="Label" position="845,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="config" position="5,60" size="980,275" scrollbarMode="showOnDemand" font="Regular;32" itemHeight="34" />
+			<ePixmap pixmap="skin_default/div-h.png" position="center,497" zPosition="1" size="600,2" />
+			<widget source="help" render="Label" position="5,512" size="980,210" font="Regular;33" />
+		</screen>"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
@@ -37,7 +52,7 @@ class VPS_Setup(Screen, ConfigListScreen):
 		self.vps_allow_seeking_multiple_pdc = getConfigListEntry(_("Seeking connected events"), config.plugins.vps.allow_seeking_multiple_pdc)
 		self.vps_default = getConfigListEntry(_("VPS enabled by default"), config.plugins.vps.vps_default)
 		self.vps_instanttimer = getConfigListEntry(_("Enable VPS on instant records"), config.plugins.vps.instanttimer)
-		
+
 		self.list = []
 		self.list.append(self.vps_enabled)
 		self.list.append(self.vps_initial_time)
@@ -64,12 +79,12 @@ class VPS_Setup(Screen, ConfigListScreen):
 				"blue": self.show_info,
 			}
 		)
-		
+
 		self.onLayoutFinish.append(self.setCustomTitle)
-		
+
 	def setCustomTitle(self):
 		self.setTitle(self.setup_title)
-	
+
 	def updateHelp(self):
 		cur = self["config"].getCurrent()
 		if cur == self.vps_enabled:
@@ -87,7 +102,7 @@ class VPS_Setup(Screen, ConfigListScreen):
 
 	def show_info(self):
 		VPS_show_info(self.session)
-	
+
 	def cancelConfirm(self, result):
 		if not result:
 			return
@@ -118,32 +133,36 @@ class VPS_Setup(Screen, ConfigListScreen):
 
 
 class VPS_Screen_Info(Screen):
-	skin = """<screen name="vpsInfo" position="center,center" size="550,400" title="VPS-Plugin Information">
-		<widget name="text" position="10,10" size="540,390" font="Regular;22" />
-	</screen>"""
-	
+	if getDesktop(0).size().width() <= 1280:
+		skin = """<screen name="vpsInfo" position="center,center" size="550,400" title="VPS-Plugin Information">
+			<widget name="text" position="10,10" size="540,390" font="Regular;22" />
+		</screen>"""
+	else:
+		skin = """<screen name="vpsInfo" position="center,center" size="1050,700" title="VPS-Plugin Information">
+			<widget name="text" position="10,10" size="1040,690" font="Regular;32" />
+		</screen>"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		
+
 		#Summary
 		self.info_title = _("VPS-Plugin Information")
-		
+
 		self["text"] = ScrollLabel(_("VPS-Plugin can react on delays arising in the startTime or endTime of a programme. VPS is only supported by certain channels!\n\nIf you enable VPS, the recording will only start, when the channel flags the programme as running.\n\nIf you select \"yes (safe mode)\", the recording is definitely starting at the latest at the startTime you defined. The recording may start earlier or last longer.\n\n\nSupported channels\n\nGermany:\n ARD and ZDF\n\nAustria:\n ORF\n\nSwitzerland:\n SF\n\nCzech Republic:\n CT\n\nIf a timer is programmed manually (not via EPG), it is necessary to set a VPS-Time to enable VPS. VPS-Time (also known as PDC) is the first published start time, e.g. given in magazines. If you set a VPS-Time, you have to leave timer name empty."))
-		
-		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"], 
+
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"],
 			{
 				"cancel": self.close,
 				"ok": self.close,
 				"up": self["text"].pageUp,
 				"down": self["text"].pageDown,
 			}, -1)
-		
+
 		self.onLayoutFinish.append(self.setCustomTitle)
-		
+
 	def setCustomTitle(self):
 		self.setTitle(self.info_title)
-		
-	
+
+
 def VPS_show_info(session):
 	session.open(VPS_Screen_Info)
-	
