@@ -18,6 +18,13 @@ config.plugins.vps.vps_default = ConfigSelection(choices = [("no", _("No")), ("y
 config.plugins.vps.instanttimer = ConfigSelection(choices = [("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes")), ("ask", _("always ask"))], default = "ask")
 config.plugins.vps.infotext = ConfigInteger(default=0)
 
+# 04 Feb 2021.  If we don't force-save this then
+#   config.plugins.vps.enabled=False
+# hangs around in the settings file even after you set it back to True.
+# Something else seems to be wrong somewhere, but this is a quick and
+# imple fix/workaround.
+#
+config.plugins.vps.enabled.save_forced = True
 
 def autostart(reason, **kwargs):
 	if reason == 0:
