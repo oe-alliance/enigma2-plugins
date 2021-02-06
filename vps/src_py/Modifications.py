@@ -18,27 +18,23 @@ from Vps_setup import VPS_show_info
 vps_already_registered = False
 
 # Allow VPS to work with new Setup-based timers, but retain
-# backwards-compatibility with old ConfigListScreen-based timers, in
-# both Py2 and Py3. It's ugly.
+# backwards-compatibility with old ConfigListScreen-based timers, (one
+# of which takes a positional parameter whilst the other does not).
+# In both Py2 and Py3. It's not pretty as we have to count the args...
+#
+import sys, inspect
+if sys.version_info[0] == 2:
+	__getargs = inspect.getargspec
+else:
+# getargspec is deprecated in Py3 in favour of getfullargspec
+	__getargs = inspect.getfullargspec
 
-import inspect
+__vps_TimerEntry_createSetup_has_widget = len(__getargs(TimerEntry.createSetup).args) > 1
 
-def __getargs(fn):
-	return inspect.getargspec(fn).args
-
-try:
-	import six
-
-	if six.PY3:
-		def __getargs(fn):
-			return inspect.getfullargspec(fn).args
-except ImportError:
-	pass
-
-__vps_TimerEntry_createSetup_has_widget = len(__getargs(TimerEntry.createSetup)) > 1
-
-def new_RecordTimer_saveTimer(self):
-	self._saveTimer_old_rn_vps()
+# We cater for any parameters thrown at us and pass it all on.
+#
+def new_RecordTimer_saveTimer(self, *args, **kwargs):
+	self._saveTimer_old_rn_vps(*args, **kwargs)
 	
 	# added by VPS-Plugin
 	list = []
@@ -80,7 +76,9 @@ def new_RecordTimer_saveTimer(self):
 	# added by VPS-Plugin
 
 
-def new_RecordTimer_loadTimer(self):
+# We cater for any parameters thrown at us and pass it all on.
+#
+def new_RecordTimer_loadTimer(self, *args, **kwargs):
 	# added by VPS-Plugin
 	xmlroot = None
 	try:
@@ -91,7 +89,8 @@ def new_RecordTimer_loadTimer(self):
 		pass
 	# added by VPS-Plugin
 	
-	self._loadTimer_old_rn_vps()
+# Pass on all we were given
+	self._loadTimer_old_rn_vps(*args, **kwargs)
 	
 	# added by VPS-Plugin
 	try:
@@ -133,8 +132,12 @@ def new_RecordTimer_loadTimer(self):
 		pass
 	# added by VPS-Plugin
 
-def new_TimerEntry_createConfig(self):
-	self._createConfig_old_rn_vps()
+# We cater for any parameters thrown at us and pass it all on.
+#
+def new_TimerEntry_createConfig(self, *args, **kwargs):
+
+# Pass on all we were given
+	self._createConfig_old_rn_vps(*args, **kwargs)
 	
 	# added by VPS-Plugin
 	try:
@@ -170,10 +173,24 @@ def new_TimerEntry_createConfig(self):
 	# added by VPS-Plugin
 
 
-def new_TimerEntry_createSetup(self, widget="config"):
-	if __vps_TimerEntry_createSetup_has_widget:
-		self._createSetup_old_rn_vps(widget)
+# We cater for any parameters thrown at us and pass it all on.
+# This one is a little messy as we may be called with a widegt as the
+# first positional parameter, but the call we have intercepted might not
+# be expecting one. (Or vice versa?)
+# So, we remove the first positional parameter if it is there (assuming
+# it to be "widget") and call the intercepted code as it expects.
+#
+def new_TimerEntry_createSetup(self, *args, **kwargs):
+	if len(args) > 0:
+		widget = args[0]
+		del args[0]
 	else:
+		widget = "config"
+	if __vps_TimerEntry_createSetup_has_widget:
+# Since we know it takes >1 arg, pass them all on
+		self._createSetup_old_rn_vps(widget, *args, **kwargs)
+	else:
+# We know it takes 0 rgs, so no point in sending it any
 		self._createSetup_old_rn_vps()
 
 	# added by VPS-Plugin
@@ -216,8 +233,12 @@ def new_TimerEntry_createSetup(self, widget="config"):
 	self[widget].list = self.list
 	self[widget].l.setList(self.list)
 
-def new_TimerEntry_newConfig(self):
-	self._newConfig_old_rn_vps()
+# We cater for any parameters thrown at us and pass it all on.
+#
+def new_TimerEntry_newConfig(self, *args, **kwargs):
+
+# Pass on all we were given
+	self._newConfig_old_rn_vps(*args, **kwargs)
 	
 	# added by VPS-Plugin
 	if self["config"].getCurrent() == self.timerVps_enabled_Entry:
@@ -229,7 +250,9 @@ def new_TimerEntry_newConfig(self):
 	# added by VPS-Plugin
 
 
-def new_TimerEntry_keyGo(self):
+# We cater for any parameters thrown at us and pass it all on.
+#
+def new_TimerEntry_keyGo(self, *args, **kwargs):
 	# added by VPS-Plugin
 	try:
 		self.timer.vpsplugin_enabled = self.timerentry_vpsplugin_enabled.value != "no"
@@ -249,11 +272,16 @@ def new_TimerEntry_keyGo(self):
 		pass
 	# added by VPS-Plugin
 	
-	self._keyGo_old_rn_vps()
+# Pass on all we were given
+	self._keyGo_old_rn_vps(*args, **kwargs)
 
 
-def new_TimerEntry_finishedChannelSelection(self, *args):
-	self._finishedChannelSelection_old_rn_vps(*args)
+# We cater for any parameters thrown at us and pass it all on.
+#
+def new_TimerEntry_finishedChannelSelection(self, *args, **kwargs):
+
+# Pass on all we were given
+	self._finishedChannelSelection_old_rn_vps(*args, **kwargs)
 	
 	try:
 		if self.timerentry_vpsplugin_enabled.value != "no":
@@ -262,9 +290,12 @@ def new_TimerEntry_finishedChannelSelection(self, *args):
 	except:
 		pass
 
+# We cater for any parameters thrown at us and pass it all on.
+#
+def new_InfoBarInstantRecord_recordQuestionCallback(self, answer, *args, **kwargs):
 
-def new_InfoBarInstantRecord_recordQuestionCallback(self, answer):
-	self._recordQuestionCallback_old_rn_vps(answer)
+# Pass on all we were given
+	self._recordQuestionCallback_old_rn_vps(answer, *args, **kwargs)
 	
 	try:
 		entry = len(self.recording)-1
