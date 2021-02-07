@@ -16,7 +16,8 @@
 #
 #######################################################################
 
-
+# for localized messages
+from . import _
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
@@ -34,6 +35,7 @@ from Components.ScrollLabel import ScrollLabel
 from Components.Pixmap import Pixmap
 from Components.AVSwitch import AVSwitch
 from Components.config import config, ConfigSubsection, ConfigText
+from Components.Sources.StaticText import StaticText
 from Tools.Directories import fileExists, pathExists
 from Tools.HardwareInfo import HardwareInfo
 from ServiceReference import ServiceReference
@@ -171,6 +173,15 @@ class DreamExplorerII(Screen):
 	def __init__(self, session, args = None):
 		self.skin = DreamExplorerII.skin
 		Screen.__init__(self, session)
+
+		self["key_red"] = StaticText(_("Delete"))
+		self["key_green"] = StaticText(_("Rename"))
+		self["key_yellow"] = StaticText(_("Move/Copy"))
+		self["key_blue"] = StaticText(_("Bookmarks"))
+
+		self["key_menu"] = StaticText(_("MENU"))
+		self["key_info"] = StaticText(_("INFO"))
+
 		self.sesion = session
 		self.altservice = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.MyBox = HardwareInfo().get_device_name()
