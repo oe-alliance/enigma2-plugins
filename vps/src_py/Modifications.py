@@ -181,15 +181,10 @@ def new_TimerEntry_createConfig(self, *args, **kwargs):
 # So, we remove the first positional parameter if it is there (assuming
 # it to be "widget") and call the intercepted code as it expects.
 #
-def new_TimerEntry_createSetup(self, *args, **kwargs):
-	if len(args) > 0:
-		widget = args[0]
-		del args[0]
-	else:
-		widget = "config"
+def new_TimerEntry_createSetup(self, widget="config"):
 	if __vps_TimerEntry_createSetup_has_widget:
 # Since we know it takes >1 arg, pass them all on
-		self._createSetup_old_rn_vps(widget, *args, **kwargs)
+		self._createSetup_old_rn_vps(widget)
 	else:
 # We know it takes 0 rgs, so no point in sending it any
 		self._createSetup_old_rn_vps()
