@@ -174,19 +174,22 @@ def new_TimerEntry_createConfig(self, *args, **kwargs):
 	# added by VPS-Plugin
 
 
-# We cater for any parameters thrown at us and pass it all on.
-# This one is a little messy as we may be called with a widegt as the
-# first positional parameter, but the call we have intercepted might not
-# be expecting one. (Or vice versa?)
-# So, we remove the first positional parameter if it is there (assuming
-# it to be "widget") and call the intercepted code as it expects.
+# This call should(?) also cater for any parameters thrown at us and
+# pass it all on.
+# But the original attempts to set this up were wrong (a
+# createConfig/createSetup mix-up) and so this (which currently
+# works) was put back in place.
+# If anything else changes with the calling sequence (including any
+# other interceptor adding parameters) then the full "*args, **kwargs"
+# definition should be put in and widget extracted from that as
+# necessary.
 #
 def new_TimerEntry_createSetup(self, widget="config"):
 	if __vps_TimerEntry_createSetup_has_widget:
 # Since we know it takes >1 arg, pass them all on
 		self._createSetup_old_rn_vps(widget)
 	else:
-# We know it takes 0 rgs, so no point in sending it any
+# We know it takes 0 args, so no point in sending it any
 		self._createSetup_old_rn_vps()
 
 	# added by VPS-Plugin
@@ -286,6 +289,36 @@ def new_TimerEntry_finishedChannelSelection(self, *args, **kwargs):
 	except:
 		pass
 
+# Do we have TimerEntryBase?
+# If so, we have to intercept its __init__ and set the session filed in
+# self, as otherwise our createConfig intercept will fail as in the
+# "standard" code session isn't set until Setup.__init__ is called,
+# which comes later.
+#
+we_have_TimerEntryBase = False
+try:
+	from Screens.TimerEntryBase import TimerEntryBase
+	we_have_TimerEntryBase = True
+
+# We cater for any parameters thrown at us and pass it all on.
+# But we know that session is arg1.
+# And if it isn't we'll have Big Problems anyway.....
+#
+	def new_TimerEntryBase_init(self, session, *args, **kwargs):
+
+# For our createSetup intercept to work, the session member must be set
+# now - the reworked Setup code sets it too late
+#
+		try:
+			self.session = session
+		except:
+			pass
+# NOW we can safely pass on all we were given
+		self.__init__old_rn_vps(session, *args, **kwargs)
+
+except:
+	pass
+
 # We cater for any parameters thrown at us and pass it all on.
 #
 def new_InfoBarInstantRecord_recordQuestionCallback(self, answer, *args, **kwargs):
@@ -326,6 +359,13 @@ def register_vps():
 
 		TimerEntry._createSetup_old_rn_vps = TimerEntry.createSetup
 		TimerEntry.createSetup = new_TimerEntry_createSetup
+
+# If we_have_TimerEntryBase was set above then we need this intercepting
+# call to be set-up as well.
+#
+		if we_have_TimerEntryBase:
+			TimerEntryBase.__init__old_rn_vps = TimerEntryBase.__init__
+			TimerEntryBase.__init__ = new_TimerEntryBase_init
 
 		if hasattr(TimerEntry, "newConfig"):
 			TimerEntry._newConfig_old_rn_vps = TimerEntry.newConfig
