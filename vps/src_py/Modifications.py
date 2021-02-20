@@ -250,8 +250,10 @@ def new_TimerEntry_newConfig(self, *args, **kwargs):
 
 
 # We cater for any parameters thrown at us and pass it all on.
+# NOTE that for systems not refactored ot use TimerEntryBase
+# this is intercepting keyGo, not keySave.
 #
-def new_TimerEntry_keyGo(self, *args, **kwargs):
+def new_TimerEntry_keySave(self, *args, **kwargs):
 	# added by VPS-Plugin
 	try:
 		self.timer.vpsplugin_enabled = self.timerentry_vpsplugin_enabled.value != "no"
@@ -272,7 +274,7 @@ def new_TimerEntry_keyGo(self, *args, **kwargs):
 	# added by VPS-Plugin
 
 # Pass on all we were given
-	self._keyGo_old_rn_vps(*args, **kwargs)
+	self._keySave_old_rn_vps(*args, **kwargs)
 
 
 # We cater for any parameters thrown at us and pass it all on.
@@ -374,8 +376,11 @@ def register_vps():
 			TimerEntry._newConfig_old_rn_vps = TimerEntry.changedEntry
 			TimerEntry.newConfig = new_TimerEntry_newConfig
 
-		TimerEntry._keyGo_old_rn_vps = TimerEntry.keyGo
-		TimerEntry.keyGo = new_TimerEntry_keyGo
+		if we_have_TimerEntryBase:
+			TimerEntry._keySave_old_rn_vps = TimerEntry.keySave
+		else:   # It used to be called keyGo
+			TimerEntry._keySave_old_rn_vps = TimerEntry.keyGo
+		TimerEntry.keySave = new_TimerEntry_keySave
 
 		TimerEntry._finishedChannelSelection_old_rn_vps = TimerEntry.finishedChannelSelection
 		TimerEntry.finishedChannelSelection = new_TimerEntry_finishedChannelSelection
