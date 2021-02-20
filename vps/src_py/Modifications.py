@@ -35,38 +35,38 @@ __vps_TimerEntry_createSetup_has_widget = len(__getargs(TimerEntry.createSetup).
 #
 def new_RecordTimer_saveTimer(self, *args, **kwargs):
 	self._saveTimer_old_rn_vps(*args, **kwargs)
-	
+
 	# added by VPS-Plugin
 	list = []
 	list.append('<?xml version="1.0" ?>\n')
 	list.append('<vps_timers>\n')
-	
-	try:	
+
+	try:
 		for timer in self.timer_list:
 			if timer.dontSave or timer.vpsplugin_enabled is None or timer.vpsplugin_enabled == False:
 				continue
-			
+
 			list.append('<timer')
 			list.append(' begin="' + str(int(timer.begin)) + '"')
 			list.append(' end="' + str(int(timer.end)) + '"')
 			list.append(' serviceref="' + stringToXML(str(timer.service_ref)) + '"')
 			list.append(' vps_enabled="1"')
-			
+
 			if timer.vpsplugin_overwrite is not None:
 				list.append(' vps_overwrite="' + str(int(timer.vpsplugin_overwrite)) + '"')
 			else:
 				list.append(' vps_overwrite="0"')
-			
+
 			if timer.vpsplugin_time is not None:
 				list.append(' vps_time="' + str(timer.vpsplugin_time) + '"')
 			else:
 				list.append(' vps_time="0"')
-			
+
 			list.append('>\n')
 			list.append('</timer>\n')
-		
+
 		list.append('</vps_timers>\n')
-		
+
 		file = open(Directories.resolveFilename(Directories.SCOPE_CONFIG, "timers_vps.xml"), "w")
 		for x in list:
 			file.write(x)
@@ -88,38 +88,38 @@ def new_RecordTimer_loadTimer(self, *args, **kwargs):
 	except:
 		pass
 	# added by VPS-Plugin
-	
+
 # Pass on all we were given
 	self._loadTimer_old_rn_vps(*args, **kwargs)
-	
+
 	# added by VPS-Plugin
 	try:
 		vps_timers = { }
-		
+
 		if xmlroot is not None:
 			for xml in xmlroot.findall("timer"):
 				begin = xml.get("begin")
 				end = xml.get("end")
 				serviceref = xml.get("serviceref").encode("utf-8")
-				
+
 				vps_timers[serviceref + begin + end] = { }
 				vps_overwrite = xml.get("vps_overwrite")
 				if vps_overwrite and vps_overwrite == "1":
 					vps_timers[serviceref + begin + end]["overwrite"] = True
 				else:
 					vps_timers[serviceref + begin + end]["overwrite"] = False
-				
+
 				vps_time = xml.get("vps_time")
 				if vps_time and vps_time != "None":
 					vps_timers[serviceref + begin + end]["time"] = int(vps_time)
 				else:
 					vps_timers[serviceref + begin + end]["time"] = 0
-			
+
 			for timer in self.timer_list:
 				begin = str(timer.begin)
 				end = str(timer.end)
 				serviceref = str(timer.service_ref)
-				
+
 				if vps_timers.get(serviceref + begin + end, None) is not None:
 					timer.vpsplugin_enabled = True
 					timer.vpsplugin_overwrite = vps_timers[serviceref + begin + end]["overwrite"]
@@ -138,17 +138,17 @@ def new_TimerEntry_createConfig(self, *args, **kwargs):
 
 # Pass on all we were given
 	self._createConfig_old_rn_vps(*args, **kwargs)
-	
+
 	# added by VPS-Plugin
 	try:
 		self.timerentry_vpsplugin_dontcheck_pdc = False
 		default_value = "no"
-		
+
 		if self.timer.vpsplugin_enabled is not None:
 			self.timerentry_vpsplugin_dontcheck_pdc = self.timer.vpsplugin_enabled
 			if self.timer.vpsplugin_enabled:
 				default_value = {False: "yes_safe", True: "yes"}[self.timer.vpsplugin_overwrite]
-		
+
 		elif config.plugins.vps.vps_default.value != "no" and self.timer.eit is not None and self.timer.name != "" and self.timer not in self.session.nav.RecordTimer.timer_list and self.timer not in self.session.nav.RecordTimer.processed_timers:
 			from Vps_check import Check_PDC, VPS_check_PDC_Screen
 			service = self.timerentry_service_ref.ref
@@ -158,10 +158,10 @@ def new_TimerEntry_createConfig(self, *args, **kwargs):
 			if has_pdc == 1 or default_vps == 1:
 				self.timerentry_vpsplugin_dontcheck_pdc = True
 				default_value = config.plugins.vps.vps_default.value
-		
-		
+
+
 		self.timerentry_vpsplugin_enabled = ConfigSelection(choices = [("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes"))], default = default_value)
-	
+
 		if self.timer.vpsplugin_time is not None:
 			self.timerentry_vpsplugin_time_date = ConfigDateTime(default = self.timer.vpsplugin_time, formatstring = _("%d.%B %Y"), increment = 86400)
 			self.timerentry_vpsplugin_time_clock = ConfigClock(default = self.timer.vpsplugin_time)
@@ -173,19 +173,22 @@ def new_TimerEntry_createConfig(self, *args, **kwargs):
 	# added by VPS-Plugin
 
 
-# We cater for any parameters thrown at us and pass it all on.
-# This one is a little messy as we may be called with a widegt as the
-# first positional parameter, but the call we have intercepted might not
-# be expecting one. (Or vice versa?)
-# So, we remove the first positional parameter if it is there (assuming
-# it to be "widget") and call the intercepted code as it expects.
+# This call should(?) also cater for any parameters thrown at us and
+# pass it all on.
+# But the original attempts to set this up were wrong (a
+# createConfig/createSetup mix-up) and so this (which currently
+# works) was put back in place.
+# If anything else changes with the calling sequence (including any
+# other interceptor adding parameters) then the full "*args, **kwargs"
+# definition should be put in and widget extracted from that as
+# necessary.
 #
 def new_TimerEntry_createSetup(self, widget="config"):
 	if __vps_TimerEntry_createSetup_has_widget:
 # Since we know it takes >1 arg, pass them all on
 		self._createSetup_old_rn_vps(widget)
 	else:
-# We know it takes 0 rgs, so no point in sending it any
+# We know it takes 0 args, so no point in sending it any
 		self._createSetup_old_rn_vps()
 
 	# added by VPS-Plugin
@@ -194,29 +197,29 @@ def new_TimerEntry_createSetup(self, widget="config"):
 		if self.timerentry_justplay.value != "zap" and self.timerentry_type.value == "once" and config.plugins.vps.enabled.value == True:
 			self.timerVps_enabled_Entry = getConfigListEntry(_("Enable VPS"), self.timerentry_vpsplugin_enabled)
 			self.list.append(self.timerVps_enabled_Entry)
-			
+
 			if self.timerentry_vpsplugin_enabled.value != "no":
 				from Vps_check import Check_PDC, VPS_check_PDC_Screen
 				service = self.timerentry_service_ref.ref
 				if service and service.flags & eServiceReference.isGroup:
 					service = getBestPlayableServiceReference(service, eServiceReference())
-				
+
 				if self.timer.eit is None or self.timer.name == "":
 					if not self.timerentry_vpsplugin_dontcheck_pdc:
 						self.timerentry_vpsplugin_dontcheck_pdc = True
 						has_pdc, last_check, default_vps = Check_PDC.check_service(service)
 						if has_pdc != 1 or Check_PDC.recheck(has_pdc, last_check):
 							self.session.open(VPS_check_PDC_Screen, service, self)
-					
+
 					self.list.append(getConfigListEntry(_("VPS-Time (date)"), self.timerentry_vpsplugin_time_date))
 					self.list.append(getConfigListEntry(_("VPS-Time (time)"), self.timerentry_vpsplugin_time_clock))
-					
+
 				elif not self.timerentry_vpsplugin_dontcheck_pdc:
 					self.timerentry_vpsplugin_dontcheck_pdc = True
 					has_pdc, last_check, default_vps = Check_PDC.check_service(service)
 					if default_vps != 1 and (has_pdc != 1 or Check_PDC.recheck(has_pdc, last_check)):
 						self.session.open(VPS_check_PDC_Screen, service, self, False)
-					
+
 					# Hilfetext
 					if config.plugins.vps.infotext.value != 2:
 						config.plugins.vps.infotext.value = 2
@@ -234,12 +237,12 @@ def new_TimerEntry_newConfig(self, *args, **kwargs):
 
 # Pass on all we were given
 	self._newConfig_old_rn_vps(*args, **kwargs)
-	
+
 	# added by VPS-Plugin
 	if self["config"].getCurrent() == self.timerVps_enabled_Entry:
 		if self.timerentry_vpsplugin_enabled.value == "no":
 			self.timerentry_vpsplugin_dontcheck_pdc = False
-		
+
 		self.createSetup("config")
 		self["config"].setCurrentIndex(self["config"].getCurrentIndex() + 1)
 	# added by VPS-Plugin
@@ -255,7 +258,7 @@ def new_TimerEntry_keyGo(self, *args, **kwargs):
 		if self.timer.vpsplugin_enabled == True:
 			from Plugins.SystemPlugins.vps.Vps import vps_timers
 			vps_timers.checksoon()
-			
+
 			if self.timer.name == "" or self.timer.eit is None:
 				self.timer.vpsplugin_time = self.getTimestamp(self.timerentry_vpsplugin_time_date.value, self.timerentry_vpsplugin_time_clock.value)
 				if self.timer.vpsplugin_overwrite:
@@ -266,7 +269,7 @@ def new_TimerEntry_keyGo(self, *args, **kwargs):
 	except:
 		pass
 	# added by VPS-Plugin
-	
+
 # Pass on all we were given
 	self._keyGo_old_rn_vps(*args, **kwargs)
 
@@ -277,7 +280,7 @@ def new_TimerEntry_finishedChannelSelection(self, *args, **kwargs):
 
 # Pass on all we were given
 	self._finishedChannelSelection_old_rn_vps(*args, **kwargs)
-	
+
 	try:
 		if self.timerentry_vpsplugin_enabled.value != "no":
 			self.timerentry_vpsplugin_dontcheck_pdc = False
@@ -285,13 +288,43 @@ def new_TimerEntry_finishedChannelSelection(self, *args, **kwargs):
 	except:
 		pass
 
+# Do we have TimerEntryBase?
+# If so, we have to intercept its __init__ and set the session filed in
+# self, as otherwise our createConfig intercept will fail as in the
+# "standard" code session isn't set until Setup.__init__ is called,
+# which comes later.
+#
+we_have_TimerEntryBase = False
+try:
+	from Screens.TimerEntryBase import TimerEntryBase
+	we_have_TimerEntryBase = True
+
+# We cater for any parameters thrown at us and pass it all on.
+# But we know that session is arg1.
+# And if it isn't we'll have Big Problems anyway.....
+#
+	def new_TimerEntryBase_init(self, session, *args, **kwargs):
+
+# For our createSetup intercept to work, the session member must be set
+# now - the reworked Setup code sets it too late
+#
+		try:
+			self.session = session
+		except:
+			pass
+# NOW we can safely pass on all we were given
+		self.__init__old_rn_vps(session, *args, **kwargs)
+
+except:
+	pass
+
 # We cater for any parameters thrown at us and pass it all on.
 #
 def new_InfoBarInstantRecord_recordQuestionCallback(self, answer, *args, **kwargs):
 
 # Pass on all we were given
 	self._recordQuestionCallback_old_rn_vps(answer, *args, **kwargs)
-	
+
 	try:
 		entry = len(self.recording)-1
 		if answer is not None and answer[1] == "event" and config.plugins.vps.instanttimer.value != "no" and entry is not None and entry >= 0:
@@ -300,31 +333,38 @@ def new_InfoBarInstantRecord_recordQuestionCallback(self, answer, *args, **kwarg
 			if rec_ref and rec_ref.flags & eServiceReference.isGroup:
 				rec_ref = getBestPlayableServiceReference(rec_ref, eServiceReference())
 			self.session.open(VPS_check_on_instanttimer, rec_ref, self.recording[entry])
-			
+
 	except:
 		pass
 
 # VPS-Plugin in Enigma-Klassen einhängen
 def register_vps():
 	global vps_already_registered
-	
+
 	if vps_already_registered == False:
 		RecordTimerEntry.vpsplugin_enabled = None
 		RecordTimerEntry.vpsplugin_overwrite = None
 		RecordTimerEntry.vpsplugin_time = None
-		
+
 		RecordTimer._saveTimer_old_rn_vps = RecordTimer.saveTimer
 		RecordTimer.saveTimer = new_RecordTimer_saveTimer
-		
+
 		RecordTimer._loadTimer_old_rn_vps = RecordTimer.loadTimer
 		RecordTimer.loadTimer = new_RecordTimer_loadTimer
-		
-		
+
+
 		TimerEntry._createConfig_old_rn_vps = TimerEntry.createConfig
 		TimerEntry.createConfig = new_TimerEntry_createConfig
-		
+
 		TimerEntry._createSetup_old_rn_vps = TimerEntry.createSetup
 		TimerEntry.createSetup = new_TimerEntry_createSetup
+
+# If we_have_TimerEntryBase was set above then we need this intercepting
+# call to be set-up as well.
+#
+		if we_have_TimerEntryBase:
+			TimerEntryBase.__init__old_rn_vps = TimerEntryBase.__init__
+			TimerEntryBase.__init__ = new_TimerEntryBase_init
 
 		if hasattr(TimerEntry, "newConfig"):
 			TimerEntry._newConfig_old_rn_vps = TimerEntry.newConfig
@@ -335,11 +375,11 @@ def register_vps():
 
 		TimerEntry._keyGo_old_rn_vps = TimerEntry.keyGo
 		TimerEntry.keyGo = new_TimerEntry_keyGo
-		
+
 		TimerEntry._finishedChannelSelection_old_rn_vps = TimerEntry.finishedChannelSelection
 		TimerEntry.finishedChannelSelection = new_TimerEntry_finishedChannelSelection
-		
+
 		InfoBarInstantRecord._recordQuestionCallback_old_rn_vps = InfoBarInstantRecord.recordQuestionCallback
 		InfoBarInstantRecord.recordQuestionCallback = new_InfoBarInstantRecord_recordQuestionCallback
-		
+
 		vps_already_registered = True
