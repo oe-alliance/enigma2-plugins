@@ -329,10 +329,10 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			timer.maxduration = None
 
 		# Includes
-		title = req.args.get("title")
-		shortdescription = req.args.get("shortdescription")
-		description = req.args.get("description")
-		dayofweek = req.args.get("dayofweek")
+		title = get("title")
+		shortdescription = get("shortdescription")
+		description = get("description")
+		dayofweek = get("dayofweek")
 		if title or shortdescription or description or dayofweek:
 			includes = timer.include
 			title = [unquote(x) for x in title] if title else includes[0]
@@ -346,10 +346,10 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			timer.include = (title, shortdescription, description, dayofweek)
 
 		# Excludes
-		title = req.args.get("!title")
-		shortdescription = req.args.get("!shortdescription")
-		description = req.args.get("!description")
-		dayofweek = req.args.get("!dayofweek")
+		title = get("!title")
+		shortdescription = get("!shortdescription")
+		description = get("!description")
+		dayofweek = get("!dayofweek")
 		if title or shortdescription or description or dayofweek:
 			excludes = timer.exclude
 			title = [unquote(x) for x in title] if title else excludes[0]
@@ -362,7 +362,7 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			while '' in dayofweek: dayofweek.remove('')
 			timer.exclude = (title, shortdescription, description, dayofweek)
 
-		tags = req.args.get("tag")
+		tags = get("tag")
 		if tags:
 			while '' in tags: tags.remove('')
 			timer.tags = [unquote(x) for x in tags]
