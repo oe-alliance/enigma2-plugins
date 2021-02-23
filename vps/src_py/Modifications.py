@@ -13,7 +13,7 @@ from Screens.InfoBarGenerics import InfoBarInstantRecord
 from time import time
 from enigma import getBestPlayableServiceReference, eServiceReference
 import xml.etree.cElementTree
-from Vps_setup import VPS_show_info
+from .Vps_setup import VPS_show_info
 
 vps_already_registered = False
 
@@ -150,7 +150,7 @@ def new_TimerEntry_createConfig(self, *args, **kwargs):
 				default_value = {False: "yes_safe", True: "yes"}[self.timer.vpsplugin_overwrite]
 
 		elif config.plugins.vps.vps_default.value != "no" and self.timer.eit is not None and self.timer.name != "" and self.timer not in self.session.nav.RecordTimer.timer_list and self.timer not in self.session.nav.RecordTimer.processed_timers:
-			from Vps_check import Check_PDC, VPS_check_PDC_Screen
+			from .Vps_check import Check_PDC, VPS_check_PDC_Screen
 			service = self.timerentry_service_ref.ref
 			if service and service.flags & eServiceReference.isGroup:
 				service = getBestPlayableServiceReference(service, eServiceReference())
@@ -199,7 +199,7 @@ def new_TimerEntry_createSetup(self, widget="config"):
 			self.list.append(self.timerVps_enabled_Entry)
 
 			if self.timerentry_vpsplugin_enabled.value != "no":
-				from Vps_check import Check_PDC, VPS_check_PDC_Screen
+				from .Vps_check import Check_PDC, VPS_check_PDC_Screen
 				service = self.timerentry_service_ref.ref
 				if service and service.flags & eServiceReference.isGroup:
 					service = getBestPlayableServiceReference(service, eServiceReference())
@@ -258,7 +258,7 @@ def new_TimerEntry_keySave(self, *args, **kwargs):
 		self.timer.vpsplugin_enabled = self.timerentry_vpsplugin_enabled.value != "no"
 		self.timer.vpsplugin_overwrite = self.timerentry_vpsplugin_enabled.value == "yes"
 		if self.timer.vpsplugin_enabled == True:
-			from Plugins.SystemPlugins.vps.Vps import vps_timers
+			from .Vps import vps_timers
 			vps_timers.checksoon()
 
 			if self.timer.name == "" or self.timer.eit is None:
@@ -330,7 +330,7 @@ def new_InfoBarInstantRecord_recordQuestionCallback(self, answer, *args, **kwarg
 	try:
 		entry = len(self.recording)-1
 		if answer is not None and answer[1] == "event" and config.plugins.vps.instanttimer.value != "no" and entry is not None and entry >= 0:
-			from Vps_check import VPS_check_on_instanttimer
+			from .Vps_check import VPS_check_on_instanttimer
 			rec_ref = self.recording[entry].service_ref.ref
 			if rec_ref and rec_ref.flags & eServiceReference.isGroup:
 				rec_ref = getBestPlayableServiceReference(rec_ref, eServiceReference())
