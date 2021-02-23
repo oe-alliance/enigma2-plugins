@@ -188,7 +188,14 @@ def new_TimerEntry_createSetup(self, widget="config"):
 # Since we know it takes >1 arg, pass them all on
 		self._createSetup_old_rn_vps(widget)
 	else:
+# This is the Setup-based code-base.
 # We know it takes 0 args, so no point in sending it any
+# If we have a position, remember it for restoring at the end.
+#
+		try:
+			currentItem = self[widget].getCurrent()
+		except:
+			currentItem = 0
 		self._createSetup_old_rn_vps()
 
 	# added by VPS-Plugin
@@ -229,7 +236,13 @@ def new_TimerEntry_createSetup(self, widget="config"):
 		pass
 	# added by VPS-Plugin
 	self[widget].list = self.list
-	self[widget].l.setList(self.list)
+	if __vps_TimerEntry_createSetup_has_widget:     # "Old" call
+		self[widget].l.setList(self.list)
+	else:                                           # Setup-based call
+# Don't re-sort, even if config.usage.sort_settings is set, but do
+# now set the original position
+#
+		self.moveToItem(currentItem)
 
 # We cater for any parameters thrown at us and pass it all on.
 #
