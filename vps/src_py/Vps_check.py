@@ -11,7 +11,7 @@ from Tools.XMLTools import stringToXML
 from Tools import Directories
 from time import time
 from Components.config import config
-from Vps import vps_exe, vps_timers
+from .Vps import vps_exe, vps_timers
 import NavigationInstance
 from xml.etree.cElementTree import parse as xml_parse
 
