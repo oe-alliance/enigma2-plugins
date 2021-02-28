@@ -68,6 +68,11 @@ class VPS_check_PDC:
 		file.close()
 
 	def check_service(self, service):
+# If we aren't checking PDC, returns successes for "now"
+#
+		if not config.plugins.vps.do_PDC_check.getValue():
+			return 1, time(), 1
+
 		service_str = service.toCompareString()
 
 		try:
