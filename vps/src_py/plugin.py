@@ -11,6 +11,7 @@ from Components.config import config, ConfigYesNo, ConfigSubsection, ConfigInteg
 
 config.plugins.vps = ConfigSubsection()
 config.plugins.vps.enabled = ConfigYesNo(default = True)
+config.plugins.vps.do_PDC_check = ConfigYesNo(default = True)
 config.plugins.vps.initial_time = ConfigInteger(default=10, limits=(0, 120))
 config.plugins.vps.allow_wakeup = ConfigYesNo(default = False)
 config.plugins.vps.allow_seeking_multiple_pdc = ConfigYesNo(default = True)

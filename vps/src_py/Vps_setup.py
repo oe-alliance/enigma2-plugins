@@ -9,7 +9,7 @@ from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Components.config import config, getConfigListEntry
 
-VERSION = "1.33"
+VERSION = "1.34"
 
 class VPS_Setup(Screen, ConfigListScreen):
 
@@ -47,6 +47,7 @@ class VPS_Setup(Screen, ConfigListScreen):
 		self.setup_title = _("VPS Setup Version %s") %VERSION
 
 		self.vps_enabled = getConfigListEntry(_("Enable VPS-Plugin"), config.plugins.vps.enabled)
+		self.vps_do_PDC_check = getConfigListEntry(_("Check for PDC"), config.plugins.vps.do_PDC_check)
 		self.vps_initial_time = getConfigListEntry(_("Starting time"), config.plugins.vps.initial_time)
 		self.vps_allow_wakeup = getConfigListEntry(_("Wakeup from Deep-Standby is allowed"), config.plugins.vps.allow_wakeup)
 		self.vps_allow_seeking_multiple_pdc = getConfigListEntry(_("Seeking connected events"), config.plugins.vps.allow_seeking_multiple_pdc)
@@ -55,6 +56,7 @@ class VPS_Setup(Screen, ConfigListScreen):
 
 		self.list = []
 		self.list.append(self.vps_enabled)
+		self.list.append(self.vps_do_PDC_check)
 		self.list.append(self.vps_initial_time)
 		self.list.append(self.vps_allow_wakeup)
 		self.list.append(self.vps_allow_seeking_multiple_pdc)
@@ -89,6 +91,8 @@ class VPS_Setup(Screen, ConfigListScreen):
 		cur = self["config"].getCurrent()
 		if cur == self.vps_enabled:
 			self["help"].text = _("This plugin can determine whether a programme begins earlier or lasts longer. The channel has to provide reliable data.")
+		elif cur == self.vps_do_PDC_check:
+			self["help"].text = _("Check for PDC availability on each service")
 		elif cur == self.vps_initial_time:
 			self["help"].text = _("If possible, x minutes before a timer starts VPS-Plugin will control whether the programme begins earlier. (0 disables feature)")
 		elif cur == self.vps_default:

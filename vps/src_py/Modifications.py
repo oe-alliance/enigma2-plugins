@@ -141,7 +141,7 @@ def new_TimerEntry_createConfig(self, *args, **kwargs):
 
 	# added by VPS-Plugin
 	try:
-		self.timerentry_vpsplugin_dontcheck_pdc = False
+		self.timerentry_vpsplugin_dontcheck_pdc = not config.plugins.vps.do_PDC_check.getValue()
 		default_value = "no"
 
 		if self.timer.vpsplugin_enabled is not None:
@@ -150,7 +150,7 @@ def new_TimerEntry_createConfig(self, *args, **kwargs):
 				default_value = {False: "yes_safe", True: "yes"}[self.timer.vpsplugin_overwrite]
 
 		elif config.plugins.vps.vps_default.value != "no" and self.timer.eit is not None and self.timer.name != "" and self.timer not in self.session.nav.RecordTimer.timer_list and self.timer not in self.session.nav.RecordTimer.processed_timers:
-			from .Vps_check import Check_PDC, VPS_check_PDC_Screen
+			from .Vps_check import Check_PDC
 			service = self.timerentry_service_ref.ref
 			if service and service.flags & eServiceReference.isGroup:
 				service = getBestPlayableServiceReference(service, eServiceReference())
@@ -343,11 +343,24 @@ def new_InfoBarInstantRecord_recordQuestionCallback(self, answer, *args, **kwarg
 	try:
 		entry = len(self.recording)-1
 		if answer is not None and answer[1] == "event" and config.plugins.vps.instanttimer.value != "no" and entry is not None and entry >= 0:
-			from .Vps_check import VPS_check_on_instanttimer
-			rec_ref = self.recording[entry].service_ref.ref
-			if rec_ref and rec_ref.flags & eServiceReference.isGroup:
-				rec_ref = getBestPlayableServiceReference(rec_ref, eServiceReference())
-			self.session.open(VPS_check_on_instanttimer, rec_ref, self.recording[entry])
+# If we aren't checking PDC, just put the values in directly
+#
+			if not config.plugins.vps.do_PDC_check.getValue():
+				from .Vps import vps_timers
+				if config.plugins.vps.instanttimer.value == "yes":
+					self.recording[entry].vpsplugin_enabled = True
+					self.recording[entry].vpsplugin_overwrite = True
+					vps_timers.checksoon()
+				elif config.plugins.vps.instanttimer.value == "yes_safe":
+					self.recording[entry].vpsplugin_enabled = True
+					self.recording[entry].vpsplugin_overwrite = False
+					vps_timers.checksoon()
+			else:
+				from .Vps_check import VPS_check_on_instanttimer
+				rec_ref = self.recording[entry].service_ref.ref
+				if rec_ref and rec_ref.flags & eServiceReference.isGroup:
+					rec_ref = getBestPlayableServiceReference(rec_ref, eServiceReference())
+				self.session.open(VPS_check_on_instanttimer, rec_ref, self.recording[entry])
 
 	except:
 		pass
