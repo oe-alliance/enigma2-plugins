@@ -293,6 +293,12 @@ class EPGSearch(EPGSelection):
 		self.onLayoutFinish.append(self.onCreate)
 		# end stripped copy of EPGSelection.__init__
 
+		# Hack to work around the design choice of not calling EPGSelection.__init__
+		try:
+			self.EPGSearch_init(self, session)
+		except:
+			pass
+
 		# Partnerbox
 		if PartnerBoxIconsEnabled:
 			EPGSelection.PartnerboxInit(self, False)
@@ -375,7 +381,11 @@ class EPGSearch(EPGSelection):
 		cur = self["list"].getCurrent()
 		self.currentService = cur[1]
 		if self.currentService:
-			self.zap()
+			try:
+				# EPGSelection can do the zap for us
+				self.zapExit()
+			except:
+				self.zap()
 
 	def epgsearchOKLong(self):
 		self.eventSelected()
