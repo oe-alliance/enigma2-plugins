@@ -5,11 +5,9 @@ from . import _
 
 from Plugins.Plugin import PluginDescriptor
 from Tools.Downloader import downloadWithProgress
-from enigma import ePicLoad, eServiceReference, eServiceCenter
+from enigma import ePicLoad, eServiceCenter
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
-from Screens.EpgSelection import EPGSelection
-from Screens.ChannelSelection import SimpleChannelSelection
 from Screens.ChoiceBox import ChoiceBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.ActionMap import ActionMap, HelpableActionMap
@@ -23,39 +21,23 @@ from Components.Language import language
 from Components.ProgressBar import ProgressBar
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
-from Components.MovieList import KNOWN_EXTENSIONS as KNOWN_EXTENSIONS2
-from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
+from Components.MovieList import KNOWN_EXTENSIONS
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 import os
 import re
-import gettext
 import six
 
 from six.moves.urllib.parse import quote_plus
 
 try:
 	import htmlentitydefs
-	iteritems = lambda d: six.iteritems(d)
 except ImportError as ie:
 	from html import entities as htmlentitydefs
-	iteritems = lambda d: list(d.items())
 	unichr = chr
-
-
-if six.PY2:
-	from HTMLParser import HTMLParser
-	_unescape = HTMLParser().unescape
-else:
-	from html import unescape as _unescape
-
 # Configuration
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo, ConfigText
 from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-
-
-def transHTML(text):
-	return _unescape(text)
 
 
 config.plugins.imdb = ConfigSubsection()
@@ -76,75 +58,6 @@ def quoteEventName(eventName, safe="/()" + ''.join(map(chr, list(range(192, 255)
 		text = eventName
 	# IMDb doesn't seem to like urlencoded characters at all, hence the big "safe" list
 	return quote_plus(text, safe="+")
-
-
-class IMDBChannelSelection(SimpleChannelSelection):
-	def __init__(self, session):
-		SimpleChannelSelection.__init__(self, session, _("Channel Selection"))
-		self.skinName = "SimpleChannelSelection"
-
-		self["ChannelSelectEPGActions"] = ActionMap(["ChannelSelectEPGActions"],
-			{
-				"showEPGList": self.channelSelected
-			}
-		)
-
-	def channelSelected(self):
-		ref = self.getCurrentSelection()
-		if (ref.flags & 7) == 7:
-			self.enterPath(ref)
-		elif not (ref.flags & eServiceReference.isMarker):
-			info = eServiceCenter.getInstance().info(ref)
-			evt = info and info.getEvent(ref, -1)
-			event_id = evt and evt.getEventId() or None
-			self.session.openWithCallback(
-				self.epgClosed,
-				IMDBEPGSelection,
-				ref,
-				eventid=event_id,
-				openPlugin=False
-			)
-
-	def epgClosed(self, ret=None):
-		if ret:
-			self.close(ret)
-
-
-class IMDBEPGSelection(EPGSelection):
-	def __init__(self, session, ref, eventid=None, openPlugin=True):
-		EPGSelection.__init__(self, session, ref.toString(), eventid=eventid)
-		self.skinName = "EPGSelection"
-		self["key_green"].setText(_("Lookup"))
-		self.openPlugin = openPlugin
-
-	def infoKeyPressed(self):
-		self.greenButtonPressed()
-
-	def timerAdd(self):
-		self.greenButtonPressed()
-
-	def greenButtonPressed(self):
-		self.closeEventViewDialog()
-		from Screens.InfoBar import InfoBar
-		InfoBarInstance = InfoBar.instance
-		if not InfoBarInstance.LongButtonPressed:
-			cur = self["list"].getCurrent()
-			evt = cur[0]
-			sref = cur[1]
-			if not evt:
-				return
-
-			if self.openPlugin:
-				self.session.open(
-					IMDB,
-					evt.getEventName()
-				)
-			else:
-				self.close(evt.getEventName())
-
-	def onSelectionChanged(self):
-		super(IMDBEPGSelection, self).onSelectionChanged()
-		self["key_green"].setText(_("Lookup"))
 
 
 class IMDB(Screen, HelpableScreen):
@@ -458,7 +371,6 @@ class IMDB(Screen, HelpableScreen):
 	def contextMenuPressed(self):
 		list = [
 			(_("Enter search"), self.openVirtualKeyBoard),
-			(_("Select from EPG"), self.openChannelSelection),
 			(_("Setup"), self.setup),
 		]
 
@@ -642,13 +554,7 @@ class IMDB(Screen, HelpableScreen):
 			text=self.eventName
 		)
 
-	def openChannelSelection(self):
-		self.session.openWithCallback(
-			self.gotSearchString,
-			IMDBChannelSelection
-		)
-
-	def gotSearchString(self, ret=None):
+	def gotSearchString(self, ret = None):
 		if ret:
 			self.eventName = ret
 			self.Page = 0
