@@ -187,6 +187,11 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			ret = req.args.get(name)
 			return six.ensure_str(ret[0]) if ret else default
 
+		def getA(name, default=None):
+			name = six.ensure_binary(name)
+			ret = req.args.get(name)
+			return [six.ensure_str(x) for x in ret] if ret else default
+
 		id = get("id")
 		timer = None
 		newTimer = True
@@ -329,10 +334,10 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			timer.maxduration = None
 
 		# Includes
-		title = get("title")
-		shortdescription = get("shortdescription")
-		description = get("description")
-		dayofweek = get("dayofweek")
+		title = getA("title")
+		shortdescription = getA("shortdescription")
+		description = getA("description")
+		dayofweek = getA("dayofweek")
 		if title or shortdescription or description or dayofweek:
 			includes = timer.include
 			title = [unquote(x) for x in title] if title else includes[0]
@@ -346,10 +351,10 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			timer.include = (title, shortdescription, description, dayofweek)
 
 		# Excludes
-		title = get("!title")
-		shortdescription = get("!shortdescription")
-		description = get("!description")
-		dayofweek = get("!dayofweek")
+		title = getA("!title")
+		shortdescription = getA("!shortdescription")
+		description = getA("!description")
+		dayofweek = getA("!dayofweek")
 		if title or shortdescription or description or dayofweek:
 			excludes = timer.exclude
 			title = [unquote(x) for x in title] if title else excludes[0]
@@ -362,7 +367,7 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			while '' in dayofweek: dayofweek.remove('')
 			timer.exclude = (title, shortdescription, description, dayofweek)
 
-		tags = get("tag")
+		tags = getA("tag")
 		if tags:
 			while '' in tags: tags.remove('')
 			timer.tags = [unquote(x) for x in tags]
