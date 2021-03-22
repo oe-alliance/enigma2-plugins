@@ -21,7 +21,7 @@ from Screens.HelpMenu import HelpMenu, HelpableScreen
 from Components.Sources.StaticText import StaticText
 
 # Configuration
-from Components.config import config, getConfigListEntry, configfile, NoSave
+from Components.config import config, getConfigListEntry, configfile, NoSave, ConfigBoolean, ConfigSelection
 from Screens.FixedMenu import FixedMenu
 from Tools.BoundFunction import boundFunction
 
@@ -374,4 +374,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 		
 		self.close(self.session, self.needsEnigmaRestart)
 
-
+	def keySelect(self): # used by OpenViX
+		ConfigListScreen.keySelect(self)
+		if self["config"].getCurrent() and isinstance(self["config"].getCurrent()[1], (ConfigBoolean, ConfigSelection)):
+			self._getConfig()
