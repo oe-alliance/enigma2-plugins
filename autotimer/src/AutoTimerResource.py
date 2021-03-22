@@ -420,6 +420,46 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 
 		return self.returnResult(req, True, message)
 
+
+class AutoTimerChangeResource(AutoTimerBaseResource):
+	def render(self, req):
+		def get(name, default=None):
+			name = six.ensure_binary(name)
+			ret = req.args.get(name)
+			return six.ensure_str(ret[0]) if ret else default
+
+		id = get("id")
+		timer = None
+		if id is not None:
+			id = int(id)
+			for possibleMatch in autotimer.getTimerList():
+				if possibleMatch.id == id:
+					timer = possibleMatch
+					break
+
+		if timer is None:
+			return self.returnResult(req, False, _("unable to find timer with id %i" % (id,)))
+
+		# Name
+		name = get("name")
+		if name is not None:
+			timer.name = unquote(name).strip()
+
+		# Enabled
+		enabled = get("enabled")
+		if enabled is not None:
+			try: enabled = int(enabled)
+			except ValueError: enabled = enabled == "yes"
+			timer.enabled = enabled
+
+		message = _("AutoTimer was changed successfully")
+
+		if config.plugins.autotimer.always_write_config.value:
+			autotimer.writeXml()
+
+		return self.returnResult(req, True, message)
+
+
 class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 	def render(self, req):
 		for key, value in six.iteritems(req.args):
