@@ -814,6 +814,8 @@ def buildConfig(defaultTimer, timers, webif = False):
 		# Tags
 		if webif and timer.tags:
 			extend(('  <e2tags>', stringToXML(' '.join(timer.tags)), '</e2tags>\n'))
+			for tag in timer.tags:
+				extend(('  <e2tag>', stringToXML(tag), '</e2tag>\n'))
 		else:
 			for tag in timer.tags:
 				extend(('  <tag>', stringToXML(tag), '</tag>\n'))
