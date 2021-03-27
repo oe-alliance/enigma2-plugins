@@ -5,7 +5,7 @@ msgstr ""
 "POT-Creation-Date: 2018-11-23 15:36+0000\n"
 "PO-Revision-Date: 2019-03-04 10:44+0000\n"
 "Last-Translator: Alexwilmac\n"
-"Language-Team: Alexwilmac & insanity <vuplus-community.net>\n"
+"Language-Team: Alexwilmac <vuplus-community.net>\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -15,12 +15,46 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Bookmarks: 106,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
-#: ../src/AutoTimerList.py:170
+msgid "If specified bouquets"
+msgstr "Se si specificano dei bouquet"
+
+msgid "If specified services"
+msgstr "Se si specificano dei canali"
+
+msgid "If specified services or bouquets"
+msgstr "Se si specificano canali o bouquet"
+
+msgid "Allow double timer for different services"
+msgstr "Permetti duplicazione timer da canali diversi"
+
+msgid ""
+"Here you can specify whether simultaneous timers of the same program can be "
+"created. This allows simultaneous recording of a program with different "
+"resolutions. (e.g. SD service and HD service)"
+msgstr ""
+"Si può stabilire se possano essere creati timer per lo stesso programma ma da canali diversi. Questo, eventualmente, per registrare programmi con risoluzioni diverse o da satellite e DT."
+
+msgid "Exit"
+msgstr "Esci"
+
+msgid "Hour"
+msgstr "Ora"
+
+msgid "Minute"
+msgstr "Minuto"
+
+msgid ""
+"If this is enabled an existing timer will also be considered recording an "
+"event if it records at least 80% of the it."
+msgstr ""
+"Se l'opzione è abilitata, un timer esistente si considera come già in registrazione di un evento se ne registra almeno l'80%."
+
+msgid "Title and all descriptions"
+msgstr "Titolo e tutte le descrizioni"
+
 msgid "  Any time"
 msgstr "  Qualsiasi orario"
 
-#: ../src/AutoPoller.py:41 ../src/AutoTimer.py:703
-#, python-format
 msgid ""
 "%d conflict(s) encountered when trying to add new timers:\n"
 "%s"
@@ -28,8 +62,6 @@ msgstr ""
 "Il tentativo di aggiungere nuovi timer ha generato %d conflitti.\n"
 "%s"
 
-#: ../src/AutoPoller.py:49 ../src/AutoTimer.py:710
-#, python-format
 msgid ""
 "%d conflict(s) solved with similar timer(s):\n"
 "%s"
@@ -37,26 +69,18 @@ msgstr ""
 "Conflitti risolti con timer simili: %d\n"
 "%s"
 
-#: ../src/AutoTimerEditor.py:232 ../src/AutoTimerEditor.py:233 ../src/AutoTimerEditor.py:227
-#: ../src/AutoTimerEditor.py:228
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
-#: ../src/AutoPoller.py:41 ../src/AutoPoller.py:49 ../src/AutoTimer.py:703
-#: ../src/AutoTimer.py:710
-#, python-format
 msgid "%s: %s at %s"
 msgstr "%s: %s alle %s"
 
-#: ../src/autotimerwizard.xml
 msgid "Abort this Wizard."
 msgstr "Annullare la procedura guidata."
 
-#: ../src/AutoTimerEditor.py:622 ../src/AutoTimerEditor.py:666
 msgid "Activate VPS"
 msgstr "Attivare VPS"
 
-#: ../src/AutoTimerOverview.py:73 ../src/AutoTimerOverview.py:88
 msgid "Add"
 msgstr "Aggiungi"
 
@@ -519,17 +543,7 @@ msgstr "Se abilitato, la ricerca sarà saltata se è in corso una registrazione.
 
 #: ../src/AutoTimerSettings.py:71 ../src/AutoTimerSettings.py:54
 #, python-format
-msgid ""
-"If this is enabled an existing timer will also be considered recording an event if it records "
-"at least 80%s of the it."
-msgstr "Se abilitato, un timer esistente sarà aggiunto se copre almeno l’80%s dell’evento."
 
-#: ../src/AutoTimerSettings.py:44
-#, python-format
-msgid ""
-"If this is enabled an existing timer will also be considered recording an event if it records "
-"at least 80%% of the it."
-msgstr "Se abilitato, un timer esistente sarà aggiunto se copre almeno l’80%% dell’evento."
 
 #: ../src/AutoTimerSettings.py:75 ../src/AutoTimerSettings.py:58
 msgid ""
@@ -1316,10 +1330,6 @@ msgstr "Titolo"
 #: ../src/AutoTimerEditor.py:327 ../src/AutoTimerEditor.py:322
 msgid "Title and Short description"
 msgstr "Titolo e breve descrizione"
-
-#: ../src/AutoTimerEditor.py:328 ../src/AutoTimerEditor.py:323
-msgid "Title and all descriptions"
-msgstr "Title and all descriptions"
 
 #: ../src/AutoTimerList.py:193
 msgid "Tue"
