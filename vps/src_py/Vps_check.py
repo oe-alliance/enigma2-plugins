@@ -32,7 +32,7 @@ class VPS_check_PDC:
 
 			if xmlroot is not None:
 				for xml in xmlroot.findall("channel"):
-					serviceref = xml.get("serviceref").encode("utf-8")
+					serviceref = xml.get("serviceref")
 					has_pdc = xml.get("has_pdc")
 					last_check = xml.get("last_check")
 					default_vps = xml.get("default_vps")
