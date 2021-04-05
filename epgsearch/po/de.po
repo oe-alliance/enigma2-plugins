@@ -36,7 +36,7 @@ msgid "Could not read AutoTimer timer list: %s"
 msgstr "Liste der AutoTimer konnte nicht abgerufen werden: %s"
 
 msgid "EPGSearch Setup"
-msgstr "EPG-Suche-Einstellungen"
+msgstr "EPG-Suche Einstellungen"
 
 msgid "EPG Search"
 msgstr "EPG-Suche"
@@ -48,7 +48,7 @@ msgid "EPG Search setup"
 msgstr "EPG-Suche einrichten"
 
 msgid "Enable this to allow access to EPG Search from within the plugin browser."
-msgstr "EPG Suche in Erweiterungen aufführen"
+msgstr "EPG-Suche in Erweiterungen aufführen"
 
 msgid "Enter text to search for"
 msgstr "Zu suchenden Text eingeben"
@@ -183,7 +183,7 @@ msgid "Set type of match used to compare program titles with the search string."
 msgstr "Legen Sie die Art der Übereinstimmung fest, um die Sendungstitel mit dem Suchbegriff zu vergleichen."
 
 msgid "Is the search case-sensitive or case-insensitive?"
-msgstr "In der Suche Groß- und Kleinschreibung beachten ?"
+msgstr "In der Suche Groß- und Kleinschreibung beachten?"
 
 #. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
 msgid "search EPG"
@@ -197,7 +197,7 @@ msgid "Close dialog"
 msgstr "Dialog schließen"
 
 msgid "Exit EPG Search"
-msgstr "Beende EPG Suche"
+msgstr "Beende EPG-Suche"
 
 msgid "Show detailed event information"
 msgstr "Zeige detaillierte Sendungsinformationen"
@@ -218,7 +218,7 @@ msgid "Add/remove/edit timer for highlighted event"
 msgstr "Erstelle/lösche/ändere Timer für ausgewählte Sendung"
 
 msgid "IMDB search for highlighted event"
-msgstr "IMBD Suche für ausgewählte Sendung"
+msgstr "IMDb Suche für ausgewählte Sendung"
 
 msgid "Add a zap timer for highlighted event"
 msgstr "Umschalttimer für ausgewählte Sendung hinzufügen"

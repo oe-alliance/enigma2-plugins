@@ -421,7 +421,11 @@ class AutoTimer:
 
 		else:
 			# Search EPG, default to empty list
-			epgmatches = epgcache.search( ('RITBDSE', 3000, typeMap[timer.searchType], match, caseMap[timer.searchCase]) ) or []
+			if timer.searchType in typeMap:
+				EPG_searchType = typeMap[timer.searchType]
+			else:
+				EPG_searchType = typeMap["partial"]
+			epgmatches = epgcache.search( ('RITBDSE', 3000, EPG_searchType, match, caseMap[timer.searchCase]) ) or []
 
 		# Sort list of tuples by begin time 'B'
 		epgmatches.sort(key=itemgetter(3))
@@ -555,8 +559,11 @@ class AutoTimer:
 
 					if eit == preveit:
 						break
-
-					if (evtBegin - offsetBegin != rtimer.begin) or (evtEnd + offsetEnd != rtimer.end) or (shortdesc != rtimer.description):
+					try: # protect against vps plugin not being present
+						vps_changed = rtimer.vpsplugin_enabled != timer.vps_enabled or rtimer.vpsplugin_overwrite != timer.vps_overwrite
+					except AttributeError:
+						vps_changed = False
+					if (evtBegin - offsetBegin != rtimer.begin) or (evtEnd + offsetEnd != rtimer.end) or (shortdesc != rtimer.description) or vps_changed:
 						if rtimer.isAutoTimer and eit == rtimer.eit:
 							print ("[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
 							# rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))

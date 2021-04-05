@@ -276,8 +276,11 @@ def timerInit():
 	TimerEntry.createSetup = createNewnigma2Setup
 	TimerEntry.keyGo = newnigma2KeyGo
 
-def createNewnigma2Setup(self, widget):
-	baseTimerEntrySetup(self, widget)
+def createNewnigma2Setup(self, widget="config"):
+	try:
+		baseTimerEntrySetup(self, widget)
+	except TypeError: # for distros that do not use the "widget" argument in Setup.createSetup
+		baseTimerEntrySetup(self)
 	self.timerentry_remote = ConfigYesNo(default = config.plugins.remoteTimer.default.value)
 	self.list.insert(0, getConfigListEntry(_("Remote Timer"), self.timerentry_remote))
 
