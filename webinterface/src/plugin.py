@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 from __future__ import absolute_import
-Version = '$Header$';
+Version = '$Header$'
 
 from enigma import eConsoleAppContainer, eTPM
 from Plugins.Plugin import PluginDescriptor
@@ -21,7 +21,6 @@ from twisted.internet.error import CannotListenError
 from twisted.web import server, http, util, static, resource
 from twisted import version
 
-from zope.interface import Interface, implements
 from socket import gethostname as socket_gethostname, has_ipv6
 from OpenSSL import SSL, crypto
 from time import gmtime
@@ -30,7 +29,7 @@ from os.path import isfile as os_isfile, exists as os_exists
 from .__init__ import _, __version__, decrypt_block
 from .webif import get_random, validate_certificate
 
-import random, uuid, time, hashlib
+import random, uuid, time, hashlib, six
 
 tpm = eTPM()
 rootkey = ['\x9f', '|', '\xe4', 'G', '\xc9', '\xb4', '\xf4', '#', '&', '\xce', '\xb3', '\xfe', '\xda', '\xc9', 'U', '`', '\xd8', '\x8c', 's', 'o', '\x90', '\x9b', '\\', 'b', '\xc0', '\x89', '\xd1', '\x8c', '\x9e', 'J', 'T', '\xc5', 'X', '\xa1', '\xb8', '\x13', '5', 'E', '\x02', '\xc9', '\xb2', '\xe6', 't', '\x89', '\xde', '\xcd', '\x9d', '\x11', '\xdd', '\xc7', '\xf4', '\xe4', '\xe4', '\xbc', '\xdb', '\x9c', '\xea', '}', '\xad', '\xda', 't', 'r', '\x9b', '\xdc', '\xbc', '\x18', '3', '\xe7', '\xaf', '|', '\xae', '\x0c', '\xe3', '\xb5', '\x84', '\x8d', '\r', '\x8d', '\x9d', '2', '\xd0', '\xce', '\xd5', 'q', '\t', '\x84', 'c', '\xa8', ')', '\x99', '\xdc', '<', '"', 'x', '\xe8', '\x87', '\x8f', '\x02', ';', 'S', 'm', '\xd5', '\xf0', '\xa3', '_', '\xb7', 'T', '\t', '\xde', '\xa7', '\xf1', '\xc9', '\xae', '\x8a', '\xd7', '\xd2', '\xcf', '\xb2', '.', '\x13', '\xfb', '\xac', 'j', '\xdf', '\xb1', '\x1d', ':', '?']
@@ -126,8 +125,8 @@ def installCertificates(session):
 		cert.get_subject().OU = "STB"
 		cert.get_subject().CN = socket_gethostname()
 		cert.set_serial_number(random.randint(1000000, 1000000000))
-		cert.set_notBefore("20120101000000Z");
-		cert.set_notAfter("20301231235900Z")
+		cert.set_notBefore(b"20120101000000Z")
+		cert.set_notAfter(b"20301231235900Z")
 		cert.set_issuer(cert.get_subject())
 		cert.set_pubkey(k)
 		print("[Webinterface].installCertificates :: Signing SSL key pair with new CACert")
@@ -342,10 +341,10 @@ class SimpleSession(object):
 #Every request made will pass this Resource (as it is the root resource)
 #Any "global" checks should be done here
 class HTTPRootResource(resource.Resource):
-	SESSION_PROTECTED_PATHS = ['/web/', '/opkg', '/ipkg']
+	SESSION_PROTECTED_PATHS = [b'/web/', b'/opkg', b'/ipkg']
 	SESSION_EXCEPTIONS = [
-		'/web/epgsearch.rss', '/web/movielist.m3u', '/web/movielist.rss', '/web/services.m3u', '/web/session',
-		'/web/stream.m3u', '/web/stream', '/web/streamcurrent.m3u', '/web/strings.js', '/web/ts.m3u']
+		b'/web/epgsearch.rss', b'/web/movielist.m3u', b'/web/movielist.rss', b'/web/services.m3u', b'/web/session',
+		b'/web/stream.m3u', b'/web/stream', b'/web/streamcurrent.m3u', b'/web/strings.js', b'/web/ts.m3u']
 
 	def __init__(self, res):
 		print("[HTTPRootResource}.__init__")
@@ -357,7 +356,7 @@ class HTTPRootResource(resource.Resource):
 	def getClientToken(self, request):
 		ip = request.getClientIP()
 		ua = request.getHeader("User-Agent") or "Default UA"
-		return hashlib.sha1("%s/%s" %(ip, ua)).hexdigest()
+		return hashlib.sha1(six.ensure_binary("%s/%s" %(ip, ua))).hexdigest()
 
 	def isSessionValid(self, request):
 		session = self._sessions.get( self.getClientToken(request), None )
