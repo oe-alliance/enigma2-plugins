@@ -101,5 +101,3 @@ class WebIfConfigScreen(ConfigListScreen, Screen):
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close(False, self.session)
-
-

@@ -93,4 +93,3 @@ class UserManager(Screen):
 			if os_path.exists(cachefile):
 				unlink(cachefile)
 				self.updateList()
-

@@ -65,7 +65,7 @@ class EpiSepCfg(Screen):
 		self.secondlevel[0] = self.secondformat % (self.currentsep, len(self.currentsep))
 
 		self.level = 1
-		
+
 		self["sfLabel"] = Label()
 		self["sfRedBtn"] = Label()
 		self["sfGreenBtn"] = Label()
@@ -86,7 +86,7 @@ class EpiSepCfg(Screen):
 		if self.newsep == self.currentsep:
 			self.exitConfirmed(True)
 		else:
-			self.session.openWithCallback(self.exitConfirmed, MessageBox, _("Really close without saving settings?"))   
+			self.session.openWithCallback(self.exitConfirmed, MessageBox, _("Really close without saving settings?"))
 
 	def exitConfirmed(self, confirmed):
 		if confirmed:
@@ -164,4 +164,3 @@ class EpiSepCfg(Screen):
 		self["sfGreenBtn"].setText(labels[2])
 		self["sfYellowBtn"].setText(labels[3])
 		self["sfBlueBtn"].setText(labels[4])
-

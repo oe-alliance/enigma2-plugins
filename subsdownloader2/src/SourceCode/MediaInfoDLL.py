@@ -1,26 +1,26 @@
 ﻿## MediaInfoDLL - All info about media files, for DLL
 #  Copyright (C) 2007-2009 Jerome Martinez, Zen@MediaArea.net
-# 
+#
 #  This library is free software: you can redistribute it and/or modify it
 #  under the terms of the GNU Lesser General Public License as published by
 #  the Free Software Foundation, either version 3 of the License, or
 #  any later version.
-# 
+#
 #  This library is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
-# 
+#
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with this library. If not, see <http://www.gnu.org/licenses/>.
-# 
+#
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# 
+#
 #  Public DLL interface implementation
 #  Wrapper for MediaInfo Library
 #  Please see MediaInfo.h for help
-# 
+#
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #
 # Converted to python module by Petr Kaderabek
@@ -48,7 +48,7 @@ else:
 # enum				c_size_t
 # const wchar_t*	c_wchar_p,
 # NULL				None,
-# these functions need strings in unicode format 
+# these functions need strings in unicode format
 
 
 class Stream:
@@ -72,7 +72,7 @@ class MediaInfo:
 	#MEDIAINFO_EXP void*	     __stdcall MediaInfo_New (); /*you must ALWAYS call MediaInfo_Delete(Handle) in order to free memory*/
 	#/** @brief A 'new' MediaInfo interface (with a quick init of useful options : "**VERSION**;**APP_NAME**;**APP_VERSION**", but without debug information, use it only if you know what you do), return a Handle, don't forget to delete it after using it*/
 	MediaInfo_New = MediaInfoDLL_Handler.MediaInfo_New
-	MediaInfo_New.argtypes = []  
+	MediaInfo_New.argtypes = []
 	MediaInfo_New.restype = c_void_p
 
 	#MEDIAINFO_EXP void*	     __stdcall MediaInfo_New_Quick (const wchar_t* File, const wchar_t* Options); /*you must ALWAYS call MediaInfo_Delete(Handle) in order to free memory*/
@@ -101,14 +101,14 @@ class MediaInfo:
 	#/** @brief Wrapper for MediaInfoLib::MediaInfo::Open (with a buffer) */
 	#MEDIAINFO_EXP size_t	    __stdcall MediaInfo_Open_Buffer (void* Handle, const unsigned char* Begin, size_t Begin_Size, const unsigned char* End, size_t End_Size); /*return Handle*/
 	MediaInfo_Open_Buffer = MediaInfoDLL_Handler.MediaInfo_Open_Buffer
-	MediaInfo_Open_Buffer.argtype = [c_void_p, c_void_p, c_size_t, c_void_p, c_size_t]  
+	MediaInfo_Open_Buffer.argtype = [c_void_p, c_void_p, c_size_t, c_void_p, c_size_t]
 	MediaInfo_Open_Buffer.restype = c_size_t
 
 	#/** @brief Wrapper for MediaInfoLib::MediaInfo::Save */
 	#MEDIAINFO_EXP size_t	    __stdcall MediaInfo_Save (void* Handle);
 	MediaInfo_Save = MediaInfoDLL_Handler.MediaInfo_Save
 	MediaInfo_Save.argtype = [c_void_p]
-	MediaInfo_Save.restype = c_size_t   
+	MediaInfo_Save.restype = c_size_t
 
 	#/** @brief Wrapper for MediaInfoLib::MediaInfo::Close */
 	#MEDIAINFO_EXP void	      __stdcall MediaInfo_Close (void* Handle);
@@ -213,21 +213,21 @@ class MediaInfo:
 	#General information
 	def Inform(self):
 		if MustUseAnsi:
-			return unicode(self.MediaInfoA_Inform(self.Handle, 0), "utf_8") 
+			return unicode(self.MediaInfoA_Inform(self.Handle, 0), "utf_8")
 		else:
 			return self.MediaInfo_Inform(self.Handle, 0)
 
 	def Get(self, StreamKind, StreamNumber, Parameter, InfoKind=Info.Text, SearchKind=Info.Name):
 		if type(Parameter) == str:
-			return unicode(self.MediaInfoA_Get(self.Handle, StreamKind, StreamNumber, Parameter, InfoKind, SearchKind), "utf_8") 
+			return unicode(self.MediaInfoA_Get(self.Handle, StreamKind, StreamNumber, Parameter, InfoKind, SearchKind), "utf_8")
 		elif MustUseAnsi:
-			return unicode(self.MediaInfoA_Get(self.Handle, StreamKind, StreamNumber, Parameter.encode("utf-8"), InfoKind, SearchKind), "utf_8") 
+			return unicode(self.MediaInfoA_Get(self.Handle, StreamKind, StreamNumber, Parameter.encode("utf-8"), InfoKind, SearchKind), "utf_8")
 		else:
 			return self.MediaInfo_Get(self.Handle, StreamKind, StreamNumber, Parameter, InfoKind, SearchKind)
 
 	def GetI(self, StreamKind, StreamNumber, Parameter, InfoKind=Info.Text):
 		if MustUseAnsi:
-			return unicode(self.MediaInfoA_GetI(self.Handle, StreamKind, StreamNumber, Parameter, InfoKind), "utf_8") 
+			return unicode(self.MediaInfoA_GetI(self.Handle, StreamKind, StreamNumber, Parameter, InfoKind), "utf_8")
 		else:
 			return self.MediaInfo_GetI(self.Handle, StreamKind, StreamNumber, Parameter, InfoKind)
 
@@ -256,9 +256,9 @@ class MediaInfo:
 		if type(Option) == unicode and type(Value) == str:
 			Value = Value.decode("utf-8")
 		if type(Option) == str:
-			return unicode(self.MediaInfoA_Option(self.Handle, Option.encode("utf-8"), Value.encode("utf-8")), "utf_8") 
+			return unicode(self.MediaInfoA_Option(self.Handle, Option.encode("utf-8"), Value.encode("utf-8")), "utf_8")
 		elif MustUseAnsi:
-			return unicode(self.MediaInfoA_Option(self.Handle, Option.encode("utf-8"), Value.encode("utf-8")), "utf_8") 
+			return unicode(self.MediaInfoA_Option(self.Handle, Option.encode("utf-8"), Value.encode("utf-8")), "utf_8")
 		else:
 			return self.MediaInfo_Option(self.Handle, Option, Value)
 
@@ -268,9 +268,9 @@ class MediaInfo:
 		if type(Option) == unicode and type(Value) == str:
 			Value = Value.decode("utf-8")
 		if type(Option) == str:
-			return unicode(self.MediaInfoA_Option(None, Option, Value), "utf_8") 
+			return unicode(self.MediaInfoA_Option(None, Option, Value), "utf_8")
 		elif MustUseAnsi:
-			return unicode(self.MediaInfoA_Option(None, Option.encode("utf-8"), Value.encode("utf-8")), "utf_8") 
+			return unicode(self.MediaInfoA_Option(None, Option.encode("utf-8"), Value.encode("utf-8")), "utf_8")
 		else:
 			return self.MediaInfo_Option(None, Option, Value)
 
@@ -379,7 +379,7 @@ class MediaInfoList:
 	Handle = c_void_p(0)
 
 	#Handling
-	def __init__(self):		      
+	def __init__(self):
 		self.Handle = MediaInfoList_New()
 
 	def __del__(self):
@@ -428,4 +428,3 @@ class MediaInfoList:
 
 	def Count_Get_Files(self):
 		return MediaInfoList_Count_Get_Files(self.Handle)
-

@@ -54,13 +54,13 @@ class PushServiceBase(Modules, ConfigFile):
 	def __init__(self, path=""):
 		Modules.__init__(self)
 		ConfigFile.__init__(self)
-		
+
 		self.services = []
 		self.controllers = []
-		
+
 		self.pushcallbacks = {}
 		self.pusherrbacks = {}
-		
+
 		# Read module files from subfolders
 		self.servicemodules = self.loadModules(SERVICE_PATH, ServiceBase)
 		self.controllermodules = self.loadModules(CONTROLLER_PATH, ControllerBase)
@@ -169,7 +169,7 @@ class PushServiceBase(Modules, ConfigFile):
 		if root:
 			services = []
 			controllers = []
-			
+
 			# Reset the unique id counters
 			ServiceBase.resetUniqueID()
 			ControllerBase.resetUniqueID()
@@ -186,7 +186,7 @@ class PushServiceBase(Modules, ConfigFile):
 							instance = self.instantiateModule(module)
 							if instance:
 								instance.setEnable(eval(enable))
-								
+
 								# Set instance options
 								options = []
 								for option in element.findall(OPTION):
@@ -194,16 +194,16 @@ class PushServiceBase(Modules, ConfigFile):
 									value = option.text
 									if key and value:
 										options.append((key, value))
-								
+
 								if options:
 									instance.setOptions(options)
-								
+
 								# Append to active controller list
 								instances.append(instance)
 				return instances
 			services = parse(root, SERVICE, self.servicemodules)
 			controllers = parse(root, CONTROLLER, self.controllermodules)
-			
+
 			self.services = services
 			self.controllers = controllers
 		else:
@@ -215,13 +215,13 @@ class PushServiceBase(Modules, ConfigFile):
 		root = None
 		services = self.services
 		controllers = self.controllers
-		
+
 		# Build Header
 		from plugin import NAME, VERSION
 		root = Element(NAME)
 		root.set('version', VERSION)
 		root.append(Comment(_("Don't edit this manually unless you really know what you are doing")))
-		
+
 		# Build Body
 		def build(root, instances, typ):
 			for instance in instances:
@@ -233,12 +233,12 @@ class PushServiceBase(Modules, ConfigFile):
 					for key, value, description in options:
 						SubElement(element, OPTION, key=stringToXML(key)).text = stringToXML(value)
 			return root
-		
+
 		if services:
 			root = build(root, services, SERVICE)
 		if controllers:
 			root = build(root, controllers, CONTROLLER)
-		
+
 		self.writeXML(root)
 
 	######################################
@@ -266,17 +266,17 @@ class PushServiceBase(Modules, ConfigFile):
 
 	def run(self):
 		print _("PushService started: ") + strftime(_("%d.%m.%Y %H:%M"), localtime())
-		
+
 		controllers = self.controllers
 		self.pushcallbacks = {}
 		self.pusherrbacks = {}
-		
+
 		# Loop over all Controllers
 		if controllers:
 			for controller in controllers:
 				if controller.getEnable():
 					print _("PushService running: ") + str(controller.getName())
-					
+
 					try:
 						# Run controller
 						ret = controller.run(
@@ -290,7 +290,7 @@ class PushServiceBase(Modules, ConfigFile):
 	def runcallback(self, controller, *args):
 		services = self.services
 		subject, body, attachments = "", "", []
-		
+
 		# Parse return value(s)
 		if args:
 			if len(args) == 3:
@@ -301,7 +301,7 @@ class PushServiceBase(Modules, ConfigFile):
 			else:
 				# Only header returned
 				subject = args
-			
+
 			if subject:
 				# Push notification
 				self.push(controller, subject, body, attachments)
@@ -368,7 +368,7 @@ class PushServiceBase(Modules, ConfigFile):
 		errparam = self.pusherrbacks.get(key, [])
 		cnterr = len(errparam)
 		cntservices = len([service for service in self.services if service.getEnable()])
-		
+
 		# Check if all services already called and returned
 		if (cntservices == (cntcall + cnterr)):
 			service, controller = key

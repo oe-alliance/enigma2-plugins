@@ -89,7 +89,7 @@ def timeSimilarityPercent(rtimer, evtBegin, evtEnd, timer=None):
 		return 0
 	#print("commonTime_percent = ",commonTime_percent,", durationMatch_percent = ",durationMatch_percent)
 	if durationMatch_percent < commonTime_percent:
-		#avoid false match for a short event completely inside a very long rtimer's time span 
+		#avoid false match for a short event completely inside a very long rtimer's time span
 		return durationMatch_percent
 	else:
 		return commonTime_percent
@@ -137,16 +137,16 @@ class AutoTimer:
 			if not os_path.exists(XML_CONFIG):
 				print("[AutoTimer] No configuration file present")
 				return
-	
+
 			# Parse if mtime differs from whats saved
 			mtime = os_path.getmtime(XML_CONFIG)
 			if mtime == self.configMtime:
 				print("[AutoTimer] No changes in configuration, won't parse")
 				return
-	
+
 			# Save current mtime
 			self.configMtime = mtime
-	
+
 			# Parse Config
 			try:
 				configuration = cet_parse(XML_CONFIG).getroot()
@@ -160,7 +160,7 @@ class AutoTimer:
 					pass
 				if Standby.inStandby is None:
 					AddPopup(_("The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "), type=MessageBox.TYPE_ERROR, timeout=0, id="AutoTimerLoadFailed")
-	
+
 				self.timers = []
 				self.defaultTimer = preferredAutoTimerComponent(
 					0,		# Id
@@ -168,7 +168,7 @@ class AutoTimer:
 					"",		# Match
 					True	# Enabled
 				)
-	
+
 				try:
 					self.writeXml()
 					configuration = cet_parse(XML_CONFIG).getroot()
@@ -326,7 +326,7 @@ class AutoTimer:
 			task = Components.Task.PythonTask(job, 'Show results')
 			task.work = self.JobMessage
 			task.weighting = 1
-		
+
 		return job
 
 	def JobStart(self):
@@ -434,7 +434,7 @@ class AutoTimer:
 		epgmatches.sort(key=itemgetter(3))
 
 		# Contains the the marked similar eits and the conflicting strings
-		similardict = defaultdict(list)		
+		similardict = defaultdict(list)
 
 		# Loop over all EPG matches
 		preveit = False
@@ -619,7 +619,7 @@ class AutoTimer:
 				newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, shortdesc, eit)
 				newEntry.log(500, "[AutoTimer] Try to add new timer based on AutoTimer %s." % (timer.name))
 				newEntry.log(509, "[AutoTimer] Timer start on: %s" % ctime(begin))
-				
+
 				# Mark this entry as AutoTimer (only AutoTimers will have this Attribute set)
 				newEntry.isAutoTimer = True
 				newEntry.autoTimerId = timer.id

@@ -65,29 +65,29 @@ def dump(obj):
 
 def getInstance():
 	global instance
-	
+
 	if instance is None:
-		
+
 		log.reinit()
-		
+
 		from plugin import VERSION
-		
+
 		log.debug(" SERIESPLUGIN NEW INSTANCE " + VERSION)
 		log.debug(" ", strftime("%a, %d %b %Y %H:%M:%S", localtime()))
-		
+
 		try:
 			from Tools.HardwareInfo import HardwareInfo
 			log.debug(" DeviceName " + HardwareInfo().get_device_name().strip())
 		except:
 			sys.exc_clear()
-		
+
 		try:
 			from Components.About import about
 			log.debug(" EnigmaVersion " + about.getEnigmaVersionString().strip())
 			log.debug(" ImageVersion " + about.getVersionString().strip())
 		except:
 			sys.exc_clear()
-		
+
 		try:
 			#http://stackoverflow.com/questions/1904394/python-selecting-to-read-the-first-line-only
 			log.debug(" dreamboxmodel " + open("/proc/stb/info/model").readline().strip())
@@ -95,13 +95,13 @@ def getInstance():
 			log.debug(" imageissue " + open("/etc/issue.net").readline().strip())
 		except:
 			sys.exc_clear()
-		
+
 		try:
 			for key, value in config.plugins.seriesplugin.dict().iteritems():
 				log.debug(" config..%s = %s" % (key, str(value.value)))
 		except Exception as e:
 			sys.exc_clear()
-		
+
 		global CompiledRegexpReplaceChars
 		try:
 			if config.plugins.seriesplugin.replace_chars.value:
@@ -109,7 +109,7 @@ def getInstance():
 		except:
 			log.exception(" Config option 'Replace Chars' is no valid regular expression")
 			CompiledRegexpReplaceChars = re.compile("[:\!/\\,\(\)'\?]")
-		
+
 		# Check autotimer
 		try:
 			from Plugins.Extensions.AutoTimer.plugin import autotimer
@@ -126,7 +126,7 @@ def getInstance():
 				log.warning(_("Your autotimer is deprecated") + "\n" + _("Please update it"))
 		except ImportError:
 			log.debug(" AutoTimer: Not found")
-		
+
 		# Check dependencies
 		start = True
 		from imp import find_module
@@ -139,7 +139,7 @@ def getInstance():
 				log.error(_("Error missing dependency") + "\n" + "python-" + dependency + "\n\n" + _("Please install missing python paket manually"))
 		if start:
 			instance = SeriesPlugin()
-		
+
 	return instance
 
 
@@ -153,13 +153,13 @@ def stopWorker():
 def resetInstance():
 	if config.plugins.seriesplugin.lookup_counter.isChanged():
 		config.plugins.seriesplugin.lookup_counter.save()
-	
+
 	global instance
 	if instance is not None:
 		log.debug(" SERIESPLUGIN INSTANCE STOP")
 		instance.stop()
 		instance = None
-	
+
 	from Cacher import clearCache
 	clearCache()
 
@@ -226,7 +226,7 @@ def normalizeResult(result):
 		series_ = result['series'].strip()
 		season_ = result['season']
 		episode_ = result['episode']
-		
+
 		result['rawseason'] = season_ or config.plugins.seriesplugin.default_season.value
 		result['rawepisode'] = episode_ or config.plugins.seriesplugin.default_episode.value
 		if season_:
@@ -237,7 +237,7 @@ def normalizeResult(result):
 			result['episode'] = int(CompiledRegexpNonDecimal.sub('', str(episode_)) or config.plugins.seriesplugin.default_episode.value or "0")
 		else:
 			result['episode'] = int(config.plugins.seriesplugin.default_episode.value) or 0
-		
+
 		if CompiledRegexpReplaceChars:
 			title = CompiledRegexpReplaceChars.sub('', title_)
 			#log.debug(" normalize title", title_, title)
@@ -267,7 +267,7 @@ class ThreadItem:
 
 
 class SeriesPluginWorker(Thread):
-	
+
 	def __init__(self, callback):
 		Thread.__init__(self)
 		self.callback = callback
@@ -282,20 +282,20 @@ class SeriesPluginWorker(Thread):
 
 	def empty(self):
 		return self.__queue.empty()
-	
+
 	def finished(self):
 		return not self.__running
 
 	def add(self, item):
-		
+
 		self.__queue.push(item)
-		
+
 		if not self.__running:
 			self.__running = True
 			self.start() # Start blocking code in Thread
-	
+
 	def gotThreadMsg(self, msg=None):
-		
+
 		data = self.__messages.pop()
 		if callable(self.callback):
 			self.callback(data)
@@ -308,37 +308,37 @@ class SeriesPluginWorker(Thread):
 		except:
 			pass
 		self.__pump_recv_msg_conn = None
-	
+
 	def run(self):
-		
+
 		while not self.__queue.empty():
-			
+
 			# NOTE: we have to check this here and not using the while to prevent the parser to be started on shutdown
 			if not self.__running:
 				break
-			
+
 			log.debug('Worker is processing')
-			
+
 			item = self.__queue.pop()
-			
+
 			result = None
-			
+
 			try:
 				result = item.identifier.getEpisode(
 					item.name, item.begin, item.end, item.service
 				)
 			except Exception, e:
 				log.debug("Worker: Exception:", str(e))
-				
+
 				# Exception finish job with error
 				result = str(e)
-			
+
 			config.plugins.seriesplugin.lookup_counter.value += 1
-			
+
 			self.__messages.push((item.callback, normalizeResult(result)))
-			
+
 			self.__pump.send(0)
-		
+
 		log.debug(' Worker: list is emty, done')
 		Thread.__init__(self)
 		self.__running = False
@@ -350,26 +350,26 @@ class SeriesPlugin(Modules, ChannelsBase):
 		log.debug("Main: Init")
 		Modules.__init__(self)
 		ChannelsBase.__init__(self)
-		
+
 		self.thread = SeriesPluginWorker(self.gotResult)
-		
+
 		# Because of the same XMLFile base class we intantiate a new object
 		self.xmltv = XMLTVBase()
-		
+
 		self.serviceHandler = eServiceCenter.getInstance()
-		
+
 		#http://bugs.python.org/issue7980
 		datetime.strptime('2012-01-01', '%Y-%m-%d')
-		
+
 		self.identifier_elapsed = self.instantiateModuleWithName(config.plugins.seriesplugin.identifier_elapsed.value)
 		#log.debug(self.identifier_elapsed)
-		
+
 		self.identifier_today = self.instantiateModuleWithName(config.plugins.seriesplugin.identifier_today.value)
 		#log.debug(self.identifier_today)
-		
+
 		self.identifier_future = self.instantiateModuleWithName(config.plugins.seriesplugin.identifier_future.value)
 		#log.debug(self.identifier_future)
-		
+
 		pattern = config.plugins.seriesplugin.pattern_title.value
 		pattern = pattern.replace("{org:s}", "(.+)")
 		pattern = re.sub('{season:?\d*d?}', '\d+', pattern)
@@ -378,7 +378,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 		pattern = re.sub('{rawseason:s}', '.+', pattern)
 		pattern = pattern.replace("{title:s}", ".+")
 		self.compiledRegexpSeries = re.compile(pattern)
-	
+
 	################################################
 	# Identifier functions
 	def getLogo(self, future=False, today=False, elapsed=False):
@@ -390,9 +390,9 @@ class SeriesPlugin(Modules, ChannelsBase):
 			return self.identifier_future and self.identifier_future.getLogo(future, today, elapsed)
 		else:
 			return None
-	
+
 	def getEpisode(self, callback, name, begin, end=None, service=None, future=False, today=False, elapsed=False, block=False, rename=False):
-		
+
 		if config.plugins.seriesplugin.skip_during_records.value:
 			try:
 				import NavigationInstance
@@ -404,7 +404,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 					return msg
 			except:
 				pass
-		
+
 		# Check for episode information in title
 		match = self.compiledRegexpSeries.match(name)
 		if match:
@@ -418,7 +418,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 				return msg
 			if match.group(1):
 				name = match.group(1)
-		
+
 		if elapsed:
 			identifier = self.identifier_elapsed
 		elif today:
@@ -427,28 +427,28 @@ class SeriesPlugin(Modules, ChannelsBase):
 			identifier = self.identifier_future
 		else:
 			identifier = self.modules and self.instantiateModule(self.modules.itervalues().next())
-		
+
 		if not identifier:
 			msg = _("No identifier available") + "\n\n" + _("Please check Your installation")
 			log.error(msg)
 			if callable(callback):
 				callback(msg)
 			return msg
-		
+
 		elif self.channelsEmpty():
 			msg = _("Channels are not matched") + "\n\n" + _("Please open the channel editor (setup) and match them")
 			log.error(msg)
 			if callable(callback):
 				callback(msg)
 			return msg
-			
+
 		else:
 			# Reset title search depth on every new request
 			identifier.search_depth = 0
-			
+
 			# Reset the knownids on every new request
 			identifier.knownids = []
-			
+
 			try:
 				serviceref = service.toString()
 			except:
@@ -457,28 +457,28 @@ class SeriesPlugin(Modules, ChannelsBase):
 			serviceref = re.sub('::.*', ':', serviceref)
 
 			if block == False:
-				
+
 				self.thread.add(ThreadItem(identifier, callback, name, begin, end, serviceref))
-				
+
 			else:
-				
+
 				result = None
-				
+
 				try:
 					result = identifier.getEpisode(name, begin, end, serviceref)
 				except Exception, e:
 					log.exception("Worker:", str(e))
-					
+
 					# Exception finish job with error
 					result = str(e)
-				
+
 				config.plugins.seriesplugin.lookup_counter.value += 1
-				
+
 				data = normalizeResult(result)
-				
+
 				if callable(callback):
 					callback(data)
-				
+
 				return data
 
 	def gotResult(self, msg):
@@ -486,7 +486,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 		callback, data = msg
 		if callable(callback):
 			callback(data)
-		
+
 		if (config.plugins.seriesplugin.lookup_counter.value == 10) \
 			or (config.plugins.seriesplugin.lookup_counter.value == 100) \
 			or (config.plugins.seriesplugin.lookup_counter.value % 1000 == 0):
@@ -505,7 +505,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 			self.thread.stop()
 		# NOTE: while we don't need to join the thread, we should do so in case it's currently parsing
 		#self.thread.join()
-		
+
 		self.thread = None
 		self.saveXML()
 		self.xmltv.writeXMLTVConfig()

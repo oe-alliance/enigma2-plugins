@@ -149,7 +149,7 @@ def Partnerbox_EPGSelection_zapTo(self):
 				self.session.openWithCallback(self.NewPartnerBoxSelected, PartnerboxEntriesListConfigScreen, 0)
 			else:
 				baseEPGSelection_zapTo(self)
-	except: 
+	except:
 		pass
 
 

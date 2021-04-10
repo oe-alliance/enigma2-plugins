@@ -1,6 +1,6 @@
 from Plugins.Extensions.Widgets.Widget import Widget
 from Components.Label import Label
-#from Components.Clock import Clock 
+#from Components.Clock import Clock
 from enigma import eSize, ePoint
 
 

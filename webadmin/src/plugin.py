@@ -30,7 +30,7 @@ def autostart(reason, **kwargs):
 		root.putChild("pkg", PKGResource())
 		root.putChild("script", Script())
 		addExternalChild(("webadmin", root, "WebAdmin", 1, True, "_self"))
-			
+
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(name="WebAdmin",

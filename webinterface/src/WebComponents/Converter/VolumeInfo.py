@@ -7,7 +7,7 @@ class VolumeInfo(Converter):
 	RESULTTEXT = 1
 	VOLUME = 2
 	ISMUTED = 3
-	
+
 	def __init__(self, type):
 		Converter.__init__(self, type)
 		self.type = {"Result": self.RESULT,
@@ -19,7 +19,7 @@ class VolumeInfo(Converter):
 	@cached
 	def getText(self):
 		volume = self.source.volume
-		
+
 		if self.type is self.RESULT:
 			return str(volume[0])
 		elif self.type is self.RESULTTEXT:
@@ -30,5 +30,5 @@ class VolumeInfo(Converter):
 			return str(volume[3])
 		else:
 			return "N/A"
-		
+
 	text = property(getText)

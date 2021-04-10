@@ -64,7 +64,7 @@ class dreamMediathekStationsScreen(Screen):
 				</convert>
 			</widget>
 		</screen>"""
-		
+
 	def __init__(self, session, skin_path=None):
 		Screen.__init__(self, session)
 		self.session = session
@@ -82,7 +82,7 @@ class dreamMediathekStationsScreen(Screen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 		self["key_yellow"] = StaticText()
-		self["key_blue"] = StaticText()	
+		self["key_blue"] = StaticText()
 
 		self["FredMainActions"] = ActionMap(["ShortcutActions", "WizardActions"],
 		{
@@ -95,16 +95,16 @@ class dreamMediathekStationsScreen(Screen):
 		self.onLayoutFinish.append(self.layoutFinished)
 		self.onShown.append(self.setWindowTitle)
 		self.onClose.append(self.__onClose)
-		
+
 	def __onClose(self):
 		self.Details = {}
 		self.session.nav.playService(self.lastservice)
-		
+
 	def layoutFinished(self):
 		self.currentList = "streamlist"
 		self.getStationsList()
 		#self["videoactions"].setEnabled(False)
-		
+
 	def setWindowTitle(self):
 		self.setTitle(_("dreamMediathek TV Stations"))
 
@@ -114,7 +114,7 @@ class dreamMediathekStationsScreen(Screen):
 			list = (
 				(_("Yes"), "quit"),
 				(_("No"), "continue")
-			)					
+			)
 			self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Really quit dreamMediathek ?"), list=list)
 		else:
 			self.leavePlayerConfirmed([True, how])
@@ -134,7 +134,7 @@ class dreamMediathekStationsScreen(Screen):
 		config.plugins.dreamMediathek.general.save()
 		config.plugins.dreamMediathek.save()
 		self.close()
-			
+
 	def keyOK(self):
 		print "self.currentList im KeyOK", self.currentList
 		if self.currentList == "streamlist":
@@ -162,8 +162,8 @@ class dreamMediathekStationsScreen(Screen):
 		if iWebTVStations.webtv_stations[station].has_key("title"):
 			title = iWebTVStations.webtv_stations[station]["title"]
 		if iWebTVStations.webtv_stations[station].has_key("streamurl"):
-			streamurl = iWebTVStations.webtv_stations[station]["streamurl"]			
-		return((provider, title, streamurl))	
+			streamurl = iWebTVStations.webtv_stations[station]["streamurl"]
+		return((provider, title, streamurl))
 
 	def buildStationsList(self):
 		self.tvstations = None

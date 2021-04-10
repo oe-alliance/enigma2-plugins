@@ -1146,4 +1146,3 @@ def Plugins(**kwargs): #@UnusedVariable # pylint: disable=W0613,C0103
 	what = _("Display Fon calls on screen")
 	return [PluginDescriptor(name="NCID Client", description=what, where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main),
 		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]
-

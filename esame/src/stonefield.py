@@ -17,7 +17,7 @@ class Stone:
 	changed = False
 	marked = False
 
-# This class is derived from StoneField.cpp (kSame) by Marcus Kreutzberger	
+# This class is derived from StoneField.cpp (kSame) by Marcus Kreutzberger
 
 
 class StoneField:
@@ -40,10 +40,10 @@ class StoneField:
 			if stone.color == color:
 				c += 1
 		return c
-	
+
 	def width(self):
 		return self.sizex
-	
+
 	def height(self):
 		return self.sizey
 
@@ -119,13 +119,13 @@ class StoneField:
 		self.marked += 1
 
 		# mark left
-		if index % self.sizex != 0: 
+		if index % self.sizex != 0:
 			self.mark2(index - 1, color)
 		# mark right
 		if (index + 1) % self.sizex != 0:
 			self.mark2(index + 1, color)
 		# mark upward
-		if index >= self.sizex: 
+		if index >= self.sizex:
 			self.mark2(index - self.sizex, color)
 		# mark downward
 		if index < (self.sizex - 1) * self.sizey:
@@ -233,10 +233,10 @@ class StoneField:
 	def isGameover(self):
 		i = self.maxstone - 1
 		#register unsigned char color;
-		
+
 		if self.gameover >= 0:
 			return bool(self.gameover)
-		
+
 		while i >= 0:
 			# ignore empty fields
 			while i >= 0 and self.field[i].color == 0:
@@ -261,22 +261,21 @@ class StoneField:
 
 	def hasBonus(self):
 		return self.m_gotBonus
-	
+
 	def getBoard(self):
 		return self.board
-	
+
 	def getScore(self):
 		return self.score
-	
+
 	def getColors(self):
 		return self.colors
-	
+
 	def getMarked(self):
 		return self.marked
-	
+
 	def getFieldSize(self):
 		return self.maxstone
-	
+
 	def getField(self):
 		return self.field
-

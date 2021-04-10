@@ -18,15 +18,15 @@ reduced_timeout = 3.0		# in seconds
 
 class TimeoutServerProxy(xmlrpclib.ServerProxy):
 	def __init__(self, *args, **kwargs):
-		
+
 		from Plugins.Extensions.SeriesPlugin.plugin import REQUEST_PARAMETER
 		uri = config.plugins.seriesplugin.serienserver_url.value + REQUEST_PARAMETER
-		
+
 		xmlrpclib.ServerProxy.__init__(self, uri, verbose=False, *args, **kwargs)
-		
+
 		timeout = config.plugins.seriesplugin.socket_timeout.value
 		socket.setdefaulttimeout(float(timeout))
-		
+
 		self.skip = {}
 
 	def getWebChannels(self):
@@ -39,7 +39,7 @@ class TimeoutServerProxy(xmlrpclib.ServerProxy):
 
 	def getSeasonEpisode(self, name, webChannel, unixtime, max_time_drift):
 		result = None
-		
+
 		skipped = self.skip.get(name, None)
 		if skipped:
 			if (time() - skipped) < skip_expiration:
@@ -47,7 +47,7 @@ class TimeoutServerProxy(xmlrpclib.ServerProxy):
 				socket.setdefaulttimeout(reduced_timeout)
 			else:
 				del self.skip[name]
-		
+
 		try:
 			result = self.sp.cache.getSeasonEpisode(name, webChannel, unixtime, max_time_drift)
 			log.debug("SerienServer getSeasonEpisode result:", result)
@@ -60,9 +60,9 @@ class TimeoutServerProxy(xmlrpclib.ServerProxy):
 				log.debug(msg)
 			self.skip[name] = time()
 			result = str(e)
-		
+
 		if skipped:
 			timeout = config.plugins.seriesplugin.socket_timeout.value
 			socket.setdefaulttimeout(float(timeout))
-		
+
 		return result

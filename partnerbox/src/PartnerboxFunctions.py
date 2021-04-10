@@ -86,7 +86,7 @@ def isInTimerList(begin, duration, service, eventid, timer_list):
 							time_match = ((timecmp + ((x.timeend - x.timebegin) / 60)) - chktimecmp) * 60
 						elif chktimecmp <= timecmp < chktimecmp_end:
 							time_match = (chktimecmp_end - timecmp) * 60
-			else: 
+			else:
 				if begin <= x.timebegin <= end:
 					diff = end - x.timebegin
 					if time_match < diff:
@@ -290,7 +290,7 @@ def FillE2TimerList(xmlstring, sreference=None):
 			except:
 				repeated = 0
 			try:
-				justplay = int(timer.findtext("e2justplay", 0)) 
+				justplay = int(timer.findtext("e2justplay", 0))
 			except:
 				justplay = 0
 			try:
@@ -405,7 +405,7 @@ class PlaylistEntry:
 	PlaylistEntry = 1			# normal PlaylistEntry (no Timerlist entry)
 	SwitchTimerEntry = 2		#simple service switch timer
 	RecTimerEntry = 4			#timer do recording
-	
+
 	recDVR = 8				#timer do DVR recording
 	recVCR = 16				#timer do VCR recording (LIRC) not used yet
 	recNgrab = 131072			#timer do record via Ngrab Server

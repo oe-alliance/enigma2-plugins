@@ -30,21 +30,21 @@ class StreamPlayer:
 
     def __onStart(self):
         self.trackstarttime = time()
-    
+
     def __onStop(self):
         self.stop()
-        
+
     def setSession(self, session):
         self.session = session
-        
+
     def setPlaylist(self, playlist):
         if self.playlist is not None:
-            self.currentplaylistitemnumber = 0 
+            self.currentplaylistitemnumber = 0
         self.playlist = playlist
-        
+
     def stateChanged(self, reason):
         for i in self.onStateChanged:
-            i(reason)   
+            i(reason)
 
     def getRemaining(self):
         track = self.playlist.getTrack(self.currentplaylistitemnumber)
@@ -61,13 +61,13 @@ class StreamPlayer:
                 else:
                     return str(integer)
             return "-%s:%s" % (shiftchars(minutes, " "), shiftchars(seconds, "0"))
-    
+
     def play(self, tracknumber=False):
         if tracknumber is False:
-            self.currentplaylistitemnumber = 0 
+            self.currentplaylistitemnumber = 0
         else:
             self.currentplaylistitemnumber = tracknumber
-        
+
         track = self.playlist.getTrack(self.currentplaylistitemnumber)
         if track is False:
             print "no track to play"
@@ -77,12 +77,12 @@ class StreamPlayer:
             self.is_playing = True
 
     def _delayedPlay(self, sref):
-        if self.is_playing: # making sure, that no one presses stop while we had wait 
+        if self.is_playing: # making sure, that no one presses stop while we had wait
             self.session.nav.playService(sref)
-    
+
     def skip(self):
         self.stop()
-                
+
     def stop(self, text="", force=False):
         if self.playlist is None:
             self.is_playing = False
@@ -94,15 +94,15 @@ class StreamPlayer:
             pass
             self.session.nav.playService(self.oldService)
             self.is_playing = False
-            self.stateChanged(self.STATE_STOP)            
+            self.stateChanged(self.STATE_STOP)
         else:
             self.stateChanged(self.STATE_PLAYLISTENDS)
-            
+
     def exit(self):
         for x in self.onClose:
             x()
         self.stop()
-    
+
     def getMetadata(self, key):
         try:
             track = self.playlist.getTrack(self.currentplaylistitemnumber)

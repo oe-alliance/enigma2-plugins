@@ -212,4 +212,3 @@ def timermenu(menuid):
 	if menuid == "timermenu":
 		return [(_("AutoTimers"), main, "autotimer_setup", None)]
 	return []
-

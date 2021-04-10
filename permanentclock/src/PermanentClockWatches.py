@@ -42,12 +42,12 @@ class PermanentClockWatches(Renderer):
 	def draw_line(self, x0, y0, x1, y1):
 		steep = abs(y1 - y0) > abs(x1 - x0)
 		if steep:
-			x0, y0 = y0, x0  
+			x0, y0 = y0, x0
 			x1, y1 = y1, x1
 		if x0 > x1:
 			x0, x1 = x1, x0
 			y0, y1 = y1, y0
-		if y0 < y1: 
+		if y0 < y1:
 			ystep = 1
 		else:
 			ystep = -1

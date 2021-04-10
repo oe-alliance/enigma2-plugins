@@ -35,9 +35,9 @@ TAG = _("ActiveTimerPushed")
 
 
 class ActiveTimers(ControllerBase):
-	
+
 	ForceSingleInstance = True
-	
+
 	def __init__(self):
 		# Is called on instance creation
 		ControllerBase.__init__(self)

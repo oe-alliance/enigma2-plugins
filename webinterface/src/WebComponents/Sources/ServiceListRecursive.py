@@ -48,7 +48,7 @@ class ServiceListRecursive(Source):
 			else:
 				self.xml += "\t\t<e2service>\n"
 				bouquet = False
-			
+
 			self.xml += "\t\t<e2servicereference>%s</e2servicereference>\n\t\t<e2servicename>%s</e2servicename>\n" % (self.filterXML(item[0]), self.filterXML(item[1]))
 
 			if bouquet:

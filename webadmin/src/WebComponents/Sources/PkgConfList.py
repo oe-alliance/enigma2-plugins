@@ -8,14 +8,14 @@ class PkgConfList(Source):
 	LIST = 0
 	SWITCH = 1
 	MEM = 2
-	
+
 	def __init__(self, session, func=LIST, wap=False):
 		Source.__init__(self)
 		self.func = func
 		self.wap = wap
 		self.session = session
 		self.res = (False, "Missing or Wrong Argument")
-			
+
 	def handleCommand(self, cmd):
 		if cmd is not None:
 			if self.func is self.SWITCH:
@@ -24,7 +24,7 @@ class PkgConfList(Source):
 				self.res = self.getMem()
 			elif self.func is self.LIST:
 				pass
-			
+
 	def switch(self, cmd):
 		if cmd:
 			try:
@@ -37,7 +37,7 @@ class PkgConfList(Source):
 					return (True, file)
 			except Exception, e:
 				return (False, str(e))
-			
+
 	def getMem(self):
 		try:
 			stat = os_statvfs("/")
@@ -45,7 +45,7 @@ class PkgConfList(Source):
 			return (False, "-1")
 		freespace = stat.f_bfree / 1000 * stat.f_bsize / 1000
 		return (True, '%d' % freespace)
-			
+
 	def getList(self):
 		list = []
 		files = os_popen("ls /etc/opkg")
@@ -67,7 +67,7 @@ class PkgConfList(Source):
 		return (False, "illegal call")
 
 	result = property(getResult)
-	
+
 	list = property(getList)
 	lut = {"Name": 0			, "Text": 1
 		}

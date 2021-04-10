@@ -3,7 +3,7 @@
 # Babelzapper Plugin by gutemine
 #
 babelzapper_version = "0.9.6"
-babelzapper_plugindir = "/usr/lib/enigma2/python/Plugins/Extensions/BabelZapper" 
+babelzapper_plugindir = "/usr/lib/enigma2/python/Plugins/Extensions/BabelZapper"
 babelzapper_readme = "%s/readme.txt" % babelzapper_plugindir
 babelzapper_menus = "/etc/babelzapper"
 #
@@ -65,7 +65,7 @@ class BabelzapperConfiguration(Screen, ConfigListScreen):
 		<widget name="buttongreen" position="120,200" size="100,40" backgroundColor="green" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/>
 		<widget name="buttonyellow" position="230,200" size="100,40" backgroundColor="yellow" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/>
 		<widget name="buttonblue" position="340,200" size="100,40" backgroundColor="blue" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/>
-		<ePixmap position="175,80" size="100,100" pixmap="%s/babel.png" transparent="1" alphatest="on" />	
+		<ePixmap position="175,80" size="100,100" pixmap="%s/babel.png" transparent="1" alphatest="on" />
 	</screen>""" % babelzapper_plugindir
 
 	def __init__(self, session, args=0):
@@ -123,7 +123,7 @@ class BabelzapperConfiguration(Screen, ConfigListScreen):
 
 	def readme(self):
 		self.session.open(Console, _("Babelzapper readme.txt"), ["cat %s" % (babelzapper_readme)])
- 
+
 	def about(self):
 		self.session.open(MessageBox, _("Babelzapper Version %s\nby gutemine and garbage") % babelzapper_version, MessageBox.TYPE_INFO)
 
@@ -139,7 +139,7 @@ class BabelZapperStartup(Screen):
 		# overwrite Mute  for the handicaped
 		globalActionMap.actions["babelzapperMute"] = self.setKey
 		self.babelDialog = session.instantiateDialog(BabelZapper)
-				
+
 	def setKey(self):
 		global babelmenu
 		global babelkey
@@ -172,7 +172,7 @@ class BabelZapperStartup(Screen):
 			i = 1 + babeldone
 			babeldone = 0
 			# here comes the command line interpreter
-			while i < cmdlen: 
+			while i < cmdlen:
 				cmd = babelmenu[babelkey][i]
 				cmdname = cmd.lstrip("	 ")
 				print "[BABELZAPPER] command: %s" % cmdname
@@ -180,29 +180,29 @@ class BabelZapperStartup(Screen):
 					self.babelDialog.executeKey(cmdname)
 				elif cmdname.startswith("END"):
 					self.babelDialog.hide()
-					print "[BABELZAPPER] ENDs\n" 
+					print "[BABELZAPPER] ENDs\n"
 					babelkey = -1
 					return
 				elif cmdname.startswith("IFON"):
 					if babelon == 0:
-						print "[BABELZAPPER] ON is off\n" 
+						print "[BABELZAPPER] ON is off\n"
 						# skip rest of commandline
 						i = cmdlen
 					else:
-						print "[BABELZAPPER] ON is on executing rest and setting it off\n" 
+						print "[BABELZAPPER] ON is on executing rest and setting it off\n"
 						babelon = 0
 				elif cmdname.startswith("ON"):
-					print "[BABELZAPPER] ON\n" 
+					print "[BABELZAPPER] ON\n"
 					babelon = 1
 				elif cmdname.startswith("TOGGLE"):
 					if babelon == 0:
-						print "[BABELZAPPER] TOGGLE on\n" 
+						print "[BABELZAPPER] TOGGLE on\n"
 						babelon = 1
 					else:
-						print "[BABELZAPPER] TOGGLE off\n" 
+						print "[BABELZAPPER] TOGGLE off\n"
 						babelon = 0
 				elif cmdname.startswith("OFF"):
-					print "[BABELZAPPER] OFF\n" 
+					print "[BABELZAPPER] OFF\n"
 					babelon = 0
 				elif cmdname.startswith("GOTO"):
  					try:
@@ -213,11 +213,11 @@ class BabelZapperStartup(Screen):
 					# skip rest of commandline
 					i = cmdlen
 				elif cmdname.startswith("STOP"):
-					try:		
+					try:
 						babelstop = int(cmdname.replace("STOP", ""))
 					except:
 						babelstop = 1000
-					if babelstop < 1000:		
+					if babelstop < 1000:
 						babelstop = 1000
 					elif babelstop > 60000:
 						babelstop = 60000
@@ -267,12 +267,12 @@ class BabelZapperStartup(Screen):
 					self.session.open(MessageBox, babeltext, MessageBox.TYPE_ERROR)
 					# skip rest of commandline
 					i = cmdlen
-				# next command	
+				# next command
 				i = i + 1
 			# continue babelzapping but show last command again to make repeats easier
 			babelkey = babelkey - 1
 			self.nextKeyTimer.start(config.plugins.babelzapper.changetime.value, True)
-			
+
 	def resetKey(self):
 		print "[BABELZAPPER] resets last key"
 		self.resetKeyTimer.stop()
@@ -300,7 +300,7 @@ class BabelZapperStartup(Screen):
 		cmd = babelmenu[babelkey][1]
 		cmdname = cmd.lstrip("	 ")
 		if cmdname.startswith("RETURN"):
-			try:		
+			try:
 				babelkey = int(cmdname.replace("RETURN", "")) - 1
 			except:
 				babelkey = -1
@@ -312,33 +312,33 @@ class BabelZapperStartup(Screen):
 			self.nextKeyTimer.start(0, True)
 			return
 		elif cmdname.startswith("ON"):
-			print "[BABELZAPPER] ON\n" 
+			print "[BABELZAPPER] ON\n"
 			babelon = 1
 			# skip this commandline
 			self.nextKeyTimer.start(0, True)
 			return
 		elif cmdname.startswith("OFF"):
-			print "[BABELZAPPER] OFF\n" 
+			print "[BABELZAPPER] OFF\n"
 			babelon = 0
 			# skip this commandline
 			self.nextKeyTimer.start(0, True)
 			return
 		elif cmdname.startswith("TOGGLE"):
 			if babelon == 0:
-				print "[BABELZAPPER] TOGGLE on\n" 
+				print "[BABELZAPPER] TOGGLE on\n"
 				babelon = 0
 			else:
-				print "[BABELZAPPER] TOGGLE off\n" 
+				print "[BABELZAPPER] TOGGLE off\n"
 				babelon = 1
 			# skip this commandline
 			self.nextKeyTimer.start(0, True)
 			return
 		elif cmdname.startswith("STOP"):
-			try:		
+			try:
 				babelstop = int(cmdname.replace("STOP", ""))
 			except:
 				babelstop = 1000
-			if babelstop < 1000:		
+			if babelstop < 1000:
 				babelstop = 1000
 			elif babelstop > 60000:
 				babelstop = 60000
@@ -421,7 +421,7 @@ class BabelZapper(Screen):
 				if len(bz) < 2:
 					print "[BABELZAPPER] wrong line %s in babelzapper.zbb" % line
  					babelmenu.append(("????", "PRINT ???? %s" % line))
-					
+
 				else:
 					babelmenu.append((bz))
 				line = f.readline().replace("\r", "").replace("\n", "")
@@ -430,7 +430,7 @@ class BabelZapper(Screen):
 		self["babelzapper"] = MultiColorLabel(babelmenu[babelkey][0])
                 self["babelzapper"].setForegroundColorNum(0)
                 self["babelzapper"].setBackgroundColorNum(1)
- 		
+
 	def updateKey(self, keyname, keybg=0, keyfg=1):
 		self["babelzapper"].setText(keyname)
                 self["babelzapper"].setForegroundColorNum(keyfg)
@@ -445,7 +445,7 @@ class BabelZapper(Screen):
 		        if keyname.endswith("_LONG"):
 				long = True
 				keyname = keyname.replace("_LONG", "")
-	        	try:		
+	        	try:
 				keycode = KEYIDS[keyname]
 				print "[BABELZAPPER] found key %i" % keycode
 			except:

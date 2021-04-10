@@ -3,7 +3,7 @@
 #    Vali-XD-Skins Control for Dreambox/Enigma-2
 #    Coded by Vali (c)2009-2011
 #
-#  This plugin is licensed under the Creative Commons 
+#  This plugin is licensed under the Creative Commons
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 #  To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/
 #  or send a letter to Creative Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -12,7 +12,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 #######################################################################
@@ -118,16 +118,16 @@ class XDsetup(ConfigListScreen, Screen):
 		list.append(getConfigListEntry(_("Selected foreground:"), config.plugins.valiXDsetup.selFG))
 		#list.append(getConfigListEntry(_("SmartInfo update time:"), config.plugins.valiXDsetup.pollTime))
 		ConfigListScreen.__init__(self, list)
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], 
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 									{
-									"red": self.exit, 
-									"green": self.save, 
+									"red": self.exit,
+									"green": self.save,
 									"yellow": self.colortest,
 									"blue": self.toolBox,
 									"cancel": self.exit
 									}, -1)
 		self.onLayoutFinish.append(self.UpdateComponents)
-	
+
 	def UpdateComponents(self):
 		system('cp ' + self.komponente + 'vRendVolumeText.py /usr/lib/enigma2/python/Components/Renderer/vRendVolumeText.py')
 		system('cp ' + self.komponente + 'vRendMaxTemp.py /usr/lib/enigma2/python/Components/Renderer/vRendMaxTemp.py')
@@ -224,7 +224,7 @@ class XDsetup(ConfigListScreen, Screen):
 			if config.plugins.valiXDsetup.dmType.value == "8000":
 				oled_file = self.daten + "oled-8000.xml"
 			elif config.plugins.valiXDsetup.dmType.value == "7025":
-				oled_file = self.daten + "oled-7025.xml"                                
+				oled_file = self.daten + "oled-7025.xml"
 			elif config.plugins.valiXDsetup.dmType.value == "verysimple":
 				oled_file = self.daten + "oled-VerySymple.xml"
 			else:
@@ -261,7 +261,7 @@ class XDsetup(ConfigListScreen, Screen):
 						(_("Suomipoeka-Movielist patch"), "PATCHSUOMI"),
 						(_("Colored icons patch"), "PATCHCONSTABLE")]
 		self.session.openWithCallback(self.toolExec, ChoiceBox, title=_("Vali-XD Tool Box..."), list=contextFileList)
-	
+
 	def toolExec(self, answer):
 		answer = answer and answer[1]
 		if answer == "INFO":
@@ -319,10 +319,3 @@ class UserStylePreview(Screen):
 		self.skin = prvScreen
 		Screen.__init__(self, session)
 		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.close, "cancel": self.close}, -1)
-
-
-
-
-
-
-

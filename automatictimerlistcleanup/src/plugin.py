@@ -6,8 +6,8 @@
 #  Coded by Dr.Best (c) 2010
 #  Support: www.dreambox-tools.info
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -16,7 +16,7 @@
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 from Plugins.Plugin import PluginDescriptor
@@ -94,7 +94,7 @@ class AutomaticTimerlistCleanUp:
 			self.timer.startLongTimer(self.TIMER_INTERVAL) # check again in x secs
 		else:
 			print "[AutomaticTimerlistCleanUp] disabled"
-		
+
 	def configChange(self, configElement=None):
 		# config was changed in setup
 		if self.timer.isActive(): # stop timer if running
@@ -102,10 +102,10 @@ class AutomaticTimerlistCleanUp:
 		print "[AutomaticTimerlistCleanUp] Setup values have changed"
 		if int(config.plugins.automatictimerlistcleanup.type.value) > -1:
 			print "[AutomaticTimerlistCleanUp] Next automatic timerlist cleanup at ", strftime("%c", localtime(time() + 120))
-			self.timer.startLongTimer(120) # check timerlist in 2 minutes after changing 
+			self.timer.startLongTimer(120) # check timerlist in 2 minutes after changing
 		else:
 			print "[AutomaticTimerlistCleanUp] disabled"
-		
+
 	def timerentryOnStateChange(self, timer):
 		if int(config.plugins.automatictimerlistcleanup.type.value) > -1 and timer.state == TimerEntry.StateEnded and timer.cancelled is not True: #if enabled, timerentry ended and it was not cancelled by user
 			print "[AutomaticTimerlistCleanUp] Timerentry has been changed to StateEnd"
@@ -116,7 +116,7 @@ class AutomaticTimerlistCleanUp:
 
 def autostart(session, **kwargs):
 	AutomaticTimerlistCleanUp(session) # start plugin at sessionstart
-	
+
 
 def setup(session, **kwargs):
 	session.open(AutomaticTimerlistCleanUpSetup) # start setup
@@ -126,8 +126,7 @@ def startSetup(menuid):
 	if menuid != "system": # show setup only in system level menu
 		return []
 	return [(_("Automatic Timerlist Cleanup Setup"), setup, "automatictimerlistcleanup", 46)]
-	
+
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart), PluginDescriptor(name="Automatic Timerlist Cleanup Setup", description=_("Automatic Timerlist Cleanup Setup"), where=PluginDescriptor.WHERE_MENU, fnc=startSetup)]
-

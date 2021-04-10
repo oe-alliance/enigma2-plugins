@@ -9,7 +9,7 @@ def importSingleWidget(session, widgetdir):
     print "importing widget from", widgetdir
     widgetname = widgetdir.split("/")[-1]
     module_name, ext = splitext(widgetname + ".widget.py") # Handles no-extension files, etc.
-    if ext == '.py' and module_name != "__init__":                
+    if ext == '.py' and module_name != "__init__":
         try:
             #import python part
             spam = __import__(module_name, globals(), locals(), [], -1)
@@ -18,14 +18,14 @@ def importSingleWidget(session, widgetdir):
             #import skin
             skin = parse(widgetdir + "/" + "widget_skin.xml").getroot()
             return widgetname, w, skin, widgetdir, module_name
-        
-        except (ImportError, IOError), e:                
+
+        except (ImportError, IOError), e:
             print 'Could NOT import widget: %s' % (module_name)
             print 'Exception Caught\n%s' % e
     return False
     print "#" * 20
-    
-    
+
+
 def importWidgets(session,):
     widgets = []
     dir = abspath(resolveFilename(SCOPE_PLUGINS) + "Extensions/Widgets/widgets/")

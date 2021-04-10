@@ -44,14 +44,14 @@ class ServiceList(Source):
 					elif protection[1] == IMG_WHITEBOUQUET:
 						#(unlocked -B-)
 						isProtected = "5"
-					
+
 			list.append((item[0].toString(), item[1], isGroup, isMarker, isProtected))
 		return list
 
 	def getServiceList(self):
 		serviceHandler = eServiceCenter.getInstance()
 		return serviceHandler.list(self.root)
-		
+
 	def getRoot(self):
 		return self.__root
 
@@ -59,7 +59,7 @@ class ServiceList(Source):
 		assert isinstance(root, eServiceReference)
 		self.__root = root
 		self.changed()
-		
+
 	root = property(getRoot, setRoot)
 
 	def validateReference(self, ref):
@@ -75,4 +75,4 @@ class ServiceList(Source):
 			self.command_func(ref)
 
 	list = property(getServicesAsList)
-	lut = {"Reference": 0, "Name": 1, "isGroup": 2, "isMarker": 3, "isProtected": 4}			
+	lut = {"Reference": 0, "Name": 1, "isGroup": 2, "isMarker": 3, "isProtected": 4}

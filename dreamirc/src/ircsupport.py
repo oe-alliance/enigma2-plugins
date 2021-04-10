@@ -49,7 +49,7 @@ class IRCPerson(e2support.AbstractPerson):
         if self.account.client is None:
             print "not connected"
         else:
-        	  self.account.client.quit("user logged off")    	  
+        	  self.account.client.quit("user logged off")
 
 
 class IRCGroup(e2support.AbstractGroup):
@@ -89,12 +89,12 @@ class IRCGroup(e2support.AbstractGroup):
             return 0
         self.account.client.leave(self.name)
         self.account.client.getGroupConversation(self.name, 1)
-        
+
     def bye(self):
         if self.account.client is None:
             print "not connected"
         else:
-        	self.account.client.quit("user logged off")    	  
+        	self.account.client.quit("user logged off")
 
 
 class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
@@ -140,7 +140,7 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
         self.name = nick
         self.accountName = "%s (IRC)" % nick
         irc.IRCClient.setNick(self, nick)
-        
+
     def quit(self, message='bye bye'):
 #         self.quit_str=str("QUIT :%s" % message)
          self.sendLine("QUIT :%s" % message)
@@ -288,4 +288,3 @@ class IRCAccount(e2support.AbstractAccount):
         d = cc.connectTCP(self.host, self.port)
         d.addErrback(logonDeferred.errback)
         return logonDeferred
-        

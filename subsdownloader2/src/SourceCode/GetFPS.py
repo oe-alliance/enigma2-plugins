@@ -11,10 +11,10 @@ class GetFPS(object):
 
     def __enter__(self):
         return self.fps
-    
+
     #def fps_round_to3(self):
     #    return round(self.fps(),3)
-        
+
     def fps(self):
         self.file = open(self.filename, "r+b")
         s = self.file.read(4)
@@ -31,7 +31,7 @@ class GetFPS(object):
             self.file.close()
         except:
             pass
-        
+
     def eblm(self, bits=0xf0):
         suma = 0x00
         mask = 0x01
@@ -55,7 +55,7 @@ class GetFPS(object):
                         track = ord(self.file.read(1))
                 elif (class_id == 0x23E383 and track == 1):
                         break
-                elif (class_id not in [0x18538067, 0x1654AE6B, 0xAE, 0x83]):  
+                elif (class_id not in [0x18538067, 0x1654AE6B, 0xAE, 0x83]):
 #Segment,Tracks,TrackEntry,TrackType
                         self.file.seek(length, 1)
 

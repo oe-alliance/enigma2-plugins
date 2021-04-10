@@ -3,10 +3,10 @@ from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os
 import gettext
- 
+
 PluginLanguageDomain = "AspectRatioSwitch"
 PluginLanguagePath = "SystemPlugins/AspectRatioSwitch/locale"
- 
+
 
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))

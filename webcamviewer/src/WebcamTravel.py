@@ -366,7 +366,3 @@ class Cam:
 
 		datex = datetime.fromtimestamp(int(element.findtext("last_update", 0)))
 		self.last_update = datex.strftime("%d.%m.%Y %H:%M:%S")
-
-
-
-

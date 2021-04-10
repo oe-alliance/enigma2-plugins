@@ -35,4 +35,3 @@ class Hdd(Source):
 			"Capacity": 1,
 			"Free": 2
 		}
-

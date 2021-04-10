@@ -3,12 +3,12 @@ class Sensors:
 	TYPE_TEMPERATURE = 0
 	# (type, name, unit, fanid)
 #	TYPE_FAN_RPM = 1
-	
+
 	def __init__(self):
 		# (type, name, unit, sensor_specific_dict/list)
 		self.sensors_list = []
 		self.addSensors()
-		
+
 	def getSensorsCount(self, type=None):
 		if type is None:
 			return len(self.sensors_list)
@@ -17,7 +17,7 @@ class Sensors:
 			if sensor[0] == type:
 				count += 1
 		return count
-	
+
 	# returns a list of sensorids of type "type"
 	def getSensorsList(self, type=None):
 		if type is None:
@@ -60,11 +60,11 @@ class Sensors:
 					f = open("/proc/stb/sensors/%s/name" % dirname, "r")
 					name = f.readline().strip()
 					f.close()
-					
+
 					f = open("/proc/stb/sensors/%s/unit" % dirname, "r")
 					unit = f.readline().strip()
 					f.close()
-					
+
 					self.sensors_list.append((self.TYPE_TEMPERATURE, name, unit, "/proc/stb/sensors/%s" % dirname))
 
 

@@ -485,4 +485,3 @@ class EmissionOverview(Screen, HelpableScreen):
 __all__ = ['LIST_TYPE_ALL', 'LIST_TYPE_DOWNLOADING',
 	'LIST_TYPE_SEEDING', 'EmissionOverview', 'SORT_TYPE_TIME',
 	'SORT_TYPE_PROGRESS', 'SORT_TYPE_ADDED', 'SORT_TYPE_SPEED']
-

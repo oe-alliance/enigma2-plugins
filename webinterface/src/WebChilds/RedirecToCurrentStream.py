@@ -21,4 +21,3 @@ class RedirecToCurrentStreamResource(resource.Resource):
 		request.redirect("http://%s:8001/%s" % (request.getHost().host, sref))
 		request.finish()
 		return server.NOT_DONE_YET
-

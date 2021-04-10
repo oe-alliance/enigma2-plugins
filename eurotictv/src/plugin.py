@@ -87,11 +87,11 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 				iPlayableService.evTuneFailed: self.__streamFailed,
 				iPlayableService.evEOF: self.__evEOF,
 				iPlayableService.evUser + 15: self.__streamFailed
-			})	
+			})
 
 		self.onClose.append(self.__onClose)
 		self.onExecBegin.append(self.__onExecBegin)
-		
+
 		self.setState(self.STATE_DISCONNECTED)
 
 	def __onExecBegin(self):
@@ -106,7 +106,7 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 
 		self["connection_label"].setForegroundColorNum(self.state)
 		self["connection_label"].setText(self.STATE_NAMES[self.state])
-		
+
 		if self.state in (self.STATE_CONNECTING, self.STATE_PAUSED):
 			self["do_blink"].setBoolean(True)
 		else:
@@ -114,11 +114,11 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 
 		if self.state in (self.STATE_DISCONNECTED, self.STATE_CONNECTING, self.STATE_FAILURE):
 			self.togglePIG(fullscreen=False)
-		
+
 		if self.state in (self.STATE_PLAYING, self.STATE_PAUSED):
 			self["poster"].hide()
 			self["pig_mode"].setBoolean(True)
-		else: 
+		else:
 			self["poster"].show()
 			self["pig_mode"].setBoolean(False)
 

@@ -85,4 +85,3 @@ class SatellitesList(Source):
 		return item
 
 	text = property(do_func)
-

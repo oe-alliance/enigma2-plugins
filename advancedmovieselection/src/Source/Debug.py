@@ -19,22 +19,22 @@ GNU General Public License for more details.
 For more information on the GNU General Public License see:
 <http://www.gnu.org/licenses/>.
 
-For example, if you distribute copies of such a program, whether gratis or for a fee, you 
-must pass on to the recipients the same freedoms that you received. You must make sure 
+For example, if you distribute copies of such a program, whether gratis or for a fee, you
+must pass on to the recipients the same freedoms that you received. You must make sure
 that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 '''
 
 from time import localtime
-import sys 
+import sys
 
 saved_stdout = None
 
 
-class writer: 
-    def __init__(self, *writers): 
-        self.writers = writers 
- 
-    def write(self, text): 
+class writer:
+    def __init__(self, *writers):
+        self.writers = writers
+
+    def write(self, text):
         for w in self.writers:
             if isinstance(w, str):
                 try:
@@ -45,17 +45,17 @@ class writer:
                     pass
                     #Debug.disable()
                 continue
-            w.write(text) 
- 
+            w.write(text)
+
 
 class Debug():
     @staticmethod
     def enable(file_name):
         global saved_stdout
         if saved_stdout:
-            Debug.disable() 
+            Debug.disable()
         saved_stdout = sys.stdout
-        sys.stdout = writer(sys.stdout, file_name) 
+        sys.stdout = writer(sys.stdout, file_name)
         try:
             ltim = localtime()
             print
@@ -72,7 +72,6 @@ class Debug():
         except:
             pass
         global saved_stdout
-        if saved_stdout: 
+        if saved_stdout:
             sys.stdout = saved_stdout
             saved_stdout = None
-

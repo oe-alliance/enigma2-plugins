@@ -27,4 +27,4 @@ class ProtectionSettings(Source):
 		self.getProtectionSettings()
 
 	list = property(getProtectionSettings)
-	lut = {"Configured": 0, "Type": 1, "SetupPinActive": 2, "SetupPin": 3}			
+	lut = {"Configured": 0, "Type": 1, "SetupPinActive": 2, "SetupPin": 3}

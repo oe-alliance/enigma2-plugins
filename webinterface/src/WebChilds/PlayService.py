@@ -56,4 +56,3 @@ class ServiceplayerResource(resource.Resource):
 			return True, "[ServiceplayerResource] stopped, now playing old service, %s" % self.oldservice[0]
 		else:
 			return True, "[ServiceplayerResource] stopped"
-

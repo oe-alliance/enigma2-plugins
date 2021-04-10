@@ -9,8 +9,8 @@
 #  design by Vali
 #  Support: www.dreambox-tools.info
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -19,7 +19,7 @@
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 
@@ -46,7 +46,7 @@ lengthList = [0, 0, 0, 0]
 
 def main(session, **kwargs):
     session.open(fstabViewerScreen)
-	
+
 
 class fstabMenuList(MenuList):
 	def __init__(self, list):
@@ -54,7 +54,7 @@ class fstabMenuList(MenuList):
 		self.l.setFont(0, gFont("Regular", 22))
 		self.l.setFont(1, gFont("Regular", 18))
 		self.l.setItemHeight(220)
-		
+
 
 def fstabMenuListEntry(devicename, mountpoint, fstype, options, dumpfreq, passnum):
 	res = [(devicename, mountpoint, fstype, options, dumpfreq, passnum)]
@@ -71,8 +71,8 @@ def fstabMenuListEntry(devicename, mountpoint, fstype, options, dumpfreq, passnu
 	res.append(MultiContentEntryText(pos=(0, 152), size=(200, 25), font=1, flags=RT_HALIGN_RIGHT, text="Dump frequency:"))
 	res.append(MultiContentEntryText(pos=(0, 182), size=(200, 25), font=1, flags=RT_HALIGN_RIGHT, text="Pass number:"))
 	return res
-	
-	
+
+
 class fstabViewerScreen(Screen, HelpableScreen):
 	skin = """
 		<screen position="center,center" size="600,430" title="fstab-Editor" >
@@ -90,7 +90,7 @@ class fstabViewerScreen(Screen, HelpableScreen):
 			<eLabel foregroundColor="#f0f0f0" font="Regular;18" position="275,376" size="200,25" text="Run mount -a" transparent="1"/>
 			<eLabel foregroundColor="#f0f0f0" font="Regular;18" position="275,401" size="200,25" text="Restore fstab.backup" transparent="1"/>
 		</screen>"""
-		
+
 	def __init__(self, session, args=0):
 		self.skin = fstabViewerScreen.skin
 		self.session = session
@@ -107,7 +107,7 @@ class fstabViewerScreen(Screen, HelpableScreen):
 			"yellow": (self.restoreBackUp, _("Restore back up of fstab")),
 			"blue": (self.mountall, _("Run mount -a")),
 		}, -1)
-		
+
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
 		{
 			"cancel": (self.close, _("Close plugin")),
@@ -115,13 +115,13 @@ class fstabViewerScreen(Screen, HelpableScreen):
 		}, -1)
 
 		self.buildScreen()
-		
+
 		self["menulist"].onSelectionChanged.append(self.selectionChanged)
 
 	def openEditScreen(self):
 		self.selectedEntry = self["menulist"].getSelectedIndex()
 		self.session.openWithCallback(self.writeFile, fstabEditorScreen, self.selectedEntry)
-	
+
 	def buildScreen(self):
 		self.fstabEntryList = []
 		if fileExists("/etc/fstab"):
@@ -139,16 +139,16 @@ class fstabViewerScreen(Screen, HelpableScreen):
 					if len(entry[1]) > lengthList[1]:
 						lengthList[1] = len(entry[1])
 					if len(entry[2]) > lengthList[2]:
-						lengthList[2] = len(entry[2])					
+						lengthList[2] = len(entry[2])
 					if len(entry[3]) > lengthList[3]:
 						lengthList[3] = len(entry[3])
 					self.fstabEntryList.append(fstabMenuListEntry(entry[0], entry[1], entry[2], entry[3], entry[4], entry[5]))
 					self.counter = self.counter + 1
 			fstabFile.close()
-			
+
 		self["menulist"].l.setList(self.fstabEntryList)
 		self["entryinfo"].setText("%d / %d" % (self["menulist"].getSelectedIndex() + 1, self.counter))
-	
+
 	def writeFile(self, returnvalue):
 		if returnvalue != 0:
 			os.system("cp /etc/fstab /etc/fstab.backup")
@@ -158,21 +158,21 @@ class fstabViewerScreen(Screen, HelpableScreen):
 				configFile.write(line)
 			configFile.close()
 			self.buildScreen()
-			
+
 	def selectionChanged(self):
 		self["entryinfo"].setText("%d / %d" % (self["menulist"].getSelectedIndex() + 1, self.counter))
-		
+
 	def mountall(self):
 		os.system("mount -a")
-		
+
 	def addEntry(self):
 		self.session.openWithCallback(self.writeFile, fstabEditorScreen, None, addEntry=True)
-		
+
 	def restoreBackUp(self):
 		os.system("rm -f /etc/fstab")
 		os.system("cp /etc/fstab.backup /etc/fstab")
 		self.buildScreen()
-		
+
 
 class fstabEditorScreen(Screen, ConfigListScreen, HelpableScreen):
 	skin = """
@@ -186,7 +186,7 @@ class fstabEditorScreen(Screen, ConfigListScreen, HelpableScreen):
 			<eLabel foregroundColor="#f0f0f0" font="Regular;18" position="275,326" size="200,25" text="Cancel" transparent="1"/>
 			<widget name="ButtonRedText" position="275,351" size="200,25" zPosition="10" font="Regular;18" foregroundColor="#f0f0f0" transparent="1" />
 		</screen>"""
-		
+
 	def __init__(self, session, selectedEntry, addEntry=False):
 		self.skin = fstabEditorScreen.skin
 		self.session = session
@@ -197,33 +197,33 @@ class fstabEditorScreen(Screen, ConfigListScreen, HelpableScreen):
 
 		self["ButtonRed"] = Pixmap()
 		self["ButtonRedText"] = Label(_("Remove entry"))
-		
+
 		if self.addEntry:
 			self["ButtonRed"].hide()
 			self["ButtonRedText"].hide()
-		
+
 		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
 		{
 			"green": (self.checkEntry, _("Return with saving")),
 			"red": (self.removeEntry, _("Remove entry")),
 		}, -1)
-		
+
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
 		{
 			"cancel": (self.cancelEntry, _("Return without saving")),
 			"ok": (self.ok, _("Open selector")),
-		}, -1)	
-		
+		}, -1)
+
 		self.list = []
 		ConfigListScreen.__init__(self, self.list)
-				
+
 		if self.addEntry:
 			self.devicename = NoSave(ConfigText(default=""))
 			self.mountpoint = NoSave(ConfigText(default=""))
 			self.fstype = NoSave(ConfigSelection([("auto", "auto"), ("ext2", "ext2"), ("ext3", "ext3"), ("ext4", "ext4"), ("swap", "swap"), ("tmpfs", "tmpfs"), ("proc", "proc"), ("cifs", "cifs"), ("nfs", "nfs"), ("jffs2", "jffs2"), ("usbfs", "usbfs"), ("devpts", "devpts"), ("vfat", "vfat"), ("fat", "fat"), ("ntfs", "ntfs"), ("noauto", "no auto"), ("xfs", "xfs")], default="auto"))
 			self.options = NoSave(ConfigText(default="defaults"))
 			self.dumpfreq = NoSave(ConfigNumber(default=0))
-			self.passnum = NoSave(ConfigSelection([("0", "0"), ("1", "1"), ("2", "2")], default="0"))			
+			self.passnum = NoSave(ConfigSelection([("0", "0"), ("1", "1"), ("2", "2")], default="0"))
 		else:
 			self.devicename = NoSave(ConfigText(default=entryList[self.selectedEntry][0]))
 			self.mountpoint = NoSave(ConfigText(default=entryList[self.selectedEntry][1]))
@@ -231,7 +231,7 @@ class fstabEditorScreen(Screen, ConfigListScreen, HelpableScreen):
 			self.options = NoSave(ConfigText(default=entryList[self.selectedEntry][3]))
 			self.dumpfreq = NoSave(ConfigNumber(default=int(entryList[self.selectedEntry][4])))
 			self.passnum = NoSave(ConfigSelection([("0", "0"), ("1", "1"), ("2", "2")], default=entryList[self.selectedEntry][5]))
-		
+
 		self.list.append(getConfigListEntry(_("device name: "), self.devicename))
 		self.list.append(getConfigListEntry(_("mount point: "), self.mountpoint))
 		self.list.append(getConfigListEntry(_("file system type: "), self.fstype))
@@ -240,13 +240,13 @@ class fstabEditorScreen(Screen, ConfigListScreen, HelpableScreen):
 		self.list.append(getConfigListEntry(_("pass num: "), self.passnum))
 
 		self["config"].setList(self.list)
-	
+
 	def checkEntry(self):
 		if self.devicename.value == "" or self.mountpoint.value == "":
 			error = self.session.open(MessageBox, _("Please enter a value for every input field"), MessageBox.TYPE_ERROR, timeout=10)
 		else:
 			self.saveEntry()
-	
+
 	def saveEntry(self):
 		global entryList, lengthList
 		#check if new entry is longer than the currently longest
@@ -263,22 +263,22 @@ class fstabEditorScreen(Screen, ConfigListScreen, HelpableScreen):
 		else:
 			entryList[self.selectedEntry] = [self.devicename.value, self.mountpoint.value, self.fstype.value, self.options.value, str(self.dumpfreq.value), self.passnum.value]
 		self.close(1)
-		
+
 	def removeEntry(self):
 		global entryList
 		del entryList[self.selectedEntry]
 		self.close(1)
-		
+
 	def cancelEntry(self):
 		self.close(0)
-	
+
 	def ok(self):
 		self.selectedEntry = self["config"].getCurrentIndex()
 		if self.selectedEntry == 1:
 			self.session.openWithCallback(self.dirSelectDlgClosed, dirSelectDlg, "/media/dummy/", False)  # just add any (not even existing) subdir to start in /media
 		elif self.selectedEntry == 0:
 			self.session.openWithCallback(self.dirSelectDlgClosed, dirSelectDlg, "/dev/dummy/", True) # just add any (not even existing) subdir to start in /dev
-	
+
 	def dirSelectDlgClosed(self, mountpoint):
 		#use print to see in crashlog what's been selected
 		print "mountpoint: ", mountpoint
@@ -287,7 +287,7 @@ class fstabEditorScreen(Screen, ConfigListScreen, HelpableScreen):
 				self.mountpoint.value = mountpoint
 			elif self.selectedEntry == 0:
 				self.devicename.value = mountpoint
-		
+
 
 def Plugins(**kwargs):
     return [PluginDescriptor(name="fstab-Editor", description=_("Plugin to edit fstab"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="fstabEditor.png", fnc=main)]

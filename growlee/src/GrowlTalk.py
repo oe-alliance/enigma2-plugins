@@ -144,4 +144,3 @@ class GrowlTalkAbstraction:
 
 	def stop(self):
 		return self.serverPort.stopListening()
-

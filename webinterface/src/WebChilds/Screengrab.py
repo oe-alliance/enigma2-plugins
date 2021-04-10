@@ -137,4 +137,3 @@ class GrabStream:
 
 	def requestFinished(self, val):
 		pass
-

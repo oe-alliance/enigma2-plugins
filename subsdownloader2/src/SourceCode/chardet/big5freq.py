@@ -1,11 +1,11 @@
 ######################## BEGIN LICENSE BLOCK ########################
 # The Original Code is Mozilla Communicator client code.
-# 
+#
 # The Initial Developer of the Original Code is
 # Netscape Communications Corporation.
 # Portions created by the Initial Developer are Copyright (C) 1998
 # the Initial Developer. All Rights Reserved.
-# 
+#
 # Contributor(s):
 #   Mark Pilgrim - port to Python
 #
@@ -13,12 +13,12 @@
 # modify it under the terms of the GNU Lesser General Public
 # License as published by the Free Software Foundation; either
 # version 2.1 of the License, or (at your option) any later version.
-# 
+#
 # This library is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 # Lesser General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
@@ -26,18 +26,18 @@
 ######################### END LICENSE BLOCK #########################
 
 # Big5 frequency table
-# by Taiwan's Mandarin Promotion Council 
+# by Taiwan's Mandarin Promotion Council
 # <http://www.edu.tw:81/mandr/>
-# 
+#
 # 128  --> 0.42261
 # 256  --> 0.57851
 # 512  --> 0.74851
 # 1024 --> 0.89384
 # 2048 --> 0.97583
-# 
+#
 # Ideal Distribution Ratio = 0.74851/(1-0.74851) =2.98
 # Random Distribution Ration = 512/(5401-512)=0.105
-# 
+#
 # Typical Distribution Ratio about 25% of Ideal one, still much higher than RDR
 
 BIG5_TYPICAL_DISTRIBUTION_RATIO = 0.75

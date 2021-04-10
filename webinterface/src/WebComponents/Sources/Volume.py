@@ -46,4 +46,3 @@ class Volume(Source):
 		self.vol = l
 
 	volume = property(lambda self: self.vol)
-

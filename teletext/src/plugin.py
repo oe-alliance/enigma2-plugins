@@ -9,13 +9,13 @@ from Screens.Screen import Screen
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
-from Components.MenuList import MenuList 
+from Components.MenuList import MenuList
 from Components.Pixmap import Pixmap
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.config import config, configfile, getConfigListEntry, ConfigSubsection, ConfigEnableDisable, ConfigSlider, ConfigSelection, ConfigSequence
 from GlobalActions import globalActionMap
 from Plugins.Plugin import PluginDescriptor
-from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard 
+from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 import array
@@ -30,7 +30,7 @@ from select import POLLIN, POLLPRI, POLLHUP, POLLERR
 from enigma import Teletext as TeletextInterface
 from enigma import DISABLED, BILINEAR, ANISOTROPIC, SHARP, SHARPER, BLURRY, ANTI_FLUTTER, ANTI_FLUTTER_BLURRY, ANTI_FLUTTER_SHARP
 
-from ConfigParser import ConfigParser, DuplicateSectionError 
+from ConfigParser import ConfigParser, DuplicateSectionError
 
 PLUGIN_VERSION = "20120807"
 
@@ -930,7 +930,7 @@ class TeleText(Screen):
     log("reading data(%s)" % self.read_data)
     if self.read_data == False:
       return
-      
+
     # read all txtpids and channels from transponder
     cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
     self.pid_index = 0
@@ -956,7 +956,7 @@ class TeleText(Screen):
         self.pid_index = i
       i = i + 1
     self.pid_count = available
-      
+
     self.read_data = False
 
     # read favorites
@@ -981,7 +981,7 @@ class TeleText(Screen):
     if hasStart == False:
       self.fav_list.append(100)
     log("favorites: %s" % self.fav_list)
-  
+
   # ---- for summary (lcd) ----
 
   def createSummary(self):
@@ -1582,7 +1582,7 @@ class TeleTextFavorites():
     log("[favorites] writing")
     fp = open(self.configFile, "w")
     self.parser.write(fp)
-    fp.close()   
+    fp.close()
 
   def getFavorite(self, service, index):
     index = str(index)
@@ -1751,7 +1751,7 @@ class TeleTextFavoritesMenu(Screen):
       NTIVirtualKeyBoard,
       title =_("Enter text for page %s") % page,
       text=value
-    )     
+    )
 
   def addFavorite(self, text):
     if text:
@@ -1780,7 +1780,7 @@ class TeleTextFavoritesMenu(Screen):
     self.session.openWithCallback(self.cleanupService, MessageBox, _("Delete all favorites?"))
 
   def cleanupService(self, result):
-    if result:    
+    if result:
       self.favorites.removeService(self.service)
       self.favorites.write()
       self.updateList()

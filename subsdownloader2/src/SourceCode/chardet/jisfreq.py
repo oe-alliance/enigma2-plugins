@@ -13,12 +13,12 @@
 # modify it under the terms of the GNU Lesser General Public
 # License as published by the Free Software Foundation; either
 # version 2.1 of the License, or (at your option) any later version.
-# 
+#
 # This library is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 # Lesser General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
@@ -28,7 +28,7 @@
 # Sampling from about 20M text materials include literature and computer technology
 #
 # Japanese frequency table, applied to both S-JIS and EUC-JP
-# They are sorted in order. 
+# They are sorted in order.
 
 # 128  --> 0.77094
 # 256  --> 0.85710
@@ -38,12 +38,12 @@
 #
 # Ideal Distribution Ratio = 0.92635 / (1-0.92635) = 12.58
 # Random Distribution Ration = 512 / (2965+62+83+86-512) = 0.191
-# 
-# Typical Distribution Ratio, 25% of IDR 
+#
+# Typical Distribution Ratio, 25% of IDR
 
 JIS_TYPICAL_DISTRIBUTION_RATIO = 3.0
 
-# Char to FreqOrder table , 
+# Char to FreqOrder table ,
 JIS_TABLE_SIZE = 4368
 
 JISCharToFreqOrder = (

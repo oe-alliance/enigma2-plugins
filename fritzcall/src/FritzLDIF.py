@@ -16,7 +16,7 @@ try:
 except ValueError:
 	def _(string): # pylint: disable-msg=C0103
 		return string
-	
+
 	def normalizePhoneNumber(intNo):
 		found = re.match('^\+49(.*)', intNo)
 		if found:
@@ -61,7 +61,7 @@ class FindNumber(ldif.LDIFParser):
 			name = found.group(1)
 		else:
 			return
-	
+
 		address = ""
 		addressB = ""
 		if entry.has_key('telephoneNumber') or (entry.has_key('homePhone') and self.number == normalizePhoneNumber(entry['homePhone'][0])) or (entry.has_key('mobile') and self.number == normalizePhoneNumber(entry['mobile'][0])):
@@ -145,7 +145,7 @@ class ReadNumbers(ldif.LDIFParser):
 			name = found.group(1)
 		else:
 			return
-	
+
 		address = ""
 		addressB = ""
 		if entry.has_key('telephoneNumber') or entry.has_key('homePhone') or entry.has_key('mobile'):

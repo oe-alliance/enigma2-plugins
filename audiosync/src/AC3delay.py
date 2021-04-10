@@ -27,14 +27,14 @@ class AC3delay:
         self.activateTimer = eTimer()
         self.activateTimer.callback.append(self.activateDelay)
         self.activateWait = config.plugins.AC3LipSync.activationDelay.getValue()
-        
+
         # Current value for movie start behaviour
         self.movieStart = config.usage.on_movie_start.getValue()
 
         # find out box type
         self.oHWInfo = HardwareInfo()
         self.bHasToRestartService = self.oHWInfo.get_device_name() == "dm7025"
-        
+
     def initAudio(self):
         self.iService = NavigationInstance.instance.getCurrentService()
         self.iServiceReference = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
@@ -55,7 +55,7 @@ class AC3delay:
         self.activateTimer.start(self.activateWait, False)
 
     def activateDelay(self):
-        # This activation code is only neccessary for DM7025. 
+        # This activation code is only neccessary for DM7025.
         # DM800, DM8000 and DM500HD directly activate the delay after using "setAC3Delay" and "setPCMDelay", they don't need the service restart
         if self.activateTimer.isActive:
             self.activateTimer.stop()
@@ -79,7 +79,7 @@ class AC3delay:
                         self.timer.start(200, False)
             else:
                 self.deleteAudio()
-        
+
     def seekAfterWait(self):
         self.timer.stop()
         self.initAudio()
@@ -156,7 +156,7 @@ class AC3delay:
         lCurPosition = self.cueGetCurrentPosition()
         if lCurPosition is not None:
             self.bIsRecording = True
-            
+
         # check if downmix is enabled
         try:
             bDownmixEnabled = config.av.downmix_ac3.value

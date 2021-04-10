@@ -77,11 +77,11 @@ class ORFatCache(Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		
+
 		self["spinner"] = Pixmap()
 		self.curr = 0
 		self.Shown = False
-		
+
 		self.timer = eTimer()
 		self.timer.callback.append(self.showNextSpinner)
 
@@ -112,10 +112,10 @@ class ORFMain(Screen):
 		<widget name="pic" position="0,0" size="0,0" />
 		<ePixmap pixmap="skin_default/arrowdown.png" position="256,370" size="37,70" alphatest="blend" />
 	</screen>"""
-	
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		
+
 		self.session = session
 		self.movies = []
 		self.pics = []
@@ -128,7 +128,7 @@ class ORFMain(Screen):
 		self.cacheTimer = eTimer()
 		self.cacheTimer.callback.append(self.chechCachedFile)
 		self.transcodeServer = None
-		
+
 		self["pic"] = MovingPixmap()
 		self["actions"] = ActionMap(["WizardActions", "MenuActions"],
 			{
@@ -138,7 +138,7 @@ class ORFMain(Screen):
 				"down": self.down,
 				"menu": self.selectServer
 			}, -1)
-		
+
 		self.onLayoutFinish.append(self.downloadList)
 
 	def getVideoUrl(self, url):

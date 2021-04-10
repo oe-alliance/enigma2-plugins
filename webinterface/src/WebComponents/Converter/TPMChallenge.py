@@ -8,7 +8,7 @@ class TPMChallenge(Converter):
     VALUE = 2
     RESULT = 3
     TEXT = 4
-    
+
     def __init__(self, type):
         Converter.__init__(self, type)
         self.type = {"Level2Cert": self.L2C,
@@ -21,7 +21,7 @@ class TPMChallenge(Converter):
     @cached
     def getText(self):
         res = self.source.tpm_result
-        
+
         if self.type is self.L2C:
             return str(res[0])
         elif self.type is self.L3C:
@@ -31,8 +31,8 @@ class TPMChallenge(Converter):
         elif self.type is self.RESULT:
             return str(res[3])
         elif self.type is self.TEXT:
-            return str(res[4]) 
+            return str(res[4])
         else:
             return "N/A"
-        
+
     text = property(getText)

@@ -82,7 +82,7 @@ def getTimeDiff(timer, begin, end):
 # 		result = defer.maybeDeferred(f, *a, **kw)
 # 		result.addBoth(queue.put)
 # 	reactor.callFromThread(_callFromThread)
-# 
+#
 # 	result = None
 # 	while True:
 # 		try:
@@ -92,7 +92,7 @@ def getTimeDiff(timer, begin, end):
 # 				raise ValueError("Reactor no longer active, aborting.")
 # 		else:
 # 			break
-# 
+#
 # 	if isinstance(result, failure.Failure):
 # 		result.raiseException()
 # 	return result
@@ -113,10 +113,10 @@ caseMap = {
 # class AutoTimerIgnoreTimerException(Exception):
 # 	def __init__(self, cause):
 # 		self.cause = cause
-# 
+#
 # 	def __str__(self):
 # 		return "[AutoTimer] " + str(self.cause)
-# 
+#
 # 	def __repr__(self):
 # 		return str(type(self))
 
@@ -295,7 +295,7 @@ class AutoTimer:
 			task = Components.Task.PythonTask(job, 'Show results')
 			task.work = self.JobMessage
 			task.weighting = 1
-		
+
 		return job
 
 	def JobStart(self):
@@ -405,7 +405,7 @@ class AutoTimer:
 		epgmatches.sort(key=itemgetter(3))
 
 		# Contains the the marked similar eits and the conflicting strings
-		similardict = defaultdict(list)		
+		similardict = defaultdict(list)
 
 		# Loop over all EPG matches
 		preveit = False
@@ -510,7 +510,7 @@ class AutoTimer:
 			for rtimer in timerdict.get(serviceref, ()):
 				if (rtimer.eit == eit or config.plugins.autotimer.try_guessing.getValue()) and getTimeDiff(rtimer, evtBegin, evtEnd) > ((duration / 10) * 8):
 					oldExists = True
-					
+
 					# Abort if we don't want to modify timers or timer is repeated
 					if config.plugins.autotimer.refresh.getValue() == "none" or rtimer.repeated:
 						print("[AutoTimer] Won't modify existing timer because either no modification allowed or repeated timer")
@@ -518,7 +518,7 @@ class AutoTimer:
 
 					if eit == preveit:
 						break
-					
+
 					if (evtBegin - (config.recording.margin_before.getValue() * 60) != rtimer.begin) or (evtEnd + (config.recording.margin_after.getValue() * 60) != rtimer.end) or (shortdesc != rtimer.description):
 						if rtimer.isAutoTimer and eit == rtimer.eit:
 							print("[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))

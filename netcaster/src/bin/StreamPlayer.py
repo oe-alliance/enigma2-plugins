@@ -25,7 +25,7 @@ class StreamPlayer:
 #	    elif ev == 1:
 #	       for c in self.onStop:
 #	           c()
-		
+
 	def _onMetadataChanged(self, title):
 		for i in self.metadatachangelisteners:
 			i(title)
@@ -62,4 +62,3 @@ class StreamPlayer:
 
 	def exit(self):
 	    self.stop()
-

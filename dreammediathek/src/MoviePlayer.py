@@ -79,7 +79,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 				iPlayableService.evStart: self.__serviceStarted,
 				iPlayableService.evEOF: self.__evEOF,
 			})
-		
+
 		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions", "MovieSelectionActions"],
 		{
 				"ok": self.ok,
@@ -102,10 +102,10 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 
 		self.onPlayStateChanged = []
 		self.__seekableStatusChanged()
-	
+
 		self.play()
 		self.onClose.append(self.__onClose)
-		
+
 	def __onClose(self):
 		self.session.nav.stopService()
 
@@ -137,7 +137,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 	def showVideoInfo(self):
 		if self.shown:
 			self.hideInfobar()
-		if self.infoCallback is not None:	
+		if self.infoCallback is not None:
 			self.infoCallback()
 
 	def playNextFile(self):
@@ -166,7 +166,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 		if self.state != self.STATE_IDLE:
 			self.stopCurrent()
 		self.play()
-	
+
 	def playService(self, newservice):
 		if self.state != self.STATE_IDLE:
 			self.stopCurrent()
@@ -176,7 +176,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 	def play(self):
 		if self.state == self.STATE_PAUSED:
 			if self.shown:
-				self.__setHideTimer()	
+				self.__setHideTimer()
 		self.state = self.STATE_PLAYING
 		self.session.nav.playService(self.service)
 		if self.shown:
@@ -198,7 +198,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 		print "pauseService"
 		if self.state == self.STATE_PLAYING:
 			self.setSeekState(self.STATE_PAUSED)
-		
+
 	def unPauseService(self):
 		print "unPauseService"
 		if self.state == self.STATE_PAUSED:
@@ -265,7 +265,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 
 		for c in self.onPlayStateChanged:
 			c(self.state)
-		
+
 		return True
 
 	def handleLeave(self, how, error=False):
@@ -297,11 +297,10 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 			self.playPrevFile()
 		elif answer == "playagain":
 			self.playagain()
-			
+
 	def doEofInternal(self, playing):
 		if not self.execing:
 			return
 		if not playing:
 			return
 		self.handleLeave(config.usage.on_movie_eof.value)
-

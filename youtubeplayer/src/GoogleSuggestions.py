@@ -80,7 +80,7 @@ class GoogleSuggestions():
 #	def gotSuggestions(self, suggestslist):
 #		self.callback(suggestslist)
 #
-#		
+#
 #	def getSuggestions(self, querryString):
 #		if querryString is not "":
 #			querry = self.prepQuerry + urllib.quote(querryString)

@@ -67,4 +67,3 @@ def channelShowSeriesInfo(self):
 
 def closeafterfinish(self, retval=None):
 	self.close()
-

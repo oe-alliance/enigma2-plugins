@@ -121,7 +121,7 @@ class RemoteTimerEntry(Screen, ConfigListScreen):
 				afterevent = PlaylistEntry.doGoSleep
 			else:
 				afterevent = 3
-		
+
 			if self.timer.type & PlaylistEntry.RecTimerEntry:
 				if self.timer.type & PlaylistEntry.recDVR:
 					justplay = PlaylistEntry.recDVR
@@ -139,7 +139,7 @@ class RemoteTimerEntry(Screen, ConfigListScreen):
 		end = self.timer.timeend
 		weekday = (int(strftime("%w", localtime(begin))) - 1) % 7
 		day[weekday] = 1
-		name = self.timer.name 
+		name = self.timer.name
 		description = self.timer.description
 		if self.timer.type == 0:
 			self.timerentry_justplay = ConfigSelection(choices=[("1", _("zap")), ("0", _("record"))], default=str(justplay))
@@ -249,7 +249,7 @@ class RemoteTimerEntry(Screen, ConfigListScreen):
 			self.timer.afterevent = int(self.timerentry_afterevent.value)
 		self.timer.description = self.timerentry_description.value
 		self.timer.justplay = int(self.timerentry_justplay.value)
-		
+
 		self.timer.timebegin, self.timer.timeend = self.getBeginEnd()
 		self.close((True, self.timer))
 
@@ -303,9 +303,9 @@ def RemoteTimerInit():
 		baseTimercreateConfig = TimerEntry.createConfig
 	if baseTimer__init__ is None:
 		baseTimer__init__ = TimerEntry.__init__
-	
+
 	TimerEntry.createConfig = RemoteTimerConfig
-	TimerEntry.keyLeft = RemoteTimerkeyLeft 
+	TimerEntry.keyLeft = RemoteTimerkeyLeft
 	TimerEntry.keyRight = RemoteTimerkeyRight
 	TimerEntry.keySelect = RemoteTimerkeySelect
 	TimerEntry.createSetup = createRemoteTimerSetup
@@ -353,7 +353,7 @@ def getLocationsCallback(self, xmlstring, check=False):
 	try:
 		root = xml.etree.cElementTree.fromstring(xmlstring)
 	except:
-		return 
+		return
 	for location in root.findall("e2location"):
 		add = True
 		if check:
@@ -469,13 +469,13 @@ def RemoteTimercreateConfig(self):
 	weekday = (int(strftime("%w", localtime(begin))) - 1) % 7
 	day[weekday] = 1
 	if int(self.entryguilist[int(self.timerentry_remote.value)][2].enigma.value) == 0:
-		name = self.timer.name 
+		name = self.timer.name
 		description = self.timer.description
 		self.timerentry_justplay = ConfigSelection(choices=[("zap", _("zap")), ("record", _("record"))], default={0: "record", 1: "zap"}[justplay])
 		self.timerentry_afterevent = ConfigSelection(choices=[("nothing", _("do nothing")), ("standby", _("go to standby")), ("deepstandby", _("go to deep standby")), ("auto", _("auto"))], default=afterevent)
 		self.timerentry_name = ConfigText(default=name, visible_width=50, fixed_size=False)
 	else:
-		description = self.timer.name 
+		description = self.timer.name
 		self.timerentry_justplay = ConfigSelection(choices=[(str(PlaylistEntry.SwitchTimerEntry), _("zap")), (str(PlaylistEntry.recNgrab), _("NGRAB")), (str(PlaylistEntry.recDVR), _("DVR"))], default=str(justplay))
 		self.timerentry_afterevent = ConfigSelection(choices=[("0", _("do nothing")), (str(PlaylistEntry.doGoSleep), _("go to standby")), (str(PlaylistEntry.doShutdown), _("go to deep standby"))], default=str(afterevent))
 	self.timerentry_description = ConfigText(default=description, visible_width=50, fixed_size=False)
@@ -620,7 +620,7 @@ def AddTimerE2Callback(self, session, answer):
 	ok = state == "True"
 	session.open(MessageBox, _("Partnerbox Answer: \n%s") % _(text), MessageBox.TYPE_INFO, timeout=10)
 	if ok:
-		if (config.plugins.Partnerbox.enablepartnerboxepglist.value): 
+		if (config.plugins.Partnerbox.enablepartnerboxepglist.value):
 			# Timerlist der Partnerbox neu laden --> Anzeige fuer EPGList, aber nur, wenn die gleiche IP in EPGList auch angezeigt wird
 			if partnerboxfunctions.CurrentIP == self.entryguilist[int(self.timerentry_remote.value)][2].ip.value:
 				SetPartnerboxTimerlist(self.entryguilist[int(self.timerentry_remote.value)][2])
@@ -633,7 +633,7 @@ def AddTimerE1Callback(self, session, answer):
 		answer = _("Timer event was created successfully.")
 	session.open(MessageBox, _("Partnerbox Answer: \n%s") % (answer), MessageBox.TYPE_INFO, timeout=10)
 	if ok:
-		if (config.plugins.Partnerbox.enablepartnerboxepglist.value): 
+		if (config.plugins.Partnerbox.enablepartnerboxepglist.value):
 			# Timerlist der Partnerbox neu laden --> Anzeige fuer EPGList, aber nur, wenn die gleiche IP in EPGList auch angezeigt wird
 			if partnerboxfunctions.CurrentIP == self.entryguilist[int(self.timerentry_remote.value)][2].ip.value:
 				SetPartnerboxTimerlist(self.entryguilist[int(self.timerentry_remote.value)][2])

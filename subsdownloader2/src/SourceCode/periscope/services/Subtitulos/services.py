@@ -64,11 +64,11 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
         #http://www.subtitulos.es/dexter/4x01
         self.host = "http://www.subtitulos.es"
         self.release_pattern = re.compile("Versi&oacute;n (.+) ([0-9]+).([0-9])+ megabytes")
-        
+
     def process(self, filepath, langs):
-        ''' main method to call on the plugin, pass the filename and the wished 
+        ''' main method to call on the plugin, pass the filename and the wished
         languages and it will query the subtitles source '''
-        
+
         #Convert subtitle language to plugin requirements
         temp_lang = []
         for x in langs:
@@ -79,10 +79,10 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
                 pass
             else:
                 #temp_lang.append(toOpenSubtitles_two(str(x)))
-                temp_lang.append(languageTranslate(x, 0, 2))                
+                temp_lang.append(languageTranslate(x, 0, 2))
         langs = temp_lang
         #Convert subtitle language to plugin requirements
-        
+
         #fname = unicode(self.getFileName(filepath).lower())
         fname = self.getFileName(filepath).lower()
         guessedData = self.guessFileData(fname)
@@ -93,7 +93,7 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
             return subs
         else:
             return []
-    
+
     def query(self, name, season, episode, teams, langs=None):
         ''' makes a query and returns info (link, lang) about found subtitles'''
         sublinks = []
@@ -102,14 +102,14 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
         content = self.downloadContent(searchurl, 10)
         if not content:
             return sublinks
-        
+
         soup = BeautifulSoup(content)
         for subs in soup("div", {"id": "version"}):
             version = subs.find("p", {"class": "title-sub"})
-            subteams = self.release_pattern.search("%s" % version.contents[1]).group(1).lower()            
+            subteams = self.release_pattern.search("%s" % version.contents[1]).group(1).lower()
             teams = set(teams)
             subteams = self.listTeams([subteams], [".", "_", " ", "/"])
-            
+
             log.debug("Team from website: %s" % subteams)
             log.debug("Team from file: %s" % teams)
 
@@ -117,7 +117,7 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
             for lang_html in nexts:
                 langLI = lang_html.findNext("li", {"class": "li-idioma"})
                 lang = self.getLG(langLI.find("strong").contents[0].string.strip())
-        
+
                 statusLI = lang_html.findNext("li", {"class": "li-estado green"})
                 status = statusLI.contents[0].string.strip()
 
@@ -129,16 +129,16 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
                     result["link"] = link
                     result["page"] = searchurl
                     sublinks.append(result)
-                
+
         return sublinks
-        
+
     def listTeams(self, subteams, separators):
         teams = []
         for sep in separators:
             subteams = self.splitTeam(subteams, sep)
         log.debug(subteams)
         return set(subteams)
-    
+
     def splitTeam(self, subteams, sep):
         teams = []
         for t in subteams:
@@ -146,7 +146,7 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
         return teams
 
     #def createFile(self, subtitle):
-    def createFile(self, subtitle, filename):     
+    def createFile(self, subtitle, filename):
         '''pass the URL of the sub and the file it matches, will unzip it
         and return the path to the created file'''
         suburl = subtitle["link"]
@@ -160,7 +160,7 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
     def downloadFile(self, url, filename):
         ''' Downloads the given url to the given filename '''
         req = urllib2.Request(url, headers={'Referer': url, 'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.1.3)'})
-        
+
         f = urllib2.urlopen(req)
         dump = open(filename, "wb")
         dump.write(f.read())

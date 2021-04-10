@@ -528,4 +528,3 @@ class RSSOverview(RSSBaseView):
 		for entry in self["content"].getCurrent().history:
 				enclosures.extend(entry[3])
 		RSSBaseView.selectEnclosure(self, enclosures)
-

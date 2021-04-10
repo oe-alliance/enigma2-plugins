@@ -18,7 +18,7 @@ class RSSFeedList(MenuList):
 		l.setBuildFunc(self.buildListboxEntry)
 
 	def applySkin(self, desktop, parent):
-		attribs = [] 
+		attribs = []
 		if self.skinAttributes is not None:
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "font":
@@ -70,4 +70,3 @@ class RSSFeedList(MenuList):
 	def getCurrent(self):
 		# We know that the list will never be empty...
 		return self.l.getCurrentSelection()[0]
-

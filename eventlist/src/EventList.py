@@ -41,11 +41,11 @@ class EventList(Converter, object):
 			while i <= len(args) - 1:
 				type_c, value = args[i].split('=')
 				if type_c == "eventcount":
-					self.eventcount = int(value)			
+					self.eventcount = int(value)
 				elif type_c == "primetime":
 					if value == "yes":
 						self.primetime = 1
-				i += 1  			
+				i += 1
 
 	@cached
 	def getContent(self):

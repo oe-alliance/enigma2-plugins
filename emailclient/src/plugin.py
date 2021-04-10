@@ -60,7 +60,7 @@ def decodeHeader(text, default=''):
 
 IS_UNSEEN = 0
 IS_SEEN = 1
-IS_DELETED = 2 
+IS_DELETED = 2
 
 
 class EmailScreen(Screen):
@@ -96,9 +96,9 @@ class EmailScreen(Screen):
 		the list of messages (messagelist) on the right.
 		At the bottom we have a line for info messages.
 		It is specific for one account.
-	
+
 		@param session: session in which this screen is running
-		@param account: account for which mailboxes are shown 
+		@param account: account for which mailboxes are shown
 		'''
 		self._session = session
 		self._account = account
@@ -147,7 +147,7 @@ class EmailScreen(Screen):
 		self["boxlist"].moveToIndex(self._account.inboxPos - 1)
 		self._selectBoxlist()
 		self._onBoxSelected()
-	
+
 	def _selectBoxlist(self):
 		self.currList = "boxlist"
 		self["messagelist"].selectionEnabled(0)
@@ -199,10 +199,10 @@ class EmailScreen(Screen):
 				self["infolabel"].setText(_("account not connected"))
 		else:
 			self["infolabel"].setText(_("no mailbox?!?!"))
-			
+
 	def _onHeaderList(self, result, flagsList):
 		'''
-		
+
 		@param result: list of message
 		@param flagsList: list of corresponding flags
 		'''
@@ -281,7 +281,7 @@ class EmailScreen(Screen):
 			font = 0
 			color = 0x00FFFFFF # white
 		elif state == IS_DELETED:
-			font = 1 
+			font = 1
 			color = 0x00FF6666 # redish :)
 		else:
 			font = 2
@@ -301,7 +301,7 @@ class ScreenMailView(Screen):
 		'''
 		Principal screen to show one mail message.
 		@param session:
-		@param account: mail acoount, this message is coming from 
+		@param account: mail acoount, this message is coming from
 		@param message: the message itself
 		@param uid: uid of the message, needed to (un)delete and unmark
 		@param flags: the flags of the message, needed to check, whether IS_DELETED
@@ -334,8 +334,8 @@ class ScreenMailView(Screen):
 					   (DESKTOP_WIDTH - width) / 2, (DESKTOP_HEIGHT - height) / 2, width, height,
 					   0, 0, width, lineHeight, fontSize - 1, # from
 					   0, lineHeight, width, lineHeight, fontSize - 1, # date
-					   0, 2 * lineHeight, width, lineHeight, fontSize - 1, # subject 
-					   0, 3 * lineHeight + 1, width, # line 
+					   0, 2 * lineHeight, width, lineHeight, fontSize - 1, # subject
+					   0, 3 * lineHeight + 1, width, # line
 					   0, 3 * lineHeight + 5, width, height - 3 * lineHeight - 5 - 5 - 30 - 5, fontSize, # body
 					   buttonsGap, height - 30 - 5,
 					   2 * buttonsGap + 140, height - 30 - 5,
@@ -456,7 +456,7 @@ class EmailBody:
 			try:
 				text = text.decode(self.getEncoding())
 			except UnicodeDecodeError:
-				pass	
+				pass
 		# debug('EmailBody/getData text: ' +  text)
 		#=======================================================================
 		# if self.getEncoding():
@@ -471,7 +471,7 @@ class EmailBody:
 			return text.encode('utf-8')
 		except UnicodeDecodeError:
 			return text
-		
+
 	def getContenttype(self):
 		return self.data.get_content_type()
 
@@ -651,7 +651,7 @@ class EmailAccount():
 		self.inboxPos = 0
 		self.mailboxList = None
 		self._failureReason = ""
-		self._connectCallback = None 
+		self._connectCallback = None
 		mailAccounts.append(self)
 		if afterInit:
 			afterInit()
@@ -678,7 +678,7 @@ class EmailAccount():
 		reset delays and retry
 		@param connectCallback: call this function on successful connect, used by EmailAccountList
 		'''
-		self._connectCallback = connectCallback 
+		self._connectCallback = connectCallback
 		if self._factory and self._factory.connector:
 			self._factory.resetDelay()
 			self._factory.retry()
@@ -686,7 +686,7 @@ class EmailAccount():
 			self._factory = createFactory(self, self._user, self._server, int(self._port))
 
 	def removeCallback(self):
-		self._connectCallback = None 
+		self._connectCallback = None
 
 	def getConfig(self):
 		# TODO: encrypt passwd
@@ -725,7 +725,7 @@ class EmailAccount():
 
 	def delete(self, uid):
 		'''
-		mark message as deleted 
+		mark message as deleted
 		@param uid: uid of message
 		'''
 		if self._proto:
@@ -798,7 +798,7 @@ class EmailAccount():
 		debug("[EmailAccount] %s: getMessage: %s" % (self._name, str(message)))
 		if self._proto:
 			self._proto.fetchSize(message.uid
-				).addCallback(self._onMessageSizeLoaded, message, callback, errCallback 
+				).addCallback(self._onMessageSizeLoaded, message, callback, errCallback
 				).addErrback(self._onMessageLoadFailed, message, errCallback
 				)
 			return True
@@ -885,7 +885,7 @@ class EmailAccount():
 		debug("[EmailAccount] %s: _onAuthentication: %s" % (self._name, str(result)))
 		self.startChecker()
 		self.getMailboxList()
-		
+
 	def getMailboxList(self):
 		if self._listall:
 			debug("[EmailAccount] %s: getMailboxList list" % (self._name))
@@ -946,7 +946,7 @@ class EmailAccountList(Screen):
 	def __init__(self, session):
 		'''
 		Entry screen holding the list of accounts.
-		Offering to add, edit or remove one. Also configuration through <menu> 
+		Offering to add, edit or remove one. Also configuration through <menu>
 		'''
 		debug("[EmailAccountList] __init__")
 		noButtons = 3
@@ -1053,7 +1053,7 @@ class EmailAccountList(Screen):
 			# TODO: encrypt passwd
 			EmailAccount(params, writeAccounts)
 		self.close()
-		
+
 	def _remove(self):
 		debug("[EmailAccountList] _remove")
 		if self["accounts"].getCurrent():

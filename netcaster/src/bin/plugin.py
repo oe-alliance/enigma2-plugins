@@ -131,7 +131,7 @@ class NETcasterScreenBrowser(Screen):
     def updateTitle(self):
 		try:
 			self.setTitle("%s (%s)" % (myname, self.currentPlugin.nameshort))
-		except:	
+		except:
 			pass
 
     def selectPlugin(self):

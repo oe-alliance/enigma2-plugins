@@ -33,9 +33,9 @@ POPUP_TEMPLATE = _("{name:s} {plugin:s}\n{subject:s}\n{body:s}")
 
 
 class PopUp(ServiceBase):
-	
+
 	ForceSingleInstance = True
-	
+
 	def __init__(self):
 		# Is called on instance creation
 		ServiceBase.__init__(self)

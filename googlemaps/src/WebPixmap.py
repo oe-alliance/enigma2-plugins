@@ -78,4 +78,3 @@ class WebPixmap(Pixmap):
 		ptr = self.picload.getData()
 		if ptr and self.instance:
 			self.instance.setPixmap(ptr)
-

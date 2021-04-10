@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 
 import sys
 import os
@@ -17,37 +17,37 @@ import struct
 #---
 
 ###-------------------------  Log  ------------------###############
-   
+
 
 def log(module, msg):
 #---
 #-  xbmc.output("### [%s-%s] - %s" % (__scriptname__,module,msg,),level=xbmc.LOGDEBUG )
 #+++
   print(msg, module, "D")
-#+++ 
+#+++
 
 ###-------------------------  Hash  -----------------###############
 
 
-def hashFile(filename): 
-    try: 
-      longlongformat = '<LL'  # signed long, unsigned long 
-      bytesize = struct.calcsize(longlongformat) 
-      f = open(filename, "rb") 
-          
+def hashFile(filename):
+    try:
+      longlongformat = '<LL'  # signed long, unsigned long
+      bytesize = struct.calcsize(longlongformat)
+      f = open(filename, "rb")
+
       filesize = os.path.getsize(filename)
-      hash = filesize 
-          
+      hash = filesize
+
       if filesize < 65536 * 2:
         return "Error"
       b = f.read(65536)
       for x in range(65536 / bytesize):
         buffer = b[x * bytesize:x * bytesize + bytesize]
-        (l2, l1) = struct.unpack(longlongformat, buffer) 
-        l_value = (long(l1) << 32) | long(l2) 
-        hash += l_value 
+        (l2, l1) = struct.unpack(longlongformat, buffer)
+        l_value = (long(l1) << 32) | long(l2)
+        hash += l_value
         hash = hash & 0xFFFFFFFFFFFFFFFF #to remain as 64bit number
-      
+
       f.seek(max(0, filesize - 65536), 0)
       b = f.read(65536)
       for x in range(65536 / bytesize):
@@ -56,20 +56,20 @@ def hashFile(filename):
         l_value = (long(l1) << 32) | long(l2)
         hash += l_value
         hash = hash & 0xFFFFFFFFFFFFFFFF
-      
-      f.close() 
-      returnedhash = "%016x" % hash 
+
+      f.close()
+      returnedhash = "%016x" % hash
       return returnedhash
-    
-    except(IOError): 
+
+    except(IOError):
       return "IOError"
 
 
-###-------------------------- match sub to file  -------------################        
+###-------------------------- match sub to file  -------------################
 
 def regex_tvshow(compare, file, sub=""):
     regex_expressions = ['[Ss]([0-9]+)[][._-]*[Ee]([0-9]+)([^\\\\/]*)$',
-                        '[\._ \-]([0-9]+)x([0-9]+)([^\\/]*)',                     # foo.1x09 
+                        '[\._ \-]([0-9]+)x([0-9]+)([^\\/]*)',                     # foo.1x09
                         '[\._ \-]([0-9]+)([0-9][0-9])([\._ \-][^\\/]*)',          # foo.109
                         '([0-9]+)([0-9][0-9])([\._ \-][^\\/]*)',
                         '[\\\\/\\._ -]([0-9]+)([0-9][0-9])[^\\/]*',
@@ -82,24 +82,24 @@ def regex_tvshow(compare, file, sub=""):
                         ]
     sub_info = ""
     tvshow = 0
-    
+
     for regex in regex_expressions:
-      response_file = re.findall(regex, file)                  
-      if len(response_file) > 0: 
+      response_file = re.findall(regex, file)
+      if len(response_file) > 0:
         print "Regex File Se: %s, Ep: %s," % (str(response_file[0][0]), str(response_file[0][1]),)
         tvshow = 1
         if not compare:
             title = re.split(regex, file)[0]
-            for char in ['[', ']', '_', '(', ')', '.', '-']: 
+            for char in ['[', ']', '_', '(', ')', '.', '-']:
                title = title.replace(char, ' ')
             if title.endswith(" "):
               title = title[:-1]
             return title, response_file[0][0], response_file[0][1]
         else:
             break
-    
+
     if (tvshow == 1):
-      for regex in regex_expressions:       
+      for regex in regex_expressions:
         response_sub = re.findall(regex, sub)
         if len(response_sub) > 0:
           try:
@@ -107,17 +107,17 @@ def regex_tvshow(compare, file, sub=""):
               if (int(response_sub[0][1]) == int(response_file[0][1])):
                 return True
           except:
-            pass      
+            pass
       return False
     if compare:
         return True
     else:
-        return "", "", ""    
+        return "", "", ""
 
 
 """
 def toOpenSubtitles_two( id ):
-  languages = { 
+  languages = {
   	"None"                       : "none",
     "Albanian"                   : "sq",
     "Arabic"                     : "ar",
@@ -239,7 +239,7 @@ def onetotwo(id):
     "52"                  :  "fa"
   }
   return languages[ id ]
-        
+
 
 def twotoone(id):
   languages = {
@@ -289,10 +289,10 @@ def twotoone(id):
     "vi"                  :  "51"
   }
   return languages[ id ]
-        
+
 
 def toOpenSubtitlesId( id ):
-  languages = { 
+  languages = {
   	"None"                : "none",
     "Albanian"            : "alb",
     "Arabic"              : "ara",
@@ -357,7 +357,7 @@ def toOpenSubtitlesId( id ):
 
 
 def toScriptLang(id):
-  languages = { 
+  languages = {
     "0"                   : "Albanian",
     "1"                   : "Arabic",
     "2"                   : "Belarusian",
@@ -403,10 +403,10 @@ def toScriptLang(id):
     "42"                  : "Ukrainian",
     "43"                  : "Vietnamese",
   }
-  return languages[ id ]       
-        
+  return languages[ id ]
+
 def toSublightLanguage(id):
-  languages = { 
+  languages = {
   	"0"                   : "None",
     "alb"                 : "Albanian",
     "ara"                 : "Arabic",
@@ -454,10 +454,10 @@ def toSublightLanguage(id):
     "vie"                 : "Vietnamese",
   }
   return languages[ id ]
-  
+
 def twotofull(id):
   languages = {
-            
+
 
     "sq"                  :  "Albanian",
     "ar"                  :  "Arabic",
@@ -507,13 +507,13 @@ def twotofull(id):
 
 
   }
-  return languages[ id ] 
+  return languages[ id ]
 """
 
 LANGUAGES = (
-    
+
     # Full Language name[0]     podnapisi[1]  ISO 639-1[2]   ISO 639-1 Code[3]   Script Setting Language[4]   localized name id number[5]
-    
+
     ("Albanian", "29", "sq", "alb", "0", 30201),
     ("Arabic", "12", "ar", "ara", "1", 30202),
     ("Belarusian", "0", "hy", "arm", "2", 30203),

@@ -25,7 +25,7 @@ class ServiceTime(Converter, object):
 #		print("ServiceTimeSF.getTime %x, self=%s" % (id(self.getTime), sstr(self)))
 		service = self.source.service
 		info = self.source.info
-		
+
 		if not info or not service:
 			return None
 

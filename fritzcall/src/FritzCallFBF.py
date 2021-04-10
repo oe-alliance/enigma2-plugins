@@ -3669,7 +3669,7 @@ class FritzCallFBF_upnp():
 		self.info("upTime: " + repr(upTime))
 		self.info("provider: " + repr(provider))
 		self.info("ipAddress: " + repr(ipAddress))
-		
+
 		if "ipv4" in boxData and "txt" in boxData["ipv4"]:
 			for item in boxData["ipv4"]["txt"]:
 				item = item.encode("utf-8")
@@ -4228,7 +4228,7 @@ class FritzCallFBF_upnp():
 			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 			return
 		self.fc.call_action(self._readBlacklist_cb, "X_AVM-DE_OnTel", "GetDeflections")
-		
+
 	def _readBlacklist_cb(self, result):
 		def _readPhonebookForBlacklist(result):
 			self.debug(repr(result))
@@ -4237,14 +4237,14 @@ class FritzCallFBF_upnp():
 				self._notify(text)
 				self._loginFailure = True
 				return
-	
+
 			if 'NewPhonebookName' not in result or 'NewPhonebookURL' not in result:
 				text = _("FRITZ!Box - ") + _("Could not load phonebook: %s") % 'NewPhonebookName'
 				self._notify(text)
 				return
-	
+
 			getPage(result["NewPhonebookURL"]).addCallback(_readPhonebookForBlacklist_cb)
-	
+
 		def _readPhonebookForBlacklist_cb(result):
 			root = ET.fromstring(result)
 			thisName = root.find(".//phonebook").attrib["name"]
@@ -4254,7 +4254,7 @@ class FritzCallFBF_upnp():
 				linkP = open("/tmp/FritzCall_readPhonebookForBlacklist_cb_%s.xml" % thisName, "w")
 				linkP.write(result)
 				linkP.close()
-	
+
 			contacts = root.iterfind(".//contact")
 			for contact in contacts:
 				numbers = contact.iterfind("./telephony/number")

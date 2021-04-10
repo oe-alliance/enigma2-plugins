@@ -240,7 +240,7 @@ class FileList(MenuList):
 						date_file_tuple = lastmod_date, name, path, file, size, isDir
 					elif sort == "alpha" or sort == "alphareverse":
 						date_file_tuple = name, lastmod_date, path, file, size, isDir
-					date_file_list.append(date_file_tuple)	
+					date_file_list.append(date_file_tuple)
 				else:
 					path = directory + x
 					name = x
@@ -259,24 +259,24 @@ class FileList(MenuList):
 			random.shuffle(date_file_list)
 		for x in date_file_list:
 			if sort == "size" or sort == "sizereverse":
-				size = x[0]				
+				size = x[0]
 				name = x[1]
 				path = x[2]
-				file = x[3] 
-				timestamp = x[4]				
+				file = x[3]
+				timestamp = x[4]
 				isDir = x[5]
-			elif sort == "date" or sort == "datereverse" or sort == "default":		
-				timestamp = x[0]					
+			elif sort == "date" or sort == "datereverse" or sort == "default":
+				timestamp = x[0]
 				name = x[1]
 				path = x[2]
-				file = x[3] 
+				file = x[3]
 				size = x[4]
-				isDir = x[5]			
+				isDir = x[5]
 			elif sort == "alpha" or sort == "alphareverse":
 				name = x[0]
-				timestamp = x[1]					
+				timestamp = x[1]
 				path = x[2]
-				file = x[3] 
+				file = x[3]
 				size = x[4]
 				isDir = x[5]
 			if isDir == True:
@@ -387,7 +387,7 @@ class MultiFileSelectList(FileList):
 		if self.selectedFiles is None:
 			self.selectedFiles = []
 		FileList.__init__(self, directory, showMountpoints=showMountpoints, matchingPattern=matchingPattern, showDirectories=showDirectories, showFiles=showFiles, useServiceRef=useServiceRef, inhibitDirs=inhibitDirs, inhibitMounts=inhibitMounts, isTop=isTop, enableWrapAround=enableWrapAround, additionalExtensions=additionalExtensions)
-		self.changeDir(directory)			
+		self.changeDir(directory)
 		self.l.setItemHeight(25)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.onSelectionChanged = []
@@ -416,7 +416,7 @@ class MultiFileSelectList(FileList):
 								self.selectedFiles.remove(entry)
 					else:
 						SelectState = True
-						alreadyinList = False	
+						alreadyinList = False
 						for entry in self.selectedFiles:
 							if entry == realPathname:
 								alreadyinList = True
@@ -494,8 +494,8 @@ class MultiFileSelectList(FileList):
 					alreadySelected = False
 					for entry in self.selectedFiles:
 						if entry == x:
-							alreadySelected = True					
-					if alreadySelected:		
+							alreadySelected = True
+					if alreadySelected:
 						self.list.append(MultiFileSelectEntryComponent(name=name, absolute=x, isDir=True, selected=True))
 					else:
 						self.list.append(MultiFileSelectEntryComponent(name=name, absolute=x, isDir=True, selected=False))
@@ -511,7 +511,7 @@ class MultiFileSelectList(FileList):
 					alreadySelected = False
 					for entry in self.selectedFiles:
 						if os_path.basename(entry) == x:
-							alreadySelected = True	
+							alreadySelected = True
 					if alreadySelected:
 						self.list.append(MultiFileSelectEntryComponent(name=name, absolute=x, isDir=False, selected=True))
 					else:

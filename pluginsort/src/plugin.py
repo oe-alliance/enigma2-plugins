@@ -166,7 +166,7 @@ class PluginWeights:
 				extend(('  <plugin name="', stringToXML(str(key)), '" weight="', str(value), '" />\n'))
 			append((' </where>\n'))
 		append('\n</pluginsort>\n')
-		
+
 		file = open(XML_CONFIG, 'w')
 		file.writelines(lst)
 		file.close()

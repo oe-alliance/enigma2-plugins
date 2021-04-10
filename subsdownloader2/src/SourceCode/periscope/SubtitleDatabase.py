@@ -28,7 +28,7 @@ import socket # For timeout purposes
 import re
 
 global tvshowRegex
-global tvshowRegex2 
+global tvshowRegex2
 global movieRegex
 
 tvshowRegex = re.compile('(?P<show>.*)S(?P<season>[0-9]{2})E(?P<episode>[0-9]{2}).(?P<teams>.*)', re.IGNORECASE)
@@ -55,8 +55,8 @@ class SubtitleDB(object):
         #self.movieRegex = re.compile('(?P<movie>.*)[\.|\[|\(| ]{1}(?P<year>(?:(?:19|20)[0-9]{2}))(?P<teams>.*)', re.IGNORECASE)
         self.tvshowRegex = tvshowRegex
         self.tvshowRegex2 = tvshowRegex2
-        self.movieRegex = movieRegex        
-        
+        self.movieRegex = movieRegex
+
     def searchInThread(self, queue, filename, langs):
         ''' search subtitles with the given filename for the given languages'''
         try:
@@ -68,9 +68,9 @@ class SubtitleDB(object):
             log.exception("Error occured")
             subs = []
         queue.put(subs, True) # Each plugin must write as the caller periscopy.py waits for an result on the queue
-    
+
     def process(self, filepath, langs):
-        ''' main method to call on the plugin, pass the filename and the wished 
+        ''' main method to call on the plugin, pass the filename and the wished
         languages and it will query the subtitles source '''
         fname = self.getFileName(filepath)
         try:
@@ -78,7 +78,7 @@ class SubtitleDB(object):
         except Exception, e:
             log.exception("Error occured")
             return []
-        
+
     def createFile(self, subtitle):
         '''pass the URL of the sub and the file it matches, will unzip it
         and return the path to the created file'''
@@ -87,7 +87,7 @@ class SubtitleDB(object):
         srtbasefilename = videofilename.rsplit(".", 1)[0]
         zipfilename = srtbasefilename + ".zip"
         self.downloadFile(suburl, zipfilename)
-        
+
         if zipfile.is_zipfile(zipfilename):
             log.debug("Unzipping file " + zipfilename)
             zf = zipfile.ZipFile(zipfilename, "r")
@@ -131,28 +131,28 @@ class SubtitleDB(object):
         dump.write(content)
         dump.close()
         log.debug("Download finished to file %s. Size : %s" % (filename, os.path.getsize(filename)))
-        
+
     def getLG(self, language):
         ''' Returns the short (two-character) representation of the long language name'''
         try:
             return self.revertlangs[language]
         except KeyError, e:
             log.warn("Ooops, you found a missing language in the config file of %s: %s. Send a bug report to have it added." % (self.__class__.__name__, language))
-        
+
     def getLanguage(self, lg):
         ''' Returns the long naming of the language on a two character code '''
         try:
             return self.langs[lg]
         except KeyError, e:
             log.warn("Ooops, you found a missing language in the config file of %s: %s. Send a bug report to have it added." % (self.__class__.__name__, lg))
-    
+
     def query(self, token):
         raise TypeError("%s has not implemented method '%s'" % (self.__class__.__name__, sys._getframe().f_code.co_name))
-        
+
     def fileExtension(self, filename):
         ''' Returns the file extension (without the dot)'''
         return os.path.splitext(filename)[1][1:].lower()
-        
+
     def getFileName(self, filepath):
         if os.path.isfile(filepath):
             filename = os.path.basename(filepath)
@@ -163,7 +163,7 @@ class SubtitleDB(object):
         else:
             fname = filename
         return fname
-        
+
     def guessFileData(self, filename):
         filename = unicode(self.getFileName(filename).lower())
         matches_tvshow = self.tvshowRegex.match(filename)
@@ -199,30 +199,30 @@ class SubtitleDB(object):
         '''
         Calculates the Hash à-la Media Player Classic as it is the hash used by OpenSubtitles.
         By the way, this is not a very robust hash code.
-        ''' 
+        '''
         longlongformat = 'Q'  # unsigned long long little endian
         bytesize = struct.calcsize(longlongformat)
         format = "<%d%s" % (65536 // bytesize, longlongformat)
-        
-        f = open(name, "rb") 
+
+        f = open(name, "rb")
         filesize = os.fstat(f.fileno()).st_size
-        hash = filesize 
-        
+        hash = filesize
+
         if filesize < 65536 * 2:
             log.error('File is too small')
-            return "SizeError" 
-        
+            return "SizeError"
+
         buffer = f.read(65536)
         longlongs = struct.unpack(format, buffer)
         hash += sum(longlongs)
-        
+
         f.seek(-65536, os.SEEK_END) # size is always > 131072
         buffer = f.read(65536)
         longlongs = struct.unpack(format, buffer)
         hash += sum(longlongs)
         hash &= 0xFFFFFFFFFFFFFFFF
-        
-        f.close() 
+
+        f.close()
         returnedhash = "%016x" % hash
         return returnedhash
 

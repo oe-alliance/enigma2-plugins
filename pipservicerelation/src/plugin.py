@@ -5,8 +5,8 @@
 #  Coded by Dr.Best (c) 2011
 #  Support: www.dreambox-tools.info
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -15,7 +15,7 @@
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 from Plugins.Plugin import PluginDescriptor
@@ -152,10 +152,10 @@ class PipServiceRelationEntryList(MenuList):
 
 	def getCurrentIndex(self):
 		return self.instance.getCurrentIndex()
-		
+
 	def setConfig(self, configPSR):
 		self.configPSR = configPSR
-		
+
 	def buildList(self):
 		list = []
 		for c in self.configPSR.items():
@@ -183,7 +183,7 @@ class PipServiceRelationEntryConfigScreen(ConfigListScreen, Screen):
 			<widget source="key_green" render="Label" position="140,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 
-	def __init__(self, session, entry, configPSR):	
+	def __init__(self, session, entry, configPSR):
 		self.session = session
 		Screen.__init__(self, session)
 		self.title = _("PipServiceRelation - Entry Config")
@@ -212,7 +212,7 @@ class PipServiceRelationEntryConfigScreen(ConfigListScreen, Screen):
 		self.list.append(self.serviceref1)
 		self.list.append(self.serviceref2)
 		ConfigListScreen.__init__(self, self.list, session)
-		
+
 	def keySelect(self):
 		cur = self["config"].getCurrent()
 		if cur == self.serviceref1:
@@ -226,7 +226,7 @@ class PipServiceRelationEntryConfigScreen(ConfigListScreen, Screen):
 				sname = ""
 			descr = _("Related PiP service for %s") % sname
 		self.session.openWithCallback(boundFunction(self.channelSelected, index), SimpleChannelSelection, descr)
-			
+
 	def channelSelected(self, index, ref=None):
 		if ref:
 			if self.entry:
@@ -291,4 +291,3 @@ def Plugins(**kwargs):
 	list.append(PluginDescriptor(name="Setup PiPServiceRelation", description=_("setup for PiPServiceRelation"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="PiPServiceRelation.png", fnc=setup))
 	list.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart_PictureInPicture))
 	return list
-

@@ -56,7 +56,7 @@ def newLegacyEncode(string):
 				string2 += ASCIItranslit[i].lower()
 			else:
 				string2 += ASCIItranslit[i]
-				
+
 		else:
 			try:
 				string2 += char.encode('ascii', 'strict')
@@ -69,7 +69,7 @@ def rename(servicepath, name, short, data):
 	# Episode data available
 	log.debug("rename:", data)
 	result = True
-	
+
 	#MAYBE Check if it is already renamed?
 	try:
 		# Before renaming change content
@@ -77,17 +77,17 @@ def rename(servicepath, name, short, data):
 	except Exception as e:
 		log.exception("rewriteMeta:", str(e))
 		result = "rewriteMeta:" + str(e)
-	
+
 	if config.plugins.seriesplugin.pattern_title.value and not config.plugins.seriesplugin.pattern_title.value == "Off":
 
 		if config.plugins.seriesplugin.rename_file.value == True:
-			
+
 			try:
 				renameFiles(servicepath, name, data)
 			except Exception as e:
 				log.exception("renameFiles:", str(e))
 				result = "renameFiles:" + str(e)
-	
+
 	return result
 
 
@@ -98,7 +98,7 @@ def rewriteMeta(servicepath, name, data):
 		meta_file = servicepath + ".meta"
 	else:
 		meta_file = servicepath + ".ts.meta"
-	
+
 	# Create new meta for ts files
 	if not os.path.exists(meta_file):
 		if os.path.isfile(servicepath):
@@ -112,7 +112,7 @@ def rewriteMeta(servicepath, name, data):
 		metafile = open(meta_file, "w")
 		metafile.write("%s\n%s\n%s\n%s\n%s" % (_sid, _title, _descr, _time, _tags))
 		metafile.close()
-	
+
 	if os.path.exists(meta_file):
 		metafile = open(meta_file, "r")
 		sid = metafile.readline()
@@ -120,7 +120,7 @@ def rewriteMeta(servicepath, name, data):
 		olddescr = metafile.readline().rstrip()
 		rest = metafile.read()
 		metafile.close()
-		
+
 		if config.plugins.seriesplugin.pattern_title.value and not config.plugins.seriesplugin.pattern_title.value == "Off":
 			title = refactorTitle(oldtitle, data)
 		else:
@@ -131,7 +131,7 @@ def rewriteMeta(servicepath, name, data):
 		else:
 			descr = olddescr
 		log.debug("descr", descr)
-		
+
 		metafile = open(meta_file, "w")
 		metafile.write("%s%s\n%s\n%s" % (sid, title, descr, rest))
 		metafile.close()
@@ -140,11 +140,11 @@ def rewriteMeta(servicepath, name, data):
 
 def renameFiles(servicepath, name, data):
 	log.debug("servicepath", servicepath)
-	
+
 	path = os.path.dirname(servicepath)
 	file_name = os.path.basename(os.path.splitext(servicepath)[0])
 	log.debug("file_name", file_name)
-	
+
 	log.debug("name     ", name)
 	# Refactor title
 	name = refactorTitle(file_name, data)
@@ -154,16 +154,16 @@ def renameFiles(servicepath, name, data):
 	if config.plugins.seriesplugin.rename_legacy.value:
 		name = newLegacyEncode(name)
 		log.debug("name     ", name)
-	
+
 	src = os.path.join(path, file_name)
 	log.debug("servicepathSrc", src)
-	
+
 	path = refactorDirectory(path, data)
 	dst = os.path.join(path, name)
 	log.debug("servicepathDst", dst)
-	
+
 	return osrename(src, dst)
-	
+
 
 def osrename(src, dst):
 	#Py3 for f in glob( escape(src) + "*" ):
@@ -173,7 +173,7 @@ def osrename(src, dst):
 		log.debug("servicepathRnm", f)
 		to = f.replace(src, dst)
 		log.debug("servicepathTo ", to)
-		
+
 		if not os.path.exists(to):
 			try:
 				os.rename(f, to)
@@ -192,17 +192,17 @@ def osrename(src, dst):
 # Rename movies
 class SeriesPluginRenamer(object):
 	def __init__(self, session, services, *args, **kwargs):
-		
+
 		log.info("SeriesPluginRenamer: services, service:", str(services))
-		
+
 		if services and not isinstance(services, list):
-			services = [services]	
-		
+			services = [services]
+
 		self.services = services
-		
+
 		self.data = []
 		self.counter = 0
-		
+
 		session.openWithCallback(
 			self.confirm,
 			MessageBox,
@@ -215,12 +215,12 @@ class SeriesPluginRenamer(object):
 	def confirm(self, confirmed):
 		if confirmed and self.services:
 			serviceHandler = eServiceCenter.getInstance()
-			
+
 			try:
 				for service in self.services:
-				
+
 					seriesPlugin = getInstance()
-					
+
 					if isinstance(service, eServiceReference):
 						service = service
 					elif isinstance(service, ServiceReference):
@@ -228,23 +228,23 @@ class SeriesPluginRenamer(object):
 					else:
 						log.debug("Wrong instance")
 						continue
-					
+
 					servicepath = service.getPath()
-					
+
 					if not os.path.exists(servicepath):
 						log.debug("File not exists: " + servicepath)
 						continue
-					
+
 					info = serviceHandler.info(service)
 					if not info:
 						log.debug("No info available: " + servicepath)
 						continue
-					
+
 					short = ""
 					begin = None
 					end = None
 					duration = 0
-					
+
 					event = info.getEvent(service)
 					if event:
 						name = event.getEventName() or ""
@@ -259,7 +259,7 @@ class SeriesPluginRenamer(object):
 						if name[-2:] == 'ts':
 							name = name[:-2]
 						log.debug("not event")
-					
+
 					if not begin:
 						begin = info.getInfo(service, iServiceInformation.sTimeCreate) or -1
 						if begin != -1:
@@ -267,58 +267,58 @@ class SeriesPluginRenamer(object):
 						else:
 							end = os.path.getmtime(servicepath)
 							begin = end - (info.getLength(service) or 0)
-						
+
 						#MAYBE we could also try to parse the filename
 						log.debug("We don't know the exact margins, we will assume the E2 default margins")
 						begin -= (int(config.recording.margin_before.value) * 60)
 						end += (int(config.recording.margin_after.value) * 60)
-					
+
 					rec_ref_str = info.getInfoString(service, iServiceInformation.sServiceref)
 					#channel = ServiceReference(rec_ref_str).getServiceName()
-					
+
 					log.debug("getEpisode:", name, begin, end, rec_ref_str)
 					seriesPlugin.getEpisode(
 							boundFunction(self.renamerCallback, servicepath, name, short),
 							name, begin, end, rec_ref_str, elapsed=True, block=True, rename=True
 						)
-					
+
 			except Exception as e:
 				log.exception("Exception:", str(e))
 
 	def renamerCallback(self, servicepath, name, short, data=None):
 		log.debug("renamerCallback", name, data)
-		
+
 		result = None
-		
+
 		if data and isinstance(data, dict):
 			result = rename(servicepath, name, short, data)
-		
+
 		elif data and isinstance(data, basestring):
 			msg = _("Failed: %s." % (str(data)))
 			log.debug(msg)
 			self.data.append(name + ": " + msg)
-		
+
 		else:
 			msg = _("No data available")
 			log.debug(msg)
 			self.data.append(name + ": " + msg)
-		
+
 		self.counter = self.counter + 1
-		
+
 		# Maybe there is a better way to avoid multiple Popups
 		from SeriesPlugin import getInstance
-		
+
 		instance = getInstance()
-		
+
 		if instance.thread.empty() and instance.thread.finished():
 			if self.data:
 				msg = "SeriesPlugin:\n" + _("Record rename has been finished with %d errors:\n") % (len(self.data)) + "\n" + "\n".join(self.data)
 				log.warning(msg)
-				
+
 			else:
 				if self.counter > 0:
 					msg = "SeriesPlugin:\n" + _("%d records renamed successfully") % (self.counter)
 					log.success(msg)
-				
+
 			self.data = []
 			self.counter = 0

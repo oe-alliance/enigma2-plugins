@@ -34,7 +34,7 @@ class CDInfo(ConfigListScreen, Screen):
 		    <widget name="info2" position="20,340" size="520,80" font="Regular;20" transparent="1" />
 		</screen>
 		"""
-	
+
 	def __init__(self, session, args=None):
 		self.skin = CDInfo.skin
 		Screen.__init__(self, session)
@@ -52,7 +52,7 @@ class CDInfo(ConfigListScreen, Screen):
 		self.list.append(getConfigListEntry(_("CDDB server port number"), config.plugins.CDInfo.CDDB_port))
 		self.list.append(getConfigListEntry(_("CDDB retrieval timeout (s)"), config.plugins.CDInfo.CDDB_timeout))
 		self.list.append(getConfigListEntry(_("store local CDDB cache"), config.plugins.CDInfo.CDDB_cache))
-		
+
 		ConfigListScreen.__init__(self, self.list)
 		self["key_red"] = Button(_("cancel"))
 		self["key_green"] = Button(_("ok"))
@@ -177,7 +177,7 @@ class Query:
 		for tag in self.albuminfo:
 			if tag not in self.mp.AudioCD_albuminfo or replace:
 				self.mp.AudioCD_albuminfo[tag] = self.albuminfo[tag]
-	
+
 	def updatePlaylist(self, replace=False):
 		for idx in range(len(self.playlist)):
 			ref = self.playlist.getServiceRefList()[idx]

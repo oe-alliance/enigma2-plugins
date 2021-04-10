@@ -67,11 +67,11 @@ class BierDopje(SubtitleDatabase.SubtitleDB):
         f.close()
 
     def process(self, filepath, langs):
-        ''' main method to call on the plugin, pass the filename and the wished 
+        ''' main method to call on the plugin, pass the filename and the wished
         languages and it will query the subtitles source '''
         fname = self.getFileName(filepath)
         temp_lang = []
-        
+
         #Convert subtitle language to plugin requirements
         temp_lang = []
         for x in langs:
@@ -83,13 +83,13 @@ class BierDopje(SubtitleDatabase.SubtitleDB):
             else:
                 #temp_lang.append(toOpenSubtitles_two(str(x)))
                 temp_lang.append(languageTranslate(x, 0, 2))
-        langs = temp_lang    
+        langs = temp_lang
          #Convert subtitle language to plugin requirements
-         
+
         try:
             subs = self.query(fname, langs)
             print str(subs)
-            
+
             if not subs and fname.rfind(".[") > 0:
                 # Try to remove the [VTV] or [EZTV] at the end of the file
                 teamless_filename = fname[0: fname.rfind(".[")]
@@ -100,7 +100,7 @@ class BierDopje(SubtitleDatabase.SubtitleDB):
         except Exception, e:
             log.exception("Error raised by plugin")
             return []
-            
+
     #def createFile(self, subtitle):
     def createFile(self, subtitle, filename):
         '''get the URL of the sub, download it and return the path to the created file'''
@@ -109,7 +109,7 @@ class BierDopje(SubtitleDatabase.SubtitleDB):
         subpath = filename.rsplit(".", 1)[0] + '.srt'
         self.downloadFile(sublink, subpath)
         return subpath
-    
+
     def query(self, token, langs=None):
         ''' makes a query and returns info (link, lang) about found subtitles'''
         guessedData = self.guessFileData(token)
@@ -117,7 +117,7 @@ class BierDopje(SubtitleDatabase.SubtitleDB):
             return []
         elif langs and not set(langs).intersection((['en', 'nl'])): # lang is given but does not include nl or en
             return []
-            
+
         if not langs:
             availableLangs = ['nl', 'en']
         else:
@@ -125,7 +125,7 @@ class BierDopje(SubtitleDatabase.SubtitleDB):
         log.debug("possible langs : %s " % availableLangs)
 
         sublinks = []
-        
+
         # Query the show to get the show id
         showName = guessedData['name'].lower()
         if exceptions.has_key(showName):
@@ -146,7 +146,7 @@ class BierDopje(SubtitleDatabase.SubtitleDB):
             pickle.dump(self.cache, f)
             f.close()
             page.close()
-        
+
         # Query the episode to get the subs
         for lang in availableLangs:
             getAllSubs_url = "%sGetAllSubsFor/%s/%s/%s/%s" % (self.api, show_id, guessedData['season'], guessedData['episode'], lang)
@@ -168,5 +168,5 @@ class BierDopje(SubtitleDatabase.SubtitleDB):
                     result["page"] = dllink
                     result["lang"] = lang
                     sublinks.append(result)
-            
+
         return sublinks

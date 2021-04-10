@@ -7,8 +7,8 @@
 #  Coded by Dr.Best (c) 2010
 #  Support: www.dreambox-tools.info
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -17,7 +17,7 @@
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 # for localized messages
@@ -25,7 +25,7 @@ from . import _
 
 from Components.config import ConfigSubsection, ConfigText, \
 	config, ConfigInteger, Config, ConfigSubList, ConfigDirectory, NoSave, ConfigYesNo, ConfigSelectionNumber, ConfigSelection
-from os import path as os_path, open as os_open, close as os_close, O_RDWR as os_O_RDWR, O_CREAT as os_O_CREAT 
+from os import path as os_path, open as os_open, close as os_close, O_RDWR as os_O_RDWR, O_CREAT as os_O_CREAT
 from pickle import load as pickle_load, dump as pickle_dump
 from enigma import eEnv
 
@@ -55,7 +55,7 @@ class AutomaticVolumeAdjustmentConfig():
 		# load config file
 		self.loadConfigFile()
 
-	# load config file and initialize 
+	# load config file and initialize
 	def loadConfigFile(self):
 		print "[AutomaticVolumeAdjustmentConfig] Loading config file..."
 		self.config = Config()
@@ -94,14 +94,14 @@ class AutomaticVolumeAdjustmentConfig():
 		self.config.Entries[i].name = NoSave(ConfigDirectory(default=_("Press OK to select a service")))
 		self.config.Entries[i].adjustvalue = ConfigSelectionNumber(-50, 50, 5, default=25)
 		return self.config.Entries[i]
-	
+
 	def remove(self, configItem):
 		self.config.entriescount.value = self.config.entriescount.value - 1
 		self.config.entriescount.save()
 		self.config.Entries.remove(configItem)
 		self.config.Entries.save()
 		self.save()
-	
+
 	def save(self):
 		print "[AutomaticVolumeAdjustmentConfig] saving config file..."
 		self.config.saveToFile(self.CONFIG_FILE)

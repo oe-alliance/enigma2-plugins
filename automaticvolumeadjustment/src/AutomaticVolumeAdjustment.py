@@ -7,8 +7,8 @@
 #  Coded by Dr.Best (c) 2010
 #  Support: www.dreambox-tools.info
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -17,7 +17,7 @@
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 from Screens.Screen import Screen
@@ -75,7 +75,7 @@ class AutomaticVolumeAdjustment(Screen):
 		if not self.pluginStarted and self.enabled and fromOutside:
 			self.newService = True
 			self.__evUpdatedInfo()
-		
+
 	def __evEnd(self):
 		if self.pluginStarted and self.enabled:
 			if self.modus == "0": # Automatic volume adjust mode
@@ -88,7 +88,7 @@ class AutomaticVolumeAdjustment(Screen):
 # Check it is not None before using it!
 					if ref and ref.valid():
 						self.serviceList[ref.toString()] = self.volctrl.getVolume()
-		
+
 	def __evStart(self):
 		self.newService = True
 
@@ -168,7 +168,7 @@ class AutomaticVolumeAdjustment(Screen):
 			except:
 				return False
 		return False
-		
+
 	def getPlayingServiceReference(self):
 		ref = self.session.nav.getCurrentlyPlayingServiceReference()
 # Check it is not None before using it!
@@ -180,14 +180,14 @@ class AutomaticVolumeAdjustment(Screen):
 				# no need here to know if eServiceReference is valid...
 				ref = eServiceReference(info.getInfoString(ref, iServiceInformation.sServiceref)) # get new eServicereference from meta file
 		return ref
-		
+
 	def setVolume(self, value):
-		# set new volume 
+		# set new volume
 		self.volctrl.setVolume(value, value)
 		if self.volumeControlInstance is not None:
 			self.volumeControlInstance.volumeDialog.setValue(value) # update progressbar value
-			if self.showVolumeBar: 
-				# show volume bar 
+			if self.showVolumeBar:
+				# show volume bar
 				self.volumeControlInstance.volumeDialog.show()
 				self.volumeControlInstance.hideVolTimer.start(3000, True)
 		# save new volume value in E2-settings
@@ -198,7 +198,7 @@ class AutomaticVolumeAdjustment(Screen):
 # VolumeControl Class --> overwrite setVolume
 # only for max. mpeg-volume restriction
 baseVolumeControl_setVolume = None
-		
+
 
 def VolumeControlInit(enabled, maxVolume):
 	global baseVolumeControl_setVolume
@@ -216,7 +216,7 @@ def AVA_setVolume(self, direction):
 	ok = True
 	if direction > 0:
 		oldvol = self.volctrl.getVolume()
-		if not AutomaticVolumeAdjustment.instance.currentAC3DTS:	
+		if not AutomaticVolumeAdjustment.instance.currentAC3DTS:
 			if oldvol + 1 > self.maxVolume:
 				ok = False
 				self.volumeDialog.setValue(oldvol)

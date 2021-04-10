@@ -41,7 +41,7 @@ class ContactsList:
         self.contacts = {}
         self.onlineContacts = {}
         self.clients = []
-        
+
     def setContactStatus(self, person):
         """Inform the user that a person's status has changed.
 
@@ -167,7 +167,7 @@ class GroupConversation:
         self.timer = eTimer()
         self.timer.timeout.get().append(self.sendOutPipe)
         self.timer.start(100)
-        
+
     def show(self):
         """Displays the GroupConversationWindow."""
 #        raise NotImplementedError("Subclasses must implement this method")
@@ -184,7 +184,7 @@ class GroupConversation:
         self.group.sendGroupMessage(text, None)
         self.pipe.add("%s" % text)
         self.pipe.clearOutText()
-    
+
     def sendOutPipe(self):
         if len(str(self.pipe.getOutText())) > 0:
          	if (self.pipe.getOutText() == "/QUIT"):
@@ -260,7 +260,7 @@ class GroupConversation:
             self.members.remove(member)
         self.pipe.add("-!- %s left %s" % (member, self.group.name))
         self.refreshMemberList()
-        
+
     def refreshMemberList(self):
         self.pipe.clearBuddyList()
         self.members.sort(lambda x, y: cmp(string.lower(x), string.lower(y)))
@@ -269,7 +269,7 @@ class GroupConversation:
             self.pipe.buildBuddyList(str(member))
         print "Buddylist of #%s : \n%s" % (self.group.name, self.pipe.showBuddyList())
         self.pipe.updateBuddyWindow()
-        
+
 
 class ChatUI:
     """A GUI chat client"""
@@ -316,7 +316,7 @@ class ChatUI:
         self.pipe.debug(" --- %s ---" % self.helper)
         self.pipe.debug("signing off from %s" % self.helper.accountName)
         self.pipe.add("signing off %s" % helper)
-        self.pipe.add("signing off %s" % helper.accountName)        
+        self.pipe.add("signing off %s" % helper.accountName)
         self.onlineClients.remove(helper)
         self.contactsList.unregisterAccountClient(helper)
 

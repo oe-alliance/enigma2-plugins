@@ -30,7 +30,7 @@ import stat
 
 PluginLanguageDomain = "DVDBackup"
 PluginLanguagePath = "Extensions/DVDBackup/locale/"
- 
+
 
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
@@ -254,22 +254,22 @@ class DVDBackupProgress(Screen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		
+
 		self.refreshTimer = eTimer()
 		self.refreshTimer.callback.append(self.refreshList)
-		
+
 		self.console = None
 		self.working = False
-		
+
 		self["key_red"] = Label(_("Abort"))
 		self["list"] = DVDBackupList()
-		
+
 		self["actions"] = ActionMap(["ColorActions", "OkCancelActions"],
 			{
 				"cancel": self.exit,
 				"red": self.abort
 			}, -1)
-		
+
 		self.onLayoutFinish.append(self.refreshList)
 
 	def exit(self):
@@ -329,26 +329,26 @@ class DVDBackupScreen(ConfigListScreen, Screen):
 
 	def __init__(self, session, device=None):
 		Screen.__init__(self, session)
-		
+
 		self.working = False
 		self.session = session
 		self.console = None
-		
+
 		self["key_red"] = Label(_("Progress"))
 		self["key_green"] = Label(_("Backup"))
 		self["key_yellow"] = Label(_("Keyboard"))
 		self["key_blue"] = Label(_("Location"))
-		
+
 		if device:
 			config.plugins.DVDBackup.device.value = device
-		
+
 		ConfigListScreen.__init__(self, [
 			getConfigListEntry(_("Device:"), config.plugins.DVDBackup.device),
 			getConfigListEntry(_("Directory:"), config.plugins.DVDBackup.directory),
 			getConfigListEntry(_("Name:"), config.plugins.DVDBackup.name),
 			getConfigListEntry(_("Log:"), config.plugins.DVDBackup.log),
 			getConfigListEntry(_("Create iso:"), config.plugins.DVDBackup.create_iso)])
-		
+
 		self["actions"] = ActionMap(["ColorActions", "OkCancelActions"],
 			{
 				"red": self.progress,
@@ -357,7 +357,7 @@ class DVDBackupScreen(ConfigListScreen, Screen):
 				"blue": self.location,
 				"cancel": self.exit
 			}, -1)
-		
+
 		self["config"].onSelectionChanged.append(self.checkConfig)
 		self.onLayoutFinish.append(self.getName)
 
@@ -451,7 +451,7 @@ def filescan(**kwargs):
 	class LocalScanner(Scanner):
 		def checkFile(self, file):
 			return fileExists(file.path)
-	return [LocalScanner(mimetypes=["video/x-dvd"], paths_to_scan=[ScanPath(path="video_ts", with_subdirs=False)], name="DVD", description=_("DVD Backup"), openfnc=filescan_open)]		
+	return [LocalScanner(mimetypes=["video/x-dvd"], paths_to_scan=[ScanPath(path="video_ts", with_subdirs=False)], name="DVD", description=_("DVD Backup"), openfnc=filescan_open)]
 
 
 def Plugins(**kwargs):

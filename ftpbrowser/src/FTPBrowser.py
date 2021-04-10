@@ -450,7 +450,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 		self.queue = [(True, remoteDirectory + file["filename"], localDirectory + file["filename"], file["size"]) for file in filelist.files if file["filetype"] == "-"]
 		self.nextQueue()
-	
+
 	def nextQueue(self):
 		if self.queue:
 			# NOTE: put this transfer back if there already is an active one,
@@ -563,7 +563,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			self.lastApprox = 0
 
 			def sendfile(consumer, fileObj):
-				FileSender().beginFileTransfer(fileObj, consumer, transform=self.putProgress).addCallback(  
+				FileSender().beginFileTransfer(fileObj, consumer, transform=self.putProgress).addCallback(
 					lambda _: consumer.finish()).addCallback(
 					self.putComplete).addErrback(self.putFailed)
 
@@ -829,4 +829,3 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 				type=MessageBox.TYPE_ERROR,
 				timeout=3,
 		)
-

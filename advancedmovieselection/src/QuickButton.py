@@ -1,13 +1,13 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 #  Advanced Movie Selection for Dreambox-Enigma2
 #
 #  The plugin is developed on the basis from a lot of single plugins (thx for the code @ all)
 #  Coded by JackDaniel & cmikula (c)2011
 #  Support: www.i-have-a-dreambox.com
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -16,7 +16,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 from __init__ import _
@@ -120,7 +120,7 @@ class QuickButton:
         })
         self.updateButtonText()
         self.updateHelpText()
- 
+
     def updateHelpText(self):
         for (actionmap, context, actions) in self.helpList:
             if context == "ColorActionsLong":
@@ -139,8 +139,8 @@ class QuickButton:
             text = getPluginCaption(function)
             self[key_text].setText(text)
             if function == "Toggle seen":
-                toggleSeenButton = self[key_text] 
-        
+                toggleSeenButton = self[key_text]
+
     def getNextFromList(self, items, current):
         for index, item in enumerate(items):
             if str(item) == str(current):
@@ -167,7 +167,7 @@ class QuickButton:
             if func == function:
                 key_text = 'key_%s' % (key)
                 return self[key_text]
-    
+
     def getSortButtonCaption(self, mode):
         if mode == MovieList.SORT_ALPHANUMERIC:
             return _("Sort alphabetically")
@@ -184,24 +184,24 @@ class QuickButton:
         if key_number:
             mode = self.getNextSortType()
             key_number.setText(self.getSortButtonCaption(mode))
-    
+
     def updateDBButtonText(self):
         key_number = self.findButton("Library/Movielist")
         if key_number:
             key_number.setText(getPluginCaption("Library/Movielist"))
-    
+
     def redpressed(self):
         self.startPlugin(qButtons.getFunction("red"), self["key_red"])
-     
+
     def greenpressed(self):
         self.startPlugin(qButtons.getFunction("green"), self["key_green"])
-     
+
     def yellowpressed(self):
         self.startPlugin(qButtons.getFunction("yellow"), self["key_yellow"])
-     
+
     def bluepressed(self):
         self.startPlugin(qButtons.getFunction("blue"), self["key_blue"])
- 
+
     def redpressedlong(self):
         print "red long"
         self.startPlugin(qButtons.getFunction("red_long"), None)
@@ -229,7 +229,7 @@ class QuickButton:
     def setButtonText(self, key_number, caption):
         if key_number:
             key_number.setText(caption)
-    
+
     def startPlugin(self, pname, key_number):
         print "qButtonFX:", str(pname)
         # notify action map
@@ -240,7 +240,7 @@ class QuickButton:
             # all functions with no service is needed
             if pname == "Wastebasket":
                 if config.AdvancedMovieSelection.use_wastebasket.value:
-                    self.session.openWithCallback(self.reloadList, Wastebasket)              
+                    self.session.openWithCallback(self.reloadList, Wastebasket)
             elif pname == "Home":
                 self.gotFilename(config.AdvancedMovieSelection.homepath.value)
             elif pname == "Bookmark 1":
@@ -256,7 +256,7 @@ class QuickButton:
             elif pname == "Bookmark 6":
                 self.gotFilename(config.AdvancedMovieSelection.bookmark6path.value)
             elif pname == "Bookmark 7":
-                self.gotFilename(config.AdvancedMovieSelection.bookmark7path.value)                
+                self.gotFilename(config.AdvancedMovieSelection.bookmark7path.value)
             elif pname == "Bookmark(s) on/off":
                 config.AdvancedMovieSelection.show_bookmarks.value = not config.AdvancedMovieSelection.show_bookmarks.value
                 self.saveconfig()
@@ -305,8 +305,8 @@ class QuickButton:
                 self.session.open(TimerEditList)
             elif pname == "Update library":
                 self.rescan(True)
-            else:   
-                # all functions that require a service 
+            else:
+                # all functions that require a service
                 service = self.getCurrent()
                 if not service:
                     return
@@ -325,7 +325,7 @@ class QuickButton:
                         self.showTrailer()
                     else:
                         if config.AdvancedMovieSelection.showinfo.value:
-                            self.session.open(MessageBox, _("Trailer search here not possible, please select a movie!"), MessageBox.TYPE_INFO) 
+                            self.session.open(MessageBox, _("Trailer search here not possible, please select a movie!"), MessageBox.TYPE_INFO)
                 elif pname == "Move-Copy":
                     if not service.flags & eServiceReference.mustDescent:
                         self.session.open(MovieMove, self, service)
@@ -337,7 +337,7 @@ class QuickButton:
                         self.session.openWithCallback(self.reloadList, MovieRetitle, service)
                     else:
                         if config.AdvancedMovieSelection.showinfo.value:
-                            self.session.open(MessageBox, _("Rename here not possible, please select a movie!"), MessageBox.TYPE_INFO)        
+                            self.session.open(MessageBox, _("Rename here not possible, please select a movie!"), MessageBox.TYPE_INFO)
                 elif pname == "TheTVDB Info & D/L":
                     # TODO: search?
                     if True or not service.flags & eServiceReference.mustDescent:
@@ -359,7 +359,7 @@ class QuickButton:
                             self.session.openWithCallback(self.updateCurrentSelection, DownloadMovies, items)
                     else:
                         if config.AdvancedMovieSelection.showinfo.value:
-                            self.session.open(MessageBox, _("TMDb search here not possible, please select a movie!"), MessageBox.TYPE_INFO)               
+                            self.session.open(MessageBox, _("TMDb search here not possible, please select a movie!"), MessageBox.TYPE_INFO)
                 elif pname == "Toggle seen":
                     if not service.flags & eServiceReference.mustDescent:
                         perc = self.list.getMovieStatus()
@@ -371,7 +371,7 @@ class QuickButton:
                             self.setButtonText(key_number, _("Mark as unseen"))
                 elif pname == "Show up to VSR-X":
                     from Source.AccessRestriction import VSR
-                    access = "VSR-%d" % (self.list.getAccess()) 
+                    access = "VSR-%d" % (self.list.getAccess())
                     for index, item in enumerate(VSR):
                         if item == access:
                             if len(VSR) - 1 == index:
@@ -390,7 +390,7 @@ class QuickButton:
                             self.session.open(MessageBox, _("This may not be marked as seen!"), MessageBox.TYPE_INFO)
                 elif pname == "Mark as unseen":
                     if not service.flags & eServiceReference.mustDescent:
-                        self.setMovieStatus(status=0) 
+                        self.setMovieStatus(status=0)
                     else:
                         if config.AdvancedMovieSelection.showinfo.value:
                             self.session.open(MessageBox, _("This may not be marked as unseen!"), MessageBox.TYPE_INFO)
@@ -404,7 +404,7 @@ class QuickButton:
                             plugin(self.session, service)
                         except:
                             errorText = _("Unknown error!")
-                    else: 
+                    else:
                         errorText = _("Plugin not found!")
         else:
             errorText = _("No plugin assigned!")
@@ -413,17 +413,17 @@ class QuickButton:
 
     def openAccessChoice(self):
         vsr = []
-        vsr.append((_("Clear"), None))        
-        vsr.append((_("VSR-0 (General Audience)"), "VSR-0"))        
-        vsr.append((_("VSR-6 (Parental Guidance Suggested)"), "VSR-6"))        
-        vsr.append((_("VSR-12 (Parents Strongly Cautioned)"), "VSR-12"))        
-        vsr.append((_("VSR-16 (Restricted)"), "VSR-16"))        
-        vsr.append((_("VSR-18 (No One 17 And Under Admitted)"), "VSR-18"))        
+        vsr.append((_("Clear"), None))
+        vsr.append((_("VSR-0 (General Audience)"), "VSR-0"))
+        vsr.append((_("VSR-6 (Parental Guidance Suggested)"), "VSR-6"))
+        vsr.append((_("VSR-12 (Parents Strongly Cautioned)"), "VSR-12"))
+        vsr.append((_("VSR-16 (Restricted)"), "VSR-16"))
+        vsr.append((_("VSR-18 (No One 17 And Under Admitted)"), "VSR-18"))
         self.session.openWithCallback(self.setAccessChoice, ChoiceBox, title=_("Please select the VSR here:"), list=vsr)
-        
+
     def setAccessChoice(self, answer):
         if answer:
-            answer = answer[1] 
+            answer = answer[1]
             self.list.setAccessRestriction(answer)
             self.reloadList()
 
@@ -469,10 +469,10 @@ class QuickButton:
                 description = (info.getInfoString(serviceref, iServiceInformation.sDescription),)
                 if description[0] != "" and not description in descr:
                     descr.append(description)
-        
+
         descr = sorted(descr)
         descr.insert(0, (_(SHOW_ALL_MOVIES),))
-        
+
         current = self.list.filter_description
         selection = 0
         for index, item in enumerate(descr):

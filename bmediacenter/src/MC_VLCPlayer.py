@@ -478,12 +478,12 @@ class MC_VLCMedialist(Screen):
 		if self.isVisible == False:
 			self.show()
 			self.isVisible = True
-		
+
 	def Exit(self):
 		if self.isVisible == False:
 			self.visibility()
 			return
-			
+
 		#if self.filelist.getCurrentDirectory() is None:
 		#	config.plugins.mc_vlc.lastDir.value = ""
 		#else:

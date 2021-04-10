@@ -52,18 +52,18 @@ class ConfigFile(object):
 
 	def readXML(self):
 		path = config.pushservice.xmlpath.value
-		
+
 		# Abort if no config found
 		if not os.path.exists(path):
 			print _("PushService No configuration file present")
 			return None
-		
+
 		# Parse if mtime differs from whats saved
 		mtime = os.path.getmtime(path)
 		if mtime == self.mtime:
 			# No changes in configuration, won't read again
 			return self.cache
-		
+
 		# Parse XML
 		try:
 			etree = parse(path).getroot()
@@ -71,7 +71,7 @@ class ConfigFile(object):
 			print _("PushService Exception in readXML: ") + str(e)
 			etree = None
 			mtime = -1
-		
+
 		# Save time and cache file content
 		self.mtime = mtime
 		self.cache = etree
@@ -79,10 +79,10 @@ class ConfigFile(object):
 
 	def writeXML(self, etree):
 		path = config.pushservice.xmlpath.value
-		
+
 		indent(etree)
 		data = tostring(etree, 'utf-8')
-		
+
 		f = None
 		try:
 			f = open(path, 'w')
@@ -93,8 +93,7 @@ class ConfigFile(object):
 		finally:
 			if f is not None:
 				f.close()
-		
+
 		# Save time and cache file content
 		self.mtime = os.path.getmtime(path)
 		self.cache = etree
-

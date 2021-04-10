@@ -69,7 +69,7 @@ def checksum(str):
 
   # Swap bytes. Bugger me if I know why.
   answer = answer >> 8 | (answer << 8 & 0xff00)
-  
+
   return answer
 
 
@@ -89,7 +89,7 @@ def receiveOnePing(mySocket, ID, timeout):
       bytesInDouble = struct.calcsize("d")
       timeSent = struct.unpack("d", recPacket[28:28 + bytesInDouble])[0]
       return timeReceived - timeSent
-      
+
     timeLeft = timeLeft - howLongInSelect
     if timeLeft <= 0:
       return None
@@ -109,9 +109,9 @@ def sendOnePing(mySocket, destAddr, ID):
   # to make up a new header than to stuff it into the dummy.
   header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, htons(myChecksum), ID, 1)
   packet = header + data
-  mySocket.sendto(packet, (destAddr, 1)) # Don't know about the 1 
+  mySocket.sendto(packet, (destAddr, 1)) # Don't know about the 1
   return None
-  
+
 
 def doOne(destAddr, timeout=10):
   # Returns either the delay (in seconds) or none on timeout.
@@ -138,4 +138,3 @@ def main():
 if __name__ == '__main__':
   main()
   sys.exit(0)
-

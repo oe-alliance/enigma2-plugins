@@ -1,13 +1,13 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 #  Advanced Movie Selection for Dreambox-Enigma2
 #
 #  The plugin is developed on the basis from a lot of single plugins (thx for the code @ all)
 #  Coded by JackDaniel & cmikula (c)2011
 #  Support: www.i-have-a-dreambox.com
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -16,7 +16,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 from __init__ import _
@@ -43,7 +43,7 @@ from Source.ServiceProvider import detectBludiscStructure, eServiceReferenceBlud
 from Source.ServiceProvider import eServiceReferenceVDir, eServiceReferenceBackDir, eServiceReferenceListAll, eServiceReferenceHotplug, eServiceReferenceMarker
 from Source.ServiceUtils import serviceUtil, realSize, diskUsage
 from Source.CueSheetSupport import hasLastPosition, CueSheet
-from Source.AutoNetwork import autoNetwork 
+from Source.AutoNetwork import autoNetwork
 from Source.Trashcan import TRASH_NAME
 from Source.EventInformationTable import EventInformationTable, appendShortDescriptionToMeta
 from Source.AccessRestriction import accessRestriction
@@ -97,7 +97,7 @@ class MovieList(GUIComponent):
     SHOW_SERVICE = 2
     HIDE_TAGS = 1
     SHOW_TAGS = 2
-    
+
     COLOR_MOVIE_ICON = None
     COLOR_PERCENT_1 = None
     COLOR_PERCENT_2 = None
@@ -127,15 +127,15 @@ class MovieList(GUIComponent):
         self.l = eListboxPythonMultiContent()
         self.tags = set()
         self.filter_description = None
-        
+
         if root is not None:
             self.reload(root)
-        
+
         self.redrawList()
         self.l.setBuildFunc(self.buildMovieListEntry)
         self.onSelectionChanged = []
         #self.onFirstStart()
-        
+
     def onFirstStart(self):
         self.updateBookmarkDirectories()
         self.updateHotplugDevices()
@@ -143,11 +143,11 @@ class MovieList(GUIComponent):
     def destroy(self):
         self.picloader.destroy()
         GUIComponent.destroy(self)
-    
+
     def onShow(self):
         GUIComponent.onShow(self)
         self.updateSettings()
-        
+
     def updateSettings(self):
         if config.AdvancedMovieSelection.color1.value == "yellow":
             newcolor1 = 0xffcc00
@@ -158,8 +158,8 @@ class MovieList(GUIComponent):
         elif config.AdvancedMovieSelection.color1.value == "black":
             newcolor1 = 0x000000
         elif config.AdvancedMovieSelection.color1.value == "green":
-            newcolor1 = 0x38FF48           
-        
+            newcolor1 = 0x38FF48
+
         if config.AdvancedMovieSelection.color2.value == "yellow":
             newcolor2 = 0xffcc00
         elif config.AdvancedMovieSelection.color2.value == "blue":
@@ -169,8 +169,8 @@ class MovieList(GUIComponent):
         elif config.AdvancedMovieSelection.color2.value == "black":
             newcolor2 = 0x000000
         elif config.AdvancedMovieSelection.color2.value == "green":
-            newcolor2 = 0x38FF48                  
-        
+            newcolor2 = 0x38FF48
+
         if config.AdvancedMovieSelection.color3.value == "yellow":
             newcolor3 = 0xffcc00
         elif config.AdvancedMovieSelection.color3.value == "blue":
@@ -180,8 +180,8 @@ class MovieList(GUIComponent):
         elif config.AdvancedMovieSelection.color3.value == "black":
             newcolor3 = 0x000000
         elif config.AdvancedMovieSelection.color3.value == "green":
-            newcolor3 = 0x38FF48    
-        
+            newcolor3 = 0x38FF48
+
         if config.AdvancedMovieSelection.color4.value == "yellow":
             newcolor4 = 0xffcc00
         elif config.AdvancedMovieSelection.color4.value == "blue":
@@ -191,23 +191,23 @@ class MovieList(GUIComponent):
         elif config.AdvancedMovieSelection.color4.value == "black":
             newcolor4 = 0x000000
         elif config.AdvancedMovieSelection.color4.value == "green":
-            newcolor4 = 0x38FF48  
+            newcolor4 = 0x38FF48
         elif config.AdvancedMovieSelection.color4.value == "grey":
             newcolor4 = 0x7F7F7F
         elif config.AdvancedMovieSelection.color4.value == "orange":
-            newcolor4 = 0xffa500 
+            newcolor4 = 0xffa500
 
         self.mark_color = newcolor4
         try:
-            self.watching_color = parseColor("movieWatching").argb()    
+            self.watching_color = parseColor("movieWatching").argb()
         except:
             self.watching_color = newcolor1
         try:
-            self.finished_color = parseColor("movieFinished").argb()    
+            self.finished_color = parseColor("movieFinished").argb()
         except:
             self.finished_color = newcolor2
         try:
-            self.recording_color = parseColor("movieRecording").argb()    
+            self.recording_color = parseColor("movieRecording").argb()
         except:
             self.recording_color = newcolor3
 
@@ -226,7 +226,7 @@ class MovieList(GUIComponent):
                 self.COLOR_MOVIE_ICON = None
         else:
             self.COLOR_MOVIE_ICON = None
-            
+
         if config.AdvancedMovieSelection.color1.value == "yellow":
             self.COLOR_PERCENT_1 = LoadPixmap(resolveFilename(SCOPE_CURRENT_PLUGIN, IMAGE_PATH + "yellow_movieicon.png"))
         elif config.AdvancedMovieSelection.color1.value == "blue":
@@ -237,7 +237,7 @@ class MovieList(GUIComponent):
             self.COLOR_PERCENT_1 = LoadPixmap(resolveFilename(SCOPE_CURRENT_PLUGIN, IMAGE_PATH + "black_movieicon.png"))
         elif config.AdvancedMovieSelection.color1.value == "green":
             self.COLOR_PERCENT_1 = LoadPixmap(resolveFilename(SCOPE_CURRENT_PLUGIN, IMAGE_PATH + "green_movieicon.png"))
-        
+
         if config.AdvancedMovieSelection.color2.value == "yellow":
             self.COLOR_PERCENT_2 = LoadPixmap(resolveFilename(SCOPE_CURRENT_PLUGIN, IMAGE_PATH + "yellow_movieicon.png"))
         elif config.AdvancedMovieSelection.color2.value == "blue":
@@ -276,10 +276,10 @@ class MovieList(GUIComponent):
 
     def updateHotplugDevices(self):
         self.hotplugServices = hotplug.getHotplugServices()
-    
+
     def updateBookmarkDirectories(self):
         self.video_dirs = autoNetwork.getOnlineMount(config.movielist.videodirs.value)
-    
+
     def unmount(self, service):
         from os import system
         cmd = 'umount "%s"' % (service.getPath())
@@ -327,13 +327,13 @@ class MovieList(GUIComponent):
 
     def showStatusColor(self, val):
         self.show_statuscolor = val
-        
+
     def showDate(self, val):
         self.show_date = val
-        
+
     def showTime(self, val):
         self.show_time = val
-        
+
     def showService(self, val):
         self.show_service = val
 
@@ -384,7 +384,7 @@ class MovieList(GUIComponent):
                     png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, IMAGE_PATH + "location.png"))
                 else:
                     png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, IMAGE_PATH + "directory.png"))
-                
+
                 offset = 25
                 if can_show_folder_image and self.list_type == MovieList.LISTTYPE_EXTENDED:
                     if config.AdvancedMovieSelection.usefoldername.value:
@@ -407,7 +407,7 @@ class MovieList(GUIComponent):
                     dir_size = -1
                     if isinstance(serviceref, eServiceReferenceHotplug):
                         dir_size = diskUsage(serviceref.getPath())[1]
-                    elif not movieScanner.isWorking: 
+                    elif not movieScanner.isWorking:
                         if isinstance(serviceref, eServiceReferenceListAll):
                             dir_size = movieScanner.movielibrary.getSize()
                         else:
@@ -415,13 +415,13 @@ class MovieList(GUIComponent):
                     if dir_size >= 0:
                         dir_size = realSize(dir_size, int(config.AdvancedMovieSelection.dirsize_digits.value))
                         res.append(MultiContentEntryText(pos=(width - 115, 4), size=(110, 30), font=1, flags=RT_HALIGN_RIGHT, text=dir_size))
-                
+
                 if os.path.islink(serviceref.getPath()[:-1]) and can_show_folder_image:
                     link_png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, IMAGE_PATH + "link.png"))
                     res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 15, 9, 10, link_png))
 
                 return res
-                
+
             png = None
             if self.list_type != MovieList.LISTTYPE_EXTENDED and self.show_statusicon:
                 extension = serviceref.toString().split('.')
@@ -440,7 +440,7 @@ class MovieList(GUIComponent):
                 else:
                     if isinstance(serviceref, eServiceReferenceDvd) or isinstance(serviceref, eServiceReferenceBludisc):
                         png = LoadPixmap(resolveFilename(SCOPE_CURRENT_PLUGIN, IMAGE_PATH + "dvd_watching.png"))
-    
+
             if info is not None:
                 if _len < 0:  # recalc _len when not already done
                     cur_idx = self.l.getCurrentSelectionIndex()
@@ -456,14 +456,14 @@ class MovieList(GUIComponent):
                     else:
                         _len = 0  # dont recalc movielist to speedup loading the list
                     self.list[cur_idx][0].length = _len  # update entry in list... so next time we don't need to recalc
-    
+
             length = _len
-        
+
             if _len > 0:
                 _len = "%d:%02d" % (_len / 60, _len % 60)
             else:
                 _len = ""
-            
+
             if info is not None:
                 # service_name = info.getName(serviceref)
                 if not isinstance(info, Info):
@@ -472,8 +472,8 @@ class MovieList(GUIComponent):
                     service = info.getServiceReference()
                 description = info.getInfoString(serviceref, iServiceInformation.sDescription)
                 tags = info.getInfoString(serviceref, iServiceInformation.sTags)
-    
-            color = None 
+
+            color = None
             recording = False
             if NavigationInstance.instance.getRecordings():
                 for timer in NavigationInstance.instance.RecordTimer.timer_list:
@@ -494,13 +494,13 @@ class MovieList(GUIComponent):
                     mtime = filestats[stat_ST_MTIME]
                     if math_fabs(mtime - int(currentTime)) <= 10:
                         recording = True
-            
-            if recording: 
+
+            if recording:
                 if self.show_statuscolor:
                     color = self.recording_color
                 if self.COLOR_MOVIE_ICON:
                     png = self.COLOR_MOVIE_ICON
-    
+
             if (self.list_type == MovieList.LISTTYPE_EXTENDED) or (self.show_progressbar or self.show_percent) or (self.show_statusicon and self.show_folders) or self.show_statuscolor:
                 last = None
                 if length <= 0:  # Set default file length if is not calculateable
@@ -537,17 +537,17 @@ class MovieList(GUIComponent):
                             png = self.COLOR_PERCENT_1
                         elif perc > config.AdvancedMovieSelection.moviepercentseen.value:
                             png = self.COLOR_PERCENT_2
-    
+
                 if self.list_type != MovieList.LISTTYPE_EXTENDED:
                     ''' never enable this - on dvd structures the extension is incorrect and will crash '''
                     # if config.AdvancedMovieSelection.shownew.value and self.show_folders and not self.show_statusicon and perc > 0:
-                    #    png = LoadPixmap(resolveFilename(SCOPE_CURRENT_PLUGIN, IMAGE_PATH + MEDIAEXTENSIONS[extension] + ".png"))   
-                        
+                    #    png = LoadPixmap(resolveFilename(SCOPE_CURRENT_PLUGIN, IMAGE_PATH + MEDIAEXTENSIONS[extension] + ".png"))
+
                     if self.show_progressbar:
                         top = int((self.l.getItemSize().height() - 6) / 2) + 1
                         res.append(MultiContentEntryProgress(pos=(0 + offset, top), size=(50, 6), percent=perc, borderWidth=1, foreColor=color, backColorSelected=color)) #Topfi: added backColorSelected
                         offset = offset + 55
-        
+
                     if self.show_percent:
                         perc_txt = "%d" % (perc) + ' % - '
                         if self.list_type == MovieList.LISTTYPE_MINIMAL_AdvancedMovieSelection:
@@ -556,13 +556,13 @@ class MovieList(GUIComponent):
                         else:
                             res.append(MultiContentEntryText(pos=(offset, 2), size=(70, 25), font=0, flags=RT_HALIGN_RIGHT, text=perc_txt, color=color, color_sel=color)) #Topfi: added color_sel
                             offset = offset + 75
-    
+
             begin_string = ""
             if recording:
                 if config.AdvancedMovieSelection.dateformat.value in ("6", "7"):
                     begin_string = (_("REC"))
                 else:
-                    begin_string = (_("Records"))        
+                    begin_string = (_("Records"))
             else:
                 if config.AdvancedMovieSelection.dateformat.value == "2" and begin > 0:
                     t = FuzzyTime(begin)
@@ -570,14 +570,14 @@ class MovieList(GUIComponent):
                 else:
                     d = datetime.fromtimestamp(begin)
                     begin_string = d.strftime(self.DATE_TIME_FORMAT)
-    
+
             if selection_index > -1:
                 txt = "%d - %s" % (selection_index, service_name)
                 if self.show_statuscolor:
                     color = self.mark_color
             else:
                 txt = service_name
-    
+
             if self.list_type == MovieList.LISTTYPE_EXTENDED:
                 if os.path.isfile(serviceref.getPath()):
                     filename = os.path.splitext(serviceref.getPath())[0] + ".jpg"
@@ -606,17 +606,17 @@ class MovieList(GUIComponent):
                 if config.AdvancedMovieSelection.shownew.value and not hasLastPosition(serviceref):
                     res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, offset, 0, 20, 20, self.MOVIE_NEW_PNG))
                     new_offset = new_offset + 24
-    
+
                 # Line 1: Movie Text, service name
                 res.append(MultiContentEntryText(pos=(new_offset + offset, 0), size=(width - 265, 30), font=0, flags=RT_HALIGN_LEFT, text=txt, color=color, color_sel=color)) #Topfi: added color_sel
                 res.append(MultiContentEntryText(pos=(width - 185, 0), size=(180, 30), font=2, flags=RT_HALIGN_RIGHT, text=service.getServiceName(), color=color, color_sel=color)) #Topfi: added color_sel
-                # line 2: description, file size 
+                # line 2: description, file size
                 res.append(MultiContentEntryText(pos=(0 + offset, 28), size=(width, 25), font=1, flags=RT_HALIGN_LEFT, text=description, color=color, color_sel=color)) #Topfi: added color_sel
                 if filesize:
                     if filesize <= 999:
                         filesize = "%d MB" % (filesize)
                     else:
-                        filesize = "%s GB" % (round(filesize / 1000, 2))                
+                        filesize = "%s GB" % (round(filesize / 1000, 2))
                     res.append(MultiContentEntryText(pos=(width - 185, 28), size=(180, 30), font=2, flags=RT_HALIGN_RIGHT, text=filesize, color=color, color_sel=color)) #Topfi: added color_sel
                 # Line 3: begin_string, progress bar, percent, tags, movie length
                 res.append(MultiContentEntryText(pos=(0 + offset, 55), size=(100, 20), font=1, flags=RT_HALIGN_LEFT, text=begin_string, color=color, color_sel=color)) #Topfi: added color_sel
@@ -625,7 +625,7 @@ class MovieList(GUIComponent):
                 if tags:
                     res.append(MultiContentEntryText(pos=(250 + offset, 55), size=(500, 20), font=1, flags=RT_HALIGN_LEFT, text=self.arrangeTags(tags), color=color, color_sel=color)) #Topfi: added color_sel
                 res.append(MultiContentEntryText(pos=(width - 105, 55), size=(100, 20), font=1, flags=RT_HALIGN_RIGHT, text=_len, color=color, color_sel=color)) #Topfi: added color_sel
-    
+
             elif self.list_type == MovieList.LISTTYPE_ORIGINAL:
                 if png is not None: # self.show_folders:
                     res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 0, 29, 20, 20, png))
@@ -642,36 +642,36 @@ class MovieList(GUIComponent):
                     res.append(MultiContentEntryText(pos=(0 + offset, 55), size=(200, 20), font=1, flags=RT_HALIGN_LEFT, text=begin_string, color=color, color_sel=color)) #Topfi: added color_sel
                 if self.show_time == MovieList.SHOW_TIME:
                     res.append(MultiContentEntryText(pos=(width - 205, 55), size=(200, 20), font=1, flags=RT_HALIGN_RIGHT, text=_len, color=color, color_sel=color)) #Topfi: added color_sel
-    
+
             elif self.list_type == MovieList.LISTTYPE_COMPACT_DESCRIPTION:
                 if png is not None: # self.show_folders:
                     res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 0, 9, 20, 20, png))
-                res.append(MultiContentEntryText(pos=(0 + offset, 0), size=(width, 23), font=0, flags=RT_HALIGN_LEFT, text=txt, color=color, color_sel=color)) #Topfi: added color_sel               
+                res.append(MultiContentEntryText(pos=(0 + offset, 0), size=(width, 23), font=0, flags=RT_HALIGN_LEFT, text=txt, color=color, color_sel=color)) #Topfi: added color_sel
                 res.append(MultiContentEntryText(pos=(0 + offset, 22), size=(width - 212, 17), font=1, flags=RT_HALIGN_LEFT, text=description, color=color, color_sel=color))
                 if self.show_date == MovieList.SHOW_DATE:
-                    res.append(MultiContentEntryText(pos=(width - 135, 4), size=(130, 20), font=1, flags=RT_HALIGN_RIGHT, text=begin_string, color=color, color_sel=color)) #Topfi: added color_sel               
+                    res.append(MultiContentEntryText(pos=(width - 135, 4), size=(130, 20), font=1, flags=RT_HALIGN_RIGHT, text=begin_string, color=color, color_sel=color)) #Topfi: added color_sel
                 if self.show_time == MovieList.SHOW_TIME:
                     dr = service.getServiceName() + " " + _len
                     res.append(MultiContentEntryText(pos=(width - 215, 22), size=(210, 17), font=1, flags=RT_HALIGN_RIGHT, text=dr, color=color, color_sel=color)) #Topfi: added color_sel
                 else:
                     res.append(MultiContentEntryText(pos=(width - 155, 22), size=(150, 17), font=1, flags=RT_HALIGN_RIGHT, text=service.getServiceName(), color=color, color_sel=color)) #Topfi: added color_sel
-    
+
             elif self.list_type == MovieList.LISTTYPE_COMPACT:
                 if png is not None: # self.show_folders:
-                    res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 0, 9, 20, 20, png))            
-                res.append(MultiContentEntryText(pos=(offset, 0), size=(width, 25), font=0, flags=RT_HALIGN_LEFT, text=txt, color=color, color_sel=color)) #Topfi: added color_sel           
+                    res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 0, 9, 20, 20, png))
+                res.append(MultiContentEntryText(pos=(offset, 0), size=(width, 25), font=0, flags=RT_HALIGN_LEFT, text=txt, color=color, color_sel=color)) #Topfi: added color_sel
                 if self.show_date == MovieList.SHOW_DATE:
-                    res.append(MultiContentEntryText(pos=(offset, 22), size=(200, 17), font=1, flags=RT_HALIGN_LEFT, text=begin_string, color=color, color_sel=color)) #Topfi: added color_sel           
+                    res.append(MultiContentEntryText(pos=(offset, 22), size=(200, 17), font=1, flags=RT_HALIGN_LEFT, text=begin_string, color=color, color_sel=color)) #Topfi: added color_sel
                 if self.show_time == MovieList.SHOW_TIME:
-                    res.append(MultiContentEntryText(pos=(width - 80, 0), size=(75, 20), font=0, flags=RT_HALIGN_RIGHT, text=_len, color=color, color_sel=color)) #Topfi: added color_sel           
+                    res.append(MultiContentEntryText(pos=(width - 80, 0), size=(75, 20), font=0, flags=RT_HALIGN_RIGHT, text=_len, color=color, color_sel=color)) #Topfi: added color_sel
                 if tags and self.show_tags == MovieList.SHOW_TAGS:
                     res.append(MultiContentEntryText(pos=(width - 205, 22), size=(200, 17), font=1, flags=RT_HALIGN_RIGHT, text=self.arrangeTags(tags), color=color, color_sel=color)) #Topfi: added color_sel
                     if service is not None:
                         res.append(MultiContentEntryText(pos=(250, 22), size=(200, 17), font=1, flags=RT_HALIGN_LEFT, text=service.getServiceName(), color=color, color_sel=color)) #Topfi: added color_sel
                 else:
                     if service is not None:
-                        res.append(MultiContentEntryText(pos=(width - 205, 22), size=(200, 17), font=1, flags=RT_HALIGN_RIGHT, text=service.getServiceName(), color=color, color_sel=color)) #Topfi: added color_sel       
-    
+                        res.append(MultiContentEntryText(pos=(width - 205, 22), size=(200, 17), font=1, flags=RT_HALIGN_RIGHT, text=service.getServiceName(), color=color, color_sel=color)) #Topfi: added color_sel
+
             elif self.list_type == MovieList.LISTTYPE_MINIMAL_AdvancedMovieSelection:
                 if selection_index > -1:
                     displaytext = "%d - " % (selection_index)
@@ -689,7 +689,7 @@ class MovieList(GUIComponent):
                         displaytext = displaytext + service_name
                 if _len and self.show_time == MovieList.SHOW_TIME:
                     displaytext = displaytext + ' ' + "(" + _len + ")"
-                
+
                 if png is not None: # self.show_folders:
                     res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 0, 3, 20, 20, png))
                 offsetServiceName = 0
@@ -712,21 +712,21 @@ class MovieList(GUIComponent):
 
                 w = 0
                 if self.show_date == MovieList.SHOW_DATE:
-                    display_info = length > 0 and str(_len) + ", " + begin_string or begin_string 
+                    display_info = length > 0 and str(_len) + ", " + begin_string or begin_string
                     if self.show_time == MovieList.SHOW_TIME:
                         w = 200
                         res.append(MultiContentEntryText(pos=(width - w, 5), size=(w - 5, 25), font=1, flags=RT_HALIGN_RIGHT, text=display_info, color=color))
-               
+
                     if self.show_time == MovieList.HIDE_TIME:
                         w = 155
-                        res.append(MultiContentEntryText(pos=(width - w, 4), size=(w - 5, 20), font=1, flags=RT_HALIGN_RIGHT, text=begin_string, color=color, color_sel=color)) #Topfi: added color_sel                             
+                        res.append(MultiContentEntryText(pos=(width - w, 4), size=(w - 5, 20), font=1, flags=RT_HALIGN_RIGHT, text=begin_string, color=color, color_sel=color)) #Topfi: added color_sel
                 elif self.show_date == MovieList.HIDE_DATE:
                     if self.show_time == MovieList.SHOW_TIME:
                         w = 75
-                        res.append(MultiContentEntryText(pos=(width - 75, 2), size=(70, 20), font=1, flags=RT_HALIGN_RIGHT, text=_len, color=color, color_sel=color)) #Topfi: added color_sel                                   
-        
+                        res.append(MultiContentEntryText(pos=(width - 75, 2), size=(70, 20), font=1, flags=RT_HALIGN_RIGHT, text=_len, color=color, color_sel=color)) #Topfi: added color_sel
+
                 res.append(MultiContentEntryText(pos=(0 + offset, 0), size=(width - w - offset, 25), font=0, flags=RT_HALIGN_LEFT, text=txt, color=color, color_sel=color)) #Topfi: added color_sel
-    
+
             return res
         except:
             printStackTrace()
@@ -742,7 +742,7 @@ class MovieList(GUIComponent):
                 return idx
             idx += 1
         return 0
-    
+
     def getPrevMarkerPos(self):
         idx = self.getCurrentIndex() - 1
         if idx < 0:
@@ -753,7 +753,7 @@ class MovieList(GUIComponent):
                 return idx
             idx -= 1
         return idx
-    
+
     def moveToNextMarker(self):
         idx = self.getNextMarkerPos()
         self.instance.moveSelectionTo(idx)
@@ -839,7 +839,7 @@ class MovieList(GUIComponent):
         if config.AdvancedMovieSelection.movielibrary_show.value:
             self.loadMovieLibrary(root, filter_tags)
             return
-        
+
         print "load:", root.getPath()
         if root.type != eServiceReference.idFile:
             print "current type", root.type, "set to", eServiceReference.idFile
@@ -850,20 +850,20 @@ class MovieList(GUIComponent):
         self.multiSelection = []
 
         self.serviceHandler = ServiceCenter.getInstance()
-        
+
         list = self.serviceHandler.list(root)
         if list is None:
             print "listing of movies failed"
             return
         tags = set()
-        
+
         dirs = []
-        
+
         while 1:
             serviceref = list.getNext()
             if not serviceref.valid():
                 break
-            
+
             dvd = None
             # dvd structure
             if serviceref.flags & eServiceReference.mustDescent:
@@ -877,7 +877,7 @@ class MovieList(GUIComponent):
                     if serviceref.getPath()[:-1].endswith(TRASH_NAME):
                         continue
                     serviceref = eServiceReferenceBludisc(serviceref, True)
-                    
+
             if dvd is None:
                 if self.show_folders:
                     if serviceref.flags & eServiceReference.mustDescent:
@@ -903,16 +903,16 @@ class MovieList(GUIComponent):
 
             if config.AdvancedMovieSelection.hide_seen_movies.value and hasLastPosition(serviceref):
                 continue
-            
+
             if serviceUtil.isServiceMoving(serviceref):
                 continue
-            
+
             extension = serviceref.getPath().split(".")[-1].lower()
             if extension == "iso" or extension == "img":
                 serviceref = eServiceReferenceDvd(serviceref)
 
             info = self.serviceHandler.info(serviceref)
-            
+
             if dvd is not None:
                 begin = long(os.stat(dvd).st_mtime)
             else:
@@ -921,8 +921,8 @@ class MovieList(GUIComponent):
             if self.filter_description:
                 descr = info.getInfoString(serviceref, iServiceInformation.sDescription)
                 if not self.filter_description.lower() in str(descr).lower():
-                    continue 
-            
+                    continue
+
             # convert space-seperated list of tags into a set
             this_tags = info.getInfoString(serviceref, iServiceInformation.sTags).split(' ')
             if not accessRestriction.isAccessible(this_tags):
@@ -931,17 +931,17 @@ class MovieList(GUIComponent):
                 this_tags = []
             this_tags = set(this_tags)
             tags |= this_tags
-        
-            # filter_tags is either None (which means no filter at all), or 
+
+            # filter_tags is either None (which means no filter at all), or
             # a set. In this case, all elements of filter_tags must be present,
-            # otherwise the entry will be dropped.            
+            # otherwise the entry will be dropped.
             if filter_tags is not None and not this_tags.issuperset(filter_tags):
                 continue
 
             service_name = info.getName(serviceref)
             mi = MovieInfo(service_name, serviceref, info, begin)
             self.list.append((mi,))
-        
+
         if self.sort_type == MovieList.SORT_ALPHANUMERIC:
             self.list.sort(key=self.buildAlphaNumericSortKey)
         elif self.sort_type == MovieList.SORT_DATE_ASC:
@@ -963,7 +963,7 @@ class MovieList(GUIComponent):
                     parts = directory.split("/")
                     if len(parts) > 2:
                         dirName = parts[-3] + "/" + parts[-2]
-                    else: 
+                    else:
                         dirName = parts[-2]
                     # TODO: check videodirs disabled on build movielist (performance issue)
                     #if not autoNetwork.isMountOnline(directory) or not os.path.exists(directory):
@@ -976,7 +976,7 @@ class MovieList(GUIComponent):
             vdirs.sort(self.sortFolders)
             for servicedirs in vdirs:
                 self.list.insert(0, servicedirs)
-        
+
         db_index = 0
         if self.show_folders:
             if config.AdvancedMovieSelection.hotplug.value:
@@ -1007,7 +1007,7 @@ class MovieList(GUIComponent):
             info = self.serviceHandler.info(tt1)
             mi = MovieInfo(tt1.getName(), tt1, info)
             self.list.insert(db_index, (mi,))
-        
+
         # finally, store a list of all tags which were found. these can be presented to the user to filter the list
         self.tags = sorted(tags)
 
@@ -1069,13 +1069,13 @@ class MovieList(GUIComponent):
                 return True
             count += 1
         return False
-    
+
     def moveUp(self):
         self.instance.moveSelection(self.instance.moveUp)
 
     def moveDown(self):
         self.instance.moveSelection(self.instance.moveDown)
-        
+
     def updateCurrentSelection(self, dummy=None):
         cur_idx = self.instance.getCurrentIndex()
         self.l.invalidateEntry(cur_idx)
@@ -1095,9 +1095,9 @@ class MovieList(GUIComponent):
 
     def find(self, f, seq):
         for item in seq:
-            if item == f: 
+            if item == f:
                 return item
-        return None        
+        return None
 
     def toggleSelection(self):
         x = self.l.getCurrentSelection()
@@ -1122,7 +1122,7 @@ class MovieList(GUIComponent):
         self.list.insert(cur_idx, (x[0], idx_num))
         self.l.invalidateEntry(cur_idx)
         return True
-    
+
     def findIndex(self, serviceref):
         for i, x in enumerate(self.list):
             ref = x[0].serviceref

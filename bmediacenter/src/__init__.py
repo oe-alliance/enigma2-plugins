@@ -27,7 +27,7 @@ PluginLanguagePath = "Extensions/BMediaCenter/locale"
 
 
 def localeInit():
-	lang = language.getLanguage()[:2] 
+	lang = language.getLanguage()[:2]
 	os.environ["LANGUAGE"] = lang
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
@@ -74,7 +74,7 @@ config.plugins.mc_vlc.fps = ConfigInteger(25, (1, 99))
 config.plugins.mc_vlc.aspect = ConfigSelection(["none", "16:9", "4:3"], "none")
 config.plugins.mc_vlc.soverlay = ConfigYesNo()
 config.plugins.mc_vlc.checkdvd = ConfigYesNo(True)
-config.plugins.mc_vlc.notranscode = ConfigYesNo(False) 
+config.plugins.mc_vlc.notranscode = ConfigYesNo(False)
 
 config.plugins.mc_vlc.servercount = ConfigInteger(0)
 config.plugins.mc_vlc.servers = ConfigSubList()

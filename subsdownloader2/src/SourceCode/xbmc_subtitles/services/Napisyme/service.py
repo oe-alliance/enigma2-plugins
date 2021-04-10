@@ -2,7 +2,7 @@
 
 # Attention this is a Frankenstein Monster. Patched from other pieces of code,
 # ugly and may not work at all. Feel free to improve, change anything.
-# I do not know how to code, especially in Python, at all. 
+# I do not know how to code, especially in Python, at all.
 # Credits to amet, Guilherme Jardim, and many more.
 # mrto
 
@@ -78,7 +78,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
       log(__name__, "Original title: [%s]" % (original_title))
       movie_title_plus = original_title.replace(" ", "+")
       url = '%s%s' % (main_url, movie_title_plus)
-    log(__name__, "Pobieram z [ %s ]" % (url))     
+    log(__name__, "Pobieram z [ %s ]" % (url))
     response = urllib2.urlopen(url)
     content = response.read()
     getallsubs(content, title, subtitles_list, file_original_path)
@@ -91,14 +91,14 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     import urllib
     f = urllib.urlopen(subtitles_list[pos]["link"])
     language = subtitles_list[pos]["language_name"]
-   
+
     local_tmp_file = os.path.join(tmp_sub_dir, "zipsubs.zip")
     log(__name__, "Saving subtitles to '%s'" % (local_tmp_file))
-    
+
     local_file = open(zip_subs, "w" + "b")
     local_file.write(f.read())
     local_file.close()
     zipped_file = zip_extractor(zip_subs, destination_dir=tmp_sub_dir)
-    subs_file = zipped_file.extract_zipped_file() 
-    os.remove(zip_subs)   
+    subs_file = zipped_file.extract_zipped_file()
+    os.remove(zip_subs)
     return True, language, subs_file #standard output

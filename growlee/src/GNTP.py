@@ -66,7 +66,7 @@ class GNTPPacket:
 				'SHA512': hashlib.sha512,
 		}
 		hashAlgorithm = hashAlgorithm.upper()
-		
+
 		if not hashAlgorithm in hashes:
 			raise Exception('Unsupported hash algorithm: %s' % hashAlgorithm)
 		if encryptionAlgorithm is not None:
@@ -93,7 +93,7 @@ class GNTPRegister(GNTPPacket):
 		assert applicationName, "There needs to be an application name set"
 		self.applicationName = applicationName
 		self.notifications = []
-	
+
 	def add_notification(self, name, displayName=None, enabled=True):
 		assert name, "Notifications need a name"
 		note = {

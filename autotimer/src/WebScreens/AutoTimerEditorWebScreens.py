@@ -7,4 +7,3 @@ class AutoTimerEditorWebScreen(WebScreen):
 		from Plugins.Extensions.AutoTimer.WebComponents.Sources.AutoTimerEditor import AutoTimerEditor
 		self["Backup"] = AutoTimerEditor(session, func=AutoTimerEditor.BACKUP)
 		self["Restore"] = AutoTimerEditor(session, func=AutoTimerEditor.RESTORE)
-

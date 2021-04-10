@@ -150,4 +150,3 @@ class AutoMountView(Screen):
 		if data is not None:
 			if data is True:
 				self.showMountsList()
-

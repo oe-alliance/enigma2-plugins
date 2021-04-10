@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# for localized messages     
+# for localized messages
 from . import _x
 
 from Components.GUIComponent import GUIComponent
@@ -335,7 +335,7 @@ class MovieList(GUIComponent):
 				return ((parent, info, begin, tinfo))
 
 	def load(self, root, filter_tags):
-		# this lists our root service, then building a 
+		# this lists our root service, then building a
 		# nice list
 
 		self.serviceHandler = eServiceCenter.getInstance()
@@ -347,7 +347,7 @@ class MovieList(GUIComponent):
 		list = self.serviceHandler.list(root)
 		if list is None:
 			print "[SF-Plugin] listing of movies failed"
-			list = []	
+			list = []
 			return
 		tags = set()
 
@@ -375,9 +375,9 @@ class MovieList(GUIComponent):
 			this_tags = set(this_tags)
 			tags |= this_tags
 
-			# filter_tags is either None (which means no filter at all), or 
+			# filter_tags is either None (which means no filter at all), or
 			# a set. In this case, all elements of filter_tags must be present,
-			# otherwise the entry will be dropped.			
+			# otherwise the entry will be dropped.
 			if filter_tags is not None and not this_tags.issuperset(filter_tags):
 				continue
 
@@ -486,7 +486,7 @@ class MovieList(GUIComponent):
 				if txt[0] != serie:				# neue Serie
 					sflidx += 1
 					serie = txt[0]
-					ser_serviceref = eServiceReference(eServiceReference.idUser | eServiceReference.idDVB, 
+					ser_serviceref = eServiceReference(eServiceReference.idUser | eServiceReference.idDVB,
 							eServiceReference.canDescent, "SFLIDX" + str(sflidx))
 					ser_info = self.serviceHandler.info(ser_serviceref)
 					# VIRT_UP should sort first, but after REAL_UP: MAXTIME-1 resp. "  1"
@@ -512,7 +512,7 @@ class MovieList(GUIComponent):
 						repcnt = 0
 					serlst.append(film)
 			elif serlst:
-				self.rootlst[parent_list_index] = (ser_serviceref, ser_info, self.serdate, 
+				self.rootlst[parent_list_index] = (ser_serviceref, ser_info, self.serdate,
 					[self.VIRT_DIR, self.pdirMap, txt[0], "", "SFLIDX" + str(sflidx), 1])
 				self.serdate = 0
 				if repcnt:
@@ -522,7 +522,7 @@ class MovieList(GUIComponent):
 			rootlidx += 1
 			txt = ts
 		if serlst:
-			self.rootlst[parent_list_index] = (ser_serviceref, ser_info, self.serdate, 
+			self.rootlst[parent_list_index] = (ser_serviceref, ser_info, self.serdate,
 				[self.VIRT_DIR, self.pdirMap, txt[0], "", "SFLIDX" + str(sflidx), None, 1])
 			if repcnt:
 				self.update_repcnt(serlst, repcnt)
@@ -574,5 +574,3 @@ class MovieList(GUIComponent):
 			if repcnt:
 				s += ", %d %s" % (repcnt, _x("duplicated"))
 			return s
-
-

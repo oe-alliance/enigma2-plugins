@@ -267,7 +267,7 @@ class FileEngine(CacheEngine):
     def get(self, date):
         self._init_cache()
         self._open('r+b')
-        
+
         with Flock(self.cachefd, Flock.LOCK_SH): # lock for shared access
             # return any new objects in the cache
             return self._read(date)
@@ -399,5 +399,3 @@ class FileEngine(CacheEngine):
 
     def expire(self, key):
         pass
-
-

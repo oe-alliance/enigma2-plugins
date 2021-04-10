@@ -15,7 +15,7 @@ from . import _
 # Plugin
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config, configfile, ConfigSelection, ConfigSubsection, getConfigListEntry, ConfigSubList, \
-	ConfigClock, ConfigInteger, ConfigYesNo 
+	ConfigClock, ConfigInteger, ConfigYesNo
 from Components.ConfigList import ConfigListScreen
 from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER
 from Components.MenuList import MenuList
@@ -40,18 +40,18 @@ class AdvHdmiCecSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.onChangedEntry = []
-		
+
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changed)
-		
+
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 		self["key_yellow"] = StaticText(_("Timespans"))
 		self["key_info"] = StaticText()
 		self["help"] = StaticText()
-		
+
 		self.getConfig()
-		
+
 		def selectionChanged():
 			current = self["config"].getCurrent()
 			if self["config"].current != current:
@@ -65,7 +65,7 @@ class AdvHdmiCecSetup(Screen, ConfigListScreen):
 
 		self["config"].selectionChanged = selectionChanged
 		self["config"].onSelectionChanged.append(self.updateHelp)
-		
+
 		# Actions
 		self["actions"] = ActionMap(["SetupActions", "AdvHdmiConfigActions"],
 			{
@@ -81,13 +81,13 @@ class AdvHdmiCecSetup(Screen, ConfigListScreen):
 		# Trigger change
 		self.changed()
 		self.onLayoutFinish.append(self._layoutFinished)
-	
+
 	def _layoutFinished(self):
 		self.setTitle(_("Advanced HDMI-Cec Setup"))
-		
+
 	def getConfig(self):
 		from Plugins.SystemPlugins.AdvHdmi.plugin import g_AdvHdmi_webif_available
-		
+
 		self.list = [getConfigListEntry(_("partially disable HdmiCec"), config.plugins.AdvHdmiCec.enable, _("Partially disable HDMI-Cec?\nIt can be prevented only the signals that are sent from the Dreambox. Signals received by the Dreambox will not be prevented."))]
 		if config.plugins.AdvHdmiCec.enable.value:
 			self.list.append(getConfigListEntry(_("disable at GUI-start"), config.plugins.AdvHdmiCec.disable_after_enigmastart, _("Should HDMI-Cec be disabled when GUI service startup?")))
@@ -131,7 +131,7 @@ class AdvHdmiCecSetup(Screen, ConfigListScreen):
 
 	def showInfo(self):
 		from Plugins.SystemPlugins.AdvHdmi.plugin import advhdmiHooks, ADVHDMI_VERSION
-		
+
 		infoMsg = _("Version: ") + ADVHDMI_VERSION + "\n\n"
 		if advhdmiHooks:
 			infoMsg += _("Registered HDMI-Cec-Hooks:") + "\n"
@@ -160,7 +160,7 @@ class TimeSpanEntryList(MenuList):
 	def postWidgetCreate(self, instance):
 		MenuList.postWidgetCreate(self, instance)
 		instance.setItemHeight(30)
-		
+
 	def buildList(self, entryselect=None):
 		from Plugins.SystemPlugins.AdvHdmi.plugin import TimeSpanPresenter
 		self.list = []
@@ -227,11 +227,11 @@ class TimeSpanListScreen(Screen):
 			"yellow": self.keyEdit,
 			"blue": self.keyDelete,
 		}, -1)
-		
+
 		self._updateList()
 		self.onLayoutFinish.append(self._layoutFinished)
 
-	def _updateList(self, entryselect=None):		
+	def _updateList(self, entryselect=None):
 		self["entrylist"].buildList(entryselect)
 
 	def _layoutFinished(self):
@@ -283,7 +283,7 @@ class TimeSpanConfigScreen(Screen, ConfigListScreen):
 			<widget name="config" position="10,0" size="530,210" scrollbarMode="showOnDemand" enableWrapAround="1" />
 			<ePixmap pixmap="skin_default/div-h.png" position="0,210" zPosition="1" size="550,2" />
 			<widget source="help" render="Label" position="5,220" size="550,120" font="Regular;21" />
-			
+
 			<widget source="key_red" render="Label" position="10,380" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget source="key_green" render="Label" position="180,380" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="green" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<ePixmap name="red" position="10,380" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
@@ -313,9 +313,9 @@ class TimeSpanConfigScreen(Screen, ConfigListScreen):
 		else:
 			self.newmode = 0
 			self.current = entry
-		
+
 		self.callbackfnc = callbackfnc
-			
+
 		cfglist = [
 			getConfigListEntry(_("from weekday"), self.current.fromWD, _("From which day of the week, HDMI-Cec should be disabled?")),
 			getConfigListEntry(_("to weekday"), self.current.toWD, _("To what day of the week, HDMI-Cec should be disabled?")),
@@ -343,7 +343,7 @@ class TimeSpanConfigScreen(Screen, ConfigListScreen):
 			config.plugins.AdvHdmiCec.entriescount.save()
 		ConfigListScreen.keySave(self)
 		config.plugins.AdvHdmiCec.save()
-		configfile.save()		
+		configfile.save()
 		if self.callbackfnc is not None:
 			self.onClose.append(boundFunction(self.callbackfnc, entryselect))
 		self.close(entryselect)
@@ -360,7 +360,7 @@ def sessionstart(reason, **kwargs):
 	global g_AdvHdmi_sessionstarted
 	if reason == 0:
 		g_AdvHdmi_sessionstarted = True
-		
+
 
 def autostart(reason, **kwargs):
 	global g_AdvHdmi_sessionstarted
@@ -389,9 +389,9 @@ def Plugins(**kwargs):
 	]
 	if config.plugins.AdvHdmiCec.show_in.value == "system":
 		list.append(PluginDescriptor(
-			name="Advanced HDMI-Cec Control", 
-			description=_("manage when HDMI Cec is enabled"), 
-			where=PluginDescriptor.WHERE_MENU, 
+			name="Advanced HDMI-Cec Control",
+			description=_("manage when HDMI Cec is enabled"),
+			where=PluginDescriptor.WHERE_MENU,
 			fnc=showinSetup)
 		)
 	if config.plugins.AdvHdmiCec.show_in.value == "plugin":
@@ -410,7 +410,5 @@ def Plugins(**kwargs):
 				fnc=main,
 				needsRestart=False)
 		)
-	
+
 	return list
-
-

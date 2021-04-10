@@ -310,5 +310,3 @@ def Plugins(path, **kwargs):
     if config.plugins.filebrowser.add_mainmenu_entry.value:
         list.append(desc_mainmenu)
     return list
-
-

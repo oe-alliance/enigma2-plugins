@@ -73,7 +73,7 @@ class ConfigGoto(ConfigBoolean):
 class ConfigEIBText(ConfigText):
 	def __init__(self, default="", fixed_size=True, visible_width=False):
 		ConfigText.__init__(self, default, fixed_size, visible_width)
-	
+
 	def onSelect(self, session):
 		self.allmarked = (self.value != "")
 
@@ -179,7 +179,7 @@ class EIBObject(object):
 			return str(value)
 
 	value = property(getValue, setValue)
-		
+
 
 class EIBObjects(object):
 	def __init__(self, zone_id, zone_name, zone_img):
@@ -225,7 +225,7 @@ class EIBObjects(object):
 			ret = knx.send(query)
 			if config.eib.debug.value:
 				print "[sendKNX]", query, ret
-			
+
 			knxdata = knx.recv(1024)
 			while not knxdata.endswith('\n\x04'):
 				knxdata += knx.recv(1024)
@@ -289,12 +289,12 @@ class EIBObjects(object):
 					            elif config.eib.debug.value:
 							  print "[parseMultiRead] couldn't parse persistence object", object_id, value
 		except xml.parsers.expat.ExpatError:
-			print("[parseMultiRead] XML parser error") 
+			print("[parseMultiRead] XML parser error")
 
 	def __iter__(self):
 		list = self.ids.itervalues()
 		return iter(sorted(list, key=lambda EIBObject: EIBObject.order))
-		
+
 
 class EIBoxZoneScreen(Screen, ConfigListScreen):
 
@@ -306,7 +306,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 
 		offset = [12, 10] # fix up browser css spacing
 		iconsize = [32, 32]
-		
+
 		self.setup_title = "E.I.B.ox"
 
 		self.EIB_objects = EIB_objects
@@ -340,7 +340,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 					skin += '\t\t\t<widget source="%s_progress" render="Progress" pixmap="skin_default/progress_small.png" position="%s" size="32,5" backgroundColor="#4f74BB" zPosition="1" />\n' % (EIB_object.object_id, EIB_object.getPos([offset[0], offset[1] - iconsize[1]]))
 					self[EIB_object.object_id + "_progress"] = Progress()
 					self[EIB_object.object_id + "_progress"].range = 255
-			
+
 			elif EIB_object.object_type in (EIB_THERMO, EIB_TEXT):
 				skin += '\t\t\t<widget name="%s" position="%s" size="120,20" font="Regular;14" halign="left" valign="center" foregroundColors="#000000,#0000FF" transparent="1" zPosition="1" />\n' % (EIB_object.object_id, EIB_object.getPos(offset))
 				self[EIB_object.object_id] = MultiColorLabel()
@@ -355,7 +355,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 		self.onChangedEntry = []
 
-		self["actions"] = ActionMap(["SetupActions", "OkCancelActions", "ColorActions", "DirectionActions"], 
+		self["actions"] = ActionMap(["SetupActions", "OkCancelActions", "ColorActions", "DirectionActions"],
 		{
 			"up": self.keyUp,
 			"upUp": self.keyPass,
@@ -375,7 +375,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 
 	def handleInputHelpers(self):
 		pass
-	
+
 	def keyPass(self):
 		pass
 
@@ -504,7 +504,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		self.list = []
 		for EIB_object in self.EIB_objects:
 			self.list.append(getConfigListEntry(EIB_object.label, EIB_object.config_element))
-	
+
 	def changedEntry(self):
 		current = self["config"].getCurrent()
 		if current:
@@ -540,15 +540,15 @@ class EIBox(Screen, ConfigListScreen):
 		<screen position="center,center" size="570,420" title="E.I.B.ox" >
 		</screen>"""
 
-	def __init__(self, session, args=None):		
+	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions"], 
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions"],
 		{
 			"cancel": self.close,
 			"red": self.close
 		}, -1)
-		
+
 		self.gotoZone = None
 		self.EIB_zones = {}
 		self.onShown.append(self.onFirstShown)
@@ -562,13 +562,13 @@ class EIBox(Screen, ConfigListScreen):
 
 	def onFirstShown(self):
 		self.onShown.remove(self.onFirstShown)
-		self.loadXML(resolveFilename(SCOPE_PLUGINS, file_prefix + config.eib.xmlfile.value))		
+		self.loadXML(resolveFilename(SCOPE_PLUGINS, file_prefix + config.eib.xmlfile.value))
 		self.displayZone()
 
 	def displayZone(self):
 		if self.gotoZone in self.EIB_zones:
 			self.session.openWithCallback(self.ZoneScreenCB, EIBoxZoneScreen, self.EIB_zones[self.gotoZone])
-	
+
 	def errorOut(self, message):
 		self.session.openWithCallback(self.close, MessageBox, message, type=MessageBox.TYPE_ERROR)
 
@@ -717,4 +717,3 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name="E.I.B.ox", description=_("Visualization for European Installation Bus"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)
-

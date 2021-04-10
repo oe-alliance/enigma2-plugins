@@ -41,4 +41,3 @@ class FileStreamer(resource.Resource):
 			return resource.NoResource(message="no file given with file={filename}").render(request)
 
 		return server.NOT_DONE_YET
-

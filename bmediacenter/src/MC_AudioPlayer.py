@@ -224,7 +224,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 				iPlayableService.evUser + 13: self["coverArt"].embeddedCoverArt,
 				iPlayableService.evUser + 14: self["screensaver"].screensaver
 			})
-		self["actions"] = HelpableActionMap(self, "MC_AudioPlayerActions", 
+		self["actions"] = HelpableActionMap(self, "MC_AudioPlayerActions",
 			{
 				"ok": (self.KeyOK, "Play selected file"),
 				"playpause": (self.PlayPause, "Play / Pause"),
@@ -411,11 +411,11 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		self.filelist.refresh(sort)
 		if MC_AudioPlayer.STATE == "PLAY":
 			self["play"].instance.setPixmapFromFile(mcpath + "icons/play_enabled.png")
-			if config.plugins.mc_ap.showJpg.getValue():	
+			if config.plugins.mc_ap.showJpg.getValue():
 				self.screensavercheckup()
 		elif MC_AudioPlayer.STATE == "PAUSED":
 			self["play"].instance.setPixmapFromFile(mcpath + "icons/pause_enabled.png")
-			if config.plugins.mc_ap.showJpg.getValue():	
+			if config.plugins.mc_ap.showJpg.getValue():
 				self.screensavercheckup()
 		elif MC_AudioPlayer.STATE == "NONE":
 			self["play"].instance.setPixmapFromFile(mcpath + "icons/stop_enabled.png")
@@ -684,7 +684,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		self.JpgTimer.start(time, True)
 
 	def showLyrics(self):
-		if MC_AudioPlayer.STATE == "PLAY":			
+		if MC_AudioPlayer.STATE == "PLAY":
 			self.session.openWithCallback(self.updd, Lyrics)
 
 
@@ -719,7 +719,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 				iPlayableService.evUser + 12: self.__evPluginError,
 				iPlayableService.evUser + 14: self["screensaver"].screensaver
 			})
-		self["actions"] = HelpableActionMap(self, "MC_AudioPlayerActions", 
+		self["actions"] = HelpableActionMap(self, "MC_AudioPlayerActions",
 			{
 				"ok": (self.KeyOK, "Play selected file"),
 				"playpause": (self.PlayPause, "Play / Pause"),
@@ -830,11 +830,11 @@ class MC_WebRadio(Screen, HelpableScreen):
 		self.filelist.refresh(sort)
 		if MC_AudioPlayer.STATE == "PLAY":
 			self["play"].instance.setPixmapFromFile(mcpath + "icons/play_enabled.png")
-			if config.plugins.mc_ap.showJpg.getValue():	
+			if config.plugins.mc_ap.showJpg.getValue():
 				self.screensavercheckup()
 		elif MC_AudioPlayer.STATE == "PAUSED":
 			self["play"].instance.setPixmapFromFile(mcpath + "icons/pause_enabled.png")
-			if config.plugins.mc_ap.showJpg.getValue():	
+			if config.plugins.mc_ap.showJpg.getValue():
 				self.screensavercheckup()
 		elif MC_AudioPlayer.STATE == "NONE":
 			self["play"].instance.setPixmapFromFile(mcpath + "icons/stop_enabled.png")
@@ -992,7 +992,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 		menu.append((_("Rundfunk"), "Rundfunk/"))
 		menu.append((_("Smooth"), "Smooth/"))
 		menu.append((_("Soul"), "Soul/"))
-		menu.append((_("Techno/House"), "Techno/"))		
+		menu.append((_("Techno/House"), "Techno/"))
 		menu.append((_("Worldmusic"), "Worldmusik/"))
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title="", list=menu)
 
@@ -1063,7 +1063,7 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 				#iPlayableService.evUser+13: self["coverArt"].embeddedCoverArt,
 				iPlayableService.evUser + 14: self["screensaver"].screensaver
 			})
-		self["actions"] = HelpableActionMap(self, "MC_AudioPlayerActions", 
+		self["actions"] = HelpableActionMap(self, "MC_AudioPlayerActions",
 			{
 				"ok": (self.KeyOK, "Play from selected file"),
 				"cancel": (self.Exit, "Exit Audio Player"),
@@ -1173,7 +1173,7 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 		MC_AudioPlayer.playlistplay = 1
 		self.session.nav.playService(self.playlist.getServiceRefList()[self.playlist.getCurrentIndex()])
 		MC_AudioPlayer.STATE = "PLAY"
-		self.FileInfoTimer.start(2000, True)		
+		self.FileInfoTimer.start(2000, True)
 		self["play"].instance.setPixmapFromFile(mcpath + "icons/play_enabled.png")
 		if config.plugins.mc_ap.showJpg.getValue():
 			time = config.plugins.mc_ap.jpg_delay.getValue() * 1000
@@ -1203,7 +1203,7 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 			self.isVisible = True
 			self.show()
 
-	def Settings(self):	
+	def Settings(self):
 		self.session.openWithCallback(self.updd, MC_AudioPlaylist)
 
 	def updd(self):
@@ -1383,7 +1383,7 @@ class Lyrics(Screen):
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evUser + 11: self["coverly"].coverlyrics
 			})
-		self["actions"] = HelpableActionMap(self, "MC_AudioPlayerActions", 
+		self["actions"] = HelpableActionMap(self, "MC_AudioPlayerActions",
 			{
 				"cancel": self.Exit,
 				"up": self.pageUp,
@@ -1551,7 +1551,7 @@ class AudioPlayerSettings(Screen):
 			"8": self.keyNumber,
 			"9": self.keyNumber
 		}, -1)
-		
+
 		self.list = []
 		self["configlist"] = ConfigList(self.list)
 		self.list.append(getConfigListEntry(_("Screensaver Enable:"), config.plugins.mc_ap.showJpg))

@@ -1,6 +1,6 @@
 from __init__ import _
 Version = "V2.9r2"
-# globale Variablen        
+# globale Variablen
 ZielRPM = 0
 AktVLT = 0
 AktPWM = 0

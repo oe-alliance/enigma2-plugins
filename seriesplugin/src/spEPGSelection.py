@@ -46,13 +46,13 @@ def enterDateTime(self):
 	event = self["Event"].event
 	if self.type == EPG_TYPE_SINGLE:
 		service = self.currentService
-	elif self.type == EPG_TYPE_MULTI:	
+	elif self.type == EPG_TYPE_MULTI:
 		service = self.services
 	elif self.type == EPG_TYPE_SIMILAR:
 		service = self.currentService
 	if service and event:
 		from Plugins.Extensions.SeriesPlugin.SeriesPluginInfoScreen import SeriesPluginInfoScreen
-		self.session.openWithCallback(self.SPcloseafterfinish, SeriesPluginInfoScreen, service, event) 
+		self.session.openWithCallback(self.SPcloseafterfinish, SeriesPluginInfoScreen, service, event)
 		return
 	EPGSelection_enterDateTime(self)
 
@@ -63,4 +63,3 @@ def enterDateTime(self):
 
 def closeafterfinish(self, retval=None):
 	self.close()
-

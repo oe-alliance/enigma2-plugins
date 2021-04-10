@@ -211,11 +211,11 @@ class ARDMediathekCache(Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		
+
 		self["spinner"] = Pixmap()
 		self.curr = 0
 		self.__shown = False
-		
+
 		self.timer = eTimer()
 		self.timer.callback.append(self.showNextSpinner)
 
@@ -269,11 +269,11 @@ def ARDMenuListSubEntry(movie, thumb):
 class ARDMediathek(Screen):
 	def __init__(self, session):
 		self.session = session
-		
+
 		desktop = getDesktop(0)
 		size = desktop.size()
 		width = size.width()
-		
+
 		if width == 720:
 			self.skin = """<screen position="0,0" size="720,576" flags="wfNoBorder" >"""
 		else:
@@ -284,13 +284,13 @@ class ARDMediathek(Screen):
 				<widget name="pageNavigation" position="260,520" size="380,400" halign="right" font="Regular;20" backgroundColor="#2666ad" foregroundColor="#ffffff" />
 				<widget name="serverName" position="120,520" size="250,20" font="Regular;20" backgroundColor="#2666ad" foregroundColor="#ffffff" />
 			</screen>""" % (PNG_PATH + "background.png")
-		
+
 		Screen.__init__(self, session)
-		
+
 		self["list"] = ARDMenuList()
 		self["pageNavigation"] = Label()
 		self["serverName"] = Label("Server")
-		
+
 		self["actions"] = ActionMap(["ARDMediathekActions"],
 			{
 				"back": self.exit,
@@ -304,19 +304,19 @@ class ARDMediathek(Screen):
 				"previousPage": self.previousPage,
 				"nextPage": self.nextPage
 			}, -1)
-		
+
 		self.cacheDialog = self.session.instantiateDialog(ARDMediathekCache)
-		
+
 		self.working = False
 		self.mainpage = True
 		self.pages = None
 		self.transcodeServer = None
 		self.movies = []
 		self.listMovies = []
-		
+
 		self.cacheTimer = eTimer()
 		self.cacheTimer.callback.append(self.chechCachedFile)
-		
+
 		self.onLayoutFinish.append(self.getPage)
 
 	def mainpage(self):

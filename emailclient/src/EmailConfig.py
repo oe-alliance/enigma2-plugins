@@ -52,7 +52,7 @@ class EmailConfigOptions(ConfigListScreen, Screen):
 			getConfigListEntry(_("display timeout (seconds)"), config.plugins.emailimap.timeout),
 			getConfigListEntry(_("display connection errors"), config.plugins.emailimap.verbose),
 			getConfigListEntry(_("debug"), config.plugins.emailimap.debug),
-			]	
+			]
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 		self.onLayoutFinish.append(self._layoutFinish)
@@ -111,7 +111,7 @@ class EmailConfigAccount(ConfigListScreen, Screen):
 			"cancel": self.cancel,
 			"ok": self.save,
 		}, -2)
-		
+
 		if params:
 			(self._name, self._server, self._port, self._user, self._password, self._interval, self._maxmail, self._listall) = params
 		else:
@@ -126,7 +126,7 @@ class EmailConfigAccount(ConfigListScreen, Screen):
 		self._cMaxmail = ConfigText(self._maxmail, fixed_size=False)
 		self._cMaxmail.setUseableChars('0123456789,')
 		self._cListall = ConfigEnableDisable(self._listall)
-		
+
 		self.list = [
 					getConfigListEntry(_("account name"), self._cName),
 					getConfigListEntry(_("IMAP Server"), self._cServer),

@@ -23,7 +23,7 @@ class PortScanner(object):
 	"""
 	PortScanner allows to use nmap from python
 	"""
-	
+
 	def __init__(self):
 		self._scan_result = {}
 		self._nmap_version_number = 0       # nmap version number
@@ -43,7 +43,7 @@ class PortScanner(object):
 		assert type(arguments) in types.StringTypes, 'Wrong type for [arguments], should be a string [was {0}]'.format(type(arguments))
 
 		f_args = shlex.split(arguments)
-		
+
 		# Launch scan
 		args = ['nmap', '-oX', '-', hosts] + ['-p', ports] * (ports != None) + f_args
 

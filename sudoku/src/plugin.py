@@ -57,7 +57,7 @@ class board:
 				slots.append((i, j))
 
 		self.search(slots, 0)
-		
+
 		while len(slots) > 0:
 			i = random.randint(0, len(slots) - 1)
 			fillOrder.append(slots[i])
@@ -179,7 +179,7 @@ class SudokuCell:
 		b = 2
 
 		self.canvas.fill(self.x, self.y, self.w, self.h, fg)
-		
+
 		if self.bg_color == 0:
 			bg = black
 		elif self.bg_color == 1:
@@ -256,7 +256,7 @@ class Sudoku(Screen):
 					color = get_attr("color")
 					# is it a "named" color?
 					if color[0] != '#':
-						# is "named" color, have to look in dictionary... 
+						# is "named" color, have to look in dictionary...
 						color = colorNames[color]
 					#print type, color
 					# at least get the background color...
@@ -273,7 +273,7 @@ class Sudoku(Screen):
 		self["key_yellow"] = Button(_("check game"))
 		self["key_blue"] = Button(_("restart game"))
 		self["key_red"] = Button(_("solve game"))
-		
+
 		self.cnt = 0
 		self.timer = eTimer()
 		self.timer.callback.append(self.timerHandler)
@@ -475,15 +475,15 @@ class Sudoku(Screen):
 	def check_game(self, highlight):
 		empty = False
 		correct = True
-	
+
 		for j in range(0, 9):
 			for i in range(0, 9):
 				cell = self.board_cells[i][j]
 				val = cell.value()
-	
+
 				if cell.readonly():
 					continue
-	
+
 				if not val:
 					empty = True
 				else:
@@ -492,18 +492,18 @@ class Sudoku(Screen):
 						if ((i != k and self.board_cells[k][j].value() == val) or (j != k and self.board_cells[i][k].value() == val)):
 							err = True
 							break
-	
+
 					if err:
 						if highlight:
 							cell.color(3) #red
 							cell.paint()
-	
+
 						correct = False
 
 					elif highlight:
 						cell.color(1) #grey
-						cell.paint()	
-	
+						cell.paint()
+
 		if not empty and correct:
 			self.timer.stop()
 			for j in range(0, 9):
@@ -545,11 +545,11 @@ class Sudoku(Screen):
 
 	def restart_game(self):
 		solved = True
-		
+
 		for j in range(0, 9):
 			for i in range(0, 9):
 				cell = self.board_cells[i][j]
-	
+
 				if not cell.readonly():
 					solved = False
 					cell.color(1) #grey
@@ -566,7 +566,7 @@ class Sudoku(Screen):
 		for j in range(0, 9):
 			for i in range(0, 9):
 				cell = self.board_cells[i][j]
-	
+
 				cell.setValue(self.board_values[i][j])
 				cell.setReadonly(True)
 				cell.color(0) #black
@@ -593,10 +593,10 @@ class Sudoku(Screen):
 			sav = open(SAVEFILE, "r")
 			inp = sav.readline()
 			inplist = inp.split()
-			
+
 			self.gameLevel = int(inplist[0])
 			self.cnt = int(inplist[1])
-	
+
 			for j in range(0, 9):
 				for i in range(0, 9):
 					inp = sav.readline()

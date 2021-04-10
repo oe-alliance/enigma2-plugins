@@ -7,8 +7,8 @@
 #  Coded by Dr.Best (c) 2010
 #  Support: www.dreambox-tools.info
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -17,7 +17,7 @@
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 
@@ -197,7 +197,7 @@ class SHOUTcastWidget(Screen):
 			sz_h - 105, # position cover
 			sz_w - 125, # position logo
 			)
-	
+
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
@@ -227,7 +227,7 @@ class SHOUTcastWidget(Screen):
 			"green": self.green_pressed,
 			"yellow": self.yellow_pressed,
 			"blue": self.blue_pressed,
-			"nextBouquet": self.nextPipService, 
+			"nextBouquet": self.nextPipService,
 			"prevBouquet": self.prevPipService
 		}, -1)
 		self.stationList = []
@@ -576,7 +576,7 @@ class SHOUTcastWidget(Screen):
 				self["statustext"].setText(_("%s\nPress green-button to try again...") % str(error.getErrorMessage()))
 			except:
 				pass
-		
+
 	def fillGenreList(self, xmlstring):
 		genreList = []
 		# print "[SHOUTcast] fillGenreList\n%s" % xmlstring
@@ -677,7 +677,7 @@ class SHOUTcastWidget(Screen):
 		if config.plugins.shoutcast.showcover.value:
 			self["cover"].doHide()
 		self.session.nav.stopService()
-		
+
 	def callbackPLS(self, result):
 		self["headertext"].setText(self.headerTextString)
 		found = False
@@ -687,7 +687,7 @@ class SHOUTcastWidget(Screen):
 				line = string.split(lines, "File1=")
 				found = True
 				self.playServiceStream(line[-1].rstrip().strip())
-				
+
 		if found:
 			self["statustext"].setText("")
 			self["list"].show()
@@ -744,8 +744,8 @@ class SHOUTcastWidget(Screen):
 				except:
 					bitrate = 0
 				if bitrate >= config_bitrate:
-					stationList.append(SHOUTcastStation(name=childs.get("name"), 
-									mt=childs.get("mt"), id=childs.get("id"), br=childs.get("br"), 
+					stationList.append(SHOUTcastStation(name=childs.get("name"),
+									mt=childs.get("mt"), id=childs.get("id"), br=childs.get("br"),
 									genre=childs.get("genre"), ct=childs.get("ct"), lc=childs.get("lc"), ml=childs.get("ml"), nsc=childs.get("nsc"),
 									cst=childs.get("cst")))
 		return stationList
@@ -787,7 +787,7 @@ class SHOUTcastWidget(Screen):
 	def addStationToFavorite(self):
 		sel = self.getSelectedItem()
 		if sel is not None:
-			self.addFavorite(name=sel.name, text=self.SCY + "/sbin/tunein-station.pls?id=%s" % (sel.id), favoritetype="pls", audio=sel.mt, bitrate=sel.br)			
+			self.addFavorite(name=sel.name, text=self.SCY + "/sbin/tunein-station.pls?id=%s" % (sel.id), favoritetype="pls", audio=sel.mt, bitrate=sel.br)
 
 	def addCurrentStreamToFavorite(self):
 		self.addFavorite(name=self.currentStreamingStation, text=self.currentStreamingURL, favoritetype="url")
@@ -886,7 +886,7 @@ class SHOUTcastWidget(Screen):
 			sendUrlCommand(self.currentGoogle, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
 		else:
 			self.currentGoogle = None
-	
+
 	def __onClose(self):
 		global coverfiles
 		for f in coverfiles:
@@ -1008,7 +1008,7 @@ class SHOUTcastWidget(Screen):
 				self.summaries.setText(title)
 			else:
 				print "[SHOUTcast] Ignoring useless updated info provided by streamengine!"
-			
+
 	def playServiceStream(self, url):
 		self.currPlay = None
 		self.session.nav.stopService()
@@ -1168,13 +1168,13 @@ class SHOUTcastList(GUIComponent, object):
 	def selectionChanged(self):
 		for x in self.onSelectionChanged:
 			x()
-	
+
 	def getCurrent(self):
 		cur = self.l.getCurrentSelection()
 		return cur and cur[0]
-	
+
 	GUI_WIDGET = eListbox
-	
+
 	def postWidgetCreate(self, instance):
 		instance.setContent(self.l)
 		instance.setWrapAround(True)
@@ -1215,7 +1215,7 @@ class SHOUTcastLCDScreen(Screen):
 	<screen position="0,0" size="132,64" title="SHOUTcast">
 		<widget name="text1" position="4,0" size="132,14" font="Regular;12" halign="center" valign="center"/>
 		<widget name="text2" position="4,14" size="132,49" font="Regular;10" halign="center" valign="center"/>
-	</screen>""" 
+	</screen>"""
 
 	def __init__(self, session, parent):
 		Screen.__init__(self, session)
@@ -1237,7 +1237,7 @@ class SHOUTcastSetup(Screen, ConfigListScreen):
 			<widget render="Label" source="key_red" position="10,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_green" position="150,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="config" position="10,50" size="580,400" scrollbarMode="showOnDemand" />
-		</screen>""" 
+		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -1259,7 +1259,7 @@ class SHOUTcastSetup(Screen, ConfigListScreen):
 				]
 		self.dirname = getConfigListEntry(_("Recording location:"), config.plugins.shoutcast.dirname)
 		self.list.append(self.dirname)
-		
+
 		ConfigListScreen.__init__(self, self.list, session)
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -1302,7 +1302,7 @@ class SHOUTcastStreamripperRecordingPath(Screen):
 			<widget render="Label" source="key_red" position="0,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_green" position="140,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
-		
+
 	def __init__(self, session, initDir):
 		Screen.__init__(self, session)
 		self.setTitle(_("Select record path for streamripper"))
@@ -1320,7 +1320,7 @@ class SHOUTcastStreamripperRecordingPath(Screen):
 			"ok": self.ok,
 			"green": self.green,
 			"red": self.cancel
-			
+
 		}, -1)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))

@@ -5,7 +5,7 @@ from twisted.web import server, resource, http
 
 
 class Script(resource.Resource):
-	
+
 	def render(self, request):
 		self.args = request.args
 		self.command = self.getArg("command")

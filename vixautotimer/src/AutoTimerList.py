@@ -16,7 +16,7 @@ try:
 	from Tools.Directories import SCOPE_ACTIVE_SKIN
 except:
 	from Tools.Directories import SCOPE_CURRENT_SKIN
-	
+
 from skin import parseColor, parseFont
 
 
@@ -49,7 +49,7 @@ class AutoTimerList(MenuList):
 		self.colorDisabled = 12368828
 
 	def applySkin(self, desktop, parent):
-		attribs = [] 
+		attribs = []
 		if self.skinAttributes is not None:
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "font":
@@ -152,4 +152,3 @@ class AutoTimerList(MenuList):
 				self.instance.moveSelectionTo(idx)
 				break
 			idx += 1
-

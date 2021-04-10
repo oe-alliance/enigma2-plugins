@@ -7,8 +7,8 @@
 #  plugin.png by Sakartvelo with images from BazaarDesigns.com
 #  Support: www.dreambox-tools.info
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -17,7 +17,7 @@
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 
@@ -57,16 +57,16 @@ birthdaytimer = BirthdayTimer()
 
 def settings(session, **kwargs):
 	session.open(BirthdayReminderSettings, birthdaytimer)
-	
+
 
 def autostart(reason, **kwargs):
 	if reason == 1:
 		birthdaytimer.stop()
-		
+
 
 def main(session, **kwargs):
 	session.open(BirthdayReminder, birthdaytimer)
-	
+
 
 def Plugins(**kwargs):
 	list = []
@@ -75,4 +75,3 @@ def Plugins(**kwargs):
 	if config.plugins.birthdayreminder.showInExtensions.value:
             list.append(PluginDescriptor(name="Birthday Reminder", description=_("Helps to remind of birthdays"), where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_EVENTINFO], fnc=main))
 	return list
-	

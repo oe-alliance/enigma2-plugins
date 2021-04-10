@@ -138,7 +138,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
             else:
                 #log( __name__ ," Login to Itasa failed. Check your username/password at the addon configuration.")
                 screen_session.open(MessageBox, _(" Login to Itasa failed. Check your username/password at the configuration menu."), MessageBox.TYPE_INFO, timeout=5)
-                               
+
                 msg = "Login to Itasa failed. Check your username/password at the addon configuration."
         else:
             msg = "Won't work, Itasa is only for Italian subtitles."
@@ -153,13 +153,13 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     #password = __settings__.getSetting( "ITpass" )
     username = config.plugins.subsdownloader.ItasaUser.value
     password = config.plugins.subsdownloader.ItasaPassword.value
-    
+
     if login(username, password):
         log(__name__, " Login successful")
         id = subtitles_list[pos]["id"]
-        link = subtitles_list[pos]["link"] 
-        
-        content = geturl(main_url + link)        
+        link = subtitles_list[pos]["link"]
+
+        content = geturl(main_url + link)
         match = re.search(subtitle_download_pattern % id, content, re.IGNORECASE | re.DOTALL)
 
         if match:
@@ -179,7 +179,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
                     subs_file = local_tmp_file
                     packed = False
                 log(__name__, " Saving subtitles to '%s'" % (local_tmp_file))
-                                
+
                 try:
                     local_file_handle = open(local_tmp_file, "wb")
                     local_file_handle.write(content)
@@ -192,7 +192,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
                         subs_file = zipped_file.extract_zipped_file()
                         os.remove(local_tmp_file)
                     if header == 'Rar!':
-                        if os.path.exists("/usr/bin/unrar"): 
+                        if os.path.exists("/usr/bin/unrar"):
                             files_before_unrar = list_directory_files(tmp_sub_dir)
                             os.system('unrar -p- -y x %s %s' % (local_tmp_file, tmp_sub_dir))
                             files_after_unrar = list_directory_files(tmp_sub_dir)
@@ -204,7 +204,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
                             __cmdList = []
                             __cmdList.append((IpkgComponent.CMD_INSTALL, {"package": 'unrar'}))
                             screen_session.openWithCallback(__restartMessage__(screen_session, callback=None), Ipkg, cmdList=__cmdList)
-                    
+
                 return False, language, subs_file #standard output
     #log( __name__ ," Login to Itasa failed. Check your username/password at the addon configuration.")
     screen_session.open(MessageBox, _(" Login to Itasa failed. Check your username/password at the configuration menu."), MessageBox.TYPE_INFO, timeout=5)

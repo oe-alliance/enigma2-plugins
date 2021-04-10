@@ -29,4 +29,3 @@ class ParentControl(Source):
 	list = property(command)
 	lut = {"ServiceReference": 0			, "ServiceName": 1
 			}
-

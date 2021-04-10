@@ -663,6 +663,3 @@ def Plugins(path, **kwargs):
     if config.plugins.GoogleMaps.add_mainmenu_entry.value:
         list.append(desc_mainmenu)
     return list
-
-
-

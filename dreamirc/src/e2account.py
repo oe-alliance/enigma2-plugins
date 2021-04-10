@@ -1,7 +1,7 @@
 # -*- Python -*-
 #
 # Copyright (c) 2001-2004 Twisted Matrix Laboratories.
-# See LICENSE for details. 
+# See LICENSE for details.
 
 #
 import string
@@ -74,4 +74,3 @@ class AccountManager:
 
 	def quit(self):
 		pass
-

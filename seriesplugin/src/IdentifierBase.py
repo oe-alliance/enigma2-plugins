@@ -36,21 +36,21 @@ class IdentifierBase2(ModuleBase, Cacher):
 	def __init__(self):
 		ModuleBase.__init__(self)
 		Cacher.__init__(self)
-		
+
 		self.max_time_drift = int(config.plugins.seriesplugin.max_time_drift.value) * 60
-		
+
 		self.name = ""
 		self.begin = None
 		self.end = None
 		self.channel = ""
 		self.ids = []
-		
+
 		self.knownids = []
-		
+
 		self.returnvalue = None
-		
+
 		self.search_depth = 0
-		
+
 		self.now = time()
 		today = datetime.today()
 		self.actual_month = today.month
@@ -59,10 +59,10 @@ class IdentifierBase2(ModuleBase, Cacher):
 	################################################
 	# Helper function
 	def getAlternativeSeries(self, name):
-		
+
 		self.search_depth += 1
 		if(self.search_depth < config.plugins.seriesplugin.search_depths.value):
-			
+
 			if self.search_depth == 1:
 				if name.find("-") != -1:
 					alt = " ".join(name.split("-")[:-1]).strip()
@@ -70,7 +70,7 @@ class IdentifierBase2(ModuleBase, Cacher):
 					alt = " ".join(name.split(" ")[:-1])
 			else:
 				alt = " ".join(name.split(" ")[:-1])
-			
+
 			# Avoid searchs with: The, Der, Die, Das...
 			if len(alt) > 3:
 				return alt
@@ -82,10 +82,10 @@ class IdentifierBase2(ModuleBase, Cacher):
 	def filterKnownIds(self, newids):
 		# Filter already checked series
 		filteredids = [elem for elem in newids if elem not in self.knownids]
-		
+
 		# Add new ids to knownid list
 		self.knownids.extend(filteredids)
-		
+
 		return filteredids
 
 	################################################

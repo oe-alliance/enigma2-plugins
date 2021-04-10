@@ -71,7 +71,7 @@ class __YouTubeUserConfig():
 			newUserConfigSubsection.name.default = ""
 		newUserConfigSubsection.email = ConfigText("", False)
 		newUserConfigSubsection.password = ConfigText("", False)
-		
+
 		newUser = YouTubeUser(newUserConfigSubsection)
 
 		self.userlist.append(newUser)

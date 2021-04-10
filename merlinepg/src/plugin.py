@@ -1037,9 +1037,3 @@ if epgSpresent:
 
 		def timerAdd(self):
 			pass
-
-
-
-
-
-

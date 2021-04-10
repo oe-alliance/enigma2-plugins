@@ -489,7 +489,7 @@ def overwriteFunctions():
 	baseMethods.ChannelSelection_channelSelected = ChannelSelection.channelSelected
 	ChannelSelection.channelSelected = ChannelSelection_channelSelected
 
-	ChannelSelection.togglePipzap = ChannelSelection_togglePipzap 
+	ChannelSelection.togglePipzap = ChannelSelection_togglePipzap
 
 	baseMethods.ChannelSelection_zap = ChannelSelection.zap
 	ChannelSelection.zap = ChannelSelection_zap

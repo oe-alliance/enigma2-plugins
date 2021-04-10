@@ -187,4 +187,3 @@ class SnarlNetworkProtocolAbstraction:
 		if self.pending == 0:
 			reactor.callLater(1, defer.callback, True)
 		return defer
-

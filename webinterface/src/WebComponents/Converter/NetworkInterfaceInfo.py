@@ -39,4 +39,3 @@ class NetworkInfo(Converter):
 			return iface.ipv6
 
 	text = property(getText)
-

@@ -77,4 +77,3 @@ class RootFolder:
             if file.endswith(self.extension):
                 list.append((file.split('.')[0], path + file))
         return list
-

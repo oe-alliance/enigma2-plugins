@@ -16,7 +16,7 @@ def mbasename(fname):
 	win = l[len(l) - 1]
 	l2 = win.split('\\')
 	return l2[len(l2) - 1]
-	
+
 
 class UploadPkgResource(resource.Resource):
 	res = """
@@ -24,7 +24,7 @@ class UploadPkgResource(resource.Resource):
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 			"http://www.w3.org/TR/html4/loose.dtd">
 	<html>
-					
+
 	<head>
 		<link rel="shortcut icon" type="/web-data/image/x-icon" href="/web-data/img/favicon.ico">
 		<meta content="text/html; charset=UTF-8" http-equiv="content-type">
@@ -41,7 +41,7 @@ class UploadPkgResource(resource.Resource):
 	</body>
 	</html>
 	"""
-			
+
 	def render_POST(self, req):
 		data = req.args['file'][0]
 		print "[filename req.args]", req.args['filename'][0]
@@ -49,19 +49,19 @@ class UploadPkgResource(resource.Resource):
 		print "[filename]", filename
 		if not filename.endswith(".ipk"):
 			return self.res % (_("wrong filetype!"), _("Close"), _("Add"))
-		
+
 		if not data:
 			req.setResponseCode(http.OK)
 			return self.res % (_("filesize was 0, not uploaded"),
 					_("Close"),
 					 _("Add")
 					)
-		
+
 		fd, fn = mkstemp(dir="/tmp/")
 		cnt = os_write(fd, data)
 		os_close(fd)
 		os_chmod(fn, 0755)
-		
+
 		if cnt <= 0: # well, actually we should check against len(data) but lets assume we fail big time or not at all
 			try:
 				os_unlink(fn)
@@ -69,7 +69,7 @@ class UploadPkgResource(resource.Resource):
 				pass
 			req.setResponseCode(http.OK)
 			return self.res % (_("error writing to disk, not uploaded"), _("Close"), _("Add"))
-		
+
 		else:
 			file = "/tmp/" + filename
 			os_rename(fn, (file))
@@ -95,7 +95,7 @@ class UploadPkgResource(resource.Resource):
 				<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 						"http://www.w3.org/TR/html4/loose.dtd">
 				<html>
-					
+
 				<head>
 				<link rel="shortcut icon" type="/web-data/image/x-icon" href="/web-data/img/favicon.ico">
 				<meta content="text/html; charset=UTF-8" http-equiv="content-type">

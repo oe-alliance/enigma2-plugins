@@ -88,7 +88,7 @@ class MPHelp(Screen):
 		self["title"].text = _(title).encode('utf-8', 'ignore')
 		self["detailtext"].setText(_(text).encode('utf-8', 'ignore'))
 		self.curPage = newPage
-	
+
 	def pageUp(self):
 		self["detailtext"].pageUp()
 

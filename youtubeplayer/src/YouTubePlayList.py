@@ -56,10 +56,10 @@ class YouTubePlaylistScreen(Screen):
 
 		self["red"] = Label(_("Delete Playlist"))
 		self["green"] = Label(_("Add new Playlist"))
-		
+
 		self.list = []
 		self["list"] = YouTubePlaylistList(self.list)
-		
+
 		self["actions"] = ActionMap(["YouTubePlaylistScreenActions"],
 		{
 			"ok"		: self.choosePlaylist,

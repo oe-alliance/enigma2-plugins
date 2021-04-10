@@ -111,7 +111,7 @@ config.plugins.subsdownloader.Napisy24MovieNameMethod = ConfigYesNo(default=True
 
 class SubsDownloaderApplication(Screen):
 	def __init__(self, session, args=0):
-		
+
 		global Skin_width
 		global Skin_height
 		global Screen_width
@@ -119,11 +119,11 @@ class SubsDownloaderApplication(Screen):
 		global is_libmediainfo
 		#global Subtitle_Downloader_temp_dir
 		#Subtitle_Downloader_temp_dir = '/tmp/SubsDownloader_cache/'
-		
-		Screen_width = getDesktop(0).size().width() #1280		
-		Screen_height = getDesktop(0).size().height() #720		
+
+		Screen_width = getDesktop(0).size().width() #1280
+		Screen_height = getDesktop(0).size().height() #720
 		Skin_width = int(0.9 * Screen_width) # 1152
-		Skin_height = int(0.9 * Screen_height) #648		
+		Skin_height = int(0.9 * Screen_height) #648
 		widget_name_height = int(0.3 * Skin_height)
 		widget_name_width = int(0.74827 * Skin_width)
 		widget_name_x_position = int(0.0087 * Skin_width)
@@ -133,7 +133,7 @@ class SubsDownloaderApplication(Screen):
 		widget_source_x_size = int(0.191 * Skin_width)
 		widget_source_y_size = int(26)
 		font_size = int(int(0.0174 * Skin_width))
-		
+
 		self.skin = "<screen position=\"center," + str(int(0.078 * Skin_height)) + "\" size=\"" + str(Skin_width) + "," + str(Skin_height) + "\" title= \"Subtitle downloader\" > \
 	        <widget name=\"fileList\" position=\"" + str(widget_name_x_position) + "," + str(1 * widget_name_y_position) + "\" size=\"" + str(widget_name_width) + "," + str(widget_name_height) + "\" scrollbarMode=\"showOnDemand\" /> \
 	        <widget name=\"subsList\" position=\"" + str(widget_name_x_position) + "," + str(2 * widget_name_y_position + 1 * widget_name_height) + "\" size=\"" + str(widget_name_width) + "," + str(widget_name_height) + "\" scrollbarMode=\"showOnDemand\" /> \
@@ -156,7 +156,7 @@ class SubsDownloaderApplication(Screen):
 	        <ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_blue.png\" position=\"" + str(widget_source_x_position) + "," + str(widget_source_y_position + widget_source_y_size * 7) + "\" size=\"36," + str(widget_source_y_size) + "\" zPosition=\"1\" alphatest=\"on\" /> \
 		<widget source=\"key_blue\" render=\"Label\" position=\"" + str(widget_source_x_position + 43) + "," + str(widget_source_y_position + widget_source_y_size * 7) + "\" zPosition=\"1\" size=\"" + str(widget_source_x_size) + "," + str(widget_source_y_size) + "\" font=\"Regular;" + str(font_size) + "\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
 	        </screen>"
-		
+
 		os.system('mkdir /tmp/SubsDownloader_cache')
 		self.subsListDownloaded = 0
 		self.localConvertion = False
@@ -181,12 +181,12 @@ class SubsDownloaderApplication(Screen):
 		self["key_0"] = StaticText("Show/Hide")
 		self["key_blue"] = StaticText("Enable FileManager")
 		self.mediaPatern = self.make_media_patern()
-				
+
 		try:
 			fileListPath = config.plugins.subsdownloader.path.value
 		except:
 			fileListPath = "/"
-				
+
 		self.session = session
 		Screen.__init__(self, session)
 		self.altservice = self.session.nav.getCurrentlyPlayingServiceReference()
@@ -199,13 +199,13 @@ class SubsDownloaderApplication(Screen):
 		self["subsList"] = MenuList(list)
 		self.fileManagerEnabled = False
 		self.showFilemanagerScreen_command = None
-		self.clearSubList()		
+		self.clearSubList()
 		self.set_listFile_enabled()
-		
+
 		self.isVisible = True
 		#self.fileManager_orders = []
-		
-		self["myActionMap_showned"] = ActionMap(["ChannelSelectBaseActions", "WizardActions", "DirectionActions", "MenuActions", "NumberActions", "ColorActions", "SubsDownloaderApplication_actions"],                            
+
+		self["myActionMap_showned"] = ActionMap(["ChannelSelectBaseActions", "WizardActions", "DirectionActions", "MenuActions", "NumberActions", "ColorActions", "SubsDownloaderApplication_actions"],
 	        {
 	                "ok": self.ok,
 	                "back": self.closeApplication,
@@ -218,40 +218,40 @@ class SubsDownloaderApplication(Screen):
 	                "down": self.goDown,
 	                "left": self.goLeft,
 	                "right": self.goRight,
-	                "info": self.showFilemanagerScreen_file_info_on_screen_title, #self.FM_file_Info, 
+	                "info": self.showFilemanagerScreen_file_info_on_screen_title, #self.FM_file_Info,
 	                "localConv": self.localConvertionSublist,
 	                "0": self.skinVisibility,
 	                #"red": self.goRed,
 	                #"green": self.goGreen,
 	                #"yellow": self.goYellow,
-	                "blue": self.showFilemanagerScreen_without_callback,		        
+	                "blue": self.showFilemanagerScreen_without_callback,
 	        }, -1)
-		
-		self["myActionMap_hidded"] = ActionMap(["ChannelSelectBaseActions", "WizardActions", "DirectionActions", "MenuActions", "NumberActions", "ColorActions", "SubsDownloaderApplication_actions"],                            
+
+		self["myActionMap_hidded"] = ActionMap(["ChannelSelectBaseActions", "WizardActions", "DirectionActions", "MenuActions", "NumberActions", "ColorActions", "SubsDownloaderApplication_actions"],
 		{
 		        "0": self.skinVisibility,
-		}, -1)		
+		}, -1)
 		self["myActionMap_showned"].setEnabled(True)
 		self["myActionMap_hidded"].setEnabled(False)
-		
+
 		#PICTURE INITIALIZATION
 		self.EXscale = (AVSwitch().getFramebufferScale())
-		#1st picture 
+		#1st picture
 		self.ServerPicture = ePicLoad()
 		self["serverPicture"] = Pixmap()
 		self.ServerPicture.PictureData.get().append(self.DecodeServerPictureAction)
 		self.serverPicturePath = "/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/none1.jpg"
 		self.onLayoutFinish.append(self.Show_Server_Picture)
-		
+
 		self.display_Server_Picture()
-	
+
 		#2nd picture
 		self.CommertialPicture = ePicLoad()
 		self["commertialPicture"] = Pixmap()
 		self.CommertialPicture.PictureData.get().append(self.DecodeCommertialPictureAction)
 		self.CommertialPicturePath = "/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/none1.jpg"
 		self.onLayoutFinish.append(self.Show_Commertial_Picture)
-		
+
 		self.download_commertial_pictures = CommertialBannerDownload()
 		self.download_commertial_pictures.start()
 		self.__commertial_pictures_display_counter = 0
@@ -262,15 +262,15 @@ class SubsDownloaderApplication(Screen):
 		"""Oczywiscie trzeba stworzyc widget i pokopiowac odpowiednie funkcje inicjalizujace"""
 		#PICTURE INITIALIZATION
 		self.set_title()
-		
-	def CommertialBannerDisplayTimerAction(self):		
+
+	def CommertialBannerDisplayTimerAction(self):
 		if self.download_commertial_pictures.is_alive() == False and self.__commertial_pictures == []:
 			self.__commertial_pictures = self.Find_Commertial_Picure()
 			self.__commertial_pictures.sort()
-			self.CommertialBannerTimer.start(10, False)			
+			self.CommertialBannerTimer.start(10, False)
 		else:
 			self.CommertialBannerTimer.start(120, False)
-		if self.__commertial_pictures != []:	
+		if self.__commertial_pictures != []:
 			if self.__commertial_pictures_display_counter > len(self.__commertial_pictures) - 1:
 				self.__commertial_pictures_display_counter = 0
 			self.display_Commmertial_Picture(self.__commertial_pictures[self.__commertial_pictures_display_counter])
@@ -279,29 +279,29 @@ class SubsDownloaderApplication(Screen):
 				self.CommertialBannerTimer.stop()
 			else:
 				self.CommertialBannerTimer.start(7500, False)
-		
+
 	def skinVisibility(self):
 		if self.isVisible == True:
 			self.isVisible = False
 			self["myActionMap_showned"].setEnabled(False)
-			self["myActionMap_hidded"].setEnabled(True)			
+			self["myActionMap_hidded"].setEnabled(True)
 			self.hide()
 		else:
 			self.isVisible = True
 			self["myActionMap_showned"].setEnabled(True)
 			self["myActionMap_hidded"].setEnabled(False)
 			self.show()
-		             
+
 	def set_title(self):
 		if is_libmediainfo == False:
 			self.setTitle("Subtitle downloader (without libmediainfo)")
 		elif is_libmediainfo == True:
 			self.setTitle("Subtitle downloader (with libmediainfo)")
-			
+
 	def showFilemanagerScreen_file_info_on_screen_title(self):
 		self.showFilemanagerScreen(("file_info_on_screen_title"))
-		
-	def showFilemanagerScreen_without_callback(self):		
+
+	def showFilemanagerScreen_without_callback(self):
 		if type(self.showFilemanagerScreen_command) == type(None):
 			self.showFilemanagerScreen(("None"))
 		else:
@@ -314,7 +314,7 @@ class SubsDownloaderApplication(Screen):
 					order = 'rm -f \"' + self.showFilemanagerScreen_command[1] + '\"'
 				elif os.path.isdir(self.showFilemanagerScreen_command[1]):
 					order = 'rm -r \"' + self.showFilemanagerScreen_command[1] + '\"'
-			elif self.showFilemanagerScreen_command[0] == "copy":			
+			elif self.showFilemanagerScreen_command[0] == "copy":
 				dest = self["subsList"].getCurrent()[1]
 				if self.showFilemanagerScreen_command[1][len(self.showFilemanagerScreen_command[1]) - 1] == '/':
 					order = 'cp -af \"' + self.showFilemanagerScreen_command[1] + '\" \"' + dest + '\"'
@@ -332,10 +332,10 @@ class SubsDownloaderApplication(Screen):
 					order = 'mv \"' + self.showFilemanagerScreen_command[1] + '\" \"' + dest + '\"'
 				else:
 					order = 'mv \"' + self.showFilemanagerScreen_command[1] + '\" \"' + dest + '\"'
-				
+
 				#order = "ls"
 				#self.session.open(MessageBox,_("%s \n %s \n %s!" % (self.showFilemanagerScreen_command[0],self.showFilemanagerScreen_command[1],self.showFilemanagerScreen_command[2])), MessageBox.TYPE_ERROR)
-				
+
 			if order != None:
 				try:
 					os.system(order)
@@ -343,10 +343,10 @@ class SubsDownloaderApplication(Screen):
 					self.session.open(MessageBox, _("%s \nFAILED!" % order), MessageBox.TYPE_ERROR)
 			self.set_FileManager_disabled()
 			self["fileList"].refresh()
-	
+
 	def showFilemanagerScreen(self, callback):
-		self.showFilemanagerScreen_command = callback	
-		
+		self.showFilemanagerScreen_command = callback
+
 		def FM_file_Info(self):
 			if self["fileList"].canDescent():
 				if self["fileList"].getSelectionIndex() != 0:
@@ -356,15 +356,15 @@ class SubsDownloaderApplication(Screen):
 					self.setTitle(_(dir_infos))
 				else:
 					dei = self.session.open(MessageBox, _("Dreambox: " + self.MyBox + "\n\n"), MessageBox.TYPE_INFO)
-					dei.setTitle(_("Device"))				
-									
+					dei.setTitle(_("Device"))
+
 			else:
 				curSelFile = self["fileList"].getCurrentDirectory() + self["fileList"].getFilename()
 				file_stats = os_stat(curSelFile)
 				file_infos = self.return_media_kind(self.return_extention(curSelFile)).upper() + ":    "
 				file_infos = file_infos + "size " + str(FM_Humanizer(file_stats.st_size))
 				self.setTitle(_(file_infos))
-	
+
 		def FM_Humanizer(size):
 			if (size < 1024):
 				humansize = str(size) + " B"
@@ -373,7 +373,7 @@ class SubsDownloaderApplication(Screen):
 			else:
 				humansize = str(size / 1048576) + " MB"
 			return humansize
-		
+
 		def VirtualKeyboart_dir_rename_Callback(callback):
 			if callback == None or callback == "":
 				self.showFilemanagerScreen_command = ("Do_nothing", self.showFilemanagerScreen_command[1])
@@ -381,7 +381,7 @@ class SubsDownloaderApplication(Screen):
 			else:
 				self.showFilemanagerScreen_command = ("rename", self.showFilemanagerScreen_command[1], "/".join(self.showFilemanagerScreen_command[1].split("/")[0:-2]) + "/" + callback + "/")
 				self.showFilemanagerScreen_without_callback()
-		
+
 		def VirtualKeyboart_file_rename_Callback(callback):
 			if callback == None or callback == "":
 				self.showFilemanagerScreen_command = ("Do_nothing", self.showFilemanagerScreen_command[1])
@@ -389,10 +389,10 @@ class SubsDownloaderApplication(Screen):
 			else:
 				self.showFilemanagerScreen_command = ("rename", self.showFilemanagerScreen_command[1], "/".join(self.showFilemanagerScreen_command[1].split("/")[0:-1]) + "/" + callback)
 				self.showFilemanagerScreen_without_callback()
-			
+
 		def get_FileManagerCommands_callback(callback):
 			self.showFilemanagerScreen_command = callback
-			
+
 			if self.fileManagerEnabled == True:
 				if self.showFilemanagerScreen_command[0] == "copy" or self.showFilemanagerScreen_command[0] == "move":
 					pass #do nothing execute command during blue button press
@@ -406,7 +406,7 @@ class SubsDownloaderApplication(Screen):
 				else:
 					#for Do_nothing and delete
 					self.showFilemanagerScreen_without_callback()
-				
+
 		if self.fileManagerEnabled == False and callback != "file_info_on_screen_title":
 			if self["fileList"].canDescent():
 				current_dir = self["fileList"].getCurrentDirectory()
@@ -415,7 +415,7 @@ class SubsDownloaderApplication(Screen):
 				current_dir = self["fileList"].getCurrentDirectory()
 				current_selection = self["fileList"].getCurrentDirectory() + self["fileList"].getSelection()[0]# ('/hdd/Net_HDD/Filmy/Seriale/Boardwalk Empire Season 2/', True)
 
-			if os.path.exists(str(current_selection)) and "/".join(str(current_dir).split("/")[:-2]) + "/" != current_selection and type(current_dir) != type(None):	
+			if os.path.exists(str(current_selection)) and "/".join(str(current_dir).split("/")[:-2]) + "/" != current_selection and type(current_dir) != type(None):
 				self.set_FileManager_enabled()
 				self.setServerAvailableSubtitles_for_dirList(current_dir)
 				self.session.openWithCallback(get_FileManagerCommands_callback, FileManagerCommands, current_selection)
@@ -423,28 +423,28 @@ class SubsDownloaderApplication(Screen):
 		if self.showFilemanagerScreen_command == "file_info_on_screen_title":
 			FM_file_Info(self)
 			self.set_listFile_enabled()
-			
 
-# !!!!!!!!!!!! PICTURE FUNCTIONS !!!!!!!!!!!!!!	
+
+# !!!!!!!!!!!! PICTURE FUNCTIONS !!!!!!!!!!!!!!
 
 
 	def display_Server_Picture(self):
-		"""Function display suittalbe picture in ["serverPicture"] (based on subtitle server)""" 
+		"""Function display suittalbe picture in ["serverPicture"] (based on subtitle server)"""
 		self.serverPicturePath = "/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/%s.jpg" % config.plugins.subsdownloader.subtitleserver.value
 		self.ServerPicture.startDecode(self.serverPicturePath)
-		
+
 	def Show_Server_Picture(self):
 		"""This function is required to init witget ["serverPicture"] and picture class [self.ServerPicture]"""
 		self.ServerPicture.setPara([self["serverPicture"].instance.size().width(), self["serverPicture"].instance.size().height(), self.EXscale[0], self.EXscale[1], 0, 1, "#002C2C39"])
 		self.ServerPicture.startDecode(self.serverPicturePath)
-		
+
 	def DecodeServerPictureAction(self, pictureInfo=""):
 		"""This function is required to init witget ["serverPicture"] and picture class [self.ServerPicture]"""
 		ptr = self.ServerPicture.getData()
 		self["serverPicture"].instance.setPixmap(ptr)
 		#text = picInfo.split('\n',1)    #WYSWIETLA INFORMACJE NA TEMAT OBRAZKA
 		#self["label"].setText(text[1])  #WYSWIETLA INFORMACJE NA TEMAT OBRAZKA
-	
+
 	def Find_Commertial_Picure(self):
 		commertial_pictures = []
 		for x in os.listdir(Subtitle_Downloader_temp_dir):
@@ -454,43 +454,43 @@ class SubsDownloaderApplication(Screen):
 			return ["/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/none1.jpg"]
 		else:
 			return commertial_pictures
-				
+
 	def Show_Commertial_Picture(self):
 		"""This function is required to init witget ["commertialPicture"] and picture class self.CommertialPicture"""
 		self.CommertialPicture.setPara([self["commertialPicture"].instance.size().width(), self["commertialPicture"].instance.size().height(), self.EXscale[0], self.EXscale[1], 0, 1, "#002C2C39"])
 		self.CommertialPicture.startDecode(self.CommertialPicturePath)
-		
+
 	def DecodeCommertialPictureAction(self, pictureInfo=""):
 		"""This function is required to init witget ["serverPicture"] and picture class [self.ServerPicture]"""
 		ptr = self.CommertialPicture.getData()
 		self["commertialPicture"].instance.setPixmap(ptr)
 		#text = picInfo.split('\n',1)    #WYSWIETLA INFORMACJE NA TEMAT OBRAZKA
-		#self["label"].setText(text[1])  #WYSWIETLA INFORMACJE NA TEMAT OBRAZKA		
-		
+		#self["label"].setText(text[1])  #WYSWIETLA INFORMACJE NA TEMAT OBRAZKA
+
 	def display_Commmertial_Picture(self, picture_path):
 		self.CommertialPicturePath = picture_path
 		self.CommertialPicture.startDecode(self.CommertialPicturePath)
-		
+
 	def executeDMnapi(self, media_file_path):
 		try:
 			#self.session.openWithCallback(self.__movie_Callback, DMnapi, sel[B_FULL]) #oryginal Gemini File Browser execution line
 			self.session.openWithCallback(self.__executeDMnapi_callback, DMnapi, media_file_path)
-			
+
 		except:
 			self.session.open(MessageBox, _("There is problem with DMnapi execution.\nCheck if Your SubsDownloader supports DMnapi %s version.", dmnapi_version), MessageBox.TYPE_INFO, timeout=10)
-	
+
 	def __executeDMnapi_callback(self, callback=None):
 		self["fileList"].refresh()
 
-# !!!!!!!!!!!! PICTURE FUNCTIONS !!!!!!!!!!!!!!	
-		
+# !!!!!!!!!!!! PICTURE FUNCTIONS !!!!!!!!!!!!!!
+
 	def clearSubList(self):
 		"""Clear subList and prevent to download unwanted subtitle"""
 		self.serverAvailableSubtitles = []
 		self["subsList"].setList(self.serverAvailableSubtitles)
 		self.subsListDownloaded = 0
 		#self.set_listFile_enabled()
-		
+
 	def setServerAvailableSubtitles_for_PERISCOPE(self, serverList):
 		"""Function preper (appends) serverAvailableSubtitles which is seted by
 		comend self["subsList"].setList(self.serverAvailableSubtitles)"""
@@ -502,7 +502,7 @@ class SubsDownloaderApplication(Screen):
 		self.subsListDownloaded = 1
 		self["subsList"].setList(self.serverAvailableSubtitles)
 		self.set_listSubs_enabled()
-			
+
 	def setServerAvailableSubtitles_for_XBMC_SUBTITLES(self, serverList):
 		"""Function preper (appends) serverAvailableSubtitles which is seted by
 		comend self["subsList"].setList(self.serverAvailableSubtitles)"""
@@ -511,17 +511,17 @@ class SubsDownloaderApplication(Screen):
 		if serverList[0].has_key('no_files'):
 			for x in serverList:
 				self.serverAvailableSubtitles.append(("[" + str(x['language_name']) + "]_" + str(x['no_files']) + "cd__" + str(x['filename']), position))
-				position = position + 1			
-		else:			
+				position = position + 1
+		else:
 			for x in serverList:
 				self.serverAvailableSubtitles.append(("[" + str(x['language_name']) + "]_" + str(x['filename']), position))
 				position = position + 1
 		self.subsListDownloaded = 1
 		self["subsList"].setList(self.serverAvailableSubtitles)
 		self.set_listSubs_enabled()
-		
-	def setServerAvailableSubtitles_for_dirList(self, current_dir):		
-		if os.path.exists(str(current_dir)):			
+
+	def setServerAvailableSubtitles_for_dirList(self, current_dir):
+		if os.path.exists(str(current_dir)):
 			a = os.listdir(current_dir)
 			a.sort()
 			self.serverAvailableSubtitles = []
@@ -529,13 +529,13 @@ class SubsDownloaderApplication(Screen):
 			for x in a:
 				if os.path.isdir(os.path.join(current_dir, x)):
 					self.serverAvailableSubtitles.append(("/" + x + "/", os.path.join(current_dir, x) + "/"))
-			self.subsListDownloaded = 1		
+			self.subsListDownloaded = 1
 			self["subsList"].setList(self.serverAvailableSubtitles)
 			self["subsList"].moveToIndex(0)
 			self.set_listSubs_enabled()
-	
+
 	def setServerAvailableSubtitles_for_Napisy24(self, serverList):
-		"""Function preper (appends) serverAvailableSubtitles which is seted by 
+		"""Function preper (appends) serverAvailableSubtitles which is seted by
 		comend self["subsList"].setList(self.serverAvailableSubtitles)"""
 		self.serverAvailableSubtitles = []
 		position = 0
@@ -548,7 +548,7 @@ class SubsDownloaderApplication(Screen):
 		self.subsListDownloaded = 1
 		self["subsList"].setList(self.serverAvailableSubtitles)
 		self.set_listSubs_enabled()
-		
+
 	def saveSubtitleasSRT(self, subtitleFile, fps, subtitleCodePage):
 		"""Function converts and saves downloaded subtitle in suitable ditectory"""
 		subtitle_codepade = codePageDecoded = chardetOutputTranslation(subtitleCodePage)
@@ -582,22 +582,22 @@ class SubsDownloaderApplication(Screen):
 				self.session.open(MessageBox, _("Can't detect downloaded subtitle code page. Please contact with developer to correct this in future versions."), MessageBox.TYPE_INFO)
 				#TODO automatic send email with: subtitle, filn hash sume to developer - if user allow for this - for developement reaseons
 				self.session.open(MessageBox, _("Can't detect downloaded subtitle format. Please contact with developer to correct this in future versions."), MessageBox.TYPE_INFO)
-				#TODO automatic send email with: subtitle, filn hash sume to developer - if user allow for this - for developement reaseons	
+				#TODO automatic send email with: subtitle, filn hash sume to developer - if user allow for this - for developement reaseons
 		return subtitleFormat
-				
+
 	def getSubtitleCodepade(self, subtitle):
 		"""Function gets subtitle file codepage using Chardet library"""
 		subtitleFile = open(subtitle, 'r')
 		data = subtitleFile.read()
 		subtitleFile.close()
 		return chardet.detect(data)
-	
+
 	def goLeft(self):
 		self.selectedList.pageUp()
-		
+
 	def goRight(self):
-		self.selectedList.pageDown()	
-	
+		self.selectedList.pageDown()
+
 	def getMovieFPS(self, movie):
 		try:
 			choosen_movie = GetFPS(movie)
@@ -613,7 +613,7 @@ class SubsDownloaderApplication(Screen):
 		self.subtitles = 0
 		self.subtitle_filename = 0
 		self.clearSubList()
-		
+
 	def localConvertionSublist(self):
 		"""Search dir for subtitle file and converts it to given movie file"""
 		selected_movie_dir = self["fileList"].getCurrentDirectory()
@@ -624,16 +624,16 @@ class SubsDownloaderApplication(Screen):
 			self.session.open(MessageBox, _("Local subtitle convertion for:\n%s." % (str(selected_movie_file))), MessageBox.TYPE_INFO, timeout=15)
 			self.__defaults_before_subtitle_download_and_convertion()
 			self.movie_filename = selected_movie_dir + selected_movie_file
-			file_list = self["fileList"].getFileList()			
+			file_list = self["fileList"].getFileList()
 			for x in file_list:
 				if x[0][-1] != True: #not directory
 					if self.return_media_kind(self.return_extention(x[0][0])) == "text":# and LocalConvertedSubtitle.detect_format(LocalConvertedSubtitle.subs_file) != "None":
 						#localCodePageDecoded= self.chardetOutputTranslation(self.getSubtitleCodepade(selected_movie_dir+x[0][0]))
-						self.subtitle_codepade = localCodePageDecoded = chardetOutputTranslation(self.getSubtitleCodepade(selected_movie_dir + x[0][0])) 
+						self.subtitle_codepade = localCodePageDecoded = chardetOutputTranslation(self.getSubtitleCodepade(selected_movie_dir + x[0][0]))
 						LocalConvertedSubtitle = SubConv((selected_movie_dir + x[0][0]), localCodePageDecoded)
 						if LocalConvertedSubtitle.detect_format(LocalConvertedSubtitle.subs_file) != "None":
 							local_subtitle.append((x[0][0], str(selected_movie_dir + x[0][0]))) #makes list of subtitles"""
-							self.subsListDownloaded = 1							
+							self.subsListDownloaded = 1
 			self["subsList"].setList(local_subtitle)
 			self.set_listSubs_enabled()
 		else:
@@ -653,10 +653,10 @@ class SubsDownloaderApplication(Screen):
 			self["fileList"].refresh()
 		except:
 			try:
-				self.failed_to_download_subtitle_nfo(subtitle_filename, subtitle_codepade, subtitle_filename_type, movie_fps)			
+				self.failed_to_download_subtitle_nfo(subtitle_filename, subtitle_codepade, subtitle_filename_type, movie_fps)
 			except:
 				self.failed_to_download_subtitle_nfo(subtitle_filename, subtitle_codepade, "unsupported", movie_fps)
-			
+
 	def downloadSubtitle(self):
 		"""Download Subtitle for movie variable self.textEXTENSIONS has defived all supported files and their king.
 		Variable self.textEXTENSIONS is self.textEXTENSIONS and EXTENSIONS union"""
@@ -677,16 +677,16 @@ class SubsDownloaderApplication(Screen):
 					#	pass
 					#TODO TU BY SIE PRZYDALA OBSLUGA WYJATKOW Z KOMENDY POWYZEJ
 					#if len(self.subtitle_database) == 0:
-					if self.subtitle_database == []:	
+					if self.subtitle_database == []:
 						self.clearSubList()
 						self.session.open(MessageBox, _("There is no subtitle on this server to Your movie. \nPlease try another language or subtitle server.\n\nIf error still appears please check network connection with server."), MessageBox.TYPE_INFO, timeout=5)
 					else:
 						self.setServerAvailableSubtitles_for_PERISCOPE(self.subtitle_database)
 				elif config.plugins.subsdownloader.subtitleserver.value in XBMC_PLUGINS:
-					
+
 					exec('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import *' % config.plugins.subsdownloader.subtitleserver.value)
-					exec('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import service as SERVICE' % config.plugins.subsdownloader.subtitleserver.value)        
-					
+					exec('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import service as SERVICE' % config.plugins.subsdownloader.subtitleserver.value)
+
 					temp_struct = GuessFileData_from_FileName(SubtitleDatabase.tvshowRegex, SubtitleDatabase.tvshowRegex2, SubtitleDatabase.movieRegex)
 					show_name, show_type, show_season, show_episode = temp_struct.return_movie_data_to_XBMC(self.movie_filename)
 					lang1 = config.plugins.subsdownloader.SubsDownloader1stLang.value
@@ -708,22 +708,22 @@ class SubsDownloaderApplication(Screen):
 					#self.movie_fps = "None"
 					#self.subtitle_codepade = "None"
 					#self.subtitle_filename_type = "None"
-					
+
 					self.movie_filename = self["fileList"].getCurrentDirectory() + self["fileList"].getFilename()
 					self.NapiSubtitle = NapiProjekt()
 					self.NapiSubtitle.getnapi(self.movie_filename)
-					
+
 					subtitle_filename.append(self.NapiSubtitle.save())
 					if subtitle_filename[0] != "None":
 						self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename[0])
 					else:
 						self.session.open(MessageBox, _("There is problem with downloading or saveing subtitles on storage device."), MessageBox.TYPE_INFO, timeout=5)
-					
+
 					"""try:
 						self.NapiSubtitle.getnapi(self.movie_filename)
 						self.subtitle_filename = self.NapiSubtitle.save()
-						
-						
+
+
 						self.subtitle_codepade = self.getSubtitleCodepade(self.subtitle_filename)
 						self.movie_fps = self.getMovieFPS(self.movie_filename)
 						self.subtitle_filename_type = self.saveSubtitleasSRT(self.subtitle_filename, self.movie_fps, self.subtitle_codepade)
@@ -755,11 +755,11 @@ class SubsDownloaderApplication(Screen):
 				movie_name = self["fileList"].getFilename().rsplit(".", 1)[0]
 			elif config.plugins.subsdownloader.Napisy24MovieNameMethod.value == True:
 				temp_struct = GuessFileData_from_FileName(SubtitleDatabase.tvshowRegex, SubtitleDatabase.tvshowRegex2, SubtitleDatabase.movieRegex)
-				movie_name = temp_struct.return_data_string(self["fileList"].getFilename())			
+				movie_name = temp_struct.return_data_string(self["fileList"].getFilename())
 			self.session.openWithCallback(self.VirtualKeyboartCallback, VirtualKeyBoard, title=("Search subtitle(s) for:\n%s" % self["fileList"].getFilename()), text=movie_name)
 		else:
 			self.VirtualKeyboartCallback(callback=None)
-							
+
 	def VirtualKeyboartCallback(self, callback=None):
 		N24_movie_name = None
 		N24_imdb_search = None
@@ -771,7 +771,7 @@ class SubsDownloaderApplication(Screen):
 			N24_imdb_search = True
 			N24_movie_name = callback
 		elif config.plugins.subsdownloader.Napisy24SearchMethod.value == "movie filname" and callback != None:
-			N24_imdb_search = False						
+			N24_imdb_search = False
 			N24_movie_name = callback
 		self.subtitles = Napisy24_pl(self.movie_filename, N24_movie_name)
 		if N24_imdb_search == True:
@@ -803,25 +803,25 @@ class SubsDownloaderApplication(Screen):
 
 	def failed_to_download_subtitle_nfo(self, subtitle_filename, subtitle_codepade_, subtitle_filename_type, movie_fps):
 		self.session.open(MessageBox, _("Failed to download or save file.\nPossible problems:\n- Subtitle filname:\n%s\n- Subtitle codepage:\n%s\n- Subtitle filetype:\n%s\n- Movie fsp:\n%s\n.") % (subtitle_filename, subtitle_codepade_, subtitle_filename_type, movie_fps), MessageBox.TYPE_INFO, timeout=15)
-		
+
 	def make_media_patern(self):
 		"""Creare media patern to file browser based on self.textEXTENSIONS from this module
 		and EXTENSIONS fron FileList module"""
 		self.textEXTENSIONS.update(EXTENSIONS)
 		return "^.*\.(" + str.join('|', self.textEXTENSIONS.keys()) + ")"
-	
+
 	def return_extention(self, file_path):
 		"""get filename and return file extention"""
 		extention = file_path
 		return extention.split('.')[-1]
-	
+
 	def return_media_kind(self, file_extention):
 		"""Function returns what kind of file is it: text, movie, sysyem, picture"""
 		try:
 			return self.textEXTENSIONS[file_extention]
 		except:
 			return 'not_supported'
-	
+
 	def showConfigScreen(self):
 		""" Display config screen for Subs Downloader"""
 		self.set_listFile_enabled()
@@ -831,7 +831,7 @@ class SubsDownloaderApplication(Screen):
 		#self.session.open(SubsDownloaderConfig)
 		#self.session.openWithCallback(self.display_Server_Picture, SubsDownloaderConfig)
 		self.session.openWithCallback(self.MainMenuCallback, SubsDownloaderConfig)
-		
+
 		#TODO POPRAWIC TO PONIEWAZ NIE ZMIENIA SIE PO POWROCIE Z self.session.open(SubsDownloaderConfig)
 		#self.display_Server_Picture()
 
@@ -842,7 +842,7 @@ class SubsDownloaderApplication(Screen):
 		else:
 			self["fileList"].matchingPattern = None
 		self["fileList"].refresh()
-		
+
 	def set_listFile_enabled(self):
 		"""Function makes self["fileList"] as active"""
 		if self.fileManagerEnabled == False:
@@ -852,7 +852,7 @@ class SubsDownloaderApplication(Screen):
 		elif self.fileManagerEnabled == True:
 			self.set_FileManager_disabled()
 			self.clearSubList()
-	
+
 	def set_FileManager_enabled(self):
 		self["fileList"].selectionEnabled(0)
 		self["subsList"].selectionEnabled(1)
@@ -861,16 +861,16 @@ class SubsDownloaderApplication(Screen):
 		self["key_last"].setText("Disable FileManager")
 		self["key_info"].setText("Disable FileManager")
 		self["key_blue"].setText("Execute command")
-		
+
 	def set_FileManager_disabled(self):
-		self.fileManagerEnabled = False		
+		self.fileManagerEnabled = False
 		self["key_last"].setText("FileList enable")
 		self["key_info"].setText("File size")
-		self["key_blue"].setText("Enable FileManager")	
+		self["key_blue"].setText("Enable FileManager")
 		self.set_listFile_enabled()
-		self.showFilemanagerScreen_command = None		
+		self.showFilemanagerScreen_command = None
 		self.clearSubList()
-		
+
 	def set_listSubs_enabled(self):
 		"""If subtitle was found and list was generated function makes self["subsList"] as active.
 		The condition is that self.subsListDownloaded is "1". Condition is seted in downloadSubtitle function.
@@ -880,10 +880,10 @@ class SubsDownloaderApplication(Screen):
 			self["fileList"].selectionEnabled(0)
 			self["subsList"].selectionEnabled(1)
 			self.selectedList = self["subsList"]
-	
+
 	def __pass__(self):
 		pass
-	
+
 	def ok(self):
 		global DVDPlayerAviable
 		if self.selectedList == self["fileList"] and self.fileManagerEnabled == False:
@@ -967,12 +967,12 @@ class SubsDownloaderApplication(Screen):
 					pass #PASS BECAUSE DMnapi DOWNLOAD ONLY PL FILE AND IT'S DIRECTLY IN DOWNLOAD SUBTITLE FUNCTION.
 				if config.plugins.subsdownloader.subtitleserver.value in XBMC_PLUGINS:
 					exec('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import *' % config.plugins.subsdownloader.subtitleserver.value)
-					exec('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import service as SERVICE' % config.plugins.subsdownloader.subtitleserver.value) 
+					exec('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import service as SERVICE' % config.plugins.subsdownloader.subtitleserver.value)
 					pos = self["subsList"].getCurrent()[1]
 					tmp_sub_dir = sub_folder = self.movie_filename.rsplit("/", 1)[0]
 					zipped_subs_path = self.movie_filename.rsplit(".", 1)[0] + ".zip" #for some plugins
 					TRUE_FALSE, language, subtitle_filename = SERVICE.download_subtitles(self.subtitle_database, pos, zipped_subs_path, tmp_sub_dir, sub_folder, self.__session_id, self.session)
-					
+
 				if config.plugins.subsdownloader.subtitleserver.value == "Napisy24":
 					whichSubtitleDownload = self["subsList"].getCurrent()[1]
 					if self.subtitles.save_downloaded_zip(whichSubtitleDownload) == True:
@@ -981,9 +981,9 @@ class SubsDownloaderApplication(Screen):
 							os.remove(self.subtitles.ZipFilePath) #remove downloaded zip file
 						except:
 							print "Can't delete file: %s" % self.subtitles.ZipFilePath
-				
+
 				if type(subtitle_filename) == type("string"):
-					self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename)	
+					self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename)
 				elif type(subtitle_filename) == type([]) or subtitle_filename == None:
 					if len(subtitle_filename) == 1:
 						self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename[0])
@@ -998,11 +998,11 @@ class SubsDownloaderApplication(Screen):
 							self.session.open(MessageBox, _("%i file(s) was extracted and I didn't match them automatically this time. \n Please make local convertion (long TEXT).") % (len(subtitle_filename)), MessageBox.TYPE_INFO, timeout=10)
 				if subtitle_filename == [] or subtitle_filename == "":
 					self.session.open(MessageBox, _("There is problem with downloading or saveing subtitles on storage device."), MessageBox.TYPE_INFO, timeout=5)
-			
+
 			elif self.localConvertion == True:
 				#local convertion in progress
 				whichSubtitleDownload = self["subsList"].getCurrent()[1]
-				subtitle_filename.append(whichSubtitleDownload)				
+				subtitle_filename.append(whichSubtitleDownload)
 				self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename[0])
 			#TODO OTHER SUBTITLE SERVERS HANDLE
 		if self.selectedList == self["subsList"] and self.fileManagerEnabled == True:
@@ -1013,7 +1013,7 @@ class SubsDownloaderApplication(Screen):
 					dir_count = dir_count + 1
 			if dir_count > 0:
 				self.setServerAvailableSubtitles_for_dirList(self["subsList"].getCurrent()[1])
-				
+
 	def closeApplication(self):
 		os.system('rm -r %s' % Subtitle_Downloader_temp_dir)
 		print "\n[SubsDownloaderApplication] cancel\n"
@@ -1022,15 +1022,15 @@ class SubsDownloaderApplication(Screen):
 			config.plugins.subsdownloader.path.value = self["fileList"].getCurrentDirectory()
 			config.plugins.subsdownloader.path.save()
 		self.close(None)
-	
+
 	def goUp(self):
 		self.set_title()
 		self.selectedList.up()
-		
+
 	def goDown(self):
 		self.set_title()
 		self.selectedList.down()
-	
+
 	def showAboutScreen(self):
 		self.session.open(vEditor, '/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/about.nfo')
 
@@ -1047,10 +1047,10 @@ class SubsDownloaderApplication(Screen):
 				if self["fileList"].getFilename() == name:
 					foundIndex = index
 				index = index + 1
-		return slist, foundIndex		
+		return slist, foundIndex
 
 
-class FileManagerCommands(Screen):	
+class FileManagerCommands(Screen):
 	def __init__(self, session, file_to_manage):
 		self.file_to_manage = file_to_manage
 		self.skin = "<screen position=\"center,80\" size=\"" + str(int(0.644 * Skin_width)) + "," + str(int(0.644 * Skin_height)) + "\" title=\"What to do with file:\" > \
@@ -1066,7 +1066,7 @@ class FileManagerCommands(Screen):
 			"cancel": self.ExitWithoutDoingNothing
 		}, -1)
 		self.createCommandsMenu()
-		
+
 	def createCommandsMenu(self):
 		self.list.append((_("Exit"), "exit"))
 		self.list.append((_("Delete"), "delete"))
@@ -1075,18 +1075,18 @@ class FileManagerCommands(Screen):
 		self.list.append((_("Rename"), "rename"))
 		#self.list.append((_(str(self.file_to_manage)), "exit"))
 		self["myCommands"].setList(self.list)
-		
+
 	def ExitWithoutDoingNothing(self):
 		self.close(["Do_nothing", self.file_to_manage])
-	
+
 	def ExitWithDoingSomething(self):
 		def delete_command_notification(callback):
 			if callback == True:
 				self.close(("delete", self.file_to_manage))
-			
+
 			else:
 				self.ExitWithoutDoingNothing()
-			
+
 		returnValue = self["myCommands"].l.getCurrentSelection()[1]
 		if returnValue == "exit":
 			self.ExitWithoutDoingNothing()
@@ -1098,9 +1098,9 @@ class FileManagerCommands(Screen):
 			self.close(("move", self.file_to_manage))
 		elif returnValue == "rename":
 			self.close(("rename", self.file_to_manage))
-	
-	
-class SubsDownloaderConfig(ConfigListScreen, Screen):	
+
+
+class SubsDownloaderConfig(ConfigListScreen, Screen):
 	def __init__(self, session):
 		self.skin = "<screen position=\"center,80\" size=\"" + str(int(0.644 * Skin_width)) + "," + str(int(0.644 * Skin_height)) + "\" title=\"Subtitle downloader: Configuration screen\" > \
 		<widget name=\"config\" position=\"10,10\" size=\"" + str(int(0.625 * Skin_width)) + "," + str(int(0.385 * Skin_height)) + "\" scrollbarMode=\"showOnDemand\" /> \
@@ -1128,11 +1128,11 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 			"cancel": self.cancelWithoutSave # add the RC Command "cancel" to close your Screen
 		}, -1)
 		self.createConfigMenu()
-		
+
 	def installLibMediaInfo(self):
 		file = open("/proc/cpuinfo", 'r')
 		cpu_info = file.read()
-		file.close()	
+		file.close()
 		if (is_libmediainfo == False or os.popen("unrar").readlines() == []) and "mips" in cpu_info:
 			content_to_download = []
 			if is_libmediainfo == False:
@@ -1148,11 +1148,11 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 	def keyLeft(self): #ABY DZIALALA AUTOMATYCZNA ZMIANA LIST WYSWIETLANEJ TA FUNKCJA MUSI SIE TAK NAZYWAC
 		ConfigListScreen.keyLeft(self)
 		self.createConfigMenu()
-	
+
 	def keyRight(self): #ABY DZIALALA AUTOMATYCZNA ZMIANA LIST WYSWIETLANEJ TA FUNKCJA MUSI SIE TAK NAZYWAC
 		ConfigListScreen.keyRight(self)
 		self.createConfigMenu()
-		
+
 	def createConfigMenu(self):
 		self.list = []
 		self.list.append(getConfigListEntry(_("Choose subtitle server:"), config.plugins.subsdownloader.subtitleserver))
@@ -1163,13 +1163,13 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 			#TODO LOGIN AND PASSWORD TO OPENSUBTITLE
 			self.list.append(getConfigListEntry(_("1st subtitle language:"), config.plugins.subsdownloader.SubsDownloader1stLang))
 			self.list.append(getConfigListEntry(_("2nd subtitle language:"), config.plugins.subsdownloader.SubsDownloader2ndLang))
-			self.list.append(getConfigListEntry(_("3rd subtitle language:"), config.plugins.subsdownloader.SubsDownloader3rdLang))			
+			self.list.append(getConfigListEntry(_("3rd subtitle language:"), config.plugins.subsdownloader.SubsDownloader3rdLang))
 		if config.plugins.subsdownloader.subtitleserver.value == "NapiProjekt":
 			pass
 		if config.plugins.subsdownloader.subtitleserver.value == "Napisy24":
 			self.list.append(getConfigListEntry(_("Choose Napisy24 search method:"), config.plugins.subsdownloader.Napisy24SearchMethod))
 			self.list.append(getConfigListEntry(_("Use \"guessFileData\" method for movie filname:"), config.plugins.subsdownloader.Napisy24MovieNameMethod))
-			pass 
+			pass
 		self.list.append(getConfigListEntry(_("Extended configuratin menu:"), config.plugins.subsdownloader.extendedMenuConfig))
 		if config.plugins.subsdownloader.extendedMenuConfig.value == True:
 			self.list.append(getConfigListEntry(_("Save last FileList path:"), config.plugins.subsdownloader.pathSave))
@@ -1179,19 +1179,19 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Plugin autoupdate:"), config.plugins.subsdownloader.AutoUpdate))
 		self["config"].list = self.list
 		self["config"].setList(self.list)
-		
+
 	def cancelWithoutSave(self):
 		#TODO RETURN TO APPLICATION AND NOTIFICATRION ABOIUT NOT SAVEING
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close()
-	
+
 	def saveConfig(self):
 		for x in self["config"].list:
 			x[1].save()
 		self.close()
 
-		
+
 #######################################################################
 #
 #    Dream-ExplorerII for Dreambox-Enigma2
@@ -1209,7 +1209,7 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 #    GNU General Public License for more details.
 #
 #######################################################################
-			
+
 class vEditor(Screen):
 	def __init__(self, session, file):
 		self.skin = '<screen position="center,center" size="' + str(int(0.9 * Screen_width)) + ',' + str(int(0.9 * Screen_height)) + '" title="File-Explorer"> \
@@ -1397,28 +1397,28 @@ class MoviePlayer(MP_parent):
 		elif (self.moviename.endswith(".mpg")) or (self.moviename.endswith(".mpeg")) or (self.moviename.endswith(".mkv")) or (self.moviename.endswith(".m2ts")) or (self.moviename.endswith(".vob")) or (self.moviename.endswith(".mod")):
 			fileRef = eServiceReference("4097:0:0:0:0:0:0:0:0:0:" + self.moviename)
 		elif (self.moviename.endswith(".avi")) or (self.moviename.endswith(".mp4")) or (self.moviename.endswith(".divx")) or (self.moviename.endswith(".mov")) or (self.moviename.endswith(".flv")) or (self.moviename.endswith(".3gp")):
-			if not(HardwareInfo().get_device_name() == "dm7025"):	
+			if not(HardwareInfo().get_device_name() == "dm7025"):
 				fileRef = eServiceReference("4097:0:0:0:0:0:0:0:0:0:" + self.moviename)
 		self.session = session
 		self.WithoutStopClose = False
 		MP_parent.__init__(self, self.session, fileRef)
 		self.cut_list = []
 		self.downloadCuesheet()
-		
+
 	def addLastPosition(self):
 		print("", self, "I")
 		service = self.session.nav.getCurrentService()
 		seek = service and service.seek()
 		if seek != None:
 			pts = seek.getPlayPosition()[1]
-			
+
 			found = False
 			for i in range(len(self.cut_list)):
 				if self.cut_list[i][1] == self.CUT_TYPE_LAST:
 					self.cut_list[i] = (pts, self.CUT_TYPE_LAST, )
 					found = True
 					break
-			
+
 			if found is False:
 				self.cut_list.append((pts, self.CUT_TYPE_LAST, ))
 
@@ -1430,7 +1430,7 @@ class MoviePlayer(MP_parent):
 			for cue in self.cut_list:
 				print cue
 				packed += struct.pack('>QI', cue[0], cue[1])
-			
+
 			if len(packed) > 0:
 				f = open(self.moviename + ".cuts", "wb")
 				f.write(packed)
@@ -1439,7 +1439,7 @@ class MoviePlayer(MP_parent):
 				os.remove(self.moviename + ".cuts")
 		except Exception, ex:
 			print("Exception (ef): " + str(ex), self, "E")
-			
+
 	def downloadCuesheet(self):
 		print("", self, "I")
 		self.cut_list = []
@@ -1448,7 +1448,7 @@ class MoviePlayer(MP_parent):
 			f = open(self.moviename + ".cuts", "rb")
 			packed = f.read()
 			f.close()
-			
+
 			while len(packed) > 0:
 				packedCue = packed[:12]
 				packed = packed[12:]
@@ -1456,10 +1456,10 @@ class MoviePlayer(MP_parent):
 				self.cut_list.append(cue)
 		except Exception, ex:
 			print("Exception (ef): " + str(ex), self, "E")
-		
+
 	def leavePlayer(self):
 		self.addLastPosition()
-		self.uploadCuesheet()		
+		self.uploadCuesheet()
 		self.is_closing = True
 		self.close()
 
@@ -1497,7 +1497,7 @@ class MoviePlayer_4_MusicExploret(MP_parent):
 
 	def leavePlayerConfirmed(self, answer):
 		pass
-	
+
 
 class MusicExplorer(MoviePlayer_4_MusicExploret):
 	skin = """
@@ -1527,7 +1527,7 @@ class MusicExplorer(MoviePlayer_4_MusicExploret):
 			#TODO DAC wlasna
 		except:
 			pass #TU DOROBIC WLASNA TAPETE
-			
+
 	def searchMusic(self):
 		midx = 0
 		for root, dirs, files in os_walk(self.MusicDir):
@@ -1570,7 +1570,7 @@ class MusicExplorer(MoviePlayer_4_MusicExploret):
 
 
 def main(session, **kwargs):
-	print "\n[SubsDownloaderApplication] start\n"	
+	print "\n[SubsDownloaderApplication] start\n"
 	if config.plugins.subsdownloader.AutoUpdate.value == True:
 		session.open(SubsDownloaderApplication)
 		autoupdate = IsNewVersionCheck(session)
@@ -1578,7 +1578,7 @@ def main(session, **kwargs):
 	else:
 		session.open(SubsDownloaderApplication)
 
-	
+
 #########################################################################
 
 

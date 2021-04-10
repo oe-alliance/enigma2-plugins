@@ -69,7 +69,7 @@ class EventListDisplay(Renderer):
 		def parseSize(str):
 			x, y = str.split(',')
 			return eSize(int(x), int(y))
-	
+
 		def parseColumnValue(value):
 			x, length, color, fontname, fontheight, align, itemindex = value.split(',')
 			return (int(x), int(length), parseColor(color), gFont(fontname, int(fontheight)), int(fontheight), int(itemindex), int(align))
@@ -96,4 +96,3 @@ class EventListDisplay(Renderer):
 				attribs.append((attrib, value))
 		self.skinAttributes = attribs
 		return Renderer.applySkin(self, desktop, parent)
-

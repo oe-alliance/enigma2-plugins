@@ -40,7 +40,7 @@ def __(text, front=True):
 	#	else:
 	#		return text[:-5] + '.....'
 	# else:
-	#	return '.....' 
+	#	return '.....'
 	#===========================================================================
 	out = ""
 	for i in range(len(text) / 2):
@@ -52,7 +52,7 @@ import re
 
 
 def normalizePhoneNumber(intNo):
-	
+
 	found = re.match(r'^\+' + config.plugins.FritzCall.country.value.replace('00', '') + '(.*)', intNo)
 	if found:
 		intNo = '0' + found.group(1)

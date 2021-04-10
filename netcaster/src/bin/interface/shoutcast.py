@@ -11,12 +11,12 @@ class Interface(StreamInterface):
     def __init__(self, session, cbListLoaded=None):
         StreamInterface.__init__(self, session, cbListLoaded=cbListLoaded)
         self.genrefeed = GenreFeed()
-    
+
     def getList(self):
         glist = []
         #self.genrefeed.fetch_genres()
         self.genrefeed.parse_genres()
-        for i in self.genrefeed.genre_list:            
+        for i in self.genrefeed.genre_list:
             glist.append((str(i), i))
         self.session.openWithCallback(self.GenreSelected, ChoiceBox, _("select Genre to search for streams"), glist)
 

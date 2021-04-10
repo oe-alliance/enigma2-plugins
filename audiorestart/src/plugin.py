@@ -27,10 +27,10 @@ class AudioRestart():
             config.misc.standbyCounter.addNotifier(self.enterStandby, initial_call=False)
         if config.plugins.AudioRestart.restartSelection.value in ["restart", "both"]:
             self.startTimer()
-        
+
     def enterStandby(self, configElement):
         Standby.inStandby.onClose.append(self.endStandby)
-      
+
     def endStandby(self):
         self.startTimer()
 
@@ -62,7 +62,7 @@ class AudioRestart():
                     if (description.find("AC3") != -1 or description.find("AC-3") != -1) or description.find("DTS") != -1:
                         blnReturn = True
         return blnReturn
-    
+
 
 class AudioRestartSetup(ConfigListScreen, Screen):
     skin = """
@@ -95,7 +95,7 @@ class AudioRestartSetup(ConfigListScreen, Screen):
             getConfigListEntry(_("Restart audio"), config.plugins.AudioRestart.restartSelection),
             getConfigListEntry(_("Restart audio delay (in sec)"), config.plugins.AudioRestart.restartDelay)
         ]
-        
+
         ConfigListScreen.__init__(self, self.list)
 
         self["config"].list = self.list
@@ -139,7 +139,7 @@ def sessionstart(reason, **kwargs):
 def setup(session, **kwargs):
 #    reload(AC3setup)
     session.open(AudioRestartSetup, plugin_path)
-        
+
 
 def Plugins(path, **kwargs):
     global plugin_path

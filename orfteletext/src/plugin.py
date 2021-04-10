@@ -3,7 +3,7 @@
 #    ORFteletext for Dreambox-Enigma2
 #    Coded by Vali (c)2010
 #
-#  This plugin is licensed under the Creative Commons 
+#  This plugin is licensed under the Creative Commons
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 #  To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/
 #  or send a letter to Creative Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -12,7 +12,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 #######################################################################
@@ -155,7 +155,7 @@ class ORFteletextScreen(Screen):
 		if config.plugins.ORFteletext.adr.value == "ORF":
 			adr = "http://teletext.orf.at/" + lz + "00/" + hz + "_000" + nz + ".png"
 		elif config.plugins.ORFteletext.adr.value == "SAT1":
-			adr = "http://www.sat1.at/service/teletext/cache_de/" + hz + "_0" + nz + ".png" 
+			adr = "http://www.sat1.at/service/teletext/cache_de/" + hz + "_0" + nz + ".png"
 		neu = "wget -O /tmp/bild " + adr
 		self["seite"].setText(hz + "-" + nz + " at " + config.plugins.ORFteletext.adr.value)
 		os_system(neu)
@@ -210,7 +210,7 @@ class ORFteletextScreen(Screen):
 		else:
 			self.seite = 100
 		self.subseite = 1
-		self.lade2(self.seite, self.subseite)	
+		self.lade2(self.seite, self.subseite)
 
 	def rot(self):
 		self.seite = 111
@@ -237,7 +237,7 @@ class ORFteletextScreen(Screen):
 			self.seite = 104
 		self.subseite = 1
 		self.lade2(self.seite, self.subseite)
-			
+
 	def Info(self):
 		if config.plugins.ORFteletext.adr.value == "ORF":
 			config.plugins.ORFteletext.adr.value = "SAT1"
@@ -248,7 +248,3 @@ class ORFteletextScreen(Screen):
 		self.seite = 100
 		self.subseite = 1
 		self.showMe()
-
-
-
-

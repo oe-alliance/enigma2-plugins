@@ -102,7 +102,7 @@ def autostart(reason, **kwargs):
 				Session.doInstantiateDialog.im_class.doInstantiateDialog = doInstantiateDialogSF
 				modname = Session.doInstantiateDialog.__module__
 				print "[SF-Plugin] mytest.Session.doInstantiateDialog modname = %s = %s" % (str(type(modname)), str(modname))
-				
+
 			except Exception, e:
 				print "[SF-Plugin] autostart MovieList launch override exception:\n" + str(e)
 

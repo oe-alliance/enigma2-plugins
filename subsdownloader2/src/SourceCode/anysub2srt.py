@@ -20,7 +20,7 @@ class SubConv():
 	file = codecs.open(self.subtitle, 'r', self.encodeing, errors="ignore")
         self.subs_file = file.readlines()
         file.close()
-  
+
     def detect_format(self, list):
         """Detects format of readed subtittes and return information about format if unknown returns: "" """
         re_mdvd = re.compile("^\{(\d+)\}\{(\d*)\}\s*(.*)")
@@ -28,7 +28,7 @@ class SubConv():
         re_tmp = re.compile("^(\d+):(\d+):(\d+):(.*)")
         re_sub2 = re.compile("^(\d+):(\d+):(\d+)\.\d+\s*\,.*")
         re_mpl2 = re.compile("\[(?P<start>\d+)\]\[(?P<stop>\d+)\](?P<line>.*)", re.S)
-        #for line in list:	
+        #for line in list:
         while len(list) > 0:
             line = list.pop(0)
             if re_mdvd.match(line):
@@ -43,9 +43,9 @@ class SubConv():
             elif re_sub2.match(line):
                 return "sub2"
 	        break
-            elif re_mpl2.match(line):              
-                return "mpl2" 
-	        break	    
+            elif re_mpl2.match(line):
+                return "mpl2"
+	        break
 	    #becouse file is saved as mdvd returns mdvd value
         print "Unsupported subtitle format appears. Please send this subtitle to developer."
         ####################################################
@@ -100,7 +100,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 	    except:
 		sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
 	return subtitles
-    
+
 #    try:
 #            while len(list)>0:
 #                m = re1.match(list.pop(0), 0)
@@ -115,7 +115,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 #        except IndexError:
 #            sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
 #	return subtitles
-    
+
     def read_srt(self, list):
         """
 Reads srt subtitles.
@@ -142,7 +142,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 	    except:
 		sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
 	return subtitles
-       
+
     def read_tmp(self, list):
         """
 Reads tmplayer (tmp) subtitles.
@@ -163,7 +163,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 			subs[time] = m.group(4).strip().split("|")
 	    except:
 		sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
-		
+
         times = subs.keys()
         times.sort()
         for i in range(0, len(times)):
@@ -180,7 +180,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 	    #FRAMERATE = float(fps)
 	    subtitles = []
 	    while len(list) > 0:
-	    #for line in list:	
+	    #for line in list:
 		try:
 		    group = MPL2LINE.match(list.pop(0)).groupdict()
 		    start = float(float(group["start"]) / 10) #*0.1*FRAMERATE) or 1
@@ -190,8 +190,8 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 		    subtitles.append(temp)
 		except:
 		    sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
-	    return subtitles    
-    
+	    return subtitles
+
     def check_subs_long(self, subtitles_standard_list, fps):
         """takes list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep, time_end, line1, ...],....]
         and checks in end time of subtittle in not longer then next subtitle start time if yes correct this error"""
@@ -229,7 +229,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
             outl.append("%d\n%.2d:%.2d:%.2d,%.3d --> %.2d:%.2d:%.2d,%.3d\n%s\n\n" % (count, h1, m1, s1, f1, h2, m2, s2, f2, "\n".join(l[2:])))
 	    count = count + 1
         return outl
-    
+
 #    def fileData_to_utf_8(self, input_coding):
 #	"""convert string readed from file coding to UTF-8 managed by Dreambox
  #       input codint is string eg. 'iso-8859-2' 'utf-8' other"""
@@ -243,7 +243,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 #    def to_utf_8(self, list):
 #        """convert list coding to UTF-8 managed by Dreambox
 #        input codint is string eg. 'iso-8859-2' 'utf-8' other"""
-#        
+#
 #        temporary_list=[]
 #        for x in list:
 #            try:
@@ -255,14 +255,14 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 #        ####################################################
 #        #"""KOMUNIKAT message box"""
 #        ####################################################
-#      
+#
 #                break
 #	    unicode_string = unicode( temp )
 #            temp = unicode_string.encode('utf-8',"ignore")
 #            temporary_list.append(temp)
 #        return temporary_list
 
-    def ___utf8_to_utf_8_BOM(self): 
+    def ___utf8_to_utf_8_BOM(self):
 	"""Function write 3 bytes xEF xBB xBF at the begining of UTF-8 srt file.
 	This bytes are written by Windows Notepad for UTF-8 code page.
 	Probably it means that codepage is UTF-8 BOM (I'm not sure).
@@ -276,7 +276,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 	file_out = open(self.subtitle, 'wb')
 	file_out.write("\xef\xbb\xbf" + buffor)
 	file_out.close()
-		
+
     def save_subtitle(self, list):
         """Save subtitle list in file"""
         sub_list = [list]
@@ -290,5 +290,3 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 	    #self.___utf8_to_utf_8_BOM()
 	except:
 	    print "Can't save subtitles in file: %s" % file
-
-

@@ -146,7 +146,7 @@ class SortableMenuList(MenuList):
 		self.l.invalidate()
 
 	def applySkin(self, desktop, parent):
-		attribs = [] 
+		attribs = []
 		if self.skinAttributes is not None:
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "font":

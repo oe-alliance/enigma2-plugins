@@ -170,4 +170,3 @@ def Plugins(**kwargs):
 		PluginDescriptor(name="eMission...", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main, needsRestart=False),
 		PluginDescriptor(where=PluginDescriptor.WHERE_FILESCAN, fnc=filescan, needsRestart=False),
 	]
-
