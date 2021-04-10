@@ -7,7 +7,7 @@ class Interface(StreamInterface):
     name = "listen to SHOUTcast Streams"
     nameshort = "SHOUTcast"
     description = "This is a Plugin to browse www.shoutcast.com and listen to webradios listed there."
-    def __init__(self,session,cbListLoaded=None):
+    def __init__(self, session, cbListLoaded=None):
         StreamInterface.__init__(self, session, cbListLoaded=cbListLoaded)
         self.genrefeed = GenreFeed()
     
@@ -139,7 +139,7 @@ class StationParser(ContentHandler):
             self.isStation = False
             if int(self.Bitrate) >= self.min_bitrate:
                 self.stationUrl = self.shoutUrl + self.baseUrl + '?id=' + self.Id
-                self.station_list.append({'Name':self.Name.encode("utf-8"), 'PLS_URL':self.stationUrl.encode("utf-8"), 'NowPlaying':self.nowPlaying.encode("utf-8"), 'Listeners':self.Listeners.encode("utf-8"), 'Bitrate':self.Bitrate.encode("utf-8"), 'MimeType':self.mimeType.encode("utf-8"), 'Genres': self.Genre.encode("utf-8")})
+                self.station_list.append({'Name': self.Name.encode("utf-8"), 'PLS_URL': self.stationUrl.encode("utf-8"), 'NowPlaying': self.nowPlaying.encode("utf-8"), 'Listeners': self.Listeners.encode("utf-8"), 'Bitrate': self.Bitrate.encode("utf-8"), 'MimeType': self.mimeType.encode("utf-8"), 'Genres': self.Genre.encode("utf-8")})
                 self.count += 1
         if name == 'stationlist':
             self.isStationList = False

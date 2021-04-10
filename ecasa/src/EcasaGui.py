@@ -353,7 +353,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 				history.insert(0, text)
 			config.plugins.ecasa.searchhistory.save()
 
-			thread = SimpleThread(lambda:self.api.getSearch(text, limit=str(config.plugins.ecasa.searchlimit.value)))
+			thread = SimpleThread(lambda: self.api.getSearch(text, limit=str(config.plugins.ecasa.searchlimit.value)))
 			self.session.open(EcasaFeedview, thread, api=self.api, title=_("Search for %s") % (text))
 
 	def contextMenu(self):
@@ -537,7 +537,7 @@ class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 		self.setTitle(_("eCasa: Albums for user %s") % (self.user.encode('utf-8'),))
 
 	def acquireAlbumsForUser(self, user):
-		thread = SimpleThread(lambda:self.api.getAlbums(user=user))
+		thread = SimpleThread(lambda: self.api.getAlbums(user=user))
 		thread.deferred.addCallbacks(self.gotAlbums, self.errorAlbums)
 		thread.start()
 
@@ -563,7 +563,7 @@ class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 		if cur and cur[-1]:
 			album = cur[-1]
 			title = cur[0] # NOTE: retrieve from array to be independent of underlaying API as the flickr and picasa albums are not compatible here
-			thread = SimpleThread(lambda:self.api.getAlbum(album))
+			thread = SimpleThread(lambda: self.api.getAlbum(album))
 			self.session.open(EcasaFeedview, thread, api=self.api, title=title)
 
 	def users(self):

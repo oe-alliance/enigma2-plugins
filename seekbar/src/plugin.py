@@ -241,7 +241,7 @@ def parseKeys(context, filename, actionmap, device, keys):
 				if id == "KEY_RIGHT":
 					mapto = "seekbarRight"
 				flags = get_attr("flags")
-				flag_ascii_to_id = lambda x: {'m':1,'b':2,'r':4,'l':8}[x]
+				flag_ascii_to_id = lambda x: {'m': 1, 'b': 2, 'r': 4, 'l': 8}[x]
 				flags = sum(map(flag_ascii_to_id, flags))
 				assert mapto, "%s: must specify mapto in context %s, id '%s'" % (filename, context, id)
 				assert id, "%s: must specify id in context %s, mapto '%s'" % (filename, context, mapto)

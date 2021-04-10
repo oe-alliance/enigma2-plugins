@@ -21,7 +21,7 @@ class Interface(StreamInterface):
             list.append(stream)
         self.list = list
         self.OnListLoaded()
-    def getMenuItems(self,selectedStream,generic=False):
+    def getMenuItems(self, selectedStream, generic=False):
         self.selectedStream = selectedStream
         list = []
         if generic is True and selectedStream is not None:

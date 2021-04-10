@@ -146,8 +146,8 @@ class WeatherPluginEntryList(MenuList):
 	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 
-		font1, size1 = skinparameter.get("WeatherPluginEntryListFont1", ('Regular',20))
-		font2, size2 = skinparameter.get("WeatherPluginEntryListFont2", ('Regular',18))
+		font1, size1 = skinparameter.get("WeatherPluginEntryListFont1", ('Regular', 20))
+		font2, size2 = skinparameter.get("WeatherPluginEntryListFont2", ('Regular', 18))
 		self.l.setFont(0, gFont(font1, size1))
 		self.l.setFont(1, gFont(font2, size2))
 
@@ -362,8 +362,8 @@ class MSNWeatherPluginSearchResultList(MenuList):
 	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 
-		font1, size1 = skinparameter.get("WeatherPluginSearchResultListFont1", ('Regular',20))
-		font2, size2 = skinparameter.get("WeatherPluginSearchResultListFont2", ('Regular',18))
+		font1, size1 = skinparameter.get("WeatherPluginSearchResultListFont1", ('Regular', 20))
+		font2, size2 = skinparameter.get("WeatherPluginSearchResultListFont2", ('Regular', 18))
 		self.l.setFont(0, gFont(font1, size1))
 		self.l.setFont(1, gFont(font2, size2))
 

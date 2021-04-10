@@ -50,13 +50,13 @@ from boxbranding import getBoxType, getImageDistro
 from six.moves import queue, range
 
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	try:
 		session.open(FanControl2Plugin)
 	except:
 		FClog("Pluginexecution failed")
 
-def mainMonitor(session,**kwargs):
+def mainMonitor(session, **kwargs):
 	try:
 		session.open(FanControl2Monitor)
 	except:

@@ -109,7 +109,7 @@ def sendOnePing(mySocket, destAddr, ID):
   mySocket.sendto(packet, (destAddr, 1)) # Don't know about the 1 
   return None
   
-def doOne(destAddr,timeout=10):
+def doOne(destAddr, timeout=10):
   # Returns either the delay (in seconds) or none on timeout.
   icmp = getprotobyname("icmp")
   mySocket = socket(AF_INET, SOCK_RAW, icmp)

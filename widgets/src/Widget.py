@@ -5,7 +5,7 @@ from Components.Label import Label
 class Widget:
     
     
-    def __init__(self,session,name="no Name",description="unknown Description",version="unknown Version",author="unknown Author",homepage="http://www.unknown.de"):
+    def __init__(self, session, name="no Name", description="unknown Description", version="unknown Version", author="unknown Author", homepage="http://www.unknown.de"):
         self.name = name
         self.author = author
         self.description = description

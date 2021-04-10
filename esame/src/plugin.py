@@ -28,7 +28,7 @@ from .stonefield import StoneField
 import time
 
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	session.open(eSame)
 
 def Plugins(**kwargs):

@@ -48,11 +48,11 @@ dn_regex = re.compile('^%s$' % dn_pattern)
 ldif_pattern = '^((dn(:|::) %(dn_pattern)s)|(%(attrtype_pattern)s(:|::) .*)$)+' % vars()
 
 MOD_OP_INTEGER = {
-  'add':0,'delete':1,'replace':2
+  'add': 0, 'delete': 1, 'replace': 2
 }
 
 MOD_OP_STR = {
-  0:'add',1:'delete',2:'replace'
+  0: 'add', 1: 'delete', 2: 'replace'
 }
 
 CHANGE_TYPES = ['add', 'delete', 'modify', 'modrdn']
@@ -95,7 +95,7 @@ class LDIFWriter:
   via URLs
   """
 
-  def __init__(self,output_file,base64_attrs=None,cols=76,line_sep='\n'):
+  def __init__(self, output_file, base64_attrs=None, cols=76, line_sep='\n'):
     """
     output_file
         file object for output
@@ -216,7 +216,7 @@ class LDIFWriter:
     return # unparse()
 
 
-def CreateLDIF(dn,record,base64_attrs=None,cols=76):
+def CreateLDIF(dn, record, base64_attrs=None, cols=76):
   """
   Create LDIF single formatted record including trailing empty line.
   This is a compability function. Use is deprecated!
@@ -411,7 +411,7 @@ class LDIFRecordList(LDIFParser):
   def __init__(
     self,
     input_file,
-    ignored_attr_types=None,max_entries=0,process_url_schemes=None
+    ignored_attr_types=None, max_entries=0, process_url_schemes=None
   ):
     """
     See LDIFParser.__init__()
@@ -438,9 +438,9 @@ class LDIFCopy(LDIFParser):
 
   def __init__(
     self,
-    input_file,output_file,
-    ignored_attr_types=None,max_entries=0,process_url_schemes=None,
-    base64_attrs=None,cols=76,line_sep='\n'
+    input_file, output_file,
+    ignored_attr_types=None, max_entries=0, process_url_schemes=None,
+    base64_attrs=None, cols=76, line_sep='\n'
   ):
     """
     See LDIFParser.__init__() and LDIFWriter.__init__()
@@ -455,7 +455,7 @@ class LDIFCopy(LDIFParser):
     self._output_ldif.unparse(dn, entry)
 
 
-def ParseLDIF(f,ignore_attrs=None,maxentries=0):
+def ParseLDIF(f, ignore_attrs=None, maxentries=0):
   """
   Parse LDIF records read from file.
   This is a compability function. Use is deprecated!

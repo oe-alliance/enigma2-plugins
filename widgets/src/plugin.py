@@ -63,7 +63,7 @@ def InfoBarPlugins__init__(self):
 	global SIB_StartOnlyOneTime
 	if not SIB_StartOnlyOneTime: 
 		SIB_StartOnlyOneTime = True
-		self["SIBActions"] = ActionMap(["WidgetStartActions"], {"ok_but": self.switch,"exit_but": self.swOff}, -1)
+		self["SIBActions"] = ActionMap(["WidgetStartActions"], {"ok_but": self.switch, "exit_but": self.swOff}, -1)
 		self.SIBtimer = eTimer()
 		self.SIBtimer.callback.append(self.swOff)
 		self.SIBtimer.start(4000, True)
@@ -312,7 +312,7 @@ class WidgetDesktop(Screen):
 
 ###########
 class WidgetPositionConfigScreen(Screen):
-	def __init__(self, session,x,y,widget=False):
+	def __init__(self, session, x, y, widget=False):
 		self.session = session
 		self.position_x = x
 		self.position_y = y

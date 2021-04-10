@@ -181,7 +181,7 @@ class ServiceListSave(resource.Resource):
 			bref = urllib_unquote(bouquet.getElementsByTagName('e2bouquetreference')[0].childNodes[0].data)
 			bname = urllib_unquote(bouquet.getElementsByTagName('e2bouquetname')[0].childNodes[0].data)
 			#print "Bouquet",bref,bname
-			list.append({'bname':bname, 'bref':bref, 'services':self.parseServices(bouquet)})
+			list.append({'bname': bname, 'bref': bref, 'services': self.parseServices(bouquet)})
 		return list
 
 	def parseServices(self, xmlnode):
@@ -192,7 +192,7 @@ class ServiceListSave(resource.Resource):
 			sname = urllib_unquote(service.getElementsByTagName('e2servicename')[0].childNodes[0].data)
 			sname = sname.replace(self.undefinded_tag, "<n/a>").replace(self.undefinded_and, "&")
 			#print sref,sname
-			list.append({'sref':sref, 'sname':sname})
+			list.append({'sref': sref, 'sname': sname})
 		return list
 
 	def createBouquetFile(self, type, bname, list_services, counter):

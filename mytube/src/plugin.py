@@ -473,7 +473,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			print('Login-Error: ' + str(e))
 			self.statuslist.append((_("Login failed"), str(e)))
 
-	def setState(self,status=None):
+	def setState(self, status=None):
 		if status:
 			self.currList = "status"
 			self["videoactions"].setEnabled(False)
@@ -1299,7 +1299,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		print("thumbnail-fetchFailed for: ", tubeid, string.getErrorMessage())
 		self.fetchFinished(False, tubeid, failed=True)
 
-	def fetchFinished(self,x,tubeid, failed=False):
+	def fetchFinished(self, x, tubeid, failed=False):
 		print("thumbnail-fetchFinished for:", tubeid)
 		self.pixmaps_to_load.remove(tubeid)
 		if failed:

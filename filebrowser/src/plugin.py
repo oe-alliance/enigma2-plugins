@@ -93,7 +93,7 @@ class FilebrowserScreen(Screen):
             <ePixmap name="pblue" position="400,390" size="120,30" zPosition="0" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on"/>
         </screen>
         """
-    def __init__(self, session,path_left=None):
+    def __init__(self, session, path_left=None):
         if path_left is None:
             if os_path_isdir(config.plugins.filebrowser.path_left.value) and config.plugins.filebrowser.savedirs.value:
                 path_left = config.plugins.filebrowser.path_left.value
@@ -291,10 +291,10 @@ def start_from_mainmenu(menuid, **kwargs):
         return [(pname, start_from_pluginmenu, "filecommand", 46)]
     return []
 
-def start_from_pluginmenu(session,**kwargs):
+def start_from_pluginmenu(session, **kwargs):
     session.open(FilebrowserScreen)
 
-def Plugins(path,**kwargs):
+def Plugins(path, **kwargs):
     desc_mainmenu = PluginDescriptor(name=pname, description=pdesc, where=PluginDescriptor.WHERE_MENU, fnc=start_from_mainmenu)
     desc_pluginmenu = PluginDescriptor(name=pname, description=pdesc, where=PluginDescriptor.WHERE_PLUGINMENU, fnc=start_from_pluginmenu)
     desc_extensionmenu = PluginDescriptor(name=pname, description=pdesc, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=start_from_pluginmenu)

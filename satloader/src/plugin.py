@@ -104,8 +104,8 @@ class Satloader(Screen):
 
 	def downloadListSATCallback(self, ret):
 		if six.PY3:
-			u = open("/etc/tuxbox/satellites.xml","rb").read().encode("utf-8")
-			open("/etc/tuxbox/satellites.xml","w").write(u)
+			u = open("/etc/tuxbox/satellites.xml", "rb").read().encode("utf-8")
+			open("/etc/tuxbox/satellites.xml", "w").write(u)
 		restart = self.session.openWithCallback(self.restart, MessageBox, "%s\n%s\n\n%s\n%s" % (_("satellites.xml is updated"), str(self["list"].l.getCurrentSelection()[0][0]), _("GUI needs a restart to apply changes."), _("Do you want to restart the GUI now?")), MessageBox.TYPE_YESNO)
 		restart.setTitle("%s" % (_("Restart GUI now?")))
 

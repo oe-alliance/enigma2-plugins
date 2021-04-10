@@ -133,7 +133,7 @@ def main(session, **kwargs):
     """ open config screen """
     session.open(HTTPProxyConfigScreen)
 
-def autostart(reason,**kwargs):
+def autostart(reason, **kwargs):
     """ start proxy in background """
     if reason is True and config.plugins.httpproxy.enable.value is True:
         try:

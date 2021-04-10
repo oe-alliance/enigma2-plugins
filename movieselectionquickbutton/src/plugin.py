@@ -238,7 +238,7 @@ class MovieSelectionButtonSetup(ConfigListScreen, Screen):
 		else:
 			return "0"
 
-def setup(session,**kwargs):
+def setup(session, **kwargs):
 	session.open(MovieSelectionButtonSetup)
 
 def main(session, **kwargs):

@@ -141,9 +141,9 @@ class EmailScreen(Screen):
 		# pylint: disable-msg=W0212
 		self.setTitle(_("%(name)s (%(user)s@%(server)s)")
 				% {
-				'name':self._account._name,
-				'user':self._account._user,
-				'server':self._account._server
+				'name': self._account._name,
+				'user': self._account._user,
+				'server': self._account._server
 				})
 		self["boxlist"].moveToIndex(self._account.inboxPos - 1)
 		self._selectBoxlist()
@@ -185,7 +185,7 @@ class EmailScreen(Screen):
 		'''
 		# pylint: disable-msg=W0212
 		debug("[EmailScreen] _ebNotify error in %s: %s" % (where, what))
-		self.session.open(MessageBox, _("EmailClient for %(account)s:\n\n%(error)s") % {'account': self._account._name, 'error':what}, type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
+		self.session.open(MessageBox, _("EmailClient for %(account)s:\n\n%(error)s") % {'account': self._account._name, 'error': what}, type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
 
 	def _onBoxSelected(self):
 		self["messagelist"].l.setList([])
@@ -526,7 +526,7 @@ class CheckMail:
 		self._interval = int(self._account._interval) * 60 * 1000
 		self._interval = int(random.normalvariate(self._interval, self._interval * 0.11962656472))
 		debug("[CheckMail] %(name)s: __init__: checking all %(interval)s seconds"
-			% {'name':self._name, 'interval':self._interval / 1000})
+			% {'name': self._name, 'interval': self._interval / 1000})
 		self._timer.start(self._interval) # it is minutes
 		self._unseenList = None
 		self._checkMail()
@@ -688,7 +688,7 @@ class EmailAccount():
 	def _ebNotify(self, result, where, what):
 		debug("[EmailAccount] %s: _ebNotify error in %s: %s: %s" % (self._name, where, what, result.getErrorMessage()))
 		if config.plugins.emailimap.verbose.value:
-			Notifications.AddNotification(MessageBox, "EmailClient for %(account)s:\n\n%(error)s" % {'account': self._name, 'error':what}, type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
+			Notifications.AddNotification(MessageBox, "EmailClient for %(account)s:\n\n%(error)s" % {'account': self._name, 'error': what}, type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
 
 	def startChecker(self):
 		# debug("[EmailAccount] %s: startChecker?" %self._name)
@@ -860,7 +860,7 @@ class EmailAccount():
 # If you have problems to log into your imap-server, please send me the output of the following line\n\
 # cbCapabilities: %(capa)s\n\
 ####################################################################################################\n")
-			% {'name':self._name, 'capa':str(reason)})
+			% {'name': self._name, 'capa': str(reason)})
 		self._doLogin()
 
 	def _ebCapabilities(self, reason):
@@ -916,8 +916,8 @@ class EmailAccount():
 		self._ebNotify(failure, "_onInsecureAuthenticationFailed",
 					_("error logging %(who)s in:\n%(failure)s")
 					% {
-					'who':"%s@%s" % (self._user, self._server),
-					'failure':failure.getErrorMessage()
+					'who': "%s@%s" % (self._user, self._server),
+					'failure': failure.getErrorMessage()
 					})
 
 	def _onMailboxList(self, result):

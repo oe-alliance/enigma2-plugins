@@ -141,7 +141,7 @@ def onSessionStart(reason, **kwargs):
 		elif reason == 1:
 			dyndnsservice.disable()
 
-def Plugins(path,**kwargs):
+def Plugins(path, **kwargs):
 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=onSessionStart),
 		    PluginDescriptor(name=_("DynDNS"), description=_("use www.DynDNS.org on your Box"), where=[PluginDescriptor.WHERE_PLUGINMENU], fnc=onPluginStart, icon="icon.png")]
 

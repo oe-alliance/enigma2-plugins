@@ -456,7 +456,7 @@ class PictureViewer(Screen):
 class WebcamViewer(Screen, InfoBarNotifications):
 	skin = ""
 	filelist = []
-	def __init__(self, session,xmlnode, args=0):
+	def __init__(self, session, xmlnode, args=0):
 		self.xmlnode = xmlnode
 		screen_x = 736
 		screen_y = 576

@@ -285,7 +285,7 @@ class IMDB(Screen, HelpableScreen):
 			'(?:.*?<h4 class="inline">\s*(?P<g_writer>Drehbuch|Writers?):\s*</h4>(?P<writer>.*?)</div>)?'
 			'(?:.*?<h4 class="inline">\s*(?P<g_country>Land|Country):\s*</h4>.*?(?P<country>.*?)</div>)?'
 			'(?:.*?<h4 class="inline">\s*(?P<g_premiere>Premiere|Release Date).*?</h4>\s+(?P<premiere>.*?)\s*<span)?'
-			'(?:.*?<h4 class="inline">\s*(?P<g_alternativ>Auch bekannt als|Also Known As):\s*</h4>\s*(?P<alternativ>.*?)\s*<span)?'			, re.DOTALL)
+			'(?:.*?<h4 class="inline">\s*(?P<g_alternativ>Auch bekannt als|Also Known As):\s*</h4>\s*(?P<alternativ>.*?)\s*<span)?', re.DOTALL)
 
 			self.awardsmask = re.compile('<span itemprop="awards">\s*(?:<b>)?\s*(?P<awards>.+?)\s*(?:</b>)?\s*</span>', re.DOTALL)
 
@@ -306,7 +306,7 @@ class IMDB(Screen, HelpableScreen):
 			'(?:.*?<h4 class="inline">(?P<g_runtime>L\S*?nge|Runtime):</h4>\s*(?P<runtime>.+?)</div>)?'
 			'(?:.*?<h4 class="inline">(?P<g_sound>Tonverfahren|Sound Mix):</h4>\s*(?P<sound>.+?)</div>)?'
 			'(?:.*?<h4 class="inline">(?P<g_color>Farbe|Color):</h4>\s*(?P<color>.+?)</div>)?'
-			'(?:.*?<h4 class="inline">(?P<g_aspect>Seitenverh\S*?ltnis|Aspect Ratio):</h4>\s*(?P<aspect>.+?)(?:Mehr|See more</a>|</div>))?'			, re.DOTALL)
+			'(?:.*?<h4 class="inline">(?P<g_aspect>Seitenverh\S*?ltnis|Aspect Ratio):</h4>\s*(?P<aspect>.+?)(?:Mehr|See more</a>|</div>))?', re.DOTALL)
 
 			self.genreblockmask = re.compile('<h4 class="inline">Genres?:</h4>\s*?(.*?)\s+?(?:Mehr|See more|</p|<a class|</div>)', re.DOTALL)
 			self.ratingmask = re.compile('<div class="ratingValue">.*?<span itemprop="ratingValue">(?P<rating>.*?)</span>', re.DOTALL)

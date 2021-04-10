@@ -25,12 +25,12 @@ streamplayer = None
 plugin_path = ""
 
 ###############################################################################
-def main(session,**kwargs):
+def main(session, **kwargs):
     session.open(NETcasterScreenBrowser)
     global streamplayer
     streamplayer = StreamPlayer(session)
 
-def Plugins(path,**kwargs):
+def Plugins(path, **kwargs):
     global plugin_path
     plugin_path = path
     return PluginDescriptor(

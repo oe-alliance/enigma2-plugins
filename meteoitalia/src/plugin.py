@@ -325,7 +325,7 @@ def main(session, **kwargs):
 	session.open(meteoitMain)	
 
 
-def Plugins(path,**kwargs):
+def Plugins(path, **kwargs):
 	global pluginpath
 	pluginpath = path
 	return PluginDescriptor(name="MeteoItalia", description="Previsioni Meteo", icon="meteoitalia.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)

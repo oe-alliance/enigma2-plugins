@@ -344,7 +344,7 @@ class ChatUI:
             conv.show()
         return conv
 
-    def getGroupConversation(self,group,Class=GroupConversation,stayHidden=0):
+    def getGroupConversation(self, group, Class=GroupConversation, stayHidden=0):
         """For the given group object, returns the group conversation window or
         creates and returns a new group conversation window if it doesn't exist
 

@@ -40,7 +40,7 @@ config.plugins.babelzapper.enabled = ConfigEnableDisable(default=False)
 config.plugins.babelzapper.changetime = ConfigInteger(default=1000, limits=(200, 10000))
 config.plugins.babelzapper.exit2escape = ConfigEnableDisable(default=False)
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	session.open(BabelzapperConfiguration)
 
 def autostart(reason, **kwargs):
@@ -423,7 +423,7 @@ class BabelZapper(Screen):
 		elf["babelzapper"].setForegroundColorNum(0)
 	self["babelzapper"].setBackgroundColorNum(1)
 
-	def updateKey(self, keyname,keybg=0,keyfg=1):
+	def updateKey(self, keyname, keybg=0, keyfg=1):
 		self["babelzapper"].setText(keyname)
 		self["babelzapper"].setForegroundColorNum(keyfg)
 		self["babelzapper"].setBackgroundColorNum(keybg)

@@ -624,7 +624,7 @@ def start_from_mainmenu(menuid, **kwargs):
 originalservice = None
 mysession = None
 
-def start_from_pluginmenu(session,**kwargs):
+def start_from_pluginmenu(session, **kwargs):
     global originalservice, mysession
     mysession = session
     originalservice = session.nav.getCurrentlyPlayingServiceReference()
@@ -639,7 +639,7 @@ def mainCB():
     config.plugins.GoogleMaps.position.y.save()
     config.plugins.GoogleMaps.position.z.save()
 
-def Plugins(path,**kwargs):
+def Plugins(path, **kwargs):
     global plugin_path
     plugin_path = path + "/"
     pname = "Google Maps"

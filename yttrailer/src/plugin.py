@@ -89,7 +89,7 @@ def autostart(reason, **kwargs):
 			EPGSelection.showTrailerList = showTrailerList
 
 
-def setup(session,**kwargs):
+def setup(session, **kwargs):
 	session.open(YTTrailerSetup)
 
 def Plugins(**kwargs):

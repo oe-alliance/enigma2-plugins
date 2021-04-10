@@ -46,7 +46,7 @@ def autostart(reason, **kwargs):
 def extensionMenu(session, **kwargs):
     kiddyTimer.showExtensionsMenu()
         
-def Plugins(path,**kwargs):
+def Plugins(path, **kwargs):
     # Assign global variable plugin_path
     KTglob.plugin_path = path
     return [

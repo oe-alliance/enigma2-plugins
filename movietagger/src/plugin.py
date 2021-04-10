@@ -158,7 +158,7 @@ class MovieTagger(Screen):
 		self.updateAllTagList()
 
 
-	def setTags(self,tagstring,service=False,userNotice=True):
+	def setTags(self, tagstring, service=False, userNotice=True):
 		if service is False:
 			serviceRef = self.service
 		else:
@@ -312,5 +312,5 @@ def main(session, service, **kwargs):
 	except Exception as e:
 		raise e
 
-def Plugins(path,**kwargs):
+def Plugins(path, **kwargs):
  	return PluginDescriptor(name="Movie Tagger", description=_("Movie Tagger..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main)

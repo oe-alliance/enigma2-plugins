@@ -136,7 +136,7 @@ class LastFM(LastFMHandler):
         self.playlist = LastFMPlaylist(xmlsource)
         self.onPlaylistLoaded("playlist loaded")
     
-    def getPersonalURL(self,username,level=50):
+    def getPersonalURL(self, username, level=50):
         return "lastfm://user/%s/recommended/32" % username
     
     def getNeighboursURL(self, username):
@@ -145,19 +145,19 @@ class LastFM(LastFMHandler):
     def getLovedURL(self, username):
         return "lastfm://user/%s/loved" % username
     
-    def getSimilarArtistsURL(self,artist=None):
+    def getSimilarArtistsURL(self, artist=None):
         if artist is None and 'artist' in self.metadata:
             return "lastfm://artist/%s/similarartists" % self.metadata['artist'].replace(" ", "%20")
         else:
             return "lastfm://artist/%s/similarartists" % artist.replace(" ", "%20")
 
-    def getArtistsLikedByFans(self,artist=None):
+    def getArtistsLikedByFans(self, artist=None):
         if artist is None and 'artist' in self.metadata:
             return "lastfm://artist/%s/fans" % self.metadata['artist'].replace(" ", "%20")
         else:
             return "lastfm://artist/%s/fans" % artist.replace(" ", "%20")
     
-    def getArtistGroup(self,artist=None):
+    def getArtistGroup(self, artist=None):
         if artist is None and 'artist' in self.metadata:
             return "lastfm://group/%s" % self.metadata['artist'].replace(" ", "%20")
         else:
@@ -226,7 +226,7 @@ class LastFM(LastFMHandler):
     def XMLget_txt(self, node, tagName, default_txt=""):
         return self.XMLnode_data(node, tagName) or self.XMLnode_data(node, tagName, self.DUBLIN_CORE) or default_txt
 
-    def getGlobalTags(self,force_reload=False):
+    def getGlobalTags(self, force_reload=False):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:

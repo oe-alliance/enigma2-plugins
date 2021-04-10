@@ -272,7 +272,7 @@ class ElementType(type):
         # a copy into this class's attributes
         # run in reverse order so higher priority values overwrite lower ones
         data = {}
-        pollers = {'_populate':None}
+        pollers = {'_populate': None}
 
         for base in reversed(bases):
             if isinstance(base, mcs):

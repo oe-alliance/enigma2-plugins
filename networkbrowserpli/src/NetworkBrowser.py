@@ -202,7 +202,7 @@ class NetworkBrowser(Screen):
 			write_cache(self.cache_file, self.networklist)
 			self.updateHostsList()
 
-	def setStatus(self,status=None):
+	def setStatus(self, status=None):
 		if status:
 			self.statuslist = []
 			if status == 'update':

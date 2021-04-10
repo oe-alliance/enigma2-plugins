@@ -60,7 +60,7 @@ class Showiframe():
 		call_function(self.showSinglePic, (pic, ))
 	def finishStillPicture(self):
 		call_function(self.finishShowSinglePic, ())
-def shortname(movie,showing=None):
+def shortname(movie, showing=None):
 	movielist = movie.split('/')
 	for n in movielist:
 		if n != "":

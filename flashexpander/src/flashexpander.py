@@ -299,5 +299,5 @@ class FEconf(Screen):
 		else:
 			self.session.open(MessageBox, _("error copy flash memory"), MessageBox.TYPE_ERROR, timeout=10)
 
-	def Exit(self,data=False):
+	def Exit(self, data=False):
 		self.close(data)

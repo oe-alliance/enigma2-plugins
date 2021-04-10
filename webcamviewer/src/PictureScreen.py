@@ -108,7 +108,7 @@ class PictureScreen(Screen):
 	skin = ""
 	processing = False # if fetching or converting is active
 	autoreload = False
-	def __init__(self, session,title,filename, slideshowcallback=None,args=0):
+	def __init__(self, session, title, filename, slideshowcallback=None, args=0):
 		self.slideshowcallback = slideshowcallback
 		self.screentitle = title
 		self.filename = filename

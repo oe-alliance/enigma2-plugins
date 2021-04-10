@@ -422,7 +422,7 @@ class UnwetterMain(Screen):
 def main(session, **kwargs):
 	session.open(UnwetterMain)
 
-def Plugins(path,**kwargs):
+def Plugins(path, **kwargs):
 	global pluginpath
 	pluginpath = path
 	return PluginDescriptor(

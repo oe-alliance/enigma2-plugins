@@ -133,16 +133,16 @@ def autostart_Partnerbox_EPGList(reason, **kwargs):
 		except:
 			pass
 
-def setup(session,**kwargs):
+def setup(session, **kwargs):
 	session.open(PartnerboxSetup)
 
-def currentremotetv(session,**kwargs):
+def currentremotetv(session, **kwargs):
 	partnerboxpluginStart(session, 0)
 
-def remotetvplayer(session,**kwargs):
+def remotetvplayer(session, **kwargs):
 	partnerboxpluginStart(session, 1)
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	partnerboxpluginStart(session, 2)
 
 def eventinfo(session, servicelist, eventName="", **kwargs):

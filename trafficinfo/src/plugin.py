@@ -34,7 +34,7 @@ class TrafficInfoMain(Screen):
             <widget name="statuslabel" position="0,587" size="730,13" halign="left" />
         </screen>
         """
-    def __init__(self, session,args=0):
+    def __init__(self, session, args=0):
         self.loadinginprogress = False
         self.session = session
         desktop = getDesktop(0)

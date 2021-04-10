@@ -28,7 +28,7 @@ def rand():
 	return random.randint(0, 32767)
 
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	session.open(vierg)
 
 

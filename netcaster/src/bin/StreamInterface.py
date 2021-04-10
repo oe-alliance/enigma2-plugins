@@ -63,7 +63,7 @@ class LimitedHTTPClientFactory(HTTPClientFactory):
 			self.deferred.callback(self.buf)
 
 class StreamInterface:
-    def __init__(self,session,cbListLoaded=None):
+    def __init__(self, session, cbListLoaded=None):
         self.session = session
         self.cbListLoaded = cbListLoaded
 
@@ -73,7 +73,7 @@ class StreamInterface:
         #loads a list auf Streams into self.list
         pass
 
-    def getMenuItems(self,selectedStream,generic=False):
+    def getMenuItems(self, selectedStream, generic=False):
         # this return a list of MenuEntries of actions of this iterface
         # list=(("item1",func1),("item2",func2), ... )
         #
@@ -89,7 +89,7 @@ class StreamInterface:
 ###############################################################################
 class Stream:
     isfavorite = False
-    def __init__(self,name,description,url,type="mp3"):
+    def __init__(self, name, description, url, type="mp3"):
         self.name = name
         self.description = description
         self.url = url

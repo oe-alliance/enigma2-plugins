@@ -141,7 +141,7 @@ def setup(session, **kwargs):
 #    reload_module(AC3setup)
     session.open(AudioRestartSetup, plugin_path)
         
-def Plugins(path,**kwargs):
+def Plugins(path, **kwargs):
     global plugin_path
     plugin_path = path
     pluginList = [PluginDescriptor(name=_("Audio restart Setup"), description=_("Setup for the AudioRestart Plugin"), icon="AudioRestart.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=setup)]

@@ -45,7 +45,7 @@ import os
 entryList = []
 lengthList = [0, 0, 0, 0]
 
-def main(session,**kwargs):
+def main(session, **kwargs):
     session.open(fstabViewerScreen)
 	
 class fstabMenuList(MenuList):

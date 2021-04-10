@@ -1836,7 +1836,7 @@ class iDreamMerlin(Screen):
 
 	def menu_pressed(self):
 		self.startMerlinPlayerScreenTimer.stop()
-		options = [(_("Configuration"), self.config), (_("Search in iDream database"), self.searchInIDreamDatabase),]
+		options = [(_("Configuration"), self.config), (_("Search in iDream database"), self.searchInIDreamDatabase), ]
 		options.extend(((_("Scan path for music files and add them to database"), self.scanDir),))
 		if self.mode != 1:
 			options.extend(((_("Create new playlist"), self.createPlaylist),))
@@ -1978,7 +1978,7 @@ class iDreamMerlin(Screen):
 		options = [(_("search for title"), 1),
 			(_("search for artist"), 2),
 			(_("search for album"), 3),
-			(_("search in all of them"), 4),]
+			(_("search in all of them"), 4), ]
 		self.session.openWithCallback(self.enterSearchText, ChoiceBox, list=options)
 
 	def enterSearchText(self, ret):
@@ -3266,7 +3266,7 @@ class MerlinMusicPlayerFileList(Screen):
 
 	def menu_pressed(self):
 		self.startMerlinPlayerScreenTimer.stop()
-		options = [(_("Configuration"), self.config),]
+		options = [(_("Configuration"), self.config), ]
 		if not self["list"].canDescent():
 			filename = self["list"].getFilename()
 			if filename.lower().endswith(".mp3") or filename.lower().endswith(".flac") or filename.lower().endswith(".m4a") or filename.lower().endswith(".ogg"):
@@ -3400,11 +3400,11 @@ class MerlinMusicPlayerFileList(Screen):
 	def createSummary(self):
 		return MerlinMusicPlayerLCDScreenText
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	servicelist = InfoBar.instance and InfoBar.instance.servicelist
 	session.open(iDreamMerlin, servicelist)
 
-def merlinmusicplayerfilelist(session,**kwargs):
+def merlinmusicplayerfilelist(session, **kwargs):
 	servicelist = InfoBar.instance and InfoBar.instance.servicelist
 	session.open(MerlinMusicPlayerFileList, servicelist)
 

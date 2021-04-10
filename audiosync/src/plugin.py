@@ -54,7 +54,7 @@ def audioMenu(session, **kwargs):
 #	 reload_module(AC3setup)
 	session.open(AC3main.AC3LipSync, plugin_path)
 
-def Plugins(path,**kwargs):
+def Plugins(path, **kwargs):
 	global plugin_path
 	plugin_path = path
 	return [PluginDescriptor(name=_("Audio Sync Setup"), description=_("Setup for the Audio Sync Plugin"), where=PluginDescriptor.WHERE_MENU, fnc=startSetup),

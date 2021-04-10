@@ -128,7 +128,7 @@ def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
 	reactor.connectTCP(host, port, factory, timeout=timeout)
 	return factory.deferred
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	session.open(SHOUTcastWidget)
 
 def Plugins(**kwargs):
@@ -748,7 +748,7 @@ class SHOUTcastWidget(Screen):
 	def menu_pressed(self):
 		if not self.visible:
 			self.showWindow()
-		options = [(_("Config"), self.config), (_("Search"), self.search),]
+		options = [(_("Config"), self.config), (_("Search"), self.search), ]
 		if self.mode == self.FAVORITELIST and self.getSelectedItem() is not None:
 			options.extend(((_("rename current selected favorite"), self.renameFavorite),))
 			options.extend(((_("remove current selected favorite"), self.removeFavorite),))

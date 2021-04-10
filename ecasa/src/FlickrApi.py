@@ -173,8 +173,8 @@ class FlickrApi(PictureApi):
 			reactor.callLater(0, d.callback, (fullname, photo))
 		else:
 			downloadPage(six.ensure_binary(url), fullname).addCallbacks(
-				lambda value:d.callback((fullname, photo)),
-				lambda error:d.errback((error, photo)))
+				lambda value: d.callback((fullname, photo)),
+				lambda error: d.errback((error, photo)))
 		return d
 
 	def downloadThumbnail(self, photo):
@@ -210,7 +210,7 @@ class FlickrApi(PictureApi):
 		else:
 			print("[FlickrApi] Photo does not exist in cache, trying to download with deferred copy operation")
 			self.downloadPhoto(photo).addCallback(
-				lambda value:self.copyPhoto(photo, target, recursive=False)
+				lambda value: self.copyPhoto(photo, target, recursive=False)
 			)
 			return False
 

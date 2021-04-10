@@ -125,7 +125,7 @@ class KiddyTimer():
         self.sessionStartTime = None
         self.startTimer()
         
-    def startTimer(self,bForceStart=False,iRemainingSeconds=0):
+    def startTimer(self, bForceStart=False, iRemainingSeconds=0):
         curStartYear = time.localtime().tm_year 
         if curStartYear < 2011: 
             # Time has not yet been set from transponder, wait until it has been set
@@ -182,7 +182,7 @@ class KiddyTimer():
         self.iServiceReference = None
         self.dialog = None
                 
-    def resetTimer(self,**kwargs):
+    def resetTimer(self, **kwargs):
         if "setTime" in list(kwargs.keys()):
             self.setCurrentDayTime(kwargs["setTime"])
         else:            
@@ -276,7 +276,7 @@ class KiddyTimer():
             elif self.callbackParameter == PARAM_ENABLETIMERONCE:
                 self.session.openWithCallback(self.callbackEnableTimerOnce, MinuteInput)
 
-    def setCurrentDayTime(self,iDayTime=PARAM_NONE):
+    def setCurrentDayTime(self, iDayTime=PARAM_NONE):
         if iDayTime == PARAM_NONE:
             iDayTime = KTglob.getTodaysTimeInSeconds()
         self.currentDayTime = iDayTime

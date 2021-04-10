@@ -36,11 +36,11 @@ class LastFMScrobbler(object):
     def handshake(self):
         print("[LastFMScrobbler] try logging into lastfm-submission-server")
         url = "http://" + self.host + ":" + str(self.port) + "?" + urllib_urlencode({
-            "hs":"true",
-            "p":"1.1",
-            "c":self.client,
-            "v":self.version,
-            "u":self.user
+            "hs": "true",
+            "p": "1.1",
+            "c": self.client,
+            "v": self.version,
+            "u": self.user
             })
         getPage(six.ensure_binary(url)).addCallback(self.handshakeCB).addErrback(self.handshakeCBError)
 
@@ -86,7 +86,7 @@ class LastFMScrobbler(object):
         (host, port) = self.submiturl.split("/")[2].split(":")
         url = "http://" + host + ":" + port + "/" + "/".join(self.submiturl.split("/")[3:])
         data = self.encode(post)
-        getPage(six.ensure_binary(url), method="POST", headers={'Content-Type': "application/x-www-form-urlencoded",'Content-Length': str(len(data))}, postdata=data).addCallback(self.submitCB).addErrback(self.submitCBError)
+        getPage(six.ensure_binary(url), method="POST", headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(data))}, postdata=data).addCallback(self.submitCB).addErrback(self.submitCBError)
     
     def encode(self, postdict):
         result = []
@@ -109,7 +109,7 @@ class LastFMScrobbler(object):
 ############
 
 class Track(object):
-    def __init__(self,artist,name,album,length=-1,mbid=None,tracktime=None):
+    def __init__(self, artist, name, album, length=-1, mbid=None, tracktime=None):
         self.params = {}
         self.artist = artist
         self.name = name
@@ -198,7 +198,7 @@ class EventListener:
                                  )
              
              
-    def getTrack(self, artist=None, title=None, album=None,length=-1):
+    def getTrack(self, artist=None, title=None, album=None, length=-1):
         if artist == "" or artist is None:
             print("[LastFMScrobbler] CurrentlyPlayingServiceReference has no Artist, not submitting to LastFM")
             return False

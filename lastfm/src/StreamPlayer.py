@@ -19,7 +19,7 @@ class StreamPlayer:
     currentplaylistitemnumber = 0
     playlist = None
     onClose = []
-    def __init__(self,session, args=0):
+    def __init__(self, session, args=0):
         self.session = session
         self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
         self.onStateChanged = []
@@ -60,7 +60,7 @@ class StreamPlayer:
                     return str(integer)
             return "-%s:%s" % (shiftchars(minutes, " "), shiftchars(seconds, "0"))
     
-    def play(self,tracknumber=False):
+    def play(self, tracknumber=False):
         if tracknumber is False:
             self.currentplaylistitemnumber = 0 
         else:
@@ -81,7 +81,7 @@ class StreamPlayer:
     def skip(self):
         self.stop()
                 
-    def stop(self,text="",force=False):
+    def stop(self, text="", force=False):
         if self.playlist is None:
             self.is_playing = False
             self.stateChanged(self.STATE_STOP)

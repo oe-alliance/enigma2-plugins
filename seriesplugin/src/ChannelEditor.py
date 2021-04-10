@@ -114,7 +114,7 @@ class MatchList(MenuList):
 		else:
 			imageStatus = path = os.path.join(PIXMAP_PATH, "plus.png")
 		
-		l = [(stbSender, webSender, serviceref, status),]
+		l = [(stbSender, webSender, serviceref, status), ]
 		
 		pos = self.margin + self.iconPosX
 		l.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, pos, self.iconPosY, self.iconSize, self.iconSize, loadPNG(imageStatus)))
@@ -182,7 +182,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 		
 		self.helpList[0][2].sort()
 
-		self["helpActions"] = ActionMap(["HelpActions",], {
+		self["helpActions"] = ActionMap(["HelpActions", ], {
 			"displayHelp": self.showHelp
 		}, 0)
 
@@ -344,7 +344,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 			idx = self.getIndexOfServiceref(serviceref)
 			log.debug("addConfirm", servicename, serviceref, remote, idx)
 			if idx is not False:
-				self.setTitle(_("Channel '- %(servicename)s - %(remote)s -' added.") % {'servicename': servicename, 'remote':remote})
+				self.setTitle(_("Channel '- %(servicename)s - %(remote)s -' added.") % {'servicename': servicename, 'remote': remote})
 				self.addChannel(serviceref, servicename, remote)
 				self.stbToWebChlist[idx] = (servicename, remote, serviceref, "1")
 				self['list'].setList(self.stbToWebChlist)
@@ -360,13 +360,13 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 		
 		if result:
 			log.debug("add", servicename, serviceref, remote, webSender)
-			self.setTitle(_("Channel '- %(servicename)s - %(remote)s -' added.") % {'servicename': servicename, 'remote':remote})
+			self.setTitle(_("Channel '- %(servicename)s - %(remote)s -' added.") % {'servicename': servicename, 'remote': remote})
 			self.addChannel(serviceref, servicename, remote)
 			self.stbToWebChlist[idx] = (servicename, webSender + " / " + remote, serviceref, "1")
 			
 		else:
 			log.debug("replace", servicename, serviceref, remote, webSender)
-			self.setTitle(_("Channel '- %(servicename)s - %(remote)s -' replaced.") % {'servicename': servicename, 'remote':remote})
+			self.setTitle(_("Channel '- %(servicename)s - %(remote)s -' replaced.") % {'servicename': servicename, 'remote': remote})
 			self.replaceChannel(serviceref, servicename, remote)
 			self.stbToWebChlist[idx] = (servicename, remote, serviceref, "1")
 			

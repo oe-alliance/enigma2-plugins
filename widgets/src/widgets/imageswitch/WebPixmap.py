@@ -46,14 +46,14 @@ class WebPixmap(Pixmap):
 		elif url is not None:
 			self.tmpfile = tmpfile
 			head = {
-				"Accept":"image/png,image/*;q=0.8,*/*;q=0.5",
-				"Accept-Language":"de",
-				"Accept-Encoding":"gzip,deflate",
-				"Accept-Charset":"ISO-8859-1,utf-8;q=0.7,*;q=0.7",
-				"Keep-Alive":"300",
-				"Referer":"http://maps.google.de/",
+				"Accept": "image/png,image/*;q=0.8,*/*;q=0.5",
+				"Accept-Language": "de",
+				"Accept-Encoding": "gzip,deflate",
+				"Accept-Charset": "ISO-8859-1,utf-8;q=0.7,*;q=0.7",
+				"Keep-Alive": "300",
+				"Referer": "http://maps.google.de/",
 				"Cookie:": "khcookie=fzwq1BaIQeBvxLjHsDGOezbBcCBU1T_t0oZKpA; PREF=ID=a9eb9d6fbca69f5f:TM=1219251671:LM=1219251671:S=daYFLkncM3cSOKsF; NID=15=ADVC1mqIWQWyJ0Wz655SirSOMG6pXP2ocdXwdfBZX56SgYaDXNNySnaOav-6_lE8G37iWaD7aBFza-gsX-kujQeH_8WTelqP9PpaEg0A_vZ9G7r50tzRBAZ-8GUwnEfl",
-				"Connection":"keep-alive"
+				"Connection": "keep-alive"
 			}
 			agt = "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.0.2) Gecko/2008091620 Firefox/3.0.2"
 			downloadPage(six.ensure_binary(url), self.tmpfile, headers=head, agent=agt).addCallback(self.onLoadFinished).addErrback(self.onLoadFailed)

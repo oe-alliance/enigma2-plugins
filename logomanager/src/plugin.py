@@ -38,13 +38,13 @@ def start_from_filescan(**kwargs):
         )
 
 
-def main(session,**kwargs):
+def main(session, **kwargs):
     if os_path.isdir(config.plugins.logomanager.path.value) is not True:
         session.open(LogoManagerConfigScreen)
     else:
         session.open(LogoManagerScreen)
 
-def Plugins(path,**kwargs):
+def Plugins(path, **kwargs):
     global plugin_path
     plugin_path = path
     return [

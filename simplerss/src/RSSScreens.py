@@ -239,7 +239,7 @@ class RSSFeedView(RSSBaseView):
 			<widget source="summary" render="Label" position="0,320" size="460,95" font="Regular;16" />
 		</screen>"""
 
-	def __init__(self, session, feed=None, newItems=False, parent=None, rssPoller=None,id=None):
+	def __init__(self, session, feed=None, newItems=False, parent=None, rssPoller=None, id=None):
 		RSSBaseView.__init__(self, session, rssPoller, parent)
 
 		self.feed = feed
