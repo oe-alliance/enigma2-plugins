@@ -145,7 +145,7 @@ class MC_WeatherInfo(Screen):
 				ffmpeg = "/sbin/ffmpeg"
 			else:
 				ffmpeg = "/usr/bin/ffmpeg"
-			if fileExists("/sbin/ffmpeg") or fileExists("/sbin/ffmpeg"):	
+			if fileExists("/sbin/ffmpeg") or fileExists("/sbin/ffmpeg"):
 				cmd = [ffmpeg, "-f", "image2", "-i", "/tmp/" + stadt + ".jpg", mviname]
 				subprocess.Popen(cmd).wait()
 			if fileExists(mviname):
@@ -216,7 +216,7 @@ class MC_WeatherInfo(Screen):
 		errormessage = ""
 		for childs in root:
 			if childs.tag == "weather":
-				
+
 				errormessage = childs.attrib.get("errormessage")
 				if errormessage:
 					self["statustext"].text = errormessage.encode("utf-8", 'ignore')
@@ -345,7 +345,7 @@ class WeatherSetup(Screen):
 		self["city"] = StaticText(_("City"))
 		self["degreetype"] = StaticText(_("System"))
 		self["key_red"] = StaticText(_("Back"))
-		self["key_green"] = StaticText(_("Add"))		
+		self["key_green"] = StaticText(_("Add"))
 		self["key_yellow"] = StaticText(_("Edit"))
 		self["key_blue"] = StaticText(_("Delete"))
 		self["entrylist"] = WeatherPluginEntryList([])
@@ -354,7 +354,7 @@ class WeatherSetup(Screen):
 			 "ok": self.keyOK,
 			 "back": self.keyClose,
 			 "red": self.keyClose,
-			 "green": self.keyGreen,			 
+			 "green": self.keyGreen,
 			 "yellow": self.keyYellow,
 			 "blue": self.keyDelete,
 			 }, -1)
@@ -522,7 +522,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 		config.plugins.mc_wi.Entry.save()
 		config.plugins.mc_wi.save()
 		configfile.save()
-		self.close()		
+		self.close()
 
 	def xmlCallback(self, xmlstring):
 		if xmlstring:
@@ -548,13 +548,13 @@ class MSNWeatherPluginSearch(Screen):
 			<ePixmap position="140,10" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 			<ePixmap position="280,10" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
 			<ePixmap position="420,10" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		</screen>""" 
+		</screen>"""
 
 	def __init__(self, session, xmlstring):
 		Screen.__init__(self, session)
 		self.title = _("MSN location search result")
 		self["key_red"] = StaticText(_("Back"))
-		self["key_green"] = StaticText(_("OK"))		
+		self["key_green"] = StaticText(_("OK"))
 		self["entrylist"] = MSNWeatherPluginSearchResultList([])
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
 			{

@@ -66,7 +66,7 @@ class Seekbar(ConfigListScreen, Screen):
 
 	def __init__(self, session, instance, fwd):
 		Screen.__init__(self, session)
-		
+
 		self.session = session
 		self.infobarInstance = instance
 		self.fwd = fwd
@@ -90,7 +90,7 @@ class Seekbar(ConfigListScreen, Screen):
 				if self.length and position:
 					if int(position[1]) > 0:
 						self.percent = float(position[1]) * 100.0 / float(self.length[1])
-		
+
 		self.minuteInput = ConfigNumber(default=5)
 		self.positionEntry = ConfigSelection(choices=["<>"], default="<>")
 		if self.fwd:
@@ -102,16 +102,16 @@ class Seekbar(ConfigListScreen, Screen):
 			getConfigListEntry(_("Go to position:"), self.positionEntry),
 			getConfigListEntry(_("Sensibility:"), config.plugins.Seekbar.sensibility),
 			getConfigListEntry(_("Overwrite left and right buttons:"), config.plugins.Seekbar.overwrite_left_right)])
-		
+
 		self["cursor"] = MovingPixmap()
 		self["time"] = Label()
-		
+
 		self["actions"] = ActionMap(["WizardActions"], {"back": self.exit}, -1)
-		
+
 		self.cursorTimer = eTimer()
 		self.cursorTimer.callback.append(self.updateCursor)
 		self.cursorTimer.start(200, False)
-		
+
 		self.onLayoutFinish.append(self.firstStart)
 
 	def firstStart(self):

@@ -333,7 +333,7 @@ class VlcServer:
 
 		if re.match("dvd", filename):
 			# sout-all only, if is not selected subtitle track or subtitle language
-			if self.gettypeSubtitles() == "---" or self.gettypeSubtitles() == "-1": 
+			if self.gettypeSubtitles() == "---" or self.gettypeSubtitles() == "-1":
 				parameters += " :sout-all"
 		else:
 			parameters += " :sout-all"

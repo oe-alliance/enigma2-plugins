@@ -12,8 +12,8 @@
 #
 #  Provided with no warranties of any sort.
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -22,7 +22,7 @@
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 
@@ -63,7 +63,7 @@ from Components.ConfigList import ConfigListScreen
 from Screens.Setup import SetupSummary
 
 from boxbranding import getImageDistro
-###############################################################################        
+###############################################################################
 VERSION = "0.1.9"
 # History:
 # 0.1.2 First public version
@@ -82,7 +82,7 @@ VERSION = "0.1.9"
 # 0.1.8 Performance improvement: avoid duplicate cleanup of orphaned movie files if EMC movie_homepath is same as E2 moviePath
 # 0.1.9	Remove orphaned files in movie path marked for E2 smooth deletion (during session start only, to avoid conflicting E2)
 #		Simplify translation code: Setting the os LANGUAGE variable isn't needed anymore
-###############################################################################  
+###############################################################################
 pluginPrintname = "[AutomaticCleanup Ver. %s]" % VERSION
 DEBUG = False # If set True, plugin won't remove any file physically, instead prints file names in log for verification purposes
 ###############################################################################
@@ -109,7 +109,7 @@ class AutomaticCleanupSetup(Screen, ConfigListScreen): # config
 			<ePixmap pixmap="skin_default/buttons/green.png" position="165,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="325,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/blue.png" position="485,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			
+
 			<widget render="Label" source="key_red" position="5,5" size="140,40" zPosition="2" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_green" position="165,5" size="140,40" zPosition="2" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_yellow" position="325,5" size="140,40" zPosition="2" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -117,16 +117,16 @@ class AutomaticCleanupSetup(Screen, ConfigListScreen): # config
 			<widget name="config" position="5,60" size="620,155" scrollbarMode="showOnDemand" />
 
 			<ePixmap pixmap="skin_default/div-h.png" position="0,220" zPosition="1" size="630,2" />
-			<widget source="help" render="Label" position="5,235" size="620,75" font="Regular;21" /> 
+			<widget source="help" render="Label" position="5,235" size="620,75" font="Regular;21" />
 		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		
+
 		#Summary
 		self.setup_title = _("Automatic System Cleanup Setup")
 
-		self.onChangedEntry = []		
+		self.onChangedEntry = []
 
 		self.list = [
 			getConfigListEntry(_("Delete system setting backups"), config.plugins.AutomaticCleanup.deleteSettingsOlderThan,
@@ -143,21 +143,21 @@ class AutomaticCleanupSetup(Screen, ConfigListScreen): # config
 
 		try:
 			# try to import EMC module to check for its existence
-			from Plugins.Extensions.EnhancedMovieCenter.EnhancedMovieCenter import EnhancedMovieCenterMenu 
+			from Plugins.Extensions.EnhancedMovieCenter.EnhancedMovieCenter import EnhancedMovieCenterMenu
 			self.EMC_timer_autocln = config.EMC.timer_autocln.value
 		except ImportError as ie:
 			print(pluginPrintname, "EMC not installed:", ie)
 			self.EMC_timer_autocln = False
-			
+
 		if self.EMC_timer_autocln: # Timer cleanup enabled in EMC plugin?
 			self.list.append(getConfigListEntry(_("Delete timerlist entries"), config.plugins.AutomaticCleanup.deleteTimersOlderThan,
 				_("Timerlist cleanup is enabled in EMC plugin! To avoid crashes, we won't delete entries whilst this option is enabled in EMC."))) # Avoid duplicate cleanup
 		else:
 			self.list.append(getConfigListEntry(_("Delete timerlist entries"), config.plugins.AutomaticCleanup.deleteTimersOlderThan,
 				_("Specify, how long expired timer list entries shall be kept at most. Deactivated repeat timer entries won't be deleted ever.")))
-			
+
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changed)
-		
+
 		def selectionChanged():
 			if self["config"].current:
 				self["config"].current[1].onDeselect(self.session)
@@ -166,7 +166,7 @@ class AutomaticCleanupSetup(Screen, ConfigListScreen): # config
 				self["config"].current[1].onSelect(self.session)
 			for x in self["config"].onSelectionChanged:
 				x()
-				
+
 		self["config"].selectionChanged = selectionChanged
 		self["config"].onSelectionChanged.append(self.configHelp)
 
@@ -175,14 +175,14 @@ class AutomaticCleanupSetup(Screen, ConfigListScreen): # config
 		self["key_green"] = StaticText(_("OK"))
 		self["key_yellow"] = StaticText(_("Help"))
 
-		self["help"] = StaticText()		
+		self["help"] = StaticText()
 
-		# Define Actions		
+		# Define Actions
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 			{
 			"red": self.keyCancel,
 			"green": self.keySave,
-			"yellow": self.keyHelp,		
+			"yellow": self.keyHelp,
 			"cancel": self.keyCancel,
 			"save": self.keySave,
 			"ok": self.keySave,
@@ -204,8 +204,8 @@ class AutomaticCleanupSetup(Screen, ConfigListScreen): # config
 			try:
 				x()
 			except Exception:
-				pass	
-			
+				pass
+
 	def getCurrentEntry(self):
 		return self["config"].getCurrent()[0]
 
@@ -214,10 +214,10 @@ class AutomaticCleanupSetup(Screen, ConfigListScreen): # config
 
 	def createSummary(self):
 		return SetupSummary
-		
-	def keyHelp(self):            
+
+	def keyHelp(self):
 		self.session.open(MessageBox,
-			_('Cleanup timerlist, orphaned movie files and stored setting backups automatically.\n\nModify the settings to match your preferences. More detailed explanations given with each adjustable option.'), 
+			_('Cleanup timerlist, orphaned movie files and stored setting backups automatically.\n\nModify the settings to match your preferences. More detailed explanations given with each adjustable option.'),
 			MessageBox.TYPE_INFO)
 
 
@@ -243,7 +243,7 @@ class AutomaticCleanup:
 		config.plugins.AutomaticCleanup.deleteOrphanedMovieFiles.addNotifier(self.configChange, initial_call=False)
 		config.plugins.AutomaticCleanup.deleteTimersOlderThan.addNotifier(self.configChange, initial_call=False)
 		self.session.nav.RecordTimer.on_state_change.append(self.timerentryOnStateChange)
-		
+
 	def configChange(self, configElement=None):
 		# config was changed in setup
 		if self.timer.isActive(): # stop timer if running
@@ -251,10 +251,10 @@ class AutomaticCleanup:
 		print(pluginPrintname, "Setup values have changed")
 		if self.cleanupEnabled(): # check only if feature is enabled
 			print(pluginPrintname, "Next automatic timerlist cleanup at ", strftime("%c", localtime(time() + 120)))
-			self.timer.startLongTimer(120) # check timerlist in 2 minutes after changing 
+			self.timer.startLongTimer(120) # check timerlist in 2 minutes after changing
 		else:
 			print(pluginPrintname, "Cleanup disabled")
-			
+
 	def doCleanup(self):
 		if self.timer.isActive(): # stop timer if running
 			self.timer.stop()
@@ -266,7 +266,7 @@ class AutomaticCleanup:
 			self.timer.startLongTimer(self.checkInterval) # check again after x secs
 		else:
 			print(pluginPrintname, "Cleanup disabled")
-		
+
 	def cleanupSettings(self):
 		if int(config.plugins.AutomaticCleanup.keepSettings.value) > -1 or int(config.plugins.AutomaticCleanup.deleteSettingsOlderThan.value) > -1: # check only if feature is enabled
 			print(pluginPrintname, "Cleaning up setting backups")
@@ -283,10 +283,10 @@ class AutomaticCleanup:
 				self.filterSettings()
 		else:
 			print(pluginPrintname, "Setting backups cleanup disabled")
-				
+
 	def filterSettings(self):
 		self.deleteList = []
-		
+
 		keep = int(config.plugins.AutomaticCleanup.keepSettings.value)
 		if keep > -1: # don't keep all setting backups
 			if keep > self.numSettings:
@@ -302,7 +302,7 @@ class AutomaticCleanup:
 			now = int(time())
 			# 86400 = one day in seconds
 			deleteOlderThan = now - 86400 * int(config.plugins.AutomaticCleanup.deleteSettingsOlderThan.value)
-			
+
 			if keep > -1: # don't keep all settings
 				# start checking the range in self.settingList which wasn't copied to
 				# self.deleteList
@@ -313,7 +313,7 @@ class AutomaticCleanup:
 					i = 0
 			else:
 				i = 0
-			
+
 			while i < self.numSettings:
 				self.backupPath = self.getBackupPath()
 				backupDatePos = self.settingList[i].rfind('/') + 1
@@ -325,7 +325,7 @@ class AutomaticCleanup:
 					break
 				self.deleteList.append(self.settingList[i])
 				i += 1
-			
+
 			print(pluginPrintname, "Found %i outdated setting backup(s)" % i)
 
 		for setting in self.deleteList:
@@ -335,8 +335,8 @@ class AutomaticCleanup:
 				remove(setting)
 
 		print(pluginPrintname, "Deleted %i setting backup(s)" % len(self.deleteList))
-						
-	def getBackupPath(self):	
+
+	def getBackupPath(self):
 		try:
 			# try to import SoftwareManager module to check for its existence
 			from Plugins.SystemPlugins.SoftwareManager.plugin import UpdatePluginMenu
@@ -347,17 +347,17 @@ class AutomaticCleanup:
 		if backuppath.endswith('/'):
 			return (backuppath + 'backup')
 		else:
-			return (backuppath + '/backup')		
-		
+			return (backuppath + '/backup')
+
 	def cleanupTimerlist(self):
 		try:
 			# try to import EMC module to check for its existence
-			from Plugins.Extensions.EnhancedMovieCenter.EnhancedMovieCenter import EnhancedMovieCenterMenu 
+			from Plugins.Extensions.EnhancedMovieCenter.EnhancedMovieCenter import EnhancedMovieCenterMenu
 			self.EMC_timer_autocln = config.EMC.timer_autocln.value
 		except ImportError as ie:
 			print(pluginPrintname, "EMC not installed:", ie)
 			self.EMC_timer_autocln = False
-			
+
 		if int(config.plugins.AutomaticCleanup.deleteTimersOlderThan.value) > -1:  # check only if feature is enabled
 			if self.EMC_timer_autocln:	# Duplicate cleanup?
 				print(pluginPrintname, "Timerlist cleanup skipped because it is already enabled in EMC") # we skip check to avoid crash
@@ -368,18 +368,18 @@ class AutomaticCleanup:
 					self.session.nav.RecordTimer.processed_timers = [timerentry for timerentry in self.session.nav.RecordTimer.processed_timers if timerentry.repeated or (timerentry.end and timerentry.end > expiration)] # cleanup timerlist
 		else:
 			print(pluginPrintname, "Timerlist cleanup disabled")
-		
+
 	def timerentryOnStateChange(self, timer):
 		if int(config.plugins.AutomaticCleanup.deleteTimersOlderThan.value) == 0 and timer.state == TimerEntry.StateEnded and timer.cancelled is not True: #if enabled, timerentry ended and it was not cancelled by user
 			print(pluginPrintname, "Timerentry has been changed to StateEnd")
 			self.cleanupTimerlist() # and check if entries have to be cleaned up in the timerlist
-		
+
 	def cleanupMovies(self):
 		if config.plugins.AutomaticCleanup.deleteOrphanedMovieFiles.value: # check only if feature is enabled
 			print(pluginPrintname, "Cleaning up orphaned movies")
 			moviePath = []
 			excludePath = []
-			
+
 			from Components.UsageConfig import defaultMoviePath
 			if defaultMoviePath().endswith('/'):
 				moviePath.append(defaultMoviePath())
@@ -388,7 +388,7 @@ class AutomaticCleanup:
 			if config.usage.instantrec_path.value.endswith('/'):
 				excludePath.append(config.usage.instantrec_path.value)
 			else:
-				excludePath.append(config.usage.instantrec_path.value + "/")			
+				excludePath.append(config.usage.instantrec_path.value + "/")
 			if config.usage.timeshift_path.value.endswith('/'):
 				excludePath.append(config.usage.timeshift_path.value)
 			else:
@@ -434,8 +434,8 @@ class AutomaticCleanup:
 						excludePath[f] = "/media" + excludePath[f]
 				print(pluginPrintname, "Movie path:", moviePath)
 				print(pluginPrintname, "Excluded movie path:", excludePath)
-				for checkPath in moviePath:	
-					self.filterMovies(str(checkPath), excludePath)				
+				for checkPath in moviePath:
+					self.filterMovies(str(checkPath), excludePath)
 		else:
 			print(pluginPrintname, "Orphaned movies cleanup disabled")
 
@@ -449,7 +449,7 @@ class AutomaticCleanup:
 		if DEBUG:
 			print(pluginPrintname, "Checking moviepath:", scanPath)
 
-		if self.initialState: 
+		if self.initialState:
 			extensions = [".ts.ap", ".ts.cuts", ".ts.cutsr", ".ts.gm", ".ts.meta", ".ts.sc", ".eit", ".png", ".ts_mp.jpg", ".ts.del", ".ts.ap.del", ".ts.cuts.del", ".ts.cutsr.del", ".ts.gm.del", ".ts.meta.del", ".ts.sc.del", ".eit.del"] # include orphaned files marked for E2 smooth deletion
 		else:
 			extensions = [".ts.ap", ".ts.cuts", ".ts.cutsr", ".ts.gm", ".ts.meta", ".ts.sc", ".eit", ".png", ".ts_mp.jpg"]
@@ -463,7 +463,7 @@ class AutomaticCleanup:
 			else:
 				for ext in extensions:
 					if p.endswith(ext):
-						if not path.exists(scanPath + p.replace(ext, ".ts")):							
+						if not path.exists(scanPath + p.replace(ext, ".ts")):
 							if DEBUG:
 								print(pluginPrintname, "Deletable orphaned movie file:", scanPath + p)
 							else:
@@ -497,7 +497,7 @@ def startSetup(menuid):
 		if menuid != "system":
 			return []
 	return [(_("System cleanup"), setup, "AutomaticCleanup", 50)]
-	
+
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart), PluginDescriptor(name="System cleanup", description=_("Automatic System Cleanup Setup"), where=PluginDescriptor.WHERE_MENU, fnc=startSetup)]

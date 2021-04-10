@@ -27,4 +27,3 @@ def sessionstart(reason, session=None):
 def Plugins(path, **kwargs):
 	return [PluginDescriptor(name="StartupToStandby", description="Startup To Standby", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main, needsRestart=False),
 			PluginDescriptor(name="StartupToStandby", description="Startup To Standby", where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart, needsRestart=False, weight=-1)]
-

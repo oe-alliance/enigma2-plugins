@@ -1569,7 +1569,7 @@ def addAutotimerFromEventSilent(session, evt=None, service=None):
 	newTimer.match = name
 	if newTimer.timespan[0]:
 		newTimer.timespan = ((begin[3], begin[4]), (end[3], end[4]), False)
-	
+
 	if newTimer.include:
 		includes = [
 				newTimer.getIncludedTitle(),
@@ -1578,7 +1578,7 @@ def addAutotimerFromEventSilent(session, evt=None, service=None):
 				[str(begin.tm_wday)],
 		]
 		newTimer.include = includes
-	
+
 	newTimer.services = [service]
 	newTimer.enabled = True
 
@@ -1600,4 +1600,3 @@ def editorCallback(ret):
 
 		autotimer.readXml()
 		autotimer.parseEPG()
-

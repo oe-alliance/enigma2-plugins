@@ -110,7 +110,7 @@ class YouTubeFeed():
 
 	def getTotalResults(self):
 		return self.feed.total_results.text
-	
+
 	def getNextFeed(self):
 		print("[YTB] YouTubeFeed::getNextFeed()")
 		for link in self.feed.link:
@@ -205,7 +205,7 @@ class YouTubeEntry():
 	def loadThumbnails(self, callback):
 		print("[YTB] YouTubeEntry::loadThumbnails()")
 		self.loadThumbnail(0, callback)
-		
+
 	def verify_url(self, url):
 		try:
 			request = Request(url, None, std_headers)
@@ -241,7 +241,7 @@ class YouTubeEntry():
 		else:
 			quality_fallback_dict = dict({"22": "18", "18": "6", "6": "1"})
 			token = video_info['token'][0]
-			while True: 
+			while True:
 				print("[YTB] Trying fmt=" + fmt)
 				video_real_url = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en&fmt=%s' % (video_id, token, fmt)
 				video_real_url = self.verify_url(video_real_url)
@@ -271,12 +271,12 @@ class YouTubeEntry():
 		if self.entry.rating is not None:
 			return self.entry.rating.num_raters
 		return ""
-	
+
 	def getRatingMax(self):
 		if self.entry.rating is not None:
 			return self.entry.rating.max
 		return "not available"
-	
+
 	def getRatingMin(self):
 		if self.entry.rating is not None:
 			return self.entry.rating.min
@@ -286,7 +286,7 @@ class YouTubeEntry():
 		if self.entry.statistics is not None:
 			return self.entry.statistics.favorite_count
 		return "not available"
-	
+
 	def getViewCount(self):
 		if self.entry.statistics is not None:
 			return self.entry.statistics.view_count
@@ -450,7 +450,7 @@ class YouTubeInterface():
 		return self.loggedIn
 
 	def search(self, searchTerms, startIndex=1, maxResults=25,
-					orderby="relevance", time="all_time", racy="include", 
+					orderby="relevance", time="all_time", racy="include",
 					author="", lr="", categories="", sortOrder="ascending", format="6"):
 		print("[YTB] YouTubeInterface::search()")
 		query = gdata.youtube.service.YouTubeVideoQuery()

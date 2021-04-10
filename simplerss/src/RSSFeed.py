@@ -171,7 +171,7 @@ class UniversalFeed(BaseFeed):
 
 		# Set Autoupdate
 		self.autoupdate = autoupdate
-		
+
 		# Is this a synced feed?
 		self.sync = sync
 
@@ -248,4 +248,3 @@ class UniversalFeed(BaseFeed):
 			self.logoUrl = wrapper.logo
 
 		return self.gotWrapper(wrapper)
-

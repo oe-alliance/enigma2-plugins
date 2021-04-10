@@ -55,7 +55,7 @@ gInfoBarTunerState = None
 
 
 # Config choices
-field_choices = [	
+field_choices = [
 									("TypeIcon", _("Type (Icon)")),
 									("TypeText", _("Type (Text)")),
 									("Tuner", _("Tuner")),
@@ -82,7 +82,7 @@ field_choices = [
 									("None", _("None")),
 								]
 
-date_choices = [	
+date_choices = [
 									("%H:%M", _("HH:MM")),
 									("%d.%m %H:%M", _("DD.MM HH:MM")),
 									("%d.%m. %H:%M", _("DD.MM. HH:MM")),
@@ -99,7 +99,7 @@ date_choices = [
 								]
 
 #TODO New Config Show on timer prepare Event
-event_choices = [	
+event_choices = [
 									("prepare", _("Prepare record")),
 									("start", _("Start record")),
 									("end", _("End record")),
@@ -170,7 +170,7 @@ config.infobartunerstate.background_transparency = ConfigYesNo(default=False)
 # Plugin main function
 def Plugins(**kwargs):
 	descriptors = []
-	
+
 	if config.infobartunerstate.enabled.value:
 		# SessionStart
 		descriptors.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=start, needsRestart=False))
@@ -178,7 +178,7 @@ def Plugins(**kwargs):
 			descriptors.append(PluginDescriptor(name=IBTSSHOW, description=IBTSSHOW, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=show, needsRestart=False))
 		if config.infobartunerstate.extensions_menu_setup.value:
 			descriptors.append(PluginDescriptor(name=IBTSSETUP, description=IBTSSETUP, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=setup, needsRestart=False))
-	
+
 	descriptors.append(PluginDescriptor(name=NAME, description=NAME + " " + _("configuration"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=setup, needsRestart=False, icon="plugin.png"))
 
 	return descriptors
@@ -234,4 +234,3 @@ def show(session, **kwargs):
 		# No InfoBarTunerState Instance running
 		print("InfoBarTunerState disabled")
 		session.open(MessageBox, _("InfoBarTunerState is disabled"), MessageBox.TYPE_INFO, 3)
-

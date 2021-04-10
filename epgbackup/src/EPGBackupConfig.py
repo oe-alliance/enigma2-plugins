@@ -27,7 +27,7 @@ from traceback import format_exc
 
 from .plugin import gUserScriptExists
 from .plugin import epgbackup
-			
+
 
 class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 	skin = """
@@ -45,21 +45,21 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
-		
+
 		# Summary
 		self.setup_title = _("EPGBackup Setup")
 		self.onChangedEntry = []
-		
+
 		self.session = session
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session, on_change=self.changed)
 		self["config"].onSelectionChanged.append(self._updateHelp)
 		self._getConfig()
-		
+
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 		self["help"] = StaticText()
-		
+
 		# Actions
 		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
 			{
@@ -83,7 +83,7 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 				"prevBouquet": (self.pagedown, _("Move page down")),
 			}
 		)
-		
+
 		self["HelpActions"] = ActionMap(["HelpActions"],
 			{
 				"displayHelp": self.showKeyHelp,
@@ -92,25 +92,25 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 
 		# Trigger change
 		self.changed()
-		
+
 		self.confShowSetupIn = config.plugins.epgbackup.show_setup_in.value
-		
+
 		config.plugins.epgbackup.backup_strategy.addNotifier(self.updateVariableHelpText, initial_call=False, immediate_feedback=True)
 		self.onClose.append(self.removeNotifiers)
-		
+
 		self.needsEnigmaRestart = False
 		self.onLayoutFinish.append(self._layoutFinished)
 		self["config"].isChanged = self._ConfigisChanged
-	
+
 	def _layoutFinished(self):
 		self.setTitle(_("EPGBackup Setup") + " V%s" % (PLUGIN_VERSION))
-	
+
 	def removeNotifiers(self):
 		try:
 			config.plugins.epgbackup.backup_strategy.removeNotifier(self.updateVariableHelpText)
 		except:
 			debugOut("removeNotifiers-Error:\n" + str(format_exc()), forced=True)
-	
+
 	def showMainHelp(self):
 		from .plugin import epgBackuphHelp
 		if epgBackuphHelp:
@@ -157,11 +157,11 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 					self.showMainHelp()
 		except:
 			debugOut("menuCallback-Error:\n" + str(format_exc()), forced=True)
-	
+
 	def _getConfig(self):
 		# Name, configElement, HelpTxt, reloadConfig
 		try:
-			self.list = [] 
+			self.list = []
 			self.list.append(getConfigListEntry(_("Enable Backup"), config.plugins.epgbackup.backup_enabled, _("Should the Backup-Functionality be enabled?\nFor more Information have a look at the Help-Screen."), True))
 			if config.plugins.epgbackup.backup_enabled.value:
 				self.list.append(getConfigListEntry(_("make Backup on start"), config.plugins.epgbackup.make_backup_after_unsuccess_restore, _("Make a backup before starting enigma. A backup-file will only be created, if no valid backup-file could be restored.\nNote: It's logically the same as making a backup at the ending of enigma, because the file didn't change in the meanwhile."), False))
@@ -181,12 +181,12 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 						self.list.append(getConfigListEntry(_("Log-directory"), config.plugins.epgbackup.backup_log_dir, _("Directory for the Logfiles."), False))
 					if gUserScriptExists:
 						self.list.append(getConfigListEntry(_("Show in User-Scripts"), config.plugins.epgbackup.showin_usr_scripts, _("Should the Manage-Script be shown in User-Scripts?"), False))
-					
+
 					self.list.append(getConfigListEntry(_("Show messages in background"), config.plugins.epgbackup.show_messages_background, _("Pop a notification if called in background?"), False))
 					self.list.append(getConfigListEntry(_("Show setup in"), config.plugins.epgbackup.show_setup_in, _("Where should this setup be displayed?"), False))
 					self.list.append(getConfigListEntry(_("Show \"Make Backup\" in extension menu"), config.plugins.epgbackup.show_make_backup_in_extmenu, _("Enable this to be able to make a Backup-File from within the extension menu."), False))
 					self.list.append(getConfigListEntry(_("Show \"Restore Backup\" in extension menu"), config.plugins.epgbackup.show_backuprestore_in_extmenu, _("Enable this to be able to start a restore of a Backup-File from within the extension menu."), False))
-				
+
 			self["config"].list = self.list
 			self["config"].setList(self.list)
 		except:
@@ -196,7 +196,7 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 		if (self.confShowSetupIn == "system" and config.plugins.epgbackup.show_setup_in.value != "system") \
 			or (self.confShowSetupIn != "system" and config.plugins.epgbackup.show_setup_in.value == "system"):
 			self.needsEnigmaRestart = True
-	
+
 	# overwrites / extendends
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -205,7 +205,7 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
 		self._onKeyChange()
-	
+
 	# overwrite configlist.isChanged
 	def _ConfigisChanged(self):
 		is_changed = False
@@ -213,7 +213,7 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 			if not x[1].save_disabled:
 				is_changed |= x[1].isChanged()
 		return is_changed
-	
+
 	def keyOK(self):
 		self["config"].handleKey(KEY_OK)
 		cur = self["config"].getCurrent()
@@ -274,10 +274,10 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 			for x in self["config"].list:
 				x[1].save()
 			configfile.save()
-		
+
 		self._checkNeedsRestart()
 		self.close(self.session, self.needsEnigmaRestart)
-	
+
 	# for Summary
 	def changed(self):
 		for x in self.onChangedEntry:
@@ -296,5 +296,3 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 
 	def createSummary(self):
 		return SetupSummary
-
-

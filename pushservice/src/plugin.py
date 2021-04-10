@@ -108,13 +108,13 @@ def autostart(reason, **kwargs):
 #######################################################
 # Plugin main function
 def Plugins(**kwargs):
-	
+
 	descriptors = []
-	
+
 	if config.pushservice.enable.value:
 		# AutoStart
 		descriptors.append(PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, fnc=autostart, needsRestart=False))
-		
+
 	#TODO icon
 	descriptors.append(PluginDescriptor(name=NAME, description=NAME + " " + _("configuration"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=setup, needsRestart=False)) #icon = "/icon.png"
 

@@ -28,14 +28,14 @@ class Interface(StreamInterface):
         list = []
         if generic is True and selectedStream is not None:
             if selectedStream.isFavorite() is False:
-                list.append((_("add stream to favorites"), self.addStream))            
+                list.append((_("add stream to favorites"), self.addStream))
         elif generic is False and selectedStream is not None:
             if selectedStream.isFavorite() is False:
                 list.append((_("add stream to favorites"), self.addStream))
             if selectedStream.isFavorite() is True:
                 list.append((_("delete stream from favorites"), self.deleteStream))
         return list
-    
+
     def deleteStream(self):
         print("favorites deleteStream")
         if self.selectedStream is not None:
@@ -47,7 +47,7 @@ class Interface(StreamInterface):
         if self.selectedStream is not None:
             SHOUTcasterFavorites().addStream(self.selectedStream)
         #self.getList()
-############################################################################### 
+###############################################################################
 
 
 class SHOUTcasterFavorites:
@@ -111,18 +111,17 @@ class SHOUTcasterFavorites:
             return False, "stream not found in config"
         elif self.configparser.has_section(streamnew.getName()) is True:
             return False, "stream with that name exists already"
-        else:    
+        else:
            self.configparser.remove_section(streamold.getName())
            return self.addStream(streamnew)
-        
+
     def deleteStreamWithName(self, streamname):
         self.configparser.remove_section(streamname)
         self.writeConfig()
-        
+
     def writeConfig(self):
         print("[" + myname + "] writing config to " + self.configfile)
-        
+
         fp = open(self.configfile, "w")
         self.configparser.write(fp)
         fp.close()
-            

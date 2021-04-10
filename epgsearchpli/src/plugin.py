@@ -1,5 +1,5 @@
 from __future__ import absolute_import
-# for localized messages  
+# for localized messages
 from . import _
 from enigma import eServiceCenter
 from Screens.EpgSelection import EPGSelection

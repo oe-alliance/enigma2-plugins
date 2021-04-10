@@ -1,13 +1,13 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 #  Advanced Movie Selection for Dreambox-Enigma2
 #
 #  The plugin is developed on the basis from a lot of single plugins (thx for the code @ all)
 #  Coded by JackDaniel & cmikula (c)2011
 #  Support: www.i-have-a-dreambox.com
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -16,7 +16,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 from __future__ import absolute_import
@@ -34,7 +34,7 @@ from Components.Pixmap import Pixmap
 import os
 
 
-class EventViewBase:    
+class EventViewBase:
     def __init__(self, event, ref, callback=None, similarEPGCB=None):
         self.similarEPGCB = similarEPGCB
         self.cbFunc = callback
@@ -47,7 +47,7 @@ class EventViewBase:
         self["key_yellow"] = StaticText("")
         self["yellow_button"] = Pixmap()
         self["key_blue"] = StaticText("")
-        self["blue_button"] = Pixmap()        
+        self["blue_button"] = Pixmap()
         self["Location"] = Label()
         self["epg_description"] = ScrollLabel()
         self["Service"] = ServiceEvent()
@@ -132,19 +132,19 @@ class EventViewBase:
         if name:
             from SearchTVDb import TheTVDBMain
             self.session.open(TheTVDBMain, self.currentService)
-        
+
     def green_button(self):
         name = self.getEventName()
         if name:
             from SearchTMDb import TMDbMain
-            self.session.open(TMDbMain, name, self.currentService) 
-        
+            self.session.open(TMDbMain, name, self.currentService)
+
     def yellow_button(self):
         name = self.getEventName()
         if pluginPresent.IMDb and name:
             from Plugins.Extensions.IMDb.plugin import IMDB
             self.session.open(IMDB, name)
-        
+
     def blue_button(self):
         name = self.getEventName()
         if pluginPresent.OFDb and name:

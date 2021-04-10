@@ -67,7 +67,7 @@ class meteoitMain(Screen):
 		self["lab12"] = Label("")
 		self["lab13"] = Pixmap()
 		self["lab14"] = Label("")
-		
+
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
 		{
 			"red": self.key_red,
@@ -75,7 +75,7 @@ class meteoitMain(Screen):
 			"back": self.close,
 			"ok": self.close
 		})
-		
+
 		self.activityTimer = eTimer()
 		self.activityTimer.timeout.get().append(self.startConnection)
 		self.onShow.append(self.startShow)
@@ -87,7 +87,7 @@ class meteoitMain(Screen):
 	def startShow(self):
 		self["lab1"].setText("Attendere prego, connessione al server in corso...")
 		self.activityTimer.start(10)
-		
+
 	def startConnection(self):
 		self.activityTimer.stop()
 		self.updateInfo()
@@ -114,14 +114,14 @@ class meteoitMain(Screen):
 			if (dom):
 				weather_data = {}
 				weather_dom = dom.getElementsByTagName('weather')[0]
-				data_structure = { 
+				data_structure = {
 					'forecast_information': ('postal_code', 'current_date_time'),
 					'current_conditions': ('condition', 'temp_c', 'humidity', 'wind_condition', 'icon')
 					}
 				for (tag, list_of_tags2) in six.iteritems(data_structure):
 					tmp_conditions = {}
 					for tag2 in list_of_tags2:
-						try: 
+						try:
 							tmp_conditions[tag2] = weather_dom.getElementsByTagName(tag)[0].getElementsByTagName(tag2)[0].getAttribute('data')
 						except IndexError:
 							pass
@@ -144,52 +144,52 @@ class meteoitMain(Screen):
 				parts = mytime.strip().split(" ")
 				mytime = parts[1]
 				self["lab2"].setText("Condizioni del tempo aggiornate alle ore " + mytime)
-				
+
 				myicon = self.checkIcon(str(weather_data['current_conditions']['icon']))
-# Damn'ed Google gifs .... (we cannot use loadPixmap)			
+# Damn'ed Google gifs .... (we cannot use loadPixmap)
 				png = loadPic(myicon, 40, 40, 0, 0, 0, 1)
 				self["lab3"].instance.setPixmap(png)
-				
+
 				self["lab4"].setText(self.fixSlang(str(weather_data['current_conditions']['condition'])))
-				
+
 				tmptext = "Temperatura: " + str(weather_data['current_conditions']['temp_c']) + " gradi Celsius\n" + str(weather_data['current_conditions']['humidity']) + "   " + str(weather_data['current_conditions']['wind_condition'])
 				self["lab5"].setText(tmptext)
-				
+
 				tmptext = "Previsioni " + self.eXtendedDay(str(weather_data['forecasts'][1]['day_of_week']))
 				self["lab6"].setText(tmptext)
-				
+
 				myicon = self.checkIcon(str(weather_data['forecasts'][1]['icon']))
 				png = loadPic(myicon, 40, 40, 0, 0, 0, 1)
 				self["lab7"].instance.setPixmap(png)
-				
+
 				tmptext = self.fixSlang(str(weather_data['forecasts'][1]['condition'])) + "\nTemp. minima: " + str(weather_data['forecasts'][1]['low']) + "\nTemp. massima: " + str(weather_data['forecasts'][1]['high'])
 				self["lab8"].setText(tmptext)
-				
+
 				tmptext = "Previsioni " + self.eXtendedDay(str(weather_data['forecasts'][2]['day_of_week']))
 				self["lab9"].setText(tmptext)
-				
+
 				myicon = self.checkIcon(str(weather_data['forecasts'][2]['icon']))
 				png = loadPic(myicon, 40, 40, 0, 0, 0, 1)
 				self["lab10"].instance.setPixmap(png)
-				
+
 				tmptext = self.fixSlang(str(weather_data['forecasts'][2]['condition'])) + "\nTemp. minima: " + str(weather_data['forecasts'][2]['low']) + "\nTemp. massima: " + str(weather_data['forecasts'][2]['high'])
 				self["lab11"].setText(tmptext)
-				
+
 				tmptext = "Previsioni " + self.eXtendedDay(str(weather_data['forecasts'][3]['day_of_week']))
 				self["lab12"].setText(tmptext)
-				
+
 				myicon = self.checkIcon(str(weather_data['forecasts'][3]['icon']))
 				png = loadPic(myicon, 40, 40, 0, 0, 0, 1)
 				self["lab13"].instance.setPixmap(png)
-				
+
 				tmptext = self.fixSlang(str(weather_data['forecasts'][3]['condition'])) + "\nTemp. minima: " + str(weather_data['forecasts'][3]['low']) + "\nTemp. massima: " + str(weather_data['forecasts'][3]['high'])
 				self["lab14"].setText(tmptext)
 
 			else:
 				maintext = "Error getting XML document!"
-		
+
 		self["lab1"].setText(maintext)
-			
+
 
 # Download icon from Google if we have not yet.
 
@@ -208,7 +208,7 @@ class meteoitMain(Screen):
 				fileout.write(content)
 				handler.close()
 				fileout.close()
-		
+
 		return localfile
 
 # Bad Google translations (uff.....)
@@ -216,7 +216,7 @@ class meteoitMain(Screen):
 		if word.find('Chiaro') != -1:
 			word = "Sereno"
 		return word
-		
+
 # Google don't show expanded days
 	def eXtendedDay(self, day):
 		if day.find('lun') != -1:
@@ -234,7 +234,7 @@ class meteoitMain(Screen):
 		elif day.find('dom') != -1:
 			day = "Domenica"
 		return day
-			
+
 # Make text safe for xml parser (Google old xml format without the character set declaration)
 	def checkXmlSanity(self, content):
 		content = content.replace('à', 'a')
@@ -257,14 +257,14 @@ class meteoitMain(Screen):
 		url = url + url2
 		url = url.replace(' ', '%20')
 		return url
-		
+
 	def delTimer(self):
 		del self.activityTimer
 
 	def key_green(self):
 		box = self.session.open(MessageBox, METEOITALIA_ABOUT_TXT, MessageBox.TYPE_INFO)
 		box.setTitle(_("Informazioni"))
-		
+
 	def key_red(self):
 		self.session.openWithCallback(self.updateInfo, MeteoitSelectCity)
 
@@ -294,10 +294,10 @@ class MeteoitSelectCity(Screen):
 				"Siena", "Siracusa", "Sondrio", "Taranto", "Tempio Pausania", "Teramo", "Terni", "Torino", "Trani", "Trapani",
 				"Trento", "Treviso", "Trieste", "Udine", "Urbino", "Varese", "Venezia", "Verbania", "Vercelli", "Verona",
 				"Vibo Valenzia", "Villacidro", "Vicenza", "Viterbo"]
-				
+
 		self["list"] = List(self.list)
 		self["lab1"] = Label("Ok per confermare")
-		
+
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
 		{
 			"back": self.close,
@@ -319,7 +319,7 @@ class MeteoitSelectCity(Screen):
 
 
 def main(session, **kwargs):
-	session.open(meteoitMain)	
+	session.open(meteoitMain)
 
 
 def Plugins(path, **kwargs):

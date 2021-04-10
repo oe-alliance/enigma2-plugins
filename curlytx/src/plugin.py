@@ -10,7 +10,7 @@ from . import CurlyTx
 from . import config
 from Components.config import config
 
- 
+
 def main(session, **kwargs):
     """ Opens the main window """
     try:
@@ -26,7 +26,7 @@ def menuHook(menuid):
         return [(config.plugins.CurlyTx.menuTitle.value, main, "curlytx", 41)]
     return []
 
- 
+
 def Plugins(**kwargs):
     """ Register CurlyTx in the extension list and main menu """
     list = [

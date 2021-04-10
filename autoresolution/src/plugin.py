@@ -686,7 +686,7 @@ class ManualResolution(Screen):
 			return
 		selection = 0
 		tlist = []
-		tlist.append((_("Exit"), "exit")) 
+		tlist.append((_("Exit"), "exit"))
 		tlist.append((_("Video: ") + str(xres) + "x" + str(yres) + "@" + str(fpsFloat) + "hz", ""))
 		tlist.append(("--", ""))
 		for x in self.choices:

@@ -39,30 +39,30 @@ MAIL_BODY_TEMPLATE = _("{body:s}\n\n") \
 
 
 class SMTP(ServiceBase):
-	
+
 	ForceSingleInstance = False
-	
+
 	def __init__(self):
 		# Is called on instance creation
 		ServiceBase.__init__(self)
 		self.connectors = []
-		
+
 		# Default configuration
 		self.setOption('smtpserver', NoSave(ConfigText(default="smtp.server.com", fixed_size=False)), _("SMTP Server"))
 		self.setOption('smtpport', NoSave(ConfigNumber(default=587)), _("SMTP Port"))
 		self.setOption('smtpssl', NoSave(ConfigYesNo(default=True)), _("SMTP SSL"))
 		self.setOption('smtptls', NoSave(ConfigYesNo(default=True)), _("SMTP TLS"))
 		self.setOption('timeout', NoSave(ConfigNumber(default=30)), _("Timeout"))
-		
+
 		self.setOption('username', NoSave(ConfigText(default="user", fixed_size=False)), _("User name"))
 		self.setOption('password', NoSave(ConfigPassword(default="password")), _("Password"))
-		
+
 		self.setOption('mailfrom', NoSave(ConfigText(default="abc@provider.com", fixed_size=False)), _("Mail from"))
 		self.setOption('mailto', NoSave(ConfigText(fixed_size=False)), _("Mail to or leave empty (From will be used)"))
 
 	def push(self, callback, errback, pluginname, subject, body="", attachments=[]):
 		from Plugins.Extensions.PushService.plugin import NAME, VERSION, SUPPORT, DONATE
-		
+
 		# Set SMTP parameters
 		mailconf = {}
 		mailconf["host"] = self.getValue('smtpserver')
@@ -72,11 +72,11 @@ class SMTP(ServiceBase):
 		mailconf["ssl"] = self.getValue('smtpssl')
 		mailconf["tls"] = self.getValue('smtptls')
 		mailconf["timeout"] = self.getValue('timeout')
-		
+
 		# Create message object
 		from_addr = self.getValue('mailfrom')
 		to_addrs = [self.getValue('mailto') or from_addr]
-		
+
 		# Prepare message
 		if body == "":
 			body = subject
@@ -86,15 +86,15 @@ class SMTP(ServiceBase):
 		if attachments:
 			for attachment in attachments:
 				message.attach(attachment) #TODO change mime=None, charset=None, content=None):
-		
+
 		# Send message
 		print(_("PushService PushMail: Sending message: %s") % subject)
 		deferred, connector = sendmail(mailconf, message)
-		
+
 		# Add callbacks
 		deferred.addCallback(callback)
 		deferred.addErrback(errback)
-		
+
 		self.connectors.append(connector)
 
 	def cancel(self):

@@ -60,7 +60,7 @@ class ChatWindow(ScrollLabel):
 		self.timer.start(250)
 		self.pipe = MessagePipe()
 		self.oldText = ""
-		
+
 	def updateChatWindow(self):
 		if (len(self.pipe.LastMsg()) > 0) or (self.oldText != self.pipe.getChatText()):
 			self.oldText = self.pipe.getChatText()
@@ -108,9 +108,9 @@ class MessagePipe():
 			self.debuglogger = MessageLogger(open("/var/log/dreamIRC_debug.log", "a"))
 
 	def updateBuddyWindow(self):
-		global BuddyList 
+		global BuddyList
 		return BuddyList
-	
+
 	def getChatText(self):
 		global ChatText
 		return ChatText
@@ -159,10 +159,10 @@ class MessagePipe():
 	def close(self):
 		self.logger.close()
 		if self.debug_state == True:
-			self.debuglogger.close()	
+			self.debuglogger.close()
 
 	def buildBuddyList(self, text):
-		global BuddyList    
+		global BuddyList
 		BuddyList = BuddyList + "%s\n" % text
 
 	def clearBuddyList(self):
@@ -170,7 +170,7 @@ class MessagePipe():
 		BuddyList = ""
 
 	def showBuddyList(self):
-		global BuddyList    
+		global BuddyList
 
 		return BuddyList
 
@@ -181,11 +181,11 @@ class MessagePipe():
 	def getCannelName(self, text):
 		global Channel
 		Channel = "ChatBox #" + "%s\n" % text
-		
+
 	def resetDesc(self):
 		global Channel
 		Channel = "ChatBox"
-	
+
 
 class MessageLogger:
 	def __init__(self, file):
@@ -224,14 +224,14 @@ def getMacAddress():
 
 
 def debug():
-	try:	
+	try:
 		doc = xml.dom.minidom.parse(accounts_xml)
 		root = doc.childNodes[0]
 		for node in elementsWithTag(root.childNodes, "account"):
 			debug = node.getAttribute("debug")
 		if debug == "False":
 			return False
-		else:	
+		else:
 			return True
 	except IOError:
 		return False

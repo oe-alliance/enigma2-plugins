@@ -1,10 +1,10 @@
 # -*- coding: UTF-8 -*-
 
-###############################################################################  
+###############################################################################
 # Quick'n'easy switching of aspect ratio setting via configurable remote control keys (Enigma2)
 # © 2007 schaumkeks <schaumkeks@yahoo.de>
 # This is free software. You are allowed to modify and use it as long as you leave the copyright.
-###############################################################################  
+###############################################################################
 
 # for localized messages
 from __future__ import print_function
@@ -42,13 +42,13 @@ import keymapparser
 # OS
 import os.path
 
-############################################################################### 
+###############################################################################
 # History:
 # 0.4 First public version (schaumkeks)
 # 0.5 Die Anzeige des aktuellen Seitenverhältnis kann über das Konfigurationsmenü abgeschaltet werden. (schaumkeks)
 # 0.6 Abhängigkeit Enigma2 2.2cvs20070620 (schaumkeks)
 #	Nicht benutzte Seitenverhältnisse können im Konfigurationsmenü deaktiviert werden
-# 0.7 Es kann im Konfigurationsmenü zwischen Tastenbelegungen gewählt werden. 
+# 0.7 Es kann im Konfigurationsmenü zwischen Tastenbelegungen gewählt werden.
 #	Derzeit: Bouquet oder Shift-TV (eine Richtung) (schaumkeks)
 # 0.8 Help-Taste als Möglichkeit zum Umschalten hinzugefügt (schaumkeks)
 #	Aktivierung bei Keymap-wechsel im deaktivierten Zustand behoben
@@ -56,7 +56,7 @@ import os.path
 # 1.0 Switch keys assigned to Bouquet long, Help long, Radio long and PVR long (JuSt611)
 #	Keymap modified to enable Quickbuttons with long key press
 #	Plugin Setup Start optionally shown in Plugin Menu or Extensions Menu
-#	German localization added       
+#	German localization added
 VERSION = "1.0"
 ###############################################################################
 pluginPrintname = "[AspectRatioSwitch Ver. %s]" % VERSION
@@ -64,11 +64,11 @@ pluginPrintname = "[AspectRatioSwitch Ver. %s]" % VERSION
 ASPECT = ["4_3_letterbox", "4_3_panscan", "16_9", "16_9_always", "16_10_letterbox", "16_10_panscan", "16_9_letterbox"]
 ASPECTMSG = {
 		"4_3_letterbox": _("4:3 Letterbox"),
-		"4_3_panscan": _("4:3 PanScan"), 
-		"16_9": _("16:9"), 
+		"4_3_panscan": _("4:3 PanScan"),
+		"16_9": _("16:9"),
 		"16_9_always": _("16:9 always"),
 		"16_10_letterbox": _("16:10 Letterbox"),
-		"16_10_panscan": _("16:10 PanScan"), 
+		"16_10_panscan": _("16:10 PanScan"),
 		"16_9_letterbox": _("16:9 Letterbox")}
 
 PACKAGE_PATH = os.path.dirname(str((globals())["__file__"]))
@@ -105,7 +105,7 @@ class AspectRatioSwitchSetup(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		#Summary
 		self.setup_title = _("AspectRatioSwitch Setup")
-		
+
 		self.list = []
 		self.list.append(getConfigListEntry(_("Quick switching via remote control"), config.plugins.AspectRatioSwitch.enabled))
 		self.list.append(getConfigListEntry(_("Key mapping"), config.plugins.AspectRatioSwitch.keymap))
@@ -115,12 +115,12 @@ class AspectRatioSwitchSetup(ConfigListScreen, Screen):
 		self.list.append(getConfigListEntry(_("Set aspect ratio on startup"), config.plugins.AspectRatioSwitch.autostart_ratio_enabled))
 		self.list.append(getConfigListEntry(_("Startup aspect ratio"), config.plugins.AspectRatioSwitch.autostart_ratio))
 		self.list.append(getConfigListEntry(_('Show Setup in'), config.plugins.AspectRatioSwitch.menu,))
-		
-		ConfigListScreen.__init__(self, self.list)		
+
+		ConfigListScreen.__init__(self, self.list)
 
 		# Initialize Buttons
 		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("Save"))		
+		self["key_green"] = StaticText(_("Save"))
 		self["label"] = Label(_("Use the configured key(s) on your remote control to switch aspect ratio modes. If any 'Quickbutton' actions were assigned to these keys, they will be disabled as long as this plugin is activated!"))
 
 		# Define Actions
@@ -138,7 +138,7 @@ class AspectRatioSwitchSetup(ConfigListScreen, Screen):
 
 	def save(self):
 		global aspect_ratio_switch
-		
+
 		if len([modeconf for modeconf in list(config.plugins.AspectRatioSwitch.modes.values()) if modeconf.value]) < 2:
 			self.session.open(MessageBox, _("You need to include at least %d aspect ratio modes!") % 2, MessageBox.TYPE_ERROR)
 			return
@@ -157,7 +157,7 @@ class AspectRatioSwitchSetup(ConfigListScreen, Screen):
 
 		for x in self["config"].list:
 			x[1].save()
-		
+
 		self.close()
 
 
@@ -185,7 +185,7 @@ class AspectRatioSwitch:
 	def unload_keymap(self):
 		for keymap in list(KEYMAPPINGS.values()):
 			keymapparser.removeKeymap(keymap)
-		
+
 		global globalActionMap
 		if 'switchAspectUp' in globalActionMap.actions:
 			del globalActionMap.actions['switchAspectUp']
@@ -202,7 +202,7 @@ class AspectRatioSwitch:
 	def enable(self):
 		self.change_keymap(config.plugins.AspectRatioSwitch.keymap.value)
 		self.reload_enabledaspects()
-	
+
 	def disable(self):
 		global aspect_ratio_switch
 		self.unload_keymap()
@@ -210,7 +210,7 @@ class AspectRatioSwitch:
 
 	def switchAspectRatioUp(self):
 		self.switchAspectRatio(+1)
-		
+
 	def switchAspectRatioDown(self):
 		self.switchAspectRatio(-1)
 
@@ -229,10 +229,10 @@ class AspectRatioSwitch:
 		if config.plugins.AspectRatioSwitch.showmsg.value:
 			Notifications.AddPopup(text=_("Aspect ratio switched from:\n   %s\nto:\n   %s") % (ASPECTMSG[ASPECT[aspectnum]], ASPECTMSG[ASPECT[newaspectnum]]), type=MessageBox.TYPE_INFO, timeout=5, id='AspectRatioSwitch')
 			print(pluginPrintname, "Aspect ratio switched from %d - %s to %d - %s" % (aspectnum, ASPECT[aspectnum], newaspectnum, ASPECT[newaspectnum]))
-			
+
 
 def autostart(reason, **kwargs):
-	#STANDARD beim Systemstart	
+	#STANDARD beim Systemstart
 	global aspect_ratio_switch
 	if reason == 0: # startup
 		keymappath = "/usr/share/enigma2/keymap.xml"
@@ -268,7 +268,7 @@ def autostart(reason, **kwargs):
 			iAVSwitch.setAspectRatio(int(config.plugins.AspectRatioSwitch.autostart_ratio.value))
 			config.av.aspectratio.setValue(ASPECT[int(config.plugins.AspectRatioSwitch.autostart_ratio.value)])
 			print(pluginPrintname, "startup, keymap =", config.plugins.AspectRatioSwitch.keymap)
-			print(pluginPrintname, "Initially set to:", ASPECT[int(config.plugins.AspectRatioSwitch.autostart_ratio.value)])	
+			print(pluginPrintname, "Initially set to:", ASPECT[int(config.plugins.AspectRatioSwitch.autostart_ratio.value)])
 		else:
 			print(pluginPrintname, "Initiation disabled")
 
@@ -286,7 +286,7 @@ def main(session, **kwargs):
 
 
 def Plugins(**kwargs):
-			
+
 	list = [
 		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)
 		]

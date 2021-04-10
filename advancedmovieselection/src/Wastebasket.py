@@ -21,8 +21,8 @@ GNU General Public License for more details.
 For more information on the GNU General Public License see:
 <http://www.gnu.org/licenses/>.
 
-For example, if you distribute copies of such a program, whether gratis or for a fee, you 
-must pass on to the recipients the same freedoms that you received. You must make sure 
+For example, if you distribute copies of such a program, whether gratis or for a fee, you
+must pass on to the recipients the same freedoms that you received. You must make sure
 that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 '''
 from __future__ import print_function
@@ -67,7 +67,7 @@ class TrashMovieList(GUIComponent):
         self.l.setFont(2, gFont("Regular", 16))
         self.l.setItemHeight(75)
         self.l.setBuildFunc(self.buildMovieListEntry)
-        
+
         self.onSelectionChanged = []
 
     def connectSelChanged(self, fnc):
@@ -161,7 +161,7 @@ class TrashMovieList(GUIComponent):
                 return True
             count += 1
         return False
-    
+
     def moveDown(self):
         self.instance.moveSelection(self.instance.moveDown)
 
@@ -182,7 +182,7 @@ class TrashMovieList(GUIComponent):
             begin = int(os.stat(serviceref.getPath()).st_mtime)
         d = datetime.fromtimestamp(begin)
         return d.strftime("%H:%M")
-    
+
 
 class Wastebasket(Screen, HelpableScreen):
     def __init__(self, session):
@@ -191,7 +191,7 @@ class Wastebasket(Screen, HelpableScreen):
         self.skinName = SkinTools.appendResolution("AdvancedMovieSelectionTrash")
         self.delayTimer = eTimer()
         self.delayTimer.callback.append(self.updateHDDData)
-        self.current_ref = eServiceReferenceTrash(config.movielist.last_videodir.value)  
+        self.current_ref = eServiceReferenceTrash(config.movielist.last_videodir.value)
         self["ColorActions"] = HelpableActionMap(self, "ColorActions",
         {
             "red": (self.canDelete, _("Delete selected movie")),
@@ -221,7 +221,7 @@ class Wastebasket(Screen, HelpableScreen):
         self["MenuActions"] = HelpableActionMap(self, "MenuActions",
             {
                 "menu": (self.clientSetup, _("Clientbox setup"))
-            })        
+            })
         self.inited = False
         self.onShown.append(self.setWindowTitle)
 
@@ -320,7 +320,7 @@ class Wastebasket(Screen, HelpableScreen):
         recordings = self.session.nav.getRecordings()
         next_rec_time = -1
         if not recordings:
-            next_rec_time = self.session.nav.RecordTimer.getNextRecordingTime()	
+            next_rec_time = self.session.nav.RecordTimer.getNextRecordingTime()
         if config.movielist.last_videodir.value == "/hdd/movie/" and recordings or (next_rec_time > 0 and (next_rec_time - time()) < 360):
             self.session.openWithCallback(self.delete, MessageBox, _("Recording(s) are in progress or coming up in few seconds!\nNow movie delete can damage the recording(s)!\nRealy delete movie?"))
         else:
@@ -353,7 +353,7 @@ class Wastebasket(Screen, HelpableScreen):
         recordings = self.session.nav.getRecordings()
         next_rec_time = -1
         if not recordings:
-            next_rec_time = self.session.nav.RecordTimer.getNextRecordingTime()	
+            next_rec_time = self.session.nav.RecordTimer.getNextRecordingTime()
         if config.movielist.last_videodir.value == "/hdd/movie/" and recordings or (next_rec_time > 0 and (next_rec_time - time()) < 360):
             self.session.openWithCallback(self.deleteAll, MessageBox, _("Recording(s) are in progress or coming up in few seconds!\nNow empty the Wastebasket can damage the recording(s)!\nRealy empty the Wastbasket?"))
         else:
@@ -372,7 +372,7 @@ class Wastebasket(Screen, HelpableScreen):
 
     def restore(self):
         try:
-            service = self.getCurrent() 
+            service = self.getCurrent()
             if not service:
                 return
             self["list"].removeService(service)
@@ -381,7 +381,7 @@ class Wastebasket(Screen, HelpableScreen):
             print(e)
             self.session.open(MessageBox, _("Restore failed!"), MessageBox.TYPE_ERROR)
             return
-        self.delayTimer.start(0, 1)        
+        self.delayTimer.start(0, 1)
 
     def restoreAll(self):
         try:
@@ -412,11 +412,11 @@ class WastebasketTimer():
         self.wastebasketTimer.callback.append(self.autoDeleteAllMovies)
         self.startTimer()
         config.AdvancedMovieSelection.empty_wastebasket_time.addNotifier(self.startTimer, initial_call=False)
-    
+
     def stopTimer(self):
         print("[AdvancedMovieSelection] WastebasketTimer.stopTimer")
         self.wastebasketTimer.stop()
-    
+
     def startTimer(self, dummy=None):
         if self.wastebasketTimer.isActive():
             self.wastebasketTimer.stop()
@@ -473,11 +473,11 @@ class WastebasketTimer():
         print("[AdvancedMovieSelection] Setup values have changed")
         config.AdvancedMovieSelection.next_auto_empty_wastebasket.value = 0
         self.startTimer()
-        
+
     def autoDeleteAllMovies(self):
         from .Source.Remote.Client import isAnyRecording
         remote_recordings = isAnyRecording()
-        
+
         retryvalue = "%s minutes" % int(config.AdvancedMovieSelection.next_empty_check.value)
 
         if self.recTimer.isActive():
@@ -487,7 +487,7 @@ class WastebasketTimer():
             print("[AdvancedMovieSelection] Start automated deleting all movies but remote recordings activ, retry at", retryvalue)
             self.recTimer.start(config.AdvancedMovieSelection.next_empty_check.value * 60000)
             return
-        
+
         if not Screens.Standby.inStandby:
             print("[AdvancedMovieSelection] Start automated deleting all movies but box not in standby, retry in", retryvalue)
             self.recTimer.start(config.AdvancedMovieSelection.next_empty_check.value * 60000)
@@ -495,28 +495,28 @@ class WastebasketTimer():
             recordings = self.session.nav.getRecordings()
             next_rec_time = -1
             if not recordings:
-                next_rec_time = self.session.nav.RecordTimer.getNextRecordingTime()    
-            if config.movielist.last_videodir.value == "/hdd/movie/" and recordings or (next_rec_time > 0 and (next_rec_time - time()) < 360):           
+                next_rec_time = self.session.nav.RecordTimer.getNextRecordingTime()
+            if config.movielist.last_videodir.value == "/hdd/movie/" and recordings or (next_rec_time > 0 and (next_rec_time - time()) < 360):
                 print("[AdvancedMovieSelection] Start automated deleting all movies but recordings activ, retry at", retryvalue)
                 self.recTimer.start(config.AdvancedMovieSelection.next_empty_check.value * 60000)
             else:
                 if self.recTimer.isActive():
                     self.recTimer.stop()
                 self.list = []
-                
+
                 path = config.movielist.last_videodir.value
                 if not fileExists(path):
                     path = defaultMoviePath()
                     config.movielist.last_videodir.value = path
                     config.movielist.last_videodir.save()
-                    
+
                 if config.AdvancedMovieSelection.wastelist_buildtype.value == 'listMovies':
                     trash = Trashcan.listMovies(path)
                 elif config.AdvancedMovieSelection.wastelist_buildtype.value == 'listAllMovies':
                     trash = Trashcan.listAllMovies(path)
                 else:
                     trash = Trashcan.listAllMovies("/media")
-                
+
                 print("[AdvancedMovieSelection] Start automated deleting all movies in trash list")
                 Trashcan.deleteAsynch(trash)
                 config.AdvancedMovieSelection.last_auto_empty_wastebasket.value = int(time())

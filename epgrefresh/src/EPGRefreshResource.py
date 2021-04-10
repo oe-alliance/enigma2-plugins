@@ -133,7 +133,7 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
-		
+
 		return six.ensure_binary("""<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2simplexmlresult>
  <e2state>%s</e2state>
@@ -387,4 +387,3 @@ class EPGRefreshSettingsResource(resource.Resource):
 				hasAutoTimer,
 				API_VERSION,
 			))
-

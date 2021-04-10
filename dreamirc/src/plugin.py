@@ -34,7 +34,7 @@ from .dreamIRCSetup import *
 from .protocols import irc
 from . import ircsupport
 
-import os 
+import os
 import string
 import time
 import datetime
@@ -68,9 +68,9 @@ class dreamIRCMainMenu(Screen):
 				<widget name="disconnect.desc" position="940,510" size="110,20" font="Regular;16" />
 				<widget name="connect.desc" position="940,530" size="110,20" font="Regular;16" />
 				<widget name="settings.desc" position="940,550" size="110,20" font="Regular;16" />
-				<widget name="blue.desc" position="940,570" size="180,20" font="Regular;16" />                                
+				<widget name="blue.desc" position="940,570" size="180,20" font="Regular;16" />
 			</screen>"""
-	else:	
+	else:
 		skin = """
 			<screen position="60,80" size="600,450"  title="dreamIRC" >
 				<widget name="buddy" position="480,35" size="120,310" font="Regular;14" />
@@ -88,7 +88,7 @@ class dreamIRCMainMenu(Screen):
 				<widget name="settings.desc" position="490,400" size="110,20" font="Regular;16" />
 				<widget name="blue.desc" position="490,420" size="110,20" font="Regular;16" />
 			</screen>"""
-		
+
 	def __init__(self, session, args=0):
 		global x, y
 		self.skin = dreamIRCMainMenu.skin
@@ -100,7 +100,7 @@ class dreamIRCMainMenu(Screen):
 
 		self.list = []
 		self.menuList = []
-		
+
 		self.connected = False
 
 		self["buddy"] = BuddyWindow("")
@@ -116,12 +116,12 @@ class dreamIRCMainMenu(Screen):
 		if y >= 720:
 				self["blue.desc"] = Label(_("virtual Keyboard"))
 		else:
-				self["blue.desc"] = Label(_("virtual Keyb."))				
+				self["blue.desc"] = Label(_("virtual Keyb."))
 		self["green.pic"] = Pixmap()
 		self["red.pic"] = Pixmap()
 		self["yellow.pic"] = Pixmap()
 		self["blue.pic"] = Pixmap()
-		
+
 		self["actions"] = NumberActionMap(["dreamIRCActions", "InputBoxActions", "InputAsciiActions", "KeyboardInputActions"],
 		{
 			"gotAsciiCode": self.gotAsciiCode,
@@ -138,7 +138,7 @@ class dreamIRCMainMenu(Screen):
 			"down": self["chat"].pageDown,
 			"buddyUp": self["buddy"].pageUp,
 			"buddyDown": self["buddy"].pageDown,
-			"home": self.keyHome,                
+			"home": self.keyHome,
 			"end": self.keyEnd,
 			"delete": self.keyDelete,
 			"deleteForward": self.keyDeleteForward,
@@ -153,56 +153,56 @@ class dreamIRCMainMenu(Screen):
 			"7": self.keyNumberGlobal,
 			"8": self.keyNumberGlobal,
 			"9": self.keyNumberGlobal,
-			"0": self.keyNumberGlobal            
+			"0": self.keyNumberGlobal
 		}, -1)
 		rcinput = eRCInput.getInstance()
 		rcinput.setKeyboardMode(rcinput.kmAscii)
-		
+
 		self.checkStatus()
 
 	def gotAsciiCode(self):
 		self["input"].handleAscii(getPrevAsciiCode())
-	
+
 	def keyUp(self):
 		self["input"].up()
-	
+
 	def keyDown(self):
 		self["input"].down()
-	
+
 	def keyLeft(self):
 		self["input"].left()
-	
+
 	def keyRight(self):
 		self["input"].right()
-	
+
 	def keyTab(self):
 		self["input"].tab()
-	
+
 	def keyHome(self):
 		self["input"].home()
-	
+
 	def keyEnd(self):
 		self["input"].end()
 
 	def keyNumberGlobal(self, number):
 		print("You pressed number " + str(number))
 		self["input"].number(number)
-		
+
 	def keyDelete(self):
 		self["input"].delete()
-	
+
 	def keyDeleteForward(self):
 		self["input"].delete()
-	
+
 	def keyDeleteBackward(self):
 		self["input"].left()
 		self["input"].delete()
-		
+
 	def closePlugin(self):
 		rcinput = eRCInput.getInstance()
 		rcinput.setKeyboardMode(rcinput.kmNone)
 		self.close(None)
-		
+
 	def greenPressed(self):
 		if self.checkStatus() == 0:
 			self.pipe.add("connecting... pls wait...")
@@ -239,29 +239,29 @@ class dreamIRCMainMenu(Screen):
 			self["disconnect.desc"].hide()
 			self["red.pic"].hide()
 		return status[0]
-	
+
 	def bluePressed(self):
 		self.checkStatus()
 		self.session.openWithCallback(self.VirtualKeyBoardTextEntry, VirtualKeyBoard, title=(_("Enter your text here:")), text="")
-		
+
 	def yellowPressed(self):
 		self.checkStatus()
 		self.session.openWithCallback(self.resetKeyboard, dreamIRCSetupScreen)
-		
+
 	def resetKeyboard(self):
 		rcinput = eRCInput.getInstance()
 		rcinput.setKeyboardMode(rcinput.kmAscii)
-		
+
 	def go(self):
 		if self.checkStatus() == 1:
 #			self.pipe.debug(" TEXT = %s   - laenge = %d  !!!!" % (self["input"].getText(),len(self["input"].getText())))
 			if (len(self["input"].getText()) >= 1):
 				self.pipe.addOutText(self["input"].getText())
 				self.clearInput()
-			
+
 	def clearInput(self):
 		self["input"].setText("")
-			
+
 	def VirtualKeyBoardTextEntry(self, callback=None):
 		if callback is not None and len(callback):
 			print(" TEXT = %s   - laenge = %d  !!!!" % (callback, len(callback)))

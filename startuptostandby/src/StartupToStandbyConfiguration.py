@@ -65,4 +65,3 @@ class StartupToStandbyConfiguration(Screen, ConfigListScreen):
 
 	def createSummary(self):
 		return SetupSummary
-

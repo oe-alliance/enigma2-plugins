@@ -41,9 +41,9 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
         self.stepSize["7"] = -1 * self.stepSize["9"]
         self.keyStep = {}
         self.keyStep["0"] = 0
-        self.keyStep["2"] = int(config.plugins.AC3LipSync.absoluteStep2.getValue()) 
-        self.keyStep["5"] = int(config.plugins.AC3LipSync.absoluteStep5.getValue()) 
-        self.keyStep["8"] = int(config.plugins.AC3LipSync.absoluteStep8.getValue()) 
+        self.keyStep["2"] = int(config.plugins.AC3LipSync.absoluteStep2.getValue())
+        self.keyStep["5"] = int(config.plugins.AC3LipSync.absoluteStep5.getValue())
+        self.keyStep["8"] = int(config.plugins.AC3LipSync.absoluteStep8.getValue())
 
         # AC3delay instance
         self.AC3delay = AC3delay()
@@ -52,18 +52,18 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
         self.savedValue = {}
         # Current Values
         self.currentValue = {}
-        
+
         #OptionFields
         self["ChannelImg"] = MultiPixmap()
         self["GlobalImg"] = MultiPixmap()
-        
+
         self["ChannelLabel"] = MultiColorLabel(_("Service delay"))
         self["GlobalLabel"] = MultiColorLabel(_("Global delay"))
 
         # Slider
         self["AudioSliderBar"] = ProgressBar()
         self["AudioSlider"] = Label(_("%i ms") % self.AC3delay.systemDelay[self.AC3delay.whichAudio])
-        
+
         #Service Information
         self["ServiceInfoLabel"] = Label(_("Channel audio:"))
         self["ServiceInfo"] = Label()
@@ -101,7 +101,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
 
         HelpableScreen.__init__(self)
         MovableScreen.__init__(self, config.plugins.AC3LipSync, [self["actions"]], 600, 460)
-        
+
     def __onShow(self):
         for sAudio in AC3PCM:
             iDelay = self.AC3delay.getSystemDelay(sAudio)
@@ -117,7 +117,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
             self.AC3delay.whichAudio = PCM
         elif self.AC3delay.whichAudio == AC3GLOB:
             self.AC3delay.whichAudio = AC3
-        
+
         self.setActiveSlider()
 
     def keyRight(self):
@@ -134,13 +134,13 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
             self["ChannelImg"].setPixmapNum(1)
             self["GlobalImg"].setPixmapNum(0)
             self["ChannelLabel"].setForegroundColorNum(1)
-            self["GlobalLabel"].setForegroundColorNum(0)        
-        else:    
+            self["GlobalLabel"].setForegroundColorNum(0)
+        else:
             self["ChannelImg"].setPixmapNum(0)
             self["GlobalImg"].setPixmapNum(1)
             self["ChannelLabel"].setForegroundColorNum(0)
             self["GlobalLabel"].setForegroundColorNum(1)
-        
+
         iCurDelay = self.currentValue[self.AC3delay.whichAudio]
         iDelay = iCurDelay - self.lowerBound
         self["AudioSliderBar"].setValue(iDelay)
@@ -152,7 +152,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
         else:
             iStep = -1 * self.arrowStepSize
         self.changeSliderValue(iStep)
-        
+
     def keyUp(self):
         if self.AC3delay.whichAudio == AC3GLOB or self.AC3delay.whichAudio == PCMGLOB:
             iStep = 25
@@ -166,7 +166,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
         if self.AC3delay.whichAudio == AC3GLOB or self.AC3delay.whichAudio == PCMGLOB:
             iStep = (self.keyStep[sNumber] // 25) * 25
         else:
-            iStep = self.keyStep[sNumber]        
+            iStep = self.keyStep[sNumber]
         iSliderValue = iStep - self.lowerBound
         self.setSliderInfo(iSliderValue)
         self.AC3delay.setSystemDelay(sAudio, self.currentValue[sAudio], True)
@@ -189,7 +189,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
         elif iSliderValue > (self.upperBound - self.lowerBound):
             iSliderValue = (self.upperBound - self.lowerBound)
         self.setSliderInfo(iSliderValue)
-        self.AC3delay.setSystemDelay(sAudio, self.currentValue[sAudio], True)        
+        self.AC3delay.setSystemDelay(sAudio, self.currentValue[sAudio], True)
 
     def keyOk(self):
         self.close()
@@ -210,7 +210,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
         ]
 
         self.session.openWithCallback(self.DoShowMenu, ChoiceBox, _("Menu"), keyList)
-    
+
     def DoShowMenu(self, answer):
         if answer is not None:
             if answer[1] == "1":
@@ -219,13 +219,13 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
                 sResponse = _("Invalid selection")
                 iType = MessageBox.TYPE_ERROR
                 self.session.open(MessageBox, sResponse, iType)
-                
+
     def menuSaveDelayToKey(self):
         sAudio = self.AC3delay.whichAudio
         iDelay = self["AudioSliderBar"].getValue() + self.lowerBound
 
         AC3SetCustomValue(self.session, iDelay, self.keyStep)
-        
+
     def setSliderInfo(self, iDelay):
         sAudio = self.AC3delay.whichAudio
         self.currentValue[sAudio] = iDelay + self.lowerBound
@@ -239,7 +239,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
         sPCMDelay = _("%i ms") % self.AC3delay.systemDelay[PCM]
 
         self["ServiceInfo"].setText(sActiveAudio)
-            
+
 
 class AC3SetCustomValue:
     def __init__(self, session, iDelay, keyStep):

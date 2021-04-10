@@ -88,20 +88,20 @@ class YouTubeVideoDetailsScreen(Screen):
 		mins = int(durationInSecs / 60)
 		secs = durationInSecs - mins * 60
 		duration = "%d:%02d" % (mins, secs)
-		
+
 		self["label_video_duration"] = Label(_("Duration") + ":")
 		self["video_duration"] = Label(duration)
-		
+
 		self["label_video_rating_average"] = Label(_("Rate") + ":")
 		self["starsbg"] = Pixmap()
 		self["stars"] = ProgressBar()
 
 		self["label_video_numraters"] = Label(_("Ratings") + ":")
 		self["video_numraters"] = Label(entry.getNumRaters())
-		
+
 		self["label_video_statistics_favorite_count"] = Label(_("Favorited") + ":")
 		self["video_statistics_favorite_count"] = Label(entry.getFavoriteCount())
-		
+
 		self["label_video_statistics_view_count"] = Label(_("Views") + ":")
 		self["video_statistics_view_count"] = Label(entry.getViewCount())
 
@@ -115,7 +115,7 @@ class YouTubeVideoDetailsScreen(Screen):
 		self["video_category"] = Label(entry.getCategory())
 		self["label_video_tags"] = Label(_("Tags") + ":")
 		self["video_tags"] = Label(entry.getTags())
-		
+
 		self["video_thumbnail_1"] = Pixmap()
 		self["video_thumbnail_2"] = Pixmap()
 		self["video_thumbnail_3"] = Pixmap()
@@ -208,7 +208,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 
 		self["red"] = Label(_("Select a VLC-Server"))
 		self["green"] = Label(_("New YouTube search"))
-		
+
 		self.list = []
 		self["list"] = YouTubeList(self.list)
 
@@ -224,7 +224,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 		self.isFavoritesFeed = False
 
 		self.patientDialog = None
-		
+
 		self["actions"] = ActionMap(["YouTubeVideoListActions"],
 		{
 			"play"			: self.tryToPlay,
@@ -295,7 +295,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 	def searchFeedReal(self, searchContext):
 		print("[YTB] searchFeedReal")
 		try:
-			feed = interface.search(searchContext.searchTerm.value, 
+			feed = interface.search(searchContext.searchTerm.value,
 					orderby=searchContext.orderBy.value,
 					racy=searchContext.racy.value,
 					time=searchContext.time.value,
@@ -575,14 +575,14 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 				entries.append((_("Remove from favorites"), [self.removeFromFavorites, False]))
 			else:
 				entries.append((_("Add to favorites"), [self.addToFavorites, False]))
-				
+
 			if self["list"].getCurrent()[0].isPlaylistEntry():
 				entries.append((_("Remove from playlist"), [self.removeFromPlaylist, False]))
 			else:
 				entries.append((_("Add to playlist"), [self.addToPlaylist, False]))
 			entries.append((_("Get related videos"), [self.getRelatedDelayed, True]))
 			entries.append((_("Get video responses"), [self.getResponsesDelayed, True]))
-			
+
 			self.currentServer.play(self.session, mrl, youTubeEntry.getTitle(), self,
 								player=boundFunction(YouTubePlayer, contextMenuEntries=entries, infoCallback=self.showVideoInfo, name=self["list"].getCurrent()[0].getTitle()))
 		else:
@@ -612,7 +612,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 			self.session.open(DirectYouTubePlayer, mrl, youTubeEntry.getTitle(), self, contextMenuEntries=entries, infoCallback=self.showVideoInfo, name=self["list"].getCurrent()[0].getTitle())
 		else:
 			print("[YTB] No valid flv-mrl found")
-			
+
 	def getNextFile(self):
 		i = self["list"].getSelectedIndex() + 1
 		if i < len(self.list):

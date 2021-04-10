@@ -58,7 +58,7 @@ class MountAgainCheckPoller:
 
 	def JobEpgCache(self):
 		print('[Networkbrowser MountAgain] mounting network shares.')
-		iAutoMount.getAutoMountPoints() 
+		iAutoMount.getAutoMountPoints()
 
 	def JobSched(self):
 		self.timer.startLongTimer(int(config.networkbrowser.automountpolltimer.value) * 3600)
@@ -93,7 +93,7 @@ def MountManagerCallFunction(iface):
 
 def RemountMain(session, iface=None, **kwargs):
 	from .AutoMount import iAutoMount
-	iAutoMount.getAutoMountPoints() 
+	iAutoMount.getAutoMountPoints()
 
 
 def RemountCallFunction(iface):

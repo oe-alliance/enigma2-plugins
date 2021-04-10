@@ -33,7 +33,7 @@ def MountManagerCallFunction(iface):
 
 def RemountMain(session, iface=None, **kwargs):
 	from .AutoMount import iAutoMount
-	iAutoMount.getAutoMountPoints() 
+	iAutoMount.getAutoMountPoints()
 
 
 def RemountCallFunction(iface):
@@ -52,4 +52,3 @@ def Plugins(path, **kwargs):
 				"menuEntryName": lambda x: _("Mount again"),
 				"menuEntryDescription": lambda x: _("Attempt to recover lost mounts (in background)")})
 	]
-

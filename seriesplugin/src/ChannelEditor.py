@@ -52,11 +52,11 @@ colorYellow = 0xbab329
 colorWhite = 0xffffff
 
 
-class MatchList(MenuList): 
-	"""Defines a simple Component to show Timer name""" 
+class MatchList(MenuList):
+	"""Defines a simple Component to show Timer name"""
 
-	def __init__(self): 
-		MenuList.__init__(self, [], enableWrapAround=True, content=eListboxPythonMultiContent) 
+	def __init__(self):
+		MenuList.__init__(self, [], enableWrapAround=True, content=eListboxPythonMultiContent)
 
 		self.listFont = None
 		self.itemHeight = 30
@@ -66,9 +66,9 @@ class MatchList(MenuList):
 		self.colWidthStb = 300
 		self.colWidthWeb = 250
 		self.margin = 5
-		
-		self.l.setBuildFunc(self.buildListboxEntry) 
-		
+
+		self.l.setBuildFunc(self.buildListboxEntry)
+
 		global TemplatedListFonts
 		if TemplatedListFonts is not None:
 			tlf = TemplatedListFonts()
@@ -76,10 +76,10 @@ class MatchList(MenuList):
 		else:
 			self.l.setFont(0, gFont('Regular', 20))
 
-	def applySkin(self, desktop, parent): 
+	def applySkin(self, desktop, parent):
 		# This is a very bad way to get the skin attributes
 		# This function is called for every skin element, we should parse the attributes depending on the element name
-		attribs = [] 
+		attribs = []
 		if self.skinAttributes is not None:
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "font":
@@ -103,60 +103,60 @@ class MatchList(MenuList):
 				else:
 					attribs.append((attrib, value))
 		self.skinAttributes = attribs
-		return MenuList.applySkin(self, desktop, parent) 
+		return MenuList.applySkin(self, desktop, parent)
 
 	def buildListboxEntry(self, stbSender, webSender, serviceref, status):
-		
-		size = self.l.getItemSize() 
-		
-		if int(status) == 0:		
+
+		size = self.l.getItemSize()
+
+		if int(status) == 0:
 			imageStatus = path = os.path.join(PIXMAP_PATH, "minus.png")
 		else:
 			imageStatus = path = os.path.join(PIXMAP_PATH, "plus.png")
-		
+
 		l = [(stbSender, webSender, serviceref, status), ]
-		
+
 		pos = self.margin + self.iconPosX
 		l.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, pos, self.iconPosY, self.iconSize, self.iconSize, loadPNG(imageStatus)))
-		
+
 		pos += self.iconSize + self.margin
 		l.append((eListboxPythonMultiContent.TYPE_TEXT, pos, 0, self.colWidthStb, self.itemHeight, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, stbSender))
-		
+
 		pos += self.colWidthStb + self.margin
 		l.append((eListboxPythonMultiContent.TYPE_TEXT, pos, 0, self.colWidthWeb, self.itemHeight, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, webSender))
-		
+
 		pos += self.colWidthWeb + self.margin
 		l.append((eListboxPythonMultiContent.TYPE_TEXT, pos, 0, size.width() - pos, self.itemHeight, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, "", colorYellow))
-		
+
 		return l
 
 
 class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
-	
+
 	skinfile = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Skins/ChannelEditor.xml")
 	skin = open(skinfile).read()
-	
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		ChannelsBase.__init__(self)
 		WebChannels.__init__(self)
-		
+
 		self.session = session
-		
+
 		self.skinName = ["SeriesPluginChannelEditor"]
-		
+
 		log.debug("ChannelEditor")
-		
+
 		from .plugin import NAME, VERSION
 		self.setup_title = NAME + " " + _("Channel Editor") + " " + VERSION
-		
+
 		# Buttons
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("OK"))
 		self["key_blue"] = Button(_("Remove"))
 		self["key_yellow"] = Button(_("Auto match"))
-		
+
 		# Define Actions
 		self["actions_1"] = HelpableActionMap(self, "SetupActions", {
 			"ok": (self.keyAdd, _("Show popup to add Stb Channel")),
@@ -179,7 +179,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 			"blue": (self.keyRemove, _("Remove channel")),
 			"yellow": (self.tryToMatchChannels, _("Auto match")),
 		}, -2) # higher priority
-		
+
 		self.helpList[0][2].sort()
 
 		self["helpActions"] = ActionMap(["HelpActions", ], {
@@ -192,9 +192,9 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 		self.stbChlist = []
 		self.webChlist = []
 		self.stbToWebChlist = []
-		
+
 		self.bouquet = None
-		
+
 		self.onLayoutFinish.append(self.readChannels)
 		self.onShown.append(self.showMessage)
 
@@ -205,27 +205,27 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 
 	def readChannels(self, bouquet=None):
 		self.stbToWebChlist = []
-		
+
 		if bouquet is None:
 			self.bouquet = config.plugins.seriesplugin.bouquet_main.value
 			self.stbChlist = []
 		elif bouquet != self.bouquet:
 			self.bouquet = bouquet
 			self.stbChlist = []
-		
+
 		if not self.stbChlist:
 			self.loadStbChannels()
-		
+
 		if not self.webChlist:
 			self.loadWebChannels()
-		
+
 		self.showChannels()
-	
+
 	def loadStbChannels(self):
 		self.setTitle(_("Load STB channels for bouquet") + " " + self.bouquet)
 		log.debug("Load STB")
 		self.stbChlist = buildSTBchannellist(self.bouquet)
-	
+
 	def loadWebChannels(self):
 		self.setTitle(_("Load Web channels for bouquet") + " " + self.bouquet)
 		log.debug("Load Web channels")
@@ -236,46 +236,46 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 			self.setTitle(_("Problem during loading Webchannels"))
 			temp = []
 		self.webChlist = sorted(temp, key=lambda tup: tup[0])
-	
+
 	def getChannelByRef(ref):
 		if self.stbChlist:
 			for servicename, serviceref, uservicename in self.stbChlist:
 				if serviceref == ref:
 					return servicename
 		return ""
-	
+
 	def showChannels(self):
 		self.setTitle(_("STB- / Web-Channel for bouquet:") + " " + self.bouquet)
 		if len(self.stbChlist) != 0:
 			for servicename, serviceref, uservicename in self.stbChlist:
 				#log.debug("servicename", servicename, uservicename)
-				
+
 				webSender = lookupChannelByReference(serviceref)
 				if webSender is not False:
 					self.stbToWebChlist.append((servicename, ' / '.join(webSender), serviceref, "1"))
-					
+
 				else:
 					self.stbToWebChlist.append((servicename, "", serviceref, "0"))
-		
+
 		if len(self.stbToWebChlist) != 0:
 			self['list'].setList(self.stbToWebChlist)
 		else:
 			log.debug("Error creating webChlist..")
 			self.setTitle(_("Error check log file"))
-	
+
 	def tryToMatchChannels(self):
 		self.setTitle(_("Channel matching..."))
 		self.stbToWebChlist = []
 		sequenceMatcher = SequenceMatcher(" ".__eq__, "", "")
-		
+
 		if len(self.stbChlist) != 0:
 			for servicename, serviceref, uservicename in self.stbChlist:
 				#log.debug("servicename", servicename, uservicename)
-				
+
 				webSender = lookupChannelByReference(serviceref)
 				if webSender is not False:
 					self.stbToWebChlist.append((servicename, ' / '.join(webSender), serviceref, "1"))
-					
+
 				else:
 					if len(self.webChlist) != 0:
 						match = ""
@@ -283,25 +283,25 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 						for webSender, uwebSender in self.webChlist:
 							#log.debug("webSender", webSender, uwebSender)
 							if uwebSender in uservicename or uservicename in uwebSender:
-								
+
 								sequenceMatcher.set_seqs(uservicename, uwebSender)
 								newratio = sequenceMatcher.ratio()
 								if newratio > ratio:
 									log.debug("possible match", servicename, uservicename, webSender, uwebSender, ratio)
 									ratio = newratio
 									match = webSender
-						
+
 						if ratio > 0:
 							log.debug("match", servicename, uservicename, match, ratio)
 							self.stbToWebChlist.append((servicename, match, serviceref, "1"))
 							self.addChannel(serviceref, servicename, match)
-						
+
 						else:
 							self.stbToWebChlist.append((servicename, "", serviceref, "0"))
-							
+
 					else:
 						self.stbToWebChlist.append((servicename, "", serviceref, "0"))
-						
+
 		if len(self.stbToWebChlist) != 0:
 			self['list'].setList(self.stbToWebChlist)
 		else:
@@ -313,7 +313,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 			if(webCh[0] == webSender):
 				return pos
 		return 0
-	
+
 	def keyAdd(self):
 		check = self['list'].getCurrent()
 		if check == None:
@@ -327,13 +327,13 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 				idx = self.getIndexOfWebSender(self.webChlist)
 			log.debug("keyAdd webSender", webSender, idx)
 			self.session.openWithCallback(boundFunction(self.addConfirm, servicename, serviceref, webSender), ChoiceBox, _("Add Web Channel"), self.webChlist, None, idx)
-	
+
 	def getIndexOfServiceref(self, serviceref):
 		for pos, stbWebChl in enumerate(self.stbToWebChlist):
 			if(stbWebChl[2] == serviceref):
 				return pos
 		return False
-	
+
 	def addConfirm(self, servicename, serviceref, webSender, result):
 		if not result:
 			return
@@ -357,19 +357,19 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 		log.debug("addOrReplace", servicename, serviceref, remote, webSender, idx)
 		if idx is False:
 			return
-		
+
 		if result:
 			log.debug("add", servicename, serviceref, remote, webSender)
 			self.setTitle(_("Channel '- %(servicename)s - %(remote)s -' added.") % {'servicename': servicename, 'remote': remote})
 			self.addChannel(serviceref, servicename, remote)
 			self.stbToWebChlist[idx] = (servicename, webSender + " / " + remote, serviceref, "1")
-			
+
 		else:
 			log.debug("replace", servicename, serviceref, remote, webSender)
 			self.setTitle(_("Channel '- %(servicename)s - %(remote)s -' replaced.") % {'servicename': servicename, 'remote': remote})
 			self.replaceChannel(serviceref, servicename, remote)
 			self.stbToWebChlist[idx] = (servicename, remote, serviceref, "1")
-			
+
 		self['list'].setList(self.stbToWebChlist)
 
 	def keyRemove(self):
@@ -419,7 +419,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 
 	def keyUp(self):
 		self['list'].up()
-	
+
 	def nextBouquet(self):
 		tvbouquets = getTVBouquets()
 		next = tvbouquets[0][1]
@@ -428,7 +428,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 				break
 			next = tvbouquet[1]
 		self.readChannels(next)
-	
+
 	def prevBouquet(self):
 		tvbouquets = getTVBouquets()
 		prev = tvbouquets[-1][1]
@@ -437,7 +437,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 				break
 			prev = tvbouquet[1]
 		self.readChannels(prev)
-	
+
 	def keySave(self):
 		self.close(ChannelsBase.channels_changed)
 

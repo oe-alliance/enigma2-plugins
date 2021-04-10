@@ -66,4 +66,3 @@ def Plugins(**kwargs):
 			needsRestart=False,
 		)
 	]
-

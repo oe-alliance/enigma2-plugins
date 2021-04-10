@@ -91,7 +91,7 @@ class MPHelp(Screen):
 		self["title"].text = six.ensure_str(_(title), errors='ignore')
 		self["detailtext"].setText(six.ensure_str(_(text), errors='ignore'))
 		self.curPage = newPage
-	
+
 	def pageUp(self):
 		self["detailtext"].pageUp()
 

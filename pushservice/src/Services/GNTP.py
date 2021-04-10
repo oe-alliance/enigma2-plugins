@@ -37,14 +37,14 @@ GROWL_BODY_TEMPLATE = _("{body:s}\n\n") \
 
 
 class GNTP(ServiceBase):
-	
+
 	ForceSingleInstance = False
-	
+
 	def __init__(self):
 		# Is called on instance creation
 		ServiceBase.__init__(self)
 		#self.sockets = []
-		
+
 		# Default configuration
 		self.setOption('growlhost', NoSave(ConfigText(default="host", fixed_size=False)), _("Growl Host name"))
 		self.setOption('growlport', NoSave(ConfigNumber(default=23053)), _("Growl Port"))
@@ -55,17 +55,17 @@ class GNTP(ServiceBase):
 
 	def push(self, callback, errback, pluginname, subject, body="", attachments=[]):
 		from Plugins.Extensions.PushService.plugin import NAME, VERSION, SUPPORT, DONATE
-		
+
 		box = config.pushservice.boxname.value
 		app = APP_NAME.format(**{'box': box, 'name': NAME})
 		nottype = NOTIFICATION_TYPE.format(**{'box': box, 'name': NAME})
-		
+
 		# Prepare message
 		if body == "":
 			body = subject
 		subject = GROWL_SUBJECT_TEMPLATE.format(**{'box': box, 'subject': subject})
 		body = GROWL_BODY_TEMPLATE.format(**{'body': str(body), 'name': NAME, 'version': VERSION, 'plugin': pluginname, 'support': SUPPORT, 'donate': DONATE})
-		
+
 		# Registrate
 		growl = gntp.notifier.GrowlNotifier(
 			applicationName=app,
@@ -77,9 +77,9 @@ class GNTP(ServiceBase):
 		)
 		growl.socketTimeout = self.getValue('timeout')
 		growl.register()
-		
+
 		# Send a message
-		#socket = 
+		#socket =
 		sent = growl.notify(
 			noteType=nottype,
 			title=subject,
@@ -89,7 +89,7 @@ class GNTP(ServiceBase):
 			priority=self.getValue('priority')
 		)
 		#self.sockets.append(socket)
-		
+
 		if sent is True:
 			callback()
 		else:

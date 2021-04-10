@@ -7,7 +7,7 @@ import gettext
 
 PluginLanguageDomain = "AutoResolution"
 PluginLanguagePath = "SystemPlugins/AutoResolution/locale"
- 
+
 
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))

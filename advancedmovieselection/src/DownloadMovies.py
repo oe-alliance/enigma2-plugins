@@ -1,13 +1,13 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 #  Advanced Movie Selection for Dreambox-Enigma2
 #
 #  The plugin is developed on the basis from a lot of single plugins (thx for the code @ all)
 #  Coded by JackDaniel (c)2011
 #  Support: www.i-have-a-dreambox.com
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -16,7 +16,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 from __future__ import print_function
@@ -57,7 +57,7 @@ class DownloadMovies(Screen):
         self.skinName = SkinTools.appendResolution("AdvancedMovieSelectionDownload")
         self.onShow.append(self.selectionChanged)
         self.service = service
-        self["logo"] = Pixmap()  
+        self["logo"] = Pixmap()
         self["info"] = Label()
         self["title"] = Label()
         self["poster"] = Pixmap()
@@ -84,11 +84,11 @@ class DownloadMovies(Screen):
           "right": self.scrollLabelPageDown
           }, -1)
         self.onShown.append(self.setWindowTitle)
-      
+
         self.l = []
         self["list"] = MenuList(self.l)
         self["list"].onSelectionChanged.append(self.selectionChanged)
-        
+
         self.picload = ePicLoad()
         self.picload.PictureData.get().append(self.paintPosterPixmap)
         self.refreshTimer = eTimer()
@@ -101,7 +101,7 @@ class DownloadMovies(Screen):
             movie_title = ServiceCenter.getInstance().info(self.service).getName(self.service).encode("utf-8").split(" - ")[0].strip()
             self.refreshTimer.start(1, True)
             return
-        
+
         global fetchingMovies, this_session, is_hidden
         if fetchingMovies is None:
             fetchingMovies = FetchingMovies(items)
@@ -115,20 +115,20 @@ class DownloadMovies(Screen):
 
     def setWindowTitle(self):
         self.setTitle(_("Search for %s, please wait...") % (movie_title))
-        self["logo"].instance.setPixmapFromFile("%s/tmdb_logo.png" % tmdb_logodir)  
+        self["logo"].instance.setPixmapFromFile("%s/tmdb_logo.png" % tmdb_logodir)
 
     def scrollLabelPageUp(self):
         self["description"].pageUp()
 
     def scrollLabelPageDown(self):
         self["description"].pageDown()
-    
+
     def paintPosterPixmap(self, picInfo=None):
         ptr = self.picload.getData()
         if ptr != None:
             self["poster"].instance.setPixmap(ptr)
             self["poster"].show()
-    
+
     def __cancel(self):
         global fetchingMovies
         if fetchingMovies is not None:
@@ -139,7 +139,7 @@ class DownloadMovies(Screen):
         global is_hidden
         is_hidden = True
         self.close()
-        
+
     def updateProgress(self):
         self.setTitle(_("Automatic search and save, please wait..."))
         global current, movie_title, total, fetchingMovies
@@ -191,8 +191,8 @@ class DownloadMovies(Screen):
         current = self["list"].l.getCurrentSelection()
         if self.service is not None and current:
             createEIT(self.service.getPath(), movie_title, movie=current[1])
-        self.__hide()        
-    
+        self.__hide()
+
     def selectionChanged(self):
         self["poster"].hide()
         current = self["list"].l.getCurrentSelection()
@@ -211,18 +211,18 @@ class DownloadMovies(Screen):
                 self.picload.startDecode(jpg_file)
             except Exception as e:
                 print(e)
-        
+
     def pageUp(self):
         self["description"].pageUp()
 
     def pageDown(self):
         self["description"].pageDown()
-        
+
     def editTitle(self):
         global movie_title
         self.session.openWithCallback(self.newTitle, VirtualKeyBoard, title=_("Enter new moviename to search for"), text=movie_title)
         #self.session.openWithCallback(self.newTitle, InputBox, title=_("Enter the new Movie title!"), text=movie_title+" "*80, maxSize=55, type=Input.TEXT)
-        
+
     def newTitle(self, newTitle):
         if newTitle is not None:
             self.setTitle(_("Search for %s, please wait...") % (newTitle))
@@ -255,7 +255,7 @@ class FetchingMovies(Thread):
                     if service.flags & eServiceReference.mustDescent:
                         total = total - 1
                         continue
-                    current = current + 1 
+                    current = current + 1
                     movie_title = ServiceCenter.getInstance().info(service).getName(service).encode("utf-8").split(" - ")[0].strip()
                     createEIT(service.getPath(), movie_title)
                 except:

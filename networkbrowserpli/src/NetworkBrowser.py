@@ -433,7 +433,7 @@ class NetworkBrowser(Screen):
 		for sharename, sharedata in list(self.mounts.items()):
 			if sharedata['ip'] == sharehost:
 				if sharetype == 'nfsShare' and sharedata['mounttype'] == 'nfs':
-					sharedir = sharedir.replace('/', '')					
+					sharedir = sharedir.replace('/', '')
 					if sharedir == sharedata['sharedir']:
 						if sharedata["isMounted"] is True:
 							self.isMounted = True
@@ -641,4 +641,3 @@ class ScanIP(Screen, ConfigListScreen):
 			self.close((self.ipAddress.getText(), "nfs"))
 		else:
 			self.exit
-

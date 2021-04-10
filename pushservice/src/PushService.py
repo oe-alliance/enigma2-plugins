@@ -44,15 +44,15 @@ class PushService(PushServiceBase):
 
 	def __init__(self):
 		PushServiceBase.__init__(self)
-		
+
 		self.state = PSBOOT if config.pushservice.runonboot.value else PSFIRST
-		
+
 		self.timer = eTimer()
 		self.timer.callback.append(self.do)
-		
+
 		# Read XML file, parse it and instantiate configured plugins
 		self.load()
-		
+
 		#TODO Run in a new thread
 
 	######################################
@@ -61,14 +61,14 @@ class PushService(PushServiceBase):
 	def start(self):
 		print("PushService start")
 		self.stopTimer()
-		
+
 		self.begin()
 		next(self)
 
 	def stop(self):
 		print("PushService stop")
 		self.stopTimer()
-		
+
 		self.end()
 		self.state = PSFIRST
 
@@ -76,10 +76,10 @@ class PushService(PushServiceBase):
 		if state:
 			self.state = state
 		print("PushService next", self.state)
-		
+
 		if self.state == PSBOOT:
 			self.startTimer(int(config.pushservice.bootdelay.value), PSBOOTRUN)
-		
+
 		elif self.state == PSBOOTRUN \
 			or self.state == PSFIRST:
 			cltime = config.pushservice.time.value
@@ -88,7 +88,7 @@ class PushService(PushServiceBase):
 			ctime = cltime[0] * 60 + cltime[1]
 			seconds = 60 * abs(ctime - ltime)
 			self.startTimer(seconds, PSFIRSTRUN)
-		
+
 		elif self.state == PSFIRSTRUN \
 			or self.state == PSCYCLE:
 			period = int(config.pushservice.period.value)

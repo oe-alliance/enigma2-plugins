@@ -239,7 +239,7 @@ class MountManagerMenu(Screen, ConfigListScreen):
 	def keySave(self):
 		self.saveAll()
 		self.close()
-	
+
 	def cancelConfirm(self, result):
 		if not result:
 			return

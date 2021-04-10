@@ -3315,10 +3315,10 @@ class FritzProtocol(LineReceiver):  # pylint: disable=W0223
 # 	def pauseEnigma2(self):
 # 		debug("")
 # 		getPage("http://127.0.0.1/web/remotecontrol?command=164").addCallback(self.pauseEnigma2_cb).addErrback(self.pauseEnigma2_eb)
-# 
+#
 # 	def pauseEnigma2_cb(self, result):
 # 		debug(repr(result))
-# 
+#
 # 	def pauseEnigma2_eb(self, result):
 # 		debug(repr(result))
 

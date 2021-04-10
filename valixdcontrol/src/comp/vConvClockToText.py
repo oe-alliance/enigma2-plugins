@@ -16,7 +16,7 @@ class vConvClockToText(Converter, object):
 	STUNDEN = 7
 	LOCDE = 8
 	LOCFULL = 9
-	
+
 	def __init__(self, type):
 		Converter.__init__(self, type)
 		if type == "WithSeconds":
@@ -29,7 +29,7 @@ class vConvClockToText(Converter, object):
 			self.type = self.DATE
 		elif type == "AsLength":
 			self.type = self.AS_LENGTH
-		elif type == "Timestamp":	
+		elif type == "Timestamp":
 			self.type = self.TIMESTAMP
 		elif str(type).find("Format") != -1:
 			self.type = self.FORMAT

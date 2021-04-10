@@ -18,8 +18,8 @@ In case of reuse of this source code please do not remove this copyright.
     For more information on the GNU General Public License see:
     <http://www.gnu.org/licenses/>.
 
-For example, if you distribute copies of such a program, whether gratis or for a fee, you 
-must pass on to the recipients the same freedoms that you received. You must make sure 
+For example, if you distribute copies of such a program, whether gratis or for a fee, you
+must pass on to the recipients the same freedoms that you received. You must make sure
 that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 '''
 from __future__ import print_function
@@ -47,22 +47,22 @@ class MessageQueue:
             request = str(Screens.Standby.inStandby != None)
         elif data.startswith("setPort"):
             try:
-                from Components.config import config            
+                from Components.config import config
                 port = int(data.replace("setPort", ""))
                 serverInstance.reconnect(port=port)
-                config.AdvancedMovieSelection.server_port.value = port  
+                config.AdvancedMovieSelection.server_port.value = port
                 config.AdvancedMovieSelection.server_port.save()
             except Exception as e:
                 print(e)
         elif data == "nextTrashEvent":
             from Components.config import config
             if config.AdvancedMovieSelection.auto_empty_wastebasket.value == "-1":
-                return "-1"            
+                return "-1"
             request = str(config.AdvancedMovieSelection.next_auto_empty_wastebasket.value)
         elif data == "lastTrashEvent":
             from Components.config import config
             if config.AdvancedMovieSelection.auto_empty_wastebasket.value == "-1":
-                return "-1"            
+                return "-1"
             request = str(config.AdvancedMovieSelection.last_auto_empty_wastebasket.value)
         return request
 
@@ -108,22 +108,22 @@ class Client:
     def setPort(self, port):
         self.sendData("setPort" + str(port))
         self.port = port
-        
+
     def getAddress(self):
         return self.ip
 
     def getPort(self):
         return self.port
-        
+
     def getDeviceName(self):
         return self.device
-    
+
     def getName(self):
         return self.name
-        
+
     def isRecording(self):
         return self.sendData("isRecording") == "True"
-    
+
     def inStandby(self):
         return self.sendData("inStandby") == "True"
 
@@ -142,7 +142,7 @@ class Client:
         except:
             pass
         return ev
-    
+
 
 if __name__ == "__main__":
     print(Client("192.168.0.97", 20000).isRecording())

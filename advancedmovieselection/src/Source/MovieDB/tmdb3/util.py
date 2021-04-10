@@ -78,7 +78,7 @@ class Poller(object):
             self.apply(req.new(language=None, country=None).readJSON())
             # re-apply the filtered first pass data over top the second
             # unfiltered set. this is to work around the issue that the
-            # properties have no way of knowing when they should or 
+            # properties have no way of knowing when they should or
             # should not overwrite existing data. the cache engine will
             # take care of the duplicate query
         self.apply(req.readJSON())
@@ -381,4 +381,3 @@ class ElementType(type):
 class Element(object):
     __metaclass__ = ElementType
     _lang = 'en'
-

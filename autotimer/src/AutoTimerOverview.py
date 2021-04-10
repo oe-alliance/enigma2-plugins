@@ -360,8 +360,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 						AutoTimerEditor,
 						newTimer
 					)
-				
+
 	def save(self):
 		# Just close here, saving will be done by cb
 		self.close(self.session)
-

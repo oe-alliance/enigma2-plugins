@@ -8,12 +8,12 @@ from __future__ import absolute_import
 # Profiles, HDD, IP, NAS Mod by joergm6
 #
 # Small fixes by awl (3.4.6):
-#   * ElektroWakeUpTime must be recalculated after parameter change 
+#   * ElektroWakeUpTime must be recalculated after parameter change
 #     before shutdown in getNextWakeup() in order to allow
 #     for correct detection of automated wakeup
 #   * elektroTimerWakeupThreshold increased from 6 to 14.75 minutes
 #     (> 12 minutes is needed e.g. on Optimuss OS 2 plus)
-#   * Extensive debug output added (enclosed by "if debug" - 
+#   * Extensive debug output added (enclosed by "if debug" -
 #     set debug to true in order to see what really happens...)
 #   * Minor code cleanup
 #   * Debug output now correctly prints all times in local time

@@ -25,11 +25,11 @@ from .ModuleBase import ModuleBase
 class ControllerBase(ModuleBase):
 	# You only have to overwrite the functions You need
 	# If You don't have to save something, You don't need getOptions / setOptions
-	
+
 	UniqueCounter = 0
-	
+
 	ForceSingleInstance = True
-	
+
 	def __init__(self):
 		ModuleBase.__init__(self)
 		# Is called on instance creation

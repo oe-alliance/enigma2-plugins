@@ -117,4 +117,3 @@ class PagedRequest(PagedList):
                 yield None
             else:
                 yield self._handler(item)
-

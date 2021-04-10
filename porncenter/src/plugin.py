@@ -121,18 +121,18 @@ class PornCenterBuffer(Screen):
 	def __init__(self, session, url, file):
 		self.session = session
 		Screen.__init__(self, session)
-		
+
 		self.url = url
 		self.file = file
-		
+
 		self.infoTimer = eTimer()
 		self.infoTimer.timeout.get().append(self.updateInfo)
-		
+
 		self["info"] = Label(_("Downloading movie: %s") % self.file)
 		self["progress"] = ProgressBar()
-		
+
 		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.exit}, -1)
-		
+
 		self.onLayoutFinish.append(self.downloadMovie)
 
 	def downloadMovie(self):
@@ -251,11 +251,11 @@ class PornCenterConfig(ConfigListScreen, Screen):
 	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self.session = session
-		
+
 		ConfigListScreen.__init__(self, [])
-		
+
 		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.change, "cancel": self.exit}, -2)
-		
+
 		self.onLayoutFinish.append(self.createConfig)
 
 	def createConfig(self):
@@ -349,13 +349,13 @@ class PornCenterSub(Screen, ProtectedScreen):
 		Screen.__init__(self, session)
 		if pinchecker.pin_entered == False:
 			ProtectedScreen.__init__(self)
-		
+
 		self.session = session
 		self.plugin = plugin
 		self.list = []
-		
+
 		self["list"] = PornCenterList()
-		
+
 		self["actions"] = ActionMap(["InfobarActions", "MenuActions", "OkCancelActions"],
 			{
 				"ok": self.ok,
@@ -363,12 +363,12 @@ class PornCenterSub(Screen, ProtectedScreen):
 				"menu": self.config,
 				"showMovies": self.showMore
 			}, -1)
-		
+
 		self.onLayoutFinish.append(self.getEntries)
 
 	def isProtected(self):
 		return config.ParentalControl.setuppinactive.value
-	
+
 	def pinEntered(self, result):
 		if result is None:
 			self.close()

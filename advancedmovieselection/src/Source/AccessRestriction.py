@@ -18,8 +18,8 @@ In case of reuse of this source code please do not remove this copyright.
     For more information on the GNU General Public License see:
     <http://www.gnu.org/licenses/>.
 
-For example, if you distribute copies of such a program, whether gratis or for a fee, you 
-must pass on to the recipients the same freedoms that you received. You must make sure 
+For example, if you distribute copies of such a program, whether gratis or for a fee, you
+must pass on to the recipients the same freedoms that you received. You must make sure
 that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 '''
 from __future__ import print_function
@@ -31,7 +31,7 @@ VSR = ["VSR-0", "VSR-6", "VSR-12", "VSR-16", "VSR-18"]
 class AccessRestriction:
     def __init__(self):
         self.access = 18
-    
+
     def setAccess(self, access):
         print("set VSR:", access)
         self.access = int(access)
@@ -45,7 +45,7 @@ class AccessRestriction:
         except Exception as e:
             print(e)
             return -1 # type as error
-    
+
     def isAccessible(self, tags):
         if not tags:
             return True
@@ -58,7 +58,7 @@ class AccessRestriction:
 
     def setToService(self, file_name, access, clear_access=False):
         try:
-            meta_file = file_name.endswith(".ts") and file_name + ".meta" or file_name + ".ts.meta"  
+            meta_file = file_name.endswith(".ts") and file_name + ".meta" or file_name + ".ts.meta"
             if not clear_access:
                 print("Set %s to %s" % (access, meta_file))
             else:
@@ -79,17 +79,17 @@ class AccessRestriction:
                 time = ""
                 tags = ""
                 rest = ""
-    
+
             tag_list = tags.split()
             new_tags = []
             for t in tag_list:
                 if not t.startswith("VSR"):
                     new_tags.append(t)
-            
+
             if not clear_access:
                 new_tags.insert(0, access)
             tags = " ".join(new_tags)
-                    
+
             metafile = open(meta_file, "w")
             metafile.write("%s\n%s\n%s\n%s\n%s\n%s" % (sid, title, descr, time, tags, rest))
             metafile.close()

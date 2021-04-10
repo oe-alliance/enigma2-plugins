@@ -70,7 +70,7 @@ instance = None
 #######################################################
 # Info screen
 class SeriesPluginInfoScreen(Screen):
-	
+
 	desktop = getDesktop(0)
 	desktopSize = desktop and desktop.size()
 	dwidth = desktopSize and desktopSize.width()
@@ -82,37 +82,37 @@ class SeriesPluginInfoScreen(Screen):
 		skinFile = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Skins/InfoScreenXD.xml")
 	else:
 		skinFile = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Skins/InfoScreenSD.xml")
-	
+
 	skin = open(skinFile).read()
-	
+
 	def __init__(self, session, service=None, event=None):
 		if session:
 			Screen.__init__(self, session)
-			
+
 			global instance
 			instance = self
-		
+
 		self.session = session
 		self.skinName = ["SeriesPluginInfoScreen"]
-		
+
 		self["logo"] = Pixmap()
 		self["cover"] = Pixmap()
 		self["state"] = Pixmap()
-		
+
 		self["event_title"] = Label()
 		self["event_episode"] = Label()
 		self["event_description"] = ScrollLabel()
 		self["datetime"] = Label()
 		self["channel"] = Label()
 		self["duration"] = Label()
-		
+
 		self["key_red"] = Button("")				# Rename or Record
 		self["key_green"] = Button("")			# Trakt Seen / Not Seen
 		self["key_yellow"] = Button("")			# Show all Episodes of current season
 		self["key_blue"] = Button("")				# Show all Seasons
-		
+
 		self.redButtonFunction = None
-		
+
 		#TODO HelpableActionMap
 		self["actions"] = ActionMap(["OkCancelActions", "EventViewActions", "DirectionActions", "ColorActions"],
 		{
@@ -123,28 +123,28 @@ class SeriesPluginInfoScreen(Screen):
 			"red": self.redButton,
 			"prevEvent": self.prevEpisode,
 			"nextEvent": self.nextEpisode,
-			
+
 			#TODO
 			#"pageUp":    self.pageUp,
 			#"pageDown":  self.pageDown,
 			#"openSimilarList": self.openSimilarList
 		})
-		
+
 		log.info("SeriesPluginInfo:", service, event)
 		self.service = service
 		self.event = event
-		
+
 		self.name = ""
 		self.short = ""
 		self.data = None
-		
+
 		self.path = None
 		self.eservice = None
-		
+
 		self.epg = eEPGCache.getInstance()
 		self.serviceHandler = eServiceCenter.getInstance()
 		self.seriesPlugin = getInstance()
-		
+
 		if session:
 			self.onLayoutFinish.append(self.layoutFinished)
 		else:
@@ -152,7 +152,7 @@ class SeriesPluginInfoScreen(Screen):
 
 	def layoutFinished(self):
 		self.setTitle(_("SeriesPlugin Info"))
-		
+
 		self.getEpisode()
 
 	def getEpisode(self):
@@ -161,18 +161,18 @@ class SeriesPluginInfoScreen(Screen):
 		self.data = None
 		begin, end, duration = 0, 0, 0
 		ext, channel = "", ""
-		
+
 		future = True
 		today = False
 		elapsed = False
-		
+
 		if self.service:
 			service = self.service
 		else:
 			service = self.service = self.session and self.session.nav.getCurrentlyPlayingServiceReference()
-		
+
 		ref = None
-		
+
 		if isinstance(service, eServiceReference):
 			#ref = service  #Problem EPG
 			self.eservice = service
@@ -207,24 +207,24 @@ class SeriesPluginInfoScreen(Screen):
 						pass
 				# Get information from event
 				log.debug("eServiceReference channel", str(ref))
-		
+
 		elif isinstance(service, ServiceReference):
 			ref = service.ref
 			channel = service.getServiceName()
 			log.debug("ServiceReference", str(ref))
-		
+
 		elif isinstance(service, ChannelSelectionBase):
 			ref = service.getCurrentSelection()
 			channel = ServiceReference(ref).getServiceName() or ""
 			log.debug("ChannelSelectionBase", str(ref))
-		
+
 		# Fallbacks
 		if ref is None:
 			ref = self.session and self.session.nav.getCurrentlyPlayingServiceReference()
 			channel = getChannel(ref)
-			
+
 			log.debug("Fallback ref", ref, str(ref), channel)
-		
+
 		if not isinstance(self.event, eServiceEvent):
 			try:
 				self.event = ref.valid() and self.epg.lookupEventTime(ref, -1)
@@ -240,9 +240,9 @@ class SeriesPluginInfoScreen(Screen):
 			today = True
 			elapsed = False
 			log.debug("Fallback event", self.event)
-		
+
 		self.service = ref
-		
+
 		if self.event:
 			self.name = self.event.getEventName() or ""
 			begin = self.event.getBeginTime() or 0
@@ -252,7 +252,7 @@ class SeriesPluginInfoScreen(Screen):
 			self.short = self.event.getShortDescription() or ""
 			ext = self.event.getExtendedDescription() or ""
 			log.debug("event")
-		
+
 		if not begin:
 			info = self.serviceHandler.info(eServiceReference(str(ref)))
 			#log.debug("info")
@@ -279,20 +279,20 @@ class SeriesPluginInfoScreen(Screen):
 				log.debug("We don't know the exact margins, we will assume the E2 default margins")
 				begin = begin + (config.recording.margin_before.value * 60)
 				end = end - (config.recording.margin_after.value * 60)
-		
+
 		if self.session:
 			self.updateScreen(self.name, _("Retrieving Season, Episode and Title..."), self.short, ext, begin, duration, channel)
-		
+
 		logo = self.seriesPlugin.getLogo(future, today, elapsed)
 		if logo:
 			logopath = os.path.join(PIXMAP_PATH, logo + ".png")
-			
+
 			if self.session and os.path.exists(logopath):
 				self.loadPixmap("logo", logopath)
 		try:
 			log.debug("getEpisode:", self.name, begin, end, ref)
 			self.seriesPlugin.getEpisode(
-					self.episodeCallback, 
+					self.episodeCallback,
 					self.name, begin, end, ref, future=future, today=today, elapsed=elapsed, block=False
 				)
 		except Exception as e:
@@ -302,25 +302,25 @@ class SeriesPluginInfoScreen(Screen):
 	def episodeCallback(self, data=None):
 		#TODO episode list handling
 		#store the list and just open the first one
-		
+
 		log.debug("episodeCallback", data)
 		#log.debug(data)
 		if data and isinstance(data, dict):
 			# Episode data available
 			self.data = data
-		
+
 			if data['rawseason'] == "" and data['rawepisode'] == "":
 				custom = _("{title:s}").format(**data)
-				
+
 			elif data['rawseason'] == "":
 				custom = _("Episode: {rawepisode:s}\n{title:s}").format(**data)
-				
+
 			elif data['rawepisode'] == "":
 				custom = _("Season: {rawseason:s}\n{title:s}").format(**data)
-				
+
 			else:
 				custom = _("Season: {rawseason:s}  Episode: {rawepisode:s}\n{title:s}").format(**data)
-			
+
 			try:
 				self.setColorButtons()
 			except Exception as e:
@@ -331,7 +331,7 @@ class SeriesPluginInfoScreen(Screen):
 			custom = str(data)
 		else:
 			custom = _("No matching episode found")
-		
+
 		# Check if the dialog is already closed
 		try:
 			self["event_episode"].setText(custom)
@@ -344,7 +344,7 @@ class SeriesPluginInfoScreen(Screen):
 		# Adapted from EventView
 		self["event_title"].setText(name)
 		self["event_episode"].setText(episode)
-		
+
 		text = ""
 		if short and short != name:
 			text = short
@@ -353,7 +353,7 @@ class SeriesPluginInfoScreen(Screen):
 				text += '\n'
 			text += ext
 		self["event_description"].setText(text)
-		
+
 		self["datetime"].setText(datetime.fromtimestamp(begin).strftime("%d.%m.%Y, %H:%M"))
 		self["duration"].setText(_("%d min") % ((duration) / 60))
 		self["channel"].setText(channel)
@@ -386,10 +386,10 @@ class SeriesPluginInfoScreen(Screen):
 	# Overwrite Screen close function
 	def close(self):
 		log.debug("user close")
-		
+
 		global instance
 		instance = None
-		
+
 		# Call baseclass function
 		Screen.close(self)
 
@@ -397,7 +397,7 @@ class SeriesPluginInfoScreen(Screen):
 		try:
 			log.debug("event eit", self.event and self.event.getEventId())
 			if self.service and self.data:
-				
+
 				if self.path and os.path.exists(self.path):
 					# Record file exists
 					self["key_red"].setText(_("Rename"))
@@ -466,12 +466,12 @@ class SeriesPluginInfoScreen(Screen):
 			else:
 				#newEntry = RecordTimerEntry(ServiceReference(ref), checkOldTimers = True, dirname = preferredTimerPath(), *parseEvent(self.event))
 				begin, end, name, description, eit = parseEvent(self.event)
-				
+
 				from .SeriesPlugin import refactorTitle, refactorDescription
 				if self.data:
 					name = refactorTitle(name, self.data)
 					description = refactorDescription(description, self.data)
-				
+
 				#newEntry = RecordTimerEntry(ServiceReference(refstr), begin, end, name, description, eit, dirname = preferredTimerPath())
 				newEntry = RecordTimerEntry(ServiceReference(str(ref)), begin, end, name, description, eit, dirname=preferredTimerPath())
 				#newEntry = RecordTimerEntry(refstr, begin, end, name, description, eit, dirname = preferredTimerPath())
@@ -505,4 +505,3 @@ class SeriesPluginInfoScreen(Screen):
 
 	def finishSanityCorrection(self, answer):
 		self.finishedAdd(answer)
-

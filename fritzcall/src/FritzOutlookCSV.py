@@ -14,10 +14,10 @@ try:
 except ValueError:
 	def _(string): # pylint: disable-msg=C0103
 		return string
-	
+
 	def debug(text):
 		print(text)
-	
+
 	import re
 
 	def normalizePhoneNumber(intNo):
@@ -109,7 +109,7 @@ def findNumber(number, filename):
 						if row[8]:
 							addressB = row[8] + ', ' + addressB# Stra￟e gesch￤ftlich
 						nameB = (nameB + ', ' + addressB).replace('\n', ', ').replace('\r', '').replace('#', '')
-	
+
 					if no == number:
 						debug("[FritzCallPhonebook] findNumber result: " + no + ' ' + nameB)
 						fileD.close()
@@ -150,7 +150,7 @@ def findNumber(number, filename):
 			continue
 	fileD.close()
 	return ""
-	
+
 
 def readNumbers(filename, outFun):
 	fileD = open(filename, "rb")

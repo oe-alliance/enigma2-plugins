@@ -58,7 +58,7 @@ class Showiframe():
 		try:
 			self.showSinglePic = dlsym(self.showiframe, "showSinglePic")
 			self.finishShowSinglePic = dlsym(self.showiframe, "finishShowSinglePic")
-		except OSError as e: 
+		except OSError as e:
 			self.showSinglePic = dlsym(self.showiframe, "_Z13showSinglePicPKc")
 			self.finishShowSinglePic = dlsym(self.showiframe, "_Z19finishShowSinglePicv")
 
@@ -84,7 +84,7 @@ def shortname(movie, showing=None):
 	movie = re.sub("\W[0-9]{4}", "", movie)
 	if not showing:
 		movie = re.sub("\WDVDRIP(.*[^.]+).", "", movie)
-		movie = re.sub("\WAC3D(.*[^.]+).", "", movie)	
+		movie = re.sub("\WAC3D(.*[^.]+).", "", movie)
 		movie = re.sub("\WAC3(.*[^.]+).", "", movie)
 		movie = re.sub("\WX264(.*[^.]+).", "", movie)
 		movie = re.sub("\WXVID(.*[^.]+).", "", movie)

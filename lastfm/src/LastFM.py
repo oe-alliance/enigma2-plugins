@@ -12,20 +12,20 @@ from . import _
 class LastFMEventRegister:
     def __init__(self):
         self.onMetadataChangedList = []
-    
+
     def addOnMetadataChanged(self, callback):
         self.onMetadataChangedList.append(callback)
 
     def removeOnMetadataChanged(self, callback):
         self.onMetadataChangedList.remove(callback)
-    
+
     def onMetadataChanged(self, metad):
         for i in self.onMetadataChangedList:
             i(metadata=metad)
 
 
 lastfm_event_register = LastFMEventRegister()
-            
+
 
 class LastFMHandler:
     def __init__(self):
@@ -74,7 +74,7 @@ class LastFMHandler:
         pass
 
     def onStationChanged(self, reason):
-        pass    
+        pass
 
     def onMetadataLoaded(self, metadata):
         pass
@@ -87,7 +87,7 @@ class LastFM(LastFMHandler):
         'http://my.netscape.com/rdf/simple/0.9/' # RSS 0.90
     )
     DUBLIN_CORE = ('http://purl.org/dc/elements/1.1/',)
-    
+
     version = "1.0.1"
     platform = "linux"
     host = "ws.audioscrobbler.com"
@@ -96,11 +96,11 @@ class LastFM(LastFMHandler):
     info = {}
     cache_toptags = "/tmp/toptags"
     playlist = None
-    
+
     def __init__(self):
         LastFMHandler.__init__(self)
         self.state = False # if logged in
-                    
+
     def connect(self, username, password):
 #        getPage(self.host,self.port
 #                            ,"/radio/handshake.php?version=" + self.version + "&platform=" + self.platform + "&username=" + username + "&passwordmd5=" + self.hexify(md5(password).digest())
@@ -122,10 +122,10 @@ class LastFM(LastFMHandler):
                 self.framehack = self.info["base_path"]
                 self.state = True
                 self.onConnectSuccessful("loggedin")
-                
+
         else:
             self.onConnectFailed("login failed")
-        
+
     def _parselines(self, str):
         res = {}
         vars = split(str, "\n")
@@ -154,16 +154,16 @@ class LastFM(LastFMHandler):
     def loadPlaylistCB(self, xmlsource):
         self.playlist = LastFMPlaylist(xmlsource)
         self.onPlaylistLoaded("playlist loaded")
-    
+
     def getPersonalURL(self, username, level=50):
         return "lastfm://user/%s/recommended/32" % username
-    
+
     def getNeighboursURL(self, username):
         return "lastfm://user/%s/neighbours" % username
 
     def getLovedURL(self, username):
         return "lastfm://user/%s/loved" % username
-    
+
     def getSimilarArtistsURL(self, artist=None):
         if artist is None and 'artist' in self.metadata:
             return "lastfm://artist/%s/similarartists" % self.metadata['artist'].replace(" ", "%20")
@@ -175,7 +175,7 @@ class LastFM(LastFMHandler):
             return "lastfm://artist/%s/fans" % self.metadata['artist'].replace(" ", "%20")
         else:
             return "lastfm://artist/%s/fans" % artist.replace(" ", "%20")
-    
+
     def getArtistGroup(self, artist=None):
         if artist is None and 'artist' in self.metadata:
             return "lastfm://group/%s" % self.metadata['artist'].replace(" ", "%20")
@@ -192,7 +192,7 @@ class LastFM(LastFMHandler):
 #                            ,callback=callback,errorback=self.onCommandFailed)
             url = "http://" + self.info["base_url"] + ":80" + self.info["base_path"] + "/control.php?command=" + cmd + "&session=" + self.info["session"]
             getPage(six.ensure_binary(url)).addCallback(callback).addErrback(self.onCommandFailed)
- 
+
     def onTrackLovedCB(self, response):
         res = self._parselines(response)
         if res["response"] == "OK":
@@ -213,7 +213,7 @@ class LastFM(LastFMHandler):
             self.onTrackSkiped("Track skiped")
         else:
             self.onCommandFailed("Server returned FALSE")
-                        
+
     def love(self):
         return self.command("love", self.onTrackLovedCB)
 
@@ -223,13 +223,13 @@ class LastFM(LastFMHandler):
     def skip(self):
         """unneeded"""
         return self.command("skip", self.onTrackSkipedCB)
-    
+
     def hexify(self, s):
         result = ""
         for c in s:
             result = result + ("%02x" % ord(c))
         return result
-    
+
     def XMLgetElementsByTagName(self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES):
         for namespace in possibleNamespaces:
             children = node.getElementsByTagNameNS(namespace, tagName)
@@ -279,14 +279,14 @@ class LastFM(LastFMHandler):
 #                            ,callback=self.getTopTracksCB,errorback=self.onCommandFailed)
             url = "http://" + self.info["base_url"] + "/1.0/user/" + username + "/toptracks.xml"
             getPage(six.ensure_binary(url)).addCallback(self.getTopTracksCB).addErrback(self.onCommandFailed)
-           
+
     def getTopTracksCB(self, result):
         re, rdata = self._parseTracks(result)
         if re:
             self.onTopTracksLoaded(rdata)
         else:
             self.onCommandFailed(rdata)
-            
+
     def getRecentTracks(self, username):
         if self.state is not True:
             self.onCommandFailed("not logged in")
@@ -296,14 +296,14 @@ class LastFM(LastFMHandler):
 #                            ,callback=self.getRecentTracksCB,errorback=self.onCommandFailed)
             url = "http://" + self.info["base_url"] + "/1.0/user/" + username + "/recenttracks.xml"
             getPage(six.ensure_binary(url)).addCallback(self.getRecentTracksCB).addErrback(self.onCommandFailed)
-           
+
     def getRecentTracksCB(self, result):
         re, rdata = self._parseTracks(result)
         if re:
             self.onRecentTracksLoaded(rdata)
         else:
             self.onCommandFailed(rdata)
-    
+
     def getRecentLovedTracks(self, username):
         if self.state is not True:
             self.onCommandFailed("not logged in")
@@ -313,7 +313,7 @@ class LastFM(LastFMHandler):
 #                            ,callback=self.getRecentLovedTracksCB,errorback=self.onCommandFailed)
             url = "http://" + self.info["base_url"] + "/1.0/user/" + username + "/recentlovedtracks.xml"
             getPage(six.ensure_binary(url)).addCallback(self.getRecentLovedTracksCB).addErrback(self.onCommandFailed)
-           
+
     def getRecentLovedTracksCB(self, result):
         re, rdata = self._parseTracks(result)
         if re:
@@ -330,7 +330,7 @@ class LastFM(LastFMHandler):
 #                            ,callback=self.getRecentBannedTracksCB,errorback=self.onCommandFailed)
             url = "http://" + self.info["base_url"] + "/1.0/user/" + username + "/recentbannedtracks.xml"
             getPage(six.ensure_binary(url)).addCallback(self.getRecentBannedTracksCB).addErrback(self.onCommandFailed)
-           
+
     def getRecentBannedTracksCB(self, result):
         re, rdata = self._parseTracks(result)
         if re:
@@ -366,7 +366,7 @@ class LastFM(LastFMHandler):
 #                            ,callback=self.getNeighboursCB,errorback=self.onCommandFailed)
             url = "http://" + self.info["base_url"] + "/1.0/user/" + username + "/neighbours.xml"
             getPage(six.ensure_binary(url)).addCallback(self.getNeighboursCB).addErrback(self.onCommandFailed)
-           
+
     def getNeighboursCB(self, result):
         re, rdata = self._parseUser(result)
         if re:
@@ -383,7 +383,7 @@ class LastFM(LastFMHandler):
 #                            ,callback=self.getFriendsCB,errorback=self.onCommandFailed)
             url = "http://" + self.info["base_url"] + "/1.0/user/" + username + "/friends.xml"
             getPage(six.ensure_binary(url)).addCallback(self.getFriendsCB).addErrback(self.onCommandFailed)
-           
+
     def getFriendsCB(self, result):
         re, rdata = self._parseUser(result)
         if re:
@@ -417,7 +417,7 @@ class LastFM(LastFMHandler):
 #                            ,callback=self.changeStationCB,errorback=self.onCommandFailed)
             url = "http://" + self.info["base_url"] + ":80" + self.info["base_path"] + "/adjust.php?session=" + self.info["session"] + "&url=" + url
             getPage(six.ensure_binary(url)).addCallback(self.changeStationCB).addErrback(self.onCommandFailed)
-           
+
     def changeStationCB(self, result):
         res = self._parselines(result)
         if res["response"] == "OK":
@@ -434,12 +434,12 @@ class LastFMPlaylist:
     """
     DEFAULT_NAMESPACES = (None,)
     DUBLIN_CORE = ('http://purl.org/dc/elements/1.1/',) #why do i need this?
-    
+
     name = "N/A"
     creator = "N/A"
     tracks = []
     length = 0
-    
+
     def __init__(self, xmlsource):
         self.xmldoc = parseString(xmlsource)
         self.name = unquote_plus(self._get_txt(self.xmldoc, "title", "no playlistname"))
@@ -454,7 +454,7 @@ class LastFMPlaylist:
             return self.tracks[tracknumber]
         except IndexError:
             return False
-    
+
     def parseTracks(self):
         try:
             self.tracks = []
@@ -473,7 +473,7 @@ class LastFMPlaylist:
             return True
         except:
             return False
-    
+
     def _getElementsByTagName(self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES):
         for namespace in possibleNamespaces:
             children = node.getElementsByTagNameNS(namespace, tagName)

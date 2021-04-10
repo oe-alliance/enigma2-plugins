@@ -3,7 +3,7 @@ from __future__ import absolute_import
 # POC FTP Browser for Enigma2
 #
 
-# for localized messages  	 
+# for localized messages
 from . import _
 
 # Config

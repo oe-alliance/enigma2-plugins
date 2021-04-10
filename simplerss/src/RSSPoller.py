@@ -292,4 +292,3 @@ class RSSPoller:
 			self.googleReader.login().addCallback(self.googleLoggedIn).addErrback(self.googleLoginFailed)
 		else:
 			self.reloading = False
-

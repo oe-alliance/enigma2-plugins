@@ -21,15 +21,15 @@ by the assembler.  So for example:
                 <co_code><![CDATA[
  33           0 LOAD_FAST                0 (x)
               3 LOAD_CONST               1 (7)
-              6 BINARY_ADD          
-              7 RETURN_VALUE        
+              6 BINARY_ADD
+              7 RETURN_VALUE
                 ]]></co_code>
 and
                 <co_code><![CDATA[
  48          73 LOAD_FAST                0 (y22)
               4 LOAD_CONST               1 (324517)
-#            26 ROT_TWO  
-       ------ 6 BINARY_ADD          
+#            26 ROT_TWO
+       ------ 6 BINARY_ADD
 =========== 217 RETURN_VALUE
                 ]]></co_code>
 
@@ -101,11 +101,11 @@ def elem_code(obj, n=None):
        the code in a more human readable form."""
 
     attrib = {'n': str(n)} if n >= 0 else {}
-    
+
     if type(obj) == CodeType:
         elem = ET.Element('code', attrib)
         elem.attrib.update(name=obj.co_name)
-        
+
         tags = [n for n in dir(obj) if n.startswith('co_')]
         tags.sort()
         tags.remove('co_consts')
@@ -113,23 +113,23 @@ def elem_code(obj, n=None):
             name = tag[3:]
             caelem = ET.Element(tag)
             ca = getattr(obj, tag)
-            
+
             if name in 'filename name'.split():
                 caelem.text = ca
-                
+
             elif name in 'argcount firstlineno nlocals stacksize'.split():
                 caelem.text = str(ca)
-                
+
             elif name in 'cellvars freevars names varnames consts'.split():
                 for i, item in enumerate(ca):
                     caelem.append(elem_code(item, i))
-            
+
             elif name == 'flags':
                 caelem.text = '0x%04x' % ca
-            
+
             elif name == 'lnotab':
                 caelem.text = '0x' + ca.encode('hex')
-            
+
             elif name == 'code':
                 caelem.text = ('[%s[\n' % magic) + disassemble(obj) + \
                               (16 * ' ' + ']%s]' % magic)
@@ -141,24 +141,24 @@ def elem_code(obj, n=None):
     else:
         elem = ET.Element('item', attrib)
         elem.text = repr(obj)
-    
+
     return elem
 
 
 def xmlpostprocess(xml):
     pat = re.compile(r'\[%s\[.*?\]%s\]' % (magic, magic), re.DOTALL)
-    
+
     def repl(match):
         s = match.group()
         s = s.replace('&lt;', '<')
         s = s.replace('&gt;', '>')
         s = s.replace('&amp;', '&')
         return s
-    
+
     ret = pat.sub(repl, xml)
     ret = ret.replace('[%s[' % magic, '<![CDATA[')
     ret = ret.replace(']%s]' % magic, ']]>')
-    
+
     return '''\
 <?xml version="1.0" ?>
 <?xml-stylesheet type="text/xsl" href="bytecode.xsl" ?>
@@ -177,11 +177,11 @@ def xml_code(code):
 def headET(f):
     "Given file object, return an ET.Element representing the header"
     head = ET.Element('head')
-    
+
     e = ET.Element('magic')
     e.text = '0x' + f.read(4).encode('hex')
     head.append(e)
-    
+
     e = ET.Element('modtime')
     e.text = time.asctime(time.localtime(struct.unpack('L', f.read(4))[0]))
     head.append(e)
@@ -225,44 +225,44 @@ def assemble(text):
 
         elif len(cmd) != 1:
             exit('Error: Opcode %r takes no argument' % byteName)
-            
+
     return ''.join(chr(n) for n in lst)
 
 
 def code_elem(elem):
     "Given an ET.Element, return the representing code object."
-    
+
     if elem.tag == 'code':
-        
+
         args = '''argcount nlocals stacksize flags code consts names
                   varnames filename name firstlineno lnotab'''.split()
-        
+
         return new.code(*[code_elem(elem.find('co_' + arg)) for arg in args])
-    
+
     elif elem.tag.startswith('co_'):
         text = elem.text
         name = elem.tag[3:]
         if name in 'filename name'.split():
             return text
-        
+
         elif name in 'argcount firstlineno nlocals stacksize'.split():
             return int(text)
-        
+
         elif name in 'cellvars freevars names varnames consts'.split():
             return tuple(code_elem(e) for e in elem)
-        
+
         elif name == 'flags':
             assert len(text) == 6
             assert text[:2] == '0x'
             return int(text[2:], 16)
-        
+
         elif name == 'lnotab':
             assert text[:2] == '0x'
             return text[2:].decode('hex')
-        
+
         elif name == 'code':
             return assemble(text)
-        
+
     else:
         return eval(elem.text)
 
@@ -278,30 +278,30 @@ def pyc_xml(xml, filename):
     elem = ET.XML(xml)
     if not elem.find('head'):
         exit('Error: <head> missing in XML file, cannot convert to pyc file.')
-    
+
     f = open(filename, 'wb')
 
     magic = elem.find('head/magic').text
     assert magic[:2] == '0x'
     f.write(magic[2:].decode('hex'))
-    
+
     timestr = elem.find('head/modtime').text
     f.write(struct.pack('L', time.mktime(time.strptime(timestr))))
-    
+
     marshal.dump(code_elem(elem.find('code')), f)
-    
+
     f.close()
 
 
 def test(filename):
     import compiler
-    
+
     co1 = compile(open(filename).read(), '<input>', 'exec')
     xml1 = xml_code(co1)
-    
+
     co2 = code_xml(xml1)
     xml2 = xml_code(co2)
-    
+
     assert xml1 == xml2
 
 
@@ -330,5 +330,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-

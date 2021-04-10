@@ -11,4 +11,3 @@ class WebSession(Source):
 		return self.request.enigma2_session.id
 
 	text = property(getText)
-

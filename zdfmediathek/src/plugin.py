@@ -364,7 +364,7 @@ def getRightMenu(html):
 					details = None
 					if ('VIDEO, ' in div) or ('>LIVE<' in div):
 						details = getMovieDetails(div)
-					elif 'BEITR&Auml;GE' in div:	
+					elif 'BEITR&Auml;GE' in div:
 						details = getCategoryDetails(div)
 					if details:
 						list.append([details[0], details[1], details[2], details[3], details[4]])
@@ -475,9 +475,9 @@ def RightMenuEntryPixmap(thumbID, png_cache):
 
 
 class RightMenuList(List):
-	
+
 	png_cache = {}
-	
+
 	def __init__(self, list=[], enableWrapAround=False):
 		List.__init__(self, list, enableWrapAround, item_height=50)
 		self.pixmaps_to_load = []
@@ -604,7 +604,7 @@ class RightMenuList(List):
 			self.lastListLength = len(self.list)
 		else:
 			self.lastIndex = 0
-			self.lastListLength = len(l[1])			
+			self.lastListLength = len(l[1])
 		self.type = l[0]
 		self.list = l[1]
 		if self.type == TYPE_PODCAST:
@@ -646,10 +646,10 @@ class ZDFMediathekCache(Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		
+
 		self["spinner"] = Pixmap()
 		self.curr = 0
-		
+
 		self.timer = eTimer()
 		self.timer.callback.append(self.showNextSpinner)
 
@@ -736,17 +736,17 @@ class ZDFMediathek(Screen, HelpableScreen):
 
 	def __init__(self, session):
 		self.session = session
-		
+
 		Screen.__init__(self, session)
-		
+
 		self["navigationTitle"] = Label(" ")
 		self["leftList"] = LeftMenuList()
 		self["rightList"] = RightMenuList()
 		self["fakeList"] = MenuList([])
 		self["serverName"] = Label("Server")
-		
+
 		HelpableScreen.__init__(self)
-		
+
 		self["actions"] = HelpableActionMap(self, "ZDFMediathekActions",
 			{
 				"back": (self.exit, "Beenden"),
@@ -761,17 +761,17 @@ class ZDFMediathek(Screen, HelpableScreen):
 				"search": (self.search, "Suche"),
 				"previousPage": (self.previousPage, "Vorherige Seite")
 			}, -2)
-		
+
 		self.cacheDialog = self.session.instantiateDialog(ZDFMediathekCache)
 		self["rightList"].callback = self.deactivateCacheDialog
 		self.working = False
 		self.currentList = LIST_RIGHT
 		self.linkPreviousPage = ""
-		
+
 		self.transcodeServer = None
 		self.cacheTimer = eTimer()
 		self.cacheTimer.callback.append(self.chechCachedFile)
-		
+
 		self.onLayoutFinish.append(self.getPage)
 		self.onClose.append(self.__onClose)
 

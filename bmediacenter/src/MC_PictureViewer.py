@@ -54,7 +54,7 @@ class MC_PictureViewer(Screen, HelpableScreen):
 		self["key_yellow"] = Button("Thumb View")
 		self["currentfolder"] = Label("")
 		self["currentfavname"] = Label("")
-		self["actions"] = HelpableActionMap(self, "MC_PictureViewerActions", 
+		self["actions"] = HelpableActionMap(self, "MC_PictureViewerActions",
 			{
 				"ok": (self.KeyOk, "Show Picture"),
 				"cancel": (self.Exit, "Exit Picture Viewer"),
@@ -119,7 +119,7 @@ class MC_PictureViewer(Screen, HelpableScreen):
 				ptr = self.picload.getData()
 			else:
 				ptr = None
-			
+
 			#ptr = loadPic(self.filelist.getCurrentDirectory() + self.filelist.getFilename(), 180, 160, self.aspect, int(config.plugins.mc_pp.resize.value), 0, 0, cachefile)
 			if ptr != None:
 				self["thumbnail"].instance.setPixmap(ptr.__deref__())
@@ -233,7 +233,7 @@ class MC_PicThumbViewer(Screen, HelpableScreen):
 			<widget name=\"frame\" position=\"35,30\" size=\"" + str(self.picX + 1) + "," + str(self.picY + 10) + "\" pixmap=\"pic_frame.png\" zPosition=\"3\" alphatest=\"on\" />" + skincontent + "</screen>"
 		Screen.__init__(self, session)
 
-		self["actions"] = HelpableActionMap(self, "MC_PictureViewerActions", 
+		self["actions"] = HelpableActionMap(self, "MC_PictureViewerActions",
 		{
 			"ok": (self.KeyOk, "Show Picture"),
 			"cancel": (self.Exit, "Exit Picture Viewer"),
@@ -672,7 +672,7 @@ class Selectmusic(Screen):
 		currDir = config.plugins.mc_ap.lastDir.value
 		if not pathExists(currDir):
 			currDir = "/"
-		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib", "/proc", "/ram", "/root", "/sbin", "/sys", "/tmp", "/usr", "/var"]		
+		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib", "/proc", "/ram", "/root", "/sbin", "/sys", "/tmp", "/usr", "/var"]
 		self.filelist = FileList(currDir, useServiceRef=True, showDirectories=True, showFiles=True, matchingPattern="(?i)^.*\.(m3u|mp2|mp3|wav|wave|pls|wma|m4a|ogg|ra|flac)", inhibitDirs=inhibitDirs)
 		self["filelist"] = self.filelist
 		self["currentfolder"] = Label()

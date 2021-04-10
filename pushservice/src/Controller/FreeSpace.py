@@ -37,25 +37,25 @@ BODY = _("Free disk space limit has been reached:\n") \
 
 
 class FreeSpace(ControllerBase):
-	
+
 	ForceSingleInstance = False
-	
+
 	def __init__(self):
 		# Is called on instance creation
 		ControllerBase.__init__(self)
-		
+
 		# Default configuration
 		self.setOption('wakehdd', NoSave(ConfigYesNo(default=False)), _("Allow HDD wake up"))
 		self.setOption('path', NoSave(ConfigText(default="/media/hdd/movie", fixed_size=False)), _("Where to check free space"))
 		self.setOption('limit', NoSave(ConfigNumber(default=100)), _("Free space limit in GB"))
-	
+
 	def run(self, callback, errback):
 		# At the end a plugin has to call one of the functions: callback or errback
 		# Callback should return with at least one of the parameter: Header, Body, Attachment
 		# If empty or none is returned, nothing will be sent
 		path = self.getValue('path')
 		limit = self.getValue('limit')
-		
+
 		if not self.getValue('wakehdd'):
 			#Adapted from: from Components.Harddisk import findMountPoint
 			def mountpoint(path):
@@ -63,19 +63,19 @@ class FreeSpace(ControllerBase):
 				if os.path.ismount(path) or len(path) == 0:
 					return path
 				return mountpoint(os.path.dirname(path))
-						
+
 			def getDevicebyMountpoint(hdm, mountpoint):
 				for x in hdm.partitions[:]:
 					if x.mountpoint == mountpoint:
 						return x.device
 				return None
-			
+
 			def getHDD(hdm, part):
 				for hdd in hdm.hdd:
 					if hdd.device == part[:3]:
 						return hdd
 				return None
-			
+
 			# User specified to avoid HDD wakeup if it is sleeping
 			from Components.Harddisk import harddiskmanager
 			dev = getDevicebyMountpoint(harddiskmanager, mountpoint(path))
@@ -86,7 +86,7 @@ class FreeSpace(ControllerBase):
 						# Don't wake up HDD
 						print(_("[FreeSpace] HDD is idle: ") + str(path))
 						callback()
-		
+
 		# Check free space on path
 		if os.path.exists(path):
 			stat = os.statvfs(path)

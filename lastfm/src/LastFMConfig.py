@@ -8,26 +8,26 @@ from Components.ActionMap import ActionMap
 # for localized messages
 from . import _
 
-       
+
 class LastFMConfigScreen(ConfigListScreen, Screen):
 
     config.plugins.LastFM = ConfigSubsection()
     config.plugins.LastFM.name = ConfigText(default=_("Last.FM"))
-    
+
     skin = """
         <screen position="center,center" size="600,480" title="%s" >
-        
+
         <widget name="config" position="10,0" size="580,400" scrollbarMode="showOnDemand" />
-        
-        <widget name="buttonred" position="10,430" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"2\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\" />          
-        <widget name="buttongreen" position="150,430" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"2\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\"/>            
+
+        <widget name="buttonred" position="10,430" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"2\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\" />
+        <widget name="buttongreen" position="150,430" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"2\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\"/>
         <ePixmap pixmap="skin_default/buttons/red.png" position="10,430" zPosition="1" size="140,40" transparent="1" alphatest="on" />
         <ePixmap pixmap="skin_default/buttons/green.png" position="150,430" zPosition="1" size="140,40" transparent="1" alphatest="on" />
 
         </screen>""" % (
             config.plugins.LastFM.name.value + " " + _("Setup")  # title
-        ) 
-			
+        )
+
     def __init__(self, session, args=0):
         self.session = session
         Screen.__init__(self, session)

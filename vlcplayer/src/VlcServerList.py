@@ -98,7 +98,7 @@ class VlcServerListScreen(Screen):
 		self.session = session
 		self.serverlist = VlcServerList()
 		self.defaultServer = defaultServer
-		
+
 		self.setTitle(_("Select VLC-Server profile"))
 		self["serverlabel"] = Label(_("List of known profiles. Note: key info - help"))
 		self["serverlist"] = self.serverlist

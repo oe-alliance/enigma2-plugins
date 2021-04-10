@@ -104,7 +104,7 @@ class FTPServer:
 
 def ftpserverFromURI(uri, name="", save=True):
 	scheme, host, port, path, username, password = _parse(uri, defaultPort=21)
-	
+
 	newServer = ConfigSubsection()
 	if save:
 		config.plugins.ftpbrowser.server.append(newServer)
@@ -162,7 +162,7 @@ class FTPServerEditor(ConfigListScreen, Screen):
 			getConfigListEntry(_("Port:"), server.cfg.port),
 			getConfigListEntry(_("Passive:"), server.cfg.passive),
 		])
-		
+
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 			{
 				"save": self.keySave,
@@ -263,7 +263,7 @@ class FTPServerManager(Screen):
 		self["key_yellow"] = StaticText(_("Edit"))
 		self["key_blue"] = StaticText(_("Save"))
 		self["list"] = List([])
-		
+
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 			{
 				"cancel": self.exit,
@@ -273,7 +273,7 @@ class FTPServerManager(Screen):
 				"yellow": self.edit,
 				"blue": self.save
 			}, -1)
-		
+
 		self.onLayoutFinish.extend((
 			self.updateServerList,
 			self.layoutFinished,
@@ -371,4 +371,3 @@ class FTPServerManager(Screen):
 				_("Configuration saved."),
 				type=MessageBox.TYPE_INFO
 			)
-

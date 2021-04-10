@@ -24,7 +24,7 @@ try:
 	from Tools.Directories import SCOPE_ACTIVE_SKIN
 except:
 	from Tools.Directories import SCOPE_CURRENT_SKIN
-	
+
 from skin import parseColor, parseFont
 try:
 	from Tools.TextBoundary import getTextBoundarySize
@@ -243,4 +243,3 @@ class AutoTimerList(MenuList):
 				self.instance.moveSelectionTo(idx)
 				break
 			idx += 1
-

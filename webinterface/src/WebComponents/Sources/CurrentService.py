@@ -16,4 +16,3 @@ class CurrentService(Source):
 		return text
 
 	text = property(command)
-

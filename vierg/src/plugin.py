@@ -68,7 +68,7 @@ class vierg(Screen):
 		self["message"] = Label(_(" "))
 		self["key_red"] = Button(_("quit game"))
 		self["key_green"] = Button(_("new game"))
-		
+
 		self["actions"] = ActionMap(["WizardActions", "ColorActions", "SetupActions"],
 		{
 			"ok": self.ok_pressed,
@@ -173,7 +173,7 @@ class vierg(Screen):
 			self.aniTimer.stop()
 			self.locked = False
 
-	def aniFall(self):	
+	def aniFall(self):
 		self.aniCnt = 0
 		self.aniTimer.start(100)
 
@@ -334,4 +334,3 @@ class vierg(Screen):
 
 		idx = rand() % idx
 		self.cPlay(vidx[idx])
-

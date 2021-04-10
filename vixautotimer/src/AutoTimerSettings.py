@@ -123,7 +123,7 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 			for plugin in plugins.getPlugins(PluginDescriptor.WHERE_EXTENSIONSMENU):
 				if plugin.name == "AutoTimer":
 					plugins.removePlugin(plugin)
-				
+
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		self.close()
 

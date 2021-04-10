@@ -70,7 +70,7 @@ class WebPixmap(Pixmap):
         ptr = self.picload.getData()
         if ptr and self.instance:
             self.instance.setPixmap(ptr)
-        
+
 
 class ImageswitchWidget(Widget):
     def __init__(self, session):
@@ -79,14 +79,14 @@ class ImageswitchWidget(Widget):
         self.Timer = eTimer()
         self.Timer.callback.append(self.TimerFire)
         self.last = False
-       
+
     def onLoadFinished(self, instance):
         self.instance = instance
         self.TimerFire()
-        
+
     def onClose(self):
         self.Timer.stop()
-        
+
     def TimerFire(self):
         if self.last:
             self.getElement("imageswitch_pixmap").load("http://www.google.de/intl/de_de/images/logo.gif")
@@ -94,9 +94,9 @@ class ImageswitchWidget(Widget):
         else:
             self.getElement("imageswitch_pixmap").load("http://maps.google.de/intl/de_de/images/maps_small_horizontal_logo.png")
             self.last = True
-            
+
         self.Timer.start(5000)
 
-        
+
 def get_widget(session):
     return ImageswitchWidget(session)

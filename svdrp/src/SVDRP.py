@@ -26,10 +26,10 @@ CODE_IMAGE = 216
 CODE_HELO = 220
 CODE_BYE = 221
 CODE_OK = 250
-CODE_EPG_START = 354 
+CODE_EPG_START = 354
 CODE_ERR_LOCAL = 451
 CODE_UNK = 500
-CODE_SYNTAX = 501 
+CODE_SYNTAX = 501
 CODE_IMP_FUNC = 502
 CODE_IMP_PARAM = 504
 CODE_NOK = 550
@@ -576,4 +576,3 @@ class SimpleVDRProtocolAbstraction:
 		if self.pending == 0:
 			reactor.callLater(1, defer.callback, True)
 		return defer
-

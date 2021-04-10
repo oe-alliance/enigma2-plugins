@@ -1,13 +1,13 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 #  Advanced Movie Selection for Dreambox-Enigma2
 #
 #  The plugin is developed on the basis from a lot of single plugins (thx for the code @ all)
 #  Coded by JackDaniel and cmikula (c)2011
 #  Support: www.i-have-a-dreambox.com
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -16,7 +16,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 from __future__ import print_function
@@ -55,7 +55,7 @@ class MoviePreview():
 
     def __onClose(self):
         del self.picload
-    
+
     def layoutFinish(self):
         sc = AVSwitch().getFramebufferScale()
         self.picload.setPara((self["CoverPreview"].instance.size().width(), self["CoverPreview"].instance.size().height(), sc[0], sc[1], False, 1, "#ff000000"))
@@ -85,7 +85,7 @@ class MoviePreview():
             path = os.path.splitext(path)[0] + ".jpg"
         else:
             path = path + ".jpg"
-    
+
         self.working = True
         self["CoverPreview"].setPosition(self.cpX, self.cpY)
         if fileExists(path):
@@ -106,7 +106,7 @@ class MoviePreview():
                     self.picload.startDecode(piconpath)
                 return
         self.picload.startDecode(nocover)
-                
+
     def showPreviewCallback(self, picInfo=None):
         if picInfo:
             ptr = self.picload.getData()
@@ -149,7 +149,7 @@ class VideoPreview():
         self.updateVideoPreviewSettings()
         self.onClose.append(self.__playLastService)
         self.dvdScreen = self.session.instantiateDialog(DVDOverlay)
-        
+
     def updateVideoPreviewSettings(self):
         self.enabled = config.AdvancedMovieSelection.video_preview.value
         if not self.enabled:
@@ -168,10 +168,10 @@ class VideoPreview():
 
     def setNewCutList(self, cut_list):
         self.cut_list = cut_list
-        
+
     def jumpForward(self):
         self.seekRelativ(config.AdvancedMovieSelection.video_preview_jump_time.value)
-    
+
     def jumpBackward(self):
         jumptime = config.AdvancedMovieSelection.video_preview_jump_time.value
         self.seekRelativ(-jumptime)
@@ -197,7 +197,7 @@ class VideoPreview():
         if seek is None or not seek.isCurrentlySeekable():
             return None
         return seek
-    
+
     def doSeekRelative(self, pts):
         seekable = self.getSeek()
         if seekable is None:
@@ -216,7 +216,7 @@ class VideoPreview():
                 return
             cpsr = self.session.nav.getCurrentlyPlayingServiceReference()
             if cpsr and cpsr == self.service:
-                return 
+                return
             #if not self.lastService:
             #    self.lastService = self.session.nav.getCurrentlyPlayingServiceReference()
             self.stopCurrentlyPlayingService()
@@ -268,7 +268,7 @@ class VideoPreview():
             if callable(attr):
                 return attr()
         return None
-            
+
     def playLastDVD(self, answer=True):
         print("playLastDVD", self.resume_point)
         service = self.session.nav.getCurrentService()

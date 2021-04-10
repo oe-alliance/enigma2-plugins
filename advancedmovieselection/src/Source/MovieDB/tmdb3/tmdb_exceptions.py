@@ -102,4 +102,3 @@ class TMDBOffline(TMDBError):
 
 class TMDBLocaleError(TMDBError):
     pass
-

@@ -331,7 +331,7 @@ class SatloaderMultiSat(Screen):
 				f.flush()
 				os.fsync(f.fileno())
 				f.close()
-				
+
 				restart = self.session.openWithCallback(self.restart, MessageBox, "%s\n%s\n\n%s\n%s" % (_("satellites.xml has been built."), str(self.satname), _("GUI needs a restart to apply changes."), _("Do you want to restart the GUI now?")), MessageBox.TYPE_YESNO)
 				restart.setTitle("%s" % (_("Restart GUI now?")))
 			else:
@@ -471,7 +471,7 @@ class TransponderSelection(Screen):
 			f.flush()
 			os.fsync(f.fileno())
 			f.close()
-			
+
 			self.session.open(MessageBox, "\"%s\" %s" % (str(self.satfile), _("has been saved.")), MessageBox.TYPE_INFO, timeout=3)
 			self.close(None)
 		else:

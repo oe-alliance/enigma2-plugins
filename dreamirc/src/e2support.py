@@ -108,7 +108,7 @@ class AbstractClientMixin:
                 break
         else:
             pass
-        from .dreamIRCTools import MessagePipe 
+        from .dreamIRCTools import MessagePipe
         self.pipe = MessagePipe()
         self.account = account
         self.chat = chatui

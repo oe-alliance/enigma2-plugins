@@ -46,7 +46,7 @@ class vInputBox(Screen, myNumericalTextInput):
 		self.onShown.append(boundFunction(self.setTitle, windowTitle))
 		if useableChars is not None:
 			self["input"].setUseableChars(useableChars)
-		self["actions"] = NumberActionMap(["WizardActions", "InputBoxActions", "InputAsciiActions", "KeyboardInputActions"], 
+		self["actions"] = NumberActionMap(["WizardActions", "InputBoxActions", "InputAsciiActions", "KeyboardInputActions"],
 		{
 			"gotAsciiCode": self.gotAsciiCode,
 			"ok": self.go,
@@ -122,9 +122,3 @@ class vInputBox(Screen, myNumericalTextInput):
 
 	def keyInsert(self):
 		self["input"].toggleOverwrite()
-
-
-
-
-
-

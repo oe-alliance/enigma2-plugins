@@ -175,7 +175,7 @@ class IMDB(Screen, HelpableScreen):
 		NBSP = NBSP.encode("utf8")
 		RAQUO = RAQUO.encode("utf8")
 		HELLIP = HELLIP.encode("utf8")
-		
+
 	def __init__(self, session, eventName, callbackNeeded=False, save=False, savepath=None, localpath=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)

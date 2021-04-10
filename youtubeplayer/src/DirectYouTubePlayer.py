@@ -45,7 +45,7 @@ class DirectYouTubePlayerSummary(Screen):
 		Screen.__init__(self, session)
 		self.skinName = "InfoBarMoviePlayerSummary"
 
-		
+
 class DirectYouTubePlayer(Screen, InfoBarNotifications):
 	STATE_IDLE = 0
 	STATE_PLAYING = 1
@@ -66,7 +66,7 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 		self.currentList = currentList
 		self.infoCallback = infoCallback
 		self.screen_timeout = 5000
-		
+
 		class DirectYouTubePlayerActionMap(ActionMap):
 			def __init__(self, player, contexts=[], actions={}, prio=0):
 				ActionMap.__init__(self, contexts, actions, prio)
@@ -86,7 +86,7 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 					return 1
 				else:
 					return ActionMap.action(self, contexts, action)
-					
+
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evSeekableStatusChanged: self.__seekableStatusChanged,
 				iPlayableService.evStart: self.__serviceStarted,
@@ -112,7 +112,7 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 				"menu": self.openContextMenu,
 				"info": self.showVideoInfo,
 			}, -2)
-			
+
 		self.oldservice = self.session.screen["CurrentService"]
 		self.oldNavService = session.nav.getCurrentlyPlayingServiceReference()
 
@@ -127,13 +127,13 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 		self.__seekableStatusChanged()
 
 		self.onClose.append(self.__onClose)
-		
+
 		self.play()
 
 	def createSummary(self):
 		print("[YTB] createSummary")
 		return DirectYouTubePlayerSummary
-		
+
 	def __onClose(self):
 		self.session.nav.stopService()
 		self.session.screen["CurrentService"] = self.oldservice

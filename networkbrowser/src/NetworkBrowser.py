@@ -455,7 +455,7 @@ class NetworkBrowser(Screen):
 		for sharename, sharedata in list(self.mounts.items()):
 			if sharedata['ip'] == sharehost:
 				if sharetype == 'nfsShare' and sharedata['mounttype'] == 'nfs':
-					sharedir = sharedir.replace('/', '')					
+					sharedir = sharedir.replace('/', '')
 					if sharedir.endswith(sharedata['sharedir']):
 						if sharedata["isMounted"] is True:
 							self.isMounted = True

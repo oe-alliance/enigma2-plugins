@@ -20,7 +20,7 @@ from Plugins.Plugin import PluginDescriptor
 from .__init__ import _
 
 import string
-import sys 
+import sys
 import time
 from random import Random
 import six
@@ -51,7 +51,7 @@ class ChangePasswdScreen(Screen):
 		self.user = "root"
 		self.output_line = ""
 		self.list = []
-		
+
 		self["passwd"] = ConfigList(self.list)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Set Password"))
@@ -66,25 +66,25 @@ class ChangePasswdScreen(Screen):
 						"blue": self.bluePressed,
 						"cancel": self.close
 				}, -1)
-	
+
 		self.buildList(self.GeneratePassword())
 
 	def newRandom(self):
 		self.buildList(self.GeneratePassword())
-	
+
 	def buildList(self, password):
 		self.password = password
 		self.list = []
 		self.list.append(getConfigListEntry(_('Enter new Password'), ConfigText(default=self.password, fixed_size=False)))
 		self["passwd"].setList(self.list)
-		
-	def GeneratePassword(self): 
+
+	def GeneratePassword(self):
 		passwdChars = string.letters + string.digits
 		passwdLength = 8
-		return ''.join(Random().sample(passwdChars, passwdLength)) 
+		return ''.join(Random().sample(passwdChars, passwdLength))
 
 	def SetPasswd(self):
-		print("Changing password for %s to %s" % (self.user, self.password)) 
+		print("Changing password for %s to %s" % (self.user, self.password))
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
 		self.container.dataAvail.append(self.dataAvail)
@@ -115,10 +115,10 @@ class ChangePasswdScreen(Screen):
 		del self.container.appClosed[:]
 		del self.container
 		self.close()
-		
+
 	def bluePressed(self):
 		self.session.openWithCallback(self.VirtualKeyBoardTextEntry, VirtualKeyBoard, title=(_("Enter your password here:")), text=self.password)
-	
+
 	def VirtualKeyBoardTextEntry(self, callback=None):
 		if callback is not None and len(callback):
 			self.buildList(callback)
@@ -140,7 +140,6 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	return PluginDescriptor(
-		name=title, 
+		name=title,
 		description=_("Change or reset the root password of your Receiver"),
 		where=[PluginDescriptor.WHERE_MENU], fnc=startChange)
-	

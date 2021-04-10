@@ -321,4 +321,3 @@ class EmissionDetailview(Screen, HelpableScreen):
 	def close(self):
 		self.timer.stop()
 		Screen.close(self)
-

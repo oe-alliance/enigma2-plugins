@@ -238,7 +238,7 @@ class RemoteTimerSetup(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 
 		self.setTitle(_("Remote-Timer settings"))
-		
+
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 

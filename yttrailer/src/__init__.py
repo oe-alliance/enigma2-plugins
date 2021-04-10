@@ -46,7 +46,7 @@ def long2bin(l):
 
 def rsa_pub1024(src, mod):
 	return long2bin(pow(bin2long(src), 65537, bin2long(mod)))
-	
+
 
 def decrypt_block(src, mod):
 	if len(src) != 128 and len(src) != 202:
@@ -54,7 +54,7 @@ def decrypt_block(src, mod):
 	dest = rsa_pub1024(src[:128], mod)
 	hash = sha.new(dest[1:107])
 	if len(src) == 202:
-		hash.update(src[131:192])	
+		hash.update(src[131:192])
 	result = hash.digest()
 	if result == dest[107:127]:
 		return dest
@@ -62,15 +62,14 @@ def decrypt_block(src, mod):
 
 
 def validate_cert(cert, key):
-	buf = decrypt_block(cert[8:], key) 
+	buf = decrypt_block(cert[8:], key)
 	if buf is None:
 		return None
 	return buf[36:107] + cert[139:196]
-	
+
 
 def read_random():
 	fd = open("/dev/urandom", "r")
 	buf = fd.read(8)
 	fd.close()
 	return buf
-

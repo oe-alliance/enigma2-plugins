@@ -27,7 +27,7 @@ def normalize_ipv6(orig):
 
 def getAdapterIPv6(interface):
 	addr = _("IPv4-only kernel")
-	
+
 	if fileExists('/proc/net/if_inet6'):
 		addr = _("IPv4-only Python/Twisted")
 
@@ -121,4 +121,3 @@ class Network(Source):
 			"Gateway": 5,
 			"Ipv6": 6,
 		   }
-

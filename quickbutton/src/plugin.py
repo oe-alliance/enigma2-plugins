@@ -74,7 +74,7 @@ def setup(session, **kwargs):
 
 def Plugins(**kwargs):
 
-	list = [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart)]	
+	list = [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart)]
 	list.append(PluginDescriptor(name="Setup Quickbutton", description=_("setup for Quickbutton"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="setup_quickbutton.png", fnc=setup))
 	return list
 
@@ -150,8 +150,8 @@ def startPlugin(self, pname):
 			self.session.open(PluginBrowser)
 			no_plugin = False
 		elif pname == _("switch 4:3 content display"):
-			ar = {	"pillarbox": _("Pillarbox"), 
-				"panscan": _("Pan&Scan"),  
+			ar = {	"pillarbox": _("Pillarbox"),
+				"panscan": _("Pan&Scan"),
 				"scale": _("Just Scale")}
 			switch = {"pillarbox": "panscan", "panscan": "scale", "scale": "pillarbox"}
 			config.av.policy_43.value = switch[config.av.policy_43.value]
@@ -184,7 +184,7 @@ def startPlugin(self, pname):
 					no_plugin = False
 				except Exception as e:
 					msgText = _("Error!\nError Text: %s" % e)
-			else: 
+			else:
 				msgText = _("Plugin not found!")
 	else:
 		msgText = _("No plugin assigned!")

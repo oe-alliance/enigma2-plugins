@@ -82,4 +82,3 @@ class RedirectorResource(resource.Resource):
 	def render(self, request):
 		request.redirect(self.uri)
 		request.finish()
-

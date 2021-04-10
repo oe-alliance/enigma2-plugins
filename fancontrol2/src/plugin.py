@@ -94,7 +94,7 @@ def FClog(wert):
 					f.close()
 			except IOError:
 				FC2Log.append(strftime("%H:%M:%S ") + "Event-Log-Error")
-				
+
 
 def FClogE(wert):
 	if config.plugins.FanControl.EnableEventLog.value:
@@ -275,14 +275,14 @@ class ControllerPI:
 	controlSignal = 0.0
 	coeffKp = 0.0
 	coeffKi = 0.0
- 
+
 	def __init__(self, givenName="PI Controller"):
 		self.name = givenName
 #		FClogE("%s : creating object" % self.name)
 
 	def ReturnInputError(self):
 		return self.inputError
-      
+
 	def ResetIntegrator(self):
 		FClogE("%s : integrator output %3.2f" % (self.name, self.integratorOutput))
 		self.integratorOutput = 0.0
@@ -805,7 +805,7 @@ class FanControl2Plugin(ConfigListScreen, Screen):
 			if int(abs(ErrRPM)) <= 10 and ErrRPM != 0:
 				self["PixERR"].value = int(abs(ErrRPM) * 10)
 				self["T10ERR"].setText("10%")
-			else:	
+			else:
 				self["PixERR"].value = int(abs(ErrRPM))
 				self["T10ERR"].setText("")
 			self["TxtERR"].setText(_("PID Ctl Err %03.2f %%") % ErrRPM)
@@ -968,22 +968,22 @@ def FC2fanReset():
 	FClog("Fan Reset")
 
 
-class FC2Worker(Thread): 
+class FC2Worker(Thread):
 	def __init__(self, index, s, session):
 		Thread.__init__(self)
 		self.index = index
 		self.session = session
 		self.s = s
- 
-	def run(self): 
+
+	def run(self):
 		global FritzTime
 		while True:
 #			print "worker a", self.index
 			zahl = Briefkasten.get()
 			if zahl == 1:
 				self.s.queryRun()
- 
-			Briefkasten.task_done() 
+
+			Briefkasten.task_done()
 
 
 class FanControl2(Screen):
@@ -1021,10 +1021,10 @@ class FanControl2(Screen):
 		HDDtestTemp()
 		GetHDDtemp(False)
 		DeleteData()
-		FC2threads = [FC2Worker(i, self, session) for i in range(3)] 
-		for thread in FC2threads: 
-			thread.setDaemon(True) 
-			thread.start() 
+		FC2threads = [FC2Worker(i, self, session) for i in range(3)]
+		for thread in FC2threads:
+			thread.setDaemon(True)
+			thread.start()
 		self.timer = eTimer()
 		if self.query not in self.timer.callback:
 			self.timer.callback.append(self.query)
@@ -1088,7 +1088,7 @@ class FanControl2(Screen):
 					GetHDDtemp(False)
 			if config.plugins.FanControl.EnableThread.value == True:
 				if Briefkasten.qsize() <= 3:
-					Briefkasten.put(1) 
+					Briefkasten.put(1)
 				else:
 					FClog("queue full, Thread hanging?")
 			else:
@@ -1108,7 +1108,7 @@ class FanControl2(Screen):
 				FClog("Emergency Shutdown %dC" % AktTemp)
 				self.FC2AskShutdown()
 		self.timer.startLongTimer(10)
-		
+
 	def queryRun(self):
 		global FirstStart
 		global istStandbySave
@@ -1125,12 +1125,12 @@ class FanControl2(Screen):
 		global AktPWM
 
 		global AktPWMCTL
-		global IntegralRPM      
+		global IntegralRPM
 		global ErrRPM
 		tt = time.time()
 		try:
 			if self.targetTemp != config.plugins.FanControl.temp.value:
-				self.RPMController.ResetIntegrator() 
+				self.RPMController.ResetIntegrator()
 			self.targetTemp = config.plugins.FanControl.temp.value
 			self.maxTemp = config.plugins.FanControl.tempmax.value
 			self.Fan = config.plugins.FanControl.Fan.value
@@ -1213,7 +1213,7 @@ class FanControl2(Screen):
 					if config.plugins.FanControl.EnableThread.value == True:
 						if Briefkasten.qsize() <= 2:
 							time.sleep(0.4)
-							Briefkasten.put(1) 
+							Briefkasten.put(1)
 					else:
 						self.timer.start(400, True)
 					return

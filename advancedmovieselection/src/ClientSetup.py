@@ -1,13 +1,13 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 #  Advanced Movie Selection for Dreambox-Enigma2
 #
 #  The plugin is developed on the basis from a lot of single plugins (thx for the code @ all)
 #  Coded by JackDaniel @ cmikula (c)2011
 #  Support: www.i-have-a-dreambox.com
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -16,7 +16,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 from __future__ import print_function
@@ -47,7 +47,7 @@ staticIP = None
 class ClientSetupList(GUIComponent):
     def __init__(self, ip_address):
         GUIComponent.__init__(self)
-        self.l = eListboxPythonMultiContent()        
+        self.l = eListboxPythonMultiContent()
         self.l.setFont(0, gFont("Regular", 22))
         self.l.setFont(1, gFont("Regular", 18))
         self.l.setItemHeight(100)
@@ -74,7 +74,7 @@ class ClientSetupList(GUIComponent):
         width_up_l = width - width_up_r
         width_dn_r = width / 2
         width_dn_l = width - width_dn_r
-        pos_up_r = width - width_up_r 
+        pos_up_r = width - width_up_r
         pos_dn_r = width - width_dn_r
         if client.isRecording():
             stby_text = _("Status:") + ' ' + _("Recording")
@@ -194,7 +194,7 @@ class ClientSetup(ConfigListScreen, Screen):
         self.onShown.append(self.setWindowTitle)
 
     def setWindowTitle(self):
-        self.setTitle(_("Advanced Movie Selection - Clientbox setup"))  
+        self.setTitle(_("Advanced Movie Selection - Clientbox setup"))
         if self.staticIP:
             self.createSetup()
             self["key_green"].setText(_("Save"))
@@ -205,10 +205,10 @@ class ClientSetup(ConfigListScreen, Screen):
             if config.AdvancedMovieSelection.server_enabled.value:
                 self["clienttxt"].setText(_("Available Server/Clients"))
             else:
-                self["clienttxt"].setText(_("Remoteserver disabled!"))                
+                self["clienttxt"].setText(_("Remoteserver disabled!"))
         else:
             self["status"].setText(_("ATTENTION: DHCP in lan configuration is activ, no clientbox services available!"))
-         
+
     def createSetup(self):
         self.configList = []
         self.configList.append(getConfigListEntry(_("Port address:"), config.AdvancedMovieSelection.server_port, _("Set the port address for client and server. Port address from connected clients will be automatically updated.")))
@@ -235,13 +235,13 @@ class ClientSetup(ConfigListScreen, Screen):
             self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
         else:
             self.close()
-            
+
     def keySave(self):
         if config.AdvancedMovieSelection.server_port.isChanged():
             self.setPort()
         if self.staticIP:
             ConfigListScreen.keySave(self)
-        
+
     def keyYellow(self):
         if self.staticIP:
             if config.AdvancedMovieSelection.server_port.isChanged():
@@ -256,7 +256,7 @@ class ClientSetup(ConfigListScreen, Screen):
         self.list.reload()
 
     def setPort(self):
-        config.AdvancedMovieSelection.server_port.save() 
+        config.AdvancedMovieSelection.server_port.save()
         port = config.AdvancedMovieSelection.server_port.value
         for client in getClients():
             if client.getAddress() != self.staticIP:

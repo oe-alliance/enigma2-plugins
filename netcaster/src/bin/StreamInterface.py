@@ -22,7 +22,7 @@ def getPage(url, contextFactory=None, *args, **kwargs):
 		path = uri.path
 	factory = LimitedHTTPClientFactory(url, *args, **kwargs)
 	if scheme == 'https':
-		from twisted.internet import ssl 
+		from twisted.internet import ssl
 		if contextFactory is None:
 			contextFactory = ssl.ClientContextFactory()
 		reactor.connectSSL(host, port, factory, contextFactory)
@@ -157,4 +157,3 @@ class Stream:
 
     def getType(self):
         return self.type
-

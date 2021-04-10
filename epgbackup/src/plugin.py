@@ -38,7 +38,7 @@ config.plugins.epgbackup.backupSaveInterval = ConfigSelection(choices=[
         ("1200", _("1 day")),
     ], default="-1")
 config.plugins.epgbackup.show_messages_background = ConfigYesNo(default=True)
-config.plugins.epgbackup.filesize_valid = ConfigSelectionNumber(min=1, 
+config.plugins.epgbackup.filesize_valid = ConfigSelectionNumber(min=1,
         max=20, stepwidth=1, default=3, wraparound=True)
 config.plugins.epgbackup.timespan_valid = ConfigNumber(default=7)
 config.plugins.epgbackup.showadvancedoptions = NoSave(ConfigYesNo(default=False))
@@ -61,7 +61,7 @@ try:
 	from Plugins.SystemPlugins.MPHelp import registerHelp, XMLHelpReader
 	from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileExists
 	lang = language.getLanguage()[:2]
-	
+
 	HELPPATH = resolveFilename(SCOPE_PLUGINS, "Extensions/EPGBackup")
 	if fileExists(HELPPATH + "/locale/" + str(lang) + "/mphelp.xml"):
 		helpfile = HELPPATH + "/locale/" + str(lang) + "/mphelp.xml"
@@ -72,7 +72,7 @@ try:
 except:
 	debugOut("Help-Error:\n" + str(format_exc()), forced=True)
 	epgBackuphHelp = None
-	
+
 # Plugin
 epgbackup = None
 from Components.PluginComponent import plugins
@@ -85,16 +85,16 @@ gUserScriptExists = False
 def autostart(reason, **kwargs):
 	global epgbackup
 	global gUserScriptExists
-	
+
 	if reason == 0 and "session" in kwargs:
 		session = kwargs["session"]
-		
+
 		from .EPGBackupSupport import EPGBackupSupport
 		try:
 			epgbackup = EPGBackupSupport(session)
 		except:
 			debugOut("Error while initializing EPGBackupSupport:\n" + str(format_exc()), forced=True)
-	
+
 		try:
 			from Plugins.Extensions.UserScripts.plugin import UserScriptsConfiguration
 			gUserScriptExists = True
@@ -191,7 +191,7 @@ def PluginHousekeeping(configentry):
 			PlugDescInstall.append(RestorePlugDescExt)
 		else:
 			PlugDescDeinstall.append(RestorePlugDescExt)
-	
+
 	for PlugDescriptor in PlugDescDeinstall:
 		AdjustPlugin(False, PlugDescriptor)
 	for PlugDescriptor in PlugDescInstall:
@@ -209,7 +209,7 @@ def Plugins(**kwargs):
 			where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART],
 			fnc=autostart)
 	]
-	
+
 	if config.plugins.epgbackup.show_setup_in.value == "system":
 		pluginList.append(PluginDescriptor(
 			name=extPrefix + " " + _("EXTENSIONNAME_SETUP"),
@@ -223,10 +223,10 @@ def Plugins(**kwargs):
 			pluginList.append(SetupPlugDescPlug)
 		if config.plugins.epgbackup.show_setup_in.value in ("extension", "both"):
 			pluginList.append(SetupPlugDescExt)
-	
+
 	if config.plugins.epgbackup.show_make_backup_in_extmenu.value:
 		pluginList.append(MakePlugDescExt)
 	if config.plugins.epgbackup.show_backuprestore_in_extmenu.value:
 		pluginList.append(RestorePlugDescExt)
-	
+
 	return pluginList

@@ -12,7 +12,7 @@ class UploadResource(resource.Resource):
 	def render_POST(self, req):
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml;')
-		req.setHeader('charset', 'UTF-8')	
+		req.setHeader('charset', 'UTF-8')
 		data = req.args['file'][0]
 		if not data:
 			result = """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n
@@ -42,4 +42,3 @@ class UploadResource(resource.Resource):
 					<e2statetext>%s</e2statetext>
 				</e2simplexmlresult>\n""" % self.FILENAME
 		return result
-

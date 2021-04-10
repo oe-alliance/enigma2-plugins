@@ -56,18 +56,18 @@ def stopIndependent():
 
 def runIndependent():
 	try:
-		
+
 		spt = SeriesPluginTimer()
-		
+
 		for timer in NavigationInstance.instance.RecordTimer.timer_list:
-			
+
 			#Maybe later
 			# Add a series whitelist
 			# Configured with a dialog
 			# Stored in a db or xml
-			
+
 			spt.getEpisode(timer)
-			
+
 	except Exception as e:
 		log.exception(_("Independent mode exception") + "\n" + str(e))
 
@@ -77,7 +77,7 @@ def runIndependent():
 class SeriesPluginIndependent(object):
 
 	data = []
-	
+
 	def __init__(self):
 		self.etimer = eTimer()
 		self.etimer_conn = None

@@ -35,9 +35,9 @@ BODY = _("Crashlog(s) are attached")
 
 
 class CrashLog(ControllerBase):
-	
+
 	ForceSingleInstance = True
-	
+
 	def __init__(self):
 		# Is called on instance creation
 		ControllerBase.__init__(self)

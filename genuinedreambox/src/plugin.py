@@ -26,7 +26,7 @@
 #
 ###########################################################################
 #
-# thx to <kayshadow@newnigma2.to> for painting the icon 
+# thx to <kayshadow@newnigma2.to> for painting the icon
 #
 from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
@@ -35,7 +35,7 @@ from Screens.MessageBox import MessageBox
 
 from Components.ActionMap import ActionMap
 from Components.Button import Button
-from Components.Label import Label 
+from Components.Label import Label
 
 import socket
 import struct
@@ -67,7 +67,7 @@ class genuineDreambox(Screen):
 		<widget name="infotext" position="10,20" zPosition="1" size="600,150" font="Regular;20" halign="center" valign="center" />
 		<widget name="resulttext" position="10,160" zPosition="1" size="600,110" font="Regular;20" halign="center" valign="center" />
 		<widget name="infotext2" position="10,280" zPosition="1" size="600,80" font="Regular;20" halign="center" valign="center" />
-		<widget name="kRed" position="185,365" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />	   
+		<widget name="kRed" position="185,365" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<ePixmap name="red" position="185,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<widget name="kGreen" position="330,365" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<ePixmap name="green" position="330,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
@@ -104,7 +104,7 @@ class genuineDreambox(Screen):
 			udsError = True
 		if not udsError:
 			if (self.stepFirst(TPMD_CMD_GET_DATA, [TPMD_DT_PROTOCOL_VERSION, TPMD_DT_TPM_VERSION, TPMD_DT_SERIAL])):
-				try:  
+				try:
 					url = ("https://www.dream-multimedia-tv.de/verify/challenge?serial=%s&version=%s" % (self.serial, self.tpmdVersion))
 					getPage(six.ensure_binary(url)).addCallback(self._gotPageLoadRandom).addErrback(self.errorLoad)
 				except:
@@ -112,7 +112,7 @@ class genuineDreambox(Screen):
 
 	def needsTPMUpdate(self):
 		return self.level3_cert is None
-	
+
 	def updateCallback(self, result):
 		if result:
 			self.isStart = True
@@ -135,7 +135,7 @@ class genuineDreambox(Screen):
 			self["resulttext"].setText(_("Invalid response from server."))
 		self.closeUds()
 		self.isStart = False
-		
+
 	def _gotPageLoadRandom(self, data):
 		self["resulttext"].setText(_("Please wait (Step 2)"))
 		self.back = data.strip()
@@ -146,7 +146,7 @@ class genuineDreambox(Screen):
 				TPMD_DT_LEVEL3_CERT, TPMD_DT_FAB_CA_CERT, TPMD_DT_DATABLOCK_SIGNED])):
 			url = self.buildUrl()
 			getPage(six.ensure_binary(url)).addCallback(self._gotPageLoad).addErrback(self.errorLoad)
-			
+
 	def _gotPageLoadUpdate(self, data):
 		updatedata = base64.decodestring(data)
 		if len(updatedata) != 409:
@@ -154,7 +154,7 @@ class genuineDreambox(Screen):
 			self.isStart = False
 		else:
 			udsError = False
-			
+
 			try:
 				self.uds = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 				self.uds.connect(("/var/run/tpmd_socket"))
@@ -171,16 +171,16 @@ class genuineDreambox(Screen):
 				self.closeUds()
 				self.isStart = False
 				self.session.openWithCallback(self.updateFinished, MessageBox, _("Update done... The genuine dreambox test will now be rerun and should not ask you to update again."), MessageBox.TYPE_INFO)
-	
+
 	def updateFinished(self, result):
-		self.start()		
+		self.start()
 
 	def errorLoad(self, error):
 		print(str(error))
 		self["resulttext"].setText(_("Invalid response from server. Please report: %s") % str(error))
 
 	def buildUrl(self):
-		# NOTE: this is a modified base64 which uses -_ instead of +/ to avoid the need for escpaing + when using urlencode 
+		# NOTE: this is a modified base64 which uses -_ instead of +/ to avoid the need for escpaing + when using urlencode
 		tmpra = ("random=%s" % self.back.replace('+', '-').replace('/', '_'))
 		tmpl2 = ("&l2=%s" % base64.b64encode(self.level2_cert).replace('+', '-').replace('/', '_'))
 		if self.level3_cert is not None:
@@ -200,7 +200,7 @@ class genuineDreambox(Screen):
 		for x in l:
 			liste.append(ord(x))
 		return liste
-	
+
 	def formatString(self, s):
 		myString = ""
 		for x in s:
@@ -215,12 +215,12 @@ class genuineDreambox(Screen):
 			return False
 		if (self.parseSignature(self.udsSend(TPMD_CMD_COMPUTE_SIGNATURE, self.random, 8)) == False):
 			return False
-		return True	 
+		return True
 
 	def parseResult(self, rbuf):
 		if (rbuf != -1):
 			buf = self.formatList(rbuf)
-			
+
 			pos = 0
 			while pos < len(buf):
 				tag = buf[pos]
@@ -264,11 +264,11 @@ class genuineDreambox(Screen):
 				else:
 					print("unknown tag:", tag)
 				pos += 2 + length
-				
+
 			return True
 		else:
 			return False
-		
+
 	def parseSignature(self, rbuf):
 		if (rbuf != -1):
 			self.r = self.formatString(self.formatList(rbuf))
@@ -291,9 +291,9 @@ class genuineDreambox(Screen):
 			udsError = False
 		except socket.timeout:
 			udsError = True
-			
+
 		res = -1
-	
+
 		if (udsError == False):
 			leng = [ord(rbuf[2]) << 8 | ord(rbuf[3])]
 			if (leng != 4):
@@ -317,7 +317,7 @@ class genuineDreambox(Screen):
 
 	def exit(self):
 		self.closeUds()
-		self.close() 
+		self.close()
 
 
 def main(session, **kwargs):

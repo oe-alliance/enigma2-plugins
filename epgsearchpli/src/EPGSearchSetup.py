@@ -1,4 +1,4 @@
-# for localized messages  	 
+# for localized messages
 from . import _
 
 # GUI (Screens)
@@ -49,7 +49,7 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 				getConfigListEntry(_("Search only bouquets"), config.plugins.epgsearch.bouquet, _("If this setting is enabled, searching EPG in only services in user bouquets.")),
 				getConfigListEntry(_("Display name service as in bouquets"), config.plugins.epgsearch.favorit_name, _("If 'Search only bouquets' is enabled, show service name as in bouquets for renamed services.")),
 				getConfigListEntry(_("Search type for filter"), config.plugins.epgsearch.filter_type, _("Select type for filter search. Press button P +/- for show/hide filter in description after search.")),
-				
+
 			],
 			session=session,
 			on_change=self.changed

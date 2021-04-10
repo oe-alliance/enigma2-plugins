@@ -29,7 +29,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			<widget source="VKeyIcon" render="Pixmap" pixmap="skin_default/buttons/key_text.png" position="10,430" zPosition="10" size="35,25" transparent="1" alphatest="on">
 				<convert type="ConditionalShowHide" />
 			</widget>
-			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="160,350" zPosition="1" size="1,1" transparent="1" alphatest="on" />	
+			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="160,350" zPosition="1" size="1,1" transparent="1" alphatest="on" />
 		</screen>"""
 
 	def __init__(self, session, plugin_path, mountinfo=None):
@@ -232,7 +232,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 				self["config"].invalidate(self.sharedirConfigEntry)
 			if entry == 'options':
 				self.optionsConfigEntry.setValue(callback)
-				self["config"].invalidate(self.optionsConfigEntry)				
+				self["config"].invalidate(self.optionsConfigEntry)
 			if entry == 'username':
 				self.usernameConfigEntry.setValue(callback)
 				self["config"].invalidate(self.usernameConfigEntry)

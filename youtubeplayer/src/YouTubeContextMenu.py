@@ -44,12 +44,12 @@ class YouTubeEntryContextMenu(Screen):
 			"cancel": self.cancelClick
 		})
 		self["menu"] = menuList
-		
+
 		self.onFirstExecBegin.append(self.setTitleDelaied)
 
 	def okbuttonClick(self):
 		self.close(self["menu"].getCurrent()[1])
-		
+
 	def cancelClick(self):
 		self.close(None)
 

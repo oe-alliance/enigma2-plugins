@@ -133,7 +133,7 @@ class AutoTimerTestResource(AutoTimerBaseResource):
 					'   <e2message>', stringToXML(message), '</e2message>\n'
 					'</e2testtimer>\n'
 				))
-		
+
 		returnlist.append('</e2autotimertest>')
 
 		req.setResponseCode(http.OK)
@@ -181,17 +181,17 @@ class AutoTimerAddXMLAutoTimerResource(AutoTimerBaseResource):
 		if config.plugins.autotimer.always_write_config.value:
 			autotimer.writeXml()
 		return self.returnResult(req, True, _("AutoTimer was added successfully"))
-		
+
 
 class AutoTimerUploadXMLConfigurationAutoTimerResource(AutoTimerBaseResource):
 	def render_POST(self, req):
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml;')
-		req.setHeader('charset', 'UTF-8')	
+		req.setHeader('charset', 'UTF-8')
 		autotimer.readXml(xml_string=six.ensure_str(req.args[b'xml'][0]))
 		if config.plugins.autotimer.always_write_config.value:
 			autotimer.writeXml()
-		return self.returnResult(req, True, _("AutoTimers were changed successfully."))	
+		return self.returnResult(req, True, _("AutoTimers were changed successfully."))
 
 
 class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
@@ -626,4 +626,3 @@ class AutoTimerSettingsResource(resource.Resource):
 			</e2settings>""" % (hasVps, hasSeriesPlugin, CURRENT_CONFIG_VERSION, API_VERSION, AUTOTIMER_VERSION)
 
 		return six.ensure_binary(resultstr)
-

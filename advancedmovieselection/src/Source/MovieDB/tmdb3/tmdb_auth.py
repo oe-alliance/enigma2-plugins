@@ -4,7 +4,7 @@
 # Name: tmdb_auth.py
 # Python Library
 # Author: Raymond Wagner
-# Purpose: Provide authentication and session services for 
+# Purpose: Provide authentication and session services for
 #          calls against the TMDB v3 API
 #-----------------------
 
@@ -136,4 +136,3 @@ class Session(object):
     @property
     def callbackurl(self):
         return "http://www.themoviedb.org/authenticate/" + self._authtoken
-

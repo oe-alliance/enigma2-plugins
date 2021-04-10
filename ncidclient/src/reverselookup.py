@@ -198,7 +198,7 @@ class ReverseLookupAndNotify:
 			areaCodeLen = int(website.getAttribute("pfxareacode"))
 			url = url.replace("$PFXAREACODE", "%(pfxareacode)s").replace("$NUMBER", "%(number)s")
 			url = url % {'pfxareacode': number[:areaCodeLen], 'number': number[areaCodeLen:]}
-		elif re.search('\\$NUMBER', url): 
+		elif re.search('\\$NUMBER', url):
 			url = url.replace("$NUMBER", "%s") % number
 		else:
 			debug("[ReverseLookupAndNotify] handleWebsite: cannot handle websites with no $NUMBER in url")
@@ -238,7 +238,7 @@ class ReverseLookupAndNotify:
 				item = newitem
 				newitem = item.replace("  ", " ")
 			return newitem.strip()
-	
+
 		debug("[ReverseLookupAndNotify] _gotPage")
 		found = re.match('.*<meta http-equiv="Content-Type" content="(?:application/xhtml\+xml|text/html); charset=([^"]+)" />', page, re.S)
 		if found:
@@ -265,7 +265,7 @@ class ReverseLookupAndNotify:
 					if number != normalizePhoneNumber(found.group(1)):
 						debug("[ReverseLookupAndNotify] _gotPage: got unequal number '''%s''' for '''%s'''" % (found.group(1), self.number))
 						continue
-			
+
 			# look for <firstname> and <lastname> match, if not there look for <name>, if not there break
 			name = ''
 			firstname = ''
@@ -364,7 +364,7 @@ class ReverseLookupAndNotify:
 		else:
 			self._gotError("[ReverseLookupAndNotify] _gotPage: Nothing found at %s" % self.currentWebsite.getAttribute("name"))
 			return False
-			
+
 	def _gotError(self, error=""):
 		debug("[ReverseLookupAndNotify] _gotError - Error: %s" % error)
 		if self.nextWebsiteNo >= len(self.websites):

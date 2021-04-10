@@ -138,4 +138,3 @@ class AutoTimerPreview(Screen):
 
 	def save(self):
 		self.close(True)
-

@@ -56,32 +56,32 @@ class XMLFile(object):
 		self.__mtime = -1
 		self.__path = path
 
-	def getPath(self):	
+	def getPath(self):
 		return self.__path
-	
-	def setPath(self, path):	
+
+	def setPath(self, path):
 		self.__path = path
-	
+
 	def readXML(self):
-		
+
 		path = self.__path
 		log.debug("Read XML from " + str(path))
-		
+
 		if not path:
 			log.debug("No configuration file given")
 			return None
-		
+
 		# Abort if no config found
 		if not os.path.exists(path):
 			log.debug("Configuration file does not exist")
 			return None
-		
+
 		# Parse if mtime differs from whats saved
 		mtime = os.path.getmtime(path)
 		if mtime == self.__mtime:
 			# No changes in configuration, won't read again
 			return self.__cache
-		
+
 		# Parse XML
 		try:
 			etree = parse(path)
@@ -89,24 +89,24 @@ class XMLFile(object):
 			log.exception("Exception in read XML: " + str(e))
 			etree = None
 			mtime = -1
-		
+
 		# Save time and cache file content
 		self.__mtime = mtime
 		self.__cache = etree
 		return self.__cache
 
 	def writeXML(self, etree):
-		
+
 		path = self.__path
 		log.debug("Write XML to " + path)
-		
+
 		try:
-			etree.write(path, encoding='utf-8', xml_declaration=True) 
+			etree.write(path, encoding='utf-8', xml_declaration=True)
 		except Exception as e:
 			log.exception("Exception in write XML: " + str(e))
 			etree = None
 			mtime = -1
-		
+
 		# Save time and cache file content
 		self.__mtime = os.path.getmtime(path)
 		self.__cache = etree

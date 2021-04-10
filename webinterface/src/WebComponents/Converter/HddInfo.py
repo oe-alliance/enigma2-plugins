@@ -33,4 +33,3 @@ class HddInfo(Converter):
 		return _("N/A")
 
 	text = property(getText)
-

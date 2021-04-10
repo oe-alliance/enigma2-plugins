@@ -175,7 +175,7 @@ class Schiffe(Screen):
 					color = get_attr("color")
 					# is it a "named" color?
 					if color[0] != '#':
-						# is "named" color, have to look in dictionary... 
+						# is "named" color, have to look in dictionary...
 						color = colorNames[color]
 					# at least get the background color...
 					if type == "Background":
@@ -190,7 +190,7 @@ class Schiffe(Screen):
 		self["key_green"] = Button(_("new game"))
 		self["key_blue"] = Button(_("solve game"))
 		self["key_red"] = Button(_("quit game"))
-		
+
 		self.cnt = 0
 		self.timer = eTimer()
 		self.timer.callback.append(self.timerHandler)
@@ -305,7 +305,7 @@ class Schiffe(Screen):
 	def left_pressed(self):
 		if self.Focus > 0:
 			if self.Focus % XMAX == 0:
-				return 
+				return
 			cell = self.boxCells[self.Focus]
 			cell.setFocus(False)
 			cell.paint()
@@ -330,7 +330,7 @@ class Schiffe(Screen):
 	def timerHandler(self):
 		self.instance.setTitle("Schiffe versenken %s %10d shots %10d sec" % (VERSION, self.moves, self.cnt))
 		self.cnt += 1
-			
+
 	# create new game...
 	def new_game(self, loadFromFile=False):
 		self["message"].setText("")
@@ -408,7 +408,7 @@ class Schiffe(Screen):
 			inplist = inp.split()
 			self.moves = int(inplist[0])
 			self.cnt = int(inplist[1])
-	
+
 			self.box = []
 			for y in range(YMAX):
 				inp = sav.readline()
@@ -487,11 +487,11 @@ def ships(field):
 						# place ship vertical...
 						x = rand() % XMAX
 						y = rand() % (YMAX - shipLen + 1)
-				
+
 						for j in range(shipLen + 2):
 							if shadow[x][y + j] != 0 or shadow[x + 1][y + j] != 0 or shadow[x + 2][y + j] != 0:
 								ok = False
-							
+
 						if ok:
 							for j in range(shipLen):
 								field[x + (y + j) * XMAX] = 3
@@ -517,7 +517,7 @@ def calcNewField(field):
 					field[lx + ly * XMAX - 1] = 2
 					return
 				if field[lx + ly * XMAX - 1] == 3:
-					field[lx + ly * XMAX - 1] = 4 
+					field[lx + ly * XMAX - 1] = 4
 					lx -= 1
 					if lx > 0 and ly > 0 and field[lx + ly * XMAX - 1 - XMAX] != 2:
 						field[lx + ly * XMAX - 1 - XMAX] = 1
@@ -558,7 +558,7 @@ def calcNewField(field):
 					if lx < XMAX - 1 and ly > 0 and field[lx + ly * XMAX + 1 - XMAX] != 2:
 						field[lx + ly * XMAX + 1 - XMAX] = 1
 					if lx < XMAX - 1 and ly < YMAX - 1 and field[lx + ly * XMAX + 1 + XMAX] != 2:
-						field[lx + ly * XMAX + 1 + XMAX] = 1			
+						field[lx + ly * XMAX + 1 + XMAX] = 1
 					return
 			if ly < YMAX - 1:
 				if field[lx + ly * XMAX + XMAX] == 0:
@@ -586,11 +586,11 @@ def calcNewField(field):
 		else:
 			x = rand() % XMAX
 			y = rand() % YMAX
-		
+
 		if field[x + y * XMAX] == 0: #fail (water)
 			field[x + y * XMAX] = 2
 			return
-		
+
 		if field[x + y * XMAX] == 3: #hit ship
 			field[x + y * XMAX] = 4
 			if x > 0 and y > 0:
@@ -604,4 +604,3 @@ def calcNewField(field):
 			lx = x
 			ly = y
 			return
-

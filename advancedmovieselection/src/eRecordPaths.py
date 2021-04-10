@@ -188,7 +188,7 @@ class RecordPathsSettings(Screen, ConfigListScreen):
 		if self.checkReadWriteDir(currentry[1]):
 			config.usage.default_path.value = self.default_dirname.value
 			config.usage.timer_path.value = self.timer_dirname.value
-			config.usage.instantrec_path.value = self.instantrec_dirname.value 
+			config.usage.instantrec_path.value = self.instantrec_dirname.value
 			config.usage.timeshift_path.value = self.timeshift_dirname.value
 			config.usage.default_path.save()
 			config.usage.timer_path.save()
@@ -198,4 +198,3 @@ class RecordPathsSettings(Screen, ConfigListScreen):
 
 	def cancel(self):
 		self.close()
-

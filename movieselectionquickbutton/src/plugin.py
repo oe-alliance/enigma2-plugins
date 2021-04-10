@@ -6,8 +6,8 @@
 #  Coded by Dr.Best (c) 2009
 #  Support: www.dreambox-tools.info
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -16,7 +16,7 @@
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 
@@ -160,7 +160,7 @@ def startPlugin(self, pname, index):
 						no_plugin = False
 					except Exception as e:
 						msgText = _("Error!\nError Text: %s" % e)
-				else: 
+				else:
 					msgText = _("Plugin not found!")
 		else:
 			msgText = _("No plugin assigned!")
@@ -262,12 +262,11 @@ def main(session, **kwargs):
 
 
 def Plugins(**kwargs):
-	list = [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=main)]	
+	list = [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=main)]
 	list.append(PluginDescriptor(name="Setup MovieSelection QuickButton", description=_("Setup for MovieSelection QuickButton"),
 	where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=setup))
-	
-	if config.plugins.MovieSelectionQuickButton.show_in_extensionsmenu.value:	
+
+	if config.plugins.MovieSelectionQuickButton.show_in_extensionsmenu.value:
 		list.append(PluginDescriptor(name="Setup MovieSelection QuickButton", description=_("Setup for MovieSelection QuickButton"),
 		where=PluginDescriptor.WHERE_EXTENSIONSMENU, icon="plugin.png", fnc=setup))
 	return list
-

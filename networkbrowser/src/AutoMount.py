@@ -68,7 +68,7 @@ class AutoMount():
 				return Len > 0 and definitions[Len - 1].text.encode("UTF-8") or default.encode("UTF-8")
 			else:
 				return Len > 0 and definitions[Len - 1].text or default
-		
+
 		mountusing = 0 # 0=old_enigma2, 1 =fstab, 2=enigma2
 		# Config is stored in "mountmanager" element
 		# Read out NFS Mounts
@@ -430,7 +430,7 @@ class AutoMount():
 			tmpfile.close()
 			f.close()
 			os.rename(filename + '.tmp', filename)
-		
+
 	def escape(self, data):
 		return data.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;').replace("'", '&#39;')
 

@@ -28,11 +28,11 @@ from . import _
 
 class YouTubeStdFeedSelectionScreen(Screen):
 	STD_FEED = "http://gdata.youtube.com/feeds/api/standardfeeds/"
-	
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
-		self["actions"] = ActionMap(["OkCancelActions"], 
+		self["actions"] = ActionMap(["OkCancelActions"],
 			{
 				"ok"		: self.ok,
 				"cancel"	: self.close

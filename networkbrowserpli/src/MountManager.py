@@ -136,4 +136,3 @@ class AutoMountManager(Screen):
 	def restartfinishedCB(self, data):
 		if data is True:
 			self.session.open(MessageBox, _("Finished restarting your network"), type=MessageBox.TYPE_INFO, timeout=10, default=False)
-

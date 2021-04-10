@@ -32,12 +32,12 @@ class ModuleBase(object):
 
 	def __init__(self):
 		# Is called on instance creation
-		
+
 		# Default configuration
 		self.enable = NoSave(ConfigYesNo(default=False))
-		
+
 		self.options = OrderedDict()
-		
+
 		# Build a list of key-value string tuples
 		# [ (key, value, description, config element) , ]
 		#self.options['enabled'] = ConfigYesNo( default = False )

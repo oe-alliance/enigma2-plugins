@@ -35,14 +35,14 @@ TAG = _("FinishedTimerPushed")
 
 
 class RecordSummary(ControllerBase):
-	
+
 	ForceSingleInstance = True
-	
+
 	def __init__(self):
 		# Is called on instance creation
 		ControllerBase.__init__(self)
 		self.timers = []
-		
+
 		# Default configuration
 		self.setOption('remove_timer', NoSave(ConfigYesNo(default=False)), _("Remove finished timer(s)"))
 

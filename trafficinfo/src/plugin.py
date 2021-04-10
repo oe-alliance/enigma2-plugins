@@ -16,16 +16,16 @@ import xml.dom.minidom
 from twisted.web.client import getPage
 from twisted.internet import reactor
 import six
-###############################################################################        
+###############################################################################
 
 
 class TrafficInfoMain(Screen):
     skin_SD = """
-        <screen position="110,83" size="530,430" title="Verkehrsinfo" >                        
-            <widget name="sectionlist" position="0,0" size="530,125" scrollbarMode="showOnDemand" />            
-            <widget name="itemlist" position="0,130" size="530,125" scrollbarMode="showOnDemand" />            
-            <widget name="itemdetails" position="0,260" size="530,140" font="Regular;20" halign=\"center\" valign=\"center\"/>            
-            <widget name="statuslabel" position="0,400" size="530,30" halign=\"left\"/>           
+        <screen position="110,83" size="530,430" title="Verkehrsinfo" >
+            <widget name="sectionlist" position="0,0" size="530,125" scrollbarMode="showOnDemand" />
+            <widget name="itemlist" position="0,130" size="530,125" scrollbarMode="showOnDemand" />
+            <widget name="itemdetails" position="0,260" size="530,140" font="Regular;20" halign=\"center\" valign=\"center\"/>
+            <widget name="statuslabel" position="0,400" size="530,30" halign=\"left\"/>
         </screen>
         """
     skin_HD = """
@@ -53,7 +53,7 @@ class TrafficInfoMain(Screen):
         self["itemlist"] = ItemList([])
         self["statuslabel"] = Label("")
         self["itemdetails"] = Label("")
-        self["actions"] = ActionMap(["ChannelSelectBaseActions", "WizardActions", "DirectionActions", "MenuActions", "NumberActions"], 
+        self["actions"] = ActionMap(["ChannelSelectBaseActions", "WizardActions", "DirectionActions", "MenuActions", "NumberActions"],
             {
              "ok": self.go,
              "back": self.exit,
@@ -66,12 +66,12 @@ class TrafficInfoMain(Screen):
              }, -1)
         self.statuslabelcleartimer = eTimer()
         self.statuslabelcleartimer.timeout.get().append(self.clearStatusLabel)
-        
+
         self["itemlist"].onSelectionChanged.append(self.onItemSelected)
         self.selectSectionlist()
-        
+
         self.onShown.append(self.getSections)
-        
+
     def exit(self):
         if self.loadinginprogress:
             reactor.callLater(1, self.exit)
@@ -82,59 +82,59 @@ class TrafficInfoMain(Screen):
         self.currList = "sectionlist"
         self["sectionlist"].selectionEnabled(1)
         self["itemlist"].selectionEnabled(0)
-        
+
     def selectItemlist(self):
         self.currList = "itemlist"
         self["sectionlist"].selectionEnabled(0)
         self["itemlist"].selectionEnabled(1)
         self["itemlist"].selectionChanged()
-        
+
     def go(self):
         if self.currList == "sectionlist":
             self.onSectionSelected()
 
     def up(self):
         self[self.currList].up()
-    
+
     def down(self):
         self[self.currList].down()
-        
+
     def left(self):
         self[self.currList].pageUp()
-    
+
     def right(self):
         self[self.currList].pageDown()
-        
+
     def onSectionSelected(self):
         c = self["sectionlist"].getCurrent()
         if c is not None:
             self.setTitle("Verkehrsinfo: " + c[1].name)
             self.getItemsOfSection(c[1])
-        
+
     def onItemSelected(self):
         if self["itemlist"].getCurrent() is not None:
             c = self["itemlist"].getCurrent()[0]
             if c is not None:
                 self["itemdetails"].setText(c.text)
-            
+
     ###########
     def clearStatusLabel(self):
         self["statuslabel"].setText("")
-        
+
     def setStatusLabel(self, text):
-        self.statuslabelcleartimer.stop()         
+        self.statuslabelcleartimer.stop()
         self["statuslabel"].setText(text)
         self.statuslabelcleartimer.start(3000)
-        
+
     def getSections(self):
         self.setStatusLabel("loading sections")
-        self.loadinginprogress = True    
+        self.loadinginprogress = True
         getPage(b"http://wap.verkehrsinfo.de/wvindex.php3").addCallback(self.sectionsLoaded).addErrback(self.sectionsLoadingFaild)
-    
+
     def sectionsLoadingFaild(self, raw):
         self.loadinginprogress = False
         self.setStatusLabel("loading sections failed" + raw)
-        
+
     def sectionsLoaded(self, raw):
         self.loadinginprogress = False
         try:
@@ -175,14 +175,14 @@ class TrafficInfoMain(Screen):
     def getItemsOfSection(self, section):
         print("loading section", section.name, section.link)
         self.setStatusLabel("loading messages " + section.name)
-        self.loadinginprogress = True    
+        self.loadinginprogress = True
         getPage(six.ensure_binary("http://wap.verkehrsinfo.de" + section.link)).addCallback(self.trafficitemsLoaded).addErrback(self.trafficitemsLoadingFaild)
 
     def trafficitemsLoadingFaild(self, raw):
         self.loadinginprogress = False
         print("loading items faild", raw)
         self.setStatusLabel("loading messages faild" + raw)
-        
+
     def trafficitemsLoaded(self, raw):
         self.loadinginprogress = False
         try:
@@ -196,13 +196,13 @@ class TrafficInfoMain(Screen):
             print(e)
             print(raw)
             self.setStatusLabel("loading messages faild! Parsing Error")
-        
+
     def parseItem(self, item):
         source = item.toxml()
         i = item.getElementsByTagName("b")
         source = source.replace(i[0].toxml(), "")
         street = i[0].toxml().replace("<b>", "").replace("</b>", "").replace("\n", "")
-        
+
         source = source.replace(i[1].toxml(), "")
         direction = i[1].toxml().replace("<b>", "").replace("</b>", "").replace("\n", "")
         details = source.replace("<p>", "").replace("</p>", "").replace("<small>", "").replace("</small>", "").replace("<br/>", "").replace("\n", "")
@@ -252,4 +252,3 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
   return PluginDescriptor(name="Verkehrsinfo", description="Show German traffic jams", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main, icon="plugin.png")
-

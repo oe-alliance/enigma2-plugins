@@ -18,4 +18,3 @@ class NullEngine(CacheEngine):
     def get(self, date): return []
     def put(self, key, value, lifetime): return []
     def expire(self, key): pass
-

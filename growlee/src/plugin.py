@@ -246,10 +246,9 @@ def Plugins(**kwargs):
 		),
 		PluginDescriptor(
 			name="Growlee",
-			description=_("Configure Growlee"), 
+			description=_("Configure Growlee"),
 			where=PluginDescriptor.WHERE_PLUGINMENU,
 			fnc=configuration,
 			needsRestart=False,
 		),
 	]
-

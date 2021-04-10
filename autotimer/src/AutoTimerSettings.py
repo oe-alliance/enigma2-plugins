@@ -110,7 +110,7 @@ class AutoTimerSettings(ConfigListScreen, Screen):
 		self["key_green"] = StaticText(_("Save"))
 
 		# Use self["description"] as this is what "Setup" skin uses.
-		# The embedded skin could be removed. 
+		# The embedded skin could be removed.
 		# Plugin will use "Setup" screen from default skin if no skin available.
 		self["description"] = StaticText("")
 		self["help"] = StaticText("") # for backwards compatibility

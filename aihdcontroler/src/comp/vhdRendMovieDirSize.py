@@ -27,5 +27,3 @@ class vhdRendMovieDirSize(Renderer, VariableText):
 					self.text = '---'
 			except:
 				self.text = 'ERR'
-
-

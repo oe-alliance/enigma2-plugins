@@ -38,13 +38,13 @@ class MovableScreen():
             "9": (self.moveKeyNumber, _("Move screen to the lower right corner")),
             "0": (self.moveKeyNumber, _("Reset saved position"))
         }, -1)
-             
+
         self["MovableScreenActions"].setEnabled(False)
-      
+
         desktop = getDesktop(0)
         self.desktopWidth = desktop.size().width()
         self.desktopHeight = desktop.size().height()
-        
+
     def startMoving(self):
         self.setEnableMoveKeymap(True)
 
@@ -57,13 +57,13 @@ class MovableScreen():
             self.configRoot.position_x.value = (self.desktopWidth - self.screenSize_x) / 2
             self.configRoot.position_y.value = self.moveMinMargin
         self.instance.move(ePoint(self.configRoot.position_x.value, self.configRoot.position_y.value))
-            
+
         self.moveTimer.start(50, 1)
 
     def movePosition(self):
         if self.configRoot.position_x.value != 0 or self.configRoot.position_y.value != 0:
             self.instance.move(ePoint(self.configRoot.position_x.value, self.configRoot.position_y.value))
-            
+
     def moveKeyLeft(self):
         value = self.configRoot.position_x.value
         value -= self.moveStepSize
@@ -100,7 +100,7 @@ class MovableScreen():
             iPosX = (self.desktopWidth - self.screenSize_x) / 2
         else:
             iPosX = self.desktopWidth - self.moveMinMargin - self.screenSize_x
-        
+
         self.configRoot.position_x.value = iPosX
 
         #y- positioning
@@ -108,11 +108,11 @@ class MovableScreen():
             iPosY = self.moveMinMargin
         elif number in (4, 5, 6):
             iPosY = (self.desktopHeight - self.screenSize_y) / 2
-        elif number in (7, 8, 9):    
+        elif number in (7, 8, 9):
             iPosY = self.desktopHeight - self.moveMinMargin - self.screenSize_y
-            
+
         self.configRoot.position_y.value = iPosY
-            
+
     def moveKeyOk(self):
         self.configRoot.position_x.save()
         self.configRoot.position_y.save()

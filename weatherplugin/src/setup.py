@@ -198,7 +198,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		self.title = _("WeatherPlugin: Edit Entry")
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
-		
+
 		{
 			"green": self.keySave,
 			"red": self.keyCancel,
@@ -273,7 +273,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 
 	def VirtualKeyBoardCallBack(self, callback):
 		try:
-			if callback:  
+			if callback:
 				self["config"].getCurrent()[1].value = callback
 			else:
 				pass
@@ -296,7 +296,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 		config.plugins.WeatherPlugin.save()
 		configfile.save()
 		self.close()
-		
+
 	def xmlCallback(self, xmlstring):
 		if xmlstring:
 			errormessage = ""
@@ -313,7 +313,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 	def error(self, error=None):
 		if error is not None:
 			print(error)
-		
+
 	def searchCallback(self, result):
 		if result:
 			self.current.weatherlocationcode.value = result[0]
@@ -330,7 +330,7 @@ class MSNWeatherPluginSearch(Screen):
 			<ePixmap position="140,10" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 			<ePixmap position="280,10" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
 			<ePixmap position="420,10" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		</screen>""" 
+		</screen>"""
 
 	def __init__(self, session, xmlstring):
 		Screen.__init__(self, session)
@@ -360,7 +360,7 @@ class MSNWeatherPluginSearch(Screen):
 		except:
 			sel = None
 		self.close(sel)
-		
+
 
 class MSNWeatherPluginSearchResultList(MenuList):
 	def __init__(self, list, enableWrapAround=True):

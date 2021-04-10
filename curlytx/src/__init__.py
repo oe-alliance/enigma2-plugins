@@ -11,7 +11,7 @@ import gettext
 
 PluginLanguageDomain = "CurlyTx"
 PluginLanguagePath = "Extensions/CurlyTx/locale"
- 
+
 
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))

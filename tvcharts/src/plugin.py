@@ -479,7 +479,7 @@ class DBUpdateStatus(Screen):
 		self.recordtimer = session.nav.RecordTimer
 		self.NetworkConnectionAvailable = False
 		self.LastTimerlistUpdate = 0
-		
+
 		self.timerlist = ""
 		self.pluginlist = ""
 
@@ -566,7 +566,7 @@ class DBUpdateStatus(Screen):
 				os_system("rm -f /tmp/plugins.txt")
 			except Exception:
 				print("[TVCharts] Error loading plugins!")
-		
+
 		# Status Update
 		getPage(url=b'http://www.dreambox-plugins.de/feeds/TVCharts/status.php', agent="Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)", timeout=60, method='POST', headers={'Content-Type': 'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid': self.BoxID, 'devicename': self.DeviceName, 'imageversion': self.ImageVersion, 'enigmaversion': self.EnigmaVersion, 'lastchannel': channel_name, 'lastevent': event_name, 'eventdescr': event_description, 'lastbegin': event_begin, 'lastserviceref': self.serviceref, 'timerlist': self.timerlist, 'pluginlist': self.pluginlist})).addErrback(self.updateError)
 

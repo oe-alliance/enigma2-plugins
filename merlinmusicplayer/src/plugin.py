@@ -7,8 +7,8 @@
 #  Coded by Dr.Best (c) 2010
 #  Support: www.dreambox-tools.info
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -17,7 +17,7 @@
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 
 # for localized messages
@@ -183,7 +183,7 @@ class PathToDatabase(Thread):
 						row = cursor.fetchone()
 						if row is None:
 							audio, isAudio, title, genre, artist, album, tracknr, track, date, length, bitrate = getID3Tags(root, filename)
-							if audio:	
+							if audio:
 								# 1. Artist
 								artistID = -1
 								cursor.execute('SELECT artist_id FROM Artists WHERE artist = "%s";' % (artist.replace('"', '""')))
@@ -291,7 +291,7 @@ class iDreamAddToDatabase(Screen):
 			pathToDatabase.Cancel()
 
 	def __onClose(self):
-		pathToDatabase.MessagePump.recv_msg.get().remove(self.gotThreadMsg)	
+		pathToDatabase.MessagePump.recv_msg.get().remove(self.gotThreadMsg)
 
 
 class myHTTPClientFactory(HTTPClientFactory):
@@ -432,7 +432,7 @@ def getID3Tags(root, filename):
 		except:
 			audio = None
 	elif filename.lower().endswith(".flac"):
-		try: 
+		try:
 			audio = FLAC(os_path.join(root, filename))
 			isFlac = True
 		except:
@@ -509,7 +509,7 @@ class MerlinMusicPlayerScreenSaver(Screen):
 			<widget name="coverArt" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/no_coverArt.png" position="200,77" size="238,238" transparent="1" alphatest="blend" />
 			<widget name="display" position="200,315" size="720,24" zPosition="1" transparent="1" font="Regular;20" foregroundColor="#fcc000" />
 			</screen>"""
-		
+
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
@@ -597,7 +597,7 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 		Screen.__init__(self, session)
 		self.setTitle(_("Merlin Music Player TV"))
 		self.onClose.append(self.__onClose)
-		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ChannelSelectBaseActions", "ChannelSelectEPGActions"], 
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ChannelSelectBaseActions", "ChannelSelectEPGActions"],
 		{
 			"cancel": self.close,
 			"ok": self.showHide,
@@ -806,7 +806,7 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 			self.session.open(EPGSelection, current.ref)
 
 	def openEventView(self):
-		if self.servicelist is not None: 
+		if self.servicelist is not None:
 			epglist = []
 			self.epglist = epglist
 			service = ServiceReference(self.servicelist.getCurrentSelection())
@@ -865,7 +865,7 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 			if self.pipservice and not self.pipservice.setTarget(1):
 				self.pipservice.start()
 				if self.servicelist is not None:
-					self.servicelist.setCurrentSelection(current_service) 
+					self.servicelist.setCurrentSelection(current_service)
 				self.currentPiP = current_service.toString()
 			else:
 				self.pipservice = None
@@ -1016,7 +1016,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 				os_mkdir(self.googleDownloadDir)
 			except:
 				self.googleDownloadDir = "/tmp/"
-				
+
 		self.init = 0
 		self.onShown.append(self.__onShown)
 		# for lcd
@@ -1223,19 +1223,19 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		audio = None
 		audiotype = 0
 		if self.currentFilename.lower().endswith(".mp3"):
-			try: 
+			try:
 				audio = ID3(self.currentFilename)
 				audiotype = 1
 			except:
 				audio = None
 		elif self.currentFilename.lower().endswith(".flac"):
-			try: 
+			try:
 				audio = FLAC(self.currentFilename)
 				audiotype = 2
 			except:
 				audio = None
 		elif self.currentFilename.lower().endswith(".m4a"):
-			try: 
+			try:
 				audio = MP4(self.currentFilename)
 				audiotype = 3
 			except:
@@ -1554,7 +1554,7 @@ class MerlinMusicPlayerLyrics(Screen):
 			<widget name="resulttext" position="50,100" zPosition="1" size="620,20" font="Regular;16" transparent="1"   backgroundColor="#00000000"/>
 			<widget name="lyric_text" position="50,150" zPosition="2" size="620,350" font="Regular;18" transparent="0"  backgroundColor="#00000000"/>
 			</screen>"""
-		
+
 	def __init__(self, session, currentsong):
 		self.session = session
 		Screen.__init__(self, session)
@@ -1584,7 +1584,7 @@ class MerlinMusicPlayerLyrics(Screen):
 		text = getEncodedString(self.getLyricsFromID3Tag(audio)).replace("\r\n", "\n")
 		text = text.replace("\r", "\n")
 		self["lyric_text"].setText(text)
- 
+
 	def getLyricsFromID3Tag(self, tag):
 		if tag:
 			for frame in list(tag.values()):
@@ -1620,7 +1620,7 @@ class MerlinMusicPlayerLyrics(Screen):
 
 
 class MerlinMusicPlayerSongList(Screen):
-	
+
 	sz_w = getDesktop(0).size().width()
 	if sz_w == 1280:
 		skin = """
@@ -1650,11 +1650,11 @@ class MerlinMusicPlayerSongList(Screen):
 			<widget name="headertext" position="50,73" zPosition="1" size="620,23" font="Regular;20" transparent="1"  foregroundColor="#fcc000" backgroundColor="#00000000"/>
 			<widget name="list" position="50,110" zPosition="2" size="620,350" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
 			</screen>"""
-		
+
 	def __init__(self, session, songlist, index, idreammode):
 		self.session = session
 		Screen.__init__(self, session)
-		
+
 		self["headertext"] = Label(_("Merlin Music Player Songlist"))
 		self["list"] = iDreamList()
 		self["list"].connectSelChanged(self.lcdUpdate)
@@ -1785,17 +1785,17 @@ class iDreamMerlin(Screen):
 		self.onLayoutFinish.append(self.startRun)
 		self.onShown.append(self.lcdUpdate)
 		self.onClose.append(self.__onClose)
-		
+
 		self.serviceList = servicelist
 		self.currentService = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.session.nav.stopService()
-		
+
 		self.mode = 0
 		self.mainMenuList = []
 		self.cacheList = []
 		self.LastMethod = None
 		self.player = None
-		
+
 		self["key_red"] = StaticText("")
 		self["key_green"] = StaticText("")
 		self["key_yellow"] = StaticText("")
@@ -1814,7 +1814,7 @@ class iDreamMerlin(Screen):
 			cursor.execute("select playlist_id,playlist_text from playlists order by playlist_text;")
 			for row in cursor:
 				playList.append((row[1], row[0]))
-			cursor.close()  
+			cursor.close()
 			connection.close()
 			return playList
 		else:
@@ -1963,7 +1963,7 @@ class iDreamMerlin(Screen):
 				self.sqlCommand("delete from songs where song_id = %d" % (sel.songID))
 				self["list"].removeItem(self["list"].getCurrentIndex())
 				self.clearCache()
-			
+
 	def addSongToPlaylist(self):
 		playList = self.getPlayList()
 		if len(playList):
@@ -2041,7 +2041,7 @@ class iDreamMerlin(Screen):
 				cache = self.cacheList.pop()
 			else:
 				cache = CacheList(cache=False, index=-1)
-			if sel.navigator: 
+			if sel.navigator:
 				self["headertext"].setText(cache.headertext)
 				if cache.cache:
 					self["list"].setList(cache.listview)
@@ -2121,7 +2121,7 @@ class iDreamMerlin(Screen):
 			cursor.execute("select playlists.playlist_id, playlist_text, count(Playlist_Songs.playlist_id) from playlists left outer join Playlist_Songs on playlists.playlist_id = Playlist_Songs.playlist_id group by playlists.playlist_id order by playlists.playlist_text;")
 			for row in cursor:
 				playlistList.append((Item(text="%s (%d)" % (row[1], row[2]), mode=2, playlistID=row[0]),))
-			cursor.close() 
+			cursor.close()
 			connection.close()
 			self["list"].setList(playlistList)
 			if len(playlistList) > 1:
@@ -2146,7 +2146,7 @@ class iDreamMerlin(Screen):
 			cursor.execute("SELECT playlist_text from playlists where playlist_id = %d;" % playlistID)
 			row = cursor.fetchone()
 			self["headertext"].setText(_("Playlist (%s) -> Song List") % row[0])
-			cursor.close() 
+			cursor.close()
 			connection.close()
 			self["list"].setList(playlistSongList)
 			if len(playlistSongList) > 1:
@@ -2168,7 +2168,7 @@ class iDreamMerlin(Screen):
 			cursor.execute("select Genre.genre_id,Genre.Genre_text, count(*) from songs inner join Genre on songs.genre_id = Genre.Genre_id group by songs.Genre_id order by Genre.Genre_text;")
 			for row in cursor:
 				genreList.append((Item(text="%s (%d)" % (row[1], row[2]), mode=14, genreID=row[0]),))
-			cursor.close() 
+			cursor.close()
 			connection.close()
 			self["list"].setList(genreList)
 			if len(genreList) > 1:
@@ -2193,7 +2193,7 @@ class iDreamMerlin(Screen):
 			cursor.execute("SELECT genre_text from genre where genre_ID = %d;" % genreID)
 			row = cursor.fetchone()
 			self["headertext"].setText(_("Genre (%s) -> Song List") % row[0])
-			cursor.close() 
+			cursor.close()
 			connection.close()
 			self["list"].setList(genreSongList)
 			if len(genreSongList) > 1:
@@ -2226,7 +2226,7 @@ class iDreamMerlin(Screen):
 	def green_pressed(self):
 		try:
 			sel = self["list"].l.getCurrentSelection()[0]
-		except: 
+		except:
 			sel = None
 		if sel is None:
 			return
@@ -2248,7 +2248,7 @@ class iDreamMerlin(Screen):
 	def yellow_pressed(self):
 		try:
 			sel = self["list"].l.getCurrentSelection()[0]
-		except: 
+		except:
 			return
 		if sel.artistID != 0:
 			oldmode = self.mode
@@ -2260,7 +2260,7 @@ class iDreamMerlin(Screen):
 	def blue_pressed(self):
 		try:
 			sel = self["list"].l.getCurrentSelection()[0]
-		except: 
+		except:
 			return
 		if sel.albumID != 0:
 			self.setButtons(red=True, green=True, yellow=True)
@@ -2285,7 +2285,7 @@ class iDreamMerlin(Screen):
 			cursor.execute("select song_id, title, artists.artist, filename, songs.artist_id, bitrate, length, genre_text, track, date, album_text, songs.Album_id from songs inner join artists on songs.artist_id = artists.artist_id inner join Album on songs.Album_id = Album.Album_id inner join genre on songs.genre_id = genre.genre_id order by title, filename;")
 			for row in cursor:
 				SongList.append((Item(mode=99, songID=row[0], title=row[1], artist=row[2], filename=row[3], artistID=row[4], bitrate=row[5], length=row[6], genre=row[7], track=row[8], date=row[9], album=row[10], albumID=row[11]),))
-			cursor.close() 
+			cursor.close()
 			connection.close()
 			self["list"].setList(SongList)
 			if len(SongList) > 1:
@@ -2310,7 +2310,7 @@ class iDreamMerlin(Screen):
 			cursor.execute("select song_id, title, artists.artist, filename, songs.artist_id, bitrate, length, genre_text, track, date, album_text, songs.Album_id from songs inner join artists on songs.artist_id = artists.artist_id inner join Album on songs.Album_id = Album.Album_id inner join genre on songs.genre_id = genre.genre_id %s order by title, filename;" % sql_where)
 			for row in cursor:
 				SongList.append((Item(mode=99, songID=row[0], title=row[1], artist=row[2], filename=row[3], artistID=row[4], bitrate=row[5], length=row[6], genre=row[7], track=row[8], date=row[9], album=row[10], albumID=row[11]),))
-			cursor.close() 
+			cursor.close()
 			connection.close()
 			self["list"].setList(SongList)
 			if len(SongList) > 1:
@@ -2336,7 +2336,7 @@ class iDreamMerlin(Screen):
 			cursor.execute("SELECT artist from artists where artist_ID = %d;" % artistID)
 			row = cursor.fetchone()
 			self["headertext"].setText(_("Artist (%s) -> Song List") % row[0])
-			cursor.close() 
+			cursor.close()
 			connection.close()
 			self["list"].setList(artistSongList)
 			if len(artistSongList) > 1:
@@ -2362,7 +2362,7 @@ class iDreamMerlin(Screen):
 			cursor.execute("SELECT album_text from album where album_ID = %d;" % albumID)
 			row = cursor.fetchone()
 			self["headertext"].setText(_("Album (%s) -> Song List") % row[0])
-			cursor.close() 
+			cursor.close()
 			connection.close()
 			self["list"].setList(albumSongList)
 			if len(albumSongList) > 1:
@@ -2398,7 +2398,7 @@ class iDreamMerlin(Screen):
 			cursor.execute("SELECT COUNT (*) FROM genre;")
 			row = cursor.fetchone()
 			mainMenuList.append((Item(text=_("Genres (%d)") % row[0], mode=13),))
-			cursor.close()  
+			cursor.close()
 			connection.close()
 			self["list"].setList(mainMenuList)
 			self["list"].moveToIndex(0)
@@ -2419,10 +2419,10 @@ class iDreamMerlin(Screen):
 			cursor.execute("SELECT artists.artist_id,artists.artist, count (distinct album.album_text) FROM songs INNER JOIN artists ON songs.artist_id = artists.artist_id inner join album on songs.album_id =  album.album_id GROUP BY songs.artist_id ORDER BY artists.artist;")
 			for row in cursor:
 				artistList.append((Item(text="%s (%d)" % (row[1], row[2]), mode=5, artistID=row[0]),))
-			cursor.close() 
+			cursor.close()
 			connection.close()
 			self["list"].setList(artistList)
-		
+
 	def buildArtistAlbumList(self, ArtistID, addToCache):
 		if addToCache:
 			self.cacheList.append(CacheList(index=self["list"].getCurrentIndex(), listview=self["list"].getList(), headertext=self["headertext"].getText(), methodarguments=self.LastMethod))
@@ -2446,7 +2446,7 @@ class iDreamMerlin(Screen):
 			cursor.execute("SELECT artist from artists where artist_ID = %d;" % ArtistID)
 			row = cursor.fetchone()
 			self["headertext"].setText(_("Artist (%s) -> Album List") % row[0])
-			cursor.close() 
+			cursor.close()
 			connection.close()
 			self["list"].setList(albumArtistList)
 			if len(albumArtistList) > 1:
@@ -2468,7 +2468,7 @@ class iDreamMerlin(Screen):
 			cursor.execute("select Album.Album_id,Album.Album_text, count(*) from songs inner join Album on songs.Album_id = Album.Album_id group by songs.Album_id order by Album.Album_text;")
 			for row in cursor:
 				albumList.append((Item(text="%s (%d)" % (row[1], row[2]), mode=8, albumID=row[0]),))
-			cursor.close() 
+			cursor.close()
 			connection.close()
 			self["list"].setList(albumList)
 			if len(albumList) > 1:
@@ -2503,7 +2503,7 @@ class iDreamMerlin(Screen):
 				SongList.append((Item(songID=row[0], text=os_path.basename(row[1]), filename=row[1], title=row[2], artist=row[3], album=row[4], genre=row[5], bitrate=row[6], length=row[7], track=row[8], date=row[9], PTS=row[10], join=False),))
 				if row[0] != 0:
 					iDreamMode = True
-			cursor.close() 
+			cursor.close()
 			connection.close()
 			if self.player is not None:
 				self.player.doClose()
@@ -2735,7 +2735,7 @@ class iDreamList(GUIComponent, object):
 
 	def getDisplaySongMode(self):
 		return self.displaySongMode
-		
+
 	def setMode(self, mode):
 		self.mode = mode
 		if mode == 2 or mode == 6 or mode == 8 or mode == 10 or mode == 18 or mode == 19 or mode == 14 or mode == 20:
@@ -3026,7 +3026,7 @@ class MerlinMusicPlayerSetup(Screen, ConfigListScreen):
 
 
 class MerlinMusicPlayerFileList(Screen):
-	
+
 	sz_w = getDesktop(0).size().width()
 	if sz_w == 1280:
 		skin = """
@@ -3057,7 +3057,7 @@ class MerlinMusicPlayerFileList(Screen):
 			<widget name="headertext" position="50,73" zPosition="1" size="620,23" font="Regular;20" transparent="1"  foregroundColor="#fcc000" backgroundColor="#00000000"/>
 			<widget name="list" position="50,110" zPosition="2" size="620,350" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
 			</screen>"""
-		
+
 	def __init__(self, session, servicelist):
 		self.session = session
 		Screen.__init__(self, session)
@@ -3108,7 +3108,7 @@ class MerlinMusicPlayerFileList(Screen):
 				SongList.append((Item(songID=row[0], text=os_path.basename(row[1]), filename=row[1], title=row[2], artist=row[3], album=row[4], genre=row[5], bitrate=row[6], length=row[7], track=row[8], date=row[9], PTS=row[10], join=False),))
 				if row[0] != 0:
 					iDreamMode = True
-			cursor.close() 
+			cursor.close()
 			connection.close()
 			if self.player is not None:
 				self.player.doClose()
@@ -3303,7 +3303,7 @@ class MerlinMusicPlayerFileList(Screen):
 		if self.player is not None:
 			self.player.doClose()
 			self.player = None
-		self.appendFileToSongList()	
+		self.appendFileToSongList()
 		self.startMerlinPlayerScreenTimer.start(START_MERLIN_PLAYER_SCREEN_TIMER_VALUE)
 
 	def appendFileToSongList(self):
@@ -3355,7 +3355,7 @@ class MerlinMusicPlayerFileList(Screen):
 	def moveleft(self):
 		self["list"].pageUp()
 		self.lcdupdate()
-		
+
 	def moveup(self):
 		self["list"].up()
 		self.lcdupdate()

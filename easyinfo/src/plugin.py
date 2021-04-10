@@ -3,7 +3,7 @@
 #    EasyInfo for Dreambox-Enigma2
 #    Coded by Vali (c)2011
 #
-#  This plugin is licensed under the Creative Commons 
+#  This plugin is licensed under the Creative Commons
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 #  To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/
 #  or send a letter to Creative Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -12,7 +12,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 #######################################################################
@@ -119,7 +119,7 @@ def EasyInfoAutostart(reason, **kwargs):
 
 def InfoBarPlugins__init__(self):
 	global EINStartOnlyOneTime
-	if not EINStartOnlyOneTime: 
+	if not EINStartOnlyOneTime:
 		EINStartOnlyOneTime = True
 		global InfoBar_instance
 		InfoBar_instance = self
@@ -1230,15 +1230,3 @@ class EasySelection(EPGSelection, Screen):
 		if ref:
 			InfoBar_instance.servicelist.savedService = ref
 			self.session.openWithCallback(InfoBar_instance.servicelist.SingleServiceEPGClosed, EPGSelection, ref, serviceChangeCB=InfoBar_instance.servicelist.changeServiceCB)
-
-
-
-
-
-
-
-	
-
-
-
-

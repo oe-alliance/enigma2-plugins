@@ -11,17 +11,17 @@ class CounterWidget(Widget):
         self.Timer = eTimer()
         self.Timer.callback.append(self.TimerFire)
         self.counter = 0
-       
+
     def onLoadFinished(self, instance):
         self.instance = instance
         print("refresh CounterWidget")
-        
+
         self.getElement("counter_title").setText("###")
         self.Timer.start(200)
-        
+
     def onClose(self):
         self.Timer.stop()
-        
+
     def TimerFire(self):
         #print "TimerFire"
         self.counter += 1
@@ -30,7 +30,7 @@ class CounterWidget(Widget):
             self.Timer.start(200)
         except Exception as e:
             pass
-        
+
 
 def get_widget(session):
     return CounterWidget(session)

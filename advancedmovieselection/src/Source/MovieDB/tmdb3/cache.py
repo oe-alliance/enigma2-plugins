@@ -124,4 +124,3 @@ class Cache(object):
             func = self.func.__get__(inst, owner)
             callback = self.callback.__get__(inst, owner)
             return self.__class__(self.cache, callback, func, inst)
-

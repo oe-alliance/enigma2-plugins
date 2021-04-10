@@ -57,24 +57,24 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 		self.dreamIRCconf = ConfigSubsection()
 		self.reloadFile()
 		list = []
-		list.append(getConfigListEntry(_('Nickname'), self.dreamIRCconf.nick))      
+		list.append(getConfigListEntry(_('Nickname'), self.dreamIRCconf.nick))
 		if config.usage.setup_level.index > 1: # advanced
-			list.append(getConfigListEntry(_('Passwd'), self.dreamIRCconf.passwd))      
+			list.append(getConfigListEntry(_('Passwd'), self.dreamIRCconf.passwd))
 		if config.usage.setup_level.index >= 1: # intermediate+
-			list.append(getConfigListEntry(_('Server1'), self.dreamIRCconf.server1))      
+			list.append(getConfigListEntry(_('Server1'), self.dreamIRCconf.server1))
 		if config.usage.setup_level.index > 1: # advanced
-			list.append(getConfigListEntry(_('Server2'), self.dreamIRCconf.server2))      
-			list.append(getConfigListEntry(_('Server3'), self.dreamIRCconf.server3))      
+			list.append(getConfigListEntry(_('Server2'), self.dreamIRCconf.server2))
+			list.append(getConfigListEntry(_('Server3'), self.dreamIRCconf.server3))
 		if config.usage.setup_level.index >= 1: # intermediate+
-			list.append(getConfigListEntry(_('Port'), self.dreamIRCconf.port))          
-		list.append(getConfigListEntry(_('Channel'), self.dreamIRCconf.channel))    
+			list.append(getConfigListEntry(_('Port'), self.dreamIRCconf.port))
+		list.append(getConfigListEntry(_('Channel'), self.dreamIRCconf.channel))
 		if config.usage.setup_level.index > 1: # i
-			list.append(getConfigListEntry(_('Debug'), self.dreamIRCconf.debug))        
+			list.append(getConfigListEntry(_('Debug'), self.dreamIRCconf.debug))
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 
-		ConfigListScreen.__init__(self, list)                                     
+		ConfigListScreen.__init__(self, list)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 				{
 						"green": self.saveAndExit,
@@ -91,7 +91,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 	def reloadFile(self):
 		try:
 			doc = xml.dom.minidom.parse(accounts_xml)
-			root = doc.childNodes[0]	
+			root = doc.childNodes[0]
 			for node in elementsWithTag(root.childNodes, "account"):
 				self.nick = node.getAttribute("nick")
 				self.passwd = node.getAttribute("passwd")
@@ -117,7 +117,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 			self.debug = "False"
 
 		if self.debug != "True" or self.debug != "False":
-			self.debug = "False"	
+			self.debug = "False"
 		self.dreamIRCconf.nick = ConfigText(default=self.nick, fixed_size=False)
 		self.dreamIRCconf.passwd = ConfigText(default=self.passwd, fixed_size=False)
 		self.dreamIRCconf.server1 = ConfigText(default=self.server1, fixed_size=False)
@@ -157,7 +157,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 			try:
 				result = gethostbyname_ex(server)
 			except:
-				self.session.open(MessageBox, _("irc server %s not responding!\nplease check your network settings and/or irc servername..." % server), MessageBox.TYPE_ERROR)	
+				self.session.open(MessageBox, _("irc server %s not responding!\nplease check your network settings and/or irc servername..." % server), MessageBox.TYPE_ERROR)
 
 	def saveAndExit(self):
 		for x in self["config"].list:
@@ -169,7 +169,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close()
-		
+
 
 class dreamIRCConfig:
 	def load(self):
@@ -193,8 +193,8 @@ class dreamIRCConfig:
 					self.nick = self.device + "_" + self.mac_end
 				self.passwd = node.getAttribute("passwd")
 				self.server1 = node.getAttribute("server1") # atm only ip.. cause of probs with theads and dns..
-				self.server2 = node.getAttribute("server2") 
-				self.server3 = node.getAttribute("server3") 
+				self.server2 = node.getAttribute("server2")
+				self.server3 = node.getAttribute("server3")
 				self.port = node.getAttribute("port")
 				self.channel = node.getAttribute("channel")
 				self.debug = node.getAttribute("debug") # not used yet.. later will enable/disable console debug out..
@@ -242,7 +242,7 @@ class dreamIRCConfig:
 						self.status1 = True
 			except:
 				print("unable to resolve hostname %s..." % self.server1)
-				
+
 		if self.status1 == False and self.status2 == False and self.status3 == False:
 			self.pipe.add("ERROR!!! no irc server was valid... please check settings...")
 			return False
@@ -251,13 +251,10 @@ class dreamIRCConfig:
 			self.accounts = [ircsupport.IRCAccount(self.type, int(self.login), str(self.nick), str(self.passwd), str(self.ip), int(self.port), str(self.channel))]
 			print(self.accounts)
 			return self.accounts
-	
+
 	def channel(self):
 			doc = xml.dom.minidom.parse(accounts_xml)
 			root = doc.childNodes[0]
 			for node in elementsWithTag(root.childNodes, "account"):
 				self.channel = node.getAttribute("channel")
 			return self.channel
-
-
-
