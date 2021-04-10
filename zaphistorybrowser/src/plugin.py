@@ -148,14 +148,14 @@ class ZapHistoryBrowserList(MenuList):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		DESKTOP_WIDTH = getDesktop(0).size().width()
 		if DESKTOP_WIDTH <= 1280:
-			font1, size1 = skinparameter.get("ZapHistoryBrowserListFont1", ('Regular',20))
-			font2, size2 = skinparameter.get("ZapHistoryBrowserListFont2", ('Regular',18))
+			font1, size1 = skinparameter.get("ZapHistoryBrowserListFont1", ('Regular', 20))
+			font2, size2 = skinparameter.get("ZapHistoryBrowserListFont2", ('Regular', 18))
 			self.l.setFont(0, gFont(font1, size1))
 			self.l.setFont(1, gFont(font2, size2))
 			self.l.setItemHeight(40)
 		else:
-			font1, size1 = skinparameter.get("ZapHistoryBrowserListFont1", ('Regular',30))
-			font2, size2 = skinparameter.get("ZapHistoryBrowserListFont2", ('Regular',27))
+			font1, size1 = skinparameter.get("ZapHistoryBrowserListFont1", ('Regular', 30))
+			font2, size2 = skinparameter.get("ZapHistoryBrowserListFont2", ('Regular', 27))
 			self.l.setFont(0, gFont(font1, size1))
 			self.l.setFont(1, gFont(font2, size2))
 			self.l.setItemHeight(75)

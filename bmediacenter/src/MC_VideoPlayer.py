@@ -16,9 +16,9 @@ import re
 import os
 config.plugins.mc_vp = ConfigSubsection()
 config.plugins.mc_vp_sortmode = ConfigSubsection()
-sorts = [('default',_("default")),('alpha',_("alphabet")), ('alphareverse',_("alphabet backward")),('date',_("date")),('datereverse',_("date backward")),('size',_("size")),('sizereverse',_("size backward"))]
+sorts = [('default', _("default")), ('alpha', _("alphabet")), ('alphareverse', _("alphabet backward")), ('date', _("date")), ('datereverse', _("date backward")), ('size', _("size")), ('sizereverse', _("size backward"))]
 config.plugins.mc_vp_sortmode.enabled = ConfigSelection(sorts)
-config.plugins.mc_vp.dvd = ConfigSelection(default="dvd", choices=[("dvd", "dvd"),("movie", "movie")])
+config.plugins.mc_vp.dvd = ConfigSelection(default="dvd", choices=[("dvd", "dvd"), ("movie", "movie")])
 config.plugins.mc_vp.lastDir = ConfigText(default=resolveFilename(SCOPE_MEDIA))
 class MoviePlayer(OrgMoviePlayer):
 	def __init__(self, session, service, slist=None, lastservice=None):
@@ -139,7 +139,7 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 		short = shortname(filename)
 		newshort = short.lower()
 		newshort = newshort.replace(" ", "")
-		movienameserie = re.sub("e[0-9]{2}","",newshort.lower())
+		movienameserie = re.sub("e[0-9]{2}", "", newshort.lower())
 		covername = "/hdd/bmcover/" + str(movienameserie) + "/backcover.mvi"
 		if fileExists(covername):
 			self.showiframe.showStillpicture(covername)
@@ -181,7 +181,7 @@ class VideoPlayerSettings(Screen, ConfigListScreen):
 		</screen>"""
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self["actions"] = NumberActionMap(["SetupActions","OkCancelActions"],
+		self["actions"] = NumberActionMap(["SetupActions", "OkCancelActions"],
 		{
 			"ok": self.keyOK,
 			"cancel": self.keyOK

@@ -41,7 +41,7 @@ class AutoTimerDoParseResource(AutoTimerBaseResource):
 		# todo timeout / error handling
 		autotimer.parseEPG(callback=self.parsecallback)
 		return server.NOT_DONE_YET
-	def renderBackground(self, req,ret):
+	def renderBackground(self, req, ret):
 		output = _("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[6]), len(ret[5]))
 		return self.returnResult(req, True, output)
 
@@ -55,7 +55,7 @@ class AutoTimerSimulateResource(AutoTimerBaseResource):
 		# todo timeout / error handling
 		autotimer.parseEPG(simulateOnly=True, callback=self.parsecallback)
 		return server.NOT_DONE_YET
-	def renderBackground(self, req,timers):
+	def renderBackground(self, req, timers):
 
 		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimersimulate api_version=\"", str(API_VERSION), "\">\n"]
 		extend = returnlist.extend
@@ -89,7 +89,7 @@ class AutoTimerTestResource(AutoTimerBaseResource):
 		# todo timeout / error handling
 		autotimer.parseEPG(simulateOnly=True, callback=self.parsecallback)
 		return server.NOT_DONE_YET
-	def renderBackground(self, req,timers, skipped):
+	def renderBackground(self, req, timers, skipped):
 
 		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimertest api_version=\"", str(API_VERSION), "\">\n"]
 		extend = returnlist.extend
@@ -568,7 +568,7 @@ class AutoTimerSettingsResource(resource.Resource):
 
 		resultstr = """<?xml version=\"1.0\" encoding=\"UTF-8\" ?><e2settings>"""
 
-		for (title,cfg,key,description) in defs:
+		for (title, cfg, key, description) in defs:
 			resultstr += """<e2setting>
 				<e2settingname>config.plugins.autotimer.%s</e2settingname>
 				<e2settingvalue>%s</e2settingvalue>

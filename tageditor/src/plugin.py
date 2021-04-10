@@ -86,7 +86,7 @@ class TagEditor(Screen):
 		)
 
 	def addCustomCallback(self, ret):
-		ret = ret and ret.strip().replace(" ","_").capitalize()
+		ret = ret and ret.strip().replace(" ", "_").capitalize()
 		tags = self.tags
 		if ret and ret not in tags:
 			tags.append(ret)

@@ -42,7 +42,7 @@ config.plugins.ORFteletext.adr = ConfigText(default="ORF")
 
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(name="ORF-Teletext", description=_("ORF-Teletext"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),]
+	return [PluginDescriptor(name="ORF-Teletext", description=_("ORF-Teletext"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main), ]
 
 
 
@@ -130,7 +130,7 @@ class ORFteletextScreen(Screen):
 		self.onLayoutFinish.append(self.firstStart)
 
 	def firstStart(self):
-		self.lade2(self.seite,self.subseite)
+		self.lade2(self.seite, self.subseite)
 
 	def Show_Picture(self):
 		if self.whatPic is not None:
@@ -170,30 +170,30 @@ class ORFteletextScreen(Screen):
 		self.Show_Picture()
 
 	def showMe(self):
-		self.lade2(self.seite,self.subseite)
+		self.lade2(self.seite, self.subseite)
 
 	def seitePlus(self):
 		if self.subseite < 9:
 			self.subseite = self.subseite + 1
 		else:
 			self.subseite = 1
-		self.lade2(self.seite,self.subseite)
+		self.lade2(self.seite, self.subseite)
 
 	def seiteMinus(self):
 		if self.subseite > 1:
 			self.subseite = self.subseite - 1
 		else:
 			self.subseite = 1
-		self.lade2(self.seite,self.subseite)
+		self.lade2(self.seite, self.subseite)
 
-	def keyNumberGlobal(self,number):
+	def keyNumberGlobal(self, number):
 		if len(self.strseite) < 3:
 			self.strseite = self.strseite + str(number)
 			self["wohin"].setText(self.strseite)
 		if len(self.strseite) == 3:
 			self.seite = int(self.strseite)
 			self.subseite = 1
-			self.lade2(self.seite,self.subseite)
+			self.lade2(self.seite, self.subseite)
 			self.strseite = ""
 			self["wohin"].setText(self.strseite)
 		if len(self.strseite) > 3:
@@ -206,7 +206,7 @@ class ORFteletextScreen(Screen):
 		else:
 			self.seite = 100
 		self.subseite = 1
-		self.lade2(self.seite,self.subseite)
+		self.lade2(self.seite, self.subseite)
 
 	def zurueck(self):
 		if self.seite > 100:
@@ -214,12 +214,12 @@ class ORFteletextScreen(Screen):
 		else:
 			self.seite = 100
 		self.subseite = 1
-		self.lade2(self.seite,self.subseite)	
+		self.lade2(self.seite, self.subseite)	
 
 	def rot(self):
 		self.seite = 111
 		self.subseite = 1
-		self.lade2(self.seite,self.subseite)
+		self.lade2(self.seite, self.subseite)
 
 	def gruen(self):
 		if config.plugins.ORFteletext.adr.value == "ORF":
@@ -227,11 +227,11 @@ class ORFteletextScreen(Screen):
 		elif config.plugins.ORFteletext.adr.value == "SAT1":
 			self.seite = 150
 		self.subseite = 1
-		self.lade2(self.seite,self.subseite)
+		self.lade2(self.seite, self.subseite)
 	def gelb(self):
 		self.seite = 200
 		self.subseite = 1
-		self.lade2(self.seite,self.subseite)
+		self.lade2(self.seite, self.subseite)
 
 	def blau(self):
 		if config.plugins.ORFteletext.adr.value == "ORF":
@@ -239,7 +239,7 @@ class ORFteletextScreen(Screen):
 		elif config.plugins.ORFteletext.adr.value == "SAT1":
 			self.seite = 104
 		self.subseite = 1
-		self.lade2(self.seite,self.subseite)
+		self.lade2(self.seite, self.subseite)
 			
 
 	def Info(self):

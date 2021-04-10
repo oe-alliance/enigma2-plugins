@@ -76,10 +76,10 @@ config.plugins.autoresolution.testmode = ConfigYesNo(default=False)
 config.plugins.autoresolution.deinterlacer = ConfigSelection(default="auto", choices=[("off", _("off")), ("auto", _("auto")), ("on", _("on")), ("bob", _("bob"))])
 config.plugins.autoresolution.deinterlacer_progressive = ConfigSelection(default="auto", choices=[("off", _("off")), ("auto", _("auto")), ("on", _("on")), ("bob", _("bob"))])
 config.plugins.autoresolution.delay_switch_mode = ConfigSelection(default="1000", choices=[
-		("0", "0 " + _("seconds")),("50", "0.05 " + _("seconds")), ("500", "0.5 " + _("seconds")),
+		("0", "0 " + _("seconds")), ("50", "0.05 " + _("seconds")), ("500", "0.5 " + _("seconds")),
 		("1000", "1 " + _("second")), ("2000", "2 " + _("seconds")), ("3000", "3 " + _("seconds")),
 		("4000", "4 " + _("seconds")), ("5000", "5 " + _("seconds")), ("6000", "6 " + _("seconds")), ("7000", "7 " + _("seconds")),
-		("8000", "8 " + _("seconds")), ("9000", "9 " + _("seconds")), ("10000", "10 " + _("seconds")),("60000", "60 " + _("seconds"))])
+		("8000", "8 " + _("seconds")), ("9000", "9 " + _("seconds")), ("10000", "10 " + _("seconds")), ("60000", "60 " + _("seconds"))])
 config.plugins.autoresolution.mode = ConfigSelection(default="manual", choices=[("manual", _("manual")), ("auto", _("Auto frame rate (refresh need 'multi')"))])
 config.plugins.autoresolution.lock_timeout = ConfigSelection(default="60", choices=[("30", "30 " + _("seconds")), ("60", "60 " + _("seconds"))])
 config.plugins.autoresolution.ask_apply_mode = ConfigYesNo(default=False)

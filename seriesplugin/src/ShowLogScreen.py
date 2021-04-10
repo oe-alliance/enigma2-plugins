@@ -52,7 +52,7 @@ class ShowLogScreen(Screen):
 		Screen.close(self)
 
 	def firstPage(self):
-		self["text"].long_text.move(ePoint(0,0))
+		self["text"].long_text.move(ePoint(0, 0))
 		self["text"].updateScrollbar()
 
 	def readLog(self):

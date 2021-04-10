@@ -72,7 +72,7 @@ config.plugins.easyMedia.timers = ConfigSelection(default="no", choices=[("no", 
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=EasyMediaAutostart),
-			PluginDescriptor(name="EasyMedia", description=_("Not easy way to start EasyMedia"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=notEasy),]
+			PluginDescriptor(name="EasyMedia", description=_("Not easy way to start EasyMedia"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=notEasy), ]
 
 
 
@@ -427,11 +427,11 @@ class EasyMedia(Screen):
 			"ok": self.go,
 			"back": self.cancel,
 			"menu": self.emContextMenu,
-			"showMovies": lambda: self.go2(MPaskList,0),
-			"green": lambda: self.go2(MPaskList,2),
-			"red": lambda: self.go2(MPaskList,1),
-			"blue": lambda: self.go2(MPaskList,4),
-			"yellow": lambda: self.go2(MPaskList,3)
+			"showMovies": lambda: self.go2(MPaskList, 0),
+			"green": lambda: self.go2(MPaskList, 2),
+			"red": lambda: self.go2(MPaskList, 1),
+			"blue": lambda: self.go2(MPaskList, 4),
+			"yellow": lambda: self.go2(MPaskList, 3)
 		}, -1)
 
 	def cancel(self):

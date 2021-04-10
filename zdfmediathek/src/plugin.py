@@ -493,9 +493,9 @@ class RightMenuList(List):
 		elif self.type == TYPE_MOVIELIST_CATEGORY:
 			for entry in self.list:
 				if entry[4] != "Weitere Beitraege laden.":
-					self.listCompleted.append((entry[0],entry[1],entry[2],entry[3],entry[4],entry[3].rsplit("/",1)[1]))
+					self.listCompleted.append((entry[0], entry[1], entry[2], entry[3], entry[4], entry[3].rsplit("/", 1)[1]))
 				else:
-					self.listCompleted.append((entry[0],entry[1],entry[2],entry[3],entry[4], None))
+					self.listCompleted.append((entry[0], entry[1], entry[2], entry[3], entry[4], None))
 
 	def buildEntry(self, vurl, txt1, title, turl, txt2, thumbid):
 		#print "[ZDF Mediathek - buildEntry ] --> ", txt1, title, txt2, thumbid
@@ -518,9 +518,9 @@ class RightMenuList(List):
 			idx += 1
 		return None
 
-	def downloadThumbnail(self,thumbUrl):
+	def downloadThumbnail(self, thumbUrl):
 		if thumbUrl is not None:
-			thumbID = thumbUrl.rsplit("/",1)[1]
+			thumbID = thumbUrl.rsplit("/", 1)[1]
 			thumbFile = None
 			if not thumbUrl.startswith("http://"):
 				thumbUrl = "%s%s" % (MAIN_PAGE, thumbUrl)
@@ -843,7 +843,7 @@ class ZDFMediathek(Screen, HelpableScreen):
 					newurl = getMovieUrl(url)
 					if newurl:
 						url = newurl
-			print "[ZDFMediathek]->PLAY:",url
+			print "[ZDFMediathek]->PLAY:", url
 			if url:
 				if PLAY_MP4 and url.endswith(".mp4"):
 					ref = eServiceReference(4097, 0, url)

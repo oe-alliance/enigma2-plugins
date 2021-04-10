@@ -21,7 +21,7 @@ def _(txt):
 language.addCallback(localeInit())
 
 def bin2long(s):
-	return reduce(lambda x,y:(x << 8L) + y, map(ord, s))
+	return reduce(lambda x, y: (x << 8L) + y, map(ord, s))
 
 def long2bin(l):
 	res = ""

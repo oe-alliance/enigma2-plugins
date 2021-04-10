@@ -24,7 +24,7 @@ def autostart(reason, **kwargs):
 		root = File(eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/WebBouquetEditor/web-data"))
 		root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True))
 		root.putChild('tmp', File('/tmp'))
-		root.putChild("uploadfile",WebUploadResource(session))
+		root.putChild("uploadfile", WebUploadResource(session))
 		addExternalChild(("bouqueteditor", root, "BouquetEditor", 1, True))
 
 def Plugins(**kwargs):

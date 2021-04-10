@@ -177,7 +177,7 @@ class OFDB(Screen):
 		'(?P<g_original>Originaltitel):[\s\S]*?class=\"Daten\">(?P<original>.*?)</td>'
 		'(?:.*?(?P<g_country>Herstellungsland):[\s\S]*?class="Daten">(?P<country>.*?)(?:\.\.\.|</td>))*'
 		'(?:.*?(?P<g_year>Erscheinungsjahr):[\s\S]*?class="Daten">(?P<year>.*?)</td>)*'
-		'(?:.*?(?P<g_director>Regie):[\s\S]*?class="Daten">(?P<director>.*?)(?:\.\.\.|</td>))*'		, re.DOTALL)
+		'(?:.*?(?P<g_director>Regie):[\s\S]*?class="Daten">(?P<director>.*?)(?:\.\.\.|</td>))*', re.DOTALL)
 
 	def resetLabels(self):
 		self["detailslabel"].setText("")
@@ -235,7 +235,7 @@ class OFDB(Screen):
 			localfile = "/tmp/ofdbquery2.html"
 			fetchurl = "http://www.ofdb.de/film/" + link
 			print "[OFDb] downloading query " + fetchurl + " to " + localfile
-			downloadPage(fetchurl,localfile).addCallback(self.OFDBquery2).addErrback(self.fetchFailed)
+			downloadPage(fetchurl, localfile).addCallback(self.OFDBquery2).addErrback(self.fetchFailed)
 			self["menu"].hide()
 			self.resetLabels()
 			self.Page = 1
@@ -306,19 +306,19 @@ class OFDB(Screen):
 			try:
 				self.eventName = urllib.quote(self.eventName)
 			except:
-				self.eventName = urllib.quote(self.eventName.decode('utf8').encode('ascii','ignore'))
+				self.eventName = urllib.quote(self.eventName.decode('utf8').encode('ascii', 'ignore'))
 			localfile = "/tmp/ofdbquery.html"
 			fetchurl = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=DTitel&SText=" + self.eventName
 			print "[OFDb] Downloading Query " + fetchurl + " to " + localfile
-			downloadPage(fetchurl,localfile).addCallback(self.OFDBquery).addErrback(self.fetchFailed)
+			downloadPage(fetchurl, localfile).addCallback(self.OFDBquery).addErrback(self.fetchFailed)
 		else:
 			self["statusbar"].setText(_("Could't get Eventname"))
 
-	def fetchFailed(self,string):
+	def fetchFailed(self, string):
 		print "[OFDb] fetch failed " + string
 		self["statusbar"].setText(_("OFDb Download failed"))
 
-	def html2utf8(self,in_html):
+	def html2utf8(self, in_html):
 		htmlentitynumbermask = re.compile('(&#(\d{1,5}?);)')
 		htmlentitynamemask = re.compile('(&(\D{1,5}?);)')
 
@@ -341,7 +341,7 @@ class OFDB(Screen):
 
 		self.inhtml = in_html
 
-	def OFDBquery(self,string):
+	def OFDBquery(self, string):
 		print "[OFDBquery]"
 		self["statusbar"].setText(_("OFDb Download completed"))
 
@@ -355,7 +355,7 @@ class OFDB(Screen):
 			if re.search("<title>OFDb - Suchergebnis</title>", self.inhtml):
 				searchresultmask = re.compile("<br>(\d{1,3}\.) <a href=\"film/(.*?)\"(?:.*?)\)\">(.*?)</a>", re.DOTALL)
 				searchresults = searchresultmask.finditer(self.inhtml)
-				self.resultlist = [(self.htmltags.sub('',x.group(3)), x.group(2)) for x in searchresults]
+				self.resultlist = [(self.htmltags.sub('', x.group(3)), x.group(2)) for x in searchresults]
 				self["menu"].l.setList(self.resultlist)
 				if len(self.resultlist) == 1:
 					self.Page = 0
@@ -370,7 +370,7 @@ class OFDB(Screen):
 			else:
 				self["detailslabel"].setText(_("OFDb query failed!"))
 
-	def OFDBquery2(self,string):
+	def OFDBquery2(self, string):
 		self["statusbar"].setText(_("OFDb Re-Download completed"))
 		self.html2utf8(open("/tmp/ofdbquery2.html", "r").read())
 		self.generalinfos = self.generalinfomask.search(self.inhtml)
@@ -403,7 +403,7 @@ class OFDB(Screen):
 
 			for category in ("director", "year", "country", "original"):
 				if self.generalinfos.group('g_' + category):
-					Detailstext += "\n" + self.generalinfos.group('g_' + category) + ": " + self.htmltags.sub('', self.generalinfos.group(category).replace("<br>",' '))
+					Detailstext += "\n" + self.generalinfos.group('g_' + category) + ": " + self.htmltags.sub('', self.generalinfos.group(category).replace("<br>", ' '))
 
 			self["detailslabel"].setText(Detailstext)
 
@@ -415,7 +415,7 @@ class OFDB(Screen):
 			Ratingtext = _("no user rating yet")
 			if rating:
 				Ratingtext = rating.group("g_rating") + rating.group("rating") + " / 10"
-				self.ratingstars = int(10 * round(float(rating.group("rating")),1))
+				self.ratingstars = int(10 * round(float(rating.group("rating")), 1))
 				self["stars"].show()
 				self["stars"].setValue(self.ratingstars)
 				self["starsbg"].show()
@@ -443,7 +443,7 @@ class OFDB(Screen):
 				self["statusbar"].setText(_("Downloading Movie Poster: %s...") % (posterurl))
 				localfile = "/tmp/poster.jpg"
 				print "[OFDb] downloading poster " + posterurl + " to " + localfile
-				downloadPage(posterurl,localfile).addCallback(self.OFDBPoster).addErrback(self.fetchFailed)
+				downloadPage(posterurl, localfile).addCallback(self.OFDBPoster).addErrback(self.fetchFailed)
 			else:
 				print "no jpg poster!"
 				self.OFDBPoster(noPoster=True)

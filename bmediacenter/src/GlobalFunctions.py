@@ -60,42 +60,42 @@ class Showiframe():
 		call_function(self.showSinglePic, (pic, ))
 	def finishStillPicture(self):
 		call_function(self.finishShowSinglePic, ())
-def shortname(movie,showing=None):
+def shortname(movie, showing=None):
 	movielist = movie.split('/')
 	for n in movielist:
 		if n is not "":		
 			movie = n
 	movie = movie.upper()
 	movieback = movie
-	movie = re.sub("\W720P(.*[^.]+).","",movie)
-	movie = re.sub("\W1080I(.*[^.]+).","",movie)
-	movie = re.sub("\W1080P(.*[^.]+).","",movie)
-	movie = re.sub("\W[(].*?[)](.*[^.]+).","",movie)
-	movie = re.sub("\W[[].*?[]](.*[^.]+).","",movie)
-	movie = re.sub("\W[0-9]{4}","",movie)
+	movie = re.sub("\W720P(.*[^.]+).", "", movie)
+	movie = re.sub("\W1080I(.*[^.]+).", "", movie)
+	movie = re.sub("\W1080P(.*[^.]+).", "", movie)
+	movie = re.sub("\W[(].*?[)](.*[^.]+).", "", movie)
+	movie = re.sub("\W[[].*?[]](.*[^.]+).", "", movie)
+	movie = re.sub("\W[0-9]{4}", "", movie)
 	if not showing:
-		movie = re.sub("\WDVDRIP(.*[^.]+).","",movie)
-		movie = re.sub("\WAC3D(.*[^.]+).","",movie)	
-		movie = re.sub("\WAC3(.*[^.]+).","",movie)
-		movie = re.sub("\WX264(.*[^.]+).","",movie)
-		movie = re.sub("\WXVID(.*[^.]+).","",movie)
-		movie = re.sub("\WBLURAY(.*[^.]+).","",movie)
-		movie = re.sub("\WGERMAN(.*[^.]+).","",movie)
-		movie = re.sub("\WCD[0-9]{2}","",movie)
-		movie = re.sub("\WCD[0-9]","",movie)
-		movie = re.sub("\WDVD[0-9]{2}","",movie)
-		movie = re.sub("\WDVD[0-9]","",movie)
-		movie = re.sub("\WDISC[0-9]{2}","",movie)
-		movie = re.sub("\WDISC[0-9]","",movie)
-		movie = re.sub("\W[0-9]{2}DISC","",movie)
-		movie = re.sub("\W[0-9]DISC","",movie)
+		movie = re.sub("\WDVDRIP(.*[^.]+).", "", movie)
+		movie = re.sub("\WAC3D(.*[^.]+).", "", movie)	
+		movie = re.sub("\WAC3(.*[^.]+).", "", movie)
+		movie = re.sub("\WX264(.*[^.]+).", "", movie)
+		movie = re.sub("\WXVID(.*[^.]+).", "", movie)
+		movie = re.sub("\WBLURAY(.*[^.]+).", "", movie)
+		movie = re.sub("\WGERMAN(.*[^.]+).", "", movie)
+		movie = re.sub("\WCD[0-9]{2}", "", movie)
+		movie = re.sub("\WCD[0-9]", "", movie)
+		movie = re.sub("\WDVD[0-9]{2}", "", movie)
+		movie = re.sub("\WDVD[0-9]", "", movie)
+		movie = re.sub("\WDISC[0-9]{2}", "", movie)
+		movie = re.sub("\WDISC[0-9]", "", movie)
+		movie = re.sub("\W[0-9]{2}DISC", "", movie)
+		movie = re.sub("\W[0-9]DISC", "", movie)
 #		movie = re.sub("\WS[0-9]{2}","",movie)
 #		movie = re.sub("\WE[0-9]{2}","",movie)
-		movie = re.sub("\WSEASON[0-9]{2}","",movie)
-		movie = re.sub("\WSEASON[0-9]","",movie)
+		movie = re.sub("\WSEASON[0-9]{2}", "", movie)
+		movie = re.sub("\WSEASON[0-9]", "", movie)
 
-	movie = re.sub("[0-9]{8} ","",movie)
-	movie = re.sub(" -","-",movie)
+	movie = re.sub("[0-9]{8} ", "", movie)
+	movie = re.sub(" -", "-", movie)
 	if len(movie) != 0:
 		if movie[0] == '-':
 			moviesplit = movie.split('-')[2:]

@@ -6,7 +6,7 @@ from Components.Sources.Sensor import SensorSource
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Progress import Progress
 from Components.ConfigList import ConfigListScreen
-from Components.Pixmap import Pixmap,MultiPixmap
+from Components.Pixmap import Pixmap, MultiPixmap
 from Components.Label import MultiColorLabel
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigBoolean, ConfigOnOff, ConfigInteger, ConfigSlider, ConfigText, ConfigSelection, ConfigSelectionNumber, ConfigNothing, ConfigFloat, ConfigText
 from Screens.Screen import Screen
@@ -97,10 +97,10 @@ class EIBObject(object):
 				choiceslist.append(choice)
 			self.config_element = ConfigSelection(choices=choiceslist)
 		elif self.object_type == EIB_DIMMER:
-			self.config_element = ConfigSelectionNumber(0,255,1)
+			self.config_element = ConfigSelectionNumber(0, 255, 1)
 			#self.config_element = ConfigSlider(increment = 10, limits=(0,255))
 		elif self.object_type == EIB_THERMO:
-			self.config_element = ConfigFloat(default=[0,0],limits=[(-31,+31),(0,99)])
+			self.config_element = ConfigFloat(default=[0, 0], limits=[(-31, +31), (0, 99)])
 		elif self.object_type == EIB_GOTO:
 			self.config_element = ConfigGoto()
 		elif self.object_type == EIB_TEXT:
@@ -121,14 +121,14 @@ class EIBObject(object):
 			if self.object_type == EIB_THERMO:
 				return str(self.value + "°C")
 			elif self.object_type == EIB_TEXT:
-				return str(self.textformat.replace("$1",str(self.value)))
+				return str(self.textformat.replace("$1", str(self.value)))
 			else:
 				return str(self.value)
 
-	def getPos(self, offset=[0,0]):
+	def getPos(self, offset=[0, 0]):
 		x = self.position[0] - offset[0]
 		y = self.position[1] - offset[1]
-		return "%d,%d" % (x,y)
+		return "%d,%d" % (x, y)
 
 	def setValue(self, val):
 		if self.config_element:
@@ -143,7 +143,7 @@ class EIBObject(object):
 						val = val.split('.')
 						if len(val) == 1:
 							val.append(0)
-						self.config_element.setValue([int(val[0]),int(val[1])])
+						self.config_element.setValue([int(val[0]), int(val[1])])
 					elif self.object_type in (EIB_TEXT, EIB_MULTISWITCH):
 						self.config_element.setValue(str(val))
 					else:
@@ -306,15 +306,15 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 
 			elif EIB_object.object_type in (EIB_SWITCH, EIB_MULTISWITCH, EIB_DIMMER):
 				if EIB_object.object_type == EIB_DIMMER or EIB_object.img == "light":
-					pixmaps_sources = ['light_off.png','light_on.png']
+					pixmaps_sources = ['light_off.png', 'light_on.png']
 				elif EIB_object.img == "blinds":
-					pixmaps_sources = ['blinds_up.png','blinds_down.png']
+					pixmaps_sources = ['blinds_up.png', 'blinds_down.png']
 				elif EIB_object.img == "outlet":
-					pixmaps_sources = ['outlet_off.png','outlet_on.png']
+					pixmaps_sources = ['outlet_off.png', 'outlet_on.png']
 				elif EIB_object.img == "fan":
-					pixmaps_sources = ['fan_off.png','fan_on.png']
+					pixmaps_sources = ['fan_off.png', 'fan_on.png']
 				elif EIB_object.img == "pump":
-					pixmaps_sources = ['pump_off.png','pump_on.png']
+					pixmaps_sources = ['pump_off.png', 'pump_on.png']
 				else:
 					pixmaps_sources = list(EIB_object.custom_img)
 
@@ -325,7 +325,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 				self[EIB_object.object_id] = MultiPixmap()
 
 				if EIB_object.object_type == EIB_DIMMER:
-					skin += '\t\t\t<widget source="%s_progress" render="Progress" pixmap="skin_default/progress_small.png" position="%s" size="32,5" backgroundColor="#4f74BB" zPosition="1" />\n' % (EIB_object.object_id, EIB_object.getPos([offset[0],offset[1] - iconsize[1]]))
+					skin += '\t\t\t<widget source="%s_progress" render="Progress" pixmap="skin_default/progress_small.png" position="%s" size="32,5" backgroundColor="#4f74BB" zPosition="1" />\n' % (EIB_object.object_id, EIB_object.getPos([offset[0], offset[1] - iconsize[1]]))
 					self[EIB_object.object_id + "_progress"] = Progress()
 					self[EIB_object.object_id + "_progress"].range = 255
 			
@@ -566,7 +566,7 @@ class EIBox(Screen, ConfigListScreen):
 				return
 				#raise AttributeError
 			file = open(filename, "r")
-			data = file.read().decode("utf-8").replace('&',"&amp;").encode("ascii",'xmlcharrefreplace')
+			data = file.read().decode("utf-8").replace('&', "&amp;").encode("ascii", 'xmlcharrefreplace')
 			file.close()
 			projectfiledom = xml.dom.minidom.parseString(data)
 			for node in projectfiledom.childNodes[0].childNodes:
@@ -677,24 +677,24 @@ class EIBox(Screen, ConfigListScreen):
 						readonly = True
 					i += 1
 				if object_id and object_type and label and x and y:
-					obj = EIBObject(order, object_id, object_type, label, (x,y), img, custom_img, custom_values, textformat, readonly)
+					obj = EIBObject(order, object_id, object_type, label, (x, y), img, custom_img, custom_values, textformat, readonly)
 					self.EIB_zones[zone].append(obj)
 					if config.eib.debug.value:
 						print "[xmlGetZoneNode] new", obj.getInfo()
 					order += 1
 				elif temp_id and setpoint_id and label and x and y:
-					obj = EIBObject(order, temp_id, EIB_THERMO, label + ' ' + _("(actual)"), (x,y), readonly=True)
+					obj = EIBObject(order, temp_id, EIB_THERMO, label + ' ' + _("(actual)"), (x, y), readonly=True)
 					self.EIB_zones[zone].append(obj)
 					if config.eib.debug.value:
 						print "[xmlGetZoneNode] new", obj.getInfo()
 					order += 1
-					obj = EIBObject(order, setpoint_id, EIB_THERMO, label + ' ' + _("(set point)"), (x,y + 16), readonly=readonly)
+					obj = EIBObject(order, setpoint_id, EIB_THERMO, label + ' ' + _("(set point)"), (x, y + 16), readonly=readonly)
 					self.EIB_zones[zone].append(obj)
 					if config.eib.debug.value:
 						print "[xmlGetZoneNode] new", obj.getInfo()
 					order += 1
 				else:
-					print "[xmlGetZoneNode] couldn't parse object", object_id, object_type, label, (x,y), img, custom_img, custom_values, textformat, readonly, temp_id, setpoint_id
+					print "[xmlGetZoneNode] couldn't parse object", object_id, object_type, label, (x, y), img, custom_img, custom_values, textformat, readonly, temp_id, setpoint_id
 
 def main(session, **kwargs):
 	session.open(EIBox)

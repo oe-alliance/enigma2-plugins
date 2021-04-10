@@ -74,7 +74,7 @@ config.plugins.threed.showSBSmenu = ConfigYesNo(default=False)
 config.plugins.threed.showTBmenu = ConfigYesNo(default=False)
 config.plugins.threed.zoffset = ConfigSlider(default=0, increment=1, limits=[0, 10])
 config.plugins.threed.zoffset.addNotifier(setZOffset)
-config.plugins.threed.autothreed = ConfigSelection(default="0", choices=[("0", _("off")),("1", _("on with side by side")),("2", _("on with top/bottom"))])
+config.plugins.threed.autothreed = ConfigSelection(default="0", choices=[("0", _("off")), ("1", _("on with side by side")), ("2", _("on with top/bottom"))])
 
 def switchmode(mode):
 	if mode in modes.keys():

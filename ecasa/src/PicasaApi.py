@@ -84,8 +84,8 @@ class PicasaApi(PictureApi):
 			reactor.callLater(0, d.callback, (fullname, photo))
 		else:
 			downloadPage(url, fullname).addCallbacks(
-				lambda value:d.callback((fullname, photo)),
-				lambda error:d.errback((error, photo)))
+				lambda value: d.callback((fullname, photo)),
+				lambda error: d.errback((error, photo)))
 		return d
 
 	def copyPhoto(self, photo, target, recursive=True):
@@ -118,7 +118,7 @@ class PicasaApi(PictureApi):
 		else:
 			print("[PicasaApi] Photo does not exist in cache, trying to download with deferred copy operation")
 			self.downloadPhoto(photo).addCallback(
-				lambda value:self.copyPhoto(photo, target, recursive=False)
+				lambda value: self.copyPhoto(photo, target, recursive=False)
 			)
 			return False
 

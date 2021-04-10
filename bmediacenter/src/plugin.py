@@ -138,7 +138,7 @@ class DMC_MainMenu(Screen):
 				if dvdplayer:
 					self.session.open(DVDPlayer)
 				else:
-					self.session.open(MessageBox,"Error: DVD-Player Plugin not installed ...", MessageBox.TYPE_INFO)
+					self.session.open(MessageBox, "Error: DVD-Player Plugin not installed ...", MessageBox.TYPE_INFO)
 			elif selection[1] == "MC_PictureViewer":
 				from MC_PictureViewer import MC_PictureViewer
 				self.session.open(MC_PictureViewer)
@@ -153,7 +153,7 @@ class DMC_MainMenu(Screen):
 					from MC_VLCPlayer import MC_VLCServerlist
 					self.session.open(MC_VLCServerlist)
 				else:
-					self.session.open(MessageBox,"Error: VLC-Player Plugin not installed ...", MessageBox.TYPE_INFO)
+					self.session.open(MessageBox, "Error: VLC-Player Plugin not installed ...", MessageBox.TYPE_INFO)
 			elif selection[1] == "MC_WeatherInfo":
 				from MC_WeatherInfo import MC_WeatherInfo
 				self.session.open(MC_WeatherInfo)
@@ -161,10 +161,10 @@ class DMC_MainMenu(Screen):
 				from MC_Settings import MC_Settings
 				self.session.open(MC_Settings)
 			else:
-				self.session.open(MessageBox,("Error: Could not find plugin %s\ncoming soon ... :)") % (selection[1]), MessageBox.TYPE_INFO)
+				self.session.open(MessageBox, ("Error: Could not find plugin %s\ncoming soon ... :)") % (selection[1]), MessageBox.TYPE_INFO)
 	def error(self, error):
 		from Screens.MessageBox import MessageBox
-		self.session.open(MessageBox,("UNEXPECTED ERROR:\n%s") % (error), MessageBox.TYPE_INFO)
+		self.session.open(MessageBox, ("UNEXPECTED ERROR:\n%s") % (error), MessageBox.TYPE_INFO)
 	def Exit(self):
 #		self.session.nav.stopService()
 		# Restore OSD Transparency Settings

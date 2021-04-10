@@ -10,7 +10,7 @@ from MountManager import AutoMountManager
 plugin_path = ""
 
 def NetworkBrowserMain(session, iface=None, **kwargs):
-	session.open(NetworkBrowser,iface, plugin_path)
+	session.open(NetworkBrowser, iface, plugin_path)
 
 def MountManagerMain(session, iface=None, **kwargs):
 	session.open(AutoMountManager, iface, plugin_path)

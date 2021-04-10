@@ -104,9 +104,9 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		
 		# Create temporary identifier config elements
 		identifiers = self.seriesPlugin.modules
-		identifiers_elapsed = [k for k,v in identifiers.items() if v.knowsElapsed()]
-		identifiers_today = [k for k,v in identifiers.items() if v.knowsToday()]
-		identifiers_future = [k for k,v in identifiers.items() if v.knowsFuture()]
+		identifiers_elapsed = [k for k, v in identifiers.items() if v.knowsElapsed()]
+		identifiers_today = [k for k, v in identifiers.items() if v.knowsToday()]
+		identifiers_future = [k for k, v in identifiers.items() if v.knowsFuture()]
 		if config.plugins.seriesplugin.identifier_elapsed.value in identifiers_elapsed:
 			self.cfg_identifier_elapsed = NoSave(ConfigSelection(choices=identifiers_elapsed, default=config.plugins.seriesplugin.identifier_elapsed.value))
 		else:

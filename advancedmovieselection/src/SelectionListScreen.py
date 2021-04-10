@@ -51,7 +51,7 @@ class SelectionListScreen(Screen, HelpableScreen, SkinResolutionHelper):
 
         self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
         {
-            "ok": (self["list"].toggleSelection,_("Toggle selected")),
+            "ok": (self["list"].toggleSelection, _("Toggle selected")),
             "cancel": (self.cancel, _("Cancel")),
         })
         self["ColorActions"] = HelpableActionMap(self, "ColorActions",

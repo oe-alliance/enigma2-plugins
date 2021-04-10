@@ -20,7 +20,7 @@ config.plugins.KiddyTimer.monitorStartTime = ConfigClock(default=KTglob.FOUROCLO
 config.plugins.KiddyTimer.monitorEndTime = ConfigClock(default=KTglob.EIGHTOCLOCKNOON)
 config.plugins.KiddyTimer.activationDialogTimeout = ConfigInteger(default=10)
 config.plugins.KiddyTimer.pin = ConfigPIN(default=1111, censor="*")
-config.plugins.KiddyTimer.remainingTime = ConfigInteger(default=int(KTglob.ONEHOUR), limits=(0,86400))
+config.plugins.KiddyTimer.remainingTime = ConfigInteger(default=int(KTglob.ONEHOUR), limits=(0, 86400))
 
 config.plugins.KiddyTimer.dayTimes = ConfigSubList()
 for i in range(0, 7):
@@ -45,7 +45,7 @@ def autostart(reason, **kwargs):
 def extensionMenu(session, **kwargs):
     kiddyTimer.showExtensionsMenu()
         
-def Plugins(path,**kwargs):
+def Plugins(path, **kwargs):
     # Assign global variable plugin_path
     KTglob.plugin_path = path
     return [

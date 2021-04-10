@@ -27,8 +27,8 @@ class EmailConfigOptions(ConfigListScreen, Screen):
 					width, height - 50,  # config
 					buttonsGap, height - 45,
 					2 * buttonsGap + 140, height - 45,
-					buttonsGap, height - 45, scaleV(22,18),
-					2 * buttonsGap + 140, height - 45, scaleV(22,18),
+					buttonsGap, height - 45, scaleV(22, 18),
+					2 * buttonsGap + 140, height - 45, scaleV(22, 18),
 					)
 
 	def __init__(self, session, versionString):
@@ -89,8 +89,8 @@ class EmailConfigAccount(ConfigListScreen, Screen):
 					width, height - 50,  # config
 					buttonsGap, height - 45,
 					2 * buttonsGap + 140, height - 45,
-					buttonsGap, height - 45, scaleV(22,18),
-					2 * buttonsGap + 140, height - 45, scaleV(22,18)
+					buttonsGap, height - 45, scaleV(22, 18),
+					2 * buttonsGap + 140, height - 45, scaleV(22, 18)
 					)
 
 	def __init__(self, session, params=None):

@@ -70,7 +70,7 @@ class UserManager(Screen):
 						hostpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png"))
 					else:
 						hostpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
-					self.list.append((file[:-6],'edit',file,hostpng))
+					self.list.append((file[:-6], 'edit', file, hostpng))
 		self["config"].setList(self.list)
 
 	def exit(self):
@@ -82,7 +82,7 @@ class UserManager(Screen):
 			returnValue = cur[1]
 			hostinfo = cur[0]
 			if returnValue is "edit":
-				self.session.open(UserDialog, self.skin_path,hostinfo)
+				self.session.open(UserDialog, self.skin_path, hostinfo)
 
 	def delete(self, returnValue=None):
 		cur = self["config"].getCurrent()

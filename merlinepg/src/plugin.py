@@ -186,7 +186,7 @@ class MerlinEPGList(EPGList):
 		return (bt[3], bt[4])
 
 	def foudPrimetime(self):
-		for OneLine in range(0,self.evCnt):
+		for OneLine in range(0, self.evCnt):
 			evBgTime, evBgMin = self.getBgTime()
 			if evBgTime is not None:
 				if (evBgTime == config.plugins.MerlinEPG.Primetime.value) and (evBgMin >= config.plugins.MerlinEPG.PTlow.value) and (evBgMin < config.plugins.MerlinEPG.PThi.value):
@@ -330,7 +330,7 @@ class Merlin_PGII(Screen):
 						"showMovies": self.editCurTimer,
 						"showTv": self.fullEPGlist,
 						"showRadio": self.runEpgSeartch
-						},-2)
+						}, -2)
 		self.onLayoutFinish.append(self.onLayoutReady)
 
 	def getChannels(self):
@@ -456,7 +456,7 @@ class Merlin_PGII(Screen):
 		self.updateInfos()
 
 	def displayActiveEPG(self):
-		for xA in range(1,self.Fields):
+		for xA in range(1, self.Fields):
 			if xA == self.ActiveEPG:
 				self["Active" + str(xA)].show()
 			else:
@@ -504,22 +504,22 @@ class Merlin_PGII(Screen):
 
 	def AllUp(self):
 		if config.plugins.MerlinEPG.PageUDonBouquets.value:
-			for xU in range(1,self.Fields):
+			for xU in range(1, self.Fields):
 				self["epg_list" + str(xU)].instance.moveSelection(self["epg_list" + str(xU)].instance.pageUp)
 		else:
-			for xU in range(1,self.Fields):
+			for xU in range(1, self.Fields):
 				self["epg_list" + str(xU)].moveUp()
 
 	def AllDown(self):
 		if config.plugins.MerlinEPG.PageUDonBouquets.value:
-			for xU in range(1,self.Fields):
+			for xU in range(1, self.Fields):
 				self["epg_list" + str(xU)].instance.moveSelection(self["epg_list" + str(xU)].instance.pageDown)
 		else:
-			for xD in range(1,self.Fields):
+			for xD in range(1, self.Fields):
 				self["epg_list" + str(xD)].moveDown()
 
 	def go2now(self):
-		for xD in range(1,self.Fields):
+		for xD in range(1, self.Fields):
 			self["epg_list" + str(xD)].instance.moveSelection(self["epg_list" + str(xD)].instance.moveTop)
 
 	def go2first(self):
@@ -547,11 +547,11 @@ class Merlin_PGII(Screen):
 
 	def showEventInfo(self):
 		if not IMDbPresent:
-			self.showConfirmedInfo([None,"Ei"])
+			self.showConfirmedInfo([None, "Ei"])
 		else:
-			self.session.openWithCallback(self.showConfirmedInfo, ChoiceBox, title=_("Select Info type..."), list=[(_("Standard EPG info"), "Ei"),(_("IMDb info"), "Ii")])
+			self.session.openWithCallback(self.showConfirmedInfo, ChoiceBox, title=_("Select Info type..."), list=[(_("Standard EPG info"), "Ei"), (_("IMDb info"), "Ii")])
 
-	def showConfirmedInfo(self,answer):
+	def showConfirmedInfo(self, answer):
 		curEV = self["epg_list" + str(self.ActiveEPG)].getCurrent()
 		event = curEV[0]
 		service = curEV[1]
@@ -566,9 +566,9 @@ class Merlin_PGII(Screen):
 
 	def timerAdd(self):
 		if not AutoTimerPresent:
-			self.AddConfirmedTimer([None,"NT"])
+			self.AddConfirmedTimer([None, "NT"])
 		else:
-			self.session.openWithCallback(self.AddConfirmedTimer, ChoiceBox, title=_("Select timer type..."), list=[(_("Standard timer"), "NT"),(_("AutoTimer"), "AT"),(_("View AutoTimers"), "ATV")])
+			self.session.openWithCallback(self.AddConfirmedTimer, ChoiceBox, title=_("Select timer type..."), list=[(_("Standard timer"), "NT"), (_("AutoTimer"), "AT"), (_("View AutoTimers"), "ATV")])
 
 	def AddConfirmedTimer(self, answer):
 		cur = self["epg_list" + str(self.ActiveEPG)].getCurrent()
@@ -580,7 +580,7 @@ class Merlin_PGII(Screen):
 		refstr = serviceref.ref.toString()
 		answer = answer and answer[1]
 		if answer == "AT":
-			addAutotimerFromEvent(self.session,evt=event,service=serviceref)
+			addAutotimerFromEvent(self.session, evt=event, service=serviceref)
 		elif answer == "NT":
 			for timer in self.session.nav.RecordTimer.timer_list:
 				if timer.eit == eventid and timer.service_ref.ref.toString() == refstr:
@@ -619,7 +619,7 @@ class Merlin_PGII(Screen):
 		CurrIdx = 0
 		CurrBqt = self.myBqts[self.getActivePrg()]
 		self.ActiveEPG = 1
-		for CurrIdx in range(self.getActivePrg(),self.chCount):
+		for CurrIdx in range(self.getActivePrg(), self.chCount):
 			NewBqt = self.myBqts[CurrIdx]
 			if NewBqt != CurrBqt:
 				break
@@ -630,7 +630,7 @@ class Merlin_PGII(Screen):
 		CurrIdx = 0
 		CurrBqt = self.myBqts[self.getActivePrg()]
 		self.ActiveEPG = 1
-		for CurrIdx in range(self.getActivePrg(),-1,-1):
+		for CurrIdx in range(self.getActivePrg(), -1, -1):
 			NewBqt = self.myBqts[CurrIdx]
 			if NewBqt != CurrBqt:
 				break
@@ -642,7 +642,7 @@ class Merlin_PGII(Screen):
 			self.AutoPrime.stop()
 		for xFL in range(1, self.Fields):
 			self["epg_list" + str(xFL)].instance.moveSelection(self["epg_list" + str(xFL)].instance.moveTop)
-			for i in range(0,(self.Fields * 3)):
+			for i in range(0, (self.Fields * 3)):
 				self["epg_list" + str(xFL)].foudPrimetime()
 
 	def myhelp(self):
@@ -652,7 +652,7 @@ class Merlin_PGII(Screen):
 		if config.plugins.MerlinEPG.ZapOnOK.value:
 			self.ZapTo()
 		else:
-			self.showConfirmedInfo([None,"Ei"])
+			self.showConfirmedInfo([None, "Ei"])
 
 	def editCurTimer(self):
 		cur = self["epg_list" + str(self.ActiveEPG)].getCurrent()
@@ -777,7 +777,7 @@ class Merlin_PGd(Screen):
 									"showMovies": self.editCurTimer,
 									"showTv": self.fullEPGlist,
 									"showRadio": self.runEpgSeartch
-									},-2)
+									}, -2)
 		self.onLayoutFinish.append(self.onLayoutReady)
 
 	def onLayoutReady(self):
@@ -886,9 +886,9 @@ class Merlin_PGd(Screen):
 
 	def timerAdd(self):
 		if not AutoTimerPresent:
-			self.AddConfirmedTimer([None,"NT"])
+			self.AddConfirmedTimer([None, "NT"])
 		else:
-			self.session.openWithCallback(self.AddConfirmedTimer, ChoiceBox, title=_("Select timer type..."), list=[(_("Standard timer"), "NT"),(_("AutoTimer"), "AT"),(_("View AutoTimers"), "ATV")])
+			self.session.openWithCallback(self.AddConfirmedTimer, ChoiceBox, title=_("Select timer type..."), list=[(_("Standard timer"), "NT"), (_("AutoTimer"), "AT"), (_("View AutoTimers"), "ATV")])
 
 	def AddConfirmedTimer(self, answer):
 		cur = self["epg_list"].getCurrent()
@@ -900,7 +900,7 @@ class Merlin_PGd(Screen):
 		refstr = serviceref.ref.toString()
 		answer = answer and answer[1]
 		if answer == "AT":
-			addAutotimerFromEvent(self.session,evt=event,service=serviceref)
+			addAutotimerFromEvent(self.session, evt=event, service=serviceref)
 		elif answer == "NT":
 			for timer in self.session.nav.RecordTimer.timer_list:
 				if timer.eit == eventid and timer.service_ref.ref.toString() == refstr:
@@ -998,7 +998,7 @@ if epgSpresent:
 			res = [
 				None,
 				(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_LEFT, _(days[t[6]])),
-				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width() - 20, r1.height(), 0, RT_HALIGN_LEFT, "%02d.%02d, %02d:%02d" % (t[2],t[1],t[3],t[4]))
+				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width() - 20, r1.height(), 0, RT_HALIGN_LEFT, "%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4]))
 			]
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left(), r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, EventName + " <" + serviceref.getServiceName()))
 			return res

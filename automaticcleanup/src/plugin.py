@@ -88,15 +88,15 @@ DEBUG = False # If set True, plugin won't remove any file physically, instead pr
 
 config.plugins.AutomaticCleanup = ConfigSubsection()
 config.plugins.AutomaticCleanup.deleteCrashlogsOlderThan = ConfigSelection(default="-1",
-	choices=[("-1",_("void"))])
+	choices=[("-1", _("void"))])
 config.plugins.AutomaticCleanup.keepCrashlogs = ConfigSelection(default="-1",
-	choices=[("-1",_("all"))])
+	choices=[("-1", _("all"))])
 config.plugins.AutomaticCleanup.deleteSettingsOlderThan = ConfigSelection(default="-1",
-	choices=[("-1",_("cleanup disabled")),("183",_("older than 6 months")),("91",_("older than 3 months")),("28",_("older than 4 weeks")),("14",_("older than 2 weeks")),("7",_("older than 1 week"))])
+	choices=[("-1", _("cleanup disabled")), ("183", _("older than 6 months")), ("91", _("older than 3 months")), ("28", _("older than 4 weeks")), ("14", _("older than 2 weeks")), ("7", _("older than 1 week"))])
 config.plugins.AutomaticCleanup.keepSettings = ConfigSelection(default="-1",
-	choices=[("-1",_("all")), ("10",_("last 10")),("5",_("last 5")),("3",_("last 3")),("2",_("last 2")),("1",_("only last one"))])
+	choices=[("-1", _("all")), ("10", _("last 10")), ("5", _("last 5")), ("3", _("last 3")), ("2", _("last 2")), ("1", _("only last one"))])
 config.plugins.AutomaticCleanup.deleteTimersOlderThan = ConfigSelection(default="-1",
-	choices=[("-1",_("cleanup disabled")),("42",_("older than 6 weeks")),("28",_("older than 4 weeks")),("14",_("older than 2 weeks")),("7",_("older than 1 week")),("3",_("older than 3 days")),("1",_("older than 1 day")),("0",_("immediately after recording"))])
+	choices=[("-1", _("cleanup disabled")), ("42", _("older than 6 weeks")), ("28", _("older than 4 weeks")), ("14", _("older than 2 weeks")), ("7", _("older than 1 week")), ("3", _("older than 3 days")), ("1", _("older than 1 day")), ("0", _("immediately after recording"))])
 config.plugins.AutomaticCleanup.deleteOrphanedMovieFiles = ConfigYesNo(default=False)
 
 

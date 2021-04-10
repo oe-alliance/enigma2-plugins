@@ -11,7 +11,7 @@ class UploadTextResource(resource.Resource):
 
 	def render_POST(self, req):
 		uploaddir = self.default_uploaddir
-		print "[UploadTextResource] req.args ",req.args
+		print "[UploadTextResource] req.args ", req.args
 		if req.args['path'][0]:
 			if os_path.isdir(req.args['path'][0]):
 				uploaddir = req.args['path'][0]
@@ -30,13 +30,13 @@ class UploadTextResource(resource.Resource):
 				req.setHeader('Content-type', 'text/html')
 				return "illegal upload directory: " + req.args['path'][0]
 
-			data = req.args['text'][0].replace('\r\n','\n')
+			data = req.args['text'][0].replace('\r\n', '\n')
 		if not data:
 			req.setResponseCode(http.OK)
 			req.setHeader('Content-type', 'text/html')
 			return "filesize was 0, not uploaded"
 		else:
-			print "[UploadTextResource] text:",data
+			print "[UploadTextResource] text:", data
 
 		filename = req.args['filename'][0]
 

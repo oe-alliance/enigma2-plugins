@@ -19,9 +19,9 @@ class WAPfunctions(Source):
 	TAGLIST = 6
 	DELETEOLD = 7
 
-	lut = {	"Name":0,
-			"Value":1,
-			"Selected":2
+	lut = {	"Name": 0,
+			"Value": 1,
+			"Selected": 2
 	}
 
 	def __init__(self, session, func=LISTTIME):
@@ -134,7 +134,7 @@ class WAPfunctions(Source):
 		repeated = param or 0
 		repeated = int(repeated)
 
-		self.lut = {"Name":0			, "Value":1			, "Description":2			, "Selected":3
+		self.lut = {"Name": 0			, "Value": 1			, "Description": 2			, "Selected": 3
 		}
 
 		mo = ["mo", 1, "Mo "]#"Monday"]

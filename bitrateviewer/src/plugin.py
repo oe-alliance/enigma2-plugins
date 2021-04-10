@@ -77,20 +77,20 @@ class BitrateCalculator(Screen):
 			self.audioBitrate = eBitrateCalculator(apid, dvbnamespace, tsid, onid, 1000, 64 * 1024)
 			self.audioBitrate.callback.append(self.getAudioBitrateData)
 
-	def getVideoBitrateData(self,value, status): # value = rate in kbit/s, status ( 1  = ok || 0 = nok (zapped?))
+	def getVideoBitrateData(self, value, status): # value = rate in kbit/s, status ( 1  = ok || 0 = nok (zapped?))
 		if status:
 			self["video"].text = "%d kbit/s" % value
 		else:
 			self.videoBitrate = None
 
-	def getAudioBitrateData(self,value, status): 
+	def getAudioBitrateData(self, value, status): 
 		if status:
 			self["audio"].text = "%d kbit/s" % value
 		else:
 			self.audioBitrate = None
 
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	session.open(BitrateCalculator)
 
 def Plugins(**kwargs):

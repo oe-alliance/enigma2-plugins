@@ -63,14 +63,14 @@ class XML_to_Dict():
 		if unlink:
 			node.unlink()
 
-class Napisy24_pl(XML_to_Dict,zip_extractor):    
-    def __init__(self,moviePath, movieNameString=None):
+class Napisy24_pl(XML_to_Dict, zip_extractor):    
+    def __init__(self, moviePath, movieNameString=None):
 	if movieNameString == None:
-	    self.MovieName = ((moviePath.rsplit("/",1))[-1]).rsplit(".",1)[0]
+	    self.MovieName = ((moviePath.rsplit("/", 1))[-1]).rsplit(".", 1)[0]
 	else:
 	    self.MovieName = (movieNameString)
-        self.MovieDir = (moviePath.rsplit("/",1))[0]
-        self.ZipFilePath = self.MovieDir + '/' + ((moviePath.rsplit("/",1))[-1]).rsplit(".",1)[0] + '.zip'
+        self.MovieDir = (moviePath.rsplit("/", 1))[0]
+        self.ZipFilePath = self.MovieDir + '/' + ((moviePath.rsplit("/", 1))[-1]).rsplit(".", 1)[0] + '.zip'
 	self.subtitle_dict = []
 	self.NAPISY24_url = "napisy24.pl"
     
@@ -84,7 +84,7 @@ class Napisy24_pl(XML_to_Dict,zip_extractor):
 		break
 	    dir_count = dir_count + 1
 	try:	
-	    nfo_file = open(self.MovieDir + "/" + dir_list[dir_count],"r")
+	    nfo_file = open(self.MovieDir + "/" + dir_list[dir_count], "r")
 	    buffor = nfo_file.read()
 	    nfo_file.close
 	    #IMDB line in nfo: iMDB: http://www.imdb.com/title/tt1219289/	    
@@ -108,7 +108,7 @@ class Napisy24_pl(XML_to_Dict,zip_extractor):
 	    print "blad IMBN"
 	    return False
     
-    def __connect_with_server(self,get_operatoin,server_reuest_type):
+    def __connect_with_server(self, get_operatoin, server_reuest_type):
 	"""Function connect with server and downloades avaliable subtitle
 	list or avaliable subtitle zip file	
 	"""
@@ -196,7 +196,7 @@ class Napisy24_pl(XML_to_Dict,zip_extractor):
 	"""Function returns subtitle dictionary which is computed from correct xml string."""
 	try:
 	    self.Correct_MultiRoot_XML()
-	    self.subtitle_dict = sorted(self.xmltodict(self.XML_String)['subtitle'],key=itemgetter('imdb','cd'))
+	    self.subtitle_dict = sorted(self.xmltodict(self.XML_String)['subtitle'], key=itemgetter('imdb', 'cd'))
 	    #self.subtitle_dict = self.xmltodict(self.XML_String)['subtitle']
 	    print "XML subtitle list downloaded and converted to dict"
 	    return True
@@ -205,13 +205,13 @@ class Napisy24_pl(XML_to_Dict,zip_extractor):
 	    return False
 	    
     
-    def return_xml_dict_entry_value(self,dict_entry, dict_entry_position):
+    def return_xml_dict_entry_value(self, dict_entry, dict_entry_position):
 	"""From subtitle dictionary function returns value."""
 	value = self.subtitle_dict[dict_entry][dict_entry_position]
 	return value[0]
 
     def extract_zip_file(self):
-	extractor = zip_extractor(self.ZipFilePath,None,("txt","sub","srt"))
+	extractor = zip_extractor(self.ZipFilePath, None, ("txt", "sub", "srt"))
 	# return false if nothing extracted
 	return extractor.extract_zipped_file()
 	#os.remove(self.ZipFilePath)
@@ -222,7 +222,7 @@ class Napisy24_pl(XML_to_Dict,zip_extractor):
 	self.zip_string if saveing is succesfull."""
 	if self.download_subtitle_zip(dict_entry_to_download) == True:
 	    try:
-		zip_file = open(self.ZipFilePath,"wb")
+		zip_file = open(self.ZipFilePath, "wb")
 		zip_file.write(self.zip_string)
 		zip_file.close		
 		print "Zipfile: %s saved on hdd." % self.ZipFilePath
@@ -235,7 +235,7 @@ class Napisy24_pl(XML_to_Dict,zip_extractor):
     def download_subtitle_zip(self, dict_entry_to_download):
 	"""Napisy 24 GET request for subtitle zip downloading. Data is stored in self.zip_string."""
 	#request_subtitle_list = "http://napisy24.pl/download/%s/" % str(self.return_xml_dict_entry_value(dict_entry_to_download,'id'))
-	request_subtitle_list = "http://napisy.me/download/sr/%s/" % str(self.return_xml_dict_entry_value(dict_entry_to_download,'id'))
+	request_subtitle_list = "http://napisy.me/download/sr/%s/" % str(self.return_xml_dict_entry_value(dict_entry_to_download, 'id'))
 	
 	repeat = 3
 	while repeat > 0:  
@@ -271,14 +271,14 @@ class GuessFileData_from_FileName(SubtitleDatabase.SubtitleDB):
         self.tvshowRegex2 = SubtitleDatabase.tvshowRegex2
         self.movieRegex = SubtitleDatabase.movieRegex
 
-    def return_data_string(self,file_path):
+    def return_data_string(self, file_path):
         file_data = self.guessFileData(file_path)
         if file_data['type'] == 'tvshow':
             return str(file_data['name'] + " " + str(file_data['season']) + "x" + str(file_data['episode']))
         elif file_data['type'] == 'movie' or file_data['type'] == 'unknown':
             return str(file_data['name'])
     
-    def return_movie_data_to_XBMC(self,file_path):
+    def return_movie_data_to_XBMC(self, file_path):
 	fileData = self.guessFileData(file_path)
 	if fileData['type'] == 'tvshow':
             tvShow = fileData['name']
@@ -311,16 +311,16 @@ class CompareMovie_and_Subtite_FileData(GuessFileData_from_FileName):
     def __return_movie_file_list(self, movie_path):
         """Funstion takes movie file path and based on EXTENSIONS from myListy.pl
         returns list of movies in movie file directory"""
-        movie_dir = movie_path.rsplit("/",1)[0]
+        movie_dir = movie_path.rsplit("/", 1)[0]
         movie_file_list = []
         movie_extentionds = self.__movie_file_extensions(self.__file_extentions)
         for x in os.listdir(movie_dir):
-            if x.rsplit(".",1)[-1]in movie_extentionds:
+            if x.rsplit(".", 1)[-1]in movie_extentionds:
                 movie_file_list.append(movie_dir + "/" + x)		
 	#USUNAC URL Z NAPISY24
         return movie_file_list
 
-    def moviePath_and_movieFileData(self,file_path):
+    def moviePath_and_movieFileData(self, file_path):
         self.__file_path = file_path
         """Function returns structure (file_path, {guesseFileData})"""
         movie_file_list = self.__return_movie_file_list(file_path)
@@ -329,7 +329,7 @@ class CompareMovie_and_Subtite_FileData(GuessFileData_from_FileName):
             movie_file_data.append((x, self.guessFileData(x)))
         return movie_file_data
     
-    def subtitlePath_and_subtitleFileData(self,file_path_list):
+    def subtitlePath_and_subtitleFileData(self, file_path_list):
         """Function returns structure (file_path, {guesseFileData})"""
         subtile_file_data = []        
         for x in file_path_list:
@@ -373,7 +373,7 @@ class CompareMovie_and_Subtite_FileData(GuessFileData_from_FileName):
                     if x[1]['year'] == y[1]['year']:
                         wynik = wynik + 0.0049
                 #Cause and effect for subtitle and movie guesseFileData results
-                compare_result.append({"movie":x[0],"subtitle":y[0],"propability": wynik})                       
+                compare_result.append({"movie": x[0], "subtitle": y[0], "propability": wynik})                       
                # print x[0], y[0], wynik
         return compare_result
         #musi sprawdzic czy film jest najbardziej prawdopodobny

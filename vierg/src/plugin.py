@@ -27,7 +27,7 @@ def rand():
 	return random.randint(0, 32767)
 
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	session.open(vierg)
 
 
@@ -272,7 +272,7 @@ class vierg(Screen):
 					self.cPlay(x)
 					return
 
-				k = self.vFall(x,5) # put playerchip over me
+				k = self.vFall(x, 5) # put playerchip over me
 				if k is not -1:
 					if self.testGameOver(1): # fault - this field is ugly
 						tst[x] -= 50
@@ -295,7 +295,7 @@ class vierg(Screen):
 					for k in range(7):
 						if k == x:
 							continue
-						idx2 = self.vFall(k,5)
+						idx2 = self.vFall(k, 5)
 						if idx2 is not -1:
 							if self.testGameOver(1): # great ! - choose it
 								tst[x] += 10
@@ -321,7 +321,7 @@ class vierg(Screen):
 				if i1 == -1:
 					continue
 				for x in range(7):
-					i2 = self.vFall(x,5)
+					i2 = self.vFall(x, 5)
 					if i2 == -1:
 						continue
 					if self.testGameOver(2): # great ! - choose it

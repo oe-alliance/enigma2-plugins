@@ -51,7 +51,7 @@ class AutoTimerList(MenuList):
 		if self.skinAttributes is not None:
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "font":
-					self.l.setFont(0, parseFont(value, ((1,1),(1,1))))
+					self.l.setFont(0, parseFont(value, ((1, 1), (1, 1))))
 				elif attrib == "itemHeight":
 					self.l.setItemHeight(int(value))
 				elif attrib == "colorDisabled":

@@ -171,7 +171,7 @@ def refactorTitle(org_, data):
 		if config.plugins.seriesplugin.pattern_title.value and not config.plugins.seriesplugin.pattern_title.value == "Off" and not config.plugins.seriesplugin.pattern_title.value == "Disabled":
 			data["org"] = org
 			cust_ = config.plugins.seriesplugin.pattern_title.value.strip().format(**data)
-			cust = cust_.replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace('  ',' ')
+			cust = cust_.replace('&amp;', '&').replace('&apos;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&quot;', '"').replace('  ', ' ')
 			log.debug(" refactor title", cust_, cust)
 			return cust
 		else:
@@ -189,7 +189,7 @@ def refactorDescription(org_, data):
 		if config.plugins.seriesplugin.pattern_description.value and not config.plugins.seriesplugin.pattern_description.value == "Off" and not config.plugins.seriesplugin.pattern_description.value == "Disabled":
 			data["org"] = org
 			cust_ = config.plugins.seriesplugin.pattern_description.value.strip().format(**data)
-			cust = cust_.replace("\n", " ").replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace('  ',' ')
+			cust = cust_.replace("\n", " ").replace('&amp;', '&').replace('&apos;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&quot;', '"').replace('  ', ' ')
 			log.debug(" refactor desc", cust_, cust)
 			return cust
 		else:
@@ -203,7 +203,7 @@ def refactorDirectory(org, data):
 		if config.plugins.seriesplugin.pattern_directory.value and not config.plugins.seriesplugin.pattern_directory.value == "Off" and not config.plugins.seriesplugin.pattern_directory.value == "Disabled":
 			data["org"] = org
 			cust_ = config.plugins.seriesplugin.pattern_directory.value.strip().format(**data)
-			cust_ = cust_.replace("\n", "").replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace("  ", " ").replace("//", "/")
+			cust_ = cust_.replace("\n", "").replace('&amp;', '&').replace('&apos;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&quot;', '"').replace("  ", " ").replace("//", "/")
 			dir = CompiledRegexpReplaceDirChars.sub(' ', cust_)
 			log.debug(" refactor dir", org, cust_, dir)
 		if dir and not os.path.exists(dir):

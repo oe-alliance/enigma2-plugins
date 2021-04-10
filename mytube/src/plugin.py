@@ -177,7 +177,7 @@ class downloadTask(Task):
 
 	def run(self, callback):
 		self.callback = callback
-		self.download = downloadWithProgress(self.url,self.local)
+		self.download = downloadWithProgress(self.url, self.local)
 		self.download.addProgress(self.http_progress)
 		self.download.start().addCallback(self.http_finished).addErrback(self.http_failed)
 
@@ -471,7 +471,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			print 'Login-Error: ' + str(e)
 			self.statuslist.append((_("Login failed"), str(e)))
 
-	def setState(self,status=None):
+	def setState(self, status=None):
 		if status:
 			self.currList = "status"
 			self["videoactions"].setEnabled(False)
@@ -536,7 +536,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		if config.plugins.mytube.general.showHelpOnOpen.value is True:
 			if self.currList == "configlist":
 				self.hideSuggestions()
-				self.session.openWithCallback(self.firstRunHelpClosed, MyTubeVideoHelpScreen, self.skin_path,wantedinfo=self.feedtext, wantedtitle=_("MyTubePlayer Help"))
+				self.session.openWithCallback(self.firstRunHelpClosed, MyTubeVideoHelpScreen, self.skin_path, wantedinfo=self.feedtext, wantedtitle=_("MyTubePlayer Help"))
 		else:
 			self.FirstRun = False
 
@@ -580,7 +580,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		answer = answer and answer[1]
 		if answer == "settings":
 			print "settings selected"
-			self.session.openWithCallback(self.ScreenClosed,MyTubeSettingsScreen, self.skin_path)
+			self.session.openWithCallback(self.ScreenClosed, MyTubeSettingsScreen, self.skin_path)
 		elif answer == "related":
 			current = self["feedlist"].getCurrent()[0]
 			self.setState('getFeed')
@@ -608,11 +608,11 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					if myentry:
 						myurl = myentry.getVideoUrl()
 						filename = str(config.plugins.mytube.general.videodir.value) + str(myentry.getTitle()) + '.mp4'
-						job_manager.AddJob(downloadJob(myurl,filename, str(myentry.getTitle())[:30]))
+						job_manager.AddJob(downloadJob(myurl, filename, str(myentry.getTitle())[:30]))
 		elif answer == "downview":
 			self.tasklist = []
 			for job in job_manager.getPendingJobs():
-				self.tasklist.append((job,job.name,job.getStatustext(),int(100 * job.progress / float(job.end)),str(100 * job.progress / float(job.end)) + "%"))
+				self.tasklist.append((job, job.name, job.getStatustext(), int(100 * job.progress / float(job.end)), str(100 * job.progress / float(job.end)) + "%"))
 			self.session.open(MyTubeTasksScreen, self.skin_path, self.tasklist)
 		elif answer == None:
 			self.ScreenClosed()
@@ -736,13 +736,13 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self.close()
 
 	def keyOK(self):
-		print "self.currList im KeyOK",self.currList
+		print "self.currList im KeyOK", self.currList
 		if self.currList == "configlist" or self.currList == "suggestionslist":
 			self["config"].invalidateCurrent()
 			if config.plugins.mytube.search.searchTerm.value != "":
 				self.add2History()
 				searchContext = config.plugins.mytube.search.searchTerm.value
-				print "Search searchcontext",searchContext
+				print "Search searchcontext", searchContext
 				if isinstance(self["config"].getCurrent()[1], ConfigTextWithGoogleSuggestions) and not self.propagateUpDownNormally:
 					self.propagateUpDownNormally = True
 					self["config"].getCurrent()[1].deactivateSuggestionList()
@@ -755,9 +755,9 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				myentry = current[0]
 				if myentry is not None:
 					myurl = myentry.getVideoUrl()
-					print "Playing URL",myurl
+					print "Playing URL", myurl
 					if myurl is not None:
-						myreference = eServiceReference(4097,0,myurl)
+						myreference = eServiceReference(4097, 0, myurl)
 						myreference.setName(myentry.getTitle())
 						self.session.openWithCallback(self.onPlayerClosed, MyTubePlayer, myreference, self.lastservice, infoCallback=self.showVideoInfo, nextCallback=self.getNextEntry, prevCallback=self.getPrevEntry)
 					else:
@@ -768,7 +768,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self["config"].invalidateCurrent()
 			if config.plugins.mytube.search.searchTerm.value != "":
 				searchContext = config.plugins.mytube.search.searchTerm.value
-				print "Search searchcontext",searchContext
+				print "Search searchcontext", searchContext
 				self.setState('getSearchFeed')
 				self.runSearch(searchContext)
 
@@ -783,7 +783,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.show()
 
 	def keyUp(self):
-		print "self.currList im KeyUp",self.currList
+		print "self.currList im KeyUp", self.currList
 		if self.currList == "suggestionslist":
 			if config.plugins.mytube.search.searchTerm.value != "":
 				if not self.propagateUpDownNormally:
@@ -796,7 +796,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				self.HistoryWindow.up()
 
 	def keyDown(self):
-		print "self.currList im KeyDown",self.currList
+		print "self.currList im KeyDown", self.currList
 		if self.currList == "suggestionslist":
 			if config.plugins.mytube.search.searchTerm.value != "":
 				if not self.propagateUpDownNormally:
@@ -817,7 +817,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			if self.HistoryWindow is not None and self.HistoryWindow.shown:
 				self.HistoryWindow.down()
 	def keyRight(self):
-		print "self.currList im KeyRight",self.currList
+		print "self.currList im KeyRight", self.currList
 		if self.propagateUpDownNormally:
 			ConfigListScreen.keyRight(self)
 		else:
@@ -830,7 +830,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					self.HistoryWindow.pageDown()
 
 	def keyLeft(self):
-		print "self.currList im kEyLeft",self.currList
+		print "self.currList im kEyLeft", self.currList
 		if self.propagateUpDownNormally:
 			ConfigListScreen.keyLeft(self)
 		else:
@@ -873,7 +873,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 
 	def handleSuggestions(self):
 		print "handleSuggestions"
-		print "self.currList",self.currList
+		print "self.currList", self.currList
 		if self.currList == "configlist":
 			self.switchToSuggestionsList()
 		elif self.currList == "historylist":
@@ -914,7 +914,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		helpwindowpos = self["HelpWindow"].getPosition()
 		current = self["config"].getCurrent()
 		if current[1].help_window.instance is not None:
-			current[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
+			current[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
 			current[1].help_window.instance.show()
 		if current[1].suggestionsWindow.instance is not None:
 			current[1].suggestionsWindow.instance.show()
@@ -928,8 +928,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 
 	def switchToFeedList(self, append=False):
 		print "switchToFeedList"
-		print "switching to feedlist from:",self.currList
-		print "len(self.videolist):",len(self.videolist)
+		print "switching to feedlist from:", self.currList
+		print "len(self.videolist):", len(self.videolist)
 		if self.HistoryWindow is not None and self.HistoryWindow.shown:
 			self.HistoryWindow.deactivate()
 			self.HistoryWindow.instance.hide()
@@ -956,8 +956,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		print "switchToHistory"
 		self.oldlist = self.currList
 		self.currList = "historylist"
-		print "switchToHistory currentlist",self.currList
-		print "switchToHistory oldlist",self.oldlist
+		print "switchToHistory currentlist", self.currList
+		print "switchToHistory oldlist", self.oldlist
 		self.hideSuggestions()
 		self["ButtonBlue"].hide()
 		self["VKeyIcon"].boolean = False
@@ -974,7 +974,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 	def handleHistory(self):
 		if self.HistoryWindow is None:
 			self.HistoryWindow = self.session.instantiateDialog(MyTubeHistoryScreen)
-		if self.currList in ("configlist","feedlist"):
+		if self.currList in ("configlist", "feedlist"):
 			if self.HistoryWindow.status() is False:
 				print "status is FALSE,switchToHistory"
 				self.switchToHistory()
@@ -982,8 +982,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.closeHistory()
 
 	def closeHistory(self):
-		print "closeHistory currentlist",self.currList
-		print "closeHistory oldlist",self.oldlist
+		print "closeHistory currentlist", self.currList
+		print "closeHistory oldlist", self.oldlist
 		if self.currList == "historylist":
 			if self.HistoryWindow.status() is True:
 				print "status is TRUE, closing historyscreen"
@@ -999,15 +999,15 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.History = config.plugins.mytube.general.history.value.split(',')
 		if self.History[0] == '':
 			del self.History[0]
-		print "self.History im add",self.History
+		print "self.History im add", self.History
 		if config.plugins.mytube.search.searchTerm.value in self.History:
 			self.History.remove((config.plugins.mytube.search.searchTerm.value))
-		self.History.insert(0,(config.plugins.mytube.search.searchTerm.value))
+		self.History.insert(0, (config.plugins.mytube.search.searchTerm.value))
 		if len(self.History) == 30:
 			self.History.pop()
 		config.plugins.mytube.general.history.value = ",".join(self.History)
 		config.plugins.mytube.general.history.save()
-		print "configvalue",config.plugins.mytube.general.history.value
+		print "configvalue", config.plugins.mytube.general.history.value
 
 	def hideSuggestions(self):
 		current = self["config"].getCurrent()
@@ -1032,7 +1032,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 	def getRelatedVideos(self, myentry):
 		if myentry:
 			myurl = myentry.getRelatedVideos()
-			print "RELATEDURL--->",myurl
+			print "RELATEDURL--->", myurl
 			if myurl is not None:
 				self.appendEntries = False
 				self.getFeed(myurl, _("Related video entries."))
@@ -1040,7 +1040,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 	def getResponseVideos(self, myentry):
 		if myentry:
 			myurl = myentry.getResponseVideos()
-			print "RESPONSEURL--->",myurl
+			print "RESPONSEURL--->", myurl
 			if myurl is not None:
 				self.appendEntries = False
 				self.getFeed(myurl, _("Response video entries."))
@@ -1048,7 +1048,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 	def getUserVideos(self, myentry):
 		if myentry:
 			myurl = myentry.getUserVideos()
-			print "RESPONSEURL--->",myurl
+			print "RESPONSEURL--->", myurl
 			if myurl is not None:
 				self.appendEntries = False
 				self.getFeed(myurl, _("User video entries."))
@@ -1142,7 +1142,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					thumbnailUrl = None
 					thumbnailUrl = entry.getThumbnailUrl(0)
 					if thumbnailUrl is not None:
-						self.screenshotList.append((TubeID,thumbnailUrl))
+						self.screenshotList.append((TubeID, thumbnailUrl))
 					if not self.Details.has_key(TubeID):
 						self.Details[TubeID] = {'thumbnail': None}
 					self.videolist.append(self.buildEntryComponent(entry, TubeID))
@@ -1165,7 +1165,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					thumbnailUrl = None
 					thumbnailUrl = entry.getThumbnailUrl(0)
 					if thumbnailUrl is not None:
-						self.screenshotList.append((TubeID,thumbnailUrl))
+						self.screenshotList.append((TubeID, thumbnailUrl))
 					if not self.Details.has_key(TubeID):
 						self.Details[TubeID] = {'thumbnail': None}
 					self.videolist.append(self.buildEntryComponent(entry, TubeID))
@@ -1187,9 +1187,9 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.setState('Error')
 			pass
 
-	def buildEntryComponent(self, entry,TubeID):
+	def buildEntryComponent(self, entry, TubeID):
 		Title = entry.getTitle()
-		print "Titel-->",Title
+		print "Titel-->", Title
 		Description = entry.getDescription()
 		myTubeID = TubeID
 		PublishedDate = entry.getPublishedDate()
@@ -1231,15 +1231,15 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					myurl = myentry.getVideoUrl()
 					if myurl is not None:
 						print "Got a URL to stream"
-						myreference = eServiceReference(4097,0,myurl)
+						myreference = eServiceReference(4097, 0, myurl)
 						myreference.setName(myentry.getTitle())
-						return myreference,False
+						return myreference, False
 					else:
 						print "NoURL im getNextEntry"
-						return None,True
+						return None, True
 
 		print "no more entries to play"
-		return None,False
+		return None, False
 
 	def getPrevEntry(self):
 		i = self["feedlist"].getIndex() - 1
@@ -1252,12 +1252,12 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					myurl = myentry.getVideoUrl()
 					if myurl is not None:
 						print "Got a URL to stream"
-						myreference = eServiceReference(4097,0,myurl)
+						myreference = eServiceReference(4097, 0, myurl)
 						myreference.setName(myentry.getTitle())
-						return myreference,False
+						return myreference, False
 					else:
-						return None,True
-		return None,False
+						return None, True
+		return None, False
 
 	def showVideoInfo(self):
 		if self.currList == "feedlist":
@@ -1269,7 +1269,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			if current:
 				myentry = current[0]
 				if myentry:
-					print "Title im showVideoInfo",myentry.getTitle()
+					print "Title im showVideoInfo", myentry.getTitle()
 					videoinfos = myentry.PrintEntryDetails()
 					self.session.open(MyTubeVideoInfoScreen, self.skin_path, videoinfo=videoinfos)
 
@@ -1285,20 +1285,20 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 						if tubeid not in self.pixmaps_to_load:
 							self.pixmaps_to_load.append(tubeid)
 							if (os_path.exists(thumbnailFile) == True):
-								self.fetchFinished(False,tubeid)
+								self.fetchFinished(False, tubeid)
 							else:
-								client.downloadPage(thumbnailUrl,thumbnailFile).addCallback(self.fetchFinished,str(tubeid)).addErrback(self.fetchFailed,str(tubeid))
+								client.downloadPage(thumbnailUrl, thumbnailFile).addCallback(self.fetchFinished, str(tubeid)).addErrback(self.fetchFailed, str(tubeid))
 					else:
 						if tubeid not in self.pixmaps_to_load:
 							self.pixmaps_to_load.append(tubeid)
-							self.fetchFinished(False,tubeid, failed=True)
+							self.fetchFinished(False, tubeid, failed=True)
 
-	def fetchFailed(self,string,tubeid):
-		print "thumbnail-fetchFailed for: ",tubeid,string.getErrorMessage()
-		self.fetchFinished(False,tubeid, failed=True)
+	def fetchFailed(self, string, tubeid):
+		print "thumbnail-fetchFailed for: ", tubeid, string.getErrorMessage()
+		self.fetchFinished(False, tubeid, failed=True)
 
-	def fetchFinished(self,x,tubeid, failed=False):
-		print "thumbnail-fetchFinished for:",tubeid
+	def fetchFinished(self, x, tubeid, failed=False):
+		print "thumbnail-fetchFinished for:", tubeid
 		self.pixmaps_to_load.remove(tubeid)
 		if failed:
 			thumbnailFile = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MyTube/plugin.png")
@@ -1312,10 +1312,10 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.picloads[tubeid].startDecode(thumbnailFile)
 		else:
 			self.pixmaps_to_load.append(tubeid)
-			self.fetchFinished(False,tubeid, failed=True)
+			self.fetchFinished(False, tubeid, failed=True)
 
-	def finish_decode(self,tubeid,info):
-		print "thumbnail finish_decode:", tubeid,info
+	def finish_decode(self, tubeid, info):
+		print "thumbnail finish_decode:", tubeid, info
 		ptr = self.picloads[tubeid].getData()
 		thumbnailFile = "/tmp/" + str(tubeid) + ".jpg"
 		if ptr != None:
@@ -1424,7 +1424,7 @@ class MyTubeVideoInfoScreen(Screen):
 
 	def layoutFinished(self):
 		self.statuslist = []
-		self.statuslist.append((_("Downloading screenshots. Please wait..."),_("Downloading screenshots. Please wait...")))
+		self.statuslist.append((_("Downloading screenshots. Please wait..."), _("Downloading screenshots. Please wait...")))
 		self["infolist"].style = "state"
 		self['infolist'].setList(self.statuslist)
 		self.loadPreviewpics()
@@ -1487,12 +1487,12 @@ class MyTubeVideoInfoScreen(Screen):
 				TubeID = self.videoinfo["TubeID"]
 				ThumbID = TubeID + str(currindex)
 				thumbnailFile = "/tmp/" + ThumbID + ".jpg"
-				currPic = [currindex,ThumbID,thumbnailFile,None]
+				currPic = [currindex, ThumbID, thumbnailFile, None]
 				self.thumbnails.append(currPic)
 				thumbnailUrl = None
 				thumbnailUrl = entry
 				if thumbnailUrl is not None:
-					client.downloadPage(thumbnailUrl,thumbnailFile).addCallback(self.fetchFinished,currindex,ThumbID).addErrback(self.fetchFailed,currindex,ThumbID)
+					client.downloadPage(thumbnailUrl, thumbnailFile).addCallback(self.fetchFinished, currindex, ThumbID).addErrback(self.fetchFailed, currindex, ThumbID)
 				currindex += 1
 		else:
 			pass
@@ -1517,7 +1517,7 @@ class MyTubeVideoInfoScreen(Screen):
 					self.picloads[index].setPara((self["thumbnail"].instance.size().width(), self["thumbnail"].instance.size().height(), sc[0], sc[1], False, 1, "#00000000"))
 					self.picloads[index].startDecode(thumbnailFile)
 				else:
-					print "[decodePic] Thumbnail file NOT FOUND !!!-->:",thumbnailFile
+					print "[decodePic] Thumbnail file NOT FOUND !!!-->:", thumbnailFile
 
 	def finish_decode(self, picindex=None, picInfo=None):
 		print "finish_decode - of INDEX", picindex
@@ -1728,8 +1728,8 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 
 	def playNextFile(self):
 		print "playNextFile"
-		nextservice,error = self.nextCallback()
-		print "nextservice--->",nextservice
+		nextservice, error = self.nextCallback()
+		print "nextservice--->", nextservice
 		if nextservice is None:
 			self.handleLeave(config.plugins.mytube.general.on_movie_stop.value, error)
 		else:
@@ -1738,7 +1738,7 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 
 	def playPrevFile(self):
 		print "playPrevFile"
-		prevservice,error = self.prevCallback()
+		prevservice, error = self.prevCallback()
 		if prevservice is None:
 			self.handleLeave(config.plugins.mytube.general.on_movie_stop.value, error)
 		else:
@@ -1822,9 +1822,9 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	def setSeekState(self, wantstate, onlyGUI=False):
 		print "setSeekState"
 		if wantstate == self.STATE_PAUSED:
-			print "trying to switch to Pause- state:",self.STATE_PAUSED
+			print "trying to switch to Pause- state:", self.STATE_PAUSED
 		elif wantstate == self.STATE_PLAYING:
-			print "trying to switch to playing- state:",self.STATE_PLAYING
+			print "trying to switch to playing- state:", self.STATE_PLAYING
 		service = self.session.nav.getCurrentService()
 		if service is None:
 			print "No Service found"
@@ -1907,7 +1907,7 @@ def MyTubeMain(session, **kwargs):
 		return
 	l2 = True
 	if l2:
-		session.open(MyTubePlayerMainScreen,l2key)
+		session.open(MyTubePlayerMainScreen, l2key)
 
 
 def Plugins(path, **kwargs):

@@ -47,9 +47,9 @@ from . import _
 
 config.plugins.yttrailer = ConfigSubsection()
 config.plugins.yttrailer.show_in_extensionsmenu = ConfigYesNo(default=False)
-config.plugins.yttrailer.best_resolution = ConfigSelection(default="2", choices=[("0", _("1080p")),("1", _("720p")), ("2", _("No HD streaming"))])
+config.plugins.yttrailer.best_resolution = ConfigSelection(default="2", choices=[("0", _("1080p")), ("1", _("720p")), ("2", _("No HD streaming"))])
 config.plugins.yttrailer.ext_descr = ConfigText(default="german", fixed_size=False)
-config.plugins.yttrailer.max_results = ConfigInteger(5,limits=(1, 10))
+config.plugins.yttrailer.max_results = ConfigInteger(5, limits=(1, 10))
 config.plugins.yttrailer.close_player_with_exit = ConfigYesNo(default=False)
 
 from Screens.EventView import EventViewBase
@@ -82,7 +82,7 @@ def autostart(reason, **kwargs):
 			EPGSelection.showTrailerList = showTrailerList
 
 
-def setup(session,**kwargs):
+def setup(session, **kwargs):
 	session.open(YTTrailerSetup)
 
 def Plugins(**kwargs):
@@ -176,7 +176,7 @@ class YTTrailer:
 	def setServiceReference(self, entry):
 		url = self.getVideoUrl(entry)
 		if url:
-			ref = eServiceReference(4097,0,url)
+			ref = eServiceReference(4097, 0, url)
 			ref.setName(entry.media.title.text)
 		else:
 			ref = None
@@ -223,7 +223,7 @@ class YTTrailer:
 		watch_url = 'http://www.youtube.com/watch?v=%s&gl=US&hl=en' % video_id
 		watchrequest = Request(watch_url, None, std_headers)
 		try:
-			print "[YTTrailer] trying to find out if a HD Stream is available",watch_url
+			print "[YTTrailer] trying to find out if a HD Stream is available", watch_url
 			watchvideopage = urlopen2(watchrequest).read()
 		except (URLError, HTTPException, socket_error), err:
 			print "[YTTrailer] Error: Unable to retrieve watchpage - Error code: ", str(err)
@@ -239,7 +239,7 @@ class YTTrailer:
 				if ('url_encoded_fmt_stream_map' or 'fmt_url_map') in videoinfo:
 					break
 			except (URLError, HTTPException, socket_error), err:
-				print "[YTTrailer] Error: unable to download video infopage",str(err)
+				print "[YTTrailer] Error: unable to download video infopage", str(err)
 				return video_url
 
 		if ('url_encoded_fmt_stream_map' or 'fmt_url_map') not in videoinfo:
@@ -279,14 +279,14 @@ class YTTrailer:
 					fmturl = fmtid = ""
 
 				except:
-					print "error parsing fmtstring:",fmtstring
+					print "error parsing fmtstring:", fmtstring
 
 			else:
-				(fmtid,fmturl) = fmtstring.split('|')
+				(fmtid, fmturl) = fmtstring.split('|')
 			if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid) and fmtid != "":
 				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
 				fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
-		print "[YTTrailer] got",sorted(fmt_infomap.iterkeys())
+		print "[YTTrailer] got", sorted(fmt_infomap.iterkeys())
 		if video_fmt_map and len(video_fmt_map):
 			if self.l3cert:
 				l3key = validate_cert(self.l3cert, l2key)
@@ -295,10 +295,10 @@ class YTTrailer:
 					val = etpm.computeSignature(rnd)
 					result = decrypt_block(val, l3key)
 					if result[80:88] == rnd:
-						print "[YTTrailer] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
+						print "[YTTrailer] found best available video format:", video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
 						best_video = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]
 						video_url = "%s" % (best_video['fmturl'].split(';')[0])
-						print "[YTTrailer] found best available video url:",video_url
+						print "[YTTrailer] found best available video url:", video_url
 
 		return video_url
 

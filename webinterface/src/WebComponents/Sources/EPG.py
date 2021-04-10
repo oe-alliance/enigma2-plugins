@@ -206,7 +206,7 @@ class EPG(Source):
 		return ()
 
 	def searchSimilarEvent(self, needle):
-		print "[WebComponents.EPG] searching similar eventid: ",needle
+		print "[WebComponents.EPG] searching similar eventid: ", needle
 
 		events = self.epgcache.search(('IBDCTSERN', 256, eEPGCache.SIMILAR_BROADCASTINGS_SEARCH, needle['sRef'], int(needle['eventid'])))
 		if events:

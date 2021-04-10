@@ -98,7 +98,7 @@ class MovieRetitle(Screen, ConfigListScreen):
         if hasattr(current[1], 'help_window'):
             if current[1].help_window.instance is not None:
                 current[1].help_window.instance.show()
-                current[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
+                current[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
         
     def setCustomTitle(self):
         if self.is_vdir:

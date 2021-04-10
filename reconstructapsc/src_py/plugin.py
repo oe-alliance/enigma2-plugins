@@ -40,7 +40,7 @@ class ReconstructApSc(ChoiceBox):
 		else:
 			self.name = info.getName(self.service)
 		if self.offline is None:
-			tlist = [(_("Cannot reconstruct this item"), "CALLFUNC", self.confirmed0),]
+			tlist = [(_("Cannot reconstruct this item"), "CALLFUNC", self.confirmed0), ]
 		else:
 			tlist = [
 				(_("Don't reconstruct"), "CALLFUNC", self.confirmed0),

@@ -125,12 +125,12 @@ def rewriteMeta(servicepath, name, data):
 			title = refactorTitle(oldtitle, data)
 		else:
 			title = oldtitle
-		log.debug("title",title)
+		log.debug("title", title)
 		if config.plugins.seriesplugin.pattern_description.value and not config.plugins.seriesplugin.pattern_description.value == "Off":
 			descr = refactorDescription(olddescr, data)
 		else:
 			descr = olddescr
-		log.debug("descr",descr)
+		log.debug("descr", descr)
 		
 		metafile = open(meta_file, "w")
 		metafile.write("%s%s\n%s\n%s" % (sid, title, descr, rest))

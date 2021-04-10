@@ -37,7 +37,7 @@ class CurlyTxSettings(ConfigListScreen, HelpableScreen, Screen):
         #self.skinName = [ "CurlyTxSettings", "Setup" ]
         self.setup_title = _("Settings")
 
-        self["actions"] = ActionMap(["SetupActions","ColorActions"],
+        self["actions"] = ActionMap(["SetupActions", "ColorActions"],
             {
                 "cancel": self.keyCancel,
                 "save": self.keySave,

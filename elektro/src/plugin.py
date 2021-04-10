@@ -144,7 +144,7 @@ weekdays = [
 #global ElektroWakeUpTime
 ElektroWakeUpTime = -1
 
-def NASpowerdown(Nname,Nuser,Npass,Ncommand,Nport):
+def NASpowerdown(Nname, Nuser, Npass, Ncommand, Nport):
 	from telnetlib import Telnet
 	if Nname == "":
 		return _("no Name")
@@ -153,25 +153,25 @@ def NASpowerdown(Nname,Nuser,Npass,Ncommand,Nport):
 		tn = Telnet(Nname, Nport, 5)
 		l = ""
 		if Nuser != "":
-			l = l + tn.expect(['ogin:','sername'],10)[2]
+			l = l + tn.expect(['ogin:', 'sername'], 10)[2]
 			l = l + tn.read_very_lazy()
 			tn.write('%s\r' % Nuser)
 		if Npass != "":
-			l = l + tn.read_until('assword:',10)
+			l = l + tn.read_until('assword:', 10)
 			l = l + tn.read_very_lazy()
 			tn.write('%s\r' % Npass)
-		l = l + tn.expect(['#',">"],10)[2]
+		l = l + tn.expect(['#', ">"], 10)[2]
 		l = l + tn.read_very_lazy()
 		tn.write('%s\r' % Ncommand)
-		l = l + tn.expect(['#',">"],20)[2]
+		l = l + tn.expect(['#', ">"], 20)[2]
 		l = l + tn.read_very_lazy()
 		if config.plugins.elektro.NASwait.value == True:
 			tt = time() + 90
 			l = l + "\n waiting...\n"
-			while tt > time() and ping.doOne(Nname,1) != None:
+			while tt > time() and ping.doOne(Nname, 1) != None:
 				sleep(2)
 		tn.write('exit\r')
-		l = l + tn.expect(['#',">"],5)[2]
+		l = l + tn.expect(['#', ">"], 5)[2]
 		l = l + tn.read_very_lazy()
 		tn.close()
 	finally:
@@ -350,13 +350,13 @@ def Plugins(**kwargs):
 	return list
 
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	try:
 	 	session.open(Elektro)
 	except:
 		print pluginPrintname, "Pluginexecution failed"
 
-class ElektroProfile(ConfigListScreen,Screen):
+class ElektroProfile(ConfigListScreen, Screen):
 	skin = """
 			<screen position="center,center" size="600,400" title="Elektro Power Save Profile Times" >
 			<widget name="config" position="0,0" size="600,360" scrollbarMode="showOnDemand" />
@@ -402,15 +402,15 @@ class ElektroProfile(ConfigListScreen,Screen):
 		#print "saving"
 		for x in self["config"].list:
 			x[1].save()
-		self.close(False,self.session)
+		self.close(False, self.session)
 
 	def cancel(self):
 		#print "cancel"
 		for x in self["config"].list:
 			x[1].cancel()
-		self.close(False,self.session)
+		self.close(False, self.session)
 
-class ElektroIP(ConfigListScreen,Screen):
+class ElektroIP(ConfigListScreen, Screen):
 	skin = """
 			<screen position="center,center" size="600,400" title="Elektro Power Save IP Addresses to wait" >
 			<widget name="config" position="0,0" size="600,360" scrollbarMode="showOnDemand" />
@@ -448,15 +448,15 @@ class ElektroIP(ConfigListScreen,Screen):
 		#print "saving"
 		for x in self["config"].list:
 			x[1].save()
-		self.close(False,self.session)
+		self.close(False, self.session)
 
 	def cancel(self):
 		#print "cancel"
 		for x in self["config"].list:
 			x[1].cancel()
-		self.close(False,self.session)
+		self.close(False, self.session)
 
-class ElektroNASrun(ConfigListScreen,Screen):
+class ElektroNASrun(ConfigListScreen, Screen):
 	skin = """
 		<screen name="ElektroNASrun" position="center,center" size="600,400" zPosition="1" title="Powerdown...">
 		<widget source="TextTest" render="Label" position="10,0" size="580,400" font="Regular;20" transparent="1" />
@@ -478,13 +478,13 @@ class ElektroNASrun(ConfigListScreen,Screen):
 		}, -1)
 
 	def cancel(self):
-		self.close(False,self.session)
+		self.close(False, self.session)
 
 	def DoNASrun(self):
 		ret = NASpowerdown(config.plugins.elektro.NASname.value, config.plugins.elektro.NASuser.value, config.plugins.elektro.NASpass.value, config.plugins.elektro.NAScommand.value, config.plugins.elektro.NASport.value)
 		self["TextTest"].setText(ret)
 
-class ElektroNAS(ConfigListScreen,Screen):
+class ElektroNAS(ConfigListScreen, Screen):
 	skin = """
 			<screen name="ElektroNAS" position="center,center" size="600,400" title="Elektro Power Save IP Telnet - Poweroff" >
 			<widget name="config" position="0,0" size="600,360" scrollbarMode="showOnDemand" />
@@ -532,15 +532,15 @@ class ElektroNAS(ConfigListScreen,Screen):
 		#print "saving"
 		for x in self["config"].list:
 			x[1].save()
-		self.close(False,self.session)
+		self.close(False, self.session)
 
 	def cancel(self):
 		#print "cancel"
 		for x in self["config"].list:
 			x[1].cancel()
-		self.close(False,self.session)
+		self.close(False, self.session)
 
-class Elektro(ConfigListScreen,Screen):
+class Elektro(ConfigListScreen, Screen):
 	skin = """
 		<screen name ="Elektro" position="center,center" size="630,480" title="Elektro Power Save" >
 			<widget name="key_red" position="4,5" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;18" transparent="1"/>
@@ -571,7 +571,7 @@ class Elektro(ConfigListScreen,Screen):
 		self.list = [
 			getConfigListEntry(_("Active Time Profile"), config.plugins.elektro.profile,
 				_("The active Time Profile is (1 or 2).")),
-			getConfigListEntry(_("Enable Elektro Power Save"),config.plugins.elektro.enable,
+			getConfigListEntry(_("Enable Elektro Power Save"), config.plugins.elektro.enable,
 				_("Unless this is enabled, this plugin won't run automatically.")),
 			getConfigListEntry(_("Use both profiles alternately"), config.plugins.elektro.profileShift,
 				_("Both profiles are used alternately. When shutting down the other profile is enabled. This allows two time cycles per day. Do not overlap the times.")),
@@ -666,7 +666,7 @@ class Elektro(ConfigListScreen,Screen):
 		return str(self["config"].getCurrent()[1].getText())
 
 	def help(self):
-		self.session.open(Console,_("Showing Elektro readme.txt"),["cat /usr/lib/enigma2/python/Plugins/Extensions/Elektro/%s" % _("readme.txt")])
+		self.session.open(Console, _("Showing Elektro readme.txt"), ["cat /usr/lib/enigma2/python/Plugins/Extensions/Elektro/%s" % _("readme.txt")])
 
 	def profile(self):
 		self.session.open(ElektroProfile)
@@ -674,8 +674,8 @@ class Elektro(ConfigListScreen,Screen):
 class DoElektro(Screen):
 	skin = """ <screen position="center,center" size="300,300" title="Elektro Plugin Menu" > </screen>"""
 
-	def __init__(self,session):
-		Screen.__init__(self,session)
+	def __init__(self, session):
+		Screen.__init__(self, session)
 
 		print pluginPrintname, "Starting up Version", elektro_pluginversion
 
@@ -740,7 +740,7 @@ class DoElektro(Screen):
 	def CheckStandby(self):
 		print pluginPrintname, "Showing Standby Sceen"
 		try:
-			self.session.openWithCallback(self.DoElektroStandby,MessageBox,_("Go to Standby now?"),type=MessageBox.TYPE_YESNO,
+			self.session.openWithCallback(self.DoElektroStandby, MessageBox, _("Go to Standby now?"), type=MessageBox.TYPE_YESNO,
 					timeout=config.plugins.elektro.standbyOnBootTimeout.value)
 		except:
 			# Couldn't be shown. Restart timer.
@@ -748,7 +748,7 @@ class DoElektro(Screen):
 			self.TimerStandby.startLongTimer(elektrostarttime)
 
 
-	def DoElektroStandby(self,retval):
+	def DoElektroStandby(self, retval):
 		if (retval):
 			# Yes, go to standby
 			Notifications.AddNotification(Standby.Standby)
@@ -882,7 +882,7 @@ class DoElektro(Screen):
 			for i in range(10):
 				ip = "%d.%d.%d.%d" % tuple(config.plugins.elektro.ip[i].value)
 				if ip != "0.0.0.0":
-					if ping.doOne(ip,0.1) != None:
+					if ping.doOne(ip, 0.1) != None:
 						print pluginPrintname, ip, "online -> don't sleep"
 						trysleep = False
 						break
@@ -892,7 +892,7 @@ class DoElektro(Screen):
 		# Looks like there really is a reason to go to sleep -> Lets try it!
 		if trysleep:
 			try:
-				self.session.openWithCallback(self.DoElektroSleep, MessageBox, _("Go to sleep now?"),type=MessageBox.TYPE_YESNO,timeout=60)
+				self.session.openWithCallback(self.DoElektroSleep, MessageBox, _("Go to sleep now?"), type=MessageBox.TYPE_YESNO, timeout=60)
 			except:
 				# reset the timer and try again
 				self.TimerSleep.startLongTimer(elektrostarttime)
@@ -901,7 +901,7 @@ class DoElektro(Screen):
 		self.TimerSleep.startLongTimer(elektrostarttime)
 
 
-	def DoElektroSleep(self,retval):
+	def DoElektroSleep(self, retval):
 		config_NASenable = True if config.plugins.elektro.NASenable.value == config.plugins.elektro.profile.value else False
 		if config.plugins.elektro.profileShift.value == True:
 			config.plugins.elektro.profile.value = "1" if config.plugins.elektro.profile.value == "2" else "2"

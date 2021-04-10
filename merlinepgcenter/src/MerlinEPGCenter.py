@@ -157,7 +157,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		self.epgcache = eEPGCache.getInstance()
 		
 		self.piconLoader = PiconLoader()
-		self.piconSize = eSize(50,30)
+		self.piconSize = eSize(50, 30)
 		
 		self.blinkTimer = BlinkTimer(session)
 		
@@ -1075,13 +1075,13 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 				if len(sel.includedDays):
 					days = ""
 					for day in sel.includedDays:
-						days = ''.join([days, [y[1] for x,y in enumerate(weekdays) if y[0] == day][0], ", "])
+						days = ''.join([days, [y[1] for x, y in enumerate(weekdays) if y[0] == day][0], ", "])
 					days = days.rstrip(", ")
 					description = ''.join([description, _("Included days:"), " ", days, "\n"])
 				if len(sel.excludedDays):
 					days = ""
 					for day in sel.excludedDays:
-						days = ''.join([days, [y[1] for x,y in enumerate(weekdays) if y[0] == day][0], ", "])
+						days = ''.join([days, [y[1] for x, y in enumerate(weekdays) if y[0] == day][0], ", "])
 					days = days.rstrip(", ")
 					description = ''.join([description, _("Excluded days:"), " ", days, "\n"])
 				description = ''.join([description, _("Record a maximum of x times:"), " ", str(sel.counter), "\n",

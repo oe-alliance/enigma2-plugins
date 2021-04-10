@@ -8,14 +8,14 @@ from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Sources.StaticText import StaticText
 from Components.Sources.List import List
 from Components.AVSwitch import AVSwitch
-from Components.config import config, Config, ConfigSelection, ConfigSubsection, ConfigText, getConfigListEntry, ConfigYesNo, ConfigIP, ConfigNumber,ConfigLocations
+from Components.config import config, Config, ConfigSelection, ConfigSubsection, ConfigText, getConfigListEntry, ConfigYesNo, ConfigIP, ConfigNumber, ConfigLocations
 from Components.config import KEY_DELETE, KEY_BACKSPACE, KEY_LEFT, KEY_RIGHT, KEY_HOME, KEY_END, KEY_TOGGLEOW, KEY_ASCII, KEY_TIMEOUT
 from Components.ConfigList import ConfigListScreen
 from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
 
 from Tools.Directories import pathExists, fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_HDD, SCOPE_CURRENT_PLUGIN, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
-from enigma import eTimer, quitMainloop,eListbox,ePoint, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent, eListbox, gFont, getDesktop, ePicLoad, eServiceCenter, iServiceInformation, eServiceReference,iSeekableService,iServiceInformation, iPlayableService, iPlayableServicePtr
+from enigma import eTimer, quitMainloop, eListbox, ePoint, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent, eListbox, gFont, getDesktop, ePicLoad, eServiceCenter, iServiceInformation, eServiceReference, iSeekableService, iServiceInformation, iPlayableService, iPlayableServicePtr
 from os import path as os_path, system as os_system, unlink, stat, mkdir, popen, makedirs, listdir, access, rename, remove, W_OK, R_OK, F_OK
 from twisted.web import client
 from twisted.internet import reactor
@@ -145,8 +145,8 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 	def playNextFile(self):
 		print "playNextFile"
 		if self.nextCallback() is not None:
-			nextservice,error = self.nextCallback()
-			print "nextservice--->",nextservice
+			nextservice, error = self.nextCallback()
+			print "nextservice--->", nextservice
 			if nextservice is None:
 				self.handleLeave(config.plugins.dreamMediathek.general.on_movie_stop.value, error)
 			else:
@@ -156,7 +156,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 	def playPrevFile(self):
 		print "playPrevFile"
 		if self.prevCallback() is not None:
-			prevservice,error = self.prevCallback()
+			prevservice, error = self.prevCallback()
 			if prevservice is None:
 				self.handleLeave(config.plugins.dreamMediathek.general.on_movie_stop.value, error)
 			else:
@@ -238,9 +238,9 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 	def setSeekState(self, wantstate):
 		print "setSeekState"
 		if wantstate == self.STATE_PAUSED:
-			print "trying to switch to Pause- state:",self.STATE_PAUSED
+			print "trying to switch to Pause- state:", self.STATE_PAUSED
 		elif wantstate == self.STATE_PLAYING:
-			print "trying to switch to playing- state:",self.STATE_PLAYING
+			print "trying to switch to playing- state:", self.STATE_PLAYING
 		service = self.session.nav.getCurrentService()
 		if service is None:
 			print "No Service found"

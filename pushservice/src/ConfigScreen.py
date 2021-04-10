@@ -252,7 +252,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 
 	def addServices(self):
 		self.hideHelpWindow()
-		self.session.openWithCallback(self.addServicesCB, ChoiceBox,_("Add Service"), self.getAvlServices())
+		self.session.openWithCallback(self.addServicesCB, ChoiceBox, _("Add Service"), self.getAvlServices())
 
 	def addServicesCB(self, result):
 		module = result and result[1]
@@ -268,7 +268,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 			select = current[2]
 		slist = self.getServiceInstances()
 		if slist:
-			self.session.openWithCallback(self.removeServicesCB, ChoiceBox,_("Remove controller"), list=slist, selection=select)
+			self.session.openWithCallback(self.removeServicesCB, ChoiceBox, _("Remove controller"), list=slist, selection=select)
 
 	def removeServicesCB(self, result):
 		service = result and result[1]
@@ -283,7 +283,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 
 	def addControllers(self):
 		self.hideHelpWindow()
-		self.session.openWithCallback(self.addControllersCB, ChoiceBox,_("Add Controller"), self.getAvlControllers())
+		self.session.openWithCallback(self.addControllersCB, ChoiceBox, _("Add Controller"), self.getAvlControllers())
 
 	def addControllersCB(self, result):
 		module = result and result[1]
@@ -299,7 +299,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 			select = current[2]
 		plist = self.getControllerInstances()
 		if plist:
-			self.session.openWithCallback(self.removeControllersCB, ChoiceBox,_("Remove controller"), list=plist, selection=select)
+			self.session.openWithCallback(self.removeControllersCB, ChoiceBox, _("Remove controller"), list=plist, selection=select)
 
 	def removeControllersCB(self, result):
 		controller = result and result[1]

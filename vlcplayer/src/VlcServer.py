@@ -24,7 +24,7 @@ seed()
 def normpath(path):
 	if path is None:
 		return None
-	path = path.replace("\\","/").replace("//", "/")
+	path = path.replace("\\", "/").replace("//", "/")
 	if path == "/..":
 		return None
 	if len(path) > 0 and path[0] != '/':
@@ -266,7 +266,7 @@ class VlcServer:
 			videoNormList = self.getVideoNorm().split(",")
 			# Video settings
 			transcode.append("vcodec=%s,vb=%d,venc=ffmpeg,fps=%s" % (
-				self.getVideoCodec(),self.getVideoBitrate(),
+				self.getVideoCodec(), self.getVideoBitrate(),
 				videoNormList[3]
 			))
 			#New canvas - since VLC 0.9
@@ -347,7 +347,7 @@ class VlcServer:
 			input += " " + sout + parameters
 			sout = ""
 		else:
-			params = "".join((sout,parameters)).split(' ')
+			params = "".join((sout, parameters)).split(' ')
 			sout = ""
 			for par in params:
 				sout += "&option=%s" % quote_plus(par.lstrip(':'))
@@ -355,7 +355,7 @@ class VlcServer:
 		print "[VLC] playfile", input
 		print "[VLC] sout", sout
 
-		xml = self.__xmlRequest("status", [("command", "in_play"),("input", input)], sout)
+		xml = self.__xmlRequest("status", [("command", "in_play"), ("input", input)], sout)
 
 		error = xml.getElementsByTagName("error")
 		if error is not None and len(error) > 0:

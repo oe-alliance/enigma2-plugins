@@ -16,7 +16,7 @@ def _parse(url, defaultPort=None):
 	url = url.strip()
 	parsed = urlparse(url)
 	scheme = parsed[0]
-	path = urlunparse(('','') + parsed[2:])
+	path = urlunparse(('', '') + parsed[2:])
 
 	if defaultPort is None:
 		if scheme == 'https':
@@ -106,7 +106,7 @@ class PictureScreen(Screen):
 	skin = ""
 	processing = False # if fetching or converting is active
 	autoreload = False
-	def __init__(self, session,title,filename, slideshowcallback=None,args=0):
+	def __init__(self, session, title, filename, slideshowcallback=None, args=0):
 		self.slideshowcallback = slideshowcallback
 		self.screentitle = title
 		self.filename = filename
@@ -116,7 +116,7 @@ class PictureScreen(Screen):
 		self.skin = """
 		<screen position="0,0" size="%i,%i" title="%s" flags=\"wfNoBorder\">
 			 <widget name="pixmap" position="0,0" size="%i,%i" backgroundColor=\"black\"/>
-		</screen>""" % (size_w,size_h,filename,size_w,size_h)
+		</screen>""" % (size_w, size_h, filename, size_w, size_h)
 		Screen.__init__(self, session)
 
 		self.picload = ePicLoad()
@@ -127,7 +127,7 @@ class PictureScreen(Screen):
 
 		self.paused = False
 
-		self["actions"] = ActionMap(["WizardActions", "DirectionActions","ChannelSelectBaseActions","ShortcutActions"],
+		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ChannelSelectBaseActions", "ShortcutActions"],
 			{
 			 "ok": self.do,
 			 "back": self.exit,
@@ -179,11 +179,11 @@ class PictureScreen(Screen):
 		self.sourcefile = "/tmp/loadedfile"
 		download(url, self.sourcefile).addCallback(self.fetchFinished).addErrback(self.fetchFailed)
 
-	def fetchFailed(self,string):
+	def fetchFailed(self, string):
 		print "fetch failed", string
 		self.setTitle("fetch failed: " + string)
 
-	def fetchFinished(self,string):
+	def fetchFinished(self, string):
 		print "fetching finished"
 		self.setPicture(self.sourcefile)
 

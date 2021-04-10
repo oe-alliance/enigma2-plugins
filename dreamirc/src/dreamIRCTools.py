@@ -50,8 +50,8 @@ y = 0
 accounts_xml = "/etc/dreamIRC.xml"
 
 class ChatWindow(ScrollLabel):
-	def __init__(self,session):
-		ScrollLabel.__init__(self,text="")
+	def __init__(self, session):
+		ScrollLabel.__init__(self, text="")
 		self.timer = eTimer()
 		self.timer.timeout.get().append(self.updateChatWindow)
 		self.timer.start(250)
@@ -66,8 +66,8 @@ class ChatWindow(ScrollLabel):
 			self.pipe.setLastMsg("")
 
 class BuddyWindow(ScrollLabel):
-	def __init__(self,session):
-		ScrollLabel.__init__(self,text="")
+	def __init__(self, session):
+		ScrollLabel.__init__(self, text="")
 		self.timer = eTimer()
 		self.timer.timeout.get().append(self.updateBuddyWindow)
 		self.timer.start(500)
@@ -79,8 +79,8 @@ class BuddyWindow(ScrollLabel):
 			self.oldlist = BuddyList
 
 class ChanName(Label):
-	def __init__(self,session):
-		Label.__init__(self,text=Channel)
+	def __init__(self, session):
+		Label.__init__(self, text=Channel)
 		self.timer = eTimer()
 		self.timer.timeout.get().append(self.updateChanName)
 		self.timer.start(500)
@@ -113,7 +113,7 @@ class MessagePipe():
 		global NewMsg
 		return NewMsg
 
-	def setLastMsg(self,text):
+	def setLastMsg(self, text):
 		global NewMsg
 		NewMsg = str(text)
 
@@ -121,7 +121,7 @@ class MessagePipe():
 		global OutTextTmp
 		return OutTextTmp
 
-	def addOutText(self,text):
+	def addOutText(self, text):
 		global OutTextTmp
 		OutTextTmp = str(text)
 
@@ -130,19 +130,19 @@ class MessagePipe():
 		OutTextTmp = str("")
 		return OutTextTmp
 
-	def add(self,text):
+	def add(self, text):
 		timestamp = time.strftime("[%H:%M:%S]", time.localtime(time.time()))
 		global ChatText, NewMsg
-		ChatText = ChatText + "%s %s\n" % (timestamp,text)
-		NewMsg = "%s %s" % (timestamp,text)
-		self.logger.log("%s %s" % (timestamp,text))
+		ChatText = ChatText + "%s %s\n" % (timestamp, text)
+		NewMsg = "%s %s" % (timestamp, text)
+		self.logger.log("%s %s" % (timestamp, text))
 		if self.debug_state == True:
-			self.debuglogger.log("%s %s" % (timestamp,text))
+			self.debuglogger.log("%s %s" % (timestamp, text))
 
-	def debug(self,text):
+	def debug(self, text):
 		if self.debug_state == True:
 			timestamp = time.strftime("[%H:%M:%S]", time.localtime(time.time()))
-			self.debuglogger.log("%s %s" % (timestamp,text))
+			self.debuglogger.log("%s %s" % (timestamp, text))
 		else:
 			print text
 
@@ -155,7 +155,7 @@ class MessagePipe():
 		if self.debug_state == True:
 			self.debuglogger.close()	
 
-	def buildBuddyList(self,text):
+	def buildBuddyList(self, text):
 		global BuddyList    
 		BuddyList = BuddyList + "%s\n" % text
 
@@ -172,7 +172,7 @@ class MessagePipe():
 		global Channel
 		return Channel
 
-	def getCannelName(self,text):
+	def getCannelName(self, text):
 		global Channel
 		Channel = "ChatBox #" + "%s\n" % text
 		
@@ -184,7 +184,7 @@ class MessagePipe():
 class MessageLogger:
 	def __init__(self, file):
 		self.file = file
-		print '[dreamIRC] %s  MESSAGE LOGGER = %s \n' % (time.strftime("[%H:%M:%S]", time.localtime(time.time())),self.file)
+		print '[dreamIRC] %s  MESSAGE LOGGER = %s \n' % (time.strftime("[%H:%M:%S]", time.localtime(time.time())), self.file)
 
 	def log(self, message):
 		print '[dreamIRC] %s\n' % (message)
@@ -210,7 +210,7 @@ def getMacAddress():
 	for line in os.popen("/sbin/ifconfig"):
 		if line.find('Ether') > -1:
 			mac = line.split()[4]
-			new_mac = mac.replace(":","")
+			new_mac = mac.replace(":", "")
 			break
 	return new_mac
 

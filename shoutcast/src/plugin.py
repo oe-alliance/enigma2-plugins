@@ -61,8 +61,8 @@ containerStreamripper = None
 config.plugins.shoutcast = ConfigSubsection()
 config.plugins.shoutcast.showcover = ConfigYesNo(default=True)
 config.plugins.shoutcast.showinextensions = ConfigYesNo(default=False)
-config.plugins.shoutcast.streamingrate = ConfigSelection(default="0", choices=[("0",_("All")), ("64",_(">= 64 kbps")), ("128",_(">= 128 kbps")), ("192",_(">= 192 kbps")), ("256",_(">= 256 kbps"))])
-config.plugins.shoutcast.reloadstationlist = ConfigSelection(default="0", choices=[("0",_("Off")), ("1",_("every minute")), ("3",_("every three minutes")), ("5",_("every five minutes"))])
+config.plugins.shoutcast.streamingrate = ConfigSelection(default="0", choices=[("0", _("All")), ("64", _(">= 64 kbps")), ("128", _(">= 128 kbps")), ("192", _(">= 192 kbps")), ("256", _(">= 256 kbps"))])
+config.plugins.shoutcast.reloadstationlist = ConfigSelection(default="0", choices=[("0", _("Off")), ("1", _("every minute")), ("3", _("every three minutes")), ("5", _("every five minutes"))])
 config.plugins.shoutcast.dirname = ConfigDirectory(default="/media/hdd/streamripper/")
 config.plugins.shoutcast.riptosinglefile = ConfigYesNo(default=False)
 config.plugins.shoutcast.createdirforeachstream = ConfigYesNo(default=True)
@@ -126,7 +126,7 @@ def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
 	reactor.connectTCP(host, port, factory, timeout=timeout)
 	return factory.deferred
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	session.open(SHOUTcastWidget)
 
 def Plugins(**kwargs):
@@ -424,7 +424,7 @@ class SHOUTcastWidget(Screen):
 		self["key_red"].setText(_("Record"))
 
 	def streamripperDataAvail(self, data):
-		sData = data.replace('\n','')
+		sData = data.replace('\n', '')
 		self["console"].setText(sData)
 
 	def stopReloadStationListTimer(self):
@@ -435,7 +435,7 @@ class SHOUTcastWidget(Screen):
 		self.stopReloadStationListTimer()
 		if self.mode == self.STATIONLIST:
 			# print "[SHOUTcast] reloadStationList: %s " % self.stationListURL
-			sendUrlCommand(self.stationListURL, None,10).addCallback(self.callbackStationList).addErrback(self.callbackStationListError)
+			sendUrlCommand(self.stationListURL, None, 10).addCallback(self.callbackStationList).addErrback(self.callbackStationListError)
 
 	def InputBoxStartRecordingCallback(self, returnValue=None):
 		if returnValue:
@@ -469,7 +469,7 @@ class SHOUTcastWidget(Screen):
 			containerStreamripper.execute(*cmd)
 			self["key_red"].setText(_("Stop record"))
 
-	def deleteRecordingConfirmed(self,val):
+	def deleteRecordingConfirmed(self, val):
 		if val:
 			containerStreamripper.sendCtrlC()
 
@@ -481,7 +481,7 @@ class SHOUTcastWidget(Screen):
 				if len(self.currentStreamingURL) != 0:
 					self.session.openWithCallback(self.InputBoxStartRecordingCallback, InputBox, windowTitle=_("Recording length"), title=_("Enter in minutes (0 means unlimited)"), text="0", type=Input.NUMBER)
 				else:
-					self.session.open(MessageBox, _("Only running streamings can be recorded!"), type=MessageBox.TYPE_INFO,timeout=20)
+					self.session.open(MessageBox, _("Only running streamings can be recorded!"), type=MessageBox.TYPE_INFO, timeout=20)
 		else:
 			if self.pipZapAvailable is not None and SystemInfo.get("NumVideoDecoders", 1) > 1:
 				self.activatePiP()
@@ -548,7 +548,7 @@ class SHOUTcastWidget(Screen):
 			url = self.SC + "/genre/secondary?parentid=%s&k=%s&f=xml" % (id, devid)
 		else:
 			url = "http://207.200.98.1/sbin/newxml.phtml"
-		sendUrlCommand(url, None,10).addCallback(self.callbackGenreList).addErrback(self.callbackGenreListError)
+		sendUrlCommand(url, None, 10).addCallback(self.callbackGenreList).addErrback(self.callbackGenreListError)
 
 	def callbackGenreList(self, xmlstring):
 		self["headertext"].setText(_("SHOUTcast genre list"))
@@ -651,7 +651,7 @@ class SHOUTcastWidget(Screen):
 						self["list"].hide()
 						self["statustext"].setText(_("Getting streaming data from\n%s") % sel.configItem.name.value)
 						self.currentStreamingStation = sel.configItem.name.value
-						sendUrlCommand(url, None,10).addCallback(self.callbackPLS).addErrback(self.callbackStationListError)
+						sendUrlCommand(url, None, 10).addCallback(self.callbackPLS).addErrback(self.callbackStationListError)
 					elif sel.configItem.type.value == "genre":
 						self.getStationList(sel.configItem.name.value)
 				elif self.mode == self.SEARCHLIST and self.searchSHOUTcastString != "":
@@ -673,10 +673,10 @@ class SHOUTcastWidget(Screen):
 	def callbackPLS(self, result):
 		self["headertext"].setText(self.headerTextString)
 		found = False
-		parts = string.split(result,"\n")
+		parts = string.split(result, "\n")
 		for lines in parts:
 			if lines.find("File1=") != -1:
-				line = string.split(lines,"File1=")
+				line = string.split(lines, "File1=")
 				found = True
 				self.playServiceStream(line[-1].rstrip().strip())
 				
@@ -716,7 +716,7 @@ class SHOUTcastWidget(Screen):
 		if self.reloadStationListTimerVar != 0:
 			self.reloadStationListTimer.start(1000 * 60)
 
-	def fillStationList(self,xmlstring):
+	def fillStationList(self, xmlstring):
 		stationList = []
 		try:
 			root = xml.etree.cElementTree.fromstring(xmlstring)
@@ -745,7 +745,7 @@ class SHOUTcastWidget(Screen):
 	def menu_pressed(self):
 		if not self.visible:
 			self.showWindow()
-		options = [(_("Config"), self.config),(_("Search"), self.search),]
+		options = [(_("Config"), self.config), (_("Search"), self.search), ]
 		if self.mode == self.FAVORITELIST and self.getSelectedItem() is not None:
 			options.extend(((_("rename current selected favorite"), self.renameFavorite),))
 			options.extend(((_("remove current selected favorite"), self.removeFavorite),))
@@ -758,7 +758,7 @@ class SHOUTcastWidget(Screen):
 		options.extend(((_("Hide"), self.hideWindow),))
 		if self.pipZapAvailable is not None and SystemInfo.get("NumVideoDecoders", 1) > 1:
 			options.extend(((_("Menu PiP"), self.activatePiP),))
-		self.session.openWithCallback(self.menuCallback, ChoiceBox,list=options)
+		self.session.openWithCallback(self.menuCallback, ChoiceBox, list=options)
 
 	def menuCallback(self, ret):
 		ret and ret[1]()
@@ -913,7 +913,7 @@ class SHOUTcastWidget(Screen):
 			sendUrlCommand(self.currentGoogle, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
 			return
 		self.currentGoogle = None
-		r = re.findall('murl&quot;:&quot;(http.*?)&quot',result, re.S | re.I)
+		r = re.findall('murl&quot;:&quot;(http.*?)&quot', result, re.S | re.I)
 		if r:
 			url = r[nr]
 			print "[SHOUTcast] fetch cover first try:%s" % (url)
@@ -951,7 +951,7 @@ class SHOUTcastWidget(Screen):
 				print "[SHOUTcast] downloading cover from %s to %s numer%s" % (url, coverfile, str(nr))
 				downloadPage(url, coverfile).addCallback(self.coverDownloadFinished, coverfile).addErrback(self.coverDownloadFailed)
 
-	def coverDownloadFailed(self,result):
+	def coverDownloadFailed(self, result):
 		print "[SHOUTcast] cover download failed:", result
 		if config.plugins.shoutcast.showcover.value:
 			self["statustext"].setText(_("Error downloading cover..."))
@@ -1136,7 +1136,7 @@ class SHOUTcastList(GUIComponent, object):
 	def __init__(self):
 		GUIComponent.__init__(self)
 		self.l = eListboxPythonMultiContent()
-		self.fontsize0, self.fontsize1, self.cenrylist, self.favlist, self.para, self.parb, self.parc, self.pard = skin.parameters.get("SHOUTcastListItem",(20, 18, 22, 69, 20, 23, 43, 22))
+		self.fontsize0, self.fontsize1, self.cenrylist, self.favlist, self.para, self.parb, self.parc, self.pard = skin.parameters.get("SHOUTcastListItem", (20, 18, 22, 69, 20, 23, 43, 22))
 		self.onSelectionChanged = []
 		self.mode = 0
 
@@ -1260,7 +1260,7 @@ class SHOUTcastSetup(Screen, ConfigListScreen):
 	def keySelect(self):
 		cur = self["config"].getCurrent()
 		if cur == self.dirname:
-			self.session.openWithCallback(self.pathSelected,SHOUTcastStreamripperRecordingPath,config.plugins.shoutcast.dirname.value)
+			self.session.openWithCallback(self.pathSelected, SHOUTcastStreamripperRecordingPath, config.plugins.shoutcast.dirname.value)
 
 	def pathSelected(self, res):
 		if res is not None:

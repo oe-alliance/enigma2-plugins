@@ -68,7 +68,7 @@ config.plugins.epgrefresh.adapter = ConfigSelection(choices=adapter_choices, def
 
 config.plugins.epgrefresh.show_in_extensionsmenu = ConfigYesNo(default=False)
 config.plugins.epgrefresh.show_run_in_extensionsmenu = ConfigYesNo(default=True)
-if getImageDistro() in ("openatv","openvix",):
+if getImageDistro() in ("openatv", "openvix",):
 	config.plugins.epgrefresh.show_in_plugins = ConfigYesNo(default=False)
 else:
 	config.plugins.epgrefresh.show_in_plugins = ConfigYesNo(default=True)
@@ -103,7 +103,7 @@ try:
 	reader = XMLHelpReader(helpfile)
 	epgrefreshHelp = registerHelp(*reader)
 except Exception as e:
-	print("[EPGRefresh] Unable to initialize MPHelp:", e,"- Help not available!")
+	print("[EPGRefresh] Unable to initialize MPHelp:", e, "- Help not available!")
 	epgrefreshHelp = None
 #pragma mark -
 

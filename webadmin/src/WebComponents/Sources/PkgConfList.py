@@ -24,7 +24,7 @@ class PkgConfList(Source):
 			elif self.func is self.LIST:
 				pass
 			
-	def switch(self,cmd):
+	def switch(self, cmd):
 		if cmd:
 			try:
 				file = cmd["file"]
@@ -55,7 +55,7 @@ class PkgConfList(Source):
 				text = ""
 				with open("/etc/opkg/" + file) as f:
 					text = f.read()
-					print "[PkgConfList] text ",text
+					print "[PkgConfList] text ", text
 					f.close()
 				list.append((file, text))
 		return list

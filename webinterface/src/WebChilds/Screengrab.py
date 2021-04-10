@@ -71,9 +71,9 @@ class GrabResource(resource.Resource):
 			if mimetype == 'jpg':
 				mimetype = 'jpeg'
 
-			request.setHeader('Content-Type','image/%s' % mimetype)
+			request.setHeader('Content-Type', 'image/%s' % mimetype)
 
-			filename = "%s.%s" % (filename,imageformat)
+			filename = "%s.%s" % (filename, imageformat)
 			append(filename)
 			cmd = [self.GRAB_BIN, self.GRAB_BIN] + args
 
@@ -117,7 +117,7 @@ class GrabStream:
 					if self.save is False:
 						os_remove(self.target)
 						print '[Screengrab.py] %s removed' % self.target
-				except Exception,e:
+				except Exception, e:
 					self.request.write('Internal error while reading target file')
 					self.request.setResponseCode(http.INTERNAL_SERVER_ERROR)
 

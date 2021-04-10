@@ -20,7 +20,7 @@ class AccountManager:
 	@ivar accounts: A collection of available accounts.
 	@type accounts: mapping of strings to L{Account<interfaces.IAccount>}s.
 	"""
-	def __init__(self,session):
+	def __init__(self, session):
 		self.chatui = e2chat.ChatUI()
 		self.config = dreamIRCSetup.dreamIRCConfig()
 		self.accounts = self.config.load()
@@ -42,7 +42,7 @@ class AccountManager:
 		"""
 		data = []
 		for account in self.accounts:
-			data.append((account.accountName, account.isOnline(),account.autoLogin, account.gatewayType))
+			data.append((account.accountName, account.isOnline(), account.autoLogin, account.gatewayType))
 		return data
 
 	def isEmpty(self):

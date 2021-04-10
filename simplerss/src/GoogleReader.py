@@ -45,7 +45,7 @@ class GoogleReader:
 
 	def loginFinished(self, res=None, defer=None):
 		pos_beg = res.find('Auth=')
-		pos_end = res.find('\n',pos_beg)
+		pos_end = res.find('\n', pos_beg)
 		self.auth = res[pos_beg + 5:pos_end]
 		if defer:
 			defer.callback(self.auth)

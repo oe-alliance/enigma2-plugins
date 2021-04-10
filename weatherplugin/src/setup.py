@@ -83,11 +83,11 @@ class MSNWeatherPluginEntriesListConfigScreen(Screen):
 		self["key_yellow"] = StaticText(_("Edit"))
 		self["key_blue"] = StaticText(_("Delete"))
 		self["entrylist"] = WeatherPluginEntryList([])
-		self["actions"] = ActionMap(["WizardActions","MenuActions","ShortcutActions"],
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
 			{
-			 "ok"	: self.keyOK,
-			 "back"	: self.keyClose,
-			 "red"	: self.keyClose,
+			 "ok": self.keyOK,
+			 "back": self.keyClose,
+			 "red": self.keyClose,
 			 "green": self.keyGreen,    
 			 "yellow": self.keyYellow,
 			 "blue": self.keyDelete,
@@ -101,7 +101,7 @@ class MSNWeatherPluginEntriesListConfigScreen(Screen):
 		self.close(-1, None)
 
 	def keyGreen(self):
-		self.session.openWithCallback(self.updateList,MSNWeatherPluginEntryConfigScreen,None)
+		self.session.openWithCallback(self.updateList, MSNWeatherPluginEntryConfigScreen, None)
 
 	def keyOK(self):
 		try:
@@ -117,7 +117,7 @@ class MSNWeatherPluginEntriesListConfigScreen(Screen):
 			sel = None
 		if sel is None:
 			return
-		self.session.openWithCallback(self.updateList,MSNWeatherPluginEntryConfigScreen,sel)
+		self.session.openWithCallback(self.updateList, MSNWeatherPluginEntryConfigScreen, sel)
 
 	def keyDelete(self):
 		try:
@@ -144,8 +144,8 @@ class WeatherPluginEntryList(MenuList):
 	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 
-		font1, size1 = skinparameter.get("WeatherPluginEntryListFont1", ('Regular',20))
-		font2, size2 = skinparameter.get("WeatherPluginEntryListFont2", ('Regular',18))
+		font1, size1 = skinparameter.get("WeatherPluginEntryListFont1", ('Regular', 20))
+		font2, size2 = skinparameter.get("WeatherPluginEntryListFont2", ('Regular', 18))
 		self.l.setFont(0, gFont(font1, size1))
 		self.l.setFont(1, gFont(font2, size2))
 
@@ -223,7 +223,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 		
 	def searchLocation(self):
 		if self.current.city.value != "":
-			language = config.osd.language.value.replace("_","-")
+			language = config.osd.language.value.replace("_", "-")
 			if language == "en-EN": # hack
 				language = "en-US"
 			elif language == "no-NO": # hack
@@ -333,11 +333,11 @@ class MSNWeatherPluginSearch(Screen):
 		self["key_red"] = StaticText(_("Back"))
 		self["key_green"] = StaticText(_("OK"))		
 		self["entrylist"] = MSNWeatherPluginSearchResultList([])
-		self["actions"] = ActionMap(["WizardActions","MenuActions","ShortcutActions"],
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
 			{
-			 "ok"	: self.keyOK,
+			 "ok": self.keyOK,
 			 "green": self.keyOK,
-			 "back"	: self.keyClose,
+			 "back": self.keyClose,
 			 "red": self.keyClose,
 			 }, -1)
 		self.updateList(xmlstring)
@@ -361,8 +361,8 @@ class MSNWeatherPluginSearchResultList(MenuList):
 	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 
-		font1, size1 = skinparameter.get("WeatherPluginSearchResultListFont1", ('Regular',20))
-		font2, size2 = skinparameter.get("WeatherPluginSearchResultListFont2", ('Regular',18))
+		font1, size1 = skinparameter.get("WeatherPluginSearchResultListFont1", ('Regular', 20))
+		font2, size2 = skinparameter.get("WeatherPluginSearchResultListFont2", ('Regular', 18))
 		self.l.setFont(0, gFont(font1, size1))
 		self.l.setFont(1, gFont(font2, size2))
 

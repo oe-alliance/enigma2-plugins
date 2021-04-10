@@ -111,7 +111,7 @@ def _parse(url):
 	url = url.strip()
 	parsed = urlparse(url)
 	scheme = parsed[0]
-	path = urlunparse(('','') + parsed[2:])
+	path = urlunparse(('', '') + parsed[2:])
 	host, port = parsed[1], 80
 	if '@' in host:
 		username, host = host.split('@')

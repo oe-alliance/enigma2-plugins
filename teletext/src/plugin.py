@@ -66,7 +66,7 @@ SPLIT_MODE_TIP = "tip"
 splittingModeList = [(SPLIT_MODE_PAT, _("picture and teletext")), (SPLIT_MODE_TAP, _("teletext and picture")), (SPLIT_MODE_TIP, _("teletext in picture"))]
 textlevelModeList = [("0", "1.0"), ("1", "1.5"), ("2", "2.5"), ("3", "3.5")]
 regionList = [("0", _("Western and Central Europe")), ("8", _("Eastern Europe")), ("16", _("Western Europe and Turkey")), ("24", _("Central and Southeast Europe")), ("32", _("Cyrillic")), ("48", _("Turkish / Greek")), ("64", _("Arabic")), ("80", _("Hebrew / Arabic"))]
-filterList = [("%d" % DISABLED,_("Disabled")), ("%d" % BILINEAR,_("bilinear")), ("%d" % ANISOTROPIC,_("anisotropic")), ("%d" % SHARP,_("sharp")), ("%d" % SHARPER,_("sharper"))]
+filterList = [("%d" % DISABLED, _("Disabled")), ("%d" % BILINEAR, _("bilinear")), ("%d" % ANISOTROPIC, _("anisotropic")), ("%d" % SHARP, _("sharp")), ("%d" % SHARPER, _("sharper"))]
 
 HELP_TEXT_POS = _("Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically.")
 HELP_TEXT_TIP_POS = _("Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically.")
@@ -102,16 +102,16 @@ DEF_BOTTOM = dsk_height - DEF_TOP
 config.plugins.TeleText = ConfigSubsection()
 config.plugins.TeleText.scale_filter = ConfigSelection(filterList, default="%d" % BILINEAR)
 config.plugins.TeleText.scale_filter_zoom = ConfigSelection(filterList, default="%d" % BILINEAR)
-config.plugins.TeleText.brightness = ConfigSlider(default=8, increment=1, limits=(0,15))
-config.plugins.TeleText.contrast = ConfigSlider(default=12, increment=1, limits=(0,15))
-config.plugins.TeleText.transparency = ConfigSlider(default=8, increment=1, limits=(0,15))
+config.plugins.TeleText.brightness = ConfigSlider(default=8, increment=1, limits=(0, 15))
+config.plugins.TeleText.contrast = ConfigSlider(default=12, increment=1, limits=(0, 15))
+config.plugins.TeleText.transparency = ConfigSlider(default=8, increment=1, limits=(0, 15))
 config.plugins.TeleText.edge_cut = ConfigEnableDisable(default=False)
 config.plugins.TeleText.splitting_mode = ConfigSelection(splittingModeList, default=SPLIT_MODE_PAT)
 config.plugins.TeleText.textlevel = ConfigSelection(textlevelModeList, default="2")
 config.plugins.TeleText.region = ConfigSelection(regionList, default="16")
 config.plugins.TeleText.debug = ConfigEnableDisable(default=False)
-config.plugins.TeleText.pos = ConfigSequence(default=[DEF_LEFT, DEF_TOP, DEF_RIGHT, DEF_BOTTOM], seperator=",", limits=[(0,dsk_width >> 3),(0,dsk_height >> 3),(dsk_width - (dsk_width >> 3),dsk_width),(dsk_height - (dsk_height >> 3),dsk_height)])
-config.plugins.TeleText.tip_pos = ConfigSequence(default=[(dsk_width >> 1) + (dsk_width >> 2), (dsk_height >> 1) + (dsk_height >> 2), dsk_width, dsk_height], seperator=",", limits=[(0,dsk_width - MIN_W),(0,dsk_height - MIN_H),(MIN_W,dsk_width),(MIN_H,dsk_height)])
+config.plugins.TeleText.pos = ConfigSequence(default=[DEF_LEFT, DEF_TOP, DEF_RIGHT, DEF_BOTTOM], seperator=",", limits=[(0, dsk_width >> 3), (0, dsk_height >> 3), (dsk_width - (dsk_width >> 3), dsk_width), (dsk_height - (dsk_height >> 3), dsk_height)])
+config.plugins.TeleText.tip_pos = ConfigSequence(default=[(dsk_width >> 1) + (dsk_width >> 2), (dsk_height >> 1) + (dsk_height >> 2), dsk_width, dsk_height], seperator=",", limits=[(0, dsk_width - MIN_W), (0, dsk_height - MIN_H), (MIN_W, dsk_width), (MIN_H, dsk_height)])
 # state
 config.plugins.TeleText.textOnly = ConfigEnableDisable(default=True)
 config.plugins.TeleText.opaque = ConfigEnableDisable(default=False)
@@ -215,8 +215,8 @@ class TeleText(Screen):
     self.helpList.append((self["actions"], "OkCancelActions", [("cancel", _("exit"))]))
 #    self.helpList.append((self["actions"], "TeleTextActions", [("volUp",_("increase width"))]))
 #    self.helpList.append((self["actions"], "TeleTextActions", [("volDown",_("decrease width"))]))
-    self.helpList.append((self["actions"], "TeleTextActions", [("nextBouquet",_("zoom / increase height"))]))
-    self.helpList.append((self["actions"], "TeleTextActions", [("prevBouquet",_("favorites / decrease height"))]))
+    self.helpList.append((self["actions"], "TeleTextActions", [("nextBouquet", _("zoom / increase height"))]))
+    self.helpList.append((self["actions"], "TeleTextActions", [("prevBouquet", _("favorites / decrease height"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("info", _("toggle info"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("menu", _("teletext settings"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("up", _("next page / catch page / move"))]))
@@ -301,7 +301,7 @@ class TeleText(Screen):
     if x[0] == 0:
       self.catchPage = False
     elif x[0] == 1:
-      self.ttx.update(0,0,492,250, self.zoom, self.filter_mode)
+      self.ttx.update(0, 0, 492, 250, self.zoom, self.filter_mode)
       if x[1] == 2303:
         x[1] = 0x0100
       self.cur_page = "%s%s%s-%s%s/%s%s" % ((x[1] & 0x0F00) >> 8, (x[1] & 0xF0) >> 4, x[1] & 0x0F, x[2] >> 4, x[2] & 0x0F, x[3] >> 4, x[3] & 0x0F)
@@ -481,7 +481,7 @@ class TeleText(Screen):
       # open favorites
       if len(self.pid_list) > 0:
         self.inMenu = True
-        self.session.openWithCallback(self.favoritesResult, TeleTextFavoritesMenu, parent=self, service=self.pid_list[self.pid_index], page=self.cur_page.split("-",1)[0], favorites=self.favorites)
+        self.session.openWithCallback(self.favoritesResult, TeleTextFavoritesMenu, parent=self, service=self.pid_list[self.pid_index], page=self.cur_page.split("-", 1)[0], favorites=self.favorites)
     else:
       # position setup
       if self.nav_pos[3] > (self.nav_pos[1] + MIN_H):
@@ -678,10 +678,10 @@ class TeleText(Screen):
       top = pos[1]
       height = bottom - top
       log("splitting video")
-      l = open("/proc/stb/vmpeg/0/dst_left","w")
+      l = open("/proc/stb/vmpeg/0/dst_left", "w")
       l.write("%x" % 0)
       l.close()
-      w = open("/proc/stb/vmpeg/0/dst_width","w")
+      w = open("/proc/stb/vmpeg/0/dst_width", "w")
       w.write("%x" % 360)
       w.close()
     elif mode == SPLIT_MODE_TAP:
@@ -690,10 +690,10 @@ class TeleText(Screen):
       top = pos[1]
       height = bottom - top
       log("splitting video")
-      l = open("/proc/stb/vmpeg/0/dst_left","w")
+      l = open("/proc/stb/vmpeg/0/dst_left", "w")
       l.write("%x" % 360)
       l.close()
-      w = open("/proc/stb/vmpeg/0/dst_width","w")
+      w = open("/proc/stb/vmpeg/0/dst_width", "w")
       w.write("%x" % 360)
       w.close()
     elif mode == SPLIT_MODE_TIP:
@@ -706,19 +706,19 @@ class TeleText(Screen):
       self.resetVideo()
 
     log("screen rect %s %s %s %s" % (left, top, width, height))
-    self.instance.move(ePoint(left,top))
+    self.instance.move(ePoint(left, top))
     self.instance.resize(eSize(*(width, height)))
 
     self.ttx.hide()
     self.ttx.show(self.instance)
-    self.ttx.update(0,0,492,250,self.zoom,self.filter_mode)
+    self.ttx.update(0, 0, 492, 250, self.zoom, self.filter_mode)
 
   def resetVideo(self):
     log("reset video")
-    l = open("/proc/stb/vmpeg/0/dst_left","w")
+    l = open("/proc/stb/vmpeg/0/dst_left", "w")
     l.write("%x" % 0)
     l.close()
-    w = open("/proc/stb/vmpeg/0/dst_width","w")
+    w = open("/proc/stb/vmpeg/0/dst_width", "w")
     w.write("%x" % 720)
     w.close()
 
@@ -1335,7 +1335,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
     ]
     if config.plugins.TeleText.splitting_mode.value == SPLIT_MODE_TIP:
       self.list.append(getConfigListEntry("... %s" % _("Position and size"), config.plugins.TeleText.tip_pos))
-    self.list.append(getConfigListEntry(_("Background caching"),config.plugins.TeleText.background_caching))
+    self.list.append(getConfigListEntry(_("Background caching"), config.plugins.TeleText.background_caching))
     self.list.append(getConfigListEntry(_("Debug"), config.plugins.TeleText.debug))
 
     self["config"].list = self.list
@@ -1571,7 +1571,7 @@ class TeleTextFavorites():
 
   def write(self):
     log("[favorites] writing")
-    fp = open(self.configFile,"w")
+    fp = open(self.configFile, "w")
     self.parser.write(fp)
     fp.close()   
 
@@ -1579,7 +1579,7 @@ class TeleTextFavorites():
     index = str(index)
     if self.parser.has_option(service, index) is False:
       return None
-    return self.parser.get(service, index).split(";",1)
+    return self.parser.get(service, index).split(";", 1)
 
   def getFavorites(self, service):
     result = []
@@ -1735,7 +1735,7 @@ class TeleTextFavoritesMenu(Screen):
     if value == _("<empty>"):
       value = ""
     else:
-      value = value.split(None,1)[1]
+      value = value.split(None, 1)[1]
     self.session.openWithCallback(
       self.addFavorite,
       NTIVirtualKeyBoard,

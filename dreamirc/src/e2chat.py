@@ -259,7 +259,7 @@ class GroupConversation:
         
     def refreshMemberList(self):
         self.pipe.clearBuddyList()
-        self.members.sort(lambda x,y: cmp(string.lower(x), string.lower(y)))
+        self.members.sort(lambda x, y: cmp(string.lower(x), string.lower(y)))
         self.pipe.getCannelName(self.group.name)
         for member in self.members:
             self.pipe.buildBuddyList(str(member))
@@ -342,7 +342,7 @@ class ChatUI:
             conv.show()
         return conv
 
-    def getGroupConversation(self,group,Class=GroupConversation,stayHidden=0):
+    def getGroupConversation(self, group, Class=GroupConversation, stayHidden=0):
         """For the given group object, returns the group conversation window or
         creates and returns a new group conversation window if it doesn't exist
 

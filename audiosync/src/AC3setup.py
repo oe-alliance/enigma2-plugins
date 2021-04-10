@@ -6,7 +6,7 @@ from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
 from Components.ConfigList import ConfigListScreen
-from Components.Label import Label,MultiColorLabel
+from Components.Label import Label, MultiColorLabel
 from Components.ProgressBar import ProgressBar
 from Components.config import config, getConfigListEntry
 from Screens.ChoiceBox import ChoiceBox
@@ -33,7 +33,7 @@ class AC3LipSyncSetup(ConfigListScreen, Screen):
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
 		self['footnote'] = Label("")
-		self["status"] = StaticText(_("Plugin: %(plugin)s , Version: %(version)s") % dict(plugin=PLUGIN_BASE,version=PLUGIN_VERSION))
+		self["status"] = StaticText(_("Plugin: %(plugin)s , Version: %(version)s") % dict(plugin=PLUGIN_BASE, version=PLUGIN_VERSION))
 
 		# Lets get a list of elements for the config list
 		self.list = [

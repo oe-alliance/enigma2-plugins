@@ -28,11 +28,11 @@ config.plugins.epgbackup.backup_enabled = ConfigYesNo(default=True)
 config.plugins.epgbackup.make_backup_after_unsuccess_restore = ConfigYesNo(default=True)
 config.plugins.epgbackup.callAfterEPGRefresh = ConfigYesNo(default=True)
 config.plugins.epgbackup.backupSaveInterval = ConfigSelection(choices=[
-        ("-1",_("backup timer disabled")),
-        ("30",_("30 minutes")),
-        ("60",_("1 hour")),
-        ("300",_("6 hours")),
-        ("1200",_("1 day")),
+        ("-1", _("backup timer disabled")),
+        ("30", _("30 minutes")),
+        ("60", _("1 hour")),
+        ("300", _("6 hours")),
+        ("1200", _("1 day")),
     ], default="-1")
 config.plugins.epgbackup.show_messages_background = ConfigYesNo(default=True)
 config.plugins.epgbackup.filesize_valid = ConfigSelectionNumber(min=1, 
@@ -190,7 +190,7 @@ config.plugins.epgbackup.show_backuprestore_in_extmenu.addNotifier(PluginHouseke
 def Plugins(**kwargs):
 	pluginList = [
 		PluginDescriptor(
-			where=[PluginDescriptor.WHERE_SESSIONSTART,PluginDescriptor.WHERE_AUTOSTART],
+			where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART],
 			fnc=autostart)
 	]
 	

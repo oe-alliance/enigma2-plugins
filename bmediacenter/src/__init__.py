@@ -54,9 +54,9 @@ config.plugins.mc_vlc.folders = ConfigSubList()
 
 config.plugins.mc_vlc.vcodec = ConfigSelection({"mp1v": "MPEG1", "mp2v": "MPEG2"}, "mp2v")
 config.plugins.mc_vlc.vb = ConfigInteger(1000, (100, 9999))
-config.plugins.mc_vlc.acodec = ConfigSelection({"mpga":"MP1", "mp2a": "MP2", "mp3": "MP3"}, "mp2a")
+config.plugins.mc_vlc.acodec = ConfigSelection({"mpga": "MP1", "mp2a": "MP2", "mp3": "MP3"}, "mp2a")
 config.plugins.mc_vlc.ab = ConfigInteger(128, (64, 320))
-config.plugins.mc_vlc.samplerate = ConfigSelection({"0":"as Input", "44100": "44100", "48000": "48000"}, "0")
+config.plugins.mc_vlc.samplerate = ConfigSelection({"0": "as Input", "44100": "44100", "48000": "48000"}, "0")
 config.plugins.mc_vlc.channels = ConfigInteger(2, (1, 9))
 config.plugins.mc_vlc.width = ConfigSelection(["352", "704", "720"])
 config.plugins.mc_vlc.height = ConfigSelection(["288", "576"])
@@ -73,7 +73,7 @@ def addVlcServerConfig():
 	i = len(config.plugins.mc_vlc.servers)
 	config.plugins.mc_vlc.servers.append(ConfigSubsection())
 	config.plugins.mc_vlc.servers[i].host = ConfigText("", False)
-	config.plugins.mc_vlc.servers[i].httpport = ConfigInteger(8080, (0,65535))
+	config.plugins.mc_vlc.servers[i].httpport = ConfigInteger(8080, (0, 65535))
 	config.plugins.mc_vlc.servers[i].basedir = ConfigText("/", False)
 	config.plugins.mc_vlc.servercount.value = i + 1
 	return i

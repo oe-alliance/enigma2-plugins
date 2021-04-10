@@ -35,7 +35,7 @@ class AutoTimerEditor(Source):
 		backupFilename = path.join(self.BACKUP_PATH, tarFilename)
 		if path.exists(backupFilename):
 			remove(backupFilename)
-		checkfile = path.join(self.BACKUP_PATH,'.autotimeredit')
+		checkfile = path.join(self.BACKUP_PATH, '.autotimeredit')
 		f = open(checkfile, 'w')
 		if f:
 			files = []
@@ -48,7 +48,7 @@ class AutoTimerEditor(Source):
 				if not path.exists(arg):
 					return (False, "Error while preparing backup file, %s does not exists." % arg)
 				tarFiles += "%s " % arg
-			lines = popen("tar cvf %s %s" % (backupFilename,tarFiles)).readlines()
+			lines = popen("tar cvf %s %s" % (backupFilename, tarFiles)).readlines()
 			remove(checkfile)
 			return (True, tarFilename)
 		else:

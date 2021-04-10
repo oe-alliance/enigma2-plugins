@@ -18,7 +18,7 @@ class Interface(StreamInterface):
             list.append(stream)
         self.list = list
         self.OnListLoaded()
-    def getMenuItems(self,selectedStream,generic=False):
+    def getMenuItems(self, selectedStream, generic=False):
         self.selectedStream = selectedStream
         list = []
         if generic is True and selectedStream is not None:
@@ -55,12 +55,12 @@ class SHOUTcasterFavorites:
                 stream = self.getStreamByName(section)
                 streams.append(stream)
         return streams
-    def isStream(self,streamname):
+    def isStream(self, streamname):
         if self.configparser.has_section(streamname) is True:
             return True
         else:
             return False
-    def getStreamByName(self,streamname):
+    def getStreamByName(self, streamname):
         print "[" + myname + "] load " + streamname + " from config"
         if self.isStream(streamname) is True:
             stream = Stream(
@@ -78,15 +78,15 @@ class SHOUTcasterFavorites:
         print "[" + myname + "] adding " + stream.getName() + " to config"
         try:
             self.configparser.add_section(stream.getName())
-        except DuplicateSectionError,e:
-            print "[" + myname + "] error while adding stream to config:",e
-            return False,e
+        except DuplicateSectionError, e:
+            print "[" + myname + "] error while adding stream to config:", e
+            return False, e
         else:
             # XXX: I hope this still works properly if we make a optimistic
             # return here since otherwise the interface would need to be changed
             # to work with a callback
             stream.getURL(boundFunction(self.addStreamCb, stream))
-            return True,"Stream added"
+            return True, "Stream added"
 
     def addStreamCb(self, stream, url=None):
         self.configparser.set(stream.getName(), "description", stream.getDescription())
@@ -94,23 +94,23 @@ class SHOUTcasterFavorites:
         self.configparser.set(stream.getName(), "type", stream.getType())
         self.writeConfig()
 
-    def changeStream(self,streamold,streamnew):
+    def changeStream(self, streamold, streamnew):
         if self.configparser.has_section(streamold.getName()) is False:
-            return False,"stream not found in config"
+            return False, "stream not found in config"
         elif self.configparser.has_section(streamnew.getName()) is True:
-            return False,"stream with that name exists already"
+            return False, "stream with that name exists already"
         else:    
            self.configparser.remove_section(streamold.getName())
            return self.addStream(streamnew)
         
-    def deleteStreamWithName(self,streamname):
+    def deleteStreamWithName(self, streamname):
         self.configparser.remove_section(streamname)
         self.writeConfig()
         
     def writeConfig(self):
         print "[" + myname + "] writing config to " + self.configfile
         
-        fp = open(self.configfile,"w")
+        fp = open(self.configfile, "w")
         self.configparser.write(fp)
         fp.close()
             

@@ -23,7 +23,7 @@ def main(session, *args, **kwargs):
 		name = self.session.nav.getCurrentlyPlayingServiceReference().toString()
 		name = name.split('/')
 		name = name[-1]
-		name = name.replace('.',' ')
+		name = name.replace('.', ' ')
 		name = name.split('-')
 		name = name[0]
 		if name.endswith(' '):

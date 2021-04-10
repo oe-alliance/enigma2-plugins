@@ -49,7 +49,7 @@ def getToplevel(session):
 	root.putChild("play", ServiceplayerResource(session))
 	root.putChild("wap", RedirectorResource("/mobile/"))
 	root.putChild("mobile", ScreenPage(session, util.sibpath(__file__, "mobile"), True))
-	root.putChild("m",ScreenPage(session, util.sibpath(__file__, "m"), True))
+	root.putChild("m", ScreenPage(session, util.sibpath(__file__, "m"), True))
 	root.putChild("upload", UploadResource())
 	root.putChild("servicelist", ServiceList(session))
 	root.putChild("streamcurrent", RedirecToCurrentStreamResource(session))

@@ -59,7 +59,7 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
     site_name = "Subtitulos"
 
     def __init__(self, config, cache_folder_path):
-        super(Subtitulos, self).__init__(langs=None,revertlangs=LANGUAGES)
+        super(Subtitulos, self).__init__(langs=None, revertlangs=LANGUAGES)
         #http://www.subtitulos.es/dexter/4x01
         self.host = "http://www.subtitulos.es"
         self.release_pattern = re.compile("Versi&oacute;n (.+) ([0-9]+).([0-9])+ megabytes")
@@ -104,8 +104,8 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
             return sublinks
         
         soup = BeautifulSoup(content)
-        for subs in soup("div", {"id":"version"}):
-            version = subs.find("p", {"class":"title-sub"})
+        for subs in soup("div", {"id": "version"}):
+            version = subs.find("p", {"class": "title-sub"})
             subteams = self.release_pattern.search("%s" % version.contents[1]).group(1).lower()            
             teams = set(teams)
             subteams = self.listTeams([subteams], [".", "_", " ", "/"])
@@ -113,15 +113,15 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
             log.debug("Team from website: %s" % subteams)
             log.debug("Team from file: %s" % teams)
 
-            nexts = subs.findAll("ul", {"class":"sslist"})
+            nexts = subs.findAll("ul", {"class": "sslist"})
             for lang_html in nexts:
-                langLI = lang_html.findNext("li",{"class":"li-idioma"})
+                langLI = lang_html.findNext("li", {"class": "li-idioma"})
                 lang = self.getLG(langLI.find("strong").contents[0].string.strip())
         
-                statusLI = lang_html.findNext("li",{"class":"li-estado green"})
+                statusLI = lang_html.findNext("li", {"class": "li-estado green"})
                 status = statusLI.contents[0].string.strip()
 
-                link = statusLI.findNext("span", {"class":"descargar green"}).find("a")["href"]
+                link = statusLI.findNext("span", {"class": "descargar green"}).find("a")["href"]
                 if status == "Completado" and subteams.issubset(teams) and (not langs or lang in langs):
                     result = {}
                     result["release"] = "%s.S%.2dE%.2d.%s" % (name.replace("-", ".").title(), int(season), int(episode), '.'.join(subteams))

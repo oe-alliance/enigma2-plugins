@@ -18,7 +18,7 @@ import struct
 
 ###-------------------------  Log  ------------------###############
    
-def log(module,msg):
+def log(module, msg):
 #---
 #-  xbmc.output("### [%s-%s] - %s" % (__scriptname__,module,msg,),level=xbmc.LOGDEBUG )
 #+++
@@ -45,7 +45,7 @@ def hashFile(filename):
         hash += l_value 
         hash = hash & 0xFFFFFFFFFFFFFFFF #to remain as 64bit number
       
-      f.seek(max(0,filesize - 65536),0)
+      f.seek(max(0, filesize - 65536), 0)
       b = f.read(65536)
       for x in range(65536 / bytesize):
         buffer = b[x * bytesize:x * bytesize + bytesize]
@@ -83,15 +83,15 @@ def regex_tvshow(compare, file, sub=""):
     for regex in regex_expressions:
       response_file = re.findall(regex, file)                  
       if len(response_file) > 0: 
-        print "Regex File Se: %s, Ep: %s," % (str(response_file[0][0]),str(response_file[0][1]),)
+        print "Regex File Se: %s, Ep: %s," % (str(response_file[0][0]), str(response_file[0][1]),)
         tvshow = 1
         if not compare:
             title = re.split(regex, file)[0]
-            for char in ['[', ']', '_', '(', ')','.','-']: 
+            for char in ['[', ']', '_', '(', ')', '.', '-']: 
                title = title.replace(char, ' ')
             if title.endswith(" "):
               title = title[:-1]
-            return title,response_file[0][0], response_file[0][1]
+            return title, response_file[0][0], response_file[0][1]
         else:
             break
     
@@ -109,7 +109,7 @@ def regex_tvshow(compare, file, sub=""):
     if compare:
         return True
     else:
-        return "","",""    
+        return "", "", ""    
 
 
 

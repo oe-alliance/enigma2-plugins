@@ -93,10 +93,10 @@ config.plugins.EasyInfo.pos9 = ConfigSelection(default="no", choices=CHOICELIST)
 config.plugins.EasyInfo.pos10 = ConfigSelection(default="no", choices=CHOICELIST)
 config.plugins.EasyInfo.pos11 = ConfigSelection(default="no", choices=CHOICELIST)
 config.plugins.EasyInfo.EvInStart = ConfigSelection(default="yes", choices=[("no", _("Disabled")), ("yes", _("Enabled"))])
-config.plugins.EasyInfo.bEvInYellow = ConfigSelection(default="singleepg", choices=[("singleepg", _("Single EPG")),("multiepg", _("Multi EPG")),("easypg", _("Easy-PG")),("graphepg", _("Graphik multi-EPG")),("merlinepg", _("Merlin EPG")),("cooltv", _("Cool-TV")),("imdbinfo", _("IMDB info"))])
-config.plugins.EasyInfo.bEvInBlue = ConfigSelection(default="multiepg", choices=[("singleepg", _("Single EPG")),("multiepg", _("Multi EPG")),("easypg", _("Easy-PG")),("graphepg", _("Graphik multi-EPG")),("merlinepg", _("Merlin EPG")),("cooltv", _("Cool-TV")),("imdbinfo", _("IMDB info"))])
+config.plugins.EasyInfo.bEvInYellow = ConfigSelection(default="singleepg", choices=[("singleepg", _("Single EPG")), ("multiepg", _("Multi EPG")), ("easypg", _("Easy-PG")), ("graphepg", _("Graphik multi-EPG")), ("merlinepg", _("Merlin EPG")), ("cooltv", _("Cool-TV")), ("imdbinfo", _("IMDB info"))])
+config.plugins.EasyInfo.bEvInBlue = ConfigSelection(default="multiepg", choices=[("singleepg", _("Single EPG")), ("multiepg", _("Multi EPG")), ("easypg", _("Easy-PG")), ("graphepg", _("Graphik multi-EPG")), ("merlinepg", _("Merlin EPG")), ("cooltv", _("Cool-TV")), ("imdbinfo", _("IMDB info"))])
 config.plugins.EasyInfo.myPicons = ConfigSelection(default="/media/usb/epgpicon/", choices=[("/media/usb/epgpicon/", "/media/usb/epgpicon/"), ("/media/cf/epgpicon/", "/media/cf/epgpicon/"), ("/media/hdd/epgpicon/", "/media/hdd/epgpicon/"), ("/usr/share/enigma2/epgpicon/", "/usr/share/enigma2/epgpicon/")])
-config.plugins.EasyInfo.epgOKFunc = ConfigSelection(default="info", choices=[("info", _("Event info")), ("zap", _("Just zap")),("exitzap", _("Zap and Exit"))])
+config.plugins.EasyInfo.epgOKFunc = ConfigSelection(default="info", choices=[("info", _("Event info")), ("zap", _("Just zap")), ("exitzap", _("Zap and Exit"))])
 config.plugins.EasyInfo.Primetime1 = ConfigClock(default=63000)
 config.plugins.EasyInfo.Primetime2 = ConfigClock(default=69300)
 config.plugins.EasyInfo.Primetime3 = ConfigClock(default=75600)
@@ -696,7 +696,7 @@ class EasyEvent(Screen, EventViewBase):
 				"pageDown": self.pageDown,
 				"prevEvent": self.prevEvent,
 				"nextEvent": self.nextEvent
-			},-1)
+			}, -1)
 
 	def openSimilarList(self):
 		self.hide()
@@ -770,7 +770,7 @@ class EvNewList(EPGList):
 	def buildMultiEntry(self, changecount, service, eventId, beginTime, duration, EventName, nowTime, service_name):
 		(clock_pic, rec) = self.getPixmapForEntry(service, eventId, beginTime, duration)
 		res = [None]
-		sref = str(service)[:-1].replace(':','_')
+		sref = str(service)[:-1].replace(':', '_')
 		Spixmap = LoadPixmap(path=(config.plugins.EasyInfo.myPicons.value + sref + '.png'))
 		if Spixmap is not None:
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 5, 4, 70, 42, Spixmap))
@@ -784,7 +784,7 @@ class EvNewList(EPGList):
 				end = localtime(beginTime + duration)
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_TEXT, 100, 4, 10, 20, 1, RT_HALIGN_RIGHT, '>'),
-					(eListboxPythonMultiContent.TYPE_TEXT, 110, 4, 70, 44, 1, RT_HALIGN_LEFT, "%02d.%02d\n%02d.%02d" % (begin[3],begin[4],end[3],end[4])),
+					(eListboxPythonMultiContent.TYPE_TEXT, 110, 4, 70, 44, 1, RT_HALIGN_LEFT, "%02d.%02d\n%02d.%02d" % (begin[3], begin[4], end[3], end[4])),
 					(eListboxPythonMultiContent.TYPE_TEXT, 180, 1, self.breite, 48, 0, RT_HALIGN_LEFT | RT_VALIGN_TOP | RT_WRAP, EventName)
 				))
 			else:
@@ -801,7 +801,7 @@ class EvNewList(EPGList):
 				end = localtime(beginTime + duration)
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_TEXT, 100, 4, 10, 20, 1, RT_HALIGN_RIGHT, '>'),
-					(eListboxPythonMultiContent.TYPE_TEXT, 110, 4, 70, 44, 1, RT_HALIGN_LEFT, "%02d.%02d\n%02d.%02d" % (begin[3],begin[4],end[3],end[4])),
+					(eListboxPythonMultiContent.TYPE_TEXT, 110, 4, 70, 44, 1, RT_HALIGN_LEFT, "%02d.%02d\n%02d.%02d" % (begin[3], begin[4], end[3], end[4])),
 					(eListboxPythonMultiContent.TYPE_TEXT, 180, 1, self.breite, 48, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, EventName)
 				))
 			else:
@@ -814,7 +814,7 @@ class EvNewList(EPGList):
 				))
 		return res
 
-	def moveToService(self,serviceref):
+	def moveToService(self, serviceref):
 		if not serviceref:
 			return
 		index = 0
@@ -963,7 +963,7 @@ class EasyPG(EPGSelection, Screen):
 				"1": self.SetPT1,
 				"2": self.SetPT2,
 				"3": self.SetPT3
-			},-1)
+			}, -1)
 
 	def closeScreen(self):
 		self.close(True)
@@ -974,7 +974,7 @@ class EasyPG(EPGSelection, Screen):
 
 	def GoPrimetime(self):
 		heute = localtime()
-		pt = (heute[0],heute[1],heute[2],self.PThour,self.PTmin,0,heute[6],heute[7],0)
+		pt = (heute[0], heute[1], heute[2], self.PThour, self.PTmin, 0, heute[6], heute[7], 0)
 		self.ask_time = int(mktime(pt))
 		self.PTinit = True
 		if self.ask_time > int(mktime(heute)):
@@ -1004,7 +1004,7 @@ class EasyPG(EPGSelection, Screen):
 			return
 		heute = localtime()
 		if not self.PTinit:
-			pt = (heute[0],heute[1],heute[2],self.PThour,self.PTmin,0,heute[6],heute[7],0)
+			pt = (heute[0], heute[1], heute[2], self.PThour, self.PTmin, 0, heute[6], heute[7], 0)
 			self.ask_time = int(mktime(pt))
 			self.PTinit = True
 			if self.ask_time < int(mktime(heute)):
@@ -1016,7 +1016,7 @@ class EasyPG(EPGSelection, Screen):
 	def PTback(self):
 		heute = localtime()
 		if not self.PTinit:
-			pt = (heute[0],heute[1],heute[2],self.PThour,self.PTmin,0,heute[6],heute[7],0)
+			pt = (heute[0], heute[1], heute[2], self.PThour, self.PTmin, 0, heute[6], heute[7], 0)
 			self.ask_time = int(mktime(pt))
 			self.PTinit = True
 		else:
@@ -1080,7 +1080,7 @@ class ESListNext(EPGList):
 				end = localtime(beginTime + duration)
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_TEXT, 0, 4, 10, 20, 1, RT_HALIGN_RIGHT, '>'),
-					(eListboxPythonMultiContent.TYPE_TEXT, 10, 4, 70, 44, 1, RT_HALIGN_LEFT, "%02d.%02d\n%02d.%02d" % (begin[3],begin[4],end[3],end[4])),
+					(eListboxPythonMultiContent.TYPE_TEXT, 10, 4, 70, 44, 1, RT_HALIGN_LEFT, "%02d.%02d\n%02d.%02d" % (begin[3], begin[4], end[3], end[4])),
 					(eListboxPythonMultiContent.TYPE_TEXT, 80, 1, self.breite, 48, 0, RT_HALIGN_LEFT | RT_VALIGN_TOP | RT_WRAP, EventName)
 				))
 			else:
@@ -1097,7 +1097,7 @@ class ESListNext(EPGList):
 				end = localtime(beginTime + duration)
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_TEXT, 0, 4, 10, 20, 1, RT_HALIGN_RIGHT, '>'),
-					(eListboxPythonMultiContent.TYPE_TEXT, 10, 4, 70, 44, 1, RT_HALIGN_LEFT, "%02d.%02d\n%02d.%02d" % (begin[3],begin[4],end[3],end[4])),
+					(eListboxPythonMultiContent.TYPE_TEXT, 10, 4, 70, 44, 1, RT_HALIGN_LEFT, "%02d.%02d\n%02d.%02d" % (begin[3], begin[4], end[3], end[4])),
 					(eListboxPythonMultiContent.TYPE_TEXT, 80, 1, self.breite, 48, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, EventName)
 				))
 			else:
@@ -1110,7 +1110,7 @@ class ESListNext(EPGList):
 				))
 		return res
 
-	def moveToService(self,serviceref):
+	def moveToService(self, serviceref):
 		if not serviceref:
 			return
 		index = 0
@@ -1182,7 +1182,7 @@ class EasySelection(EPGSelection, Screen):
 				"downRepeated": self.down,
 				"nextService": self.PrimeTimeLook,
 				"prevService": self.NowNextLook
-			},-1)
+			}, -1)
 		self.onLayoutFinish.append(self.byLayoutEnd)
 
 	def byLayoutEnd(self):
@@ -1226,11 +1226,11 @@ class EasySelection(EPGSelection, Screen):
 
 	def PrimeTimeLook(self):
 		heute = localtime()
-		pt = (heute[0],heute[1],heute[2],config.plugins.EasyInfo.Primetime2.value[0],config.plugins.EasyInfo.Primetime2.value[1],0,heute[6],heute[7],0)
+		pt = (heute[0], heute[1], heute[2], config.plugins.EasyInfo.Primetime2.value[0], config.plugins.EasyInfo.Primetime2.value[1], 0, heute[6], heute[7], 0)
 		ask_time = int(mktime(pt))
 		if ask_time > int(mktime(heute)):
 			self["list"].fillMultiEPG(self.services, ask_time)
-			pt = (heute[0],heute[1],heute[2],config.plugins.EasyInfo.Primetime3.value[0],config.plugins.EasyInfo.Primetime3.value[1],0,heute[6],heute[7],0)
+			pt = (heute[0], heute[1], heute[2], config.plugins.EasyInfo.Primetime3.value[0], config.plugins.EasyInfo.Primetime3.value[1], 0, heute[6], heute[7], 0)
 			ask_time = int(mktime(pt))
 			self["listN"].fillMultiEPG(self.services, ask_time)
 

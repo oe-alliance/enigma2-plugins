@@ -100,9 +100,9 @@ class genuineDreambox(Screen):
 			self["resulttext"].setText("Security service not running.")
 			udsError = True
 		if not udsError:
-			if (self.stepFirst(TPMD_CMD_GET_DATA,[TPMD_DT_PROTOCOL_VERSION,TPMD_DT_TPM_VERSION,TPMD_DT_SERIAL])):
+			if (self.stepFirst(TPMD_CMD_GET_DATA, [TPMD_DT_PROTOCOL_VERSION, TPMD_DT_TPM_VERSION, TPMD_DT_SERIAL])):
 				try:  
-					url = ("https://www.dream-multimedia-tv.de/verify/challenge?serial=%s&version=%s" % (self.serial,self.tpmdVersion))
+					url = ("https://www.dream-multimedia-tv.de/verify/challenge?serial=%s&version=%s" % (self.serial, self.tpmdVersion))
 					getPage(url).addCallback(self._gotPageLoadRandom).addErrback(self.errorLoad)
 				except:
 					self["resulttext"].setText(_("Can't connect to server. Please check your network!"))
@@ -139,8 +139,8 @@ class genuineDreambox(Screen):
 		self.random = (self.formatList(base64.b64decode(self.back)))
 		self.level2_cert = None
 		self.level3_cert = None
-		if (self.stepSecond(TPMD_CMD_GET_DATA,[TPMD_DT_PROTOCOL_VERSION,TPMD_DT_TPM_VERSION,TPMD_DT_SERIAL,TPMD_DT_LEVEL2_CERT,
-				TPMD_DT_LEVEL3_CERT,TPMD_DT_FAB_CA_CERT,TPMD_DT_DATABLOCK_SIGNED])):
+		if (self.stepSecond(TPMD_CMD_GET_DATA, [TPMD_DT_PROTOCOL_VERSION, TPMD_DT_TPM_VERSION, TPMD_DT_SERIAL, TPMD_DT_LEVEL2_CERT,
+				TPMD_DT_LEVEL3_CERT, TPMD_DT_FAB_CA_CERT, TPMD_DT_DATABLOCK_SIGNED])):
 			url = self.buildUrl()
 			getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)
 			
@@ -187,34 +187,34 @@ class genuineDreambox(Screen):
 		tmpfa = ("&fab=%s" % base64.b64encode(self.fab_ca_cert).replace('+', '-').replace('/', '_'))
 		tmpda = ("&data=%s" % base64.b64encode(self.datablock_signed).replace('+', '-').replace('/', '_'))
 		tmpr = ("&r=%s" % base64.b64encode(self.r).replace('+', '-').replace('/', '_'))
-		return("https://www.dream-multimedia-tv.de/verify/challenge?%s%s%s%s%s%s&serial=%s" % (tmpra,tmpl2,tmpl3,tmpfa,tmpda,tmpr,self.serial))
+		return("https://www.dream-multimedia-tv.de/verify/challenge?%s%s%s%s%s%s&serial=%s" % (tmpra, tmpl2, tmpl3, tmpfa, tmpda, tmpr, self.serial))
 
 	def buildUrlUpdate(self):
 		return self.buildUrl() + "&getupdate=true"
 
-	def formatList(self,l):
+	def formatList(self, l):
 		liste = []
 		for x in l:
 			liste.append(ord(x))
 		return liste
 	
-	def formatString(self,s):
+	def formatString(self, s):
 		myString = ""
 		for x in s:
 			myString = myString + chr(x)
 		return myString
 
-	def stepFirst(self,typ,daten):
-		return (self.parseResult(self.udsSend(typ,daten,len(daten))))
+	def stepFirst(self, typ, daten):
+		return (self.parseResult(self.udsSend(typ, daten, len(daten))))
 
-	def stepSecond(self,typ,daten):
-		if (self.parseResult(self.udsSend(typ,daten,len(daten))) == False):
+	def stepSecond(self, typ, daten):
+		if (self.parseResult(self.udsSend(typ, daten, len(daten))) == False):
 			return False
-		if (self.parseSignature(self.udsSend(TPMD_CMD_COMPUTE_SIGNATURE,self.random,8)) == False):
+		if (self.parseSignature(self.udsSend(TPMD_CMD_COMPUTE_SIGNATURE, self.random, 8)) == False):
 			return False
 		return True	 
 
-	def parseResult(self,rbuf):
+	def parseResult(self, rbuf):
 		if (rbuf != -1):
 			buf = self.formatList(rbuf)
 			
@@ -275,7 +275,7 @@ class genuineDreambox(Screen):
 
 	def udsSend(self, cmdTyp, data, length):
 		udsError = False
-		sbuf = [(cmdTyp >> 8) & 0xff,(cmdTyp >> 0) & 0xff,(length >> 8) & 0xff,(length >> 0) & 0xff]
+		sbuf = [(cmdTyp >> 8) & 0xff, (cmdTyp >> 0) & 0xff, (length >> 8) & 0xff, (length >> 0) & 0xff]
 		sbuf.extend(data[:length])
 		sbuf = struct.pack(str((length + 4)) + "B", *sbuf)
 		try:
@@ -319,7 +319,7 @@ class genuineDreambox(Screen):
 def main(session, **kwargs):
 		session.open(genuineDreambox)
 
-def Plugins(path,**kwargs):
+def Plugins(path, **kwargs):
 		global plugin_path
 		plugin_path = path
 		return [

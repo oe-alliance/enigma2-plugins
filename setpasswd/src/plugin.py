@@ -80,11 +80,11 @@ class ChangePasswdScreen(Screen):
 		return ''.join(Random().sample(passwdChars, passwdLength)) 
 
 	def SetPasswd(self):
-		print "Changing password for %s to %s" % (self.user,self.password) 
+		print "Changing password for %s to %s" % (self.user, self.password) 
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
 		self.container.dataAvail.append(self.dataAvail)
-		retval = self.container.execute("echo -e '%s\n%s' | (passwd %s)" % (self.password,self.password,self.user))
+		retval = self.container.execute("echo -e '%s\n%s' | (passwd %s)" % (self.password, self.password, self.user))
 		if retval == 0:
 			message = _("Sucessfully changed password for root user to: ") + self.password
 			self.session.open(MessageBox, message, MessageBox.TYPE_INFO)
@@ -92,7 +92,7 @@ class ChangePasswdScreen(Screen):
 			message = _("Unable to change/reset password for root user")
 			self.session.open(MessageBox, message, MessageBox.TYPE_ERROR)
 
-	def dataAvail(self,data):
+	def dataAvail(self, data):
 		self.output_line += data
 		while True:
 			i = self.output_line.find('\n')
@@ -101,11 +101,11 @@ class ChangePasswdScreen(Screen):
 			self.processOutputLine(self.output_line[:i + 1])
 			self.output_line = self.output_line[i + 1:]
 
-	def processOutputLine(self,line):
+	def processOutputLine(self, line):
 		if line.find('password: '):
 			self.container.write("%s\n" % self.password)
 
-	def runFinished(self,retval):
+	def runFinished(self, retval):
 		del self.container.dataAvail[:]
 		del self.container.appClosed[:]
 		del self.container

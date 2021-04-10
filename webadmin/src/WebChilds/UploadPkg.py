@@ -46,7 +46,7 @@ class UploadPkgResource(resource.Resource):
 		filename = mbasename(req.args['filename'][0])
 		print "[filename]", filename
 		if not filename.endswith(".ipk"):
-			return self.res % (_("wrong filetype!"),_("Close"), _("Add"))
+			return self.res % (_("wrong filetype!"), _("Close"), _("Add"))
 		
 		if not data:
 			req.setResponseCode(http.OK)
@@ -55,7 +55,7 @@ class UploadPkgResource(resource.Resource):
 					 _("Add")
 					)
 		
-		fd,fn = mkstemp(dir="/tmp/")
+		fd, fn = mkstemp(dir="/tmp/")
 		cnt = os_write(fd, data)
 		os_close(fd)
 		os_chmod(fn, 0755)
@@ -66,18 +66,18 @@ class UploadPkgResource(resource.Resource):
 			except OSError, oe:
 				pass
 			req.setResponseCode(http.OK)
-			return self.res % (_("error writing to disk, not uploaded"),_("Close"), _("Add"))
+			return self.res % (_("error writing to disk, not uploaded"), _("Close"), _("Add"))
 		
 		else:
 			file = "/tmp/" + filename
-			os_rename(fn,(file))
+			os_rename(fn, (file))
 			if file is not None:
 				out = os_popen("opkg install %s" % file)
 				debug = ""
 				for line in out:
 					debug += line
 			else:
-				return self.res % (_("error writing to disk, not uploaded"),_("Close"), _("Add"))
+				return self.res % (_("error writing to disk, not uploaded"), _("Close"), _("Add"))
 
 			req.setResponseCode(http.OK)
 			return self.res % ((debug),

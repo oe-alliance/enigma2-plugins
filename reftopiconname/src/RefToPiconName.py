@@ -36,7 +36,7 @@ class RefToPiconName(Converter, object):
 			if ref.flags & (eServiceReference.isDirectory | eServiceReference.isMarker):
 				info = eServiceCenter.getInstance().info(ref)
 				if info:
-					return info.getName(ref).replace(" ","_")
+					return info.getName(ref).replace(" ", "_")
 			#channel
 			else:
 				return ref.toString()

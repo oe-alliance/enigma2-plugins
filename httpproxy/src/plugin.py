@@ -8,7 +8,7 @@ from Components.config import config, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.ActionMap import ActionMap
-from Components.config import config, ConfigSubsection, ConfigInteger,ConfigYesNo
+from Components.config import config, ConfigSubsection, ConfigInteger, ConfigYesNo
 from Components.Network import iNetwork
 from Plugins.Plugin import PluginDescriptor
 
@@ -19,18 +19,18 @@ from twisted.internet import reactor
 ###############################################################################
 config.plugins.httpproxy = ConfigSubsection()
 config.plugins.httpproxy.enable = ConfigYesNo(default=True)
-config.plugins.httpproxy.port = ConfigInteger(8080,limits=(1, 65536))
+config.plugins.httpproxy.port = ConfigInteger(8080, limits=(1, 65536))
 config.plugins.httpproxy.filter_hosts = ConfigYesNo(default=False)
 config.plugins.httpproxy.filter_uri = ConfigYesNo(default=False)
 
-global ALLOWED_CLIENTS,LOG_TO_STDOUT,URI_BLACKLIST
+global ALLOWED_CLIENTS, LOG_TO_STDOUT, URI_BLACKLIST
 LOG_TO_STDOUT = False
 ALLOWED_CLIENTS = ['192.168.1.3'] # only clients listed here with ther IP Adress passed
-URI_BLACKLIST = ['microsoft','teen','porn'] # all uri s containig this words will be blocked
+URI_BLACKLIST = ['microsoft', 'teen', 'porn'] # all uri s containig this words will be blocked
 
 
 ###############################################################################
-class HTTPProxyConfigScreen(ConfigListScreen,Screen):
+class HTTPProxyConfigScreen(ConfigListScreen, Screen):
     skin = """
         <screen position="100,100" size="550,400" title="HTTP Proxy Setup" >
         <widget name="config" position="0,0" size="550,360" scrollbarMode="showOnDemand" />
@@ -63,13 +63,13 @@ class HTTPProxyConfigScreen(ConfigListScreen,Screen):
         print "saving"
         for x in self["config"].list:
             x[1].save()
-        self.close(True,self.session)
+        self.close(True, self.session)
 
     def cancel(self):
         print "cancel"
         for x in self["config"].list:
             x[1].cancel()
-        self.close(False,self.session)
+        self.close(False, self.session)
 
 ###############################################################################
 
@@ -98,25 +98,25 @@ class myProxyRequest(proxy.ProxyRequest):
             self.logMessage('OK')
             proxy.ProxyRequest.process(self)
 
-    def renderResponse(self,message):
+    def renderResponse(self, message):
         self.transport.write("HTTP/1.0 200 blocked\r\n")
         self.transport.write("Content-Type: text/html\r\n")
         self.transport.write("\r\n")
         self.transport.write('<H1>%s</H1>' % message)
         self.transport.stopProducing()
 
-    def checkClientAccess(self,client):
+    def checkClientAccess(self, client):
         global ALLOWED_CLIENTS
         if client.host not in ALLOWED_CLIENTS:
             return False
         else:
             return True
 
-    def logMessage(self,status):
+    def logMessage(self, status):
         global LOG_TO_STDOUT
         if LOG_TO_STDOUT:
             try:
-                print "[PROXY]",self.client.host,self.uri,status
+                print "[PROXY]", self.client.host, self.uri, status
             except Exception:
                 ''' now i am quite careful with logging webstuff with E2 '''
                 pass
@@ -132,7 +132,7 @@ def main(session, **kwargs):
     """ open config screen """
     session.open(HTTPProxyConfigScreen)
 
-def autostart(reason,**kwargs):
+def autostart(reason, **kwargs):
     """ start proxy in background """
     if reason is True and config.plugins.httpproxy.enable.value is True:
         try:
@@ -140,16 +140,16 @@ def autostart(reason,**kwargs):
                 extip = iNetwork.ifaces[adaptername]['ip']
                 if iNetwork.ifaces[adaptername]['up'] is True:
                     extip = "%i.%i.%i.%i" % (extip[0], extip[1], extip[2], extip[3])
-                    print "starting proxy on ",extip,":", config.plugins.httpproxy.port.value
-                    reactor.listenTCP(int(config.plugins.httpproxy.port.value), ProxyFactory(),interface=extip)
-        except Exception,e:
+                    print "starting proxy on ", extip, ":", config.plugins.httpproxy.port.value
+                    reactor.listenTCP(int(config.plugins.httpproxy.port.value), ProxyFactory(), interface=extip)
+        except Exception, e:
             print "starting the http proxy failed!"
             print e
 
 
 def Plugins(**kwargs):
   return [
-          PluginDescriptor(name="HTTP Proxy",description="use your receiver as Web Proxy",where=PluginDescriptor.WHERE_PLUGINMENU,fnc=main),
+          PluginDescriptor(name="HTTP Proxy", description="use your receiver as Web Proxy", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
           PluginDescriptor(where=[PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc=autostart)
           ]
 

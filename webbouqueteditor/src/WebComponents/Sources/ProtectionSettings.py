@@ -20,7 +20,7 @@ class ProtectionSettings(Source):
 			type = ""
 			setuppin = ""
 			setuppinactive = ""
-		return [(configured,type,setuppinactive, setuppin)]
+		return [(configured, type, setuppinactive, setuppin)]
 
 	def handleCommand(self, cmd):
 		self.getProtectionSettings()

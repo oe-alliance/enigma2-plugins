@@ -44,7 +44,7 @@ class ServiceList(Source):
 						#(unlocked -B-)
 						isProtected = "5"
 					
-			list.append((item[0].toString(),item[1],isGroup,isMarker,isProtected))
+			list.append((item[0].toString(), item[1], isGroup, isMarker, isProtected))
 		return list
 
 	def getServiceList(self):

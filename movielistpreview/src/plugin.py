@@ -342,7 +342,7 @@ class MovielistPreviewManualCreator(Screen, InfoBarBase, InfoBarSeek, InfoBarCue
 
 	def grabDone(self):
 		self.working = False
-		self.session.open(MessageBox,_("Preview created."), MessageBox.TYPE_INFO, timeout=5)
+		self.session.open(MessageBox, _("Preview created."), MessageBox.TYPE_INFO, timeout=5)
 
 	def exit(self):
 		if not self.working:

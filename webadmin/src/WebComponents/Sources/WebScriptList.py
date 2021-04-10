@@ -33,7 +33,7 @@ class WebScriptList(Source):
 				text = ""
 				with open("/usr/script/" + file) as f:
 					text = f.read()
-					print "[WebScriptList] text ",text
+					print "[WebScriptList] text ", text
 					f.close()
 				list.append((file, text))
 		return list

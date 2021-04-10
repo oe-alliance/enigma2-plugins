@@ -106,8 +106,8 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 #				"seekBackManual": self.seekManual,
 				"next": self.playNextFile,
 				"previous": self.playPrevFile,
-				"menu"	: self.openContextMenu,
-				"info"	: self.showVideoInfo,
+				"menu": self.openContextMenu,
+				"info": self.showVideoInfo,
 			}, -2)
 			
 		self.oldservice = self.session.screen["CurrentService"]
@@ -264,9 +264,9 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 	def setSeekState(self, wantstate):
 		print "setSeekState"
 		if wantstate == self.STATE_PAUSED:
-			print "trying to switch to Pause- state:",self.STATE_PAUSED
+			print "trying to switch to Pause- state:", self.STATE_PAUSED
 		elif wantstate == self.STATE_PLAYING:
-			print "trying to switch to playing- state:",self.STATE_PLAYING
+			print "trying to switch to playing- state:", self.STATE_PLAYING
 		service = self.session.nav.getCurrentService()
 		if service is None:
 			print "No Service found"

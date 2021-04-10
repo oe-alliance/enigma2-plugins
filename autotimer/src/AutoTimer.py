@@ -5,7 +5,7 @@ from . import _
 
 # Plugins Config
 from xml.etree.cElementTree import parse as cet_parse, fromstring as cet_fromstring
-from os import path as os_path,rename as os_rename
+from os import path as os_path, rename as os_rename
 from AutoTimerConfiguration import parseConfig, buildConfig
 
 # Tasks
@@ -847,19 +847,19 @@ class AutoTimer:
 		foundShort = False
 		retValue = False
 		if name1 and name2:
-			foundTitle = (0.8 < SequenceMatcher(lambda x: x == " ",name1, name2).ratio())
+			foundTitle = (0.8 < SequenceMatcher(lambda x: x == " ", name1, name2).ratio())
 		# NOTE: only check extended & short if tile is a partial match
 		if foundTitle:
 			if timer.searchForDuplicateDescription > 0 or force:
 				if shortdesc1 and shortdesc2:
 					# If the similarity percent is higher then 0.7 it is a very close match
-					foundShort = (0.7 < SequenceMatcher(lambda x: x == " ",shortdesc1, shortdesc2).ratio())
+					foundShort = (0.7 < SequenceMatcher(lambda x: x == " ", shortdesc1, shortdesc2).ratio())
 					if foundShort:
 						if timer.searchForDuplicateDescription == 2:
 							if extdesc1 and extdesc2:
 								# Some channels indicate replays in the extended descriptions
 								# If the similarity percent is higher then 0.7 it is a very close match
-								retValue = (0.7 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio())
+								retValue = (0.7 < SequenceMatcher(lambda x: x == " ", extdesc1, extdesc2).ratio())
 						else:
 							retValue = True
 			else:

@@ -38,7 +38,7 @@ def SPEPGSelectionUndo():
 		#EPGSelection_openOutdatedEPGSelection = None
 
 def enterDateTime(self):
-	from Screens.EpgSelection import EPG_TYPE_SINGLE,EPG_TYPE_MULTI,EPG_TYPE_SIMILAR
+	from Screens.EpgSelection import EPG_TYPE_SINGLE, EPG_TYPE_MULTI, EPG_TYPE_SIMILAR
 	event = self["Event"].event
 	if self.type == EPG_TYPE_SINGLE:
 		service = self.currentService

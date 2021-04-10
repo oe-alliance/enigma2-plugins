@@ -47,7 +47,7 @@ config.plugins.WeatherPlugin.Entry = ConfigSubList()
 initConfig()
 
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	session.open(MSNWeatherPlugin)
 
 def Plugins(**kwargs):
@@ -186,7 +186,7 @@ class MSNWeatherPlugin(Screen):
 			self["weekday%s_temp" % i].text = ""
 			i += 1
 
-	def showIcon(self,index, filename):
+	def showIcon(self, index, filename):
 		if index <> -1:
 			self["weekday%s_icon" % index].updateIcon(filename)
 			self["weekday%s_icon" % index].show()
@@ -209,13 +209,13 @@ class MSNWeatherPlugin(Screen):
 					self["humidity"].text = _("Humidity: %s %%") % item.humidity
 					self["wind_condition"].text = item.winddisplay
 					c = time.strptime(item.observationtime, "%H:%M:%S")
-					self["observationtime"].text = _("Observation time: %s") % time.strftime("%H:%M",c)
+					self["observationtime"].text = _("Observation time: %s") % time.strftime("%H:%M", c)
 					self["observationpoint"].text = _("Observation point: %s") % item.observationpoint
 					self["feelsliketemp"].text = _("Feels like %s") % item.feelslike + "°" + self.weatherData.degreetype
 				else:
 					index = weatherData[0]
-					c = time.strptime(item.date,"%Y-%m-%d")
-					self["weekday%s" % index].text = "%s\n%s" % (item.day, time.strftime("%d. %b",c))
+					c = time.strptime(item.date, "%Y-%m-%d")
+					self["weekday%s" % index].text = "%s\n%s" % (item.day, time.strftime("%d. %b", c))
 					lowTemp = item.low
 					highTemp = item.high
 					self["weekday%s_temp" % index].text = "%s°%s|%s°%s\n%s" % (highTemp, self.weatherData.degreetype, lowTemp, self.weatherData.degreetype, item.skytextday)

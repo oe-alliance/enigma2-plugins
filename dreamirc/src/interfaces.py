@@ -93,7 +93,7 @@ class IClient(Interface):
         @type groupName: string
         """
 
-    def getGroupConversation(name,hide=0):
+    def getGroupConversation(name, hide=0):
         pass
 
     def getPerson(name):
@@ -284,7 +284,7 @@ class IChatUI(Interface):
         @returntype: L{Conversation<IConversation>}
         """
 
-    def getGroupConversation(group,Class,stayHidden=0):
+    def getGroupConversation(group, Class, stayHidden=0):
         """For the given group object, returns the group conversation window or
         creates and returns a new group conversation window if it doesn't exist.
 

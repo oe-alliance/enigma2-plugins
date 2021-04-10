@@ -41,7 +41,7 @@ config.plugins.emailimap.debug = ConfigEnableDisable(default=False)
 def decodeHeader(text, default=''):
 	if text is None:
 		return _(default)
-	text = text.replace('\r',' ').replace('\n',' ').replace('\t',' ')
+	text = text.replace('\r', ' ').replace('\n', ' ').replace('\t', ' ')
 	text = re.sub('\s\s+', ' ', text)
 	textNew = ""
 	for part in decode_header(text):
@@ -83,7 +83,7 @@ class EmailScreen(Screen):
 					   (DESKTOP_WIDTH - width) / 2, (DESKTOP_HEIGHT - height) / 2, width, height,
 					   boxlistWidth, height - infolabelHeight,
 					   boxlistWidth, 0, messagelistWidth, height - infolabelHeight,
-					   0, height - infolabelHeight, width, infolabelHeight, scaleV(20,18)
+					   0, height - infolabelHeight, width, infolabelHeight, scaleV(20, 18)
 					   )
 
 	def __init__(self, session, account):
@@ -137,9 +137,9 @@ class EmailScreen(Screen):
 		# pylint: disable-msg=W0212
 		self.setTitle(_("%(name)s (%(user)s@%(server)s)")
 				% {
-				'name':self._account._name,
-				'user':self._account._user,
-				'server':self._account._server
+				'name': self._account._name,
+				'user': self._account._user,
+				'server': self._account._server
 				})
 		self["boxlist"].moveToIndex(self._account.inboxPos - 1)
 		self._selectBoxlist()
@@ -181,7 +181,7 @@ class EmailScreen(Screen):
 		'''
 		# pylint: disable-msg=W0212
 		debug("[EmailScreen] _ebNotify error in %s: %s" % (where, what))
-		self.session.open(MessageBox, _("EmailClient for %(account)s:\n\n%(error)s") % {'account': self._account._name, 'error':what}, type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
+		self.session.open(MessageBox, _("EmailClient for %(account)s:\n\n%(error)s") % {'account': self._account._name, 'error': what}, type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
 
 	def _onBoxSelected(self):
 		self["messagelist"].l.setList([])
@@ -286,9 +286,9 @@ class EmailScreen(Screen):
 			color = 0x00888888 # grey
 		return [
 			message,
-			MultiContentEntryText(pos=(5, 0), size=(self.messagelistWidth, scaleV(20,18) + 5), font=font, text=message.getSenderString(), color=color, color_sel=color),
-			MultiContentEntryText(pos=(5, scaleV(20,18) + 1), size=(self.messagelistWidth, scaleV(20,18) + 5), font=font, text=message.getLocalDateTimeString(), color=color, color_sel=color),
-			MultiContentEntryText(pos=(5, 2 * (scaleV(20,18) + 1)), size=(self.messagelistWidth, scaleV(20,18) + 5), font=font, text=message.getSubject(), color=color, color_sel=color)
+			MultiContentEntryText(pos=(5, 0), size=(self.messagelistWidth, scaleV(20, 18) + 5), font=font, text=message.getSenderString(), color=color, color_sel=color),
+			MultiContentEntryText(pos=(5, scaleV(20, 18) + 1), size=(self.messagelistWidth, scaleV(20, 18) + 5), font=font, text=message.getLocalDateTimeString(), color=color, color_sel=color),
+			MultiContentEntryText(pos=(5, 2 * (scaleV(20, 18) + 1)), size=(self.messagelistWidth, scaleV(20, 18) + 5), font=font, text=message.getSubject(), color=color, color_sel=color)
 		]
 
 class ScreenMailView(Screen):
@@ -337,10 +337,10 @@ class ScreenMailView(Screen):
 					   2 * buttonsGap + 140, height - 30 - 5,
 					   3 * buttonsGap + 2 * 140, height - 30 - 5,
 					   4 * buttonsGap + 3 * 140, height - 30 - 5,
-					   buttonsGap, height - 30 - 5, scaleV(18,16),
-					   2 * buttonsGap + 140, height - 30 - 5, scaleV(18,16),
-					   3 * buttonsGap + 2 * 140, height - 30 - 5, scaleV(18,16),
-					   4 * buttonsGap + 3 * 140, height - 30 - 5, scaleV(18,16),
+					   buttonsGap, height - 30 - 5, scaleV(18, 16),
+					   2 * buttonsGap + 140, height - 30 - 5, scaleV(18, 16),
+					   3 * buttonsGap + 2 * 140, height - 30 - 5, scaleV(18, 16),
+					   4 * buttonsGap + 3 * 140, height - 30 - 5, scaleV(18, 16),
 					   )
 		Screen.__init__(self, session)
 		self["from"] = Label(decodeHeader(_("From") + ": %s" % self._email.get('from', _('no from'))))
@@ -479,7 +479,7 @@ class EmailAttachment:
 
 	def save(self, folder):
 		try:
-			fp = open(folder + "/" + self.getFilename(),"wb")
+			fp = open(folder + "/" + self.getFilename(), "wb")
 			fp.write(self.data)
 			fp.close()
 		except Exception, e:
@@ -522,7 +522,7 @@ class CheckMail:
 		self._interval = int(self._account._interval) * 60 * 1000
 		self._interval = int(random.normalvariate(self._interval, self._interval * 0.11962656472))
 		debug("[CheckMail] %(name)s: __init__: checking all %(interval)s seconds"
-			% {'name':self._name, 'interval':self._interval / 1000})
+			% {'name': self._name, 'interval': self._interval / 1000})
 		self._timer.start(self._interval) # it is minutes
 		self._unseenList = None
 		self._checkMail()
@@ -684,7 +684,7 @@ class EmailAccount():
 	def _ebNotify(self, result, where, what):
 		debug("[EmailAccount] %s: _ebNotify error in %s: %s: %s" % (self._name, where, what, result.getErrorMessage()))
 		if config.plugins.emailimap.verbose.value:
-			Notifications.AddNotification(MessageBox, "EmailClient for %(account)s:\n\n%(error)s" % {'account': self._name, 'error':what}, type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
+			Notifications.AddNotification(MessageBox, "EmailClient for %(account)s:\n\n%(error)s" % {'account': self._name, 'error': what}, type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
 
 	def startChecker(self):
 		# debug("[EmailAccount] %s: startChecker?" %self._name)
@@ -856,7 +856,7 @@ class EmailAccount():
 # If you have problems to log into your imap-server, please send me the output of the following line\n\
 # cbCapabilities: %(capa)s\n\
 ####################################################################################################\n")
-			% {'name':self._name, 'capa':str(reason)})
+			% {'name': self._name, 'capa': str(reason)})
 		self._doLogin()
 
 	def _ebCapabilities(self, reason):
@@ -912,8 +912,8 @@ class EmailAccount():
 		self._ebNotify(failure, "_onInsecureAuthenticationFailed",
 					_("error logging %(who)s in:\n%(failure)s")
 					% {
-					'who':"%s@%s" % (self._user, self._server),
-					'failure':failure.getErrorMessage()
+					'who': "%s@%s" % (self._user, self._server),
+					'failure': failure.getErrorMessage()
 					})
 
 	def _onMailboxList(self, result):
@@ -959,9 +959,9 @@ class EmailAccountList(Screen):
 						2 * buttonsGap + 140, height - 45,
 						3 * buttonsGap + 2 * 140, height - 45,
 						4 * buttonsGap + 3 * 140, height - 38,
-						buttonsGap, height - 45, scaleV(22,18),
-						2 * buttonsGap + 140, height - 45, scaleV(22,18),
-						3 * buttonsGap + 2 * 140, height - 45, scaleV(22,18)
+						buttonsGap, height - 45, scaleV(22, 18),
+						2 * buttonsGap + 140, height - 45, scaleV(22, 18),
+						3 * buttonsGap + 2 * 140, height - 45, scaleV(22, 18)
 						)
 		Screen.__init__(self, session)
 		self["buttonred"] = Label(_("remove"))

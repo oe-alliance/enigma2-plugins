@@ -58,7 +58,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		}, -2)
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list,session=self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 		self.createSetup()
 		self.onLayoutFinish.append(self.layoutFinished)
 		# Initialize Buttons
@@ -254,7 +254,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		else:
 			helpwindowpos = self["HelpWindow"].getPosition()
 			if current[1].help_window.instance is not None:
-				current[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
+				current[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
 				self["VKeyIcon"].boolean = True
 				self["VirtualKB"].setEnabled(True)
 
@@ -298,11 +298,11 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		if data is True:
 			self.updateConfigRef.close(True)
 
-	def updateConfigfinishedCB(self,data):
+	def updateConfigfinishedCB(self, data):
 		if data is True:
 			self.session.openWithCallback(self.Updatefinished, MessageBox, _("Your network mount has been updated."), type=MessageBox.TYPE_INFO, timeout=10)
 
-	def Updatefinished(self,data):
+	def Updatefinished(self, data):
 		if data is not None:
 			if data is True:
 				self.close()
@@ -336,11 +336,11 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		if data is True:
 			self.applyConfigRef.close(True)
 
-	def applyConfigfinishedCB(self,data):
+	def applyConfigfinishedCB(self, data):
 		if data is True:
 			self.session.openWithCallback(self.applyfinished, MessageBox, _("Your network mount has been activated."), type=MessageBox.TYPE_INFO, timeout=10)
 
-	def applyfinished(self,data):
+	def applyfinished(self, data):
 		if data is not None:
 			if data is True:
 				self.close()

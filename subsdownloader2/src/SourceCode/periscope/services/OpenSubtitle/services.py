@@ -96,7 +96,7 @@ OS_LANGS = {}
 for x in LANGUAGES:
   #languageTranslate(x[0], 0, 2)
   #languageTranslate(x[0], 0, 3)
-  OS_LANGS.update({languageTranslate(x[0], 0, 2):languageTranslate(x[0], 0, 3)})
+  OS_LANGS.update({languageTranslate(x[0], 0, 2): languageTranslate(x[0], 0, 3)})
 
 class OpenSubtitle(SubtitleDatabase.SubtitleDB):
     url = "http://www.opensubtitles.org/"
@@ -105,7 +105,7 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
     def __init__(self, config, cache_folder_path):
         super(OpenSubtitle, self).__init__(OS_LANGS)
         self.server_url = 'http://api.opensubtitles.org/xml-rpc'
-        self.revertlangs = dict(map(lambda item: (item[1],item[0]), self.langs.items()))
+        self.revertlangs = dict(map(lambda item: (item[1], item[0]), self.langs.items()))
 
     def process(self, filepath, langs):
         ''' main method to call on the plugin, pass the filename and the wished 
@@ -179,7 +179,7 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
             hash = hash & 0xFFFFFFFFFFFFFFFF #to remain as 64bit number  
                  
 
-        f.seek(max(0,filesize - 65536),0) 
+        f.seek(max(0, filesize - 65536), 0) 
         for x in range(65536 / bytesize): 
             buffer = f.read(bytesize) 
             (l_value,) = struct.unpack(longlongformat, buffer)  
@@ -216,7 +216,7 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
         self.server = xmlrpclib.Server(self.server_url)
         socket.setdefaulttimeout(10)
         try:
-            log_result = self.server.LogIn("","","eng","periscope")
+            log_result = self.server.LogIn("", "", "eng", "periscope")
             logging.debug(log_result)
             token = log_result["token"]
         except Exception:

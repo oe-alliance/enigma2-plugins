@@ -48,14 +48,14 @@ class IsNewVersionCheck(threading.Thread):
         else:
             if latest_verion[0] > current_verion:		
                 print "Jest nowa wersja pluginu" 
-                self.session.open(PluginIpkUpdate,latest_verion[1])
+                self.session.open(PluginIpkUpdate, latest_verion[1])
             else:
                 print "Posiadasz najnowsza wersje pluginu"
                 return False
 
 
 class InstallDownloadableContent():
-    def __init__(self,session, url_to_download):
+    def __init__(self, session, url_to_download):
 	self.session = session
 	self.cmdList = []
 	for item in url_to_download:
@@ -65,7 +65,7 @@ class InstallDownloadableContent():
 	self.session.openWithCallback(self.__restartMessage__, Ipkg, cmdList=self.cmdList)
     
     def __restartMessage__(self):
-	self.session.openWithCallback(self.__restartGUI__, MessageBox,_("Do You want to restart GUI to apply changes?"), MessageBox.TYPE_YESNO, default=False)
+	self.session.openWithCallback(self.__restartGUI__, MessageBox, _("Do You want to restart GUI to apply changes?"), MessageBox.TYPE_YESNO, default=False)
 
     def __restartGUI__(self, callback=None):
 	if callback == True:
@@ -105,7 +105,7 @@ class PluginIpkUpdate(Screen): #, IsNewVersionCheck):
 				self.libmediaInfoInstallation = InstallDownloadableContent(self.session, [self.new_wersion_url])
 				self.libmediaInfoInstallation.__install__()
 			    else:
-				self.session.openWithCallback(self.__close_screen__,MessageBox,_("There is problem with server connection. \n Please try again later."), MessageBox.TYPE_INFO)
+				self.session.openWithCallback(self.__close_screen__, MessageBox, _("There is problem with server connection. \n Please try again later."), MessageBox.TYPE_INFO)
 			elif returnValue is "exit":
 			    self.__close_screen__()
 			    

@@ -19,7 +19,7 @@ __all__ = [
   'ldif_pattern',
   # functions
   # 'AttrTypeandValueLDIF',
-  'CreateLDIF','ParseLDIF',
+  'CreateLDIF', 'ParseLDIF',
   # classes
   'LDIFWriter',
   'LDIFParser',
@@ -47,14 +47,14 @@ dn_regex = re.compile('^%s$' % dn_pattern)
 ldif_pattern = '^((dn(:|::) %(dn_pattern)s)|(%(attrtype_pattern)s(:|::) .*)$)+' % vars()
 
 MOD_OP_INTEGER = {
-  'add':0,'delete':1,'replace':2
+  'add': 0, 'delete': 1, 'replace': 2
 }
 
 MOD_OP_STR = {
-  0:'add',1:'delete',2:'replace'
+  0: 'add', 1: 'delete', 2: 'replace'
 }
 
-CHANGE_TYPES = ['add','delete','modify','modrdn']
+CHANGE_TYPES = ['add', 'delete', 'modify', 'modrdn']
 valid_changetype_dict = {}
 for c in CHANGE_TYPES:
   valid_changetype_dict[c] = None
@@ -84,7 +84,7 @@ def list_dict(l):
   """
   return a dictionary with all items of l being the keys of the dictionary
   """
-  return dict([(i,None) for i in l])
+  return dict([(i, None) for i in l])
 
 
 class LDIFWriter:
@@ -94,7 +94,7 @@ class LDIFWriter:
   via URLs
   """
 
-  def __init__(self,output_file,base64_attrs=None,cols=76,line_sep='\n'):
+  def __init__(self, output_file, base64_attrs=None, cols=76, line_sep='\n'):
     """
     output_file
         file object for output
@@ -112,7 +112,7 @@ class LDIFWriter:
     self._line_sep = line_sep
     self.records_written = 0
 
-  def _unfoldLDIFLine(self,line):
+  def _unfoldLDIFLine(self, line):
     """
     Write string line as one or more folded lines
     """
@@ -124,16 +124,16 @@ class LDIFWriter:
     else:
       # Fold line
       pos = self._cols
-      self._output_file.write(line[0:min(line_len,self._cols)])
+      self._output_file.write(line[0:min(line_len, self._cols)])
       self._output_file.write(self._line_sep)
       while pos < line_len:
         self._output_file.write(' ')
-        self._output_file.write(line[pos:min(line_len,pos + self._cols - 1)])
+        self._output_file.write(line[pos:min(line_len, pos + self._cols - 1)])
         self._output_file.write(self._line_sep)
         pos = pos + self._cols - 1
     return # _unfoldLDIFLine()
 
-  def _unparseAttrTypeandValue(self,attr_type,attr_value):
+  def _unparseAttrTypeandValue(self, attr_type, attr_value):
     """
     Write a single attribute type/value pair
 
@@ -145,12 +145,12 @@ class LDIFWriter:
     if self._base64_attrs.has_key(attr_type.lower()) or \
        needs_base64(attr_value):
       # Encode with base64
-      self._unfoldLDIFLine(':: '.join([attr_type,base64.encodestring(attr_value).replace('\n','')]))
+      self._unfoldLDIFLine(':: '.join([attr_type, base64.encodestring(attr_value).replace('\n', '')]))
     else:
-      self._unfoldLDIFLine(': '.join([attr_type,attr_value]))
+      self._unfoldLDIFLine(': '.join([attr_type, attr_value]))
     return # _unparseAttrTypeandValue()
 
-  def _unparseEntryRecord(self,entry):
+  def _unparseEntryRecord(self, entry):
     """
     entry
         dictionary holding an entry
@@ -159,9 +159,9 @@ class LDIFWriter:
     attr_types.sort()
     for attr_type in attr_types:
       for attr_value in entry[attr_type]:
-        self._unparseAttrTypeandValue(attr_type,attr_value)
+        self._unparseAttrTypeandValue(attr_type, attr_value)
 
-  def _unparseChangeRecord(self,modlist):
+  def _unparseChangeRecord(self, modlist):
     """
     modlist
         list of additions (2-tuple) or modifications (3-tuple)
@@ -172,23 +172,23 @@ class LDIFWriter:
     elif mod_len == 3:
       changetype = 'modify'
     else:
-      raise ValueError,"modlist item of wrong length"
-    self._unparseAttrTypeandValue('changetype',changetype)
+      raise ValueError, "modlist item of wrong length"
+    self._unparseAttrTypeandValue('changetype', changetype)
     for mod in modlist:
       if mod_len == 2:
-        mod_type,mod_vals = mod
+        mod_type, mod_vals = mod
       elif mod_len == 3:
-        mod_op,mod_type,mod_vals = mod
-        self._unparseAttrTypeandValue(MOD_OP_STR[mod_op],mod_type)
+        mod_op, mod_type, mod_vals = mod
+        self._unparseAttrTypeandValue(MOD_OP_STR[mod_op], mod_type)
       else:
-        raise ValueError,"Subsequent modlist item of wrong length"
+        raise ValueError, "Subsequent modlist item of wrong length"
       if mod_vals:
         for mod_val in mod_vals:
-          self._unparseAttrTypeandValue(mod_type,mod_val)
+          self._unparseAttrTypeandValue(mod_type, mod_val)
       if mod_len == 3:
         self._output_file.write('-' + self._line_sep)
 
-  def unparse(self,dn,record):
+  def unparse(self, dn, record):
     """
     dn
           string-representation of distinguished name
@@ -200,11 +200,11 @@ class LDIFWriter:
       # Simply ignore empty records
       return
     # Start with line containing the distinguished name
-    self._unparseAttrTypeandValue('dn',dn)
+    self._unparseAttrTypeandValue('dn', dn)
     # Dispatch to record type specific writers
-    if isinstance(record,types.DictType):
+    if isinstance(record, types.DictType):
       self._unparseEntryRecord(record)
-    elif isinstance(record,types.ListType):
+    elif isinstance(record, types.ListType):
       self._unparseChangeRecord(record)
     else:
       raise ValueError, "Argument record must be dictionary or list"
@@ -215,7 +215,7 @@ class LDIFWriter:
     return # unparse()
 
 
-def CreateLDIF(dn,record,base64_attrs=None,cols=76):
+def CreateLDIF(dn, record, base64_attrs=None, cols=76):
   """
   Create LDIF single formatted record including trailing empty line.
   This is a compability function. Use is deprecated!
@@ -232,8 +232,8 @@ def CreateLDIF(dn,record,base64_attrs=None,cols=76):
         folded into many lines.
   """
   f = StringIO()
-  ldif_writer = LDIFWriter(f,base64_attrs,cols,'\n')
-  ldif_writer.unparse(dn,record)
+  ldif_writer = LDIFWriter(f, base64_attrs, cols, '\n')
+  ldif_writer.unparse(dn, record)
   s = f.getvalue()
   f.close()
   return s
@@ -249,7 +249,7 @@ class LDIFParser:
         Counter for records processed so far
   """
 
-  def _stripLineSep(self,s):
+  def _stripLineSep(self, s):
     """
     Strip trailing line separators from s, but no other whitespaces
     """
@@ -291,7 +291,7 @@ class LDIFParser:
     self._line_sep = line_sep
     self.records_read = 0
 
-  def handle(self,dn,entry):
+  def handle(self, dn, entry):
     """
     Process a single content LDIF record. This method should be
     implemented by applications using LDIFParser.
@@ -319,12 +319,12 @@ class LDIFParser:
     while unfolded_line and unfolded_line[0] == '#':
       unfolded_line = self._unfoldLDIFLine()
     if not unfolded_line or unfolded_line == '\n' or unfolded_line == '\r\n':
-      return None,None
+      return None, None
     try:
       colon_pos = unfolded_line.index(':')
     except ValueError:
       # Treat malformed lines without colon as non-existent
-      return None,None
+      return None, None
     attr_type = unfolded_line[0:colon_pos]
     # if needed attribute value is BASE64 decoded
     value_spec = unfolded_line[colon_pos:colon_pos + 2]
@@ -343,7 +343,7 @@ class LDIFParser:
       attr_value = ''
     else:
       attr_value = unfolded_line[colon_pos + 2:].lstrip()
-    return attr_type,attr_value
+    return attr_type, attr_value
 
   def parse(self):
     """
@@ -361,7 +361,7 @@ class LDIFParser:
       modop = None
       entry = {}
 
-      attr_type,attr_value = self._parseAttrTypeandValue()
+      attr_type, attr_value = self._parseAttrTypeandValue()
 
       while attr_type != None and attr_value != None:
         if attr_type == 'dn':
@@ -391,11 +391,11 @@ class LDIFParser:
             entry[attr_type] = [attr_value]
 
         # Read the next line within an entry
-        attr_type,attr_value = self._parseAttrTypeandValue()
+        attr_type, attr_value = self._parseAttrTypeandValue()
 
       if entry:
         # append entry to result list
-        self.handle(dn,entry)
+        self.handle(dn, entry)
         self.records_read = self.records_read + 1
 
     return # parse()
@@ -410,7 +410,7 @@ class LDIFRecordList(LDIFParser):
   def __init__(
     self,
     input_file,
-    ignored_attr_types=None,max_entries=0,process_url_schemes=None
+    ignored_attr_types=None, max_entries=0, process_url_schemes=None
   ):
     """
     See LDIFParser.__init__()
@@ -419,14 +419,14 @@ class LDIFRecordList(LDIFParser):
     all_records
         List instance for storing parsed records
     """
-    LDIFParser.__init__(self,input_file,ignored_attr_types,max_entries,process_url_schemes)
+    LDIFParser.__init__(self, input_file, ignored_attr_types, max_entries, process_url_schemes)
     self.all_records = []
 
-  def handle(self,dn,entry):
+  def handle(self, dn, entry):
     """
     Append single record to dictionary of all records.
     """
-    self.all_records.append((dn,entry))
+    self.all_records.append((dn, entry))
 
 
 class LDIFCopy(LDIFParser):
@@ -437,30 +437,30 @@ class LDIFCopy(LDIFParser):
 
   def __init__(
     self,
-    input_file,output_file,
-    ignored_attr_types=None,max_entries=0,process_url_schemes=None,
-    base64_attrs=None,cols=76,line_sep='\n'
+    input_file, output_file,
+    ignored_attr_types=None, max_entries=0, process_url_schemes=None,
+    base64_attrs=None, cols=76, line_sep='\n'
   ):
     """
     See LDIFParser.__init__() and LDIFWriter.__init__()
     """
-    LDIFParser.__init__(self,input_file,ignored_attr_types,max_entries,process_url_schemes)
-    self._output_ldif = LDIFWriter(output_file,base64_attrs,cols,line_sep)
+    LDIFParser.__init__(self, input_file, ignored_attr_types, max_entries, process_url_schemes)
+    self._output_ldif = LDIFWriter(output_file, base64_attrs, cols, line_sep)
 
-  def handle(self,dn,entry):
+  def handle(self, dn, entry):
     """
     Write single LDIF record to output file.
     """
-    self._output_ldif.unparse(dn,entry)
+    self._output_ldif.unparse(dn, entry)
 
 
-def ParseLDIF(f,ignore_attrs=None,maxentries=0):
+def ParseLDIF(f, ignore_attrs=None, maxentries=0):
   """
   Parse LDIF records read from file.
   This is a compability function. Use is deprecated!
   """
   ldif_parser = LDIFRecordList(
-    f,ignored_attr_types=ignore_attrs,max_entries=maxentries,process_url_schemes=0
+    f, ignored_attr_types=ignore_attrs, max_entries=maxentries, process_url_schemes=0
   )
   ldif_parser.parse()
   return ldif_parser.all_records

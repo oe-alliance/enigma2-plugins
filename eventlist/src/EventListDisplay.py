@@ -71,12 +71,12 @@ class EventListDisplay(Renderer):
 	
 		def parseColumnValue(value):
 			x, length, color, fontname, fontheight, align, itemindex = value.split(',')
-			return (int(x), int(length), parseColor(color), gFont(fontname,int(fontheight)), int(fontheight), int(itemindex), int(align))
+			return (int(x), int(length), parseColor(color), gFont(fontname, int(fontheight)), int(fontheight), int(itemindex), int(align))
 
 		for (attrib, value) in self.skinAttributes:
 			if attrib == "size":
 				self.instance.setSize(parseSize(value))
-				attribs.append((attrib,value))
+				attribs.append((attrib, value))
 			elif attrib == "column0":
 				self.columns["0"] = parseColumnValue(value)
 			elif attrib == "column1":
@@ -90,9 +90,9 @@ class EventListDisplay(Renderer):
 			elif attrib == "backgroundColor":
 				self.backgroundColor = parseColor(value)
 				self.instance.clear(self.backgroundColor)
-				attribs.append((attrib,value))
+				attribs.append((attrib, value))
 			else:
-				attribs.append((attrib,value))
+				attribs.append((attrib, value))
 		self.skinAttributes = attribs
 		return Renderer.applySkin(self, desktop, parent)
 

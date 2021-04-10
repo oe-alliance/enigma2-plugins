@@ -72,9 +72,9 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 
 	def defineConfig(self):
 		
-		separator = "".ljust(250,"-")
+		separator = "".ljust(250, "-")
 		separatorE2Usage = "- E2 " + _("Usage") + " "
-		separatorE2Usage = separatorE2Usage.ljust(250 - len(separatorE2Usage),"-")
+		separatorE2Usage = separatorE2Usage.ljust(250 - len(separatorE2Usage), "-")
 		
 #         _config list entry
 #         _                                                     , config element

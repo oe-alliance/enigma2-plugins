@@ -77,7 +77,7 @@ class CrashLog(ControllerBase):
 					# Adapted from autosubmit - instead of .sent we will use .pushed
 					currfilename = str(os.path.basename(crashlog))
 					newfilename = "/media/hdd/" + currfilename + ".pushed"
-					os.rename(crashlog,newfilename)
+					os.rename(crashlog, newfilename)
 				self.crashlogs.remove(crashlog)
 
 	def errback(self):

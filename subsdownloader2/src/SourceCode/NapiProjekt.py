@@ -37,7 +37,7 @@ class NapiProjekt():
         self.error_ = 0
         pass
         
-    def f(self,z):
+    def f(self, z):
         idx = [0xe, 0x3, 0x6, 0x8, 0x2]
         mul = [2, 2, 5, 4, 3]
         add = [0, 0xd, 0x10, 0xb, 0x5]
@@ -111,7 +111,7 @@ class NapiProjekt():
         else:
             #subFilePath = str(self.filename).split(".")[0]+'.srt'
             subFilePath = str(self.filename).rsplit(".", 1)[0] + '.srt'
-            savefile = open(subFilePath,"w")
+            savefile = open(subFilePath, "w")
             savefile.write(self.sub)
             savefile.close()
             return subFilePath

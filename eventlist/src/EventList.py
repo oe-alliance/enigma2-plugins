@@ -73,11 +73,11 @@ class EventList(Converter, object):
 							contentList.append(self.getEventTuple(event),)
 		return contentList
 
-	def getEventTuple(self,event):
+	def getEventTuple(self, event):
 		time = "%s - %s" % (strftime("%H:%M", localtime(event.getBeginTime())), strftime("%H:%M", localtime(event.getBeginTime() + event.getDuration())))
 		title = event.getEventName()
 		duration = "%d min" % (event.getDuration() / 60)
-		return (time,title,duration)
+		return (time, title, duration)
 
 	def changed(self, what):
 		if what[0] != self.CHANGED_SPECIFIC:

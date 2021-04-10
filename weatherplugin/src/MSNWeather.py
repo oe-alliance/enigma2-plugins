@@ -116,7 +116,7 @@ class MSNWeather:
 		
 	def getWeatherData(self, degreetype, locationcode, city, callback, callbackShowIcon, callbackAllIconsDownloaded=None):
 		self.initialize()
-		language = config.osd.language.value.replace("_","-")
+		language = config.osd.language.value.replace("_", "-")
 		if language == "en-EN": # hack
 			language = "en-US"
 		elif language == "no-NO": # hack
@@ -153,7 +153,7 @@ class MSNWeather:
 
 	def finishedIconDownload(self, result, item):
 		if not item.error:
-			self.showIcon(item.index,item.filename)
+			self.showIcon(item.index, item.filename)
 		
 	def showIcon(self, index, filename):
 		if self.callbackShowIcon is not None:
@@ -195,9 +195,9 @@ class MSNWeather:
 					currentWeather.iconFilename = filename
 					if not os_path.exists(filename):
 						url = "%s%s" % (self.imagerelativeurl, currentWeather.skycode)
-						IconDownloadList.append(WeatherIconItem(url=url,filename=filename, index=-1))
+						IconDownloadList.append(WeatherIconItem(url=url, filename=filename, index=-1))
 					else:
-						self.showIcon(-1,filename)
+						self.showIcon(-1, filename)
 					self.weatherItems[str(-1)] = currentWeather
 				elif items.tag == "forecast" and index <= 4:
 					index += 1
@@ -214,14 +214,14 @@ class MSNWeather:
 					weather.iconFilename = filename
 					if not os_path.exists(filename):
 						url = "%s%s" % (self.imagerelativeurl, weather.skycodeday)
-						IconDownloadList.append(WeatherIconItem(url=url,filename=filename, index=index))
+						IconDownloadList.append(WeatherIconItem(url=url, filename=filename, index=index))
 					else:
-						self.showIcon(index,filename)
+						self.showIcon(index, filename)
 					self.weatherItems[str(index)] = weather
 		
 		if len(IconDownloadList) != 0:
 			ds = defer.DeferredSemaphore(tokens=len(IconDownloadList))
-			downloads = [ds.run(download,item).addErrback(self.errorIconDownload, item).addCallback(self.finishedIconDownload,item) for item in IconDownloadList]
+			downloads = [ds.run(download, item).addErrback(self.errorIconDownload, item).addCallback(self.finishedIconDownload, item) for item in IconDownloadList]
 			finished = defer.DeferredList(downloads).addErrback(self.error).addCallback(self.finishedAllDownloadFiles)
 		else:
 			self.finishedAllDownloadFiles(None)

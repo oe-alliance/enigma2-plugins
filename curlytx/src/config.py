@@ -32,6 +32,6 @@ config.plugins.CurlyTx.menuExtensions = ConfigYesNo(default=False)
 config.plugins.CurlyTx.menuTitle = ConfigText(default="CurlyTx", fixed_size=False)
 config.plugins.CurlyTx.feedUrl = ConfigText(default="", fixed_size=False)
 config.plugins.CurlyTx.pages = ConfigSubList()
-for id,value in config.plugins.CurlyTx.pages.stored_values.iteritems():
+for id, value in config.plugins.CurlyTx.pages.stored_values.iteritems():
     config.plugins.CurlyTx.pages.append(createPage())
 loadDefaultPageOptions()

@@ -186,7 +186,7 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 		pass
 
 	def start(self):
-		sref = eServiceReference(4097,0,self.STREAM_URI)
+		sref = eServiceReference(4097, 0, self.STREAM_URI)
 		sref.setName("eUroticTV Live Stream")
 		self.session.nav.playService(sref)
 

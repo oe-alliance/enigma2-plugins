@@ -61,8 +61,8 @@ class BonjourScreen(Screen):
 		
 		file = "%s" % (service['file'])
 		name = "Name: %s" % (service['name'])
-		type = "Type: %s" % (service['type'].split('.')[0].replace('_',''))
-		prot = "Protocol: %s" % (service['type'].split('.')[1].replace('_',''))
+		type = "Type: %s" % (service['type'].split('.')[0].replace('_', ''))
+		prot = "Protocol: %s" % (service['type'].split('.')[1].replace('_', ''))
 		port = "Port: %s" % (service['port'])
 		text = "Text: %s" % (service['text'])
 		

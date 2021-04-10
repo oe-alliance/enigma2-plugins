@@ -2235,7 +2235,7 @@ class FritzCallPhonebook(object):
 					self.deleteConfirmed,
 					MessageBox,
 					_("Do you really want to delete entry for\n\n%(number)s\n\n%(name)s?")
-					% {'number':str(cur[2]), 'name':str(cur[0]).replace(", ", "\n")}
+					% {'number': str(cur[2]), 'name': str(cur[0]).replace(", ", "\n")}
 								)
 			else:
 				self.session.open(MessageBox, _("No entry selected"), MessageBox.TYPE_INFO)
@@ -3142,9 +3142,9 @@ mutedOnConnID = None
 def notifyCall(event, date, number, caller, phone, connID): # @UnusedVariable # pylint: disable=W0613
 	if Standby.inStandby is None or config.plugins.FritzCall.afterStandby.value == "each":
 		if event == "RING":
-			text = _("Incoming Call on %(date)s at %(time)s from\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nto: %(phone)s") % {'date':date[:8], 'time':date[9:], 'number':number, 'caller':caller, 'phone':phone}
+			text = _("Incoming Call on %(date)s at %(time)s from\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nto: %(phone)s") % {'date': date[:8], 'time': date[9:], 'number': number, 'caller': caller, 'phone': phone}
 		else:
-			text = _("Outgoing Call on %(date)s at %(time)s to\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nfrom: %(phone)s") % {'date':date[:8], 'time':date[9:], 'number':number, 'caller':caller, 'phone':phone}
+			text = _("Outgoing Call on %(date)s at %(time)s to\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nfrom: %(phone)s") % {'date': date[:8], 'time': date[9:], 'number': number, 'caller': caller, 'phone': phone}
 		info("[FritzCall]\n%s", text)
 		# Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
 		Notifications.AddNotification(MessageBoxPixmap, text, number=number, name=caller, timeout=config.plugins.FritzCall.timeout.value)

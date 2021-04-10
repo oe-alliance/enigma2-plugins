@@ -70,12 +70,12 @@ def ChannelListEntryComponent(type, channelname, serviceref, eventid, eventname,
 
 	# PIXMAP / PICON
 	pixmap = resolveFilename(SCOPE_ACTIVE_SKIN, "picon_default.png")
-	searchPaths = ('/usr/share/enigma2/picon/','/media/cf/picon/','/media/usb/picon/')
+	searchPaths = ('/usr/share/enigma2/picon/', '/media/cf/picon/', '/media/usb/picon/')
 
 	srefstring = serviceref
 	pos = srefstring.rfind(':')
 	if pos != -1:
-		srefstring = srefstring[:pos].rstrip(':').replace(':','_')
+		srefstring = srefstring[:pos].rstrip(':').replace(':', '_')
 		for path in searchPaths:
 			pngname = path + srefstring + ".png"
 			if fileExists(pngname):
@@ -481,7 +481,7 @@ class DBUpdateStatus(Screen):
 	def restartTimer(self):
 		if self.NetworkConnectionAvailable:
 			self.DBStatusTimer.stop()
-			self.DBStatusTimer.start((randint(15,60)) * 1000, True)
+			self.DBStatusTimer.start((randint(15, 60)) * 1000, True)
 		else:
 			iNetwork.checkNetworkState(self.checkNetworkCB)
 
@@ -546,7 +546,7 @@ class DBUpdateStatus(Screen):
 			try:
 				for timer in self.recordtimer.timer_list:
 					if timer.disabled == 0 and timer.justplay == 0:
-						self.timerlist += "%s|%s|%s|%s|%s|%s|%s\n" % (timer.eit,str(int(timer.begin) + (config.recording.margin_before.getValue() * 60)), str(int(timer.end) - (config.recording.margin_after.getValue() * 60)), str(timer.service_ref), timer.name, timer.service_ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8"), timer.repeated)
+						self.timerlist += "%s|%s|%s|%s|%s|%s|%s\n" % (timer.eit, str(int(timer.begin) + (config.recording.margin_before.getValue() * 60)), str(int(timer.end) - (config.recording.margin_after.getValue() * 60)), str(timer.service_ref), timer.name, timer.service_ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8"), timer.repeated)
 			except Exception:
 				print "[TVCharts] Error loading timers!"
 
@@ -561,7 +561,7 @@ class DBUpdateStatus(Screen):
 				print "[TVCharts] Error loading plugins!"
 		
 		# Status Update
-		getPage(url='http://www.dreambox-plugins.de/feeds/TVCharts/status.php', agent="Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)", timeout=60, method='POST', headers={'Content-Type':'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid': self.BoxID, 'devicename': self.DeviceName, 'imageversion': self.ImageVersion, 'enigmaversion': self.EnigmaVersion, 'lastchannel': channel_name, 'lastevent': event_name, 'eventdescr': event_description, 'lastbegin': event_begin, 'lastserviceref': self.serviceref, 'timerlist': self.timerlist, 'pluginlist': self.pluginlist})).addErrback(self.updateError)
+		getPage(url='http://www.dreambox-plugins.de/feeds/TVCharts/status.php', agent="Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)", timeout=60, method='POST', headers={'Content-Type': 'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid': self.BoxID, 'devicename': self.DeviceName, 'imageversion': self.ImageVersion, 'enigmaversion': self.EnigmaVersion, 'lastchannel': channel_name, 'lastevent': event_name, 'eventdescr': event_description, 'lastbegin': event_begin, 'lastserviceref': self.serviceref, 'timerlist': self.timerlist, 'pluginlist': self.pluginlist})).addErrback(self.updateError)
 
 		# Restart Timer
 		self.DBStatusTimer.start(900000, True)

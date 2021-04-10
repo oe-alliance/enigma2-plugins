@@ -289,7 +289,7 @@ def getSeasonEpisode(service_ref, name, begin, end, description, path, *args, **
 		try:
 			result = bareGetEpisode(service_ref, name, begin, end, description, path)
 			if result and isinstance(result, dict):
-				return (result[0],result[1],result[2])
+				return (result[0], result[1], result[2])
 			else:
 				return str(result)
 		except Exception as e:

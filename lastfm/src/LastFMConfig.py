@@ -8,7 +8,7 @@ from Components.ActionMap import ActionMap
 from . import _
 
        
-class LastFMConfigScreen(ConfigListScreen,Screen):
+class LastFMConfigScreen(ConfigListScreen, Screen):
 
     config.plugins.LastFM = ConfigSubsection()
     config.plugins.LastFM.name = ConfigText(default=_("Last.FM"))

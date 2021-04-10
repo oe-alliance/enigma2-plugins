@@ -27,7 +27,7 @@ class PkgList(Source):
 		try:
 			out = os_popen("opkg update")
 			for line in out:
-				print "[loadOpkgfeed]",line
+				print "[loadOpkgfeed]", line
 				
 			out = os_popen("opkg list")
 			for line in out:
@@ -66,7 +66,7 @@ class PkgList(Source):
 			
 			return [(name, map[name][0], map[name][1], map[name][2], map[name][3]) for name in keys]
 		except Exception, e:
-			print "[PkgList] except: ",str(e)
+			print "[PkgList] except: ", str(e)
 			return []
 		
 	def getOpkgfeed(self):

@@ -13,7 +13,7 @@ XML_FSTAB = "/etc/enigma2/automounts.xml"
 
 def rm_rf(d): # only for removing the ipkg stuff from /media/hdd subdirs
 	try:
-		for path in (os.path.join(d,f) for f in os.listdir(d)):
+		for path in (os.path.join(d, f) for f in os.listdir(d)):
 			if os.path.isdir(path):
 				rm_rf(path)
 			else:
@@ -223,7 +223,7 @@ class AutoMount():
 
 	def sanitizeOptions(self, origOptions, cifs=False, fstab=False, autofs=False):
 		options = origOptions.strip()
-		options = options.replace('utf8','iocharset=utf8')
+		options = options.replace('utf8', 'iocharset=utf8')
 		if fstab:
 			if not options:
 				options = 'rw'
@@ -321,7 +321,7 @@ class AutoMount():
 				command.append('sleep 2')
 			if mountcommand is not None:
 				command.append(mountcommand)
-			print 'command',command
+			print 'command', command
 			self.MountConsole.eBatch(command, self.CheckMountPointFinished, [data, callback, restart], debug=True)
 		else:
 			self.CheckMountPointFinished([data, callback, restart])

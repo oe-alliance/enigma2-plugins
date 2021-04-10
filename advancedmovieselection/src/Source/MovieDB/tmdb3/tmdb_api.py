@@ -83,8 +83,8 @@ def process_date(datestr):
         import sys
         import warnings
         import traceback
-        _,_,tb = sys.exc_info()
-        f,l,_,_ = traceback.extract_tb(tb)[-1]
+        _, _, tb = sys.exc_info()
+        f, l, _, _ = traceback.extract_tb(tb)[-1]
         warnings.warn_explicit(('"{0}" is not a supported date format. '
                 'Please fix upstream data at http://www.themoviedb.org.')
               .format(datestr), Warning, f, l)
@@ -112,7 +112,7 @@ class Account(NameRepr, Element):
         return get_locale(self.language, self.country)
 
 def searchMovie(query, locale=None, adult=False, year=None):
-    kwargs = {'query':query, 'include_adult':adult}
+    kwargs = {'query': query, 'include_adult': adult}
     if year is not None:
         try:
             kwargs['year'] = year.year
@@ -581,7 +581,7 @@ class Movie(Element):
         req = Request('account/{0}/favorite'.format(
                                         Account(session=self._session).id),
                             session_id=self._session.sessionid)
-        req.add_data({'movie_id':self.id, 'favorite':str(bool(value)).lower()})
+        req.add_data({'movie_id': self.id, 'favorite': str(bool(value)).lower()})
         req.lifetime = 0
         req.readJSON()
 
@@ -591,7 +591,7 @@ class Movie(Element):
         req = Request('movie/{0}/rating'.format(self.id),
                             session_id=self._session.sessionid)
         req.lifetime = 0
-        req.add_data({'value':value})
+        req.add_data({'value': value})
         req.readJSON()
 
     def setWatchlist(self, value):
@@ -599,8 +599,8 @@ class Movie(Element):
                                         Account(session=self._session).id),
                             session_id=self._session.sessionid)
         req.lifetime = 0
-        req.add_data({'movie_id':self.id,
-                      'movie_watchlist':str(bool(value)).lower()})
+        req.add_data({'movie_id': self.id,
+                      'movie_watchlist': str(bool(value)).lower()})
         req.readJSON()
 
     def getSimilar(self):

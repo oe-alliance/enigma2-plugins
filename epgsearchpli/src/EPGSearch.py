@@ -95,7 +95,7 @@ class EPGSearchList(EPGList):
 		self.skinColumns = False
 		self.tw = 90
 		self.dy = 0
-		self.piconSize = 50,30
+		self.piconSize = 50, 30
 		self.piconDistance = 5
 		self.pboxDistance = 80
 
@@ -348,19 +348,19 @@ class EPGSearchList(EPGList):
 					None, # no private data needed
 					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r1.left(), r1.top() + dy, self.piconSize[0], self.piconSize[1], png),
 					(eListboxPythonMultiContent.TYPE_TEXT, r1.left() + dx, r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, self.days[t[6]]),
-					(eListboxPythonMultiContent.TYPE_TEXT, r2.left() + dx, r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d" % (t[2],t[1],t[3],t[4]))
+					(eListboxPythonMultiContent.TYPE_TEXT, r2.left() + dx, r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4]))
 				]
 			else:
 				res = [
 					None, # no private data needed
 					(eListboxPythonMultiContent.TYPE_TEXT, r1.left() + dx, r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, self.days[t[6]]),
-					(eListboxPythonMultiContent.TYPE_TEXT, r2.left() + dx, r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d" % (t[2],t[1],t[3],t[4]))
+					(eListboxPythonMultiContent.TYPE_TEXT, r2.left() + dx, r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4]))
 				]
 		else:
 			res = [
 				None, # no private data needed
 				(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, self.days[t[6]]),
-				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d" % (t[2],t[1],t[3],t[4]))
+				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4]))
 			]
 		if config.plugins.epgsearch.picons.value:
 			if rec1 or rec2:
@@ -493,7 +493,7 @@ class EPGSearchList(EPGList):
 			sname = ':'.join(service.split(':')[:11])
 			pos = sname.rfind(':')
 			if pos != -1:
-				sname = sname[:pos].rstrip(':').replace(':','_')
+				sname = sname[:pos].rstrip(':').replace(':', '_')
 				for path in self.searchPiconPaths:
 					pngname = path + sname + ".png"
 					if fileExists(pngname):
@@ -504,9 +504,9 @@ class EPGSearchList(EPGList):
 		def warningWrongSkinParameter(string):
 			print "[EPGList] wrong '%s' skin parameters" % string
 		def setEventItemFont(value):
-			self.eventItemFont = parseFont(value, ((1,1),(1,1)))
+			self.eventItemFont = parseFont(value, ((1, 1), (1, 1)))
 		def setEventTimeFont(value):
-			self.eventTimeFont = parseFont(value, ((1,1),(1,1)))
+			self.eventTimeFont = parseFont(value, ((1, 1), (1, 1)))
 		def setIconDistance(value):
 			self.iconDistance = int(value)
 		def setIconShift(value):
@@ -719,7 +719,7 @@ class EPGSearch(EPGSelection):
 				(_("Lookup in TMBD"), "runtmbd"),
 				(_("Partnerbox Entries"), "partnerbox"),
 				]
-				dlg = self.session.openWithCallback(self.RedbuttonCallback,ChoiceBox,title=_("Select action:"), list=list)
+				dlg = self.session.openWithCallback(self.RedbuttonCallback, ChoiceBox, title=_("Select action:"), list=list)
 				dlg.setTitle(_("Choice list RED Button"))
 			else:
 				self.zapTo()

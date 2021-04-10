@@ -69,9 +69,9 @@ class MovieList(GUIComponent):
 		self.pdirIcon = LoadPixmap(cached=True, path=eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/SerienFilm/icons/folder_20.png'))
 		self.rdirIcon = LoadPixmap(cached=True, path=eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/SerienFilm/icons/folder_red.png'))
 		self.fupIcon = LoadPixmap(cached=True, path=eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/SerienFilm/icons/folderup_20.png'))
-		self.pdirMap = MultiContentEntryPixmapAlphaTest(pos=(0,0), size=(20,20), png=self.pdirIcon)
-		self.rdirMap = MultiContentEntryPixmapAlphaTest(pos=(0,0), size=(20,20), png=self.rdirIcon)
-		self.fupMap = MultiContentEntryPixmapAlphaTest(pos=(0,0), size=(20,20), png=self.fupIcon)
+		self.pdirMap = MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(20, 20), png=self.pdirIcon)
+		self.rdirMap = MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(20, 20), png=self.rdirIcon)
+		self.fupMap = MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(20, 20), png=self.fupIcon)
 
 		self.redrawList()
 		self.l.setBuildFunc(self.buildMovieListEntry)

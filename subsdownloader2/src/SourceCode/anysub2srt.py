@@ -16,7 +16,7 @@ class SubConv():
     def __init__(self, subtitle_path, encoding):
 	self.encodeing = encoding
 	self.subtitle = subtitle_path
-	file = codecs.open(self.subtitle,'r',self.encodeing, errors="ignore")
+	file = codecs.open(self.subtitle, 'r', self.encodeing, errors="ignore")
         self.subs_file = file.readlines()
         file.close()
   
@@ -53,7 +53,7 @@ class SubConv():
         ####################################################
         return "None"
 
-    def read_mdvd(self,list,fps):
+    def read_mdvd(self, list, fps):
         """
     Read micro-dvd subtitles.
     input: contents of a file as list
@@ -76,7 +76,7 @@ class SubConv():
 		sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
         return subtitles
 
-    def read_sub2(self,list):
+    def read_sub2(self, list):
         """
 Reads subviewer 2.0 format subtitles, e.g. :
 00:01:54.75,00:01:58.54
@@ -94,7 +94,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
                     subt.append(int(m.group(5)) * 3600 + int(m.group(6)) * 60 + int(m.group(7)) + int(m.group(8)) / 100.0)
                     l = list.pop(0).strip()
                     lines = l.split("[br]")
-                    for i in range(0,len(lines)):
+                    for i in range(0, len(lines)):
                         subt.append(lines[i])
                     subtitles.append(subt)
 	    except:
@@ -117,7 +117,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 #	return subtitles
     
     
-    def read_srt(self,list):
+    def read_srt(self, list):
         """
 Reads srt subtitles.
 input: contents of a file as list
@@ -144,7 +144,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 		sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
 	return subtitles
        
-    def read_tmp(self,list):
+    def read_tmp(self, list):
         """
 Reads tmplayer (tmp) subtitles.
 input: contents of a file as list
@@ -167,7 +167,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 		
         times = subs.keys()
         times.sort()
-        for i in range(0,len(times)):
+        for i in range(0, len(times)):
             next_time = 1
             while not subs.has_key(times[i] + next_time) and next_time < 4:
                 next_time = next_time + 1
@@ -177,7 +177,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
         return subtitles
 
 
-    def read_mpl2(self,list):
+    def read_mpl2(self, list):
 	    MPL2LINE = re.compile("\[(?P<start>\d+)\]\[(?P<stop>\d+)\](?P<line>.*)", re.S)
 	    #FRAMERATE = float(fps)
 	    subtitles = []
@@ -188,7 +188,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 		    start = float(float(group["start"]) / 10) #*0.1*FRAMERATE) or 1
 		    stop = float(float(group["stop"]) / 10)#*0.1*FRAMERATE)
 		    rest = group["line"]
-		    temp = [float(start), float(stop), str(rest).replace('|','\n')]
+		    temp = [float(start), float(stop), str(rest).replace('|', '\n')]
 		    subtitles.append(temp)
 		except:
 		    sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
@@ -196,7 +196,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
     
     
     
-    def check_subs_long(self,subtitles_standard_list, fps):
+    def check_subs_long(self, subtitles_standard_list, fps):
         """takes list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep, time_end, line1, ...],....]
         and checks in end time of subtittle in not longer then next subtitle start time if yes correct this error"""
         loops = len(subtitles_standard_list) - 1
@@ -213,7 +213,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
             x = x + 1
         return subtitles_standard_list
 
-    def to_srt(self,list):
+    def to_srt(self, list):
         """
         Converts list of subtitles (internal format) to srt format
         """
@@ -230,7 +230,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
             m2 = int(int(secs2 % 3600) / 60)
             s2 = int(secs2 % 60)
             f2 = (secs2 - int(secs2)) * 1000
-            outl.append("%d\n%.2d:%.2d:%.2d,%.3d --> %.2d:%.2d:%.2d,%.3d\n%s\n\n" % (count,h1,m1,s1,f1,h2,m2,s2,f2,"\n".join(l[2:])))
+            outl.append("%d\n%.2d:%.2d:%.2d,%.3d --> %.2d:%.2d:%.2d,%.3d\n%s\n\n" % (count, h1, m1, s1, f1, h2, m2, s2, f2, "\n".join(l[2:])))
 	    count = count + 1
         return outl
     
@@ -287,7 +287,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
         sub_list = [list]
 	try:
 	    #dst = codecs.open(self.subtitle, 'w','UTF-8')
-	    dst = codecs.open(self.subtitle, 'w','utf-8-sig')
+	    dst = codecs.open(self.subtitle, 'w', 'utf-8-sig')
 	    for nsub in sub_list:
 		s = self.to_srt(nsub)
 		dst.writelines(s)

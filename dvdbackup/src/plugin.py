@@ -145,7 +145,7 @@ class DVDBackup:
 				self.working = False
 		else:
 			message(_("Could not read the DVD informations!"))
-			print "[DVD Backup]",result
+			print "[DVD Backup]", result
 			self.working = False
 
 	def dvdbackupFinished(self, result, retval, extra_args):

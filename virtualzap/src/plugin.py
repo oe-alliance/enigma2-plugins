@@ -59,13 +59,13 @@ except:
 	plugin_PiPServiceRelation_installed = False
 
 config.plugins.virtualzap = ConfigSubsection()
-config.plugins.virtualzap.mode = ConfigSelection(default="0", choices=[("0", _("as plugin in extended bar")),("1", _("with long OK press")), ("2", _("with exit button"))])
+config.plugins.virtualzap.mode = ConfigSelection(default="0", choices=[("0", _("as plugin in extended bar")), ("1", _("with long OK press")), ("2", _("with exit button"))])
 config.plugins.virtualzap.usepip = ConfigYesNo(default=True)
 config.plugins.virtualzap.showpipininfobar = ConfigYesNo(default=True)
 config.plugins.virtualzap.saveLastService = ConfigYesNo(default=False)
 config.plugins.virtualzap.curref = ConfigText()
 config.plugins.virtualzap.curbouquet = ConfigText()
-config.plugins.virtualzap.exittimer = ConfigInteger(0,limits=(0, 20))
+config.plugins.virtualzap.exittimer = ConfigInteger(0, limits=(0, 20))
 
 def autostart(reason, **kwargs):
 	if config.plugins.virtualzap.mode.value != "0":
@@ -138,18 +138,18 @@ def newHide(self):
 def Plugins(**kwargs):
  	plist = [PluginDescriptor(name="Virtual Zap Setup", description=_("Virtual Zap Setup"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=setup)]
 	if config.plugins.virtualzap.mode.value == "0":
-		plist.append(PluginDescriptor(name="Virtual Zap", description=_("Virtual (PiP) Zap"), where=[PluginDescriptor.WHERE_EXTENSIONSMENU],icon="plugin.png", fnc=main))
+		plist.append(PluginDescriptor(name="Virtual Zap", description=_("Virtual (PiP) Zap"), where=[PluginDescriptor.WHERE_EXTENSIONSMENU], icon="plugin.png", fnc=main))
 	elif config.plugins.virtualzap.mode.value == "1" or config.plugins.virtualzap.mode.value == "2":
-		plist.append(PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART],fnc=autostart))
+		plist.append(PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart))
 	return plist
 
-def setup(session,**kwargs):
+def setup(session, **kwargs):
 	session.open(VirtualZapConfig)
 
 def VirtualZapMainCallback(service=None, servicePath=None):
 	VirtualZapCallback(InfoBar.instance, service, servicePath)
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	if InfoBar.instance.pipShown():
 		InfoBar.instance.showPiP()
 	session.openWithCallback(VirtualZapMainCallback, VirtualZap, InfoBar.instance.servicelist)
@@ -222,7 +222,7 @@ class VirtualZap(Screen):
 					<widget backgroundColor="#101214" font="Regular;24" halign="left" name="NextEPG" position="140,645" size="860,28" transparent="1" zPosition="2"/>
 					<widget backgroundColor="#101214" font="Regular;24" foregroundColor="#fcc000" halign="right" name="NowTime" position="1015,610" size="124,28" transparent="1" zPosition="2"/>
 					<widget backgroundColor="#101214" font="Regular;24" halign="right" name="NextTime" position="1015,645" size="124,28" transparent="1" zPosition="2"/>
-				</screen>""" % (x,y,w,h)
+				</screen>""" % (x, y, w, h)
 		elif sz_w == 1024:
 			skin = """
 				<screen backgroundColor="transparent" flags="wfNoBorder" name="VirtualZapNoPiP" position="0,0" size="1024,576" title="Virtual Zap">
@@ -233,7 +233,7 @@ class VirtualZap(Screen):
 					<widget backgroundColor="#101214" font="Regular;20" halign="left" name="NextEPG" position="100,500" size="700,25" transparent="1" zPosition="2"/>
 					<widget backgroundColor="#101214" font="Regular;20" foregroundColor="#fcc000" halign="right" name="NowTime" position="800,475" size="124,25" transparent="1" zPosition="2"/>
 					<widget backgroundColor="#101214" font="Regular;20" halign="right" name="NextTime" position="800,500" size="124,25" transparent="1" zPosition="2"/>
-				</screen>""" % (x,y,w,h)
+				</screen>""" % (x, y, w, h)
 		else:
 
 			skin = """
@@ -245,7 +245,7 @@ class VirtualZap(Screen):
 					<widget backgroundColor="#101214" font="Regular;20" halign="left" name="NextEPG" position="50,500" size="500,25" transparent="1" zPosition="2"/>
 					<widget backgroundColor="#101214" font="Regular;20" foregroundColor="#fcc000" halign="right" name="NowTime" position="550,475" size="120,25" transparent="1" zPosition="2"/>
 					<widget backgroundColor="#101214" font="Regular;20" halign="right" name="NextTime" position="550,500" size="120,25" transparent="1" zPosition="2"/>
-				</screen>""" % (x,y,w,h)
+				</screen>""" % (x, y, w, h)
 
 	def __init__(self, session, servicelist=None):
 		Screen.__init__(self, session)
@@ -277,7 +277,7 @@ class VirtualZap(Screen):
 			"yellow": self.switchAndStandardPiP,
 			"down": self.switchChannelDown,
 			"up": self.switchChannelUp,
-		},-2)
+		}, -2)
 		self["actions2"] = NumberActionMap(["NumberActions"],
 		{
 			"0": self.swap,
@@ -418,8 +418,8 @@ class VirtualZap(Screen):
 		# update data
 		current = ServiceReference(self.servicelist.getCurrentSelection())
 		self["NowChannel"].setText(current.getServiceName())
-		nowepg, nowtimedisplay = self.getEPGNowNext(current.ref,0)
-		nextepg, nexttimedisplay = self.getEPGNowNext(current.ref,1)
+		nowepg, nowtimedisplay = self.getEPGNowNext(current.ref, 0)
+		nextepg, nexttimedisplay = self.getEPGNowNext(current.ref, 1)
 		self["NowEPG"].setText(nowepg)
 		self["NextEPG"].setText(nextepg)
 		self["NowTime"].setText(nowtimedisplay)
@@ -432,7 +432,7 @@ class VirtualZap(Screen):
 			# play in videowindow
 			self.playService(current.ref)
 
-	def getEPGNowNext(self,ref, modus):
+	def getEPGNowNext(self, ref, modus):
 		# get now || next event
 		if self.epgcache is not None:
 			event = self.epgcache.lookupEvent(['IBDCTSERNX', (ref.toString(), modus, -1)])
@@ -444,7 +444,7 @@ class VirtualZap(Screen):
 						timedisplay = "+%d min" % (((event[0][1] + duration) - time()) / 60)
 					elif modus == 1:
 						timedisplay = "%d min" % (duration / 60)
-					return "%02d:%02d %s" % (t[3],t[4], event[0][4]), timedisplay
+					return "%02d:%02d %s" % (t[3], t[4], event[0][4]), timedisplay
 				else:
 					return "", ""
 		return "", ""
@@ -564,7 +564,7 @@ class VirtualZap(Screen):
 	def playService(self, service):
 		if parentalControl.getProtectionLevel(service.toCompareString()) == -1 or (parentalControl.configInitialized and parentalControl.sessionPinCached and parentalControl.sessionPinCachedValue): # check parentalControl, only play a protected service when Pin-Cache is activated and still valid
 			current_service = service
-			n_service = self.pipServiceRelation.get(service.toString(),None) # PiPServiceRelation
+			n_service = self.pipServiceRelation.get(service.toString(), None) # PiPServiceRelation
 			if n_service is not None:
 				service = eServiceReference(n_service)
 			if service and (service.flags & eServiceReference.isGroup):
@@ -744,7 +744,7 @@ class VirtualZapConfig(Screen, ConfigListScreen):
 		for x in self["config"].list:
 			x[1].save()
 		configfile.save()
-		restartbox = self.session.openWithCallback(self.restartGUI,MessageBox,_("GUI needs a restart to apply the new settings.\nDo you want to Restart the GUI now?"), MessageBox.TYPE_YESNO)
+		restartbox = self.session.openWithCallback(self.restartGUI, MessageBox, _("GUI needs a restart to apply the new settings.\nDo you want to Restart the GUI now?"), MessageBox.TYPE_YESNO)
 		restartbox.setTitle(_("Restart GUI now?"))
 		
 

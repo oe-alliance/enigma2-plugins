@@ -193,7 +193,7 @@ class AspectRatioSwitch:
 		for aspectnum, aspect in enumerate(ASPECT):
 			if config.plugins.AspectRatioSwitch.modes[aspect].value:
 				self.enabledaspects.append(aspectnum)
-		print pluginPrintname, "Aspect modes in cycle:",self.enabledaspects
+		print pluginPrintname, "Aspect modes in cycle:", self.enabledaspects
 
 	def enable(self):
 		self.change_keymap(config.plugins.AspectRatioSwitch.keymap.value)
@@ -281,7 +281,7 @@ def main(session, **kwargs):
 def Plugins(**kwargs):
 			
 	list = [
-		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART,PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)
+		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)
 		]
 	if config.plugins.AspectRatioSwitch.menu.value == "plugin":
 		list.append(PluginDescriptor(name=_("Aspect Ratio Switch setup"), description=_("Quick switching of aspect ratio setting"),

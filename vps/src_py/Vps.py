@@ -286,7 +286,7 @@ class vps_timer:
 
 			# eigenen Timer überprüfen, wenn Zeiten nicht überschrieben werden dürfen
 			if not self.timer.vpsplugin_overwrite and evt_begin <= self.timer.end:
-				check_already_existing = [x for (x,y) in self.next_events if y == neweventid]
+				check_already_existing = [x for (x, y) in self.next_events if y == neweventid]
 				if len(check_already_existing) > 0:
 					start = check_already_existing.pop()
 					if start == evt_begin:

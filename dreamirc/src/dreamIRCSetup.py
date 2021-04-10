@@ -22,7 +22,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 	desk = getDesktop(0)
 	x = int(desk.size().width())
 	y = int(desk.size().height())
-	print "[dreamIRC] setup: current desktop size: %dx%d" % (x,y)
+	print "[dreamIRC] setup: current desktop size: %dx%d" % (x, y)
 
 	if (y >= 720):
 		skin = """
@@ -122,7 +122,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 		self.dreamIRCconf.server3 = ConfigText(default=self.server3, fixed_size=False)
 		self.dreamIRCconf.port = ConfigInteger(default=string.atoi(self.port), limits=(0, 99999))
 		self.dreamIRCconf.channel = ConfigText(default=self.channel, fixed_size=False)
-		self.dreamIRCconf.debug = ConfigSelection(default=self.debug, choices=["False","True"])
+		self.dreamIRCconf.debug = ConfigSelection(default=self.debug, choices=["False", "True"])
 
 	def keySave(self):
 		self.accounts = []

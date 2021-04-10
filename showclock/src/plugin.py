@@ -371,7 +371,7 @@ def sessionstart(reason, **kwargs):
 	if reason == 0:
 		showClock.gotSession(kwargs["session"])
 	
-def setup(session,**kwargs):
+def setup(session, **kwargs):
 	try:	
 	 	session.open(ShowClockSetup)
 	except:

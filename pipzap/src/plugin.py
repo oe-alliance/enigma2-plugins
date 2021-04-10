@@ -407,7 +407,7 @@ try:
 		file.close()
 		pipzapHelp = registerHelp(*reader)
 except Exception as e:
-	print("[pipzap] Unable to initialize MPHelp:", e,"- Help not available!")
+	print("[pipzap] Unable to initialize MPHelp:", e, "- Help not available!")
 	pipzapHelp = None
 
 #pragma mark -

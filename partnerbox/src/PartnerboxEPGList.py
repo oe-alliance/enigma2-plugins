@@ -159,9 +159,9 @@ def Partnerbox_EPGList__init__(self, type=0, selChangedCB=None, timer=None, time
 	if self.screenwidth and self.screenwidth == 1920:
 		global sf
 		sf = 1.5
-		self.posx, self.posy, self.picx, self.picy, self.gap = skinparameter.get("EpgListIcon", (2,13,25,25,2))
+		self.posx, self.posy, self.picx, self.picy, self.gap = skinparameter.get("EpgListIcon", (2, 13, 25, 25, 2))
 	else:
-		self.posx, self.posy, self.picx, self.picy, self.gap = skinparameter.get("EpgListIcon", (1,11,23,23,1))
+		self.posx, self.posy, self.picx, self.picy, self.gap = skinparameter.get("EpgListIcon", (1, 11, 23, 23, 1))
 
 	self.serviceFontSizeGraph = int(20 * sf)
 	self.eventFontSizeGraph = int(18 * sf)
@@ -218,7 +218,7 @@ def Partnerbox_SingleEntry(self, service, eventId, beginTime, duration, EventNam
 		(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, strftime(_("%e/%m, %-H:%M"), t), foreColor, foreColorSel, backColor, backColorSel)
 	]
 	if clock_types:
-		if self.wasEntryAutoTimer and clock_types in (2,7,12):
+		if self.wasEntryAutoTimer and clock_types in (2, 7, 12):
 			res.extend((
 				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x + r3.w - self.picx - self.posx, (r3.h / 2 - self.posy), self.picx, self.picy, self.clocks[clock_types]),
 				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x + r3.w - self.picx * 2 - self.gap - self.posx, (r3.h / 2 - self.posy), self.picx, self.picy, self.autotimericon),
@@ -247,7 +247,7 @@ def Partnerbox_SimilarEntry(self, service, eventId, beginTime, service_name, dur
 		(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, strftime(_("%e/%m, %-H:%M"), t))
 	]
 	if clock_types:
-		if self.wasEntryAutoTimer and clock_types in (2,7,12):
+		if self.wasEntryAutoTimer and clock_types in (2, 7, 12):
 			res.extend((
 				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x + r3.w - self.picx - self.posx, (r3.h / 2 - self.posy), self.picx, self.picy, self.clocks[clock_types]),
 				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x + r3.w - self.picx * 2 - self.gap - self.posx, (r3.h / 2 - self.posy), self.picx, self.picy, self.autotimericon),
@@ -282,7 +282,7 @@ def Partnerbox_MultiEntry(self, changecount, service, eventId, beginTime, durati
 			begin = localtime(beginTime)
 			end = localtime(beginTime + duration)
 			res.extend((
-				(eListboxPythonMultiContent.TYPE_TEXT, r4.x, r4.y, r4.w, r4.h, 1, RT_HALIGN_CENTER | RT_VALIGN_CENTER, _("%02d.%02d - %02d.%02d") % (begin[3],begin[4],end[3],end[4])),
+				(eListboxPythonMultiContent.TYPE_TEXT, r4.x, r4.y, r4.w, r4.h, 1, RT_HALIGN_CENTER | RT_VALIGN_CENTER, _("%02d.%02d - %02d.%02d") % (begin[3], begin[4], end[3], end[4])),
 				(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, fact1, r3.h, 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, _("%d min") % (duration / 60))
 			))
 		else:
@@ -297,7 +297,7 @@ def Partnerbox_MultiEntry(self, changecount, service, eventId, beginTime, durati
 			))
 		if clock_types:
 			pos = r3.x + r3.w
-			if self.wasEntryAutoTimer and clock_types in (2,7,12):
+			if self.wasEntryAutoTimer and clock_types in (2, 7, 12):
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_TEXT, r3.x + fact4, r3.y, r3.w - fact4 - self.picx * 2 - (self.gap * 2) - self.posx, r3.h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, EventName),
 					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, pos - self.picx - self.posx, (r3.h / 2 - self.posy), self.picx, self.picy, self.clocks[clock_types]),
@@ -483,7 +483,7 @@ def isInTimer(self, eventid, begin, duration, service):
 						type = type_offset + 2
 			if time_match:
 				if not config.plugins.Partnerbox.allicontype.value:
-					if type in (2,7,12,17,22,27):
+					if type in (2, 7, 12, 17, 22, 27):
 						# When full recording do not look further
 						returnValue = (time_match, [type])
 						break

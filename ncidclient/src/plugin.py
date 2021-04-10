@@ -520,7 +520,7 @@ class NcidClientPhonebook:
 					self.deleteConfirmed,
 					MessageBox,
 					_("Do you really want to delete entry for\n\n%(number)s\n\n%(name)s?")
-					% {'number':str(cur[2]), 'name':str(cur[0]).replace(", ", "\n")}
+					% {'number': str(cur[2]), 'name': str(cur[0]).replace(", ", "\n")}
 								)
 			else:
 				self.session.open(MessageBox, _("No entry selected"), MessageBox.TYPE_INFO)

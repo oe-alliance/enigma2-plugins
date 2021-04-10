@@ -90,7 +90,7 @@ class MC_WeatherInfo(Screen):
 			self.weatherPluginEntryIndex = 1
 		else:
 			self.weatherPluginEntry = None
-		self.language = config.osd.language.value.replace("_","-")
+		self.language = config.osd.language.value.replace("_", "-")
 		if self.language == "en-EN": # hack
 			self.language = "en-US"
 		self.webSite = ""
@@ -173,9 +173,9 @@ class MC_WeatherInfo(Screen):
 
 	def finishedIconDownload(self, result, item):
 		if not item.error:
-			self.showIcon(item.index,item.filename)
+			self.showIcon(item.index, item.filename)
 
-	def showIcon(self,index, filename):
+	def showIcon(self, index, filename):
 		if index <> -1:
 			self["weekday%s_icon" % index].updateIcon(filename)
 			self["weekday%s_icon" % index].show()
@@ -209,7 +209,7 @@ class MC_WeatherInfo(Screen):
 					self["humidity"].text = _("Humidity: %s %%") % items.attrib.get("humidity").encode("utf-8", 'ignore')
 					self["wind_condition"].text = items.attrib.get("winddisplay").encode("utf-8", 'ignore')
 					c = time.strptime(items.attrib.get("observationtime").encode("utf-8", 'ignore'), "%H:%M:%S")
-					self["observationtime"].text = _("Observation time: %s") % time.strftime("%H:%M",c)
+					self["observationtime"].text = _("Observation time: %s") % time.strftime("%H:%M", c)
 					self["observationpoint"].text = _("Observation point: %s") % items.attrib.get("observationpoint").encode("utf-8", 'ignore')
 					self["feelsliketemp"].text = _("Feels like %s") % items.attrib.get("feelslike").encode("utf-8", 'ignore') + "°" + degreetype
 					skycode = "%s.gif" % items.attrib.get("skycode").encode("utf-8", 'ignore')
@@ -219,13 +219,13 @@ class MC_WeatherInfo(Screen):
 					if not pathExists(filenamepng):
 						if not pathExists(filename):
 							url = "%s%s" % (imagerelativeurl, skycode)
-							IconDownloadList.append(WeatherIconItem(url=url,filename=filename, index=-1))
+							IconDownloadList.append(WeatherIconItem(url=url, filename=filename, index=-1))
 					else:
-						self.showIcon(-1,filenamepng)
+						self.showIcon(-1, filenamepng)
 				elif items.tag == "forecast" and index <= 4:
 					index += 1
-					c = time.strptime(items.attrib.get("date").encode("utf-8", 'ignore'),"%Y-%m-%d")
-					self["weekday%s" % index].text = "%s\n%s" % (items.attrib.get("day").encode("utf-8", 'ignore'), time.strftime("%d. %b",c))
+					c = time.strptime(items.attrib.get("date").encode("utf-8", 'ignore'), "%Y-%m-%d")
+					self["weekday%s" % index].text = "%s\n%s" % (items.attrib.get("day").encode("utf-8", 'ignore'), time.strftime("%d. %b", c))
 					lowTemp = items.attrib.get("low").encode("utf-8", 'ignore')
 					highTemp = items.attrib.get("high").encode("utf-8", 'ignore')
 					self["weekday%s_temp" % index].text = "Min: %s°%s \n Max: %s°%s" % (lowTemp, degreetype, highTemp, degreetype)
@@ -237,12 +237,12 @@ class MC_WeatherInfo(Screen):
 					if not pathExists(filenamepng):
 						if not pathExists(filename):
 							url = "%s%s" % (imagerelativeurl, skycodeday)
-							IconDownloadList.append(WeatherIconItem(url=url,filename=filename, index=index))
+							IconDownloadList.append(WeatherIconItem(url=url, filename=filename, index=index))
 					else:
-						self.showIcon(index,filenamepng)
+						self.showIcon(index, filenamepng)
 		if len(IconDownloadList) != 0:
 			ds = defer.DeferredSemaphore(tokens=len(IconDownloadList))
-			downloads = [ds.run(download,item).addErrback(self.errorIconDownload, item).addCallback(self.finishedIconDownload,item) for item in IconDownloadList]
+			downloads = [ds.run(download, item).addErrback(self.errorIconDownload, item).addCallback(self.finishedIconDownload, item) for item in IconDownloadList]
 			finished = defer.DeferredList(downloads).addErrback(self.error)
 		stadt = config.plugins.mc_wi.Entry[self.weatherPluginEntryIndex - 1].city.value
 		stadt = stadt.split(",")[0]
@@ -316,7 +316,7 @@ class WeatherSetup(Screen):
 		self["key_yellow"] = StaticText(_("Edit"))
 		self["key_blue"] = StaticText(_("Delete"))
 		self["entrylist"] = WeatherPluginEntryList([])
-		self["actions"] = ActionMap(["WizardActions","MenuActions","ShortcutActions"],
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
 			{
 			 "ok": self.keyOK,
 			 "back": self.keyClose,
@@ -331,7 +331,7 @@ class WeatherSetup(Screen):
 	def keyClose(self):
 		self.close(-1, None)
 	def keyGreen(self):
-		self.session.openWithCallback(self.updateList,MSNWeatherPluginEntryConfigScreen,None)
+		self.session.openWithCallback(self.updateList, MSNWeatherPluginEntryConfigScreen, None)
 	def keyOK(self):
 		try:
 			sel = self["entrylist"].l.getCurrentSelection()[0]
@@ -345,7 +345,7 @@ class WeatherSetup(Screen):
 			sel = None
 		if sel is None:
 			return
-		self.session.openWithCallback(self.updateList,MSNWeatherPluginEntryConfigScreen,sel)
+		self.session.openWithCallback(self.updateList, MSNWeatherPluginEntryConfigScreen, sel)
 	def keyDelete(self):
 		try:
 			sel = self["entrylist"].l.getCurrentSelection()[0]
@@ -430,7 +430,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, cfglist, session)
 	def searchLocation(self):
 		if self.current.city.value != "":
-			language = config.osd.language.value.replace("_","-")
+			language = config.osd.language.value.replace("_", "-")
 			if language == "en-EN": # hack
 				language = "en-US"
 			url = "http://weather.service.msn.com/find.aspx?outputview=search&weasearchstr=%s&culture=%s" % (urllib_quote(self.current.city.value), language)
@@ -497,7 +497,7 @@ class MSNWeatherPluginSearch(Screen):
 		self["key_red"] = StaticText(_("Back"))
 		self["key_green"] = StaticText(_("OK"))		
 		self["entrylist"] = MSNWeatherPluginSearchResultList([])
-		self["actions"] = ActionMap(["WizardActions","MenuActions","ShortcutActions"],
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
 			{
 			 "ok": self.keyOK,
 			 "green": self.keyOK,

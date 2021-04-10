@@ -26,7 +26,7 @@ try:
 	file.close()
 	autotimerHelp = registerHelp(*reader)
 except Exception as e:
-	print("[AutoTimer] Unable to initialize MPHelp:", e,"- Help not available!")
+	print("[AutoTimer] Unable to initialize MPHelp:", e, "- Help not available!")
 	autotimerHelp = None
 #pragma mark -
 

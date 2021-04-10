@@ -155,7 +155,7 @@ class XDsetup(ConfigListScreen, Screen):
 			and fileExists("/usr/lib/enigma2/python/Components/Converter/vConvClockToText.py"):
 			CompsAreOK = True
 		if not(CompsAreOK):
-			self.session.open(MessageBox,_("Vali-XD converters and renderers are not installed!!!"), MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, _("Vali-XD converters and renderers are not installed!!!"), MessageBox.TYPE_ERROR)
 			self.close()
 		for x in self["config"].list:
 			x[1].save()
@@ -247,7 +247,7 @@ class XDsetup(ConfigListScreen, Screen):
 			xFile.close()
 		except:
 			self.session.open(MessageBox, _("Error by processing the skin file !!!"), MessageBox.TYPE_ERROR)
-		restartbox = self.session.openWithCallback(self.restartGUI,MessageBox,_("GUI needs a restart to apply a new skin.\nDo you want to Restart the GUI now?"), MessageBox.TYPE_YESNO)
+		restartbox = self.session.openWithCallback(self.restartGUI, MessageBox, _("GUI needs a restart to apply a new skin.\nDo you want to Restart the GUI now?"), MessageBox.TYPE_YESNO)
 		restartbox.setTitle(_("Restart GUI now?"))
 
 	def restartGUI(self, answer):

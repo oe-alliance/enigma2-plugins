@@ -497,7 +497,7 @@ if pluginPresent.BludiscPlayer:
             name = self["menu"].getCurrent()[0]
             idx = self["menu"].getCurrent()[1]
             newref = eServiceReference(0x04, 0, "%s:%03d" % (self.bd_mountpoint, idx))
-            newref.setData(1,1)
+            newref.setData(1, 1)
             newref.setName("Bludisc title %d" % idx)
             print "[Bludisc] playService: ", name, newref.toString()
             main_movie = idx == self.getMainMovieIndex()

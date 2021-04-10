@@ -22,7 +22,7 @@ class zip_extractor():
           self.__destination_dir = destination_dir
           self.__extracted_extension_filter = extracted_extension_filter
                
-     def open_zip_file_to_read(self,zip__path):
+     def open_zip_file_to_read(self, zip__path):
           try:
                zip_data = zipfile.ZipFile(zip__path, 'r')
                zip_file_list = zip_data.namelist()
@@ -36,7 +36,7 @@ class zip_extractor():
           zip_file_list = []
           for x in zip_file_temp_list:
                if extraction_filter != None:
-                    if x.rsplit(".",1)[1] in extraction_filter:
+                    if x.rsplit(".", 1)[1] in extraction_filter:
                          zip_file_list.append(x)
                else:
                     zip_file_list.append(x)
@@ -44,7 +44,7 @@ class zip_extractor():
 
      def extract_zipped_file(self):
           if self.__destination_dir == None:
-               destination_dir = (self.__zip__path.rsplit("/",1))[0]
+               destination_dir = (self.__zip__path.rsplit("/", 1))[0]
           else:
                destination_dir = self.__destination_dir
           if zipfile.is_zipfile(self.__zip__path):
@@ -54,11 +54,11 @@ class zip_extractor():
                     extracted_files_path = []
                     for x in extraction_file_list:
                          zip_data.extract(x, destination_dir)
-                         print "Files %s from zip %s extracted to dir: %s.\n" % (x,self.__zip__path,destination_dir)  
+                         print "Files %s from zip %s extracted to dir: %s.\n" % (x, self.__zip__path, destination_dir)  
                          extracted_files_path.append(destination_dir + "/" + x)
                     return extracted_files_path   
                except:
-                    print "Zip %s was not extracted to dir: %s" % (self.__zip__path,destination_dir) 
+                    print "Zip %s was not extracted to dir: %s" % (self.__zip__path, destination_dir) 
                     return False
           else:
                print "%s is not a zip file." % zip__path

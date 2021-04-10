@@ -128,7 +128,7 @@ class ReverseLookupAndNotify:
 			dom = parse(reverseLookupFileName)
 			for top in dom.getElementsByTagName("reverselookup"):
 				for country in top.getElementsByTagName("country"):
-					code = country.getAttribute("code").replace("+","00")
+					code = country.getAttribute("code").replace("+", "00")
 					countries[code] = country.getElementsByTagName("website")
 
 		self.countrycode = countrycode
@@ -168,7 +168,7 @@ class ReverseLookupAndNotify:
 	def handleWebsite(self, website):
 		debug("[ReverseLookupAndNotify] handleWebsite: " + website.getAttribute("name"))
 		if self.number[:2] == "00":
-			number = website.getAttribute("prefix") + self.number.replace(self.countrycode,"")
+			number = website.getAttribute("prefix") + self.number.replace(self.countrycode, "")
 		else:
 			number = self.number
 
@@ -187,10 +187,10 @@ class ReverseLookupAndNotify:
 			url = url.replace("$AREACODE", number[:areaCodeLen]).replace("$NUMBER", number[areaCodeLen:])
 		elif re.search('\\$PFXAREACODE', url) and website.hasAttribute("pfxareacode"):
 			areaCodeLen = int(website.getAttribute("pfxareacode"))
-			url = url.replace("$PFXAREACODE","%(pfxareacode)s").replace("$NUMBER", "%(number)s")
+			url = url.replace("$PFXAREACODE", "%(pfxareacode)s").replace("$NUMBER", "%(number)s")
 			url = url % {'pfxareacode': number[:areaCodeLen], 'number': number[areaCodeLen:]}
 		elif re.search('\\$NUMBER', url): 
-			url = url.replace("$NUMBER","%s") % number
+			url = url.replace("$NUMBER", "%s") % number
 		else:
 			debug("[ReverseLookupAndNotify] handleWebsite: cannot handle websites with no $NUMBER in url")
 			# self.caller = _("UNKNOWN")
@@ -206,7 +206,7 @@ class ReverseLookupAndNotify:
 
 	def _gotPage(self, page):
 		def cleanName(text):
-			item = text.replace("%20"," ").replace("&nbsp;"," ").replace("</b>","").replace(","," ").replace('\n',' ').replace('\t',' ')
+			item = text.replace("%20", " ").replace("&nbsp;", " ").replace("</b>", "").replace(",", " ").replace('\n', ' ').replace('\t', ' ')
 
 			item = html2unicode(item, self.charset)
 			#===================================================================
@@ -235,10 +235,10 @@ class ReverseLookupAndNotify:
 		found = re.match('.*<meta http-equiv="Content-Type" content="(?:application/xhtml\+xml|text/html); charset=([^"]+)" />', page, re.S)
 		if found:
 			debug("[ReverseLookupAndNotify] Charset: " + found.group(1))
-			page = page.replace("\xa0"," ").decode(found.group(1), "replace")
+			page = page.replace("\xa0", " ").decode(found.group(1), "replace")
 		else:
 			debug("[ReverseLookupAndNotify] Default Charset: iso-8859-1")
-			page = page.replace("\xa0"," ").decode("ISO-8859-1", "replace")
+			page = page.replace("\xa0", " ").decode("ISO-8859-1", "replace")
 
 		for entry in self.currentWebsite.getElementsByTagName("entry"):
 			#

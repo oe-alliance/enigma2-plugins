@@ -19,7 +19,7 @@ from enigma import gFont
 from . import config
 from Components.config import config
 
-class CurlyTx(Screen,HelpableScreen):
+class CurlyTx(Screen, HelpableScreen):
     skin = """
         <screen name="CurlyTx" position="center,center" size="560,430" title="CurlyTx" >
 	  <ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />

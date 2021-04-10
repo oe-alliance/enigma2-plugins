@@ -39,7 +39,7 @@ config.plugins.babelzapper.enabled = ConfigEnableDisable(default=False)
 config.plugins.babelzapper.changetime = ConfigInteger(default=1000, limits=(200, 10000))
 config.plugins.babelzapper.exit2escape = ConfigEnableDisable(default=False)
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	session.open(BabelzapperConfiguration)
 
 def autostart(reason, **kwargs):
@@ -98,13 +98,13 @@ class BabelzapperConfiguration(Screen, ConfigListScreen):
 		keymapfile.close()
 		keymapfile = open("/usr/share/enigma2/keymap.xml", "w")
 		if config.plugins.babelzapper.enabled.value:
-			text = text.replace("volumeMute","babelzapperMute")
-			text = text.replace("id=\"KEY_MUTE\" mapto=\"deleteForward\" flags=\"mr\"","id=\"KEY_MUTE\" mapto=\"babelzapperMute\" flags=\"m\"")
-			text = text.replace("id=\"KEY_MUTE\" mapto=\"delete\" flags=\"mr\"","id=\"KEY_MUTE\" mapto=\"babelzapperMute\" flags=\"b\"")
+			text = text.replace("volumeMute", "babelzapperMute")
+			text = text.replace("id=\"KEY_MUTE\" mapto=\"deleteForward\" flags=\"mr\"", "id=\"KEY_MUTE\" mapto=\"babelzapperMute\" flags=\"m\"")
+			text = text.replace("id=\"KEY_MUTE\" mapto=\"delete\" flags=\"mr\"", "id=\"KEY_MUTE\" mapto=\"babelzapperMute\" flags=\"b\"")
 		else:
-			text = text.replace("id=\"KEY_MUTE\" mapto=\"babelzapperMute\" flags=\"b\"","id=\"KEY_MUTE\" mapto=\"delete\" flags=\"mr\"")
-			text = text.replace("id=\"KEY_MUTE\" mapto=\"babelzapperMute\" flags=\"m\"","id=\"KEY_MUTE\" mapto=\"deleteForward\" flags=\"mr\"")
-			text = text.replace("babelzapperMute","volumeMute")
+			text = text.replace("id=\"KEY_MUTE\" mapto=\"babelzapperMute\" flags=\"b\"", "id=\"KEY_MUTE\" mapto=\"delete\" flags=\"mr\"")
+			text = text.replace("id=\"KEY_MUTE\" mapto=\"babelzapperMute\" flags=\"m\"", "id=\"KEY_MUTE\" mapto=\"deleteForward\" flags=\"mr\"")
+			text = text.replace("babelzapperMute", "volumeMute")
 		keymapfile.write(text)
 		keymapfile.close()
 		keymapparser.removeKeymap("/usr/share/enigma2/keymap.xml")
@@ -117,7 +117,7 @@ class BabelzapperConfiguration(Screen, ConfigListScreen):
 		self.close(False)
 
 	def readme(self):
-		self.session.open(Console,_("Babelzapper readme.txt"),["cat %s" % (babelzapper_readme)])
+		self.session.open(Console, _("Babelzapper readme.txt"), ["cat %s" % (babelzapper_readme)])
  
 	def about(self):
 		self.session.open(MessageBox, _("Babelzapper Version %s\nby gutemine and garbage") % babelzapper_version, MessageBox.TYPE_INFO)
@@ -199,7 +199,7 @@ class BabelZapperStartup(Screen):
 					babelon = 0
 				elif cmdname.startswith("GOTO"):
  					try:
-						babelkey = int(cmdname.replace("GOTO",""))
+						babelkey = int(cmdname.replace("GOTO", ""))
 						print "[BABELZAPPER] GOTO %i \n" % babelkey
  					except:
 						babelkey = 0
@@ -207,7 +207,7 @@ class BabelZapperStartup(Screen):
 					i = cmdlen
 				elif cmdname.startswith("STOP"):
 					try:		
-						babelstop = int(cmdname.replace("STOP",""))
+						babelstop = int(cmdname.replace("STOP", ""))
 					except:
 						babelstop = 1000
 					if babelstop < 1000:		
@@ -220,7 +220,7 @@ class BabelZapperStartup(Screen):
 					self.delayedKeyTimer.start(babelstop, True)
 					return
 				elif cmdname.startswith("PRINT"):
-					babeltext = cmd.replace("PRINT","")
+					babeltext = cmd.replace("PRINT", "")
 					print "[BABELZAPPER] PRINTs: %s \n" % babeltext
 					self.session.open(MessageBox, babeltext, MessageBox.TYPE_INFO)
 				elif cmdname.startswith("LOAD") or cmdname.startswith("RUN"):
@@ -230,13 +230,13 @@ class BabelZapperStartup(Screen):
 					while i > 1:
  						i = i - 1
  						babelmenu.pop(i)
-					babelfile = "%s/%s.zbb" % (babelzapper_menus,cmdname.replace("LOAD","").replace("RUN","").replace(" ","").replace("	",""))
+					babelfile = "%s/%s.zbb" % (babelzapper_menus, cmdname.replace("LOAD", "").replace("RUN", "").replace(" ", "").replace("	", ""))
 					print "[BABELZAPPER] LOADs: %s\n" % babelfile
 					if os.path.exists(babelfile):
 						f = open(babelfile, 'r')
 					else:
 						f = open("%s/babelzapper.zbb" % babelzapper_menus, 'r')
-					line = f.readline().replace("\r","").replace("\n","")
+					line = f.readline().replace("\r", "").replace("\n", "")
 					while (line):
 						bz = line.split(";")
 						if len(bz) < 2:
@@ -244,7 +244,7 @@ class BabelZapperStartup(Screen):
  							babelmenu.append(("????", "PRINT ???? %s" % line))
 						else:
 							babelmenu.append((bz))
-						line = f.readline().replace("\r","").replace("\n","")
+						line = f.readline().replace("\r", "").replace("\n", "")
 					f.close()
 					# skip rest of commandline
 					i = cmdlen
@@ -295,7 +295,7 @@ class BabelZapperStartup(Screen):
 		cmdname = cmd.lstrip("	 ")
 		if cmdname.startswith("RETURN"):
 			try:		
-				babelkey = int(cmdname.replace("RETURN","")) - 1
+				babelkey = int(cmdname.replace("RETURN", "")) - 1
 			except:
 				babelkey = -1
 			print "[BABELZAPPER] RETURN %i \n" % babelkey
@@ -329,7 +329,7 @@ class BabelZapperStartup(Screen):
 			return
 		elif cmdname.startswith("STOP"):
 			try:		
-				babelstop = int(cmdname.replace("STOP",""))
+				babelstop = int(cmdname.replace("STOP", ""))
 			except:
 				babelstop = 1000
 			if babelstop < 1000:		
@@ -346,7 +346,7 @@ class BabelZapperStartup(Screen):
 				currentbg = int(split[1])
                         if len(split) > 2:
 				currentfg = int(split[2])
-			self.babelDialog.updateKey(currentkey,currentbg,currentfg)
+			self.babelDialog.updateKey(currentkey, currentbg, currentfg)
 			self.babelDialog.show()
 			self.nextKeyTimer.start(babelstop, True)
 			return
@@ -355,13 +355,13 @@ class BabelZapperStartup(Screen):
 			while i > 1:
  				i = i - 1
  				babelmenu.pop(i)
-			babelfile = "%s/%s.zbb" % (babelzapper_menus,cmdname.replace("RUN","").replace(" ","").replace("	",""))
+			babelfile = "%s/%s.zbb" % (babelzapper_menus, cmdname.replace("RUN", "").replace(" ", "").replace("	", ""))
 			print "[BABELZAPPER] RUNs: %s\n" % babelfile
 			if os.path.exists(babelfile):
 				f = open(babelfile, 'r')
 			else:
 				f = open("/%s/babelzapper.zbb" % babelzapper_menus, 'r')
-			line = f.readline().replace("\r","").replace("\n","")
+			line = f.readline().replace("\r", "").replace("\n", "")
 			while (line):
 				bz = line.split(";")
 				if len(bz) < 2:
@@ -369,7 +369,7 @@ class BabelZapperStartup(Screen):
  					babelmenu.append(("????", "PRINT ???? %s" % line))
 				else:
 					babelmenu.append((bz))
-				line = f.readline().replace("\r","").replace("\n","")
+				line = f.readline().replace("\r", "").replace("\n", "")
 			f.close()
 			babelkey = -1
 			self.babelDialog.updateKey(babelmenu[babelkey][0])
@@ -387,7 +387,7 @@ class BabelZapperStartup(Screen):
 			currentbg = int(split[1])
                 if len(split) > 2:
 			currentfg = int(split[2])
-		self.babelDialog.updateKey(currentkey,currentbg,currentfg)
+		self.babelDialog.updateKey(currentkey, currentbg, currentfg)
 		self.babelDialog.show()
 		self.nextKeyTimer.start(config.plugins.babelzapper.changetime.value, True)
 
@@ -407,7 +407,7 @@ class BabelZapper(Screen):
  		babelmenu.append(("NONE", "END"))
 		if os.path.exists("%s/babelzapper.zbb" % babelzapper_menus):
 			f = open("%s/babelzapper.zbb" % babelzapper_menus, 'r')
-			line = f.readline().replace("\r","").replace("\n","")
+			line = f.readline().replace("\r", "").replace("\n", "")
 			while (line):
 				bz = line.split(";")
 				if len(bz) < 2:
@@ -416,27 +416,27 @@ class BabelZapper(Screen):
 					
 				else:
 					babelmenu.append((bz))
-				line = f.readline().replace("\r","").replace("\n","")
+				line = f.readline().replace("\r", "").replace("\n", "")
 			f.close()
 		babelkey = -1
 		self["babelzapper"] = MultiColorLabel(babelmenu[babelkey][0])
                 self["babelzapper"].setForegroundColorNum(0)
                 self["babelzapper"].setBackgroundColorNum(1)
  		
-	def updateKey(self, keyname,keybg=0,keyfg=1):
+	def updateKey(self, keyname, keybg=0, keyfg=1):
 		self["babelzapper"].setText(keyname)
                 self["babelzapper"].setForegroundColorNum(keyfg)
                 self["babelzapper"].setBackgroundColorNum(keybg)
 
 	def executeKey(self, keyname):
-		keyname = keyname.replace("$","").replace(" ","").replace("\n","")
+		keyname = keyname.replace("$", "").replace(" ", "").replace("\n", "")
 		long = False
 	        if keyname.startswith("KEY_EXIT") and config.plugins.babelzapper.exit2escape.value:
-	        	keyname = keyname.replace("KEY_EXIT","KEY_ESC")
+	        	keyname = keyname.replace("KEY_EXIT", "KEY_ESC")
 	        if keyname.startswith("KEY_"):
 		        if keyname.endswith("_LONG"):
 				long = True
-				keyname = keyname.replace("_LONG","")
+				keyname = keyname.replace("_LONG", "")
 	        	try:		
 				keycode = KEYIDS[keyname]
 				print "[BABELZAPPER] found key %i" % keycode
