@@ -185,7 +185,8 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 							+ "\n".join(["Field " + (str(f)) for f in fieldicon])
 		
 		if len(fieldprogress) > 1:
-			if text: text += "\n\n"
+			if text:
+				text += "\n\n"
 			text += _("Only one Graphical Progress field allowed:") + "\n" \
 							+ "\n".join(["Field " + (str(f)) for f in fieldprogress])
 		

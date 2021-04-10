@@ -123,7 +123,8 @@ def isInRepeatTimer(self, timer, event):
 	checking_time = timer.begin < begin or begin <= timer.begin <= end
 	if xbt.tm_yday != xet.tm_yday:
 		oday = bday - 1
-		if oday == -1: oday = 6
+		if oday == -1:
+			oday = 6
 		offset_day = timer.repeated & (1 << oday)
 	xbegin = 1440 + xbt.tm_hour * 60 + xbt.tm_min
 	xend = xbegin + ((timer_end - timer.begin) / 60)
@@ -226,8 +227,10 @@ class E2Timer:
 
 def FillE2TimerList(xmlstring, sreference = None):
 	E2TimerList = []
-	try: root = xml.etree.cElementTree.fromstring(xmlstring)
-	except: return E2TimerList
+	try:
+		root = xml.etree.cElementTree.fromstring(xmlstring)
+	except:
+		return E2TimerList
 	if sreference is None:
 		sreference = None
 	else:
@@ -235,11 +238,15 @@ def FillE2TimerList(xmlstring, sreference = None):
 	for timer in root.findall("e2timer"):
 		go = False
 		state = 0
-		try: state = int(timer.findtext("e2state", 0))
-		except: state = 0
+		try:
+			state = int(timer.findtext("e2state", 0))
+		except:
+			state = 0
 		disabled = 0
-		try: disabled = int(timer.findtext("e2disabled", 0))
-		except: disabled = 0
+		try:
+			disabled = int(timer.findtext("e2disabled", 0))
+		except:
+			disabled = 0
 		servicereference = str(timer.findtext("e2servicereference", '').decode("utf-8").encode("utf-8", 'ignore'))
 		if sreference is None:
 			go = True
@@ -257,22 +264,38 @@ def FillE2TimerList(xmlstring, sreference = None):
 			justplay = 0
 			afterevent = 3
 			eventId = -1
-			try: timebegin = int(timer.findtext("e2timebegin", 0))
-			except: timebegin = 0
-			try: timeend = int(timer.findtext("e2timeend", 0))
-			except: timeend = 0
-			try: duration = int(timer.findtext("e2duration", 0))
-			except: duration = 0
-			try: startprepare = int(timer.findtext("e2startprepare", 0))
-			except: startprepare = 0
-			try: repeated = int(timer.findtext("e2repeated", 0))
-			except: repeated = 0
-			try: justplay = int(timer.findtext("e2justplay", 0)) 
-			except: justplay = 0
-			try: afterevent = int(timer.findtext("e2afterevent", 3))
-			except: afterevent = 3
-			try: eventId = int(timer.findtext("e2eit", -1))
-			except: eventId = -1
+			try:
+				timebegin = int(timer.findtext("e2timebegin", 0))
+			except:
+				timebegin = 0
+			try:
+				timeend = int(timer.findtext("e2timeend", 0))
+			except:
+				timeend = 0
+			try:
+				duration = int(timer.findtext("e2duration", 0))
+			except:
+				duration = 0
+			try:
+				startprepare = int(timer.findtext("e2startprepare", 0))
+			except:
+				startprepare = 0
+			try:
+				repeated = int(timer.findtext("e2repeated", 0))
+			except:
+				repeated = 0
+			try:
+				justplay = int(timer.findtext("e2justplay", 0)) 
+			except:
+				justplay = 0
+			try:
+				afterevent = int(timer.findtext("e2afterevent", 3))
+			except:
+				afterevent = 3
+			try:
+				eventId = int(timer.findtext("e2eit", -1))
+			except:
+				eventId = -1
 			E2TimerList.append(E2Timer(
 				servicereference = servicereference,
 				servicename = unquote(str(timer.findtext("e2servicename", 'n/a').decode("utf-8").encode("utf-8", 'ignore'))),
@@ -294,19 +317,27 @@ def FillE2TimerList(xmlstring, sreference = None):
 
 def FillE1TimerList(xmlstring, sreference = None):
 	E1TimerList = []
-	try: root = xml.etree.cElementTree.fromstring(xmlstring)
-	except: return E1TimerList
+	try:
+		root = xml.etree.cElementTree.fromstring(xmlstring)
+	except:
+		return E1TimerList
 	for timer in root.findall("timer"):
-		try: typedata = int(timer.findtext("typedata", 0))
-		except: typedata = 0
+		try:
+			typedata = int(timer.findtext("typedata", 0))
+		except:
+			typedata = 0
 		for service in timer.findall("service"):
 			servicereference = str(service.findtext("reference", '').decode("utf-8").encode("utf-8", 'ignore'))
 			servicename = str(service.findtext("name", 'n/a').decode("utf-8").encode("utf-8", 'ignore'))
 		for event in timer.findall("event"):
-			try: timebegin = int(event.findtext("start", 0))
-			except: timebegin = 0
-			try: duration = int(event.findtext("duration", 0))
-			except: duration = 0
+			try:
+				timebegin = int(event.findtext("start", 0))
+			except:
+				timebegin = 0
+			try:
+				duration = int(event.findtext("duration", 0))
+			except:
+				duration = 0
 			description = str(event.findtext("description", '').decode("utf-8").encode("utf-8", 'ignore'))
 		go = False
 		if sreference is None:
@@ -418,7 +449,8 @@ def SetPartnerboxTimerlist(partnerboxentry = None, sreference = None):
 			remote_timer_list = FillE2TimerList(sxml, sreference)
 		else:
 			remote_timer_list = FillE1TimerList(sxml, sreference)
-	except: pass
+	except:
+		pass
 
 def getServiceRef(sreference):
 		if not sreference:

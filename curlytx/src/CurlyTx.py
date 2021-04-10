@@ -165,7 +165,7 @@ class CurlyTx(Screen,HelpableScreen):
             if len(cfg.pages) == 0:
                 self.loadNoPage()
             else:
-                self["text"].setText(_("Invalid page") + " " + pageId);
+                self["text"].setText(_("Invalid page") + " " + pageId)
             return
 
         url   = cfg.pages[pageId].uri.value
@@ -180,7 +180,7 @@ class CurlyTx(Screen,HelpableScreen):
 
         self.setTitle(title)
         self.setTextFont()
-        self["text"].setText(_("Loading ...") + "\n" + url);
+        self["text"].setText(_("Loading ...") + "\n" + url)
 
         self.getPageWebClient(url).addCallback(self.urlLoaded).addErrback(self.urlFailed, url)
 
@@ -198,7 +198,7 @@ class CurlyTx(Screen,HelpableScreen):
             )
 
     def loadNoPage(self):
-        self["text"].setText(_("Go and add a page in the settings"));
+        self["text"].setText(_("Go and add a page in the settings"))
 
     def showHeader(self):
         if self.showingHeaders:

@@ -124,10 +124,12 @@ ADVHDMI_AFTER_RECEIVED_NOWACTIVE = "AFTER_RECEIVED_NOWACTIVE"
 advhdmiHooks = {}
 
 def callHook(advhdmi_event):
-	if config.plugins.AdvHdmiCec.debug.value: _print("Debug: call Hooks for Event '" + str(advhdmi_event) + "'")
+	if config.plugins.AdvHdmiCec.debug.value:
+		_print("Debug: call Hooks for Event '" + str(advhdmi_event) + "'")
 	if advhdmiHooks:
 		for hookKey,hook in advhdmiHooks.iteritems():
-			if config.plugins.AdvHdmiCec.debug.value: _print("Debug: call Hook '" + str(hookKey) + "'")
+			if config.plugins.AdvHdmiCec.debug.value:
+				_print("Debug: call Hook '" + str(hookKey) + "'")
 			try:
 				if advhdmi_event in (ADVHDMI_BEFORE_POWERON, ADVHDMI_BEFORE_POWEROFF, ADVHDMI_BEFORE_RECEIVED_STANDBY, ADVHDMI_BEFORE_RECEIVED_NOWACTIVE):
 					if not hook.before_event(advhdmi_event):
@@ -253,11 +255,14 @@ def AdvHdmiCecDOIT():
 						_print("prevent sending HDMICec, because of timespan '" + ", ".join( str(x) for x in presenter ) + "'")
 						ret_val = False
 					else:
-						if config.plugins.AdvHdmiCec.debug.value: _print("Debug: Local Time is not between " + str(presenter[2]) + " and " + str(presenter[3]))
+						if config.plugins.AdvHdmiCec.debug.value:
+							_print("Debug: Local Time is not between " + str(presenter[2]) + " and " + str(presenter[3]))
 				else:
-					if config.plugins.AdvHdmiCec.debug.value: _print("Debug: Local weekday (" + str(lt[6]) + ") is not between " + str(presenter[0]) + " and " + str(presenter[1]))
+					if config.plugins.AdvHdmiCec.debug.value:
+						_print("Debug: Local weekday (" + str(lt[6]) + ") is not between " + str(presenter[0]) + " and " + str(presenter[1]))
 				if not ret_val:
-					if config.plugins.AdvHdmiCec.debug.value: _print("Debug: Found matching Timespan, exit loop!")
+					if config.plugins.AdvHdmiCec.debug.value:
+						_print("Debug: Found matching Timespan, exit loop!")
 					break
 	g_AdvHdmi_sessionstarted = False
 	g_AdvHdmi_fromwebif = False

@@ -87,7 +87,7 @@ class PagedList( Sequence ):
                 pagestart += 1
 
     def _getpage(self, page):
-        raise NotImplementedError("PagedList._getpage() must be provided "+\
+        raise NotImplementedError("PagedList._getpage() must be provided "+
                                   "by subclass")
 
 class PagedRequest( PagedList ):
@@ -97,7 +97,8 @@ class PagedRequest( PagedList ):
     """
     def __init__(self, request, handler=None):
         self._request = request
-        if handler: self._handler = handler
+        if handler:
+            self._handler = handler
         super(PagedRequest, self).__init__(self._getpage(1), 20)
 
     def _getpage(self, page):

@@ -542,7 +542,8 @@ class MovieList(GUIComponent):
 	def sortLists(self):
 		if self.sort_type == self.SORT_ALPHANUMERIC:
 			key = lambda x: (x[3][2]+x[3][3]).lower()
-		else: key=lambda x: -x[2]
+		else:
+			key=lambda x: -x[2]
 		if self.sflists:
 			for list in self.sflists:
 				list.sort(key=key)

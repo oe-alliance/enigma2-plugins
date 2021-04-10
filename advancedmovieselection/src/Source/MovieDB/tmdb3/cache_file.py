@@ -284,13 +284,14 @@ class FileEngine( CacheEngine ):
                 # already opened in requested mode, nothing to do
                 self.cachefd.seek(0)
                 return
-        except: pass # catch issue of no cachefile yet opened
+        except:
+            pass # catch issue of no cachefile yet opened
         self.cachefd = io.open(self.cachefile, mode)
 
     def _read(self, date):
         try:
             self.cachefd.seek(0)
-            version, count = self._struct.unpack(\
+            version, count = self._struct.unpack(
                                     self.cachefd.read(self._struct.size))
             if version != self._version:
                 # old version, break out and well rewrite when finished

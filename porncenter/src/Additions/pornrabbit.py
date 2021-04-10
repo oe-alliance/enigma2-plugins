@@ -101,7 +101,8 @@ class PornRabbit(Plugin):
 		self.callback(plugins)
 
 	def getPageError(self, error=None):
-		if error: print "[%s] Error: %s" % (self.name, error)
+		if error:
+			print "[%s] Error: %s" % (self.name, error)
 
 ##################################################
 

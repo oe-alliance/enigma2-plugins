@@ -83,7 +83,7 @@ class Services( Source ):
 
 	def buildEPGList(self, ref):
 		E2List = [] 
-		events = self.epgcache.lookupEvent(['IBDTSERN',(ref,0,-1,-1)]);
+		events = self.epgcache.lookupEvent(['IBDTSERN',(ref,0,-1,-1)])
 		if events:
 			for item in events:
 				servicereference = ""

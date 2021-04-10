@@ -355,7 +355,11 @@ class LDIFParser:
           (not self._max_entries or self.records_read<self._max_entries):
 
       # Reset record
-      version = None; dn = None; changetype = None; modop = None; entry = {}
+      version = None
+      dn = None
+      changetype = None
+      modop = None
+      entry = {}
 
       attr_type,attr_value = self._parseAttrTypeandValue()
 

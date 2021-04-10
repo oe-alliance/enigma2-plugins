@@ -36,10 +36,14 @@ def sessionstart(reason, **kwargs):
             try:
                 from MoviePlayer import showMovies
                 value = config.AdvancedMovieSelection.movie_launch.value
-                if value == "showMovies": InfoBar.showMovies = showMovies
-                elif value == "showTv": InfoBar.showTv = showMovies
-                elif value == "showRadio": InfoBar.showRadio = showMovies
-                elif value == "timeshiftStart": InfoBar.startTimeshift = showMovies
+                if value == "showMovies":
+                    InfoBar.showMovies = showMovies
+                elif value == "showTv":
+                    InfoBar.showTv = showMovies
+                elif value == "showRadio":
+                    InfoBar.showRadio = showMovies
+                elif value == "timeshiftStart":
+                    InfoBar.startTimeshift = showMovies
                 from Wastebasket import createWasteTimer
                 createWasteTimer(session)
                 from Source.Remote.MessageServer import serverInstance

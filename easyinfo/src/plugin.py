@@ -403,47 +403,57 @@ class EasyInfo(Screen):
 				self.__keys.append(config.plugins.EasyInfo.pos1.value)
 				MPaskList.append(("info", config.plugins.EasyInfo.pos1.value))
 				self["key_info"].setText(_(getPluginByName(config.plugins.EasyInfo.pos1.value)))
-			else: fertig = True
+			else:
+				fertig = True
 			if config.plugins.EasyInfo.pos2.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos2.value)
 				MPaskList.append(("red", config.plugins.EasyInfo.pos2.value))
 				self["key_red"].setText(_(getPluginByName(config.plugins.EasyInfo.pos2.value)))
-			else: fertig = True
+			else:
+				fertig = True
 			if config.plugins.EasyInfo.pos3.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos3.value)
 				MPaskList.append(("green", config.plugins.EasyInfo.pos3.value))
 				self["key_green"].setText(_(getPluginByName(config.plugins.EasyInfo.pos3.value)))
-			else: fertig = True
+			else:
+				fertig = True
 			if config.plugins.EasyInfo.pos4.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos4.value)
 				MPaskList.append(("yellow", config.plugins.EasyInfo.pos4.value))
 				self["key_yellow"].setText(_(getPluginByName(config.plugins.EasyInfo.pos4.value)))
-			else: fertig = True
+			else:
+				fertig = True
 			if config.plugins.EasyInfo.pos5.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos5.value)
 				MPaskList.append(("blue", config.plugins.EasyInfo.pos5.value))
 				self["key_blue"].setText(_(getPluginByName(config.plugins.EasyInfo.pos5.value)))
-			else: fertig = True
+			else:
+				fertig = True
 			if config.plugins.EasyInfo.pos6.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos6.value)
 				MPaskList.append(("x", config.plugins.EasyInfo.pos6.value))
-			else: fertig = True
+			else:
+				fertig = True
 			if config.plugins.EasyInfo.pos7.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos7.value)
 				MPaskList.append(("x", config.plugins.EasyInfo.pos7.value))
-			else: fertig = True
+			else:
+				fertig = True
 			if config.plugins.EasyInfo.pos8.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos8.value)
 				MPaskList.append(("x", config.plugins.EasyInfo.pos8.value))
-			else: fertig = True
+			else:
+				fertig = True
 			if config.plugins.EasyInfo.pos9.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos9.value)
 				MPaskList.append(("x", config.plugins.EasyInfo.pos9.value))
-			else: fertig = True
+			else:
+				fertig = True
 			if config.plugins.EasyInfo.pos10.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos10.value)
 				MPaskList.append(("x", config.plugins.EasyInfo.pos10.value))
-			else: fertig = True
+			else:
+				fertig = True
 			if config.plugins.EasyInfo.pos11.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos11.value)
 				MPaskList.append(("x", config.plugins.EasyInfo.pos11.value))
@@ -533,9 +543,12 @@ def EINzapTo(NewService):
 
 
 def EINcallbackFunc(answer):
-	if answer is None: return
-	if EINsession is None: return
-	if not InfoBar_instance: return
+	if answer is None:
+		return
+	if EINsession is None:
+		return
+	if not InfoBar_instance:
+		return
 	if answer == "singleepg":
 		ref=InfoBar_instance.servicelist.getCurrentSelection()
 		if ref:

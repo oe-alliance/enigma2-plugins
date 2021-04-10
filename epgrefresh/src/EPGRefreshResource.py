@@ -280,7 +280,8 @@ class EPGRefreshSettingsResource(resource.Resource):
 		try:
 			from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
 			hasAutoTimer = True
-		except ImportError as ie: pass
+		except ImportError as ie:
+			pass
 
 		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2settings>

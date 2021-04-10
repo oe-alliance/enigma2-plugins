@@ -60,7 +60,8 @@ class GNTP(ServiceBase):
 		nottype = NOTIFICATION_TYPE.format( **{'box': box, 'name': NAME} )
 		
 		# Prepare message
-		if body == "": body = subject
+		if body == "":
+			body = subject
 		subject = GROWL_SUBJECT_TEMPLATE.format( **{'box': box, 'subject': subject} )
 		body = GROWL_BODY_TEMPLATE.format( **{'body': str(body), 'name': NAME, 'version': VERSION, 'plugin': pluginname, 'support': SUPPORT, 'donate': DONATE} )
 		

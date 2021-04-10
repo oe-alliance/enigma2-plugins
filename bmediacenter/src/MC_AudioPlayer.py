@@ -1172,9 +1172,9 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 		menu = []
 		menu.append((_("delete from playlist"), "deleteentry"))
 		menu.append((_("clear playlist"), "clear"))
-		menu.append((_("load playlist"), "loadplaylist"));
-		menu.append((_("save playlist"), "saveplaylist"));
-		menu.append((_("delete saved playlist"), "deleteplaylist"));
+		menu.append((_("load playlist"), "loadplaylist"))
+		menu.append((_("save playlist"), "saveplaylist"))
+		menu.append((_("delete saved playlist"), "deleteplaylist"))
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title="", list=menu)
 	def menuCallback(self, choice):
 		if choice is None:

@@ -211,7 +211,8 @@ class EPGSearchList(EPGList):
 					checking_time = x.begin < begin or begin <= x.begin <= end
 					if xbt.tm_yday != xet.tm_yday:
 						oday = bday - 1
-						if oday == -1: oday = 6
+						if oday == -1:
+							oday = 6
 						offset_day = x.repeated & (1 << oday)
 					xbegin = 1440 + xbt.tm_hour * 60 + xbt.tm_min
 					xend = xbegin + ((timer_end - x.begin) / 60)
@@ -464,15 +465,15 @@ class EPGSearchList(EPGList):
 				x += self.col[1]
 				self.descr_rect = Rect(x, 0, width-x, height)
 			else:
-				xpos = 0;
-				w = width/10*3;
+				xpos = 0
+				w = width/10*3
 				self.service_rect = Rect(xpos, 0, w-10, height)
-				xpos += w;
-				w = width/10*2;
+				xpos += w
+				w = width/10*2
 				self.start_end_rect = Rect(xpos, 0, w-10, height)
 				self.progress_rect = Rect(xpos, 4, w-10, height-8)
 				xpos += w
-				w = width/10*5;
+				w = width/10*5
 				self.descr_rect = Rect(xpos, 0, width, height)
 		else: # EPG_TYPE_SIMILAR
 			if self.skinColumns:
@@ -1006,7 +1007,8 @@ class EPGSearch(EPGSelection):
 			if not servicelist is None:
 				while True:
 					service = servicelist.getNext()
-					if not service.valid(): break
+					if not service.valid():
+						break
 					if not (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
 						usr_ref_list.append(service.toString())
 		else:
@@ -1016,13 +1018,15 @@ class EPGSearch(EPGSelection):
 			if not bouquetlist is None:
 				while True:
 					bouquet = bouquetlist.getNext()
-					if not bouquet.valid(): break
+					if not bouquet.valid():
+						break
 					if bouquet.flags & eServiceReference.isDirectory and not bouquet.flags & eServiceReference.isInvisible:
 						servicelist = serviceHandler.list(bouquet)
 						if not servicelist is None:
 							while True:
 								service = servicelist.getNext()
-								if not service.valid(): break
+								if not service.valid():
+									break
 								if not (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
 									usr_ref_list.append(service.toString())
 		result = [ ]

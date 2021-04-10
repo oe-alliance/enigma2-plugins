@@ -242,8 +242,10 @@ def setup(session,**kwargs):
 	session.open(MovieSelectionButtonSetup)
 
 def main(session, **kwargs):
-	try: MovieSelectionInit()
-	except: pass
+	try:
+		MovieSelectionInit()
+	except:
+		pass
 
 def Plugins(**kwargs):
 	list = [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = main)]	

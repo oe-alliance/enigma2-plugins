@@ -40,7 +40,7 @@ class datetime( _pydatetime ):
     def fromIso(cls, isotime, sep='T'):
         match = cls._reiso.match(isotime)
         if match is None:
-            raise TypeError("time data '%s' does not match ISO 8601 format" \
+            raise TypeError("time data '%s' does not match ISO 8601 format"
                                 % isotime)
 
         dt = [int(a) for a in match.groups()[:5]]
@@ -92,7 +92,7 @@ class Session( object ):
             if self._authtoken is None:
                 raise TMDBError("No Auth Token to produce Session for")
             # TODO: check authtokenexpiration against current time
-            req = Request('authentication/session/new', \
+            req = Request('authentication/session/new',
                                             request_token=self._authtoken)
             req.lifetime = 0
             dat = req.readJSON()

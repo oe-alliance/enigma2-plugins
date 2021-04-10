@@ -189,7 +189,7 @@ def clkToTime(clock):
 	return ( (int)(clock.value[0]) * 60 + (int)(clock.value[1]) ) * 60
 
 def getTime():
-	ltime = localtime();
+	ltime = localtime()
 	return ( (int)(ltime.tm_hour) * 60 + (int)(ltime.tm_min) ) * 60
 
 def getPrintTime(secs):
@@ -297,7 +297,7 @@ def getNextWakeup():
 	#it might happen, that session does not exist. I don't know why. :-(
 	if session is None:
 		print pluginPrintname, "No session found; Will wake up at", strftime("%a:%H:%M:%S", localtime(ElektroWakeUpTime))
-		return ElektroWakeUpTime;
+		return ElektroWakeUpTime
 
 	nextTimer = session.nav.RecordTimer.getNextRecordingTime()
 	if debug:

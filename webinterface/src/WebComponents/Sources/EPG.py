@@ -127,7 +127,7 @@ class EPG(Source):
 				if endtime < 0:
 					endtime = -1
 
-		events = self.epgcache.lookupEvent([options , (service, 0, time, endtime)]);
+		events = self.epgcache.lookupEvent([options , (service, 0, time, endtime)])
 
 		if events:
 			if self.endtime:
@@ -200,7 +200,7 @@ class EPG(Source):
 
 		self.search = True
 
-		events = self.epgcache.search(('IBDTSERN', 256, eEPGCache.PARTIAL_TITLE_SEARCH, needle, 1));
+		events = self.epgcache.search(('IBDTSERN', 256, eEPGCache.PARTIAL_TITLE_SEARCH, needle, 1))
 		if events:
 			return events
 		return ()
@@ -208,7 +208,7 @@ class EPG(Source):
 	def searchSimilarEvent(self, needle):
 		print "[WebComponents.EPG] searching similar eventid: ",needle
 
-		events = self.epgcache.search(('IBDCTSERN', 256, eEPGCache.SIMILAR_BROADCASTINGS_SEARCH, needle['sRef'], int(needle['eventid'])));
+		events = self.epgcache.search(('IBDCTSERN', 256, eEPGCache.SIMILAR_BROADCASTINGS_SEARCH, needle['sRef'], int(needle['eventid'])))
 		if events:
 			return events
 		return ()

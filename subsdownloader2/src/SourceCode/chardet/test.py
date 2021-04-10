@@ -10,7 +10,8 @@ for f in glob.glob(sys.argv[1]):
     u.reset()
     for line in file(f, 'rb'):
         u.feed(line)
-        if u.done: break
+        if u.done:
+            break
     u.close()
     result = u.result
     if result['encoding']:

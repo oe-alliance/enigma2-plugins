@@ -168,7 +168,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
         times = subs.keys()
         times.sort()
         for i in range(0,len(times)):
-            next_time = 1;
+            next_time = 1
             while not subs.has_key(times[i]+next_time) and next_time < 4 :
                 next_time = next_time + 1
             subt = [ times[i] , times[i] + next_time]

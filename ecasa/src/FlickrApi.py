@@ -112,11 +112,14 @@ class FlickrApi(PictureApi):
 
 	def getAlbums(self, user='default'):
 		flickr_api = self.flickr_api
-		if user == 'default': user = ''
+		if user == 'default':
+			user = ''
 		elif '@' not in user:
 			users = flickr_api.people_findByUsername(username=user)
-			try: user = users.find('user').get('nsid')
-			except Exception as e: our_print("getAlbums failed to retrieve nsid:", e)
+			try:
+				user = users.find('user').get('nsid')
+			except Exception as e:
+				our_print("getAlbums failed to retrieve nsid:", e)
 		albums = flickr_api.photosets_getList(user_id=user, per_page='90', total='90')
 
 		albums = [(album.find('title').text.encode('utf-8'), album.get('photos'), album) for album in albums.find('photosets').findall('photoset')]
@@ -150,11 +153,14 @@ class FlickrApi(PictureApi):
 		return PictureGenerator(photos.find('photos').findall('photo'))
 
 	def downloadPhoto(self, photo, thumbnail=False):
-		if not photo: return
+		if not photo:
+			return
 
 		cache = os.path.join(self.cache, 'thumb', photo.owner) if thumbnail else os.path.join(self.cache, photo.owner)
-		try: os.makedirs(cache)
-		except OSError: pass
+		try:
+			os.makedirs(cache)
+		except OSError:
+			pass
 
 		url = photo.url_t if thumbnail else photo.url
 		print(url)
@@ -189,7 +195,8 @@ class FlickrApi(PictureApi):
 		Raises:
 		shutil.Error if an error occured during moving the file.
 		"""
-		if not photo: return
+		if not photo:
+			return
 
 		cache = os.path.join(self.cache, photo.owner)
 		filename = photo.url.split('/')[-1]

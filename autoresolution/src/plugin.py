@@ -100,13 +100,13 @@ def setDeinterlacer(mode):
 	except:
 		print "[AutoRes] failed switch deinterlacer mode to %s" % mode
 
-frqdic = { 23976: '24', \
-		24000: '24', \
-		25000: '25', \
-		29970: '30', \
-		30000: '30', \
-		50000: '50', \
-		59940: '60', \
+frqdic = { 23976: '24',
+		24000: '24',
+		25000: '25',
+		29970: '30',
+		30000: '30',
+		50000: '50',
+		59940: '60',
 		60000: '60'}
 
 class AutoRes(Screen):
@@ -540,7 +540,8 @@ class AutoFrameRate(Screen):
 				if config.av.videomode[config.av.videoport.value].value in config.av.videorate:
 					service = self.session.nav.getCurrentService()
 					ref = self.session.nav.getCurrentlyPlayingServiceReference()
-					if not ref or not service: return
+					if not ref or not service:
+						return
 					cur_service_str = ref.toString()
 					if not (cur_service_str and self.lastService):
 						self.lastService = cur_service_str

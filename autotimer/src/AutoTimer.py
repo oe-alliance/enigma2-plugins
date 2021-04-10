@@ -489,9 +489,9 @@ class AutoTimer:
 			# NOTE: similar matches do not care about the day/time they are on, so ignore them
 			if timer.checkServices(serviceref) \
 				or timer.checkDuration(duration) \
-				or (not similarTimer and (\
-					timer.checkTimespan(timestamp) \
-					or timer.checkTimeframe(begin) \
+				or (not similarTimer and (
+					timer.checkTimespan(timestamp)
+					or timer.checkTimeframe(begin)
 				)) or timer.checkFilter(name, shortdesc, extdesc, dayofweek):
 				msg="[AutoTimer] Skipping an event because of filter check"
 #				print(msg)

@@ -309,7 +309,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 
 	def applyConfig(self, ret = False):
 		if (ret == True):
-			data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, \
+			data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False,
 					'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
 			data['active'] = self.activeConfigEntry.value
 			data['ip'] = self.ipConfigEntry.getText()

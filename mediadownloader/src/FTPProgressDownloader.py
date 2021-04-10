@@ -9,8 +9,8 @@ from os import SEEK_END
 class FTPProgressDownloader(Protocol):
 	"""Download to a file from FTP and keep track of progress."""
 
-	def __init__(self, host, port, path, fileOrName, username = 'anonymous', \
-		password = 'my@email.com', writeProgress = None, passive = True, \
+	def __init__(self, host, port, path, fileOrName, username = 'anonymous',
+		password = 'my@email.com', writeProgress = None, passive = True,
 		supportPartial = False, *args, **kwargs):
 
 		timeout = 30

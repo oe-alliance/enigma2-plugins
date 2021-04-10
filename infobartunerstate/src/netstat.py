@@ -55,7 +55,8 @@ def netstat(getstate=None, getuid=True, getpid=True, readable=True):
 	as superuser
 	'''
 	getstate = [key for key, value in STATE.iteritems() if value == getstate]
-	if getstate: getstate = getstate[0]
+	if getstate:
+		getstate = getstate[0]
 	
 	content = _load()
 	result = []

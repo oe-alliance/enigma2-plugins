@@ -64,7 +64,7 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         self["config"].list = self.list
 
         self.skin_path = KTglob.plugin_path
-        self.kiddyTimerStopped = False;
+        self.kiddyTimerStopped = False
         
         # Plugin Information
         self.remainingTime = config.plugins.KiddyTimer.remainingTime.value
@@ -97,7 +97,7 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         elif not result:
             self.session.openWithCallback(self.pinCancel, MessageBox, _("The pin code you entered is wrong."), MessageBox.TYPE_ERROR)
         else:
-            self.checkStopTimer();
+            self.checkStopTimer()
 
     def pinCancel(self, result):
         self.cancel()
@@ -108,7 +108,7 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
     def checkStopTimer(self):
         # Temporarily stop timer as long as we are in the setup screen
         if kiddyTimer.active:
-            self.kiddyTimerStopped = True;
+            self.kiddyTimerStopped = True
             kiddyTimer.stopTimer()
 
     def resetTimer(self):

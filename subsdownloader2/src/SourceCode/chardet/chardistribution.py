@@ -120,7 +120,7 @@ class EUCKRDistributionAnalysis(CharDistributionAnalysis):
         if aStr[0] >= '\xB0':
             return 94 * (ord(aStr[0]) - 0xB0) + ord(aStr[1]) - 0xA1
         else:
-            return -1;
+            return -1
 
 class GB2312DistributionAnalysis(CharDistributionAnalysis):
     def __init__(self):
@@ -137,7 +137,7 @@ class GB2312DistributionAnalysis(CharDistributionAnalysis):
         if (aStr[0] >= '\xB0') and (aStr[1] >= '\xA1'):
             return 94 * (ord(aStr[0]) - 0xB0) + ord(aStr[1]) - 0xA1
         else:
-            return -1;
+            return -1
 
 class Big5DistributionAnalysis(CharDistributionAnalysis):
     def __init__(self):
@@ -176,7 +176,7 @@ class SJISDistributionAnalysis(CharDistributionAnalysis):
         elif (aStr[0] >= '\xE0') and (aStr[0] <= '\xEF'):
             order = 188 * (ord(aStr[0]) - 0xE0 + 31)
         else:
-            return -1;
+            return -1
         order = order + ord(aStr[1]) - 0x40
         if aStr[1] > '\x7F':
             order =- 1

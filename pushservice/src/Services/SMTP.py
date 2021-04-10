@@ -76,7 +76,8 @@ class SMTP(ServiceBase):
 		to_addrs = [self.getValue('mailto') or from_addr]
 		
 		# Prepare message
-		if body == "": body = subject
+		if body == "":
+			body = subject
 		subject = MAIL_HEADER_TEMPLATE.format( **{'box': config.pushservice.boxname.value, 'name': NAME, 'plugin': pluginname, 'subject': subject} )
 		body    = MAIL_BODY_TEMPLATE.format( **{'body': str(body), 'name': NAME, 'version': VERSION, 'plugin': pluginname, 'support': SUPPORT, 'donate': DONATE} )
 		message = Message(from_addr, to_addrs, subject, body) #TODO change mime="text/plain", charset="utf-8")

@@ -9,8 +9,10 @@ from . import NOTIFICATIONID
 
 def emergencyDisable(*args, **kwargs):
 	if args:
-		try: args[0].printTraceback()
-		except Exception: pass
+		try:
+			args[0].printTraceback()
+		except Exception:
+			pass
 
 	global growleeConnection
 	if growleeConnection:
@@ -97,7 +99,8 @@ class GrowleeConnection:
 	def maybeClose(self, resOrFail, defer = None):
 		self.pending -= 1
 		if self.pending == 0:
-			if defer: defer.callback(True)
+			if defer:
+				defer.callback(True)
 
 	def stop(self):
 		defer = Deferred()

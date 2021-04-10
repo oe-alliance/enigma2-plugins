@@ -601,7 +601,7 @@ class VirtualZap(Screen):
 					break
 				playable = not (serviceIterator.flags & (eServiceReference.isMarker|eServiceReference.isDirectory))
 				if playable:
-					num -= 1;
+					num -= 1
 			if not num: #found service with searched number ?
 				return serviceIterator, 0
 		return None, num

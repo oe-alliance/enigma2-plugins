@@ -337,7 +337,7 @@ class vps_timer:
 					if (streamdata and ('demux' in streamdata)):
 						self.demux = streamdata['demux']
 			if self.demux == -1:
-				return;
+				return
 
 			self.program_try_search_running = True
 			self.program_running = False

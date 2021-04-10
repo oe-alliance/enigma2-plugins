@@ -101,7 +101,7 @@ class SHOUTcasterFavorites:
             return False,"stream with that name exists already"
         else:    
            self.configparser.remove_section(streamold.getName())
-           return self.addStream(streamnew); 
+           return self.addStream(streamnew)
         
     def deleteStreamWithName(self,streamname):
         self.configparser.remove_section(streamname)

@@ -27,7 +27,7 @@
 
 from constants import eStart, eError, eItsMe
 
-HZ_cls = ( \
+HZ_cls = (
 1,0,0,0,0,0,0,0,  # 00 - 07 
 0,0,0,0,0,0,0,0,  # 08 - 0f 
 0,0,0,0,0,0,0,0,  # 10 - 17 
@@ -62,7 +62,7 @@ HZ_cls = ( \
 1,1,1,1,1,1,1,1,  # f8 - ff 
 )
 
-HZ_st = ( \
+HZ_st = (
 eStart,eError,     3,eStart,eStart,eStart,eError,eError,# 00-07 
 eError,eError,eError,eError,eItsMe,eItsMe,eItsMe,eItsMe,# 08-0f 
 eItsMe,eItsMe,eError,eError,eStart,eStart,     4,eError,# 10-17 
@@ -79,7 +79,7 @@ HZSMModel = {'classTable': HZ_cls,
              'charLenTable': HZCharLenTable,
              'name': "HZ-GB-2312"}
 
-ISO2022CN_cls = ( \
+ISO2022CN_cls = (
 2,0,0,0,0,0,0,0,  # 00 - 07 
 0,0,0,0,0,0,0,0,  # 08 - 0f 
 0,0,0,0,0,0,0,0,  # 10 - 17 
@@ -114,7 +114,7 @@ ISO2022CN_cls = ( \
 2,2,2,2,2,2,2,2,  # f8 - ff 
 )
 
-ISO2022CN_st = ( \
+ISO2022CN_st = (
 eStart,     3,eError,eStart,eStart,eStart,eStart,eStart,# 00-07 
 eStart,eError,eError,eError,eError,eError,eError,eError,# 08-0f 
 eError,eError,eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,# 10-17 
@@ -133,7 +133,7 @@ ISO2022CNSMModel = {'classTable': ISO2022CN_cls,
                     'charLenTable': ISO2022CNCharLenTable,
                     'name': "ISO-2022-CN"}
 
-ISO2022JP_cls = ( \
+ISO2022JP_cls = (
 2,0,0,0,0,0,0,0,  # 00 - 07 
 0,0,0,0,0,0,2,2,  # 08 - 0f 
 0,0,0,0,0,0,0,0,  # 10 - 17 
@@ -168,7 +168,7 @@ ISO2022JP_cls = ( \
 2,2,2,2,2,2,2,2,  # f8 - ff 
 )
 
-ISO2022JP_st = ( \
+ISO2022JP_st = (
 eStart,     3,eError,eStart,eStart,eStart,eStart,eStart,# 00-07 
 eStart,eStart,eError,eError,eError,eError,eError,eError,# 08-0f 
 eError,eError,eError,eError,eItsMe,eItsMe,eItsMe,eItsMe,# 10-17 
@@ -188,7 +188,7 @@ ISO2022JPSMModel = {'classTable': ISO2022JP_cls,
                     'charLenTable': ISO2022JPCharLenTable,
                     'name': "ISO-2022-JP"}
 
-ISO2022KR_cls = ( \
+ISO2022KR_cls = (
 2,0,0,0,0,0,0,0,  # 00 - 07 
 0,0,0,0,0,0,0,0,  # 08 - 0f 
 0,0,0,0,0,0,0,0,  # 10 - 17 
@@ -223,7 +223,7 @@ ISO2022KR_cls = ( \
 2,2,2,2,2,2,2,2,  # f8 - ff 
 )
 
-ISO2022KR_st = ( \
+ISO2022KR_st = (
 eStart,     3,eError,eStart,eStart,eStart,eError,eError,# 00-07 
 eError,eError,eError,eError,eItsMe,eItsMe,eItsMe,eItsMe,# 08-0f 
 eItsMe,eItsMe,eError,eError,eError,     4,eError,eError,# 10-17 

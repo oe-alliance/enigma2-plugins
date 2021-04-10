@@ -86,8 +86,10 @@ def main(session, **kwargs):
 			config.radio.lastservice.value = config.startupservice.lastservice.value
 			config.radio.lastroot.value = config.startupservice.lastroot.value
 			config.radio.save()
-	try: startUpServiceInit()
-	except: pass
+	try:
+		startUpServiceInit()
+	except:
+		pass
 	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 
 ###########################################

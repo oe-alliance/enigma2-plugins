@@ -117,28 +117,28 @@ def restoreBackup(session, **kwargs):
 
 def doneConfiguring(session, needsRestart):
 	if needsRestart:
-		session.openWithCallback(boundFunction(restartGUICB, session), MessageBox, \
-			_("To apply your Changes the GUI has to be restarted.\nDo you want to restart the GUI now?"), \
+		session.openWithCallback(boundFunction(restartGUICB, session), MessageBox,
+			_("To apply your Changes the GUI has to be restarted.\nDo you want to restart the GUI now?"),
 			MessageBox.TYPE_YESNO, title = _("EPGBackup Config V %s") % (PLUGIN_VERSION), timeout =  30)
 
 def restartGUICB(session, answer):
 	if answer is True:
 		session.open(TryQuitMainloop, 3)
 
-SetupPlugDescExt = PluginDescriptor(name = extPrefix + " " + _("EXTENSIONNAME_SETUP"), \
-	description = _("Backup and restore EPG Data, including integration of EPGRefresh-plugin"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, \
+SetupPlugDescExt = PluginDescriptor(name = extPrefix + " " + _("EXTENSIONNAME_SETUP"),
+	description = _("Backup and restore EPG Data, including integration of EPGRefresh-plugin"), where = PluginDescriptor.WHERE_EXTENSIONSMENU,
 	fnc = openconfig,
 	needsRestart = False)
-SetupPlugDescPlug = PluginDescriptor(name = extPrefix + " " + _("EXTENSIONNAME_SETUP"), \
-	description = _("Backup and restore EPG Data, including integration of EPGRefresh-plugin"), where = PluginDescriptor.WHERE_PLUGINMENU, \
+SetupPlugDescPlug = PluginDescriptor(name = extPrefix + " " + _("EXTENSIONNAME_SETUP"),
+	description = _("Backup and restore EPG Data, including integration of EPGRefresh-plugin"), where = PluginDescriptor.WHERE_PLUGINMENU,
 	fnc = openconfig,
 	needsRestart = False)
-MakePlugDescExt = PluginDescriptor(name = extPrefix + " " + _("Make Backup"), \
-	description = _("Start making a Backup"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, \
+MakePlugDescExt = PluginDescriptor(name = extPrefix + " " + _("Make Backup"),
+	description = _("Start making a Backup"), where = PluginDescriptor.WHERE_EXTENSIONSMENU,
 	fnc = makeBackup,
 	needsRestart = False)
-RestorePlugDescExt = PluginDescriptor(name = extPrefix + " " + _("Restore Backup"), \
-	description = _("Start a Restore of a Backup"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, \
+RestorePlugDescExt = PluginDescriptor(name = extPrefix + " " + _("Restore Backup"),
+	description = _("Start a Restore of a Backup"), where = PluginDescriptor.WHERE_EXTENSIONSMENU,
 	fnc = restoreBackup,
 	needsRestart = False)
 

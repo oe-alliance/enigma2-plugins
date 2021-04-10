@@ -1,4 +1,4 @@
-Version = '$Header$';
+Version = '$Header$'
 
 from __init__ import *
 

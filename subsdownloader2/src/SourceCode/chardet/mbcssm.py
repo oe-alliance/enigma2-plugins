@@ -29,7 +29,7 @@ from constants import eStart, eError, eItsMe
 
 # BIG5 
 
-BIG5_cls = ( \
+BIG5_cls = (
     1,1,1,1,1,1,1,1,  # 00 - 07    #allow 0x00 as legal value
     1,1,1,1,1,1,0,0,  # 08 - 0f 
     1,1,1,1,1,1,1,1,  # 10 - 17 
@@ -63,7 +63,7 @@ BIG5_cls = ( \
     3,3,3,3,3,3,3,3,  # f0 - f7 
     3,3,3,3,3,3,3,0)  # f8 - ff 
 
-BIG5_st = ( \
+BIG5_st = (
     eError,eStart,eStart,     3,eError,eError,eError,eError,#00-07 
     eError,eError,eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,eError,#08-0f 
     eError,eStart,eStart,eStart,eStart,eStart,eStart,eStart)#10-17 
@@ -78,7 +78,7 @@ Big5SMModel = {'classTable': BIG5_cls,
 
 # EUC-JP
 
-EUCJP_cls = ( \
+EUCJP_cls = (
     4,4,4,4,4,4,4,4,  # 00 - 07 
     4,4,4,4,4,4,5,5,  # 08 - 0f 
     4,4,4,4,4,4,4,4,  # 10 - 17 
@@ -112,7 +112,7 @@ EUCJP_cls = ( \
     0,0,0,0,0,0,0,0,  # f0 - f7 
     0,0,0,0,0,0,0,5)  # f8 - ff 
 
-EUCJP_st = ( \
+EUCJP_st = (
           3,     4,     3,     5,eStart,eError,eError,eError,#00-07 
      eError,eError,eError,eError,eItsMe,eItsMe,eItsMe,eItsMe,#08-0f 
      eItsMe,eItsMe,eStart,eError,eStart,eError,eError,eError,#10-17 
@@ -129,7 +129,7 @@ EUCJPSMModel = {'classTable': EUCJP_cls,
 
 # EUC-KR
 
-EUCKR_cls  = ( \
+EUCKR_cls  = (
     1,1,1,1,1,1,1,1,  # 00 - 07 
     1,1,1,1,1,1,0,0,  # 08 - 0f 
     1,1,1,1,1,1,1,1,  # 10 - 17 
@@ -177,7 +177,7 @@ EUCKRSMModel = {'classTable': EUCKR_cls,
 
 # EUC-TW
 
-EUCTW_cls = ( \
+EUCTW_cls = (
     2,2,2,2,2,2,2,2,  # 00 - 07 
     2,2,2,2,2,2,0,0,  # 08 - 0f 
     2,2,2,2,2,2,2,2,  # 10 - 17 
@@ -211,7 +211,7 @@ EUCTW_cls = ( \
     3,3,3,3,3,3,3,3,  # f0 - f7 
     3,3,3,3,3,3,3,0)  # f8 - ff 
 
-EUCTW_st = ( \
+EUCTW_st = (
     eError,eError,eStart,     3,     3,     3,     4,eError,#00-07 
     eError,eError,eError,eError,eError,eError,eItsMe,eItsMe,#08-0f 
     eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,eError,eStart,eError,#10-17 
@@ -229,7 +229,7 @@ EUCTWSMModel = {'classTable': EUCTW_cls,
 
 # GB2312
 
-GB2312_cls = ( \
+GB2312_cls = (
     1,1,1,1,1,1,1,1,  # 00 - 07 
     1,1,1,1,1,1,0,0,  # 08 - 0f 
     1,1,1,1,1,1,1,1,  # 10 - 17 
@@ -263,7 +263,7 @@ GB2312_cls = ( \
     6,6,6,6,6,6,6,6,  # f0 - f7 
     6,6,6,6,6,6,6,0)  # f8 - ff 
 
-GB2312_st = ( \
+GB2312_st = (
     eError,eStart,eStart,eStart,eStart,eStart,     3,eError,#00-07 
     eError,eError,eError,eError,eError,eError,eItsMe,eItsMe,#08-0f 
     eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,eError,eError,eStart,#10-17 
@@ -286,7 +286,7 @@ GB2312SMModel = {'classTable': GB2312_cls,
 
 # Shift_JIS
 
-SJIS_cls = ( \
+SJIS_cls = (
     1,1,1,1,1,1,1,1,  # 00 - 07 
     1,1,1,1,1,1,0,0,  # 08 - 0f 
     1,1,1,1,1,1,1,1,  # 10 - 17 
@@ -322,7 +322,7 @@ SJIS_cls = ( \
     4,4,4,4,4,4,4,4,  # f0 - f7 
     4,4,4,4,4,0,0,0)  # f8 - ff 
 
-SJIS_st = ( \
+SJIS_st = (
     eError,eStart,eStart,     3,eError,eError,eError,eError,#00-07 
     eError,eError,eError,eError,eItsMe,eItsMe,eItsMe,eItsMe,#08-0f 
     eItsMe,eItsMe,eError,eError,eStart,eStart,eStart,eStart)#10-17 
@@ -337,7 +337,7 @@ SJISSMModel = {'classTable': SJIS_cls,
 
 # UCS2-BE
 
-UCS2BE_cls = ( \
+UCS2BE_cls = (
     0,0,0,0,0,0,0,0,  # 00 - 07 
     0,0,1,0,0,2,0,0,  # 08 - 0f 
     0,0,0,0,0,0,0,0,  # 10 - 17 
@@ -371,7 +371,7 @@ UCS2BE_cls = ( \
     0,0,0,0,0,0,0,0,  # f0 - f7 
     0,0,0,0,0,0,4,5)  # f8 - ff 
 
-UCS2BE_st  = ( \
+UCS2BE_st  = (
           5,     7,     7,eError,     4,     3,eError,eError,#00-07 
      eError,eError,eError,eError,eItsMe,eItsMe,eItsMe,eItsMe,#08-0f 
      eItsMe,eItsMe,     6,     6,     6,     6,eError,eError,#10-17 
@@ -390,7 +390,7 @@ UCS2BESMModel = {'classTable': UCS2BE_cls,
 
 # UCS2-LE
 
-UCS2LE_cls = ( \
+UCS2LE_cls = (
     0,0,0,0,0,0,0,0,  # 00 - 07 
     0,0,1,0,0,2,0,0,  # 08 - 0f 
     0,0,0,0,0,0,0,0,  # 10 - 17 
@@ -424,7 +424,7 @@ UCS2LE_cls = ( \
     0,0,0,0,0,0,0,0,  # f0 - f7 
     0,0,0,0,0,0,4,5)  # f8 - ff 
 
-UCS2LE_st = ( \
+UCS2LE_st = (
           6,     6,     7,     6,     4,     3,eError,eError,#00-07 
      eError,eError,eError,eError,eItsMe,eItsMe,eItsMe,eItsMe,#08-0f 
      eItsMe,eItsMe,     5,     5,     5,eError,eItsMe,eError,#10-17 
@@ -443,7 +443,7 @@ UCS2LESMModel = {'classTable': UCS2LE_cls,
 
 # UTF-8
 
-UTF8_cls = ( \
+UTF8_cls = (
     1,1,1,1,1,1,1,1,  # 00 - 07  #allow 0x00 as a legal value
     1,1,1,1,1,1,0,0,  # 08 - 0f 
     1,1,1,1,1,1,1,1,  # 10 - 17 
@@ -477,7 +477,7 @@ UTF8_cls = ( \
     10,11,11,11,11,11,11,11,  # f0 - f7 
     12,13,13,13,14,15,0,0)   # f8 - ff 
 
-UTF8_st = ( \
+UTF8_st = (
     eError,eStart,eError,eError,eError,eError,     12,   10,#00-07 
          9,     11,     8,     7,     6,     5,     4,    3,#08-0f 
     eError,eError,eError,eError,eError,eError,eError,eError,#10-17 

@@ -47,7 +47,7 @@ class LocaleBase( object ):
         try:
             return cls._stored[key.lower()]
         except:
-            raise TMDBLocaleError("'{0}' is not a known valid {1} code."\
+            raise TMDBLocaleError("'{0}' is not a known valid {1} code."
                                         .format(key, cls.__name__))
 
 class Language( LocaleBase ):

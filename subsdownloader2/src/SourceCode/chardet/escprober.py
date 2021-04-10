@@ -34,7 +34,7 @@ from codingstatemachine import CodingStateMachine
 class EscCharSetProber(CharSetProber):
     def __init__(self):
         CharSetProber.__init__(self)
-        self._mCodingSM = [ \
+        self._mCodingSM = [
             CodingStateMachine(HZSMModel),
             CodingStateMachine(ISO2022CNSMModel),
             CodingStateMachine(ISO2022JPSMModel),
@@ -45,7 +45,8 @@ class EscCharSetProber(CharSetProber):
     def reset(self):
         CharSetProber.reset(self)
         for codingSM in self._mCodingSM:
-            if not codingSM: continue
+            if not codingSM:
+                continue
             codingSM.active = constants.True
             codingSM.reset()
         self._mActiveSM = len(self._mCodingSM)
@@ -63,8 +64,10 @@ class EscCharSetProber(CharSetProber):
     def feed(self, aBuf):
         for c in aBuf:
             for codingSM in self._mCodingSM:
-                if not codingSM: continue
-                if not codingSM.active: continue
+                if not codingSM:
+                    continue
+                if not codingSM.active:
+                    continue
                 codingState = codingSM.next_state(c)
                 if codingState == constants.eError:
                     codingSM.active = constants.False

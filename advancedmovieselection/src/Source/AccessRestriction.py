@@ -94,4 +94,4 @@ class AccessRestriction:
         except Exception, e:
             print e
 
-accessRestriction = AccessRestriction();
+accessRestriction = AccessRestriction()

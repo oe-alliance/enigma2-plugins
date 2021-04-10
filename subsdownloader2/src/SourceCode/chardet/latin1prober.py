@@ -42,7 +42,7 @@ ASV = 6 # accent small vowel
 ASO = 7 # accent small other
 CLASS_NUM = 8 # total classes
 
-Latin1_CharToClass = ( \
+Latin1_CharToClass = (
   OTH, OTH, OTH, OTH, OTH, OTH, OTH, OTH,   # 00 - 07
   OTH, OTH, OTH, OTH, OTH, OTH, OTH, OTH,   # 08 - 0F
   OTH, OTH, OTH, OTH, OTH, OTH, OTH, OTH,   # 10 - 17

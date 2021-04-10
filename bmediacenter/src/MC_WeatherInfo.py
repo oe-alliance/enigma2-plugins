@@ -333,18 +333,24 @@ class WeatherSetup(Screen):
 	def keyGreen(self):
 		self.session.openWithCallback(self.updateList,MSNWeatherPluginEntryConfigScreen,None)
 	def keyOK(self):
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		self.close(self["entrylist"].getCurrentIndex(), sel)
 	def keyYellow(self):
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		if sel is None:
 			return
 		self.session.openWithCallback(self.updateList,MSNWeatherPluginEntryConfigScreen,sel)
 	def keyDelete(self):
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		if sel is None:
 			return
 		self.session.openWithCallback(self.deleteConfirm, MessageBox, _("Really delete this Entry?"))
@@ -505,8 +511,10 @@ class MSNWeatherPluginSearch(Screen):
 		self.close(None)
 	def keyOK(self):
 		pass
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		self.close(sel)
 class MSNWeatherPluginSearchResultList(MenuList):
 	def __init__(self, list, enableWrapAround = True):

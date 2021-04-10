@@ -308,7 +308,8 @@ class SeriesPluginWorker(Thread):
 		while not self.__queue.empty():
 			
 			# NOTE: we have to check this here and not using the while to prevent the parser to be started on shutdown
-			if not self.__running: break
+			if not self.__running:
+				break
 			
 			log.debug('Worker is processing')
 			
@@ -437,7 +438,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 			
 		else:
 			# Reset title search depth on every new request
-			identifier.search_depth = 0;
+			identifier.search_depth = 0
 			
 			# Reset the knownids on every new request
 			identifier.knownids = []

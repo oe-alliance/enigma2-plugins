@@ -510,10 +510,10 @@ class InfoBar(InfoBarOrg):
 		Notifications.AddNotification(MessageBox, _("PTS-Plugin: Restarting Timeshift!"), MessageBox.TYPE_INFO, timeout=5)
 
 	def saveTimeshiftPopup(self):
-		self.session.openWithCallback(self.saveTimeshiftPopupCallback, ChoiceBox, \
-			title=_("The Timeshift record was not saved yet!\nWhat do you want to do now with the timeshift file?"), \
-			list=((_("Save Timeshift as Movie and stop recording"), "savetimeshift"), \
-			(_("Save Timeshift as Movie and continue recording"), "savetimeshiftandrecord"), \
+		self.session.openWithCallback(self.saveTimeshiftPopupCallback, ChoiceBox,
+			title=_("The Timeshift record was not saved yet!\nWhat do you want to do now with the timeshift file?"),
+			list=((_("Save Timeshift as Movie and stop recording"), "savetimeshift"),
+			(_("Save Timeshift as Movie and continue recording"), "savetimeshiftandrecord"),
 			(_("Don't save Timeshift as Movie"), "noSave")))
 
 	def saveTimeshiftPopupCallback(self, answer):
@@ -757,7 +757,7 @@ class InfoBar(InfoBarOrg):
 							servicerefname = readmetafile.readline()[0:-1]
 							eventname = readmetafile.readline()[0:-1]
 						else:
-							eventname = "";
+							eventname = ""
 
 						JobManager.AddJob(CopyTimeshiftJob(self, "cp \"%s/%s.copy\" \"%s.ts\"" % (config.usage.timeshift_path.value,copy_file,fullname), copy_file, fullname, eventname))
 						if not Screens.Standby.inTryQuitMainloop and not Screens.Standby.inStandby and not mergelater and self.save_timeshift_postaction != "standby":
@@ -1607,17 +1607,17 @@ def instantRecord(self):
 
 	if not harddiskmanager.inside_mountpoint(dir):
 		if harddiskmanager.HDDCount() and not harddiskmanager.HDDEnabledCount():
-			self.session.open(MessageBox, _("Unconfigured storage devices found!") + "\n" \
+			self.session.open(MessageBox, _("Unconfigured storage devices found!") + "\n"
 				+ _("Please make sure to set up your storage devices with the storage management in menu -> setup -> system -> storage devices."), MessageBox.TYPE_ERROR)
 			return
 		elif harddiskmanager.HDDEnabledCount() and defaultStorageDevice() == "<undefined>":
-			self.session.open(MessageBox, _("No default storage device found!") + "\n" \
+			self.session.open(MessageBox, _("No default storage device found!") + "\n"
 				+ _("Please make sure to set up your default storage device in menu -> setup -> system -> recording paths."), MessageBox.TYPE_ERROR)
 			return
 		elif harddiskmanager.HDDEnabledCount() and defaultStorageDevice() != "<undefined>":
 			part = harddiskmanager.getDefaultStorageDevicebyUUID(defaultStorageDevice())
 			if part is None:
-				self.session.open(MessageBox, _("Default storage device is not available!") + "\n" \
+				self.session.open(MessageBox, _("Default storage device is not available!") + "\n"
 					+ _("Please verify if your default storage device is attached or set up your default storage device in menu -> setup -> system -> recording paths."), MessageBox.TYPE_ERROR)
 				return
 		else:
@@ -1626,27 +1626,27 @@ def instantRecord(self):
 			return
 
 	if self.isInstantRecordRunning():
-		self.session.openWithCallback(self.recordQuestionCallback, ChoiceBox, \
-			title=_("A recording is currently running.\nWhat do you want to do?"), \
-			list=((_("stop recording"), "stop"), \
-			(_("add recording (stop after current event)"), "event"), \
-			(_("add recording (indefinitely)"), "indefinitely"), \
-			(_("add recording (enter recording duration)"), "manualduration"), \
-			(_("add recording (enter recording endtime)"), "manualendtime"), \
-			(_("change recording (duration)"), "changeduration"), \
-			(_("change recording (endtime)"), "changeendtime"), \
-			(_("Timeshift")+" "+_("save recording (stop after current event)"), "savetimeshift"), \
-			(_("Timeshift")+" "+_("save recording (Select event)"), "savetimeshiftEvent"), \
+		self.session.openWithCallback(self.recordQuestionCallback, ChoiceBox,
+			title=_("A recording is currently running.\nWhat do you want to do?"),
+			list=((_("stop recording"), "stop"),
+			(_("add recording (stop after current event)"), "event"),
+			(_("add recording (indefinitely)"), "indefinitely"),
+			(_("add recording (enter recording duration)"), "manualduration"),
+			(_("add recording (enter recording endtime)"), "manualendtime"),
+			(_("change recording (duration)"), "changeduration"),
+			(_("change recording (endtime)"), "changeendtime"),
+			(_("Timeshift")+" "+_("save recording (stop after current event)"), "savetimeshift"),
+			(_("Timeshift")+" "+_("save recording (Select event)"), "savetimeshiftEvent"),
 			(_("do nothing"), "no")))
 	else:
-		self.session.openWithCallback(self.recordQuestionCallback, ChoiceBox, \
-			title=_("Start recording?"), \
-			list=((_("add recording (stop after current event)"), "event"), \
-			(_("add recording (indefinitely)"), "indefinitely"), \
-			(_("add recording (enter recording duration)"), "manualduration"), \
-			(_("add recording (enter recording endtime)"), "manualendtime"), \
-			(_("Timeshift")+" "+_("save recording (stop after current event)"), "savetimeshift"), \
-			(_("Timeshift")+" "+_("save recording (Select event)"), "savetimeshiftEvent"), \
+		self.session.openWithCallback(self.recordQuestionCallback, ChoiceBox,
+			title=_("Start recording?"),
+			list=((_("add recording (stop after current event)"), "event"),
+			(_("add recording (indefinitely)"), "indefinitely"),
+			(_("add recording (enter recording duration)"), "manualduration"),
+			(_("add recording (enter recording endtime)"), "manualendtime"),
+			(_("Timeshift")+" "+_("save recording (stop after current event)"), "savetimeshift"),
+			(_("Timeshift")+" "+_("save recording (Select event)"), "savetimeshiftEvent"),
 			(_("don't record"), "no")))
 
 InfoBarInstantRecord.instantRecord = instantRecord

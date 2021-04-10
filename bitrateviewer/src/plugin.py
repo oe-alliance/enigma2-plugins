@@ -79,13 +79,13 @@ class BitrateCalculator(Screen):
 
 	def getVideoBitrateData(self,value, status): # value = rate in kbit/s, status ( 1  = ok || 0 = nok (zapped?))
 		if status:
-			self["video"].text = "%d kbit/s" % value;
+			self["video"].text = "%d kbit/s" % value
 		else:
 			self.videoBitrate = None
 
 	def getAudioBitrateData(self,value, status): 
 		if status:
-			self["audio"].text = "%d kbit/s" % value;
+			self["audio"].text = "%d kbit/s" % value
 		else:
 			self.audioBitrate = None
 

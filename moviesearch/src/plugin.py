@@ -10,7 +10,8 @@ titleCmp = lambda x, y: x.lower() in y.lower() # force case-insensitive for now
 
 def vkCallback(movieContextMenu, searchString=None):
 	isEmc = False
-	if not movieContextMenu: return
+	if not movieContextMenu:
+		return
 	else:
 		if hasattr(movieContextMenu, 'csel'):
 			csel = movieContextMenu.csel
@@ -18,8 +19,10 @@ def vkCallback(movieContextMenu, searchString=None):
 			csel = movieContextMenu.mlist
 			isEmc = True
 	if not searchString:
-		if isEmc: csel.reload(csel.loadPath)
-		else: csel.reloadList()
+		if isEmc:
+			csel.reload(csel.loadPath)
+		else:
+			csel.reloadList()
 		return movieContextMenu.close()
 
 	if isEmc:
@@ -28,15 +31,19 @@ def vkCallback(movieContextMenu, searchString=None):
 		newList = []
 		for movie in movieList:
 			# we have no idea what this input could be, just add it back
-			if len(movie) != 8: newList.append(movie)
+			if len(movie) != 8:
+				newList.append(movie)
 			else:
-				if not isinstance(movie[0], eServiceReference): newList.append(movie)
+				if not isinstance(movie[0], eServiceReference):
+					newList.append(movie)
 				else:
 					info = serviceHandler.info(movie[0])
-					if not info: newList.append(movie)
+					if not info:
+						newList.append(movie)
 					else:
 						name = info.getName(movie[0])
-						if titleCmp(searchString, name): newList.append(movie)
+						if titleCmp(searchString, name):
+							newList.append(movie)
 		csel.list = newList
 		csel.l.setList(newList)
 	else:
@@ -44,21 +51,25 @@ def vkCallback(movieContextMenu, searchString=None):
 		newList = []
 		for movie in movieList:
 			# we have no idea what this input could be, just add it back
-			if len(movie) < 2: newList.append(movie)
+			if len(movie) < 2:
+				newList.append(movie)
 			else:
 				if len(movie) == 4 and isinstance(movie[3], list): # assume serienfilm-plugin
 					tinfo = movie[3]
 					type = tinfo[0]
 					if type == 0:
 						name = movie[1].getName(movie[0])
-						if titleCmp(searchString, name): newList.append(movie)
+						if titleCmp(searchString, name):
+							newList.append(movie)
 					elif type == 4:
-						if titleCmp(searchString, tinfo[2]): newList.append(movie)
+						if titleCmp(searchString, tinfo[2]):
+							newList.append(movie)
 					else:
 						newList.append(movie)
 				elif isinstance(movie[0], eServiceReference) and isinstance(movie[1], iStaticServiceInformationPtr):
 					name = movie[1].getName(movie[0])
-					if titleCmp(searchString, name): newList.append(movie)
+					if titleCmp(searchString, name):
+						newList.append(movie)
 				else:
 					newList.append(movie)
 		csel["list"].list = newList

@@ -36,7 +36,7 @@ import constants
 # this table is modified base on win1251BulgarianCharToOrderMap, so 
 # only number <64 is sure valid
 
-Latin5_BulgarianCharToOrderMap = ( \
+Latin5_BulgarianCharToOrderMap = (
 255,255,255,255,255,255,255,255,255,255,254,255,255,254,255,255,  # 00
 255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,  # 10
 253,253,253,253,253,253,253,253,253,253,253,253,253,253,253,253,  # 20
@@ -55,7 +55,7 @@ Latin5_BulgarianCharToOrderMap = ( \
  62,242,243,244, 58,245, 98,246,247,248,249,250,251, 91,252,253,  # f0
 )
 
-win1251BulgarianCharToOrderMap = ( \
+win1251BulgarianCharToOrderMap = (
 255,255,255,255,255,255,255,255,255,255,254,255,255,254,255,255,  # 00
 255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,  # 10
 253,253,253,253,253,253,253,253,253,253,253,253,253,253,253,253,  # 20
@@ -80,7 +80,7 @@ win1251BulgarianCharToOrderMap = ( \
 # first 1024 sequences:3.0618%
 # rest  sequences:     0.2992%
 # negative sequences:  0.0020% 
-BulgarianLangModel = ( \
+BulgarianLangModel = (
 0,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2,3,3,3,3,3,3,3,3,2,3,3,3,3,3,
 3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,3,3,3,2,2,3,2,2,1,2,2,
 3,1,3,3,2,3,3,3,3,3,3,3,3,3,3,3,3,0,3,3,3,3,3,3,3,3,3,3,0,3,0,1,
@@ -211,7 +211,7 @@ BulgarianLangModel = ( \
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 )
 
-Latin5BulgarianModel = { \
+Latin5BulgarianModel = {
   'charToOrderMap': Latin5_BulgarianCharToOrderMap,
   'precedenceMatrix': BulgarianLangModel,
   'mTypicalPositiveRatio': 0.969392,
@@ -219,7 +219,7 @@ Latin5BulgarianModel = { \
   'charsetName': "ISO-8859-5"
 }
 
-Win1251BulgarianModel = { \
+Win1251BulgarianModel = {
   'charToOrderMap': win1251BulgarianCharToOrderMap,
   'precedenceMatrix': BulgarianLangModel,
   'mTypicalPositiveRatio': 0.969392,

@@ -57,10 +57,10 @@ class ScreenPage(resource.Resource):
 		elif os_path.isdir(path) and self.addSlash is True:
 			uri = "%s/" % (request.path)
 			request.redirect(uri)
-			return "";
+			return ""
 
 		else:
-			return resource.ErrorPage(http.NOT_FOUND, "Error 404 - Page not found", "The requested resource is not available").render(request);
+			return resource.ErrorPage(http.NOT_FOUND, "Error 404 - Page not found", "The requested resource is not available").render(request)
 
 		return server.NOT_DONE_YET
 

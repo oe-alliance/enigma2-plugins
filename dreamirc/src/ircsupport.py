@@ -161,7 +161,8 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
         if metadata is None:
             metadata = {}
         username=string.split(username,'!',1)[0]
-        if username==self.name: return
+        if username==self.name:
+            return
         if channel[0]=='#':
             group=channel[1:]
             self.getGroupConversation(group).showGroupMessage(username, message, metadata)
@@ -170,7 +171,8 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
 
     def action(self,username,channel,emote):
         username=string.split(username,'!',1)[0]
-        if username==self.name: return
+        if username==self.name:
+            return
         meta={'style':'emote'}
         if channel[0]=='#':
             group=channel[1:]

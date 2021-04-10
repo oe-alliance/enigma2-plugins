@@ -251,7 +251,8 @@ class MSNWeatherPlugin(Screen):
 			from Plugins.Extensions.Browser.Browser import Browser
 			if self.webSite:
 				self.session.open(Browser, config.plugins.WebBrowser.fullscreen.value, self.webSite, False)
-		except: pass # I dont care if browser is installed or not...
+		except:
+			pass # I dont care if browser is installed or not...
 
 class WeatherIcon(Pixmap):
 	def __init__(self):

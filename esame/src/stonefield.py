@@ -39,7 +39,7 @@ class StoneField:
 		return c
 	
 	def width(self):
-		return self.sizex;
+		return self.sizex
 	
 	def height(self):
 		return self.sizey
@@ -133,8 +133,8 @@ class StoneField:
 			return
 
 		for stone in self.field:
-			stone.marked = False;
-			stone.changed = True;
+			stone.marked = False
+			stone.changed = True
 
 		self.marked = 0
 

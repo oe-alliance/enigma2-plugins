@@ -88,10 +88,14 @@ class vierg(Screen):
 
 
 	def drawRect(self, x, y, color = "bg1"):
-		if color == "blue": bg = self.blue
-		elif color == "red": bg = self.red
-		elif color == "bg0": bg = self.bg0
-		else: bg = self.bg1
+		if color == "blue":
+			bg = self.blue
+		elif color == "red":
+			bg = self.red
+		elif color == "bg0":
+			bg = self.bg0
+		else:
+			bg = self.bg1
 		self["Canvas"].fill(2*self.bsize + x, 2*self.bsize + y, self.csize, self.csize, bg)
 		self["Canvas"].flush()
 
@@ -186,12 +190,13 @@ class vierg(Screen):
 				break
 			if y:
 				self.aniList.append((x*self.fsize, y*self.fsize, "bg1"))
-				self.maze[(6-y)*7 + x] = 0;
+				self.maze[(6-y)*7 + x] = 0
 			else:
 				self.aniList.append((x*self.fsize, y*self.fsize, "bg0"))
 			self.maze[(5-y)*7 + x] = v
 			self.aniList.append((x*self.fsize, y*self.fsize + self.fsize, dr))
-		if v==2:self.aniList.append((self.ipos*self.fsize, 0, "red"))
+		if v==2:
+			self.aniList.append((self.ipos*self.fsize, 0, "red"))
 
 
 	def cPlay(self, x):
@@ -304,7 +309,7 @@ class vierg(Screen):
 		idx = 0
 		for x in range(7):
 			if tst[x] == tst[max] and not self.maze[35+x]:
-				vidx[idx] = x;
+				vidx[idx] = x
 				idx += 1
 
 		if not idx: # never reached

@@ -41,7 +41,7 @@ from hebrewprober import HebrewProber
 class SBCSGroupProber(CharSetGroupProber):
     def __init__(self):
         CharSetGroupProber.__init__(self)
-        self._mProbers = [ \
+        self._mProbers = [
             SingleByteCharSetProber(Win1251CyrillicModel),
             SingleByteCharSetProber(Koi8rModel),
             SingleByteCharSetProber(Latin5CyrillicModel),

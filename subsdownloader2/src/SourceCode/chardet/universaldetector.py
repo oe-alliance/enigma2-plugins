@@ -60,10 +60,12 @@ class UniversalDetector:
             prober.reset()
 
     def feed(self, aBuf):
-        if self.done: return
+        if self.done:
+            return
 
         aLen = len(aBuf)
-        if not aLen: return
+        if not aLen:
+            return
         
         if not self._mGotData:
             # If the data starts with BOM, we know it is UTF
@@ -120,7 +122,8 @@ class UniversalDetector:
                     break
 
     def close(self):
-        if self.done: return
+        if self.done:
+            return
         if not self._mGotData:
             if constants._debug:
                 sys.stderr.write('no data received!\n')
@@ -136,7 +139,8 @@ class UniversalDetector:
             maxProberConfidence = 0.0
             maxProber = None
             for prober in self._mCharSetProbers:
-                if not prober: continue
+                if not prober:
+                    continue
                 proberConfidence = prober.get_confidence()
                 if proberConfidence > maxProberConfidence:
                     maxProberConfidence = proberConfidence
@@ -149,7 +153,8 @@ class UniversalDetector:
         if constants._debug:
             sys.stderr.write('no probers hit minimum threshhold\n')
             for prober in self._mCharSetProbers[0].mProbers:
-                if not prober: continue
-                sys.stderr.write('%s confidence = %s\n' % \
-                                 (prober.get_charset_name(), \
+                if not prober:
+                    continue
+                sys.stderr.write('%s confidence = %s\n' %
+                                 (prober.get_charset_name(),
                                   prober.get_confidence()))

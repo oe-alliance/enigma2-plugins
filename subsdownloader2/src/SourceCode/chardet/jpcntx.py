@@ -34,7 +34,7 @@ MAX_REL_THRESHOLD = 1000
 MINIMUM_DATA_THRESHOLD = 4
 
 # This is hiragana 2-char sequence table, the number in each cell represents its frequency category
-jp2CharContext = ( \
+jp2CharContext = (
 (0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1),
 (2,4,0,4,0,3,0,4,0,3,4,4,4,2,4,3,3,4,3,2,3,3,4,2,3,3,3,2,4,1,4,3,3,1,5,4,3,4,3,4,3,5,3,0,3,5,4,2,0,3,1,0,3,3,0,3,3,0,1,1,0,4,3,0,3,3,0,4,0,2,0,3,5,5,5,5,4,0,4,1,0,3,4),
 (0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2),
@@ -132,7 +132,8 @@ class JapaneseContextAnalysis:
         self._mDone = constants.False # If this flag is set to constants.True, detection is done and conclusion has been made
 
     def feed(self, aBuf, aLen):
-        if self._mDone: return
+        if self._mDone:
+            return
         
         # The buffer we got is byte oriented, and a character may span in more than one
         # buffers. In case the last one or two byte in last buffer is not complete, we 
@@ -171,7 +172,8 @@ class JapaneseContextAnalysis:
         
 class SJISContextAnalysis(JapaneseContextAnalysis):
     def get_order(self, aStr):
-        if not aStr: return -1, 1
+        if not aStr:
+            return -1, 1
         # find out current char's byte length
         if ((aStr[0] >= '\x81') and (aStr[0] <= '\x9F')) or \
            ((aStr[0] >= '\xE0') and (aStr[0] <= '\xFC')):
@@ -190,7 +192,8 @@ class SJISContextAnalysis(JapaneseContextAnalysis):
 
 class EUCJPContextAnalysis(JapaneseContextAnalysis):
     def get_order(self, aStr):
-        if not aStr: return -1, 1
+        if not aStr:
+            return -1, 1
         # find out current char's byte length
         if (aStr[0] == '\x8E') or \
            ((aStr[0] >= '\xA1') and (aStr[0] <= '\xFE')):

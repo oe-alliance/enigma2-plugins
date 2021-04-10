@@ -57,9 +57,12 @@ def get_version():
 	return __version__
 
 
-class FritzConnectionException(Exception): pass
-class ServiceError(FritzConnectionException): pass
-class ActionError(FritzConnectionException): pass
+class FritzConnectionException(Exception):
+	pass
+class ServiceError(FritzConnectionException):
+	pass
+class ActionError(FritzConnectionException):
+	pass
 
 
 class FritzAction(object):

@@ -164,7 +164,7 @@ class ServiceListSave(resource.Resource):
 
 	def parseXML(self, xmldata):
 		print "parsing xmldata with length", len(xmldata)
-		xmldoc = xml_dom_minidom_parseString(xmldata);
+		xmldoc = xml_dom_minidom_parseString(xmldata)
 		blist = xmldoc.getElementsByTagName("e2bouquetlist")[0]
 		print "Num TV Bouquets", len(blist.getElementsByTagName('e2tvbouquetlist')[0].getElementsByTagName('e2bouquet'))
 		print "Num RADIO Bouquets", len(blist.getElementsByTagName('e2radiobouquetlist')[0].getElementsByTagName('e2bouquet'))

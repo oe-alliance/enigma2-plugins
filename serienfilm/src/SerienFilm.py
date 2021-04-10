@@ -107,7 +107,7 @@ class EpiSepCfg(Screen):
 
 	def gotEdit(self):
 		if self.level == 1:
-			self.level = 2;
+			self.level = 2
 			self.sfsetLabel()
 		else:
 			self.session.openWithCallback(self.setSeparator,		# edit serarator

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-Version = '$Header$';
+Version = '$Header$'
 
 from enigma import eConsoleAppContainer, eTPM
 from Plugins.Plugin import PluginDescriptor
@@ -127,7 +127,7 @@ def installCertificates(session):
 		cert.get_subject().OU = "STB"
 		cert.get_subject().CN = socket_gethostname()
 		cert.set_serial_number(random.randint(1000000,1000000000))
-		cert.set_notBefore("20120101000000Z");
+		cert.set_notBefore("20120101000000Z")
 		cert.set_notAfter("20301231235900Z")
 		cert.set_issuer(cert.get_subject())
 		cert.set_pubkey(k)

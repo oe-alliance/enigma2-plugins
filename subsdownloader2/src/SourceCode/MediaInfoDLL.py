@@ -193,11 +193,11 @@ class MediaInfo:
 		self.MediaInfo_Delete(self.Handle)
 	def Open(self, File):
 		if type(File)==str:
-			return self.MediaInfoA_Open (self.Handle, File);
+			return self.MediaInfoA_Open (self.Handle, File)
 		elif MustUseAnsi:
-			return self.MediaInfoA_Open (self.Handle, File.encode("utf-8"));
+			return self.MediaInfoA_Open (self.Handle, File.encode("utf-8"))
 		else:
-			return self.MediaInfo_Open (self.Handle, File);
+			return self.MediaInfo_Open (self.Handle, File)
 	def Open_Buffer(self, Begin, Begin_Size, End=None, End_Size=0):
 		return self.MediaInfo_Open_Buffer(self.Handle, Begin, Begin_Size, End, End_Size)
 	def Save(self):

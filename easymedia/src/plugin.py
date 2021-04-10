@@ -269,13 +269,15 @@ class AddPlug(Screen):
 				pickle.dump(plugin, outf)
 				outf.close()
 				self.session.open(MessageBox, text = (plugin.name + _(" added to EasyMedia")), type = MessageBox.TYPE_INFO)
-			except: self.session.open(MessageBox, text = "Write Error!", type = MessageBox.TYPE_WARNING)
+			except:
+				self.session.open(MessageBox, text = "Write Error!", type = MessageBox.TYPE_WARNING)
 		else:
 			order = 'rm -f \"' + '/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/' + plugin.name + '.plug' + '\"'
 			try:
 				os_system(order)
 				self.session.open(MessageBox, text = (plugin.name + _(" removed from EasyMedia")), type = MessageBox.TYPE_INFO)
-			except: self.session.open(MessageBox, text = "Write Error!", type = MessageBox.TYPE_WARNING)
+			except:
+				self.session.open(MessageBox, text = "Write Error!", type = MessageBox.TYPE_WARNING)
 
 
 
@@ -401,16 +403,22 @@ class EasyMedia(Screen):
 				inpf.close()	
 				self.__keys.append(binPlug.name)
 				MPaskList.append((binPlug.name, ("++++" + binPlug.name)))
-			except: pass
+			except:
+				pass
 		pos = 0
 		for x in MPaskList:
 			strpos = str(self.__keys[pos])
 			self.list.append(MPanelEntryComponent(key = strpos, text = x, cell = pos))
-			if pos==0: self["key_pvr"].setText(MPaskList[0][0])
-			elif pos==1: self["key_red"].setText(MPaskList[1][0])
-			elif pos==2: self["key_green"].setText(MPaskList[2][0])
-			elif pos==3: self["key_yellow"].setText(MPaskList[3][0])
-			elif pos==4: self["key_blue"].setText(MPaskList[4][0])
+			if pos==0:
+				self["key_pvr"].setText(MPaskList[0][0])
+			elif pos==1:
+				self["key_red"].setText(MPaskList[1][0])
+			elif pos==2:
+				self["key_green"].setText(MPaskList[2][0])
+			elif pos==3:
+				self["key_yellow"].setText(MPaskList[3][0])
+			elif pos==4:
+				self["key_blue"].setText(MPaskList[4][0])
 			pos += 1
 		self["list"] = MPanelList(list = self.list, selection = 0)
 		self["list"].onSelectionChanged.append(self.updateOLED)
@@ -589,7 +597,8 @@ def MPcallbackFunc(answer):
 			runPlug = pickle.load(inpf)
 			inpf.close()	
 			runPlug(session = EMsession)
-		except: EMsession.open(MessageBox, text = (plugToRun + " not found!"), type = MessageBox.TYPE_WARNING)
+		except:
+			EMsession.open(MessageBox, text = (plugToRun + " not found!"), type = MessageBox.TYPE_WARNING)
 
 
 

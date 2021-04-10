@@ -79,7 +79,8 @@ def doInstantiateDialogSF(self, screen, arguments, kwargs, desktop):
 RUNPLUGIN = 1
 
 def autostart(reason, **kwargs):
-	if RUNPLUGIN != 1: return
+	if RUNPLUGIN != 1:
+		return
 	if reason == 0: # start
 		if kwargs.has_key("session"):
 			global gLeavePlayerConfirmed

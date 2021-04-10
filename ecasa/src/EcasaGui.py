@@ -155,7 +155,8 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 	def highlighted(self, highlighted):
 		our_print("setHighlighted", highlighted)
 		# only allow to select valid pictures
-		if highlighted + self.offset >= len(self.pictures): return
+		if highlighted + self.offset >= len(self.pictures):
+			return
 
 		self.__highlighted = highlighted
 		pixmap = self['image%d' % highlighted]
@@ -180,7 +181,8 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		self.maybeDecode()
 
 	def maybeDecode(self):
-		if self.currentphoto is not None: return
+		if self.currentphoto is not None:
+			return
 		try:
 			filename, self.currentphoto = self.queue.pop()
 		except IndexError:
@@ -263,7 +265,8 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		self.highlighted = highlighted
 	def nextPage(self):
 		our_print("nextPage")
-		if not self.pictures: return
+		if not self.pictures:
+			return
 		offset = self.offset + self.PICS_PER_PAGE
 		Len = len(self.pictures)
 		if offset >= Len:
@@ -275,7 +278,8 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		self.setup()
 	def prevPage(self):
 		our_print("prevPage")
-		if not self.pictures: return
+		if not self.pictures:
+			return
 		offset = self.offset - self.PICS_PER_PAGE
 		if offset < 0:
 			Len = len(self.pictures) - 1
@@ -410,12 +414,14 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		self.api.cache = config.plugins.ecasa.cache.value
 
 	def gotPictures(self, pictures):
-		if not self.instance: return
+		if not self.instance:
+			return
 		self.pictures = pictures
 		self.setup()
 
 	def errorPictures(self, error):
-		if not self.instance: return
+		if not self.instance:
+			return
 		our_print("errorPictures", error)
 		self.session.open(
 			MessageBox,
@@ -532,11 +538,13 @@ class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 		thread.start()
 
 	def gotAlbums(self, albums):
-		if not self.instance: return
+		if not self.instance:
+			return
 		self['list'].list = albums
 
 	def errorAlbums(self, error):
-		if not self.instance: return
+		if not self.instance:
+			return
 		our_print("errorAlbums", error)
 		self['list'].setList([(_("Error downloading"), "0", None)])
 		self.session.open(
@@ -659,12 +667,14 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 				self.timer.start(config.plugins.ecasa.slideshow_interval.value*1000, True)
 
 	def cbDownload(self, tup):
-		if not self.instance: return
+		if not self.instance:
+			return
 		filename, photo = tup
 		self.picload.startDecode(filename)
 
 	def ebDownload(self, tup):
-		if not self.instance: return
+		if not self.instance:
+			return
 		error, photo = tup
 		print("ebDownload", error)
 		self.session.open(
@@ -748,7 +758,8 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		self.api.downloadPhoto(self.nextPhoto)
 
 	def reloadData(self, photo):
-		if photo is None: return
+		if photo is None:
+			return
 		self.photo = photo
 		unk = _("unknown")
 
@@ -793,8 +804,10 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		self.api.downloadPhoto(photo).addCallbacks(self.cbDownload, self.ebDownload)
 
 	def previous(self):
-		if self.prevFunc: self.reloadData(self.prevFunc())
+		if self.prevFunc:
+			self.reloadData(self.prevFunc())
 		self['pixmap'].instance.setPixmap(None)
 	def next(self):
-		if self.nextFunc: self.reloadData(self.nextFunc())
+		if self.nextFunc:
+			self.reloadData(self.nextFunc())
 		self['pixmap'].instance.setPixmap(None)

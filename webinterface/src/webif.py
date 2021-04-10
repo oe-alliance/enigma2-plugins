@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-Version = '$Header$';
+Version = '$Header$'
 
 # things to improve:
 #	- better error handling
@@ -496,7 +496,7 @@ class webifHandler(ContentHandler):
 			self.sub.append(ch)
 
 	def startEntity(self, name):
-		self.res.append('&' + name + ';');
+		self.res.append('&' + name + ';')
 
 	def execBegin(self):
 		for screen in self.screens:

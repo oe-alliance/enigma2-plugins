@@ -111,14 +111,16 @@ def setRedbutton(self):
 				else:
 					name_red = _("Zap/") + config.plugins.Partnerbox.Entries[0].name.value
 					self["key_red"].setText(name_red)
-			except: pass
+			except:
+				pass
 	elif self.type == EPG_TYPE_SINGLE and not self.zapFunc and not self.isTMBD and not self.AutoTimer:
 		try:
 			if int(config.plugins.Partnerbox.entriescount.value) > 1:
 				self["key_red"].setText("PartnerBox")
 			else:
 				self["key_red"].setText(config.plugins.Partnerbox.Entries[0].name.value)
-		except: pass
+		except:
+			pass
 
 
 def Partnerbox_EPGSelection_zapTo(self):
@@ -212,7 +214,8 @@ def Partnerbox_timerAdd(self):
 		proceed = True
 		if self.key_green_choice == self.REMOVE_TIMER:
 			cur = self["list"].getCurrent()
-			if cur is None: return
+			if cur is None:
+				return
 			event = cur[0]
 			serviceref = cur[1]
 			if event is not None:

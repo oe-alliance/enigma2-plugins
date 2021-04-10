@@ -543,9 +543,9 @@ class SubsDownloaderApplication(Screen):
 		self.serverAvailableSubtitles=[]
 		position = 0
 		for x  in serverList:
-			self.serverAvailableSubtitles.append((str(x['language']).replace("u'","").replace("'","")+"_" \
-			                                      +str(x['cd']).replace("u'","").replace("'","")+"cd__"\
-			                                      +str(x['title']).replace("u'","").replace("'","")+" "\
+			self.serverAvailableSubtitles.append((str(x['language']).replace("u'","").replace("'","")+"_"
+			                                      +str(x['cd']).replace("u'","").replace("'","")+"cd__"
+			                                      +str(x['title']).replace("u'","").replace("'","")+" "
 			                                      +str(x['release']).replace("u'","").replace("'",""), position)) #makes list of subtitles
 			position = position +1
 		self.subsListDownloaded=1
