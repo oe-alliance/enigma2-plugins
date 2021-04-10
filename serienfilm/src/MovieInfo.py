@@ -4,6 +4,7 @@ from enigma import iServiceInformation, eServiceReference
 from ServiceReference import ServiceReference
 from MovieList import MovieList
 
+
 class MovieInfo(Converter, object):
 	MOVIE_SHORT_DESCRIPTION = 0 # meta description when available.. when not .eit short description
 	MOVIE_META_DESCRIPTION = 1 # just meta description when available
@@ -48,7 +49,7 @@ class MovieInfo(Converter, object):
 			elif self.type == self.MOVIE_REC_FILESIZE:
 				filesize = info.getInfoObject(service, iServiceInformation.sFileSize)
 				if filesize is not None:
-					return "%d MB" % (filesize / (1024*1024))
+					return "%d MB" % (filesize / (1024 * 1024))
 		return ""
 
 	text = property(getText)

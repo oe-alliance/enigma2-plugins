@@ -14,14 +14,16 @@ from NamezapSetup import NamezapSetup
 from boxbranding import getImageDistro
 
 config.plugins.namezap = ConfigSubsection()
-config.plugins.namezap.style = ConfigSelection(choices = [
+config.plugins.namezap.style = ConfigSelection(choices=[
 		("number", _("Only Number")),
 		("name", _("Service Name")),
 		("both", _("Number and Name"))
-	], default = "both"
+	], default="both"
 )
 
 NumberZap = InfoBarGenerics.NumberZap
+
+
 class NameZap(NumberZap):
 	STYLE_NUMBER = 0
 	STYLE_NAME = 1
@@ -58,9 +60,9 @@ class NameZap(NumberZap):
 				serviceIterator = servicelist.getNext()
 				if not serviceIterator.valid(): #check end of list
 					break
-				playable = not (serviceIterator.flags & (eServiceReference.isMarker|eServiceReference.isDirectory))
+				playable = not (serviceIterator.flags & (eServiceReference.isMarker | eServiceReference.isDirectory))
 				if playable:
-					num -= 1;
+					num -= 1
 			if not num: #found service with searched number ?
 				return serviceIterator, 0
 		return None, num
@@ -95,24 +97,28 @@ class NameZap(NumberZap):
 			else:
 				self["name"].setText("%s (%s)" % (sname, self.field))
 
+
 def autostart(reason, *args, **kwargs):
 	if reason == 0:
 		InfoBarGenerics.NumberZap = NameZap
 
+
 def main(session, *args, **kwargs):
 	session.open(NamezapSetup)
+
 
 def menu(menuid):
 	if getImageDistro() in ('teamblue'):
 		if menuid != "ui_menu":
-			return [ ]
+			return []
 	elif getImageDistro() in ('openhdf'):
 		if menuid != "gui_menu":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
 			return []
 	return [(_("NameZAP Setup"), main, "namezap_setup", None)]
+
 
 def Plugins(**kwargs):
 	return [

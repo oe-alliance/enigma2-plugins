@@ -12,6 +12,7 @@ from time import localtime, mktime, time, strftime
 # Config
 from Components.config import config
 
+
 def checkTimespan(begin, end):
 	# Get current time
 	time = localtime()
@@ -38,9 +39,11 @@ def checkTimespan(begin, end):
 			return False
 		return True
 
+
 class EPGRefreshTimerEntry(timer.TimerEntry):
 	"""TimerEntry ..."""
-	def __init__(self, begin, tocall, nocheck = False):
+
+	def __init__(self, begin, tocall, nocheck=False):
 		timer.TimerEntry.__init__(self, int(begin), int(begin))
 
 		self.function = tocall
@@ -50,7 +53,7 @@ class EPGRefreshTimerEntry(timer.TimerEntry):
 
 	def getNextActivation(self):
 		# We delay our activation so we won't rush into reprocessing a repeating one
-		return self.begin+1
+		return self.begin + 1
 
 	def activate(self):
 		if self.state == self.StateWaiting:
@@ -65,7 +68,7 @@ class EPGRefreshTimerEntry(timer.TimerEntry):
 					print("[EPGRefresh] Box still in use, rescheduling")
 
 					# Recheck later
-					self.begin = time() + config.plugins.epgrefresh.delay_standby.value*60
+					self.begin = time() + config.plugins.epgrefresh.delay_standby.value * 60
 					return False
 			else:
 				print("[EPGRefresh] Not in timespan, ending timer")
@@ -98,6 +101,7 @@ class EPGRefreshTimerEntry(timer.TimerEntry):
 				)),
 				")>"
 			))
+
 
 class EPGRefreshTimer(timer.Timer):
 	def __init__(self):
@@ -138,7 +142,7 @@ class EPGRefreshTimer(timer.Timer):
 		if config.plugins.epgrefresh.lastscan.value < begin and begin < time():
 			tocall()
 
-		refreshTimer = EPGRefreshTimerEntry(begin, tocall, nocheck = True)
+		refreshTimer = EPGRefreshTimerEntry(begin, tocall, nocheck=True)
 
 		i = 0
 		while i < 7:
@@ -162,5 +166,6 @@ class EPGRefreshTimer(timer.Timer):
 
 	def saveTimer(self):
 		pass
+
 
 epgrefreshtimer = EPGRefreshTimer()

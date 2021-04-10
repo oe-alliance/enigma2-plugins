@@ -2,8 +2,9 @@ from Components.Sources.Source import Source
 from ServiceReference import ServiceReference
 #from time import sleep
 
+
 class SubServices(Source):
-	def __init__(self, session, streamingScreens = None):
+	def __init__(self, session, streamingScreens=None):
 		Source.__init__(self)
 		self.session = session
 		self.streamingScreens = streamingScreens
@@ -11,7 +12,7 @@ class SubServices(Source):
 
 	def handleCommand(self, cmd):
 		if cmd is not None:
-			print "[SubServices].handleCommand %s" %cmd
+			print "[SubServices].handleCommand %s" % cmd
 			self.cmd = cmd
 
 	def getSubservices(self):
@@ -49,7 +50,7 @@ class SubServices(Source):
 					service = screen.getRecordService()
 					sref = ServiceReference(screen.getRecordServiceRef())
 					if service is not None:
-						print "[SubServices] serviceref: %s | cmd: %s" %(sref, self.cmd)
+						print "[SubServices] serviceref: %s | cmd: %s" % (sref, self.cmd)
 
 						if sref.__str__() == self.cmd:
 							list.append((sref.__str__(), sref.getServiceName()))
@@ -65,7 +66,7 @@ class SubServices(Source):
 
 								return list
 							else:
-								print "[SubServices] no items: %s" %subservices
+								print "[SubServices] no items: %s" % subservices
 					else:
 						print "[SubServices] Service is None!"
 		if not list:
@@ -77,4 +78,3 @@ class SubServices(Source):
 	lut = {"ServiceReference": 0,
 			"Name": 1
 			}
-

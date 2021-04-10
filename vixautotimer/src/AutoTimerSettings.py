@@ -20,6 +20,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
 
+
 class AutoTimerSettings(Screen, ConfigListScreen):
 	skin = """<screen name="AutoTimerSettings" position="center,center" size="565,370">
 		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
@@ -60,9 +61,10 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 				getConfigListEntry(_("Support \"Fast Scan\"?"), config.plugins.autotimer.fastscan, _("When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it.")),
 				getConfigListEntry(_("Skip poll during records"), config.plugins.autotimer.skip_during_records, _("If enabled, the polling will be skipped if a recording is in progress.")),
 			],
-			session = session,
-			on_change = self.changed
+			session=session,
+			on_change=self.changed
 		)
+
 		def selectionChanged():
 			if self["config"].current:
 				self["config"].current[1].onDeselect(self.session)
@@ -121,7 +123,7 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 			for plugin in plugins.getPlugins(PluginDescriptor.WHERE_EXTENSIONSMENU):
 				if plugin.name == "AutoTimer":
 					plugins.removePlugin(plugin)
-				
+
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		self.close()
 

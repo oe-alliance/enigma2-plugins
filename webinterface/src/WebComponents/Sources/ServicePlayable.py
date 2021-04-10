@@ -1,6 +1,7 @@
 from enigma import eServiceCenter, eServiceReference
 from Components.Sources.Source import Source
 
+
 class ServicePlayable(Source):
 
 	SINGLE = 0
@@ -15,10 +16,8 @@ class ServicePlayable(Source):
 		self.info = None
 		self.type = type
 
-
 	def handleCommand(self, cmd):
 		self.command = cmd
-
 
 	def convertStrTrueFalse(self, int):
 		if int > 0:
@@ -26,18 +25,16 @@ class ServicePlayable(Source):
 		else:
 			return str(False)
 
-
 	def isServicePlayable(self, refToPlay, refPlaying=None):
 		if self.info is None:
 			self.info = self.sci.info(refToPlay)
 
 		if refPlaying is None:
-			return self.convertStrTrueFalse( self.info.isPlayable(refToPlay) )
+			return self.convertStrTrueFalse(self.info.isPlayable(refToPlay))
 		else:
-			return self.convertStrTrueFalse( self.info.isPlayable(refToPlay, refPlaying))
+			return self.convertStrTrueFalse(self.info.isPlayable(refToPlay, refPlaying))
 
 		return false
-
 
 	def getPlayableServices(self, refToPlay, refPlaying=None):
 		list = []
@@ -57,7 +54,6 @@ class ServicePlayable(Source):
 
 		return list
 
-
 	def getList(self):
 		list = []
 
@@ -73,8 +69,7 @@ class ServicePlayable(Source):
 
 		return list
 
-
 	list = property(getList)
-	lut = { "ServiceReference" : 0,
-			"ServicePlayable" : 1
+	lut = {"ServiceReference": 0,
+			"ServicePlayable": 1
 			}

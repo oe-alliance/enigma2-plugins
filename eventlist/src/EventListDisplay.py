@@ -24,6 +24,7 @@ from Renderer import Renderer
 from enigma import eCanvas, eRect, gFont
 from skin import parseColor, parseFont
 
+
 class EventListDisplay(Renderer):
 	GUI_WIDGET = eCanvas
 
@@ -50,7 +51,7 @@ class EventListDisplay(Renderer):
 			while i < 3:
 				if self.columns.has_key(str(i)):
 					value = self.columns[str(i)]
-					self.instance.writeText(eRect(value[0], y+int((self.rowHeight-value[4])/2), value[1], self.rowHeight), value[2], self.backgroundColor, value[3], item[value[5]], value[6])
+					self.instance.writeText(eRect(value[0], y + int((self.rowHeight - value[4]) / 2), value[1], self.rowHeight), value[2], self.backgroundColor, value[3], item[value[5]], value[6])
 				i += 1
 			a += 1
 			y += self.rowHeight
@@ -62,21 +63,21 @@ class EventListDisplay(Renderer):
 
 	def applySkin(self, desktop, parent):
 
-		attribs = [ ]
+		attribs = []
 		from enigma import eSize
 
 		def parseSize(str):
 			x, y = str.split(',')
 			return eSize(int(x), int(y))
-	
+
 		def parseColumnValue(value):
 			x, length, color, fontname, fontheight, align, itemindex = value.split(',')
-			return (int(x), int(length), parseColor(color), gFont(fontname,int(fontheight)), int(fontheight), int(itemindex), int(align))
+			return (int(x), int(length), parseColor(color), gFont(fontname, int(fontheight)), int(fontheight), int(itemindex), int(align))
 
 		for (attrib, value) in self.skinAttributes:
 			if attrib == "size":
 				self.instance.setSize(parseSize(value))
-				attribs.append((attrib,value))
+				attribs.append((attrib, value))
 			elif attrib == "column0":
 				self.columns["0"] = parseColumnValue(value)
 			elif attrib == "column1":
@@ -90,9 +91,8 @@ class EventListDisplay(Renderer):
 			elif attrib == "backgroundColor":
 				self.backgroundColor = parseColor(value)
 				self.instance.clear(self.backgroundColor)
-				attribs.append((attrib,value))
+				attribs.append((attrib, value))
 			else:
-				attribs.append((attrib,value))
+				attribs.append((attrib, value))
 		self.skinAttributes = attribs
 		return Renderer.applySkin(self, desktop, parent)
-

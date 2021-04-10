@@ -42,15 +42,18 @@ THREE_D_TOP_BOTTOM = 2
 
 modes = {	THREE_D_OFF: "off",
 			THREE_D_SIDE_BY_SIDE: "sbs",
-			THREE_D_TOP_BOTTOM: "tab" }
+			THREE_D_TOP_BOTTOM: "tab"}
 reversemodes = dict((value, key) for key, value in modes.iteritems())
+
 
 def setZOffset(configElement):
 	open("/proc/stb/fb/primary/zoffset", "w").write(str(configElement.value))
 
+
 def getmode():
 	mode = reversemodes.get(open("/proc/stb/fb/primary/3d", "r").read().strip(), None)
 	return mode
+
 
 def toggleDisplay(configElement):
 	from Components.Lcd import LCD
@@ -62,19 +65,23 @@ def toggleDisplay(configElement):
 		LCD().setBright(0)
 	eDBoxLCD.getInstance().update()
 
+
 def leaveStandby():
 	toggleDisplay(config.plugins.threed.toggleState)
+
 
 def standbyCounterChanged(configElement):
 	from Screens.Standby import inStandby
 	inStandby.onClose.append(leaveStandby)
 
+
 config.plugins.threed = ConfigSubsection()
-config.plugins.threed.showSBSmenu = ConfigYesNo(default = False)
-config.plugins.threed.showTBmenu = ConfigYesNo(default = False)
-config.plugins.threed.zoffset = ConfigSlider(default = 0, increment = 1, limits = [0, 10])
+config.plugins.threed.showSBSmenu = ConfigYesNo(default=False)
+config.plugins.threed.showTBmenu = ConfigYesNo(default=False)
+config.plugins.threed.zoffset = ConfigSlider(default=0, increment=1, limits=[0, 10])
 config.plugins.threed.zoffset.addNotifier(setZOffset)
-config.plugins.threed.autothreed = ConfigSelection(default="0", choices = [("0", _("off")),("1", _("on with side by side")),("2", _("on with top/bottom"))])
+config.plugins.threed.autothreed = ConfigSelection(default="0", choices=[("0", _("off")), ("1", _("on with side by side")), ("2", _("on with top/bottom"))])
+
 
 def switchmode(mode):
 	if mode in modes.keys():
@@ -85,22 +92,26 @@ def switchmode(mode):
 			config.plugins.threed.toggleState.setValue(getmode() != THREE_D_OFF)
 			toggleDisplay(config.plugins.threed.toggleState)
 
+
 def switchsbs(session, **kwargs):
 	switchmode(THREE_D_SIDE_BY_SIDE)
+
 
 def switchtb(session, **kwargs):
 	switchmode(THREE_D_TOP_BOTTOM)
 
+
 def switchoff(session, **kwargs):
 	switchmode(THREE_D_OFF)
 
+
 class AutoThreeD(Screen):
 	instance = None
+
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evUpdatedInfo: self.__evUpdatedInfo,
 				iPlayableService.evStart: self.__evStart
 			})
@@ -111,11 +122,11 @@ class AutoThreeD(Screen):
 
 		if eDBoxLCD.getInstance().detected(): # display found
 			from Components.config import NoSave
-			config.plugins.threed.disableDisplay = ConfigYesNo(default = False)
-			config.plugins.threed.disableDisplay.addNotifier(toggleDisplay, initial_call = False)
+			config.plugins.threed.disableDisplay = ConfigYesNo(default=False)
+			config.plugins.threed.disableDisplay.addNotifier(toggleDisplay, initial_call=False)
 			from Components.config import NoSave
-			config.plugins.threed.toggleState = NoSave(ConfigYesNo(default = True)) # True = display on, False = display off
-			config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
+			config.plugins.threed.toggleState = NoSave(ConfigYesNo(default=True)) # True = display on, False = display off
+			config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
 	def __evStart(self):
 		self.newService = True
@@ -138,7 +149,7 @@ class AutoThreeD(Screen):
 				else:
 					name = serviceRef.getName() # partnerbox servicename
 			else:
-				name =  ServiceReference(ref.info().getInfoString(iServiceInformation.sServiceref)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+				name = ServiceReference(ref.info().getInfoString(iServiceInformation.sServiceref)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
 			if "3d" in name.lower():
 				if config.plugins.threed.autothreed.value == "1":
 					mode = THREE_D_SIDE_BY_SIDE
@@ -151,6 +162,7 @@ class AutoThreeD(Screen):
 
 	def setLastMode(self, mode):
 		self.lastmode = mode
+
 
 class ThreeDSettings(Screen, ConfigListScreen):
 	skin = """
@@ -167,7 +179,7 @@ class ThreeDSettings(Screen, ConfigListScreen):
 			<widget name="config" position="10,50" size="550,320" scrollbarMode="showOnDemand" />
 		</screen>"""
 
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 
 		self["red"] = StaticText(_("Cancel"))
@@ -177,7 +189,7 @@ class ThreeDSettings(Screen, ConfigListScreen):
 		self.updateButtons()
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 		self.createSetup()
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
@@ -244,29 +256,33 @@ class ThreeDSettings(Screen, ConfigListScreen):
 		self.updateButtons()
 		self.createSetup()
 
+
 def opensettings(session, **kwargs):
 	session.open(ThreeDSettings)
+
 
 def settings(menuid, **kwargs):
 	if getImageDistro() in ('openhdf'):
 		if menuid != "video_menu":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
 			return []
 	return [(_("3D settings"), opensettings, "3d_settings", 10)]
 
+
 def autostart(session, **kwargs):
 	AutoThreeD(session)
+
 
 def Plugins(**kwargs):
 	pluginlist = []
 	if config.plugins.threed.showSBSmenu.value:
-		pluginlist.append(PluginDescriptor(name = _("3D: Enable side by side menu"), description = _("3D: Enable side by side menu"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = switchsbs, needsRestart = False))
+		pluginlist.append(PluginDescriptor(name=_("3D: Enable side by side menu"), description=_("3D: Enable side by side menu"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=switchsbs, needsRestart=False))
 	if config.plugins.threed.showTBmenu.value:
-		pluginlist.append(PluginDescriptor(name = _("3D: Enable top/bottom menu"), description = _("3D: Enable top/bottom menu"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = switchtb, needsRestart = False))
+		pluginlist.append(PluginDescriptor(name=_("3D: Enable top/bottom menu"), description=_("3D: Enable top/bottom menu"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=switchtb, needsRestart=False))
 	if config.plugins.threed.showSBSmenu.value or config.plugins.threed.showTBmenu.value:
-		pluginlist.append(PluginDescriptor(name = _("3D: disable 3D menu"), description = _("3D: 2D menu"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = switchoff, needsRestart = False))
-	pluginlist.append(PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart))
-	pluginlist.append(PluginDescriptor(name = _("3D settings"), description = _("Change 3D settings"), icon = "plugin.png", where = PluginDescriptor.WHERE_MENU, fnc = settings))
+		pluginlist.append(PluginDescriptor(name=_("3D: disable 3D menu"), description=_("3D: 2D menu"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=switchoff, needsRestart=False))
+	pluginlist.append(PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart))
+	pluginlist.append(PluginDescriptor(name=_("3D settings"), description=_("Change 3D settings"), icon="plugin.png", where=PluginDescriptor.WHERE_MENU, fnc=settings))
 	return pluginlist

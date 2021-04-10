@@ -13,6 +13,7 @@ from Components.Sources.StaticText import StaticText
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
+
 class FTPQueueManagerSummary(Screen):
 	skin = """
 	<screen position="0,0" size="132,64">
@@ -24,6 +25,7 @@ class FTPQueueManagerSummary(Screen):
 			<convert type="ClockToText">WithSeconds</convert>
 		</widget>
 	</screen>"""
+
 
 class FTPQueueManager(Screen):
 	skin = """
@@ -53,7 +55,7 @@ class FTPQueueManager(Screen):
 	def __init__(self, session, queue):
 		Screen.__init__(self, session)
 		self.queue = queue or []
-		
+
 		self["key_red"] = StaticText("")
 		self["key_green"] = StaticText("")
 		self["key_yellow"] = StaticText("")
@@ -70,7 +72,7 @@ class FTPQueueManager(Screen):
 				"cancel": self.exit,
 				"ok": self.ok,
 			}, -1)
-		
+
 		self.onLayoutFinish.extend((
 			self.layoutFinished,
 			self.updateList,
@@ -79,7 +81,7 @@ class FTPQueueManager(Screen):
 	def createSummary(self):
 		return FTPQueueManagerSummary
 
-	def updateList(self, queue = None):
+	def updateList(self, queue=None):
 		if not queue:
 			queue = self.queue
 
@@ -89,7 +91,7 @@ class FTPQueueManager(Screen):
 
 		# XXX: this is a little ugly but this way we have the least
 		# visible distortion :-)
-		index = min(self['list'].index, len(list)-1)
+		index = min(self['list'].index, len(list) - 1)
 		self['list'].setList(list)
 		self['list'].index = index
 
@@ -101,4 +103,3 @@ class FTPQueueManager(Screen):
 
 	def ok(self):
 		pass
-

@@ -16,7 +16,7 @@ class vConvClockToText(Converter, object):
 	STUNDEN = 7
 	LOCDE = 8
 	LOCFULL = 9
-	
+
 	def __init__(self, type):
 		Converter.__init__(self, type)
 		if type == "WithSeconds":
@@ -29,7 +29,7 @@ class vConvClockToText(Converter, object):
 			self.type = self.DATE
 		elif type == "AsLength":
 			self.type = self.AS_LENGTH
-		elif type == "Timestamp":	
+		elif type == "Timestamp":
 			self.type = self.TIMESTAMP
 		elif str(type).find("Format") != -1:
 			self.type = self.FORMAT
@@ -77,7 +77,7 @@ class vConvClockToText(Converter, object):
 			if spos > 0:
 				s1 = self.fmt_string[:spos]
 				s2 = strftime(self.fmt_string[spos:], t)
-				return str(s1+s2)
+				return str(s1 + s2)
 			else:
 				return strftime(self.fmt_string, t)
 		elif self.type == self.LOCDE:
@@ -87,7 +87,7 @@ class vConvClockToText(Converter, object):
 				iAll = s1.split(" ")
 				iTag = iAll[0]
 				iMonat = iAll[2]
-				sOut = self.Tage[int(iTag)-1] + " " + iAll[1] + ". " + self.Monate[int(iMonat)-1]
+				sOut = self.Tage[int(iTag) - 1] + " " + iAll[1] + ". " + self.Monate[int(iMonat) - 1]
 				return str(sOut)
 			else:
 				return strftime(self.fmt_string, t)
@@ -98,7 +98,7 @@ class vConvClockToText(Converter, object):
 				iAll = s1.split(" ")
 				iTag = iAll[0]
 				iMonat = iAll[2]
-				sOut = self.Tage[int(iTag)-1] + " " + iAll[1] + ". " + self.Monate[int(iMonat)-1]
+				sOut = self.Tage[int(iTag) - 1] + " " + iAll[1] + ". " + self.Monate[int(iMonat) - 1]
 				zeit = "%02d:%02d" % (t.tm_hour, t.tm_min)
 				return str(sOut + "     " + zeit)
 			else:

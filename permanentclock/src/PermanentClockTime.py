@@ -2,6 +2,7 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 from time import localtime, strftime
 
+
 class PermanentClockTime(Converter, object):
 	SECHAND = 1
 	MINHAND = 2

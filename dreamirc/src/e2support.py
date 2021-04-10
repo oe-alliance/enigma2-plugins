@@ -23,6 +23,7 @@ from twisted.internet import error
 import dreamIRCTools
 from dreamIRCTools import *
 
+
 class AbstractGroup:
     def __init__(self, name, account):
         self.name = name
@@ -63,6 +64,7 @@ class AbstractGroup:
     def __str__(self):
         return '%s@%s' % (self.name, self.account.accountName)
 
+
 class AbstractPerson:
     def __init__(self, name, baseAccount):
         self.name = name
@@ -89,6 +91,7 @@ class AbstractPerson:
     def __str__(self):
         return '%s@%s' % (self.name, self.account.accountName)
 
+
 class AbstractClientMixin:
     """Designed to be mixed in to a Protocol implementing class.
 
@@ -96,6 +99,7 @@ class AbstractClientMixin:
 
     @ivar _logonDeferred: Fired when I am done logging in.
     """
+
     def __init__(self, account, chatui, logonDeferred):
         for base in self.__class__.__bases__:
             if issubclass(base, Protocol):
@@ -103,7 +107,7 @@ class AbstractClientMixin:
                 break
         else:
             pass
-        from dreamIRCTools import MessagePipe 
+        from dreamIRCTools import MessagePipe
         self.pipe = MessagePipe()
         self.account = account
         self.chat = chatui

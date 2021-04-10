@@ -34,7 +34,13 @@ from twisted.web.client import getPage
 from urllib2 import Request
 from urlparse import urlparse, urlunparse
 from xml.etree.cElementTree import parse
-import os, gettext, re, socket, sys, urllib, urllib2
+import os
+import gettext
+import re
+import socket
+import sys
+import urllib
+import urllib2
 
 ##############################################################################
 
@@ -76,8 +82,10 @@ config.plugins.Uploaded.password = ConfigText(default="", fixed_size=False)
 PluginLanguageDomain = "RSDownloader"
 PluginLanguagePath = "Extensions/RSDownloader/locale/"
 
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -86,9 +94,11 @@ def _(txt):
 		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
 		return gettext.gettext(txt)
 
+
 language.addCallback(localeInit())
 
 ##############################################################################
+
 
 def writeLog(message):
 	if config.plugins.RSDownloader.write_log.value:
@@ -101,11 +111,12 @@ def writeLog(message):
 
 ##############################################################################
 
+
 def _parse(url):
 	url = url.strip()
 	parsed = urlparse(url)
 	scheme = parsed[0]
-	path = urlunparse(('','') + parsed[2:])
+	path = urlunparse(('', '') + parsed[2:])
 	host, port = parsed[1], 80
 	if '@' in host:
 		username, host = host.split('@')
@@ -123,12 +134,13 @@ def _parse(url):
 		path = "/"
 	return scheme, host, port, path, username, password
 
+
 class ProgressDownload:
 	def __init__(self, url, outputfile, contextFactory=None, *args, **kwargs):
 		scheme, host, port, path, username, password = _parse(url)
 		if username and password:
 			url = scheme + '://' + host + ':' + str(port) + path
-			basicAuth = encodestring("%s:%s"%(username, password))
+			basicAuth = encodestring("%s:%s" % (username, password))
 			authHeader = "Basic " + basicAuth.strip()
 			AuthHeaders = {"Authorization": authHeader}
 			if kwargs.has_key("headers"):
@@ -149,18 +161,21 @@ class ProgressDownload:
 
 ##############################################################################
 
+
 def get(url):
 	try:
 		data = urllib2.urlopen(url)
 		return data.read()
 	except:
 		return ""
-   
+
+
 def post(url, data):
 	try:
 		return urllib2.urlopen(url, data).read()
 	except:
 		return ""
+
 
 def matchGet(rex, string):
 	match = re.search(rex, string)
@@ -174,6 +189,7 @@ def matchGet(rex, string):
 
 ##############################################################################
 
+
 def reconnect(host='fritz.box', port=49000):
 	writeLog("Reconnecting fritz.Box...")
 	http_body = '\r\n'.join((
@@ -185,10 +201,10 @@ def reconnect(host='fritz.box', port=49000):
 		'</s:Envelope>'))
 	http_data = '\r\n'.join((
 		'POST /upnp/control/WANIPConn1 HTTP/1.1',
-		'Host: %s:%d'%(host, port),
+		'Host: %s:%d' % (host, port),
 		'SoapAction: urn:schemas-upnp-org:service:WANIPConnection:1#ForceTermination',
 		'Content-Type: text/xml; charset="utf-8"',
-		'Content-Length: %d'%len(http_body),
+		'Content-Length: %d' % len(http_body),
 		'',
 		http_body))
 	try:
@@ -201,15 +217,17 @@ def reconnect(host='fritz.box', port=49000):
 
 ##############################################################################
 
+
 def reconnect_script():
 	script = config.plugins.RSDownloader.reconnect_script.value
 	if script != "" and fileExists(script):
-		writeLog("Reconnecting with script %s..."%script)
+		writeLog("Reconnecting with script %s..." % script)
 		system(script)
 	else:
-		writeLog("Error: Reconnect script %s not found!"%script)
+		writeLog("Error: Reconnect script %s not found!" % script)
 
 ##############################################################################
+
 
 std_headers = {
 	'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2',
@@ -218,9 +236,10 @@ std_headers = {
 	'Accept-Language': 'en-us,en;q=0.5',
 }
 
+
 class RSDownload:
 	def __init__(self, url):
-		writeLog("Adding: %s"%url)
+		writeLog("Adding: %s" % url)
 		self.url = url
 		self.download = None
 		self.downloading = False
@@ -261,7 +280,7 @@ class RSDownload:
 			return False
 
 	def start(self):
-		writeLog("Downloading: %s"%self.url)
+		writeLog("Downloading: %s" % self.url)
 		self.downloading = True
 		self.progress = 0
 		self.size = 0
@@ -272,7 +291,7 @@ class RSDownload:
 		ul_username = config.plugins.Uploaded.username.value
 		ul_password = config.plugins.Uploaded.password.value
 		if self.url.__contains__("rapidshare.com") and username == "" and password == "":
-			writeLog("Free RS-Download: %s"%self.url)
+			writeLog("Free RS-Download: %s" % self.url)
 			self.status = _("Checking")
 			if self.mayReconnect():
 				if config.plugins.RSDownloader.reconnect_type.value == "fritz":
@@ -284,26 +303,26 @@ class RSDownload:
 			data = get(self.url)
 			url = matchGet('<form[^>]+action="([^"]+)', data)
 			if not url:
-				writeLog("Failed: %s"%self.url)
-				self.httpFailed(True, "Failed to get download page url: %s"%self.url)
+				writeLog("Failed: %s" % self.url)
+				self.httpFailed(True, "Failed to get download page url: %s" % self.url)
 			else:
 				data = post(url, "dl.start=Free")
 				seconds = matchGet('var c=([0-9]+)', data)
 				if not seconds:
-					self.httpFailed(True, "Failed to get download page url: %s"%self.url)
+					self.httpFailed(True, "Failed to get download page url: %s" % self.url)
 				else:
-					writeLog("Free RS-Download... must wait %s seconds: %s"%(seconds, self.url))
-					self.status = "%s %s"%(_("Waiting"), seconds)
+					writeLog("Free RS-Download... must wait %s seconds: %s" % (seconds, self.url))
+					self.status = "%s %s" % (_("Waiting"), seconds)
 					url = matchGet('"dlf" action="([^"]+)', data)
 					if not url:
-						self.httpFailed(True, "Failed to get download page url: %s"%self.url)
+						self.httpFailed(True, "Failed to get download page url: %s" % self.url)
 					else:
 						self.freeDownloadUrl = url
 						self.freeDownloadTimer = eTimer()
 						self.freeDownloadTimer.callback.append(self.freeDownloadStart)
 						self.freeDownloadTimer.start((int(seconds) + 2) * 1000, 1)
 		elif (self.url.__contains__("uploaded.to") or self.url.__contains__("ul.to")) and ul_username == "" and ul_password == "":
-			writeLog("Free Uploaded.to-Download: %s"%self.url)
+			writeLog("Free Uploaded.to-Download: %s" % self.url)
 			self.status = _("Checking")
 			if self.mayReconnect():
 				if config.plugins.RSDownloader.reconnect_type.value == "fritz":
@@ -316,8 +335,8 @@ class RSDownload:
 			tmp = re.search(r"Or wait (\d+) minutes", data)
 			if tmp:
 				minutes = tmp.group(1)
-				writeLog("Free Uploaded.to-Download... must wait %s minutes: %s"%(minutes, self.url))
-				self.status = "%s %s"%(_("Waiting"), minutes)
+				writeLog("Free Uploaded.to-Download... must wait %s minutes: %s" % (minutes, self.url))
+				self.status = "%s %s" % (_("Waiting"), minutes)
 				self.freeDownloadTimer = eTimer()
 				self.freeDownloadTimer.callback.append(self.start)
 				self.freeDownloadTimer.start((int(minutes) + 1) * 60000, 1)
@@ -329,18 +348,18 @@ class RSDownload:
 				if url:
 					self.name = re.search(r"<td><b>\s+(.+)\s", data).group(1) + re.search(r"</td><td>(\..+)</td></tr>", data).group(1)
 					self.status = _("Downloading")
-					self.download = ProgressDownload(url, ("%s/%s"%(config.plugins.RSDownloader.downloads_directory.value, self.name)).replace("//", "/"))
+					self.download = ProgressDownload(url, ("%s/%s" % (config.plugins.RSDownloader.downloads_directory.value, self.name)).replace("//", "/"))
 					self.download.addProgress(self.httpProgress)
 					self.download.start().addCallback(self.httpFinished).addErrback(self.httpFailed)
 				else:
-					self.httpFailed(True, "File is offline: %s"%self.url)
+					self.httpFailed(True, "File is offline: %s" % self.url)
 		elif self.url.__contains__("youtube.com"):
-			writeLog("Getting youtube video link: %s"%self.url)
+			writeLog("Getting youtube video link: %s" % self.url)
 			self.status = _("Checking")
 			downloadLink = self.getYoutubeDownloadLink()
 			if downloadLink:
 				self.status = _("Downloading")
-				writeLog("Downloading video: %s"%downloadLink)
+				writeLog("Downloading video: %s" % downloadLink)
 				req = urllib2.Request(downloadLink)
 				url_handle = urllib2.urlopen(req)
 				headers = url_handle.info()
@@ -348,11 +367,11 @@ class RSDownload:
 					ext = "mp4"
 				else:
 					ext = "flv"
-				self.download = ProgressDownload(downloadLink, ("%s/%s.%s"%(config.plugins.RSDownloader.downloads_directory.value, self.name, ext)).replace("//", "/"))
+				self.download = ProgressDownload(downloadLink, ("%s/%s.%s" % (config.plugins.RSDownloader.downloads_directory.value, self.name, ext)).replace("//", "/"))
 				self.download.addProgress(self.httpProgress)
 				self.download.start().addCallback(self.httpFinished).addErrback(self.httpFailed)
 			else:
-				self.httpFailed(True, "Failed to get video url: %s"%self.url)
+				self.httpFailed(True, "Failed to get video url: %s" % self.url)
 		else:
 			if self.url.__contains__("rapidshare.com") and username != "" and password != "":
 				url = self.url.replace("http://", "http://" + username + ":" + password + "@")
@@ -363,13 +382,13 @@ class RSDownload:
 			else:
 				url = self.url
 			self.status = _("Downloading")
-			self.download = ProgressDownload(url, ("%s/%s"%(config.plugins.RSDownloader.downloads_directory.value, self.name)).replace("//", "/").replace(".html", ""))
+			self.download = ProgressDownload(url, ("%s/%s" % (config.plugins.RSDownloader.downloads_directory.value, self.name)).replace("//", "/").replace(".html", ""))
 			self.download.addProgress(self.httpProgress)
 			self.download.start().addCallback(self.httpFinished).addErrback(self.httpFailed)
 
 	def freeDownloadStart(self):
 		self.status = _("Downloading")
-		self.download = ProgressDownload(self.freeDownloadUrl, ("%s/%s"%(config.plugins.RSDownloader.downloads_directory.value, self.name)).replace("//", "/").replace(".html", ""))
+		self.download = ProgressDownload(self.freeDownloadUrl, ("%s/%s" % (config.plugins.RSDownloader.downloads_directory.value, self.name)).replace("//", "/").replace(".html", ""))
 		self.download.addProgress(self.httpProgress)
 		self.download.start().addCallback(self.httpFinished).addErrback(self.httpFailed)
 
@@ -378,7 +397,7 @@ class RSDownload:
 		self.downloading = False
 		self.status = _("Waiting")
 		if self.download:
-			writeLog("Stopping download: %s"%self.url)
+			writeLog("Stopping download: %s" % self.url)
 			self.download.stop()
 
 	def httpProgress(self, recvbytes, totalbytes):
@@ -388,8 +407,8 @@ class RSDownload:
 
 	def httpFinished(self, string=None):
 		if string is not None:
-			writeLog("Failed: %s"%self.url)
-			writeLog("Error: %s"%string)
+			writeLog("Failed: %s" % self.url)
+			writeLog("Error: %s" % string)
 		self.status = _("Checking")
 		self.checkTimer = eTimer()
 		self.checkTimer.callback.append(self.doCheckTimer)
@@ -401,10 +420,10 @@ class RSDownload:
 			if config.plugins.RSDownloader.autorestart_failed.value:
 				self.restartFailedTimer = eTimer()
 				self.restartFailedTimer.callback.append(self.restartFailedCheck)
-				self.restartFailedTimer.start(10000*60, 1)
+				self.restartFailedTimer.start(10000 * 60, 1)
 		elif self.progress == 100:
 			self.status = _("Finished")
-			writeLog("Finished: %s"%self.url)
+			writeLog("Finished: %s" % self.url)
 		self.downloading = False
 		self.execFinishCallbacks()
 
@@ -422,8 +441,8 @@ class RSDownload:
 			if error == "":
 				error = failure.getErrorMessage()
 			if error != "" and not error.startswith("[Errno 2]"):
-				writeLog("Failed: %s"%self.url)
-				writeLog("Error: %s"%error)
+				writeLog("Failed: %s" % self.url)
+				writeLog("Error: %s" % error)
 				self.status = _("Checking")
 		self.checkTimer = eTimer()
 		self.checkTimer.callback.append(self.doCheckTimer)
@@ -452,11 +471,11 @@ class RSDownload:
 				self.name = titles[0]
 				if self.name.__contains__("\t- "):
 					idx = self.name.index("\t- ")
-					self.name = (self.name[idx+3:]).replace("&amp;", "&").replace("\t", "").replace("\n", "")
+					self.name = (self.name[idx + 3:]).replace("&amp;", "&").replace("\t", "").replace("\n", "")
 		mrl = None
 		isHDAvailable = False
 		video_id = str(self.getTubeId())
-		watch_url = "http://www.youtube.com/watch?v="+video_id
+		watch_url = "http://www.youtube.com/watch?v=" + video_id
 		watchrequest = Request(watch_url, None, std_headers)
 		try:
 			watchvideopage = urllib2.urlopen(watchrequest).read()
@@ -464,7 +483,7 @@ class RSDownload:
 			watchvideopage = ""
 		if "isHDAvailable = true" in watchvideopage:
 			isHDAvailable = True
-		info_url = 'http://www.youtube.com/get_video_info?&video_id=%s&el=detailpage&ps=default&eurl=&gl=US&hl=en'%video_id
+		info_url = 'http://www.youtube.com/get_video_info?&video_id=%s&el=detailpage&ps=default&eurl=&gl=US&hl=en' % video_id
 		inforequest = Request(info_url, None, std_headers)
 		try:
 			infopage = urllib2.urlopen(inforequest).read()
@@ -473,21 +492,22 @@ class RSDownload:
 		mobj = re.search(r'(?m)&token=([^&]+)(?:&|$)', infopage)
 		if mobj:
 			token = urllib.unquote(mobj.group(1))
-			myurl = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en'%(video_id, token)
+			myurl = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en' % (video_id, token)
 			if isHDAvailable is True:
-				mrl = '%s&fmt=%s'%(myurl, '22')
+				mrl = '%s&fmt=%s' % (myurl, '22')
 			else:
-				mrl = '%s&fmt=%s'%(myurl, '18')
+				mrl = '%s&fmt=%s' % (myurl, '18')
 		return mrl
 
 ##############################################################################
+
 
 class RS:
 	def __init__(self):
 		self.downloads = []
 		self.checkTimer = eTimer()
 		self.checkTimer.callback.append(self.startDownloading)
-		self.checkTimer.start(5000*60, False)
+		self.checkTimer.start(5000 * 60, False)
 
 	def mayDownload(self):
 		if config.plugins.RSDownloader.onoff.value == False:
@@ -616,7 +636,7 @@ class RS:
 			list = path + x
 			if list.endswith(".txt"):
 				try:
-					writeLog("Reading list %s..."%list)
+					writeLog("Reading list %s..." % list)
 					f = open(list, "r")
 					count = 0
 					for l in f:
@@ -629,13 +649,13 @@ class RS:
 								break
 					f.close()
 					if count == 0:
-						writeLog("Empty list or downloads already in download list: %s"%list)
+						writeLog("Empty list or downloads already in download list: %s" % list)
 					else:
-						writeLog("Added %d files from list %s..."%(count, list))
+						writeLog("Added %d files from list %s..." % (count, list))
 				except:
-					writeLog("Error while reading list %s!"%list)
+					writeLog("Error while reading list %s!" % list)
 			else:
-				writeLog("No *.txt file: %s!"%list)
+				writeLog("No *.txt file: %s!" % list)
 
 	def cleanLists(self):
 		writeLog("Cleaning lists...")
@@ -647,7 +667,7 @@ class RS:
 		except:
 			file_list = []
 			writeLog("Error while searching for lists: " + str(sys.exc_info()))
-		
+
 		finished_downloads = []
 		for download in self.downloads:
 			if download.status == _("Finished"):
@@ -761,9 +781,11 @@ class RS:
 		self.downloads = tmp
 		self.startDownloading()
 
+
 rapidshare = RS()
 
 ##############################################################################
+
 
 class ChangedScreen(Screen):
 	def __init__(self, session, parent=None):
@@ -774,6 +796,7 @@ class ChangedScreen(Screen):
 		self.setTitle(_("RS Downloader"))
 
 ##############################################################################
+
 
 class ReconnectScriptSelector(ChangedScreen):
 	skin = """
@@ -792,9 +815,10 @@ class ReconnectScriptSelector(ChangedScreen):
 		else:
 			cur = self["list"].getCurrent()
 			if cur:
-				self.close("%s/%s"%(self["list"].getCurrentDirectory(), cur[0][0]))
+				self.close("%s/%s" % (self["list"].getCurrentDirectory(), cur[0][0]))
 
 ##############################################################################
+
 
 class RSConfig(ConfigListScreen, ChangedScreen):
 	skin = """
@@ -809,9 +833,9 @@ class RSConfig(ConfigListScreen, ChangedScreen):
 
 	def __init__(self, session):
 		ChangedScreen.__init__(self, session)
-		
+
 		self["key_green"] = Label(_("Save"))
-		
+
 		ConfigListScreen.__init__(self, [
 			getConfigListEntry(_("Download in the background:"), config.plugins.RSDownloader.onoff),
 			getConfigListEntry(_("Username:"), config.plugins.RSDownloader.username),
@@ -841,7 +865,7 @@ class RSConfig(ConfigListScreen, ChangedScreen):
 			getConfigListEntry(_("Don't reconnect after:"), config.plugins.RSDownloader.reconnect_end_time),
 			getConfigListEntry(_("Restart failed after 10 minutes:"), config.plugins.RSDownloader.autorestart_failed),
 			getConfigListEntry(_("Mark files < 1 MB as failed:"), config.plugins.RSDownloader.mark_small_as_failed)])
-		
+
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], {"green": self.save, "cancel": self.exit}, -1)
 
 	def save(self):
@@ -878,6 +902,7 @@ class RSConfig(ConfigListScreen, ChangedScreen):
 
 ##############################################################################
 
+
 class RSSearch(Screen):
 	skin = """
 		<screen position="center,center" size="560,450" title="Searching... please wait!">
@@ -887,14 +912,14 @@ class RSSearch(Screen):
 	def __init__(self, session, searchFor):
 		Screen.__init__(self, session)
 		self.session = session
-		
+
 		self.searchFor = searchFor.replace(" ", "%2B")
 		self.maxPage = 1
 		self.curPage = 1
 		self.files = []
-		
+
 		self["list"] = MenuList([])
-		
+
 		self["actions"] = ActionMap(["OkCancelActions", "InfobarChannelSelection"],
 			{
 				"historyBack": self.previousPage,
@@ -902,7 +927,7 @@ class RSSearch(Screen):
 				"ok": self.okClicked,
 				"cancel": self.close
 			}, -1)
-		
+
 		self.onLayoutFinish.append(self.search)
 
 	def okClicked(self):
@@ -911,19 +936,19 @@ class RSSearch(Screen):
 			url = self.files[idx]
 			try:
 				f = open(("%s/search.txt" % config.plugins.RSDownloader.lists_directory.value).replace("//", "/"), "a")
-				f.write("%s\n"%url)
+				f.write("%s\n" % url)
 				f.close()
 				self.session.open(MessageBox, (_("Added %s to the download-list.") % url), MessageBox.TYPE_INFO)
 			except:
 				self.session.open(MessageBox, (_("Error while adding %s to the download-list!") % url), MessageBox.TYPE_ERROR)
 
 	def search(self):
-		getPage("http://rapidshare-search-engine.com/index-s_submit=Search&sformval=1&s_type=0&what=1&s=%s&start=%d.html"%(self.searchFor, self.curPage)).addCallback(self.searchCallback).addErrback(self.searchError)
+		getPage("http://rapidshare-search-engine.com/index-s_submit=Search&sformval=1&s_type=0&what=1&s=%s&start=%d.html" % (self.searchFor, self.curPage)).addCallback(self.searchCallback).addErrback(self.searchError)
 
 	def searchCallback(self, html=""):
 		list = []
 		files = []
-		
+
 		if html.__contains__("Nothing found, sorry."):
 			self.session.open(MessageBox, (_("Error while searching http://rapidshare-search-engine.com!\n\nError: Nothing found, sorry.")), MessageBox.TYPE_ERROR)
 			self.instance.setTitle(_("Nothing found, sorry."))
@@ -931,45 +956,45 @@ class RSSearch(Screen):
 			tmp = html
 			while tmp.__contains__("goPg('"):
 				idx = tmp.index("goPg('")
-				tmp = tmp[idx+6:]
+				tmp = tmp[idx + 6:]
 				idx = tmp.index("'")
 				pageNumber = tmp[:idx]
-				
+
 				try:
 					pageNumber = int(pageNumber)
 					if pageNumber > self.maxPage:
 						self.maxPage = pageNumber
 				except:
 					pass
-				
-				self.instance.setTitle(_("Page %d / %d. Push < > to switch the page...")%(self.curPage, self.maxPage))
-			
+
+				self.instance.setTitle(_("Page %d / %d. Push < > to switch the page...") % (self.curPage, self.maxPage))
+
 			while html.__contains__('title="Download"'):
 				idx = html.index('title="Download"')
 				html = html[idx:]
 				idx = html.index('value="')
-				html = html[idx+7:]
+				html = html[idx + 7:]
 				idx = html.index('"')
 				size = html[:idx]
 				idx = html.index('http://rapidshare.com/')
 				html = html[idx:]
 				idx = html.index('"')
 				url = html[:idx]
-				
-				files.append(url) 
+
+				files.append(url)
 				try:
 					urllist = url.split("/")
 					idx = len(urllist) - 1
 					name = urllist[idx]
-					list.append("%s - %s"%(size, name))
+					list.append("%s - %s" % (size, name))
 				except:
-					list.append("%s - %s"%(size, url))
-		
+					list.append("%s - %s" % (size, url))
+
 		self.files = files
 		self["list"].setList(list)
 
 	def searchError(self, error=""):
-		self.session.open(MessageBox, (_("Error while searching http://rapidshare-search-engine.com!\n\nError: %s")%str(error)), MessageBox.TYPE_ERROR)
+		self.session.open(MessageBox, (_("Error while searching http://rapidshare-search-engine.com!\n\nError: %s") % str(error)), MessageBox.TYPE_ERROR)
 
 	def previousPage(self):
 		if self.curPage > 1:
@@ -985,6 +1010,7 @@ class RSSearch(Screen):
 
 ##############################################################################
 
+
 class RSLogScreen(ChangedScreen):
 	skin = """
 		<screen position="center,center" size="560,450" title="RS Downloader">
@@ -993,7 +1019,7 @@ class RSLogScreen(ChangedScreen):
 
 	def __init__(self, session):
 		ChangedScreen.__init__(self, session)
-		
+
 		try:
 			f = open("/tmp/rapidshare.log")
 			log = f.read()
@@ -1001,7 +1027,7 @@ class RSLogScreen(ChangedScreen):
 		except:
 			log = ""
 		self["label"] = ScrollLabel(log)
-		
+
 		self["actions"] = ActionMap(["WizardActions"],
 			{
 				"ok": self.close,
@@ -1013,6 +1039,7 @@ class RSLogScreen(ChangedScreen):
 			}, -1)
 
 ##############################################################################
+
 
 class RSContainerSelector(ChangedScreen):
 	skin = """
@@ -1031,6 +1058,7 @@ class RSContainerSelector(ChangedScreen):
 
 ##############################################################################
 
+
 class UnrarEntry:
 	def __init__(self, name, password, package=None):
 		self.name = name
@@ -1040,7 +1068,7 @@ class UnrarEntry:
 		self.console = None
 		self.command = None
 		self.package = None
-		self.list = ("%s/%s"%(config.plugins.RSDownloader.lists_directory.value, self.name)).replace("//", "/")
+		self.list = ("%s/%s" % (config.plugins.RSDownloader.lists_directory.value, self.name)).replace("//", "/")
 		if package is None:
 			try:
 				f = open(self.list, "r")
@@ -1051,7 +1079,7 @@ class UnrarEntry:
 					elif line.startswith("http://") and (line.__contains__("part1.rar") or line.__contains__("part01.rar") or line.__contains__("part001.rar")):
 						package = line.split("/")[-1]
 						package = package.replace("\n", "").replace("\r", "")
-						package = ("%s/%s"%(config.plugins.RSDownloader.downloads_directory.value, package)).replace("//", "/")
+						package = ("%s/%s" % (config.plugins.RSDownloader.downloads_directory.value, package)).replace("//", "/")
 						break
 				f.close()
 			except:
@@ -1059,9 +1087,9 @@ class UnrarEntry:
 		if package:
 			self.package = package
 			if self.password:
-				self.command = "unrar -p%s -o+ x %s %s"%(self.password, package, config.plugins.RSDownloader.downloads_directory.value)
+				self.command = "unrar -p%s -o+ x %s %s" % (self.password, package, config.plugins.RSDownloader.downloads_directory.value)
 			else:
-				self.command = "unrar -o+ x %s %s"%(package, config.plugins.RSDownloader.downloads_directory.value)
+				self.command = "unrar -o+ x %s %s" % (package, config.plugins.RSDownloader.downloads_directory.value)
 		else:
 			writeLog("Error finding rar-archives in list: " + self.name)
 
@@ -1074,7 +1102,7 @@ class UnrarEntry:
 	def unrarDataAvailable(self, result, retval, extra_args):
 		self.working = False
 		try:
-			fileName = ("%s/%s_unrar.txt"%(config.plugins.RSDownloader.downloads_directory.value, self.name)).replace("//", "/")
+			fileName = ("%s/%s_unrar.txt" % (config.plugins.RSDownloader.downloads_directory.value, self.name)).replace("//", "/")
 			f = open(fileName, "w")
 			f.write(result)
 			f.close()
@@ -1096,14 +1124,15 @@ class UnrarEntry:
 
 ##############################################################################
 
+
 class Unrar:
 	def __init__(self):
 		self.list = []
 		self.timer = eTimer()
 		self.timer.callback.append(self.checkUnrar)
 		self.timer.start(30000, 1)
-		self.xmlFile = ("%s/unrar.xml"%config.plugins.RSDownloader.lists_directory.value).replace("//", "/")
-		
+		self.xmlFile = ("%s/unrar.xml" % config.plugins.RSDownloader.lists_directory.value).replace("//", "/")
+
 	def addToList(self, name, password, package=None):
 		entry = UnrarEntry(name, password, package)
 		self.list.append(entry)
@@ -1149,7 +1178,7 @@ class Unrar:
 			entry = self.getFirstEmptyList()
 			if entry:
 				if entry.command:
-					writeLog("Start unpacking: %s"%entry.name)
+					writeLog("Start unpacking: %s" % entry.name)
 					entry.finishCallback = self.cleanFinishedEntry
 					entry.startUnrar()
 				else:
@@ -1161,7 +1190,7 @@ class Unrar:
 			self.timer.start(30000, 1)
 
 	def cleanFinishedEntry(self, name):
-		writeLog("Unpacking finished: %s"%name)
+		writeLog("Unpacking finished: %s" % name)
 		self.deleteEntry(name)
 		self.checkUnrar()
 
@@ -1189,17 +1218,20 @@ class Unrar:
 		for x in self.list:
 			name = self.decode_charset(x.name, "utf-8")
 			password = self.decode_charset(x.password, "utf-8")
-			xml += '\t<entry name="%s" password="%s" package="%s" />\n'%(name.encode("utf-8"), password.encode("utf-8"), x.package)
+			xml += '\t<entry name="%s" password="%s" package="%s" />\n' % (name.encode("utf-8"), password.encode("utf-8"), x.package)
 		xml += '</unrar>\n'
 		try:
 			f = open(self.xmlFile, "w")
 			f.write(xml)
 			f.close()
 		except:
-			writeLog("Error writing unrar xml file: %s"%self.xmlFile)
+			writeLog("Error writing unrar xml file: %s" % self.xmlFile)
+
+
 unrar = Unrar()
 
 ##############################################################################
+
 
 class UnrarPackageSelector(ChangedScreen):
 	skin = """
@@ -1209,15 +1241,15 @@ class UnrarPackageSelector(ChangedScreen):
 
 	def __init__(self, session):
 		ChangedScreen.__init__(self, session)
-		
+
 		self["list"] = MenuList([])
-		
+
 		self["actions"] = ActionMap(["OkCancelActions"],
 			{
 				"ok": self.okClicked,
 				"cancel": self.close
 			}, -1)
-		
+
 		self.onLayoutFinish.append(self.updateList)
 
 	def updateList(self):
@@ -1252,6 +1284,7 @@ class UnrarPackageSelector(ChangedScreen):
 
 ##############################################################################
 
+
 class UnrarManager(ChangedScreen):
 	skin = """
 		<screen position="center,center" size="560,450" title="RS Downloader">
@@ -1267,18 +1300,18 @@ class UnrarManager(ChangedScreen):
 	def __init__(self, session):
 		ChangedScreen.__init__(self, session)
 		self.session = session
-		
+
 		self["key_red"] = Label(_("Delete"))
 		self["key_green"] = Label(_("Add"))
 		self["list"] = MenuList([])
-		
+
 		self["actions"] = ActionMap(["ColorActions", "OkCancelActions"],
 			{
 				"red": self.delete,
 				"green": self.add,
 				"cancel": self.close
 			}, prio=-1)
-		
+
 		self.onLayoutFinish.append(self.updateList)
 
 	def updateList(self):
@@ -1307,6 +1340,7 @@ class UnrarManager(ChangedScreen):
 
 ##############################################################################
 
+
 class RSList(MenuList):
 	def __init__(self, list):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
@@ -1315,17 +1349,19 @@ class RSList(MenuList):
 
 ##############################################################################
 
+
 def RSListEntry(download):
 	res = [(download)]
 	res.append(MultiContentEntryText(pos=(0, 0), size=(170, 25), font=0, text=download.name))
-	res.append(MultiContentEntryText(pos=(175, 0), size=(75, 25), font=0, text="%d%s"%(download.size, "MB"), flags=RT_HALIGN_CENTER))
+	res.append(MultiContentEntryText(pos=(175, 0), size=(75, 25), font=0, text="%d%s" % (download.size, "MB"), flags=RT_HALIGN_CENTER))
 	res.append(MultiContentEntryPixmapAlphaTest(pos=(260, 9), size=(84, 7), png=LoadPixmap(cached=True, path=resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/progress_bg.png"))))
 	res.append(MultiContentEntryPixmapAlphaTest(pos=(260, 10), size=(int(0.84 * download.progress), 5), png=LoadPixmap(cached=True, path=resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/progress_small.png"))))
-	res.append(MultiContentEntryText(pos=(360, 0), size=(60, 25), font=0, text="%d%s"%(download.progress, "%"), flags=RT_HALIGN_CENTER))
+	res.append(MultiContentEntryText(pos=(360, 0), size=(60, 25), font=0, text="%d%s" % (download.progress, "%"), flags=RT_HALIGN_CENTER))
 	res.append(MultiContentEntryText(pos=(420, 0), size=(140, 25), font=0, text=download.status, flags=RT_HALIGN_RIGHT))
 	return res
 
 ##############################################################################
+
 
 class RSMain(ChangedScreen):
 	skin = """
@@ -1346,17 +1382,17 @@ class RSMain(ChangedScreen):
 	def __init__(self, session):
 		ChangedScreen.__init__(self, session)
 		self.session = session
-		
+
 		self["key_red"] = Label(_("Delete"))
 		self["key_green"] = Label(_("Search"))
 		self["key_yellow"] = Label(_("Add"))
 		self["key_blue"] = Label(_("Config"))
 		self["key_menu"] = Label(_("Menu"))
 		self["list"] = RSList([])
-		
+
 		self.refreshTimer = eTimer()
 		self.refreshTimer.callback.append(self.updateList)
-		
+
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "InfobarMenuActions"],
 			{
 				"mainMenu": self.menu,
@@ -1366,7 +1402,7 @@ class RSMain(ChangedScreen):
 				"yellow": self.add,
 				"blue": self.config
 			}, prio=-1)
-		
+
 		self.onLayoutFinish.append(self.updateList)
 
 	def menu(self):
@@ -1433,7 +1469,7 @@ class RSMain(ChangedScreen):
 			if cur.status == _("Finished"):
 				rapidshare.clearFinishedDownload(cur.url)
 			else:
-				self.session.openWithCallback(self.deleteCallback, MessageBox, (_("Delete %s?")%cur.name))
+				self.session.openWithCallback(self.deleteCallback, MessageBox, (_("Delete %s?") % cur.name))
 
 	def deleteCallback(self, callback):
 		if callback:
@@ -1447,7 +1483,6 @@ class RSMain(ChangedScreen):
 	def searchCallback(self, callback):
 		if callback is not None and callback != "":
 			self.session.openWithCallback(self.searchScreenCallback, RSSearch, callback)
-
 
 	def searchScreenCallback(self):
 		self.refreshTimer.stop()
@@ -1486,7 +1521,7 @@ class RSMain(ChangedScreen):
 
 	def addContainerCallback(self, callback=None):
 		if callback:
-			file = "%s/%s"%(config.plugins.RSDownloader.lists_directory.value, callback)
+			file = "%s/%s" % (config.plugins.RSDownloader.lists_directory.value, callback)
 			file = file.replace("//", "/")
 			links = decrypt(file)
 			if links:
@@ -1497,7 +1532,7 @@ class RSMain(ChangedScreen):
 							link = link[:-5]
 						elif link.endswith(".htm"):
 							link = link[:-4]
-						f.write("%s\n"%link)
+						f.write("%s\n" % link)
 					f.close()
 					remove(file)
 				except:
@@ -1510,6 +1545,7 @@ class RSMain(ChangedScreen):
 
 ##############################################################################
 
+
 def autostart(reason, **kwargs):
 	if reason == 0:
 		rapidshare.startDownloading()
@@ -1519,13 +1555,14 @@ def autostart(reason, **kwargs):
 
 ##############################################################################
 
+
 def main(session, **kwargs):
 	session.open(RSMain)
 
 ##############################################################################
 
+
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, fnc=autostart),
 		PluginDescriptor(name=_("RS Downloader"), description=_("Download files from rapidshare"), where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU], icon="rs.png", fnc=main)]
-

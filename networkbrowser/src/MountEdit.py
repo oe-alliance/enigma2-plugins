@@ -17,6 +17,7 @@ from re import sub as re_sub
 
 from boxbranding import getImageDistro
 
+
 class AutoMountEdit(Screen, ConfigListScreen):
 	skin = """
 		<screen name="AutoMountEdit" position="center,center" size="560,450" title="MountEdit">
@@ -31,17 +32,17 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="160,350" zPosition="1" size="1,1" transparent="1" alphatest="on" />
 		</screen>"""
 
-	def __init__(self, session, plugin_path, mountinfo = None, newmount = True):
+	def __init__(self, session, plugin_path, mountinfo=None, newmount=True):
 		self.skin_path = plugin_path
 		self.session = session
 		Screen.__init__(self, self.session)
 
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.mountinfo = mountinfo
 		self.newmount = newmount
 		if self.mountinfo is None:
 			#Initialize blank mount enty
-			self.mountinfo = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+			self.mountinfo = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 
 		self.applyConfigRef = None
 		self.updateConfigRef = None
@@ -63,7 +64,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		}, -2)
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list,session = self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 		self.createSetup()
 		self.onLayoutFinish.append(self.layoutFinished)
 		# Initialize Buttons
@@ -208,18 +209,18 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		if password is False:
 			password = ""
 
-		self.mountusingConfigEntry = NoSave(ConfigSelection(self.mountusing, default = mountusing ))
-		self.activeConfigEntry = NoSave(ConfigEnableDisable(default = active))
-		self.ipConfigEntry = NoSave(ConfigIP(default = ip))
-		self.sharenameConfigEntry = NoSave(ConfigText(default = sharename, visible_width = 50, fixed_size = False))
-		self.sharedirConfigEntry = NoSave(ConfigText(default = sharedir, visible_width = 50, fixed_size = False))
-		self.optionsConfigEntry = NoSave(ConfigText(default = defaultOptions, visible_width = 50, fixed_size = False))
+		self.mountusingConfigEntry = NoSave(ConfigSelection(self.mountusing, default=mountusing))
+		self.activeConfigEntry = NoSave(ConfigEnableDisable(default=active))
+		self.ipConfigEntry = NoSave(ConfigIP(default=ip))
+		self.sharenameConfigEntry = NoSave(ConfigText(default=sharename, visible_width=50, fixed_size=False))
+		self.sharedirConfigEntry = NoSave(ConfigText(default=sharedir, visible_width=50, fixed_size=False))
+		self.optionsConfigEntry = NoSave(ConfigText(default=defaultOptions, visible_width=50, fixed_size=False))
 		if options is not False:
 			self.optionsConfigEntry.value = options
-		self.usernameConfigEntry = NoSave(ConfigText(default = username, visible_width = 50, fixed_size = False))
-		self.passwordConfigEntry = NoSave(ConfigPassword(default = password, visible_width = 50, fixed_size = False))
-		self.mounttypeConfigEntry = NoSave(ConfigSelection(self.sharetypelist, default = mounttype ))
-		self.hdd_replacementConfigEntry = NoSave(ConfigYesNo(default = hdd_replacement))
+		self.usernameConfigEntry = NoSave(ConfigText(default=username, visible_width=50, fixed_size=False))
+		self.passwordConfigEntry = NoSave(ConfigPassword(default=password, visible_width=50, fixed_size=False))
+		self.mounttypeConfigEntry = NoSave(ConfigSelection(self.sharetypelist, default=mounttype))
+		self.hdd_replacementConfigEntry = NoSave(ConfigYesNo(default=hdd_replacement))
 
 	def createSetup(self):
 		self.list = []
@@ -259,7 +260,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 				options = self.mountinfo['options']
 			else:
 				options = defaultOptions
-			self.optionsConfigEntry = NoSave(ConfigText(default = defaultOptions, visible_width = 50, fixed_size = False))
+			self.optionsConfigEntry = NoSave(ConfigText(default=defaultOptions, visible_width=50, fixed_size=False))
 			if options is not False:
 				self.optionsConfigEntry.value = options
 			self.createSetup()
@@ -267,17 +268,17 @@ class AutoMountEdit(Screen, ConfigListScreen):
 	def KeyText(self):
 		print "Green Pressed"
 		if self["config"].getCurrent() == self.sharenameEntry:
-			self.session.openWithCallback(lambda x : self.VirtualKeyBoardCallback(x, 'sharename'), VirtualKeyBoard, title = (_("Enter share name:")), text = self.sharenameConfigEntry.value)
+			self.session.openWithCallback(lambda x: self.VirtualKeyBoardCallback(x, 'sharename'), VirtualKeyBoard, title=(_("Enter share name:")), text=self.sharenameConfigEntry.value)
 		if self["config"].getCurrent() == self.sharedirEntry:
-			self.session.openWithCallback(lambda x : self.VirtualKeyBoardCallback(x, 'sharedir'), VirtualKeyBoard, title = (_("Enter share directory:")), text = self.sharedirConfigEntry.value)
+			self.session.openWithCallback(lambda x: self.VirtualKeyBoardCallback(x, 'sharedir'), VirtualKeyBoard, title=(_("Enter share directory:")), text=self.sharedirConfigEntry.value)
 		if self["config"].getCurrent() == self.optionsEntry:
-			self.session.openWithCallback(lambda x : self.VirtualKeyBoardCallback(x, 'options'), VirtualKeyBoard, title = (_("Enter options:")), text = self.optionsConfigEntry.value)
+			self.session.openWithCallback(lambda x: self.VirtualKeyBoardCallback(x, 'options'), VirtualKeyBoard, title=(_("Enter options:")), text=self.optionsConfigEntry.value)
 		if self["config"].getCurrent() == self.usernameEntry:
-			self.session.openWithCallback(lambda x : self.VirtualKeyBoardCallback(x, 'username'), VirtualKeyBoard, title = (_("Enter username:")), text = self.usernameConfigEntry.value)
+			self.session.openWithCallback(lambda x: self.VirtualKeyBoardCallback(x, 'username'), VirtualKeyBoard, title=(_("Enter username:")), text=self.usernameConfigEntry.value)
 		if self["config"].getCurrent() == self.passwordEntry:
-			self.session.openWithCallback(lambda x : self.VirtualKeyBoardCallback(x, 'password'), VirtualKeyBoard, title = (_("Enter password:")), text = self.passwordConfigEntry.value)
+			self.session.openWithCallback(lambda x: self.VirtualKeyBoardCallback(x, 'password'), VirtualKeyBoard, title=(_("Enter password:")), text=self.passwordConfigEntry.value)
 
-	def VirtualKeyBoardCallback(self, callback = None, entry = None):
+	def VirtualKeyBoardCallback(self, callback=None, entry=None):
 		if callback is not None and len(callback) and entry is not None and len(entry):
 			if entry == 'sharename':
 				self.sharenameConfigEntry.setValue(callback)
@@ -311,7 +312,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		else:
 			helpwindowpos = self["HelpWindow"].getPosition()
 			if current[1].help_window.instance is not None:
-				current[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
+				current[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
 				self["VKeyIcon"].boolean = True
 				self["VirtualKB"].setEnabled(True)
 
@@ -334,13 +335,13 @@ class AutoMountEdit(Screen, ConfigListScreen):
 				break
 
 		if not self.newmount and self.old_sharename and self.old_sharename != self.sharenameConfigEntry.value:
-			self.session.openWithCallback(self.updateConfig, MessageBox, _("You have changed the share name!\nUpdate existing entry and continue?\n"), default=False )
+			self.session.openWithCallback(self.updateConfig, MessageBox, _("You have changed the share name!\nUpdate existing entry and continue?\n"), default=False)
 		elif not self.newmount and self.old_sharename and self.old_sharename == self.sharenameConfigEntry.value and sharexists:
-			self.session.openWithCallback(self.updateConfig, MessageBox, _("A mount entry with this name already exists!\nUpdate existing entry and continue?\n"), default=False )
+			self.session.openWithCallback(self.updateConfig, MessageBox, _("A mount entry with this name already exists!\nUpdate existing entry and continue?\n"), default=False)
 		else:
-			self.session.openWithCallback(self.applyConfig, MessageBox, _("Are you sure you want to save this network mount?\n\n") )
+			self.session.openWithCallback(self.applyConfig, MessageBox, _("Are you sure you want to save this network mount?\n\n"))
 
-	def updateConfig(self, ret = False):
+	def updateConfig(self, ret=False):
 		if (ret == True):
 			sharedir = None
 			if self.old_sharename != self.sharenameConfigEntry.value:
@@ -364,7 +365,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			iAutoMount.setMountsAttribute(xml_sharename, "hdd_replacement", self.hdd_replacementConfigEntry.value)
 
 			self.updateConfigRef = None
-			self.updateConfigRef = self.session.openWithCallback(self.updateConfigfinishedCB, MessageBox, _("Please wait while updating your network mount..."), type = MessageBox.TYPE_INFO, enable_input = False)
+			self.updateConfigRef = self.session.openWithCallback(self.updateConfigfinishedCB, MessageBox, _("Please wait while updating your network mount..."), type=MessageBox.TYPE_INFO, enable_input=False)
 			iAutoMount.writeMountsConfig()
 			iAutoMount.getAutoMountPoints(self.updateConfigDataAvail, True)
 		else:
@@ -374,19 +375,19 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		if data is True:
 			self.updateConfigRef.close(True)
 
-	def updateConfigfinishedCB(self,data):
+	def updateConfigfinishedCB(self, data):
 		if data is True:
-			self.session.openWithCallback(self.Updatefinished, MessageBox, _("Your network mount has been updated."), type = MessageBox.TYPE_INFO, timeout = 10)
+			self.session.openWithCallback(self.Updatefinished, MessageBox, _("Your network mount has been updated."), type=MessageBox.TYPE_INFO, timeout=10)
 
-	def Updatefinished(self,data):
+	def Updatefinished(self, data):
 		if data is not None:
 			if data is True:
 				self.close()
 
-	def applyConfig(self, ret = False):
+	def applyConfig(self, ret=False):
 		if (ret == True):
-			data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, \
-					'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+			data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False,
+					'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 			data['mountusing'] = self.mountusingConfigEntry.value
 			data['active'] = self.activeConfigEntry.value
 			data['ip'] = self.ipConfigEntry.getText()
@@ -396,13 +397,13 @@ class AutoMountEdit(Screen, ConfigListScreen):
 				data['sharedir'] = self.sharedirConfigEntry.value[1:]
 			else:
 				data['sharedir'] = self.sharedirConfigEntry.value
-			data['options'] =  self.optionsConfigEntry.value
+			data['options'] = self.optionsConfigEntry.value
 			data['mounttype'] = self.mounttypeConfigEntry.value
 			data['username'] = self.usernameConfigEntry.value
 			data['password'] = self.passwordConfigEntry.value
 			data['hdd_replacement'] = self.hdd_replacementConfigEntry.value
 			self.applyConfigRef = None
-			self.applyConfigRef = self.session.openWithCallback(self.applyConfigfinishedCB, MessageBox, _("Please wait for activation of your network mount..."), type = MessageBox.TYPE_INFO, enable_input = False)
+			self.applyConfigRef = self.session.openWithCallback(self.applyConfigfinishedCB, MessageBox, _("Please wait for activation of your network mount..."), type=MessageBox.TYPE_INFO, enable_input=False)
 			iAutoMount.automounts[self.sharenameConfigEntry.value] = data
 			iAutoMount.writeMountsConfig()
 			iAutoMount.getAutoMountPoints(self.applyConfigDataAvail, True)
@@ -413,11 +414,11 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		if data is True:
 			self.applyConfigRef.close(True)
 
-	def applyConfigfinishedCB(self,data):
+	def applyConfigfinishedCB(self, data):
 		if data is True:
-			self.session.openWithCallback(self.applyfinished, MessageBox, _("Your network mount has been activated."), type = MessageBox.TYPE_INFO, timeout = 10)
+			self.session.openWithCallback(self.applyfinished, MessageBox, _("Your network mount has been activated."), type=MessageBox.TYPE_INFO, timeout=10)
 
-	def applyfinished(self,data):
+	def applyfinished(self, data):
 		if data is not None:
 			if data is True:
 				self.close()

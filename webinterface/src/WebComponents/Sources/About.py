@@ -2,6 +2,7 @@
 from Components.Sources.Source import Source
 from Components.Network import iNetwork
 
+
 class About(Source):
 	def __init__(self, session):
 		Source.__init__(self)
@@ -36,9 +37,5 @@ class About(Source):
 		return (l,)
 
 	list = property(command)
-	lut = { "lanMac": 0
-			, "lanDHCP": 1
-			, "lanIP": 2
-			, "lanMask": 3
-			, "lanGW": 4
+	lut = {"lanMac": 0			, "lanDHCP": 1			, "lanIP": 2			, "lanMask": 3			, "lanGW": 4
 		}

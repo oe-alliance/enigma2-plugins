@@ -30,21 +30,21 @@ from time import localtime, strftime
 
 # Constants
 SUBJECT = _("Found deactivated timer(s)")
-BODY    = _("Deactivated timer list:\n%s")
-TAG     = _("DeactivatedTimerPushed")
+BODY = _("Deactivated timer list:\n%s")
+TAG = _("DeactivatedTimerPushed")
 
 
 class DeactivatedTimers(ControllerBase):
-	
+
 	ForceSingleInstance = True
-	
+
 	def __init__(self):
 		# Is called on instance creation
 		ControllerBase.__init__(self)
 		self.timers = []
-		
+
 		# Default configuration
-		self.setOption( 'remove_timer', NoSave(ConfigYesNo( default = False )), _("Remove deactivated timer(s)") )
+		self.setOption('remove_timer', NoSave(ConfigYesNo(default=False)), _("Remove deactivated timer(s)"))
 
 	def run(self, callback, errback):
 		# At the end a plugin has to call one of the functions: callback or errback
@@ -59,9 +59,9 @@ class DeactivatedTimers(ControllerBase):
 							+ strftime(_("%H:%M"), localtime(timer.end)) + "    " \
 							+ str(timer.service_ref and timer.service_ref.getServiceName() or "") \
 							+ "\n"
-				self.timers.append( timer )
+				self.timers.append(timer)
 		if self.timers and text:
-			callback( SUBJECT, BODY % text )
+			callback(SUBJECT, BODY % text)
 		else:
 			callback()
 

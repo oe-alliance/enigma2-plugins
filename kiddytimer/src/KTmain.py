@@ -30,15 +30,16 @@ PARAM_SETTIMER = 7
 PARAM_ENABLETIMERONCE = 8
 PARAM_RESETTIMER = 9
 
-class KiddyTimerScreen(Screen):    
+
+class KiddyTimerScreen(Screen):
 
     def __init__(self, session):
         Screen.__init__(self, session)
         self.skin = KTglob.SKIN
         self.onShow.append(self.movePosition)
-        
+
         self.skin_path = KTglob.plugin_path
-        
+
         self["TimerGraph"] = KTmultiPixmap()
         self["TimerText"] = Label(_("??:??"))
         self["TimerSlider"] = ProgressBar()
@@ -47,9 +48,9 @@ class KiddyTimerScreen(Screen):
         self["TimerTransparentText"] = Label(_("01:00"))
 
     def renderScreen(self):
-        self["TimerSlider"].setValue(int(kiddyTimer.remainingPercentage*100)) 
+        self["TimerSlider"].setValue(int(kiddyTimer.remainingPercentage * 100))
         self["TimerGraph"].setPixmapNum(kiddyTimer.curImg)
-        self.sTimeLeft = KTglob.getTimeFromSeconds( (kiddyTimer.remainingTime + 59) , False ) # Add 59 Seconds to show one minute if less than 1 minute left...
+        self.sTimeLeft = KTglob.getTimeFromSeconds((kiddyTimer.remainingTime + 59), False) # Add 59 Seconds to show one minute if less than 1 minute left...
         self["TimerText"].setText(self.sTimeLeft)
         self["TimerSliderText"].setText(self.sTimeLeft)
         self["TimerTransparentText"].setText(self.sTimeLeft)
@@ -57,7 +58,7 @@ class KiddyTimerScreen(Screen):
         if config.plugins.KiddyTimer.timerStyle.value == "clock":
             self["TimerGraph"].show()
             self["TimerText"].show()
-            self["TimerSlider"].hide()    
+            self["TimerSlider"].hide()
             self["TimerSliderText"].hide()
             self["TimerTransparent"].hide()
             self["TimerTransparentText"].hide()
@@ -86,13 +87,14 @@ class KiddyTimerScreen(Screen):
         for sPixmap in self["TimerGraph"].pixmapFiles:
             i = int(sPixmap[-8:-4])
             self.percentageList.append(i)
-      
+
 ##############################################################################
+
 
 class KiddyTimer():
 
     def __init__(self):
-        self.session = None 
+        self.session = None
         self.dialog = None
         self.active = False
 
@@ -109,23 +111,23 @@ class KiddyTimer():
         self.observeTimer = eTimer()
         self.observeTimer.callback.append(self.observeTime)
 
-        config.misc.standbyCounter.addNotifier(self.enterStandby, initial_call = False)
+        config.misc.standbyCounter.addNotifier(self.enterStandby, initial_call=False)
 
     def gotSession(self, session):
         self.session = session
-        self.startTimer()   
-         
-    def enterStandby(self,configElement):
+        self.startTimer()
+
+    def enterStandby(self, configElement):
         Standby.inStandby.onClose.append(self.endStandby)
-        self.stopTimer()    
-      
+        self.stopTimer()
+
     def endStandby(self):
         self.sessionStartTime = None
         self.startTimer()
-        
-    def startTimer(self,bForceStart=False,iRemainingSeconds=0):
-        curStartYear = time.localtime().tm_year 
-        if curStartYear < 2011: 
+
+    def startTimer(self, bForceStart=False, iRemainingSeconds=0):
+        curStartYear = time.localtime().tm_year
+        if curStartYear < 2011:
             # Time has not yet been set from transponder, wait until it has been set
             eDVBLocalTimeHandler.getInstance().m_timeUpdated.get().append(self.gotTime)
         else:
@@ -134,11 +136,11 @@ class KiddyTimer():
                 self.enabled = True
             else:
                 self.enabled = config.plugins.KiddyTimer.enabled.value
-            if (self.enabled == True and self.timerHasToRun()) or bForceStart:   
+            if (self.enabled == True and self.timerHasToRun()) or bForceStart:
                 # This command may be double, just made to be sure, the observer is stopped when the real timer starts
                 self.stopObserve()
                 # Date of the current day
-                self.currentDay = time.strftime("%d.%m.%Y" , time.localtime())
+                self.currentDay = time.strftime("%d.%m.%Y", time.localtime())
                 # First check for Cheat- attempts by kids
                 if self.detectCheatAttempt():
                     config.plugins.KiddyTimer.remainingTime.value = 0
@@ -150,12 +152,12 @@ class KiddyTimer():
                 elif self.currentDay != config.plugins.KiddyTimer.lastStartDay.getValue():
                     self.resetTimer()
                     bDoStandardInit = False
-                if bDoStandardInit:             
+                if bDoStandardInit:
                     self.setCurrentDayTime()
                     self.setSessionTime(config.plugins.KiddyTimer.remainingTime.getValue())
                     self.setRemainingTime(self.sessionTime)
                     self.setSessionStartTime()
-    
+
                 self.setPluginStatus("RUNNING")
                 self.toggleActiveState(True)
                 if not bForceStart:
@@ -169,7 +171,7 @@ class KiddyTimer():
     def gotTime(self):
         eDVBLocalTimeHandler.getInstance().m_timeUpdated.get().remove(self.gotTime)
         self.startTimer()
-    
+
     def stopTimer(self):
         if self.active:
             self.saveValues()
@@ -179,52 +181,52 @@ class KiddyTimer():
         self.setPluginStatus("SHUTDOWN")
         self.iServiceReference = None
         self.dialog = None
-                
-    def resetTimer(self,**kwargs):
+
+    def resetTimer(self, **kwargs):
         if "setTime" in kwargs.keys():
             self.setCurrentDayTime(kwargs["setTime"])
-        else:            
+        else:
             self.setCurrentDayTime()
-        
+
         self.setSessionTime(self.currentDayTime)
         self.setRemainingTime(self.currentDayTime)
         self.setSessionStartTime()
 
     def timerHasToRun(self):
         curStartTime = time.localtime()
-        iPluginStart = KTglob.getSecondsFromClock( [curStartTime[3],curStartTime[4]] )
-        iMonitorEnd = KTglob.getSecondsFromClock(config.plugins.KiddyTimer.monitorEndTime.getValue())  
-        iMonitorStart = KTglob.getSecondsFromClock(config.plugins.KiddyTimer.monitorStartTime.getValue())  
+        iPluginStart = KTglob.getSecondsFromClock([curStartTime[3], curStartTime[4]])
+        iMonitorEnd = KTglob.getSecondsFromClock(config.plugins.KiddyTimer.monitorEndTime.getValue())
+        iMonitorStart = KTglob.getSecondsFromClock(config.plugins.KiddyTimer.monitorStartTime.getValue())
         return (iPluginStart < iMonitorEnd) & (iPluginStart >= iMonitorStart)
 
     def startLoop(self):
-        self.loopTimer.start(self.loopTimerStep,1)
-    
+        self.loopTimer.start(self.loopTimerStep, 1)
+
     def stopLoop(self):
         self.loopTimer.stop()
-    
+
     def startObserve(self):
         curStartTime = time.localtime()
-        iPluginStart = KTglob.getSecondsFromClock( [curStartTime[3],curStartTime[4]] )
-        iMonitorStart = KTglob.getSecondsFromClock(config.plugins.KiddyTimer.monitorStartTime.getValue())  
+        iPluginStart = KTglob.getSecondsFromClock([curStartTime[3], curStartTime[4]])
+        iMonitorStart = KTglob.getSecondsFromClock(config.plugins.KiddyTimer.monitorStartTime.getValue())
 
         # If we are after Pluginstart, then sleep until next day
         if (iPluginStart > iMonitorStart):
             iMonitorStart += 86400
 
-        iObserveTimerStep = (iMonitorStart - iPluginStart)*1000 + 1000
+        iObserveTimerStep = (iMonitorStart - iPluginStart) * 1000 + 1000
         print "[KiddyTimer] setting plugin idle for ms=", iObserveTimerStep
         self.observeTimer.start(iObserveTimerStep, False)
-        
+
     def stopObserve(self):
         self.observeTimer.stop()
-    
+
     def observeTime(self):
         print "[KiddyTimer] Observer checking if plugin has to run"
         if (self.timerHasToRun()):
             self.stopObserve()
             self.startTimer()
-    
+
     def detectCheatAttempt(self):
         sLastStatus = config.plugins.KiddyTimer.lastStatus.value
         if (sLastStatus == "RUNNING"):
@@ -234,7 +236,7 @@ class KiddyTimer():
         else:
             return False
 
-    def setPluginStatus(self,sStatus):
+    def setPluginStatus(self, sStatus):
         # Set values for detection of cheat attempts
         config.plugins.KiddyTimer.lastStatus.value = sStatus
         config.plugins.KiddyTimer.lastStatus.save()
@@ -252,8 +254,8 @@ class KiddyTimer():
         self.startLoop()
 
     def askForPIN(self):
-        self.session.openWithCallback( self.pinEntered, PinInput, pinList = [config.plugins.KiddyTimer.pin.getValue()], triesEntry = self.getTriesEntry(), title = _("Please enter the correct pin code"), windowTitle = _("Enter pin code"))
-    
+        self.session.openWithCallback(self.pinEntered, PinInput, pinList=[config.plugins.KiddyTimer.pin.getValue()], triesEntry=self.getTriesEntry(), title=_("Please enter the correct pin code"), windowTitle=_("Enter pin code"))
+
     def getTriesEntry(self):
         return config.ParentalControl.retries.setuppin
 
@@ -262,7 +264,7 @@ class KiddyTimer():
             pass
         else:
             if self.callbackParameter == PARAM_STOPTIMER:
-                self.stopTimer()      
+                self.stopTimer()
             elif self.callbackParameter == PARAM_DISABLETIMER:
                 self.toggleEnabledState(False)
             elif self.callbackParameter == PARAM_INCREASETIMER:
@@ -274,22 +276,21 @@ class KiddyTimer():
             elif self.callbackParameter == PARAM_ENABLETIMERONCE:
                 self.session.openWithCallback(self.callbackEnableTimerOnce, MinuteInput)
 
-    def setCurrentDayTime(self,iDayTime=PARAM_NONE):
+    def setCurrentDayTime(self, iDayTime=PARAM_NONE):
         if iDayTime == PARAM_NONE:
             iDayTime = KTglob.getTodaysTimeInSeconds()
         self.currentDayTime = iDayTime
 
     def setSessionStartTime(self):
         self.sessionStartTime = time.localtime()
-                
+
     def modifySessionTime(self, iMinutes):
         iSeconds = iMinutes * 60
         if self.callbackParameter == PARAM_INCREASETIMER:
             iSeconds += self.sessionTime
         else:
-            iSeconds = self.sessionTime - iSeconds 
+            iSeconds = self.sessionTime - iSeconds
         self.setSessionTime(iSeconds)
-        
 
     def setSessionTime(self, iSeconds):
         self.sessionTime = iSeconds
@@ -298,7 +299,7 @@ class KiddyTimer():
         if self.sessionTime < 0:
             self.sessionTime = 0
 
-    def setRemainingTime(self,iRemaining):
+    def setRemainingTime(self, iRemaining):
         if iRemaining < 0:
             iRemaining = 0
         self.remainingTime = iRemaining
@@ -310,7 +311,7 @@ class KiddyTimer():
     def callbackSetTimer(self, iMinutes):
         iSeconds = iMinutes * 60
         self.resetTimer(setTime=iSeconds)
-                
+
     def callbackEnableTimerOnce(self, iMinutes):
         iSeconds = iMinutes * 60
         if iSeconds > 0:
@@ -318,8 +319,8 @@ class KiddyTimer():
             if self.active:
                 self.stopTimer()
             self.startTimer(True, iSeconds)
-    
-    def toggleActiveState(self , bStatus):
+
+    def toggleActiveState(self, bStatus):
         # Initialize dialog
         if self.dialog == None and bStatus:
             self.dialog = self.session.instantiateDialog(KiddyTimerScreen)
@@ -355,7 +356,7 @@ class KiddyTimer():
                 self.remainingPercentage = 0
 
             self.setImageNumber()
-            
+
             if self.remainingTime == 0:
                 self.iServiceReference = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
                 NavigationInstance.instance.stopService()
@@ -365,7 +366,7 @@ class KiddyTimer():
             self.stopTimer()
 
     def setImageNumber(self):
-        iCurPercent = int( self.remainingPercentage * 1000 )
+        iCurPercent = int(self.remainingPercentage * 1000)
         iCount = 0
         for iPercent in self.dialog.percentageList:
            if iCurPercent <= iPercent:
@@ -374,12 +375,12 @@ class KiddyTimer():
         if iCount < 0:
             iCount = 0
         self.curImg = iCount
-        
+
     def saveValues(self):
-        if hasattr(self,"currentDay"):
+        if hasattr(self, "currentDay"):
             config.plugins.KiddyTimer.lastStartDay.value = self.currentDay
             config.plugins.KiddyTimer.lastStartDay.save()
-        if hasattr(self,"remainingTime"):
+        if hasattr(self, "remainingTime"):
             config.plugins.KiddyTimer.remainingTime.value = int(self.remainingTime)
             config.plugins.KiddyTimer.remainingTime.save()
 
@@ -387,35 +388,36 @@ class KiddyTimer():
         keyList = []
         if self.enabled:
             if self.active:
-                keyList.append((_("Stop KiddyTimer (this session only)"),PARAM_STOPTIMER))
-                keyList.append((_("Increase remaining time"),PARAM_INCREASETIMER))
-                keyList.append((_("Decrease remaining time"),PARAM_DECREASETIMER))
-                keyList.append((_("Set remaining time"),PARAM_SETTIMER))
-                keyList.append((_("Reset todays remaining time"),PARAM_RESETTIMER))
+                keyList.append((_("Stop KiddyTimer (this session only)"), PARAM_STOPTIMER))
+                keyList.append((_("Increase remaining time"), PARAM_INCREASETIMER))
+                keyList.append((_("Decrease remaining time"), PARAM_DECREASETIMER))
+                keyList.append((_("Set remaining time"), PARAM_SETTIMER))
+                keyList.append((_("Reset todays remaining time"), PARAM_RESETTIMER))
             else:
-                keyList.append((_("Start KiddyTimer"),PARAM_STARTTIMER))
-            keyList.append((_("Enable KiddyTimer for x minutes"),PARAM_ENABLETIMERONCE))
-            keyList.append((_("Disable KiddyTimer"),PARAM_DISABLETIMER))
+                keyList.append((_("Start KiddyTimer"), PARAM_STARTTIMER))
+            keyList.append((_("Enable KiddyTimer for x minutes"), PARAM_ENABLETIMERONCE))
+            keyList.append((_("Disable KiddyTimer"), PARAM_DISABLETIMER))
         else:
-            keyList.append((_("Enable KiddyTimer"),PARAM_ENABLETIMER))
-            keyList.append((_("Enable KiddyTimer for x minutes"),PARAM_ENABLETIMERONCE))
-        self.session.openWithCallback(self.DoSelectionExtensionsMenu,ChoiceBox,_("Please select your KiddyTimer- option"),keyList)
-        
-    def DoSelectionExtensionsMenu(self,answer):
+            keyList.append((_("Enable KiddyTimer"), PARAM_ENABLETIMER))
+            keyList.append((_("Enable KiddyTimer for x minutes"), PARAM_ENABLETIMERONCE))
+        self.session.openWithCallback(self.DoSelectionExtensionsMenu, ChoiceBox, _("Please select your KiddyTimer- option"), keyList)
+
+    def DoSelectionExtensionsMenu(self, answer):
         self.callbackParameter = PARAM_NONE
         if answer is None:
             pass
-        elif answer[1] in [PARAM_DISABLETIMER,PARAM_STOPTIMER,PARAM_INCREASETIMER,PARAM_SETTIMER,PARAM_ENABLETIMERONCE,PARAM_RESETTIMER]:
+        elif answer[1] in [PARAM_DISABLETIMER, PARAM_STOPTIMER, PARAM_INCREASETIMER, PARAM_SETTIMER, PARAM_ENABLETIMERONCE, PARAM_RESETTIMER]:
             self.callbackParameter = answer[1]
             self.askForPIN()
-        elif  answer[1] == PARAM_STARTTIMER:
+        elif answer[1] == PARAM_STARTTIMER:
             self.startTimer()
-        elif  answer[1] == PARAM_ENABLETIMER: 
+        elif answer[1] == PARAM_ENABLETIMER:
             self.toggleEnabledState(True)
         elif answer[1] == PARAM_DECREASETIMER:
             self.session.openWithCallback(self.modifySessionTime, MinuteInput)
         else:
-            self.session.open(MessageBox,_("Invalid selection"), MessageBox.TYPE_ERROR, 5)
+            self.session.open(MessageBox, _("Invalid selection"), MessageBox.TYPE_ERROR, 5)
+
 
 # Assign global variable kiddyTimer
 kiddyTimer = KiddyTimer()

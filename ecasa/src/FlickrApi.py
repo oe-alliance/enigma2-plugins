@@ -14,27 +14,34 @@ from twisted.web.client import downloadPage
 
 our_print = lambda *args, **kwargs: print("[FlickrApi]", *args, **kwargs)
 
+
 class FakeExif:
 	def __init__(self):
 		pass
+
 	def __getattr__(self, attr):
 		if attr == 'make':
 			return None
 		elif attr == 'model':
 			return None
 
+
 class FakeNode:
 	def __init__(self, value):
 		self.text = value
 
+
 class Picture:
 	"""A picture from Flickr. Makes API compatible with the one from gdata as straight-forward as possible."""
+
 	def __init__(self, obj, owner=None):
 		self.__obj = obj
 		self.__owner = owner
+
 	@property
 	def obj(self):
 		return self.__obj
+
 	def __getattr__(self, attr):
 		if attr == 'title':
 			return FakeNode(self.__obj.get('title'))
@@ -66,10 +73,12 @@ class Picture:
 		elif attr.startswith('_'):
 			raise AttributeError("No such attribute '%s'" % (attr,))
 		return self.__obj.get(attr)
+
 	def __getitem__(self, idx):
 		if idx != 0:
 			raise IndexError("no such index")
 		return self
+
 	def __repr__(self):
 		return '<Ecasa.FlickrApi.Picture: %s>' % (self.title.text,)
 	__str__ = __repr__
@@ -77,31 +86,41 @@ class Picture:
 #		from xml.etree.cElementTree import dump
 #		dump(self.__obj)
 
+
 class PictureGenerator:
 	def __init__(self, fset, owner=None):
 		self.__list = fset
 		self.__owner = owner
+
 	def __getitem__(self, idx):
 		return Picture(self.__list[idx], owner=self.__owner)
+
 	def __iter__(self):
 		self.idx = 0
-		self.len = len(self)-1
+		self.len = len(self) - 1
 		return self
+
 	def next(self):
 		idx = self.idx
 		if idx > self.len:
 			raise StopIteration
-		self.idx = idx+1
+		self.idx = idx + 1
 		return self[idx]
 	__next__ = next
+
 	def __len__(self):
 		return len(self.__list)
+
 	def index(self, obj):
 		return self.__list.index(obj.obj)
 
+
 from PictureApi import PictureApi
+
+
 class FlickrApi(PictureApi):
 	"""Wrapper around flickr API to make our life a little easier."""
+
 	def __init__(self, api_key=None, cache='/tmp/ecasa'):
 		"""Initialize API, login to flickr servers"""
 		PictureApi.__init__(self, cache=cache)
@@ -112,11 +131,14 @@ class FlickrApi(PictureApi):
 
 	def getAlbums(self, user='default'):
 		flickr_api = self.flickr_api
-		if user == 'default': user = ''
+		if user == 'default':
+			user = ''
 		elif '@' not in user:
 			users = flickr_api.people_findByUsername(username=user)
-			try: user = users.find('user').get('nsid')
-			except Exception as e: our_print("getAlbums failed to retrieve nsid:", e)
+			try:
+				user = users.find('user').get('nsid')
+			except Exception as e:
+				our_print("getAlbums failed to retrieve nsid:", e)
 		albums = flickr_api.photosets_getList(user_id=user, per_page='90', total='90')
 
 		albums = [(album.find('title').text.encode('utf-8'), album.get('photos'), album) for album in albums.find('photosets').findall('photoset')]
@@ -150,11 +172,14 @@ class FlickrApi(PictureApi):
 		return PictureGenerator(photos.find('photos').findall('photo'))
 
 	def downloadPhoto(self, photo, thumbnail=False):
-		if not photo: return
+		if not photo:
+			return
 
 		cache = os.path.join(self.cache, 'thumb', photo.owner) if thumbnail else os.path.join(self.cache, photo.owner)
-		try: os.makedirs(cache)
-		except OSError: pass
+		try:
+			os.makedirs(cache)
+		except OSError:
+			pass
 
 		url = photo.url_t if thumbnail else photo.url
 		print(url)
@@ -166,8 +191,8 @@ class FlickrApi(PictureApi):
 			reactor.callLater(0, d.callback, (fullname, photo))
 		else:
 			downloadPage(url, fullname).addCallbacks(
-				lambda value:d.callback((fullname, photo)),
-				lambda error:d.errback((error, photo)))
+				lambda value: d.callback((fullname, photo)),
+				lambda error: d.errback((error, photo)))
 		return d
 
 	def downloadThumbnail(self, photo):
@@ -189,7 +214,8 @@ class FlickrApi(PictureApi):
 		Raises:
 		shutil.Error if an error occured during moving the file.
 		"""
-		if not photo: return
+		if not photo:
+			return
 
 		cache = os.path.join(self.cache, photo.owner)
 		filename = photo.url.split('/')[-1]
@@ -202,8 +228,9 @@ class FlickrApi(PictureApi):
 		else:
 			print("[FlickrApi] Photo does not exist in cache, trying to download with deferred copy operation")
 			self.downloadPhoto(photo).addCallback(
-				lambda value:self.copyPhoto(photo, target, recursive=False)
+				lambda value: self.copyPhoto(photo, target, recursive=False)
 			)
 			return False
+
 
 __all__ = ['FlickrApi']

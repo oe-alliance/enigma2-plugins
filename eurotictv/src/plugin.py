@@ -18,13 +18,14 @@ from ServiceReference import ServiceReference
 from Tools.Directories import SCOPE_PLUGINS, resolveFilename
 from __init__ import _
 
+
 class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 	STATE_DISCONNECTED, STATE_CONNECTING, STATE_PLAYING, STATE_PAUSED, STATE_FAILURE = range(5)
 	STATE_NAMES = [_("disconnected"), _("connecting..."), _("LIVE"), _("pause"), _("No Connection")]
 	STREAM_DIM = (768, 576)
 	PIP_DIM = (432, 324)
 	STREAM_URI = "http://174.121.228.234/hls-live/livepkgr/_definst_/liveevent/etv-livestream_2.m3u86"
-	CENTER_POS = ((560-PIP_DIM[0])/2)
+	CENTER_POS = ((560 - PIP_DIM[0]) / 2)
 
 	skin = """
 	<screen position="center,center" size="560,470" title="eUroticTV" flags="wfNoBorder">
@@ -49,8 +50,8 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		InfoBarBase.__init__(self, steal_current_service = True)
-		InfoBarSeek.__init__(self, actionmap = "CutlistSeekActions")
+		InfoBarBase.__init__(self, steal_current_service=True)
+		InfoBarSeek.__init__(self, actionmap="CutlistSeekActions")
 		HelpableScreen.__init__(self)
 		self.old_service = session.nav.getCurrentlyPlayingServiceReference()
 		self.session.nav.stopService()
@@ -80,25 +81,24 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 				"seekFwd": self.keyPass
 			}, -4)
 
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evStart: self.__serviceStarted,
 				iPlayableService.evUpdatedEventInfo: self.__streamStarted,
 				iPlayableService.evTuneFailed: self.__streamFailed,
 				iPlayableService.evEOF: self.__evEOF,
-				iPlayableService.evUser+15: self.__streamFailed
-			})	
+				iPlayableService.evUser + 15: self.__streamFailed
+			})
 
 		self.onClose.append(self.__onClose)
 		self.onExecBegin.append(self.__onExecBegin)
-		
+
 		self.setState(self.STATE_DISCONNECTED)
 
 	def __onExecBegin(self):
 		from Components.AVSwitch import AVSwitch
 		sc = AVSwitch().getFramebufferScale()
 		self.picload.setPara((self["poster"].instance.size().width(), self["poster"].instance.size().height(), self.PIP_DIM[0], self.PIP_DIM[1], False, 1, "#00000000"))
-		self.picload.startDecode(resolveFilename(SCOPE_PLUGINS)+"Extensions/eUroticTV/"+"eurotic.jpg")
+		self.picload.startDecode(resolveFilename(SCOPE_PLUGINS) + "Extensions/eUroticTV/" + "eurotic.jpg")
 
 	def setState(self, state):
 		if state <= self.STATE_FAILURE:
@@ -106,7 +106,7 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 
 		self["connection_label"].setForegroundColorNum(self.state)
 		self["connection_label"].setText(self.STATE_NAMES[self.state])
-		
+
 		if self.state in (self.STATE_CONNECTING, self.STATE_PAUSED):
 			self["do_blink"].setBoolean(True)
 		else:
@@ -114,11 +114,11 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 
 		if self.state in (self.STATE_DISCONNECTED, self.STATE_CONNECTING, self.STATE_FAILURE):
 			self.togglePIG(fullscreen=False)
-		
+
 		if self.state in (self.STATE_PLAYING, self.STATE_PAUSED):
 			self["poster"].hide()
 			self["pig_mode"].setBoolean(True)
-		else: 
+		else:
 			self["poster"].show()
 			self["pig_mode"].setBoolean(False)
 
@@ -140,7 +140,7 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 	def __streamFailed(self):
 		print "__streamFailed"
 		currPlay = self.session.nav.getCurrentService()
-		message = currPlay.info().getInfoString(iServiceInformation.sUser+12)
+		message = currPlay.info().getInfoString(iServiceInformation.sUser + 12)
 		self.setState(self.STATE_FAILURE)
 		self["connection_label"].setText(_("Streaming error: %s") % message)
 
@@ -187,7 +187,7 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 		pass
 
 	def start(self):
-		sref = eServiceReference(4097,0,self.STREAM_URI)
+		sref = eServiceReference(4097, 0, self.STREAM_URI)
 		sref.setName("eUroticTV Live Stream")
 		self.session.nav.playService(sref)
 
@@ -201,8 +201,10 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 	def exit(self):
 		self.close()
 
+
 def main(session, **kwargs):
 	session.open(EuroticTVPlayer)
 
+
 def Plugins(**kwargs):
- 	return PluginDescriptor(name="eUroticTV", description=_("Watch eUroticTV via HTTP Live Streaming"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", needsRestart = True, fnc=main)
+ 	return PluginDescriptor(name="eUroticTV", description=_("Watch eUroticTV via HTTP Live Streaming"), where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", needsRestart=True, fnc=main)

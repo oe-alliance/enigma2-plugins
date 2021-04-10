@@ -6,8 +6,8 @@
 #  Coded by Shaderman (c) 2011
 #  Support: www.dreambox-tools.info
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -16,7 +16,7 @@
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 
@@ -43,7 +43,7 @@ from Tools.LoadPixmap import LoadPixmap
 LIST_TYPE_EPG = 0
 LIST_TYPE_UPCOMING = 1
 
-WEEKSECONDS = 7*86400
+WEEKSECONDS = 7 * 86400
 WEEKDAYS = (_("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"), _("Friday"), _("Saturday"), _("Sunday"))
 
 
@@ -53,20 +53,20 @@ class EmbeddedVolumeControl():
 		self.volctrl = eDVBVolumecontrol.getInstance()
 		self.hideVolTimer = eTimer()
 		self.hideVolTimer.callback.append(self.volHide)
-		
+
 	def volSave(self):
 		if self.volctrl.isMuted():
 			config.audio.volume.value = 0
 		else:
 			config.audio.volume.value = self.volctrl.getVolume()
 		config.audio.volume.save()
-		
+
 	def volUp(self):
 		self.setVolume(+1)
-		
+
 	def volDown(self):
 		self.setVolume(-1)
-		
+
 	def setVolume(self, direction):
 		oldvol = self.volctrl.getVolume()
 		if direction > 0:
@@ -86,10 +86,10 @@ class EmbeddedVolumeControl():
 			self["volume"].setValue(self.volctrl.getVolume())
 		self.volSave()
 		self.hideVolTimer.start(3000, True)
-		
+
 	def volHide(self):
 		self["volume"].hide()
-		
+
 	def volMute(self, showMuteSymbol=True, force=False):
 		vol = self.volctrl.getVolume()
 		if vol or force:
@@ -101,43 +101,45 @@ class EmbeddedVolumeControl():
 			else:
 				self["mute"].hide()
 				self["volume"].setValue(vol)
-				
+
 	def getIsMuted(self):
 		return self.volctrl.isMuted()
-		
+
 	def setMutePixmap(self):
 		if self.volctrl.isMuted():
 			self["mute"].show()
 		else:
 			self["mute"].hide()
-			
+
+
 class ResizeScrollLabel(ScrollLabel):
-	def __init__(self, text = ""):
+	def __init__(self, text=""):
 		ScrollLabel.__init__(self, text)
-		
+
 	def resize(self, s):
-		lineheight=fontRenderClass.getInstance().getLineHeight( self.long_text.getFont() )
+		lineheight = fontRenderClass.getInstance().getLineHeight(self.long_text.getFont())
 		if not lineheight:
 			lineheight = 30 # assume a random lineheight if nothing is visible
 		lines = (int)(s.height() / lineheight)
 		self.pageHeight = (int)(lines * lineheight)
-		self.instance.resize(eSize(s.width(), self.pageHeight+(int)(lineheight/6)))
-		self.scrollbar.move(ePoint(s.width()-20,0))
-		self.scrollbar.resize(eSize(20,self.pageHeight+(int)(lineheight/6)))
-		self.long_text.resize(eSize(s.width()-30, self.pageHeight*16))
+		self.instance.resize(eSize(s.width(), self.pageHeight + (int)(lineheight / 6)))
+		self.scrollbar.move(ePoint(s.width() - 20, 0))
+		self.scrollbar.resize(eSize(20, self.pageHeight + (int)(lineheight / 6)))
+		self.long_text.resize(eSize(s.width() - 30, self.pageHeight * 16))
 		self.setText(self.message)
+
 
 class PiconLoader():
 	def __init__(self):
-		self.nameCache = { }
-		config.plugins.merlinEpgCenter.epgPaths.addNotifier(self.piconPathChanged, initial_call = False)
-		
+		self.nameCache = {}
+		config.plugins.merlinEpgCenter.epgPaths.addNotifier(self.piconPathChanged, initial_call=False)
+
 	def getPiconFilename(self, sRef):
 		pngname = ""
 		# strip all after last :
 		pos = sRef.rfind(':')
 		if pos != -1:
-			sRef = sRef[:pos].rstrip(':').replace(':','_')
+			sRef = sRef[:pos].rstrip(':').replace(':', '_')
 		pngname = self.nameCache.get(sRef, "")
 		if pngname == "":
 			pngname = self.findPicon(sRef)
@@ -151,42 +153,45 @@ class PiconLoader():
 						pngname = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MerlinEPGCenter/images/PiconMissing_small.png")
 					self.nameCache["default"] = pngname
 		return pngname
-		
+
 	def getPicon(self, pngname):
-		return LoadPixmap(cached = True, path = self.getPiconFilename(pngname))
-		
+		return LoadPixmap(cached=True, path=self.getPiconFilename(pngname))
+
 	def findPicon(self, sRef):
 		pngname = config.plugins.merlinEpgCenter.epgPaths.value + sRef + ".png"
 		if not fileExists(pngname):
 			pngname = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MerlinEPGCenter/images/PiconMissing_small.png")
 		return pngname
-		
-	def piconPathChanged(self, configElement = None):
+
+	def piconPathChanged(self, configElement=None):
 		self.nameCache.clear()
-		
+
+
 def findDefaultPicon(serviceName):
 	searchPaths = (eEnv.resolve('${datadir}/enigma2/%s/'), '/media/cf/%s/', '/media/usb/%s/')
-	
+
 	pos = serviceName.rfind(':')
 	if pos != -1:
-		serviceName = serviceName[:pos].rstrip(':').replace(':','_')
-	
+		serviceName = serviceName[:pos].rstrip(':').replace(':', '_')
+
 	for path in searchPaths:
 		pngname = (path % "picon") + serviceName + ".png"
 		if fileExists(pngname):
 			return pngname
 	return resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MerlinEPGCenter/images/PiconMissing.png")
-	
+
 # derived from Tools.FuzzyDate
+
+
 def getFuzzyDay(t):
 	d = localtime(t)
 	nt = time()
 	n = localtime()
-	
+
 	if d[:3] == n[:3]:
 		# same day
 		date = _("Today")
-	elif dt_date.fromtimestamp(t) == dt_date.today() + dt_timedelta(days = 1):
+	elif dt_date.fromtimestamp(t) == dt_date.today() + dt_timedelta(days=1):
 		# next day
 		date = _("Tomorrow")
 	elif nt < t and (t - nt) < WEEKSECONDS:
@@ -194,10 +199,12 @@ def getFuzzyDay(t):
 		date = WEEKDAYS[d.tm_wday]
 	else:
 		date = "%d.%d.%d" % (d.tm_mday, d.tm_mon, d.tm_year)
-		
+
 	return date
-	
+
 # used to let timer pixmaps blink in our lists
+
+
 class BlinkTimer():
 	def __init__(self, session):
 		self.session = session
@@ -210,7 +217,7 @@ class BlinkTimer():
 		self.timer = eTimer()
 		self.callbacks = []
 		self.resume()
-		
+
 	def gotRecordEvent(self, service, event):
 		if event in (iRecordableService.evEnd, iRecordableService.evStart, None):
 			numRecs = len(self.session.nav.getRecordings())
@@ -222,7 +229,7 @@ class BlinkTimer():
 					x()
 			elif not numRecs and self.timerRunning and not self.stopping:
 				self.stopping = True
-				
+
 	def suspend(self):
 		if self.gotRecordEvent in self.session.nav.record_event:
 			self.session.nav.record_event.remove(self.gotRecordEvent)
@@ -234,58 +241,58 @@ class BlinkTimer():
 			self.stopping = False
 			self.state = False
 			self.timerRunning = False
-			
+
 	def resume(self):
 		self.timer.callback.insert(0, self.changeBlinkState) # order is important, this callback must be called first!
 		self.session.nav.record_event.append(self.gotRecordEvent)
 		if self.session.nav.RecordTimer.isRecording():
 			self.gotRecordEvent(None, None)
-			
+
 	def appendList(self, l):
 		self.lists.append(l)
-		
+
 	def changeBlinkState(self):
 		self.state = not self.state
-		
+
 		i = 0
 		while i < 2:
 			for idx in self.listSets[i]:
 				self.lists[i].l.invalidateEntry(idx)
 			i += 1
-			
+
 		if self.stopping:
 			self.delayStop()
-			
+
 	def getBlinkState(self):
 		return self.state
-		
+
 	def getIsRunning(self):
 		return self.timerRunning
-		
+
 	def getIsStopping(self):
 		return self.stopping
-		
+
 	def getIsInList(self, idx):
 		return idx in self.listSets[LIST_TYPE_EPG]
-		
+
 	def gotListElements(self):
 		if len(self.listSets[LIST_TYPE_EPG]) or len(self.listSets[LIST_TYPE_UPCOMING]):
 			return True
 		else:
 			return False
-			
+
 	# make one more tick befor stopping the timer to show the picon again
 	def delayStop(self):
 		self.stopping = True
 		self.delay += 1
-		
+
 		if self.delay > 1:
 			self.timer.stop()
 			self.delay = 0
 			self.stopping = False
 			self.state = False
 			self.timerRunning = False
-			
+
 	def updateEntry(self, listType, idx, isRunning):
 		if idx in self.listSets[listType]:
 			if not isRunning:
@@ -295,37 +302,38 @@ class BlinkTimer():
 			if not self.timerRunning and self.gotListElements():
 				self.delay = 0
 				self.stopping = False
-				
+
 	def reset(self):
 		if not self.timerRunning:
 			return
-			
+
 		self.listSets[LIST_TYPE_EPG].clear()
 		self.listSets[LIST_TYPE_UPCOMING].clear()
-		
+
 # interface between AutoTimer and our timer list
+
+
 class TimerListObject(object):
 	def __init__(self, begin, end, service_ref, name, justplay, disabled, autoTimerId, match, searchType, counter, counterLeft, destination, services, bouquets, includedDays, excludedDays):
-		self.begin		= begin
-		self.end		= end
-		self.service_ref 	= service_ref
-		self.name		= name
-		self.justplay		= justplay
-		self.disabled		= disabled
-		self.autoTimerId	= autoTimerId
-		self.state		= 0 # TimerEntry.StateWaiting
-		
+		self.begin = begin
+		self.end = end
+		self.service_ref = service_ref
+		self.name = name
+		self.justplay = justplay
+		self.disabled = disabled
+		self.autoTimerId = autoTimerId
+		self.state = 0 # TimerEntry.StateWaiting
+
 		# additional information
-		self.match		= match
-		self.searchType		= searchType
-		self.counter		= counter
-		self.counterLeft	= counterLeft
-		self.destination	= destination
-		self.services		= services
-		self.bouquets		= bouquets
-		self.includedDays	= includedDays
-		self.excludedDays	= excludedDays
-		
+		self.match = match
+		self.searchType = searchType
+		self.counter = counter
+		self.counterLeft = counterLeft
+		self.destination = destination
+		self.services = services
+		self.bouquets = bouquets
+		self.includedDays = includedDays
+		self.excludedDays = excludedDays
+
 	def isRunning(self):
 		return False
-		

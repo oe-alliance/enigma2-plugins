@@ -6,7 +6,7 @@ from Components.Sources.Sensor import SensorSource
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Progress import Progress
 from Components.ConfigList import ConfigListScreen
-from Components.Pixmap import Pixmap,MultiPixmap
+from Components.Pixmap import Pixmap, MultiPixmap
 from Components.Label import MultiColorLabel
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigBoolean, ConfigOnOff, ConfigInteger, ConfigSlider, ConfigText, ConfigSelection, ConfigSelectionNumber, ConfigNothing, ConfigFloat, ConfigText
 from Screens.Screen import Screen
@@ -21,13 +21,16 @@ from socket import *
 import xml.dom.minidom
 
 from Components.Language import language
-import os, gettext
+import os
+import gettext
 
 PluginLanguageDomain = "EIBox"
 PluginLanguagePath = "Extensions/EIBox/locale"
 
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -35,6 +38,7 @@ def _(txt):
 	else:
 		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
 		return gettext.gettext(txt)
+
 
 language.addCallback(localeInit())
 
@@ -51,21 +55,28 @@ file_prefix = resolveFilename(SCOPE_PLUGINS, 'Extensions/EIBox/')
 img_prefix = file_prefix + 'images/'
 
 up_down_descriptions = {False: _("up"), True: _("down")}
+
+
 class ConfigUpDown(ConfigBoolean):
-	def __init__(self, default = False):
-		ConfigBoolean.__init__(self, default = default, descriptions = up_down_descriptions)
+	def __init__(self, default=False):
+		ConfigBoolean.__init__(self, default=default, descriptions=up_down_descriptions)
+
 
 goto_descriptions = {False: "", True: ""}
+
+
 class ConfigGoto(ConfigBoolean):
-	def __init__(self, default = False):
-		ConfigBoolean.__init__(self, default = default, descriptions = goto_descriptions)
+	def __init__(self, default=False):
+		ConfigBoolean.__init__(self, default=default, descriptions=goto_descriptions)
+
 
 class ConfigEIBText(ConfigText):
-	def __init__(self, default = "", fixed_size = True, visible_width = False):
+	def __init__(self, default="", fixed_size=True, visible_width=False):
 		ConfigText.__init__(self, default, fixed_size, visible_width)
-	
+
 	def onSelect(self, session):
 		self.allmarked = (self.value != "")
+
 
 class EIBObject(object):
 	def __init__(self, order, object_id, object_type, label, position, img=None, custom_img=[], custom_values=[], textformat=None, readonly=False):
@@ -96,10 +107,10 @@ class EIBObject(object):
 				choiceslist.append(choice)
 			self.config_element = ConfigSelection(choices=choiceslist)
 		elif self.object_type == EIB_DIMMER:
-			self.config_element = ConfigSelectionNumber(0,255,1)
+			self.config_element = ConfigSelectionNumber(0, 255, 1)
 			#self.config_element = ConfigSlider(increment = 10, limits=(0,255))
 		elif self.object_type == EIB_THERMO:
-			self.config_element = ConfigFloat(default=[0,0],limits=[(-31,+31),(0,99)])
+			self.config_element = ConfigFloat(default=[0, 0], limits=[(-31, +31), (0, 99)])
 		elif self.object_type == EIB_GOTO:
 			self.config_element = ConfigGoto()
 		elif self.object_type == EIB_TEXT:
@@ -118,16 +129,16 @@ class EIBObject(object):
 	def getText(self):
 		if self.config_element:
 			if self.object_type == EIB_THERMO:
-				return str(self.value+"°C")
+				return str(self.value + "°C")
 			elif self.object_type == EIB_TEXT:
-				return str(self.textformat.replace("$1",str(self.value)))
+				return str(self.textformat.replace("$1", str(self.value)))
 			else:
 				return str(self.value)
 
-	def getPos(self, offset=[0,0]):
+	def getPos(self, offset=[0, 0]):
 		x = self.position[0] - offset[0]
 		y = self.position[1] - offset[1]
-		return "%d,%d" % (x,y)
+		return "%d,%d" % (x, y)
 
 	def setValue(self, val):
 		if self.config_element:
@@ -142,8 +153,8 @@ class EIBObject(object):
 						val = val.split('.')
 						if len(val) == 1:
 							val.append(0)
-						self.config_element.setValue([int(val[0]),int(val[1])])
-					elif self.object_type in (EIB_TEXT, EIB_MULTISWITCH) :
+						self.config_element.setValue([int(val[0]), int(val[1])])
+					elif self.object_type in (EIB_TEXT, EIB_MULTISWITCH):
 						self.config_element.setValue(str(val))
 					else:
 						self.config_element.setValue(int(val))
@@ -168,7 +179,8 @@ class EIBObject(object):
 			return str(value)
 
 	value = property(getValue, setValue)
-		
+
+
 class EIBObjects(object):
 	def __init__(self, zone_id, zone_name, zone_img):
 		self.ids = {}
@@ -177,7 +189,7 @@ class EIBObjects(object):
 		self.zone_name = zone_name
 		self.zone_img = zone_img
 
-	def by_id (self, x): return self.ids[x]
+	def by_id(self, x): return self.ids[x]
 	def by_cfg(self, x): return self.cfg[x]
 
 	def append(self, x):
@@ -213,7 +225,7 @@ class EIBObjects(object):
 			ret = knx.send(query)
 			if config.eib.debug.value:
 				print "[sendKNX]", query, ret
-			
+
 			knxdata = knx.recv(1024)
 			while not knxdata.endswith('\n\x04'):
 				knxdata += knx.recv(1024)
@@ -222,9 +234,9 @@ class EIBObjects(object):
 				callback(knxdata[:-1], user_args)
 			return True
 		except timeout:
-			print ("[sendKNX] socket timeout with linknx server %s:%d") % (host, port)
+			print("[sendKNX] socket timeout with linknx server %s:%d") % (host, port)
 		except error:
-			print ("[sendKNX] can't connect to linknx server %s:%d") % (host, port)
+			print("[sendKNX] can't connect to linknx server %s:%d") % (host, port)
 		return False
 
 	def parseSingleRead(self, knxdata, EIBObject):
@@ -243,9 +255,9 @@ class EIBObjects(object):
 					except KeyError:
 						print "[parseSingleRead] KeyError exception"
 					return
-			print ("[parseSingleRead] XML parser error parseSingleRead failed")
+			print("[parseSingleRead] XML parser error parseSingleRead failed")
 		except xml.parsers.expat.ExpatError, ValueError:
-			print ("[parseSingleRead] XML parser error parseSingleRead DOM error")
+			print("[parseSingleRead] XML parser error parseSingleRead DOM error")
 
 	def parseMultiRead(self, knxdata, user_args):
 		if config.eib.debug.value:
@@ -277,23 +289,24 @@ class EIBObjects(object):
 					            elif config.eib.debug.value:
 							  print "[parseMultiRead] couldn't parse persistence object", object_id, value
 		except xml.parsers.expat.ExpatError:
-			print ("[parseMultiRead] XML parser error") 
+			print("[parseMultiRead] XML parser error")
 
-	def __iter__ (self):
+	def __iter__(self):
 		list = self.ids.itervalues()
 		return iter(sorted(list, key=lambda EIBObject: EIBObject.order))
-		
+
+
 class EIBoxZoneScreen(Screen, ConfigListScreen):
 
 	def __init__(self, session, EIB_objects):
 		skin = """
 		<screen position="center,center" size="550,450" title="E.I.B.ox" >
 			<widget name="config" position="10,420" size="530,26" zPosition="1" transparent="1" scrollbarMode="showNever" />
-			<ePixmap pixmap="%s" position="0,0" size="550,400" zPosition="-1" alphatest="on" />\n""" % (img_prefix+EIB_objects.zone_img)
+			<ePixmap pixmap="%s" position="0,0" size="550,400" zPosition="-1" alphatest="on" />\n""" % (img_prefix + EIB_objects.zone_img)
 
 		offset = [12, 10] # fix up browser css spacing
 		iconsize = [32, 32]
-		
+
 		self.setup_title = "E.I.B.ox"
 
 		self.EIB_objects = EIB_objects
@@ -305,29 +318,29 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 
 			elif EIB_object.object_type in (EIB_SWITCH, EIB_MULTISWITCH, EIB_DIMMER):
 				if EIB_object.object_type == EIB_DIMMER or EIB_object.img == "light":
-					pixmaps_sources = ['light_off.png','light_on.png']
+					pixmaps_sources = ['light_off.png', 'light_on.png']
 				elif EIB_object.img == "blinds":
-					pixmaps_sources = ['blinds_up.png','blinds_down.png']
+					pixmaps_sources = ['blinds_up.png', 'blinds_down.png']
 				elif EIB_object.img == "outlet":
-					pixmaps_sources = ['outlet_off.png','outlet_on.png']
+					pixmaps_sources = ['outlet_off.png', 'outlet_on.png']
 				elif EIB_object.img == "fan":
-					pixmaps_sources = ['fan_off.png','fan_on.png']
+					pixmaps_sources = ['fan_off.png', 'fan_on.png']
 				elif EIB_object.img == "pump":
-					pixmaps_sources = ['pump_off.png','pump_on.png']
+					pixmaps_sources = ['pump_off.png', 'pump_on.png']
 				else:
 					pixmaps_sources = list(EIB_object.custom_img)
 
 				for idx, filename in enumerate(pixmaps_sources):
-					  pixmaps_sources[idx] = img_prefix+filename
+					  pixmaps_sources[idx] = img_prefix + filename
 				pixmaps_string = ','.join(pixmaps_sources)
 				skin += '\t\t\t<widget name="%s" pixmaps="%s" position="%s" size="32,32" transparent="1" alphatest="on" borderColor="#004679" zPosition="1" />\n' % (EIB_object.object_id, pixmaps_string, EIB_object.getPos(offset))
 				self[EIB_object.object_id] = MultiPixmap()
 
 				if EIB_object.object_type == EIB_DIMMER:
-					skin += '\t\t\t<widget source="%s_progress" render="Progress" pixmap="skin_default/progress_small.png" position="%s" size="32,5" backgroundColor="#4f74BB" zPosition="1" />\n' % (EIB_object.object_id, EIB_object.getPos([offset[0],offset[1]-iconsize[1]]))
-					self[EIB_object.object_id+"_progress"] = Progress()
-					self[EIB_object.object_id+"_progress"].range = 255
-			
+					skin += '\t\t\t<widget source="%s_progress" render="Progress" pixmap="skin_default/progress_small.png" position="%s" size="32,5" backgroundColor="#4f74BB" zPosition="1" />\n' % (EIB_object.object_id, EIB_object.getPos([offset[0], offset[1] - iconsize[1]]))
+					self[EIB_object.object_id + "_progress"] = Progress()
+					self[EIB_object.object_id + "_progress"].range = 255
+
 			elif EIB_object.object_type in (EIB_THERMO, EIB_TEXT):
 				skin += '\t\t\t<widget name="%s" position="%s" size="120,20" font="Regular;14" halign="left" valign="center" foregroundColors="#000000,#0000FF" transparent="1" zPosition="1" />\n' % (EIB_object.object_id, EIB_object.getPos(offset))
 				self[EIB_object.object_id] = MultiColorLabel()
@@ -339,10 +352,10 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		self.skin = skin
 		Screen.__init__(self, session)
 		self.initConfigList()
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
-		self.onChangedEntry = [ ]
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
+		self.onChangedEntry = []
 
-		self["actions"] = ActionMap(["SetupActions", "OkCancelActions", "ColorActions", "DirectionActions"], 
+		self["actions"] = ActionMap(["SetupActions", "OkCancelActions", "ColorActions", "DirectionActions"],
 		{
 			"up": self.keyUp,
 			"upUp": self.keyPass,
@@ -362,7 +375,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 
 	def handleInputHelpers(self):
 		pass
-	
+
 	def keyPass(self):
 		pass
 
@@ -391,7 +404,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		EIB_object = self.getCurrentObj()
 		if EIB_object and EIB_object.object_type == EIB_DIMMER:
 			value = EIB_object.getValue()
-			if value < 255-15:
+			if value < 255 - 15:
 				EIB_object.value += 15
 			else:
 				EIB_object.value = 255
@@ -485,13 +498,13 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		elif type(EIB_object.value) == int and EIB_object.value > 0:
 			self[EIB_object.object_id].setPixmapNum(1)
 		if EIB_object.object_type == EIB_DIMMER:
-			self[EIB_object.object_id+"_progress"].value = EIB_object.value
+			self[EIB_object.object_id + "_progress"].value = EIB_object.value
 
 	def initConfigList(self):
 		self.list = []
 		for EIB_object in self.EIB_objects:
 			self.list.append(getConfigListEntry(EIB_object.label, EIB_object.config_element))
-	
+
 	def changedEntry(self):
 		current = self["config"].getCurrent()
 		if current:
@@ -521,20 +534,21 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		self.refresh_timer.callback.remove(self.refreshObjects)
 		self.close(gotoZone)
 
+
 class EIBox(Screen, ConfigListScreen):
 	skin = """
 		<screen position="center,center" size="570,420" title="E.I.B.ox" >
 		</screen>"""
 
-	def __init__(self, session, args = None):		
+	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions"], 
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions"],
 		{
 			"cancel": self.close,
 			"red": self.close
 		}, -1)
-		
+
 		self.gotoZone = None
 		self.EIB_zones = {}
 		self.onShown.append(self.onFirstShown)
@@ -548,15 +562,15 @@ class EIBox(Screen, ConfigListScreen):
 
 	def onFirstShown(self):
 		self.onShown.remove(self.onFirstShown)
-		self.loadXML(resolveFilename(SCOPE_PLUGINS, file_prefix+config.eib.xmlfile.value))		
+		self.loadXML(resolveFilename(SCOPE_PLUGINS, file_prefix + config.eib.xmlfile.value))
 		self.displayZone()
 
 	def displayZone(self):
 		if self.gotoZone in self.EIB_zones:
 			self.session.openWithCallback(self.ZoneScreenCB, EIBoxZoneScreen, self.EIB_zones[self.gotoZone])
-	
+
 	def errorOut(self, message):
-		self.session.openWithCallback(self.close, MessageBox, message, type = MessageBox.TYPE_ERROR)
+		self.session.openWithCallback(self.close, MessageBox, message, type=MessageBox.TYPE_ERROR)
 
 	def loadXML(self, filename):
 		try:
@@ -565,7 +579,7 @@ class EIBox(Screen, ConfigListScreen):
 				return
 				#raise AttributeError
 			file = open(filename, "r")
-			data = file.read().decode("utf-8").replace('&',"&amp;").encode("ascii",'xmlcharrefreplace')
+			data = file.read().decode("utf-8").replace('&', "&amp;").encode("ascii", 'xmlcharrefreplace')
 			file.close()
 			projectfiledom = xml.dom.minidom.parseString(data)
 			for node in projectfiledom.childNodes[0].childNodes:
@@ -617,8 +631,9 @@ class EIBox(Screen, ConfigListScreen):
 						values.append(str(item.nodeValue))
 					elif key == "img":
 						images.append(str(item.nodeValue))
-					i = i+1
+					i = i + 1
 		return values, images
+
 	def xmlGetZoneNode(self, node, zone):
 		order = 0
 		for subnode in node.childNodes:
@@ -676,28 +691,29 @@ class EIBox(Screen, ConfigListScreen):
 						readonly = True
 					i += 1
 				if object_id and object_type and label and x and y:
-					obj = EIBObject(order, object_id, object_type, label, (x,y), img, custom_img, custom_values, textformat, readonly)
+					obj = EIBObject(order, object_id, object_type, label, (x, y), img, custom_img, custom_values, textformat, readonly)
 					self.EIB_zones[zone].append(obj)
 					if config.eib.debug.value:
 						print "[xmlGetZoneNode] new", obj.getInfo()
 					order += 1
 				elif temp_id and setpoint_id and label and x and y:
-					obj = EIBObject(order, temp_id, EIB_THERMO, label+' '+_("(actual)"), (x,y), readonly=True)
+					obj = EIBObject(order, temp_id, EIB_THERMO, label + ' ' + _("(actual)"), (x, y), readonly=True)
 					self.EIB_zones[zone].append(obj)
 					if config.eib.debug.value:
 						print "[xmlGetZoneNode] new", obj.getInfo()
 					order += 1
-					obj = EIBObject(order, setpoint_id, EIB_THERMO, label+' '+_("(set point)"), (x,y+16), readonly=readonly)
+					obj = EIBObject(order, setpoint_id, EIB_THERMO, label + ' ' + _("(set point)"), (x, y + 16), readonly=readonly)
 					self.EIB_zones[zone].append(obj)
 					if config.eib.debug.value:
 						print "[xmlGetZoneNode] new", obj.getInfo()
 					order += 1
 				else:
-					print "[xmlGetZoneNode] couldn't parse object", object_id, object_type, label, (x,y), img, custom_img, custom_values, textformat, readonly, temp_id, setpoint_id
+					print "[xmlGetZoneNode] couldn't parse object", object_id, object_type, label, (x, y), img, custom_img, custom_values, textformat, readonly, temp_id, setpoint_id
+
 
 def main(session, **kwargs):
 	session.open(EIBox)
 
-def Plugins(**kwargs):
-	return PluginDescriptor(name = "E.I.B.ox", description = _("Visualization for European Installation Bus"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main)
 
+def Plugins(**kwargs):
+	return PluginDescriptor(name="E.I.B.ox", description=_("Visualization for European Installation Bus"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)

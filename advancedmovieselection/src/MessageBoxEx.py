@@ -1,4 +1,5 @@
-from Screens.MessageBox import MessageBox 
+from Screens.MessageBox import MessageBox
+
 
 class MessageBox(MessageBox):
     def cancel(self):

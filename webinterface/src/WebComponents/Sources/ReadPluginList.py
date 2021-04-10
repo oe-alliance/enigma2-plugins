@@ -2,6 +2,7 @@ from Components.Sources.Source import Source
 from Components.PluginComponent import plugins
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
+
 class ReadPluginList(Source):
 	def __init__(self, session):
 		Source.__init__(self)
@@ -11,6 +12,6 @@ class ReadPluginList(Source):
 		print "[WebComponents.ReadPluginList] readPluginList"
 
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
-		return ( True, _("List of Plugins has been read" ))
+		return (True, _("List of Plugins has been read"))
 
 	result = property(command)

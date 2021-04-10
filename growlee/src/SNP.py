@@ -12,8 +12,9 @@ from . import NOTIFICATIONID
 
 SNP_TCP_PORT = 9887
 
+
 class SnarlNetworkProtocol(LineReceiver):
-	def __init__(self, client = False):
+	def __init__(self, client=False):
 		self.client = client
 
 	def connectionMade(self):
@@ -78,21 +79,22 @@ class SnarlNetworkProtocol(LineReceiver):
 		Notifications.AddNotificationWithID(
 			NOTIFICATIONID,
 			MessageBox,
-			text = title + '\n' + description,
-			type = MessageBox.TYPE_INFO,
-			timeout = timeout,
-			close_on_any_key = True,
+			text=title + '\n' + description,
+			type=MessageBox.TYPE_INFO,
+			timeout=timeout,
+			close_on_any_key=True,
 		)
 
 		# return ok
 		payload = "SNP/1.0/0/OK"
 		self.sendLine(payload)
 
+
 class SnarlNetworkProtocolClientFactory(ClientFactory):
 	client = None
 
 	def buildProtocol(self, addr):
-		p = SnarlNetworkProtocol(client = True)
+		p = SnarlNetworkProtocol(client=True)
 		p.factory = self
 		return p
 
@@ -113,6 +115,7 @@ class SnarlNetworkProtocolClientFactory(ClientFactory):
 	def removeClient(self, client):
 		self.client = None
 
+
 class SnarlNetworkProtocolServerFactory(ServerFactory):
 	protocol = SnarlNetworkProtocol
 
@@ -131,6 +134,7 @@ class SnarlNetworkProtocolServerFactory(ServerFactory):
 	def stopFactory(self):
 		for client in self.clients:
 			client.stop()
+
 
 class SnarlNetworkProtocolAbstraction:
 	clientPort = None
@@ -158,7 +162,7 @@ class SnarlNetworkProtocolAbstraction:
 	def sendNotification(self, *args, **kwargs):
 		self.clientFactory.sendNotification(*args, **kwargs)
 
-	def maybeClose(self, resOrFail, defer = None):
+	def maybeClose(self, resOrFail, defer=None):
 		self.pending -= 1
 		if self.pending == 0:
 			if defer:
@@ -169,18 +173,17 @@ class SnarlNetworkProtocolAbstraction:
 		if self.clientPort:
 			d = self.clientPort.disconnect()
 			if d:
-				d.addBoth(self.maybeClose, defer = defer)
+				d.addBoth(self.maybeClose, defer=defer)
 			else:
 				self.pending -= 1
 
 		if self.serverPort:
 			d = self.serverPort.stopListening()
 			if d:
-				d.addBoth(self.maybeClose, defer = defer)
+				d.addBoth(self.maybeClose, defer=defer)
 			else:
 				self.pending -= 1
 
 		if self.pending == 0:
 			reactor.callLater(1, defer.callback, True)
 		return defer
-

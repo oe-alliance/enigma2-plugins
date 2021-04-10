@@ -46,6 +46,7 @@ class UnsupportedError(BaseError):
 
 class _GNTPBuffer(StringIO.StringIO):
 	"""GNTP Buffer class"""
+
 	def writefmt(self, str="", *args):
 		"""Shortcut function for writing GNTP Headers"""
 		self.write((str % args).encode('utf8', 'replace'))
@@ -59,6 +60,7 @@ class _GNTPBase(object):
 	:param string version: GNTP Protocol version
 	:param string encription: Encryption protocol
 	"""
+
 	def __init__(self, messagetype=None, version='1.0', encryption=None):
 		self.info = {
 			'version': version,

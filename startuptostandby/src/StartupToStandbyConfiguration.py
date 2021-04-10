@@ -12,12 +12,13 @@ from Components.Sources.StaticText import StaticText
 # Configuration
 from Components.config import config, getConfigListEntry
 
+
 class StartupToStandbyConfiguration(Screen, ConfigListScreen):
 	"""Configuration of Startup To Standby"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = [ "StartupToStandbyConfiguration", "Setup" ]
+		self.skinName = ["StartupToStandbyConfiguration", "Setup"]
 
 		# Summary
 		self.setup_title = _("StartupToStandby Configuration")
@@ -40,8 +41,8 @@ class StartupToStandbyConfiguration(Screen, ConfigListScreen):
 			[
 				getConfigListEntry(_("Enabled"), config.plugins.startuptostandby.enabled)
 			],
-			session = session,
-			on_change = self.changed
+			session=session,
+			on_change=self.changed
 		)
 
 		# Trigger change
@@ -64,4 +65,3 @@ class StartupToStandbyConfiguration(Screen, ConfigListScreen):
 
 	def createSummary(self):
 		return SetupSummary
-

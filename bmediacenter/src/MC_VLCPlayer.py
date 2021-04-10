@@ -26,7 +26,7 @@ from pyexpat import ExpatError
 import os
 from os import path as os_path
 
-path="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/"
+path = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/"
 
 # IMPORT VLC PLAYER PLUGIN STUFF
 try:
@@ -38,16 +38,19 @@ try:
 except Exception, e:
 	print "Media Center: Import VLC Stuff failed"
 
+
 def addFavoriteVLCFolders():
 	i = len(config.plugins.mc_vlc.folders)
 	config.plugins.mc_vlc.folders.append(ConfigSubsection())
 	config.plugins.mc_vlc.folders[i].name = ConfigText("", False)
 	config.plugins.mc_vlc.folders[i].basedir = ConfigText("/", False)
-	config.plugins.mc_vlc.foldercount.value = i+1
+	config.plugins.mc_vlc.foldercount.value = i + 1
 	return i
+
 
 for i in range(0, config.plugins.mc_vlc.foldercount.value):
 	addFavoriteVLCFolders()
+
 
 class MC_VLCServerlist(Screen):
 	def __init__(self, session):
@@ -71,16 +74,16 @@ class MC_VLCServerlist(Screen):
 
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions", "MoviePlayerActions"],
 			{
-			 "back": 	self.Exit,
-			 "red": 	self.keyDelete,
-			 "green": 	self.keyAddServer,
-			 "yellow": 	self.keyEditServer,
-			 "blue":	self.keyDVD,
-			 "up": 		self.up,
-			 "down": 	self.down,
-			 "left": 	self.left,
-			 "right": 	self.right,
-			 "ok":		self.ok
+			 "back": self.Exit,
+			 "red": self.keyDelete,
+			 "green": self.keyAddServer,
+			 "yellow": self.keyEditServer,
+			 "blue": self.keyDVD,
+			 "up": self.up,
+			 "down": self.down,
+			 "left": self.left,
+			 "right": self.right,
+			 "ok": self.ok
 			 }, -1)
 
 		self.onLayoutFinish.append(self.updateServerlist)
@@ -160,6 +163,8 @@ class MC_VLCServerlist(Screen):
 		config.plugins.mc_vlc.save()
 		self.close()
 #------------------------------------------------------------------------------------------
+
+
 class MC_VLCMedialist(Screen):
 	def __init__(self, session, server):
 		Screen.__init__(self, session)
@@ -189,26 +194,25 @@ class MC_VLCMedialist(Screen):
 
 		self.curfavfolder = -1
 
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				#iPlayableService.evStart: self.doEofInternal,
 				iPlayableService.evEnd: self.StopPlayback,
 				iPlayableService.evEOF: self.StopPlayback,
 				iPlayableService.evStopped: self.StopPlayback
 			})
 
-		self["actions"] = ActionMap(["WizardActions","InfobarActions", "MovieSelectionActions", "MenuActions", "ShortcutActions", "MoviePlayerActions", "EPGSelectActions"],
+		self["actions"] = ActionMap(["WizardActions", "InfobarActions", "MovieSelectionActions", "MenuActions", "ShortcutActions", "MoviePlayerActions", "EPGSelectActions"],
 			{
-			 "back": 	self.Exit,
-			 "red": 	self.JumpToFavs,
-			 "green":	self.showPreview,
-			 "yellow": 	self.update,
-			 "blue":	self.keyFilter,
-			 "up": 		self.up,
-			 "down": 	self.down,
-			 "left": 	self.left,
-			 "right": 	self.right,
-			 "ok":		self.ok,
+			 "back": self.Exit,
+			 "red": self.JumpToFavs,
+			 "green": self.showPreview,
+			 "yellow": self.update,
+			 "blue": self.keyFilter,
+			 "up": self.up,
+			 "down": self.down,
+			 "left": self.left,
+			 "right": self.right,
+			 "ok": self.ok,
 			 "menu": self.KeyMenu,
 			 "nextBouquet": self.NextFavFolder,
 			 "prevBouquet": self.PrevFavFolder,
@@ -440,7 +444,7 @@ class MC_VLCMedialist(Screen):
 			self["currentmedia"].setText(("%s") % (self.favname))
 			self.changeDir(self.currDir)
 
-	def JumpToFolder(self, jumpto = None):
+	def JumpToFolder(self, jumpto=None):
 		if jumpto is None:
 			return
 		else:
@@ -474,12 +478,12 @@ class MC_VLCMedialist(Screen):
 		if self.isVisible == False:
 			self.show()
 			self.isVisible = True
-		
+
 	def Exit(self):
 		if self.isVisible == False:
 			self.visibility()
 			return
-			
+
 		#if self.filelist.getCurrentDirectory() is None:
 		#	config.plugins.mc_vlc.lastDir.value = ""
 		#else:
@@ -491,6 +495,8 @@ class MC_VLCMedialist(Screen):
 		config.plugins.mc_vlc.save()
 		self.close()
 #------------------------------------------------------------------------------------------
+
+
 class MC_VLCFavoriteFolders(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -575,11 +581,11 @@ class MC_VLCFavoriteFolders(Screen):
 		configfile.save()
 		self.close()
 
-	def conditionalNew(self,added):
+	def conditionalNew(self, added):
 		if added == 0:
 			return
 
-		id = len(config.plugins.mc_vlc.folders)-1
+		id = len(config.plugins.mc_vlc.folders) - 1
 		self.list.insert(id, getConfigListEntry(str(config.plugins.mc_vlc.folders[id].name.value), id))
 
 	def conditionalEdit(self, id):
@@ -593,16 +599,18 @@ class MC_VLCFavoriteFolders(Screen):
 		configfile.save()
 		self.close()
 #------------------------------------------------------------------------------------------
+
+
 class FavoriteFolderAdd(Screen, ConfigListScreen):
 	skin = """
 		<screen position="160,220" size="400,120" title="Media Center - Add VLC Favorite" >
 			<widget name="config" position="10,10" size="380,100" />
 		</screen>"""
 
-	def __init__(self, session, directory = "/", name = ""):
+	def __init__(self, session, directory="/", name=""):
 		Screen.__init__(self, session)
 
-		self["actions"] = NumberActionMap(["SetupActions","OkCancelActions"],
+		self["actions"] = NumberActionMap(["SetupActions", "OkCancelActions"],
 		{
 			"ok": self.keyOK,
 			"cancel": self.keyCancel
@@ -636,6 +644,8 @@ class FavoriteFolderAdd(Screen, ConfigListScreen):
 			print "MC_Settings_DelaFavFailed"
 		self.close(0)
 #------------------------------------------------------------------------------------------
+
+
 class FavoriteFolderEdit(Screen, ConfigListScreen):
 	skin = """
 		<screen position="160,220" size="400,120" title="Media Center - Edit VLC Favorite" >
@@ -645,7 +655,7 @@ class FavoriteFolderEdit(Screen, ConfigListScreen):
 	def __init__(self, session, foldernum):
 		Screen.__init__(self, session)
 
-		self["actions"] = NumberActionMap(["SetupActions","OkCancelActions"],
+		self["actions"] = NumberActionMap(["SetupActions", "OkCancelActions"],
 		{
 			"ok": self.keyOK,
 			"cancel": self.keyOK
@@ -664,6 +674,8 @@ class FavoriteFolderEdit(Screen, ConfigListScreen):
 		config.plugins.mc_vlc.folders.save()
 		self.close(self.fn)
 #------------------------------------------------------------------------------------------
+
+
 class FolderOptions(Screen):
 	skin = """
 		<screen position="160,200" size="400,200" title="Media Center - VLC Folder Options" >

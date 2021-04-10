@@ -1,8 +1,10 @@
 # mp4porn plugin by AliAbdul
 from Plugin import Movie, Plugin
-import re, urllib2
+import re
+import urllib2
 
 ##################################################
+
 
 class MP4PornMovie(Movie):
 	def __init__(self, name, url, thumb):
@@ -21,6 +23,7 @@ class MP4PornMovie(Movie):
 			return None
 
 ##################################################
+
 
 class MP4Porn(Plugin):
 	def __init__(self):
@@ -41,7 +44,7 @@ class MP4Porn(Plugin):
 
 	def getMoreEntries(self):
 		if self.moreEntries:
-			self.getEntries(self.callback, self.currPage+1)
+			self.getEntries(self.callback, self.currPage + 1)
 
 	def getPageError(self, error=None):
 		if error and self.currPage == 1:
@@ -50,6 +53,7 @@ class MP4Porn(Plugin):
 			self.moreEntries = False
 
 ##################################################
+
 
 def getPlugin():
 	return MP4Porn()

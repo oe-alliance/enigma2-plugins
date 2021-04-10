@@ -1,26 +1,26 @@
 ﻿## MediaInfoDLL - All info about media files, for DLL
 #  Copyright (C) 2007-2009 Jerome Martinez, Zen@MediaArea.net
-# 
+#
 #  This library is free software: you can redistribute it and/or modify it
 #  under the terms of the GNU Lesser General Public License as published by
 #  the Free Software Foundation, either version 3 of the License, or
 #  any later version.
-# 
+#
 #  This library is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
-# 
+#
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with this library. If not, see <http://www.gnu.org/licenses/>.
-# 
+#
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# 
+#
 #  Public DLL interface implementation
 #  Wrapper for MediaInfo Library
 #  Please see MediaInfo.h for help
-# 
+#
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #
 # Converted to python module by Petr Kaderabek
@@ -48,23 +48,23 @@ else:
 # enum				c_size_t
 # const wchar_t*	c_wchar_p,
 # NULL				None,
-# these functions need strings in unicode format 
-
-
+# these functions need strings in unicode format
 
 
 class Stream:
 	General, Video, Audio, Text, Chapters, Image, Menu, Max = range(8)
 
+
 class Info:
 	Name, Text, Measure, Options, Name_Text, Measure_Text, Info, HowTo, Max = range(9)
+
 
 class InfoOption:
 	ShowInInform, Reserved, ShowInSupported, TypeOfValue, Max = range(5)
 
+
 class FileOptions:
 	Nothing, Recursive, CloseAll, xxNonexx_3, Max = range(5)
-
 
 
 class MediaInfo:
@@ -72,22 +72,22 @@ class MediaInfo:
 	#MEDIAINFO_EXP void*	     __stdcall MediaInfo_New (); /*you must ALWAYS call MediaInfo_Delete(Handle) in order to free memory*/
 	#/** @brief A 'new' MediaInfo interface (with a quick init of useful options : "**VERSION**;**APP_NAME**;**APP_VERSION**", but without debug information, use it only if you know what you do), return a Handle, don't forget to delete it after using it*/
 	MediaInfo_New = MediaInfoDLL_Handler.MediaInfo_New
-	MediaInfo_New.argtypes = []  
-	MediaInfo_New.restype  = c_void_p
+	MediaInfo_New.argtypes = []
+	MediaInfo_New.restype = c_void_p
 
 	#MEDIAINFO_EXP void*	     __stdcall MediaInfo_New_Quick (const wchar_t* File, const wchar_t* Options); /*you must ALWAYS call MediaInfo_Delete(Handle) in order to free memory*/
 	MediaInfo_New_Quick = MediaInfoDLL_Handler.MediaInfo_New_Quick
 	MediaInfo_New_Quick.argtypes = [c_wchar_p, c_wchar_p]
-	MediaInfo_New_Quick.restype  = c_void_p
+	MediaInfo_New_Quick.restype = c_void_p
 	MediaInfoA_New_Quick = MediaInfoDLL_Handler.MediaInfoA_New_Quick
 	MediaInfoA_New_Quick.argtypes = [c_char_p, c_char_p]
-	MediaInfoA_New_Quick.restype  = c_void_p
+	MediaInfoA_New_Quick.restype = c_void_p
 
 	#/** @brief Delete a MediaInfo interface*/
 	#MEDIAINFO_EXP void	      __stdcall MediaInfo_Delete (void* Handle);
 	MediaInfo_Delete = MediaInfoDLL_Handler.MediaInfo_Delete
 	MediaInfo_Delete.argtypes = [c_void_p]
-	MediaInfo_Delete.restype  = None
+	MediaInfo_Delete.restype = None
 
 	#/** @brief Wrapper for MediaInfoLib::MediaInfo::Open (with a filename)*/
 	#MEDIAINFO_EXP size_t	    __stdcall MediaInfo_Open (void* Handle, const wchar_t* File);
@@ -101,14 +101,14 @@ class MediaInfo:
 	#/** @brief Wrapper for MediaInfoLib::MediaInfo::Open (with a buffer) */
 	#MEDIAINFO_EXP size_t	    __stdcall MediaInfo_Open_Buffer (void* Handle, const unsigned char* Begin, size_t Begin_Size, const unsigned char* End, size_t End_Size); /*return Handle*/
 	MediaInfo_Open_Buffer = MediaInfoDLL_Handler.MediaInfo_Open_Buffer
-	MediaInfo_Open_Buffer.argtype = [c_void_p, c_void_p, c_size_t, c_void_p, c_size_t]  
+	MediaInfo_Open_Buffer.argtype = [c_void_p, c_void_p, c_size_t, c_void_p, c_size_t]
 	MediaInfo_Open_Buffer.restype = c_size_t
 
 	#/** @brief Wrapper for MediaInfoLib::MediaInfo::Save */
 	#MEDIAINFO_EXP size_t	    __stdcall MediaInfo_Save (void* Handle);
 	MediaInfo_Save = MediaInfoDLL_Handler.MediaInfo_Save
 	MediaInfo_Save.argtype = [c_void_p]
-	MediaInfo_Save.restype = c_size_t   
+	MediaInfo_Save.restype = c_size_t
 
 	#/** @brief Wrapper for MediaInfoLib::MediaInfo::Close */
 	#MEDIAINFO_EXP void	      __stdcall MediaInfo_Close (void* Handle);
@@ -187,53 +187,62 @@ class MediaInfo:
 
 	#Handling
 	def __init__(self):
-		self.Handle=self.MediaInfo_New()
+		self.Handle = self.MediaInfo_New()
 		self.MediaInfoA_Option(self.Handle, "CharSet", "UTF-8")
+
 	def __del__(self):
 		self.MediaInfo_Delete(self.Handle)
+
 	def Open(self, File):
-		if type(File)==str:
-			return self.MediaInfoA_Open (self.Handle, File);
+		if type(File) == str:
+			return self.MediaInfoA_Open(self.Handle, File)
 		elif MustUseAnsi:
-			return self.MediaInfoA_Open (self.Handle, File.encode("utf-8"));
+			return self.MediaInfoA_Open(self.Handle, File.encode("utf-8"))
 		else:
-			return self.MediaInfo_Open (self.Handle, File);
+			return self.MediaInfo_Open(self.Handle, File)
+
 	def Open_Buffer(self, Begin, Begin_Size, End=None, End_Size=0):
 		return self.MediaInfo_Open_Buffer(self.Handle, Begin, Begin_Size, End, End_Size)
+
 	def Save(self):
 		return self.MediaInfo_Save(self.Handle)
+
 	def Close(self):
 		return self.MediaInfo_Close(self.Handle)
 
 	#General information
 	def Inform(self):
 		if MustUseAnsi:
-			return unicode(self.MediaInfoA_Inform(self.Handle, 0), "utf_8") 
+			return unicode(self.MediaInfoA_Inform(self.Handle, 0), "utf_8")
 		else:
 			return self.MediaInfo_Inform(self.Handle, 0)
+
 	def Get(self, StreamKind, StreamNumber, Parameter, InfoKind=Info.Text, SearchKind=Info.Name):
-		if type(Parameter)==str:
-			return unicode(self.MediaInfoA_Get(self.Handle, StreamKind, StreamNumber, Parameter, InfoKind, SearchKind), "utf_8") 
+		if type(Parameter) == str:
+			return unicode(self.MediaInfoA_Get(self.Handle, StreamKind, StreamNumber, Parameter, InfoKind, SearchKind), "utf_8")
 		elif MustUseAnsi:
-			return unicode(self.MediaInfoA_Get(self.Handle, StreamKind, StreamNumber, Parameter.encode("utf-8"), InfoKind, SearchKind), "utf_8") 
+			return unicode(self.MediaInfoA_Get(self.Handle, StreamKind, StreamNumber, Parameter.encode("utf-8"), InfoKind, SearchKind), "utf_8")
 		else:
 			return self.MediaInfo_Get(self.Handle, StreamKind, StreamNumber, Parameter, InfoKind, SearchKind)
+
 	def GetI(self, StreamKind, StreamNumber, Parameter, InfoKind=Info.Text):
 		if MustUseAnsi:
-			return unicode(self.MediaInfoA_GetI(self.Handle, StreamKind, StreamNumber, Parameter, InfoKind), "utf_8") 
+			return unicode(self.MediaInfoA_GetI(self.Handle, StreamKind, StreamNumber, Parameter, InfoKind), "utf_8")
 		else:
 			return self.MediaInfo_GetI(self.Handle, StreamKind, StreamNumber, Parameter, InfoKind)
+
 	def Set(self, ToSet, StreamKind, StreamNumber, Parameter, OldParameter=u""):
-		if type(Parameter)==str and type(OldParameter)==unicode:
-			Parameter=Parameter.decode("utf-8")
-		if type(Parameter)==unicode and type(OldParameter)==str:
-			OldParameter=OldParameter.decode("utf-8")
-		if type(Parameter)==str:
+		if type(Parameter) == str and type(OldParameter) == unicode:
+			Parameter = Parameter.decode("utf-8")
+		if type(Parameter) == unicode and type(OldParameter) == str:
+			OldParameter = OldParameter.decode("utf-8")
+		if type(Parameter) == str:
 			return self.MediaInfoA_Set(self.Handle, ToSet, StreamKind, StreamNumber, Parameter, OldParameter)
 		elif MustUseAnsi:
 			return self.MediaInfoA_Set(self.Handle, ToSet, StreamKind, StreamNumber, Parameter.encode("utf-8"), OldParameter.encode("utf-8"))
 		else:
 			return self.MediaInfo_Set(self.Handle, ToSet, StreamKind, StreamNumber, Parameter, OldParameter)
+
 	def SetI(self, ToSet, StreamKind, StreamNumber, Parameter, OldValue):
 		if MustUseAnsi:
 			return self.MediaInfoA_SetI(self.Handle, ToSet, StreamKind, StreamNumber, Parameter, OldValue.encode("utf-8"))
@@ -242,29 +251,32 @@ class MediaInfo:
 
 	#Options
 	def Option(self, Option, Value=u""):
-		if type(Option)==str and type(Value)==unicode:
-			Option=Option.decode("utf-8")
-		if type(Option)==unicode and type(Value)==str:
-			Value=Value.decode("utf-8")
-		if type(Option)==str:
-			return unicode(self.MediaInfoA_Option(self.Handle, Option.encode("utf-8"), Value.encode("utf-8")), "utf_8") 
+		if type(Option) == str and type(Value) == unicode:
+			Option = Option.decode("utf-8")
+		if type(Option) == unicode and type(Value) == str:
+			Value = Value.decode("utf-8")
+		if type(Option) == str:
+			return unicode(self.MediaInfoA_Option(self.Handle, Option.encode("utf-8"), Value.encode("utf-8")), "utf_8")
 		elif MustUseAnsi:
-			return unicode(self.MediaInfoA_Option(self.Handle, Option.encode("utf-8"), Value.encode("utf-8")), "utf_8") 
+			return unicode(self.MediaInfoA_Option(self.Handle, Option.encode("utf-8"), Value.encode("utf-8")), "utf_8")
 		else:
 			return self.MediaInfo_Option(self.Handle, Option, Value)
+
 	def Option_Static(self, Option, Value=u""):
-		if type(Option)==str and type(Value)==unicode:
-			Option=Option.decode("utf-8")
-		if type(Option)==unicode and type(Value)==str:
-			Value=Value.decode("utf-8")
-		if type(Option)==str:
-			return unicode(self.MediaInfoA_Option(None, Option, Value), "utf_8") 
+		if type(Option) == str and type(Value) == unicode:
+			Option = Option.decode("utf-8")
+		if type(Option) == unicode and type(Value) == str:
+			Value = Value.decode("utf-8")
+		if type(Option) == str:
+			return unicode(self.MediaInfoA_Option(None, Option, Value), "utf_8")
 		elif MustUseAnsi:
-			return unicode(self.MediaInfoA_Option(None, Option.encode("utf-8"), Value.encode("utf-8")), "utf_8") 
+			return unicode(self.MediaInfoA_Option(None, Option.encode("utf-8"), Value.encode("utf-8")), "utf_8")
 		else:
 			return self.MediaInfo_Option(None, Option, Value)
+
 	def State_Get(self):
 		return self.MediaInfo_State_Get(self.Handle)
+
 	def Count_Get(self, StreamKind, StreamNumber=-1):
 		return self.MediaInfo_Count_Get(self.Handle, StreamKind, StreamNumber)
 
@@ -367,40 +379,52 @@ class MediaInfoList:
 	Handle = c_void_p(0)
 
 	#Handling
-	def __init__(self):		      
-		self.Handle=MediaInfoList_New()
+	def __init__(self):
+		self.Handle = MediaInfoList_New()
+
 	def __del__(self):
 		MediaInfoList_Delete(self.Handle)
+
 	def Open(self, Files, Options=FileOptions.Nothing):
 		return MediaInfoList_Open(self.Handle, Files, Options)
+
 	def Open_Buffer(self, Begin, Begin_Size, End=None, End_Size=0):
-		return MediaInfoList_Open_Buffer (self.Handle, Begin, Begin_Size, End, End_Size)
+		return MediaInfoList_Open_Buffer(self.Handle, Begin, Begin_Size, End, End_Size)
+
 	def Save(self, FilePos):
 		return MediaInfoList_Save(self.Handle, FilePos)
+
 	def Close(self, FilePos):
-		MediaInfoList_Close (self.Handle, FilePos)
+		MediaInfoList_Close(self.Handle, FilePos)
 
 	#General information
 	def Inform(self, FilePos, Reserved=0):
-		return MediaInfoList_Inform (self.Handle, FilePos, Reserved)
+		return MediaInfoList_Inform(self.Handle, FilePos, Reserved)
+
 	def GetI(self, FilePos, StreamKind, StreamNumber, Parameter, InfoKind=Info.Text):
-		return MediaInfoList_GetI (self.Handle, FilePos, StreamKind, StreamNumber, Parameter, InfoKind)
+		return MediaInfoList_GetI(self.Handle, FilePos, StreamKind, StreamNumber, Parameter, InfoKind)
+
 	def Get(self, FilePos, StreamKind, StreamNumber, Parameter, InfoKind=Info.Text, SearchKind=Info.Name):
-		return MediaInfoList_Get (self.Handle, FilePos, StreamKind, StreamNumber, (Parameter), InfoKind, SearchKind)
+		return MediaInfoList_Get(self.Handle, FilePos, StreamKind, StreamNumber, (Parameter), InfoKind, SearchKind)
+
 	def SetI(self, ToSet, FilePos, StreamKind, StreamNumber, Parameter, OldParameter=u""):
-		return MediaInfoList_SetI (self, Handle, ToSet, FilePos, StreamKind, StreamNumber, Parameter, OldParameter)
+		return MediaInfoList_SetI(self, Handle, ToSet, FilePos, StreamKind, StreamNumber, Parameter, OldParameter)
+
 	def Set(self, ToSet, FilePos, StreamKind, StreamNumber, Parameter, OldParameter=u""):
-		return MediaInfoList_Set (self.Handle, ToSet, FilePos, StreamKind, StreamNumber, Parameter, OldParameter)
+		return MediaInfoList_Set(self.Handle, ToSet, FilePos, StreamKind, StreamNumber, Parameter, OldParameter)
 
 	#Options
 	def Option(self, Option, Value=u""):
-		return MediaInfoList_Option (self.Handle, Option, Value)
+		return MediaInfoList_Option(self.Handle, Option, Value)
+
 	def Option_Static(self, Option, Value=u""):
 		return MediaInfoList_Option(None, Option, Value)
-	def State_Get(self):
-		return MediaInfoList_State_Get (self.Handle)
-	def Count_Get(self, FilePos, StreamKind, StreamNumber):
-		return MediaInfoList_Count_Get (self.Handle, FilePos, StreamKind, StreamNumber=-1)
-	def Count_Get_Files(self):
-		return MediaInfoList_Count_Get_Files (self.Handle)
 
+	def State_Get(self):
+		return MediaInfoList_State_Get(self.Handle)
+
+	def Count_Get(self, FilePos, StreamKind, StreamNumber):
+		return MediaInfoList_Count_Get(self.Handle, FilePos, StreamKind, StreamNumber=-1)
+
+	def Count_Get_Files(self):
+		return MediaInfoList_Count_Get_Files(self.Handle)

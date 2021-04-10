@@ -1,13 +1,13 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 #  Advanced Movie Selection for Dreambox-Enigma2
 #
 #  The plugin is developed on the basis from a lot of single plugins (thx for the code @ all)
 #  Coded by JackDaniel and cmikula (c)2012
 #  Support: www.i-have-a-dreambox.com
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -16,7 +16,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 from __init__ import _
@@ -31,14 +31,15 @@ from Components.ScrollLabel import ScrollLabel
 from Source.Globals import SkinTools
 import Version
 
+
 class VersionList(GUIComponent):
     def __init__(self):
         GUIComponent.__init__(self)
         self.l = eListboxPythonMultiContent()
         self.l.setBuildFunc(self.buildMovieSelectionListEntry)
-        self.l.setFont(0, gFont("Regular", 20))                             
+        self.l.setFont(0, gFont("Regular", 20))
         self.l.setItemHeight(30)
-        self.onSelectionChanged = [ ]
+        self.onSelectionChanged = []
 
     def connectSelChanged(self, fnc):
         if not fnc in self.onSelectionChanged:
@@ -50,16 +51,16 @@ class VersionList(GUIComponent):
 
     def selectionChanged(self):
         for x in self.onSelectionChanged:
-            x()        
+            x()
 
     def buildMovieSelectionListEntry(self, version):
         width = self.l.getItemSize().width()
-        res = [ None ]        
-        res.append((eListboxPythonMultiContent.TYPE_TEXT, 5, 2, width - 30 , 23, 0, RT_HALIGN_LEFT, "%s" % version.getVersion()))
+        res = [None]
+        res.append((eListboxPythonMultiContent.TYPE_TEXT, 5, 2, width - 30, 23, 0, RT_HALIGN_LEFT, "%s" % version.getVersion()))
         return res
 
     GUI_WIDGET = eListbox
-    
+
     def postWidgetCreate(self, instance):
         instance.setContent(self.l)
         instance.selectionChanged.get().append(self.selectionChanged)
@@ -70,16 +71,17 @@ class VersionList(GUIComponent):
 
     def getCurrentIndex(self):
         return self.instance.getCurrentIndex()
-    
+
     def getSelectionIndex(self):
         return self.l.getCurrentSelectionIndex()
 
     def setList(self, l):
         self.l.setList(l)
-    
+
     def getCurrent(self):
         l = self.l.getCurrentSelection()
         return l and l[0]
+
 
 class AdvancedMovieSelectionAbout(Screen):
     def __init__(self, session):
@@ -111,6 +113,7 @@ class AdvancedMovieSelectionAbout(Screen):
 
     def showchanges(self):
         self.session.openWithCallback(self.close, AboutDetails)
+
 
 class AboutDetails(Screen):
     def __init__(self, session):
@@ -144,7 +147,7 @@ class AboutDetails(Screen):
         versionList = []
         for version in versions:
             versionList.append((version,))
-            
+
         self["bouquet+"].show()
         self["bouquet-"].show()
         self["red"].show()

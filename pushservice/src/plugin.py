@@ -16,7 +16,9 @@
 #
 #######################################################################
 
-import os, sys, traceback
+import os
+import sys
+import traceback
 
 # Plugin
 from Plugins.Plugin import PluginDescriptor
@@ -52,19 +54,19 @@ gPushService = None
 
 
 # Config options
-config.pushservice                           = ConfigSubsection()
+config.pushservice = ConfigSubsection()
 
-config.pushservice.about                     = ConfigNothing()
+config.pushservice.about = ConfigNothing()
 
-config.pushservice.enable                    = ConfigEnableDisable(default = True)
+config.pushservice.enable = ConfigEnableDisable(default=True)
 
-config.pushservice.boxname                   = ConfigText(default = "Enigma2", fixed_size = False)
-config.pushservice.xmlpath                   = ConfigText(default = "/etc/enigma2/pushservice.xml", fixed_size = False)
+config.pushservice.boxname = ConfigText(default="Enigma2", fixed_size=False)
+config.pushservice.xmlpath = ConfigText(default="/etc/enigma2/pushservice.xml", fixed_size=False)
 
-config.pushservice.runonboot                 = ConfigEnableDisable(default = True)
-config.pushservice.bootdelay                 = ConfigSelectionNumber(5, 1000, 5, default = 10)
-config.pushservice.time                      = ConfigClock(default = 0)
-config.pushservice.period                    = ConfigSelectionNumber(0, 1000, 1, default = 24)
+config.pushservice.runonboot = ConfigEnableDisable(default=True)
+config.pushservice.bootdelay = ConfigSelectionNumber(5, 1000, 5, default=10)
+config.pushservice.time = ConfigClock(default=0)
+config.pushservice.period = ConfigSelectionNumber(0, 1000, 1, default=24)
 
 
 #######################################################
@@ -100,14 +102,14 @@ def autostart(reason, **kwargs):
 #######################################################
 # Plugin main function
 def Plugins(**kwargs):
-	
+
 	descriptors = []
-	
+
 	if config.pushservice.enable.value:
 		# AutoStart
-		descriptors.append( PluginDescriptor(where = PluginDescriptor.WHERE_AUTOSTART, fnc = autostart, needsRestart = False) )
-		
+		descriptors.append(PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, fnc=autostart, needsRestart=False))
+
 	#TODO icon
-	descriptors.append( PluginDescriptor(name = NAME, description = NAME + " " +_("configuration"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc = setup, needsRestart = False) ) #icon = "/icon.png"
+	descriptors.append(PluginDescriptor(name=NAME, description=NAME + " " + _("configuration"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=setup, needsRestart=False)) #icon = "/icon.png"
 
 	return descriptors

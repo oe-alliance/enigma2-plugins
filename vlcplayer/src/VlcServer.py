@@ -21,10 +21,11 @@ from VlcPlayer import VlcPlayer, isDvdUrl
 
 seed()
 
+
 def normpath(path):
 	if path is None:
 		return None
-	path = path.replace("\\","/").replace("//", "/")
+	path = path.replace("\\", "/").replace("//", "/")
 	if path == "/..":
 		return None
 	if len(path) > 0 and path[0] != '/':
@@ -37,6 +38,7 @@ def normpath(path):
 	elif path == ".":
 		return None
 	return path
+
 
 class VlcServer:
 	def __init__(self, cfg):
@@ -197,7 +199,8 @@ class VlcServer:
 
 	def __xmlRequest(self, request, params, sout=""):
 		uri = "/requests/" + request + ".xml"
-		if params is not None: uri = uri + "?" + urlencode(params).replace('+', '%20') + sout.replace('+', '%20')
+		if params is not None:
+			uri = uri + "?" + urlencode(params).replace('+', '%20') + sout.replace('+', '%20')
 		location = "%s:%d" % (self.getHost(), self.getHttpPort())
 		try:
 			resp = urlopen("http://" + location + uri)
@@ -245,7 +248,7 @@ class VlcServer:
 				return e
 		return None
 
-	def play(self, session, media, name, currentList = None, player = None):
+	def play(self, session, media, name, currentList=None, player=None):
 		if player is None:
 		# or not isinstance(player, VlcPlayer):
 			player = VlcPlayer
@@ -265,7 +268,7 @@ class VlcServer:
 			videoNormList = self.getVideoNorm().split(",")
 			# Video settings
 			transcode.append("vcodec=%s,vb=%d,venc=ffmpeg,fps=%s" % (
-				self.getVideoCodec(),self.getVideoBitrate(),
+				self.getVideoCodec(), self.getVideoBitrate(),
 				videoNormList[3]
 			))
 			#New canvas - since VLC 0.9
@@ -315,20 +318,20 @@ class VlcServer:
 			parameters += " :file-caching=1000"
 
 		# languages/tracks
-		if self.getlangInputType()=="language":
-			if self.gettypeAudio()!="---":
+		if self.getlangInputType() == "language":
+			if self.gettypeAudio() != "---":
 				parameters += " :audio-language=%s" % self.gettypeAudio()
-			if self.gettypeSubtitles()!="---":
+			if self.gettypeSubtitles() != "---":
 				parameters += " :sub-language=%s" % self.gettypeSubtitles()
 		else:
-			if self.gettypeAudio()!="-1":
+			if self.gettypeAudio() != "-1":
 				parameters += " :audio-track=%s" % self.gettypeAudio()
-			if self.gettypeSubtitles()!="-1":
+			if self.gettypeSubtitles() != "-1":
 				parameters += " :sub-track=%s" % self.gettypeSubtitles()
 
 		if re.match("dvd", filename):
 			# sout-all only, if is not selected subtitle track or subtitle language
-			if self.gettypeSubtitles()=="---" or self.gettypeSubtitles()=="-1": 
+			if self.gettypeSubtitles() == "---" or self.gettypeSubtitles() == "-1":
 				parameters += " :sout-all"
 		else:
 			parameters += " :sout-all"
@@ -339,22 +342,22 @@ class VlcServer:
 		if len(transcode) > 0:
 			sout += "transcode{%s}:" % (",".join(transcode))
 
-		mux="ts{pid-video=%d,pid-audio=%d}" % (videoPid, audioPid)
+		mux = "ts{pid-video=%d,pid-audio=%d}" % (videoPid, audioPid)
 		sout += "std{access=http,mux=%s,dst=/%s.ts}" % (mux, streamName)
 
 		if oldVLC:
-			input +=  " " + sout + parameters
+			input += " " + sout + parameters
 			sout = ""
 		else:
-			params = "".join((sout,parameters)).split(' ')
+			params = "".join((sout, parameters)).split(' ')
 			sout = ""
 			for par in params:
-				sout +="&option=%s" % quote_plus(par.lstrip(':'))
+				sout += "&option=%s" % quote_plus(par.lstrip(':'))
 
 		print "[VLC] playfile", input
 		print "[VLC] sout", sout
 
-		xml = self.__xmlRequest("status", [("command", "in_play"),("input", input)], sout)
+		xml = self.__xmlRequest("status", [("command", "in_play"), ("input", input)], sout)
 
 		error = xml.getElementsByTagName("error")
 		if error is not None and len(error) > 0:

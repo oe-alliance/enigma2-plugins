@@ -1,6 +1,7 @@
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 
+
 class NetworkInfo(Converter):
 	MAC = 0
 	DHCP = 1
@@ -12,12 +13,12 @@ class NetworkInfo(Converter):
 	def __init__(self, type):
 		Converter.___init__(self)
 		self.type = {
-					 "Mac" : self.MAC,
-					 "Dhcp" : self.DHCP,
-					 "Ip" : self.IP,
-					 "Gateway" : self.GATEWAY,
-					 "Nameserver" : self.NAMESERVER,
-					 "Ipv6" : self.IPV6,
+					 "Mac": self.MAC,
+					 "Dhcp": self.DHCP,
+					 "Ip": self.IP,
+					 "Gateway": self.GATEWAY,
+					 "Nameserver": self.NAMESERVER,
+					 "Ipv6": self.IPV6,
 					 }[type]
 
 	@cached
@@ -38,4 +39,3 @@ class NetworkInfo(Converter):
 			return iface.ipv6
 
 	text = property(getText)
-

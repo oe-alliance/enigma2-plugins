@@ -3,13 +3,14 @@ from Components.Sources.Source import Source
 from GlobalActions import globalActionMap
 from Components.VolumeControl import VolumeControl
 
+
 class Volume(Source):
 	def __init__(self, session):
 		Source.__init__(self)
 		global globalActionMap # hackalert :)
 		self.actionmap = globalActionMap
 		self.volctrl = eDVBVolumecontrol.getInstance() # this is not nice
-		self.vol = ( True, "State", self.volctrl.getVolume(), self.volctrl.isMuted() )
+		self.vol = (True, "State", self.volctrl.getVolume(), self.volctrl.isMuted())
 
 	def handleCommand(self, cmd):
 		l = []
@@ -45,4 +46,3 @@ class Volume(Source):
 		self.vol = l
 
 	volume = property(lambda self: self.vol)
-

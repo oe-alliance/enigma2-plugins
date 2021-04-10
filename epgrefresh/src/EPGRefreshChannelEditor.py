@@ -23,6 +23,7 @@ from EPGRefreshService import EPGRefreshService
 # Show ServiceName instead of ServiceReference
 from ServiceReference import ServiceReference
 
+
 class SimpleBouquetSelection(SimpleChannelSelection):
 	def __init__(self, session, title):
 		SimpleChannelSelection.__init__(self, session, title)
@@ -36,6 +37,7 @@ class SimpleBouquetSelection(SimpleChannelSelection):
 			# We return the currently active path here
 			# Asking the user if this is what he wants might be better though
 			self.close(self.servicePath[-1])
+
 
 class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 	"""Edit Services to be refreshed by EPGRefresh"""
@@ -65,15 +67,15 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 			services[1][:]
 		)
 
-		self.typeSelection = NoSave(ConfigSelection(choices = [
+		self.typeSelection = NoSave(ConfigSelection(choices=[
 			("channels", _("Channels")),
 			("bouquets", _("Bouquets"))]
 		))
-		self.typeSelection.addNotifier(self.refresh, initial_call = False)
+		self.typeSelection.addNotifier(self.refresh, initial_call=False)
 
 		self.reloadList()
 
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changed)
 
 		# Initialize StaticTexts
 		self["key_red"] = StaticText(_("Cancel"))
@@ -126,7 +128,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 			self.idx = 1
 
 		self.list.extend([
-			getConfigListEntry(_("Refreshing"), NoSave(ConfigSelection(choices = [(x, ServiceReference(x.sref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))])))
+			getConfigListEntry(_("Refreshing"), NoSave(ConfigSelection(choices=[(x, ServiceReference(x.sref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))])))
 				for x in self.services[self.idx]
 		])
 
@@ -175,7 +177,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 			list = self["config"].getList()
 			list.append(getConfigListEntry(
 				_("Refreshing"),
-				NoSave(ConfigSelection(choices = [(
+				NoSave(ConfigSelection(choices=[(
 					EPGRefreshService(str(args[0].toString()), None),
 					ServiceReference(args[0]).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
 				)]))

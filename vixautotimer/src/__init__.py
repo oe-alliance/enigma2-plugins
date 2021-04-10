@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
-import os, gettext
+import os
+import gettext
 
 # Config
 from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
@@ -16,13 +17,13 @@ config.plugins.autotimer.refresh = ConfigSelection(choices=[
 		("none", _("None")),
 		("auto", _("Only AutoTimers created during this session")),
 		("all", _("All non-repeating timers"))
-	], default = "all"
+	], default="all"
 )
 config.plugins.autotimer.try_guessing = ConfigEnableDisable(default=True)
 config.plugins.autotimer.editor = ConfigSelection(choices=[
 		("plain", _("Classic")),
 		("wizard", _("Wizard"))
-	], default = "plain"
+	], default="plain"
 )
 config.plugins.autotimer.addsimilar_on_conflict = ConfigEnableDisable(default=False)
 config.plugins.autotimer.add_autotimer_to_tags = ConfigYesNo(default=False)
@@ -39,9 +40,11 @@ config.plugins.autotimer.skip_during_records = ConfigYesNo(default=False)
 
 PluginLanguageDomain = "AutoTimer"
 PluginLanguagePath = "Extensions/AutoTimer/locale"
- 
+
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -49,6 +52,7 @@ def _(txt):
 	else:
 		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
 		return gettext.gettext(txt)
+
 
 language.addCallback(localeInit())
 

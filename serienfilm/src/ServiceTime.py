@@ -2,6 +2,7 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached, ElementError
 from enigma import iServiceInformation, eServiceReference
 
+
 class ServiceTime(Converter, object):
 	STARTTIME = 0
 	ENDTIME = 1
@@ -24,7 +25,7 @@ class ServiceTime(Converter, object):
 #		print("ServiceTimeSF.getTime %x, self=%s" % (id(self.getTime), sstr(self)))
 		service = self.source.service
 		info = self.source.info
-		
+
 		if not info or not service:
 			return None
 

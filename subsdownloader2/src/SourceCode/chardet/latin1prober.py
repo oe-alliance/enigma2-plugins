@@ -14,12 +14,12 @@
 # modify it under the terms of the GNU Lesser General Public
 # License as published by the Free Software Foundation; either
 # version 2.1 of the License, or (at your option) any later version.
-# 
+#
 # This library is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 # Lesser General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
@@ -42,7 +42,7 @@ ASV = 6 # accent small vowel
 ASO = 7 # accent small other
 CLASS_NUM = 8 # total classes
 
-Latin1_CharToClass = ( \
+Latin1_CharToClass = (
   OTH, OTH, OTH, OTH, OTH, OTH, OTH, OTH,   # 00 - 07
   OTH, OTH, OTH, OTH, OTH, OTH, OTH, OTH,   # 08 - 0F
   OTH, OTH, OTH, OTH, OTH, OTH, OTH, OTH,   # 10 - 17
@@ -77,21 +77,22 @@ Latin1_CharToClass = ( \
   ASV, ASV, ASV, ASV, ASV, ASO, ASO, ASO,   # F8 - FF
 )
 
-# 0 : illegal 
-# 1 : very unlikely 
-# 2 : normal 
+# 0 : illegal
+# 1 : very unlikely
+# 2 : normal
 # 3 : very likely
 Latin1ClassModel = ( \
 # UDF OTH ASC ASS ACV ACO ASV ASO
-   0,  0,  0,  0,  0,  0,  0,  0,  # UDF
-   0,  3,  3,  3,  3,  3,  3,  3,  # OTH
-   0,  3,  3,  3,  3,  3,  3,  3,  # ASC
-   0,  3,  3,  3,  1,  1,  3,  3,  # ASS
-   0,  3,  3,  3,  1,  2,  1,  2,  # ACV
-   0,  3,  3,  3,  3,  3,  3,  3,  # ACO
-   0,  3,  1,  3,  1,  1,  1,  3,  # ASV
-   0,  3,  1,  3,  1,  1,  3,  3,  # ASO
+   0, 0, 0, 0, 0, 0, 0, 0,  # UDF
+   0, 3, 3, 3, 3, 3, 3, 3,  # OTH
+   0, 3, 3, 3, 3, 3, 3, 3,  # ASC
+   0, 3, 3, 3, 1, 1, 3, 3,  # ASS
+   0, 3, 3, 3, 1, 2, 1, 2,  # ACV
+   0, 3, 3, 3, 3, 3, 3, 3,  # ACO
+   0, 3, 1, 3, 1, 1, 1, 3,  # ASV
+   0, 3, 1, 3, 1, 1, 3, 3,  # ASO
 )
+
 
 class Latin1Prober(CharSetProber):
     def __init__(self):
@@ -122,7 +123,7 @@ class Latin1Prober(CharSetProber):
     def get_confidence(self):
         if self.get_state() == constants.eNotMe:
             return 0.01
-  
+
         total = reduce(operator.add, self._mFreqCounter)
         if total < 0.01:
             confidence = 0.0
@@ -130,7 +131,7 @@ class Latin1Prober(CharSetProber):
             confidence = (self._mFreqCounter[3] / total) - (self._mFreqCounter[1] * 20.0 / total)
         if confidence < 0.0:
             confidence = 0.0
-        # lower the confidence of latin1 so that other more accurate detector 
+        # lower the confidence of latin1 so that other more accurate detector
         # can take priority.
         confidence = confidence * 0.5
         return confidence

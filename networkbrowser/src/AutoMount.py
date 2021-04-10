@@ -11,9 +11,10 @@ from shutil import rmtree
 
 XML_FSTAB = "/etc/enigma2/automounts.xml"
 
+
 def rm_rf(d): # only for removing the ipkg stuff from /media/hdd subdirs
 	try:
-		for path in (os.path.join(d,f) for f in os.listdir(d)):
+		for path in (os.path.join(d, f) for f in os.listdir(d)):
 			if os.path.isdir(path):
 				rm_rf(path)
 			else:
@@ -22,8 +23,10 @@ def rm_rf(d): # only for removing the ipkg stuff from /media/hdd subdirs
 	except Exception, ex:
 		print "AutoMount failed to remove", d, "Error:", ex
 
+
 class AutoMount():
 	"""Manages Mounts declared in a XML-Document."""
+
 	def __init__(self):
 		self.automounts = {}
 		self.restartConsole = Console()
@@ -37,7 +40,7 @@ class AutoMount():
 
 		self.getAutoMountPoints()
 
-	def getAutoMountPoints(self, callback = None, restart=False):
+	def getAutoMountPoints(self, callback=None, restart=False):
 		# Initialize mounts to empty list
 		automounts = []
 		self.automounts = {}
@@ -53,7 +56,7 @@ class AutoMount():
 			ret = ""
 			# How many definitions are present
 			Len = len(definitions)
-			return Len > 0 and definitions[Len-1].text or default
+			return Len > 0 and definitions[Len - 1].text or default
 		mountusing = 0 # 0=old_enigma2, 1 =fstab, 2=enigma2
 		# Config is stored in "mountmanager" element
 		# Read out NFS Mounts
@@ -61,13 +64,13 @@ class AutoMount():
 			mountusing = 1
 			for nfs in autofs.findall("nfs"):
 				for mount in nfs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 					try:
 						data['mountusing'] = 'autofs'.encode("UTF-8")
 						data['mounttype'] = 'nfs'.encode("UTF-8")
 						data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
 						if data["active"] == 'True' or data["active"] == True:
-							self.activeMountsCounter +=1
+							self.activeMountsCounter += 1
 						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/media/hdd/").encode("UTF-8")
@@ -78,13 +81,13 @@ class AutoMount():
 						print "[MountManager] Error reading Mounts:", e
 			for cifs in autofs.findall("cifs"):
 				for mount in cifs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 					try:
 						data['mountusing'] = 'autofs'.encode("UTF-8")
 						data['mounttype'] = 'cifs'.encode("UTF-8")
 						data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
 						if data["active"] == 'True' or data["active"] == True:
-							self.activeMountsCounter +=1
+							self.activeMountsCounter += 1
 						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/media/hdd/").encode("UTF-8")
@@ -100,13 +103,13 @@ class AutoMount():
 			mountusing = 2
 			for nfs in fstab.findall("nfs"):
 				for mount in nfs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 					try:
 						data['mountusing'] = 'fstab'.encode("UTF-8")
 						data['mounttype'] = 'nfs'.encode("UTF-8")
 						data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
 						if data["active"] == 'True' or data["active"] == True:
-							self.activeMountsCounter +=1
+							self.activeMountsCounter += 1
 						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/media/hdd/").encode("UTF-8")
@@ -117,13 +120,13 @@ class AutoMount():
 						print "[MountManager] Error reading Mounts:", e
 			for cifs in fstab.findall("cifs"):
 				for mount in cifs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 					try:
 						data['mountusing'] = 'fstab'.encode("UTF-8")
 						data['mounttype'] = 'cifs'.encode("UTF-8")
 						data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
 						if data["active"] == 'True' or data["active"] == True:
-							self.activeMountsCounter +=1
+							self.activeMountsCounter += 1
 						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/media/hdd/").encode("UTF-8")
@@ -139,13 +142,13 @@ class AutoMount():
 			mountusing = 3
 			for nfs in enigma2.findall("nfs"):
 				for mount in nfs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 					try:
 						data['mountusing'] = 'enigma2'.encode("UTF-8")
 						data['mounttype'] = 'nfs'.encode("UTF-8")
 						data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
 						if data["active"] == 'True' or data["active"] == True:
-							self.activeMountsCounter +=1
+							self.activeMountsCounter += 1
 						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
@@ -157,13 +160,13 @@ class AutoMount():
 				# Read out CIFS Mounts
 			for cifs in enigma2.findall("cifs"):
 				for mount in cifs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 					try:
 						data['mountusing'] = 'enigma2'.encode("UTF-8")
 						data['mounttype'] = 'cifs'.encode("UTF-8")
 						data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
 						if data["active"] == 'True' or data["active"] == True:
-							self.activeMountsCounter +=1
+							self.activeMountsCounter += 1
 						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
@@ -178,13 +181,13 @@ class AutoMount():
 		if mountusing == 0:
 			for nfs in tree.findall("nfs"):
 				for mount in nfs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 					try:
 						data['mountusing'] = 'old_enigma2'.encode("UTF-8")
 						data['mounttype'] = 'nfs'.encode("UTF-8")
 						data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
 						if data["active"] == 'True' or data["active"] == True:
-							self.activeMountsCounter +=1
+							self.activeMountsCounter += 1
 						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
@@ -195,13 +198,13 @@ class AutoMount():
 						print "[MountManager] Error reading Mounts:", e
 			for cifs in tree.findall("cifs"):
 				for mount in cifs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 					try:
 						data['mountusing'] = 'old_enigma2'.encode("UTF-8")
 						data['mounttype'] = 'cifs'.encode("UTF-8")
 						data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
 						if data["active"] == 'True' or data["active"] == True:
-							self.activeMountsCounter +=1
+							self.activeMountsCounter += 1
 						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
@@ -223,7 +226,7 @@ class AutoMount():
 
 	def sanitizeOptions(self, origOptions, cifs=False, fstab=False, autofs=False):
 		options = origOptions.strip()
-		options = options.replace('utf8','iocharset=utf8')
+		options = options.replace('utf8', 'iocharset=utf8')
 		if fstab:
 			if not options:
 				options = 'rw'
@@ -285,7 +288,7 @@ class AutoMount():
 		if data['mountusing'] == 'autofs' and restart:
 			unmountcommand.append("/etc/init.d/autofs stop")
 		if os.path.ismount(path) and 'autofs' not in path:
-			unmountcommand.append('umount -fl '+ path)
+			unmountcommand.append('umount -fl ' + path)
 		if self.activeMountsCounter != 0:
 			if data['active'] == 'True' or data['active'] is True:
 				if data['mountusing'] == 'autofs' and restart:
@@ -308,7 +311,7 @@ class AutoMount():
 					elif data['mounttype'] == 'cifs':
 						if not os.path.ismount(path):
 							tmpusername = data['username'].replace(" ", "\\ ")
-							tmpcmd = 'mount -t cifs -o ' + self.sanitizeOptions(data['options'], cifs=True) +',noatime,noserverino,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
+							tmpcmd = 'mount -t cifs -o ' + self.sanitizeOptions(data['options'], cifs=True) + ',noatime,noserverino,username=' + tmpusername + ',password=' + data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
 							mountcommand = tmpcmd.encode("UTF-8")
 
 		if len(unmountcommand) > 0 or mountcommand is not None:
@@ -321,7 +324,7 @@ class AutoMount():
 				command.append('sleep 2')
 			if mountcommand is not None:
 				command.append(mountcommand)
-			print 'command',command
+			print 'command', command
 			self.MountConsole.eBatch(command, self.CheckMountPointFinished, [data, callback, restart], debug=True)
 		else:
 			self.CheckMountPointFinished([data, callback, restart])
@@ -408,7 +411,7 @@ class AutoMount():
 			tmpfile.close()
 			f.close()
 			os.rename(filename + '.tmp', filename)
-		
+
 	def escape(self, data):
 		return data.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;').replace("'", '&#39;')
 
@@ -435,7 +438,6 @@ class AutoMount():
 			res.append('</' + mountusing + '>\n')
 		return res
 
-
 	def writeMountsConfig(self):
 		# Generate List in RAM
 		list = ['<?xml version="1.0" ?>\n<mountmanager>\n']
@@ -453,11 +455,11 @@ class AutoMount():
 			sharetemp = None
 			if mounttype == 'nfs':
 				sharetemp = sharedata['ip'] + ':/' + sharedata['sharedir']
-				self.removeEntryFromFile(sharetemp+'\n', '/etc/auto.network', ' ')
+				self.removeEntryFromFile(sharetemp + '\n', '/etc/auto.network', ' ')
 				self.removeEntryFromFile(sharetemp, '/etc/fstab')
 			elif mounttype == 'cifs':
 				sharetemp = '//' + sharedata['ip'] + '/' + sharedata['sharedir']
-				self.removeEntryFromFile(":" + sharetemp+'\n', '/etc/auto.network', ' ')
+				self.removeEntryFromFile(":" + sharetemp + '\n', '/etc/auto.network', ' ')
 				self.removeEntryFromFile(sharetemp, '/etc/fstab')
 
 			list += self.generateMountXML(sharedata)
@@ -470,7 +472,7 @@ class AutoMount():
 						tmpusername = sharedata['username'].replace(" ", "\ ")
 						tmppassword = sharedata['password'].replace(" ", "\ ")
 						tmpaddress = sharedata['ip']
-						line = sharedata['sharename'] + ' -fstype=' + mounttype + ',user=' + tmpusername + ',pass=' + tmppassword +','+ self.sanitizeOptions(sharedata['options'], cifs=True, autofs=True) + ' ://' + tmpaddress + '/' + sharedata['sharedir'] + '\n'
+						line = sharedata['sharename'] + ' -fstype=' + mounttype + ',user=' + tmpusername + ',pass=' + tmppassword + ',' + self.sanitizeOptions(sharedata['options'], cifs=True, autofs=True) + ' ://' + tmpaddress + '/' + sharedata['sharedir'] + '\n'
 					out.write(line)
 					out.close()
 			elif mountusing == 'fstab':
@@ -499,7 +501,7 @@ class AutoMount():
 		if self.MountConsole is not None:
 			self.MountConsole = None
 
-	def removeMount(self, mountpoint, callback = None):
+	def removeMount(self, mountpoint, callback=None):
 # 		print "[NetworkBrowser] removing mount: ",mountpoint
 		self.newautomounts = {}
 		for sharename, sharedata in self.automounts.items():
@@ -522,7 +524,7 @@ class AutoMount():
 			elif sharedata['mounttype'] == 'cifs':
 				sharetemp = '://' + sharedata['ip'] + '/' + sharedata['sharedir']
 			if sharetemp:
-				self.removeEntryFromFile(sharetemp+'\n', '/etc/auto.network' , ' ')
+				self.removeEntryFromFile(sharetemp + '\n', '/etc/auto.network', ' ')
 				self.removeEntryFromFile(sharetemp, '/etc/fstab')
 		self.automounts.clear()
 		self.automounts = self.newautomounts
@@ -535,12 +537,12 @@ class AutoMount():
 			command.append("sleep 2")
 			command.append("/etc/init.d/autofs start")
 		else:
-			command.append('umount -fl '+ path)
+			command.append('umount -fl ' + path)
 # 		print "[NetworkBrowser] UMOUNT-CMD--->",umountcmd
 		self.removeConsole.eBatch(command, self.removeMountPointFinished, [path, callback], debug=True)
 
 	def removeMountPointFinished(self, extra_args):
-		(path, callback ) = extra_args
+		(path, callback) = extra_args
 		if os.path.exists(path):
 			if not os.path.ismount(path):
 				try:
@@ -553,5 +555,6 @@ class AutoMount():
 				if callback is not None:
 					self.callback = callback
 					self.timer.startLongTimer(1)
+
 
 iAutoMount = AutoMount()

@@ -29,21 +29,24 @@ from AutoMount import iAutoMount
 from MountEdit import AutoMountEdit
 from UserDialog import UserDialog
 
+
 def formatIp(ip):
 	if ip is None or len(ip) != 4:
 		return "0.0.0.0"
 	return "%d.%d.%d.%d" % (ip[0], ip[1], ip[2], ip[3])
 
+
 def write_cache(cache_file, cache_data):
 	#Does a cPickle dump
-	if not os_path.isdir( os_path.dirname(cache_file) ):
+	if not os_path.isdir(os_path.dirname(cache_file)):
 		try:
-			mkdir( os_path.dirname(cache_file) )
+			mkdir(os_path.dirname(cache_file))
 		except OSError:
 			print os_path.dirname(cache_file), '[Networkbrowser] is a file'
 	fd = open(cache_file, 'w')
 	dump(cache_data, fd, -1)
 	fd.close()
+
 
 def valid_cache(cache_file, cache_ttl):
 	#See if the cache file exists and is still living
@@ -57,6 +60,7 @@ def valid_cache(cache_file, cache_ttl):
 	else:
 		return 1
 
+
 def load_cache(cache_file):
 	#Does a cPickle load
 	fd = open(cache_file)
@@ -64,10 +68,12 @@ def load_cache(cache_file):
 	fd.close()
 	return cache_data
 
+
 class NetworkDescriptor:
-	def __init__(self, name = "NetworkServer", description = ""):
+	def __init__(self, name="NetworkServer", description=""):
 		self.name = name
 		self.description = description
+
 
 class NetworkBrowser(Screen):
 	skin = """
@@ -99,7 +105,7 @@ class NetworkBrowser(Screen):
 			<widget source="infotext" render="Label" position="0,420" size="560,30" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
 		</screen>"""
 
-	def __init__(self, session, iface,plugin_path):
+	def __init__(self, session, iface, plugin_path):
 		Screen.__init__(self, session)
 		self.skin_path = plugin_path
 		self.session = session
@@ -112,7 +118,7 @@ class NetworkBrowser(Screen):
 		self.networklist = None
 		self.device = None
 		self.mounts = None
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.expanded = []
 		self.cache_ttl = 604800 #Seconds cache is considered valid, 7 Days should be ok
 		self.cache_file = '/etc/enigma2/networkbrowser.cache' #Path to cache directory
@@ -147,13 +153,13 @@ class NetworkBrowser(Screen):
 		self.Timer.callback.append(self.TimerFire)
 
 	def GetNetworkInterfaces(self):
-		self.adapters = [(iNetwork.getFriendlyAdapterName(x),x) for x in iNetwork.getAdapterList()]
+		self.adapters = [(iNetwork.getFriendlyAdapterName(x), x) for x in iNetwork.getAdapterList()]
 
 		if not self.adapters:
-			self.adapters = [(iNetwork.getFriendlyAdapterName(x),x) for x in iNetwork.getConfiguredAdapters()]
+			self.adapters = [(iNetwork.getFriendlyAdapterName(x), x) for x in iNetwork.getConfiguredAdapters()]
 
 		if len(self.adapters) == 0:
-			self.adapters = [(iNetwork.getFriendlyAdapterName(x),x) for x in iNetwork.getInstalledAdapters()]
+			self.adapters = [(iNetwork.getFriendlyAdapterName(x), x) for x in iNetwork.getInstalledAdapters()]
 
 		for x in self.adapters:
 			if iNetwork.getAdapterAttribute(x[1], 'up') is True:
@@ -194,23 +200,23 @@ class NetworkBrowser(Screen):
 		self.startRun()
 
 	def keyBlue(self):
-		self.session.openWithCallback(self.scanIPclosed,ScanIP)
+		self.session.openWithCallback(self.scanIPclosed, ScanIP)
 
-	def scanIPclosed(self,result):
+	def scanIPclosed(self, result):
 		if result[0]:
 			if result[1] == "address":
-				print "[Networkbrowser] got IP:",result[1]
+				print "[Networkbrowser] got IP:", result[1]
 				nwlist = []
 				nwlist.append(netscan.netzInfo(result[0] + "/24"))
 				self.networklist += nwlist[0]
 			elif result[1] == "nfs":
-				self.networklist.append(['host', result[0], result[0] , '00:00:00:00:00:00', result[0], 'Master Browser'])
+				self.networklist.append(['host', result[0], result[0], '00:00:00:00:00:00', result[0], 'Master Browser'])
 
 		if len(self.networklist) > 0:
 			write_cache(self.cache_file, self.networklist)
 			self.updateHostsList()
 
-	def setStatus(self,status = None):
+	def setStatus(self, status=None):
 		if status:
 			self.statuslist = []
 			if status == 'update':
@@ -218,7 +224,7 @@ class NetworkBrowser(Screen):
 					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/update.png"))
 				else:
 					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/update.png"))
-				self.statuslist.append(( ['info'], statuspng, _("Searching your network. Please wait..."), None, None, None, None ))
+				self.statuslist.append((['info'], statuspng, _("Searching your network. Please wait..."), None, None, None, None))
 				self['list'].setList(self.statuslist)
 				name = _("Searching your network. Please wait...")
 				desc = name
@@ -227,7 +233,7 @@ class NetworkBrowser(Screen):
 					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/error.png"))
 				else:
 					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/error.png"))
-				self.statuslist.append(( ['info'], statuspng, _("No network devices found!"), None, None, None, None ))
+				self.statuslist.append((['info'], statuspng, _("No network devices found!"), None, None, None, None))
 				self['list'].setList(self.statuslist)
 				name = _("No network devices found!")
 				desc = name
@@ -250,7 +256,7 @@ class NetworkBrowser(Screen):
 		self.inv_cache = 0
 		self.vc = valid_cache(self.cache_file, self.cache_ttl)
 		if self.cache_ttl > 0 and self.vc != 0:
-			print '[Networkbrowser] Loading network cache from ',self.cache_file
+			print '[Networkbrowser] Loading network cache from ', self.cache_file
 			try:
 				self.networklist = load_cache(self.cache_file)
 			except:
@@ -301,7 +307,7 @@ class NetworkBrowser(Screen):
 				hostname = hostname.split('.')
 				hostname = hostname[0]
 				host = dhost.getElementsByTagName('address')[0].getAttributeNode('addr').value
-				scan_result.append(['host',str(hostname).upper(),str(host),'00:00:00:00:00:00'])
+				scan_result.append(['host', str(hostname).upper(), str(host), '00:00:00:00:00:00'])
 
 		self.networklist += scan_result
 		write_cache(self.cache_file, self.networklist)
@@ -311,14 +317,14 @@ class NetworkBrowser(Screen):
 			self.setStatus('error')
 		self["shortcuts"].setEnabled(True)
 
-	def getNetworkShares(self,hostip,hostname,devicetype):
+	def getNetworkShares(self, hostip, hostname, devicetype):
 		sharelist = []
 		self.sharecache_file = None
 		self.sharecache_file = '/etc/enigma2/' + hostname.strip() + '.cache' #Path to cache directory
 		username = ""
 		password = ""
 		if os_path.exists(self.sharecache_file):
-			print '[Networkbrowser] Loading userinfo from ',self.sharecache_file
+			print '[Networkbrowser] Loading userinfo from ', self.sharecache_file
 			try:
 				self.hostdata = load_cache(self.sharecache_file)
 				username = self.hostdata['username']
@@ -327,7 +333,7 @@ class NetworkBrowser(Screen):
 				pass
 
 		if devicetype == 'unix':
-			nfslist=netscan.nfsShare(hostip,hostname)
+			nfslist = netscan.nfsShare(hostip, hostname)
 			for x in nfslist:
 				if len(x) == 6:
 					sharelist.append(x)
@@ -352,23 +358,23 @@ class NetworkBrowser(Screen):
 		for x in self.networklist:
 			if not self.network.has_key(x[2]):
 				self.network[x[2]] = []
-			self.network[x[2]].append((NetworkDescriptor(name = x[1], description = x[2]), x))
+			self.network[x[2]].append((NetworkDescriptor(name=x[1], description=x[2]), x))
 
 		for x in self.network.keys():
 			hostentry = self.network[x][0][1]
-			name = hostentry[2] + " ( " +hostentry[1].strip() + " )"
+			name = hostentry[2] + " ( " + hostentry[1].strip() + " )"
 			if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png")):
 				expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png"))
 			else:
 				expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
-			self.list.append(( hostentry, expandableIcon, name, None, None, None, None, None ))
+			self.list.append((hostentry, expandableIcon, name, None, None, None, None, None))
 
 		if len(self.list):
 			for entry in self.list:
-				entry[0][2]= "%3s.%3s.%3s.%3s" % tuple(entry[0][2].split("."))
+				entry[0][2] = "%3s.%3s.%3s.%3s" % tuple(entry[0][2].split("."))
 			self.list.sort(key=lambda x: x[0][2])
 			for entry in self.list:
-				entry[0][2]= entry[0][2].replace(" ", "")
+				entry[0][2] = entry[0][2].replace(" ", "")
 		self["list"].setList(self.list)
 		self["list"].setIndex(self.listindex)
 
@@ -379,7 +385,7 @@ class NetworkBrowser(Screen):
 		for x in self.networklist:
 			if not self.network.has_key(x[2]):
 				self.network[x[2]] = []
-			self.network[x[2]].append((NetworkDescriptor(name = x[1], description = x[2]), x))
+			self.network[x[2]].append((NetworkDescriptor(name=x[1], description=x[2]), x))
 		self.network.keys().sort()
 		for x in self.network.keys():
 			if self.network[x][0][1][3] == '00:00:00:00:00:00':
@@ -387,34 +393,34 @@ class NetworkBrowser(Screen):
 			else:
 				self.device = 'windows'
 			if x in self.expanded:
-				networkshares = self.getNetworkShares(x,self.network[x][0][1][1].strip(),self.device)
+				networkshares = self.getNetworkShares(x, self.network[x][0][1][1].strip(), self.device)
 				hostentry = self.network[x][0][1]
-				name = hostentry[2] + " ( " +hostentry[1].strip() + " )"
+				name = hostentry[2] + " ( " + hostentry[1].strip() + " )"
 				if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png")):
 					expandedIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png"))
 				else:
 					expandedIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
-				self.list.append(( hostentry, expandedIcon, name, None, None, None, None, None ))
+				self.list.append((hostentry, expandedIcon, name, None, None, None, None, None))
 				for share in networkshares:
 					self.list.append(self.BuildNetworkShareEntry(share))
 			else: # HOSTLIST - VIEW
 				hostentry = self.network[x][0][1]
-				name = hostentry[2] + " ( " +hostentry[1].strip() + " )"
+				name = hostentry[2] + " ( " + hostentry[1].strip() + " )"
 				if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png")):
 					expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png"))
 				else:
 					expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
-				self.list.append(( hostentry, expandableIcon, name, None, None, None, None, None ))
+				self.list.append((hostentry, expandableIcon, name, None, None, None, None, None))
 		if len(self.list):
 			for entry in self.list:
-				entry[0][2]= "%3s.%3s.%3s.%3s" % tuple(entry[0][2].split("."))
+				entry[0][2] = "%3s.%3s.%3s.%3s" % tuple(entry[0][2].split("."))
 			self.list.sort(key=lambda x: x[0][2])
 			for entry in self.list:
-				entry[0][2]= entry[0][2].replace(" ", "")
+				entry[0][2] = entry[0][2].replace(" ", "")
 		self["list"].setList(self.list)
 		self["list"].setIndex(self.listindex)
 
-	def BuildNetworkShareEntry(self,share):
+	def BuildNetworkShareEntry(self, share):
 		if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/verticalLine.png")):
 			verticallineIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/verticalLine.png"))
 		else:
@@ -445,7 +451,7 @@ class NetworkBrowser(Screen):
 		for sharename, sharedata in self.mounts.items():
 			if sharedata['ip'] == sharehost:
 				if sharetype == 'nfsShare' and sharedata['mounttype'] == 'nfs':
-					sharedir = sharedir.replace('/', '')					
+					sharedir = sharedir.replace('/', '')
 					if sharedir.endswith(sharedata['sharedir']):
 						if sharedata["isMounted"] is True:
 							self.isMounted = True
@@ -520,9 +526,9 @@ class NetworkBrowser(Screen):
 				pass
 			self.passwordQuestion(False)
 		else:
-			self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?") ) )
+			self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?")))
 
-	def passwordQuestion(self, ret = False):
+	def passwordQuestion(self, ret=False):
 		sel = self["list"].getCurrent()
 		selectedhost = sel[0][2]
 		selectedhostname = sel[0][1]
@@ -548,7 +554,7 @@ class NetworkBrowser(Screen):
 			newmount = True
 			if selection[0] == 'nfsShare': # share entry selected
 				#Initialize blank mount enty
-				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }
+				data = {'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False}
 				# add data
 				data['mounttype'] = 'nfs'
 				data['active'] = True
@@ -564,7 +570,7 @@ class NetworkBrowser(Screen):
 						newmount = False
 			elif selection[0] == 'smbShare': # share entry selected
 				#Initialize blank mount enty
-				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }
+				data = {'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False}
 				# add data
 				data['mounttype'] = 'cifs'
 				data['active'] = True
@@ -577,7 +583,7 @@ class NetworkBrowser(Screen):
 				data['username'] = ""
 				data['password'] = ""
 				if os_path.exists(self.sharecache_file):
-					print '[Networkbrowser] Loading userinfo from ',self.sharecache_file
+					print '[Networkbrowser] Loading userinfo from ', self.sharecache_file
 					try:
 						self.hostdata = load_cache(self.sharecache_file)
 						data['username'] = self.hostdata['username']
@@ -588,11 +594,12 @@ class NetworkBrowser(Screen):
 					if sharedata['ip'] == selection[2].strip() and sharedata['sharedir'] in selection[3].strip():
 						data = sharedata
 						newmount = False
-			self.session.openWithCallback(self.MountEditClosed,AutoMountEdit, self.skin_path, data, newmount)
+			self.session.openWithCallback(self.MountEditClosed, AutoMountEdit, self.skin_path, data, newmount)
 
-	def MountEditClosed(self, returnValue = None):
+	def MountEditClosed(self, returnValue=None):
 		if returnValue == None:
 			self.updateNetworkList()
+
 
 class ScanIP(Screen, ConfigListScreen):
 	skin = """
@@ -624,7 +631,7 @@ class ScanIP(Screen, ConfigListScreen):
 			"yellow": self.goAddress,
 		}, -1)
 
-		self.ipAddress = ConfigIP(default=[0,0,0,0])
+		self.ipAddress = ConfigIP(default=[0, 0, 0, 0])
 
 		ConfigListScreen.__init__(self, [
 			getConfigListEntry(_("IP Address"), self.ipAddress),
@@ -636,7 +643,7 @@ class ScanIP(Screen, ConfigListScreen):
 		pass
 
 	def exit(self):
-		self.close((None,None))
+		self.close((None, None))
 
 	def layoutFinished(self):
 		self.setWindowTitle()

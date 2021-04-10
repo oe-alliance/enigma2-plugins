@@ -28,6 +28,7 @@ from Screens.Screen import Screen
 from VlcServer import VlcServer
 from . import _
 
+
 class ConfigMutable(ConfigElement):
 	def __init__(self, configElementDict, defaultKey):
 		ConfigElement.__init__(self)
@@ -45,7 +46,7 @@ class ConfigMutable(ConfigElement):
 			self.currentConfig = self.configElementDict[key]
 			self.currentKey = key
 			self.saved_value = self.currentConfig.saved_value
-			
+
 	def setValue(self, val):
 		self.currentConfig.value = val
 		self.changed()
@@ -56,12 +57,12 @@ class ConfigMutable(ConfigElement):
 
 	def getValue(self):
 		return self.currentConfig.value
-	
+
 	def get_Value(self):
 		return self.currentConfig._value
 
 	_value = property(get_Value, set_Value)
-	
+
 	def fromstring(self, value):
 		return self.currentConfig.fromstring(value)
 
@@ -80,15 +81,15 @@ class ConfigMutable(ConfigElement):
 	def cancel(self):
 		self.setAsCurrent(self.defaultKey)
 		self.load()
-		
+
 	def isChanged(self):
 		return self.currentConfig.isChanged()
 
 	def changed(self):
 		for x in self.notifiers:
 			x(self)
-			
-	def addNotifier(self, notifier, initial_call = True):
+
+	def addNotifier(self, notifier, initial_call=True):
 		assert callable(notifier), "notifiers must be callable"
 		self.notifiers.append(notifier)
 		if initial_call:
@@ -123,7 +124,7 @@ class ConfigMutable(ConfigElement):
 
 
 class ConfigSelectionExtended(ConfigSelection):
-	def __init__(self, choices, default = None):
+	def __init__(self, choices, default=None):
 		ConfigSelection.__init__(self, choices, default)
 
 	def deleteNotifier(self, notifier):
@@ -152,10 +153,10 @@ class __VlcServerConfig():
 				 ("IP", _("IP-Address"))
 				], "IP")
 		newServerConfigSubsection.hostip = ConfigMutable(
-				{"IP": ConfigIP([192,168,1,1]),
+				{"IP": ConfigIP([192, 168, 1, 1]),
 				 "FQDN": ConfigText("fqdname", False)
 				}, newServerConfigSubsection.addressType.value)
-		newServerConfigSubsection.httpport = ConfigInteger(8080, (0,65535))
+		newServerConfigSubsection.httpport = ConfigInteger(8080, (0, 65535))
 		newServerConfigSubsection.vlctype = ConfigYesNo(False)
 		newServerConfigSubsection.basedir = ConfigText("/", False)
 		newServerConfigSubsection.pingonopen = ConfigYesNo(True)
@@ -226,31 +227,31 @@ class __VlcServerConfig():
 		newServerConfigSubsection.overscancorrection = ConfigInteger(0, (0, 100))
 		newServerConfigSubsection.soverlay = ConfigYesNo()
 		newServerConfigSubsection.subyellow = ConfigYesNo()
-		
+
 		newServerConfigSubsection.langInputType = ConfigSelectionExtended(
 				[("track", _("tracks")),
 				 ("language", _("languages"))
 				], "language")
 		newServerConfigSubsection.typeAudio = ConfigMutable(
 				{"track": ConfigSelection([
-							("-1","-1"),
-							("0","0"),
-							("1","1"),
-							("2","2"),
-							("3","3"),
-							("4","4"),
-							("5","5"),
-							("6","6"),
-							("7","7"),
-							("8","8"),
-							("9","9"),
-							("10","10"),
-							("11","11"),
-							("12","12"),
-							("13","13"),
-							("14","14"),
-							("15","15")
-							],"-1"),
+							("-1", "-1"),
+							("0", "0"),
+							("1", "1"),
+							("2", "2"),
+							("3", "3"),
+							("4", "4"),
+							("5", "5"),
+							("6", "6"),
+							("7", "7"),
+							("8", "8"),
+							("9", "9"),
+							("10", "10"),
+							("11", "11"),
+							("12", "12"),
+							("13", "13"),
+							("14", "14"),
+							("15", "15")
+							], "-1"),
 				 "language": ConfigSelection([
 							("---", "None"),
 							("ara", "Arabic"),
@@ -281,28 +282,28 @@ class __VlcServerConfig():
 							("spa", "Spanish"),
 							("swe", "Swedish"),
 							("tur", "Turkish")
-							],"---")
+							], "---")
 				}, newServerConfigSubsection.langInputType.value)
 		newServerConfigSubsection.typeSubtitles = ConfigMutable(
 				{"track": ConfigSelection([
-							("-1","-1"),
-							("0","0"),
-							("1","1"),
-							("2","2"),
-							("3","3"),
-							("4","4"),
-							("5","5"),
-							("6","6"),
-							("7","7"),
-							("8","8"),
-							("9","9"),
-							("10","10"),
-							("11","11"),
-							("12","12"),
-							("13","13"),
-							("14","14"),
-							("15","15")
-							],"-1"),
+							("-1", "-1"),
+							("0", "0"),
+							("1", "1"),
+							("2", "2"),
+							("3", "3"),
+							("4", "4"),
+							("5", "5"),
+							("6", "6"),
+							("7", "7"),
+							("8", "8"),
+							("9", "9"),
+							("10", "10"),
+							("11", "11"),
+							("12", "12"),
+							("13", "13"),
+							("14", "14"),
+							("15", "15")
+							], "-1"),
 				 "language": ConfigSelection([
 							("---", "None"),
 							("ara", "Arabic"),
@@ -333,7 +334,7 @@ class __VlcServerConfig():
 							("spa", "Spanish"),
 							("swe", "Swedish"),
 							("tur", "Turkish")
-							],"---")
+							], "---")
 				}, newServerConfigSubsection.langInputType.value)
 
 		newServer = VlcServer(newServerConfigSubsection)
@@ -411,7 +412,7 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 			"red": self.keyCancel,
 			"cancel": self.keyCancel
 		}, -2)
-		
+
 		self.setTitle(_("Edit VLC Server"))
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("OK"))
@@ -435,7 +436,7 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 		cfglist.append(getConfigListEntry(_("Video Codec"), server.videoCodec()))
 		cfglist.append(getConfigListEntry(_("Video Bitrate"), server.videoBitrate()))
 		cfglist.append(getConfigListEntry(_("Video Norm"), server.videoNorm()))
-		cfglist.append(getConfigListEntry(_("Overscan Correction [in %(percentsign)s of Video width]") % { "percentsign" : "%"}, server.overscanCorrection()))
+		cfglist.append(getConfigListEntry(_("Overscan Correction [in %(percentsign)s of Video width]") % {"percentsign": "%"}, server.overscanCorrection()))
 
 		cfglist.append(getConfigListEntry(_("Subtitle overlay"), server.sOverlay()))
 		cfglist.append(getConfigListEntry(_("Yellow subtitles"), server.subYellow()))
@@ -445,7 +446,7 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 		cfglist.append(self.typeAudioConfigListEntry)
 		self.typeSubtitlesConfigListEntry = getConfigListEntry(_("Subtitles"), server.typeSubtitles())
 		cfglist.append(self.typeSubtitlesConfigListEntry)
-		
+
 		cfglist.append(getConfigListEntry(_("Transcode MPEG/DVD Audio"), server.transcodeAudio()))
 		cfglist.append(getConfigListEntry(_("Audio Codec"), server.audioCodec()))
 		cfglist.append(getConfigListEntry(_("Audio Bitrate"), server.audioBitrate()))
@@ -456,9 +457,9 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 
 		server.addressType().addNotifier(self.switchAddressType, False)
 		server.langInputType().addNotifier(self.switchlangInputType, False)
-		
+
 		self.onClose.append(self.__onClose)
-		
+
 	def __onClose(self):
 		self.server.addressType().deleteNotifier(self.switchAddressType)
 		self.server.langInputType().deleteNotifier(self.switchlangInputType)
@@ -466,13 +467,13 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 	def switchAddressType(self, configElement):
 		self.server.host().setAsCurrent(configElement.value)
 		self["config"].invalidate(self.hostConfigListEntry)
-		
+
 	def switchlangInputType(self, configElement):
 		self.server.typeAudio().setAsCurrent(configElement.value)
 		self["config"].invalidate(self.typeAudioConfigListEntry)
 		self.server.typeSubtitles().setAsCurrent(configElement.value)
 		self["config"].invalidate(self.typeSubtitlesConfigListEntry)
-		
+
 	def keySave(self):
 		self.close(True, self.server)
 

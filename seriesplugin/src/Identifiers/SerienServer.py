@@ -20,9 +20,9 @@ from Plugins.Extensions.SeriesPlugin.TimeoutServerProxy import TimeoutServerProx
 class SerienServer(IdentifierBase2):
 	def __init__(self):
 		IdentifierBase2.__init__(self)
-		
+
 		self.server = TimeoutServerProxy()
-	
+
 	@classmethod
 	def knowsElapsed(cls):
 		return True
@@ -46,11 +46,10 @@ class SerienServer(IdentifierBase2):
 	def getEpisode(self, name, begin, end=None, service=None):
 		# On Success: Return a single season, episode, title tuple
 		# On Failure: Return a empty list or String or None
-		
-		
+
 		# Check preconditions
 		if not name:
-			msg =_("Skipping lookup because no show name is specified")
+			msg = _("Skipping lookup because no show name is specified")
 			log.warning(msg)
 			return msg
 		if not begin:
@@ -61,39 +60,38 @@ class SerienServer(IdentifierBase2):
 			msg = _("Skipping lookup because no channel is specified")
 			log.warning(msg)
 			return msg
-		
-		
+
 		self.name = name
 		self.begin = begin
 		self.end = end
 		self.service = service
-		
+
 		log.info("SerienServer getEpisode, name, begin, end=None, service", name, begin, end, service)
-		
+
 		# Prepare parameters
 		webChannels = lookupChannelByReference(service)
 		if not webChannels:
 			msg = _("No matching channel found.") + "\n" + getChannel(service) + " (" + str(service) + ")\n\n" + _("Please open the Channel Editor and add the channel manually.")
 			log.warning(msg)
 			return msg
-		
+
 		unixtime = str(begin)
 		max_time_drift = self.max_time_drift
-		
+
 		# Lookup
 		for webChannel in webChannels:
 			log.debug("SerienServer getSeasonEpisode(): [\"%s\",\"%s\",\"%s\",%s]" % (name, webChannel, unixtime, max_time_drift))
-			
-			result = self.server.getSeasonEpisode( name, webChannel, unixtime, self.max_time_drift )
-			
+
+			result = self.server.getSeasonEpisode(name, webChannel, unixtime, self.max_time_drift)
+
 			if result and isinstance(result, dict):
 				result['service'] = service
 				result['channel'] = webChannel
 				result['begin'] = begin
-			
+
 			log.debug("SerienServer getSeasonEpisode result:", type(result), result)
-			
+
 			return result
 
 		else:
-			return ( _("No match found") )
+			return (_("No match found"))

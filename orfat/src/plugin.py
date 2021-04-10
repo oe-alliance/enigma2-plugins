@@ -16,11 +16,12 @@ from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 from twisted.web.client import downloadPage, getPage
-import re, urllib2
+import re
+import urllib2
 
 ##########################################################
 
-PNG_PATH = resolveFilename(SCOPE_PLUGINS)+"/Extensions/ORFat/"
+PNG_PATH = resolveFilename(SCOPE_PLUGINS) + "/Extensions/ORFat/"
 
 try:
 	from LT.LTStreamPlayer import streamplayer
@@ -36,6 +37,7 @@ except ImportError:
 	vlcServerConfig = None
 
 ##########################################################
+
 
 class ChangedMoviePlayer(MoviePlayer):
 	def __init__(self, session, service):
@@ -64,6 +66,7 @@ class ChangedMoviePlayer(MoviePlayer):
 
 ##########################################################
 
+
 class ORFatCache(Screen):
 	skin = """
 		<screen position="center,center" size="76,76" flags="wfNoBorder" backgroundColor="#ffffff" >
@@ -74,11 +77,11 @@ class ORFatCache(Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		
+
 		self["spinner"] = Pixmap()
 		self.curr = 0
 		self.Shown = False
-		
+
 		self.timer = eTimer()
 		self.timer.callback.append(self.showNextSpinner)
 
@@ -101,6 +104,7 @@ class ORFatCache(Screen):
 
 ##########################################################
 
+
 class ORFMain(Screen):
 	skin = """
 	<screen position="center,center" size="550,450" title="ORF.at IPTV - Server:" backgroundColor="#6699cc" >
@@ -108,10 +112,10 @@ class ORFMain(Screen):
 		<widget name="pic" position="0,0" size="0,0" />
 		<ePixmap pixmap="skin_default/arrowdown.png" position="256,370" size="37,70" alphatest="blend" />
 	</screen>"""
-	
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		
+
 		self.session = session
 		self.movies = []
 		self.pics = []
@@ -124,7 +128,7 @@ class ORFMain(Screen):
 		self.cacheTimer = eTimer()
 		self.cacheTimer.callback.append(self.chechCachedFile)
 		self.transcodeServer = None
-		
+
 		self["pic"] = MovingPixmap()
 		self["actions"] = ActionMap(["WizardActions", "MenuActions"],
 			{
@@ -134,7 +138,7 @@ class ORFMain(Screen):
 				"down": self.down,
 				"menu": self.selectServer
 			}, -1)
-		
+
 		self.onLayoutFinish.append(self.downloadList)
 
 	def getVideoUrl(self, url):
@@ -214,7 +218,7 @@ class ORFMain(Screen):
 					if streamplayer.connected:
 						streamplayer.logout()
 				self.transcodeServer = server
-				self.setTitle("ORF.at IPTV - Server: %s"%server.getName())
+				self.setTitle("ORF.at IPTV - Server: %s" % server.getName())
 
 	def connectToStream2Dream(self):
 		streamplayer.login()
@@ -230,7 +234,7 @@ class ORFMain(Screen):
 
 	def chechCachedFile(self):
 		try:
-			f = open ("/tmp/mpstream/progress.txt")
+			f = open("/tmp/mpstream/progress.txt")
 			content = f.read()
 			f.close()
 			list = content.split("-")
@@ -318,8 +322,10 @@ class ORFMain(Screen):
 
 ####################################################
 
+
 def main(session, **kwargs):
 	session.open(ORFMain)
+
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name="ORF.at IPTV", description="IPTV-Sendungen von ORF.at anschauen", where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU], icon="orf.png", fnc=main)

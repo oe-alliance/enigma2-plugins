@@ -25,6 +25,7 @@ from enigma import ePixmap
 from Components.AVSwitch import AVSwitch
 from enigma import eEnv, ePicLoad, eRect, eSize, gPixmapPtr
 
+
 class MSNWeatherPixmap(Renderer):
 	def __init__(self):
 		Renderer.__init__(self)
@@ -43,12 +44,12 @@ class MSNWeatherPixmap(Renderer):
 		sc = AVSwitch().getFramebufferScale()
 		self._aspectRatio = eSize(sc[0], sc[1])
 		self.picload.setPara((self._scaleSize.width(), self._scaleSize.height(), sc[0], sc[1], True, 2, '#ff000000'))
-		
+
 	def disconnectAll(self):
 		self.picload.PictureData.get().remove(self.paintIconPixmapCB)
 		self.picload = None
 		Renderer.disconnectAll(self)
-		
+
 	def paintIconPixmapCB(self, picInfo=None):
 		ptr = self.picload.getData()
 		if ptr is not None:
@@ -70,14 +71,13 @@ class MSNWeatherPixmap(Renderer):
 			self.instance.setPixmap(ptr)
 		else:
 			self.instance.setPixmap(None)
-		
+
 	def doSuspend(self, suspended):
 		if suspended:
 			self.changed((self.CHANGED_CLEAR,))
 		else:
 			self.changed((self.CHANGED_DEFAULT,))
-			
-			
+
 	def updateIcon(self, filename):
 		new_IconFileName = filename
 		if (self.iconFileName != new_IconFileName):

@@ -1,5 +1,6 @@
 from Components.Converter.Converter import Converter
 
+
 class HddInfo(Converter):
 	MODEL = 0
 	CAPACITY = 1
@@ -9,9 +10,9 @@ class HddInfo(Converter):
 		Converter.__init__(self, type)
 
 		self.type = {
-					 "Model" : self.MODEL,
-					 "Capacity" : self.CAPACITY,
-					 "Free" : self.FREE,
+					 "Model": self.MODEL,
+					 "Capacity": self.CAPACITY,
+					 "Free": self.FREE,
 					 }[type]
 
 	def getText(self):
@@ -32,4 +33,3 @@ class HddInfo(Converter):
 		return _("N/A")
 
 	text = property(getText)
-

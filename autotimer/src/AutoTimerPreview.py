@@ -16,6 +16,8 @@ from enigma import getDesktop
 HD = False
 if getDesktop(0).size().width() >= 1280:
 	HD = True
+
+
 class AutoTimerPreview(Screen):
 	"""Preview Timers which would be set"""
 	if HD:
@@ -67,7 +69,7 @@ class AutoTimerPreview(Screen):
 		Screen.__init__(self, session)
 
 		# Sort timers by begin
-		timers.sort(key = lambda x: x[1])
+		timers.sort(key=lambda x: x[1])
 		self.sort_type = 0
 
 		# name, begin, end, serviceref, timername -> name, begin, timername, sname, timestr
@@ -119,7 +121,7 @@ class AutoTimerPreview(Screen):
 				timers.sort(key=lambda x: x[1])
 				self.sort_type = 0
 			else:
-				timers.sort(key = lambda x: x[4].lower())
+				timers.sort(key=lambda x: x[4].lower())
 				self.sort_type = 1
 			self["timerlist"].updateList(timers)
 			self["timerlist"].index = idx
@@ -130,4 +132,3 @@ class AutoTimerPreview(Screen):
 
 	def save(self):
 		self.close(True)
-

@@ -16,7 +16,7 @@ from Components.MenuList import MenuList
 from Components.FileList import EXTENSIONS
 from Components.AVSwitch import AVSwitch
 ## configmenu
-from Components.config import config, ConfigSubsection,ConfigSelection,ConfigText,ConfigYesNo
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigText, ConfigYesNo
 ####
 from Components.Input import Input
 from Components.Pixmap import Pixmap
@@ -39,14 +39,14 @@ myname = "Webcam/Picture Viewer"
 myversion = "1.1"
 
 config.plugins.pictureviewer = ConfigSubsection()
-config.plugins.pictureviewer.slideshowtime = ConfigSelection(default="5000", choices = [("5000", _("5 Seconds")), ("10000", _("10 Seconds")), ("20000", _("20 Seconds")), ("60000", _("1 Minute"))])
-config.plugins.pictureviewer.slideshowmode = ConfigSelection(default="0", choices = [("0", _("normal")), ("1", _("endless"))])
+config.plugins.pictureviewer.slideshowtime = ConfigSelection(default="5000", choices=[("5000", _("5 Seconds")), ("10000", _("10 Seconds")), ("20000", _("20 Seconds")), ("60000", _("1 Minute"))])
+config.plugins.pictureviewer.slideshowmode = ConfigSelection(default="0", choices=[("0", _("normal")), ("1", _("endless"))])
 #not editable configs
 config.plugins.pictureviewer.slideshowext = ConfigText(default=".3ssl")
 config.plugins.pictureviewer.matchingPattern = ConfigText(default="(?i)^.*\.(jpeg|jpg|jpe|png|bmp|gif)")
 config.plugins.pictureviewer.slideshowdir = ConfigText(default="/media/hdd/slideshows/")
 config.plugins.pictureviewer.rootdir = ConfigText(default="/media/")
-config.plugins.pictureviewer.stopserviceonstart = ConfigYesNo(default = False)
+config.plugins.pictureviewer.stopserviceonstart = ConfigYesNo(default=False)
 SLIDESHOWMODE_NORMAL = 0
 SLIDESHOWMODE_REPEAT = 1
 
@@ -61,6 +61,7 @@ def startPictureviewer(session, **kwargs):
 	if config.plugins.pictureviewer.stopserviceonstart.value:
 		session.nav.stopService()
 	session.openWithCallback(mainCB, PictureViewer)
+
 
 def startWebcamviewer(session, **kwargs):
 	global originalservice, mysession
@@ -104,44 +105,46 @@ def startWebcamviewer(session, **kwargs):
 		)
 
 
-
-
 def mainCB():
 	global originalservice, mysession
 	if config.plugins.pictureviewer.stopserviceonstart.value:
 		mysession.nav.playService(originalservice)
+
 
 def Plugins(path, **kwargs):
 	p = [
 			PluginDescriptor(
 							name="PictureViewer",
 							description="browse your local pictures",
-							where = PluginDescriptor.WHERE_PLUGINMENU,
-							fnc = startPictureviewer,
+							where=PluginDescriptor.WHERE_PLUGINMENU,
+							fnc=startPictureviewer,
 							icon="pictureviewer.png"
 			  ),
 			PluginDescriptor(
 							name="WebcamViewer",
 							description="view webcams around the world",
-							where = PluginDescriptor.WHERE_PLUGINMENU,
-							fnc = startWebcamviewer,
+							where=PluginDescriptor.WHERE_PLUGINMENU,
+							fnc=startWebcamviewer,
 							icon="webcamviewer.png"
 			)
 		 ]
 	return p
 
 ###################
+
+
 class ViewerSelectScreen(Screen):
 	skin = ""
-	def __init__(self, session, args = 0):
-		skin =  """<screen position="93,70" size="550,450">
+
+	def __init__(self, session, args=0):
+		skin = """<screen position="93,70" size="550,450">
 		<widget name="list" position="0,0" size="550,450"  />
 		</screen>"""
 		self.skin = skin
 		Screen.__init__(self, session)
 		self.slideshowfiles = []
-		self.slideshowfiles.append((_("WebcamViewer"),STARTWEBCAMVIEWER))
-		self.slideshowfiles.append((_("online webcam.travel"),STARTWEBCAMTRAVEL))
+		self.slideshowfiles.append((_("WebcamViewer"), STARTWEBCAMVIEWER))
+		self.slideshowfiles.append((_("online webcam.travel"), STARTWEBCAMTRAVEL))
 		self["list"] = MenuList(self.slideshowfiles)
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "DirectionActions", "ShortcutActions"],
 			{
@@ -152,7 +155,7 @@ class ViewerSelectScreen(Screen):
 	def go(self):
 		selection = self["list"].getCurrent()
 		if selection:
-			self.close(self.session,selection[1])
+			self.close(self.session, selection[1])
 
 
 ###################
@@ -173,7 +176,7 @@ class Slideshow:
 			self.currentslideshowitem = -1
 			self.nextSlideshowItem()
 
-	def nextSlideshowItem(self, prev = False):
+	def nextSlideshowItem(self, prev=False):
 		currentslideshowitem = self.currentslideshowitem
 		if prev:
    			currentslideshowitem -= 2
@@ -188,23 +191,25 @@ class Slideshow:
 									PictureScreen,
 									filetoshow.split("/")[-1],
 									filetoshow,
-									slideshowcallback = self.nextSlideshowItem
+									slideshowcallback=self.nextSlideshowItem
 				)
 			else:
 				self.wbviewer.filename = filetoshow
 				self.wbviewer.do()
 			self.currentslideshowitem = currentslideshowitem
 		elif int(config.plugins.pictureviewer.slideshowmode.value) is SLIDESHOWMODE_REPEAT:
-			print "["+myname+"] restarting slideshow"
+			print "[" + myname + "] restarting slideshow"
 			self.start()
 		else:
-			print "["+myname+"] slideshow finished"
+			print "[" + myname + "] slideshow finished"
 			self.wbviewer.exit()
 			self.cb()
 
 	def cb(self):
 		self.callback()
 ###################
+
+
 class PictureViewer(Screen):
 	skin = ""
 	filelist = []
@@ -212,8 +217,8 @@ class PictureViewer(Screen):
 	wbviewer = False
 	loadedslideshowlistlistname = False
 
-	def __init__(self, session, args = 0):
-		skin =  """<screen position="93,70" size="550,450" title="%s">
+	def __init__(self, session, args=0):
+		skin = """<screen position="93,70" size="550,450" title="%s">
 		<widget name="menu" position="1,1" size="275,400"  scrollbarMode="showOnDemand" />
 		<widget name="pixmap" position="275,1" size="275,200" backgroundColor="red" />
 		<widget name="slist" position="275,200" size="275,200"  scrollbarMode="showOnDemand" />
@@ -225,14 +230,14 @@ class PictureViewer(Screen):
 		self.skin = skin
 		Screen.__init__(self, session)
 
-		self.filelist = PictureList(config.plugins.pictureviewer.rootdir.value, matchingPattern = config.plugins.pictureviewer.matchingPattern.value)
+		self.filelist = PictureList(config.plugins.pictureviewer.rootdir.value, matchingPattern=config.plugins.pictureviewer.matchingPattern.value)
 		self["menu"] = self.filelist
 
 		self.preview = Pixmap()
 		self["pixmap"] = self.preview
 
 		self.slideshowfiles = []
-		self.slideshowlist =MenuList(self.slideshowfiles)
+		self.slideshowlist = MenuList(self.slideshowfiles)
 		self["slist"] = self.slideshowlist
 
 		self["key_red"] = Label("")
@@ -267,7 +272,7 @@ class PictureViewer(Screen):
 				s.sort()
 				for file in s:
 					if compile(config.plugins.pictureviewer.matchingPattern.value).search(dirname + file):
-						self.slideshowfiles.append((_(file),dirname + file))
+						self.slideshowfiles.append((_(file), dirname + file))
 				self["slist"].l.setList(self.slideshowfiles)
 		else:
 			#loading list
@@ -275,20 +280,20 @@ class PictureViewer(Screen):
 			try:
 				for file in os.listdir(config.plugins.pictureviewer.slideshowdir.value):
 					if file.endswith(config.plugins.pictureviewer.slideshowext.value):
-						list.append((_(file.split("/")[-1]),file))
+						list.append((_(file.split("/")[-1]), file))
 				self.session.openWithCallback(
 						self.fileToLoadFilelistEntered,
 						ChoiceBox,
 						_("select List to load"),
 						list
 				)
-			except IOError,e:
-				print "["+myname+"] IOError:",e
-			except OSError,e:
-				print "["+myname+"] OSError:",e
+			except IOError, e:
+				print "[" + myname + "] IOError:", e
+			except OSError, e:
+				print "[" + myname + "] OSError:", e
 
 	def KeyRed(self):
-		if self.currList is "filelist" :
+		if self.currList is "filelist":
 			#do slideshow
 			self.hide()
 			x = Slideshow(self.session, self.show)
@@ -303,10 +308,10 @@ class PictureViewer(Screen):
 			self.session.openWithCallback(
 					self.fileToSaveFilelistEntered,
 					InputBox,
-					title = _("Enter filename to save the List:"),
-					text = newname,
-					maxSize = False,
-					type = Input.TEXT
+					title=_("Enter filename to save the List:"),
+					text=newname,
+					maxSize=False,
+					type=Input.TEXT
 			)
 
 	def fileToLoadFilelistEntered(self, fileselection):
@@ -316,35 +321,35 @@ class PictureViewer(Screen):
 				   fp = open(config.plugins.pictureviewer.slideshowdir.value + filename)
 				   list = []
 				   for x in fp.readlines():
-					   file = x.replace("\n","")
+					   file = x.replace("\n", "")
 					   if x.startswith("#"):
 						   pass
 					   elif not os.path.exists(file):
-						   print "["+myname+"] loaded file from filelist isnt avaible! ignoreing ->", file
+						   print "[" + myname + "] loaded file from filelist isnt avaible! ignoreing ->", file
 					   else:
 						   list.append((_(file.split("/")[-1]), file))
 				   self.slideshowfiles = list
 				   self["slist"].l.setList(self.slideshowfiles)
 				   self.loadedslideshowlistlistname = filename.replace(config.plugins.pictureviewer.slideshowext.value, "")
 			   except IOError, e:
-				   print "["+myname+"] error:", e
+				   print "[" + myname + "] error:", e
 
 	def fileToSaveFilelistEntered(self, filename):
 		if filename is not None:
-			print "["+myname+"] saving list to ", config.plugins.pictureviewer.slideshowdir.value+filename + config.plugins.pictureviewer.slideshowext.value
+			print "[" + myname + "] saving list to ", config.plugins.pictureviewer.slideshowdir.value + filename + config.plugins.pictureviewer.slideshowext.value
 			try:
 				if not os.path.exists(config.plugins.pictureviewer.slideshowdir.value):
 					print "+" * 10, os.path.basename(filename)
 					os.mkdir(config.plugins.pictureviewer.slideshowdir.value)
-				fp = open(config.plugins.pictureviewer.slideshowdir.value + filename+config.plugins.pictureviewer.slideshowext.value, "w")
-				fp.write("# this is a slideshow file for "+myname+" made by V"+myversion+"\n")
+				fp = open(config.plugins.pictureviewer.slideshowdir.value + filename + config.plugins.pictureviewer.slideshowext.value, "w")
+				fp.write("# this is a slideshow file for " + myname + " made by V" + myversion + "\n")
 				fp.write("# you can make your own... each line with full path of the imagefile\n")
 				fp.write("# by importing this file,we will ignoring a file if is doesnt exist\n")
 				for x in self.slideshowfiles:
 					fp.write(x[1] + "\n")
 				fp.close()
 			except IOError, e:
-				print "["+myname+"] error:", e
+				print "[" + myname + "] error:", e
 
 	def KeyYellow(self):
 		if self.currList is "filelist":
@@ -361,7 +366,7 @@ class PictureViewer(Screen):
 				self["slist"].l.setList(self.slideshowfiles)
 
 	def switchList(self):
-		if self.currList is "filelist" :
+		if self.currList is "filelist":
 			# Slideshow activieren
 			self.filelist.selectionEnabled(0)
 			self.slideshowlist.selectionEnabled(1)
@@ -381,7 +386,7 @@ class PictureViewer(Screen):
 			self.currList = "filelist"
 
 	def go(self):
-		if self.currList is "filelist" :
+		if self.currList is "filelist":
 			selection = self["menu"].getSelection()
 			if self.filelist.canDescent():
 				self.setTitle(selection[0])
@@ -390,11 +395,11 @@ class PictureViewer(Screen):
 				if selection[1] == True: # isDir
 					pass
 				else:
-					print "["+myname+"] file selected ", selection[0]
+					print "[" + myname + "] file selected ", selection[0]
 					if os.path.isfile(selection[0]):
-						self.session.open(PictureScreen,selection[0].split("/")[-1], selection[0])
+						self.session.open(PictureScreen, selection[0].split("/")[-1], selection[0])
 					else:
-						print "["+myname+"] file not found ", selection[0]
+						print "[" + myname + "] file not found ", selection[0]
 		else:
 			self.updateInfoPanel()
 
@@ -431,41 +436,43 @@ class PictureViewer(Screen):
 			selectedfile = self["menu"].getSelection()[0]
 		else:
 			selectedfile = self["slist"].l.getCurrentSelection()[1]
-		sc=AVSwitch().getFramebufferScale()
+		sc = AVSwitch().getFramebufferScale()
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.updateInfoPanelCB)
 		self.picload.setPara((self["pixmap"].instance.size().width(), self["pixmap"].instance.size().height(), sc[0], sc[1], False, 1, "#FF000000"))
 		self.picload.startDecode(selectedfile)
 
-
-	def updateInfoPanelCB(self, picInfo = None):
+	def updateInfoPanelCB(self, picInfo=None):
 		ptr = self.picload.getData()
 		if ptr is not None:
 			self["pixmap"].instance.setPixmap(ptr)
 		else:
 			pass
 
-	def output(self,str):
+	def output(self, str):
 		print "+" * 10, str
 
 	def openMenu(self):
 		self.session.open(WebcamViewerMenu)
 ###################
+
+
 class WebcamViewer(Screen, InfoBarNotifications):
 	skin = ""
 	filelist = []
-	def __init__(self, session,xmlnode, args = 0):
+
+	def __init__(self, session, xmlnode, args=0):
 		self.xmlnode = xmlnode
 		screen_x = 736
 		screen_y = 576
 		size_x = 350
 		size_y = 250
-		pos_x = (screen_x/2)-(size_x/2)
-		pos_y = (screen_y/2)-(size_y/2)
+		pos_x = (screen_x / 2) - (size_x / 2)
+		pos_y = (screen_y / 2) - (size_y / 2)
 		skin = """
 		<screen position="%i,%i" size="%i,%i" title="%s">
 			<widget name="menu" position="1,1" size="%i,%i"  scrollbarMode="showOnDemand"/>
-		</screen>""" % (pos_x,pos_y,size_x,size_y,myname,size_x,size_y)
+		</screen>""" % (pos_x, pos_y, size_x, size_y, myname, size_x, size_y)
 		self.skin = skin
 		Screen.__init__(self, session)
 		InfoBarNotifications.__init__(self)
@@ -501,8 +508,8 @@ class WebcamViewer(Screen, InfoBarNotifications):
 	def getMenuData(self):
 		xloader = XMLloader()
 		self.menutitle = xloader.getScreenXMLTitle(self.xmlnode)
-		data =[]
-		if self.menutitle =="Mainmenu":
+		data = []
+		if self.menutitle == "Mainmenu":
 			data.append((_("webcam.travel"), "webcam.travel"))
 		for node in self.xmlnode.childNodes:
 			if node.nodeType != xml.dom.minidom.Element.nodeType or node.tagName != 'menu':
@@ -516,14 +523,16 @@ class WebcamViewer(Screen, InfoBarNotifications):
 				continue
 			nodex = {}
 			nodex['name'] = xloader.get_txt(node, "name", "no name")
-			nodex['url'] =xloader.get_txt(node, "url", "no url")
+			nodex['url'] = xloader.get_txt(node, "url", "no url")
 			data.append((_(nodex['name']), ["cam", nodex['url']]))
 		return data
 ###################
 
 ##################
+
+
 class PictureList(MenuList):
-	def __init__(self, directory, matchingPattern = None, enableWrapAround = False):
+	def __init__(self, directory, matchingPattern=None, enableWrapAround=False):
 		MenuList.__init__(self, None, enableWrapAround, eListboxPythonMultiContent)
 		self.showDirectories = True
 		self.showFiles = True
@@ -562,7 +571,7 @@ class PictureList(MenuList):
 
 		if self.showDirectories:
 			for x in directories:
-				name = (directory+x).split('/')[-1]
+				name = (directory + x).split('/')[-1]
 				self.list.append(self.getPictureEntryComponent(name, '/'.join(directory.split('/')[:-1]) + '/' + x + '/', True))
 
 		if self.showFiles:
@@ -571,7 +580,7 @@ class PictureList(MenuList):
 				name = x
 				if self.matchingPattern is not None:
 					if compile(self.matchingPattern).search(path):
-						self.list.append(self.getPictureEntryComponent(name,path, False))
+						self.list.append(self.getPictureEntryComponent(name, path, False))
 				else:
 					pass
 
@@ -593,9 +602,9 @@ class PictureList(MenuList):
 		MenuList.postWidgetCreate(self, instance)
 		instance.setItemHeight(23)
 
-	def getPictureEntryComponent(self,name, absolute, isDir):
+	def getPictureEntryComponent(self, name, absolute, isDir):
 		""" name={angezeigter Name}, absolute={vollstaendiger Pfad}, isDir={True,False} """
-		res = [ (absolute, isDir) ]
+		res = [(absolute, isDir)]
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 200, 20, 0, 0, name))
 		if isDir:
 			png = loadPNG("/usr/share/enigma2/extensions/directory.png")
@@ -619,25 +628,25 @@ class XMLloader:
 		  'http://my.netscape.com/rdf/simple/0.9/' # RSS 0.90
 		)
 	DUBLIN_CORE = ('http://purl.org/dc/elements/1.1/',)
-	def getElementsByTagName(self, node, tagName, possibleNamespaces = DEFAULT_NAMESPACES):
+
+	def getElementsByTagName(self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES):
 		for namespace in possibleNamespaces:
 			children = node.getElementsByTagNameNS(namespace, tagName)
 			if len(children):
 				return children
 		return []
 
-	def node_data(self, node, tagName, possibleNamespaces = DEFAULT_NAMESPACES):
+	def node_data(self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES):
 		children = self.getElementsByTagName(node, tagName, possibleNamespaces)
 		node = len(children) and children[0] or None
 		return node and "".join([child.data.encode("utf-8") for child in node.childNodes]) or None
 
-	def get_txt(self, node, tagName, default_txt = ""):
+	def get_txt(self, node, tagName, default_txt=""):
 		"""
 		Liefert den Inhalt >tagName< des >node< zurueck, ist dieser nicht
 		vorhanden, wird >default_txt< zurueck gegeben.
 		"""
 		return self.node_data(node, tagName) or self.node_data(node, tagName, self.DUBLIN_CORE) or default_txt
 
-	def getScreenXMLTitle(self,node):
+	def getScreenXMLTitle(self, node):
 		return self.get_txt(node, "name", "no title")
-

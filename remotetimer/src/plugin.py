@@ -47,13 +47,14 @@ import urllib
 #------------------------------------------------------------------------------------------
 
 config.plugins.remoteTimer = ConfigSubsection()
-config.plugins.remoteTimer.httphost = ConfigText(default = "" , fixed_size = False)
-config.plugins.remoteTimer.httpip = ConfigIP(default = [0, 0, 0, 0])
-config.plugins.remoteTimer.httpport = ConfigNumber(default = 80)
-config.plugins.remoteTimer.username = ConfigText(default = "root", fixed_size = False)
-config.plugins.remoteTimer.password = ConfigPassword(default = "", fixed_size = False)
-config.plugins.remoteTimer.default = ConfigYesNo(default = False)
-config.plugins.remoteTimer.remotedir = ConfigYesNo(default = False)
+config.plugins.remoteTimer.httphost = ConfigText(default="", fixed_size=False)
+config.plugins.remoteTimer.httpip = ConfigIP(default=[0, 0, 0, 0])
+config.plugins.remoteTimer.httpport = ConfigNumber(default=80)
+config.plugins.remoteTimer.username = ConfigText(default="root", fixed_size=False)
+config.plugins.remoteTimer.password = ConfigPassword(default="", fixed_size=False)
+config.plugins.remoteTimer.default = ConfigYesNo(default=False)
+config.plugins.remoteTimer.remotedir = ConfigYesNo(default=False)
+
 
 def localGetPage(url):
 	username = config.plugins.remoteTimer.username.value
@@ -65,7 +66,8 @@ def localGetPage(url):
 	else:
 		headers = {}
 
-	return getPage(url, headers = headers)
+	return getPage(url, headers=headers)
+
 
 class RemoteService:
 	def __init__(self, sref, sname):
@@ -73,6 +75,7 @@ class RemoteService:
 		self.sname = sname
 
 	getServiceName = lambda self: self.sname
+
 
 class RemoteTimerScreen(Screen):
 	skin = """
@@ -113,7 +116,7 @@ class RemoteTimerScreen(Screen):
 		self["text"] = Label("")
 
 		remoteip = "%d.%d.%d.%d" % tuple(config.plugins.remoteTimer.httpip.value)
-		self.remoteurl = "%s:%s" % ( remoteip, str(config.plugins.remoteTimer.httpport.value))
+		self.remoteurl = "%s:%s" % (remoteip, str(config.plugins.remoteTimer.httpport.value))
 
 		self.onLayoutFinish.append(self.getInfo)
 
@@ -173,33 +176,34 @@ class RemoteTimerScreen(Screen):
 			return [
 				(
 					E2Timer(
-						sref = str(timer.findtext("e2servicereference", '').encode("utf-8", 'ignore')),
-						sname = str(timer.findtext("e2servicename", 'n/a').encode("utf-8", 'ignore')),
-						name = str(timer.findtext("e2name", '').encode("utf-8", 'ignore')),
-						disabled = int(timer.findtext("e2disabled", 0)),
-						failed = int(timer.findtext("e2failed", 0)),
-						timebegin = int(timer.findtext("e2timebegin", 0)),
-						timeend = int(timer.findtext("e2timeend", 0)),
-						duration = int(timer.findtext("e2duration", 0)),
-						startprepare = int(timer.findtext("e2startprepare", 0)),
-						state = int(timer.findtext("e2state", 0)),
-						repeated = int(timer.findtext("e2repeated", 0)),
-						justplay = int(timer.findtext("e2justplay", 0)),
-						eventId = int(timer.findtext("e2eit", -1)),
-						afterevent = int(timer.findtext("e2afterevent", 0)),
-						dirname = str(timer.findtext("e2dirname", '').encode("utf-8", 'ignore')),
-						description = str(timer.findtext("e2description", '').encode("utf-8", 'ignore'))
+						sref=str(timer.findtext("e2servicereference", '').encode("utf-8", 'ignore')),
+						sname=str(timer.findtext("e2servicename", 'n/a').encode("utf-8", 'ignore')),
+						name=str(timer.findtext("e2name", '').encode("utf-8", 'ignore')),
+						disabled=int(timer.findtext("e2disabled", 0)),
+						failed=int(timer.findtext("e2failed", 0)),
+						timebegin=int(timer.findtext("e2timebegin", 0)),
+						timeend=int(timer.findtext("e2timeend", 0)),
+						duration=int(timer.findtext("e2duration", 0)),
+						startprepare=int(timer.findtext("e2startprepare", 0)),
+						state=int(timer.findtext("e2state", 0)),
+						repeated=int(timer.findtext("e2repeated", 0)),
+						justplay=int(timer.findtext("e2justplay", 0)),
+						eventId=int(timer.findtext("e2eit", -1)),
+						afterevent=int(timer.findtext("e2afterevent", 0)),
+						dirname=str(timer.findtext("e2dirname", '').encode("utf-8", 'ignore')),
+						description=str(timer.findtext("e2description", '').encode("utf-8", 'ignore'))
 					),
 					False
 				)
 				for timer in root.findall("e2timer")
 			]
 
+
 class E2Timer:
-	def __init__(self, sref = "", sname = "", name = "", disabled = 0, failed = 0, \
-			timebegin = 0, timeend = 0, duration = 0, startprepare = 0, \
-			state = 0, repeated = 0, justplay = 0, eventId = 0, afterevent = 0, \
-			dirname = "", description = "", isAutoTimer = 0, ice_timer_id = None):
+	def __init__(self, sref="", sname="", name="", disabled=0, failed=0,
+			timebegin=0, timeend=0, duration=0, startprepare=0,
+			state=0, repeated=0, justplay=0, eventId=0, afterevent=0,
+			dirname="", description="", isAutoTimer=0, ice_timer_id=None):
 		self.service_ref = RemoteService(sref, sname)
 		self.name = name
 		self.disabled = disabled
@@ -218,6 +222,7 @@ class E2Timer:
 		self.isAutoTimer = isAutoTimer
 		self.ice_timer_id = ice_timer_id
 
+
 class RemoteTimerSetup(Screen, ConfigListScreen):
 	skin = """
 		<screen position="center,center" size="560,410" title="Settings" >
@@ -232,7 +237,7 @@ class RemoteTimerSetup(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 
 		self.setTitle(_("Remote-Timer settings"))
-		
+
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 
@@ -264,8 +269,10 @@ class RemoteTimerSetup(Screen, ConfigListScreen):
 	def Exit(self):
 		self.close()
 
+
 baseTimerEntrySetup = None
 baseTimerEntryGo = None
+
 
 def timerInit():
 	global baseTimerEntrySetup, baseTimerEntryGo
@@ -276,16 +283,18 @@ def timerInit():
 	TimerEntry.createSetup = createNewnigma2Setup
 	TimerEntry.keyGo = newnigma2KeyGo
 
+
 def createNewnigma2Setup(self, widget="config"):
 	try:
 		baseTimerEntrySetup(self, widget)
 	except TypeError: # for distros that do not use the "widget" argument in Setup.createSetup
 		baseTimerEntrySetup(self)
-	self.timerentry_remote = ConfigYesNo(default = config.plugins.remoteTimer.default.value)
+	self.timerentry_remote = ConfigYesNo(default=config.plugins.remoteTimer.default.value)
 	self.list.insert(0, getConfigListEntry(_("Remote Timer"), self.timerentry_remote))
 
 	# force re-reading the list
 	self[widget].list = self.list
+
 
 def newnigma2SubserviceSelected(self, service):
 	if service is not None:
@@ -299,6 +308,7 @@ def newnigma2SubserviceSelected(self, service):
 
 		self.timerentry_service_ref = service_ref
 		self.timer.eit = eit
+
 
 def newnigma2KeyGo(self):
 	if not self.timerentry_remote.value:
@@ -319,7 +329,7 @@ def newnigma2KeyGo(self):
 						if i.toString() == ref.toString():
 							selection = x
 						tlist.append((i.getName(), i))
-					self.session.openWithCallback(boundFunction(newnigma2SubserviceSelected, self), ChoiceBox, title=_("Please select a subservice to record..."), list = tlist, selection = selection)
+					self.session.openWithCallback(boundFunction(newnigma2SubserviceSelected, self), ChoiceBox, title=_("Please select a subservice to record..."), list=tlist, selection=selection)
 					return
 				elif n > 0:
 					parent = service_ref.ref
@@ -336,7 +346,7 @@ def newnigma2KeyGo(self):
 			if colon_counter < 10:
 				clean_ref += char
 
-		service_ref = clean_ref;
+		service_ref = clean_ref
 
 		# XXX: this will - without any hassle - ignore the value of repeated
 		begin, end = self.getBeginEnd()
@@ -345,13 +355,13 @@ def newnigma2KeyGo(self):
 		if end < begin:
 			end += 86400
 
-		rt_name = urllib.quote(self.timerentry_name.value.decode('utf8').encode('utf8','ignore'))
-		rt_description = urllib.quote(self.timerentry_description.value.decode('utf8').encode('utf8','ignore'))
+		rt_name = urllib.quote(self.timerentry_name.value.decode('utf8').encode('utf8', 'ignore'))
+		rt_description = urllib.quote(self.timerentry_description.value.decode('utf8').encode('utf8', 'ignore'))
 		rt_disabled = 0 # XXX: do we really want to hardcode this? why do we offer this option then?
 		rt_repeated = 0 # XXX: same here
 
 		if config.plugins.remoteTimer.remotedir.value:
-			rt_dirname = urllib.quote(self.timerentry_dirname.value.decode('utf8').encode('utf8','ignore'))
+			rt_dirname = urllib.quote(self.timerentry_dirname.value.decode('utf8').encode('utf8', 'ignore'))
 		else:
 			rt_dirname = "None"
 
@@ -389,12 +399,14 @@ def newnigma2KeyGo(self):
 		defer.addCallback(boundFunction(_gotPageLoad, self.session, self))
 		defer.addErrback(boundFunction(errorLoad, self.session))
 
+
 def _gotPageLoadCb(timerEntry, doClose, *args):
 	if doClose:
 		timerEntry.keyCancel()
 
+
 def _gotPageLoad(session, timerEntry, html):
-	remoteresponse = parseXml( html)
+	remoteresponse = parseXml(html)
 	#print "print _gotPageLoad remoteresponse:", remoteresponse
 	# XXX: should be improved...
 	doClose = remoteresponse == "Timer added successfully!"
@@ -405,6 +417,7 @@ def _gotPageLoad(session, timerEntry, html):
 		MessageBox.TYPE_INFO
 	)
 
+
 def errorLoad(session, error):
 	#print "[RemoteTimer] errorLoad ERROR:", error
 	session.open(
@@ -412,6 +425,7 @@ def errorLoad(session, error):
 		_("ERROR - Set Timer on Remote Receiver via WebIf:\n%s") % (error),
 		MessageBox.TYPE_INFO
 	)
+
 
 def parseXml(string):
 	try:
@@ -424,6 +438,7 @@ def parseXml(string):
 		return "ERROR XML PARSE"
 
 #------------------------------------------------------------------------------------------
+
 
 def autostart(reason, **kwargs):
 	if "session" in kwargs:
@@ -441,15 +456,17 @@ def timermenu(menuid, **kwargs):
 	else:
 		return []
 
+
 def main(session, **kwargs):
 	session.open(RemoteTimerScreen)
+
 
 def Plugins(**kwargs):
 	plugin = []
 	if getImageDistro() in ("openvix", "openatv", "openxta"):
-		plugin.append(PluginDescriptor(name=_("Remote Timer"), description = _("Remote Timer Setup"), where=PluginDescriptor.WHERE_MENU, fnc=timermenu))
+		plugin.append(PluginDescriptor(name=_("Remote Timer"), description=_("Remote Timer Setup"), where=PluginDescriptor.WHERE_MENU, fnc=timermenu))
 	else:
-		plugin.append(PluginDescriptor(name="Remote Timer",description="Remote Timer Setup", where = [ PluginDescriptor.WHERE_PLUGINMENU ], icon="remotetimer.png", fnc = main))
-	plugin.append(PluginDescriptor(name="Remote Timer", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main))
-	plugin.append(PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart))
+		plugin.append(PluginDescriptor(name="Remote Timer", description="Remote Timer Setup", where=[PluginDescriptor.WHERE_PLUGINMENU], icon="remotetimer.png", fnc=main))
+	plugin.append(PluginDescriptor(name="Remote Timer", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main))
+	plugin.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart))
 	return plugin

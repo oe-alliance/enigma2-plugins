@@ -3,6 +3,7 @@ from Components.Sources.Source import Source
 from Components.FileList import FileList
 from os import path as os_path
 
+
 class MP(Source):
 	LIST = 0
 	PLAY = 1
@@ -39,10 +40,10 @@ class MP(Source):
 		elif func is self.REMOVE:
 			self.result = self.removeFile(cmd)
 		elif func is self.ADD:
-			param = { "file" : cmd, "root" : None}
+			param = {"file": cmd, "root": None}
 			self.result = self.addFile(param)
 
-	def tryOpenMP(self, noCreate = False):
+	def tryOpenMP(self, noCreate=False):
 		# check if there is an active link
 		if hasattr(self.session, "mediaplayer"):
 			mp = self.session.mediaplayer
@@ -112,9 +113,9 @@ class MP(Source):
 		filelist = FileList(path, showDirectories=True, showFiles=True, matchingPattern=matchingPattern, useServiceRef=useServiceRef, isTop=False)
 		list = filelist.getFileList()
 		if useServiceRef is True:
-			returnList = [ (x[0][0].toString(), x[0][1], path) if x[0][1] is False else (x[0][0], x[0][1], path) for x in list ]
+			returnList = [(x[0][0].toString(), x[0][1], path) if x[0][1] is False else (x[0][0], x[0][1], path) for x in list]
 		else:
-			returnList = [ (param["path"] + x[0][0], x[0][1], path) if x[0][1] is False else (x[0][0], x[0][1], path) for x in list ]
+			returnList = [(param["path"] + x[0][0], x[0][1], path) if x[0][1] is False else (x[0][0], x[0][1], path) for x in list]
 
 		return returnList
 
@@ -263,7 +264,7 @@ class MP(Source):
 				"Genre": 4,
 				"CoverFilename": 5,
 			}
-		return  {
+		return {
 			"ServiceReference": 0,
 			"IsDirectory": 1,
 			"Root": 2,
