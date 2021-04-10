@@ -16,7 +16,13 @@
 #    along with periscope; if not, write to the Free Software
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import os, shutil, urllib2, sys, logging, traceback, zipfile
+import os
+import shutil
+import urllib2
+import sys
+import logging
+import traceback
+import zipfile
 import struct
 import socket # For timeout purposes
 import re

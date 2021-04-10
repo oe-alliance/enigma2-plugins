@@ -14,7 +14,8 @@ from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import *
 from Components.FileList import FileList
 from _ctypes import *
-import os, re
+import os
+import re
 from os import path as os_path
 #------------------------------------------------------------------------------------------
 class MC_VideoInfoView(Screen):

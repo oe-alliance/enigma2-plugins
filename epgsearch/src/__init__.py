@@ -4,7 +4,8 @@ from Components.NimManager import nimmanager
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 from boxbranding import getImageDistro
 from enigma import eServiceReference, eServiceCenter
-import os, gettext
+import os
+import gettext
 
 # Config
 from Components.config import config, configfile, ConfigSet, ConfigSubsection, ConfigSelection, ConfigSelectionNumber, ConfigYesNo, ConfigSatlist

@@ -34,7 +34,9 @@ Modified to use async communication, content level authentication and plain xml.
 
 __version__ = '0.6'
 
-import logging, re, md5
+import logging
+import re
+import md5
 
 import xml.etree.ElementTree as ET
 from Components.config import config

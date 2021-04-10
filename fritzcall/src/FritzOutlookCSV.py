@@ -226,7 +226,8 @@ def readNumbers(filename, outFun):
 	fileD.close()
 
 if __name__ == '__main__':
-	import os, sys
+	import os
+	import sys
 	cwd = os.path.dirname(sys.argv[0])
 	if (len(sys.argv) == 1):
 		readNumbers("Kontakte.csv", out)

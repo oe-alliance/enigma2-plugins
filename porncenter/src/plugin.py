@@ -24,7 +24,8 @@ from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Tools.Downloader import downloadWithProgress
 from Tools.LoadPixmap import LoadPixmap
-import os, gettext
+import os
+import gettext
 
 ##################################################
 

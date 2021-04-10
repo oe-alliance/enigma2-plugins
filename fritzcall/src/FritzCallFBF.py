@@ -21,7 +21,13 @@ $Id: FritzCallFBF.py 1552 2019-04-23 07:40:35Z michael $
 # E0611 No name %r in module %r
 # pylint: disable=C0111,C0103,C0301,W0603,W0403,C0302,W0611,F0401,E0611
 
-import re, time, hashlib, logging, StringIO, csv, json
+import re
+import time
+import hashlib
+import logging
+import StringIO
+import csv
+import json
 from urllib import urlencode
 import xml.etree.ElementTree as ET
 

@@ -9,7 +9,8 @@ $Id: FritzLDIF.py 1290 2016-05-01 16:09:29Z michael $
 # needs python-ldap for ldif
 #
 
-import ldif, re
+import ldif
+import re
 try:
 	from . import _, normalizePhoneNumber #@UnresolvedImport # pylint: disable-msg=F0401
 except ValueError:
@@ -191,7 +192,8 @@ def lookedUp(number, name):
 	print number + ' ' + name
 
 if __name__ == '__main__':
-	import os, sys
+	import os
+	import sys
 	cwd = os.path.dirname(sys.argv[0])
 	if (len(sys.argv) == 1):
 		ReadNumbers(open("Kontakte.ldif"), out)

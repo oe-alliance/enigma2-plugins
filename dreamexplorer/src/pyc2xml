@@ -44,9 +44,16 @@ inserted by the disassembler to make the XML more readable.
 __author__  = 'Ilan Schnell <ilanschnell@gmail.com>'
 __version__ = '0.2'
 
-import dis, marshal, new
-import struct, sys, time
-import random, string, cStringIO, re
+import dis
+import marshal
+import new
+import struct
+import sys
+import time
+import random
+import string
+import cStringIO
+import re
 
 from types import CodeType
 from xml.etree import ElementTree as ET

@@ -22,7 +22,9 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 from time import time
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
-import gettext, os, stat
+import gettext
+import os
+import stat
 
 #################################################
 

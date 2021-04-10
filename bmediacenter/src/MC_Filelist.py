@@ -1,6 +1,9 @@
 from re import compile as re_compile
 from os import path as os_path, listdir
-import os, glob, time, random
+import os
+import glob
+import time
+import random
 from Components.MenuList import MenuList
 from Components.Harddisk import harddiskmanager
 from Tools.Directories import SCOPE_CURRENT_SKIN, resolveFilename, pathExists, fileExists, crawlDirectory

@@ -43,7 +43,8 @@ class AutoPoller:
 					ret = autotimer.parseEPG(autoPoll = True)
 				except Exception:
 					# Dump error to stdout
-					import traceback, sys
+					import traceback
+					import sys
 					traceback.print_exc(file=sys.stdout)
 			elif not config.plugins.autotimer.onlyinstandby.value:
 				print "[AutoTimer] Auto Poll Started"
@@ -52,6 +53,7 @@ class AutoPoller:
 					ret = autotimer.parseEPG(autoPoll = True)
 				except Exception:
 					# Dump error to stdout
-					import traceback, sys
+					import traceback
+					import sys
 					traceback.print_exc(file=sys.stdout)
 		self.timer.startLongTimer(config.plugins.autotimer.interval.value*60)

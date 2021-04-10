@@ -8,7 +8,9 @@ $Date$
 $Modified: sreichholf
 '''
 
-import re, sys, os
+import re
+import sys
+import os
 import htmlentitydefs
 from xml.dom.minidom import parse
 from twisted.web.client import getPage #@UnresolvedImport

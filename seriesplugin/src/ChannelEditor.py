@@ -1,7 +1,15 @@
 # -*- coding: utf-8 -*-
 from __init__ import _
 
-import sys, os, base64, re, time, shutil, datetime, codecs, urllib2
+import sys
+import os
+import base64
+import re
+import time
+import shutil
+import datetime
+import codecs
+import urllib2
 
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.MenuList import MenuList

@@ -57,7 +57,8 @@ def autostart(reason, *args, **kwargs):
 	if reason == 0:
 		if hasattr(PluginComponent, 'pluginHider_baseGetPlugins'):
 			print("[PluginHider] Something went wrong as our autostart handler was called multiple times for startup, printing traceback and ignoring.")
-			import traceback, sys
+			import traceback
+			import sys
 			traceback.print_stack(limit=5, file=sys.stdout)
 		else:
 			PluginComponent.pluginHider_baseGetPlugins = PluginComponent.getPlugins
@@ -68,7 +69,8 @@ def autostart(reason, *args, **kwargs):
 			del PluginComponent.pluginHider_baseGetPlugins
 		else:
 			print("[PluginHider] Something went wrong as our autostart handler was called multiple times for shutdown, printing traceback and ignoring.")
-			import traceback, sys
+			import traceback
+			import sys
 			traceback.print_stack(limit=5, file=sys.stdout)
 
 def main(session, *args, **kwargs):

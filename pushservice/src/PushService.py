@@ -17,7 +17,8 @@
 #######################################################################
 
 import os
-import sys, traceback
+import sys
+import traceback
 from time import localtime
 
 from Components.config import config

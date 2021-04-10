@@ -22,7 +22,8 @@ from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
 from Components.MovieList import KNOWN_EXTENSIONS
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
-import os, re
+import os
+import re
 try:
 	import htmlentitydefs
 	from urllib import quote_plus

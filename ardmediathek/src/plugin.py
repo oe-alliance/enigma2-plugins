@@ -19,7 +19,8 @@ from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 from twisted.web.client import downloadPage, getPage
-import re, urllib2
+import re
+import urllib2
 
 ###################################################
 

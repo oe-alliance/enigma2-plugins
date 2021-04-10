@@ -19,7 +19,11 @@
 
 import socket # For timeout purposes
 from Plugins.Extensions.SubsDownloader2.SourceCode import xmlrpclib
-import os, struct, commands, traceback, logging
+import os
+import struct
+import commands
+import traceback
+import logging
 
 #from Screens.MessageBox import MessageBox
 #from Screens.Screen import Screen

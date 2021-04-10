@@ -1,4 +1,5 @@
-import sys, glob
+import sys
+import glob
 sys.path.insert(0, '..')
 from chardet.universaldetector import UniversalDetector
 

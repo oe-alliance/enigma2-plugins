@@ -26,7 +26,8 @@
 # 02110-1301  USA
 ######################### END LICENSE BLOCK #########################
 
-import constants, sys
+import constants
+import sys
 from latin1prober import Latin1Prober # windows-1252
 from mbcsgroupprober import MBCSGroupProber # multi-byte character sets
 from sbcsgroupprober import SBCSGroupProber # single-byte character sets

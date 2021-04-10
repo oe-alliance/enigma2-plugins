@@ -27,7 +27,11 @@ __all__ = [
   'LDIFCopy',
 ]
 
-import urlparse,urllib,base64,re,types
+import urlparse
+import urllib
+import base64
+import re
+import types
 
 try:
   from cStringIO import StringIO

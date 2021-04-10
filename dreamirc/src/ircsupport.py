@@ -10,7 +10,9 @@ import string
 from protocols import irc
 from twisted.internet import defer, reactor, protocol
 from twisted.internet.defer import succeed
-import e2support, interfaces,dreamIRCTools
+import e2support
+import interfaces
+import dreamIRCTools
 from zope.interface import implements
 
 class IRCPerson(e2support.AbstractPerson):

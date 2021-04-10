@@ -30,7 +30,8 @@ from codingstatemachine import CodingStateMachine
 from chardistribution import SJISDistributionAnalysis
 from jpcntx import SJISContextAnalysis
 from mbcssm import SJISSMModel
-import constants, sys
+import constants
+import sys
 from constants import eStart, eError, eItsMe
 
 class SJISProber(MultiByteCharSetProber):

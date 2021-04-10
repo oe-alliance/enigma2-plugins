@@ -43,8 +43,10 @@ Further Example:
 
 import urllib
 import urllib2
-import mimetools, mimetypes
-import os, stat
+import mimetools
+import mimetypes
+import os
+import stat
 from cStringIO import StringIO
 
 class Callable:
@@ -115,7 +117,8 @@ class MultipartPostHandler(urllib2.BaseHandler):
     https_request = http_request
 
 def main():
-    import tempfile, sys
+    import tempfile
+    import sys
 
     validatorURL = "http://validator.w3.org/check"
     opener = urllib2.build_opener(MultipartPostHandler)

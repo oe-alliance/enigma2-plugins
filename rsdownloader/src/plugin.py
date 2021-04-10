@@ -34,7 +34,13 @@ from twisted.web.client import getPage
 from urllib2 import Request
 from urlparse import urlparse, urlunparse
 from xml.etree.cElementTree import parse
-import os, gettext, re, socket, sys, urllib, urllib2
+import os
+import gettext
+import re
+import socket
+import sys
+import urllib
+import urllib2
 
 ##############################################################################
 

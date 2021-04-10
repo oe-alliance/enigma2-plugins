@@ -81,7 +81,12 @@
 __version__ = "0.1"
  
  
-import os, sys, socket, struct, select, time
+import os
+import sys
+import socket
+import struct
+import select
+import time
  
 # From /usr/include/linux/icmp.h; your milage may vary.
 ICMP_ECHO_REQUEST = 8 # Seems to be the same on Solaris.

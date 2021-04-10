@@ -513,7 +513,8 @@ class SimpleVDRProtocol(LineReceiver):
 		try:
 			call(args)
 		except Exception as e:
-			import traceback, sys
+			import traceback
+			import sys
 			traceback.print_exc(file=sys.stdout)
 			payload = "%d exception occured: %s" % (CODE_ERR, str(e).replace('\n', ' ').replace('\r', ''))
 			self.sendLine(payload)

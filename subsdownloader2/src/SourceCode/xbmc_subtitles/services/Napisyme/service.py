@@ -6,7 +6,11 @@
 # Credits to amet, Guilherme Jardim, and many more.
 # mrto
 
-import urllib2, re, string, sys, os
+import urllib2
+import re
+import string
+import sys
+import os
 #, xbmc
 from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities import log, twotofull
 from Plugins.Extensions.SubsDownloader2.SourceCode.archives_extractor import zip_extractor

@@ -1,4 +1,5 @@
-import os, urllib
+import os
+import urllib
 #from ..StopWatch import clockit
 
 #@clockit
@@ -10,7 +11,8 @@ def downloadCover(url, filename, overwrite=False):
         else:
             print "Download skipped:", str(url), "->", str(filename)
     except:
-        import sys, traceback
+        import sys
+        import traceback
         print '-' * 50
         traceback.print_exc(file=sys.stdout)
         print '-' * 50

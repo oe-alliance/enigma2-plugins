@@ -460,7 +460,8 @@ def autostart(reason, *args, **kwargs):
 	if reason == 0:
 		if hasattr(PluginComponent, 'pluginSort_baseAddPlugin'):
 			print("[PluginSort] Something went wrong as our autostart handler was called multiple times for startup, printing traceback and ignoring.")
-			import traceback, sys
+			import traceback
+			import sys
 			traceback.print_stack(limit=5, file=sys.stdout)
 		else:
 			PluginComponent.pluginSort_baseAddPlugin = PluginComponent.addPlugin

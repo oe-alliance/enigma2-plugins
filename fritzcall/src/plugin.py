@@ -20,7 +20,11 @@ $Id: plugin.py 1553 2019-04-25 07:36:05Z michael $
 # E501 line too long (85 > 79 characters)
 # pylint: disable=C0111,C0103,C0301,W0603,W0403,C0302,W0312
 
-import re, time, os, traceback, json
+import re
+import time
+import os
+import traceback
+import json
 from itertools import cycle, izip
 import base64
 from logging import NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL
@@ -64,7 +68,8 @@ from twisted.internet import reactor  # @UnresolvedImport
 from twisted.internet.protocol import ReconnectingClientFactory  # @UnresolvedImport
 from twisted.protocols.basic import LineReceiver  # @UnresolvedImport
 
-import FritzOutlookCSV, FritzLDIF
+import FritzOutlookCSV
+import FritzLDIF
 from nrzuname import ReverseLookupAndNotifier
 from . import _, __  # @UnresolvedImport # pylint: disable=W0611,F0401
 

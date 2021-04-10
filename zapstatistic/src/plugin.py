@@ -16,7 +16,8 @@ from ServiceReference import ServiceReference
 from time import gmtime, localtime, strftime, time
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from xml.etree.cElementTree import parse
-import os, gettext
+import os
+import gettext
 
 ###########################################################
 

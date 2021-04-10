@@ -1,6 +1,7 @@
 # pornrabbit plugin by AliAbdul
 from Plugin import Movie, Plugin
-import re, urllib2
+import re
+import urllib2
 
 ##################################################
 

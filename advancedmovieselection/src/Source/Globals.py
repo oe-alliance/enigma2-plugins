@@ -23,7 +23,8 @@ from enigma import getDesktop
 from Tools.Directories import fileExists, resolveFilename, SCOPE_HDD, SCOPE_CURRENT_SKIN, SCOPE_CURRENT_PLUGIN
 
 def printStackTrace():
-    import sys, traceback
+    import sys
+    import traceback
     print "--- [AdvancedMovieSelection] STACK TRACE ---"
     traceback.print_exc(file=sys.stdout)
     print '-' * 50

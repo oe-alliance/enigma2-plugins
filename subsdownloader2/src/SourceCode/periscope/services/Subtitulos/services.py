@@ -16,7 +16,14 @@
 #    along with periscope; if not, write to the Free Software
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import zipfile, os, urllib2, urllib, logging, traceback, httplib, re
+import zipfile
+import os
+import urllib2
+import urllib
+import logging
+import traceback
+import httplib
+import re
 from Plugins.Extensions.SubsDownloader2.SourceCode.BeautifulSoup import BeautifulSoup
 from Plugins.Extensions.SubsDownloader2.SourceCode.periscope import SubtitleDatabase
 from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities import languageTranslate #toOpenSubtitles_two
