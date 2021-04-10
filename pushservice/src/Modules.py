@@ -18,10 +18,13 @@ from __future__ import absolute_import
 #
 #######################################################################
 
-import os, sys, traceback
+import os
+import sys
+import traceback
 
 # Plugin framework
-import imp, inspect
+import imp
+import inspect
 
 # Plugin internal
 from . import _

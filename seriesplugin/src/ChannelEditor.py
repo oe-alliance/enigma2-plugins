@@ -2,7 +2,14 @@
 from __future__ import absolute_import
 from .__init__ import _
 
-import sys, os, base64, re, time, shutil, datetime, codecs
+import sys
+import os
+import base64
+import re
+import time
+import shutil
+import datetime
+import codecs
 
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.MenuList import MenuList

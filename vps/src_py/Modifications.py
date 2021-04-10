@@ -23,7 +23,8 @@ vps_already_registered = False
 # of which takes a positional parameter whilst the other does not).
 # In both Py2 and Py3. It's not pretty as we have to count the args...
 #
-import sys, inspect
+import sys
+import inspect
 if sys.version_info[0] == 2:
 	__getargs = inspect.getargspec
 else:

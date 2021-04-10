@@ -32,7 +32,8 @@ from twisted.internet import reactor
 from twisted.internet.protocol import ReconnectingClientFactory
 from twisted.protocols.basic import LineReceiver
 
-import re, os
+import re
+import os
 
 from datetime import datetime
 

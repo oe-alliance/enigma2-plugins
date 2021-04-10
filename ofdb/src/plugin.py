@@ -18,7 +18,8 @@ from Components.ProgressBar import ProgressBar
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 import re
 from six.moves.urllib.parse import quote
-import os, gettext
+import os
+import gettext
 
 import six
 from six.moves import html_entities

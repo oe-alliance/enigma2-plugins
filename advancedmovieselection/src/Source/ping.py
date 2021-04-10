@@ -82,7 +82,12 @@ from __future__ import print_function
 __version__ = "0.1"
  
  
-import os, sys, socket, struct, select, time
+import os
+import sys
+import socket
+import struct
+import select
+import time
 
 from six.moves import range
 

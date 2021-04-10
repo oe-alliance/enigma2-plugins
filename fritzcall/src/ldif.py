@@ -28,7 +28,10 @@ __all__ = [
   'LDIFCopy',
 ]
 
-import urlparse, base64, re, types
+import urlparse
+import base64
+import re
+import types
 from six.moves.urllib.request import urlopen
 
 try:

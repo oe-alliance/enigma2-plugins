@@ -2,7 +2,8 @@ import Plugins.Plugin
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigInteger, ConfigSubList, ConfigSubDict, ConfigText, configfile, ConfigYesNo
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
-import os, gettext
+import os
+import gettext
 
 currentmcversion = "099"
 currentmcplatform = "sh4"

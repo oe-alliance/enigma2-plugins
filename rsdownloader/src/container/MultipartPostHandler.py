@@ -44,8 +44,10 @@ from __future__ import print_function
 
 import urllib
 import urllib2
-import mimetools, mimetypes
-import os, stat
+import mimetools
+import mimetypes
+import os
+import stat
 
 from six.moves import cStringIO as StringIO
 
@@ -118,7 +120,8 @@ class MultipartPostHandler(urllib2.BaseHandler):
     https_request = http_request
 
 def main():
-    import tempfile, sys
+    import tempfile
+    import sys
 
     validatorURL = "http://validator.w3.org/check"
     opener = urllib2.build_opener(MultipartPostHandler)

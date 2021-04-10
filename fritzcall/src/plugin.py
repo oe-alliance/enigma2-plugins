@@ -21,7 +21,11 @@ from __future__ import absolute_import
 # E501 line too long (85 > 79 characters)
 # pylint: disable=C0111,C0103,C0301,W0603,W0403,C0302,W0312
 
-import re, time, os, traceback, json
+import re
+import time
+import os
+import traceback
+import json
 try:
     from itertools import izip as zip
 except ImportError: # will be 3.x series

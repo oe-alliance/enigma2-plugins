@@ -29,7 +29,8 @@ from Components.config import config
 from .Source.ServiceUtils import serviceUtil, realSize, diskUsage
 from .Source.ServiceProvider import ServiceCenter
 from enigma import eTimer
-import os, time
+import os
+import time
 
 def openDialog(job, session):
     error = job.getError()

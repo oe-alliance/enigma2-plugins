@@ -24,7 +24,9 @@ from Screens.MessageBox import MessageBox
 from Screens.MovieSelection import MovieSelection
 from Screens.Screen import Screen
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
-import os, gettext, random
+import os
+import gettext
+import random
 
 ##############################################################################
 

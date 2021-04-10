@@ -58,7 +58,8 @@ def sessionstart(reason, **kwargs):
                 movieScanner.setEnabled(True)
             except:
                 print('-' * 50)
-                import traceback, sys
+                import traceback
+                import sys
                 traceback.print_exc(file=sys.stdout)
                 print('-' * 50)
 

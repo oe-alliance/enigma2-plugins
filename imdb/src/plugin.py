@@ -25,7 +25,8 @@ from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
 from Components.MovieList import KNOWN_EXTENSIONS
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
-import os, re
+import os
+import re
 
 from six.moves.urllib.parse import quote_plus
 
@@ -36,7 +37,8 @@ except ImportError as ie:
 	from html import entities as htmlentitydefs
 	iteritems = lambda d: d.items()
 	unichr = chr
-import os, gettext
+import os
+import gettext
 import six
 from six.moves.html_parser import HTMLParser
 

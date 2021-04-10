@@ -2,7 +2,9 @@
 from __future__ import print_function
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE #@UnresolvedImport
-import gettext, os, re
+import gettext
+import os
+import re
 from enigma import eBackgroundFileEraser
 
 PluginLanguageDomain = "NcidClient"

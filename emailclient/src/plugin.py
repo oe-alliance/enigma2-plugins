@@ -22,7 +22,9 @@ from Tools import Notifications
 from enigma import eListboxPythonMultiContent, gFont, eTimer #@UnresolvedImport # pylint: disable-msg=E0611
 from twisted.mail import imap4 #@UnresolvedImport
 from zope.interface import implementer
-import email, re, os
+import email
+import re
+import os
 from email.header import decode_header
 import time
 from .TagStrip import strip_readable

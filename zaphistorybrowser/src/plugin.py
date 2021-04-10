@@ -18,7 +18,8 @@ from Screens.ParentalControlSetup import ProtectedScreen
 from Screens.Screen import Screen
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from enigma import eServiceReference, getDesktop
-import os, gettext
+import os
+import gettext
 from skin import parameters as skinparameter
 
 ################################################

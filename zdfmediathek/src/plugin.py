@@ -24,7 +24,8 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUG
 from Tools.HardwareInfo import HardwareInfo
 from Tools.LoadPixmap import LoadPixmap
 from twisted.web.client import downloadPage, getPage
-import htmlentitydefs, re
+import htmlentitydefs
+import re
 from socket import error
 from six.moves.urllib.request import Request, urlopen as urlopen2
 from six.moves.http_client import HTTPConnection, HTTPException

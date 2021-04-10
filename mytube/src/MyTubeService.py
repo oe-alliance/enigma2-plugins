@@ -12,7 +12,11 @@ from gdata.service import BadAuthentication
 from twisted.web import client
 from twisted.internet import reactor
 from socket import gaierror, error
-import os, socket, httplib, re, json
+import os
+import socket
+import httplib
+import re
+import json
 from six.moves.urllib.parse import quote, unquote_plus, unquote, urlencode
 from six.moves.urllib.request import Request, urlopen, URLError
 

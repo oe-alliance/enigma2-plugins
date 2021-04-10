@@ -22,7 +22,13 @@ from __future__ import absolute_import
 # E0611 No name %r in module %r
 # pylint: disable=C0111,C0103,C0301,W0603,W0403,C0302,W0611,F0401,E0611
 
-import re, time, hashlib, logging, StringIO, csv, json
+import re
+import time
+import hashlib
+import logging
+import StringIO
+import csv
+import json
 import xml.etree.ElementTree as ET
 
 

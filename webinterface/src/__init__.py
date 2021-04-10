@@ -3,7 +3,9 @@ from __future__ import print_function
 import Plugins.Plugin
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
-import os, gettext, hashlib
+import os
+import gettext
+import hashlib
 
 from six.moves import reduce
 from functools import reduce

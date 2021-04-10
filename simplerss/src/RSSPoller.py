@@ -131,7 +131,8 @@ class RSSPoller:
 				# We don't want to stop updating just because one feed is broken
 				self.next_feed()
 		except Exception:
-			import traceback, sys
+			import traceback
+			import sys
 			traceback.print_exc(file=sys.stdout)
 			# Errorback given, call it (asumme we don't need do restart timer!)
 			if errorback is not None:

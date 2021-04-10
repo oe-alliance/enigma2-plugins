@@ -22,7 +22,9 @@ from . import _
 
 import logging
 
-import os, sys, traceback
+import os
+import sys
+import traceback
 
 from Components.config import config
 

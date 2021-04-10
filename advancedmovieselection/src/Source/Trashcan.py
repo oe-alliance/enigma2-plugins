@@ -26,7 +26,10 @@ must pass on to the recipients the same freedoms that you received. You must mak
 that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 '''
 from __future__ import print_function
-import os, glob, shutil, time
+import os
+import glob
+import shutil
+import time
 from threading import Thread
  
 TRASH_NAME = ".trash"

@@ -21,7 +21,9 @@ from __future__ import print_function
 # C0410 multiple-imports
 # pylint: disable=C0111,C0103,C0301,W0603,W0403,C0302
 
-import re, sys, os
+import re
+import sys
+import os
 from xml.dom.minidom import parse
 
 try:

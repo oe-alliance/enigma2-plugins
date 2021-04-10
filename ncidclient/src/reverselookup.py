@@ -9,7 +9,9 @@ $Modified: sreichholf
 '''
 from __future__ import print_function
 
-import re, sys, os
+import re
+import sys
+import os
 from xml.dom.minidom import parse
 from twisted.web.client import getPage #@UnresolvedImport
 from twisted.internet import reactor #@UnresolvedImport

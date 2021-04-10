@@ -34,7 +34,11 @@ from twisted.internet import reactor
 from twisted.python import failure
 from twisted.web.client import getPage
 from xml.etree.cElementTree import parse
-import os, gettext, re, socket, sys
+import os
+import gettext
+import re
+import socket
+import sys
 from six.moves.urllib.parse import urlparse, urlunparse
 from six.moves.urllib.request import Request, urlopen
 

@@ -38,7 +38,10 @@ from twisted.web import client
 from twisted.web.client import HTTPClientFactory
 from Components.Pixmap import Pixmap
 from Components.ScrollLabel import ScrollLabel
-import string, os, re, skin
+import string
+import os
+import re
+import skin
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigDirectory, ConfigYesNo, Config, ConfigInteger, ConfigSubList, ConfigText, ConfigNumber, getConfigListEntry, configfile
 from Components.ConfigList import ConfigListScreen
 from Screens.MessageBox import MessageBox
