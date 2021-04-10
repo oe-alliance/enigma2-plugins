@@ -267,9 +267,9 @@ class EmissionDetailview(Screen, HelpableScreen):
 			for id, x in list(files.items()):
 				completed = x['completed']
 				size = x['size'] or 1 # to avoid division by zero ;-)
-				l.append((id, x['priority'], str(completed/1048576) + " MB", \
-					x['selected'], str(x['name']), str(size/1048576) + " MB", \
-					x['selected'] and _("downloading") or _("skipping"), \
+				l.append((id, x['priority'], str(completed/1048576) + " MB",
+					x['selected'], str(x['name']), str(size/1048576) + " MB",
+					x['selected'] and _("downloading") or _("skipping"),
 					int(100*(completed / float(size)))
 				))
 

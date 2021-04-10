@@ -23,8 +23,10 @@ class PluginHelp(object):
 		self.additionalSkin = additionalSkin
 
 	def __getattr__(self, attr):
-		if attr == "name": return self.getNameFunc()
-		elif attr == "pages": return self.getPagesFunc()
+		if attr == "name":
+			return self.getNameFunc()
+		elif attr == "pages":
+			return self.getPagesFunc()
 		return object.__getattr__(self, attr)
 
 	def open(self, session):

@@ -217,8 +217,8 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 		self["config"].handleKey(KEY_OK)
 		cur = self["config"].getCurrent()
 		if cur[1] == config.plugins.epgbackup.backup_log_dir:
-			self.session.openWithCallback(self.directorySelected, LocationBox, \
-				_("Select Logfile-Location"), "", \
+			self.session.openWithCallback(self.directorySelected, LocationBox,
+				_("Select Logfile-Location"), "",
 				config.plugins.epgbackup.backup_log_dir.value)
 
 	def directorySelected(self, res):

@@ -167,20 +167,26 @@ class AutomaticVolumeAdjustmentEntriesListConfigScreen(Screen):
 		self.session.openWithCallback(self.updateList, AutomaticVolumeAdjustmentEntryConfigScreen, None, self["entrylist"].configVA)
 
 	def keyOK(self):
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		self.close(self["entrylist"].getCurrentIndex(), sel)
 
 	def keyYellow(self):
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		if sel is None:
 			return
 		self.session.openWithCallback(self.updateList, AutomaticVolumeAdjustmentEntryConfigScreen, sel, self["entrylist"].configVA)
 
 	def keyDelete(self):
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		if sel is None:
 			return
 		self.session.openWithCallback(self.deleteConfirm, MessageBox, _("Do you really want to delete this entry?"))

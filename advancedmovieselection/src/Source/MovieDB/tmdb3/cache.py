@@ -93,14 +93,14 @@ class Cache( object ):
         def __call__(self, *args, **kwargs):
             if self.func is None: # decorator is waiting to be given a function
                 if len(kwargs) or (len(args) != 1):
-                    raise TMDBCacheError('Cache.Cached decorator must be called '+\
-                                         'a single callable argument before it '+\
+                    raise TMDBCacheError('Cache.Cached decorator must be called '+
+                                         'a single callable argument before it '+
                                          'be used.')
                 elif args[0] is None:
-                    raise TMDBCacheError('Cache.Cached decorator called before '+\
+                    raise TMDBCacheError('Cache.Cached decorator called before '+
                                          'being given a function to wrap.')
                 elif not callable(args[0]):
-                    raise TMDBCacheError('Cache.Cached must be provided a '+\
+                    raise TMDBCacheError('Cache.Cached must be provided a '+
                                          'callable object.')
                 return self.__class__(self.cache, self.callback, args[0])
             elif self.inst.lifetime == 0:

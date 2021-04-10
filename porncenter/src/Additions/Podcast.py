@@ -56,4 +56,5 @@ class Podcast(Plugin):
 		self.callback(movies)
 
 	def getPageError(self, error=None):
-		if error: print(error)
+		if error:
+			print(error)

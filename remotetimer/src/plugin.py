@@ -197,9 +197,9 @@ class RemoteTimerScreen(Screen):
 			]
 
 class E2Timer:
-	def __init__(self, sref = "", sname = "", name = "", disabled = 0, failed = 0, \
-			timebegin = 0, timeend = 0, duration = 0, startprepare = 0, \
-			state = 0, repeated = 0, justplay = 0, eventId = 0, afterevent = 0, \
+	def __init__(self, sref = "", sname = "", name = "", disabled = 0, failed = 0,
+			timebegin = 0, timeend = 0, duration = 0, startprepare = 0,
+			state = 0, repeated = 0, justplay = 0, eventId = 0, afterevent = 0,
 			dirname = "", description = "", isAutoTimer = 0, ice_timer_id = None):
 		self.service_ref = RemoteService(sref, sname)
 		self.name = name
@@ -337,7 +337,7 @@ def newnigma2KeyGo(self):
 			if colon_counter < 10:
 				clean_ref += char
 
-		service_ref = clean_ref;
+		service_ref = clean_ref
 
 		# XXX: this will - without any hassle - ignore the value of repeated
 		begin, end = self.getBeginEnd()

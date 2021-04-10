@@ -100,7 +100,8 @@ class MenuWeights:
 
 	def get(self, tuple, supportHiding = True):
 		weight, hidden = self.weights.get(tuple[0], (tuple[3], False))
-		if supportHiding and hidden: return HIDDENWEIGHT
+		if supportHiding and hidden:
+			return HIDDENWEIGHT
 		return int(weight)
 
 	def cmp(self, first, second):
@@ -118,8 +119,10 @@ def Menu__init__(self, session, parent, *args, **kwargs):
 	# remove hidden entries from list
 	i = 0
 	for x in list:
-		if menuWeights.get(x) == HIDDENWEIGHT: i += 1
-		else: break
+		if menuWeights.get(x) == HIDDENWEIGHT:
+			i += 1
+		else:
+			break
 	if i:
 		del list[:i]
 
@@ -270,7 +273,8 @@ class SortableMenu(Menu, HelpableScreen):
 				diff = abs(int(l[i][3]) - int(l[newpos][3])) + 1
 				print("[MenuSort] Using weight from %d (%d) and %d (%d) to calculate diff (%d)" % (i, int(l[i][3]), newpos, int(l[newpos][3]), diff))
 				while i < Len:
-					if DEBUG: print("[MenuSort] INCREASE WEIGHT OF", l[i][0], "BY", diff)
+					if DEBUG:
+						print("[MenuSort] INCREASE WEIGHT OF", l[i][0], "BY", diff)
 					l[i] = (l[i][0], l[i][1], l[i][2], int(l[i][3]) + diff, l[i][4])
 					i += 1
 			# we moved down, decrease weight of plugins before us
@@ -281,13 +285,16 @@ class SortableMenu(Menu, HelpableScreen):
 				diff = abs(int(l[i][3]) - int(l[newpos][3])) + 1
 				print("[MenuSort] Using weight from %d (%d) and %d (%d) to calculate diff (%d)" % (newpos, int(l[newpos][3]), i, int(l[i][3]), diff))
 				while i > -1:
-					if DEBUG: print("[MenuSort] DECREASE WEIGHT OF", l[i][0], "BY", diff)
+					if DEBUG:
+						print("[MenuSort] DECREASE WEIGHT OF", l[i][0], "BY", diff)
 					l[i] = (l[i][0], l[i][1], l[i][2], int(l[i][3]) - diff, l[i][4])
 					i -= 1
 			else:
-				if DEBUG: print("[MenuSort]", entry[0], "did not move (%d to %d)?" % (selected, newpos))
+				if DEBUG:
+					print("[MenuSort]", entry[0], "did not move (%d to %d)?" % (selected, newpos))
 
-			if DEBUG: print("[MenuSort] NEW LIST:", l)
+			if DEBUG:
+				print("[MenuSort] NEW LIST:", l)
 			self["menu"].setList(l)
 			self.selected = -1
 			self["menu"].selected = None

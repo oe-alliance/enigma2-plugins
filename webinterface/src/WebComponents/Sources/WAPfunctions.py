@@ -1,5 +1,5 @@
 from __future__ import print_function
-Version = '$Header$';
+Version = '$Header$'
 
 from Components.Sources.Source import Source
 from Components.Sources.ServiceList import ServiceList

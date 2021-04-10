@@ -106,8 +106,10 @@ class PipServiceRelationSetup(Screen):
 		self.close()
 
 	def keyBlue(self):
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		if sel is None:
 			return
 		self.session.openWithCallback(self.updateList, PipServiceRelationEntryConfigScreen, sel, self["entrylist"].configPSR)
@@ -116,8 +118,10 @@ class PipServiceRelationSetup(Screen):
 		self.session.openWithCallback(self.updateList, PipServiceRelationEntryConfigScreen, None, self["entrylist"].configPSR)
 
 	def keyDelete(self):
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		if sel is None:
 			return
 		self.session.openWithCallback(self.deleteConfirm, MessageBox, _("Do you really want to delete this entry?"))

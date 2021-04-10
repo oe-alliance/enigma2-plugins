@@ -99,10 +99,13 @@ class SimpleVDRProtocol(LineReceiver):
 		services = slist.getServicesAsList(format="SNn")
 		if services:
 			def getServiceInfoValue(info, sref, what):
-				if info is None: return ""
+				if info is None:
+					return ""
 				v = info.getInfo(sref.ref, what)
-				if v == -2: return info.getInfoString(sref.ref, what)
-				elif v == -1: return "N/A"
+				if v == -2:
+					return info.getInfoString(sref.ref, what)
+				elif v == -1:
+					return "N/A"
 				return v
 			def sendServiceLine(service, counter, last=False):
 				if service[0][:5] == '1:64:':
@@ -147,8 +150,10 @@ class SimpleVDRProtocol(LineReceiver):
 	def sendTimerLine(self, timer, counter, last=False):
 		# <number> <flags>:<channel id>:<YYYY-MM-DD>:<HHMM>:<HHMM>:<priority>:<lifetime>:<name>:<auxiliary>
 		flags = 0
-		if not timer.disabled: flags |= 1
-		if timer.state == timer.StateRunning: flags |= 8
+		if not timer.disabled:
+			flags |= 1
+		if timer.state == timer.StateRunning:
+			flags |= 8
 		try:
 			channelid = self.channelList.index(str(timer.service_ref)) + 1
 		except ValueError as e:
@@ -202,8 +207,10 @@ class SimpleVDRProtocol(LineReceiver):
 			payload = "%d argument error" % (CODE_SYNTAX,)
 			return self.sendLine(payload)
 
-		if len(list) >= timerId: oldTimer = list[timerId - 1]
-		else: oldTimer = None
+		if len(list) >= timerId:
+			oldTimer = list[timerId - 1]
+		else:
+			oldTimer = None
 
 		try:
 			flags, channelid, datestring, beginstring, endstring, priority, lifetime, name, description = args[1].split(':')
@@ -222,7 +229,8 @@ class SimpleVDRProtocol(LineReceiver):
 			payload = "%d argument error" % (CODE_SYNTAX,)
 			return self.sendLine(payload)
 
-		if end < begin: end += 86400 # Add 1 day, beware - this is evil and might not work correctly due to dst
+		if end < begin:
+			end += 86400 # Add 1 day, beware - this is evil and might not work correctly due to dst
 		timer = RecordTimerEntry(service_ref, begin, end, name, description, 0, disabled=flags & 1 == 0)
 		if oldTimer:
 			recordTimer.removeEntry(oldTimer)
@@ -276,7 +284,8 @@ class SimpleVDRProtocol(LineReceiver):
 						payload = "%d timer conflict detected, aborting." % (CODE_ERR_LOCAL,)
 						return self.sendLine(payload)
 					else:
-						if timersanitycheck.doubleCheck(): timer.disable()
+						if timersanitycheck.doubleCheck():
+							timer.disable()
 				elif not timer.disabled and disable:
 					timer.disable()
 				recordTimer.timeChanged(timer)

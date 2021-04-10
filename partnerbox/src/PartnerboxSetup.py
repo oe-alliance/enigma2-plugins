@@ -210,8 +210,10 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		self.session.openWithCallback(self.updateList, PartnerboxEntryConfigScreen, None)
 
 	def keyOK(self):
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		nr = int(config.plugins.Partnerbox.entriescount.value)
 		if nr > 1 and self.what == 2 or nr >= 1 and self.what == None:
 				from .plugin import RemoteTimer
@@ -220,15 +222,19 @@ class PartnerboxEntriesListConfigScreen(Screen):
 			self.close(self.session, self.what, sel)
 
 	def keyYellow(self):
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		if sel is None:
 			return
 		self.session.openWithCallback(self.updateList, PartnerboxEntryConfigScreen, sel)
 
 	def keyDelete(self):
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		if sel is None:
 			return
 		self.session.openWithCallback(self.deleteConfirm, MessageBox, _("Really delete this Partnerbox Entry?"))
@@ -246,8 +252,10 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		self.updateList()
 
 	def powerMenu(self):
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		if sel is None:
 			return
 		menu = []
@@ -266,8 +274,10 @@ class PartnerboxEntriesListConfigScreen(Screen):
 	def menuCallback(self, choice):
 		if choice is None:
 			return
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		if sel is None:
 			return
 		password = sel.password.value

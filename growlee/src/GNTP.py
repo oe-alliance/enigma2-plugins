@@ -199,7 +199,8 @@ class GNTP(Protocol):
 	def dataReceived(self, data):
 		# only parse complete packages
 		self.__buffer += data
-		if data[-4:] != '\r\n\r\n': return
+		if data[-4:] != '\r\n\r\n':
+			return
 		data = self.__buffer
 		self.__buffer = ''
 

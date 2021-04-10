@@ -56,7 +56,7 @@ def _parse(url, defaultPort = None):
 
 	return scheme, host, port, path, username, password
 
-def download(url, file, writeProgress = None, contextFactory = None, \
+def download(url, file, writeProgress = None, contextFactory = None,
 	*args, **kwargs):
 
 	"""Download a remote file and provide current-/total-length.

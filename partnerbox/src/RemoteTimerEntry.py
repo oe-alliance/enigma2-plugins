@@ -340,11 +340,14 @@ def getLocations(self, url, check):
 		f = urlopen(url)
 		sxml = f.read()
 		getLocationsCallback(self, sxml, check)
-	except: pass
+	except:
+		pass
 
 def getLocationsCallback(self, xmlstring, check = False):
-	try: root = xml.etree.cElementTree.fromstring(xmlstring)
-	except: return 
+	try:
+		root = xml.etree.cElementTree.fromstring(xmlstring)
+	except:
+		return 
 	for location in root.findall("e2location"):
 		add = True
 		if check:
@@ -582,7 +585,8 @@ def RemoteTimerGo(self):
 					eit = self.timer.eit
 				except:
 					eit = 0
-				if eit is None: eit = 0
+				if eit is None:
+					eit = 0
 				if service_ref.getPath(): # partnerbox service ?
 					service_ref = getServiceRef(service_ref.ref.toString())
 				refstr = ':'.join(str(service_ref).split(':')[:11])
@@ -591,8 +595,10 @@ def RemoteTimerGo(self):
 
 def AddTimerE2Callback(self, session, answer):
 	text = ""
-	try: root = xml.etree.cElementTree.fromstring(answer)
-	except: pass
+	try:
+		root = xml.etree.cElementTree.fromstring(answer)
+	except:
+		pass
 	statetext = root.findtext("e2statetext")
 	state = root.findtext("e2state")
 	if statetext:

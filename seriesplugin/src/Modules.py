@@ -87,7 +87,8 @@ class Modules(object):
 				log.debug("[SP Modules] Load exception: " + str(e))
 			finally:
 				# Since we may exit via an exception, close fp explicitly.
-				if fp: fp.close()
+				if fp:
+					fp.close()
 			
 			if not module:
 				log.debug("[SP Modules] No module available: " + str(name))

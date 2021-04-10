@@ -67,11 +67,14 @@ class PicasaApi(PictureApi):
 		return __returnPhotos(featured)
 
 	def downloadPhoto(self, photo, thumbnail=False):
-		if not photo: return
+		if not photo:
+			return
 
 		cache = os.path.join(self.cache, 'thumb', photo.albumid.text) if thumbnail else os.path.join(self.cache, photo.albumid.text)
-		try: os.makedirs(cache)
-		except OSError: pass
+		try:
+			os.makedirs(cache)
+		except OSError:
+			pass
 
 		url = photo.media.thumbnail[0].url if thumbnail else photo.media.content[0].url
 		filename = url.split('/')[-1]
@@ -102,7 +105,8 @@ class PicasaApi(PictureApi):
 		Raises:
 		shutil.Error if an error occured during moving the file.
 		"""
-		if not photo: return
+		if not photo:
+			return
 
 		cache = os.path.join(self.cache, photo.albumid.text)
 		filename = photo.media.content[0].url.split('/')[-1]

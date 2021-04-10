@@ -81,7 +81,8 @@ width = getDesktop(0).size().width()
 height = getDesktop(0).size().height()
 config.plugins.ShowClock.position_x = ConfigNumber(default = int(width * 0.7))
 config.plugins.ShowClock.position_y = ConfigNumber(default=45)
-if debug: print(pluginPrintname, "Clock X,Y position: %d,%d" %(config.plugins.ShowClock.position_x.value, config.plugins.ShowClock.position_y.value))
+if debug:
+	print(pluginPrintname, "Clock X,Y position: %d,%d" %(config.plugins.ShowClock.position_x.value, config.plugins.ShowClock.position_y.value))
 
 ##############################################################################
 
@@ -207,7 +208,8 @@ class ShowClockSetup(Screen, ConfigListScreen): # config
 			MessageBox.TYPE_INFO)
 		
 	def keyMove(self):            
-		if debug: print(pluginPrintname, "Move Clock")
+		if debug:
+			print(pluginPrintname, "Move Clock")
 		self.hideKeypad() # close help window if open
 		self.session.openWithCallback(
 			self.startPositioner, MessageBox,
@@ -239,7 +241,8 @@ class ShowClockPositioner(Screen):
 	def setPosition(self):
 		self.pos = (config.plugins.ShowClock.position_x.value, config.plugins.ShowClock.position_y.value)
 		self.limit = (width - self.instance.size().width(), height - self.instance.size().height())
-		if debug: print(pluginPrintname, "Clock X,Y limit: %d,%d" %(self.limit[0], self.limit[1]))	
+		if debug:
+			print(pluginPrintname, "Clock X,Y limit: %d,%d" %(self.limit[0], self.limit[1]))	
 		self.instance.move(ePoint(min(self.pos[0], self.limit[0]), min(self.pos[1], self.limit[1]))) # ensure clock visabilty even if resolution has changed
 	
 	def moveRelative(self, x = 0, y = 0):
@@ -278,9 +281,9 @@ class ShowClock(Screen):
 		self.onShow.append(self.setPosition)
 
 	def setPosition(self):
-		self.instance.move(ePoint( \
-			min(config.plugins.ShowClock.position_x.value, width - self.instance.size().width()), \
-			min(config.plugins.ShowClock.position_y.value, height - self.instance.size().height()) \
+		self.instance.move(ePoint(
+			min(config.plugins.ShowClock.position_x.value, width - self.instance.size().width()),
+			min(config.plugins.ShowClock.position_y.value, height - self.instance.size().height())
 			)) # ensure clock visabilty even if resolution has changed     
 
 ##############################################################################
@@ -379,7 +382,8 @@ def setup(session,**kwargs):
 
 def Plugins(**kwargs):
 	
-	if debug: print(pluginPrintname, "Setting entry points")
+	if debug:
+		print(pluginPrintname, "Setting entry points")
 
 	list = [
 		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart)

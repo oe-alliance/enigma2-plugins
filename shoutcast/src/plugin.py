@@ -569,14 +569,16 @@ class SHOUTcastWidget(Screen):
 			try:
 				self["list"].hide()
 				self["statustext"].setText(_("%s\nPress green-button to try again...") % str(error.getErrorMessage()))
-			except: pass
+			except:
+				pass
 		
 	def fillGenreList(self, xmlstring):
 		genreList = []
 		# print "[SHOUTcast] fillGenreList\n%s" % xmlstring
 		try:
 			root = xml.etree.cElementTree.fromstring(xmlstring)
-		except: return []
+		except:
+			return []
 		data = root.find("data")
 		if data == None:
 			print("[SHOUTcast] could not find data tag, assume flat listing\n")
@@ -622,7 +624,8 @@ class SHOUTcastWidget(Screen):
 			sel = None
 			try:
 				sel = self["list"].l.getCurrentSelection()[0]
-			except:return
+			except:
+				return
 			if sel is None:
 				return
 			else:
@@ -720,7 +723,8 @@ class SHOUTcastWidget(Screen):
 		stationList = []
 		try:
 			root = xml.etree.cElementTree.fromstring(xmlstring)
-		except: return []
+		except:
+			return []
 		config_bitrate = int(config.plugins.shoutcast.streamingrate.value)
 		data = root.find("data")
 		if data == None:
@@ -730,8 +734,10 @@ class SHOUTcastWidget(Screen):
 			for childs in slist.findall("tunein"):
 				self.tunein = childs.get("base")
 			for childs in slist.findall("station"):
-				try: bitrate = int(childs.get("br"))
-				except: bitrate = 0
+				try:
+					bitrate = int(childs.get("br"))
+				except:
+					bitrate = 0
 				if bitrate >= config_bitrate:
 					stationList.append(SHOUTcastStation(name = childs.get("name"), 
 									mt = childs.get("mt"), id = childs.get("id"), br = childs.get("br"), 
@@ -858,7 +864,8 @@ class SHOUTcastWidget(Screen):
 			try:
 				self["list"].hide()
 				self["statustext"].setText(_("%s\nPress OK to try again...") % str(error.getErrorMessage()))
-			except: pass
+			except:
+				pass
 
 	def Error(self, error = None):
 		if error is not None:
@@ -866,7 +873,8 @@ class SHOUTcastWidget(Screen):
 			try:
 				self["list"].hide()
 				self["statustext"].setText(str(error.getErrorMessage()))
-			except: pass
+			except:
+				pass
 		if self.nextGoogle:
 			self.currentGoogle = self.nextGoogle
 			self.nextGoogle = None
@@ -890,15 +898,15 @@ class SHOUTcastWidget(Screen):
 
 	def GoogleImageCallback(self, result):
 		global coverfiles
-		bad_link  = ['http://cdn.discogs.com', 'http://www.jaren80muziek.nl', 'http://www.inthestudio.net', \
-		'https://deepmp3.ru', 'http://beyondbreed.com', 'https://i1.sndcdn.com', 'http://www.lyrics007.com', 'https://lametralleta.es', \
-		'http://www.caramail.tv', 'http://cloud.freehandmusic.netdna-cdn.com', 'http://rockyourlyrics.com', 'http://www.franceinter.fr', \
-		'http://audio-max.home.pl', 'https://www.mystic.pl', 'http://radiobox2.omroep.nl', 'http://s0.hulkshare.com', 'http://static2.ising.pl', \
-		'http://www.disco-polo.info', 'http://merlin.pl', 'http://www.muzikbuldum.com', 'http://img2.zcdn.com.au', 'http://www.duoviva.com', \
-		'http://thumbnail.mixcloud.com', 'http://www.modern-talking.net', 'http://galleryplus.ebayimg.com', 'http://www.radiotrip.it', \
-		'https://dlmetal.org', 'http://i.iplsc.com', 'http://www.copertinedvd.org', 'http://flacmusic.org', 'https://imgcdn.ok.de', \
-		'http://www.mediaboom.org', 'http://democracy.allerdale.gov.uk', 'http://lahoradelrelax.com', 'http://www.isvent.com',  \
-		'http://www.wallpaperfo.com', 'http://www.analyticdatasolutions.net', 'http://caratulascd.com', 'http://img.youtube.com', \
+		bad_link  = ['http://cdn.discogs.com', 'http://www.jaren80muziek.nl', 'http://www.inthestudio.net',
+		'https://deepmp3.ru', 'http://beyondbreed.com', 'https://i1.sndcdn.com', 'http://www.lyrics007.com', 'https://lametralleta.es',
+		'http://www.caramail.tv', 'http://cloud.freehandmusic.netdna-cdn.com', 'http://rockyourlyrics.com', 'http://www.franceinter.fr',
+		'http://audio-max.home.pl', 'https://www.mystic.pl', 'http://radiobox2.omroep.nl', 'http://s0.hulkshare.com', 'http://static2.ising.pl',
+		'http://www.disco-polo.info', 'http://merlin.pl', 'http://www.muzikbuldum.com', 'http://img2.zcdn.com.au', 'http://www.duoviva.com',
+		'http://thumbnail.mixcloud.com', 'http://www.modern-talking.net', 'http://galleryplus.ebayimg.com', 'http://www.radiotrip.it',
+		'https://dlmetal.org', 'http://i.iplsc.com', 'http://www.copertinedvd.org', 'http://flacmusic.org', 'https://imgcdn.ok.de',
+		'http://www.mediaboom.org', 'http://democracy.allerdale.gov.uk', 'http://lahoradelrelax.com', 'http://www.isvent.com',
+		'http://www.wallpaperfo.com', 'http://www.analyticdatasolutions.net', 'http://caratulascd.com', 'http://img.youtube.com',
 		'http://satpic.ru', 'http://imagizer.imageshack.us']
 		nr = 0
 		url = 'http://memytutaj.pl/uploads/2015/07/27/55b66ab973ad1.jpg'
@@ -1036,7 +1044,8 @@ class SHOUTcastWidget(Screen):
 		sel = None
 		try:
 			sel = self["list"].l.getCurrentSelection()[0]
-		except:return None
+		except:
+			return None
 		return sel
 
 class Cover(Pixmap):

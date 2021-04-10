@@ -1,5 +1,5 @@
 from __future__ import print_function
-Version = '$Header$';
+Version = '$Header$'
 
 from enigma import eServiceReference, eEPGCache
 from Components.config import config
@@ -261,8 +261,10 @@ class Timer(Source):
 		if eit is None or eit.strip() == "":
 			eit = 0
 		else:
-			try: eit = int(eit)
-			except ValueError: return ( False, _("Illegal Parameter value for Parameter eit : '%s'") % eit )
+			try:
+				eit = int(eit)
+			except ValueError:
+				return ( False, _("Illegal Parameter value for Parameter eit : '%s'") % eit )
 
 		print("[WebComponents.Sources.Timer]: eit=%d" %eit)
 		if eit != 0:

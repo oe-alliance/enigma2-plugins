@@ -290,7 +290,7 @@ class EPGRefresh:
 			message = _("There is still a refresh running. The Operation isn't allowed at this moment.")
 			try:
 				if self.session != None:
-					self.session.open(MessageBox, message, \
+					self.session.open(MessageBox, message,
 						 MessageBox.TYPE_INFO, timeout=10)
 			except:
 				print("[EPGRefresh] Error while opening Messagebox!")
@@ -380,8 +380,8 @@ class EPGRefresh:
 				defaultanswer = True if config.plugins.epgrefresh.parse_autotimer.value == "ask_yes" else False
 				if self.forcedScan:
 					# only if we are interactive
-					Notifications.AddNotificationWithCallback(self._ToDoCallAutotimerCB, MessageBox, \
-						text = _("EPG refresh finished.\nShould AutoTimer be search for new matches?"), \
+					Notifications.AddNotificationWithCallback(self._ToDoCallAutotimerCB, MessageBox,
+						text = _("EPG refresh finished.\nShould AutoTimer be search for new matches?"),
 						type = MessageBox.TYPE_YESNO, default = defaultanswer, timeout = 10)
 				else:
 					self._ToDoCallAutotimerCB(parseAT=defaultanswer)
@@ -422,7 +422,7 @@ class EPGRefresh:
 	def _autotimerErrback(self, failure):
 		print("[EPGRefresh] Debug: AutoTimer failed:" + str(failure))
 		if config.plugins.epgrefresh.enablemessage.value:
-			Notifications.AddPopup(_("AutoTimer failed with error %s") % (str(failure)), \
+			Notifications.AddPopup(_("AutoTimer failed with error %s") % (str(failure)),
 				MessageBox.TYPE_ERROR, 100)
 		self._nextTodo()
 
@@ -474,7 +474,7 @@ class EPGRefresh:
 			if self.beginOfTimespan < config.plugins.epgrefresh.lastscan.value:
 				return
 			if config.plugins.epgrefresh.force.value \
-				or (Screens.Standby.inStandby and \
+				or (Screens.Standby.inStandby and
 					not self.session.nav.RecordTimer.isRecording()):
 
 				self.nextService()
@@ -566,7 +566,7 @@ class EPGRefresh:
 			
 			if servcounter > LISTMAX:
 				servtxt = servtxt + _("%d more services") % (servcounter)
-			session.open(MessageBox, _("Following Services have to be scanned:") \
+			session.open(MessageBox, _("Following Services have to be scanned:")
 				+ "\n" + servtxt, MessageBox.TYPE_INFO)
 		except:
 			print("[EPGRefresh] showPendingServices Error!")

@@ -73,7 +73,8 @@ class PushService(PushServiceBase):
 		self.state = PSFIRST
 
 	def next(self, state = None):
-		if state: self.state = state
+		if state:
+			self.state = state
 		print("PushService next", self.state)
 		
 		if self.state == PSBOOT:
@@ -99,7 +100,8 @@ class PushService(PushServiceBase):
 		next(self)
 
 	def startTimer(self, seconds, state=None):
-		if state: self.state = state
+		if state:
+			self.state = state
 		self.timer.startLongTimer( seconds )
 
 	def stopTimer(self):

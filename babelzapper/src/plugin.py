@@ -184,7 +184,7 @@ class BabelZapperStartup(Screen):
 						i=cmdlen
 					else:
 						print("[BABELZAPPER] ON is on executing rest and setting it off\n") 
-						babelon=0;
+						babelon=0
 				elif cmdname.startswith("ON"):
 					print("[BABELZAPPER] ON\n") 
 					babelon=1

@@ -150,8 +150,10 @@ class AutomaticVolumeAdjustment(Screen):
 						self.lastAdjustedValue = self.serviceList.get(self.session.nav.getCurrentlyPlayingServiceReference().toString(), self.defaultValue)
 						self.currentVolume = self.volctrl.getVolume() # ac3||dts service , save current volume
 				# only images >= 05.08.2010, must use try/except
-				try: self.volumeControlInstance = VolumeControl.instance
-				except:	pass
+				try:
+					self.volumeControlInstance = VolumeControl.instance
+				except:
+					pass
 				self.pluginStarted = True # plugin started...
 
 	def isCurrentAudioAC3DTS(self):
@@ -161,7 +163,7 @@ class AutomaticVolumeAdjustment(Screen):
 			try: # uhh, servicemp3 leads sometimes to OverflowError Error
 				tracknr = audio.getCurrentTrack()
 				i = audio.getTrackInfo(tracknr)
-				description = i.getDescription();
+				description = i.getDescription()
 				if "AC3" in description or "DTS" in description:
 					return True
 			except:

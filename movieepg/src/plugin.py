@@ -86,7 +86,8 @@ ChannelSelection.zap = ChannelSelection_zap
 # Absolutely no effect on its own.
 def entry(session = None, servicelist = None):
 	# XXX: session.current_dialog is the movie player (or infobar if ran from "regular" extension menu)
-	if not session: return
+	if not session:
+		return
 	if not servicelist:
 		if InfoBar.instance:
 			servicelist = InfoBar.instance.servicelist

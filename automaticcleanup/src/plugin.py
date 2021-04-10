@@ -229,8 +229,10 @@ class AutomaticCleanup:
 
 	def __init__(self, session):
 		self.session = session
-		if DEBUG: print(pluginPrintname, "Starting in debugging mode...")
-		else: print(pluginPrintname, "Starting AutomaticCleanup...")
+		if DEBUG:
+			print(pluginPrintname, "Starting in debugging mode...")
+		else:
+			print(pluginPrintname, "Starting AutomaticCleanup...")
 		self.timer = eTimer() # check timer
 		self.timer.callback.append(self.doCleanup)
 		self.initialState = True
@@ -316,7 +318,8 @@ class AutomaticCleanup:
 				self.backupPath = self.getBackupPath()
 				backupDatePos = self.settingList[i].rfind('/') + 1
 				backupDate = self.settingList[i][backupDatePos:backupDatePos + 10]
-				if DEBUG: print(pluginPrintname, "Backup path: %s, file: %s, date: %s"  %(self.backupPath, self.settingList[i], backupDate))
+				if DEBUG:
+					print(pluginPrintname, "Backup path: %s, file: %s, date: %s"  %(self.backupPath, self.settingList[i], backupDate))
 				settingTime = mktime(strptime(backupDate, "%Y-%m-%d"))
 				if int(settingTime) > deleteOlderThan:
 					break
@@ -326,8 +329,10 @@ class AutomaticCleanup:
 			print(pluginPrintname, "Found %i outdated setting backup(s)"  % i)
 
 		for setting in self.deleteList:
-			if DEBUG: print(pluginPrintname, "Setting backup to delete:", setting)
-			else: remove(setting)
+			if DEBUG:
+				print(pluginPrintname, "Setting backup to delete:", setting)
+			else:
+				remove(setting)
 
 		print(pluginPrintname, "Deleted %i setting backup(s)"  % len(self.deleteList))
 						
@@ -339,8 +344,10 @@ class AutomaticCleanup:
 		except ImportError as ie:
 			print(pluginPrintname, "SoftwareManager not installed:", ie)
 			backuppath = '/media/hdd/'
-		if backuppath.endswith('/'): return (backuppath + 'backup')
-		else: return (backuppath + '/backup')		
+		if backuppath.endswith('/'):
+			return (backuppath + 'backup')
+		else:
+			return (backuppath + '/backup')		
 		
 	def cleanupTimerlist(self):
 		try:
@@ -374,33 +381,46 @@ class AutomaticCleanup:
 			excludePath = []
 			
 			from Components.UsageConfig import defaultMoviePath
-			if defaultMoviePath().endswith('/'): moviePath.append(defaultMoviePath())
-			else: moviePath.append(defaultMoviePath() + "/")
-			if config.usage.instantrec_path.value.endswith('/'): excludePath.append(config.usage.instantrec_path.value)
-			else: excludePath.append(config.usage.instantrec_path.value + "/")			
-			if config.usage.timeshift_path.value.endswith('/'): excludePath.append(config.usage.timeshift_path.value)
-			else: excludePath.append(config.usage.timeshift_path.value + "/")
+			if defaultMoviePath().endswith('/'):
+				moviePath.append(defaultMoviePath())
+			else:
+				moviePath.append(defaultMoviePath() + "/")
+			if config.usage.instantrec_path.value.endswith('/'):
+				excludePath.append(config.usage.instantrec_path.value)
+			else:
+				excludePath.append(config.usage.instantrec_path.value + "/")			
+			if config.usage.timeshift_path.value.endswith('/'):
+				excludePath.append(config.usage.timeshift_path.value)
+			else:
+				excludePath.append(config.usage.timeshift_path.value + "/")
 
 			try:
 				# try to import EMC module to check for its existence
 				from Plugins.Extensions.EnhancedMovieCenter.EnhancedMovieCenter import EnhancedMovieCenterMenu
 				if config.EMC.movie_homepath.value:
 					path = config.EMC.movie_homepath.value
-					if not path.endswith("/"): path += "/"
+					if not path.endswith("/"):
+						path += "/"
 					if path not in moviePath:
 						moviePath.append(path)
 				try: # with v3 name
 					if len(config.EMC.movie_trashcan_path.value) > 1:	# Trashpath specified?
-						if DEBUG: print(pluginPrintname, "EMC v3 trashcan path is", config.EMC.movie_trashcan_path.value)
-						if config.EMC.movie_trashcan_path.value.endswith('/'): excludePath.append(config.EMC.movie_trashcan_path.value)
-						else: excludePath.append(config.EMC.movie_trashcan_path.value + "/")
+						if DEBUG:
+							print(pluginPrintname, "EMC v3 trashcan path is", config.EMC.movie_trashcan_path.value)
+						if config.EMC.movie_trashcan_path.value.endswith('/'):
+							excludePath.append(config.EMC.movie_trashcan_path.value)
+						else:
+							excludePath.append(config.EMC.movie_trashcan_path.value + "/")
 				except KeyError as ke:
 					print(pluginPrintname, "EMC v3 trashcan path not specified", ke)
 					try: # else with v2 name
 						if len(config.EMC.movie_trashpath.value) > 1:	# Trashpath specified?
-							if DEBUG: print(pluginPrintname, "EMC v2 trashcan path is", config.EMC.movie_trashpath.value)
-							if config.EMC.movie_trashpath.value.endswith('/'): excludePath.append(config.EMC.movie_trashpath.value)
-							else: excludePath.append(config.EMC.movie_trashpath.value + "/")
+							if DEBUG:
+								print(pluginPrintname, "EMC v2 trashcan path is", config.EMC.movie_trashpath.value)
+							if config.EMC.movie_trashpath.value.endswith('/'):
+								excludePath.append(config.EMC.movie_trashpath.value)
+							else:
+								excludePath.append(config.EMC.movie_trashpath.value + "/")
 					except KeyError as ke:
 						print(pluginPrintname, "EMC v2 trashcan path not specified", ke)
 			except ImportError as ie:
@@ -410,7 +430,8 @@ class AutomaticCleanup:
 				print(pluginPrintname, "No movies found!")
 			else:
 				for f in list(range(len(excludePath))):
-					if excludePath[f].startswith("/hdd"): excludePath[f] = "/media" + excludePath[f]
+					if excludePath[f].startswith("/hdd"):
+						excludePath[f] = "/media" + excludePath[f]
 				print(pluginPrintname, "Movie path:", moviePath)
 				print(pluginPrintname, "Excluded movie path:", excludePath)
 				for checkPath in moviePath:	
@@ -419,10 +440,14 @@ class AutomaticCleanup:
 			print(pluginPrintname, "Orphaned movies cleanup disabled")
 
 	def filterMovies(self, scanPath, exclude = []):
-		if not scanPath.endswith("/"): scanPath += "/"
-		if scanPath.startswith("/hdd"): scanPath = "/media" + scanPath
-		if not path.exists(scanPath) or scanPath in exclude: return
-		if DEBUG: print(pluginPrintname, "Checking moviepath:", scanPath)
+		if not scanPath.endswith("/"):
+			scanPath += "/"
+		if scanPath.startswith("/hdd"):
+			scanPath = "/media" + scanPath
+		if not path.exists(scanPath) or scanPath in exclude:
+			return
+		if DEBUG:
+			print(pluginPrintname, "Checking moviepath:", scanPath)
 
 		if self.initialState: 
 			extensions =[".ts.ap", ".ts.cuts", ".ts.cutsr", ".ts.gm", ".ts.meta", ".ts.sc", ".eit", ".png", ".ts_mp.jpg", ".ts.del", ".ts.ap.del", ".ts.cuts.del", ".ts.cutsr.del", ".ts.gm.del", ".ts.meta.del", ".ts.sc.del", ".eit.del"] # include orphaned files marked for E2 smooth deletion
@@ -431,8 +456,10 @@ class AutomaticCleanup:
 
 		for p in listdir(scanPath):
 			if path.isdir(scanPath + p):
-				try: self.filterMovies(scanPath + p, exclude)
-				except: pass
+				try:
+					self.filterMovies(scanPath + p, exclude)
+				except:
+					pass
 			else:
 				for ext in extensions:
 					if p.endswith(ext):

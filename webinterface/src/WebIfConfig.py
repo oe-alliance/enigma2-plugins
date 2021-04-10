@@ -1,6 +1,6 @@
 from __future__ import print_function
 from __future__ import absolute_import
-Version = '$Header$';
+Version = '$Header$'
 
 from .__init__ import *
 

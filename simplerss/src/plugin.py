@@ -64,7 +64,7 @@ def main(session, **kwargs):
 # Plugin window has been closed
 def closed():
 	# If SimpleRSS should not run in Background: shutdown
-	if not (config.plugins.simpleRSS.autostart.value or \
+	if not (config.plugins.simpleRSS.autostart.value or
 			config.plugins.simpleRSS.keep_running.value):
 
 		# Get Global rssPoller-Object

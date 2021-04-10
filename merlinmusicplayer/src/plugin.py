@@ -413,19 +413,26 @@ def getID3Tags(root, filename):
 	length = ""
 	bitrate = None
 	if filename.lower().endswith(".mp3"):
-		try: audio = MP3(os_path.join(root, filename), ID3 = EasyID3)
-		except: audio = None
+		try:
+			audio = MP3(os_path.join(root, filename), ID3 = EasyID3)
+		except:
+			audio = None
 	elif filename.lower().endswith(".flac"):
 		try: 
 			audio = FLAC(os_path.join(root, filename))
 			isFlac = True
-		except: audio = None
+		except:
+			audio = None
 	elif filename.lower().endswith(".m4a"):
-		try: audio = EasyMP4(os_path.join(root, filename))
-		except: audio = None
+		try:
+			audio = EasyMP4(os_path.join(root, filename))
+		except:
+			audio = None
 	elif filename.lower().endswith(".ogg"):
-		try: audio = OggVorbis(os_path.join(root, filename))
-		except: audio = None
+		try:
+			audio = OggVorbis(os_path.join(root, filename))
+		except:
+			audio = None
 	else:
 		isAudio = False
 	if audio:
@@ -1204,22 +1211,26 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			try: 
 				audio = ID3(self.currentFilename)
 				audiotype = 1
-			except: audio = None
+			except:
+				audio = None
 		elif self.currentFilename.lower().endswith(".flac"):
 			try: 
 				audio = FLAC(self.currentFilename)
 				audiotype = 2
-			except: audio = None
+			except:
+				audio = None
 		elif self.currentFilename.lower().endswith(".m4a"):
 			try: 
 				audio = MP4(self.currentFilename)
 				audiotype = 3
-			except: audio = None
+			except:
+				audio = None
 		elif self.currentFilename.lower().endswith(".ogg"):
 			try:
 				audio = OggVorbis(self.currentFilename)
 				audiotype = 4
-			except: audio = None
+			except:
+				audio = None
 		if audio:
 			if audiotype == 1:
 				apicframes = audio.getall("APIC")
@@ -1682,7 +1693,8 @@ class MerlinMusicPlayerSongList(Screen):
 				self.summaries.setText(songlist[index][0].title, 4)
 			else:
 				self.summaries.setText(songlist[index][0].text, 4)
-		except: pass
+		except:
+			pass
 
 	def createSummary(self):
 		return MerlinMusicPlayerLCDScreenText
@@ -1809,8 +1821,10 @@ class iDreamMerlin(Screen):
 
 	def getCurrentSelection(self):
 		sel = None
-		try: sel = self["list"].l.getCurrentSelection()[0]
-		except: pass
+		try:
+			sel = self["list"].l.getCurrentSelection()[0]
+		except:
+			pass
 		return sel
 
 	def addListToPlaylistConfirmed(self, methodName, answer):
@@ -2576,7 +2590,8 @@ class iDreamMerlin(Screen):
 			if index > count:
 				index = 0
 			self.summaries.setText(iDreamList[index][0].title or iDreamList[index][0].text, 4)
-		except: pass
+		except:
+			pass
 
 	def createSummary(self):
 		return MerlinMusicPlayerLCDScreenText

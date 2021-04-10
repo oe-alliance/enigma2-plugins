@@ -49,7 +49,7 @@ class IdentifierBase2(ModuleBase, Cacher):
 		
 		self.returnvalue = None
 		
-		self.search_depth = 0;
+		self.search_depth = 0
 		
 		self.now = time()
 		today = datetime.today()

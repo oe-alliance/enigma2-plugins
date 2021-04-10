@@ -557,10 +557,10 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 					self.showInfobar()
 
 	def audioTracks(self):
-		return self.session.nav.getCurrentService() and self.session.nav.getCurrentService().audioTracks();
+		return self.session.nav.getCurrentService() and self.session.nav.getCurrentService().audioTracks()
 
 	def subtitle(self):
-		return self.session.nav.getCurrentService() and self.session.nav.getCurrentService().subtitle();
+		return self.session.nav.getCurrentService() and self.session.nav.getCurrentService().subtitle()
 
 	def seekRelative(self, delta):
 		"""delta is seconds as integer number

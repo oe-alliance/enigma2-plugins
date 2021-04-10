@@ -180,8 +180,8 @@ class eSame(Screen):
 			self.Slice = 0
 
 	def pressEvent(self, i):
-		sy = i / 15;
-		sx = i - sy * 15;
+		sy = i / 15
+		sx = i - sy * 15
 		if self.stonefield.remove(sx, sy):
 			marked = self.stonefield.mark1(sx, sy)
 			self.printMarked(marked)
@@ -203,8 +203,8 @@ class eSame(Screen):
 		msg.setTitle(txt2)
 
 	def printColors(self):
-		self["lbColors"].setText(str(self.stonefield.getColors()) + " Colors(" + str(self.stonefield.count(1)) + "," +\
-		                                                                         str(self.stonefield.count(2)) + "," +\
+		self["lbColors"].setText(str(self.stonefield.getColors()) + " Colors(" + str(self.stonefield.count(1)) + "," +
+		                                                                         str(self.stonefield.count(2)) + "," +
 		                                                                         str(self.stonefield.count(3)) + ")" )
 
 	def printMarked(self, m):

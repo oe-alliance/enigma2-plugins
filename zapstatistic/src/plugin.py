@@ -259,13 +259,17 @@ class ZapStatisticDurationScreen(Screen):
 			return l
 
 	def buildSortNameKey(self, x):
-		try: name = x.name
-		except: name = ""
+		try:
+			name = x.name
+		except:
+			name = ""
 		return (name and name.lower() or "")
 
 	def buildSortDurationKey(self, x):
-		try: name = str(x.duration)
-		except: name = ""
+		try:
+			name = str(x.duration)
+		except:
+			name = ""
 		return (name and name.lower() or "")
 
 	def buildList(self):
@@ -357,13 +361,17 @@ class ZapStatisticCombinedScreen(Screen):
 			return l
 
 	def buildSortNameKey(self, x):
-		try: name = x.name
-		except: name = ""
+		try:
+			name = x.name
+		except:
+			name = ""
 		return (name and name.lower() or "")
 
 	def buildSortDurationKey(self, x):
-		try: name = x.getDurationText()
-		except: name = ""
+		try:
+			name = x.getDurationText()
+		except:
+			name = ""
 		return (name and name.lower() or "")
 
 	def buildList(self):
@@ -473,13 +481,17 @@ class ZapStatisticScreen(Screen, ProtectedScreen):
 			return l
 
 	def buildSortNameKey(self, x):
-		try: name = x.name
-		except: name = ""
+		try:
+			name = x.name
+		except:
+			name = ""
 		return (name and name.lower() or "")
 
 	def buildSortDateKey(self, x):
-		try: name = str(x.begin)
-		except: name = ""
+		try:
+			name = str(x.begin)
+		except:
+			name = ""
 		return (name and name.lower() or "")
 
 	def buildList(self):

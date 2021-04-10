@@ -119,8 +119,10 @@ def partnerboxplugin(session, what, partnerboxentry = None):
 def autostart_RemoteTimerInit(reason, **kwargs):
 	if "session" in kwargs:
 		session = kwargs["session"]
-		try: RemoteTimerInit()
-		except: pass
+		try:
+			RemoteTimerInit()
+		except:
+			pass
 
 def autostart_Partnerbox_EPGList(reason, **kwargs):
 	if "session" in kwargs:
@@ -128,7 +130,8 @@ def autostart_Partnerbox_EPGList(reason, **kwargs):
 		try:
 			Partnerbox_EPGListInit()
 			Partnerbox_EPGSelectionInit()
-		except: pass
+		except:
+			pass
 
 def setup(session,**kwargs):
 	session.open(PartnerboxSetup)
@@ -169,8 +172,10 @@ def Plugins(**kwargs):
 
 def FillLocationList(xmlstring):
 	Locations = []
-	try: root = xml.etree.cElementTree.fromstring(xmlstring)
-	except: Locations
+	try:
+		root = xml.etree.cElementTree.fromstring(xmlstring)
+	except:
+		Locations
 	for location in root.findall("e2location"):
 		Locations.append(location.text.encode("utf-8", 'ignore'))
 	for location in root.findall("e2simplexmlitem"):  # vorerst Kompatibilitaet zum alten Webinterface-Api aufrecht erhalten (e2simplexmlitem)
@@ -353,7 +358,8 @@ class RemoteTimer(Screen):
 	def addTimer(self):
 		try:
 			sel = self["timerlist"].l.getCurrentSelection()[0]
-		except: return
+		except:
+			return
 		if sel is None:
 			return
 		if sel.repeated == 0:
@@ -420,7 +426,8 @@ class RemoteTimer(Screen):
 			else:
 				name = sel.description
 			self.session.openWithCallback(self.deleteTimerConfirmed, MessageBox, title_text + _("Do you really want to delete the timer \n%s ?") % name)
-		except: return
+		except:
+			return
 
 	def deleteTimerConfirmed(self, val):
 		if val:
@@ -475,7 +482,8 @@ class RemoteTimer(Screen):
 				refstr = ':'.join(str(sel.servicereference).split(':')[:11])
 				sCommand = self.http + "/web/timertogglestatus?sRef=" + refstr + "&begin=" + ("%s"%(sel.timebegin)) + "&end=" +("%s"%(sel.timeend))
 				sendPartnerBoxWebCommand(sCommand, None, 3, self.username, self.password).addCallback(self.deleteTimerCallback).addErrback(self.deleteTimerError)
-		except: pass
+		except:
+			pass
 
 	def EPGList(self):
 		if self.not_epg:
@@ -526,7 +534,8 @@ class RemoteTimerBouquetList(Screen):
 			if sel is None:
 				return
 			self.session.openWithCallback(self.CallbackEPGList, RemoteTimerChannelList, self.E2TimerList, sel.servicereference, sel.servicename, self.PartnerboxEntry, self.E1XMLString, self.playeronly)
-		except: return
+		except:
+			return
 
 	def CallbackEPGList(self):
 		pass
@@ -759,7 +768,8 @@ class RemoteTimerChannelList(Screen):
 	def EPGEvent(self):
 		try:
 			sel = self["channellist"].l.getCurrentSelection()[0]
-		except:return
+		except:
+			return
 		if sel is None:
 			return
 		self.session.openWithCallback(self.CallbackEPGEvent, RemoteTimerEventView, self.E2TimerList, sel, self.PartnerboxEntry)
@@ -838,16 +848,26 @@ class RemoteTimerChannelList(Screen):
 		xmlstring = xmlstring.replace("""<?xml-stylesheet type="text/xsl" href="/xml/serviceepg.xsl"?>""", "")
 		root = xml.etree.cElementTree.fromstring(xmlstring)
 		for events in root.findall("event"):
-			try:eventtitle = str(events.findtext("description", '').encode("utf-8", 'ignore'))
-			except:eventtitle = ""
-			try:eventdescriptionextended = str(events.findtext("details", '').encode("utf-8", 'ignore'))
-			except:eventdescriptionextended = ""
-			try:eventdescription = str(events.findtext("genre", '').encode("utf-8", 'ignore'))
-			except:eventdescription = ""
-			try:eventstart = int(events.findtext("start", 0))
-			except:eventstart = 0
-			try:eventduration = int(events.findtext("duration", 0))
-			except:eventduration = 0
+			try:
+				eventtitle = str(events.findtext("description", '').encode("utf-8", 'ignore'))
+			except:
+				eventtitle = ""
+			try:
+				eventdescriptionextended = str(events.findtext("details", '').encode("utf-8", 'ignore'))
+			except:
+				eventdescriptionextended = ""
+			try:
+				eventdescription = str(events.findtext("genre", '').encode("utf-8", 'ignore'))
+			except:
+				eventdescription = ""
+			try:
+				eventstart = int(events.findtext("start", 0))
+			except:
+				eventstart = 0
+			try:
+				eventduration = int(events.findtext("duration", 0))
+			except:
+				eventduration = 0
 		if eventstart != 0:
 			eventid = 1
 
@@ -859,18 +879,30 @@ class RemoteTimerChannelList(Screen):
 		for events in root.findall("e2event"):
 			servicereference = str(events.findtext("e2eventservicereference", '').encode("utf-8", 'ignore'))
 			servicename = str(events.findtext("e2eventservicename", 'n/a').encode("utf-8", 'ignore'))
-			try:eventstart = int(events.findtext("e2eventstart", 0))
-			except:eventstart = 0
-			try:eventduration = int(events.findtext("e2eventduration", 0))
-			except:eventduration  = 0
-			try:eventtitle = str(events.findtext("e2eventtitle", '').encode("utf-8", 'ignore'))
-			except:eventtitle = ""
-			try:eventid = int(events.findtext("e2eventid", 0))
-			except:eventid = 0
-			try:eventdescription = str(events.findtext("e2eventdescription", '').encode("utf-8", 'ignore'))
-			except:eventdescription = ""
-			try:eventdescriptionextended = str(events.findtext("e2eventdescriptionextended", '').encode("utf-8", 'ignore'))
-			except:eventdescriptionextended = ""
+			try:
+				eventstart = int(events.findtext("e2eventstart", 0))
+			except:
+				eventstart = 0
+			try:
+				eventduration = int(events.findtext("e2eventduration", 0))
+			except:
+				eventduration  = 0
+			try:
+				eventtitle = str(events.findtext("e2eventtitle", '').encode("utf-8", 'ignore'))
+			except:
+				eventtitle = ""
+			try:
+				eventid = int(events.findtext("e2eventid", 0))
+			except:
+				eventid = 0
+			try:
+				eventdescription = str(events.findtext("e2eventdescription", '').encode("utf-8", 'ignore'))
+			except:
+				eventdescription = ""
+			try:
+				eventdescriptionextended = str(events.findtext("e2eventdescriptionextended", '').encode("utf-8", 'ignore'))
+			except:
+				eventdescriptionextended = ""
 			self.E2ChannelList.append(E2EPGListAllData(
 					servicereference = servicereference, servicename = servicename, eventstart = eventstart,
 					eventduration = eventduration, eventtitle = eventtitle, eventid = eventid, eventdescription= eventdescription,
@@ -885,7 +917,8 @@ class RemoteTimerChannelList(Screen):
 					return
 				if sel.eventid != 0:
 					self.session.openWithCallback(self.CallbackEPGSelection, RemoteTimerEPGList, self.E2TimerList, sel.servicereference, sel.servicename, self.PartnerboxEntry)
-			except: return
+			except:
+				return
 
 	def CallbackEPGSelection(self):
 		pass
@@ -1127,25 +1160,41 @@ class RemotePlayer(Screen, InfoBarAudioSelection):
 		e2eventduration = 0
 		if self.enigma_type == 0:
 			for events in root.findall("e2event"):
-				try:e2eventservicename = str(events.findtext("e2eventservicename", 'n/a').encode("utf-8", 'ignore'))
-				except:e2eventservicename = "n/a"
-				try:e2eventstart = int(events.findtext("e2eventstart", 0))
-				except:e2eventstart = 0
-				try:e2eventduration = int(events.findtext("e2eventduration", 0))
-				except:e2eventduration  = 0
-				try:e2eventtitle = str(events.findtext("e2eventtitle", '').encode("utf-8", 'ignore'))
-				except:e2eventtitle = ""
+				try:
+					e2eventservicename = str(events.findtext("e2eventservicename", 'n/a').encode("utf-8", 'ignore'))
+				except:
+					e2eventservicename = "n/a"
+				try:
+					e2eventstart = int(events.findtext("e2eventstart", 0))
+				except:
+					e2eventstart = 0
+				try:
+					e2eventduration = int(events.findtext("e2eventduration", 0))
+				except:
+					e2eventduration  = 0
+				try:
+					e2eventtitle = str(events.findtext("e2eventtitle", '').encode("utf-8", 'ignore'))
+				except:
+					e2eventtitle = ""
 		else:
 			for services in root.findall("service"):
-				try:e2eventservicename = str(services.findtext("name", 'n/a').encode("utf-8", 'ignore'))
-				except:e2eventservicename = "n/a"
+				try:
+					e2eventservicename = str(services.findtext("name", 'n/a').encode("utf-8", 'ignore'))
+				except:
+					e2eventservicename = "n/a"
 			for events in root.findall("event"):
-				try:e2eventstart = int(events.findtext("start", 0))
-				except:e2eventstart = 0
-				try:e2eventduration = int(events.findtext("duration", 0))
-				except:e2eventduration  = 0
-				try:e2eventtitle = str(events.findtext("description", '').encode("utf-8", 'ignore'))
-				except:e2eventtitle = ""
+				try:
+					e2eventstart = int(events.findtext("start", 0))
+				except:
+					e2eventstart = 0
+				try:
+					e2eventduration = int(events.findtext("duration", 0))
+				except:
+					e2eventduration  = 0
+				try:
+					e2eventtitle = str(events.findtext("description", '').encode("utf-8", 'ignore'))
+				except:
+					e2eventtitle = ""
 		endtime = int(e2eventstart + e2eventduration)
 		if endtime != 0:
 			tt = ((": %s ... %s (+%d " + _("mins") + ")") % (FuzzyTime(e2eventstart)[1], FuzzyTime(endtime)[1], (endtime - time.time()) / 60))
@@ -1262,7 +1311,8 @@ class RemoteTimerEPGList(Screen):
 	def EPGEvent(self):
 		try:
 			sel = self["epglist"].l.getCurrentSelection()[0]
-		except:return
+		except:
+			return
 		if sel is None:
 			return
 		self.session.openWithCallback(self.CallbackEPGEvent, RemoteTimerEventView, self.E2TimerList, sel, self.PartnerboxEntry)
@@ -1329,19 +1379,31 @@ class RemoteTimerEPGList(Screen):
 		root = xml.etree.cElementTree.fromstring(xmlstring)
 		for services in root.findall("service"):
 			servicereference = str(services.findtext("reference", 'n/a').decode("utf-8").encode("utf-8", 'ignore'))
-			try:servicename = str(services.findtext("name", 'n/a').decode("utf-8").encode("utf-8", 'ignore'))
-			except:servicename = "n/a"
+			try:
+				servicename = str(services.findtext("name", 'n/a').decode("utf-8").encode("utf-8", 'ignore'))
+			except:
+				servicename = "n/a"
 		for events in root.findall("event"):
-			try:eventstart = int(events.findtext("start", 0))
-			except:eventstart = 0
-			try:eventduration = int(events.findtext("duration", 0))
-			except:eventduration  = 0
-			try:eventtitle = str(events.findtext("description", '').decode("utf-8").encode("utf-8", 'ignore'))
-			except:eventtitle = ""
-			try:eventdescription = str(events.findtext("genre", '').decode("utf-8").encode("utf-8", 'ignore'))
-			except:eventdescription = ""
-			try:eventdescriptionextended = str(events.findtext("details", '').decode("utf-8").encode("utf-8", 'ignore'))
-			except:eventdescriptionextended = ""
+			try:
+				eventstart = int(events.findtext("start", 0))
+			except:
+				eventstart = 0
+			try:
+				eventduration = int(events.findtext("duration", 0))
+			except:
+				eventduration  = 0
+			try:
+				eventtitle = str(events.findtext("description", '').decode("utf-8").encode("utf-8", 'ignore'))
+			except:
+				eventtitle = ""
+			try:
+				eventdescription = str(events.findtext("genre", '').decode("utf-8").encode("utf-8", 'ignore'))
+			except:
+				eventdescription = ""
+			try:
+				eventdescriptionextended = str(events.findtext("details", '').decode("utf-8").encode("utf-8", 'ignore'))
+			except:
+				eventdescriptionextended = ""
 			E1ListEPG.append(E2EPGListAllData(servicereference = servicereference, servicename = servicename, eventid = 1, eventstart = eventstart, eventduration = eventduration, eventtitle = eventtitle, eventdescription = eventdescription, eventdescriptionextended = eventdescriptionextended  ))
 		self["epglist"].buildList(E1ListEPG, self.E2TimerList)
 		if self.ListCurrentIndex != 0:
@@ -1354,18 +1416,30 @@ class RemoteTimerEPGList(Screen):
 		for events in root.findall("e2event"):
 			servicereference = str(events.findtext("e2eventservicereference", '').decode("utf-8").encode("utf-8", 'ignore'))
 			servicename = str(events.findtext("e2eventservicename", 'n/a').decode("utf-8").encode("utf-8", 'ignore'))
-			try:eventstart = int(events.findtext("e2eventstart", 0))
-			except:eventstart = 0
-			try:eventduration = int(events.findtext("e2eventduration", 0))
-			except:eventduration  = 0
-			try:eventtitle = str(events.findtext("e2eventtitle", '').decode("utf-8").encode("utf-8", 'ignore'))
-			except:eventtitle = ""
-			try:eventid = int(events.findtext("e2eventid", -1))
-			except:eventid = -1
-			try:eventdescription = str(events.findtext("e2eventdescription", '').decode("utf-8").encode("utf-8", 'ignore'))
-			except:eventdescription = ""
-			try:eventdescriptionextended = str(events.findtext("e2eventdescriptionextended", '').decode("utf-8").encode("utf-8", 'ignore'))
-			except:eventdescriptionextended = ""
+			try:
+				eventstart = int(events.findtext("e2eventstart", 0))
+			except:
+				eventstart = 0
+			try:
+				eventduration = int(events.findtext("e2eventduration", 0))
+			except:
+				eventduration  = 0
+			try:
+				eventtitle = str(events.findtext("e2eventtitle", '').decode("utf-8").encode("utf-8", 'ignore'))
+			except:
+				eventtitle = ""
+			try:
+				eventid = int(events.findtext("e2eventid", -1))
+			except:
+				eventid = -1
+			try:
+				eventdescription = str(events.findtext("e2eventdescription", '').decode("utf-8").encode("utf-8", 'ignore'))
+			except:
+				eventdescription = ""
+			try:
+				eventdescriptionextended = str(events.findtext("e2eventdescriptionextended", '').decode("utf-8").encode("utf-8", 'ignore'))
+			except:
+				eventdescriptionextended = ""
 			E2ListEPG.append(E2EPGListAllData(servicereference = servicereference, servicename = servicename, eventid = eventid, eventstart = eventstart, eventduration = eventduration, eventtitle = eventtitle, eventdescription = eventdescription, eventdescriptionextended = eventdescriptionextended  ))
 		self["epglist"].buildList(E2ListEPG, self.E2TimerList)
 		if self.ListCurrentIndex != 0:
@@ -2208,7 +2282,8 @@ class PartnerBouquetList(RemoteTimerBouquetList):
 				if sel is None:
 					return
 				self.session.openWithCallback(self.callbackChannelList, PartnerChannelList, self.E2TimerList, sel.servicereference, sel.servicename, self.PartnerboxEntry, self.playeronly)
-			except: return
+			except:
+				return
 		else:
 			self.takeBouquet()
 
@@ -2224,7 +2299,8 @@ class PartnerBouquetList(RemoteTimerBouquetList):
 			sel = self["bouquetlist"].l.getCurrentSelection()[0]
 			if sel is None:
 				return
-		except: return
+		except:
+			return
 		ref = quote(sel.servicereference.decode('utf-8').encode('utf-8', 'ignore'))
 		url = self.http + "/web/epgnow?bRef=" + ref
 		sendPartnerBoxWebCommand(url, None, 10, self.username, self.password).addCallback(self.ChannelListDownloadCallback, sel).addErrback(self.ChannelListDownloadError)

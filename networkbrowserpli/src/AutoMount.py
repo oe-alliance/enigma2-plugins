@@ -57,7 +57,7 @@ class AutoMount():
 		# Read out NFS Mounts
 		for nfs in tree.findall("nfs"):
 			for mount in nfs.findall("mount"):
-				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, \
+				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False,
 							'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
 				try:
 					data['mounttype'] = 'nfs'.encode("UTF-8")
@@ -75,7 +75,7 @@ class AutoMount():
 			# Read out CIFS Mounts
 		for nfs in tree.findall("cifs"):
 			for mount in nfs.findall("mount"):
-				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, \
+				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False,
 							'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
 				try:
 					data['mounttype'] = 'cifs'.encode("UTF-8")

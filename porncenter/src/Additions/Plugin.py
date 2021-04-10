@@ -63,7 +63,8 @@ class Movie:
 				downloadPage(six.ensure_binary(thumb), self.thumbnailFile).addCallback(self.decodeThumbnail).addErrback(self.error)
 
 	def error(self, error=None):
-		if error: print(error)
+		if error:
+			print(error)
 
 	def decodeThumbnail(self, str=None):
 		self.picload = ePicLoad()

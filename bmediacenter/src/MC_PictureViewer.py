@@ -426,7 +426,7 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 				iPlayableService.evEOF: self.doEOF,
 			})
 		if startslide == True:
-			self.PlayPause();
+			self.PlayPause()
 			if config.plugins.mc_pp.musicenable.value == True and config.plugins.mc_pp.music.value != "none":
 				if pathExists(config.plugins.mc_pp.music.value):
 					self.session.nav.playService(eServiceReference(4097, 0, config.plugins.mc_pp.music.value))

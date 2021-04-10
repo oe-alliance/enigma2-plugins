@@ -184,7 +184,7 @@ class Schiffe(Screen):
 		self["key_blue"] = Button(_("solve game"))
 		self["key_red"] = Button(_("quit game"))
 		
-		self.cnt = 0;
+		self.cnt = 0
 		self.timer = eTimer()
 		self.timer.callback.append(self.timerHandler)
 
@@ -297,7 +297,8 @@ class Schiffe(Screen):
 
 	def left_pressed(self):
 		if self.Focus > 0:
-			if self.Focus % XMAX == 0: return 
+			if self.Focus % XMAX == 0:
+				return 
 			cell = self.boxCells[self.Focus]
 			cell.setFocus(False)
 			cell.paint()
@@ -308,7 +309,8 @@ class Schiffe(Screen):
 
 	def right_pressed(self):
 		if self.Focus < XYMAX-1:
-			if (self.Focus+1) % XMAX == 0: return
+			if (self.Focus+1) % XMAX == 0:
+				return
 			cell = self.boxCells[self.Focus]
 			cell.setFocus(False)
 			cell.paint()
@@ -504,10 +506,14 @@ def calcNewField(field):
 				if field[lx+ly*XMAX-1] == 3:
 					field[lx+ly*XMAX-1] = 4 
 					lx -=1
-					if lx>0      and ly>0      and field[lx+ly*XMAX-1-XMAX] != 2: field[lx+ly*XMAX-1-XMAX] = 1
-					if lx>0      and ly<YMAX-1 and field[lx+ly*XMAX-1+XMAX] != 2: field[lx+ly*XMAX-1+XMAX] = 1
-					if lx<XMAX-1 and ly>0      and field[lx+ly*XMAX+1-XMAX] != 2: field[lx+ly*XMAX+1-XMAX] = 1
-					if lx<XMAX-1 and ly<YMAX-1 and field[lx+ly*XMAX+1+XMAX] != 2: field[lx+ly*XMAX+1+XMAX] = 1
+					if lx>0      and ly>0      and field[lx+ly*XMAX-1-XMAX] != 2:
+						field[lx+ly*XMAX-1-XMAX] = 1
+					if lx>0      and ly<YMAX-1 and field[lx+ly*XMAX-1+XMAX] != 2:
+						field[lx+ly*XMAX-1+XMAX] = 1
+					if lx<XMAX-1 and ly>0      and field[lx+ly*XMAX+1-XMAX] != 2:
+						field[lx+ly*XMAX+1-XMAX] = 1
+					if lx<XMAX-1 and ly<YMAX-1 and field[lx+ly*XMAX+1+XMAX] != 2:
+						field[lx+ly*XMAX+1+XMAX] = 1
 					return
 			if lx<XMAX-1:
 				if field[lx+ly*XMAX+1] == 0:
@@ -516,10 +522,14 @@ def calcNewField(field):
 				if field[lx+ly*XMAX+1] == 3:
 					field[lx+ly*XMAX+1] = 4
 					lx += 1
-					if lx>0      and ly>0      and field[lx+ly*XMAX-1-XMAX] != 2: field[lx+ly*XMAX-1-XMAX] = 1
-					if lx>0      and ly<YMAX-1 and field[lx+ly*XMAX-1+XMAX] != 2: field[lx+ly*XMAX-1+XMAX] = 1
-					if lx<XMAX-1 and ly>0      and field[lx+ly*XMAX+1-XMAX] != 2: field[lx+ly*XMAX+1-XMAX] = 1
-					if lx<XMAX-1 and ly<YMAX-1 and field[lx+ly*XMAX+1+XMAX] != 2: field[lx+ly*XMAX+1+XMAX] = 1
+					if lx>0      and ly>0      and field[lx+ly*XMAX-1-XMAX] != 2:
+						field[lx+ly*XMAX-1-XMAX] = 1
+					if lx>0      and ly<YMAX-1 and field[lx+ly*XMAX-1+XMAX] != 2:
+						field[lx+ly*XMAX-1+XMAX] = 1
+					if lx<XMAX-1 and ly>0      and field[lx+ly*XMAX+1-XMAX] != 2:
+						field[lx+ly*XMAX+1-XMAX] = 1
+					if lx<XMAX-1 and ly<YMAX-1 and field[lx+ly*XMAX+1+XMAX] != 2:
+						field[lx+ly*XMAX+1+XMAX] = 1
 					return
 			if ly>0:
 				if field[lx+ly*XMAX-XMAX] == 0:
@@ -528,10 +538,14 @@ def calcNewField(field):
 				if field[lx+ly*XMAX-XMAX] == 3:
 					field[lx+ly*XMAX-XMAX] = 4
 					ly -= 1
-					if lx>0      and ly>0      and field[lx+ly*XMAX-1-XMAX] != 2: field[lx+ly*XMAX-1-XMAX] = 1
-					if lx>0      and ly<YMAX-1 and field[lx+ly*XMAX-1+XMAX] != 2: field[lx+ly*XMAX-1+XMAX] = 1
-					if lx<XMAX-1 and ly>0      and field[lx+ly*XMAX+1-XMAX] != 2: field[lx+ly*XMAX+1-XMAX] = 1
-					if lx<XMAX-1 and ly<YMAX-1 and field[lx+ly*XMAX+1+XMAX] != 2: field[lx+ly*XMAX+1+XMAX] = 1			
+					if lx>0      and ly>0      and field[lx+ly*XMAX-1-XMAX] != 2:
+						field[lx+ly*XMAX-1-XMAX] = 1
+					if lx>0      and ly<YMAX-1 and field[lx+ly*XMAX-1+XMAX] != 2:
+						field[lx+ly*XMAX-1+XMAX] = 1
+					if lx<XMAX-1 and ly>0      and field[lx+ly*XMAX+1-XMAX] != 2:
+						field[lx+ly*XMAX+1-XMAX] = 1
+					if lx<XMAX-1 and ly<YMAX-1 and field[lx+ly*XMAX+1+XMAX] != 2:
+						field[lx+ly*XMAX+1+XMAX] = 1			
 					return
 			if ly<YMAX-1:
 				if field[lx+ly*XMAX+XMAX] == 0:
@@ -540,10 +554,14 @@ def calcNewField(field):
 				if field[lx+ly*XMAX+XMAX] == 3:
 					field[lx+ly*XMAX+XMAX] = 4
 					ly += 1
-					if lx>0      and ly>0      and field[lx+ly*XMAX-1-XMAX] != 2: field[lx+ly*XMAX-1-XMAX] = 1
-					if lx>0      and ly<YMAX-1 and field[lx+ly*XMAX-1+XMAX] != 2: field[lx+ly*XMAX-1+XMAX] = 1
-					if lx<XMAX-1 and ly>0      and field[lx+ly*XMAX+1-XMAX] != 2: field[lx+ly*XMAX+1-XMAX] = 1
-					if lx<XMAX-1 and ly<YMAX-1 and field[lx+ly*XMAX+1+XMAX] != 2: field[lx+ly*XMAX+1+XMAX] = 1
+					if lx>0      and ly>0      and field[lx+ly*XMAX-1-XMAX] != 2:
+						field[lx+ly*XMAX-1-XMAX] = 1
+					if lx>0      and ly<YMAX-1 and field[lx+ly*XMAX-1+XMAX] != 2:
+						field[lx+ly*XMAX-1+XMAX] = 1
+					if lx<XMAX-1 and ly>0      and field[lx+ly*XMAX+1-XMAX] != 2:
+						field[lx+ly*XMAX+1-XMAX] = 1
+					if lx<XMAX-1 and ly<YMAX-1 and field[lx+ly*XMAX+1+XMAX] != 2:
+						field[lx+ly*XMAX+1+XMAX] = 1
 					return
 
 	lx = -1
@@ -562,10 +580,14 @@ def calcNewField(field):
 		
 		if field[x+y*XMAX] == 3: #hit ship
 			field[x+y*XMAX] = 4
-			if x>0      and y>0     : field[x+y*XMAX-1-XMAX] = 1
-			if x>0      and y<YMAX-1: field[x+y*XMAX-1+XMAX] = 1
-			if x<XMAX-1 and y>0     : field[x+y*XMAX+1-XMAX] = 1
-			if x<XMAX-1 and y<YMAX-1: field[x+y*XMAX+1+XMAX] = 1
+			if x>0      and y>0     :
+				field[x+y*XMAX-1-XMAX] = 1
+			if x>0      and y<YMAX-1:
+				field[x+y*XMAX-1+XMAX] = 1
+			if x<XMAX-1 and y>0     :
+				field[x+y*XMAX+1-XMAX] = 1
+			if x<XMAX-1 and y<YMAX-1:
+				field[x+y*XMAX+1+XMAX] = 1
 			lx = x
 			ly = y
 			return

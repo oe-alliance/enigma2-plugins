@@ -59,7 +59,7 @@ class XMLTVBase(object):
 	def writeXMLTVConfig(self):
 		
 		if int(self.epgimportversion[0]) >= 5 and int(self.xmltvimportversion[0]) >= 5:
-			return;
+			return
 		
 		if self.epgimport is None and self.xmltvimport is None:
 			return

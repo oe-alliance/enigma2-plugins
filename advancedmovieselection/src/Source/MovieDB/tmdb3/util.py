@@ -247,7 +247,7 @@ class Datadict( Data ):
         elif attr:
             self.getkey = lambda x: getattr(x, attr)
         else:
-            raise TypeError("Datadict requires `key` or `attr` be defined "+\
+            raise TypeError("Datadict requires `key` or `attr` be defined "+
                             "for populating the dictionary")
     def __set__(self, inst, value):
         data = {}
@@ -327,7 +327,7 @@ class ElementType( type ):
                 attrs[attr.name] = attr
 
         # build sorted list of arguments used for intialization
-        attrs['_InitArgs'] = tuple([a.name for a in \
+        attrs['_InitArgs'] = tuple([a.name for a in
                                 sorted(initargs, key=lambda x: x.initarg)])
         return type.__new__(mcs, name, bases, attrs)
 
@@ -353,7 +353,7 @@ class ElementType( type ):
             # if not, the number of input arguments must exactly match that
             # defined by the Data definitions
             if len(args) != len(cls._InitArgs):
-                raise TypeError('__init__() takes exactly {0} arguments ({1} given)'\
+                raise TypeError('__init__() takes exactly {0} arguments ({1} given)'
                             .format(len(cls._InitArgs)+1, len(args)+1))
             for a, v in zip(cls._InitArgs, args):
                 setattr(obj, a, v)

@@ -202,12 +202,18 @@ class MovieList(GUIComponent):
             newcolor4 = 0xffa500 
 
         self.mark_color = newcolor4
-        try: self.watching_color = parseColor("movieWatching").argb()    
-        except: self.watching_color = newcolor1
-        try: self.finished_color = parseColor("movieFinished").argb()    
-        except: self.finished_color = newcolor2
-        try: self.recording_color = parseColor("movieRecording").argb()    
-        except: self.recording_color = newcolor3
+        try:
+            self.watching_color = parseColor("movieWatching").argb()    
+        except:
+            self.watching_color = newcolor1
+        try:
+            self.finished_color = parseColor("movieFinished").argb()    
+        except:
+            self.finished_color = newcolor2
+        try:
+            self.recording_color = parseColor("movieRecording").argb()    
+        except:
+            self.recording_color = newcolor3
 
         if self.show_statusicon and self.show_folders:
             if config.AdvancedMovieSelection.color3.value == "yellow":
@@ -520,7 +526,7 @@ class MovieList(GUIComponent):
                             last = pts
                 perc = 0
                 if last is not None and length > 0:
-                    perc = int((float(last) / 90000 / float(length)) * 100);
+                    perc = int((float(last) / 90000 / float(length)) * 100)
                     if perc > 100:
                         perc = 100
                     if perc < 0:
@@ -1175,7 +1181,7 @@ class MovieList(GUIComponent):
                     break
         if length == 0:
             return 0
-        perc = int((float(last) / float(length)) * 100);
+        perc = int((float(last) / float(length)) * 100)
         return perc
 
     def updateMetaFromEit(self):

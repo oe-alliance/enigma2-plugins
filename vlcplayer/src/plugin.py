@@ -61,12 +61,14 @@ class __VlcManager():
 				self.testHost = "%s" % selectedServer.getHost()
 				link = "down"
 				for iface in self.get_iface_list():
-					if "lo" in iface: continue
+					if "lo" in iface:
+						continue
 					if os_path.exists("/sys/class/net/%s/operstate"%(iface)):
 						fd = open("/sys/class/net/%s/operstate"%(iface), "r")
 						link = fd.read().strip()
 						fd.close()
-					if link != "down": break
+					if link != "down":
+						break
 				if link != "down":
 					s = socket(AF_INET, SOCK_STREAM)
 					s.settimeout(self.testTime)

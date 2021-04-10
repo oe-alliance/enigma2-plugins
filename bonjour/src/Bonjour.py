@@ -62,7 +62,7 @@ class Bonjour:
 		if 'type' in service and 'port' in service and 'file' in service:
 			filepath = "%s%s" %(self.AVAHI_SERVICES_DIR, service['file'])
 			try:
-				file = open(filepath, 'w');
+				file = open(filepath, 'w')
 				file.writelines(self.__createServiceConfig(service))
 				file.flush()
 				fsync(file.fileno())
