@@ -41,7 +41,7 @@ def getValue(definitions, default):
 	# Return stripped output or (if empty) default
 	return ret.strip() or default
 
-def parseConfig(configuration, list, version = None, uniqueTimerId = 0, defaultTimer = None):
+def parseConfig(configuration, list, version=None, uniqueTimerId=0, defaultTimer=None):
 	try:
 		intVersion = int(version)
 	except ValueError:
@@ -69,7 +69,7 @@ def parseConfig(configuration, list, version = None, uniqueTimerId = 0, defaultT
 		if parseEntry(timer, baseTimer):
 			list.append(baseTimer)
 
-def parseEntry(element, baseTimer, defaults = False):
+def parseEntry(element, baseTimer, defaults=False):
 	if not defaults:
 		# Read out match
 		baseTimer.match = element.get("match", "").encode("UTF-8")
@@ -276,7 +276,7 @@ def parseEntry(element, baseTimer, defaults = False):
 
 	return True
 
-def parseConfigOld(configuration, list, uniqueTimerId = 0):
+def parseConfigOld(configuration, list, uniqueTimerId=0):
 	print("[AutoTimer] Trying to parse old config")
 
 	# Iterate Timers
@@ -508,28 +508,28 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 				name,
 				match,
 				enabled,
-				timespan = timetuple,
-				services = servicelist,
-				offset = offset,
-				afterevent = afterevent,
-				exclude = excludes,
-				include = includes,
-				maxduration = maxlen,
-				destination = destination,
-				matchCount = counter,
-				matchLeft = counterLeft,
-				matchLimit = counterLimit,
-				matchFormatString = counterFormat,
-				lastBegin = lastBegin,
-				justplay = justplay,
-				setEndtime = setEndtime,
-				avoidDuplicateDescription = avoidDuplicateDescription,
-				searchForDuplicateDescription = searchForDuplicateDescription,
-				bouquets = bouquets,
-				tags = tags
+				timespan=timetuple,
+				services=servicelist,
+				offset=offset,
+				afterevent=afterevent,
+				exclude=excludes,
+				include=includes,
+				maxduration=maxlen,
+				destination=destination,
+				matchCount=counter,
+				matchLeft=counterLeft,
+				matchLimit=counterLimit,
+				matchFormatString=counterFormat,
+				lastBegin=lastBegin,
+				justplay=justplay,
+				setEndtime=setEndtime,
+				avoidDuplicateDescription=avoidDuplicateDescription,
+				searchForDuplicateDescription=searchForDuplicateDescription,
+				bouquets=bouquets,
+				tags=tags
 		))
 
-def buildConfig(defaultTimer, timers, webif = False):
+def buildConfig(defaultTimer, timers, webif=False):
 	# Generate List in RAM
 	list = ['<?xml version="1.0" ?>\n<autotimer version="', CURRENT_CONFIG_VERSION, '" nextTimerId="', "1", '">\n\n']
 	append = list.append

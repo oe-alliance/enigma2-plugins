@@ -474,7 +474,7 @@ class SeriesPluginInfoScreen(Screen):
 					description = refactorDescription(description, self.data)
 				
 				#newEntry = RecordTimerEntry(ServiceReference(refstr), begin, end, name, description, eit, dirname = preferredTimerPath())
-				newEntry = RecordTimerEntry(ServiceReference(str(ref)), begin, end, name, description, eit, dirname = preferredTimerPath())
+				newEntry = RecordTimerEntry(ServiceReference(str(ref)), begin, end, name, description, eit, dirname=preferredTimerPath())
 				#newEntry = RecordTimerEntry(refstr, begin, end, name, description, eit, dirname = preferredTimerPath())
 				self.session.openWithCallback(self.finishedAdd, TimerEntry, newEntry)
 

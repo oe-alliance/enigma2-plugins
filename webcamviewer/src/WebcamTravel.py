@@ -29,7 +29,7 @@ from urllib import quote as urllib_quote
 
 class TravelWebcamviewer(Screen):
 	skin = ""
-	def __init__(self, session, args = 0):
+	def __init__(self, session, args=0):
 		skin =  """<screen position="93,70" size="550,450" title="Webcams provided by webcams.travel">
 
 			<widget source="list" render="Listbox" position="0,0" size="550,350" zPosition="1" scrollbarMode="showOnDemand" transparent="1"  >

@@ -28,9 +28,9 @@ from MoviePlayer import dreamMediathekPlayer
 
 config.plugins.dreamMediathek = ConfigSubsection()
 config.plugins.dreamMediathek.general = ConfigSubsection()
-config.plugins.dreamMediathek.general.on_movie_stop = ConfigSelection(default = "ask", choices = [
+config.plugins.dreamMediathek.general.on_movie_stop = ConfigSelection(default="ask", choices=[
 	("ask", _("Ask user")), ("quit", _("Return to movie list")), ("playnext", _("Play next video")), ("playagain", _("Play video again")) ])
-config.plugins.dreamMediathek.general.on_exit = ConfigSelection(default = "ask", choices = [
+config.plugins.dreamMediathek.general.on_exit = ConfigSelection(default="ask", choices=[
 	("ask", _("Ask user")), ("quit", _("Return to movie list"))])
 
 
@@ -65,7 +65,7 @@ class dreamMediathekStationsScreen(Screen):
 			</widget>
 		</screen>"""
 		
-	def __init__(self, session, skin_path = None):
+	def __init__(self, session, skin_path=None):
 		Screen.__init__(self, session)
 		self.session = session
 		self.skin_path = skin_path
@@ -115,7 +115,7 @@ class dreamMediathekStationsScreen(Screen):
 				(_("Yes"), "quit"),
 				(_("No"), "continue")
 			)					
-			self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Really quit dreamMediathek ?"), list = list)
+			self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Really quit dreamMediathek ?"), list=list)
 		else:
 			self.leavePlayerConfirmed([True, how])
 
@@ -187,5 +187,5 @@ def Plugins(path, **kwargs):
 	return PluginDescriptor(
 		name=_("DreamMediathek"),
 		description=_("Play Web and ipTV streams"),
-		where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
-		fnc = dreamMediathekMain)
+		where=[ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
+		fnc=dreamMediathekMain)

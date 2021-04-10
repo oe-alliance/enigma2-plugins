@@ -32,7 +32,7 @@ def main(session,**kwargs):
 
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(name="Sudoku", description=_("Sudoku Game"), where = [PluginDescriptor.WHERE_PLUGINMENU], fnc=main)]
+	return [PluginDescriptor(name="Sudoku", description=_("Sudoku Game"), where=[PluginDescriptor.WHERE_PLUGINMENU], fnc=main)]
 
 
 # thanks to Robert Wohleb for this class...

@@ -135,7 +135,7 @@ class PipServiceRelationSetup(Screen):
 		self.updateList()
 
 class PipServiceRelationEntryList(MenuList):
-	def __init__(self, list, enableWrapAround = True):
+	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setFont(1, gFont("Regular", 18))
@@ -195,12 +195,12 @@ class PipServiceRelationEntryConfigScreen(ConfigListScreen, Screen):
 		self.entry = entry
 		if entry is None:
 			self.currentKey = None
-			self.ref1 =  NoSave(ConfigDirectory(default = _("Press OK to select a service")))
-			self.ref2 =  NoSave(ConfigDirectory(default = _("Press OK to select a related PiP service")))
+			self.ref1 =  NoSave(ConfigDirectory(default=_("Press OK to select a service")))
+			self.ref2 =  NoSave(ConfigDirectory(default=_("Press OK to select a related PiP service")))
 		else:
 			self.currentKey = entry[0]
-			self.ref1 =  NoSave(ConfigDirectory(default = ServiceReference(eServiceReference(entry[0])).getServiceName()))
-			self.ref2 =  NoSave(ConfigDirectory(default = ServiceReference(eServiceReference(entry[1])).getServiceName()))
+			self.ref1 =  NoSave(ConfigDirectory(default=ServiceReference(eServiceReference(entry[0])).getServiceName()))
+			self.ref2 =  NoSave(ConfigDirectory(default=ServiceReference(eServiceReference(entry[1])).getServiceName()))
 		self.list = [ ]
 		self.serviceref1 =  getConfigListEntry(_("Service"), self.ref1)
 		self.serviceref2 =  getConfigListEntry(_("Related Pip Service"), self.ref2)
@@ -222,7 +222,7 @@ class PipServiceRelationEntryConfigScreen(ConfigListScreen, Screen):
 			descr = _("Related PiP service for %s") % sname
 		self.session.openWithCallback(boundFunction(self.channelSelected,index), SimpleChannelSelection, descr)
 			
-	def channelSelected(self, index, ref = None):
+	def channelSelected(self, index, ref=None):
 		if ref:
 			if self.entry:
 				val1 = self.entry[0]
@@ -280,7 +280,7 @@ def playService(self, service):
 
 def Plugins(**kwargs):
 	list = []
-	list.append(PluginDescriptor(name="Setup PiPServiceRelation", description=_("setup for PiPServiceRelation"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon = "PiPServiceRelation.png", fnc=setup))
-	list.append(PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart_PictureInPicture))
+	list.append(PluginDescriptor(name="Setup PiPServiceRelation", description=_("setup for PiPServiceRelation"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="PiPServiceRelation.png", fnc=setup))
+	list.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart_PictureInPicture))
 	return list
 

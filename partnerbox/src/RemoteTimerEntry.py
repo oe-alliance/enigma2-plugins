@@ -100,7 +100,7 @@ class RemoteTimerEntry(Screen, ConfigListScreen):
 			"size-": self.decrementEnd
 		}, -2)
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = session)
+		ConfigListScreen.__init__(self, self.list, session=session)
 		self.createSetup("config")
 
 	def createConfig(self):
@@ -140,16 +140,16 @@ class RemoteTimerEntry(Screen, ConfigListScreen):
 		name = self.timer.name 
 		description = self.timer.description
 		if self.timer.type == 0:
-			self.timerentry_justplay = ConfigSelection(choices = [("1", _("zap")), ("0", _("record"))], default = str(justplay))
-			self.timerentry_afterevent = ConfigSelection(choices = [("nothing", _("do nothing")), ("standby", _("go to standby")), ("deepstandby", _("go to deep standby")), ("auto", _("auto"))], default = afterevent)
-			self.timerentry_name = ConfigText(default = name, visible_width = 50, fixed_size = False)
+			self.timerentry_justplay = ConfigSelection(choices=[("1", _("zap")), ("0", _("record"))], default=str(justplay))
+			self.timerentry_afterevent = ConfigSelection(choices=[("nothing", _("do nothing")), ("standby", _("go to standby")), ("deepstandby", _("go to deep standby")), ("auto", _("auto"))], default=afterevent)
+			self.timerentry_name = ConfigText(default=name, visible_width=50, fixed_size=False)
 		else:
-			self.timerentry_justplay = ConfigSelection(choices = [(str(PlaylistEntry.SwitchTimerEntry), _("zap")), (str(PlaylistEntry.recNgrab), _("NGRAB")),(str(PlaylistEntry.recDVR), _("DVR"))], default = str(justplay))
-			self.timerentry_afterevent = ConfigSelection(choices = [("0", _("do nothing")), (str(PlaylistEntry.doGoSleep), _("go to standby")), (str(PlaylistEntry.doShutdown), _("go to deep standby"))], default = str(afterevent))
-		self.timerentry_description = ConfigText(default = description, visible_width = 50, fixed_size = False)
-		self.timerentry_date = ConfigDateTime(default = begin, formatstring = _("%d.%B %Y"), increment = 86400)
-		self.timerentry_starttime = ConfigClock(default = begin)
-		self.timerentry_endtime = ConfigClock(default = end)
+			self.timerentry_justplay = ConfigSelection(choices=[(str(PlaylistEntry.SwitchTimerEntry), _("zap")), (str(PlaylistEntry.recNgrab), _("NGRAB")),(str(PlaylistEntry.recDVR), _("DVR"))], default=str(justplay))
+			self.timerentry_afterevent = ConfigSelection(choices=[("0", _("do nothing")), (str(PlaylistEntry.doGoSleep), _("go to standby")), (str(PlaylistEntry.doShutdown), _("go to deep standby"))], default=str(afterevent))
+		self.timerentry_description = ConfigText(default=description, visible_width=50, fixed_size=False)
+		self.timerentry_date = ConfigDateTime(default=begin, formatstring=_("%d.%B %Y"), increment=86400)
+		self.timerentry_starttime = ConfigClock(default=begin)
+		self.timerentry_endtime = ConfigClock(default=end)
 		if self.timer.type == 0:
 			default = self.timer.dirname
 			if default == "None":
@@ -159,11 +159,11 @@ class RemoteTimerEntry(Screen, ConfigListScreen):
 					default = "N/A"
 			if default not in self.Locations:
 				self.Locations.append(default)
-			self.timerentry_dirname = ConfigSelection(default = default, choices = self.Locations)
-		self.timerentry_weekday = ConfigSelection(default = weekday_table[weekday], choices = [("mon",_("Monday")), ("tue", _("Tuesday")), ("wed",_("Wednesday")), ("thu", _("Thursday")), ("fri", _("Friday")), ("sat", _("Saturday")), ("sun", _("Sunday"))])
+			self.timerentry_dirname = ConfigSelection(default=default, choices=self.Locations)
+		self.timerentry_weekday = ConfigSelection(default=weekday_table[weekday], choices=[("mon",_("Monday")), ("tue", _("Tuesday")), ("wed",_("Wednesday")), ("thu", _("Thursday")), ("fri", _("Friday")), ("sat", _("Saturday")), ("sun", _("Sunday"))])
 		self.timerentry_day = ConfigSubList()
 		for x in (0, 1, 2, 3, 4, 5, 6):
-			self.timerentry_day.append(ConfigYesNo(default = day[x]))
+			self.timerentry_day.append(ConfigYesNo(default=day[x]))
 		servicename = self.timer.servicename
 		self.timerentry_service = ConfigSelection([servicename])
 
@@ -326,7 +326,7 @@ def RemoteTimerConfig(self):
 		default = "1"
 	else:
 		default = "0"
-	self.timerentry_remote = ConfigSelection(default = default, choices = self.entryguilist)
+	self.timerentry_remote = ConfigSelection(default=default, choices=self.entryguilist)
 	baseTimercreateConfig(self)
 
 #def getLocationsError(self, error):
@@ -341,7 +341,7 @@ def getLocations(self, url, check):
 	except:
 		pass
 
-def getLocationsCallback(self, xmlstring, check = False):
+def getLocationsCallback(self, xmlstring, check=False):
 	try:
 		root = xml.etree.cElementTree.fromstring(xmlstring)
 	except:
@@ -457,17 +457,17 @@ def  RemoteTimercreateConfig(self):
 	if int(self.entryguilist[int(self.timerentry_remote.value)][2].enigma.value) == 0:
 		name = self.timer.name 
 		description = self.timer.description
-		self.timerentry_justplay = ConfigSelection(choices = [("zap", _("zap")), ("record", _("record"))], default = {0: "record", 1: "zap"}[justplay])
-		self.timerentry_afterevent = ConfigSelection(choices = [("nothing", _("do nothing")), ("standby", _("go to standby")), ("deepstandby", _("go to deep standby")), ("auto", _("auto"))], default = afterevent)
-		self.timerentry_name = ConfigText(default = name, visible_width = 50, fixed_size = False)
+		self.timerentry_justplay = ConfigSelection(choices=[("zap", _("zap")), ("record", _("record"))], default={0: "record", 1: "zap"}[justplay])
+		self.timerentry_afterevent = ConfigSelection(choices=[("nothing", _("do nothing")), ("standby", _("go to standby")), ("deepstandby", _("go to deep standby")), ("auto", _("auto"))], default=afterevent)
+		self.timerentry_name = ConfigText(default=name, visible_width=50, fixed_size=False)
 	else:
 		description = self.timer.name 
-		self.timerentry_justplay = ConfigSelection(choices = [(str(PlaylistEntry.SwitchTimerEntry), _("zap")), (str(PlaylistEntry.recNgrab), _("NGRAB")),(str(PlaylistEntry.recDVR), _("DVR"))], default = str(justplay))
-		self.timerentry_afterevent = ConfigSelection(choices = [("0", _("do nothing")), (str(PlaylistEntry.doGoSleep), _("go to standby")), (str(PlaylistEntry.doShutdown), _("go to deep standby"))], default = str(afterevent))
-	self.timerentry_description = ConfigText(default = description, visible_width = 50, fixed_size = False)
-	self.timerentry_date = ConfigDateTime(default = begin, formatstring = _("%d.%B %Y"), increment = 86400)
-	self.timerentry_starttime = ConfigClock(default = begin)
-	self.timerentry_endtime = ConfigClock(default = end)
+		self.timerentry_justplay = ConfigSelection(choices=[(str(PlaylistEntry.SwitchTimerEntry), _("zap")), (str(PlaylistEntry.recNgrab), _("NGRAB")),(str(PlaylistEntry.recDVR), _("DVR"))], default=str(justplay))
+		self.timerentry_afterevent = ConfigSelection(choices=[("0", _("do nothing")), (str(PlaylistEntry.doGoSleep), _("go to standby")), (str(PlaylistEntry.doShutdown), _("go to deep standby"))], default=str(afterevent))
+	self.timerentry_description = ConfigText(default=description, visible_width=50, fixed_size=False)
+	self.timerentry_date = ConfigDateTime(default=begin, formatstring=_("%d.%B %Y"), increment=86400)
+	self.timerentry_starttime = ConfigClock(default=begin)
+	self.timerentry_endtime = ConfigClock(default=end)
 	if int(self.entryguilist[int(self.timerentry_remote.value)][2].enigma.value) == 0:
 		if self.Locations:
 			default = self.Locations[0]
@@ -475,11 +475,11 @@ def  RemoteTimercreateConfig(self):
 			default = "N/A"
 		if default not in self.Locations:
 			self.Locations.append(default)
-		self.timerentry_dirname = ConfigSelection(default = default, choices = self.Locations)
-	self.timerentry_weekday = ConfigSelection(default = weekday_table[weekday], choices = [("mon",_("Monday")), ("tue", _("Tuesday")), ("wed",_("Wednesday")), ("thu", _("Thursday")), ("fri", _("Friday")), ("sat", _("Saturday")), ("sun", _("Sunday"))])
+		self.timerentry_dirname = ConfigSelection(default=default, choices=self.Locations)
+	self.timerentry_weekday = ConfigSelection(default=weekday_table[weekday], choices=[("mon",_("Monday")), ("tue", _("Tuesday")), ("wed",_("Wednesday")), ("thu", _("Thursday")), ("fri", _("Friday")), ("sat", _("Saturday")), ("sun", _("Sunday"))])
 	self.timerentry_day = ConfigSubList()
 	for x in (0, 1, 2, 3, 4, 5, 6):
-		self.timerentry_day.append(ConfigYesNo(default = day[x]))
+		self.timerentry_day.append(ConfigYesNo(default=day[x]))
 	# FIXME some service-chooser needed here
 	servicename = "N/A"
 	try: # no current service available?
@@ -488,7 +488,7 @@ def  RemoteTimercreateConfig(self):
 		pass
 	self.timerentry_service_ref = self.timer.service_ref
 	self.timerentry_service = ConfigSelection([servicename])
-	self.timerentry_vps_in_timerevent = ConfigSelection(default = "no", choices = [("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes"))])
+	self.timerentry_vps_in_timerevent = ConfigSelection(default="no", choices=[("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes"))])
 
 def RemoteTimerCreateSetup(self, widget):
 	self.list = []
@@ -602,7 +602,7 @@ def AddTimerE2Callback(self, session, answer):
 	if statetext:
 		text = statetext.encode("utf-8", 'ignore')
 	ok = state == "True"
-	session.open(MessageBox,_("Partnerbox Answer: \n%s") % _(text),MessageBox.TYPE_INFO, timeout = 10)
+	session.open(MessageBox,_("Partnerbox Answer: \n%s") % _(text),MessageBox.TYPE_INFO, timeout=10)
 	if ok:
 		if (config.plugins.Partnerbox.enablepartnerboxepglist.value): 
 			# Timerlist der Partnerbox neu laden --> Anzeige fuer EPGList, aber nur, wenn die gleiche IP in EPGList auch angezeigt wird
@@ -614,7 +614,7 @@ def AddTimerE1Callback(self, session, answer):
 	ok = answer == "Timer event was created successfully."
 	if answer == "Timer event was created successfully.":
 		answer = _("Timer event was created successfully.")
-	session.open(MessageBox,_("Partnerbox Answer: \n%s") % (answer),MessageBox.TYPE_INFO, timeout = 10)
+	session.open(MessageBox,_("Partnerbox Answer: \n%s") % (answer),MessageBox.TYPE_INFO, timeout=10)
 	if ok:
 		if (config.plugins.Partnerbox.enablepartnerboxepglist.value): 
 			# Timerlist der Partnerbox neu laden --> Anzeige fuer EPGList, aber nur, wenn die gleiche IP in EPGList auch angezeigt wird

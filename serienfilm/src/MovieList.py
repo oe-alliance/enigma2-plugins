@@ -47,7 +47,7 @@ class MovieList(GUIComponent):
 	gsflists = []
 
 
-	def __init__(self, root, list_type=None, sort_type=None, show_times=None, sftitle_episode_separator = None, MovieSelectionSelf = None):
+	def __init__(self, root, list_type=None, sort_type=None, show_times=None, sftitle_episode_separator=None, MovieSelectionSelf=None):
 		GUIComponent.__init__(self)
 #		print "[SF-Plugin] class SF:MovieList init, lstt=%x, srt=%x, sht=%s, sft=>%s<, root=%s" % ( list_type, sort_type, show_times, str(sftitle_episode_separator), str(root))
 		self.list_type = list_type or self.LISTTYPE_MINIMAL
@@ -169,14 +169,14 @@ class MovieList(GUIComponent):
 		tags = self.tags and info.getInfoString(serviceref, iServiceInformation.sTags)
 
 		if isinstance(pixmap, str):
-			pixmap = MultiContentEntryText(pos=(0, 0), size=(25, 20), font = 0, flags = RT_HALIGN_LEFT, text = pixmap)
+			pixmap = MultiContentEntryText(pos=(0, 0), size=(25, 20), font=0, flags=RT_HALIGN_LEFT, text=pixmap)
 		if pixmap is not None:
 			res.append(pixmap)
 
 		XPOS = 25
 
 		if self.list_type & MovieList.LISTTYPE_ORIGINAL:
-			res.append(MultiContentEntryText(pos=(XPOS, 0), size=(width, 30), font = 0, flags = RT_HALIGN_LEFT, text=txt))
+			res.append(MultiContentEntryText(pos=(XPOS, 0), size=(width, 30), font=0, flags=RT_HALIGN_LEFT, text=txt))
 			line2 = 20
 			if self.list == self.sflists[0]:
 				line2 = 50
@@ -184,9 +184,9 @@ class MovieList(GUIComponent):
 					res.append(MultiContentEntryText(pos=(XPOS, 30), size=(width, 20), font=1, flags=RT_HALIGN_LEFT, text=description))
 			res.append(MultiContentEntryText(pos=(XPOS, line2), size=(150, 20), font=1, flags=RT_HALIGN_LEFT, text=begin_string))
 			if service:
-				res.append(MultiContentEntryText(pos=(XPOS+150, line2), size=(180, 20), font = 2, flags = RT_HALIGN_RIGHT, text = service))
+				res.append(MultiContentEntryText(pos=(XPOS+150, line2), size=(180, 20), font=2, flags=RT_HALIGN_RIGHT, text=service))
 			if tags:
-				res.append(MultiContentEntryText(pos=(width - 250, line2), size=(180, 20), font = 2, flags = RT_HALIGN_RIGHT, text = tags))
+				res.append(MultiContentEntryText(pos=(width - 250, line2), size=(180, 20), font=2, flags=RT_HALIGN_RIGHT, text=tags))
 			if not typ & (self.REAL_DIR | self.VIRT_ENTRY):
 				res.append(MultiContentEntryText(pos=(width-60, line2), size=(60, 20), font=2, flags=RT_HALIGN_RIGHT, text=len))
 			return res
@@ -201,7 +201,7 @@ class MovieList(GUIComponent):
 
 		if self.list_type  & MovieList.LISTTYPE_COMPACT:
 			res.append(MultiContentEntryText(pos=(XPOS, 4), size=(tslen-5, 20), font=1, flags=RT_HALIGN_RIGHT, text=date_string))
-			res.append(MultiContentEntryText(pos=(XPOS + tslen, 0), size=(width-XPOS-tslen, 20), font = 0, flags = RT_HALIGN_LEFT, text = txt))
+			res.append(MultiContentEntryText(pos=(XPOS + tslen, 0), size=(width-XPOS-tslen, 20), font=0, flags=RT_HALIGN_LEFT, text=txt))
 			other = None
 			if self.list_type & MovieList.LISTTYPE_COMPACT_TAGS:
 				if tags:
@@ -223,7 +223,7 @@ class MovieList(GUIComponent):
 		else:
 #			assert(self.list_type == MovieList.LISTTYPE_MINIMAL)
 			res.append(MultiContentEntryText(pos=(XPOS, 3), size=(tslen-5, 20), font=1, flags=RT_HALIGN_RIGHT, text=date_string))
-			res.append(MultiContentEntryText(pos=(XPOS + tslen, 0), size=(width-XPOS-tslen-dusz, 20), font = 0, flags = RT_HALIGN_LEFT, text = txt))
+			res.append(MultiContentEntryText(pos=(XPOS + tslen, 0), size=(width-XPOS-tslen-dusz, 20), font=0, flags=RT_HALIGN_LEFT, text=txt))
 			if dusz:
 				res.append(MultiContentEntryText(pos=(width-dusz, 3), size=(dusz, 20), font=1, flags=RT_HALIGN_RIGHT, text=len))
 
@@ -255,7 +255,7 @@ class MovieList(GUIComponent):
 		instance.setContent(None)
 		instance.selectionChanged.get().remove(self.selectionChanged)
 
-	def reload(self, root = None, filter_tags = None):
+	def reload(self, root=None, filter_tags=None):
 		if root is not None:
 			self.load(root, filter_tags)
 		else:

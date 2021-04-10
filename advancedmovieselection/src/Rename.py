@@ -92,7 +92,7 @@ class MovieRetitle(Screen, ConfigListScreen):
 
         self["config"].setList(self.list)
 
-    def showKeypad(self, retval = None):
+    def showKeypad(self, retval=None):
         current = self["config"].getCurrent()
         helpwindowpos = self["HelpWindow"].getPosition()
         if hasattr(current[1], 'help_window'):

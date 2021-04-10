@@ -67,7 +67,7 @@ class AutomaticVolumeAdjustmentConfigScreen(ConfigListScreen, Screen):
 		self.configVA = AutomaticVolumeAdjustmentConfig()
 		self.automaticVolumeAdjustmentInstance = AutomaticVolumeAdjustment.instance
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = session)
+		ConfigListScreen.__init__(self, self.list, session=session)
 		self.createSetup("config")
 		
 	def createSetup(self, widget):
@@ -200,7 +200,7 @@ class AutomaticVolumeAdjustmentEntriesListConfigScreen(Screen):
 		self.updateList()
 
 class AutomaticVolumeAdjustmentEntryList(MenuList):
-	def __init__(self, list, enableWrapAround = True):
+	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setFont(1, gFont("Regular", 18))
@@ -279,7 +279,7 @@ class AutomaticVolumeAdjustmentEntryConfigScreen(ConfigListScreen, Screen):
 		if cur == self.service:
 			self.session.openWithCallback(self.channelSelected, SimpleChannelSelection, _("Channel Selection"))
 			
-	def channelSelected(self, ref = None):
+	def channelSelected(self, ref=None):
 		if ref:
 			self.current.name.value = ServiceReference(ref).getServiceName()
 			self.current.servicereference.value = ref.toString()
@@ -297,7 +297,7 @@ class AutomaticVolumeAdjustmentEntryConfigScreen(ConfigListScreen, Screen):
 				self.automaticVolumeAdjustmentInstance.initializeConfigValues(self.configVA, True) # submit config values
 			self.close()
 		else:
-			self.session.open(MessageBox, _("You must select a valid service!"), type = MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, _("You must select a valid service!"), type=MessageBox.TYPE_INFO)
 
 	def keyCancel(self):
 		if self.newmode == 1:

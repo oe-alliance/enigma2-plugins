@@ -16,7 +16,7 @@ class SubConv():
     def __init__(self, subtitle_path, encoding):
 	self.encodeing = encoding
 	self.subtitle = subtitle_path
-	file = codecs.open(self.subtitle,'r',self.encodeing, errors = "ignore")
+	file = codecs.open(self.subtitle,'r',self.encodeing, errors="ignore")
         self.subs_file = file.readlines()
         file.close()
   

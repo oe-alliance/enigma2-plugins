@@ -18,14 +18,14 @@ from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
 from Screens.InfoBarGenerics import InfoBarSeek, InfoBarNotifications
 config.plugins.mc_pp = ConfigSubsection()
 config.plugins.mc_pp.slidetime = ConfigInteger(default=10, limits=(5, 60))
-config.plugins.mc_pp.resize = ConfigSelection(default="0", choices = [("0", _("simple")), ("1", _("better"))])
+config.plugins.mc_pp.resize = ConfigSelection(default="0", choices=[("0", _("simple")), ("1", _("better"))])
 config.plugins.mc_pp.cache = ConfigEnableDisable(default=True)
 config.plugins.mc_pp.lastDir = ConfigText(default=resolveFilename(SCOPE_MEDIA))
-config.plugins.mc_pp.rotate = ConfigSelection(default="0", choices = [("0", _("none")), ("1", _("manual")), ("2", _("by Exif"))])
+config.plugins.mc_pp.rotate = ConfigSelection(default="0", choices=[("0", _("none")), ("1", _("manual")), ("2", _("by Exif"))])
 config.plugins.mc_pp.ThumbWidth = ConfigInteger(default=145, limits=(1, 999))
 config.plugins.mc_pp.ThumbHeight = ConfigInteger(default=120, limits=(1, 999))
-config.plugins.mc_pp.bgcolor = ConfigSelection(default="#00000000", choices = [("#00000000", _("black")),("#009eb9ff", _("blue")),("#00ff5a51", _("red")), ("#00ffe875", _("yellow")), ("#0038FF48", _("green"))])
-config.plugins.mc_pp.textcolor = ConfigSelection(default="#0038FF48", choices = [("#00000000", _("black")),("#009eb9ff", _("blue")),("#00ff5a51", _("red")), ("#00ffe875", _("yellow")), ("#0038FF48", _("green"))])
+config.plugins.mc_pp.bgcolor = ConfigSelection(default="#00000000", choices=[("#00000000", _("black")),("#009eb9ff", _("blue")),("#00ff5a51", _("red")), ("#00ffe875", _("yellow")), ("#0038FF48", _("green"))])
+config.plugins.mc_pp.textcolor = ConfigSelection(default="#0038FF48", choices=[("#00000000", _("black")),("#009eb9ff", _("blue")),("#00ff5a51", _("red")), ("#00ffe875", _("yellow")), ("#0038FF48", _("green"))])
 config.plugins.mc_pp.framesize = ConfigInteger(default=30, limits=(5, 99))
 config.plugins.mc_pp.infoline = ConfigEnableDisable(default=True)
 config.plugins.mc_pp.loop = ConfigEnableDisable(default=True)
@@ -67,7 +67,7 @@ class MC_PictureViewer(Screen, HelpableScreen):
 		self.filelist = []
 		self["filelist"] = []
 		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib" , "/proc", "/ram", "/root" , "/sbin", "/sys", "/tmp", "/usr", "/var"]
-		self.filelist = FileList(currDir, showDirectories = True, showFiles = True, showMountpoints = True, isTop = False, matchingPattern = "(?i)^.*\.(jpeg|jpg|jpe|png|bmp)", inhibitDirs = inhibitDirs)
+		self.filelist = FileList(currDir, showDirectories=True, showFiles=True, showMountpoints=True, isTop=False, matchingPattern="(?i)^.*\.(jpeg|jpg|jpe|png|bmp)", inhibitDirs=inhibitDirs)
 		self["filelist"] = self.filelist
 		self["filelist"].show()
 		self["thumbnail"] = Pixmap()
@@ -122,7 +122,7 @@ class MC_PictureViewer(Screen, HelpableScreen):
 	def StartThumb(self):
 		self.session.openWithCallback(self.returnVal, MC_PicThumbViewer, self.filelist.getFileList(), self.filelist.getSelectionIndex(), self.filelist.getCurrentDirectory())
 
-	def JumpToFolder(self, jumpto = None):
+	def JumpToFolder(self, jumpto=None):
 		if jumpto is None:
 			return
 		else:
@@ -372,7 +372,7 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 
 		Screen.__init__(self, session)
 		InfoBarBase.__init__(self)
-		InfoBarSeek.__init__(self, actionmap = "MediaPlayerSeekActions")
+		InfoBarSeek.__init__(self, actionmap="MediaPlayerSeekActions")
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "MovieSelectionActions"],
 		{
 			"cancel": self.Exit,
@@ -418,8 +418,7 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 
 		if self.maxentry >= 0:
 			self.onLayoutFinish.append(self.setPicloadConf)
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evEOF: self.doEOF,
 			})
 		if startslide == True:
@@ -564,7 +563,7 @@ class MC_PicSetup(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 		self.onChangedEntry = []
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 		self["actions"] = ActionMap(["SetupActions","DirectionActions"],
 			{
 				"cancel": self.exit,
@@ -635,7 +634,7 @@ class Selectmusic(Screen):
 		if not pathExists(currDir):
 			currDir = "/"
 		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib" , "/proc", "/ram", "/root" , "/sbin", "/sys", "/tmp", "/usr", "/var"]		
-		self.filelist = FileList(currDir, useServiceRef = True, showDirectories = True, showFiles = True, matchingPattern = "(?i)^.*\.(m3u|mp2|mp3|wav|wave|pls|wma|m4a|ogg|ra|flac)", inhibitDirs = inhibitDirs)
+		self.filelist = FileList(currDir, useServiceRef=True, showDirectories=True, showFiles=True, matchingPattern="(?i)^.*\.(m3u|mp2|mp3|wav|wave|pls|wma|m4a|ogg|ra|flac)", inhibitDirs=inhibitDirs)
 		self["filelist"] = self.filelist
 		self["currentfolder"] = Label()
 		self["currentfolder"].setText(str(currDir))

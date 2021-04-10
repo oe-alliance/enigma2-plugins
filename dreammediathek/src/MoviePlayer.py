@@ -27,9 +27,9 @@ from ServiceXML import iWebTVStations
 
 config.plugins.dreamMediathek = ConfigSubsection()
 config.plugins.dreamMediathek.general = ConfigSubsection()
-config.plugins.dreamMediathek.general.on_movie_stop = ConfigSelection(default = "ask", choices = [
+config.plugins.dreamMediathek.general.on_movie_stop = ConfigSelection(default="ask", choices=[
 	("ask", _("Ask user")), ("quit", _("Return to movie list")), ("playnext", _("Play next video")), ("playagain", _("Play video again")) ])
-config.plugins.dreamMediathek.general.on_exit = ConfigSelection(default = "ask", choices = [
+config.plugins.dreamMediathek.general.on_exit = ConfigSelection(default="ask", choices=[
 	("ask", _("Ask user")), ("quit", _("Return to movie list"))])
 
 
@@ -62,7 +62,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 		</widget>
 		</screen>"""
 
-	def __init__(self, session, service, lastservice, infoCallback = None, nextCallback = None, prevCallback = None):
+	def __init__(self, session, service, lastservice, infoCallback=None, nextCallback=None, prevCallback=None):
 		Screen.__init__(self, session)
 		InfoBarNotifications.__init__(self)
 		self.session = session
@@ -74,8 +74,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 		self.nextservice = None
 
 		print "evEOF=%d" % iPlayableService.evEOF
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evSeekableStatusChanged: self.__seekableStatusChanged,
 				iPlayableService.evStart: self.__serviceStarted,
 				iPlayableService.evEOF: self.__evEOF,
@@ -272,7 +271,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 		
 		return True
 
-	def handleLeave(self, how, error = False):
+	def handleLeave(self, how, error=False):
 		self.is_closing = True
 		if how == "ask":
 			list = (
@@ -282,9 +281,9 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 				(_("Yes, but play previous video"), "playprev"),
 			)
 			if error is False:
-				self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Stop playing this movie?"), list = list)
+				self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Stop playing this movie?"), list=list)
 			else:
-				self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("No playable video found! Stop playing this movie?"), list = list)
+				self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("No playable video found! Stop playing this movie?"), list=list)
 		else:
 			self.leavePlayerConfirmed([True, how])
 

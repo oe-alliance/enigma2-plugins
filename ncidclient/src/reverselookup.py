@@ -105,7 +105,7 @@ countries = { }
 reverselookupMtime = 0
 
 class ReverseLookupAndNotify:
-	def __init__(self, number, notificationCallback=out, charset="cp1252", countrycode = "0049"):
+	def __init__(self, number, notificationCallback=out, charset="cp1252", countrycode="0049"):
 		debug("[ReverseLookupAndNotify] reverse Lookup for %s!" %number)
 		self.number = number
 		self.notificationCallback = notificationCallback
@@ -357,7 +357,7 @@ class ReverseLookupAndNotify:
 			self._gotError("[ReverseLookupAndNotify] _gotPage: Nothing found at %s" %self.currentWebsite.getAttribute("name"))
 			return False
 			
-	def _gotError(self, error = ""):
+	def _gotError(self, error=""):
 		debug("[ReverseLookupAndNotify] _gotError - Error: %s" %error)
 		if self.nextWebsiteNo >= len(self.websites):
 			debug("[ReverseLookupAndNotify] _gotError: I give up")

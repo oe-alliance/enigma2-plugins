@@ -70,10 +70,10 @@ def autostart(reason, session=None, **kwargs):
 				mountagaincheckpoller = MountAgainCheckPoller(session)
 		# session.nav.RecordTimer.isRecording()
 
-def NetworkBrowserMain(session, iface = None, **kwargs):
+def NetworkBrowserMain(session, iface=None, **kwargs):
 	session.open(NetworkBrowser,iface, plugin_path)
 
-def MountManagerMain(session, iface = None, **kwargs):
+def MountManagerMain(session, iface=None, **kwargs):
 	session.open(AutoMountManager, iface, plugin_path)
 
 def NetworkBrowserCallFunction(iface):
@@ -82,7 +82,7 @@ def NetworkBrowserCallFunction(iface):
 def MountManagerCallFunction(iface):
 	return MountManagerMain
 
-def RemountMain(session, iface = None, **kwargs):
+def RemountMain(session, iface=None, **kwargs):
 	from AutoMount import iAutoMount
 	iAutoMount.getAutoMountPoints() 
 
@@ -96,8 +96,8 @@ def Plugins(path, **kwargs):
 	global plugin_path
 	plugin_path = path
 	return [
-		PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART,PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart),
-		PluginDescriptor(name=_("Network Browser"), description=_("Search for network shares"), where = PluginDescriptor.WHERE_NETWORKMOUNTS, fnc={"ifaceSupported": NetworkBrowserCallFunction, "menuEntryName": lambda x: _("Network Browser"), "menuEntryDescription": lambda x: _("Search for network shares...")}),
-		PluginDescriptor(name=_("Mount Manager"), description=_("Manage network shares"), where = PluginDescriptor.WHERE_NETWORKMOUNTS, fnc={"ifaceSupported": MountManagerCallFunction, "menuEntryName": lambda x: _("Mount Manager"), "menuEntryDescription": lambda x: _("Manage your network shares...")}),
-		PluginDescriptor(name=_("Mount Again"), description=_("Attempt to mount shares again"), where = PluginDescriptor.WHERE_NETWORKMOUNTS, fnc={"ifaceSupported": RemountCallFunction, "menuEntryName": lambda x: _("Mount again"), "menuEntryDescription": lambda x: _("Attempt to recover lost mounts (in background)")})
+		PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART,PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart),
+		PluginDescriptor(name=_("Network Browser"), description=_("Search for network shares"), where=PluginDescriptor.WHERE_NETWORKMOUNTS, fnc={"ifaceSupported": NetworkBrowserCallFunction, "menuEntryName": lambda x: _("Network Browser"), "menuEntryDescription": lambda x: _("Search for network shares...")}),
+		PluginDescriptor(name=_("Mount Manager"), description=_("Manage network shares"), where=PluginDescriptor.WHERE_NETWORKMOUNTS, fnc={"ifaceSupported": MountManagerCallFunction, "menuEntryName": lambda x: _("Mount Manager"), "menuEntryDescription": lambda x: _("Manage your network shares...")}),
+		PluginDescriptor(name=_("Mount Again"), description=_("Attempt to mount shares again"), where=PluginDescriptor.WHERE_NETWORKMOUNTS, fnc={"ifaceSupported": RemountCallFunction, "menuEntryName": lambda x: _("Mount again"), "menuEntryDescription": lambda x: _("Attempt to recover lost mounts (in background)")})
 	]

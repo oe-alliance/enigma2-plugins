@@ -428,7 +428,7 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 		self.session.openWithCallback(
 			self.menuCallback,
 			ChoiceBox,
-			list = list,
+			list=list,
 		)
 
 	def menuCallback(self, ret):

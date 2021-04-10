@@ -189,8 +189,7 @@ class MC_VLCMedialist(Screen):
 
 		self.curfavfolder = -1
 
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				#iPlayableService.evStart: self.doEofInternal,
 				iPlayableService.evEnd: self.StopPlayback,
 				iPlayableService.evEOF: self.StopPlayback,
@@ -440,7 +439,7 @@ class MC_VLCMedialist(Screen):
 			self["currentmedia"].setText(("%s") % (self.favname))
 			self.changeDir(self.currDir)
 
-	def JumpToFolder(self, jumpto = None):
+	def JumpToFolder(self, jumpto=None):
 		if jumpto is None:
 			return
 		else:
@@ -599,7 +598,7 @@ class FavoriteFolderAdd(Screen, ConfigListScreen):
 			<widget name="config" position="10,10" size="380,100" />
 		</screen>"""
 
-	def __init__(self, session, directory = "/", name = ""):
+	def __init__(self, session, directory="/", name=""):
 		Screen.__init__(self, session)
 
 		self["actions"] = NumberActionMap(["SetupActions","OkCancelActions"],

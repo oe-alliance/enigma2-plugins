@@ -479,7 +479,7 @@ class SatloaderList(MenuList):
 		self.list = []
 		self.setList(self.list)
 
-	def addSelection(self, description, value, index, selected = False):
+	def addSelection(self, description, value, index, selected=False):
 		self.list.append(SatListEntry(description, value, index, selected))
 		self.setList(self.list)
 
@@ -522,6 +522,6 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	return [
-		PluginDescriptor(name="Satloader Plugin", description="updates satellites.xml", icon="satloader.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
-		PluginDescriptor(name="Satloader Plugin", description="updates satellites.xml", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)
+		PluginDescriptor(name="Satloader Plugin", description="updates satellites.xml", icon="satloader.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+		PluginDescriptor(name="Satloader Plugin", description="updates satellites.xml", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)
 		]

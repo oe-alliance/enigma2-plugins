@@ -59,21 +59,21 @@ from . import _
 coverfiles = ("/tmp/.cover.ping", "/tmp/.cover.pong")
 containerStreamripper = None
 config.plugins.shoutcast = ConfigSubsection()
-config.plugins.shoutcast.showcover = ConfigYesNo(default = True)
-config.plugins.shoutcast.showinextensions = ConfigYesNo(default = False)
-config.plugins.shoutcast.streamingrate = ConfigSelection(default="0", choices = [("0",_("All")), ("64",_(">= 64 kbps")), ("128",_(">= 128 kbps")), ("192",_(">= 192 kbps")), ("256",_(">= 256 kbps"))])
-config.plugins.shoutcast.reloadstationlist = ConfigSelection(default="0", choices = [("0",_("Off")), ("1",_("every minute")), ("3",_("every three minutes")), ("5",_("every five minutes"))])
-config.plugins.shoutcast.dirname = ConfigDirectory(default = "/media/hdd/streamripper/")
-config.plugins.shoutcast.riptosinglefile = ConfigYesNo(default = False)
-config.plugins.shoutcast.createdirforeachstream = ConfigYesNo(default = True)
-config.plugins.shoutcast.addsequenceoutputfile = ConfigYesNo(default = False)
-config.plugins.shoutcast.cover_width = ConfigNumber(default = 200)
-config.plugins.shoutcast.cover_height = ConfigNumber(default = 300)
+config.plugins.shoutcast.showcover = ConfigYesNo(default=True)
+config.plugins.shoutcast.showinextensions = ConfigYesNo(default=False)
+config.plugins.shoutcast.streamingrate = ConfigSelection(default="0", choices=[("0",_("All")), ("64",_(">= 64 kbps")), ("128",_(">= 128 kbps")), ("192",_(">= 192 kbps")), ("256",_(">= 256 kbps"))])
+config.plugins.shoutcast.reloadstationlist = ConfigSelection(default="0", choices=[("0",_("Off")), ("1",_("every minute")), ("3",_("every three minutes")), ("5",_("every five minutes"))])
+config.plugins.shoutcast.dirname = ConfigDirectory(default="/media/hdd/streamripper/")
+config.plugins.shoutcast.riptosinglefile = ConfigYesNo(default=False)
+config.plugins.shoutcast.createdirforeachstream = ConfigYesNo(default=True)
+config.plugins.shoutcast.addsequenceoutputfile = ConfigYesNo(default=False)
+config.plugins.shoutcast.cover_width = ConfigNumber(default=200)
+config.plugins.shoutcast.cover_height = ConfigNumber(default=300)
 
 devid = "fa1jo93O_raeF0v9"
 
 class SHOUTcastGenre:
-	def __init__(self, name = "", id = 0, haschilds = "false", parentid = 0, opened = "false"):
+	def __init__(self, name="", id=0, haschilds="false", parentid=0, opened="false"):
 		self.name = name
 		self.id = id
 		self.haschilds = haschilds
@@ -81,7 +81,7 @@ class SHOUTcastGenre:
 		self.opened = opened
 
 class SHOUTcastStation:
-	def __init__(self, name = "", mt = "", id = "", br = "", genre = "", ct = "", lc = "", ml = "", nsc = "", cst = ""):
+	def __init__(self, name="", mt="", id="", br="", genre="", ct="", lc="", ml="", nsc="", cst=""):
 		self.name = name.replace("- a SHOUTcast.com member station", "")
 		self.mt = mt
 		self.id = id
@@ -94,7 +94,7 @@ class SHOUTcastStation:
 		self.cst = cst
 
 class Favorite:
-	def __init__(self, configItem = None):
+	def __init__(self, configItem=None):
 		self.configItem = configItem
 
 class myHTTPClientFactory(HTTPClientFactory):
@@ -130,9 +130,9 @@ def main(session,**kwargs):
 	session.open(SHOUTcastWidget)
 
 def Plugins(**kwargs):
-	list = [PluginDescriptor(name="SHOUTcast", description=_("listen to shoutcast internet-radio"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=main)] # always show in plugin menu
+	list = [PluginDescriptor(name="SHOUTcast", description=_("listen to shoutcast internet-radio"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=main)] # always show in plugin menu
 	if config.plugins.shoutcast.showinextensions.value:
-		list.append (PluginDescriptor(name="SHOUTcast", description=_("listen to shoutcast internet-radio"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main))
+		list.append (PluginDescriptor(name="SHOUTcast", description=_("listen to shoutcast internet-radio"), where=[PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main))
 	return list
 
 class SHOUTcastWidget(Screen):
@@ -316,11 +316,11 @@ class SHOUTcastWidget(Screen):
 					keyslist.append('blue')
 				else:
 					if len(self.currentStreamingURL) == 0:
-						self.session.open(MessageBox, _("First play streaming!"), MessageBox.TYPE_INFO, timeout = 5)
+						self.session.open(MessageBox, _("First play streaming!"), MessageBox.TYPE_INFO, timeout=5)
 						return
 					modeslist.append((_("Activate Picture in Picture"), "start"))
 					keyslist.append('blue')
-				dlg = self.session.openWithCallback(self.pipAnswerConfirmed, ChoiceBox, title=_("Choose action:"), list = modeslist, keys = keyslist)
+				dlg = self.session.openWithCallback(self.pipAnswerConfirmed, ChoiceBox, title=_("Choose action:"), list=modeslist, keys=keyslist)
 				dlg.setTitle(_("Menu PiP"))
 
 	def pipAnswerConfirmed(self, answer):
@@ -388,7 +388,7 @@ class SHOUTcastWidget(Screen):
 								break
 				else:
 					slist.moveDown()
-				slist.zap(enable_pipzap = True)
+				slist.zap(enable_pipzap=True)
 		except:
 			pass
 
@@ -414,7 +414,7 @@ class SHOUTcastWidget(Screen):
 								break
 				else:
 					slist.moveUp()
-				slist.zap(enable_pipzap = True)
+				slist.zap(enable_pipzap=True)
 		except:
 			pass
 
@@ -437,14 +437,14 @@ class SHOUTcastWidget(Screen):
 			# print "[SHOUTcast] reloadStationList: %s " % self.stationListURL
 			sendUrlCommand(self.stationListURL, None,10).addCallback(self.callbackStationList).addErrback(self.callbackStationListError)
 
-	def InputBoxStartRecordingCallback(self, returnValue = None):
+	def InputBoxStartRecordingCallback(self, returnValue=None):
 		if returnValue:
 			recordingLength =  int(returnValue) * 60
 			if not os.path.exists(config.plugins.shoutcast.dirname.value):
 				try:
 					os.mkdir(config.plugins.shoutcast.dirname.value)
 				except:
-					self.session.open(MessageBox, _("Error create directory %s!") % config.plugins.shoutcast.dirname.value, MessageBox.TYPE_ERROR, timeout = 10)
+					self.session.open(MessageBox, _("Error create directory %s!") % config.plugins.shoutcast.dirname.value, MessageBox.TYPE_ERROR, timeout=10)
 					return
 			args = []
 			args.append(self.currentStreamingURL)
@@ -463,7 +463,7 @@ class SHOUTcastWidget(Screen):
 			if config.plugins.shoutcast.addsequenceoutputfile.value:
 				args.append('-q')
 			if not fileExists(self.STREAMRIPPER_BIN):
-				self.session.open(MessageBox, _("streamripper not installed!"), MessageBox.TYPE_ERROR, timeout = 10)
+				self.session.open(MessageBox, _("streamripper not installed!"), MessageBox.TYPE_ERROR, timeout=10)
 				return
 			cmd = [self.STREAMRIPPER_BIN, self.STREAMRIPPER_BIN] + args
 			containerStreamripper.execute(*cmd)
@@ -479,9 +479,9 @@ class SHOUTcastWidget(Screen):
 				self.session.openWithCallback(self.deleteRecordingConfirmed, MessageBox, _("Do you really want to stop the recording?"))
 			else:
 				if len(self.currentStreamingURL) != 0:
-					self.session.openWithCallback(self.InputBoxStartRecordingCallback, InputBox, windowTitle = _("Recording length"),  title=_("Enter in minutes (0 means unlimited)"), text="0", type=Input.NUMBER)
+					self.session.openWithCallback(self.InputBoxStartRecordingCallback, InputBox, windowTitle=_("Recording length"),  title=_("Enter in minutes (0 means unlimited)"), text="0", type=Input.NUMBER)
 				else:
-					self.session.open(MessageBox, _("Only running streamings can be recorded!"), type = MessageBox.TYPE_INFO,timeout = 20 )
+					self.session.open(MessageBox, _("Only running streamings can be recorded!"), type=MessageBox.TYPE_INFO,timeout=20 )
 		else:
 			if self.pipZapAvailable is not None and SystemInfo.get("NumVideoDecoders", 1) > 1:
 				self.activatePiP()
@@ -526,7 +526,7 @@ class SHOUTcastWidget(Screen):
 			else:
 				self.showWindow()
 
-	def getFavoriteList(self, favoriteListIndex = 0):
+	def getFavoriteList(self, favoriteListIndex=0):
 		self["statustext"].setText("")
 		self.headerTextString = _("Favorite list")
 		self["headertext"].setText(self.headerTextString)
@@ -540,7 +540,7 @@ class SHOUTcastWidget(Screen):
 			self["list"].moveToIndex(favoriteListIndex)
 		self["list"].show()
 
-	def getGenreList(self, genre = "all" , id = 0):
+	def getGenreList(self, genre="all" , id=0):
 		self["headertext"].setText("")
 		self["statustext"].setText(_("Getting SHOUTcast genre list for %s..." % genre))
 		self["list"].hide()
@@ -561,7 +561,7 @@ class SHOUTcastWidget(Screen):
 		else:
 			self.showGenreList()
 
-	def callbackGenreListError(self, error = None):
+	def callbackGenreListError(self, error=None):
 		if error is not None:
 			try:
 				self["list"].hide()
@@ -587,7 +587,7 @@ class SHOUTcastWidget(Screen):
 				gparentid = childs.get("parentid")
 				ghaschilds = childs.get("haschildren")
 				#print "[SHOUTcast] Genre %s id=%s parent=%s haschilds=%s\n" % (gn, gid, gparentid, ghaschilds)
-				genreList.append(SHOUTcastGenre(name = gn, id = gid, parentid = gparentid, haschilds = ghaschilds))
+				genreList.append(SHOUTcastGenre(name=gn, id=gid, parentid=gparentid, haschilds=ghaschilds))
 				if ghaschilds == "true":
 					for childlist in childs.findall("genrelist"):
 						for genre in childlist.findall("genre"):
@@ -596,7 +596,7 @@ class SHOUTcastWidget(Screen):
 							gparentid = genre.get("parentid")
 							ghaschilds = genre.get("haschildren")
 							# print "[SHOUTcast]   Genre %s id=%s parent=%s haschilds=%s\n" % (gn, gid, gparentid, ghaschilds)
-							genreList.append(SHOUTcastGenre(name = gn, id = gid, parentid = gparentid, haschilds = ghaschilds))
+							genreList.append(SHOUTcastGenre(name=gn, id=gid, parentid=gparentid, haschilds=ghaschilds))
 		return genreList
 
 	def showGenreList(self):
@@ -736,10 +736,10 @@ class SHOUTcastWidget(Screen):
 				except:
 					bitrate = 0
 				if bitrate >= config_bitrate:
-					stationList.append(SHOUTcastStation(name = childs.get("name"), 
-									mt = childs.get("mt"), id = childs.get("id"), br = childs.get("br"), 
-									genre = childs.get("genre"), ct = childs.get("ct"), lc = childs.get("lc"), ml = childs.get("ml"), nsc = childs.get("nsc"),
-									cst = childs.get("cst")))
+					stationList.append(SHOUTcastStation(name=childs.get("name"), 
+									mt=childs.get("mt"), id=childs.get("id"), br=childs.get("br"), 
+									genre=childs.get("genre"), ct=childs.get("ct"), lc=childs.get("lc"), ml=childs.get("ml"), nsc=childs.get("nsc"),
+									cst=childs.get("cst")))
 		return stationList
 
 	def menu_pressed(self):
@@ -758,7 +758,7 @@ class SHOUTcastWidget(Screen):
 		options.extend(((_("Hide"), self.hideWindow),))
 		if self.pipZapAvailable is not None and SystemInfo.get("NumVideoDecoders", 1) > 1:
 			options.extend(((_("Menu PiP"), self.activatePiP),))
-		self.session.openWithCallback(self.menuCallback, ChoiceBox,list = options)
+		self.session.openWithCallback(self.menuCallback, ChoiceBox,list=options)
 
 	def menuCallback(self, ret):
 		ret and ret[1]()
@@ -774,17 +774,17 @@ class SHOUTcastWidget(Screen):
 	def addGenreToFavorite(self):
 		sel = self.getSelectedItem()
 		if sel is not None:
-			self.addFavorite(name = sel.name, text = sel.name, favoritetype = "genre")
+			self.addFavorite(name=sel.name, text=sel.name, favoritetype="genre")
 
 	def addStationToFavorite(self):
 		sel = self.getSelectedItem()
 		if sel is not None:
-			self.addFavorite(name = sel.name, text = self.SCY + "/sbin/tunein-station.pls?id=%s" % (sel.id), favoritetype = "pls", audio = sel.mt, bitrate = sel.br)			
+			self.addFavorite(name=sel.name, text=self.SCY + "/sbin/tunein-station.pls?id=%s" % (sel.id), favoritetype="pls", audio=sel.mt, bitrate=sel.br)			
 
 	def addCurrentStreamToFavorite(self):
-		self.addFavorite(name = self.currentStreamingStation, text = self.currentStreamingURL, favoritetype = "url")
+		self.addFavorite(name=self.currentStreamingStation, text=self.currentStreamingURL, favoritetype="url")
 
-	def addFavorite(self, name = "", text = "", favoritetype = "", audio = "", bitrate = ""):
+	def addFavorite(self, name="", text="", favoritetype="", audio="", bitrate=""):
 		self.favoriteConfig.entriescount.value = self.favoriteConfig.entriescount.value + 1
 		self.favoriteConfig.entriescount.save()
 		newFavorite = self.initFavouriteEntryConfig()
@@ -799,9 +799,9 @@ class SHOUTcastWidget(Screen):
 	def renameFavorite(self):
 		sel = self.getSelectedItem()
 		if sel is not None:
-			self.session.openWithCallback(self.renameFavoriteFinished, VirtualKeyBoard, title = _("Enter new name for favorite item"), text = sel.configItem.name.value)
+			self.session.openWithCallback(self.renameFavoriteFinished, VirtualKeyBoard, title=_("Enter new name for favorite item"), text=sel.configItem.name.value)
 
-	def renameFavoriteFinished(self, text = None):
+	def renameFavoriteFinished(self, text=None):
 		if text:
 			sel = self.getSelectedItem()
 			sel.configItem.name.value = text
@@ -822,9 +822,9 @@ class SHOUTcastWidget(Screen):
 			self.getFavoriteList()
 
 	def search(self):
-		self.session.openWithCallback(self.searchSHOUTcast, VirtualKeyBoard, title = _("Enter text to search for"))
+		self.session.openWithCallback(self.searchSHOUTcast, VirtualKeyBoard, title=_("Enter text to search for"))
 
-	def searchSHOUTcast(self, searchstring = None):
+	def searchSHOUTcast(self, searchstring=None):
 		if searchstring:
 			self.stopReloadStationListTimer()
 			self.stationListHeader = _("search-criteria %s") % searchstring
@@ -856,7 +856,7 @@ class SHOUTcastWidget(Screen):
 				self.stationListIndex = 0
 				self.callbackStationList(self.stationListXML)
 
-	def callbackStationListError(self, error = None):
+	def callbackStationListError(self, error=None):
 		if error is not None:
 			try:
 				self["list"].hide()
@@ -864,7 +864,7 @@ class SHOUTcastWidget(Screen):
 			except:
 				pass
 
-	def Error(self, error = None):
+	def Error(self, error=None):
 		if error is not None:
 			# print "[SHOUTcast] Error: %s\n" % error
 			try:
@@ -1022,11 +1022,11 @@ class SHOUTcastWidget(Screen):
 	def initFavouriteEntryConfig(self):
 		self.favoriteConfig.Entries.append(ConfigSubsection())
 		i = len(self.favoriteConfig.Entries) -1
-		self.favoriteConfig.Entries[i].name = ConfigText(default = "")
-		self.favoriteConfig.Entries[i].text = ConfigText(default = "")
-		self.favoriteConfig.Entries[i].type = ConfigText(default = "")
-		self.favoriteConfig.Entries[i].audio = ConfigText(default = "")
-		self.favoriteConfig.Entries[i].bitrate = ConfigText(default = "")
+		self.favoriteConfig.Entries[i].name = ConfigText(default="")
+		self.favoriteConfig.Entries[i].text = ConfigText(default="")
+		self.favoriteConfig.Entries[i].type = ConfigText(default="")
+		self.favoriteConfig.Entries[i].audio = ConfigText(default="")
+		self.favoriteConfig.Entries[i].bitrate = ConfigText(default="")
 		return self.favoriteConfig.Entries[i]
 
 	def initFavouriteConfig(self):
@@ -1297,7 +1297,7 @@ class SHOUTcastStreamripperRecordingPath(Screen):
 		self.setTitle(_("Select record path for streamripper"))
 		inhibitDirs = ["/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/usr", "/var"]
 		inhibitMounts = []
-		self["filelist"] = FileList(initDir, showDirectories = True, showFiles = False, inhibitMounts = inhibitMounts, inhibitDirs = inhibitDirs)
+		self["filelist"] = FileList(initDir, showDirectories=True, showFiles=False, inhibitMounts=inhibitMounts, inhibitDirs=inhibitDirs)
 		self["target"] = Label()
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EPGSelectActions"],
 		{

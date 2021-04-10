@@ -36,8 +36,7 @@ class AutomaticVolumeAdjustment(Screen):
 		self.session = session
 		Screen.__init__(self, session)
 		print "[AutomaticVolumeAdjustment] Starting AutomaticVolumeAdjustment..."
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evUpdatedInfo: self.__evUpdatedInfo,
 				iPlayableService.evStart: self.__evStart,
 				iPlayableService.evEnd: self.__evEnd

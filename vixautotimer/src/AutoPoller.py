@@ -40,7 +40,7 @@ class AutoPoller:
 				print "[AutoTimer] Auto Poll Started"
 				# Ignore any program errors
 				try:
-					ret = autotimer.parseEPG(autoPoll = True)
+					ret = autotimer.parseEPG(autoPoll=True)
 				except Exception:
 					# Dump error to stdout
 					import traceback
@@ -50,7 +50,7 @@ class AutoPoller:
 				print "[AutoTimer] Auto Poll Started"
 				# Ignore any program errors
 				try:
-					ret = autotimer.parseEPG(autoPoll = True)
+					ret = autotimer.parseEPG(autoPoll=True)
 				except Exception:
 					# Dump error to stdout
 					import traceback

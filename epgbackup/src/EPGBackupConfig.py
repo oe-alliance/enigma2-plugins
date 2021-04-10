@@ -48,7 +48,7 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 		
 		self.session = session
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session, on_change = self.changed)
+		ConfigListScreen.__init__(self, self.list, session, on_change=self.changed)
 		self["config"].onSelectionChanged.append(self._updateHelp)
 		self._getConfig()
 		
@@ -91,7 +91,7 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 		
 		self.confShowSetupIn = config.plugins.epgbackup.show_setup_in.value
 		
-		config.plugins.epgbackup.backup_strategy.addNotifier(self.updateVariableHelpText, initial_call = False, immediate_feedback = True)
+		config.plugins.epgbackup.backup_strategy.addNotifier(self.updateVariableHelpText, initial_call=False, immediate_feedback=True)
 		self.onClose.append(self.removeNotifiers)
 		
 		self.needsEnigmaRestart = False
@@ -130,7 +130,7 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 		self.session.openWithCallback(
 			self.menuCallback,
 			ChoiceBox,
-			list = menuList,
+			list=menuList,
 		)
 
 	def menuCallback(self, menuinfo):
@@ -145,7 +145,7 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 						epgbackup.forceRestoreBySize()
 				elif menuinfo == "MENU_RETURN_DO_BACKUP":
 					if epgbackup:
-						epgbackup.makeBackup(interactive = True)
+						epgbackup.makeBackup(interactive=True)
 				elif menuinfo == "MENU_RETURN_SET_NEXT_BOOT_RESTORE":
 					if epgbackup:
 						epgbackup.setNextBootRestore()

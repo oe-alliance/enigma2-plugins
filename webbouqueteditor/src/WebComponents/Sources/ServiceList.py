@@ -4,13 +4,13 @@ from Components.ParentalControl import parentalControl, IMG_WHITESERVICE, IMG_WH
 from Components.config import config
 
 class ServiceList(Source):
-	def __init__(self, root, command_func = None, validate_commands = True):
+	def __init__(self, root, command_func=None, validate_commands=True):
 		Source.__init__(self)
 		self.root = root
 		self.command_func = command_func
 		self.validate_commands = validate_commands
 
-	def getServicesAsList(self, format = "RN"):
+	def getServicesAsList(self, format="RN"):
 		services = self.getServiceList()
 		mylist = services and services.getContent(format, True)
 		list = []

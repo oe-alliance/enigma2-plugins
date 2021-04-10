@@ -18,7 +18,7 @@ def getAspect():
     return r
 
 class WebPixmap(Pixmap):
-    def __init__(self, default = None):
+    def __init__(self, default=None):
         Pixmap.__init__(self)
         self.picload = ePicLoad()
         self.picload.PictureData.get().append(self.setPixmapCB)
@@ -32,7 +32,7 @@ class WebPixmap(Pixmap):
         background = '#ff000000'
         self.picload.setPara((self.instance.size().width(), self.instance.size().height(), sc[0], sc[1], False, resize, background))
 
-    def load(self, url = None):
+    def load(self, url=None):
         tmpfile = ''.join((self.cachedir, quote_plus(url), ''))
         if os_path_isdir(self.cachedir) is False:
             print "cachedir not existing, creating it"
@@ -59,7 +59,7 @@ class WebPixmap(Pixmap):
         if os_isfile(self.tmpfile):
             os_remove(self.tmpfile)
 
-    def setPixmapCB(self, picInfo = None):
+    def setPixmapCB(self, picInfo=None):
         if os_isfile(self.tmpfile):
             os_remove(self.tmpfile)
         ptr = self.picload.getData()

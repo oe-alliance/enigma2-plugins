@@ -28,7 +28,7 @@ class ProwlAPI:
 			'priority': priority,
 		}
 
-		getPage('https://prowl.weks.net/publicapi/add/', method = 'POST', headers = headers, postdata = urlencode(data)).addErrback(emergencyDisable)
+		getPage('https://prowl.weks.net/publicapi/add/', method='POST', headers=headers, postdata=urlencode(data)).addErrback(emergencyDisable)
 
 	def stop(self):
 		defer = Deferred()

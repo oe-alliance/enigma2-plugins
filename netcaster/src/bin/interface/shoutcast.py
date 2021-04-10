@@ -162,7 +162,7 @@ class GenreParse(ContentHandler):
             self.isGenreList = False
 
 class GenreFeed:
-    def __init__(self, cache_ttl=3600, cache_dir = '/tmp/pyshout_cache'):
+    def __init__(self, cache_ttl=3600, cache_dir='/tmp/pyshout_cache'):
         self.cache_ttl = cache_ttl
         self.cache_file = cache_dir + '/genres.cache'
 	self.genre_list = ['Sorry, failed to load', '...try again later', 'Rock', 'Pop', 'Alternative']

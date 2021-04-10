@@ -65,7 +65,7 @@ class AutoTimerImportSelector(Screen):
 
 		l.extend([(timer, False) for timer in self.session.nav.RecordTimer.timer_list])
 		l.extend([(timer, True) for timer in self.session.nav.RecordTimer.processed_timers])
-		l.sort(key = lambda x: x[0].begin)
+		l.sort(key=lambda x: x[0].begin)
 
 	def importerClosed(self, ret):
 		ret = ret and ret[0]
@@ -313,7 +313,7 @@ class AutoTimerImporter(Screen):
 			self.session.openWithCallback(
 					self.gotCustomMatch,
 					InputBox,
-					title = _("Please provide a Text to match")
+					title=_("Please provide a Text to match")
 			)
 		else:
 			self.close((

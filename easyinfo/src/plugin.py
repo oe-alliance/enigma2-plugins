@@ -81,31 +81,31 @@ CHOICELIST=[("no", _("Disabled")),
 			("sysinfo", _("Sherlock"))
 			]
 config.plugins.EasyInfo  = ConfigSubsection()
-config.plugins.EasyInfo.pos1 = ConfigSelection(default="eventinfo", choices = CHOICELIST)
-config.plugins.EasyInfo.pos2 = ConfigSelection(default="singleepg", choices = CHOICELIST)
-config.plugins.EasyInfo.pos3 = ConfigSelection(default="merlinepg", choices = CHOICELIST)
-config.plugins.EasyInfo.pos4 = ConfigSelection(default="timers", choices = CHOICELIST)
-config.plugins.EasyInfo.pos5 = ConfigSelection(default="channelinfo", choices = CHOICELIST)
-config.plugins.EasyInfo.pos6 = ConfigSelection(default="no", choices = CHOICELIST)
-config.plugins.EasyInfo.pos7 = ConfigSelection(default="no", choices = CHOICELIST)
-config.plugins.EasyInfo.pos8 = ConfigSelection(default="no", choices = CHOICELIST)
-config.plugins.EasyInfo.pos9 = ConfigSelection(default="no", choices = CHOICELIST)
-config.plugins.EasyInfo.pos10 = ConfigSelection(default="no", choices = CHOICELIST)
-config.plugins.EasyInfo.pos11 = ConfigSelection(default="no", choices = CHOICELIST)
-config.plugins.EasyInfo.EvInStart = ConfigSelection(default="yes", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
+config.plugins.EasyInfo.pos1 = ConfigSelection(default="eventinfo", choices=CHOICELIST)
+config.plugins.EasyInfo.pos2 = ConfigSelection(default="singleepg", choices=CHOICELIST)
+config.plugins.EasyInfo.pos3 = ConfigSelection(default="merlinepg", choices=CHOICELIST)
+config.plugins.EasyInfo.pos4 = ConfigSelection(default="timers", choices=CHOICELIST)
+config.plugins.EasyInfo.pos5 = ConfigSelection(default="channelinfo", choices=CHOICELIST)
+config.plugins.EasyInfo.pos6 = ConfigSelection(default="no", choices=CHOICELIST)
+config.plugins.EasyInfo.pos7 = ConfigSelection(default="no", choices=CHOICELIST)
+config.plugins.EasyInfo.pos8 = ConfigSelection(default="no", choices=CHOICELIST)
+config.plugins.EasyInfo.pos9 = ConfigSelection(default="no", choices=CHOICELIST)
+config.plugins.EasyInfo.pos10 = ConfigSelection(default="no", choices=CHOICELIST)
+config.plugins.EasyInfo.pos11 = ConfigSelection(default="no", choices=CHOICELIST)
+config.plugins.EasyInfo.EvInStart = ConfigSelection(default="yes", choices=[("no", _("Disabled")), ("yes", _("Enabled"))])
 config.plugins.EasyInfo.bEvInYellow = ConfigSelection(default="singleepg", choices=[("singleepg", _("Single EPG")),("multiepg", _("Multi EPG")),("easypg", _("Easy-PG")),("graphepg", _("Graphik multi-EPG")),("merlinepg", _("Merlin EPG")),("cooltv", _("Cool-TV")),("imdbinfo", _("IMDB info"))])
 config.plugins.EasyInfo.bEvInBlue = ConfigSelection(default="multiepg", choices=[("singleepg", _("Single EPG")),("multiepg", _("Multi EPG")),("easypg", _("Easy-PG")),("graphepg", _("Graphik multi-EPG")),("merlinepg", _("Merlin EPG")),("cooltv", _("Cool-TV")),("imdbinfo", _("IMDB info"))])
-config.plugins.EasyInfo.myPicons = ConfigSelection(default="/media/usb/epgpicon/", choices = [("/media/usb/epgpicon/", "/media/usb/epgpicon/"), ("/media/cf/epgpicon/", "/media/cf/epgpicon/"), ("/media/hdd/epgpicon/", "/media/hdd/epgpicon/"), ("/usr/share/enigma2/epgpicon/", "/usr/share/enigma2/epgpicon/")])
-config.plugins.EasyInfo.epgOKFunc = ConfigSelection(default="info", choices = [("info", _("Event info")), ("zap", _("Just zap")),("exitzap", _("Zap and Exit"))])
-config.plugins.EasyInfo.Primetime1 = ConfigClock(default = 63000)
-config.plugins.EasyInfo.Primetime2 = ConfigClock(default = 69300)
-config.plugins.EasyInfo.Primetime3 = ConfigClock(default = 75600)
-config.plugins.EasyInfo.buttTV = ConfigSelection(default="easysel", choices = [("no", _("Disabled")), ("easysel", _("Easy-Selection")), ("easypg", _("Easy-PG"))])
+config.plugins.EasyInfo.myPicons = ConfigSelection(default="/media/usb/epgpicon/", choices=[("/media/usb/epgpicon/", "/media/usb/epgpicon/"), ("/media/cf/epgpicon/", "/media/cf/epgpicon/"), ("/media/hdd/epgpicon/", "/media/hdd/epgpicon/"), ("/usr/share/enigma2/epgpicon/", "/usr/share/enigma2/epgpicon/")])
+config.plugins.EasyInfo.epgOKFunc = ConfigSelection(default="info", choices=[("info", _("Event info")), ("zap", _("Just zap")),("exitzap", _("Zap and Exit"))])
+config.plugins.EasyInfo.Primetime1 = ConfigClock(default=63000)
+config.plugins.EasyInfo.Primetime2 = ConfigClock(default=69300)
+config.plugins.EasyInfo.Primetime3 = ConfigClock(default=75600)
+config.plugins.EasyInfo.buttTV = ConfigSelection(default="easysel", choices=[("no", _("Disabled")), ("easysel", _("Easy-Selection")), ("easypg", _("Easy-PG"))])
 
 
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = EasyInfoAutostart)]
+	return [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=EasyInfoAutostart)]
 
 
 
@@ -220,7 +220,7 @@ def EINPanelEntryComponent(key, text):
 
 
 class EINPanelList(MenuList):
-	def __init__(self, list, selection = 0, enableWrapAround=True):
+	def __init__(self, list, selection=0, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setItemHeight(60)
@@ -271,7 +271,7 @@ class ConfigEasyInfo(ConfigListScreen, Screen):
 		for x in self["config"].list:
 			x[1].save()
 		if self.oldsetting != [config.plugins.EasyInfo.EvInStart.value, config.plugins.EasyInfo.buttTV.value]:
-			self.session.open(MessageBox, text = _('You need GUI-restart to load the new settings!'), type = MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, text=_('You need GUI-restart to load the new settings!'), type=MessageBox.TYPE_INFO)
 		self.close()
 
 	def exit(self):
@@ -461,11 +461,11 @@ class EasyInfo(Screen):
 		pos = 0
 		for x in MPaskList:
 			strpos = str(self.__keys[pos])
-			self.list.append(EINPanelEntryComponent(key = strpos, text = x))
+			self.list.append(EINPanelEntryComponent(key=strpos, text=x))
 			if self.__keys[pos] != "":
 				self.keymap[self.__keys[pos]] = MPaskList[pos]
 			pos += 1
-		self["list"] = EINPanelList(list = self.list, selection = 0)
+		self["list"] = EINPanelList(list=self.list, selection=0)
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ColorActions", "EPGSelectActions"],
 		{
 			"ok": self.go,
@@ -553,7 +553,7 @@ def EINcallbackFunc(answer):
 		ref=InfoBar_instance.servicelist.getCurrentSelection()
 		if ref:
 			InfoBar_instance.servicelist.savedService = ref
-			EINsession.openWithCallback(InfoBar_instance.servicelist.SingleServiceEPGClosed, EPGSelection, ref, serviceChangeCB = InfoBar_instance.servicelist.changeServiceCB)
+			EINsession.openWithCallback(InfoBar_instance.servicelist.SingleServiceEPGClosed, EPGSelection, ref, serviceChangeCB=InfoBar_instance.servicelist.changeServiceCB)
 	elif answer == "easypg":
 		bouquets = InfoBar_instance.servicelist.getBouquetList()
 		if bouquets is None:
@@ -611,13 +611,13 @@ def EINcallbackFunc(answer):
 			else:
 				EINsession.open(Merlin_PGd, InfoBar_instance.servicelist)
 		else:
-			EINsession.open(MessageBox, text = _('MerlinEPG is not installed!'), type = MessageBox.TYPE_INFO)
+			EINsession.open(MessageBox, text=_('MerlinEPG is not installed!'), type=MessageBox.TYPE_INFO)
 	elif answer == "autotimer":
 		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/AutoTimer/AutoTimerEditor.pyo"):
 			from Plugins.Extensions.AutoTimer.plugin import main as AutoTimerView
 			AutoTimerView(EINsession)
 		else:
-			EINsession.open(MessageBox, text = _('Autotimer is not installed!'), type = MessageBox.TYPE_INFO)
+			EINsession.open(MessageBox, text=_('Autotimer is not installed!'), type=MessageBox.TYPE_INFO)
 	elif answer == "epgsearch":
 		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/EPGSearch/plugin.pyo"):
 			from Plugins.Extensions.EPGSearch.EPGSearch import EPGSearch
@@ -628,7 +628,7 @@ def EINcallbackFunc(answer):
 				epg_name = epg_event and epg_event.getEventName() or ''
 				EINsession.open(EPGSearch, epg_name, False)
 		else:
-			EINsession.open(MessageBox, text = _('EPGsearch is not installed!'), type = MessageBox.TYPE_INFO)
+			EINsession.open(MessageBox, text=_('EPGsearch is not installed!'), type=MessageBox.TYPE_INFO)
 	elif answer == "channelinfo":
 		EINsession.open(ServiceInfo, InfoBar_instance.servicelist.getCurrentSelection())
 	elif answer == "imdbinfo":
@@ -641,39 +641,39 @@ def EINcallbackFunc(answer):
 				IeventName = epg_event.getEventName()
 				EINsession.open(IMDB, IeventName)
 		else:
-			EINsession.open(MessageBox, text = _('IMDB is not installed!'), type = MessageBox.TYPE_INFO)
+			EINsession.open(MessageBox, text=_('IMDB is not installed!'), type=MessageBox.TYPE_INFO)
 	elif answer == "graphepg":
 		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/GraphMultiEPG/plugin.pyo"):
 			from Plugins.Extensions.GraphMultiEPG.plugin import main as gmepgmain
 			gmepgmain(EINsession, InfoBar_instance.servicelist)
 		else:
-			EINsession.open(MessageBox, text = _('GraphMultiEPG is not installed!'), type = MessageBox.TYPE_INFO)
+			EINsession.open(MessageBox, text=_('GraphMultiEPG is not installed!'), type=MessageBox.TYPE_INFO)
 	elif answer == "primetime":
 		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/PrimeTimeManager/plugin.pyo"):
 			from Plugins.Extensions.PrimeTimeManager.plugin import main as ptmanmain
 			ptmanmain(EINsession)
 		else:
-			EINsession.open(MessageBox, text = _('Prime Time Manager is not installed!'), type = MessageBox.TYPE_INFO)
+			EINsession.open(MessageBox, text=_('Prime Time Manager is not installed!'), type=MessageBox.TYPE_INFO)
 	elif answer == "epgrefresh":
 		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/EPGRefresh/plugin.pyo"):
 			from Plugins.Extensions.EPGRefresh.plugin import main as epgrefmain
 			epgrefmain(EINsession)
 		else:
-			EINsession.open(MessageBox, text = _('EPGRefresh is not installed!'), type = MessageBox.TYPE_INFO)
+			EINsession.open(MessageBox, text=_('EPGRefresh is not installed!'), type=MessageBox.TYPE_INFO)
 	elif answer == "cooltv":
 		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/CoolTVGuide/plugin.pyo"):
 			from Plugins.Extensions.CoolTVGuide.plugin import main as ctvmain
 			ctvmain(EINsession, InfoBar_instance.servicelist)
 		else:
-			EINsession.open(MessageBox, text = _('CoolTVGuide is not installed!'), type = MessageBox.TYPE_INFO)
+			EINsession.open(MessageBox, text=_('CoolTVGuide is not installed!'), type=MessageBox.TYPE_INFO)
 	elif answer == "sysinfo":
 		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/Sherlock/plugin.pyo"):
 			from Plugins.Extensions.Sherlock.plugin import SherlockII
 			EINsession.open(SherlockII)
 		else:
-			EINsession.open(MessageBox, text = _('Sherlock is not installed!'), type = MessageBox.TYPE_INFO)
+			EINsession.open(MessageBox, text=_('Sherlock is not installed!'), type=MessageBox.TYPE_INFO)
 	else:
-		EINsession.open(MessageBox, text = _('This function is yet not available!'), type = MessageBox.TYPE_INFO)
+		EINsession.open(MessageBox, text=_('This function is yet not available!'), type=MessageBox.TYPE_INFO)
 
 
 
@@ -754,7 +754,7 @@ class EasyEvent(Screen, EventViewBase):
 
 
 class EvNewList(EPGList):
-	def __init__(self, type=EPG_TYPE_MULTI, selChangedCB=None, timer = None):
+	def __init__(self, type=EPG_TYPE_MULTI, selChangedCB=None, timer=None):
 		EPGList.__init__(self, type, selChangedCB, timer)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setFont(1, gFont("Regular", 18))
@@ -938,7 +938,7 @@ class EasyPG(EPGSelection, Screen):
 		EPGSelection.skinName = "EasyPG"
 		self.PThour = config.plugins.EasyInfo.Primetime2.value[0]
 		self.PTmin = config.plugins.EasyInfo.Primetime2.value[1]
-		self["list"] = EvNewList(type = EPG_TYPE_MULTI, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
+		self["list"] = EvNewList(type=EPG_TYPE_MULTI, selChangedCB=self.onSelectionChanged, timer=session.nav.RecordTimer)
 		self.skinName = "EasyPG"
 		self.RefrTimer = eTimer()
 		self.RefrTimer.callback.append(self.RefreshEPG)
@@ -997,7 +997,7 @@ class EasyPG(EPGSelection, Screen):
 				epg_name = epg_event and epg_event.getEventName() or ''
 				self.session.open(EPGSearch, epg_name, False)
 		else:
-			self.session.open(MessageBox, text = _('EPGsearch is not installed!'), type = MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, text=_('EPGsearch is not installed!'), type=MessageBox.TYPE_INFO)
 
 	def PTfor(self):
 		if not self["list"].getCurrent()[0]:
@@ -1056,7 +1056,7 @@ class EasyPG(EPGSelection, Screen):
 
 
 class ESListNext(EPGList):
-	def __init__(self, type=EPG_TYPE_MULTI, selChangedCB=None, timer = None):
+	def __init__(self, type=EPG_TYPE_MULTI, selChangedCB=None, timer=None):
 		EPGList.__init__(self, type, selChangedCB, timer)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setFont(1, gFont("Regular", 18))
@@ -1162,8 +1162,8 @@ class EasySelection(EPGSelection, Screen):
 				break
 		self.session = session
 		EPGSelection.skinName = "EasySelection"
-		self["list"] = EvNewList(type = EPG_TYPE_MULTI, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
-		self["listN"] = ESListNext(type = EPG_TYPE_MULTI, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
+		self["list"] = EvNewList(type=EPG_TYPE_MULTI, selChangedCB=self.onSelectionChanged, timer=session.nav.RecordTimer)
+		self["listN"] = ESListNext(type=EPG_TYPE_MULTI, selChangedCB=self.onSelectionChanged, timer=session.nav.RecordTimer)
 		self.skinName = "EasySelection"
 		self["actions"] = ActionMap(["EPGSelectActions", "OkCancelActions", "DirectionActions"],
 			{
@@ -1245,7 +1245,7 @@ class EasySelection(EPGSelection, Screen):
 		ref = eServiceReference(service)
 		if ref:
 			InfoBar_instance.servicelist.savedService = ref
-			self.session.openWithCallback(InfoBar_instance.servicelist.SingleServiceEPGClosed, EPGSelection, ref, serviceChangeCB = InfoBar_instance.servicelist.changeServiceCB)
+			self.session.openWithCallback(InfoBar_instance.servicelist.SingleServiceEPGClosed, EPGSelection, ref, serviceChangeCB=InfoBar_instance.servicelist.changeServiceCB)
 
 
 

@@ -39,7 +39,7 @@ class CurlyTx(Screen,HelpableScreen):
     httpGetterFactory = None
     showingHeaders = False
 
-    def __init__(self, session, args = None):
+    def __init__(self, session, args=None):
         #self.skin = CurlyTx.skin
         Screen.__init__(self, session)
         HelpableScreen.__init__(self)

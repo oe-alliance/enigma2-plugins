@@ -68,11 +68,11 @@ class AutomaticVolumeAdjustmentConfig():
 			print "Error: ", e
 		self.config.entriescount =  ConfigInteger(0)
 		self.config.Entries = ConfigSubList()
-		self.config.enable = ConfigYesNo(default = False)
-		self.config.modus = ConfigSelection(choices = [("0", _("Automatic volume adjust")), ("1", _("Remember service volume value"))], default = "0")
-		self.config.adustvalue = ConfigSelectionNumber(-50, 50, 5, default = 25)
-		self.config.mpeg_max_volume = ConfigSelectionNumber(10, 100, 5, default = 100)
-		self.config.show_volumebar = ConfigYesNo(default = False)
+		self.config.enable = ConfigYesNo(default=False)
+		self.config.modus = ConfigSelection(choices=[("0", _("Automatic volume adjust")), ("1", _("Remember service volume value"))], default="0")
+		self.config.adustvalue = ConfigSelectionNumber(-50, 50, 5, default=25)
+		self.config.mpeg_max_volume = ConfigSelectionNumber(10, 100, 5, default=100)
+		self.config.show_volumebar = ConfigYesNo(default=False)
 		self.initConfig()
 
 	def initConfig(self):
@@ -87,9 +87,9 @@ class AutomaticVolumeAdjustmentConfig():
 	def initEntryConfig(self):
 		self.config.Entries.append(ConfigSubsection())
 		i = len(self.config.Entries) - 1
-		self.config.Entries[i].servicereference = ConfigText(default = "")
-		self.config.Entries[i].name = NoSave(ConfigDirectory(default = _("Press OK to select a service")))
-		self.config.Entries[i].adjustvalue = ConfigSelectionNumber(-50, 50, 5, default = 25)
+		self.config.Entries[i].servicereference = ConfigText(default="")
+		self.config.Entries[i].name = NoSave(ConfigDirectory(default=_("Press OK to select a service")))
+		self.config.Entries[i].adjustvalue = ConfigSelectionNumber(-50, 50, 5, default=25)
 		return self.config.Entries[i]
 	
 	def remove(self, configItem):

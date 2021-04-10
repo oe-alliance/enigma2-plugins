@@ -22,7 +22,7 @@ def main(session, service, **kwargs):
 	session.open(MovieCut, service, **kwargs)
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name="MovieCut", description=_("Execute cuts..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc=main)
+	return PluginDescriptor(name="MovieCut", description=_("Execute cuts..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main)
 
 
 import struct
@@ -212,17 +212,17 @@ class AdvancedCutInput(Screen, ConfigListScreen):
 			title = name
 		dir = self.dirName(path)
 		file = self.baseName(path) + " cut"
-		self.input_replace = ConfigSelection(choices = [("no", _("No")), ("yes", _("Yes"))], default = "no")
-		self.input_file = ConfigText(default = file, fixed_size = False, visible_width = 45)
-		self.input_title = ConfigText(default = title, fixed_size = False, visible_width = 45)
-		self.input_descr = ConfigText(default = descr, fixed_size = False, visible_width = 45)
+		self.input_replace = ConfigSelection(choices=[("no", _("No")), ("yes", _("Yes"))], default="no")
+		self.input_file = ConfigText(default=file, fixed_size=False, visible_width=45)
+		self.input_title = ConfigText(default=title, fixed_size=False, visible_width=45)
+		self.input_descr = ConfigText(default=descr, fixed_size=False, visible_width=45)
 		tmp = config.movielist.videodirs.value
 		if not dir in tmp:
 			tmp.append(dir)
-		self.input_dir = ConfigSelection(choices = tmp, default = dir)
-		self.input_manual = ConfigSelection(choices = [("no", _("Cutlist")), ("yes", _("Manual specification"))], default = "no")
+		self.input_dir = ConfigSelection(choices=tmp, default=dir)
+		self.input_manual = ConfigSelection(choices=[("no", _("Cutlist")), ("yes", _("Manual specification"))], default="no")
 		self.input_space = ConfigNothing()
-		self.input_manualcuts = ConfigText(default = "", fixed_size = False)
+		self.input_manualcuts = ConfigText(default="", fixed_size=False)
 		self.input_manualcuts.setUseableChars(" 0123456789:.")
 
 		self["actions"] = ActionMap(["SetupActions"],

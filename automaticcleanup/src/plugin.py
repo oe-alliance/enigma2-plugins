@@ -87,17 +87,17 @@ DEBUG = False # If set True, plugin won't remove any file physically, instead pr
 ###############################################################################
 
 config.plugins.AutomaticCleanup = ConfigSubsection()
-config.plugins.AutomaticCleanup.deleteCrashlogsOlderThan = ConfigSelection(default = "-1",
-	choices = [("-1",_("void"))])
-config.plugins.AutomaticCleanup.keepCrashlogs = ConfigSelection(default = "-1",
-	choices = [("-1",_("all"))])
-config.plugins.AutomaticCleanup.deleteSettingsOlderThan = ConfigSelection(default = "-1",
-	choices = [("-1",_("cleanup disabled")),("183",_("older than 6 months")),("91",_("older than 3 months")),("28",_("older than 4 weeks")),("14",_("older than 2 weeks")),("7",_("older than 1 week"))])
-config.plugins.AutomaticCleanup.keepSettings = ConfigSelection(default = "-1",
-	choices = [("-1",_("all")), ("10",_("last 10")),("5",_("last 5")),("3",_("last 3")),("2",_("last 2")),("1",_("only last one"))])
-config.plugins.AutomaticCleanup.deleteTimersOlderThan = ConfigSelection(default = "-1",
-	choices = [("-1",_("cleanup disabled")),("42",_("older than 6 weeks")),("28",_("older than 4 weeks")),("14",_("older than 2 weeks")),("7",_("older than 1 week")),("3",_("older than 3 days")),("1",_("older than 1 day")),("0",_("immediately after recording"))])
-config.plugins.AutomaticCleanup.deleteOrphanedMovieFiles = ConfigYesNo(default = False)
+config.plugins.AutomaticCleanup.deleteCrashlogsOlderThan = ConfigSelection(default="-1",
+	choices=[("-1",_("void"))])
+config.plugins.AutomaticCleanup.keepCrashlogs = ConfigSelection(default="-1",
+	choices=[("-1",_("all"))])
+config.plugins.AutomaticCleanup.deleteSettingsOlderThan = ConfigSelection(default="-1",
+	choices=[("-1",_("cleanup disabled")),("183",_("older than 6 months")),("91",_("older than 3 months")),("28",_("older than 4 weeks")),("14",_("older than 2 weeks")),("7",_("older than 1 week"))])
+config.plugins.AutomaticCleanup.keepSettings = ConfigSelection(default="-1",
+	choices=[("-1",_("all")), ("10",_("last 10")),("5",_("last 5")),("3",_("last 3")),("2",_("last 2")),("1",_("only last one"))])
+config.plugins.AutomaticCleanup.deleteTimersOlderThan = ConfigSelection(default="-1",
+	choices=[("-1",_("cleanup disabled")),("42",_("older than 6 weeks")),("28",_("older than 4 weeks")),("14",_("older than 2 weeks")),("7",_("older than 1 week")),("3",_("older than 3 days")),("1",_("older than 1 day")),("0",_("immediately after recording"))])
+config.plugins.AutomaticCleanup.deleteOrphanedMovieFiles = ConfigYesNo(default=False)
 
 
 class AutomaticCleanupSetup(Screen, ConfigListScreen): # config
@@ -155,7 +155,7 @@ class AutomaticCleanupSetup(Screen, ConfigListScreen): # config
 			self.list.append(getConfigListEntry(_("Delete timerlist entries"), config.plugins.AutomaticCleanup.deleteTimersOlderThan,
 				_("Specify, how long expired timer list entries shall be kept at most. Deactivated repeat timer entries won't be deleted ever.")))
 			
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changed)
 		
 		def selectionChanged():
 			if self["config"].current:
@@ -237,13 +237,13 @@ class AutomaticCleanup:
 		self.initialState = True
 		self.doCleanup() # always check immediately after starting plugin
 		self.initialState = False
-		config.plugins.AutomaticCleanup.deleteSettingsOlderThan.addNotifier(self.configChange, initial_call = False)
-		config.plugins.AutomaticCleanup.keepSettings.addNotifier(self.configChange, initial_call = False)
-		config.plugins.AutomaticCleanup.deleteOrphanedMovieFiles.addNotifier(self.configChange, initial_call = False)
-		config.plugins.AutomaticCleanup.deleteTimersOlderThan.addNotifier(self.configChange, initial_call = False)
+		config.plugins.AutomaticCleanup.deleteSettingsOlderThan.addNotifier(self.configChange, initial_call=False)
+		config.plugins.AutomaticCleanup.keepSettings.addNotifier(self.configChange, initial_call=False)
+		config.plugins.AutomaticCleanup.deleteOrphanedMovieFiles.addNotifier(self.configChange, initial_call=False)
+		config.plugins.AutomaticCleanup.deleteTimersOlderThan.addNotifier(self.configChange, initial_call=False)
 		self.session.nav.RecordTimer.on_state_change.append(self.timerentryOnStateChange)
 		
-	def configChange(self, configElement = None):
+	def configChange(self, configElement=None):
 		# config was changed in setup
 		if self.timer.isActive(): # stop timer if running
 			self.timer.stop()
@@ -438,7 +438,7 @@ class AutomaticCleanup:
 		else:
 			print pluginPrintname, "Orphaned movies cleanup disabled"
 
-	def filterMovies(self, scanPath, exclude = []):
+	def filterMovies(self, scanPath, exclude=[]):
 		if not scanPath.endswith("/"):
 			scanPath += "/"
 		if scanPath.startswith("/hdd"):
@@ -496,4 +496,4 @@ def startSetup(menuid):
 	return [(_("System cleanup"), setup, "AutomaticCleanup", 50)]
 	
 def Plugins(**kwargs):
-	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart), PluginDescriptor(name="System cleanup", description=_("Automatic System Cleanup Setup"), where = PluginDescriptor.WHERE_MENU, fnc=startSetup) ]
+	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart), PluginDescriptor(name="System cleanup", description=_("Automatic System Cleanup Setup"), where=PluginDescriptor.WHERE_MENU, fnc=startSetup) ]

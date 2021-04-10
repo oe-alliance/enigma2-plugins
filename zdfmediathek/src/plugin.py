@@ -459,8 +459,8 @@ class RightMenuList(List):
 	
 	png_cache = {}
 	
-	def __init__(self, list = [ ], enableWrapAround=False):
-		List.__init__(self, list, enableWrapAround, item_height = 50 )
+	def __init__(self, list=[ ], enableWrapAround=False):
+		List.__init__(self, list, enableWrapAround, item_height=50 )
 		self.pixmaps_to_load = []
 		self.picloads = {}
 		self.listCompleted = []
@@ -564,7 +564,7 @@ class RightMenuList(List):
 			self.picloads[thumbID].setPara((94, 60, sc[0], sc[1], False, 1, "#00000000"))
 			self.picloads[thumbID].startDecode(thumbFile)
 
-	def finishedThumbnailDecode(self, thumbID = "", thumbFile = "", picInfo = None):
+	def finishedThumbnailDecode(self, thumbID="", thumbFile="", picInfo=None):
 		ptr = self.picloads[thumbID].getData()
 		if ptr != None:
 			self.png_cache[thumbID] = ptr

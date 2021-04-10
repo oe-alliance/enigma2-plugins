@@ -64,7 +64,7 @@ class XML_to_Dict():
 			node.unlink()
 
 class Napisy24_pl(XML_to_Dict,zip_extractor):    
-    def __init__(self,moviePath, movieNameString= None):
+    def __init__(self,moviePath, movieNameString=None):
 	if movieNameString== None:
 	    self.MovieName = ((moviePath.rsplit("/",1))[-1]).rsplit(".",1)[0]
 	else:

@@ -198,7 +198,7 @@ class CVevoSignAlgoExtractor:
         return vLocals['outSignature']
 
     # Note, this method is using a recursion
-    def _getfullAlgoCode( self, mainFunName, recDepth = 0 ):
+    def _getfullAlgoCode( self, mainFunName, recDepth=0 ):
         if self.MAX_REC_DEPTH <= recDepth:
             printDBG('_getfullAlgoCode: Maximum recursion depth exceeded')
             return 
@@ -273,7 +273,7 @@ class GoogleSuggestions():
 			return None
 
 class MyTubeFeedEntry():
-	def __init__(self, feed, entry, favoritesFeed = False):
+	def __init__(self, feed, entry, favoritesFeed=False):
 		self.feed = feed
 		self.entry = entry
 		self.favoritesFeed = favoritesFeed
@@ -314,7 +314,7 @@ class MyTubeFeedEntry():
 			return self.entry.media.description.text
 		return "not vailable"
 
-	def getThumbnailUrl(self, index = 0):
+	def getThumbnailUrl(self, index=0):
 		#print "[MyTubeFeedEntry] getThumbnailUrl"
 		if index < len(self.entry.media.thumbnail):
 			return self.entry.media.thumbnail[index].url
@@ -682,7 +682,7 @@ class MyTubePlayerService():
 			return self.yt_service.GetMostRespondedVideoFeed
 		return self.yt_service.GetYouTubeVideoFeed
 
-	def getFeed(self, url, feedname = "", callback = None, errorback = None):
+	def getFeed(self, url, feedname="", callback=None, errorback=None):
 		print "[MyTube] MyTubePlayerService - getFeed:",url, feedname
 		self.feedentries = []
 		ytservice = self.yt_service.GetYouTubeVideoFeed
@@ -712,10 +712,10 @@ class MyTubePlayerService():
 		queryThread.start()
 		return queryThread
 
-	def search(self, searchTerms, startIndex = 1, maxResults = 25,
-					orderby = "relevance", time = 'all_time', racy = "include",
-					author = "", lr = "", categories = "", sortOrder = "ascending",
-					callback = None, errorback = None):
+	def search(self, searchTerms, startIndex=1, maxResults=25,
+					orderby="relevance", time='all_time', racy="include",
+					author="", lr="", categories="", sortOrder="ascending",
+					callback=None, errorback=None):
 		print "[MyTube] MyTubePlayerService - search()"
 		self.feedentries = []
 		query = gdata.youtube.service.YouTubeVideoQuery()

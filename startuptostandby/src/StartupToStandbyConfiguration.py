@@ -40,8 +40,8 @@ class StartupToStandbyConfiguration(Screen, ConfigListScreen):
 			[
 				getConfigListEntry(_("Enabled"), config.plugins.startuptostandby.enabled)
 			],
-			session = session,
-			on_change = self.changed
+			session=session,
+			on_change=self.changed
 		)
 
 		# Trigger change

@@ -373,7 +373,7 @@ class PermanentClockPositioner(Screen):
 		def extraAction(choice):
 			if choice is not None:
 				if choice[1] == "slider":
-					self.session.openWithCallback(self.setSliderStep, InputBox, title=_("Set slider step (1 - 20):"), text=str(self.slider), type = Input.NUMBER)
+					self.session.openWithCallback(self.setSliderStep, InputBox, title=_("Set slider step (1 - 20):"), text=str(self.slider), type=Input.NUMBER)
 				elif choice[1] == "save":
 					self.Save()
 		self.session.openWithCallback(extraAction, ChoiceBox, list=menu)
@@ -489,11 +489,11 @@ class PermanentClockMenu(Screen):
 		self.session.openWithCallback(
 			self.menuCallback,
 			ChoiceBox,
-			title= _("Choice color clock:"),
-			list = list,
+			title=_("Choice color clock:"),
+			list=list,
 		)
 
-	def menuCallback(self, ret = None):
+	def menuCallback(self, ret=None):
 		ret and ret[1]()
 
 	def positionerCallback(self, callback=None):

@@ -7,7 +7,7 @@ from skin import parseFont
 
 class RSSFeedList(MenuList):
 	def __init__(self, entries):
-		MenuList.__init__(self, entries, False, content = eListboxPythonMultiContent)
+		MenuList.__init__(self, entries, False, content=eListboxPythonMultiContent)
 
 		l = self.l
 		l.setFont(0, gFont("Regular", 22))

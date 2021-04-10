@@ -3,7 +3,7 @@ from ServiceReference import ServiceReference
 #from time import sleep
 
 class SubServices(Source):
-	def __init__(self, session, streamingScreens = None):
+	def __init__(self, session, streamingScreens=None):
 		Source.__init__(self)
 		self.session = session
 		self.streamingScreens = streamingScreens

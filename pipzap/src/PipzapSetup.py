@@ -41,8 +41,8 @@ class PipzapSetup(Screen, ConfigListScreen):
 				getConfigListEntry(_("Show in Plugin menu"), config.plugins.pipzap.show_in_plugins, _("Adds an entry to the Plugin menu to toggle pipzap")),
 				getConfigListEntry(_("Show indicator label if zapping PiP"), config.plugins.pipzap.show_label, _("Displays a label in the opposite corner of PiP if pipzap is enabled.")),
 			],
-			session = session,
-			on_change = self.changed
+			session=session,
+			on_change=self.changed
 		)
 		def selectionChanged():
 			if self["config"].current:

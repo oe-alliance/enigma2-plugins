@@ -64,7 +64,7 @@ def hashFile(filename):
 
 ###-------------------------- match sub to file  -------------################        
 
-def regex_tvshow(compare, file, sub = ""):
+def regex_tvshow(compare, file, sub=""):
     regex_expressions = [ '[Ss]([0-9]+)[][._-]*[Ee]([0-9]+)([^\\\\/]*)$',
                         '[\._ \-]([0-9]+)x([0-9]+)([^\\/]*)',                     # foo.1x09 
                         '[\._ \-]([0-9]+)([0-9][0-9])([\._ \-][^\\/]*)',          # foo.109

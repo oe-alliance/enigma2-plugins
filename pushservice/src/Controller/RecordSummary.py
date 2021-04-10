@@ -44,7 +44,7 @@ class RecordSummary(ControllerBase):
 		self.timers = []
 		
 		# Default configuration
-		self.setOption( 'remove_timer', NoSave(ConfigYesNo( default = False )), _("Remove finished timer(s)") )
+		self.setOption( 'remove_timer', NoSave(ConfigYesNo( default=False )), _("Remove finished timer(s)") )
 
 	def run(self, callback, errback):
 		# At the end a plugin has to call one of the functions: callback or errback

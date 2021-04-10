@@ -88,7 +88,7 @@ class YouTubeUser():
 
 
 class YouTubeFeed():
-	def __init__(self, feed, favoritesFeed = False):
+	def __init__(self, feed, favoritesFeed=False):
 		print "[YTB] YouTubeFeed::__init__()"
 		self.feed = feed
 		self.favoritesFeed = favoritesFeed
@@ -154,7 +154,7 @@ class YouTubeFeed():
 
 
 class YouTubeEntry():
-	def __init__(self, feed, entry, sequenceNumber, favoritesFeed = False):
+	def __init__(self, feed, entry, sequenceNumber, favoritesFeed=False):
 		print "[YTB] YouTubeEntry::__init__()"
 		self.feed = feed
 		self.entry = entry
@@ -396,7 +396,7 @@ class YouTubePlaylistEntry():
 		return self.entry.description.text
 
 
-	def getFeed(self, index = 0):
+	def getFeed(self, index=0):
 		print "[YTB] YouTubePlaylistEntry::getFeed()"
 		return self.entry.feed_link[index].href
 
@@ -501,9 +501,9 @@ class YouTubeInterface():
 		return self.loggedIn
 
 
-	def search(self, searchTerms, startIndex = 1, maxResults = 25,
-					orderby = "relevance", time = "all_time", racy = "include", 
-					author = "", lr = "", categories = "", sortOrder = "ascending", format = "6"):
+	def search(self, searchTerms, startIndex=1, maxResults=25,
+					orderby="relevance", time="all_time", racy="include", 
+					author="", lr="", categories="", sortOrder="ascending", format="6"):
 		print "[YTB] YouTubeInterface::search()"
 		query = gdata.youtube.service.YouTubeVideoQuery()
 		query.vq = searchTerms
@@ -529,8 +529,8 @@ class YouTubeInterface():
 		return YouTubeFeed(self.ytService.GetYouTubeVideoFeed(url))
 
 
-	def getUserFavoritesFeed(self, userName = "default"):
-		return YouTubeFeed(self.ytService.GetUserFavoritesFeed(userName), favoritesFeed = True)
+	def getUserFavoritesFeed(self, userName="default"):
+		return YouTubeFeed(self.ytService.GetUserFavoritesFeed(userName), favoritesFeed=True)
 
 
 	def getUserPlaylistFeed(self, playlistEntry):

@@ -206,8 +206,8 @@ class SeriesPluginRenamer(object):
 			MessageBox,
 			_("Do You want to start renaming?"),
 			MessageBox.TYPE_YESNO,
-			timeout = 15,
-			default = True
+			timeout=15,
+			default=True
 		)
 
 	def confirm(self, confirmed):

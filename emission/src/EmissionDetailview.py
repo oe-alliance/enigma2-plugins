@@ -58,7 +58,7 @@ class EmissionDetailview(Screen, HelpableScreen):
 		</widget>
 	</screen>"""
 
-	def __init__(self, session, daemon, torrent, prevFunc = None, nextFunc = None):
+	def __init__(self, session, daemon, torrent, prevFunc=None, nextFunc=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		self.transmission = daemon
@@ -110,7 +110,7 @@ class EmissionDetailview(Screen, HelpableScreen):
 		self.timer.callback.append(self.updateList)
 		self.timer.start(0, 1)
 
-	def bandwidthCallback(self, ret = None):
+	def bandwidthCallback(self, ret=None):
 		if ret:
 			try:
 				self.transmission.change([self.torrentid], **ret)
@@ -118,8 +118,8 @@ class EmissionDetailview(Screen, HelpableScreen):
 				self.session.open(
 					MessageBox,
 					_("Error communicating with transmission-daemon: %s.") % (te),
-					type = MessageBox.TYPE_ERROR,
-					timeout = 5
+					type=MessageBox.TYPE_ERROR,
+					timeout=5
 				)
 		self.updateList()
 
@@ -134,8 +134,8 @@ class EmissionDetailview(Screen, HelpableScreen):
 			self.session.open(
 				MessageBox,
 				_("Error communicating with transmission-daemon: %s.") % (te),
-				type = MessageBox.TYPE_ERROR,
-				timeout = 5
+				type=MessageBox.TYPE_ERROR,
+				timeout=5
 			)
 			# XXX: this seems silly but cleans the gui and restarts the timer :-)
 			self.updateList()
@@ -181,8 +181,8 @@ class EmissionDetailview(Screen, HelpableScreen):
 			self.session.open(
 				MessageBox,
 				_("Error communicating with transmission-daemon: %s.") % (te),
-				type = MessageBox.TYPE_ERROR,
-				timeout = 5
+				type=MessageBox.TYPE_ERROR,
+				timeout=5
 			)
 
 	def remove(self):
@@ -195,22 +195,22 @@ class EmissionDetailview(Screen, HelpableScreen):
 			(_("yes, including data"), "data")]
 		)
 
-	def removeCallback(self, ret = None):
+	def removeCallback(self, ret=None):
 		if ret:
 			ret = ret[1]
 			try:
 				if ret == "yes":
-					self.transmission.remove([self.torrentid], delete_data = False)
+					self.transmission.remove([self.torrentid], delete_data=False)
 					self.close()
 				elif ret == "data":
-					self.transmission.remove([self.torrentid], delete_data = True)
+					self.transmission.remove([self.torrentid], delete_data=True)
 					self.close()
 			except transmission.TransmissionError as te:
 				self.session.open(
 					MessageBox,
 					_("Error communicating with transmission-daemon: %s.") % (te),
-					type = MessageBox.TYPE_ERROR,
-					timeout = 5
+					type=MessageBox.TYPE_ERROR,
+					timeout=5
 				)
 
 	def updateList(self, *args, **kwargs):
@@ -298,7 +298,7 @@ class EmissionDetailview(Screen, HelpableScreen):
 						self.session.open(
 							MessageBox,
 							_("Unselecting the only file scheduled for download is not possible through RPC."),
-							type = MessageBox.TYPE_ERROR
+							type=MessageBox.TYPE_ERROR
 						)
 						self.updateList()
 						return
@@ -310,8 +310,8 @@ class EmissionDetailview(Screen, HelpableScreen):
 				self.session.open(
 					MessageBox,
 					_("Error communicating with transmission-daemon: %s.") % (te),
-					type = MessageBox.TYPE_ERROR,
-					timeout = 5
+					type=MessageBox.TYPE_ERROR,
+					timeout=5
 				)
 			self.updateList()
 

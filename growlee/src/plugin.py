@@ -235,14 +235,14 @@ def Plugins(**kwargs):
 		PluginDescriptor(
 			where=PluginDescriptor.WHERE_AUTOSTART,
 			fnc=autostart,
-			needsRestart = False,
+			needsRestart=False,
 		),
 		PluginDescriptor(
 			name="Growlee",
 			description=_("Configure Growlee"), 
 			where=PluginDescriptor.WHERE_PLUGINMENU,
 			fnc=configuration,
-			needsRestart = False,
+			needsRestart=False,
 		),
 	]
 

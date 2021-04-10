@@ -94,7 +94,7 @@ def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, 
     local_file = open(zip_subs, "w" + "b")
     local_file.write(f.read())
     local_file.close()
-    zipped_file = zip_extractor(zip_subs, destination_dir = tmp_sub_dir)
+    zipped_file = zip_extractor(zip_subs, destination_dir=tmp_sub_dir)
     subs_file = zipped_file.extract_zipped_file() 
     os.remove(zip_subs)   
     return True,language, subs_file #standard output

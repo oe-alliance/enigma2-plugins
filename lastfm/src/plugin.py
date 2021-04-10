@@ -31,28 +31,28 @@ lastfm_pluginversion = "0.6.0"
 
 config.plugins.LastFM = ConfigSubsection()
 
-config.plugins.LastFM.menu = ConfigSelection(default = "plugin", choices = [("plugin", _("Plugin menu")), ("extensions", _("Extensions menu"))])
-config.plugins.LastFM.name = ConfigText(default = _("Last.FM"), fixed_size = False, visible_width = 20)
-config.plugins.LastFM.description = ConfigText(default = _("Listen to Last.FM Internet Radio"), fixed_size = False, visible_width = 80)
-config.plugins.LastFM.showcoverart = ConfigYesNo(default = True)
-config.plugins.LastFM.username = ConfigText("user", fixed_size = False)
-config.plugins.LastFM.password = ConfigPassword(default = "passwd", fixed_size = False)
-config.plugins.LastFM.timeoutstatustext = ConfigInteger(3,limits = (0, 10))
-config.plugins.LastFM.timeouttabselect = ConfigInteger(2,limits = (0, 10))
-config.plugins.LastFM.metadatarefreshinterval = ConfigInteger(1,limits = (0, 100))
-config.plugins.LastFM.recommendedlevel = ConfigInteger(3,limits = (0, 100))
-config.plugins.LastFM.sendSubmissions = ConfigYesNo(default = False)
+config.plugins.LastFM.menu = ConfigSelection(default="plugin", choices=[("plugin", _("Plugin menu")), ("extensions", _("Extensions menu"))])
+config.plugins.LastFM.name = ConfigText(default=_("Last.FM"), fixed_size=False, visible_width=20)
+config.plugins.LastFM.description = ConfigText(default=_("Listen to Last.FM Internet Radio"), fixed_size=False, visible_width=80)
+config.plugins.LastFM.showcoverart = ConfigYesNo(default=True)
+config.plugins.LastFM.username = ConfigText("user", fixed_size=False)
+config.plugins.LastFM.password = ConfigPassword(default="passwd", fixed_size=False)
+config.plugins.LastFM.timeoutstatustext = ConfigInteger(3,limits=(0, 10))
+config.plugins.LastFM.timeouttabselect = ConfigInteger(2,limits=(0, 10))
+config.plugins.LastFM.metadatarefreshinterval = ConfigInteger(1,limits=(0, 100))
+config.plugins.LastFM.recommendedlevel = ConfigInteger(3,limits=(0, 100))
+config.plugins.LastFM.sendSubmissions = ConfigYesNo(default=False)
 
-config.plugins.LastFM.useproxy = ConfigYesNo(default = False)
-config.plugins.LastFM.proxyport = ConfigInteger(6676,limits = (1, 65536))
+config.plugins.LastFM.useproxy = ConfigYesNo(default=False)
+config.plugins.LastFM.proxyport = ConfigInteger(6676,limits=(1, 65536))
 
 config.plugins.LastFM.sreensaver = ConfigSubsection()
-config.plugins.LastFM.sreensaver.use = ConfigYesNo(default = True)
-config.plugins.LastFM.sreensaver.wait = ConfigInteger(30,limits = (0, 1000))
-config.plugins.LastFM.sreensaver.showcoverart = ConfigYesNo(default = True)
-config.plugins.LastFM.sreensaver.coverartanimation = ConfigYesNo(default = True)
-config.plugins.LastFM.sreensaver.coverartspeed = ConfigInteger(10,limits = (0, 100))
-config.plugins.LastFM.sreensaver.coverartinterval = ConfigInteger(10,limits = (0, 100))
+config.plugins.LastFM.sreensaver.use = ConfigYesNo(default=True)
+config.plugins.LastFM.sreensaver.wait = ConfigInteger(30,limits=(0, 1000))
+config.plugins.LastFM.sreensaver.showcoverart = ConfigYesNo(default=True)
+config.plugins.LastFM.sreensaver.coverartanimation = ConfigYesNo(default=True)
+config.plugins.LastFM.sreensaver.coverartspeed = ConfigInteger(10,limits=(0, 100))
+config.plugins.LastFM.sreensaver.coverartinterval = ConfigInteger(10,limits=(0, 100))
 
 ###############################################################################        
     
@@ -84,22 +84,22 @@ def Plugins(path,**kwargs):
     global plugin_path
     plugin_path = path
 
-    list = [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = startScrobbler)]
+    list = [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=startScrobbler)]
 
     if config.plugins.LastFM.menu.value == "plugin":
         list.append (PluginDescriptor(
-            name = config.plugins.LastFM.name.value, 
-            description = config.plugins.LastFM.description.value + " "  + _("Ver.") + " " + lastfm_pluginversion, 
-            where = PluginDescriptor.WHERE_PLUGINMENU,
-            icon = "plugin.png",
-            fnc = main)
+            name=config.plugins.LastFM.name.value, 
+            description=config.plugins.LastFM.description.value + " "  + _("Ver.") + " " + lastfm_pluginversion, 
+            where=PluginDescriptor.WHERE_PLUGINMENU,
+            icon="plugin.png",
+            fnc=main)
             )
     else:
         list.append (PluginDescriptor(
-            name = config.plugins.LastFM.name.value, 
-            description = config.plugins.LastFM.description.value + " "  + _("Ver.") + " " + lastfm_pluginversion, 
-            where = PluginDescriptor.WHERE_EXTENSIONSMENU, 
-            fnc = main)
+            name=config.plugins.LastFM.name.value, 
+            description=config.plugins.LastFM.description.value + " "  + _("Ver.") + " " + lastfm_pluginversion, 
+            where=PluginDescriptor.WHERE_EXTENSIONSMENU, 
+            fnc=main)
             )		
 
     return list
@@ -136,7 +136,7 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
          
     noCoverArtPNG = "/usr/share/enigma2/skin_default/no_coverArt.png"
     
-    def __init__(self, session,streamplayer, args = 0):
+    def __init__(self, session,streamplayer, args=0):
         self.skin = LastFMScreenMain.skin
         Screen.__init__(self, session)
         HelpableScreen.__init__(self)
@@ -360,8 +360,8 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
                 self.session.openWithCallback(
                     self.onTextForCustomStationEntered,
                     InputBox,
-                    windowTitle = text,
-                    title = texts
+                    windowTitle=text,
+                    title=texts
                     )
             else:
                 self.changeStation(x[1])
@@ -603,7 +603,7 @@ class LastFMSaveScreen(Screen):
         self.startmovingtimer.stop() 
         newX = randrange(getDesktop(0).size().width()-self.coverartsize[0]-1)
         newY = randrange(getDesktop(0).size().height()-self.coverartsize[1]-1)
-        self["cover"].moveTo(newX, newY, time = config.plugins.LastFM.sreensaver.coverartspeed.value)
+        self["cover"].moveTo(newX, newY, time=config.plugins.LastFM.sreensaver.coverartspeed.value)
         self["cover"].startMoving()
         self.startmovingtimer.start(config.plugins.LastFM.sreensaver.coverartinterval.value*1000)
 

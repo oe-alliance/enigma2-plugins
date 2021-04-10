@@ -84,7 +84,7 @@ class LastFMScrobbler(object):
         (host,port) = self.submiturl.split("/")[2].split(":")
         url = "http://"+host+":"+port+"/"+"/".join(self.submiturl.split("/")[3:])
         data = self.encode(post)
-        getPage(url,method="POST",headers = {'Content-Type': "application/x-www-form-urlencoded",'Content-Length': str(len(data))},postdata=data).addCallback(self.submitCB).addErrback(self.submitCBError)
+        getPage(url,method="POST",headers={'Content-Type': "application/x-www-form-urlencoded",'Content-Length': str(len(data))},postdata=data).addCallback(self.submitCB).addErrback(self.submitCBError)
     
     def encode(self,postdict):
         result=[]
@@ -189,14 +189,14 @@ class EventListener:
                 r= seek.getLength()
                 if not r[0]:
                     tracklength = r[1] / 90000
-            return self.getTrack( artist = currPlay.info().getInfoString(iServiceInformation.sTagArtist),
-                                  title = currPlay.info().getInfoString(iServiceInformation.sTagTitle),
-                                  album = currPlay.info().getInfoString(iServiceInformation.sTagAlbum),
-                                  length = tracklength,
+            return self.getTrack( artist=currPlay.info().getInfoString(iServiceInformation.sTagArtist),
+                                  title=currPlay.info().getInfoString(iServiceInformation.sTagTitle),
+                                  album=currPlay.info().getInfoString(iServiceInformation.sTagAlbum),
+                                  length=tracklength,
                                  )
              
              
-    def getTrack(self , artist = None, title = None, album = None,length=-1):
+    def getTrack(self , artist=None, title=None, album=None,length=-1):
         if artist == "" or artist is None:
             print "[LastFMScrobbler] CurrentlyPlayingServiceReference has no Artist, not submitting to LastFM"
             return False

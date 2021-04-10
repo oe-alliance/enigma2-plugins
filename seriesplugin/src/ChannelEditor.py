@@ -350,7 +350,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 				self['list'].setList( self.stbToWebChlist )
 		elif servicename and serviceref and remote and webSender:
 			log.debug("add or replace", servicename, serviceref, remote, webSender)
-			self.session.openWithCallback( boundFunction(self.addOrReplace, servicename, serviceref, webSender, remote), MessageBox,_("Add channel (Yes) or replace it (No)"), MessageBox.TYPE_YESNO, default = False)
+			self.session.openWithCallback( boundFunction(self.addOrReplace, servicename, serviceref, webSender, remote), MessageBox,_("Add channel (Yes) or replace it (No)"), MessageBox.TYPE_YESNO, default=False)
 
 	def addOrReplace(self, servicename, serviceref, webSender, remote, result):
 		idx = self.getIndexOfServiceref(serviceref)
@@ -382,7 +382,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 			log.debug("keyRemove", servicename, webSender, serviceref, state)
 			if serviceref:
 				#TODO handle multiple links/alternatives - show a choicebox
-				self.session.openWithCallback( boundFunction(self.removeConfirm, servicename, serviceref), MessageBox, _("Remove '%s'?") % servicename, MessageBox.TYPE_YESNO, default = False)
+				self.session.openWithCallback( boundFunction(self.removeConfirm, servicename, serviceref), MessageBox, _("Remove '%s'?") % servicename, MessageBox.TYPE_YESNO, default=False)
 
 	def removeConfirm(self, servicename, serviceref, answer):
 		if not answer:

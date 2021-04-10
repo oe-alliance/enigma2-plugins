@@ -323,4 +323,4 @@ def main(session, **kwargs):
 def Plugins(path,**kwargs):
 	global pluginpath
 	pluginpath = path
-	return PluginDescriptor(name="MeteoItalia", description="Previsioni Meteo", icon="meteoitalia.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
+	return PluginDescriptor(name="MeteoItalia", description="Previsioni Meteo", icon="meteoitalia.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)

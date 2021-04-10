@@ -9,8 +9,8 @@ from os import SEEK_END
 class FTPDownloader(Protocol):
 	"""Download to a file from FTP."""
 
-	def __init__(self, host, port, path, fileOrName, username = 'anonymous',
-		password = 'my@email.com', passive = True, supportPartial = False,
+	def __init__(self, host, port, path, fileOrName, username='anonymous',
+		password='my@email.com', passive=True, supportPartial=False,
 		*args, **kwargs):
 
 		timeout = 30
@@ -26,7 +26,7 @@ class FTPDownloader(Protocol):
 		else:
 			self.file = fileOrName
 
-		creator = ClientCreator(reactor, FTPClient, username, password, passive = passive)
+		creator = ClientCreator(reactor, FTPClient, username, password, passive=passive)
 
 		creator.connectTCP(host, port, timeout).addCallback(self.controlConnectionMade).addErrback(self.connectionFailed)
 
@@ -96,7 +96,7 @@ class FTPDownloader(Protocol):
 
 		offset = self.resume and offset or 0
 
-		d = self.ftpclient.retrieveFile(self.path, self, offset = offset)
+		d = self.ftpclient.retrieveFile(self.path, self, offset=offset)
 		d.addCallback(self.ftpFinish).addErrback(self.connectionFailed)
 
 	def dataReceived(self, data):
@@ -110,13 +110,13 @@ class FTPDownloader(Protocol):
 		except IOError, ie:
 			self.connectionFailed()
 
-	def ftpFinish(self, code = 0, message = None):
+	def ftpFinish(self, code=0, message=None):
 		self.ftpclient.quit()
 		if self.file is not None:
 			self.file.close()
 		self.deferred.callback(code)
 
-	def connectionFailed(self, reason = None):
+	def connectionFailed(self, reason=None):
 		if self.file is not None:
 			self.file.close()
 		self.deferred.errback(reason)

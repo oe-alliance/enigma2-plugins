@@ -71,15 +71,15 @@ language.addCallback(localeInit())
 
 VERSION = "1.5"
 config.plugins.pts = ConfigSubsection()
-config.plugins.pts.enabled = ConfigYesNo(default = True)
+config.plugins.pts.enabled = ConfigYesNo(default=True)
 config.plugins.pts.maxevents = ConfigInteger(default=5, limits=(1, 99))
 config.plugins.pts.maxlength = ConfigInteger(default=180, limits=(5, 999))
 config.plugins.pts.startdelay = ConfigInteger(default=5, limits=(5, 999))
-config.plugins.pts.showinfobar = ConfigYesNo(default = False)
-config.plugins.pts.stopwhilerecording = ConfigYesNo(default = False)
+config.plugins.pts.showinfobar = ConfigYesNo(default=False)
+config.plugins.pts.stopwhilerecording = ConfigYesNo(default=False)
 config.plugins.pts.favoriteSaveAction = ConfigSelection([("askuser", _("Ask user")),("savetimeshift", _("Save and stop")),("savetimeshiftandrecord", _("Save and record")),("noSave", _("Don't save"))], "askuser")
-config.plugins.pts.permanentrecording = ConfigYesNo(default = False)
-config.plugins.pts.isRecording = NoSave(ConfigYesNo(default = False))
+config.plugins.pts.permanentrecording = ConfigYesNo(default=False)
+config.plugins.pts.isRecording = NoSave(ConfigYesNo(default=False))
 
 ###################################
 ###  PTS TimeshiftState Screen  ###
@@ -225,8 +225,7 @@ class InfoBar(InfoBarOrg):
 		InfoBarOrg.__init__(self, session)
 		InfoBarOrg.instance = self
 
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evStart: self.__evStart,
 				iPlayableService.evEnd: self.__evEnd,
 				iPlayableService.evSOF: self.__evSOF,
@@ -363,7 +362,7 @@ class InfoBar(InfoBarOrg):
 			if self.save_current_timeshift and self.timeshift_enabled:
 				if config.recording.margin_after.getValue() > 0 and len(self.recording) == 0:
 					self.SaveTimeshift(mergelater=True)
-					recording = RecordTimerEntry(ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()), time(), time()+(config.recording.margin_after.getValue()*60), self.pts_curevent_name, self.pts_curevent_description, self.pts_curevent_eventid, dirname = config.usage.default_path.value)
+					recording = RecordTimerEntry(ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()), time(), time()+(config.recording.margin_after.getValue()*60), self.pts_curevent_name, self.pts_curevent_description, self.pts_curevent_eventid, dirname=config.usage.default_path.value)
 					recording.dontSave = True
 					self.session.nav.RecordTimer.record(recording)
 					self.recording.append(recording)
@@ -888,7 +887,7 @@ class InfoBar(InfoBarOrg):
 					Notifications.AddNotification(MessageBox, _("Creating Hardlink to Timeshift file failed!")+"\n%s" % (errormsg), MessageBox.TYPE_ERROR)
 
 	def ptsRecordCurrentEvent(self):
-			recording = RecordTimerEntry(ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()), time(), self.pts_curevent_end, self.pts_curevent_name, self.pts_curevent_description, self.pts_curevent_eventid, dirname = config.usage.default_path.value)
+			recording = RecordTimerEntry(ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()), time(), self.pts_curevent_end, self.pts_curevent_name, self.pts_curevent_description, self.pts_curevent_eventid, dirname=config.usage.default_path.value)
 			recording.dontSave = True
 			self.session.nav.RecordTimer.record(recording)
 			self.recording.append(recording)
@@ -1025,7 +1024,7 @@ class InfoBar(InfoBarOrg):
 		if Screens.Standby.inTryQuitMainloop:
 			self.pts_QuitMainloop_timer.start(30000, True)
 		else:
-			Notifications.AddNotification(MessageBox, _("Timeshift saved to your harddisk!"), MessageBox.TYPE_INFO, timeout = 5)
+			Notifications.AddNotification(MessageBox, _("Timeshift saved to your harddisk!"), MessageBox.TYPE_INFO, timeout=5)
 
 	def ptsMergePostCleanUp(self):
 		if self.session.nav.RecordTimer.isRecording() or len(JobManager.getPendingJobs()) >= 1:
@@ -1340,7 +1339,7 @@ Screens.InfoBar.InfoBar = InfoBar
 TryQuitMainloop_getRecordEvent = Screens.Standby.TryQuitMainloop.getRecordEvent
 
 class TryQuitMainloopPTS(TryQuitMainloop):
-	def __init__(self, session, retvalue=1, timeout=-1, default_yes = True):
+	def __init__(self, session, retvalue=1, timeout=-1, default_yes=True):
 		TryQuitMainloop.__init__(self, session, retvalue, timeout, default_yes)
 
 		self.session.ptsmainloopvalue = retvalue
@@ -1686,7 +1685,7 @@ class PermanentTimeShiftSetup(Screen, ConfigListScreen):
 
 		self.onChangedEntry = [ ]
 		self.list = [ ]
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{

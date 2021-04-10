@@ -42,7 +42,7 @@ config.plugins.ORFteletext.adr = ConfigText(default="ORF")
 
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(name="ORF-Teletext", description=_("ORF-Teletext"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),]
+	return [PluginDescriptor(name="ORF-Teletext", description=_("ORF-Teletext"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),]
 
 
 

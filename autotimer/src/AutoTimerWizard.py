@@ -49,7 +49,7 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 	def __init__(self, session, newTimer):
 		self.xmlfile = Directories.resolveFilename(Directories.SCOPE_PLUGINS, "Extensions/AutoTimer/autotimerwizard.xml")
 
-		WizardLanguage.__init__(self, session, showSteps = True, showStepSlider = True)
+		WizardLanguage.__init__(self, session, showSteps=True, showStepSlider=True)
 		AutoTimerEditorBase.__init__(self, newTimer)
 		Rc.__init__(self)
 
@@ -64,7 +64,7 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 		self.tailingWhitespacesMatch = False
 
 		# We might need to change shown items, so add some notifiers
-		self.timespan.addNotifier(self.regenTimespanList, initial_call = False)
+		self.timespan.addNotifier(self.regenTimespanList, initial_call=False)
 		self.generateTimespanList()
 
 		self.servicesDlg = self.session.instantiateDialog(
@@ -189,7 +189,7 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 	def deleteBackward(self):
 		self["config"].handleKey(KEY_BACKSPACE)
 
-	def exitWizardQuestion(self, ret = False):
+	def exitWizardQuestion(self, ret=False):
 		if ret:
 			self.doCancel = True
 			self.close()

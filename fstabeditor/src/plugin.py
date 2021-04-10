@@ -88,7 +88,7 @@ class fstabViewerScreen(Screen,HelpableScreen):
 			<eLabel foregroundColor="#f0f0f0" font="Regular;18" position="275,401" size="200,25" text="Restore fstab.backup" transparent="1"/>
 		</screen>"""
 		
-	def __init__(self, session, args = 0):
+	def __init__(self, session, args=0):
 		self.skin = fstabViewerScreen.skin
 		self.session = session
 		Screen.__init__(self, session)
@@ -214,19 +214,19 @@ class fstabEditorScreen(Screen,ConfigListScreen,HelpableScreen):
 		ConfigListScreen.__init__(self, self.list)
 				
 		if 	self.addEntry:
-			self.devicename = NoSave(ConfigText(default = ""))
-			self.mountpoint = NoSave(ConfigText(default = ""))
-			self.fstype = NoSave(ConfigSelection([("auto","auto"),("ext2","ext2"),("ext3","ext3"),("ext4","ext4"),("swap","swap"),("tmpfs","tmpfs"),("proc","proc"),("cifs","cifs"),("nfs","nfs"),("jffs2","jffs2"),("usbfs","usbfs"),("devpts","devpts"),("vfat","vfat"),("fat","fat"),("ntfs","ntfs"),("noauto", "no auto"), ("xfs", "xfs")], default = "auto"))
-			self.options = NoSave(ConfigText(default = "defaults"))
-			self.dumpfreq = NoSave(ConfigNumber(default = 0))
-			self.passnum = NoSave(ConfigSelection([("0","0"),("1","1"),("2","2")], default = "0"))			
+			self.devicename = NoSave(ConfigText(default=""))
+			self.mountpoint = NoSave(ConfigText(default=""))
+			self.fstype = NoSave(ConfigSelection([("auto","auto"),("ext2","ext2"),("ext3","ext3"),("ext4","ext4"),("swap","swap"),("tmpfs","tmpfs"),("proc","proc"),("cifs","cifs"),("nfs","nfs"),("jffs2","jffs2"),("usbfs","usbfs"),("devpts","devpts"),("vfat","vfat"),("fat","fat"),("ntfs","ntfs"),("noauto", "no auto"), ("xfs", "xfs")], default="auto"))
+			self.options = NoSave(ConfigText(default="defaults"))
+			self.dumpfreq = NoSave(ConfigNumber(default=0))
+			self.passnum = NoSave(ConfigSelection([("0","0"),("1","1"),("2","2")], default="0"))			
 		else:
-			self.devicename = NoSave(ConfigText(default = entryList[self.selectedEntry][0]))
-			self.mountpoint = NoSave(ConfigText(default = entryList[self.selectedEntry][1]))
-			self.fstype = NoSave(ConfigSelection([("auto","auto"),("ext2","ext2"),("ext3","ext3"),("ext4","ext4"),("swap","swap"),("tmpfs","tmpfs"),("proc","proc"),("cifs","cifs"),("nfs","nfs"),("jffs2","jffs2"),("usbfs","usbfs"),("devpts","devpts"),("vfat","vfat"),("fat","fat"),("ntfs","ntfs"),("noauto", "no auto"), ("xfs", "xfs")], default = entryList[self.selectedEntry][2]))
-			self.options = NoSave(ConfigText(default = entryList[self.selectedEntry][3]))
-			self.dumpfreq = NoSave(ConfigNumber(default = int(entryList[self.selectedEntry][4])))
-			self.passnum = NoSave(ConfigSelection([("0","0"),("1","1"),("2","2")], default = entryList[self.selectedEntry][5]))
+			self.devicename = NoSave(ConfigText(default=entryList[self.selectedEntry][0]))
+			self.mountpoint = NoSave(ConfigText(default=entryList[self.selectedEntry][1]))
+			self.fstype = NoSave(ConfigSelection([("auto","auto"),("ext2","ext2"),("ext3","ext3"),("ext4","ext4"),("swap","swap"),("tmpfs","tmpfs"),("proc","proc"),("cifs","cifs"),("nfs","nfs"),("jffs2","jffs2"),("usbfs","usbfs"),("devpts","devpts"),("vfat","vfat"),("fat","fat"),("ntfs","ntfs"),("noauto", "no auto"), ("xfs", "xfs")], default=entryList[self.selectedEntry][2]))
+			self.options = NoSave(ConfigText(default=entryList[self.selectedEntry][3]))
+			self.dumpfreq = NoSave(ConfigNumber(default=int(entryList[self.selectedEntry][4])))
+			self.passnum = NoSave(ConfigSelection([("0","0"),("1","1"),("2","2")], default=entryList[self.selectedEntry][5]))
 		
 		self.list.append(getConfigListEntry(_("device name: "), self.devicename))
 		self.list.append(getConfigListEntry(_("mount point: "), self.mountpoint))
@@ -285,4 +285,4 @@ class fstabEditorScreen(Screen,ConfigListScreen,HelpableScreen):
 				self.devicename.value = mountpoint
 		
 def Plugins(**kwargs):
-    return [PluginDescriptor(name="fstab-Editor", description=_("Plugin to edit fstab"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon="fstabEditor.png", fnc=main)]
+    return [PluginDescriptor(name="fstab-Editor", description=_("Plugin to edit fstab"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="fstabEditor.png", fnc=main)]

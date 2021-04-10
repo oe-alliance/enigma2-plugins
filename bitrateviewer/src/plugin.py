@@ -43,7 +43,7 @@ class BitrateCalculator(Screen):
 			<widget render="Label" source="audio" position="75,35" zPosition="1" size="150,23" font="Regular;22" halign="right" transparent="1"/>
 		</screen>""" % left
 
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self["video_caption"] = StaticText("Video:")
 		self["audio_caption"] = StaticText("Audio:")
@@ -95,5 +95,5 @@ def main(session,**kwargs):
 
 def Plugins(**kwargs):
 	list = [PluginDescriptor(name="BitrateViewer", description=_("BitrateViewer"), 
-		where = [PluginDescriptor.WHERE_EXTENSIONSMENU ], fnc=main)]
+		where=[PluginDescriptor.WHERE_EXTENSIONSMENU ], fnc=main)]
 	return list

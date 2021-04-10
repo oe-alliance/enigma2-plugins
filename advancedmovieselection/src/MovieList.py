@@ -359,7 +359,7 @@ class MovieList(GUIComponent):
             self.l.setItemHeight(26)
 
 #    def buildMovieListEntry(self, serviceref, info, begin, len, selection_index= -1):
-    def buildMovieListEntry(self, movie_info, selection_index= -1):
+    def buildMovieListEntry(self, movie_info, selection_index=-1):
         try:
             width = self.l.getItemSize().width()
             offset = 0

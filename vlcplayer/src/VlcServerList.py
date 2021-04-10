@@ -216,7 +216,7 @@ class VlcServerListScreen(Screen):
 	def right(self):
 		self.serverlist.pageDown()
 
-	def close(self, server = None):
+	def close(self, server=None):
 		Screen.close(self, server, self.defaultServer)
 
 	def ok(self):

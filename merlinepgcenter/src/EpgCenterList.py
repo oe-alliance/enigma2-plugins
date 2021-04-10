@@ -117,8 +117,8 @@ class EpgCenterList(GUIComponent):
 		self.mode = None
 		self.similarShown = False
 		
-		config.plugins.merlinEpgCenter.listItemHeight.addNotifier(self.changeHeight, initial_call = True)
-		config.plugins.merlinEpgCenter.adjustFontSize.addNotifier(self.setFontSizes, initial_call = True)
+		config.plugins.merlinEpgCenter.listItemHeight.addNotifier(self.changeHeight, initial_call=True)
+		config.plugins.merlinEpgCenter.adjustFontSize.addNotifier(self.setFontSizes, initial_call=True)
 		
 		if listType == LIST_TYPE_EPG:
 			EpgCenterList.bouquetList = bouquetList
@@ -158,7 +158,7 @@ class EpgCenterList(GUIComponent):
 	def onShow(self):
 		self.maxWidth = self.l.getItemSize().width()
 		
-	def setFontSizes(self, configElement = None):
+	def setFontSizes(self, configElement=None):
 		diff = configElement.getValue()
 		
 		if self.videoMode == MODE_SD:
@@ -180,7 +180,7 @@ class EpgCenterList(GUIComponent):
 	def setMaxWidth(self, newSize):
 		self.maxWidth = newSize.width()
 		
-	def changeHeight(self, configElement = None):
+	def changeHeight(self, configElement=None):
 		self.listStyle = config.plugins.merlinEpgCenter.listStyle.value
 		if self.listStyle == STYLE_SINGLE_LINE:
 			self.singleLineBorder = 2
@@ -662,7 +662,7 @@ class EpgCenterList(GUIComponent):
 		if self.listStyle == STYLE_SINGLE_LINE:
 			self.changeHeight()
 		if showOutdated:
-			self.list.sort(key = lambda x: x[3], reverse = True) # sort by time
+			self.list.sort(key=lambda x: x[3], reverse=True) # sort by time
 		self.l.setList(self.list)
 		
 	def fillSimilar(self, sRef, eventId):
@@ -680,7 +680,7 @@ class EpgCenterList(GUIComponent):
 			if self.listStyle == STYLE_SINGLE_LINE:
 				self.changeHeight()
 				
-			self.list.sort(key = lambda x: x[3]) # sort by time
+			self.list.sort(key=lambda x: x[3]) # sort by time
 			self.l.setList(self.list)
 			
 	def fillEpgSearch(self, searchString, mode):
@@ -696,14 +696,14 @@ class EpgCenterList(GUIComponent):
 				for item in self.list[:]:
 					if not item[2] in EpgCenterList.allServicesNameDict:
 						self.list.remove(item)
-			self.list.sort(key = lambda x: x[3]) # sort by time
+			self.list.sort(key=lambda x: x[3]) # sort by time
 			
 		if self.listStyle == STYLE_SINGLE_LINE:
 			self.changeHeight()
 		self.l.setList(self.list)
 		
 	@staticmethod
-	def getServiceList(bouquet, stime=-1, sRefOnly = False):
+	def getServiceList(bouquet, stime=-1, sRefOnly=False):
 		services = [ ]
 		servicelist = eServiceCenter.getInstance().list(bouquet)
 		if not servicelist is None:
@@ -766,7 +766,7 @@ class EpgCenterList(GUIComponent):
 		EpgCenterList.bouquetServices = []
 
 		for bouquet in EpgCenterList.bouquetList:
-			EpgCenterList.bouquetServices.append(EpgCenterList.getServiceList(bouquet[1], sRefOnly = True))
+			EpgCenterList.bouquetServices.append(EpgCenterList.getServiceList(bouquet[1], sRefOnly=True))
 			
 	def selectionEnabled(self, enabled):
 		if self.instance is not None:
@@ -882,15 +882,15 @@ class EpgCenterTimerlist(TimerList):
 			self.overallFontHeight = 44
 			
 		self.l.setList(list)
-		config.plugins.merlinEpgCenter.listItemHeight.addNotifier(self.changeHeight, initial_call = True)
-		config.plugins.merlinEpgCenter.adjustFontSize.addNotifier(self.setFontSizes, initial_call = True)
+		config.plugins.merlinEpgCenter.listItemHeight.addNotifier(self.changeHeight, initial_call=True)
+		config.plugins.merlinEpgCenter.adjustFontSize.addNotifier(self.setFontSizes, initial_call=True)
 		
 		self.autoTimerPixmap = LoadPixmap(cached=False, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MerlinEPGCenter/images/AutoTimerSmall.png"))
 		
 	def onShow(self):
 		self.maxWidth = self.l.getItemSize().width()
 		
-	def setFontSizes(self, configElement = None):
+	def setFontSizes(self, configElement=None):
 		diff = configElement.getValue()
 		
 		if self.videoMode == MODE_SD:
@@ -912,7 +912,7 @@ class EpgCenterTimerlist(TimerList):
 	def setMaxWidth(self, newSize):
 		self.maxWidth = newSize.width()
 		
-	def changeHeight(self, configElement = None):
+	def changeHeight(self, configElement=None):
 		if self.overallFontHeight > self.baseHeight:
 			self.itemHeight = self.overallFontHeight + int(config.plugins.merlinEpgCenter.listItemHeight.value)
 		else:

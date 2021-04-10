@@ -116,10 +116,10 @@ class GrowlTalk(DatagramProtocol):
 		Notifications.AddNotificationWithID(
 			NOTIFICATIONID,
 			MessageBox,
-			text = title + '\n' + description,
-			type = MessageBox.TYPE_INFO,
-			timeout = 5,
-			close_on_any_key = True,
+			text=title + '\n' + description,
+			type=MessageBox.TYPE_INFO,
+			timeout=5,
+			close_on_any_key=True,
 		)
 
 class GrowlTalkAbstraction:

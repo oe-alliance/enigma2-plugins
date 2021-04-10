@@ -69,8 +69,7 @@ class AntiScrollOverlay(Screen):
         self.session = session
         Screen.__init__(self, session)
         self["label"] = Label()
-        self.__event_tracker = ServiceEventTracker(screen=self,eventmap=
-            {
+        self.__event_tracker = ServiceEventTracker(screen=self,eventmap={
                 iPlayableService.evUpdatedInfo: self.evStart,
                 iPlayableService.evEOF: self.hide,
             })
@@ -295,5 +294,5 @@ def autostart(session, **kwargs):
         activebar = session.instantiateDialog(AntiScrollOverlay)
 
 def Plugins(**kwargs):
-  return [PluginDescriptor(name=myname,description="overlay for scrolling bars",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main, icon="plugin.png"),
-          PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART,fnc = autostart)]
+  return [PluginDescriptor(name=myname,description="overlay for scrolling bars",where=PluginDescriptor.WHERE_PLUGINMENU,fnc=main, icon="plugin.png"),
+          PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART,fnc=autostart)]

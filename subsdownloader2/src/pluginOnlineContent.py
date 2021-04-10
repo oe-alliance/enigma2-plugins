@@ -62,12 +62,12 @@ class InstallDownloadableContent():
 	    self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": item }))
 		
     def __install__(self):
-	self.session.openWithCallback(self.__restartMessage__, Ipkg, cmdList = self.cmdList)
+	self.session.openWithCallback(self.__restartMessage__, Ipkg, cmdList=self.cmdList)
     
     def __restartMessage__(self):
-	self.session.openWithCallback(self.__restartGUI__, MessageBox,_("Do You want to restart GUI to apply changes?"), MessageBox.TYPE_YESNO, default = False)
+	self.session.openWithCallback(self.__restartGUI__, MessageBox,_("Do You want to restart GUI to apply changes?"), MessageBox.TYPE_YESNO, default=False)
 
-    def __restartGUI__(self, callback = None):
+    def __restartGUI__(self, callback=None):
 	if callback == True:
 	    quitMainloop(3)
 	elif callback == False:
@@ -110,7 +110,7 @@ class PluginIpkUpdate(Screen): #, IsNewVersionCheck):
 			    self.__close_screen__()
 			    
 	                                  
-	def __close_screen__(self, callback= None):
+	def __close_screen__(self, callback=None):
 	    self.close(None)		
 		
 		

@@ -51,7 +51,7 @@ def main(session,**kwargs):
 	session.open(MSNWeatherPlugin)
 
 def Plugins(**kwargs):
-	list = [PluginDescriptor(name=_("Weather Plugin"), description=_("Show Weather Forecast"), where = [PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU], icon = "weather.png", fnc=main)]
+	list = [PluginDescriptor(name=_("Weather Plugin"), description=_("Show Weather Forecast"), where=[PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU], icon="weather.png", fnc=main)]
 	return list
 
 class MSNWeatherPlugin(Screen):
@@ -226,7 +226,7 @@ class MSNWeatherPlugin(Screen):
 	def config(self):
 		self.session.openWithCallback(self.setupFinished, MSNWeatherPluginEntriesListConfigScreen)
 
-	def setupFinished(self, index, entry = None):
+	def setupFinished(self, index, entry=None):
 		self.weatherPluginEntryCount = config.plugins.WeatherPlugin.entrycount.value
 		if self.weatherPluginEntryCount >= 1:
 			if entry is not None:

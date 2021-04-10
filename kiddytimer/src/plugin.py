@@ -13,14 +13,14 @@ config.plugins.KiddyTimer = ConfigSubsection()
 config.plugins.KiddyTimer.enabled = ConfigYesNo(default=False)
 config.plugins.KiddyTimer.position_x = ConfigInteger(default=590)
 config.plugins.KiddyTimer.position_y = ConfigInteger(default=35)
-config.plugins.KiddyTimer.timerStyle = ConfigSelection(choices = [("clock", _("Clock")), ("smiley", _("Smiley")), ("noimage", _("no Image"))])
+config.plugins.KiddyTimer.timerStyle = ConfigSelection(choices=[("clock", _("Clock")), ("smiley", _("Smiley")), ("noimage", _("no Image"))])
 config.plugins.KiddyTimer.lastStartDay = ConfigText(default="")
 config.plugins.KiddyTimer.lastStatus = ConfigText(default="") # Used for cheat detection
 config.plugins.KiddyTimer.monitorStartTime = ConfigClock(default=KTglob.FOUROCLOCK)
 config.plugins.KiddyTimer.monitorEndTime = ConfigClock(default=KTglob.EIGHTOCLOCKNOON)
 config.plugins.KiddyTimer.activationDialogTimeout = ConfigInteger(default=10)
-config.plugins.KiddyTimer.pin = ConfigPIN(default = 1111 , censor = "*")
-config.plugins.KiddyTimer.remainingTime = ConfigInteger(default=int(KTglob.ONEHOUR), limits = (0,86400) )
+config.plugins.KiddyTimer.pin = ConfigPIN(default=1111 , censor="*")
+config.plugins.KiddyTimer.remainingTime = ConfigInteger(default=int(KTglob.ONEHOUR), limits=(0,86400) )
 
 config.plugins.KiddyTimer.dayTimes = ConfigSubList()
 for i in range(0, 7):
@@ -52,5 +52,5 @@ def Plugins(path,**kwargs):
             PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart),
             PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, fnc=autostart),
             PluginDescriptor(name=_("KiddyTimer"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=extensionMenu),
-            PluginDescriptor(name=_("KiddyTimer"), description=_("Allows to controls your kids' daily TV usage"), icon = "KiddyTimer.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=setup)]
+            PluginDescriptor(name=_("KiddyTimer"), description=_("Allows to controls your kids' daily TV usage"), icon="KiddyTimer.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=setup)]
 

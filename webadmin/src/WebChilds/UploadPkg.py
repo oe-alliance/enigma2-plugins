@@ -55,7 +55,7 @@ class UploadPkgResource(resource.Resource):
 					 _("Add")
 					)
 		
-		fd,fn = mkstemp(dir = "/tmp/")
+		fd,fn = mkstemp(dir="/tmp/")
 		cnt = os_write(fd, data)
 		os_close(fd)
 		os_chmod(fn, 0755)

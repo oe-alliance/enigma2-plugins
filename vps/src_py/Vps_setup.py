@@ -63,7 +63,7 @@ class VPS_Setup(Screen, ConfigListScreen):
 		self.list.append(self.vps_default)
 		self.list.append(self.vps_instanttimer)
 
-		ConfigListScreen.__init__(self, self.list, session = session)
+		ConfigListScreen.__init__(self, self.list, session=session)
 		self["config"].onSelectionChanged.append(self.updateHelp)
 
 		# Initialize Buttons

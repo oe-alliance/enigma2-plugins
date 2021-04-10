@@ -33,7 +33,7 @@ class TrafficInfoMain(Screen):
             <widget name="statuslabel" position="0,587" size="730,13" halign="left" />
         </screen>
         """
-    def __init__(self, session,args = 0):
+    def __init__(self, session,args=0):
         self.loadinginprogress = False
         self.session = session
         desktop = getDesktop(0)
@@ -160,8 +160,8 @@ class TrafficInfoMain(Screen):
         list=[]
         for item in self.trafficitems:
             res = [ item ]
-            res.append(MultiContentEntryText(pos=(0, 0), size=(75, 20), font=0, flags = RT_HALIGN_LEFT|RT_WRAP, text = item.street))
-            res.append(MultiContentEntryText(pos=(75,0), size=(455, 20), font=1, flags = RT_HALIGN_LEFT, text = item.direction))
+            res.append(MultiContentEntryText(pos=(0, 0), size=(75, 20), font=0, flags=RT_HALIGN_LEFT|RT_WRAP, text=item.street))
+            res.append(MultiContentEntryText(pos=(75,0), size=(455, 20), font=1, flags=RT_HALIGN_LEFT, text=item.direction))
             list.append(res)
         self["itemlist"].l.setList(list)
         self["itemlist"].instance.moveSelectionTo(0)
@@ -207,7 +207,7 @@ class TrafficInfoMain(Screen):
         return TrafficInfoItem(street,direction,details)
 
 class ItemList(MenuList):
-    def __init__(self, items, enableWrapAround = False):
+    def __init__(self, items, enableWrapAround=False):
         MenuList.__init__(self, items, enableWrapAround, eListboxPythonMultiContent)
         self.l.setFont(0, gFont("Regular", 20))
         self.l.setFont(1, gFont("Regular", 18))
@@ -239,5 +239,5 @@ def main(session, **kwargs):
     session.open(TrafficInfoMain)
 
 def Plugins(**kwargs):
-  return PluginDescriptor(name="Verkehrsinfo",description="Show German traffic jams",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main,icon="plugin.png")
+  return PluginDescriptor(name="Verkehrsinfo",description="Show German traffic jams",where=PluginDescriptor.WHERE_PLUGINMENU,fnc=main,icon="plugin.png")
 

@@ -40,7 +40,7 @@ def checkTimespan(begin, end):
 
 class EPGRefreshTimerEntry(timer.TimerEntry):
 	"""TimerEntry ..."""
-	def __init__(self, begin, tocall, nocheck = False):
+	def __init__(self, begin, tocall, nocheck=False):
 		timer.TimerEntry.__init__(self, int(begin), int(begin))
 
 		self.function = tocall
@@ -138,7 +138,7 @@ class EPGRefreshTimer(timer.Timer):
 		if config.plugins.epgrefresh.lastscan.value < begin and begin < time():
 			tocall()
 
-		refreshTimer = EPGRefreshTimerEntry(begin, tocall, nocheck = True)
+		refreshTimer = EPGRefreshTimerEntry(begin, tocall, nocheck=True)
 
 		i = 0
 		while i < 7:

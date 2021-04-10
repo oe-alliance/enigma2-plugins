@@ -112,7 +112,7 @@ class EmbeddedVolumeControl():
 			self["mute"].hide()
 			
 class ResizeScrollLabel(ScrollLabel):
-	def __init__(self, text = ""):
+	def __init__(self, text=""):
 		ScrollLabel.__init__(self, text)
 		
 	def resize(self, s):
@@ -130,7 +130,7 @@ class ResizeScrollLabel(ScrollLabel):
 class PiconLoader():
 	def __init__(self):
 		self.nameCache = { }
-		config.plugins.merlinEpgCenter.epgPaths.addNotifier(self.piconPathChanged, initial_call = False)
+		config.plugins.merlinEpgCenter.epgPaths.addNotifier(self.piconPathChanged, initial_call=False)
 		
 	def getPiconFilename(self, sRef):
 		pngname = ""
@@ -153,7 +153,7 @@ class PiconLoader():
 		return pngname
 		
 	def getPicon(self, pngname):
-		return LoadPixmap(cached = True, path = self.getPiconFilename(pngname))
+		return LoadPixmap(cached=True, path=self.getPiconFilename(pngname))
 		
 	def findPicon(self, sRef):
 		pngname = config.plugins.merlinEpgCenter.epgPaths.value + sRef + ".png"
@@ -161,7 +161,7 @@ class PiconLoader():
 			pngname = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MerlinEPGCenter/images/PiconMissing_small.png")
 		return pngname
 		
-	def piconPathChanged(self, configElement = None):
+	def piconPathChanged(self, configElement=None):
 		self.nameCache.clear()
 		
 def findDefaultPicon(serviceName):
@@ -186,7 +186,7 @@ def getFuzzyDay(t):
 	if d[:3] == n[:3]:
 		# same day
 		date = _("Today")
-	elif dt_date.fromtimestamp(t) == dt_date.today() + dt_timedelta(days = 1):
+	elif dt_date.fromtimestamp(t) == dt_date.today() + dt_timedelta(days=1):
 		# next day
 		date = _("Tomorrow")
 	elif nt < t and (t - nt) < WEEKSECONDS:

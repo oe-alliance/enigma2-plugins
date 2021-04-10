@@ -137,22 +137,22 @@ def addExtension():
 	from Plugins.Extensions.InfoBarTunerState.plugin import IBTSSHOW, IBTSSETUP, show, setup
 	if plugins:
 		if config.infobartunerstate.extensions_menu_show.value:
-			for p in plugins.getPlugins( where = PluginDescriptor.WHERE_EXTENSIONSMENU ):
+			for p in plugins.getPlugins( where=PluginDescriptor.WHERE_EXTENSIONSMENU ):
 				if p.name == IBTSSHOW:
 					# Plugin is already in menu
 					break
 			else:
 				# Plugin not in menu - add it
-				plugin = PluginDescriptor(name = IBTSSHOW, description = IBTSSHOW, where = PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart = False, fnc = show)
+				plugin = PluginDescriptor(name=IBTSSHOW, description=IBTSSHOW, where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart=False, fnc=show)
 				plugins.plugins[PluginDescriptor.WHERE_EXTENSIONSMENU].append(plugin)
 		if config.infobartunerstate.extensions_menu_setup.value:
-			for p in plugins.getPlugins( where = PluginDescriptor.WHERE_EXTENSIONSMENU ):
+			for p in plugins.getPlugins( where=PluginDescriptor.WHERE_EXTENSIONSMENU ):
 				if p.name == IBTSSETUP:
 					# Plugin is already in menu
 					break
 			else:
 				# Plugin not in menu - add it
-				plugin = PluginDescriptor(name = IBTSSETUP, description = IBTSSETUP, where = PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart = False, fnc = setup)
+				plugin = PluginDescriptor(name=IBTSSETUP, description=IBTSSETUP, where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart=False, fnc=setup)
 				plugins.plugins[PluginDescriptor.WHERE_EXTENSIONSMENU].append(plugin)
 
 def removeExtension():
@@ -160,12 +160,12 @@ def removeExtension():
 	from Components.PluginComponent import plugins
 	from Plugins.Extensions.InfoBarTunerState.plugin import IBTSSHOW, IBTSSETUP
 	if config.infobartunerstate.extensions_menu_show.value:
-		for p in plugins.getPlugins( where = PluginDescriptor.WHERE_EXTENSIONSMENU ):
+		for p in plugins.getPlugins( where=PluginDescriptor.WHERE_EXTENSIONSMENU ):
 			if p.name == IBTSSHOW:
 				plugins.plugins[PluginDescriptor.WHERE_EXTENSIONSMENU].remove(p)
 				break
 	if config.infobartunerstate.extensions_menu_setup.value:
-		for p in plugins.getPlugins( where = PluginDescriptor.WHERE_EXTENSIONSMENU ):
+		for p in plugins.getPlugins( where=PluginDescriptor.WHERE_EXTENSIONSMENU ):
 			if p.name == IBTSSETUP:
 				plugins.plugins[PluginDescriptor.WHERE_EXTENSIONSMENU].remove(p)
 				break
@@ -1386,7 +1386,7 @@ def getNextPendingRecordTimers():
 
 
 # Adapted from TimerEntry
-def processRepeated(timer, findRunningEvent = False):
+def processRepeated(timer, findRunningEvent=False):
 	print "ProcessRepeated"
 	
 	def addOneDay(timedatestruct):

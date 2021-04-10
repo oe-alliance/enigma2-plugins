@@ -35,13 +35,13 @@ from . import _
 
 #config for lastservice
 config.startupservice = ConfigSubsection()
-config.startupservice.lastservice = ConfigText(default = "")
-config.startupservice.lastroot = ConfigText(default = "")
-config.startupservice.lastmode = ConfigText(default = "tv")
+config.startupservice.lastservice = ConfigText(default="")
+config.startupservice.lastroot = ConfigText(default="")
+config.startupservice.lastmode = ConfigText(default="tv")
 config.startupserviceleavingstandbymode = ConfigSubsection()
-config.startupserviceleavingstandbymode.lastservice = ConfigText(default = "")
-config.startupserviceleavingstandbymode.lastroot = ConfigText(default = "")
-config.startupserviceleavingstandbymode.lastmode = ConfigText(default = "tv")
+config.startupserviceleavingstandbymode.lastservice = ConfigText(default="")
+config.startupserviceleavingstandbymode.lastroot = ConfigText(default="")
+config.startupserviceleavingstandbymode.lastmode = ConfigText(default="tv")
 
 def leaveStandby():
 	if config.startupserviceleavingstandbymode.lastservice.value != "" and config.startupserviceleavingstandbymode.lastroot.value != "":
@@ -69,7 +69,7 @@ def main(session, **kwargs):
 	# copy startupservice data to config.tv or config.radio if available
 	if config.startupservice.lastservice.value != "" and config.startupservice.lastroot.value != "":
 		config.servicelist = ConfigSubsection()
-		config.servicelist.lastmode = ConfigText(default = "tv")
+		config.servicelist.lastmode = ConfigText(default="tv")
 		config.servicelist.lastmode.value = config.startupservice.lastmode.value
 		config.servicelist.lastmode.save()
 		if config.startupservice.lastmode.value == "tv":
@@ -90,7 +90,7 @@ def main(session, **kwargs):
 		startUpServiceInit()
 	except:
 		pass
-	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
+	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
 ###########################################
 # ChannelContextMenu
@@ -115,8 +115,8 @@ def startUpService__init__(self, session, csel):
 	if csel.bouquet_mark_edit == 0 and not csel.movemode:
 		if not inBouquetRootList:
 			if not (current.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
-				self["menu"].list.insert(1, ChoiceEntryComponent(text = (_("set as startup service"), boundFunction(self.startUpServiceContextMenuCallback,True))))
-				self["menu"].list.insert(2, ChoiceEntryComponent(text = (_("reset startup service"), boundFunction(self.startUpServiceContextMenuCallback,False))))
+				self["menu"].list.insert(1, ChoiceEntryComponent(text=(_("set as startup service"), boundFunction(self.startUpServiceContextMenuCallback,True))))
+				self["menu"].list.insert(2, ChoiceEntryComponent(text=(_("reset startup service"), boundFunction(self.startUpServiceContextMenuCallback,False))))
 
 def startUpServiceContextMenuCallback(self, add):
 	if add:
@@ -129,7 +129,7 @@ def startUpServiceContextMenuCallback(self, add):
 				(_("reset startup service for booting..."), boundFunction(self.resetStartUpService, config.startupservice)),
 				(_("reset startup service for leaving standby mode..."), boundFunction(self.resetStartUpService, config.startupserviceleavingstandbymode)),
 			]
-	self.session.openWithCallback(self.startUpServiceMenuCallback, ChoiceBox,list = options)
+	self.session.openWithCallback(self.startUpServiceMenuCallback, ChoiceBox,list=options)
 
 def startUpServiceMenuCallback(self, ret):
 	ret and ret[1]()
@@ -162,5 +162,5 @@ def resetStartUpService(self, configElement):
 	self.close()
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(name="StartUpService", description="set startup service", where = PluginDescriptor.WHERE_SESSIONSTART, fnc=main)]
+	return [PluginDescriptor(name="StartUpService", description="set startup service", where=PluginDescriptor.WHERE_SESSIONSTART, fnc=main)]
 

@@ -225,12 +225,12 @@ class PushServiceBase(Modules, ConfigFile):
 		def build(root, instances, typ):
 			for instance in instances:
 				# Add module
-				element = SubElement( root, typ, name = stringToXML(instance.getName()), enable = stringToXML(instance.getStringEnable()) )
+				element = SubElement( root, typ, name=stringToXML(instance.getName()), enable=stringToXML(instance.getStringEnable()) )
 				# Add options
 				options = instance.getStringOptions()
 				if options:
 					for key, value, description in options:
-						SubElement( element, OPTION, key = stringToXML(key) ).text = stringToXML(value)
+						SubElement( element, OPTION, key=stringToXML(key) ).text = stringToXML(value)
 			return root
 		
 		if services:

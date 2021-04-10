@@ -11,13 +11,13 @@ from Components.PluginComponent import plugins
 config.plugins.simpleRSS = ConfigSubsection()
 simpleRSS = config.plugins.simpleRSS
 simpleRSS.update_notification = ConfigSelection(
-	choices = [
+	choices=[
 		("notification", _("Notification")),
 		("preview", _("Preview")),
 		("ticker", _("Ticker")),
 		("none", _("none"))
 	],
-	default = "preview"
+	default="preview"
 )
 simpleRSS.interval = ConfigNumber(default=15)
 simpleRSS.feedcount = ConfigNumber(default=0)
@@ -106,8 +106,8 @@ def filescan_open(item, session, **kwargs):
 	session.open(
 		MessageBox,
 		_("%d Feed(s) were added to configuration.") % (len(item)),
-		type = MessageBox.TYPE_INFO,
-		timeout = 5
+		type=MessageBox.TYPE_INFO,
+		timeout=5
 	)
 
 # Filescanner
@@ -121,14 +121,13 @@ def filescan(**kwargs):
 
 	return [
 		RemoteScanner(
-			mimetypes = ("application/rss+xml", "application/atom+xml"),
-			paths_to_scan =
-				(
-					ScanPath(path = "", with_subdirs = False),
+			mimetypes=("application/rss+xml", "application/atom+xml"),
+			paths_to_scan=(
+					ScanPath(path="", with_subdirs=False),
 				),
-			name = "RSS-Reader",
-			description = _("Subscribe Newsfeed..."),
-			openfnc = filescan_open,
+			name="RSS-Reader",
+			description=_("Subscribe Newsfeed..."),
+			openfnc=filescan_open,
 		)
 	]
 
@@ -136,27 +135,27 @@ def Plugins(**kwargs):
 	from Plugins.Plugin import PluginDescriptor
  	return [
 		PluginDescriptor(
-			name = "RSS Reader",
-			description = _("A simple to use RSS reader"),
-			where = PluginDescriptor.WHERE_PLUGINMENU,
+			name="RSS Reader",
+			description=_("A simple to use RSS reader"),
+			where=PluginDescriptor.WHERE_PLUGINMENU,
 			fnc=main,
 			needsRestart=False,
 		),
  		PluginDescriptor(
-			where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART],
-			fnc = autostart,
+			where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART],
+			fnc=autostart,
 			needsRestart=False,
 		),
  		PluginDescriptor(
-			name = _("View RSS..."),
-			description = "Let's you view current RSS entries",
-			where = PluginDescriptor.WHERE_EXTENSIONSMENU,
+			name=_("View RSS..."),
+			description="Let's you view current RSS entries",
+			where=PluginDescriptor.WHERE_EXTENSIONSMENU,
 			fnc=main,
 			needsRestart=False,
 		),
  		PluginDescriptor(
-			where = PluginDescriptor.WHERE_FILESCAN,
-			fnc = filescan,
+			where=PluginDescriptor.WHERE_FILESCAN,
+			fnc=filescan,
 			needsRestart=False,
 		)
 	]

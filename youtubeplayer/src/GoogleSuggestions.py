@@ -24,7 +24,7 @@ import socket
 
 
 class GoogleSuggestions():
-	def __init__(self, callback, ds = None, json = None, hl = None):
+	def __init__(self, callback, ds=None, json=None, hl=None):
 		self.callback = callback
 		self.conn = httplib.HTTPConnection("google.com")
 		self.prepQuerry = "/complete/search?"

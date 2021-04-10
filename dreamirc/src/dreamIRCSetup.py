@@ -45,7 +45,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 			<widget source="key_green" render="Label" position="280,250" zPosition="1" size="150,40" font="Regular;19" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 		</screen>"""
 
-	def __init__(self, session, args = 0):
+	def __init__(self, session, args=0):
 		Screen.__init__(self, session)
 		self.hardware_info = HardwareInfo()
 		self.device=self.hardware_info.get_device_name()
@@ -115,14 +115,14 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 
 		if self.debug != "True" or self.debug != "False":
 			self.debug="False"	
-		self.dreamIRCconf.nick = ConfigText(default = self.nick, fixed_size = False)
-		self.dreamIRCconf.passwd = ConfigText(default = self.passwd, fixed_size = False)
-		self.dreamIRCconf.server1 = ConfigText(default = self.server1, fixed_size = False)
-		self.dreamIRCconf.server2 = ConfigText(default = self.server2, fixed_size = False)
-		self.dreamIRCconf.server3 = ConfigText(default = self.server3, fixed_size = False)
-		self.dreamIRCconf.port = ConfigInteger(default = string.atoi(self.port), limits = (0, 99999))
-		self.dreamIRCconf.channel = ConfigText(default = self.channel, fixed_size = False)
-		self.dreamIRCconf.debug = ConfigSelection(default=self.debug, choices = ["False","True"])
+		self.dreamIRCconf.nick = ConfigText(default=self.nick, fixed_size=False)
+		self.dreamIRCconf.passwd = ConfigText(default=self.passwd, fixed_size=False)
+		self.dreamIRCconf.server1 = ConfigText(default=self.server1, fixed_size=False)
+		self.dreamIRCconf.server2 = ConfigText(default=self.server2, fixed_size=False)
+		self.dreamIRCconf.server3 = ConfigText(default=self.server3, fixed_size=False)
+		self.dreamIRCconf.port = ConfigInteger(default=string.atoi(self.port), limits=(0, 99999))
+		self.dreamIRCconf.channel = ConfigText(default=self.channel, fixed_size=False)
+		self.dreamIRCconf.debug = ConfigSelection(default=self.debug, choices=["False","True"])
 
 	def keySave(self):
 		self.accounts=[]

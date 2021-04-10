@@ -137,7 +137,7 @@ class EPGRefreshListServicesResource(resource.Resource):
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
-		return ''.join(epgrefresh.buildConfiguration(webif = True))
+		return ''.join(epgrefresh.buildConfiguration(webif=True))
 
 class EPGRefreshPreviewServicesResource(resource.Resource):
 	def render(self, req):

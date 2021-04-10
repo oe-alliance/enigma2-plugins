@@ -14,11 +14,11 @@ from twisted.internet import reactor
 sessions = []
 
 config.plugins.DynDNS = ConfigSubsection()
-config.plugins.DynDNS.enable = ConfigYesNo(default = False)
-config.plugins.DynDNS.interval = ConfigSelection(default = "10", choices = [("5", _("5 min.")),("10", _("10 min.")),("15", _("15 min.")),("30", _("30 min.")),("60", _("60 min."))])
-config.plugins.DynDNS.hostname = ConfigText(default = "", fixed_size = False)
-config.plugins.DynDNS.user = ConfigText(default = "", fixed_size = False)
-config.plugins.DynDNS.password = ConfigText(default = "", fixed_size = False)
+config.plugins.DynDNS.enable = ConfigYesNo(default=False)
+config.plugins.DynDNS.interval = ConfigSelection(default="10", choices=[("5", _("5 min.")),("10", _("10 min.")),("15", _("15 min.")),("30", _("30 min.")),("60", _("60 min."))])
+config.plugins.DynDNS.hostname = ConfigText(default="", fixed_size=False)
+config.plugins.DynDNS.user = ConfigText(default="", fixed_size=False)
+config.plugins.DynDNS.password = ConfigText(default="", fixed_size=False)
 
 class DynDNSScreenMain(ConfigListScreen,Screen):
     skin = """
@@ -27,7 +27,7 @@ class DynDNSScreenMain(ConfigListScreen,Screen):
         <widget name="buttonred" position="10,360" size="100,40" backgroundColor="red" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/>
         <widget name="buttongreen" position="120,360" size="100,40" backgroundColor="green" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/>
         </screen>"""
-    def __init__(self, session, args = 0):
+    def __init__(self, session, args=0):
         self.session = session
         Screen.__init__(self, session)
         self.list = []
@@ -139,6 +139,6 @@ def onSessionStart(reason, **kwargs):
 			dyndnsservice.disable()
 
 def Plugins(path,**kwargs):
-	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = onSessionStart),
-		    PluginDescriptor(name=_("DynDNS"), description=_("use www.DynDNS.org on your Box"),where = [PluginDescriptor.WHERE_PLUGINMENU], fnc = onPluginStart, icon="icon.png")]
+	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=onSessionStart),
+		    PluginDescriptor(name=_("DynDNS"), description=_("use www.DynDNS.org on your Box"),where=[PluginDescriptor.WHERE_PLUGINMENU], fnc=onPluginStart, icon="icon.png")]
 

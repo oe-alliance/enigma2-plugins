@@ -1147,8 +1147,8 @@ initLog()
 def Plugins(path, **kwargs): #@UnusedVariable kwargs # pylint: disable-msg=W0613,C0103
 	return [
 			 PluginDescriptor(name=_("Email Client"), description=_("view Emails via IMAP4"),
-			 where = PluginDescriptor.WHERE_PLUGINMENU,
-			 fnc = main,
+			 where=PluginDescriptor.WHERE_PLUGINMENU,
+			 fnc=main,
 			 icon="plugin.png"
 			 ),
 			 PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart)

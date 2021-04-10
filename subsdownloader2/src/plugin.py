@@ -66,14 +66,14 @@ else:
 
 #define config:
 config.plugins.subsdownloader = ConfigSubsection()
-config.plugins.subsdownloader.path = ConfigText(default = "/", fixed_size = False)
-config.plugins.subsdownloader.pathSave = ConfigYesNo(default = True)
-config.plugins.subsdownloader.BlueButtonMenu = ConfigYesNo(default = True)
-config.plugins.subsdownloader.AutoUpdate = ConfigYesNo(default = True)
-config.plugins.subsdownloader.pathUseMediaPaternFilter = ConfigYesNo(default = False)
-config.plugins.subsdownloader.extendedMenuConfig = ConfigYesNo(default = False)
-config.plugins.subsdownloader.ItasaUser = ConfigText(default = "login", fixed_size = False)
-config.plugins.subsdownloader.ItasaPassword = ConfigPassword(default = "password", fixed_size = False)
+config.plugins.subsdownloader.path = ConfigText(default="/", fixed_size=False)
+config.plugins.subsdownloader.pathSave = ConfigYesNo(default=True)
+config.plugins.subsdownloader.BlueButtonMenu = ConfigYesNo(default=True)
+config.plugins.subsdownloader.AutoUpdate = ConfigYesNo(default=True)
+config.plugins.subsdownloader.pathUseMediaPaternFilter = ConfigYesNo(default=False)
+config.plugins.subsdownloader.extendedMenuConfig = ConfigYesNo(default=False)
+config.plugins.subsdownloader.ItasaUser = ConfigText(default="login", fixed_size=False)
+config.plugins.subsdownloader.ItasaPassword = ConfigPassword(default="password", fixed_size=False)
 #config.plugins.subsdownloader.del_sub_after_conv = ConfigYesNo(default = False)
 
 #Create Subtitle Server plugin list
@@ -84,7 +84,7 @@ for server in PERISCOPE_PLUGINS :
 XBMC_PLUGINS = list_XBMC_Periscope_plugins('/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/SourceCode/xbmc_subtitles/services/')
 for server in XBMC_PLUGINS:
 	SUBTITLE_SERVER_LIST.append((server,server))
-config.plugins.subsdownloader.subtitleserver = ConfigSelection(default = "OpenSubtitle", choices = SUBTITLE_SERVER_LIST)
+config.plugins.subsdownloader.subtitleserver = ConfigSelection(default="OpenSubtitle", choices=SUBTITLE_SERVER_LIST)
 if os.path.exists('/usr/lib/enigma2/python/Plugins/Extensions/DMnapi/DMnapi.py'):
 	try:
 		from Plugins.Extensions.DMnapi.DMnapi import DMnapi, dmnapi_version
@@ -102,14 +102,14 @@ for x in LANGUAGES:
 	#SubsDownloaderLangs.append(getConfigListEntry(toScriptLang(str(x)),toScriptLang(str(x))))
 	SubsDownloaderLangs.append(getConfigListEntry(x[0],x[0]))
 SubsDownloaderLangs.append(getConfigListEntry("All","All"))
-config.plugins.subsdownloader.SubsDownloader1stLang = ConfigSelection(default ="English", choices = SubsDownloaderLangs)
-config.plugins.subsdownloader.SubsDownloader2ndLang = ConfigSelection(default ="Polish", choices = SubsDownloaderLangs)
-config.plugins.subsdownloader.SubsDownloader3rdLang = ConfigSelection(default ="German", choices = SubsDownloaderLangs)
-config.plugins.subsdownloader.Napisy24SearchMethod = ConfigSelection(default = "IMDB", choices = [(_("IMDB"),"IMDB"), (_("IMDB then movie filname"),"IMDB then movie filname"), (_("movie filname"),"movie filname")])
-config.plugins.subsdownloader.Napisy24MovieNameMethod = ConfigYesNo(default = True)
+config.plugins.subsdownloader.SubsDownloader1stLang = ConfigSelection(default="English", choices=SubsDownloaderLangs)
+config.plugins.subsdownloader.SubsDownloader2ndLang = ConfigSelection(default="Polish", choices=SubsDownloaderLangs)
+config.plugins.subsdownloader.SubsDownloader3rdLang = ConfigSelection(default="German", choices=SubsDownloaderLangs)
+config.plugins.subsdownloader.Napisy24SearchMethod = ConfigSelection(default="IMDB", choices=[(_("IMDB"),"IMDB"), (_("IMDB then movie filname"),"IMDB then movie filname"), (_("movie filname"),"movie filname")])
+config.plugins.subsdownloader.Napisy24MovieNameMethod = ConfigYesNo(default=True)
 
 class SubsDownloaderApplication(Screen):
-	def __init__(self, session, args = 0):
+	def __init__(self, session, args=0):
 		
 		global Skin_width
 		global Skin_height
@@ -191,9 +191,9 @@ class SubsDownloaderApplication(Screen):
 		self.altservice = self.session.nav.getCurrentlyPlayingServiceReference()
 		list = []
 		if config.plugins.subsdownloader.pathUseMediaPaternFilter.value == True:
-			self["fileList"] = FileList(fileListPath, matchingPattern = None)
+			self["fileList"] = FileList(fileListPath, matchingPattern=None)
 		else:
-			self["fileList"] = FileList(fileListPath, matchingPattern = self.mediaPatern)
+			self["fileList"] = FileList(fileListPath, matchingPattern=self.mediaPatern)
 		self.selectedList = self["fileList"]
 		self["subsList"] = MenuList(list)
 		self.fileManagerEnabled = False
@@ -399,9 +399,9 @@ class SubsDownloaderApplication(Screen):
 					pass #do nothing execute command during blue button press
 				elif self.showFilemanagerScreen_command[0] == "rename":
 					if os.path.isdir(self.showFilemanagerScreen_command[1]):
-						self.session.openWithCallback(VirtualKeyboart_dir_rename_Callback, VirtualKeyBoard, title = _("Oryginal dir name: %s" % self.showFilemanagerScreen_command[1].split("/")[-2]), text = self.showFilemanagerScreen_command[1].split("/")[-2])
+						self.session.openWithCallback(VirtualKeyboart_dir_rename_Callback, VirtualKeyBoard, title=_("Oryginal dir name: %s" % self.showFilemanagerScreen_command[1].split("/")[-2]), text=self.showFilemanagerScreen_command[1].split("/")[-2])
 					elif os.path.isfile(self.showFilemanagerScreen_command[1]):
-						self.session.openWithCallback(VirtualKeyboart_file_rename_Callback, VirtualKeyBoard, title = _("Oryginal file name: %s" % self.showFilemanagerScreen_command[1].split("/")[-1]), text = self.showFilemanagerScreen_command[1].split("/")[-1])
+						self.session.openWithCallback(VirtualKeyboart_file_rename_Callback, VirtualKeyBoard, title=_("Oryginal file name: %s" % self.showFilemanagerScreen_command[1].split("/")[-1]), text=self.showFilemanagerScreen_command[1].split("/")[-1])
 				elif self.showFilemanagerScreen_command[0] == "Do_nothing":
 					self.set_FileManager_disabled()
 				else:
@@ -479,7 +479,7 @@ class SubsDownloaderApplication(Screen):
 			self.session.openWithCallback(self.__executeDMnapi_callback, DMnapi, media_file_path)
 			
 		except:
-			self.session.open(MessageBox, _("There is problem with DMnapi execution.\nCheck if Your SubsDownloader supports DMnapi %s version.", dmnapi_version), MessageBox.TYPE_INFO, timeout = 10)
+			self.session.open(MessageBox, _("There is problem with DMnapi execution.\nCheck if Your SubsDownloader supports DMnapi %s version.", dmnapi_version), MessageBox.TYPE_INFO, timeout=10)
 	
 	def __executeDMnapi_callback(self, callback=None):
 		self["fileList"].refresh()
@@ -607,7 +607,7 @@ class SubsDownloaderApplication(Screen):
 			#return float(str(round(choosen_movie.fps(),3))[0:-1])
 			return round(choosen_movie.fps(),3) #JESLI NAPISY NIE BEDA W CZASIE PADSOWAC TO POKOMBINOWAC Z TA LINIJKA
 		except:
-			self.session.open(MessageBox,_("I can't detect movie FPS!!!"), MessageBox.TYPE_INFO, timeout = 5)
+			self.session.open(MessageBox,_("I can't detect movie FPS!!!"), MessageBox.TYPE_INFO, timeout=5)
 			return "None"
 
 	def __defaults_before_subtitle_download_and_convertion(self):
@@ -624,7 +624,7 @@ class SubsDownloaderApplication(Screen):
 		local_subtitle = []
 		if self.selectedList == self["fileList"] and self.return_media_kind(self.return_extention(selected_movie_file))=="movie":
 			self.localConvertion = True
-			self.session.open(MessageBox,_("Local subtitle convertion for:\n%s." % (str(selected_movie_file))), MessageBox.TYPE_INFO, timeout = 15)
+			self.session.open(MessageBox,_("Local subtitle convertion for:\n%s." % (str(selected_movie_file))), MessageBox.TYPE_INFO, timeout=15)
 			self.__defaults_before_subtitle_download_and_convertion()
 			self.movie_filename = selected_movie_dir+selected_movie_file
 			file_list = self["fileList"].getFileList()			
@@ -640,7 +640,7 @@ class SubsDownloaderApplication(Screen):
 			self["subsList"].setList(local_subtitle)
 			self.set_listSubs_enabled()
 		else:
-			self.session.open(MessageBox,_("I can't convert subtitle for this kind of media!!!"), MessageBox.TYPE_INFO, timeout = 5)
+			self.session.open(MessageBox,_("I can't convert subtitle for this kind of media!!!"), MessageBox.TYPE_INFO, timeout=5)
 
 	def convert_subtitle_to_movie(self, movie_filename, subtitle_filename):
 		if (movie_filename.rsplit(".", 1)[0]+".srt") == subtitle_filename:
@@ -667,7 +667,7 @@ class SubsDownloaderApplication(Screen):
 		self.__defaults_before_subtitle_download_and_convertion()
 		self.localConvertion = False
 		if self["fileList"].canDescent():
-			self.session.open(MessageBox,_("I can't download subtitle for this kind of media!!!"), MessageBox.TYPE_INFO, timeout = 5)
+			self.session.open(MessageBox,_("I can't download subtitle for this kind of media!!!"), MessageBox.TYPE_INFO, timeout=5)
 		else:
 			self.movie_filename = self["fileList"].getCurrentDirectory() + self["fileList"].getFilename()
 			if self.return_media_kind(self.return_extention(self.movie_filename))=="movie":
@@ -682,7 +682,7 @@ class SubsDownloaderApplication(Screen):
 					#if len(self.subtitle_database) == 0:
 					if self.subtitle_database == []:	
 						self.clearSubList()
-						self.session.open(MessageBox,_("There is no subtitle on this server to Your movie. \nPlease try another language or subtitle server.\n\nIf error still appears please check network connection with server."), MessageBox.TYPE_INFO, timeout = 5)
+						self.session.open(MessageBox,_("There is no subtitle on this server to Your movie. \nPlease try another language or subtitle server.\n\nIf error still appears please check network connection with server."), MessageBox.TYPE_INFO, timeout=5)
 					else:
 						self.setServerAvailableSubtitles_for_PERISCOPE(self.subtitle_database)
 				elif config.plugins.subsdownloader.subtitleserver.value in  XBMC_PLUGINS:
@@ -701,7 +701,7 @@ class SubsDownloaderApplication(Screen):
 					#self.subtitle_database= self.subtitles.XBMC_search_subtitles(self.movie_filename,config.plugins.subsdownloader.SubsDownloader1stLang.value,config.plugins.subsdownloader.SubsDownloader2ndLang.value,config.plugins.subsdownloader.SubsDownloader3rdLang.value)
 					if self.subtitle_database == []:
 						self.clearSubList()
-						self.session.open(MessageBox,_("There is no subtitle on this server to Your movie. \nPlease try another language or subtitle server.\n\nIf error still appears please check network connection with server."), MessageBox.TYPE_INFO, timeout = 5)
+						self.session.open(MessageBox,_("There is no subtitle on this server to Your movie. \nPlease try another language or subtitle server.\n\nIf error still appears please check network connection with server."), MessageBox.TYPE_INFO, timeout=5)
 					else:
 						#os.system('echo "%s" >> /text' % str(self.subtitle_database))
 						self.setServerAvailableSubtitles_for_XBMC_SUBTITLES(self.subtitle_database)
@@ -721,7 +721,7 @@ class SubsDownloaderApplication(Screen):
 					if subtitle_filename[0] != "None":
 						self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename[0])
 					else:
-						self.session.open(MessageBox, _("There is problem with downloading or saveing subtitles on storage device."), MessageBox.TYPE_INFO, timeout = 5)
+						self.session.open(MessageBox, _("There is problem with downloading or saveing subtitles on storage device."), MessageBox.TYPE_INFO, timeout=5)
 					
 					"""try:
 						self.NapiSubtitle.getnapi(self.movie_filename)
@@ -751,7 +751,7 @@ class SubsDownloaderApplication(Screen):
 			elif config.plugins.subsdownloader.subtitleserver.value == "Napisy24":
 				pass
 			else:
-				self.session.open(MessageBox,_("I can't download subtitle for this kind of media!!!"), MessageBox.TYPE_INFO, timeout = 5)
+				self.session.open(MessageBox,_("I can't download subtitle for this kind of media!!!"), MessageBox.TYPE_INFO, timeout=5)
 
 	def virtualKeyboardOpen(self):
 		if config.plugins.subsdownloader.Napisy24SearchMethod.value == "IMDB then movie filname" or config.plugins.subsdownloader.Napisy24SearchMethod.value == "movie filname":
@@ -760,11 +760,11 @@ class SubsDownloaderApplication(Screen):
 			elif config.plugins.subsdownloader.Napisy24MovieNameMethod.value == True:
 				temp_struct = GuessFileData_from_FileName(SubtitleDatabase.tvshowRegex, SubtitleDatabase.tvshowRegex2, SubtitleDatabase.movieRegex)
 				movie_name = temp_struct.return_data_string(self["fileList"].getFilename())			
-			self.session.openWithCallback(self.VirtualKeyboartCallback, VirtualKeyBoard, title = ("Search subtitle(s) for:\n%s" % self["fileList"].getFilename()), text = movie_name)
+			self.session.openWithCallback(self.VirtualKeyboartCallback, VirtualKeyBoard, title=("Search subtitle(s) for:\n%s" % self["fileList"].getFilename()), text=movie_name)
 		else:
-			self.VirtualKeyboartCallback(callback = None)
+			self.VirtualKeyboartCallback(callback=None)
 							
-	def VirtualKeyboartCallback(self, callback = None):
+	def VirtualKeyboartCallback(self, callback=None):
 		N24_movie_name = None
 		N24_imdb_search = None
 		IMDM_results = None
@@ -797,16 +797,16 @@ class SubsDownloaderApplication(Screen):
 		else:
 			if (IMDM_results == False or IMDM_results ==None) and N24_movie_name == None:
 				if config.plugins.subsdownloader.Napisy24SearchMethod.value == "IMDB":
-					self.session.open(MessageBox,_("NAPISY24 searching method error:\n\nCan't find IMDB identifier for this movie.\nPlease try another searching method."), MessageBox.TYPE_INFO, timeout = 10)
+					self.session.open(MessageBox,_("NAPISY24 searching method error:\n\nCan't find IMDB identifier for this movie.\nPlease try another searching method."), MessageBox.TYPE_INFO, timeout=10)
 				elif config.plugins.subsdownloader.Napisy24SearchMethod.value == "IMDB then movie filname":
-					self.session.open(MessageBox,_("NAPISY24 searching method error:\n\nBoth IMDB and movie name haven't values. \nPlease give at least one correct searching value."), MessageBox.TYPE_INFO, timeout = 10)
+					self.session.open(MessageBox,_("NAPISY24 searching method error:\n\nBoth IMDB and movie name haven't values. \nPlease give at least one correct searching value."), MessageBox.TYPE_INFO, timeout=10)
 				elif config.plugins.subsdownloader.Napisy24SearchMethod.value == "movie filname":
-					self.session.open(MessageBox,_("NAPISY24 searching method error:\n\nPlease enter movie name to search."), MessageBox.TYPE_INFO, timeout = 10)
+					self.session.open(MessageBox,_("NAPISY24 searching method error:\n\nPlease enter movie name to search."), MessageBox.TYPE_INFO, timeout=10)
 			else:
-				self.session.open(MessageBox,_("There is no subtitle on this server to Your movie. \nPlease try another search method or subtitle server.\n\nIf error still appears please check network connection with server."), MessageBox.TYPE_INFO, timeout = 10)
+				self.session.open(MessageBox,_("There is no subtitle on this server to Your movie. \nPlease try another search method or subtitle server.\n\nIf error still appears please check network connection with server."), MessageBox.TYPE_INFO, timeout=10)
 
 	def failed_to_download_subtitle_nfo(self,subtitle_filename,subtitle_codepade_,subtitle_filename_type,movie_fps):
-		self.session.open(MessageBox,_("Failed to download or save file.\nPossible problems:\n- Subtitle filname:\n%s\n- Subtitle codepage:\n%s\n- Subtitle filetype:\n%s\n- Movie fsp:\n%s\n.") % (subtitle_filename,subtitle_codepade_,subtitle_filename_type,movie_fps), MessageBox.TYPE_INFO, timeout = 15)
+		self.session.open(MessageBox,_("Failed to download or save file.\nPossible problems:\n- Subtitle filname:\n%s\n- Subtitle codepage:\n%s\n- Subtitle filetype:\n%s\n- Movie fsp:\n%s\n.") % (subtitle_filename,subtitle_codepade_,subtitle_filename_type,movie_fps), MessageBox.TYPE_INFO, timeout=15)
 		
 	def make_media_patern(self):
 		"""Creare media patern to file browser based on self.textEXTENSIONS from this module
@@ -957,7 +957,7 @@ class SubsDownloaderApplication(Screen):
 						if (xfile.st_size < 61440):
 							self.session.open(vEditor, filename)
 						else:
-							self.session.open(MessageBox, _("File size is bigger than 61440.\n\n Subs Downloader can't manage it with vEditor."), MessageBox.TYPE_INFO, timeout = 5)
+							self.session.open(MessageBox, _("File size is bigger than 61440.\n\n Subs Downloader can't manage it with vEditor."), MessageBox.TYPE_INFO, timeout=5)
 		if self.selectedList == self["subsList"] and self.fileManagerEnabled == False:
 			whichSubtitleDownload="None"
 			subtitle_filename = []
@@ -1000,9 +1000,9 @@ class SubsDownloaderApplication(Screen):
 								self.convert_subtitle_to_movie(x['movie'], x['subtitle'])
 						else:
 							self["fileList"].refresh()
-							self.session.open(MessageBox, _("%i file(s) was extracted and I didn't match them automatically this time. \n Please make local convertion (long TEXT).") % (len(subtitle_filename)) , MessageBox.TYPE_INFO, timeout = 10)
+							self.session.open(MessageBox, _("%i file(s) was extracted and I didn't match them automatically this time. \n Please make local convertion (long TEXT).") % (len(subtitle_filename)) , MessageBox.TYPE_INFO, timeout=10)
 				if subtitle_filename == [] or subtitle_filename == "":
-					self.session.open(MessageBox, _("There is problem with downloading or saveing subtitles on storage device."), MessageBox.TYPE_INFO, timeout = 5)
+					self.session.open(MessageBox, _("There is problem with downloading or saveing subtitles on storage device."), MessageBox.TYPE_INFO, timeout=5)
 			
 			elif self.localConvertion == True:
 				#local convertion in progress
@@ -1048,7 +1048,7 @@ class SubsDownloaderApplication(Screen):
 		for name in files:
 			testname = name.lower()
 			if testname.endswith(".mp3") or name.endswith(".m4a") or name.endswith(".ogg") or name.endswith(".flac"):
-				slist.append((Item(text = name, filename = os_path.join(self["fileList"].getCurrentDirectory(),name)),))
+				slist.append((Item(text=name, filename=os_path.join(self["fileList"].getCurrentDirectory(),name)),))
 				if self["fileList"].getFilename() == name:
 					foundIndex = index
 				index = index + 1
@@ -1097,7 +1097,7 @@ class FileManagerCommands(Screen):
 		if returnValue == "exit":
 			self.ExitWithoutDoingNothing()
 		elif returnValue == "delete":
-			self.session.openWithCallback(delete_command_notification, MessageBox,_("Do You realy want to delete: /n %s" % self.file_to_manage), MessageBox.TYPE_YESNO, default = False)
+			self.session.openWithCallback(delete_command_notification, MessageBox,_("Do You realy want to delete: /n %s" % self.file_to_manage), MessageBox.TYPE_YESNO, default=False)
 		elif returnValue == "copy":
 			self.close (("copy", self.file_to_manage))
 		elif returnValue == "move":
@@ -1310,7 +1310,7 @@ class MviExplorer(Screen):
 
 
 class PictureExplorerII(Screen):
-	def __init__(self, session, whatPic = None, whatDir = None):
+	def __init__(self, session, whatPic=None, whatDir=None):
 		self.skin = '<screen flags="wfNoBorder" position="0,0" size="'+str(Screen_width)+','+str(Screen_height)+'" title="Picture-Explorer" backgroundColor="#00121214"> \
 		<widget name="Picture" position="0,0" size="'+str(Screen_width)+','+str(Screen_height)+'" zPosition="1" alphatest="on" /> \
 		<widget name="State" font="Regular;20" halign="center" position="0,'+str(int(0.904*720))+'" size="'+str(Screen_width)+',70" backgroundColor="#01080911" foregroundColor="#fcc000" transparent="0" zPosition="9"/> \
@@ -1584,8 +1584,8 @@ def main(session, **kwargs):
 
 
 def Plugins(**kwargs):
-	desc_plugin_menu = PluginDescriptor(name="SubsDownloader",description="Download subtitle to any movie",where = PluginDescriptor.WHERE_PLUGINMENU,icon="subsdownloader.png",fnc=main)
-	desc_menu_Blue_button_menu = PluginDescriptor(name="SubsDownloader",description="Download subtitle to any movie",where = PluginDescriptor.WHERE_EXTENSIONSMENU,fnc=main)
+	desc_plugin_menu = PluginDescriptor(name="SubsDownloader",description="Download subtitle to any movie",where=PluginDescriptor.WHERE_PLUGINMENU,icon="subsdownloader.png",fnc=main)
+	desc_menu_Blue_button_menu = PluginDescriptor(name="SubsDownloader",description="Download subtitle to any movie",where=PluginDescriptor.WHERE_EXTENSIONSMENU,fnc=main)
 	list = []
 	list.append(desc_plugin_menu)
 	if config.plugins.subsdownloader.BlueButtonMenu.value == True:

@@ -35,7 +35,7 @@ CODE_IMP_PARAM = 504
 CODE_NOK = 550
 CODE_ERR = 554
 class SimpleVDRProtocol(LineReceiver):
-	def __init__(self, client = False):
+	def __init__(self, client=False):
 		self.client = client
 		self._channelList = []
 		from Components.MovieList import MovieList
@@ -319,10 +319,10 @@ class SimpleVDRProtocol(LineReceiver):
 		Notifications.AddNotificationWithID(
 			NOTIFICATIONID,
 			MessageBox,
-			text = data,
-			type = MessageBox.TYPE_INFO,
-			timeout = 5,
-			close_on_any_key = True,
+			text=data,
+			type=MessageBox.TYPE_INFO,
+			timeout=5,
+			close_on_any_key=True,
 		)
 		payload = "%d Message queued" % (CODE_OK,)
 		self.sendLine(payload)
@@ -553,7 +553,7 @@ class SimpleVDRProtocolAbstraction:
 		self.serverPort = reactor.listenTCP(SVDRP_TCP_PORT, self.serverFactory)
 		self.pending += 1
 
-	def maybeClose(self, resOrFail, defer = None):
+	def maybeClose(self, resOrFail, defer=None):
 		self.pending -= 1
 		if self.pending == 0:
 			if defer:
@@ -564,7 +564,7 @@ class SimpleVDRProtocolAbstraction:
 		if self.serverPort:
 			d = self.serverPort.stopListening()
 			if d:
-				d.addBoth(self.maybeClose, defer = defer)
+				d.addBoth(self.maybeClose, defer=defer)
 			else:
 				self.pending -= 1
 

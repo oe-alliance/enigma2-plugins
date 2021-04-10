@@ -35,9 +35,9 @@ babeldone=0
 babelon=0
 
 config.plugins.babelzapper = ConfigSubsection()
-config.plugins.babelzapper.enabled = ConfigEnableDisable(default = False)
-config.plugins.babelzapper.changetime = ConfigInteger(default = 1000, limits = (200, 10000))
-config.plugins.babelzapper.exit2escape = ConfigEnableDisable(default = False)
+config.plugins.babelzapper.enabled = ConfigEnableDisable(default=False)
+config.plugins.babelzapper.changetime = ConfigInteger(default=1000, limits=(200, 10000))
+config.plugins.babelzapper.exit2escape = ConfigEnableDisable(default=False)
 
 def main(session,**kwargs):
 	session.open(BabelzapperConfiguration)
@@ -50,8 +50,8 @@ def autostart(reason, **kwargs):
 		session.open(BabelZapperStartup)
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart),
-		PluginDescriptor(name="Babelzapper", description=_("Mute button remote control"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="babelzapper.png", fnc=main)]
+	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart),
+		PluginDescriptor(name="Babelzapper", description=_("Mute button remote control"), where=PluginDescriptor.WHERE_PLUGINMENU, icon="babelzapper.png", fnc=main)]
 
 class BabelzapperConfiguration(Screen, ConfigListScreen):
 	skin = """
@@ -63,7 +63,7 @@ class BabelzapperConfiguration(Screen, ConfigListScreen):
 		<widget name="buttonblue" position="340,200" size="100,40" backgroundColor="blue" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/>
 		<ePixmap position="175,80" size="100,100" pixmap="%s/babel.png" transparent="1" alphatest="on" />	
 	</screen>""" % babelzapper_plugindir
-	def __init__(self, session, args = 0):
+	def __init__(self, session, args=0):
 		Screen.__init__(self, session)
 		self.list = []
 		self.list.append(getConfigListEntry(_("Enable Babelzapper on Mute"), config.plugins.babelzapper.enabled))

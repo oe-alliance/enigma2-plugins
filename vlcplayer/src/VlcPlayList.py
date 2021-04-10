@@ -63,7 +63,7 @@ class VlcPlayList(MenuList):
 			for file in files:
 				name, path = file
 				fileEntries.append((name, path))
-			fileEntries.sort(cmp = lambda x, y: cmp(x[1][7], y[1][7]))
+			fileEntries.sort(cmp=lambda x, y: cmp(x[1][7], y[1][7]))
 		self.list = fileEntries
 		self.l.setList(self.list)
 		self.moveToIndex(0)

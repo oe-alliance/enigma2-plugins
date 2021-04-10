@@ -137,7 +137,7 @@ def search_subtitles( file_original_path, title, tvshow, year, season, episode, 
                         msg = "Tv show '%s' not found" % tvshow
             else:
                 #log( __name__ ," Login to Itasa failed. Check your username/password at the addon configuration.")
-                screen_session.open(MessageBox,_(" Login to Itasa failed. Check your username/password at the configuration menu."), MessageBox.TYPE_INFO, timeout = 5)
+                screen_session.open(MessageBox,_(" Login to Itasa failed. Check your username/password at the configuration menu."), MessageBox.TYPE_INFO, timeout=5)
                                
                 msg = "Login to Itasa failed. Check your username/password at the addon configuration."
         else:
@@ -203,12 +203,12 @@ def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, 
                             from Screens.Ipkg import Ipkg
                             __cmdList = []
                             __cmdList.append((IpkgComponent.CMD_INSTALL, { "package": 'unrar' }))
-                            screen_session.openWithCallback(__restartMessage__(screen_session, callback = None), Ipkg, cmdList = __cmdList)
+                            screen_session.openWithCallback(__restartMessage__(screen_session, callback=None), Ipkg, cmdList=__cmdList)
                     
                 return False, language, subs_file #standard output
     #log( __name__ ," Login to Itasa failed. Check your username/password at the addon configuration.")
-    screen_session.open(MessageBox,_(" Login to Itasa failed. Check your username/password at the configuration menu."), MessageBox.TYPE_INFO, timeout = 5)
+    screen_session.open(MessageBox,_(" Login to Itasa failed. Check your username/password at the configuration menu."), MessageBox.TYPE_INFO, timeout=5)
     return False, "None", []
 
-def __restartMessage__(screen_session, callback = None):
-        screen_session.open(MessageBox,_("Please restart GUI to apply changes.\n\n If UNRAR package haven't been installed it means that Your image doesn't have it. \n You can download package from project Google Code page or unpack rar manually and make local convertion."), MessageBox.TYPE_INFO, timeout = 25)
+def __restartMessage__(screen_session, callback=None):
+        screen_session.open(MessageBox,_("Please restart GUI to apply changes.\n\n If UNRAR package haven't been installed it means that Your image doesn't have it. \n You can download package from project Google Code page or unpack rar manually and make local convertion."), MessageBox.TYPE_INFO, timeout=25)

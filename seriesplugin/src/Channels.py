@@ -120,7 +120,7 @@ def getServicesOfBouquet(bouquet):
 		
 	return chlist
 
-def buildSTBchannellist(BouquetName = None):
+def buildSTBchannellist(BouquetName=None):
 	chlist = []
 	tvbouquets = getTVBouquets()
 	log.debug("SPC: found %s bouquet: %s" % (len(tvbouquets), tvbouquets) )
@@ -299,7 +299,7 @@ class ChannelsBase(XMLFile):
 							if alternatives:
 								# Add channel
 								web = alternatives[0]
-								element = SubElement( root, "channel", name = stringToXML(name), id = stringToXML(web) )
+								element = SubElement( root, "channel", name=stringToXML(name), id=stringToXML(web) )
 								element.text = stringToXML(reference)
 								del alternatives[0]
 								if alternatives:

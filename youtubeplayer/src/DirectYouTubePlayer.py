@@ -65,7 +65,7 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 		self.screen_timeout = 5000
 		
 		class DirectYouTubePlayerActionMap(ActionMap):
-			def __init__(self, player, contexts = [ ], actions = { }, prio=0):
+			def __init__(self, player, contexts=[ ], actions={ }, prio=0):
 				ActionMap.__init__(self, contexts, actions, prio)
 				self.player = player
 
@@ -84,8 +84,7 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 				else:
 					return ActionMap.action(self, contexts, action)
 					
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evSeekableStatusChanged: self.__seekableStatusChanged,
 				iPlayableService.evStart: self.__serviceStarted,
 				iPlayableService.evEOF: self.__evEOF

@@ -26,7 +26,7 @@ rApScTimer = eTimer()
 rApScTimer.callback.append(rApScFinishedMessage)
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name="ReconstructApSc", description=_("Reconstruct AP/SC ..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc=main)
+	return PluginDescriptor(name="ReconstructApSc", description=_("Reconstruct AP/SC ..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main)
 
 class ReconstructApSc(ChoiceBox):
 	def __init__(self, session, service):
@@ -47,7 +47,7 @@ class ReconstructApSc(ChoiceBox):
 				(_("Reconstruct the .ap and .sc files of the selected movie"), "CALLFUNC", self.confirmed1),
 				# not yet #  (_("Reconstruct all missing .ap and .sc files in this directory"), "CALLFUNC", self.confirmed2),
 			]
-		ChoiceBox.__init__(self, session, _("What would you like to reconstruct?  (\"%s\")") % (self.name), list = tlist, selection = 0)
+		ChoiceBox.__init__(self, session, _("What would you like to reconstruct?  (\"%s\")") % (self.name), list=tlist, selection=0)
 		self.skinName = "ChoiceBox"
 
 	def confirmed0(self, arg):

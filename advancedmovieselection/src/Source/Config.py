@@ -32,7 +32,7 @@ config.usage.on_movie_stop = ConfigSelection(default="ask", choices=[("ask", _("
 config.usage.on_movie_eof = ConfigSelection(default="ask", choices=[("ask", _("Ask user")), ("movielist", _("Return to movie list")), ("quit", _("Return to previous service")), ("pause", _("Pause movie at end")), ("standby", _("Standby")), ("shutdown", _("Shutdown"))])
 
 config.AdvancedMovieSelection = ConfigSubsection()
-config.AdvancedMovieSelection.last_selected_service = ConfigText(default = "")
+config.AdvancedMovieSelection.last_selected_service = ConfigText(default="")
 config.AdvancedMovieSelection.wastelist_buildtype = ConfigSelection(default="listMovies" , choices=[("listMovies", _("Only current location")), ("listAllMovies", _("Current location and all subdirectories")), ("listAllMoviesMedia", _("All directorys below '/media'")) ])
 config.AdvancedMovieSelection.use_wastebasket = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.overwrite_left_right = ConfigYesNo(default=True)

@@ -82,7 +82,7 @@ class AutoMountManager(Screen):
 	def exit(self):
 		self.close()
 
-	def keyOK(self, returnValue = None):
+	def keyOK(self, returnValue=None):
 		if returnValue == None:
 			returnValue = self["config"].getCurrent()[1]
 			if returnValue is "add":
@@ -108,9 +108,9 @@ class AutoMountManager(Screen):
 			fp = open('/etc/hostname', 'r')
 			self.hostname = fp.read()
 			fp.close()
-			self.session.openWithCallback(self.hostnameCallback, VirtualKeyBoard, title = (_("Enter new hostname for your Dreambox")), text = self.hostname)
+			self.session.openWithCallback(self.hostnameCallback, VirtualKeyBoard, title=(_("Enter new hostname for your Dreambox")), text=self.hostname)
 
-	def hostnameCallback(self, callback = None):
+	def hostnameCallback(self, callback=None):
 		if callback is not None and len(callback):
 			fp = open('/etc/hostname', 'w+')
 			fp.write(callback)
@@ -119,7 +119,7 @@ class AutoMountManager(Screen):
 
 	def restartLan(self):
 		iNetwork.restartNetwork(self.restartLanDataAvail)
-		self.restartLanRef = self.session.openWithCallback(self.restartfinishedCB, MessageBox, _("Please wait while your network is restarting..."), type = MessageBox.TYPE_INFO, enable_input = False)
+		self.restartLanRef = self.session.openWithCallback(self.restartfinishedCB, MessageBox, _("Please wait while your network is restarting..."), type=MessageBox.TYPE_INFO, enable_input=False)
 
 	def restartLanDataAvail(self, data):
 		if data is True:
@@ -132,5 +132,5 @@ class AutoMountManager(Screen):
 
 	def restartfinishedCB(self,data):
 		if data is True:
-			self.session.open(MessageBox, _("Finished restarting your network"), type = MessageBox.TYPE_INFO, timeout = 10, default = False)
+			self.session.open(MessageBox, _("Finished restarting your network"), type=MessageBox.TYPE_INFO, timeout=10, default=False)
 

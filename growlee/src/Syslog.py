@@ -105,10 +105,10 @@ class SyslogNetworkProtocol(DatagramProtocol):
 		Notifications.AddNotificationWithID(
 			NOTIFICATIONID,
 			MessageBox,
-			text = message,
-			type = type,
-			timeout = 10, # XXX: un-hardcode timeout?
-			close_on_any_key = True,
+			text=message,
+			type=type,
+			timeout=10, # XXX: un-hardcode timeout?
+			close_on_any_key=True,
 		)
 
 class SyslogAbstraction:

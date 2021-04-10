@@ -32,16 +32,16 @@ def Plugins(**kwargs):
 #                         description = "View remote text files",
 #                         where = [PluginDescriptor.WHERE_PLUGINMENU],
 #                         fnc = main),
-        PluginDescriptor(name = config.plugins.CurlyTx.menuTitle.value,
-                         description = _("View remote text files"),
+        PluginDescriptor(name=config.plugins.CurlyTx.menuTitle.value,
+                         description=_("View remote text files"),
                          where=PluginDescriptor.WHERE_MENU,
-                         fnc = menuHook),
+                         fnc=menuHook),
         ]
     if config.plugins.CurlyTx.menuExtensions.value:
         list.append(
-            PluginDescriptor(name = config.plugins.CurlyTx.menuTitle.value,
-                             description = _("View remote text files"),
-                             where = [PluginDescriptor.WHERE_EXTENSIONSMENU],
-                             fnc = main)
+            PluginDescriptor(name=config.plugins.CurlyTx.menuTitle.value,
+                             description=_("View remote text files"),
+                             where=[PluginDescriptor.WHERE_EXTENSIONSMENU],
+                             fnc=main)
         )
     return list

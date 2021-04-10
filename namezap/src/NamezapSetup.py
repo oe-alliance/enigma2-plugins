@@ -38,8 +38,8 @@ class NamezapSetup(Screen, ConfigListScreen):
 			[
 				getConfigListEntry(_("Zapper Style"), config.plugins.namezap.style, _("Controls the visual appearance of the number zap dialog.")),
 			],
-			session = session,
-			on_change = self.changed
+			session=session,
+			on_change=self.changed
 		)
 		def selectionChanged():
 			if self["config"].current:

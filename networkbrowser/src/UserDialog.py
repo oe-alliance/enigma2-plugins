@@ -61,7 +61,7 @@ class UserDialog(Screen, ConfigListScreen):
 			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="410,330" zPosition="1" size="1,1" transparent="1" alphatest="on" />	
 		</screen>"""
 
-	def __init__(self, session, plugin_path, hostinfo = None ):
+	def __init__(self, session, plugin_path, hostinfo=None ):
 		self.skin_path = plugin_path
 		self.session = session
 		Screen.__init__(self, self.session)
@@ -84,7 +84,7 @@ class UserDialog(Screen, ConfigListScreen):
 		}, -2)
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list,session = self.session)
+		ConfigListScreen.__init__(self, self.list,session=self.session)
 		self.createSetup()
 		self.onLayoutFinish.append(self.layoutFinished)
 		# Initialize Buttons
@@ -123,8 +123,8 @@ class UserDialog(Screen, ConfigListScreen):
 			username = "username"
 			password = "password"
 
-		self.username = NoSave(ConfigText(default = username, visible_width = 50, fixed_size = False))
-		self.password = NoSave(ConfigPassword(default = password, visible_width = 50, fixed_size = False))
+		self.username = NoSave(ConfigText(default=username, visible_width=50, fixed_size=False))
+		self.password = NoSave(ConfigPassword(default=password, visible_width=50, fixed_size=False))
 
 	def createSetup(self):
 		self.list = []
@@ -139,11 +139,11 @@ class UserDialog(Screen, ConfigListScreen):
 
 	def KeyText(self):
 		if self["config"].getCurrent() == self.usernameEntry:
-			self.session.openWithCallback(lambda x : self.VirtualKeyBoardCallback(x, 'username'), VirtualKeyBoard, title = (_("Enter username:")), text = self.username.value)
+			self.session.openWithCallback(lambda x : self.VirtualKeyBoardCallback(x, 'username'), VirtualKeyBoard, title=(_("Enter username:")), text=self.username.value)
 		if self["config"].getCurrent() == self.passwordEntry:
-			self.session.openWithCallback(lambda x : self.VirtualKeyBoardCallback(x, 'password'), VirtualKeyBoard, title = (_("Enter password:")), text = self.password.value)
+			self.session.openWithCallback(lambda x : self.VirtualKeyBoardCallback(x, 'password'), VirtualKeyBoard, title=(_("Enter password:")), text=self.password.value)
 
-	def VirtualKeyBoardCallback(self, callback = None, entry = None):
+	def VirtualKeyBoardCallback(self, callback=None, entry=None):
 		if callback is not None and len(callback) and entry is not None and len(entry):
 			if entry == 'username':
 				self.username.setValue(callback)

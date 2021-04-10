@@ -18,12 +18,11 @@ class StreamPlayer:
     currentplaylistitemnumber = 0
     playlist = None
     onClose = []
-    def __init__(self,session, args = 0):
+    def __init__(self,session, args=0):
         self.session = session
         self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
         self.onStateChanged = []
-        self.__event_tracker = ServiceEventTracker(screen=self,eventmap=
-            {
+        self.__event_tracker = ServiceEventTracker(screen=self,eventmap={
                 iPlayableService.evStart: self.__onStart,
                 iPlayableService.evEOF: self.__onStop,
             })

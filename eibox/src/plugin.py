@@ -53,16 +53,16 @@ img_prefix = file_prefix + 'images/'
 
 up_down_descriptions = {False: _("up"), True: _("down")}
 class ConfigUpDown(ConfigBoolean):
-	def __init__(self, default = False):
-		ConfigBoolean.__init__(self, default = default, descriptions = up_down_descriptions)
+	def __init__(self, default=False):
+		ConfigBoolean.__init__(self, default=default, descriptions=up_down_descriptions)
 
 goto_descriptions = {False: "", True: ""}
 class ConfigGoto(ConfigBoolean):
-	def __init__(self, default = False):
-		ConfigBoolean.__init__(self, default = default, descriptions = goto_descriptions)
+	def __init__(self, default=False):
+		ConfigBoolean.__init__(self, default=default, descriptions=goto_descriptions)
 
 class ConfigEIBText(ConfigText):
-	def __init__(self, default = "", fixed_size = True, visible_width = False):
+	def __init__(self, default="", fixed_size=True, visible_width=False):
 		ConfigText.__init__(self, default, fixed_size, visible_width)
 	
 	def onSelect(self, session):
@@ -340,7 +340,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		self.skin = skin
 		Screen.__init__(self, session)
 		self.initConfigList()
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 		self.onChangedEntry = [ ]
 
 		self["actions"] = ActionMap(["SetupActions", "OkCancelActions", "ColorActions", "DirectionActions"], 
@@ -527,7 +527,7 @@ class EIBox(Screen, ConfigListScreen):
 		<screen position="center,center" size="570,420" title="E.I.B.ox" >
 		</screen>"""
 
-	def __init__(self, session, args = None):		
+	def __init__(self, session, args=None):		
 		Screen.__init__(self, session)
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions"], 
@@ -557,7 +557,7 @@ class EIBox(Screen, ConfigListScreen):
 			self.session.openWithCallback(self.ZoneScreenCB, EIBoxZoneScreen, self.EIB_zones[self.gotoZone])
 	
 	def errorOut(self, message):
-		self.session.openWithCallback(self.close, MessageBox, message, type = MessageBox.TYPE_ERROR)
+		self.session.openWithCallback(self.close, MessageBox, message, type=MessageBox.TYPE_ERROR)
 
 	def loadXML(self, filename):
 		try:
@@ -700,5 +700,5 @@ def main(session, **kwargs):
 	session.open(EIBox)
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name = "E.I.B.ox", description = _("Visualization for European Installation Bus"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main)
+	return PluginDescriptor(name="E.I.B.ox", description=_("Visualization for European Installation Bus"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)
 

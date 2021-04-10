@@ -64,14 +64,14 @@ from . import _
 def YouTubeEntryComponent(entry):
 	res = [ entry ]
 # 385
-	res.append(MultiContentEntryText(pos = (150, 5), size = (370, 42), font = 0, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = entry.getTitle()))
-	res.append(MultiContentEntryText(pos = (150, 46), size = (370, 56), font = 1, color = 0xFFA323, color_sel = 0xFFA323, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = entry.getDescription()))
+	res.append(MultiContentEntryText(pos=(150, 5), size=(370, 42), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text=entry.getTitle()))
+	res.append(MultiContentEntryText(pos=(150, 46), size=(370, 56), font=1, color=0xFFA323, color_sel=0xFFA323, flags=RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text=entry.getDescription()))
 
 	if entry.thumbnail["0"] is None:
 		png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/plugin.png"))
 	else:
 		png = entry.thumbnail["0"]
-	res.append(MultiContentEntryPixmapAlphaTest(pos = (10, 5), size = (130, 97), png = png))
+	res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 5), size=(130, 97), png=png))
 
 	return res
 
@@ -169,7 +169,7 @@ class YouTubeVideoDetailsScreen(Screen):
 
 
 class PatientMessageBox(MessageBox):
-	def __init__(self, session, text, type = 1, timeout = -1, close_on_any_key = False, default = True):
+	def __init__(self, session, text, type=1, timeout=-1, close_on_any_key=False, default=True):
 		MessageBox.__init__(self, session, text, type, timeout, close_on_any_key, default)
 		self.skinName = "MessageBox"
 
@@ -198,7 +198,7 @@ class PatientMessageBox(MessageBox):
 
 
 class YouTubeList(MenuList):
-	def __init__(self, list, enableWrapAround = False):
+	def __init__(self, list, enableWrapAround=False):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 18))
 		self.l.setFont(1, gFont("Regular", 14))
@@ -275,7 +275,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 	def insertEntry(self, entry):
 		print "[YTB] YouTubeTest::updateFinished()"
 		self.list.append(YouTubeEntryComponent(entry))
-		self.list.sort(cmp = lambda x, y : cmp(x[0].sequenceNumber, y[0].sequenceNumber))
+		self.list.sort(cmp=lambda x, y : cmp(x[0].sequenceNumber, y[0].sequenceNumber))
 		currentlyShown = "%d" % len(self.list)
 		self["currently_shown"].setText(currentlyShown)
 		self["list"].setList(self.list)
@@ -313,13 +313,13 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 		print "[YTB] searchFeedReal"
 		try:
 			feed = interface.search(searchContext.searchTerm.value, 
-					orderby = searchContext.orderBy.value,
-					racy = searchContext.racy.value,
-					time = searchContext.time.value,
-					lr = searchContext.lr.value,
-					categories = [ searchContext.categories.value ],
-					sortOrder = searchContext.sortOrder.value,
-					format = config.plugins.youtubeplayer.quality)
+					orderby=searchContext.orderBy.value,
+					racy=searchContext.racy.value,
+					time=searchContext.time.value,
+					lr=searchContext.lr.value,
+					categories=[ searchContext.categories.value ],
+					sortOrder=searchContext.sortOrder.value,
+					format=config.plugins.youtubeplayer.quality)
 		except Exception, e:
 			feed = None
 			self.session.open(MessageBox, _("Error querying feed for search term %s:\n%s" %
@@ -330,7 +330,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 
 	def searchFeed(self, searchContext):
 		self.patientDialog = self.session.open(PatientMessageBox, _("Searching, be patient ..."))
-		self.patientDialog.processDelayed(boundFunction(self.searchFeedReal, searchContext = searchContext))
+		self.patientDialog.processDelayed(boundFunction(self.searchFeedReal, searchContext=searchContext))
 		self.isFavoritesFeed = False
 
 
@@ -347,10 +347,10 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 
 	def loadPlaylistFeed(self, playlist):
 		self.patientDialog = self.session.open(PatientMessageBox, _("Loading playlist, be patient ..."))
-		self.patientDialog.processDelayed(boundFunction(self.loadPlaylistFeedReal, playlist = playlist))
+		self.patientDialog.processDelayed(boundFunction(self.loadPlaylistFeedReal, playlist=playlist))
 
 
-	def loadFavoritesFeedReal(self, userName = "default"):
+	def loadFavoritesFeedReal(self, userName="default"):
 		try:
 			feed = interface.getUserFavoritesFeed(userName)
 		except Exception, e:
@@ -361,9 +361,9 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 		self.addToHistory(feed)
 
 
-	def loadFavoritesFeed(self, userName = "default"):
+	def loadFavoritesFeed(self, userName="default"):
 		self.patientDialog = self.session.open(PatientMessageBox, _("Loading favorits, be patient ..."))
-		self.patientDialog.processDelayed(boundFunction(self.loadFavoritesFeedReal, userName = userName))
+		self.patientDialog.processDelayed(boundFunction(self.loadFavoritesFeedReal, userName=userName))
 		self.isFavoritesFeed = True
 
 
@@ -371,7 +371,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 		self.loadFeed(_("Loading standard feed, be patient ..."), url, "standard feed")
 
 
-	def loadFeedReal(self, feedUrl, feedName, append = False, addToHistory = True):
+	def loadFeedReal(self, feedUrl, feedName, append=False, addToHistory=True):
 		try:
 			feed = interface.getFeed(feedUrl)
 		except Exception, e:
@@ -383,10 +383,10 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 			self.addToHistory(feed)
 
 
-	def loadFeed(self, text, feedUrl, feedName, append = False, addToHistory = True):
+	def loadFeed(self, text, feedUrl, feedName, append=False, addToHistory=True):
 		self.patientDialog = self.session.open(PatientMessageBox, text)
-		self.patientDialog.processDelayed(boundFunction(self.loadFeedReal, feedName = feedName,
-											feedUrl = feedUrl, append = append, addToHistory = addToHistory))
+		self.patientDialog.processDelayed(boundFunction(self.loadFeedReal, feedName=feedName,
+											feedUrl=feedUrl, append=append, addToHistory=addToHistory))
 
 
 	def loadPreviousFeed(self, result):
@@ -639,7 +639,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 			entries.append((_("Get video responses"), [self.getResponsesDelayed, True]))
 			
 			self.currentServer.play(self.session, mrl, youTubeEntry.getTitle(), self,
-								player = boundFunction(YouTubePlayer, contextMenuEntries = entries, infoCallback = self.showVideoInfo, name = self["list"].getCurrent()[0].getTitle()))
+								player=boundFunction(YouTubePlayer, contextMenuEntries=entries, infoCallback=self.showVideoInfo, name=self["list"].getCurrent()[0].getTitle()))
 		else:
 			print "[YTB] No valid flv-mrl found"
 
@@ -665,7 +665,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 
 #			self.session.open(MoviePlayer, eServiceReference(4097, 0, mrl))
 
-			self.session.open(DirectYouTubePlayer, mrl, youTubeEntry.getTitle(), self, contextMenuEntries = entries, infoCallback = self.showVideoInfo, name = self["list"].getCurrent()[0].getTitle())
+			self.session.open(DirectYouTubePlayer, mrl, youTubeEntry.getTitle(), self, contextMenuEntries=entries, infoCallback=self.showVideoInfo, name=self["list"].getCurrent()[0].getTitle())
 		else:
 			print "[YTB] No valid flv-mrl found"
 			

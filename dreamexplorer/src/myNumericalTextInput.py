@@ -3,7 +3,7 @@ from enigma import eTimer
 from Components.Language import language
 
 class myNumericalTextInput:
-	def __init__(self, nextFunc=None, handleTimeout = True, search = False):
+	def __init__(self, nextFunc=None, handleTimeout=True, search=False):
 		self.mapping = []
 		self.lang = language.getLanguage()
 		self.useableChars=None

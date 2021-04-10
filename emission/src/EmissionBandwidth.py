@@ -23,7 +23,7 @@ class EmissionBandwidth(Screen, ConfigListScreen):
 		self.setup_title = _("Bandwidth settings")
 		self.onChangedEntry = []
 
-		ConfigListScreen.__init__(self, [], session = session, on_change = self.changed)
+		ConfigListScreen.__init__(self, [], session=session, on_change=self.changed)
 
 		self.isTorrent = isTorrent
 		if isTorrent:
@@ -36,11 +36,11 @@ class EmissionBandwidth(Screen, ConfigListScreen):
 				uploadLimitMode = val.uploadLimited
 				modelist = [(0, _("Global Setting")), (1, _("Limit"))] # XXX: this is a pure guess...
 
-			self.downloadLimitMode = NoSave(ConfigSelection(choices = modelist, default = downloadLimitMode))
-			self.downloadLimit = NoSave(ConfigNumber(default = val.downloadLimit))
-			self.uploadLimitMode = NoSave(ConfigSelection(choices = modelist, default = uploadLimitMode))
-			self.uploadLimit = NoSave(ConfigNumber(default = val.uploadLimit))
-			self.maxConnectedPeers = NoSave(ConfigNumber(default = val.maxConnectedPeers))
+			self.downloadLimitMode = NoSave(ConfigSelection(choices=modelist, default=downloadLimitMode))
+			self.downloadLimit = NoSave(ConfigNumber(default=val.downloadLimit))
+			self.uploadLimitMode = NoSave(ConfigSelection(choices=modelist, default=uploadLimitMode))
+			self.uploadLimit = NoSave(ConfigNumber(default=val.uploadLimit))
+			self.maxConnectedPeers = NoSave(ConfigNumber(default=val.maxConnectedPeers))
 		else: #if not isTorrent:
 			if rpc_version < 5:
 				peerLimit = val.peer_limit
@@ -51,19 +51,19 @@ class EmissionBandwidth(Screen, ConfigListScreen):
 				port = val.peer_port
 				pex_allowed = val.pex_enabled
 
-			self.downloadLimitMode = NoSave(ConfigSelection(choices = [(0, _("Unlimited")), (1, _("Limit"))], default = val.speed_limit_down_enabled))
-			self.downloadLimit = NoSave(ConfigNumber(default = val.speed_limit_down))
-			self.uploadLimitMode = NoSave(ConfigSelection(choices = [(0, _("Unlimited")), (1, _("Limit"))], default = val.speed_limit_up_enabled))
-			self.uploadLimit = NoSave(ConfigNumber(default = val.speed_limit_up))
-			self.maxConnectedPeers = NoSave(ConfigNumber(default = peerLimit))
-			self.encryption = NoSave(ConfigSelection(choices = [('required', _("required")), ('preferred', _("preferred")), ('tolerated', _("tolerated"))], default = val.encryption))
-			self.download_dir = NoSave(ConfigText(default = val.download_dir, fixed_size = False))
-			self.pex_allowed = NoSave(ConfigYesNo(default = pex_allowed))
-			self.port = NoSave(ConfigNumber(default = port))
-			self.port_forwarding_enabled = NoSave(ConfigYesNo(default = val.port_forwarding_enabled))
+			self.downloadLimitMode = NoSave(ConfigSelection(choices=[(0, _("Unlimited")), (1, _("Limit"))], default=val.speed_limit_down_enabled))
+			self.downloadLimit = NoSave(ConfigNumber(default=val.speed_limit_down))
+			self.uploadLimitMode = NoSave(ConfigSelection(choices=[(0, _("Unlimited")), (1, _("Limit"))], default=val.speed_limit_up_enabled))
+			self.uploadLimit = NoSave(ConfigNumber(default=val.speed_limit_up))
+			self.maxConnectedPeers = NoSave(ConfigNumber(default=peerLimit))
+			self.encryption = NoSave(ConfigSelection(choices=[('required', _("required")), ('preferred', _("preferred")), ('tolerated', _("tolerated"))], default=val.encryption))
+			self.download_dir = NoSave(ConfigText(default=val.download_dir, fixed_size=False))
+			self.pex_allowed = NoSave(ConfigYesNo(default=pex_allowed))
+			self.port = NoSave(ConfigNumber(default=port))
+			self.port_forwarding_enabled = NoSave(ConfigYesNo(default=val.port_forwarding_enabled))
 
-		self.downloadLimitMode.addNotifier(self.updateList, initial_call = False)
-		self.uploadLimitMode.addNotifier(self.updateList, initial_call = False)
+		self.downloadLimitMode.addNotifier(self.updateList, initial_call=False)
+		self.uploadLimitMode.addNotifier(self.updateList, initial_call=False)
 
 		self.updateList()
 
@@ -126,7 +126,7 @@ class EmissionBandwidth(Screen, ConfigListScreen):
 			self.session.open(
 					MessageBox,
 					_("Setting \"Unlimited\" is not supported via RPC.\nEither abort or choose another limit to continue."),
-					type = MessageBox.TYPE_ERROR
+					type=MessageBox.TYPE_ERROR
 			)
 		else:
 			# NOTE: transmissionrpc will take care of translating the arguments

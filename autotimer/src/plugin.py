@@ -116,8 +116,8 @@ def main(session, **kwargs):
 		session.open(
 			MessageBox,
 			_("Your config file is not well-formed:\n%s") % (str(se)),
-			type = MessageBox.TYPE_ERROR,
-			timeout = 10
+			type=MessageBox.TYPE_ERROR,
+			timeout=10
 		)
 		return
 
@@ -194,20 +194,20 @@ try:
 except AttributeError:
 	print("[AutoTimer] Failed to load timezone notifier.")
 
-config.plugins.autotimer.show_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = True)
-extDescriptor = PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = extensionsmenu, needsRestart = False)
+config.plugins.autotimer.show_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call=False, immediate_feedback=True)
+extDescriptor = PluginDescriptor(name="AutoTimer", description=_("Edit Timers and scan for new Events"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=extensionsmenu, needsRestart=False)
 # TRANSLATORS: description of AutoTimer in PluginBrowser
-pluginlist = PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc = main, needsRestart = False)
+pluginlist = PluginDescriptor(name="AutoTimer", description=_("Edit Timers and scan for new Events"), where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main, needsRestart=False)
 
 def Plugins(**kwargs):
 	l = [
 		PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, fnc=autostart, needsRestart=False),
 		PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart, needsRestart=False),
 		# TRANSLATORS: AutoTimer title in MovieList (automatically opens importer, I consider this no further interaction)
-		PluginDescriptor(name="AutoTimer", description= _("add AutoTimer"), where = PluginDescriptor.WHERE_MOVIELIST, fnc = movielist, needsRestart = False),
+		PluginDescriptor(name="AutoTimer", description=_("add AutoTimer"), where=PluginDescriptor.WHERE_MOVIELIST, fnc=movielist, needsRestart=False),
 		# TRANSLATORS: AutoTimer title in EventInfo dialog (requires the user to select an event to base the AutoTimer on)
-		PluginDescriptor(name=_("add AutoTimer..."), where = PluginDescriptor.WHERE_EVENTINFO, fnc = eventinfo, needsRestart = False),
-		PluginDescriptor(name=_("Auto Timers"), description = _("Edit Timers and scan for new Events"), where=PluginDescriptor.WHERE_MENU, fnc=timermenu),
+		PluginDescriptor(name=_("add AutoTimer..."), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart=False),
+		PluginDescriptor(name=_("Auto Timers"), description=_("Edit Timers and scan for new Events"), where=PluginDescriptor.WHERE_MENU, fnc=timermenu),
 	]
 	if config.plugins.autotimer.show_in_extensionsmenu.value:
 		l.append(extDescriptor)

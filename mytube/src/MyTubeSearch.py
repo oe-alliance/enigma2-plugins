@@ -55,7 +55,7 @@ class SuggestionsQueryThread(Thread):
 			message[1](message[0])
 
 class ConfigTextWithGoogleSuggestions(ConfigText):
-	def __init__(self, default = "", fixed_size = True, visible_width = False):
+	def __init__(self, default="", fixed_size=True, visible_width=False):
 		ConfigText.__init__(self, default, fixed_size, visible_width)
 		self.suggestions = GoogleSuggestions()
 		self.suggestionsThread = None
@@ -380,7 +380,7 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 				MovieLocationBox,
 				_("Choose target folder"),
 				config.plugins.mytube.general.videodir.value,
-				minFree = 100 # We require at least 100MB free space
+				minFree=100 # We require at least 100MB free space
 			)
 		else:
 			self.keySave()

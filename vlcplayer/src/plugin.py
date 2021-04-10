@@ -82,7 +82,7 @@ class __VlcManager():
 					else:
 						self.openServerlist()
 						server_name = selectedServer.getName()
-						self.session.open(MessageBox, _("No ping from Server:\n%s\n%s") % (server_name, self.testHost), MessageBox.TYPE_ERROR, timeout = 5)
+						self.session.open(MessageBox, _("No ping from Server:\n%s\n%s") % (server_name, self.testHost), MessageBox.TYPE_ERROR, timeout=5)
 			else:
 				self.session.openWithCallback(self.medialistClosed, VlcMediaListScreen, selectedServer).keyUpdate()
 
@@ -94,7 +94,7 @@ class __VlcManager():
 		namestr = names.tostring()
 		return [namestr[i:i+32].split('\0', 1)[0] for i in range(0, bytelen, 32)]
 
-	def medialistClosed(self, proceed = False):
+	def medialistClosed(self, proceed=False):
 		print "[VLC] medialistClosed"
 		if proceed:
 			self.openServerlist()
@@ -106,5 +106,5 @@ def Plugins(**kwargs):
 	return PluginDescriptor(
 		name=_("VLC Video Player"),
 		description=_("A video streaming solution based on VLC"),
-		where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
-		icon = "plugin.png", fnc = main)
+		where=[ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
+		icon="plugin.png", fnc=main)

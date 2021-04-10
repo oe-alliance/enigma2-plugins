@@ -7,7 +7,7 @@ NS_RSS_10 = "{http://purl.org/rss/1.0/}"
 
 # based on http://effbot.org/zone/element-rss-wrapper.htm
 class ElementWrapper:
-	def __init__(self, element, ns = ""):
+	def __init__(self, element, ns=""):
 		self._element = element
 		self._ns = ns
 
@@ -26,9 +26,9 @@ class RSSEntryWrapper(ElementWrapper):
 					length = int(length) / 1048576
 				myl.append(ScanFile(
 					elem.get("url"),
-					mimetype = elem.get("type"),
-					size = length,
-					autodetect = False)
+					mimetype=elem.get("type"),
+					size=length,
+					autodetect=False)
 				)
 			return myl
 		elif tag == "id":
@@ -55,9 +55,9 @@ class PEAEntryWrapper(ElementWrapper):
 						length = int(length) / 1048576
 					myl.append(ScanFile(
 						elem.get("href"),
-						mimetype = elem.get("type"),
-						size = length,
-						autodetect = False
+						mimetype=elem.get("type"),
+						size=length,
+						autodetect=False
 					))
 			return myl
 		elif tag == "summary":
@@ -72,7 +72,7 @@ class PEAEntryWrapper(ElementWrapper):
 		return ElementWrapper.__getattr__(self, tag)
 
 class RSSWrapper(ElementWrapper):
-	def __init__(self, channel, items, ns = ""):
+	def __init__(self, channel, items, ns=""):
 		self._items = items
 		ElementWrapper.__init__(self, channel, ns)
 
@@ -140,7 +140,7 @@ class BaseFeed:
 	"""Base-class for all Feeds. Initializes needed Elements."""
 	MAX_HISTORY_ELEMENTS = 100
 
-	def __init__(self, uri, title = "", description = ""):
+	def __init__(self, uri, title="", description=""):
 		# Set URI (used as Identifier)
 		self.uri = uri
 
@@ -155,7 +155,7 @@ class BaseFeed:
 
 class UniversalFeed(BaseFeed):
 	"""Feed which can handle rdf, rss and atom feeds utilizing abstraction wrappers."""
-	def __init__(self, uri, autoupdate, sync = False):
+	def __init__(self, uri, autoupdate, sync=False):
 		BaseFeed.__init__(self, uri)
 
 		# Set Autoupdate

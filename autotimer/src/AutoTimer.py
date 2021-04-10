@@ -156,7 +156,7 @@ class AutoTimer:
 				except:
 					pass
 				if Standby.inStandby is None:
-					AddPopup(_("The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "), type = MessageBox.TYPE_ERROR, timeout = 0, id = "AutoTimerLoadFailed")
+					AddPopup(_("The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "), type=MessageBox.TYPE_ERROR, timeout=0, id="AutoTimerLoadFailed")
 	
 				self.timers = []
 				self.defaultTimer = preferredAutoTimerComponent(
@@ -188,7 +188,7 @@ class AutoTimer:
 		if not self.nextTimerId:
 			self.nextTimerId = len(self.timers) + 1
 
-	def getXml(self, webif = True):
+	def getXml(self, webif=True):
 		return buildConfig(self.defaultTimer, self.timers, webif)
 
 	def writeXml(self):
@@ -262,7 +262,7 @@ class AutoTimer:
 		return t.deferred
 
 	# Main function
-	def parseEPG(self, autoPoll = False, simulateOnly = False, callback = None):
+	def parseEPG(self, autoPoll=False, simulateOnly=False, callback=None):
 		self.autoPoll = autoPoll
 		self.simulateOnly = simulateOnly
 
@@ -277,7 +277,7 @@ class AutoTimer:
 		self.callback = callback
 
 		# NOTE: the config option specifies "the next X days" which means today (== 1) + X
-		delta = timedelta(days = config.plugins.autotimer.maxdaysinfuture.getValue() + 1)
+		delta = timedelta(days=config.plugins.autotimer.maxdaysinfuture.getValue() + 1)
 		self.evtLimit = mktime((date.today() + delta).timetuple())
 		self.checkEvtLimit = delta.days > 1
 		del delta

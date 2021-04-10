@@ -41,7 +41,7 @@ USER_AGENT = 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.1.3)'
 
 class SubtitleDB(object):
     ''' Base (kind of abstract) class that represent a SubtitleDB, usually a website. Should be rewritten using abc module in Python 2.6/3K'''
-    def __init__(self, langs, revertlangs = None):
+    def __init__(self, langs, revertlangs=None):
         if langs:
             self.langs = langs
             self.revertlangs = dict(map(lambda item: (item[1],item[0]), self.langs.items()))
@@ -106,7 +106,7 @@ class SubtitleDB(object):
             os.remove(zipfilename)
             return None
 
-    def downloadContent(self, url, timeout = None):
+    def downloadContent(self, url, timeout=None):
         ''' Downloads the given url and returns its contents.'''
         try:
             log.debug("Downloading %s" % url)

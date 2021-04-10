@@ -87,7 +87,7 @@ class dreamIRCMainMenu(Screen):
 			</screen>"""
 		
 	
-	def __init__(self, session, args = 0):
+	def __init__(self, session, args=0):
 		global x,y
 		self.skin = dreamIRCMainMenu.skin
 		Screen.__init__(self, session)
@@ -240,7 +240,7 @@ class dreamIRCMainMenu(Screen):
 	
 	def bluePressed(self):
 		self.checkStatus()
-		self.session.openWithCallback(self.VirtualKeyBoardTextEntry, VirtualKeyBoard, title = (_("Enter your text here:")), text = "")
+		self.session.openWithCallback(self.VirtualKeyBoardTextEntry, VirtualKeyBoard, title=(_("Enter your text here:")), text="")
 		
 	def yellowPressed(self):
 		self.checkStatus()
@@ -260,7 +260,7 @@ class dreamIRCMainMenu(Screen):
 	def clearInput(self):
 		self["input"].setText("")
 			
-	def VirtualKeyBoardTextEntry(self, callback = None):
+	def VirtualKeyBoardTextEntry(self, callback=None):
 		if callback is not None and len(callback):
 			print " TEXT = %s   - laenge = %d  !!!!" % (callback,len(callback))
 			self.pipe.addOutText(callback)

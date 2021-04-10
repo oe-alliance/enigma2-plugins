@@ -80,7 +80,7 @@ class FTPFileList(FileList):
 		self.isValid = False
 		FileList.__init__(self, "/")
 
-	def changeDir(self, directory, select = None):
+	def changeDir(self, directory, select=None):
 		if not directory:
 			return
 
@@ -99,9 +99,9 @@ class FTPFileList(FileList):
 	def listRcvd(self, *args):
 		# TODO: is any of the 'advanced' features useful (and more of all can they be implemented) here?
 		list = [FTPFileEntryComponent(file, self.current_directory) for file in self.filelist.files]
-		list.sort(key = lambda x: (not x[0][1], x[0][0]))
+		list.sort(key=lambda x: (not x[0][1], x[0][0]))
 		if self.current_directory != "/":
-			list.insert(0, FileEntryComponent(name = "<" +_("Parent Directory") + ">", absolute = '/'.join(self.current_directory.split('/')[:-2]) + '/', isDir = True))
+			list.insert(0, FileEntryComponent(name="<" +_("Parent Directory") + ">", absolute='/'.join(self.current_directory.split('/')[:-2]) + '/', isDir=True))
 
 		self.isValid = True
 		self.l.setList(list)
@@ -123,12 +123,12 @@ class FTPFileList(FileList):
 		# XXX: we might end up here if login fails, we might want to add some check for this (e.g. send a dummy command before doing actual work)
 		if self.current_directory != "/":
 			self.list = [
-				FileEntryComponent(name = "<" +_("Parent Directory") + ">", absolute = '/'.join(self.current_directory.split('/')[:-2]) + '/', isDir = True),
-				FileEntryComponent(name = "<" + _("Error") + ">", absolute = None, isDir = False),
+				FileEntryComponent(name="<" +_("Parent Directory") + ">", absolute='/'.join(self.current_directory.split('/')[:-2]) + '/', isDir=True),
+				FileEntryComponent(name="<" + _("Error") + ">", absolute=None, isDir=False),
 			]
 		else:
 			self.list = [
-				FileEntryComponent(name = "<" + _("Error") + ">", absolute = None, isDir = False),
+				FileEntryComponent(name="<" + _("Error") + ">", absolute=None, isDir=False),
 			]
 
 		self.isValid = False
@@ -178,7 +178,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		self.fileSize = 0
 
 		self["localText"] = StaticText(_("Local"))
-		self["local"] = FileList("/media/hdd/", showMountpoints = False)
+		self["local"] = FileList("/media/hdd/", showMountpoints=False)
 		self["remoteText"] = StaticText(_("Remote (not connected)"))
 		self["remote"] = FTPFileList()
 		self["eta"] = StaticText("")
@@ -261,7 +261,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		self.session.openWithCallback(
 			self.menuCallback,
 			ChoiceBox,
-			list = [
+			list=[
 				(_("Server Manager"), self.serverManager),
 				(_("Queue Manager"), self.queueManager),
 			]
@@ -275,9 +275,9 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		self.currlist = "remote"
 		self["key_blue"].text = _("Download")
 
-	def okQuestion(self, res = None):
+	def okQuestion(self, res=None):
 		if res:
-			self.ok(force = True)
+			self.ok(force=True)
 
 	def getRemoteFile(self):
 		remoteFile = self["remote"].getSelection()
@@ -312,7 +312,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 		return absLocalFile, fileName
 
-	def renameCallback(self, newName = None):
+	def renameCallback(self, newName=None):
 		if not newName:
 			return
 
@@ -325,9 +325,9 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			sep = '/' if directory != '/' else ''
 			newRemoteFile = directory + sep + newName
 
-			def callback(ret = None):
+			def callback(ret=None):
 				AddPopup(_("Renamed %s to %s.") % (fileName, newName), MessageBox.TYPE_INFO, -1)
-			def errback(ret = None):
+			def errback(ret=None):
 				AddPopup(_("Could not rename %s.") % (fileName), MessageBox.TYPE_ERROR, -1)
 
 			self.ftpclient.rename(absRemoteFile, newRemoteFile).addCallback(callback).addErrback(errback)
@@ -367,8 +367,8 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		self.session.openWithCallback(
 			self.renameCallback,
 			NTIVirtualKeyBoard,
-			title = _("Enter new filename:"),
-			text = fileName,
+			title=_("Enter new filename:"),
+			text=fileName,
 		)
 
 	def deleteConfirmed(self, ret):
@@ -380,9 +380,9 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			if not fileName:
 				return
 
-			def callback(ret = None):
+			def callback(ret=None):
 				AddPopup(_("Removed %s.") % (fileName), MessageBox.TYPE_INFO, -1)
-			def errback(ret = None):
+			def errback(ret=None):
 				AddPopup(_("Could not delete %s.") % (fileName), MessageBox.TYPE_ERROR, -1)
 
 			self.ftpclient.removeFile(absRemoteFile).addCallback(callback).addErrback(errback)
@@ -468,7 +468,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		if self.queueManagerInstance:
 			self.queueManagerInstance.updateList(self.queue)
 
-	def transferListFailed(self, res = None):
+	def transferListFailed(self, res=None):
 		self.queue = None
 		AddPopup(_("Could not obtain list of files."), MessageBox.TYPE_ERROR, -1)
 
@@ -534,7 +534,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 				# TODO: handle this
 				raise ie
 			else:
-				d = self.ftpclient.retrieveFile(absRemoteFile, self, offset = 0)
+				d = self.ftpclient.retrieveFile(absRemoteFile, self, offset=0)
 				d.addCallback(self.getFinished).addErrback(self.getFailed)
 
 	def putFileCallback(self, ret, absRemoteFile, absLocalFile, remoteFileExists):
@@ -558,7 +558,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			self.lastApprox = 0
 
 			def sendfile(consumer, fileObj):
-				FileSender().beginFileTransfer(fileObj, consumer, transform = self.putProgress).addCallback(  
+				FileSender().beginFileTransfer(fileObj, consumer, transform=self.putProgress).addCallback(  
 					lambda _: consumer.finish()).addCallback(
 					self.putComplete).addErrback(self.putFailed)
 
@@ -572,7 +572,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 				dC, dL = self.ftpclient.storeFile(absRemoteFile)
 				dC.addCallback(sendfile, self.file)
 
-	def ok(self, force = False):
+	def ok(self, force=False):
 		if self.queue:
 			return
 
@@ -588,7 +588,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 					self.session.open(
 						MessageBox,
 						_("There already is an active transfer."),
-						type = MessageBox.TYPE_WARNING
+						type=MessageBox.TYPE_WARNING
 					)
 					return
 
@@ -612,7 +612,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 					self.session.open(
 						MessageBox,
 						_("There already is an active transfer."),
-						type = MessageBox.TYPE_WARNING
+						type=MessageBox.TYPE_WARNING
 					)
 					return
 
@@ -730,7 +730,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			self.file = None
 			raise ie
 
-	def cancelQuestion(self, res = None):
+	def cancelQuestion(self, res=None):
 		res = res and res[1]
 		if res:
 			if res == 1:
@@ -744,8 +744,8 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			self.session.openWithCallback(
 				self.cancelQuestion,
 				ChoiceBox,
-				title = _("A transfer is currently in progress.\nWhat do you want to do?"),
-				list = (
+				title=_("A transfer is currently in progress.\nWhat do you want to do?"),
+				list=(
 					(_("Run in Background"), 2),
 					(_("Abort transfer"), 1),
 					(_("Cancel"), 0)
@@ -802,7 +802,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 		# XXX: we might want to add a guard so we don't try to connect to another host while a previous attempt is not timed out
 
-		creator = ClientCreator(reactor, FTPClient, username, password, passive = passive)
+		creator = ClientCreator(reactor, FTPClient, username, password, passive=passive)
 		creator.connectTCP(host, port, timeout).addCallback(self.controlConnectionMade).addErrback(self.connectionFailed)
 
 	def controlConnectionMade(self, ftpclient):
@@ -821,7 +821,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		self.session.open(
 				MessageBox,
 				_("Could not connect to ftp server!"),
-				type = MessageBox.TYPE_ERROR,
-				timeout = 3,
+				type=MessageBox.TYPE_ERROR,
+				timeout=3,
 		)
 

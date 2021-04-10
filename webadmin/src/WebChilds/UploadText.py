@@ -40,7 +40,7 @@ class UploadTextResource(resource.Resource):
 
 		filename = req.args['filename'][0]
 
-		fd, fn = mkstemp(dir = uploaddir)
+		fd, fn = mkstemp(dir=uploaddir)
 		cnt = os_write(fd, data)
 		os_close(fd)
 		os_chmod(fn, 0755)

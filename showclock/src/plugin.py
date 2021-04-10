@@ -71,14 +71,14 @@ debug = False # If set True, plugin will print some additional status info to tr
 ###############################################################################
 
 config.plugins.ShowClock = ConfigSubsection()
-config.plugins.ShowClock.name = ConfigText(default = _('Show Clock setup'), fixed_size = False, visible_width = 80)
-config.plugins.ShowClock.description = ConfigText(default = _('Push "Exit" long to show/hide clock'), fixed_size = False, visible_width = 80)
-config.plugins.ShowClock.menu = ConfigSelection(default = 'plugin', choices = [('plugin', _('Plugin menu')), ('extensions', _('Extensions menu'))])
-config.plugins.ShowClock.showTimeout = ConfigNumber(default = 10)
+config.plugins.ShowClock.name = ConfigText(default=_('Show Clock setup'), fixed_size=False, visible_width=80)
+config.plugins.ShowClock.description = ConfigText(default=_('Push "Exit" long to show/hide clock'), fixed_size=False, visible_width=80)
+config.plugins.ShowClock.menu = ConfigSelection(default='plugin', choices=[('plugin', _('Plugin menu')), ('extensions', _('Extensions menu'))])
+config.plugins.ShowClock.showTimeout = ConfigNumber(default=10)
 
 width = getDesktop(0).size().width()
 height = getDesktop(0).size().height()
-config.plugins.ShowClock.position_x = ConfigNumber(default = int(width * 0.7))
+config.plugins.ShowClock.position_x = ConfigNumber(default=int(width * 0.7))
 config.plugins.ShowClock.position_y = ConfigNumber(default=45)
 if debug:
 	print pluginPrintname, "Clock X,Y position: %d,%d" %(config.plugins.ShowClock.position_x.value, config.plugins.ShowClock.position_y.value)
@@ -125,7 +125,7 @@ class ShowClockSetup(Screen, ConfigListScreen): # config
 				_('Specify plugin description to be used in menu (needs GUI restart).')),	
 			]
 							
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changed)
 		
 		def selectionChanged():
 			if self["config"].current:
@@ -244,21 +244,21 @@ class ShowClockPositioner(Screen):
 			print pluginPrintname, "Clock X,Y limit: %d,%d" %(self.limit[0], self.limit[1])	
 		self.instance.move(ePoint(min(self.pos[0], self.limit[0]), min(self.pos[1], self.limit[1]))) # ensure clock visabilty even if resolution has changed
 	
-	def moveRelative(self, x = 0, y = 0):
+	def moveRelative(self, x=0, y=0):
 		self.pos = (clip(self.pos[0] + x, 0, self.limit[0]), clip(self.pos[1] + y, 0, self.limit[1]))
 		self.instance.move(ePoint(self.pos[0], self.pos[1]))
 
 	def left(self):
-		self.moveRelative(x =- 10)
+		self.moveRelative(x=- 10)
 
 	def up(self):
-		self.moveRelative(y =- 10)
+		self.moveRelative(y=- 10)
 
 	def right(self):
-		self.moveRelative(x =+ 10)
+		self.moveRelative(x=+ 10)
 
 	def down(self):
-		self.moveRelative(y =+ 10)
+		self.moveRelative(y=+ 10)
 
 	def ok(self):
 		config.plugins.ShowClock.position_x.value = self.pos[0]
@@ -389,17 +389,17 @@ def Plugins(**kwargs):
 		]
 	if config.plugins.ShowClock.menu.value == "plugin":
 		list.append (PluginDescriptor(
-			name = config.plugins.ShowClock.name.value + " "  + _("Ver.") + " " + VERSION, 
-			description = config.plugins.ShowClock.description.value, 
-			where = PluginDescriptor.WHERE_PLUGINMENU, 
-			icon = "plugin.png", 
+			name=config.plugins.ShowClock.name.value + " "  + _("Ver.") + " " + VERSION, 
+			description=config.plugins.ShowClock.description.value, 
+			where=PluginDescriptor.WHERE_PLUGINMENU, 
+			icon="plugin.png", 
 			fnc=setup)
 		)
 	else:
 		list.append (PluginDescriptor(
-			name = config.plugins.ShowClock.name.value + " "  + _("Ver.") + " " + VERSION, 
-			description = config.plugins.ShowClock.description.value, 
-			where = PluginDescriptor.WHERE_EXTENSIONSMENU, 
+			name=config.plugins.ShowClock.name.value + " "  + _("Ver.") + " " + VERSION, 
+			description=config.plugins.ShowClock.description.value, 
+			where=PluginDescriptor.WHERE_EXTENSIONSMENU, 
 			fnc=setup)
 		)
 

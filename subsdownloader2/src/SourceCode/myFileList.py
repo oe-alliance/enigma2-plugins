@@ -65,7 +65,7 @@ EXTENSIONS = {
 
 
 
-def FileEntryComponent(name, absolute = None, isDir = False):
+def FileEntryComponent(name, absolute=None, isDir=False):
 	res = [ (absolute, isDir) ]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 40, 2, 1000, 22, 0, RT_HALIGN_LEFT, name))
 	if isDir:
@@ -84,7 +84,7 @@ def FileEntryComponent(name, absolute = None, isDir = False):
 
 
 class FileList(MenuList):
-	def __init__(self, directory, showDirectories = True, showFiles = True, showMountpoints = True, matchingPattern = None, useServiceRef = False, inhibitDirs = False, inhibitMounts = False, isTop = False, enableWrapAround = True, additionalExtensions = None):
+	def __init__(self, directory, showDirectories=True, showFiles=True, showMountpoints=True, matchingPattern=None, useServiceRef=False, inhibitDirs=False, inhibitMounts=False, isTop=False, enableWrapAround=True, additionalExtensions=None):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.additional_extensions = additionalExtensions
 		self.mountpoints = []
@@ -106,7 +106,7 @@ class FileList(MenuList):
 
 	def refreshMountpoints(self):
 		self.mountpoints = [os_path.join(p.mountpoint, "") for p in harddiskmanager.getMountedPartitions()]
-		self.mountpoints.sort(reverse = True)
+		self.mountpoints.sort(reverse=True)
 
 	def getMountpoint(self, file):
 		file = os_path.join(os_path.realpath(file), "")
@@ -151,7 +151,7 @@ class FileList(MenuList):
 				return True
 		return False
 
-	def changeDir(self, directory, select = None):
+	def changeDir(self, directory, select=None):
 		self.list = []
 		if self.current_directory is None:
 			if directory and self.showMountpoints:
@@ -165,7 +165,7 @@ class FileList(MenuList):
 			for p in harddiskmanager.getMountedPartitions():
 				path = os_path.join(p.mountpoint, "")
 				if path not in self.inhibitMounts and not self.inParentDirs(path, self.inhibitDirs):
-					self.list.append(FileEntryComponent(name = p.description, absolute = path, isDir = True))
+					self.list.append(FileEntryComponent(name=p.description, absolute=path, isDir=True))
 			files = [ ]
 			directories = [ ]
 		elif directory is None:
@@ -202,14 +202,14 @@ class FileList(MenuList):
 						files.remove(x)
 		if directory is not None and self.showDirectories and not self.isTop:
 			if directory == self.current_mountpoint and self.showMountpoints:
-				self.list.append(FileEntryComponent(name = "<" +_("List of Storage Devices") + ">", absolute = None, isDir = True))
+				self.list.append(FileEntryComponent(name="<" +_("List of Storage Devices") + ">", absolute=None, isDir=True))
 			elif (directory != "/") and not (self.inhibitMounts and self.getMountpoint(directory) in self.inhibitMounts):
-				self.list.append(FileEntryComponent(name = "<" +_("Parent Directory") + ">", absolute = '/'.join(directory.split('/')[:-2]) + '/', isDir = True))
+				self.list.append(FileEntryComponent(name="<" +_("Parent Directory") + ">", absolute='/'.join(directory.split('/')[:-2]) + '/', isDir=True))
 		if self.showDirectories:
 			for x in directories:
 				if not (self.inhibitMounts and self.getMountpoint(x) in self.inhibitMounts) and not self.inParentDirs(x, self.inhibitDirs):
 					name = x.split('/')[-2]
-					self.list.append(FileEntryComponent(name = name, absolute = x, isDir = True))
+					self.list.append(FileEntryComponent(name=name, absolute=x, isDir=True))
 		if self.showFiles:
 			for x in files:
 				if self.useServiceRef:
@@ -231,7 +231,7 @@ class FileList(MenuList):
 					EXext = "nothing"
 				if (self.matchingPattern is None) or (EXext in self.matchingPattern):
 					if nx is None:
-						self.list.append(FileEntryComponent(name = name, absolute = x , isDir = False))
+						self.list.append(FileEntryComponent(name=name, absolute=x , isDir=False))
 					else:
 						res = [ (x, False) ]
 						res.append((eListboxPythonMultiContent.TYPE_TEXT, 40, 2, 1000, 22, 0, RT_HALIGN_LEFT, name + " [" + self.getTSLength(path) + "]"))
@@ -261,7 +261,7 @@ class FileList(MenuList):
 	def descent(self):
 		if self.getSelection() is None:
 			return
-		self.changeDir(self.getSelection()[0], select = self.current_directory)
+		self.changeDir(self.getSelection()[0], select=self.current_directory)
 
 	def getFilename(self):
 		if self.getSelection() is None:

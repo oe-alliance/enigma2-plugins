@@ -47,13 +47,13 @@ def transHTML(text):
 	return h.unescape(text)
 
 config.plugins.imdb = ConfigSubsection()
-config.plugins.imdb.showinplugins = ConfigYesNo(default = False)
-config.plugins.imdb.showsetupinplugins = ConfigYesNo(default = True)
-config.plugins.imdb.showinmovielist = ConfigYesNo(default = True)
+config.plugins.imdb.showinplugins = ConfigYesNo(default=False)
+config.plugins.imdb.showsetupinplugins = ConfigYesNo(default=True)
+config.plugins.imdb.showinmovielist = ConfigYesNo(default=True)
 config.plugins.imdb.force_english = ConfigYesNo(default=False)
-config.plugins.imdb.ignore_tags = ConfigText(visible_width = 50, fixed_size = False)
-config.plugins.imdb.showlongmenuinfo = ConfigYesNo(default = False)
-config.plugins.imdb.showepisodeinfo = ConfigYesNo(default = False)
+config.plugins.imdb.ignore_tags = ConfigText(visible_width=50, fixed_size=False)
+config.plugins.imdb.showlongmenuinfo = ConfigYesNo(default=False)
+config.plugins.imdb.showepisodeinfo = ConfigYesNo(default=False)
 
 def quoteEventName(eventName, safe="/()" + ''.join(map(chr,range(192,255)))):
 	# BBC uses '\x86' markers in program names, remove them
@@ -362,10 +362,10 @@ class IMDB(Screen, HelpableScreen):
 			self.menuCallback,
 			ChoiceBox,
 			title=_("IMDb Menu"),
-			list = list,
+			list=list,
 		)
 
-	def menuCallback(self, ret = None):
+	def menuCallback(self, ret=None):
 		ret and ret[1]()
 
 	def saveHtmlDetails(self):
@@ -516,11 +516,11 @@ class IMDB(Screen, HelpableScreen):
 		self.session.openWithCallback(
 			self.gotSearchString,
 			VirtualKeyBoard,
-			title = _("Enter text to search for"),
-			text = self.eventName
+			title=_("Enter text to search for"),
+			text=self.eventName
 		)
 
-	def gotSearchString(self, ret = None):
+	def gotSearchString(self, ret=None):
 		if ret:
 			self.eventName = ret
 			self.Page = 0
@@ -861,7 +861,7 @@ class IMDbSetup(Screen, ConfigListScreen):
 		self["VirtualKB"].setEnabled(False)
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 		self.createSetup()
 		if not self.handleInputHelpers in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.handleInputHelpers)
@@ -916,9 +916,9 @@ class IMDbSetup(Screen, ConfigListScreen):
 		if isinstance(self["config"].getCurrent()[1], ConfigText):
 			if self["config"].getCurrent()[1].help_window.instance is not None:
 				self["config"].getCurrent()[1].help_window.hide()
-		self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title = self["config"].getCurrent()[0], text = self["config"].getCurrent()[1].getValue())
+		self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title=self["config"].getCurrent()[0], text=self["config"].getCurrent()[1].getValue())
 
-	def VirtualKeyBoardCallback(self, callback = None):
+	def VirtualKeyBoardCallback(self, callback=None):
 		if callback is not None and len(callback):
 			self["config"].getCurrent()[1].setValue(callback)
 			self["config"].invalidate(self["config"].getCurrent())

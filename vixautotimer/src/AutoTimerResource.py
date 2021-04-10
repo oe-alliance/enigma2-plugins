@@ -403,7 +403,7 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 			if plugin.autopoller is None:
 				from AutoPoller import AutoPoller
 				plugin.autopoller = AutoPoller()
-			plugin.autopoller.start(initial = False)
+			plugin.autopoller.start(initial=False)
 		else:
 			if plugin.autopoller is not None:
 				plugin.autopoller.stop()

@@ -299,7 +299,7 @@ else:
         Use True or False to generate a "boolean" XML-RPC value.
         """
 
-        def __init__(self, value = 0):
+        def __init__(self, value=0):
             self.value = operator.truth(value)
 
         def encode(self, out):

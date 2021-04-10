@@ -18,10 +18,10 @@ from twisted.internet import reactor
 
 ###############################################################################
 config.plugins.httpproxy = ConfigSubsection()
-config.plugins.httpproxy.enable = ConfigYesNo(default = True)
-config.plugins.httpproxy.port = ConfigInteger(8080,limits = (1, 65536))
-config.plugins.httpproxy.filter_hosts = ConfigYesNo(default = False)
-config.plugins.httpproxy.filter_uri = ConfigYesNo(default = False)
+config.plugins.httpproxy.enable = ConfigYesNo(default=True)
+config.plugins.httpproxy.port = ConfigInteger(8080,limits=(1, 65536))
+config.plugins.httpproxy.filter_hosts = ConfigYesNo(default=False)
+config.plugins.httpproxy.filter_uri = ConfigYesNo(default=False)
 
 global ALLOWED_CLIENTS,LOG_TO_STDOUT,URI_BLACKLIST
 LOG_TO_STDOUT = False
@@ -38,7 +38,7 @@ class HTTPProxyConfigScreen(ConfigListScreen,Screen):
         <widget name="buttongreen" position="120,360" size="100,40" backgroundColor="green" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/>
         </screen>"""
 
-    def __init__(self, session, args = 0):
+    def __init__(self, session, args=0):
         self.session = session
         Screen.__init__(self, session)
         self.list = []
@@ -149,7 +149,7 @@ def autostart(reason,**kwargs):
 
 def Plugins(**kwargs):
   return [
-          PluginDescriptor(name="HTTP Proxy",description="use your receiver as Web Proxy",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main),
-          PluginDescriptor(where = [PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc = autostart)
+          PluginDescriptor(name="HTTP Proxy",description="use your receiver as Web Proxy",where=PluginDescriptor.WHERE_PLUGINMENU,fnc=main),
+          PluginDescriptor(where=[PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc=autostart)
           ]
 

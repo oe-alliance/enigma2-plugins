@@ -11,7 +11,7 @@ zapperInstance = None
 
 # Config options
 config.werbezapper          = ConfigSubsection()
-config.werbezapper.duration = ConfigNumber(default = 5)
+config.werbezapper.duration = ConfigNumber(default=5)
 
 
 # Mainfunction
@@ -47,18 +47,18 @@ def cleanup():
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
-			name = "Werbezapper",
-			description = _("Automatically zaps back to current service after given Time"),
-			where = PluginDescriptor.WHERE_EXTENSIONSMENU,
-			fnc = main,
-			needsRestart = False,
+			name="Werbezapper",
+			description=_("Automatically zaps back to current service after given Time"),
+			where=PluginDescriptor.WHERE_EXTENSIONSMENU,
+			fnc=main,
+			needsRestart=False,
 		),
 		PluginDescriptor(
-			name = "Werbezapper Start / Stop monitoring",
-			description = _("Start / Stop monitoring instantly"),
-			where = PluginDescriptor.WHERE_EXTENSIONSMENU,
-			fnc = startstop,
-			needsRestart = False,
+			name="Werbezapper Start / Stop monitoring",
+			description=_("Start / Stop monitoring instantly"),
+			where=PluginDescriptor.WHERE_EXTENSIONSMENU,
+			fnc=startstop,
+			needsRestart=False,
 		)
 	]
 

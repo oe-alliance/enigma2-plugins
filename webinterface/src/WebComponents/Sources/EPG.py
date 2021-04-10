@@ -155,7 +155,7 @@ class EPG(Source):
 
 		return list
 
-	def getEPGofBouquet(self, param, multi = False):
+	def getEPGofBouquet(self, param, multi=False):
 		print "[WebComponents.EPG] getting EPG for Bouquet", param
 
 		if 'bRef' not in param:

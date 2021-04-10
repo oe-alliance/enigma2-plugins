@@ -74,16 +74,16 @@ PACKAGE_PATH = os.path.dirname(str((globals())["__file__"]))
 KEYMAPPINGS = {'bouquet': os.path.join(PACKAGE_PATH, 'keymap-bouquet.xml'), 'help': os.path.join(PACKAGE_PATH, 'keymap-help.xml'), 'radio': os.path.join(PACKAGE_PATH, 'keymap-radio.xml'), 'video': os.path.join(PACKAGE_PATH, 'keymap-video.xml')}
 
 config.plugins.AspectRatioSwitch = ConfigSubsection()
-config.plugins.AspectRatioSwitch.enabled = ConfigEnableDisable(default = False)
+config.plugins.AspectRatioSwitch.enabled = ConfigEnableDisable(default=False)
 config.plugins.AspectRatioSwitch.keymap = ConfigSelection({'bouquet': _('Bouquet +/- long'), 'help': _('Help key long'), 'radio': _('Radio key long'), 'video': _('PVR key long')}, default='bouquet')
-config.plugins.AspectRatioSwitch.autostart_ratio_enabled = ConfigEnableDisable(default = False)
-config.plugins.AspectRatioSwitch.autostart_ratio = ConfigSelection(choices = [("0", _("4:3 Letterbox")), ("1", _("4:3 PanScan")), ("2", _("16:9")), ("3", _("16:9 always")), ("4", _("16:10 Letterbox")), ("5", _("16:10 PanScan")), ("6", _("16:9 Letterbox"))], default = "6")
-config.plugins.AspectRatioSwitch.showmsg = ConfigYesNo(default = True)
+config.plugins.AspectRatioSwitch.autostart_ratio_enabled = ConfigEnableDisable(default=False)
+config.plugins.AspectRatioSwitch.autostart_ratio = ConfigSelection(choices=[("0", _("4:3 Letterbox")), ("1", _("4:3 PanScan")), ("2", _("16:9")), ("3", _("16:9 always")), ("4", _("16:10 Letterbox")), ("5", _("16:10 PanScan")), ("6", _("16:9 Letterbox"))], default="6")
+config.plugins.AspectRatioSwitch.showmsg = ConfigYesNo(default=True)
 config.plugins.AspectRatioSwitch.modes = ConfigSubDict()
-config.plugins.AspectRatioSwitch.menu = ConfigSelection(default = 'plugin', choices = [('plugin', _('Plugin menu')), ('extensions', _('Extensions menu'))])
+config.plugins.AspectRatioSwitch.menu = ConfigSelection(default='plugin', choices=[('plugin', _('Plugin menu')), ('extensions', _('Extensions menu'))])
 
 for aspect in ASPECT:
-	config.plugins.AspectRatioSwitch.modes[aspect] = ConfigYesNo(default = True)
+	config.plugins.AspectRatioSwitch.modes[aspect] = ConfigYesNo(default=True)
 
 aspect_ratio_switch = None
 
@@ -281,15 +281,15 @@ def main(session, **kwargs):
 def Plugins(**kwargs):
 			
 	list = [
-		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART,PluginDescriptor.WHERE_AUTOSTART], fnc = autostart)
+		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART,PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)
 		]
 	if config.plugins.AspectRatioSwitch.menu.value == "plugin":
 		list.append (PluginDescriptor(name=_("Aspect Ratio Switch setup"),	description=_("Quick switching of aspect ratio setting"),
-		where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+		where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
 	)
 	else:
 		list.append (PluginDescriptor(name=_("Aspect Ratio Switch setup"), description=_("Quick switching of aspect ratio setting"),
-		where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
+		where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
 	)
 
 	return list

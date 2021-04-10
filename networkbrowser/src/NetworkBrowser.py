@@ -65,7 +65,7 @@ def load_cache(cache_file):
 	return cache_data
 
 class NetworkDescriptor:
-	def __init__(self, name = "NetworkServer", description = ""):
+	def __init__(self, name="NetworkServer", description=""):
 		self.name = name
 		self.description = description
 
@@ -210,7 +210,7 @@ class NetworkBrowser(Screen):
 			write_cache(self.cache_file, self.networklist)
 			self.updateHostsList()
 
-	def setStatus(self,status = None):
+	def setStatus(self,status=None):
 		if status:
 			self.statuslist = []
 			if status == 'update':
@@ -352,7 +352,7 @@ class NetworkBrowser(Screen):
 		for x in self.networklist:
 			if not self.network.has_key(x[2]):
 				self.network[x[2]] = []
-			self.network[x[2]].append((NetworkDescriptor(name = x[1], description = x[2]), x))
+			self.network[x[2]].append((NetworkDescriptor(name=x[1], description=x[2]), x))
 
 		for x in self.network.keys():
 			hostentry = self.network[x][0][1]
@@ -379,7 +379,7 @@ class NetworkBrowser(Screen):
 		for x in self.networklist:
 			if not self.network.has_key(x[2]):
 				self.network[x[2]] = []
-			self.network[x[2]].append((NetworkDescriptor(name = x[1], description = x[2]), x))
+			self.network[x[2]].append((NetworkDescriptor(name=x[1], description=x[2]), x))
 		self.network.keys().sort()
 		for x in self.network.keys():
 			if self.network[x][0][1][3] == '00:00:00:00:00:00':
@@ -522,7 +522,7 @@ class NetworkBrowser(Screen):
 		else:
 			self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?") ) )
 
-	def passwordQuestion(self, ret = False):
+	def passwordQuestion(self, ret=False):
 		sel = self["list"].getCurrent()
 		selectedhost = sel[0][2]
 		selectedhostname = sel[0][1]
@@ -590,7 +590,7 @@ class NetworkBrowser(Screen):
 						newmount = False
 			self.session.openWithCallback(self.MountEditClosed,AutoMountEdit, self.skin_path, data, newmount)
 
-	def MountEditClosed(self, returnValue = None):
+	def MountEditClosed(self, returnValue=None):
 		if returnValue == None:
 			self.updateNetworkList()
 

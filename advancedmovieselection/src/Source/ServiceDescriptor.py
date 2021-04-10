@@ -31,7 +31,7 @@ class MovieInfo():
     idDVD = 0x1111 # 4369
     idMP3 = 0x1001 # 4097
     idBD = 0x0004
-    def __init__(self, name, serviceref, info=None, begin= -1, length= -1, file_name=None):
+    def __init__(self, name, serviceref, info=None, begin=-1, length=-1, file_name=None):
         self.name = name
         self.info = info
         self.begin = begin

@@ -88,7 +88,7 @@ class ConfigMutable(ConfigElement):
 		for x in self.notifiers:
 			x(self)
 			
-	def addNotifier(self, notifier, initial_call = True):
+	def addNotifier(self, notifier, initial_call=True):
 		assert callable(notifier), "notifiers must be callable"
 		self.notifiers.append(notifier)
 		if initial_call:
@@ -123,7 +123,7 @@ class ConfigMutable(ConfigElement):
 
 
 class ConfigSelectionExtended(ConfigSelection):
-	def __init__(self, choices, default = None):
+	def __init__(self, choices, default=None):
 		ConfigSelection.__init__(self, choices, default)
 
 	def deleteNotifier(self, notifier):

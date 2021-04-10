@@ -42,7 +42,7 @@ class MP(Source):
 			param = { "file" : cmd, "root" : None}
 			self.result = self.addFile(param)
 
-	def tryOpenMP(self, noCreate = False):
+	def tryOpenMP(self, noCreate=False):
 		# check if there is an active link
 		if hasattr(self.session, "mediaplayer"):
 			mp = self.session.mediaplayer

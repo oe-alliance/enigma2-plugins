@@ -13,7 +13,7 @@ class WebTVStations():
 		print "[WebTVStations] INIT"
 		self.webtv_stations = {}
 
-	def getWebTVStations(self, callback = None):
+	def getWebTVStations(self, callback=None):
 		webtv_stations = []
 		self.webtv_stations = {}
 

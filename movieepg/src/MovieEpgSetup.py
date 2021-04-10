@@ -36,8 +36,8 @@ class MovieEpgSetup(Screen, ConfigListScreen):
 				getConfigListEntry(_("Show \"EPG\" entry"), config.plugins.movieepg.show_epg_entry, _("Configures where to show the \"EPG\"-Entry in the Extensions-List. You can either show this just in the movie player, the movie player and TV-mode or never.")),
 				getConfigListEntry(_("Show all Plugins in MoviePlayer?"), config.plugins.movieepg.show_servicelist_plugins_in_movieplayer, _("Enables you to show all plugins in the (regular) movie player, including ones which may have previously been hidden there like the Graphical Multi-EPG.")),
 			],
-			session = session,
-			on_change = self.changed
+			session=session,
+			on_change=self.changed
 		)
 		def selectionChanged():
 			if self["config"].current:

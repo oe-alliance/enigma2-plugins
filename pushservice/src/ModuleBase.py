@@ -32,7 +32,7 @@ class ModuleBase(object):
 		# Is called on instance creation
 		
 		# Default configuration
-		self.enable = NoSave(ConfigYesNo( default = False ))
+		self.enable = NoSave(ConfigYesNo( default=False ))
 		
 		self.options = OrderedDict()
 		
