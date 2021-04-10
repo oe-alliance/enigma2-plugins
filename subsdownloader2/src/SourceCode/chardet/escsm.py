@@ -63,11 +63,11 @@ HZ_cls = (
 )
 
 HZ_st = (
-eStart,eError,     3,eStart,eStart,eStart,eError,eError,# 00-07 
+eStart,eError, 3,eStart,eStart,eStart,eError,eError,# 00-07 
 eError,eError,eError,eError,eItsMe,eItsMe,eItsMe,eItsMe,# 08-0f 
-eItsMe,eItsMe,eError,eError,eStart,eStart,     4,eError,# 10-17 
-     5,eError,     6,eError,     5,     5,     4,eError,# 18-1f 
-     4,eError,     4,     4,     4,eError,     4,eError,# 20-27 
+eItsMe,eItsMe,eError,eError,eStart,eStart, 4,eError,# 10-17 
+     5,eError, 6,eError, 5, 5, 4,eError,# 18-1f 
+     4,eError, 4, 4, 4,eError, 4,eError,# 20-27 
      4,eItsMe,eStart,eStart,eStart,eStart,eStart,eStart,# 28-2f 
 )
 
@@ -115,12 +115,12 @@ ISO2022CN_cls = (
 )
 
 ISO2022CN_st = (
-eStart,     3,eError,eStart,eStart,eStart,eStart,eStart,# 00-07 
+eStart, 3,eError,eStart,eStart,eStart,eStart,eStart,# 00-07 
 eStart,eError,eError,eError,eError,eError,eError,eError,# 08-0f 
 eError,eError,eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,# 10-17 
-eItsMe,eItsMe,eItsMe,eError,eError,eError,     4,eError,# 18-1f 
+eItsMe,eItsMe,eItsMe,eError,eError,eError, 4,eError,# 18-1f 
 eError,eError,eError,eItsMe,eError,eError,eError,eError,# 20-27 
-     5,     6,eError,eError,eError,eError,eError,eError,# 28-2f 
+     5, 6,eError,eError,eError,eError,eError,eError,# 28-2f 
 eError,eError,eError,eItsMe,eError,eError,eError,eError,# 30-37 
 eError,eError,eError,eError,eError,eItsMe,eError,eStart,# 38-3f 
 )
@@ -169,12 +169,12 @@ ISO2022JP_cls = (
 )
 
 ISO2022JP_st = (
-eStart,     3,eError,eStart,eStart,eStart,eStart,eStart,# 00-07 
+eStart, 3,eError,eStart,eStart,eStart,eStart,eStart,# 00-07 
 eStart,eStart,eError,eError,eError,eError,eError,eError,# 08-0f 
 eError,eError,eError,eError,eItsMe,eItsMe,eItsMe,eItsMe,# 10-17 
 eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,eError,eError,# 18-1f 
-eError,     5,eError,eError,eError,     4,eError,eError,# 20-27 
-eError,eError,eError,     6,eItsMe,eError,eItsMe,eError,# 28-2f 
+eError, 5,eError,eError,eError, 4,eError,eError,# 20-27 
+eError,eError,eError, 6,eItsMe,eError,eItsMe,eError,# 28-2f 
 eError,eError,eError,eError,eError,eError,eItsMe,eItsMe,# 30-37 
 eError,eError,eError,eItsMe,eError,eError,eError,eError,# 38-3f 
 eError,eError,eError,eError,eItsMe,eError,eStart,eStart,# 40-47 
@@ -224,10 +224,10 @@ ISO2022KR_cls = (
 )
 
 ISO2022KR_st = (
-eStart,     3,eError,eStart,eStart,eStart,eError,eError,# 00-07 
+eStart, 3,eError,eStart,eStart,eStart,eError,eError,# 00-07 
 eError,eError,eError,eError,eItsMe,eItsMe,eItsMe,eItsMe,# 08-0f 
-eItsMe,eItsMe,eError,eError,eError,     4,eError,eError,# 10-17 
-eError,eError,eError,eError,     5,eError,eError,eError,# 18-1f 
+eItsMe,eItsMe,eError,eError,eError, 4,eError,eError,# 10-17 
+eError,eError,eError,eError, 5,eError,eError,eError,# 18-1f 
 eError,eError,eError,eItsMe,eStart,eStart,eStart,eStart,# 20-27 
 )
 

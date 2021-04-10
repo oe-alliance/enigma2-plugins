@@ -35,7 +35,7 @@ def addHost(name):
 
 i = 0
 while i < growlee.hostcount.value:
-	addHost(str(i+1))
+	addHost(str(i + 1))
 	i += 1
 
 # XXX: change to new config format
@@ -171,7 +171,7 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 		]
 
 		proto = cur.protocol.value
-		if proto ==  "prowl":
+		if proto == "prowl":
 			l.append(getConfigListEntry(_("API Key"), cur.password))
 		else:
 			if proto != "gntp":

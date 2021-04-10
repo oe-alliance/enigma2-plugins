@@ -125,7 +125,7 @@ def startPlugin(self,pname, index):
 			elif pname == _("Sort"):
 				if config.movielist.moviesort.value == MovieList.SORT_ALPHANUMERIC:
 					newType = MovieList.SORT_RECORDED
-					newCaption =  _("alphabetic sort")
+					newCaption = _("alphabetic sort")
 				else:
 					newType = MovieList.SORT_ALPHANUMERIC
 					newCaption = _("sort by date")
@@ -150,7 +150,7 @@ def startPlugin(self,pname, index):
 						plugin(self.session, current)
 						no_plugin = False
 					except Exception, e:
-						msgText = _("Error!\nError Text: %s"%e)
+						msgText = _("Error!\nError Text: %s" % e)
 				else: 
 					msgText = _("Plugin not found!")
 		else:

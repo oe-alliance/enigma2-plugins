@@ -25,7 +25,7 @@ class zip_extractor():
      def open_zip_file_to_read(self,zip__path):
           try:
                zip_data = zipfile.ZipFile(zip__path, 'r')
-               zip_file_list= zip_data.namelist()
+               zip_file_list = zip_data.namelist()
                return zip_data, zip_file_list
                zip_data.close()
           except:
@@ -33,7 +33,7 @@ class zip_extractor():
                return False
 
      def zipped_file_list(self, zip_file_temp_list, extraction_filter=None):
-          zip_file_list =[]
+          zip_file_list = []
           for x in zip_file_temp_list:
                if extraction_filter != None:
                     if x.rsplit(".",1)[1] in extraction_filter:
@@ -51,11 +51,11 @@ class zip_extractor():
                zip_data, zip_file_list = self.open_zip_file_to_read(self.__zip__path)
                extraction_file_list = self.zipped_file_list(zip_file_list, self.__extracted_extension_filter)
                try:
-                    extracted_files_path =[]
+                    extracted_files_path = []
                     for x in extraction_file_list:
                          zip_data.extract(x, destination_dir)
                          print "Files %s from zip %s extracted to dir: %s.\n" % (x,self.__zip__path,destination_dir)  
-                         extracted_files_path.append(destination_dir+"/"+x)
+                         extracted_files_path.append(destination_dir + "/" + x)
                     return extracted_files_path   
                except:
                     print "Zip %s was not extracted to dir: %s" % (self.__zip__path,destination_dir) 

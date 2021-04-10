@@ -45,15 +45,15 @@ from twisted.web.client import getPage
 
 TPMD_DT_RESERVED = 0x00
 TPMD_DT_PROTOCOL_VERSION = 0x01
-TPMD_DT_TPM_VERSION	= 0x02
+TPMD_DT_TPM_VERSION = 0x02
 TPMD_DT_SERIAL = 0x03
 TPMD_DT_LEVEL2_CERT = 0x04
-TPMD_DT_LEVEL3_CERT	= 0x05
-TPMD_DT_FAB_CA_CERT	= 0x06
+TPMD_DT_LEVEL3_CERT = 0x05
+TPMD_DT_FAB_CA_CERT = 0x06
 TPMD_DT_DATABLOCK_SIGNED = 0x07
-TPMD_CMD_RESERVED	= 0x0000
-TPMD_CMD_GET_DATA	= 0x0001
-TPMD_CMD_APDU	= 0x0002
+TPMD_CMD_RESERVED = 0x0000
+TPMD_CMD_GET_DATA = 0x0001
+TPMD_CMD_APDU = 0x0002
 TPMD_CMD_COMPUTE_SIGNATURE = 0x0003
 TPMD_CMD_APP_CERT = 0x0004
 TPMD_PV_2 = 0x02
@@ -68,7 +68,7 @@ class genuineDreambox(Screen):
 		<ePixmap name="red" position="185,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<widget name="kGreen" position="330,365" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<ePixmap name="green" position="330,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		</screen>"""% _("Genuine Dreambox")
+		</screen>""" % _("Genuine Dreambox")
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -186,7 +186,7 @@ class genuineDreambox(Screen):
 			tmpl3 = ""
 		tmpfa = ("&fab=%s" % base64.b64encode(self.fab_ca_cert).replace('+', '-').replace('/', '_'))
 		tmpda = ("&data=%s" % base64.b64encode(self.datablock_signed).replace('+', '-').replace('/', '_'))
-		tmpr  = ("&r=%s" % base64.b64encode(self.r).replace('+', '-').replace('/', '_'))
+		tmpr = ("&r=%s" % base64.b64encode(self.r).replace('+', '-').replace('/', '_'))
 		return("https://www.dream-multimedia-tv.de/verify/challenge?%s%s%s%s%s%s&serial=%s" % (tmpra,tmpl2,tmpl3,tmpfa,tmpda,tmpr,self.serial))
 
 	def buildUrlUpdate(self):
@@ -201,7 +201,7 @@ class genuineDreambox(Screen):
 	def formatString(self,s):
 		myString = ""
 		for x in s:
-			myString =  myString + chr(x)
+			myString = myString + chr(x)
 		return myString
 
 	def stepFirst(self,typ,daten):
@@ -277,7 +277,7 @@ class genuineDreambox(Screen):
 		udsError = False
 		sbuf = [(cmdTyp >> 8) & 0xff,(cmdTyp >> 0) & 0xff,(length >> 8) & 0xff,(length >> 0) & 0xff]
 		sbuf.extend(data[:length])
-		sbuf = struct.pack(str((length + 4))+"B", *sbuf)
+		sbuf = struct.pack(str((length + 4)) + "B", *sbuf)
 		try:
 			self.uds.send(sbuf)
 			udsError = False

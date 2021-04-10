@@ -47,7 +47,7 @@ class Request(urllib2.Request):
     @property
     def api_key(self):
         if self._api_key is None:
-            raise TMDBKeyMissing("API key must be specified before "+
+            raise TMDBKeyMissing("API key must be specified before " +
                                  "requests can be made")
         return self._api_key
 
@@ -89,9 +89,9 @@ class Request(urllib2.Request):
         """Open a file object to the specified URL."""
         try:
             if DEBUG:
-                print 'loading '+self.get_full_url()
+                print 'loading ' + self.get_full_url()
                 if self.has_data():
-                    print '  '+self.get_data()
+                    print '  ' + self.get_data()
             return urllib2.urlopen(self)
         except urllib2.HTTPError, e:
             raise TMDBHTTPError(e)
@@ -128,19 +128,19 @@ class Request(urllib2.Request):
 status_handlers = {
     1: None,
     2: TMDBRequestInvalid('Invalid service - This service does not exist.'),
-    3: TMDBRequestError('Authentication Failed - You do not have '+
+    3: TMDBRequestError('Authentication Failed - You do not have ' +
                         'permissions to access this service.'),
-    4: TMDBRequestInvalid("Invalid format - This service doesn't exist "+
+    4: TMDBRequestInvalid("Invalid format - This service doesn't exist " +
                         'in that format.'),
-    5: TMDBRequestInvalid('Invalid parameters - Your request parameters '+
+    5: TMDBRequestInvalid('Invalid parameters - Your request parameters ' +
                         'are incorrect.'),
-    6: TMDBRequestInvalid('Invalid id - The pre-requisite id is invalid '+
+    6: TMDBRequestInvalid('Invalid id - The pre-requisite id is invalid ' +
                         'or not found.'),
     7: TMDBKeyInvalid('Invalid API key - You must be granted a valid key.'),
-    8: TMDBRequestError('Duplicate entry - The data you tried to submit '+
+    8: TMDBRequestError('Duplicate entry - The data you tried to submit ' +
                         'already exists.'),
     9: TMDBOffline('This service is tempirarily offline. Try again later.'),
-   10: TMDBKeyRevoked('Suspended API key - Access to your account has been '+
+   10: TMDBKeyRevoked('Suspended API key - Access to your account has been ' +
                       'suspended, contact TMDB.'),
    11: TMDBError('Internal error - Something went wrong. Contact TMDb.'),
    12: None,

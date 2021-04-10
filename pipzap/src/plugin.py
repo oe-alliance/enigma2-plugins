@@ -124,7 +124,7 @@ def ChannelSelection_zap(self, *args, **kwargs):
 			self.session.pip = self.session.instantiateDialog(PictureInPicture)
 			self.session.pip.show()
 			self.session.pipshown = True
-		self.revertMode=None
+		self.revertMode = None
 		ref = self.session.pip.getCurrentService()
 		nref = self.getCurrentSelection()
 		if ref is None or ref != nref:

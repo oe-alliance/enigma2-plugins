@@ -55,7 +55,7 @@ class GrabResource(resource.Resource):
 				if key == "v" and osdOnly is True:
 					continue
 
-				append("-%s" %key)
+				append("-%s" % key)
 
 				if value:
 					if value[0]:
@@ -63,17 +63,17 @@ class GrabResource(resource.Resource):
 
 		if not os_path.exists(self.GRAB_BIN):
 			request.setResponseCode(http.OK)
-			return 'Grab is not installed at %s. Please install package aio-grab.' %self.GRAB_BIN
+			return 'Grab is not installed at %s. Please install package aio-grab.' % self.GRAB_BIN
 
 		else:
-			request.setHeader('Content-Disposition', 'inline; filename=screenshot.%s;' %imageformat)
+			request.setHeader('Content-Disposition', 'inline; filename=screenshot.%s;' % imageformat)
 			mimetype = imageformat
 			if mimetype == 'jpg':
 				mimetype = 'jpeg'
 
-			request.setHeader('Content-Type','image/%s' %mimetype)
+			request.setHeader('Content-Type','image/%s' % mimetype)
 
-			filename = "%s.%s" %(filename,imageformat)
+			filename = "%s.%s" % (filename,imageformat)
 			append(filename)
 			cmd = [self.GRAB_BIN, self.GRAB_BIN] + args
 
@@ -111,12 +111,12 @@ class GrabStream:
 			self.request.setResponseCode(http.OK)
 			if int(data) is 0 and self.target is not None:
 				try:
-					self.request.setHeader('Content-Length', '%i' %os_path_getsize(self.target))
+					self.request.setHeader('Content-Length', '%i' % os_path_getsize(self.target))
 					with open(self.target) as fp:
 						self.request.write(fp.read())
 					if self.save is False:
 						os_remove(self.target)
-						print '[Screengrab.py] %s removed' %self.target
+						print '[Screengrab.py] %s removed' % self.target
 				except Exception,e:
 					self.request.write('Internal error while reading target file')
 					self.request.setResponseCode(http.INTERNAL_SERVER_ERROR)

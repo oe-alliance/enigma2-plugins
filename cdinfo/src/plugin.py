@@ -169,7 +169,7 @@ class Query:
 				    trackinfo["title"] = title
 				#elif track.tagName == 'length':
 				    #tracktext += "Dauer=%ss " % self.getText(track.childNodes)
-			self.tracklisting[index]=trackinfo
+			self.tracklisting[index] = trackinfo
 
 	def updateAlbuminfo(self, replace=False):
 		for tag in self.albuminfo:
@@ -179,7 +179,7 @@ class Query:
 	def updatePlaylist(self, replace=False):
 		for idx in range(len(self.playlist)):
 			ref = self.playlist.getServiceRefList()[idx]
-			track = idx+1
+			track = idx + 1
 			if idx < len(self.tracklisting):
 				if replace or not ref.getName():
 					trackinfo = self.tracklisting[track]

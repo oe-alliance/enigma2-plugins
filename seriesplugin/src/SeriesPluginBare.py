@@ -64,7 +64,7 @@ def bareShowResult():
 	global loop_data, loop_counter
 	
 	if loop_data:
-		msg = "SeriesPlugin:\n" + _("Finished with errors:\n") +"\n" +"\n".join(loop_data)
+		msg = "SeriesPlugin:\n" + _("Finished with errors:\n") + "\n" + "\n".join(loop_data)
 		log.warning(msg)
 	
 	else:

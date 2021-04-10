@@ -74,7 +74,7 @@ class Country(LocaleBase):
     _stored = {}
 
     def __init__(self, alpha2, name):
-        self.alpha2  = alpha2
+        self.alpha2 = alpha2
         self.name = name
         super(Country, self).__init__(alpha2)
 

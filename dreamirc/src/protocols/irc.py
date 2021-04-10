@@ -102,7 +102,7 @@ def split(str, length=80):
             line, str = str[:length], str[length:]
         else:
             i = n == -1 and w or n
-            line, str = str[:i], str[i+1:]
+            line, str = str[:i], str[i + 1:]
         r.append(line)
     if len(str):
         r.extend(str.split('\n'))
@@ -990,7 +990,7 @@ class IRCClient(basic.LineReceiver):
     ### but it is safe to leave them alone.
 
     def irc_ERR_NICKNAMEINUSE(self, prefix, params):
-        self.register(self.nickname+'_')
+        self.register(self.nickname + '_')
 
     def irc_ERR_PASSWDMISMATCH(self, prefix, params):
         raise IRCPasswordMismatch("Password Incorrect.")
@@ -1036,7 +1036,7 @@ class IRCClient(basic.LineReceiver):
         if not message:
             return # don't raise an exception if some idiot sends us a blank message
 
-        if message[0]==X_DELIM:
+        if message[0] == X_DELIM:
             m = ctcpExtract(message)
             if m['extended']:
                 self.ctcpQuery(user, channel, m['extended'])
@@ -1053,7 +1053,7 @@ class IRCClient(basic.LineReceiver):
         channel = params[0]
         message = params[-1]
 
-        if message[0]==X_DELIM:
+        if message[0] == X_DELIM:
             m = ctcpExtract(message)
             if m['extended']:
                 self.ctcpReply(user, channel, m['extended'])
@@ -1286,7 +1286,7 @@ class IRCClient(basic.LineReceiver):
         if handler:
             if self.dcc_sessions is None:
                 self.dcc_sessions = []
-            data = data[len(dcctype)+1:]
+            data = data[len(dcctype) + 1:]
             handler(user, channel, data)
         else:
             nick = string.split(user,"!")[0]
@@ -1961,7 +1961,7 @@ def ctcpExtract(message):
 
 # CTCP escaping
 
-M_QUOTE= chr(020)
+M_QUOTE = chr(020)
 
 mQuoteTable = {
     NUL: M_QUOTE + '0',

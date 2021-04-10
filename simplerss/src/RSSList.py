@@ -62,7 +62,7 @@ class RSSFeedList(MenuList):
 
 		return [
 			None,
-			(eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, titleHeight, 0, RT_HALIGN_LEFT|RT_WRAP, feed.title),
+			(eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, titleHeight, 0, RT_HALIGN_LEFT | RT_WRAP, feed.title),
 			(eListboxPythonMultiContent.TYPE_TEXT, 0, titleHeight, width, descriptionHeight, 1, RT_HALIGN_LEFT, feed.description)
 		]
 

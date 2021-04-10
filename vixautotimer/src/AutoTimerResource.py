@@ -211,9 +211,9 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 					# strip all after last :
 					pos = value.rfind(':')
 					if pos != -1:
-						if value[pos-1] == ':':
+						if value[pos - 1] == ':':
 							pos -= 1
-						value = value[:pos+1]
+						value = value[:pos + 1]
 
 				if myref.valid():
 					appendlist.append(value)
@@ -267,7 +267,7 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		# Maxduration
 		maxduration = get("maxduration")
 		if maxduration:
-			timer.maxduration = int(maxduration)*60
+			timer.maxduration = int(maxduration) * 60
 		elif maxduration == '':
 			timer.maxduration = None
 

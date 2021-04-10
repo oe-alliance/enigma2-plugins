@@ -11,7 +11,7 @@ from . import debug #@UnresolvedImport # pylint: disable-msg=F0401
 class SimpleIMAP4Client(imap4.IMAP4Client):
 	greetDeferred = None
 	def serverGreeting(self, caps):
-		debug("[SimpleIMAP4Client] serverGreeting: %s" %caps)
+		debug("[SimpleIMAP4Client] serverGreeting: %s" % caps)
 		self.serverCapabilities = caps
 		if self.greetDeferred is not None:
 			self.greetDeferred(self)
@@ -28,7 +28,7 @@ class SimpleIMAP4ClientFactory(protocol.ReconnectingClientFactory):
 		self.username = username
 
 	def buildProtocol(self, addr):
-		debug("[SimpleIMAP4ClientFactory] building protocol: %s" %addr)
+		debug("[SimpleIMAP4ClientFactory] building protocol: %s" % addr)
 		pr = self.protocol(contextFactory=self.ctx)
 		pr.factory = self
 		pr.greetDeferred = self.e2session.onConnect
@@ -50,7 +50,7 @@ class SimpleIMAP4ClientFactory(protocol.ReconnectingClientFactory):
 		protocol.ReconnectingClientFactory.clientConnectionLost(self, connector, reason)
 
 def createFactory(e2session, username, hostname, port):
-	debug("createFactory: for %s@%s:%s" %(username, hostname, port))
+	debug("createFactory: for %s@%s:%s" % (username, hostname, port))
 
 	f2 = ssl.ClientContextFactory()
 	factory = SimpleIMAP4ClientFactory(e2session, username, f2)

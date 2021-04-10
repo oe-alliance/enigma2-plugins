@@ -174,7 +174,7 @@ class YouTubeEntry():
 			split = self.entry.media.player.url.split("=")
 			ret = split.pop()
 			if ret == 'youtube_gdata':
-				tmpval=split.pop()
+				tmpval = split.pop()
 				if tmpval.endswith("&feature"):
 					tmp = tmpval.split("&")
 					ret = tmp.pop(0)
@@ -248,7 +248,7 @@ class YouTubeEntry():
 		if video_id is None:
 			return None #, no video_id
 		for el_type in ['detailpage', 'embedded', 'vevo']:
-			video_info_url = ('http://www.youtube.com/get_video_info?&video_id=%s&el=%s&ps=default&eurl=&gl=DE&hl=en'% (video_id, el_type))
+			video_info_url = ('http://www.youtube.com/get_video_info?&video_id=%s&el=%s&ps=default&eurl=&gl=DE&hl=en' % (video_id, el_type))
 			request = Request(video_info_url, None, std_headers)
 			try:
 				video_info_page = urlopen(request).read()
@@ -264,7 +264,7 @@ class YouTubeEntry():
 				reason = unquote_plus(video_info['reason'][0])
 			return None #, reason
 		else:
-			quality_fallback_dict = dict({"22": "18",  "18": "6",  "6": "1"})
+			quality_fallback_dict = dict({"22": "18", "18": "6", "6": "1"})
 			token = video_info['token'][0]
 			while True: 
 				print "[YTB] Trying fmt=" + fmt

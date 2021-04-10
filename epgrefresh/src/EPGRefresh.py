@@ -121,10 +121,10 @@ class EPGRefresh:
 				pos = value.rfind(':')
 				# don't split alternative service
 				if value.find('1:134:1') == -1 and pos != -1:
-					value = value[:pos+1]
+					value = value[:pos + 1]
 
 				duration = service.get('duration', None)
-				duration = duration and int(duration)*factor
+				duration = duration and int(duration) * factor
 
 				self.services[0].add(EPGRefreshService(value, duration))
 		for bouquet in configuration.findall("bouquet"):
@@ -220,7 +220,7 @@ class EPGRefresh:
 			except:
 				continue
 
-			if (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
+			if (service.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)):
 				continue
 
 			channelID = '%08x%04x%04x' % (
@@ -491,7 +491,7 @@ class EPGRefresh:
 
 					# Recheck later
 					epgrefreshtimer.add(EPGRefreshTimerEntry(
-							time() + config.plugins.epgrefresh.delay_standby.value*60,
+							time() + config.plugins.epgrefresh.delay_standby.value * 60,
 							self.refresh,
 							nocheck=True)
 					)

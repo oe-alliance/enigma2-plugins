@@ -102,13 +102,13 @@ class fstabViewerScreen(Screen,HelpableScreen):
 		{
 			"green": (self.addEntry, _("Add entry")),
 			"yellow": (self.restoreBackUp, _("Restore back up of fstab")),
-			"blue":	(self.mountall, _("Run mount -a")),
+			"blue": (self.mountall, _("Run mount -a")),
 		}, -1)
 		
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
 		{
-			"cancel":	(self.close, _("Close plugin")),
-			"ok":		(self.openEditScreen, _("Open editor")),
+			"cancel": (self.close, _("Close plugin")),
+			"ok": (self.openEditScreen, _("Open editor")),
 		}, -1)
 
 		self.buildScreen()
@@ -140,24 +140,24 @@ class fstabViewerScreen(Screen,HelpableScreen):
 					if len(entry[3]) > lengthList[3]:
 						lengthList[3] = len(entry[3])
 					self.fstabEntryList.append(fstabMenuListEntry(entry[0],entry[1],entry[2],entry[3],entry[4],entry[5]))
-					self.counter = self.counter+1
+					self.counter = self.counter + 1
 			fstabFile.close()
 			
 		self["menulist"].l.setList(self.fstabEntryList)
-		self["entryinfo"].setText("%d / %d" %(self["menulist"].getSelectedIndex()+1, self.counter))
+		self["entryinfo"].setText("%d / %d" % (self["menulist"].getSelectedIndex() + 1, self.counter))
 	
 	def writeFile(self, returnvalue):
 		if returnvalue != 0:
 			os.system("cp /etc/fstab /etc/fstab.backup")
 			configFile = open('/etc/fstab', 'w')
 			for i in range(len(entryList)):
-				line = "%*s %*s %*s %*s %s %s\n" %(int(lengthList[0])*-1, entryList[i][0], int(lengthList[1])*-1, entryList[i][1], int(lengthList[2])*-1, entryList[i][2], int(lengthList[3])*-1, entryList[i][3],str(entryList[i][4]), str(entryList[i][5]))
+				line = "%*s %*s %*s %*s %s %s\n" % (int(lengthList[0]) * -1, entryList[i][0], int(lengthList[1]) * -1, entryList[i][1], int(lengthList[2]) * -1, entryList[i][2], int(lengthList[3]) * -1, entryList[i][3],str(entryList[i][4]), str(entryList[i][5]))
 				configFile.write(line)
 			configFile.close()
 			self.buildScreen()
 			
 	def selectionChanged(self):
-		self["entryinfo"].setText("%d / %d" %(self["menulist"].getSelectedIndex()+1, self.counter))
+		self["entryinfo"].setText("%d / %d" % (self["menulist"].getSelectedIndex() + 1, self.counter))
 		
 	def mountall(self):
 		os.system("mount -a")
@@ -200,20 +200,20 @@ class fstabEditorScreen(Screen,ConfigListScreen,HelpableScreen):
 		
 		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
 		{
-			"green":	(self.checkEntry, _("Return with saving")),
-			"red":		(self.removeEntry, _("Remove entry")),
+			"green": (self.checkEntry, _("Return with saving")),
+			"red": (self.removeEntry, _("Remove entry")),
 		}, -1)
 		
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
 		{
-			"cancel":	(self.cancelEntry, _("Return without saving")),
-			"ok":		(self.ok, _("Open selector")),
+			"cancel": (self.cancelEntry, _("Return without saving")),
+			"ok": (self.ok, _("Open selector")),
 		}, -1)	
 		
 		self.list = []
 		ConfigListScreen.__init__(self, self.list)
 				
-		if 	self.addEntry:
+		if self.addEntry:
 			self.devicename = NoSave(ConfigText(default=""))
 			self.mountpoint = NoSave(ConfigText(default=""))
 			self.fstype = NoSave(ConfigSelection([("auto","auto"),("ext2","ext2"),("ext3","ext3"),("ext4","ext4"),("swap","swap"),("tmpfs","tmpfs"),("proc","proc"),("cifs","cifs"),("nfs","nfs"),("jffs2","jffs2"),("usbfs","usbfs"),("devpts","devpts"),("vfat","vfat"),("fat","fat"),("ntfs","ntfs"),("noauto", "no auto"), ("xfs", "xfs")], default="auto"))

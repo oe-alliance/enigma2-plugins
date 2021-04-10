@@ -506,7 +506,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
             self["TMDbtxt"].setText(_("TMDb plugin installed. Assign function to info button is possible."))
         else:
             self["TMDbtxt"].setText(_("TMDb plugin NOT installed. Assign function to info button is NOT possible.")) 
-        if  pluginPresent.YTTrailer:
+        if pluginPresent.YTTrailer:
             self["Trailertxt"].setText(_("YTTrailer plugin installed. Search for trailers on the Web is possible."))
         else:
             self["Trailertxt"].setText(_("YTTrailer plugin NOT installed. Search for trailers on the Web is NOT possible."))           

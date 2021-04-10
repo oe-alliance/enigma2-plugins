@@ -74,55 +74,55 @@ class Mosaic(Screen):
 	skin = ""
 	skin += """<screen position="0,0" size="%d,%d" title="Mosaic" flags="wfNoBorder" backgroundColor="#ffffff" >""" % (width, height)
 	skin += """<widget name="playState" position="55,55" size="16,16" alphatest="on" />"""
-	skin += """<eLabel position="%d,%d" size="%d,%d" />""" % (positions[0][0]-2, positions[0][1]-1, windowWidth, windowHeight)
-	skin += """<eLabel position="%d,%d" size="%d,%d" />""" % (positions[1][0]-2, positions[1][1]-1, windowWidth, windowHeight)
-	skin += """<eLabel position="%d,%d" size="%d,%d" />""" % (positions[2][0]-2, positions[2][1]-1, windowWidth, windowHeight)
-	skin += """<eLabel position="%d,%d" size="%d,%d" />""" % (positions[3][0]-2, positions[3][1]-1, windowWidth, windowHeight)
-	skin += """<eLabel position="%d,%d" size="%d,%d" />""" % (positions[4][0]-2, positions[4][1]-1, windowWidth, windowHeight)
-	skin += """<eLabel position="%d,%d" size="%d,%d" />""" % (positions[5][0]-2, positions[5][1]-1, windowWidth, windowHeight)
-	skin += """<eLabel position="%d,%d" size="%d,%d" />""" % (positions[6][0]-2, positions[6][1]-1, windowWidth, windowHeight)
-	skin += """<eLabel position="%d,%d" size="%d,%d" />""" % (positions[7][0]-2, positions[7][1]-1, windowWidth, windowHeight)
-	skin += """<eLabel position="%d,%d" size="%d,%d" />""" % (positions[8][0]-2, positions[8][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="channel1" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (positions[0][0], positions[0][1]-18, windowWidth-4)
-	skin += """<widget name="channel2" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (positions[1][0], positions[1][1]-18, windowWidth-4)
-	skin += """<widget name="channel3" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (positions[2][0], positions[2][1]-18, windowWidth-4)
-	skin += """<widget name="channel4" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (positions[3][0], positions[3][1]-18, windowWidth-4)
-	skin += """<widget name="channel5" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (positions[4][0], positions[4][1]-18, windowWidth-4)
-	skin += """<widget name="channel6" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (positions[5][0], positions[5][1]-18, windowWidth-4)
-	skin += """<widget name="channel7" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (positions[6][0], positions[6][1]-18, windowWidth-4)
-	skin += """<widget name="channel8" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (positions[7][0], positions[7][1]-18, windowWidth-4)
-	skin += """<widget name="channel9" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (positions[8][0], positions[8][1]-18, windowWidth-4)
-	skin += """<widget name="window1" position="%d,%d" zPosition="1" size="%d,%d" />""" % (positions[0][0]-2, positions[0][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="window2" position="%d,%d" zPosition="1" size="%d,%d" />""" % (positions[1][0]-2, positions[1][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="window3" position="%d,%d" zPosition="1" size="%d,%d" />""" % (positions[2][0]-2, positions[2][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="window4" position="%d,%d" zPosition="1" size="%d,%d" />""" % (positions[3][0]-2, positions[3][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="window5" position="%d,%d" zPosition="1" size="%d,%d" />""" % (positions[4][0]-2, positions[4][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="window6" position="%d,%d" zPosition="1" size="%d,%d" />""" % (positions[5][0]-2, positions[5][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="window7" position="%d,%d" zPosition="1" size="%d,%d" />""" % (positions[6][0]-2, positions[6][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="window8" position="%d,%d" zPosition="1" size="%d,%d" />""" % (positions[7][0]-2, positions[7][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="window9" position="%d,%d" zPosition="1" size="%d,%d" />""" % (positions[8][0]-2, positions[8][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="video1" position="%d,%d" zPosition="2" size="%d,%d" backgroundColor="#ffffffff" />""" % (positions[0][0]-2, positions[0][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="video2" position="%d,%d" zPosition="2" size="%d,%d" backgroundColor="#ffffffff" />""" % (positions[1][0]-2, positions[1][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="video3" position="%d,%d" zPosition="2" size="%d,%d" backgroundColor="#ffffffff" />""" % (positions[2][0]-2, positions[2][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="video4" position="%d,%d" zPosition="2" size="%d,%d" backgroundColor="#ffffffff" />""" % (positions[3][0]-2, positions[3][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="video5" position="%d,%d" zPosition="2" size="%d,%d" backgroundColor="#ffffffff" />""" % (positions[4][0]-2, positions[4][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="video6" position="%d,%d" zPosition="2" size="%d,%d" backgroundColor="#ffffffff" />""" % (positions[5][0]-2, positions[5][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="video7" position="%d,%d" zPosition="2" size="%d,%d" backgroundColor="#ffffffff" />""" % (positions[6][0]-2, positions[6][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="video8" position="%d,%d" zPosition="2" size="%d,%d" backgroundColor="#ffffffff" />""" % (positions[7][0]-2, positions[7][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="video9" position="%d,%d" zPosition="2" size="%d,%d" backgroundColor="#ffffffff" />""" % (positions[8][0]-2, positions[8][1]-1, windowWidth, windowHeight)
-	skin += """<widget name="event1" position="%d,%d" size="%d,20" zPosition="3" font="Regular;18" backgroundColor="#000000" foregroundColor="#ffffff" />""" % (positions[0][0]-2, positions[0][1]-1, windowWidth)
-	skin += """<widget name="event2" position="%d,%d" size="%d,20" zPosition="3" font="Regular;18" backgroundColor="#000000" foregroundColor="#ffffff" />""" % (positions[1][0]-2, positions[1][1]-1, windowWidth)
-	skin += """<widget name="event3" position="%d,%d" size="%d,20" zPosition="3" font="Regular;18" backgroundColor="#000000" foregroundColor="#ffffff" />""" % (positions[2][0]-2, positions[2][1]-1, windowWidth)
-	skin += """<widget name="event4" position="%d,%d" size="%d,20" zPosition="3" font="Regular;18" backgroundColor="#000000" foregroundColor="#ffffff" />""" % (positions[3][0]-2, positions[3][1]-1, windowWidth)
-	skin += """<widget name="event5" position="%d,%d" size="%d,20" zPosition="3" font="Regular;18" backgroundColor="#000000" foregroundColor="#ffffff" />""" % (positions[4][0]-2, positions[4][1]-1, windowWidth)
-	skin += """<widget name="event6" position="%d,%d" size="%d,20" zPosition="3" font="Regular;18" backgroundColor="#000000" foregroundColor="#ffffff" />""" % (positions[5][0]-2, positions[5][1]-1, windowWidth)
-	skin += """<widget name="event7" position="%d,%d" size="%d,20" zPosition="3" font="Regular;18" backgroundColor="#000000" foregroundColor="#ffffff" />""" % (positions[6][0]-2, positions[6][1]-1, windowWidth)
-	skin += """<widget name="event8" position="%d,%d" size="%d,20" zPosition="3" font="Regular;18" backgroundColor="#000000" foregroundColor="#ffffff" />""" % (positions[7][0]-2, positions[7][1]-1, windowWidth)
-	skin += """<widget name="event9" position="%d,%d" size="%d,20" zPosition="3" font="Regular;18" backgroundColor="#000000" foregroundColor="#ffffff" />""" % (positions[8][0]-2, positions[8][1]-1, windowWidth)
+	skin += """<eLabel position="%d,%d" size="%d,%d" />""" % (positions[0][0] - 2, positions[0][1] - 1, windowWidth, windowHeight)
+	skin += """<eLabel position="%d,%d" size="%d,%d" />""" % (positions[1][0] - 2, positions[1][1] - 1, windowWidth, windowHeight)
+	skin += """<eLabel position="%d,%d" size="%d,%d" />""" % (positions[2][0] - 2, positions[2][1] - 1, windowWidth, windowHeight)
+	skin += """<eLabel position="%d,%d" size="%d,%d" />""" % (positions[3][0] - 2, positions[3][1] - 1, windowWidth, windowHeight)
+	skin += """<eLabel position="%d,%d" size="%d,%d" />""" % (positions[4][0] - 2, positions[4][1] - 1, windowWidth, windowHeight)
+	skin += """<eLabel position="%d,%d" size="%d,%d" />""" % (positions[5][0] - 2, positions[5][1] - 1, windowWidth, windowHeight)
+	skin += """<eLabel position="%d,%d" size="%d,%d" />""" % (positions[6][0] - 2, positions[6][1] - 1, windowWidth, windowHeight)
+	skin += """<eLabel position="%d,%d" size="%d,%d" />""" % (positions[7][0] - 2, positions[7][1] - 1, windowWidth, windowHeight)
+	skin += """<eLabel position="%d,%d" size="%d,%d" />""" % (positions[8][0] - 2, positions[8][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="channel1" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (positions[0][0], positions[0][1] - 18, windowWidth - 4)
+	skin += """<widget name="channel2" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (positions[1][0], positions[1][1] - 18, windowWidth - 4)
+	skin += """<widget name="channel3" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (positions[2][0], positions[2][1] - 18, windowWidth - 4)
+	skin += """<widget name="channel4" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (positions[3][0], positions[3][1] - 18, windowWidth - 4)
+	skin += """<widget name="channel5" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (positions[4][0], positions[4][1] - 18, windowWidth - 4)
+	skin += """<widget name="channel6" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (positions[5][0], positions[5][1] - 18, windowWidth - 4)
+	skin += """<widget name="channel7" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (positions[6][0], positions[6][1] - 18, windowWidth - 4)
+	skin += """<widget name="channel8" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (positions[7][0], positions[7][1] - 18, windowWidth - 4)
+	skin += """<widget name="channel9" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (positions[8][0], positions[8][1] - 18, windowWidth - 4)
+	skin += """<widget name="window1" position="%d,%d" zPosition="1" size="%d,%d" />""" % (positions[0][0] - 2, positions[0][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="window2" position="%d,%d" zPosition="1" size="%d,%d" />""" % (positions[1][0] - 2, positions[1][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="window3" position="%d,%d" zPosition="1" size="%d,%d" />""" % (positions[2][0] - 2, positions[2][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="window4" position="%d,%d" zPosition="1" size="%d,%d" />""" % (positions[3][0] - 2, positions[3][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="window5" position="%d,%d" zPosition="1" size="%d,%d" />""" % (positions[4][0] - 2, positions[4][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="window6" position="%d,%d" zPosition="1" size="%d,%d" />""" % (positions[5][0] - 2, positions[5][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="window7" position="%d,%d" zPosition="1" size="%d,%d" />""" % (positions[6][0] - 2, positions[6][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="window8" position="%d,%d" zPosition="1" size="%d,%d" />""" % (positions[7][0] - 2, positions[7][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="window9" position="%d,%d" zPosition="1" size="%d,%d" />""" % (positions[8][0] - 2, positions[8][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="video1" position="%d,%d" zPosition="2" size="%d,%d" backgroundColor="#ffffffff" />""" % (positions[0][0] - 2, positions[0][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="video2" position="%d,%d" zPosition="2" size="%d,%d" backgroundColor="#ffffffff" />""" % (positions[1][0] - 2, positions[1][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="video3" position="%d,%d" zPosition="2" size="%d,%d" backgroundColor="#ffffffff" />""" % (positions[2][0] - 2, positions[2][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="video4" position="%d,%d" zPosition="2" size="%d,%d" backgroundColor="#ffffffff" />""" % (positions[3][0] - 2, positions[3][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="video5" position="%d,%d" zPosition="2" size="%d,%d" backgroundColor="#ffffffff" />""" % (positions[4][0] - 2, positions[4][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="video6" position="%d,%d" zPosition="2" size="%d,%d" backgroundColor="#ffffffff" />""" % (positions[5][0] - 2, positions[5][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="video7" position="%d,%d" zPosition="2" size="%d,%d" backgroundColor="#ffffffff" />""" % (positions[6][0] - 2, positions[6][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="video8" position="%d,%d" zPosition="2" size="%d,%d" backgroundColor="#ffffffff" />""" % (positions[7][0] - 2, positions[7][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="video9" position="%d,%d" zPosition="2" size="%d,%d" backgroundColor="#ffffffff" />""" % (positions[8][0] - 2, positions[8][1] - 1, windowWidth, windowHeight)
+	skin += """<widget name="event1" position="%d,%d" size="%d,20" zPosition="3" font="Regular;18" backgroundColor="#000000" foregroundColor="#ffffff" />""" % (positions[0][0] - 2, positions[0][1] - 1, windowWidth)
+	skin += """<widget name="event2" position="%d,%d" size="%d,20" zPosition="3" font="Regular;18" backgroundColor="#000000" foregroundColor="#ffffff" />""" % (positions[1][0] - 2, positions[1][1] - 1, windowWidth)
+	skin += """<widget name="event3" position="%d,%d" size="%d,20" zPosition="3" font="Regular;18" backgroundColor="#000000" foregroundColor="#ffffff" />""" % (positions[2][0] - 2, positions[2][1] - 1, windowWidth)
+	skin += """<widget name="event4" position="%d,%d" size="%d,20" zPosition="3" font="Regular;18" backgroundColor="#000000" foregroundColor="#ffffff" />""" % (positions[3][0] - 2, positions[3][1] - 1, windowWidth)
+	skin += """<widget name="event5" position="%d,%d" size="%d,20" zPosition="3" font="Regular;18" backgroundColor="#000000" foregroundColor="#ffffff" />""" % (positions[4][0] - 2, positions[4][1] - 1, windowWidth)
+	skin += """<widget name="event6" position="%d,%d" size="%d,20" zPosition="3" font="Regular;18" backgroundColor="#000000" foregroundColor="#ffffff" />""" % (positions[5][0] - 2, positions[5][1] - 1, windowWidth)
+	skin += """<widget name="event7" position="%d,%d" size="%d,20" zPosition="3" font="Regular;18" backgroundColor="#000000" foregroundColor="#ffffff" />""" % (positions[6][0] - 2, positions[6][1] - 1, windowWidth)
+	skin += """<widget name="event8" position="%d,%d" size="%d,20" zPosition="3" font="Regular;18" backgroundColor="#000000" foregroundColor="#ffffff" />""" % (positions[7][0] - 2, positions[7][1] - 1, windowWidth)
+	skin += """<widget name="event9" position="%d,%d" size="%d,20" zPosition="3" font="Regular;18" backgroundColor="#000000" foregroundColor="#ffffff" />""" % (positions[8][0] - 2, positions[8][1] - 1, windowWidth)
 
-	skin += """<widget name="countdown" position="80,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (height-50, windowWidth)
+	skin += """<widget name="countdown" position="80,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (height - 50, windowWidth)
 	skin += """<widget name="count" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" halign="right" />
-	</screen>""" % (positions[2][0],height-50, windowWidth)
+	</screen>""" % (positions[2][0],height - 50, windowWidth)
 
 	def __init__(self, session, services):
 		Screen.__init__(self, session)
@@ -212,7 +212,7 @@ class Mosaic(Screen):
 		self.close()
 
 	def numberPressed(self, number):
-		ref = self.window_refs[number-1]
+		ref = self.window_refs[number - 1]
 		if ref is not None:
 			self.session.nav.playService(ref)
 			self.deleteConsoleCallbacks()
@@ -270,7 +270,7 @@ class Mosaic(Screen):
 
 			# Get next ref
 			self.current_refidx += 1
-			if self.current_refidx > (len(self.ref_list) -1):
+			if self.current_refidx > (len(self.ref_list) - 1):
 				self.current_refidx = 0
 
 			# Play next ref
@@ -286,7 +286,7 @@ class Mosaic(Screen):
 				self.current_window = 1
 
 			# Save the ref
-			self.window_refs[self.current_window-1] = ref
+			self.window_refs[self.current_window - 1] = ref
 
 			# Save the event-name and hide the label
 			self["event" + str(self.current_window)].hide()

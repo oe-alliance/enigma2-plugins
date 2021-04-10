@@ -82,8 +82,8 @@ class PushService(PushServiceBase):
 			or self.state == PSFIRST:
 			cltime = config.pushservice.time.value
 			lotime = localtime()
-			ltime = lotime[3]*60 + lotime[4]
-			ctime = cltime[0]*60 + cltime[1]
+			ltime = lotime[3] * 60 + lotime[4]
+			ctime = cltime[0] * 60 + cltime[1]
 			seconds = 60 * abs(ctime - ltime)
 			self.startTimer(seconds, PSFIRSTRUN)
 		
@@ -91,7 +91,7 @@ class PushService(PushServiceBase):
 			or self.state == PSCYCLE:
 			period = int(config.pushservice.period.value)
 			if period > 0:
-				self.startTimer(period*60*60, PSCYCLE)
+				self.startTimer(period * 60 * 60, PSCYCLE)
 
 	def do(self):
 		self.run()

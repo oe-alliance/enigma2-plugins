@@ -46,7 +46,7 @@ ABOUT = "\n  " + NAME + " " + VERSION + "\n\n" \
 				+ _("  Feel free to donate. \n") \
 				+ _("  PayPal: ") + DONATE
 
-USER_AGENT = "Enigma2-"+NAME
+USER_AGENT = "Enigma2-" + NAME
 
 try:
 	from Tools.HardwareInfo import HardwareInfo
@@ -56,7 +56,7 @@ except:
 
 REQUEST_PARAMETER = "?device=" + DEVICE + "&version=SP" + VERSION
 
-WHERE_EPGMENU     = 'WHERE_EPGMENU'
+WHERE_EPGMENU = 'WHERE_EPGMENU'
 WHERE_CHANNELMENU = 'WHERE_CHANNELMENU'
 
 

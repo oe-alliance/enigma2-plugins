@@ -39,7 +39,7 @@ config.plugins.Quickbutton.yellow = ConfigText(default=_("Nothing"), visible_wid
 config.plugins.Quickbutton.blue = ConfigText(default=_("Nothing"), visible_width=50, fixed_size=False)
 
 
-from  Screens.InfoBarGenerics import InfoBarPlugins
+from Screens.InfoBarGenerics import InfoBarPlugins
 baseInfoBarPlugins__init__ = None
 ENABLE_RED_BUTTON = False
 
@@ -134,7 +134,7 @@ def startPlugin(self,pname):
 				self.session.open(MediaPlayer)
 				no_plugin = False
 			except Exception, e:
-				msgText = _("Error!\nError Text: %s"%e)
+				msgText = _("Error!\nError Text: %s" % e)
 		elif pname == _("Plugin browser"):
 			from Screens.PluginBrowser import PluginBrowser
 			self.session.open(PluginBrowser)
@@ -144,7 +144,7 @@ def startPlugin(self,pname):
 				"panscan": _("Pan&Scan"),  
 				"scale": _("Just Scale")}
 			switch = {"pillarbox":"panscan", "panscan":"scale", "scale":"pillarbox"}
-			config.av.policy_43.value =  switch[config.av.policy_43.value]
+			config.av.policy_43.value = switch[config.av.policy_43.value]
 			config.av.policy_43.save()
 			self.session.open(MessageBox,_("Display 4:3 content as") + " " + ar[config.av.policy_43.value], MessageBox.TYPE_INFO, timeout=3)
 			no_plugin = False
@@ -173,7 +173,7 @@ def startPlugin(self,pname):
 					self.runPlugin(plugin)
 					no_plugin = False
 				except Exception, e:
-					msgText = _("Error!\nError Text: %s"%e)
+					msgText = _("Error!\nError Text: %s" % e)
 			else: 
 				msgText = _("Plugin not found!")
 	else:

@@ -75,7 +75,7 @@ class GNTPPacket:
 		seed = uuid.uuid4().hex
 		salt = hashfunction(seed).hexdigest()
 		saltHash = hashfunction(seed).digest()
-		keyBasis = password+saltHash
+		keyBasis = password + saltHash
 		key = hashfunction(keyBasis).digest()
 		keyHash = hashfunction(key).hexdigest()
 
@@ -293,7 +293,7 @@ class GNTPAbstraction:
 		emergencyDisable()
 
 	def sendNotification(self, title='No title.', description='No description.', priority=-1, timeout=-1):
-		self.clientFactory.sendNotification(title=title, description=description, sticky=timeout==-1, priority=priority)
+		self.clientFactory.sendNotification(title=title, description=description, sticky=timeout == -1, priority=priority)
 
 	def maybeClose(self, resOrFail, defer=None):
 		self.pending -= 1

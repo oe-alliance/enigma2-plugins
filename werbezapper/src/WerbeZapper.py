@@ -50,12 +50,12 @@ class WerbeZapperChoiceBox(ChoiceBox):
 			name = self.monitored_event and self.monitored_event.getEventName()
 			remaining = (self.monitored_event.getDuration() - (time() - self.monitored_event.getBeginTime()))
 			if remaining > 0:
-				text += _("Monitoring: %s (%d:%02d Min)") % (name, remaining/60, remaining%60)
+				text += _("Monitoring: %s (%d:%02d Min)") % (name, remaining / 60, remaining % 60)
 		if self.zap_time:
 			remaining = int(math.floor(self.zap_time - time()))
 			if remaining > 0:
-				remainstr = ("%d:%02d") % (remaining/60, remaining%60)
-				text += "\n" + _("Zapping back in %d:%02d Min") % (remaining/60, remaining%60)
+				remainstr = ("%d:%02d") % (remaining / 60, remaining % 60)
+				text += "\n" + _("Zapping back in %d:%02d Min") % (remaining / 60, remaining % 60)
 		if text:
 			self.setText(text)
 
@@ -111,7 +111,7 @@ class WerbeZapper(Screen):
 		# Number keys
 		choices = [
 								(_("Custom"), 'custom'),
-								('1 ' + _('minute'),  1),
+								('1 ' + _('minute'), 1),
 								('2 ' + _('minutes'), 2),
 								('3 ' + _('minutes'), 3),
 								('4 ' + _('minutes'), 4),

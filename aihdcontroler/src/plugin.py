@@ -36,7 +36,7 @@ from enigma import eEnv
 
 
 
-config.plugins.vhd  = ConfigSubsection()
+config.plugins.vhd = ConfigSubsection()
 config.plugins.vhd.Style = ConfigSelection(default="dmm", choices=[
 				("dmm", _("DMM-Board")),
 				("shadow", _("Shadow")),
@@ -147,11 +147,11 @@ class AIHDsetup(ConfigListScreen, Screen):
 			for x in oled_lines:
 				skin_lines.append(x)
 			skn_file = self.daten + "channelselector-"
-			if config.plugins.vhd.ChannSelector.value=="pig":
+			if config.plugins.vhd.ChannSelector.value == "pig":
 				skn_file = skn_file + "pig.xml"
-			elif config.plugins.vhd.ChannSelector.value=="simple":
+			elif config.plugins.vhd.ChannSelector.value == "simple":
 				skn_file = skn_file + "simple.xml"
-			elif config.plugins.vhd.ChannSelector.value=="vert":
+			elif config.plugins.vhd.ChannSelector.value == "vert":
 				skn_file = skn_file + "vert.xml"
 			else:
 				skn_file = skn_file + "full.xml"

@@ -83,7 +83,7 @@ class SubtitleDB(object):
         suburl = subtitle["link"]
         videofilename = subtitle["filename"]
         srtbasefilename = videofilename.rsplit(".", 1)[0]
-        zipfilename = srtbasefilename +".zip"
+        zipfilename = srtbasefilename + ".zip"
         self.downloadFile(suburl, zipfilename)
         
         if zipfile.is_zipfile(zipfilename):
@@ -96,7 +96,7 @@ class SubtitleDB(object):
                     outfile.flush()
                     outfile.close()
                 else:
-                    log.info("File %s does not seem to be valid " %el.orig_filename)
+                    log.info("File %s does not seem to be valid " % el.orig_filename)
             # Deleting the zip file
             zf.close()
             os.remove(zipfilename)
@@ -128,24 +128,24 @@ class SubtitleDB(object):
         dump = open(filename, "wb")
         dump.write(content)
         dump.close()
-        log.debug("Download finished to file %s. Size : %s"%(filename,os.path.getsize(filename)))
+        log.debug("Download finished to file %s. Size : %s" % (filename,os.path.getsize(filename)))
         
     def getLG(self, language):
         ''' Returns the short (two-character) representation of the long language name'''
         try:
             return self.revertlangs[language]
         except KeyError, e:
-            log.warn("Ooops, you found a missing language in the config file of %s: %s. Send a bug report to have it added." %(self.__class__.__name__, language))
+            log.warn("Ooops, you found a missing language in the config file of %s: %s. Send a bug report to have it added." % (self.__class__.__name__, language))
         
     def getLanguage(self, lg):
         ''' Returns the long naming of the language on a two character code '''
         try:
             return self.langs[lg]
         except KeyError, e:
-            log.warn("Ooops, you found a missing language in the config file of %s: %s. Send a bug report to have it added." %(self.__class__.__name__, lg))
+            log.warn("Ooops, you found a missing language in the config file of %s: %s. Send a bug report to have it added." % (self.__class__.__name__, lg))
     
     def query(self, token):
-        raise TypeError("%s has not implemented method '%s'" %(self.__class__.__name__, sys._getframe().f_code.co_name))
+        raise TypeError("%s has not implemented method '%s'" % (self.__class__.__name__, sys._getframe().f_code.co_name))
         
     def fileExtension(self, filename):
         ''' Returns the file extension (without the dot)'''
@@ -200,7 +200,7 @@ class SubtitleDB(object):
         ''' 
         longlongformat = 'Q'  # unsigned long long little endian
         bytesize = struct.calcsize(longlongformat)
-        format= "<%d%s" % (65536//bytesize, longlongformat)
+        format = "<%d%s" % (65536 // bytesize, longlongformat)
         
         f = open(name, "rb") 
         filesize = os.fstat(f.fileno()).st_size
@@ -210,18 +210,18 @@ class SubtitleDB(object):
             log.error('File is too small')
             return "SizeError" 
         
-        buffer= f.read(65536)
-        longlongs= struct.unpack(format, buffer)
-        hash+= sum(longlongs)
+        buffer = f.read(65536)
+        longlongs = struct.unpack(format, buffer)
+        hash += sum(longlongs)
         
         f.seek(-65536, os.SEEK_END) # size is always > 131072
-        buffer= f.read(65536)
-        longlongs= struct.unpack(format, buffer)
-        hash+= sum(longlongs)
-        hash&= 0xFFFFFFFFFFFFFFFF
+        buffer = f.read(65536)
+        longlongs = struct.unpack(format, buffer)
+        hash += sum(longlongs)
+        hash &= 0xFFFFFFFFFFFFFFFF
         
         f.close() 
-        returnedhash =  "%016x" % hash
+        returnedhash = "%016x" % hash
         return returnedhash
 
 

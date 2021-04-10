@@ -59,7 +59,7 @@ def addToHistory(instance, ref):
 		tmp = instance.servicePath[:]
 		tmp.append(ref)
 		try:
-			del instance.history[instance.history_pos+1:]
+			del instance.history[instance.history_pos + 1:]
 		except Exception, e:
 			pass
 		if config.plugins.ZapHistoryConfigurator.e1_like_history.value and tmp in instance.history:
@@ -69,7 +69,7 @@ def addToHistory(instance, ref):
 		if hlen > config.plugins.ZapHistoryConfigurator.maxEntries_zap_history.value:
 			del instance.history[0]
 			hlen -= 1
-		instance.history_pos = hlen-1
+		instance.history_pos = hlen - 1
 		if config.plugins.ZapHistoryConfigurator.e1_like_history.value:
 			# TODO: optimize this
 			if instance.history == instance.history_tv:
@@ -92,9 +92,9 @@ def newInit(self, session):
 
 		# XXX: self.lastChannelRootTimer was always finished for me, so just fix its mistakes ;)
 		if self.history == self.history_tv:
-			self.history_pos = len(self.history_tv)-1
+			self.history_pos = len(self.history_tv) - 1
 		else:
-			self.history_pos = len(self.history_radio)-1
+			self.history_pos = len(self.history_radio) - 1
 
 baseInit = ChannelSelection.__init__
 ChannelSelection.__init__ = newInit

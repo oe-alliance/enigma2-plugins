@@ -34,7 +34,7 @@ from . import _
 
 def initPartnerboxEntryConfig():
 	config.plugins.Partnerbox.Entries.append(ConfigSubsection())
-	i = len(config.plugins.Partnerbox.Entries) -1
+	i = len(config.plugins.Partnerbox.Entries) - 1
 	config.plugins.Partnerbox.Entries[i].name = ConfigText(default="Remote box", visible_width=50, fixed_size=False)
 	config.plugins.Partnerbox.Entries[i].ip = ConfigIP(default=[192,168,0,98])
 	config.plugins.Partnerbox.Entries[i].port = ConfigInteger(default=80, limits=(1, 65555))
@@ -189,12 +189,12 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		self["entrylist"] = PartnerboxEntryList([])
 		self["actions"] = ActionMap(["WizardActions","MenuActions","ShortcutActions"],
 			{
-			 "ok"	:	self.keyOK,
-			 "back"	:	self.keyClose,
-			 "red"	:	self.keyRed,
-			 "yellow":	self.keyYellow,
-			 "blue": 	self.keyDelete,
-			 "green":	self.powerMenu,
+			 "ok"	: self.keyOK,
+			 "back"	: self.keyClose,
+			 "red"	: self.keyRed,
+			 "yellow": self.keyYellow,
+			 "blue": self.keyDelete,
+			 "green": self.powerMenu,
 			 }, -1)
 		self.what = what
 		self.updateList()
@@ -268,7 +268,7 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		else:
 			menu.append((_("Shutdown"),4))
 		from Screens.ChoiceBox import ChoiceBox
-		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=(_("Select operation for partnerbox")+": "+"%s" % (sel.name.value)), list=menu)
+		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=(_("Select operation for partnerbox") + ": " + "%s" % (sel.name.value)), list=menu)
 
 	def menuCallback(self, choice):
 		if choice is None:
@@ -294,7 +294,7 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		elif choice[1] == 2:
 			sCommand += enigma_type and "restart" or "3"
 		elif choice[1] == 3:
-			sCommand += enigma_type and "reboot"  or "2"
+			sCommand += enigma_type and "reboot" or "2"
 		elif choice[1] == 4:
 			sCommand += enigma_type and "shutdown" or "0"
 		elif choice[1] == 5:
@@ -319,23 +319,23 @@ class PartnerboxEntryList(MenuList):
 		instance.setItemHeight(self.ItemHeight)
 
 	def buildList(self):
-		self.list=[]
+		self.list = []
 		for c in config.plugins.Partnerbox.Entries:
 			res = [c]
 			x, y, w, h = skin.parameters.get("PartnerBoxEntryListName",(5, 0, 150, 20))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(c.name.value)))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(c.name.value)))
 			ip = "%d.%d.%d.%d" % tuple(c.ip.value)
 			x, y, w, h = skin.parameters.get("PartnerBoxEntryListIP",(120, 0, 150, 20))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(ip)))
-			port = "%d"%(c.port.value)
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(ip)))
+			port = "%d" % (c.port.value)
 			x, y, w, h = skin.parameters.get("PartnerBoxEntryListPort",(270, 0, 100, 20))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(port)))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(port)))
 			if int(c.enigma.value) == 0:
 				e_type = "Enigma2"
 			else:
 				e_type = "Enigma1"
 			x, y, w, h = skin.parameters.get("PartnerBoxEntryListType",(410, 0, 100, 20))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(e_type)))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(e_type)))
 			self.list.append(res)
 		self.l.setList(self.list)
 		self.moveToIndex(0)

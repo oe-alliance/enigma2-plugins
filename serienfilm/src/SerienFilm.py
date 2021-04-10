@@ -76,7 +76,7 @@ class EpiSepCfg(Screen):
 		{
 			"ok": self.gotOk,
 			"cancel": self.gotCancel,
-			"red":  self.gotCancel,
+			"red": self.gotCancel,
 			"green": self.gotGreen,
 			"yellow": self.gotEdit,
 			"blue": self.gotBlue
@@ -100,7 +100,7 @@ class EpiSepCfg(Screen):
 				self.sfsetLabel()
 
 	def gotOk(self):
-		if self.level ==1:
+		if self.level == 1:
 			self.close(self.newsep)
 		else:
 			self.gotGreen()	# save and back to level 1
@@ -119,7 +119,7 @@ class EpiSepCfg(Screen):
 				type=Input.TEXT)
 
 	def gotGreen(self):
-		if self.level ==1:
+		if self.level == 1:
 			self.currentsep = self.newsep = self.defaultsep	# set default
 		else:
 			self.currentsep = self.newsep	# save

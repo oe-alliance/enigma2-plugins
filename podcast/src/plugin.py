@@ -235,7 +235,7 @@ class PodcastMovies(Screen):
 					file = url
 					while file.__contains__("/"):
 						idx = file.index("/")
-						file = file[idx+1:]
+						file = file[idx + 1:]
 					self.file = "%s%s" % (config.plugins.Podcast.bufferDevice.value, file)
 					self.session.openWithCallback(self.bufferCallback, PodcastBuffer, url, self.file)
 				else:

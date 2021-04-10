@@ -227,8 +227,8 @@ class GlobalMercator(object):
     def TileBounds(self, tx, ty, zoom):
         "Returns bounds of the given tile in EPSG:900913 coordinates"
         
-        minx, miny = self.PixelsToMeters(tx*self.tileSize, ty*self.tileSize, zoom)
-        maxx, maxy = self.PixelsToMeters((tx+1)*self.tileSize, (ty+1)*self.tileSize, zoom)
+        minx, miny = self.PixelsToMeters(tx * self.tileSize, ty * self.tileSize, zoom)
+        maxx, maxy = self.PixelsToMeters((tx + 1) * self.tileSize, (ty + 1) * self.tileSize, zoom)
         return (minx, miny, maxx, maxy)
 
     def TileLatLonBounds(self, tx, ty, zoom):
@@ -251,7 +251,7 @@ class GlobalMercator(object):
         
         for i in range(30):
             if pixelSize > self.Resolution(i):
-                return i-1 if i!=0 else 0 # We don't want to scale up
+                return i - 1 if i != 0 else 0 # We don't want to scale up
 
     def GoogleTile(self, tx, ty, zoom):
         "Converts TMS tile coordinates to Google Tile coordinates"
@@ -266,7 +266,7 @@ class GlobalMercator(object):
         ty = (2**zoom - 1) - ty
         for i in range(zoom, 0, -1):
             digit = 0
-            mask = 1 << (i-1)
+            mask = 1 << (i - 1)
             if (tx & mask) != 0:
                 digit += 1
             if (ty & mask) != 0:
@@ -340,10 +340,10 @@ class GlobalGeodetic(object):
         "Returns bounds of the given tile"
         res = 180 / 256.0 / 2**zoom
         return (
-            tx*256*res - 180,
-            ty*256*res - 90,
-            (tx+1)*256*res - 180,
-            (ty+1)*256*res - 90
+            tx * 256 * res - 180,
+            ty * 256 * res - 90,
+            (tx + 1) * 256 * res - 180,
+            (ty + 1) * 256 * res - 90
         )
 
 

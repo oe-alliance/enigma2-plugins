@@ -114,19 +114,19 @@ class AutomaticVolumeAdjustment(Screen):
 						if (vol + ajvol != currentvol):
 							if ajvol == 0:
 								ajvol = vol - currentvol # correction for debug -print only
-							self.setVolume(vol+self.lastAdjustedValue)
-							print "[AutomaticVolumeAdjustment] Change volume for service: %s (+%d) to %d"%(ServiceReference(ref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), ajvol, self.volctrl.getVolume())
+							self.setVolume(vol + self.lastAdjustedValue)
+							print "[AutomaticVolumeAdjustment] Change volume for service: %s (+%d) to %d" % (ServiceReference(ref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), ajvol, self.volctrl.getVolume())
 						self.currentVolume = self.volctrl.getVolume() # ac3||dts service , save current volume
 					else:
 						# mpeg or whatever audio
 						if self.lastAdjustedValue != 0:
 							# go back to origin value
 							vol = self.volctrl.getVolume()
-							ajvol = vol-self.lastAdjustedValue
+							ajvol = vol - self.lastAdjustedValue
 							if ajvol > self.maxMPEGVolume:
 									ajvol = self.maxMPEGVolume
 							self.setVolume(ajvol)
-							print "[AutomaticVolumeAdjustment] Change volume for service: %s (-%d) to %d"%(ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), vol-ajvol, self.volctrl.getVolume())
+							print "[AutomaticVolumeAdjustment] Change volume for service: %s (-%d) to %d" % (ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), vol - ajvol, self.volctrl.getVolume())
 							self.lastAdjustedValue = 0 # mpeg audio, no delta here
 					return # get out of here, nothing to do anymore
 			else: # modus = Remember channel volume
@@ -138,7 +138,7 @@ class AutomaticVolumeAdjustment(Screen):
 						if lastvol != -1 and lastvol != self.volctrl.getVolume():
 							# set volume value
 							self.setVolume(lastvol)
-							print "[AutomaticVolumeAdjustment] Set last used volume value for service %s to %d"%(ServiceReference(ref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), self.volctrl.getVolume())
+							print "[AutomaticVolumeAdjustment] Set last used volume value for service %s to %d" % (ServiceReference(ref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), self.volctrl.getVolume())
 					return # get out of here, nothing to do anymore
 			if not self.pluginStarted:
 				if self.modus == "0": # Automatic volume adjust mode
@@ -213,7 +213,7 @@ def AVA_setVolume(self, direction):
 	if direction > 0:
 		oldvol = self.volctrl.getVolume()
 		if not AutomaticVolumeAdjustment.instance.currentAC3DTS:	
-			if oldvol+1 > self.maxVolume:
+			if oldvol + 1 > self.maxVolume:
 				ok = False
 				self.volumeDialog.setValue(oldvol)
 				self.volumeDialog.show()

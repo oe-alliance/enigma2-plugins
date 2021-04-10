@@ -8,7 +8,7 @@ from Tools.BoundFunction import boundFunction
 ####################################################################
 
 class Interface(StreamInterface):
-    name= "Your saved Favorites"
+    name = "Your saved Favorites"
     nameshort = "Favorites"
     description = "you can save Streams in your Favorites in a local list, to exec them directly without search for long time."
     selectedStream = None
@@ -48,7 +48,7 @@ class SHOUTcasterFavorites:
         self.configparser = ConfigParser()
         self.configparser.read(self.configfile)
     def getStreams(self):
-        streams=[]
+        streams = []
         sections = self.configparser.sections()
         print sections
         for section in sections:
@@ -61,7 +61,7 @@ class SHOUTcasterFavorites:
         else:
             return False
     def getStreamByName(self,streamname):
-        print "["+myname+"] load "+streamname+" from config"
+        print "[" + myname + "] load " + streamname + " from config"
         if self.isStream(streamname) is True:
             stream = Stream(
                         streamname,
@@ -75,11 +75,11 @@ class SHOUTcasterFavorites:
             return False
 
     def addStream(self, stream):
-        print "["+myname+"] adding "+stream.getName()+" to config"
+        print "[" + myname + "] adding " + stream.getName() + " to config"
         try:
             self.configparser.add_section(stream.getName())
         except DuplicateSectionError,e:
-            print "["+myname+"] error while adding stream to config:",e
+            print "[" + myname + "] error while adding stream to config:",e
             return False,e
         else:
             # XXX: I hope this still works properly if we make a optimistic
@@ -108,7 +108,7 @@ class SHOUTcasterFavorites:
         self.writeConfig()
         
     def writeConfig(self):
-        print "["+myname+"] writing config to "+self.configfile
+        print "[" + myname + "] writing config to " + self.configfile
         
         fp = open(self.configfile,"w")
         self.configparser.write(fp)

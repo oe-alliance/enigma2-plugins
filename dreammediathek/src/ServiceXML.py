@@ -24,7 +24,7 @@ class WebTVStations():
 		def getValue(definitions, default):
 			ret = ""
 			Len = len(definitions)
-			return Len > 0 and definitions[Len-1].text or default
+			return Len > 0 and definitions[Len - 1].text or default
 
 		for tvstation in tree.findall("tvstation"):
 			data = {'provider': None, 'title': None, 'streamurl': None}

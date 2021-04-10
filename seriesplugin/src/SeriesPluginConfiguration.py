@@ -87,15 +87,15 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		# Define Actions
 		self["actions"] = ActionMap(["SetupActions", "ChannelSelectBaseActions", "ColorActions"],
 		{
-			"cancel":		self.keyCancel,
-			"save":			self.keySave,
-			"nextBouquet":	self.pageUp,
-			"prevBouquet":	self.pageDown,
-			"blue":			self.showLog,
-			"yellow":		self.openChannelEditor,
-			"ok": 			self.keyOK,
-			"left": 		self.keyLeft,
-			"right": 		self.keyRight,
+			"cancel": self.keyCancel,
+			"save": self.keySave,
+			"nextBouquet": self.pageUp,
+			"prevBouquet": self.pageDown,
+			"blue": self.showLog,
+			"yellow": self.openChannelEditor,
+			"ok": self.keyOK,
+			"left": self.keyLeft,
+			"right": self.keyRight,
 		}, -2) # higher priority
 		
 		stopIndependent()
@@ -105,37 +105,37 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		# Create temporary identifier config elements
 		identifiers = self.seriesPlugin.modules
 		identifiers_elapsed = [k for k,v in identifiers.items() if v.knowsElapsed()]
-		identifiers_today   = [k for k,v in identifiers.items() if v.knowsToday()]
-		identifiers_future  = [k for k,v in identifiers.items() if v.knowsFuture()]
+		identifiers_today = [k for k,v in identifiers.items() if v.knowsToday()]
+		identifiers_future = [k for k,v in identifiers.items() if v.knowsFuture()]
 		if config.plugins.seriesplugin.identifier_elapsed.value in identifiers_elapsed:
 			self.cfg_identifier_elapsed = NoSave(ConfigSelection(choices=identifiers_elapsed, default=config.plugins.seriesplugin.identifier_elapsed.value))
 		else:
 			self.cfg_identifier_elapsed = NoSave(ConfigSelection(choices=identifiers_elapsed, default=identifiers_elapsed[0]))
 			self.changesMade = True
 		if config.plugins.seriesplugin.identifier_today.value in identifiers_today:
-			self.cfg_identifier_today   = NoSave(ConfigSelection(choices=identifiers_today,   default=config.plugins.seriesplugin.identifier_today.value))
+			self.cfg_identifier_today = NoSave(ConfigSelection(choices=identifiers_today, default=config.plugins.seriesplugin.identifier_today.value))
 		else:
-			self.cfg_identifier_today   = NoSave(ConfigSelection(choices=identifiers_today,   default=identifiers_today[0]))
+			self.cfg_identifier_today = NoSave(ConfigSelection(choices=identifiers_today, default=identifiers_today[0]))
 			self.changesMade = True
 		if config.plugins.seriesplugin.identifier_future.value in identifiers_future:
-			self.cfg_identifier_future  = NoSave(ConfigSelection(choices=identifiers_future,  default=config.plugins.seriesplugin.identifier_future.value))
+			self.cfg_identifier_future = NoSave(ConfigSelection(choices=identifiers_future, default=config.plugins.seriesplugin.identifier_future.value))
 		else:
-			self.cfg_identifier_future  = NoSave(ConfigSelection(choices=identifiers_future,  default=identifiers_future[0]))
+			self.cfg_identifier_future = NoSave(ConfigSelection(choices=identifiers_future, default=identifiers_future[0]))
 			self.changesMade = True
 		
 		# Load patterns
 		patterns_file = readFilePatterns()
-		self.cfg_pattern_title       = NoSave(ConfigSelection(choices=patterns_file, default=config.plugins.seriesplugin.pattern_title.value))
+		self.cfg_pattern_title = NoSave(ConfigSelection(choices=patterns_file, default=config.plugins.seriesplugin.pattern_title.value))
 		self.cfg_pattern_description = NoSave(ConfigSelection(choices=patterns_file, default=config.plugins.seriesplugin.pattern_description.value))
 		#self.cfg_pattern_record     = NoSave( ConfigSelection(choices = patterns_file, default = config.plugins.seriesplugin.pattern_record.value ) )
 		patterns_directory = readDirectoryPatterns()
-		self.cfg_pattern_directory   = NoSave(ConfigSelection(choices=patterns_directory, default=config.plugins.seriesplugin.pattern_directory.value))
+		self.cfg_pattern_directory = NoSave(ConfigSelection(choices=patterns_directory, default=config.plugins.seriesplugin.pattern_directory.value))
 		
 		bouquetList = [("", "")]
 		tvbouquets = getTVBouquets()
 		for bouquet in tvbouquets:
 			bouquetList.append((bouquet[1], bouquet[1]))
-		self.cfg_bouquet_main = NoSave(ConfigSelection(choices=bouquetList,  default=config.plugins.seriesplugin.bouquet_main.value or str(list(zip(*bouquetList)[1]))))
+		self.cfg_bouquet_main = NoSave(ConfigSelection(choices=bouquetList, default=config.plugins.seriesplugin.bouquet_main.value or str(list(zip(*bouquetList)[1]))))
 		
 		checkList(self.cfg_pattern_title)
 		checkList(self.cfg_pattern_description)
@@ -197,7 +197,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Record title episode pattern"), self.cfg_pattern_title))
 			self.list.append(getConfigListEntry(_("Record description episode pattern"), self.cfg_pattern_description))
 			
-			self.list.append(getConfigListEntry("E2: "+_("Composition of the recording filenames"), config.recording.filename_composition))
+			self.list.append(getConfigListEntry("E2: " + _("Composition of the recording filenames"), config.recording.filename_composition))
 			self.list.append(getConfigListEntry(_("Record directory pattern"), self.cfg_pattern_directory))
 			
 			self.list.append(getConfigListEntry(_("Default season"), config.plugins.seriesplugin.default_season))
@@ -239,10 +239,10 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Directory pattern file"), config.plugins.seriesplugin.pattern_file_directories))
 			
 			try:
-				self.list.append(getConfigListEntry("AT: "+_("Poll automatically"), config.plugins.autotimer.autopoll))
-				self.list.append(getConfigListEntry("AT: "+_("Startup delay (in min)"), config.plugins.autotimer.delay))
-				self.list.append(getConfigListEntry("AT: "+_("Poll Interval (in h)"), config.plugins.autotimer.interval))
-				self.list.append(getConfigListEntry("AT: "+_("Timeout (in min)"), config.plugins.autotimer.timeout))
+				self.list.append(getConfigListEntry("AT: " + _("Poll automatically"), config.plugins.autotimer.autopoll))
+				self.list.append(getConfigListEntry("AT: " + _("Startup delay (in min)"), config.plugins.autotimer.delay))
+				self.list.append(getConfigListEntry("AT: " + _("Poll Interval (in h)"), config.plugins.autotimer.interval))
+				self.list.append(getConfigListEntry("AT: " + _("Timeout (in min)"), config.plugins.autotimer.timeout))
 			except:
 				pass
 			
@@ -254,15 +254,15 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 				#self.list.append( getConfigListEntry(  _("Debug: User mail address")                , config.plugins.seriesplugin.log_reply_mail ) )
 			
 			try:
-				self.list.append(getConfigListEntry("AT: "+_("Send debug messages to shell"), config.plugins.autotimer.log_shell))
-				self.list.append(getConfigListEntry("AT: "+ _("Write debug messages into file"), config.plugins.autotimer.log_write))
+				self.list.append(getConfigListEntry("AT: " + _("Send debug messages to shell"), config.plugins.autotimer.log_shell))
+				self.list.append(getConfigListEntry("AT: " + _("Write debug messages into file"), config.plugins.autotimer.log_write))
 				if config.plugins.autotimer.log_write.value:
-					self.list.append(getConfigListEntry("AT: "+_("Location and name of log file"), config.plugins.autotimer.log_file))
+					self.list.append(getConfigListEntry("AT: " + _("Location and name of log file"), config.plugins.autotimer.log_file))
 			except:
 				pass
 			
 			try:
-				self.list.append(getConfigListEntry("E2: "+_("Enable recording debug (Timer log)"), config.recording.debug))
+				self.list.append(getConfigListEntry("E2: " + _("Enable recording debug (Timer log)"), config.recording.debug))
 			except:
 				pass
 
@@ -293,12 +293,12 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		self.saveAll()
 		
 		config.plugins.seriesplugin.identifier_elapsed.value = self.cfg_identifier_elapsed.value
-		config.plugins.seriesplugin.identifier_today.value   = self.cfg_identifier_today.value
-		config.plugins.seriesplugin.identifier_future.value  = self.cfg_identifier_future.value
-		config.plugins.seriesplugin.pattern_title.value       = self.cfg_pattern_title.value
+		config.plugins.seriesplugin.identifier_today.value = self.cfg_identifier_today.value
+		config.plugins.seriesplugin.identifier_future.value = self.cfg_identifier_future.value
+		config.plugins.seriesplugin.pattern_title.value = self.cfg_pattern_title.value
 		config.plugins.seriesplugin.pattern_description.value = self.cfg_pattern_description.value
 		#config.plugins.seriesplugin.pattern_record.value      = self.cfg_pattern_record.value
-		config.plugins.seriesplugin.pattern_directory.value       = self.cfg_pattern_directory.value
+		config.plugins.seriesplugin.pattern_directory.value = self.cfg_pattern_directory.value
 		config.plugins.seriesplugin.bouquet_main.value = self.cfg_bouquet_main.value
 		config.plugins.seriesplugin.save()
 		

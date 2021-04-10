@@ -14,7 +14,7 @@ def chardetOutputTranslation(recognizedCoding):
 		return "cp1252"
 	elif supposedEncoding == "windows-1253" or supposedEncoding == "iso-8859-7":
 		return "cp1253"
-	elif supposedEncoding == "koi8-r" or supposedEncoding == "maccyrillic" or supposedEncoding == "ibm855" or supposedEncoding =="ibm866" or supposedEncoding == "windows-1251" or supposedEncoding == "iso-8859-5":
+	elif supposedEncoding == "koi8-r" or supposedEncoding == "maccyrillic" or supposedEncoding == "ibm855" or supposedEncoding == "ibm866" or supposedEncoding == "windows-1251" or supposedEncoding == "iso-8859-5":
 		return "cp1251"
 	elif supposedEncoding == "ascii" or supposedEncoding == "iso-8859-1":
 		return "ascii"

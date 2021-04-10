@@ -143,7 +143,7 @@ class JapaneseContextAnalysis:
         # this character will simply our logic and improve performance.
         i = self._mNeedToSkipCharNum
         while i < aLen:
-            order, charLen = self.get_order(aBuf[i:i+2])
+            order, charLen = self.get_order(aBuf[i:i + 2])
             i += charLen
             if i > aLen:
                 self._mNeedToSkipCharNum = i - aLen

@@ -12,7 +12,7 @@ class Widget:
         self.homepage = homepage
         self.session = session
         self.dir = "" # the directory the widget is saved in the filesystem
-        self.elements ={} # contains all Labels etc. 
+        self.elements = {} # contains all Labels etc. 
         self.prefix = "" # the prefix of the name of the elements after it is patched into the main screen skin depending on its place in the widgetdesktop 
         self.wname = "" # the place name, the widget is placed and running in
         
@@ -23,11 +23,11 @@ class Widget:
     def setPositionname(self,wname):
         """ called after the widget is placed at a place at the widgetdesktop """
         self.wname = wname
-        self.prefix = wname+"_e_"
+        self.prefix = wname + "_e_"
     
     def getElement(self,elementname):
         """ returns the intance of an element of self.elements """
-        return self.instance[self.prefix+elementname]  
+        return self.instance[self.prefix + elementname]  
     
     def onLoadFinished(self,instance):
         """ overwrite this in your widget to do things after the widget is shown on the widgetdesktop """

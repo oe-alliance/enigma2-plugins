@@ -50,7 +50,7 @@ class SerienServer(IdentifierBase2):
 		
 		# Check preconditions
 		if not name:
-			msg =_("Skipping lookup because no show name is specified")
+			msg = _("Skipping lookup because no show name is specified")
 			log.warning(msg)
 			return msg
 		if not begin:

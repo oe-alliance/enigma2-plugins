@@ -30,8 +30,8 @@ from time import localtime, strftime
 
 # Constants
 SUBJECT = _("Found deactivated timer(s)")
-BODY    = _("Deactivated timer list:\n%s")
-TAG     = _("DeactivatedTimerPushed")
+BODY = _("Deactivated timer list:\n%s")
+TAG = _("DeactivatedTimerPushed")
 
 
 class DeactivatedTimers(ControllerBase):

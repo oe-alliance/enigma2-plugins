@@ -33,7 +33,7 @@ class ChannelSelectionShortTitle(Converter, object):
 		t = " (%s) " % config.servicelist.lastmode.value.upper()
 		pos = title.find(t)
 		if pos != -1:
-			title = title[pos+len(t):]
+			title = title[pos + len(t):]
 		return title
 
 	text = property(getText)

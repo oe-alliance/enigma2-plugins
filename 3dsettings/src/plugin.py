@@ -137,7 +137,7 @@ class AutoThreeD(Screen):
 				else:
 					name = serviceRef.getName() # partnerbox servicename
 			else:
-				name =  ServiceReference(ref.info().getInfoString(iServiceInformation.sServiceref)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+				name = ServiceReference(ref.info().getInfoString(iServiceInformation.sServiceref)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
 			if "3d" in name.lower():
 				if config.plugins.threed.autothreed.value == "1":
 					mode = THREE_D_SIDE_BY_SIDE

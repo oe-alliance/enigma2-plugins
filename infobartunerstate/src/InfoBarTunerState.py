@@ -82,7 +82,7 @@ INFO, RECORD, STREAM, FINISHED = range(4)
 
 
 # Constants
-INFINITY =  u"\u221E".encode("utf-8")
+INFINITY = u"\u221E".encode("utf-8")
 
 
 #######################################################
@@ -306,7 +306,7 @@ class InfoBarTunerState(object):
 
 	def __onRecordingEvent(self, timer):
 		if not timer.justplay:
-			print "IBTS Timer Event "+ str(timer.state) + ' ' + str(timer.repeated)
+			print "IBTS Timer Event " + str(timer.state) + ' ' + str(timer.repeated)
 #TODO
 # w.processRepeated()
 # w.state = TimerEntry.StateWaiting
@@ -490,7 +490,7 @@ class InfoBarTunerState(object):
 				timer_list.reverse()
 				
 				for i, (timer, begin, end) in enumerate(timer_list):
-					id = 'next'+str(i)
+					id = 'next' + str(i)
 					if timer:
 						name = timer.name
 						service_ref = timer.service_ref
@@ -802,7 +802,7 @@ class TunerStateBase(Screen):
 		#for i, c in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
 			label = Label()
 			#fieldid = "Field"+str(i)
-			self["Field"+str(i)] = label
+			self["Field" + str(i)] = label
 		
 		self.padding = 0
 		self.spacing = 0
@@ -849,7 +849,7 @@ class TunerStateBase(Screen):
 		fieldwidths = config.infobartunerstate.fieldswidth.dict().values()
 		
 		for i, (c, width) in enumerate(zip(config.infobartunerstate.fields.dict().values(), widths)):
-			fieldid = "Field"+str(i)
+			fieldid = "Field" + str(i)
 			field = c.value
 			if field == "TypeIcon":
 				self["Type"].instance.move(ePoint(px, py))
@@ -884,9 +884,9 @@ class TunerStateBase(Screen):
 				if fieldwidth > 0 and not (field == "TimerProgressGraphical" or field == "TypeIcon" or field == "None"):
 					# Handle new maximum width
 					if width > 0:
-						overwidth +=  fieldwidth - width
+						overwidth += fieldwidth - width
 					else:		
-						overwidth +=  fieldwidth - width + spacing
+						overwidth += fieldwidth - width + spacing
 					width = fieldwidth
 					self[fieldid].instance.resize(eSize(width, sh))
 					self[fieldid].instance.move(ePoint(px, py))
@@ -897,7 +897,7 @@ class TunerStateBase(Screen):
 		# Set background
 		bw = self["Background"].instance.size().width()
 		# Avoid background start position is within our window
-		bw = px-bw if px-bw<0 else 0
+		bw = px - bw if px - bw < 0 else 0
 		self["Background"].instance.move(ePoint(bw, py))
 		self.instance.resize(eSize(px, sh))
 
@@ -924,7 +924,7 @@ class TunerStateInfo(TunerStateBase):
 		
 		#for i, c in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
 		for i in xrange(len(config.infobartunerstate.fields.dict())):
-			fieldid = "Field"+str(i)
+			fieldid = "Field" + str(i)
 			
 			if fieldid == "Field0":
 				#self[field].setText( str(self.name).encode("utf-8") )
@@ -944,7 +944,7 @@ class TunerStateInfo(TunerStateBase):
 		
 		#for i, c in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
 		for i in xrange(len(config.infobartunerstate.fields.dict())):
-			fieldid = "Field"+str(i)
+			fieldid = "Field" + str(i)
 			
 			#Workaround#1 Set default size
 			self[fieldid].instance.resize(eSize(1000, height))
@@ -1100,7 +1100,7 @@ class TunerState(TunerStateBase):
 		filename = self.filename
 		if filename and os.path.exists(filename):
 			filesize = os.path.getsize(filename) 
-			self.filesize = filesize / (1024*1024)
+			self.filesize = filesize / (1024 * 1024)
 			
 			try:
 				stat = os.statvfs(filename)
@@ -1125,7 +1125,7 @@ class TunerState(TunerStateBase):
 		self["Progress"].hide()
 		
 		for i, c in enumerate(config.infobartunerstate.fields.dict().itervalues()):
-			fieldid = "Field"+str(i)
+			fieldid = "Field" + str(i)
 			field = c.value
 			text = ""
 			
@@ -1244,7 +1244,7 @@ class TunerState(TunerStateBase):
 				text = self.destination or self.client or self.ip
 			
 			elif field == "FileSize":
-				if self.filesize  is not None:
+				if self.filesize is not None:
 					text = _("%d MB") % (self.filesize)
 			
 			elif field == "FreeSpace":
@@ -1391,7 +1391,7 @@ def processRepeated(timer, findRunningEvent=False):
 	
 	def addOneDay(timedatestruct):
 		oldHour = timedatestruct.tm_hour
-		newdate =  (datetime(timedatestruct.tm_year, timedatestruct.tm_mon, timedatestruct.tm_mday, timedatestruct.tm_hour, timedatestruct.tm_min, timedatestruct.tm_sec) + timedelta(days=1)).timetuple()
+		newdate = (datetime(timedatestruct.tm_year, timedatestruct.tm_mon, timedatestruct.tm_mday, timedatestruct.tm_hour, timedatestruct.tm_min, timedatestruct.tm_sec) + timedelta(days=1)).timetuple()
 		if localtime(mktime(newdate)).tm_hour != oldHour:
 			return (datetime(timedatestruct.tm_year, timedatestruct.tm_mon, timedatestruct.tm_mday, timedatestruct.tm_hour, timedatestruct.tm_min, timedatestruct.tm_sec) + timedelta(days=2)).timetuple()
 		return newdate
@@ -1425,7 +1425,7 @@ def processRepeated(timer, findRunningEvent=False):
 
 		# if day is NOT in the list of repeated days
 		# OR if the day IS in the list of the repeated days, check, if event is currently running... then if findRunningEvent is false, go to the next event
-		while ((day[localbegin.tm_wday] != 0) or (mktime(localrepeatedbegindate) > mktime(localbegin))  or
+		while ((day[localbegin.tm_wday] != 0) or (mktime(localrepeatedbegindate) > mktime(localbegin)) or
 			((day[localbegin.tm_wday] == 0) and ((findRunningEvent and localend < localnow) or ((not findRunningEvent) and localbegin < localnow)))):
 			localbegin = addOneDay(localbegin)
 			localend = addOneDay(localend)

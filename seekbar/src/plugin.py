@@ -119,7 +119,7 @@ class Seekbar(ConfigListScreen, Screen):
 
 			self["cursor"].startMoving()
 			pts = int(float(self.length[1]) / 100.0 * self.percent)
-			self["time"].setText("%d:%02d" % ((pts/60/90000), ((pts/90000)%60)))
+			self["time"].setText("%d:%02d" % ((pts / 60 / 90000), ((pts / 90000) % 60)))
 
 	def exit(self):
 		self.cursorTimer.stop()
@@ -136,7 +136,7 @@ class Seekbar(ConfigListScreen, Screen):
 					if newPosition > oldPosition:
 						pts = newPosition - oldPosition
 					else:
-						pts = -1*(oldPosition - newPosition)
+						pts = -1 * (oldPosition - newPosition)
 					DVDPlayer.doSeekRelative(self.infobarInstance, pts)
 				else:
 					self.seek.seekTo(int(float(self.length[1]) / 100.0 * self.percent))
@@ -144,7 +144,7 @@ class Seekbar(ConfigListScreen, Screen):
 		elif sel == self.minuteInput:
 			pts = self.minuteInput.value * 60 * 90000
 			if self.fwd == False:
-				pts = -1*pts
+				pts = -1 * pts
 			if self.dvd:
 				DVDPlayer.doSeekRelative(self.infobarInstance, pts)
 			elif self.vdb:
@@ -191,15 +191,15 @@ def seekbarBack(instance):
 MoviePlayer.seekFwdManual = seekbar
 MoviePlayer.seekBackManual = seekbarBack
 
-dvdPlayer = "%s%s"%(resolveFilename(SCOPE_PLUGINS), "Extensions/DVDPlayer/plugin.py")
-if fileExists(dvdPlayer) or fileExists("%sc"%dvdPlayer):
+dvdPlayer = "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/DVDPlayer/plugin.py")
+if fileExists(dvdPlayer) or fileExists("%sc" % dvdPlayer):
 	from Plugins.Extensions.DVDPlayer.plugin import DVDPlayer
 	DVDPlayer.seekFwdManual = seekbar
 	DVDPlayer.seekBackManual = seekbarBack
 else:
 	DVDPlayer = None
 
-videodb = "%s%s"%(resolveFilename(SCOPE_PLUGINS), "Extensions/VideoDB/plugin.py")
+videodb = "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/VideoDB/plugin.py")
 if fileExists(videodb):
 	from Plugins.Extensions.VideoDB.Player import VideoDBPlayer
 	VideoDBPlayer.seekFwdManual = seekbar

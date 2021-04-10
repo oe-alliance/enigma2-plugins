@@ -40,7 +40,7 @@ class vhdRendNextEvent(Renderer, VariableText):
 		if eventNext:
 			if eventNext[0][4]:
 				t = localtime(eventNext[0][1])
-				duration = "%d min" %  (eventNext[0][2] / 60)
+				duration = "%d min" % (eventNext[0][2] / 60)
 				ENext = "next:   %02d:%02d   %s   %s" % (t[3], t[4], duration, eventNext[0][4])
 		self.text = ENext
 

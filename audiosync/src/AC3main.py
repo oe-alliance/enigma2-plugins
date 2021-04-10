@@ -58,7 +58,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
 
         # Slider
         self["AudioSliderBar"] = ProgressBar()
-        self["AudioSlider"] = Label(_("%i ms")%self.AC3delay.systemDelay[self.AC3delay.whichAudio])
+        self["AudioSlider"] = Label(_("%i ms") % self.AC3delay.systemDelay[self.AC3delay.whichAudio])
         
         #Service Information
         self["ServiceInfoLabel"] = Label(_("Channel audio:"))
@@ -73,26 +73,26 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
         # Actions
         self["actions"] = HelpableNumberActionMap(self, "PluginAudioSyncActions",
         {
-            "menu":     (self.keyMenu,              _("Open plugin menu")),
-            "ok":       (self.keyOk,                _("Save values and close plugin")),
-            "cancel":   (self.keyCancel,            _("Discard changes and close plugin")),
-            "left":     (self.keyLeft,              _("Change active delay")),
-            "right":    (self.keyRight,             _("Change active delay")),
-            "up":       (self.keyUp,                _("Increase delay")),
-            "down":     (self.keyDown,              _("Decrease delay")),
-            "red":      (self.keyCancel,            _("Discard changes and close plugin")),
-            "green":    (self.keyOk,                _("Save values and close plugin")),
-            "blue":     (self.menuSaveDelayToKey,    _("Save current delay to key")),
-            "1":        (self.keyNumberRelative,    _("Decrease delay by %i ms (can be set)")%self.stepSize["1"]),
-            "3":        (self.keyNumberRelative,    _("Increase delay by %i ms (can be set)")%self.stepSize["3"]),
-            "4":        (self.keyNumberRelative,    _("Decrease delay by %i ms (can be set)")%self.stepSize["4"]),
-            "6":        (self.keyNumberRelative,    _("Increase delay by %i ms (can be set)")%self.stepSize["6"]),
-            "7":        (self.keyNumberRelative,    _("Decrease delay by %i ms (can be set)")%self.stepSize["7"]),
-            "9":        (self.keyNumberRelative,    _("Increase delay by %i ms (can be set)")%self.stepSize["9"]),
-            "0":        (self.keyNumberAbsolute,    _("Set delay to %i ms (can be set)")%self.keyStep["0"]),
-            "2":        (self.keyNumberAbsolute,    _("Set delay to %i ms (can be set)")%self.keyStep["2"]),
-            "5":        (self.keyNumberAbsolute,    _("Set delay to %i ms (can be set)")%self.keyStep["5"]),
-            "8":        (self.keyNumberAbsolute,    _("Set delay to %i ms (can be set)")%self.keyStep["8"])
+            "menu": (self.keyMenu, _("Open plugin menu")),
+            "ok": (self.keyOk, _("Save values and close plugin")),
+            "cancel": (self.keyCancel, _("Discard changes and close plugin")),
+            "left": (self.keyLeft, _("Change active delay")),
+            "right": (self.keyRight, _("Change active delay")),
+            "up": (self.keyUp, _("Increase delay")),
+            "down": (self.keyDown, _("Decrease delay")),
+            "red": (self.keyCancel, _("Discard changes and close plugin")),
+            "green": (self.keyOk, _("Save values and close plugin")),
+            "blue": (self.menuSaveDelayToKey, _("Save current delay to key")),
+            "1": (self.keyNumberRelative, _("Decrease delay by %i ms (can be set)") % self.stepSize["1"]),
+            "3": (self.keyNumberRelative, _("Increase delay by %i ms (can be set)") % self.stepSize["3"]),
+            "4": (self.keyNumberRelative, _("Decrease delay by %i ms (can be set)") % self.stepSize["4"]),
+            "6": (self.keyNumberRelative, _("Increase delay by %i ms (can be set)") % self.stepSize["6"]),
+            "7": (self.keyNumberRelative, _("Decrease delay by %i ms (can be set)") % self.stepSize["7"]),
+            "9": (self.keyNumberRelative, _("Increase delay by %i ms (can be set)") % self.stepSize["9"]),
+            "0": (self.keyNumberAbsolute, _("Set delay to %i ms (can be set)") % self.keyStep["0"]),
+            "2": (self.keyNumberAbsolute, _("Set delay to %i ms (can be set)") % self.keyStep["2"]),
+            "5": (self.keyNumberAbsolute, _("Set delay to %i ms (can be set)") % self.keyStep["5"]),
+            "8": (self.keyNumberAbsolute, _("Set delay to %i ms (can be set)") % self.keyStep["8"])
         }, -1)
 
         HelpableScreen.__init__(self)
@@ -140,7 +140,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
         iCurDelay = self.currentValue[self.AC3delay.whichAudio]
         iDelay = iCurDelay - self.lowerBound
         self["AudioSliderBar"].setValue(iDelay)
-        self["AudioSlider"].setText(_("%i ms")%iCurDelay)
+        self["AudioSlider"].setText(_("%i ms") % iCurDelay)
 
     def keyDown(self):
         if self.AC3delay.whichAudio == AC3GLOB or self.AC3delay.whichAudio == PCMGLOB:
@@ -163,7 +163,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
             iStep = (self.keyStep[sNumber] // 25) * 25
         else:
             iStep = self.keyStep[sNumber]        
-        iSliderValue = iStep-self.lowerBound
+        iSliderValue = iStep - self.lowerBound
         self.setSliderInfo(iSliderValue)
         self.AC3delay.setSystemDelay(sAudio, self.currentValue[sAudio], True)
 
@@ -200,7 +200,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
 
     def keyMenu(self):
         sAudio = self.AC3delay.whichAudio
-        iDelay = self["AudioSliderBar"].getValue()+self.lowerBound
+        iDelay = self["AudioSliderBar"].getValue() + self.lowerBound
         keyList = [
             (_("Move plugin screen"),"1")
         ]
@@ -218,7 +218,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
                 
     def menuSaveDelayToKey(self):
         sAudio = self.AC3delay.whichAudio
-        iDelay = self["AudioSliderBar"].getValue()+self.lowerBound
+        iDelay = self["AudioSliderBar"].getValue() + self.lowerBound
 
         AC3SetCustomValue(self.session,iDelay,self.keyStep)
         
@@ -227,12 +227,12 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
         self.currentValue[sAudio] = iDelay + self.lowerBound
         iCurDelay = self.currentValue[sAudio]
         self["AudioSliderBar"].setValue(iDelay)
-        self["AudioSlider"].setText(_("%i ms")%iCurDelay)
+        self["AudioSlider"].setText(_("%i ms") % iCurDelay)
 
     def setChannelInfoText(self):
         sActiveAudio = str(self.AC3delay.selectedAudioInfo[0])
-        sBitstreamDelay = _("%i ms") %self.AC3delay.systemDelay[AC3]
-        sPCMDelay = _("%i ms") %self.AC3delay.systemDelay[PCM]
+        sBitstreamDelay = _("%i ms") % self.AC3delay.systemDelay[AC3]
+        sPCMDelay = _("%i ms") % self.AC3delay.systemDelay[PCM]
 
         self["ServiceInfo"].setText(sActiveAudio)
             
@@ -241,13 +241,13 @@ class AC3SetCustomValue:
         self.keyStep = keyStep
         self.session = session
         self.iDelay = iDelay
-        self.session.openWithCallback(self.DoSetCustomValue,ChoiceBox,_("Select the key you want to set to %i ms") %(iDelay),self.getKeyList())
+        self.session.openWithCallback(self.DoSetCustomValue,ChoiceBox,_("Select the key you want to set to %i ms") % (iDelay),self.getKeyList())
 
     def getKeyList(self):
         keyList = []
         for i,iValue in self.keyStep.iteritems():
             if i != "0":
-                keyList.append((_("Key %(key)s (current value: %(value)i ms)") %dict(key=i, value=iValue),i))
+                keyList.append((_("Key %(key)s (current value: %(value)i ms)") % dict(key=i, value=iValue),i))
         return keyList
 
     def DoSetCustomValue(self,answer):
@@ -257,13 +257,13 @@ class AC3SetCustomValue:
             if answer[1] == "2":
                 config.plugins.AC3LipSync.absoluteStep2.setValue(self.iDelay)
                 config.plugins.AC3LipSync.absoluteStep2.save()
-            elif  answer[1] == "5":
+            elif answer[1] == "5":
                 config.plugins.AC3LipSync.absoluteStep5.setValue(self.iDelay)
                 config.plugins.AC3LipSync.absoluteStep5.save()
-            elif  answer[1] == "8":
+            elif answer[1] == "8":
                 config.plugins.AC3LipSync.absoluteStep8.setValue(self.iDelay)
                 config.plugins.AC3LipSync.absoluteStep8.save()
             self.keyStep[answer[1]] = self.iDelay
-            self.session.open(MessageBox,_("Key %(Key)s successfully set to %(delay)i ms") %dict(Key=answer[1],delay=self.iDelay), MessageBox.TYPE_INFO, 5)
+            self.session.open(MessageBox,_("Key %(Key)s successfully set to %(delay)i ms") % dict(Key=answer[1],delay=self.iDelay), MessageBox.TYPE_INFO, 5)
         else:
             self.session.open(MessageBox,_("Invalid selection"), MessageBox.TYPE_ERROR, 5)

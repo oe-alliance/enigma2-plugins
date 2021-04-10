@@ -50,7 +50,7 @@ class AutoMount():
 			ret = ""
 			# How many definitions are present
 			Len = len(definitions)
-			return Len > 0 and definitions[Len-1].text or default
+			return Len > 0 and definitions[Len - 1].text or default
 		# Config is stored in "mountmanager" element
 		# Read out NFS Mounts
 		for nfs in tree.findall("nfs"):
@@ -61,7 +61,7 @@ class AutoMount():
 					data['mounttype'] = 'nfs'.encode("UTF-8")
 					data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
 					if data["active"] == 'True' or data["active"] == True:
-						self.activeMountsCounter +=1
+						self.activeMountsCounter += 1
 					data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
 					data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 					data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
@@ -79,7 +79,7 @@ class AutoMount():
 					data['mounttype'] = 'cifs'.encode("UTF-8")
 					data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
 					if data["active"] == 'True' or data["active"] == True:
-						self.activeMountsCounter +=1
+						self.activeMountsCounter += 1
 					data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
 					data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 					data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
@@ -146,7 +146,7 @@ class AutoMount():
 					elif data['mounttype'] == 'cifs':
 						if not os.path.ismount(path):
 							tmpusername = data['username'].replace(" ", "\\ ")
-							options = data['options'] + ',noatime,noserverino,iocharset=utf8,username='+ tmpusername + ',password='+ data['password']
+							options = data['options'] + ',noatime,noserverino,iocharset=utf8,username=' + tmpusername + ',password=' + data['password']
 							tmpcmd = "mount -t cifs -o %s '//%s/%s' '%s'" % (options, data['ip'], data['sharedir'], path)
 							command = tmpcmd.encode("UTF-8")
 				except Exception, ex:
@@ -275,7 +275,7 @@ class AutoMount():
 		self.automounts = self.newautomounts
 		if not self.removeConsole:
 			self.removeConsole = Console()
-		path = '/media/net/'+ mountpoint
+		path = '/media/net/' + mountpoint
 		umountcmd = "umount -fl '%s'" % path
 		print "[AutoMount.py] UMOUNT-CMD--->",umountcmd
 		self.removeConsole.ePopen(umountcmd, self.removeMountPointFinished, [path, callback])

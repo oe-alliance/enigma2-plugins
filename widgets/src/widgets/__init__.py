@@ -7,7 +7,7 @@ from xml.etree.cElementTree import parse
 def importSingleWidget(session,widgetdir):
     print "importing widget from",widgetdir
     widgetname = widgetdir.split("/")[-1]
-    module_name, ext = splitext(widgetname+".widget.py") # Handles no-extension files, etc.
+    module_name, ext = splitext(widgetname + ".widget.py") # Handles no-extension files, etc.
     if ext == '.py' and module_name != "__init__":                
         try:
             #import python part
@@ -15,14 +15,14 @@ def importSingleWidget(session,widgetdir):
             w = spam.widget.get_widget(session)
             w.setDir(widgetdir)
             #import skin
-            skin = parse(widgetdir+"/"+"widget_skin.xml").getroot()
+            skin = parse(widgetdir + "/" + "widget_skin.xml").getroot()
             return widgetname,w,skin,widgetdir,module_name
         
         except (ImportError,IOError), e:                
             print 'Could NOT import widget: %s' % (module_name)
-            print 'Exception Caught\n%s' %e
+            print 'Exception Caught\n%s' % e
     return False
-    print "#"*20
+    print "#" * 20
     
     
 
@@ -30,13 +30,13 @@ def importWidgets(session,):
     widgets = []
     dir = abspath(resolveFilename(SCOPE_PLUGINS) + "Extensions/Widgets/widgets/")
     for widgetdir in listdir(dir):
-        abs_path =  "/".join([dir,widgetdir])
+        abs_path = "/".join([dir,widgetdir])
         if isdir(abs_path):
-            if isfile(abs_path+"/widget.py"):
+            if isfile(abs_path + "/widget.py"):
                 w = importSingleWidget(session,abs_path)
                 if w is not None:
                     widgets.append(w)
             else:
-                print "found NO widget.py", abs_path+"/widget.py"
+                print "found NO widget.py", abs_path + "/widget.py"
                 continue
     return widgets

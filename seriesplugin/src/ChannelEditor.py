@@ -45,11 +45,11 @@ from WebChannels import WebChannels
 # Constants
 PIXMAP_PATH = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/SeriesPlugin/Images/")
 
-colorRed    = 0xf23d21
-colorGreen  = 0x389416
-colorBlue   = 0x0064c7
+colorRed = 0xf23d21
+colorGreen = 0x389416
+colorBlue = 0x0064c7
 colorYellow = 0xbab329
-colorWhite  = 0xffffff
+colorWhite = 0xffffff
 
 
 class MatchList(MenuList): 
@@ -117,16 +117,16 @@ class MatchList(MenuList):
 		l = [(stbSender, webSender, serviceref, status),]
 		
 		pos = self.margin + self.iconPosX
-		l.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, pos, self.iconPosY, self.iconSize,     self.iconSize,  loadPNG(imageStatus)))
+		l.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, pos, self.iconPosY, self.iconSize, self.iconSize, loadPNG(imageStatus)))
 		
 		pos += self.iconSize + self.margin
-		l.append((eListboxPythonMultiContent.TYPE_TEXT,             pos, 0,             self.colWidthStb,  self.itemHeight, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, stbSender))
+		l.append((eListboxPythonMultiContent.TYPE_TEXT, pos, 0, self.colWidthStb, self.itemHeight, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, stbSender))
 		
 		pos += self.colWidthStb + self.margin
-		l.append((eListboxPythonMultiContent.TYPE_TEXT,             pos, 0,             self.colWidthWeb,  self.itemHeight, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, webSender))
+		l.append((eListboxPythonMultiContent.TYPE_TEXT, pos, 0, self.colWidthWeb, self.itemHeight, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, webSender))
 		
 		pos += self.colWidthWeb + self.margin
-		l.append((eListboxPythonMultiContent.TYPE_TEXT,             pos, 0,             size.width()-pos, self.itemHeight,  0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, "", colorYellow))
+		l.append((eListboxPythonMultiContent.TYPE_TEXT, pos, 0, size.width() - pos, self.itemHeight, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, "", colorYellow))
 		
 		return l
 
@@ -170,8 +170,8 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 			"down": (self.keyDown, _("One row down")),
 		}, -1)
 		self["actions_3"] = HelpableActionMap(self, "ChannelSelectBaseActions", {
-			"nextBouquet":	(self.nextBouquet, _("Next bouquet")),
-			"prevBouquet":	(self.prevBouquet, _("Previous bouquet")),
+			"nextBouquet": (self.nextBouquet, _("Next bouquet")),
+			"prevBouquet": (self.prevBouquet, _("Previous bouquet")),
 		}, -1)
 		self["actions_4"] = HelpableActionMap(self, "ColorActions", {
 			"red": (self.keyCancel, _("Cancel and close")),
@@ -362,7 +362,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 			log.debug("add", servicename, serviceref, remote, webSender)
 			self.setTitle(_("Channel '- %(servicename)s - %(remote)s -' added.") % {'servicename': servicename, 'remote':remote})
 			self.addChannel(serviceref, servicename, remote)
-			self.stbToWebChlist[idx] = (servicename, webSender+" / "+remote, serviceref, "1")
+			self.stbToWebChlist[idx] = (servicename, webSender + " / " + remote, serviceref, "1")
 			
 		else:
 			log.debug("replace", servicename, serviceref, remote, webSender)

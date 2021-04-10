@@ -296,7 +296,7 @@ def RemoteTimerInit():
 	if baseTimerkeySelect is None:
 		baseTimerkeySelect = TimerEntry.keySelect
 	if baseTimercreateConfig is None:
-		baseTimercreateConfig  = TimerEntry.createConfig
+		baseTimercreateConfig = TimerEntry.createConfig
 	if baseTimer__init__ is None:
 		baseTimer__init__ = TimerEntry.__init__
 	
@@ -390,7 +390,7 @@ def RemoteTimernewConfig(self):
 	if self["config"].getCurrent() == self.timerRemoteEntry:
 		if int(self.timerentry_remote.value) != 0:
 			if int(self.entryguilist[int(self.timerentry_remote.value)][2].enigma.value) == 1: # E1
-				self.timertype = PlaylistEntry.RecTimerEntry|PlaylistEntry.recDVR
+				self.timertype = PlaylistEntry.RecTimerEntry | PlaylistEntry.recDVR
 			else: # E2
 				self.timertype = 0
 				ip = "%d.%d.%d.%d" % tuple(self.entryguilist[int(self.timerentry_remote.value)][2].ip.value)
@@ -422,7 +422,7 @@ def RemoteTimernewConfig(self):
 			self.createSetup("config")
 			self["config"].setCurrentIndex(self["config"].getCurrentIndex() + 1)
 
-def  RemoteTimercreateConfig(self):
+def RemoteTimercreateConfig(self):
 	if int(self.entryguilist[int(self.timerentry_remote.value)][2].enigma.value) == 0:
 		justplay = self.timer.justplay
 		afterevent = {

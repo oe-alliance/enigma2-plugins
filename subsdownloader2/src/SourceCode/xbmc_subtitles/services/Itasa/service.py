@@ -55,7 +55,7 @@ def geturl(url):
 
 def login(username, password):
     log(__name__, " Logging in with username '%s' ..." % (username))
-    content= geturl(main_url + 'index.php')
+    content = geturl(main_url + 'index.php')
     if content is not None:
         match = re.search('logouticon.png', content, re.IGNORECASE | re.DOTALL)
         if match:
@@ -96,7 +96,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
             password = config.plugins.subsdownloader.ItasaPassword.value
             if login(username, password):
                 log(__name__, " Login successful")
-                content= geturl(main_url + 'index.php?option=com_remository&Itemid=6')
+                content = geturl(main_url + 'index.php?option=com_remository&Itemid=6')
                 if content is not None:
                     match = re.search(show_pattern % tvshow, content, re.IGNORECASE | re.DOTALL)
                     if match is None and tvshow[-1] == ")":
@@ -104,14 +104,14 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
                         match = re.search(show_pattern % tvshow, content, re.IGNORECASE | re.DOTALL)
                     if match:
                         log(__name__," Tv show '%s' found" % tvshow)
-                        content= geturl(main_url + match.group(1))
+                        content = geturl(main_url + match.group(1))
                         if content is not None:
                             match = re.search(season_pattern % season, content, re.IGNORECASE | re.DOTALL)
                             if match:
                                 log(__name__," Season %s of tv show '%s' found" % (season, tvshow))
                                 category = 'normal'
                                 categorypage = match.group(1)
-                                content= geturl(main_url + categorypage)
+                                content = geturl(main_url + categorypage)
                                 if content is not None:
                                     for matches in re.finditer(subtitle_pattern % (tvshow, int(season), int(episode)), content, re.IGNORECASE | re.DOTALL):
                                         filename = matches.group(3)
@@ -122,7 +122,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
                                         categorypage = matches.group(1)
                                         category = matches.group(2)
                                         log(__name__," Page for category '%s' found" % category)
-                                        content= geturl(main_url + categorypage)
+                                        content = geturl(main_url + categorypage)
                                         if content is not None:
                                             for matches in re.finditer(subtitle_pattern % (tvshow, int(season), int(episode)), content, re.IGNORECASE | re.DOTALL):
                                                 id = matches.group(2)
@@ -159,7 +159,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         id = subtitles_list[pos]["id"]
         link = subtitles_list[pos]["link"] 
         
-        content= geturl(main_url + link)        
+        content = geturl(main_url + link)        
         match = re.search(subtitle_download_pattern % id, content, re.IGNORECASE | re.DOTALL)
 
         if match:

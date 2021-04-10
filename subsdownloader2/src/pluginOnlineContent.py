@@ -150,11 +150,11 @@ class CommertialBannerDownload(threading.Thread):
 	for x in pictures_URLS:
 	    try:
 		flag = urllib.urlopen(x,)
-		picture_file = open((Subtitle_Downloader_temp_dir+"%s.png" % picture_counter), "wb")
+		picture_file = open((Subtitle_Downloader_temp_dir + "%s.png" % picture_counter), "wb")
 		picture_file.write(flag.read())
 		flag.close()
 		picture_file.close()
-		picture_counter = picture_counter+1
+		picture_counter = picture_counter + 1
 	    except:
 		print "Failed to download picture no %i", picture_counter
 	return True

@@ -61,7 +61,7 @@ class SubConv():
     """
         re1 = re.compile("^\{(\d+)\}\{(\d*)\}\s*(.*)")
         subtitles = []
-        while len(list)>0:
+        while len(list) > 0:
 	    try:
 		m = re1.match(list.pop(0), 0)
 		if m:
@@ -86,12 +86,12 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 """
         re1 = re.compile("^(\d+):(\d+):(\d+)\.(\d+)\s*\,\s*(\d+):(\d+):(\d+)\.(\d+).*$")
         subtitles = []
-	while len(list)>0:
+	while len(list) > 0:
 	    try:
                 m = re1.match(list.pop(0), 0)
                 if m:
-                    subt = [int(m.group(1))*3600 + int(m.group(2))*60 + int(m.group(3)) + int(m.group(4))/100.0]
-                    subt.append(int(m.group(5))*3600 + int(m.group(6))*60 + int(m.group(7)) + int(m.group(8))/100.0)
+                    subt = [int(m.group(1)) * 3600 + int(m.group(2)) * 60 + int(m.group(3)) + int(m.group(4)) / 100.0]
+                    subt.append(int(m.group(5)) * 3600 + int(m.group(6)) * 60 + int(m.group(7)) + int(m.group(8)) / 100.0)
                     l = list.pop(0).strip()
                     lines = l.split("[br]")
                     for i in range(0,len(lines)):
@@ -127,13 +127,13 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
         re2 = re.compile("^(\d+):(\d+):(\d+),(\d+)\s*-->\s*(\d+):(\d+):(\d+),(\d+).*$")
         re3 = re.compile("^\s*$")
         subtitles = []
-        while len(list)>0:
+        while len(list) > 0:
 	    try:
                 if re1.match(list.pop(0), 0):
                     m = re2.match(list.pop(0), 0)
                     if m:
-                        subt = [int(m.group(1))*3600 + int(m.group(2))*60 + int(m.group(3)) + int(m.group(4))/1000.0]
-                        subt.append(int(m.group(5))*3600 + int(m.group(6))*60 + int(m.group(7)) + int(m.group(8))/1000.0)
+                        subt = [int(m.group(1)) * 3600 + int(m.group(2)) * 60 + int(m.group(3)) + int(m.group(4)) / 1000.0]
+                        subt.append(int(m.group(5)) * 3600 + int(m.group(6)) * 60 + int(m.group(7)) + int(m.group(8)) / 1000.0)
                         l = list.pop(0)
                         while not re3.match(l, 0):
                             subt.append(l.strip())
@@ -152,12 +152,12 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 """
         re1 = re.compile("^(\d+):(\d+):(\d+):(.*)")
         subtitles = []
-        subs={}
-        while len(list)>0:
+        subs = {}
+        while len(list) > 0:
             try:
 		m = re1.match(list.pop(0), 0)
 		if m:
-		    time = int(m.group(1))*3600 + int(m.group(2))*60 + int(m.group(3))
+		    time = int(m.group(1)) * 3600 + int(m.group(2)) * 60 + int(m.group(3))
 		    if subs.has_key(time):
 			subs[time].extend(m.group(4).strip().split("|"))
 		    else:
@@ -169,7 +169,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
         times.sort()
         for i in range(0,len(times)):
             next_time = 1
-            while not subs.has_key(times[i]+next_time) and next_time < 4:
+            while not subs.has_key(times[i] + next_time) and next_time < 4:
                 next_time = next_time + 1
             subt = [times[i], times[i] + next_time]
             subt.extend(subs[times[i]])
@@ -181,14 +181,14 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 	    MPL2LINE = re.compile("\[(?P<start>\d+)\]\[(?P<stop>\d+)\](?P<line>.*)", re.S)
 	    #FRAMERATE = float(fps)
 	    subtitles = []
-	    while len(list)>0:
+	    while len(list) > 0:
 	    #for line in list:	
 		try:
 		    group = MPL2LINE.match(list.pop(0)).groupdict()
-		    start = float(float(group["start"])/10) #*0.1*FRAMERATE) or 1
-		    stop = float(float(group["stop"])/10)#*0.1*FRAMERATE)
+		    start = float(float(group["start"]) / 10) #*0.1*FRAMERATE) or 1
+		    stop = float(float(group["stop"]) / 10)#*0.1*FRAMERATE)
 		    rest = group["line"]
-		    temp=[float(start), float(stop), str(rest).replace('|','\n')]
+		    temp = [float(start), float(stop), str(rest).replace('|','\n')]
 		    subtitles.append(temp)
 		except:
 		    sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
@@ -199,18 +199,18 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
     def check_subs_long(self,subtitles_standard_list, fps):
         """takes list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep, time_end, line1, ...],....]
         and checks in end time of subtittle in not longer then next subtitle start time if yes correct this error"""
-        loops = len(subtitles_standard_list)-1
-        x=0
+        loops = len(subtitles_standard_list) - 1
+        x = 0
         while x < loops:
             if subtitles_standard_list[x][1] is None:
-                subtitles_standard_list[x][1] = subtitles_standard_list[x][1]+ 6* fps
-            if subtitles_standard_list[x][1] >= subtitles_standard_list[x+1][0]:
+                subtitles_standard_list[x][1] = subtitles_standard_list[x][1] + 6 * fps
+            if subtitles_standard_list[x][1] >= subtitles_standard_list[x + 1][0]:
                 if (subtitles_standard_list[x][1] - 0.1) <= subtitles_standard_list[x][0]:
-                    subtitles_standard_list[x][1] = (subtitles_standard_list[x][0] + subtitles_standard_list[x+1][0])/2
+                    subtitles_standard_list[x][1] = (subtitles_standard_list[x][0] + subtitles_standard_list[x + 1][0]) / 2
                 else:
                     subtitles_standard_list[x][1] = subtitles_standard_list[x][1] - 0.1
                 print "Subtitle end time error detected. Line no. %d was corrected" % x
-            x = x+1
+            x = x + 1
         return subtitles_standard_list
 
     def to_srt(self,list):
@@ -221,15 +221,15 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
         count = 1
         for l in list:
             secs1 = l[0]
-            h1 = int(secs1/3600)
-            m1 = int(int(secs1%3600)/60)
-            s1 = int(secs1%60)
-            f1 = (secs1 - int(secs1))*1000
+            h1 = int(secs1 / 3600)
+            m1 = int(int(secs1 % 3600) / 60)
+            s1 = int(secs1 % 60)
+            f1 = (secs1 - int(secs1)) * 1000
             secs2 = l[1]
-            h2 = int(secs2/3600)
-            m2 = int(int(secs2%3600)/60)
-            s2 = int(secs2%60)
-            f2 = (secs2 - int(secs2))*1000
+            h2 = int(secs2 / 3600)
+            m2 = int(int(secs2 % 3600) / 60)
+            s2 = int(secs2 % 60)
+            f2 = (secs2 - int(secs2)) * 1000
             outl.append("%d\n%.2d:%.2d:%.2d,%.3d --> %.2d:%.2d:%.2d,%.3d\n%s\n\n" % (count,h1,m1,s1,f1,h2,m2,s2,f2,"\n".join(l[2:])))
 	    count = count + 1
         return outl
@@ -278,7 +278,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 	buffor = file_in.read()
 	file_in.close()
 	file_out = open(self.subtitle, 'wb')
-	file_out.write("\xef\xbb\xbf"+buffor)
+	file_out.write("\xef\xbb\xbf" + buffor)
 	file_out.close()
 		
     

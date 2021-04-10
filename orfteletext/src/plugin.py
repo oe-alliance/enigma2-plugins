@@ -53,7 +53,7 @@ def main(session, **kwargs):
 
 class ORFteletextScreen(Screen):
 	if (getDesktop(0).size().width()) == 1280:
-		skin="""
+		skin = """
 			<screen flags="wfNoBorder" position="0,0" size="1280,720" title="ORF-Teletext" backgroundColor="#00121214">
 				<widget backgroundColor="#ffffffff" position="30,163" render="Pig" size="700,394" source="session.VideoPicture" zPosition="1"/>
 				<widget name="Picture" position="740,192" size="480,336" zPosition="1"/>
@@ -65,7 +65,7 @@ class ORFteletextScreen(Screen):
 				<eLabel font="Regular;20" foregroundColor="#00879ce1" position="760,650" size="120,26" transparent="1" text="INDEX"/>
 			</screen>"""
 	elif (getDesktop(0).size().width()) == 1024:
-		skin="""
+		skin = """
 			<screen flags="wfNoBorder" position="0,0" size="1024,576" title="ORF-Teletext" backgroundColor="#00121214">
 				<widget backgroundColor="#ffffffff" position="30,156" render="Pig" size="470,264" source="session.VideoPicture" zPosition="1"/>
 				<widget name="Picture" position="504,120" size="480,336" zPosition="1"/>
@@ -77,7 +77,7 @@ class ORFteletextScreen(Screen):
 				<eLabel font="Regular;20" foregroundColor="#00879ce1" position="504,510" size="120,26" transparent="1" text="INDEX"/>
 			</screen>"""
 	else:
-		skin="""
+		skin = """
 			<screen flags="wfNoBorder" position="0,0" size="720,576" title="ORF-Teletext" backgroundColor="#00121214">
 				<widget name="seite" position="250,50" size="200,24" font="Regular;22" transparent="1"/>
 				<widget name="wohin" position="250,75" size="200,24" font="Regular;22" foregroundColor="#ff4a3c" transparent="1"/>
@@ -161,7 +161,7 @@ class ORFteletextScreen(Screen):
 		elif config.plugins.ORFteletext.adr.value == "SAT1":
 			adr = "http://www.sat1.at/service/teletext/cache_de/" + hz + "_0" + nz + ".png" 
 		neu = "wget -O /tmp/bild " + adr
-		self["seite"].setText(hz+"-"+nz+" at "+config.plugins.ORFteletext.adr.value)
+		self["seite"].setText(hz + "-" + nz + " at " + config.plugins.ORFteletext.adr.value)
 		os_system(neu)
 		if fileExists("/tmp/bild"):
 			self.whatPic = "/tmp/bild"

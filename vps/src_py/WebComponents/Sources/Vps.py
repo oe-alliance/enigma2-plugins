@@ -88,9 +88,9 @@ class Vps(Timer):
 # build new lut
 tempLut = Timer.lut.copy()
 maxVal = max(tempLut.values())
-tempLut["vpsplugin_enabled"] = maxVal+1
-tempLut["vpsplugin_overwrite"] = maxVal+2
-tempLut["vpsplugin_time"] = maxVal+3
+tempLut["vpsplugin_enabled"] = maxVal + 1
+tempLut["vpsplugin_overwrite"] = maxVal + 2
+tempLut["vpsplugin_time"] = maxVal + 3
 Vps.lut = tempLut
 
 del tempLut, maxVal

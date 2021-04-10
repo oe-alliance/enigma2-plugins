@@ -72,11 +72,11 @@ class FC2web(resource.Resource):
 		html += "<tr>\n"
 		for count in range(0,12):
 			tmp = ("<BR>-" if FC2stunde[count] == "-" else FC2stunde[count])
-			html +="<td><p align=\"center\"><font size=\"1\">%02d:00<br><font color=\"#FFCC00\">%s</font></font></td>\n" % (count,tmp)
+			html += "<td><p align=\"center\"><font size=\"1\">%02d:00<br><font color=\"#FFCC00\">%s</font></font></td>\n" % (count,tmp)
 		html += "</tr><tr>\n"
 		for count in range(12,24):
 			tmp = ("<BR>-" if FC2stunde[count] == "-" else FC2stunde[count])
-			html +="<td><p align=\"center\"><font size=\"1\">%02d:00<br><font color=\"#FFCC00\">%s</font></font></td>\n" % (count,tmp)
+			html += "<td><p align=\"center\"><font size=\"1\">%02d:00<br><font color=\"#FFCC00\">%s</font></font></td>\n" % (count,tmp)
 		html += "</tr></table>\n"
 
 		html += "<script type=\"text/javascript\">\n"
@@ -162,10 +162,10 @@ class FC2webLog(resource.Resource):
 				html += "</form>"
 			if os.path.exists(config.plugins.FanControl.LogPath.value + "FC2data.csv"):
 				s = os.stat(config.plugins.FanControl.LogPath.value + "FC2data.csv")
-				if int(s.st_size/1024) == 0:
+				if int(s.st_size / 1024) == 0:
 					html += "<BR>" + _("Filesize : %d %sByte") % (int(s.st_size), "")
 				else:
-					html += "<BR>" + _("Filesize : %d %sByte") % (int(s.st_size/1024), "k")
+					html += "<BR>" + _("Filesize : %d %sByte") % (int(s.st_size / 1024), "k")
 				s = os.statvfs(config.plugins.FanControl.LogPath.value)
 				html += "<BR>" + _("Disk free : %d MByte") % (int(s.f_bsize * s.f_bavail / 1024 / 1024))
 				html += "<form method=\"GET\">"
@@ -198,10 +198,10 @@ class FC2webLog(resource.Resource):
 				html += "</form>"
 			if os.path.exists(config.plugins.FanControl.LogPath.value + "FC2events.txt"):
 				s = os.stat(config.plugins.FanControl.LogPath.value + "FC2events.txt")
-				if int(s.st_size/1024) == 0:
+				if int(s.st_size / 1024) == 0:
 					html += "<BR>" + _("Filesize : %d %sByte") % (int(s.st_size), "")
 				else:
-					html += "<BR>" + _("Filesize : %d %sByte") % (int(s.st_size/1024), "k")
+					html += "<BR>" + _("Filesize : %d %sByte") % (int(s.st_size / 1024), "k")
 				s = os.statvfs(config.plugins.FanControl.LogPath.value)
 				html += "<BR>" + _("Disk free : %d MByte") % (int(s.f_bsize * s.f_bavail / 1024 / 1024))
 				html += "<form method=\"GET\">"
@@ -224,7 +224,7 @@ class FC2webLog(resource.Resource):
 			html += "<BR>" + _("Auto-Delete older %s Days") % config.plugins.FanControl.DeleteData.value
 			html += "</html>"
 
-		elif command[0] ==  "data":
+		elif command[0] == "data":
 			req.setResponseCode(http.OK)
 #			req.setHeader('Content-type', 'application/octet-stream')
 			req.setHeader('Content-type', 'application/vnd.ms-excel')
@@ -235,18 +235,18 @@ class FC2webLog(resource.Resource):
 			f = open(config.plugins.FanControl.LogPath.value + "FC2data.csv","r")
 			html = f.read()
 			f.close()
-		elif command[0] ==  "datadel":
+		elif command[0] == "datadel":
 			if os.path.exists(config.plugins.FanControl.LogPath.value + "FC2data.csv"):
 				os.remove(config.plugins.FanControl.LogPath.value + "FC2data.csv")
 			CreateDataHead()
 			html = LogRefresh()
-		elif command[0] ==  "datadel48h":
+		elif command[0] == "datadel48h":
 			if os.path.exists(config.plugins.FanControl.LogPath.value + "FC2data.csv") and os.stat(config.plugins.FanControl.LogPath.value + "FC2data.csv").st_size > 10000:
 				f = open(config.plugins.FanControl.LogPath.value + "FC2data.csv","a")
 				s = f.tell()
 				f.close()
 				f = open(config.plugins.FanControl.LogPath.value + "FC2data.csv","r")
-				f.seek(s-100)
+				f.seek(s - 100)
 				line = f.readline()
 				line = f.readline()
 				DT = line.split(";")
@@ -269,13 +269,13 @@ class FC2webLog(resource.Resource):
 				if os.path.exists(config.plugins.FanControl.LogPath.value + "FC2data.csv.tmp"):
 					os.rename(config.plugins.FanControl.LogPath.value + "FC2data.csv.tmp",config.plugins.FanControl.LogPath.value + "FC2data.csv")
 			html = LogRefresh()
-		elif command[0] ==  "dataenable":
+		elif command[0] == "dataenable":
 			config.plugins.FanControl.EnableDataLog.value = not config.plugins.FanControl.EnableDataLog.value
 			CreateDataHead()
 			config.plugins.FanControl.EnableDataLog.save()
 			html = LogRefresh()
 
-		elif command[0] ==  "events":
+		elif command[0] == "events":
 			req.setResponseCode(http.OK)
 			req.setHeader('Content-type', 'application/octet-stream')
 			req.setHeader('Content-Disposition', 'attachment;filename=FC2events.txt')
@@ -285,17 +285,17 @@ class FC2webLog(resource.Resource):
 			f = open(config.plugins.FanControl.LogPath.value + "FC2events.txt","r")
 			html = f.read()
 			f.close()
-		elif command[0] ==  "eventsdel":
+		elif command[0] == "eventsdel":
 			if os.path.exists(config.plugins.FanControl.LogPath.value + "FC2events.txt"):
 				os.remove(config.plugins.FanControl.LogPath.value + "FC2events.txt")
 			html = LogRefresh()
-		elif command[0] ==  "eventsdel48h":
+		elif command[0] == "eventsdel48h":
 			if os.path.exists(config.plugins.FanControl.LogPath.value + "FC2events.txt"):
 				f = open(config.plugins.FanControl.LogPath.value + "FC2events.txt","a")
 				s = f.tell()
 				f.close()
 				f = open(config.plugins.FanControl.LogPath.value + "FC2events.txt","r")
-				f.seek(s-100)
+				f.seek(s - 100)
 				line = f.readline()
 				line = f.readline()
 				DT = line.split(";")
@@ -318,7 +318,7 @@ class FC2webLog(resource.Resource):
 				if os.path.exists(config.plugins.FanControl.LogPath.value + "FC2events.txt.tmp"):
 					os.rename(config.plugins.FanControl.LogPath.value + "FC2events.txt.tmp",config.plugins.FanControl.LogPath.value + "FC2events.txt")
 			html = LogRefresh()
-		elif command[0] ==  "eventsenable":
+		elif command[0] == "eventsenable":
 			config.plugins.FanControl.EnableEventLog.value = not config.plugins.FanControl.EnableEventLog.value
 			config.plugins.FanControl.EnableEventLog.save()
 			html = LogRefresh()
@@ -367,7 +367,7 @@ class FC2webChart(resource.Resource):
 				html = "<html><body><html>Not enough Data (wait 3min)!</body></html>"
 				return html
 			f = open(config.plugins.FanControl.LogPath.value + "FC2data.csv","r")
-			f.seek(s-100)
+			f.seek(s - 100)
 			line = f.readline()
 			line = f.readline()
 			DT = line.split(";")
@@ -466,7 +466,7 @@ class FC2webChart(resource.Resource):
 			html += "dT = document.DiaTemp\n"
 			html += "dR = document.DiaRPM\n"
 			t = 0
-			Xtime = int((Anzahl/20))
+			Xtime = int((Anzahl / 20))
 			if Anzahl < 1000:
 				Xtime += 1
 			for line in f.readlines():
@@ -477,17 +477,17 @@ class FC2webChart(resource.Resource):
 					else:
 						tmp = "null"
 					t += 1
-					if len(DT[6])>1:
-						DT[6]="0"
+					if len(DT[6]) > 1:
+						DT[6] = "0"
 					B = 0
 					H = 0
 					R = 0
 					S = int(DT[6])
-					if (S & 1)>0:
+					if (S & 1) > 0:
 						B = 3
-					if (S & 2)>0:
+					if (S & 2) > 0:
 						H = 6
-					if (S & 4)>0:
+					if (S & 4) > 0:
 						R = 9
 					html += "dT.AddPoint(\"%s; %s; %d; %d; %d\", %s, null);\n" % (DT[1].replace(",","."),DT[5],B,H,R,tmp)
 					html += "dR.AddPoint(\"%s\", %s, null);\n" % (DT[2],tmp)
@@ -504,10 +504,10 @@ class FC2webChart(resource.Resource):
 def BoxStatus():
 	h = ""
 	S = int(FC2werte[5])
-	if (S & 1)>0:
+	if (S & 1) > 0:
 		h += "<img border=\"0\" src=\"/fancontrol/FC2on.png\" width=\"20\" height=\"20\" title=\"Box On\" align=\"left\" hspace=\"2\" vspace=\"5\">\n"
-	if (S & 2)>0:
+	if (S & 2) > 0:
 		h += "<img border=\"0\" src=\"/fancontrol/FC2hdd.png\" width=\"20\" height=\"20\" title=\"HDD On\" align=\"left\" hspace=\"2\" vspace=\"5\">\n"
-	if (S & 4)>0:
+	if (S & 4) > 0:
 		h += "<img border=\"0\" src=\"/fancontrol/FC2record.png\" width=\"20\" height=\"20\" title=\"Recording\" align=\"left\" hspace=\"2\" vspace=\"5\">\n"
 	return h

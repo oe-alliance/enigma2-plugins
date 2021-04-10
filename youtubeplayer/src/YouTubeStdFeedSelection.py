@@ -33,8 +33,8 @@ class YouTubeStdFeedSelectionScreen(Screen):
 
 		self["actions"] = ActionMap(["OkCancelActions"], 
 			{
-				"ok"		:	self.ok,
-				"cancel"	:	self.close
+				"ok"		: self.ok,
+				"cancel"	: self.close
 			})
 
 		menu = [(_("Most Viewed"), "most_viewed")]

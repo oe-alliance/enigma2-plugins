@@ -76,9 +76,9 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 		self.load()
 		
 		# Buttons
-		self["key_red"]    = StaticText("")
-		self["key_green"]  = StaticText("")
-		self["key_blue"]   = StaticText("")
+		self["key_red"] = StaticText("")
+		self["key_green"] = StaticText("")
+		self["key_blue"] = StaticText("")
 		self["key_yellow"] = StaticText("")
 		
 		self.help_window = None
@@ -87,39 +87,39 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 		#E2 Bug self["custom_actions"] = HelpableActionMap(self, ["SetupActions", "ColorActions", "PushServiceConfigActions"],
 		self["custom_actions"] = HelpableActionMap(self, "PushServiceConfigActions",
 		{
-			"pageUp":				(self.pageUp,       _("Page up")),
-			"pageDown":			(self.pageDown,     _("Page down")),
+			"pageUp": (self.pageUp, _("Page up")),
+			"pageDown": (self.pageDown, _("Page down")),
 		}, -2) # higher priority
 		
 		self["main_actions"] = HelpableActionMap(self, "PushServiceConfigActions",
 		{
-			"red":					(self.keyCancel,       _("Exit without saving")),
-			"green":				(self.keySave,         _("Save and exit")),
+			"red": (self.keyCancel, _("Exit without saving")),
+			"green": (self.keySave, _("Save and exit")),
 		}, -2) # higher priority
 		self["main_actions"].setEnabled(False)
 		
 		self["main_actions_enabled"] = HelpableActionMap(self, "PushServiceConfigActions",
 		{
-			"yellow":				(self.showServices,     _("Show Services")),
-			"blue":					(self.showControllers,  _("Show Controllers")),
+			"yellow": (self.showServices, _("Show Services")),
+			"blue": (self.showControllers, _("Show Controllers")),
 		}, -2) # higher priority
 		self["main_actions_enabled"].setEnabled(False)
 		
 		self["service_actions"] = HelpableActionMap(self, "PushServiceConfigActions",
 		{
-			"red":					(self.showMain,        _("Back to main screen")),
-			"green":				(self.testService,     _("Test selected Service")),
-			"yellow":				(self.addServices,     _("Add Service")),
-			"blue":					(self.removeServices,  _("Remove Service")),
+			"red": (self.showMain, _("Back to main screen")),
+			"green": (self.testService, _("Test selected Service")),
+			"yellow": (self.addServices, _("Add Service")),
+			"blue": (self.removeServices, _("Remove Service")),
 		}, -2) # higher priority
 		self["service_actions"].setEnabled(False)
 		
 		self["controller_actions"] = HelpableActionMap(self, "PushServiceConfigActions",
 		{
-			"red":					(self.showMain,            _("Back to main screen")),
-			"green":				(self.testController,      _("Test selected Controller")),
-			"yellow":				(self.addControllers,      _("Add Controller")),
-			"blue": 				(self.removeControllers,   _("Remove Controller")),
+			"red": (self.showMain, _("Back to main screen")),
+			"green": (self.testController, _("Test selected Controller")),
+			"yellow": (self.addControllers, _("Add Controller")),
+			"blue": (self.removeControllers, _("Remove Controller")),
 		}, -2) # higher priority
 		self["controller_actions"].setEnabled(False)
 		
@@ -163,7 +163,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 					self.list.append(getConfigListEntry(entry.getNameId(), entry.getConfigEnable(), idx))
 					if entry.getUniqueID() == uniqueid:
 						# Select the added entry
-						select = len(self.list)-1
+						select = len(self.list) - 1
 					if entry.getEnable():
 						for key, element, description in entry.getConfigOptions():
 							self.list.append(getConfigListEntry("  " + str(description), element, idx))
@@ -404,10 +404,10 @@ class TestConsole(Screen):
 		self["text"] = ScrollLabel("")
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions"], 
 		{
-			"ok":    self.cancel,
-			"back":  self.cancel,
-			"up":    self["text"].pageUp,
-			"down":  self["text"].pageDown
+			"ok": self.cancel,
+			"back": self.cancel,
+			"up": self["text"].pageUp,
+			"down": self["text"].pageDown
 		}, -1)
 		
 		# Set title and text

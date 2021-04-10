@@ -123,7 +123,7 @@ class MSNWeather:
 			language = "nn-NO"
 		self.city = city
 		self.callback = callback
-		self.callbackShowIcon  = callbackShowIcon
+		self.callbackShowIcon = callbackShowIcon
 		self.callbackAllIconsDownloaded = callbackAllIconsDownloaded
 		url = "http://weather.service.msn.com/data.aspx?src=windows&weadegreetype=%s&culture=%s&wealocations=%s" % (degreetype, language, urllib_quote(locationcode))
 		getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
@@ -191,7 +191,7 @@ class MSNWeather:
 					currentWeather.feelslike = items.attrib.get("feelslike").encode("utf-8", 'ignore')
 					currentWeather.skycode = "%s%s" % (items.attrib.get("skycode").encode("utf-8", 'ignore'), self.iconextension)
 					currentWeather.code = items.attrib.get("skycode").encode("utf-8", 'ignore')
-					filename = "%s%s"  % (self.iconpath, currentWeather.skycode)
+					filename = "%s%s" % (self.iconpath, currentWeather.skycode)
 					currentWeather.iconFilename = filename
 					if not os_path.exists(filename):
 						url = "%s%s" % (self.imagerelativeurl, currentWeather.skycode)
@@ -200,7 +200,7 @@ class MSNWeather:
 						self.showIcon(-1,filename)
 					self.weatherItems[str(-1)] = currentWeather
 				elif items.tag == "forecast" and index <= 4:
-					index +=1
+					index += 1
 					weather = MSNWeatherItem()
 					weather.date = items.attrib.get("date").encode("utf-8", 'ignore')
 					weather.day = items.attrib.get("day").encode("utf-8", 'ignore')
@@ -210,7 +210,7 @@ class MSNWeather:
 					weather.skytextday = items.attrib.get("skytextday").encode("utf-8", 'ignore')
 					weather.skycodeday = "%s%s" % (items.attrib.get("skycodeday").encode("utf-8", 'ignore'), self.iconextension)
 					weather.code = items.attrib.get("skycodeday").encode("utf-8", 'ignore')
-					filename = "%s%s"  % (self.iconpath, weather.skycodeday)
+					filename = "%s%s" % (self.iconpath, weather.skycodeday)
 					weather.iconFilename = filename
 					if not os_path.exists(filename):
 						url = "%s%s" % (self.imagerelativeurl, weather.skycodeday)

@@ -319,7 +319,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 				data['sharedir'] = self.sharedirConfigEntry.value[1:]
 			else:
 				data['sharedir'] = self.sharedirConfigEntry.value
-			data['options'] =  self.optionsConfigEntry.value
+			data['options'] = self.optionsConfigEntry.value
 			data['mounttype'] = self.mounttypeConfigEntry.value
 			data['username'] = self.usernameConfigEntry.value
 			data['password'] = self.passwordConfigEntry.value

@@ -12,12 +12,12 @@ from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
 
 def mbasename(fname):
 	l = fname.split('/')
-	win = l[len(l)-1]
+	win = l[len(l) - 1]
 	l2 = win.split('\\')
-	return l2[len(l2)-1]
+	return l2[len(l2) - 1]
 	
 class UploadPkgResource(resource.Resource):
-	res="""
+	res = """
 	<?xml version="1.0" encoding="UTF-8"?>
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 			"http://www.w3.org/TR/html4/loose.dtd">
@@ -66,18 +66,18 @@ class UploadPkgResource(resource.Resource):
 			except OSError, oe:
 				pass
 			req.setResponseCode(http.OK)
-			return  self.res % (_("error writing to disk, not uploaded"),_("Close"), _("Add"))
+			return self.res % (_("error writing to disk, not uploaded"),_("Close"), _("Add"))
 		
 		else:
 			file = "/tmp/" + filename
 			os_rename(fn,(file))
 			if file is not None:
-				out = os_popen("opkg install %s" %file)
+				out = os_popen("opkg install %s" % file)
 				debug = ""
 				for line in out:
 					debug += line
 			else:
-				return  self.res % (_("error writing to disk, not uploaded"),_("Close"), _("Add"))
+				return self.res % (_("error writing to disk, not uploaded"),_("Close"), _("Add"))
 
 			req.setResponseCode(http.OK)
 			return self.res % ((debug),

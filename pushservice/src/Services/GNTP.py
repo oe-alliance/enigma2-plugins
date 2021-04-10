@@ -31,7 +31,7 @@ import gntp.notifier
 APP_NAME = _("{box:s} {name:s}")
 NOTIFICATION_TYPE = _("{name:s}")
 GROWL_SUBJECT_TEMPLATE = _("{box:s}: {subject:s}")
-GROWL_BODY_TEMPLATE = 	_("{body:s}\n\n") \
+GROWL_BODY_TEMPLATE = _("{body:s}\n\n") \
 											+ _("Donate {donate:s}")
 
 
@@ -45,12 +45,12 @@ class GNTP(ServiceBase):
 		#self.sockets = []
 		
 		# Default configuration
-		self.setOption('growlhost',  NoSave(ConfigText(default="host", fixed_size=False)),  _("Growl Host name"))
-		self.setOption('growlport',  NoSave(ConfigNumber(default=23053)),                   _("Growl Port"))
-		self.setOption('timeout',    NoSave(ConfigNumber(default=3)),                       _("Timeout"))
-		self.setOption('password',   NoSave(ConfigPassword()),                                _("Password"))
-		self.setOption('sticky',     NoSave(ConfigYesNo(default=True)),                     _("Send as sticky"))
-		self.setOption('priority',   NoSave(ConfigNumber(default=1)),                       _("Send with priority"))
+		self.setOption('growlhost', NoSave(ConfigText(default="host", fixed_size=False)), _("Growl Host name"))
+		self.setOption('growlport', NoSave(ConfigNumber(default=23053)), _("Growl Port"))
+		self.setOption('timeout', NoSave(ConfigNumber(default=3)), _("Timeout"))
+		self.setOption('password', NoSave(ConfigPassword()), _("Password"))
+		self.setOption('sticky', NoSave(ConfigYesNo(default=True)), _("Send as sticky"))
+		self.setOption('priority', NoSave(ConfigNumber(default=1)), _("Send with priority"))
 
 	def push(self, callback, errback, pluginname, subject, body="", attachments=[]):
 		from Plugins.Extensions.PushService.plugin import NAME, VERSION, SUPPORT, DONATE

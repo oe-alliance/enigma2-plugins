@@ -186,7 +186,7 @@ else:
 __version__ = "1.0.1"
 
 # xmlrpc integer limits
-MAXINT =  2L**31-1
+MAXINT = 2L**31 - 1
 MININT = -2L**31
 
 # --------------------------------------------------------------------
@@ -194,20 +194,20 @@ MININT = -2L**31
 # http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php)
 
 # Ranges of errors
-PARSE_ERROR       = -32700
-SERVER_ERROR      = -32600
+PARSE_ERROR = -32700
+SERVER_ERROR = -32600
 APPLICATION_ERROR = -32500
-SYSTEM_ERROR      = -32400
-TRANSPORT_ERROR   = -32300
+SYSTEM_ERROR = -32400
+TRANSPORT_ERROR = -32300
 
 # Specific errors
-NOT_WELLFORMED_ERROR  = -32700
-UNSUPPORTED_ENCODING  = -32701
+NOT_WELLFORMED_ERROR = -32700
+UNSUPPORTED_ENCODING = -32701
 INVALID_ENCODING_CHAR = -32702
-INVALID_XMLRPC        = -32600
-METHOD_NOT_FOUND      = -32601
+INVALID_XMLRPC = -32600
+METHOD_NOT_FOUND = -32601
 INVALID_METHOD_PARAMS = -32602
-INTERNAL_ERROR        = -32603
+INTERNAL_ERROR = -32603
 
 # --------------------------------------------------------------------
 # Exceptions
@@ -935,7 +935,7 @@ class Unmarshaller:
         dict = {}
         items = self._stack[mark:]
         for i in range(0, len(items), 2):
-            dict[_stringify(items[i])] = items[i+1]
+            dict[_stringify(items[i])] = items[i + 1]
         self._stack[mark:] = [dict]
         self._value = 0
     dispatch["struct"] = end_struct

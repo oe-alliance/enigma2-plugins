@@ -55,11 +55,11 @@ def doInstantiateDialogSF(self, screen, arguments, kwargs, desktop):
 		dlg = self.create(screen, arguments, **kwargs)
 	except:
 		print 'EXCEPTION IN DIALOG INIT CODE, ABORTING:'
-		print '-'*60
+		print '-' * 60
 		print_exc(file=stdout)
 		from enigma import quitMainloop
 		quitMainloop(5)
-		print '-'*60
+		print '-' * 60
 
 	if dlg is None:
 		return
@@ -85,7 +85,7 @@ def autostart(reason, **kwargs):
 		if kwargs.has_key("session"):
 			global gLeavePlayerConfirmed
 			Session = kwargs["session"]
-			print "[SF-Plugin] autostart, Session = " +  str(Session) + "\n"
+			print "[SF-Plugin] autostart, Session = " + str(Session) + "\n"
 			try:
 				from Screens.InfoBar import InfoBar
 				InfoBar.showMovies = showMoviesSF
@@ -108,7 +108,7 @@ def autostart(reason, **kwargs):
 def Plugins(**kwargs):
 	descriptors = [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart)]
 	descriptors.append(PluginDescriptor(
-		name="SerienFilm "+SerienFilmVersion,
+		name ="SerienFilm " + SerienFilmVersion,
 		description=_("group movies of a series to virtual directories"),
 		icon="SerienFilm.png",
 		where=PluginDescriptor.WHERE_PLUGINMENU,

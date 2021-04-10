@@ -33,8 +33,8 @@ class KiddyTimerPositioner(Screen, MovableScreen):
 
         self["actions"] = ActionMap(["OkCancelActions"], 
         {
-         "ok":      self.keyOK,
-         "cancel":  self.keyCancel
+         "ok": self.keyOK,
+         "cancel": self.keyCancel
         }, -1)
 
         MovableScreen.__init__(self, config.plugins.KiddyTimer, [], 82, 82)

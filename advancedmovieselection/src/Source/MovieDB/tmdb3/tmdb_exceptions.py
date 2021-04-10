@@ -7,27 +7,27 @@
 #-----------------------
 
 class TMDBError(Exception):
-    Error                   = 0
-    KeyError                = 10
-    KeyMissing              = 20
-    KeyInvalid              = 30
-    KeyRevoked              = 40
-    RequestError            = 50
-    RequestInvalid          = 51
-    PagingIssue             = 60
-    CacheError              = 70
-    CacheReadError          = 71
-    CacheWriteError         = 72
-    CacheDirectoryError     = 73
-    ImageSizeError          = 80
-    HTTPError               = 90
-    Offline                 = 100
-    LocaleError             = 110
+    Error = 0
+    KeyError = 10
+    KeyMissing = 20
+    KeyInvalid = 30
+    KeyRevoked = 40
+    RequestError = 50
+    RequestInvalid = 51
+    PagingIssue = 60
+    CacheError = 70
+    CacheReadError = 71
+    CacheWriteError = 72
+    CacheDirectoryError = 73
+    ImageSizeError = 80
+    HTTPError = 90
+    Offline = 100
+    LocaleError = 110
 
     def __init__(self, msg=None, errno=0):
         self.errno = errno
         if errno == 0:
-            self.errno = getattr(self, 'TMDB'+self.__class__.__name__, errno)
+            self.errno = getattr(self, 'TMDB' + self.__class__.__name__, errno)
         self.args = (msg,)
 
 class TMDBKeyError(TMDBError):

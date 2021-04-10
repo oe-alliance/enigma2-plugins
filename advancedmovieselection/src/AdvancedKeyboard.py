@@ -36,7 +36,7 @@ class AdvancedTextInputHelpDialog(NumericalTextInputHelpDialog, SkinResolutionHe
 class AdvancedKeyBoard(VirtualKeyBoard, NumericalTextInput, SkinResolutionHelper):
     KEYBOARD = 0x01
     NUM_KEYB = 0x02
-    BOTH = KEYBOARD|NUM_KEYB
+    BOTH = KEYBOARD | NUM_KEYB
     def __init__(self, session, title="", text=""):
         #VirtualKeyBoard.__init__(self, session, title, text) Changed by Topfi, added parameter names
         VirtualKeyBoard.__init__(self, session, title=title, text=text)

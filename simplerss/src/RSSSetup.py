@@ -179,14 +179,14 @@ class RSSSetup(ConfigListScreen, Screen):
 		self.session.openWithCallback(self.conditionalNew, RSSFeedEdit, id)
 
 	def conditionalNew(self):
-		id = len(config.plugins.simpleRSS.feed)-1
+		id = len(config.plugins.simpleRSS.feed) - 1
 		uri = config.plugins.simpleRSS.feed[id].uri
 
 		# Check if new feed differs from default
 		if uri.value == "http://":
 			del config.plugins.simpleRSS.feed[id]
 		else:
-			config.plugins.simpleRSS.feedcount.value = id+1
+			config.plugins.simpleRSS.feedcount.value = id + 1
 			self.createSetup()
 			self["config"].setList(self.list)
 

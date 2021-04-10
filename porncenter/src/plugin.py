@@ -295,7 +295,7 @@ class PinChecker:
 
 	def pinEntered(self):
 		self.pin_entered = True
-		self.timer.start(60000*10, 1)
+		self.timer.start(60000 * 10, 1)
 
 	def lock(self):
 		self.pin_entered = False
@@ -321,8 +321,8 @@ class PornCenterList(MenuList):
 			if entry.thumb:
 				res.append(MultiContentEntryPixmapAlphaBlend(pos=(0, 0), size=(150, 75), png=entry.thumb))
 			else:
-				res.append(MultiContentEntryPixmapAlphaBlend(pos=(0, 0), size=(150, 75), png=LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS)+"/Extensions/PornCenter/nopreview.png")))
-			res.append(MultiContentEntryText(pos=(155, self.center_up), size=(WIDTH-270, 45), font=0, text=entry.name))
+				res.append(MultiContentEntryPixmapAlphaBlend(pos=(0, 0), size=(150, 75), png=LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS) + "/Extensions/PornCenter/nopreview.png")))
+			res.append(MultiContentEntryText(pos=(155, self.center_up), size=(WIDTH - 270, 45), font=0, text=entry.name))
 			list.append(res)
 		self.setList(list)
 
@@ -374,7 +374,7 @@ class PornCenterSub(Screen, ProtectedScreen):
 						file = url
 						while file.__contains__("/"):
 							idx = file.index("/")
-							file = file[idx+1:]
+							file = file[idx + 1:]
 						self.file = "%s%s" % (config.plugins.PornCenter.bufferDevice.value, file)
 						self.session.openWithCallback(self.bufferCallback, PornCenterBuffer, url, self.file)
 					else:

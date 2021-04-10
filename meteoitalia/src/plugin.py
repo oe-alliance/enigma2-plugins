@@ -117,7 +117,7 @@ class meteoitMain(Screen):
         				tmp_conditions = {}
        					for tag2 in list_of_tags2:
             					try: 
-                					tmp_conditions[tag2] =  weather_dom.getElementsByTagName(tag)[0].getElementsByTagName(tag2)[0].getAttribute('data')
+                					tmp_conditions[tag2] = weather_dom.getElementsByTagName(tag)[0].getElementsByTagName(tag2)[0].getAttribute('data')
             					except IndexError:
                 					pass
         				weather_data[tag] = tmp_conditions
@@ -135,7 +135,7 @@ class meteoitMain(Screen):
     				dom.unlink()
 				
 				maintext = "Il tempo di oggi a " + str(weather_data['forecast_information']['postal_code'])
-				mytime =  str(weather_data['forecast_information']['current_date_time'])
+				mytime = str(weather_data['forecast_information']['current_date_time'])
 				parts = mytime.strip().split(" ")
 				mytime = parts[1]
 				self["lab2"].setText("Condizioni del tempo aggiornate alle ore " + mytime)
@@ -192,7 +192,7 @@ class meteoitMain(Screen):
 # Download icon from Google if we have not yet.
 	def checkIcon(self, filename):
 		parts = filename.split("/")
-		totsp = (len(parts) -1)
+		totsp = (len(parts) - 1)
 		localfile = pluginpath + "/" + parts[totsp]
 		if fileExists(localfile):
 			pass

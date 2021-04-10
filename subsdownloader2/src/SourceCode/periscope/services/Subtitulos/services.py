@@ -98,7 +98,7 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
         ''' makes a query and returns info (link, lang) about found subtitles'''
         sublinks = []
         name = name.lower().replace(" ", "-")
-        searchurl = "%s/%s/%sx%s" %(self.host, name, season, episode)
+        searchurl = "%s/%s/%sx%s" % (self.host, name, season, episode)
         content = self.downloadContent(searchurl, 10)
         if not content:
             return sublinks
@@ -106,12 +106,12 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
         soup = BeautifulSoup(content)
         for subs in soup("div", {"id":"version"}):
             version = subs.find("p", {"class":"title-sub"})
-            subteams = self.release_pattern.search("%s"%version.contents[1]).group(1).lower()            
+            subteams = self.release_pattern.search("%s" % version.contents[1]).group(1).lower()            
             teams = set(teams)
             subteams = self.listTeams([subteams], [".", "_", " ", "/"])
             
-            log.debug("Team from website: %s" %subteams)
-            log.debug("Team from file: %s" %teams)
+            log.debug("Team from website: %s" % subteams)
+            log.debug("Team from file: %s" % teams)
 
             nexts = subs.findAll("ul", {"class":"sslist"})
             for lang_html in nexts:
@@ -124,7 +124,7 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
                 link = statusLI.findNext("span", {"class":"descargar green"}).find("a")["href"]
                 if status == "Completado" and subteams.issubset(teams) and (not langs or lang in langs):
                     result = {}
-                    result["release"] = "%s.S%.2dE%.2d.%s" %(name.replace("-", ".").title(), int(season), int(episode), '.'.join(subteams))
+                    result["release"] = "%s.S%.2dE%.2d.%s" % (name.replace("-", ".").title(), int(season), int(episode), '.'.join(subteams))
                     result["lang"] = lang
                     result["link"] = link
                     result["page"] = searchurl
@@ -153,7 +153,7 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
         #videofilename = subtitle["filename"]
         videofilename = filename
         srtbasefilename = videofilename.rsplit(".", 1)[0]
-        srtfilename = srtbasefilename +".srt"
+        srtfilename = srtbasefilename + ".srt"
         self.downloadFile(suburl, srtfilename)
         return srtfilename
 

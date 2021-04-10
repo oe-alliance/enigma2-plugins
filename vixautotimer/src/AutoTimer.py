@@ -416,7 +416,7 @@ class AutoTimer:
 			# Try to determine real service (we always choose the last one)
 			n = evt.getNumOfLinkageServices()
 			if n > 0:
-				i = evt.getLinkageService(eserviceref, n-1)
+				i = evt.getLinkageService(eserviceref, n - 1)
 				serviceref = i.toString()
 
 			evtBegin = begin
@@ -505,7 +505,7 @@ class AutoTimer:
 			# We first check eit and if user wants us to guess event based on time
 			# we try this as backup. The allowed diff should be configurable though.
 			for rtimer in timerdict.get(serviceref, ()):
-				if (rtimer.eit == eit or config.plugins.autotimer.try_guessing.getValue()) and getTimeDiff(rtimer, evtBegin, evtEnd) > ((duration/10)*8):
+				if (rtimer.eit == eit or config.plugins.autotimer.try_guessing.getValue()) and getTimeDiff(rtimer, evtBegin, evtEnd) > ((duration / 10) * 8):
 					oldExists = True
 					
 					# Abort if we don't want to modify timers or timer is repeated
@@ -620,7 +620,7 @@ class AutoTimer:
 						# Attention we have to use a copy of the list, because we have to append the previous older matches
 						lepgm = len(epgmatches)
 						for i in xrange(lepgm):
-							servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS = epgmatches[(i+idx+1)%lepgm]
+							servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS = epgmatches[(i + idx + 1) % lepgm]
 							if self.checkSimilarity(timer, name, nameS, shortdesc, shortdescS, extdesc, extdescS, force=True):
 								# Check if the similar is already known
 								if eitS not in similardict:
@@ -663,7 +663,7 @@ class AutoTimer:
 						newEntry.disabled = True
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
 						conflicts = recordHandler.record(newEntry)
-		self.result=(new, modified, skipped)
+		self.result = (new, modified, skipped)
 		self.completed.append(timer.name)
 		sleep(0.5)
 		# return (new, modified)
@@ -686,7 +686,7 @@ class AutoTimer:
 				)
 		else:
 			AddPopup(
-				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % ((self.new+self.modified+len(self.conflicting)+self.skipped+len(self.similars)), self.new, self.modified, len(self.conflicting), self.skipped, len(self.similars)),
+				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % ((self.new + self.modified + len(self.conflicting) + self.skipped + len(self.similars)), self.new, self.modified, len(self.conflicting), self.skipped, len(self.similars)),
 				MessageBox.TYPE_INFO,
 				15,
 				NOTIFICATIONID

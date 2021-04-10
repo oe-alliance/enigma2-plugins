@@ -64,7 +64,7 @@ BIG5_cls = (
     3,3,3,3,3,3,3,0)  # f8 - ff 
 
 BIG5_st = (
-    eError,eStart,eStart,     3,eError,eError,eError,eError,#00-07 
+    eError,eStart,eStart, 3,eError,eError,eError,eError,#00-07 
     eError,eError,eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,eError,#08-0f 
     eError,eStart,eStart,eStart,eStart,eStart,eStart,eStart)#10-17 
 
@@ -113,10 +113,10 @@ EUCJP_cls = (
     0,0,0,0,0,0,0,5)  # f8 - ff 
 
 EUCJP_st = (
-          3,     4,     3,     5,eStart,eError,eError,eError,#00-07 
+          3, 4, 3, 5,eStart,eError,eError,eError,#00-07 
      eError,eError,eError,eError,eItsMe,eItsMe,eItsMe,eItsMe,#08-0f 
      eItsMe,eItsMe,eStart,eError,eStart,eError,eError,eError,#10-17 
-     eError,eError,eStart,eError,eError,eError,     3,eError,#18-1f 
+     eError,eError,eStart,eError,eError,eError, 3,eError,#18-1f 
           3,eError,eError,eError,eStart,eStart,eStart,eStart)#20-27 
 
 EUCJPCharLenTable = (2, 2, 2, 3, 1, 0)
@@ -129,7 +129,7 @@ EUCJPSMModel = {'classTable': EUCJP_cls,
 
 # EUC-KR
 
-EUCKR_cls  = (
+EUCKR_cls = (
     1,1,1,1,1,1,1,1,  # 00 - 07 
     1,1,1,1,1,1,0,0,  # 08 - 0f 
     1,1,1,1,1,1,1,1,  # 10 - 17 
@@ -164,7 +164,7 @@ EUCKR_cls  = (
     2,2,2,2,2,2,2,0)  # f8 - ff 
 
 EUCKR_st = (
-    eError,eStart,     3,eError,eError,eError,eError,eError,#00-07 
+    eError,eStart, 3,eError,eError,eError,eError,eError,#00-07 
     eItsMe,eItsMe,eItsMe,eItsMe,eError,eError,eStart,eStart)#08-0f 
 
 EUCKRCharLenTable = (0, 1, 2, 0)
@@ -212,7 +212,7 @@ EUCTW_cls = (
     3,3,3,3,3,3,3,0)  # f8 - ff 
 
 EUCTW_st = (
-    eError,eError,eStart,     3,     3,     3,     4,eError,#00-07 
+    eError,eError,eStart, 3, 3, 3, 4,eError,#00-07 
     eError,eError,eError,eError,eError,eError,eItsMe,eItsMe,#08-0f 
     eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,eError,eStart,eError,#10-17 
     eStart,eStart,eStart,eError,eError,eError,eError,eError,#18-1f 
@@ -264,11 +264,11 @@ GB2312_cls = (
     6,6,6,6,6,6,6,0)  # f8 - ff 
 
 GB2312_st = (
-    eError,eStart,eStart,eStart,eStart,eStart,     3,eError,#00-07 
+    eError,eStart,eStart,eStart,eStart,eStart, 3,eError,#00-07 
     eError,eError,eError,eError,eError,eError,eItsMe,eItsMe,#08-0f 
     eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,eError,eError,eStart,#10-17 
          4,eError,eStart,eStart,eError,eError,eError,eError,#18-1f 
-    eError,eError,     5,eError,eError,eError,eItsMe,eError,#20-27 
+    eError,eError, 5,eError,eError,eError,eItsMe,eError,#20-27 
     eError,eError,eStart,eStart,eStart,eStart,eStart,eStart)#28-2f 
 
 # To be accurate, the length of class 6 can be either 2 or 4. 
@@ -323,7 +323,7 @@ SJIS_cls = (
     4,4,4,4,4,0,0,0)  # f8 - ff 
 
 SJIS_st = (
-    eError,eStart,eStart,     3,eError,eError,eError,eError,#00-07 
+    eError,eStart,eStart, 3,eError,eError,eError,eError,#00-07 
     eError,eError,eError,eError,eItsMe,eItsMe,eItsMe,eItsMe,#08-0f 
     eItsMe,eItsMe,eError,eError,eStart,eStart,eStart,eStart)#10-17 
 
@@ -371,14 +371,14 @@ UCS2BE_cls = (
     0,0,0,0,0,0,0,0,  # f0 - f7 
     0,0,0,0,0,0,4,5)  # f8 - ff 
 
-UCS2BE_st  = (
-          5,     7,     7,eError,     4,     3,eError,eError,#00-07 
+UCS2BE_st = (
+          5, 7, 7,eError, 4, 3,eError,eError,#00-07 
      eError,eError,eError,eError,eItsMe,eItsMe,eItsMe,eItsMe,#08-0f 
-     eItsMe,eItsMe,     6,     6,     6,     6,eError,eError,#10-17 
-          6,     6,     6,     6,     6,eItsMe,     6,     6,#18-1f 
-          6,     6,     6,     6,     5,     7,     7,eError,#20-27 
-          5,     8,     6,     6,eError,     6,     6,     6,#28-2f 
-          6,     6,     6,     6,eError,eError,eStart,eStart)#30-37 
+     eItsMe,eItsMe, 6, 6, 6, 6,eError,eError,#10-17 
+          6, 6, 6, 6, 6,eItsMe, 6, 6,#18-1f 
+          6, 6, 6, 6, 5, 7, 7,eError,#20-27 
+          5, 8, 6, 6,eError, 6, 6, 6,#28-2f 
+          6, 6, 6, 6,eError,eError,eStart,eStart)#30-37 
 
 UCS2BECharLenTable = (2, 2, 2, 0, 2, 2)
 
@@ -425,13 +425,13 @@ UCS2LE_cls = (
     0,0,0,0,0,0,4,5)  # f8 - ff 
 
 UCS2LE_st = (
-          6,     6,     7,     6,     4,     3,eError,eError,#00-07 
+          6, 6, 7, 6, 4, 3,eError,eError,#00-07 
      eError,eError,eError,eError,eItsMe,eItsMe,eItsMe,eItsMe,#08-0f 
-     eItsMe,eItsMe,     5,     5,     5,eError,eItsMe,eError,#10-17 
-          5,     5,     5,eError,     5,eError,     6,     6,#18-1f 
-          7,     6,     8,     8,     5,     5,     5,eError,#20-27 
-          5,     5,     5,eError,eError,eError,     5,     5,#28-2f 
-          5,     5,     5,eError,     5,eError,eStart,eStart)#30-37 
+     eItsMe,eItsMe, 5, 5, 5,eError,eItsMe,eError,#10-17 
+          5, 5, 5,eError, 5,eError, 6, 6,#18-1f 
+          7, 6, 8, 8, 5, 5, 5,eError,#20-27 
+          5, 5, 5,eError,eError,eError, 5, 5,#28-2f 
+          5, 5, 5,eError, 5,eError,eStart,eStart)#30-37 
 
 UCS2LECharLenTable = (2, 2, 2, 2, 2, 2)
 
@@ -478,29 +478,29 @@ UTF8_cls = (
     12,13,13,13,14,15,0,0)   # f8 - ff 
 
 UTF8_st = (
-    eError,eStart,eError,eError,eError,eError,     12,   10,#00-07 
-         9,     11,     8,     7,     6,     5,     4,    3,#08-0f 
+    eError,eStart,eError,eError,eError,eError, 12, 10,#00-07 
+         9, 11, 8, 7, 6, 5, 4, 3,#08-0f 
     eError,eError,eError,eError,eError,eError,eError,eError,#10-17 
     eError,eError,eError,eError,eError,eError,eError,eError,#18-1f 
     eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,#20-27 
     eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,eItsMe,#28-2f 
-    eError,eError,     5,     5,     5,     5,eError,eError,#30-37 
+    eError,eError, 5, 5, 5, 5,eError,eError,#30-37 
     eError,eError,eError,eError,eError,eError,eError,eError,#38-3f 
-    eError,eError,eError,     5,     5,     5,eError,eError,#40-47 
+    eError,eError,eError, 5, 5, 5,eError,eError,#40-47 
     eError,eError,eError,eError,eError,eError,eError,eError,#48-4f 
-    eError,eError,     7,     7,     7,     7,eError,eError,#50-57 
+    eError,eError, 7, 7, 7, 7,eError,eError,#50-57 
     eError,eError,eError,eError,eError,eError,eError,eError,#58-5f 
-    eError,eError,eError,eError,     7,     7,eError,eError,#60-67 
+    eError,eError,eError,eError, 7, 7,eError,eError,#60-67 
     eError,eError,eError,eError,eError,eError,eError,eError,#68-6f 
-    eError,eError,     9,     9,     9,     9,eError,eError,#70-77 
+    eError,eError, 9, 9, 9, 9,eError,eError,#70-77 
     eError,eError,eError,eError,eError,eError,eError,eError,#78-7f 
-    eError,eError,eError,eError,eError,     9,eError,eError,#80-87 
+    eError,eError,eError,eError,eError, 9,eError,eError,#80-87 
     eError,eError,eError,eError,eError,eError,eError,eError,#88-8f 
-    eError,eError,    12,    12,    12,    12,eError,eError,#90-97 
+    eError,eError, 12, 12, 12, 12,eError,eError,#90-97 
     eError,eError,eError,eError,eError,eError,eError,eError,#98-9f 
-    eError,eError,eError,eError,eError,    12,eError,eError,#a0-a7 
+    eError,eError,eError,eError,eError, 12,eError,eError,#a0-a7 
     eError,eError,eError,eError,eError,eError,eError,eError,#a8-af 
-    eError,eError,    12,    12,    12,eError,eError,eError,#b0-b7 
+    eError,eError, 12, 12, 12,eError,eError,eError,#b0-b7 
     eError,eError,eError,eError,eError,eError,eError,eError,#b8-bf 
     eError,eError,eStart,eStart,eStart,eStart,eError,eError,#c0-c7 
     eError,eError,eError,eError,eError,eError,eError,eError)#c8-cf 

@@ -263,7 +263,7 @@ class MP(Source):
 				"Genre": 4,
 				"CoverFilename": 5,
 			}
-		return  {
+		return {
 			"ServiceReference": 0,
 			"IsDirectory": 1,
 			"Root": 2,

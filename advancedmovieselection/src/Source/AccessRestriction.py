@@ -58,7 +58,7 @@ class AccessRestriction:
         try:
             meta_file = file_name.endswith(".ts") and file_name + ".meta" or file_name + ".ts.meta"  
             if not clear_access:
-                print "Set %s to %s"%(access, meta_file)
+                print "Set %s to %s" % (access, meta_file)
             else:
                 print "Clear VSR to", meta_file
             if os.path.exists(meta_file):

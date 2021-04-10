@@ -30,7 +30,7 @@ class Podcast(Plugin):
 	def getPageCallback(self, page):
 		movies = []
 		if page.__contains__("</title>"):
-			page = page[page.index("</title>")+8:]
+			page = page[page.index("</title>") + 8:]
 		reonecat = re.compile(r'<title>(.+?)</title>.+?<description>(.+?)</description>.+?<enclosure(.+?)/>.+?', re.DOTALL)
 		for title, description, info in reonecat.findall(page):
 			if title.startswith("<![CDATA["):
@@ -41,12 +41,12 @@ class Podcast(Plugin):
 			thumb = None
 			if info.__contains__('url="'):
 				idx = info.index('url="')
-				url = info[idx+5:]
+				url = info[idx + 5:]
 				idx = url.index('"')
 				url = url[:idx]
 			if description.__contains__('img src="'):
 				idx = description.index('img src="')
-				thumb = description[idx+9:]
+				thumb = description[idx + 9:]
 				idx = thumb.index('"')
 				thumb = thumb[:idx]
 			if url:

@@ -68,8 +68,8 @@ class EUCJPProber(MultiByteCharSetProber):
                     self._mContextAnalyzer.feed(self._mLastChar, charLen)
                     self._mDistributionAnalyzer.feed(self._mLastChar, charLen)
                 else:
-                    self._mContextAnalyzer.feed(aBuf[i-1:i+1], charLen)
-                    self._mDistributionAnalyzer.feed(aBuf[i-1:i+1], charLen)
+                    self._mContextAnalyzer.feed(aBuf[i - 1:i + 1], charLen)
+                    self._mDistributionAnalyzer.feed(aBuf[i - 1:i + 1], charLen)
                     
         self._mLastChar[0] = aBuf[aLen - 1]
         

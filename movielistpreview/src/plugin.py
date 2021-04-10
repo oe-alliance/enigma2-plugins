@@ -280,7 +280,7 @@ class PreviewCreator:
 	def grab(self, file):
 		if not self.Console:
 			self.Console = Console()
-		self.Console.ePopen('/usr/bin/grab -v -r 250 -l -j 100 "%s"'%file, self.grabDone)
+		self.Console.ePopen('/usr/bin/grab -v -r 250 -l -j 100 "%s"' % file, self.grabDone)
 
 	def grabDone(self, result, retval, extra_args):
 		if retval != 0:

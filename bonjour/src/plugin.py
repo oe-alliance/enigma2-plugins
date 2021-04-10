@@ -57,14 +57,14 @@ class BonjourScreen(Screen):
 		self["menuList"].setList(list)
 		
 	def __buildMenuEntry(self, service):
-		print "[Bonjour.__buildMenuEntry] service=%s" %service
+		print "[Bonjour.__buildMenuEntry] service=%s" % service
 		
-		file = "%s" %(service['file'])
-		name = "Name: %s" %(service['name'])
-		type = "Type: %s" %(service['type'].split('.')[0].replace('_',''))
-		prot = "Protocol: %s" %(service['type'].split('.')[1].replace('_',''))
-		port = "Port: %s" %(service['port'])
-		text = "Text: %s" %(service['text'])
+		file = "%s" % (service['file'])
+		name = "Name: %s" % (service['name'])
+		type = "Type: %s" % (service['type'].split('.')[0].replace('_',''))
+		prot = "Protocol: %s" % (service['type'].split('.')[1].replace('_',''))
+		port = "Port: %s" % (service['port'])
+		text = "Text: %s" % (service['text'])
 		
 		return [
 			service,
@@ -79,7 +79,7 @@ class BonjourScreen(Screen):
 def opencontrol(session):
 	bonjour.reloadConfig()
 	session.open(BonjourScreen, bonjour.services, bonjour.files)
-	print "[Bonjour.opencontrol] %s" %(bonjour.files)
+	print "[Bonjour.opencontrol] %s" % (bonjour.files)
 	#TODO GUI-Stuff
 
 	

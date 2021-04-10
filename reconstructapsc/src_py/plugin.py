@@ -17,7 +17,7 @@ def rApScFinishedMessage():
 			break
 	if finished:
 		tasks = '\n'.join(rApScTasks)
-		Notifications.AddNotification(MessageBox, _("Reconstruct AP/SC is finished !\n\n%s")%tasks, type=MessageBox.TYPE_INFO, timeout=30)
+		Notifications.AddNotification(MessageBox, _("Reconstruct AP/SC is finished !\n\n%s") % tasks, type=MessageBox.TYPE_INFO, timeout=30)
 	else:
 		rApScTimer.startLongTimer(10)
 
@@ -40,7 +40,7 @@ class ReconstructApSc(ChoiceBox):
 		else:
 			self.name = info.getName(self.service)
 		if self.offline is None:
-			tlist = [(_("Cannot reconstruct this item"),  "CALLFUNC", self.confirmed0),]
+			tlist = [(_("Cannot reconstruct this item"), "CALLFUNC", self.confirmed0),]
 		else:
 			tlist = [
 				(_("Don't reconstruct"), "CALLFUNC", self.confirmed0),
@@ -58,7 +58,7 @@ class ReconstructApSc(ChoiceBox):
 		if not rApScTimer.isActive():
 			rApScTimer.startLongTimer(10)
 			rApScTasks = []
-		rApScTasks.append(str(len(rApScTasks)+1) + '. ' + self.name)
+		rApScTasks.append(str(len(rApScTasks) + 1) + '. ' + self.name)
 		job = Task.Job(_("Reconstruct AP/SC"))
 		task = Task.PythonTask(job, self.name)
 		task.work = self.offline.reindex

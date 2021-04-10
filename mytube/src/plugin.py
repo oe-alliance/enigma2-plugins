@@ -183,7 +183,7 @@ class downloadTask(Task):
 
 	def http_progress(self, recvbytes, totalbytes):
 		#print "[http_progress] recvbytes=%d, totalbytes=%d" % (recvbytes, totalbytes)
-		self.progress = int(self.end*recvbytes/float(totalbytes))
+		self.progress = int(self.end * recvbytes / float(totalbytes))
 
 	def http_finished(self, string=""):
 		print "[http_finished]" + str(string)
@@ -607,12 +607,12 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					myentry = current[0]
 					if myentry:
 						myurl = myentry.getVideoUrl()
-						filename = str(config.plugins.mytube.general.videodir.value)+ str(myentry.getTitle()) + '.mp4'
+						filename = str(config.plugins.mytube.general.videodir.value) + str(myentry.getTitle()) + '.mp4'
 						job_manager.AddJob(downloadJob(myurl,filename, str(myentry.getTitle())[:30]))
 		elif answer == "downview":
 			self.tasklist = []
 			for job in job_manager.getPendingJobs():
-				self.tasklist.append((job,job.name,job.getStatustext(),int(100*job.progress/float(job.end)),str(100*job.progress/float(job.end)) + "%"))
+				self.tasklist.append((job,job.name,job.getStatustext(),int(100 * job.progress / float(job.end)),str(100 * job.progress / float(job.end)) + "%"))
 			self.session.open(MyTubeTasksScreen, self.skin_path, self.tasklist)
 		elif answer == None:
 			self.ScreenClosed()
@@ -805,7 +805,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		elif self.currList == "feedlist":
 			print self[self.currList].count()
 			print self[self.currList].index
-			if self[self.currList].index == self[self.currList].count()-1 and myTubeService.getNextFeedEntriesURL() is not None:
+			if self[self.currList].index == self[self.currList].count() - 1 and myTubeService.getNextFeedEntriesURL() is not None:
 				# load new feeds on last selected item
 				if config.plugins.mytube.general.AutoLoadFeeds.value is False:
 					self.session.openWithCallback(self.getNextEntries, MessageBox, _("Do you want to see more entries?"))
@@ -1031,7 +1031,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 
 	def getRelatedVideos(self, myentry):
 		if myentry:
-			myurl =  myentry.getRelatedVideos()
+			myurl = myentry.getRelatedVideos()
 			print "RELATEDURL--->",myurl
 			if myurl is not None:
 				self.appendEntries = False
@@ -1039,7 +1039,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 
 	def getResponseVideos(self, myentry):
 		if myentry:
-			myurl =  myentry.getResponseVideos()
+			myurl = myentry.getResponseVideos()
 			print "RESPONSEURL--->",myurl
 			if myurl is not None:
 				self.appendEntries = False
@@ -1047,7 +1047,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 
 	def getUserVideos(self, myentry):
 		if myentry:
-			myurl =  myentry.getUserVideos()
+			myurl = myentry.getUserVideos()
 			print "RESPONSEURL--->",myurl
 			if myurl is not None:
 				self.appendEntries = False
@@ -1133,7 +1133,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self.screenshotList = []
 		self.maxentries = 0
 		self.mytubeentries = myTubeService.getEntries()
-		self.maxentries = len(self.mytubeentries)-1
+		self.maxentries = len(self.mytubeentries) - 1
 		if self.mytubeentries and len(self.mytubeentries):
 			if self.appendEntries == False:
 				self.videolist = []
@@ -1278,7 +1278,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		for entry in self.screenshotList:
 			thumbnailUrl = entry[1]
 			tubeid = entry[0]
-			thumbnailFile = "/tmp/"+str(tubeid)+".jpg"
+			thumbnailFile = "/tmp/" + str(tubeid) + ".jpg"
 			if self.Details.has_key(tubeid):
 				if self.Details[tubeid]["thumbnail"] is None:
 					if thumbnailUrl is not None:
@@ -1303,7 +1303,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		if failed:
 			thumbnailFile = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MyTube/plugin.png")
 		else:
-			thumbnailFile = "/tmp/"+str(tubeid)+".jpg"
+			thumbnailFile = "/tmp/" + str(tubeid) + ".jpg"
 		sc = AVSwitch().getFramebufferScale()
 		if (os_path.exists(thumbnailFile) == True):
 			self.picloads[tubeid] = ePicLoad()
@@ -1317,7 +1317,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 	def finish_decode(self,tubeid,info):
 		print "thumbnail finish_decode:", tubeid,info
 		ptr = self.picloads[tubeid].getData()
-		thumbnailFile = "/tmp/"+str(tubeid)+".jpg"
+		thumbnailFile = "/tmp/" + str(tubeid) + ".jpg"
 		if ptr != None:
 			if self.Details.has_key(tubeid):
 				self.Details[tubeid]["thumbnail"] = ptr
@@ -1411,8 +1411,8 @@ class MyTubeVideoInfoScreen(Screen):
 			"back": self.close,
 			"red": self.close,
 			"up": self.pageUp,
-			"down":	self.pageDown,
-			"left":	self.pageUp,
+			"down": self.pageDown,
+			"left": self.pageUp,
 			"right": self.pageDown,
 		}, -2)
 
@@ -1480,7 +1480,7 @@ class MyTubeVideoInfoScreen(Screen):
 		self.maxentries = 0
 		self.picloads = {}
 		self.mythumbubeentries = self.videoinfo["Thumbnails"]
-		self.maxentries = len(self.mythumbubeentries)-1
+		self.maxentries = len(self.mythumbubeentries) - 1
 		if self.mythumbubeentries and len(self.mythumbubeentries):
 			currindex = 0
 			for entry in self.mythumbubeentries:
@@ -1493,7 +1493,7 @@ class MyTubeVideoInfoScreen(Screen):
 				thumbnailUrl = entry
 				if thumbnailUrl is not None:
 					client.downloadPage(thumbnailUrl,thumbnailFile).addCallback(self.fetchFinished,currindex,ThumbID).addErrback(self.fetchFailed,currindex,ThumbID)
-				currindex +=1
+				currindex += 1
 		else:
 			pass
 
@@ -1513,7 +1513,7 @@ class MyTubeVideoInfoScreen(Screen):
 				self.index = index
 				thumbnailFile = entry[2]
 				if (os_path.exists(thumbnailFile) == True):
-					print "[decodePic] DECODING THUMBNAIL for INDEX:"+  str(self.index) + "and file: " + thumbnailFile
+					print "[decodePic] DECODING THUMBNAIL for INDEX:" + str(self.index) + "and file: " + thumbnailFile
 					self.picloads[index].setPara((self["thumbnail"].instance.size().width(), self["thumbnail"].instance.size().height(), sc[0], sc[1], False, 1, "#00000000"))
 					self.picloads[index].startDecode(thumbnailFile)
 				else:
@@ -1589,8 +1589,8 @@ class MyTubeVideoHelpScreen(Screen):
 			"back": self.close,
 			"red": self.close,
 			"up": self.pageUp,
-			"down":	self.pageDown,
-			"left":	self.pageUp,
+			"down": self.pageDown,
+			"left": self.pageUp,
 			"right": self.pageDown,
 		}, -2)
 

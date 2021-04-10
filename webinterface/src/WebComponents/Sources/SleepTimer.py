@@ -20,7 +20,7 @@ class SleepTimer(Source):
 		self.res = self.setSleeptimer(cmd)
 
 	def setSleeptimer(self, cmd):
-		print "[WebComponents.SleepTimer].setSleeptimer, cmd=%s" %cmd
+		print "[WebComponents.SleepTimer].setSleeptimer, cmd=%s" % cmd
 
 		from Screens.Standby import inStandby
 
@@ -49,7 +49,7 @@ class SleepTimer(Source):
 							config.SleepTimer.defaulttime.value,
 							config.SleepTimer.action.value,
 							config.SleepTimer.ask.value,
-							_("ERROR: Obligatory parameter 'enabled' [True,False] has unspecified value '%s'") %cmd['enabled'])
+							_("ERROR: Obligatory parameter 'enabled' [True,False] has unspecified value '%s'") % cmd['enabled'])
 
 				if cmd['time'] is None:
 					if enabled:
@@ -87,7 +87,7 @@ class SleepTimer(Source):
 					text = _("Sleeptimer has been disabled")
 				else:
 					self.session.nav.SleepTimer.setSleepTime(time)
-					self.session.open(MessageBox, _("The sleep timer has been activated for %s minutes.") %time, MessageBox.TYPE_INFO)
+					self.session.open(MessageBox, _("The sleep timer has been activated for %s minutes.") % time, MessageBox.TYPE_INFO)
 					text = _("Sleeptimer set to %s minutes") % (time,)
 
 				return (self.session.nav.SleepTimer.isActive(),
@@ -101,7 +101,7 @@ class SleepTimer(Source):
 						config.SleepTimer.defaulttime.value,
 						config.SleepTimer.action.value,
 						config.SleepTimer.ask.value,
-						_("ERROR: Obligatory parameter 'cmd' [get,set] has unspecified value '%s'") %cmd['cmd'])
+						_("ERROR: Obligatory parameter 'cmd' [get,set] has unspecified value '%s'") % cmd['cmd'])
 		else:
 			return (self.session.nav.SleepTimer.isActive(),
 					config.SleepTimer.defaulttime.value,

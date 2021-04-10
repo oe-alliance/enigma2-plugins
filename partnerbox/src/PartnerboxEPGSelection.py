@@ -26,7 +26,7 @@ from Components.EpgList import EPG_TYPE_SINGLE, EPG_TYPE_SIMILAR, EPG_TYPE_MULTI
 from Screens.ChoiceBox import ChoiceBox
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists
-from PartnerboxFunctions import  SetPartnerboxTimerlist, isInTimerList, isInRepeatTimer, sendPartnerBoxWebCommand, FillE1TimerList, FillE2TimerList
+from PartnerboxFunctions import SetPartnerboxTimerlist, isInTimerList, isInRepeatTimer, sendPartnerBoxWebCommand, FillE1TimerList, FillE2TimerList
 import PartnerboxFunctions as partnerboxfunctions
 from enigma import eServiceReference, eServiceCenter
 
@@ -355,9 +355,9 @@ def DeleteTimerConfirmed(self, timerentry, answer):
 			http = "http://%s:%d" % (ip,port)
 			if int(self.partnerboxentry.enigma.value) == 0:
 				refstr = ':'.join(str(timerentry.servicereference).split(':')[:11])
-				sCommand = http + "/web/timerdelete?sRef=" + refstr + "&begin=" + ("%s"%(timerentry.timebegin)) + "&end=" +("%s"%(timerentry.timeend))
+				sCommand = http + "/web/timerdelete?sRef=" + refstr + "&begin=" + ("%s" % (timerentry.timebegin)) + "&end=" + ("%s" % (timerentry.timeend))
 			else:
-				sCommand = http + "/deleteTimerEvent?ref=" + timerentry.servicereference + "&start=" + ("%s"%(timerentry.timebegin)) + "&type=" +("%s"%(timerentry.type)) + "&force=yes"
+				sCommand = http + "/deleteTimerEvent?ref=" + timerentry.servicereference + "&start=" + ("%s" % (timerentry.timebegin)) + "&type=" + ("%s" % (timerentry.type)) + "&force=yes"
 			sendPartnerBoxWebCommand(sCommand, None,3, "root", self.partnerboxentry.password.value).addCallback(self.DeleteTimerCallback).addErrback(DeleteTimerCallbackError)
 	except:
 		pass

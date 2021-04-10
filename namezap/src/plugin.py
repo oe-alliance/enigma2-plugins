@@ -58,7 +58,7 @@ class NameZap(NumberZap):
 				serviceIterator = servicelist.getNext()
 				if not serviceIterator.valid(): #check end of list
 					break
-				playable = not (serviceIterator.flags & (eServiceReference.isMarker|eServiceReference.isDirectory))
+				playable = not (serviceIterator.flags & (eServiceReference.isMarker | eServiceReference.isDirectory))
 				if playable:
 					num -= 1
 			if not num: #found service with searched number ?

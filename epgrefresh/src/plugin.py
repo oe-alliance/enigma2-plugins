@@ -180,8 +180,8 @@ def getNextWakeup():
 		return begin
 
 	# otherwise add 1 day
-	setConfigWakeupTime(begin+86400)
-	return begin+86400
+	setConfigWakeupTime(begin + 86400)
+	return begin + 86400
 
 def setConfigWakeupTime(value):
 	config.plugins.epgrefresh.wakeup_time.value = value
@@ -236,7 +236,7 @@ def eventinfo(session, servicelist, **kwargs):
 	# strip all after last :
 	pos = sref.rfind(':')
 	if pos != -1:
-		sref = sref[:pos+1]
+		sref = sref[:pos + 1]
 
 	epgrefresh.services[0].add(EPGRefreshService(str(sref), None))
 
@@ -249,7 +249,7 @@ extSetupDescriptor = PluginDescriptor(_("EPG-Refresh_SetUp"), description=_("Aut
 extRunDescriptor = PluginDescriptor(_("EPG-Refresh_Refresh now"), description=_("Start EPGrefresh immediately"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=forceRefresh, needsRestart=False)
 extStopDescriptor = PluginDescriptor(_("EPG-Refresh_Stop Refresh"), description=_("Stop Running EPG-refresh"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=stopRunningRefresh, needsRestart=False)
 extPendingServDescriptor = PluginDescriptor(_("EPG-Refresh_Pending Services"), description=_("Show the pending Services for refresh"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=showPendingServices, needsRestart=False)
-extPluginDescriptor = PluginDescriptor(	name=_("EPGRefresh"), description=_("Automatically refresh EPG"), 	where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main, icon="EPGRefresh.png", needsRestart=False)
+extPluginDescriptor = PluginDescriptor(	name=_("EPGRefresh"), description=_("Automatically refresh EPG"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main, icon="EPGRefresh.png", needsRestart=False)
 
 def AdjustExtensionsmenu(enable, PlugDescriptor):
 	if enable:

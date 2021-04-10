@@ -26,7 +26,7 @@ import urllib2
 
 MAIN_PAGE = "http://www.ardmediathek.de"
 
-PNG_PATH = resolveFilename(SCOPE_PLUGINS)+"/Extensions/ARDMediathek/"
+PNG_PATH = resolveFilename(SCOPE_PLUGINS) + "/Extensions/ARDMediathek/"
 
 try:
 	from LT.LTStreamPlayer import streamplayer
@@ -272,7 +272,7 @@ class ARDMediathek(Screen):
 				<ePixmap pixmap="skin_default/buttons/key_menu.png" position="70,520" size="35,25" transparent="1" alphatest="on" />
 				<widget name="pageNavigation" position="260,520" size="380,400" halign="right" font="Regular;20" backgroundColor="#2666ad" foregroundColor="#ffffff" />
 				<widget name="serverName" position="120,520" size="250,20" font="Regular;20" backgroundColor="#2666ad" foregroundColor="#ffffff" />
-			</screen>""" % (PNG_PATH+"background.png")
+			</screen>""" % (PNG_PATH + "background.png")
 		
 		Screen.__init__(self, session)
 		

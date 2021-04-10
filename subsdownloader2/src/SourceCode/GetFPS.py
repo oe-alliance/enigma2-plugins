@@ -35,7 +35,7 @@ class GetFPS(object):
         suma = 0x00
         mask = 0x01
         while not (suma & mask):
-            suma =  (suma << 8) + ord(self.file.read(1))
+            suma = (suma << 8) + ord(self.file.read(1))
             if (mask == 0x01) and not (suma & bits):
                 raise Exception('Error: MKV stream is broken')
             mask <<= 7
@@ -58,4 +58,4 @@ class GetFPS(object):
 #Segment,Tracks,TrackEntry,TrackType
                         self.file.seek(length,1)
 
-        return (1000000000/ float(struct.unpack('>I', self.file.read(4))[0]))
+        return (1000000000 / float(struct.unpack('>I', self.file.read(4))[0]))

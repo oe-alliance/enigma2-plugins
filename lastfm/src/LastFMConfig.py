@@ -23,7 +23,7 @@ class LastFMConfigScreen(ConfigListScreen,Screen):
         <ePixmap pixmap="skin_default/buttons/red.png" position="10,430" zPosition="1" size="140,40" transparent="1" alphatest="on" />
         <ePixmap pixmap="skin_default/buttons/green.png" position="150,430" zPosition="1" size="140,40" transparent="1" alphatest="on" />
 
-        </screen>""" %(
+        </screen>""" % (
             config.plugins.LastFM.name.value + " " + _("Setup")  # title
         ) 
 			

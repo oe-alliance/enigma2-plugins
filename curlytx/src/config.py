@@ -8,7 +8,7 @@ from Components.config import config, ConfigYesNo, ConfigSelection, ConfigNumber
 def createPage():
     """ Create and return a configuration page object """
     s = ConfigSubsection()
-    s.uri   = ConfigText(default="http://", fixed_size=False)
+    s.uri = ConfigText(default="http://", fixed_size=False)
     s.title = ConfigText(
         default="Page #" + str(len(config.plugins.CurlyTx.pages) + 1),
         fixed_size=False

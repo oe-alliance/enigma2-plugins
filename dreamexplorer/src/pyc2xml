@@ -41,7 +41,7 @@ disassembler is already in the 'dis'-module.
 When assembling, all XML attributes are ignored, these attributes are only
 inserted by the disassembler to make the XML more readable.
 """
-__author__  = 'Ilan Schnell <ilanschnell@gmail.com>'
+__author__ = 'Ilan Schnell <ilanschnell@gmail.com>'
 __version__ = '0.2'
 
 import dis
@@ -67,7 +67,7 @@ def indent(elem, level=0):
         if not elem.text or not elem.text.strip():
             elem.text = i + XMLindentation
         for e in elem:
-            indent(e, level+1)
+            indent(e, level + 1)
             if not e.tail or not e.tail.strip():
                 e.tail = i + XMLindentation
         if not e.tail or not e.tail.strip():
@@ -130,7 +130,7 @@ def elem_code(obj, n=None):
             
             elif name == 'code':
                 caelem.text = ('[%s[\n' % magic) + disassemble(obj) + \
-                              (16*' '+']%s]' % magic)
+                              (16 * ' ' + ']%s]' % magic)
             else:
                 raise 'Attribute %r unknown for code object' % tag
 
@@ -235,7 +235,7 @@ def code_elem(elem):
         args = '''argcount nlocals stacksize flags code consts names
                   varnames filename name firstlineno lnotab'''.split()
         
-        return new.code(*[code_elem(elem.find('co_'+arg)) for arg in args])
+        return new.code(*[code_elem(elem.find('co_' + arg)) for arg in args])
     
     elif elem.tag.startswith('co_'):
         text = elem.text

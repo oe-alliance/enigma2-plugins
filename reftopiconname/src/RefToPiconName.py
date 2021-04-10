@@ -33,7 +33,7 @@ class RefToPiconName(Converter, object):
 		ref = self.source.service
 		if ref is not None:
 			#bouquet or marker
-			if ref.flags & (eServiceReference.isDirectory|eServiceReference.isMarker):
+			if ref.flags & (eServiceReference.isDirectory | eServiceReference.isMarker):
 				info = eServiceCenter.getInstance().info(ref)
 				if info:
 					return info.getName(ref).replace(" ","_")

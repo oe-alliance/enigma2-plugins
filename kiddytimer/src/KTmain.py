@@ -47,7 +47,7 @@ class KiddyTimerScreen(Screen):
         self["TimerTransparentText"] = Label(_("01:00"))
 
     def renderScreen(self):
-        self["TimerSlider"].setValue(int(kiddyTimer.remainingPercentage*100)) 
+        self["TimerSlider"].setValue(int(kiddyTimer.remainingPercentage * 100)) 
         self["TimerGraph"].setPixmapNum(kiddyTimer.curImg)
         self.sTimeLeft = KTglob.getTimeFromSeconds((kiddyTimer.remainingTime + 59), False) # Add 59 Seconds to show one minute if less than 1 minute left...
         self["TimerText"].setText(self.sTimeLeft)
@@ -212,7 +212,7 @@ class KiddyTimer():
         if (iPluginStart > iMonitorStart):
             iMonitorStart += 86400
 
-        iObserveTimerStep = (iMonitorStart - iPluginStart)*1000 + 1000
+        iObserveTimerStep = (iMonitorStart - iPluginStart) * 1000 + 1000
         print "[KiddyTimer] setting plugin idle for ms=", iObserveTimerStep
         self.observeTimer.start(iObserveTimerStep, False)
         
@@ -408,9 +408,9 @@ class KiddyTimer():
         elif answer[1] in [PARAM_DISABLETIMER,PARAM_STOPTIMER,PARAM_INCREASETIMER,PARAM_SETTIMER,PARAM_ENABLETIMERONCE,PARAM_RESETTIMER]:
             self.callbackParameter = answer[1]
             self.askForPIN()
-        elif  answer[1] == PARAM_STARTTIMER:
+        elif answer[1] == PARAM_STARTTIMER:
             self.startTimer()
-        elif  answer[1] == PARAM_ENABLETIMER: 
+        elif answer[1] == PARAM_ENABLETIMER: 
             self.toggleEnabledState(True)
         elif answer[1] == PARAM_DECREASETIMER:
             self.session.openWithCallback(self.modifySessionTime, MinuteInput)

@@ -70,7 +70,7 @@ class TagEditor(Screen):
         self.setCustomTitle(tags)
 
     def setCustomTitle(self, tags):
-        if  tags == []:
+        if tags == []:
             self.setTitle(_("Add Tag(s) for Recordings/Timer or AutoTimer"))
         else:
             try:

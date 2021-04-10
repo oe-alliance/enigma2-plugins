@@ -37,7 +37,7 @@ from MerlinEPGCenter import LIST_MODE_AUTOTIMER
 # base class for all epg tab classes
 class EpgBaseTab():
 	# instance of the parent (MerlinEPGCenter)
-	parentInstance	= None
+	parentInstance = None
 	
 	def __init__(self):
 		pass
@@ -230,8 +230,8 @@ class EpgSingleTab(EpgBaseTab):
 			
 			self.__currentBouquetIndex += direction
 			if self.__currentBouquetIndex < 0:
-				self.__currentBouquetIndex = numBouquets -1
-				self.serviceIndex = len(EpgCenterList.bouquetServices[self.__currentBouquetIndex]) -1
+				self.__currentBouquetIndex = numBouquets - 1
+				self.serviceIndex = len(EpgCenterList.bouquetServices[self.__currentBouquetIndex]) - 1
 			elif self.__currentBouquetIndex == numBouquets:
 				self.__currentBouquetIndex = 0
 				self.serviceIndex = 0
@@ -239,7 +239,7 @@ class EpgSingleTab(EpgBaseTab):
 				if direction == 1:
 					self.serviceIndex = 0
 				else:
-					self.serviceIndex = len(EpgCenterList.bouquetServices[self.__currentBouquetIndex]) -1
+					self.serviceIndex = len(EpgCenterList.bouquetServices[self.__currentBouquetIndex]) - 1
 					
 			EpgCenterList.currentBouquetIndex = self.__currentBouquetIndex
 			self.parentInstance.currentBouquetIndex = self.__currentBouquetIndex

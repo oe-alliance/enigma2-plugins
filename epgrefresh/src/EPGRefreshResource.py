@@ -91,9 +91,9 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 							# strip all after last :
 							pos = sref.rfind(':')
 							if pos != -1:
-								if sref[pos-1] == ':':
+								if sref[pos - 1] == ':':
 									pos -= 1
-								sref = sref[:pos+1]
+								sref = sref[:pos + 1]
 
 						epgservice = EPGRefreshService(sref, duration)
 						# assume service
@@ -163,9 +163,9 @@ class EPGRefreshPreviewServicesResource(resource.Resource):
 						# strip all after last :
 						pos = sref.rfind(':')
 						if pos != -1:
-							if sref[pos-1] == ':':
+							if sref[pos - 1] == ':':
 								pos -= 1
-							sref = sref[:pos+1]
+							sref = sref[:pos + 1]
 
 					epgservice = EPGRefreshService(sref, None)
 					if epgservice not in services:

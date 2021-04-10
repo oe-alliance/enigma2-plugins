@@ -66,12 +66,12 @@ class LocationsAndTags(Source):
 						createFolder = True
 						os.makedirs(dirname)
 					except OSError:
-						return (False, _("Path %s can not be created") %(dirname))
+						return (False, _("Path %s can not be created") % (dirname))
 			if not createFolder:
-				return (False, _("Path %s does not exist") %(dirname))
+				return (False, _("Path %s does not exist") % (dirname))
 		bookmarks = config.movielist.videodirs.value[:] or []
 		if dirname in bookmarks:
-			return (False, _("Location '%s' is already existing") %(dirname))
+			return (False, _("Location '%s' is already existing") % (dirname))
 		bookmarks.append(dirname)
 		config.movielist.videodirs.value = bookmarks
 		config.movielist.videodirs.save()
@@ -91,7 +91,7 @@ class LocationsAndTags(Source):
 			config.movielist.videodirs.save()
 			return (True, _("Location '%s' removed successfully") % (dirname))
 		else:
-			return (False, _("Location '%s' does not exist") %(dirname))
+			return (False, _("Location '%s' does not exist") % (dirname))
 
 	def getText(self):
 		self.handleCommand(None)

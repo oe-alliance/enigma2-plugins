@@ -68,9 +68,9 @@ import skin
 from . import _
 
 config.plugins.Partnerbox = ConfigSubsection()
-config.plugins.Partnerbox.showremotetvinextensionsmenu= ConfigYesNo(default=True)
-config.plugins.Partnerbox.showcurrentstreaminextensionsmenu= ConfigYesNo(default=True)
-config.plugins.Partnerbox.showremotetimerinextensionsmenu= ConfigYesNo(default=True)
+config.plugins.Partnerbox.showremotetvinextensionsmenu = ConfigYesNo(default=True)
+config.plugins.Partnerbox.showcurrentstreaminextensionsmenu = ConfigYesNo(default=True)
+config.plugins.Partnerbox.showremotetimerinextensionsmenu = ConfigYesNo(default=True)
 config.plugins.Partnerbox.enablepartnerboxintimerevent = ConfigYesNo(default=False)
 config.plugins.Partnerbox.enablepartnerboxepglist = ConfigYesNo(default=False)
 config.plugins.Partnerbox.showremaingepglist = ConfigYesNo(default=False)
@@ -152,7 +152,7 @@ def Plugins(**kwargs):
 	if config.plugins.Partnerbox.enablepartnerboxepglist.value:
 		list.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart_Partnerbox_EPGList))
 	if config.plugins.Partnerbox.enablepartnerboxeventinfomenu.value and not config.plugins.Partnerbox.enablepartnerboxeventinfocontextmenu.value:
-		list.append(PluginDescriptor(name=_("Partnerbox: RemoteTimer"), description=_("Manage timer for other dreamboxes in network"),  where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo))
+		list.append(PluginDescriptor(name=_("Partnerbox: RemoteTimer"), description=_("Manage timer for other dreamboxes in network"), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo))
 	if config.plugins.Partnerbox.enablepartnerboxeventinfocontextmenu.value and config.plugins.Partnerbox.enablepartnerboxeventinfomenu.value:
 		list.append(PluginDescriptor(name=_("Partnerbox: RemoteTimer"), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfoContextMenu))
 	list.append(PluginDescriptor(name=_("Partnerbox"), description=_("setup for partnerbox"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="Setup_Partnerbox.png", fnc=setup))
@@ -363,7 +363,7 @@ class RemoteTimer(Screen):
 			self.session.openWithCallback(self.RemoteTimerEntryFinished, RemoteTimerEntry,sel, self.Locations)
 		else:
 			text = _("Repeated Timer are not supported!")
-			self.session.open(MessageBox,text,  MessageBox.TYPE_INFO)
+			self.session.open(MessageBox,text, MessageBox.TYPE_INFO)
 
 	def RemoteTimerEntryFinished(self, answer):
 		if answer[0]:
@@ -371,8 +371,8 @@ class RemoteTimer(Screen):
 			self["timerlist"].instance.hide()
 			if self.enigma_type == 0:
 				refstr = ':'.join(str(entry.servicereference).split(':')[:11])
-				ref_old = "&channelOld=" + urllib.quote(refstr.decode('utf-8').encode('utf-8','ignore')) + "&beginOld=" + ("%s"%(self.oldstart)) + "&endOld=" + ("%s"%(self.oldend))  + "&deleteOldOnSave=1"
-				ref = urllib.quote(refstr.decode('utf-8').encode('utf-8','ignore')) + "&begin=" + ("%s"%(entry.timebegin)) + "&end=" + ("%s"%(entry.timeend))  + "&name=" + urllib.quote(entry.name) + "&description=" + urllib.quote(entry.description) + "&dirname=" + urllib.quote(entry.dirname) + "&eit=" + ("%s"%(entry.eventId)) + "&justplay=" + ("%s"%(entry.justplay)) + "&afterevent=" + ("%s"%(entry.afterevent))
+				ref_old = "&channelOld=" + urllib.quote(refstr.decode('utf-8').encode('utf-8','ignore')) + "&beginOld=" + ("%s" % (self.oldstart)) + "&endOld=" + ("%s" % (self.oldend)) + "&deleteOldOnSave=1"
+				ref = urllib.quote(refstr.decode('utf-8').encode('utf-8','ignore')) + "&begin=" + ("%s" % (entry.timebegin)) + "&end=" + ("%s" % (entry.timeend)) + "&name=" + urllib.quote(entry.name) + "&description=" + urllib.quote(entry.description) + "&dirname=" + urllib.quote(entry.dirname) + "&eit=" + ("%s" % (entry.eventId)) + "&justplay=" + ("%s" % (entry.justplay)) + "&afterevent=" + ("%s" % (entry.afterevent))
 				sCommand = self.http + "/web/timerchange?sRef=" + ref + ref_old
 				sendPartnerBoxWebCommand(sCommand, None,10, self.username, self.password).addCallback(self.deleteTimerCallback).addErrback(self.downloadError)
 			else:
@@ -384,10 +384,10 @@ class RemoteTimer(Screen):
 					action = ""
 				tstart = time.localtime(entry.timebegin)
 				tend = time.localtime(entry.timeend)
-				ref_time_start = "&sday=" + ("%s"%(tstart.tm_mday)) + "&smonth=" + ("%s"%(tstart.tm_mon)) + "&syear=" + ("%s"%(tstart.tm_year)) + "&shour=" + ("%s"%(tstart.tm_hour)) + "&smin=" + ("%s"%(tstart.tm_min))
-				ref_time_end = "&eday=" + ("%s"%(tend.tm_mday)) + "&emonth=" + ("%s"%(tend.tm_mon)) + "&eyear=" + ("%s"%(tend.tm_year)) + "&ehour=" + ("%s"%(tend.tm_hour)) + "&emin=" + ("%s"%(tend.tm_min))
-				ref_old = "&old_type=" + ("%s"%(self.oldtype)) + "&old_stime=" + ("%s"%(self.oldstart)) + "&force=yes"
-				ref = urllib.quote(entry.servicereference.decode('utf-8').encode('utf-8','ignore')) + "&descr=" + urllib.quote(entry.description) + "&channel=" + urllib.quote(entry.servicename) + "&after_event=" + ("%s"%(entry.afterevent)) + "&action=" + ("%s"%(action))
+				ref_time_start = "&sday=" + ("%s" % (tstart.tm_mday)) + "&smonth=" + ("%s" % (tstart.tm_mon)) + "&syear=" + ("%s" % (tstart.tm_year)) + "&shour=" + ("%s" % (tstart.tm_hour)) + "&smin=" + ("%s" % (tstart.tm_min))
+				ref_time_end = "&eday=" + ("%s" % (tend.tm_mday)) + "&emonth=" + ("%s" % (tend.tm_mon)) + "&eyear=" + ("%s" % (tend.tm_year)) + "&ehour=" + ("%s" % (tend.tm_hour)) + "&emin=" + ("%s" % (tend.tm_min))
+				ref_old = "&old_type=" + ("%s" % (self.oldtype)) + "&old_stime=" + ("%s" % (self.oldstart)) + "&force=yes"
+				ref = urllib.quote(entry.servicereference.decode('utf-8').encode('utf-8','ignore')) + "&descr=" + urllib.quote(entry.description) + "&channel=" + urllib.quote(entry.servicename) + "&after_event=" + ("%s" % (entry.afterevent)) + "&action=" + ("%s" % (action))
 				sCommand = self.http + "/changeTimerEvent?ref=" + ref + ref_old + ref_time_start + ref_time_end
 				sendPartnerBoxWebCommand(sCommand, None,10, self.username, self.password).addCallback(self.deleteTimerCallback).addErrback(self.downloadError)
 
@@ -430,9 +430,9 @@ class RemoteTimer(Screen):
 				return
 			if self.enigma_type == 0:
 				refstr = ':'.join(str(sel.servicereference).split(':')[:11])
-				sCommand = self.http + "/web/timerdelete?sRef=" + refstr + "&begin=" + ("%s"%(sel.timebegin)) + "&end=" +("%s"%(sel.timeend))
+				sCommand = self.http + "/web/timerdelete?sRef=" + refstr + "&begin=" + ("%s" % (sel.timebegin)) + "&end=" + ("%s" % (sel.timeend))
 			else:
-				sCommand = self.http + "/deleteTimerEvent?ref=" + sel.servicereference + "&start=" + ("%s"%(sel.timebegin)) + "&type=" +("%s"%(sel.type)) + "&force=yes"
+				sCommand = self.http + "/deleteTimerEvent?ref=" + sel.servicereference + "&start=" + ("%s" % (sel.timebegin)) + "&type=" + ("%s" % (sel.type)) + "&force=yes"
 			sendPartnerBoxWebCommand(sCommand, None, 4, self.username, self.password).addCallback(self.deleteTimerCallback).addErrback(self.deleteTimerError)
 
 	def deleteTimerCallback(self, callback=None):
@@ -474,7 +474,7 @@ class RemoteTimer(Screen):
 				return
 			if self.enigma_type == 0:
 				refstr = ':'.join(str(sel.servicereference).split(':')[:11])
-				sCommand = self.http + "/web/timertogglestatus?sRef=" + refstr + "&begin=" + ("%s"%(sel.timebegin)) + "&end=" +("%s"%(sel.timeend))
+				sCommand = self.http + "/web/timertogglestatus?sRef=" + refstr + "&begin=" + ("%s" % (sel.timebegin)) + "&end=" + ("%s" % (sel.timeend))
 				sendPartnerBoxWebCommand(sCommand, None, 3, self.username, self.password).addCallback(self.deleteTimerCallback).addErrback(self.deleteTimerError)
 		except:
 			pass
@@ -614,7 +614,7 @@ class RemoteTimerChannelList(Screen):
 				<widget name="channellist" position="0,40" zPosition="2" size="560,375" scrollbarMode="showOnDemand" />
 			</screen>"""
 
-	def __init__(self, session, E2Timerlist, ServiceReference, ServiceName, partnerboxentry, E1XMLString,  playeronly):
+	def __init__(self, session, E2Timerlist, ServiceReference, ServiceName, partnerboxentry, E1XMLString, playeronly):
 		self.session = session
 		Screen.__init__(self, session)
 		self.setTitle(_("Bouquet List"))
@@ -672,7 +672,7 @@ class RemoteTimerChannelList(Screen):
 			ChannelList = a.buildList(Channelref, True)
 			self["channellist"].buildList(ChannelList)
 			self["channellist"].instance.show()
-			if self.ChannelListCurrentIndex !=0:
+			if self.ChannelListCurrentIndex != 0:
 				sel = self["channellist"].moveSelectionTo(self.ChannelListCurrentIndex)
 				self.ChannelListCurrentIndex = 0
 		else:
@@ -780,7 +780,7 @@ class RemoteTimerChannelList(Screen):
 			self["key_blue"].setText("")
 			return
 		eventid = cur[0].eventid
-		if eventid ==0:
+		if eventid == 0:
 			self["key_green"].setText("")
 			self.key_green_choice = self.EMPTY
 			self["key_yellow"].setText("")
@@ -793,7 +793,7 @@ class RemoteTimerChannelList(Screen):
 
 	def ChannelListDownloadCallback(self, callback=None):
 		self.readXMLServiceList(callback)
-		if self.ChannelListCurrentIndex !=0:
+		if self.ChannelListCurrentIndex != 0:
 			sel = self["channellist"].moveSelectionTo(self.ChannelListCurrentIndex)
 			self.ChannelListCurrentIndex = 0
 		self["channellist"].instance.show()
@@ -810,7 +810,7 @@ class RemoteTimerChannelList(Screen):
 			sendPartnerBoxWebCommand(url, None,10, self.username, self.password).addCallback(self.ChannelListDownloadCallback).addErrback(self.ChannelListDownloadError)
 		else:
 			self.readXMLServiceListE1()
-			if self.ChannelListCurrentIndex !=0:
+			if self.ChannelListCurrentIndex != 0:
 				sel = self["channellist"].moveSelectionTo(self.ChannelListCurrentIndex)
 				self.ChannelListCurrentIndex = 0
 			self["channellist"].instance.show()
@@ -880,7 +880,7 @@ class RemoteTimerChannelList(Screen):
 			try:
 				eventduration = int(events.findtext("e2eventduration", 0))
 			except:
-				eventduration  = 0
+				eventduration = 0
 			try:
 				eventtitle = str(events.findtext("e2eventtitle", '').encode("utf-8", 'ignore'))
 			except:
@@ -919,7 +919,7 @@ class RemoteTimerChannelList(Screen):
 
 class RemotePlayer(Screen, InfoBarAudioSelection):
 	if HD:
-		skin="""
+		skin = """
 			<screen name="RemotePlayer" flags="wfNoBorder" position="283,102" size="720,576" title="Partnerbox - RemotePlayer" backgroundColor="#FFFFFFFF">
 				<ePixmap position="41,388" zPosition="-1" size="630,130" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Partnerbox/ExPlayer.png" alphatest="off" transparent="1"/>
 				<widget name="ServiceName" zPosition="1" position="50,404" size="610,59" valign="center" halign="center" font="Regular;21" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" />
@@ -927,7 +927,7 @@ class RemotePlayer(Screen, InfoBarAudioSelection):
 				<widget name="IP" zPosition="2" position="361,473" size="300,30" halign="right" font="Regular;16" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" transparent="1" />
 			</screen>"""
 	else:
-		skin="""
+		skin = """
 			<screen name="RemotePlayer" flags="wfNoBorder" position="3,30" size="720,576" title="Partnerbox - RemotePlayer" backgroundColor="#FFFFFFFF">
 				<ePixmap position="41,388" zPosition="-1" size="630,130" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Partnerbox/ExPlayer.png" alphatest="off" transparent="1"/>
 				<widget name="ServiceName" zPosition="1" position="50,404" size="610,59" valign="center" halign="center" font="Regular;21" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" />
@@ -1165,7 +1165,7 @@ class RemotePlayer(Screen, InfoBarAudioSelection):
 				try:
 					e2eventduration = int(events.findtext("e2eventduration", 0))
 				except:
-					e2eventduration  = 0
+					e2eventduration = 0
 				try:
 					e2eventtitle = str(events.findtext("e2eventtitle", '').encode("utf-8", 'ignore'))
 				except:
@@ -1184,7 +1184,7 @@ class RemotePlayer(Screen, InfoBarAudioSelection):
 				try:
 					e2eventduration = int(events.findtext("duration", 0))
 				except:
-					e2eventduration  = 0
+					e2eventduration = 0
 				try:
 					e2eventtitle = str(events.findtext("description", '').encode("utf-8", 'ignore'))
 				except:
@@ -1385,7 +1385,7 @@ class RemoteTimerEPGList(Screen):
 			try:
 				eventduration = int(events.findtext("duration", 0))
 			except:
-				eventduration  = 0
+				eventduration = 0
 			try:
 				eventtitle = str(events.findtext("description", '').decode("utf-8").encode("utf-8", 'ignore'))
 			except:
@@ -1417,7 +1417,7 @@ class RemoteTimerEPGList(Screen):
 			try:
 				eventduration = int(events.findtext("e2eventduration", 0))
 			except:
-				eventduration  = 0
+				eventduration = 0
 			try:
 				eventtitle = str(events.findtext("e2eventtitle", '').decode("utf-8").encode("utf-8", 'ignore'))
 			except:
@@ -1475,7 +1475,7 @@ class RemoteTimerEPGList(Screen):
 			dirname = "None"
 		else:
 			dirname = ""
-			type = PlaylistEntry.RecTimerEntry|PlaylistEntry.recDVR
+			type = PlaylistEntry.RecTimerEntry | PlaylistEntry.recDVR
 			description = cur[0].eventtitle
 		timerentry = E2Timer(servicereference=cur[0].servicereference, servicename=cur[0].servicename, name=cur[0].eventtitle, disabled=0, timebegin=cur[0].eventstart, timeend=cur[0].eventstart + cur[0].eventduration, duration=cur[0].eventduration, startprepare=0, state=0, repeated=0, justplay=0, eventId=cur_eventId, afterevent=3, dirname=dirname, description=description, type=type)
 		self.session.openWithCallback(self.RemoteTimerEntryFinished, RemoteTimerEntry, timerentry, self.Locations)
@@ -1487,7 +1487,7 @@ class RemoteTimerEPGList(Screen):
 			self["epglist"].instance.hide()
 			if self.enigma_type == 0:
 				refstr = ':'.join(str(entry.servicereference).split(':')[:11])
-				ref = urllib.quote(refstr.decode('utf-8').encode('utf-8','ignore')) + "&begin=" + ("%s"%(entry.timebegin)) + "&end=" + ("%s"%(entry.timeend))  + "&name=" + urllib.quote(entry.name) + "&description=" + urllib.quote(entry.description) + "&dirname=" + urllib.quote(entry.dirname) + "&eit=" + ("%s"%(entry.eventId)) +"&justplay=" + ("%s"%(entry.justplay)) + "&afterevent=" + ("%s"%(entry.afterevent))
+				ref = urllib.quote(refstr.decode('utf-8').encode('utf-8','ignore')) + "&begin=" + ("%s" % (entry.timebegin)) + "&end=" + ("%s" % (entry.timeend)) + "&name=" + urllib.quote(entry.name) + "&description=" + urllib.quote(entry.description) + "&dirname=" + urllib.quote(entry.dirname) + "&eit=" + ("%s" % (entry.eventId)) + "&justplay=" + ("%s" % (entry.justplay)) + "&afterevent=" + ("%s" % (entry.afterevent))
 				sCommand = self.http + "/web/timeradd?sRef=" + ref
 				sendPartnerBoxWebCommand(sCommand, None,10, self.username, self.password).addCallback(self.deleteTimerCallback).addErrback(self.EPGListDownloadError)
 			else:
@@ -1497,7 +1497,7 @@ class RemoteTimerEPGList(Screen):
 					action = "ngrab"
 				else:
 					action = ""
-				ref = urllib.quote(entry.servicereference.decode('utf-8').encode('utf-8','ignore')) + "&start=" + ("%s"%(entry.timebegin)) + "&duration=" + ("%s"%(entry.timeend - entry.timebegin))  + "&descr=" + urllib.quote(entry.description) + "&channel=" + urllib.quote(entry.servicename) + "&after_event=" + ("%s"%(entry.afterevent)) + "&action=" + ("%s"%(action))
+				ref = urllib.quote(entry.servicereference.decode('utf-8').encode('utf-8','ignore')) + "&start=" + ("%s" % (entry.timebegin)) + "&duration=" + ("%s" % (entry.timeend - entry.timebegin)) + "&descr=" + urllib.quote(entry.description) + "&channel=" + urllib.quote(entry.servicename) + "&after_event=" + ("%s" % (entry.afterevent)) + "&action=" + ("%s" % (action))
 				sCommand = self.http + "/addTimerEvent?ref=" + ref
 				sendPartnerBoxWebCommand(sCommand, None,10, self.username, self.password).addCallback(self.deleteTimerCallback).addErrback(self.EPGListDownloadError)
 
@@ -1525,9 +1525,9 @@ class RemoteTimerEPGList(Screen):
 				self["epglist"].instance.hide()
 				if self.enigma_type == 0:
 					refstr = ':'.join(str(timerentry.servicereference).split(':')[:11])
-					sCommand = self.http + "/web/timerdelete?sRef=" + refstr + "&begin=" + ("%s"%(timerentry.timebegin)) + "&end=" +("%s"%(timerentry.timeend))
+					sCommand = self.http + "/web/timerdelete?sRef=" + refstr + "&begin=" + ("%s" % (timerentry.timebegin)) + "&end=" + ("%s" % (timerentry.timeend))
 				else:
-					sCommand = self.http + "/deleteTimerEvent?ref=" + timerentry.servicereference + "&start=" + ("%s"%(timerentry.timebegin)) + "&type=" +("%s"%(timerentry.type)) + "&force=yes"
+					sCommand = self.http + "/deleteTimerEvent?ref=" + timerentry.servicereference + "&start=" + ("%s" % (timerentry.timebegin)) + "&type=" + ("%s" % (timerentry.type)) + "&force=yes"
 				sendPartnerBoxWebCommand(sCommand, None,3, self.username, self.password).addCallback(self.deleteTimerCallback).addErrback(self.EPGListDownloadError)
 
 	def deleteTimerCallback(self, callback=None):
@@ -1538,7 +1538,7 @@ class RemoteTimerEPGList(Screen):
 				msg = _("Timer event deleted successfully.")
 			else:
 				msg = callback
-			self.session.open(MessageBox,msg,  MessageBox.TYPE_INFO, timeout=3)
+			self.session.open(MessageBox,msg, MessageBox.TYPE_INFO, timeout=3)
 			url = self.http + "/xml/timers"
 		sendPartnerBoxWebCommand(url, None,10, self.username, self.password).addCallback(self.readXML).addErrback(self.EPGListDownloadError)
 
@@ -1588,9 +1588,9 @@ class E2TimerMenu(GUIComponent, object):
 		width = self.l.getItemSize().width()
 		res = [timer]
 		x, y, h = skin.parameters.get("PartnerBoxTimerServicename",(0, 0, 30))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.servicename + '      ' + self.getOrbitalPos(timer.servicereference)))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, timer.servicename + '      ' + self.getOrbitalPos(timer.servicereference)))
 		x, y, h = skin.parameters.get("PartnerBoxTimerName",(0, 30, 20))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.name))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, timer.name))
 		repeatedtext = ""
 		days = [_("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat"), _("Sun")]
 		icon = None
@@ -1609,14 +1609,14 @@ class E2TimerMenu(GUIComponent, object):
 				x1, y1, w1, h1 = skin.parameters.get("PartnerBoxE2TimerIconRepeat",(510, 30, 20, 20))
 				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, x1, y1, w1, h1, self.iconRepeat))
 			if timer.justplay:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width-w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + ((" %s "+ _("(ZAP)")) % (FuzzyTime(timer.timebegin)[1]))))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width - w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, repeatedtext + ((" %s " + _("(ZAP)")) % (FuzzyTime(timer.timebegin)[1]))))
 			else:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width-w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + ((" %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin)[1], FuzzyTime(timer.timeend)[1], (timer.timeend - timer.timebegin) / 60))))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width - w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, repeatedtext + ((" %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin)[1], FuzzyTime(timer.timeend)[1], (timer.timeend - timer.timebegin) / 60))))
 		else:
 			if timer.justplay:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width-w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + (("%s, %s " + _("(ZAP)")) % (FuzzyTime(timer.timebegin)))))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width - w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, repeatedtext + (("%s, %s " + _("(ZAP)")) % (FuzzyTime(timer.timebegin)))))
 			else:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width-w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + (("%s, %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin) + FuzzyTime(timer.timeend)[1:] + ((timer.timeend - timer.timebegin) / 60,)))))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width - w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, repeatedtext + (("%s, %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin) + FuzzyTime(timer.timeend)[1:] + ((timer.timeend - timer.timebegin) / 60,)))))
 
 		if timer.state == TimerEntry.StateWaiting:
 			state = _("waiting")
@@ -1643,7 +1643,7 @@ class E2TimerMenu(GUIComponent, object):
 			icon = self.iconDisabled
 
 		x, y, w, h = skin.parameters.get("PartnerBoxE2TimerState",(150, 50, 150, 20))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, width-x, y, w, h, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, state))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, width - x, y, w, h, 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, state))
 
 		#if timer.disabled:
 		#	png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/redx.png"))
@@ -1659,9 +1659,9 @@ class E2TimerMenu(GUIComponent, object):
 		width = self.l.getItemSize().width()
 		res = [timer]
 		x, y, h = skin.parameters.get("PartnerBoxTimerServicename",(0, 0, 30))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.servicename))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, timer.servicename))
 		x, y, h = skin.parameters.get("PartnerBoxTimerName",(0, 30, 20))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.description))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, timer.description))
 
 		repeatedtext = ""
 		days = [_("Sun"), _("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat")]
@@ -1677,14 +1677,14 @@ class E2TimerMenu(GUIComponent, object):
 					count += 1
 				mask *= 2
 			if timer.type & PlaylistEntry.SwitchTimerEntry:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width-w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + ((" %s "+ _("(ZAP)")) % (FuzzyTime(timer.timebegin)[1]))))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width - w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, repeatedtext + ((" %s " + _("(ZAP)")) % (FuzzyTime(timer.timebegin)[1]))))
 			elif timer.type & PlaylistEntry.RecTimerEntry:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width-w, h, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + ((" %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin)[1], FuzzyTime(timer.timeend)[1], (timer.timeend - timer.timebegin) / 60))))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width - w, h, 20, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, repeatedtext + ((" %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin)[1], FuzzyTime(timer.timeend)[1], (timer.timeend - timer.timebegin) / 60))))
 		else:
 			if timer.type & PlaylistEntry.SwitchTimerEntry:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT,  x, y, width-w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + (("%s, %s ... %s (%d " + _("mins") + ") ") % (FuzzyTime(timer.timebegin) + FuzzyTime(timer.timeend)[1:] + ((timer.timeend - timer.timebegin) / 60,))) + _("(ZAP)")))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width - w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, repeatedtext + (("%s, %s ... %s (%d " + _("mins") + ") ") % (FuzzyTime(timer.timebegin) + FuzzyTime(timer.timeend)[1:] + ((timer.timeend - timer.timebegin) / 60,))) + _("(ZAP)")))
 			elif timer.type & PlaylistEntry.RecTimerEntry:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT,  x, y, width-w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + (("%s, %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin) + FuzzyTime(timer.timeend)[1:] + ((timer.timeend - timer.timebegin) / 60,)))))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width - w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, repeatedtext + (("%s, %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin) + FuzzyTime(timer.timeend)[1:] + ((timer.timeend - timer.timebegin) / 60,)))))
 
 		if timer.type & PlaylistEntry.stateWaiting:
 			state = _("waiting")
@@ -1709,7 +1709,7 @@ class E2TimerMenu(GUIComponent, object):
 		else:
 			state = _("<unknown>")
 		x, y, w, h = skin.parameters.get("PartnerBoxE1TimerState",(170, 50, 170, 20))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, width-x, y, w, h, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, state))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, width - x, y, w, h, 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, state))
 		return res
 
 	def getOrbitalPos(self, ref):
@@ -1775,12 +1775,12 @@ class E2BouquetList(MenuList):
 		instance.setItemHeight(self.ItemHeight)
 
 	def buildList(self,listnew):
-		self.list=[]
+		self.list = []
 		width = self.l.getItemSize().width()
 		for bouquets in listnew:
 			res = [bouquets]
 			x, y, h = skin.parameters.get("PartnerBoxBouquetListName",(0, 0, 30))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, bouquets.servicename))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, bouquets.servicename))
 			self.list.append(res)
 		self.l.setList(self.list)
 		self.moveToIndex(0)
@@ -1820,7 +1820,7 @@ class E2ChannelList(MenuList):
 		 self.instance.moveSelection(how)
 
 	def buildList(self,listnew):
-		self.list=[]
+		self.list = []
 		width = self.l.getItemSize().width()
 		for epgdata in listnew:
 			res = [epgdata]
@@ -1828,9 +1828,9 @@ class E2ChannelList(MenuList):
 			if event_text == "None":
 				event_text = ''
 			x, y, h = skin.parameters.get("PartnerBoxChannelListName",(0, 0, 30))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, epgdata.servicename))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, epgdata.servicename))
 			x, y, h = skin.parameters.get("PartnerBoxChannelListTitle",(0, 30, 20))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, event_text))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, event_text))
 			if epgdata.eventstart != 0:
 				endtime = int(epgdata.eventstart + epgdata.eventduration)
 				prefix = "+"
@@ -1839,7 +1839,7 @@ class E2ChannelList(MenuList):
 					prefix = ""
 				Time = _("%s%d min") % (prefix, remaining)
 				x, y, w, h = skin.parameters.get("PartnerBoxChannelListTime",(0, 50, 150, 20))
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width-w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, Time + '  ' + (("%s ... %s (%d " + _("mins") + ")") % (FuzzyTime(epgdata.eventstart)[1], FuzzyTime(endtime)[1], (endtime - epgdata.eventstart) / 60))))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width - w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, Time + '  ' + (("%s ... %s (%d " + _("mins") + ")") % (FuzzyTime(epgdata.eventstart)[1], FuzzyTime(endtime)[1], (endtime - epgdata.eventstart) / 60))))
 			self.list.append(res)
 		self.l.setList(self.list)
 		self.moveToIndex(0)
@@ -1899,20 +1899,20 @@ class E2EPGList(MenuList):
 				x()
 
 	def buildList(self,listnew, timerlist):
-		self.list=[]
+		self.list = []
 		self.timer_list = timerlist
 		for epgdata in listnew:
 			res = [epgdata]
-			rec=epgdata.eventstart and (self.isInTimer(epgdata.eventstart, epgdata.eventduration, epgdata.servicereference))
+			rec = epgdata.eventstart and (self.isInTimer(epgdata.eventstart, epgdata.eventduration, epgdata.servicereference))
 			esize = self.l.getItemSize()
 			width = esize.width()
 			height = esize.height()
-			r1 = Rect(0, 0, width/20*2-10, height)
-			r2 = Rect(width/20*2, 0, width/20*5-15, height)
-			r3 = Rect(width/20*7, 0, width/20*13, height)
+			r1 = Rect(0, 0, width / 20 * 2 - 10, height)
+			r2 = Rect(width / 20 * 2, 0, width / 20 * 5 - 15, height)
+			r3 = Rect(width / 20 * 7, 0, width / 20 * 13, height)
 			t = localtime(epgdata.eventstart)
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, self.days[t[6]]))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 0, RT_HALIGN_RIGHT, "%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4])))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 0, RT_HALIGN_RIGHT, "%02d.%02d, %02d:%02d" % (t[2],t[1],t[3],t[4])))
 			if rec:
 				clock_pic = self.getClockPixmap(epgdata.servicereference, epgdata.eventstart, epgdata.eventduration, epgdata.eventid)
 				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left(), r3.top() + 2, 21, 21, clock_pic))
@@ -2128,8 +2128,8 @@ class RemoteTimerEventView(Screen):
 		self["epg_description"].setText(text)
 		endtime = int(self.epgdata.eventstart + self.epgdata.eventduration)
 		t = localtime(self.epgdata.eventstart)
-		datetime = ("%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
-		duration = (" (%d " + _("mins")+")") % ((self.epgdata.eventduration) / 60)
+		datetime = ("%02d.%02d, %02d:%02d" % (t[2],t[1],t[3],t[4]))
+		duration = (" (%d " + _("mins") + ")") % ((self.epgdata.eventduration) / 60)
 		self["datetime"].setText(datetime)
 		self["duration"].setText(duration)
 		self["key_red"].setText("")
@@ -2316,7 +2316,7 @@ class PartnerBouquetList(RemoteTimerBouquetList):
 
 class PartnerChannelList(RemoteTimerChannelList):
 	def __init__(self, session, E2Timerlist, ServiceReference, ServiceName, partnerboxentry, playeronly):
-		RemoteTimerChannelList.__init__(self, session, E2Timerlist, ServiceReference, ServiceName, partnerboxentry, "",  playeronly)
+		RemoteTimerChannelList.__init__(self, session, E2Timerlist, ServiceReference, ServiceName, partnerboxentry, "", playeronly)
 		self.skinName = "RemoteTimerChannelList"
 		self.useinternal = 0 # always use partnerbox services
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions"],

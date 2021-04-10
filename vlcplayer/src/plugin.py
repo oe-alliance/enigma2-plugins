@@ -61,8 +61,8 @@ class __VlcManager():
 				for iface in self.get_iface_list():
 					if "lo" in iface:
 						continue
-					if os_path.exists("/sys/class/net/%s/operstate"%(iface)):
-						fd = open("/sys/class/net/%s/operstate"%(iface), "r")
+					if os_path.exists("/sys/class/net/%s/operstate" % (iface)):
+						fd = open("/sys/class/net/%s/operstate" % (iface), "r")
 						link = fd.read().strip()
 						fd.close()
 					if link != "down":
@@ -92,7 +92,7 @@ class __VlcManager():
 		bytelen = struct.unpack('iL', fcntl.ioctl(sck.fileno(), SIOCGIFCONF, struct.pack('iL', BYTES, names.buffer_info()[0])))[0]
 		sck.close()
 		namestr = names.tostring()
-		return [namestr[i:i+32].split('\0', 1)[0] for i in range(0, bytelen, 32)]
+		return [namestr[i:i + 32].split('\0', 1)[0] for i in range(0, bytelen, 32)]
 
 	def medialistClosed(self, proceed=False):
 		print "[VLC] medialistClosed"

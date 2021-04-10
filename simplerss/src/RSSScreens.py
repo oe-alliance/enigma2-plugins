@@ -118,12 +118,12 @@ class RSSEntryView(RSSBaseView):
 		self.entries = entries
 
 		if cur_idx is not None and entries is not None:
-			self["info"] = StaticText(_("Entry %s/%s") % (cur_idx+1, entries))
+			self["info"] = StaticText(_("Entry %s/%s") % (cur_idx + 1, entries))
 		else:
 			self["info"] = StaticText()
 
 		if data:
-			self["content"] = ScrollLabel(''.join((data[0], '\n\n', data[2], '\n\n', str(len(data[3])), ' ',  _("Enclosures"))))
+			self["content"] = ScrollLabel(''.join((data[0], '\n\n', data[2], '\n\n', str(len(data[3])), ' ', _("Enclosures"))))
 		else:
 			self["content"] = ScrollLabel()
 
@@ -205,12 +205,12 @@ class RSSEntryView(RSSBaseView):
 
 	def setContent(self):
 		if self.cur_idx is not None and self.entries is not None:
-			self["info"].text = _("Entry %s/%s") % (self.cur_idx+1, self.entries)
+			self["info"].text = _("Entry %s/%s") % (self.cur_idx + 1, self.entries)
 		else:
 			self["info"].text = ""
 		data = self.data
 		if data:
-			self["content"].setText(''.join((data[0], '\n\n', data[2], '\n\n', str(len(data[3])), ' ',  _("Enclosures"))))
+			self["content"].setText(''.join((data[0], '\n\n', data[2], '\n\n', str(len(data[3])), ' ', _("Enclosures"))))
 		else:
 			self["content"].setText(_("No such Item."))
 		self.updateInfo()
@@ -299,7 +299,7 @@ class RSSFeedView(RSSBaseView):
 	def pollCallback(self, id=None):
 		print("[SimpleRSS] SimpleRSSFeed called back")
 
-		if id is None or id+1 == self.id:
+		if id is None or id + 1 == self.id:
 			self["content"].updateList(self.feed.history)
 			self.setConditionalTitle()
 			self.updateInfo()
@@ -313,7 +313,7 @@ class RSSFeedView(RSSBaseView):
 			self["summary"].text = current_entry[2]
 
 			cur_idx = self["content"].index
-			self["info"].text = _("Entry %s/%s") % (cur_idx+1, len(self.feed.history))
+			self["info"].text = _("Entry %s/%s") % (cur_idx + 1, len(self.feed.history))
 			summary_text = current_entry[0]
 		else:
 			self["summary"].text = _("Feed is empty.")
@@ -328,7 +328,7 @@ class RSSFeedView(RSSBaseView):
 
 	def menu(self):
 		if self.id > 0:
-			self.singleUpdate(self.id-1)
+			self.singleUpdate(self.id - 1)
 
 	def nextEntry(self):
 		self["content"].selectNext()
@@ -362,7 +362,7 @@ class RSSFeedView(RSSBaseView):
 
 	def checkEmpty(self):
 		if self.id > 0 and not len(self.feed.history):
-			self.singleUpdate(self.id-1)
+			self.singleUpdate(self.id - 1)
 
 	def showCurrentEntry(self):
 		current_entry = self["content"].current
@@ -440,7 +440,7 @@ class RSSOverview(RSSBaseView):
 	def updateInfo(self):
 		current_entry = self["content"].getCurrent()
 		self["summary"].text = ' '.join((str(len(current_entry.history)), _("Entries")))
-		self["info"].text = _("Feed %s/%s") % (self["content"].getSelectedIndex()+1, len(self.feeds))
+		self["info"].text = _("Feed %s/%s") % (self["content"].getSelectedIndex() + 1, len(self.feeds))
 		summary_text = current_entry.title
 
 		for x in self.onChangedEntry:
@@ -477,7 +477,7 @@ class RSSOverview(RSSBaseView):
 			if result[1] == "update":
 				cur_idx = self["content"].getSelectedIndex()
 				if cur_idx > 0:
-					self.singleUpdate(cur_idx-1)
+					self.singleUpdate(cur_idx - 1)
 			elif result[1] == "setup":
 				from RSSSetup import RSSSetup
 

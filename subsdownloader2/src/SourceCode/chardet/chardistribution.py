@@ -179,7 +179,7 @@ class SJISDistributionAnalysis(CharDistributionAnalysis):
             return -1
         order = order + ord(aStr[1]) - 0x40
         if aStr[1] > '\x7F':
-            order =- 1
+            order = - 1
         return order
 
 class EUCJPDistributionAnalysis(CharDistributionAnalysis):

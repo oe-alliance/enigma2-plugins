@@ -314,7 +314,7 @@ class AutoRes(Screen):
 				else:
 					setDeinterlacer("auto")
 
-				print "[AutoRes] new content is %sx%s%s%s" %(width, height, prog, frate)
+				print "[AutoRes] new content is %sx%s%s%s" % (width, height, prog, frate)
 
 				if videoresolution_dictionary.has_key(new_mode):
 					new_mode = videoresolution_dictionary[new_mode].value
@@ -448,13 +448,13 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 					for mode, label in resolutions:
 						self.list.append(getConfigListEntry(label, videoresolution_dictionary[mode]))
 					if "720p" in config.av.videorate:
-						self.list.append(getConfigListEntry(_("Refresh Rate")+" 720p", config.av.videorate["720p"]))
+						self.list.append(getConfigListEntry(_("Refresh Rate") + " 720p", config.av.videorate["720p"]))
 					if "1080i" in config.av.videorate:
-						self.list.append(getConfigListEntry(_("Refresh Rate")+" 1080i", config.av.videorate["1080i"]))
+						self.list.append(getConfigListEntry(_("Refresh Rate") + " 1080i", config.av.videorate["1080i"]))
 					if "1080p" in config.av.videorate:
-						self.list.append(getConfigListEntry(_("Refresh Rate")+" 1080p", config.av.videorate["1080p"]))
+						self.list.append(getConfigListEntry(_("Refresh Rate") + " 1080p", config.av.videorate["1080p"]))
 					if "2160p" in config.av.videorate:
-						self.list.append(getConfigListEntry(_("Refresh Rate")+" 2160p", config.av.videorate["2160p"]))
+						self.list.append(getConfigListEntry(_("Refresh Rate") + " 2160p", config.av.videorate["2160p"]))
 					self.list.extend((
 						getConfigListEntry(_("Show info screen"), config.plugins.autoresolution.showinfo),
 						getConfigListEntry(_("Delay x seconds after service started"), config.plugins.autoresolution.delay_switch_mode),
@@ -489,13 +489,13 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
 		if self["config"].getCurrent() and len(self["config"].getCurrent()) > 0:
-			if self["config"].getCurrent()[1] in (config.plugins.autoresolution.enable, config.plugins.autoresolution.mode, config.plugins.autoresolution.ask_apply_mode,  config.plugins.autoresolution.manual_resolution_ext_menu):
+			if self["config"].getCurrent()[1] in (config.plugins.autoresolution.enable, config.plugins.autoresolution.mode, config.plugins.autoresolution.ask_apply_mode, config.plugins.autoresolution.manual_resolution_ext_menu):
 				self.createSetup()
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
 		if self["config"].getCurrent() and len(self["config"].getCurrent()) > 0:
-			if self["config"].getCurrent()[1] in (config.plugins.autoresolution.enable, config.plugins.autoresolution.mode, config.plugins.autoresolution.ask_apply_mode,  config.plugins.autoresolution.manual_resolution_ext_menu):
+			if self["config"].getCurrent()[1] in (config.plugins.autoresolution.enable, config.plugins.autoresolution.mode, config.plugins.autoresolution.ask_apply_mode, config.plugins.autoresolution.manual_resolution_ext_menu):
 				self.createSetup()
 
 	# for summary:
@@ -673,7 +673,7 @@ class ManualResolution(Screen):
 			yres = int(yresString, 16)
 			fps = int(fpsString)
 			fpsFloat = float(fps)
-			fpsFloat = fpsFloat/1000
+			fpsFloat = fpsFloat / 1000
 		except:
 			print "[ManualResolution] Error reading current mode!Stop!"
 			return

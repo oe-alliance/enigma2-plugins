@@ -44,7 +44,7 @@ class MovingLabel(Label):
 
 	def doMove(self):
 		offset = self.offset + 1
-		text = self.longText[offset:self.displayLength+offset]
+		text = self.longText[offset:self.displayLength + offset]
 		self.offset = offset
 
 		if not text:

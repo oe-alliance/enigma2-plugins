@@ -42,7 +42,7 @@ def SPChannelContextMenu__init__(self, session, csel):
 	current = csel.getCurrentSelection()
 	current_sel_path = current.getPath()
 	current_sel_flags = current.flags
-	if csel.mode == MODE_TV and not (current_sel_path or current_sel_flags & (eServiceReference.isDirectory|eServiceReference.isMarker)):
+	if csel.mode == MODE_TV and not (current_sel_path or current_sel_flags & (eServiceReference.isDirectory | eServiceReference.isMarker)):
 		from Plugins.Extensions.SeriesPlugin.plugin import SHOWINFO
 		self["menu"].list.insert(0, ChoiceEntryComponent(text=(SHOWINFO, boundFunction(self.SPchannelShowSeriesInfo))))
 

@@ -47,23 +47,23 @@ class CurlyTx(Screen,HelpableScreen):
 
         self["text"] = ScrollLabel("foo")
 
-        self["key_red"]    = StaticText(_("Settings"))
-        self["key_green"]  = StaticText(_("Reload"))
+        self["key_red"] = StaticText(_("Settings"))
+        self["key_green"] = StaticText(_("Reload"))
         self["key_yellow"] = StaticText(_("Prev"))
-        self["key_blue"]   = StaticText(_("Next"))
+        self["key_blue"] = StaticText(_("Next"))
 
 
         self["actions"] = ActionMap(
             ["WizardActions", "ColorActions", "InputActions", "InfobarEPGActions"], {
-                "ok":   self.close,
+                "ok": self.close,
                 "back": self.close,
-                "up":   self.pageUp,
+                "up": self.pageUp,
                 "down": self.pageDown,
 
-                "red":    self.showSettings,
-                "green":  self.reload,
+                "red": self.showSettings,
+                "green": self.reload,
                 "yellow": self.prevPage,
-                "blue":   self.nextPage,
+                "blue": self.nextPage,
 
                 "showEventInfo": self.showHeader
             }, -1)
@@ -168,7 +168,7 @@ class CurlyTx(Screen,HelpableScreen):
                 self["text"].setText(_("Invalid page") + " " + pageId)
             return
 
-        url   = cfg.pages[pageId].uri.value
+        url = cfg.pages[pageId].uri.value
         title = cfg.pages[pageId].title.value
 
         if pageCount > 1:
@@ -203,7 +203,7 @@ class CurlyTx(Screen,HelpableScreen):
     def showHeader(self):
         if self.showingHeaders:
             self["text"].setText(self.pageContent)
-            self.pageContent    = None
+            self.pageContent = None
             self.showingHeaders = False
         elif self.httpGetterFactory.response_headers:
             headers = _("HTTP response headers for") + "\n" + self.currentUrl + "\n\n"

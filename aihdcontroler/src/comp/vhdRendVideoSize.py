@@ -17,8 +17,8 @@ class vhdRendVideoSize(Renderer, VariableText):
 			return
 		xresol = info.getInfo(iServiceInformation.sVideoWidth)
 		yresol = info.getInfo(iServiceInformation.sVideoHeight)
-		if (xresol>0):
-			self.text = str(xresol)+'x'+str(yresol)
+		if (xresol > 0):
+			self.text = str(xresol) + 'x' + str(yresol)
 		else:
 			self.text = '---'
 

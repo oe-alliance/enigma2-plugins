@@ -58,7 +58,7 @@ import os.path
 #	German localization added       
 VERSION = "1.0"
 ###############################################################################
-pluginPrintname = "[AspectRatioSwitch Ver. %s]" %VERSION
+pluginPrintname = "[AspectRatioSwitch Ver. %s]" % VERSION
 
 ASPECT = ["4_3_letterbox", "4_3_panscan", "16_9", "16_9_always", "16_10_letterbox", "16_10_panscan", "16_9_letterbox"]
 ASPECTMSG = {
@@ -284,7 +284,7 @@ def Plugins(**kwargs):
 		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART,PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)
 		]
 	if config.plugins.AspectRatioSwitch.menu.value == "plugin":
-		list.append(PluginDescriptor(name=_("Aspect Ratio Switch setup"),	description=_("Quick switching of aspect ratio setting"),
+		list.append(PluginDescriptor(name=_("Aspect Ratio Switch setup"), description=_("Quick switching of aspect ratio setting"),
 		where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
 	)
 	else:

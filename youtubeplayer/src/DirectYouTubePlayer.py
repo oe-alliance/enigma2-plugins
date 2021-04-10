@@ -78,7 +78,7 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 					key = int(action[8:])
 					time = [-config.seek.selfdefined_13.value, False, config.seek.selfdefined_13.value,
 							-config.seek.selfdefined_46.value, False, config.seek.selfdefined_46.value,
-							-config.seek.selfdefined_79.value, False, config.seek.selfdefined_79.value][key-1]
+							-config.seek.selfdefined_79.value, False, config.seek.selfdefined_79.value][key - 1]
 					self.player.seekRelative(time * 90000)
 					return 1
 				else:
@@ -106,8 +106,8 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 #				"seekBackManual": self.seekManual,
 				"next": self.playNextFile,
 				"previous": self.playPrevFile,
-				"menu"	:	self.openContextMenu,
-				"info"	:	self.showVideoInfo,
+				"menu"	: self.openContextMenu,
+				"info"	: self.showVideoInfo,
 			}, -2)
 			
 		self.oldservice = self.session.screen["CurrentService"]
@@ -308,7 +308,7 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 #				self.setSeekState(self.STATE_PAUSE)
 #			else:
 #				self.setSeekState(self.STATE_PLAY)
-		seekable.seekRelative(pts<0 and -1 or 1, abs(pts))
+		seekable.seekRelative(pts < 0 and -1 or 1, abs(pts))
 		if abs(pts) > 100 and config.usage.show_infobar_on_skip.value:
 			self.showInfobar()
 

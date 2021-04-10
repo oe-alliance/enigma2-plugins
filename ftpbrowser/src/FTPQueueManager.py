@@ -89,7 +89,7 @@ class FTPQueueManager(Screen):
 
 		# XXX: this is a little ugly but this way we have the least
 		# visible distortion :-)
-		index = min(self['list'].index, len(list)-1)
+		index = min(self['list'].index, len(list) - 1)
 		self['list'].setList(list)
 		self['list'].index = index
 

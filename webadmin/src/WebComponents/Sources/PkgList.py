@@ -12,7 +12,7 @@ class PkgList(Source):
 		self.wap = wap
 		self.session = session
 		self.cmd = ""
-		self.err=False
+		self.err = False
 		
 	def handleCommand(self, cmd):
 		if cmd is not None:
@@ -20,9 +20,9 @@ class PkgList(Source):
 			
 	def __getList(self):
 		from os import popen as os_popen
-		PKG_NAME=0
-		PKG_REL=1
-		PKG_INFO=2
+		PKG_NAME = 0
+		PKG_REL = 1
+		PKG_INFO = 2
 		map = {}
 		try:
 			out = os_popen("opkg update")
@@ -38,7 +38,7 @@ class PkgList(Source):
 				if len(package) > 2:
 					if "Collected errors:" in package:
 						# Schleife
-						self.err=True
+						self.err = True
 						return
 					
 				if map.has_key(package[PKG_NAME]):
@@ -61,7 +61,7 @@ class PkgList(Source):
 					map[package[PKG_NAME]][0] = package[PKG_REL].replace("experimental-", "exp. ") + " -> " + package[PKG_INFO][:-1].replace("experimental-", "exp. ")
 					map[package[PKG_NAME]][3] = "1"
 		
-			keys=map.keys()
+			keys = map.keys()
 			keys.sort()
 			
 			return [(name, map[name][0], map[name][1], map[name][2], map[name][3]) for name in keys]
@@ -72,7 +72,7 @@ class PkgList(Source):
 	def getOpkgfeed(self):
 		#print "[WebAdmin] ", self.cmd
 		if self.err:
-			self.err=False
+			self.err = False
 			return []
 			
 		PKGCACHE = self.__getList()

@@ -64,8 +64,8 @@ from . import _
 def YouTubeEntryComponent(entry):
 	res = [entry]
 # 385
-	res.append(MultiContentEntryText(pos=(150, 5), size=(370, 42), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text=entry.getTitle()))
-	res.append(MultiContentEntryText(pos=(150, 46), size=(370, 56), font=1, color=0xFFA323, color_sel=0xFFA323, flags=RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text=entry.getDescription()))
+	res.append(MultiContentEntryText(pos=(150, 5), size=(370, 42), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_TOP | RT_WRAP, text=entry.getTitle()))
+	res.append(MultiContentEntryText(pos=(150, 46), size=(370, 56), font=1, color=0xFFA323, color_sel=0xFFA323, flags=RT_HALIGN_LEFT | RT_VALIGN_TOP | RT_WRAP, text=entry.getDescription()))
 
 	if entry.thumbnail["0"] is None:
 		png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/plugin.png"))
@@ -119,12 +119,12 @@ class YouTubeVideoDetailsScreen(Screen):
 
 		self["actions"] = ActionMap(["YouTubeVideoDetailsScreenActions"],
 		{
-			"ok"		:	self.close,
-			"cancel"	:	self.close,
-			"up"		:	self.pageUp,
-			"down"		:	self.pageDown,
-			"left"		:	self.pageUp,
-			"right"		:	self.pageDown
+			"ok"		: self.close,
+			"cancel"	: self.close,
+			"up"		: self.pageUp,
+			"down"		: self.pageDown,
+			"left"		: self.pageUp,
+			"right"		: self.pageDown
 		})
 
 		self.onFirstExecBegin.append(self.setPixmap)
@@ -235,18 +235,18 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 		
 		self["actions"] = ActionMap(["YouTubeVideoListActions"],
 		{
-			"play"			:	self.tryToPlay,
-			"select"		:	self.justSelectServer,
-			"search"		:	self.searchAgain,
-			"menu"			:	self.openContextMenu,
-			"forward"		:	self.forwardInHistory,
-			"backward"		:	self.backInHistory,
-			"left"			:	self.keyLeft,
-			"right"			:	self.keyRight,
-			"up"			:	self.keyUp,
-			"down"			:	self.keyDown,
-			"info"			:	self.showVideoInfo,
-			"cancel"		:	self.close
+			"play"			: self.tryToPlay,
+			"select"		: self.justSelectServer,
+			"search"		: self.searchAgain,
+			"menu"			: self.openContextMenu,
+			"forward"		: self.forwardInHistory,
+			"backward"		: self.backInHistory,
+			"left"			: self.keyLeft,
+			"right"			: self.keyRight,
+			"up"			: self.keyUp,
+			"down"			: self.keyDown,
+			"info"			: self.showVideoInfo,
+			"cancel"		: self.close
 		}, -1)
 
 

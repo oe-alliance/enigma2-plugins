@@ -34,7 +34,7 @@ class AudioRestart():
         self.startTimer()
 
     def startTimer(self):
-        self.intDelay = config.plugins.AudioRestart.restartDelay.value*1000
+        self.intDelay = config.plugins.AudioRestart.restartDelay.value * 1000
         print "[AudioSync] audio restart in ",self.intDelay
         self.activateTimer.start(self.intDelay, True)
 
@@ -101,7 +101,7 @@ class AudioRestartSetup(ConfigListScreen, Screen):
         self.skin_path = plugin_path
 
         # Plugin Information
-        self["PluginInfo"] = Label(_("Plugin: %(plugin)s , Version: %(version)s") %dict(plugin=PLUGIN_BASE,version=PLUGIN_VERSION))
+        self["PluginInfo"] = Label(_("Plugin: %(plugin)s , Version: %(version)s") % dict(plugin=PLUGIN_BASE,version=PLUGIN_VERSION))
 
         # BUTTONS
         self["key_red"] = Button(_("Cancel"))

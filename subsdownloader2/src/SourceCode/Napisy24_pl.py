@@ -40,13 +40,13 @@ class XML_to_Dict():
 	elif (child.nodeType == xml.dom.minidom.Node.TEXT_NODE):
 		return child.nodeValue
 	
-	d={}
+	d = {}
 	while child is not None:
 		if (child.nodeType == xml.dom.minidom.Node.ELEMENT_NODE):
 			try:
 				d[child.tagName]
 			except KeyError:
-				d[child.tagName]=[]
+				d[child.tagName] = []
 			d[child.tagName].append(self.elementtodict(child))
 		child = child.nextSibling
 	return d
@@ -65,12 +65,12 @@ class XML_to_Dict():
 
 class Napisy24_pl(XML_to_Dict,zip_extractor):    
     def __init__(self,moviePath, movieNameString=None):
-	if movieNameString== None:
+	if movieNameString == None:
 	    self.MovieName = ((moviePath.rsplit("/",1))[-1]).rsplit(".",1)[0]
 	else:
 	    self.MovieName = (movieNameString)
         self.MovieDir = (moviePath.rsplit("/",1))[0]
-        self.ZipFilePath = self.MovieDir+'/'+((moviePath.rsplit("/",1))[-1]).rsplit(".",1)[0]+'.zip'
+        self.ZipFilePath = self.MovieDir + '/' + ((moviePath.rsplit("/",1))[-1]).rsplit(".",1)[0] + '.zip'
 	self.subtitle_dict = []
 	self.NAPISY24_url = "napisy24.pl"
     
@@ -79,29 +79,29 @@ class Napisy24_pl(XML_to_Dict,zip_extractor):
 	dir_list = os.listdir(self.MovieDir)
 	dir_count = 0
 	for x in dir_list:
-	    if x.split(".")[-1].lower()=="nfo":
+	    if x.split(".")[-1].lower() == "nfo":
 		print "find NFO in %i list" % dir_count
 		break
-	    dir_count=dir_count+1
+	    dir_count = dir_count + 1
 	try:	
-	    nfo_file = open(self.MovieDir+"/"+dir_list[dir_count],"r")
+	    nfo_file = open(self.MovieDir + "/" + dir_list[dir_count],"r")
 	    buffor = nfo_file.read()
 	    nfo_file.close
 	    #IMDB line in nfo: iMDB: http://www.imdb.com/title/tt1219289/	    
 	    char_count = 0
-	    while (char_count+len("http://www.imdb.com/title/")) < len(buffor):
-		if buffor[char_count:(char_count+len("http://www.imdb.com/title/"))] == "http://www.imdb.com/title/":
+	    while (char_count + len("http://www.imdb.com/title/")) < len(buffor):
+		if buffor[char_count:(char_count + len("http://www.imdb.com/title/"))] == "http://www.imdb.com/title/":
 		    #print "%s" % str(char_count+len("http://www.imdb.com/title/"))
-		    self.dd11 = IMDB_begining = char_count+len("http://www.imdb.com/title/")
+		    self.dd11 = IMDB_begining = char_count + len("http://www.imdb.com/title/")
 		    break
-		char_count=char_count+1
-	    char_count=IMDB_begining+1   
+		char_count = char_count + 1
+	    char_count = IMDB_begining + 1   
 	    while char_count < len(buffor):
-		if buffor[char_count:(char_count+1)] == "/":
+		if buffor[char_count:(char_count + 1)] == "/":
 		    #print "%s" % str(char_count)
 		    self.dd22 = IMDB_ending = char_count
 		    break
-		char_count=char_count+1
+		char_count = char_count + 1
 	    return buffor[IMDB_begining:IMDB_ending]	
 	#tutaj trzeba sprawdzienia IMDB numeru jesli jest oka to zwraca informacje jesli jest nie oka to zwraca blad
 	except:	    
@@ -122,7 +122,7 @@ class Napisy24_pl(XML_to_Dict,zip_extractor):
 	    print r1.status, r1.reason
 	    if what_is_downloaded == "downloada_subtitle_list_by_film_name" or what_is_downloaded == "downloada_subtitle_list_by_IMDB":
 		self.XML_String = r1.read()
-	    elif what_is_downloaded  == "download_subtilte_zip":		
+	    elif what_is_downloaded == "download_subtilte_zip":		
 		self.zip_string = r1.read()
 	    return r1.status#, r1.reason
 	except (IOError, OSError), e:
@@ -152,7 +152,7 @@ class Napisy24_pl(XML_to_Dict,zip_extractor):
             repeat = repeat - 1
 	    r1_status = self.__connect_with_server(request_subtitle_list, "downloada_subtitle_list_by_film_name")            
             if r1_status != 200 and r1_status != 400:
-                print  "Fetching subtitle list failed, HTTP code: %s" % (str(r1_status))
+                print "Fetching subtitle list failed, HTTP code: %s" % (str(r1_status))
                 time.sleep(0.5)
                 continue
 	    elif r1_status == 400:
@@ -162,7 +162,7 @@ class Napisy24_pl(XML_to_Dict,zip_extractor):
                 repeat = 0
     
             if self.XML_String == ('brak wynikow'):
-                print  "Subtitle list NOT FOUND"
+                print "Subtitle list NOT FOUND"
                 repeat = 0
                 continue
 
@@ -182,13 +182,13 @@ class Napisy24_pl(XML_to_Dict,zip_extractor):
 	"""Downloaded XML string isn't compatybil with XML standard in which minidom is written.
 	This function corrects  in downloaded string  stringsome known errors e.g.: multiroot, & char in data, CP1252 encodeing."""
         if self.XML_String[0] == "\n":
-            self.XML_String=self.XML_String[1:]
+            self.XML_String = self.XML_String[1:]
         SECONDLINE_CHAR = 0
         for x in self.XML_String:
-            SECONDLINE_CHAR = SECONDLINE_CHAR+1
-            if x =="\n":
+            SECONDLINE_CHAR = SECONDLINE_CHAR + 1
+            if x == "\n":
                 break
-        self.XML_String = self.XML_String[0:SECONDLINE_CHAR] + "<lista>"+ self.XML_String[(SECONDLINE_CHAR+1):]+"</lista>"
+        self.XML_String = self.XML_String[0:SECONDLINE_CHAR] + "<lista>" + self.XML_String[(SECONDLINE_CHAR + 1):] + "</lista>"
 	self.XML_String = re.sub("&", "and", self.XML_String)
 	self.XML_String = self.XML_String.decode("CP1252").encode("UTF-8")
     
@@ -243,14 +243,14 @@ class Napisy24_pl(XML_to_Dict,zip_extractor):
 	    #request_subtitle_list = "/libs/webapi.php?title=%s" % self.MovieName
 	    r1_status = self.__connect_with_server(request_subtitle_list, "download_subtilte_zip")            
             if r1_status != 302:
-                print  "Fetching subtitle failed, HTTP code: %s" % (str(r1_status))
+                print "Fetching subtitle failed, HTTP code: %s" % (str(r1_status))
                 time.sleep(0.5)
                 continue
             else:
                 repeat = 0
     
             if self.zip_string == None:
-                print  "Subtitle NOT DOWNLOADED"
+                print "Subtitle NOT DOWNLOADED"
                 repeat = 0
                 continue
 
@@ -274,8 +274,8 @@ class GuessFileData_from_FileName(SubtitleDatabase.SubtitleDB):
     def return_data_string(self,file_path):
         file_data = self.guessFileData(file_path)
         if file_data['type'] == 'tvshow':
-            return str(file_data['name']+" "+str(file_data['season'])+"x"+str(file_data['episode']))
-        elif file_data['type'] =='movie' or file_data['type'] == 'unknown':
+            return str(file_data['name'] + " " + str(file_data['season']) + "x" + str(file_data['episode']))
+        elif file_data['type'] == 'movie' or file_data['type'] == 'unknown':
             return str(file_data['name'])
     
     def return_movie_data_to_XBMC(self,file_path):
@@ -285,7 +285,7 @@ class GuessFileData_from_FileName(SubtitleDatabase.SubtitleDB):
             season = fileData['season']
             episode = fileData['episode']
             #print fileData
-        elif fileData['type'] =='movie' or fileData['type'] =='unknown':
+        elif fileData['type'] == 'movie' or fileData['type'] == 'unknown':
             tvShow = []
             season = []
             episode = []  
@@ -312,11 +312,11 @@ class CompareMovie_and_Subtite_FileData(GuessFileData_from_FileName):
         """Funstion takes movie file path and based on EXTENSIONS from myListy.pl
         returns list of movies in movie file directory"""
         movie_dir = movie_path.rsplit("/",1)[0]
-        movie_file_list =[]
+        movie_file_list = []
         movie_extentionds = self.__movie_file_extensions(self.__file_extentions)
         for x in os.listdir(movie_dir):
             if x.rsplit(".",1)[-1]in movie_extentionds:
-                movie_file_list.append(movie_dir+"/"+x)		
+                movie_file_list.append(movie_dir + "/" + x)		
 	#USUNAC URL Z NAPISY24
         return movie_file_list
 
@@ -346,32 +346,32 @@ class CompareMovie_and_Subtite_FileData(GuessFileData_from_FileName):
                 if x[1].has_key('type') and y[1].has_key('type'):
                     if x[1]['type'] == y[1]['type']:
                         #wynik = wynik + 0.1600
-			wynik = wynik +0.0900
+			wynik = wynik + 0.0900
                 if x[1].has_key('name') and y[1].has_key('name'):
                     if x[1]['name'] == y[1]['name']:
                         #wynik = wynik +0.0900
 			wynik = wynik + 0.1600
                 if x[1].has_key('season') and y[1].has_key('season'):   
                     if x[1]['season'] == y[1]['season']:
-                        wynik = wynik +0.0225
+                        wynik = wynik + 0.0225
                 if x[1].has_key('episode') and y[1].has_key('episode'):  
                     if x[1]['episode'] == y[1]['episode']:
-                        wynik = wynik +0.0225
+                        wynik = wynik + 0.0225
                 if x[1].has_key('season') and y[1].has_key('part'): 
                     if x[1]['season'] == y[1]['part']:
-                        wynik = wynik +0.0060
+                        wynik = wynik + 0.0060
                 if x[1].has_key('episode') and y[1].has_key('part'): 
                     if x[1]['episode'] == y[1]['part']:
-                        wynik = wynik +0.0060
+                        wynik = wynik + 0.0060
                 if x[1].has_key('part') and y[1].has_key('part'): 
                     if x[1]['part'] == y[1]['part']:
-                        wynik = wynik +0.0400
+                        wynik = wynik + 0.0400
                 if x[1].has_key('teams') and y[1].has_key('teams'):
                     if x[1]['teams'] == y[1]['teams']:
-                        wynik = wynik +0.0025
+                        wynik = wynik + 0.0025
                 if x[1].has_key('year') and y[1].has_key('year'):
                     if x[1]['year'] == y[1]['year']:
-                        wynik = wynik +0.0049
+                        wynik = wynik + 0.0049
                 #Cause and effect for subtitle and movie guesseFileData results
                 compare_result.append({"movie":x[0],"subtitle":y[0],"propability": wynik})                       
                # print x[0], y[0], wynik
@@ -400,7 +400,7 @@ class CompareMovie_and_Subtite_FileData(GuessFileData_from_FileName):
             """For all movies in temp_movieList checks best subtitles"""
             final_propability = 0
             for y in preliminary_movie_subtitle_list:
-                if y['movie'] == x and  y['propability'] > final_propability:
+                if y['movie'] == x and y['propability'] > final_propability:
                     if self.__file_path == y['movie']:
                         """Check it primary movie is in results matching_movie = True"""
                         matching_movie = True
@@ -424,7 +424,7 @@ class CompareMovie_and_Subtite_FileData(GuessFileData_from_FileName):
 	    """
             final_propability = 0
             for y in preliminary_movie_subtitle_list:
-                if y['subtitle'] == x and  y['propability'] > final_propability:
+                if y['subtitle'] == x and y['propability'] > final_propability:
                     if self.__file_path == y['movie']:
                         """Check it primary movie is in results matching_movie = True"""
                         matching_movie = True
@@ -432,7 +432,7 @@ class CompareMovie_and_Subtite_FileData(GuessFileData_from_FileName):
                     final_propability = y['propability']
             final_movie_subtitle_list.append(best_entry)
 	
-        if  matching_movie == True:
+        if matching_movie == True:
             return final_movie_subtitle_list
         else:
             return []

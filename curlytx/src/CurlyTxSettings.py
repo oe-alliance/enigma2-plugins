@@ -46,10 +46,10 @@ class CurlyTxSettings(ConfigListScreen, HelpableScreen, Screen):
                 "blue": self.deletePage
             }, -2)
 
-        self["key_red"]    = StaticText(_("Cancel"))
-        self["key_green"]  = StaticText(_("OK"))
+        self["key_red"] = StaticText(_("Cancel"))
+        self["key_green"] = StaticText(_("OK"))
         self["key_yellow"] = StaticText(_("New"))
-        self["key_blue"]   = StaticText(_("Delete"))
+        self["key_blue"] = StaticText(_("Delete"))
 
         ConfigListScreen.__init__(self, self.getConfigList(), session=self.session)
 
@@ -206,7 +206,7 @@ class CurlyTxPageEdit(Screen, ConfigListScreen):
         Screen.__init__(self, session)
         self.skinName = ["CurlyTxPageEdit", "Setup"]
 
-        self["key_red"]   = StaticText(_("Cancel"))
+        self["key_red"] = StaticText(_("Cancel"))
         self["key_green"] = StaticText(_("OK"))
 
         self["setupActions"] = ActionMap(["SetupActions"],

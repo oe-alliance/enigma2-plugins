@@ -1289,7 +1289,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
         #if config.usage.setup_level.index >= 2: # expert+
         title = getSortDescription()
         if self.list.getAccess() < 18:
-            title += " [%s-%d]"%(_("VSR"), self.list.getAccess())
+            title += " [%s-%d]" % (_("VSR"), self.list.getAccess())
         title += " | "
         if not isinstance(self.current_ref, eServiceReferenceListAll):
             title += _("Movie location:") + " "

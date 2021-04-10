@@ -611,7 +611,7 @@ def validate_certificate(cert, key):
 
 def get_random():
 	try:
-		xor = lambda a,b: ''.join(chr(ord(c)^ord(d)) for c,d in zip(a,b*100))
+		xor = lambda a,b: ''.join(chr(ord(c) ^ ord(d)) for c,d in zip(a,b * 100))
 		random = urandom(8)
 		x = str(time())[-8:]
 		result = xor(random, x)

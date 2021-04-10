@@ -24,7 +24,7 @@ import os
 import commands
 
 config.plugins.mc_wi = ConfigSubsection()
-config.plugins.mc_wi.entrycount =  ConfigInteger(0)
+config.plugins.mc_wi.entrycount = ConfigInteger(0)
 config.plugins.mc_wi.Entry = ConfigSubList()
 def initWeatherPluginEntryConfig():
 	s = ConfigSubsection()
@@ -41,7 +41,7 @@ def initConfig():
 			initWeatherPluginEntryConfig()
 			i += 1
 initConfig()
-path="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/"
+path = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/"
 class WeatherIconItem:
 	def __init__(self, url="", filename="", index=-1, error=False):
 		self.url = url
@@ -76,7 +76,7 @@ class MC_WeatherInfo(Screen):
 		i = 1
 		while i <= 5:
 			self["weekday%s" % i] = StaticText()
-			self["weekday%s_icon" %i] = WeatherIcon()
+			self["weekday%s_icon" % i] = WeatherIcon()
 			self["weekday%s_temp" % i] = StaticText()
 			self["weekday%s_tempname" % i] = StaticText()
 			i += 1
@@ -107,27 +107,27 @@ class MC_WeatherInfo(Screen):
 		else:
 			self["statustext"].text = _("No locations defined...\nPress 'Blue' to do that.")
 	def mvidown(self, stadt):
-		downlink = "http://www.meinestadt.de/"+ stadt +"/bilder"
+		downlink = "http://www.meinestadt.de/" + stadt + "/bilder"
 		downname = "/tmp/.stadtindex"
 		stadd = stadt
 		if fileExists(downname):
-			os.system("rm -rf "+ downname)
+			os.system("rm -rf " + downname)
 		downloadPage(downlink, downname).addCallback(self.jpgdown, stadd).addErrback(self.error)
 	def jpgdown(self, value, stadd):
 		downlink = commands.getoutput("cat /tmp/.stadtindex | grep \"background-image:url('http://mytown.de/\" | cut -d \"'\" -f2")
 		stadt = stadd
-		downname = "/tmp/"+ stadt +".jpg"
+		downname = "/tmp/" + stadt + ".jpg"
 		downloadPage(downlink, downname).addCallback(self.makemvi, stadt).addErrback(self.error)
 	def makemvi(self, value, stadt):
-		mviname = "/tmp/"+ stadt +".m1v"
+		mviname = "/tmp/" + stadt + ".m1v"
 		if fileExists(mviname) is False:
 			import subprocess
 			if fileExists("/sbin/ffmpeg"):
-				ffmpeg="/sbin/ffmpeg"
+				ffmpeg = "/sbin/ffmpeg"
 			else:
-				ffmpeg="/usr/bin/ffmpeg"
+				ffmpeg = "/usr/bin/ffmpeg"
 			if fileExists("/sbin/ffmpeg") or fileExists("/sbin/ffmpeg"):	
-				cmd = [ffmpeg, "-f", "image2", "-i", "/tmp/"+ stadt +".jpg", mviname]
+				cmd = [ffmpeg, "-f", "image2", "-i", "/tmp/" + stadt + ".jpg", mviname]
 				subprocess.Popen(cmd).wait()
 			if fileExists(mviname):
 				self.showiframe.showStillpicture(mviname)
@@ -146,7 +146,7 @@ class MC_WeatherInfo(Screen):
 				self.weatherPluginEntryIndex = self.weatherPluginEntryCount
 			self.setItem()
 	def setItem(self):
-		self.weatherPluginEntry = config.plugins.mc_wi.Entry[self.weatherPluginEntryIndex-1]
+		self.weatherPluginEntry = config.plugins.mc_wi.Entry[self.weatherPluginEntryIndex - 1]
 		self.clearFields()
 		self.startRun()
 	def clearFields(self):
@@ -163,7 +163,7 @@ class MC_WeatherInfo(Screen):
 		i = 1
 		while i <= 5:
 			self["weekday%s" % i].text = ""
-			self["weekday%s_icon" %i].hide()
+			self["weekday%s_icon" % i].hide()
 			self["weekday%s_temp" % i].text = ""
 			self["weekday%s_tempname" % i].text = ""
 			i += 1
@@ -208,14 +208,14 @@ class MC_WeatherInfo(Screen):
 					self["condition"].text = items.attrib.get("skytext").encode("utf-8", 'ignore')
 					self["humidity"].text = _("Humidity: %s %%") % items.attrib.get("humidity").encode("utf-8", 'ignore')
 					self["wind_condition"].text = items.attrib.get("winddisplay").encode("utf-8", 'ignore')
-					c =  time.strptime(items.attrib.get("observationtime").encode("utf-8", 'ignore'), "%H:%M:%S")
-					self["observationtime"].text = _("Observation time: %s") %  time.strftime("%H:%M",c)
+					c = time.strptime(items.attrib.get("observationtime").encode("utf-8", 'ignore'), "%H:%M:%S")
+					self["observationtime"].text = _("Observation time: %s") % time.strftime("%H:%M",c)
 					self["observationpoint"].text = _("Observation point: %s") % items.attrib.get("observationpoint").encode("utf-8", 'ignore')
-					self["feelsliketemp"].text = _("Feels like %s") % items.attrib.get("feelslike").encode("utf-8", 'ignore') + "°" +  degreetype
+					self["feelsliketemp"].text = _("Feels like %s") % items.attrib.get("feelslike").encode("utf-8", 'ignore') + "°" + degreetype
 					skycode = "%s.gif" % items.attrib.get("skycode").encode("utf-8", 'ignore')
-					filename = path +"icons/" + skycode
+					filename = path + "icons/" + skycode
 					skycodepng = "%s.png" % items.attrib.get("skycode").encode("utf-8", 'ignore')
-					filenamepng = path +"icons/" + skycodepng
+					filenamepng = path + "icons/" + skycodepng
 					if not pathExists(filenamepng):
 						if not pathExists(filename):
 							url = "%s%s" % (imagerelativeurl, skycode)
@@ -223,7 +223,7 @@ class MC_WeatherInfo(Screen):
 					else:
 						self.showIcon(-1,filenamepng)
 				elif items.tag == "forecast" and index <= 4:
-					index +=1
+					index += 1
 					c = time.strptime(items.attrib.get("date").encode("utf-8", 'ignore'),"%Y-%m-%d")
 					self["weekday%s" % index].text = "%s\n%s" % (items.attrib.get("day").encode("utf-8", 'ignore'), time.strftime("%d. %b",c))
 					lowTemp = items.attrib.get("low").encode("utf-8", 'ignore')
@@ -256,7 +256,7 @@ class MC_WeatherInfo(Screen):
 		stadt = stadt.lower()
 		if self.mvion == True:
 			self.showiframe.finishStillPicture()
-		bild = "/tmp/"+ stadt +".m1v"
+		bild = "/tmp/" + stadt + ".m1v"
 		if fileExists(bild):
 			self.showiframe.showStillpicture(bild)
 			self.mvion = True
@@ -380,8 +380,8 @@ class WeatherPluginEntryList(MenuList):
 		for c in config.plugins.mc_wi.Entry:
 			res = [
 				c,
-				(eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 400, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(c.city.value)),
-				(eListboxPythonMultiContent.TYPE_TEXT, 410, 0, 80, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(c.degreetype .value)),
+				(eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 400, 20, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(c.city.value)),
+				(eListboxPythonMultiContent.TYPE_TEXT, 410, 0, 80, 20, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(c.degreetype .value)),
 			]
 			list.append(res)
 		self.list = list
@@ -539,8 +539,8 @@ class MSNWeatherPluginSearchResultList(MenuList):
 				weatherlocationcode = childs.attrib.get("weatherlocationcode").encode("utf-8", 'ignore')
 				res = [
 					(weatherlocationcode, searchlocation),
-					(eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 500, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, searchlocation),
-					(eListboxPythonMultiContent.TYPE_TEXT, 5, 22, 500, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, searchresult),
+					(eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 500, 20, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, searchlocation),
+					(eListboxPythonMultiContent.TYPE_TEXT, 5, 22, 500, 20, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, searchresult),
 				]
 				list.append(res)
 		self.list = list

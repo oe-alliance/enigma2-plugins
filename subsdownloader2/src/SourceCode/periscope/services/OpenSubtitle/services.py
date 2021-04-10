@@ -92,7 +92,7 @@ from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities impo
             "uk":"ukr",
             "vi":"vie"}"""
 
-OS_LANGS ={}   
+OS_LANGS = {}   
 for x in LANGUAGES:
   #languageTranslate(x[0], 0, 2)
   #languageTranslate(x[0], 0, 3)
@@ -144,13 +144,13 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
         srtbasefilename = videofilename.rsplit(".", 1)[0]
         self.downloadFile(suburl, srtbasefilename + ".srt.gz")
 #        try:
-        f = gzip.open(srtbasefilename+".srt.gz")
-        dump = open(srtbasefilename+".srt", "wb")
+        f = gzip.open(srtbasefilename + ".srt.gz")
+        dump = open(srtbasefilename + ".srt", "wb")
         dump.write(f.read())
         dump.close()
         f.close()
-        os.remove(srtbasefilename+".srt.gz")
-        return srtbasefilename+".srt"
+        os.remove(srtbasefilename + ".srt.gz")
+        return srtbasefilename + ".srt"
 #        except:
 #            return "None"
         
@@ -169,25 +169,25 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
         hash = filesize 
             
         if filesize < 65536 * 2:
-            logging.error("File %s is too small (SizeError < 2**16)"%name)
+            logging.error("File %s is too small (SizeError < 2**16)" % name)
             return []
          
-        for x in range(65536/bytesize): 
+        for x in range(65536 / bytesize): 
             buffer = f.read(bytesize) 
-            (l_value,)= struct.unpack(longlongformat, buffer)  
+            (l_value,) = struct.unpack(longlongformat, buffer)  
             hash += l_value 
             hash = hash & 0xFFFFFFFFFFFFFFFF #to remain as 64bit number  
                  
 
-        f.seek(max(0,filesize-65536),0) 
-        for x in range(65536/bytesize): 
+        f.seek(max(0,filesize - 65536),0) 
+        for x in range(65536 / bytesize): 
             buffer = f.read(bytesize) 
-            (l_value,)= struct.unpack(longlongformat, buffer)  
+            (l_value,) = struct.unpack(longlongformat, buffer)  
             hash += l_value 
             hash = hash & 0xFFFFFFFFFFFFFFFF 
          
         f.close() 
-        returnedhash =  "%016x" % hash 
+        returnedhash = "%016x" % hash 
         return returnedhash
 
     def query(self, filename, imdbID=None, moviehash=None, bytesize=None, langs=None):
@@ -251,7 +251,7 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
             logging.error("Could not query the server OpenSubtitles")
             logging.debug(e)
             return []
-        logging.debug("Result: %s" %str(results))
+        logging.debug("Result: %s" % str(results))
 
         sublinks = []
         if results['data']:
@@ -268,7 +268,7 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
                     if r["MovieReleaseName"].startswith(self.filename):
                         sublinks.append(result)
                     else:
-                        logging.debug("Removing %s because release '%s' has not right start %s" %(result["release"], r["MovieReleaseName"], self.filename))
+                        logging.debug("Removing %s because release '%s' has not right start %s" % (result["release"], r["MovieReleaseName"], self.filename))
                 else:
                     sublinks.append(result)
         return sublinks
@@ -276,8 +276,8 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
     def sort_by_moviereleasename(self, x, y):
         ''' sorts based on the movierelease name tag. More matching, returns 1'''
         #TODO add also support for subtitles release
-        xmatch = x['MovieReleaseName'] and (x['MovieReleaseName'].find(self.filename)>-1 or self.filename.find(x['MovieReleaseName'])>-1)
-        ymatch = y['MovieReleaseName'] and (y['MovieReleaseName'].find(self.filename)>-1 or self.filename.find(y['MovieReleaseName'])>-1)
+        xmatch = x['MovieReleaseName'] and (x['MovieReleaseName'].find(self.filename) > -1 or self.filename.find(x['MovieReleaseName']) > -1)
+        ymatch = y['MovieReleaseName'] and (y['MovieReleaseName'].find(self.filename) > -1 or self.filename.find(y['MovieReleaseName']) > -1)
         #print "analyzing %s and %s = %s and %s" %(x['MovieReleaseName'], y['MovieReleaseName'], xmatch, ymatch)
         if xmatch and ymatch:
             if x['MovieReleaseName'] == self.filename or x['MovieReleaseName'].startswith(self.filename):

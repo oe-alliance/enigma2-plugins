@@ -64,7 +64,7 @@ class SwitchService(Source):
 					elif eref.getName() != "":
 						name = eref.getName()
 
-					return (True, _("Active service is now '%s'") %name)
+					return (True, _("Active service is now '%s'") % name)
 				else:
 					return (False, _("Obligatory parameter 'sRef' is missing"))
 			else:

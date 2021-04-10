@@ -194,7 +194,7 @@ def startWebserver(session, l2k):
 		if config.plugins.Webinterface.http.enabled.value is True:
 			ret = startServerInstance(session, ip, config.plugins.Webinterface.http.port.value, config.plugins.Webinterface.http.auth.value, l2k)
 			if ret == False:
-				errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.http.port.value)
+				errors = "%s%s:%i\n" % (errors, ip, config.plugins.Webinterface.http.port.value)
 			else:
 				registerBonjourService('http', config.plugins.Webinterface.http.port.value)
 
@@ -212,7 +212,7 @@ def startWebserver(session, l2k):
 		if config.plugins.Webinterface.https.enabled.value is True:
 			ret = startServerInstance(session, ip, config.plugins.Webinterface.https.port.value, config.plugins.Webinterface.https.auth.value, l2k, True)
 			if ret == False:
-				errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.https.port.value)
+				errors = "%s%s:%i\n" % (errors, ip, config.plugins.Webinterface.https.port.value)
 			else:
 				registerBonjourService('https', config.plugins.Webinterface.https.port.value)
 
@@ -272,9 +272,9 @@ def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usess
 
 	if has_ipv6 and fileExists('/proc/net/if_inet6') and version.major >= 12:
 		if ipaddress == '0.0.0.0':
-			ipaddress='::'
+			ipaddress = '::'
 		elif ipaddress == '127.0.0.1':
-			ipaddress='::1'
+			ipaddress = '::1'
 
 	if usessl:
 		ctx = ChainedOpenSSLContextFactory(KEY_FILE, CERT_FILE)
@@ -358,14 +358,14 @@ class HTTPRootResource(resource.Resource):
 	def getClientToken(self, request):
 		ip = request.getClientIP()
 		ua = request.getHeader("User-Agent") or "Default UA"
-		return hashlib.sha1("%s/%s" %(ip, ua)).hexdigest()
+		return hashlib.sha1("%s/%s" % (ip, ua)).hexdigest()
 
 	def isSessionValid(self, request):
 		session = self._sessions.get(self.getClientToken(request), None)
 		if session is None or session.expired():
 			session = SimpleSession()
 			key = self.getClientToken(request)
-			print "[HTTPRootResource].isSessionValid :: created session with id '%s' for client with token '%s'" %(session.id, key)
+			print "[HTTPRootResource].isSessionValid :: created session with id '%s' for client with token '%s'" % (session.id, key)
 			self._sessions[key] = session
 
 		request.enigma2_session = session
@@ -426,7 +426,7 @@ class HTTPAuthResource(HTTPRootResource):
 		#If streamauth is disabled allow all acces from localhost
 		if not config.plugins.Webinterface.streamauth.value:
 			if(host == "::ffff:127.0.0.1" or host == "127.0.0.1" or host == "localhost"):
-				print "[WebInterface.plugin.isAuthenticated] Streaming auth is disabled bypassing authcheck because host is '%s'" %host
+				print "[WebInterface.plugin.isAuthenticated] Streaming auth is disabled bypassing authcheck because host is '%s'" % host
 				return True
 
 		# get the Session from the Request
@@ -510,11 +510,11 @@ def registerBonjourService(protocol, port):
 
 		service = bonjour.buildService(protocol, port)
 		bonjour.registerService(service, True)
-		print "[WebInterface.registerBonjourService] Service for protocol '%s' with port '%i' registered!" %(protocol, port)
+		print "[WebInterface.registerBonjourService] Service for protocol '%s' with port '%i' registered!" % (protocol, port)
 		return True
 
 	except ImportError, e:
-		print "[WebInterface.registerBonjourService] %s" %e
+		print "[WebInterface.registerBonjourService] %s" % e
 		return False
 
 def unregisterBonjourService(protocol):
@@ -522,11 +522,11 @@ def unregisterBonjourService(protocol):
 		from Plugins.Extensions.Bonjour.Bonjour import bonjour
 
 		bonjour.unregisterService(protocol)
-		print "[WebInterface.unregisterBonjourService] Service for protocol '%s' unregistered!" %(protocol)
+		print "[WebInterface.unregisterBonjourService] Service for protocol '%s' unregistered!" % (protocol)
 		return True
 
 	except ImportError, e:
-		print "[WebInterface.unregisterBonjourService] %s" %e
+		print "[WebInterface.unregisterBonjourService] %s" % e
 		return False
 
 def checkBonjour():

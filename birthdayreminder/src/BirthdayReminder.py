@@ -192,26 +192,26 @@ class BirthdayReminder(Screen, HelpableScreen):
 		
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
 		{
-			"cancel":	(self.exit, _("Exit the plugin")),
+			"cancel": (self.exit, _("Exit the plugin")),
 		}, -1)
 		
 		self["BaseActions"] = HelpableActionMap(self, "ColorActions",
 		{
-			"red":		(self.addBirthday, _("Add a birthday")),
-			"blue":		(self.openExtras, _("Open the extras menu")),
+			"red": (self.addBirthday, _("Add a birthday")),
+			"blue": (self.openExtras, _("Open the extras menu")),
 		}, -1)
 		
 		# this ActionMap can be enabled/disabled depending on the number of list entries
 		self["EditActions"] = HelpableActionMap(self, "ColorActions",
 		{
-			"green":	(self.editBirthday, _("Edit the selected entry")),
-			"yellow":	(self.removeBirthday, _("Remove the selected entry")),
+			"green": (self.editBirthday, _("Edit the selected entry")),
+			"yellow": (self.removeBirthday, _("Remove the selected entry")),
 		}, -1)
 		
 		self["ChannelSelectBaseActions"] = HelpableActionMap(self, "ChannelSelectBaseActions",
 		{
-			"prevBouquet":	(self.changeSortingUp, _("Sorting next")),
-			"nextBouquet":	(self.changeSortingDown, _("Sorting previous")),
+			"prevBouquet": (self.changeSortingUp, _("Sorting next")),
+			"nextBouquet": (self.changeSortingDown, _("Sorting previous")),
 		}, -1)
 		
 		self["key_red"] = StaticText(_("Add"))
@@ -335,7 +335,7 @@ class BirthdayReminder(Screen, HelpableScreen):
 		if size > 1 and idx < size:
 			self["list"].setIndex(idx)
 		elif size > 1 and idx >= size:
-			self["list"].setIndex(size -1)
+			self["list"].setIndex(size - 1)
 			
 		self.setButtonState()
 		
@@ -344,7 +344,7 @@ class BirthdayReminder(Screen, HelpableScreen):
 		if config.plugins.birthdayreminder.sortby.value == "1":
 			config.plugins.birthdayreminder.sortby.value = "3"
 		else:
-			val = int(config.plugins.birthdayreminder.sortby.value) -1
+			val = int(config.plugins.birthdayreminder.sortby.value) - 1
 			config.plugins.birthdayreminder.sortby.value = str(val)
 			
 		config.plugins.birthdayreminder.sortby.save()
@@ -355,7 +355,7 @@ class BirthdayReminder(Screen, HelpableScreen):
 		if config.plugins.birthdayreminder.sortby.value == "3":
 			config.plugins.birthdayreminder.sortby.value = "1"
 		else:
-			val = int(config.plugins.birthdayreminder.sortby.value) +1
+			val = int(config.plugins.birthdayreminder.sortby.value) + 1
 			config.plugins.birthdayreminder.sortby.value = str(val)
 			
 		config.plugins.birthdayreminder.sortby.save()
@@ -394,25 +394,25 @@ class BirthdayReminder(Screen, HelpableScreen):
 		try:
 			bDay1 = x.replace(year=today.year)
 		except ValueError: # raised on feb 29th
-			bDay1 = x.replace(year=today.year, day=x.day -1)
+			bDay1 = x.replace(year=today.year, day=x.day - 1)
 			
 		if bDay1 < today: # next birthday in next year
 			try:
-				bDay1 = x.replace(year=today.year +1)
+				bDay1 = x.replace(year=today.year + 1)
 			except ValueError: # raised on feb 29th
-				bDay1 = x.replace(year=today.year +1, day=x.day -1)
+				bDay1 = x.replace(year=today.year + 1, day=x.day - 1)
 		ts1 = int(mktime(bDay1.timetuple()))
 		
 		try:
 			bDay2 = y.replace(year=today.year)
 		except ValueError: # raised on feb 29th
-			bDay2 = y.replace(year=today.year, day=y.day -1)
+			bDay2 = y.replace(year=today.year, day=y.day - 1)
 			
 		if bDay2 < today: # next birthday in next year
 			try:
-				bDay2 = y.replace(year=today.year +1)
+				bDay2 = y.replace(year=today.year + 1)
 			except ValueError: # raised on feb 29th
-				bDay2 = y.replace(year=today.year +1, day=y.day -1)
+				bDay2 = y.replace(year=today.year + 1, day=y.day - 1)
 		ts2 = int(mktime(bDay2.timetuple()))
 		
 		return ts1 - ts2
@@ -580,14 +580,14 @@ class EditBirthdayScreen(Screen, ConfigListScreen, HelpableScreen):
 		
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
 		{
-			"cancel":	(self.cancel, _("Cancel")),
-			'ok':		(self.ok, _("VirtualKeyBoard")),
+			"cancel": (self.cancel, _("Cancel")),
+			'ok': (self.ok, _("VirtualKeyBoard")),
 		}, -1)
 		
 		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
 		{
-			"red":		(self.cancel, _("Cancel")),
-			"green":	(self.accept, _("Accept changes")),
+			"red": (self.cancel, _("Cancel")),
+			"green": (self.accept, _("Accept changes")),
 		}, -1)
 		
 	# close this screen
@@ -663,15 +663,15 @@ class BirthdayReminderSettings(Screen, ConfigListScreen, HelpableScreen):
 		
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
 		{
-			"cancel":	(self.cancel, _("Cancel")),
-			"ok":		(self.keySelect, _("Change path")),
+			"cancel": (self.cancel, _("Cancel")),
+			"ok": (self.keySelect, _("Change path")),
 		}, -1)
 		
 		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
 		{
-			"red":		(self.cancel, _("Cancel")),
-			"green":	(self.save, _("Save")),
-			"blue":		(self.editBirthdays, _("Edit birthdays")),
+			"red": (self.cancel, _("Cancel")),
+			"green": (self.save, _("Save")),
+			"blue": (self.editBirthdays, _("Edit birthdays")),
 		}, -1)
 		
 		# save the setting value on start for comparison if the user changed it
@@ -754,14 +754,14 @@ class PathSelectionScreen(Screen):
 		
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EPGSelectActions"],
 		{
-			"back":		self.cancel,
-			"left":		self.left,
-			"right":	self.right,
-			"up":		self.up,
-			"down":		self.down,
-			"ok":		self.ok,
-			"green":	self.green,
-			"red":		self.cancel
+			"back": self.cancel,
+			"left": self.left,
+			"right": self.right,
+			"up": self.up,
+			"down": self.down,
+			"ok": self.ok,
+			"green": self.green,
+			"red": self.cancel
 		}, -1)
 		
 		self["key_red"] = StaticText(_("Cancel"))

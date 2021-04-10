@@ -33,7 +33,7 @@ class AC3LipSyncSetup(ConfigListScreen, Screen):
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
 		self['footnote'] = Label("")
-		self["status"] = StaticText(_("Plugin: %(plugin)s , Version: %(version)s") %dict(plugin=PLUGIN_BASE,version=PLUGIN_VERSION))
+		self["status"] = StaticText(_("Plugin: %(plugin)s , Version: %(version)s") % dict(plugin=PLUGIN_BASE,version=PLUGIN_VERSION))
 
 		# Lets get a list of elements for the config list
 		self.list = [

@@ -20,11 +20,11 @@ from dreamIRCTools import *
 class dreamIRCSetupScreen(ConfigListScreen, Screen):
 	from enigma import getDesktop
 	desk = getDesktop(0)
-	x= int(desk.size().width())
-	y= int(desk.size().height())
+	x = int(desk.size().width())
+	y = int(desk.size().height())
 	print "[dreamIRC] setup: current desktop size: %dx%d" % (x,y)
 
-	if (y>=720):
+	if (y >= 720):
 		skin = """
 			<screen position="390,205" size="500,300" title="dreamIRC - edit settings" >
 			<widget name="config" position="10,10" size="480,260" scrollbarMode="showOnDemand" />
@@ -48,9 +48,9 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 	def __init__(self, session, args=0):
 		Screen.__init__(self, session)
 		self.hardware_info = HardwareInfo()
-		self.device=self.hardware_info.get_device_name()
-		self.mac=getMacAddress()
-		self.mac_end=self.mac[6:]
+		self.device = self.hardware_info.get_device_name()
+		self.mac = getMacAddress()
+		self.mac_end = self.mac[6:]
 		self.dreamIRCconf = ConfigSubsection()
 		self.reloadFile()
 		list = []
@@ -81,7 +81,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 
 	def load(self):
 		self.reloadFile()
-		self.accounts=[ircsupport.IRCAccount(self.type, string.atoi(self.nr), str(self.nick), str(self.passwd), str(self.server1), string.atoi(self.port), str(self.channel))]
+		self.accounts = [ircsupport.IRCAccount(self.type, string.atoi(self.nr), str(self.nick), str(self.passwd), str(self.server1), string.atoi(self.port), str(self.channel))]
 		print self.accounts
 		return self.accounts
 
@@ -100,11 +100,11 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 				self.debug = node.getAttribute("debug")
 			if ((self.nick.lower() == "dreamircuser") or (self.nick == "") or (self.nick[0] == " ") or (self.nick.lower() == "dm8000-vip")):
 				print "[dreamIRC] nickname error... restoring default..."
-				self.nick = self.device+"_"+self.mac_end
+				self.nick = self.device + "_" + self.mac_end
 		except IOError:
 			self.type = "IRC"
 			self.login = "1"
-			self.nick = self.device+"_"+self.mac_end
+			self.nick = self.device + "_" + self.mac_end
 			self.passwd = ""
 			self.server1 = "irc.belwue.de"
 			self.server2 = "irc.freenet.de"
@@ -114,7 +114,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 			self.debug = "False"
 
 		if self.debug != "True" or self.debug != "False":
-			self.debug="False"	
+			self.debug = "False"	
 		self.dreamIRCconf.nick = ConfigText(default=self.nick, fixed_size=False)
 		self.dreamIRCconf.passwd = ConfigText(default=self.passwd, fixed_size=False)
 		self.dreamIRCconf.server1 = ConfigText(default=self.server1, fixed_size=False)
@@ -125,7 +125,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 		self.dreamIRCconf.debug = ConfigSelection(default=self.debug, choices=["False","True"])
 
 	def keySave(self):
-		self.accounts=[]
+		self.accounts = []
 		self.type = "IRC"
 		self.login = "1"
 		self.nick = self.dreamIRCconf.nick.value
@@ -152,9 +152,9 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 
 	def checkServer(self, server):
 			try:
-				result=gethostbyname_ex(server)
+				result = gethostbyname_ex(server)
 			except:
-				self.session.open(MessageBox, _("irc server %s not responding!\nplease check your network settings and/or irc servername..." %server), MessageBox.TYPE_ERROR)	
+				self.session.open(MessageBox, _("irc server %s not responding!\nplease check your network settings and/or irc servername..." % server), MessageBox.TYPE_ERROR)	
 
 	def saveAndExit(self):
 		for x in self["config"].list:
@@ -169,14 +169,14 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 		
 class dreamIRCConfig:
 	def load(self):
-		self.pipe=MessagePipe()
-		self.status1=False
-		self.status2=False
-		self.status3=False
+		self.pipe = MessagePipe()
+		self.status1 = False
+		self.status2 = False
+		self.status3 = False
 		self.hardware_info = HardwareInfo()
-		self.device=self.hardware_info.get_device_name()
-		self.mac=getMacAddress()
-		self.mac_end=self.mac[6:]
+		self.device = self.hardware_info.get_device_name()
+		self.mac = getMacAddress()
+		self.mac_end = self.mac[6:]
 		try:
 			doc = xml.dom.minidom.parse(accounts_xml)
 			root = doc.childNodes[0]
@@ -186,7 +186,7 @@ class dreamIRCConfig:
 				self.nick = node.getAttribute("nick")
 				if ((self.nick.lower() == "dreamircuser") or (self.nick == "") or (self.nick[0] == " ") or (self.nick.lower() == "dm8000-vip")):
 					print "[dreamIRC] nickname error... restoring default..."
-					self.nick = self.device+"_"+self.mac_end
+					self.nick = self.device + "_" + self.mac_end
 				self.passwd = node.getAttribute("passwd")
 				self.server1 = node.getAttribute("server1") # atm only ip.. cause of probs with theads and dns..
 				self.server2 = node.getAttribute("server2") 
@@ -197,7 +197,7 @@ class dreamIRCConfig:
 		except IOError:
 			self.type = "IRC"
 			self.login = "1"
-			self.nick = self.device+"_"+self.mac_end
+			self.nick = self.device + "_" + self.mac_end
 			self.passwd = ""
 			self.server1 = "irc.freenet.de"
 			self.server2 = "irc.freenet.de"
@@ -210,41 +210,41 @@ class dreamIRCConfig:
 		self.server3 = self.server3.strip()
 		if self.server3:
 			try:
-				self.result3=gethostbyname_ex(self.server3)
+				self.result3 = gethostbyname_ex(self.server3)
 				if self.result3:
 					for ip_tmp3 in self.result3[2]:
-						self.ip=ip_tmp3
-						self.server=self.server3
-						self.status3=True
+						self.ip = ip_tmp3
+						self.server = self.server3
+						self.status3 = True
 			except:
 				print "unable to resolve hostname %s..." % self.server3
 		if self.server2:
 			try:
-				self.result2=gethostbyname_ex(self.server2)
+				self.result2 = gethostbyname_ex(self.server2)
 				if self.result2:
 					for ip_tmp2 in self.result2[2]:
-						self.ip=ip_tmp2
-						self.server=self.server2
-						self.status2=True
+						self.ip = ip_tmp2
+						self.server = self.server2
+						self.status2 = True
 			except:
 				print "unable to resolve hostname %s..." % self.server2
 		if self.server1:
 			try:
-				self.result1=gethostbyname_ex(self.server1)
+				self.result1 = gethostbyname_ex(self.server1)
 				if self.result1:
 					for ip_tmp1 in self.result1[2]:
-						self.ip=ip_tmp1
-						self.server=self.server1
-						self.status1=True
+						self.ip = ip_tmp1
+						self.server = self.server1
+						self.status1 = True
 			except:
 				print "unable to resolve hostname %s..." % self.server1
 				
-		if self.status1==False and self.status2==False and self.status3==False:
+		if self.status1 == False and self.status2 == False and self.status3 == False:
 			self.pipe.add("ERROR!!! no irc server was valid... please check settings...")
 			return False
 		else:
 			print " account = type: %s login:%s nick:%s passwd:%s server:%s ip:%s port:%s channel:%s debug:%s " % (self.type, self.login, self.nick, self.passwd, self.server, self.ip, self.port, self.channel, self.debug)
-			self.accounts=[ircsupport.IRCAccount(self.type, string.atoi(self.login), str(self.nick), str(self.passwd), str(self.ip), string.atoi(self.port), str(self.channel))]
+			self.accounts = [ircsupport.IRCAccount(self.type, string.atoi(self.login), str(self.nick), str(self.passwd), str(self.ip), string.atoi(self.port), str(self.channel))]
 			print self.accounts
 			return self.accounts
 	

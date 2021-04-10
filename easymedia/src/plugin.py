@@ -51,7 +51,7 @@ InfoBar_instance = None
 
 
 
-config.plugins.easyMedia  = ConfigSubsection()
+config.plugins.easyMedia = ConfigSubsection()
 config.plugins.easyMedia.music = ConfigSelection(default="mediaplayer", choices=[("no", _("Disabled")), ("mediaplayer", _("MediaPlayer")), ("merlinmp", _("MerlinMusicPlayer"))])
 config.plugins.easyMedia.files = ConfigSelection(default="dreamexplorer", choices=[("no", _("Disabled")), ("filebrowser", _("Filebrowser")), ("dreamexplorer", _("DreamExplorer")), ("tuxcom", _("TuxCom"))])
 config.plugins.easyMedia.videodb = ConfigSelection(default="no", choices=[("no", _("Disabled")), ("yes", _("Enabled"))])
@@ -116,7 +116,7 @@ def notEasy(session, **kwargs):
 def MPanelEntryComponent(key, text, cell):
 	res = [text]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 150, 17, 300, 60, 0, RT_HALIGN_LEFT, text[0]))
-	if cell<5:
+	if cell < 5:
 		bpng = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/key-' + str(cell) + ".png")
 		if bpng is not None:
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 0, 5, 5, 50, bpng))
@@ -409,15 +409,15 @@ class EasyMedia(Screen):
 		for x in MPaskList:
 			strpos = str(self.__keys[pos])
 			self.list.append(MPanelEntryComponent(key=strpos, text=x, cell=pos))
-			if pos==0:
+			if pos == 0:
 				self["key_pvr"].setText(MPaskList[0][0])
-			elif pos==1:
+			elif pos == 1:
 				self["key_red"].setText(MPaskList[1][0])
-			elif pos==2:
+			elif pos == 2:
 				self["key_green"].setText(MPaskList[2][0])
-			elif pos==3:
+			elif pos == 3:
 				self["key_yellow"].setText(MPaskList[3][0])
-			elif pos==4:
+			elif pos == 4:
 				self["key_blue"].setText(MPaskList[4][0])
 			pos += 1
 		self["list"] = MPanelList(list=self.list, selection=0)
@@ -448,16 +448,16 @@ class EasyMedia(Screen):
 		if wohin == 0:
 			self.close(was[wohin])
 		elif wohin == 1:
-			if len(was)>1: 
+			if len(was) > 1: 
 				self.close(was[wohin])
 		elif wohin == 2:
-			if len(was)>2: 
+			if len(was) > 2: 
 				self.close(was[wohin])
 		elif wohin == 3:
-			if len(was)>3: 
+			if len(was) > 3: 
 				self.close(was[wohin])
 		elif wohin == 4:
-			if len(was)>4: 
+			if len(was) > 4: 
 				self.close(was[wohin])
 
 	def goEntry(self, entry):
@@ -499,7 +499,7 @@ def MPcallbackFunc(answer):
 	elif answer == "BOOKMARKS":
 		tmpBookmarks = config.movielist.videodirs
 		myBookmarks = tmpBookmarks and tmpBookmarks.value[:] or []
-		if len(myBookmarks)>0:
+		if len(myBookmarks) > 0:
 			askBM = []
 			for s in myBookmarks:
 				askBM.append((s, s))

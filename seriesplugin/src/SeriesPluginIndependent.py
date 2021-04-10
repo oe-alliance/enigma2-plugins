@@ -89,7 +89,7 @@ class SeriesPluginIndependent(object):
 		#self.etimer.start( 10, True )
 
 	def run(self):
-		log.debug("SeriesPluginIndependent: run",  strftime("%a, %d %b %Y %H:%M:%S", localtime()))
+		log.debug("SeriesPluginIndependent: run", strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 
 		runIndependent()
 

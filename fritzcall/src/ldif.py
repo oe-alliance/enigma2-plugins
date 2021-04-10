@@ -41,8 +41,8 @@ except ImportError:
 attrtype_pattern = r'[\w;.]+(;[\w_-]+)*'
 attrvalue_pattern = r'(([^,]|\\,)+|".*?")'
 rdn_pattern = attrtype_pattern + r'[ ]*=[ ]*' + attrvalue_pattern
-dn_pattern   = rdn_pattern + r'([ ]*,[ ]*' + rdn_pattern + r')*[ ]*'
-dn_regex   = re.compile('^%s$' % dn_pattern)
+dn_pattern = rdn_pattern + r'([ ]*,[ ]*' + rdn_pattern + r')*[ ]*'
+dn_regex = re.compile('^%s$' % dn_pattern)
 
 ldif_pattern = '^((dn(:|::) %(dn_pattern)s)|(%(attrtype_pattern)s(:|::) .*)$)+' % vars()
 
@@ -57,7 +57,7 @@ MOD_OP_STR = {
 CHANGE_TYPES = ['add','delete','modify','modrdn']
 valid_changetype_dict = {}
 for c in CHANGE_TYPES:
-  valid_changetype_dict[c]=None
+  valid_changetype_dict[c] = None
 
 
 SAFE_STRING_PATTERN = '(^(\000|\n|\r| |:|<)|[\000\n\r\200-\377]+|[ ]+$)'
@@ -67,10 +67,10 @@ def is_dn(s):
   """
   returns 1 if s is a LDAP DN
   """
-  if s=='':
+  if s == '':
     return 1
   rm = dn_regex.match(s)
-  return rm!=None and rm.group(0)==s
+  return rm != None and rm.group(0) == s
 
 
 def needs_base64(s):
@@ -118,7 +118,7 @@ class LDIFWriter:
     """
     # Check maximum line length
     line_len = len(line)
-    if line_len<=self._cols:
+    if line_len <= self._cols:
       self._output_file.write(line)
       self._output_file.write(self._line_sep)
     else:
@@ -126,11 +126,11 @@ class LDIFWriter:
       pos = self._cols
       self._output_file.write(line[0:min(line_len,self._cols)])
       self._output_file.write(self._line_sep)
-      while pos<line_len:
+      while pos < line_len:
         self._output_file.write(' ')
-        self._output_file.write(line[pos:min(line_len,pos+self._cols-1)])
+        self._output_file.write(line[pos:min(line_len,pos + self._cols - 1)])
         self._output_file.write(self._line_sep)
-        pos = pos+self._cols-1
+        pos = pos + self._cols - 1
     return # _unfoldLDIFLine()
 
   def _unparseAttrTypeandValue(self,attr_type,attr_value):
@@ -167,17 +167,17 @@ class LDIFWriter:
         list of additions (2-tuple) or modifications (3-tuple)
     """
     mod_len = len(modlist[0])
-    if mod_len==2:
+    if mod_len == 2:
       changetype = 'add'
-    elif mod_len==3:
+    elif mod_len == 3:
       changetype = 'modify'
     else:
       raise ValueError,"modlist item of wrong length"
     self._unparseAttrTypeandValue('changetype',changetype)
     for mod in modlist:
-      if mod_len==2:
+      if mod_len == 2:
         mod_type,mod_vals = mod
-      elif mod_len==3:
+      elif mod_len == 3:
         mod_op,mod_type,mod_vals = mod
         self._unparseAttrTypeandValue(MOD_OP_STR[mod_op],mod_type)
       else:
@@ -185,8 +185,8 @@ class LDIFWriter:
       if mod_vals:
         for mod_val in mod_vals:
           self._unparseAttrTypeandValue(mod_type,mod_val)
-      if mod_len==3:
-        self._output_file.write('-'+self._line_sep)
+      if mod_len == 3:
+        self._output_file.write('-' + self._line_sep)
 
   def unparse(self,dn,record):
     """
@@ -211,7 +211,7 @@ class LDIFWriter:
     # Write empty line separating the records
     self._output_file.write(self._line_sep)
     # Count records written
-    self.records_written = self.records_written+1
+    self.records_written = self.records_written + 1
     return # unparse()
 
 
@@ -253,9 +253,9 @@ class LDIFParser:
     """
     Strip trailing line separators from s, but no other whitespaces
     """
-    if s[-2:]=='\r\n':
+    if s[-2:] == '\r\n':
       return s[:-2]
-    elif s[-1:]=='\n':
+    elif s[-1:] == '\n':
       return s[:-1]
     else:
       return s
@@ -303,7 +303,7 @@ class LDIFParser:
     """
     unfolded_lines = [self._stripLineSep(self._line)]
     self._line = self._input_file.readline()
-    while self._line and self._line[0]==' ':
+    while self._line and self._line[0] == ' ':
       unfolded_lines.append(self._stripLineSep(self._line[1:]))
       self._line = self._input_file.readline()
     return ''.join(unfolded_lines)
@@ -316,9 +316,9 @@ class LDIFParser:
     # Reading new attribute line
     unfolded_line = self._unfoldLDIFLine()
     # Ignore comments which can also be folded
-    while unfolded_line and unfolded_line[0]=='#':
+    while unfolded_line and unfolded_line[0] == '#':
       unfolded_line = self._unfoldLDIFLine()
-    if not unfolded_line or unfolded_line=='\n' or unfolded_line=='\r\n':
+    if not unfolded_line or unfolded_line == '\n' or unfolded_line == '\r\n':
       return None,None
     try:
       colon_pos = unfolded_line.index(':')
@@ -327,22 +327,22 @@ class LDIFParser:
       return None,None
     attr_type = unfolded_line[0:colon_pos]
     # if needed attribute value is BASE64 decoded
-    value_spec = unfolded_line[colon_pos:colon_pos+2]
-    if value_spec=='::':
+    value_spec = unfolded_line[colon_pos:colon_pos + 2]
+    if value_spec == '::':
       # attribute value needs base64-decoding
-      attr_value = base64.decodestring(unfolded_line[colon_pos+2:])
-    elif value_spec==':<':
+      attr_value = base64.decodestring(unfolded_line[colon_pos + 2:])
+    elif value_spec == ':<':
       # fetch attribute value from URL
-      url = unfolded_line[colon_pos+2:].strip()
+      url = unfolded_line[colon_pos + 2:].strip()
       attr_value = None
       if self._process_url_schemes:
         u = urlparse.urlparse(url)
         if self._process_url_schemes.has_key(u[0]):
           attr_value = urllib.urlopen(url).read()
-    elif value_spec==':\r\n' or value_spec=='\n':
+    elif value_spec == ':\r\n' or value_spec == '\n':
       attr_value = ''
     else:
-      attr_value = unfolded_line[colon_pos+2:].lstrip()
+      attr_value = unfolded_line[colon_pos + 2:].lstrip()
     return attr_type,attr_value
 
   def parse(self):
@@ -352,7 +352,7 @@ class LDIFParser:
     self._line = self._input_file.readline()
 
     while self._line and \
-          (not self._max_entries or self.records_read<self._max_entries):
+          (not self._max_entries or self.records_read < self._max_entries):
 
       # Reset record
       version = None
@@ -363,32 +363,32 @@ class LDIFParser:
 
       attr_type,attr_value = self._parseAttrTypeandValue()
 
-      while attr_type!=None and attr_value!=None:
-        if attr_type=='dn':
+      while attr_type != None and attr_value != None:
+        if attr_type == 'dn':
           # attr type and value pair was DN of LDIF record
-          if dn!=None:
+          if dn != None:
 	    raise ValueError, 'Two lines starting with dn: in one record.'
           if not is_dn(attr_value):
 	    raise ValueError, 'No valid string-representation of distinguished name %s.' % (repr(attr_value))
           dn = attr_value
-        elif attr_type=='version' and dn is None:
+        elif attr_type == 'version' and dn is None:
           version = 1
-        elif attr_type=='changetype':
+        elif attr_type == 'changetype':
           # attr type and value pair was DN of LDIF record
           if dn is None:
 	    raise ValueError, 'Read changetype: before getting valid dn: line.'
-          if changetype!=None:
+          if changetype != None:
 	    raise ValueError, 'Two lines starting with changetype: in one record.'
           if not valid_changetype_dict.has_key(attr_value):
 	    raise ValueError, 'changetype value %s is invalid.' % (repr(attr_value))
           changetype = attr_value
-        elif attr_value!=None and \
+        elif attr_value != None and \
              not self._ignored_attr_types.has_key(attr_type.lower()):
           # Add the attribute to the entry if not ignored attribute
           if entry.has_key(attr_type):
             entry[attr_type].append(attr_value)
           else:
-            entry[attr_type]=[attr_value]
+            entry[attr_type] = [attr_value]
 
         # Read the next line within an entry
         attr_type,attr_value = self._parseAttrTypeandValue()
@@ -396,7 +396,7 @@ class LDIFParser:
       if entry:
         # append entry to result list
         self.handle(dn,entry)
-        self.records_read = self.records_read+1
+        self.records_read = self.records_read + 1
 
     return # parse()
 

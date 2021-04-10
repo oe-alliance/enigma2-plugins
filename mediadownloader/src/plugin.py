@@ -44,7 +44,7 @@ def filescan_open(items, session, **kwargs):
 		# Create human-readable filenames
 		choices = [
 			(
-				item.path[item.path.rfind("/")+1:].replace('%20', ' ').
+				item.path[item.path.rfind("/") + 1:].replace('%20', ' ').
 					replace('%5F', '_').replace('%2D', '-'),
 				item
 			)

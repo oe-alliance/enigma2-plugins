@@ -115,11 +115,11 @@ class SeriesPluginInfoScreen(Screen):
 		#TODO HelpableActionMap
 		self["actions"] = ActionMap(["OkCancelActions", "EventViewActions", "DirectionActions", "ColorActions"],
 		{
-			"cancel":    self.close,
-			"ok":        self.close,
-			"up":        self["event_description"].pageUp,
-			"down":      self["event_description"].pageDown,
-			"red":       self.redButton,
+			"cancel": self.close,
+			"ok": self.close,
+			"up": self["event_description"].pageUp,
+			"down": self["event_description"].pageDown,
+			"red": self.redButton,
 			"prevEvent": self.prevEpisode,
 			"nextEvent": self.nextEpisode,
 			
@@ -284,7 +284,7 @@ class SeriesPluginInfoScreen(Screen):
 		
 		logo = self.seriesPlugin.getLogo(future, today, elapsed)
 		if logo:
-			logopath = os.path.join(PIXMAP_PATH, logo+".png")
+			logopath = os.path.join(PIXMAP_PATH, logo + ".png")
 			
 			if self.session and os.path.exists(logopath):
 				self.loadPixmap("logo", logopath)
@@ -355,7 +355,7 @@ class SeriesPluginInfoScreen(Screen):
 		self["event_description"].setText(text)
 		
 		self["datetime"].setText(datetime.fromtimestamp(begin).strftime("%d.%m.%Y, %H:%M"))
-		self["duration"].setText(_("%d min")%((duration)/60))
+		self["duration"].setText(_("%d min") % ((duration) / 60))
 		self["channel"].setText(channel)
 
 	# Handle pixmaps

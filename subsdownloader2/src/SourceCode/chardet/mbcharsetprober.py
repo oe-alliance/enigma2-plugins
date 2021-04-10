@@ -68,7 +68,7 @@ class MultiByteCharSetProber(CharSetProber):
                     self._mLastChar[1] = aBuf[0]
                     self._mDistributionAnalyzer.feed(self._mLastChar, charLen)
                 else:
-                    self._mDistributionAnalyzer.feed(aBuf[i-1:i+1], charLen)
+                    self._mDistributionAnalyzer.feed(aBuf[i - 1:i + 1], charLen)
                     
         self._mLastChar[0] = aBuf[aLen - 1]
         

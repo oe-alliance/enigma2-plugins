@@ -134,7 +134,7 @@ class AddCopyTimeshiftTask(Task):
 		if self.srcsize <= 0 or not fileExists(self.destfile, 'r'):
 			return
 
-		self.setProgress(int((os_path.getsize(self.destfile)/float(self.srcsize))*100))
+		self.setProgress(int((os_path.getsize(self.destfile) / float(self.srcsize)) * 100))
 		self.ProgressTimer.start(15000, True)
 
 	def prepare(self):
@@ -175,7 +175,7 @@ class AddMergeTimeshiftTask(Task):
 		if self.srcsize <= 0 or not fileExists(self.destfile, 'r'):
 			return
 
-		self.setProgress(int((os_path.getsize(self.destfile)/float(self.srcsize))*100))
+		self.setProgress(int((os_path.getsize(self.destfile) / float(self.srcsize)) * 100))
 		self.ProgressTimer.start(7500, True)
 
 	def prepare(self):
@@ -232,7 +232,7 @@ class InfoBar(InfoBarOrg):
 				iPlayableService.evUpdatedInfo: self.__evInfoChanged,
 				iPlayableService.evUpdatedEventInfo: self.__evEventInfoChanged,
 				iPlayableService.evSeekableStatusChanged: self.__seekableStatusChanged,
-				iPlayableService.evUser+1: self.ptsTimeshiftFileChanged
+				iPlayableService.evUser + 1: self.ptsTimeshiftFileChanged
 			})
 
 		self["PTSactions"] = ActionMap(["PTS_GlobalActions"],{"instantRecord": self.instantRecord, "restartTimeshift": self.restartTimeshift},-2)
@@ -324,7 +324,7 @@ class InfoBar(InfoBarOrg):
 		if self.pts_currplaying == 1:
 			preptsfile = config.plugins.pts.maxevents.value
 		else:
-			preptsfile = self.pts_currplaying-1
+			preptsfile = self.pts_currplaying - 1
 
 		# Switch to previous TS file by jumping to next one
 		if fileExists("%s/pts_livebuffer.%s" % (config.usage.timeshift_path.value, preptsfile), 'r') and preptsfile != self.pts_eventcount:
@@ -362,7 +362,7 @@ class InfoBar(InfoBarOrg):
 			if self.save_current_timeshift and self.timeshift_enabled:
 				if config.recording.margin_after.getValue() > 0 and len(self.recording) == 0:
 					self.SaveTimeshift(mergelater=True)
-					recording = RecordTimerEntry(ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()), time(), time()+(config.recording.margin_after.getValue()*60), self.pts_curevent_name, self.pts_curevent_description, self.pts_curevent_eventid, dirname=config.usage.default_path.value)
+					recording = RecordTimerEntry(ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()), time(), time() + (config.recording.margin_after.getValue() * 60), self.pts_curevent_name, self.pts_curevent_description, self.pts_curevent_eventid, dirname=config.usage.default_path.value)
 					recording.dontSave = True
 					self.session.nav.RecordTimer.record(recording)
 					self.recording.append(recording)
@@ -371,7 +371,7 @@ class InfoBar(InfoBarOrg):
 
 			# Restarting active timers after zap ...
 			if self.pts_delay_timer.isActive() and not self.timeshift_enabled:
-				self.pts_delay_timer.start(config.plugins.pts.startdelay.value*1000, True)
+				self.pts_delay_timer.start(config.plugins.pts.startdelay.value * 1000, True)
 			if self.pts_cleanUp_timer.isActive() and not self.timeshift_enabled:
 				self.pts_cleanUp_timer.start(3000, True)
 
@@ -380,7 +380,7 @@ class InfoBar(InfoBarOrg):
 				if not self.timeshift_enabled or old_begin_time != self.pts_begintime or old_begin_time == 0:
 					if self.pts_service_changed:
 						self.pts_service_changed = False
-						self.pts_delay_timer.start(config.plugins.pts.startdelay.value*1000, True)
+						self.pts_delay_timer.start(config.plugins.pts.startdelay.value * 1000, True)
 					else:
 						self.pts_delay_timer.start(1000, True)
 
@@ -404,7 +404,7 @@ class InfoBar(InfoBarOrg):
 
 		# setNextPlaybackFile() when switching back to live tv
 		if config.plugins.pts.enabled.value and self.timeshift_enabled and not self.isSeekable():
-			if self.pts_starttime <= (time()-5):
+			if self.pts_starttime <= (time() - 5):
 				self.pts_blockZap_timer.start(3000, True)
 			self.pts_currplaying = self.pts_eventcount
 			self.ptsSetNextPlaybackFile("pts_livebuffer.%s" % (self.pts_eventcount))
@@ -530,7 +530,7 @@ class InfoBar(InfoBarOrg):
 	def saveTimeshiftEventPopup(self):
 		filecount = 0
 		entrylist = []
-		entrylist.append((_("Current Event:")+" %s" % (self.pts_curevent_name), "savetimeshift"))
+		entrylist.append((_("Current Event:") + " %s" % (self.pts_curevent_name), "savetimeshift"))
 
 		filelist = os_listdir(config.usage.timeshift_path.value)
 
@@ -540,7 +540,7 @@ class InfoBar(InfoBarOrg):
 		for filename in filelist:
 			if (filename.startswith("pts_livebuffer.") is True) and (filename.endswith(".del") is False and filename.endswith(".meta") is False and filename.endswith(".eit") is False and filename.endswith(".copy") is False):
 				statinfo = os_stat("%s/%s" % (config.usage.timeshift_path.value,filename))
-				if statinfo.st_mtime < (time()-5.0):
+				if statinfo.st_mtime < (time() - 5.0):
 					# Get Event Info from meta file
 					readmetafile = open("%s/%s.meta" % (config.usage.timeshift_path.value,filename), "r")
 					servicerefname = readmetafile.readline()[0:-1]
@@ -621,8 +621,8 @@ class InfoBar(InfoBarOrg):
 				if filename.startswith("timeshift.") and not filename.endswith(".del") and not filename.endswith(".copy") and not filename.endswith(".sc"):
 					try:
 						statinfo = os_stat("%s/%s" % (config.usage.timeshift_path.value,filename))
-						if statinfo.st_mtime > (time()-5.0):
-							savefilename=filename
+						if statinfo.st_mtime > (time() - 5.0):
+							savefilename = filename
 					except Exception, errormsg:
 						Notifications.AddNotification(MessageBox, _("PTS Plugin Error: %s" % (errormsg)), MessageBox.TYPE_ERROR)
 
@@ -643,7 +643,7 @@ class InfoBar(InfoBarOrg):
 			try:
 				if timeshiftfile is None:
 					# Save Current Event by creating hardlink to ts file
-					if self.pts_starttime >= (time()-60):
+					if self.pts_starttime >= (time() - 60):
 						self.pts_starttime -= 60
 
 					ptsfilename = "%s - %s - %s" % (strftime("%Y%m%d %H%M",localtime(self.pts_starttime)),self.pts_curevent_station,self.pts_curevent_name)
@@ -687,7 +687,7 @@ class InfoBar(InfoBarOrg):
 					if config.recording.ascii_filenames.value:
 						ptsfilename = ASCIItranslit.legacyEncode(ptsfilename)
 
-					fullname=Directories.getRecordingFilename(ptsfilename,config.usage.default_path.value)
+					fullname = Directories.getRecordingFilename(ptsfilename,config.usage.default_path.value)
 					os_link("%s/%s" % (config.usage.timeshift_path.value,timeshiftfile),"%s.ts" % (fullname))
 					os_link("%s/%s.meta" % (config.usage.timeshift_path.value,timeshiftfile),"%s.ts.meta" % (fullname))
 					if fileExists("%s/%s.eit" % (config.usage.timeshift_path.value,timeshiftfile)):
@@ -701,7 +701,7 @@ class InfoBar(InfoBarOrg):
 
 				# Create AP and SC Files when not merging
 				if not mergelater:
-					self.ptsCreateAPSCFiles(fullname+".ts")
+					self.ptsCreateAPSCFiles(fullname + ".ts")
 
 			except Exception, errormsg:
 				timeshift_saved = False
@@ -717,7 +717,7 @@ class InfoBar(InfoBarOrg):
 
 					if timeshiftfile is None:
 						# Get Filesize for Free Space Check
-						filesize = int(os_path.getsize("%s/%s" % (config.usage.timeshift_path.value,savefilename)) / (1024*1024))
+						filesize = int(os_path.getsize("%s/%s" % (config.usage.timeshift_path.value,savefilename)) / (1024 * 1024))
 
 						# Save Current Event by copying it to the other device
 						if filesize <= freespace:
@@ -729,7 +729,7 @@ class InfoBar(InfoBarOrg):
 							self.ptsCreateEITFile(fullname)
 					elif timeshiftfile.startswith("pts_livebuffer"):
 						# Get Filesize for Free Space Check
-						filesize = int(os_path.getsize("%s/%s" % (config.usage.timeshift_path.value, timeshiftfile)) / (1024*1024))
+						filesize = int(os_path.getsize("%s/%s" % (config.usage.timeshift_path.value, timeshiftfile)) / (1024 * 1024))
 
 						# Save stored timeshift by copying it to the other device
 						if filesize <= freespace:
@@ -748,7 +748,7 @@ class InfoBar(InfoBarOrg):
 					# Only copy file when enough disk-space available!
 					if filesize <= freespace:
 						timeshift_saved = True
-						copy_file = copy_file+"."+str(randomint)
+						copy_file = copy_file + "." + str(randomint)
 
 						# Get Event Info from meta file
 						if fileExists("%s.ts.meta" % (fullname)):
@@ -774,7 +774,7 @@ class InfoBar(InfoBarOrg):
 				config.plugins.pts.isRecording.value = False
 				self.save_timeshift_postaction = None
 				errormessage = str(timeshift_saveerror1) + "\n" + str(timeshift_saveerror2)
-				Notifications.AddNotification(MessageBox, _("Timeshift save failed!")+"\n\n%s" % errormessage, MessageBox.TYPE_ERROR)
+				Notifications.AddNotification(MessageBox, _("Timeshift save failed!") + "\n\n%s" % errormessage, MessageBox.TYPE_ERROR)
 
 	def ptsCleanTimeshiftFolder(self):
 		if not config.plugins.pts.enabled.value or self.ptsCheckTimeshiftPath() is False or self.session.screen["Standby"].boolean is True:
@@ -786,7 +786,7 @@ class InfoBar(InfoBarOrg):
 
 					statinfo = os_stat("%s/%s" % (config.usage.timeshift_path.value,filename))
 					# if no write for 5 sec = stranded timeshift
-					if statinfo.st_mtime < (time()-5.0):
+					if statinfo.st_mtime < (time() - 5.0):
 						print "PTS-Plugin: Erasing stranded timeshift %s" % filename
 						self.BgFileEraser.erase("%s/%s" % (config.usage.timeshift_path.value,filename))
 
@@ -811,7 +811,7 @@ class InfoBar(InfoBarOrg):
 			info = service and service.info()
 			event = info and info.getEvent(0)
 		except Exception, errormsg:
-			Notifications.AddNotification(MessageBox, _("Getting Event Info failed!")+"\n\n%s" % errormsg, MessageBox.TYPE_ERROR, timeout=10)
+			Notifications.AddNotification(MessageBox, _("Getting Event Info failed!") + "\n\n%s" % errormsg, MessageBox.TYPE_ERROR, timeout=10)
 
 		if event is not None:
 			curEvent = parseEvent(event)
@@ -848,7 +848,7 @@ class InfoBar(InfoBarOrg):
 			if filename.startswith("timeshift.") and not filename.endswith(".del") and not filename.endswith(".copy") and not filename.endswith(".sc"):
 				try:
 					statinfo = os_stat("%s/%s" % (config.usage.timeshift_path.value,filename))
-					if statinfo.st_mtime > (time()-5.0):
+					if statinfo.st_mtime > (time() - 5.0):
 						try:
 							self.BgFileEraser.erase("%s/pts_livebuffer.%s" % (config.usage.timeshift_path.value,self.pts_eventcount))
 							self.BgFileEraser.erase("%s/pts_livebuffer.%s.meta" % (config.usage.timeshift_path.value,self.pts_eventcount))
@@ -864,7 +864,7 @@ class InfoBar(InfoBarOrg):
 							metafile.write("%s\n%s\n%s\n%i\n" % (self.pts_curevent_servicerefname,self.pts_curevent_name.replace("\n", ""),self.pts_curevent_description.replace("\n", ""),int(self.pts_starttime)))
 							metafile.close()
 						except Exception, errormsg:
-							Notifications.AddNotification(MessageBox, _("Creating Hardlink to Timeshift file failed!")+"\n"+_("The Filesystem on your Timeshift-Device does not support hardlinks.\nMake sure it is formated in EXT2 or EXT3!")+"\n\n%s" % errormsg, MessageBox.TYPE_ERROR)
+							Notifications.AddNotification(MessageBox, _("Creating Hardlink to Timeshift file failed!") + "\n" + _("The Filesystem on your Timeshift-Device does not support hardlinks.\nMake sure it is formated in EXT2 or EXT3!") + "\n\n%s" % errormsg, MessageBox.TYPE_ERROR)
 
 						# Create EIT File
 						self.ptsCreateEITFile("%s/pts_livebuffer.%s" % (config.usage.timeshift_path.value,self.pts_eventcount))
@@ -884,7 +884,7 @@ class InfoBar(InfoBarOrg):
 					errormsg = str(errormsg)
 					if errormsg.find('Input/output error') != -1:
 						errormsg += _("\nAn Input/output error usually indicates a corrupted filesystem! Please check the filesystem of your timeshift-device!")
-					Notifications.AddNotification(MessageBox, _("Creating Hardlink to Timeshift file failed!")+"\n%s" % (errormsg), MessageBox.TYPE_ERROR)
+					Notifications.AddNotification(MessageBox, _("Creating Hardlink to Timeshift file failed!") + "\n%s" % (errormsg), MessageBox.TYPE_ERROR)
 
 	def ptsRecordCurrentEvent(self):
 			recording = RecordTimerEntry(ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()), time(), self.pts_curevent_end, self.pts_curevent_name, self.pts_curevent_description, self.pts_curevent_eventid, dirname=config.usage.default_path.value)
@@ -948,7 +948,7 @@ class InfoBar(InfoBarOrg):
 					# If still recording or transfering, try again later ...
 					if fileExists("%s/%s" % (config.usage.default_path.value,ptsmergeDEST)):
 						statinfo = os_stat("%s/%s" % (config.usage.default_path.value,ptsmergeDEST))
-						if statinfo.st_mtime > (time()-10.0):
+						if statinfo.st_mtime > (time() - 10.0):
 							self.pts_mergeRecords_timer.start(120000, True)
 							return
 
@@ -963,9 +963,9 @@ class InfoBar(InfoBarOrg):
 
 	def ptsCreateAPSCFiles(self, filename):
 		if fileExists(filename, 'r'):
-			if fileExists(filename+".meta", 'r'):
+			if fileExists(filename + ".meta", 'r'):
 				# Get Event Info from meta file
-				readmetafile = open(filename+".meta", "r")
+				readmetafile = open(filename + ".meta", "r")
 				servicerefname = readmetafile.readline()[0:-1]
 				eventname = readmetafile.readline()[0:-1]
 			else:
@@ -979,7 +979,7 @@ class InfoBar(InfoBarOrg):
 			try:
 				import eitsave
 				serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).ref.toString()
-				eitsave.SaveEIT(serviceref, filename+".eit", self.pts_curevent_eventid, -1, -1)
+				eitsave.SaveEIT(serviceref, filename + ".eit", self.pts_curevent_eventid, -1, -1)
 			except Exception, errormsg:
 				print "PTS Plugin: %s" % (errormsg)
 
@@ -1134,8 +1134,8 @@ class InfoBar(InfoBarOrg):
 		length = self.ptsGetLength()
 
 		if length >= 1:
-			tpixels = int((float(int((position*100)/length))/100)*400)
-			self.pvrStateDialog["PTSSeekPointer"].setPosition(self.pts_seekpointer_MinX+tpixels, self.pvrStateDialog["PTSSeekPointer"].position[1])
+			tpixels = int((float(int((position * 100) / length)) / 100) * 400)
+			self.pvrStateDialog["PTSSeekPointer"].setPosition(self.pts_seekpointer_MinX + tpixels, self.pvrStateDialog["PTSSeekPointer"].position[1])
 
 	def ptsMoveSeekPointer(self, direction=None):
 		if direction is None or self.pts_pvrStateDialog != "PTSTimeshiftState":
@@ -1148,18 +1148,18 @@ class InfoBar(InfoBarOrg):
 		if direction == "left":
 			minmaxval = self.pts_seekpointer_MinX
 			movepixels = -15
-			if cur_pos[0]+movepixels > minmaxval:
+			if cur_pos[0] + movepixels > minmaxval:
 				isvalidjump = True
 		elif direction == "right":
 			minmaxval = self.pts_seekpointer_MaxX
 			movepixels = 15
-			if cur_pos[0]+movepixels < minmaxval:
+			if cur_pos[0] + movepixels < minmaxval:
 				isvalidjump = True
 		else:
 			return 0
 
 		if isvalidjump:
-			self.pvrStateDialog["PTSSeekPointer"].setPosition(cur_pos[0]+movepixels,cur_pos[1])
+			self.pvrStateDialog["PTSSeekPointer"].setPosition(cur_pos[0] + movepixels,cur_pos[1])
 		else:
 			self.pvrStateDialog["PTSSeekPointer"].setPosition(minmaxval,cur_pos[1])
 
@@ -1201,10 +1201,10 @@ class InfoBar(InfoBarOrg):
 				self.pvrStateDialog["eventname"].setText("")
 
 		# Get next pts file ...
-		if self.pts_currplaying+1 > config.plugins.pts.maxevents.value:
+		if self.pts_currplaying + 1 > config.plugins.pts.maxevents.value:
 			nextptsfile = 1
 		else:
-			nextptsfile = self.pts_currplaying+1
+			nextptsfile = self.pts_currplaying + 1
 
 		# Seek to previous file
 		if self.pts_seektoprevfile:
@@ -1236,7 +1236,7 @@ class InfoBar(InfoBarOrg):
 			return
 
 		self.setSeekState(self.SEEK_STATE_PAUSE)
-		self.doSeek(-90000*4) # seek ~4s before end
+		self.doSeek(-90000 * 4) # seek ~4s before end
 		self.pts_SeekBack_timer.start(1000, True)
 
 	def ptsSeekBackTimer(self):
@@ -1505,7 +1505,7 @@ InfoBarNumberZap_keyNumberGlobal = InfoBarNumberZap.keyNumberGlobal
 def keyNumberGlobal(self, number):
 	if self.pts_pvrStateDialog == "PTSTimeshiftState" and self.timeshift_enabled and self.isSeekable() and number == 0:
 		InfoBarTimeshiftState._mayShow(self)
-		self.pvrStateDialog["PTSSeekPointer"].setPosition(self.pts_seekpointer_MaxX/2, self.pvrStateDialog["PTSSeekPointer"].position[1])
+		self.pvrStateDialog["PTSSeekPointer"].setPosition(self.pts_seekpointer_MaxX / 2, self.pvrStateDialog["PTSSeekPointer"].position[1])
 		if self.seekstate != self.SEEK_STATE_PLAY:
 			self.setSeekState(self.SEEK_STATE_PLAY)
 		self.ptsSeekPointerOK()
@@ -1531,7 +1531,7 @@ RecordTimer_getNextRecordingTime = RecordTimer.getNextRecordingTime
 
 def getNextRecordingTime(self):
 	nextrectime = RecordTimer_getNextRecordingTime(self)
-	faketime = time()+300
+	faketime = time() + 300
 
 	if config.plugins.pts.isRecording.value or len(JobManager.getPendingJobs()) >= 1:
 		if nextrectime > 0 and nextrectime < faketime:
@@ -1559,7 +1559,7 @@ def _mayShow(self):
 			idx = config.usage.infobar_timeout.index
 			if not idx:
 				idx = 5
-			self.pvrstate_hide_timer.start(idx*1000, True)
+			self.pvrstate_hide_timer.start(idx * 1000, True)
 		else:
 			self.pvrstate_hide_timer.stop()
 	elif self.execing and self.timeshift_enabled and not self.isSeekable():
@@ -1634,8 +1634,8 @@ def instantRecord(self):
 			(_("add recording (enter recording endtime)"), "manualendtime"),
 			(_("change recording (duration)"), "changeduration"),
 			(_("change recording (endtime)"), "changeendtime"),
-			(_("Timeshift")+" "+_("save recording (stop after current event)"), "savetimeshift"),
-			(_("Timeshift")+" "+_("save recording (Select event)"), "savetimeshiftEvent"),
+			(_("Timeshift") + " " + _("save recording (stop after current event)"), "savetimeshift"),
+			(_("Timeshift") + " " + _("save recording (Select event)"), "savetimeshiftEvent"),
 			(_("do nothing"), "no")))
 	else:
 		self.session.openWithCallback(self.recordQuestionCallback, ChoiceBox,
@@ -1644,8 +1644,8 @@ def instantRecord(self):
 			(_("add recording (indefinitely)"), "indefinitely"),
 			(_("add recording (enter recording duration)"), "manualduration"),
 			(_("add recording (enter recording endtime)"), "manualendtime"),
-			(_("Timeshift")+" "+_("save recording (stop after current event)"), "savetimeshift"),
-			(_("Timeshift")+" "+_("save recording (Select event)"), "savetimeshiftEvent"),
+			(_("Timeshift") + " " + _("save recording (stop after current event)"), "savetimeshift"),
+			(_("Timeshift") + " " + _("save recording (Select event)"), "savetimeshiftEvent"),
 			(_("don't record"), "no")))
 
 InfoBarInstantRecord.instantRecord = instantRecord
@@ -1681,7 +1681,7 @@ class PermanentTimeShiftSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skinName = ["PTSSetup", "Setup"]
-		self.setup_title = _("Permanent Timeshift Settings Version %s") %VERSION
+		self.setup_title = _("Permanent Timeshift Settings Version %s") % VERSION
 
 		self.onChangedEntry = []
 		self.list = []

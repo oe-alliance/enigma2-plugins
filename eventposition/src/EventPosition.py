@@ -29,7 +29,7 @@ class EventPosition(Poll, Converter, object):
 	def __init__(self, type):
 		Poll.__init__(self)
 		Converter.__init__(self, type)
-		self.poll_interval = 30*1000
+		self.poll_interval = 30 * 1000
 		self.poll_enabled = True
 
 	@cached

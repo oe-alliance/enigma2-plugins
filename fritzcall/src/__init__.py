@@ -39,9 +39,9 @@ def __(text, front=True):
 	# else:
 	#	return '.....' 
 	#===========================================================================
-	out =""
-	for i in range(len(text)/2):
-		out = out + text[i*2] + '.'
+	out = ""
+	for i in range(len(text) / 2):
+		out = out + text[i * 2] + '.'
 	return out
 
 import re

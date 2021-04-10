@@ -164,10 +164,10 @@ class SortableMenuList(MenuList):
 
 		l = [
 			None,
-			(eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, height, 0, RT_HALIGN_LEFT|RT_WRAP, menu[0], color, color),
+			(eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, height, 0, RT_HALIGN_LEFT | RT_WRAP, menu[0], color, color),
 		]
 		if menu[0] == self.selected:
-			l.insert(1, (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, height, 0, RT_HALIGN_LEFT|RT_WRAP, '',  None, None, None, self.selectedColor, None, None))
+			l.insert(1, (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, height, 0, RT_HALIGN_LEFT | RT_WRAP, '', None, None, None, self.selectedColor, None, None))
 		return l
 
 class SortableMenu(Menu, HelpableScreen):

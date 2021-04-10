@@ -90,9 +90,9 @@ class DynDNSService:
 			str = str.lstrip().rstrip()
 
 			if self.lastip != str:
-				self.lastip=str
+				self.lastip = str
 				reactor.callLater(1, self.onIPchanged)
-			self.timer.start(int(config.plugins.DynDNS.interval.value)*60000)
+			self.timer.start(int(config.plugins.DynDNS.interval.value) * 60000)
 		except Exception,e:
 			print "[DynDNS]",e
 			str = "coundnotgetip"
@@ -100,14 +100,14 @@ class DynDNSService:
 	def onIPchanged(self):
 		print "[DynDNS] IP change, setting new one",self.lastip
 		try:
-			url = "http://members.dyndns.org/nic/update?system=dyndns&hostname=%s&myip=%s&wildcard=ON&offline=NO"%(config.plugins.DynDNS.hostname.value,self.lastip)
+			url = "http://members.dyndns.org/nic/update?system=dyndns&hostname=%s&myip=%s&wildcard=ON&offline=NO" % (config.plugins.DynDNS.hostname.value,self.lastip)
 			if self.getURL(url).find("good") is not -1:
 				print "[DynDNS] ip changed"
 		except Exception,e:
 			print "[DynDNS] ip was not changed",e
 
 	def getURL(self,url):
-		request =  Request(url)
+		request = Request(url)
    		base64string = encodestring('%s:%s' % (config.plugins.DynDNS.user.value,config.plugins.DynDNS.password.value))[:-1]
    		request.add_header("Authorization", "Basic %s" % base64string)
    		htmlFile = urlopen(request)

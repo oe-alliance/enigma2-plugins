@@ -30,7 +30,7 @@ class SatellitesList(Source):
 			s_type = service_types_tv
 		else:
 			s_type = service_types_radio
-		refstr = '%s FROM SATELLITES ORDER BY satellitePosition'%(s_type)
+		refstr = '%s FROM SATELLITES ORDER BY satellitePosition' % (s_type)
 		ref = eServiceReference(refstr)
 		serviceHandler = eServiceCenter.getInstance()
 		counter = i = 0
@@ -38,7 +38,7 @@ class SatellitesList(Source):
 			counter = 1
 		while i <= counter:
 			if i:
-				refstr ='%s FROM SATELLITES ORDER BY satellitePosition'%(service_types_tv_hd)
+				refstr = '%s FROM SATELLITES ORDER BY satellitePosition' % (service_types_tv_hd)
 				ref = eServiceReference(refstr)
 			servicelist = serviceHandler.list(ref)
 			if not servicelist is None:
@@ -52,7 +52,7 @@ class SatellitesList(Source):
 						orbpos += 3600
 					if service.getPath().find("FROM PROVIDER") != -1:
 						continue
-					elif service.getPath().find("flags == %d" %(FLAG_SERVICE_NEW_FOUND)) != -1:
+					elif service.getPath().find("flags == %d" % (FLAG_SERVICE_NEW_FOUND)) != -1:
 						service_type = _("New")
 					else:
 						service_type = _("Services")
