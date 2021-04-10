@@ -44,7 +44,7 @@ class CrashLog(ControllerBase):
 		self.crashlogs = []
 
 		# Default configuration
-		self.setOption( 'delete_logs', NoSave(ConfigYesNo( default=False )), _("Delete crashlog(s)") )
+		self.setOption('delete_logs', NoSave(ConfigYesNo(default=False)), _("Delete crashlog(s)"))
 
 	def run(self, callback, errback):
 		# At the end a plugin has to call one of the functions: callback or errback
@@ -52,12 +52,12 @@ class CrashLog(ControllerBase):
 		# If empty or none is returned, nothing will be sent
 		self.crashlogs = []
 		text = "Found crashlogs, see attachment(s)\n"
-		for file in os.listdir( CRASHLOG_DIR ):
+		for file in os.listdir(CRASHLOG_DIR):
 			if file.startswith("enigma2_crash_") and file.endswith(".log"):
-				crashlog = os.path.join( CRASHLOG_DIR, file )
+				crashlog = os.path.join(CRASHLOG_DIR, file)
 				self.crashlogs.append(crashlog)
 		if self.crashlogs:
-			callback( SUBJECT, BODY, self.crashlogs )
+			callback(SUBJECT, BODY, self.crashlogs)
 		else:
 			callback()
 
@@ -67,18 +67,18 @@ class CrashLog(ControllerBase):
 		if self.getValue('delete_logs'):
 			# Delete crashlogs
 			for crashlog in self.crashlogs[:]:
-				if os.path.exists( crashlog ):
-					os.remove( crashlog )
-				self.crashlogs.remove( crashlog )
+				if os.path.exists(crashlog):
+					os.remove(crashlog)
+				self.crashlogs.remove(crashlog)
 		else:
 			# Rename crashlogs to avoid resending it
 			for crashlog in self.crashlogs[:]:
-				if os.path.exists( crashlog ):
+				if os.path.exists(crashlog):
 					# Adapted from autosubmit - instead of .sent we will use .pushed
 					currfilename = str(os.path.basename(crashlog))
 					newfilename = "/media/hdd/" + currfilename + ".pushed"
 					os.rename(crashlog, newfilename)
-				self.crashlogs.remove( crashlog )
+				self.crashlogs.remove(crashlog)
 
 	def errback(self):
 		# Called after all services has returned, but at least one has failed

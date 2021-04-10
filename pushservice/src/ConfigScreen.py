@@ -58,7 +58,7 @@ from .ControllerBase import ControllerBase
 # Configuration screen
 class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 
-	skinfile = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/PushService/skin.xml" )
+	skinfile = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/PushService/skin.xml")
 	skin = open(skinfile).read()
 
 	def __init__(self, session):
@@ -131,7 +131,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.change)
 		
 		# Override selectionChanged because our config tuples are bigger
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		def selectionChanged():
 			current = self["config"].getCurrent()
 			if self["config"].current != current:
@@ -148,7 +148,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 
 	def change(self, uniqueid=None):
 		select = self.build(uniqueid)
-		self["config"].setList( self.list )
+		self["config"].setList(self.list)
 		
 		if select is not None:
 			self["config"].instance.moveSelectionTo(select)
@@ -161,13 +161,13 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 			select = None
 			if entries:
 				for idx, entry in enumerate(entries):
-					self.list.append( getConfigListEntry( entry.getNameId(), entry.getConfigEnable(), idx ) )
+					self.list.append(getConfigListEntry(entry.getNameId(), entry.getConfigEnable(), idx))
 					if entry.getUniqueID() == uniqueid:
 						# Select the added entry
 						select = len(self.list)-1
 					if entry.getEnable():
 						for key, element, description in entry.getConfigOptions():
-							self.list.append( getConfigListEntry( "  " + str(description), element, idx ) )
+							self.list.append(getConfigListEntry("  " + str(description), element, idx))
 			return select
 		
 		if self.state == MAIN:
@@ -185,17 +185,17 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 				self["key_blue"].setText("")
 				self["main_actions_enabled"].setEnabled(False)
 			
-			self.list.append( getConfigListEntry( _("Enable PushService"), config.pushservice.enable, 0 ) )
+			self.list.append(getConfigListEntry(_("Enable PushService"), config.pushservice.enable, 0))
 			
 			if config.pushservice.enable.value:
-				self.list.append( getConfigListEntry( _("Dreambox name"), config.pushservice.boxname, 0 ) )
-				self.list.append( getConfigListEntry( _("Config file"), config.pushservice.xmlpath, 0 ) )
+				self.list.append(getConfigListEntry(_("Dreambox name"), config.pushservice.boxname, 0))
+				self.list.append(getConfigListEntry(_("Config file"), config.pushservice.xmlpath, 0))
 				
-				self.list.append( getConfigListEntry( _("Start time (HH:MM)"), config.pushservice.time, 0 ) )
-				self.list.append( getConfigListEntry( _("Period in hours (0=disabled)"), config.pushservice.period, 0 ) )
-				self.list.append( getConfigListEntry( _("Run on boot"), config.pushservice.runonboot, 0 ) )
+				self.list.append(getConfigListEntry(_("Start time (HH:MM)"), config.pushservice.time, 0))
+				self.list.append(getConfigListEntry(_("Period in hours (0=disabled)"), config.pushservice.period, 0))
+				self.list.append(getConfigListEntry(_("Run on boot"), config.pushservice.runonboot, 0))
 				if config.pushservice.runonboot.value:
-					self.list.append( getConfigListEntry( _("Boot delay"), config.pushservice.bootdelay, 0 ) )
+					self.list.append(getConfigListEntry(_("Boot delay"), config.pushservice.bootdelay, 0))
 			
 		elif self.state == SERVICES:
 			self["key_red"].setText(_("Main"))
@@ -259,7 +259,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 		module = result and result[1]
 		if module:
 			id = self.addService(module)
-			self.change( id )
+			self.change(id)
 
 	def removeServices(self):
 		self.hideHelpWindow()
@@ -290,7 +290,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 		module = result and result[1]
 		if module:
 			id = self.addController(module)
-			self.change( id )
+			self.change(id)
 
 	def removeControllers(self):
 		self.hideHelpWindow()
@@ -429,9 +429,9 @@ class TestConsole(Screen):
 		# Starting test
 		try:
 			if isinstance(test, ServiceBase):
-				test.push( self.callback, self.errback, _("PushService Config"), _("Push test"), _("If You can see this, Your configuration is correct.") )
+				test.push(self.callback, self.errback, _("PushService Config"), _("Push test"), _("If You can see this, Your configuration is correct."))
 			elif isinstance(test, ControllerBase):
-				test.run( self.callback, self.errback )
+				test.run(self.callback, self.errback)
 		except Exception as e:
 			text = _("PushService Test exception:") + "\n\n"
 			exc_type, exc_value, exc_traceback = sys.exc_info()

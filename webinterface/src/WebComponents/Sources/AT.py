@@ -137,31 +137,5 @@ class AT(Source):
 		# TODO: fix error handling
 
 	list = property(timerList)
-	lut = {"Name": 0
-			, "Match": 1
-			, "AfterEvent": 2
-			, "ExcludedTitle": 3
-			, "ExcludedShort": 4
-			, "ExcludedDescription": 5
-			, "ExcludedDays": 6
-			, "IncludedTitle": 7
-			, "IncludedShort": 8
-			, "IncludedDescription": 9
-			, "IncludedDays": 10
-			, "Services": 11
-			, "Bouquets": 12
-			, "TimespanBegin": 13
-			, "TimespanEnd": 14
-			, "Duration": 15
-			, "Counter": 16
-			, "CounterLeft": 17
-			, "CounterLimit": 18
-			, "Destination": 19
-			, "CounterFormatString": 20
-			, "LastBegin": 21
-			, "Justplay": 22
-			, "AvoidDuplicateDescription": 23
-			, "Tags": 24
-			, "Enabled": 25
-			, "toggleDisabledIMG": 26
+	lut = {"Name": 0			, "Match": 1			, "AfterEvent": 2			, "ExcludedTitle": 3			, "ExcludedShort": 4			, "ExcludedDescription": 5			, "ExcludedDays": 6			, "IncludedTitle": 7			, "IncludedShort": 8			, "IncludedDescription": 9			, "IncludedDays": 10			, "Services": 11			, "Bouquets": 12			, "TimespanBegin": 13			, "TimespanEnd": 14			, "Duration": 15			, "Counter": 16			, "CounterLeft": 17			, "CounterLimit": 18			, "Destination": 19			, "CounterFormatString": 20			, "LastBegin": 21			, "Justplay": 22			, "AvoidDuplicateDescription": 23			, "Tags": 24			, "Enabled": 25			, "toggleDisabledIMG": 26
 			}

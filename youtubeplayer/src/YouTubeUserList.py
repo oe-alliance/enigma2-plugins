@@ -34,7 +34,7 @@ from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, gFont
 from . import _
 
 def YouTubeUserListEntry(youTubeUser, defaultUser):
-	res = [ youTubeUser ]
+	res = [youTubeUser]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 470, 20, 0, RT_HALIGN_LEFT, youTubeUser.getName()))
 
 	if defaultUser is not None and defaultUser.getName() == youTubeUser.getName():
@@ -120,7 +120,7 @@ class YouTubeUserListScreen(Screen):
 	def keyDelete(self):
 		user = self.userlist.getSelection()
 		if user is not None:
-			self.session.openWithCallback(self.deleteCallback, MessageBox, _("Really delete %(user)s?") % {"user" : user.getName()})
+			self.session.openWithCallback(self.deleteCallback, MessageBox, _("Really delete %(user)s?") % {"user": user.getName()})
 
 	def deleteCallback(self, result):
 		if result:

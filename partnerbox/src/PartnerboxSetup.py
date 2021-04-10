@@ -97,7 +97,7 @@ class PartnerboxSetup(ConfigListScreen, Screen):
 		}, -2)
 
 	def initConfig(self):
-		self.list = [ ]
+		self.list = []
 		self.list.append(getConfigListEntry(_("Show 'RemoteTimer' in Eventinfo menu"), config.plugins.Partnerbox.enablepartnerboxeventinfomenu))
 		if config.plugins.Partnerbox.enablepartnerboxeventinfomenu.value:
 			self.list.append(getConfigListEntry(_("Show 'RemoteTimer' in Event View context menu"), config.plugins.Partnerbox.enablepartnerboxeventinfocontextmenu))

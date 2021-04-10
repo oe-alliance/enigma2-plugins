@@ -12,7 +12,7 @@ from __future__ import absolute_import
 from datetime import datetime as _pydatetime, \
                      tzinfo as _pytzinfo
 import re
-class datetime( _pydatetime ):
+class datetime(_pydatetime):
     """Customized datetime class with ISO format parsing."""
     _reiso = re.compile('(?P<year>[0-9]{4})'
                        '-(?P<month>[0-9]{1,2})'
@@ -28,7 +28,7 @@ class datetime( _pydatetime ):
                             '(?P<tzmin>[0-9]{2})?'
                         ')?')
 
-    class _tzinfo( _pytzinfo):
+    class _tzinfo(_pytzinfo):
         def __init__(self, direc='+', hr=0, min=0):
             if direc == '-':
                 hr = -1*int(hr)
@@ -78,7 +78,7 @@ def get_session(sessionid=None):
     else:
         return Session.new()
 
-class Session( object ):
+class Session(object):
 
     @classmethod
     def new(cls):

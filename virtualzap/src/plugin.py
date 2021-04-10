@@ -87,14 +87,14 @@ def InfoBarShowHide__init__(self):
 	if config.plugins.virtualzap.mode.value == "1":
 		del self["ShowHideActions"]
 		# initialize own actionmap with ok = b and longOK = l
-		self["myactions"] = ActionMap( ["myShowHideActions"],
+		self["myactions"] = ActionMap(["myShowHideActions"],
 		{
 			"toggleShow": self.toggleShow,
 			"longOK": self.showVZ,
 			"hide": self.hide,
 		}, 1)
 	elif config.plugins.virtualzap.mode.value == "2":
-		self["ShowHideActions"] = ActionMap( ["InfobarShowHideActions"],
+		self["ShowHideActions"] = ActionMap(["InfobarShowHideActions"],
 		{
 			"toggleShow": self.toggleShow,
 			"hide": self.newHide,
@@ -459,7 +459,7 @@ class VirtualZap(Screen):
 		if self.exitTimer.isActive():
 			self.exitTimer.stop()
 		# show EPG Event
-		epglist = [ ]
+		epglist = []
 		self.epglist = epglist
 		service = ServiceReference(self.servicelist.getCurrentSelection())
 		ref = service.ref
@@ -726,7 +726,7 @@ class VirtualZapConfig(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
-		self.list = [ ]
+		self.list = []
 		self.list.append(getConfigListEntry(_("Usage"), config.plugins.virtualzap.mode))
 		if SystemInfo.get("NumVideoDecoders", 1) > 1:
 			self.list.append(getConfigListEntry(_("Use PiP"), config.plugins.virtualzap.usepip))

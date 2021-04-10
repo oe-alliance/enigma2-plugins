@@ -146,7 +146,7 @@ def InfoBarPlugins__init__(self):
 
 def info(self):
 	if config.plugins.EasyInfo.EvInStart.value == "yes":
-		epglist = [ ]
+		epglist = []
 		self.epglist = epglist
 		service = self.session.nav.getCurrentService()
 		ref = self.session.nav.getCurrentlyPlayingServiceReference()
@@ -206,7 +206,7 @@ def getPluginByName(sstr):
 
 
 def EINPanelEntryComponent(key, text):
-	res = [ text ]
+	res = [text]
 	bpng = LoadPixmap(EasyInfo.EINiconspath + "key-" + text[0] + ".png")
 	if bpng is not None:
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 0, 5, 5, 50, bpng))
@@ -244,10 +244,10 @@ class ConfigEasyInfo(ConfigListScreen, Screen):
 		self.session = session
 		self.oldsetting = [config.plugins.EasyInfo.EvInStart.value, config.plugins.EasyInfo.buttTV.value]
 		list = []
-		list.append(getConfigListEntry(_("Start first EventInfo:"), config.plugins.EasyInfo.EvInStart ))
-		list.append(getConfigListEntry(_("Replace TV-button function:"), config.plugins.EasyInfo.buttTV ))
-		list.append(getConfigListEntry(_("EventInfo yellow button:"), config.plugins.EasyInfo.bEvInYellow ))
-		list.append(getConfigListEntry(_("EventInfo blue button:"), config.plugins.EasyInfo.bEvInBlue ))
+		list.append(getConfigListEntry(_("Start first EventInfo:"), config.plugins.EasyInfo.EvInStart))
+		list.append(getConfigListEntry(_("Replace TV-button function:"), config.plugins.EasyInfo.buttTV))
+		list.append(getConfigListEntry(_("EventInfo yellow button:"), config.plugins.EasyInfo.bEvInYellow))
+		list.append(getConfigListEntry(_("EventInfo blue button:"), config.plugins.EasyInfo.bEvInBlue))
 		list.append(getConfigListEntry(_("OK function in Easy-PG:"), config.plugins.EasyInfo.epgOKFunc))
 		list.append(getConfigListEntry(_("Easy-PG picons path:"), config.plugins.EasyInfo.myPicons))
 		list.append(getConfigListEntry(_("Easy-PG Primetime 1:"), config.plugins.EasyInfo.Primetime1))
@@ -590,7 +590,7 @@ def EINcallbackFunc(answer):
 		elif cnt == 1:
 			InfoBar_instance.openBouquetEPG(bouquets[0][1], True)
 	elif answer == "eventinfo":
-		epglist = [ ]
+		epglist = []
 		InfoBar_instance.epglist = epglist
 		service = EINsession.nav.getCurrentService()
 		ref = EINsession.nav.getCurrentlyPlayingServiceReference()
@@ -769,7 +769,7 @@ class EvNewList(EPGList):
 
 	def buildMultiEntry(self, changecount, service, eventId, beginTime, duration, EventName, nowTime, service_name):
 		(clock_pic, rec) = self.getPixmapForEntry(service, eventId, beginTime, duration)
-		res = [ None ]
+		res = [None]
 		sref = str(service)[:-1].replace(':', '_')
 		Spixmap = LoadPixmap(path=(config.plugins.EasyInfo.myPicons.value + sref + '.png'))
 		if Spixmap is not None:
@@ -1071,7 +1071,7 @@ class ESListNext(EPGList):
 
 	def buildMultiEntry(self, changecount, service, eventId, beginTime, duration, EventName, nowTime, service_name):
 		(clock_pic, rec) = self.getPixmapForEntry(service, eventId, beginTime, duration)
-		res = [ None ]
+		res = [None]
 		if rec:
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 58, 16, 21, 21, clock_pic))
 		if beginTime is not None and len(EventName) > 60:

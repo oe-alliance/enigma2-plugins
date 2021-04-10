@@ -74,8 +74,8 @@ class AutoMountManager(Screen):
 			okpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/ok.png"))
 		else:
 			okpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/ok.png"))
-		self.list.append((_("Add new network mount point"), "add", _("Add a new NFS or CIFS mount point to your Dreambox."), okpng ))
-		self.list.append((_("Mountpoints management"), "view", _("View, edit or delete mountpoints on your Dreambox."), okpng ))
+		self.list.append((_("Add new network mount point"), "add", _("Add a new NFS or CIFS mount point to your Dreambox."), okpng))
+		self.list.append((_("Mountpoints management"), "view", _("View, edit or delete mountpoints on your Dreambox."), okpng))
 		self.list.append((_("User management"), "user", _("View, edit or delete usernames and passwords for your network."), okpng))
 		self.list.append((_("Change hostname"), "hostname", _("Change the hostname of your Dreambox."), okpng))
 		self["config"].setList(self.list)

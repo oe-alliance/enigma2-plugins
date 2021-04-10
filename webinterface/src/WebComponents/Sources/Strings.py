@@ -183,4 +183,4 @@ class Strings(Source):
 		]
 
 	list = property(getList)
-	lut = { "id": 0, "value": 1 }
+	lut = {"id": 0, "value": 1}

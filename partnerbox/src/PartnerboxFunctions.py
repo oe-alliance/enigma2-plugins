@@ -344,7 +344,7 @@ def FillE1TimerList(xmlstring, sreference=None):
 		if sreference is None:
 			go = True
 		else:
-			if sreference.upper() == servicereference.upper() and ( (typedata & PlaylistEntry.stateWaiting) or (typedata & PlaylistEntry.stateRunning)):
+			if sreference.upper() == servicereference.upper() and ((typedata & PlaylistEntry.stateWaiting) or (typedata & PlaylistEntry.stateRunning)):
 				go = True
 		if go:
 			E1TimerList.append(E2Timer(servicereference=servicereference, servicename=servicename, name="", disabled=0, timebegin=timebegin, timeend=0, duration=duration, startprepare=0, state=0, repeated=0, justplay=0, eventId=-1, afterevent=0, dirname="", description=description, type=typedata))

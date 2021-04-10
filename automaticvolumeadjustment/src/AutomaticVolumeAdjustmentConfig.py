@@ -59,8 +59,8 @@ class AutomaticVolumeAdjustmentConfig():
 		self.config = Config()
 		if not os_path.exists(self.CONFIG_FILE):
 			try:
-				fd = os_open( self.CONFIG_FILE, os_O_RDWR|os_O_CREAT)
-				os_close( fd )
+				fd = os_open(self.CONFIG_FILE, os_O_RDWR|os_O_CREAT)
+				os_close(fd)
 			except Exception as e:
 				print("Error: ", e)
 		try:

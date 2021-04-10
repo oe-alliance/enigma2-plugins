@@ -89,7 +89,7 @@ def sendUrlCommand(url, contextFactory=None, timeout=50, *args, **kwargs):
 	return factory.deferred
 mcpath = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/"
 def PlaylistEntryComponent(serviceref):
-	res = [ serviceref ]
+	res = [serviceref]
 	text = serviceref.getName()
 	if text == "":
 		text = os_path.split(serviceref.getPath().split('/')[-1])[1]
@@ -151,7 +151,7 @@ class PlayList(MenuList):
 		l = self.l.getCurrentSelection()
 		return l and l[0]
 	def getServiceRefList(self):
-		return [ x[0] for x in self.list ]
+		return [x[0] for x in self.list]
 	def __len__(self):
 		return len(self.list)
 class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
@@ -538,11 +538,11 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 	def __evDecodeError(self):
 		currPlay = self.session.nav.getCurrentService()
 		sVideoType = currPlay.info().getInfoString(iServiceInformation.sVideoType)
-		self.session.open(MessageBox, _("This Dreambox can't decode %s video streams!") % sVideoType, type=MessageBox.TYPE_INFO, timeout=20 )
+		self.session.open(MessageBox, _("This Dreambox can't decode %s video streams!") % sVideoType, type=MessageBox.TYPE_INFO, timeout=20)
 	def __evPluginError(self):
 		currPlay = self.session.nav.getCurrentService()
 		message = currPlay.info().getInfoString(iServiceInformation.sUser+12)
-		self.session.open(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=20 )
+		self.session.open(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=20)
 	def addPlaylistParser(self, parser, extension):
 		self.playlistparsers[extension] = parser
 	def Shuffle(self):
@@ -842,11 +842,11 @@ class MC_WebRadio(Screen, HelpableScreen):
 	def __evDecodeError(self):
 		currPlay = self.session.nav.getCurrentService()
 		sVideoType = currPlay.info().getInfoString(iServiceInformation.sVideoType)
-		self.session.open(MessageBox, _("This Dreambox can't decode %s video streams!") % sVideoType, type=MessageBox.TYPE_INFO, timeout=20 )
+		self.session.open(MessageBox, _("This Dreambox can't decode %s video streams!") % sVideoType, type=MessageBox.TYPE_INFO, timeout=20)
 	def __evPluginError(self):
 		currPlay = self.session.nav.getCurrentService()
 		message = currPlay.info().getInfoString(iServiceInformation.sUser+12)
-		self.session.open(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=20 )
+		self.session.open(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=20)
 	def addPlaylistParser(self, parser, extension):
 		self.playlistparsers[extension] = parser
 	def Settings(self):

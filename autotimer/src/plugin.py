@@ -97,15 +97,15 @@ def sessionstart(reason, **kwargs):
 			root.putChild('set', AutoTimerChangeSettingsResource())
 			root.putChild('simulate', AutoTimerSimulateResource())
 			root.putChild('test', AutoTimerTestResource())
-			addExternalChild( ("autotimer", root, "AutoTimer-Plugin", API_VERSION, False) )
+			addExternalChild(("autotimer", root, "AutoTimer-Plugin", API_VERSION, False))
 
 			# webgui
 			session = kwargs["session"]
 			root = File(util.sibpath(__file__, "web-data"))
-			root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True) )
+			root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True))
 			root.putChild('tmp', File('/tmp'))
 			root.putChild("uploadfile", UploadResource(session))
-			addExternalChild( ("autotimereditor", root, "AutoTimer", "1", True) )
+			addExternalChild(("autotimereditor", root, "AutoTimer", "1", True))
 
 # Mainfunction
 def main(session, **kwargs):

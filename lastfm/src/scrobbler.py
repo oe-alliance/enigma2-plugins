@@ -191,14 +191,14 @@ class EventListener:
                 r= seek.getLength()
                 if not r[0]:
                     tracklength = r[1] / 90000
-            return self.getTrack( artist=currPlay.info().getInfoString(iServiceInformation.sTagArtist),
+            return self.getTrack(artist=currPlay.info().getInfoString(iServiceInformation.sTagArtist),
                                   title=currPlay.info().getInfoString(iServiceInformation.sTagTitle),
                                   album=currPlay.info().getInfoString(iServiceInformation.sTagAlbum),
                                   length=tracklength,
                                  )
              
              
-    def getTrack(self , artist=None, title=None, album=None,length=-1):
+    def getTrack(self, artist=None, title=None, album=None,length=-1):
         if artist == "" or artist is None:
             print("[LastFMScrobbler] CurrentlyPlayingServiceReference has no Artist, not submitting to LastFM")
             return False

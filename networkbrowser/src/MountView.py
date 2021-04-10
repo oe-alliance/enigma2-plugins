@@ -66,7 +66,7 @@ class AutoMountView(Screen):
 		self["key_red"] = StaticText(_("Close"))
 		self["key_yellow"] = StaticText(_("Delete mount"))
 
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.list = []
 		self["config"] = List(self.list)
 		self.showMountsList()

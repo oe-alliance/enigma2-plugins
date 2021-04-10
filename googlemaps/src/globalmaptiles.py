@@ -172,28 +172,28 @@ class GlobalMercator(object):
         self.originShift = 2 * math.pi * 6378137 / 2.0
         # 20037508.342789244
 
-    def LatLonToMeters(self, lat, lon ):
+    def LatLonToMeters(self, lat, lon):
         "Converts given lat/lon in WGS84 Datum to XY in Spherical Mercator EPSG:900913"
 
         mx = lon * self.originShift / 180.0
-        my = math.log( math.tan((90 + lat) * math.pi / 360.0 )) / (math.pi / 180.0)
+        my = math.log(math.tan((90 + lat) * math.pi / 360.0)) / (math.pi / 180.0)
 
         my = my * self.originShift / 180.0
         return mx, my
 
-    def MetersToLatLon(self, mx, my ):
+    def MetersToLatLon(self, mx, my):
         "Converts XY point from Spherical Mercator EPSG:900913 to lat/lon in WGS84 Datum"
 
         lon = (mx / self.originShift) * 180.0
         lat = (my / self.originShift) * 180.0
 
-        lat = 180 / math.pi * (2 * math.atan( math.exp( lat * math.pi / 180.0)) - math.pi / 2.0)
+        lat = 180 / math.pi * (2 * math.atan(math.exp(lat * math.pi / 180.0)) - math.pi / 2.0)
         return lat, lon
 
     def PixelsToMeters(self, px, py, zoom):
         "Converts pixel coordinates in given zoom level of pyramid to EPSG:900913"
 
-        res = self.Resolution( zoom )
+        res = self.Resolution(zoom)
         mx = px * res - self.originShift
         my = py * res - self.originShift
         return mx, my
@@ -201,7 +201,7 @@ class GlobalMercator(object):
     def MetersToPixels(self, mx, my, zoom):
         "Converts EPSG:900913 to pyramid pixel coordinates in given zoom level"
                 
-        res = self.Resolution( zoom )
+        res = self.Resolution(zoom)
         px = (mx + self.originShift) / res
         py = (my + self.originShift) / res
         return px, py
@@ -209,8 +209,8 @@ class GlobalMercator(object):
     def PixelsToTile(self, px, py):
         "Returns a tile covering region in given pixel coordinates"
 
-        tx = int( math.ceil( px / float(self.tileSize) ) - 1 )
-        ty = int( math.ceil( py / float(self.tileSize) ) - 1 )
+        tx = int(math.ceil(px / float(self.tileSize)) - 1)
+        ty = int(math.ceil(py / float(self.tileSize)) - 1)
         return tx, ty
 
     def PixelsToRaster(self, px, py, zoom):
@@ -222,32 +222,32 @@ class GlobalMercator(object):
     def MetersToTile(self, mx, my, zoom):
         "Returns tile for given mercator coordinates"
         
-        px, py = self.MetersToPixels( mx, my, zoom)
-        return self.PixelsToTile( px, py)
+        px, py = self.MetersToPixels(mx, my, zoom)
+        return self.PixelsToTile(px, py)
 
     def TileBounds(self, tx, ty, zoom):
         "Returns bounds of the given tile in EPSG:900913 coordinates"
         
-        minx, miny = self.PixelsToMeters( tx*self.tileSize, ty*self.tileSize, zoom )
-        maxx, maxy = self.PixelsToMeters( (tx+1)*self.tileSize, (ty+1)*self.tileSize, zoom )
-        return ( minx, miny, maxx, maxy )
+        minx, miny = self.PixelsToMeters(tx*self.tileSize, ty*self.tileSize, zoom)
+        maxx, maxy = self.PixelsToMeters((tx+1)*self.tileSize, (ty+1)*self.tileSize, zoom)
+        return (minx, miny, maxx, maxy)
 
-    def TileLatLonBounds(self, tx, ty, zoom ):
+    def TileLatLonBounds(self, tx, ty, zoom):
         "Returns bounds of the given tile in latutude/longitude using WGS84 datum"
 
-        bounds = self.TileBounds( tx, ty, zoom)
+        bounds = self.TileBounds(tx, ty, zoom)
         minLat, minLon = self.MetersToLatLon(bounds[0], bounds[1])
         maxLat, maxLon = self.MetersToLatLon(bounds[2], bounds[3])
         
-        return ( minLat, minLon, maxLat, maxLon )
+        return (minLat, minLon, maxLat, maxLon)
         
-    def Resolution(self, zoom ):
+    def Resolution(self, zoom):
         "Resolution (meters/pixel) for given zoom level (measured at Equator)"
         
         # return (2 * math.pi * 6378137) / (self.tileSize * 2**zoom)
         return self.initialResolution / (2**zoom)
         
-    def ZoomForPixelSize(self, pixelSize ):
+    def ZoomForPixelSize(self, pixelSize):
         "Maximal scaledown zoom of the pyramid closest to the pixelSize."
         
         for i in list(range(30)):
@@ -260,7 +260,7 @@ class GlobalMercator(object):
         # coordinate origin is moved from bottom-left to top-left corner of the extent
         return tx, (2**zoom - 1) - ty
 
-    def QuadTree(self, tx, ty, zoom ):
+    def QuadTree(self, tx, ty, zoom):
         "Converts TMS tile coordinates to Microsoft QuadTree"
         
         quadKey = ""
@@ -327,11 +327,11 @@ class GlobalGeodetic(object):
     def PixelsToTile(self, px, py):
         "Returns coordinates of the tile covering region in pixel coordinates"
 
-        tx = int( math.ceil( px / float(self.tileSize) ) - 1 )
-        ty = int( math.ceil( py / float(self.tileSize) ) - 1 )
+        tx = int(math.ceil(px / float(self.tileSize)) - 1)
+        ty = int(math.ceil(py / float(self.tileSize)) - 1)
         return tx, ty
 
-    def Resolution(self, zoom ):
+    def Resolution(self, zoom):
         "Resolution (arc/pixel) for given zoom level (measured at Equator)"
         
         return 180 / 256.0 / 2**zoom

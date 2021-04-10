@@ -31,11 +31,11 @@ import sys
 saved_stdout = None
 
 class writer: 
-    def __init__(self, *writers) : 
+    def __init__(self, *writers): 
         self.writers = writers 
  
-    def write(self, text) : 
-        for w in self.writers :
+    def write(self, text): 
+        for w in self.writers:
             if isinstance(w, str):
                 try:
                     f = open(w, "a")

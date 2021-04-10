@@ -20,7 +20,7 @@ class RemoteControl(Source):
 		self.cmd = None
 		self.session = session
 		Source.__init__(self)
-		self.res = ( False, _("Missing or wrong argument" ))
+		self.res = (False, _("Missing or wrong argument"))
 		self.eam = eActionMap.getInstance()
 
 		#Advanced remote or standard?
@@ -44,13 +44,13 @@ class RemoteControl(Source):
 		key = self.cmd.get("command", None)
 		if key is None:
 			print("[RemoteControl.sendEvent] Obligatory parameter 'command' is missing!")
-			return ( False, _("Obligatory parameter 'command' is missing!" ))
+			return (False, _("Obligatory parameter 'command' is missing!"))
 
 		key = int(key)
 
 		if key <= 0:
 			print("[RemoteControl.sendEvent] command <= 0 (%s)" % key)
-			return ( False, _("the command was not > 0") )
+			return (False, _("the command was not > 0"))
 
 		#type can be "long" or "ascii", everything else will result in FLAG_MAKE
 		type = self.cmd.get('type', '')
@@ -83,6 +83,6 @@ class RemoteControl(Source):
 		self.eam.keyPressed(remotetype, key, self.FLAG_BREAK)
 
 		print("[RemoteControl.sendEvent] command was was sent (key: %s, flag: %s)" %(key, flag))
-		return ( True, _("RC command '%s' has been issued") %str(key))
+		return (True, _("RC command '%s' has been issued") %str(key))
 
 	result = property(lambda self: self.res)

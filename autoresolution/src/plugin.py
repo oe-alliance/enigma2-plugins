@@ -99,7 +99,7 @@ def setDeinterlacer(mode):
 	except:
 		print("[AutoRes] failed switch deinterlacer mode to %s" % mode)
 
-frqdic = { 23976: '24',
+frqdic = {23976: '24',
 		24000: '24',
 		25000: '25',
 		29970: '30',
@@ -422,11 +422,11 @@ class ResolutionLabel(Screen):
 class AutoResSetupMenu(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = [ "AutoResSetupMenu", "Setup" ]
+		self.skinName = ["AutoResSetupMenu", "Setup"]
 		self.setup_title = _("Autoresolution videomode setup")
 		self.setTitle(self.setup_title)
-		self.onChangedEntry = [ ]
-		self.list = [ ]
+		self.onChangedEntry = []
+		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 		self.prev_manual_resolution_ext_menu = config.plugins.autoresolution.manual_resolution_ext_menu.value
 		self["actions"] = ActionMap(["SetupActions"],
@@ -742,10 +742,10 @@ def autostart(reason, **kwargs):
 def startSetup(menuid):
 	if getImageDistro() in ('teamblue', 'openhdf'):
 		if menuid != "video_menu":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
-			return [ ]
+			return []
 	return [(_("Autoresolution"), autoresSetup, "autores_setup", None)]
 
 def autoresSetup(session, **kwargs):

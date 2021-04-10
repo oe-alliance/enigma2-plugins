@@ -55,7 +55,7 @@ else:
 def cutlist_changed(self):
     if playerChoice and playerChoice.isPlaying():
         self.cutlist = [] # we need to update the property 
-    self.cutlist = self.source.cutlist or [ ]
+    self.cutlist = self.source.cutlist or []
 
 from Components.Renderer.PositionGauge import PositionGauge
 PositionGauge.cutlist_changed = cutlist_changed

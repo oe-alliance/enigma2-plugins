@@ -245,7 +245,7 @@ class MC_WeatherInfo(Screen):
 						self.showIcon(index, filenamepng)
 		if len(IconDownloadList) != 0:
 			ds = defer.DeferredSemaphore(tokens=len(IconDownloadList))
-			downloads = [ds.run(download, item ).addErrback(self.errorIconDownload, item).addCallback(self.finishedIconDownload, item) for item in IconDownloadList]
+			downloads = [ds.run(download, item).addErrback(self.errorIconDownload, item).addCallback(self.finishedIconDownload, item) for item in IconDownloadList]
 			finished = defer.DeferredList(downloads).addErrback(self.error)
 		stadt = config.plugins.mc_wi.Entry[self.weatherPluginEntryIndex - 1].city.value
 		stadt = stadt.split(",")[0]

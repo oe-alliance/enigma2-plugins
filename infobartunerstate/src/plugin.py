@@ -173,13 +173,13 @@ def Plugins(**kwargs):
 	
 	if config.infobartunerstate.enabled.value:
 		# SessionStart
-		descriptors.append( PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=start, needsRestart=False) )
+		descriptors.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=start, needsRestart=False))
 		if config.infobartunerstate.extensions_menu_show.value:
-			descriptors.append( PluginDescriptor(name=IBTSSHOW, description=IBTSSHOW, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=show, needsRestart=False) )
+			descriptors.append(PluginDescriptor(name=IBTSSHOW, description=IBTSSHOW, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=show, needsRestart=False))
 		if config.infobartunerstate.extensions_menu_setup.value:
-			descriptors.append( PluginDescriptor(name=IBTSSETUP, description=IBTSSETUP, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=setup, needsRestart=False) )
+			descriptors.append(PluginDescriptor(name=IBTSSETUP, description=IBTSSETUP, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=setup, needsRestart=False))
 	
-	descriptors.append( PluginDescriptor(name=NAME, description=NAME + " " +_("configuration"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=setup, needsRestart=False, icon="plugin.png") )
+	descriptors.append(PluginDescriptor(name=NAME, description=NAME + " " +_("configuration"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=setup, needsRestart=False, icon="plugin.png"))
 
 	return descriptors
 

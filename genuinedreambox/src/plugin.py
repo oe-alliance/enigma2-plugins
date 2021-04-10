@@ -142,7 +142,7 @@ class genuineDreambox(Screen):
 		self.level2_cert = None
 		self.level3_cert = None
 		if (self.stepSecond(TPMD_CMD_GET_DATA, [TPMD_DT_PROTOCOL_VERSION, TPMD_DT_TPM_VERSION, TPMD_DT_SERIAL, TPMD_DT_LEVEL2_CERT,
-				TPMD_DT_LEVEL3_CERT, TPMD_DT_FAB_CA_CERT, TPMD_DT_DATABLOCK_SIGNED] )):
+				TPMD_DT_LEVEL3_CERT, TPMD_DT_FAB_CA_CERT, TPMD_DT_DATABLOCK_SIGNED])):
 			url = self.buildUrl()
 			getPage(six.ensure_binary(url)).addCallback(self._gotPageLoad).addErrback(self.errorLoad)
 			
@@ -207,7 +207,7 @@ class genuineDreambox(Screen):
 		return myString
 
 	def stepFirst(self, typ, daten):
-		return (self.parseResult (self.udsSend(typ, daten, len(daten))))
+		return (self.parseResult(self.udsSend(typ, daten, len(daten))))
 
 	def stepSecond(self, typ, daten):
 		if (self.parseResult(self.udsSend(typ, daten, len(daten))) == False):

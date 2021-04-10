@@ -45,9 +45,9 @@ class FreeSpace(ControllerBase):
 		ControllerBase.__init__(self)
 		
 		# Default configuration
-		self.setOption( 'wakehdd',  NoSave(ConfigYesNo(  default=False )),                                  _("Allow HDD wake up") )
-		self.setOption( 'path',     NoSave(ConfigText(   default="/media/hdd/movie", fixed_size=False )), _("Where to check free space") )
-		self.setOption( 'limit',    NoSave(ConfigNumber( default=100 )),                                    _("Free space limit in GB") )
+		self.setOption('wakehdd',  NoSave(ConfigYesNo(default=False)),                                  _("Allow HDD wake up"))
+		self.setOption('path',     NoSave(ConfigText(default="/media/hdd/movie", fixed_size=False)), _("Where to check free space"))
+		self.setOption('limit',    NoSave(ConfigNumber(default=100)),                                    _("Free space limit in GB"))
 	
 	def run(self, callback, errback):
 		# At the end a plugin has to call one of the functions: callback or errback
@@ -78,9 +78,9 @@ class FreeSpace(ControllerBase):
 			
 			# User specified to avoid HDD wakeup if it is sleeping
 			from Components.Harddisk import harddiskmanager
-			dev = getDevicebyMountpoint( harddiskmanager, mountpoint(path) )
+			dev = getDevicebyMountpoint(harddiskmanager, mountpoint(path))
 			if dev is not None:
-				hdd = getHDD( harddiskmanager, dev )
+				hdd = getHDD(harddiskmanager, dev)
 				if hdd is not None:
 					if hdd.isSleeping():
 						# Don't wake up HDD
@@ -88,16 +88,16 @@ class FreeSpace(ControllerBase):
 						callback()
 		
 		# Check free space on path
-		if os.path.exists( path ):
-			stat = os.statvfs( path )
-			free = ( stat.f_bavail if stat.f_bavail!=0 else stat.f_bfree ) * stat.f_bsize / 1024 / 1024 # MB
+		if os.path.exists(path):
+			stat = os.statvfs(path)
+			free = (stat.f_bavail if stat.f_bavail!=0 else stat.f_bfree) * stat.f_bsize / 1024 / 1024 # MB
 			if limit > (free/1024): #GB
 				if free >= 10*1024:	#MB
 					free = "%d GB" %(free/1024)
 				else:
 					free = "%d MB" %(free)
 				# Not enough free space
-				callback( SUBJECT, BODY % (path, limit, free) )
+				callback(SUBJECT, BODY % (path, limit, free))
 			else:
 				# There is enough free space
 				callback()

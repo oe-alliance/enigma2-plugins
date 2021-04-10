@@ -57,8 +57,8 @@ class AutoMount():
 		# Read out NFS Mounts
 		for nfs in tree.findall("nfs"):
 			for mount in nfs.findall("mount"):
-				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False,
-							'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+				data = {'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False,
+							'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 				try:
 					data['mounttype'] = 'nfs'.encode("UTF-8")
 					data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
@@ -75,8 +75,8 @@ class AutoMount():
 			# Read out CIFS Mounts
 		for nfs in tree.findall("cifs"):
 			for mount in nfs.findall("mount"):
-				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False,
-							'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+				data = {'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False,
+							'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 				try:
 					data['mounttype'] = 'cifs'.encode("UTF-8")
 					data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
@@ -162,7 +162,7 @@ class AutoMount():
 
 	def CheckMountPointFinished(self, result, retval, extra_args):
 		print("[AutoMount.py] CheckMountPointFinished", result, retval)
-		(data, callback ) = extra_args
+		(data, callback) = extra_args
 		path = os.path.join('/media/net', data['sharename'])
 		if os.path.exists(path):
 			if os.path.ismount(path):
@@ -284,7 +284,7 @@ class AutoMount():
 
 	def removeMountPointFinished(self, result, retval, extra_args):
 		print("[AutoMount.py] removeMountPointFinished result", result, "retval", retval)
-		(path, callback ) = extra_args
+		(path, callback) = extra_args
 		if os.path.exists(path):
 			if not os.path.ismount(path):
 				try:

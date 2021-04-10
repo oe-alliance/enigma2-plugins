@@ -51,7 +51,7 @@ class UploadPkgResource(resource.Resource):
 		
 		if not data:
 			req.setResponseCode(http.OK)
-			return self.res % ( _("filesize was 0, not uploaded"),
+			return self.res % (_("filesize was 0, not uploaded"),
 					_("Close"),
 					 _("Add")
 					)

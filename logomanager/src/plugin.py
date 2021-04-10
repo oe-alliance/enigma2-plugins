@@ -54,8 +54,7 @@ def Plugins(path,**kwargs):
                 where=PluginDescriptor.WHERE_PLUGINMENU,
                 icon="plugin.png",
                 fnc=main
-                )
-             ,
+                ),
              PluginDescriptor(name="Logo Manager", where=PluginDescriptor.WHERE_FILESCAN, fnc=start_from_filescan)
             ]
 ###############################################################################
@@ -66,10 +65,7 @@ class LogoManagerScreen(Screen):
          </screen>"""
 
     targets = [
-                ("bootlogo", "/boot/bootlogo.mvi")
-               , ("wait", "/boot/bootlogo_wait.mvi")
-               , ("backdrop", "/boot/backdrop.mvi")
-               , ("radio", "/usr/share/enigma2/radio.mvi")
+                ("bootlogo", "/boot/bootlogo.mvi"), ("wait", "/boot/bootlogo_wait.mvi"), ("backdrop", "/boot/backdrop.mvi"), ("radio", "/usr/share/enigma2/radio.mvi")
                ]
 
     def __init__(self, session, file=None):

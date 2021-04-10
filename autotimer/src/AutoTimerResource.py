@@ -32,7 +32,7 @@ class AutoTimerBaseResource(resource.Resource):
 
 class AutoTimerDoParseResource(AutoTimerBaseResource):
 	def parsecallback(self, ret):
-		rets = self.renderBackground (self.req, ret)
+		rets = self.renderBackground(self.req, ret)
 		self.req.write(six.ensure_binary(rets))
 		self.req.finish()
 	def render(self, req):
@@ -46,7 +46,7 @@ class AutoTimerDoParseResource(AutoTimerBaseResource):
 
 class AutoTimerSimulateResource(AutoTimerBaseResource):
 	def parsecallback(self, timers, skipped):
-		rets = self.renderBackground (self.req, timers)
+		rets = self.renderBackground(self.req, timers)
 		self.req.write(six.ensure_binary(rets))
 		self.req.finish()
 	def render(self, req):
@@ -80,7 +80,7 @@ class AutoTimerSimulateResource(AutoTimerBaseResource):
 #TODO
 class AutoTimerTestResource(AutoTimerBaseResource):
 	def parsecallback(self, timers, skipped):
-		rets = self.renderBackground (self.req, timers, skipped)
+		rets = self.renderBackground(self.req, timers, skipped)
 		self.req.write(six.ensure_binary(rets))
 		self.req.finish()
 	def render(self, req):
@@ -161,7 +161,7 @@ class AutoTimerRemoveAutoTimerResource(AutoTimerBaseResource):
 class AutoTimerAddXMLAutoTimerResource(AutoTimerBaseResource):
 	def render_POST(self, req):
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application/xhtml+xml;' )
+		req.setHeader('Content-type', 'application/xhtml+xml;')
 		req.setHeader('charset', 'UTF-8')
 		autotimer.readXmlTimer(six.ensure_str(req.args[b'xml'][0]))
 		if config.plugins.autotimer.always_write_config.value:
@@ -171,7 +171,7 @@ class AutoTimerAddXMLAutoTimerResource(AutoTimerBaseResource):
 class AutoTimerUploadXMLConfigurationAutoTimerResource(AutoTimerBaseResource):
 	def render_POST(self, req):
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application/xhtml+xml;' )
+		req.setHeader('Content-type', 'application/xhtml+xml;')
 		req.setHeader('charset', 'UTF-8')	
 		autotimer.readXml(xml_string=six.ensure_str(req.args[b'xml'][0]))
 		if config.plugins.autotimer.always_write_config.value:
@@ -584,7 +584,7 @@ class AutoTimerSettingsResource(resource.Resource):
 				<e2settingvalue>%s</e2settingvalue>
 				<e2settingtitle>%s</e2settingtitle>
 				<e2settingdescription>%s</e2settingdescription>
-			</e2setting>""" % (key, cfg.value, title, description )
+			</e2setting>""" % (key, cfg.value, title, description)
 
 		resultstr += """<e2setting>
 				<e2settingname>hasVps</e2settingname>
@@ -606,7 +606,7 @@ class AutoTimerSettingsResource(resource.Resource):
 					<e2settingname>autotimer_version</e2settingname>
 					<e2settingvalue>%s</e2settingvalue>
 				</e2setting>
-			</e2settings>""" % (hasVps, hasSeriesPlugin, CURRENT_CONFIG_VERSION, API_VERSION, AUTOTIMER_VERSION )
+			</e2settings>""" % (hasVps, hasSeriesPlugin, CURRENT_CONFIG_VERSION, API_VERSION, AUTOTIMER_VERSION)
 
 		return six.ensure_binary(resultstr)
 

@@ -67,7 +67,7 @@ class TrashMovieList(GUIComponent):
         self.l.setItemHeight(75)
         self.l.setBuildFunc(self.buildMovieListEntry)
         
-        self.onSelectionChanged = [ ]
+        self.onSelectionChanged = []
 
     def connectSelChanged(self, fnc):
         if not fnc in self.onSelectionChanged:
@@ -82,7 +82,7 @@ class TrashMovieList(GUIComponent):
             x()
 
     def buildMovieListEntry(self, serviceref, info, begin, length):
-        res = [ None ]
+        res = [None]
         width = self.l.getItemSize().width()
         date = _("Record date:") + ' ' + self.getDate(serviceref)
         time = _("Record time:") + ' ' + self.getTime(serviceref)
@@ -127,7 +127,7 @@ class TrashMovieList(GUIComponent):
         instance.selectionChanged.get().remove(self.selectionChanged)
 
     def load(self, root):
-        self.list = [ ]
+        self.list = []
         if not root or Trashcan.isCurrentlyDeleting():
             return
         if config.AdvancedMovieSelection.wastelist_buildtype.value == 'listMovies':
@@ -248,7 +248,7 @@ class Wastebasket(Screen, HelpableScreen):
                         lastEmptyEvent = client.lastTrashEvent()
                         if lastEmptyEvent != -1:
                             t = localtime(lastEmptyEvent)
-                            self["autoemptylast"].setText( _("Last remote wastebasket empty at %s") % (strftime(("%02d.%02d.%04d" % (t[2], t[1], t[0])) + ' ' + _("at") + ' ' + ("%02d:%02d" % (t[3], t[4])) + ' ' + _("Clock"))))
+                            self["autoemptylast"].setText(_("Last remote wastebasket empty at %s") % (strftime(("%02d.%02d.%04d" % (t[2], t[1], t[0])) + ' ' + _("at") + ' ' + ("%02d:%02d" % (t[3], t[4])) + ' ' + _("Clock"))))
                         nextEmptyEvent = client.nextTrashEvent()
                         if nextEmptyEvent != -1:
                             t = localtime(nextEmptyEvent)
@@ -499,7 +499,7 @@ class WastebasketTimer():
             else:
                 if self.recTimer.isActive():
                     self.recTimer.stop()
-                self.list = [ ]
+                self.list = []
                 
                 path = config.movielist.last_videodir.value
                 if not fileExists(path):

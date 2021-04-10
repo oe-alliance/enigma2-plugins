@@ -109,11 +109,11 @@ def autostart(reason, **kwargs):
 
 def Plugins(**kwargs):
 	descriptors = [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart)]
-	descriptors.append( PluginDescriptor(
+	descriptors.append(PluginDescriptor(
 		name="SerienFilm "+SerienFilmVersion,
 		description=_("group movies of a series to virtual directories"),
 		icon="SerienFilm.png",
 		where=PluginDescriptor.WHERE_PLUGINMENU,
-		fnc=pluginConfig) )
+		fnc=pluginConfig))
 	print("[SF-Plugin] autostart descriptors = " + str(descriptors))
 	return descriptors

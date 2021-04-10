@@ -50,8 +50,8 @@ SERVICE = "Service"
 CONTROLLER = "Controller"
 OPTION = "Option"
 
-SERVICE_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/PushService/Services/" )
-CONTROLLER_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/PushService/Controller/" )
+SERVICE_PATH = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/PushService/Services/")
+CONTROLLER_PATH = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/PushService/Controller/")
 
 
 class PushServiceBase(Modules, ConfigFile):
@@ -85,33 +85,33 @@ class PushServiceBase(Modules, ConfigFile):
 	def getAvlServices(self):
 		slist = []
 		if self.servicemodules:
-			serviceclasses = [ service.getClass() for service in self.services] if self.services else []
+			serviceclasses = [service.getClass() for service in self.services] if self.services else []
 			for name, module in six.iteritems(self.servicemodules):
 				if module.forceSingle():
 					# We have to check if there is already a plugin instance
 					if name in serviceclasses:
 						# A service instance already exists
 						continue
-				slist.append( (name, module) )
+				slist.append((name, module))
 			slist.sort()
 		return slist
 
 	def getServiceInstances(self):
-		return [( service.getNameId(), service ) for service in self.getServices() ]
+		return [(service.getNameId(), service) for service in self.getServices()]
 
 	def addService(self, module):
 		id = None
-		service = module and self.instantiateModule( module )
+		service = module and self.instantiateModule(module)
 		if service:
 			service.setEnable(True)
-			self.services.append( service )
-			self.services.sort( key=lambda x: ( x.getUniqueID() ) )
+			self.services.append(service)
+			self.services.sort(key=lambda x: (x.getUniqueID()))
 			id = service.getUniqueID()
 		return id
 
 	def removeService(self, service):
 		if service in self.services:
-			self.services.remove( service )
+			self.services.remove(service)
 
 	def getControllers(self):
 		return self.controllers or []
@@ -125,33 +125,33 @@ class PushServiceBase(Modules, ConfigFile):
 	def getAvlControllers(self):
 		plist = []
 		if self.controllermodules:
-			controllerclasses = [ controller.getClass() for controller in self.controllers] if self.controllers else []
+			controllerclasses = [controller.getClass() for controller in self.controllers] if self.controllers else []
 			for name, module in six.iteritems(self.controllermodules):
 				if module.forceSingle():
 					# We have to check if there is already a controller instance
 					if name in controllerclasses:
 						# A controller instance already exists
 						continue
-				plist.append( (name, module) )
+				plist.append((name, module))
 			plist.sort()
 		return plist
 
 	def getControllerInstances(self):
-		return [( controller.getNameId(), controller ) for controller in self.getControllers() ]
+		return [(controller.getNameId(), controller) for controller in self.getControllers()]
 
 	def addController(self, module):
 		id = None
-		controller = module and self.instantiateModule( module )
+		controller = module and self.instantiateModule(module)
 		if controller:
 			controller.setEnable(True)
-			self.controllers.append( controller )
-			self.controllers.sort( key=lambda x: ( x.getUniqueID() ) )
+			self.controllers.append(controller)
+			self.controllers.sort(key=lambda x: (x.getUniqueID()))
 			id = controller.getUniqueID()
 		return id
 
 	def removeController(self, controller):
 		if controller in self.controllers:
-			self.controllers.remove( controller )
+			self.controllers.remove(controller)
 
 
 	######################################
@@ -205,8 +205,8 @@ class PushServiceBase(Modules, ConfigFile):
 								# Append to active controller list
 								instances.append(instance)
 				return instances
-			services = parse( root, SERVICE, self.servicemodules )
-			controllers = parse( root, CONTROLLER, self.controllermodules )
+			services = parse(root, SERVICE, self.servicemodules)
+			controllers = parse(root, CONTROLLER, self.controllermodules)
 			
 			self.services = services
 			self.controllers = controllers
@@ -230,20 +230,20 @@ class PushServiceBase(Modules, ConfigFile):
 		def build(root, instances, typ):
 			for instance in instances:
 				# Add module
-				element = SubElement( root, typ, name=stringToXML(instance.getName()), enable=stringToXML(instance.getStringEnable()) )
+				element = SubElement(root, typ, name=stringToXML(instance.getName()), enable=stringToXML(instance.getStringEnable()))
 				# Add options
 				options = instance.getStringOptions()
 				if options:
 					for key, value, description in options:
-						SubElement( element, OPTION, key=stringToXML(key) ).text = stringToXML(value)
+						SubElement(element, OPTION, key=stringToXML(key)).text = stringToXML(value)
 			return root
 		
 		if services:
-			root = build( root, services, SERVICE)
+			root = build(root, services, SERVICE)
 		if controllers:
-			root = build( root, controllers, CONTROLLER)
+			root = build(root, controllers, CONTROLLER)
 		
-		self.writeXML( root )
+		self.writeXML(root)
 
 
 	######################################
@@ -269,7 +269,7 @@ class PushServiceBase(Modules, ConfigFile):
 				controller.end()
 
 	def run(self):
-		print(_("PushService started: ") + strftime( _("%d.%m.%Y %H:%M"), localtime() ))
+		print(_("PushService started: ") + strftime(_("%d.%m.%Y %H:%M"), localtime()))
 		
 		controllers = self.controllers
 		self.pushcallbacks = {}
@@ -279,13 +279,13 @@ class PushServiceBase(Modules, ConfigFile):
 		if controllers:
 			for controller in controllers:
 				if controller.getEnable():
-					print(_("PushService running: ") + str( controller.getName() ))
+					print(_("PushService running: ") + str(controller.getName()))
 					
 					try:
 						# Run controller
 						ret = controller.run(
 								boundFunction(self.runcallback, controller),
-								boundFunction(self.runcallback, controller) )
+								boundFunction(self.runcallback, controller))
 					except Exception as e:
 						print(_("PushService controller run() exception"))
 						exc_type, exc_value, exc_traceback = sys.exc_info()
@@ -335,7 +335,7 @@ class PushServiceBase(Modules, ConfigFile):
 								boundFunction(self.pushcallback, service, controller),
 								boundFunction(self.pusherrback, service, controller),
 								controller.getName(),
-								subject, text, attachments )
+								subject, text, attachments)
 					except Exception as e:
 						print(_("PushService Service push() exception"))
 						exc_type, exc_value, exc_traceback = sys.exc_info()
@@ -371,14 +371,14 @@ class PushServiceBase(Modules, ConfigFile):
 		cntcall = len(callparam)
 		errparam = self.pusherrbacks.get(key, [])
 		cnterr = len(errparam)
-		cntservices = len( [ service for service in self.services if service.getEnable() ] )
+		cntservices = len([service for service in self.services if service.getEnable()])
 		
 		# Check if all services already called and returned
-		if ( cntservices == (cntcall + cnterr) ):
+		if (cntservices == (cntcall + cnterr)):
 			service, controller = key
 			if controller:
 				# Check if no error is logged
-				if ( cnterr == 0 ):
+				if (cnterr == 0):
 					print("controller.callback()")
 					controller.callback()
 				else:

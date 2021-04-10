@@ -64,7 +64,7 @@ from .YouTubePlayList import YouTubePlaylistScreen
 from . import _
 
 def YouTubeEntryComponent(entry):
-	res = [ entry ]
+	res = [entry]
 # 385
 	res.append(MultiContentEntryText(pos=(150, 5), size=(370, 42), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text=entry.getTitle()))
 	res.append(MultiContentEntryText(pos=(150, 46), size=(370, 56), font=1, color=0xFFA323, color_sel=0xFFA323, flags=RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text=entry.getDescription()))
@@ -277,7 +277,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 	def insertEntry(self, entry):
 		print("[YTB] YouTubeTest::updateFinished()")
 		self.list.append(YouTubeEntryComponent(entry))
-		self.list.sort(cmp=lambda x, y : cmp(x[0].sequenceNumber, y[0].sequenceNumber))
+		self.list.sort(cmp=lambda x, y: cmp(x[0].sequenceNumber, y[0].sequenceNumber))
 		currentlyShown = "%d" % len(self.list)
 		self["currently_shown"].setText(currentlyShown)
 		self["list"].setList(self.list)
@@ -306,7 +306,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 
 	def addToHistory(self, feed):
 		if feed is not None:
-			del self.history[self.historyIndex : len(self.history)]
+			del self.history[self.historyIndex: len(self.history)]
 			self.history.insert(self.historyIndex, feed.getSelfFeed())
 			self.historyIndex = self.historyIndex + 1
 
@@ -319,7 +319,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 					racy=searchContext.racy.value,
 					time=searchContext.time.value,
 					lr=searchContext.lr.value,
-					categories=[ searchContext.categories.value ],
+					categories=[searchContext.categories.value],
 					sortOrder=searchContext.sortOrder.value,
 					format=config.plugins.youtubeplayer.quality)
 		except Exception as e:

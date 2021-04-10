@@ -185,7 +185,7 @@ class vierg(Screen):
 		self.aniTimer.start(100)
 
 
-	def fall(self, x, dr, v ):
+	def fall(self, x, dr, v):
 		for y in range(6):
 			if self.maze[(5-y)*7 + x]:
 				break
@@ -225,14 +225,14 @@ class vierg(Screen):
 						if self.maze[idx + 1] & mask and self.maze[idx + 2] & mask and self.maze[idx + 3] & mask:
 							return 1 # game over
 						# diagonale nach rechts testen
-						if self.maze[idx+ 8 ] & mask and self.maze[idx+ 16] & mask and self.maze[idx+ 24] & mask:
+						if self.maze[idx+ 8] & mask and self.maze[idx+ 16] & mask and self.maze[idx+ 24] & mask:
 							return 1 # game over
 					if (x > 2):
 						# diagonale nach links testen
-						if self.maze[idx + 6 ] & mask and self.maze[idx + 12] & mask and self.maze[idx + 18] & mask:
+						if self.maze[idx + 6] & mask and self.maze[idx + 12] & mask and self.maze[idx + 18] & mask:
 							return 1 # game over
 					# nach oben testen
-					if self.maze[idx + 7 ] & mask and self.maze[idx + 14] & mask and self.maze[idx + 21] & mask:
+					if self.maze[idx + 7] & mask and self.maze[idx + 14] & mask and self.maze[idx + 21] & mask:
 						return 1 # game over
 				idx += 1
 

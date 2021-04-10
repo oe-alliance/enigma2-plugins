@@ -151,7 +151,7 @@ def callHook(advhdmi_event):
 def TimeSpanPresenter(confsection):
 	presenter = [
 		WEEKDAYS[int(confsection.fromWD.value)],
-		WEEKDAYS[int(confsection.toWD.value)] ]
+		WEEKDAYS[int(confsection.toWD.value)]]
 	timestr = "%02d:%02d" % tuple(confsection.begin.value)
 	presenter.append(str(timestr))
 	timestr = "%02d:%02d" % tuple(confsection.end.value)
@@ -172,7 +172,7 @@ def main(session, **kwargs):
 def showinSetup(menuid):
 	if getImageDistro() in ('openhdf'):
 		if menuid != "video_menu":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
 			return []
@@ -185,14 +185,14 @@ def Plugins(**kwargs):
 			fnc=autostart)
 	]
 	if config.plugins.AdvHdmiCec.show_in.value == "system":
-		list.append (PluginDescriptor(
+		list.append(PluginDescriptor(
 			name="Advanced HDMI-Cec Control",
 			description=_("manage when HDMI Cec is enabled"),
 			where=PluginDescriptor.WHERE_MENU,
 			fnc=showinSetup)
 		)
 	if config.plugins.AdvHdmiCec.show_in.value == "plugin":
-		list.append (PluginDescriptor(
+		list.append(PluginDescriptor(
 			name="Advanced HDMI-Cec Control",
 			description=_("manage when HDMI Cec is enabled"),
 			where=PluginDescriptor.WHERE_PLUGINMENU,
@@ -200,7 +200,7 @@ def Plugins(**kwargs):
 			needsRestart=False)
 		)
 	if config.plugins.AdvHdmiCec.show_in.value == "extension":
-		list.append (PluginDescriptor(
+		list.append(PluginDescriptor(
 				name="Advanced HDMI-Cec Control",
 				description=_("manage when HDMI Cec is enabled"),
 				where=PluginDescriptor.WHERE_EXTENSIONSMENU,
@@ -252,12 +252,12 @@ def AdvHdmiCecDOIT():
 				entr = [e]
 				if config.plugins.AdvHdmiCec.debug.value:
 					presenter = TimeSpanPresenter(e)
-					_print("Debug: Checking timespan '" + ", ".join( str(x) for x in presenter ) + "'")
+					_print("Debug: Checking timespan '" + ", ".join(str(x) for x in presenter) + "'")
 				if int(e.fromWD.getValue()) <=  int(lt[6]) \
-					and int(e.toWD.getValue()) >= int(lt[6]) :
+					and int(e.toWD.getValue()) >= int(lt[6]):
 					presenter = TimeSpanPresenter(e)
 					if checkTimespan(lt, e.begin.getValue(), e.end.getValue()):
-						_print("prevent sending HDMICec, because of timespan '" + ", ".join( str(x) for x in presenter ) + "'")
+						_print("prevent sending HDMICec, because of timespan '" + ", ".join(str(x) for x in presenter) + "'")
 						ret_val = False
 					else:
 						if config.plugins.AdvHdmiCec.debug.value:

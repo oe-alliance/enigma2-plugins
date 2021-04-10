@@ -100,7 +100,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 				self.port = node.getAttribute("port")
 				self.channel = node.getAttribute("channel")
 				self.debug = node.getAttribute("debug")
-			if ((self.nick.lower() == "dreamircuser") or (self.nick == "") or (self.nick[0] == " ") or (self.nick.lower() == "dm8000-vip")) :
+			if ((self.nick.lower() == "dreamircuser") or (self.nick == "") or (self.nick[0] == " ") or (self.nick.lower() == "dm8000-vip")):
 				print("[dreamIRC] nickname error... restoring default...")
 				self.nick = self.device+"_"+self.mac_end
 		except IOError:
@@ -186,7 +186,7 @@ class dreamIRCConfig:
 				self.type = node.getAttribute("type")
 				self.login = node.getAttribute("login")
 				self.nick = node.getAttribute("nick")
-				if ((self.nick.lower() == "dreamircuser") or (self.nick == "") or (self.nick[0] == " ") or (self.nick.lower() == "dm8000-vip")) :
+				if ((self.nick.lower() == "dreamircuser") or (self.nick == "") or (self.nick[0] == " ") or (self.nick.lower() == "dm8000-vip")):
 					print("[dreamIRC] nickname error... restoring default...")
 					self.nick = self.device+"_"+self.mac_end
 				self.passwd = node.getAttribute("passwd")

@@ -202,7 +202,7 @@ class SimpleListFiller(Converter):
 		l = self.source.simplelist
 		conv_args = self.converter_arguments
 
-		list = [ ]
+		list = []
 		append = list.append
 		for element in conv_args:
 			if isinstance(element, six.string_types):
@@ -214,7 +214,7 @@ class SimpleListFiller(Converter):
 			else:
 				raise Exception("neither string, ListItem nor ListMacroItem")
 
-		strlist = [ ]
+		strlist = []
 		append = strlist.append
 		for item in l:
 			if item is None:
@@ -245,7 +245,7 @@ class ListFiller(Converter):
 
 		# now build a ["string", 1, "string", 2]-styled list, with indices into the
 		# list to avoid lookup of item name for each entry
-		lutlist = [ ]
+		lutlist = []
 		append = lutlist.append
 		for element in conv_args:
 			if isinstance(element, six.string_types):
@@ -258,7 +258,7 @@ class ListFiller(Converter):
 				raise Exception("neither string, ListItem nor ListMacroItem")
 
 		# now, for the huge list, do:
-		strlist = [ ]
+		strlist = []
 		append = strlist.append
 		for item in l:
 			for (element, filternum) in lutlist:
@@ -281,7 +281,7 @@ def appendListItem(item, filternum, append):
 	if filternum == webifHandler.FILTER_JAVASCRIPT:
 		append(item.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
 	elif filternum == webifHandler.FILTER_XML:
-		append( escape_xml( item ))
+		append(escape_xml(item))
 	elif filternum == webifHandler.FILTER_URI:
 		append(item.replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
 	elif filternum == webifHandler.FILTER_URLENCODE:
@@ -319,7 +319,7 @@ def appendListItem(item, filternum, append):
 		else:
 			append(item.replace("\n", "<br />"))
 	elif filternum == webifHandler.FILTER_ATTRIBUTE:
-		append( item.replace("\"", "&quot;"))
+		append(item.replace("\"", "&quot;"))
 	else:
 		append(item)
 
@@ -343,13 +343,13 @@ class webifHandler(ContentHandler):
 	FILTER_ATTRIBUTE = 11
 
 	def __init__(self, session, request):
-		self.res = [ ]
+		self.res = []
 		self.mode = 0
 		self.screen = None
 		self.session = session
-		self.screens = [ ]
+		self.screens = []
 		self.request = request
-		self.macros = { }
+		self.macros = {}
 
 	def start_element(self, attrs):
 		scr = self.screen
@@ -409,7 +409,7 @@ class webifHandler(ContentHandler):
 				self.converter = my_import('.'.join(("Components", "Converter", ctype))).__dict__.get(ctype)
 			except ImportError:
 				self.converter = my_import('.'.join(("Plugins", "Extensions", "WebInterface", "WebComponents", "Converter", ctype))).__dict__.get(ctype)
-		self.sub = [ ]
+		self.sub = []
 
 	def end_convert(self):
 		sub = self.sub
@@ -512,7 +512,7 @@ class webifHandler(ContentHandler):
 		for screen in self.screens:
 			screen.execEnd()
 			screen.doClose()
-		self.screens = [ ]
+		self.screens = []
 
 #===============================================================================
 # renderPage
@@ -588,7 +588,7 @@ def renderPage(request, path, session):
 			reactor.callLater(0, requestFinish, handler, request, requestAlreadyFinished=True)
 
 		d = request.notifyFinish()
-		d.addBoth( _requestFinishDeferred, handler, request )
+		d.addBoth(_requestFinishDeferred, handler, request)
 
 #===============================================================================
 # requestFinish

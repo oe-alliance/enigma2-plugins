@@ -53,7 +53,7 @@ class AutomaticTimerlistCleanUpSetup(Screen, ConfigListScreen): # config
 		Screen.__init__(self, session)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
-		self.list = [ ]
+		self.list = []
 		self.list.append(getConfigListEntry(_("Cleanup timerlist-entries"), config.plugins.automatictimerlistcleanup.type))
 		ConfigListScreen.__init__(self, self.list, session)
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -87,7 +87,7 @@ class AutomaticTimerlistCleanUp:
 		if int(config.plugins.automatictimerlistcleanup.type.value) > -1: # check only if feature is enabled
 			value = time() - int(config.plugins.automatictimerlistcleanup.type.value) * 86400 # calculate end time for comparison with processed timers
 			print("[AutomaticTimerlistCleanUp] Cleaning up timerlist-entries older than ", strftime("%c", localtime(value)))
-			self.session.nav.RecordTimer.processed_timers = [ timerentry for timerentry in self.session.nav.RecordTimer.processed_timers if timerentry.disabled or (timerentry.end and timerentry.end > value) ] # cleanup timerlist
+			self.session.nav.RecordTimer.processed_timers = [timerentry for timerentry in self.session.nav.RecordTimer.processed_timers if timerentry.disabled or (timerentry.end and timerentry.end > value)] # cleanup timerlist
 			print("[AutomaticTimerlistCleanUp] Next automatic timerlist cleanup at ", strftime("%c", localtime(time()+self.TIMER_INTERVAL)))
 			self.timer.startLongTimer(self.TIMER_INTERVAL) # check again in x secs
 		else:
@@ -123,5 +123,5 @@ def startSetup(menuid):
 	return [(_("Automatic Timerlist Cleanup Setup"), setup, "automatictimerlistcleanup", 46)]
 	
 def Plugins(**kwargs):
-	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart), PluginDescriptor(name="Automatic Timerlist Cleanup Setup", description=_("Automatic Timerlist Cleanup Setup"), where=PluginDescriptor.WHERE_MENU, fnc=startSetup) ]
+	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart), PluginDescriptor(name="Automatic Timerlist Cleanup Setup", description=_("Automatic Timerlist Cleanup Setup"), where=PluginDescriptor.WHERE_MENU, fnc=startSetup)]
 

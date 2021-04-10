@@ -184,10 +184,10 @@ class SudokuCell:
 
 	def paint(self):
 		fg    = RGB(255, 255, 255) # foreground
-		black = RGB(  0,  0,  0) # background readonly
+		black = RGB(0,  0,  0) # background readonly
 		focus = RGB(192, 192,  0) # background focus
-		grey  = RGB( 70, 70, 70) # background not readonly
-		green = RGB(  0, 255,  0) # background solved
+		grey  = RGB(70, 70, 70) # background not readonly
+		green = RGB(0, 255,  0) # background solved
 		red   = RGB(255,  0,  0) # background error
 
 		b  = 2
@@ -277,7 +277,7 @@ class Sudoku(Screen):
 					if type == "Background":
 						bgcolor = int(color[1:], 0x10)
 		#if not bgcolor:
-		bgcolor = RGB(  0,  0,  0)
+		bgcolor = RGB(0,  0,  0)
 
 		self.skin = Sudoku.skin
 		Screen.__init__(self, session)
@@ -615,7 +615,7 @@ class Sudoku(Screen):
 	# save actual game to file...
 	def save_game(self):
 		sav = open(SAVEFILE, "w")
-		sav.write( "%d %d\n" % (self.gameLevel, self.cnt) )
+		sav.write("%d %d\n" % (self.gameLevel, self.cnt))
 
 		for j in range(0, 9):
 			for i in range(0, 9):

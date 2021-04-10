@@ -67,7 +67,7 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 		self.screen_timeout = 5000
 		
 		class DirectYouTubePlayerActionMap(ActionMap):
-			def __init__(self, player, contexts=[ ], actions={ }, prio=0):
+			def __init__(self, player, contexts=[], actions={}, prio=0):
 				ActionMap.__init__(self, contexts, actions, prio)
 				self.player = player
 
@@ -122,7 +122,7 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 		self.state = self.STATE_PLAYING
 		self.lastseekstate = self.STATE_PLAYING
 
-		self.onPlayStateChanged = [ ]
+		self.onPlayStateChanged = []
 		self.__seekableStatusChanged()
 
 		self.onClose.append(self.__onClose)
@@ -318,7 +318,7 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 	def doEofInternal(self, playing):
 		if not self.execing:
 			return
-		if not playing :
+		if not playing:
 			return
 		self.close()
 

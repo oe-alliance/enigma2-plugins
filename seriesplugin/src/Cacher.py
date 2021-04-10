@@ -89,7 +89,7 @@ class Cacher(object):
 		if not config.plugins.seriesplugin.caching.value:
 			return
 		
-		cache[url] = ( time(), page )
+		cache[url] = (time(), page)
 
 	def doCacheList(self, url, list):
 		global cache
@@ -101,4 +101,4 @@ class Cacher(object):
 		if not config.plugins.seriesplugin.caching.value:
 			return
 		
-		cache[url] = ( time(), list )
+		cache[url] = (time(), list)

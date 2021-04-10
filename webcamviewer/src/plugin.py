@@ -290,7 +290,7 @@ class PictureViewer(Screen):
 				print("["+myname+"] OSError:", e)
 
 	def KeyRed(self):
-		if self.currList == "filelist" :
+		if self.currList == "filelist":
 			#do slideshow
 			self.hide()
 			x = Slideshow(self.session, self.show)
@@ -363,7 +363,7 @@ class PictureViewer(Screen):
 				self["slist"].l.setList(self.slideshowfiles)
 
 	def switchList(self):
-		if self.currList == "filelist" :
+		if self.currList == "filelist":
 			# Slideshow activieren
 			self.filelist.selectionEnabled(0)
 			self.slideshowlist.selectionEnabled(1)
@@ -383,7 +383,7 @@ class PictureViewer(Screen):
 			self.currList = "filelist"
 
 	def go(self):
-		if self.currList == "filelist" :
+		if self.currList == "filelist":
 			selection = self["menu"].getSelection()
 			if self.filelist.canDescent():
 				self.setTitle(selection[0])
@@ -597,7 +597,7 @@ class PictureList(MenuList):
 
 	def getPictureEntryComponent(self, name, absolute, isDir):
 		""" name={angezeigter Name}, absolute={vollstaendiger Pfad}, isDir={True,False} """
-		res = [ (absolute, isDir) ]
+		res = [(absolute, isDir)]
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 200, 20, 0, 0, name))
 		if isDir:
 			png = loadPNG("/usr/share/enigma2/extensions/directory.png")

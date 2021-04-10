@@ -26,6 +26,5 @@ class Settings(Source):
 				result.append((name, val))
 
 	list = property(do_func)
-	lut = {"Name": 0
-			, "Value": 1
+	lut = {"Name": 0			, "Value": 1
 			}

@@ -106,10 +106,10 @@ def main(session, *args, **kwargs):
 def menu(menuid):
 	if getImageDistro() in ('teamblue'):
 		if menuid != "ui_menu":
-			return [ ]
+			return []
 	elif getImageDistro() in ('openhdf'):
 		if menuid != "gui_menu":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
 			return []

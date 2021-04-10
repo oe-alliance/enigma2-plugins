@@ -281,7 +281,7 @@ class YTTrailer:
 								fmturl = value
 
 					if fmtid != "" and fmturl != "" and fmtid in VIDEO_FMT_PRIORITY_MAP:
-						video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
+						video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
 						fmt_infomap[int(fmtid)] = "%s" %(unquote_plus(fmturl))
 					fmturl = fmtid = ""
 
@@ -291,7 +291,7 @@ class YTTrailer:
 			else:
 				(fmtid, fmturl) = fmtstring.split('|')
 			if fmtid in VIDEO_FMT_PRIORITY_MAP and fmtid != "":
-				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
+				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
 				fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
 		print("[YTTrailer] got", sorted(six.iterkeys(fmt_infomap)))
 		if video_fmt_map and len(video_fmt_map):
@@ -360,7 +360,7 @@ class TrailerList(GUIComponent, object):
 
 	def buildList(self, entry):
 		width = self.l.getItemSize().width()
-		res = [ None ]
+		res = [None]
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, 24, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, entry.media.title.text))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 28, width, 40, 1, RT_WRAP, entry.media.description.text))
 		return res
@@ -438,7 +438,7 @@ class YTTrailerSetup(ConfigListScreen, Screen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 
-		cfglist = [ ]
+		cfglist = []
 		cfglist.append(getConfigListEntry(_("Show Setup in Extensions menu"), config.plugins.yttrailer.show_in_extensionsmenu))
 		cfglist.append(getConfigListEntry(_("Extended search filter"), config.plugins.yttrailer.ext_descr))
 		cfglist.append(getConfigListEntry(_("Best resolution"), config.plugins.yttrailer.best_resolution))

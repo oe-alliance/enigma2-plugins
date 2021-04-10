@@ -62,7 +62,7 @@ from .Logger import log
 from .Channels import getChannel
 
 # Constants
-PIXMAP_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Logos/" )
+PIXMAP_PATH = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Logos/")
 
 instance = None
 
@@ -75,13 +75,13 @@ class SeriesPluginInfoScreen(Screen):
 	desktopSize = desktop and desktop.size()
 	dwidth = desktopSize and desktopSize.width()
 	if dwidth == 1920:
-		skinFile = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Skins/InfoScreenFULLHD.xml" )
+		skinFile = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Skins/InfoScreenFULLHD.xml")
 	elif dwidth == 1280:
-		skinFile = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Skins/InfoScreenHD.xml" )
+		skinFile = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Skins/InfoScreenHD.xml")
 	elif dwidth == 1024:
-		skinFile = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Skins/InfoScreenXD.xml" )
+		skinFile = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Skins/InfoScreenXD.xml")
 	else:
-		skinFile = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Skins/InfoScreenSD.xml" )
+		skinFile = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Skins/InfoScreenSD.xml")
 	
 	skin = open(skinFile).read()
 	
@@ -93,7 +93,7 @@ class SeriesPluginInfoScreen(Screen):
 			instance = self
 		
 		self.session = session
-		self.skinName = [ "SeriesPluginInfoScreen" ]
+		self.skinName = ["SeriesPluginInfoScreen"]
 		
 		self["logo"] = Pixmap()
 		self["cover"] = Pixmap()
@@ -146,12 +146,12 @@ class SeriesPluginInfoScreen(Screen):
 		self.seriesPlugin = getInstance()
 		
 		if session:
-			self.onLayoutFinish.append( self.layoutFinished )
+			self.onLayoutFinish.append(self.layoutFinished)
 		else:
 			self.getEpisode()
 
 	def layoutFinished(self):
-		self.setTitle( _("SeriesPlugin Info") )
+		self.setTitle(_("SeriesPlugin Info"))
 		
 		self.getEpisode()
 
@@ -232,7 +232,7 @@ class SeriesPluginInfoScreen(Screen):
 				# Maybe it is an old reference
 				# Has the movie been renamed earlier?
 				# Refresh / reload the list?
-				self["event_episode"].setText( "No valid selection!" )
+				self["event_episode"].setText("No valid selection!")
 				log.debug("No valid selection", str(ref))
 				return
 			# Get information from epg
@@ -288,7 +288,7 @@ class SeriesPluginInfoScreen(Screen):
 			logopath = os.path.join(PIXMAP_PATH, logo+".png")
 			
 			if self.session and os.path.exists(logopath):
-				self.loadPixmap("logo", logopath )
+				self.loadPixmap("logo", logopath)
 		try:
 			log.debug("getEpisode:", self.name, begin, end, ref)
 			self.seriesPlugin.getEpisode(
@@ -310,16 +310,16 @@ class SeriesPluginInfoScreen(Screen):
 			self.data = data
 		
 			if data['rawseason'] == "" and data['rawepisode'] == "":
-				custom = _("{title:s}").format( **data )
+				custom = _("{title:s}").format(**data)
 				
 			elif data['rawseason'] == "":
-				custom = _("Episode: {rawepisode:s}\n{title:s}").format( **data )
+				custom = _("Episode: {rawepisode:s}\n{title:s}").format(**data)
 				
 			elif data['rawepisode'] == "":
-				custom = _("Season: {rawseason:s}\n{title:s}").format( **data )
+				custom = _("Season: {rawseason:s}\n{title:s}").format(**data)
 				
 			else:
-				custom = _("Season: {rawseason:s}  Episode: {rawepisode:s}\n{title:s}").format( **data )
+				custom = _("Season: {rawseason:s}  Episode: {rawepisode:s}\n{title:s}").format(**data)
 			
 			try:
 				self.setColorButtons()
@@ -328,13 +328,13 @@ class SeriesPluginInfoScreen(Screen):
 				log.debug("exception:", str(e))
 				pass
 		elif data:
-			custom = str( data )
+			custom = str(data)
 		else:
 			custom = _("No matching episode found")
 		
 		# Check if the dialog is already closed
 		try:
-			self["event_episode"].setText( custom )
+			self["event_episode"].setText(custom)
 		except Exception as e:
 			# Screen already closed
 			log.debug("exception:", str(e))
@@ -343,8 +343,8 @@ class SeriesPluginInfoScreen(Screen):
 
 	def updateScreen(self, name, episode, short, ext, begin, duration, channel):
 		# Adapted from EventView
-		self["event_title"].setText( name )
-		self["event_episode"].setText( episode )
+		self["event_title"].setText(name)
+		self["event_episode"].setText(episode)
 		
 		text = ""
 		if short and short != name:
@@ -355,7 +355,7 @@ class SeriesPluginInfoScreen(Screen):
 			text += ext
 		self["event_description"].setText(text)
 		
-		self["datetime"].setText( datetime.fromtimestamp(begin).strftime("%d.%m.%Y, %H:%M") )
+		self["datetime"].setText(datetime.fromtimestamp(begin).strftime("%d.%m.%Y, %H:%M"))
 		self["duration"].setText(_("%d min")%((duration)/60))
 		self["channel"].setText(channel)
 
@@ -366,10 +366,10 @@ class SeriesPluginInfoScreen(Screen):
 		self.picload = ePicLoad()
 		self.picload_conn = None
 		try:
-			self.picload_conn = self.picload.PictureData.connect( boundFunction(self.loadPixmapCallback, widget) )
+			self.picload_conn = self.picload.PictureData.connect(boundFunction(self.loadPixmapCallback, widget))
 		except:
 			self.picload_conn = True
-			self.picload.PictureData.get().append( boundFunction(self.loadPixmapCallback, widget) )
+			self.picload.PictureData.get().append(boundFunction(self.loadPixmapCallback, widget))
 		if self.picload and self.picload_conn:
 			self.picload.setPara((size.width(), size.height(), sc[0], sc[1], False, 1, "#00000000")) # Background dynamically
 			if self.picload.startDecode(path) != 0:
@@ -445,9 +445,9 @@ class SeriesPluginInfoScreen(Screen):
 				if rename(path, self.name, self.short, self.data) is True:
 					self["key_red"].setText("")
 					self.redButtonFunction = None
-					self.session.open( MessageBox, _("Successfully renamed"), MessageBox.TYPE_INFO )
+					self.session.open(MessageBox, _("Successfully renamed"), MessageBox.TYPE_INFO)
 				else:
-					self.session.open( MessageBox, _("Renaming failed"), MessageBox.TYPE_ERROR )
+					self.session.open(MessageBox, _("Renaming failed"), MessageBox.TYPE_ERROR)
 
 	# Adapted from EventView
 	def keyRecord(self):
@@ -462,7 +462,7 @@ class SeriesPluginInfoScreen(Screen):
 			refstr = eref.toString()
 			for timer in self.session.nav.RecordTimer.timer_list:
 				if timer.eit == eventid and timer.service_ref.ref.toString() == refstr:
-					cb_func = lambda ret : not ret or self.removeTimer(timer)
+					cb_func = lambda ret: not ret or self.removeTimer(timer)
 					self.session.openWithCallback(cb_func, MessageBox, _("Do you really want to delete %s?") % event.getEventName())
 					break
 			else:

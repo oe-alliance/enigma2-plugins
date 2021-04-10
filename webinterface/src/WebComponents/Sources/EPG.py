@@ -124,7 +124,7 @@ class EPG(Source):
 
 		if "endTime" in param:
 			if not param["endTime"] is None:
-				endtime = int( float(param["endTime"]) )
+				endtime = int(float(param["endTime"]))
 				if endtime < 0:
 					endtime = -1
 
@@ -172,7 +172,7 @@ class EPG(Source):
 
 		if "endTime" in param:
 			if not param["endTime"] is None:
-				endtime = int( float(param["endTime"]) )
+				endtime = int(float(param["endTime"]))
 				if endtime < 0:
 					endtime = -1
 

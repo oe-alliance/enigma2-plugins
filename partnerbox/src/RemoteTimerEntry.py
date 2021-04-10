@@ -528,7 +528,7 @@ def RemoteTimerCreateSetup(self, widget):
 			cfg = self.timerentry_vpsplugin_enabled
 		else:
 			cfg = self.timerentry_vps_in_timerevent
-		self.list.append(getConfigListEntry(_("Enable VPS"), cfg ))
+		self.list.append(getConfigListEntry(_("Enable VPS"), cfg))
 	self[widget].list = self.list
 	self[widget].l.setList(self.list)
 

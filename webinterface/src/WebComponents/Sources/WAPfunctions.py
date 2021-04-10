@@ -29,7 +29,7 @@ class WAPfunctions(Source):
 		self.func = func
 		Source.__init__(self)
 		self.session = session
-		self.result = ( "unknown command (%s)" % (self.func), )
+		self.result = ("unknown command (%s)" % (self.func), )
 
 	def handleCommand(self, cmd):
 		print("WAPfunctions: handleCommand", cmd)
@@ -50,7 +50,7 @@ class WAPfunctions(Source):
 		elif self.func is self.DELETEOLD:
 			self.result = self.deleteOldSaved(cmd)
 		else:
-			self.result = ( "unknown command cmd(%s) self.func(%s)" % (cmd, self.func), )
+			self.result = ("unknown command cmd(%s) self.func(%s)" % (cmd, self.func), )
 
 	def fillListTime(self, param):
 		print("fillListTime", param)
@@ -90,7 +90,7 @@ class WAPfunctions(Source):
 			if p != "sRef" and param[p] != None:
 				key = p
 
-		if key == "smin" or key == "emin" :
+		if key == "smin" or key == "emin":
 			start = 0
 			end = 59
 		elif key == "shour" or key == "ehour":
@@ -135,10 +135,7 @@ class WAPfunctions(Source):
 		repeated = param or 0
 		repeated = int(repeated)
 
-		self.lut = {"Name":0
-			, "Value":1
-			, "Description":2
-			, "Selected":3
+		self.lut = {"Name":0			, "Value":1			, "Description":2			, "Selected":3
 		}
 
 		mo = ["mo", 	1, "Mo "]#"Monday"]

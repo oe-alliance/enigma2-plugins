@@ -61,7 +61,7 @@ class IdentifierBase2(ModuleBase, Cacher):
 	def getAlternativeSeries(self, name):
 		
 		self.search_depth += 1
-		if( self.search_depth < config.plugins.seriesplugin.search_depths.value ):
+		if(self.search_depth < config.plugins.seriesplugin.search_depths.value):
 			
 			if self.search_depth == 1:
 				if name.find("-") != -1:

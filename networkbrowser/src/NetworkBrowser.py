@@ -38,9 +38,9 @@ def formatIp(ip):
 
 def write_cache(cache_file, cache_data):
 	#Does a cPickle dump
-	if not os_path.isdir( os_path.dirname(cache_file) ):
+	if not os_path.isdir(os_path.dirname(cache_file)):
 		try:
-			mkdir( os_path.dirname(cache_file) )
+			mkdir(os_path.dirname(cache_file))
 		except OSError:
 			print(os_path.dirname(cache_file), '[Networkbrowser] is a file')
 	fd = open(cache_file, 'wb')
@@ -114,7 +114,7 @@ class NetworkBrowser(Screen):
 		self.networklist = None
 		self.device = None
 		self.mounts = None
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.expanded = []
 		self.cache_ttl = 604800 #Seconds cache is considered valid, 7 Days should be ok
 		self.cache_file = '/etc/enigma2/networkbrowser.cache' #Path to cache directory
@@ -220,7 +220,7 @@ class NetworkBrowser(Screen):
 					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/update.png"))
 				else:
 					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/update.png"))
-				self.statuslist.append(( ['info'], statuspng, _("Searching your network. Please wait..."), None, None, None, None ))
+				self.statuslist.append((['info'], statuspng, _("Searching your network. Please wait..."), None, None, None, None))
 				self['list'].setList(self.statuslist)
 				name = _("Searching your network. Please wait...")
 				desc = name
@@ -229,7 +229,7 @@ class NetworkBrowser(Screen):
 					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/error.png"))
 				else:
 					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/error.png"))
-				self.statuslist.append(( ['info'], statuspng, _("No network devices found!"), None, None, None, None ))
+				self.statuslist.append((['info'], statuspng, _("No network devices found!"), None, None, None, None))
 				self['list'].setList(self.statuslist)
 				name = _("No network devices found!")
 				desc = name
@@ -365,7 +365,7 @@ class NetworkBrowser(Screen):
 				expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png"))
 			else:
 				expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
-			self.list.append(( hostentry, expandableIcon, name, None, None, None, None, None ))
+			self.list.append((hostentry, expandableIcon, name, None, None, None, None, None))
 
 		if len(self.list):
 			for entry in self.list:
@@ -398,7 +398,7 @@ class NetworkBrowser(Screen):
 					expandedIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png"))
 				else:
 					expandedIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
-				self.list.append(( hostentry, expandedIcon, name, None, None, None, None, None ))
+				self.list.append((hostentry, expandedIcon, name, None, None, None, None, None))
 				for share in networkshares:
 					self.list.append(self.BuildNetworkShareEntry(share))
 			else: # HOSTLIST - VIEW
@@ -408,7 +408,7 @@ class NetworkBrowser(Screen):
 					expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png"))
 				else:
 					expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
-				self.list.append(( hostentry, expandableIcon, name, None, None, None, None, None ))
+				self.list.append((hostentry, expandableIcon, name, None, None, None, None, None))
 		if len(self.list):
 			for entry in self.list:
 				entry[0][2]= "%3s.%3s.%3s.%3s" % tuple(entry[0][2].split("."))
@@ -524,7 +524,7 @@ class NetworkBrowser(Screen):
 				pass
 			self.passwordQuestion(False)
 		else:
-			self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?") ) )
+			self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?")))
 
 	def passwordQuestion(self, ret=False):
 		sel = self["list"].getCurrent()
@@ -552,7 +552,7 @@ class NetworkBrowser(Screen):
 			newmount = True
 			if selection[0] == 'nfsShare': # share entry selected
 				#Initialize blank mount enty
-				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }
+				data = {'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False}
 				# add data
 				data['mounttype'] = 'nfs'
 				data['active'] = True
@@ -568,7 +568,7 @@ class NetworkBrowser(Screen):
 						newmount = False
 			elif selection[0] == 'smbShare': # share entry selected
 				#Initialize blank mount enty
-				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }
+				data = {'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False}
 				# add data
 				data['mounttype'] = 'cifs'
 				data['active'] = True

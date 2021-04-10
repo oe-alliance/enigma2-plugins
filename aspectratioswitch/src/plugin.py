@@ -286,11 +286,11 @@ def Plugins(**kwargs):
 		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)
 		]
 	if config.plugins.AspectRatioSwitch.menu.value == "plugin":
-		list.append (PluginDescriptor(name=_("Aspect Ratio Switch setup"),	description=_("Quick switching of aspect ratio setting"),
+		list.append(PluginDescriptor(name=_("Aspect Ratio Switch setup"),	description=_("Quick switching of aspect ratio setting"),
 		where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
 	)
 	else:
-		list.append (PluginDescriptor(name=_("Aspect Ratio Switch setup"), description=_("Quick switching of aspect ratio setting"),
+		list.append(PluginDescriptor(name=_("Aspect Ratio Switch setup"), description=_("Quick switching of aspect ratio setting"),
 		where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
 	)
 

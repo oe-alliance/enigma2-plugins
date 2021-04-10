@@ -33,7 +33,7 @@ from threading import Condition
 
 
 def SuggestionListEntry(suggestion):
-	res = [ suggestion ]
+	res = [suggestion]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 5, 1, 370, 20, 0, RT_HALIGN_LEFT, suggestion[0]))
 	return res
 

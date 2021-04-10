@@ -8,7 +8,7 @@ class HTTPProgressDownloader(HTTPDownloader):
 
 		# Save callback(s) locally
 		if writeProgress and not isinstance(writeProgress, list):
-			writeProgress = [ writeProgress ]
+			writeProgress = [writeProgress]
 		self.writeProgress = writeProgress
 
 		# Initialize

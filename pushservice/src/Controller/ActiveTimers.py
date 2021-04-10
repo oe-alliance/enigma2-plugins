@@ -56,9 +56,9 @@ class ActiveTimers(ControllerBase):
 							+ strftime(_("%H:%M"), localtime(timer.end)) + "    " \
 							+ str(timer.service_ref and timer.service_ref.getServiceName() or "") \
 							+ "\n"
-				self.timers.append( timer )
+				self.timers.append(timer)
 		if self.timers and text:
-			callback( SUBJECT, BODY % text )
+			callback(SUBJECT, BODY % text)
 		else:
 			callback()
 

@@ -121,11 +121,11 @@ class MovieTagger(Screen):
 
 		taglist = []
 		for i in e:
-			res = [ i ]
+			res = [i]
 			res.append(MultiContentEntryText(pos=(5, 0), size=(500, 25), font=0, text=i))
 			if self.isUsedTag(i):
 				res.append(MultiContentEntryText(pos=(220, 0), size=(20, 25), font=1, text="X", color=0x00FFFF00)) #yellow
-			if self.isUserTag(i) :
+			if self.isUserTag(i):
 				res.append(MultiContentEntryText(pos=(240, 0), size=(20, 25), font=1, text="X", color=0x00FF0000)) #red
 			if self.isPreTag(i):
 				res.append(MultiContentEntryText(pos=(260, 0), size=(20, 25), font=1, text="X", color=0x0000FF00)) #green

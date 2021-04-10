@@ -146,7 +146,7 @@ class EIBObject(object):
 						if len(val) == 1:
 							val.append(0)
 						self.config_element.setValue([int(val[0]), int(val[1])])
-					elif self.object_type in (EIB_TEXT, EIB_MULTISWITCH) :
+					elif self.object_type in (EIB_TEXT, EIB_MULTISWITCH):
 						self.config_element.setValue(str(val))
 					else:
 						self.config_element.setValue(int(val))
@@ -180,7 +180,7 @@ class EIBObjects(object):
 		self.zone_name = zone_name
 		self.zone_img = zone_img
 
-	def by_id (self, x): return self.ids[x]
+	def by_id(self, x): return self.ids[x]
 	def by_cfg(self, x): return self.cfg[x]
 
 	def append(self, x):
@@ -246,9 +246,9 @@ class EIBObjects(object):
 					except KeyError:
 						print("[parseSingleRead] KeyError exception")
 					return
-			print ("[parseSingleRead] XML parser error parseSingleRead failed")
+			print("[parseSingleRead] XML parser error parseSingleRead failed")
 		except xml.parsers.expat.ExpatError as ValueError:
-			print ("[parseSingleRead] XML parser error parseSingleRead DOM error")
+			print("[parseSingleRead] XML parser error parseSingleRead DOM error")
 
 	def parseMultiRead(self, knxdata, user_args):
 		if config.eib.debug.value:
@@ -280,9 +280,9 @@ class EIBObjects(object):
 										elif config.eib.debug.value:
 											print("[parseMultiRead] couldn't parse persistence object", object_id, value)
 		except xml.parsers.expat.ExpatError:
-			print ("[parseMultiRead] XML parser error") 
+			print("[parseMultiRead] XML parser error") 
 
-	def __iter__ (self):
+	def __iter__(self):
 		list = six.itervalues(self.ids)
 		return iter(sorted(list, key=lambda EIBObject: EIBObject.order))
 		
@@ -343,7 +343,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 		self.initConfigList()
 		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 
 		self["actions"] = ActionMap(["SetupActions", "OkCancelActions", "ColorActions", "DirectionActions"], 
 		{

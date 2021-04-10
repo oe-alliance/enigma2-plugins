@@ -10,7 +10,7 @@
 import time
 from weakref import ref
 
-class Engines( object ):
+class Engines(object):
     def __init__(self):
         self._engines = {}
     def register(self, engine):
@@ -22,7 +22,7 @@ class Engines( object ):
         return self._engines.__contains__(key)
 Engines = Engines()
 
-class CacheEngineType( type ):
+class CacheEngineType(type):
     """
     Cache Engine Metaclass that registers new engines against the cache
     for named selection and use.
@@ -33,7 +33,7 @@ class CacheEngineType( type ):
             # skip base class
             Engines.register(mcs)
 
-class CacheEngine( object ):
+class CacheEngine(object):
     __metaclass__ = CacheEngineType
 
     name = 'unspecified'
@@ -48,7 +48,7 @@ class CacheEngine( object ):
     def expire(self, key):
         raise RuntimeError
 
-class CacheObject( object ):
+class CacheObject(object):
     """
     Cache object class, containing one stored record.
     """

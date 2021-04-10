@@ -32,7 +32,7 @@ class WebTVStations():
 			return Len > 0 and definitions[Len-1].text or default
 
 		for tvstation in tree.findall("tvstation"):
-			data = { 'provider': None, 'title': None, 'streamurl': None }
+			data = {'provider': None, 'title': None, 'streamurl': None}
 			try:
 				data['provider'] = getValue(tvstation.findall("provider"), False).encode("UTF-8")
 				data['title'] = getValue(tvstation.findall("title"), False).encode("UTF-8")

@@ -153,7 +153,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		self.startTab = startTab
 		self.doSearch = doSearch
 		
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		from Screens.InfoBar import InfoBar
 		self.infoBarInstance = InfoBar.instance
 		self.epgcache = eEPGCache.getInstance()
@@ -180,7 +180,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		self.autoTimerPixmapLarge = None
 		self.removeAutoTimerInstance = False
 		self.timerListMode = LIST_MODE_TIMER
-		list = [ ]
+		list = []
 		self.list = list # TimerEditList property, needed
 		
 		self.key_green_choice = self.EMPTY

@@ -22,7 +22,7 @@ class Movie(Source):
 			self.tagfilter = []
 			self.root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + resolveFilename(SCOPE_HDD))
 			self.movielist = movielist #MovieList(self.root)
-		self.res = ( False, _("Missing or Wrong Argument") )
+		self.res = (False, _("Missing or Wrong Argument"))
 
 	def handleCommand(self, cmd):
 		if cmd is not None:
@@ -59,11 +59,11 @@ class Movie(Source):
 					result = True
 
 			if result == False:
-				return ( result, _("Could not delete Movie '%s'") % name )
+				return (result, _("Could not delete Movie '%s'") % name)
 			else:
-				return ( result, _("Movie '%s' deleted") % name )
+				return (result, _("Movie '%s' deleted") % name)
 
-		return ( result, _("Illegal Parameter Value: sRef - '%s'") % param )
+		return (result, _("Illegal Parameter Value: sRef - '%s'") % param)
 
 	def moveMovie(self, param):
 		import os
@@ -156,7 +156,7 @@ class Movie(Source):
 					return True, _("Movie '%s' moved to '%s' without errors.") % (name, destdir)
 				else:
 					return False, _("%d error while moving Movie '%s' to '%s': %s") % (len(errlist), name, destdir, ',\n'.join(errlist))
-		return ( result, _("Illegal Parameter Value: sRef - '%s'") % param['sRef'] )
+		return (result, _("Illegal Parameter Value: sRef - '%s'") % param['sRef'])
 
 	def getMovieList(self):
 		self.movielist.reload(root=self.root, filter_tags=self.tagfilter)
@@ -233,21 +233,11 @@ class Movie(Source):
 		elif self.func is self.MOVE:
 			return self.res
 
-		return ( False, _("illegal call") )
+		return (False, _("illegal call"))
 
 	result = property(getResult)
 
 	simplelist = property(getMovieSubdirs)
 	list = property(getMovieList)
-	lut = {"ServiceReference": 0
-			, "Title": 1
-			, "Description": 2
-			, "Time": 3
-			, "TimeString": 4
-			, "Length": 5
-			, "ServiceName": 6
-			, "Tags": 7
-			, "DescriptionExtended": 8
-			, "Filename": 9
-			, "Filesize": 10
+	lut = {"ServiceReference": 0			, "Title": 1			, "Description": 2			, "Time": 3			, "TimeString": 4			, "Length": 5			, "ServiceName": 6			, "Tags": 7			, "DescriptionExtended": 8			, "Filename": 9			, "Filesize": 10
 		}

@@ -256,4 +256,4 @@ def main(session, **kwargs):
 	session.open(CDInfo)
 
 def Plugins(**kwargs):
-	return [ PluginDescriptor(name="CDInfo", description=_("AudioCD info from CDDB & CD-Text"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main, icon="plugin.png") ]
+	return [PluginDescriptor(name="CDInfo", description=_("AudioCD info from CDDB & CD-Text"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main, icon="plugin.png")]

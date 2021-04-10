@@ -389,7 +389,7 @@ def Plugins(**kwargs):
 		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart)
 		]
 	if config.plugins.ShowClock.menu.value == "plugin":
-		list.append (PluginDescriptor(
+		list.append(PluginDescriptor(
 			name=config.plugins.ShowClock.name.value + " "  + _("Ver.") + " " + VERSION, 
 			description=config.plugins.ShowClock.description.value, 
 			where=PluginDescriptor.WHERE_PLUGINMENU, 
@@ -397,7 +397,7 @@ def Plugins(**kwargs):
 			fnc=setup)
 		)
 	else:
-		list.append (PluginDescriptor(
+		list.append(PluginDescriptor(
 			name=config.plugins.ShowClock.name.value + " "  + _("Ver.") + " " + VERSION, 
 			description=config.plugins.ShowClock.description.value, 
 			where=PluginDescriptor.WHERE_EXTENSIONSMENU, 

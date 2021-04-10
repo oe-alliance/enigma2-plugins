@@ -38,7 +38,7 @@ class vps_timer:
 		self.org_timer_end = 0
 		self.org_timer_begin = 0
 		self.max_extending_timer = 4*3600
-		self.next_events = [ ]
+		self.next_events = []
 		self.new_timer_copy = None
 
 
@@ -295,10 +295,10 @@ class vps_timer:
 					if start == evt_begin:
 						return
 					else:
-						self.next_events.remove( (start, neweventid) )
+						self.next_events.remove((start, neweventid))
 						self.timer.log(0, "[VPS] delete event_id "+ str(neweventid) +" because of delay "+ str(evt_begin - start))
 
-				self.next_events.append( (evt_begin, neweventid) )
+				self.next_events.append((evt_begin, neweventid))
 				self.next_events = sorted(self.next_events)
 				self.timer.log(0, "[VPS] add event_id "+ str(neweventid))
 
@@ -542,8 +542,8 @@ class vps:
 		self.timer = eTimer()
 		self.timer.callback.append(self.checkTimer)
 
-		self.vpstimers = [ ]
-		self.current_timers_list = [ ]
+		self.vpstimers = []
+		self.current_timers_list = []
 		self.max_activation = 900
 
 	def checkTimer(self):

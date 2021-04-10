@@ -6,7 +6,7 @@
 # Author: Raymond Wagner
 #-----------------------
 
-class TMDBError( Exception ):
+class TMDBError(Exception):
     Error                   = 0
     KeyError                = 10
     KeyMissing              = 20
@@ -30,60 +30,60 @@ class TMDBError( Exception ):
             self.errno = getattr(self, 'TMDB'+self.__class__.__name__, errno)
         self.args = (msg,)
 
-class TMDBKeyError( TMDBError ):
+class TMDBKeyError(TMDBError):
     pass
 
-class TMDBKeyMissing( TMDBKeyError ):
+class TMDBKeyMissing(TMDBKeyError):
     pass
 
-class TMDBKeyInvalid( TMDBKeyError ):
+class TMDBKeyInvalid(TMDBKeyError):
     pass
 
-class TMDBKeyRevoked( TMDBKeyInvalid ):
+class TMDBKeyRevoked(TMDBKeyInvalid):
     pass
 
-class TMDBRequestError( TMDBError ):
+class TMDBRequestError(TMDBError):
     pass
 
-class TMDBRequestInvalid( TMDBRequestError ):
+class TMDBRequestInvalid(TMDBRequestError):
     pass
 
-class TMDBPagingIssue( TMDBRequestError ):
+class TMDBPagingIssue(TMDBRequestError):
     pass
 
-class TMDBCacheError( TMDBRequestError ):
+class TMDBCacheError(TMDBRequestError):
     pass
 
-class TMDBCacheReadError( TMDBCacheError ):
+class TMDBCacheReadError(TMDBCacheError):
     def __init__(self, filename):
         super(TMDBCacheReadError, self).__init__(
             "User does not have permission to access cache file: {0}.".format(filename))
         self.filename = filename
 
-class TMDBCacheWriteError( TMDBCacheError ):
+class TMDBCacheWriteError(TMDBCacheError):
     def __init__(self, filename):
         super(TMDBCacheWriteError, self).__init__(
             "User does not have permission to write cache file: {0}.".format(filename))
         self.filename = filename
 
-class TMDBCacheDirectoryError( TMDBCacheError ):
+class TMDBCacheDirectoryError(TMDBCacheError):
     def __init__(self, filename):
         super(TMDBCacheDirectoryError, self).__init__(
             "Directory containing cache file does not exist: {0}.".format(filename))
         self.filename = filename
 
-class TMDBImageSizeError( TMDBError ):
+class TMDBImageSizeError(TMDBError):
     pass
 
-class TMDBHTTPError( TMDBError ):
+class TMDBHTTPError(TMDBError):
     def __init__(self, err):
         self.httperrno = err.code
         self.response = err.fp.read()
         super(TMDBHTTPError, self).__init__(str(err))
 
-class TMDBOffline( TMDBError ):
+class TMDBOffline(TMDBError):
     pass
 
-class TMDBLocaleError( TMDBError ):
+class TMDBLocaleError(TMDBError):
     pass
 

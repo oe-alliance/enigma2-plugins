@@ -125,7 +125,7 @@ class ChangePasswdScreen(Screen):
 def startChange(menuid):
 	if getImageDistro() in ('teamblue'):
 		if menuid != "general_menu":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
 			return []

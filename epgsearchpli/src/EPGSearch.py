@@ -999,7 +999,7 @@ class EPGSearch(EPGSelection):
 			l.l.setList(ret)
 
 	def sortEPGList(self, epglist):
-		usr_ref_list = [ ]
+		usr_ref_list = []
 		serviceHandler = eServiceCenter.getInstance()
 		if not config.usage.multibouquet.value:
 			service_types_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 22) || (type == 25) || (type == 134) || (type == 195)'
@@ -1031,7 +1031,7 @@ class EPGSearch(EPGSelection):
 									break
 								if not (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
 									usr_ref_list.append(service.toString())
-		result = [ ]
+		result = []
 		if config.plugins.epgsearch.favorit_name.value:
 			for e in epglist:
 				for x in usr_ref_list:

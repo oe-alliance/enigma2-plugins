@@ -10,7 +10,7 @@ class SleepTimer(Converter):
     
     def __init__(self, type):
         Converter.__init__(self, type)
-        self.type = { "Enabled": self.ENABLED,
+        self.type = {"Enabled": self.ENABLED,
                       "Time": self.TIME,
                       "Action": self.ACTION,
                       "Text": self.TEXT,

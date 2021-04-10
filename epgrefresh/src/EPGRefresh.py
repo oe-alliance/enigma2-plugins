@@ -63,7 +63,7 @@ class EPGRefresh:
 		self.beginOfTimespan = 0
 		self.refreshAdapter = None
 		# to call additional tasks (from other plugins)
-		self.finishNotifiers = { }
+		self.finishNotifiers = {}
 
 		# Mtime of configuration files
 		self.configMtime = -1

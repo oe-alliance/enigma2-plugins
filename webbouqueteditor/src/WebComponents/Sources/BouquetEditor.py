@@ -37,7 +37,7 @@ class BouquetEditor(Source):
 		self.session = session
 		self.command = None
 		self.bouquet_rootstr = ""
-		self.result = ( False, "one two three four unknown command" )
+		self.result = (False, "one two three four unknown command")
 		
 
 	def handleCommand(self, cmd):
@@ -71,7 +71,7 @@ class BouquetEditor(Source):
 		elif self.func is self.ADD_MARKER_TO_BOUQUET:
 			self.result = self.addMarkerToBouquet(cmd)
 		else:
-			self.result = ( False, "one two three four unknown command" )
+			self.result = (False, "one two three four unknown command")
 
 	def addToBouquet(self, param):
 		print("[WebComponents.BouquetEditor] addToBouquet with param = ", param)
@@ -666,7 +666,7 @@ class BouquetEditor(Source):
 		if path.exists(filename):
 			i = 1
 			while True:
-				filename = "/etc/enigma2/%s%s_%d%s" %( prefix, name, i, suffix)
+				filename = "/etc/enigma2/%s%s_%d%s" %(prefix, name, i, suffix)
 				if path.exists(filename):
 					i += 1
 				else:

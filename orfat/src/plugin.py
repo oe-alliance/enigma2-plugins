@@ -232,7 +232,7 @@ class ORFMain(Screen):
 
 	def chechCachedFile(self):
 		try:
-			f = open ("/tmp/mpstream/progress.txt")
+			f = open("/tmp/mpstream/progress.txt")
 			content = f.read()
 			f.close()
 			list = content.split("-")

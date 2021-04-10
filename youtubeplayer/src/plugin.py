@@ -143,5 +143,5 @@ def Plugins(**kwargs):
 	return PluginDescriptor(
 		name="YouTube Player",
 		description=_("Search and play YouTube movies"),
-		where=[ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
+		where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU],
 		icon="plugin.png", fnc=main)

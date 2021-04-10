@@ -70,7 +70,7 @@ class Modules(object):
 				continue
 			
 			try:
-				module = imp.load_module( name, fp, pathname, description)
+				module = imp.load_module(name, fp, pathname, description)
 			except Exception as e:
 				print(_("PushService Load exception: ") + str(e))
 			finally:
@@ -94,7 +94,7 @@ class Modules(object):
 				continue
 			
 			# Continue only if the class is a subclass of the corresponding base class
-			if not issubclass( attr, base):
+			if not issubclass(attr, base):
 				print(_("PushService Warning no subclass of base: ") + str(name))
 				continue
 			

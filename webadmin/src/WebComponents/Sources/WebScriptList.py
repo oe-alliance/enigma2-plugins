@@ -12,7 +12,7 @@ class WebScriptList(Source):
 		self.func = func
 		self.wap = wap
 		self.session = session
-		self.res = ( False, "Missing or Wrong Argument" )
+		self.res = (False, "Missing or Wrong Argument")
 			
 	def handleCommand(self, cmd):
 		if cmd is not None:
@@ -42,11 +42,10 @@ class WebScriptList(Source):
 	def getResult(self):
 		if self.func is not self.LIST:
 			return self.res
-		return ( False, "illegal call" )
+		return (False, "illegal call")
 
 	result = property(getResult)
 	
 	list = property(getList)
-	lut = {"Name": 0
-			, "Text": 1
+	lut = {"Name": 0			, "Text": 1
 		}

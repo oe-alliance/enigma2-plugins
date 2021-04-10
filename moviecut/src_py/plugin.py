@@ -202,7 +202,7 @@ class CutTask(Task):
 class AdvancedCutInput(Screen, ConfigListScreen):
 	def __init__(self, session, name, path, descr):
 		Screen.__init__(self, session)
-		self.skinName = [ "AdvancedCutInput", "Setup" ]
+		self.skinName = ["AdvancedCutInput", "Setup"]
 
 		self["key_green"] = StaticText(_("OK"))
 		self["key_red"] = StaticText(_("Cancel"))

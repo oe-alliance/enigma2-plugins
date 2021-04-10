@@ -54,7 +54,7 @@ class ControllerBase(ModuleBase):
 		# At the end a plugin has to call one of the functions: callback or errback
 		# Callback should return with at least one of the parameter: Header, Body, Attachment
 		# If empty or none is returned, nothing will be sent
-		errback( "Not implemented: " + self.getName() + ".run()")
+		errback("Not implemented: " + self.getName() + ".run()")
 
 	# Callback functions
 	def callback(self):

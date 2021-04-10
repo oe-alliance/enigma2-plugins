@@ -70,7 +70,7 @@ def out(number, caller):
 	found = re.match("NA: ([^;]*);VN: ([^;]*);STR: ([^;]*);HNR: ([^;]*);PLZ: ([^;]*);ORT: ([^;]*)", caller)
 	if not found:
 		return
-	( name, vorname, strasse, hnr, plz, ort ) = (found.group(1),
+	(name, vorname, strasse, hnr, plz, ort) = (found.group(1),
 											found.group(2),
 											found.group(3),
 											found.group(4),
@@ -105,7 +105,7 @@ try:
 except ImportError:
 	reverseLookupFileName = "reverselookup.xml"
 
-countries = { }
+countries = {}
 reverselookupMtime = 0
 
 class ReverseLookupAndNotify:
@@ -192,7 +192,7 @@ class ReverseLookupAndNotify:
 		elif re.search('\\$PFXAREACODE', url) and website.hasAttribute("pfxareacode"):
 			areaCodeLen = int(website.getAttribute("pfxareacode"))
 			url = url.replace("$PFXAREACODE", "%(pfxareacode)s").replace("$NUMBER", "%(number)s")
-			url = url % { 'pfxareacode': number[:areaCodeLen], 'number': number[areaCodeLen:] }
+			url = url % {'pfxareacode': number[:areaCodeLen], 'number': number[areaCodeLen:]}
 		elif re.search('\\$NUMBER', url): 
 			url = url.replace("$NUMBER", "%s") %number
 		else:
@@ -251,7 +251,7 @@ class ReverseLookupAndNotify:
 			pat = self.getPattern(entry, "number")
 			if pat:
 				pat = ".*?" + pat
-				debug("[ReverseLookupAndNotify] _gotPage: look for number with '''%s'''" %( pat ))
+				debug("[ReverseLookupAndNotify] _gotPage: look for number with '''%s'''" %(pat))
 				found = re.match(pat, page, re.S|re.M)
 				if found:
 					if self.number[:2] == '00':
@@ -272,27 +272,27 @@ class ReverseLookupAndNotify:
 			pat = self.getPattern(entry, "lastname")
 			if pat:
 				pat = ".*?" + pat
-				debug("[ReverseLookupAndNotify] _gotPage: look for '''%s''' with '''%s'''" %( "lastname", pat ))
+				debug("[ReverseLookupAndNotify] _gotPage: look for '''%s''' with '''%s'''" %("lastname", pat))
 				found = re.match(pat, page, re.S|re.M)
 				if found:
-					debug("[ReverseLookupAndNotify] _gotPage: found for '''%s''': '''%s'''" %( "lastname", found.group(1)))
+					debug("[ReverseLookupAndNotify] _gotPage: found for '''%s''': '''%s'''" %("lastname", found.group(1)))
 					name = cleanName(found.group(1))
 
 					pat = self.getPattern(entry, "firstname")
 					if pat:
 						pat = ".*?" + pat
-						debug("[ReverseLookupAndNotify] _gotPage: look for '''%s''' with '''%s'''" %( "firstname", pat ))
+						debug("[ReverseLookupAndNotify] _gotPage: look for '''%s''' with '''%s'''" %("firstname", pat))
 						found = re.match(pat, page, re.S|re.M)
 						if found:
-							debug("[ReverseLookupAndNotify] _gotPage: found for '''%s''': '''%s'''" %( "firstname", found.group(1)))
+							debug("[ReverseLookupAndNotify] _gotPage: found for '''%s''': '''%s'''" %("firstname", found.group(1)))
 						firstname = cleanName(found.group(1)).strip()
 
 			else:
 				pat = ".*?" + self.getPattern(entry, "name")
-				debug("[ReverseLookupAndNotify] _gotPage: look for '''%s''' with '''%s'''" %( "name", pat ))
+				debug("[ReverseLookupAndNotify] _gotPage: look for '''%s''' with '''%s'''" %("name", pat))
 				found = re.match(pat, page, re.S|re.M)
 				if found:
-					debug("[ReverseLookupAndNotify] _gotPage: found for '''%s''': '''%s'''" %( "name", found.group(1)))
+					debug("[ReverseLookupAndNotify] _gotPage: found for '''%s''': '''%s'''" %("name", found.group(1)))
 					item = cleanName(found.group(1))
 					# debug("[ReverseLookupAndNotify] _gotPage: name: " + item)
 					name = item.strip()
@@ -311,10 +311,10 @@ class ReverseLookupAndNotify:
 				continue
 
 			pat = ".*?" + self.getPattern(entry, "city")
-			debug("[ReverseLookupAndNotify] _gotPage: look for '''%s''' with '''%s'''" %( "city", pat ))
+			debug("[ReverseLookupAndNotify] _gotPage: look for '''%s''' with '''%s'''" %("city", pat))
 			found = re.match(pat, page, re.S|re.M)
 			if found:
-				debug("[ReverseLookupAndNotify] _gotPage: found for '''%s''': '''%s'''" %( "city", found.group(1)))
+				debug("[ReverseLookupAndNotify] _gotPage: found for '''%s''': '''%s'''" %("city", found.group(1)))
 				item = cleanName(found.group(1))
 				debug("[ReverseLookupAndNotify] _gotPage: city: " + item)
 				city = item.strip()
@@ -323,19 +323,19 @@ class ReverseLookupAndNotify:
 				continue
 
 			pat = ".*?" + self.getPattern(entry, "zipcode")
-			debug("[ReverseLookupAndNotify] _gotPage: look for '''%s''' with '''%s'''" %( "zipcode", pat ))
+			debug("[ReverseLookupAndNotify] _gotPage: look for '''%s''' with '''%s'''" %("zipcode", pat))
 			found = re.match(pat, page, re.S|re.M)
 			if found and found.group(1):
-				debug("[ReverseLookupAndNotify] _gotPage: found for '''%s''': '''%s'''" %( "zipcode", found.group(1)))
+				debug("[ReverseLookupAndNotify] _gotPage: found for '''%s''': '''%s'''" %("zipcode", found.group(1)))
 				item = cleanName(found.group(1))
 				debug("[ReverseLookupAndNotify] _gotPage: zipcode: " + item)
 				zipcode = item.strip()
 
 			pat = ".*?" + self.getPattern(entry, "street")
-			debug("[ReverseLookupAndNotify] _gotPage: look for '''%s''' with '''%s'''" %( "street", pat ))
+			debug("[ReverseLookupAndNotify] _gotPage: look for '''%s''' with '''%s'''" %("street", pat))
 			found = re.match(pat, page, re.S|re.M)
 			if found and found.group(1):
-				debug("[ReverseLookupAndNotify] _gotPage: found for '''%s''': '''%s'''" %( "street", found.group(1)))
+				debug("[ReverseLookupAndNotify] _gotPage: found for '''%s''': '''%s'''" %("street", found.group(1)))
 				item = cleanName(found.group(1))
 				debug("[ReverseLookupAndNotify] _gotPage: street: " + item)
 				street = item.strip()
@@ -352,7 +352,7 @@ class ReverseLookupAndNotify:
 				#		streetno = found.group(1)
 				#===============================================================
 
-			self.caller = "NA: %s;VN: %s;STR: %s;HNR: %s;PLZ: %s;ORT: %s" % ( name, firstname, street, streetno, zipcode, city )
+			self.caller = "NA: %s;VN: %s;STR: %s;HNR: %s;PLZ: %s;ORT: %s" % (name, firstname, street, streetno, zipcode, city)
 			debug("[ReverseLookupAndNotify] _gotPage: Reverse lookup succeeded:\nName: %s" %(self.caller))
 
 			self.notifyAndReset()

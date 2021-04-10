@@ -35,7 +35,7 @@ config.usage.on_movie_eof = ConfigSelection(default="ask", choices=[("ask", _("A
 
 config.AdvancedMovieSelection = ConfigSubsection()
 config.AdvancedMovieSelection.last_selected_service = ConfigText(default="")
-config.AdvancedMovieSelection.wastelist_buildtype = ConfigSelection(default="listMovies", choices=[("listMovies", _("Only current location")), ("listAllMovies", _("Current location and all subdirectories")), ("listAllMoviesMedia", _("All directorys below '/media'")) ])
+config.AdvancedMovieSelection.wastelist_buildtype = ConfigSelection(default="listMovies", choices=[("listMovies", _("Only current location")), ("listAllMovies", _("Current location and all subdirectories")), ("listAllMoviesMedia", _("All directorys below '/media'"))])
 config.AdvancedMovieSelection.use_wastebasket = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.overwrite_left_right = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.sensibility = ConfigInteger(default=10, limits=(1, 100))
@@ -94,7 +94,7 @@ config.AdvancedMovieSelection.bookmark4owntext = ConfigText(default=_("Own text 
 config.AdvancedMovieSelection.bookmark5owntext = ConfigText(default=_("Own text 5"), visible_width=50, fixed_size=False)
 config.AdvancedMovieSelection.bookmark6owntext = ConfigText(default=_("Own text 6"), visible_width=50, fixed_size=False)
 config.AdvancedMovieSelection.bookmark7owntext = ConfigText(default=_("Own text 7"), visible_width=50, fixed_size=False)
-launch_choices = [    ("None", _("No override")),
+launch_choices = [("None", _("No override")),
                             ("showMovies", _("Video-button")),
                             ("showTv", _("TV-button")),
                             ("showRadio", _("Radio-button")),

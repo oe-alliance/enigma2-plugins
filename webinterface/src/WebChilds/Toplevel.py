@@ -40,7 +40,7 @@ def addExternalChild(child):
 def getToplevel(session):
 	root = File(util.sibpath(__file__, "web-data/tpl/default"))
 
-	root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True) ) # "/web/*"
+	root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True)) # "/web/*"
 	root.putChild("web-data", File(util.sibpath(__file__, "web-data")))
 	root.putChild("file", FileStreamer())
 	root.putChild("grab", GrabResource())
@@ -49,7 +49,7 @@ def getToplevel(session):
 	root.putChild("ipkg", res)
 	root.putChild("play", ServiceplayerResource(session))
 	root.putChild("wap", RedirectorResource("/mobile/"))
-	root.putChild("mobile", ScreenPage(session, util.sibpath(__file__, "mobile"), True) )
+	root.putChild("mobile", ScreenPage(session, util.sibpath(__file__, "mobile"), True))
 	root.putChild("m", ScreenPage(session, util.sibpath(__file__, "m"), True))
 	root.putChild("upload", UploadResource())
 	root.putChild("servicelist", ServiceList(session))

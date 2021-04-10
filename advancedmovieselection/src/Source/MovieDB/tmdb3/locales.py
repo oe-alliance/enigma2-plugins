@@ -12,7 +12,7 @@ import locale
 
 syslocale = None
 
-class LocaleBase( object ):
+class LocaleBase(object):
     __slots__ = ['__immutable']
     _stored = {}
     fallthrough = False
@@ -51,7 +51,7 @@ class LocaleBase( object ):
             raise TMDBLocaleError("'{0}' is not a known valid {1} code."
                                         .format(key, cls.__name__))
 
-class Language( LocaleBase ):
+class Language(LocaleBase):
     __slots__ = ['ISO639_1', 'ISO639_2', 'ISO639_2B', 'englishname',
                  'nativename']
     _stored = {}
@@ -70,7 +70,7 @@ class Language( LocaleBase ):
     def __repr__(self):
         return u"<Language '{0.englishname}' ({0.ISO639_1})>".format(self)
 
-class Country( LocaleBase ):
+class Country(LocaleBase):
     __slots__ = ['alpha2', 'name']
     _stored = {}
 
@@ -85,7 +85,7 @@ class Country( LocaleBase ):
     def __repr__(self):
         return u"<Country '{0.name}' ({0.alpha2})>".format(self)
 
-class Locale( LocaleBase ):
+class Locale(LocaleBase):
     __slots__ = ['language', 'country', 'encoding']
 
     def __init__(self, language, country, encoding):

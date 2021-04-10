@@ -40,7 +40,7 @@ class GrabResource(resource.Resource):
 						append('-j')
 						#Quality Setting
 						if 'jpgquali' in request.args:
-							append("%s" % (request.args["jpgquali"][0]) )
+							append("%s" % (request.args["jpgquali"][0]))
 							del request.args['jpgquali']
 						else:
 							append('80')
@@ -56,7 +56,7 @@ class GrabResource(resource.Resource):
 				if key == "v" and osdOnly is True:
 					continue
 
-				append("-%s" %key )
+				append("-%s" %key)
 
 				if value:
 					if value[0]:

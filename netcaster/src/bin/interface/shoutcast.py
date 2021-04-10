@@ -67,9 +67,9 @@ def write_cache(cache_file, cache_data):
     """
     Does a cPickle dump
     """
-    if not isdir( dirname(cache_file) ):
+    if not isdir(dirname(cache_file)):
         try:
-            mkdir( dirname(cache_file) )
+            mkdir(dirname(cache_file))
         except OSError:
             print(dirname(cache_file), 'is a file')
     fd = open(cache_file, 'wb')
@@ -147,20 +147,20 @@ class StationParser(ContentHandler):
                 print('Parsed ', self.count, ' stations')
 
 class GenreParse(ContentHandler):
-    def __init__( self ):
+    def __init__(self):
         self.isGenre = False
         self.isGenreList = False
         self.genreList = []
-    def startElement( self, name, attrs ):
+    def startElement(self, name, attrs):
         if name == 'genrelist':
             self.isGenreList = True
         if name == 'genre':
             self.isGenre == True
-            self.genre_name = attrs.get( 'name', None )
-    def endElement( self, name ):
+            self.genre_name = attrs.get('name', None)
+    def endElement(self, name):
         if name == 'genre':
             self.isGenre = False
-            self.genreList.append( self.genre_name.encode("utf-8") )
+            self.genreList.append(self.genre_name.encode("utf-8"))
         if name == 'genrelist':
             self.isGenreList = False
 
@@ -194,7 +194,7 @@ class GenreFeed:
             try:
                 parseXML = GenreParse()
                 self.genres = self.fetch_genres()
-                parseString( self.genres, parseXML )
+                parseString(self.genres, parseXML)
                 self.genre_list = parseXML.genreList
                 write_cache(self.cache_file, self.genre_list)
             except:

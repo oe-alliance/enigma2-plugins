@@ -26,8 +26,8 @@ class BonjourScreen(Screen):
 		
 		self["menuList"] = MenuList([], content=eListboxPythonMultiContent)
 		self["menuList"].l.setItemHeight(75)
-		self["menuList"].l.setFont(0, gFont("Regular", 20) )
-		self["menuList"].l.setFont(1, gFont("Regular", 16) )
+		self["menuList"].l.setFont(0, gFont("Regular", 20))
+		self["menuList"].l.setFont(1, gFont("Regular", 16))
 		
 		self["actions"] = ActionMap(["OkCancelActions"],
 			{
@@ -53,7 +53,7 @@ class BonjourScreen(Screen):
 		list = []
 		for key in sorted(self.files):
 			if self.files[key] != None:
-				list.append( self.__buildMenuEntry(self.services[self.files[key]]) )
+				list.append(self.__buildMenuEntry(self.services[self.files[key]]))
 		
 		self["menuList"].l.setList(list)
 		self["menuList"].setList(list)
@@ -86,7 +86,7 @@ def opencontrol(session):
 
 	
 def Plugins(**kwargs):
-	return [ PluginDescriptor(
+	return [PluginDescriptor(
 							name=_("Bonjour"), description=_("Control Bonjour (avahi-daemon)"),
 							where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=opencontrol)
 			]

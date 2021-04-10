@@ -135,7 +135,7 @@ class TrafficInfoMain(Screen):
     def sectionsLoaded(self, raw):
         self.loadinginprogress = False
         try:
-            xmldoc = xml.dom.minidom.parseString( raw)
+            xmldoc = xml.dom.minidom.parseString(raw)
             self.sections = []
             for i in xmldoc.getElementsByTagName("a"):
                 link = "/"+i.getAttribute("href")
@@ -160,7 +160,7 @@ class TrafficInfoMain(Screen):
     def onItemsLoaded(self):
         list=[]
         for item in self.trafficitems:
-            res = [ item ]
+            res = [item]
             res.append(MultiContentEntryText(pos=(0, 0), size=(75, 20), font=0, flags=RT_HALIGN_LEFT|RT_WRAP, text=item.street))
             res.append(MultiContentEntryText(pos=(75, 0), size=(455, 20), font=1, flags=RT_HALIGN_LEFT, text=item.direction))
             list.append(res)
@@ -184,7 +184,7 @@ class TrafficInfoMain(Screen):
         self.loadinginprogress = False
         try:
             raw = raw.replace("&amp", "")
-            xmldoc = xml.dom.minidom.parseString( raw)
+            xmldoc = xml.dom.minidom.parseString(raw)
             self.trafficitems = []
             for item in  xmldoc.getElementsByTagName("p"):
                 self.trafficitems.append(self.parseItem(item))

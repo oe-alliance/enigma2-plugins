@@ -69,7 +69,7 @@ EXTENSIONS = {
 
 
 def FileEntryComponent(name, absolute=None, isDir=False):
-	res = [ (absolute, isDir) ]
+	res = [(absolute, isDir)]
 	x, y, w, h = skin.parameters.get("DreamexplorerName", (40, 2, 1000, 22))
 	res.append((eListboxPythonMultiContent.TYPE_TEXT,  x, y, w, h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, name))
 	if isDir:
@@ -172,11 +172,11 @@ class FileList(MenuList):
 				path = os_path.join(p.mountpoint, "")
 				if path not in self.inhibitMounts and not self.inParentDirs(path, self.inhibitDirs):
 					self.list.append(FileEntryComponent(name=p.description, absolute=path, isDir=True))
-			files = [ ]
-			directories = [ ]
+			files = []
+			directories = []
 		elif directory is None:
-			files = [ ]
-			directories = [ ]
+			files = []
+			directories = []
 		elif self.useServiceRef:
 			root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + directory)
 			if self.additional_extensions:
@@ -238,12 +238,12 @@ class FileList(MenuList):
 					if nx is None:
 						self.list.append(FileEntryComponent(name=name, absolute=x, isDir=False))
 					else:
-						res = [ (x, False) ]
+						res = [(x, False)]
 						x, y, w, h = skin.parameters.get("DreamexplorerName", (40, 2, 1000, 22))
 						res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, name + " [" + self.getTSLength(path) + "]"))
 						png = LoadPixmap("/usr/lib/enigma2/python/Plugins/Extensions/DreamExplorer/res/movie.png")
 						x, y, w, h = skin.parameters.get("DreamexplorerIcon", (12, 3, 20, 20))
-						res.append(MultiContentEntryPixmapAlphaTest( pos=(x, y), size=(w, h), png=png, flags=BT_SCALE | BT_KEEP_ASPECT_RATIO))
+						res.append(MultiContentEntryPixmapAlphaTest(pos=(x, y), size=(w, h), png=png, flags=BT_SCALE | BT_KEEP_ASPECT_RATIO))
 						self.list.append(res)
 		self.l.setList(self.list)
 		if select is not None:

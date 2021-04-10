@@ -58,8 +58,8 @@ def getMapURL(x, y, z):
 def getMaptilesFromLonLat(lon, lat, zoomlevel):
     # calc map tiles
     mercator = GlobalMercator()
-    mx, my = mercator.LatLonToMeters( lat, lon )
-    tminx, tminy = mercator.MetersToTile( mx, my, zoomlevel )
+    mx, my = mercator.LatLonToMeters(lat, lon)
+    tminx, tminy = mercator.MetersToTile(mx, my, zoomlevel)
     gx, gy = mercator.GoogleTile(tminx, tminy, zoomlevel)
     return gx, gy
 
@@ -545,7 +545,7 @@ class GoogleMapsGeoSearchScreen(InputBox):
             adress, lon, lat = listitem[1]
             for i in self.do_preview_timer.timeout.get():
                 self.do_preview_timer.timeout.get().remove(i)
-            self.do_preview_timer.timeout.get().append(lambda : self.loadPreview(lon, lat))
+            self.do_preview_timer.timeout.get().append(lambda: self.loadPreview(lon, lat))
             self.do_preview_timer.start(1500)
         else:
             pass #print("nothing selected")
@@ -563,7 +563,7 @@ class GoogleMapsGeoSearchScreen(InputBox):
         self.do_search_timer.stop()
         for i in self.do_search_timer.timeout.get():
             self.do_search_timer.timeout.get().remove(i)
-        self.do_search_timer.timeout.get().append(lambda : self.doSearch(self["input"].getText()))
+        self.do_search_timer.timeout.get().append(lambda: self.doSearch(self["input"].getText()))
         self.do_search_timer.start(1000)
 
         #self.doSearch(self["input"].getText())

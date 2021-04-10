@@ -214,7 +214,7 @@ class MyTubeSuggestionsListScreen(Screen):
 						name = str(suggest)
 						numresults = suggestrelevance[count]
 						if name and numresults:
-							self.suggestlist.append((name, numresults ))
+							self.suggestlist.append((name, numresults))
 						count +=1
 				"""for suggestion in suggestions_tree.findall("CompleteSuggestion"):
 					name = None
@@ -230,7 +230,7 @@ class MyTubeSuggestionsListScreen(Screen):
 					self.suggestlist.sort(key=lambda x: int(x[1]))
 					self.suggestlist.reverse()
 					for entry in self.suggestlist:
-						self.list.append((entry[0], str(entry[1]) + _(" Results") ))
+						self.list.append((entry[0], str(entry[1]) + _(" Results")))
 					self["suggestionslist"].setList(self.list)
 					self["suggestionslist"].setIndex(0)
 		else:
@@ -508,7 +508,7 @@ class MyTubeTasksScreen(Screen):
 	def rebuildTaskList(self):
 		self.tasklist = []
 		for job in job_manager.getPendingJobs():
-			self.tasklist.append((job, job.name, job.getStatustext(), int(100*job.progress/float(job.end)), str(100*job.progress/float(job.end)) + "%" ))
+			self.tasklist.append((job, job.name, job.getStatustext(), int(100*job.progress/float(job.end)), str(100*job.progress/float(job.end)) + "%"))
 		self['tasklist'].setList(self.tasklist)
 		self['tasklist'].updateList(self.tasklist)
 		self.Timer.startLongTimer(2)
@@ -567,7 +567,7 @@ class MyTubeHistoryScreen(Screen):
 		print("self.history", self.history)
 		self.historylist = []
 		for entry in self.history:
-			self.historylist.append(( str(entry),))
+			self.historylist.append((str(entry),))
 		self["historylist"].setList(self.historylist)
 		self["historylist"].updateList(self.historylist)
 

@@ -216,7 +216,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 
-		self.tags = [ ]
+		self.tags = []
 		if selectedmovie:
 			self.selected_tags = config.movielist.last_selected_tags.value
 		else:
@@ -511,7 +511,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 
 	def showTagsMenu(self, tagele):
 		self.selected_tags_ele = tagele
-		list = [(tag, self.getTagDescription(tag)) for tag in self.tags ]
+		list = [(tag, self.getTagDescription(tag)) for tag in self.tags]
 		self.session.openWithCallback(self.tagChosen, ChoiceBox, title=_("Please select tag to filter..."), list=list)
 
 	def showTagWarning(self):

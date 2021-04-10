@@ -19,7 +19,7 @@ class LetterBox(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.default = None
-		self.tracker = ServiceEventTracker(screen=self, eventmap={ iPlayableService.evStart: self.reset, })
+		self.tracker = ServiceEventTracker(screen=self, eventmap={iPlayableService.evStart: self.reset, })
 		self.used = False
 
 	def reset(self):

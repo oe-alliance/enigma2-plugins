@@ -40,13 +40,13 @@ class PopUp(ServiceBase):
 		# Is called on instance creation
 		ServiceBase.__init__(self)
 		# Default configuration
-		self.setOption( 'timeout', NoSave(ConfigNumber(default=30)), _("Timeout") )
+		self.setOption('timeout', NoSave(ConfigNumber(default=30)), _("Timeout"))
 
 	def push(self, callback, errback, pluginname, subject, body="", attachments=[]):
 		from Plugins.Extensions.PushService.plugin import NAME
 		# Fire and forget
 		AddPopup(
-			POPUP_TEMPLATE.format( **{'name': NAME, 'plugin': pluginname, 'subject': subject, 'body': body} ),
+			POPUP_TEMPLATE.format(**{'name': NAME, 'plugin': pluginname, 'subject': subject, 'body': body}),
 			MessageBox.TYPE_INFO,
 			self.getValue('timeout'),
 			'PS_PopUp_ID_' + subject

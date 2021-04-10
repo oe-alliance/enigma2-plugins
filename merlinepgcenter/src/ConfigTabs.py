@@ -61,7 +61,7 @@ from .EpgCenterList import MULTI_EPG_NOW, MULTI_EPG_NEXT, SINGLE_EPG, MULTI_EPG_
 from .MerlinEPGCenter import STYLE_SINGLE_LINE, STYLE_SHORT_DESCRIPTION, TAB_TEXT_EPGLIST
 from .SkinFinder import SkinFinder
 
-TAB_CHOICES = [ ("-1", _("disabled")),
+TAB_CHOICES = [("-1", _("disabled")),
 		(str(MULTI_EPG_NOW), TAB_TEXT_EPGLIST[MULTI_EPG_NOW]),
 		(str(MULTI_EPG_NEXT), TAB_TEXT_EPGLIST[MULTI_EPG_NEXT]),
 		(str(SINGLE_EPG), TAB_TEXT_EPGLIST[SINGLE_EPG]),

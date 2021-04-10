@@ -344,7 +344,7 @@ class AutoTimer:
 						if not service.valid(): #check end of list
 							break
 						if not (service.flags & mask):
-							test.append( (service.toString(), 0, -1, -1 ) )
+							test.append((service.toString(), 0, -1, -1))
 
 			if not test:
 				# No service filter defined
@@ -384,7 +384,7 @@ class AutoTimer:
 								if not service.valid(): #check end of list
 									break
 								if not (service.flags & mask):
-									test.append( (service.toString(), 0, -1, -1 ) )
+									test.append((service.toString(), 0, -1, -1))
 
 			if test:
 				# Get all events
@@ -396,11 +396,11 @@ class AutoTimer:
 				for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
 					if match in (shortdesc if casesensitive else shortdesc.lower()) \
 						or match in (extdesc if casesensitive else extdesc.lower()):
-						epgmatches.append( (serviceref, eit, name, begin, duration, shortdesc, extdesc) )
+						epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
 
 		else:
 			# Search EPG, default to empty list
-			epgmatches = epgcache.search( ('RITBDSE', 3000, typeMap[timer.searchType], match, caseMap[timer.searchCase]) ) or []
+			epgmatches = epgcache.search(('RITBDSE', 3000, typeMap[timer.searchType], match, caseMap[timer.searchCase])) or []
 
 		# Sort list of tuples by begin time 'B'
 		epgmatches.sort(key=itemgetter(3))
@@ -410,7 +410,7 @@ class AutoTimer:
 
 		# Loop over all EPG matches
 		preveit = False
-		for idx, ( serviceref, eit, name, begin, duration, shortdesc, extdesc ) in enumerate( epgmatches ):
+		for idx, (serviceref, eit, name, begin, duration, shortdesc, extdesc) in enumerate(epgmatches):
 
 			eserviceref = eServiceReference(serviceref)
 			evt = epgcache.lookupEventId(eserviceref, eit)
@@ -522,7 +522,7 @@ class AutoTimer:
 					
 					if (evtBegin - (config.recording.margin_before.getValue() * 60) != rtimer.begin) or (evtEnd + (config.recording.margin_after.getValue() * 60) != rtimer.end) or (shortdesc != rtimer.description):
 						if rtimer.isAutoTimer and eit == rtimer.eit:
-							print ("[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
+							print("[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
 							rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
 							preveit = eit
 						else:
@@ -536,11 +536,11 @@ class AutoTimer:
 						rtimer.log(501, "[AutoTimer] AutoTimer modified timer: %s ." % (rtimer.name))
 						break
 					else:
-						print ("[AutoTimer] Skipping timer because it has not changed.")
+						print("[AutoTimer] Skipping timer because it has not changed.")
 						skipped += 1
 						break
 				elif timer.avoidDuplicateDescription >= 1 and not rtimer.disabled:
-					if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
+					if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc):
 						print("[AutoTimer] We found a timer with similar description, skipping event")
 						oldExists = True
 						break
@@ -552,14 +552,14 @@ class AutoTimer:
 					continue
 
 				# We want to search for possible doubles
-				for rtimer in chain.from_iterable( itervalues(timerdict) ):
+				for rtimer in chain.from_iterable(itervalues(timerdict)):
 					if not rtimer.disabled:
-						if self.checkDoubleTimers(timer, name, rtimer.name, begin, rtimer.begin, end, rtimer.end ):
+						if self.checkDoubleTimers(timer, name, rtimer.name, begin, rtimer.begin, end, rtimer.end):
 							oldExists = True
 							# print("[AutoTimer] We found a timer with same StartTime, skipping event")
 							break
 						if timer.avoidDuplicateDescription >= 2:
-							if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
+							if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc):
 								oldExists = True
 								print("[AutoTimer] We found a timer (any service) with same description, skipping event")
 								break
@@ -624,8 +624,8 @@ class AutoTimer:
 						# Attention we have to use a copy of the list, because we have to append the previous older matches
 						lepgm = len(epgmatches)
 						for i in range(lepgm):
-							servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS = epgmatches[ (i+idx+1)%lepgm ]
-							if self.checkSimilarity(timer, name, nameS, shortdesc, shortdescS, extdesc, extdescS, force=True ):
+							servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS = epgmatches[(i+idx+1)%lepgm]
+							if self.checkSimilarity(timer, name, nameS, shortdesc, shortdescS, extdesc, extdescS, force=True):
 								# Check if the similar is already known
 								if eitS not in similardict:
 									print("[AutoTimer] Found similar Timer: " + name)
@@ -746,19 +746,19 @@ class AutoTimer:
 		foundShort = False
 		foundExt = False
 		if name1 and name2:
-			foundTitle = ( 0.8 < SequenceMatcher(lambda x: x == " ", name1, name2).ratio() )
+			foundTitle = (0.8 < SequenceMatcher(lambda x: x == " ", name1, name2).ratio())
 		# NOTE: only check extended & short if tile is a partial match
 		if foundTitle:
 			if timer.searchForDuplicateDescription > 0 or force:
 				if extdesc1 and extdesc2:
 					# Some channels indicate replays in the extended descriptions
 					# If the similarity percent is higher then 0.7 it is a very close match
-					foundExt = ( 0.7 < SequenceMatcher(lambda x: x == " ", extdesc1, extdesc2).ratio() )
+					foundExt = (0.7 < SequenceMatcher(lambda x: x == " ", extdesc1, extdesc2).ratio())
 
 				if not foundExt and shortdesc1 and shortdesc2:
 					# some channels do not use extended description, so try to find a close match to short description.
 					# If the similarity percent is higher then 0.7 it is a very close match
-					foundShort = ( 0.7 < SequenceMatcher(lambda x: x == " ", shortdesc1, shortdesc2).ratio() )
+					foundShort = (0.7 < SequenceMatcher(lambda x: x == " ", shortdesc1, shortdesc2).ratio())
 		return foundShort or foundExt
 
 	def checkDoubleTimers(self, timer, name1, name2, starttime1, starttime2, endtime1, endtime2):

@@ -48,7 +48,7 @@ class AutoMountManager(Screen):
 		self.hostname = None
 		self.restartLanRef = None
 		Screen.__init__(self, session)
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 		{
 			"ok": self.keyOK,
@@ -97,8 +97,8 @@ class AutoMountManager(Screen):
 			okpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/ok.png"))
 		else:
 			okpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/ok.png"))
-		self.list.append((_("Add new network mount point"), "add", _("Add a new NFS or CIFS mount point to your Receiver."), okpng ))
-		self.list.append((_("Mountpoints management"), "view", _("View, edit or delete mountpoints on your Receiver."), okpng ))
+		self.list.append((_("Add new network mount point"), "add", _("Add a new NFS or CIFS mount point to your Receiver."), okpng))
+		self.list.append((_("Mountpoints management"), "view", _("View, edit or delete mountpoints on your Receiver."), okpng))
 		self.list.append((_("User management"), "user", _("View, edit or delete usernames and passwords for your network."), okpng))
 		self.list.append((_("Change hostname"), "hostname", _("Change the hostname of your Receiver."), okpng))
 		self.list.append((_("Setup Mount Again"), "mountagain", _("Schedule a auto remount of your network shares."), okpng))
@@ -191,7 +191,7 @@ class MountManagerMenu(Screen, ConfigListScreen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 		self.createSetup()

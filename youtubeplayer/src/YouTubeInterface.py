@@ -223,7 +223,7 @@ class YouTubeEntry():
 		if thumbnailUrl is not None and self.getYouTubeId() is not None:
 			thumbnailFile = "/tmp/" + self.getYouTubeId() + "_" + str(index) + ".jpg"
 			self.thumbnail[str(index)] = None
-			cookie = {"entry" : self, "file" : thumbnailFile, "callback" : callback, "index" : index}
+			cookie = {"entry": self, "file": thumbnailFile, "callback": callback, "index": index}
 			downloadPage(six.ensure_binary(thumbnailUrl), thumbnailFile).addCallback(fetchFinished, cookie).addErrback(fetchFailed, cookie)
 
 
@@ -265,7 +265,7 @@ class YouTubeEntry():
 				reason = unquote_plus(video_info['reason'][0])
 			return None #, reason
 		else:
-			quality_fallback_dict = dict({"22" : "18",  "18" : "6",  "6" : "1"})
+			quality_fallback_dict = dict({"22": "18",  "18": "6",  "6": "1"})
 			token = video_info['token'][0]
 			while True: 
 				print("[YTB] Trying fmt=" + fmt)

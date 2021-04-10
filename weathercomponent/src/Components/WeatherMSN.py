@@ -27,7 +27,7 @@ class WeatherMSN:
 	TIMER_INTERVAL = 1800
 	def __init__(self):
 		self.weatherData = MSNWeather()
-		self.callbacks = [ ]
+		self.callbacks = []
 		self.callbacksAllIconsDownloaded = []
 		self.timer = eTimer()
 		self.timer.callback.append(self.getData)

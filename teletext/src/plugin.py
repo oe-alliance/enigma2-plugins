@@ -64,10 +64,10 @@ CMD_CLOSE_DMN=99
 SPLIT_MODE_PAT = "pat"
 SPLIT_MODE_TAP = "tap"
 SPLIT_MODE_TIP = "tip"
-splittingModeList = [ (SPLIT_MODE_PAT, _("picture and teletext")), (SPLIT_MODE_TAP, _("teletext and picture")), (SPLIT_MODE_TIP, _("teletext in picture")) ]
-textlevelModeList = [ ("0", "1.0"), ("1", "1.5"), ("2", "2.5"), ("3", "3.5") ]
-regionList = [ ("0", _("Western and Central Europe")), ("8", _("Eastern Europe")), ("16", _("Western Europe and Turkey")), ("24", _("Central and Southeast Europe")), ("32", _("Cyrillic")), ("48", _("Turkish / Greek")), ("64", _("Arabic")), ("80", _("Hebrew / Arabic")) ]
-filterList = [ ("%d"%DISABLED, _("Disabled")), ("%d"%BILINEAR, _("bilinear")), ("%d"%ANISOTROPIC, _("anisotropic")), ("%d"%SHARP, _("sharp")), ("%d"%SHARPER, _("sharper"))]
+splittingModeList = [(SPLIT_MODE_PAT, _("picture and teletext")), (SPLIT_MODE_TAP, _("teletext and picture")), (SPLIT_MODE_TIP, _("teletext in picture"))]
+textlevelModeList = [("0", "1.0"), ("1", "1.5"), ("2", "2.5"), ("3", "3.5")]
+regionList = [("0", _("Western and Central Europe")), ("8", _("Eastern Europe")), ("16", _("Western Europe and Turkey")), ("24", _("Central and Southeast Europe")), ("32", _("Cyrillic")), ("48", _("Turkish / Greek")), ("64", _("Arabic")), ("80", _("Hebrew / Arabic"))]
+filterList = [("%d"%DISABLED, _("Disabled")), ("%d"%BILINEAR, _("bilinear")), ("%d"%ANISOTROPIC, _("anisotropic")), ("%d"%SHARP, _("sharp")), ("%d"%SHARPER, _("sharper"))]
 
 HELP_TEXT_POS          = _("Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically.")
 HELP_TEXT_TIP_POS      = _("Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically.")
@@ -149,7 +149,7 @@ class TeleText(Screen):
   favorites = None
   read_data = False
 
-  onChangedEntry = [ ]
+  onChangedEntry = []
 
   def __init__(self, session):
     TeleText.skin = """<screen position="0,0" size="%d,%d" title="TeleText" flags="wfNoBorder"/>""" % (dsk_width, dsk_height)
@@ -163,18 +163,18 @@ class TeleText(Screen):
 
     self["actions"] = NumberActionMap(["OkCancelActions", "TeleTextActions"],
     {
-      "ok" : self.okPressed,
-      "cancel" : self.cancelPressed,
-      "1" : self.keyNumberGlobal,
-      "2" : self.keyNumberGlobal,
-      "3" : self.keyNumberGlobal,
-      "4" : self.keyNumberGlobal,
-      "5" : self.keyNumberGlobal,
-      "6" : self.keyNumberGlobal,
-      "7" : self.keyNumberGlobal,
-      "8" : self.keyNumberGlobal,
-      "9" : self.keyNumberGlobal,
-      "0" : self.keyNumberGlobal,
+      "ok": self.okPressed,
+      "cancel": self.cancelPressed,
+      "1": self.keyNumberGlobal,
+      "2": self.keyNumberGlobal,
+      "3": self.keyNumberGlobal,
+      "4": self.keyNumberGlobal,
+      "5": self.keyNumberGlobal,
+      "6": self.keyNumberGlobal,
+      "7": self.keyNumberGlobal,
+      "8": self.keyNumberGlobal,
+      "9": self.keyNumberGlobal,
+      "0": self.keyNumberGlobal,
       "prev":   self.prevPressed,
       "next":   self.nextPressed,
       "prev_long": self.prevLongPressed,
@@ -1081,7 +1081,7 @@ class TeleTextTransponderMenu(Screen):
   cur_service = ""
   new_service = ""
 
-  onChangedEntry = [ ]
+  onChangedEntry = []
 
   def __init__(self, session, list, index):
     log("[transponder] __init__")
@@ -1112,14 +1112,14 @@ class TeleTextTransponderMenu(Screen):
 
     self["actions"] = ActionMap(["OkCancelActions", "TeleTextActions"],
     {
-      "ok"     : self.okPressed,
-      "cancel" : self.cancelPressed,
-      "red"    : self.cancelPressed,
-      "green"  : self.okPressed,
-      "left"   : self.prevPressed,
-      "right"  : self.nextPressed,
-      "prev"   : self.prevPressed,
-      "next"   : self.nextPressed,
+      "ok": self.okPressed,
+      "cancel": self.cancelPressed,
+      "red": self.cancelPressed,
+      "green": self.okPressed,
+      "left": self.prevPressed,
+      "right": self.nextPressed,
+      "prev": self.prevPressed,
+      "next": self.nextPressed,
       "prev_long": self.prevPressed,
       "next_long": self.nextPressed
     }, -2)
@@ -1226,7 +1226,7 @@ class TeleTextTransponderSummary(Screen):
 
 class TeleTextMenu(ConfigListScreen, Screen):
 
-  onChangedEntry = [ ]
+  onChangedEntry = []
   isInitialized = False
   parent = None
 
@@ -1258,14 +1258,14 @@ class TeleTextMenu(ConfigListScreen, Screen):
 
     self["actions"] = ActionMap(["OkCancelActions", "TeleTextActions"],
     {
-      "ok"     : self.okPressed,
-      "cancel" : self.cancelPressed,
-      "red"    : self.cancelPressed,
-      "green"  : self.okPressed,
-      "yellow" : self.resetPressed,
-      "menu"   : self.cancelPressed,
-      "text"   : self.textPressed,
-      "info"   : self.infoPressed
+      "ok": self.okPressed,
+      "cancel": self.cancelPressed,
+      "red": self.cancelPressed,
+      "green": self.okPressed,
+      "yellow": self.resetPressed,
+      "menu": self.cancelPressed,
+      "text": self.textPressed,
+      "info": self.infoPressed
     }, -2)
     self["actions"].setEnabled(True)
 
@@ -1512,8 +1512,8 @@ class TeleTextAboutScreen(Screen):
 
     self["actions"] = ActionMap(["OkCancelActions"],
     {
-      "ok"     : self.okPressed,
-      "cancel" : self.cancelPressed
+      "ok": self.okPressed,
+      "cancel": self.cancelPressed
     }, -2)
     self["actions"].setEnabled(True)
 
@@ -1609,7 +1609,7 @@ class TeleTextFavorites():
 
 class TeleTextFavoritesMenu(Screen):
 
-  onChangedEntry = [ ]
+  onChangedEntry = []
 
   def __init__(self, session, parent, service, page, favorites):
     width = 590
@@ -1652,22 +1652,22 @@ class TeleTextFavoritesMenu(Screen):
 
     self["actions"] = NumberActionMap(["OkCancelActions", "TeleTextActions"],
     {
-      "1"      : self.keyNumberGlobal,
-      "2"      : self.keyNumberGlobal,
-      "3"      : self.keyNumberGlobal,
-      "4"      : self.keyNumberGlobal,
-      "5"      : self.keyNumberGlobal,
-      "6"      : self.keyNumberGlobal,
-      "7"      : self.keyNumberGlobal,
-      "8"      : self.keyNumberGlobal,
-      "9"      : self.keyNumberGlobal,
-      "0"      : self.keyNumberGlobal,
-      "ok"     : self.okPressed,
-      "cancel" : self.cancelPressed,
-      "red"    : self.redPressed,
-      "green"  : self.okPressed,
-      "yellow" : self.yellowPressed,
-      "blue"   : self.bluePressed
+      "1": self.keyNumberGlobal,
+      "2": self.keyNumberGlobal,
+      "3": self.keyNumberGlobal,
+      "4": self.keyNumberGlobal,
+      "5": self.keyNumberGlobal,
+      "6": self.keyNumberGlobal,
+      "7": self.keyNumberGlobal,
+      "8": self.keyNumberGlobal,
+      "9": self.keyNumberGlobal,
+      "0": self.keyNumberGlobal,
+      "ok": self.okPressed,
+      "cancel": self.cancelPressed,
+      "red": self.redPressed,
+      "green": self.okPressed,
+      "yellow": self.yellowPressed,
+      "blue": self.bluePressed
     }, -2)
     self["actions"].setEnabled(True)
 

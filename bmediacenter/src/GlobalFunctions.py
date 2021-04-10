@@ -31,7 +31,7 @@ class MC_VideoInfoView(Screen):
 			"cancel": self.close,
 			"ok": self.close
 		}, -1)
-		tlist = [ ]
+		tlist = []
 		self["infolist"] = ServiceInfoList(tlist)
 		currPlay = self.session.nav.getCurrentService()
 		if currPlay is not None:

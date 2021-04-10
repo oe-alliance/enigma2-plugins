@@ -67,7 +67,7 @@ def runIndependent():
 			spt.getEpisode(timer)
 			
 	except Exception as e:
-		log.exception( _("Independent mode exception") + "\n" + str(e))
+		log.exception(_("Independent mode exception") + "\n" + str(e))
 
 
 #######################################################
@@ -85,12 +85,12 @@ class SeriesPluginIndependent(object):
 			self.etimer.callback.append(self.run)
 		cycle = int(config.plugins.seriesplugin.independent_cycle.value)
 		if cycle > 0:
-			self.etimer.start( (cycle * 60 * 1000) )
+			self.etimer.start((cycle * 60 * 1000))
 		# Start timer as single shot, just for testing
 		#self.etimer.start( 10, True )
 
 	def run(self):
-		log.debug("SeriesPluginIndependent: run",  strftime("%a, %d %b %Y %H:%M:%S", localtime()) )
+		log.debug("SeriesPluginIndependent: run",  strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 
 		runIndependent()
 
