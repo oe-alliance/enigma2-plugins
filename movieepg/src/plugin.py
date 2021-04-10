@@ -17,9 +17,9 @@ config.plugins.movieepg.show_epg_entry = ConfigSelection(choices=[
 		("never", _("Never")),
 		("movie", _("Movie Player")),
 		("always", _("always")),
-	], default = "movie"
+	], default="movie"
 )
-config.plugins.movieepg.show_servicelist_plugins_in_movieplayer = ConfigYesNo(default = True)
+config.plugins.movieepg.show_servicelist_plugins_in_movieplayer = ConfigYesNo(default=True)
 
 MODE_OFF = False
 MODE_ON = True
@@ -38,7 +38,7 @@ MODE_MOVIEPLAYER = 2
 def InfoBarPlugins_getPluginList(self, *args, **kwargs):
 	l = []
 	showSlistPlugins = (config.plugins.movieepg.show_servicelist_plugins_in_movieplayer.value and hasattr(self, 'servicelist')) or isinstance(self, InfoBarChannelSelection)
-	for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EXTENSIONSMENU):
+	for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EXTENSIONSMENU):
 		args = inspect.getargspec(p.__call__)[0]
 		if len(args) == 1 or len(args) == 2 and showSlistPlugins:
 			l.append(p)
@@ -55,9 +55,9 @@ def InfoBarPlugins_getPluginList(self, *args, **kwargs):
 	return l
 def InfoBarPlugins_runPlugin(self, plugin, *args, **kwargs):
 	if hasattr(self, 'servicelist'):
-		plugin(session = self.session, servicelist = self.servicelist)
+		plugin(session=self.session, servicelist=self.servicelist)
 	else:
-		plugin(session = self.session)
+		plugin(session=self.session)
 InfoBarPlugins.getPluginList = InfoBarPlugins_getPluginList
 InfoBarPlugins.runPlugin = InfoBarPlugins_runPlugin
 
@@ -84,7 +84,7 @@ ChannelSelection.zap = ChannelSelection_zap
 
 # Step 3: Plugin which allows access to service list from extension menu (and possibly later on from plugin menu)
 # Absolutely no effect on its own.
-def entry(session = None, servicelist = None):
+def entry(session=None, servicelist=None):
 	# XXX: session.current_dialog is the movie player (or infobar if ran from "regular" extension menu)
 	if not session:
 		return

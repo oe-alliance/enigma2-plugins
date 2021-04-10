@@ -94,7 +94,7 @@ class AutoTimerSettings(ConfigListScreen, Screen):
 		self.onChangedEntry = []
 		self.session = session
 		self.pollUnitEntry = None
-		ConfigListScreen.__init__(self, [], session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, [], session=session, on_change=self.changedEntry)
 
 		self["actions2"] = ActionMap(["SetupActions"],
 		{

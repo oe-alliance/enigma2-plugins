@@ -141,9 +141,9 @@ class ConfigTextWithSuggestions(ConfigText):
 			self.condition.notify()
 			self.condition.release()
 
-	def __init__(self, default = "", fixed_size = True, visible_width = False, threaded = False):
+	def __init__(self, default="", fixed_size=True, visible_width=False, threaded=False):
 		ConfigText.__init__(self, default, fixed_size, visible_width)
-		self.suggestions = GoogleSuggestions(self.propagateSuggestions, ds = "yt", hl = "en")
+		self.suggestions = GoogleSuggestions(self.propagateSuggestions, ds="yt", hl="en")
 		self.suggestionsThread = None
 		self.threaded = threaded
 		self.suggestionsListActivated = False

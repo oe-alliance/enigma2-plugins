@@ -229,7 +229,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 		self.onClose.append(self.__onClose)
 
 		class VlcPlayerActionMap(ActionMap):
-			def __init__(self, player, contexts = [ ], actions = { }, prio=0):
+			def __init__(self, player, contexts=[ ], actions={ }, prio=0):
 				ActionMap.__init__(self, contexts, actions, prio)
 				self.player = player
 
@@ -272,8 +272,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 			}, -2)
 
 		print("[VLC] evEOF=%d" % iPlayableService.evEOF)
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evEOF: self.__evEOF,
 				iPlayableService.evSOF: self.__evSOF
 			})

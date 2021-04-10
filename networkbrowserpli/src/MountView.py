@@ -115,21 +115,21 @@ class AutoMountView(Screen):
 	def exit(self):
 		self.close()
 
-	def keyOK(self, returnValue = None):
+	def keyOK(self, returnValue=None):
 		cur = self["config"].getCurrent()
 		if cur:
 			returnValue = cur[1]
 			self.session.openWithCallback(self.MountEditClosed, AutoMountEdit, self.skin_path, iAutoMount.automounts[returnValue])
 
-	def MountEditClosed(self, returnValue = None):
+	def MountEditClosed(self, returnValue=None):
 		if returnValue == None:
 			self.showMountsList()
 
-	def delete(self, returnValue = None):
+	def delete(self, returnValue=None):
 		cur = self["config"].getCurrent()
 		if cur:
 			returnValue = cur[1]
-			self.applyConfigRef = self.session.openWithCallback(self.applyConfigfinishedCB, MessageBox, _("Please wait while removing your network mount..."), type = MessageBox.TYPE_INFO, enable_input = False)
+			self.applyConfigRef = self.session.openWithCallback(self.applyConfigfinishedCB, MessageBox, _("Please wait while removing your network mount..."), type=MessageBox.TYPE_INFO, enable_input=False)
 			iAutoMount.removeMount(returnValue, self.removeDataAvail)
 
 	def removeDataAvail(self, data):
@@ -144,7 +144,7 @@ class AutoMountView(Screen):
 
 	def applyConfigfinishedCB(self, data):
 		if data is True:
-			self.session.openWithCallback(self.ConfigfinishedCB, MessageBox, _("Your network mount has been removed."), type = MessageBox.TYPE_INFO, timeout = 10)
+			self.session.openWithCallback(self.ConfigfinishedCB, MessageBox, _("Your network mount has been removed."), type=MessageBox.TYPE_INFO, timeout=10)
 
 	def ConfigfinishedCB(self, data):
 		if data is not None:

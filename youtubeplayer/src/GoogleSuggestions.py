@@ -26,7 +26,7 @@ from six.moves import http_client
 
 
 class GoogleSuggestions():
-	def __init__(self, callback, ds = None, json = None, hl = None):
+	def __init__(self, callback, ds=None, json=None, hl=None):
 		self.callback = callback
 		self.conn = http_client.HTTPConnection("google.com")
 		self.prepQuerry = "/complete/search?"

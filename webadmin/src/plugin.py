@@ -33,5 +33,5 @@ def autostart(reason, **kwargs):
 			
 def Plugins(**kwargs):
 	return [PluginDescriptor(name="WebAdmin",
-			where = PluginDescriptor.WHERE_SESSIONSTART,
-			fnc = autostart)]
+			where=PluginDescriptor.WHERE_SESSIONSTART,
+			fnc=autostart)]

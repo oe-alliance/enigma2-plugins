@@ -17,8 +17,8 @@ from six.moves import reload_module
 
 
 config.plugins.AudioRestart = ConfigSubsection()
-config.plugins.AudioRestart.restartSelection = ConfigSelection( default = "disabled", choices = [("disabled", _("disabled")), ("restart", _("after restart")), ("standby", _("after standby")), ("both", _("after restart/standby"))])
-config.plugins.AudioRestart.restartDelay = ConfigInteger(default = 5, limits = (0, 30))
+config.plugins.AudioRestart.restartSelection = ConfigSelection( default="disabled", choices=[("disabled", _("disabled")), ("restart", _("after restart")), ("standby", _("after standby")), ("both", _("after restart/standby"))])
+config.plugins.AudioRestart.restartDelay = ConfigInteger(default=5, limits=(0, 30))
 
 PLUGIN_BASE = "AudioRestart"
 PLUGIN_VERSION = "0.1"
@@ -28,7 +28,7 @@ class AudioRestart():
         self.activateTimer = eTimer()
         self.activateTimer.callback.append(self.restartAudio)
         if config.plugins.AudioRestart.restartSelection.value in ["standby", "both"]:
-            config.misc.standbyCounter.addNotifier(self.enterStandby, initial_call = False)
+            config.misc.standbyCounter.addNotifier(self.enterStandby, initial_call=False)
         if config.plugins.AudioRestart.restartSelection.value in ["restart", "both"]:
             self.startTimer()
         
@@ -144,8 +144,8 @@ def setup(session, **kwargs):
 def Plugins(path,**kwargs):
     global plugin_path
     plugin_path = path
-    pluginList = [ PluginDescriptor(name=_("Audio restart Setup"), description=_("Setup for the AudioRestart Plugin"), icon = "AudioRestart.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=setup)]
+    pluginList = [ PluginDescriptor(name=_("Audio restart Setup"), description=_("Setup for the AudioRestart Plugin"), icon="AudioRestart.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=setup)]
     if config.plugins.AudioRestart.restartSelection.value != "disabled":
-        pluginAutoStart = PluginDescriptor(name="Audio restart", description = _("Restart audio"), where=PluginDescriptor.WHERE_SESSIONSTART, fnc = sessionstart)
+        pluginAutoStart = PluginDescriptor(name="Audio restart", description=_("Restart audio"), where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart)
         pluginList.append(pluginAutoStart)
     return pluginList

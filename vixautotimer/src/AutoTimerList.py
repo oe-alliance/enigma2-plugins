@@ -34,7 +34,7 @@ class AutoTimerList(MenuList):
 	"""Defines a simple Component to show Timer name"""
 
 	def __init__(self, entries):
-		MenuList.__init__(self, entries, False, content = eListboxPythonMultiContent)
+		MenuList.__init__(self, entries, False, content=eListboxPythonMultiContent)
 		self.l.setBuildFunc(self.buildListboxEntry)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setFont(1, gFont("Regular", 17))

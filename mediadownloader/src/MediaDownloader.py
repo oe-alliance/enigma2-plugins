@@ -21,7 +21,7 @@ from six.moves.urllib.parse import urlparse, urlunparse
 
 import time
 
-def _parse(url, defaultPort = None):
+def _parse(url, defaultPort=None):
 	url = url.strip()
 	parsed = urlparse(url)
 	scheme = parsed[0]
@@ -56,7 +56,7 @@ def _parse(url, defaultPort = None):
 
 	return scheme, host, port, path, username, password
 
-def download(url, file, writeProgress = None, contextFactory = None,
+def download(url, file, writeProgress=None, contextFactory=None,
 	*args, **kwargs):
 
 	"""Download a remote file and provide current-/total-length.
@@ -131,7 +131,7 @@ class MediaDownloader(Screen):
 			<widget source="speed" render="Label" position="338,65" size="200,30" halign="right" font="Regular;23" />
 		</screen>"""
 
-	def __init__(self, session, file, askOpen = False, downloadTo = None, callback = None):
+	def __init__(self, session, file, askOpen=False, downloadTo=None, callback=None):
 		Screen.__init__(self, session)
 
 		# Save arguments local
@@ -175,8 +175,8 @@ class MediaDownloader(Screen):
 				LocationBox,
 				_("Where to save?"),
 				path.basename(self.file.path),
-				minFree = self.file.size,
-				bookmarks = config.plugins.mediadownloader.bookmarks
+				minFree=self.file.size,
+				bookmarks=config.plugins.mediadownloader.bookmarks
 			)
 
 	def gotFilename(self, res):
@@ -230,8 +230,8 @@ class MediaDownloader(Screen):
 			self.session.open(
 				MessageBox,
 				_("No suitable Viewer found!"),
-				type = MessageBox.TYPE_ERROR,
-				timeout = 5
+				type=MessageBox.TYPE_ERROR,
+				timeout=5
 			)
 
 		# Calback with Filename on success
@@ -240,14 +240,14 @@ class MediaDownloader(Screen):
 
 		self.close()
 
-	def gotFile(self, data = ""):
+	def gotFile(self, data=""):
 		# Ask if file should be opened unless told not to
 		if self.askOpen:
 			self.session.openWithCallback(
 				self.openCallback,
 				MessageBox,
 				_("Do you want to try to open the downloaded file?"),
-				type = MessageBox.TYPE_YESNO
+				type=MessageBox.TYPE_YESNO
 			)
 		# Otherwise callback and close
 		else:
@@ -257,15 +257,15 @@ class MediaDownloader(Screen):
 
 			self.close()
 
-	def error(self, msg = ""):
+	def error(self, msg=""):
 		if msg != "":
 			print("[MediaDownloader] Error downloading:", msg)
 
 		self.session.open(
 			MessageBox,
 			_("Error while downloading file %s") % (self.file.path),
-			type = MessageBox.TYPE_ERROR,
-			timeout = 3
+			type=MessageBox.TYPE_ERROR,
+			timeout=3
 		)
 
 		# Calback with None on failure

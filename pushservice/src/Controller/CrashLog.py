@@ -44,7 +44,7 @@ class CrashLog(ControllerBase):
 		self.crashlogs = []
 
 		# Default configuration
-		self.setOption( 'delete_logs', NoSave(ConfigYesNo( default = False )), _("Delete crashlog(s)") )
+		self.setOption( 'delete_logs', NoSave(ConfigYesNo( default=False )), _("Delete crashlog(s)") )
 
 	def run(self, callback, errback):
 		# At the end a plugin has to call one of the functions: callback or errback

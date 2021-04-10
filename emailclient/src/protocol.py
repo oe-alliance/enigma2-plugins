@@ -29,7 +29,7 @@ class SimpleIMAP4ClientFactory(protocol.ReconnectingClientFactory):
 
 	def buildProtocol(self, addr):
 		debug("[SimpleIMAP4ClientFactory] building protocol: %s" %addr)
-		pr = self.protocol(contextFactory = self.ctx)
+		pr = self.protocol(contextFactory=self.ctx)
 		pr.factory = self
 		pr.greetDeferred = self.e2session.onConnect
 		auth = imap4.CramMD5ClientAuthenticator(self.username)

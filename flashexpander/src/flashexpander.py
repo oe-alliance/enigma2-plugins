@@ -257,7 +257,7 @@ class FEconf(Screen):
 			return False
 		return True
 
-	def __CopyFinished(self, result, retval, extra_args = None):
+	def __CopyFinished(self, result, retval, extra_args=None):
 		if retval==0:
 			self.__message.close(True)
 		else:

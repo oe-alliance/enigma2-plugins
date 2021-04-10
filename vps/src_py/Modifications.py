@@ -165,14 +165,14 @@ def new_TimerEntry_createConfig(self, *args, **kwargs):
 				default_value = config.plugins.vps.vps_default.value
 
 
-		self.timerentry_vpsplugin_enabled = ConfigSelection(choices = [("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes"))], default = default_value)
+		self.timerentry_vpsplugin_enabled = ConfigSelection(choices=[("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes"))], default=default_value)
 
 		if self.timer.vpsplugin_time is not None:
-			self.timerentry_vpsplugin_time_date = ConfigDateTime(default = self.timer.vpsplugin_time, formatstring = _("%d.%B %Y"), increment = 86400)
-			self.timerentry_vpsplugin_time_clock = ConfigClock(default = self.timer.vpsplugin_time)
+			self.timerentry_vpsplugin_time_date = ConfigDateTime(default=self.timer.vpsplugin_time, formatstring=_("%d.%B %Y"), increment=86400)
+			self.timerentry_vpsplugin_time_clock = ConfigClock(default=self.timer.vpsplugin_time)
 		else:
-			self.timerentry_vpsplugin_time_date = ConfigDateTime(default = self.timer.begin, formatstring = _("%d.%B %Y"), increment = 86400)
-			self.timerentry_vpsplugin_time_clock = ConfigClock(default = self.timer.begin)
+			self.timerentry_vpsplugin_time_date = ConfigDateTime(default=self.timer.begin, formatstring=_("%d.%B %Y"), increment=86400)
+			self.timerentry_vpsplugin_time_clock = ConfigClock(default=self.timer.begin)
 	except Exception as exc:
 		print("[VPS] new_TimerEntry_createConfig : ", exc)
 		pass

@@ -60,15 +60,15 @@ class OFDBChannelSelection(SimpleChannelSelection):
 				self.epgClosed,
 				OFDBEPGSelection,
 				ref,
-				openPlugin = False
+				openPlugin=False
 			)
 
-	def epgClosed(self, ret = None):
+	def epgClosed(self, ret=None):
 		if ret:
 			self.close(ret)
 
 class OFDBEPGSelection(EPGSelection):
-	def __init__(self, session, ref, openPlugin = True):
+	def __init__(self, session, ref, openPlugin=True):
 		EPGSelection.__init__(self, session, ref)
 		self.skinName = "EPGSelection"
 		self["key_green"].setText(_("Lookup"))
@@ -119,7 +119,7 @@ class OFDB(Screen):
 			<widget name="stars" position="340,40" size="250,21" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OFDb/starsbar_filled.png" transparent="1" />
 		</screen>"""
 
-	def __init__(self, session, eventName, args = None):
+	def __init__(self, session, eventName, args=None):
 		self.skin = OFDB.skin
 		Screen.__init__(self, session)
 		self.eventName = eventName
@@ -272,7 +272,7 @@ class OFDB(Screen):
 			OFDBChannelSelection
 		)
 
-	def channelSelectionClosed(self, ret = None):
+	def channelSelectionClosed(self, ret=None):
 		if ret:
 			self.eventName = ret
 			self.Page = 0
@@ -451,11 +451,11 @@ class OFDB(Screen):
 				downloadPage(six.ensure_binary(posterurl), localfile).addCallback(self.OFDBPoster).addErrback(self.fetchFailed)
 			else:
 				print("no jpg poster!")
-				self.OFDBPoster(noPoster = True)
+				self.OFDBPoster(noPoster=True)
 
 		self["detailslabel"].setText(Detailstext)
 
-	def OFDBPoster(self, noPoster = False):
+	def OFDBPoster(self, noPoster=False):
 		self["statusbar"].setText(_("OFDb Details parsed"))
 		if not noPoster:
 			filename = "/tmp/poster.jpg"
@@ -501,20 +501,20 @@ def main(session, eventName="", **kwargs):
 
 def Plugins(**kwargs):
 	try:
-		return [PluginDescriptor(name = "OFDb Details",
-				description = _("Query details from the Online-Filmdatenbank"),
-				icon = "ofdb.png",
-				where = PluginDescriptor.WHERE_PLUGINMENU,
-				fnc = main),
-				PluginDescriptor(name = "OFDb Details",
-				description = _("Query details from the Online-Filmdatenbank"),
-				where = PluginDescriptor.WHERE_EVENTINFO,
-				fnc = eventinfo)
+		return [PluginDescriptor(name="OFDb Details",
+				description=_("Query details from the Online-Filmdatenbank"),
+				icon="ofdb.png",
+				where=PluginDescriptor.WHERE_PLUGINMENU,
+				fnc=main),
+				PluginDescriptor(name="OFDb Details",
+				description=_("Query details from the Online-Filmdatenbank"),
+				where=PluginDescriptor.WHERE_EVENTINFO,
+				fnc=eventinfo)
 				]
 	except AttributeError:
 		wherelist = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]
 		return PluginDescriptor(name="OFDb Details",
 				description=_("Query details from the Online-Filmdatenbank"),
 				icon="ofdb.png",
-				where = wherelist,
+				where=wherelist,
 				fnc=main)

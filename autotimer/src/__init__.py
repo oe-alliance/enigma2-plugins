@@ -44,7 +44,7 @@ if getImageDistro() in ('beyonwiz', 'teamblue', 'openatv', 'openvix', 'opendroid
 config.plugins.autotimer.unit = ConfigSelection(choices=[
 		("hour", _("Hour")),
 		("minute", _("Minute"))
-	], default = default_unit
+	], default=default_unit
 )
 
 default_interval = {"hour": 4, "minute": 30} # default poll every 4 hours or 30 minutes
@@ -60,14 +60,14 @@ config.plugins.autotimer.refresh = ConfigSelection(choices=[
 		("none", _("None")),
 		("auto", _("Only AutoTimers created during this session")),
 		("all", _("All non-repeating timers"))
-	], default = "all"
+	], default="all"
 )
 config.plugins.autotimer.try_guessing = ConfigEnableDisable(default=True)
 config.plugins.autotimer.editor = ConfigSelection(choices=[
 		("epg", _("Import from EPG")),
 		("plain", _("Classic")),
 		("wizard", _("Wizard"))
-	], default = "plain"
+	], default="plain"
 )
 config.plugins.autotimer.addsimilar_on_conflict = ConfigEnableDisable(default=False)
 config.plugins.autotimer.onlyinstandby = ConfigEnableDisable(default=False)
@@ -85,7 +85,7 @@ config.plugins.autotimer.enable_multiple_timer = ConfigSelection(choices=[
 		("s", _("If specified services")),
 		("b", _("If specified bouquets")),
 		("sb", _("If specified services or bouquets"))
-	], default = "0"
+	], default="0"
 )
 config.plugins.autotimer.show_help = ConfigYesNo(default=True)
 config.plugins.autotimer.skip_during_records = ConfigYesNo(default=False)

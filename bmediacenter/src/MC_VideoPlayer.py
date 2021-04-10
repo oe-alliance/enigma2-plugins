@@ -20,12 +20,12 @@ config.plugins.mc_vp = ConfigSubsection()
 config.plugins.mc_vp_sortmode = ConfigSubsection()
 sorts = [('default', _("default")), ('alpha', _("alphabet")), ('alphareverse', _("alphabet backward")), ('date', _("date")), ('datereverse', _("date backward")), ('size', _("size")), ('sizereverse', _("size backward"))]
 config.plugins.mc_vp_sortmode.enabled = ConfigSelection(sorts)
-config.plugins.mc_vp.dvd = ConfigSelection(default="dvd", choices = [("dvd", "dvd"), ("movie", "movie")])
+config.plugins.mc_vp.dvd = ConfigSelection(default="dvd", choices=[("dvd", "dvd"), ("movie", "movie")])
 config.plugins.mc_vp.lastDir = ConfigText(default=resolveFilename(SCOPE_MEDIA))
 class MoviePlayer(OrgMoviePlayer):
-	def __init__(self, session, service, slist = None, lastservice = None):
+	def __init__(self, session, service, slist=None, lastservice=None):
 		self.session = session
-		OrgMoviePlayer.__init__(self, session, service, slist = None, lastservice = None)
+		OrgMoviePlayer.__init__(self, session, service, slist=None, lastservice=None)
 		self.skinName = "MoviePlayer"
 		OrgMoviePlayer.WithoutStopClose = True
 	def doEofInternal(self, playing):
@@ -69,7 +69,7 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 		self.filelist = []
 		self["filelist"] = []
 		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib", "/proc", "/ram", "/root", "/sbin", "/sys", "/tmp", "/usr", "/var"]
-		self.filelist = FileList(currDir, useServiceRef = True, showDirectories = True, showFiles = True, matchingPattern = "(?i)^.*\.(ts|vob|mpg|mpeg|avi|mkv|dat|iso|img|mp4|wmv|flv|divx|mov|ogm|m2ts)", additionalExtensions = None, sort = sort)
+		self.filelist = FileList(currDir, useServiceRef=True, showDirectories=True, showFiles=True, matchingPattern="(?i)^.*\.(ts|vob|mpg|mpeg|avi|mkv|dat|iso|img|mp4|wmv|flv|divx|mov|ogm|m2ts)", additionalExtensions=None, sort=sort)
 		self["filelist"] = self.filelist
 		self["filelist"].show()
 	def up(self):
@@ -135,7 +135,7 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 			self.filelist.descent()
 		else:
 			self.showiframe.finishStillPicture()
-			self.session.open(MoviePlayer, self["filelist"].getServiceRef(), slist = None, lastservice = None)
+			self.session.open(MoviePlayer, self["filelist"].getServiceRef(), slist=None, lastservice=None)
 	def cover(self):
 		filename = self["filelist"].getName()
 		short = shortname(filename)

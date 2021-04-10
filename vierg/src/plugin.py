@@ -33,7 +33,7 @@ def main(session,**kwargs):
 
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(name="Vier Gewinnt", description=_("Connect Four Game"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon="vierg.png", fnc=main)]
+	return [PluginDescriptor(name="Vier Gewinnt", description=_("Connect Four Game"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="vierg.png", fnc=main)]
 
 
 # mainwindow...
@@ -88,7 +88,7 @@ class vierg(Screen):
 		self.onLayoutFinish.append(self.new_game)
 
 
-	def drawRect(self, x, y, color = "bg1"):
+	def drawRect(self, x, y, color="bg1"):
 		if color == "blue":
 			bg = self.blue
 		elif color == "red":

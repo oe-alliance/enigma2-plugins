@@ -36,9 +36,9 @@ def Plugins(path,**kwargs):
     return PluginDescriptor(
         name=myname,
         description="play Network and Internet Streams",
-        where = PluginDescriptor.WHERE_EXTENSIONSMENU,
-        icon = "NETcaster.png",
-        fnc = main
+        where=PluginDescriptor.WHERE_EXTENSIONSMENU,
+        icon="NETcaster.png",
+        fnc=main
         )
 
 ###############################################################################
@@ -59,7 +59,7 @@ class NETcasterScreenBrowser(Screen):
 
     streamlist = []
     currentPlugin = None
-    def __init__(self, session, args = 0):
+    def __init__(self, session, args=0):
         self.skin = NETcasterScreenBrowser.skin
         self.session = session
         Screen.__init__(self, session)
@@ -222,7 +222,7 @@ class NETcasterScreenHelp(Screen):
             <widget name="help" position="0,0" size="500,400" font="Regular;18"/>
         </screen>"""
 
-    def __init__(self, session, args = 0):
+    def __init__(self, session, args=0):
         self.skin = NETcasterScreenHelp.skin
         Screen.__init__(self, session)
         global plugin_path
@@ -244,7 +244,7 @@ class NETcasterScreenHelp(Screen):
 
 ###############################################################################
 class StreamMenu(MenuList):
-    def __init__(self, list, enableWrapAround = False):
+    def __init__(self, list, enableWrapAround=False):
         MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
         self.l.setFont(0, gFont("Regular", 20))
         self.l.setFont(1, gFont("Regular", 18))

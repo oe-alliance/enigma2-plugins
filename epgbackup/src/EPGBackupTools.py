@@ -38,7 +38,7 @@ def _getLogFilename(outfile=None):
 EPGBACKUP_NOTIFICATIONDOMAIN = "EPGBackup"
 from Tools import Notifications
 try:
-	Notifications.notificationQueue.registerDomain(EPGBACKUP_NOTIFICATIONDOMAIN, _("EPGBACKUP_NOTIFICATION_DOMAIN"), deferred_callable = True)
+	Notifications.notificationQueue.registerDomain(EPGBACKUP_NOTIFICATIONDOMAIN, _("EPGBACKUP_NOTIFICATION_DOMAIN"), deferred_callable=True)
 except:
 	debugOut("Register-Notification-Domain-Error:\n" + str(format_exc()), forced=True)
 	

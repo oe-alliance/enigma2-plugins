@@ -595,7 +595,7 @@ def renderPage(request, path, session):
 #
 # This has to be/is called at the end of every ScreenPage-based Request
 #===============================================================================
-def requestFinish(handler, request, requestAlreadyFinished = False):
+def requestFinish(handler, request, requestAlreadyFinished=False):
 	handler.cleanup()
 	if not requestAlreadyFinished:
 		try:

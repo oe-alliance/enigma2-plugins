@@ -35,14 +35,14 @@ from . import _
 def YouTubePlaylistEntryComponent(entry):
 	res = [ entry ]
 
-	res.append(MultiContentEntryText(pos = (5, 5), size = (550, 18), font = 0, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = entry.getTitle()))
-	res.append(MultiContentEntryText(pos = (5, 23), size = (550, 14), font = 1, color = 0xFFA323, color_sel = 0xFFA323, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = entry.getDescription()))
+	res.append(MultiContentEntryText(pos=(5, 5), size=(550, 18), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text=entry.getTitle()))
+	res.append(MultiContentEntryText(pos=(5, 23), size=(550, 14), font=1, color=0xFFA323, color_sel=0xFFA323, flags=RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text=entry.getDescription()))
 
 	return res
 
 
 class YouTubePlaylistList(MenuList):
-	def __init__(self, list, enableWrapAround = False):
+	def __init__(self, list, enableWrapAround=False):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 18))
 		self.l.setFont(1, gFont("Regular", 14))

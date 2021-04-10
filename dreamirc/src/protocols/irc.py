@@ -91,7 +91,7 @@ def parsemsg(s):
     return prefix, command, args
 
 
-def split(str, length = 80):
+def split(str, length=80):
     """I break a message into multiple lines.
 
     I prefer to break at whitespace near str[length].  I also break at \\n.
@@ -843,7 +843,7 @@ class IRCClient(basic.LineReceiver):
         else:
             self.sendLine("TOPIC %s" % (channel,))
 
-    def mode(self, chan, set, modes, limit = None, user = None, mask = None):
+    def mode(self, chan, set, modes, limit=None, user=None, mask=None):
         """Change the modes on a user or channel."""
         if set:
             line = 'MODE %s +%s' % (chan, modes)
@@ -858,12 +858,12 @@ class IRCClient(basic.LineReceiver):
         self.sendLine(line)
 
 
-    def say(self, channel, message, length = None):
+    def say(self, channel, message, length=None):
         if channel[0] not in '&#!+':
             channel = '#' + channel
         self.msg(channel, message, length)
 
-    def msg(self, user, message, length = None):
+    def msg(self, user, message, length=None):
         """Send a message to a user or channel.
 
         @type user: C{str}
@@ -916,7 +916,7 @@ class IRCClient(basic.LineReceiver):
         self.nickname = nickname
         self.sendLine("NICK %s" % nickname)
 
-    def quit(self, message = ''):
+    def quit(self, message=''):
         self.sendLine("QUIT :%s" % message)
 
     ### user input commands, client->client
@@ -931,7 +931,7 @@ class IRCClient(basic.LineReceiver):
     _pings = None
     _MAX_PINGRING = 12
 
-    def ping(self, user, text = None):
+    def ping(self, user, text=None):
         """Measure round-trip delay to another IRC client.
         """
         if self._pings is None:

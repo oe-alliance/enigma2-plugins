@@ -11,17 +11,17 @@ from Tools.Directories import resolveFilename, SCOPE_HDD
 
 # SCOPE_HDD is not really what we want but the best we can get :-)
 config.plugins.mediadownloader = ConfigSubsection()
-config.plugins.mediadownloader.bookmarks = ConfigLocations(default = [resolveFilename(SCOPE_HDD)])
+config.plugins.mediadownloader.bookmarks = ConfigLocations(default=[resolveFilename(SCOPE_HDD)])
 
 # TODO: support custom bookmark element?
 
 # Download a single File
-def download_file(session, url, to = None, askOpen = False, callback = None,
+def download_file(session, url, to=None, askOpen=False, callback=None,
 	**kwargs):
 	"""Provides a simple downloader Application"""
 
 	from Components.Scanner import ScanFile
-	file = ScanFile(url, autodetect = False)
+	file = ScanFile(url, autodetect=False)
 
 	from .MediaDownloader import MediaDownloader
 	session.open(MediaDownloader, file, askOpen, to, callback)
@@ -31,7 +31,7 @@ def filescan_chosen(session, item):
 	if item:
 		from .MediaDownloader import MediaDownloader
 
-		session.open(MediaDownloader, item[1], askOpen = True)
+		session.open(MediaDownloader, item[1], askOpen=True)
 
 # Open as FileScanner
 def filescan_open(items, session, **kwargs):
@@ -62,7 +62,7 @@ def filescan_open(items, session, **kwargs):
 	elif Len:
 		from .MediaDownloader import MediaDownloader
 
-		session.open(MediaDownloader, items[0], askOpen = True)
+		session.open(MediaDownloader, items[0], askOpen=True)
 
 # Return Scanner provided by this Plugin
 def filescan(**kwargs):
@@ -75,14 +75,13 @@ def filescan(**kwargs):
 
 	return [
 		RemoteScanner(
-			mimetypes = None,
-			paths_to_scan =
-				[
-					ScanPath(path = "", with_subdirs = False),
+			mimetypes=None,
+			paths_to_scan=[
+					ScanPath(path="", with_subdirs=False),
 				],
-			name = "Download",
-			description = _("Download..."),
-			openfnc = filescan_open,
+			name="Download",
+			description=_("Download..."),
+			openfnc=filescan_open,
 		)
 	]
 
@@ -91,9 +90,9 @@ def Plugins(**kwargs):
 
 	return [
 		PluginDescriptor(
-			name = "MediaDownloader",
-			where = PluginDescriptor.WHERE_FILESCAN,
-			fnc = filescan,
-			needsRestart = False,
+			name="MediaDownloader",
+			where=PluginDescriptor.WHERE_FILESCAN,
+			fnc=filescan,
+			needsRestart=False,
 		)
 	]

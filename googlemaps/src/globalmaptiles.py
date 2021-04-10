@@ -313,7 +313,7 @@ class GlobalGeodetic(object):
        WMS, KML    Web Clients, Google Earth  TileMapService
     """
 
-    def __init__(self, tileSize = 256):
+    def __init__(self, tileSize=256):
         self.tileSize = tileSize
 
     def LatLonToPixels(self, lat, lon, zoom):

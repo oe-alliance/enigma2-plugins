@@ -195,17 +195,17 @@ def menu(menuid, **kwargs):
 def Plugins(**kwargs):
 	if config.plugins.mc_globalsettings.showinmainmenu.value == True and config.plugins.mc_globalsettings.showinextmenu.value == True:
 		return [
-			PluginDescriptor(name = "Media Center", description = "Media Center Plugin for your STB_BOX", icon="plugin.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main),
-			PluginDescriptor(name = "Media Center", description = "Media Center Plugin for your STB_BOX", where = PluginDescriptor.WHERE_MENU, fnc = menu),
-			PluginDescriptor(name = "Media Center", description = "Media Center Plugin for your STB_BOX", icon="plugin.png", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)]	
+			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", where=PluginDescriptor.WHERE_MENU, fnc=menu),
+			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", icon="plugin.png", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)]	
 	elif config.plugins.mc_globalsettings.showinmainmenu.value == True and config.plugins.mc_globalsettings.showinextmenu.value == False:
 		return [
-			PluginDescriptor(name = "Media Center", description = "Media Center Plugin for your STB_BOX", icon="plugin.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main),
-			PluginDescriptor(name = "Media Center", description = "Media Center Plugin for your STB_BOX", where = PluginDescriptor.WHERE_MENU, fnc = menu)]
+			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", where=PluginDescriptor.WHERE_MENU, fnc=menu)]
 	elif config.plugins.mc_globalsettings.showinmainmenu.value == False and config.plugins.mc_globalsettings.showinextmenu.value == True:
 		return [
-			PluginDescriptor(name = "Media Center", description = "Media Center Plugin for your STB_BOX", icon="plugin.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main),
-			PluginDescriptor(name = "Media Center", description = "Media Center Plugin for your STB_BOX", icon="plugin.png", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)]
+			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", icon="plugin.png", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)]
 	else:
 		return [
-			PluginDescriptor(name = "Media Center", description = "Media Center Plugin for your STB_BOX", icon="plugin.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main)]
+			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)]

@@ -74,7 +74,7 @@ class UserManager(Screen):
 	def exit(self):
 		self.close()
 
-	def keyOK(self, returnValue = None):
+	def keyOK(self, returnValue=None):
 		cur = self["config"].getCurrent()
 		if cur:
 			returnValue = cur[1]
@@ -82,7 +82,7 @@ class UserManager(Screen):
 			if returnValue == "edit":
 				self.session.open(UserDialog, self.skin_path, hostinfo)
 
-	def delete(self, returnValue = None):
+	def delete(self, returnValue=None):
 		cur = self["config"].getCurrent()
 		if cur:
 			returnValue = cur[2]

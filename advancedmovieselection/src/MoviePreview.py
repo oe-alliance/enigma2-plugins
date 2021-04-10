@@ -119,7 +119,7 @@ class MoviePreview():
 from Screens.Screen import Screen
 from enigma import getDesktop
 class DVDOverlay(Screen):
-    def __init__(self, session, args = None):
+    def __init__(self, session, args=None):
         desktop_size = getDesktop(0).size()
         DVDOverlay.skin = """<screen name="DVDOverlay" position="0,0" size="%d,%d" flags="wfNoBorder" zPosition="-1" backgroundColor="transparent" />""" %(desktop_size.width(), desktop_size.height())
         Screen.__init__(self, session)

@@ -109,34 +109,34 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		identifiers_today   = [k for k, v in list(identifiers.items()) if v.knowsToday()]
 		identifiers_future  = [k for k, v in list(identifiers.items()) if v.knowsFuture()]
 		if config.plugins.seriesplugin.identifier_elapsed.value in identifiers_elapsed:
-			self.cfg_identifier_elapsed = NoSave( ConfigSelection(choices = identifiers_elapsed, default = config.plugins.seriesplugin.identifier_elapsed.value) )
+			self.cfg_identifier_elapsed = NoSave( ConfigSelection(choices=identifiers_elapsed, default=config.plugins.seriesplugin.identifier_elapsed.value) )
 		else:
-			self.cfg_identifier_elapsed = NoSave( ConfigSelection(choices = identifiers_elapsed, default = identifiers_elapsed[0]) )
+			self.cfg_identifier_elapsed = NoSave( ConfigSelection(choices=identifiers_elapsed, default=identifiers_elapsed[0]) )
 			self.changesMade = True
 		if config.plugins.seriesplugin.identifier_today.value in identifiers_today:
-			self.cfg_identifier_today   = NoSave( ConfigSelection(choices = identifiers_today,   default = config.plugins.seriesplugin.identifier_today.value) )
+			self.cfg_identifier_today   = NoSave( ConfigSelection(choices=identifiers_today,   default=config.plugins.seriesplugin.identifier_today.value) )
 		else:
-			self.cfg_identifier_today   = NoSave( ConfigSelection(choices = identifiers_today,   default = identifiers_today[0]) )
+			self.cfg_identifier_today   = NoSave( ConfigSelection(choices=identifiers_today,   default=identifiers_today[0]) )
 			self.changesMade = True
 		if config.plugins.seriesplugin.identifier_future.value in identifiers_future:
-			self.cfg_identifier_future  = NoSave( ConfigSelection(choices = identifiers_future,  default = config.plugins.seriesplugin.identifier_future.value) )
+			self.cfg_identifier_future  = NoSave( ConfigSelection(choices=identifiers_future,  default=config.plugins.seriesplugin.identifier_future.value) )
 		else:
-			self.cfg_identifier_future  = NoSave( ConfigSelection(choices = identifiers_future,  default = identifiers_future[0]) )
+			self.cfg_identifier_future  = NoSave( ConfigSelection(choices=identifiers_future,  default=identifiers_future[0]) )
 			self.changesMade = True
 		
 		# Load patterns
 		patterns_file = readFilePatterns()
-		self.cfg_pattern_title       = NoSave( ConfigSelection(choices = patterns_file, default = config.plugins.seriesplugin.pattern_title.value ) )
-		self.cfg_pattern_description = NoSave( ConfigSelection(choices = patterns_file, default = config.plugins.seriesplugin.pattern_description.value ) )
+		self.cfg_pattern_title       = NoSave( ConfigSelection(choices=patterns_file, default=config.plugins.seriesplugin.pattern_title.value ) )
+		self.cfg_pattern_description = NoSave( ConfigSelection(choices=patterns_file, default=config.plugins.seriesplugin.pattern_description.value ) )
 		#self.cfg_pattern_record     = NoSave( ConfigSelection(choices = patterns_file, default = config.plugins.seriesplugin.pattern_record.value ) )
 		patterns_directory = readDirectoryPatterns()
-		self.cfg_pattern_directory   = NoSave( ConfigSelection(choices = patterns_directory, default = config.plugins.seriesplugin.pattern_directory.value ) )
+		self.cfg_pattern_directory   = NoSave( ConfigSelection(choices=patterns_directory, default=config.plugins.seriesplugin.pattern_directory.value ) )
 		
 		bouquetList = [("", "")]
 		tvbouquets = getTVBouquets()
 		for bouquet in tvbouquets:
 			bouquetList.append((bouquet[1], bouquet[1]))
-		self.cfg_bouquet_main = NoSave( ConfigSelection(choices = bouquetList,  default = config.plugins.seriesplugin.bouquet_main.value or str(list(zip(*bouquetList)[1]))   )  )
+		self.cfg_bouquet_main = NoSave( ConfigSelection(choices=bouquetList,  default=config.plugins.seriesplugin.bouquet_main.value or str(list(zip(*bouquetList)[1]))   )  )
 		
 		checkList( self.cfg_pattern_title )
 		checkList( self.cfg_pattern_description )
@@ -148,7 +148,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		# Initialize Configuration
 		self.list = []
 		self.buildConfig()
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changed)
 		
 		self.changed()
 		self.onLayoutFinish.append(self.layoutFinished)

@@ -60,7 +60,7 @@ def Partnerbox_EPGListInit():
 	EPGList.space = 0
 	EPGList.iconDistance = 0
 
-def Partnerbox_EPGList__init__(self, type=0, selChangedCB=None, timer = None, time_epoch = 120, overjump_empty = False, graphic=False):
+def Partnerbox_EPGList__init__(self, type=0, selChangedCB=None, timer=None, time_epoch=120, overjump_empty=False, graphic=False):
 	baseEPGList__init__(self, type, selChangedCB, timer, time_epoch, overjump_empty, graphic)
 
 	self.clocks = [ LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, 'icons/epgclock_add.png')),

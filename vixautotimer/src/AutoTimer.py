@@ -172,7 +172,7 @@ class AutoTimer:
 		self.uniqueTimerId = len(self.timers)
 
 	def getXml(self):
-		return buildConfig(self.defaultTimer, self.timers, webif = True)
+		return buildConfig(self.defaultTimer, self.timers, webif=True)
 
 	def writeXml(self):
 		file = open(XML_CONFIG, 'w')
@@ -226,7 +226,7 @@ class AutoTimer:
 		return t.deferred
 
 	# Main function
-	def parseEPG(self, autoPoll = False, simulateOnly = False):
+	def parseEPG(self, autoPoll=False, simulateOnly=False):
 		self.autoPoll = autoPoll
 		self.simulateOnly = simulateOnly
 		# if NavigationInstance.instance is None:
@@ -247,7 +247,7 @@ class AutoTimer:
 		# 	doBlockingCallFromMainThread = blockingCallFromMainThread
 
 		# NOTE: the config option specifies "the next X days" which means today (== 1) + X
-		delta = timedelta(days = config.plugins.autotimer.maxdaysinfuture.getValue() + 1)
+		delta = timedelta(days=config.plugins.autotimer.maxdaysinfuture.getValue() + 1)
 		self.evtLimit = mktime((date.today() + delta).timetuple())
 		self.checkEvtLimit = delta.days > 1
 		del delta

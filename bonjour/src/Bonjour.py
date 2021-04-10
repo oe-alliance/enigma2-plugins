@@ -128,7 +128,7 @@ class Bonjour:
 		self.registerDefaultServices()
 
 
-	def registerService(self, service, replace = False):
+	def registerService(self, service, replace=False):
 		print("[Bonjour.registerService] %s" %service)
 
 		if 'type' in service and 'port' in service and 'file' in service:
@@ -171,7 +171,7 @@ class Bonjour:
 			self.reloadConfig()
 
 
-	def buildService(self, protocol, port, text=[], udp = False):
+	def buildService(self, protocol, port, text=[], udp=False):
 		file = "%s.service" %protocol
 
 		type = "_%s._tcp" %protocol
@@ -189,7 +189,7 @@ class Bonjour:
 				'text' : text
 				}
 
-	def buildServiceFull(self, file, name, type, port, text=[], udp = False):
+	def buildServiceFull(self, file, name, type, port, text=[], udp=False):
 		return {
 				'file' : file,
 				'name' : name,

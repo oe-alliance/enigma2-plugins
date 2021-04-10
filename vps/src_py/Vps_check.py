@@ -242,7 +242,7 @@ class VPS_check(Screen):
 
 
 class VPS_check_PDC_Screen(VPS_check):
-	def __init__(self, session, service, timer_entry, manual_timer = True):
+	def __init__(self, session, service, timer_entry, manual_timer=True):
 		self.timer_entry = timer_entry
 		self.manual_timer = manual_timer
 		VPS_check.__init__(self, session, service)
@@ -253,15 +253,15 @@ class VPS_check_PDC_Screen(VPS_check):
 				self.close()
 			elif self.has_pdc == 0: # kein PDC
 				#nachfragen
-				self.session.openWithCallback(self.finish_callback, MessageBox, _("The selected channel doesn't support VPS for manually programmed timers!\n Do you really want to enable VPS?"), default = False)
+				self.session.openWithCallback(self.finish_callback, MessageBox, _("The selected channel doesn't support VPS for manually programmed timers!\n Do you really want to enable VPS?"), default=False)
 			else: # konnte nicht ermitteln
-				self.session.openWithCallback(self.finish_callback, MessageBox, _("The VPS-Plugin couldn't check if the selected channel supports VPS for manually programmed timers!\n Do you really want to enable VPS?"), default = False)
+				self.session.openWithCallback(self.finish_callback, MessageBox, _("The VPS-Plugin couldn't check if the selected channel supports VPS for manually programmed timers!\n Do you really want to enable VPS?"), default=False)
 		else:
 			if self.has_pdc == 1: # PDC vorhanden
 				self.close()
 			else:
 				choiceList = [(_("No"), 0), (_("Yes"), 1), (_("Yes, don't ask again"), 2)]
-				self.session.openWithCallback(self.finish_callback2, ChoiceBox, title = _("VPS-Plugin couldn't check if the selected channel supports VPS.\n Do you really want to enable VPS?"), list = choiceList)
+				self.session.openWithCallback(self.finish_callback2, ChoiceBox, title=_("VPS-Plugin couldn't check if the selected channel supports VPS.\n Do you really want to enable VPS?"), list=choiceList)
 
 	def finish_callback(self, result):
 		if not result:
@@ -296,9 +296,9 @@ class VPS_check_on_instanttimer(VPS_check):
 			elif config.plugins.vps.instanttimer.value == "yes_safe":
 				self.enable_vps_safe()
 			else:
-				self.session.openWithCallback(self.finish_callback, ChoiceBox, title = _("The channel may support VPS\n Do you want to enable VPS?"), list = choiceList)
+				self.session.openWithCallback(self.finish_callback, ChoiceBox, title=_("The channel may support VPS\n Do you want to enable VPS?"), list=choiceList)
 		else:
-			self.session.openWithCallback(self.finish_callback, ChoiceBox, title = _("VPS-Plugin couldn't check if the channel supports VPS.\n Do you want to enable VPS anyway?"), list = choiceList)
+			self.session.openWithCallback(self.finish_callback, ChoiceBox, title=_("VPS-Plugin couldn't check if the channel supports VPS.\n Do you want to enable VPS anyway?"), list=choiceList)
 
 	def enable_vps(self):
 		self.timer.vpsplugin_enabled = True

@@ -24,7 +24,7 @@ class SerienFilmCfg(Screen):
 			<widget name="myLabel" position="10,20" size="480,160" font="Regular;20"/>
 		</screen>"""
 
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		print("[SF-Plugin] SerienFilmCfg init")
 		self.session = session
 		Screen.__init__(self, session)
@@ -38,7 +38,7 @@ class SerienFilmCfg(Screen):
 
 class EpiSepCfg(Screen):
 
-	def __init__(self, session, separator = None):
+	def __init__(self, session, separator=None):
 
 		skincontent = """
 			<widget name="sfLabel" position="10,20" size="590,220" font="Regular;20"/>
@@ -113,9 +113,9 @@ class EpiSepCfg(Screen):
 		else:
 			self.session.openWithCallback(self.setSeparator,		# edit serarator
 				InputBox,
-				windowTitle = _x("Edit title:episode separator"),
-				title = _x("Key 0 provides special chracters, key 1 blank"),
-				text = self.newsep,
+				windowTitle=_x("Edit title:episode separator"),
+				title=_x("Key 0 provides special chracters, key 1 blank"),
+				text=self.newsep,
 				maxSize=True,
 				type=Input.TEXT)
 
@@ -141,7 +141,7 @@ class EpiSepCfg(Screen):
 				InputBox,
 				title=_x("Number of characters"),
 				windowTitle=_x("Length of the title:episode separator"),
-				text = str(len(self.newsep)),
+				text=str(len(self.newsep)),
 				type=Input.NUMBER)
 
 

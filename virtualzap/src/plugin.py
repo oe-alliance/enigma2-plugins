@@ -59,13 +59,13 @@ except:
 	plugin_PiPServiceRelation_installed = False
 
 config.plugins.virtualzap = ConfigSubsection()
-config.plugins.virtualzap.mode = ConfigSelection(default="0", choices = [("0", _("as plugin in extended bar")), ("1", _("with long OK press")), ("2", _("with exit button"))])
-config.plugins.virtualzap.usepip = ConfigYesNo(default = True)
-config.plugins.virtualzap.showpipininfobar = ConfigYesNo(default = True)
-config.plugins.virtualzap.saveLastService = ConfigYesNo(default = False)
+config.plugins.virtualzap.mode = ConfigSelection(default="0", choices=[("0", _("as plugin in extended bar")), ("1", _("with long OK press")), ("2", _("with exit button"))])
+config.plugins.virtualzap.usepip = ConfigYesNo(default=True)
+config.plugins.virtualzap.showpipininfobar = ConfigYesNo(default=True)
+config.plugins.virtualzap.saveLastService = ConfigYesNo(default=False)
 config.plugins.virtualzap.curref = ConfigText()
 config.plugins.virtualzap.curbouquet = ConfigText()
-config.plugins.virtualzap.exittimer =  ConfigInteger(0, limits = (0, 20))
+config.plugins.virtualzap.exittimer =  ConfigInteger(0, limits=(0, 20))
 
 def autostart(reason, **kwargs):
 	if config.plugins.virtualzap.mode.value != "0":
@@ -114,7 +114,7 @@ def showVZ(self):
 		if isinstance(self, InfoBar):
 			self.session.openWithCallback(self.VirtualZapCallback, VirtualZap, self.servicelist)
 
-def VirtualZapCallback(self, service = None, servicePath = None):
+def VirtualZapCallback(self, service=None, servicePath=None):
 	if isinstance(self, InfoBarPiP):
 		if service and servicePath:
 			self.session.pip = self.session.instantiateDialog(PictureInPicture)
@@ -136,17 +136,17 @@ def newHide(self):
 		self.showVZ()
 
 def Plugins(**kwargs):
-	plist =  [PluginDescriptor(name="Virtual Zap Setup", description=_("Virtual Zap Setup"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon = "plugin.png", fnc = setup)]
+	plist =  [PluginDescriptor(name="Virtual Zap Setup", description=_("Virtual Zap Setup"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=setup)]
 	if config.plugins.virtualzap.mode.value == "0":
-		plist.append(PluginDescriptor(name="Virtual Zap", description=_("Virtual (PiP) Zap"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], icon = "plugin.png", fnc = main))
+		plist.append(PluginDescriptor(name="Virtual Zap", description=_("Virtual (PiP) Zap"), where=[PluginDescriptor.WHERE_EXTENSIONSMENU], icon="plugin.png", fnc=main))
 	elif config.plugins.virtualzap.mode.value == "1" or config.plugins.virtualzap.mode.value == "2":
-		plist.append(PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart))
+		plist.append(PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart))
 	return plist
 
 def setup(session,**kwargs):
 	session.open(VirtualZapConfig)
 
-def VirtualZapMainCallback(service = None, servicePath = None):
+def VirtualZapMainCallback(service=None, servicePath=None):
 	VirtualZapCallback(InfoBar.instance, service, servicePath)
 
 def main(session,**kwargs):
@@ -199,7 +199,7 @@ class VirtualZap(Screen):
 	else:
 		if SystemInfo.get("NumVideoDecoders", 1) > 1 and config.plugins.virtualzap.usepip.value and not config.plugins.virtualzap.showpipininfobar.value:
 			# use standard PiP
-			config.av.pip = ConfigPosition(default=[0, 0, 0, 0], args = (719, 567, 720, 568))
+			config.av.pip = ConfigPosition(default=[0, 0, 0, 0], args=(719, 567, 720, 568))
 			x = config.av.pip.value[0]
 			y = config.av.pip.value[1]
 			w = config.av.pip.value[2]
@@ -247,7 +247,7 @@ class VirtualZap(Screen):
 					<widget backgroundColor="#101214" font="Regular;20" halign="right" name="NextTime" position="550,500" size="120,25" transparent="1" zPosition="2"/>
 				</screen>"""  % (x, y, w, h)
 
-	def __init__(self, session, servicelist = None):
+	def __init__(self, session, servicelist=None):
 		Screen.__init__(self, session)
 		self.session = session
 		if SystemInfo.get("NumVideoDecoders", 1) > 1 and config.plugins.virtualzap.usepip.value and config.plugins.virtualzap.showpipininfobar.value:
@@ -300,7 +300,7 @@ class VirtualZap(Screen):
 				self["video"] = VideoWindow()
 			else:
 				# show PiP in Infobar
-				self["video"] = VideoWindow(fb_width = getDesktop(0).size().width(), fb_height = getDesktop(0).size().height())
+				self["video"] = VideoWindow(fb_width=getDesktop(0).size().width(), fb_height=getDesktop(0).size().height())
 			self.currentPiP = ""
 		else:
 			# no PiP

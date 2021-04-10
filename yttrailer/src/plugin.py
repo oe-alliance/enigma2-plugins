@@ -48,11 +48,11 @@ from Components.ServiceEventTracker import InfoBarBase
 from . import _
 
 config.plugins.yttrailer = ConfigSubsection()
-config.plugins.yttrailer.show_in_extensionsmenu = ConfigYesNo(default = False)
-config.plugins.yttrailer.best_resolution = ConfigSelection(default="2", choices = [("0", _("1080p")), ("1", _("720p")), ("2", _("No HD streaming"))])
-config.plugins.yttrailer.ext_descr = ConfigText(default="german", fixed_size = False)
-config.plugins.yttrailer.max_results =  ConfigInteger(5, limits = (1, 10))
-config.plugins.yttrailer.close_player_with_exit =  ConfigYesNo(default = False)
+config.plugins.yttrailer.show_in_extensionsmenu = ConfigYesNo(default=False)
+config.plugins.yttrailer.best_resolution = ConfigSelection(default="2", choices=[("0", _("1080p")), ("1", _("720p")), ("2", _("No HD streaming"))])
+config.plugins.yttrailer.ext_descr = ConfigText(default="german", fixed_size=False)
+config.plugins.yttrailer.max_results =  ConfigInteger(5, limits=(1, 10))
+config.plugins.yttrailer.close_player_with_exit =  ConfigYesNo(default=False)
 
 from Screens.EventView import EventViewBase
 baseEventViewBase__init__ = None
@@ -94,10 +94,10 @@ def setup(session,**kwargs):
 
 def Plugins(**kwargs):
 
-	list = [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)]
-	list.append(PluginDescriptor(name="YTTrailer Setup", description=_("YouTube-Trailer Setup"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc=setup, icon="YTtrailer.png"))
+	list = [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart)]
+	list.append(PluginDescriptor(name="YTTrailer Setup", description=_("YouTube-Trailer Setup"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=setup, icon="YTtrailer.png"))
 	if config.plugins.yttrailer.show_in_extensionsmenu.value:
-		list.append(PluginDescriptor(name="YTTrailer Setup", description=_("YouTube-Trailer Setup"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=setup, icon="YTtrailer.png"))
+		list.append(PluginDescriptor(name="YTTrailer Setup", description=_("YouTube-Trailer Setup"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=setup, icon="YTtrailer.png"))
 	return list
 
 def EventViewBase__init__(self, Event, Ref, callback=None, similarEPGCB=None):
@@ -433,7 +433,7 @@ class YTTrailerSetup(ConfigListScreen, Screen):
 			<widget name="config" position="20,50" size="520,330" scrollbarMode="showOnDemand" />
 		</screen>"""
 
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))

@@ -29,13 +29,12 @@ def start_from_filescan(**kwargs):
     print("start_from_filescan", kwargs)
     return \
         Scanner(mimetypes=["image/jpeg", "image/mvi"],
-            paths_to_scan =
-                [
-                    ScanPath(path = "", with_subdirs = False),
+            paths_to_scan=[
+                    ScanPath(path="", with_subdirs=False),
                 ],
-            name = "Logo Manager",
-            description = "view Bootlogo/MVI",
-            openfnc = filescan_open,
+            name="Logo Manager",
+            description="view Bootlogo/MVI",
+            openfnc=filescan_open,
         )
 
 
@@ -52,12 +51,12 @@ def Plugins(path,**kwargs):
              PluginDescriptor(
                 name="Logo Manager",
                 description="manage logos to display at boottime",
-                where = PluginDescriptor.WHERE_PLUGINMENU,
+                where=PluginDescriptor.WHERE_PLUGINMENU,
                 icon="plugin.png",
-                fnc = main
+                fnc=main
                 )
              ,
-             PluginDescriptor(name="Logo Manager", where = PluginDescriptor.WHERE_FILESCAN, fnc = start_from_filescan)
+             PluginDescriptor(name="Logo Manager", where=PluginDescriptor.WHERE_FILESCAN, fnc=start_from_filescan)
             ]
 ###############################################################################
 class LogoManagerScreen(Screen):
@@ -73,7 +72,7 @@ class LogoManagerScreen(Screen):
                , ("radio", "/usr/share/enigma2/radio.mvi")
                ]
 
-    def __init__(self, session, file = None):
+    def __init__(self, session, file=None):
         self.session = session
         self.skin = LogoManagerScreen.skin
         Screen.__init__(self, session)
@@ -213,7 +212,7 @@ class LogoManagerConfigScreen(ConfigListScreen, Screen):
         <widget name="buttonred" position="10,360" size="100,40" backgroundColor="red" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/>
         <widget name="buttongreen" position="120,360" size="100,40" backgroundColor="green" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/>
         </screen>"""
-    def __init__(self, session, args = 0):
+    def __init__(self, session, args=0):
         self.session = session
         Screen.__init__(self, session)
         self.list = []

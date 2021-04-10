@@ -52,7 +52,7 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 		Screen.setTitle(self, _(self.setup_title))
 		self.onChangedEntry = []
 
-		ConfigListScreen.__init__(self, [], session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, [], session=session, on_change=self.changedEntry)
 		self.notifiers = (
 			config.plugins.epgsearch.scope,
 			config.plugins.epgsearch.enableorbpos,

@@ -30,7 +30,7 @@ class AutoTimerOverviewSummary(Screen):
 	</screen>"""
 
 	def __init__(self, session, parent):
-		Screen.__init__(self, session, parent = parent)
+		Screen.__init__(self, session, parent=parent)
 		self["entry"] = StaticText("")
 		self.onShow.append(self.addWatcher)
 		self.onHide.append(self.removeWatcher)
@@ -186,7 +186,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 				ret
 			)
 
-	def refresh(self, res = None):
+	def refresh(self, res=None):
 		# Re-assign List
 		cur = self["entries"].getCurrent()
 		self["entries"].setList(self.autotimer.getSortedTupleTimerList())
@@ -277,7 +277,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 			self.menuCallback,
 			ChoiceBox,
 			title=_("AutoTimer Context Menu"),
-			list = list,
+			list=list,
 		)
 
 	def openPreview(self, timers, skipped):
@@ -301,7 +301,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 				autotimerFaq.open(self.session)
 			elif ret == "preview":
 				# todo timeout / error handling
-				self.autotimer.parseEPG(simulateOnly = True, callback = self.openPreview)
+				self.autotimer.parseEPG(simulateOnly=True, callback=self.openPreview)
 			elif ret == "import":
 				newTimer = self.autotimer.defaultTimer.clone()
 				newTimer.id = self.autotimer.getUniqueId()
@@ -325,7 +325,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 				self.session.open(
 					AutoTimerEditor,
 					self.autotimer.defaultTimer,
-					editingDefaults = True
+					editingDefaults=True
 				)
 			elif ret == "newwizard":
 				newTimer = self.autotimer.defaultTimer.clone()

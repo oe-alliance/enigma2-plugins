@@ -256,7 +256,7 @@ def normalizeResult(result):
 
 
 class ThreadItem:
-	def __init__(self, identifier = None, callback = None, name = None, begin = None, end = None, service = None):
+	def __init__(self, identifier=None, callback=None, name=None, begin=None, end=None, service=None):
 		self.identifier = identifier
 		self.callback = callback
 		self.name = name

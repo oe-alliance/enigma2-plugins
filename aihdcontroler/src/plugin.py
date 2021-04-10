@@ -37,7 +37,7 @@ from enigma import eEnv
 
 
 config.plugins.vhd  = ConfigSubsection()
-config.plugins.vhd.Style = ConfigSelection(default="dmm", choices = [
+config.plugins.vhd.Style = ConfigSelection(default="dmm", choices=[
 				("dmm", _("DMM-Board")),
 				("shadow", _("Shadow")),
 				("beyonddreams", _("BeyondDreams-HD")),
@@ -46,13 +46,13 @@ config.plugins.vhd.Style = ConfigSelection(default="dmm", choices = [
 				("dc", _("Concinnity")),
 				("bluesofdream", _("BluesOfDream-HD"))
 				])
-config.plugins.vhd.ChannSelector = ConfigSelection(default="full", choices = [
+config.plugins.vhd.ChannSelector = ConfigSelection(default="full", choices=[
 				("full", _("Full")),
 				("vert", _("Full vertikal")),
 				("pig", _("mini TV")),
 				("simple", _("Simple"))
 				])
-config.plugins.vhd.OledStyle = ConfigSelection(default="full", choices = [
+config.plugins.vhd.OledStyle = ConfigSelection(default="full", choices=[
 				("full", _("Full")),
 				("simple", _("Simple"))
 				])
@@ -65,7 +65,7 @@ def main(session, **kwargs):
 
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name="Ai.HD Controler", description=_("Configuration tool for All.In HD skins"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main)
+	return PluginDescriptor(name="Ai.HD Controler", description=_("Configuration tool for All.In HD skins"), where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main)
 
 
 

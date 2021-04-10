@@ -38,7 +38,7 @@ class AutoTimerDoParseResource(AutoTimerBaseResource):
 	def render(self, req):
 		self.req = req
 		# todo timeout / error handling
-		autotimer.parseEPG(callback = self.parsecallback)
+		autotimer.parseEPG(callback=self.parsecallback)
 		return server.NOT_DONE_YET
 	def renderBackground(self, req, ret):
 		output = _("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[6]), len(ret[5]))
@@ -52,7 +52,7 @@ class AutoTimerSimulateResource(AutoTimerBaseResource):
 	def render(self, req):
 		self.req = req
 		# todo timeout / error handling
-		autotimer.parseEPG(simulateOnly=True, callback = self.parsecallback)
+		autotimer.parseEPG(simulateOnly=True, callback=self.parsecallback)
 		return server.NOT_DONE_YET
 	def renderBackground(self, req, timers):
 
@@ -86,7 +86,7 @@ class AutoTimerTestResource(AutoTimerBaseResource):
 	def render(self, req):
 		self.req = req
 		# todo timeout / error handling
-		autotimer.parseEPG(simulateOnly=True, callback = self.parsecallback)
+		autotimer.parseEPG(simulateOnly=True, callback=self.parsecallback)
 		return server.NOT_DONE_YET
 	def renderBackground(self, req, timers, skipped):
 

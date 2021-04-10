@@ -248,7 +248,7 @@ class VlcServer:
 				return e
 		return None
 
-	def play(self, session, media, name, currentList = None, player = None):
+	def play(self, session, media, name, currentList=None, player=None):
 		if player is None:
 		# or not isinstance(player, VlcPlayer):
 			player = VlcPlayer

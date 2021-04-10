@@ -36,13 +36,13 @@ from . import _
 def initPartnerboxEntryConfig():
 	config.plugins.Partnerbox.Entries.append(ConfigSubsection())
 	i = len(config.plugins.Partnerbox.Entries) -1
-	config.plugins.Partnerbox.Entries[i].name = ConfigText(default = "Remote box", visible_width = 50, fixed_size = False)
-	config.plugins.Partnerbox.Entries[i].ip = ConfigIP(default = [192, 168, 0, 98])
+	config.plugins.Partnerbox.Entries[i].name = ConfigText(default="Remote box", visible_width=50, fixed_size=False)
+	config.plugins.Partnerbox.Entries[i].ip = ConfigIP(default=[192, 168, 0, 98])
 	config.plugins.Partnerbox.Entries[i].port = ConfigInteger(default=80, limits=(1, 65555))
-	config.plugins.Partnerbox.Entries[i].enigma = ConfigSelection(default="0", choices = [("0", _("Enigma 2")), ("1", _("Enigma 1"))])
-	config.plugins.Partnerbox.Entries[i].password = ConfigText(default = "root", visible_width = 50, fixed_size = False)
-	config.plugins.Partnerbox.Entries[i].useinternal = ConfigSelection(default="1", choices = [("0", _("use external")), ("1", _("use internal"))])
-	config.plugins.Partnerbox.Entries[i].zaptoservicewhenstreaming = ConfigYesNo(default = True)
+	config.plugins.Partnerbox.Entries[i].enigma = ConfigSelection(default="0", choices=[("0", _("Enigma 2")), ("1", _("Enigma 1"))])
+	config.plugins.Partnerbox.Entries[i].password = ConfigText(default="root", visible_width=50, fixed_size=False)
+	config.plugins.Partnerbox.Entries[i].useinternal = ConfigSelection(default="1", choices=[("0", _("use external")), ("1", _("use internal"))])
+	config.plugins.Partnerbox.Entries[i].zaptoservicewhenstreaming = ConfigYesNo(default=True)
 	return config.plugins.Partnerbox.Entries[i]
 
 def initConfig():
@@ -78,7 +78,7 @@ class PartnerboxSetup(ConfigListScreen, Screen):
 				<ePixmap name="yellow" pixmap="skin_default/buttons/yellow.png" position="280,350" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
 			</screen>"""
 
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self.setTitle(_("Partnerbox Setup"))
 
@@ -174,7 +174,7 @@ class PartnerboxEntriesListConfigScreen(Screen):
 			<ePixmap name="blue" position="420,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 		</screen>"""
 
-	def __init__(self, session, what = None):
+	def __init__(self, session, what=None):
 		Screen.__init__(self, session)
 		self.session = session
 		self.setTitle(_("Partnerbox: List of Entries"))
@@ -308,7 +308,7 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		sendPartnerBoxWebCommand(sCommand, None, 3, username, password)
 
 class PartnerboxEntryList(MenuList):
-	def __init__(self, list, enableWrapAround = True):
+	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		font = skin.fonts.get("PartnerBoxEntryList0", ("Regular", 20, 20))
 		self.l.setFont(0, gFont(font[0], font[1]))

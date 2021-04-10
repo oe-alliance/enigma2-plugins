@@ -99,10 +99,10 @@ def main(session, service, **kwargs):
 		session.open(
 			MessageBox,
 			_("Improperly launched plugin.\nAborting!"),
-			type = MessageBox.TYPE_ERROR
+			type=MessageBox.TYPE_ERROR
 		)
 
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name="MovieSearch", description=_("search..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart = False)
+	return PluginDescriptor(name="MovieSearch", description=_("search..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart=False)
 

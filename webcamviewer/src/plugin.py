@@ -41,14 +41,14 @@ myname = "Webcam/Picture Viewer"
 myversion = "1.1"
 
 config.plugins.pictureviewer = ConfigSubsection()
-config.plugins.pictureviewer.slideshowtime = ConfigSelection(default="5000", choices = [("5000", _("5 Seconds")), ("10000", _("10 Seconds")), ("20000", _("20 Seconds")), ("60000", _("1 Minute"))])
-config.plugins.pictureviewer.slideshowmode = ConfigSelection(default="0", choices = [("0", _("normal")), ("1", _("endless"))])
+config.plugins.pictureviewer.slideshowtime = ConfigSelection(default="5000", choices=[("5000", _("5 Seconds")), ("10000", _("10 Seconds")), ("20000", _("20 Seconds")), ("60000", _("1 Minute"))])
+config.plugins.pictureviewer.slideshowmode = ConfigSelection(default="0", choices=[("0", _("normal")), ("1", _("endless"))])
 #not editable configs
 config.plugins.pictureviewer.slideshowext = ConfigText(default=".3ssl")
 config.plugins.pictureviewer.matchingPattern = ConfigText(default="(?i)^.*\.(jpeg|jpg|jpe|png|bmp|gif)")
 config.plugins.pictureviewer.slideshowdir = ConfigText(default="/media/hdd/slideshows/")
 config.plugins.pictureviewer.rootdir = ConfigText(default="/media/")
-config.plugins.pictureviewer.stopserviceonstart = ConfigYesNo(default = False)
+config.plugins.pictureviewer.stopserviceonstart = ConfigYesNo(default=False)
 SLIDESHOWMODE_NORMAL = 0
 SLIDESHOWMODE_REPEAT = 1
 
@@ -118,15 +118,15 @@ def Plugins(path, **kwargs):
 			PluginDescriptor(
 							name="PictureViewer",
 							description="browse your local pictures",
-							where = PluginDescriptor.WHERE_PLUGINMENU,
-							fnc = startPictureviewer,
+							where=PluginDescriptor.WHERE_PLUGINMENU,
+							fnc=startPictureviewer,
 							icon="pictureviewer.png"
 			  ),
 			PluginDescriptor(
 							name="WebcamViewer",
 							description="view webcams around the world",
-							where = PluginDescriptor.WHERE_PLUGINMENU,
-							fnc = startWebcamviewer,
+							where=PluginDescriptor.WHERE_PLUGINMENU,
+							fnc=startWebcamviewer,
 							icon="webcamviewer.png"
 			)
 		 ]
@@ -135,7 +135,7 @@ def Plugins(path, **kwargs):
 ###################
 class ViewerSelectScreen(Screen):
 	skin = ""
-	def __init__(self, session, args = 0):
+	def __init__(self, session, args=0):
 		skin =  """<screen position="93,70" size="550,450">
 		<widget name="list" position="0,0" size="550,450"  />
 		</screen>"""
@@ -175,7 +175,7 @@ class Slideshow:
 			self.currentslideshowitem = -1
 			self.nextSlideshowItem()
 
-	def nextSlideshowItem(self, prev = False):
+	def nextSlideshowItem(self, prev=False):
 		currentslideshowitem = self.currentslideshowitem
 		if prev:
    			currentslideshowitem -= 2
@@ -190,7 +190,7 @@ class Slideshow:
 									PictureScreen,
 									filetoshow.split("/")[-1],
 									filetoshow,
-									slideshowcallback = self.nextSlideshowItem
+									slideshowcallback=self.nextSlideshowItem
 				)
 			else:
 				self.wbviewer.filename = filetoshow
@@ -214,7 +214,7 @@ class PictureViewer(Screen):
 	wbviewer = False
 	loadedslideshowlistlistname = False
 
-	def __init__(self, session, args = 0):
+	def __init__(self, session, args=0):
 		skin =  """<screen position="93,70" size="550,450" title="%s">
 		<widget name="menu" position="1,1" size="275,400"  scrollbarMode="showOnDemand" />
 		<widget name="pixmap" position="275,1" size="275,200" backgroundColor="red" />
@@ -227,7 +227,7 @@ class PictureViewer(Screen):
 		self.skin = skin
 		Screen.__init__(self, session)
 
-		self.filelist = PictureList(config.plugins.pictureviewer.rootdir.value, matchingPattern = config.plugins.pictureviewer.matchingPattern.value)
+		self.filelist = PictureList(config.plugins.pictureviewer.rootdir.value, matchingPattern=config.plugins.pictureviewer.matchingPattern.value)
 		self["menu"] = self.filelist
 
 		self.preview = Pixmap()
@@ -305,10 +305,10 @@ class PictureViewer(Screen):
 			self.session.openWithCallback(
 					self.fileToSaveFilelistEntered,
 					InputBox,
-					title = _("Enter filename to save the List:"),
-					text = newname,
-					maxSize = False,
-					type = Input.TEXT
+					title=_("Enter filename to save the List:"),
+					text=newname,
+					maxSize=False,
+					type=Input.TEXT
 			)
 
 	def fileToLoadFilelistEntered(self, fileselection):
@@ -440,7 +440,7 @@ class PictureViewer(Screen):
 		self.picload.startDecode(selectedfile)
 
 
-	def updateInfoPanelCB(self, picInfo = None):
+	def updateInfoPanelCB(self, picInfo=None):
 		ptr = self.picload.getData()
 		if ptr is not None:
 			self["pixmap"].instance.setPixmap(ptr)
@@ -456,7 +456,7 @@ class PictureViewer(Screen):
 class WebcamViewer(Screen, InfoBarNotifications):
 	skin = ""
 	filelist = []
-	def __init__(self, session,xmlnode, args = 0):
+	def __init__(self, session,xmlnode, args=0):
 		self.xmlnode = xmlnode
 		screen_x = 736
 		screen_y = 576
@@ -525,7 +525,7 @@ class WebcamViewer(Screen, InfoBarNotifications):
 
 ##################
 class PictureList(MenuList):
-	def __init__(self, directory, matchingPattern = None, enableWrapAround = False):
+	def __init__(self, directory, matchingPattern=None, enableWrapAround=False):
 		MenuList.__init__(self, None, enableWrapAround, eListboxPythonMultiContent)
 		self.showDirectories = True
 		self.showFiles = True
@@ -621,19 +621,19 @@ class XMLloader:
 		  'http://my.netscape.com/rdf/simple/0.9/' # RSS 0.90
 		)
 	DUBLIN_CORE = ('http://purl.org/dc/elements/1.1/',)
-	def getElementsByTagName(self, node, tagName, possibleNamespaces = DEFAULT_NAMESPACES):
+	def getElementsByTagName(self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES):
 		for namespace in possibleNamespaces:
 			children = node.getElementsByTagNameNS(namespace, tagName)
 			if len(children):
 				return children
 		return []
 
-	def node_data(self, node, tagName, possibleNamespaces = DEFAULT_NAMESPACES):
+	def node_data(self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES):
 		children = self.getElementsByTagName(node, tagName, possibleNamespaces)
 		node = len(children) and children[0] or None
 		return node and "".join([child.data.encode("utf-8") for child in node.childNodes]) or None
 
-	def get_txt(self, node, tagName, default_txt = ""):
+	def get_txt(self, node, tagName, default_txt=""):
 		"""
 		Liefert den Inhalt >tagName< des >node< zurueck, ist dieser nicht
 		vorhanden, wird >default_txt< zurueck gegeben.

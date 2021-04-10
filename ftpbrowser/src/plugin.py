@@ -48,7 +48,7 @@ def main(session, **kwargs):
 def filescan_chosen(session, item):
 	if item:
 		createSingleton(session)
-		ftpbrowser.connect(ftpserverFromURI(item[1], save = False))
+		ftpbrowser.connect(ftpserverFromURI(item[1], save=False))
 		session.execDialog(ftpbrowser)
 
 def filescan_open_connected(res, items, session, **kwargs):
@@ -65,7 +65,7 @@ def filescan_open(items, session, **kwargs):
 			boundFunction(filescan_open_connected, items, session, **kwargs),
 			MessageBox,
 			_("There already is an active connection.\nDo you want to abort it?"),
-			type = MessageBox.TYPE_YESNO
+			type=MessageBox.TYPE_YESNO
 		)
 		return
 
@@ -93,14 +93,13 @@ def filescan(**kwargs):
 
 	return [
 		RemoteScanner(
-			mimetypes = None,
-			paths_to_scan =
-				(
-					ScanPath(path = "", with_subdirs = False),
+			mimetypes=None,
+			paths_to_scan=(
+					ScanPath(path="", with_subdirs=False),
 				),
-			name = "Connect",
-			description = _("Connect to FTP..."),
-			openfnc = filescan_open,
+			name="Connect",
+			description=_("Connect to FTP..."),
+			openfnc=filescan_open,
 		),
 	]
 
@@ -110,16 +109,16 @@ def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
 			name="FTPBrowser",
-			description = _("A basic FTP client"),
-			where = PluginDescriptor.WHERE_PLUGINMENU,
-			icon = "plugin.png",
-			fnc = main,
-			needsRestart = False
+			description=_("A basic FTP client"),
+			where=PluginDescriptor.WHERE_PLUGINMENU,
+			icon="plugin.png",
+			fnc=main,
+			needsRestart=False
 		),
 		PluginDescriptor(
-			name = "FTPBrowser",
-			where = PluginDescriptor.WHERE_FILESCAN,
-			fnc = filescan,
-			needsRestart = False,
+			name="FTPBrowser",
+			where=PluginDescriptor.WHERE_FILESCAN,
+			fnc=filescan,
+			needsRestart=False,
 		),
 	]

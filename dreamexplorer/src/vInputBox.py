@@ -38,9 +38,9 @@ class vInputBox(Screen, myNumericalTextInput):
 	sknew = sknew + '<widget name="text" position="5,5" size="1270,25" font="Console;16"/>\n<widget name="input" position="0,40" size="'
 	sknew = sknew + vibnewx + ',30" font="Console;22"/>\n</screen>'
 	skin = sknew
-	def __init__(self, session, title = "", windowTitle = _("Input"), useableChars = None, **kwargs):
+	def __init__(self, session, title="", windowTitle=_("Input"), useableChars=None, **kwargs):
 		Screen.__init__(self, session)
-		myNumericalTextInput.__init__(self, nextFunc = None, handleTimeout = False)
+		myNumericalTextInput.__init__(self, nextFunc=None, handleTimeout=False)
 		self.session = session
 		self["text"] = Label(title)
 		self["input"] = Input(**kwargs)

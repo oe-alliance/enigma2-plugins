@@ -299,7 +299,7 @@ class GNTPAbstraction:
 	def sendNotification(self, title='No title.', description='No description.', priority=-1, timeout=-1):
 		self.clientFactory.sendNotification(title=title, description=description, sticky=timeout==-1, priority=priority)
 
-	def maybeClose(self, resOrFail, defer = None):
+	def maybeClose(self, resOrFail, defer=None):
 		self.pending -= 1
 		if self.pending == 0:
 			if defer:
@@ -310,14 +310,14 @@ class GNTPAbstraction:
 		if self.clientPort:
 			d = self.clientPort.disconnect()
 			if d:
-				d.addBoth(self.maybeClose, defer = defer)
+				d.addBoth(self.maybeClose, defer=defer)
 			else:
 				self.pending -= 1
 
 		if self.serverPort:
 			d = self.serverPort.stopListening()
 			if d:
-				d.addBoth(self.maybeClose, defer = defer)
+				d.addBoth(self.maybeClose, defer=defer)
 			else:
 				self.pending -= 1
 

@@ -63,13 +63,13 @@ class RSSSetup(ConfigListScreen, Screen):
 			<widget name="config" position="5,45" size="550,350" scrollbarMode="showOnDemand" />
 		</screen>"""
 
-	def __init__(self, session, rssPoller = None):
+	def __init__(self, session, rssPoller=None):
 		Screen.__init__(self, session)
 		self.rssPoller = rssPoller
 
 		self.createSetup()
-		config.plugins.simpleRSS.autostart.addNotifier(self.elementChanged, initial_call = False)
-		config.plugins.simpleRSS.enable_google_reader.addNotifier(self.elementChanged, initial_call = False)
+		config.plugins.simpleRSS.autostart.addNotifier(self.elementChanged, initial_call=False)
+		config.plugins.simpleRSS.enable_google_reader.addNotifier(self.elementChanged, initial_call=False)
 
 		# Initialize ConfigListScreen
 		ConfigListScreen.__init__(self, self.list, session)
@@ -173,7 +173,7 @@ class RSSSetup(ConfigListScreen, Screen):
 	def new(self):
 		l = config.plugins.simpleRSS.feed
 		s = ConfigSubsection()
-		s.uri = ConfigText(default="http://", fixed_size = False)
+		s.uri = ConfigText(default="http://", fixed_size=False)
 		s.autoupdate = ConfigEnableDisable(default=True)
 		id = len(l)
 		l.append(s)
@@ -212,12 +212,12 @@ class RSSSetup(ConfigListScreen, Screen):
 		simpleRSS.feedcount.value = len(simpleRSS.feed)
 		simpleRSS.feedcount.save()
 
-def addFeed(address, auto = False):
+def addFeed(address, auto=False):
 	l = config.plugins.simpleRSS.feed
 
 	# Create new Item
 	s = ConfigSubsection()
-	s.uri = ConfigText(default="http://", fixed_size = False)
+	s.uri = ConfigText(default="http://", fixed_size=False)
 	s.autoupdate = ConfigEnableDisable(default=True)
 
 	# Set values

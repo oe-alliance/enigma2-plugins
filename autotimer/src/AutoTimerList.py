@@ -52,7 +52,7 @@ class AutoTimerList(MenuList):
 #
 
 	def __init__(self, entries):
-		MenuList.__init__(self, entries, False, content = eListboxPythonMultiContent)
+		MenuList.__init__(self, entries, False, content=eListboxPythonMultiContent)
 		self.l.setBuildFunc(self.buildListboxEntry)
 		try:
 			png = resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_off.png")

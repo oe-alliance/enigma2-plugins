@@ -45,7 +45,7 @@ class AdvHdmiCecSetup(Screen, ConfigListScreen):
 		self.onChangedEntry = []
 		
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changed)
 		
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
@@ -143,7 +143,7 @@ class AdvHdmiCecSetup(Screen, ConfigListScreen):
 				infoMsg += str(hook.hookDescription) + "\n\n"
 		else:
 			infoMsg += _("No HDMI-Cec-Hooks are registered!")
-		self.session.open(MessageBox, infoMsg, MessageBox.TYPE_INFO, title = _("Advanced HDMI-Cec Control"))
+		self.session.open(MessageBox, infoMsg, MessageBox.TYPE_INFO, title=_("Advanced HDMI-Cec Control"))
 
 	def changed(self):
 		for x in self.onChangedEntry:
@@ -154,7 +154,7 @@ class AdvHdmiCecSetup(Screen, ConfigListScreen):
 
 # Timespans
 class TimeSpanEntryList(MenuList):
-	def __init__(self, list, enableWrapAround = True):
+	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 20))
 
@@ -231,7 +231,7 @@ class TimeSpanListScreen(Screen):
 		self._updateList()
 		self.onLayoutFinish.append(self._layoutFinished)
 
-	def _updateList(self, entryselect = None):		
+	def _updateList(self, entryselect=None):		
 		self["entrylist"].buildList(entryselect)
 
 	def _layoutFinished(self):
@@ -374,34 +374,34 @@ def showinSetup(menuid):
 def Plugins(**kwargs):
 	list = [
 		PluginDescriptor(
-			where = PluginDescriptor.WHERE_SESSIONSTART,
-			fnc = sessionstart),
+			where=PluginDescriptor.WHERE_SESSIONSTART,
+			fnc=sessionstart),
 		PluginDescriptor(
-			where = PluginDescriptor.WHERE_AUTOSTART,
-			fnc = autostart)
+			where=PluginDescriptor.WHERE_AUTOSTART,
+			fnc=autostart)
 	]
 	if config.plugins.AdvHdmiCec.show_in.value == "system":
 		list.append (PluginDescriptor(
 			name="Advanced HDMI-Cec Control", 
 			description=_("manage when HDMI Cec is enabled"), 
-			where = PluginDescriptor.WHERE_MENU, 
+			where=PluginDescriptor.WHERE_MENU, 
 			fnc=showinSetup)
 		)
 	if config.plugins.AdvHdmiCec.show_in.value == "plugin":
 		list.append (PluginDescriptor(
-			name = "Advanced HDMI-Cec Control",
-			description = _("manage when HDMI Cec is enabled"),
-			where = PluginDescriptor.WHERE_PLUGINMENU,
-			fnc = main,
-			needsRestart = False)
+			name="Advanced HDMI-Cec Control",
+			description=_("manage when HDMI Cec is enabled"),
+			where=PluginDescriptor.WHERE_PLUGINMENU,
+			fnc=main,
+			needsRestart=False)
 		)
 	if config.plugins.AdvHdmiCec.show_in.value == "extension":
 		list.append (PluginDescriptor(
-				name = "Advanced HDMI-Cec Control",
-				description = _("manage when HDMI Cec is enabled"),
-				where = PluginDescriptor.WHERE_EXTENSIONSMENU,
-				fnc = main,
-				needsRestart = False)
+				name="Advanced HDMI-Cec Control",
+				description=_("manage when HDMI Cec is enabled"),
+				where=PluginDescriptor.WHERE_EXTENSIONSMENU,
+				fnc=main,
+				needsRestart=False)
 		)
 	
 	return list

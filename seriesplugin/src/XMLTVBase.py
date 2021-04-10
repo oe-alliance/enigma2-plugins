@@ -74,7 +74,7 @@ class XMLTVBase(object):
 		root.set('created_by', NAME)
 		root.append(Comment(_("Don't edit this manually unless you really know what you are doing")))
 		
-		element = SubElement( root, "source", type = "gen_xmltv", channels = "wunschliste.channels.xml" )
+		element = SubElement( root, "source", type="gen_xmltv", channels="wunschliste.channels.xml" )
 		
 		SubElement( element, "description" ).text = "Wunschliste XMLTV"
 		SubElement( element, "url" ).text = config.plugins.seriesplugin.xmltv_url.value

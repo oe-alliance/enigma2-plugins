@@ -201,7 +201,7 @@ def isInRepeatTimer(self, timer, event):
 	return time_match and is_editable
 
 class E2Timer:
-	def __init__(self, servicereference = "", servicename = "", name = "", disabled = 0, timebegin = 0, timeend = 0, duration = 0, startprepare = 0, state = 0, repeated = 0, justplay = 0, eventId = 0, afterevent = 3, dirname = "", description = "", type = 0):
+	def __init__(self, servicereference="", servicename="", name="", disabled=0, timebegin=0, timeend=0, duration=0, startprepare=0, state=0, repeated=0, justplay=0, eventId=0, afterevent=3, dirname="", description="", type=0):
 		self.servicereference = servicereference
 		self.servicename = servicename
 		self.name = name
@@ -226,7 +226,7 @@ class E2Timer:
 				self.repeated = 1
 			self.dirname = "/media/hdd/movie/"
 
-def FillE2TimerList(xmlstring, sreference = None):
+def FillE2TimerList(xmlstring, sreference=None):
 	E2TimerList = []
 	try:
 		root = xml.etree.cElementTree.fromstring(xmlstring)
@@ -298,25 +298,25 @@ def FillE2TimerList(xmlstring, sreference = None):
 			except:
 				eventId = -1
 			E2TimerList.append(E2Timer(
-				servicereference = servicereference,
-				servicename = unquote(str(timer.findtext("e2servicename", 'n/a').decode("utf-8").encode("utf-8", 'ignore'))),
-				name = str(timer.findtext("e2name", '').decode("utf-8").encode("utf-8", 'ignore')),
-				disabled = disabled,
-				timebegin = timebegin,
-				timeend = timeend,
-				duration = duration,
-				startprepare = startprepare,
-				state = state,
-				repeated = repeated,
-				justplay = justplay,
-				eventId = eventId,
-				afterevent = afterevent,
-				dirname = str(timer.findtext("e2location", '').decode("utf-8").encode("utf-8", 'ignore')),
-				description = unquote(str(timer.findtext("e2description", '').decode("utf-8").encode("utf-8", 'ignore'))),
-				type = 0))
+				servicereference=servicereference,
+				servicename=unquote(str(timer.findtext("e2servicename", 'n/a').decode("utf-8").encode("utf-8", 'ignore'))),
+				name=str(timer.findtext("e2name", '').decode("utf-8").encode("utf-8", 'ignore')),
+				disabled=disabled,
+				timebegin=timebegin,
+				timeend=timeend,
+				duration=duration,
+				startprepare=startprepare,
+				state=state,
+				repeated=repeated,
+				justplay=justplay,
+				eventId=eventId,
+				afterevent=afterevent,
+				dirname=str(timer.findtext("e2location", '').decode("utf-8").encode("utf-8", 'ignore')),
+				description=unquote(str(timer.findtext("e2description", '').decode("utf-8").encode("utf-8", 'ignore'))),
+				type=0))
 	return E2TimerList
 
-def FillE1TimerList(xmlstring, sreference = None):
+def FillE1TimerList(xmlstring, sreference=None):
 	E1TimerList = []
 	try:
 		root = xml.etree.cElementTree.fromstring(xmlstring)
@@ -347,7 +347,7 @@ def FillE1TimerList(xmlstring, sreference = None):
 			if sreference.upper() == servicereference.upper() and ( (typedata & PlaylistEntry.stateWaiting) or (typedata & PlaylistEntry.stateRunning)):
 				go = True
 		if go:
-			E1TimerList.append(E2Timer(servicereference = servicereference, servicename = servicename, name = "", disabled = 0, timebegin = timebegin, timeend = 0, duration = duration, startprepare = 0, state = 0, repeated = 0, justplay= 0, eventId = -1, afterevent = 0, dirname = "", description = description, type = typedata))
+			E1TimerList.append(E2Timer(servicereference=servicereference, servicename=servicename, name="", disabled=0, timebegin=timebegin, timeend=0, duration=duration, startprepare=0, state=0, repeated=0, justplay=0, eventId=-1, afterevent=0, dirname="", description=description, type=typedata))
 	return E1TimerList
 
 class myHTTPClientFactory(HTTPClientFactory):
@@ -372,7 +372,7 @@ def url_parse(url, defaultPort=None):
 		port = int(port)
 	return scheme, host, port, path
 
-def sendPartnerBoxWebCommand(url, contextFactory=None, timeout=60, username = "root", password = "", *args, **kwargs):
+def sendPartnerBoxWebCommand(url, contextFactory=None, timeout=60, username="root", password="", *args, **kwargs):
 	#scheme, host, port, path = client._parse(url)
 	#scheme, host, port, path = url_parse(url)
 	from urlparse import urlparse
@@ -428,7 +428,7 @@ class PlaylistEntry:
 	Fr=16777216
 	Sa=33554432
 
-def SetPartnerboxTimerlist(partnerboxentry = None, sreference = None):
+def SetPartnerboxTimerlist(partnerboxentry=None, sreference=None):
 	global remote_timer_list
 	global CurrentIP
 	if partnerboxentry is None:

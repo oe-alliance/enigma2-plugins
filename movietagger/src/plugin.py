@@ -250,7 +250,7 @@ class MovieTagger(Screen):
 
 	def keyGreen(self):
 		if self.currList is self["cTaglist"]:
-			self.session.openWithCallback(self.newTagEntered, InputBox, title=_('Whitepace will be replaced by "_"'), windowTitle = _("Enter the new Tag"))
+			self.session.openWithCallback(self.newTagEntered, InputBox, title=_('Whitepace will be replaced by "_"'), windowTitle=_("Enter the new Tag"))
 
 	def keyYellow(self):
 		if  self.currList is self["aTaglist"]:
@@ -297,7 +297,7 @@ class MovieTagger(Screen):
 			self.addTag(newTag.strip().replace(" ", "_"))
 
 class TagMenuList(MenuList):
-	def __init__(self, list, enableWrapAround = False):
+	def __init__(self, list, enableWrapAround=False):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setFont(1, gFont("Regular", 25))
@@ -313,4 +313,4 @@ def main(session, service, **kwargs):
 		raise e
 
 def Plugins(path,**kwargs):
- 	return PluginDescriptor(name="Movie Tagger", description=_("Movie Tagger..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc=main)
+ 	return PluginDescriptor(name="Movie Tagger", description=_("Movie Tagger..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main)

@@ -109,7 +109,7 @@ class AutoMountManager(Screen):
 	def exit(self):
 		self.close()
 
-	def keyOK(self, returnValue = None):
+	def keyOK(self, returnValue=None):
 		if returnValue == None:
 			returnValue = self["config"].getCurrent()[1]
 			if returnValue == "add":
@@ -137,9 +137,9 @@ class AutoMountManager(Screen):
 			fp = open('/etc/hostname', 'r')
 			self.hostname = fp.readline().rstrip('\n')
 			fp.close()
-			self.session.openWithCallback(self.hostnameCallback, VirtualKeyBoard, title = (_("Enter new hostname for your Receiver")), text = self.hostname)
+			self.session.openWithCallback(self.hostnameCallback, VirtualKeyBoard, title=(_("Enter new hostname for your Receiver")), text=self.hostname)
 
-	def hostnameCallback(self, callback = None):
+	def hostnameCallback(self, callback=None):
 		if callback is not None and len(callback):
 			fp = open('/etc/hostname', 'w+')
 			fp.write(callback + '\n')
@@ -150,7 +150,7 @@ class AutoMountManager(Screen):
 
 	def restartLan(self):
 		iNetwork.restartNetwork(self.restartLanDataAvail)
-		self.restartLanRef = self.session.openWithCallback(self.restartfinishedCB, MessageBox, _("Please wait while your network is restarting..."), type = MessageBox.TYPE_INFO, enable_input = False)
+		self.restartLanRef = self.session.openWithCallback(self.restartfinishedCB, MessageBox, _("Please wait while your network is restarting..."), type=MessageBox.TYPE_INFO, enable_input=False)
 
 	def restartLanDataAvail(self, data):
 		if data is True:
@@ -163,14 +163,14 @@ class AutoMountManager(Screen):
 
 	def restartfinishedCB(self, data):
 		if data is True:
-			self.session.open(MessageBox, _("Finished restarting your network"), type = MessageBox.TYPE_INFO, timeout = 10, default = False)
+			self.session.open(MessageBox, _("Finished restarting your network"), type=MessageBox.TYPE_INFO, timeout=10, default=False)
 
 	def createSetup(self):
 		self.session.open(MountManagerMenu)
 
 config.networkbrowser = ConfigSubsection()
-config.networkbrowser.automountpoll = ConfigYesNo(default = False)
-config.networkbrowser.automountpolltimer = ConfigSelection(default = "1", choices = [
+config.networkbrowser.automountpoll = ConfigYesNo(default=False)
+config.networkbrowser.automountpolltimer = ConfigSelection(default="1", choices=[
 	("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("7", "7"), ("8", "8"), ("9", "9"), ("10", "10"),
 	("11", "11"), ("12", "12"), ("13", "13"), ("14", "14"), ("15", "15"), ("16", "16"), ("17", "17"), ("18", "18"), ("19", "19"), ("20", "20"),
 	("21", "21"), ("22", "22"), ("23", "23"), ("24", "24")])
@@ -193,7 +193,7 @@ class MountManagerMenu(Screen, ConfigListScreen):
 
 		self.onChangedEntry = [ ]
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 		self.createSetup()
 
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],

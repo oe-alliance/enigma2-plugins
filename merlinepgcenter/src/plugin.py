@@ -46,7 +46,7 @@ class MerlinEPGCenterStarter(object):
 		assert not MerlinEPGCenterStarter.instance, "only one MerlinEPGCenterStarter instance is allowed!"
 		MerlinEPGCenterStarter.instance = self # set instance
 		
-	def openMerlinEPGCenter(self, startTab = None, doSearch = False):
+	def openMerlinEPGCenter(self, startTab=None, doSearch=False):
 		servicelist, currentBouquet, bouquetList, currentIndex = getBouquetInformation()
 		if MerlinEPGCenterStarter.merlinEPGCenter is None:
 			MerlinEPGCenterStarter.merlinEPGCenter = self.session.instantiateDialog(MerlinEPGCenter, servicelist, currentBouquet, bouquetList, currentIndex, startTab, doSearch)
@@ -73,7 +73,7 @@ class InfoBarFunctionSaver:
 		self.infoBarSingleEpg = InfoBar.openSingleServiceEPG
 		self.infoBarMultiEpg = InfoBar.openMultiServiceEPG
 		from Components.config import config
-		config.plugins.merlinEpgCenter.replaceInfobarEpg.addNotifier(self.changeFunctions, initial_call = True)
+		config.plugins.merlinEpgCenter.replaceInfobarEpg.addNotifier(self.changeFunctions, initial_call=True)
 			
 	def changeFunctions(self, configElement):
 		if configElement.value: # replace InfoBar EPG functions
@@ -90,7 +90,7 @@ class InfoBarFunctionSaver:
 	def saveInfoBarEventViewFunctions(self):
 		self.infoBarEventView = InfoBar.instance["EPGActions"].actions["showEventInfo"]
 		
-	def setInfoBarActionMap(self, configElement = None):
+	def setInfoBarActionMap(self, configElement=None):
 		if configElement == config.plugins.merlinEpgCenter.replaceInfobarChannelUp:
 			value = int(config.plugins.merlinEpgCenter.replaceInfobarChannelUp.value)
 			if value == -1: # disabled
@@ -143,14 +143,14 @@ def sessionstart(reason, session):
 	MerlinEPGCenterStarter(session)
 	
 # InfoBar is now initialised, our chance to occupy the ChannelSelectActions
-def networkconfigread(reason = None):
+def networkconfigread(reason=None):
 	if not InfoBar.instance:
 		return
 	infoBarFunctionSaver.saveInfoBarChannelFunctions()
 	infoBarFunctionSaver.saveInfoBarEventViewFunctions()
-	config.plugins.merlinEpgCenter.replaceInfobarChannelUp.addNotifier(infoBarFunctionSaver.setInfoBarActionMap, initial_call = True)
-	config.plugins.merlinEpgCenter.replaceInfobarChannelDown.addNotifier(infoBarFunctionSaver.setInfoBarActionMap, initial_call = True)
-	config.plugins.merlinEpgCenter.replaceShowEventView.addNotifier(infoBarFunctionSaver.setInfoBarActionMap, initial_call = True)
+	config.plugins.merlinEpgCenter.replaceInfobarChannelUp.addNotifier(infoBarFunctionSaver.setInfoBarActionMap, initial_call=True)
+	config.plugins.merlinEpgCenter.replaceInfobarChannelDown.addNotifier(infoBarFunctionSaver.setInfoBarActionMap, initial_call=True)
+	config.plugins.merlinEpgCenter.replaceShowEventView.addNotifier(infoBarFunctionSaver.setInfoBarActionMap, initial_call=True)
 	
 def getBouquetInformation():
 	# get current bouquet and bouquetlist from channelselection
@@ -178,11 +178,11 @@ def openMerlinEPGCenter(session, **kwargs):
 	
 def Plugins(**kwargs):
 	list = [
-		PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc=autostart, weight=100),
-		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart, weight=100),
-		PluginDescriptor(where = [PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc=networkconfigread, weight=100),
-		PluginDescriptor(name = "Merlin EPG Center", description = _("More than just an EPG..."), where = [PluginDescriptor.WHERE_EXTENSIONSMENU,
-		PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EVENTINFO], fnc = openMerlinEPGCenter, icon = "plugin.png")
+		PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART], fnc=autostart, weight=100),
+		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart, weight=100),
+		PluginDescriptor(where=[PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc=networkconfigread, weight=100),
+		PluginDescriptor(name="Merlin EPG Center", description=_("More than just an EPG..."), where=[PluginDescriptor.WHERE_EXTENSIONSMENU,
+		PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EVENTINFO], fnc=openMerlinEPGCenter, icon="plugin.png")
 		]
 	return list
 	

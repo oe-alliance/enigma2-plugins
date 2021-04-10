@@ -70,7 +70,7 @@ class WerbeZapperChoiceBox(ChoiceBox):
 class WerbeZapper(Screen):
 	"""Simple Plugin to automatically zap back to a Service after a given amount
 	   of time."""
-	def __init__(self, session, servicelist, cleanupfnc = None):
+	def __init__(self, session, servicelist, cleanupfnc=None):
 		Screen.__init__(self, session)
 		
 		# Save Session&Servicelist
@@ -231,8 +231,7 @@ class WerbeZapper(Screen):
 		# Notify us on new services
 		# ServiceEventTracker will remove itself on close
 		if not self.__event_tracker:
-			self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
+			self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evStart: self.serviceStarted,
 			})
 

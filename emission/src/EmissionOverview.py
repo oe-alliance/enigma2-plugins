@@ -45,7 +45,7 @@ class TorrentLocationBox(LocationBox):
 		self.skinName = [ "TorrentLocationBox", "LocationBox" ]
 
 		# non-standard filelist which shows .tor(rent) files
-		self["filelist"] = FileList(None, showDirectories = True, showFiles = True, matchingPattern = "^.*\.tor(rent)?")
+		self["filelist"] = FileList(None, showDirectories=True, showFiles=True, matchingPattern="^.*\.tor(rent)?")
 
 	def ok(self):
 		# changeDir in booklist and only select path
@@ -119,10 +119,10 @@ class EmissionOverview(Screen, HelpableScreen):
 
 		try:
 			self.transmission = Client(
-				address = config.plugins.emission.hostname.value,
-				port = config.plugins.emission.port.value,
-				user = config.plugins.emission.username.value,
-				password = config.plugins.emission.password.value
+				address=config.plugins.emission.hostname.value,
+				port=config.plugins.emission.port.value,
+				user=config.plugins.emission.username.value,
+				password=config.plugins.emission.password.value
 			)
 		except TransmissionError as te:
 			self.transmission = None
@@ -171,7 +171,7 @@ class EmissionOverview(Screen, HelpableScreen):
 		self.timer.callback.append(self.updateList)
 		self.timer.start(0, 1)
 
-	def bandwidthCallback(self, ret = None):
+	def bandwidthCallback(self, ret=None):
 		if self.transmission is not None and ret:
 			try:
 				self.transmission.set_session(**ret)
@@ -179,15 +179,15 @@ class EmissionOverview(Screen, HelpableScreen):
 				self.session.open(
 					MessageBox,
 					_("Error communicating with transmission-daemon: %s.") % (te),
-					type = MessageBox.TYPE_ERROR,
-					timeout = 5
+					type=MessageBox.TYPE_ERROR,
+					timeout=5
 				)
 		self.updateList()
 
-	def menuCallback(self, ret = None):
+	def menuCallback(self, ret=None):
 		ret and ret[1]()
 
-	def newDlCallback(self, ret = None):
+	def newDlCallback(self, ret=None):
 		if self.transmission is not None and ret:
 			try:
 				res = self.transmission.add_url(ret)
@@ -195,16 +195,16 @@ class EmissionOverview(Screen, HelpableScreen):
 				self.session.open(
 					MessageBox,
 					_("Error communicating with transmission-daemon: %s.") % (te),
-					type = MessageBox.TYPE_ERROR,
-					timeout = 5
+					type=MessageBox.TYPE_ERROR,
+					timeout=5
 				)
 			else:
 				if not res:
 					self.session.open(
 						MessageBox,
 						_("Torrent could not be scheduled not download!"),
-						type = MessageBox.TYPE_ERROR,
-						timeout = 5
+						type=MessageBox.TYPE_ERROR,
+						timeout=5
 					)
 		self.updateList()
 
@@ -215,7 +215,7 @@ class EmissionOverview(Screen, HelpableScreen):
 			TorrentLocationBox
 		)
 
-	def sortCallback(self, ret = None):
+	def sortCallback(self, ret=None):
 		if ret is not None:
 			self.sort_type = config.plugins.emission.last_sort.value = ret[1]
 			config.plugins.emission.last_sort.save()
@@ -251,8 +251,8 @@ class EmissionOverview(Screen, HelpableScreen):
 			self.session.open(
 				MessageBox,
 				_("Error communicating with transmission-daemon: %s.") % (te),
-				type = MessageBox.TYPE_ERROR,
-				timeout = 5
+				type=MessageBox.TYPE_ERROR,
+				timeout=5
 			)
 
 	def unpauseAll(self):
@@ -265,8 +265,8 @@ class EmissionOverview(Screen, HelpableScreen):
 			self.session.open(
 				MessageBox,
 				_("Error communicating with transmission-daemon: %s.") % (te),
-				type = MessageBox.TYPE_ERROR,
-				timeout = 5
+				type=MessageBox.TYPE_ERROR,
+				timeout=5
 			)
 
 	def configure(self):
@@ -359,8 +359,8 @@ class EmissionOverview(Screen, HelpableScreen):
 			self.session.open(
 				MessageBox,
 				_("Error communicating with transmission-daemon: %s.") % (te),
-				type = MessageBox.TYPE_ERROR,
-				timeout = 5
+				type=MessageBox.TYPE_ERROR,
+				timeout=5
 			)
 			# XXX: this seems silly but cleans the gui and restarts the timer :-)
 			self.updateList()
@@ -376,18 +376,18 @@ class EmissionOverview(Screen, HelpableScreen):
 	def configureCallback(self):
 		try:
 			self.transmission = Client(
-				address = config.plugins.emission.hostname.value,
-				port = config.plugins.emission.port.value,
-				user = config.plugins.emission.username.value,
-				password = config.plugins.emission.password.value
+				address=config.plugins.emission.hostname.value,
+				port=config.plugins.emission.port.value,
+				user=config.plugins.emission.username.value,
+				password=config.plugins.emission.password.value
 			)
 		except TransmissionError as te:
 			self.transmission = None
 			self.session.open(
 				MessageBox,
 				_("Error communicating with transmission-daemon: %s.") % (te),
-				type = MessageBox.TYPE_ERROR,
-				timeout = 5
+				type=MessageBox.TYPE_ERROR,
+				timeout=5
 			)
 		else:
 			self.updateList()
@@ -419,11 +419,11 @@ class EmissionOverview(Screen, HelpableScreen):
 					# note: cmp call inversed because lower eta is "better"
 					return cmp(y_eta, x_eta) or cmp(x.progress, y.progress)
 
-				lst.sort(cmp = cmp_func, reverse = True)
+				lst.sort(cmp=cmp_func, reverse=True)
 			elif sort_type == SORT_TYPE_PROGRESS:
-				lst.sort(key = lambda x: x.progress, reverse = True)
+				lst.sort(key=lambda x: x.progress, reverse=True)
 			elif sort_type == SORT_TYPE_SPEED:
-				lst.sort(key = lambda x: (x.rateDownload, x.rateUpload), reverse = True)
+				lst.sort(key=lambda x: (x.rateDownload, x.rateUpload), reverse=True)
 			# SORT_TYPE_ADDED is what we already have
 
 			list_type = self.list_type

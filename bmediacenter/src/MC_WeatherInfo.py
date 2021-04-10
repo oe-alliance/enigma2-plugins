@@ -31,9 +31,9 @@ config.plugins.mc_wi.entrycount =  ConfigInteger(0)
 config.plugins.mc_wi.Entry = ConfigSubList()
 def initWeatherPluginEntryConfig():
 	s = ConfigSubsection()
-	s.city = ConfigText(default = "Berlin", visible_width = 100, fixed_size = False)
-	s.degreetype = ConfigSelection(choices = [("C", _("metric system")), ("F", _("imperial system"))], default = "C")
-	s.weatherlocationcode = ConfigText(default = "", visible_width = 100, fixed_size = False)
+	s.city = ConfigText(default="Berlin", visible_width=100, fixed_size=False)
+	s.degreetype = ConfigSelection(choices=[("C", _("metric system")), ("F", _("imperial system"))], default="C")
+	s.weatherlocationcode = ConfigText(default="", visible_width=100, fixed_size=False)
 	config.plugins.mc_wi.Entry.append(s)
 	return s
 def initConfig():
@@ -46,7 +46,7 @@ def initConfig():
 initConfig()
 path="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/"
 class WeatherIconItem:
-	def __init__(self, url = "", filename = "", index = -1, error = False):
+	def __init__(self, url="", filename="", index=-1, error=False):
 		self.url = url
 		self.filename = filename
 		self.index = index
@@ -171,7 +171,7 @@ class MC_WeatherInfo(Screen):
 			self["weekday%s_tempname" % i].text = ""
 			i += 1
 
-	def errorIconDownload(self, error = None, item = None):
+	def errorIconDownload(self, error=None, item=None):
 		item.error = True
 
 	def finishedIconDownload(self, result, item):
@@ -222,7 +222,7 @@ class MC_WeatherInfo(Screen):
 					if not pathExists(filenamepng):
 						if not pathExists(filename):
 							url = "%s%s" % (imagerelativeurl, skycode)
-							IconDownloadList.append(WeatherIconItem(url = url, filename = filename, index = -1))
+							IconDownloadList.append(WeatherIconItem(url=url, filename=filename, index=-1))
 					else:
 						self.showIcon(-1, filenamepng)
 				elif items.tag == "forecast" and index <= 4:
@@ -240,7 +240,7 @@ class MC_WeatherInfo(Screen):
 					if not pathExists(filenamepng):
 						if not pathExists(filename):
 							url = "%s%s" % (imagerelativeurl, skycodeday)
-							IconDownloadList.append(WeatherIconItem(url = url, filename = filename, index = index))
+							IconDownloadList.append(WeatherIconItem(url=url, filename=filename, index=index))
 					else:
 						self.showIcon(index, filenamepng)
 		if len(IconDownloadList) != 0:
@@ -267,7 +267,7 @@ class MC_WeatherInfo(Screen):
 			self.mvidown(stadt)
 	def config(self):
 		self.session.openWithCallback(self.setupFinished, WeatherSetup)
-	def setupFinished(self, index, entry = None):
+	def setupFinished(self, index, entry=None):
 		self.weatherPluginEntryCount = config.plugins.mc_wi.entrycount.value
 		if self.weatherPluginEntryCount >= 1:
 			if entry is not None:
@@ -281,7 +281,7 @@ class MC_WeatherInfo(Screen):
 			self.weatherPluginEntryIndex = -1
 		self.clearFields()
 		self.startRun()
-	def error(self, error = None):
+	def error(self, error=None):
 		self.mvion = False
 		self.showiframe.showStillpicture("/usr/share/enigma2/black.mvi")
 		if error is not None:
@@ -369,7 +369,7 @@ class WeatherSetup(Screen):
 		configfile.save()
 		self.updateList()
 class WeatherPluginEntryList(MenuList):
-	def __init__(self, list, enableWrapAround = True):
+	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setFont(1, gFont("Regular", 18))
@@ -476,7 +476,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 	def xmlCallback(self, xmlstring):
 		if xmlstring:
 			self.session.openWithCallback(self.searchCallback, MSNWeatherPluginSearch, xmlstring)
-	def error(self, error = None):
+	def error(self, error=None):
 		if error is not None:
 			print(error)
 	def searchCallback(self, result):
@@ -520,7 +520,7 @@ class MSNWeatherPluginSearch(Screen):
 			sel = None
 		self.close(sel)
 class MSNWeatherPluginSearchResultList(MenuList):
-	def __init__(self, list, enableWrapAround = True):
+	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setFont(1, gFont("Regular", 18))

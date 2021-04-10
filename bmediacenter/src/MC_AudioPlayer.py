@@ -34,7 +34,7 @@ config.plugins.mc_ap_sortmode = ConfigSubsection()
 config.plugins.mc_ap_sortmode.enabled = ConfigSelection(sorts)
 config.plugins.mc_ap.showJpg = ConfigYesNo(default=True)
 config.plugins.mc_ap.jpg_delay = ConfigInteger(default=10, limits=(5, 999))
-config.plugins.mc_ap.repeat = ConfigSelection(default="off", choices = [("off", "off"), ("single", "single"), ("all", "all")])
+config.plugins.mc_ap.repeat = ConfigSelection(default="off", choices=[("off", "off"), ("single", "single"), ("all", "all")])
 config.plugins.mc_ap.lastDir = ConfigText(default=resolveFilename(SCOPE_MEDIA))
 screensaverlist = [('default', _("default"))]
 hddpath="/hdd/saver/"
@@ -96,7 +96,7 @@ def PlaylistEntryComponent(serviceref):
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 25, 1, 470, 22, 0, RT_VALIGN_CENTER, text))
 	return res
 class PlayList(MenuList):
-	def __init__(self, enableWrapAround = False):
+	def __init__(self, enableWrapAround=False):
 		MenuList.__init__(self, playlist, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 15))
 		self.l.setItemHeight(23)
@@ -158,7 +158,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
-		InfoBarSeek.__init__(self, actionmap = "MediaPlayerSeekActions")
+		InfoBarSeek.__init__(self, actionmap="MediaPlayerSeekActions")
 		self.jpgList = []
 		self.jpgIndex = 0
 		self.jpgLastIndex = -1
@@ -186,8 +186,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		self.playlist = PlayList()
 		MC_AudioPlayer.playlistplay = 0
 		MC_AudioPlayer.currPlaying = -1
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evEOF: self.doEOF,
 				iPlayableService.evStopped: self.StopPlayback,
 				iPlayableService.evUser+11: self.__evDecodeError,
@@ -228,7 +227,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		self.filelist = []
 		self["filelist"] = []
 		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib", "/proc", "/ram", "/root", "/sbin", "/sys", "/tmp", "/usr", "/var"]
-		self.filelist = FileList(currDir, useServiceRef = True, showDirectories = True, showFiles = True, matchingPattern = "(?i)^.*\.(mp2|mp3|wav|wave|wma|m4a|ogg|ra|flac|m3u|pls|e2pls)", inhibitDirs = inhibitDirs, sort = sort)
+		self.filelist = FileList(currDir, useServiceRef=True, showDirectories=True, showFiles=True, matchingPattern="(?i)^.*\.(mp2|mp3|wav|wave|wma|m4a|ogg|ra|flac|m3u|pls|e2pls)", inhibitDirs=inhibitDirs, sort=sort)
 		self["filelist"] = self.filelist
 		self["filelist"].show()
 		self.JpgTimer = eTimer()
@@ -415,7 +414,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 				self["screensaver"].showDefaultCover()
 			MC_AudioPlayer.STATE = "NONE"
 			self["play"].instance.setPixmapFromFile(mcpath +"icons/stop_enabled.png")
-	def JumpToFolder(self, jumpto = None):
+	def JumpToFolder(self, jumpto=None):
 		if jumpto is None:
 			return
 		else:
@@ -451,10 +450,10 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		else:
 			self.playlist.addFile(self.filelist.getServiceRef())
 			self.playlist.updateList()
-	def addDirtoPls(self, directory, recursive = True):
+	def addDirtoPls(self, directory, recursive=True):
 		if directory == '/':
 			return
-		filelist = FileList(directory, useServiceRef = True, showMountpoints = False, isTop = True)
+		filelist = FileList(directory, useServiceRef=True, showMountpoints=False, isTop=True)
 		for x in filelist.getFileList():
 			if x[0][1] == True: #isDir
 				#if recursive:
@@ -539,11 +538,11 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 	def __evDecodeError(self):
 		currPlay = self.session.nav.getCurrentService()
 		sVideoType = currPlay.info().getInfoString(iServiceInformation.sVideoType)
-		self.session.open(MessageBox, _("This Dreambox can't decode %s video streams!") % sVideoType, type = MessageBox.TYPE_INFO, timeout = 20 )
+		self.session.open(MessageBox, _("This Dreambox can't decode %s video streams!") % sVideoType, type=MessageBox.TYPE_INFO, timeout=20 )
 	def __evPluginError(self):
 		currPlay = self.session.nav.getCurrentService()
 		message = currPlay.info().getInfoString(iServiceInformation.sUser+12)
-		self.session.open(MessageBox, message, type = MessageBox.TYPE_INFO, timeout = 20 )
+		self.session.open(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=20 )
 	def addPlaylistParser(self, parser, extension):
 		self.playlistparsers[extension] = parser
 	def Shuffle(self):
@@ -580,7 +579,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 			MC_AudioPlayer.currPlaying = len(self.playlist) - 1
 			self.PlayServicepls()
 		elif choice[1] == "copyfiles":
-			self.addDirtoPls(os_path.dirname(self.filelist.getSelection()[0].getPath()) + "/", recursive = False)
+			self.addDirtoPls(os_path.dirname(self.filelist.getSelection()[0].getPath()) + "/", recursive=False)
 		elif choice[1] == "deletefile":
 			self.deleteFile()
 		elif choice[1] == "shuffle":
@@ -641,8 +640,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 		self.playlist = PlayList()
 		MC_AudioPlayer.playlistplay = 0
 		MC_AudioPlayer.currPlaying = -1
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evEOF: self.doEOF,
 				iPlayableService.evStopped: self.StopPlayback,
 				iPlayableService.evUser+11: self.__evDecodeError,
@@ -675,7 +673,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 		self.filelist = []
 		self["filelist"] = []
 		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib", "/proc", "/ram", "/root", "/sbin", "/sys", "/tmp", "/usr", "/var"]
-		self.filelist = FileList(currDir, useServiceRef = True, showDirectories = False, showFiles = True, matchingPattern = "(?i)^.*\.(m3u|pls|e2pls)", additionalExtensions = "4098:m3u 4098:e2pls 4098:pls")
+		self.filelist = FileList(currDir, useServiceRef=True, showDirectories=False, showFiles=True, matchingPattern="(?i)^.*\.(m3u|pls|e2pls)", additionalExtensions="4098:m3u 4098:e2pls 4098:pls")
 
 		self["filelist"] = self.filelist
 		self["filelist"].show()
@@ -844,11 +842,11 @@ class MC_WebRadio(Screen, HelpableScreen):
 	def __evDecodeError(self):
 		currPlay = self.session.nav.getCurrentService()
 		sVideoType = currPlay.info().getInfoString(iServiceInformation.sVideoType)
-		self.session.open(MessageBox, _("This Dreambox can't decode %s video streams!") % sVideoType, type = MessageBox.TYPE_INFO, timeout = 20 )
+		self.session.open(MessageBox, _("This Dreambox can't decode %s video streams!") % sVideoType, type=MessageBox.TYPE_INFO, timeout=20 )
 	def __evPluginError(self):
 		currPlay = self.session.nav.getCurrentService()
 		message = currPlay.info().getInfoString(iServiceInformation.sUser+12)
-		self.session.open(MessageBox, message, type = MessageBox.TYPE_INFO, timeout = 20 )
+		self.session.open(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=20 )
 	def addPlaylistParser(self, parser, extension):
 		self.playlistparsers[extension] = parser
 	def Settings(self):
@@ -932,7 +930,7 @@ class MC_WebDown(Screen):
 class MC_AudioPlaylist(Screen, InfoBarSeek):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		InfoBarSeek.__init__(self, actionmap = "MediaPlayerSeekActions")
+		InfoBarSeek.__init__(self, actionmap="MediaPlayerSeekActions")
 		self["key_red"] = Button("Back")
 		self["key_green"] = Button(" ")
 		self["key_yellow"] = Button(" ")
@@ -955,8 +953,7 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 		self.addPlaylistParser(PlaylistIOM3U, "m3u")
 		self.addPlaylistParser(PlaylistIOPLS, "pls")
 		self.addPlaylistParser(PlaylistIOInternal, "e2pls")
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evEOF: self.fileupdate,
 				#iPlayableService.evStopped: self.StopPlayback,
 				#iPlayableService.evUser+13: self["coverArt"].embeddedCoverArt,
@@ -1119,7 +1116,7 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 			self["fileinfo"].setText("Title: " + sTitle + "\nArtist: " + sArtist + "\nAlbum: " + sAlbum + "\nYear: " + sYear + "\nGenre: " + sGenre + "\nComment: " + sComment)
 	def save_playlist(self):
 		from Screens.InputBox import InputBox
-		self.session.openWithCallback(self.save_pls, InputBox, title=_("Please enter filename (empty = use current date)"), windowTitle = _("Save Playlist"))
+		self.session.openWithCallback(self.save_pls, InputBox, title=_("Please enter filename (empty = use current date)"), windowTitle=_("Save Playlist"))
 	def save_pls(self, name):
 		if name is not None:
 			name = name.strip()
@@ -1138,7 +1135,7 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 				listpath.append((i, playlistdir + i))
 		except IOError as e:
 			print("Error while scanning subdirs ", e)
-		self.session.openWithCallback(self.load_pls, ChoiceBox, title=_("Please select a playlist..."), list = listpath)
+		self.session.openWithCallback(self.load_pls, ChoiceBox, title=_("Please select a playlist..."), list=listpath)
 	def load_pls(self, path):
 		if path is not None:
 			self.playlist.clear()
@@ -1157,7 +1154,7 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 				listpath.append((i, playlistdir + i))
 		except IOError as e:
 			print("Error while scanning subdirs ", e)
-		self.session.openWithCallback(self.delete_saved_pls, ChoiceBox, title=_("Please select a playlist to delete..."), list = listpath)
+		self.session.openWithCallback(self.delete_saved_pls, ChoiceBox, title=_("Please select a playlist to delete..."), list=listpath)
 	def delete_saved_pls(self, path):
 		if path is not None:
 			self.delname = path[1]
@@ -1244,8 +1241,7 @@ class Lyrics(Screen):
 			os.system("echo '"+ str(title) +"' > /tmp/.oldplaying | echo '"+ str(title) +"' > /tmp/.curplaying ")
 		self.RFTimer = eTimer()
 		self.RFTimer.callback.append(self.refresh)
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evUser+11: self["coverly"].coverlyrics
 			})
 		self["actions"] = HelpableActionMap(self, "MC_AudioPlayerActions", 
@@ -1291,7 +1287,7 @@ class Lyrics(Screen):
 		url = "http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist=%s&song=%s" % (quote(artistly), quote(titlely))
 		sendUrlCommand(url, None, 10).addCallback(self.gotLyrics).addErrback(self.urlError)
 		return "No lyrics found in id3-tag, trying api.chartlyrics.com..."
-	def urlError(self, error = None):
+	def urlError(self, error=None):
 		if error is not None:
 			self["resulttext"].setText(str(error.getErrorMessage()))
 			self["lyric_text"].setText("")

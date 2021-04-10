@@ -97,7 +97,7 @@ class GrowleeConnection:
 
 			self.connections.append((connection, host))
 
-	def maybeClose(self, resOrFail, defer = None):
+	def maybeClose(self, resOrFail, defer=None):
 		self.pending -= 1
 		if self.pending == 0:
 			if defer:
@@ -110,7 +110,7 @@ class GrowleeConnection:
 			d = connection.stop()
 			if d is not None:
 				self.pending += 1
-				d.addBoth(self.maybeClose, defer = defer)
+				d.addBoth(self.maybeClose, defer=defer)
 		del self.connections[:]
 
 		if self.pending == 0:

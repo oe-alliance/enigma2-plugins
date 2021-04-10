@@ -585,7 +585,7 @@ class vps:
 		self.vpstimers.append(vps_timer(timer, self.session))
 		self.current_timers_list.append(timer)
 
-	def checksoon(self, newstart = 3000):
+	def checksoon(self, newstart=3000):
 		self.timer.start(newstart, True)
 
 	def shutdown(self):

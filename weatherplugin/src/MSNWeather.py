@@ -34,7 +34,7 @@ from six.moves.urllib.parse import quote as urllib_quote
 import six
 
 class WeatherIconItem:
-	def __init__(self, url = "", filename = "", index = -1, error = False):
+	def __init__(self, url="", filename="", index=-1, error=False):
 		self.url = url
 		self.filename = filename
 		self.index = index
@@ -115,7 +115,7 @@ class MSNWeather:
 	def setIconExtension(self, iconextension):
 		self.iconextension = iconextension
 		
-	def getWeatherData(self, degreetype, locationcode, city, callback, callbackShowIcon, callbackAllIconsDownloaded = None ):
+	def getWeatherData(self, degreetype, locationcode, city, callback, callbackShowIcon, callbackAllIconsDownloaded=None ):
 		self.initialize()
 		language = config.osd.language.value.replace("_", "-")
 		if language == "en-EN": # hack
@@ -129,7 +129,7 @@ class MSNWeather:
 		url = "http://weather.service.msn.com/data.aspx?src=windows&weadegreetype=%s&culture=%s&wealocations=%s" % (degreetype, language, urllib_quote(locationcode))
 		getPage(six.ensure_binary(url)).addCallback(self.xmlCallback).addErrback(self.error)
 		
-	def getDefaultWeatherData(self, callback = None, callbackAllIconsDownloaded = None):
+	def getDefaultWeatherData(self, callback=None, callbackAllIconsDownloaded=None):
 		self.initialize()
 		weatherPluginEntryCount = config.plugins.WeatherPlugin.entrycount.value
 		if weatherPluginEntryCount >= 1:
@@ -139,7 +139,7 @@ class MSNWeather:
 		else:
 			return 0
 		
-	def error(self, error = None):
+	def error(self, error=None):
 		errormessage = ""
 		if error is not None:
 			errormessage = str(error.getErrorMessage())
@@ -147,7 +147,7 @@ class MSNWeather:
 			self.callback(self.ERROR, errormessage)
 			
 	
-	def errorIconDownload(self, error = None, item = None):
+	def errorIconDownload(self, error=None, item=None):
 		item.error = True
 		if os_path.exists(item.filename): # delete 0 kb file
 			os_remove(item.filename)
@@ -196,7 +196,7 @@ class MSNWeather:
 					currentWeather.iconFilename = filename
 					if not os_path.exists(filename):
 						url = "%s%s" % (self.imagerelativeurl, currentWeather.skycode)
-						IconDownloadList.append(WeatherIconItem(url = url, filename = filename, index = -1))
+						IconDownloadList.append(WeatherIconItem(url=url, filename=filename, index=-1))
 					else:
 						self.showIcon(-1, filename)
 					self.weatherItems[str(-1)] = currentWeather
@@ -215,7 +215,7 @@ class MSNWeather:
 					weather.iconFilename = filename
 					if not os_path.exists(filename):
 						url = "%s%s" % (self.imagerelativeurl, weather.skycodeday)
-						IconDownloadList.append(WeatherIconItem(url = url, filename = filename, index = index))
+						IconDownloadList.append(WeatherIconItem(url=url, filename=filename, index=index))
 					else:
 						self.showIcon(index, filename)
 					self.weatherItems[str(index)] = weather

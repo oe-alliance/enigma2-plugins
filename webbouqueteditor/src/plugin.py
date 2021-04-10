@@ -29,5 +29,5 @@ def autostart(reason, **kwargs):
 		addExternalChild( ("bouqueteditor", root, "BouquetEditor", 1, True) )
 
 def Plugins(**kwargs):
-	list = [PluginDescriptor(name="WebBouquetEditor", description=_("WebBouquetEditor"), where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)]
+	list = [PluginDescriptor(name="WebBouquetEditor", description=_("WebBouquetEditor"), where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart)]
 	return list

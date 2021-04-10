@@ -155,10 +155,10 @@ def getBeginTimeString(info, serviceref):
     return desc
 
 from Screens.LocationBox import LocationBox
-def ScanLocationBox(session, text, dir, minFree = None):
+def ScanLocationBox(session, text, dir, minFree=None):
     inhibitDirs = ["/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/usr", "/var"]
     config.AdvancedMovieSelection.videodirs.load()
-    return LocationBox(session, text = text, currDir = dir, bookmarks = config.AdvancedMovieSelection.videodirs, autoAdd = False, editDir = False, inhibitDirs = inhibitDirs, minFree = minFree)
+    return LocationBox(session, text=text, currDir=dir, bookmarks=config.AdvancedMovieSelection.videodirs, autoAdd=False, editDir=False, inhibitDirs=inhibitDirs, minFree=minFree)
 
 class MovieContextMenu(Screen):
     def __init__(self, session, csel, service):
@@ -1494,13 +1494,13 @@ class MoviebarPositionSetup(Screen):
         print("[InfobarPositionSetup] New skin position: x = %d, y = %d" % (self.instance.position().x() + x, self.instance.position().y() + y))
     
     def up(self):
-        self.moveRelative(y= -2)
+        self.moveRelative(y=-2)
 
     def down(self):
         self.moveRelative(y=2)
     
     def left(self):
-        self.moveRelative(x= -2)
+        self.moveRelative(x=-2)
     
     def right(self):
         self.moveRelative(x=2)

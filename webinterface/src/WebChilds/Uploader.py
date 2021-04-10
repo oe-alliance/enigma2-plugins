@@ -54,7 +54,7 @@ class UploadResource(resource.Resource):
 		if fn and (overwrite or not os_path.exists(fn)):
 			fd = os_open(fn, O_WRONLY | O_CREAT)
 		else:
-			fd, fn = mkstemp(dir = uploaddir)
+			fd, fn = mkstemp(dir=uploaddir)
 		cnt = os_write(fd, data)
 		os_close(fd)
 		os_chmod(fn, 0o755)

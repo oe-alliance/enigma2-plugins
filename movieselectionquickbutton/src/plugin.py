@@ -35,12 +35,12 @@ from Screens.MessageBox import MessageBox
 from . import _
 
 config.plugins.MovieSelectionQuickButton = ConfigSubsection()
-config.plugins.MovieSelectionQuickButton.red = ConfigText(default = _("Delete"), visible_width = 50, fixed_size = False)
-config.plugins.MovieSelectionQuickButton.green = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
-config.plugins.MovieSelectionQuickButton.yellow = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
-config.plugins.MovieSelectionQuickButton.blue = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
-config.plugins.MovieSelectionQuickButton.buttoncaption = ConfigSelection(default="0", choices = [("0", _("display plugin name")), ("1", _("display plugin description"))])
-config.plugins.MovieSelectionQuickButton.show_in_extensionsmenu = ConfigYesNo(default = False)
+config.plugins.MovieSelectionQuickButton.red = ConfigText(default=_("Delete"), visible_width=50, fixed_size=False)
+config.plugins.MovieSelectionQuickButton.green = ConfigText(default=_("Nothing"), visible_width=50, fixed_size=False)
+config.plugins.MovieSelectionQuickButton.yellow = ConfigText(default=_("Nothing"), visible_width=50, fixed_size=False)
+config.plugins.MovieSelectionQuickButton.blue = ConfigText(default=_("Nothing"), visible_width=50, fixed_size=False)
+config.plugins.MovieSelectionQuickButton.buttoncaption = ConfigSelection(default="0", choices=[("0", _("display plugin name")), ("1", _("display plugin description"))])
+config.plugins.MovieSelectionQuickButton.show_in_extensionsmenu = ConfigYesNo(default=False)
 
 ###########################################
 # MovieSelection
@@ -62,7 +62,7 @@ def MovieSelectionInit():
 	MovieSelection.bluepressed = bluepressed
 	MovieSelection.getPluginCaption = getPluginCaption
 
-def MovieSelection__init__(self, session, selectedmovie = None):
+def MovieSelection__init__(self, session, selectedmovie=None):
 	baseMovieSelection__init__ (self, session, selectedmovie)
 	self["key_red"] = Button(self.getPluginCaption(str(config.plugins.MovieSelectionQuickButton.red.value)))
 	self["key_green"] = Button(self.getPluginCaption(str(config.plugins.MovieSelectionQuickButton.green.value)))
@@ -100,7 +100,7 @@ def getPluginCaption(self, pname):
 			else:
 				return _("alphabetic sort")
 		else:
-			for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_MOVIELIST]):
+			for p in plugins.getPlugins(where=[PluginDescriptor.WHERE_MOVIELIST]):
 				if pname == str(p.name):
 					if config.plugins.MovieSelectionQuickButton.buttoncaption.value == "1":
 						return p.description
@@ -142,7 +142,7 @@ def startPlugin(self, pname, index):
 					self["key_blue"].setText(newCaption)
 				no_plugin = False
 			else:
-				for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_MOVIELIST]):
+				for p in plugins.getPlugins(where=[PluginDescriptor.WHERE_MOVIELIST]):
 					if pname == str(p.name):
 						plugin = p
 				if plugin is not None:
@@ -171,7 +171,7 @@ class MovieSelectionButtonSetup(ConfigListScreen, Screen):
 			<ePixmap name="green" pixmap="skin_default/buttons/green.png" position="140,350" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
 		</screen>"""
 
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("OK"))
@@ -185,7 +185,7 @@ class MovieSelectionButtonSetup(ConfigListScreen, Screen):
 		green_selectedindex = self.getStaticName(config.plugins.MovieSelectionQuickButton.green.value)
 		yellow_selectedindex = self.getStaticName(config.plugins.MovieSelectionQuickButton.yellow.value)
 		blue_selectedindex = self.getStaticName(config.plugins.MovieSelectionQuickButton.blue.value)
-		for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_MOVIELIST]):
+		for p in plugins.getPlugins(where=[PluginDescriptor.WHERE_MOVIELIST]):
 			self.entryguilist.append((str(index), str(p.name)))
 			if config.plugins.MovieSelectionQuickButton.red.value == str(p.name):
 				red_selectedindex = str(index)
@@ -196,10 +196,10 @@ class MovieSelectionButtonSetup(ConfigListScreen, Screen):
 			if config.plugins.MovieSelectionQuickButton.blue.value == str(p.name):
 				blue_selectedindex = str(index)
 			index = index + 1
-		self.redchoice = ConfigSelection(default = red_selectedindex, choices = self.entryguilist)
-		self.greenchoice = ConfigSelection(default = green_selectedindex, choices = self.entryguilist)
-		self.yellowchoice = ConfigSelection(default = yellow_selectedindex, choices = self.entryguilist)
-		self.bluechoice = ConfigSelection(default = blue_selectedindex, choices = self.entryguilist)
+		self.redchoice = ConfigSelection(default=red_selectedindex, choices=self.entryguilist)
+		self.greenchoice = ConfigSelection(default=green_selectedindex, choices=self.entryguilist)
+		self.yellowchoice = ConfigSelection(default=yellow_selectedindex, choices=self.entryguilist)
+		self.bluechoice = ConfigSelection(default=blue_selectedindex, choices=self.entryguilist)
 		cfglist = [
 			getConfigListEntry(_("assigned to red"), self.redchoice),
 			getConfigListEntry(_("assigned to green"), self.greenchoice),
@@ -248,12 +248,12 @@ def main(session, **kwargs):
 		pass
 
 def Plugins(**kwargs):
-	list = [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = main)]	
+	list = [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=main)]	
 	list.append(PluginDescriptor(name="Setup MovieSelection QuickButton", description=_("Setup for MovieSelection QuickButton"),
-	where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc = setup))
+	where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=setup))
 	
 	if config.plugins.MovieSelectionQuickButton.show_in_extensionsmenu.value:	
 		list.append(PluginDescriptor(name="Setup MovieSelection QuickButton", description=_("Setup for MovieSelection QuickButton"),
-		where = PluginDescriptor.WHERE_EXTENSIONSMENU, icon = "plugin.png", fnc = setup))
+		where=PluginDescriptor.WHERE_EXTENSIONSMENU, icon="plugin.png", fnc=setup))
 	return list
 

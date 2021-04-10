@@ -174,10 +174,10 @@ class FritzAction(object):
 
 		# self.debug("url: " + url + "\n" + data)
 		getPage(six.ensure_binary(url),
-			method = "POST",
-			agent = USERAGENT,
-			headers = headers,
-			postdata = data).addCallback(self._okExecute, callback, **kwargs).addErrback(self._errorExecute, callback)
+			method="POST",
+			agent=USERAGENT,
+			headers=headers,
+			postdata=data).addCallback(self._okExecute, callback, **kwargs).addErrback(self._errorExecute, callback)
 
 	def _okExecute(self, content, callback, **kwargs):
 		# self.debug("")
@@ -216,10 +216,10 @@ class FritzAction(object):
 
 		# self.debug("url: " + url + "\n" + data)
 		getPage(six.ensure_binary(url),
-			method = "POST",
-			agent = USERAGENT,
-			headers = headers,
-			postdata = data).addCallback(self.parse_response, callback).addErrback(self._errorExecute, callback)
+			method="POST",
+			agent=USERAGENT,
+			headers=headers,
+			postdata=data).addCallback(self.parse_response, callback).addErrback(self._errorExecute, callback)
 
 	def _errorExecute(self, error, callback):
 		# text = _("FRITZ!Box - Error getting status: %s") % error.getErrorMessage()
@@ -330,7 +330,7 @@ class FritzXmlParser(object):
 				source = 'http://{0}:{1}/{2}'.format(address, port, filename)
 			self.debug("source: %s", source)
 			getPage(six.ensure_binary(source),
- 				method = "GET",).addCallback(self._okInit).addErrback(self._errorInit)
+ 				method="GET",).addCallback(self._okInit).addErrback(self._errorInit)
 
 	def _okInit(self, source):
 		# self.debug("")
@@ -349,7 +349,7 @@ class FritzXmlParser(object):
 		source = 'http://{0}:{1}/{2}'.format(address, port, filename)
 		self.debug("source: %s", source)
 		getPage(six.ensure_binary(source),
-				method = "GET",).addCallback(self._okInit).addErrback(self._errorInit)
+				method="GET",).addCallback(self._okInit).addErrback(self._errorInit)
 		
 
 	def nodename(self, name):

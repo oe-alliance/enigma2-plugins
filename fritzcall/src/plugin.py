@@ -118,61 +118,61 @@ def scale(y2, y1, x2, x1, x):
 my_global_session = None
 
 config.plugins.FritzCall = ConfigSubsection()
-config.plugins.FritzCall.fwVersion = ConfigSelection(choices = [(None, _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", _("05.29 until below 6.35")), ("06.35", _("06.35 and newer"))], default = None)
+config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[(None, _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", _("05.29 until below 6.35")), ("06.35", _("06.35 and newer"))], default=None)
 # config.plugins.FritzCall.fwVersion = ConfigSelection(choices = [(None, _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", _("05.29 until below 6.35")), ("06.35", _("06.35 and newer")), ("upnp", "Experimental")], default = None)
 # config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[(None, _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", _("05.29 and newer"))], default=None)
-config.plugins.FritzCall.debug = ConfigSelection(choices = [
+config.plugins.FritzCall.debug = ConfigSelection(choices=[
 														(str(NOTSET), _("nothing")),
 														(str(DEBUG), "DEBUG"),
 														(str(INFO), "INFO"),
 														(str(WARNING), "WARNING"),
 														(str(ERROR), "ERROR"),
 														(str(CRITICAL), "CRITICAL")],
-												default = str(ERROR))
+												default=str(ERROR))
 # config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring")), ("connect", _("on connect"))])
 # config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring"))])
-config.plugins.FritzCall.muteOnCall = ConfigYesNo(default = False)
-config.plugins.FritzCall.muteOnOutgoingCall = ConfigYesNo(default = False)
-config.plugins.FritzCall.hostname = ConfigText(default = "fritz.box", fixed_size = False)
-config.plugins.FritzCall.afterStandby = ConfigSelection(choices = [("none", _("show nothing")), ("inList", _("show as list")), ("each", _("show each call"))])
-config.plugins.FritzCall.filter = ConfigYesNo(default = False)
-config.plugins.FritzCall.filtermsn = ConfigText(default = "", fixed_size = False)
+config.plugins.FritzCall.muteOnCall = ConfigYesNo(default=False)
+config.plugins.FritzCall.muteOnOutgoingCall = ConfigYesNo(default=False)
+config.plugins.FritzCall.hostname = ConfigText(default="fritz.box", fixed_size=False)
+config.plugins.FritzCall.afterStandby = ConfigSelection(choices=[("none", _("show nothing")), ("inList", _("show as list")), ("each", _("show each call"))])
+config.plugins.FritzCall.filter = ConfigYesNo(default=False)
+config.plugins.FritzCall.filtermsn = ConfigText(default="", fixed_size=False)
 config.plugins.FritzCall.filtermsn.setUseableChars('0123456789,')
-config.plugins.FritzCall.filterCallList = ConfigYesNo(default = True)
-config.plugins.FritzCall.showBlacklistedCalls = ConfigYesNo(default = False)
-config.plugins.FritzCall.showOutgoingCalls = ConfigYesNo(default = False)
-config.plugins.FritzCall.timeout = ConfigInteger(default = 15, limits = (0, 65535))
-config.plugins.FritzCall.lookup = ConfigYesNo(default = False)
-config.plugins.FritzCall.internal = ConfigYesNo(default = False)
-config.plugins.FritzCall.fritzphonebook = ConfigYesNo(default = False)
-config.plugins.FritzCall.fritzphonebookName = ConfigText(default = _('Phonebook'), fixed_size = False)
-config.plugins.FritzCall.fritzphonebookShowInternal = ConfigYesNo(default = True)
-config.plugins.FritzCall.phonebook = ConfigYesNo(default = False)
-config.plugins.FritzCall.addcallers = ConfigYesNo(default = False)
-config.plugins.FritzCall.enable = ConfigOnOff(default = False)
-config.plugins.FritzCall.username = ConfigText(default = 'BoxAdmin', fixed_size = False)
-config.plugins.FritzCall.password = ConfigPassword(default = "", fixed_size = False)
-config.plugins.FritzCall.extension = ConfigText(default = '1', fixed_size = False)
+config.plugins.FritzCall.filterCallList = ConfigYesNo(default=True)
+config.plugins.FritzCall.showBlacklistedCalls = ConfigYesNo(default=False)
+config.plugins.FritzCall.showOutgoingCalls = ConfigYesNo(default=False)
+config.plugins.FritzCall.timeout = ConfigInteger(default=15, limits=(0, 65535))
+config.plugins.FritzCall.lookup = ConfigYesNo(default=False)
+config.plugins.FritzCall.internal = ConfigYesNo(default=False)
+config.plugins.FritzCall.fritzphonebook = ConfigYesNo(default=False)
+config.plugins.FritzCall.fritzphonebookName = ConfigText(default=_('Phonebook'), fixed_size=False)
+config.plugins.FritzCall.fritzphonebookShowInternal = ConfigYesNo(default=True)
+config.plugins.FritzCall.phonebook = ConfigYesNo(default=False)
+config.plugins.FritzCall.addcallers = ConfigYesNo(default=False)
+config.plugins.FritzCall.enable = ConfigOnOff(default=False)
+config.plugins.FritzCall.username = ConfigText(default='BoxAdmin', fixed_size=False)
+config.plugins.FritzCall.password = ConfigPassword(default="", fixed_size=False)
+config.plugins.FritzCall.extension = ConfigText(default='1', fixed_size=False)
 config.plugins.FritzCall.extension.setUseableChars('0123456789')
-config.plugins.FritzCall.showType = ConfigYesNo(default = True)
-config.plugins.FritzCall.showShortcut = ConfigYesNo(default = False)
-config.plugins.FritzCall.showVanity = ConfigYesNo(default = False)
-config.plugins.FritzCall.prefix = ConfigText(default = "", fixed_size = False)
+config.plugins.FritzCall.showType = ConfigYesNo(default=True)
+config.plugins.FritzCall.showShortcut = ConfigYesNo(default=False)
+config.plugins.FritzCall.showVanity = ConfigYesNo(default=False)
+config.plugins.FritzCall.prefix = ConfigText(default="", fixed_size=False)
 config.plugins.FritzCall.prefix.setUseableChars('0123456789')
-config.plugins.FritzCall.connectionVerbose = ConfigSelection(choices = [("on", _("on")), ("failed", _("only failed")), ("off", _("off"))])
-config.plugins.FritzCall.ignoreUnknown = ConfigYesNo(default = False)
-config.plugins.FritzCall.reloadPhonebookTime = ConfigInteger(default = 8, limits = (0, 99))
-config.plugins.FritzCall.FritzExtendedSearchFaces = ConfigYesNo(default = False)
-config.plugins.FritzCall.FritzExtendedSearchNames = ConfigYesNo(default = False)
-config.plugins.FritzCall.phonebookLocation = ConfigDirectory(default = resolveFilename(SCOPE_CONFIG))
-config.plugins.FritzCall.advancedSkin = ConfigYesNo(default = False)
-config.plugins.FritzCall.guestSSID = ConfigText(default = "FRITZ!Box Gastzugang", fixed_size = False)
-config.plugins.FritzCall.guestSecure = ConfigYesNo(default = True)
-config.plugins.FritzCall.guestPassword = ConfigPassword(default = encode("guestguest!!!"), fixed_size = False)
-config.plugins.FritzCall.useHttps = ConfigYesNo(default = False)
+config.plugins.FritzCall.connectionVerbose = ConfigSelection(choices=[("on", _("on")), ("failed", _("only failed")), ("off", _("off"))])
+config.plugins.FritzCall.ignoreUnknown = ConfigYesNo(default=False)
+config.plugins.FritzCall.reloadPhonebookTime = ConfigInteger(default=8, limits=(0, 99))
+config.plugins.FritzCall.FritzExtendedSearchFaces = ConfigYesNo(default=False)
+config.plugins.FritzCall.FritzExtendedSearchNames = ConfigYesNo(default=False)
+config.plugins.FritzCall.phonebookLocation = ConfigDirectory(default=resolveFilename(SCOPE_CONFIG))
+config.plugins.FritzCall.advancedSkin = ConfigYesNo(default=False)
+config.plugins.FritzCall.guestSSID = ConfigText(default="FRITZ!Box Gastzugang", fixed_size=False)
+config.plugins.FritzCall.guestSecure = ConfigYesNo(default=True)
+config.plugins.FritzCall.guestPassword = ConfigPassword(default=encode("guestguest!!!"), fixed_size=False)
+config.plugins.FritzCall.useHttps = ConfigYesNo(default=False)
 
 guestWLANUptime = [(None, _('Not deactivating after time')), "15", "30", "45", "60", "90", "120", "180", "240", "300", "360", "480", "600", "720", "900", "1080", "1260"]
-config.plugins.FritzCall.guestUptime = ConfigSelection(choices = guestWLANUptime, default = "30")
+config.plugins.FritzCall.guestUptime = ConfigSelection(choices=guestWLANUptime, default="30")
 
 countryCodes = [
 	("0049", _("Germany")),
@@ -183,8 +183,8 @@ countryCodes = [
 	("0043", _("Austria")),
 	("", _("Others"))
 	]
-config.plugins.FritzCall.country = ConfigSelection(choices = countryCodes)
-config.plugins.FritzCall.countrycode = ConfigText(default = "0049", fixed_size = False)
+config.plugins.FritzCall.country = ConfigSelection(choices=countryCodes)
+config.plugins.FritzCall.countrycode = ConfigText(default="0049", fixed_size=False)
 config.plugins.FritzCall.countrycode.setUseableChars('0123456789')
 
 FBF_ALL_CALLS = "."
@@ -198,15 +198,15 @@ fbfCallsChoices = {
 				FBF_MISSED_CALLS: _("Missed calls"),
 				FBF_OUT_CALLS: _("Outgoing calls")
 				}
-config.plugins.FritzCall.fbfCalls = ConfigSelection(choices = fbfCallsChoices)
+config.plugins.FritzCall.fbfCalls = ConfigSelection(choices=fbfCallsChoices)
 
-config.plugins.FritzCall.name = ConfigText(default = "", fixed_size = False)
-config.plugins.FritzCall.number = ConfigText(default = "", fixed_size = False)
+config.plugins.FritzCall.name = ConfigText(default="", fixed_size=False)
+config.plugins.FritzCall.number = ConfigText(default="", fixed_size=False)
 config.plugins.FritzCall.number.setUseableChars('0123456789')
 
 logger = logging.getLogger("FritzCall")
 logger.setLevel(int(config.plugins.FritzCall.debug.value))
-fileHandler = logging.FileHandler('/tmp/FritzDebug.log', mode = 'w')
+fileHandler = logging.FileHandler('/tmp/FritzDebug.log', mode='w')
 fileHandler.setFormatter(logging.Formatter('%(asctime)s %(levelname)-8s %(name)-26s %(funcName)s %(message)-15s', '%Y-%m-%d %H:%M:%S'))
 logger.addHandler(fileHandler)
 
@@ -975,7 +975,7 @@ class FritzMenu(Screen, HelpableScreen):
 			fritzbox.getInfo(self._fillMenu)
 			self._fillMenu(fritzbox.information, True)
 
-	def _fillMenu(self, status, refreshing = False):
+	def _fillMenu(self, status, refreshing=False):
 		(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = status
 		if wlanState:
 			self._wlanActive = (wlanState[0] == '1')
@@ -1172,7 +1172,7 @@ class FritzMenu(Screen, HelpableScreen):
 
 class FritzDisplayCalls(Screen, HelpableScreen):
 
-	def __init__(self, session, text = ""):  # @UnusedVariable # pylint: disable=W0613
+	def __init__(self, session, text=""):  # @UnusedVariable # pylint: disable=W0613
 		if not config.plugins.FritzCall.advancedSkin.value:
 			self.width = DESKTOP_WIDTH * scaleH(75, 85) / 100
 			self.height = DESKTOP_HEIGHT * 0.75
@@ -1419,7 +1419,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 	def ok(self):
 		self.close()
 
-	def display(self, which = None):
+	def display(self, which=None):
 		debug("[FritzDisplayCalls]")
 		if which:
 			config.plugins.FritzCall.fbfCalls.value = which
@@ -1492,12 +1492,12 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 				# we do not even have a number...
 				self.session.open(MessageBox,
 								_("UNKNOWN"),
-								type = MessageBox.TYPE_INFO)
+								type=MessageBox.TYPE_INFO)
 
 
 class FritzOfferAction(Screen):
 
-	def __init__(self, session, parent, number, name = ""):
+	def __init__(self, session, parent, number, name=""):
 		if not config.plugins.FritzCall.advancedSkin.value:
 			# the layout will completely be recalculated in finishLayout
 			self.skin = """
@@ -1623,7 +1623,7 @@ class FritzOfferAction(Screen):
 		faceFile = findFace(self._number, self._name)
 		picPixmap = LoadPixmap(faceFile)
 		if not picPixmap:  # that means most probably, that the picture is not 8 bit...
-			Notifications.AddNotification(MessageBox, _("Found picture\n\n%s\n\nBut did not load. Probably not PNG, 8-bit") % faceFile, type = MessageBox.TYPE_ERROR)
+			Notifications.AddNotification(MessageBox, _("Found picture\n\n%s\n\nBut did not load. Probably not PNG, 8-bit") % faceFile, type=MessageBox.TYPE_ERROR)
 			if DESKTOP_WIDTH <= 720:
 				picPixmap = LoadPixmap(resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/FritzCall/images/no-face-error-sd.png"))
 			elif DESKTOP_WIDTH <= 1280:
@@ -1732,11 +1732,11 @@ class FritzOfferAction(Screen):
 	def _call(self):
 		if fritzbox:
 			debug("[FritzOfferAction]  %s", self._number)
-			self.session.open(MessageBox, _("Calling %s") % self._number, type = MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, _("Calling %s") % self._number, type=MessageBox.TYPE_INFO)
 			fritzbox.dial(self._number)
 		else:
 			error("[FritzOfferAction] no fritzbox object?!?!")
-			self.session.open(MessageBox, _("FRITZ!Box not available for calling"), type = MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, _("FRITZ!Box not available for calling"), type=MessageBox.TYPE_INFO)
 
 	def _add(self):
 		debug("[FritzOfferAction] %s, %s", self._number, self._name)
@@ -1788,7 +1788,7 @@ class FritzCallPhonebook(object):
 						self.phonebook[k.encode("utf-8")] = v.encode("utf-8")
 				except (ValueError, UnicodeError, IOError) as e:
 					error("[FritzCallPhonebook] Could not load %s: %s", phonebookFilename, str(e))
-					Notifications.AddNotification(MessageBox, _("Could not load phonebook: %s") % (phonebookFilename + ": " + str(e)), type = MessageBox.TYPE_ERROR)
+					Notifications.AddNotification(MessageBox, _("Could not load phonebook: %s") % (phonebookFilename + ": " + str(e)), type=MessageBox.TYPE_ERROR)
 
 				# debug(repr(self.phonebook))
 			elif os.path.exists(phonebookFilenameOld):  # read old format and dump to json
@@ -1879,7 +1879,7 @@ class FritzCallPhonebook(object):
 # 				debug("[FritzCallPhonebook] LDIF import failed" %line)
 #===============================================================================
 
-	def search(self, number, default = None, extended = True):
+	def search(self, number, default=None, extended=True):
 		# debug("[FritzCallPhonebook] Searching for %s" %number)
 		name = ""
 		if not self.phonebook or not number:
@@ -2194,7 +2194,7 @@ class FritzCallPhonebook(object):
 			# TRANSLATORS: this is a window title.
 			self.setTitle(_("Phonebook"))
 
-		def display(self, filterNumber = ""):
+		def display(self, filterNumber=""):
 			debug("[FritzDisplayPhonebook]")
 			self.sortlist = []
 			# Beware: strings in phonebook.phonebook are utf-8!
@@ -2269,11 +2269,11 @@ class FritzCallPhonebook(object):
 			else:
 				self.session.open(MessageBox, _("No entry selected"), MessageBox.TYPE_INFO)
 
-		def add(self, parent = None, number = "", name = ""):
+		def add(self, parent=None, number="", name=""):
 			class AddScreen(Screen, ConfigListScreen):
 				'''ConfiglistScreen with two ConfigTexts for Name and Number'''
 
-				def __init__(self, session, parent, number = "", name = ""):
+				def __init__(self, session, parent, number="", name=""):
 					if not config.plugins.FritzCall.advancedSkin.value:  #
 						# setup screen with two ConfigText and OK and ABORT button
 						#
@@ -2359,7 +2359,7 @@ class FritzCallPhonebook(object):
 					}, -2)
 
 					self.list = []
-					ConfigListScreen.__init__(self, self.list, session = session)
+					ConfigListScreen.__init__(self, self.list, session=session)
 					self.name = name
 					self.number = number
 					config.plugins.FritzCall.name.value = name
@@ -2384,7 +2384,7 @@ class FritzCallPhonebook(object):
 					self.name = config.plugins.FritzCall.name.value
 					self.number = config.plugins.FritzCall.number.value
 					if not self.number or not self.name:
-						self.session.open(MessageBox, _("Entry incomplete."), type = MessageBox.TYPE_ERROR)
+						self.session.open(MessageBox, _("Entry incomplete."), type=MessageBox.TYPE_ERROR)
 						return
 					# add (number,name) to sortlist and phonebook.phonebook and disk
 	# 					oldname = phonebook.search(self.number)
@@ -2432,7 +2432,7 @@ class FritzCallPhonebook(object):
 			# self.help_window = self.session.instantiateDialog(NumericalTextInputHelpDialog, self)
 			# self.help_window.show()
 			# VirtualKeyboard instead of InputBox?
-			self.session.openWithCallback(self.doSearch, VirtualKeyBoard, title = _("Search phonebook"))
+			self.session.openWithCallback(self.doSearch, VirtualKeyBoard, title=_("Search phonebook"))
 
 		def doSearch(self, searchTerms):
 			if not searchTerms:
@@ -2450,7 +2450,7 @@ phonebook = FritzCallPhonebook()
 
 class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
-	def __init__(self, session, args = None):  # @UnusedVariable # pylint: disable=W0613
+	def __init__(self, session, args=None):  # @UnusedVariable # pylint: disable=W0613
 		if not config.plugins.FritzCall.advancedSkin.value:
 			self.width = scaleH(20 + 4 * (140 + 90) + 2 * (35 + 40) + 20, 4 * 140 + 2 * 35)
 			width = self.width
@@ -2624,7 +2624,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		# TRANSLATORS: keep it short, this is a help text
 		self.helpList.append((self["setupActions"], "EPGSelectActions", [("info", _("About FritzCall"))]))
 
-		ConfigListScreen.__init__(self, self.list, session = session)
+		ConfigListScreen.__init__(self, self.list, session=session)
 
 		try:
 			config.plugins.FritzCall.guestPassword.value = decode(config.plugins.FritzCall.guestPassword.value)
@@ -2730,7 +2730,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 # 		debug("[FritzCallSetup]"
 		global fritzbox
 		if self["config"].getCurrent()[1] == config.plugins.FritzCall.phonebookLocation:
-			self.session.openWithCallback(self.LocationBoxClosed, LocationBox, _("PhoneBook and Faces Location"), currDir = config.plugins.FritzCall.phonebookLocation.value)
+			self.session.openWithCallback(self.LocationBoxClosed, LocationBox, _("PhoneBook and Faces Location"), currDir=config.plugins.FritzCall.phonebookLocation.value)
 
 		if fritzbox and config.plugins.FritzCall.password.isChanged():
 			fritzbox.password = config.plugins.FritzCall.password.value
@@ -2744,7 +2744,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			x[1].save()
 
 		if not config.plugins.FritzCall.fwVersion.value:
-			Notifications.AddNotification(MessageBox, _("To enjoy more functionalities of your FRITZ!Box, configure the firmware version!"), type = MessageBox.TYPE_INFO, timeout = 4)
+			Notifications.AddNotification(MessageBox, _("To enjoy more functionalities of your FRITZ!Box, configure the firmware version!"), type=MessageBox.TYPE_INFO, timeout=4)
 			fritzbox = FritzCallFBF.FritzCallFBF_dummy()
 			config.plugins.FritzCall.fritzphonebook.value = False
 		elif config.plugins.FritzCall.fwVersion.value == "old":
@@ -2758,7 +2758,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 # 			elif config.plugins.FritzCall.fwVersion.value == "upnp":
 			fritzbox = FritzCallFBF.FritzCallFBF_upnp()
 		else:
-			Notifications.AddNotification(MessageBox, _("FRITZ!Box firmware version not configured! Please set it in the configuration."), type = MessageBox.TYPE_INFO, timeout = 0)
+			Notifications.AddNotification(MessageBox, _("FRITZ!Box firmware version not configured! Please set it in the configuration."), type=MessageBox.TYPE_INFO, timeout=0)
 
 		phonebook.reload()
 
@@ -2788,18 +2788,18 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			if fritzbox and config.plugins.FritzCall.fwVersion.value:
 				self.session.open(FritzDisplayCalls)
 			else:
-				self.session.open(MessageBox, _("Cannot get calls from FRITZ!Box"), type = MessageBox.TYPE_INFO)
+				self.session.open(MessageBox, _("Cannot get calls from FRITZ!Box"), type=MessageBox.TYPE_INFO)
 		else:
-			self.session.open(MessageBox, _("Plugin not enabled"), type = MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, _("Plugin not enabled"), type=MessageBox.TYPE_INFO)
 
 	def displayPhonebook(self):
 		if phonebook:
 			if config.plugins.FritzCall.enable.value:
 				self.session.open(phonebook.FritzDisplayPhonebook)
 			else:
-				self.session.open(MessageBox, _("Plugin not enabled"), type = MessageBox.TYPE_INFO)
+				self.session.open(MessageBox, _("Plugin not enabled"), type=MessageBox.TYPE_INFO)
 		else:
-			self.session.open(MessageBox, _("No phonebook"), type = MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, _("No phonebook"), type=MessageBox.TYPE_INFO)
 
 	def about(self):
 		self.session.open(FritzAbout)
@@ -2809,9 +2809,9 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			if fritzbox and fritzbox.information:
 				self.session.open(FritzMenu)
 			else:
-				self.session.open(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type = MessageBox.TYPE_INFO)
+				self.session.open(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type=MessageBox.TYPE_INFO)
 		else:
-			self.session.open(MessageBox, _("Plugin not enabled"), type = MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, _("Plugin not enabled"), type=MessageBox.TYPE_INFO)
 
 standbyMode = False
 
@@ -2889,7 +2889,7 @@ class FritzCallList(object):
 				debug("[FritzCallList] '%s %s %s %s'", date, caller, direction, phone)
 
 		# display screen
-		Notifications.AddNotification(MessageBox, text, type = MessageBox.TYPE_INFO)
+		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO)
 		self.callList = []
 
 callList = FritzCallList()
@@ -2952,7 +2952,7 @@ def findFace(number, name):
 	return facesFile
 
 class MessageBoxPixmap(Screen):
-	def __init__(self, session, text, number = "", name = "", timeout = -1):
+	def __init__(self, session, text, number="", name="", timeout=-1):
 		if not config.plugins.FritzCall.advancedSkin.value:
 			self.skin = """
 		<screen name="MessageBoxPixmap" position="center,center" size="600,10" title="New Call">
@@ -3024,7 +3024,7 @@ class MessageBoxPixmap(Screen):
 		faceFile = findFace(self._number, self._name)
 		picPixmap = LoadPixmap(faceFile)
 		if not picPixmap:  # that means most probably, that the picture is not 8 bit...
-			Notifications.AddNotification(MessageBox, _("Found picture\n\n%s\n\nBut did not load. Probably not PNG, 8-bit") % faceFile, type = MessageBox.TYPE_ERROR)
+			Notifications.AddNotification(MessageBox, _("Found picture\n\n%s\n\nBut did not load. Probably not PNG, 8-bit") % faceFile, type=MessageBox.TYPE_ERROR)
 			if DESKTOP_WIDTH <= 720:
 				picPixmap = LoadPixmap(resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/FritzCall/images/no-face-error-sd.png"))
 			elif DESKTOP_WIDTH <= 1280:
@@ -3158,7 +3158,7 @@ def notifyCall(event, date, number, caller, phone, connID): # @UnusedVariable # 
 			text = _("Outgoing Call on %(date)s at %(time)s to\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nfrom: %(phone)s") % {'date':date[:8], 'time':date[9:], 'number':number, 'caller':caller, 'phone':phone}
 		info("[FritzCall]\n%s", text)
 		# Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
-		Notifications.AddNotification(MessageBoxPixmap, text, number = number, name = caller, timeout = config.plugins.FritzCall.timeout.value)
+		Notifications.AddNotification(MessageBoxPixmap, text, number=number, name=caller, timeout=config.plugins.FritzCall.timeout.value)
 	elif config.plugins.FritzCall.afterStandby.value == "inList":
 		#
 		# if not yet done, register function to show call list
@@ -3411,13 +3411,13 @@ class FritzClientFactory(ReconnectingClientFactory):
 
 		if config.plugins.FritzCall.connectionVerbose.value == "on":
 			info("[FRITZ!FritzClientFactory]")
-			Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box..."), type = MessageBox.TYPE_INFO, timeout = 2)
+			Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box..."), type=MessageBox.TYPE_INFO, timeout=2)
 
 	def buildProtocol(self, addr):  # @UnusedVariable # pylint: disable=W0613
 		global fritzbox
 		if config.plugins.FritzCall.connectionVerbose.value == "on":
 			info("[FRITZ!FritzClientFactory]")
-			Notifications.AddNotification(MessageBox, _("Connected to FRITZ!Box!"), type = MessageBox.TYPE_INFO, timeout = 4)
+			Notifications.AddNotification(MessageBox, _("Connected to FRITZ!Box!"), type=MessageBox.TYPE_INFO, timeout=4)
 		self.resetDelay()
 		# initDebug()
 		initCbC()
@@ -3426,18 +3426,18 @@ class FritzClientFactory(ReconnectingClientFactory):
 		try:
 			decode(config.plugins.FritzCall.password.value)
 		except binascii.Error:
-			Notifications.AddNotification(MessageBox, _("There might be a problem with your FritzCall %spassword.\nCheck in the configuration.") % "", type = MessageBox.TYPE_WARNING)
+			Notifications.AddNotification(MessageBox, _("There might be a problem with your FritzCall %spassword.\nCheck in the configuration.") % "", type=MessageBox.TYPE_WARNING)
 			config.plugins.FritzCall.password.value = encode(config.plugins.FritzCall.password.value)
 			config.plugins.FritzCall.password.save()
 		try:
 			decode(config.plugins.FritzCall.guestPassword.value)
 		except binascii.Error:
-			Notifications.AddNotification(MessageBox, _("There might be a problem with your FritzCall %spassword.\nCheck in the configuration.") % _("guest "), type = MessageBox.TYPE_WARNING)
+			Notifications.AddNotification(MessageBox, _("There might be a problem with your FritzCall %spassword.\nCheck in the configuration.") % _("guest "), type=MessageBox.TYPE_WARNING)
 			config.plugins.FritzCall.guestPassword.value = encode(config.plugins.FritzCall.guestPassword.value)
 			config.plugins.FritzCall.guestPassword.save()
 
 		if not config.plugins.FritzCall.fwVersion.value:
-			Notifications.AddNotification(MessageBox, _("To enjoy more functionalities of your FRITZ!Box, configure the firmware version!"), type = MessageBox.TYPE_INFO, timeout = 4)
+			Notifications.AddNotification(MessageBox, _("To enjoy more functionalities of your FRITZ!Box, configure the firmware version!"), type=MessageBox.TYPE_INFO, timeout=4)
 			fritzbox = FritzCallFBF.FritzCallFBF_dummy()
 			config.plugins.FritzCall.fritzphonebook.value = False
 		elif config.plugins.FritzCall.fwVersion.value == "old":
@@ -3452,7 +3452,7 @@ class FritzClientFactory(ReconnectingClientFactory):
 			fritzbox = FritzCallFBF.FritzCallFBF_upnp()
 		else:
 			fritzbox = None
-			Notifications.AddNotification(MessageBox, _("FRITZ!Box firmware version not configured! Please set it in the configuration."), type = MessageBox.TYPE_INFO, timeout = 0)
+			Notifications.AddNotification(MessageBox, _("FRITZ!Box firmware version not configured! Please set it in the configuration."), type=MessageBox.TYPE_INFO, timeout=0)
 		phonebook.reload()
 		return FritzProtocol()
 
@@ -3460,14 +3460,14 @@ class FritzClientFactory(ReconnectingClientFactory):
 		global fritzbox
 		if not self.hangup_ok and config.plugins.FritzCall.connectionVerbose.value != "off":
 			warn("[FRITZ!FritzClientFactory] - clientConnectionLost")
-			Notifications.AddNotification(MessageBox, _("Connection to FRITZ!Box! lost\n (%s)\nretrying...") % reason.getErrorMessage(), type = MessageBox.TYPE_INFO, timeout = config.plugins.FritzCall.timeout.value)
+			Notifications.AddNotification(MessageBox, _("Connection to FRITZ!Box! lost\n (%s)\nretrying...") % reason.getErrorMessage(), type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
 		ReconnectingClientFactory.clientConnectionLost(self, connector, reason)
 		fritzbox = None
 
 	def clientConnectionFailed(self, connector, reason):
 		global fritzbox
 		if config.plugins.FritzCall.connectionVerbose.value != "off":
-			Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box failed\n (%s)\nretrying...") % reason.getErrorMessage(), type = MessageBox.TYPE_INFO, timeout = config.plugins.FritzCall.timeout.value)
+			Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box failed\n (%s)\nretrying...") % reason.getErrorMessage(), type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
 		ReconnectingClientFactory.clientConnectionFailed(self, connector, reason)
 		fritzbox = None
 
@@ -3494,32 +3494,32 @@ class FritzCall(object):
 			self.desc[1].disconnect()
 			self.desc = None
 
-def displayCalls(session, servicelist = None):  # @UnusedVariable # pylint: disable=W0613
+def displayCalls(session, servicelist=None):  # @UnusedVariable # pylint: disable=W0613
 	if config.plugins.FritzCall.enable.value:
 		if fritzbox and config.plugins.FritzCall.fwVersion.value:
 			session.open(FritzDisplayCalls)
 		else:
-			Notifications.AddNotification(MessageBox, _("Cannot get calls from FRITZ!Box"), type = MessageBox.TYPE_INFO)
+			Notifications.AddNotification(MessageBox, _("Cannot get calls from FRITZ!Box"), type=MessageBox.TYPE_INFO)
 	else:
-		Notifications.AddNotification(MessageBox, _("Plugin not enabled"), type = MessageBox.TYPE_INFO)
+		Notifications.AddNotification(MessageBox, _("Plugin not enabled"), type=MessageBox.TYPE_INFO)
 
-def displayPhonebook(session, servicelist = None):  # @UnusedVariable # pylint: disable=W0613
+def displayPhonebook(session, servicelist=None):  # @UnusedVariable # pylint: disable=W0613
 	if phonebook:
 		if config.plugins.FritzCall.enable.value:
 			session.open(phonebook.FritzDisplayPhonebook)
 		else:
-			Notifications.AddNotification(MessageBox, _("Plugin not enabled"), type = MessageBox.TYPE_INFO)
+			Notifications.AddNotification(MessageBox, _("Plugin not enabled"), type=MessageBox.TYPE_INFO)
 	else:
-		Notifications.AddNotification(MessageBox, _("No phonebook"), type = MessageBox.TYPE_INFO)
+		Notifications.AddNotification(MessageBox, _("No phonebook"), type=MessageBox.TYPE_INFO)
 
-def displayFBFStatus(session, servicelist = None):  # @UnusedVariable # pylint: disable=W0613
+def displayFBFStatus(session, servicelist=None):  # @UnusedVariable # pylint: disable=W0613
 	if config.plugins.FritzCall.enable.value:
 		if fritzbox and fritzbox.information:
 			session.open(FritzMenu)
 		else:
-			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type = MessageBox.TYPE_INFO)
+			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type=MessageBox.TYPE_INFO)
 	else:
-		Notifications.AddNotification(MessageBox, _("Plugin not enabled"), type = MessageBox.TYPE_INFO)
+		Notifications.AddNotification(MessageBox, _("Plugin not enabled"), type=MessageBox.TYPE_INFO)
 
 def main(session, **kwargs):  # @UnusedVariable  pylint: disable=W0613
 	session.open(FritzCallSetup)
@@ -3548,8 +3548,8 @@ def Plugins(**kwargs):  # @UnusedVariable # pylint: disable=W0613,C0103
 	what_calls = _("Phone calls")
 	what_phonebook = _("Phonebook")
 	what_status = _("FRITZ!Box Fon Status")
-	return [PluginDescriptor(name = "FritzCall", description = what, where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc = main),
-		PluginDescriptor(name = what_calls, description = what_calls, where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = displayCalls),
-		PluginDescriptor(name = what_phonebook, description = what_phonebook, where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = displayPhonebook),
-		PluginDescriptor(name = what_status, description = what_status, where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = displayFBFStatus),
-		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart)]
+	return [PluginDescriptor(name="FritzCall", description=what, where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main),
+		PluginDescriptor(name=what_calls, description=what_calls, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayCalls),
+		PluginDescriptor(name=what_phonebook, description=what_phonebook, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayPhonebook),
+		PluginDescriptor(name=what_status, description=what_status, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayFBFStatus),
+		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]

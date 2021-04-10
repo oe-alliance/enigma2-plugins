@@ -36,7 +36,7 @@ def EPGSearchSelection__init__(self, session, service, zapFunc=None, eventid=Non
 				(_("Search"), "search"),
 				(_("Select channel"), "standard"),
 				]
-				dlg = self.session.openWithCallback(self.CallbackChoiceAction, ChoiceBox, title= _("Select action:"), list = list)
+				dlg = self.session.openWithCallback(self.CallbackChoiceAction, ChoiceBox, title=_("Select action:"), list=list)
 				dlg.setTitle(_("Choice list EPGSearch"))
 		self["epgsearch_actions"] = ActionMap(["EPGSelectActions"],
 				{
@@ -118,32 +118,32 @@ def movielist(session, service, **kwargs):
 def Plugins(**kwargs):
 	path = [
 		PluginDescriptor(
-			where = [PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART],
-			fnc = autostart,
+			where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART],
+			fnc=autostart,
 		),
 		PluginDescriptor(
-			name = _("EPGSearch"),
-			description = _("Search EPG by title event"),
-			where = PluginDescriptor.WHERE_PLUGINMENU,
-			fnc = main,
-			icon = "epg.png",
-			needsRestart = False,
+			name=_("EPGSearch"),
+			description=_("Search EPG by title event"),
+			where=PluginDescriptor.WHERE_PLUGINMENU,
+			fnc=main,
+			icon="epg.png",
+			needsRestart=False,
 		),
 		PluginDescriptor(
-			name = _("search EPG..."),
-			where = PluginDescriptor.WHERE_EVENTINFO,
-			fnc = eventinfo,
-			needsRestart = False,
+			name=_("search EPG..."),
+			where=PluginDescriptor.WHERE_EVENTINFO,
+			fnc=eventinfo,
+			needsRestart=False,
 		),
 		PluginDescriptor(
-			description = _("search EPG"),
-			where = PluginDescriptor.WHERE_MOVIELIST,
-			fnc = movielist,
-			needsRestart = False,
+			description=_("search EPG"),
+			where=PluginDescriptor.WHERE_MOVIELIST,
+			fnc=movielist,
+			needsRestart=False,
 		),
 	]
 	if config.plugins.epgsearch.search_in_channelmenu.value:
-		path.append(PluginDescriptor(name = _("Search event in EPG"), where=PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU, needsRestart = False, fnc=channelscontext))
+		path.append(PluginDescriptor(name=_("Search event in EPG"), where=PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU, needsRestart=False, fnc=channelscontext))
 	if config.plugins.epgsearch.show_in_furtheroptionsmenu.value:
-		path.append(PluginDescriptor(name = _("Search event in EPG"), where = PluginDescriptor.WHERE_EVENTINFO, fnc = epgfurther, needsRestart = False))
+		path.append(PluginDescriptor(name=_("Search event in EPG"), where=PluginDescriptor.WHERE_EVENTINFO, fnc=epgfurther, needsRestart=False))
 	return path

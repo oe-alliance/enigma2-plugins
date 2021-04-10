@@ -36,9 +36,9 @@ from os import system
 
 
 config.plugins.valiXDsetup  = ConfigSubsection()
-config.plugins.valiXDsetup.ShowPicons = ConfigYesNo(default = False)
-config.plugins.valiXDsetup.CenterMenus = ConfigYesNo(default = False)
-config.plugins.valiXDsetup.Style = ConfigSelection(default="base", choices = [
+config.plugins.valiXDsetup.ShowPicons = ConfigYesNo(default=False)
+config.plugins.valiXDsetup.CenterMenus = ConfigYesNo(default=False)
+config.plugins.valiXDsetup.Style = ConfigSelection(default="base", choices=[
 				("base", _("Base")),
 				("beyonddreams", _("Beyond Dreams")),
 				("validator", _("Validator")),
@@ -51,26 +51,26 @@ config.plugins.valiXDsetup.Style = ConfigSelection(default="base", choices = [
 				("avalon", _("Avalon")),
 				("blues", _("Blues of dream"))
 				])
-config.plugins.valiXDsetup.ChannSelector = ConfigSelection(default="simple", choices = [
+config.plugins.valiXDsetup.ChannSelector = ConfigSelection(default="simple", choices=[
 				("simple", _("Simple")),
 				("full", _("Full")),
 				("full-vert", _("Full-vertical")),
 				("full-hor", _("Full-horizontal")),
 				("pig", _("with PiG"))
 				])
-config.plugins.valiXDsetup.dmType = ConfigSelection(default="800", choices = [
+config.plugins.valiXDsetup.dmType = ConfigSelection(default="800", choices=[
 				("800", _("DM-800 Simple")),
 				("8000", _("DM-8000 Full")),
 				("7025", _("DM-7025")),
 				("verysimple", _("Very simple"))
 				])
-config.plugins.valiXDsetup.BG = ConfigText(default = "18111112", fixed_size=8)
-config.plugins.valiXDsetup.FG = ConfigText(default = "f0f0f0", fixed_size=6)
-config.plugins.valiXDsetup.secondBG = ConfigText(default = "18071230", fixed_size=8)
-config.plugins.valiXDsetup.secondFG = ConfigText(default = "fcc000", fixed_size=6)
-config.plugins.valiXDsetup.selBG = ConfigText(default = "08303240", fixed_size=8)
-config.plugins.valiXDsetup.selFG = ConfigText(default = "fcc000", fixed_size=6)
-config.plugins.valiXDsetup.pollTime = ConfigInteger(default = 15, limits = (3, 60))
+config.plugins.valiXDsetup.BG = ConfigText(default="18111112", fixed_size=8)
+config.plugins.valiXDsetup.FG = ConfigText(default="f0f0f0", fixed_size=6)
+config.plugins.valiXDsetup.secondBG = ConfigText(default="18071230", fixed_size=8)
+config.plugins.valiXDsetup.secondFG = ConfigText(default="fcc000", fixed_size=6)
+config.plugins.valiXDsetup.selBG = ConfigText(default="08303240", fixed_size=8)
+config.plugins.valiXDsetup.selFG = ConfigText(default="fcc000", fixed_size=6)
+config.plugins.valiXDsetup.pollTime = ConfigInteger(default=15, limits=(3, 60))
 
 
 
@@ -84,7 +84,7 @@ def main(session, **kwargs):
 
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name="Vali-XD Skin Control", description=_("Configuration tool for Vali-XD skins"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main)
+	return PluginDescriptor(name="Vali-XD Skin Control", description=_("Configuration tool for Vali-XD skins"), where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main)
 
 
 

@@ -165,7 +165,7 @@ class EpgSingleTab(EpgBaseTab):
 				
 		return sRef
 		
-	def show(self, oldMode, firstBouquet, currentBouquet, currentBouquetIndex, currentMode, showOutdated, sRef = None, timerListMode = None):
+	def show(self, oldMode, firstBouquet, currentBouquet, currentBouquetIndex, currentMode, showOutdated, sRef=None, timerListMode=None):
 		# save the last state
 		self.__currentBouquet = currentBouquet
 		self.__currentBouquetIndex = currentBouquetIndex
@@ -255,7 +255,7 @@ class EpgSingleTab(EpgBaseTab):
 		self.parentInstance.currentBouquetIndex = self.__currentBouquetIndex
 		self.parentInstance.lastMultiEpgIndex = self.serviceIndex
 		
-	def sort(self, eventId = None):
+	def sort(self, eventId=None):
 		if eventId == None:
 			cur = self.tabList.getCurrent()
 			eventId = cur[1]

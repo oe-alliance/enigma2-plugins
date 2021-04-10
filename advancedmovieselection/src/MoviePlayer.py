@@ -141,8 +141,7 @@ class PlayerBase(MoviePreview, SelectionEventInfo):
                 "showEventInfoPlugin": (self.openServiceList, _("Open servicelist"))
             })
         self.endless_loop = False
-        self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-            {
+        self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
                 iPlayableService.evEnd: self.__evServiceEnd
             })
     
@@ -180,8 +179,7 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
                     "back": (self.close, _("Leave movie player"))
                 })
         if config.AdvancedMovieSelection.use_original_movieplayer_summary.value == True: 
-            self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-                {
+            self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
                         iPlayableService.evUpdatedInfo: self.__updateInfo
                 })
         self.firstime = True
@@ -475,7 +473,7 @@ if pluginPresent.BludiscPlayer:
                     (_("No"), "continue")
                 )
                 from Screens.ChoiceBox import ChoiceBox
-                self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Stop playing this movie?"), list = list)
+                self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Stop playing this movie?"), list=list)
             else:
                 self.leavePlayerConfirmed([True, "quit"])
     

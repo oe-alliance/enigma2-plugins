@@ -169,7 +169,7 @@ def MoviePlayer__init__(self, *args, **kwargs):
 		{
 			"left": self.left,
 			"right": self.right
-		}, prio = -2)
+		}, prio=-2)
 
 def MoviePlayer_up(self):
 	slist = self.servicelist
@@ -512,10 +512,10 @@ def overwriteFunctions():
 	PictureInPicture.move = PictureInPicture_move
 
 config.plugins.pipzap = ConfigSubsection()
-config.plugins.pipzap.enable_hotkey = ConfigEnableDisable(default = True)
-config.plugins.pipzap.show_in_plugins = ConfigEnableDisable(default = False)
-config.plugins.pipzap.show_label = ConfigEnableDisable(default = True)
-config.plugins.pipzap.show_help = ConfigEnableDisable(default = True)
+config.plugins.pipzap.enable_hotkey = ConfigEnableDisable(default=True)
+config.plugins.pipzap.show_in_plugins = ConfigEnableDisable(default=False)
+config.plugins.pipzap.show_label = ConfigEnableDisable(default=True)
+config.plugins.pipzap.show_help = ConfigEnableDisable(default=True)
 
 def autostart(reason, **kwargs):
 	if reason == 0:

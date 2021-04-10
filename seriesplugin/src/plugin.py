@@ -304,68 +304,68 @@ def Plugins(**kwargs):
 	descriptors = []
 	
 	descriptors.append( PluginDescriptor(
-											name = NAME + " " + _("Setup"),
-											description = NAME + " " + _("Setup"),
-											where = PluginDescriptor.WHERE_PLUGINMENU,
-											fnc = setup,
-											icon = "plugin.png",
-											needsRestart = False) )
+											name=NAME + " " + _("Setup"),
+											description=NAME + " " + _("Setup"),
+											where=PluginDescriptor.WHERE_PLUGINMENU,
+											fnc=setup,
+											icon="plugin.png",
+											needsRestart=False) )
 	
 	if config.plugins.seriesplugin.enabled.value:
 		
 		descriptors.append( PluginDescriptor(
-													where = PluginDescriptor.WHERE_SESSIONSTART,
-													needsRestart = False,
-													fnc = start) )
+													where=PluginDescriptor.WHERE_SESSIONSTART,
+													needsRestart=False,
+													fnc=start) )
 
 		if config.plugins.seriesplugin.menu_info.value:
 			descriptors.append( PluginDescriptor(
-													name = SHOWINFO,
-													description = SHOWINFO,
-													where = PluginDescriptor.WHERE_EVENTINFO,
-													needsRestart = False,
-													fnc = info) )
+													name=SHOWINFO,
+													description=SHOWINFO,
+													where=PluginDescriptor.WHERE_EVENTINFO,
+													needsRestart=False,
+													fnc=info) )
 
 		if config.plugins.seriesplugin.menu_extensions.value:
 			descriptors.append(PluginDescriptor(
-													name = SHOWINFO,
-													description = SHOWINFO,
-													where = PluginDescriptor.WHERE_EXTENSIONSMENU,
-													fnc = sp_extension,
-													needsRestart = False) )
+													name=SHOWINFO,
+													description=SHOWINFO,
+													where=PluginDescriptor.WHERE_EXTENSIONSMENU,
+													fnc=sp_extension,
+													needsRestart=False) )
 		
 		if config.plugins.seriesplugin.check_timer_list.value:
 			descriptors.append(PluginDescriptor(
-													name = CHECKTIMERS,
-													description = CHECKTIMERS,
-													where = PluginDescriptor.WHERE_EXTENSIONSMENU,
-													fnc = checkTimers,
-													needsRestart = False) )
+													name=CHECKTIMERS,
+													description=CHECKTIMERS,
+													where=PluginDescriptor.WHERE_EXTENSIONSMENU,
+													fnc=checkTimers,
+													needsRestart=False) )
 		
 		if config.plugins.seriesplugin.menu_movie_info.value:
 			descriptors.append( PluginDescriptor(
-													name = SHOWINFO,
-													description = SHOWINFO,
-													where = PluginDescriptor.WHERE_MOVIELIST,
-													fnc = movielist_info,
-													needsRestart = False) )
+													name=SHOWINFO,
+													description=SHOWINFO,
+													where=PluginDescriptor.WHERE_MOVIELIST,
+													fnc=movielist_info,
+													needsRestart=False) )
 		
 		if config.plugins.seriesplugin.menu_movie_rename.value:
 			descriptors.append( PluginDescriptor(
-													name = RENAMESERIES,
-													description = RENAMESERIES,
-													where = PluginDescriptor.WHERE_MOVIELIST,
-													fnc = movielist_rename,
-													needsRestart = False) )
+													name=RENAMESERIES,
+													description=RENAMESERIES,
+													where=PluginDescriptor.WHERE_MOVIELIST,
+													fnc=movielist_rename,
+													needsRestart=False) )
 		
 		if config.plugins.seriesplugin.menu_channel.value:
 			try:
 				descriptors.append( PluginDescriptor(
-													name = SHOWINFO,
-													description = SHOWINFO,
-													where = PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU,
-													fnc = channel,
-													needsRestart = False) )
+													name=SHOWINFO,
+													description=SHOWINFO,
+													where=PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU,
+													fnc=channel,
+													needsRestart=False) )
 			except:
 				addSeriesPlugin(WHERE_CHANNELMENU, SHOWINFO)
 		
@@ -388,19 +388,19 @@ def addSeriesPlugin(menu, title, fnc=None):
 	else:
 		from Components.PluginComponent import plugins
 		if plugins:
-			for p in plugins.getPlugins( where = menu ):
+			for p in plugins.getPlugins( where=menu ):
 				if p.name == title:
 					# Plugin is already in menu
 					break
 			else:
 				# Plugin not in menu - add it
 				plugin = PluginDescriptor(
-																name = title,
-																description = title,
-																where = menu,
-																icon = "plugin.png",
-																needsRestart = False,
-																fnc = fnc)
+																name=title,
+																description=title,
+																where=menu,
+																icon="plugin.png",
+																needsRestart=False,
+																fnc=fnc)
 				if menu in plugins.plugins:
 					plugins.plugins[ menu ].append(plugin)
 
@@ -417,7 +417,7 @@ def removeSeriesPlugin(menu, title):
 	else:
 		from Components.PluginComponent import plugins
 		if plugins:
-			for p in plugins.getPlugins( where = menu ):
+			for p in plugins.getPlugins( where=menu ):
 				if p.name == title:
 					plugins.plugins[ menu ].remove(p)
 					break

@@ -29,7 +29,7 @@ NoExplicitHeaderFiles = frozenset(('getpid.xml', 'tvbrowser.xml', ))
 TextJavascriptHeaderFiles = frozenset(('strings.js.xml', ))
 
 class ScreenPage(resource.Resource):
-	def __init__(self, session, path, addSlash = False):
+	def __init__(self, session, path, addSlash=False):
 		resource.Resource.__init__(self)
 
 		self.session = session

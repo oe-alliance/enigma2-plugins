@@ -208,7 +208,7 @@ def do_one(dest_addr, timeout):
     return delay
  
  
-def verbose_ping(dest_addr, timeout = 2, count = 4):
+def verbose_ping(dest_addr, timeout=2, count=4):
     """
     Send >count< ping to >dest_addr< with the given >timeout< and display
     the result.

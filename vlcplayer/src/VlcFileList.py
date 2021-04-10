@@ -105,8 +105,8 @@ class VlcFileList(MenuList):
 			for directory in directories:
 				name, path = directory
 				directoryEntries.append((path, True, name))
-			fileEntries.sort(cmp = lambda x, y: cmp(x[0], y[0]))
-			directoryEntries.sort(cmp = lambda x, y: cmp(x[0], y[0]))
+			fileEntries.sort(cmp=lambda x, y: cmp(x[0], y[0]))
+			directoryEntries.sort(cmp=lambda x, y: cmp(x[0], y[0]))
 			success = True
 		self.list = directoryEntries + fileEntries
 		self.l.setList(self.list)

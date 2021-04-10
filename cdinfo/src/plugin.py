@@ -12,14 +12,14 @@ from Components.ConfigList import ConfigListScreen
 import six
 
 config.plugins.CDInfo = ConfigSubsection()
-config.plugins.CDInfo.useCDTEXT = ConfigYesNo(default = True)
-config.plugins.CDInfo.useCDDB = ConfigYesNo(default = True)
-config.plugins.CDInfo.displayString = ConfigText("$i - $t ($a)", fixed_size = False)
-config.plugins.CDInfo.preferCDDB = ConfigYesNo(default = False)
-config.plugins.CDInfo.CDDB_server = ConfigText("freedb.freedb.org", fixed_size = False)
-config.plugins.CDInfo.CDDB_port = ConfigInteger(8880, limits = (1, 65536))
-config.plugins.CDInfo.CDDB_timeout = ConfigInteger(20, limits = (-1, 60))
-config.plugins.CDInfo.CDDB_cache = ConfigYesNo(default = True)
+config.plugins.CDInfo.useCDTEXT = ConfigYesNo(default=True)
+config.plugins.CDInfo.useCDDB = ConfigYesNo(default=True)
+config.plugins.CDInfo.displayString = ConfigText("$i - $t ($a)", fixed_size=False)
+config.plugins.CDInfo.preferCDDB = ConfigYesNo(default=False)
+config.plugins.CDInfo.CDDB_server = ConfigText("freedb.freedb.org", fixed_size=False)
+config.plugins.CDInfo.CDDB_port = ConfigInteger(8880, limits=(1, 65536))
+config.plugins.CDInfo.CDDB_timeout = ConfigInteger(20, limits=(-1, 60))
+config.plugins.CDInfo.CDDB_cache = ConfigYesNo(default=True)
 
 class CDInfo(ConfigListScreen, Screen):
 	skin = """
@@ -36,7 +36,7 @@ class CDInfo(ConfigListScreen, Screen):
 		</screen>
 		"""
 	
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		self.skin = CDInfo.skin
 		Screen.__init__(self, session)
 
@@ -173,12 +173,12 @@ class Query:
 								#tracktext += "Dauer=%ss " % self.getText(track.childNodes)
 							self.tracklisting[index]=trackinfo
 
-	def updateAlbuminfo(self, replace = False):
+	def updateAlbuminfo(self, replace=False):
 		for tag in self.albuminfo:
 			if tag not in self.mp.AudioCD_albuminfo or replace:
 				self.mp.AudioCD_albuminfo[tag] = self.albuminfo[tag]
 	
-	def updatePlaylist(self, replace = False):
+	def updatePlaylist(self, replace=False):
 		for idx in list(range(len(self.playlist))):
 			ref = self.playlist.getServiceRefList()[idx]
 			track = idx+1
@@ -230,11 +230,11 @@ class Query:
 		if not self.xml_parse_output(self.cddb_output):
 			return
 		if config.plugins.CDInfo.preferCDDB.value:
-			self.updatePlaylist(replace = True)
-			self.updateAlbuminfo(replace = True)
+			self.updatePlaylist(replace=True)
+			self.updateAlbuminfo(replace=True)
 		else:
-			self.updatePlaylist(replace = False)
-			self.updateAlbuminfo(replace = False)
+			self.updatePlaylist(replace=False)
+			self.updateAlbuminfo(replace=False)
 		self.mp.readTitleInformation()
 		self.cddb_output = ""
 
@@ -244,11 +244,11 @@ class Query:
 		if not self.xml_parse_output(self.cdtext_output):
 			return
 		if not config.plugins.CDInfo.preferCDDB.value:
-			self.updatePlaylist(replace = True)
-			self.updateAlbuminfo(replace = True)
+			self.updatePlaylist(replace=True)
+			self.updateAlbuminfo(replace=True)
 		else:
-			self.updatePlaylist(replace = False)
-			self.updateAlbuminfo(replace = False)
+			self.updatePlaylist(replace=False)
+			self.updateAlbuminfo(replace=False)
 		self.mp.readTitleInformation()
 		self.cdtext_output = ""
 
@@ -256,4 +256,4 @@ def main(session, **kwargs):
 	session.open(CDInfo)
 
 def Plugins(**kwargs):
-	return [ PluginDescriptor(name="CDInfo", description=_("AudioCD info from CDDB & CD-Text"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main, icon="plugin.png") ]
+	return [ PluginDescriptor(name="CDInfo", description=_("AudioCD info from CDDB & CD-Text"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main, icon="plugin.png") ]

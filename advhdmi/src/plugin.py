@@ -78,7 +78,7 @@ def TimeSpanEntryInit():
 		("4", WEEKDAYS[4]),
 		("5", WEEKDAYS[5]),
 		("6", WEEKDAYS[6]),
-	], default = "0")
+	], default="0")
 	config.plugins.AdvHdmiCec.Entries[i].toWD = ConfigSelection(choices=[
 		("0", WEEKDAYS[0]),
 		("1", WEEKDAYS[1]),
@@ -87,25 +87,25 @@ def TimeSpanEntryInit():
 		("4", WEEKDAYS[4]),
 		("5", WEEKDAYS[5]),
 		("6", WEEKDAYS[6]),
-	], default = "6")
-	config.plugins.AdvHdmiCec.Entries[i].begin = ConfigClock(default = int(begin))
-	config.plugins.AdvHdmiCec.Entries[i].end = ConfigClock(default = int(end))
+	], default="6")
+	config.plugins.AdvHdmiCec.Entries[i].begin = ConfigClock(default=int(begin))
+	config.plugins.AdvHdmiCec.Entries[i].end = ConfigClock(default=int(end))
 	return config.plugins.AdvHdmiCec.Entries[i]
 
 config.plugins.AdvHdmiCec = ConfigSubsection()
-config.plugins.AdvHdmiCec.enable = ConfigYesNo(default = False)
-config.plugins.AdvHdmiCec.debug = ConfigYesNo(default = False)
-config.plugins.AdvHdmiCec.enable_power_on = ConfigYesNo(default = True)
-config.plugins.AdvHdmiCec.enable_power_off = ConfigYesNo(default = True)
-config.plugins.AdvHdmiCec.disable_after_enigmastart = ConfigYesNo(default = False)
-config.plugins.AdvHdmiCec.disable_from_webif = ConfigYesNo(default = False)
+config.plugins.AdvHdmiCec.enable = ConfigYesNo(default=False)
+config.plugins.AdvHdmiCec.debug = ConfigYesNo(default=False)
+config.plugins.AdvHdmiCec.enable_power_on = ConfigYesNo(default=True)
+config.plugins.AdvHdmiCec.enable_power_off = ConfigYesNo(default=True)
+config.plugins.AdvHdmiCec.disable_after_enigmastart = ConfigYesNo(default=False)
+config.plugins.AdvHdmiCec.disable_from_webif = ConfigYesNo(default=False)
 config.plugins.AdvHdmiCec.entriescount =  ConfigInteger(0)
 config.plugins.AdvHdmiCec.Entries = ConfigSubList()
 config.plugins.AdvHdmiCec.show_in = ConfigSelection(choices=[
 		("system", _("systemmenue")),
 		("plugin", _("pluginmenue")),
 		("extension", _("extensions")),
-	], default = "system")
+	], default="system")
 initTimeSpanEntryList()
 
 ADVHDMI_VERSION = "1.4.3"
@@ -181,31 +181,31 @@ def showinSetup(menuid):
 def Plugins(**kwargs):
 	list = [
 		PluginDescriptor(
-			where = PluginDescriptor.WHERE_AUTOSTART,
-			fnc = autostart)
+			where=PluginDescriptor.WHERE_AUTOSTART,
+			fnc=autostart)
 	]
 	if config.plugins.AdvHdmiCec.show_in.value == "system":
 		list.append (PluginDescriptor(
 			name="Advanced HDMI-Cec Control",
 			description=_("manage when HDMI Cec is enabled"),
-			where = PluginDescriptor.WHERE_MENU,
+			where=PluginDescriptor.WHERE_MENU,
 			fnc=showinSetup)
 		)
 	if config.plugins.AdvHdmiCec.show_in.value == "plugin":
 		list.append (PluginDescriptor(
-			name = "Advanced HDMI-Cec Control",
-			description = _("manage when HDMI Cec is enabled"),
-			where = PluginDescriptor.WHERE_PLUGINMENU,
-			fnc = main,
-			needsRestart = False)
+			name="Advanced HDMI-Cec Control",
+			description=_("manage when HDMI Cec is enabled"),
+			where=PluginDescriptor.WHERE_PLUGINMENU,
+			fnc=main,
+			needsRestart=False)
 		)
 	if config.plugins.AdvHdmiCec.show_in.value == "extension":
 		list.append (PluginDescriptor(
-				name = "Advanced HDMI-Cec Control",
-				description = _("manage when HDMI Cec is enabled"),
-				where = PluginDescriptor.WHERE_EXTENSIONSMENU,
-				fnc = main,
-				needsRestart = False)
+				name="Advanced HDMI-Cec Control",
+				description=_("manage when HDMI Cec is enabled"),
+				where=PluginDescriptor.WHERE_EXTENSIONSMENU,
+				fnc=main,
+				needsRestart=False)
 		)
 
 	return list

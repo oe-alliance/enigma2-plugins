@@ -180,7 +180,7 @@ class YouTubeUserListScreen(Screen):
 		self.userlist.pageDown()
 
 
-	def close(self, loginState = LOGIN_CANCEL):
+	def close(self, loginState=LOGIN_CANCEL):
 		youTubeUserConfig.setAsDefault(self.defaultUser)
 		Screen.close(self, loginState)
 

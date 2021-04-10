@@ -128,7 +128,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 		self.list = []
 		self.state = MAIN
 		self.build()
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.change)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.change)
 		
 		# Override selectionChanged because our config tuples are bigger
 		self.onChangedEntry = [ ]

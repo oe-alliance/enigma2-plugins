@@ -91,7 +91,7 @@ class SHOUTcasterFavorites:
             stream.getURL(boundFunction(self.addStreamCb, stream))
             return True, "Stream added"
 
-    def addStreamCb(self, stream, url = None):
+    def addStreamCb(self, stream, url=None):
         self.configparser.set(stream.getName(), "description", stream.getDescription())
         self.configparser.set(stream.getName(), "url", url)
         self.configparser.set(stream.getName(), "type", stream.getType())

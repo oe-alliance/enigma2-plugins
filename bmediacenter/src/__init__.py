@@ -16,7 +16,7 @@ config.plugins.mc_globalsettings = ConfigSubsection()
 config.plugins.mc_globalsettings.showinmainmenu = ConfigYesNo(default=True)
 config.plugins.mc_globalsettings.showinextmenu = ConfigYesNo(default=False)
 config.plugins.mc_globalsettings.currentversion = ConfigInteger(0, (0, 999))
-config.plugins.mc_globalsettings.currentplatform = ConfigText(default = currentmcplatform)
+config.plugins.mc_globalsettings.currentplatform = ConfigText(default=currentmcplatform)
 
 config.plugins.mc_globalsettings.currentversion.value = currentmcversion
 config.plugins.mc_globalsettings.currentplatform.value = currentmcplatform

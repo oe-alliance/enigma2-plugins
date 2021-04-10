@@ -79,7 +79,7 @@ class FTPQueueManager(Screen):
 	def createSummary(self):
 		return FTPQueueManagerSummary
 
-	def updateList(self, queue = None):
+	def updateList(self, queue=None):
 		if not queue:
 			queue = self.queue
 

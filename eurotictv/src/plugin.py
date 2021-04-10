@@ -51,8 +51,8 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		InfoBarBase.__init__(self, steal_current_service = True)
-		InfoBarSeek.__init__(self, actionmap = "CutlistSeekActions")
+		InfoBarBase.__init__(self, steal_current_service=True)
+		InfoBarSeek.__init__(self, actionmap="CutlistSeekActions")
 		HelpableScreen.__init__(self)
 		self.old_service = session.nav.getCurrentlyPlayingServiceReference()
 		self.session.nav.stopService()
@@ -82,8 +82,7 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 				"seekFwd": self.keyPass
 			}, -4)
 
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evStart: self.__serviceStarted,
 				iPlayableService.evUpdatedEventInfo: self.__streamStarted,
 				iPlayableService.evTuneFailed: self.__streamFailed,
@@ -207,4 +206,4 @@ def main(session, **kwargs):
 	session.open(EuroticTVPlayer)
 
 def Plugins(**kwargs):
- 	return PluginDescriptor(name="eUroticTV", description=_("Watch eUroticTV via HTTP Live Streaming"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", needsRestart = True, fnc=main)
+ 	return PluginDescriptor(name="eUroticTV", description=_("Watch eUroticTV via HTTP Live Streaming"), where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", needsRestart=True, fnc=main)

@@ -50,8 +50,8 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 				getConfigListEntry(_("Search type for filter"), config.plugins.epgsearch.filter_type, _("Select type for filter search. Press button P +/- for show/hide filter in description after search.")),
 				
 			],
-			session = session,
-			on_change = self.changed
+			session=session,
+			on_change=self.changed
 		)
 		def selectionChanged():
 			if self["config"].current:

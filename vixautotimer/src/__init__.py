@@ -22,13 +22,13 @@ config.plugins.autotimer.refresh = ConfigSelection(choices=[
 		("none", _("None")),
 		("auto", _("Only AutoTimers created during this session")),
 		("all", _("All non-repeating timers"))
-	], default = "all"
+	], default="all"
 )
 config.plugins.autotimer.try_guessing = ConfigEnableDisable(default=True)
 config.plugins.autotimer.editor = ConfigSelection(choices=[
 		("plain", _("Classic")),
 		("wizard", _("Wizard"))
-	], default = "plain"
+	], default="plain"
 )
 config.plugins.autotimer.addsimilar_on_conflict = ConfigEnableDisable(default=False)
 config.plugins.autotimer.add_autotimer_to_tags = ConfigYesNo(default=False)

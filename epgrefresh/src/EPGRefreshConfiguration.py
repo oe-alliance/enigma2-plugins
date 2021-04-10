@@ -99,7 +99,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 			[x for x in epgrefresh.services[1]]
 		)
 
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changed)
 		self._getConfig()
 
 		self["config"].onSelectionChanged.append(self.updateHelp)
@@ -363,7 +363,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 			x[1].save()		
 		configfile.save()
 		
-	def keySave(self, doSaveConfiguration = True):
+	def keySave(self, doSaveConfiguration=True):
 		if self.isConfigurationChanged():
 			if not epgrefresh.isRefreshAllowed():
 				return

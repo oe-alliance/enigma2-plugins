@@ -46,12 +46,12 @@ class GNTP(ServiceBase):
 		#self.sockets = []
 		
 		# Default configuration
-		self.setOption( 'growlhost',  NoSave(ConfigText(default="host", fixed_size = False)),  _("Growl Host name") )
-		self.setOption( 'growlport',  NoSave(ConfigNumber(default = 23053)),                   _("Growl Port") )
-		self.setOption( 'timeout',    NoSave(ConfigNumber(default = 3)),                       _("Timeout") )
+		self.setOption( 'growlhost',  NoSave(ConfigText(default="host", fixed_size=False)),  _("Growl Host name") )
+		self.setOption( 'growlport',  NoSave(ConfigNumber(default=23053)),                   _("Growl Port") )
+		self.setOption( 'timeout',    NoSave(ConfigNumber(default=3)),                       _("Timeout") )
 		self.setOption( 'password',   NoSave(ConfigPassword()),                                _("Password") )
-		self.setOption( 'sticky',     NoSave(ConfigYesNo(default = True)),                     _("Send as sticky") )
-		self.setOption( 'priority',   NoSave(ConfigNumber(default = 1)),                       _("Send with priority") )
+		self.setOption( 'sticky',     NoSave(ConfigYesNo(default=True)),                     _("Send as sticky") )
+		self.setOption( 'priority',   NoSave(ConfigNumber(default=1)),                       _("Send with priority") )
 
 	def push(self, callback, errback, pluginname, subject, body="", attachments=[]):
 		from Plugins.Extensions.PushService.plugin import NAME, VERSION, SUPPORT, DONATE
@@ -68,12 +68,12 @@ class GNTP(ServiceBase):
 		
 		# Registrate
 		growl = gntp.notifier.GrowlNotifier(
-			applicationName = app,
-			notifications = [nottype],
-			defaultNotifications = [nottype],
-			hostname    = self.getValue('growlhost'),
-			port        = self.getValue('growlport'),
-			password    = self.getValue('password')
+			applicationName=app,
+			notifications=[nottype],
+			defaultNotifications=[nottype],
+			hostname=self.getValue('growlhost'),
+			port=self.getValue('growlport'),
+			password=self.getValue('password')
 		)
 		growl.socketTimeout = self.getValue('timeout')
 		growl.register()
@@ -81,12 +81,12 @@ class GNTP(ServiceBase):
 		# Send a message
 		#socket = 
 		sent = growl.notify(
-			noteType    = nottype,
-			title       = subject,
-			description = body,
+			noteType=nottype,
+			title=subject,
+			description=body,
 			#Maybelater icon        = "http://example.com/icon.png",
-			sticky      = self.getValue('sticky'),
-			priority    = self.getValue('priority')
+			sticky=self.getValue('sticky'),
+			priority=self.getValue('priority')
 		)
 		#self.sockets.append(socket)
 		

@@ -81,7 +81,7 @@ class StoneField:
 	def Map(self, x, y):
 		return x + y * self.sizex
 
-	def mark1(self, x, y, force = False):
+	def mark1(self, x, y, force=False):
 		index = self.Map(x, y)
 
 		if index < 0:
@@ -139,7 +139,7 @@ class StoneField:
 
 		self.marked = 0
 
-	def remove(self, x, y, force = False):
+	def remove(self, x, y, force=False):
 		index = self.Map(x, y)
 
 		if index < 0:

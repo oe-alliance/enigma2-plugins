@@ -21,17 +21,17 @@ from Plugins.Extensions.GoogleMaps.KMLlib import RootFolder, KmlFolder, KmlPlace
 from Plugins.Extensions.GoogleMaps.WebPixmap import WebPixmap
 
 config.plugins.GoogleMaps = ConfigSubsection()
-config.plugins.GoogleMaps.stop_service_on_start = ConfigYesNo(default = False)
-config.plugins.GoogleMaps.add_mainmenu_entry = ConfigYesNo(default = False)
-config.plugins.GoogleMaps.save_last_position = ConfigYesNo(default = True)
-config.plugins.GoogleMaps.load_map_overlay = ConfigYesNo(default = True)
-config.plugins.GoogleMaps.cache_enabled = ConfigYesNo(default = False)
+config.plugins.GoogleMaps.stop_service_on_start = ConfigYesNo(default=False)
+config.plugins.GoogleMaps.add_mainmenu_entry = ConfigYesNo(default=False)
+config.plugins.GoogleMaps.save_last_position = ConfigYesNo(default=True)
+config.plugins.GoogleMaps.load_map_overlay = ConfigYesNo(default=True)
+config.plugins.GoogleMaps.cache_enabled = ConfigYesNo(default=False)
 config.plugins.GoogleMaps.position = ConfigSubsection()
 config.plugins.GoogleMaps.position.x = ConfigInteger(33)
 config.plugins.GoogleMaps.position.y = ConfigInteger(21)
 config.plugins.GoogleMaps.position.z = ConfigInteger(6)
 config.plugins.GoogleMaps.last_searchkey = ConfigText(default="New York")
-config.plugins.GoogleMaps.show_preview_on_searchresults = ConfigYesNo(default = True)
+config.plugins.GoogleMaps.show_preview_on_searchresults = ConfigYesNo(default=True)
 config.plugins.GoogleMaps.default_zoomlevel_for_searchresults = ConfigInteger(18, (1, 99)) #zoomlevel previewpic
 
 global plugin_path, not_found_pic, not_found_pic_overlay
@@ -71,7 +71,7 @@ class GoogleMapsConfigScreen(ConfigListScreen, Screen):
         <widget name="key_green" position="120,360" size="100,40" backgroundColor="green" valign="center" halign="center" zPosition="1"  foregroundColor="white" font="Regular;18"/>
         <widget name="label" position="240,360" size="200,40"  valign="center" halign="center" zPosition="1"  foregroundColor="white" font="Regular;18"/>
         </screen>"""
-    def __init__(self, session, args = 0):
+    def __init__(self, session, args=0):
         self.session = session
         Screen.__init__(self, session)
         self.list = []
@@ -528,7 +528,7 @@ class GoogleMapsGeoSearchScreen(InputBox):
         self["previewo"] = WebPixmap(default=plugin_path+not_found_pic_overlay)
         self["infotext"] = Label("")
 
-        InputBox.__init__(self, session, title = "Please enter a City or Locationname:", windowTitle = _("GoogleMaps Search"), text=config.plugins.GoogleMaps.last_searchkey.value)
+        InputBox.__init__(self, session, title="Please enter a City or Locationname:", windowTitle=_("GoogleMaps Search"), text=config.plugins.GoogleMaps.last_searchkey.value)
         self.onLayoutFinish.append(self.onLayoutFinished)
 
         self.do_preview_timer = eTimer()
@@ -644,8 +644,8 @@ def Plugins(path,**kwargs):
     plugin_path = path+"/"
     pname = "Google Maps"
     pdesc = "browse google maps"
-    desc_mainmenu  = PluginDescriptor(name=pname, description=pdesc,  where = PluginDescriptor.WHERE_MENU, fnc = start_from_mainmenu)
-    desc_pluginmenu = PluginDescriptor(name=pname, description=pdesc,  where = PluginDescriptor.WHERE_PLUGINMENU, fnc = start_from_pluginmenu, icon="plugin.png")
+    desc_mainmenu  = PluginDescriptor(name=pname, description=pdesc,  where=PluginDescriptor.WHERE_MENU, fnc=start_from_mainmenu)
+    desc_pluginmenu = PluginDescriptor(name=pname, description=pdesc,  where=PluginDescriptor.WHERE_PLUGINMENU, fnc=start_from_pluginmenu, icon="plugin.png")
     list = []
     list.append(desc_pluginmenu)
     if config.plugins.GoogleMaps.add_mainmenu_entry.value:

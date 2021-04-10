@@ -54,7 +54,7 @@ class YouTubeManager():
 		self.session.openWithCallback(self.searchDialogClosed, YouTubeSearchDialog)
 
 
-	def searchDialogClosed(self, what, searchContext = None):
+	def searchDialogClosed(self, what, searchContext=None):
 		print("[YTB] searchDialogClosed: ", what)
 		if what == SEARCH:
 			dlg = self.session.openWithCallback(self.youTubeListScreenClosed, YouTubeListScreen)
@@ -118,7 +118,7 @@ class YouTubeManager():
 			self.backToSearchDialog()
 
 
-	def backToSearchDialog(self, dummy = True):
+	def backToSearchDialog(self, dummy=True):
 		self.openSearchDialog()
 
 
@@ -143,5 +143,5 @@ def Plugins(**kwargs):
 	return PluginDescriptor(
 		name="YouTube Player",
 		description=_("Search and play YouTube movies"),
-		where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
-		icon = "plugin.png", fnc = main)
+		where=[ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
+		icon="plugin.png", fnc=main)

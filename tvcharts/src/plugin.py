@@ -47,12 +47,12 @@ import Screens.Standby
 #####  CONFIG SETTINGS   #####
 ##############################
 config.plugins.tvcharts = ConfigSubsection()
-config.plugins.tvcharts.enabled = ConfigYesNo(default = True)
+config.plugins.tvcharts.enabled = ConfigYesNo(default=True)
 config.plugins.tvcharts.maxentries = ConfigInteger(default=10, limits=(5, 100))
 config.plugins.tvcharts.maxtimerentries = ConfigInteger(default=10, limits=(5, 100))
-config.plugins.tvcharts.submittimers = ConfigYesNo(default = True)
-config.plugins.tvcharts.submitplugins = ConfigYesNo(default = True)
-config.plugins.tvcharts.bouquetfilter = ConfigYesNo(default = True)
+config.plugins.tvcharts.submittimers = ConfigYesNo(default=True)
+config.plugins.tvcharts.submitplugins = ConfigYesNo(default=True)
+config.plugins.tvcharts.bouquetfilter = ConfigYesNo(default=True)
 
 ##########################################################
 session = [ ]
@@ -169,7 +169,7 @@ class TVChartsMain(Screen):
 			eventid = int(current[0][1])
 			event = self.getEventFromId(serviceref, eventid)
 			if event is not None:
-				newEntry = RecordTimerEntry(serviceref, *parseEvent(event), checkOldTimers = True, dirname = preferredTimerPath())
+				newEntry = RecordTimerEntry(serviceref, *parseEvent(event), checkOldTimers=True, dirname=preferredTimerPath())
 				self.session.openWithCallback(self.addTimerCallback, TimerEntry, newEntry)
 			else:
 				self.session.open(MessageBox, "Sorry, no EPG Info available for this event", type=MessageBox.TYPE_ERROR, timeout=10)
@@ -390,7 +390,7 @@ class TVChartsSetup(Screen, ConfigListScreen):
 
 		self.onChangedEntry = [ ]
 		self.list = [ ]
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -465,8 +465,7 @@ class DBUpdateStatus(Screen):
 		self.DBStatusTimer = eTimer()
 		self.DBStatusTimer.callback.append(self.updateStatus)
 
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evUpdatedInfo: self.restartTimer,
 				iPlayableService.evUpdatedEventInfo: self.restartTimer
 			})
@@ -586,6 +585,6 @@ def autostart(reason, **kwargs):
 
 def Plugins(path, **kwargs):
 	return [
-		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart),
+		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart),
 		PluginDescriptor(name="TV Charts", description="TV Charts Plugin", icon="plugin.png", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
 		PluginDescriptor(name="TV Charts", description="TV Charts Plugin", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main) ]

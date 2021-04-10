@@ -26,7 +26,7 @@ SIB_SWOFF = InfoBar.hide
 SIB_STATE = -1
 
 config.plugins.Widgets = ConfigSubsection()
-config.plugins.Widgets.show_empty_positions = ConfigBoolean(default = True, descriptions = {False: _("hide"), True: _("show")})
+config.plugins.Widgets.show_empty_positions = ConfigBoolean(default=True, descriptions={False: _("hide"), True: _("show")})
 config.plugins.Widgets.active_widgets = ConfigSubDict()
 for x in range(0, 16):
 	for y in range(0, 16):
@@ -34,7 +34,7 @@ for x in range(0, 16):
 
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = SIBautostart)]
+	return [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=SIBautostart)]
 
 
 

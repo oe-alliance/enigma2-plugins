@@ -52,7 +52,7 @@ class CurlyTxSettings(ConfigListScreen, HelpableScreen, Screen):
         self["key_yellow"] = StaticText(_("New"))
         self["key_blue"]   = StaticText(_("Delete"))
 
-        ConfigListScreen.__init__(self, self.getConfigList(), session = self.session)
+        ConfigListScreen.__init__(self, self.getConfigList(), session=self.session)
 
         self.loadHelp()
 
@@ -203,7 +203,7 @@ class CurlyTxSettings(ConfigListScreen, HelpableScreen, Screen):
 
 
 class CurlyTxPageEdit(Screen, ConfigListScreen):
-    def __init__(self, session, page, new = False):
+    def __init__(self, session, page, new=False):
         Screen.__init__(self, session)
         self.skinName = [ "CurlyTxPageEdit", "Setup" ]
 
@@ -223,7 +223,7 @@ class CurlyTxPageEdit(Screen, ConfigListScreen):
             getConfigListEntry(_("Title"), page.title),
             getConfigListEntry(_("Font size"), page.fontSize),
             ]
-        ConfigListScreen.__init__(self, list, session = self.session)
+        ConfigListScreen.__init__(self, list, session=self.session)
 
     def save(self):
         self.close(self.page, self.new)
