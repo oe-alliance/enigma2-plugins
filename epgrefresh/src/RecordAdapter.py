@@ -12,8 +12,10 @@ from Components.config import config
 
 from . import _, STARTNOTIFICATIONID, NOTIFICATIONDOMAIN
 
+
 class RecordAdapter:
 	backgroundCapable = True
+
 	def __init__(self, session):
 		if len(nimmanager.nim_slots) < 2:
 			self.backgroundRefreshAvailable = False
@@ -33,11 +35,12 @@ class RecordAdapter:
 
 	def play(self, service):
 		print("[EPGRefresh.RecordAdapter.play]")
-		if not self.backgroundRefreshAvailable: return False
+		if not self.backgroundRefreshAvailable:
+			return False
 		self.stopStreaming()
 		try:
 			#not all images support recording type indicators
-			self.__service = self.navcore.recordService(service, False, pNavigation.isPseudoRecording|pNavigation.isFromEPGrefresh)
+			self.__service = self.navcore.recordService(service, False, pNavigation.isPseudoRecording | pNavigation.isFromEPGrefresh)
 		except:
 			self.__service = self.navcore.recordService(service)
 		if self.__service is not None:
@@ -54,4 +57,3 @@ class RecordAdapter:
 	def stop(self):
 		print("[EPGRefresh.RecordAdapter.stop]")
 		self.stopStreaming()
-

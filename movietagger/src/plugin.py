@@ -17,6 +17,7 @@ from Tools.Directories import *
 
 VERSION = "1.3"
 
+
 class MovieTagger(Screen):
 	skin = """
 		<screen position="center,70" size="600,460" title="Movie Tagger" >
@@ -26,7 +27,7 @@ class MovieTagger(Screen):
 			<widget name="cTaglist" position="10,100" size="260,250" scrollbarMode="showOnDemand"/>
 			<widget name="definedTags" position="300,65" size="290,30" valign="top" halign="left" zPosition="2" foregroundColor="white" font="Regular;23"/>
 			<widget name="aTaglist" position="290,100" size="300,250" scrollbarMode="showOnDemand"/>
-                
+
 			<ePixmap pixmap="skin_default/div-h.png" position="0,358" zPosition="1" size="600,2" />
 			<widget name="usedTag" position="10,365" size="185,50" valign="top" halign="center" zPosition="2" foregroundColor="#ffff00" font="Regular;21"/>
 			<widget name="userTag" position="200,365" size="185,50" valign="top" halign="center" zPosition="2" foregroundColor="#ff0000" font="Regular;21"/>
@@ -68,15 +69,15 @@ class MovieTagger(Screen):
 		self["aTaglist"] = TagMenuList([])
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
 			{
-			"back": 	self.close,
-			"red": 		self.keyRed,
-			"green": 	self.keyGreen,
-			"yellow": 	self.keyYellow,
-			"blue": 	self.keyBlue,
-			"up": 		self.up,
-			"down": 	self.down,
-			"left": 	self.left,
-			"right": 	self.right,
+			"back": self.close,
+			"red": self.keyRed,
+			"green": self.keyGreen,
+			"yellow": self.keyYellow,
+			"blue": self.keyBlue,
+			"up": self.up,
+			"down": self.down,
+			"left": self.left,
+			"right": self.right,
 			}, -1)
 		self.loadPreTags()
 		self.updateCurrentTagList()
@@ -112,7 +113,7 @@ class MovieTagger(Screen):
 		xtmp.extend(ml.tags)
 		self.usedTags = xtmp
 
-		e = []+self.pretags
+		e = [] + self.pretags
 		for i in ml.tags:
 			try:
 				self.pretags.index(i)
@@ -121,11 +122,11 @@ class MovieTagger(Screen):
 
 		taglist = []
 		for i in e:
-			res = [ i ]
+			res = [i]
 			res.append(MultiContentEntryText(pos=(5, 0), size=(500, 25), font=0, text=i))
 			if self.isUsedTag(i):
 				res.append(MultiContentEntryText(pos=(220, 0), size=(20, 25), font=1, text="X", color=0x00FFFF00)) #yellow
-			if self.isUserTag(i) :
+			if self.isUserTag(i):
 				res.append(MultiContentEntryText(pos=(240, 0), size=(20, 25), font=1, text="X", color=0x00FF0000)) #red
 			if self.isPreTag(i):
 				res.append(MultiContentEntryText(pos=(260, 0), size=(20, 25), font=1, text="X", color=0x0000FF00)) #green
@@ -140,13 +141,12 @@ class MovieTagger(Screen):
 			self.tags.index(tagname)
 		except ValueError:
 			self.tags.append(tagname)
-			if len(self.tags) >1:
+			if len(self.tags) > 1:
 				self.setTags(" ".join(self.tags))
 			else:
 				self.setTags(tagname)
 		self.updateCurrentTagList()
 		self.updateAllTagList()
-
 
 	def removeTag(self, tagname):
 		newtags = []
@@ -157,24 +157,22 @@ class MovieTagger(Screen):
 		self.updateCurrentTagList()
 		self.updateAllTagList()
 
-
-	def setTags(self,tagstring,service=False,userNotice=True):
+	def setTags(self, tagstring, service=False, userNotice=True):
 		if service is False:
 			serviceRef = self.service
 		else:
 			serviceRef = service
 
-		service_name =serviceRef.toString().split(":")[-1]
-		filename = service_name+".meta"
+		service_name = serviceRef.toString().split(":")[-1]
+		filename = service_name + ".meta"
 		metadata = self.readMETAData(filename)
 		if metadata is not False:
 			metadata.append(tagstring.strip())
-			return  self.writeMETAData(filename, metadata)
+			return self.writeMETAData(filename, metadata)
 		else:
 			if userNotice is True:
 				self.session.open(MessageBox, _("Can't write movietags, because no meta-file found!"), MessageBox.TYPE_ERROR)
-			return  False
-
+			return False
 
 	def readMETAData(self, filename):
 		if pathExists(filename):
@@ -188,6 +186,7 @@ class MovieTagger(Screen):
 			return data
 		else:
 			return False
+
 	def writeMETAData(self, filename, metadata):
 		if pathExists(filename):
 			fp = open(filename, "w")
@@ -250,10 +249,10 @@ class MovieTagger(Screen):
 
 	def keyGreen(self):
 		if self.currList is self["cTaglist"]:
-			self.session.openWithCallback(self.newTagEntered, InputBox, title=_('Whitepace will be replaced by "_"'), windowTitle = _("Enter the new Tag"))
+			self.session.openWithCallback(self.newTagEntered, InputBox, title=_('Whitepace will be replaced by "_"'), windowTitle=_("Enter the new Tag"))
 
 	def keyYellow(self):
-		if  self.currList is self["aTaglist"]:
+		if self.currList is self["aTaglist"]:
 			self.session.openWithCallback(self.clearAllTags, MessageBox, _("Clear all Tags?\n\nThis will delete ALL tags in ALL recodings!\nAre you sure?"), MessageBox.TYPE_YESNO)
 
 	def keyBlue(self):
@@ -293,11 +292,12 @@ class MovieTagger(Screen):
 		self.currList.pageDown()
 
 	def newTagEntered(self, newTag):
-		if newTag >=0:
+		if newTag >= 0:
 			self.addTag(newTag.strip().replace(" ", "_"))
 
+
 class TagMenuList(MenuList):
-	def __init__(self, list, enableWrapAround = False):
+	def __init__(self, list, enableWrapAround=False):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setFont(1, gFont("Regular", 25))
@@ -306,11 +306,13 @@ class TagMenuList(MenuList):
 		MenuList.postWidgetCreate(self, instance)
 		instance.setItemHeight(25)
 
+
 def main(session, service, **kwargs):
 	try:
 		session.open(MovieTagger, service)
 	except Exception as e:
 		raise e
 
-def Plugins(path,**kwargs):
- 	return PluginDescriptor(name="Movie Tagger", description=_("Movie Tagger..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc=main)
+
+def Plugins(path, **kwargs):
+ 	return PluginDescriptor(name="Movie Tagger", description=_("Movie Tagger..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main)

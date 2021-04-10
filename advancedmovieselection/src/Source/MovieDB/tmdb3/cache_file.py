@@ -56,9 +56,11 @@ from six.moves import cStringIO as StringIO
 def _donothing(*args, **kwargs):
     pass
 
+
 try:
     import fcntl
-    class Flock( object ):
+
+    class Flock(object):
         """
         Context manager to flock file for the duration the object exists.
         Referenced file will be automatically unflocked as the interpreter
@@ -73,8 +75,10 @@ try:
             self.fileobj = fileobj
             self.operation = operation
             self.callback = callback
+
         def __enter__(self):
             fcntl.flock(self.fileobj, self.operation)
+
         def __exit__(self, exc_type, exc_value, exc_tb):
             suppress = False
             if callable(self.callback):
@@ -97,7 +101,8 @@ try:
 
 except ImportError:
     import msvcrt
-    class Flock( object ):
+
+    class Flock(object):
         LOCK_EX = msvcrt.LK_LOCK
         LOCK_SH = msvcrt.LK_LOCK
 
@@ -105,9 +110,11 @@ except ImportError:
             self.fileobj = fileobj
             self.operation = operation
             self.callback = callback
+
         def __enter__(self):
             self.size = os.path.getsize(self.fileobj.name)
             msvcrt.locking(self.fileobj.fileno(), self.operation, self.size)
+
         def __exit__(self, exc_type, exc_value, exc_tb):
             suppress = False
             if callable(self.callback):
@@ -122,7 +129,7 @@ except ImportError:
         if filename.startswith('~'):
             # check for home directory
             return os.path.expanduser(filename)
-        elif (ord(filename[0]) in (list(range(65, 91))+list(range(99, 123)))) \
+        elif (ord(filename[0]) in (list(range(65, 91)) + list(range(99, 123)))) \
                 and (filename[1:3] == ':\\'):
             # check for absolute drive path (e.g. C:\...)
             return filename
@@ -133,7 +140,7 @@ except ImportError:
         return os.path.expandvars(os.path.join('%TEMP%', filename))
 
 
-class FileCacheObject( CacheObject ):
+class FileCacheObject(CacheObject):
     _struct = struct.Struct('dII') # double and two ints
                                    # timestamp, lifetime, position
 
@@ -163,6 +170,7 @@ class FileCacheObject( CacheObject ):
                 self._size = self._buff.tell()
             self._size = size
         return self._size
+
     @size.setter
     def size(self, value): self._size = value
 
@@ -174,6 +182,7 @@ class FileCacheObject( CacheObject ):
             except:
                 pass
         return self._key
+
     @key.setter
     def key(self, value): self._key = value
 
@@ -182,6 +191,7 @@ class FileCacheObject( CacheObject ):
         if self._data is None:
             self._key, self._data = json.loads(self._buff.getvalue())
         return self._data
+
     @data.setter
     def data(self, value): self._data = value
 
@@ -200,7 +210,7 @@ class FileCacheObject( CacheObject ):
         fd.write(self._buff.getvalue())
 
 
-class FileEngine( CacheEngine ):
+class FileEngine(CacheEngine):
     """Simple file-backed engine."""
     name = 'file'
     _struct = struct.Struct('HH') # two shorts for version and count
@@ -260,7 +270,7 @@ class FileEngine( CacheEngine ):
     def get(self, date):
         self._init_cache()
         self._open('r+b')
-        
+
         with Flock(self.cachefd, Flock.LOCK_SH): # lock for shared access
             # return any new objects in the cache
             return self._read(date)
@@ -287,13 +297,14 @@ class FileEngine( CacheEngine ):
                 # already opened in requested mode, nothing to do
                 self.cachefd.seek(0)
                 return
-        except: pass # catch issue of no cachefile yet opened
+        except:
+            pass # catch issue of no cachefile yet opened
         self.cachefd = io.open(self.cachefile, mode)
 
     def _read(self, date):
         try:
             self.cachefd.seek(0)
-            version, count = self._struct.unpack(\
+            version, count = self._struct.unpack(
                                     self.cachefd.read(self._struct.size))
             if version != self._version:
                 # old version, break out and well rewrite when finished
@@ -357,7 +368,7 @@ class FileEngine( CacheEngine ):
             data.position = end
 
             # write incremental update to free slot
-            self.cachefd.seek(4 + 16*(self.size-self.free))
+            self.cachefd.seek(4 + 16 * (self.size - self.free))
             data.dumpslot(self.cachefd)
             data.dumpdata(self.cachefd)
 
@@ -375,7 +386,7 @@ class FileEngine( CacheEngine ):
             prev = None
             for d in data:
                 if prev == None:
-                    d.position = 4 + 16*size
+                    d.position = 4 + 16 * size
                 else:
                     d.position = prev.position + prev.size
                 d.dumpslot(self.cachefd)
@@ -391,5 +402,3 @@ class FileEngine( CacheEngine ):
 
     def expire(self, key):
         pass
-
-

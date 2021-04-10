@@ -35,11 +35,13 @@ try:
 except AttributeError:
 	iteritems = lambda d: d.items()
 
+
 class GNTPPacket:
 	version = '1.0'
 	password = ''
 	hashAlgorithm = None
 	encryptionAlgorithm = None
+
 	def encode(self):
 		# TODO: add encryption support
 		message = u'GNTP/%s %s ' % (self.version, self.messageType)
@@ -68,7 +70,7 @@ class GNTPPacket:
 				'SHA512': hashlib.sha512,
 		}
 		hashAlgorithm = hashAlgorithm.upper()
-		
+
 		if not hashAlgorithm in hashes:
 			raise Exception('Unsupported hash algorithm: %s' % hashAlgorithm)
 		if encryptionAlgorithm is not None:
@@ -79,7 +81,7 @@ class GNTPPacket:
 		seed = uuid.uuid4().hex
 		salt = hashfunction(seed).hexdigest()
 		saltHash = hashfunction(seed).digest()
-		keyBasis = password+saltHash
+		keyBasis = password + saltHash
 		key = hashfunction(keyBasis).digest()
 		keyHash = hashfunction(key).hexdigest()
 
@@ -87,13 +89,15 @@ class GNTPPacket:
 		self.keyHash = keyHash.upper()
 		self.salt = salt.upper()
 
+
 class GNTPRegister(GNTPPacket):
 	messageType = 'REGISTER'
+
 	def __init__(self, applicationName=None):
 		assert applicationName, "There needs to be an application name set"
 		self.applicationName = applicationName
 		self.notifications = []
-	
+
 	def add_notification(self, name, displayName=None, enabled=True):
 		assert name, "Notifications need a name"
 		note = {
@@ -117,8 +121,10 @@ class GNTPRegister(GNTPPacket):
 		base += u'\r\n'
 		return base.encode('utf8', 'replace')
 
+
 class GNTPNotice(GNTPPacket):
 	messageType = 'NOTIFY'
+
 	def __init__(self, applicationName, name, title, text='', sticky=False, priority=0):
 		assert priority > -3 and priority < 3, "Priority has to be between -2 and 2"
 		self.applicationName = applicationName
@@ -140,6 +146,7 @@ class GNTPNotice(GNTPPacket):
 		base += u"Notifications-Count: 1\r\n"
 		base += u'\r\n'
 		return base.encode('utf8', 'replace')
+
 
 class GNTP(Protocol):
 	def __init__(self, client=False, host=None, registered=False):
@@ -185,6 +192,7 @@ class GNTP(Protocol):
 			msg = note.encode()
 			our_print("about to send packet:", msg.replace('\r\n', '<CRLF>\n'))
 			self.transport.write(msg)
+
 			def writeAgain():
 				note.set_password(self.host.password.value, 'MD5', None)
 				msg = note.encode()
@@ -199,7 +207,8 @@ class GNTP(Protocol):
 	def dataReceived(self, data):
 		# only parse complete packages
 		self.__buffer += data
-		if data[-4:] != '\r\n\r\n': return
+		if data[-4:] != '\r\n\r\n':
+			return
 		data = self.__buffer
 		self.__buffer = ''
 
@@ -253,6 +262,7 @@ class GNTPClientFactory(ReconnectingClientFactory):
 		if self.client:
 			self.client.sendNotification(*args, **kwargs)
 
+
 class GNTPServerFactory(ServerFactory):
 	protocol = GNTP
 
@@ -271,6 +281,7 @@ class GNTPServerFactory(ServerFactory):
 	def stopFactory(self):
 		for client in self.clients:
 			client.stop()
+
 
 class GNTPAbstraction:
 	clientPort = None
@@ -296,9 +307,9 @@ class GNTPAbstraction:
 		emergencyDisable()
 
 	def sendNotification(self, title='No title.', description='No description.', priority=-1, timeout=-1):
-		self.clientFactory.sendNotification(title=title, description=description, sticky=timeout==-1, priority=priority)
+		self.clientFactory.sendNotification(title=title, description=description, sticky=timeout == -1, priority=priority)
 
-	def maybeClose(self, resOrFail, defer = None):
+	def maybeClose(self, resOrFail, defer=None):
 		self.pending -= 1
 		if self.pending == 0:
 			if defer:
@@ -309,14 +320,14 @@ class GNTPAbstraction:
 		if self.clientPort:
 			d = self.clientPort.disconnect()
 			if d:
-				d.addBoth(self.maybeClose, defer = defer)
+				d.addBoth(self.maybeClose, defer=defer)
 			else:
 				self.pending -= 1
 
 		if self.serverPort:
 			d = self.serverPort.stopListening()
 			if d:
-				d.addBoth(self.maybeClose, defer = defer)
+				d.addBoth(self.maybeClose, defer=defer)
 			else:
 				self.pending -= 1
 
@@ -324,10 +335,12 @@ class GNTPAbstraction:
 			reactor.callLater(1, defer.callback, True)
 		return defer
 
+
 if __name__ == '__main__':
 	class Value:
 		def __init__(self, value):
 			self.value = value
+
 	class Config:
 		address = Value('moritz-venns-macbook-pro')
 		password = Value('')

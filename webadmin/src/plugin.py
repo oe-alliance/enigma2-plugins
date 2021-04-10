@@ -18,20 +18,22 @@ if hasattr(static.File, 'render_GET'):
 else:
 	File = static.File
 
+
 def autostart(reason, **kwargs):
 	if reason == 0 and "session" in kwargs:
 		session = kwargs["session"]
 		root = File(eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/WebAdmin/web-data"))
-		root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True) )
-		root.putChild("mobile", ScreenPage(session, util.sibpath(__file__, "mobile"), True) )
+		root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True))
+		root.putChild("mobile", ScreenPage(session, util.sibpath(__file__, "mobile"), True))
 		root.putChild('tmp', File('/tmp'))
 		root.putChild("uploadtext", UploadTextResource())
 		root.putChild("uploadpkg", UploadPkgResource())
 		root.putChild("pkg", PKGResource())
 		root.putChild("script", Script())
-		addExternalChild( ("webadmin", root, "WebAdmin", 1, True, "_self") )
-			
+		addExternalChild(("webadmin", root, "WebAdmin", 1, True, "_self"))
+
+
 def Plugins(**kwargs):
 	return [PluginDescriptor(name="WebAdmin",
-			where = PluginDescriptor.WHERE_SESSIONSTART,
-			fnc = autostart)]
+			where=PluginDescriptor.WHERE_SESSIONSTART,
+			fnc=autostart)]

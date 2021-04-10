@@ -12,7 +12,11 @@ from gdata.service import BadAuthentication
 from twisted.web import client
 from twisted.internet import reactor
 from socket import gaierror, error
-import os, socket, httplib, re, json
+import os
+import socket
+import httplib
+import re
+import json
 from six.moves.urllib.parse import quote, unquote_plus, unquote, urlencode
 from six.moves.urllib.request import Request, urlopen, URLError
 
@@ -29,11 +33,13 @@ if 'HTTPSConnection' not in dir(httplib):
 	# python on enimga2 has no https socket support
 	gdata.youtube.service.YOUTUBE_USER_FEED_URI = 'http://gdata.youtube.com/feeds/api/users'
 
+
 def validate_cert(cert, key):
 	buf = decrypt_block(cert[8:], key)
 	if buf is None:
 		return None
 	return buf[36:107] + cert[139:196]
+
 
 def get_rnd():
 	try:
@@ -41,6 +47,7 @@ def get_rnd():
 		return rnd
 	except:
 		return None
+
 
 std_headers = {
 	'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
@@ -58,11 +65,12 @@ std_headers = {
 #	version = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'
 
 
-
 def printDBG(s):
     print(s)
 
 # source from https://github.com/rg3/youtube-dl/issues/1208
+
+
 class CVevoSignAlgoExtractor:
     # MAX RECURSION Depth for security
     MAX_REC_DEPTH = 5
@@ -85,19 +93,19 @@ class CVevoSignAlgoExtractor:
             # a.split("") -> list(a)
             match = re.search('(\w+?)\.split\(""\)', lines[i])
             if match:
-                lines[i] = lines[i].replace( match.group(0), 'list(' + match.group(1)  + ')')
+                lines[i] = lines[i].replace(match.group(0), 'list(' + match.group(1) + ')')
             # a.length -> len(a)
             match = re.search('(\w+?)\.length', lines[i])
             if match:
-                lines[i] = lines[i].replace( match.group(0), 'len(' + match.group(1)  + ')')
+                lines[i] = lines[i].replace(match.group(0), 'len(' + match.group(1) + ')')
             # a.slice(3) -> a[3:]
             match = re.search('(\w+?)\.slice\(([0-9]+?)\)', lines[i])
             if match:
-                lines[i] = lines[i].replace( match.group(0), match.group(1) + ('[%s:]' % match.group(2)) )
+                lines[i] = lines[i].replace(match.group(0), match.group(1) + ('[%s:]' % match.group(2)))
             # a.join("") -> "".join(a)
             match = re.search('(\w+?)\.join\(("[^"]*?")\)', lines[i])
             if match:
-                lines[i] = lines[i].replace( match.group(0), match.group(2) + '.join(' + match.group(1) + ')' )
+                lines[i] = lines[i].replace(match.group(0), match.group(2) + '.join(' + match.group(1) + ')')
         return "\n".join(lines)
 
     def _getLocalFunBody(self, funName):
@@ -109,16 +117,16 @@ class CVevoSignAlgoExtractor:
         return ''
 
     def _getAllLocalSubFunNames(self, mainFunBody):
-        match = re.compile('[ =(,](\w+?)\([^)]*?\)').findall( mainFunBody )
+        match = re.compile('[ =(,](\w+?)\([^)]*?\)').findall(mainFunBody)
         if len(match):
             # first item is name of main function, so omit it
-            funNameTab = set( match[1:] )
+            funNameTab = set(match[1:])
             return funNameTab
         return set()
 
     def decryptSignature(self, s, playerUrl):
-        playerUrl = playerUrl[:4] != 'http' and 'http:'+playerUrl or playerUrl
-        printDBG("decrypt_signature sign_len[%d] playerUrl[%s]" % (len(s), playerUrl) )
+        playerUrl = playerUrl[:4] != 'http' and 'http:' + playerUrl or playerUrl
+        printDBG("decrypt_signature sign_len[%d] playerUrl[%s]" % (len(s), playerUrl))
 
         # clear local data
         self._cleanTmpVariables()
@@ -134,33 +142,33 @@ class CVevoSignAlgoExtractor:
                 printDBG('Unable to download playerUrl webpage')
                 return ''
 
-            # get main function name 
+            # get main function name
             match = re.search("signature=(\w+?)\([^)]\)", self.playerData)
             if match:
                 mainFunName = match.group(1)
                 printDBG('Main signature function name = "%s"' % mainFunName)
-            else: 
+            else:
                 printDBG('Can not get main signature function name')
                 return ''
 
-            self._getfullAlgoCode( mainFunName )
+            self._getfullAlgoCode(mainFunName)
 
             # wrap all local algo function into one function extractedSignatureAlgo()
             algoLines = self.fullAlgoCode.split('\n')
             for i in list(range(len(algoLines))):
                 algoLines[i] = '\t' + algoLines[i]
-            self.fullAlgoCode  = 'def extractedSignatureAlgo(param):'
+            self.fullAlgoCode = 'def extractedSignatureAlgo(param):'
             self.fullAlgoCode += '\n'.join(algoLines)
             self.fullAlgoCode += '\n\treturn %s(param)' % mainFunName
             self.fullAlgoCode += '\noutSignature = extractedSignatureAlgo( inSignature )\n'
 
             # after this function we should have all needed code in self.fullAlgoCode
 
-            printDBG( "---------------------------------------" )
-            printDBG( "|    ALGO FOR SIGNATURE DECRYPTION    |" )
-            printDBG( "---------------------------------------" )
-            printDBG( self.fullAlgoCode                         )
-            printDBG( "---------------------------------------" )
+            printDBG("---------------------------------------")
+            printDBG("|    ALGO FOR SIGNATURE DECRYPTION    |")
+            printDBG("---------------------------------------")
+            printDBG(self.fullAlgoCode)
+            printDBG("---------------------------------------")
 
             try:
                 algoCodeObj = compile(self.fullAlgoCode, '', 'exec')
@@ -176,11 +184,11 @@ class CVevoSignAlgoExtractor:
         vGlobals = {"__builtins__": None, 'len': len, 'list': list}
 
         # local variable to pass encrypted sign and get decrypted sign
-        vLocals = { 'inSignature': s, 'outSignature': '' }
+        vLocals = {'inSignature': s, 'outSignature': ''}
 
         # execute prepared code
         try:
-            exec( algoCodeObj, vGlobals, vLocals )
+            exec(algoCodeObj, vGlobals, vLocals)
         except:
             printDBG('decryptSignature exec code EXCEPTION')
             return ''
@@ -197,12 +205,12 @@ class CVevoSignAlgoExtractor:
         return vLocals['outSignature']
 
     # Note, this method is using a recursion
-    def _getfullAlgoCode( self, mainFunName, recDepth = 0 ):
+    def _getfullAlgoCode(self, mainFunName, recDepth=0):
         if self.MAX_REC_DEPTH <= recDepth:
             printDBG('_getfullAlgoCode: Maximum recursion depth exceeded')
-            return 
+            return
 
-        funBody = self._getLocalFunBody( mainFunName )
+        funBody = self._getLocalFunBody(mainFunName)
         if '' != funBody:
             funNames = self._getAllLocalSubFunNames(funBody)
             if len(funNames):
@@ -210,14 +218,16 @@ class CVevoSignAlgoExtractor:
                     if funName not in self.allLocalFunNamesTab:
                         self.allLocalFunNamesTab.append(funName)
                         printDBG("Add local function %s to known functions" % mainFunName)
-                        self._getfullAlgoCode( funName, recDepth + 1 )
+                        self._getfullAlgoCode(funName, recDepth + 1)
 
-            # conver code from javascript to python 
+            # conver code from javascript to python
             funBody = self._jsToPy(funBody)
             self.fullAlgoCode += '\n' + funBody + '\n'
         return
-       
+
+
 decryptor = CVevoSignAlgoExtractor()
+
 
 class GoogleSuggestions():
 	def __init__(self):
@@ -259,9 +269,9 @@ class GoogleSuggestions():
 						charset = "ISO-8859-1"
 						try:
 							charset = header.split(";")[1].split("=")[1]
-							print("[MyTube - GoogleSuggestions] Got charset %s" %charset)
+							print("[MyTube - GoogleSuggestions] Got charset %s" % charset)
 						except:
-							print("[MyTube - GoogleSuggestions] No charset in Header, falling back to %s" %charset)
+							print("[MyTube - GoogleSuggestions] No charset in Header, falling back to %s" % charset)
 						data = data.decode(charset).encode("utf-8")
 						self.conn.close()
 						return data
@@ -271,8 +281,9 @@ class GoogleSuggestions():
 		else:
 			return None
 
+
 class MyTubeFeedEntry():
-	def __init__(self, feed, entry, favoritesFeed = False):
+	def __init__(self, feed, entry, favoritesFeed=False):
 		self.feed = feed
 		self.entry = entry
 		self.favoritesFeed = favoritesFeed
@@ -297,7 +308,7 @@ class MyTubeFeedEntry():
 			split = self.entry.media.player.url.split("=")
 			ret = split.pop()
 			if ret.startswith('youtube_gdata'):
-				tmpval=split.pop()
+				tmpval = split.pop()
 				if tmpval.endswith("&feature"):
 					tmp = tmpval.split("&")
 					ret = tmp.pop(0)
@@ -313,7 +324,7 @@ class MyTubeFeedEntry():
 			return self.entry.media.description.text
 		return "not vailable"
 
-	def getThumbnailUrl(self, index = 0):
+	def getThumbnailUrl(self, index=0):
 		#print "[MyTubeFeedEntry] getThumbnailUrl"
 		if index < len(self.entry.media.thumbnail):
 			return self.entry.media.thumbnail[index].url
@@ -340,7 +351,6 @@ class MyTubeFeedEntry():
 			return self.entry.rating.average
 		return 0
 
-
 	def getNumRaters(self):
 		if self.entry.rating is not None:
 			return self.entry.rating.num_raters
@@ -365,13 +375,13 @@ class MyTubeFeedEntry():
 	def subscribeToUser(self):
 		username = self.getUserId()
 		return myTubeService.SubscribeToUser(username)
-		
+
 	def addToFavorites(self):
 		video_id = self.getTubeId()
 		return myTubeService.addToFavorites(video_id)
 
 	def PrintEntryDetails(self):
-		EntryDetails = { 'Title': None, 'TubeID': None, 'Published': None, 'Published': None, 'Description': None, 'Category': None, 'Tags': None, 'Duration': None, 'Views': None, 'Rating': None, 'Thumbnails': None}
+		EntryDetails = {'Title': None, 'TubeID': None, 'Published': None, 'Published': None, 'Description': None, 'Category': None, 'Tags': None, 'Duration': None, 'Views': None, 'Rating': None, 'Thumbnails': None}
 		EntryDetails['Title'] = self.entry.media.title.text
 		EntryDetails['TubeID'] = self.getTubeId()
 		EntryDetails['Description'] = self.getDescription()
@@ -391,17 +401,17 @@ class MyTubeFeedEntry():
 		EntryDetails['Thumbnails'] = list
 		#print EntryDetails
 		return EntryDetails
-	
+
 	def removeAdditionalEndingDelimiter(self, data):
 		pos = data.find("};")
 		if pos != -1:
 			data = data[:pos + 1]
 		return data
-	
+
 	def extractFlashVars(self, data, assets):
 		flashvars = {}
 		found = False
-		
+
 		for line in data.split("\n"):
 			if line.strip().find(";ytplayer.config = ") > 0:
 				found = True
@@ -412,7 +422,7 @@ class MyTubeFeedEntry():
 				data = line[p1 + 1:p2]
 				break
 		data = self.removeAdditionalEndingDelimiter(data)
-		
+
 		if found:
 			data = json.loads(data)
 			if assets:
@@ -435,9 +445,9 @@ class MyTubeFeedEntry():
 		video_id = str(self.getTubeId())
 
 		links = {}
-		watch_url = 'http://www.youtube.com/watch?v=%s&safeSearch=none'%video_id
+		watch_url = 'http://www.youtube.com/watch?v=%s&safeSearch=none' % video_id
 		watchrequest = Request(watch_url, None, std_headers)
-		
+
 		try:
 			print("[MyTube] trying to find out if a HD Stream is available", watch_url)
 			result = urlopen(watchrequest).read()
@@ -488,8 +498,8 @@ class MyTubeFeedEntry():
 								fmturl = value
 
 					if fmtid != "" and fmturl != "" and fmtid in VIDEO_FMT_PRIORITY_MAP:
-						video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
-						fmt_infomap[int(fmtid)] = "%s" %(unquote_plus(fmturl))
+						video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
+						fmt_infomap[int(fmtid)] = "%s" % (unquote_plus(fmturl))
 					fmturl = fmtid = ""
 
 				except:
@@ -498,13 +508,13 @@ class MyTubeFeedEntry():
 			else:
 				(fmtid, fmturl) = fmtstring.split('|')
 			if fmtid in VIDEO_FMT_PRIORITY_MAP and fmtid != "":
-				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
+				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
 				fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
 		print("[MyTube] got", sorted(six.iterkeys(fmt_infomap)))
 		if video_fmt_map and len(video_fmt_map):
 			print("[MyTube] found best available video format:", video_fmt_map[sorted(six.iterkeys(video_fmt_map))[0]]['fmtid'])
 			best_video = video_fmt_map[sorted(six.iterkeys(video_fmt_map))[0]]
-			video_url = "%s" %(best_video['fmturl'].split(';')[0])
+			video_url = "%s" % (best_video['fmturl'].split(';')[0])
 			print("[MyTube] found best available video url:", video_url)
 
 		return video_url
@@ -531,6 +541,7 @@ class MyTubeFeedEntry():
 		myuri = 'http://gdata.youtube.com/feeds/api/users/%s/uploads' % username
 		print("Found Uservideos: ", myuri)
 		return myuri
+
 
 class MyTubePlayerService():
 #	Do not change the client_id and developer_key in the login-section!
@@ -562,7 +573,7 @@ class MyTubePlayerService():
 		if self.current_auth_token is not None:
 			print("[MyTube] MyTubePlayerService - auth_cached")
 			self.yt_service.SetClientLoginToken(self.current_auth_token)
-		
+
 #		self.loggedIn = False
 		#os.environ['http_proxy'] = 'http://169.229.50.12:3128'
 		#proxy = os.environ.get('http_proxy')
@@ -583,10 +594,10 @@ class MyTubePlayerService():
 		  'Passwd': pw,
 		  'source': self.yt_service.client_id,
 		}
-		
+
 		print("[MyTube] MyTubePlayerService - Starting external curl auth request")
 		result = os.popen('curl -s -k -X POST "%s" -d "%s"' % (gdata.youtube.service.YOUTUBE_CLIENTLOGIN_AUTHENTICATION_URL, urlencode(opts))).read()
-		
+
 		return result
 
 	def supportsSSL(self):
@@ -594,7 +605,7 @@ class MyTubePlayerService():
 
 	def getFormattedTokenRequest(self, email, pw):
 		return dict(parse_qsl(self.getLoginTokenOnCurl(email, pw).strip().replace('\n', '&')))
-	
+
 	def getAuthedUsername(self):
 		# on external curl we can get real username
 		if self.cached_auth_request.get('YouTubeUser') is not None:
@@ -611,7 +622,7 @@ class MyTubePlayerService():
 
 		if self.yt_service is None:
 			self.startService()
-		
+
 		if self.current_auth_token is not None:
 			print("[MyTube] MyTubePlayerService - auth_cached")
 			self.yt_service.SetClientLoginToken(self.current_auth_token)
@@ -622,14 +633,14 @@ class MyTubePlayerService():
 			self.cached_auth_request = self.getFormattedTokenRequest(username, password)
 			if self.cached_auth_request.get('Auth') is None:
 				raise Exception('Got no auth token from curl; you need curl and valid youtube login data')
-			
+
 			self.yt_service.SetClientLoginToken(self.cached_auth_request.get('Auth'))
 		else:
 			print("[MyTube] MyTubePlayerService - Using regularly ProgrammaticLogin for login")
 			self.yt_service.email = username
-			self.yt_service.password  = password
+			self.yt_service.password = password
 			self.yt_service.ProgrammaticLogin()
-			
+
 		# double check login: reset any token on wrong logins
 		if self.is_auth() is False:
 			print("[MyTube] MyTubePlayerService - auth_use - auth not possible resetting")
@@ -652,11 +663,11 @@ class MyTubePlayerService():
 
 	def is_auth(self):
 		if self.current_auth_token is not None:
-			return True		
-		
+			return True
+
 		if self.yt_service.current_token is None:
 			return False
-		
+
 		return self.yt_service.current_token.get_token_string() != 'None'
 
 	def auth_token(self):
@@ -681,11 +692,11 @@ class MyTubePlayerService():
 			return self.yt_service.GetMostRespondedVideoFeed
 		return self.yt_service.GetYouTubeVideoFeed
 
-	def getFeed(self, url, feedname = "", callback = None, errorback = None):
+	def getFeed(self, url, feedname="", callback=None, errorback=None):
 		print("[MyTube] MyTubePlayerService - getFeed:", url, feedname)
 		self.feedentries = []
 		ytservice = self.yt_service.GetYouTubeVideoFeed
-		
+
 		if feedname == "my_subscriptions":
 			url = "http://gdata.youtube.com/feeds/api/users/default/newsubscriptionvideos"
 		elif feedname == "my_favorites":
@@ -711,10 +722,10 @@ class MyTubePlayerService():
 		queryThread.start()
 		return queryThread
 
-	def search(self, searchTerms, startIndex = 1, maxResults = 25,
-					orderby = "relevance", time = 'all_time', racy = "include",
-					author = "", lr = "", categories = "", sortOrder = "ascending",
-					callback = None, errorback = None):
+	def search(self, searchTerms, startIndex=1, maxResults=25,
+					orderby="relevance", time='all_time', racy="include",
+					author="", lr="", categories="", sortOrder="ascending",
+					callback=None, errorback=None):
 		print("[MyTube] MyTubePlayerService - search()")
 		self.feedentries = []
 		query = gdata.youtube.service.YouTubeVideoQuery()
@@ -749,33 +760,33 @@ class MyTubePlayerService():
 	def SubscribeToUser(self, username):
 		try:
 			new_subscription = self.yt_service.AddSubscriptionToChannel(username_to_subscribe_to=username)
-	
+
 			if isinstance(new_subscription, gdata.youtube.YouTubeSubscriptionEntry):
 				print('[MyTube] MyTubePlayerService: New subscription added')
 				return _('New subscription added')
-			
+
 			return _('Unknown error')
 		except gdata.service.RequestError as req:
 			return str('Error: ' + str(req[0]["body"]))
 		except Exception as e:
 			return str('Error: ' + e)
-	
+
 	def addToFavorites(self, video_id):
 		try:
 			video_entry = self.yt_service.GetYouTubeVideoEntry(video_id=video_id)
 			response = self.yt_service.AddVideoEntryToFavorites(video_entry)
-			
+
 			# The response, if succesfully posted is a YouTubeVideoEntry
 			if isinstance(response, gdata.youtube.YouTubeVideoEntry):
 				print('[MyTube] MyTubePlayerService: Video successfully added to favorites')
-				return _('Video successfully added to favorites')	
-	
+				return _('Video successfully added to favorites')
+
 			return _('Unknown error')
 		except gdata.service.RequestError as req:
 			return str('Error: ' + str(req[0]["body"]))
 		except Exception as e:
 			return str('Error: ' + e)
-	
+
 	def getTitle(self):
 		return self.feed.title.text
 
@@ -788,7 +799,7 @@ class MyTubePlayerService():
 	def getTotalResults(self):
 		if self.feed.total_results is None:
 			return 0
-				
+
 		return self.feed.total_results.text
 
 	def getNextFeedEntriesURL(self):
@@ -800,8 +811,9 @@ class MyTubePlayerService():
 	def getCurrentPage(self):
 		if self.feed.start_index is None:
 			return 1
-		
+
 		return int(int(self.feed.start_index.text) / int(self.itemCount())) + 1
+
 
 class YoutubeQueryThread(Thread):
 	def __init__(self, query, param, gotFeed, gotFeedError, callback, errorback):
@@ -840,5 +852,5 @@ class YoutubeQueryThread(Thread):
 			else:
 				self.gotFeedError(message[1], message[2])
 
-myTubeService = MyTubePlayerService()
 
+myTubeService = MyTubePlayerService()

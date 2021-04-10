@@ -15,6 +15,7 @@ import os
 import six
 #######################
 
+
 class Satloader(Screen):
 	framewidth = getDesktop(0).size().width()
 	if framewidth == 1280:
@@ -76,15 +77,15 @@ class Satloader(Screen):
 		self.list.addSelection("Satbeams", "http://satellites.satloader.net/satbeams", 1, None)
 		self.list.addSelection("Kingofsat", "http://satellites.satloader.net/kingofsat", 2, None)
 		self.list.addSelection("Kingofsat (feeds)", "http://satellites.satloader.net/kingofsat/feeds", 3, None)
-		self["info"].setText("%s" %(_("Press ok or green button to install satellites.xml")))
+		self["info"].setText("%s" % (_("Press ok or green button to install satellites.xml")))
 
 	def btnRed(self):
 		print("\n[Satloader] cancel\n")
 		self.close(None)
 
 	def btnOK(self):
-		self["info"].setText("%s" %(_("Please wait...")))
-		saturl = self["list"].l.getCurrentSelection()[0][1]+"/satellites.xml"
+		self["info"].setText("%s" % (_("Please wait...")))
+		saturl = self["list"].l.getCurrentSelection()[0][1] + "/satellites.xml"
 		downloadPage(six.ensure_binary(saturl), "/etc/tuxbox/satellites.xml").addCallback(self.downloadListSATCallback).addErrback(self.downloadListError)
 
 	def btnYellow(self):
@@ -92,37 +93,38 @@ class Satloader(Screen):
 
 	def btnBlue(self):
 		satname = self["list"].l.getCurrentSelection()[0][0]
-		saturl = self["list"].l.getCurrentSelection()[0][1]+"/multisat.tar.gz"
+		saturl = self["list"].l.getCurrentSelection()[0][1] + "/multisat.tar.gz"
 		self.session.open(SatloaderMultiSat, satname, saturl)
 
 	def btnInfo(self):
 		self.session.open(SatloaderAbout)
 
 	def downloadListError(self, ret):
-		self["info"].setText("%s" %(_("Downloading satellites failed!")))
-		self.session.open(MessageBox, "%s" %(_("Downloading satellites failed!")), MessageBox.TYPE_ERROR)
+		self["info"].setText("%s" % (_("Downloading satellites failed!")))
+		self.session.open(MessageBox, "%s" % (_("Downloading satellites failed!")), MessageBox.TYPE_ERROR)
 
 	def downloadListSATCallback(self, ret):
 		if six.PY3:
-			u = open("/etc/tuxbox/satellites.xml","rb").read().encode("utf-8")
-			open("/etc/tuxbox/satellites.xml","w").write(u)
-		restart = self.session.openWithCallback(self.restart, MessageBox, "%s\n%s\n\n%s\n%s" %(_("satellites.xml is updated"), str(self["list"].l.getCurrentSelection()[0][0]), _("GUI needs a restart to apply changes."), _("Do you want to restart the GUI now?")), MessageBox.TYPE_YESNO)
-		restart.setTitle("%s" %(_("Restart GUI now?")))
+			u = open("/etc/tuxbox/satellites.xml", "rb").read().encode("utf-8")
+			open("/etc/tuxbox/satellites.xml", "w").write(u)
+		restart = self.session.openWithCallback(self.restart, MessageBox, "%s\n%s\n\n%s\n%s" % (_("satellites.xml is updated"), str(self["list"].l.getCurrentSelection()[0][0]), _("GUI needs a restart to apply changes."), _("Do you want to restart the GUI now?")), MessageBox.TYPE_YESNO)
+		restart.setTitle("%s" % (_("Restart GUI now?")))
 
 	def restart(self, ret):
 		if ret is True:
 			self.session.open(TryQuitMainloop, 3)
 		else:
-			self["info"].setText("%s" %(_("GUI needs a restart.")))
+			self["info"].setText("%s" % (_("GUI needs a restart.")))
 
 #######################
+
 
 class SatloaderAbout(Screen):
 	skin = """
 		<screen position="center,center" size="360,280" title="%s">
 			<ePixmap position="120,40" size="100,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/satloader.png" alphatest="on" />
 			<widget name="info" position="10,100" size="340,120" zPosition="10" font="Regular;22" valign="center" halign="center" />
-		</screen>""" %(_("About"))
+		</screen>""" % (_("About"))
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -134,6 +136,7 @@ class SatloaderAbout(Screen):
 		}, -1)
 
 #######################
+
 
 class SatloaderBouquet(Screen):
 	framewidth = getDesktop(0).size().width()
@@ -180,7 +183,7 @@ class SatloaderBouquet(Screen):
 		self.onLayoutFinish.append(self.onLayoutFinished)
 
 	def onLayoutFinished(self):
-		self["info"].setText("%s" %(_("Please wait...")))
+		self["info"].setText("%s" % (_("Please wait...")))
 		downloadPage(b"http://satellites.satloader.net/bouquet.tar.gz", "/tmp/bouquet.tar.gz").addCallback(self.downloadListBouquetCallback).addErrback(self.downloadListError)
 
 	def btnRed(self):
@@ -196,26 +199,26 @@ class SatloaderBouquet(Screen):
 			list = self.list.getSelectionsList()
 			if len(list) != 0:
 				for item in list:
-					if "\""+item[1]+"\"" not in open("/etc/enigma2/bouquets.tv").read():
-						os.system("cp /tmp/bouquet/"+item[1]+" /etc/enigma2/"+item[1])
+					if "\"" + item[1] + "\"" not in open("/etc/enigma2/bouquets.tv").read():
+						os.system("cp /tmp/bouquet/" + item[1] + " /etc/enigma2/" + item[1])
 						f = open("/etc/enigma2/bouquets.tv", 'a')
-						f.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \""+item[1]+"\" ORDER BY bouquet\n")
+						f.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"" + item[1] + "\" ORDER BY bouquet\n")
 						f.flush()
 						os.fsync(f.fileno())
 						f.close()
 
-				restart = self.session.openWithCallback(self.restart, MessageBox, "%s\n\n%s\n%s" %(_("selected bouquets are installed"), _("GUI needs a restart to apply changes."), _("Do you want to restart the GUI now?")), MessageBox.TYPE_YESNO)
-				restart.setTitle("%s" %(_("Restart GUI now?")))
+				restart = self.session.openWithCallback(self.restart, MessageBox, "%s\n\n%s\n%s" % (_("selected bouquets are installed"), _("GUI needs a restart to apply changes."), _("Do you want to restart the GUI now?")), MessageBox.TYPE_YESNO)
+				restart.setTitle("%s" % (_("Restart GUI now?")))
 
 			else:
-				self["info"].setText("%s" %(_("Please select at least one bouquet")))
+				self["info"].setText("%s" % (_("Please select at least one bouquet")))
 
 	def downloadListError(self, ret):
-		self["info"].setText("%s" %(_("Downloading bouquets failed!")))
-		self.session.open(MessageBox, "%s" %(_("Downloading bouquets failed!")), MessageBox.TYPE_ERROR)
+		self["info"].setText("%s" % (_("Downloading bouquets failed!")))
+		self.session.open(MessageBox, "%s" % (_("Downloading bouquets failed!")), MessageBox.TYPE_ERROR)
 
 	def downloadListBouquetCallback(self, ret):
-		self["info"].setText("%s" %(_("Downloading succesfull! Parsing ...")))
+		self["info"].setText("%s" % (_("Downloading succesfull! Parsing ...")))
 
 		try:
 			if os.path.exists('/tmp/bouquet'):
@@ -224,7 +227,7 @@ class SatloaderBouquet(Screen):
 			os.system("tar -xzf /tmp/bouquet.tar.gz -C/tmp/bouquet")
 			os.system("rm -f /tmp/bouquet.tar.gz")
 
-			idx=0
+			idx = 0
 			self.list.clearList()
 			f = open("/tmp/bouquet/list.lst", "r")
 			for line in f:
@@ -234,19 +237,20 @@ class SatloaderBouquet(Screen):
 			f.close()
 
 			if self.list is not None:
-				self["info"].setText("%s" %(_("Press ok button to select bouquet")))
+				self["info"].setText("%s" % (_("Press ok button to select bouquet")))
 
 		except Exception as e:
 			print("Error:", e)
-			self["info"].setText("%s\n%s" %(_("Parsing failed!"), e))
+			self["info"].setText("%s\n%s" % (_("Parsing failed!"), e))
 
 	def restart(self, ret):
 		if ret is True:
 			self.session.open(TryQuitMainloop, 3)
 		else:
-			self["info"].setText("%s" %(_("GUI needs a restart.")))
+			self["info"].setText("%s" % (_("GUI needs a restart.")))
 
 #######################
+
 
 class SatloaderMultiSat(Screen):
 	framewidth = getDesktop(0).size().width()
@@ -286,7 +290,7 @@ class SatloaderMultiSat(Screen):
 		self.list = SatloaderList([])
 		self["list"] = self.list
 		self["info"] = Label()
-		self["desc"] = Label("%s %s" %(_("Source:"), self.satname))
+		self["desc"] = Label("%s %s" % (_("Source:"), self.satname))
 		self["key_red"] = Label(_("Cancel"))
 		self["key_green"] = Label(_("OK"))
 		self["key_yellow"] = Label(_("Transponder"))
@@ -302,7 +306,7 @@ class SatloaderMultiSat(Screen):
 		self.onLayoutFinish.append(self.onLayoutFinished)
 
 	def onLayoutFinished(self):
-		self["info"].setText("%s %s" %(_("Download:"), self.satname))
+		self["info"].setText("%s %s" % (_("Download:"), self.satname))
 		downloadPage(six.ensure_binary(self.saturl), "/tmp/multisat.tar.gz").addCallback(self.downloadListMultiSatCallback).addErrback(self.downloadListError)
 
 	def btnRed(self):
@@ -327,11 +331,11 @@ class SatloaderMultiSat(Screen):
 				f.flush()
 				os.fsync(f.fileno())
 				f.close()
-				
-				restart = self.session.openWithCallback(self.restart, MessageBox, "%s\n%s\n\n%s\n%s" %(_("satellites.xml has been built."), str(self.satname), _("GUI needs a restart to apply changes."), _("Do you want to restart the GUI now?")), MessageBox.TYPE_YESNO)
-				restart.setTitle("%s" %(_("Restart GUI now?")))
+
+				restart = self.session.openWithCallback(self.restart, MessageBox, "%s\n%s\n\n%s\n%s" % (_("satellites.xml has been built."), str(self.satname), _("GUI needs a restart to apply changes."), _("Do you want to restart the GUI now?")), MessageBox.TYPE_YESNO)
+				restart.setTitle("%s" % (_("Restart GUI now?")))
 			else:
-				self["info"].setText("%s" %(_("Please select at least one satellite")))
+				self["info"].setText("%s" % (_("Please select at least one satellite")))
 
 	def btnYellow(self):
 		if self["list"].l.getCurrentSelection() is not None:
@@ -340,11 +344,11 @@ class SatloaderMultiSat(Screen):
 			self.session.open(TransponderSelection, satname, satfile)
 
 	def downloadListError(self, ret):
-		self["info"].setText("%s" %(_("Downloading satellites failed!")))
-		self.session.open(MessageBox, "%s" %(_("Downloading satellites failed!")), MessageBox.TYPE_ERROR)
+		self["info"].setText("%s" % (_("Downloading satellites failed!")))
+		self.session.open(MessageBox, "%s" % (_("Downloading satellites failed!")), MessageBox.TYPE_ERROR)
 
 	def downloadListMultiSatCallback(self, ret):
-		self["info"].setText("%s" %(_("Downloading succesfull! Parsing ...")))
+		self["info"].setText("%s" % (_("Downloading succesfull! Parsing ...")))
 
 		try:
 			if os.path.exists('/tmp/multisat'):
@@ -358,24 +362,25 @@ class SatloaderMultiSat(Screen):
 			f = open("/tmp/multisat/satlist.lst", "r")
 			for line in f:
 				m = line.split(";")
-				self.list.addSelection(m[0], "/tmp/multisat/"+m[1], idx, False)
+				self.list.addSelection(m[0], "/tmp/multisat/" + m[1], idx, False)
 				idx += 1
 			f.close()
 
 			if self.list is not None:
-				self["info"].setText("%s" %(_("Press ok button to select satellite")))
+				self["info"].setText("%s" % (_("Press ok button to select satellite")))
 
 		except Exception as e:
 			print("Error:", e)
-			self["info"].setText("%s\n%s" %(_("Parsing failed!"), e))
+			self["info"].setText("%s\n%s" % (_("Parsing failed!"), e))
 
 	def restart(self, ret):
 		if ret is True:
 			self.session.open(TryQuitMainloop, 3)
 		else:
-			self["info"].setText("%s" %(_("GUI needs a restart.")))
+			self["info"].setText("%s" % (_("GUI needs a restart.")))
 
 #######################
+
 
 class TransponderSelection(Screen):
 	framewidth = getDesktop(0).size().width()
@@ -390,7 +395,7 @@ class TransponderSelection(Screen):
 				<widget name="key_green" position="206,4" size="190,32" valign="center" halign="center" zPosition="1" font="Regular;22" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="list" position="10,40" size="780,400" scrollbarMode="showOnDemand" />
 				<widget name="info" position="10,450" size="780,50" zPosition="10" font="Regular;22" valign="center" halign="center" />
-			</screen>""" %(_("Transponder selection"))
+			</screen>""" % (_("Transponder selection"))
 	elif framewidth == 720:
 		skin = """
 			<screen position="center,center" size="560,460" title="%s">
@@ -402,7 +407,7 @@ class TransponderSelection(Screen):
 				<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="list" position="10,50" size="540,350" scrollbarMode="showOnDemand" />
 				<widget name="info" position="10,410" size="540,40" zPosition="10" font="Regular;20" valign="center" halign="center" />
-			</screen>""" %(_("Transponder selection"))
+			</screen>""" % (_("Transponder selection"))
 
 	def __init__(self, session, satname, satfile):
 		Screen.__init__(self, session)
@@ -441,11 +446,11 @@ class TransponderSelection(Screen):
 				elif m[5] == "3":
 					pol = "R"
 
-				text = "TP: %s   %s %s %s   %s %s" %(str(idx+1).zfill(3), _("Frequency:"), str(m[1]).zfill(8)[:5], str(pol), _("Symbol Rate:"), str(m[3]).zfill(8)[:5])
+				text = "TP: %s   %s %s %s   %s %s" % (str(idx + 1).zfill(3), _("Frequency:"), str(m[1]).zfill(8)[:5], str(pol), _("Symbol Rate:"), str(m[3]).zfill(8)[:5])
 				self.list.addSelection(text, line, idx, True)
 				idx += 1
 		f.close()
-		self["info"].setText("%s" %(self.satname))
+		self["info"].setText("%s" % (self.satname))
 
 	def btnRed(self):
 		print("\n[TransponderSelection] cancel\n")
@@ -466,13 +471,14 @@ class TransponderSelection(Screen):
 			f.flush()
 			os.fsync(f.fileno())
 			f.close()
-			
-			self.session.open(MessageBox, "\"%s\" %s" %(str(self.satfile), _("has been saved.")), MessageBox.TYPE_INFO, timeout=3)
+
+			self.session.open(MessageBox, "\"%s\" %s" % (str(self.satfile), _("has been saved.")), MessageBox.TYPE_INFO, timeout=3)
 			self.close(None)
 		else:
-			self["info"].setText("%s" %(_("Please select at least one transponder")))
+			self["info"].setText("%s" % (_("Please select at least one transponder")))
 
 #######################
+
 
 class SatloaderList(MenuList):
 	def __init__(self, list):
@@ -484,7 +490,7 @@ class SatloaderList(MenuList):
 		self.list = []
 		self.setList(self.list)
 
-	def addSelection(self, description, value, index, selected = False):
+	def addSelection(self, description, value, index, selected=False):
 		self.list.append(SatListEntry(description, value, index, selected))
 		self.setList(self.list)
 
@@ -495,9 +501,10 @@ class SatloaderList(MenuList):
 		self.setList(self.list)
 
 	def getSelectionsList(self):
-		return [ (item[0][0], item[0][1], item[0][2]) for item in self.list if item[0][3] ]
+		return [(item[0][0], item[0][1], item[0][2]) for item in self.list if item[0][3]]
 
 #######################
+
 
 def SatListEntry(description, value, index, selected):
 	if selected == None:
@@ -512,12 +519,13 @@ def SatListEntry(description, value, index, selected):
 			(eListboxPythonMultiContent.TYPE_TEXT, 40, 0, 730, 25, 0, RT_HALIGN_LEFT, description)
 		]
 		if selected == True:
-			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 0, 25, 24,  LoadPixmap(cached=True, path="/usr/share/enigma2/skin_default/icons/lock_on.png")))
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 0, 25, 24, LoadPixmap(cached=True, path="/usr/share/enigma2/skin_default/icons/lock_on.png")))
 		elif selected == False:
-			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 0, 25, 24,  LoadPixmap(cached=True, path="/usr/share/enigma2/skin_default/icons/lock_off.png")))
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 0, 25, 24, LoadPixmap(cached=True, path="/usr/share/enigma2/skin_default/icons/lock_off.png")))
 		return res
 
 #######################
+
 
 def main(session, **kwargs):
 	print("\n[Satloader] start\n")
@@ -525,8 +533,9 @@ def main(session, **kwargs):
 
 #######################
 
+
 def Plugins(**kwargs):
 	return [
-		PluginDescriptor(name="Satloader Plugin", description="updates satellites.xml", icon="satloader.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
-		PluginDescriptor(name="Satloader Plugin", description="updates satellites.xml", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)
+		PluginDescriptor(name="Satloader Plugin", description="updates satellites.xml", icon="satloader.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+		PluginDescriptor(name="Satloader Plugin", description="updates satellites.xml", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)
 		]

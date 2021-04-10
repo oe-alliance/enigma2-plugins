@@ -22,6 +22,7 @@ from . import config
 from Components.config import config
 import six
 
+
 class CurlyTx(Screen, HelpableScreen):
     skin = """
         <screen name="CurlyTx" position="center,center" size="560,430" title="CurlyTx" >
@@ -42,7 +43,7 @@ class CurlyTx(Screen, HelpableScreen):
     httpGetterFactory = None
     showingHeaders = False
 
-    def __init__(self, session, args = None):
+    def __init__(self, session, args=None):
         #self.skin = CurlyTx.skin
         Screen.__init__(self, session)
         HelpableScreen.__init__(self)
@@ -50,23 +51,22 @@ class CurlyTx(Screen, HelpableScreen):
 
         self["text"] = ScrollLabel("foo")
 
-        self["key_red"]    = StaticText(_("Settings"))
-        self["key_green"]  = StaticText(_("Reload"))
+        self["key_red"] = StaticText(_("Settings"))
+        self["key_green"] = StaticText(_("Reload"))
         self["key_yellow"] = StaticText(_("Prev"))
-        self["key_blue"]   = StaticText(_("Next"))
-
+        self["key_blue"] = StaticText(_("Next"))
 
         self["actions"] = ActionMap(
             ["WizardActions", "ColorActions", "InputActions", "InfobarEPGActions"], {
-                "ok":   self.close,
+                "ok": self.close,
                 "back": self.close,
-                "up":   self.pageUp,
+                "up": self.pageUp,
                 "down": self.pageDown,
 
-                "red":    self.showSettings,
-                "green":  self.reload,
+                "red": self.showSettings,
+                "green": self.reload,
                 "yellow": self.prevPage,
-                "blue":   self.nextPage,
+                "blue": self.nextPage,
 
                 "showEventInfo": self.showHeader
             }, -1)
@@ -168,10 +168,10 @@ class CurlyTx(Screen, HelpableScreen):
             if len(cfg.pages) == 0:
                 self.loadNoPage()
             else:
-                self["text"].setText(_("Invalid page") + " " + pageId);
+                self["text"].setText(_("Invalid page") + " " + pageId)
             return
 
-        url   = cfg.pages[pageId].uri.value
+        url = cfg.pages[pageId].uri.value
         title = cfg.pages[pageId].title.value
 
         if pageCount > 1:
@@ -183,7 +183,7 @@ class CurlyTx(Screen, HelpableScreen):
 
         self.setTitle(title)
         self.setTextFont()
-        self["text"].setText(_("Loading ...") + "\n" + url);
+        self["text"].setText(_("Loading ...") + "\n" + url)
 
         self.getPageWebClient(six.ensure_binary(url)).addCallback(self.urlLoaded).addErrback(self.urlFailed, url)
 
@@ -202,12 +202,12 @@ class CurlyTx(Screen, HelpableScreen):
             )
 
     def loadNoPage(self):
-        self["text"].setText(_("Go and add a page in the settings"));
+        self["text"].setText(_("Go and add a page in the settings"))
 
     def showHeader(self):
         if self.showingHeaders:
             self["text"].setText(self.pageContent)
-            self.pageContent    = None
+            self.pageContent = None
             self.showingHeaders = False
         elif self.httpGetterFactory.response_headers:
             headers = _("HTTP response headers for") + "\n" + self.currentUrl + "\n\n"
@@ -229,7 +229,6 @@ class CurlyTx(Screen, HelpableScreen):
         elif self.currentPage == None:
             self.currentPage = 0
             self.loadUrl(self.currentPage)
-
 
     def getPageWebClient(self, url, contextFactory=None, *args, **kwargs):
         """

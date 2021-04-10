@@ -1,13 +1,13 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 #  Advanced Movie Selection for Dreambox-Enigma2
 #
 #  The plugin is developed on the basis from a lot of single plugins (thx for the code @ all)
 #  Coded by cmikula & JackDaniel (c)2012
 #  Support: www.i-have-a-dreambox.com
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -16,7 +16,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 
@@ -34,8 +34,8 @@ config.usage.on_movie_stop = ConfigSelection(default="ask", choices=[("ask", _("
 config.usage.on_movie_eof = ConfigSelection(default="ask", choices=[("ask", _("Ask user")), ("movielist", _("Return to movie list")), ("quit", _("Return to previous service")), ("pause", _("Pause movie at end")), ("standby", _("Standby")), ("shutdown", _("Shutdown"))])
 
 config.AdvancedMovieSelection = ConfigSubsection()
-config.AdvancedMovieSelection.last_selected_service = ConfigText(default = "")
-config.AdvancedMovieSelection.wastelist_buildtype = ConfigSelection(default="listMovies", choices=[("listMovies", _("Only current location")), ("listAllMovies", _("Current location and all subdirectories")), ("listAllMoviesMedia", _("All directorys below '/media'")) ])
+config.AdvancedMovieSelection.last_selected_service = ConfigText(default="")
+config.AdvancedMovieSelection.wastelist_buildtype = ConfigSelection(default="listMovies", choices=[("listMovies", _("Only current location")), ("listAllMovies", _("Current location and all subdirectories")), ("listAllMoviesMedia", _("All directorys below '/media'"))])
 config.AdvancedMovieSelection.use_wastebasket = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.overwrite_left_right = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.sensibility = ConfigInteger(default=10, limits=(1, 100))
@@ -94,7 +94,7 @@ config.AdvancedMovieSelection.bookmark4owntext = ConfigText(default=_("Own text 
 config.AdvancedMovieSelection.bookmark5owntext = ConfigText(default=_("Own text 5"), visible_width=50, fixed_size=False)
 config.AdvancedMovieSelection.bookmark6owntext = ConfigText(default=_("Own text 6"), visible_width=50, fixed_size=False)
 config.AdvancedMovieSelection.bookmark7owntext = ConfigText(default=_("Own text 7"), visible_width=50, fixed_size=False)
-launch_choices = [    ("None", _("No override")),
+launch_choices = [("None", _("No override")),
                             ("showMovies", _("Video-button")),
                             ("showTv", _("TV-button")),
                             ("showRadio", _("Radio-button")),
@@ -200,6 +200,7 @@ config.AdvancedMovieSelection.movielibrary_show_mark_cnt = ConfigInteger(default
 config.AdvancedMovieSelection.hide_seen_movies = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.qButtons = ConfigText()
 
+
 class QuickButtons():
     def __init__(self):
         self.qlist = [('red', ''), ('red_long', ''), ('green', ''), ('green_long', ''), ('yellow', ''), ('yellow_long', ''), ('blue', ''), ('blue_long', '')]
@@ -209,15 +210,15 @@ class QuickButtons():
         for button, function in self.qlist:
             if button == key:
                 return function
-    
+
     def setFunction(self, button, function):
         for index, item in enumerate(self.qlist):
             if item[0] == button:
                 self.qlist[index] = (button, function)
-    
+
     def get(self):
         return self.qlist
-    
+
     def load(self):
         if config.AdvancedMovieSelection.qButtons.value:
             l = eval(config.AdvancedMovieSelection.qButtons.value)
@@ -225,11 +226,11 @@ class QuickButtons():
                 self.qlist = l
         else:
             self.updateOldVersion()
-    
+
     def save(self):
         config.AdvancedMovieSelection.qButtons.value = str(self.qlist)
         config.AdvancedMovieSelection.qButtons.save()
-        
+
     def updateOldVersion(self):
         try:
             print("update older config version")
@@ -240,24 +241,29 @@ class QuickButtons():
             print(self.qlist)
         except:
             printStackTrace()
-    
+
+
 qButtons = QuickButtons()
+
 
 def initializeConfig():
     pass
 
+
 CONFIG_BACKUP = ("AdvancedMovieSelection", "movielist")
 BACKUP_FILE_NAME = "AMS.settings.backup"
+
 
 def getChanges(config_entry, changes):
     print("get changes for:", config_entry)
     entry = config.content.items[config_entry]
     for item in entry.dict():
         conf = entry.__getattr__(item)
-        if conf.default != conf.value: 
+        if conf.default != conf.value:
             txt = "config.%s.%s=%s" % (config_entry, item, conf.saved_value)
             print(txt)
             changes.append(txt)
+
 
 def createBackup(path="/media/hdd/"):
     changes = []
@@ -267,7 +273,7 @@ def createBackup(path="/media/hdd/"):
     import os
     file_name = os.path.join(path, BACKUP_FILE_NAME)
     print("create backup", file_name)
-    try: 
+    try:
         backup = open(file_name, 'wb')
         backup.write("\n".join(changes))
         backup.close()
@@ -276,8 +282,9 @@ def createBackup(path="/media/hdd/"):
         return
     return file_name
 
+
 def loadBackup(file_name):
-    print("load backup", file_name) 
+    print("load backup", file_name)
     backup = open(file_name, 'rb')
     for line in backup.readlines():
         try:

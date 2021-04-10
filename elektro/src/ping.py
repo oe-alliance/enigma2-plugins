@@ -43,93 +43,99 @@ import time
 import sys
 
 # From /usr/include/linux/icmp.h; your milage may vary.
-ICMP_ECHO_REQUEST=8 # Seems to be the same on Solaris.
+ICMP_ECHO_REQUEST = 8 # Seems to be the same on Solaris.
 
 # I'm not too confident that this is right but testing seems
 # to suggest that it gives the same answers as in_cksum in ping.c
+
+
 def checksum(str):
-  sum=0
-  countTo=(len(str)/2)*2
-  count=0
-  while count<countTo:
-    thisVal=ord(str[count+1])*256+ord(str[count])
-    sum=sum+thisVal
-    sum=sum & 0xffffffff # Necessary?
-    count=count+2
+  sum = 0
+  countTo = (len(str) / 2) * 2
+  count = 0
+  while count < countTo:
+    thisVal = ord(str[count + 1]) * 256 + ord(str[count])
+    sum = sum + thisVal
+    sum = sum & 0xffffffff # Necessary?
+    count = count + 2
 
-  if countTo<len(str):
-    sum=sum+ord(str[len(str)-1])
-    sum=sum & 0xffffffff # Necessary?
+  if countTo < len(str):
+    sum = sum + ord(str[len(str) - 1])
+    sum = sum & 0xffffffff # Necessary?
 
-  sum=(sum >> 16) + (sum & 0xffff)
-  sum=sum+(sum >> 16)
-  answer=~sum
-  answer=answer & 0xffff
+  sum = (sum >> 16) + (sum & 0xffff)
+  sum = sum + (sum >> 16)
+  answer = ~sum
+  answer = answer & 0xffff
 
   # Swap bytes. Bugger me if I know why.
-  answer=answer >> 8 | (answer << 8 & 0xff00)
-  
+  answer = answer >> 8 | (answer << 8 & 0xff00)
+
   return answer
 
+
 def receiveOnePing(mySocket, ID, timeout):
-  timeLeft=timeout
+  timeLeft = timeout
   while True:
-    startedSelect=time.time()
-    whatReady=select.select([mySocket], [], [], timeLeft)
-    howLongInSelect=(time.time()-startedSelect)
-    if whatReady[0]==[]: # Timeout
+    startedSelect = time.time()
+    whatReady = select.select([mySocket], [], [], timeLeft)
+    howLongInSelect = (time.time() - startedSelect)
+    if whatReady[0] == []: # Timeout
       return None
-    timeReceived=time.time()
-    recPacket, addr=mySocket.recvfrom(1024)
-    icmpHeader=recPacket[20:28]
-    type, code, checksum, packetID, sequence=struct.unpack("bbHHh", icmpHeader)
-    if packetID==ID:
-      bytesInDouble=struct.calcsize("d")
-      timeSent=struct.unpack("d", recPacket[28:28+bytesInDouble])[0]
-      return timeReceived-timeSent
-      
-    timeLeft=timeLeft-howLongInSelect
-    if timeLeft<=0:
+    timeReceived = time.time()
+    recPacket, addr = mySocket.recvfrom(1024)
+    icmpHeader = recPacket[20:28]
+    type, code, checksum, packetID, sequence = struct.unpack("bbHHh", icmpHeader)
+    if packetID == ID:
+      bytesInDouble = struct.calcsize("d")
+      timeSent = struct.unpack("d", recPacket[28:28 + bytesInDouble])[0]
+      return timeReceived - timeSent
+
+    timeLeft = timeLeft - howLongInSelect
+    if timeLeft <= 0:
       return None
+
 
 def sendOnePing(mySocket, destAddr, ID):
   # Header is type (8), code (8), checksum (16), id (16), sequence (16)
-  myChecksum=0
+  myChecksum = 0
   # Make a dummy heder with a 0 checksum.
-  header=struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, ID, 1)
-  bytesInDouble=struct.calcsize("d")
-  data=(192-bytesInDouble) * "Q"
-  data=struct.pack("d", time.time())+data
+  header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, ID, 1)
+  bytesInDouble = struct.calcsize("d")
+  data = (192 - bytesInDouble) * "Q"
+  data = struct.pack("d", time.time()) + data
   # Calculate the checksum on the data and the dummy header.
-  myChecksum=checksum(header+data)
+  myChecksum = checksum(header + data)
   # Now that we have the right checksum, we put that in. It's just easier
   # to make up a new header than to stuff it into the dummy.
-  header=struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, htons(myChecksum), ID, 1)
-  packet=header+data
-  mySocket.sendto(packet, (destAddr, 1)) # Don't know about the 1 
+  header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, htons(myChecksum), ID, 1)
+  packet = header + data
+  mySocket.sendto(packet, (destAddr, 1)) # Don't know about the 1
   return None
-  
-def doOne(destAddr,timeout=10):
+
+
+def doOne(destAddr, timeout=10):
   # Returns either the delay (in seconds) or none on timeout.
-  icmp=getprotobyname("icmp")
-  mySocket=socket(AF_INET, SOCK_RAW, icmp)
-  myID=os.getpid() & 0xFFFF
+  icmp = getprotobyname("icmp")
+  mySocket = socket(AF_INET, SOCK_RAW, icmp)
+  myID = os.getpid() & 0xFFFF
   sendOnePing(mySocket, destAddr, myID)
-  delay=receiveOnePing(mySocket, myID, timeout)
+  delay = receiveOnePing(mySocket, myID, timeout)
   mySocket.close()
   return delay
 
+
 def main():
-  if len(sys.argv)<2:
+  if len(sys.argv) < 2:
     print("Usage: %s hostname" % os.path.basename(sys.argv[0]))
     sys.exit(1)
 
-  dest=gethostbyname(sys.argv[1])
-  delay=doOne(dest)
+  dest = gethostbyname(sys.argv[1])
+  delay = doOne(dest)
   print(delay)
   return None
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
   main()
   sys.exit(0)
-

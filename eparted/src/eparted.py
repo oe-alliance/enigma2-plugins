@@ -50,11 +50,13 @@ PA_NAME = 7
 
 #-----------------------------------------------------------------------------
 
+
 def getInt_epart(val):
 	try:
 		return int(float(val[0:-2]))#Einheit abschneiden
 	except:
 		return 0
+
 
 def parseCmd(result):
 	devlist = []
@@ -91,6 +93,7 @@ def parseCmd(result):
 		return []
 	return devlist
 
+
 def myExecute(cmd, session, test=False):
 	if test:
 		from time import sleep
@@ -103,7 +106,8 @@ def myExecute(cmd, session, test=False):
 	if result != 0 and session is not None:
 		session.open(MessageBox, _("Error command '%s'") % cmd, MessageBox.TYPE_ERROR, timeout=8)
 	return result
-	
+
+
 def getMountP():
 	try:
 		mounts = open("/proc/mounts")
@@ -114,6 +118,7 @@ def getMountP():
 	mounts.close()
 	return lines
 
+
 def ismounted(dev):
 	for x in getMountP():
 		parts = x.strip().split(" ")
@@ -123,13 +128,16 @@ def ismounted(dev):
 				return parts[1]
 	return None
 
+
 rereaddevices = False
 #-------------------------------------------------------------------------------------
+
 
 class Ceparted(Screen):
 	skin = """<screen position="center,center" size="600,200" title="eParted v0.13">
 			<widget name="list" position="5,5" size="590,190" />
 		</screen>"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
@@ -151,12 +159,12 @@ class Ceparted(Screen):
 			global rereaddevices
 			rereaddevices = False
 			self.session.openWithCallback(self.__readDev, Cpart, sel[1])
-	
+
 	def __readDev(self):
 		global rereaddevices
 		if rereaddevices:
 			self.Console.ePopen("parted -m -l", self.__FinishedConsole)
-		
+
 	def Exit(self):
 		self.Console.killAll()
 		self.close()
@@ -177,6 +185,7 @@ class Ceparted(Screen):
 			self["list"].setList(list)
 
 #-------------------------------------------------------------------------------------
+
 
 class AddPart(Screen, ConfigListScreen):
 	skin = """<screen name="AddPart" position="center,center" size="600,190" title="add Partition" >
@@ -217,10 +226,10 @@ class AddPart(Screen, ConfigListScreen):
 			list.append(getConfigListEntry(_("size in %s (max %d %s):") % (unit, maxsize, unit), config.plugins.eparted.size))
 		list.append(getConfigListEntry(_("filesystem:"), config.plugins.eparted.fs))
 		ConfigListScreen.__init__(self, list, session=session)
-		
+
 		self["key_red"] = StaticText(_("cancel"))
 		self["key_green"] = StaticText(_("ok"))
-		
+
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"red": self.keyCancel,
@@ -232,12 +241,13 @@ class AddPart(Screen, ConfigListScreen):
 
 	def keyCancel(self):
 		self.close()
-		
+
 	def keySave(self):
 		if config.plugins.eparted.size.value > 0:
 			self.close((config.plugins.eparted.size.value, config.plugins.eparted.fs.value))
 
 #-------------------------------------------------------------------------------------
+
 
 class Cpart(Screen):
 	PA_TYPE_USE = 1
@@ -296,14 +306,14 @@ class Cpart(Screen):
 
 		self.Console = Console()
 		self.__getPartInfo()
-		
+
 	def Exit(self):
 		self.Console.killAll()
 		self.close()
-		
+
 	def __getPartInfo(self, val=None):
 		self.Console.ePopen("parted -m %s unit %s print" % (self.__devpath, self.__unit), self.__FinishedConsole)
-		
+
 	def __Filllist(self):
 		list = []
 		index = self["list"].getIndex()
@@ -319,7 +329,7 @@ class Cpart(Screen):
 			self["list"].setList(list)
 		self["list"].setIndex(index)
 		self.__createCommandList()
-		
+
 	def __SetLabels(self):
 		sel = self["list"].getCurrent()
 		self["LabelGreen"].setText("")
@@ -335,11 +345,11 @@ class Cpart(Screen):
 				self["LabelRed"].setText(_("delete"))
 			else:
 				self["PixmapRed"].setPixmapNum(0)
-				
+
 	def __addFreePart(self, plist, lastPartEnd):
 		x = [LIST_TYPE_PAR, str(len(plist)), lastPartEnd, self.__fullsize, 0, _("free"), (self.PA_TYPE_FREE | self.PA_TYPE_LAST), ";"]
 		plist.append(x)
-		
+
 	def __FinishedConsole(self, result, retval, extra_args=None):
 		result = six.ensure_str(result)
 		if retval == 0 and '\n' in result:
@@ -368,7 +378,7 @@ class Cpart(Screen):
 			if lastPartEnd < self.__fullsize:#Wenn noch Frei, Part erstellen
 				self.__addFreePart(self.__old_part_list, lastPartEnd)
 				self.__addFreePart(self.__new_part_list, lastPartEnd)
-			
+
 			self.__Filllist()
 
 	def KeyBlue(self):
@@ -387,12 +397,12 @@ class Cpart(Screen):
 							break
 						else:
 							x[PA_TYPE] = self.PA_TYPE_USE
-				
+
 				lastPartEnd = 0
 				if len(self.__new_part_list) > 1:#von letzter Part, TYp setzen und Ende ermitteln
 					self.__new_part_list[len(self.__new_part_list) - 1][PA_TYPE] = self.PA_TYPE_USE | self.PA_TYPE_LAST
 					lastPartEnd = self.__new_part_list[len(self.__new_part_list) - 1][PA_END]
-				
+
 				if lastPartEnd < self.__fullsize:#Wenn noch Frei, Part erstellen
 					self.__addFreePart(self.__new_part_list, lastPartEnd)
 				#for x in self.__new_part_list:
@@ -401,12 +411,12 @@ class Cpart(Screen):
 			except:
 				print("[eParted] <remove part>")
 			self.__Filllist()
-			
+
 	def KeyGreen(self):
 		sel = self["list"].getCurrent()
 		if sel and sel[5] and sel[5][PA_TYPE] & self.PA_TYPE_FREE and sel[5][PA_START] < sel[5][PA_END] and len(self.__new_part_list) < 6:
 			self.session.openWithCallback(self.__CallbackAddPart, AddPart, sel[5][PA_END] - sel[5][PA_START], self.__unit, len(self.__new_part_list) - 1)
-			
+
 	def __CallbackAddPart(self, val=None):
 		if val:
 			for x in self.__new_part_list:
@@ -422,7 +432,7 @@ class Cpart(Screen):
 					else:
 						x[PA_TYPE] = self.PA_TYPE_USE
 			self.__Filllist()
-			
+
 	def __addPart2Comlist(self, list, val, mkpart=True):
 		#print(val)
 		partnr = val[PA_NR]
@@ -430,7 +440,7 @@ class Cpart(Screen):
 			fs = val[PA_FS]
 			com = "parted -s -a optimal %s mkpart primary %s %s%s %s%s" % (self.__devpath, fs, val[PA_START], self.__unit, val[PA_END], self.__unit)
 			list.append((com, _("create partition %s") % partnr, None))
-		
+
 		mountdev = None
 		if val[PA_FS] == "linux-swap":
 			mkfs = "/sbin/mkswap"
@@ -446,7 +456,7 @@ class Cpart(Screen):
 
 		com = "%s %s%s" % (mkfs, self.__devpath, partnr)
 		list.append((com, _("make filesystem '%s' on partition %s (%d %s)") % (val[PA_FS], partnr, val[PA_SIZE], self.__unit), mountdev))
-		
+
 	def __delPart2Comlist(self, list, val):
 		partnr = val[PA_NR]
 		dev = "%s%s" % (self.__devpath, partnr)
@@ -482,7 +492,6 @@ class Cpart(Screen):
 								self.__addPart2Comlist(self.__comlist, self.__new_part_list[x], False)
 					else:
 						self.__addPart2Comlist(self.__comlist, self.__new_part_list[x])
-		
 
 		#for x in self.__comlist: print "[eParted] com =",x
 		if len(self.__comlist):
@@ -491,6 +500,7 @@ class Cpart(Screen):
 		else:
 			self["PixmapBlue"].setPixmapNum(0)
 			self["LabelBlue"].setText("")
+
 
 class Cpartexe(Screen):
 	skin = """<screen position="center,center" size="670,400" title=" ">
@@ -531,11 +541,11 @@ class Cpartexe(Screen):
 			if x[2] is not None:
 				self.mountlist.append(x[2])
 		self["list"] = List(list)
-		
+
 		self.__Stimer = eTimer()
 		self.__Stimer.callback.append(self.__exeList)
 		self.__state = -1
-		
+
 	def __getPartitionUUID(self, device):
 		try:
 			if os_path.exists("/dev/disk/by-uuid"):
@@ -549,7 +559,7 @@ class Cpartexe(Screen):
 		except:
 			print("[eParted] <error get UUID>")
 		return None
-		
+
 	def __mountDevice(self):
 		for x in self.mountlist:
 			dev = self.__getPartitionUUID(x)
@@ -564,7 +574,7 @@ class Cpartexe(Screen):
 			del self.__Stimer
 			self.__mountDevice()
 			self.close()
-		
+
 	def __exeList(self):
 		if len(self["list"].list) > self.__state and self.__state > -1:
 			res = myExecute(self["list"].list[self.__state][2], self.session)
@@ -575,20 +585,20 @@ class Cpartexe(Screen):
 			self["list"].list[self.__state] = (self["list"].list[self.__state][0], LoadPixmap(path=SkinDefaultPath + pic), self["list"].list[self.__state][2], self["list"].list[self.__state][2])
 			self["list"].updateList(self["list"].list)
 			self["list"].setIndex(self.__state)
-			
+
 			if res == 0:
 				self.__state += 1
 			else:
 				self.__state = len(self["list"].list)#bei fehler ans Ende der liste
 				self["PixmapButton"].setPixmapNum(0)
 				self["LabelButton"].setText(_("quit"))
-				
+
 			self.__Stimer.start(500, True)
 		else:
 			self.__state = -2
 			self["PixmapButton"].setPixmapNum(0)
 			self["LabelButton"].setText(_("quit"))
-		
+
 	def KeyGreen(self):
 		if self.__state == -1:
 			global rereaddevices
@@ -600,6 +610,6 @@ class Cpartexe(Screen):
 			self.__Stimer.start(500, True)
 		elif self.__state == -2:
 			self.Exit()
-	
+
 	#def KeyRed(self):
 	#	self.Exit()

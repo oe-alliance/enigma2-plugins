@@ -19,6 +19,8 @@ mcpath = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultH
 #	from enigma import evfd
 #except Exception as e:
 #	print("Media Center: Import evfd failed")
+
+
 class MC_Settings(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -47,12 +49,16 @@ class MC_Settings(Screen):
 		self.list.append(getConfigListEntry(_("Show MC in Main-Menu"), config.plugins.mc_globalsettings.showinmainmenu))
 		self.list.append(getConfigListEntry(_("Show MC in Extension-Menu"), config.plugins.mc_globalsettings.showinextmenu))
 		self.list.append(getConfigListEntry(_("UPNP Enabled"), config.plugins.mc_globalsettings.upnp_enable))
+
 	def keyLeft(self):
 		self["configlist"].handleKey(KEY_LEFT)
+
 	def keyRight(self):
 		self["configlist"].handleKey(KEY_RIGHT)
+
 	def keyNumber(self, number):
 		self["configlist"].handleKey(KEY_0 + number)
+
 	def keyOK(self):
 		config.plugins.mc_globalsettings.save()
 #		if config.plugins.mc_global.vfd.value == "on":
@@ -69,7 +75,7 @@ class MC_Settings(Screen):
 		if str.find('Collected errors') != -1:
 			self.session.openWithCallback(self.close, MessageBox, _("A background update check is is progress, please wait a few minutes and try again."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 		elif not str:
-			self.feedscheck = self.session.open(MessageBox, _('Please wait whilst feeds state is checked.'), MessageBox.TYPE_INFO, enable_input = False)
+			self.feedscheck = self.session.open(MessageBox, _('Please wait whilst feeds state is checked.'), MessageBox.TYPE_INFO, enable_input=False)
 			self.feedscheck.setTitle(_('Checking Feeds'))
 			cmd1 = "opkg update"
 			self.CheckConsole = Console()
@@ -77,7 +83,7 @@ class MC_Settings(Screen):
 		else:
 			self.close()
 
-	def checkNetworkStateFinished(self, result, retval,extra_args=None):
+	def checkNetworkStateFinished(self, result, retval, extra_args=None):
 		result = six.ensure_str(result)
 		if result.find('bad address') != -1:
 			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Your %s %s is not connected to the internet, please check your network settings and try again.") % (getMachineBrand(), getMachineName()), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
@@ -98,9 +104,9 @@ class MC_Settings(Screen):
 		self.close()
 
 	def doInstall(self, callback, pkgname):
-		self.message = self.session.open(MessageBox, _("please wait..."), MessageBox.TYPE_INFO, enable_input = False)
+		self.message = self.session.open(MessageBox, _("please wait..."), MessageBox.TYPE_INFO, enable_input=False)
 		self.message.setTitle(_('Installing Service'))
 		self.Console.ePopen('/usr/bin/opkg install ' + pkgname, callback)
 
-	def installComplete(self,result = None, retval = None, extra_args = None):
+	def installComplete(self, result=None, retval=None, extra_args=None):
 		self.session.open(TryQuitMainloop, 2)

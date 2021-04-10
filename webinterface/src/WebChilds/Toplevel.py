@@ -34,13 +34,15 @@ if hasattr(static.File, 'render_GET'):
 else:
 	File = static.File
 
+
 def addExternalChild(child):
 	externalChildren.append(child)
+
 
 def getToplevel(session):
 	root = File(util.sibpath(__file__, "web-data/tpl/default"))
 
-	root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True) ) # "/web/*"
+	root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True)) # "/web/*"
 	root.putChild("web-data", File(util.sibpath(__file__, "web-data")))
 	root.putChild("file", FileStreamer())
 	root.putChild("grab", GrabResource())
@@ -49,7 +51,7 @@ def getToplevel(session):
 	root.putChild("ipkg", res)
 	root.putChild("play", ServiceplayerResource(session))
 	root.putChild("wap", RedirectorResource("/mobile/"))
-	root.putChild("mobile", ScreenPage(session, util.sibpath(__file__, "mobile"), True) )
+	root.putChild("mobile", ScreenPage(session, util.sibpath(__file__, "mobile"), True))
 	root.putChild("m", ScreenPage(session, util.sibpath(__file__, "m"), True))
 	root.putChild("upload", UploadResource())
 	root.putChild("servicelist", ServiceList(session))
@@ -59,7 +61,6 @@ def getToplevel(session):
 		root.putChild("media", File(resolveFilename(SCOPE_MEDIA)))
 		root.putChild("hdd", File(resolveFilename(SCOPE_MEDIA, "hdd")))
 
-
 	importExternalModules()
 
 	for child in externalChildren:
@@ -68,10 +69,12 @@ def getToplevel(session):
 
 	return root
 
+
 class RedirectorResource(resource.Resource):
 	"""
 		this class can be used to redirect a request to a specified uri
 	"""
+
 	def __init__(self, uri):
 		self.uri = uri
 		resource.Resource.__init__(self)
@@ -79,4 +82,3 @@ class RedirectorResource(resource.Resource):
 	def render(self, request):
 		request.redirect(self.uri)
 		request.finish()
-

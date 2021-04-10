@@ -1,13 +1,13 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 #  Advanced Movie Selection for Dreambox-Enigma2
 #
 #  The plugin is developed on the basis from a lot of single plugins (thx for the code @ all)
 #  Coded by JackDaniel (c)2011
 #  Support: www.i-have-a-dreambox.com
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -16,7 +16,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 from __future__ import absolute_import
@@ -33,6 +33,7 @@ from Screens.Screen import Screen
 from Tools.KeyBindings import addKeyBinding
 import keymapparser
 from .Source.Globals import SkinTools
+
 
 class Seekbar(ConfigListScreen, Screen):
     def __init__(self, session, instance, fwd):
@@ -56,18 +57,18 @@ class Seekbar(ConfigListScreen, Screen):
                 if self.length and position:
                     if int(position[1]) > 0:
                         self.percent = float(position[1]) * 100.0 / float(self.length[1])
-        
+
         self.minuteInput = ConfigNumber(default=5)
         self.positionEntry = ConfigSelection(choices=[_("Use arrow left/right for position")], default=_("Use arrow left/right for position"))
         if self.fwd:
             txt = _("Jump x minutes forward (OK for seek):")
         else:
             txt = _("Jump x minutes back (OK for seek):")
-        ConfigListScreen.__init__(self, [getConfigListEntry(txt, self.minuteInput), getConfigListEntry(_("Go manual to position (OK for seek):"), self.positionEntry)])        
+        ConfigListScreen.__init__(self, [getConfigListEntry(txt, self.minuteInput), getConfigListEntry(_("Go manual to position (OK for seek):"), self.positionEntry)])
         self["cursor"] = MovingPixmap()
         self["time"] = Label()
-        self["actions"] = ActionMap(["WizardActions"], 
-            {"back": self.exit}, 
+        self["actions"] = ActionMap(["WizardActions"],
+            {"back": self.exit},
         -1)
         self.cursorTimer = eTimer()
         self.cursorTimer.callback.append(self.updateCursor)
@@ -79,7 +80,7 @@ class Seekbar(ConfigListScreen, Screen):
 
     def __onExecBegin(self):
         if self.firstime:
-            orgpos = self.instance.position()    
+            orgpos = self.instance.position()
             self.instance.move(ePoint(orgpos.x() + config.AdvancedMovieSelection.movieplayer_infobar_position_offset_x.value, orgpos.y() + config.AdvancedMovieSelection.movieplayer_infobar_position_offset_y.value))
             self.firstime = False
 
@@ -104,7 +105,7 @@ class Seekbar(ConfigListScreen, Screen):
             self["cursor"].moveTo(x, 100, 1)
             self["cursor"].startMoving()
             pts = int(float(self.length[1]) / 100.0 * self.percent)
-            self["time"].setText(_("Manual jump to:") + ' ' + ("%d:%02d" % ((pts/60/90000), ((pts/90000)%60))))
+            self["time"].setText(_("Manual jump to:") + ' ' + ("%d:%02d" % ((pts / 60 / 90000), ((pts / 90000) % 60))))
 
     def exit(self):
         self.cursorTimer.stop()
@@ -121,7 +122,7 @@ class Seekbar(ConfigListScreen, Screen):
                     if newPosition > oldPosition:
                         pts = newPosition - oldPosition
                     else:
-                        pts = -1*(oldPosition - newPosition)
+                        pts = -1 * (oldPosition - newPosition)
                     DVDPlayer.doSeekRelative(self.infobarInstance, pts)
                 else:
                     self.seek.seekTo(int(float(self.length[1]) / 100.0 * self.percent))
@@ -129,7 +130,7 @@ class Seekbar(ConfigListScreen, Screen):
         elif sel == self.minuteInput:
             pts = self.minuteInput.value * 60 * 90000
             if self.fwd == False:
-                pts = -1*pts
+                pts = -1 * pts
             if self.dvd:
                 DVDPlayer.doSeekRelative(self.infobarInstance, pts)
             else:
@@ -164,12 +165,15 @@ class Seekbar(ConfigListScreen, Screen):
 ##############################################
 # This hack overwrites the functions seekFwdManual and seekBackManual of the InfoBarSeek class (MoviePlayer and DVDPlayer)
 
+
 def seekbar(instance, fwd=True):
     if instance and instance.session:
         instance.session.open(Seekbar, instance, fwd)
 
+
 def seekbarBack(instance):
     seekbar(instance, False)
+
 
 MoviePlayer.seekFwdManual = seekbar
 MoviePlayer.seekBackManual = seekbarBack
@@ -184,6 +188,8 @@ if pluginPresent.DVDPlayer:
 # This hack puts the functions seekFwdManual and seekBackManual to the maped keys to seekbarRight and seekbarLeft
 
 DoBind = ActionMap.doBind
+
+
 def doBind(instance):
     if not instance.bound:
         for ctx in instance.contexts:
@@ -194,6 +200,7 @@ def doBind(instance):
                     instance.actions["seekbarLeft"] = instance.actions["seekBackManual"]
             DoBind(instance)
 
+
 if config.AdvancedMovieSelection.overwrite_left_right.value:
     ActionMap.doBind = doBind
 
@@ -202,6 +209,8 @@ if config.AdvancedMovieSelection.overwrite_left_right.value:
 
 KeymapError = keymapparser.KeymapError
 ParseKeys = keymapparser.parseKeys
+
+
 def parseKeys(context, filename, actionmap, device, keys):
     if context == "InfobarSeekActions":
         if device == "generic":
@@ -214,7 +223,7 @@ def parseKeys(context, filename, actionmap, device, keys):
                 if id == "KEY_RIGHT":
                     mapto = "seekbarRight"
                 flags = get_attr("flags")
-                flag_ascii_to_id = lambda x: {'m':1,'b':2,'r':4,'l':8}[x]
+                flag_ascii_to_id = lambda x: {'m': 1, 'b': 2, 'r': 4, 'l': 8}[x]
                 flags = sum(map(flag_ascii_to_id, flags))
                 assert mapto, "%s: must specify mapto in context %s, id '%s'" % (filename, context, id)
                 assert id, "%s: must specify id in context %s, mapto '%s'" % (filename, context, mapto)
@@ -239,6 +248,7 @@ def parseKeys(context, filename, actionmap, device, keys):
             ParseKeys(context, filename, actionmap, device, keys)
     else:
         ParseKeys(context, filename, actionmap, device, keys)
+
 
 if config.AdvancedMovieSelection.overwrite_left_right.value:
     keymapparser.parseKeys = parseKeys

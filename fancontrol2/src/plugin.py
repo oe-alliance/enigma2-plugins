@@ -50,27 +50,33 @@ from boxbranding import getBoxType, getImageDistro
 from six.moves import queue, range
 
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	try:
 		session.open(FanControl2Plugin)
 	except:
 		FClog("Pluginexecution failed")
 
-def mainMonitor(session,**kwargs):
+
+def mainMonitor(session, **kwargs):
 	try:
 		session.open(FanControl2Monitor)
 	except:
 		FClog("Pluginexecution failed")
 
+
 def Test0(wert):
-	return (1 if wert<=0 else wert)
+	return (1 if wert <= 0 else wert)
+
 
 def skal(x, x1, x2, y1, y2):
-	if x > x2: return y2
-	if x < x1: return y1
+	if x > x2:
+		return y2
+	if x < x1:
+		return y1
 	m = (y2 - y1) / Test0(x2 - x1)
 	y = m * x + y1
 	return y
+
 
 def FClog(wert):
 	if config.plugins.FanControl.EnableConsoleLog.value:
@@ -88,14 +94,16 @@ def FClog(wert):
 					f.close()
 			except IOError:
 				FC2Log.append(strftime("%H:%M:%S ") + "Event-Log-Error")
-				
+
+
 def FClogE(wert):
 	if config.plugins.FanControl.EnableEventLog.value:
 		FClog(wert)
 
+
 def FCdata():
 	global DataMinute
-	if strftime("%M")!=DataMinute and config.plugins.FanControl.EnableDataLog.value:
+	if strftime("%M") != DataMinute and config.plugins.FanControl.EnableDataLog.value:
 		DataMinute = strftime("%M")
 		if Free(config.plugins.FanControl.LogPath.value):
 			try:
@@ -114,17 +122,20 @@ def FCdata():
 			except IOError:
 				FC2Log.append(strftime("%H:%M:%S ") + "Event-Log-Error")
 
+
 def Free(dir):
 	if not os.path.exists(dir):
 		return False
 	s = os.statvfs(dir)
 	return (s.f_bsize * s.f_bavail / 1024 / 1024) > 10
 
+
 def getVoltage(fanid):
 	f = open("/proc/stb/fp/fan_vlt", "r")
 	value = int(f.readline().strip(), 16)
 	f.close()
 	return value
+
 
 def setVoltage(fanid, value):
 	if value > 255:
@@ -133,11 +144,13 @@ def setVoltage(fanid, value):
 	f.write("%x" % value)
 	f.close()
 
+
 def getPWM(fanid):
 	f = open("/proc/stb/fp/fan_pwm", "r")
 	value = int(f.readline().strip(), 16)
 	f.close()
 	return value
+
 
 def setPWM(fanid, value):
 	if value > 255:
@@ -146,52 +159,54 @@ def setPWM(fanid, value):
 	f.write("%x" % value)
 	f.close()
 
+
 #Configuration
 config.plugins.FanControl = ConfigSubsection()
 
 if getImageDistro() in ('openspa') and getBoxType() in ('vusolo2'):
-	config.plugins.FanControl.Fan = ConfigSelection(choices = [("disabled", _("disabled")), ("aus", _("Control disabled")), ("3pin", _("3Pin")), ("4pin", _("4Pin")), ("4pinREG", _("4Pin (PID)"))], default = "3pin")
-	config.plugins.FanControl.StandbyOff = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))], default="true")
-	config.plugins.FanControl.minRPM = ConfigSlider(default = 900, increment = 50, limits = (0, 1500))
-	config.plugins.FanControl.maxRPM = ConfigSlider(default = 1100, increment = 50, limits = (500, 6000))
-	config.plugins.FanControl.temp = ConfigSlider(default = 42, increment = 1, limits = (30, 50))
-	config.plugins.FanControl.tempmax = ConfigSlider(default = 50, increment = 1, limits = (35, 55))
-	config.plugins.FanControl.pwm = ConfigSlider(default = 30, increment = 5, limits = (0, 255))
-	config.plugins.FanControl.vlt = ConfigSlider(default = 30, increment = 5, limits = (0, 255))
+	config.plugins.FanControl.Fan = ConfigSelection(choices=[("disabled", _("disabled")), ("aus", _("Control disabled")), ("3pin", _("3Pin")), ("4pin", _("4Pin")), ("4pinREG", _("4Pin (PID)"))], default="3pin")
+	config.plugins.FanControl.StandbyOff = ConfigSelection(choices=[("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))], default="true")
+	config.plugins.FanControl.minRPM = ConfigSlider(default=900, increment=50, limits=(0, 1500))
+	config.plugins.FanControl.maxRPM = ConfigSlider(default=1100, increment=50, limits=(500, 6000))
+	config.plugins.FanControl.temp = ConfigSlider(default=42, increment=1, limits=(30, 50))
+	config.plugins.FanControl.tempmax = ConfigSlider(default=50, increment=1, limits=(35, 55))
+	config.plugins.FanControl.pwm = ConfigSlider(default=30, increment=5, limits=(0, 255))
+	config.plugins.FanControl.vlt = ConfigSlider(default=30, increment=5, limits=(0, 255))
 elif getImageDistro() in ('openspa') and getBoxType() in ('vuduo2'):
-	config.plugins.FanControl.Fan = ConfigSelection(choices = [("disabled", _("disabled")), ("aus", _("Control disabled")), ("3pin", _("3Pin")), ("4pin", _("4Pin")), ("4pinREG", _("4Pin (PID)"))], default = "4pin")
-	config.plugins.FanControl.StandbyOff = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))], default="true")
-	config.plugins.FanControl.minRPM = ConfigSlider(default = 750, increment = 50, limits = (0, 1500))
-	config.plugins.FanControl.maxRPM = ConfigSlider(default = 1100, increment = 50, limits = (500, 6000))
-	config.plugins.FanControl.temp = ConfigSlider(default = 42, increment = 1, limits = (30, 50))
-	config.plugins.FanControl.tempmax = ConfigSlider(default = 50, increment = 1, limits = (35, 55))
-	config.plugins.FanControl.pwm = ConfigSlider(default = 125, increment = 5, limits = (0, 255))
-	config.plugins.FanControl.vlt = ConfigSlider(default = 165, increment = 5, limits = (0, 255))
+	config.plugins.FanControl.Fan = ConfigSelection(choices=[("disabled", _("disabled")), ("aus", _("Control disabled")), ("3pin", _("3Pin")), ("4pin", _("4Pin")), ("4pinREG", _("4Pin (PID)"))], default="4pin")
+	config.plugins.FanControl.StandbyOff = ConfigSelection(choices=[("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))], default="true")
+	config.plugins.FanControl.minRPM = ConfigSlider(default=750, increment=50, limits=(0, 1500))
+	config.plugins.FanControl.maxRPM = ConfigSlider(default=1100, increment=50, limits=(500, 6000))
+	config.plugins.FanControl.temp = ConfigSlider(default=42, increment=1, limits=(30, 50))
+	config.plugins.FanControl.tempmax = ConfigSlider(default=50, increment=1, limits=(35, 55))
+	config.plugins.FanControl.pwm = ConfigSlider(default=125, increment=5, limits=(0, 255))
+	config.plugins.FanControl.vlt = ConfigSlider(default=165, increment=5, limits=(0, 255))
 else:
-	config.plugins.FanControl.Fan = ConfigSelection(choices = [("disabled", _("disabled")), ("aus", _("Control disabled")), ("3pin", _("3Pin")), ("4pin", _("4Pin")), ("4pinREG", _("4Pin (PID)"))], default = "disabled")
-	config.plugins.FanControl.StandbyOff = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))], default="false")
-	config.plugins.FanControl.minRPM = ConfigSlider(default = 600, increment = 50, limits = (0, 1500))
-	config.plugins.FanControl.maxRPM = ConfigSlider(default = 3000, increment = 50, limits = (500, 6000))
-	config.plugins.FanControl.temp = ConfigSlider(default = 40, increment = 1, limits = (30, 50))
-	config.plugins.FanControl.tempmax = ConfigSlider(default = 50, increment = 1, limits = (35, 55))
-	config.plugins.FanControl.pwm = ConfigSlider(default = 130, increment = 5, limits = (0, 255))
-	config.plugins.FanControl.vlt = ConfigSlider(default = 255, increment = 5, limits = (0, 255))
+	config.plugins.FanControl.Fan = ConfigSelection(choices=[("disabled", _("disabled")), ("aus", _("Control disabled")), ("3pin", _("3Pin")), ("4pin", _("4Pin")), ("4pinREG", _("4Pin (PID)"))], default="disabled")
+	config.plugins.FanControl.StandbyOff = ConfigSelection(choices=[("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))], default="false")
+	config.plugins.FanControl.minRPM = ConfigSlider(default=600, increment=50, limits=(0, 1500))
+	config.plugins.FanControl.maxRPM = ConfigSlider(default=3000, increment=50, limits=(500, 6000))
+	config.plugins.FanControl.temp = ConfigSlider(default=40, increment=1, limits=(30, 50))
+	config.plugins.FanControl.tempmax = ConfigSlider(default=50, increment=1, limits=(35, 55))
+	config.plugins.FanControl.pwm = ConfigSlider(default=130, increment=5, limits=(0, 255))
+	config.plugins.FanControl.vlt = ConfigSlider(default=255, increment=5, limits=(0, 255))
 
-config.plugins.FanControl.ShowError = ConfigSelection(choices = [("false", _("do nothing")), ("true", _("display Info")), ("shutdown", _("Box Shutdown"))], default="true")
-config.plugins.FanControl.ShutdownTemp = ConfigInteger(default = 65, limits = (50, 80))
-config.plugins.FanControl.AddOverheat = ConfigInteger(default = 0, limits = (0, 9))
-config.plugins.FanControl.DisableDMM = ConfigYesNo(default = False)
-config.plugins.FanControl.LogCount = ConfigInteger(default = 40, limits = (40, 999))
+config.plugins.FanControl.ShowError = ConfigSelection(choices=[("false", _("do nothing")), ("true", _("display Info")), ("shutdown", _("Box Shutdown"))], default="true")
+config.plugins.FanControl.ShutdownTemp = ConfigInteger(default=65, limits=(50, 80))
+config.plugins.FanControl.AddOverheat = ConfigInteger(default=0, limits=(0, 9))
+config.plugins.FanControl.DisableDMM = ConfigYesNo(default=False)
+config.plugins.FanControl.LogCount = ConfigInteger(default=40, limits=(40, 999))
 config.plugins.FanControl.LogPath = ConfigText(default="/tmp/", fixed_size=False)
-config.plugins.FanControl.DeleteData = ConfigSelection(choices = [("0", _("no")), ("2", "2"), ("3", "3"), ("7", "7"), ("14", "14"), ("30", "30")], default="14")
-config.plugins.FanControl.EnableConsoleLog = ConfigYesNo(default = False)
-config.plugins.FanControl.EnableDataLog = ConfigYesNo(default = False)
-config.plugins.FanControl.EnableEventLog = ConfigYesNo(default = False)
-config.plugins.FanControl.CheckHDDTemp = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("auto", _("auto")), ("never", _("never"))], default="never")
-config.plugins.FanControl.MonitorInExtension = ConfigYesNo(default = True)
-config.plugins.FanControl.FanControlInExtension = ConfigYesNo(default = True)
-config.plugins.FanControl.Multi = ConfigSelection(choices = [("1", "RPM"), ("2", "RPM/2")], default = "2")
-config.plugins.FanControl.EnableThread = ConfigYesNo(default = True)
+config.plugins.FanControl.DeleteData = ConfigSelection(choices=[("0", _("no")), ("2", "2"), ("3", "3"), ("7", "7"), ("14", "14"), ("30", "30")], default="14")
+config.plugins.FanControl.EnableConsoleLog = ConfigYesNo(default=False)
+config.plugins.FanControl.EnableDataLog = ConfigYesNo(default=False)
+config.plugins.FanControl.EnableEventLog = ConfigYesNo(default=False)
+config.plugins.FanControl.CheckHDDTemp = ConfigSelection(choices=[("false", _("no")), ("true", _("yes")), ("auto", _("auto")), ("never", _("never"))], default="never")
+config.plugins.FanControl.MonitorInExtension = ConfigYesNo(default=True)
+config.plugins.FanControl.FanControlInExtension = ConfigYesNo(default=True)
+config.plugins.FanControl.Multi = ConfigSelection(choices=[("1", "RPM"), ("2", "RPM/2")], default="2")
+config.plugins.FanControl.EnableThread = ConfigYesNo(default=True)
+
 
 def GetFanRPM():
 	global RPMread
@@ -204,6 +219,7 @@ def GetFanRPM():
 	else:
 		RPMread += 1
 	return value
+
 
 def GetBox():
 	B = Box
@@ -245,6 +261,8 @@ def GetBox():
 # 		FCfile.close()
 
 # the PI controller class
+
+
 class ControllerPI:
 	name = "PI Controller"
 	looptime = 0.0
@@ -257,24 +275,23 @@ class ControllerPI:
 	controlSignal = 0.0
 	coeffKp = 0.0
 	coeffKi = 0.0
- 
-	def __init__(self, givenName = "PI Controller"):
+
+	def __init__(self, givenName="PI Controller"):
 		self.name = givenName
 #		FClogE("%s : creating object" % self.name)
 
 	def ReturnInputError(self):
 		return self.inputError
-      
+
 	def ResetIntegrator(self):
 		FClogE("%s : integrator output %3.2f" % (self.name, self.integratorOutput))
 		self.integratorOutput = 0.0
 #		FClog("%s : integrator output now 0" % self.name)
 
-
 	def ScaleCtlError(self, errval, inputMax):
 		if errval == 0:
 			return 0
-		return skal(abs(errval), 0, inputMax, 0, 100) * (errval/abs(errval))
+		return skal(abs(errval), 0, inputMax, 0, 100) * (errval / abs(errval))
 
 	def DeadBand(self, errval):
 		if abs(errval) < self.inputDeadband:
@@ -285,11 +302,11 @@ class ControllerPI:
 			return errval
 
 	def Integrate(self, errval):
-		self.integratorOutput += errval*self.dt
+		self.integratorOutput += errval * self.dt
 		return self.integratorOutput
 
 	def ControlProcess(self, InputError, integratorOutput):
-		return self.coeffKp*InputError + self.coeffKi*integratorOutput
+		return self.coeffKp * InputError + self.coeffKi * integratorOutput
 
 	def ControlLoop(self, ctlInput, ctlFeedback):
 		if self.dt < self.timer_delay:
@@ -317,6 +334,7 @@ class ControllerPI:
 		return self.ControlSignal
 # the PI controller class -end
 
+
 class FanControl2Test(Screen, ConfigListScreen):
 	skin = """
 		<screen position="center,center" size="630,300" title="Fan Control 2 - Test" >
@@ -329,8 +347,7 @@ class FanControl2Test(Screen, ConfigListScreen):
 			<widget source="TextTest7" render="Label" position="5,220" size="620,30" zPosition="10" font="Regular;20" halign="left" valign="center" backgroundColor="#25062748" transparent="1" />
 		</screen>"""
 
-
-	def __init__(self, session, args = 0):
+	def __init__(self, session, args=0):
 		self.session = session
 		Screen.__init__(self, session)
 
@@ -383,7 +400,7 @@ class FanControl2Test(Screen, ConfigListScreen):
 				time.sleep(0.3)
 				self.i += 1
 			time.sleep(2)
-			self.last=GetFanRPM()
+			self.last = GetFanRPM()
 			self["TextTest1"].setText(_("Min Fan Start %d rpm at PWM=%d") % (self.last, self.i))
 			while GetFanRPM() > 100 and self.i > 1:
 				setPWM(self.id, self.i)
@@ -407,7 +424,7 @@ class FanControl2Test(Screen, ConfigListScreen):
 				time.sleep(10)
 				self.VoltUp()
 				time.sleep(3)
-				self.last=GetFanRPM()
+				self.last = GetFanRPM()
 				self["TextTest5"].setText(_("Min Fan Start %d rpm at VLT=%d and PWM=0") % (self.last, self.i))
 				self.VoltDown()
 				ok = ("OK" if config.plugins.FanControl.minRPM.value >= self.last else (("!!>%d" % config.plugins.FanControl.minRPM.value)))
@@ -425,7 +442,7 @@ class FanControl2Test(Screen, ConfigListScreen):
 			time.sleep(10)
 			self.VoltUp()
 			time.sleep(3)
-			self.last=GetFanRPM()
+			self.last = GetFanRPM()
 			self["TextTest1"].setText(_("Min Fan Start %d rpm at VLT=%d") % (self.last, self.i))
 			self.VoltDown()
 			ok = ("OK" if config.plugins.FanControl.minRPM.value >= self.last else ("!!>%d" % (config.plugins.FanControl.minRPM.value)))
@@ -445,6 +462,7 @@ class FanControl2Test(Screen, ConfigListScreen):
 
 	def cancel(self):
 		self.close(False, self.session)
+
 
 class FanControl2Monitor(Screen, ConfigListScreen):
 	skin = """
@@ -476,7 +494,7 @@ class FanControl2Monitor(Screen, ConfigListScreen):
 
 		</screen>"""
 
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 
 		self.temp_timer = eTimer()
@@ -507,20 +525,20 @@ class FanControl2Monitor(Screen, ConfigListScreen):
 		tempcount = len(templist)
 		for count in range(tempcount):
 			tt = sensors.getSensorValue(count)
-			self["ProTemp%d" % count].value = int((tt-30)*100/(55-30))
+			self["ProTemp%d" % count].value = int((tt - 30) * 100 / (55 - 30))
 			if sensors.getSensorName(count) == "undefined":
 				self["TxtTemp%d" % count].setText(_("%s   %02d C") % (TempName[count], tt))
 			else:
 				self["TxtTemp%d" % count].setText(_("%s   %02d C") % (sensors.getSensorName(count), tt))
 		if harddiskmanager.HDDCount() > 0 and len(AktHDD) > 0:
 			if max(AktHDD) > 0:
-				self["ProHDD"].value = int((max(AktHDD)-30)*100/(55-30))
+				self["ProHDD"].value = int((max(AktHDD) - 30) * 100 / (55 - 30))
 				self["TxtHDD"].setText(_("%s   %02d C") % ("HDD", max(AktHDD)))
-			elif config.plugins.FanControl.CheckHDDTemp.value !="never":
+			elif config.plugins.FanControl.CheckHDDTemp.value != "never":
 				self["TxtHDD"].setText(_("press Info for HDD-Temp"))
 		self["TxtFan"].setText(_("Current rpm  %4d") % (AktRPM))
-		self["ProFan"].value = int((AktRPM-config.plugins.FanControl.minRPM.value)*100/Test0(config.plugins.FanControl.maxRPM.value-config.plugins.FanControl.minRPM.value))
-		if tempcount>1:
+		self["ProFan"].value = int((AktRPM - config.plugins.FanControl.minRPM.value) * 100 / Test0(config.plugins.FanControl.maxRPM.value - config.plugins.FanControl.minRPM.value))
+		if tempcount > 1:
 			self["TxtFC2Temp"].setText("%4.1f" % AktTemp)
 		self.temp_timer.start(2000, True)
 
@@ -528,12 +546,13 @@ class FanControl2Monitor(Screen, ConfigListScreen):
 		self.close(False, self.session)
 
 	def getHDD(self):
-		if harddiskmanager.HDDCount() > 0 and config.plugins.FanControl.CheckHDDTemp.value !="never":
+		if harddiskmanager.HDDCount() > 0 and config.plugins.FanControl.CheckHDDTemp.value != "never":
 			GetHDDtemp(True)
 			for hdd in harddiskmanager.HDDList():
 				if hdd[1].model().startswith("ATA"):
 					if hdd[1].isSleeping():
-						(stat, wert)=getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
+						(stat, wert) = getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
+
 
 class FanControl2SpezialSetup(Screen, ConfigListScreen):
 	skin = """
@@ -541,7 +560,7 @@ class FanControl2SpezialSetup(Screen, ConfigListScreen):
 			<widget name="config" position="10,20" size="580,350" scrollbarMode="showOnDemand" />
 		</screen>"""
 
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 
 # 		config.plugins.FanControl.DisableDMM.value = isDMMdisabled()
@@ -565,7 +584,7 @@ class FanControl2SpezialSetup(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("Auto-Delete Data older than (Days)"), config.plugins.FanControl.DeleteData))
 		self.list.append(getConfigListEntry(_("Enable Event Logging"), config.plugins.FanControl.EnableEventLog))
 		self.list.append(getConfigListEntry(_("Enable Thread use"), config.plugins.FanControl.EnableThread))
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.selectionChanged)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.selectionChanged)
 
 		self["actions"] = ActionMap(["OkCancelActions"],
 		{
@@ -579,7 +598,7 @@ class FanControl2SpezialSetup(Screen, ConfigListScreen):
 			from Screens.LocationBox import LocationBox
 			sel = self["config"].getCurrent()[1]
 			if sel == config.plugins.FanControl.LogPath:
-				self.session.openWithCallback(self.dirSelected, LocationBox, text = _("Choose path"), filename = "", currDir = self["config"].getCurrent()[1].value, minFree = 50)
+				self.session.openWithCallback(self.dirSelected, LocationBox, text=_("Choose path"), filename="", currDir=self["config"].getCurrent()[1].value, minFree=50)
 		except Exception as e:
 			self.session.open(MessageBox, "Error:\n" + str(e), MessageBox.TYPE_ERROR)
 
@@ -639,6 +658,7 @@ class FanControl2SpezialSetup(Screen, ConfigListScreen):
 		else:
 			self.close()
 
+
 class FanControl2Plugin(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="600,450" title="Fan Control 2">
@@ -673,7 +693,7 @@ class FanControl2Plugin(ConfigListScreen, Screen):
 			<widget source="T10ERR" render="Label" position="570,422" size="40,20" zPosition="1" font="Regular;11" halign="left" valign="center" backgroundColor="#25062748" transparent="1" />
 		</screen>"""
 
-	def __init__(self, session, args = 0):
+	def __init__(self, session, args=0):
 		global LastVLT
 		global LastPWM
 		self.session = session
@@ -691,7 +711,7 @@ class FanControl2Plugin(ConfigListScreen, Screen):
 		self.list.append(getConfigListEntry(_("End temperature C"), config.plugins.FanControl.tempmax))
 		self.list.append(getConfigListEntry(_("Initial Voltage"), config.plugins.FanControl.vlt))
 		self.list.append(getConfigListEntry(_("Initial PWM"), config.plugins.FanControl.pwm))
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.selectionChanged)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.selectionChanged)
 		LastVLT = config.plugins.FanControl.vlt.value
 		LastPWM = config.plugins.FanControl.pwm.value
 
@@ -740,7 +760,7 @@ class FanControl2Plugin(ConfigListScreen, Screen):
 		global AktRPM
 		self["introduction"].setText(_("Current value: %s") % (self.getCurrentValue()))
 		if self["config"].getCurrentIndex() > 4:
-			if LastVLT != config.plugins.FanControl.vlt.value or LastPWM !=config.plugins.FanControl.pwm.value:
+			if LastVLT != config.plugins.FanControl.vlt.value or LastPWM != config.plugins.FanControl.pwm.value:
 				LastVLT = config.plugins.FanControl.vlt.value
 				LastPWM = config.plugins.FanControl.pwm.value
 				AktVLT = LastVLT
@@ -752,9 +772,9 @@ class FanControl2Plugin(ConfigListScreen, Screen):
 		d = config.plugins.FanControl.tempmax.value - config.plugins.FanControl.temp.value
 		if d < 5:
 			if config.plugins.FanControl.temp.value + d < 55:
-				config.plugins.FanControl.tempmax.value=config.plugins.FanControl.temp.value+5
+				config.plugins.FanControl.tempmax.value = config.plugins.FanControl.temp.value + 5
 			else:
-				config.plugins.FanControl.temp.value=config.plugins.FanControl.tempmax.value-5
+				config.plugins.FanControl.temp.value = config.plugins.FanControl.tempmax.value - 5
 
 	def getCurrentValue(self):
 		return str(self["config"].getCurrent()[1].getText())
@@ -776,16 +796,16 @@ class FanControl2Plugin(ConfigListScreen, Screen):
 		self["TxtRPM"].setText(_("Current rpm  %4d") % (AktRPM))
 		self["TxtVLT"].setText(_("Voltage  %03d") % (AktVLT))
 		self["TxtPWM"].setText(_("PWM  %03d") % (AktPWM))
-		self["PixTemp"].value = int((AktTemp-config.plugins.FanControl.temp.value)*100/Test0(config.plugins.FanControl.tempmax.value-config.plugins.FanControl.temp.value))
-		self["PixZielRPM"].value = int((ZielRPM-config.plugins.FanControl.minRPM.value)*100/Test0(config.plugins.FanControl.maxRPM.value-config.plugins.FanControl.minRPM.value))
-		self["PixRPM"].value = int((AktRPM-config.plugins.FanControl.minRPM.value)*100/Test0(config.plugins.FanControl.maxRPM.value-config.plugins.FanControl.minRPM.value))
-		self["PixVLT"].value = int(AktVLT/2.55)
-		self["PixPWM"].value = int(AktPWM/2.55)
+		self["PixTemp"].value = int((AktTemp - config.plugins.FanControl.temp.value) * 100 / Test0(config.plugins.FanControl.tempmax.value - config.plugins.FanControl.temp.value))
+		self["PixZielRPM"].value = int((ZielRPM - config.plugins.FanControl.minRPM.value) * 100 / Test0(config.plugins.FanControl.maxRPM.value - config.plugins.FanControl.minRPM.value))
+		self["PixRPM"].value = int((AktRPM - config.plugins.FanControl.minRPM.value) * 100 / Test0(config.plugins.FanControl.maxRPM.value - config.plugins.FanControl.minRPM.value))
+		self["PixVLT"].value = int(AktVLT / 2.55)
+		self["PixPWM"].value = int(AktPWM / 2.55)
 		if config.plugins.FanControl.Fan.value == "4pinREG":
 			if int(abs(ErrRPM)) <= 10 and ErrRPM != 0:
-				self["PixERR"].value = int(abs(ErrRPM)*10)
+				self["PixERR"].value = int(abs(ErrRPM) * 10)
 				self["T10ERR"].setText("10%")
-			else:	
+			else:
 				self["PixERR"].value = int(abs(ErrRPM))
 				self["T10ERR"].setText("")
 			self["TxtERR"].setText(_("PID Ctl Err %03.2f %%") % ErrRPM)
@@ -815,6 +835,7 @@ class FanControl2Plugin(ConfigListScreen, Screen):
 	def SetupMenu(self):
 		self.session.open(FanControl2SpezialSetup)
 
+
 def DeleteData():
 	if config.plugins.FanControl.DeleteData.value == "0" or config.plugins.FanControl.EnableDataLog.value == False:
 		return
@@ -826,7 +847,7 @@ def DeleteData():
 		if s < 150:
 			return
 		f = open(config.plugins.FanControl.LogPath.value + "FC2data.csv", "r")
-		f.seek(s-100)
+		f.seek(s - 100)
 		line = f.readline()
 		line = f.readline()
 		DT = line.split(";")
@@ -850,13 +871,16 @@ def DeleteData():
 	except Exception:
 		FClog("Error Delete Data")
 
+
 def getstatusoutput(cmd):
 	try:
 		pipe = os.popen('{ ' + cmd + '; } 2>&1', 'r')
 		text = pipe.read()
 		sts = pipe.close()
-		if sts is None: sts = 0
-		if text[-1:] == '\n': text = text[:-1]
+		if sts is None:
+			sts = 0
+		if text[-1:] == '\n':
+			text = text[:-1]
 	except:
 		sts = 1
 		text = ""
@@ -864,33 +888,36 @@ def getstatusoutput(cmd):
 	finally:
 		return sts, text
 
+
 def HDDtestTemp():
 	global disableHDDread
-	if harddiskmanager.HDDCount() > 0 and config.plugins.FanControl.CheckHDDTemp.value !="never":
+	if harddiskmanager.HDDCount() > 0 and config.plugins.FanControl.CheckHDDTemp.value != "never":
 		disableHDDread = False
 		for hdd in harddiskmanager.HDDList():
 			if hdd[1].model().startswith("ATA"):
 				FClog("%s %s Mode:%s" % (hdd[1].model(), hdd[1].getDeviceName(), config.plugins.FanControl.CheckHDDTemp.value))
 				if config.plugins.FanControl.CheckHDDTemp.value == "auto":
-					(stat, wert)=getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
+					(stat, wert) = getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
 					time.sleep(0.5)
-					(stat, wert)=ReadHDDtemp(hdd[1].getDeviceName())
+					(stat, wert) = ReadHDDtemp(hdd[1].getDeviceName())
 					if stat != 0:
-						(stat, wert)=getstatusoutput("smartctl --smart=on %s" % hdd[1].getDeviceName())
+						(stat, wert) = getstatusoutput("smartctl --smart=on %s" % hdd[1].getDeviceName())
 						FClog("HDD Temperature not readable -> Ignore")
 						FC2HDDignore.append(hdd[1].getDeviceName())
 					time.sleep(0.5)
-					(stat, wert)=getstatusoutput("hdparm -C %s" % hdd[1].getDeviceName())
-					if wert.find("standby")>0:
+					(stat, wert) = getstatusoutput("hdparm -C %s" % hdd[1].getDeviceName())
+					if wert.find("standby") > 0:
 						FClog("HDD supports Temp reading without Spinup")
 					else:
 						if hdd[1].isSleeping():
-							(stat, wert)=getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
+							(stat, wert) = getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
 							FClog("HDD not supports Temp reading without Spinup -> Ignore")
 							FC2HDDignore.append(hdd[1].getDeviceName())
 
+
 def ReadHDDtemp(D):
 	return getstatusoutput('smartctl -A %s | grep "194 Temp" | grep Always' % D)
+
 
 def GetHDDtemp(OneTime):
 	global AktHDD
@@ -901,10 +928,10 @@ def GetHDDtemp(OneTime):
 				sleeptime = int((time.time() - hdd[1].last_access))
 #				FClog("HDD Temp reading %s %s %ds %s" % (config.plugins.FanControl.CheckHDDTemp.value, disableHDDread, sleeptime, hdd[1].isSleeping()))
 				if config.plugins.FanControl.CheckHDDTemp.value == "true" or (config.plugins.FanControl.CheckHDDTemp.value == "auto" and not disableHDDread) or ((not hdd[1].isSleeping()) and sleeptime < 120) or OneTime == True:
-					(stat, wert)=ReadHDDtemp(hdd[1].getDeviceName())
+					(stat, wert) = ReadHDDtemp(hdd[1].getDeviceName())
 					if stat == 0:
 						try:
-							AktHDD.append(int(wert[wert.find("Always")+6:].replace(" ", "").replace("-", "")[:2]))
+							AktHDD.append(int(wert[wert.find("Always") + 6:].replace(" ", "").replace("-", "")[:2]))
 						except:
 							AktHDD.append(0)
 					if len(AktHDD) == 0:
@@ -914,6 +941,7 @@ def GetHDDtemp(OneTime):
 		AktHDD = [0]
 	return
 
+
 def HDDsSleeping():
 	for hdd in harddiskmanager.HDDList():
 		if hdd[1].model().startswith("ATA"):
@@ -921,38 +949,42 @@ def HDDsSleeping():
 				return False
 	return True
 
+
 def FC2systemStatus():
 	S = int(FC2werte[5])
-	R = " -" if S>0 else " "
-	if (S & 1)>0 :
+	R = " -" if S > 0 else " "
+	if (S & 1) > 0:
 		R += " BoxOn"
-	if (S & 2)>0 :
+	if (S & 2) > 0:
 		R += " HDDon"
-	if (S & 4)>0 :
+	if (S & 4) > 0:
 		R += " REC"
 	return R
+
 
 def FC2fanReset():
 	setVoltage(id, AktVLT)
 	setPWM(id, AktPWM)
 	FClog("Fan Reset")
 
-class FC2Worker(Thread): 
+
+class FC2Worker(Thread):
 	def __init__(self, index, s, session):
 		Thread.__init__(self)
 		self.index = index
 		self.session = session
 		self.s = s
- 
-	def run(self): 
+
+	def run(self):
 		global FritzTime
 		while True:
 #			print "worker a", self.index
 			zahl = Briefkasten.get()
 			if zahl == 1:
 				self.s.queryRun()
- 
-			Briefkasten.task_done() 
+
+			Briefkasten.task_done()
+
 
 class FanControl2(Screen):
 	skin = """ <screen position="100,100" size="300,300" title="FanControl2" > </screen>"""
@@ -963,16 +995,16 @@ class FanControl2(Screen):
 		global Box
 		Screen.__init__(self, session)
 		self.session = session
-		self.FanMin     = 500
-		self.FanMax     = 1500
+		self.FanMin = 500
+		self.FanMax = 1500
 		self.targetTemp = 50.0
-		self.maxTemp    = 55.0
-		self.Range      = 5
-		self.Fan        = "aus"
+		self.maxTemp = 55.0
+		self.Range = 5
+		self.Fan = "aus"
 		self.dontshutdown = False
-		self.Recording  = False
-		self.inStandby  = False
-		self.HDDidle    = True
+		self.Recording = False
+		self.inStandby = False
+		self.HDDidle = True
 		# RPM PI controller initialization - later
 		self.RPMController.timer_delay = 10.0
 		self.RPMController.dt = 10.0
@@ -989,20 +1021,20 @@ class FanControl2(Screen):
 		HDDtestTemp()
 		GetHDDtemp(False)
 		DeleteData()
-		FC2threads = [FC2Worker(i, self, session) for i in range(3)] 
-		for thread in FC2threads: 
-			thread.setDaemon(True) 
-			thread.start() 
+		FC2threads = [FC2Worker(i, self, session) for i in range(3)]
+		for thread in FC2threads:
+			thread.setDaemon(True)
+			thread.start()
 		self.timer = eTimer()
 		if self.query not in self.timer.callback:
 			self.timer.callback.append(self.query)
 		self.timer.startLongTimer(10)
-		config.misc.standbyCounter.addNotifier(self.standbyQuery, initial_call = False)
+		config.misc.standbyCounter.addNotifier(self.standbyQuery, initial_call=False)
 
 	def FC2AskShutdown(self):
 		if not self.dontshutdown:
 			self.dontshutdown = True
-			self.session.openWithCallback(self.FC2DoShutdown, MessageBox, _("FanControl2 emergency, Box Shutdown now?"), type = MessageBox.TYPE_YESNO, timeout = 60)
+			self.session.openWithCallback(self.FC2DoShutdown, MessageBox, _("FanControl2 emergency, Box Shutdown now?"), type=MessageBox.TYPE_YESNO, timeout=60)
 
 	def FC2DoShutdown(self, retval):
 		if (retval):
@@ -1055,8 +1087,8 @@ class FanControl2(Screen):
 				if strftime("%M")[-1:] == "0":
 					GetHDDtemp(False)
 			if config.plugins.FanControl.EnableThread.value == True:
-				if Briefkasten.qsize()<=3:
-					Briefkasten.put(1) 
+				if Briefkasten.qsize() <= 3:
+					Briefkasten.put(1)
 				else:
 					FClog("queue full, Thread hanging?")
 			else:
@@ -1076,7 +1108,7 @@ class FanControl2(Screen):
 				FClog("Emergency Shutdown %dC" % AktTemp)
 				self.FC2AskShutdown()
 		self.timer.startLongTimer(10)
-		
+
 	def queryRun(self):
 		global FirstStart
 		global istStandbySave
@@ -1093,30 +1125,30 @@ class FanControl2(Screen):
 		global AktPWM
 
 		global AktPWMCTL
-		global IntegralRPM      
+		global IntegralRPM
 		global ErrRPM
 		tt = time.time()
 		try:
 			if self.targetTemp != config.plugins.FanControl.temp.value:
-				self.RPMController.ResetIntegrator() 
+				self.RPMController.ResetIntegrator()
 			self.targetTemp = config.plugins.FanControl.temp.value
-			self.maxTemp    = config.plugins.FanControl.tempmax.value
-			self.Fan        = config.plugins.FanControl.Fan.value
-			self.Vlt        = config.plugins.FanControl.vlt.value
+			self.maxTemp = config.plugins.FanControl.tempmax.value
+			self.Fan = config.plugins.FanControl.Fan.value
+			self.Vlt = config.plugins.FanControl.vlt.value
 			id = 0
 			AktRPMtmp = 0
 			sleeptime = 0
 			AktTemp = self.CurrTemp()
 			if int(strftime("%S")) < 10 and strftime("%H:%M") == "00:00":
 				DeleteData()
-			S=0
+			S = 0
 			if not self.inStandby:
-				S+=1
+				S += 1
 			if not self.HDDidle:
-				S+=2
+				S += 2
 			if self.Recording:
-				S+=4
-			FC2werte[5]=str(S)
+				S += 4
+			FC2werte[5] = str(S)
 
 			if (self.inStandby) and (not Overheat) and ((config.plugins.FanControl.StandbyOff.value == "true") or ((config.plugins.FanControl.StandbyOff.value == "trueRec") and (not self.Recording and self.HDDidle))):
 				FClog("Fan Off Temp: %d %s" % (AktTemp, FC2systemStatus()))
@@ -1139,13 +1171,13 @@ class FanControl2(Screen):
 					Overheat = True
 					FClog("Overheat")
 			else:
-				if (Overheat and AktTemp < self.maxTemp-3) or not self.inStandby:
+				if (Overheat and AktTemp < self.maxTemp - 3) or not self.inStandby:
 					Overheat = False
 				AktVLTtmp = getVoltage(id)
 				AktPWMtmp = getPWM(id)
 				if self.inStandby and self.inStandby == istStandbySave and RPMdiff == 1 and not self.Recording:
 					tmp = GetFanRPM()
-					RPMdiff = AktRPM-tmp
+					RPMdiff = AktRPM - tmp
 					if RPMdiff < 150 or tmp < 300 or self.Fan == "3pin":
 						RPMdiff = 0
 					else:
@@ -1176,12 +1208,12 @@ class FanControl2(Screen):
 					setVoltage(id, self.Vlt)
 					setPWM(id, config.plugins.FanControl.pwm.value)
 				AktRPMtmp = GetFanRPM()
-				if RPMread>0 and RPMread<3:
+				if RPMread > 0 and RPMread < 3:
 					FClog("Reread")
 					if config.plugins.FanControl.EnableThread.value == True:
-						if Briefkasten.qsize()<=2:
+						if Briefkasten.qsize() <= 2:
 							time.sleep(0.4)
-							Briefkasten.put(1) 
+							Briefkasten.put(1)
 					else:
 						self.timer.start(400, True)
 					return
@@ -1213,16 +1245,16 @@ class FanControl2(Screen):
 				FClog(_("currentRPM:%d targetRPM:%d Temp:%4.1f") % (AktRPM, ZielRPM, AktTemp))
 				if self.Fan == "4pin":
 					if AktPWM < 255 and AktPWM > 0 and AktVLT != self.Vlt:
-						AktVLT = (AktVLT-1 if AktVLT > self.Vlt else AktVLT+1)
+						AktVLT = (AktVLT - 1 if AktVLT > self.Vlt else AktVLT + 1)
 						setVoltage(id, AktVLT)
-					if AktRPM+29 < ZielRPM:
-						AktPWM = (AktPWM+5 if ZielRPM-AktRPM > 100 else AktPWM+1)
+					if AktRPM + 29 < ZielRPM:
+						AktPWM = (AktPWM + 5 if ZielRPM - AktRPM > 100 else AktPWM + 1)
 						setPWM(id, AktPWM)
 						if AktPWM >= 255 and AktVLT < 255:
 							AktVLT += 1
 							setVoltage(id, AktVLT)
-					elif AktRPM-19 > ZielRPM:
-						AktPWM = (AktPWM-5 if AktRPM-ZielRPM > 100 else AktPWM-1)
+					elif AktRPM - 19 > ZielRPM:
+						AktPWM = (AktPWM - 5 if AktRPM - ZielRPM > 100 else AktPWM - 1)
 						setPWM(id, AktPWM)
 # 4
 						if AktPWM < 0 and AktVLT > 5:
@@ -1236,7 +1268,7 @@ class FanControl2(Screen):
 					AktPWM = self.RPMController.ControlLoop(ZielRPM, AktRPM)
 					ErrRPM = self.RPMController.inputError
 					if AktPWM > 255.0:
-						AktVLT = 0.12*(AktPWM - 255.0) + int(config.plugins.FanControl.vlt.value)
+						AktVLT = 0.12 * (AktPWM - 255.0) + int(config.plugins.FanControl.vlt.value)
 					else:
 						AktVLT = int(config.plugins.FanControl.vlt.value)       # this will set voltage to initial value
 					if AktVLT > 255:
@@ -1250,17 +1282,18 @@ class FanControl2(Screen):
 					setVoltage(id, int(AktVLT))
 					setPWM(id, int(AktPWM))
 				elif self.Fan == "3pin":
-					if AktRPM+29 < ZielRPM:
-						AktVLT = (AktVLT+5 if ZielRPM-AktRPM > 100 else AktVLT+1)
+					if AktRPM + 29 < ZielRPM:
+						AktVLT = (AktVLT + 5 if ZielRPM - AktRPM > 100 else AktVLT + 1)
 						setVoltage(id, AktVLT)
-					elif AktRPM-19 > ZielRPM:
-						AktVLT = (AktVLT-5 if AktRPM-ZielRPM > 100 else AktVLT-1)
+					elif AktRPM - 19 > ZielRPM:
+						AktVLT = (AktVLT - 5 if AktRPM - ZielRPM > 100 else AktVLT - 1)
 						setVoltage(id, AktVLT)
 
 		except Exception:
 			from traceback import format_exc
-			FClog("Control Error:\n" + format_exc() )
-		FClogE("Runtime: %.3f" % (time.time() - tt) )
+			FClog("Control Error:\n" + format_exc())
+		FClogE("Runtime: %.3f" % (time.time() - tt))
+
 
 def autostart(reason, **kwargs):
 	global session
@@ -1276,14 +1309,14 @@ def autostart(reason, **kwargs):
 			root.putChild("chart", FC2webChart())
 			if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web/external.xml"):
 				try:
-					addExternalChild( ("fancontrol", root, "Fan Control 2", Version, True) )
+					addExternalChild(("fancontrol", root, "Fan Control 2", Version, True))
 					FClog("use new WebIF")
 				except:
-					addExternalChild( ("fancontrol", root) )
+					addExternalChild(("fancontrol", root))
 					FClog("use old WebIF")
 			if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/OpenWebif/pluginshook.src"):
 				try:
-					addExternalChild( ("fancontrol", root, "Fan Control 2", Version) )
+					addExternalChild(("fancontrol", root, "Fan Control 2", Version))
 					FClog("use new OpenWebIF")
 				except:
 					pass
@@ -1294,10 +1327,11 @@ def autostart(reason, **kwargs):
 		session = kwargs["session"]
 		session.open(FanControl2)
 
+
 def selSetup(menuid, **kwargs):
 	if getImageDistro() in ('openhdf'):
 		if menuid != "devices_menu":
-			return [ ]
+			return []
 	elif getImageDistro() in ('openatv'):
 		if menuid != "extended":
 			return []
@@ -1306,13 +1340,14 @@ def selSetup(menuid, **kwargs):
 			return []
 	return [(_("Fan Control 2"), main, "fansetup_config", 70)]
 
+
 def Plugins(**kwargs):
 	list = [
-	PluginDescriptor(name=_("Fan Control 2"), description=_("Fan Control"), where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], needsRestart = True, fnc = autostart)]
+	PluginDescriptor(name=_("Fan Control 2"), description=_("Fan Control"), where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], needsRestart=True, fnc=autostart)]
 	if os.path.exists("/proc/stb/fp/fan_vlt"):
-		list.append(PluginDescriptor(name=_("Fan Control 2"), description=_("setup Fancontol inStandby mode"), where = PluginDescriptor.WHERE_MENU, needsRestart = True, fnc=selSetup))
+		list.append(PluginDescriptor(name=_("Fan Control 2"), description=_("setup Fancontol inStandby mode"), where=PluginDescriptor.WHERE_MENU, needsRestart=True, fnc=selSetup))
 		if config.plugins.FanControl.FanControlInExtension.value:
-			list.append(PluginDescriptor(name=_("Fan Control 2"), description=_("Fan Control"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, icon = "plugin.png", needsRestart = True, fnc = main))
+			list.append(PluginDescriptor(name=_("Fan Control 2"), description=_("Fan Control"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, icon="plugin.png", needsRestart=True, fnc=main))
 		if config.plugins.FanControl.MonitorInExtension.value:
-			list.append(PluginDescriptor(name=_("Fan Control 2 - Monitor"), description=_("Fan Control"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, icon = "plugin.png", needsRestart = True, fnc = mainMonitor))
+			list.append(PluginDescriptor(name=_("Fan Control 2 - Monitor"), description=_("Fan Control"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, icon="plugin.png", needsRestart=True, fnc=mainMonitor))
 	return list

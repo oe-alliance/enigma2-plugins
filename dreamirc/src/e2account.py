@@ -2,7 +2,7 @@ from __future__ import absolute_import
 # -*- Python -*-
 #
 # Copyright (c) 2001-2004 Twisted Matrix Laboratories.
-# See LICENSE for details. 
+# See LICENSE for details.
 
 #
 import string
@@ -19,6 +19,7 @@ class AccountManager:
 	@ivar accounts: A collection of available accounts.
 	@type accounts: mapping of strings to L{Account<interfaces.IAccount>}s.
 	"""
+
 	def __init__(self, session):
 		self.chatui = e2chat.ChatUI()
 		self.config = dreamIRCSetup.dreamIRCConfig()
@@ -26,7 +27,7 @@ class AccountManager:
 		self.pipe = dreamIRCTools.MessagePipe()
 
 	def startConnect(self):
-		if self.accounts==False:
+		if self.accounts == False:
 			self.pipe.debug("You have defined no valid accounts.")
 		else:
 			for acct in self.accounts:
@@ -48,7 +49,7 @@ class AccountManager:
 		return len(self.accounts) == 0
 
 	def getConnectionInfo(self):
-		if self.accounts==False:
+		if self.accounts == False:
 			self.pipe.debug("You have defined no valid accounts.")
 			return [0]
 		else:
@@ -72,4 +73,3 @@ class AccountManager:
 
 	def quit(self):
 		pass
-

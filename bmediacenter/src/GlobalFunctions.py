@@ -14,14 +14,18 @@ from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import *
 from Components.FileList import FileList
 from _ctypes import *
-import os, re
+import os
+import re
 from os import path as os_path
 #------------------------------------------------------------------------------------------
+
+
 class MC_VideoInfoView(Screen):
 	skin = """
 		<screen position="80,130" size="560,320" title="View Video Info" >
 			<widget name="infolist" position="5,5" size="550,310" selectionDisabled="1" />
 		</screen>"""
+
 	def __init__(self, session, fullname, name, ref):
 		self.skin = MC_VideoInfoView.skin
 		Screen.__init__(self, session)
@@ -30,7 +34,7 @@ class MC_VideoInfoView(Screen):
 			"cancel": self.close,
 			"ok": self.close
 		}, -1)
-		tlist = [ ]
+		tlist = []
 		self["infolist"] = ServiceInfoList(tlist)
 		currPlay = self.session.nav.getCurrentService()
 		if currPlay is not None:
@@ -44,22 +48,28 @@ class MC_VideoInfoView(Screen):
 			tlist.append(ServiceInfoListEntry("sVideoWidth: ", currPlay.info().getInfoString(iServiceInformation.sVideoWidth)))
 			tlist.append(ServiceInfoListEntry("sVideoHeight: ", currPlay.info().getInfoString(iServiceInformation.sVideoHeight)))
 			tlist.append(ServiceInfoListEntry("sDescription: ", currPlay.info().getInfoString(iServiceInformation.sDescription)))
+
+
 class Showiframe():
 	def __init__(self):
-		lib="/usr/lib/"
-		if fileExists(lib +"libshowiframe.so.0.0.0"):
-			self.showiframe = dlopen(lib +"libshowiframe.so.0.0.0")
+		lib = "/usr/lib/"
+		if fileExists(lib + "libshowiframe.so.0.0.0"):
+			self.showiframe = dlopen(lib + "libshowiframe.so.0.0.0")
 		try:
 			self.showSinglePic = dlsym(self.showiframe, "showSinglePic")
 			self.finishShowSinglePic = dlsym(self.showiframe, "finishShowSinglePic")
-		except OSError as e: 
+		except OSError as e:
 			self.showSinglePic = dlsym(self.showiframe, "_Z13showSinglePicPKc")
 			self.finishShowSinglePic = dlsym(self.showiframe, "_Z19finishShowSinglePicv")
+
 	def showStillpicture(self, pic):
 		call_function(self.showSinglePic, (pic, ))
+
 	def finishStillPicture(self):
 		call_function(self.finishShowSinglePic, ())
-def shortname(movie,showing = None):
+
+
+def shortname(movie, showing=None):
 	movielist = movie.split('/')
 	for n in movielist:
 		if n != "":
@@ -74,7 +84,7 @@ def shortname(movie,showing = None):
 	movie = re.sub("\W[0-9]{4}", "", movie)
 	if not showing:
 		movie = re.sub("\WDVDRIP(.*[^.]+).", "", movie)
-		movie = re.sub("\WAC3D(.*[^.]+).", "", movie)	
+		movie = re.sub("\WAC3D(.*[^.]+).", "", movie)
 		movie = re.sub("\WAC3(.*[^.]+).", "", movie)
 		movie = re.sub("\WX264(.*[^.]+).", "", movie)
 		movie = re.sub("\WXVID(.*[^.]+).", "", movie)

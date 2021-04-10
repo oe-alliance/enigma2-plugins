@@ -13,6 +13,7 @@ import NavigationInstance
 # Debug
 from datetime import datetime, timedelta
 
+
 class AutoPoller:
 	"""Automatically Poll AutoTimer"""
 
@@ -57,7 +58,8 @@ class AutoPoller:
 				ret = autotimer.parseEPG(autoPoll=True)
 			except Exception:
 				# Dump error to stdout
-				import traceback, sys
+				import traceback
+				import sys
 				traceback.print_exc(file=sys.stdout)
 		multiplier = config.plugins.autotimer.unit.value == "hour" and 60 or 1
 		self.timer.startLongTimer(config.plugins.autotimer.interval.value * 60 * multiplier)

@@ -26,7 +26,7 @@ from six.moves import http_client
 
 
 class GoogleSuggestions():
-	def __init__(self, callback, ds = None, json = None, hl = None):
+	def __init__(self, callback, ds=None, json=None, hl=None):
 		self.callback = callback
 		self.conn = http_client.HTTPConnection("google.com")
 		self.prepQuerry = "/complete/search?"
@@ -38,10 +38,8 @@ class GoogleSuggestions():
 			self.prepQuerry = self.prepQuerry + "hl=" + hl + "&"
 		self.prepQuerry = self.prepQuerry + "jsonp=self.gotSuggestions&q="
 
-
 	def gotSuggestions(self, suggestslist):
 		self.callback(suggestslist)
-
 
 	def getSuggestions(self, querryString):
 		if querryString != "":
@@ -68,7 +66,6 @@ class GoogleSuggestions():
 			self.callback(None)
 
 
-
 #class GoogleSuggestions():
 #	def __init__(self, callback, ds = None, json = None, hl = None):
 #		self.callback = callback
@@ -85,7 +82,7 @@ class GoogleSuggestions():
 #	def gotSuggestions(self, suggestslist):
 #		self.callback(suggestslist)
 #
-#		
+#
 #	def getSuggestions(self, querryString):
 #		if querryString is not "":
 #			querry = self.prepQuerry + urllib.quote(querryString)

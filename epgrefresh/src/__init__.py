@@ -2,13 +2,16 @@
 from __future__ import print_function
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
-import os, gettext
+import os
+import gettext
 
 PluginLanguageDomain = "EPGRefresh"
 PluginLanguagePath = "Extensions/EPGRefresh/locale"
 
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -17,8 +20,9 @@ def _(txt):
 		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
+
 language.addCallback(localeInit())
 
 STARTNOTIFICATIONID = 'EpgRefreshStartNotificationId'
 ENDNOTIFICATIONID = 'EpgRefreshEndNotificationId'
-NOTIFICATIONDOMAIN = "EPGRefresh" 
+NOTIFICATIONDOMAIN = "EPGRefresh"

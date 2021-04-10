@@ -14,11 +14,12 @@ try:
 except ValueError:
 	def _(string): # pylint: disable-msg=C0103
 		return string
-	
+
 	def debug(text):
 		print(text)
-	
+
 	import re
+
 	def normalizePhoneNumber(intNo):
 		found = re.match('^\+49(.*)', intNo)
 		if found:
@@ -40,8 +41,10 @@ import logging
 logger = logging.getLogger("[FritzCall] OutlookCSV")
 debug = logger.debug
 
+
 def out(number, name):
 	print(number + '#' + name)
+
 
 import csv
 #
@@ -60,6 +63,7 @@ import csv
 # 20: Postleitzahl privat
 # 21: Land/Region privat
 #
+
 
 def findNumber(number, filename):
 	fileD = open(filename)
@@ -99,13 +103,13 @@ def findNumber(number, filename):
 					if row[11]: # Ort geschäftlich
 						addressB = row[11]
 						if row[13]:
-							addressB =  row[13] + ' ' + addressB# Postleitzahl geschäftlich
+							addressB = row[13] + ' ' + addressB# Postleitzahl geschäftlich
 						if row[14]:
 							addressB = addressB + ', ' + row[14] # Land/Region geschäftlich
 						if row[8]:
 							addressB = row[8] + ', ' + addressB# Stra￟e gesch￤ftlich
 						nameB = (nameB + ', ' + addressB).replace('\n', ', ').replace('\r', '').replace('#', '')
-	
+
 					if no == number:
 						debug("[FritzCallPhonebook] findNumber result: " + no + ' ' + nameB)
 						fileD.close()
@@ -146,7 +150,8 @@ def findNumber(number, filename):
 			continue
 	fileD.close()
 	return ""
-	
+
+
 def readNumbers(filename, outFun):
 	fileD = open(filename, "rb")
 	if not fileD:
@@ -182,7 +187,7 @@ def readNumbers(filename, outFun):
 				if row[11]: # Ort gesch￤ftlich
 					addressB = row[11]
 					if row[13]:
-						addressB =  row[13] + ' ' + addressB# Postleitzahl gesch￤ftlich
+						addressB = row[13] + ' ' + addressB# Postleitzahl gesch￤ftlich
 					if row[14]:
 						addressB = addressB + ', ' + row[14] # Land/Region gesch￤ftlich
 					if row[8]:
@@ -226,8 +231,10 @@ def readNumbers(filename, outFun):
 			continue
 	fileD.close()
 
+
 if __name__ == '__main__':
-	import os, sys
+	import os
+	import sys
 	cwd = os.path.dirname(sys.argv[0])
 	if (len(sys.argv) == 1):
 		readNumbers("Kontakte.csv", out)

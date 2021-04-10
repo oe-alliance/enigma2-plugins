@@ -66,11 +66,14 @@ SPC = chr(0o40)
 
 CHANNEL_PREFIXES = '&#!+'
 
+
 class IRCBadMessage(Exception):
     pass
 
+
 class IRCPasswordMismatch(Exception):
     pass
+
 
 def parsemsg(s):
     """Breaks a message from an IRC server into its prefix, command, and arguments.
@@ -91,7 +94,7 @@ def parsemsg(s):
     return prefix, command, args
 
 
-def split(str, length = 80):
+def split(str, length=80):
     """I break a message into multiple lines.
 
     I prefer to break at whitespace near str[length].  I also break at \\n.
@@ -107,11 +110,12 @@ def split(str, length = 80):
             line, str = str[:length], str[length:]
         else:
             i = n == -1 and w or n
-            line, str = str[:i], str[i+1:]
+            line, str = str[:i], str[i + 1:]
         r.append(line)
     if len(str):
         r.extend(str.split('\n'))
     return r
+
 
 class IRC(protocol.Protocol):
     """Internet Relay Chat server protocol.
@@ -127,13 +131,11 @@ class IRC(protocol.Protocol):
         if self.hostname is None:
             self.hostname = socket.getfqdn()
 
-
     def sendLine(self, line):
         if self.encoding is not None:
             if isinstance(line, six.text_type):
                 line = line.encode(self.encoding)
         self.transport.write("%s%s%s" % (line, CR, LF))
-
 
     def sendMessage(self, command, *parameter_list, **prefix):
         """Send a line formatted as an IRC message.
@@ -149,7 +151,7 @@ class IRC(protocol.Protocol):
         if ' ' in command or command[0] == ':':
             # Not the ONLY way to screw up, but provides a little
             # sanity checking to catch likely dumb mistakes.
-            raise_(ValueError, "Somebody screwed up, 'cuz this doesn't" \
+            raise_(ValueError, "Somebody screwed up, 'cuz this doesn't"
                   " look like a command to me: %s" % command)
 
         line = string.join([command] + list(parameter_list))
@@ -160,7 +162,6 @@ class IRC(protocol.Protocol):
         if len(parameter_list) > 15:
             log.msg("Message has %d parameters (RFC allows 15):\n%s" %
                     (len(parameter_list), line))
-
 
     def dataReceived(self, data):
         """This hack is to support mIRC, which sends LF only,
@@ -186,7 +187,6 @@ class IRC(protocol.Protocol):
 
             self.handleCommand(command, prefix, params)
 
-
     def handleCommand(self, command, prefix, params):
         """Determine the function to call for the given command and call
         it with the given arguments.
@@ -200,13 +200,12 @@ class IRC(protocol.Protocol):
         except:
             log.deferr()
 
-
     def irc_unknown(self, prefix, command, params):
         """Implement me!"""
         raise NotImplementedError(command, prefix, params)
 
-
     # Helper methods
+
     def privmsg(self, sender, recip, message):
         """Send a message to a channel or user
 
@@ -222,7 +221,6 @@ class IRC(protocol.Protocol):
         @param message: The message being sent.
         """
         self.sendLine(":%s PRIVMSG %s :%s" % (sender, recip, lowQuote(message)))
-
 
     def notice(self, sender, recip, message):
         """Send a \"notice\" to a channel or user.
@@ -244,7 +242,6 @@ class IRC(protocol.Protocol):
         """
         self.sendLine(":%s NOTICE %s :%s" % (sender, recip, message))
 
-
     def action(self, sender, recip, message):
         """Send an action to a channel or user.
 
@@ -260,7 +257,6 @@ class IRC(protocol.Protocol):
         @param message: The action being sent.
         """
         self.sendLine(":%s ACTION %s :%s" % (sender, recip, message))
-
 
     def topic(self, user, channel, topic, author=None):
         """Send the topic to a user.
@@ -290,7 +286,6 @@ class IRC(protocol.Protocol):
         else:
             self.sendLine(":%s TOPIC %s :%s" % (author, channel, lowQuote(topic)))
 
-
     def topicAuthor(self, user, channel, author, date):
         """
         Send the author of and time at which a topic was set for the given
@@ -315,7 +310,6 @@ class IRC(protocol.Protocol):
         """
         self.sendLine(':%s %d %s %s %s %d' % (
             self.hostname, 333, user, channel, author, date))
-
 
     def names(self, user, channel, names):
         """Send the names of a channel's participants to a user.
@@ -351,7 +345,6 @@ class IRC(protocol.Protocol):
         self.sendLine(":%s %s %s %s :End of /NAMES list" % (
             self.hostname, RPL_ENDOFNAMES, user, channel))
 
-
     def who(self, user, channel, memberInfo):
         """
         Send a list of users participating in a channel.
@@ -380,7 +373,6 @@ class IRC(protocol.Protocol):
 
         self.sendLine(":%s %s %s %s :End of /WHO list." % (
             self.hostname, RPL_ENDOFWHO, user, channel))
-
 
     def whois(self, user, nick, username, hostname, realName, server, serverInfo, oper, idle, signOn, channels):
         """
@@ -435,7 +427,6 @@ class IRC(protocol.Protocol):
         self.sendLine(":%s %s %s %s :End of WHOIS list." % (
             self.hostname, RPL_ENDOFWHOIS, user, nick))
 
-
     def join(self, who, where):
         """Send a join message.
 
@@ -447,7 +438,6 @@ class IRC(protocol.Protocol):
         @param where: The channel the user is joining.
         """
         self.sendLine(":%s JOIN %s" % (who, where))
-
 
     def part(self, who, where, reason=None):
         """Send a part message.
@@ -467,7 +457,6 @@ class IRC(protocol.Protocol):
             self.sendLine(":%s PART %s :%s" % (who, where, reason))
         else:
             self.sendLine(":%s PART %s" % (who, where))
-
 
     def channelMode(self, user, channel, mode, *args):
         """
@@ -567,7 +556,6 @@ class IRCClient(basic.LineReceiver):
 
     __pychecker__ = 'unusednames=params,prefix,channel'
 
-
     def _reallySendLine(self, line):
         return basic.LineReceiver.sendLine(self, lowQuote(line) + '\r')
 
@@ -586,7 +574,6 @@ class IRCClient(basic.LineReceiver):
                                                     self._sendLine)
         else:
             self._queueEmptying = None
-
 
     ### Interface level client->user output methods
     ###
@@ -745,7 +732,6 @@ class IRCClient(basic.LineReceiver):
         """
         self.nickname = nick
 
-
     ### Things I observe other people doing in a channel.
 
     def userJoined(self, user, channel):
@@ -803,21 +789,24 @@ class IRCClient(basic.LineReceiver):
     ### Your client will want to invoke these.
 
     def join(self, channel, key=None):
-        if channel[0] not in '&#!+': channel = '#' + channel
+        if channel[0] not in '&#!+':
+            channel = '#' + channel
         if key:
             self.sendLine("JOIN %s %s" % (channel, key))
         else:
             self.sendLine("JOIN %s" % (channel,))
 
     def leave(self, channel, reason=None):
-        if channel[0] not in '&#!+': channel = '#' + channel
+        if channel[0] not in '&#!+':
+            channel = '#' + channel
         if reason:
             self.sendLine("PART %s :%s" % (channel, reason))
         else:
             self.sendLine("PART %s" % (channel,))
 
     def kick(self, channel, user, reason=None):
-        if channel[0] not in '&#!+': channel = '#' + channel
+        if channel[0] not in '&#!+':
+            channel = '#' + channel
         if reason:
             self.sendLine("KICK %s %s :%s" % (channel, user, reason))
         else:
@@ -833,13 +822,14 @@ class IRCClient(basic.LineReceiver):
         the current topic of the given channel.
         """
         # << TOPIC #xtestx :fff
-        if channel[0] not in '&#!+': channel = '#' + channel
+        if channel[0] not in '&#!+':
+            channel = '#' + channel
         if topic != None:
             self.sendLine("TOPIC %s :%s" % (channel, topic))
         else:
             self.sendLine("TOPIC %s" % (channel,))
 
-    def mode(self, chan, set, modes, limit = None, user = None, mask = None):
+    def mode(self, chan, set, modes, limit=None, user=None, mask=None):
         """Change the modes on a user or channel."""
         if set:
             line = 'MODE %s +%s' % (chan, modes)
@@ -853,12 +843,12 @@ class IRCClient(basic.LineReceiver):
             line = '%s %s' % (line, mask)
         self.sendLine(line)
 
-
-    def say(self, channel, message, length = None):
-        if channel[0] not in '&#!+': channel = '#' + channel
+    def say(self, channel, message, length=None):
+        if channel[0] not in '&#!+':
+            channel = '#' + channel
         self.msg(channel, message, length)
 
-    def msg(self, user, message, length = None):
+    def msg(self, user, message, length=None):
         """Send a message to a user or channel.
 
         @type user: C{str}
@@ -911,7 +901,7 @@ class IRCClient(basic.LineReceiver):
         self.nickname = nickname
         self.sendLine("NICK %s" % nickname)
 
-    def quit(self, message = ''):
+    def quit(self, message=''):
         self.sendLine("QUIT :%s" % message)
 
     ### user input commands, client->client
@@ -919,13 +909,14 @@ class IRCClient(basic.LineReceiver):
     def me(self, channel, action):
         """Strike a pose.
         """
-        if channel[0] not in '&#!+': channel = '#' + channel
+        if channel[0] not in '&#!+':
+            channel = '#' + channel
         self.ctcpMakeQuery(channel, [('ACTION', action)])
 
     _pings = None
     _MAX_PINGRING = 12
 
-    def ping(self, user, text = None):
+    def ping(self, user, text=None):
         """Measure round-trip delay to another IRC client.
         """
         if self._pings is None:
@@ -989,7 +980,7 @@ class IRCClient(basic.LineReceiver):
     ### but it is safe to leave them alone.
 
     def irc_ERR_NICKNAMEINUSE(self, prefix, params):
-        self.register(self.nickname+'_')
+        self.register(self.nickname + '_')
 
     def irc_ERR_PASSWDMISMATCH(self, prefix, params):
         raise IRCPasswordMismatch("Password Incorrect.")
@@ -1032,9 +1023,10 @@ class IRCClient(basic.LineReceiver):
         channel = params[0]
         message = params[-1]
 
-        if not message: return # don't raise an exception if some idiot sends us a blank message
+        if not message:
+            return # don't raise an exception if some idiot sends us a blank message
 
-        if message[0]==X_DELIM:
+        if message[0] == X_DELIM:
             m = ctcpExtract(message)
             if m['extended']:
                 self.ctcpQuery(user, channel, m['extended'])
@@ -1051,7 +1043,7 @@ class IRCClient(basic.LineReceiver):
         channel = params[0]
         message = params[-1]
 
-        if message[0]==X_DELIM:
+        if message[0] == X_DELIM:
             m = ctcpExtract(message)
             if m['extended']:
                 self.ctcpReply(user, channel, m['extended'])
@@ -1256,7 +1248,6 @@ class IRCClient(basic.LineReceiver):
             doc = getattr(method, '__doc__', '')
             self.ctcpMakeReply(nick, [('CLIENTINFO', doc)])
 
-
     def ctcpQuery_ERRMSG(self, user, channel, data):
         # Yeah, this seems strange, but that's what the spec says to do
         # when faced with an ERRMSG query (not a reply).
@@ -1277,13 +1268,14 @@ class IRCClient(basic.LineReceiver):
         """Initiate a Direct Client Connection
         """
 
-        if not data: return
+        if not data:
+            return
         dcctype = data.split(None, 1)[0].upper()
         handler = getattr(self, "dcc_" + dcctype, None)
         if handler:
             if self.dcc_sessions is None:
                 self.dcc_sessions = []
-            data = data[len(dcctype)+1:]
+            data = data[len(dcctype) + 1:]
             handler(user, channel, data)
         else:
             nick = user.split("!")[0]
@@ -1438,7 +1430,7 @@ class IRCClient(basic.LineReceiver):
     def ctcpReply_PING(self, user, channel, data):
         nick = user.split('!', 1)[0]
         if (not self._pings) or ((nick, data) not in self._pings):
-            raise_(IRCBadMessage,\
+            raise_(IRCBadMessage,
                   "Bogus PING response from %s: %s" % (user, data))
 
         t0 = self._pings[(nick, data)]
@@ -1491,7 +1483,6 @@ class IRCClient(basic.LineReceiver):
         except IRCBadMessage:
             self.badMessage(line, *sys.exc_info())
 
-
     def handleCommand(self, command, prefix, params):
         """Determine the function to call for the given command and call
         it with the given arguments.
@@ -1504,7 +1495,6 @@ class IRCClient(basic.LineReceiver):
                 self.irc_unknown(prefix, command, params)
         except:
             log.deferr()
-
 
     def __getstate__(self):
         dct = self.__dict__.copy()
@@ -1520,7 +1510,7 @@ def dccParseAddress(address):
         try:
             address = int(address)
         except ValueError:
-            raise_(IRCBadMessage,\
+            raise_(IRCBadMessage,
                   "Indecipherable address %r" % (address,))
         else:
             address = (
@@ -1612,6 +1602,7 @@ class DccSendProtocol(protocol.Protocol, styles.Ephemeral):
 
 class DccSendFactory(protocol.Factory):
     protocol = DccSendProtocol
+
     def __init__(self, file):
         self.file = file
 
@@ -1656,6 +1647,7 @@ def fileSize(file):
             return size
 
     return size
+
 
 class DccChat(basic.LineReceiver, styles.Ephemeral):
     """Direct Client Connection protocol type CHAT.
@@ -1714,6 +1706,7 @@ class DccChat(basic.LineReceiver, styles.Ephemeral):
 class DccChatFactory(protocol.ClientFactory):
     protocol = DccChat
     noisy = 0
+
     def __init__(self, client, queryData):
         self.client = client
         self.queryData = queryData
@@ -1842,7 +1835,6 @@ class DccFileReceive(DccFileReceiveBasic):
         """
         self.overwrite = boolean
 
-
     # Protocol-level methods.
 
     def connectionMade(self):
@@ -1890,7 +1882,8 @@ class DccFileReceive(DccFileReceiveBasic):
 
         if hasattr(self, 'file'):
             logmsg = "%s and written to %s.\n" % (logmsg, self.file.name)
-            if hasattr(self.file, 'close'): self.file.close()
+            if hasattr(self.file, 'close'):
+                self.file.close()
 
         # self.transport.log(logmsg)
 
@@ -1914,6 +1907,7 @@ class DccFileReceive(DccFileReceiveBasic):
 
 X_DELIM = chr(0o01)
 
+
 def ctcpExtract(message):
     """Extract CTCP data from a string.
 
@@ -1926,7 +1920,7 @@ def ctcpExtract(message):
     extended_messages = []
     normal_messages = []
     retval = {'extended': extended_messages,
-              'normal': normal_messages }
+              'normal': normal_messages}
 
     messages = message.split(X_DELIM)
     odd = 0
@@ -1957,7 +1951,8 @@ def ctcpExtract(message):
 
 # CTCP escaping
 
-M_QUOTE= chr(0o20)
+
+M_QUOTE = chr(0o20)
 
 mQuoteTable = {
     NUL: M_QUOTE + '0',
@@ -1973,10 +1968,12 @@ del k, v
 
 mEscape_re = re.compile('%s.' % (re.escape(M_QUOTE),), re.DOTALL)
 
+
 def lowQuote(s):
     for c in (M_QUOTE, NUL, NL, CR):
         s = s.replace(c, mQuoteTable[c])
     return s
+
 
 def lowDequote(s):
     def sub(matchobj, mDequoteTable=mDequoteTable):
@@ -1988,6 +1985,7 @@ def lowDequote(s):
         return s
 
     return mEscape_re.sub(sub, s)
+
 
 X_QUOTE = '\\'
 
@@ -2003,10 +2001,12 @@ for k, v in list(xQuoteTable.items()):
 
 xEscape_re = re.compile('%s.' % (re.escape(X_QUOTE),), re.DOTALL)
 
+
 def ctcpQuote(s):
     for c in (X_QUOTE, X_DELIM):
         s = s.replace(c, xQuoteTable[c])
     return s
+
 
 def ctcpDequote(s):
     def sub(matchobj, xDequoteTable=xDequoteTable):
@@ -2018,6 +2018,7 @@ def ctcpDequote(s):
         return s
 
     return xEscape_re.sub(sub, s)
+
 
 def ctcpStringify(messages):
     """

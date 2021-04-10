@@ -1,12 +1,12 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 #  Advanced Movie Selection for Dreambox-Enigma2
 #
 #  Coded by cmikula & JackDaniel (c)2012
 #  Support: www.i-have-a-dreambox.com
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -15,7 +15,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 
@@ -29,6 +29,7 @@ from .AccessRestriction import accessRestriction
 from .Globals import printStackTrace
 from Components.config import config
 
+
 class SortProvider():
     SORT_ALPHANUMERIC = 1
     SORT_RECORDED = 2
@@ -36,7 +37,7 @@ class SortProvider():
     SORT_DATE_DESC = 4
     SORT_DESCRIPTION = 5
     SORT_WITH_DIRECTORIES = 0x1000
-    
+
     def sortMovieList(self, l, sort_type):
         sort_type = sort_type & (0xffff ^ SortProvider.SORT_WITH_DIRECTORIES)
         if sort_type == SortProvider.SORT_ALPHANUMERIC:
@@ -74,7 +75,7 @@ class MovieDatabase(dict, SortProvider):
         dict.__init__(self)
         self.tags = []
         self['db'] = {}
-    
+
     def clearAll(self):
         print("database clear all")
         self.tags = []
@@ -86,7 +87,7 @@ class MovieDatabase(dict, SortProvider):
 
     def getTags(self):
         return self.tags
-    
+
     def getCreate(self, location):
         if location not in self["db"]:
             #print "new locatio:", location
@@ -97,7 +98,7 @@ class MovieDatabase(dict, SortProvider):
             self["db"][location] = item
             return item
         return self["db"][location]
-    
+
     def addMovieList(self, location, movie_list, dir_size):
         print("database add:", location)
         item = self.getCreate(location)
@@ -112,7 +113,7 @@ class MovieDatabase(dict, SortProvider):
         if location not in self["db"]:
             return -1
         return self["db"][location]["sort_type"]
-        
+
     def addMovie(self, location, movie):
         self["db"][location]["movies"].append(movie)
         size = movie.info.getInfoObject(movie.serviceref, iServiceInformation.sFileSize)
@@ -139,13 +140,13 @@ class MovieDatabase(dict, SortProvider):
                         self["db"][key]["dir_size"] -= size
                         del item["movies"][index]
                         break
-    
+
     def insertMarker(self, l1, root):
         if len(root) > 40:
             parts = root.split("/")
             if len(parts) > 2:
                 name = "/.../" + parts[-3] + "/" + parts[-2]
-            else: 
+            else:
                 name = parts[-2]
         else:
             name = root
@@ -154,7 +155,7 @@ class MovieDatabase(dict, SortProvider):
         info = ServiceCenter.getInstance().info(serviceref)
         mi = MovieInfo(name, serviceref, info)
         l1.insert(0, (mi,))
-        
+
     def getMovieListPerMountDir(self, sort_type, filter_tags=None, filter_description=None):
         print("getMovieListPerMountDir", str(sort_type), str(filter_tags), str(filter_description))
         l = []
@@ -176,10 +177,10 @@ class MovieDatabase(dict, SortProvider):
                     if filter_description:
                         descr = i.info.getInfoString(i.serviceref, iServiceInformation.sDescription)
                         if not filter_description.lower() in str(descr).lower():
-                            continue 
+                            continue
                     l1.append((i,))
                     movie_count += 1
-                
+
             if sort_type & SortProvider.SORT_WITH_DIRECTORIES:
                 print("sorting", str(len(l1)), root)
                 self.sortMovieList(l1, sort_type)
@@ -211,9 +212,9 @@ class MovieDatabase(dict, SortProvider):
                 if filter_description:
                     descr = i.info.getInfoString(i.serviceref, iServiceInformation.sDescription)
                     if not filter_description.lower() in str(descr).lower():
-                        continue 
+                        continue
                 l1.append((i,))
-            
+
             if sort_type & SortProvider.SORT_WITH_DIRECTORIES:
                 print("sorting", str(len(l1)), location)
                 self.sortMovieList(l1, sort_type)
@@ -225,7 +226,7 @@ class MovieDatabase(dict, SortProvider):
             self.sortMovieList(l, sort_type)
         print("collected movies", str(len(l)))
         return l
-    
+
     def getDirectoryList(self, sort=False):
         if not sort:
             return list(self["db"].keys())
@@ -237,7 +238,7 @@ class MovieDatabase(dict, SortProvider):
             root = os.path.realpath(location) + os.sep
             print("?", root)
             if root not in self["db"]:
-                l.append(location) 
+                l.append(location)
         print("missing locations", l)
         return sorted(l)
 
@@ -285,7 +286,7 @@ class MovieDatabase(dict, SortProvider):
         if dir_cnt < 0:
             return None
         return (movie_cnt, dir_cnt, size)
-    
+
     def getFullCount(self):
         directories = 0
         movies = 0
@@ -365,17 +366,18 @@ class dict2xml(object):
 
     def display(self):
         print(self.doc.toprettyxml(indent="  "))
-    
+
     def write(self, file_name):
         try:
             xmlstr = self.doc.toprettyxml() #self.doc.toxml('utf-8')
             f = open(file_name, 'w')
             f.write(xmlstr)
-            f.close()        
+            f.close()
         except:
             printStackTrace()
 
+
 if __name__ == '__main__':
-    example = {'auftrag':{"kommiauftragsnr":2103839, "anliefertermin":"2009-11-25", "prioritaet": 7, "ort": u"Huecksenwagen", "positionen": [{"menge": 12, "artnr": "14640/XL", "posnr": 1}, ], "versandeinweisungen": [{"guid": "2103839-XalE", "bezeichner": "avisierung48h", "anweisung": "48h vor Anlieferung unter 0900-LOGISTIK avisieren"}, ]}}
+    example = {'auftrag': {"kommiauftragsnr": 2103839, "anliefertermin": "2009-11-25", "prioritaet": 7, "ort": u"Huecksenwagen", "positionen": [{"menge": 12, "artnr": "14640/XL", "posnr": 1}, ], "versandeinweisungen": [{"guid": "2103839-XalE", "bezeichner": "avisierung48h", "anweisung": "48h vor Anlieferung unter 0900-LOGISTIK avisieren"}, ]}}
     xml = dict2xml(example)
     xml.display()

@@ -25,23 +25,28 @@ streamplayer = None
 plugin_path = ""
 
 ###############################################################################
-def main(session,**kwargs):
+
+
+def main(session, **kwargs):
     session.open(NETcasterScreenBrowser)
     global streamplayer
     streamplayer = StreamPlayer(session)
 
-def Plugins(path,**kwargs):
+
+def Plugins(path, **kwargs):
     global plugin_path
     plugin_path = path
     return PluginDescriptor(
         name=myname,
         description="play Network and Internet Streams",
-        where = PluginDescriptor.WHERE_EXTENSIONSMENU,
-        icon = "NETcaster.png",
-        fnc = main
+        where=PluginDescriptor.WHERE_EXTENSIONSMENU,
+        icon="NETcaster.png",
+        fnc=main
         )
 
 ###############################################################################
+
+
 class NETcasterScreenBrowser(Screen):
     skin = """
         <screen position="80,73" size="560,440" title="SHOUTcaster" >
@@ -59,7 +64,8 @@ class NETcasterScreenBrowser(Screen):
 
     streamlist = []
     currentPlugin = None
-    def __init__(self, session, args = 0):
+
+    def __init__(self, session, args=0):
         self.skin = NETcasterScreenBrowser.skin
         self.session = session
         Screen.__init__(self, session)
@@ -117,7 +123,7 @@ class NETcasterScreenBrowser(Screen):
     def getInterfaceList(self):
         self.pluginlist = []
         global plugin_path, myname
-        interfacepath = plugin_path+"/interface"
+        interfacepath = plugin_path + "/interface"
         for iface in os_listdir(interfacepath):
             if iface.endswith(".py") and not iface.startswith("_"):
                 pluginp = '.'.join(["Plugins", "Extensions", myname, "interface", iface.replace(".py", "")])
@@ -126,12 +132,12 @@ class NETcasterScreenBrowser(Screen):
 
     def updateTitle(self):
         try:
-            self.setTitle("%s (%s)"%(myname, self.currentPlugin.nameshort))
+            self.setTitle("%s (%s)" % (myname, self.currentPlugin.nameshort))
         except:
             pass
 
     def selectPlugin(self):
-        glist=[]
+        glist = []
         for i in self.pluginlist:
             glist.append((i.name, i))
         self.session.openWithCallback(self.selectedPlugin, ChoiceBox, _("select Plugin"), glist)
@@ -159,7 +165,7 @@ class NETcasterScreenBrowser(Screen):
 
     def _onStop(self):
         self["pixred"].setText("")
-        self.setTitle("%s (%s)"%(myname, self.currentPlugin.nameshort))
+        self.setTitle("%s (%s)" % (myname, self.currentPlugin.nameshort))
 
     def stream_stop(self):
         global streamplayer
@@ -176,7 +182,7 @@ class NETcasterScreenBrowser(Screen):
             self.connectToMetadataUpdates()
             streamplayer.play(stream)
             self["pixred"].setText(_("Stop"))
-            self.setTitle("%s"%(stream.getName()))
+            self.setTitle("%s" % (stream.getName()))
 
     def onStreamlistLoaded(self, list):
        self["streamlist"].buildList(list)
@@ -199,8 +205,8 @@ class NETcasterScreenBrowser(Screen):
 
         # std menuitems
         menu.append((_("hide"), self.hide))
-        menu.append((_("info"), self.showAbout));
-        menu.append((_("help"), self.showHelp));
+        menu.append((_("info"), self.showAbout))
+        menu.append((_("help"), self.showHelp))
         self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_("Menu"), list=menu)
 
     def menuCallback(self, choice):
@@ -214,7 +220,6 @@ class NETcasterScreenBrowser(Screen):
         self.session.open(NETcasterScreenHelp)
 
 
-
 ###############################################################################
 class NETcasterScreenHelp(Screen):
     skin = """
@@ -222,17 +227,17 @@ class NETcasterScreenHelp(Screen):
             <widget name="help" position="0,0" size="500,400" font="Regular;18"/>
         </screen>"""
 
-    def __init__(self, session, args = 0):
+    def __init__(self, session, args=0):
         self.skin = NETcasterScreenHelp.skin
         Screen.__init__(self, session)
         global plugin_path
-        readme = plugin_path+"/readme.txt"
+        readme = plugin_path + "/readme.txt"
         if os_path.exists(readme):
             fp = open(readme)
             text = fp.read()
             fp.close()
         else:
-            text = "sorry, cant load helptext from file "+readme
+            text = "sorry, cant load helptext from file " + readme
         self["help"] = ScrollLabel(text)
         self["actions"] = ActionMap(["WizardActions", "DirectionActions", "MenuActions"],
             {
@@ -243,8 +248,10 @@ class NETcasterScreenHelp(Screen):
              }, -1)
 
 ###############################################################################
+
+
 class StreamMenu(MenuList):
-    def __init__(self, list, enableWrapAround = False):
+    def __init__(self, list, enableWrapAround=False):
         MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
         self.l.setFont(0, gFont("Regular", 20))
         self.l.setFont(1, gFont("Regular", 18))
@@ -254,9 +261,9 @@ class StreamMenu(MenuList):
         instance.setItemHeight(50)
 
     def buildList(self, listnew):
-        list=[]
+        list = []
         for stream in listnew:
-            res = [ stream ]
+            res = [stream]
             res.append(MultiContentEntryText(pos=(5, 5), size=(500, 25), font=0, text=stream.getName()))
             res.append(MultiContentEntryText(pos=(5, 26), size=(500, 24), font=1, text=stream.getDescription()))
             list.append(res)
@@ -264,6 +271,8 @@ class StreamMenu(MenuList):
         self.moveToIndex(0)
 
 ###############################################################################
+
+
 class NETcasterScreenStreamDelete(Screen):
     def __init__(self, session):
         self.session = session

@@ -24,6 +24,7 @@ from Renderer import Renderer
 from enigma import eCanvas, eRect, gFont
 from skin import parseColor, parseFont
 
+
 class EventListDisplay(Renderer):
 	GUI_WIDGET = eCanvas
 
@@ -50,7 +51,7 @@ class EventListDisplay(Renderer):
 			while i < 3:
 				if str(i) in self.columns:
 					value = self.columns[str(i)]
-					self.instance.writeText(eRect(value[0], y+int((self.rowHeight-value[4])/2), value[1], self.rowHeight), value[2], self.backgroundColor, value[3], item[value[5]], value[6])
+					self.instance.writeText(eRect(value[0], y + int((self.rowHeight - value[4]) / 2), value[1], self.rowHeight), value[2], self.backgroundColor, value[3], item[value[5]], value[6])
 				i += 1
 			a += 1
 			y += self.rowHeight
@@ -62,13 +63,13 @@ class EventListDisplay(Renderer):
 
 	def applySkin(self, desktop, parent):
 
-		attribs = [ ]
+		attribs = []
 		from enigma import eSize
 
 		def parseSize(str):
 			x, y = str.split(',')
 			return eSize(int(x), int(y))
-	
+
 		def parseColumnValue(value):
 			x, length, color, fontname, fontheight, align, itemindex = value.split(',')
 			return (int(x), int(length), parseColor(color), gFont(fontname, int(fontheight)), int(fontheight), int(itemindex), int(align))
@@ -95,4 +96,3 @@ class EventListDisplay(Renderer):
 				attribs.append((attrib, value))
 		self.skinAttributes = attribs
 		return Renderer.applySkin(self, desktop, parent)
-

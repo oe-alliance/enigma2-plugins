@@ -43,17 +43,19 @@ except:
 	WeatherMSNComp = None
 
 config.plugins.WeatherPlugin = ConfigSubsection()
-config.plugins.WeatherPlugin.entrycount =  ConfigInteger(0)
+config.plugins.WeatherPlugin.entrycount = ConfigInteger(0)
 config.plugins.WeatherPlugin.Entry = ConfigSubList()
 initConfig()
 
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	session.open(MSNWeatherPlugin)
 
+
 def Plugins(**kwargs):
-	list = [PluginDescriptor(name=_("Weather Plugin"), description=_("Show Weather Forecast"), where = [PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU], icon = "weather.png", fnc=main)]
+	list = [PluginDescriptor(name=_("Weather Plugin"), description=_("Show Weather Forecast"), where=[PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU], icon="weather.png", fnc=main)]
 	return list
+
 
 class MSNWeatherPlugin(Screen):
 
@@ -85,7 +87,7 @@ class MSNWeatherPlugin(Screen):
 			<widget render="Label" source="weekday5_temp" position="515,270" zPosition="1" size="105,60" halign="center" valign="bottom" font="Regular;16" transparent="1"/>
 			<widget render="Label" source="statustext" position="0,0" zPosition="1" size="664,340" font="Regular;20" halign="center" valign="center" transparent="1"/>
 		</screen>"""
-	
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.title = _("Weather Plugin")
@@ -108,15 +110,14 @@ class MSNWeatherPlugin(Screen):
 		self["observationtime"] = StaticText()
 		self["observationpoint"] = StaticText()
 		self["feelsliketemp"] = StaticText()
-		
+
 		i = 1
 		while i <= 5:
 			self["weekday%s" % i] = StaticText()
-			self["weekday%s_icon" %i] = WeatherIcon()
+			self["weekday%s_icon" % i] = WeatherIcon()
 			self["weekday%s_temp" % i] = StaticText()
 			i += 1
 		del i
-		
 
 		self.weatherPluginEntryIndex = -1
 		self.weatherPluginEntryCount = config.plugins.WeatherPlugin.entrycount.value
@@ -126,13 +127,12 @@ class MSNWeatherPlugin(Screen):
 		else:
 			self.weatherPluginEntry = None
 
-
 		self.webSite = ""
-		
+
 		self.weatherData = None
 		self.onLayoutFinish.append(self.startRun)
 		self.onClose.append(self.__onClose)
-		
+
 	def __onClose(self):
 		if self.weatherData is not None:
 			self.weatherData.cancel()
@@ -165,7 +165,7 @@ class MSNWeatherPlugin(Screen):
 			self.setItem()
 
 	def setItem(self):
-		self.weatherPluginEntry = config.plugins.WeatherPlugin.Entry[self.weatherPluginEntryIndex-1]
+		self.weatherPluginEntry = config.plugins.WeatherPlugin.Entry[self.weatherPluginEntryIndex - 1]
 		self.clearFields()
 		self.startRun()
 
@@ -183,7 +183,7 @@ class MSNWeatherPlugin(Screen):
 		i = 1
 		while i <= 5:
 			self["weekday%s" % i].text = ""
-			self["weekday%s_icon" %i].hide()
+			self["weekday%s_icon" % i].hide()
 			self["weekday%s_temp" % i].text = ""
 			i += 1
 
@@ -209,10 +209,10 @@ class MSNWeatherPlugin(Screen):
 					self["condition"].text = item.skytext
 					self["humidity"].text = _("Humidity: %s %%") % item.humidity
 					self["wind_condition"].text = item.winddisplay
-					c =  time.strptime(item.observationtime, "%H:%M:%S")
-					self["observationtime"].text = _("Observation time: %s") %  time.strftime("%H:%M", c)
+					c = time.strptime(item.observationtime, "%H:%M:%S")
+					self["observationtime"].text = _("Observation time: %s") % time.strftime("%H:%M", c)
 					self["observationpoint"].text = _("Observation point: %s") % item.observationpoint
-					self["feelsliketemp"].text = _("Feels like %s") % item.feelslike + "°" +  self.weatherData.degreetype
+					self["feelsliketemp"].text = _("Feels like %s") % item.feelslike + "°" + self.weatherData.degreetype
 				else:
 					index = weatherData[0]
 					c = time.strptime(item.date, "%Y-%m-%d")
@@ -220,14 +220,14 @@ class MSNWeatherPlugin(Screen):
 					lowTemp = item.low
 					highTemp = item.high
 					self["weekday%s_temp" % index].text = "%s°%s|%s°%s\n%s" % (highTemp, self.weatherData.degreetype, lowTemp, self.weatherData.degreetype, item.skytextday)
-		
+
 		if self.weatherPluginEntryIndex == 1 and WeatherMSNComp is not None:
 			WeatherMSNComp.updateWeather(self.weatherData, result, errortext)
 
 	def config(self):
 		self.session.openWithCallback(self.setupFinished, MSNWeatherPluginEntriesListConfigScreen)
 
-	def setupFinished(self, index, entry = None):
+	def setupFinished(self, index, entry=None):
 		self.weatherPluginEntryCount = config.plugins.WeatherPlugin.entrycount.value
 		if self.weatherPluginEntryCount >= 1:
 			if entry is not None:
@@ -252,7 +252,9 @@ class MSNWeatherPlugin(Screen):
 			from Plugins.Extensions.Browser.Browser import Browser
 			if self.webSite:
 				self.session.open(Browser, config.plugins.WebBrowser.fullscreen.value, self.webSite, False)
-		except: pass # I dont care if browser is installed or not...
+		except:
+			pass # I dont care if browser is installed or not...
+
 
 class WeatherIcon(Pixmap):
 	def __init__(self):
@@ -290,10 +292,9 @@ class WeatherIcon(Pixmap):
 			self.instance.setPixmap(ptr)
 		else:
 			self.instance.setPixmap(None)
-		
+
 	def updateIcon(self, filename):
 		new_IconFileName = filename
 		if (self.IconFileName != new_IconFileName):
 			self.IconFileName = new_IconFileName
 			self.picload.startDecode(self.IconFileName)
-

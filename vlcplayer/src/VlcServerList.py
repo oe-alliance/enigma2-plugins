@@ -27,6 +27,7 @@ from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, gFont
 import os
 from skin import parseFont
 
+
 class VlcServerList(MenuList):
 	def __init__(self):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
@@ -36,7 +37,7 @@ class VlcServerList(MenuList):
 		self.l.setBuildFunc(self.buildListboxEntry)
 
 	def applySkin(self, desktop, parent):
-		attribs = [ ]
+		attribs = []
 		if self.skinAttributes is not None:
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "font":
@@ -76,6 +77,7 @@ class VlcServerList(MenuList):
 		cur = self.l.getCurrentSelection()
 		return cur and cur[0]
 
+
 class VlcServerListScreen(Screen):
 	skin = """
 		<screen position="80,100" size="560,400" title="Select VLC-Server Profile" >
@@ -96,7 +98,7 @@ class VlcServerListScreen(Screen):
 		self.session = session
 		self.serverlist = VlcServerList()
 		self.defaultServer = defaultServer
-		
+
 		self.setTitle(_("Select VLC-Server profile"))
 		self["serverlabel"] = Label(_("List of known profiles. Note: key info - help"))
 		self["serverlist"] = self.serverlist
@@ -107,18 +109,18 @@ class VlcServerListScreen(Screen):
 
 		self["actions"] = ActionMap(["WizardActions", "ColorActions", "ChannelSelectEPGActions"],
 			{
-			 "back": 	self.close,
-			 "red": 	self.keyDelete,
-			 "green": 	self.keyAddServer,
-			 "yellow": 	self.keyEditServer,
-			 "blue":	self.keyGetDefault,
-			 "up": 		self.up,
-			 "down": 	self.down,
-			 "left": 	self.left,
-			 "right": 	self.right,
-			 "ok":		self.ok,
-			 "info":	self.showHelp,
-			 "epg":		self.showHelp
+			 "back": self.close,
+			 "red": self.keyDelete,
+			 "green": self.keyAddServer,
+			 "yellow": self.keyEditServer,
+			 "blue": self.keyGetDefault,
+			 "up": self.up,
+			 "down": self.down,
+			 "left": self.left,
+			 "right": self.right,
+			 "ok": self.ok,
+			 "info": self.showHelp,
+			 "epg": self.showHelp
             }, -1)
 
 		self.onLayoutFinish.append(self.initialServerlistUpdate)
@@ -217,7 +219,7 @@ class VlcServerListScreen(Screen):
 	def right(self):
 		self.serverlist.pageDown()
 
-	def close(self, server = None):
+	def close(self, server=None):
 		Screen.close(self, server, self.defaultServer)
 
 	def ok(self):

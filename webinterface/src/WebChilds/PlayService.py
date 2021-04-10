@@ -3,6 +3,7 @@ from enigma import eServiceReference
 from twisted.web import resource, http, server
 from os import path as os_path
 
+
 class ServiceplayerResource(resource.Resource):
 	def __init__(self, session):
 		resource.Resource.__init__(self)
@@ -56,4 +57,3 @@ class ServiceplayerResource(resource.Resource):
 			return True, "[ServiceplayerResource] stopped, now playing old service, %s" % self.oldservice[0]
 		else:
 			return True, "[ServiceplayerResource] stopped"
-

@@ -17,6 +17,7 @@ from .config import createPage, loadDefaultPageOptions
 from Components.config import config, getConfigListEntry, ConfigSelection
 from Components.ConfigList import ConfigList, ConfigListScreen
 
+
 class CurlyTxSettings(ConfigListScreen, HelpableScreen, Screen):
     skin = """
 	<screen name="Setup" position="center,center" size="560,430" title="Settings">
@@ -47,12 +48,12 @@ class CurlyTxSettings(ConfigListScreen, HelpableScreen, Screen):
                 "blue": self.deletePage
             }, -2)
 
-        self["key_red"]    = StaticText(_("Cancel"))
-        self["key_green"]  = StaticText(_("OK"))
+        self["key_red"] = StaticText(_("Cancel"))
+        self["key_green"] = StaticText(_("OK"))
         self["key_yellow"] = StaticText(_("New"))
-        self["key_blue"]   = StaticText(_("Delete"))
+        self["key_blue"] = StaticText(_("Delete"))
 
-        ConfigListScreen.__init__(self, self.getConfigList(), session = self.session)
+        ConfigListScreen.__init__(self, self.getConfigList(), session=self.session)
 
         self.loadHelp()
 
@@ -201,13 +202,12 @@ class CurlyTxSettings(ConfigListScreen, HelpableScreen, Screen):
             cfg.pages.append(createPage())
 
 
-
 class CurlyTxPageEdit(Screen, ConfigListScreen):
-    def __init__(self, session, page, new = False):
+    def __init__(self, session, page, new=False):
         Screen.__init__(self, session)
-        self.skinName = [ "CurlyTxPageEdit", "Setup" ]
+        self.skinName = ["CurlyTxPageEdit", "Setup"]
 
-        self["key_red"]   = StaticText(_("Cancel"))
+        self["key_red"] = StaticText(_("Cancel"))
         self["key_green"] = StaticText(_("OK"))
 
         self["setupActions"] = ActionMap(["SetupActions"],
@@ -223,7 +223,7 @@ class CurlyTxPageEdit(Screen, ConfigListScreen):
             getConfigListEntry(_("Title"), page.title),
             getConfigListEntry(_("Font size"), page.fontSize),
             ]
-        ConfigListScreen.__init__(self, list, session = self.session)
+        ConfigListScreen.__init__(self, list, session=self.session)
 
     def save(self):
         self.close(self.page, self.new)

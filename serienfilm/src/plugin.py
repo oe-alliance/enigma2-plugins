@@ -23,6 +23,7 @@ def pluginConfig(session, **kwargs):
 
 gLeavePlayerConfirmed = None
 
+
 def showMoviesSF(self):
 	try:
 #		print "[SF-Plugin] showMoviesSF.InfoBar"
@@ -30,11 +31,13 @@ def showMoviesSF(self):
 	except Exception as e:
 		print("[SF-Plugin] showMoviesSF exception:\n" + str(e))
 
+
 def showMoviesMP(self):
 	ref = self.session.nav.getCurrentlyPlayingServiceReference()
 #	print "[SF-Plugin] SF:MoviePlayer.showMoviesMP"
 #	print "[SF-Plugin] SF:MoviePlayer.showMoviesMP, ref=" + str(ref)
 	self.session.openWithCallback(self.movieSelected, MovieSelection, ref)
+
 
 def leavePlayerConfirmedMP(self, answer):
 	answer1 = answer and answer[1]
@@ -50,6 +53,7 @@ def leavePlayerConfirmedMP(self, answer):
 
 from skin import readSkin
 
+
 def doInstantiateDialogSF(self, screen, arguments, kwargs, desktop):
 	# create dialog
 
@@ -57,11 +61,11 @@ def doInstantiateDialogSF(self, screen, arguments, kwargs, desktop):
 		dlg = self.create(screen, arguments, **kwargs)
 	except:
 		print('EXCEPTION IN DIALOG INIT CODE, ABORTING:')
-		print('-'*60)
+		print('-' * 60)
 		print_exc(file=stdout)
 		from enigma import quitMainloop
 		quitMainloop(5)
-		print('-'*60)
+		print('-' * 60)
 
 	if dlg is None:
 		return
@@ -80,13 +84,15 @@ def doInstantiateDialogSF(self, screen, arguments, kwargs, desktop):
 
 RUNPLUGIN = 1
 
+
 def autostart(reason, **kwargs):
-	if RUNPLUGIN != 1: return
+	if RUNPLUGIN != 1:
+		return
 	if reason == 0: # start
 		if "session" in kwargs:
 			global gLeavePlayerConfirmed
 			Session = kwargs["session"]
-			print("[SF-Plugin] autostart, Session = " +  str(Session) + "\n")
+			print("[SF-Plugin] autostart, Session = " + str(Session) + "\n")
 			try:
 				from Screens.InfoBar import InfoBar
 				InfoBar.showMovies = showMoviesSF
@@ -98,7 +104,7 @@ def autostart(reason, **kwargs):
 				Session.doInstantiateDialog.__self__.__class__.doInstantiateDialog = doInstantiateDialogSF
 				modname = Session.doInstantiateDialog.__module__
 				print("[SF-Plugin] mytest.Session.doInstantiateDialog modname = %s = %s" % (str(type(modname)), str(modname)))
-				
+
 			except Exception as e:
 				print("[SF-Plugin] autostart MovieList launch override exception:\n" + str(e))
 
@@ -107,12 +113,12 @@ def autostart(reason, **kwargs):
 
 
 def Plugins(**kwargs):
-	descriptors = [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)]
-	descriptors.append( PluginDescriptor(
-		name = "SerienFilm "+SerienFilmVersion,
-		description = _("group movies of a series to virtual directories"),
-		icon = "SerienFilm.png",
-		where = PluginDescriptor.WHERE_PLUGINMENU,
-		fnc = pluginConfig) )
+	descriptors = [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart)]
+	descriptors.append(PluginDescriptor(
+		name ="SerienFilm " + SerienFilmVersion,
+		description=_("group movies of a series to virtual directories"),
+		icon="SerienFilm.png",
+		where=PluginDescriptor.WHERE_PLUGINMENU,
+		fnc=pluginConfig))
 	print("[SF-Plugin] autostart descriptors = " + str(descriptors))
 	return descriptors

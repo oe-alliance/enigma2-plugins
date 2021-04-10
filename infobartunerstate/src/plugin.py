@@ -55,131 +55,131 @@ gInfoBarTunerState = None
 
 
 # Config choices
-field_choices = [	
-									("TypeIcon",								_("Type (Icon)")),
-									("TypeText",								_("Type (Text)")),
-									("Tuner",										_("Tuner")),
-									("TunerType",								_("Tuner Type")),
-									("Number",									_("Channel Number")),
-									("Channel",									_("Channel Name")),
-									("Name",										_("Name")),
-									("TimeLeftDuration",				_("Time Left / Duration")),
-									("TimeLeft",								_("Time Left")),
-									("TimeElapsed",							_("Time Elapsed")),
-									("Begin",										_("Begin")),
-									("End",											_("End")),
-									("Duration",								_("Duration")),
-									("TimerProgressGraphical",	_("Timer Progress (Graphical)")),  #TODO howto do for file streams
-									("TimerProgressText",				_("Timer Progress (Text)")),  #TODO howto do for file streams
-									("TimerDestination",				_("Destination")),		#TODO howto do for file streams
-									("StreamClient",						_("Stream Client")),
-									("StreamClientPort",				_("Stream Client with Port")),
-									("DestinationStreamClient",	_("Destination / Client")),
+field_choices = [
+									("TypeIcon", _("Type (Icon)")),
+									("TypeText", _("Type (Text)")),
+									("Tuner", _("Tuner")),
+									("TunerType", _("Tuner Type")),
+									("Number", _("Channel Number")),
+									("Channel", _("Channel Name")),
+									("Name", _("Name")),
+									("TimeLeftDuration", _("Time Left / Duration")),
+									("TimeLeft", _("Time Left")),
+									("TimeElapsed", _("Time Elapsed")),
+									("Begin", _("Begin")),
+									("End", _("End")),
+									("Duration", _("Duration")),
+									("TimerProgressGraphical", _("Timer Progress (Graphical)")),  #TODO howto do for file streams
+									("TimerProgressText", _("Timer Progress (Text)")),  #TODO howto do for file streams
+									("TimerDestination", _("Destination")),  #TODO howto do for file streams
+									("StreamClient", _("Stream Client")),
+									("StreamClientPort", _("Stream Client with Port")),
+									("DestinationStreamClient", _("Destination / Client")),
 									#Throughput
 									#Overall transfer
-									("FileSize",								_("File Size")),
-									("FreeSpace",								_("Free Space")),
-									("None",										_("None")),
+									("FileSize", _("File Size")),
+									("FreeSpace", _("Free Space")),
+									("None", _("None")),
 								]
 
-date_choices = [	
-									("%H:%M",							_("HH:MM")),
-									("%d.%m %H:%M",				_("DD.MM HH:MM")),
-									("%d.%m. %H:%M",			_("DD.MM. HH:MM")),
-									("%m/%d %H:%M",				_("MM/DD HH:MM")),
-									("%d.%m.%Y %H:%M",		_("DD.MM.YYYY HH:MM")),
-									("%Y/%m/%d %H:%M",		_("YYYY/MM/DD HH:MM")),
-									("%H:%M %d.%m",				_("HH:MM DD.MM")),
-									("%H:%M %m/%d",				_("HH:MM MM/DD")),
-									("%H:%M %d.%m.%Y",		_("HH:MM DD.MM.YYYY")),
-									("%H:%M %Y/%m/%d",		_("HH:MM YYYY/MM/DD")),
-									("%a %d.%m. %H:%M",		_("WD DD.MM. HH:MM")),
-									("%a, %d.%m. %H:%M",	_("WD, DD.MM. HH:MM")),
-									("-    %H:%M",				_("-    HH:MM")),
+date_choices = [
+									("%H:%M", _("HH:MM")),
+									("%d.%m %H:%M", _("DD.MM HH:MM")),
+									("%d.%m. %H:%M", _("DD.MM. HH:MM")),
+									("%m/%d %H:%M", _("MM/DD HH:MM")),
+									("%d.%m.%Y %H:%M", _("DD.MM.YYYY HH:MM")),
+									("%Y/%m/%d %H:%M", _("YYYY/MM/DD HH:MM")),
+									("%H:%M %d.%m", _("HH:MM DD.MM")),
+									("%H:%M %m/%d", _("HH:MM MM/DD")),
+									("%H:%M %d.%m.%Y", _("HH:MM DD.MM.YYYY")),
+									("%H:%M %Y/%m/%d", _("HH:MM YYYY/MM/DD")),
+									("%a %d.%m. %H:%M", _("WD DD.MM. HH:MM")),
+									("%a, %d.%m. %H:%M", _("WD, DD.MM. HH:MM")),
+									("-    %H:%M", _("-    HH:MM")),
 								]
 
 #TODO New Config Show on timer prepare Event
-event_choices = [	
-									("prepare",						_("Prepare record")),
-									("start",							_("Start record")),
-									("end",								_("End record")),
-									("startend",					_("Start / End record")),
-									("preparestartend",		_("Prepare / Start / End record")),
+event_choices = [
+									("prepare", _("Prepare record")),
+									("start", _("Start record")),
+									("end", _("End record")),
+									("startend", _("Start / End record")),
+									("preparestartend", _("Prepare / Start / End record")),
 								]
 #config.infobartunerstate.show_on_events            = ConfigSelection(default = "%H:%M", choices = event_choices)
 
 # Config options
-config.infobartunerstate                           = ConfigSubsection()
+config.infobartunerstate = ConfigSubsection()
 
-config.infobartunerstate.about                     = ConfigNothing()
-config.infobartunerstate.enabled                   = ConfigEnableDisable(default = True)
-config.infobartunerstate.extensions_menu_show      = ConfigYesNo(default = True)
-config.infobartunerstate.extensions_menu_setup     = ConfigYesNo(default = False)
+config.infobartunerstate.about = ConfigNothing()
+config.infobartunerstate.enabled = ConfigEnableDisable(default=True)
+config.infobartunerstate.extensions_menu_show = ConfigYesNo(default=True)
+config.infobartunerstate.extensions_menu_setup = ConfigYesNo(default=False)
 #config.infobartunerstate.popup_time               = ConfigSelectionNumber(0, 10, 1, default = 5)
 
-config.infobartunerstate.show_infobar              = ConfigYesNo(default = True)
-config.infobartunerstate.show_events               = ConfigYesNo(default = True)		#TODO Show on start, end, start/end
-config.infobartunerstate.show_streams              = ConfigYesNo(default = True)
-config.infobartunerstate.show_overwrite            = ConfigYesNo(default = False)		# Show with MoviePlayer only is actually not possible
+config.infobartunerstate.show_infobar = ConfigYesNo(default=True)
+config.infobartunerstate.show_events = ConfigYesNo(default=True)		#TODO Show on start, end, start/end
+config.infobartunerstate.show_streams = ConfigYesNo(default=True)
+config.infobartunerstate.show_overwrite = ConfigYesNo(default=False)		# Show with MoviePlayer only is actually not possible
 
-config.infobartunerstate.time_format_begin         = ConfigSelection(default = "%H:%M", choices = date_choices)
-config.infobartunerstate.time_format_end           = ConfigSelection(default = "%H:%M", choices = date_choices)
-config.infobartunerstate.number_pending_records    = ConfigSelectionNumber(0, 10, 1, default = 1)
-config.infobartunerstate.number_finished_records   = ConfigSelectionNumber(0, 10, 1, default = 5)
-config.infobartunerstate.timeout_finished_records  = ConfigSelectionNumber(0, 600, 10, default = 60)
+config.infobartunerstate.time_format_begin = ConfigSelection(default="%H:%M", choices=date_choices)
+config.infobartunerstate.time_format_end = ConfigSelection(default="%H:%M", choices=date_choices)
+config.infobartunerstate.number_pending_records = ConfigSelectionNumber(0, 10, 1, default=1)
+config.infobartunerstate.number_finished_records = ConfigSelectionNumber(0, 10, 1, default=5)
+config.infobartunerstate.timeout_finished_records = ConfigSelectionNumber(0, 600, 10, default=60)
 
-config.infobartunerstate.fields                    = ConfigSubsection()
-config.infobartunerstate.fields.a                  = ConfigSelection(default = "TypeIcon", choices = field_choices)
-config.infobartunerstate.fields.b                  = ConfigSelection(default = "Tuner", choices = field_choices)
-config.infobartunerstate.fields.c                  = ConfigSelection(default = "Number", choices = field_choices)
-config.infobartunerstate.fields.d                  = ConfigSelection(default = "Channel", choices = field_choices)
-config.infobartunerstate.fields.e                  = ConfigSelection(default = "Name", choices = field_choices)
-config.infobartunerstate.fields.f                  = ConfigSelection(default = "TimerProgressGraphical", choices = field_choices)
-config.infobartunerstate.fields.g                  = ConfigSelection(default = "TimeLeftDuration", choices = field_choices)
-config.infobartunerstate.fields.h                  = ConfigSelection(default = "StreamClient", choices = field_choices)
-config.infobartunerstate.fields.i                  = ConfigSelection(default = "None", choices = field_choices)
-config.infobartunerstate.fields.j                  = ConfigSelection(default = "None", choices = field_choices)
+config.infobartunerstate.fields = ConfigSubsection()
+config.infobartunerstate.fields.a = ConfigSelection(default="TypeIcon", choices=field_choices)
+config.infobartunerstate.fields.b = ConfigSelection(default="Tuner", choices=field_choices)
+config.infobartunerstate.fields.c = ConfigSelection(default="Number", choices=field_choices)
+config.infobartunerstate.fields.d = ConfigSelection(default="Channel", choices=field_choices)
+config.infobartunerstate.fields.e = ConfigSelection(default="Name", choices=field_choices)
+config.infobartunerstate.fields.f = ConfigSelection(default="TimerProgressGraphical", choices=field_choices)
+config.infobartunerstate.fields.g = ConfigSelection(default="TimeLeftDuration", choices=field_choices)
+config.infobartunerstate.fields.h = ConfigSelection(default="StreamClient", choices=field_choices)
+config.infobartunerstate.fields.i = ConfigSelection(default="None", choices=field_choices)
+config.infobartunerstate.fields.j = ConfigSelection(default="None", choices=field_choices)
 
-config.infobartunerstate.fieldswidth               = ConfigSubsection()
-config.infobartunerstate.fieldswidth.a             = ConfigSelectionNumber(0, 1000, 1, default = 0)
-config.infobartunerstate.fieldswidth.b             = ConfigSelectionNumber(0, 1000, 1, default = 0)
-config.infobartunerstate.fieldswidth.c             = ConfigSelectionNumber(0, 1000, 1, default = 0)
-config.infobartunerstate.fieldswidth.d             = ConfigSelectionNumber(0, 1000, 1, default = 0)
-config.infobartunerstate.fieldswidth.e             = ConfigSelectionNumber(0, 1000, 1, default = 0)
-config.infobartunerstate.fieldswidth.f             = ConfigSelectionNumber(0, 1000, 1, default = 0)
-config.infobartunerstate.fieldswidth.g             = ConfigSelectionNumber(0, 1000, 1, default = 0)
-config.infobartunerstate.fieldswidth.h             = ConfigSelectionNumber(0, 1000, 1, default = 0)
-config.infobartunerstate.fieldswidth.i             = ConfigSelectionNumber(0, 1000, 1, default = 0)
-config.infobartunerstate.fieldswidth.j             = ConfigSelectionNumber(0, 1000, 1, default = 0)
+config.infobartunerstate.fieldswidth = ConfigSubsection()
+config.infobartunerstate.fieldswidth.a = ConfigSelectionNumber(0, 1000, 1, default=0)
+config.infobartunerstate.fieldswidth.b = ConfigSelectionNumber(0, 1000, 1, default=0)
+config.infobartunerstate.fieldswidth.c = ConfigSelectionNumber(0, 1000, 1, default=0)
+config.infobartunerstate.fieldswidth.d = ConfigSelectionNumber(0, 1000, 1, default=0)
+config.infobartunerstate.fieldswidth.e = ConfigSelectionNumber(0, 1000, 1, default=0)
+config.infobartunerstate.fieldswidth.f = ConfigSelectionNumber(0, 1000, 1, default=0)
+config.infobartunerstate.fieldswidth.g = ConfigSelectionNumber(0, 1000, 1, default=0)
+config.infobartunerstate.fieldswidth.h = ConfigSelectionNumber(0, 1000, 1, default=0)
+config.infobartunerstate.fieldswidth.i = ConfigSelectionNumber(0, 1000, 1, default=0)
+config.infobartunerstate.fieldswidth.j = ConfigSelectionNumber(0, 1000, 1, default=0)
 
-config.infobartunerstate.offset_horizontal         = ConfigSelectionNumber(-1000, 1000, 1, default = 0)
-config.infobartunerstate.offset_vertical           = ConfigSelectionNumber(-1000, 1000, 1, default = 0)
-config.infobartunerstate.offset_padding            = ConfigSelectionNumber(-1000, 1000, 1, default = 0)
-config.infobartunerstate.offset_spacing            = ConfigSelectionNumber(-1000, 1000, 1, default = 0)
-config.infobartunerstate.offset_rightside          = ConfigSelectionNumber(-1000, 1000, 1, default = 0)
-config.infobartunerstate.placeholder_pogressbar    = ConfigYesNo(default = True)
-config.infobartunerstate.variable_field_width      = ConfigYesNo(default = True)
+config.infobartunerstate.offset_horizontal = ConfigSelectionNumber(-1000, 1000, 1, default=0)
+config.infobartunerstate.offset_vertical = ConfigSelectionNumber(-1000, 1000, 1, default=0)
+config.infobartunerstate.offset_padding = ConfigSelectionNumber(-1000, 1000, 1, default=0)
+config.infobartunerstate.offset_spacing = ConfigSelectionNumber(-1000, 1000, 1, default=0)
+config.infobartunerstate.offset_rightside = ConfigSelectionNumber(-1000, 1000, 1, default=0)
+config.infobartunerstate.placeholder_pogressbar = ConfigYesNo(default=True)
+config.infobartunerstate.variable_field_width = ConfigYesNo(default=True)
 #MAYBE provide different sorting types / options
-config.infobartunerstate.list_goesup               = ConfigYesNo(default = False)
-config.infobartunerstate.infobar_timeout           = ConfigSelectionNumber(0, 100, 1, default = 0)
+config.infobartunerstate.list_goesup = ConfigYesNo(default=False)
+config.infobartunerstate.infobar_timeout = ConfigSelectionNumber(0, 100, 1, default=0)
 
-config.infobartunerstate.background_transparency   = ConfigYesNo(default = False)
+config.infobartunerstate.background_transparency = ConfigYesNo(default=False)
 
 
 #######################################################
 # Plugin main function
 def Plugins(**kwargs):
 	descriptors = []
-	
+
 	if config.infobartunerstate.enabled.value:
 		# SessionStart
-		descriptors.append( PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = start, needsRestart = False) )
+		descriptors.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=start, needsRestart=False))
 		if config.infobartunerstate.extensions_menu_show.value:
-			descriptors.append( PluginDescriptor(name = IBTSSHOW, description = IBTSSHOW, where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = show, needsRestart = False) )
+			descriptors.append(PluginDescriptor(name=IBTSSHOW, description=IBTSSHOW, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=show, needsRestart=False))
 		if config.infobartunerstate.extensions_menu_setup.value:
-			descriptors.append( PluginDescriptor(name = IBTSSETUP, description = IBTSSETUP, where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = setup, needsRestart = False) )
-	
-	descriptors.append( PluginDescriptor(name = NAME, description = NAME + " " +_("configuration"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc = setup, needsRestart = False, icon = "plugin.png") )
+			descriptors.append(PluginDescriptor(name=IBTSSETUP, description=IBTSSETUP, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=setup, needsRestart=False))
+
+	descriptors.append(PluginDescriptor(name=NAME, description=NAME + " " + _("configuration"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=setup, needsRestart=False, icon="plugin.png"))
 
 	return descriptors
 
@@ -234,4 +234,3 @@ def show(session, **kwargs):
 		# No InfoBarTunerState Instance running
 		print("InfoBarTunerState disabled")
 		session.open(MessageBox, _("InfoBarTunerState is disabled"), MessageBox.TYPE_INFO, 3)
-

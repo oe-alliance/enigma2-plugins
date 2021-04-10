@@ -10,13 +10,14 @@ from __future__ import print_function
 # needs python-ldap for ldif
 #
 
-import ldif, re
+import ldif
+import re
 try:
 	from . import _, normalizePhoneNumber #@UnresolvedImport # pylint: disable-msg=F0401
 except ValueError:
 	def _(string): # pylint: disable-msg=C0103
 		return string
-	
+
 	def normalizePhoneNumber(intNo):
 		found = re.match('^\+49(.*)', intNo)
 		if found:
@@ -38,8 +39,10 @@ import logging
 logger = logging.getLogger("[FritzCall] LDIF")
 debug = logger.debug
 
+
 def out(number, name):
 	print(number + '#' + name)
+
 
 class FindNumber(ldif.LDIFParser):
 	def __init__(self, number, inp, outFun):
@@ -59,7 +62,7 @@ class FindNumber(ldif.LDIFParser):
 			name = found.group(1)
 		else:
 			return
-	
+
 		address = ""
 		addressB = ""
 		if 'telephoneNumber' in entry or ('homePhone' in entry and self.number == normalizePhoneNumber(entry['homePhone'][0])) or ('mobile' in entry and self.number == normalizePhoneNumber(entry['mobile'][0])):
@@ -122,6 +125,7 @@ class FindNumber(ldif.LDIFParser):
 						self._input_file.close()
 						return
 
+
 class ReadNumbers(ldif.LDIFParser):
 	def __init__(self, inPut, outFun):
 		ldif.LDIFParser.__init__(self, inPut)
@@ -142,7 +146,7 @@ class ReadNumbers(ldif.LDIFParser):
 			name = found.group(1)
 		else:
 			return
-	
+
 		address = ""
 		addressB = ""
 		if 'telephoneNumber' in entry or 'homePhone' in entry or 'mobile' in entry:
@@ -188,11 +192,14 @@ class ReadNumbers(ldif.LDIFParser):
 						nameHM = nameHM + ', ' + addressB.replace('\n', ', ').replace('\r', '').replace('#', '')
 					self.outFun(no, nameHM)
 
+
 def lookedUp(number, name):
 	print(number + ' ' + name)
 
+
 if __name__ == '__main__':
-	import os, sys
+	import os
+	import sys
 	cwd = os.path.dirname(sys.argv[0])
 	if (len(sys.argv) == 1):
 		ReadNumbers(open("Kontakte.ldif"), out)

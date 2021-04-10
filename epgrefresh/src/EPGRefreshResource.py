@@ -23,6 +23,7 @@ except ImportError as ie:
 
 API_VERSION = "1.4"
 
+
 class EPGRefreshStartRefreshResource(resource.Resource):
 	def render(self, req):
 		state = False
@@ -42,6 +43,7 @@ class EPGRefreshStartRefreshResource(resource.Resource):
  <e2state>%s</e2state>
  <e2statetext>%s</e2statetext>
 </e2simplexmlresult>""" % ('true' if state else 'false', output))
+
 
 class EPGRefreshAddRemoveServiceResource(resource.Resource):
 	TYPE_ADD = 0
@@ -98,9 +100,9 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 							# strip all after last :
 							pos = sref.rfind(':')
 							if pos != -1:
-								if sref[pos-1] == ':':
+								if sref[pos - 1] == ':':
 									pos -= 1
-								sref = sref[:pos+1]
+								sref = sref[:pos + 1]
 
 						epgservice = EPGRefreshService(sref, duration)
 						# assume service
@@ -131,12 +133,13 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
-		
+
 		return six.ensure_binary("""<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2simplexmlresult>
  <e2state>%s</e2state>
  <e2statetext>%s</e2statetext>
 </e2simplexmlresult> """ % ('True' if state else 'False', output))
+
 
 class EPGRefreshListServicesResource(resource.Resource):
 	def render(self, req):
@@ -144,7 +147,8 @@ class EPGRefreshListServicesResource(resource.Resource):
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
-		return six.ensure_binary(''.join(epgrefresh.buildConfiguration(webif = True)))
+		return six.ensure_binary(''.join(epgrefresh.buildConfiguration(webif=True)))
+
 
 class EPGRefreshPreviewServicesResource(resource.Resource):
 	def render(self, req):
@@ -171,9 +175,9 @@ class EPGRefreshPreviewServicesResource(resource.Resource):
 						# strip all after last :
 						pos = sref.rfind(':')
 						if pos != -1:
-							if sref[pos-1] == ':':
+							if sref[pos - 1] == ':':
 								pos -= 1
-							sref = sref[:pos+1]
+							sref = sref[:pos + 1]
 
 					epgservice = EPGRefreshService(sref, None)
 					if epgservice not in services:
@@ -197,6 +201,7 @@ class EPGRefreshPreviewServicesResource(resource.Resource):
 			))
 		returnlist.append('\n</e2servicelist>')
 		return six.ensure_binary(''.join(returnlist))
+
 
 class EPGRefreshChangeSettingsResource(resource.Resource):
 	def render(self, req):
@@ -265,6 +270,7 @@ class EPGRefreshChangeSettingsResource(resource.Resource):
  <e2statetext>%s</e2statetext>
 </e2simplexmlresult>""" % (statetext,))
 
+
 class EPGRefreshSettingsResource(resource.Resource):
 	def render(self, req):
 		req.setResponseCode(http.OK)
@@ -289,7 +295,8 @@ class EPGRefreshSettingsResource(resource.Resource):
 		try:
 			from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
 			hasAutoTimer = True
-		except ImportError as ie: pass
+		except ImportError as ie:
+			pass
 
 		return six.ensure_binary("""<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2settings>
@@ -380,4 +387,3 @@ class EPGRefreshSettingsResource(resource.Resource):
 				hasAutoTimer,
 				API_VERSION,
 			))
-

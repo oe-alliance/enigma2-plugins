@@ -20,13 +20,14 @@ from Plugins.Plugin import PluginDescriptor
 from .__init__ import _
 
 import string
-import sys 
+import sys
 import time
 from random import Random
 import six
 
 from boxbranding import getImageDistro
-title=_("Change Root Password")
+title = _("Change Root Password")
+
 
 class ChangePasswdScreen(Screen):
 	skin = """
@@ -43,14 +44,14 @@ class ChangePasswdScreen(Screen):
 		<widget source="key_blue" render="Label" position="440,210" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 	</screen>""" % title
 
-	def __init__(self, session, args = 0):
+	def __init__(self, session, args=0):
 		Screen.__init__(self, session)
 		self.skin = ChangePasswdScreen.skin
 
-		self.user="root"
+		self.user = "root"
 		self.output_line = ""
 		self.list = []
-		
+
 		self["passwd"] = ConfigList(self.list)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Set Password"))
@@ -65,34 +66,34 @@ class ChangePasswdScreen(Screen):
 						"blue": self.bluePressed,
 						"cancel": self.close
 				}, -1)
-	
+
 		self.buildList(self.GeneratePassword())
 
 	def newRandom(self):
 		self.buildList(self.GeneratePassword())
-	
+
 	def buildList(self, password):
-		self.password=password
+		self.password = password
 		self.list = []
-		self.list.append(getConfigListEntry(_('Enter new Password'), ConfigText(default = self.password, fixed_size = False)))
+		self.list.append(getConfigListEntry(_('Enter new Password'), ConfigText(default=self.password, fixed_size=False)))
 		self["passwd"].setList(self.list)
-		
-	def GeneratePassword(self): 
+
+	def GeneratePassword(self):
 		passwdChars = string.letters + string.digits
 		passwdLength = 8
-		return ''.join(Random().sample(passwdChars, passwdLength)) 
+		return ''.join(Random().sample(passwdChars, passwdLength))
 
 	def SetPasswd(self):
-		print("Changing password for %s to %s" % (self.user, self.password)) 
+		print("Changing password for %s to %s" % (self.user, self.password))
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
 		self.container.dataAvail.append(self.dataAvail)
-		retval = self.container.execute("echo -e '%s\n%s' | (passwd %s)" %(self.password, self.password, self.user))
-		if retval==0:
-			message=_("Sucessfully changed password for root user to: ") + self.password
+		retval = self.container.execute("echo -e '%s\n%s' | (passwd %s)" % (self.password, self.password, self.user))
+		if retval == 0:
+			message = _("Sucessfully changed password for root user to: ") + self.password
 			self.session.open(MessageBox, message, MessageBox.TYPE_INFO)
 		else:
-			message=_("Unable to change/reset password for root user")
+			message = _("Unable to change/reset password for root user")
 			self.session.open(MessageBox, message, MessageBox.TYPE_ERROR)
 
 	def dataAvail(self, data):
@@ -102,41 +103,43 @@ class ChangePasswdScreen(Screen):
 			i = self.output_line.find('\n')
 			if i == -1:
 				break
-			self.processOutputLine(self.output_line[:i+1])
-			self.output_line = self.output_line[i+1:]
+			self.processOutputLine(self.output_line[:i + 1])
+			self.output_line = self.output_line[i + 1:]
 
 	def processOutputLine(self, line):
 		if line.find('password: '):
-			self.container.write("%s\n"%self.password)
+			self.container.write("%s\n" % self.password)
 
 	def runFinished(self, retval):
 		del self.container.dataAvail[:]
 		del self.container.appClosed[:]
 		del self.container
 		self.close()
-		
+
 	def bluePressed(self):
-		self.session.openWithCallback(self.VirtualKeyBoardTextEntry, VirtualKeyBoard, title = (_("Enter your password here:")), text = self.password)
-	
-	def VirtualKeyBoardTextEntry(self, callback = None):
+		self.session.openWithCallback(self.VirtualKeyBoardTextEntry, VirtualKeyBoard, title=(_("Enter your password here:")), text=self.password)
+
+	def VirtualKeyBoardTextEntry(self, callback=None):
 		if callback is not None and len(callback):
 			self.buildList(callback)
+
 
 def startChange(menuid):
 	if getImageDistro() in ('teamblue'):
 		if menuid != "general_menu":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
 			return []
 	return [(title, main, "change_root_passwd", 50)]
 
+
 def main(session, **kwargs):
 	session.open(ChangePasswdScreen)
 
+
 def Plugins(**kwargs):
 	return PluginDescriptor(
-		name=title, 
+		name=title,
 		description=_("Change or reset the root password of your Receiver"),
-		where = [PluginDescriptor.WHERE_MENU], fnc = startChange)
-	
+		where=[PluginDescriptor.WHERE_MENU], fnc=startChange)

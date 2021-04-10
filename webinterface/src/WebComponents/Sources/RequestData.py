@@ -1,5 +1,6 @@
 from Components.Sources.Source import Source
 
+
 class RequestData(Source):
 	"""
 		a source for requestinformations like the adress that the client requested to reache the box
@@ -26,7 +27,7 @@ class RequestData(Source):
 		if self.what is self.HOST:
 			host = self.request.getHeader('host')
 			if host:
-				if host[0]=='[':
+				if host[0] == '[':
 					return host.split(']', 1)[0] + "]"
 				return host.split(':', 1)[0].encode('ascii')
 			return self.request.getHost().host.encode('ascii')

@@ -18,13 +18,14 @@ In case of reuse of this source code please do not remove this copyright.
     For more information on the GNU General Public License see:
     <http://www.gnu.org/licenses/>.
 
-For example, if you distribute copies of such a program, whether gratis or for a fee, you 
-must pass on to the recipients the same freedoms that you received. You must make sure 
+For example, if you distribute copies of such a program, whether gratis or for a fee, you
+must pass on to the recipients the same freedoms that you received. You must make sure
 that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 '''
 from __future__ import print_function
 from __future__ import absolute_import
 from .Globals import printStackTrace
+
 
 class RecordTimerEvent():
     def __init__(self):
@@ -44,7 +45,7 @@ class RecordTimerEvent():
     def timerStateChanged(self, timer):
         try:
             print("[AdvancedMovieSelection] timer state changed event")
-            print(str(timer.justplay), str(timer.cancelled), str(timer.state)) 
+            print(str(timer.justplay), str(timer.cancelled), str(timer.state))
             if timer.justplay:
                 print("[AdvancedMovieSelection] cancel justplay event")
                 return
@@ -56,9 +57,11 @@ class RecordTimerEvent():
         except:
             printStackTrace()
 
+
 recordTimerEvent = RecordTimerEvent()
 
 from Components.config import config
+
 
 class CoverLoader():
     def __init__(self):

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# for localized messages     
+# for localized messages
 from __future__ import print_function
 from __future__ import absolute_import
 from . import _x
@@ -35,6 +35,7 @@ config.movielist.sflisttype = ConfigInteger(default=MovieList.LISTTYPE_MINIMAL)
 config.movielist.sftimes = ConfigInteger(default=MovieList.SHOW_DURATION | MovieList.SHOW_DIRECTORIES)
 config.movielist.sftitle_episode_separator = ConfigText(default=_x(": "))
 
+
 def setPreferredTagEditor(te):
 	global preferredTagEditor
 	try:
@@ -48,11 +49,14 @@ def setPreferredTagEditor(te):
 		preferredTagEditor = te
 		print("Preferred tag editor set to ", preferredTagEditor)
 
+
 def getPreferredTagEditor():
 	global preferredTagEditor
 	return preferredTagEditor
 
+
 setPreferredTagEditor(None)
+
 
 class MovieContextMenu(Screen):
 	def __init__(self, session, csel, service):
@@ -74,7 +78,7 @@ class MovieContextMenu(Screen):
 			menu.append((_x("sort by date  (quick toggle by key 0)"), boundFunction(self.sortBy, MovieList.SORT_RECORDED)))
 		else:
 			menu.append((_x("alphabetic sort  (quick toggle by key 0)"), boundFunction(self.sortBy, MovieList.SORT_ALPHANUMERIC)))
-		
+
 		menu.extend((
 			(_x("list style elaborately"), boundFunction(self.listType, MovieList.LISTTYPE_ORIGINAL)),
 			(_x("list style compact with service  (quick toggle by key 8)"), boundFunction(self.listType, MovieList.LISTTYPE_COMPACT_SERVICE)),
@@ -126,7 +130,7 @@ class MovieContextMenu(Screen):
 #		self.csel.updateDescription()
 		self.close()
 
-	def sfconfigured(self, arg = None):
+	def sfconfigured(self, arg=None):
 #		print "[SF-Plugin] MovieContextMenu.sfconfigure: arg = >%s<" % (arg)
 		if config.movielist.sftitle_episode_separator.value != arg:
 			config.movielist.sftitle_episode_separator.value = arg
@@ -148,7 +152,7 @@ class MovieContextMenu(Screen):
 			self.virtlist = self.csel["list"].getVirtDirList(name)
 			if self.virtlist:
 				self.session.openWithCallback(self.deleteVirtDirConfirmed, MessageBox,
-					_x("Do you really want to delete series\n  %s\nwith %d movies?") % (self.virtlist[0][3][3], len(self.virtlist)-1))
+					_x("Do you really want to delete series\n  %s\nwith %d movies?") % (self.virtlist[0][3][3], len(self.virtlist) - 1))
 			else:
 				self.session.openWithCallback(self.close, MessageBox, _x("Please delete the files in this Directory!"), MessageBox.TYPE_ERROR)
 			return
@@ -177,7 +181,7 @@ class MovieContextMenu(Screen):
 	def deleteConfirmed(self, confirmed):
 		if not confirmed:
 			return self.close()
-		
+
 		serviceHandler = eServiceCenter.getInstance()
 		offline = serviceHandler.offlineOperations(self.service)
 		result = False
@@ -185,13 +189,14 @@ class MovieContextMenu(Screen):
 			# really delete!
 			if not offline.deleteFromDisk(0):
 				result = True
-		
+
 		if result == False:
 			self.session.openWithCallback(self.close, MessageBox, _("Delete failed!"), MessageBox.TYPE_ERROR)
 		else:
 			self.csel["list"].removeService(self.service)
 			self.csel["freeDiskSpace"].update()
 			self.close()
+
 
 class SelectionEventInfo:
 	def __init__(self):
@@ -210,13 +215,14 @@ class SelectionEventInfo:
 		serviceref = self.getCurrent()
 		self["Service"].newService(serviceref)
 
+
 class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
-	def __init__(self, session, selectedmovie = None):
+	def __init__(self, session, selectedmovie=None):
 #		print "[SF-Plugin] SF:MovieSelection.init, PWD=%s; selmv=%s" % (config.movielist.last_videodir.value, str(selectedmovie))
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 
-		self.tags = [ ]
+		self.tags = []
 		if selectedmovie:
 			self.selected_tags = config.movielist.last_selected_tags.value
 		else:
@@ -263,11 +269,10 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 		self["freeDiskSpace"] = self.diskinfo = DiskInfo(config.movielist.last_videodir.value, DiskInfo.FREE, update=False)
 
 		if config.usage.setup_level.index >= 2: # expert+
-			self["InfobarActions"] = HelpableActionMap(self, "InfobarActions", 
+			self["InfobarActions"] = HelpableActionMap(self, "InfobarActions",
 				{
 					"showMovies": (self.doPathSelect, _("select the movie path")),
 				})
-
 
 		self["MovieSelectionActions"] = HelpableActionMap(self, "MovieSelectionActions",
 			{
@@ -298,7 +303,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 				"8": (self.toggleTags, _x("Toggle description / tags display")),
 			})
 
-
 		self.onShown.append(self.go)
 		self.onLayoutFinish.append(self.saveListsize)
 		self.inited = False
@@ -309,7 +313,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 	def toggleMinimal(self):
 		self.toggleTags(config.movielist.sflisttype.value & MovieList.LISTTYPE_COMPACT_TAGS or MovieList.LISTTYPE_COMPACT_SERVICE)
 
-	def toggleTags(self, toggletype = MovieList.LISTTYPE_COMPACT):
+	def toggleTags(self, toggletype=MovieList.LISTTYPE_COMPACT):
 		if self.toggletype == toggletype:
 			self.toggletype = 0
 		else:
@@ -325,7 +329,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 	def updateDescription(self):
 #		print "[SF-Plugin] MovieSelection.updateDescription DescriptionBorder height =" + str(self["DescriptionBorder"].instance.size().height())
 		self["DescriptionBorder"].show()
-		self["list"].instance.resize(eSize(self.listWidth, self.listHeight-self["DescriptionBorder"].instance.size().height()))
+		self["list"].instance.resize(eSize(self.listWidth, self.listHeight - self["DescriptionBorder"].instance.size().height()))
 
 	def showEventInformation(self):
 		from Screens.EventView import EventViewSimple
@@ -339,7 +343,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 		# ouch. this should redraw our "Please wait..."-text.
 		# this is of course not the right way to do this.
 			self.delayTimer.start(10, 1)
-			self.inited=True
+			self.inited = True
 
 	def saveListsize(self):
 			listsize = self["list"].instance.size()
@@ -399,19 +403,19 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 			if tmp in self.tags:
 				self.tag_first = tmp
 			else:
-				self.tag_first = "<"+_("Tag 1")+">"
+				self.tag_first = "<" + _("Tag 1") + ">"
 			tmp = config.movielist.second_tags.value
 			if tmp in self.tags:
 				self.tag_second = tmp
 			else:
-				self.tag_second = "<"+_("Tag 2")+">"
+				self.tag_second = "<" + _("Tag 2") + ">"
 		self["key_green"].text = self.tag_first
 		self["key_yellow"].text = self.tag_second
-		
+
 		# the rest is presented in a list, available on the
 		# fourth ("blue") button
 		if self.tags:
-			self["key_blue"].text = _("Tags")+"..."
+			self["key_blue"].text = _("Tags") + "..."
 		else:
 			self["key_blue"].text = ""
 
@@ -428,7 +432,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 		self["list"].setTitleEpiSep(sftitle_episode_separator)
 		self.reloadList()
 
-	def reloadList(self, sel = None, home = False):
+	def reloadList(self, sel=None, home=False):
 		if not fileExists(config.movielist.last_videodir.value):
 			path = defaultMoviePath()
 			config.movielist.last_videodir.value = path
@@ -468,19 +472,19 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 #				print "[SF-Plugin] MovieSelection.gotFilename: save" + res
 				self.current_ref = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + res)
 				self["freeDiskSpace"].path = res
-				self.reloadList(home = True)
+				self.reloadList(home=True)
 			else:
 				self.session.open(
 					MessageBox,
 					_("Directory %s nonexistent.") % (res),
-					type = MessageBox.TYPE_ERROR,
-					timeout = 5
+					type=MessageBox.TYPE_ERROR,
+					timeout=5
 					)
 
 	def showAll(self):
 		self.selected_tags_ele = None
 		self.selected_tags = None
-		self.reloadList(home = True)
+		self.reloadList(home=True)
 
 	def showTagsN(self, tagele):
 		if not self.tags:
@@ -490,7 +494,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 		else:
 			self.selected_tags_ele = tagele
 			self.selected_tags = set([tagele.value])
-			self.reloadList(home = True)
+			self.reloadList(home=True)
 
 	def showTagsFirst(self):
 		self.showTagsN(config.movielist.first_tags)
@@ -507,13 +511,12 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 			if self.selected_tags_ele:
 				self.selected_tags_ele.value = tag[0]
 				self.selected_tags_ele.save()
-			self.reloadList(home = True)
+			self.reloadList(home=True)
 
 	def showTagsMenu(self, tagele):
 		self.selected_tags_ele = tagele
-		list = [(tag, self.getTagDescription(tag)) for tag in self.tags ]
-		self.session.openWithCallback(self.tagChosen, ChoiceBox, title=_("Please select tag to filter..."), list = list)
+		list = [(tag, self.getTagDescription(tag)) for tag in self.tags]
+		self.session.openWithCallback(self.tagChosen, ChoiceBox, title=_("Please select tag to filter..."), list=list)
 
 	def showTagWarning(self):
 		self.session.open(MessageBox, _("No tags are set on these movies."), MessageBox.TYPE_ERROR)
-

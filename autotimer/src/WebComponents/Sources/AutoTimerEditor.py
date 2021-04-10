@@ -3,6 +3,7 @@ from Components.Sources.Source import Source
 from os import remove, path, popen
 from re import compile as re_compile
 
+
 class AutoTimerEditor(Source):
 	BACKUP = 0
 	RESTORE = 1
@@ -16,7 +17,7 @@ class AutoTimerEditor(Source):
 		self.session = session
 		self.command = None
 		self.bouquet_rootstr = ""
-		self.result = ( False, "one two three four unknown command" )
+		self.result = (False, "one two three four unknown command")
 
 	def handleCommand(self, cmd):
 		print("[WebComponents.AutoTimerEditor] handleCommand with cmd = ", cmd)
@@ -25,14 +26,14 @@ class AutoTimerEditor(Source):
 		elif self.func is self.RESTORE:
 			self.result = self.restoreFiles(cmd)
 		else:
-			self.result = ( False, "one two three four unknown command" )
+			self.result = (False, "one two three four unknown command")
 
 	def backupFiles(self, param):
 		filename = param
 		if not filename:
 			filename = self.BACKUP_FILENAME
-		invalidCharacters= re_compile(r'[^A-Za-z0-9_. ]+|^\.|\.$|^ | $|^$')
-		tarFilename= "%s.tar" % invalidCharacters.sub('_', filename)
+		invalidCharacters = re_compile(r'[^A-Za-z0-9_. ]+|^\.|\.$|^ | $|^$')
+		tarFilename = "%s.tar" % invalidCharacters.sub('_', filename)
 		backupFilename = path.join(self.BACKUP_PATH, tarFilename)
 		if path.exists(backupFilename):
 			remove(backupFilename)
@@ -77,7 +78,7 @@ class AutoTimerEditor(Source):
 					except Exception:
 						# TODO: proper error handling
 						pass
-				
+
 				remove(backupFilename)
 				return (True, "AutoTimer-settings were restored successfully")
 			else:

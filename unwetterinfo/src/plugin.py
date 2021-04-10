@@ -24,6 +24,7 @@ from os import unlink
 import six
 ###############################################################################
 
+
 class PictureView(Screen):
 	skin = """
 		<screen position="center,center" size="720,576" flags="wfNoBorder" title="UWZ" >
@@ -55,7 +56,7 @@ class PictureView(Screen):
 	def getPic(self):
 		self.picload.startDecode(self.picfile)
 
-	def gotPic(self, picInfo = None):
+	def gotPic(self, picInfo=None):
 		ptr = self.picload.getData()
 		if ptr:
 			self["picture"].instance.setPixmap(ptr)
@@ -65,6 +66,7 @@ class PictureView(Screen):
 
 	def exit(self):
 		self.close()
+
 
 class HelpPictureView(Screen):
 	skin = """
@@ -108,7 +110,7 @@ class HelpPictureView(Screen):
 	def getPic(self):
 		self.picload.startDecode(self.list[self.index])
 
-	def gotPic(self, picInfo = None):
+	def gotPic(self, picInfo=None):
 		ptr = self.picload.getData()
 		if ptr:
 			self["picture"].instance.setPixmap(ptr)
@@ -127,6 +129,7 @@ class HelpPictureView(Screen):
 
 	def exit(self):
 		self.close()
+
 
 class UnwetterMain(Screen):
 	skin = """
@@ -147,7 +150,7 @@ class UnwetterMain(Screen):
 		self["hmenu"] = MenuList([])
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "MovieSelectionActions"],
 		{
-			"ok":	self.ok,
+			"ok": self.ok,
 			"up": self.up,
 			"right": self.rightDown,
 			"left": self.leftUp,
@@ -172,8 +175,8 @@ class UnwetterMain(Screen):
 
 	def hauptmenu(self, output):
 		self.loadinginprogress = False
-		trans = { '&szlig;' : 'ß' , '&auml;' : 'ä' , '&ouml;' : 'ö' , '&uuml;' : 'ü' , '&Auml;' : 'Ä', '&Ouml;' : 'Ö' , '&Uuml;' : 'Ü'}
-		output= util.unescape(output, trans)
+		trans = {'&szlig;': 'ß', '&auml;': 'ä', '&ouml;': 'ö', '&uuml;': 'ü', '&Auml;': 'Ä', '&Ouml;': 'Ö', '&Uuml;': 'Ü'}
+		output = util.unescape(output, trans)
 
 		if self.land == "de":
 			startpos = output.find('<div id="navigation">')
@@ -265,7 +268,7 @@ class UnwetterMain(Screen):
 		l.append(self.gotThumbLand)
 		picload.startDecode(picture)
 
-	def gotThumbLand(self, picInfo = None):
+	def gotThumbLand(self, picInfo=None):
 		ptr = self.picload.getData()
 		if ptr:
 			self["thumbland"].instance.setPixmap(ptr)
@@ -295,7 +298,7 @@ class UnwetterMain(Screen):
 			l.append(self.gotThumb)
 			picload.startDecode(picture)
 
-	def gotThumb(self, picInfo = None):
+	def gotThumb(self, picInfo=None):
 		ptr = self.picload.getData()
 		if ptr:
 			self["statuslabel"].setText("")
@@ -325,8 +328,8 @@ class UnwetterMain(Screen):
 
 	def getWeatherReport(self, output):
 		self.loadinginprogress = False
-		trans = { '&szlig;' : 'ß' , '&auml;' : 'ä' , '&ouml;' : 'ö' , '&uuml;' : 'ü' , '&Auml;' : 'Ä', '&Ouml;' : 'Ö' , '&Uuml;' : 'Ü'}
-		output= util.unescape(output, trans)
+		trans = {'&szlig;': 'ß', '&auml;': 'ä', '&ouml;': 'ö', '&uuml;': 'ü', '&Auml;': 'Ä', '&Ouml;': 'Ö', '&Uuml;': 'Ü'}
+		output = util.unescape(output, trans)
 		if self.land == "de":
 			startpos = output.find('<!-- Anfang msg_Box Content -->')
 			endpos = output.find('<!-- Ende msg_Box Content -->')
@@ -419,15 +422,17 @@ class UnwetterMain(Screen):
 
 #############################
 
+
 def main(session, **kwargs):
 	session.open(UnwetterMain)
 
-def Plugins(path,**kwargs):
+
+def Plugins(path, **kwargs):
 	global pluginpath
 	pluginpath = path
 	return PluginDescriptor(
 		name="Unwetterzentrale",
 		description="www.unwetterzentrale.de und www.uwz.at",
 		icon="uwz.png",
-		where = PluginDescriptor.WHERE_PLUGINMENU,
+		where=PluginDescriptor.WHERE_PLUGINMENU,
 		fnc=main)

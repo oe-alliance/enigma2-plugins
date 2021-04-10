@@ -19,6 +19,7 @@ from .MountEdit import AutoMountEdit
 from .AutoMount import iAutoMount, AutoMount
 from .UserManager import UserManager
 
+
 class AutoMountManager(Screen):
 	skin = """
 		<screen name="AutoMountManager" position="center,center" size="560,400" title="AutoMountManager">
@@ -39,6 +40,7 @@ class AutoMountManager(Screen):
 			<ePixmap pixmap="skin_default/div-h.png" position="0,360" zPosition="1" size="560,2" />
 			<widget source="introduction" render="Label" position="10,370" size="540,21" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1"/>
 		</screen>"""
+
 	def __init__(self, session, iface, plugin_path):
 		self.skin_path = plugin_path
 		self.session = session
@@ -74,8 +76,8 @@ class AutoMountManager(Screen):
 			okpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/ok.png"))
 		else:
 			okpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/ok.png"))
-		self.list.append((_("Add new network mount point"), "add", _("Add a new NFS or CIFS mount point to your Dreambox."), okpng ))
-		self.list.append((_("Mountpoints management"), "view", _("View, edit or delete mountpoints on your Dreambox."), okpng ))
+		self.list.append((_("Add new network mount point"), "add", _("Add a new NFS or CIFS mount point to your Dreambox."), okpng))
+		self.list.append((_("Mountpoints management"), "view", _("View, edit or delete mountpoints on your Dreambox."), okpng))
 		self.list.append((_("User management"), "user", _("View, edit or delete usernames and passwords for your network."), okpng))
 		self.list.append((_("Change hostname"), "hostname", _("Change the hostname of your Dreambox."), okpng))
 		self["config"].setList(self.list)
@@ -83,7 +85,7 @@ class AutoMountManager(Screen):
 	def exit(self):
 		self.close()
 
-	def keyOK(self, returnValue = None):
+	def keyOK(self, returnValue=None):
 		if returnValue == None:
 			returnValue = self["config"].getCurrent()[1]
 			if returnValue == "add":
@@ -109,9 +111,9 @@ class AutoMountManager(Screen):
 			fp = open('/etc/hostname', 'r')
 			self.hostname = fp.read()
 			fp.close()
-			self.session.openWithCallback(self.hostnameCallback, VirtualKeyBoard, title = (_("Enter new hostname for your Dreambox")), text = self.hostname)
+			self.session.openWithCallback(self.hostnameCallback, VirtualKeyBoard, title=(_("Enter new hostname for your Dreambox")), text=self.hostname)
 
-	def hostnameCallback(self, callback = None):
+	def hostnameCallback(self, callback=None):
 		if callback is not None and len(callback):
 			fp = open('/etc/hostname', 'w+')
 			fp.write(callback)
@@ -120,7 +122,7 @@ class AutoMountManager(Screen):
 
 	def restartLan(self):
 		iNetwork.restartNetwork(self.restartLanDataAvail)
-		self.restartLanRef = self.session.openWithCallback(self.restartfinishedCB, MessageBox, _("Please wait while your network is restarting..."), type = MessageBox.TYPE_INFO, enable_input = False)
+		self.restartLanRef = self.session.openWithCallback(self.restartfinishedCB, MessageBox, _("Please wait while your network is restarting..."), type=MessageBox.TYPE_INFO, enable_input=False)
 
 	def restartLanDataAvail(self, data):
 		if data is True:
@@ -133,5 +135,4 @@ class AutoMountManager(Screen):
 
 	def restartfinishedCB(self, data):
 		if data is True:
-			self.session.open(MessageBox, _("Finished restarting your network"), type = MessageBox.TYPE_INFO, timeout = 10, default = False)
-
+			self.session.open(MessageBox, _("Finished restarting your network"), type=MessageBox.TYPE_INFO, timeout=10, default=False)

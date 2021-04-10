@@ -18,7 +18,8 @@ from Components.ProgressBar import ProgressBar
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 import re
 from six.moves.urllib.parse import quote
-import os, gettext
+import os
+import gettext
 
 import six
 from six.moves import html_entities
@@ -27,8 +28,10 @@ from six.moves import html_entities
 PluginLanguageDomain = "OFDb"
 PluginLanguagePath = "Extensions/OFDb/locale"
 
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -37,7 +40,9 @@ def _(txt):
 		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
+
 language.addCallback(localeInit())
+
 
 class OFDBChannelSelection(SimpleChannelSelection):
 	def __init__(self, session):
@@ -59,15 +64,16 @@ class OFDBChannelSelection(SimpleChannelSelection):
 				self.epgClosed,
 				OFDBEPGSelection,
 				ref,
-				openPlugin = False
+				openPlugin=False
 			)
 
-	def epgClosed(self, ret = None):
+	def epgClosed(self, ret=None):
 		if ret:
 			self.close(ret)
 
+
 class OFDBEPGSelection(EPGSelection):
-	def __init__(self, session, ref, openPlugin = True):
+	def __init__(self, session, ref, openPlugin=True):
 		EPGSelection.__init__(self, session, ref)
 		self.skinName = "EPGSelection"
 		self["key_green"].setText(_("Lookup"))
@@ -94,6 +100,7 @@ class OFDBEPGSelection(EPGSelection):
 	def onSelectionChanged(self):
 		pass
 
+
 class OFDB(Screen):
 	skin = """
 		<screen name="OFDb" position="center,center" size="600,420" title="Online-Filmdatenbank Details Plugin" >
@@ -118,7 +125,7 @@ class OFDB(Screen):
 			<widget name="stars" position="340,40" size="250,21" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OFDb/starsbar_filled.png" transparent="1" />
 		</screen>"""
 
-	def __init__(self, session, eventName, args = None):
+	def __init__(self, session, eventName, args=None):
 		self.skin = OFDB.skin
 		Screen.__init__(self, session)
 		self.eventName = eventName
@@ -180,8 +187,7 @@ class OFDB(Screen):
 		'(?P<g_original>Originaltitel):[\s\S]*?class=\"Daten\">(?P<original>.*?)</td>'
 		'(?:.*?(?P<g_country>Herstellungsland):[\s\S]*?class="Daten">(?P<country>.*?)(?:\.\.\.|</td>))*'
 		'(?:.*?(?P<g_year>Erscheinungsjahr):[\s\S]*?class="Daten">(?P<year>.*?)</td>)*'
-		'(?:.*?(?P<g_director>Regie):[\s\S]*?class="Daten">(?P<director>.*?)(?:\.\.\.|</td>))*'
-		, re.DOTALL)
+		'(?:.*?(?P<g_director>Regie):[\s\S]*?class="Daten">(?P<director>.*?)(?:\.\.\.|</td>))*', re.DOTALL)
 
 	def resetLabels(self):
 		self["detailslabel"].setText("")
@@ -211,7 +217,7 @@ class OFDB(Screen):
 			self["extralabel"].pageDown()
 
 	def showMenu(self):
-		if ( self.Page == 1 or self.Page == 2 ) and self.resultlist:
+		if (self.Page == 1 or self.Page == 2) and self.resultlist:
 			self["menu"].show()
 			self["stars"].hide()
 			self["starsbg"].hide()
@@ -271,7 +277,7 @@ class OFDB(Screen):
 			OFDBChannelSelection
 		)
 
-	def channelSelectionClosed(self, ret = None):
+	def channelSelectionClosed(self, ret=None):
 		if ret:
 			self.eventName = ret
 			self.Page = 0
@@ -297,7 +303,7 @@ class OFDB(Screen):
 		if self.eventName != "":
 			try:
 				pos = self.eventName.index(" (")
-				self.eventName=self.eventName[0:pos]
+				self.eventName = self.eventName[0:pos]
 			except ValueError:
 				pass
 			if self.eventName[-3:] == "...":
@@ -406,8 +412,8 @@ class OFDB(Screen):
 						Detailstext += self.htmltags.sub('', x.group(1)) + " "
 
 			for category in ("director", "year", "country", "original"):
-				if self.generalinfos.group('g_'+category):
-					Detailstext += "\n" + self.generalinfos.group('g_'+category) + ": " + self.htmltags.sub('', self.generalinfos.group(category).replace("<br>", ' '))
+				if self.generalinfos.group('g_' + category):
+					Detailstext += "\n" + self.generalinfos.group('g_' + category) + ": " + self.htmltags.sub('', self.generalinfos.group(category).replace("<br>", ' '))
 
 			self["detailslabel"].setText(Detailstext)
 
@@ -419,7 +425,7 @@ class OFDB(Screen):
 			Ratingtext = _("no user rating yet")
 			if rating:
 				Ratingtext = rating.group("g_rating") + rating.group("rating") + " / 10"
-				self.ratingstars = int(10*round(float(rating.group("rating")), 1))
+				self.ratingstars = int(10 * round(float(rating.group("rating")), 1))
 				self["stars"].show()
 				self["stars"].setValue(self.ratingstars)
 				self["starsbg"].show()
@@ -450,11 +456,11 @@ class OFDB(Screen):
 				downloadPage(six.ensure_binary(posterurl), localfile).addCallback(self.OFDBPoster).addErrback(self.fetchFailed)
 			else:
 				print("no jpg poster!")
-				self.OFDBPoster(noPoster = True)
+				self.OFDBPoster(noPoster=True)
 
 		self["detailslabel"].setText(Detailstext)
 
-	def OFDBPoster(self, noPoster = False):
+	def OFDBPoster(self, noPoster=False):
 		self["statusbar"].setText(_("OFDb Details parsed"))
 		if not noPoster:
 			filename = "/tmp/poster.jpg"
@@ -473,6 +479,7 @@ class OFDB(Screen):
 	def createSummary(self):
 		return OFDbLCDScreen
 
+
 class OFDbLCDScreen(Screen):
 	skin = """
 	<screen position="0,0" size="132,64" title="OFDb Plugin">
@@ -486,6 +493,7 @@ class OFDbLCDScreen(Screen):
 		Screen.__init__(self, session)
 		self["headline"] = Label(_("OFDb Plugin"))
 
+
 def eventinfo(session, eventName="", **kwargs):
 	if not eventName:
 		s = session.nav.getCurrentService()
@@ -495,25 +503,27 @@ def eventinfo(session, eventName="", **kwargs):
 			eventName = event and event.getEventName() or ''
 	session.open(OFDB, eventName)
 
+
 def main(session, eventName="", **kwargs):
 	session.open(OFDB, eventName)
 
+
 def Plugins(**kwargs):
 	try:
-		return [PluginDescriptor(name = "OFDb Details",
-				description = _("Query details from the Online-Filmdatenbank"),
-				icon = "ofdb.png",
-				where = PluginDescriptor.WHERE_PLUGINMENU,
-				fnc = main),
-				PluginDescriptor(name = "OFDb Details",
-				description = _("Query details from the Online-Filmdatenbank"),
-				where = PluginDescriptor.WHERE_EVENTINFO,
-				fnc = eventinfo)
+		return [PluginDescriptor(name="OFDb Details",
+				description=_("Query details from the Online-Filmdatenbank"),
+				icon="ofdb.png",
+				where=PluginDescriptor.WHERE_PLUGINMENU,
+				fnc=main),
+				PluginDescriptor(name="OFDb Details",
+				description=_("Query details from the Online-Filmdatenbank"),
+				where=PluginDescriptor.WHERE_EVENTINFO,
+				fnc=eventinfo)
 				]
 	except AttributeError:
 		wherelist = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]
 		return PluginDescriptor(name="OFDb Details",
 				description=_("Query details from the Online-Filmdatenbank"),
 				icon="ofdb.png",
-				where = wherelist,
+				where=wherelist,
 				fnc=main)

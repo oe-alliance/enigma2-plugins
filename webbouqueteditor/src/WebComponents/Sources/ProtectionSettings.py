@@ -3,6 +3,7 @@ from enigma import eServiceCenter, eServiceReference
 from Components.ParentalControl import LIST_BLACKLIST
 from Components.config import config
 
+
 class ProtectionSettings(Source):
 	def __init__(self):
 		Source.__init__(self)
@@ -26,4 +27,4 @@ class ProtectionSettings(Source):
 		self.getProtectionSettings()
 
 	list = property(getProtectionSettings)
-	lut = {"Configured": 0, "Type": 1, "SetupPinActive": 2, "SetupPin": 3}			
+	lut = {"Configured": 0, "Type": 1, "SetupPinActive": 2, "SetupPin": 3}

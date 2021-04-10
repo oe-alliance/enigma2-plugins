@@ -33,16 +33,16 @@ from . import _
 
 
 def YouTubePlaylistEntryComponent(entry):
-	res = [ entry ]
+	res = [entry]
 
-	res.append(MultiContentEntryText(pos = (5, 5), size = (550, 18), font = 0, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = entry.getTitle()))
-	res.append(MultiContentEntryText(pos = (5, 23), size = (550, 14), font = 1, color = 0xFFA323, color_sel = 0xFFA323, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = entry.getDescription()))
+	res.append(MultiContentEntryText(pos=(5, 5), size=(550, 18), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_TOP | RT_WRAP, text=entry.getTitle()))
+	res.append(MultiContentEntryText(pos=(5, 23), size=(550, 14), font=1, color=0xFFA323, color_sel=0xFFA323, flags=RT_HALIGN_LEFT | RT_VALIGN_TOP | RT_WRAP, text=entry.getDescription()))
 
 	return res
 
 
 class YouTubePlaylistList(MenuList):
-	def __init__(self, list, enableWrapAround = False):
+	def __init__(self, list, enableWrapAround=False):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 18))
 		self.l.setFont(1, gFont("Regular", 14))
@@ -57,18 +57,17 @@ class YouTubePlaylistScreen(Screen):
 
 		self["red"] = Label(_("Delete Playlist"))
 		self["green"] = Label(_("Add new Playlist"))
-		
+
 		self.list = []
 		self["list"] = YouTubePlaylistList(self.list)
-		
+
 		self["actions"] = ActionMap(["YouTubePlaylistScreenActions"],
 		{
-			"ok"		:	self.choosePlaylist,
-			"delete"	:	self.deletePlaylist,
-			"add"		:	self.addPlaylist,
-			"cancel"	:	self.close
+			"ok"		: self.choosePlaylist,
+			"delete"	: self.deletePlaylist,
+			"add"		: self.addPlaylist,
+			"cancel"	: self.close
 		}, -1)
-
 
 	def loadPlaylist(self):
 		self.list = []
@@ -81,16 +80,13 @@ class YouTubePlaylistScreen(Screen):
 					e), MessageBox.TYPE_ERROR)
 		self["list"].setList(self.list)
 
-
 	def choosePlaylist(self):
 		Screen.close(self, self["list"].getCurrent()[0])
-
 
 	def deletePlaylist(self):
 		playList = self["list"].getCurrent()[0]
 		if playList is not None:
-			self.session.openWithCallback(self.deleteCallback, MessageBox, _("Really delete %(playlist)s?") % {"playlist" : playList.getTitle()})
-
+			self.session.openWithCallback(self.deleteCallback, MessageBox, _("Really delete %(playlist)s?") % {"playlist": playList.getTitle()})
 
 	def deleteCallback(self, result):
 		if result:
@@ -98,17 +94,14 @@ class YouTubePlaylistScreen(Screen):
 				self.list.remove(self["list"].getCurrent())
 				self["list"].setList(self.list)
 
-
 	def addPlaylist(self):
 		self.session.openWithCallback(self.addCallback, YouTubeAddPlaylistDialog)
-
 
 	def addCallback(self, result, playlistContext):
 		if result:
 			entry = interface.addPlaylist(playlistContext.name.value, playlistContext.description.value, playlistContext.private.value)
 			self.list.append(YouTubePlaylistEntryComponent(entry))
 			self["list"].setList(self.list)
-
 
 	def close(self):
 		Screen.close(self, None)

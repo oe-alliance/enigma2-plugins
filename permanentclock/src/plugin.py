@@ -25,17 +25,22 @@ if not os.path.exists('/usr/lib/enigma2/python/Components/Renderer/PermanentCloc
 	os.system('cp /usr/lib/enigma2/python/Plugins/Extensions/PermanentClock/PermanentClockWatches.pyo /usr/lib/enigma2/python/Components/Renderer/PermanentClockWatches.pyo')
 
 _session = None
+
+
 def localeInit():
 	gettext.bindtextdomain("PermanentClock", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/PermanentClock/locale/"))
 
+
 PluginLanguageDomain = "PermanentClock"
 PluginLanguagePath = "Extensions/PermanentClock/locale/"
+
 
 def _(txt):
 	t = gettext.dgettext("PermanentClock", txt)
 	if t == txt:
 		t = gettext.gettext(txt)
 	return t
+
 
 localeInit()
 language.addCallback(localeInit)
@@ -181,6 +186,7 @@ SKIN0L = """
 		</widget>	</screen>"""
 ##############################################################################
 
+
 class PermanentClockNewScreen(Screen):
 	def __init__(self, session):
 		if config.plugins.PermanentClock.analog.value:
@@ -213,6 +219,7 @@ class PermanentClockNewScreen(Screen):
 	def movePosition(self):
 		if self.instance:
 			self.instance.move(ePoint(config.plugins.PermanentClock.position_x.value, config.plugins.PermanentClock.position_y.value))
+
 
 class PermanentClock():
 	def __init__(self):
@@ -287,7 +294,9 @@ class PermanentClock():
 		else:
 			self.dialog.hide()
 
+
 pClock = PermanentClock()
+
 
 class PermanentClockPositioner(Screen):
 	def __init__(self, session):
@@ -370,10 +379,11 @@ class PermanentClockPositioner(Screen):
 
 	def ok(self):
 		menu = [(_("Save"), "save"), (_("Set slider"), "slider")]
+
 		def extraAction(choice):
 			if choice is not None:
 				if choice[1] == "slider":
-					self.session.openWithCallback(self.setSliderStep, InputBox, title=_("Set slider step (1 - 20):"), text=str(self.slider), type = Input.NUMBER)
+					self.session.openWithCallback(self.setSliderStep, InputBox, title=_("Set slider step (1 - 20):"), text=str(self.slider), type=Input.NUMBER)
 				elif choice[1] == "save":
 					self.Save()
 		self.session.openWithCallback(extraAction, ChoiceBox, list=menu)
@@ -391,6 +401,7 @@ class PermanentClockPositioner(Screen):
 		config.plugins.PermanentClock.position_x.cancel()
 		config.plugins.PermanentClock.position_y.cancel()
 		self.close()
+
 
 class PermanentClockMenu(Screen):
 	skin = """
@@ -489,11 +500,11 @@ class PermanentClockMenu(Screen):
 		self.session.openWithCallback(
 			self.menuCallback,
 			ChoiceBox,
-			title= _("Choice color clock:"),
-			list = list,
+			title=_("Choice color clock:"),
+			list=list,
 		)
 
-	def menuCallback(self, ret = None):
+	def menuCallback(self, ret=None):
 		ret and ret[1]()
 
 	def positionerCallback(self, callback=None):
@@ -543,6 +554,7 @@ class PermanentClockMenu(Screen):
 		config.plugins.PermanentClock.color_analog.value = "7"
 		self.newConfig()
 
+
 def sessionstart(reason, **kwargs):
 	global _session
 	if reason == 0 and _session is None:
@@ -550,20 +562,23 @@ def sessionstart(reason, **kwargs):
 		if _session:
 			pClock.gotSession(_session)
 
+
 def startConfig(session, **kwargs):
 	session.open(PermanentClockMenu)
+
 
 def main(menuid):
 	if getImageDistro() in ('teamblue'):
 		if menuid != "general_menu":
-			return [ ]
+			return []
 	elif getImageDistro() in ('openhdf'):
 		if menuid != "gui_menu":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
 			return []
 	return [(_("Permanent Clock"), startConfig, "permanent_clock", None)]
+
 
 def Plugins(**kwargs):
 	return [

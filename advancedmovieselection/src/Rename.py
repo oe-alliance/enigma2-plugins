@@ -1,13 +1,13 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 #  Advanced Movie Selection for Dreambox-Enigma2
 #
 #  The plugin is developed on the basis from a lot of single plugins (thx for the code @ all)
 #  Coded by JackDaniel (c)2011
 #  Support: www.i-have-a-dreambox.com
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -16,7 +16,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 # for localized messages
@@ -36,6 +36,7 @@ from Components.Pixmap import Pixmap
 from .Source.MovieConfig import MovieConfig
 from .Source.Globals import SkinTools, printStackTrace
 
+
 class MovieRetitle(Screen, ConfigListScreen):
     def __init__(self, session, service):
         Screen.__init__(self, session)
@@ -51,9 +52,9 @@ class MovieRetitle(Screen, ConfigListScreen):
             parts = path.split("/")
             if len(parts) > 2:
                 dirName = parts[-3] + "/" + parts[-2]
-            else: 
+            else:
                 dirName = parts[-2]
-            self.original_file = dirName 
+            self.original_file = dirName
         elif self.is_dir:
             self.original_file = service.getName()
         else:
@@ -74,7 +75,7 @@ class MovieRetitle(Screen, ConfigListScreen):
             "save": self.keyGo,
             "cancel": self.keyCancel,
         }, -2)
-        self.list = [ ]
+        self.list = []
         ConfigListScreen.__init__(self, self.list, session=self.session)
         self.createSetup()
         self["Path"] = Label(_("Location:") + ' ' + os.path.dirname(os.path.splitext(path)[0]))
@@ -94,14 +95,14 @@ class MovieRetitle(Screen, ConfigListScreen):
 
         self["config"].setList(self.list)
 
-    def showKeypad(self, retval = None):
+    def showKeypad(self, retval=None):
         current = self["config"].getCurrent()
         helpwindowpos = self["HelpWindow"].getPosition()
         if hasattr(current[1], 'help_window'):
             if current[1].help_window.instance is not None:
                 current[1].help_window.instance.show()
                 current[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
-        
+
     def setCustomTitle(self):
         if self.is_vdir:
             self.setTitle(_("Change Bookmarkname"))
@@ -128,7 +129,7 @@ class MovieRetitle(Screen, ConfigListScreen):
                 self.renameFile(self.service, self.input_file.getText())
                 self.original_file = self.input_file.getText()
         self.close()
-    
+
     def keyCancel(self):
         self.close()
 
@@ -138,7 +139,7 @@ class MovieRetitle(Screen, ConfigListScreen):
                 meta_file = service.getPath() + ".meta"
             else:
                 meta_file = service.getPath() + ".ts.meta"
-            
+
             # Create new meta for ts files
             if not os.path.exists(meta_file):
                 if os.path.isfile(service.getPath()):
@@ -152,7 +153,7 @@ class MovieRetitle(Screen, ConfigListScreen):
                 metafile = open(meta_file, "w")
                 metafile.write("%s\n%s\n%s\n%s\n%s" % (_sid, _title, _descr, _time, _tags))
                 metafile.close()
-    
+
             if os.path.exists(meta_file):
                 metafile = open(meta_file, "r")
                 sid = metafile.readline()

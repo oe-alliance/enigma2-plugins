@@ -4,6 +4,7 @@ from Components.config import config
 from Tools.Directories import resolveFilename, SCOPE_CONFIG, SCOPE_HDD
 import os
 
+
 class LocationsAndTags(Source):
 	CURRLOCATION = 0
 	LOCATIONS = 1
@@ -15,7 +16,7 @@ class LocationsAndTags(Source):
 		self.func = func
 		Source.__init__(self)
 		self.session = session
-		self.result = ( False, _("one two three four unknown command") )
+		self.result = (False, _("one two three four unknown command"))
 
 	def handleCommand(self, cmd):
 		if self.func is self.CURRLOCATION:
@@ -53,10 +54,10 @@ class LocationsAndTags(Source):
 	def addLocation(self, param):
 		print("[WebComponents.LocationsAndTags] addLocation: ", param)
 		if param['dirname'] is None:
-			return ( False, "Missing Parameter: dirname" )
+			return (False, "Missing Parameter: dirname")
 		dirname = param['dirname']
 		if len(dirname) == 0:
-			return ( False, "Missing value for parameter dirname" )
+			return (False, "Missing value for parameter dirname")
 		if not dirname.endswith("/"):
 			dirname += "/"
 		if not os.path.exists(dirname):
@@ -67,21 +68,21 @@ class LocationsAndTags(Source):
 						createFolder = True
 						os.makedirs(dirname)
 					except OSError:
-						return ( False, _("Path %s can not be created") %(dirname) )
+						return (False, _("Path %s can not be created") % (dirname))
 			if not createFolder:
-				return ( False, _("Path %s does not exist") %(dirname) )
+				return (False, _("Path %s does not exist") % (dirname))
 		bookmarks = config.movielist.videodirs.value[:] or []
 		if dirname in bookmarks:
-			return ( False, _("Location '%s' is already existing") %(dirname) )
+			return (False, _("Location '%s' is already existing") % (dirname))
 		bookmarks.append(dirname)
 		config.movielist.videodirs.value = bookmarks
 		config.movielist.videodirs.save()
-		return ( True, _("Location '%s' added successfully") % (dirname) )
+		return (True, _("Location '%s' added successfully") % (dirname))
 
 	def removeLocation(self, param):
 		print("[WebComponents.LocationsAndTags] removeLocation: ", param)
 		if len(param) == 0:
-			return ( False, _("Missing value for parameter dirname") )
+			return (False, _("Missing value for parameter dirname"))
 		dirname = param
 		if not dirname.endswith("/"):
 			dirname += "/"
@@ -90,9 +91,9 @@ class LocationsAndTags(Source):
 			bookmarks.remove(dirname)
 			config.movielist.videodirs.value = bookmarks
 			config.movielist.videodirs.save()
-			return ( True, _("Location '%s' removed successfully") % (dirname) )
+			return (True, _("Location '%s' removed successfully") % (dirname))
 		else:
-			return ( False, _("Location '%s' does not exist") %(dirname) )
+			return (False, _("Location '%s' does not exist") % (dirname))
 
 	def getText(self):
 		self.handleCommand(None)

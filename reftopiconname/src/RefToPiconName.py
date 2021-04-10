@@ -24,6 +24,7 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 from enigma import eServiceCenter, eServiceReference
 
+
 class RefToPiconName(Converter, object):
 	def __init__(self, type):
 		Converter.__init__(self, type)
@@ -33,14 +34,14 @@ class RefToPiconName(Converter, object):
 		ref = self.source.service
 		if ref is not None:
 			#bouquet or marker
-			if ref.flags & (eServiceReference.isDirectory|eServiceReference.isMarker):
+			if ref.flags & (eServiceReference.isDirectory | eServiceReference.isMarker):
 				info = eServiceCenter.getInstance().info(ref)
 				if info:
 					return info.getName(ref).replace(" ", "_")
 			#channel
 			else:
 				return ref.toString()
-		
+
 		return ""
-		
+
 	text = property(getText)

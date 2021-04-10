@@ -26,16 +26,18 @@ CODE_IMAGE = 216
 CODE_HELO = 220
 CODE_BYE = 221
 CODE_OK = 250
-CODE_EPG_START = 354 
+CODE_EPG_START = 354
 CODE_ERR_LOCAL = 451
 CODE_UNK = 500
-CODE_SYNTAX = 501 
+CODE_SYNTAX = 501
 CODE_IMP_FUNC = 502
 CODE_IMP_PARAM = 504
 CODE_NOK = 550
 CODE_ERR = 554
+
+
 class SimpleVDRProtocol(LineReceiver):
-	def __init__(self, client = False):
+	def __init__(self, client=False):
 		self.client = client
 		self._channelList = []
 		from Components.MovieList import MovieList
@@ -99,11 +101,15 @@ class SimpleVDRProtocol(LineReceiver):
 		services = slist.getServicesAsList(format="SNn")
 		if services:
 			def getServiceInfoValue(info, sref, what):
-				if info is None: return ""
+				if info is None:
+					return ""
 				v = info.getInfo(sref.ref, what)
-				if v == -2: return info.getInfoString(sref.ref, what)
-				elif v == -1: return "N/A"
+				if v == -2:
+					return info.getInfoString(sref.ref, what)
+				elif v == -1:
+					return "N/A"
 				return v
+
 			def sendServiceLine(service, counter, last=False):
 				if service[0][:5] == '1:64:':
 					# format for markers:  ":Name"
@@ -117,7 +123,7 @@ class SimpleVDRProtocol(LineReceiver):
 					feinfo = None #sref.ref.frontendInfo()
 					fedata = feinfo.getAll(True) if feinfo else {}
 					prov = getServiceInfoValue(info, sref, iServiceInformation.sProvider)
-					frequency = fedata.get("frequency", 0)/1000
+					frequency = fedata.get("frequency", 0) / 1000
 					param = -1
 					source = '-1'
 					srate = -1
@@ -147,8 +153,10 @@ class SimpleVDRProtocol(LineReceiver):
 	def sendTimerLine(self, timer, counter, last=False):
 		# <number> <flags>:<channel id>:<YYYY-MM-DD>:<HHMM>:<HHMM>:<priority>:<lifetime>:<name>:<auxiliary>
 		flags = 0
-		if not timer.disabled: flags |= 1
-		if timer.state == timer.StateRunning: flags |= 8
+		if not timer.disabled:
+			flags |= 1
+		if timer.state == timer.StateRunning:
+			flags |= 8
 		try:
 			channelid = self.channelList.index(str(timer.service_ref)) + 1
 		except ValueError as e:
@@ -202,13 +210,15 @@ class SimpleVDRProtocol(LineReceiver):
 			payload = "%d argument error" % (CODE_SYNTAX,)
 			return self.sendLine(payload)
 
-		if len(list) >= timerId: oldTimer = list[timerId - 1]
-		else: oldTimer = None
+		if len(list) >= timerId:
+			oldTimer = list[timerId - 1]
+		else:
+			oldTimer = None
 
 		try:
 			flags, channelid, datestring, beginstring, endstring, priority, lifetime, name, description = args[1].split(':')
 			flags = int(flags)
-			service_ref = ServiceReference(self.channelList[int(channelid)-1])
+			service_ref = ServiceReference(self.channelList[int(channelid) - 1])
 			datestruct = strptime(datestring, '%Y-%m-%d')
 			timestruct = strptime(beginstring, '%H%M')
 			begin = mktime((datestruct.tm_year, datestruct.tm_mon, datestruct.tm_mday, timestruct.tm_hour, timestruct.tm_min, 0, datestruct.tm_wday, datestruct.tm_yday, -1))
@@ -222,7 +232,8 @@ class SimpleVDRProtocol(LineReceiver):
 			payload = "%d argument error" % (CODE_SYNTAX,)
 			return self.sendLine(payload)
 
-		if end < begin: end += 86400 # Add 1 day, beware - this is evil and might not work correctly due to dst
+		if end < begin:
+			end += 86400 # Add 1 day, beware - this is evil and might not work correctly due to dst
 		timer = RecordTimerEntry(service_ref, begin, end, name, description, 0, disabled=flags & 1 == 0)
 		if oldTimer:
 			recordTimer.removeEntry(oldTimer)
@@ -276,7 +287,8 @@ class SimpleVDRProtocol(LineReceiver):
 						payload = "%d timer conflict detected, aborting." % (CODE_ERR_LOCAL,)
 						return self.sendLine(payload)
 					else:
-						if timersanitycheck.doubleCheck(): timer.disable()
+						if timersanitycheck.doubleCheck():
+							timer.disable()
 				elif not timer.disabled and disable:
 					timer.disable()
 				recordTimer.timeChanged(timer)
@@ -310,10 +322,10 @@ class SimpleVDRProtocol(LineReceiver):
 		Notifications.AddNotificationWithID(
 			NOTIFICATIONID,
 			MessageBox,
-			text = data,
-			type = MessageBox.TYPE_INFO,
-			timeout = 5,
-			close_on_any_key = True,
+			text=data,
+			type=MessageBox.TYPE_INFO,
+			timeout=5,
+			close_on_any_key=True,
 		)
 		payload = "%d Message queued" % (CODE_OK,)
 		self.sendLine(payload)
@@ -341,7 +353,7 @@ class SimpleVDRProtocol(LineReceiver):
 		if volctrl.isMuted():
 			payload = "%d Audio is mute" % (CODE_OK,)
 		else:
-			payload = "%d Audio volume is %d." % (CODE_OK, volctrl.getVolume()*2.55)
+			payload = "%d Audio volume is %d." % (CODE_OK, volctrl.getVolume() * 2.55)
 		self.sendLine(payload)
 
 	def HELP(self, args):
@@ -361,7 +373,7 @@ class SimpleVDRProtocol(LineReceiver):
 					payload = "%d-    %s" % (CODE_HELP, func)
 					x = 1
 				else:
-					payload +=  "      %s" % (func,)
+					payload += "      %s" % (func,)
 					x += 1
 			self.sendLine(payload)
 			payload = "%d-To report bugs in the implementation send email to" % (CODE_HELP,)
@@ -405,7 +417,7 @@ class SimpleVDRProtocol(LineReceiver):
 			payload = "%d argument error" % (CODE_SYNTAX,)
 			return self.sendLine(payload)
 
-		sref = self.movielist.list[movieId-1][0]
+		sref = self.movielist.list[movieId - 1][0]
 		serviceHandler = eServiceCenter.getInstance()
 		offline = serviceHandler.offlineOperations(sref)
 
@@ -426,7 +438,7 @@ class SimpleVDRProtocol(LineReceiver):
 			payload = "%d parameter not implemented" % (CODE_IMP_PARAM,)
 			return self.sendLine(payload)
 		try:
-			channelId = int(first)-1
+			channelId = int(first) - 1
 			service = self.channelList[channelId]
 		except ValueError:
 			# XXX: add support for sref
@@ -513,10 +525,12 @@ class SimpleVDRProtocol(LineReceiver):
 		try:
 			call(args)
 		except Exception as e:
-			import traceback, sys
+			import traceback
+			import sys
 			traceback.print_exc(file=sys.stdout)
 			payload = "%d exception occured: %s" % (CODE_ERR, str(e).replace('\n', ' ').replace('\r', ''))
 			self.sendLine(payload)
+
 
 class SimpleVDRProtocolServerFactory(ServerFactory):
 	protocol = SimpleVDRProtocol
@@ -534,6 +548,7 @@ class SimpleVDRProtocolServerFactory(ServerFactory):
 		for client in self.clients:
 			client.stop()
 
+
 class SimpleVDRProtocolAbstraction:
 	serverPort = None
 	pending = 0
@@ -543,7 +558,7 @@ class SimpleVDRProtocolAbstraction:
 		self.serverPort = reactor.listenTCP(SVDRP_TCP_PORT, self.serverFactory)
 		self.pending += 1
 
-	def maybeClose(self, resOrFail, defer = None):
+	def maybeClose(self, resOrFail, defer=None):
 		self.pending -= 1
 		if self.pending == 0:
 			if defer:
@@ -554,11 +569,10 @@ class SimpleVDRProtocolAbstraction:
 		if self.serverPort:
 			d = self.serverPort.stopListening()
 			if d:
-				d.addBoth(self.maybeClose, defer = defer)
+				d.addBoth(self.maybeClose, defer=defer)
 			else:
 				self.pending -= 1
 
 		if self.pending == 0:
 			reactor.callLater(1, defer.callback, True)
 		return defer
-

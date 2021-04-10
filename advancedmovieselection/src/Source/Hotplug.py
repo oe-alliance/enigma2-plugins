@@ -1,12 +1,12 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 #  Advanced Movie Selection for Dreambox-Enigma2
 #
 #  Coded by cmikula (c)2013
 #  Support: www.i-have-a-dreambox.com
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -15,7 +15,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 
@@ -27,8 +27,10 @@ from .MovieConfig import MovieConfig
 from ServiceProvider import eServiceReferenceHotplug
 from enigma import eTimer
 
+
 class Hotplug():
     NTFS_3G_DRIVER_DELAY = 3000
+
     def __init__(self):
         self.notifier = []
         self.hotplugServices = []
@@ -40,15 +42,15 @@ class Hotplug():
     def addHotplugNotifier(self):
         from Plugins.SystemPlugins.Hotplug.plugin import hotplugNotifier
         if not self.hotplugNotifier in hotplugNotifier:
-            print("add hotplugNotifier") 
+            print("add hotplugNotifier")
             hotplugNotifier.append(self.hotplugNotifier)
-        
+
     def removeHotplugNotifier(self):
         from Plugins.SystemPlugins.Hotplug.plugin import hotplugNotifier
         if self.hotplugNotifier in hotplugNotifier:
-            print("remove hotplugNotifier") 
+            print("remove hotplugNotifier")
             hotplugNotifier.remove(self.hotplugNotifier)
-    
+
     def hotplugNotifier(self, dev, media_state):
         print("[hotplugNotifier]", dev, media_state)
         if len(dev) > 2 and dev[0:2] in ("sd") and dev[-1].isdigit():
@@ -90,7 +92,7 @@ class Hotplug():
                         label += " - "
                     service.setName(label + hdd.model() + " - " + hdd.capacity())
                     self.hotplugServices.append(service)
-            
+
             for callback in self.notifier:
                 try:
                     callback()
@@ -98,7 +100,7 @@ class Hotplug():
                     printStackTrace()
         except:
             printStackTrace()
-    
+
     def getHotplugServices(self):
         return self.hotplugServices
 

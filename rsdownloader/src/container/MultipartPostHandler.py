@@ -44,8 +44,10 @@ from __future__ import print_function
 
 import urllib
 import urllib2
-import mimetools, mimetypes
-import os, stat
+import mimetools
+import mimetypes
+import os
+import stat
 
 from six.moves import cStringIO as StringIO
 
@@ -54,9 +56,11 @@ class Callable:
     def __init__(self, anycallable):
         self.__call__ = anycallable
 
+
 # Controls how sequences are uncoded. If true, elements may be given multiple values by
 #  assigning a sequence.
 doseq = 1
+
 
 class MultipartPostHandler(urllib2.BaseHandler):
     handler_order = urllib2.HTTPHandler.handler_order - 10 # needs to run first
@@ -91,7 +95,7 @@ class MultipartPostHandler(urllib2.BaseHandler):
 
         return request
 
-    def multipart_encode(vars, files, boundary = None, buf = None):
+    def multipart_encode(vars, files, boundary=None, buf=None):
         if boundary is None:
             boundary = mimetools.choose_boundary()
         if buf is None:
@@ -117,8 +121,10 @@ class MultipartPostHandler(urllib2.BaseHandler):
 
     https_request = http_request
 
+
 def main():
-    import tempfile, sys
+    import tempfile
+    import sys
 
     validatorURL = "http://validator.w3.org/check"
     opener = urllib2.build_opener(MultipartPostHandler)
@@ -126,9 +132,9 @@ def main():
     def validateFile(url):
         temp = tempfile.mkstemp(suffix=".html")
         os.write(temp[0], opener.open(url).read())
-        params = { "ss" : "0",            # show source
-                   "doctype" : "Inline",
-                   "uploaded_file" : open(temp[1], "rb") }
+        params = {"ss": "0",            # show source
+                   "doctype": "Inline",
+                   "uploaded_file": open(temp[1], "rb")}
         print(opener.open(validatorURL, params).read())
         os.remove(temp[1])
 
@@ -138,5 +144,6 @@ def main():
     else:
         validateFile("http://www.google.com")
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     main()

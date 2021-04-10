@@ -1,6 +1,7 @@
 from Components.Sources.Source import Source
 from Plugins.Extensions.WebInterface import _
 
+
 class Strings(Source):
 	def __init__(self):
 		Source.__init__(self)
@@ -9,6 +10,7 @@ class Strings(Source):
 	This returns all string the webinterface requires, currently translated into the language that's configured in e2
 	With a small hack it should be possible to actually return the strings in the browser's/requester's language
 	"""
+
 	def getList(self):
 		return [
 			["television", _("TeleVision")],
@@ -183,4 +185,4 @@ class Strings(Source):
 		]
 
 	list = property(getList)
-	lut = { "id": 0, "value": 1 }
+	lut = {"id": 0, "value": 1}

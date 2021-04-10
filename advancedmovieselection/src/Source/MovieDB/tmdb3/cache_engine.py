@@ -10,19 +10,26 @@
 import time
 from weakref import ref
 
-class Engines( object ):
+
+class Engines(object):
     def __init__(self):
         self._engines = {}
+
     def register(self, engine):
         self._engines[engine.__name__] = engine
         self._engines[engine.name] = engine
+
     def __getitem__(self, key):
         return self._engines[key]
+
     def __contains__(self, key):
         return self._engines.__contains__(key)
+
+
 Engines = Engines()
 
-class CacheEngineType( type ):
+
+class CacheEngineType(type):
     """
     Cache Engine Metaclass that registers new engines against the cache
     for named selection and use.
@@ -33,22 +40,29 @@ class CacheEngineType( type ):
             # skip base class
             Engines.register(mcs)
 
-class CacheEngine( object ):
+
+class CacheEngine(object):
     __metaclass__ = CacheEngineType
 
     name = 'unspecified'
+
     def __init__(self, parent):
         self.parent = ref(parent)
+
     def configure(self):
         raise RuntimeError
+
     def get(self, date):
         raise RuntimeError
+
     def put(self, key, value, lifetime):
         raise RuntimeError
+
     def expire(self, key):
         raise RuntimeError
 
-class CacheObject( object ):
+
+class CacheObject(object):
     """
     Cache object class, containing one stored record.
     """
@@ -69,4 +83,3 @@ class CacheObject( object ):
     @property
     def remaining(self):
         return max((self.creation + self.lifetime) - time.time(), 0)
-

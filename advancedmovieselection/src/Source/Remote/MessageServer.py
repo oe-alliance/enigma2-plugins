@@ -18,8 +18,8 @@ In case of reuse of this source code please do not remove this copyright.
     For more information on the GNU General Public License see:
     <http://www.gnu.org/licenses/>.
 
-For example, if you distribute copies of such a program, whether gratis or for a fee, you 
-must pass on to the recipients the same freedoms that you received. You must make sure 
+For example, if you distribute copies of such a program, whether gratis or for a fee, you
+must pass on to the recipients the same freedoms that you received. You must make sure
 that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 '''
 from __future__ import print_function
@@ -29,6 +29,7 @@ import SocketServer
 import socket
 
 serverInstance = None
+
 
 def getIpAddress(iface):
     interfaces = []
@@ -50,6 +51,7 @@ def getIpAddress(iface):
                 return split[1]
     return None
 
+
 class TCPHandler(SocketServer.BaseRequestHandler):
     """
     The RequestHandler class for our server.
@@ -69,6 +71,7 @@ class TCPHandler(SocketServer.BaseRequestHandler):
             self.request.send(MessageQueue.getRequest(data))
         except Exception as e:
             print(e)
+
 
 class MessageServer():
     def __init__(self):
@@ -98,17 +101,17 @@ class MessageServer():
         if self.server:
             self.server.shutdown()
             print("[AdvancedMovieSelection] Server stopped:")
-        
+
     def reconnect(self, host=None, port=None):
         if host:
             self.host = host
         if port:
             self.port = port
         self.start()
-        
+
     def getHost(self):
         return self.host
-    
+
     def getPort(self):
         return self.port
 
@@ -136,19 +139,20 @@ class MessageServer():
                 pass
             finally:
                 sock.close()
-        
+
     def startScanForClients(self):
         import threading
         t = threading.Thread(target=self.findClients)
         t.start()
-        
+
     def getClients(self):
         return self.active_clients
-    
+
     def setSearchRange(self, ip_from, ip_to):
         if ip_from > ip_to or ip_to >= 255:
             return
         self.ip_from = ip_from
         self.ip_to = ip_to
-        
+
+
 serverInstance = MessageServer()

@@ -2,13 +2,16 @@
 from __future__ import print_function
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
-import os, gettext
+import os
+import gettext
 
 PluginLanguageDomain = "TeleText"
 PluginLanguagePath = "Extensions/TeleText/locale"
 
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -17,12 +20,15 @@ def _(txt):
 		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
+
 language.addCallback(localeInit())
+
 
 def _log(message):
   print("[TeleText]", message)
 
+
 def _debug(message):
-  d=open("/tmp/dbttcp.log", "a")
+  d = open("/tmp/dbttcp.log", "a")
   d.write("[TeleText] %s\n" % message)
   d.close()

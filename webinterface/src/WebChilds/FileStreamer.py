@@ -4,6 +4,7 @@ from urllib import unquote
 from os import path as os_path
 from Tools.Directories import resolveFilename, SCOPE_HDD
 
+
 class FileStreamer(resource.Resource):
 	addSlash = True
 
@@ -23,7 +24,7 @@ class FileStreamer(resource.Resource):
 			if not os_path.exists(path):
 				path = resolveFilename(SCOPE_HDD, filename)
 
-			print("[WebChilds.FileStreamer] path is %s" %path)
+			print("[WebChilds.FileStreamer] path is %s" % path)
 
 			if os_path.exists(path):
 				basename = filename.decode('utf-8', 'ignore').encode('ascii', 'ignore')
@@ -32,13 +33,12 @@ class FileStreamer(resource.Resource):
 					basename = basename.split('/')[-1]
 
 				request.setHeader("content-disposition", "attachment;filename=\"%s\"" % (basename))
-				file = static.File(path, defaultType = "application/octet-stream")
+				file = static.File(path, defaultType="application/octet-stream")
 				return file.render_GET(request)
 
 			else:
-				return resource.NoResource(message="file '%s' was not found" %(dir + filename)).render(request)
+				return resource.NoResource(message="file '%s' was not found" % (dir + filename)).render(request)
 		else:
 			return resource.NoResource(message="no file given with file={filename}").render(request)
 
 		return server.NOT_DONE_YET
-

@@ -15,12 +15,14 @@ from Components.config import config
 # Default encoding
 from Components.Language import language
 
+
 class AutoTimerComponent(object):
 	"""AutoTimer Component which also handles validity checks"""
 
 	"""
 	 Initiate
 	"""
+
 	def __init__(self, id, name, match, enabled, *args, **kwargs):
 		self.id = id
 		self._afterevent = []
@@ -29,32 +31,36 @@ class AutoTimerComponent(object):
 	"""
 	 Unsets all Attributes
 	"""
-	def clear(self, id = -1, enabled = False):
+
+	def clear(self, id=-1, enabled=False):
 		self.id = id
 		self.setValues('', '', enabled)
 
 	"""
 	 Create a deep copy of this instance
 	"""
+
 	def clone(self):
 		return self.__deepcopy__({})
 
 	"""
 	 Hook needed for WebIf
 	"""
+
 	def getEntry(self):
 		return self
 
 	"""
 	 Keeps init small and helps setting many values at once
 	"""
-	def setValues(self, name, match, enabled, timespan=None, services=None, \
-			offset=None, afterevent=[], exclude=None, maxduration=None, \
-			destination=None, include=None, matchCount=0, matchLeft=0, \
-			matchLimit='', matchFormatString='', lastBegin=0, justplay=False, \
-			avoidDuplicateDescription=0, searchForDuplicateDescription=2, bouquets=None, \
-			tags=None, encoding=None, searchType="partial", searchCase="insensitive", \
-			overrideAlternatives=False, timeframe=None, vps_enabled=False, vps_overwrite=False, setEndtime=False, \
+
+	def setValues(self, name, match, enabled, timespan=None, services=None,
+			offset=None, afterevent=[], exclude=None, maxduration=None,
+			destination=None, include=None, matchCount=0, matchLeft=0,
+			matchLimit='', matchFormatString='', lastBegin=0, justplay=False,
+			avoidDuplicateDescription=0, searchForDuplicateDescription=2, bouquets=None,
+			tags=None, encoding=None, searchType="partial", searchCase="insensitive",
+			overrideAlternatives=False, timeframe=None, vps_enabled=False, vps_overwrite=False, setEndtime=False,
 			always_zap=False, series_labeling=False):
 		self.name = name
 		self.match = match
@@ -216,7 +222,8 @@ class AutoTimerComponent(object):
 	"""
 	 Returns a tulple of (input begin, input end, begin earlier than end)
 	"""
-	def calculateDayspan(self, begin, end, ignore = None):
+
+	def calculateDayspan(self, begin, end, ignore=None):
 		if end[0] < begin[0] or (end[0] == begin[0] and end[1] <= begin[1]):
 			return (begin, end, True)
 		else:
@@ -225,7 +232,8 @@ class AutoTimerComponent(object):
 	"""
 	 Returns if a given timestruct is in a timespan
 	"""
-	def checkAnyTimespan(self, time, begin = None, end = None, haveDayspan = False):
+
+	def checkAnyTimespan(self, time, begin=None, end=None, haveDayspan=False):
 		if begin is None:
 			return False
 
@@ -254,6 +262,7 @@ class AutoTimerComponent(object):
 	"""
 	 Called when a timer based on this component was added
 	"""
+
 	def update(self, begin, timestamp):
 		# Only update limit when we have new begin
 		if begin > self.lastBegin:
@@ -283,7 +292,7 @@ class AutoTimerComponent(object):
 	# XXX: as this function was not added by me (ritzMo) i'll leave it like this but i'm not really sure if this is right ;-)
 	getDestination = lambda self: self.destination is not None
 
-	getDuration = lambda self: self.maxduration//60
+	getDuration = lambda self: self.maxduration // 60
 
 	getEnabled = lambda self: self.enabled and "yes" or "no"
 
@@ -309,8 +318,8 @@ class AutoTimerComponent(object):
 	getMatch = lambda self: self.match
 	getName = lambda self: self.name
 
-	getOffsetBegin = lambda self: self.offset[0]//60
-	getOffsetEnd = lambda self: self.offset[1]//60
+	getOffsetBegin = lambda self: self.offset[0] // 60
+	getOffsetEnd = lambda self: self.offset[1] // 60
 
 	getOverrideAlternatives = lambda self: self.overrideAlternatives and "1" or "0"
 
@@ -324,7 +333,7 @@ class AutoTimerComponent(object):
 
 	getTimeframe = lambda self: self.timeframe
 	getTimeframeBegin = lambda self: int(self.timeframe[0])
-	getTimeframeEnd	= lambda self: int(self.timeframe[1])
+	getTimeframeEnd = lambda self: int(self.timeframe[1])
 
 	isOffsetEqual = lambda self: self.offset[0] == self.offset[1]
 
@@ -433,9 +442,9 @@ class AutoTimerComponent(object):
 							value = s.toString()
 							pos = value.rfind(':')
 							if pos != -1:
-								if value[pos-1] == ':':
+								if value[pos - 1] == ':':
 									pos -= 1
-								value = value[:pos+1]
+								value = value[:pos + 1]
 
 							if value == check_service:
 								return False
@@ -452,6 +461,7 @@ class AutoTimerComponent(object):
 	Return alternative service including a given ref.
 	Note that this only works for alternatives that the autotimer is restricted to.
 	"""
+
 	def getAlternative(self, override_service):
 		services = self.services
 		if services:
@@ -469,9 +479,9 @@ class AutoTimerComponent(object):
 								value = s.toString()
 								pos = value.rfind(':')
 								if pos != -1:
-									if value[pos-1] == ':':
+									if value[pos - 1] == ':':
 										pos -= 1
-									value = value[:pos+1]
+									value = value[:pos + 1]
 
 								if value == override_service:
 									return service
@@ -501,7 +511,7 @@ class AutoTimerComponent(object):
 	def checkTimeframe(self, begin):
 		if self.timeframe is not None:
 			start, end = self.timeframe
-			if begin > start and begin < (end + 24*60*60):
+			if begin > start and begin < (end + 24 * 60 * 60):
 				return False
 			return True
 		return False
@@ -514,33 +524,33 @@ class AutoTimerComponent(object):
 			self.name,
 			self.match,
 			self.enabled,
-			timespan = self.timespan,
-			services = self.services,
-			offset = self.offset,
-			afterevent = self.afterevent,
-			exclude = (self.getExcludedTitle(), self.getExcludedShort(), self.getExcludedDescription(), self.getExcludedDays()),
-			maxduration = self.maxduration,
-			destination = self.destination,
-			include = (self.getIncludedTitle(), self.getIncludedShort(), self.getIncludedDescription(), self.getIncludedDays()),
-			matchCount = self.matchCount,
-			matchLeft = self.matchLeft,
-			matchLimit = self.matchLimit,
-			matchFormatString = self.matchFormatString,
-			lastBegin = self.lastBegin,
-			justplay = self.justplay,
-			avoidDuplicateDescription = self.avoidDuplicateDescription,
-			searchForDuplicateDescription = self.searchForDuplicateDescription,
-			bouquets = self.bouquets,
-			tags = self.tags,
-			encoding = self.encoding,
-			searchType = self.searchType,
-			searchCase = self.searchCase,
-			overrideAlternatives = self.overrideAlternatives,
-			timeframe = self.timeframe,
-			always_zap = self.always_zap,
-			vps_enabled = self.vps_enabled,
-			vps_overwrite = self.vps_overwrite,
-			series_labeling = self.series_labeling,
+			timespan=self.timespan,
+			services=self.services,
+			offset=self.offset,
+			afterevent=self.afterevent,
+			exclude=(self.getExcludedTitle(), self.getExcludedShort(), self.getExcludedDescription(), self.getExcludedDays()),
+			maxduration=self.maxduration,
+			destination=self.destination,
+			include=(self.getIncludedTitle(), self.getIncludedShort(), self.getIncludedDescription(), self.getIncludedDays()),
+			matchCount=self.matchCount,
+			matchLeft=self.matchLeft,
+			matchLimit=self.matchLimit,
+			matchFormatString=self.matchFormatString,
+			lastBegin=self.lastBegin,
+			justplay=self.justplay,
+			avoidDuplicateDescription=self.avoidDuplicateDescription,
+			searchForDuplicateDescription=self.searchForDuplicateDescription,
+			bouquets=self.bouquets,
+			tags=self.tags,
+			encoding=self.encoding,
+			searchType=self.searchType,
+			searchCase=self.searchCase,
+			overrideAlternatives=self.overrideAlternatives,
+			timeframe=self.timeframe,
+			always_zap=self.always_zap,
+			vps_enabled=self.vps_enabled,
+			vps_overwrite=self.vps_overwrite,
+			series_labeling=self.series_labeling,
 		)
 
 	def __deepcopy__(self, memo):
@@ -549,33 +559,33 @@ class AutoTimerComponent(object):
 			self.name,
 			self.match,
 			self.enabled,
-			timespan = self.timespan,
-			services = self.services[:],
-			offset = self.offset and self.offset[:],
-			afterevent = self.afterevent[:],
-			exclude = (self.getExcludedTitle(), self.getExcludedShort(), self.getExcludedDescription(), self.exclude[3][:]),
-			maxduration = self.maxduration,
-			destination = self.destination,
-			include = (self.getIncludedTitle(), self.getIncludedShort(), self.getIncludedDescription(), self.include[3][:]),
-			matchCount = self.matchCount,
-			matchLeft = self.matchLeft,
-			matchLimit = self.matchLimit,
-			matchFormatString = self.matchFormatString,
-			lastBegin = self.lastBegin,
-			justplay = self.justplay,
-			avoidDuplicateDescription = self.avoidDuplicateDescription,
-			searchForDuplicateDescription = self.searchForDuplicateDescription,
-			bouquets = self.bouquets[:],
-			tags = self.tags[:],
-			encoding = self.encoding,
-			searchType = self.searchType,
-			searchCase = self.searchCase,
-			overrideAlternatives = self.overrideAlternatives,
-			timeframe = self.timeframe,
-			always_zap = self.always_zap,
-			vps_enabled = self.vps_enabled,
-			vps_overwrite = self.vps_overwrite,
-			series_labeling = self.series_labeling,
+			timespan=self.timespan,
+			services=self.services[:],
+			offset=self.offset and self.offset[:],
+			afterevent=self.afterevent[:],
+			exclude=(self.getExcludedTitle(), self.getExcludedShort(), self.getExcludedDescription(), self.exclude[3][:]),
+			maxduration=self.maxduration,
+			destination=self.destination,
+			include=(self.getIncludedTitle(), self.getIncludedShort(), self.getIncludedDescription(), self.include[3][:]),
+			matchCount=self.matchCount,
+			matchLeft=self.matchLeft,
+			matchLimit=self.matchLimit,
+			matchFormatString=self.matchFormatString,
+			lastBegin=self.lastBegin,
+			justplay=self.justplay,
+			avoidDuplicateDescription=self.avoidDuplicateDescription,
+			searchForDuplicateDescription=self.searchForDuplicateDescription,
+			bouquets=self.bouquets[:],
+			tags=self.tags[:],
+			encoding=self.encoding,
+			searchType=self.searchType,
+			searchCase=self.searchCase,
+			overrideAlternatives=self.overrideAlternatives,
+			timeframe=self.timeframe,
+			always_zap=self.always_zap,
+			vps_enabled=self.vps_enabled,
+			vps_overwrite=self.vps_overwrite,
+			series_labeling=self.series_labeling,
 		)
 
 	def __eq__(self, other):
@@ -638,6 +648,7 @@ class AutoTimerComponent(object):
 			 ")>"
 		))
 
+
 class AutoTimerFastscanComponent(AutoTimerComponent):
 	def __init__(self, *args, **kwargs):
 		AutoTimerComponent.__init__(self, *args, **kwargs)
@@ -682,9 +693,9 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 							value = s.toString()
 							pos = value.rfind(':')
 							if pos != -1:
-								if value[pos-1] == ':':
+								if value[pos - 1] == ':':
 									pos -= 1
-								value = value[:pos+1]
+								value = value[:pos + 1]
 
 							comp = value.split(':')
 							append(':'.join(value[3:]))
@@ -721,9 +732,9 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 								value = s.toString()
 								pos = value.rfind(':')
 								if pos != -1:
-									if value[pos-1] == ':':
+									if value[pos - 1] == ':':
 										pos -= 1
-									value = value[:pos+1]
+									value = value[:pos + 1]
 
 								if ':'.join(value.split(':')[3:]) == override:
 									return service
@@ -731,11 +742,12 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 								break
 		return override_service
 
+
 def getDefaultEncoding():
 	#if 'de' in language.getLanguage():
 	#	return 'ISO8859-15'
 	return 'UTF-8'
 
+
 # very basic factory ;-)
 preferredAutoTimerComponent = lambda *args, **kwargs: AutoTimerFastscanComponent(*args, **kwargs) if config.plugins.autotimer.fastscan.value else AutoTimerComponent(*args, **kwargs)
-

@@ -5,6 +5,7 @@ from twisted.web import resource, http
 from tempfile import mkstemp
 from re import search
 
+
 class UploadResource(resource.Resource):
 	default_uploaddir = "/tmp/"
 	restricted_paths = frozenset(("/bin/", "/boot/", "/dev/", "/etc/", "/lib/", "/proc/", "/sbin/", "/sys/", "/usr/", "/var/"))
@@ -12,7 +13,7 @@ class UploadResource(resource.Resource):
 	def out_POST(self, req, state, statetext, isXml):
 		req.setResponseCode(http.OK)
 		if isXml:
-			req.setHeader('Content-type', 'application/xhtml+xml;' )
+			req.setHeader('Content-type', 'application/xhtml+xml;')
 			req.setHeader('charset', 'UTF-8')
 			return """<?xml version="1.0" encoding="UTF-8" ?>
 <e2simplexmlresult>
@@ -54,11 +55,11 @@ class UploadResource(resource.Resource):
 		if fn and (overwrite or not os_path.exists(fn)):
 			fd = os_open(fn, O_WRONLY | O_CREAT)
 		else:
-			fd, fn = mkstemp(dir = uploaddir)
+			fd, fn = mkstemp(dir=uploaddir)
 		cnt = os_write(fd, data)
 		os_close(fd)
 		os_chmod(fn, 0o755)
-		
+
 		if cnt <= 0: # well, actually we should check against len(data) but lets assume we fail big time or not at all
 			try:
 				os_unlink(fn)
@@ -89,4 +90,3 @@ class UploadResource(resource.Resource):
 				</table>
 				</form>
 		""" % (self.default_uploaddir, freespace)
-

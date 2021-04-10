@@ -1,12 +1,12 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 #  Advanced Movie Selection for Dreambox-Enigma2
 #
 #  Coded by cmikula (c)2012
 #  Support: www.i-have-a-dreambox.com
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -15,7 +15,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 
@@ -28,12 +28,14 @@ from .Globals import printStackTrace
 from enigma import eServiceReference, iServiceInformation
 from .Config import config
 
+
 class MovieInfo():
     idDVB = eServiceReference.idDVB
     idDVD = 0x1111 # 4369
     idMP3 = 0x1001 # 4097
     idBD = 0x0004
-    def __init__(self, name, serviceref, info=None, begin= -1, length= -1, file_name=None):
+
+    def __init__(self, name, serviceref, info=None, begin=-1, length=-1, file_name=None):
         self.name = name
         self.info = info
         self.begin = begin
@@ -52,7 +54,7 @@ class MovieInfo():
 
     def __repr__(self):
         return self.name + "\t" + self.path
-    
+
     def createService(self):
         if self.serviceref == None:
             self.serviceref = self.s_type(self.type, self.flags, self.path)
@@ -64,7 +66,7 @@ class MovieInfo():
 
     def getPath(self):
         return self.serviceref.getPath()
-    
+
     def getTags(self):
         if self.info is None:
             return []
@@ -72,6 +74,7 @@ class MovieInfo():
         if this_tags is None or this_tags == ['']:
             this_tags = []
         return this_tags
+
 
 class DirectoryInfo():
     def __init__(self, dir_path):
@@ -87,9 +90,9 @@ class DirectoryInfo():
         self.mov_count = -1
         if dir_path != '/':
             self.__read(dir_path)
-    
+
     def __repr__(self):
-        return ", ".join((str(self.__class__.__name__), self.name, self.dir_path, str(self.dir_count), str(self.mov_count)))  
+        return ", ".join((str(self.__class__.__name__), self.name, self.dir_path, str(self.dir_count), str(self.mov_count)))
 
     def __parse_int(self, metafile):
         try:
@@ -135,10 +138,9 @@ class DirectoryInfo():
             if metafile is not None:
                 metafile.close()
 
-    
     def setSortType(self, sort_type):
         self.sort_type = sort_type
-    
+
     def setName(self, name):
         self.name = name
 
@@ -153,7 +155,7 @@ class DirectoryInfo():
     def updateFolderSize(self):
         self.dir_size = getDirSize(self.dir_path)
         print("scanned folder size", self.dir_size)
-    
+
     def getmount(self, path=None):
         path = path and path or self.dir_path
         path = os.path.abspath(path)
@@ -164,7 +166,7 @@ class DirectoryInfo():
         if path == '/':
             return None
         return path
-    
+
     def updateDiskUsage(self, dir_count=None, movie_count=None):
         #mount = self.getmount()
         #if not mount:
@@ -185,6 +187,7 @@ class DirectoryInfo():
         #    di.updateFolderSize()
         #    di.write()
 
+
 class DirectoryEvent(DirectoryInfo):
     def __init__(self, serviceref):
         DirectoryInfo.__init__(self, serviceref.getPath())
@@ -202,7 +205,7 @@ class DirectoryEvent(DirectoryInfo):
 
     def getEventName(self):
         return self.name
-    
+
     def getShortDescription(self):
         return self.dir_path
 
@@ -211,18 +214,18 @@ class DirectoryEvent(DirectoryInfo):
         self.dir_size = movieScanner.movielibrary.getSize()
         self.dir_count, self.mov_count = movieScanner.movielibrary.getFullCount()
         text1 = []
-        
+
         if self.dir_size > -1:
             text1.append(realSize(self.dir_size, 3))
         if self.dir_count > 0:
             text1.append(str(self.dir_count) + ' ' + _("Directories"))
         if self.mov_count > 0:
             text1.append(str(self.mov_count) + ' ' + _("Movies"))
-        
+
         result = ", ".join(text1)
         if movieScanner.last_update:
             result += "\r\n" + _("Last update:") + ' ' + movieScanner.getLastUpdate()
-        
+
         return result
 
     def getDirDescription(self):
@@ -250,7 +253,7 @@ class DirectoryEvent(DirectoryInfo):
             real_path = os.path.realpath(self.dir_path) + os.sep
             if self.dir_path != real_path:
                 text.append(_("Symlink:") + ' ' + real_path)
-        
+
         return "\n".join(text)
 
     def getExtendedDescription(self):
@@ -264,9 +267,9 @@ class DirectoryEvent(DirectoryInfo):
 
     def getBeginTimeString(self):
         return ""
-    
+
     def getDuration(self):
         return 0
-    
+
     def getBeginTime(self):
         return 0

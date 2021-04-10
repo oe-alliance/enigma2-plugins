@@ -47,8 +47,8 @@ class YouTubeAddPlaylistDialog(Screen, ConfigListScreen):
 
 		self["actions"] = ActionMap(["YouTubeAddPlaylistActions"],
 		{
-			"save"		: 	self.keySave,
-			"cancel"	: 	self.keyCancel
+			"save"		: self.keySave,
+			"cancel"	: self.keyCancel
 		}, -2)
 
 		self["key_red"] = Button(_("Cancel"))
@@ -63,10 +63,8 @@ class YouTubeAddPlaylistDialog(Screen, ConfigListScreen):
 
 		ConfigListScreen.__init__(self, cfglist, session)
 
-
 	def keySave(self):
 		self.close(True, playlistContext)
-
 
 	def keyCancel(self):
 		self.close(False, playlistContext)

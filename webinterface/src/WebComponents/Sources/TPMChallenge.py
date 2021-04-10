@@ -6,6 +6,7 @@ from base64 import b64encode, b64decode
 
 tpm = eTPM()
 
+
 class TPMChallenge(Source):
 	CERTIFICATES = "certificates"
 	CHALLENGE = "challenge"
@@ -33,11 +34,11 @@ class TPMChallenge(Source):
 
 			if random != None:
 
-				value = b64encode( tpm.computeSignature( b64decode(random) ) )
+				value = b64encode(tpm.computeSignature(b64decode(random)))
 				return (None, None, value, True, _('Challenge executed, please verify the result!'))
 			else:
-				return (None, None, None, False, _('Obligatory parameter "random" for cmd="%s" missing') %self.CHALLENGE)
+				return (None, None, None, False, _('Obligatory parameter "random" for cmd="%s" missing') % self.CHALLENGE)
 
-		return (None, None, None, False, _('Unknown for parameter "cmd" [%s|%s]') %(self.CERTIFICATES, self.CHALLENGE))
+		return (None, None, None, False, _('Unknown for parameter "cmd" [%s|%s]') % (self.CERTIFICATES, self.CHALLENGE))
 
 	tpm_result = property(do_tpm)

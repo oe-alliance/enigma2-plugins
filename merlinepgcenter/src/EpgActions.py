@@ -7,8 +7,8 @@ from __future__ import absolute_import
 #  Coded by Shaderman (c) 2011
 #  Support: www.dreambox-tools.info
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -17,7 +17,7 @@ from __future__ import absolute_import
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 
@@ -29,137 +29,138 @@ from Tools.BoundFunction import boundFunction
 from .ConfigTabs import KEEP_OUTDATED_TIME
 from .EpgCenterList import MULTI_EPG_NOW, MULTI_EPG_NEXT, SINGLE_EPG, MULTI_EPG_PRIMETIME, TIMERLIST, EPGSEARCH_HISTORY, EPGSEARCH_RESULT, EPGSEARCH_MANUAL
 
-class MerlinEPGActions():		
+
+class MerlinEPGActions():
 	def __init__(self):
 		# TIMEREDITLIST
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ShortcutActions", "TimerEditActions", "YttrailerActions"],
 		{
-			"ok":			self.openEdit,
-			"cancel":		self.keyExit, # overwritten to use our own exit function
-			"green":		self.addCurrentTimer,
-			"log":			self.showLog,
-			"left":			self.left,
-			"right":		self.right,
-			"up":			self.up,
-			"down":			self.down,
-			"video":		self.keyVideo,
+			"ok": self.openEdit,
+			"cancel": self.keyExit, # overwritten to use our own exit function
+			"green": self.addCurrentTimer,
+			"log": self.showLog,
+			"left": self.left,
+			"right": self.right,
+			"up": self.up,
+			"down": self.down,
+			"video": self.keyVideo,
 		}, -1)
-		
+
 		# TAB NAVIGATION
 		self["tabNavigationActions"] = ActionMap(["TabNavigationActions"],
 		{
-			"nextTab":		boundFunction(self.keyDirection, direction = 1),
-			"prevTab": 		boundFunction(self.keyDirection, direction = -1),
-			"1":			boundFunction(self.keyNumber, number = 1),
-			"2":			boundFunction(self.keyNumber, number = 2),
-			"3":			boundFunction(self.keyNumber, number = 3),
-			"4":			boundFunction(self.keyNumber, number = 4),
-			"5":			boundFunction(self.keyNumber, number = 5),
-			"6":			boundFunction(self.keyNumber, number = 6),
+			"nextTab": boundFunction(self.keyDirection, direction=1),
+			"prevTab": boundFunction(self.keyDirection, direction=-1),
+			"1": boundFunction(self.keyNumber, number=1),
+			"2": boundFunction(self.keyNumber, number=2),
+			"3": boundFunction(self.keyNumber, number=3),
+			"4": boundFunction(self.keyNumber, number=4),
+			"5": boundFunction(self.keyNumber, number=5),
+			"6": boundFunction(self.keyNumber, number=6),
 		}, -1)
-		
+
 		# EPG TABS
 		self["epgTabBaseActions"] = ActionMap(["EpgTabBaseActions"],
 		{
-			"exit":			self.keyExit,
-			"moveUp":		self.keyUp,
-			"moveDown":		self.keyDown,
-			"pageUp":		self.keyLeft,
-			"pageDown":		self.keyRight,
-			"nextBouquet":		self.keyBouquetUp,
-			"prevBouquet": 		self.keyBouquetDown,
-			"showRadio":		self.keyRadio,
-			"showTv":		self.keyTv,
-			"showEventInfo":	self.keyInfo,
-			"ok":			self.keyOk,
-			"video":		self.keyVideo,
-			"text":			self.keyText,
+			"exit": self.keyExit,
+			"moveUp": self.keyUp,
+			"moveDown": self.keyDown,
+			"pageUp": self.keyLeft,
+			"pageDown": self.keyRight,
+			"nextBouquet": self.keyBouquetUp,
+			"prevBouquet": self.keyBouquetDown,
+			"showRadio": self.keyRadio,
+			"showTv": self.keyTv,
+			"showEventInfo": self.keyInfo,
+			"ok": self.keyOk,
+			"video": self.keyVideo,
+			"text": self.keyText,
 		}, -1)
-		
+
 		# EPG HISTORY ACTIONS
 		self["epgHistoryActions"] = ActionMap(["EpgHistoryActions"],
 		{
-			"exit":			self.keyExit,
-			"ok":			self.keyOk,
-			"moveUp":		self.keyUp,
-			"moveDown":		self.keyDown,
-			"pageUp":		self.keyLeft,
-			"pageDown":		self.keyRight,
+			"exit": self.keyExit,
+			"ok": self.keyOk,
+			"moveUp": self.keyUp,
+			"moveDown": self.keyDown,
+			"pageUp": self.keyLeft,
+			"pageDown": self.keyRight,
 		}, -1)
-		
+
 		# EPG MANUAL SEARCH ACTIONS
 		self["epgManualSearchActions"] = ActionMap(["EpgManualSearchActions"],
 		{
-			"exit":			self.keyExit,
-			"ok":			self.keyOk,
-			"left":			self.keyLeft,
-			"right":		self.keyRight,
-			"next":			boundFunction(self.keyDirection, direction = 1),
-			"previous":		boundFunction(self.keyDirection, direction = -1),
-			"1":			boundFunction(self.keyNumber, number = 1),
-			"2":			boundFunction(self.keyNumber, number = 2),
-			"3":			boundFunction(self.keyNumber, number = 3),
-			"4":			boundFunction(self.keyNumber, number = 4),
-			"5":			boundFunction(self.keyNumber, number = 5),
-			"6":			boundFunction(self.keyNumber, number = 6),
-			"7":			boundFunction(self.keyNumber, number = 7),
-			"8":			boundFunction(self.keyNumber, number = 8),
-			"9":			boundFunction(self.keyNumber, number = 9),
-			"0":			boundFunction(self.keyNumber, number = 0),
+			"exit": self.keyExit,
+			"ok": self.keyOk,
+			"left": self.keyLeft,
+			"right": self.keyRight,
+			"next": boundFunction(self.keyDirection, direction=1),
+			"previous": boundFunction(self.keyDirection, direction=-1),
+			"1": boundFunction(self.keyNumber, number=1),
+			"2": boundFunction(self.keyNumber, number=2),
+			"3": boundFunction(self.keyNumber, number=3),
+			"4": boundFunction(self.keyNumber, number=4),
+			"5": boundFunction(self.keyNumber, number=5),
+			"6": boundFunction(self.keyNumber, number=6),
+			"7": boundFunction(self.keyNumber, number=7),
+			"8": boundFunction(self.keyNumber, number=8),
+			"9": boundFunction(self.keyNumber, number=9),
+			"0": boundFunction(self.keyNumber, number=0),
 		}, -1)
-		
+
 		# EPG RED
 		self["epgRedActions"] = ActionMap(["EpgRedActions"],
 		{
-			"red":			self.keyRed,
+			"red": self.keyRed,
 		}, -1)
-		
+
 		# EPG GREEN
 		self["epgGreenActions"] = ActionMap(["EpgGreenActions"],
 		{
-			"green":		self.keyGreen,
+			"green": self.keyGreen,
 		}, -1)
-		
+
 		# EPG BLUE
 		self["epgBlueActions"] = ActionMap(["EpgBlueActions"],
 		{
-			"blue":			self.keyBlue,
+			"blue": self.keyBlue,
 		}, -1)
-		
+
 		# EPG YELLOW
 		self["epgYellowActions"] = ActionMap(["EpgYellowActions"],
 		{
-			"yellow":		self.keyYellow,
+			"yellow": self.keyYellow,
 		}, -1)
-		
+
 		# SETTINGS ACTIONS
 		self["settingsActions"] = ActionMap(["SettingsActions"],
 		{
-			"nextTab":		boundFunction(self.keyDirection, direction = 1),
-			"prevTab": 		boundFunction(self.keyDirection, direction = -1),
-			"1":			boundFunction(self.keyNumber, number = 1),
-			"2":			boundFunction(self.keyNumber, number = 2),
-			"3":			boundFunction(self.keyNumber, number = 3),
-			"4":			boundFunction(self.keyNumber, number = 4),
-			"5":			boundFunction(self.keyNumber, number = 5),
-			"6":			boundFunction(self.keyNumber, number = 6),
-			"7":			boundFunction(self.keyNumber, number = 7),
-			"8":			boundFunction(self.keyNumber, number = 8),
-			"9":			boundFunction(self.keyNumber, number = 9),
-			"0":			boundFunction(self.keyNumber, number = 0),
-			"exit":			self.keyExit,
-			"moveUp":		self.keyUp,
-			"moveDown":		self.keyDown,
-			"left":			self.keyLeft,
-			"right":		self.keyRight,
+			"nextTab": boundFunction(self.keyDirection, direction=1),
+			"prevTab": boundFunction(self.keyDirection, direction=-1),
+			"1": boundFunction(self.keyNumber, number=1),
+			"2": boundFunction(self.keyNumber, number=2),
+			"3": boundFunction(self.keyNumber, number=3),
+			"4": boundFunction(self.keyNumber, number=4),
+			"5": boundFunction(self.keyNumber, number=5),
+			"6": boundFunction(self.keyNumber, number=6),
+			"7": boundFunction(self.keyNumber, number=7),
+			"8": boundFunction(self.keyNumber, number=8),
+			"9": boundFunction(self.keyNumber, number=9),
+			"0": boundFunction(self.keyNumber, number=0),
+			"exit": self.keyExit,
+			"moveUp": self.keyUp,
+			"moveDown": self.keyDown,
+			"left": self.keyLeft,
+			"right": self.keyRight,
 		}, -1)
-		
+
 		# TOGGLE CONFIG
 		self["toggleConfigActions"] = ActionMap(["ToggleConfigActions"],
 		{
-			"toggleConfig":		self.keyMenu,
+			"toggleConfig": self.keyMenu,
 		}, -1)
-		
+
 		# disable several action maps on start
 		self["actions"].setEnabled(False)
 		self["epgHistoryActions"].setEnabled(False)
@@ -169,10 +170,10 @@ class MerlinEPGActions():
 		self["epgBlueActions"].setEnabled(False)
 		self["settingsActions"].setEnabled(False)
 		self["toggleConfigActions"].setEnabled(True)
-		
+
 	def setActions(self):
 		from .MerlinEPGCenter import IMDB_INSTALLED
-		
+
 		# unset action map
 		if self.oldMode == MULTI_EPG_NOW or self.oldMode == MULTI_EPG_NEXT or self.oldMode == MULTI_EPG_PRIMETIME or self.oldMode == EPGSEARCH_RESULT:
 			self["epgTabBaseActions"].setEnabled(False)
@@ -199,7 +200,7 @@ class MerlinEPGActions():
 		elif self.oldMode == EPGSEARCH_MANUAL:
 			self["epgManualSearchActions"].setEnabled(False)
 			self["tabNavigationActions"].setEnabled(True)
-			
+
 		# set action map
 		if self.configTabsShown:
 			self["tabNavigationActions"].setEnabled(False)
@@ -236,9 +237,8 @@ class MerlinEPGActions():
 			self["epgManualSearchActions"].setEnabled(True)
 		elif self.currentMode == EPGSEARCH_RESULT:
 			self["tabNavigationActions"].setEnabled(False)
-			
+
 		if not self.configTabsShown:
 			self["settingsActions"].setEnabled(False)
 			self["tabNavigationActions"].setEnabled(True)
 			self["epgGreenActions"].setEnabled(True)
-			

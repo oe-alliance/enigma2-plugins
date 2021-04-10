@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# 
+#
 #    Copyright (C) 2011 cmikula
 #
 #    In case of reuse of this source code please do not remove this copyright.
@@ -18,8 +18,8 @@
 #    For more information on the GNU General Public License see:
 #    <http://www.gnu.org/licenses/>.
 #
-#    For example, if you distribute copies of such a program, whether gratis or for a fee, you 
-#    must pass on to the recipients the same freedoms that you received. You must make sure 
+#    For example, if you distribute copies of such a program, whether gratis or for a fee, you
+#    must pass on to the recipients the same freedoms that you received. You must make sure
 #    that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 #
 
@@ -37,10 +37,11 @@ if not fileExists(__CONF__):
     copyfile(resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/AdvancedMovieSelection/AdvancedMovieSelection.conf"), __CONF__)
 DMCONFFILE = __CONF__
 
+
 class MovieConfig:
     def __init__(self):
         self.readDMconf()
-        
+
     def readDMconf(self):
         self.hidelist = []
         self.hotplug = []
@@ -70,11 +71,11 @@ class MovieConfig:
             for item in self.rename:
                 i = item.split("\t")
                 if i[0] == name:
-                    return i[1] 
+                    return i[1]
         except:
             pass
         return name
-    
+
     def safe(self):
         try:
             f = open(DMCONFFILE, 'w')

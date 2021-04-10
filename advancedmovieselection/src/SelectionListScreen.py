@@ -21,8 +21,8 @@ GNU General Public License for more details.
 For more information on the GNU General Public License see:
 <http://www.gnu.org/licenses/>.
 
-For example, if you distribute copies of such a program, whether gratis or for a fee, you 
-must pass on to the recipients the same freedoms that you received. You must make sure 
+For example, if you distribute copies of such a program, whether gratis or for a fee, you
+must pass on to the recipients the same freedoms that you received. You must make sure
 that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 '''
 from __future__ import absolute_import
@@ -33,6 +33,7 @@ from Components.Sources.StaticText import StaticText
 from Components.SelectionList import SelectionList
 from Screens.HelpMenu import HelpableScreen
 from .Source.Globals import SkinResolutionHelper
+
 
 class SelectionListScreen(Screen, HelpableScreen, SkinResolutionHelper):
     def __init__(self, session, title, item_descr, selected_items):

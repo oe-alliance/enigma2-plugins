@@ -31,6 +31,7 @@ HD = False
 if getDesktop(0).size().width() >= 1280:
 	HD = True
 
+
 def getAutoTimerSettingsDefinitions():
 	hours_minutes = config.plugins.autotimer.unit.value == "hour" and _("hours") or _("minutes")
 	return [
@@ -64,6 +65,7 @@ def getAutoTimerSettingsDefinitions():
 		[_("Always write config"), config.plugins.autotimer.always_write_config, "always_write_config", _("Write the config file after every change which the user quits by saving.")]
 	]
 
+
 class AutoTimerSettings(ConfigListScreen, Screen):
 	if HD:
 		skin = """<screen name="AutoTimerSettings" title="AutoTimer Settings" position="center,center" size="750,635">
@@ -94,7 +96,7 @@ class AutoTimerSettings(ConfigListScreen, Screen):
 		self.onChangedEntry = []
 		self.session = session
 		self.pollUnitEntry = None
-		ConfigListScreen.__init__(self, [], session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, [], session=session, on_change=self.changedEntry)
 
 		self["actions2"] = ActionMap(["SetupActions"],
 		{
@@ -108,7 +110,7 @@ class AutoTimerSettings(ConfigListScreen, Screen):
 		self["key_green"] = StaticText(_("Save"))
 
 		# Use self["description"] as this is what "Setup" skin uses.
-		# The embedded skin could be removed. 
+		# The embedded skin could be removed.
 		# Plugin will use "Setup" screen from default skin if no skin available.
 		self["description"] = StaticText("")
 		self["help"] = StaticText("") # for backwards compatibility

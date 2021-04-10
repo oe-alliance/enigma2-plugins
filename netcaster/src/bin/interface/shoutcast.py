@@ -3,19 +3,21 @@ from Plugins.Extensions.NETcaster.StreamInterface import StreamInterface
 from Plugins.Extensions.NETcaster.StreamInterface import Stream
 from Screens.ChoiceBox import ChoiceBox
 
+
 class Interface(StreamInterface):
-    name= "listen to SHOUTcast Streams"
+    name = "listen to SHOUTcast Streams"
     nameshort = "SHOUTcast"
     description = "This is a Plugin to browse www.shoutcast.com and listen to webradios listed there."
-    def __init__(self,session,cbListLoaded=None):
+
+    def __init__(self, session, cbListLoaded=None):
         StreamInterface.__init__(self, session, cbListLoaded=cbListLoaded)
         self.genrefeed = GenreFeed()
-    
+
     def getList(self):
-        glist=[]
+        glist = []
         #self.genrefeed.fetch_genres()
         self.genrefeed.parse_genres()
-        for i in self.genrefeed.genre_list:            
+        for i in self.genrefeed.genre_list:
             glist.append((str(i), i))
         self.session.openWithCallback(self.GenreSelected, ChoiceBox, _("select Genre to search for streams"), glist)
 
@@ -24,9 +26,9 @@ class Interface(StreamInterface):
             feed = ShoutcastFeed(selectedGenre[1])
             #feed.fetch_stations()
             feed.parse_stations()
-            self.list=[]
+            self.list = []
             for station in feed.station_list:
-                stream = Stream(str(station['Name']), "Bitrate: "+str(station['Bitrate'])+", Type: "+str(station['MimeType']), str(station['PLS_URL']), type="pls")
+                stream = Stream(str(station['Name']), "Bitrate: " + str(station['Bitrate']) + ", Type: " + str(station['MimeType']), str(station['PLS_URL']), type="pls")
                 self.list.append(stream)
         self.OnListLoaded()
 
@@ -49,6 +51,7 @@ class Interface(StreamInterface):
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+
 from six.moves.urllib.request import FancyURLopener
 from xml.sax import parseString
 from xml.sax.handler import ContentHandler
@@ -60,21 +63,23 @@ from stat import ST_MTIME
 from six.moves.cPickle import dump, load
 
 
-tmpxml='shout.xml'
-DEBUG=0
+tmpxml = 'shout.xml'
+DEBUG = 0
+
 
 def write_cache(cache_file, cache_data):
     """
     Does a cPickle dump
     """
-    if not isdir( dirname(cache_file) ):
+    if not isdir(dirname(cache_file)):
         try:
-            mkdir( dirname(cache_file) )
+            mkdir(dirname(cache_file))
         except OSError:
             print(dirname(cache_file), 'is a file')
     fd = open(cache_file, 'wb')
     dump(cache_data, fd, -1)
     fd.close()
+
 
 def cacheTime(cache_file):
     """
@@ -86,6 +91,7 @@ def cacheTime(cache_file):
         return None
     return mtime
 
+
 def load_cache(cache_file):
     """
     Does a cPickle load
@@ -95,10 +101,12 @@ def load_cache(cache_file):
     fd.close()
     return cache_data
 
+
 class StationParser(ContentHandler):
     """
     SAX handler for xml feed, not for public consumption
     """
+
     def __init__(self, min_bitrate):
         self.isStationList = False
         self.isTuneIn = False
@@ -115,6 +123,7 @@ class StationParser(ContentHandler):
         self.Genre = ''
         self.count = 0
         self.shoutUrl = 'http://www.shoutcast.com'
+
     def startElement(self, name, attrs):
         if name == 'stationlist':
             self.isStationList = True
@@ -130,6 +139,7 @@ class StationParser(ContentHandler):
             self.nowPlaying = attrs.get('ct', None)
             self.Listeners = attrs.get('lc', None)
             self.Genre = attrs.get('genre', None)
+
     def endElement(self, name):
         if name == 'station':
             self.isStation = False
@@ -139,36 +149,41 @@ class StationParser(ContentHandler):
             self.isStation = False
             if int(self.Bitrate) >= self.min_bitrate:
                 self.stationUrl = self.shoutUrl + self.baseUrl + '?id=' + self.Id
-                self.station_list.append({'Name':self.Name.encode("utf-8"), 'PLS_URL':self.stationUrl.encode("utf-8"), 'NowPlaying':self.nowPlaying.encode("utf-8"), 'Listeners':self.Listeners.encode("utf-8"), 'Bitrate':self.Bitrate.encode("utf-8"), 'MimeType':self.mimeType.encode("utf-8"), 'Genres': self.Genre.encode("utf-8")})
+                self.station_list.append({'Name': self.Name.encode("utf-8"), 'PLS_URL': self.stationUrl.encode("utf-8"), 'NowPlaying': self.nowPlaying.encode("utf-8"), 'Listeners': self.Listeners.encode("utf-8"), 'Bitrate': self.Bitrate.encode("utf-8"), 'MimeType': self.mimeType.encode("utf-8"), 'Genres': self.Genre.encode("utf-8")})
                 self.count += 1
         if name == 'stationlist':
             self.isStationList = False
             if DEBUG == 1:
                 print('Parsed ', self.count, ' stations')
 
+
 class GenreParse(ContentHandler):
-    def __init__( self ):
+    def __init__(self):
         self.isGenre = False
         self.isGenreList = False
         self.genreList = []
-    def startElement( self, name, attrs ):
+
+    def startElement(self, name, attrs):
         if name == 'genrelist':
             self.isGenreList = True
         if name == 'genre':
             self.isGenre == True
-            self.genre_name = attrs.get( 'name', None )
-    def endElement( self, name ):
+            self.genre_name = attrs.get('name', None)
+
+    def endElement(self, name):
         if name == 'genre':
             self.isGenre = False
-            self.genreList.append( self.genre_name.encode("utf-8") )
+            self.genreList.append(self.genre_name.encode("utf-8"))
         if name == 'genrelist':
             self.isGenreList = False
 
+
 class GenreFeed:
-    def __init__(self, cache_ttl=3600, cache_dir = '/tmp/pyshout_cache'):
+    def __init__(self, cache_ttl=3600, cache_dir='/tmp/pyshout_cache'):
         self.cache_ttl = cache_ttl
         self.cache_file = cache_dir + '/genres.cache'
     self.genre_list = ['Sorry, failed to load', '...try again later', 'Rock', 'Pop', 'Alternative']
+
     def fetch_genres(self):
         """
         Grabs genres and returns tuple of genres
@@ -194,12 +209,13 @@ class GenreFeed:
             try:
                 parseXML = GenreParse()
                 self.genres = self.fetch_genres()
-                parseString( self.genres, parseXML )
+                parseString(self.genres, parseXML)
                 self.genre_list = parseXML.genreList
                 write_cache(self.cache_file, self.genre_list)
             except:
                 print("Failed to get genres from server, sorry.")
         return self.genre_list
+
 
 class ShoutcastFeed:
     def __init__(self, genre, min_bitrate=128, cache_ttl=600, cache_dir='/tmp/pyshout_cache'):
@@ -220,7 +236,7 @@ class ShoutcastFeed:
         """
         Grabs the xml list of stations from the shoutcast server
         """
-        self.shout_url='http://www.shoutcast.com/sbin/newxml.phtml?genre=' + self.genre
+        self.shout_url = 'http://www.shoutcast.com/sbin/newxml.phtml?genre=' + self.genre
         self.urlhandler = FancyURLopener()
         self.fd = self.urlhandler.open(self.shout_url)
         self.stations = self.fd.read()

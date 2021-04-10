@@ -18,7 +18,8 @@ from Screens.ParentalControlSetup import ProtectedScreen
 from Screens.Screen import Screen
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from enigma import eServiceReference, getDesktop
-import os, gettext
+import os
+import gettext
 from skin import parameters as skinparameter
 
 ################################################
@@ -26,8 +27,10 @@ from skin import parameters as skinparameter
 PluginLanguageDomain = "ZapHistoryBrowser"
 PluginLanguagePath = "Extensions/ZapHistoryBrowser/locale/"
 
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -36,18 +39,20 @@ def _(txt):
 		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
+
 language.addCallback(localeInit())
 
 ################################################
 
 config.plugins.ZapHistoryConfigurator = ConfigSubsection()
-config.plugins.ZapHistoryConfigurator.enable_zap_history = ConfigSelection(choices = {"off": _("disabled"), "on": _("enabled"), "parental_lock": _("disabled at parental lock")}, default="on")
+config.plugins.ZapHistoryConfigurator.enable_zap_history = ConfigSelection(choices={"off": _("disabled"), "on": _("enabled"), "parental_lock": _("disabled at parental lock")}, default="on")
 config.plugins.ZapHistoryConfigurator.maxEntries_zap_history = ConfigInteger(default=20, limits=(1, 60))
-config.plugins.ZapHistoryConfigurator.e1_like_history = ConfigYesNo(default = False)
-config.plugins.ZapHistoryConfigurator.history_tv = ConfigSet(choices = [])
-config.plugins.ZapHistoryConfigurator.history_radio = ConfigSet(choices = [])
+config.plugins.ZapHistoryConfigurator.e1_like_history = ConfigYesNo(default=False)
+config.plugins.ZapHistoryConfigurator.history_tv = ConfigSet(choices=[])
+config.plugins.ZapHistoryConfigurator.history_radio = ConfigSet(choices=[])
 
 ################################################
+
 
 def addToHistory(instance, ref):
 	if config.plugins.ZapHistoryConfigurator.enable_zap_history.value == "off":
@@ -58,8 +63,10 @@ def addToHistory(instance, ref):
 	if instance.servicePath is not None:
 		tmp = instance.servicePath[:]
 		tmp.append(ref)
-		try: del instance.history[instance.history_pos+1:]
-		except Exception as e: pass
+		try:
+			del instance.history[instance.history_pos + 1:]
+		except Exception as e:
+			pass
 		if config.plugins.ZapHistoryConfigurator.e1_like_history.value and tmp in instance.history:
 			instance.history.remove(tmp)
 		instance.history.append(tmp)
@@ -67,7 +74,7 @@ def addToHistory(instance, ref):
 		if hlen > config.plugins.ZapHistoryConfigurator.maxEntries_zap_history.value:
 			del instance.history[0]
 			hlen -= 1
-		instance.history_pos = hlen-1
+		instance.history_pos = hlen - 1
 		if config.plugins.ZapHistoryConfigurator.e1_like_history.value:
 			# TODO: optimize this
 			if instance.history == instance.history_tv:
@@ -76,7 +83,9 @@ def addToHistory(instance, ref):
 				config.plugins.ZapHistoryConfigurator.history_radio.value = [[y.toString() for y in x] for x in instance.history]
 			config.plugins.ZapHistoryConfigurator.save()
 
+
 ChannelSelection.addToHistory = addToHistory
+
 
 def newInit(self, session):
 	baseInit(self, session)
@@ -90,14 +99,16 @@ def newInit(self, session):
 
 		# XXX: self.lastChannelRootTimer was always finished for me, so just fix its mistakes ;)
 		if self.history == self.history_tv:
-			self.history_pos = len(self.history_tv)-1
+			self.history_pos = len(self.history_tv) - 1
 		else:
-			self.history_pos = len(self.history_radio)-1
+			self.history_pos = len(self.history_radio) - 1
+
 
 baseInit = ChannelSelection.__init__
 ChannelSelection.__init__ = newInit
 
 ################################################
+
 
 class ZapHistoryConfigurator(ConfigListScreen, Screen):
 	skin = """
@@ -108,12 +119,12 @@ class ZapHistoryConfigurator(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
-		
+
 		ConfigListScreen.__init__(self, [
 			getConfigListEntry(_("Enable zap history:"), config.plugins.ZapHistoryConfigurator.enable_zap_history),
 			getConfigListEntry(_("Maximum zap history entries:"), config.plugins.ZapHistoryConfigurator.maxEntries_zap_history),
 			getConfigListEntry(_("Enigma1-like history:"), config.plugins.ZapHistoryConfigurator.e1_like_history)])
-		
+
 		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.save, "cancel": self.exit}, -2)
 
 	def save(self):
@@ -141,19 +152,20 @@ class ZapHistoryConfigurator(ConfigListScreen, Screen):
 
 ################################################
 
+
 class ZapHistoryBrowserList(MenuList):
 	def __init__(self, list, enableWrapAround=False):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		DESKTOP_WIDTH = getDesktop(0).size().width()
 		if DESKTOP_WIDTH <= 1280:
-			font1, size1 = skinparameter.get("ZapHistoryBrowserListFont1", ('Regular',20))
-			font2, size2 = skinparameter.get("ZapHistoryBrowserListFont2", ('Regular',18))
+			font1, size1 = skinparameter.get("ZapHistoryBrowserListFont1", ('Regular', 20))
+			font2, size2 = skinparameter.get("ZapHistoryBrowserListFont2", ('Regular', 18))
 			self.l.setFont(0, gFont(font1, size1))
 			self.l.setFont(1, gFont(font2, size2))
 			self.l.setItemHeight(40)
 		else:
-			font1, size1 = skinparameter.get("ZapHistoryBrowserListFont1", ('Regular',30))
-			font2, size2 = skinparameter.get("ZapHistoryBrowserListFont2", ('Regular',27))
+			font1, size1 = skinparameter.get("ZapHistoryBrowserListFont1", ('Regular', 30))
+			font2, size2 = skinparameter.get("ZapHistoryBrowserListFont2", ('Regular', 27))
 			self.l.setFont(0, gFont(font1, size1))
 			self.l.setFont(1, gFont(font2, size2))
 			self.l.setItemHeight(75)
@@ -176,6 +188,7 @@ def ZapHistoryBrowserListEntry(serviceName, eventName):
 
 ################################################
 
+
 class ZapHistoryBrowser(Screen, ProtectedScreen):
 	skin = """
 	<screen position="center,center" size="560,440" title="%s" >
@@ -194,17 +207,17 @@ class ZapHistoryBrowser(Screen, ProtectedScreen):
 		Screen.__init__(self, session)
 		ProtectedScreen.__init__(self)
 		self.session = session
-		
+
 		self.servicelist = servicelist
 		self.serviceHandler = eServiceCenter.getInstance()
 		self.allowChanges = True
-		
+
 		self["list"] = ZapHistoryBrowserList([])
 		self["key_red"] = Label(_("Clear"))
 		self["key_green"] = Label(_("Delete"))
 		self["key_yellow"] = Label(_("Zap"))
 		self["key_blue"] = Label(_("Config"))
-		
+
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 			{
 				"ok": self.zapAndClose,
@@ -214,7 +227,7 @@ class ZapHistoryBrowser(Screen, ProtectedScreen):
 				"yellow": self.zap,
 				"blue": self.config
 			}, prio=-1)
-		
+
 		self.onLayoutFinish.append(self.buildList)
 
 	def buildList(self):
@@ -284,7 +297,7 @@ class ZapHistoryBrowser(Screen, ProtectedScreen):
 
 	def isProtected(self):
 		return config.ParentalControl.setuppinactive.value
-	
+
 	def pinEntered(self, result):
 		if result is None:
 			self.allowChanges = False
@@ -295,8 +308,10 @@ class ZapHistoryBrowser(Screen, ProtectedScreen):
 
 ################################################
 
+
 def main(session, servicelist, **kwargs):
 	session.open(ZapHistoryBrowser, servicelist)
+
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("Zap-History Browser"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)

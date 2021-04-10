@@ -71,6 +71,7 @@ class GrowlNotifier(gntp.notifier.GrowlNotifier):
 		password = ?
 		port = ?
 	"""
+
 	def __init__(self, applicationName='Python GNTP', notifications=[],
 			defaultNotifications=None, applicationIcon=None, hostname='localhost',
 			password=None, port=23053):
@@ -101,6 +102,7 @@ class GrowlNotifier(gntp.notifier.GrowlNotifier):
 		self.password = config.get('gntp', 'password')
 		self.hostname = config.get('gntp', 'hostname')
 		self.port = config.getint('gntp', 'port')
+
 
 if __name__ == '__main__':
 	# If we're running this module directly we're likely running it as a test

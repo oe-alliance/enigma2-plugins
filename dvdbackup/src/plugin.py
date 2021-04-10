@@ -23,16 +23,20 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 from time import time
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
-import gettext, os, stat
+import gettext
+import os
+import stat
 import six
 
 #################################################
 
 PluginLanguageDomain = "DVDBackup"
 PluginLanguagePath = "Extensions/DVDBackup/locale/"
- 
+
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -40,6 +44,7 @@ def _(txt):
 	else:
 		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
+
 
 language.addCallback(localeInit())
 
@@ -57,10 +62,12 @@ config.plugins.DVDBackup.create_iso = ConfigYesNo(default=False)
 global SESSION
 SESSION = None
 
+
 def message(msg):
 	SESSION.open(MessageBox, msg, type=MessageBox.TYPE_ERROR, timeout=10)
 
 #################################################
+
 
 def eject(dev):
 	try:
@@ -77,11 +84,12 @@ def eject(dev):
 
 #################################################
 
+
 class DVDBackupFile:
 	def __init__(self, name, size):
 		self.name = name
 		if name != "genisoimage":
-			self.name = ("%s/%s/%s"%(config.plugins.DVDBackup.directory.value, config.plugins.DVDBackup.name.value, name)).replace("//", "/")
+			self.name = ("%s/%s/%s" % (config.plugins.DVDBackup.directory.value, config.plugins.DVDBackup.name.value, name)).replace("//", "/")
 		self.size = size
 		self.progress = 0
 
@@ -95,6 +103,7 @@ class DVDBackupFile:
 				self.progress = 0
 
 #################################################
+
 
 class DVDBackup:
 	def __init__(self):
@@ -113,7 +122,7 @@ class DVDBackup:
 	def getInfo(self):
 		if not self.console:
 			self.console = eConsole()
-		self.console.ePopen("dvdbackup --info -i %s"%config.plugins.DVDBackup.device.value, self.gotInfo)
+		self.console.ePopen("dvdbackup --info -i %s" % config.plugins.DVDBackup.device.value, self.gotInfo)
 
 	def gotInfo(self, result, retval, extra_args):
 		result = six.ensure_str(result)
@@ -126,7 +135,7 @@ class DVDBackup:
 				if len(tmp) == 1:
 					folder = tmp[0]
 				elif len(tmp) == 4:
-					name = folder+tmp[1]
+					name = folder + tmp[1]
 					size = tmp[2]
 					if size.__contains__("."):
 						size = size[:size.index(".")]
@@ -139,7 +148,7 @@ class DVDBackup:
 					log = " 2>> /tmp/dvdbackup.log"
 				else:
 					log = ""
-				cmd = 'dvdbackup -M -v -i %s -o "%s" -n "%s"%s'%(config.plugins.DVDBackup.device.value, config.plugins.DVDBackup.directory.value, config.plugins.DVDBackup.name.value, log)
+				cmd = 'dvdbackup -M -v -i %s -o "%s" -n "%s"%s' % (config.plugins.DVDBackup.device.value, config.plugins.DVDBackup.directory.value, config.plugins.DVDBackup.name.value, log)
 				self.console.ePopen(cmd, self.dvdbackupFinished)
 			else:
 				message(_("Could not find any file to backup!"))
@@ -156,12 +165,12 @@ class DVDBackup:
 			self.working = False
 		else:
 			if config.plugins.DVDBackup.create_iso.value:
-				path = ("%s/%s"%(config.plugins.DVDBackup.directory.value, config.plugins.DVDBackup.name.value)).replace("//", "/")
+				path = ("%s/%s" % (config.plugins.DVDBackup.directory.value, config.plugins.DVDBackup.name.value)).replace("//", "/")
 				if not self.console:
 					self.console = eConsole()
 				self.genisoimage = DVDBackupFile("genisoimage", 0)
 				self.files.append(self.genisoimage)
-				cmd = 'genisoimage -dvd-video -udf -o "%s.iso" "%s"'%(path, path)
+				cmd = 'genisoimage -dvd-video -udf -o "%s.iso" "%s"' % (path, path)
 				self.console.ePopen(cmd, self.genisoimageCallback)
 				self.console.appContainers[cmd].dataAvail.append(boundFunction(self.genisoimageProgress, cmd))
 			else:
@@ -190,9 +199,11 @@ class DVDBackup:
 
 	def genisoimageCallback2(self, yesno):
 		if yesno:
-			cmd = ("rm -R %s/%s"%(config.plugins.DVDBackup.directory.value, config.plugins.DVDBackup.name.value)).replace("//", "/")
-			try: os.system(cmd)
-			except: pass
+			cmd = ("rm -R %s/%s" % (config.plugins.DVDBackup.directory.value, config.plugins.DVDBackup.name.value)).replace("//", "/")
+			try:
+				os.system(cmd)
+			except:
+				pass
 		self.finished()
 
 	def finished(self):
@@ -201,16 +212,18 @@ class DVDBackup:
 		while seconds > 60:
 			seconds -= 60
 			minutes += 1
-		SESSION.openWithCallback(self.eject, MessageBox, "%s\n%s %d:%02d\n\n%s"%(_("Backup of DVD finished."), _("Duration:"), minutes, seconds, _("Eject DVD?")))
+		SESSION.openWithCallback(self.eject, MessageBox, "%s\n%s %d:%02d\n\n%s" % (_("Backup of DVD finished."), _("Duration:"), minutes, seconds, _("Eject DVD?")))
 
 	def eject(self, yesno):
 		if yesno:
 			eject(config.plugins.DVDBackup.device.value)
 		self.working = False
 
+
 dvdbackup = DVDBackup()
 
 #################################################
+
 
 class DVDBackupList(MenuList):
 	def __init__(self):
@@ -220,15 +233,17 @@ class DVDBackupList(MenuList):
 
 #################################################
 
+
 def DVDBackupListEntry(file):
 	res = [(file)]
 	res.append(MultiContentEntryText(pos=(0, 0), size=(180, 25), font=0, text=file.name.split("/")[-1]))
-	res.append(MultiContentEntryText(pos=(200, 0), size=(120, 25), font=0, text="%d %s"%((file.size / 1024) / 1024, "MB"), flags=RT_HALIGN_CENTER))
+	res.append(MultiContentEntryText(pos=(200, 0), size=(120, 25), font=0, text="%d %s" % ((file.size / 1024) / 1024, "MB"), flags=RT_HALIGN_CENTER))
 	res.append(MultiContentEntryProgress(pos=(340, 9), size=(100, 7), percent=file.progress, borderWidth=1))
-	res.append(MultiContentEntryText(pos=(460, 0), size=(60, 25), font=0, text="%d%s"%(file.progress, "%"), flags=RT_HALIGN_CENTER))
+	res.append(MultiContentEntryText(pos=(460, 0), size=(60, 25), font=0, text="%d%s" % (file.progress, "%"), flags=RT_HALIGN_CENTER))
 	return res
 
 #################################################
+
 
 class DVDBackupProgress(Screen):
 	skin = """
@@ -243,22 +258,22 @@ class DVDBackupProgress(Screen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		
+
 		self.refreshTimer = eTimer()
 		self.refreshTimer.callback.append(self.refreshList)
-		
+
 		self.console = None
 		self.working = False
-		
+
 		self["key_red"] = Label(_("Abort"))
 		self["list"] = DVDBackupList()
-		
+
 		self["actions"] = ActionMap(["ColorActions", "OkCancelActions"],
 			{
 				"cancel": self.exit,
 				"red": self.abort
 			}, -1)
-		
+
 		self.onLayoutFinish.append(self.refreshList)
 
 	def exit(self):
@@ -294,12 +309,13 @@ class DVDBackupProgress(Screen):
 			for file in dvdbackup.files:
 				if file.name == "genisoimage":
 					tool = "genisoimage"
-			self.console.ePopen("killall -9 %s"%tool, self.abortCallback)
+			self.console.ePopen("killall -9 %s" % tool, self.abortCallback)
 
 	def abortCallback(self, result, retval, extra_args):
 		self.working = False
 
 #################################################
+
 
 class DVDBackupScreen(ConfigListScreen, Screen):
 	skin = """
@@ -317,26 +333,26 @@ class DVDBackupScreen(ConfigListScreen, Screen):
 
 	def __init__(self, session, device=None):
 		Screen.__init__(self, session)
-		
+
 		self.working = False
 		self.session = session
 		self.console = None
-		
+
 		self["key_red"] = Label(_("Progress"))
 		self["key_green"] = Label(_("Backup"))
 		self["key_yellow"] = Label(_("Keyboard"))
 		self["key_blue"] = Label(_("Location"))
-		
+
 		if device:
 			config.plugins.DVDBackup.device.value = device
-		
+
 		ConfigListScreen.__init__(self, [
 			getConfigListEntry(_("Device:"), config.plugins.DVDBackup.device),
 			getConfigListEntry(_("Directory:"), config.plugins.DVDBackup.directory),
 			getConfigListEntry(_("Name:"), config.plugins.DVDBackup.name),
 			getConfigListEntry(_("Log:"), config.plugins.DVDBackup.log),
 			getConfigListEntry(_("Create iso:"), config.plugins.DVDBackup.create_iso)])
-		
+
 		self["actions"] = ActionMap(["ColorActions", "OkCancelActions"],
 			{
 				"red": self.progress,
@@ -345,7 +361,7 @@ class DVDBackupScreen(ConfigListScreen, Screen):
 				"blue": self.location,
 				"cancel": self.exit
 			}, -1)
-		
+
 		self["config"].onSelectionChanged.append(self.checkConfig)
 		self.onLayoutFinish.append(self.getName)
 
@@ -390,7 +406,7 @@ class DVDBackupScreen(ConfigListScreen, Screen):
 		self.working = True
 		if not self.console:
 			self.console = eConsole()
-		self.console.ePopen("dvdbackup --info -i %s"%config.plugins.DVDBackup.device.value, self.gotInfo)
+		self.console.ePopen("dvdbackup --info -i %s" % config.plugins.DVDBackup.device.value, self.gotInfo)
 
 	def location(self):
 		self.session.openWithCallback(self.locationCallback, LocationBox)
@@ -408,12 +424,13 @@ class DVDBackupScreen(ConfigListScreen, Screen):
 			for line in lines:
 				if line.startswith("DVD-Video information of the DVD with title "):
 					idx = line.index("title ")
-					config.plugins.DVDBackup.name.value = line[idx+6:]
+					config.plugins.DVDBackup.name.value = line[idx + 6:]
 					break
 		self["config"].setList(self["config"].getList())
 		self.working = False
 
 #################################################
+
 
 def main(session, **kwargs):
 	global SESSION
@@ -423,6 +440,7 @@ def main(session, **kwargs):
 	else:
 		session.open(DVDBackupScreen)
 
+
 def filescan_open(list, session, **kwargs):
 	global SESSION
 	SESSION = session
@@ -430,14 +448,16 @@ def filescan_open(list, session, **kwargs):
 		splitted = list[0].path.split('/')
 		if len(splitted) > 2:
 			if splitted[1] == 'autofs':
-				session.open(DVDBackupScreen, device="/dev/%s"%(splitted[2]))
+				session.open(DVDBackupScreen, device="/dev/%s" % (splitted[2]))
 				return
+
 
 def filescan(**kwargs):
 	class LocalScanner(Scanner):
 		def checkFile(self, file):
 			return fileExists(file.path)
-	return [LocalScanner(mimetypes=["video/x-dvd"], paths_to_scan=[ScanPath(path="video_ts", with_subdirs=False)], name="DVD", description=_("DVD Backup"), openfnc=filescan_open)]		
+	return [LocalScanner(mimetypes=["video/x-dvd"], paths_to_scan=[ScanPath(path="video_ts", with_subdirs=False)], name="DVD", description=_("DVD Backup"), openfnc=filescan_open)]
+
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(name=_("DVD Backup"), description=_("Backup your Video-DVD to your harddisk"), where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU], icon="DVDBackup.png", fnc=main),

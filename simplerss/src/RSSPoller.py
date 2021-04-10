@@ -22,10 +22,11 @@ NOTIFICATIONID = 'SimpleRSSUpdateNotification'
 
 update_callbacks = []
 
+
 class RSSPoller:
 	"""Keeps all Feed and takes care of (automatic) updates"""
 
-	def __init__(self, poll = True):
+	def __init__(self, poll=True):
 		# Timer
 		self.poll_timer = eTimer()
 		self.poll_timer.callback.append(self.poll)
@@ -59,10 +60,10 @@ class RSSPoller:
 		# Initialize Vars
 		self.current_feed = 0
 
-	def googleLoggedIn(self, sid = None):
+	def googleLoggedIn(self, sid=None):
 		self.googleReader.getSubscriptionList().addCallback(self.googleSubscriptionList).addErrback(self.googleSubscriptionFailed)
 
-	def googleLoginFailed(self, res = None):
+	def googleLoginFailed(self, res=None):
 		AddPopup(
 			_("Failed to login to Google Reader."),
 			MessageBox.TYPE_ERROR,
@@ -73,7 +74,7 @@ class RSSPoller:
 		if self.do_poll:
 			self.poll_timer.start(0, 1)
 
-	def googleSubscriptionList(self, subscriptions = None):
+	def googleSubscriptionList(self, subscriptions=None):
 		self.feeds.extend(subscriptions)
 
 		self.reloading = False
@@ -81,7 +82,7 @@ class RSSPoller:
 			self.doCallback()
 			self.poll_timer.start(0, 1)
 
-	def googleSubscriptionFailed(self, res = None):
+	def googleSubscriptionFailed(self, res=None):
 		AddPopup(
 			_("Failed to get subscriptions from Google Reader."),
 			MessageBox.TYPE_ERROR,
@@ -100,20 +101,20 @@ class RSSPoller:
 		if callback in update_callbacks:
 			update_callbacks.remove(callback)
 
-	def doCallback(self, id = None):
+	def doCallback(self, id=None):
 		for callback in update_callbacks:
 			try:
 				callback(id)
 			except Exception:
 				pass
 
-	def error(self, error = ""):
+	def error(self, error=""):
 		print("[SimpleRSS] failed to fetch feed:", error)
 
 		# Assume its just a temporary failure and jump over to next feed
 		self.next_feed()
 
-	def _gotPage(self, data, id = None, callback = False, errorback = None):
+	def _gotPage(self, data, id=None, callback=False, errorback=None):
 		# workaround: exceptions in gotPage-callback were ignored
 		try:
 			self.gotPage(data, id)
@@ -131,7 +132,8 @@ class RSSPoller:
 				# We don't want to stop updating just because one feed is broken
 				self.next_feed()
 		except Exception:
-			import traceback, sys
+			import traceback
+			import sys
 			traceback.print_exc(file=sys.stdout)
 			# Errorback given, call it (asumme we don't need do restart timer!)
 			if errorback is not None:
@@ -140,7 +142,7 @@ class RSSPoller:
 			# Assume its just a temporary failure and jump over to next feed
 			self.next_feed()
 
-	def gotPage(self, data, id = None):
+	def gotPage(self, data, id=None):
 		feed = cElementTree_fromstring(data)
 
 		# For Single-Polling
@@ -160,7 +162,7 @@ class RSSPoller:
 		# Start Timer so we can either fetch next feed or show new_items
 		self.next_feed()
 
-	def singlePoll(self, id, callback = False, errorback = None):
+	def singlePoll(self, id, callback=False, errorback=None):
 		getPage(six.ensure_binary(self.feeds[id].uri)).addCallback(self._gotPage, id, callback, errorback).addErrback(errorback)
 
 	def poll(self):
@@ -188,7 +190,7 @@ class RSSPoller:
 						NOTIFICATIONID,
 						RSSFeedView,
 						self.newItemFeed,
-						newItems = True
+						newItems=True
 					)
 				elif update_notification_value == "notification":
 					AddPopup(
@@ -208,7 +210,7 @@ class RSSPoller:
 				print("[SimpleRSS] no new items")
 
 			self.current_feed = 0
-			self.poll_timer.startLongTimer(config.plugins.simpleRSS.interval.value*60)
+			self.poll_timer.startLongTimer(config.plugins.simpleRSS.interval.value * 60)
 		# It's updating-time
 		else:
 			# Assume we're cleaning history if current feed is 0
@@ -290,4 +292,3 @@ class RSSPoller:
 			self.googleReader.login().addCallback(self.googleLoggedIn).addErrback(self.googleLoginFailed)
 		else:
 			self.reloading = False
-

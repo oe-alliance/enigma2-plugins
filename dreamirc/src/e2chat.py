@@ -30,8 +30,10 @@ from .dreamIRCTools import *
 #from myScrollLabel import *
 #from dreamIRCMainMenu import *
 
+
 class ContactsList:
     """A GUI object that displays a contacts list"""
+
     def __init__(self, chatui):
         """
         @param chatui: ???
@@ -41,7 +43,7 @@ class ContactsList:
         self.contacts = {}
         self.onlineContacts = {}
         self.clients = []
-        
+
     def setContactStatus(self, person):
         """Inform the user that a person's status has changed.
 
@@ -86,6 +88,7 @@ class ContactsList:
 
 class Conversation:
     """A GUI window of a conversation with a specific person"""
+
     def __init__(self, person, chatui):
         """
         @type person: L{Person<interfaces.IPerson>}
@@ -94,7 +97,7 @@ class Conversation:
         self.chatui = chatui
         self.person = person
         self.pipe = MessagePipe()
-        self.timer=eTimer()
+        self.timer = eTimer()
         self.timer.timeout.get().append(self.sendOutPipe)
         self.timer.start(100)
 
@@ -116,7 +119,7 @@ class Conversation:
 
     def sendOutPipe(self):
         if len(str(self.pipe.getOutText())) > 0:
-            if (self.pipe.getOutText()=="/QUIT"):
+            if (self.pipe.getOutText() == "/QUIT"):
                 self.pipe.debug("/quit detected....")
                 self.pipe.clearOutText()
                 self.person.bye()
@@ -149,8 +152,10 @@ class Conversation:
         """
         self.pipe.add("-!- %s " % (message))
 
+
 class GroupConversation:
     """A conversation with a group of people."""
+
     def __init__(self, group, chatui):
         """
         @type group: L{Group<interfaces.IGroup>}
@@ -161,10 +166,10 @@ class GroupConversation:
         self.group = group
         self.members = []
         self.pipe = MessagePipe()
-        self.timer=eTimer()
+        self.timer = eTimer()
         self.timer.timeout.get().append(self.sendOutPipe)
         self.timer.start(100)
-        
+
     def show(self):
         """Displays the GroupConversationWindow."""
 #        raise NotImplementedError("Subclasses must implement this method")
@@ -181,10 +186,10 @@ class GroupConversation:
         self.group.sendGroupMessage(text, None)
         self.pipe.add("%s" % text)
         self.pipe.clearOutText()
-    
+
     def sendOutPipe(self):
         if len(str(self.pipe.getOutText())) > 0:
-         	if (self.pipe.getOutText()=="/QUIT"):
+         	if (self.pipe.getOutText() == "/QUIT"):
          		self.pipe.debug("/quit detected....")
          		self.pipe.clearOutText()
          		self.group.bye()
@@ -257,8 +262,7 @@ class GroupConversation:
             self.members.remove(member)
         self.pipe.add("-!- %s left %s" % (member, self.group.name))
         self.refreshMemberList()
-        
-        
+
     def refreshMemberList(self):
         self.pipe.clearBuddyList()
         self.members.sort(lambda x, y: cmp(x.lower(), y.lower()))
@@ -267,9 +271,11 @@ class GroupConversation:
             self.pipe.buildBuddyList(str(member))
         print("Buddylist of #%s : \n%s" % (self.group.name, self.pipe.showBuddyList()))
         self.pipe.updateBuddyWindow()
-        
+
+
 class ChatUI:
     """A GUI chat client"""
+
     def __init__(self):
         self.conversations = {}      # cache of all direct windows
         self.groupConversations = {} # cache of all group windows
@@ -289,7 +295,7 @@ class ChatUI:
         self.pipe.debug("signing onto %s" % client.accountName)
         self.onlineClients.append(client)
         self.contactsList.registerAccountClient(client)
-        self.helper=client
+        self.helper = client
         self.pipe.debug(" --- %s ---" % self.helper)
         self.pipe.add("signing onto %s" % client)
         self.pipe.add("signing onto %s" % client.accountName)
@@ -310,9 +316,9 @@ class ChatUI:
         @type client: L{Client<interfaces.IClient>}
         """
         self.pipe.debug(" --- %s ---" % self.helper)
-        self.pipe.debug("signing off from %s"  % self.helper.accountName)
+        self.pipe.debug("signing off from %s" % self.helper.accountName)
         self.pipe.add("signing off %s" % helper)
-        self.pipe.add("signing off %s" % helper.accountName)        
+        self.pipe.add("signing off %s" % helper.accountName)
         self.onlineClients.remove(helper)
         self.contactsList.unregisterAccountClient(helper)
 
@@ -322,7 +328,6 @@ class ChatUI:
         """
         self.pipe.debug("contactlist = %s" % self.contactsList)
         return self.contactsList
-
 
     def getConversation(self, person, Class=Conversation, stayHidden=0):
         """For the given person object, returns the conversation window
@@ -344,7 +349,7 @@ class ChatUI:
             conv.show()
         return conv
 
-    def getGroupConversation(self,group,Class=GroupConversation,stayHidden=0):
+    def getGroupConversation(self, group, Class=GroupConversation, stayHidden=0):
         """For the given group object, returns the group conversation window or
         creates and returns a new group conversation window if it doesn't exist
 

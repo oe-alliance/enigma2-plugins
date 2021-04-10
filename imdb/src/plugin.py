@@ -25,7 +25,8 @@ from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
 from Components.MovieList import KNOWN_EXTENSIONS
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
-import os, re
+import os
+import re
 
 from six.moves.urllib.parse import quote_plus
 
@@ -36,7 +37,8 @@ except ImportError as ie:
 	from html import entities as htmlentitydefs
 	iteritems = lambda d: d.items()
 	unichr = chr
-import os, gettext
+import os
+import gettext
 import six
 from six.moves.html_parser import HTMLParser
 
@@ -46,18 +48,21 @@ from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
+
 def transHTML(text):
 	h = HTMLParser()
 	return h.unescape(text)
 
+
 config.plugins.imdb = ConfigSubsection()
-config.plugins.imdb.showinplugins = ConfigYesNo(default = False)
-config.plugins.imdb.showsetupinplugins = ConfigYesNo(default = True)
-config.plugins.imdb.showinmovielist = ConfigYesNo(default = True)
+config.plugins.imdb.showinplugins = ConfigYesNo(default=False)
+config.plugins.imdb.showsetupinplugins = ConfigYesNo(default=True)
+config.plugins.imdb.showinmovielist = ConfigYesNo(default=True)
 config.plugins.imdb.force_english = ConfigYesNo(default=False)
-config.plugins.imdb.ignore_tags = ConfigText(visible_width = 50, fixed_size = False)
-config.plugins.imdb.showlongmenuinfo = ConfigYesNo(default = False)
-config.plugins.imdb.showepisodeinfo = ConfigYesNo(default = False)
+config.plugins.imdb.ignore_tags = ConfigText(visible_width=50, fixed_size=False)
+config.plugins.imdb.showlongmenuinfo = ConfigYesNo(default=False)
+config.plugins.imdb.showepisodeinfo = ConfigYesNo(default=False)
+
 
 def quoteEventName(eventName, safe="/()" + ''.join(map(chr, list(range(192, 255))))):
 	# BBC uses '\x86' markers in program names, remove them
@@ -67,6 +72,7 @@ def quoteEventName(eventName, safe="/()" + ''.join(map(chr, list(range(192, 255)
 		text = eventName
 	# IMDb doesn't seem to like urlencoded characters at all, hence the big "safe" list
 	return quote_plus(text, safe='+')
+
 
 class IMDBChannelSelection(SimpleChannelSelection):
 	def __init__(self, session):
@@ -92,15 +98,16 @@ class IMDBChannelSelection(SimpleChannelSelection):
 				IMDBEPGSelection,
 				ref,
 				eventid=event_id,
-				openPlugin = False
+				openPlugin=False
 			)
 
-	def epgClosed(self, ret = None):
+	def epgClosed(self, ret=None):
 		if ret:
 			self.close(ret)
 
+
 class IMDBEPGSelection(EPGSelection):
-	def __init__(self, session, ref, eventid=None, openPlugin = True):
+	def __init__(self, session, ref, eventid=None, openPlugin=True):
 		EPGSelection.__init__(self, session, ref.toString(), eventid=eventid)
 		self.skinName = "EPGSelection"
 		self["key_green"].setText(_("Lookup"))
@@ -135,6 +142,7 @@ class IMDBEPGSelection(EPGSelection):
 		super(IMDBEPGSelection, self).onSelectionChanged()
 		self["key_green"].setText(_("Lookup"))
 
+
 class IMDB(Screen, HelpableScreen):
 	skin = """
 		<screen name="IMDB" position="center,center" size="600,420" title="Internet Movie Database Details Plugin" >
@@ -167,7 +175,7 @@ class IMDB(Screen, HelpableScreen):
 		NBSP = NBSP.encode("utf8")
 		RAQUO = RAQUO.encode("utf8")
 		HELLIP = HELLIP.encode("utf8")
-		
+
 	def __init__(self, session, eventName, callbackNeeded=False, save=False, savepath=None, localpath=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
@@ -202,6 +210,7 @@ class IMDB(Screen, HelpableScreen):
 
 		self["title"] = StaticText(_("The Internet Movie Database"))
 		# map new source -> old component
+
 		def setText(txt):
 			StaticText.setText(self["title"], txt)
 			self["titellabel"].setText(txt)
@@ -271,7 +280,6 @@ class IMDB(Screen, HelpableScreen):
 		else:
 			self.close()
 
-
 	def dictionary_init(self):
 		syslang = language.getLanguage()
 		if 1: #"de" not in syslang or config.plugins.imdb.force_english.value is True:
@@ -283,8 +291,7 @@ class IMDB(Screen, HelpableScreen):
 			'(?:.*?<h4 class="inline">\s*(?P<g_writer>Drehbuch|Writers?):\s*</h4>(?P<writer>.*?)</div>)?'
 			'(?:.*?<h4 class="inline">\s*(?P<g_country>Land|Country):\s*</h4>.*?(?P<country>.*?)</div>)?'
 			'(?:.*?<h4 class="inline">\s*(?P<g_premiere>Premiere|Release Date).*?</h4>\s+(?P<premiere>.*?)\s*<span)?'
-			'(?:.*?<h4 class="inline">\s*(?P<g_alternativ>Auch bekannt als|Also Known As):\s*</h4>\s*(?P<alternativ>.*?)\s*<span)?'
-			, re.DOTALL)
+			'(?:.*?<h4 class="inline">\s*(?P<g_alternativ>Auch bekannt als|Also Known As):\s*</h4>\s*(?P<alternativ>.*?)\s*<span)?', re.DOTALL)
 
 			self.awardsmask = re.compile('<span itemprop="awards">\s*(?:<b>)?\s*(?P<awards>.+?)\s*(?:</b>)?\s*</span>', re.DOTALL)
 
@@ -305,8 +312,7 @@ class IMDB(Screen, HelpableScreen):
 			'(?:.*?<h4 class="inline">(?P<g_runtime>L\S*?nge|Runtime):</h4>\s*(?P<runtime>.+?)</div>)?'
 			'(?:.*?<h4 class="inline">(?P<g_sound>Tonverfahren|Sound Mix):</h4>\s*(?P<sound>.+?)</div>)?'
 			'(?:.*?<h4 class="inline">(?P<g_color>Farbe|Color):</h4>\s*(?P<color>.+?)</div>)?'
-			'(?:.*?<h4 class="inline">(?P<g_aspect>Seitenverh\S*?ltnis|Aspect Ratio):</h4>\s*(?P<aspect>.+?)(?:Mehr|See more</a>|</div>))?'
-			, re.DOTALL)
+			'(?:.*?<h4 class="inline">(?P<g_aspect>Seitenverh\S*?ltnis|Aspect Ratio):</h4>\s*(?P<aspect>.+?)(?:Mehr|See more</a>|</div>))?', re.DOTALL)
 
 			self.genreblockmask = re.compile('<h4 class="inline">Genres?:</h4>\s*?(.*?)\s+?(?:Mehr|See more|</p|<a class|</div>)', re.DOTALL)
 			self.ratingmask = re.compile('<div class="ratingValue">.*?<span itemprop="ratingValue">(?P<rating>.*?)</span>', re.DOTALL)
@@ -346,7 +352,7 @@ class IMDB(Screen, HelpableScreen):
 			self["extralabel"].pageDown()
 
 	def showMenu(self):
-		if ( self.Page == 1 or self.Page == 2 ) and self.resultlist:
+		if (self.Page == 1 or self.Page == 2) and self.resultlist:
 			self["menu"].show()
 			self["stars"].hide()
 			self["starsbg"].hide()
@@ -438,10 +444,10 @@ class IMDB(Screen, HelpableScreen):
 			self.menuCallback,
 			ChoiceBox,
 			title=_("IMDb Menu"),
-			list = list,
+			list=list,
 		)
 
-	def menuCallback(self, ret = None):
+	def menuCallback(self, ret=None):
 		ret and ret[1]()
 
 	def saveHtmlDetails(self):
@@ -592,8 +598,8 @@ class IMDB(Screen, HelpableScreen):
 		self.session.openWithCallback(
 			self.gotSearchString,
 			VirtualKeyBoard,
-			title = _("Enter text to search for"),
-			text = self.eventName
+			title=_("Enter text to search for"),
+			text=self.eventName
 		)
 
 	def openChannelSelection(self):
@@ -602,7 +608,7 @@ class IMDB(Screen, HelpableScreen):
 			IMDBChannelSelection
 		)
 
-	def gotSearchString(self, ret = None):
+	def gotSearchString(self, ret=None):
 		if ret:
 			self.eventName = ret
 			self.Page = 0
@@ -731,7 +737,7 @@ class IMDB(Screen, HelpableScreen):
 			else:
 				splitpos = self.eventName.find('(')
 				if splitpos > 0 and self.eventName.endswith(')'):
-					self.eventName = self.eventName[splitpos+1:-1]
+					self.eventName = self.eventName[splitpos + 1:-1]
 					self["statusbar"].setText(_("Re-Query IMDb: %s...") % (self.eventName))
 					# event_quoted = quoteEventName(self.eventName)
 					localfile = "/tmp/imdbquery.html"
@@ -781,12 +787,12 @@ class IMDB(Screen, HelpableScreen):
 
 			for category in ("director", "creator", "writer", "seasons"):
 				if self.generalinfos.group(category):
-					Detailstext += addnewline + self.generalinfos.group('g_'+category) + ": " + ' '.join(self.htmltags.sub('', self.generalinfos.group(category)).replace("\n", ' ').replace(self.NBSP, ' ').replace(self.RAQUO, '').replace(self.HELLIP + ' See all', '...').split())
+					Detailstext += addnewline + self.generalinfos.group('g_' + category) + ": " + ' '.join(self.htmltags.sub('', self.generalinfos.group(category)).replace("\n", ' ').replace(self.NBSP, ' ').replace(self.RAQUO, '').replace(self.HELLIP + ' See all', '...').split())
 					addnewline = "\n"
 
 			for category in ("premiere", "country", "alternativ"):
 				if self.generalinfos.group(category):
-					Detailstext += addnewline + self.generalinfos.group('g_'+category) + ": " + ' '.join(self.htmltags.sub('', self.generalinfos.group(category).replace('\n', ' ')).split())
+					Detailstext += addnewline + self.generalinfos.group('g_' + category) + ": " + ' '.join(self.htmltags.sub('', self.generalinfos.group(category).replace('\n', ' ')).split())
 					addnewline = "\n"
 
 			rating = self.ratingmask.search(self.inhtml)
@@ -795,7 +801,7 @@ class IMDB(Screen, HelpableScreen):
 				rating = rating.group("rating")
 				if rating != '<span id="voteuser"></span>':
 					Ratingtext = _("User Rating") + ": " + rating + " / 10"
-					self.ratingstars = int(10*round(float(rating.replace(',', '.')), 1))
+					self.ratingstars = int(10 * round(float(rating.replace(',', '.')), 1))
 					self["stars"].show()
 					self["stars"].setValue(self.ratingstars)
 					self["starsbg"].show()
@@ -843,7 +849,7 @@ class IMDB(Screen, HelpableScreen):
 				if not Extratext:
 					Extratext = _("Extra Info") + "\n"
 
-				addspace = { "outline", "synopsis", "tagline", "runtime", "locations", "trivia", "goofs", "quotes", "connections" }
+				addspace = {"outline", "synopsis", "tagline", "runtime", "locations", "trivia", "goofs", "quotes", "connections"}
 				extraspace = ''
 
 				for category in ("outline", "synopsis", "tagline", "keywords", "cert", "runtime", "language", "color", "aspect", "sound", "locations", "company", "trivia", "goofs", "quotes", "connections"):
@@ -856,11 +862,11 @@ class IMDB(Screen, HelpableScreen):
 							if "Add a Plot" in extrainfos.group(category):
 								continue
 							Extratext += _("Plot Outline")
-						elif extrainfos.group('g_'+category):
-							Extratext += extrainfos.group('g_'+category)
+						elif extrainfos.group('g_' + category):
+							Extratext += extrainfos.group('g_' + category)
 						else:
 							Extratext += _("Unknown category")
-						Extratext += sep  + ' '.join(self.htmltags.sub('', extrainfos.group(category).replace("\n", ' ').replace("<br>", '\n').replace("<br />", '\n')).replace(' |' + self.NBSP, '').replace(self.NBSP, ' ').split()) + "\n"
+						Extratext += sep + ' '.join(self.htmltags.sub('', extrainfos.group(category).replace("\n", ' ').replace("<br>", '\n').replace("<br />", '\n')).replace(' |' + self.NBSP, '').replace(self.NBSP, ' ').split()) + "\n"
 						extraspace = ''
 				if extrainfos.group("g_comments"):
 					Extratext += "\n" + extrainfos.group("g_comments") + ":\n" + extrainfos.group("commenttitle") + " [" + ' '.join(self.htmltags.sub('', extrainfos.group("commenter")).split()) + "]: " + self.htmltags.sub('', extrainfos.group("comment").replace("\n", ' ').replace(self.NBSP, ' ').replace("<br>", '\n').replace("<br/>", '\n').replace("<br />", '\n')) + "\n"
@@ -898,6 +904,7 @@ class IMDB(Screen, HelpableScreen):
 	def createSummary(self):
 		return IMDbLCDScreen
 
+
 class IMDbLCDScreen(Screen):
 	skin = """
 	<screen position="0,0" size="132,64" title="IMDB Plugin">
@@ -908,6 +915,7 @@ class IMDbLCDScreen(Screen):
 	def __init__(self, session, parent):
 		Screen.__init__(self, session, parent)
 		self["headline"] = Label(_("IMDb Plugin"))
+
 
 class IMDbSetup(Screen, ConfigListScreen):
 	skin = """<screen name="EPGSearchSetup" position="center,center" size="565,370">
@@ -922,7 +930,7 @@ class IMDbSetup(Screen, ConfigListScreen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = ["Setup" ]
+		self.skinName = ["Setup"]
 
 		self['footnote'] = Label(_("* = Restart Required"))
 		self["HelpWindow"] = Pixmap()
@@ -952,7 +960,7 @@ class IMDbSetup(Screen, ConfigListScreen):
 		self["VirtualKB"].setEnabled(False)
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 		self.createSetup()
 		if not self.handleInputHelpers in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.handleInputHelpers)
@@ -1007,9 +1015,9 @@ class IMDbSetup(Screen, ConfigListScreen):
 		if isinstance(self["config"].getCurrent()[1], ConfigText):
 			if self["config"].getCurrent()[1].help_window.instance is not None:
 				self["config"].getCurrent()[1].help_window.hide()
-		self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title = self["config"].getCurrent()[0], text = self["config"].getCurrent()[1].getValue())
+		self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title=self["config"].getCurrent()[0], text=self["config"].getCurrent()[1].getValue())
 
-	def VirtualKeyBoardCallback(self, callback = None):
+	def VirtualKeyBoardCallback(self, callback=None):
 		if callback is not None and len(callback):
 			self["config"].getCurrent()[1].setValue(callback)
 			self["config"].invalidate(self["config"].getCurrent())
@@ -1041,7 +1049,6 @@ class IMDbSetup(Screen, ConfigListScreen):
 		from Screens.Setup import SetupSummary
 		return SetupSummary
 
-
 	def keySave(self):
 		self.saveAll()
 
@@ -1058,6 +1065,7 @@ class IMDbSetup(Screen, ConfigListScreen):
 		from Screens.Setup import SetupSummary
 		return SetupSummary
 
+
 def eventinfo(session, eventName="", **kwargs):
 	if not eventName:
 		s = session.nav.getCurrentService()
@@ -1067,11 +1075,14 @@ def eventinfo(session, eventName="", **kwargs):
 			eventName = event and event.getEventName() or ''
 	session.open(IMDB, eventName)
 
+
 def main(session, eventName="", **kwargs):
 	session.open(IMDB, eventName)
 
+
 def setup(session, **kwargs):
 	session.open(IMDbSetup)
+
 
 def movielistSearch(session, serviceref, **kwargs):
 	serviceHandler = eServiceCenter.getInstance()
@@ -1081,10 +1092,11 @@ def movielistSearch(session, serviceref, **kwargs):
 	if ext in KNOWN_EXTENSIONS:
 		if six.PY2:
 			_root = root.decode("utf8")
-		eventName = re.sub("[\W_]+", ' ', _root, 0, re.LOCALE|re.UNICODE)
+		eventName = re.sub("[\W_]+", ' ', _root, 0, re.LOCALE | re.UNICODE)
 		if six.PY2:
 			eventName = eventName.encode("utf8")
 	session.open(IMDB, eventName)
+
 
 pluginlist = (
 	(
@@ -1120,6 +1132,7 @@ pluginlist = (
 		)
 	),
 )
+
 
 def Plugins(**kwargs):
 	l = [PluginDescriptor(name=_("IMDb search") + "...",

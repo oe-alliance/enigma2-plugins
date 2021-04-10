@@ -21,6 +21,7 @@ from Components.Label import Label
 from Components.Button import Button
 from Components.FileList import FileList
 
+
 class dirSelectDlg(Screen): # 90,140
 	skin = """
 		<screen name="dirSelectDlg" position="center,center" size="560,360">
@@ -45,7 +46,7 @@ class dirSelectDlg(Screen): # 90,140
 		self["ButtonRedtext"] = Label(_("Close"))
 		self["ButtonOK"] = Pixmap()
 		self["ButtonOKtext"] = Label(_("Enter directory"))
-		self["filelist"] = FileList(currDir, showDirectories = True, showFiles = showFilesBoolean, showMountpoints = True, useServiceRef = False)
+		self["filelist"] = FileList(currDir, showDirectories=True, showFiles=showFilesBoolean, showMountpoints=True, useServiceRef=False)
 
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions"],
 		{

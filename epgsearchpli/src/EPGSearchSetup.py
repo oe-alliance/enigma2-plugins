@@ -1,4 +1,4 @@
-# for localized messages  	 
+# for localized messages
 from . import _
 
 # GUI (Screens)
@@ -14,6 +14,7 @@ from Components.Sources.StaticText import StaticText
 
 # Configuration
 from Components.config import config, getConfigListEntry
+
 
 class EPGSearchSetup(Screen, ConfigListScreen):
 	skin = """<screen name="EPGSearchSetup" position="center,center" size="585,420">
@@ -48,11 +49,12 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 				getConfigListEntry(_("Search only bouquets"), config.plugins.epgsearch.bouquet, _("If this setting is enabled, searching EPG in only services in user bouquets.")),
 				getConfigListEntry(_("Display name service as in bouquets"), config.plugins.epgsearch.favorit_name, _("If 'Search only bouquets' is enabled, show service name as in bouquets for renamed services.")),
 				getConfigListEntry(_("Search type for filter"), config.plugins.epgsearch.filter_type, _("Select type for filter search. Press button P +/- for show/hide filter in description after search.")),
-				
+
 			],
-			session = session,
-			on_change = self.changed
+			session=session,
+			on_change=self.changed
 		)
+
 		def selectionChanged():
 			if self["config"].current:
 				self["config"].current[1].onDeselect(self.session)

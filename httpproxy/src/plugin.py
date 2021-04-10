@@ -19,10 +19,10 @@ from twisted.internet import reactor
 
 ###############################################################################
 config.plugins.httpproxy = ConfigSubsection()
-config.plugins.httpproxy.enable = ConfigYesNo(default = True)
-config.plugins.httpproxy.port = ConfigInteger(8080, limits = (1, 65536))
-config.plugins.httpproxy.filter_hosts = ConfigYesNo(default = False)
-config.plugins.httpproxy.filter_uri = ConfigYesNo(default = False)
+config.plugins.httpproxy.enable = ConfigYesNo(default=True)
+config.plugins.httpproxy.port = ConfigInteger(8080, limits=(1, 65536))
+config.plugins.httpproxy.filter_hosts = ConfigYesNo(default=False)
+config.plugins.httpproxy.filter_uri = ConfigYesNo(default=False)
 
 global ALLOWED_CLIENTS, LOG_TO_STDOUT, URI_BLACKLIST
 LOG_TO_STDOUT = False
@@ -39,7 +39,7 @@ class HTTPProxyConfigScreen(ConfigListScreen, Screen):
         <widget name="buttongreen" position="120,360" size="100,40" backgroundColor="green" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/>
         </screen>"""
 
-    def __init__(self, session, args = 0):
+    def __init__(self, session, args=0):
         self.session = session
         Screen.__init__(self, session)
         self.list = []
@@ -74,6 +74,7 @@ class HTTPProxyConfigScreen(ConfigListScreen, Screen):
 
 ###############################################################################
 
+
 class myProxyRequest(proxy.ProxyRequest):
     RESPONSE_CLIENTED_DENIED = "this client it not allowed to connect"
     ports = {'http': 80}
@@ -103,7 +104,7 @@ class myProxyRequest(proxy.ProxyRequest):
         self.transport.write("HTTP/1.0 200 blocked\r\n")
         self.transport.write("Content-Type: text/html\r\n")
         self.transport.write("\r\n")
-        self.transport.write('<H1>%s</H1>'%message)
+        self.transport.write('<H1>%s</H1>' % message)
         self.transport.stopProducing()
 
     def checkClientAccess(self, client):
@@ -122,18 +123,23 @@ class myProxyRequest(proxy.ProxyRequest):
                 ''' now i am quite careful with logging webstuff with E2 '''
                 pass
 
+
 class ProxyProtocol(proxy.Proxy):
     requestFactory = myProxyRequest
+
 
 class ProxyFactory(http.HTTPFactory):
         protocol = ProxyProtocol
 
 ###############################################################################
+
+
 def main(session, **kwargs):
     """ open config screen """
     session.open(HTTPProxyConfigScreen)
 
-def autostart(reason,**kwargs):
+
+def autostart(reason, **kwargs):
     """ start proxy in background """
     if reason is True and config.plugins.httpproxy.enable.value is True:
         try:
@@ -150,7 +156,6 @@ def autostart(reason,**kwargs):
 
 def Plugins(**kwargs):
   return [
-          PluginDescriptor(name="HTTP Proxy", description="use your receiver as Web Proxy", where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main),
-          PluginDescriptor(where = [PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc = autostart)
+          PluginDescriptor(name="HTTP Proxy", description="use your receiver as Web Proxy", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+          PluginDescriptor(where=[PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc=autostart)
           ]
-

@@ -1,5 +1,6 @@
 from Components.Converter.Converter import Converter
 
+
 class HddInfo(Converter):
 	MODEL = 0
 	CAPACITY = 1
@@ -32,4 +33,3 @@ class HddInfo(Converter):
 		return _("N/A")
 
 	text = property(getText)
-

@@ -31,6 +31,7 @@ afterevent = {
 	AFTEREVENT.AUTO: _("auto")
 }
 
+
 class AutoTimerImportSelector(Screen):
 	def __init__(self, session, autotimer):
 		Screen.__init__(self, session)
@@ -67,7 +68,7 @@ class AutoTimerImportSelector(Screen):
 
 		l.extend([(timer, False) for timer in self.session.nav.RecordTimer.timer_list])
 		l.extend([(timer, True) for timer in self.session.nav.RecordTimer.processed_timers])
-		l.sort(key = lambda x: x[0].begin)
+		l.sort(key=lambda x: x[0].begin)
 
 	def importerClosed(self, ret):
 		ret = ret and ret[0]
@@ -76,7 +77,7 @@ class AutoTimerImportSelector(Screen):
 		self.close(ret)
 
 	def openImporter(self):
-		cur=self["timerlist"].getCurrent()
+		cur = self["timerlist"].getCurrent()
 		if cur:
 			self.session.openWithCallback(
 				self.importerClosed,
@@ -96,9 +97,12 @@ class AutoTimerImportSelector(Screen):
 	def cancel(self):
 		self.close(None)
 
+
 HD = False
 if getDesktop(0).size().width() >= 1280:
 	HD = True
+
+
 class AutoTimerImporter(Screen):
 	"""Import AutoTimer from Timer"""
 	if HD:
@@ -301,9 +305,9 @@ class AutoTimerImporter(Screen):
 					# strip all after last :
 					pos = value.rfind(':')
 					if pos != -1:
-						if value[pos-1] == ':':
+						if value[pos - 1] == ':':
 							pos -= 1
-						value = value[:pos+1]
+						value = value[:pos + 1]
 
 				autotimer.services = [value]
 			elif item[2] == 4: # AfterEvent
@@ -330,11 +334,10 @@ class AutoTimerImporter(Screen):
 			self.session.openWithCallback(
 					self.gotCustomMatch,
 					InputBox,
-					title = _("Please provide a Text to match")
+					title=_("Please provide a Text to match")
 			)
 		else:
 			self.close((
 				autotimer,
 				self.session
 			))
-

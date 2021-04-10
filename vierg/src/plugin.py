@@ -24,16 +24,18 @@ import random
 from six.moves import range
 
 #good old C function :D
+
+
 def rand():
 	return random.randint(0, 32767)
 
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	session.open(vierg)
 
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(name="Vier Gewinnt", description=_("Connect Four Game"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon="vierg.png", fnc=main)]
+	return [PluginDescriptor(name="Vier Gewinnt", description=_("Connect Four Game"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="vierg.png", fnc=main)]
 
 
 # mainwindow...
@@ -43,8 +45,8 @@ class vierg(Screen):
 		self.fsize = 50
 		self.bsize = 4
 
-		self.cw = 7*self.fsize + 2*self.bsize
-		self.ch = 7*self.fsize + 2*self.bsize
+		self.cw = 7 * self.fsize + 2 * self.bsize
+		self.ch = 7 * self.fsize + 2 * self.bsize
 
 		layout = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/vierg/layout.png")
 
@@ -62,11 +64,11 @@ class vierg(Screen):
 
 		self.skin = vierg.skin
 		Screen.__init__(self, session)
-		self["Canvas"]    = CanvasSource()
-		self["message"]   = Label(_(" "))
-		self["key_red"]   = Button(_("quit game"))
+		self["Canvas"] = CanvasSource()
+		self["message"] = Label(_(" "))
+		self["key_red"] = Button(_("quit game"))
 		self["key_green"] = Button(_("new game"))
-		
+
 		self["actions"] = ActionMap(["WizardActions", "ColorActions", "SetupActions"],
 		{
 			"ok": self.ok_pressed,
@@ -78,31 +80,33 @@ class vierg(Screen):
 		})
 
 		self.blue = 0x0000ff
-		self.red  = 0xff0000
-		self.bg1  = 0x373737
-		self.bg0  = 0x062748
+		self.red = 0xff0000
+		self.bg1 = 0x373737
+		self.bg0 = 0x062748
 
 		self.aniTimer = eTimer()
 		self.aniTimer.callback.append(self.aniTimerHandler)
 
 		self.onLayoutFinish.append(self.new_game)
 
-
-	def drawRect(self, x, y, color = "bg1"):
-		if color == "blue": bg = self.blue
-		elif color == "red": bg = self.red
-		elif color == "bg0": bg = self.bg0
-		else: bg = self.bg1
-		self["Canvas"].fill(2*self.bsize + x, 2*self.bsize + y, self.csize, self.csize, bg)
+	def drawRect(self, x, y, color="bg1"):
+		if color == "blue":
+			bg = self.blue
+		elif color == "red":
+			bg = self.red
+		elif color == "bg0":
+			bg = self.bg0
+		else:
+			bg = self.bg1
+		self["Canvas"].fill(2 * self.bsize + x, 2 * self.bsize + y, self.csize, self.csize, bg)
 		self["Canvas"].flush()
-
 
 	def gameIsOver(self, mask):
 		k = self.testGameOver(mask)
 		if k == 0:
 			return False
 		self.aniFall()
-		if  k == 2: # patt
+		if k == 2: # patt
 			self["message"].setText(_("good game!"))
 		elif mask == 1:
 			self["message"].setText(_("You won!"))
@@ -111,10 +115,9 @@ class vierg(Screen):
 		self.gameover = True
 		return True
 
-
 	def ok_pressed(self):
 		if not self.gameover and not self.locked:
-			if self.maze[self.ipos+35]:
+			if self.maze[self.ipos + 35]:
 				return
 
 			self.aniList = []
@@ -130,25 +133,21 @@ class vierg(Screen):
 				return
 			self.aniFall()
 
-
 	def left_pressed(self):
 		if self.ipos > 0 and not self.gameover and not self.locked:
-			self.drawRect(self.ipos*self.fsize, 0, "bg0")
+			self.drawRect(self.ipos * self.fsize, 0, "bg0")
 			self.ipos -= 1
-			self.drawRect(self.ipos*self.fsize, 0, "red")
-
+			self.drawRect(self.ipos * self.fsize, 0, "red")
 
 	def right_pressed(self):
 		if self.ipos < 6 and not self.gameover and not self.locked:
-			self.drawRect(self.ipos*self.fsize, 0, "bg0")
+			self.drawRect(self.ipos * self.fsize, 0, "bg0")
 			self.ipos += 1
-			self.drawRect(self.ipos*self.fsize, 0, "red")
-
+			self.drawRect(self.ipos * self.fsize, 0, "red")
 
 	def quit(self):
 		self.aniTimer.stop()
 		self.close()
-
 
 	def new_game(self):
 		self["message"].setText("")
@@ -160,45 +159,41 @@ class vierg(Screen):
 			self.maze.append(0)
 
 		self["Canvas"].fill(0, 0, self.cw, self.ch, self.bg0)
-		self["Canvas"].fill(0, self.fsize, self.cw, self.ch-self.fsize, self.bg1)
+		self["Canvas"].fill(0, self.fsize, self.cw, self.ch - self.fsize, self.bg1)
 		self["Canvas"].flush()
 
 		self.ipos = 3
-		self.drawRect(self.ipos*self.fsize, 0, "red")
-
+		self.drawRect(self.ipos * self.fsize, 0, "red")
 
 	def aniTimerHandler(self):
 		self.drawRect(self.aniList[self.aniCnt][0], self.aniList[self.aniCnt][1], self.aniList[self.aniCnt][2])
-		if self.aniCnt < len(self.aniList)-1:
+		if self.aniCnt < len(self.aniList) - 1:
 			self.aniCnt += 1
 		else:
 			self.aniTimer.stop()
 			self.locked = False
 
-
-	def aniFall(self):	
+	def aniFall(self):
 		self.aniCnt = 0
 		self.aniTimer.start(100)
 
-
-	def fall(self, x, dr, v ):
+	def fall(self, x, dr, v):
 		for y in range(6):
-			if self.maze[(5-y)*7 + x]:
+			if self.maze[(5 - y) * 7 + x]:
 				break
 			if y:
-				self.aniList.append((x*self.fsize, y*self.fsize, "bg1"))
-				self.maze[(6-y)*7 + x] = 0;
+				self.aniList.append((x * self.fsize, y * self.fsize, "bg1"))
+				self.maze[(6 - y) * 7 + x] = 0
 			else:
-				self.aniList.append((x*self.fsize, y*self.fsize, "bg0"))
-			self.maze[(5-y)*7 + x] = v
-			self.aniList.append((x*self.fsize, y*self.fsize + self.fsize, dr))
-		if v==2:self.aniList.append((self.ipos*self.fsize, 0, "red"))
-
+				self.aniList.append((x * self.fsize, y * self.fsize, "bg0"))
+			self.maze[(5 - y) * 7 + x] = v
+			self.aniList.append((x * self.fsize, y * self.fsize + self.fsize, dr))
+		if v == 2:
+			self.aniList.append((self.ipos * self.fsize, 0, "red"))
 
 	def cPlay(self, x):
-		self.aniList.append((x*self.fsize, 0, "blue"))
+		self.aniList.append((x * self.fsize, 0, "blue"))
 		self.fall(x, "blue", 2)
-
 
 	def vFall(self, x, v):
 		idx = x
@@ -208,7 +203,6 @@ class vierg(Screen):
 				return idx
 			idx += 7
 		return -1
-
 
 	def testGameOver(self, mask):
 		idx = 0
@@ -220,14 +214,14 @@ class vierg(Screen):
 						if self.maze[idx + 1] & mask and self.maze[idx + 2] & mask and self.maze[idx + 3] & mask:
 							return 1 # game over
 						# diagonale nach rechts testen
-						if self.maze[idx+ 8 ] & mask and self.maze[idx+ 16] & mask and self.maze[idx+ 24] & mask:
+						if self.maze[idx + 8] & mask and self.maze[idx + 16] & mask and self.maze[idx + 24] & mask:
 							return 1 # game over
 					if (x > 2):
 						# diagonale nach links testen
-						if self.maze[idx + 6 ] & mask and self.maze[idx + 12] & mask and self.maze[idx + 18] & mask:
+						if self.maze[idx + 6] & mask and self.maze[idx + 12] & mask and self.maze[idx + 18] & mask:
 							return 1 # game over
 					# nach oben testen
-					if self.maze[idx + 7 ] & mask and self.maze[idx + 14] & mask and self.maze[idx + 21] & mask:
+					if self.maze[idx + 7] & mask and self.maze[idx + 14] & mask and self.maze[idx + 21] & mask:
 						return 1 # game over
 				idx += 1
 
@@ -248,7 +242,6 @@ class vierg(Screen):
 				return 0
 			idx += 1
 		return 2
-
 
 	def myPlay(self):
 		tst = []
@@ -273,7 +266,7 @@ class vierg(Screen):
 					if self.testGameOver(1): # fault - this field is ugly
 						tst[x] -= 50
 					else:
-						tst[x] +=1
+						tst[x] += 1
 					self.maze[k] = 0 # remove virt. chip
 				else:
 					tst[x] += 1
@@ -283,7 +276,7 @@ class vierg(Screen):
 
 		# test: player sieg in 1-2 zuegen
 		for x in range(7):
-			idx=self.vFall(x, 5)
+			idx = self.vFall(x, 5)
 			if idx != -1:
 				if self.testGameOver(1): # great ! - choose it
 					tst[x] += 50
@@ -304,8 +297,8 @@ class vierg(Screen):
 				max = x
 		idx = 0
 		for x in range(7):
-			if tst[x] == tst[max] and not self.maze[35+x]:
-				vidx[idx] = x;
+			if tst[x] == tst[max] and not self.maze[35 + x]:
+				vidx[idx] = x
 				idx += 1
 
 		if not idx: # never reached
@@ -329,10 +322,10 @@ class vierg(Screen):
 		max = 0
 		for x in range(7):
 			if tst[x] > tst[max]:
-				max=x
-		idx=0
+				max = x
+		idx = 0
 		for x in range(7):
-			if tst[x] == tst[max] and not self.maze[35+x]:
+			if tst[x] == tst[max] and not self.maze[35 + x]:
 				vidx[idx] = x
 				idx += 1
 
@@ -341,4 +334,3 @@ class vierg(Screen):
 
 		idx = rand() % idx
 		self.cPlay(vidx[idx])
-

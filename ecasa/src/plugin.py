@@ -3,9 +3,11 @@ from __future__ import absolute_import
 
 #pragma mark - Plugin
 
+
 def main(session, *args, **kwargs):
 	from . import EcasaGui
 	session.open(EcasaGui.EcasaOverview)
+
 
 def Plugins(**kwargs):
 	from Plugins.Plugin import PluginDescriptor
@@ -18,6 +20,7 @@ def Plugins(**kwargs):
 			needsRestart=False,
 		),
 	]
+
 
 if __name__ == '__main__':
 	import sys

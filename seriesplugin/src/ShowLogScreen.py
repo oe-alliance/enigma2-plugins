@@ -1,5 +1,7 @@
 ﻿# -*- coding: utf-8 -*-
-import os, sys, traceback
+import os
+import sys
+import traceback
 
 
 # Config
@@ -24,20 +26,20 @@ class ShowLogScreen(Screen):
 		title = ""
 		text = ""
 		self.logFile = logFile
-		
+
 		self["text"] = ScrollLabel("")
-		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ChannelSelectBaseActions"], 
+		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ChannelSelectBaseActions"],
 		{
-			"ok":    self.cancel,
-			"back":  self.cancel,
-			"up":    self["text"].pageUp,
-			"down":  self["text"].pageDown,
-			"left":  self["text"].pageUp,
+			"ok": self.cancel,
+			"back": self.cancel,
+			"up": self["text"].pageUp,
+			"down": self["text"].pageDown,
+			"left": self["text"].pageUp,
 			"right": self["text"].pageDown,
-			"nextBouquet":	self["text"].lastPage,
-			"prevBouquet":	self.firstPage,
+			"nextBouquet": self["text"].lastPage,
+			"prevBouquet": self.firstPage,
 		}, -1)
-		
+
 		self.onLayoutFinish.append(self.readLog)
 
 	def cancel(self):
@@ -54,14 +56,14 @@ class ShowLogScreen(Screen):
 		self["text"].updateScrollbar()
 
 	def readLog(self):
-		
+
 		# Set title and text
 		title = _("Show Log file")
 		text = _("Reading log file...\n") + self.logFile + _("\nCancel?")
-		
+
 		self.setTitle(title)
 		self.setText(text)
-		
+
 		if not fileExists(self.logFile):
 			self.setText(_("No log file found"))
 
@@ -69,7 +71,7 @@ class ShowLogScreen(Screen):
 			file = open(self.logFile, "r")
 			text = file.read()
 			file.close()
-			
+
 			try:
 				self.setText(text)
 				self["text"].lastPage()

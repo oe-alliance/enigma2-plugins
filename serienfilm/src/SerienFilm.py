@@ -17,14 +17,13 @@ from Screens.MessageBox import MessageBox
 SerienFilmVersion = "v1.1"
 
 
-
 class SerienFilmCfg(Screen):
 	skin = """
 		<screen position="130,150" size="500,200" title="SerienFilm setup" >
 			<widget name="myLabel" position="10,20" size="480,160" font="Regular;20"/>
 		</screen>"""
 
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		print("[SF-Plugin] SerienFilmCfg init")
 		self.session = session
 		Screen.__init__(self, session)
@@ -38,7 +37,7 @@ class SerienFilmCfg(Screen):
 
 class EpiSepCfg(Screen):
 
-	def __init__(self, session, separator = None):
+	def __init__(self, session, separator=None):
 
 		skincontent = """
 			<widget name="sfLabel" position="10,20" size="590,220" font="Regular;20"/>
@@ -67,7 +66,7 @@ class EpiSepCfg(Screen):
 		self.secondlevel[0] = self.secondformat % (self.currentsep, len(self.currentsep))
 
 		self.level = 1
-		
+
 		self["sfLabel"] = Label()
 		self["sfRedBtn"] = Label()
 		self["sfGreenBtn"] = Label()
@@ -77,7 +76,7 @@ class EpiSepCfg(Screen):
 		{
 			"ok": self.gotOk,
 			"cancel": self.gotCancel,
-			"red":  self.gotCancel,
+			"red": self.gotCancel,
 			"green": self.gotGreen,
 			"yellow": self.gotEdit,
 			"blue": self.gotBlue
@@ -88,7 +87,7 @@ class EpiSepCfg(Screen):
 		if self.newsep == self.currentsep:
 			self.exitConfirmed(True)
 		else:
-			self.session.openWithCallback(self.exitConfirmed, MessageBox, _("Really close without saving settings?"))   
+			self.session.openWithCallback(self.exitConfirmed, MessageBox, _("Really close without saving settings?"))
 
 	def exitConfirmed(self, confirmed):
 		if confirmed:
@@ -101,26 +100,26 @@ class EpiSepCfg(Screen):
 				self.sfsetLabel()
 
 	def gotOk(self):
-		if self.level ==1:
+		if self.level == 1:
 			self.close(self.newsep)
 		else:
 			self.gotGreen()	# save and back to level 1
 
 	def gotEdit(self):
 		if self.level == 1:
-			self.level = 2;
+			self.level = 2
 			self.sfsetLabel()
 		else:
 			self.session.openWithCallback(self.setSeparator,		# edit serarator
 				InputBox,
-				windowTitle = _x("Edit title:episode separator"),
-				title = _x("Key 0 provides special chracters, key 1 blank"),
-				text = self.newsep,
+				windowTitle=_x("Edit title:episode separator"),
+				title=_x("Key 0 provides special chracters, key 1 blank"),
+				text=self.newsep,
 				maxSize=True,
 				type=Input.TEXT)
 
 	def gotGreen(self):
-		if self.level ==1:
+		if self.level == 1:
 			self.currentsep = self.newsep = self.defaultsep	# set default
 		else:
 			self.currentsep = self.newsep	# save
@@ -141,9 +140,8 @@ class EpiSepCfg(Screen):
 				InputBox,
 				title=_x("Number of characters"),
 				windowTitle=_x("Length of the title:episode separator"),
-				text = str(len(self.newsep)),
+				text=str(len(self.newsep)),
 				type=Input.NUMBER)
-
 
 	def setSeparatorSize(self, length):
 		len = int(length)
@@ -157,7 +155,6 @@ class EpiSepCfg(Screen):
 		self.secondlevel[0] = self.secondformat % (sep, len(sep))
 		self.sfsetLabel()
 
-
 	def sfsetLabel(self):
 		if self.level == 1:
 			labels = self.firstlevel
@@ -168,4 +165,3 @@ class EpiSepCfg(Screen):
 		self["sfGreenBtn"].setText(labels[2])
 		self["sfYellowBtn"].setText(labels[3])
 		self["sfBlueBtn"].setText(labels[4])
-

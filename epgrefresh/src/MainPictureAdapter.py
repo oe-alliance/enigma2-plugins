@@ -11,8 +11,10 @@ from Components.config import config
 
 from . import _, STARTNOTIFICATIONID, NOTIFICATIONDOMAIN
 
+
 class MainPictureAdapter:
 	backgroundCapable = True
+
 	def __init__(self, session):
 		self.navcore = session.nav
 
@@ -30,4 +32,3 @@ class MainPictureAdapter:
 	def stop(self):
 		if self.previousService is not None or Screens.Standby.inStandby:
 			self.navcore.playService(self.previousService)
-

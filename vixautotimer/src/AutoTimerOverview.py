@@ -18,6 +18,7 @@ from .AutoTimerList import AutoTimerList
 from Components.ActionMap import HelpableActionMap
 from Components.Sources.StaticText import StaticText
 
+
 class AutoTimerOverviewSummary(Screen):
 	skin = """
 	<screen position="0,0" size="132,64">
@@ -29,7 +30,7 @@ class AutoTimerOverviewSummary(Screen):
 	</screen>"""
 
 	def __init__(self, session, parent):
-		Screen.__init__(self, session, parent = parent)
+		Screen.__init__(self, session, parent=parent)
 		self["entry"] = StaticText("")
 		self.onShow.append(self.addWatcher)
 		self.onHide.append(self.removeWatcher)
@@ -43,6 +44,7 @@ class AutoTimerOverviewSummary(Screen):
 
 	def selectionChanged(self, text):
 		self["entry"].text = text
+
 
 class AutoTimerOverview(Screen, HelpableScreen):
 	"""Overview of AutoTimers"""
@@ -164,7 +166,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 				ret
 			)
 
-	def refresh(self, res = None):
+	def refresh(self, res=None):
 		# Re-assign List
 		cur = self["entries"].getCurrent()
 		self["entries"].setList(self.autotimer.getSortedTupleTimerList())
@@ -188,7 +190,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 				self.removeCallback,
 				MessageBox,
 				_("Do you really want to delete %s?") % (cur.name),
-				default = False,
+				default=False,
 			)
 
 	def removeCallback(self, ret):
@@ -237,7 +239,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		self.session.openWithCallback(
 			self.menuCallback,
 			ChoiceBox,
-			list = list,
+			list=list,
 		)
 
 	def menuCallback(self, ret):
@@ -281,7 +283,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 				self.session.open(
 					AutoTimerEditor,
 					self.autotimer.defaultTimer,
-					editingDefaults = True
+					editingDefaults=True
 				)
 			elif ret == "newwizard":
 				newTimer = self.autotimer.defaultTimer.clone()
@@ -305,4 +307,3 @@ class AutoTimerOverview(Screen, HelpableScreen):
 	def save(self):
 		# Just close here, saving will be done by cb
 		self.close(self.session)
-

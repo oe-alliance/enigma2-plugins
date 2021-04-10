@@ -11,26 +11,32 @@ from copy import copy
 from .locales import get_locale
 from .tmdb_auth import get_session
 
-class NameRepr( object ):
+
+class NameRepr(object):
     """Mixin for __repr__ methods using 'name' attribute."""
+
     def __repr__(self):
         return u"<{0.__class__.__name__} '{0.name}'>"\
                                 .format(self).encode('utf-8')
 
-class SearchRepr( object ):
+
+class SearchRepr(object):
     """
     Mixin for __repr__ methods for classes with '_name' and
     '_request' attributes.
     """
+
     def __repr__(self):
         name = self._name if self._name else self._request._kwargs['query']
         return u"<Search Results: {0}>".format(name).encode('utf-8')
 
-class Poller( object ):
+
+class Poller(object):
     """
     Wrapper for an optional callable to populate an Element derived class
     with raw data, or data from a Request.
     """
+
     def __init__(self, func, lookup, inst=None):
         self.func = func
         self.lookup = lookup
@@ -72,7 +78,7 @@ class Poller( object ):
             self.apply(req.new(language=None, country=None).readJSON())
             # re-apply the filtered first pass data over top the second
             # unfiltered set. this is to work around the issue that the
-            # properties have no way of knowing when they should or 
+            # properties have no way of knowing when they should or
             # should not overwrite existing data. the cache engine will
             # take care of the duplicate query
         self.apply(req.readJSON())
@@ -101,11 +107,13 @@ class Poller( object ):
                 unfilled = True
         return unfilled
 
-class Data( object ):
+
+class Data(object):
     """
     Basic response definition class
     This maps to a single key in a JSON dictionary received from the API
     """
+
     def __init__(self, field, initarg=None, handler=None, poller=None,
                  raw=True, default=u'', lang=False):
         """
@@ -163,14 +171,17 @@ class Data( object ):
         else:
             self.handler = lambda x: handler(x)
 
-class Datapoint( Data ):
+
+class Datapoint(Data):
     pass
 
-class Datalist( Data ):
+
+class Datalist(Data):
     """
     Response definition class for list data
     This maps to a key in a JSON dictionary storing a list of data
     """
+
     def __init__(self, field, handler=None, poller=None, sort=None, raw=True):
         """
         This defines how the dictionary value is to be processed by the poller
@@ -194,6 +205,7 @@ class Datalist( Data ):
         """
         super(Datalist, self).__init__(field, None, handler, poller, raw)
         self.sort = sort
+
     def __set__(self, inst, value):
         data = []
         if value:
@@ -210,11 +222,13 @@ class Datalist( Data ):
                     data.sort(key=lambda x: getattr(x, self.sort))
         inst._data[self.field] = data
 
-class Datadict( Data ):
+
+class Datadict(Data):
     """
     Response definition class for dictionary data
     This maps to a key in a JSON dictionary storing a dictionary of data
     """
+
     def __init__(self, field, handler=None, poller=None, raw=True,
                        key=None, attr=None):
         """
@@ -247,8 +261,9 @@ class Datadict( Data ):
         elif attr:
             self.getkey = lambda x: getattr(x, attr)
         else:
-            raise TypeError("Datadict requires `key` or `attr` be defined "+\
+            raise TypeError("Datadict requires `key` or `attr` be defined " +
                             "for populating the dictionary")
+
     def __set__(self, inst, value):
         data = {}
         if value:
@@ -260,7 +275,8 @@ class Datadict( Data ):
                 data[self.getkey(val)] = val
         inst._data[self.field] = data
 
-class ElementType( type ):
+
+class ElementType(type):
     """
     MetaClass used to pre-process Element-derived classes and set up the
     Data definitions
@@ -272,7 +288,7 @@ class ElementType( type ):
         # a copy into this class's attributes
         # run in reverse order so higher priority values overwrite lower ones
         data = {}
-        pollers = {'_populate':None}
+        pollers = {'_populate': None}
 
         for base in reversed(bases):
             if isinstance(base, mcs):
@@ -327,7 +343,7 @@ class ElementType( type ):
                 attrs[attr.name] = attr
 
         # build sorted list of arguments used for intialization
-        attrs['_InitArgs'] = tuple([a.name for a in \
+        attrs['_InitArgs'] = tuple([a.name for a in
                                 sorted(initargs, key=lambda x: x.initarg)])
         return type.__new__(mcs, name, bases, attrs)
 
@@ -353,15 +369,15 @@ class ElementType( type ):
             # if not, the number of input arguments must exactly match that
             # defined by the Data definitions
             if len(args) != len(cls._InitArgs):
-                raise TypeError('__init__() takes exactly {0} arguments ({1} given)'\
-                            .format(len(cls._InitArgs)+1, len(args)+1))
+                raise TypeError('__init__() takes exactly {0} arguments ({1} given)'
+                            .format(len(cls._InitArgs) + 1, len(args) + 1))
             for a, v in zip(cls._InitArgs, args):
                 setattr(obj, a, v)
 
         obj.__init__()
         return obj
 
-class Element( object ):
+
+class Element(object):
     __metaclass__ = ElementType
     _lang = 'en'
-

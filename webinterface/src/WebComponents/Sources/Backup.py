@@ -17,6 +17,7 @@ try:
 except ImportError as ie:
 	tarfile = None
 
+
 class Backup(Source):
 	BACKUP = 0
 	RESTORE = 1
@@ -28,7 +29,7 @@ class Backup(Source):
 		Source.__init__(self)
 		self.func = func
 		self.command = None
-		self.result = ( False, _("Missing or Wrong Argument") )
+		self.result = (False, _("Missing or Wrong Argument"))
 
 	def handleCommand(self, cmd):
 		if self.func is self.BACKUP:
@@ -36,7 +37,7 @@ class Backup(Source):
 		elif self.func is self.RESTORE:
 			self.result = self.restoreFiles(cmd)
 		else:
-			self.result = ( False, "one two three four unknown command" )
+			self.result = (False, "one two three four unknown command")
 
 	def getCompressionMode(self, tarname):
 		"""

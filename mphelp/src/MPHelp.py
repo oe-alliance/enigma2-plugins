@@ -9,6 +9,7 @@ from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
 import six
 
+
 class HelpPage:
 	def __init__(self, title, text):
 		self.__title = title
@@ -16,13 +17,17 @@ class HelpPage:
 
 	def getTitle(self):
 		return self.__title
+
 	def getText(self):
 		return self.__text
 
 	def __getitem__(self, item):
-		if item == 0: return self.getTitle()
-		elif item == 1: return self.getText()
+		if item == 0:
+			return self.getTitle()
+		elif item == 1:
+			return self.getText()
 		raise IndexError("no more items")
+
 
 class MPHelp(Screen):
 	skin = """
@@ -62,8 +67,8 @@ class MPHelp(Screen):
 			"back": self.close,
 			"red": self.close,
 			"up": self.pageUp,
-			"down":	self.pageDown,
-			"left":	self.pageUp,
+			"down": self.pageDown,
+			"left": self.pageUp,
 			"right": self.pageDown,
 			"yellow": self.prevPage,
 			"blue": self.nextPage,
@@ -86,7 +91,7 @@ class MPHelp(Screen):
 		self["title"].text = six.ensure_str(_(title), errors='ignore')
 		self["detailtext"].setText(six.ensure_str(_(text), errors='ignore'))
 		self.curPage = newPage
-	
+
 	def pageUp(self):
 		self["detailtext"].pageUp()
 
@@ -115,5 +120,6 @@ class MPHelp(Screen):
 			self["key_blue"].setText(">>")
 		else:
 			self["key_blue"].setText("")
+
 
 __all__ = ['HelpPage', 'MPHelp']

@@ -13,6 +13,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, 
 from .UserDialog import UserDialog
 from os import unlink, listdir, path as os_path
 
+
 class UserManager(Screen):
 	skin = """
 		<screen name="UserManager" position="center,center" size="560,400" title="UserManager">
@@ -71,13 +72,13 @@ class UserManager(Screen):
 						hostpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png"))
 					else:
 						hostpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
-					self.list.append(( file[:-6], 'edit', file, hostpng ))
+					self.list.append((file[:-6], 'edit', file, hostpng))
 		self["config"].setList(self.list)
 
 	def exit(self):
 		self.close()
 
-	def keyOK(self, returnValue = None):
+	def keyOK(self, returnValue=None):
 		cur = self["config"].getCurrent()
 		if cur:
 			returnValue = cur[1]
@@ -85,7 +86,7 @@ class UserManager(Screen):
 			if returnValue == "edit":
 				self.session.open(UserDialog, self.skin_path, hostinfo)
 
-	def delete(self, returnValue = None):
+	def delete(self, returnValue=None):
 		cur = self["config"].getCurrent()
 		if cur:
 			returnValue = cur[2]
@@ -93,4 +94,3 @@ class UserManager(Screen):
 			if os_path.exists(cachefile):
 				unlink(cachefile)
 				self.updateList()
-

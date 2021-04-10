@@ -1,14 +1,15 @@
 from twisted.web.client import HTTPDownloader
 
+
 class HTTPProgressDownloader(HTTPDownloader):
 	"""Download to a file and keep track of progress."""
 
-	def __init__(self, url, fileOrName, writeProgress = None, *args, **kwargs):
+	def __init__(self, url, fileOrName, writeProgress=None, *args, **kwargs):
 		HTTPDownloader.__init__(self, url, fileOrName, *args, **kwargs)
 
 		# Save callback(s) locally
 		if writeProgress and not isinstance(writeProgress, list):
-			writeProgress = [ writeProgress ]
+			writeProgress = [writeProgress]
 		self.writeProgress = writeProgress
 
 		# Initialize

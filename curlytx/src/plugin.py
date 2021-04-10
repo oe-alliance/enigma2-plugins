@@ -10,7 +10,7 @@ from . import CurlyTx
 from . import config
 from Components.config import config
 
- 
+
 def main(session, **kwargs):
     """ Opens the main window """
     try:
@@ -19,13 +19,14 @@ def main(session, **kwargs):
         import traceback
         traceback.print_exc()
 
+
 def menuHook(menuid):
     """ Called whenever a menu is created """
     if menuid == "mainmenu" and config.plugins.CurlyTx.menuMain.value:
         return [(config.plugins.CurlyTx.menuTitle.value, main, "curlytx", 41)]
-    return [ ]
+    return []
 
- 
+
 def Plugins(**kwargs):
     """ Register CurlyTx in the extension list and main menu """
     list = [
@@ -33,16 +34,16 @@ def Plugins(**kwargs):
 #                         description = "View remote text files",
 #                         where = [PluginDescriptor.WHERE_PLUGINMENU],
 #                         fnc = main),
-        PluginDescriptor(name = config.plugins.CurlyTx.menuTitle.value,
-                         description = _("View remote text files"),
+        PluginDescriptor(name=config.plugins.CurlyTx.menuTitle.value,
+                         description=_("View remote text files"),
                          where=PluginDescriptor.WHERE_MENU,
-                         fnc = menuHook),
+                         fnc=menuHook),
         ]
     if config.plugins.CurlyTx.menuExtensions.value:
         list.append(
-            PluginDescriptor(name = config.plugins.CurlyTx.menuTitle.value,
-                             description = _("View remote text files"),
-                             where = [PluginDescriptor.WHERE_EXTENSIONSMENU],
-                             fnc = main)
+            PluginDescriptor(name=config.plugins.CurlyTx.menuTitle.value,
+                             description=_("View remote text files"),
+                             where=[PluginDescriptor.WHERE_EXTENSIONSMENU],
+                             fnc=main)
         )
     return list

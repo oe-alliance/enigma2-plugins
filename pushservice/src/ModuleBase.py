@@ -32,16 +32,15 @@ class ModuleBase(object):
 
 	def __init__(self):
 		# Is called on instance creation
-		
+
 		# Default configuration
-		self.enable = NoSave(ConfigYesNo( default = False ))
-		
+		self.enable = NoSave(ConfigYesNo(default=False))
+
 		self.options = OrderedDict()
-		
+
 		# Build a list of key-value string tuples
 		# [ (key, value, description, config element) , ]
 		#self.options['enabled'] = ConfigYesNo( default = False )
-
 
 	################################################
 	# Base classmethod functions
@@ -50,9 +49,9 @@ class ModuleBase(object):
 		# Return the Class
 		return cls.__name__
 
-
 	################################################
 	# Base functions
+
 	def getName(self):
 		# Return the Class Name
 		return self.__class__.__name__
@@ -76,7 +75,7 @@ class ModuleBase(object):
 			return None
 
 	def setOption(self, key, option, description):
-		self.options[key] = ( option, description )
+		self.options[key] = (option, description)
 
 	def setOptions(self, options):
 		# Parse a list of key-value string tuples
@@ -92,7 +91,7 @@ class ModuleBase(object):
 				elif isinstance(default, int):
 					self.setValue(key, int(value))
 			except:
-				print(_("PushService Module %s:\n") % ( self.getName() ))
+				print(_("PushService Module %s:\n") % (self.getName()))
 				print(_("Skipping config option:") + str(key) + " " + str(value))
 				continue
 
@@ -112,14 +111,14 @@ class ModuleBase(object):
 		return str(self.enable.value)
 
 	def getStringOptions(self):
-		return [ ( str(key), str(option.value), str(description) ) for ( key, ( option, description ) ) in list(self.options.items()) ]
+		return [(str(key), str(option.value), str(description)) for (key, (option, description)) in list(self.options.items())]
 
 	def getConfigOptions(self):
-		return [ ( key, option, description) for ( key, ( option, description ) ) in list(self.options.items()) ]
-
+		return [(key, option, description) for (key, (option, description)) in list(self.options.items())]
 
 	################################################
 	# Functions to be implemented in the plugin
+
 	def begin(self):
 		# Is called after starting PushSerive
 		pass

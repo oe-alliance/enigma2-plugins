@@ -44,6 +44,7 @@ DEBUG = False
 config.plugins.pluginsort = ConfigSubsection()
 config.plugins.pluginsort.show_help = ConfigYesNo(default=True)
 
+
 def MyPluginEntryComponent(plugin, backcolor_sel=None):
 	if plugin.icon is None:
 		png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/plugin.png"))
@@ -55,8 +56,10 @@ def MyPluginEntryComponent(plugin, backcolor_sel=None):
 		#plugin, backcolor_sel, plugin.name, plugin.description, png,
 	]
 
+
 # TODO: make selected color themable
 SelectedPluginEntryComponent = lambda plugin: MyPluginEntryComponent(plugin, backcolor_sel=8388608)
+
 
 class MyPluginList(PluginList):
 	def __init__(self, *args, **kwargs):
@@ -76,16 +79,24 @@ class MyPluginList(PluginList):
 
 	def up(self):
 		instance = self.__instance()
-		if instance: instance.moveSelection(instance.moveUp)
+		if instance:
+			instance.moveSelection(instance.moveUp)
+
 	def down(self):
 		instance = self.__instance()
-		if instance: instance.moveSelection(instance.moveDown)
+		if instance:
+			instance.moveSelection(instance.moveDown)
+
 	def pageUp(self):
 		instance = self.__instance()
-		if instance: instance.moveSelection(instance.pageUp)
+		if instance:
+			instance.moveSelection(instance.pageUp)
+
 	def pageDown(self):
 		instance = self.__instance()
-		if instance: instance.moveSelection(instance.pageDown)
+		if instance:
+			instance.moveSelection(instance.pageDown)
+
 
 WHEREMAP = {}
 pdict = PluginDescriptor.__dict__
@@ -100,6 +111,7 @@ try:
 except AttributeError:
 	iteritems = lambda d: d.items()
 reverse = lambda map: dict((v, k) for k, v in iteritems(map))
+
 
 class PluginWeights:
 	def __init__(self):
@@ -157,7 +169,7 @@ class PluginWeights:
 				extend(('  <plugin name="', stringToXML(str(key)), '" weight="', str(value), '" />\n'))
 			append((' </where>\n'))
 		append('\n</pluginsort>\n')
-		
+
 		file = open(XML_CONFIG, 'w')
 		file.writelines(lst)
 		file.close()
@@ -178,7 +190,9 @@ class PluginWeights:
 			else:
 				self.plugins[x] = {plugin.name: plugin.weight}
 
+
 pluginWeights = PluginWeights()
+
 
 def PluginComponent_addPlugin(self, plugin, *args, **kwargs):
 	if len(plugin.where) > 1:
@@ -187,24 +201,29 @@ def PluginComponent_addPlugin(self, plugin, *args, **kwargs):
 			pd = PluginDescriptor(name=plugin.name, where=[x], description=plugin.description, icon=plugin.icon, fnc=plugin.__call__, wakeupfnc=plugin.wakeupfnc, needsRestart=plugin.needsRestart, internal=plugin.internal, weight=plugin.weight)
 
 			newWeight = pluginWeights.get(pd)
-			if DEBUG: print("[PluginSort] Setting weight of %s from %d to %d" % (pd.name, pd.weight, newWeight))
+			if DEBUG:
+				print("[PluginSort] Setting weight of %s from %d to %d" % (pd.name, pd.weight, newWeight))
 			pd.weight = newWeight
 			PluginComponent.pluginSort_baseAddPlugin(self, pd, *args, **kwargs)
 
 		# installedPluginList is a list of original descriptors, but we changed it to be a copy, not a reference. so keep it up to date
 		if self.firstRun:
 			self.installedPluginList.append(plugin)
-			if DEBUG: print("[PluginSort] Adding %s to list of installed plugins (%s, %s)." % (plugin.name, plugin.path, repr(plugin.where)))
+			if DEBUG:
+				print("[PluginSort] Adding %s to list of installed plugins (%s, %s)." % (plugin.name, plugin.path, repr(plugin.where)))
 		return
 
 	newWeight = pluginWeights.get(plugin)
-	if DEBUG: print("[PluginSort] Setting weight of %s from %d to %d" % (plugin.name, plugin.weight, newWeight))
+	if DEBUG:
+		print("[PluginSort] Setting weight of %s from %d to %d" % (plugin.name, plugin.weight, newWeight))
 	plugin.weight = newWeight
 	PluginComponent.pluginSort_baseAddPlugin(self, plugin, *args, **kwargs)
 
 	if self.firstRun:
-		if DEBUG: print("[PluginSort] Adding %s to list of installed plugins (%s, %s)." % (plugin.name, plugin.path, repr(plugin.where)))
+		if DEBUG:
+			print("[PluginSort] Adding %s to list of installed plugins (%s, %s)." % (plugin.name, plugin.path, repr(plugin.where)))
 		self.installedPluginList.append(plugin)
+
 
 if DEBUG:
 	def PluginComponent_removePlugin(self, plugin, *args, **kwargs):
@@ -213,9 +232,9 @@ if DEBUG:
 			PluginComponent.pluginSort_baseRemovePlugin(self, plugin, *args, **kwargs)
 		except ValueError as ve:
 			revMap = reverse(WHEREMAP)
-			print("-"*40)
-			print("-"*40)
-			print("-"*40)
+			print("-" * 40)
+			print("-" * 40)
+			print("-" * 40)
 			print("[PluginSort] pluginList: %s" % (repr([(x.name, x.path, repr([revMap[y] for y in x.where])) for x in self.pluginList]),))
 			for w in plugin.where:
 				print("[PluginSort] plugins[%s]: %s" % (revMap[w], repr([(x.name, x.path, repr([revMap[y] for y in x.where])) for x in self.plugins[w]])))
@@ -223,6 +242,8 @@ if DEBUG:
 	PluginComponent.removePlugin = PluginComponent_removePlugin
 
 OriginalPluginBrowser = PluginBrowser.PluginBrowser
+
+
 class SortingPluginBrowser(OriginalPluginBrowser):
 	def __init__(self, *args, **kwargs):
 		self.movemode = False
@@ -365,7 +386,8 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 				diff = abs(self.pluginlist[i].weight - self.pluginlist[newpos].weight) + 1
 				print("[PluginSort] Using weight from %d (%d) and %d (%d) to calculate diff (%d)" % (i, self.pluginlist[i].weight, newpos, self.pluginlist[newpos].weight, diff))
 				while i < Len:
-					if DEBUG: print("[PluginSort] INCREASE WEIGHT OF", self.pluginlist[i].name, "BY", diff)
+					if DEBUG:
+						print("[PluginSort] INCREASE WEIGHT OF", self.pluginlist[i].name, "BY", diff)
 					self.pluginlist[i].weight += diff
 					i += 1
 			# we moved down, decrease weight of plugins before us
@@ -376,14 +398,17 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 				diff = abs(self.pluginlist[newpos].weight - self.pluginlist[i].weight) + 1
 				print("[PluginSort] Using weight from %d (%d) and %d (%d) to calculate diff (%d)" % (newpos, self.pluginlist[newpos].weight, i, self.pluginlist[i].weight, diff))
 				while i > -1:
-					if DEBUG: print("[PluginSort] DECREASE WEIGHT OF", self.pluginlist[i].name, "BY", diff)
+					if DEBUG:
+						print("[PluginSort] DECREASE WEIGHT OF", self.pluginlist[i].name, "BY", diff)
 					self.pluginlist[i].weight -= diff
 					i -= 1
 			else:
-				if DEBUG: print("[PluginSort]", entry.name, "did not move (%d to %d)?" % (selected, newpos))
+				if DEBUG:
+					print("[PluginSort]", entry.name, "did not move (%d to %d)?" % (selected, newpos))
 
 			self.list = [MyPluginEntryComponent(plugin) for plugin in self.pluginlist]
-			if DEBUG: print("[PluginSort] NEW LIST:", [(plugin.name, plugin.weight) for plugin in self.pluginlist])
+			if DEBUG:
+				print("[PluginSort] NEW LIST:", [(plugin.name, plugin.weight) for plugin in self.pluginlist])
 			# XXX: modifyEntry is broken - I'd say a job well done :P
 			#self["pluginlist"].modifyEntry(newpos, self.list[newpos])
 			self["pluginlist"].updateList(self.list)
@@ -419,7 +444,7 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 		self.session.openWithCallback(
 			self.menuCallback,
 			ChoiceBox,
-			list = list,
+			list=list,
 		)
 
 	def menuCallback(self, ret):
@@ -459,11 +484,13 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 			self["yellow"].setText(_("End Sort"))
 		self.movemode = not self.movemode
 
+
 def autostart(reason, *args, **kwargs):
 	if reason == 0:
 		if hasattr(PluginComponent, 'pluginSort_baseAddPlugin'):
 			print("[PluginSort] Something went wrong as our autostart handler was called multiple times for startup, printing traceback and ignoring.")
-			import traceback, sys
+			import traceback
+			import sys
 			traceback.print_stack(limit=5, file=sys.stdout)
 		else:
 			PluginComponent.pluginSort_baseAddPlugin = PluginComponent.addPlugin
@@ -471,9 +498,12 @@ def autostart(reason, *args, **kwargs):
 
 			# we use a copy for installed plugins because we might change the 'where'-lists
 			plugins.installedPluginList = plugins.pluginList[:]
+
 			def PluginComponent__setattr__(self, key, value):
-				if key == 'installedPluginList': return
-				else: self.__dict__[key] = value
+				if key == 'installedPluginList':
+					return
+				else:
+					self.__dict__[key] = value
 			PluginComponent.__setattr__ = PluginComponent__setattr__
 
 			if hasattr(plugins, 'pluginHider_baseGetPlugins'):
@@ -484,7 +514,8 @@ def autostart(reason, *args, **kwargs):
 			# "fix" weight of plugins already added to list, future ones will be fixed automatically
 			fixed = []
 			for plugin in pluginlist:
-				if plugin in fixed: continue # skip double entries
+				if plugin in fixed:
+					continue # skip double entries
 
 				# create individual entries for multiple wheres, this is potentially harmful!
 				if len(plugin.where) > 1:
@@ -499,7 +530,7 @@ def autostart(reason, *args, **kwargs):
 
 					# HACK: re-add autostart entry to internal list inside PluginComponent
 					if hadAutostart:
-						plugin.where = [ PluginDescriptor.WHERE_AUTOSTART ]
+						plugin.where = [PluginDescriptor.WHERE_AUTOSTART]
 						plugins.pluginList.append(plugin)
 
 				# we're keeping the entry, just fix the weight
@@ -523,7 +554,6 @@ def autostart(reason, *args, **kwargs):
 				InfoBarPlugins.pluginSort_baseGetPluginList = InfoBarPlugins.getPluginList
 				InfoBarPlugins.getPluginList = InfoBarPlugins_getPluginList
 
-
 			PluginBrowser.PluginBrowser = SortingPluginBrowser
 	else:
 		if hasattr(PluginComponent, 'pluginSort_baseAddPlugin'):
@@ -533,6 +563,7 @@ def autostart(reason, *args, **kwargs):
 			InfoBarPlugins.getPluginList = InfoBarPlugins.pluginSort_baseGetPluginList
 			del InfoBarPlugins.pluginSort_baseGetPluginList
 		PluginBrowser.PluginBrowser = OriginalPluginBrowser
+
 
 #pragma mark - Help
 try:
@@ -545,6 +576,7 @@ except Exception as e:
 	print("[PluginSort] Unable to initialize MPHelp:", e, "- Help not available!")
 	pluginSortHelp = None
 #pragma mark -
+
 
 def Plugins(**kwargs):
 	return [

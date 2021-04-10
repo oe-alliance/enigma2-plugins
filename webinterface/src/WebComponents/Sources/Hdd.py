@@ -1,6 +1,7 @@
 from Components.Sources.Source import Source
 from Components.Harddisk import harddiskmanager
 
+
 class Hdd(Source):
 	def __init__(self, devicecount=0):
 		Source.__init__(self)
@@ -30,8 +31,7 @@ class Hdd(Source):
 		return disks
 
 	list = property(getList)
-	lut = { "Model" : 0,
-			"Capacity" : 1,
-			"Free" : 2
+	lut = {"Model": 0,
+			"Capacity": 1,
+			"Free": 2
 		}
-

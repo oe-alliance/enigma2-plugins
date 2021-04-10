@@ -6,7 +6,7 @@ import time
 PLUGIN_BASE = "KiddyTimer"
 PLUGIN_VERSION = "1.3"
 
-DAYNAMES= (_("Sunday"),
+DAYNAMES = (_("Sunday"),
           _("Monday"),
           _("Tuesday"),
           _("Wednesday"),
@@ -15,17 +15,17 @@ DAYNAMES= (_("Sunday"),
           _("Saturday"),
           )
 
-ONEHOUR=3600
-ONEMINUTE=60
+ONEHOUR = 3600
+ONEMINUTE = 60
 
 MOVEPOSITIONSTEP = 10
 
 
 #This is a hack to get the times in the current timezone to feed as default value for the ConfigClock
-ONEOCLOCK=time.mktime([2000, 1, 1, 1, 0, 0, 5, 1, time.timezone])
-FOUROCLOCK=time.mktime([2000, 1, 1, 4, 0, 0, 5, 1, time.timezone])
-EIGHTOCLOCK=time.mktime([2000, 1, 1, 8, 0, 0, 5, 1, time.timezone])
-EIGHTOCLOCKNOON=time.mktime([2000, 1, 1, 20, 0, 0, 5, 1, time.timezone])
+ONEOCLOCK = time.mktime([2000, 1, 1, 1, 0, 0, 5, 1, time.timezone])
+FOUROCLOCK = time.mktime([2000, 1, 1, 4, 0, 0, 5, 1, time.timezone])
+EIGHTOCLOCK = time.mktime([2000, 1, 1, 8, 0, 0, 5, 1, time.timezone])
+EIGHTOCLOCKNOON = time.mktime([2000, 1, 1, 20, 0, 0, 5, 1, time.timezone])
 
 plugin_path = ""
 
@@ -44,25 +44,26 @@ SKIN = """
 
 ##############################################################################
 
+
 def getTodaysTimeInSeconds():
     # Number of the current day
-    dayNr = int(time.strftime("%w", time.localtime() ))
+    dayNr = int(time.strftime("%w", time.localtime()))
     # Number of seconds for the current day
-    iDayTime = getSecondsFromClock( config.plugins.KiddyTimer.dayTimes[dayNr].timeValue.value )
+    iDayTime = getSecondsFromClock(config.plugins.KiddyTimer.dayTimes[dayNr].timeValue.value)
     return(iDayTime)
 
+
 def getSecondsFromClock(aClock):
-    iSeconds = 60*(int(aClock[0])*60 + int(aClock[1]))
+    iSeconds = 60 * (int(aClock[0]) * 60 + int(aClock[1]))
     return iSeconds
 
-def getTimeFromSeconds(iSecondsLeft, bReturnSeconds):
-        iHours = int( iSecondsLeft // 3600 )
-        iHourRest = iSecondsLeft - ( iHours * 3600 )
-        iMinutes = int( iHourRest // 60 )
-        if bReturnSeconds == False:
-            return( ("00"+str(iHours))[-2:] + ":" + ("00"+str(iMinutes))[-2:] )
-        else:
-            iSeconds = int( iHourRest - ( iMinutes * 60) )
-            return( ("00"+str(iHours))[-2:] + ":" + ("00"+str(iMinutes))[-2:] + ":" + ("00"+str(iSeconds))[-2:] )
 
-    
+def getTimeFromSeconds(iSecondsLeft, bReturnSeconds):
+        iHours = int(iSecondsLeft // 3600)
+        iHourRest = iSecondsLeft - (iHours * 3600)
+        iMinutes = int(iHourRest // 60)
+        if bReturnSeconds == False:
+            return(("00" + str(iHours))[-2:] + ":" + ("00" + str(iMinutes))[-2:])
+        else:
+            iSeconds = int(iHourRest - (iMinutes * 60))
+            return(("00" + str(iHours))[-2:] + ":" + ("00" + str(iMinutes))[-2:] + ":" + ("00" + str(iSeconds))[-2:])

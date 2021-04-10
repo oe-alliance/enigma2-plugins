@@ -3,6 +3,7 @@ from Components.Sources.Source import Source
 from Screens.MessageBox import MessageBox
 from os import system, path
 
+
 class Message(Source):
 	PRINT = 0
 	ANSWER = 1
@@ -29,14 +30,14 @@ class Message(Source):
 		print("printMessage")
 
 		if self.cmd['text'] == "" or self.cmd['text'] is None:
-			return ( False, _("No Messagetext given") )
+			return (False, _("No Messagetext given"))
 		else:
 			mtext = self.cmd['text']
 
 		try:
 			typeint = int(self.cmd['type'])
 		except (ValueError, TypeError) as e:
-			return ( False, _("type %s is not a number") % self.cmd['type'] )
+			return (False, _("type %s is not a number") % self.cmd['type'])
 
 		if typeint == MessageBox.TYPE_YESNO:
 			#dont know how to give the result to the webif back
@@ -48,7 +49,7 @@ class Message(Source):
 		elif typeint == MessageBox.TYPE_ERROR:
 			mtype = MessageBox.TYPE_ERROR
 		else:
-			return ( False, _("Unsupported Messagetype %s") % self.cmd['type'] )
+			return (False, _("Unsupported Messagetype %s") % self.cmd['type'])
 
 		try:
 			mtimeout = int(self.cmd['timeout'])
@@ -60,7 +61,7 @@ class Message(Source):
 		else:
 			self.session.open(MessageBox, mtext, type=mtype, timeout=mtimeout)
 
-		return ( True, _("Message sent successfully!") )
+		return (True, _("Message sent successfully!"))
 
 	def yesNoAnswer(self, confirmed):
 		print("yesNoAnswer", confirmed)
@@ -85,10 +86,10 @@ class Message(Source):
 			system(cmdstr)
 			print("Answer: (%s)" % lines[0])
 			if lines[0] == "yes":
-				return ( True, "Answer is YES!" )
+				return (True, "Answer is YES!")
 			else:
-				return ( True, "Answer is NO!" )
+				return (True, "Answer is NO!")
 		else:
-			return ( False, "No answer in time" )
+			return (False, "No answer in time")
 
 	result = property(lambda self: self.res)

@@ -11,6 +11,7 @@ from xml.etree.cElementTree import parse as cet_parse
 
 XML_FSTAB = "/etc/enigma2/automounts.xml"
 
+
 def rm_rf(d): # only for removing the ipkg stuff from /media/hdd subdirs
 	try:
 		for path in (os.path.join(d, f) for f in os.listdir(d)):
@@ -22,8 +23,10 @@ def rm_rf(d): # only for removing the ipkg stuff from /media/hdd subdirs
 	except Exception as ex:
 	        print("AutoMount failed to remove", d, "Error:", ex)
 
+
 class AutoMount():
 	"""Manages Mounts declared in a XML-Document."""
+
 	def __init__(self):
 		self.automounts = {}
 		self.restartConsole = Console()
@@ -37,7 +40,7 @@ class AutoMount():
 
 		self.getAutoMountPoints()
 
-	def getAutoMountPoints(self, callback = None):
+	def getAutoMountPoints(self, callback=None):
 		# Initialize mounts to empty list
 		automounts = []
 		self.automounts = {}
@@ -52,18 +55,18 @@ class AutoMount():
 			ret = ""
 			# How many definitions are present
 			Len = len(definitions)
-			return Len > 0 and definitions[Len-1].text or default
+			return Len > 0 and definitions[Len - 1].text or default
 		# Config is stored in "mountmanager" element
 		# Read out NFS Mounts
 		for nfs in tree.findall("nfs"):
 			for mount in nfs.findall("mount"):
-				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, \
-							'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+				data = {'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False,
+							'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 				try:
 					data['mounttype'] = 'nfs'.encode("UTF-8")
 					data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
 					if data["active"] == 'True' or data["active"] == True:
-						self.activeMountsCounter +=1
+						self.activeMountsCounter += 1
 					data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
 					data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 					data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
@@ -75,13 +78,13 @@ class AutoMount():
 			# Read out CIFS Mounts
 		for nfs in tree.findall("cifs"):
 			for mount in nfs.findall("mount"):
-				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, \
-							'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+				data = {'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False,
+							'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 				try:
 					data['mounttype'] = 'cifs'.encode("UTF-8")
 					data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
 					if data["active"] == 'True' or data["active"] == True:
-						self.activeMountsCounter +=1
+						self.activeMountsCounter += 1
 					data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
 					data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 					data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
@@ -148,7 +151,7 @@ class AutoMount():
 					elif data['mounttype'] == 'cifs':
 						if not os.path.ismount(path):
 							tmpusername = data['username'].replace(" ", "\\ ")
-							options = data['options'] + ',noatime,noserverino,iocharset=utf8,username='+ tmpusername + ',password='+ data['password']
+							options = data['options'] + ',noatime,noserverino,iocharset=utf8,username=' + tmpusername + ',password=' + data['password']
 							tmpcmd = "mount -t cifs -o %s '//%s/%s' '%s'" % (options, data['ip'], data['sharedir'], path)
 							command = tmpcmd.encode("UTF-8")
 				except Exception as ex:
@@ -162,7 +165,7 @@ class AutoMount():
 
 	def CheckMountPointFinished(self, result, retval, extra_args):
 		print("[AutoMount.py] CheckMountPointFinished", result, retval)
-		(data, callback ) = extra_args
+		(data, callback) = extra_args
 		path = os.path.join('/media/net', data['sharename'])
 		if os.path.exists(path):
 			if os.path.ismount(path):
@@ -267,7 +270,7 @@ class AutoMount():
 		if self.MountConsole is not None:
 			self.MountConsole = None
 
-	def removeMount(self, mountpoint, callback = None):
+	def removeMount(self, mountpoint, callback=None):
 		print("[AutoMount.py] removing mount: ", mountpoint)
 		self.newautomounts = {}
 		for sharename, sharedata in list(self.automounts.items()):
@@ -277,14 +280,14 @@ class AutoMount():
 		self.automounts = self.newautomounts
 		if not self.removeConsole:
 			self.removeConsole = Console()
-		path = '/media/net/'+ mountpoint
+		path = '/media/net/' + mountpoint
 		umountcmd = "umount -fl '%s'" % path
 		print("[AutoMount.py] UMOUNT-CMD--->", umountcmd)
 		self.removeConsole.ePopen(umountcmd, self.removeMountPointFinished, [path, callback])
 
 	def removeMountPointFinished(self, result, retval, extra_args):
 		print("[AutoMount.py] removeMountPointFinished result", result, "retval", retval)
-		(path, callback ) = extra_args
+		(path, callback) = extra_args
 		if os.path.exists(path):
 			if not os.path.ismount(path):
 				try:

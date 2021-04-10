@@ -47,17 +47,19 @@ import Screens.Standby
 #####  CONFIG SETTINGS   #####
 ##############################
 config.plugins.tvcharts = ConfigSubsection()
-config.plugins.tvcharts.enabled = ConfigYesNo(default = True)
+config.plugins.tvcharts.enabled = ConfigYesNo(default=True)
 config.plugins.tvcharts.maxentries = ConfigInteger(default=10, limits=(5, 100))
 config.plugins.tvcharts.maxtimerentries = ConfigInteger(default=10, limits=(5, 100))
-config.plugins.tvcharts.submittimers = ConfigYesNo(default = True)
-config.plugins.tvcharts.submitplugins = ConfigYesNo(default = True)
-config.plugins.tvcharts.bouquetfilter = ConfigYesNo(default = True)
+config.plugins.tvcharts.submittimers = ConfigYesNo(default=True)
+config.plugins.tvcharts.submitplugins = ConfigYesNo(default=True)
+config.plugins.tvcharts.bouquetfilter = ConfigYesNo(default=True)
 
 ##########################################################
-session = [ ]
+session = []
 
 #Channellist Menu Entry
+
+
 class ChannelListMenu(MenuList):
 	def __init__(self, list, enableWrapAround=False):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
@@ -66,8 +68,9 @@ class ChannelListMenu(MenuList):
 		self.l.setFont(2, gFont("Regular", 16))
 		self.l.setItemHeight(76)
 
+
 def ChannelListEntryComponent(type, channelname, serviceref, eventid, eventname, starttime, endtime, usercount, percent):
-	res = [ (serviceref, eventid) ]
+	res = [(serviceref, eventid)]
 
 	# PIXMAP / PICON
 	pixmap = resolveFilename(SCOPE_ACTIVE_SKIN, "picon_default.png")
@@ -91,7 +94,7 @@ def ChannelListEntryComponent(type, channelname, serviceref, eventid, eventname,
 		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 10), size=(100, 60), png=loadPNG(pixmap), flags=BT_SCALE))
 		res.append(MultiContentEntryText(pos=(130, 5), size=(480, 28), font=0, text="%s (User: %s)" % (channelname, usercount)))
 		res.append(MultiContentEntryText(pos=(130, 33), size=(480, 25), font=1, text=eventname))
-		res.append(MultiContentEntryText(pos=(130, 57), size=(480, 20), font=2, text="%s Uhr - %s Uhr (%smin)" % (strftime("%d.%m.%Y %H:%M", gmtime(starttime)), strftime("%H:%M", gmtime(endtime)), int((endtime-starttime)/60))))
+		res.append(MultiContentEntryText(pos=(130, 57), size=(480, 20), font=2, text="%s Uhr - %s Uhr (%smin)" % (strftime("%d.%m.%Y %H:%M", gmtime(starttime)), strftime("%H:%M", gmtime(endtime)), int((endtime - starttime) / 60))))
 	elif type == "moviecharts":
 		res.append(MultiContentEntryPixmapAlphaTest(pos=(8, 8), size=(100, 60), png=loadPNG(pixmap), flags=BT_SCALE))
 		res.append(MultiContentEntryText(pos=(130, 5), size=(480, 30), font=0, text=eventname))
@@ -103,6 +106,7 @@ def ChannelListEntryComponent(type, channelname, serviceref, eventid, eventname,
 ##############################
 #####   TV Charts MAIN   #####
 ##############################
+
 
 class TVChartsMain(Screen):
 
@@ -169,7 +173,7 @@ class TVChartsMain(Screen):
 			eventid = int(current[0][1])
 			event = self.getEventFromId(serviceref, eventid)
 			if event is not None:
-				newEntry = RecordTimerEntry(serviceref, *parseEvent(event), checkOldTimers = True, dirname = preferredTimerPath())
+				newEntry = RecordTimerEntry(serviceref, *parseEvent(event), checkOldTimers=True, dirname=preferredTimerPath())
 				self.session.openWithCallback(self.addTimerCallback, TimerEntry, newEntry)
 			else:
 				self.session.open(MessageBox, "Sorry, no EPG Info available for this event", type=MessageBox.TYPE_ERROR, timeout=10)
@@ -292,7 +296,7 @@ class TVChartsMain(Screen):
 			for node in xml.getElementsByTagName("CHANNEL"):
 				event_id = None
 				inBouquet = False
-				channelname =str(node.getElementsByTagName("NAME")[0].childNodes[0].data)
+				channelname = str(node.getElementsByTagName("NAME")[0].childNodes[0].data)
 				serviceref = str(node.getElementsByTagName("SERVICEREF")[0].childNodes[0].data)
 				eventname = str(node.getElementsByTagName("EVENTNAME")[0].childNodes[0].data)
 				usercount = int(node.getElementsByTagName("USERCOUNT")[0].childNodes[0].data)
@@ -382,15 +386,17 @@ class TVChartsMain(Screen):
 ############################
 #####  SETTINGS SCREEN #####
 ############################
+
+
 class TVChartsSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = [ "TVChartsSetup", "Setup" ]
+		self.skinName = ["TVChartsSetup", "Setup"]
 		self.setup_title = _("TV Charts Settings")
 
-		self.onChangedEntry = [ ]
-		self.list = [ ]
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		self.onChangedEntry = []
+		self.list = []
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -410,7 +416,7 @@ class TVChartsSetup(Screen, ConfigListScreen):
 		self.setTitle(self.setup_title)
 
 	def createSetup(self):
-		self.list = [ getConfigListEntry(_("TV Charts Plugin Enable"), config.plugins.tvcharts.enabled) ]
+		self.list = [getConfigListEntry(_("TV Charts Plugin Enable"), config.plugins.tvcharts.enabled)]
 		if config.plugins.tvcharts.enabled.value:
 			self.list.extend((
 				getConfigListEntry(_("Max Toplist Entries"), config.plugins.tvcharts.maxentries),
@@ -465,8 +471,7 @@ class DBUpdateStatus(Screen):
 		self.DBStatusTimer = eTimer()
 		self.DBStatusTimer.callback.append(self.updateStatus)
 
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evUpdatedInfo: self.restartTimer,
 				iPlayableService.evUpdatedEventInfo: self.restartTimer
 			})
@@ -474,7 +479,7 @@ class DBUpdateStatus(Screen):
 		self.recordtimer = session.nav.RecordTimer
 		self.NetworkConnectionAvailable = False
 		self.LastTimerlistUpdate = 0
-		
+
 		self.timerlist = ""
 		self.pluginlist = ""
 
@@ -483,7 +488,7 @@ class DBUpdateStatus(Screen):
 	def restartTimer(self):
 		if self.NetworkConnectionAvailable:
 			self.DBStatusTimer.stop()
-			self.DBStatusTimer.start((randint(15, 60))*1000, True)
+			self.DBStatusTimer.start((randint(15, 60)) * 1000, True)
 		else:
 			iNetwork.checkNetworkState(self.checkNetworkCB)
 
@@ -526,7 +531,7 @@ class DBUpdateStatus(Screen):
 
 		if event is not None:
 			curEvent = parseEvent(event)
-			event_begin = int(curEvent[0])+(config.recording.margin_before.getValue()*60)
+			event_begin = int(curEvent[0]) + (config.recording.margin_before.getValue() * 60)
 			event_description = event.getExtendedDescription()
 
 		# Get Box Info
@@ -543,12 +548,12 @@ class DBUpdateStatus(Screen):
 
 		# Get TimerList
 		self.timerlist = ""
-		if config.plugins.tvcharts.submittimers.value and self.LastTimerlistUpdate <= (time()-1800):
+		if config.plugins.tvcharts.submittimers.value and self.LastTimerlistUpdate <= (time() - 1800):
 			self.LastTimerlistUpdate = time()
 			try:
 				for timer in self.recordtimer.timer_list:
 					if timer.disabled == 0 and timer.justplay == 0:
-						self.timerlist += "%s|%s|%s|%s|%s|%s|%s\n" % (timer.eit, str(int(timer.begin)+(config.recording.margin_before.getValue()*60)), str(int(timer.end)-(config.recording.margin_after.getValue()*60)), str(timer.service_ref), timer.name, timer.service_ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8"), timer.repeated)
+						self.timerlist += "%s|%s|%s|%s|%s|%s|%s\n" % (timer.eit, str(int(timer.begin) + (config.recording.margin_before.getValue() * 60)), str(int(timer.end) - (config.recording.margin_after.getValue() * 60)), str(timer.service_ref), timer.name, timer.service_ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8"), timer.repeated)
 			except Exception:
 				print("[TVCharts] Error loading timers!")
 
@@ -557,13 +562,13 @@ class DBUpdateStatus(Screen):
 			try:
 				os_system("opkg list_installed | grep enigma2-plugin- > /tmp/plugins.txt")
 				for plugin in open('/tmp/plugins.txt', 'r'):
-					self.pluginlist += plugin[0:plugin.find(' - ')]+"\n"
+					self.pluginlist += plugin[0:plugin.find(' - ')] + "\n"
 				os_system("rm -f /tmp/plugins.txt")
 			except Exception:
 				print("[TVCharts] Error loading plugins!")
-		
+
 		# Status Update
-		getPage(url=b'http://www.dreambox-plugins.de/feeds/TVCharts/status.php', agent="Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)", timeout=60, method='POST', headers={'Content-Type':'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid' : self.BoxID, 'devicename' : self.DeviceName, 'imageversion' : self.ImageVersion, 'enigmaversion' : self.EnigmaVersion, 'lastchannel' : channel_name, 'lastevent' : event_name, 'eventdescr' : event_description, 'lastbegin' : event_begin, 'lastserviceref' : self.serviceref, 'timerlist' : self.timerlist, 'pluginlist' : self.pluginlist})).addErrback(self.updateError)
+		getPage(url=b'http://www.dreambox-plugins.de/feeds/TVCharts/status.php', agent="Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)", timeout=60, method='POST', headers={'Content-Type': 'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid': self.BoxID, 'devicename': self.DeviceName, 'imageversion': self.ImageVersion, 'enigmaversion': self.EnigmaVersion, 'lastchannel': channel_name, 'lastevent': event_name, 'eventdescr': event_description, 'lastbegin': event_begin, 'lastserviceref': self.serviceref, 'timerlist': self.timerlist, 'pluginlist': self.pluginlist})).addErrback(self.updateError)
 
 		# Restart Timer
 		self.DBStatusTimer.start(900000, True)
@@ -575,8 +580,11 @@ class DBUpdateStatus(Screen):
 #############################
 #####    INIT PLUGIN    #####
 #############################
+
+
 def main(session, **kwargs):
 	session.open(TVChartsMain)
+
 
 def autostart(reason, **kwargs):
 	global session
@@ -584,8 +592,9 @@ def autostart(reason, **kwargs):
 		session = kwargs["session"]
 		DBUpdateStatus(session)
 
+
 def Plugins(path, **kwargs):
 	return [
-		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart),
+		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart),
 		PluginDescriptor(name="TV Charts", description="TV Charts Plugin", icon="plugin.png", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
-		PluginDescriptor(name="TV Charts", description="TV Charts Plugin", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main) ]
+		PluginDescriptor(name="TV Charts", description="TV Charts Plugin", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)]

@@ -33,17 +33,19 @@ import skin
 # for localized messages
 from . import _
 
+
 def initPartnerboxEntryConfig():
 	config.plugins.Partnerbox.Entries.append(ConfigSubsection())
-	i = len(config.plugins.Partnerbox.Entries) -1
-	config.plugins.Partnerbox.Entries[i].name = ConfigText(default = "Remote box", visible_width = 50, fixed_size = False)
-	config.plugins.Partnerbox.Entries[i].ip = ConfigIP(default = [192, 168, 0, 98])
+	i = len(config.plugins.Partnerbox.Entries) - 1
+	config.plugins.Partnerbox.Entries[i].name = ConfigText(default="Remote box", visible_width=50, fixed_size=False)
+	config.plugins.Partnerbox.Entries[i].ip = ConfigIP(default=[192, 168, 0, 98])
 	config.plugins.Partnerbox.Entries[i].port = ConfigInteger(default=80, limits=(1, 65555))
-	config.plugins.Partnerbox.Entries[i].enigma = ConfigSelection(default="0", choices = [("0", _("Enigma 2")), ("1", _("Enigma 1"))])
-	config.plugins.Partnerbox.Entries[i].password = ConfigText(default = "root", visible_width = 50, fixed_size = False)
-	config.plugins.Partnerbox.Entries[i].useinternal = ConfigSelection(default="1", choices = [("0", _("use external")), ("1", _("use internal"))])
-	config.plugins.Partnerbox.Entries[i].zaptoservicewhenstreaming = ConfigYesNo(default = True)
+	config.plugins.Partnerbox.Entries[i].enigma = ConfigSelection(default="0", choices=[("0", _("Enigma 2")), ("1", _("Enigma 1"))])
+	config.plugins.Partnerbox.Entries[i].password = ConfigText(default="root", visible_width=50, fixed_size=False)
+	config.plugins.Partnerbox.Entries[i].useinternal = ConfigSelection(default="1", choices=[("0", _("use external")), ("1", _("use internal"))])
+	config.plugins.Partnerbox.Entries[i].zaptoservicewhenstreaming = ConfigYesNo(default=True)
 	return config.plugins.Partnerbox.Entries[i]
+
 
 def initConfig():
 	count = config.plugins.Partnerbox.entriescount.value
@@ -53,9 +55,12 @@ def initConfig():
 			initPartnerboxEntryConfig()
 			i += 1
 
+
 HD = False
 if getDesktop(0).size().width() >= 1280:
 	HD = True
+
+
 class PartnerboxSetup(ConfigListScreen, Screen):
 	if HD:
 		skin = """ <screen position="center,center" size="700,400" title="Partnerbox Setup" >
@@ -78,7 +83,7 @@ class PartnerboxSetup(ConfigListScreen, Screen):
 				<ePixmap name="yellow" pixmap="skin_default/buttons/yellow.png" position="280,350" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
 			</screen>"""
 
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self.setTitle(_("Partnerbox Setup"))
 
@@ -97,7 +102,7 @@ class PartnerboxSetup(ConfigListScreen, Screen):
 		}, -2)
 
 	def initConfig(self):
-		self.list = [ ]
+		self.list = []
 		self.list.append(getConfigListEntry(_("Show 'RemoteTimer' in Eventinfo menu"), config.plugins.Partnerbox.enablepartnerboxeventinfomenu))
 		if config.plugins.Partnerbox.enablepartnerboxeventinfomenu.value:
 			self.list.append(getConfigListEntry(_("Show 'RemoteTimer' in Event View context menu"), config.plugins.Partnerbox.enablepartnerboxeventinfocontextmenu))
@@ -155,6 +160,7 @@ class PartnerboxSetup(ConfigListScreen, Screen):
 		plugins.clearPluginList()
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 
+
 class PartnerboxEntriesListConfigScreen(Screen):
 	skin = """
 		<screen position="center,center" size="550,400" title="Partnerbox: List of Entries" >
@@ -174,7 +180,7 @@ class PartnerboxEntriesListConfigScreen(Screen):
 			<ePixmap name="blue" position="420,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 		</screen>"""
 
-	def __init__(self, session, what = None):
+	def __init__(self, session, what=None):
 		Screen.__init__(self, session)
 		self.session = session
 		self.setTitle(_("Partnerbox: List of Entries"))
@@ -190,12 +196,12 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		self["entrylist"] = PartnerboxEntryList([])
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
 			{
-			 "ok":	self.keyOK,
-			 "back":	self.keyClose,
-			 "red":	self.keyRed,
-			 "yellow":	self.keyYellow,
-			 "blue": 	self.keyDelete,
-			 "green":	self.powerMenu,
+			 "ok": self.keyOK,
+			 "back": self.keyClose,
+			 "red": self.keyRed,
+			 "yellow": self.keyYellow,
+			 "blue": self.keyDelete,
+			 "green": self.powerMenu,
 			 }, -1)
 		self.what = what
 		self.updateList()
@@ -210,8 +216,10 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		self.session.openWithCallback(self.updateList, PartnerboxEntryConfigScreen, None)
 
 	def keyOK(self):
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		nr = int(config.plugins.Partnerbox.entriescount.value)
 		if nr > 1 and self.what == 2 or nr >= 1 and self.what == None:
 				from .plugin import RemoteTimer
@@ -220,15 +228,19 @@ class PartnerboxEntriesListConfigScreen(Screen):
 			self.close(self.session, self.what, sel)
 
 	def keyYellow(self):
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		if sel is None:
 			return
 		self.session.openWithCallback(self.updateList, PartnerboxEntryConfigScreen, sel)
 
 	def keyDelete(self):
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		if sel is None:
 			return
 		self.session.openWithCallback(self.deleteConfirm, MessageBox, _("Really delete this Partnerbox Entry?"))
@@ -246,8 +258,10 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		self.updateList()
 
 	def powerMenu(self):
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		if sel is None:
 			return
 		menu = []
@@ -261,13 +275,15 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		else:
 			menu.append((_("Shutdown"), 4))
 		from Screens.ChoiceBox import ChoiceBox
-		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=(_("Select operation for partnerbox")+": "+"%s" % (sel.name.value)), list=menu)
+		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=(_("Select operation for partnerbox") + ": " + "%s" % (sel.name.value)), list=menu)
 
 	def menuCallback(self, choice):
 		if choice is None:
 			return
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		if sel is None:
 			return
 		password = sel.password.value
@@ -285,7 +301,7 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		elif choice[1] == 2:
 			sCommand += enigma_type and "restart" or "3"
 		elif choice[1] == 3:
-			sCommand += enigma_type and "reboot"  or "2"
+			sCommand += enigma_type and "reboot" or "2"
 		elif choice[1] == 4:
 			sCommand += enigma_type and "shutdown" or "0"
 		elif choice[1] == 5:
@@ -297,39 +313,42 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		from .PartnerboxFunctions import sendPartnerBoxWebCommand
 		sendPartnerBoxWebCommand(sCommand, None, 3, username, password)
 
+
 class PartnerboxEntryList(MenuList):
-	def __init__(self, list, enableWrapAround = True):
+	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		font = skin.fonts.get("PartnerBoxEntryList0", ("Regular", 20, 20))
 		self.l.setFont(0, gFont(font[0], font[1]))
 		self.ItemHeight = int(font[2])
 		font = skin.fonts.get("PartnerBoxEntryList1", ("Regular", 18))
 		self.l.setFont(1, gFont(font[0], font[1]))
+
 	def postWidgetCreate(self, instance):
 		MenuList.postWidgetCreate(self, instance)
 		instance.setItemHeight(self.ItemHeight)
 
 	def buildList(self):
-		self.list=[]
+		self.list = []
 		for c in config.plugins.Partnerbox.Entries:
 			res = [c]
 			x, y, w, h = skin.parameters.get("PartnerBoxEntryListName", (5, 0, 150, 20))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(c.name.value)))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(c.name.value)))
 			ip = "%d.%d.%d.%d" % tuple(c.ip.value)
 			x, y, w, h = skin.parameters.get("PartnerBoxEntryListIP", (120, 0, 150, 20))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(ip)))
-			port = "%d"%(c.port.value)
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(ip)))
+			port = "%d" % (c.port.value)
 			x, y, w, h = skin.parameters.get("PartnerBoxEntryListPort", (270, 0, 100, 20))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(port)))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(port)))
 			if int(c.enigma.value) == 0:
 				e_type = "Enigma2"
 			else:
 				e_type = "Enigma1"
 			x, y, w, h = skin.parameters.get("PartnerBoxEntryListType", (410, 0, 100, 20))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(e_type)))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(e_type)))
 			self.list.append(res)
 		self.l.setList(self.list)
 		self.moveToIndex(0)
+
 
 class PartnerboxEntryConfigScreen(ConfigListScreen, Screen):
 	skin = """

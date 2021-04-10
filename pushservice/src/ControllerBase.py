@@ -25,17 +25,16 @@ from .ModuleBase import ModuleBase
 class ControllerBase(ModuleBase):
 	# You only have to overwrite the functions You need
 	# If You don't have to save something, You don't need getOptions / setOptions
-	
+
 	UniqueCounter = 0
-	
+
 	ForceSingleInstance = True
-	
+
 	def __init__(self):
 		ModuleBase.__init__(self)
 		# Is called on instance creation
 		ControllerBase.UniqueCounter += 1
 		self.uniqueid = ControllerBase.UniqueCounter
-
 
 	################################################
 	# Base class functions
@@ -47,14 +46,14 @@ class ControllerBase(ModuleBase):
 	def resetUniqueID():
 		ControllerBase.UniqueCounter = 0
 
-
 	################################################
 	# Functions to be implemented in the plugin
+
 	def run(self, callback, errback):
 		# At the end a plugin has to call one of the functions: callback or errback
 		# Callback should return with at least one of the parameter: Header, Body, Attachment
 		# If empty or none is returned, nothing will be sent
-		errback( "Not implemented: " + self.getName() + ".run()")
+		errback("Not implemented: " + self.getName() + ".run()")
 
 	# Callback functions
 	def callback(self):

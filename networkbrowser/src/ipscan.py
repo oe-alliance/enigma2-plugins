@@ -19,11 +19,12 @@ except ImportError:
 
 ############################################################################
 
+
 class PortScanner(object):
 	"""
 	PortScanner allows to use nmap from python
 	"""
-	
+
 	def __init__(self):
 		self._scan_result = {}
 		self._nmap_version_number = 0       # nmap version number
@@ -39,13 +40,13 @@ class PortScanner(object):
 
 	def scan(self, hosts='127.0.0.1', ports=None, arguments='-sV'):
 		assert type(hosts) in types.StringTypes, 'Wrong type for [hosts], should be a string [was {0}]'.format(type(hosts))
-		assert type(ports) in types.StringTypes+(types.NoneType,), 'Wrong type for [ports], should be a string [was {0}]'.format(type(ports))
+		assert type(ports) in types.StringTypes + (types.NoneType,), 'Wrong type for [ports], should be a string [was {0}]'.format(type(ports))
 		assert type(arguments) in types.StringTypes, 'Wrong type for [arguments], should be a string [was {0}]'.format(type(arguments))
 
 		f_args = shlex.split(arguments)
-		
+
 		# Launch scan
-		args = ['nmap', '-oX', '-', hosts] + ['-p', ports]*(ports!=None) + f_args
+		args = ['nmap', '-oX', '-', hosts] + ['-p', ports] * (ports != None) + f_args
 
 		p = subprocess.Popen(args, bufsize=100000, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
@@ -62,7 +63,7 @@ class PortScanner(object):
 				if len(line) > 0:
 					rgw = regex_warning.search(line)
 					if rgw is not None:
-						sys.stderr.write(line+'\n')
+						sys.stderr.write(line + '\n')
 						pass
 					else:
 						raise PortScannerError(nmap_err)

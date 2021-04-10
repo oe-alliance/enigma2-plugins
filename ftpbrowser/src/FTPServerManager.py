@@ -22,11 +22,12 @@ from Components.config import config, ConfigInteger, ConfigSubsection, \
 # For new and improved _parse
 from six.moves.urllib.parse import urlparse, urlunparse
 
-def _parse(url, defaultPort = None):
+
+def _parse(url, defaultPort=None):
 	url = url.strip()
 	parsed = urlparse(url)
 	scheme = parsed[0]
-	path = urlunparse(('', '')+parsed[2:])
+	path = urlunparse(('', '') + parsed[2:])
 
 	if defaultPort is None:
 		if scheme == 'https':
@@ -56,6 +57,7 @@ def _parse(url, defaultPort = None):
 		path = "/"
 
 	return scheme, host, port, path, username, password
+
 
 class FTPServer:
 	def __init__(self, cfg):
@@ -99,17 +101,18 @@ class FTPServer:
 	def cancel(self):
 		self.cfg.cancel()
 
-def ftpserverFromURI(uri, name = "", save = True):
-	scheme, host, port, path, username, password = _parse(uri, defaultPort = 21)
-	
+
+def ftpserverFromURI(uri, name="", save=True):
+	scheme, host, port, path, username, password = _parse(uri, defaultPort=21)
+
 	newServer = ConfigSubsection()
 	if save:
 		config.plugins.ftpbrowser.server.append(newServer)
-	newServer.name = ConfigText(fixed_size = False)
+	newServer.name = ConfigText(fixed_size=False)
 	newServer.name.value = name or host
-	newServer.address = ConfigText(fixed_size = False)
+	newServer.address = ConfigText(fixed_size=False)
 	newServer.address.value = host
-	newServer.username = ConfigText(fixed_size = False)
+	newServer.username = ConfigText(fixed_size=False)
 	newServer.username.value = username
 	newServer.password = ConfigPassword()
 	newServer.password.value = password
@@ -123,6 +126,7 @@ def ftpserverFromURI(uri, name = "", save = True):
 		config.plugins.ftpbrowser.servercount.save()
 
 	return FTPServer(newServer)
+
 
 class FTPServerEditor(ConfigListScreen, Screen):
 	skin = """
@@ -158,7 +162,7 @@ class FTPServerEditor(ConfigListScreen, Screen):
 			getConfigListEntry(_("Port:"), server.cfg.port),
 			getConfigListEntry(_("Passive:"), server.cfg.passive),
 		])
-		
+
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 			{
 				"save": self.keySave,
@@ -194,7 +198,7 @@ class FTPServerEditor(ConfigListScreen, Screen):
 			# _parse gets confused without a scheme
 			if not res.startswith("ftp://"):
 				res = "ftp://" + res
-			scheme, host, port, path, username, password = _parse(res, defaultPort = 21)
+			scheme, host, port, path, username, password = _parse(res, defaultPort=21)
 
 			cfg.address.value = host
 			cfg.username.value = username
@@ -205,13 +209,14 @@ class FTPServerEditor(ConfigListScreen, Screen):
 		self.session.openWithCallback(
 			self.gotURI,
 			NTIVirtualKeyBoard,
-			title = _("Enter URI of FTP Server:"),
-			text = self.server.getURI(),
+			title=_("Enter URI of FTP Server:"),
+			text=self.server.getURI(),
 		)
 
 	def keySave(self):
 		self.saveAll()
 		self.close(True)
+
 
 class FTPServerManagerSummary(Screen):
 	skin = """
@@ -224,6 +229,7 @@ class FTPServerManagerSummary(Screen):
 			<convert type="ClockToText">WithSeconds</convert>
 		</widget>
 	</screen>"""
+
 
 class FTPServerManager(Screen):
 	skin = """
@@ -257,7 +263,7 @@ class FTPServerManager(Screen):
 		self["key_yellow"] = StaticText(_("Edit"))
 		self["key_blue"] = StaticText(_("Save"))
 		self["list"] = List([])
-		
+
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 			{
 				"cancel": self.exit,
@@ -267,7 +273,7 @@ class FTPServerManager(Screen):
 				"yellow": self.edit,
 				"blue": self.save
 			}, -1)
-		
+
 		self.onLayoutFinish.extend((
 			self.updateServerList,
 			self.layoutFinished,
@@ -328,9 +334,9 @@ class FTPServerManager(Screen):
 	def add(self):
 		newServer = ConfigSubsection()
 		config.plugins.ftpbrowser.server.append(newServer)
-		newServer.name = ConfigText("Name", fixed_size = False)
-		newServer.address = ConfigText("192.168.2.12", fixed_size = False)
-		newServer.username = ConfigText("root", fixed_size = False)
+		newServer.name = ConfigText("Name", fixed_size=False)
+		newServer.address = ConfigText("192.168.2.12", fixed_size=False)
+		newServer.username = ConfigText("root", fixed_size=False)
 		newServer.password = ConfigPassword("dreambox")
 		newServer.port = ConfigInteger(21, (1, 65535))
 		newServer.passive = ConfigYesNo(False)
@@ -352,7 +358,7 @@ class FTPServerManager(Screen):
 				FTPServer(ftpserverconfig.server[idx])
 			)
 
-	def editCallback(self, ret = False):
+	def editCallback(self, ret=False):
 		if ret:
 			self.updateServerList()
 			self.changed = True
@@ -363,6 +369,5 @@ class FTPServerManager(Screen):
 			self.session.open(
 				MessageBox,
 				_("Configuration saved."),
-				type = MessageBox.TYPE_INFO
+				type=MessageBox.TYPE_INFO
 			)
-

@@ -6,8 +6,8 @@
 #  Coded by Dr.Best (c) 2009
 #  Support: www.dreambox-tools.info
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -16,7 +16,7 @@
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 
@@ -35,13 +35,14 @@ from . import _
 
 #config for lastservice
 config.startupservice = ConfigSubsection()
-config.startupservice.lastservice = ConfigText(default = "")
-config.startupservice.lastroot = ConfigText(default = "")
-config.startupservice.lastmode = ConfigText(default = "tv")
+config.startupservice.lastservice = ConfigText(default="")
+config.startupservice.lastroot = ConfigText(default="")
+config.startupservice.lastmode = ConfigText(default="tv")
 config.startupserviceleavingstandbymode = ConfigSubsection()
-config.startupserviceleavingstandbymode.lastservice = ConfigText(default = "")
-config.startupserviceleavingstandbymode.lastroot = ConfigText(default = "")
-config.startupserviceleavingstandbymode.lastmode = ConfigText(default = "tv")
+config.startupserviceleavingstandbymode.lastservice = ConfigText(default="")
+config.startupserviceleavingstandbymode.lastroot = ConfigText(default="")
+config.startupserviceleavingstandbymode.lastmode = ConfigText(default="tv")
+
 
 def leaveStandby():
 	if config.startupserviceleavingstandbymode.lastservice.value != "" and config.startupserviceleavingstandbymode.lastroot.value != "":
@@ -50,6 +51,7 @@ def leaveStandby():
 			InfoBar.instance.servicelist.setModeTv()
 		else:
 			InfoBar.instance.servicelist.setModeRadio()
+
 
 def standbyCounterChanged(configElement):
 	if config.startupserviceleavingstandbymode.lastservice.value != "" and config.startupserviceleavingstandbymode.lastroot.value != "":
@@ -65,11 +67,12 @@ def standbyCounterChanged(configElement):
 			config_last.save()
 			inStandby.onClose.append(leaveStandby)
 
+
 def main(session, **kwargs):
 	# copy startupservice data to config.tv or config.radio if available
 	if config.startupservice.lastservice.value != "" and config.startupservice.lastroot.value != "":
 		config.servicelist = ConfigSubsection()
-		config.servicelist.lastmode = ConfigText(default = "tv")
+		config.servicelist.lastmode = ConfigText(default="tv")
 		config.servicelist.lastmode.value = config.startupservice.lastmode.value
 		config.servicelist.lastmode.save()
 		if config.startupservice.lastmode.value == "tv":
@@ -86,14 +89,19 @@ def main(session, **kwargs):
 			config.radio.lastservice.value = config.startupservice.lastservice.value
 			config.radio.lastroot.value = config.startupservice.lastroot.value
 			config.radio.save()
-	try: startUpServiceInit()
-	except: pass
-	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
+	try:
+		startUpServiceInit()
+	except:
+		pass
+	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
+
 
 ###########################################
 # ChannelContextMenu
 ###########################################
 baseChannelContextMenu__init__ = None
+
+
 def startUpServiceInit():
 	global baseChannelContextMenu__init__
 	if baseChannelContextMenu__init__ is None:
@@ -105,6 +113,7 @@ def startUpServiceInit():
 	ChannelContextMenu.setStartUpService = setStartUpService
 	ChannelContextMenu.resetStartUpService = resetStartUpService
 
+
 def startUpService__init__(self, session, csel):
 	baseChannelContextMenu__init__(self, session, csel)
 	current = csel.getCurrentSelection()
@@ -112,9 +121,10 @@ def startUpService__init__(self, session, csel):
 	inBouquetRootList = current_root and current_root.getPath().find('FROM BOUQUET "bouquets.') != -1 #FIXME HACK
 	if csel.bouquet_mark_edit == 0 and not csel.movemode:
 		if not inBouquetRootList:
-			if not (current.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
-				self["menu"].list.insert(1, ChoiceEntryComponent(text = (_("set as startup service"), boundFunction(self.startUpServiceContextMenuCallback, True))))
-				self["menu"].list.insert(2, ChoiceEntryComponent(text = (_("reset startup service"), boundFunction(self.startUpServiceContextMenuCallback, False))))
+			if not (current.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)):
+				self["menu"].list.insert(1, ChoiceEntryComponent(text=(_("set as startup service"), boundFunction(self.startUpServiceContextMenuCallback, True))))
+				self["menu"].list.insert(2, ChoiceEntryComponent(text=(_("reset startup service"), boundFunction(self.startUpServiceContextMenuCallback, False))))
+
 
 def startUpServiceContextMenuCallback(self, add):
 	if add:
@@ -127,7 +137,8 @@ def startUpServiceContextMenuCallback(self, add):
 				(_("reset startup service for booting..."), boundFunction(self.resetStartUpService, config.startupservice)),
 				(_("reset startup service for leaving standby mode..."), boundFunction(self.resetStartUpService, config.startupserviceleavingstandbymode)),
 			]
-	self.session.openWithCallback(self.startUpServiceMenuCallback, ChoiceBox, list = options)
+	self.session.openWithCallback(self.startUpServiceMenuCallback, ChoiceBox, list=options)
+
 
 def startUpServiceMenuCallback(self, ret):
 	ret and ret[1]()
@@ -140,7 +151,7 @@ def setStartUpService(self, configElement):
 		 path += i.toString()
 		 path += ';'
 	if path:
-		if current.type == eServiceReference.idDVB and current.getData(0) in (2, 10):	
+		if current.type == eServiceReference.idDVB and current.getData(0) in (2, 10):
 			configElement.lastroot.value = path
 			configElement.lastmode.value = "radio"
 		else:
@@ -152,6 +163,7 @@ def setStartUpService(self, configElement):
 	else:
 		 self.session.openWithCallback(self.close, MessageBox, _("If you see this message, please switch to the service you want to mark as startservice and try again."), MessageBox.TYPE_ERROR)
 
+
 def resetStartUpService(self, configElement):
 	configElement.lastroot.value = ""
 	configElement.lastmode.value = "tv"
@@ -159,6 +171,6 @@ def resetStartUpService(self, configElement):
 	configElement.save()
 	self.close()
 
-def Plugins(**kwargs):
-	return [PluginDescriptor(name="StartUpService", description="set startup service", where = PluginDescriptor.WHERE_SESSIONSTART, fnc=main)]
 
+def Plugins(**kwargs):
+	return [PluginDescriptor(name="StartUpService", description="set startup service", where=PluginDescriptor.WHERE_SESSIONSTART, fnc=main)]

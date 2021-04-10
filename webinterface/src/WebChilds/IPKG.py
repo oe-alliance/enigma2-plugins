@@ -4,12 +4,13 @@ from Components.config import config
 from twisted.web import server, resource, http
 import six
 
+
 class IPKGResource(resource.Resource):
 	IPKG_PATH = "/usr/bin/opkg"
 
-	SIMPLECMDS = ( "list", "list_installed", "list_upgradable", "update", "upgrade" )
-	PACKAGECMDS = ( "info", "status", "install", "remove" )
-	FILECMDS = ( "search", )
+	SIMPLECMDS = ("list", "list_installed", "list_upgradable", "update", "upgrade")
+	PACKAGECMDS = ("info", "status", "install", "remove")
+	FILECMDS = ("search", )
 
 	def render(self, request):
 		self.args = request.args
@@ -27,7 +28,7 @@ class IPKGResource(resource.Resource):
 			elif self.command in IPKGResource.FILECMDS:
 				return self.execFileCmd(request)
 			else:
-				return self.doErrorPage(request, "Unknown command: "+ self.command)
+				return self.doErrorPage(request, "Unknown command: " + self.command)
 		else:
 			return self.doIndexPage(request)
 
@@ -91,6 +92,7 @@ class IPKGResource(resource.Resource):
 		else:
 			return None
 
+
 class IPKGConsoleStream:
 	def __init__(self, request, cmd):
 		self.request = request
@@ -117,9 +119,8 @@ class IPKGConsoleStream:
 
 	def dataAvail(self, data):
 		data = six.ensure_str(data)
-		print("[IPKGConsoleStream].dataAvail: '%s'" %data)
+		print("[IPKGConsoleStream].dataAvail: '%s'" % data)
 		#FIXME - filter strange reapeated outputs since we switched to opkg
 		if data != self.lastdata or self.lastdata is None and self.stillAlive:
 			self.lastdata = data
 			self.request.write(data.replace("\n", "<br>\n"))
-

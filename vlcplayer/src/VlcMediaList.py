@@ -24,8 +24,9 @@ from .VlcFileList import VlcFileList
 from .VlcPlayList import VlcPlayList
 from . import _
 
+
 class VlcMediaListScreen(Screen):
-	skin ="""
+	skin = """
 		<screen size="560,400" position="80,100" name="VLC Media List" >
 			<ePixmap name="red"    position="0,355"   zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 			<ePixmap name="green"  position="140,355" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
@@ -67,16 +68,16 @@ class VlcMediaListScreen(Screen):
 
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions", "MoviePlayerActions", "EPGSelectActions"],
 			{
-			 "back": 	self.close,
-			 "red": 	self.keyToggleFilter,
-			 "green":	self.keyUpdate,
-			 "yellow":	self.keyOpenServerlist,
-			 "blue":	self.keyDvd,
-			 "up": 		self.up,
-			 "down": 	self.down,
-			 "left": 	self.left,
-			 "right": 	self.right,
-			 "ok":		self.ok,
+			 "back": self.close,
+			 "red": self.keyToggleFilter,
+			 "green": self.keyUpdate,
+			 "yellow": self.keyOpenServerlist,
+			 "blue": self.keyDvd,
+			 "up": self.up,
+			 "down": self.down,
+			 "left": self.left,
+			 "right": self.right,
+			 "ok": self.ok,
 			 "prevBouquet": self.switchToFileList,
 			 "nextBouquet": self.switchToPlayList,
 			 }, -1)
@@ -97,7 +98,7 @@ class VlcMediaListScreen(Screen):
 		except Exception as e:
 			pass
 
-	def close(self, proceed = False):
+	def close(self, proceed=False):
 		Screen.close(self, proceed)
 
 	def keyUpdate(self):
@@ -126,7 +127,7 @@ class VlcMediaListScreen(Screen):
 		except Exception as e:
 			self.session.open(
 				MessageBox, _("Error updating filelist from server %(server)s:\n%(error)s") % (
-						{"server" : self.server.getName(), "error" : e}
+						{"server": self.server.getName(), "error": e}
 					), MessageBox.TYPE_ERROR)
 
 	def keyDvd(self):
@@ -163,7 +164,7 @@ class VlcMediaListScreen(Screen):
 				except Exception as e:
 					self.session.open(
 						MessageBox, _("Error loading playlist %(media)s into server %(server)s:\n%(error)s") % (
-								{"media" : media, "server" : self.server.getName(), "error" : e}
+								{"media": media, "server": self.server.getName(), "error": e}
 							), MessageBox.TYPE_ERROR)
 			elif media.lower().endswith(".iso"):
 				self.play("dvdsimple://" + media, "DVD")
@@ -179,13 +180,13 @@ class VlcMediaListScreen(Screen):
 		except ExpatError as e:
 			self.session.open(
 				MessageBox, _("Error loading playlist into server %(server)s:\n%(error)s") % (
-						{"server" : self.server.getName(), "error" : e }
+						{"server": self.server.getName(), "error": e}
 					), MessageBox.TYPE_ERROR)
 			raise ExpatError
 		except Exception as e:
 			self.session.open(
 				MessageBox, _("Error loading filelist into server %(server)s:\n%(error)s") % (
-						{"server" : self.server.getName(), "error" : e }
+						{"server": self.server.getName(), "error": e}
 					), MessageBox.TYPE_ERROR)
 		return None
 
@@ -195,12 +196,12 @@ class VlcMediaListScreen(Screen):
 		except ExpatError as e:
 			self.session.open(
 				MessageBox, _("Error loading playlist into server %(server)s:\n%(error)s") % (
-						{"server" : self.server.getName(), "error" : e }
+						{"server": self.server.getName(), "error": e}
 					), MessageBox.TYPE_ERROR)
 		except Exception as e:
 			self.session.open(
 				MessageBox, _("Error loading playlist into server %(server)s:\n%(error)s") % (
-						{"server" : self.server.getName(), "error" : e }
+						{"server": self.server.getName(), "error": e}
 					), MessageBox.TYPE_ERROR)
 		return None
 

@@ -21,7 +21,9 @@ from __future__ import print_function
 # C0410 multiple-imports
 # pylint: disable=C0111,C0103,C0301,W0603,W0403,C0302
 
-import re, sys, os
+import re
+import sys
+import os
 from xml.dom.minidom import parse
 
 try:
@@ -105,6 +107,7 @@ def html2unicode(in_html):
 			warn("html2utf8: ValueError " + repr(key) + ":" + repr(codepoint) + " (" + str(e) + ")")
 	return in_html
 
+
 def normalizePhoneNumber(intNo):
 	found = re.match(r'^\+(.*)', intNo)
 	if found:
@@ -115,6 +118,7 @@ def normalizePhoneNumber(intNo):
 		return found.group(1)
 	else:
 		return '0'
+
 
 def out(number, caller):
 	debug("%s: %s", number, caller)
@@ -147,8 +151,10 @@ def out(number, caller):
 
 	print(name)
 
+
 def simpleout(number, caller):  # @UnusedVariable # pylint: disable=W0613
 	print(caller)
+
 
 try:
 	reverseLookupFileName = resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/reverselookup.xml")
@@ -158,9 +164,10 @@ except ImportError:
 countries = {}
 reverselookupMtime = 0
 
+
 class ReverseLookupAndNotifier(object):
 
-	def __init__(self, number, outputFunction = out, charset = "cp1252", countrycode = "0049"):
+	def __init__(self, number, outputFunction=out, charset="cp1252", countrycode="0049"):
 		debug("reverse Lookup for %s!", number)
 		if not countrycode:
 			out(number, "")
@@ -422,7 +429,7 @@ class ReverseLookupAndNotifier(object):
 		self._gotError("[ReverseLookupAndNotifier] _gotPage: Nothing found at %s" % self.currentWebsite.getAttribute("name"))
 		return False
 
-	def _gotError(self, errorMsg = ""):
+	def _gotError(self, errorMsg=""):
 		error("Error: %s", errorMsg)
 		if self.nextWebsiteNo >= len(self.websites):
 			debug("I give up")
@@ -460,6 +467,7 @@ class ReverseLookupAndNotifier(object):
 			self.outputFunction(self.number, "")
 		if __name__ == '__main__':
 			reactor.stop()  # @UndefinedVariable # pylint: disable=E1101
+
 
 if __name__ == '__main__':
 	cwd = os.path.dirname(sys.argv[0])

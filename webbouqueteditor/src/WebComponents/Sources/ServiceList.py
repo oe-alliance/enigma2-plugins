@@ -4,14 +4,15 @@ from enigma import eServiceCenter, eServiceReference
 from Components.ParentalControl import parentalControl, IMG_WHITESERVICE, IMG_WHITEBOUQUET, IMG_BLACKSERVICE, IMG_BLACKBOUQUET
 from Components.config import config
 
+
 class ServiceList(Source):
-	def __init__(self, root, command_func = None, validate_commands = True):
+	def __init__(self, root, command_func=None, validate_commands=True):
 		Source.__init__(self)
 		self.root = root
 		self.command_func = command_func
 		self.validate_commands = validate_commands
 
-	def getServicesAsList(self, format = "RN"):
+	def getServicesAsList(self, format="RN"):
 		services = self.getServiceList()
 		mylist = services and services.getContent(format, True)
 		list = []
@@ -44,14 +45,14 @@ class ServiceList(Source):
 					elif protection[1] == IMG_WHITEBOUQUET:
 						#(unlocked -B-)
 						isProtected = "5"
-					
+
 			list.append((item[0].toString(), item[1], isGroup, isMarker, isProtected))
 		return list
 
 	def getServiceList(self):
 		serviceHandler = eServiceCenter.getInstance()
 		return serviceHandler.list(self.root)
-		
+
 	def getRoot(self):
 		return self.__root
 
@@ -59,7 +60,7 @@ class ServiceList(Source):
 		assert isinstance(root, eServiceReference)
 		self.__root = root
 		self.changed()
-		
+
 	root = property(getRoot, setRoot)
 
 	def validateReference(self, ref):
@@ -75,4 +76,4 @@ class ServiceList(Source):
 			self.command_func(ref)
 
 	list = property(getServicesAsList)
-	lut = {"Reference": 0, "Name": 1, "isGroup": 2, "isMarker": 3, "isProtected": 4}			
+	lut = {"Reference": 0, "Name": 1, "isGroup": 2, "isMarker": 3, "isProtected": 4}

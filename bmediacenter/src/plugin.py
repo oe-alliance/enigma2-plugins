@@ -33,6 +33,8 @@ except:
 	dvdplayer = False
 
 mcpath = '/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/'
+
+
 class DMC_MainMenu(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -81,6 +83,7 @@ class DMC_MainMenu(Screen):
 			if fileExists("/media/upnp") is False:
 				os.mkdir("/media/upnp")
 			os.system('djmount /media/upnp &')
+
 	def next(self):
 		self["menu"].selectNext()
 		if self["menu"].getIndex() == 1:
@@ -88,47 +91,50 @@ class DMC_MainMenu(Screen):
 		if self["menu"].getIndex() == 9:
 			self["menu"].setIndex(1)
 		self.update()
+
 	def prev(self):
 		self["menu"].selectPrevious()
 		if self["menu"].getIndex() == 0:
 			self["menu"].setIndex(8)
 		self.update()
+
 	def update(self):
 		if self["menu"].getIndex() == 1:
-			self["left"].instance.setPixmapFromFile(mcpath +"MenuIconSettingssw.png")
-			self["middle"].instance.setPixmapFromFile(mcpath +"MenuIconMusic.png")
-			self["right"].instance.setPixmapFromFile(mcpath +"MenuIconVideosw.png")
+			self["left"].instance.setPixmapFromFile(mcpath + "MenuIconSettingssw.png")
+			self["middle"].instance.setPixmapFromFile(mcpath + "MenuIconMusic.png")
+			self["right"].instance.setPixmapFromFile(mcpath + "MenuIconVideosw.png")
 		elif self["menu"].getIndex() == 2:
-			self["left"].instance.setPixmapFromFile(mcpath +"MenuIconMusicsw.png")
-			self["middle"].instance.setPixmapFromFile(mcpath +"MenuIconVideo.png")
-			self["right"].instance.setPixmapFromFile(mcpath +"MenuIconDVDsw.png")
+			self["left"].instance.setPixmapFromFile(mcpath + "MenuIconMusicsw.png")
+			self["middle"].instance.setPixmapFromFile(mcpath + "MenuIconVideo.png")
+			self["right"].instance.setPixmapFromFile(mcpath + "MenuIconDVDsw.png")
 		elif self["menu"].getIndex() == 3:
-			self["left"].instance.setPixmapFromFile(mcpath +"MenuIconVideosw.png")
-			self["middle"].instance.setPixmapFromFile(mcpath +"MenuIconDVD.png")
-			self["right"].instance.setPixmapFromFile(mcpath +"MenuIconPicturesw.png")
+			self["left"].instance.setPixmapFromFile(mcpath + "MenuIconVideosw.png")
+			self["middle"].instance.setPixmapFromFile(mcpath + "MenuIconDVD.png")
+			self["right"].instance.setPixmapFromFile(mcpath + "MenuIconPicturesw.png")
 		elif self["menu"].getIndex() == 4:
-			self["left"].instance.setPixmapFromFile(mcpath +"MenuIconDVDsw.png")
-			self["middle"].instance.setPixmapFromFile(mcpath +"MenuIconPicture.png")
-			self["right"].instance.setPixmapFromFile(mcpath +"MenuIconRadiosw.png")
+			self["left"].instance.setPixmapFromFile(mcpath + "MenuIconDVDsw.png")
+			self["middle"].instance.setPixmapFromFile(mcpath + "MenuIconPicture.png")
+			self["right"].instance.setPixmapFromFile(mcpath + "MenuIconRadiosw.png")
 		elif self["menu"].getIndex() == 5:
-			self["left"].instance.setPixmapFromFile(mcpath +"MenuIconPicturesw.png")
-			self["middle"].instance.setPixmapFromFile(mcpath +"MenuIconRadio.png")
-			self["right"].instance.setPixmapFromFile(mcpath +"MenuIconVLCsw.png")
+			self["left"].instance.setPixmapFromFile(mcpath + "MenuIconPicturesw.png")
+			self["middle"].instance.setPixmapFromFile(mcpath + "MenuIconRadio.png")
+			self["right"].instance.setPixmapFromFile(mcpath + "MenuIconVLCsw.png")
 		elif self["menu"].getIndex() == 6:
-			self["left"].instance.setPixmapFromFile(mcpath +"MenuIconRadiosw.png")
-			self["middle"].instance.setPixmapFromFile(mcpath +"MenuIconVLC.png")
-			self["right"].instance.setPixmapFromFile(mcpath +"MenuIconWeathersw.png")
+			self["left"].instance.setPixmapFromFile(mcpath + "MenuIconRadiosw.png")
+			self["middle"].instance.setPixmapFromFile(mcpath + "MenuIconVLC.png")
+			self["right"].instance.setPixmapFromFile(mcpath + "MenuIconWeathersw.png")
 		elif self["menu"].getIndex() == 7:
-			self["left"].instance.setPixmapFromFile(mcpath +"MenuIconVLCsw.png")
-			self["middle"].instance.setPixmapFromFile(mcpath +"MenuIconWeather.png")
-			self["right"].instance.setPixmapFromFile(mcpath +"MenuIconSettingssw.png")
+			self["left"].instance.setPixmapFromFile(mcpath + "MenuIconVLCsw.png")
+			self["middle"].instance.setPixmapFromFile(mcpath + "MenuIconWeather.png")
+			self["right"].instance.setPixmapFromFile(mcpath + "MenuIconSettingssw.png")
 		elif self["menu"].getIndex() == 8:
-			self["left"].instance.setPixmapFromFile(mcpath +"MenuIconWeathersw.png")
-			self["middle"].instance.setPixmapFromFile(mcpath +"MenuIconSettings.png")
-			self["right"].instance.setPixmapFromFile(mcpath +"MenuIconMusicsw.png")
+			self["left"].instance.setPixmapFromFile(mcpath + "MenuIconWeathersw.png")
+			self["middle"].instance.setPixmapFromFile(mcpath + "MenuIconSettings.png")
+			self["right"].instance.setPixmapFromFile(mcpath + "MenuIconMusicsw.png")
 #		if config.plugins.mc_global.vfd.value == "on":
 #			evfd.getInstance().vfd_write_string(self["menu"].getCurrent()[0])
 		self["text"].setText(self["menu"].getCurrent()[0])
+
 	def okbuttonClick(self):
 		from Screens.MessageBox import MessageBox
 		selection = self["menu"].getCurrent()
@@ -140,7 +146,7 @@ class DMC_MainMenu(Screen):
 				if dvdplayer:
 					self.session.open(DVDPlayer)
 				else:
-					self.session.open(MessageBox, "Error: DVD-Player Plugin not installed ...",  MessageBox.TYPE_INFO)
+					self.session.open(MessageBox, "Error: DVD-Player Plugin not installed ...", MessageBox.TYPE_INFO)
 			elif selection[1] == "MC_PictureViewer":
 				from .MC_PictureViewer import MC_PictureViewer
 				self.session.open(MC_PictureViewer)
@@ -155,7 +161,7 @@ class DMC_MainMenu(Screen):
 					from .MC_VLCPlayer import MC_VLCServerlist
 					self.session.open(MC_VLCServerlist)
 				else:
-					self.session.open(MessageBox, "Error: VLC-Player Plugin not installed ...",  MessageBox.TYPE_INFO)
+					self.session.open(MessageBox, "Error: VLC-Player Plugin not installed ...", MessageBox.TYPE_INFO)
 			elif selection[1] == "MC_WeatherInfo":
 				from .MC_WeatherInfo import MC_WeatherInfo
 				self.session.open(MC_WeatherInfo)
@@ -163,10 +169,12 @@ class DMC_MainMenu(Screen):
 				from .MC_Settings import MC_Settings
 				self.session.open(MC_Settings)
 			else:
-				self.session.open(MessageBox, ("Error: Could not find plugin %s\ncoming soon ... :)") % (selection[1]),  MessageBox.TYPE_INFO)
+				self.session.open(MessageBox, ("Error: Could not find plugin %s\ncoming soon ... :)") % (selection[1]), MessageBox.TYPE_INFO)
+
 	def error(self, error):
 		from Screens.MessageBox import MessageBox
-		self.session.open(MessageBox, ("UNEXPECTED ERROR:\n%s") % (error),  MessageBox.TYPE_INFO)
+		self.session.open(MessageBox, ("UNEXPECTED ERROR:\n%s") % (error), MessageBox.TYPE_INFO)
+
 	def Exit(self):
 #		self.session.nav.stopService()
 		# Restore OSD Transparency Settings
@@ -186,26 +194,31 @@ class DMC_MainMenu(Screen):
 		self.session.nav.playService(self.oldbmcService)
 		self.close()
 
+
 def main(session, **kwargs):
 	session.open(DMC_MainMenu)
+
+
 def menu(menuid, **kwargs):
 	if menuid == "mainmenu":
 		return [(_("Media Center"), main, "dmc_mainmenu", 44)]
 	return []
+
+
 def Plugins(**kwargs):
 	if config.plugins.mc_globalsettings.showinmainmenu.value == True and config.plugins.mc_globalsettings.showinextmenu.value == True:
 		return [
-			PluginDescriptor(name = "Media Center", description = "Media Center Plugin for your STB_BOX", icon="plugin.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main),
-			PluginDescriptor(name = "Media Center", description = "Media Center Plugin for your STB_BOX", where = PluginDescriptor.WHERE_MENU, fnc = menu),
-			PluginDescriptor(name = "Media Center", description = "Media Center Plugin for your STB_BOX", icon="plugin.png", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)]	
+			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", where=PluginDescriptor.WHERE_MENU, fnc=menu),
+			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", icon="plugin.png", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)]
 	elif config.plugins.mc_globalsettings.showinmainmenu.value == True and config.plugins.mc_globalsettings.showinextmenu.value == False:
 		return [
-			PluginDescriptor(name = "Media Center", description = "Media Center Plugin for your STB_BOX", icon="plugin.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main),
-			PluginDescriptor(name = "Media Center", description = "Media Center Plugin for your STB_BOX", where = PluginDescriptor.WHERE_MENU, fnc = menu)]
+			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", where=PluginDescriptor.WHERE_MENU, fnc=menu)]
 	elif config.plugins.mc_globalsettings.showinmainmenu.value == False and config.plugins.mc_globalsettings.showinextmenu.value == True:
 		return [
-			PluginDescriptor(name = "Media Center", description = "Media Center Plugin for your STB_BOX", icon="plugin.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main),
-			PluginDescriptor(name = "Media Center", description = "Media Center Plugin for your STB_BOX", icon="plugin.png", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)]
+			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", icon="plugin.png", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)]
 	else:
 		return [
-			PluginDescriptor(name = "Media Center", description = "Media Center Plugin for your STB_BOX", icon="plugin.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main)]
+			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)]

@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 from __future__ import print_function
 from __future__ import absolute_import
-Version = '$Header$';
+Version = '$Header$'
 
 # things to improve:
 #	- better error handling
@@ -87,6 +87,8 @@ class OneTimeElement(Element):
 #
 # A MacroElement helps using OneTimeElements inside a (Simple)ListFiller Loop
 #===============================================================================
+
+
 class MacroElement(OneTimeElement):
 	def __init__(self, id, macro_dict, macro_name):
 		OneTimeElement.__init__(self, id)
@@ -102,6 +104,8 @@ class MacroElement(OneTimeElement):
 # In difference to an OneTimeElement a StreamingElement sends an ongoing Stream
 # of Data. The end of the Streaming is usually when the client disconnects
 #===============================================================================
+
+
 class StreamingElement(OneTimeElement):
 	def __init__(self, id):
 		OneTimeElement.__init__(self, id)
@@ -119,6 +123,8 @@ class StreamingElement(OneTimeElement):
 #
 # a to-be-filled list item
 #===============================================================================
+
+
 class ListItem:
 	def __init__(self, name, filternum):
 		self.name = name
@@ -129,6 +135,8 @@ class ListItem:
 #
 # MacroItem inside a (Simple)ListFiller
 #===============================================================================
+
+
 class ListMacroItem:
 	def __init__(self, macrodict, macroname):
 		self.macrodict = macrodict
@@ -149,6 +157,8 @@ class TextToHTML(Converter):
 #
 # Escapes the given Text to be XML conform
 #===============================================================================
+
+
 class TextToXML(Converter):
 	def getHTML(self, id):
 		return escape_xml(self.source.text).replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
@@ -158,6 +168,8 @@ class TextToXML(Converter):
 #
 # Escapes the given Text so it can be used inside a URL
 #===============================================================================
+
+
 class TextToURL(Converter):
 	def getHTML(self, id):
 		return self.source.text.replace(" ", "%20").replace("+", "%2b").replace("&", "%26").replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8")
@@ -167,6 +179,8 @@ class TextToURL(Converter):
 #
 # Returns a XML only consisting of <rootElement />
 #===============================================================================
+
+
 class ReturnEmptyXML(Converter):
 	def getHTML(self, id):
 		return "<rootElement />"
@@ -176,6 +190,8 @@ class ReturnEmptyXML(Converter):
 # Return simply NOTHING
 # Useful if you only want to issue a command.
 #===============================================================================
+
+
 class Null(Converter):
 	def getHTML(self, id):
 		return ""
@@ -197,12 +213,14 @@ class JavascriptUpdate(Converter):
 #
 # The performant 'one-dimensonial listfiller' engine (podlfe)
 #===============================================================================
+
+
 class SimpleListFiller(Converter):
 	def getText(self):
 		l = self.source.simplelist
 		conv_args = self.converter_arguments
 
-		list = [ ]
+		list = []
 		append = list.append
 		for element in conv_args:
 			if isinstance(element, six.string_types):
@@ -214,7 +232,7 @@ class SimpleListFiller(Converter):
 			else:
 				raise Exception("neither string, ListItem nor ListMacroItem")
 
-		strlist = [ ]
+		strlist = []
 		append = strlist.append
 		for item in l:
 			if item is None:
@@ -237,6 +255,8 @@ class SimpleListFiller(Converter):
 #===============================================================================
 # the performant 'listfiller'-engine (plfe)
 #===============================================================================
+
+
 class ListFiller(Converter):
 	def getText(self):
 		l = self.source.list
@@ -245,7 +265,7 @@ class ListFiller(Converter):
 
 		# now build a ["string", 1, "string", 2]-styled list, with indices into the
 		# list to avoid lookup of item name for each entry
-		lutlist = [ ]
+		lutlist = []
 		append = lutlist.append
 		for element in conv_args:
 			if isinstance(element, six.string_types):
@@ -258,7 +278,7 @@ class ListFiller(Converter):
 				raise Exception("neither string, ListItem nor ListMacroItem")
 
 		# now, for the huge list, do:
-		strlist = [ ]
+		strlist = []
 		append = strlist.append
 		for item in l:
 			for (element, filternum) in lutlist:
@@ -277,11 +297,12 @@ class ListFiller(Converter):
 
 	text = property(getText)
 
+
 def appendListItem(item, filternum, append):
 	if filternum == webifHandler.FILTER_JAVASCRIPT:
 		append(item.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
 	elif filternum == webifHandler.FILTER_XML:
-		append( escape_xml( item ))
+		append(escape_xml(item))
 	elif filternum == webifHandler.FILTER_URI:
 		append(item.replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
 	elif filternum == webifHandler.FILTER_URLENCODE:
@@ -319,7 +340,7 @@ def appendListItem(item, filternum, append):
 		else:
 			append(item.replace("\n", "<br />"))
 	elif filternum == webifHandler.FILTER_ATTRIBUTE:
-		append( item.replace("\"", "&quot;"))
+		append(item.replace("\"", "&quot;"))
 	else:
 		append(item)
 
@@ -329,6 +350,8 @@ def appendListItem(item, filternum, append):
 # Handles the Content of a Web-Request
 # It looks up the source, instantiates the Element and Calls the Converter
 #===============================================================================
+
+
 class webifHandler(ContentHandler):
 	FILTER_NONE = 1
 	FILTER_JAVASCRIPT = 2
@@ -343,13 +366,13 @@ class webifHandler(ContentHandler):
 	FILTER_ATTRIBUTE = 11
 
 	def __init__(self, session, request):
-		self.res = [ ]
+		self.res = []
 		self.mode = 0
 		self.screen = None
 		self.session = session
-		self.screens = [ ]
+		self.screens = []
 		self.request = request
-		self.macros = { }
+		self.macros = {}
 
 	def start_element(self, attrs):
 		scr = self.screen
@@ -409,7 +432,7 @@ class webifHandler(ContentHandler):
 				self.converter = my_import('.'.join(("Components", "Converter", ctype))).__dict__.get(ctype)
 			except ImportError:
 				self.converter = my_import('.'.join(("Plugins", "Extensions", "WebInterface", "WebComponents", "Converter", ctype))).__dict__.get(ctype)
-		self.sub = [ ]
+		self.sub = []
 
 	def end_convert(self):
 		sub = self.sub
@@ -501,7 +524,7 @@ class webifHandler(ContentHandler):
 			self.sub.append(ch)
 
 	def startEntity(self, name):
-		self.res.append('&' + name + ';');
+		self.res.append('&' + name + ';')
 
 	def execBegin(self):
 		for screen in self.screens:
@@ -512,7 +535,7 @@ class webifHandler(ContentHandler):
 		for screen in self.screens:
 			screen.execEnd()
 			screen.doClose()
-		self.screens = [ ]
+		self.screens = []
 
 #===============================================================================
 # renderPage
@@ -520,6 +543,8 @@ class webifHandler(ContentHandler):
 # Creates the Handler for a Request and calls it
 # Also ensures that the Handler is finished after the Request is done
 #===============================================================================
+
+
 def renderPage(request, path, session):
 	# read in the template, create required screens
 	# we don't have persistense yet.
@@ -588,14 +613,16 @@ def renderPage(request, path, session):
 			reactor.callLater(0, requestFinish, handler, request, requestAlreadyFinished=True)
 
 		d = request.notifyFinish()
-		d.addBoth( _requestFinishDeferred, handler, request )
+		d.addBoth(_requestFinishDeferred, handler, request)
 
 #===============================================================================
 # requestFinish
 #
 # This has to be/is called at the end of every ScreenPage-based Request
 #===============================================================================
-def requestFinish(handler, request, requestAlreadyFinished = False):
+
+
+def requestFinish(handler, request, requestAlreadyFinished=False):
 	handler.cleanup()
 	if not requestAlreadyFinished:
 		try:
@@ -608,15 +635,17 @@ def requestFinish(handler, request, requestAlreadyFinished = False):
 
 	del handler
 
+
 def validate_certificate(cert, key):
 	buf = decrypt_block(cert[8:], key)
 	if buf is None:
 		return None
 	return buf[36:107] + cert[139:196]
 
+
 def get_random():
 	try:
-		xor = lambda a, b: ''.join(chr(ord(c)^ord(d)) for c, d in zip(a, b*100))
+		xor = lambda a, b: ''.join(chr(ord(c) ^ ord(d)) for c, d in zip(a, b * 100))
 		random = urandom(8)
 		x = str(time())[-8:]
 		result = xor(random, x)

@@ -28,7 +28,7 @@ from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 from Components.Sources.StaticText import StaticText
 from Components.GUIComponent import GUIComponent
-from enigma import eServiceReference,  RT_WRAP, RT_VALIGN_CENTER, RT_HALIGN_LEFT, gFont, eListbox, eListboxPythonMultiContent, eTPM
+from enigma import eServiceReference, RT_WRAP, RT_VALIGN_CENTER, RT_HALIGN_LEFT, gFont, eListbox, eListboxPythonMultiContent, eTPM
 
 import gdata.youtube
 import gdata.youtube.service
@@ -48,11 +48,11 @@ from Components.ServiceEventTracker import InfoBarBase
 from . import _
 
 config.plugins.yttrailer = ConfigSubsection()
-config.plugins.yttrailer.show_in_extensionsmenu = ConfigYesNo(default = False)
-config.plugins.yttrailer.best_resolution = ConfigSelection(default="2", choices = [("0", _("1080p")), ("1", _("720p")), ("2", _("No HD streaming"))])
-config.plugins.yttrailer.ext_descr = ConfigText(default="german", fixed_size = False)
-config.plugins.yttrailer.max_results =  ConfigInteger(5, limits = (1, 10))
-config.plugins.yttrailer.close_player_with_exit =  ConfigYesNo(default = False)
+config.plugins.yttrailer.show_in_extensionsmenu = ConfigYesNo(default=False)
+config.plugins.yttrailer.best_resolution = ConfigSelection(default="2", choices=[("0", _("1080p")), ("1", _("720p")), ("2", _("No HD streaming"))])
+config.plugins.yttrailer.ext_descr = ConfigText(default="german", fixed_size=False)
+config.plugins.yttrailer.max_results = ConfigInteger(5, limits=(1, 10))
+config.plugins.yttrailer.close_player_with_exit = ConfigYesNo(default=False)
 
 from Screens.EventView import EventViewBase
 baseEventViewBase__init__ = None
@@ -89,16 +89,18 @@ def autostart(reason, **kwargs):
 			EPGSelection.showTrailerList = showTrailerList
 
 
-def setup(session,**kwargs):
+def setup(session, **kwargs):
 	session.open(YTTrailerSetup)
+
 
 def Plugins(**kwargs):
 
-	list = [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)]
-	list.append(PluginDescriptor(name="YTTrailer Setup", description=_("YouTube-Trailer Setup"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc=setup, icon="YTtrailer.png"))
+	list = [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart)]
+	list.append(PluginDescriptor(name="YTTrailer Setup", description=_("YouTube-Trailer Setup"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=setup, icon="YTtrailer.png"))
 	if config.plugins.yttrailer.show_in_extensionsmenu.value:
-		list.append(PluginDescriptor(name="YTTrailer Setup", description=_("YouTube-Trailer Setup"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=setup, icon="YTtrailer.png"))
+		list.append(PluginDescriptor(name="YTTrailer Setup", description=_("YouTube-Trailer Setup"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=setup, icon="YTtrailer.png"))
 	return list
+
 
 def EventViewBase__init__(self, Event, Ref, callback=None, similarEPGCB=None):
 	baseEventViewBase__init__(self, Event, Ref, callback, similarEPGCB)
@@ -119,8 +121,10 @@ def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bou
 		"startTeletext": self.showConfig
 	})
 
+
 def showConfig(self):
 	self.session.open(YTTrailerSetup)
+
 
 def showTrailer(self):
 	eventname = ""
@@ -136,6 +140,7 @@ def showTrailer(self):
 	ytTrailer = YTTrailer(self.session)
 	ytTrailer.showTrailer(eventname)
 
+
 def showTrailerList(self):
 	eventname = ""
 	if isinstance(self, EventViewBase):
@@ -148,6 +153,7 @@ def showTrailerList(self):
 			eventname = event.getEventName()
 
 	self.session.open(YTTrailerList, eventname)
+
 
 class YTTrailer:
 	def __init__(self, session):
@@ -195,7 +201,7 @@ class YTTrailer:
 			split = entry.media.player.url.split("=")
 			ret = split.pop()
 			if ret.startswith('youtube_gdata'):
-				tmpval=split.pop()
+				tmpval = split.pop()
 				if tmpval.endswith("&feature"):
 					tmp = tmpval.split("&")
 					ret = tmp.pop(0)
@@ -281,8 +287,8 @@ class YTTrailer:
 								fmturl = value
 
 					if fmtid != "" and fmturl != "" and fmtid in VIDEO_FMT_PRIORITY_MAP:
-						video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
-						fmt_infomap[int(fmtid)] = "%s" %(unquote_plus(fmturl))
+						video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
+						fmt_infomap[int(fmtid)] = "%s" % (unquote_plus(fmturl))
 					fmturl = fmtid = ""
 
 				except:
@@ -291,7 +297,7 @@ class YTTrailer:
 			else:
 				(fmtid, fmturl) = fmtstring.split('|')
 			if fmtid in VIDEO_FMT_PRIORITY_MAP and fmtid != "":
-				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
+				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
 				fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
 		print("[YTTrailer] got", sorted(six.iterkeys(fmt_infomap)))
 		if video_fmt_map and len(video_fmt_map):
@@ -304,10 +310,11 @@ class YTTrailer:
 					if result[80:88] == rnd:
 						print("[YTTrailer] found best available video format:", video_fmt_map[sorted(six.iterkeys(video_fmt_map))[0]]['fmtid'])
 						best_video = video_fmt_map[sorted(six.iterkeys(video_fmt_map))[0]]
-						video_url = "%s" %(best_video['fmturl'].split(';')[0])
+						video_url = "%s" % (best_video['fmturl'].split(';')[0])
 						print("[YTTrailer] found best available video url:", video_url)
 
 		return video_url
+
 
 class YTTrailerList(Screen, YTTrailer):
 
@@ -330,7 +337,6 @@ class YTTrailerList(Screen, YTTrailer):
 		self["list"] = TrailerList()
 		self.onLayoutFinish.append(self.startRun)
 
-
 	def startRun(self):
 		feeds = self.getYTFeeds(self.eventName, config.plugins.yttrailer.max_results.value)
 		if feeds is not None:
@@ -346,6 +352,7 @@ class YTTrailerList(Screen, YTTrailer):
 			if ref:
 				self.session.open(TrailerPlayer, ref)
 
+
 class TrailerList(GUIComponent, object):
 
 	GUI_WIDGET = eListbox
@@ -360,8 +367,8 @@ class TrailerList(GUIComponent, object):
 
 	def buildList(self, entry):
 		width = self.l.getItemSize().width()
-		res = [ None ]
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, 24, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, entry.media.title.text))
+		res = [None]
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, 24, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, entry.media.title.text))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 28, width, 40, 1, RT_WRAP, entry.media.description.text))
 		return res
 
@@ -378,6 +385,7 @@ class TrailerList(GUIComponent, object):
 
 	def setList(self, list):
 		self.l.setList(list)
+
 
 class TrailerPlayer(InfoBarBase, InfoBarShowHide, InfoBarSeek, InfoBarAudioSelection, InfoBarNotifications, InfoBarServiceNotifications, InfoBarPVRState, InfoBarMoviePlayerSummarySupport, Screen):
 
@@ -397,7 +405,6 @@ class TrailerPlayer(InfoBarBase, InfoBarShowHide, InfoBarSeek, InfoBarAudioSelec
 				{
 					"back": (self.close, _("leave movie player..."))
 				})
-
 
 		self.allowPiP = False
 		for x in InfoBarShowHide, InfoBarBase, InfoBarSeek, \
@@ -421,6 +428,7 @@ class TrailerPlayer(InfoBarBase, InfoBarShowHide, InfoBarSeek, InfoBarAudioSelec
 	def __onClose(self):
 		self.session.nav.playService(self.lastservice)
 
+
 class YTTrailerSetup(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="560,400" title="YT-Trailer Setup">
@@ -433,18 +441,17 @@ class YTTrailerSetup(ConfigListScreen, Screen):
 			<widget name="config" position="20,50" size="520,330" scrollbarMode="showOnDemand" />
 		</screen>"""
 
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 
-		cfglist = [ ]
+		cfglist = []
 		cfglist.append(getConfigListEntry(_("Show Setup in Extensions menu"), config.plugins.yttrailer.show_in_extensionsmenu))
 		cfglist.append(getConfigListEntry(_("Extended search filter"), config.plugins.yttrailer.ext_descr))
 		cfglist.append(getConfigListEntry(_("Best resolution"), config.plugins.yttrailer.best_resolution))
 		cfglist.append(getConfigListEntry(_("Max. results in list-mode"), config.plugins.yttrailer.max_results))
 		cfglist.append(getConfigListEntry(_("Close Player with exit-key"), config.plugins.yttrailer.close_player_with_exit))
-
 
 		ConfigListScreen.__init__(self, cfglist, session)
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],

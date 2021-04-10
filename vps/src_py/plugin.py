@@ -11,13 +11,13 @@ from boxbranding import getImageDistro
 from Components.config import config, ConfigYesNo, ConfigSubsection, ConfigInteger, ConfigSelection
 
 config.plugins.vps = ConfigSubsection()
-config.plugins.vps.enabled = ConfigYesNo(default = True)
-config.plugins.vps.do_PDC_check = ConfigYesNo(default = True)
+config.plugins.vps.enabled = ConfigYesNo(default=True)
+config.plugins.vps.do_PDC_check = ConfigYesNo(default=True)
 config.plugins.vps.initial_time = ConfigInteger(default=10, limits=(0, 120))
-config.plugins.vps.allow_wakeup = ConfigYesNo(default = False)
-config.plugins.vps.allow_seeking_multiple_pdc = ConfigYesNo(default = True)
-config.plugins.vps.vps_default = ConfigSelection(choices = [("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes"))], default = "no")
-config.plugins.vps.instanttimer = ConfigSelection(choices = [("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes")), ("ask", _("always ask"))], default = "ask")
+config.plugins.vps.allow_wakeup = ConfigYesNo(default=False)
+config.plugins.vps.allow_seeking_multiple_pdc = ConfigYesNo(default=True)
+config.plugins.vps.vps_default = ConfigSelection(choices=[("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes"))], default="no")
+config.plugins.vps.instanttimer = ConfigSelection(choices=[("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes")), ("ask", _("always ask"))], default="ask")
 config.plugins.vps.infotext = ConfigInteger(default=0)
 
 # 04 Feb 2021.  If we don't force-save this then
@@ -27,6 +27,7 @@ config.plugins.vps.infotext = ConfigInteger(default=0)
 # imple fix/workaround.
 #
 config.plugins.vps.enabled.save_forced = True
+
 
 def autostart(reason, **kwargs):
 	if reason == 0:
@@ -65,45 +66,47 @@ def autostart(reason, **kwargs):
 def setup(session, **kwargs):
 	session.openWithCallback(doneConfig, VPS_Setup)
 
+
 def doneConfig(session, **kwargs):
 	vps_timers.checkTimer()
+
 
 def startSetup(menuid):
 	if getImageDistro() in ('teamblue'):
 		if menuid != "general_menu":
-			return [ ]
+			return []
 	elif getImageDistro() in ('openhdf'):
 		if menuid != "record_menu":
-			return [ ]
+			return []
 	elif getImageDistro() in ('openvix'):
 		if menuid != "rec":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
 			return []
 	return [(_("VPS Settings"), setup, "vps", 50)]
 
+
 def getNextWakeup():
 	return vps_timers.NextWakeup()
-
 
 
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
-			name = "VPS",
-			where = [
+			name="VPS",
+			where=[
 				PluginDescriptor.WHERE_AUTOSTART,
 				PluginDescriptor.WHERE_SESSIONSTART
 			],
-			fnc = autostart,
-			wakeupfnc = getNextWakeup,
-			needsRestart = True
+			fnc=autostart,
+			wakeupfnc=getNextWakeup,
+			needsRestart=True
 		),
 		PluginDescriptor(
-			name = _("VPS Settings"),
-			where = PluginDescriptor.WHERE_MENU,
-			fnc = startSetup,
-			needsRestart = True
+			name=_("VPS Settings"),
+			where=PluginDescriptor.WHERE_MENU,
+			fnc=startSetup,
+			needsRestart=True
 		),
 	]

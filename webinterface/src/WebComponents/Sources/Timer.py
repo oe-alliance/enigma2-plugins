@@ -1,5 +1,5 @@
 from __future__ import print_function
-Version = '$Header$';
+Version = '$Header$'
 
 from enigma import eServiceReference, eEPGCache
 from Components.config import config
@@ -11,6 +11,7 @@ from RecordTimer import RecordTimerEntry, RecordTimer, AFTEREVENT, parseEvent
 
 from xml.sax.saxutils import unescape
 from time import time, strftime, localtime, mktime
+
 
 class Timer(Source):
 	LIST = 0
@@ -29,7 +30,7 @@ class Timer(Source):
 		self.session = session
 		self.recordtimer = session.nav.RecordTimer
 		self.epgcache = eEPGCache.getInstance()
-		self.res = ( False, "unknown command" )
+		self.res = (False, "unknown command")
 
 	def handleCommand(self, cmd):
 		if self.func is self.ADDBYID:
@@ -62,14 +63,13 @@ class Timer(Source):
 			self.res = self.cleanupTimer()
 
 		else:
-			self.res = ( False, _("Unknown function: '%s'") % (self.func) )
+			self.res = (False, _("Unknown function: '%s'") % (self.func))
 
 	def cleanupTimer(self):
 		print("[WebComponents.Timer] cleanupTimer")
 
 		self.session.nav.RecordTimer.cleanup()
-		return ( True, _("List of Timers has been cleaned") )
-
+		return (True, _("List of Timers has been cleaned"))
 
 	def delTimer(self, param):
 		print("[WebComponents.Timer] delTimer")
@@ -77,17 +77,17 @@ class Timer(Source):
 		if 'sRef' in param:
 			service_ref = ServiceReference(param['sRef'])
 		else:
-			return ( False, _("Missing Parameter: sRef") )
+			return (False, _("Missing Parameter: sRef"))
 
 		if 'begin' in param:
 			begin = int(float(param['begin']))
 		else:
-			return ( False, _("Missing Parameter: begin") )
+			return (False, _("Missing Parameter: begin"))
 
 		if 'end' in param:
 			end = int(float(param['end']))
 		else:
-			return ( False, _("Missing Parameter: end") )
+			return (False, _("Missing Parameter: end"))
 
 		try:
 			for timer in self.recordtimer.timer_list + self.recordtimer.processed_timers:
@@ -95,7 +95,7 @@ class Timer(Source):
 					self.recordtimer.removeEntry(timer)
 					return True, _("The timer '%s' has been deleted successfully") % (timer.name)
 		except Exception:
-			return ( False, _("The timer has NOT been deleted") )
+			return (False, _("The timer has NOT been deleted"))
 
 		return False, "No matching Timer found"
 
@@ -119,20 +119,20 @@ class Timer(Source):
 		for element in listDate:
 			if param[element] is None:
 				if param['s' + element] is None:
-					return ( False, "%s missing" % element )
+					return (False, "%s missing" % element)
 				else:
 					param[element] = int(param['s' + element])
 			else:
 				param[element] = int(param[element])
 		param['begin'] = int(mktime((param['year'], param['month'], param['day'], param['shour'], param['smin'], 0, 0, 0, -1)))
-		param['end']	 = int(mktime((param['year'], param['month'], param['day'], param['ehour'], param['emin'], 0, 0, 0, -1)))
+		param['end'] = int(mktime((param['year'], param['month'], param['day'], param['ehour'], param['emin'], 0, 0, 0, -1)))
 		if param['end'] < param['begin']:
 			param['end'] += 86400
 		for element in listDate:
 			del param[element]
 
 		if param['sRef'] is None:
-			return ( False, "Missing Parameter: sRef" )
+			return (False, "Missing Parameter: sRef")
 		else:
 			takeApart = param['sRef'].split('|')
 			if len(takeApart) > 1:
@@ -159,7 +159,7 @@ class Timer(Source):
 			del param['command']
 			return self.editTimer(param)
 		else:
-			return ( False, "Unknown command: '%s'" % param['command'] )
+			return (False, "Unknown command: '%s'" % param['command'])
 
 	def recordNow(self, param):
 		limitEvent = True
@@ -167,7 +167,7 @@ class Timer(Source):
 			ret = (True, "Infinite Instant recording started")
 			limitEvent = False
 		else:
-			ret = ( True, "Instant record for current Event started" )
+			ret = (True, "Instant record for current Event started")
 
 		serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference().toString())
 
@@ -194,7 +194,7 @@ class Timer(Source):
 				end = curEvent[1]
 		else:
 			if limitEvent:
-				ret = ( False, "No event found! Not recording!" )
+				ret = (False, "No event found! Not recording!")
 
 		if ret[0]:
 			location = preferredInstantRecordPath()
@@ -203,7 +203,7 @@ class Timer(Source):
 			recRet = self.recordtimer.record(timer)
 			if recRet is not None:
 				# a conflict is rather unlikely, but this can also indicate a non-recordable service
-				ret = (False, "Timer conflict detected! Not recording!" )
+				ret = (False, "Timer conflict detected! Not recording!")
 
 		return ret
 
@@ -214,6 +214,7 @@ class Timer(Source):
 # Otherwise, and if the parameters channelOld, beginOld and endOld are set,
 # an existing timer with corresponding values will be changed.
 #===============================================================================
+
 	def editTimer(self, param):
 		print("[WebComponents.Timer] editTimer")
 
@@ -223,26 +224,26 @@ class Timer(Source):
 		#we have to quit if they are not set/have illegal values
 
 		if 'sRef' not in param:
-			return ( False, _("Missing Parameter: sRef") )
+			return (False, _("Missing Parameter: sRef"))
 		service_ref = ServiceReference(param['sRef'])
 
 		repeated = int(param.get('repeated') or 0)
 
 		if 'begin' not in param:
-			return ( False, _("Missing Parameter: begin") )
+			return (False, _("Missing Parameter: begin"))
 		begin = int(float(param['begin']))
 
 		if 'end' not in param:
-			return ( False, _("Missing Parameter: end") )
+			return (False, _("Missing Parameter: end"))
 		end = int(float(param['end']))
 
-		tm = int( time() )
+		tm = int(time())
 		if tm <= begin:
 			pass
 		elif tm > begin and tm < end and repeated == 0:
 			pass
 		elif repeated == 0:
-			return ( False, _("Illegal Parameter value for Parameter begin : '%s'") % begin )
+			return (False, _("Illegal Parameter value for Parameter begin : '%s'") % begin)
 
 		if 'applyMargin' in param:
 			if param['applyMargin'] == "1":
@@ -250,21 +251,23 @@ class Timer(Source):
 				end += config.recording.margin_after.value * 60
 
 		if 'name' not in param:
-			return ( False, _("Missing Parameter: name") )
+			return (False, _("Missing Parameter: name"))
 		name = param['name']
 
 		if 'description' not in param:
-			return ( False, _("Missing Parameter: description") )
+			return (False, _("Missing Parameter: description"))
 		description = param['description'].replace("\n", " ")
 
 		eit = param.get("eit", None)
 		if eit is None or eit.strip() == "":
 			eit = 0
 		else:
-			try: eit = int(eit)
-			except ValueError: return ( False, _("Illegal Parameter value for Parameter eit : '%s'") % eit )
+			try:
+				eit = int(eit)
+			except ValueError:
+				return (False, _("Illegal Parameter value for Parameter eit : '%s'") % eit)
 
-		print("[WebComponents.Sources.Timer]: eit=%d" %eit)
+		print("[WebComponents.Sources.Timer]: eit=%d" % eit)
 		if eit != 0:
 			#check if the given event exists, if it doesn't the timer may be already running
 			epgcache = eEPGCache.getInstance()
@@ -310,16 +313,16 @@ class Timer(Source):
 			if 'channelOld' in param and param['channelOld']:
 				channelOld = ServiceReference(param['channelOld'])
 			else:
-				return ( False, _("Missing Parameter: channelOld") )
+				return (False, _("Missing Parameter: channelOld"))
 			# We do need all of the following Parameters, too, for being able of finding the Timer.
 			# Therefore so we can neither use default values in this part nor can we
 			# continue if a parameter is missing
 			if 'beginOld' not in param:
-				return ( False, _("Missing Parameter: beginOld") )
+				return (False, _("Missing Parameter: beginOld"))
 			beginOld = int(param['beginOld'])
 
 			if 'endOld' not in param:
-				return ( False, _("Missing Parameter: endOld") )
+				return (False, _("Missing Parameter: endOld"))
 			endOld = int(param['endOld'])
 
 			#let's try to find the timer
@@ -358,23 +361,22 @@ class Timer(Source):
 								if conflicts is None:
 									self.recordtimer.timeChanged(timer) #go and save it
 									print("[WebComponents.Timer] editTimer: Timer changed!")
-									return ( True, "Timer '%s' changed" %(timer.name) )
+									return (True, "Timer '%s' changed" % (timer.name))
 								else:
-									print("[WebComponents.Timer] editTimer conflicting Timers: %s" %(conflicts))
+									print("[WebComponents.Timer] editTimer conflicting Timers: %s" % (conflicts))
 									msg = ""
 									for t in conflicts:
-										msg = "%s / %s" %(msg, t.name)
+										msg = "%s / %s" % (msg, t.name)
 
-									return (False, _("Conflicting Timer(s) detected! %s") %(msg))
+									return (False, _("Conflicting Timer(s) detected! %s") % (msg))
 
 			except Exception as e:
 				#obviously some value was not good, return an error
 				import traceback
 				print(traceback.format_exc())
-				return ( False, _("Changing the timer for '%s' failed!") % name )
+				return (False, _("Changing the timer for '%s' failed!") % name)
 
-
-			return ( False, _("Could not find timer '%s' with given start and end time!") % name )
+			return (False, _("Could not find timer '%s' with given start and end time!") % name)
 
 		#Try adding a new Timer
 
@@ -385,28 +387,28 @@ class Timer(Source):
 			#add the new timer
 			conflicts = self.recordtimer.record(timer)
 			if conflicts is None:
-				return ( True, _("Timer '%s' added") %(timer.name) )
+				return (True, _("Timer '%s' added") % (timer.name))
 			else:
-				print("[WebComponents.Timer] editTimer conflicting Timers: %s" %(conflicts))
+				print("[WebComponents.Timer] editTimer conflicting Timers: %s" % (conflicts))
 				msg = ""
 				for timer in conflicts:
-					msg = "%s / %s" %(msg, timer.name)
+					msg = "%s / %s" % (msg, timer.name)
 
-				return (False, _("Conflicting Timer(s) detected! %s") %(msg))
+				return (False, _("Conflicting Timer(s) detected! %s") % (msg))
 
 		except Exception as e:
 			#something went wrong, most possibly one of the given paramater-values was wrong
-			print("[WebComponents.Timer] editTimer exception: %s" %(e))
-			return ( False, _("Could not add timer '%s'!") % name )
+			print("[WebComponents.Timer] editTimer exception: %s" % (e))
+			return (False, _("Could not add timer '%s'!") % name)
 
-		return ( False, "Unexpected Error" )
+		return (False, "Unexpected Error")
 
 	def addTimerByEventID(self, param):
 		print("[WebComponents.Timer] addTimerByEventID", param)
 		if param['sRef'] is None:
-			return ( False, _("Missing Parameter: sRef") )
+			return (False, _("Missing Parameter: sRef"))
 		if param['eventid'] is None:
-			return ( False, _("Missing Parameter: eventid") )
+			return (False, _("Missing Parameter: eventid"))
 
 		justplay = False
 		if param['justplay'] is not None:
@@ -424,7 +426,7 @@ class Timer(Source):
 		epgcache = eEPGCache.getInstance()
 		event = epgcache.lookupEventId(eServiceReference(param['sRef']), int(param['eventid']))
 		if event is None:
-			return ( False, _("EventId not found") )
+			return (False, _("EventId not found"))
 
 		(begin, end, name, description, eit) = parseEvent(event)
 
@@ -432,25 +434,23 @@ class Timer(Source):
 
 		conflicts = self.recordtimer.record(timer)
 		if conflicts is None:
-			return ( True, _("Timer '%s' added") %(timer.name) )
+			return (True, _("Timer '%s' added") % (timer.name))
 		else:
-			print("[WebComponents.Timer] editTimer conflicting Timers: %s" %(conflicts))
+			print("[WebComponents.Timer] editTimer conflicting Timers: %s" % (conflicts))
 			msg = ""
 			for timer in conflicts:
-				msg = "%s / %s" %(msg, timer.name)
+				msg = "%s / %s" % (msg, timer.name)
 
-			return (False, _("Conflicting Timer(s) detected! %s") %(msg))
-
+			return (False, _("Conflicting Timer(s) detected! %s") % (msg))
 
 	def writeTimerList(self, force=False):
 		# is there an easier and better way? :\
 		if config.plugins.Webinterface.autowritetimer.value or force:
 			print("Timer.py writing timer to flash")
 			self.session.nav.RecordTimer.saveTimer()
-			return ( True, _("TimerList has been saved") )
+			return (True, _("TimerList has been saved"))
 		else:
-			return ( False, _("TimerList has not been saved") )
-
+			return (False, _("TimerList has not been saved"))
 
 	def getResult(self):
 		return self.res

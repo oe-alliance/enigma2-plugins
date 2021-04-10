@@ -6,9 +6,12 @@
 from twisted.web.client import getPage
 from xml.etree.cElementTree import fromstring
 import six
+
+
 class AtomFeed:
     """ Simple XML parser that extracts pages from a atom feed """
     ns = "{http://www.w3.org/2005/Atom}"
+
     def __init__(self, url, callback, errorCallback):
         """ Fetches the URL
 
@@ -23,7 +26,7 @@ class AtomFeed:
         pages = []
         for entry in xml.findall("{0}entry".format(self.ns)):
             titleE = entry.find("{0}title".format(self.ns))
-            url   = self.bestLink(entry.findall("{0}link".format(self.ns)))
+            url = self.bestLink(entry.findall("{0}link".format(self.ns)))
             if titleE != None and titleE.text != "" and url != None:
                 pages.append({"title": titleE.text, "url": url})
 

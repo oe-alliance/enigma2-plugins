@@ -11,6 +11,7 @@ from six.moves.urllib.request import Request, urlopen
 import six
 ##################################################
 
+
 class Cache:
 	def __init__(self):
 		self.sc = AVSwitch().getFramebufferScale()
@@ -32,9 +33,12 @@ class Cache:
 	def startCallbackTimer(self):
 		self.finishCallbackTimer.stop()
 		self.finishCallbackTimer.start(5000, 1)
+
+
 cache = Cache()
 
 ##################################################
+
 
 class Movie:
 	def __init__(self, name, url, thumb=None):
@@ -52,9 +56,9 @@ class Movie:
 				contentType = None
 			if contentType:
 				if 'image/jpeg' in contentType:
-					self.thumbnailFile = "/tmp/"+str(cache.getIndex())+".jpg"
+					self.thumbnailFile = "/tmp/" + str(cache.getIndex()) + ".jpg"
 				elif 'image/png' in contentType:
-					self.thumbnailFile = "/tmp/"+str(cache.getIndex())+".png"
+					self.thumbnailFile = "/tmp/" + str(cache.getIndex()) + ".png"
 				else:
 					self.thumbnailFile = None
 			else:
@@ -63,7 +67,8 @@ class Movie:
 				downloadPage(six.ensure_binary(thumb), self.thumbnailFile).addCallback(self.decodeThumbnail).addErrback(self.error)
 
 	def error(self, error=None):
-		if error: print(error)
+		if error:
+			print(error)
 
 	def decodeThumbnail(self, str=None):
 		self.picload = ePicLoad()
@@ -84,11 +89,12 @@ class Movie:
 
 ##################################################
 
+
 class Plugin:
 	def __init__(self, name, thumb):
 		self.type = "Plugin"
 		self.name = name
-		self.thumb = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS)+"/Extensions/PornCenter/Additions/"+thumb)
+		self.thumb = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS) + "/Extensions/PornCenter/Additions/" + thumb)
 		self.callback = None
 
 	def getName(self):
@@ -112,9 +118,10 @@ class Plugin:
 
 ##################################################
 
+
 def getPlugins():
 	try:
-		files = sorted(listdir(resolveFilename(SCOPE_PLUGINS)+"/Extensions/PornCenter/Additions"))
+		files = sorted(listdir(resolveFilename(SCOPE_PLUGINS) + "/Extensions/PornCenter/Additions"))
 	except Exception as exc:
 		print("[PornCenter] failed to search for plugins:", exc)
 		files = []

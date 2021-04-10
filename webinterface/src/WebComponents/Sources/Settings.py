@@ -1,6 +1,7 @@
 from Components.config import config
 from Components.Sources.Source import Source
 
+
 class Settings(Source):
 	def __init__(self, session):
 		self.cmd = []
@@ -26,6 +27,5 @@ class Settings(Source):
 				result.append((name, val))
 
 	list = property(do_func)
-	lut = {"Name": 0
-			, "Value": 1
+	lut = {"Name": 0			, "Value": 1
 			}

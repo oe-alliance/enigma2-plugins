@@ -69,6 +69,7 @@ class IAccount(Interface):
         @returntype: L{Person<IPerson>}
         """
 
+
 class IClient(Interface):
     """
     @ivar account: The Account I am a Client for.
@@ -94,7 +95,7 @@ class IClient(Interface):
         @type groupName: string
         """
 
-    def getGroupConversation(name,hide=0):
+    def getGroupConversation(name, hide=0):
         pass
 
     def getPerson(name):
@@ -206,6 +207,7 @@ class IConversation(Interface):
         @param person: XXX Shouldn't this always be Conversation.person?
         """
 
+
 class IGroupConversation(Interface):
     def show():
         """doesn't seem like it belongs in this interface."""
@@ -285,7 +287,7 @@ class IChatUI(Interface):
         @returntype: L{Conversation<IConversation>}
         """
 
-    def getGroupConversation(group,Class,stayHidden=0):
+    def getGroupConversation(group, Class, stayHidden=0):
         """For the given group object, returns the group conversation window or
         creates and returns a new group conversation window if it doesn't exist.
 
