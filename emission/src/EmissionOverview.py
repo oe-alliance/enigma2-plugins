@@ -450,12 +450,12 @@ class EmissionOverview(Screen, HelpableScreen):
 				]
 
 			self["torrents"].setText(_("Active Torrents: %d/%d") % (session.activeTorrentCount, session.torrentCount))
-			self["upspeed"].setText(_("UL: %d kb/s") % (session.uploadSpeed/1024))
-			self["downspeed"].setText(_("DL: %d kb/s") % (session.downloadSpeed/1024))
+			self["upspeed"].setText(_("UL: %d kb/s") % (session.uploadSpeed / 1024))
+			self["downspeed"].setText(_("DL: %d kb/s") % (session.downloadSpeed / 1024))
 
 			# XXX: this is a little ugly but this way we have the least
 			# visible distortion :-)
-			index = min(self['list'].index, len(lst)-1)
+			index = min(self['list'].index, len(lst) - 1)
 			self['list'].setList(lst)
 			self['list'].index = index
 

@@ -47,7 +47,7 @@ class RecordNotification(ControllerBase):
  
 		# Default configuration
 		self.setOption('send_on_start', NoSave(ConfigYesNo(default=False)), _("Send notification on record start"))
-		self.setOption('send_on_end',   NoSave(ConfigYesNo(default=True)),  _("Send notification on record end"))
+		self.setOption('send_on_end', NoSave(ConfigYesNo(default=True)), _("Send notification on record end"))
 		#TODO option to send free space
 
 	def begin(self):

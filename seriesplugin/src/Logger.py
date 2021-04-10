@@ -102,7 +102,7 @@ class Logger(object):
 					strargs,
 					MessageBox.TYPE_INFO,
 					int(config.plugins.seriesplugin.popups_success_timeout.value),
-					'SP_PopUp_ID_Success_'+strargs
+					'SP_PopUp_ID_Success_' + strargs
 				)
 
 	def info(self, *args):
@@ -146,7 +146,7 @@ class Logger(object):
 					strargs,
 					MessageBox.TYPE_WARNING,
 					int(config.plugins.seriesplugin.popups_warning_timeout.value),
-					'SP_PopUp_ID_Warning_'+strargs
+					'SP_PopUp_ID_Warning_' + strargs
 				)
 
 	def error(self, *args):
@@ -164,7 +164,7 @@ class Logger(object):
 					strargs,
 					MessageBox.TYPE_ERROR,
 					-1,
-					'SP_PopUp_ID_Error_'+strargs
+					'SP_PopUp_ID_Error_' + strargs
 				)
 		
 	def exception(self, *args):
@@ -182,7 +182,7 @@ class Logger(object):
 					strargs,
 					MessageBox.TYPE_ERROR,
 					-1,
-					'SP_PopUp_ID_Exception_'+strargs
+					'SP_PopUp_ID_Exception_' + strargs
 				)
 
 

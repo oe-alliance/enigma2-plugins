@@ -99,7 +99,7 @@ def findNumber(number, filename):
 					if row[11]: # Ort geschäftlich
 						addressB = row[11]
 						if row[13]:
-							addressB =  row[13] + ' ' + addressB# Postleitzahl geschäftlich
+							addressB = row[13] + ' ' + addressB# Postleitzahl geschäftlich
 						if row[14]:
 							addressB = addressB + ', ' + row[14] # Land/Region geschäftlich
 						if row[8]:
@@ -182,7 +182,7 @@ def readNumbers(filename, outFun):
 				if row[11]: # Ort gesch￤ftlich
 					addressB = row[11]
 					if row[13]:
-						addressB =  row[13] + ' ' + addressB# Postleitzahl gesch￤ftlich
+						addressB = row[13] + ' ' + addressB# Postleitzahl gesch￤ftlich
 					if row[14]:
 						addressB = addressB + ', ' + row[14] # Land/Region gesch￤ftlich
 					if row[8]:

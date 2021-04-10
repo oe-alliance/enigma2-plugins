@@ -33,7 +33,7 @@ def getValue(definitions, default):
 	if isinstance(definitions, list):
 		Len = len(definitions)
 		if Len > 0:
-			childNodes = definitions[Len-1].text
+			childNodes = definitions[Len - 1].text
 		else:
 			childNodes = ""
 	else:
@@ -133,7 +133,7 @@ def parseEntry(element, baseTimer, defaults=False):
 	# Read out max length
 	maxduration = element.get("maxduration")
 	if maxduration:
-		baseTimer.maxduration = int(maxduration)*60
+		baseTimer.maxduration = int(maxduration) * 60
 
 	# Read out recording path
 	default = baseTimer.destination or ""
@@ -179,9 +179,9 @@ def parseEntry(element, baseTimer, defaults=False):
 					# strip all after last :
 					pos = value.rfind(':')
 					if pos != -1:
-						if value[pos-1] == ':':
+						if value[pos - 1] == ':':
 							pos -= 1
-						value = value[:pos+1]
+						value = value[:pos + 1]
 
 				servicelist.append(value)
 		baseTimer.services = servicelist
@@ -256,7 +256,7 @@ def parseEntry(element, baseTimer, defaults=False):
 		baseTimer.include = includes
 
 	# Read out recording tags
-	l =  element.findall("tag")
+	l = element.findall("tag")
 	if l:
 		tags = []
 		for tag in l:
@@ -338,8 +338,8 @@ def parseConfigOld(configuration, list, uniqueTimerId=0):
 			Len = len(elements)
 			if Len:
 				# Read out last definition
-				start = elements[Len-1].get("from")
-				end = elements[Len-1].get("to")
+				start = elements[Len - 1].get("from")
+				end = elements[Len - 1].get("to")
 				if start and end:
 					start = [int(x) for x in start.split(':')]
 					end = [int(x) for x in end.split(':')]
@@ -362,9 +362,9 @@ def parseConfigOld(configuration, list, uniqueTimerId=0):
 						# strip all after last :
 						pos = value.rfind(':')
 						if pos != -1:
-							if value[pos-1] == ':':
+							if value[pos - 1] == ':':
 								pos -= 1
-							value = value[:pos+1]
+							value = value[:pos + 1]
 
 					servicelist.append(value)
 		else:
@@ -392,10 +392,10 @@ def parseConfigOld(configuration, list, uniqueTimerId=0):
 			elements = timer.findall("offset")
 			Len = len(elements)
 			if Len:
-				value = elements[Len-1].get("both")
+				value = elements[Len - 1].get("both")
 				if value == '':
-					before = int(elements[Len-1].get("before", 0)) * 60
-					after = int(elements[Len-1].get("after", 0)) * 60
+					before = int(elements[Len - 1].get("before", 0)) * 60
+					after = int(elements[Len - 1].get("after", 0)) * 60
 				else:
 					before = after = int(value) * 60
 				offset = (before, after)
@@ -472,14 +472,14 @@ def parseConfigOld(configuration, list, uniqueTimerId=0):
 		# Read out max length (V4+)
 		maxlen = timer.get("maxduration")
 		if maxlen:
-			maxlen = int(maxlen)*60
+			maxlen = int(maxlen) * 60
 		# V3-
 		else:
 			elements = timer.findall("maxduration")
 			if elements:
 				maxlen = getValue(elements, None)
 				if maxlen is not None:
-					maxlen = int(maxlen)*60
+					maxlen = int(maxlen) * 60
 			else:
 				maxlen = None
 

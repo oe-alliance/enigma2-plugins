@@ -11,7 +11,7 @@ from Plugins.Plugin import PluginDescriptor
 zapperInstance = None
 
 # Config options
-config.werbezapper          = ConfigSubsection()
+config.werbezapper = ConfigSubsection()
 config.werbezapper.duration = ConfigNumber(default=5)
 
 

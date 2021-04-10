@@ -148,7 +148,7 @@ class MovieContextMenu(Screen):
 			self.virtlist = self.csel["list"].getVirtDirList(name)
 			if self.virtlist:
 				self.session.openWithCallback(self.deleteVirtDirConfirmed, MessageBox,
-					_x("Do you really want to delete series\n  %s\nwith %d movies?") % (self.virtlist[0][3][3], len(self.virtlist)-1))
+					_x("Do you really want to delete series\n  %s\nwith %d movies?") % (self.virtlist[0][3][3], len(self.virtlist) - 1))
 			else:
 				self.session.openWithCallback(self.close, MessageBox, _x("Please delete the files in this Directory!"), MessageBox.TYPE_ERROR)
 			return
@@ -325,7 +325,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 	def updateDescription(self):
 #		print "[SF-Plugin] MovieSelection.updateDescription DescriptionBorder height =" + str(self["DescriptionBorder"].instance.size().height())
 		self["DescriptionBorder"].show()
-		self["list"].instance.resize(eSize(self.listWidth, self.listHeight-self["DescriptionBorder"].instance.size().height()))
+		self["list"].instance.resize(eSize(self.listWidth, self.listHeight - self["DescriptionBorder"].instance.size().height()))
 
 	def showEventInformation(self):
 		from Screens.EventView import EventViewSimple
@@ -339,7 +339,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 		# ouch. this should redraw our "Please wait..."-text.
 		# this is of course not the right way to do this.
 			self.delayTimer.start(10, 1)
-			self.inited=True
+			self.inited = True
 
 	def saveListsize(self):
 			listsize = self["list"].instance.size()
@@ -399,19 +399,19 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 			if tmp in self.tags:
 				self.tag_first = tmp
 			else:
-				self.tag_first = "<"+_("Tag 1")+">"
+				self.tag_first = "<" + _("Tag 1") + ">"
 			tmp = config.movielist.second_tags.value
 			if tmp in self.tags:
 				self.tag_second = tmp
 			else:
-				self.tag_second = "<"+_("Tag 2")+">"
+				self.tag_second = "<" + _("Tag 2") + ">"
 		self["key_green"].text = self.tag_first
 		self["key_yellow"].text = self.tag_second
 		
 		# the rest is presented in a list, available on the
 		# fourth ("blue") button
 		if self.tags:
-			self["key_blue"].text = _("Tags")+"..."
+			self["key_blue"].text = _("Tags") + "..."
 		else:
 			self["key_blue"].text = ""
 

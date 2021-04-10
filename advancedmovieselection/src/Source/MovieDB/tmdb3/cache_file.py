@@ -122,7 +122,7 @@ except ImportError:
         if filename.startswith('~'):
             # check for home directory
             return os.path.expanduser(filename)
-        elif (ord(filename[0]) in (list(range(65, 91))+list(range(99, 123)))) \
+        elif (ord(filename[0]) in (list(range(65, 91)) + list(range(99, 123)))) \
                 and (filename[1:3] == ':\\'):
             # check for absolute drive path (e.g. C:\...)
             return filename
@@ -358,7 +358,7 @@ class FileEngine(CacheEngine):
             data.position = end
 
             # write incremental update to free slot
-            self.cachefd.seek(4 + 16*(self.size-self.free))
+            self.cachefd.seek(4 + 16 * (self.size - self.free))
             data.dumpslot(self.cachefd)
             data.dumpdata(self.cachefd)
 
@@ -376,7 +376,7 @@ class FileEngine(CacheEngine):
             prev = None
             for d in data:
                 if prev == None:
-                    d.position = 4 + 16*size
+                    d.position = 4 + 16 * size
                 else:
                     d.position = prev.position + prev.size
                 d.dumpslot(self.cachefd)

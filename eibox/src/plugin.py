@@ -121,7 +121,7 @@ class EIBObject(object):
 	def getText(self):
 		if self.config_element:
 			if self.object_type == EIB_THERMO:
-				return str(self.value+"°C")
+				return str(self.value + "°C")
 			elif self.object_type == EIB_TEXT:
 				return str(self.textformat.replace("$1", str(self.value)))
 			else:
@@ -292,7 +292,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		skin = """
 		<screen position="center,center" size="550,450" title="E.I.B.ox" >
 			<widget name="config" position="10,420" size="530,26" zPosition="1" transparent="1" scrollbarMode="showNever" />
-			<ePixmap pixmap="%s" position="0,0" size="550,400" zPosition="-1" alphatest="on" />\n""" % (img_prefix+EIB_objects.zone_img)
+			<ePixmap pixmap="%s" position="0,0" size="550,400" zPosition="-1" alphatest="on" />\n""" % (img_prefix + EIB_objects.zone_img)
 
 		offset = [12, 10] # fix up browser css spacing
 		iconsize = [32, 32]
@@ -321,15 +321,15 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 					pixmaps_sources = list(EIB_object.custom_img)
 
 				for idx, filename in enumerate(pixmaps_sources):
-					  pixmaps_sources[idx] = img_prefix+filename
+					  pixmaps_sources[idx] = img_prefix + filename
 				pixmaps_string = ','.join(pixmaps_sources)
 				skin += '\t\t\t<widget name="%s" pixmaps="%s" position="%s" size="32,32" transparent="1" alphatest="on" borderColor="#004679" zPosition="1" />\n' % (EIB_object.object_id, pixmaps_string, EIB_object.getPos(offset))
 				self[EIB_object.object_id] = MultiPixmap()
 
 				if EIB_object.object_type == EIB_DIMMER:
-					skin += '\t\t\t<widget source="%s_progress" render="Progress" pixmap="skin_default/progress_small.png" position="%s" size="32,5" backgroundColor="#4f74BB" zPosition="1" />\n' % (EIB_object.object_id, EIB_object.getPos([offset[0], offset[1]-iconsize[1]]))
-					self[EIB_object.object_id+"_progress"] = Progress()
-					self[EIB_object.object_id+"_progress"].range = 255
+					skin += '\t\t\t<widget source="%s_progress" render="Progress" pixmap="skin_default/progress_small.png" position="%s" size="32,5" backgroundColor="#4f74BB" zPosition="1" />\n' % (EIB_object.object_id, EIB_object.getPos([offset[0], offset[1] - iconsize[1]]))
+					self[EIB_object.object_id + "_progress"] = Progress()
+					self[EIB_object.object_id + "_progress"].range = 255
 			
 			elif EIB_object.object_type in (EIB_THERMO, EIB_TEXT):
 				skin += '\t\t\t<widget name="%s" position="%s" size="120,20" font="Regular;14" halign="left" valign="center" foregroundColors="#000000,#0000FF" transparent="1" zPosition="1" />\n' % (EIB_object.object_id, EIB_object.getPos(offset))
@@ -394,7 +394,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		EIB_object = self.getCurrentObj()
 		if EIB_object and EIB_object.object_type == EIB_DIMMER:
 			value = EIB_object.getValue()
-			if value < 255-15:
+			if value < 255 - 15:
 				EIB_object.value += 15
 			else:
 				EIB_object.value = 255
@@ -488,7 +488,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		elif isinstance(EIB_object.value, int) and EIB_object.value > 0:
 			self[EIB_object.object_id].setPixmapNum(1)
 		if EIB_object.object_type == EIB_DIMMER:
-			self[EIB_object.object_id+"_progress"].value = EIB_object.value
+			self[EIB_object.object_id + "_progress"].value = EIB_object.value
 
 	def initConfigList(self):
 		self.list = []
@@ -551,7 +551,7 @@ class EIBox(Screen, ConfigListScreen):
 
 	def onFirstShown(self):
 		self.onShown.remove(self.onFirstShown)
-		self.loadXML(resolveFilename(SCOPE_PLUGINS, file_prefix+config.eib.xmlfile.value))		
+		self.loadXML(resolveFilename(SCOPE_PLUGINS, file_prefix + config.eib.xmlfile.value))		
 		self.displayZone()
 
 	def displayZone(self):
@@ -620,7 +620,7 @@ class EIBox(Screen, ConfigListScreen):
 						values.append(str(item.nodeValue))
 					elif key == "img":
 						images.append(str(item.nodeValue))
-					i = i+1
+					i = i + 1
 		return values, images
 	def xmlGetZoneNode(self, node, zone):
 		order = 0
@@ -685,12 +685,12 @@ class EIBox(Screen, ConfigListScreen):
 						print("[xmlGetZoneNode] new", obj.getInfo())
 					order += 1
 				elif temp_id and setpoint_id and label and x and y:
-					obj = EIBObject(order, temp_id, EIB_THERMO, label+' '+_("(actual)"), (x, y), readonly=True)
+					obj = EIBObject(order, temp_id, EIB_THERMO, label + ' ' + _("(actual)"), (x, y), readonly=True)
 					self.EIB_zones[zone].append(obj)
 					if config.eib.debug.value:
 						print("[xmlGetZoneNode] new", obj.getInfo())
 					order += 1
-					obj = EIBObject(order, setpoint_id, EIB_THERMO, label+' '+_("(set point)"), (x, y+16), readonly=readonly)
+					obj = EIBObject(order, setpoint_id, EIB_THERMO, label + ' ' + _("(set point)"), (x, y + 16), readonly=readonly)
 					self.EIB_zones[zone].append(obj)
 					if config.eib.debug.value:
 						print("[xmlGetZoneNode] new", obj.getInfo())

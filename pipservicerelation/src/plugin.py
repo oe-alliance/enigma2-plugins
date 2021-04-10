@@ -89,12 +89,12 @@ class PipServiceRelationSetup(Screen):
 		self["entrylist"] = PipServiceRelationEntryList([])
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
 			{
-			 "ok":	self.keyBlue,
-			 "back":	self.keyClose,
-			 "red":	self.keyDelete,
-			 "green":	self.keyClose,
-			 "yellow":	self.keyYellow,
-			 "blue": 	self.keyBlue,
+			 "ok": self.keyBlue,
+			 "back": self.keyClose,
+			 "red": self.keyDelete,
+			 "green": self.keyClose,
+			 "yellow": self.keyYellow,
+			 "blue": self.keyBlue,
 			 }, -1)
 		self["entrylist"].setConfig(getRelationDict())
 		self.updateList()
@@ -156,8 +156,8 @@ class PipServiceRelationEntryList(MenuList):
 		for c in list(self.configPSR.items()):
 			res = [
 				c,
-				(eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 320, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, ServiceReference(eServiceReference(c[0])).getServiceName()),
-				(eListboxPythonMultiContent.TYPE_TEXT, 330, 0, 320, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, ServiceReference(eServiceReference(c[1])).getServiceName()),
+				(eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 320, 20, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, ServiceReference(eServiceReference(c[0])).getServiceName()),
+				(eListboxPythonMultiContent.TYPE_TEXT, 330, 0, 320, 20, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, ServiceReference(eServiceReference(c[1])).getServiceName()),
 			]
 			list.append(res)
 		self.list = list
@@ -195,15 +195,15 @@ class PipServiceRelationEntryConfigScreen(ConfigListScreen, Screen):
 		self.entry = entry
 		if entry is None:
 			self.currentKey = None
-			self.ref1 =  NoSave(ConfigDirectory(default=_("Press OK to select a service")))
-			self.ref2 =  NoSave(ConfigDirectory(default=_("Press OK to select a related PiP service")))
+			self.ref1 = NoSave(ConfigDirectory(default=_("Press OK to select a service")))
+			self.ref2 = NoSave(ConfigDirectory(default=_("Press OK to select a related PiP service")))
 		else:
 			self.currentKey = entry[0]
-			self.ref1 =  NoSave(ConfigDirectory(default=ServiceReference(eServiceReference(entry[0])).getServiceName()))
-			self.ref2 =  NoSave(ConfigDirectory(default=ServiceReference(eServiceReference(entry[1])).getServiceName()))
+			self.ref1 = NoSave(ConfigDirectory(default=ServiceReference(eServiceReference(entry[0])).getServiceName()))
+			self.ref2 = NoSave(ConfigDirectory(default=ServiceReference(eServiceReference(entry[1])).getServiceName()))
 		self.list = []
-		self.serviceref1 =  getConfigListEntry(_("Service"), self.ref1)
-		self.serviceref2 =  getConfigListEntry(_("Related Pip Service"), self.ref2)
+		self.serviceref1 = getConfigListEntry(_("Service"), self.ref1)
+		self.serviceref2 = getConfigListEntry(_("Related Pip Service"), self.ref2)
 		self.list.append(self.serviceref1)
 		self.list.append(self.serviceref2)
 		ConfigListScreen.__init__(self, self.list, session)

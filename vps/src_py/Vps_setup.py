@@ -44,7 +44,7 @@ class VPS_Setup(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 
 		#Summary
-		self.setup_title = _("VPS Setup Version %s") %VERSION
+		self.setup_title = _("VPS Setup Version %s") % VERSION
 
 		self.vps_enabled = getConfigListEntry(_("Enable VPS-Plugin"), config.plugins.vps.enabled)
 		self.vps_do_PDC_check = getConfigListEntry(_("Check for PDC"), config.plugins.vps.do_PDC_check)

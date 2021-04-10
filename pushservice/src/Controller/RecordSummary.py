@@ -30,8 +30,8 @@ from time import localtime, strftime
 
 # Constants
 SUBJECT = _("Record Summary")
-BODY    = _("Finished record list:\n%s")
-TAG     = _("FinishedTimerPushed")
+BODY = _("Finished record list:\n%s")
+TAG = _("FinishedTimerPushed")
 
 
 class RecordSummary(ControllerBase):

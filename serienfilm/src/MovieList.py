@@ -189,11 +189,11 @@ class MovieList(GUIComponent):
 					res.append(MultiContentEntryText(pos=(XPOS, 30), size=(width, 20), font=1, flags=RT_HALIGN_LEFT, text=description))
 			res.append(MultiContentEntryText(pos=(XPOS, line2), size=(150, 20), font=1, flags=RT_HALIGN_LEFT, text=begin_string))
 			if service:
-				res.append(MultiContentEntryText(pos=(XPOS+150, line2), size=(180, 20), font=2, flags=RT_HALIGN_RIGHT, text=service))
+				res.append(MultiContentEntryText(pos=(XPOS + 150, line2), size=(180, 20), font=2, flags=RT_HALIGN_RIGHT, text=service))
 			if tags:
 				res.append(MultiContentEntryText(pos=(width - 250, line2), size=(180, 20), font=2, flags=RT_HALIGN_RIGHT, text=tags))
 			if not typ & (self.REAL_DIR | self.VIRT_ENTRY):
-				res.append(MultiContentEntryText(pos=(width-60, line2), size=(60, 20), font=2, flags=RT_HALIGN_RIGHT, text=len))
+				res.append(MultiContentEntryText(pos=(width - 60, line2), size=(60, 20), font=2, flags=RT_HALIGN_RIGHT, text=len))
 			return res
 
 		tslen = 80
@@ -204,38 +204,38 @@ class MovieList(GUIComponent):
 		if self.show_times & self.SHOW_DURATION and not tinfo[0] & (self.VIRT_ENTRY | self.REAL_UP):
 			dusz = 57
 
-		if self.list_type  & MovieList.LISTTYPE_COMPACT:
-			res.append(MultiContentEntryText(pos=(XPOS, 4), size=(tslen-5, 20), font=1, flags=RT_HALIGN_RIGHT, text=date_string))
-			res.append(MultiContentEntryText(pos=(XPOS + tslen, 0), size=(width-XPOS-tslen, 20), font=0, flags=RT_HALIGN_LEFT, text=txt))
+		if self.list_type & MovieList.LISTTYPE_COMPACT:
+			res.append(MultiContentEntryText(pos=(XPOS, 4), size=(tslen - 5, 20), font=1, flags=RT_HALIGN_RIGHT, text=date_string))
+			res.append(MultiContentEntryText(pos=(XPOS + tslen, 0), size=(width - XPOS - tslen, 20), font=0, flags=RT_HALIGN_LEFT, text=txt))
 			other = None
 			if self.list_type & MovieList.LISTTYPE_COMPACT_TAGS:
 				if tags:
-					res.append(MultiContentEntryText(pos=(width-dusz-185, 20), size=(180, 17), font=1, flags=RT_HALIGN_RIGHT, text=tags))
-				otherend = dusz+185
+					res.append(MultiContentEntryText(pos=(width - dusz - 185, 20), size=(180, 17), font=1, flags=RT_HALIGN_RIGHT, text=tags))
+				otherend = dusz + 185
 				other = service
 			else:
 				if service:
-					res.append(MultiContentEntryText(pos=(width-dusz-155, 20), size=(153, 17), font=1, flags=RT_HALIGN_RIGHT, text=service))
-				otherend = dusz+160
+					res.append(MultiContentEntryText(pos=(width - dusz - 155, 20), size=(153, 17), font=1, flags=RT_HALIGN_RIGHT, text=service))
+				otherend = dusz + 160
 				other = tags
 			if self.list == self.sflists[0]:
 				if not typ & (self.REAL_DIR | self.VIRT_ENTRY):
-					res.append(MultiContentEntryText(pos=(XPOS, 20), size=(width-(XPOS+otherend), 17), font=1, flags=RT_HALIGN_LEFT, text=description))
+					res.append(MultiContentEntryText(pos=(XPOS, 20), size=(width - (XPOS + otherend), 17), font=1, flags=RT_HALIGN_LEFT, text=description))
 				elif other:
-					res.append(MultiContentEntryText(pos=(XPOS, 20), size=(width-(XPOS+otherend), 17), font=1, flags=RT_HALIGN_LEFT, text=other))
+					res.append(MultiContentEntryText(pos=(XPOS, 20), size=(width - (XPOS + otherend), 17), font=1, flags=RT_HALIGN_LEFT, text=other))
 			if dusz:
-				res.append(MultiContentEntryText(pos=(width-dusz, 20), size=(dusz-2, 20), font=1, flags=RT_HALIGN_RIGHT, text=len))
+				res.append(MultiContentEntryText(pos=(width - dusz, 20), size=(dusz - 2, 20), font=1, flags=RT_HALIGN_RIGHT, text=len))
 		else:
 #			assert(self.list_type == MovieList.LISTTYPE_MINIMAL)
-			res.append(MultiContentEntryText(pos=(XPOS, 3), size=(tslen-5, 20), font=1, flags=RT_HALIGN_RIGHT, text=date_string))
-			res.append(MultiContentEntryText(pos=(XPOS + tslen, 0), size=(width-XPOS-tslen-dusz, 20), font=0, flags=RT_HALIGN_LEFT, text=txt))
+			res.append(MultiContentEntryText(pos=(XPOS, 3), size=(tslen - 5, 20), font=1, flags=RT_HALIGN_RIGHT, text=date_string))
+			res.append(MultiContentEntryText(pos=(XPOS + tslen, 0), size=(width - XPOS - tslen - dusz, 20), font=0, flags=RT_HALIGN_LEFT, text=txt))
 			if dusz:
-				res.append(MultiContentEntryText(pos=(width-dusz, 3), size=(dusz, 20), font=1, flags=RT_HALIGN_RIGHT, text=len))
+				res.append(MultiContentEntryText(pos=(width - dusz, 3), size=(dusz, 20), font=1, flags=RT_HALIGN_RIGHT, text=len))
 
 		return res
 
 	def moveToIndex(self, index):
-		if index <0:
+		if index < 0:
 			index += len(self.list)			# standard python list behaviour
 		self.instance.moveSelectionTo(index)
 
@@ -399,7 +399,7 @@ class MovieList(GUIComponent):
 			self.rootlst.append((serviceref, info, begin, tinfo))
 
 		self.rootlst.sort(key=lambda x: -x[2])						# movies of same name stay sortet by time
-		self.rootlst.sort(key=lambda x: (x[3][2]+x[3][3]).lower())
+		self.rootlst.sort(key=lambda x: (x[3][2] + x[3][3]).lower())
 		self.list = self.rootlst
 		self.createSublists()
 
@@ -476,7 +476,7 @@ class MovieList(GUIComponent):
 
 	def update_repcnt(self, serlst, repcnt):
 		for i in list(range(repcnt + 1)):
-			serlst[-(i+1)][3][1] =  "#" + str(i)
+			serlst[-(i + 1)][3][1] = "#" + str(i)
 
 	def createSublists(self):
 		self.serdate = 0
@@ -502,11 +502,11 @@ class MovieList(GUIComponent):
 							eServiceReference.canDescent, "SFLIDX" + str(sflidx))
 					ser_info = self.serviceHandler.info(ser_serviceref)
 					# VIRT_UP should sort first, but after REAL_UP: MAXTIME-1 resp. "  1"
-					serlst = [(ser_serviceref, ser_info, MovieList.MAXTIME-1,
+					serlst = [(ser_serviceref, ser_info, MovieList.MAXTIME - 1,
 						[self.VIRT_UP, self.fupMap, "  1", txt[0], "SFLIDX0", 1])]
 					self.sflists.append(serlst)
-					serlst.append(self.serflm(self.rootlst[rootlidx-1], txt))
-					parent_list_index = rootlidx-1
+					serlst.append(self.serflm(self.rootlst[rootlidx - 1], txt))
+					parent_list_index = rootlidx - 1
 				film = self.rootlst.pop(rootlidx)
 				rootlidx -= 1
 				film = self.serflm(film, ts)
@@ -546,9 +546,9 @@ class MovieList(GUIComponent):
 
 	def sortLists(self):
 		if self.sort_type == self.SORT_ALPHANUMERIC:
-			key = lambda x: (x[3][2]+x[3][3]).lower()
+			key = lambda x: (x[3][2] + x[3][3]).lower()
 		else:
-			key=lambda x: -x[2]
+			key = lambda x: -x[2]
 		if self.sflists:
 			for list in self.sflists:
 				list.sort(key=key)
@@ -585,7 +585,7 @@ class MovieList(GUIComponent):
 			for l in list:
 				if isinstance(l[3][1], str) and l[3][1][0] == "#" and l[3][1] != "#0":
 					repcnt += 1
-			s = "%d %s" % (len(list)-1, _x("Movies"))
+			s = "%d %s" % (len(list) - 1, _x("Movies"))
 			if repcnt:
 				s += ", %d %s" % (repcnt, _x("duplicated"))
 			return s

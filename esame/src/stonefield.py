@@ -56,7 +56,7 @@ class StoneField:
 
 	def reset(self):
 		random.seed(self.board)
-		i=0
+		i = 0
 		for stone in self.field:
 			if i < 75:
 				stone.color = 1
@@ -187,11 +187,11 @@ class StoneField:
 
 		# find the last column that has something
 		lastcol = self.sizex
-		while lastcol > 0 and not self.field[self.Map(lastcol-1, self.sizey-1)].color:
+		while lastcol > 0 and not self.field[self.Map(lastcol - 1, self.sizey - 1)].color:
 			lastcol -= 1
 
 		#for (int col=0;col<lastcol-1;) {
-		for col in range(lastcol-1):
+		for col in range(lastcol - 1):
 			empty = True
 			#for (int row = 0; row < sizey; row++)
 			for row in range(self.sizey):
@@ -220,7 +220,7 @@ class StoneField:
 				self.field[source].changed = True
 
 		# add a bonus, if field is empty
-		if not self.field[self.Map(0, self.sizey-1)].color:
+		if not self.field[self.Map(0, self.sizey - 1)].color:
 			self.score += 1000
 			self.m_gotBonus = True
 
@@ -237,18 +237,18 @@ class StoneField:
 		
 		while i >= 0:
 			# ignore empty fields
-			while  i >= 0 and self.field[i].color == 0:
+			while i >= 0 and self.field[i].color == 0:
 				i -= 1
 			# Wenn Stein gefunden,
 			# dann die Nachbarn auf gleiche Farbe pruefen.
 			color = self.field[i].color
 			while i >= 0 and color:
 				# check left
-				if i % self.sizex != 0 and self.field[i - 1].color==color:
+				if i % self.sizex != 0 and self.field[i - 1].color == color:
 					self.gameover = (i < 0)
 					return bool(self.gameover)
 				# check upward
-				if i >= self.sizex and self.field[i - self.sizex].color==color:
+				if i >= self.sizex and self.field[i - self.sizex].color == color:
 					self.gameover = (i < 0)
 					return bool(self.gameover)
 				i -= 1

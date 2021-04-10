@@ -56,10 +56,10 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 		# Define Actions
 		self["custom_actions"] = ActionMap(["SetupActions", "ChannelSelectBaseActions"],
 		{
-			"cancel":				self.keyCancel,
-			"save":					self.keySave,
-			"nextBouquet":	self.pageUp,
-			"prevBouquet":	self.pageDown,
+			"cancel": self.keyCancel,
+			"save": self.keySave,
+			"nextBouquet": self.pageUp,
+			"prevBouquet": self.pageDown,
 		}, -2) # higher priority
 		
 		# Initialize Configuration part
@@ -77,8 +77,8 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 	def defineConfig(self):
 		
 		separator = "".ljust(250, "-")
-		separatorE2Usage = "- E2 "+_("Usage")+" "
-		separatorE2Usage = separatorE2Usage.ljust(250-len(separatorE2Usage), "-")
+		separatorE2Usage = "- E2 " + _("Usage") + " "
+		separatorE2Usage = separatorE2Usage.ljust(250 - len(separatorE2Usage), "-")
 		
 #         _config list entry
 #         _                                                     , config element

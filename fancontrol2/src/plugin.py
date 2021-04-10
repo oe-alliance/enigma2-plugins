@@ -63,7 +63,7 @@ def mainMonitor(session,**kwargs):
 		FClog("Pluginexecution failed")
 
 def Test0(wert):
-	return (1 if wert<=0 else wert)
+	return (1 if wert <= 0 else wert)
 
 def skal(x, x1, x2, y1, y2):
 	if x > x2:
@@ -97,7 +97,7 @@ def FClogE(wert):
 
 def FCdata():
 	global DataMinute
-	if strftime("%M")!=DataMinute and config.plugins.FanControl.EnableDataLog.value:
+	if strftime("%M") != DataMinute and config.plugins.FanControl.EnableDataLog.value:
 		DataMinute = strftime("%M")
 		if Free(config.plugins.FanControl.LogPath.value):
 			try:
@@ -276,7 +276,7 @@ class ControllerPI:
 	def ScaleCtlError(self, errval, inputMax):
 		if errval == 0:
 			return 0
-		return skal(abs(errval), 0, inputMax, 0, 100) * (errval/abs(errval))
+		return skal(abs(errval), 0, inputMax, 0, 100) * (errval / abs(errval))
 
 	def DeadBand(self, errval):
 		if abs(errval) < self.inputDeadband:
@@ -287,11 +287,11 @@ class ControllerPI:
 			return errval
 
 	def Integrate(self, errval):
-		self.integratorOutput += errval*self.dt
+		self.integratorOutput += errval * self.dt
 		return self.integratorOutput
 
 	def ControlProcess(self, InputError, integratorOutput):
-		return self.coeffKp*InputError + self.coeffKi*integratorOutput
+		return self.coeffKp * InputError + self.coeffKi * integratorOutput
 
 	def ControlLoop(self, ctlInput, ctlFeedback):
 		if self.dt < self.timer_delay:
@@ -385,7 +385,7 @@ class FanControl2Test(Screen, ConfigListScreen):
 				time.sleep(0.3)
 				self.i += 1
 			time.sleep(2)
-			self.last=GetFanRPM()
+			self.last = GetFanRPM()
 			self["TextTest1"].setText(_("Min Fan Start %d rpm at PWM=%d") % (self.last, self.i))
 			while GetFanRPM() > 100 and self.i > 1:
 				setPWM(self.id, self.i)
@@ -409,7 +409,7 @@ class FanControl2Test(Screen, ConfigListScreen):
 				time.sleep(10)
 				self.VoltUp()
 				time.sleep(3)
-				self.last=GetFanRPM()
+				self.last = GetFanRPM()
 				self["TextTest5"].setText(_("Min Fan Start %d rpm at VLT=%d and PWM=0") % (self.last, self.i))
 				self.VoltDown()
 				ok = ("OK" if config.plugins.FanControl.minRPM.value >= self.last else (("!!>%d" % config.plugins.FanControl.minRPM.value)))
@@ -427,7 +427,7 @@ class FanControl2Test(Screen, ConfigListScreen):
 			time.sleep(10)
 			self.VoltUp()
 			time.sleep(3)
-			self.last=GetFanRPM()
+			self.last = GetFanRPM()
 			self["TextTest1"].setText(_("Min Fan Start %d rpm at VLT=%d") % (self.last, self.i))
 			self.VoltDown()
 			ok = ("OK" if config.plugins.FanControl.minRPM.value >= self.last else ("!!>%d" % (config.plugins.FanControl.minRPM.value)))
@@ -509,20 +509,20 @@ class FanControl2Monitor(Screen, ConfigListScreen):
 		tempcount = len(templist)
 		for count in range(tempcount):
 			tt = sensors.getSensorValue(count)
-			self["ProTemp%d" % count].value = int((tt-30)*100/(55-30))
+			self["ProTemp%d" % count].value = int((tt - 30) * 100 / (55 - 30))
 			if sensors.getSensorName(count) == "undefined":
 				self["TxtTemp%d" % count].setText(_("%s   %02d C") % (TempName[count], tt))
 			else:
 				self["TxtTemp%d" % count].setText(_("%s   %02d C") % (sensors.getSensorName(count), tt))
 		if harddiskmanager.HDDCount() > 0 and len(AktHDD) > 0:
 			if max(AktHDD) > 0:
-				self["ProHDD"].value = int((max(AktHDD)-30)*100/(55-30))
+				self["ProHDD"].value = int((max(AktHDD) - 30) * 100 / (55 - 30))
 				self["TxtHDD"].setText(_("%s   %02d C") % ("HDD", max(AktHDD)))
-			elif config.plugins.FanControl.CheckHDDTemp.value !="never":
+			elif config.plugins.FanControl.CheckHDDTemp.value != "never":
 				self["TxtHDD"].setText(_("press Info for HDD-Temp"))
 		self["TxtFan"].setText(_("Current rpm  %4d") % (AktRPM))
-		self["ProFan"].value = int((AktRPM-config.plugins.FanControl.minRPM.value)*100/Test0(config.plugins.FanControl.maxRPM.value-config.plugins.FanControl.minRPM.value))
-		if tempcount>1:
+		self["ProFan"].value = int((AktRPM - config.plugins.FanControl.minRPM.value) * 100 / Test0(config.plugins.FanControl.maxRPM.value - config.plugins.FanControl.minRPM.value))
+		if tempcount > 1:
 			self["TxtFC2Temp"].setText("%4.1f" % AktTemp)
 		self.temp_timer.start(2000, True)
 
@@ -530,12 +530,12 @@ class FanControl2Monitor(Screen, ConfigListScreen):
 		self.close(False, self.session)
 
 	def getHDD(self):
-		if harddiskmanager.HDDCount() > 0 and config.plugins.FanControl.CheckHDDTemp.value !="never":
+		if harddiskmanager.HDDCount() > 0 and config.plugins.FanControl.CheckHDDTemp.value != "never":
 			GetHDDtemp(True)
 			for hdd in harddiskmanager.HDDList():
 				if hdd[1].model().startswith("ATA"):
 					if hdd[1].isSleeping():
-						(stat, wert)=getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
+						(stat, wert) = getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
 
 class FanControl2SpezialSetup(Screen, ConfigListScreen):
 	skin = """
@@ -742,7 +742,7 @@ class FanControl2Plugin(ConfigListScreen, Screen):
 		global AktRPM
 		self["introduction"].setText(_("Current value: %s") % (self.getCurrentValue()))
 		if self["config"].getCurrentIndex() > 4:
-			if LastVLT != config.plugins.FanControl.vlt.value or LastPWM !=config.plugins.FanControl.pwm.value:
+			if LastVLT != config.plugins.FanControl.vlt.value or LastPWM != config.plugins.FanControl.pwm.value:
 				LastVLT = config.plugins.FanControl.vlt.value
 				LastPWM = config.plugins.FanControl.pwm.value
 				AktVLT = LastVLT
@@ -754,9 +754,9 @@ class FanControl2Plugin(ConfigListScreen, Screen):
 		d = config.plugins.FanControl.tempmax.value - config.plugins.FanControl.temp.value
 		if d < 5:
 			if config.plugins.FanControl.temp.value + d < 55:
-				config.plugins.FanControl.tempmax.value=config.plugins.FanControl.temp.value+5
+				config.plugins.FanControl.tempmax.value = config.plugins.FanControl.temp.value + 5
 			else:
-				config.plugins.FanControl.temp.value=config.plugins.FanControl.tempmax.value-5
+				config.plugins.FanControl.temp.value = config.plugins.FanControl.tempmax.value - 5
 
 	def getCurrentValue(self):
 		return str(self["config"].getCurrent()[1].getText())
@@ -778,14 +778,14 @@ class FanControl2Plugin(ConfigListScreen, Screen):
 		self["TxtRPM"].setText(_("Current rpm  %4d") % (AktRPM))
 		self["TxtVLT"].setText(_("Voltage  %03d") % (AktVLT))
 		self["TxtPWM"].setText(_("PWM  %03d") % (AktPWM))
-		self["PixTemp"].value = int((AktTemp-config.plugins.FanControl.temp.value)*100/Test0(config.plugins.FanControl.tempmax.value-config.plugins.FanControl.temp.value))
-		self["PixZielRPM"].value = int((ZielRPM-config.plugins.FanControl.minRPM.value)*100/Test0(config.plugins.FanControl.maxRPM.value-config.plugins.FanControl.minRPM.value))
-		self["PixRPM"].value = int((AktRPM-config.plugins.FanControl.minRPM.value)*100/Test0(config.plugins.FanControl.maxRPM.value-config.plugins.FanControl.minRPM.value))
-		self["PixVLT"].value = int(AktVLT/2.55)
-		self["PixPWM"].value = int(AktPWM/2.55)
+		self["PixTemp"].value = int((AktTemp - config.plugins.FanControl.temp.value) * 100 / Test0(config.plugins.FanControl.tempmax.value - config.plugins.FanControl.temp.value))
+		self["PixZielRPM"].value = int((ZielRPM - config.plugins.FanControl.minRPM.value) * 100 / Test0(config.plugins.FanControl.maxRPM.value - config.plugins.FanControl.minRPM.value))
+		self["PixRPM"].value = int((AktRPM - config.plugins.FanControl.minRPM.value) * 100 / Test0(config.plugins.FanControl.maxRPM.value - config.plugins.FanControl.minRPM.value))
+		self["PixVLT"].value = int(AktVLT / 2.55)
+		self["PixPWM"].value = int(AktPWM / 2.55)
 		if config.plugins.FanControl.Fan.value == "4pinREG":
 			if int(abs(ErrRPM)) <= 10 and ErrRPM != 0:
-				self["PixERR"].value = int(abs(ErrRPM)*10)
+				self["PixERR"].value = int(abs(ErrRPM) * 10)
 				self["T10ERR"].setText("10%")
 			else:	
 				self["PixERR"].value = int(abs(ErrRPM))
@@ -828,7 +828,7 @@ def DeleteData():
 		if s < 150:
 			return
 		f = open(config.plugins.FanControl.LogPath.value + "FC2data.csv", "r")
-		f.seek(s-100)
+		f.seek(s - 100)
 		line = f.readline()
 		line = f.readline()
 		DT = line.split(";")
@@ -870,26 +870,26 @@ def getstatusoutput(cmd):
 
 def HDDtestTemp():
 	global disableHDDread
-	if harddiskmanager.HDDCount() > 0 and config.plugins.FanControl.CheckHDDTemp.value !="never":
+	if harddiskmanager.HDDCount() > 0 and config.plugins.FanControl.CheckHDDTemp.value != "never":
 		disableHDDread = False
 		for hdd in harddiskmanager.HDDList():
 			if hdd[1].model().startswith("ATA"):
 				FClog("%s %s Mode:%s" % (hdd[1].model(), hdd[1].getDeviceName(), config.plugins.FanControl.CheckHDDTemp.value))
 				if config.plugins.FanControl.CheckHDDTemp.value == "auto":
-					(stat, wert)=getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
+					(stat, wert) = getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
 					time.sleep(0.5)
-					(stat, wert)=ReadHDDtemp(hdd[1].getDeviceName())
+					(stat, wert) = ReadHDDtemp(hdd[1].getDeviceName())
 					if stat != 0:
-						(stat, wert)=getstatusoutput("smartctl --smart=on %s" % hdd[1].getDeviceName())
+						(stat, wert) = getstatusoutput("smartctl --smart=on %s" % hdd[1].getDeviceName())
 						FClog("HDD Temperature not readable -> Ignore")
 						FC2HDDignore.append(hdd[1].getDeviceName())
 					time.sleep(0.5)
-					(stat, wert)=getstatusoutput("hdparm -C %s" % hdd[1].getDeviceName())
-					if wert.find("standby")>0:
+					(stat, wert) = getstatusoutput("hdparm -C %s" % hdd[1].getDeviceName())
+					if wert.find("standby") > 0:
 						FClog("HDD supports Temp reading without Spinup")
 					else:
 						if hdd[1].isSleeping():
-							(stat, wert)=getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
+							(stat, wert) = getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
 							FClog("HDD not supports Temp reading without Spinup -> Ignore")
 							FC2HDDignore.append(hdd[1].getDeviceName())
 
@@ -905,10 +905,10 @@ def GetHDDtemp(OneTime):
 				sleeptime = int((time.time() - hdd[1].last_access))
 #				FClog("HDD Temp reading %s %s %ds %s" % (config.plugins.FanControl.CheckHDDTemp.value, disableHDDread, sleeptime, hdd[1].isSleeping()))
 				if config.plugins.FanControl.CheckHDDTemp.value == "true" or (config.plugins.FanControl.CheckHDDTemp.value == "auto" and not disableHDDread) or ((not hdd[1].isSleeping()) and sleeptime < 120) or OneTime == True:
-					(stat, wert)=ReadHDDtemp(hdd[1].getDeviceName())
+					(stat, wert) = ReadHDDtemp(hdd[1].getDeviceName())
 					if stat == 0:
 						try:
-							AktHDD.append(int(wert[wert.find("Always")+6:].replace(" ", "").replace("-", "")[:2]))
+							AktHDD.append(int(wert[wert.find("Always") + 6:].replace(" ", "").replace("-", "")[:2]))
 						except:
 							AktHDD.append(0)
 					if len(AktHDD) == 0:
@@ -927,12 +927,12 @@ def HDDsSleeping():
 
 def FC2systemStatus():
 	S = int(FC2werte[5])
-	R = " -" if S>0 else " "
-	if (S & 1)>0:
+	R = " -" if S > 0 else " "
+	if (S & 1) > 0:
 		R += " BoxOn"
-	if (S & 2)>0:
+	if (S & 2) > 0:
 		R += " HDDon"
-	if (S & 4)>0:
+	if (S & 4) > 0:
 		R += " REC"
 	return R
 
@@ -967,16 +967,16 @@ class FanControl2(Screen):
 		global Box
 		Screen.__init__(self, session)
 		self.session = session
-		self.FanMin     = 500
-		self.FanMax     = 1500
+		self.FanMin = 500
+		self.FanMax = 1500
 		self.targetTemp = 50.0
-		self.maxTemp    = 55.0
-		self.Range      = 5
-		self.Fan        = "aus"
+		self.maxTemp = 55.0
+		self.Range = 5
+		self.Fan = "aus"
 		self.dontshutdown = False
-		self.Recording  = False
-		self.inStandby  = False
-		self.HDDidle    = True
+		self.Recording = False
+		self.inStandby = False
+		self.HDDidle = True
 		# RPM PI controller initialization - later
 		self.RPMController.timer_delay = 10.0
 		self.RPMController.dt = 10.0
@@ -1059,7 +1059,7 @@ class FanControl2(Screen):
 				if strftime("%M")[-1:] == "0":
 					GetHDDtemp(False)
 			if config.plugins.FanControl.EnableThread.value == True:
-				if Briefkasten.qsize()<=3:
+				if Briefkasten.qsize() <= 3:
 					Briefkasten.put(1) 
 				else:
 					FClog("queue full, Thread hanging?")
@@ -1104,23 +1104,23 @@ class FanControl2(Screen):
 			if self.targetTemp != config.plugins.FanControl.temp.value:
 				self.RPMController.ResetIntegrator() 
 			self.targetTemp = config.plugins.FanControl.temp.value
-			self.maxTemp    = config.plugins.FanControl.tempmax.value
-			self.Fan        = config.plugins.FanControl.Fan.value
-			self.Vlt        = config.plugins.FanControl.vlt.value
+			self.maxTemp = config.plugins.FanControl.tempmax.value
+			self.Fan = config.plugins.FanControl.Fan.value
+			self.Vlt = config.plugins.FanControl.vlt.value
 			id = 0
 			AktRPMtmp = 0
 			sleeptime = 0
 			AktTemp = self.CurrTemp()
 			if int(strftime("%S")) < 10 and strftime("%H:%M") == "00:00":
 				DeleteData()
-			S=0
+			S = 0
 			if not self.inStandby:
-				S+=1
+				S += 1
 			if not self.HDDidle:
-				S+=2
+				S += 2
 			if self.Recording:
-				S+=4
-			FC2werte[5]=str(S)
+				S += 4
+			FC2werte[5] = str(S)
 
 			if (self.inStandby) and (not Overheat) and ((config.plugins.FanControl.StandbyOff.value == "true") or ((config.plugins.FanControl.StandbyOff.value == "trueRec") and (not self.Recording and self.HDDidle))):
 				FClog("Fan Off Temp: %d %s" % (AktTemp, FC2systemStatus()))
@@ -1143,13 +1143,13 @@ class FanControl2(Screen):
 					Overheat = True
 					FClog("Overheat")
 			else:
-				if (Overheat and AktTemp < self.maxTemp-3) or not self.inStandby:
+				if (Overheat and AktTemp < self.maxTemp - 3) or not self.inStandby:
 					Overheat = False
 				AktVLTtmp = getVoltage(id)
 				AktPWMtmp = getPWM(id)
 				if self.inStandby and self.inStandby == istStandbySave and RPMdiff == 1 and not self.Recording:
 					tmp = GetFanRPM()
-					RPMdiff = AktRPM-tmp
+					RPMdiff = AktRPM - tmp
 					if RPMdiff < 150 or tmp < 300 or self.Fan == "3pin":
 						RPMdiff = 0
 					else:
@@ -1180,10 +1180,10 @@ class FanControl2(Screen):
 					setVoltage(id, self.Vlt)
 					setPWM(id, config.plugins.FanControl.pwm.value)
 				AktRPMtmp = GetFanRPM()
-				if RPMread>0 and RPMread<3:
+				if RPMread > 0 and RPMread < 3:
 					FClog("Reread")
 					if config.plugins.FanControl.EnableThread.value == True:
-						if Briefkasten.qsize()<=2:
+						if Briefkasten.qsize() <= 2:
 							time.sleep(0.4)
 							Briefkasten.put(1) 
 					else:
@@ -1217,16 +1217,16 @@ class FanControl2(Screen):
 				FClog(_("currentRPM:%d targetRPM:%d Temp:%4.1f") % (AktRPM, ZielRPM, AktTemp))
 				if self.Fan == "4pin":
 					if AktPWM < 255 and AktPWM > 0 and AktVLT != self.Vlt:
-						AktVLT = (AktVLT-1 if AktVLT > self.Vlt else AktVLT+1)
+						AktVLT = (AktVLT - 1 if AktVLT > self.Vlt else AktVLT + 1)
 						setVoltage(id, AktVLT)
-					if AktRPM+29 < ZielRPM:
-						AktPWM = (AktPWM+5 if ZielRPM-AktRPM > 100 else AktPWM+1)
+					if AktRPM + 29 < ZielRPM:
+						AktPWM = (AktPWM + 5 if ZielRPM - AktRPM > 100 else AktPWM + 1)
 						setPWM(id, AktPWM)
 						if AktPWM >= 255 and AktVLT < 255:
 							AktVLT += 1
 							setVoltage(id, AktVLT)
-					elif AktRPM-19 > ZielRPM:
-						AktPWM = (AktPWM-5 if AktRPM-ZielRPM > 100 else AktPWM-1)
+					elif AktRPM - 19 > ZielRPM:
+						AktPWM = (AktPWM - 5 if AktRPM - ZielRPM > 100 else AktPWM - 1)
 						setPWM(id, AktPWM)
 # 4
 						if AktPWM < 0 and AktVLT > 5:
@@ -1240,7 +1240,7 @@ class FanControl2(Screen):
 					AktPWM = self.RPMController.ControlLoop(ZielRPM, AktRPM)
 					ErrRPM = self.RPMController.inputError
 					if AktPWM > 255.0:
-						AktVLT = 0.12*(AktPWM - 255.0) + int(config.plugins.FanControl.vlt.value)
+						AktVLT = 0.12 * (AktPWM - 255.0) + int(config.plugins.FanControl.vlt.value)
 					else:
 						AktVLT = int(config.plugins.FanControl.vlt.value)       # this will set voltage to initial value
 					if AktVLT > 255:
@@ -1254,11 +1254,11 @@ class FanControl2(Screen):
 					setVoltage(id, int(AktVLT))
 					setPWM(id, int(AktPWM))
 				elif self.Fan == "3pin":
-					if AktRPM+29 < ZielRPM:
-						AktVLT = (AktVLT+5 if ZielRPM-AktRPM > 100 else AktVLT+1)
+					if AktRPM + 29 < ZielRPM:
+						AktVLT = (AktVLT + 5 if ZielRPM - AktRPM > 100 else AktVLT + 1)
 						setVoltage(id, AktVLT)
-					elif AktRPM-19 > ZielRPM:
-						AktVLT = (AktVLT-5 if AktRPM-ZielRPM > 100 else AktVLT-1)
+					elif AktRPM - 19 > ZielRPM:
+						AktVLT = (AktVLT - 5 if AktRPM - ZielRPM > 100 else AktVLT - 1)
 						setVoltage(id, AktVLT)
 
 		except Exception:

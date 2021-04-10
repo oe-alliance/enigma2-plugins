@@ -30,14 +30,14 @@ class ShowLogScreen(Screen):
 		self["text"] = ScrollLabel("")
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ChannelSelectBaseActions"], 
 		{
-			"ok":    self.cancel,
-			"back":  self.cancel,
-			"up":    self["text"].pageUp,
-			"down":  self["text"].pageDown,
-			"left":  self["text"].pageUp,
+			"ok": self.cancel,
+			"back": self.cancel,
+			"up": self["text"].pageUp,
+			"down": self["text"].pageDown,
+			"left": self["text"].pageUp,
 			"right": self["text"].pageDown,
-			"nextBouquet":	self["text"].lastPage,
-			"prevBouquet":	self.firstPage,
+			"nextBouquet": self["text"].lastPage,
+			"prevBouquet": self.firstPage,
 		}, -1)
 		
 		self.onLayoutFinish.append(self.readLog)

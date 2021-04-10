@@ -86,17 +86,17 @@ class YouTubeUserListScreen(Screen):
 
 		self["actions"] = ActionMap(["YouTubeUserListScreenActions"],
 		{
-			"delete": 	self.keyDelete,
-			"add": 		self.keyAddUser,
-			"edit": 	self.keyEditUser,
-			"default":	self.keySetAsDefault,
+			"delete": self.keyDelete,
+			"add": self.keyAddUser,
+			"edit": self.keyEditUser,
+			"default": self.keySetAsDefault,
 			
-			"ok":		self.ok,
-			"cancel": 	self.close,
-			"up": 		self.up,
-			"down": 	self.down,
-			"left": 	self.left,
-			"right": 	self.right,
+			"ok": self.ok,
+			"cancel": self.close,
+			"up": self.up,
+			"down": self.down,
+			"left": self.left,
+			"right": self.right,
 		}, -2)
 		
 		self.onLayoutFinish.append(self.initialUserlistUpdate)

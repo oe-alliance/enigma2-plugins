@@ -91,7 +91,7 @@ def ChannelListEntryComponent(type, channelname, serviceref, eventid, eventname,
 		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 10), size=(100, 60), png=loadPNG(pixmap), flags=BT_SCALE))
 		res.append(MultiContentEntryText(pos=(130, 5), size=(480, 28), font=0, text="%s (User: %s)" % (channelname, usercount)))
 		res.append(MultiContentEntryText(pos=(130, 33), size=(480, 25), font=1, text=eventname))
-		res.append(MultiContentEntryText(pos=(130, 57), size=(480, 20), font=2, text="%s Uhr - %s Uhr (%smin)" % (strftime("%d.%m.%Y %H:%M", gmtime(starttime)), strftime("%H:%M", gmtime(endtime)), int((endtime-starttime)/60))))
+		res.append(MultiContentEntryText(pos=(130, 57), size=(480, 20), font=2, text="%s Uhr - %s Uhr (%smin)" % (strftime("%d.%m.%Y %H:%M", gmtime(starttime)), strftime("%H:%M", gmtime(endtime)), int((endtime - starttime) / 60))))
 	elif type == "moviecharts":
 		res.append(MultiContentEntryPixmapAlphaTest(pos=(8, 8), size=(100, 60), png=loadPNG(pixmap), flags=BT_SCALE))
 		res.append(MultiContentEntryText(pos=(130, 5), size=(480, 30), font=0, text=eventname))
@@ -292,7 +292,7 @@ class TVChartsMain(Screen):
 			for node in xml.getElementsByTagName("CHANNEL"):
 				event_id = None
 				inBouquet = False
-				channelname =str(node.getElementsByTagName("NAME")[0].childNodes[0].data)
+				channelname = str(node.getElementsByTagName("NAME")[0].childNodes[0].data)
 				serviceref = str(node.getElementsByTagName("SERVICEREF")[0].childNodes[0].data)
 				eventname = str(node.getElementsByTagName("EVENTNAME")[0].childNodes[0].data)
 				usercount = int(node.getElementsByTagName("USERCOUNT")[0].childNodes[0].data)
@@ -482,7 +482,7 @@ class DBUpdateStatus(Screen):
 	def restartTimer(self):
 		if self.NetworkConnectionAvailable:
 			self.DBStatusTimer.stop()
-			self.DBStatusTimer.start((randint(15, 60))*1000, True)
+			self.DBStatusTimer.start((randint(15, 60)) * 1000, True)
 		else:
 			iNetwork.checkNetworkState(self.checkNetworkCB)
 
@@ -525,7 +525,7 @@ class DBUpdateStatus(Screen):
 
 		if event is not None:
 			curEvent = parseEvent(event)
-			event_begin = int(curEvent[0])+(config.recording.margin_before.getValue()*60)
+			event_begin = int(curEvent[0]) + (config.recording.margin_before.getValue() * 60)
 			event_description = event.getExtendedDescription()
 
 		# Get Box Info
@@ -542,12 +542,12 @@ class DBUpdateStatus(Screen):
 
 		# Get TimerList
 		self.timerlist = ""
-		if config.plugins.tvcharts.submittimers.value and self.LastTimerlistUpdate <= (time()-1800):
+		if config.plugins.tvcharts.submittimers.value and self.LastTimerlistUpdate <= (time() - 1800):
 			self.LastTimerlistUpdate = time()
 			try:
 				for timer in self.recordtimer.timer_list:
 					if timer.disabled == 0 and timer.justplay == 0:
-						self.timerlist += "%s|%s|%s|%s|%s|%s|%s\n" % (timer.eit, str(int(timer.begin)+(config.recording.margin_before.getValue()*60)), str(int(timer.end)-(config.recording.margin_after.getValue()*60)), str(timer.service_ref), timer.name, timer.service_ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8"), timer.repeated)
+						self.timerlist += "%s|%s|%s|%s|%s|%s|%s\n" % (timer.eit, str(int(timer.begin) + (config.recording.margin_before.getValue() * 60)), str(int(timer.end) - (config.recording.margin_after.getValue() * 60)), str(timer.service_ref), timer.name, timer.service_ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8"), timer.repeated)
 			except Exception:
 				print("[TVCharts] Error loading timers!")
 
@@ -556,7 +556,7 @@ class DBUpdateStatus(Screen):
 			try:
 				os_system("opkg list_installed | grep enigma2-plugin- > /tmp/plugins.txt")
 				for plugin in open('/tmp/plugins.txt', 'r'):
-					self.pluginlist += plugin[0:plugin.find(' - ')]+"\n"
+					self.pluginlist += plugin[0:plugin.find(' - ')] + "\n"
 				os_system("rm -f /tmp/plugins.txt")
 			except Exception:
 				print("[TVCharts] Error loading plugins!")

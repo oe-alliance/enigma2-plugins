@@ -12,11 +12,11 @@ from Components.AVSwitch import AVSwitch
 def getAspect():
     val = AVSwitch().getAspectRatioSetting()
     if val == 0 or val == 1:
-        r = (5*576, 4*720)
+        r = (5 * 576, 4 * 720)
     elif val == 2 or val == 3 or val == 6:
-        r = (16*720, 9*1280)
+        r = (16 * 720, 9 * 1280)
     elif val == 4 or val == 5:
-        r = (16*576, 10*720)
+        r = (16 * 576, 10 * 720)
     return r
 
 class WebPixmap(Pixmap):

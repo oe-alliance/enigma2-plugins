@@ -30,7 +30,7 @@ config.plugins.Widgets.show_empty_positions = ConfigBoolean(default=True, descri
 config.plugins.Widgets.active_widgets = ConfigSubDict()
 for x in range(0, 16):
 	for y in range(0, 16):
-		config.plugins.Widgets.active_widgets["w%i_%i"%(x, y)] = ConfigText("")
+		config.plugins.Widgets.active_widgets["w%i_%i" % (x, y)] = ConfigText("")
 
 
 def Plugins(**kwargs):
@@ -82,7 +82,7 @@ def switch(self):
 			SIB_STATE = 1
 			idx = config.usage.infobar_timeout.index
 			if idx:
-				self.SIBtimer.start(idx*1000, True)
+				self.SIBtimer.start(idx * 1000, True)
 			SIB_TOGGLE_SHOW(InfoBar.instance)
 		elif (SIB_STATE == 1):
 			SIB_STATE = 0
@@ -151,9 +151,9 @@ class WidgetDesktop(Screen):
 		self.initBackgrounds()
 		
 		self.positions = []
-		for x in range(1, self.num_widgets_x+1):
-			for y in range(1, self.num_widgets_y+1):
-				self.positions.append("w%i_%i"%(x, y))
+		for x in range(1, self.num_widgets_x + 1):
+			for y in range(1, self.num_widgets_y + 1):
+				self.positions.append("w%i_%i" % (x, y))
 				
 
 		
@@ -189,7 +189,7 @@ class WidgetDesktop(Screen):
 	
 	def importWidgetElements(self, widget, wname):
 		for elementname in list(widget[1].elements.keys()):
-			self[wname+"_e_"+elementname] = widget[1].elements[elementname]
+			self[wname + "_e_" + elementname] = widget[1].elements[elementname]
 
 	def importWidgetSkin(self, scr, widget, wname):
 		x, y = self.getPositionOfBackgroundElement(scr, wname)
@@ -211,23 +211,23 @@ class WidgetDesktop(Screen):
 		
 					
 	def initBackgrounds(self):
-		for x in range(1, self.num_widgets_x+1):
-			for y in range(1, self.num_widgets_y+1):
-				wname = "w%i_%i"%(x, y)
+		for x in range(1, self.num_widgets_x + 1):
+			for y in range(1, self.num_widgets_y + 1):
+				wname = "w%i_%i" % (x, y)
 				self[wname] = Label()
 				if not config.plugins.Widgets.show_empty_positions.value:
 					self[wname].hide()
-				self[wname+"_h"] = Label(_("press menu to edit"))
-				self[wname+"_h"].hide()
+				self[wname + "_h"] = Label(_("press menu to edit"))
+				self[wname + "_h"].hide()
 				
 	def patchWidgetElementSkinPosition(self, element, x1, y1, wname):
-		pos1= element.get("position").split(",")
-		x2 = int(pos1[0])+x1
-		y2 = int(pos1[1])+y1
-		pos2 = "%i,%i"%(x2, y2)
+		pos1 = element.get("position").split(",")
+		x2 = int(pos1[0]) + x1
+		y2 = int(pos1[1]) + y1
+		pos2 = "%i,%i" % (x2, y2)
 		element.set("position", pos2)
 		if element.get("name") is not None:
-			element.set("name", wname+"_e_"+element.get("name"))
+			element.set("name", wname + "_e_" + element.get("name"))
 		return element
 
 	def _onLoadFinished(self):
@@ -258,7 +258,7 @@ class WidgetDesktop(Screen):
 	def key_down(self):
 		self.selectionHide()
 		self.selection_x += 1
-		if self.selection_x>self.num_widgets_x:
+		if self.selection_x > self.num_widgets_x:
 			self.selection_x = 1		
 		self.selectionShow()		
 	
@@ -272,21 +272,21 @@ class WidgetDesktop(Screen):
 	def key_right(self):
 		self.selectionHide()
 		self.selection_y += 1
-		if self.selection_y>self.num_widgets_y:
+		if self.selection_y > self.num_widgets_y:
 			self.selection_y = 1		
 		self.selectionShow()		
 	
 	def selectionShow(self):
-		if self.selection_x==0:
-			self.selection_x=1
-		if self.selection_y==0:
-			self.selection_y=1
-		if self.selection_x in range(1, self.num_widgets_x+1) and self.selection_y in range(1, self.num_widgets_y+1):
-			self["w%i_%i_h"%(self.selection_x, self.selection_y)].show()
+		if self.selection_x == 0:
+			self.selection_x = 1
+		if self.selection_y == 0:
+			self.selection_y = 1
+		if self.selection_x in range(1, self.num_widgets_x + 1) and self.selection_y in range(1, self.num_widgets_y + 1):
+			self["w%i_%i_h" % (self.selection_x, self.selection_y)].show()
 
 	def selectionHide(self):
-		if self.selection_x in range(1, self.num_widgets_x+1) and self.selection_y in range(1, self.num_widgets_y+1):
-			self["w%i_%i_h"%(self.selection_x, self.selection_y)].hide()
+		if self.selection_x in range(1, self.num_widgets_x + 1) and self.selection_y in range(1, self.num_widgets_y + 1):
+			self["w%i_%i_h" % (self.selection_x, self.selection_y)].hide()
 				
 	def key_menu(self):
 		if self.selection_x != 0 and self.selection_y != 0:
@@ -306,7 +306,7 @@ class WidgetDesktop(Screen):
 	
 	def getWidgetOnPosition(self, x, y):
 		try:
-			return self.widgets_on_position["w%i_%i"%(self.selection_x, self.selection_y)]
+			return self.widgets_on_position["w%i_%i" % (self.selection_x, self.selection_y)]
 		except KeyError:
 			return False
 
@@ -337,12 +337,12 @@ class WidgetPositionConfigScreen(Screen):
 		
 		
 		self["actions"] = ActionMap(["WidgetPositionConfigScreenActions"], {
-															  "ok":      self.ok,
-															  "cancel":  self.close,
-															  "down": 	 self.down,
-				                                              "up": 	 self.up,
-				             				                  "left":	 self.left,
-				             				             	  "right":	 self.right,
+															  "ok": self.ok,
+															  "cancel": self.close,
+															  "down": self.down,
+				                                              "up": self.up,
+				             				                  "left": self.left,
+				             				             	  "right": self.right,
 				             				             	  }, -1)
 		
 	def ok(self):
@@ -383,8 +383,8 @@ class WidgetPositionConfigScreen(Screen):
 		
 	
 	def setValue(self, value):
-		config.plugins.Widgets.active_widgets["w%i_%i"%(self.position_x, self.position_y)].value = value
-		config.plugins.Widgets.active_widgets["w%i_%i"%(self.position_x, self.position_y)].save()
+		config.plugins.Widgets.active_widgets["w%i_%i" % (self.position_x, self.position_y)].value = value
+		config.plugins.Widgets.active_widgets["w%i_%i" % (self.position_x, self.position_y)].save()
 		self.close()
         
 ############################################################################

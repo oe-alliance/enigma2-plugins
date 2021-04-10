@@ -25,7 +25,7 @@ from six.moves import range
 SAVEFILE = "/usr/lib/enigma2/python/Plugins/Extensions/Sudoku/Sudoku.sav"
 
 def RGB(r, g, b):
-	return (r<<16)|(g<<8)|b
+	return (r << 16) | (g << 8) | b
 
 
 def main(session,**kwargs):
@@ -42,7 +42,7 @@ class board:
 	partialboardlist = []
 
 
-	def generate(self, numFilled=(9*9)):
+	def generate(self, numFilled=(9 * 9)):
 		slots = []
 		fillOrder = []
 
@@ -60,7 +60,7 @@ class board:
 		self.search(slots, 0)
 		
 		while len(slots) > 0:
-			i = random.randint(0, len(slots)-1)
+			i = random.randint(0, len(slots) - 1)
 			fillOrder.append(slots[i])
 			del slots[i]
 
@@ -84,7 +84,7 @@ class board:
 			nums.append(i)
 
 		while len(nums) > 0:
-			i = random.randint(0, len(nums)-1)
+			i = random.randint(0, len(nums) - 1)
 			fillOrder.append(nums[i])
 			del nums[i]
 
@@ -93,7 +93,7 @@ class board:
 			y = slots[index][1]
 			self.boardlist[x][y] = i
 			if (self.check()):
-				if self.search(slots, index+1):
+				if self.search(slots, index + 1):
 					return True
 			self.boardlist[x][y] = 0
 		return False
@@ -128,14 +128,14 @@ class board:
 
 	def checkSquare(self, square):
 		found = []
-		xoffset = (3*(square % 3))
+		xoffset = (3 * (square % 3))
 		yoffset = int(square / 3) * 3
 		for j in range(0, 3):
 			for i in range(0, 3):
-				if not self.boardlist[xoffset+i][yoffset+j] == 0:
-					if self.boardlist[xoffset+i][yoffset+j] in found:
+				if not self.boardlist[xoffset + i][yoffset + j] == 0:
+					if self.boardlist[xoffset + i][yoffset + j] in found:
 						return False
-					found.append(self.boardlist[xoffset+i][yoffset+j])
+					found.append(self.boardlist[xoffset + i][yoffset + j])
 		return True
 
 
@@ -143,10 +143,10 @@ class board:
 class SudokuCell:
 	def __init__(self, canvas, x, y, w, h):
 		self.canvas = canvas
-		self.x      = x
-		self.y      = y
-		self.w      = w
-		self.h      = h
+		self.x = x
+		self.y = y
+		self.w = w
+		self.h = h
 
 		self.value_ = 0
 		self.focus_ = False
@@ -183,14 +183,14 @@ class SudokuCell:
 
 
 	def paint(self):
-		fg    = RGB(255, 255, 255) # foreground
-		black = RGB(0,  0,  0) # background readonly
-		focus = RGB(192, 192,  0) # background focus
-		grey  = RGB(70, 70, 70) # background not readonly
-		green = RGB(0, 255,  0) # background solved
-		red   = RGB(255,  0,  0) # background error
+		fg = RGB(255, 255, 255) # foreground
+		black = RGB(0, 0, 0) # background readonly
+		focus = RGB(192, 192, 0) # background focus
+		grey = RGB(70, 70, 70) # background not readonly
+		green = RGB(0, 255, 0) # background solved
+		red = RGB(255, 0, 0) # background error
 
-		b  = 2
+		b = 2
 
 		self.canvas.fill(self.x, self.y, self.w, self.h, fg)
 		
@@ -206,10 +206,10 @@ class SudokuCell:
 		if self.focus_:
 			bg = focus
 
-		self.canvas.fill(self.x+b, self.y+b, self.w-2*b, self.h-2*b, bg)
+		self.canvas.fill(self.x + b, self.y + b, self.w - 2 * b, self.h - 2 * b, bg)
 
 		if self.value_ > 0:
-			self.canvas.writeText(self.x, self.y, self.w, self.h, fg, bg, gFont("Regular", 24), str(self.value_), RT_HALIGN_CENTER|RT_VALIGN_CENTER)
+			self.canvas.writeText(self.x, self.y, self.w, self.h, fg, bg, gFont("Regular", 24), str(self.value_), RT_HALIGN_CENTER | RT_VALIGN_CENTER)
 
 		self.canvas.flush()
 
@@ -277,7 +277,7 @@ class Sudoku(Screen):
 					if type == "Background":
 						bgcolor = int(color[1:], 0x10)
 		#if not bgcolor:
-		bgcolor = RGB(0,  0,  0)
+		bgcolor = RGB(0, 0, 0)
 
 		self.skin = Sudoku.skin
 		Screen.__init__(self, session)
@@ -325,11 +325,11 @@ class Sudoku(Screen):
 		self["Canvas"].fill(0, 0, 354, 354, bgcolor)
 
 		self.board_cells = []
-		self.board_values= []
+		self.board_values = []
 		# ToDo: change for HD Skins...
-		GROUP_SIZE	= 108
-		CELL_SIZE	= 35
-		CELL_OFFSET	= 4
+		GROUP_SIZE = 108
+		CELL_SIZE = 35
+		CELL_OFFSET = 4
 
 		for j in range(9):
 			tmp = []
@@ -402,7 +402,7 @@ class Sudoku(Screen):
 			cell = self.board_cells[self.xFocus][self.yFocus]
 			cell.setFocus(False)
 			cell.paint()
-			self.yFocus = self.yFocus-1
+			self.yFocus = self.yFocus - 1
 			cell = self.board_cells[self.xFocus][self.yFocus]
 			cell.setFocus(True)
 			cell.paint()
@@ -413,7 +413,7 @@ class Sudoku(Screen):
 			cell = self.board_cells[self.xFocus][self.yFocus]
 			cell.setFocus(False)
 			cell.paint()
-			self.yFocus = self.yFocus+1
+			self.yFocus = self.yFocus + 1
 			cell = self.board_cells[self.xFocus][self.yFocus]
 			cell.setFocus(True)
 			cell.paint()
@@ -424,7 +424,7 @@ class Sudoku(Screen):
 			cell = self.board_cells[self.xFocus][self.yFocus]
 			cell.setFocus(False)
 			cell.paint()
-			self.xFocus = self.xFocus-1
+			self.xFocus = self.xFocus - 1
 			cell = self.board_cells[self.xFocus][self.yFocus]
 			cell.setFocus(True)
 			cell.paint()
@@ -435,7 +435,7 @@ class Sudoku(Screen):
 			cell = self.board_cells[self.xFocus][self.yFocus]
 			cell.setFocus(False)
 			cell.paint()
-			self.xFocus = self.xFocus+1
+			self.xFocus = self.xFocus + 1
 			cell = self.board_cells[self.xFocus][self.yFocus]
 			cell.setFocus(True)
 			cell.paint()
@@ -528,7 +528,7 @@ class Sudoku(Screen):
 				else:
 					err = False
 					for k in range(0, 9):
-						if ((i != k	and self.board_cells[k][j].value() == val) or (j != k and self.board_cells[i][k].value() == val)):
+						if ((i != k and self.board_cells[k][j].value() == val) or (j != k and self.board_cells[i][k].value() == val)):
 							err = True
 							break
 	
@@ -537,7 +537,7 @@ class Sudoku(Screen):
 							cell.color(3) #red
 							cell.paint()
 	
-						correct	= False
+						correct = False
 
 					elif highlight:
 						cell.color(1) #grey
@@ -561,7 +561,7 @@ class Sudoku(Screen):
 		b = board()
 		del b.boardlist[:]
 		del b.partialboardlist[:]
-		n =	11 * (5 - self.gameLevel)
+		n = 11 * (5 - self.gameLevel)
 		#n = 80
 		b.generate(n)
 		self.board_values = b.boardlist
@@ -601,7 +601,7 @@ class Sudoku(Screen):
 
 	# display all values and stop game...
 	def solve_game(self):
-		self.cnt=0
+		self.cnt = 0
 		for j in range(0, 9):
 			for i in range(0, 9):
 				cell = self.board_cells[i][j]

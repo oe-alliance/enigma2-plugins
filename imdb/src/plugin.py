@@ -731,7 +731,7 @@ class IMDB(Screen, HelpableScreen):
 			else:
 				splitpos = self.eventName.find('(')
 				if splitpos > 0 and self.eventName.endswith(')'):
-					self.eventName = self.eventName[splitpos+1:-1]
+					self.eventName = self.eventName[splitpos + 1:-1]
 					self["statusbar"].setText(_("Re-Query IMDb: %s...") % (self.eventName))
 					# event_quoted = quoteEventName(self.eventName)
 					localfile = "/tmp/imdbquery.html"
@@ -781,12 +781,12 @@ class IMDB(Screen, HelpableScreen):
 
 			for category in ("director", "creator", "writer", "seasons"):
 				if self.generalinfos.group(category):
-					Detailstext += addnewline + self.generalinfos.group('g_'+category) + ": " + ' '.join(self.htmltags.sub('', self.generalinfos.group(category)).replace("\n", ' ').replace(self.NBSP, ' ').replace(self.RAQUO, '').replace(self.HELLIP + ' See all', '...').split())
+					Detailstext += addnewline + self.generalinfos.group('g_' + category) + ": " + ' '.join(self.htmltags.sub('', self.generalinfos.group(category)).replace("\n", ' ').replace(self.NBSP, ' ').replace(self.RAQUO, '').replace(self.HELLIP + ' See all', '...').split())
 					addnewline = "\n"
 
 			for category in ("premiere", "country", "alternativ"):
 				if self.generalinfos.group(category):
-					Detailstext += addnewline + self.generalinfos.group('g_'+category) + ": " + ' '.join(self.htmltags.sub('', self.generalinfos.group(category).replace('\n', ' ')).split())
+					Detailstext += addnewline + self.generalinfos.group('g_' + category) + ": " + ' '.join(self.htmltags.sub('', self.generalinfos.group(category).replace('\n', ' ')).split())
 					addnewline = "\n"
 
 			rating = self.ratingmask.search(self.inhtml)
@@ -795,7 +795,7 @@ class IMDB(Screen, HelpableScreen):
 				rating = rating.group("rating")
 				if rating != '<span id="voteuser"></span>':
 					Ratingtext = _("User Rating") + ": " + rating + " / 10"
-					self.ratingstars = int(10*round(float(rating.replace(',', '.')), 1))
+					self.ratingstars = int(10 * round(float(rating.replace(',', '.')), 1))
 					self["stars"].show()
 					self["stars"].setValue(self.ratingstars)
 					self["starsbg"].show()
@@ -856,11 +856,11 @@ class IMDB(Screen, HelpableScreen):
 							if "Add a Plot" in extrainfos.group(category):
 								continue
 							Extratext += _("Plot Outline")
-						elif extrainfos.group('g_'+category):
-							Extratext += extrainfos.group('g_'+category)
+						elif extrainfos.group('g_' + category):
+							Extratext += extrainfos.group('g_' + category)
 						else:
 							Extratext += _("Unknown category")
-						Extratext += sep  + ' '.join(self.htmltags.sub('', extrainfos.group(category).replace("\n", ' ').replace("<br>", '\n').replace("<br />", '\n')).replace(' |' + self.NBSP, '').replace(self.NBSP, ' ').split()) + "\n"
+						Extratext += sep + ' '.join(self.htmltags.sub('', extrainfos.group(category).replace("\n", ' ').replace("<br>", '\n').replace("<br />", '\n')).replace(' |' + self.NBSP, '').replace(self.NBSP, ' ').split()) + "\n"
 						extraspace = ''
 				if extrainfos.group("g_comments"):
 					Extratext += "\n" + extrainfos.group("g_comments") + ":\n" + extrainfos.group("commenttitle") + " [" + ' '.join(self.htmltags.sub('', extrainfos.group("commenter")).split()) + "]: " + self.htmltags.sub('', extrainfos.group("comment").replace("\n", ' ').replace(self.NBSP, ' ').replace("<br>", '\n').replace("<br/>", '\n').replace("<br />", '\n')) + "\n"
@@ -1081,7 +1081,7 @@ def movielistSearch(session, serviceref, **kwargs):
 	if ext in KNOWN_EXTENSIONS:
 		if six.PY2:
 			_root = root.decode("utf8")
-		eventName = re.sub("[\W_]+", ' ', _root, 0, re.LOCALE|re.UNICODE)
+		eventName = re.sub("[\W_]+", ' ', _root, 0, re.LOCALE | re.UNICODE)
 		if six.PY2:
 			eventName = eventName.encode("utf8")
 	session.open(IMDB, eventName)

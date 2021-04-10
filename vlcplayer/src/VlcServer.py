@@ -318,20 +318,20 @@ class VlcServer:
 			parameters += " :file-caching=1000"
 
 		# languages/tracks
-		if self.getlangInputType()=="language":
-			if self.gettypeAudio()!="---":
+		if self.getlangInputType() == "language":
+			if self.gettypeAudio() != "---":
 				parameters += " :audio-language=%s" % self.gettypeAudio()
-			if self.gettypeSubtitles()!="---":
+			if self.gettypeSubtitles() != "---":
 				parameters += " :sub-language=%s" % self.gettypeSubtitles()
 		else:
-			if self.gettypeAudio()!="-1":
+			if self.gettypeAudio() != "-1":
 				parameters += " :audio-track=%s" % self.gettypeAudio()
-			if self.gettypeSubtitles()!="-1":
+			if self.gettypeSubtitles() != "-1":
 				parameters += " :sub-track=%s" % self.gettypeSubtitles()
 
 		if re.match("dvd", filename):
 			# sout-all only, if is not selected subtitle track or subtitle language
-			if self.gettypeSubtitles()=="---" or self.gettypeSubtitles()=="-1": 
+			if self.gettypeSubtitles() == "---" or self.gettypeSubtitles() == "-1": 
 				parameters += " :sout-all"
 		else:
 			parameters += " :sout-all"
@@ -342,17 +342,17 @@ class VlcServer:
 		if len(transcode) > 0:
 			sout += "transcode{%s}:" % (",".join(transcode))
 
-		mux="ts{pid-video=%d,pid-audio=%d}" % (videoPid, audioPid)
+		mux = "ts{pid-video=%d,pid-audio=%d}" % (videoPid, audioPid)
 		sout += "std{access=http,mux=%s,dst=/%s.ts}" % (mux, streamName)
 
 		if oldVLC:
-			input +=  " " + sout + parameters
+			input += " " + sout + parameters
 			sout = ""
 		else:
 			params = "".join((sout, parameters)).split(' ')
 			sout = ""
 			for par in params:
-				sout +="&option=%s" % quote_plus(par.lstrip(':'))
+				sout += "&option=%s" % quote_plus(par.lstrip(':'))
 
 		print("[VLC] playfile", input)
 		print("[VLC] sout", sout)

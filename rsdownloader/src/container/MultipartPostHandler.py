@@ -141,5 +141,5 @@ def main():
     else:
         validateFile("http://www.google.com")
 
-if __name__=="__main__":
+if __name__ == "__main__":
     main()

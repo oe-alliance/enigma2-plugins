@@ -102,7 +102,7 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 		self["config"].isChanged = self._ConfigisChanged
 	
 	def _layoutFinished(self):
-		self.setTitle(_("EPGBackup Setup") + " V%s" %(PLUGIN_VERSION))
+		self.setTitle(_("EPGBackup Setup") + " V%s" % (PLUGIN_VERSION))
 	
 	def removeNotifiers(self):
 		try:

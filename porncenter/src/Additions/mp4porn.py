@@ -44,7 +44,7 @@ class MP4Porn(Plugin):
 
 	def getMoreEntries(self):
 		if self.moreEntries:
-			self.getEntries(self.callback, self.currPage+1)
+			self.getEntries(self.callback, self.currPage + 1)
 
 	def getPageError(self, error=None):
 		if error and self.currPage == 1:

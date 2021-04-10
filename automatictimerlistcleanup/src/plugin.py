@@ -88,7 +88,7 @@ class AutomaticTimerlistCleanUp:
 			value = time() - int(config.plugins.automatictimerlistcleanup.type.value) * 86400 # calculate end time for comparison with processed timers
 			print("[AutomaticTimerlistCleanUp] Cleaning up timerlist-entries older than ", strftime("%c", localtime(value)))
 			self.session.nav.RecordTimer.processed_timers = [timerentry for timerentry in self.session.nav.RecordTimer.processed_timers if timerentry.disabled or (timerentry.end and timerentry.end > value)] # cleanup timerlist
-			print("[AutomaticTimerlistCleanUp] Next automatic timerlist cleanup at ", strftime("%c", localtime(time()+self.TIMER_INTERVAL)))
+			print("[AutomaticTimerlistCleanUp] Next automatic timerlist cleanup at ", strftime("%c", localtime(time() + self.TIMER_INTERVAL)))
 			self.timer.startLongTimer(self.TIMER_INTERVAL) # check again in x secs
 		else:
 			print("[AutomaticTimerlistCleanUp] disabled")
@@ -99,7 +99,7 @@ class AutomaticTimerlistCleanUp:
 			self.timer.stop()
 		print("[AutomaticTimerlistCleanUp] Setup values have changed")
 		if int(config.plugins.automatictimerlistcleanup.type.value) > -1:
-			print("[AutomaticTimerlistCleanUp] Next automatic timerlist cleanup at ", strftime("%c", localtime(time()+120)))
+			print("[AutomaticTimerlistCleanUp] Next automatic timerlist cleanup at ", strftime("%c", localtime(time() + 120)))
 			self.timer.startLongTimer(120) # check timerlist in 2 minutes after changing 
 		else:
 			print("[AutomaticTimerlistCleanUp] disabled")

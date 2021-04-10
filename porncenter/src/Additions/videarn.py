@@ -43,12 +43,12 @@ class VidearnSub(Plugin):
 		for div in divs:
 			reonecat = re.compile(r'<a href="(.+?)".+?<img src="(.+?)".+?class="galtitle">(.+?)</a>', re.DOTALL)
 			for url, thumb, name in reonecat.findall(div):
-				movies.append(VidearnMovie(name, "http://videarn.com/"+url, thumb))
+				movies.append(VidearnMovie(name, "http://videarn.com/" + url, thumb))
 		self.callback(movies)
 
 	def getMoreEntries(self):
 		if self.moreEntries:
-			self.getEntries(self.callback, self.currPage+1)
+			self.getEntries(self.callback, self.currPage + 1)
 
 	def getPageError(self, error=None):
 		if error and self.currPage == 1:
@@ -75,7 +75,7 @@ class Videarn(Plugin):
 			page = page[:page.index(end)]
 			reonecat = re.compile(r'<a href="(.+?)">(.+?)</a>', re.DOTALL)
 			for url, name in reonecat.findall(page):
-				plugins.append(VidearnSub("videarn.com - "+name, url))
+				plugins.append(VidearnSub("videarn.com - " + name, url))
 		self.callback(plugins)
 
 	def getPageError(self, error=None):

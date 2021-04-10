@@ -103,7 +103,7 @@ class myProxyRequest(proxy.ProxyRequest):
         self.transport.write("HTTP/1.0 200 blocked\r\n")
         self.transport.write("Content-Type: text/html\r\n")
         self.transport.write("\r\n")
-        self.transport.write('<H1>%s</H1>'%message)
+        self.transport.write('<H1>%s</H1>' % message)
         self.transport.stopProducing()
 
     def checkClientAccess(self, client):

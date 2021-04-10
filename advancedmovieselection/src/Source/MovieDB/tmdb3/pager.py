@@ -66,7 +66,7 @@ class PagedList(Sequence):
             raise IndexError("list index outside range")
         if (index >= len(self._data)) \
                 or isinstance(self._data[index], UnpagedData):
-            self._populatepage(index/self._pagesize + 1)
+            self._populatepage(index / self._pagesize + 1)
         return self._data[index]
 
     def __setitem__(self, index, value):
@@ -79,9 +79,9 @@ class PagedList(Sequence):
         raise NotImplementedError
 
     def _populatepage(self, page):
-        pagestart = (page-1) * self._pagesize
+        pagestart = (page - 1) * self._pagesize
         if len(self._data) < pagestart:
-            self._data.extend(UnpagedData()*(pagestart-len(self._data)))
+            self._data.extend(UnpagedData() * (pagestart - len(self._data)))
         if len(self._data) == pagestart:
             self._data.extend(self._getpage(page))
         else:
@@ -90,7 +90,7 @@ class PagedList(Sequence):
                 pagestart += 1
 
     def _getpage(self, page):
-        raise NotImplementedError("PagedList._getpage() must be provided "+
+        raise NotImplementedError("PagedList._getpage() must be provided " +
                                   "by subclass")
 
 class PagedRequest(PagedList):

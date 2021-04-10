@@ -68,15 +68,15 @@ class MovieTagger(Screen):
 		self["aTaglist"] = TagMenuList([])
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
 			{
-			"back": 	self.close,
-			"red": 		self.keyRed,
-			"green": 	self.keyGreen,
-			"yellow": 	self.keyYellow,
-			"blue": 	self.keyBlue,
-			"up": 		self.up,
-			"down": 	self.down,
-			"left": 	self.left,
-			"right": 	self.right,
+			"back": self.close,
+			"red": self.keyRed,
+			"green": self.keyGreen,
+			"yellow": self.keyYellow,
+			"blue": self.keyBlue,
+			"up": self.up,
+			"down": self.down,
+			"left": self.left,
+			"right": self.right,
 			}, -1)
 		self.loadPreTags()
 		self.updateCurrentTagList()
@@ -112,7 +112,7 @@ class MovieTagger(Screen):
 		xtmp.extend(ml.tags)
 		self.usedTags = xtmp
 
-		e = []+self.pretags
+		e = [] + self.pretags
 		for i in ml.tags:
 			try:
 				self.pretags.index(i)
@@ -140,7 +140,7 @@ class MovieTagger(Screen):
 			self.tags.index(tagname)
 		except ValueError:
 			self.tags.append(tagname)
-			if len(self.tags) >1:
+			if len(self.tags) > 1:
 				self.setTags(" ".join(self.tags))
 			else:
 				self.setTags(tagname)
@@ -164,16 +164,16 @@ class MovieTagger(Screen):
 		else:
 			serviceRef = service
 
-		service_name =serviceRef.toString().split(":")[-1]
-		filename = service_name+".meta"
+		service_name = serviceRef.toString().split(":")[-1]
+		filename = service_name + ".meta"
 		metadata = self.readMETAData(filename)
 		if metadata is not False:
 			metadata.append(tagstring.strip())
-			return  self.writeMETAData(filename, metadata)
+			return self.writeMETAData(filename, metadata)
 		else:
 			if userNotice is True:
 				self.session.open(MessageBox, _("Can't write movietags, because no meta-file found!"), MessageBox.TYPE_ERROR)
-			return  False
+			return False
 
 
 	def readMETAData(self, filename):
@@ -253,7 +253,7 @@ class MovieTagger(Screen):
 			self.session.openWithCallback(self.newTagEntered, InputBox, title=_('Whitepace will be replaced by "_"'), windowTitle=_("Enter the new Tag"))
 
 	def keyYellow(self):
-		if  self.currList is self["aTaglist"]:
+		if self.currList is self["aTaglist"]:
 			self.session.openWithCallback(self.clearAllTags, MessageBox, _("Clear all Tags?\n\nThis will delete ALL tags in ALL recodings!\nAre you sure?"), MessageBox.TYPE_YESNO)
 
 	def keyBlue(self):
@@ -293,7 +293,7 @@ class MovieTagger(Screen):
 		self.currList.pageDown()
 
 	def newTagEntered(self, newTag):
-		if newTag >=0:
+		if newTag >= 0:
 			self.addTag(newTag.strip().replace(" ", "_"))
 
 class TagMenuList(MenuList):

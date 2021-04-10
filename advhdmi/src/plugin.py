@@ -19,7 +19,7 @@ from boxbranding import getImageDistro
 
 def _print(outtxt):
 	ltim = localtime()
-	headerstr = "[AdvHdmiCec] %04d%02d%02d-%02d%02d%02d " %(ltim[0], ltim[1], ltim[2], ltim[3], ltim[4], ltim[5])
+	headerstr = "[AdvHdmiCec] %04d%02d%02d-%02d%02d%02d " % (ltim[0], ltim[1], ltim[2], ltim[3], ltim[4], ltim[5])
 	outtxt = headerstr + outtxt
 	print(outtxt)
 
@@ -69,7 +69,7 @@ def TimeSpanEntryInit():
 	end = mktime((now.tm_year, now.tm_mon, now.tm_mday, 16, 00, 0, now.tm_wday, now.tm_yday, now.tm_isdst))
 
 	config.plugins.AdvHdmiCec.Entries.append(ConfigSubsection())
-	i = len(config.plugins.AdvHdmiCec.Entries) -1
+	i = len(config.plugins.AdvHdmiCec.Entries) - 1
 	config.plugins.AdvHdmiCec.Entries[i].fromWD = ConfigSelection(choices=[
 		("0", WEEKDAYS[0]),
 		("1", WEEKDAYS[1]),
@@ -99,7 +99,7 @@ config.plugins.AdvHdmiCec.enable_power_on = ConfigYesNo(default=True)
 config.plugins.AdvHdmiCec.enable_power_off = ConfigYesNo(default=True)
 config.plugins.AdvHdmiCec.disable_after_enigmastart = ConfigYesNo(default=False)
 config.plugins.AdvHdmiCec.disable_from_webif = ConfigYesNo(default=False)
-config.plugins.AdvHdmiCec.entriescount =  ConfigInteger(0)
+config.plugins.AdvHdmiCec.entriescount = ConfigInteger(0)
 config.plugins.AdvHdmiCec.Entries = ConfigSubList()
 config.plugins.AdvHdmiCec.show_in = ConfigSelection(choices=[
 		("system", _("systemmenue")),
@@ -253,7 +253,7 @@ def AdvHdmiCecDOIT():
 				if config.plugins.AdvHdmiCec.debug.value:
 					presenter = TimeSpanPresenter(e)
 					_print("Debug: Checking timespan '" + ", ".join(str(x) for x in presenter) + "'")
-				if int(e.fromWD.getValue()) <=  int(lt[6]) \
+				if int(e.fromWD.getValue()) <= int(lt[6]) \
 					and int(e.toWD.getValue()) >= int(lt[6]):
 					presenter = TimeSpanPresenter(e)
 					if checkTimespan(lt, e.begin.getValue(), e.end.getValue()):

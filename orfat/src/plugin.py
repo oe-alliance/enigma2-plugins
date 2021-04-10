@@ -22,7 +22,7 @@ from six.moves.urllib.request import urlopen
 import six
 ##########################################################
 
-PNG_PATH = resolveFilename(SCOPE_PLUGINS)+"/Extensions/ORFat/"
+PNG_PATH = resolveFilename(SCOPE_PLUGINS) + "/Extensions/ORFat/"
 
 try:
 	from LT.LTStreamPlayer import streamplayer
@@ -216,7 +216,7 @@ class ORFMain(Screen):
 					if streamplayer.connected:
 						streamplayer.logout()
 				self.transcodeServer = server
-				self.setTitle("ORF.at IPTV - Server: %s"%server.getName())
+				self.setTitle("ORF.at IPTV - Server: %s" % server.getName())
 
 	def connectToStream2Dream(self):
 		streamplayer.login()

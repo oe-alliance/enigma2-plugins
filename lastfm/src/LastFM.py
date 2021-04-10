@@ -74,8 +74,8 @@ class LastFM(LastFMHandler):
     host = "ws.audioscrobbler.com"
     port = 80
     metadata = {}
-    info={}
-    cache_toptags= "/tmp/toptags"
+    info = {}
+    cache_toptags = "/tmp/toptags"
     playlist = None
     
     def __init__(self):
@@ -86,7 +86,7 @@ class LastFM(LastFMHandler):
 #        getPage(self.host,self.port
 #                            ,"/radio/handshake.php?version=" + self.version + "&platform=" + self.platform + "&username=" + username + "&passwordmd5=" + self.hexify(md5(password).digest())
 #                            ,callback=self.connectCB,errorback=self.onConnectFailed)
-        url = "http://"+self.host+":"+str(self.port)+"/radio/handshake.php?version=" + self.version + "&platform=" + self.platform + "&username=" + username + "&passwordmd5=" + self.hexify(md5(password).digest())
+        url = "http://" + self.host + ":" + str(self.port) + "/radio/handshake.php?version=" + self.version + "&platform=" + self.platform + "&username=" + username + "&passwordmd5=" + self.hexify(md5(password).digest())
         getPage(six.ensure_binary(url)).addCallback(self.connectCB).addErrback(self.onConnectFailed)
 
     def connectCB(self, data):
@@ -129,7 +129,7 @@ class LastFM(LastFMHandler):
 #            getPage(self.info["base_url"],80
 #                            ,self.info["base_path"] + "/xspf.php?sk=" + self.info["session"]+"&discovery=0&desktop=1.3.1.1"
 #                            ,callback=self.loadPlaylistCB,errorback=self.onCommandFailed)
-            url = "http://"+self.info["base_url"]+":80"+self.info["base_path"] + "/xspf.php?sk=" + self.info["session"] + "&discovery=0&desktop=2.0"
+            url = "http://" + self.info["base_url"] + ":80" + self.info["base_path"] + "/xspf.php?sk=" + self.info["session"] + "&discovery=0&desktop=2.0"
             getPage(six.ensure_binary(url)).addCallback(self.loadPlaylistCB).addErrback(self.onCommandFailed)
 
     def loadPlaylistCB(self, xmlsource):
@@ -137,31 +137,31 @@ class LastFM(LastFMHandler):
         self.onPlaylistLoaded("playlist loaded")
     
     def getPersonalURL(self,username,level=50):
-        return "lastfm://user/%s/recommended/32"%username
+        return "lastfm://user/%s/recommended/32" % username
     
     def getNeighboursURL(self, username):
-        return "lastfm://user/%s/neighbours"%username
+        return "lastfm://user/%s/neighbours" % username
 
     def getLovedURL(self, username):
-        return "lastfm://user/%s/loved"%username
+        return "lastfm://user/%s/loved" % username
     
     def getSimilarArtistsURL(self,artist=None):
         if artist is None and 'artist' in self.metadata:
-            return "lastfm://artist/%s/similarartists"%self.metadata['artist'].replace(" ", "%20")
+            return "lastfm://artist/%s/similarartists" % self.metadata['artist'].replace(" ", "%20")
         else:
-            return "lastfm://artist/%s/similarartists"%artist.replace(" ", "%20")
+            return "lastfm://artist/%s/similarartists" % artist.replace(" ", "%20")
 
     def getArtistsLikedByFans(self,artist=None):
         if artist is None and 'artist' in self.metadata:
-            return "lastfm://artist/%s/fans"%self.metadata['artist'].replace(" ", "%20")
+            return "lastfm://artist/%s/fans" % self.metadata['artist'].replace(" ", "%20")
         else:
-            return "lastfm://artist/%s/fans"%artist.replace(" ", "%20")
+            return "lastfm://artist/%s/fans" % artist.replace(" ", "%20")
     
     def getArtistGroup(self,artist=None):
         if artist is None and 'artist' in self.metadata:
-            return "lastfm://group/%s"%self.metadata['artist'].replace(" ", "%20")
+            return "lastfm://group/%s" % self.metadata['artist'].replace(" ", "%20")
         else:
-            return "lastfm://group/%s"%artist.replace(" ", "%20")
+            return "lastfm://group/%s" % artist.replace(" ", "%20")
     def command(self, cmd, callback):
         # commands = skip, love, ban, rtp, nortp
         if self.state is not True:
@@ -170,7 +170,7 @@ class LastFM(LastFMHandler):
 #            getPage(self.info["base_url"],80
 #                            ,self.info["base_path"] + "/control.php?command=" + cmd + "&session=" + self.info["session"]
 #                            ,callback=callback,errorback=self.onCommandFailed)
-            url = "http://"+self.info["base_url"]+":80"+self.info["base_path"] + "/control.php?command=" + cmd + "&session=" + self.info["session"]
+            url = "http://" + self.info["base_url"] + ":80" + self.info["base_path"] + "/control.php?command=" + cmd + "&session=" + self.info["session"]
             getPage(six.ensure_binary(url)).addCallback(callback).addErrback(self.onCommandFailed)
  
     def onTrackLovedCB(self, response):
@@ -233,19 +233,19 @@ class LastFM(LastFMHandler):
 #            getPage(self.info["base_url"],80
 #                            ,"/1.0/tag/toptags.xml"
 #                            ,callback=self.getGlobalTagsCB,errorback=self.onCommandFailed)
-            url = "http://"+self.info["base_url"]+":80"+"/1.0/tag/toptags.xml"
+            url = "http://" + self.info["base_url"] + ":80" + "/1.0/tag/toptags.xml"
             getPage(six.ensure_binary(url)).addCallback(self.getGlobalTagsCB).addErrback(self.onCommandFailed)
 
     def getGlobalTagsCB(self, result):
         try:
             rssDocument = parseString(result)
-            data =[]
+            data = []
             for node in self.XMLgetElementsByTagName(rssDocument, 'tag'):
-                nodex={}
+                nodex = {}
                 nodex['_display'] = nodex['name'] = node.getAttribute("name").encode("utf-8")
-                nodex['count'] =  node.getAttribute("count").encode("utf-8")
-                nodex['stationurl'] = "lastfm://globaltags/"+node.getAttribute("name").encode("utf-8").replace(" ", "%20")
-                nodex['url'] =  node.getAttribute("url").encode("utf-8")
+                nodex['count'] = node.getAttribute("count").encode("utf-8")
+                nodex['stationurl'] = "lastfm://globaltags/" + node.getAttribute("name").encode("utf-8").replace(" ", "%20")
+                nodex['url'] = node.getAttribute("url").encode("utf-8")
                 data.append(nodex)
             self.onGlobalTagsLoaded(data)
         except xml.parsers.expat.ExpatError as e:
@@ -258,7 +258,7 @@ class LastFM(LastFMHandler):
 #            getPage(self.info["base_url"],80
 #                            ,"/1.0/user/%s/toptracks.xml"%username
 #                            ,callback=self.getTopTracksCB,errorback=self.onCommandFailed)
-            url = "http://"+self.info["base_url"]+"/1.0/user/"+username+"/toptracks.xml"
+            url = "http://" + self.info["base_url"] + "/1.0/user/" + username + "/toptracks.xml"
             getPage(six.ensure_binary(url)).addCallback(self.getTopTracksCB).addErrback(self.onCommandFailed)
            
     def getTopTracksCB(self, result):
@@ -275,7 +275,7 @@ class LastFM(LastFMHandler):
 #            getPage(self.info["base_url"],80
 #                            ,"/1.0/user/%s/recenttracks.xml"%username
 #                            ,callback=self.getRecentTracksCB,errorback=self.onCommandFailed)
-            url = "http://"+self.info["base_url"]+"/1.0/user/"+username+"/recenttracks.xml"
+            url = "http://" + self.info["base_url"] + "/1.0/user/" + username + "/recenttracks.xml"
             getPage(six.ensure_binary(url)).addCallback(self.getRecentTracksCB).addErrback(self.onCommandFailed)
            
     def getRecentTracksCB(self, result):
@@ -292,7 +292,7 @@ class LastFM(LastFMHandler):
 #            getPage(self.info["base_url"],80
 #                            ,"/1.0/user/%s/recentlovedtracks.xml"%username
 #                            ,callback=self.getRecentLovedTracksCB,errorback=self.onCommandFailed)
-            url = "http://"+self.info["base_url"]+"/1.0/user/"+username+"/recentlovedtracks.xml"
+            url = "http://" + self.info["base_url"] + "/1.0/user/" + username + "/recentlovedtracks.xml"
             getPage(six.ensure_binary(url)).addCallback(self.getRecentLovedTracksCB).addErrback(self.onCommandFailed)
            
     def getRecentLovedTracksCB(self, result):
@@ -309,7 +309,7 @@ class LastFM(LastFMHandler):
 #            getPage(self.info["base_url"],80
 #                            ,"/1.0/user/%s/recentbannedtracks.xml"%username
 #                            ,callback=self.getRecentBannedTracksCB,errorback=self.onCommandFailed)
-            url = "http://"+self.info["base_url"]+"/1.0/user/"+username+"/recentbannedtracks.xml"
+            url = "http://" + self.info["base_url"] + "/1.0/user/" + username + "/recentbannedtracks.xml"
             getPage(six.ensure_binary(url)).addCallback(self.getRecentBannedTracksCB).addErrback(self.onCommandFailed)
            
     def getRecentBannedTracksCB(self, result):
@@ -323,15 +323,15 @@ class LastFM(LastFMHandler):
         #print xmlrawdata
         try:
             rssDocument = parseString(xmlrawdata)
-            data =[]
+            data = []
             for node in self.XMLgetElementsByTagName(rssDocument, 'track'):
-                nodex={}
+                nodex = {}
                 nodex['name'] = self.XMLget_txt(node, "name", "N/A")
-                nodex['artist'] =  self.XMLget_txt(node, "artist", "N/A")
+                nodex['artist'] = self.XMLget_txt(node, "artist", "N/A")
                 nodex['playcount'] = self.XMLget_txt(node, "playcount", "N/A")
-                nodex['stationurl'] =  "lastfm://artist/"+nodex['artist'].replace(" ", "%20")+"/similarartists"#+nodex['name'].replace(" ","%20")
-                nodex['url'] =  self.XMLget_txt(node, "url", "N/A")
-                nodex['_display'] = nodex['artist']+" - "+nodex['name']
+                nodex['stationurl'] = "lastfm://artist/" + nodex['artist'].replace(" ", "%20") + "/similarartists"#+nodex['name'].replace(" ","%20")
+                nodex['url'] = self.XMLget_txt(node, "url", "N/A")
+                nodex['_display'] = nodex['artist'] + " - " + nodex['name']
                 data.append(nodex)
             return True, data
         except xml.parsers.expat.ExpatError as e:
@@ -345,7 +345,7 @@ class LastFM(LastFMHandler):
 #            getPage(self.info["base_url"],80
 #                            ,"/1.0/user/%s/neighbours.xml"%username
 #                            ,callback=self.getNeighboursCB,errorback=self.onCommandFailed)
-            url = "http://"+self.info["base_url"]+"/1.0/user/"+username+"/neighbours.xml"
+            url = "http://" + self.info["base_url"] + "/1.0/user/" + username + "/neighbours.xml"
             getPage(six.ensure_binary(url)).addCallback(self.getNeighboursCB).addErrback(self.onCommandFailed)
            
     def getNeighboursCB(self, result):
@@ -362,7 +362,7 @@ class LastFM(LastFMHandler):
 #            getPage(self.info["base_url"],80
 #                            ,"/1.0/user/%s/friends.xml"%username
 #                            ,callback=self.getFriendsCB,errorback=self.onCommandFailed)
-            url = "http://"+self.info["base_url"]+"/1.0/user/"+username+"/friends.xml"
+            url = "http://" + self.info["base_url"] + "/1.0/user/" + username + "/friends.xml"
             getPage(six.ensure_binary(url)).addCallback(self.getFriendsCB).addErrback(self.onCommandFailed)
            
     def getFriendsCB(self, result):
@@ -377,12 +377,12 @@ class LastFM(LastFMHandler):
         #print xmlrawdata
         try:
             rssDocument = parseString(xmlrawdata)
-            data =[]
+            data = []
             for node in self.XMLgetElementsByTagName(rssDocument, 'user'):
-                nodex={}
+                nodex = {}
                 nodex['name'] = node.getAttribute("username").encode("utf-8")
-                nodex['url'] =  self.XMLget_txt(node, "url", "N/A")
-                nodex['stationurl'] =  "lastfm://user/"+nodex['name']+"/personal"
+                nodex['url'] = self.XMLget_txt(node, "url", "N/A")
+                nodex['stationurl'] = "lastfm://user/" + nodex['name'] + "/personal"
                 nodex['_display'] = nodex['name']
                 data.append(nodex)
             return True, data
@@ -397,7 +397,7 @@ class LastFM(LastFMHandler):
 #            getPage(self.info["base_url"],80
 #                            ,self.info["base_path"] + "/adjust.php?session=" + self.info["session"] + "&url=" + url
 #                            ,callback=self.changeStationCB,errorback=self.onCommandFailed)
-            url = "http://"+self.info["base_url"]+":80"+self.info["base_path"] + "/adjust.php?session=" + self.info["session"] + "&url=" + url
+            url = "http://" + self.info["base_url"] + ":80" + self.info["base_path"] + "/adjust.php?session=" + self.info["session"] + "&url=" + url
             getPage(six.ensure_binary(url)).addCallback(self.changeStationCB).addErrback(self.onCommandFailed)
            
     def changeStationCB(self, result):
@@ -405,7 +405,7 @@ class LastFM(LastFMHandler):
         if res["response"] == "OK":
             self.onStationChanged(_("Station changed"))
         else:
-            self.onCommandFailed(_("Server returned") + " " +res["response"])
+            self.onCommandFailed(_("Server returned") + " " + res["response"])
 
 ############
 class LastFMPlaylist:
@@ -423,7 +423,7 @@ class LastFMPlaylist:
     def __init__(self, xmlsource):
         self.xmldoc = parseString(xmlsource)
         self.name = unquote_plus(self._get_txt(self.xmldoc, "title", "no playlistname"))
-        self.creator =self._get_txt(self.xmldoc, "creator", "no playlistcreator")
+        self.creator = self._get_txt(self.xmldoc, "creator", "no playlistcreator")
         self.parseTracks()
 
     def getTracks(self):
@@ -439,15 +439,15 @@ class LastFMPlaylist:
         try:
             self.tracks = []
             for node in self._getElementsByTagName(self.xmldoc, 'track'):
-                nodex={}
-                nodex['station'] =  self.name
-                nodex['location'] =  self._get_txt(node, "location", "no location")
-                nodex['title'] =  self._get_txt(node, "title", "no title")
-                nodex['id'] =  self._get_txt(node, "id", "no id")
-                nodex['album'] =  self._get_txt(node, "album", "no album")
-                nodex['creator'] =  self._get_txt(node, "creator", "no creator")
-                nodex['duration'] =  int(self._get_txt(node, "duration", "0"))
-                nodex['image'] =  self._get_txt(node, "image", "no image")
+                nodex = {}
+                nodex['station'] = self.name
+                nodex['location'] = self._get_txt(node, "location", "no location")
+                nodex['title'] = self._get_txt(node, "title", "no title")
+                nodex['id'] = self._get_txt(node, "id", "no id")
+                nodex['album'] = self._get_txt(node, "album", "no album")
+                nodex['creator'] = self._get_txt(node, "creator", "no creator")
+                nodex['duration'] = int(self._get_txt(node, "duration", "0"))
+                nodex['image'] = self._get_txt(node, "image", "no image")
                 self.tracks.append(nodex)
             self.length = len(self.tracks)
             return True

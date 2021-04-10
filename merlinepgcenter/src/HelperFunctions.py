@@ -43,7 +43,7 @@ from Tools.LoadPixmap import LoadPixmap
 LIST_TYPE_EPG = 0
 LIST_TYPE_UPCOMING = 1
 
-WEEKSECONDS = 7*86400
+WEEKSECONDS = 7 * 86400
 WEEKDAYS = (_("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"), _("Friday"), _("Saturday"), _("Sunday"))
 
 
@@ -116,15 +116,15 @@ class ResizeScrollLabel(ScrollLabel):
 		ScrollLabel.__init__(self, text)
 		
 	def resize(self, s):
-		lineheight=fontRenderClass.getInstance().getLineHeight(self.long_text.getFont())
+		lineheight = fontRenderClass.getInstance().getLineHeight(self.long_text.getFont())
 		if not lineheight:
 			lineheight = 30 # assume a random lineheight if nothing is visible
 		lines = (int)(s.height() / lineheight)
 		self.pageHeight = (int)(lines * lineheight)
-		self.instance.resize(eSize(s.width(), self.pageHeight+(int)(lineheight/6)))
-		self.scrollbar.move(ePoint(s.width()-20, 0))
-		self.scrollbar.resize(eSize(20, self.pageHeight+(int)(lineheight/6)))
-		self.long_text.resize(eSize(s.width()-30, self.pageHeight*16))
+		self.instance.resize(eSize(s.width(), self.pageHeight + (int)(lineheight / 6)))
+		self.scrollbar.move(ePoint(s.width() - 20, 0))
+		self.scrollbar.resize(eSize(20, self.pageHeight + (int)(lineheight / 6)))
+		self.long_text.resize(eSize(s.width() - 30, self.pageHeight * 16))
 		self.setText(self.message)
 
 class PiconLoader():
@@ -306,25 +306,25 @@ class BlinkTimer():
 # interface between AutoTimer and our timer list
 class TimerListObject(object):
 	def __init__(self, begin, end, service_ref, name, justplay, disabled, autoTimerId, match, searchType, counter, counterLeft, destination, services, bouquets, includedDays, excludedDays):
-		self.begin		= begin
-		self.end		= end
-		self.service_ref 	= service_ref
-		self.name		= name
-		self.justplay		= justplay
-		self.disabled		= disabled
-		self.autoTimerId	= autoTimerId
-		self.state		= 0 # TimerEntry.StateWaiting
+		self.begin = begin
+		self.end = end
+		self.service_ref = service_ref
+		self.name = name
+		self.justplay = justplay
+		self.disabled = disabled
+		self.autoTimerId = autoTimerId
+		self.state = 0 # TimerEntry.StateWaiting
 		
 		# additional information
-		self.match		= match
-		self.searchType		= searchType
-		self.counter		= counter
-		self.counterLeft	= counterLeft
-		self.destination	= destination
-		self.services		= services
-		self.bouquets		= bouquets
-		self.includedDays	= includedDays
-		self.excludedDays	= excludedDays
+		self.match = match
+		self.searchType = searchType
+		self.counter = counter
+		self.counterLeft = counterLeft
+		self.destination = destination
+		self.services = services
+		self.bouquets = bouquets
+		self.includedDays = includedDays
+		self.excludedDays = excludedDays
 		
 	def isRunning(self):
 		return False

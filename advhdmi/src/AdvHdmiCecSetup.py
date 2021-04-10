@@ -164,7 +164,7 @@ class TimeSpanEntryList(MenuList):
 		
 	def buildList(self, entryselect=None):
 		from Plugins.SystemPlugins.AdvHdmi.plugin import TimeSpanPresenter
-		self.list=[]
+		self.list = []
 		if entryselect == None:
 			try:
 				aktidx = self.l.getCurrentSelectionIndex()
@@ -175,10 +175,10 @@ class TimeSpanEntryList(MenuList):
 		for e in config.plugins.AdvHdmiCec.Entries:
 			entr = [e]
 			presenter = TimeSpanPresenter(e)
-			entr.append((eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 165, 30, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, presenter[0]))
-			entr.append((eListboxPythonMultiContent.TYPE_TEXT, 175, 0, 165, 30, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, presenter[1]))
-			entr.append((eListboxPythonMultiContent.TYPE_TEXT, 345, 0, 80, 30, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, presenter[2]))
-			entr.append((eListboxPythonMultiContent.TYPE_TEXT, 510, 0, 80, 30, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, presenter[3]))
+			entr.append((eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 165, 30, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, presenter[0]))
+			entr.append((eListboxPythonMultiContent.TYPE_TEXT, 175, 0, 165, 30, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, presenter[1]))
+			entr.append((eListboxPythonMultiContent.TYPE_TEXT, 345, 0, 80, 30, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, presenter[2]))
+			entr.append((eListboxPythonMultiContent.TYPE_TEXT, 510, 0, 80, 30, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, presenter[3]))
 			self.list.append(entr)
 		self.l.setList(self.list)
 		if aktidx >= config.plugins.AdvHdmiCec.entriescount.value:

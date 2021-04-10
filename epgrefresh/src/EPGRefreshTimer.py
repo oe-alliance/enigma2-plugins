@@ -50,7 +50,7 @@ class EPGRefreshTimerEntry(timer.TimerEntry):
 
 	def getNextActivation(self):
 		# We delay our activation so we won't rush into reprocessing a repeating one
-		return self.begin+1
+		return self.begin + 1
 
 	def activate(self):
 		if self.state == self.StateWaiting:
@@ -65,7 +65,7 @@ class EPGRefreshTimerEntry(timer.TimerEntry):
 					print("[EPGRefresh] Box still in use, rescheduling")
 
 					# Recheck later
-					self.begin = time() + config.plugins.epgrefresh.delay_standby.value*60
+					self.begin = time() + config.plugins.epgrefresh.delay_standby.value * 60
 					return False
 			else:
 				print("[EPGRefresh] Not in timespan, ending timer")

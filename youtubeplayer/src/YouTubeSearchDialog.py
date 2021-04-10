@@ -237,11 +237,11 @@ searchContext.sortOrder = ConfigSelection(
 				], "ascending")
 
 
-SEARCH		= 1
-STDFEEDS 	= 2
-PLAYLISTS 	= 3
-FAVORITES 	= 4
-CANCEL		= 5
+SEARCH = 1
+STDFEEDS = 2
+PLAYLISTS = 3
+FAVORITES = 4
+CANCEL = 5
 
 
 class YouTubeSearchDialog(Screen, ConfigListScreen):
@@ -254,16 +254,16 @@ class YouTubeSearchDialog(Screen, ConfigListScreen):
 		
 		self["actions"] = ActionMap(["YouTubeSearchDialogActions"],
 		{
-			"standard":	self.keyStdFeeds,
-			"search":	self.keySearch,
-			"playlists":	self.keyPlaylists,
-			"favorites":	self.keyFavorites,
+			"standard": self.keyStdFeeds,
+			"search": self.keySearch,
+			"playlists": self.keyPlaylists,
+			"favorites": self.keyFavorites,
 
-			"cancel":	self.keyCancel,
-			"left":	self.keyLeft,
-			"right":	self.keyRight,
-			"up":	self.keyUp,
-			"down":	self.keyDown,
+			"cancel": self.keyCancel,
+			"left": self.keyLeft,
+			"right": self.keyRight,
+			"up": self.keyUp,
+			"down": self.keyDown,
 		}, -2)
 
 		self["key_red"] = Button(_("Std.Feeds"))

@@ -89,11 +89,11 @@ class CVevoSignAlgoExtractor:
             # a.split("") -> list(a)
             match = re.search('(\w+?)\.split\(""\)', lines[i])
             if match:
-                lines[i] = lines[i].replace(match.group(0), 'list(' + match.group(1)  + ')')
+                lines[i] = lines[i].replace(match.group(0), 'list(' + match.group(1) + ')')
             # a.length -> len(a)
             match = re.search('(\w+?)\.length', lines[i])
             if match:
-                lines[i] = lines[i].replace(match.group(0), 'len(' + match.group(1)  + ')')
+                lines[i] = lines[i].replace(match.group(0), 'len(' + match.group(1) + ')')
             # a.slice(3) -> a[3:]
             match = re.search('(\w+?)\.slice\(([0-9]+?)\)', lines[i])
             if match:
@@ -121,7 +121,7 @@ class CVevoSignAlgoExtractor:
         return set()
 
     def decryptSignature(self, s, playerUrl):
-        playerUrl = playerUrl[:4] != 'http' and 'http:'+playerUrl or playerUrl
+        playerUrl = playerUrl[:4] != 'http' and 'http:' + playerUrl or playerUrl
         printDBG("decrypt_signature sign_len[%d] playerUrl[%s]" % (len(s), playerUrl))
 
         # clear local data
@@ -153,7 +153,7 @@ class CVevoSignAlgoExtractor:
             algoLines = self.fullAlgoCode.split('\n')
             for i in list(range(len(algoLines))):
                 algoLines[i] = '\t' + algoLines[i]
-            self.fullAlgoCode  = 'def extractedSignatureAlgo(param):'
+            self.fullAlgoCode = 'def extractedSignatureAlgo(param):'
             self.fullAlgoCode += '\n'.join(algoLines)
             self.fullAlgoCode += '\n\treturn %s(param)' % mainFunName
             self.fullAlgoCode += '\noutSignature = extractedSignatureAlgo( inSignature )\n'
@@ -263,9 +263,9 @@ class GoogleSuggestions():
 						charset = "ISO-8859-1"
 						try:
 							charset = header.split(";")[1].split("=")[1]
-							print("[MyTube - GoogleSuggestions] Got charset %s" %charset)
+							print("[MyTube - GoogleSuggestions] Got charset %s" % charset)
 						except:
-							print("[MyTube - GoogleSuggestions] No charset in Header, falling back to %s" %charset)
+							print("[MyTube - GoogleSuggestions] No charset in Header, falling back to %s" % charset)
 						data = data.decode(charset).encode("utf-8")
 						self.conn.close()
 						return data
@@ -301,7 +301,7 @@ class MyTubeFeedEntry():
 			split = self.entry.media.player.url.split("=")
 			ret = split.pop()
 			if ret.startswith('youtube_gdata'):
-				tmpval=split.pop()
+				tmpval = split.pop()
 				if tmpval.endswith("&feature"):
 					tmp = tmpval.split("&")
 					ret = tmp.pop(0)
@@ -439,7 +439,7 @@ class MyTubeFeedEntry():
 		video_id = str(self.getTubeId())
 
 		links = {}
-		watch_url = 'http://www.youtube.com/watch?v=%s&safeSearch=none'%video_id
+		watch_url = 'http://www.youtube.com/watch?v=%s&safeSearch=none' % video_id
 		watchrequest = Request(watch_url, None, std_headers)
 		
 		try:
@@ -493,7 +493,7 @@ class MyTubeFeedEntry():
 
 					if fmtid != "" and fmturl != "" and fmtid in VIDEO_FMT_PRIORITY_MAP:
 						video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
-						fmt_infomap[int(fmtid)] = "%s" %(unquote_plus(fmturl))
+						fmt_infomap[int(fmtid)] = "%s" % (unquote_plus(fmturl))
 					fmturl = fmtid = ""
 
 				except:
@@ -508,7 +508,7 @@ class MyTubeFeedEntry():
 		if video_fmt_map and len(video_fmt_map):
 			print("[MyTube] found best available video format:", video_fmt_map[sorted(six.iterkeys(video_fmt_map))[0]]['fmtid'])
 			best_video = video_fmt_map[sorted(six.iterkeys(video_fmt_map))[0]]
-			video_url = "%s" %(best_video['fmturl'].split(';')[0])
+			video_url = "%s" % (best_video['fmturl'].split(';')[0])
 			print("[MyTube] found best available video url:", video_url)
 
 		return video_url
@@ -631,7 +631,7 @@ class MyTubePlayerService():
 		else:
 			print("[MyTube] MyTubePlayerService - Using regularly ProgrammaticLogin for login")
 			self.yt_service.email = username
-			self.yt_service.password  = password
+			self.yt_service.password = password
 			self.yt_service.ProgrammaticLogin()
 			
 		# double check login: reset any token on wrong logins

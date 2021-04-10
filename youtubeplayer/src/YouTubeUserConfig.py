@@ -129,8 +129,8 @@ class YouTubeUserConfigScreen(Screen, ConfigListScreen):
 		self.user = user
 		self["actions"] = ActionMap(["YouTubeUserConfigScreenActions"],
 		{
-			"save"		:	self.keySave,
-			"cancel"	:	self.keyCancel
+			"save"		: self.keySave,
+			"cancel"	: self.keyCancel
 		}, -2)
 
 		self["key_red"] = Button(_("Cancel"))

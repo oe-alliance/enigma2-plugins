@@ -82,7 +82,7 @@ class BirthdayTimerEntry(TimerEntry):
 			bDayNextYear = date(now.year + 1, bDay.month, bDay.day - 1)
 		
 		self.begin = int(mktime(bDayNextYear.timetuple()))
-		self.end = self.begin -1
+		self.end = self.begin - 1
 		self.state = self.StatePrepared
 		
 		return True
@@ -188,13 +188,13 @@ class BirthdayTimer(Timer, BirthdayStore):
 			try:
 				dateThisYear = date(now.year, bDay.month, bDay.day) - timedelta(numDays)
 			except ValueError: # raised on feb 29th
-				dateThisYear = date(now.year, bDay.month, bDay.day -1) - timedelta(numDays)
+				dateThisYear = date(now.year, bDay.month, bDay.day - 1) - timedelta(numDays)
 		else:
 			# set timer to feb 28th for birthdays on feb 29th
 			try:
 				dateThisYear = date(now.year, bDay.month, bDay.day)
 			except ValueError: # raised on feb 29th
-				dateThisYear = date(now.year, bDay.month, bDay.day -1)
+				dateThisYear = date(now.year, bDay.month, bDay.day - 1)
 			
 		dateTimeThisYear = datetime.combine(dateThisYear, notifyTime)
 		
@@ -203,13 +203,13 @@ class BirthdayTimer(Timer, BirthdayStore):
 		else: # birthday is in the past, we need a timer for the next year
 			# set timer to feb 28th for birthdays on feb 29th
 			try:
-				bDayNextYear = dateTimeThisYear.replace(year=dateThisYear.year +1)
+				bDayNextYear = dateTimeThisYear.replace(year=dateThisYear.year + 1)
 			except ValueError: # raised on feb 29th
-				bDayNextYear = dateTimeThisYear.replace(year=dateThisYear.year +1, day=dateThisYear.day -1)
+				bDayNextYear = dateTimeThisYear.replace(year=dateThisYear.year + 1, day=dateThisYear.day - 1)
 				
 			begin = int(mktime(bDayNextYear.timetuple()))
 			
-		end = begin -1
+		end = begin - 1
 		timerEntry = BirthdayTimerEntry(begin, end, preremind)
 		timerEntry.bDay = entry
 		self.addTimerEntry(timerEntry)
@@ -272,7 +272,7 @@ class BirthdayTimer(Timer, BirthdayStore):
 			day = date.fromtimestamp(timer.begin)
 			newDateTime = datetime.combine(day, notifyTime)
 			timer.begin = int(mktime(newDateTime.timetuple()))
-			timer.end = timer.begin -1
+			timer.end = timer.begin - 1
 			
 		self.calcNextActivation()
 		

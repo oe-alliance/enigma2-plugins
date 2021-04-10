@@ -31,7 +31,7 @@ import os
 CRASHLOG_DIR = '/media/hdd'
 
 SUBJECT = _("Found CrashLog(s)")
-BODY    = _("Crashlog(s) are attached")
+BODY = _("Crashlog(s) are attached")
 
 
 class CrashLog(ControllerBase):

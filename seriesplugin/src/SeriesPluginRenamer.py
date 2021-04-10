@@ -305,7 +305,7 @@ class SeriesPluginRenamer(object):
 			log.debug(msg)
 			self.data.append(name + ": " + msg)
 		
-		self.counter = self.counter +1
+		self.counter = self.counter + 1
 		
 		# Maybe there is a better way to avoid multiple Popups
 		from .SeriesPlugin import getInstance
@@ -314,7 +314,7 @@ class SeriesPluginRenamer(object):
 		
 		if instance.thread.empty() and instance.thread.finished():
 			if self.data:
-				msg = "SeriesPlugin:\n" + _("Record rename has been finished with %d errors:\n") % (len(self.data)) +"\n" +"\n".join(self.data)
+				msg = "SeriesPlugin:\n" + _("Record rename has been finished with %d errors:\n") % (len(self.data)) + "\n" + "\n".join(self.data)
 				log.warning(msg)
 				
 			else:

@@ -114,7 +114,7 @@ def startUpService__init__(self, session, csel):
 	inBouquetRootList = current_root and current_root.getPath().find('FROM BOUQUET "bouquets.') != -1 #FIXME HACK
 	if csel.bouquet_mark_edit == 0 and not csel.movemode:
 		if not inBouquetRootList:
-			if not (current.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
+			if not (current.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)):
 				self["menu"].list.insert(1, ChoiceEntryComponent(text=(_("set as startup service"), boundFunction(self.startUpServiceContextMenuCallback, True))))
 				self["menu"].list.insert(2, ChoiceEntryComponent(text=(_("reset startup service"), boundFunction(self.startUpServiceContextMenuCallback, False))))
 

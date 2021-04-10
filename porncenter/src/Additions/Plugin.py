@@ -52,9 +52,9 @@ class Movie:
 				contentType = None
 			if contentType:
 				if 'image/jpeg' in contentType:
-					self.thumbnailFile = "/tmp/"+str(cache.getIndex())+".jpg"
+					self.thumbnailFile = "/tmp/" + str(cache.getIndex()) + ".jpg"
 				elif 'image/png' in contentType:
-					self.thumbnailFile = "/tmp/"+str(cache.getIndex())+".png"
+					self.thumbnailFile = "/tmp/" + str(cache.getIndex()) + ".png"
 				else:
 					self.thumbnailFile = None
 			else:
@@ -89,7 +89,7 @@ class Plugin:
 	def __init__(self, name, thumb):
 		self.type = "Plugin"
 		self.name = name
-		self.thumb = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS)+"/Extensions/PornCenter/Additions/"+thumb)
+		self.thumb = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS) + "/Extensions/PornCenter/Additions/" + thumb)
 		self.callback = None
 
 	def getName(self):
@@ -115,7 +115,7 @@ class Plugin:
 
 def getPlugins():
 	try:
-		files = sorted(listdir(resolveFilename(SCOPE_PLUGINS)+"/Extensions/PornCenter/Additions"))
+		files = sorted(listdir(resolveFilename(SCOPE_PLUGINS) + "/Extensions/PornCenter/Additions"))
 	except Exception as exc:
 		print("[PornCenter] failed to search for plugins:", exc)
 		files = []

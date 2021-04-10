@@ -25,12 +25,12 @@ from six.moves import range
 VERSION = "0.2r0"
 SAVEFILE = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/Schiffe/Schiffe.sav")
 
-XMAX  = 10
-YMAX  = 10
+XMAX = 10
+YMAX = 10
 XYMAX = 100
 
 def RGB(r, g, b):
-	return (r<<16)|(g<<8)|b
+	return (r << 16) | (g << 8) | b
 
 def main(session,**kwargs):
 	session.open(Schiffe)
@@ -43,13 +43,13 @@ def Plugins(**kwargs):
 class GameCell:
 	def __init__(self, canvas, x, y, w, h):
 		self.canvas = canvas
-		self.x      = x
-		self.y      = y
-		self.w      = w
-		self.h      = h
+		self.x = x
+		self.y = y
+		self.w = w
+		self.h = h
 		self.value_ = 0
 		self.focus_ = False
-		self.hide_  = False
+		self.hide_ = False
 
 	def setValue(self, v):
 		self.value_ = v
@@ -67,11 +67,11 @@ class GameCell:
 		self.hide_ = f
 
 	def paint(self):
-		fg    = RGB(255, 255, 255) # foreground
-		blue  = RGB(0,  0, 255) # background water
-		focus = RGB(192, 192,  0) # background focus
-		green = RGB(0, 255,  0) # background Ship
-		red   = RGB(255,  0,  0) # background Ship hit
+		fg = RGB(255, 255, 255) # foreground
+		blue = RGB(0, 0, 255) # background water
+		focus = RGB(192, 192, 0) # background focus
+		green = RGB(0, 255, 0) # background Ship
+		red = RGB(255, 0, 0) # background Ship hit
 
 		if self.value_ == 0:
 			bg = blue
@@ -92,10 +92,10 @@ class GameCell:
 			b = 2
 			self.canvas.fill(self.x, self.y, self.w, self.h, focus)
 
-		self.canvas.fill(self.x+b, self.y+b, self.w-2*b, self.h-2*b, bg)
+		self.canvas.fill(self.x + b, self.y + b, self.w - 2 * b, self.h - 2 * b, bg)
 
 		if self.value_ == 2:
-			self.canvas.writeText(self.x, self.y, self.w, self.h, fg, bg, gFont("Regular", 24), '*', RT_HALIGN_CENTER|RT_VALIGN_CENTER)
+			self.canvas.writeText(self.x, self.y, self.w, self.h, fg, bg, gFont("Regular", 24), '*', RT_HALIGN_CENTER | RT_VALIGN_CENTER)
 
 		self.canvas.flush()
 
@@ -117,19 +117,19 @@ class Schiffe(Screen):
 			CELL_SIZE = 20
 
 		# calculate skindata...
-		CELL_OFFSET	= 2
-		cellfield   = XMAX*CELL_SIZE + (XMAX-1)*CELL_OFFSET
-		CW          = 2*cellfield + 150 # canvas w
-		CH          = cellfield         # canvas h
-		X0_OFFSET   = 0                 # xoffset cellfield box
-		X1_OFFSET   = cellfield + 150   # xoffset cellfield you
-		W           = CW + 10           # window w
-		H           = CH + 40           # window h
-		WX          = cellfield + 10    # widgets xoffset
-		W0Y         = 25                # widget0 yoffset
-		W1Y         = cellfield - 116   # widget1 yoffset
-		W2Y         = cellfield - 66    # widget2 yoffset
-		W3Y         = cellfield - 16    # widget3 yoffset
+		CELL_OFFSET = 2
+		cellfield = XMAX * CELL_SIZE + (XMAX - 1) * CELL_OFFSET
+		CW = 2 * cellfield + 150 # canvas w
+		CH = cellfield         # canvas h
+		X0_OFFSET = 0                 # xoffset cellfield box
+		X1_OFFSET = cellfield + 150   # xoffset cellfield you
+		W = CW + 10           # window w
+		H = CH + 40           # window h
+		WX = cellfield + 10    # widgets xoffset
+		W0Y = 25                # widget0 yoffset
+		W1Y = cellfield - 116   # widget1 yoffset
+		W2Y = cellfield - 66    # widget2 yoffset
+		W3Y = cellfield - 16    # widget3 yoffset
 
 		# set skin...
 		Schiffe.skin = """
@@ -174,7 +174,7 @@ class Schiffe(Screen):
 					if type == "Background":
 						bgcolor = int(color[1:], 0x10)
 		if not bgcolor:
-			bgcolor = RGB(0,  0,  0)
+			bgcolor = RGB(0, 0, 0)
 
 		self.skin = Schiffe.skin
 		Screen.__init__(self, session)
@@ -276,7 +276,7 @@ class Schiffe(Screen):
 			print("Game over, start new game!")
 
 	def up_pressed(self):
-		if self.Focus > XMAX-1:
+		if self.Focus > XMAX - 1:
 			cell = self.boxCells[self.Focus]
 			cell.setFocus(False)
 			cell.paint()
@@ -286,7 +286,7 @@ class Schiffe(Screen):
 			cell.paint()
 
 	def down_pressed(self):
-		if self.Focus < XYMAX-XMAX:
+		if self.Focus < XYMAX - XMAX:
 			cell = self.boxCells[self.Focus]
 			cell.setFocus(False)
 			cell.paint()
@@ -308,8 +308,8 @@ class Schiffe(Screen):
 			cell.paint()
 
 	def right_pressed(self):
-		if self.Focus < XYMAX-1:
-			if (self.Focus+1) % XMAX == 0:
+		if self.Focus < XYMAX - 1:
+			if (self.Focus + 1) % XMAX == 0:
 				return
 			cell = self.boxCells[self.Focus]
 			cell.setFocus(False)
@@ -378,12 +378,12 @@ class Schiffe(Screen):
 
 			for i, cell in enumerate(self.boxCells):
 				sav.write("%d " % cell.value())
-				if (i+1) % XMAX == 0:
+				if (i + 1) % XMAX == 0:
 					sav.write("\n")
 
 			for i, cell in enumerate(self.youCells):
 				sav.write("%d " % cell.value())
-				if (i+1) % XMAX == 0:
+				if (i + 1) % XMAX == 0:
 					sav.write("\n")
 
 			sav.close()
@@ -441,7 +441,7 @@ def ships(field):
 	row = []
 	for x in range(XMAX + 3):
 		row.append(0)
-	for y in range(YMAX+ 3):
+	for y in range(YMAX + 3):
 		shadow.append(row[:])
 
 	for shipLen in range(5, 1, -1):
@@ -464,13 +464,13 @@ def ships(field):
 						y = rand() % YMAX
 
 						for j in range(shipLen + 2):
-							if shadow[x+j][y] != 0 or shadow[x+j][y+1] != 0 or shadow[x+j][y+2] != 0:
+							if shadow[x + j][y] != 0 or shadow[x + j][y + 1] != 0 or shadow[x + j][y + 2] != 0:
 								ok = False
 
 						if ok:
 							for j in range(shipLen):
-								field[x+y*XMAX+j] = 3
-								shadow[x+j+1][y+1] = 1
+								field[x + y * XMAX + j] = 3
+								shadow[x + j + 1][y + 1] = 1
 
 					else:
 						# place ship vertical...
@@ -478,13 +478,13 @@ def ships(field):
 						y = rand() % (YMAX - shipLen + 1)
 				
 						for j in range(shipLen + 2):
-							if shadow[x][y+j] != 0 or shadow[x+1][y+j] != 0 or shadow[x+2][y+j] != 0:
+							if shadow[x][y + j] != 0 or shadow[x + 1][y + j] != 0 or shadow[x + 2][y + j] != 0:
 								ok = False
 							
 						if ok:
 							for j in range(shipLen):
-								field[x+(y+j)*XMAX] = 3
-								shadow[x+1][y+j+1] = 1
+								field[x + (y + j) * XMAX] = 3
+								shadow[x + 1][y + j + 1] = 1
 
 			if not ok:
 				# something went wrong...
@@ -500,94 +500,94 @@ def calcNewField(field):
 			lx = i % XMAX
 			ly = i / XMAX
 			if lx > 0:
-				if field[lx+ly*XMAX-1] == 0:
-					field[lx+ly*XMAX-1] = 2
+				if field[lx + ly * XMAX - 1] == 0:
+					field[lx + ly * XMAX - 1] = 2
 					return
-				if field[lx+ly*XMAX-1] == 3:
-					field[lx+ly*XMAX-1] = 4 
-					lx -=1
-					if lx>0      and ly>0      and field[lx+ly*XMAX-1-XMAX] != 2:
-						field[lx+ly*XMAX-1-XMAX] = 1
-					if lx>0      and ly<YMAX-1 and field[lx+ly*XMAX-1+XMAX] != 2:
-						field[lx+ly*XMAX-1+XMAX] = 1
-					if lx<XMAX-1 and ly>0      and field[lx+ly*XMAX+1-XMAX] != 2:
-						field[lx+ly*XMAX+1-XMAX] = 1
-					if lx<XMAX-1 and ly<YMAX-1 and field[lx+ly*XMAX+1+XMAX] != 2:
-						field[lx+ly*XMAX+1+XMAX] = 1
+				if field[lx + ly * XMAX - 1] == 3:
+					field[lx + ly * XMAX - 1] = 4 
+					lx -= 1
+					if lx > 0 and ly > 0 and field[lx + ly * XMAX - 1 - XMAX] != 2:
+						field[lx + ly * XMAX - 1 - XMAX] = 1
+					if lx > 0 and ly < YMAX - 1 and field[lx + ly * XMAX - 1 + XMAX] != 2:
+						field[lx + ly * XMAX - 1 + XMAX] = 1
+					if lx < XMAX - 1 and ly > 0 and field[lx + ly * XMAX + 1 - XMAX] != 2:
+						field[lx + ly * XMAX + 1 - XMAX] = 1
+					if lx < XMAX - 1 and ly < YMAX - 1 and field[lx + ly * XMAX + 1 + XMAX] != 2:
+						field[lx + ly * XMAX + 1 + XMAX] = 1
 					return
-			if lx<XMAX-1:
-				if field[lx+ly*XMAX+1] == 0:
-					field[lx+ly*XMAX+1] = 2
+			if lx < XMAX - 1:
+				if field[lx + ly * XMAX + 1] == 0:
+					field[lx + ly * XMAX + 1] = 2
 					return
-				if field[lx+ly*XMAX+1] == 3:
-					field[lx+ly*XMAX+1] = 4
+				if field[lx + ly * XMAX + 1] == 3:
+					field[lx + ly * XMAX + 1] = 4
 					lx += 1
-					if lx>0      and ly>0      and field[lx+ly*XMAX-1-XMAX] != 2:
-						field[lx+ly*XMAX-1-XMAX] = 1
-					if lx>0      and ly<YMAX-1 and field[lx+ly*XMAX-1+XMAX] != 2:
-						field[lx+ly*XMAX-1+XMAX] = 1
-					if lx<XMAX-1 and ly>0      and field[lx+ly*XMAX+1-XMAX] != 2:
-						field[lx+ly*XMAX+1-XMAX] = 1
-					if lx<XMAX-1 and ly<YMAX-1 and field[lx+ly*XMAX+1+XMAX] != 2:
-						field[lx+ly*XMAX+1+XMAX] = 1
+					if lx > 0 and ly > 0 and field[lx + ly * XMAX - 1 - XMAX] != 2:
+						field[lx + ly * XMAX - 1 - XMAX] = 1
+					if lx > 0 and ly < YMAX - 1 and field[lx + ly * XMAX - 1 + XMAX] != 2:
+						field[lx + ly * XMAX - 1 + XMAX] = 1
+					if lx < XMAX - 1 and ly > 0 and field[lx + ly * XMAX + 1 - XMAX] != 2:
+						field[lx + ly * XMAX + 1 - XMAX] = 1
+					if lx < XMAX - 1 and ly < YMAX - 1 and field[lx + ly * XMAX + 1 + XMAX] != 2:
+						field[lx + ly * XMAX + 1 + XMAX] = 1
 					return
-			if ly>0:
-				if field[lx+ly*XMAX-XMAX] == 0:
-					field[lx+ly*XMAX-XMAX] = 2
+			if ly > 0:
+				if field[lx + ly * XMAX - XMAX] == 0:
+					field[lx + ly * XMAX - XMAX] = 2
 					return
-				if field[lx+ly*XMAX-XMAX] == 3:
-					field[lx+ly*XMAX-XMAX] = 4
+				if field[lx + ly * XMAX - XMAX] == 3:
+					field[lx + ly * XMAX - XMAX] = 4
 					ly -= 1
-					if lx>0      and ly>0      and field[lx+ly*XMAX-1-XMAX] != 2:
-						field[lx+ly*XMAX-1-XMAX] = 1
-					if lx>0      and ly<YMAX-1 and field[lx+ly*XMAX-1+XMAX] != 2:
-						field[lx+ly*XMAX-1+XMAX] = 1
-					if lx<XMAX-1 and ly>0      and field[lx+ly*XMAX+1-XMAX] != 2:
-						field[lx+ly*XMAX+1-XMAX] = 1
-					if lx<XMAX-1 and ly<YMAX-1 and field[lx+ly*XMAX+1+XMAX] != 2:
-						field[lx+ly*XMAX+1+XMAX] = 1			
+					if lx > 0 and ly > 0 and field[lx + ly * XMAX - 1 - XMAX] != 2:
+						field[lx + ly * XMAX - 1 - XMAX] = 1
+					if lx > 0 and ly < YMAX - 1 and field[lx + ly * XMAX - 1 + XMAX] != 2:
+						field[lx + ly * XMAX - 1 + XMAX] = 1
+					if lx < XMAX - 1 and ly > 0 and field[lx + ly * XMAX + 1 - XMAX] != 2:
+						field[lx + ly * XMAX + 1 - XMAX] = 1
+					if lx < XMAX - 1 and ly < YMAX - 1 and field[lx + ly * XMAX + 1 + XMAX] != 2:
+						field[lx + ly * XMAX + 1 + XMAX] = 1			
 					return
-			if ly<YMAX-1:
-				if field[lx+ly*XMAX+XMAX] == 0:
-					field[lx+ly*XMAX+XMAX] = 2
+			if ly < YMAX - 1:
+				if field[lx + ly * XMAX + XMAX] == 0:
+					field[lx + ly * XMAX + XMAX] = 2
 					return
-				if field[lx+ly*XMAX+XMAX] == 3:
-					field[lx+ly*XMAX+XMAX] = 4
+				if field[lx + ly * XMAX + XMAX] == 3:
+					field[lx + ly * XMAX + XMAX] = 4
 					ly += 1
-					if lx>0      and ly>0      and field[lx+ly*XMAX-1-XMAX] != 2:
-						field[lx+ly*XMAX-1-XMAX] = 1
-					if lx>0      and ly<YMAX-1 and field[lx+ly*XMAX-1+XMAX] != 2:
-						field[lx+ly*XMAX-1+XMAX] = 1
-					if lx<XMAX-1 and ly>0      and field[lx+ly*XMAX+1-XMAX] != 2:
-						field[lx+ly*XMAX+1-XMAX] = 1
-					if lx<XMAX-1 and ly<YMAX-1 and field[lx+ly*XMAX+1+XMAX] != 2:
-						field[lx+ly*XMAX+1+XMAX] = 1
+					if lx > 0 and ly > 0 and field[lx + ly * XMAX - 1 - XMAX] != 2:
+						field[lx + ly * XMAX - 1 - XMAX] = 1
+					if lx > 0 and ly < YMAX - 1 and field[lx + ly * XMAX - 1 + XMAX] != 2:
+						field[lx + ly * XMAX - 1 + XMAX] = 1
+					if lx < XMAX - 1 and ly > 0 and field[lx + ly * XMAX + 1 - XMAX] != 2:
+						field[lx + ly * XMAX + 1 - XMAX] = 1
+					if lx < XMAX - 1 and ly < YMAX - 1 and field[lx + ly * XMAX + 1 + XMAX] != 2:
+						field[lx + ly * XMAX + 1 + XMAX] = 1
 					return
 
 	lx = -1
 	i = 0
 	while True:
-		if i+1<XYMAX:
+		if i + 1 < XYMAX:
 			x = rand() % XMAX
 			y = 2 * (rand() % (YMAX / 2)) + (x % 2)
 		else:
 			x = rand() % XMAX
 			y = rand() % YMAX
 		
-		if field[x+y*XMAX] == 0: #fail (water)
-			field[x+y*XMAX] = 2
+		if field[x + y * XMAX] == 0: #fail (water)
+			field[x + y * XMAX] = 2
 			return
 		
-		if field[x+y*XMAX] == 3: #hit ship
-			field[x+y*XMAX] = 4
-			if x>0      and y>0:
-				field[x+y*XMAX-1-XMAX] = 1
-			if x>0      and y<YMAX-1:
-				field[x+y*XMAX-1+XMAX] = 1
-			if x<XMAX-1 and y>0:
-				field[x+y*XMAX+1-XMAX] = 1
-			if x<XMAX-1 and y<YMAX-1:
-				field[x+y*XMAX+1+XMAX] = 1
+		if field[x + y * XMAX] == 3: #hit ship
+			field[x + y * XMAX] = 4
+			if x > 0 and y > 0:
+				field[x + y * XMAX - 1 - XMAX] = 1
+			if x > 0 and y < YMAX - 1:
+				field[x + y * XMAX - 1 + XMAX] = 1
+			if x < XMAX - 1 and y > 0:
+				field[x + y * XMAX + 1 - XMAX] = 1
+			if x < XMAX - 1 and y < YMAX - 1:
+				field[x + y * XMAX + 1 + XMAX] = 1
 			lx = x
 			ly = y
 			return

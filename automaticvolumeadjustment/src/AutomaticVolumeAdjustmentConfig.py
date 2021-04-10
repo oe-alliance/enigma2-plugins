@@ -26,7 +26,7 @@ from . import _
 
 from Components.config import ConfigSubsection, ConfigText, \
 	config, ConfigInteger, Config, ConfigSubList, ConfigDirectory, NoSave, ConfigYesNo, ConfigSelectionNumber, ConfigSelection
-from os import path as os_path, open as os_open, close as os_close, O_RDWR as os_O_RDWR, O_CREAT  as os_O_CREAT 
+from os import path as os_path, open as os_open, close as os_close, O_RDWR as os_O_RDWR, O_CREAT as os_O_CREAT 
 from pickle import load as pickle_load, dump as pickle_dump
 from enigma import eEnv
 
@@ -59,7 +59,7 @@ class AutomaticVolumeAdjustmentConfig():
 		self.config = Config()
 		if not os_path.exists(self.CONFIG_FILE):
 			try:
-				fd = os_open(self.CONFIG_FILE, os_O_RDWR|os_O_CREAT)
+				fd = os_open(self.CONFIG_FILE, os_O_RDWR | os_O_CREAT)
 				os_close(fd)
 			except Exception as e:
 				print("Error: ", e)
@@ -67,7 +67,7 @@ class AutomaticVolumeAdjustmentConfig():
 			self.config.loadFromFile(self.CONFIG_FILE)
 		except Exception as e:
 			print("Error: ", e)
-		self.config.entriescount =  ConfigInteger(0)
+		self.config.entriescount = ConfigInteger(0)
 		self.config.Entries = ConfigSubList()
 		self.config.enable = ConfigYesNo(default=False)
 		self.config.modus = ConfigSelection(choices=[("0", _("Automatic volume adjust")), ("1", _("Remember service volume value"))], default="0")

@@ -50,15 +50,15 @@ class StreamPlayer:
         if track is False:
             return "N/A"
         else:
-            remaining = int((track["duration"]/1000) - (time() - self.trackstarttime))
-            minutes = int(remaining/60)
-            seconds = int(remaining-(minutes*60))
+            remaining = int((track["duration"] / 1000) - (time() - self.trackstarttime))
+            minutes = int(remaining / 60)
+            seconds = int(remaining - (minutes * 60))
             def shiftchars(integer, char):
                 if integer in list(range(0, 10)):
-                    return char+str(integer)
+                    return char + str(integer)
                 else:
                     return str(integer)
-            return "-%s:%s"%(shiftchars(minutes, " "), shiftchars(seconds, "0"))
+            return "-%s:%s" % (shiftchars(minutes, " "), shiftchars(seconds, "0"))
     
     def play(self,tracknumber=False):
         if tracknumber is False:
@@ -70,7 +70,7 @@ class StreamPlayer:
         if track is False:
             print("no track to play")
         elif track['location'] != "no location":
-            print("playing item "+str(self.currentplaylistitemnumber) +"/"+str(self.playlist.length)+" with url ", track['location'])
+            print("playing item " + str(self.currentplaylistitemnumber) + "/" + str(self.playlist.length) + " with url ", track['location'])
             reactor.callLater(1, self._delayedPlay, eServiceReference(4097, 0, track['location']))
             self.is_playing = True
 
@@ -85,8 +85,8 @@ class StreamPlayer:
         if self.playlist is None:
             self.is_playing = False
             self.stateChanged(self.STATE_STOP)
-        elif force is False and self.playlist.length > 0 and (self.playlist.length-1) > self.currentplaylistitemnumber:
-            self.play(tracknumber=self.currentplaylistitemnumber+1)
+        elif force is False and self.playlist.length > 0 and (self.playlist.length - 1) > self.currentplaylistitemnumber:
+            self.play(tracknumber=self.currentplaylistitemnumber + 1)
             self.stateChanged(self.STATE_PLAYINGSTARTED)
         elif self.is_playing is True and force is True:
             pass

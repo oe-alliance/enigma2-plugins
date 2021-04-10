@@ -122,13 +122,13 @@ class MovieRetitle(Screen, ConfigListScreen):
 			if not descr and descr != "":
 				descr = olddescr
 			metafile = open(file + ".ts.meta", "w")
-			metafile.write("%s%s\n%s\n%s" %(sid, title, descr, rest))
+			metafile.write("%s%s\n%s\n%s" % (sid, title, descr, rest))
 			metafile.flush()
 			fsync(metafile.fileno())
 			metafile.close()
 
 	def maybeMoveMovieFiles(self, fr, to):
-		if os_path.exists(to+".ts"):
+		if os_path.exists(to + ".ts"):
 			self.inter_fr = fr
 			self.inter_to = to
 			self.session.openWithCallback(self.confirmedReplace, MessageBox, _("Target file %s.ts already exist.\nDo you want to replace it?") % (to), MessageBox.TYPE_YESNO)

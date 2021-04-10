@@ -25,7 +25,7 @@ def _parse(url, defaultPort=None):
 	url = url.strip()
 	parsed = urlparse(url)
 	scheme = parsed[0]
-	path = urlunparse(('', '')+parsed[2:])
+	path = urlunparse(('', '') + parsed[2:])
 
 	if defaultPort is None:
 		if scheme == 'https':
@@ -153,7 +153,7 @@ class MediaDownloader(Screen):
 
 		# Set Limit if we know it already (Server might not tell it)
 		if self.file.size:
-			self["progress"].writeValues(0, self.file.size*1048576)
+			self["progress"].writeValues(0, self.file.size * 1048576)
 
 		# Call getFilename as soon as we are able to open a new screen
 		self.onExecBegin.append(self.getFilename)
@@ -214,7 +214,7 @@ class MediaDownloader(Screen):
 
 			lastApprox = round(((newLength - self.lastLength) / (newTime - lastTime) / 1024), 2)
 
-			secLen = int(round(((max-pos) / 1024) / lastApprox))
+			secLen = int(round(((max - pos) / 1024) / lastApprox))
 			self["eta"].text = _("ETA %d:%02d min") % (secLen / 60, secLen % 60)
 			self["speed"].text = _("%d kb/s") % (lastApprox)
 

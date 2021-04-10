@@ -26,7 +26,7 @@ from random import Random
 import six
 
 from boxbranding import getImageDistro
-title=_("Change Root Password")
+title = _("Change Root Password")
 
 class ChangePasswdScreen(Screen):
 	skin = """
@@ -47,7 +47,7 @@ class ChangePasswdScreen(Screen):
 		Screen.__init__(self, session)
 		self.skin = ChangePasswdScreen.skin
 
-		self.user="root"
+		self.user = "root"
 		self.output_line = ""
 		self.list = []
 		
@@ -72,7 +72,7 @@ class ChangePasswdScreen(Screen):
 		self.buildList(self.GeneratePassword())
 	
 	def buildList(self, password):
-		self.password=password
+		self.password = password
 		self.list = []
 		self.list.append(getConfigListEntry(_('Enter new Password'), ConfigText(default=self.password, fixed_size=False)))
 		self["passwd"].setList(self.list)
@@ -87,12 +87,12 @@ class ChangePasswdScreen(Screen):
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
 		self.container.dataAvail.append(self.dataAvail)
-		retval = self.container.execute("echo -e '%s\n%s' | (passwd %s)" %(self.password, self.password, self.user))
-		if retval==0:
-			message=_("Sucessfully changed password for root user to: ") + self.password
+		retval = self.container.execute("echo -e '%s\n%s' | (passwd %s)" % (self.password, self.password, self.user))
+		if retval == 0:
+			message = _("Sucessfully changed password for root user to: ") + self.password
 			self.session.open(MessageBox, message, MessageBox.TYPE_INFO)
 		else:
-			message=_("Unable to change/reset password for root user")
+			message = _("Unable to change/reset password for root user")
 			self.session.open(MessageBox, message, MessageBox.TYPE_ERROR)
 
 	def dataAvail(self, data):
@@ -102,12 +102,12 @@ class ChangePasswdScreen(Screen):
 			i = self.output_line.find('\n')
 			if i == -1:
 				break
-			self.processOutputLine(self.output_line[:i+1])
-			self.output_line = self.output_line[i+1:]
+			self.processOutputLine(self.output_line[:i + 1])
+			self.output_line = self.output_line[i + 1:]
 
 	def processOutputLine(self, line):
 		if line.find('password: '):
-			self.container.write("%s\n"%self.password)
+			self.container.write("%s\n" % self.password)
 
 	def runFinished(self, retval):
 		del self.container.dataAvail[:]

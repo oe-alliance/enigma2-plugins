@@ -283,7 +283,7 @@ class AutoTimerComponent(object):
 	# XXX: as this function was not added by me (ritzMo) i'll leave it like this but i'm not really sure if this is right ;-)
 	getDestination = lambda self: self.destination is not None
 
-	getDuration = lambda self: self.maxduration//60
+	getDuration = lambda self: self.maxduration // 60
 
 	getEnabled = lambda self: self.enabled and "yes" or "no"
 
@@ -309,8 +309,8 @@ class AutoTimerComponent(object):
 	getMatch = lambda self: self.match
 	getName = lambda self: self.name
 
-	getOffsetBegin = lambda self: self.offset[0]//60
-	getOffsetEnd = lambda self: self.offset[1]//60
+	getOffsetBegin = lambda self: self.offset[0] // 60
+	getOffsetEnd = lambda self: self.offset[1] // 60
 
 	getOverrideAlternatives = lambda self: self.overrideAlternatives and "1" or "0"
 
@@ -324,7 +324,7 @@ class AutoTimerComponent(object):
 
 	getTimeframe = lambda self: self.timeframe
 	getTimeframeBegin = lambda self: int(self.timeframe[0])
-	getTimeframeEnd	= lambda self: int(self.timeframe[1])
+	getTimeframeEnd = lambda self: int(self.timeframe[1])
 
 	isOffsetEqual = lambda self: self.offset[0] == self.offset[1]
 
@@ -433,9 +433,9 @@ class AutoTimerComponent(object):
 							value = s.toString()
 							pos = value.rfind(':')
 							if pos != -1:
-								if value[pos-1] == ':':
+								if value[pos - 1] == ':':
 									pos -= 1
-								value = value[:pos+1]
+								value = value[:pos + 1]
 
 							if value == check_service:
 								return False
@@ -469,9 +469,9 @@ class AutoTimerComponent(object):
 								value = s.toString()
 								pos = value.rfind(':')
 								if pos != -1:
-									if value[pos-1] == ':':
+									if value[pos - 1] == ':':
 										pos -= 1
-									value = value[:pos+1]
+									value = value[:pos + 1]
 
 								if value == override_service:
 									return service
@@ -501,7 +501,7 @@ class AutoTimerComponent(object):
 	def checkTimeframe(self, begin):
 		if self.timeframe is not None:
 			start, end = self.timeframe
-			if begin > start and begin < (end + 24*60*60):
+			if begin > start and begin < (end + 24 * 60 * 60):
 				return False
 			return True
 		return False
@@ -682,9 +682,9 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 							value = s.toString()
 							pos = value.rfind(':')
 							if pos != -1:
-								if value[pos-1] == ':':
+								if value[pos - 1] == ':':
 									pos -= 1
-								value = value[:pos+1]
+								value = value[:pos + 1]
 
 							comp = value.split(':')
 							append(':'.join(value[3:]))
@@ -721,9 +721,9 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 								value = s.toString()
 								pos = value.rfind(':')
 								if pos != -1:
-									if value[pos-1] == ':':
+									if value[pos - 1] == ':':
 										pos -= 1
-									value = value[:pos+1]
+									value = value[:pos + 1]
 
 								if ':'.join(value.split(':')[3:]) == override:
 									return service

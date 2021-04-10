@@ -64,11 +64,11 @@ def timeSimilarityPercent(rtimer, evtBegin, evtEnd, timer=None):
 		# remove custom offset from rtimer using timer.offset as RecordTimerEntry doesn't store the offset
 		# ('evtBegin' and 'evtEnd' are also without offset)
 		rtimerBegin = rtimer.begin + timer.offset[0]
-		rtimerEnd   = rtimer.end   - timer.offset[1]
+		rtimerEnd = rtimer.end - timer.offset[1]
 	else:
 		# remove E2 offset
 		rtimerBegin = rtimer.begin + config.recording.margin_before.value * 60
-		rtimerEnd   = rtimer.end   - config.recording.margin_after.value * 60
+		rtimerEnd = rtimer.end - config.recording.margin_after.value * 60
 	#print("trimer [",rtimerBegin,",",rtimerEnd,"] (",rtimerEnd-rtimerBegin," s) after removing offsets")
 	if (rtimerBegin <= evtBegin) and (evtEnd <= rtimerEnd):
 		commonTime = evtEnd - evtBegin
@@ -81,11 +81,11 @@ def timeSimilarityPercent(rtimer, evtBegin, evtEnd, timer=None):
 	else:
 		commonTime = 0
 	if evtBegin != evtEnd:
-		commonTime_percent = 100*commonTime//(evtEnd - evtBegin)
+		commonTime_percent = 100 * commonTime // (evtEnd - evtBegin)
 	else:
 		return 0
 	if rtimerEnd != rtimerBegin:
-		durationMatch_percent = 100*(evtEnd - evtBegin)//(rtimerEnd - rtimerBegin)
+		durationMatch_percent = 100 * (evtEnd - evtBegin) // (rtimerEnd - rtimerBegin)
 	else:
 		return 0
 	#print("commonTime_percent = ",commonTime_percent,", durationMatch_percent = ",durationMatch_percent)
@@ -314,7 +314,7 @@ class AutoTimer:
 
 		# Iterate Timer
 		for timer in self.getEnabledTimerList():
-			taskname = timer.name + '_%d' %self.timer_count
+			taskname = timer.name + '_%d' % self.timer_count
 			task = Components.Task.PythonTask(job, taskname)
 			self.searchtimer.append((timer, taskname))
 			task.work = self.JobStart
@@ -372,7 +372,7 @@ class AutoTimer:
 							service = services.getNext()
 							if not service.valid():
 								break
-							playable = not (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)) or (service.flags & eServiceReference.isNumberedMarker)
+							playable = not (service.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)) or (service.flags & eServiceReference.isNumberedMarker)
 							if playable:
 								test.append((service.toString(), 0, -1, -1))
 			else: # Get all bouquets
@@ -406,7 +406,7 @@ class AutoTimer:
 								service = services.getNext()
 								if not service.valid():
 									break
-								playable = not (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)) or (service.flags & eServiceReference.isNumberedMarker)
+								playable = not (service.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)) or (service.flags & eServiceReference.isNumberedMarker)
 								if playable:
 									test.append((service.toString(), 0, -1, -1))
 
@@ -445,14 +445,14 @@ class AutoTimer:
 			evtEnd = end = begin + duration
 
 			if not evt:
-				msg="[AutoTimer] Could not create Event!"
+				msg = "[AutoTimer] Could not create Event!"
 				print(msg)
 				skipped.append((name, begin, end, str(serviceref), timer.name, msg))
 				continue
 			# Try to determine real service (we always choose the last one)
 			n = evt.getNumOfLinkageServices()
 			if n > 0:
-				i = evt.getLinkageService(eserviceref, n-1)
+				i = evt.getLinkageService(eserviceref, n - 1)
 				serviceref = i.toString()
 
 			# If event starts in less than 60 seconds skip it
@@ -480,7 +480,7 @@ class AutoTimer:
 				# If maximum days in future is set then check time
 				if checkEvtLimit:
 					if begin > evtLimit:
-						msg="[AutoTimer] Skipping an event because of maximum days in future is reached"
+						msg = "[AutoTimer] Skipping an event because of maximum days in future is reached"
 #						print(msg)
 						skipped.append((name, begin, end, serviceref, timer.name, msg))
 						continue
@@ -495,7 +495,7 @@ class AutoTimer:
 					timer.checkTimespan(timestamp)
 					or timer.checkTimeframe(begin)
 				)) or timer.checkFilter(name, shortdesc, extdesc, dayofweek):
-				msg="[AutoTimer] Skipping an event because of filter check"
+				msg = "[AutoTimer] Skipping an event because of filter check"
 #				print(msg)
 				skipped.append((name, begin, end, serviceref, timer.name, msg))
 				continue
@@ -504,13 +504,13 @@ class AutoTimer:
 				# Apply custom Offset
 				begin, end = timer.applyOffset(begin, end)
 				offsetBegin = timer.offset[0]
-				offsetEnd   = timer.offset[1]
+				offsetEnd = timer.offset[1]
 			else:
 				# Apply E2 Offset
 				begin -= config.recording.margin_before.value * 60
 				end += config.recording.margin_after.value * 60
 				offsetBegin = config.recording.margin_before.value * 60
-				offsetEnd   = config.recording.margin_after.value * 60
+				offsetEnd = config.recording.margin_after.value * 60
 
 			# Overwrite endtime if requested
 			if timer.justplay and not timer.setEndtime:
@@ -538,7 +538,7 @@ class AutoTimer:
 						movieExists = True
 						break
 				if movieExists:
-					msg="[AutoTimer] Skipping an event because movie already exists"
+					msg = "[AutoTimer] Skipping an event because movie already exists"
 #					print(msg)
 					skipped.append((name, begin, end, serviceref, timer.name, msg))
 					continue
@@ -698,7 +698,7 @@ class AutoTimer:
 						# Attention we have to use a copy of the list, because we have to append the previous older matches
 						lepgm = len(epgmatches)
 						for i in list(range(lepgm)):
-							servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS = epgmatches[(i+idx+1)%lepgm]
+							servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS = epgmatches[(i + idx + 1) % lepgm]
 							if self.checkSimilarity(timer, name, nameS, shortdesc, shortdescS, extdesc, extdescS, force=True):
 								# Check if the similar is already known
 								if eitS not in similardict:
@@ -743,7 +743,7 @@ class AutoTimer:
 						newEntry.disabled = True
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
 						conflicts = recordHandler.record(newEntry)
-		self.result=(new, modified)
+		self.result = (new, modified)
 		self.completed.append(taskname)
 		sleep(0.5)
 
@@ -752,7 +752,7 @@ class AutoTimer:
 			if self.simulateOnly == True:
 				self.callback(self.autotimers, self.skipped)
 			else:
-				total = (self.new+self.modified+len(self.conflicting)+len(self.existing)+len(self.similars))
+				total = (self.new + self.modified + len(self.conflicting) + len(self.existing) + len(self.similars))
 				_result = (total, self.new, self.modified, self.autotimers, self.conflicting, self.similars, self.existing, self.skipped)
 				self.callback(_result)
 		elif self.autoPoll:
@@ -772,7 +772,7 @@ class AutoTimer:
 				)
 		else:
 			AddPopup(
-				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % ((self.new+self.modified+len(self.conflicting)+len(self.existing)+len(self.similars)), self.new, self.modified, len(self.conflicting), len(self.existing), len(self.similars)),
+				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % ((self.new + self.modified + len(self.conflicting) + len(self.existing) + len(self.similars)), self.new, self.modified, len(self.conflicting), len(self.existing), len(self.similars)),
 				MessageBox.TYPE_INFO,
 				config.plugins.autotimer.popup_timeout.value,
 				NOTIFICATIONID

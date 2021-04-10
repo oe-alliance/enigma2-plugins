@@ -39,7 +39,7 @@ def getAdapterIPv6(interface):
 				tmpaddr = ""
 				tmp = line.split()
 				if interface == tmp[5]:
-					tmpaddr = ":".join([tmp[0][i:i+4] for i in list(range(0, len(tmp[0]), 4))])
+					tmpaddr = ":".join([tmp[0][i:i + 4] for i in list(range(0, len(tmp[0]), 4))])
 
 					if tmp[2].lower() != "ff":
 						tmpaddr = "%s/%s" % (tmpaddr, int(tmp[2].lower(), 16))

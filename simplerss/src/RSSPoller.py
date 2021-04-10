@@ -209,7 +209,7 @@ class RSSPoller:
 				print("[SimpleRSS] no new items")
 
 			self.current_feed = 0
-			self.poll_timer.startLongTimer(config.plugins.simpleRSS.interval.value*60)
+			self.poll_timer.startLongTimer(config.plugins.simpleRSS.interval.value * 60)
 		# It's updating-time
 		else:
 			# Assume we're cleaning history if current feed is 0

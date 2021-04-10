@@ -34,14 +34,14 @@ from . import _
 from .Logger import log
 
 def indent(elem, level=0):
-	i = "\n" + level*"  "
+	i = "\n" + level * "  "
 	if len(elem):
 		if not elem.text or not elem.text.strip():
 			elem.text = i + "  "
 		if not elem.tail or not elem.tail.strip():
 			elem.tail = i
 		for elem in elem:
-			indent(elem, level+1)
+			indent(elem, level + 1)
 		if not elem.tail or not elem.tail.strip():
 			elem.tail = i
 	else:

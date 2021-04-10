@@ -41,7 +41,7 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
       <widget name="LastDayStarted" position="10,380" size="540,20" zPosition="4" font="Regular;18" foregroundColor="#cccccc" />
       <widget name="RemainingTime" position="10,400" size="540,20" zPosition="4" font="Regular;18" foregroundColor="#cccccc" />
       <widget name="PluginInfo" position="10,420" size="540,20" zPosition="4" font="Regular;18" foregroundColor="#cccccc" />
-    </screen>""") %KTglob.PLUGIN_BASE
+    </screen>""") % KTglob.PLUGIN_BASE
 
     def __init__(self, session):
         self.session = session
@@ -71,8 +71,8 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         self.remainingTime = config.plugins.KiddyTimer.remainingTime.value
         sRemainingTime = KTglob.getTimeFromSeconds(self.remainingTime, True)
 
-        self["PluginInfo"] = Label(_("Plugin: %(plugin)s , Version: %(version)s") %dict(plugin=KTglob.PLUGIN_BASE, version=KTglob.PLUGIN_VERSION))
-        self["RemainingTime"] = Label(_("Remaining time: %s") %sRemainingTime)
+        self["PluginInfo"] = Label(_("Plugin: %(plugin)s , Version: %(version)s") % dict(plugin=KTglob.PLUGIN_BASE, version=KTglob.PLUGIN_VERSION))
+        self["RemainingTime"] = Label(_("Remaining time: %s") % sRemainingTime)
         self["LastDayStarted"] = Label(_("Last day started: %s") % config.plugins.KiddyTimer.lastStartDay.getValue())
         
         # BUTTONS
@@ -118,7 +118,7 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         config.plugins.KiddyTimer.remainingTime.save()
 
         sRemainingTime = KTglob.getTimeFromSeconds(self.remainingTime, True)
-        self["RemainingTime"].setText(_("Remaining time: %s") %sRemainingTime)
+        self["RemainingTime"].setText(_("Remaining time: %s") % sRemainingTime)
 
     def save(self):
         if self.remainingTime > KTglob.getTodaysTimeInSeconds():
@@ -179,8 +179,8 @@ class KiddyTimerPositioner(Screen, MovableScreen):
 
         self["actions"] = ActionMap(["OkCancelActions"], 
         {
-         "ok":      self.keyOK,
-         "cancel":  self.keyCancel
+         "ok": self.keyOK,
+         "cancel": self.keyCancel
         }, -1)
 
         MovableScreen.__init__(self, config.plugins.KiddyTimer, [], 82, 82)

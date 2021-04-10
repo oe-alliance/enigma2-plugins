@@ -35,7 +35,7 @@ from os import system
 
 
 
-config.plugins.valiXDsetup  = ConfigSubsection()
+config.plugins.valiXDsetup = ConfigSubsection()
 config.plugins.valiXDsetup.ShowPicons = ConfigYesNo(default=False)
 config.plugins.valiXDsetup.CenterMenus = ConfigYesNo(default=False)
 config.plugins.valiXDsetup.Style = ConfigSelection(default="base", choices=[
@@ -172,16 +172,16 @@ class XDsetup(ConfigListScreen, Screen):
 				skn_file = skn_file + "-picon.xml"
 			else:
 				skn_file = skn_file + ".xml"
-			if (config.plugins.valiXDsetup.Style.value=='base'):
+			if (config.plugins.valiXDsetup.Style.value == 'base'):
 				if self.checkUserColors():
 					skin_lines.append('  <!--  ##### Colors ##### -->\n')
 					skin_lines.append('  <colors>\n')
-					skin_lines.append('      <color name="background" value="#'+config.plugins.valiXDsetup.BG.value+'"/>\n')
+					skin_lines.append('      <color name="background" value="#' + config.plugins.valiXDsetup.BG.value + '"/>\n')
 					skin_lines.append('      <color name="foreground" value="#00f0f0f0"/>\n')
-					skin_lines.append('      <color name="secondBG" value="#'+config.plugins.valiXDsetup.secondBG.value+'"/>\n')
-					skin_lines.append('      <color name="secondFG" value="#00'+config.plugins.valiXDsetup.secondFG.value+'"/>\n')
-					skin_lines.append('      <color name="selectedBG" value="#'+config.plugins.valiXDsetup.selBG.value+'"/>\n')
-					skin_lines.append('      <color name="selectedFG" value="#00'+config.plugins.valiXDsetup.selFG.value+'"/>\n')
+					skin_lines.append('      <color name="secondBG" value="#' + config.plugins.valiXDsetup.secondBG.value + '"/>\n')
+					skin_lines.append('      <color name="secondFG" value="#00' + config.plugins.valiXDsetup.secondFG.value + '"/>\n')
+					skin_lines.append('      <color name="selectedBG" value="#' + config.plugins.valiXDsetup.selBG.value + '"/>\n')
+					skin_lines.append('      <color name="selectedFG" value="#00' + config.plugins.valiXDsetup.selFG.value + '"/>\n')
 				else:
 					skin_lines.append('  <!--  ##### Colors ##### -->\n')
 					skin_lines.append('  <colors>\n')
@@ -197,13 +197,13 @@ class XDsetup(ConfigListScreen, Screen):
 			for x in file_lines:
 				skin_lines.append(x)
 			skn_file = self.daten + "channelselector-"
-			if config.plugins.valiXDsetup.ChannSelector.value=="pig":
+			if config.plugins.valiXDsetup.ChannSelector.value == "pig":
 				skn_file = skn_file + "pig.xml"
-			elif config.plugins.valiXDsetup.ChannSelector.value=="full":
+			elif config.plugins.valiXDsetup.ChannSelector.value == "full":
 				skn_file = skn_file + "full.xml"
-			elif config.plugins.valiXDsetup.ChannSelector.value=="full-vert":
+			elif config.plugins.valiXDsetup.ChannSelector.value == "full-vert":
 				skn_file = skn_file + "full-vert.xml"
-			elif config.plugins.valiXDsetup.ChannSelector.value=="full-hor":
+			elif config.plugins.valiXDsetup.ChannSelector.value == "full-hor":
 				skn_file = skn_file + "full-hor.xml"
 			else:
 				skn_file = skn_file + "simple.xml"
@@ -284,14 +284,14 @@ class XDsetup(ConfigListScreen, Screen):
 			self.session.open(Console, cmdlist=[("tar -xzvf " + self.komponente + "magic_buttons.tar.gz" + " -C /")])
 
 	def checkUserColors(self):
-		if (config.plugins.valiXDsetup.Style.value=='base'):
+		if (config.plugins.valiXDsetup.Style.value == 'base'):
 			try:
-				self["myTestLabel"].instance.setBackgroundColor(parseColor('#'+config.plugins.valiXDsetup.BG.value))
-				self["myTestLabel"].instance.setBackgroundColor(parseColor('#'+config.plugins.valiXDsetup.FG.value))
-				self["myTestLabel"].instance.setBackgroundColor(parseColor('#'+config.plugins.valiXDsetup.secondBG.value))
-				self["myTestLabel"].instance.setBackgroundColor(parseColor('#'+config.plugins.valiXDsetup.secondFG.value))
-				self["myTestLabel"].instance.setBackgroundColor(parseColor('#'+config.plugins.valiXDsetup.selBG.value))
-				self["myTestLabel"].instance.setBackgroundColor(parseColor('#'+config.plugins.valiXDsetup.selFG.value))
+				self["myTestLabel"].instance.setBackgroundColor(parseColor('#' + config.plugins.valiXDsetup.BG.value))
+				self["myTestLabel"].instance.setBackgroundColor(parseColor('#' + config.plugins.valiXDsetup.FG.value))
+				self["myTestLabel"].instance.setBackgroundColor(parseColor('#' + config.plugins.valiXDsetup.secondBG.value))
+				self["myTestLabel"].instance.setBackgroundColor(parseColor('#' + config.plugins.valiXDsetup.secondFG.value))
+				self["myTestLabel"].instance.setBackgroundColor(parseColor('#' + config.plugins.valiXDsetup.selBG.value))
+				self["myTestLabel"].instance.setBackgroundColor(parseColor('#' + config.plugins.valiXDsetup.selFG.value))
 				config.plugins.valiXDsetup.BG.save()
 				config.plugins.valiXDsetup.FG.save()
 				config.plugins.valiXDsetup.secondBG.save()
@@ -307,14 +307,14 @@ class XDsetup(ConfigListScreen, Screen):
 
 	def colortest(self):
 		if self.checkUserColors():
-			PreviewString='<screen backgroundColor="#'+config.plugins.valiXDsetup.BG.value+'" flags="wfNoBorder" position="0,433" size="1024,176" title="Preview">\n'
-			PreviewString=PreviewString+'<ePixmap alphatest="off" pixmap="Vali-XD/border/up-shadow.png" position="0,0" size="1024,8" zPosition="0"/>\n'
-			PreviewString=PreviewString+'<eLabel backgroundColor="#'+config.plugins.valiXDsetup.secondBG.value+'" font="Regular;22" foregroundColor="#'+config.plugins.valiXDsetup.secondFG.value
-			PreviewString=PreviewString+'" halign="center" position="0,8" size="152,168" text="Second foreground" valign="center" zPosition="1"/>\n<eLabel backgroundColor="#'+config.plugins.valiXDsetup.secondBG.value
-			PreviewString=PreviewString+'" font="Regular;22" foregroundColor="#'+config.plugins.valiXDsetup.secondFG.value+'" halign="center" position="872,8" size="152,168" text="Second foreground" valign="center" zPosition="1"/>\n'
-			PreviewString=PreviewString+'<eLabel font="Regular;22" foregroundColor="#'+'00f0f0f0'+'" halign="center" position="275,45" size="457,30" text="Main element" valign="center" transparent="1" zPosition="2"/>\n'
-			PreviewString=PreviewString+'<eLabel backgroundColor="#'+config.plugins.valiXDsetup.selBG.value+'" font="Regular;22" foregroundColor="#'+config.plugins.valiXDsetup.selFG.value
-			PreviewString=PreviewString+'" halign="center" position="275,80" size="457,30" text="Selected element" valign="center" zPosition="2"/>\n</screen>'
+			PreviewString = '<screen backgroundColor="#' + config.plugins.valiXDsetup.BG.value + '" flags="wfNoBorder" position="0,433" size="1024,176" title="Preview">\n'
+			PreviewString = PreviewString + '<ePixmap alphatest="off" pixmap="Vali-XD/border/up-shadow.png" position="0,0" size="1024,8" zPosition="0"/>\n'
+			PreviewString = PreviewString + '<eLabel backgroundColor="#' + config.plugins.valiXDsetup.secondBG.value + '" font="Regular;22" foregroundColor="#' + config.plugins.valiXDsetup.secondFG.value
+			PreviewString = PreviewString + '" halign="center" position="0,8" size="152,168" text="Second foreground" valign="center" zPosition="1"/>\n<eLabel backgroundColor="#' + config.plugins.valiXDsetup.secondBG.value
+			PreviewString = PreviewString + '" font="Regular;22" foregroundColor="#' + config.plugins.valiXDsetup.secondFG.value + '" halign="center" position="872,8" size="152,168" text="Second foreground" valign="center" zPosition="1"/>\n'
+			PreviewString = PreviewString + '<eLabel font="Regular;22" foregroundColor="#' + '00f0f0f0' + '" halign="center" position="275,45" size="457,30" text="Main element" valign="center" transparent="1" zPosition="2"/>\n'
+			PreviewString = PreviewString + '<eLabel backgroundColor="#' + config.plugins.valiXDsetup.selBG.value + '" font="Regular;22" foregroundColor="#' + config.plugins.valiXDsetup.selFG.value
+			PreviewString = PreviewString + '" halign="center" position="275,80" size="457,30" text="Selected element" valign="center" zPosition="2"/>\n</screen>'
 			self.session.open(UserStylePreview, PreviewString)
 
 

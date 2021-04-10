@@ -87,7 +87,7 @@ def menu(menuid):
 	return [(_("Hide Plugins"), main, "pluginhider_setup", None)]
 
 def Plugins(**kwargs):
-	pd =  PluginDescriptor(
+	pd = PluginDescriptor(
 		where=PluginDescriptor.WHERE_AUTOSTART,
 		fnc=autostart,
 		needsRestart=False,

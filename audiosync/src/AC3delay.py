@@ -194,7 +194,7 @@ class AC3delay:
 
         self.audioTrackList = tlist
         for sAudio in AC3PCM:
-            self.systemDelay[sAudio]=self.getSystemDelay(sAudio)
+            self.systemDelay[sAudio] = self.getSystemDelay(sAudio)
         del oAudioTracks
         if bInitialized == True:
             self.deleteAudio()

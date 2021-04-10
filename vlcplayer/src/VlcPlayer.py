@@ -56,9 +56,9 @@ def isDvdUrl(url):
 
 
 def splitDvdUrl(url):
-	pos = url.rfind("@", len(url)-8)
+	pos = url.rfind("@", len(url) - 8)
 	if pos > 0:
-		track = url[pos+1:]
+		track = url[pos + 1:]
 		url = url[0:pos]
 		if track.find(":") >= 0:
 			track, chapter = track.split(":")
@@ -106,10 +106,10 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 	def setName(self, name):
 		i = name.rfind("/")
 		if i >= 0:
-			name = name[i+1:]
+			name = name[i + 1:]
 		i = name.rfind("\\")
 		if i >= 0:
-			name = name[i+1:]
+			name = name[i + 1:]
 		self.__info.name = name
 		self.setChanged()
 
@@ -147,13 +147,13 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 			pos = float(self.stats["time"])
 			if self.player.state == VlcPlayer.STATE_PLAYING:
 				pos += time() - self.lastrefresh
-			return (False, int(pos*90000))
+			return (False, int(pos * 90000))
 		else:
 			return (True, 0)
 
 	def getLength(self):
 		if self.stats and "length" in self.stats:
-			return (False, int(self.stats["length"])*90000)
+			return (False, int(self.stats["length"]) * 90000)
 		else:
 			return (True, 0)
 
@@ -242,7 +242,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 					key = int(action[8:])
 					time = [-config.seek.selfdefined_13.value, False, config.seek.selfdefined_13.value,
 							-config.seek.selfdefined_46.value, False, config.seek.selfdefined_46.value,
-							-config.seek.selfdefined_79.value, False, config.seek.selfdefined_79.value][key-1]
+							-config.seek.selfdefined_79.value, False, config.seek.selfdefined_79.value][key - 1]
 					self.player.seekRelative(time)
 					return 1
 				else:
@@ -598,7 +598,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 			self.seekRelative(-self.seek_time)
 
 	def seekToMinute(self, minutes):
-		self.server.seek(str(int(minutes)*60))
+		self.server.seek(str(int(minutes) * 60))
 		self.showInfobar()
 
 	def seekManual(self):

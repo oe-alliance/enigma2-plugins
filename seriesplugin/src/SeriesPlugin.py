@@ -52,8 +52,8 @@ except Exception as e:
 
 
 # Constants
-AUTOTIMER_PATH  = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/AutoTimer/")
-SERIESPLUGIN_PATH  = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/")
+AUTOTIMER_PATH = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/AutoTimer/")
+SERIESPLUGIN_PATH = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/")
 
 # Globals
 instance = None
@@ -109,7 +109,7 @@ def getInstance():
 		global CompiledRegexpReplaceChars
 		try:
 			if config.plugins.seriesplugin.replace_chars.value:
-				CompiledRegexpReplaceChars = re.compile('['+config.plugins.seriesplugin.replace_chars.value.replace("\\", "\\\\\\\\")+']')
+				CompiledRegexpReplaceChars = re.compile('[' + config.plugins.seriesplugin.replace_chars.value.replace("\\", "\\\\\\\\") + ']')
 		except:
 			log.exception(" Config option 'Replace Chars' is no valid regular expression")
 			CompiledRegexpReplaceChars = re.compile("[:\!/\\,\(\)'\?]")
@@ -127,7 +127,7 @@ def getInstance():
 				deprecated = True
 			log.debug(" AutoTimer: " + AUTOTIMER_VERSION)
 			if deprecated:
-				log.warning(_("Your autotimer is deprecated")  + "\n" +_("Please update it"))
+				log.warning(_("Your autotimer is deprecated") + "\n" + _("Please update it"))
 		except ImportError:
 			log.debug(" AutoTimer: Not found")
 		
@@ -140,7 +140,7 @@ def getInstance():
 				find_module(dependency)
 			except ImportError:
 				start = False
-				log.error(_("Error missing dependency")  + "\n" + "python-"+dependency + "\n\n" +_("Please install missing python paket manually"))
+				log.error(_("Error missing dependency") + "\n" + "python-" + dependency + "\n\n" + _("Please install missing python paket manually"))
 		if start:
 			instance = SeriesPlugin()
 		
@@ -221,17 +221,17 @@ def refactorDirectory(org, data):
 def normalizeResult(result):
 	if result and isinstance(result, dict):
 		log.debug("normalize result")
-		title_   = result['title'].strip()
-		series_  = result['series'].strip()
-		season_  = result['season']
+		title_ = result['title'].strip()
+		series_ = result['series'].strip()
+		season_ = result['season']
 		episode_ = result['episode']
 		
-		result['rawseason']  = season_  or config.plugins.seriesplugin.default_season.value
+		result['rawseason'] = season_ or config.plugins.seriesplugin.default_season.value
 		result['rawepisode'] = episode_ or config.plugins.seriesplugin.default_episode.value
 		if season_:
-			result['season']  = int(CompiledRegexpNonDecimal.sub('', str(season_)) or config.plugins.seriesplugin.default_season.value or "0")
+			result['season'] = int(CompiledRegexpNonDecimal.sub('', str(season_)) or config.plugins.seriesplugin.default_season.value or "0")
 		else:
-			result['season']  = int(config.plugins.seriesplugin.default_season.value) or 0
+			result['season'] = int(config.plugins.seriesplugin.default_season.value) or 0
 		if episode_:
 			result['episode'] = int(CompiledRegexpNonDecimal.sub('', str(episode_)) or config.plugins.seriesplugin.default_episode.value or "0")
 		else:
@@ -245,7 +245,7 @@ def normalizeResult(result):
 		else:
 			title = title_
 			series = series_
-		result['title']  = title
+		result['title'] = title
 		result['series'] = series
 		result['date'] = strftime("%d.%m.%Y", localtime(result['begin']))
 		result['time'] = strftime("%H:%M:%S", localtime(result['begin']))

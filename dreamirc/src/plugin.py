@@ -39,19 +39,19 @@ import string
 import time
 import datetime
 import sys
-x=0
-y=0
+x = 0
+y = 0
 
 class dreamIRCMainMenu(Screen):
 
 	from enigma import getDesktop
 	desk = getDesktop(0)
 	global x, y
-	x= int(desk.size().width())
-	y= int(desk.size().height())
+	x = int(desk.size().width())
+	y = int(desk.size().height())
 	print("[dreamIRC] mainscreen: current desktop size: %dx%d" % (x, y))
 
-	if (y>=720):
+	if (y >= 720):
 		skin = """
 			<screen position="80,80" size="1120,600"  title="dreamIRC" >
 				<widget name="buddy" position="940,35" size="170,450" font="Regular;14" />
@@ -95,7 +95,7 @@ class dreamIRCMainMenu(Screen):
 		Screen.__init__(self, session)
 
 		self.menu = args
-		self.pipe=MessagePipe()
+		self.pipe = MessagePipe()
 		self.account = AccountManager(self.session)
 
 		self.list = []
@@ -113,7 +113,7 @@ class dreamIRCMainMenu(Screen):
 		self["connect.desc"] = Label(_("Connect"))
 		self["disconnect.desc"] = Label(_("Disconnect"))
 		self["settings.desc"] = Label(_("Settings"))
-		if y>=720:
+		if y >= 720:
 				self["blue.desc"] = Label(_("virtual Keyboard"))
 		else:
 				self["blue.desc"] = Label(_("virtual Keyb."))				
@@ -204,7 +204,7 @@ class dreamIRCMainMenu(Screen):
 		self.close(None)
 		
 	def greenPressed(self):
-		if self.checkStatus()==0:
+		if self.checkStatus() == 0:
 			self.pipe.add("connecting... pls wait...")
 			self.account = AccountManager(self.session)    #reload accounts :)
 			self.account.startConnect()
@@ -212,14 +212,14 @@ class dreamIRCMainMenu(Screen):
 			self["red.pic"].show()
 
 	def redPressed(self):
-		if self.checkStatus()==1:
+		if self.checkStatus() == 1:
 			self.pipe.add("disconnecting... pls wait...")
 			self.pipe.addOutText("/QUIT")
 			try:
 				timestamp = time.strftime("%Y%m%d_%H%M%S", time.localtime(time.time()))
 				fp = open("/var/log/dreamIRC.log", 'r')
 				fp.close()
-				os.rename("/var/log/dreamIRC.log", "/var/log/dreamIRC_%s.log"%timestamp)
+				os.rename("/var/log/dreamIRC.log", "/var/log/dreamIRC_%s.log" % timestamp)
 			except IOError:
 				print("--- nothing to remove---")
 			self.pipe.clear()
@@ -231,11 +231,11 @@ class dreamIRCMainMenu(Screen):
 
 	def checkStatus(self):
 		status = self.account.getConnectionInfo()
-		if status[0]==1 or len(self["buddy"].getText())>1:
+		if status[0] == 1 or len(self["buddy"].getText()) > 1:
 			self["disconnect.desc"].show()
 			self["red.pic"].show()
-			status[0]=1
-		elif status[0]==0:
+			status[0] = 1
+		elif status[0] == 0:
 			self["disconnect.desc"].hide()
 			self["red.pic"].hide()
 		return status[0]
@@ -253,7 +253,7 @@ class dreamIRCMainMenu(Screen):
 		rcinput.setKeyboardMode(rcinput.kmAscii)
 		
 	def go(self):
-		if self.checkStatus()==1:
+		if self.checkStatus() == 1:
 #			self.pipe.debug(" TEXT = %s   - laenge = %d  !!!!" % (self["input"].getText(),len(self["input"].getText())))
 			if (len(self["input"].getText()) >= 1):
 				self.pipe.addOutText(self["input"].getText())

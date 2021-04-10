@@ -167,7 +167,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		origpos = pixmap.getPosition()
 		origsize = pixmap.instance.size()
 		# TODO: hardcoded highlight offset is evil :P
-		self["highlight"].moveTo(origpos[0], origpos[1]+origsize.height()+2, 1)
+		self["highlight"].moveTo(origpos[0], origpos[1] + origsize.height() + 2, 1)
 		self["highlight"].startMoving()
 
 	def gotPicture(self, picInfo=None):
@@ -177,7 +177,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		if ptr is not None:
 			self['image%d' % realIdx].instance.setPixmap(ptr)
 		else:
-			our_print("gotPicture got invalid results for idx", idx, "("+str(realIdx)+")")
+			our_print("gotPicture got invalid results for idx", idx, "(" + str(realIdx) + ")")
 			# NOTE: we could use a different picture here that indicates a failure
 			self['image%d' % realIdx].instance.setPixmap(None)
 			# NOTE: the thread WILL most likely be hung and NOT recover from it, so we should remove the old picload and create a new one :/
@@ -214,8 +214,8 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		pictures = self.pictures
 		for i in list(range(self.PICS_PER_PAGE)):
 			try:
-				our_print("trying to initiate download of idx", i+self.offset)
-				picture = pictures[i+self.offset]
+				our_print("trying to initiate download of idx", i + self.offset)
+				picture = pictures[i + self.offset]
 				self.api.downloadThumbnail(picture).addCallbacks(self.pictureDownloaded, self.pictureDownloadFailed)
 			except IndexError:
 				# no more pictures
@@ -305,7 +305,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		photo = None
 		try:
 			# NOTE: using self.highlighted as prevPage might have moved this if the page is not full
-			photo = self.pictures[self.highlighted+self.offset]
+			photo = self.pictures[self.highlighted + self.offset]
 		except IndexError:
 			pass
 		return photo
@@ -320,14 +320,14 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		photo = None
 		try:
 			# NOTE: using self.highlighted as nextPage might have moved this if the page is not full
-			photo = self.pictures[self.highlighted+self.offset]
+			photo = self.pictures[self.highlighted + self.offset]
 		except IndexError:
 			pass
 		return photo
 
 	def select(self):
 		try:
-			photo = self.pictures[self.highlighted+self.offset]
+			photo = self.pictures[self.highlighted + self.offset]
 		except IndexError:
 			our_print("no such picture")
 			# TODO: indicate in gui
@@ -620,7 +620,7 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 			<widget source="summary" render="Label" position="25,60" zPosition="1" size="{labelwidth},100" valign="top" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
 			<widget source="keywords" render="Label" position="25,160" zPosition="1" size="{labelwidth},40" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
 			<widget source="camera" render="Label" position="25,180" zPosition="1" size="{labelwidth},40" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
-		</screen>""".format(size_w=size_w, size_h=size_h, labelwidth=size_w-50)
+		</screen>""".format(size_w=size_w, size_h=size_h, labelwidth=size_w - 50)
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		InfoBarNotifications.__init__(self)
@@ -668,7 +668,7 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		if ptr is not None:
 			self['pixmap'].instance.setPixmap(ptr)
 			if self.nextPhoto is not None:
-				self.timer.start(config.plugins.ecasa.slideshow_interval.value*1000, True)
+				self.timer.start(config.plugins.ecasa.slideshow_interval.value * 1000, True)
 
 	def cbDownload(self, tup):
 		if not self.instance:
@@ -750,7 +750,7 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 			self.previous() # we already moved forward in our parent view, so move back
 			self.nextPhoto = None
 		else:
-			self.timer.start(config.plugins.ecasa.slideshow_interval.value*1000, True)
+			self.timer.start(config.plugins.ecasa.slideshow_interval.value * 1000, True)
 			self.timerFired()
 
 	def timerFired(self):

@@ -46,7 +46,7 @@ class RecordPathsSettings(Screen, ConfigListScreen):
 			configele.value = configele.last_value
 			self.session.open(
 				MessageBox,
-				_("The directory %s is not writable.\nMake sure you select a writable directory instead.")%dir,
+				_("The directory %s is not writable.\nMake sure you select a writable directory instead.") % dir,
 				type=MessageBox.TYPE_ERROR
 				)
 			return False
@@ -67,14 +67,14 @@ class RecordPathsSettings(Screen, ConfigListScreen):
 			tmp = tmp[:]
 			tmp.append(default)
 		print("TimerPath: ", default, tmp)
-		self.timer_dirname = ConfigSelection(default=default, choices=self.styles+tmp)
+		self.timer_dirname = ConfigSelection(default=default, choices=self.styles + tmp)
 		tmp = config.movielist.videodirs.value
 		default = config.usage.instantrec_path.value
 		if default not in tmp and default not in styles_keys:
 			tmp = tmp[:]
 			tmp.append(default)
 		print("InstantrecPath: ", default, tmp)
-		self.instantrec_dirname = ConfigSelection(default=default, choices=self.styles+tmp)
+		self.instantrec_dirname = ConfigSelection(default=default, choices=self.styles + tmp)
 		default = config.usage.timeshift_path.value
 		tmp = config.usage.allowed_timeshift_paths.value
 		if default not in tmp:
@@ -163,13 +163,13 @@ class RecordPathsSettings(Screen, ConfigListScreen):
 				if default not in tmp and default not in styles_keys:
 					tmp = tmp[:]
 					tmp.append(default)
-				self.timer_dirname.setChoices(self.styles+tmp, default=default)
+				self.timer_dirname.setChoices(self.styles + tmp, default=default)
 				tmp = config.movielist.videodirs.value
 				default = self.instantrec_dirname.value
 				if default not in tmp and default not in styles_keys:
 					tmp = tmp[:]
 					tmp.append(default)
-				self.instantrec_dirname.setChoices(self.styles+tmp, default=default)
+				self.instantrec_dirname.setChoices(self.styles + tmp, default=default)
 				self.entrydirname.value = res
 			if config.usage.allowed_timeshift_paths.value != self.lasttimeshiftdirs:
 				tmp = config.usage.allowed_timeshift_paths.value

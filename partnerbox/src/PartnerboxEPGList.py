@@ -105,7 +105,7 @@ def Partnerbox_EPGList__init__(self, type=0, selChangedCB=None, timer=None, time
 	self.nowServPix = None
 	self.recEvPix = None
 	self.recSelEvPix = None
-	self.recordingEvPix= None
+	self.recordingEvPix = None
 	self.zapEvPix = None
 	self.zapSelEvPix = None
 
@@ -185,7 +185,7 @@ def Partnerbox_SingleEntry(self, service, eventId, beginTime, duration, EventNam
 	if self.listSizeWidth != self.l.getItemSize().width(): #recalc size if scrollbar is shown
 		self.recalcEntrySize()
 
-	if (beginTime is not None) and (beginTime+duration < time()):
+	if (beginTime is not None) and (beginTime + duration < time()):
 		foreColor = self.foreColorPast
 		backColor = self.backColorPast
 		foreColorSel = self.foreColorPastSelected
@@ -215,23 +215,23 @@ def Partnerbox_SingleEntry(self, service, eventId, beginTime, duration, EventNam
 	t = localtime(beginTime)
 	res = [
 		None, # no private data needed
-		(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, _(strftime(_("%a"), t)), foreColor, foreColorSel, backColor, backColorSel),
-		(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, strftime(_("%e/%m, %-H:%M"), t), foreColor, foreColorSel, backColor, backColorSel)
+		(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, _(strftime(_("%a"), t)), foreColor, foreColorSel, backColor, backColorSel),
+		(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, strftime(_("%e/%m, %-H:%M"), t), foreColor, foreColorSel, backColor, backColorSel)
 	]
 	if clock_types:
 		if self.wasEntryAutoTimer and clock_types in (2, 7, 12):
 			res.extend((
-				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-self.picx - self.posx, (r3.h/2-self.posy), self.picx, self.picy, self.clocks[clock_types]),
-				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-self.picx*2 - self.gap - self.posx, (r3.h/2-self.posy), self.picx, self.picy, self.autotimericon),
-				(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-self.picx*2 - (self.gap*2) - self.posx, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, EventName, foreColor, foreColorSel, backColor, backColorSel)
+				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x + r3.w - self.picx - self.posx, (r3.h / 2 - self.posy), self.picx, self.picy, self.clocks[clock_types]),
+				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x + r3.w - self.picx * 2 - self.gap - self.posx, (r3.h / 2 - self.posy), self.picx, self.picy, self.autotimericon),
+				(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w - self.picx * 2 - (self.gap * 2) - self.posx, r3.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, EventName, foreColor, foreColorSel, backColor, backColorSel)
 				))
 		else:
 			res.extend((
-				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-self.picx - self.posx, (r3.h/2-self.posy), self.picx, self.picy, self.clocks[clock_types]),
-				(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-self.picx - self.posx, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, EventName, foreColor, foreColorSel, backColor, backColorSel)
+				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x + r3.w - self.picx - self.posx, (r3.h / 2 - self.posy), self.picx, self.picy, self.clocks[clock_types]),
+				(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w - self.picx - self.posx, r3.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, EventName, foreColor, foreColorSel, backColor, backColorSel)
 				))
 	else:
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, EventName, foreColor, foreColorSel, backColor, backColorSel))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, EventName, foreColor, foreColorSel, backColor, backColorSel))
 	return res
 
 def Partnerbox_SimilarEntry(self, service, eventId, beginTime, service_name, duration):
@@ -244,23 +244,23 @@ def Partnerbox_SimilarEntry(self, service, eventId, beginTime, service_name, dur
 	t = localtime(beginTime)
 	res = [
 		None,  # no private data needed
-		(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, _(strftime(_("%a"), t))),
-		(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, strftime(_("%e/%m, %-H:%M"), t))
+		(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, _(strftime(_("%a"), t))),
+		(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, strftime(_("%e/%m, %-H:%M"), t))
 	]
 	if clock_types:
 		if self.wasEntryAutoTimer and clock_types in (2, 7, 12):
 			res.extend((
-				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-self.picx - self.posx, (r3.h/2-self.posy), self.picx, self.picy, self.clocks[clock_types]),
-				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-self.picx*2 - self.gap - self.posx, (r3.h/2-self.posy), self.picx, self.picy, self.autotimericon),
-				(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-self.picx*2 - (self.gap*2) - self.posx, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, service_name)
+				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x + r3.w - self.picx - self.posx, (r3.h / 2 - self.posy), self.picx, self.picy, self.clocks[clock_types]),
+				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x + r3.w - self.picx * 2 - self.gap - self.posx, (r3.h / 2 - self.posy), self.picx, self.picy, self.autotimericon),
+				(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w - self.picx * 2 - (self.gap * 2) - self.posx, r3.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, service_name)
 			))
 		else:
 			res.extend((
-				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-self.picx - self.posx, (r3.h/2-self.posy), self.picx, self.picy, self.clocks[clock_types]),
-				(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-self.picx - (self.gap*2) - self.posx, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, service_name)
+				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x + r3.w - self.picx - self.posx, (r3.h / 2 - self.posy), self.picx, self.picy, self.clocks[clock_types]),
+				(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w - self.picx - (self.gap * 2) - self.posx, r3.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, service_name)
 			))
 	else:
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, service_name))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, service_name))
 	return res
 
 
@@ -281,36 +281,36 @@ def Partnerbox_MultiEntry(self, changecount, service, eventId, beginTime, durati
 		clock_types = self.getPixmapForEntry(service, eventId, beginTime, duration)
 		if nowTime < beginTime:
 			begin = localtime(beginTime)
-			end = localtime(beginTime+duration)
+			end = localtime(beginTime + duration)
 			res.extend((
-				(eListboxPythonMultiContent.TYPE_TEXT, r4.x, r4.y, r4.w, r4.h, 1, RT_HALIGN_CENTER|RT_VALIGN_CENTER, _("%02d.%02d - %02d.%02d")%(begin[3], begin[4], end[3], end[4])),
-				(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, fact1, r3.h, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, _("%d min") % (duration / 60))
+				(eListboxPythonMultiContent.TYPE_TEXT, r4.x, r4.y, r4.w, r4.h, 1, RT_HALIGN_CENTER | RT_VALIGN_CENTER, _("%02d.%02d - %02d.%02d") % (begin[3], begin[4], end[3], end[4])),
+				(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, fact1, r3.h, 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, _("%d min") % (duration / 60))
 			))
 		else:
 			percent = (nowTime - beginTime) * 100 / duration
 			prefix = "+"
-			remaining = ((beginTime+duration) - int(time())) / 60
+			remaining = ((beginTime + duration) - int(time())) / 60
 			if remaining <= 0:
 				prefix = ""
 			res.extend((
-				(eListboxPythonMultiContent.TYPE_PROGRESS, r2.x+fact3, r2.y, r2.w-fact3*2, r2.h, percent, borderw),
-				(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, fact1, r3.h, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, _("%s%d min") % (prefix, remaining))
+				(eListboxPythonMultiContent.TYPE_PROGRESS, r2.x + fact3, r2.y, r2.w - fact3 * 2, r2.h, percent, borderw),
+				(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, fact1, r3.h, 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, _("%s%d min") % (prefix, remaining))
 			))
 		if clock_types:
-			pos = r3.x+r3.w
+			pos = r3.x + r3.w
 			if self.wasEntryAutoTimer and clock_types in (2, 7, 12):
 				res.extend((
-					(eListboxPythonMultiContent.TYPE_TEXT, r3.x + fact4, r3.y, r3.w-fact4-self.picx*2 - (self.gap*2) - self.posx, r3.h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, EventName),
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, pos-self.picx - self.posx, (r3.h/2-self.posy), self.picx, self.picy, self.clocks[clock_types]),
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, pos-self.picx*2 - self.gap - self.posx, (r3.h/2-self.posy), self.picx, self.picy, self.autotimericon)
+					(eListboxPythonMultiContent.TYPE_TEXT, r3.x + fact4, r3.y, r3.w - fact4 - self.picx * 2 - (self.gap * 2) - self.posx, r3.h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, EventName),
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, pos - self.picx - self.posx, (r3.h / 2 - self.posy), self.picx, self.picy, self.clocks[clock_types]),
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, pos - self.picx * 2 - self.gap - self.posx, (r3.h / 2 - self.posy), self.picx, self.picy, self.autotimericon)
 				))
 			else:
 				res.extend((
-					(eListboxPythonMultiContent.TYPE_TEXT, r3.x + fact4, r3.y, r3.w-fact4-self.picx - (self.gap*2) - self.posx, r3.h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, EventName),
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, pos-self.picx - self.posx, (r3.h/2-self.posy), self.picx, self.picy, self.clocks[clock_types])
+					(eListboxPythonMultiContent.TYPE_TEXT, r3.x + fact4, r3.y, r3.w - fact4 - self.picx - (self.gap * 2) - self.posx, r3.h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, EventName),
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, pos - self.picx - self.posx, (r3.h / 2 - self.posy), self.picx, self.picy, self.clocks[clock_types])
 				))
 		else:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x + fact2, r3.y, r3.w-fact2, r3.h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, EventName))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x + fact2, r3.y, r3.w - fact2, r3.h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, EventName))
 	return res
 
 

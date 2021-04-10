@@ -125,7 +125,7 @@ class Timer(Source):
 			else:
 				param[element] = int(param[element])
 		param['begin'] = int(mktime((param['year'], param['month'], param['day'], param['shour'], param['smin'], 0, 0, 0, -1)))
-		param['end']	 = int(mktime((param['year'], param['month'], param['day'], param['ehour'], param['emin'], 0, 0, 0, -1)))
+		param['end'] = int(mktime((param['year'], param['month'], param['day'], param['ehour'], param['emin'], 0, 0, 0, -1)))
 		if param['end'] < param['begin']:
 			param['end'] += 86400
 		for element in listDate:
@@ -266,7 +266,7 @@ class Timer(Source):
 			except ValueError:
 				return (False, _("Illegal Parameter value for Parameter eit : '%s'") % eit)
 
-		print("[WebComponents.Sources.Timer]: eit=%d" %eit)
+		print("[WebComponents.Sources.Timer]: eit=%d" % eit)
 		if eit != 0:
 			#check if the given event exists, if it doesn't the timer may be already running
 			epgcache = eEPGCache.getInstance()
@@ -360,14 +360,14 @@ class Timer(Source):
 								if conflicts is None:
 									self.recordtimer.timeChanged(timer) #go and save it
 									print("[WebComponents.Timer] editTimer: Timer changed!")
-									return (True, "Timer '%s' changed" %(timer.name))
+									return (True, "Timer '%s' changed" % (timer.name))
 								else:
-									print("[WebComponents.Timer] editTimer conflicting Timers: %s" %(conflicts))
+									print("[WebComponents.Timer] editTimer conflicting Timers: %s" % (conflicts))
 									msg = ""
 									for t in conflicts:
-										msg = "%s / %s" %(msg, t.name)
+										msg = "%s / %s" % (msg, t.name)
 
-									return (False, _("Conflicting Timer(s) detected! %s") %(msg))
+									return (False, _("Conflicting Timer(s) detected! %s") % (msg))
 
 			except Exception as e:
 				#obviously some value was not good, return an error
@@ -387,18 +387,18 @@ class Timer(Source):
 			#add the new timer
 			conflicts = self.recordtimer.record(timer)
 			if conflicts is None:
-				return (True, _("Timer '%s' added") %(timer.name))
+				return (True, _("Timer '%s' added") % (timer.name))
 			else:
-				print("[WebComponents.Timer] editTimer conflicting Timers: %s" %(conflicts))
+				print("[WebComponents.Timer] editTimer conflicting Timers: %s" % (conflicts))
 				msg = ""
 				for timer in conflicts:
-					msg = "%s / %s" %(msg, timer.name)
+					msg = "%s / %s" % (msg, timer.name)
 
-				return (False, _("Conflicting Timer(s) detected! %s") %(msg))
+				return (False, _("Conflicting Timer(s) detected! %s") % (msg))
 
 		except Exception as e:
 			#something went wrong, most possibly one of the given paramater-values was wrong
-			print("[WebComponents.Timer] editTimer exception: %s" %(e))
+			print("[WebComponents.Timer] editTimer exception: %s" % (e))
 			return (False, _("Could not add timer '%s'!") % name)
 
 		return (False, "Unexpected Error")
@@ -434,14 +434,14 @@ class Timer(Source):
 
 		conflicts = self.recordtimer.record(timer)
 		if conflicts is None:
-			return (True, _("Timer '%s' added") %(timer.name))
+			return (True, _("Timer '%s' added") % (timer.name))
 		else:
-			print("[WebComponents.Timer] editTimer conflicting Timers: %s" %(conflicts))
+			print("[WebComponents.Timer] editTimer conflicting Timers: %s" % (conflicts))
 			msg = ""
 			for timer in conflicts:
-				msg = "%s / %s" %(msg, timer.name)
+				msg = "%s / %s" % (msg, timer.name)
 
-			return (False, _("Conflicting Timer(s) detected! %s") %(msg))
+			return (False, _("Conflicting Timer(s) detected! %s") % (msg))
 
 
 	def writeTimerList(self, force=False):

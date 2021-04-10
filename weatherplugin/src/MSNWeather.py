@@ -124,7 +124,7 @@ class MSNWeather:
 			language = "nn-NO"
 		self.city = city
 		self.callback = callback
-		self.callbackShowIcon  = callbackShowIcon
+		self.callbackShowIcon = callbackShowIcon
 		self.callbackAllIconsDownloaded = callbackAllIconsDownloaded
 		url = "http://weather.service.msn.com/data.aspx?src=windows&weadegreetype=%s&culture=%s&wealocations=%s" % (degreetype, language, urllib_quote(locationcode))
 		getPage(six.ensure_binary(url)).addCallback(self.xmlCallback).addErrback(self.error)
@@ -192,7 +192,7 @@ class MSNWeather:
 					currentWeather.feelslike = six.ensure_str(items.attrib.get("feelslike"), errors='ignore')
 					currentWeather.skycode = "%s%s" % (six.ensure_str(items.attrib.get("skycode"), errors='ignore'), self.iconextension)
 					currentWeather.code = six.ensure_str(items.attrib.get("skycode"), errors='ignore')
-					filename = "%s%s"  % (self.iconpath, currentWeather.skycode)
+					filename = "%s%s" % (self.iconpath, currentWeather.skycode)
 					currentWeather.iconFilename = filename
 					if not os_path.exists(filename):
 						url = "%s%s" % (self.imagerelativeurl, currentWeather.skycode)
@@ -201,7 +201,7 @@ class MSNWeather:
 						self.showIcon(-1, filename)
 					self.weatherItems[str(-1)] = currentWeather
 				elif items.tag == "forecast" and index <= 4:
-					index +=1
+					index += 1
 					weather = MSNWeatherItem()
 					weather.date = six.ensure_str(items.attrib.get("date"), errors='ignore')
 					weather.day = six.ensure_str(items.attrib.get("day"), errors='ignore')
@@ -211,7 +211,7 @@ class MSNWeather:
 					weather.skytextday = six.ensure_str(items.attrib.get("skytextday"), errors='ignore')
 					weather.skycodeday = "%s%s" % (six.ensure_str(items.attrib.get("skycodeday"), errors='ignore'), self.iconextension)
 					weather.code = six.ensure_str(items.attrib.get("skycodeday"), errors='ignore')
-					filename = "%s%s"  % (self.iconpath, weather.skycodeday)
+					filename = "%s%s" % (self.iconpath, weather.skycodeday)
 					weather.iconFilename = filename
 					if not os_path.exists(filename):
 						url = "%s%s" % (self.imagerelativeurl, weather.skycodeday)

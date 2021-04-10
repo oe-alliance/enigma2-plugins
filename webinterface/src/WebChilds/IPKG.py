@@ -27,7 +27,7 @@ class IPKGResource(resource.Resource):
 			elif self.command in IPKGResource.FILECMDS:
 				return self.execFileCmd(request)
 			else:
-				return self.doErrorPage(request, "Unknown command: "+ self.command)
+				return self.doErrorPage(request, "Unknown command: " + self.command)
 		else:
 			return self.doIndexPage(request)
 
@@ -117,7 +117,7 @@ class IPKGConsoleStream:
 
 	def dataAvail(self, data):
 		data = six.ensure_str(data)
-		print("[IPKGConsoleStream].dataAvail: '%s'" %data)
+		print("[IPKGConsoleStream].dataAvail: '%s'" % data)
 		#FIXME - filter strange reapeated outputs since we switched to opkg
 		if data != self.lastdata or self.lastdata is None and self.stillAlive:
 			self.lastdata = data

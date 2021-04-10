@@ -107,13 +107,13 @@ class myHTTPClientFactory(HTTPClientFactory):
 		headers=headers, agent=agent, timeout=timeout, cookies=cookies, followRedirect=followRedirect)
 
 	def clientConnectionLost(self, connector, reason):
-		lostreason=("Connection was closed cleanly" in vars(reason))
-		if lostreason==None:
-			print("[SHOUTcast] Lost connection, reason: %s ,trying to reconnect!" %reason)
+		lostreason = ("Connection was closed cleanly" in vars(reason))
+		if lostreason == None:
+			print("[SHOUTcast] Lost connection, reason: %s ,trying to reconnect!" % reason)
 			connector.connect()
 
 	def clientConnectionFailed(self, connector, reason):
-		print("[SHOUTcast] connection failed, reason: %s,trying to reconnect!" %reason)
+		print("[SHOUTcast] connection failed, reason: %s,trying to reconnect!" % reason)
 		connector.connect()
 
 def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
@@ -155,7 +155,7 @@ class SHOUTcastWidget(Screen):
 
 	sz_w = getDesktop(0).size().width() - 90
 	sz_h = getDesktop(0).size().height() - 95
-	print("[SHOUTcast] desktop size %dx%d\n" % (sz_w+90, sz_h+100))
+	print("[SHOUTcast] desktop size %dx%d\n" % (sz_w + 90, sz_h + 100))
 	if sz_h < 500:
 		sz_h += 4
 	skin = """
@@ -177,7 +177,7 @@ class SHOUTcastWidget(Screen):
 			<widget name="console" position="115,%d" zPosition="1" size="%d,40" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
 			<widget name="cover" zPosition="2" position="5,%d" size="102,110" alphatest="blend" />
 			<ePixmap position="%d,41" zPosition="4" size="120,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/shoutcast-logo1-fs8.png" transparent="1" alphatest="on" />
-		</screen>""" %(
+		</screen>""" % (
 			sz_w, sz_h, # size
 			sz_w - 135, # size headertext
 			sz_w - 100, # size statustext
@@ -238,7 +238,7 @@ class SHOUTcastWidget(Screen):
 			self.favoriteConfig.loadFromFile(self.FAVORITE_FILE_OLD)
 		else:
 			self.favoriteConfig.loadFromFile(self.FAVORITE_FILE_DEFAULT)
-		self.favoriteConfig.entriescount =  ConfigInteger(0)
+		self.favoriteConfig.entriescount = ConfigInteger(0)
 		self.favoriteConfig.Entries = ConfigSubList()
 		self.initFavouriteConfig()
 		self.stationListXML = ""
@@ -442,7 +442,7 @@ class SHOUTcastWidget(Screen):
 
 	def InputBoxStartRecordingCallback(self, returnValue=None):
 		if returnValue:
-			recordingLength =  int(returnValue) * 60
+			recordingLength = int(returnValue) * 60
 			if not os.path.exists(config.plugins.shoutcast.dirname.value):
 				try:
 					os.mkdir(config.plugins.shoutcast.dirname.value)
@@ -482,7 +482,7 @@ class SHOUTcastWidget(Screen):
 				self.session.openWithCallback(self.deleteRecordingConfirmed, MessageBox, _("Do you really want to stop the recording?"))
 			else:
 				if len(self.currentStreamingURL) != 0:
-					self.session.openWithCallback(self.InputBoxStartRecordingCallback, InputBox, windowTitle=_("Recording length"),  title=_("Enter in minutes (0 means unlimited)"), text="0", type=Input.NUMBER)
+					self.session.openWithCallback(self.InputBoxStartRecordingCallback, InputBox, windowTitle=_("Recording length"), title=_("Enter in minutes (0 means unlimited)"), text="0", type=Input.NUMBER)
 				else:
 					self.session.open(MessageBox, _("Only running streamings can be recorded!"), type=MessageBox.TYPE_INFO, timeout=20)
 		else:
@@ -695,7 +695,7 @@ class SHOUTcastWidget(Screen):
 		self.stationListHeader = _("genre %s") % genre
 		self.headerTextString = _("SHOUTcast station list for %s") % self.stationListHeader
 		self["headertext"].setText("")
-		self["statustext"].setText(_("Getting %s") %  self.headerTextString)
+		self["statustext"].setText(_("Getting %s") % self.headerTextString)
 		self["list"].hide()
 		if len(devid) > 8:
 			self.stationListURL = self.SC + "/station/advancedsearch&f=xml&k=%s&search=%s" % (devid, genre)
@@ -898,7 +898,7 @@ class SHOUTcastWidget(Screen):
 
 	def GoogleImageCallback(self, result):
 		global coverfiles
-		bad_link  = ['http://cdn.discogs.com', 'http://www.jaren80muziek.nl', 'http://www.inthestudio.net',
+		bad_link = ['http://cdn.discogs.com', 'http://www.jaren80muziek.nl', 'http://www.inthestudio.net',
 		'https://deepmp3.ru', 'http://beyondbreed.com', 'https://i1.sndcdn.com', 'http://www.lyrics007.com', 'https://lametralleta.es',
 		'http://www.caramail.tv', 'http://cloud.freehandmusic.netdna-cdn.com', 'http://rockyourlyrics.com', 'http://www.franceinter.fr',
 		'http://audio-max.home.pl', 'https://www.mystic.pl', 'http://radiobox2.omroep.nl', 'http://s0.hulkshare.com', 'http://static2.ising.pl',
@@ -916,7 +916,7 @@ class SHOUTcastWidget(Screen):
 			sendUrlCommand(self.currentGoogle, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
 			return
 		self.currentGoogle = None
-		r=re.findall('murl&quot;:&quot;(http.*?)&quot', result, re.S|re.I)
+		r = re.findall('murl&quot;:&quot;(http.*?)&quot', result, re.S | re.I)
 		if r:
 			url = r[nr]
 			print("[SHOUTcast] fetch cover first try:%s" % (url))
@@ -935,8 +935,8 @@ class SHOUTcastWidget(Screen):
 									nr += 1
 									url = r[nr]
 									print("[SHOUTcast] fetch cover fourth try:%s" % (url))
-			if len(url)>15:
-				url= url.replace(" ", "%20")
+			if len(url) > 15:
+				url = url.replace(" ", "%20")
 				print("download url: %s " % url)
 				validurl = True
 			else:
@@ -947,7 +947,7 @@ class SHOUTcastWidget(Screen):
 			if validurl:
 				self.currentcoverfile = (self.currentcoverfile + 1) % len(coverfiles)
 				try:
-					os.unlink(coverfiles[self.currentcoverfile-1])
+					os.unlink(coverfiles[self.currentcoverfile - 1])
 				except:
 					pass
 				coverfile = coverfiles[self.currentcoverfile]
@@ -981,7 +981,7 @@ class SHOUTcastWidget(Screen):
 				return
 			sTitle = self.currPlay.info().getInfoString(iServiceInformation.sTagTitle)
 			if self.oldtitle != sTitle:
-				self.oldtitle=sTitle
+				self.oldtitle = sTitle
 				sTitle = sTitle.replace("Title:", "")[:55]
 				if config.plugins.shoutcast.showcover.value:
 					searchpara = sTitle
@@ -1024,7 +1024,7 @@ class SHOUTcastWidget(Screen):
 
 	def initFavouriteEntryConfig(self):
 		self.favoriteConfig.Entries.append(ConfigSubsection())
-		i = len(self.favoriteConfig.Entries) -1
+		i = len(self.favoriteConfig.Entries) - 1
 		self.favoriteConfig.Entries[i].name = ConfigText(default="")
 		self.favoriteConfig.Entries[i].text = ConfigText(default="")
 		self.favoriteConfig.Entries[i].type = ConfigText(default="")
@@ -1121,19 +1121,19 @@ class SHOUTcastList(GUIComponent, object):
 					iname = item.name
 			else:
 				iname = "     %s" % item.name
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, self.pard, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, iname))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, self.pard, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, iname))
 		elif self.mode == 1: # STATIONLIST
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width, self.para, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, item.name))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, self.parb, width, self.para, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, item.ct))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, self.parc, width / 2, self.para, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, _("Audio: %s") % item.mt))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT,  width / 2, self.parc, width / 2, self.para, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, _("Bit rate: %s kbps") % item.br))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width, self.para, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, item.name))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, self.parb, width, self.para, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, item.ct))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, self.parc, width / 2, self.para, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, _("Audio: %s") % item.mt))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, width / 2, self.parc, width / 2, self.para, 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, _("Bit rate: %s kbps") % item.br))
 		elif self.mode == 2: # FAVORITELIST
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width, self.para, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, item.configItem.name.value))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, self.parb, width, self.para, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s (%s)" % (item.configItem.text.value, item.configItem.type.value)))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width, self.para, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, item.configItem.name.value))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, self.parb, width, self.para, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, "%s (%s)" % (item.configItem.text.value, item.configItem.type.value)))
 			if len(item.configItem.audio.value) != 0:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, self.parc, width / 2, self.para, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, _("Audio: %s") % item.configItem.audio.value))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, self.parc, width / 2, self.para, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, _("Audio: %s") % item.configItem.audio.value))
 			if len(item.configItem.bitrate.value) != 0:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT,  width / 2, self.parc, width / 2, self.para, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, _("Bit rate: %s kbps") % item.configItem.bitrate.value))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, width / 2, self.parc, width / 2, self.para, 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, _("Bit rate: %s kbps") % item.configItem.bitrate.value))
 		return res
 
 	def __init__(self):
@@ -1211,7 +1211,7 @@ class SHOUTcastLCDScreen(Screen):
 
 	def __init__(self, session, parent):
 		Screen.__init__(self, session)
-		self["text1"] =  Label("SHOUTcast")
+		self["text1"] = Label("SHOUTcast")
 		self["text2"] = Label("")
 
 	def setText(self, text):

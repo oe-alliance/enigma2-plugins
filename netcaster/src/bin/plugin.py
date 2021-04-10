@@ -117,7 +117,7 @@ class NETcasterScreenBrowser(Screen):
     def getInterfaceList(self):
         self.pluginlist = []
         global plugin_path, myname
-        interfacepath = plugin_path+"/interface"
+        interfacepath = plugin_path + "/interface"
         for iface in os_listdir(interfacepath):
             if iface.endswith(".py") and not iface.startswith("_"):
                 pluginp = '.'.join(["Plugins", "Extensions", myname, "interface", iface.replace(".py", "")])
@@ -126,12 +126,12 @@ class NETcasterScreenBrowser(Screen):
 
     def updateTitle(self):
         try:
-            self.setTitle("%s (%s)"%(myname, self.currentPlugin.nameshort))
+            self.setTitle("%s (%s)" % (myname, self.currentPlugin.nameshort))
         except:
             pass
 
     def selectPlugin(self):
-        glist=[]
+        glist = []
         for i in self.pluginlist:
             glist.append((i.name, i))
         self.session.openWithCallback(self.selectedPlugin, ChoiceBox, _("select Plugin"), glist)
@@ -159,7 +159,7 @@ class NETcasterScreenBrowser(Screen):
 
     def _onStop(self):
         self["pixred"].setText("")
-        self.setTitle("%s (%s)"%(myname, self.currentPlugin.nameshort))
+        self.setTitle("%s (%s)" % (myname, self.currentPlugin.nameshort))
 
     def stream_stop(self):
         global streamplayer
@@ -176,7 +176,7 @@ class NETcasterScreenBrowser(Screen):
             self.connectToMetadataUpdates()
             streamplayer.play(stream)
             self["pixred"].setText(_("Stop"))
-            self.setTitle("%s"%(stream.getName()))
+            self.setTitle("%s" % (stream.getName()))
 
     def onStreamlistLoaded(self, list):
        self["streamlist"].buildList(list)
@@ -226,13 +226,13 @@ class NETcasterScreenHelp(Screen):
         self.skin = NETcasterScreenHelp.skin
         Screen.__init__(self, session)
         global plugin_path
-        readme = plugin_path+"/readme.txt"
+        readme = plugin_path + "/readme.txt"
         if os_path.exists(readme):
             fp = open(readme)
             text = fp.read()
             fp.close()
         else:
-            text = "sorry, cant load helptext from file "+readme
+            text = "sorry, cant load helptext from file " + readme
         self["help"] = ScrollLabel(text)
         self["actions"] = ActionMap(["WizardActions", "DirectionActions", "MenuActions"],
             {
@@ -254,7 +254,7 @@ class StreamMenu(MenuList):
         instance.setItemHeight(50)
 
     def buildList(self, listnew):
-        list=[]
+        list = []
         for stream in listnew:
             res = [stream]
             res.append(MultiContentEntryText(pos=(5, 5), size=(500, 25), font=0, text=stream.getName()))

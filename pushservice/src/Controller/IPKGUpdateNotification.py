@@ -33,7 +33,7 @@ from Plugins.SystemPlugins.SoftwareManager.SoftwareTools import iSoftwareTools
 
 # Constants
 SUBJECT = _("IPKG Update Notification")
-BODY    = _("There are updates available:\n%s")
+BODY = _("There are updates available:\n%s")
 
 
 class IPKGUpdateNotification(ControllerBase):
@@ -51,7 +51,7 @@ class IPKGUpdateNotification(ControllerBase):
 		# At the end a plugin has to call one of the functions: callback or errback
 		# Callback should return with at least one of the parameter: Header, Body, Attachment
 		# If empty or none is returned, nothing will be sent
-		if iSoftwareTools.lastDownloadDate is not None and iSoftwareTools.lastDownloadDate > (time() - (24*60*60)):
+		if iSoftwareTools.lastDownloadDate is not None and iSoftwareTools.lastDownloadDate > (time() - (24 * 60 * 60)):
 			# Last refresh was within one day
 			return self.buildList(callback, errback)
 		else:

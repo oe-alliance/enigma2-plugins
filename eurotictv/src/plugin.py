@@ -26,7 +26,7 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 	STREAM_DIM = (768, 576)
 	PIP_DIM = (432, 324)
 	STREAM_URI = "http://174.121.228.234/hls-live/livepkgr/_definst_/liveevent/etv-livestream_2.m3u86"
-	CENTER_POS = ((560-PIP_DIM[0])/2)
+	CENTER_POS = ((560 - PIP_DIM[0]) / 2)
 
 	skin = """
 	<screen position="center,center" size="560,470" title="eUroticTV" flags="wfNoBorder">
@@ -87,7 +87,7 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 				iPlayableService.evUpdatedEventInfo: self.__streamStarted,
 				iPlayableService.evTuneFailed: self.__streamFailed,
 				iPlayableService.evEOF: self.__evEOF,
-				iPlayableService.evUser+15: self.__streamFailed
+				iPlayableService.evUser + 15: self.__streamFailed
 			})	
 
 		self.onClose.append(self.__onClose)
@@ -99,7 +99,7 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 		from Components.AVSwitch import AVSwitch
 		sc = AVSwitch().getFramebufferScale()
 		self.picload.setPara((self["poster"].instance.size().width(), self["poster"].instance.size().height(), self.PIP_DIM[0], self.PIP_DIM[1], False, 1, "#00000000"))
-		self.picload.startDecode(resolveFilename(SCOPE_PLUGINS)+"Extensions/eUroticTV/"+"eurotic.jpg")
+		self.picload.startDecode(resolveFilename(SCOPE_PLUGINS) + "Extensions/eUroticTV/" + "eurotic.jpg")
 
 	def setState(self, state):
 		if state <= self.STATE_FAILURE:
@@ -141,7 +141,7 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 	def __streamFailed(self):
 		print("__streamFailed")
 		currPlay = self.session.nav.getCurrentService()
-		message = currPlay.info().getInfoString(iServiceInformation.sUser+12)
+		message = currPlay.info().getInfoString(iServiceInformation.sUser + 12)
 		self.setState(self.STATE_FAILURE)
 		self["connection_label"].setText(_("Streaming error: %s") % message)
 

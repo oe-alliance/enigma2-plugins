@@ -56,7 +56,7 @@ class vhdConvSmartInfo(Poll, Converter, object):
 			xresol = info.getInfo(iServiceInformation.sVideoWidth)
 			yresol = info.getInfo(iServiceInformation.sVideoHeight)
 			feinfo = (service and service.frontendInfo())
-			if (feinfo is not None) and (xresol>0):
+			if (feinfo is not None) and (xresol > 0):
 				#Ret_Text = str(xresol) + "x" + str(yresol) + "   "
 				if (yresol > 580):
 					Ret_Text = "HD     "
@@ -80,9 +80,9 @@ class vhdConvSmartInfo(Poll, Converter, object):
 						if (frontendData.get("tuner_type") == "DVB-S"):
 							orbital_pos = int(frontendData["orbital_position"])
 							if orbital_pos > 1800:
-								orb_pos = str((float(3600 - orbital_pos))/10.0) + "W"
+								orb_pos = str((float(3600 - orbital_pos)) / 10.0) + "W"
 							elif orbital_pos > 0:
-								orb_pos = str((float(orbital_pos))/10.0) + "E"
+								orb_pos = str((float(orbital_pos)) / 10.0) + "E"
 						Ret_Text = Ret_Text + "Pos: " + orb_pos + "   "
 					elif (frontendData.get("tuner_type") == "DVB-T"):
 						frequency = (str((frontendData.get("frequency") / 1000)) + " MHz")
@@ -101,7 +101,7 @@ class vhdConvSmartInfo(Poll, Converter, object):
 						maxtemp = tt
 						sensotN = sensors.getSensorName(id)
 						if sensotN == "undefined":
-							sensotN = "sensor-"+str(id)
+							sensotN = "sensor-" + str(id)
 				Ret_Text = "max. Box-Temp:  " + str(maxtemp) + "°C / " + sensotN + "\n" + Ret_Text
 			except:
 				pass
@@ -115,8 +115,8 @@ class vhdConvSmartInfo(Poll, Converter, object):
 		Converter.changed(self, what)
 
 	def kurz(self, langTxt):
-		if (len(langTxt)>23):
-			retT = langTxt[:20]+"..."
+		if (len(langTxt) > 23):
+			retT = langTxt[:20] + "..."
 			return retT
 		else:
 			return langTxt

@@ -49,7 +49,7 @@ class MovieInfo(Converter, object):
 			elif self.type == self.MOVIE_REC_FILESIZE:
 				filesize = info.getInfoObject(service, iServiceInformation.sFileSize)
 				if filesize is not None:
-					return "%d MB" % (filesize / (1024*1024))
+					return "%d MB" % (filesize / (1024 * 1024))
 		return ""
 
 	text = property(getText)

@@ -31,8 +31,8 @@ class AutoTimerEditor(Source):
 		filename = param
 		if not filename:
 			filename = self.BACKUP_FILENAME
-		invalidCharacters= re_compile(r'[^A-Za-z0-9_. ]+|^\.|\.$|^ | $|^$')
-		tarFilename= "%s.tar" % invalidCharacters.sub('_', filename)
+		invalidCharacters = re_compile(r'[^A-Za-z0-9_. ]+|^\.|\.$|^ | $|^$')
+		tarFilename = "%s.tar" % invalidCharacters.sub('_', filename)
 		backupFilename = path.join(self.BACKUP_PATH, tarFilename)
 		if path.exists(backupFilename):
 			remove(backupFilename)

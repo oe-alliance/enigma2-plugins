@@ -6,8 +6,8 @@ class myNumericalTextInput:
 	def __init__(self, nextFunc=None, handleTimeout=True, search=False):
 		self.mapping = []
 		self.lang = language.getLanguage()
-		self.useableChars=None
-		self.nextFunction=nextFunc
+		self.useableChars = None
+		self.nextFunction = nextFunc
 
 		if handleTimeout:
 			self.timer = eTimer()
@@ -79,7 +79,7 @@ class myNumericalTextInput:
 		self.useableChars = useable
 
 	def getKey(self, num):
-		cnt=0
+		cnt = 0
 		if self.lastKey != num:
 			if self.lastKey != -1:
 				self.nextChar()

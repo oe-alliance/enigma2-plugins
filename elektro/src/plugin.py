@@ -151,10 +151,10 @@ def NASpowerdown(Nname, Nuser, Npass, Ncommand, Nport):
 	from telnetlib import Telnet
 	if Nname == "":
 		return _("no Name")
-	l=_("Connection Error")
+	l = _("Connection Error")
 	try:
 		tn = Telnet(Nname, Nport, 5)
-		l=""
+		l = ""
 		if Nuser != "":
 			l = l + tn.expect(['ogin:', 'sername'], 10)[2]
 			l = l + tn.read_very_lazy()
@@ -171,7 +171,7 @@ def NASpowerdown(Nname, Nuser, Npass, Ncommand, Nport):
 		if config.plugins.elektro.NASwait.value == True:
 			tt = time() + 90
 			l = l + "\n waiting...\n"
-			while tt>time() and ping.doOne(Nname, 1) != None:
+			while tt > time() and ping.doOne(Nname, 1) != None:
 				sleep(2)
 		tn.write('exit\r')
 		l = l + tn.expect(['#', ">"], 5)[2]
@@ -722,7 +722,7 @@ class DoElektro(Screen):
 		trysleep = config.plugins.elektro.standbyOnBoot.value
 
 		#Don't go to sleep when this was a manual wakeup and the box shouldn't go to standby
-		if timerWakeup == False and	config.plugins.elektro.standbyOnManualBoot.value == False:
+		if timerWakeup == False and config.plugins.elektro.standbyOnManualBoot.value == False:
 			trysleep = False
 
 

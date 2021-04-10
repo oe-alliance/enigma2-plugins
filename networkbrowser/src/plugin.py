@@ -28,7 +28,7 @@ class MountAgainCheckPoller:
 		if config.networkbrowser.automountpoll.value:
 			self.mountagaincheck()
 		else:
-			self.timer.startLongTimer(30*60)
+			self.timer.startLongTimer(30 * 60)
 
 	def mountagaincheck(self):
 		Components.Task.job_manager.AddJob(self.createCheckJob())

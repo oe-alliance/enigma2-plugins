@@ -14,4 +14,4 @@ def importExternalModules():
 		
 			except ImportError as e:				
 				print('[Toplevel.importExternalModules] Could NOT import external module: %s' % (module_name))
-				print('[Toplevel.importExternalModules] Exception Caught\n%s' %e)
+				print('[Toplevel.importExternalModules] Exception Caught\n%s' % e)

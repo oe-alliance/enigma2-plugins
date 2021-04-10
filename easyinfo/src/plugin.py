@@ -62,7 +62,7 @@ else:
 
 
 
-CHOICELIST=[("no", _("Disabled")),
+CHOICELIST = [("no", _("Disabled")),
 			("eventinfo", _("Event info")),
 			("singleepg", _("Single EPG")),
 			("multiepg", _("Multi EPG")),
@@ -80,7 +80,7 @@ CHOICELIST=[("no", _("Disabled")),
 			("epgrefresh", _("EPG refresh")),
 			("sysinfo", _("Sherlock"))
 			]
-config.plugins.EasyInfo  = ConfigSubsection()
+config.plugins.EasyInfo = ConfigSubsection()
 config.plugins.EasyInfo.pos1 = ConfigSelection(default="eventinfo", choices=CHOICELIST)
 config.plugins.EasyInfo.pos2 = ConfigSelection(default="singleepg", choices=CHOICELIST)
 config.plugins.EasyInfo.pos3 = ConfigSelection(default="merlinepg", choices=CHOICELIST)
@@ -151,10 +151,10 @@ def info(self):
 		service = self.session.nav.getCurrentService()
 		ref = self.session.nav.getCurrentlyPlayingServiceReference()
 		info = service.info()
-		ptr=info.getEvent(0)
+		ptr = info.getEvent(0)
 		if ptr:
 			epglist.append(ptr)
-		ptr=info.getEvent(1)
+		ptr = info.getEvent(1)
 		if ptr:
 			epglist.append(ptr)
 		if epglist:
@@ -516,13 +516,13 @@ class EasyInfo(Screen):
 def EINchangeBouquetCB(direction, epg):
 	global EINposition
 	IBbouquets = InfoBar_instance.servicelist.getBouquetList()
-	if EINposition>0 and direction<0:
+	if EINposition > 0 and direction < 0:
 		EINposition = EINposition - 1
-	elif EINposition==0 and direction<0:
+	elif EINposition == 0 and direction < 0:
 		EINposition = len(IBbouquets) - 1
-	elif EINposition<(len(IBbouquets)-1) and direction>0:
+	elif EINposition < (len(IBbouquets) - 1) and direction > 0:
 		EINposition = EINposition + 1
-	elif EINposition==(len(IBbouquets)-1) and direction>0:
+	elif EINposition == (len(IBbouquets) - 1) and direction > 0:
 		EINposition = 0
 	IBservices = InfoBar_instance.getBouquetServices(IBbouquets[EINposition][1])
 	if IBservices:
@@ -550,7 +550,7 @@ def EINcallbackFunc(answer):
 	if not InfoBar_instance:
 		return
 	if answer == "singleepg":
-		ref=InfoBar_instance.servicelist.getCurrentSelection()
+		ref = InfoBar_instance.servicelist.getCurrentSelection()
 		if ref:
 			InfoBar_instance.servicelist.savedService = ref
 			EINsession.openWithCallback(InfoBar_instance.servicelist.SingleServiceEPGClosed, EPGSelection, ref, serviceChangeCB=InfoBar_instance.servicelist.changeServiceCB)
@@ -595,10 +595,10 @@ def EINcallbackFunc(answer):
 		service = EINsession.nav.getCurrentService()
 		ref = EINsession.nav.getCurrentlyPlayingServiceReference()
 		info = service.info()
-		ptr=info.getEvent(0)
+		ptr = info.getEvent(0)
 		if ptr:
 			epglist.append(ptr)
-		ptr=info.getEvent(1)
+		ptr = info.getEvent(1)
 		if ptr:
 			epglist.append(ptr)
 		if epglist:
@@ -623,7 +623,7 @@ def EINcallbackFunc(answer):
 			from Plugins.Extensions.EPGSearch.EPGSearch import EPGSearch
 			service = EINsession.nav.getCurrentService()
 			info = service.info()
-			epg_event=info.getEvent(0)
+			epg_event = info.getEvent(0)
 			if epg_event:
 				epg_name = epg_event and epg_event.getEventName() or ''
 				EINsession.open(EPGSearch, epg_name, False)
@@ -636,7 +636,7 @@ def EINcallbackFunc(answer):
 			from Plugins.Extensions.IMDb.plugin import IMDB
 			service = EINsession.nav.getCurrentService()
 			info = service.info()
-			epg_event=info.getEvent(0)
+			epg_event = info.getEvent(0)
 			if epg_event:
 				IeventName = epg_event.getEventName()
 				EINsession.open(IMDB, IeventName)
@@ -686,7 +686,7 @@ class EasyEvent(Screen, EventViewBase):
 		self["key_yellow"].setText(_(getPluginByName(config.plugins.EasyInfo.bEvInYellow.value)))
 		self["key_blue"].setText(_(getPluginByName(config.plugins.EasyInfo.bEvInBlue.value)))
 		self["key_red"].setText(_("Similar"))
-		self["epgactions"] = ActionMap(["EventViewEPGActions", "EPGSelectActions",  "EventViewActions"],
+		self["epgactions"] = ActionMap(["EventViewEPGActions", "EPGSelectActions", "EventViewActions"],
 			{
 				"openSingleServiceEPG": self.singleEPGCB,
 				"openMultiServiceEPG": self.multiEPGCB,
@@ -729,7 +729,7 @@ class EasyEvent(Screen, EventViewBase):
 		self.setTitle(event.getEventName())
 		self["epg_description"].setText(text)
 		self["datetime"].setText(event.getBeginTimeString())
-		self["duration"].setText(_("%d min")%(event.getDuration()/60))
+		self["duration"].setText(_("%d min") % (event.getDuration() / 60))
 		self["key_red"].setText(_("Similar"))
 		serviceref = self.currentService
 		eventid = self.event.getEventId()
@@ -775,42 +775,42 @@ class EvNewList(EPGList):
 		if Spixmap is not None:
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 5, 4, 70, 42, Spixmap))
 		else:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, 77, 50, 1, RT_HALIGN_CENTER|RT_VALIGN_CENTER|RT_WRAP, service_name))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, 77, 50, 1, RT_HALIGN_CENTER | RT_VALIGN_CENTER | RT_WRAP, service_name))
 		if rec:
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 80, 16, 21, 21, clock_pic))
 		if beginTime is not None and len(EventName) > 60:
 			if nowTime < beginTime:
 				begin = localtime(beginTime)
-				end = localtime(beginTime+duration)
+				end = localtime(beginTime + duration)
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_TEXT, 100, 4, 10, 20, 1, RT_HALIGN_RIGHT, '>'),
-					(eListboxPythonMultiContent.TYPE_TEXT, 110, 4, 70, 44, 1, RT_HALIGN_LEFT, "%02d.%02d\n%02d.%02d"%(begin[3], begin[4], end[3], end[4])),
-					(eListboxPythonMultiContent.TYPE_TEXT, 180, 1, self.breite, 48, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, EventName)
+					(eListboxPythonMultiContent.TYPE_TEXT, 110, 4, 70, 44, 1, RT_HALIGN_LEFT, "%02d.%02d\n%02d.%02d" % (begin[3], begin[4], end[3], end[4])),
+					(eListboxPythonMultiContent.TYPE_TEXT, 180, 1, self.breite, 48, 0, RT_HALIGN_LEFT | RT_VALIGN_TOP | RT_WRAP, EventName)
 				))
 			else:
-				percent = (nowTime - beginTime)*100/duration
-				restzeit = ((beginTime+duration)-nowTime)
+				percent = (nowTime - beginTime) * 100 / duration
+				restzeit = ((beginTime + duration) - nowTime)
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_PROGRESS, 110, 11, 40, 8, percent),
-					(eListboxPythonMultiContent.TYPE_TEXT, 110, 25, 60, 22, 1, RT_HALIGN_LEFT, "+%d:%02d" % (restzeit/3600, (restzeit/60)-((restzeit /3600)*60))),
-					(eListboxPythonMultiContent.TYPE_TEXT, 180, 1, self.breite, 48, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, EventName)
+					(eListboxPythonMultiContent.TYPE_TEXT, 110, 25, 60, 22, 1, RT_HALIGN_LEFT, "+%d:%02d" % (restzeit / 3600, (restzeit / 60) - ((restzeit / 3600) * 60))),
+					(eListboxPythonMultiContent.TYPE_TEXT, 180, 1, self.breite, 48, 0, RT_HALIGN_LEFT | RT_VALIGN_TOP | RT_WRAP, EventName)
 				))
 		elif beginTime is not None:
 			if nowTime < beginTime:
 				begin = localtime(beginTime)
-				end = localtime(beginTime+duration)
+				end = localtime(beginTime + duration)
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_TEXT, 100, 4, 10, 20, 1, RT_HALIGN_RIGHT, '>'),
-					(eListboxPythonMultiContent.TYPE_TEXT, 110, 4, 70, 44, 1, RT_HALIGN_LEFT, "%02d.%02d\n%02d.%02d"%(begin[3], begin[4], end[3], end[4])),
-					(eListboxPythonMultiContent.TYPE_TEXT, 180, 1, self.breite, 48, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, EventName)
+					(eListboxPythonMultiContent.TYPE_TEXT, 110, 4, 70, 44, 1, RT_HALIGN_LEFT, "%02d.%02d\n%02d.%02d" % (begin[3], begin[4], end[3], end[4])),
+					(eListboxPythonMultiContent.TYPE_TEXT, 180, 1, self.breite, 48, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, EventName)
 				))
 			else:
-				percent = (nowTime - beginTime)*100/duration
-				restzeit = ((beginTime+duration)-nowTime)
+				percent = (nowTime - beginTime) * 100 / duration
+				restzeit = ((beginTime + duration) - nowTime)
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_PROGRESS, 110, 11, 40, 8, percent),
-					(eListboxPythonMultiContent.TYPE_TEXT, 110, 25, 60, 22, 1, RT_HALIGN_LEFT, "+%d:%02d" % (restzeit/3600, (restzeit/60)-((restzeit /3600)*60))),
-					(eListboxPythonMultiContent.TYPE_TEXT, 180, 1, self.breite, 48, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, EventName)
+					(eListboxPythonMultiContent.TYPE_TEXT, 110, 25, 60, 22, 1, RT_HALIGN_LEFT, "+%d:%02d" % (restzeit / 3600, (restzeit / 60) - ((restzeit / 3600) * 60))),
+					(eListboxPythonMultiContent.TYPE_TEXT, 180, 1, self.breite, 48, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, EventName)
 				))
 		return res
 
@@ -981,7 +981,7 @@ class EasyPG(EPGSelection, Screen):
 			self["list"].fillMultiEPG(self.services, self.ask_time)
 
 	def newOKFunc(self):
-		if  config.plugins.EasyInfo.epgOKFunc.value == "exitzap":
+		if config.plugins.EasyInfo.epgOKFunc.value == "exitzap":
 			self.zapTo()
 			self.close(True)
 		elif config.plugins.EasyInfo.epgOKFunc.value == "zap":
@@ -1077,36 +1077,36 @@ class ESListNext(EPGList):
 		if beginTime is not None and len(EventName) > 60:
 			if nowTime < beginTime:
 				begin = localtime(beginTime)
-				end = localtime(beginTime+duration)
+				end = localtime(beginTime + duration)
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_TEXT, 0, 4, 10, 20, 1, RT_HALIGN_RIGHT, '>'),
-					(eListboxPythonMultiContent.TYPE_TEXT, 10, 4, 70, 44, 1, RT_HALIGN_LEFT, "%02d.%02d\n%02d.%02d"%(begin[3], begin[4], end[3], end[4])),
-					(eListboxPythonMultiContent.TYPE_TEXT, 80, 1, self.breite, 48, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, EventName)
+					(eListboxPythonMultiContent.TYPE_TEXT, 10, 4, 70, 44, 1, RT_HALIGN_LEFT, "%02d.%02d\n%02d.%02d" % (begin[3], begin[4], end[3], end[4])),
+					(eListboxPythonMultiContent.TYPE_TEXT, 80, 1, self.breite, 48, 0, RT_HALIGN_LEFT | RT_VALIGN_TOP | RT_WRAP, EventName)
 				))
 			else:
-				percent = (nowTime - beginTime)*100/duration
-				restzeit = ((beginTime+duration)-nowTime)
+				percent = (nowTime - beginTime) * 100 / duration
+				restzeit = ((beginTime + duration) - nowTime)
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_PROGRESS, 10, 11, 40, 8, percent),
-					(eListboxPythonMultiContent.TYPE_TEXT, 10, 25, 60, 22, 1, RT_HALIGN_LEFT, "+%d:%02d" % (restzeit/3600, (restzeit/60)-((restzeit /3600)*60))),
-					(eListboxPythonMultiContent.TYPE_TEXT, 80, 1, self.breite, 48, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, EventName)
+					(eListboxPythonMultiContent.TYPE_TEXT, 10, 25, 60, 22, 1, RT_HALIGN_LEFT, "+%d:%02d" % (restzeit / 3600, (restzeit / 60) - ((restzeit / 3600) * 60))),
+					(eListboxPythonMultiContent.TYPE_TEXT, 80, 1, self.breite, 48, 0, RT_HALIGN_LEFT | RT_VALIGN_TOP | RT_WRAP, EventName)
 				))
 		elif beginTime is not None:
 			if nowTime < beginTime:
 				begin = localtime(beginTime)
-				end = localtime(beginTime+duration)
+				end = localtime(beginTime + duration)
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_TEXT, 0, 4, 10, 20, 1, RT_HALIGN_RIGHT, '>'),
-					(eListboxPythonMultiContent.TYPE_TEXT, 10, 4, 70, 44, 1, RT_HALIGN_LEFT, "%02d.%02d\n%02d.%02d"%(begin[3], begin[4], end[3], end[4])),
-					(eListboxPythonMultiContent.TYPE_TEXT, 80, 1, self.breite, 48, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, EventName)
+					(eListboxPythonMultiContent.TYPE_TEXT, 10, 4, 70, 44, 1, RT_HALIGN_LEFT, "%02d.%02d\n%02d.%02d" % (begin[3], begin[4], end[3], end[4])),
+					(eListboxPythonMultiContent.TYPE_TEXT, 80, 1, self.breite, 48, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, EventName)
 				))
 			else:
-				percent = (nowTime - beginTime)*100/duration
-				restzeit = ((beginTime+duration)-nowTime)
+				percent = (nowTime - beginTime) * 100 / duration
+				restzeit = ((beginTime + duration) - nowTime)
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_PROGRESS, 10, 11, 40, 8, percent),
-					(eListboxPythonMultiContent.TYPE_TEXT, 10, 25, 60, 22, 1, RT_HALIGN_LEFT, "+%d:%02d" % (restzeit/3600, (restzeit/60)-((restzeit /3600)*60))),
-					(eListboxPythonMultiContent.TYPE_TEXT, 80, 1, self.breite, 48, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, EventName)
+					(eListboxPythonMultiContent.TYPE_TEXT, 10, 25, 60, 22, 1, RT_HALIGN_LEFT, "+%d:%02d" % (restzeit / 3600, (restzeit / 60) - ((restzeit / 3600) * 60))),
+					(eListboxPythonMultiContent.TYPE_TEXT, 80, 1, self.breite, 48, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, EventName)
 				))
 		return res
 

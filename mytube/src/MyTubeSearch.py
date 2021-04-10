@@ -66,7 +66,7 @@ class ConfigTextWithGoogleSuggestions(ConfigText):
 	def prepareSuggestionsThread(self):
 		self.suggestions.hl = "en"
 		if config.plugins.mytube.search.lr.value is not None:
-			self.suggestions.hl=config.plugins.mytube.search.lr.value
+			self.suggestions.hl = config.plugins.mytube.search.lr.value
 
 	def suggestionsThreadStarted(self):
 		if self.suggestionsThreadRunning:
@@ -209,13 +209,13 @@ class MyTubeSuggestionsListScreen(Screen):
 						name = None
 						numresults = None
 						if suggesttype[count] == u'NAVIGATION':
-							count +=1
+							count += 1
 							continue
 						name = str(suggest)
 						numresults = suggestrelevance[count]
 						if name and numresults:
 							self.suggestlist.append((name, numresults))
-						count +=1
+						count += 1
 				"""for suggestion in suggestions_tree.findall("CompleteSuggestion"):
 					name = None
 					numresults = None
@@ -508,7 +508,7 @@ class MyTubeTasksScreen(Screen):
 	def rebuildTaskList(self):
 		self.tasklist = []
 		for job in job_manager.getPendingJobs():
-			self.tasklist.append((job, job.name, job.getStatustext(), int(100*job.progress/float(job.end)), str(100*job.progress/float(job.end)) + "%"))
+			self.tasklist.append((job, job.name, job.getStatustext(), int(100 * job.progress / float(job.end)), str(100 * job.progress / float(job.end)) + "%"))
 		self['tasklist'].setList(self.tasklist)
 		self['tasklist'].updateList(self.tasklist)
 		self.Timer.startLongTimer(2)

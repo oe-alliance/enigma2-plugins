@@ -69,13 +69,13 @@ class eSame(Screen):
 			if posX >= self.stonesX:
 				posX = 0
 
-			absX = stone_space + (posX*(stone_space + stone_width))
-			absY = stone_space + (posY*(stone_space + stone_height))
-			self.focuslist.append((absX+5, absY+5))
-			skincontent += "<widget name=\"stone" + str(x) + "\" position=\"" + str(absX+5)+ "," + str(absY+5) + "\" size=\"" + str(stone_width) + "," + str(stone_height) + "\" zPosition=\"2\" transparent=\"1\" alphatest=\"on\" />"
+			absX = stone_space + (posX * (stone_space + stone_width))
+			absY = stone_space + (posY * (stone_space + stone_height))
+			self.focuslist.append((absX + 5, absY + 5))
+			skincontent += "<widget name=\"stone" + str(x) + "\" position=\"" + str(absX + 5) + "," + str(absY + 5) + "\" size=\"" + str(stone_width) + "," + str(stone_height) + "\" zPosition=\"2\" transparent=\"1\" alphatest=\"on\" />"
 
 		# solve window size...
-		size_w = 5 + stone_width  * self.stonesX + stone_space * (self.stonesX - 1) + 5
+		size_w = 5 + stone_width * self.stonesX + stone_space * (self.stonesX - 1) + 5
 		size_h = 5 + stone_height * self.stonesY + stone_space * (self.stonesY - 1) + 85
 
 		# get framebuffer resolution...
@@ -88,16 +88,16 @@ class eSame(Screen):
 		y0 = (h - size_h) / 2
 
 		# solve skin...
-		self.skin = "<screen position=\""+str(x0)+","+str(y0)+"\" size=\"" + str(size_w) + "," + str(size_h) + "\" title=\"eSame  v0.1\" >" +\
-		"<widget name=\"frame\" position=\""+str(5+stone_space)+","+str(5+stone_space)+"\" size=\""+str(stone_width)+","+str(stone_height)+"\" pixmap=\""+path+"focus.png\" zPosition=\"1\" alphatest=\"on\" />" +\
-		"<widget name=\"lbColors\" position=\"5,"+str(size_h-85)+"\" size=\"170,40\" valign=\"center\" font=\"Regular;17\" />" +\
-		"<widget name=\"lbBoard\" position=\"175,"+str(size_h-85)+"\" size=\"140,40\" valign=\"center\" font=\"Regular;17\" />" +\
-		"<widget name=\"lbMarked\" position=\"310,"+str(size_h-85)+"\" size=\"100,40\" valign=\"center\" font=\"Regular;17\" />" +\
-		"<widget name=\"lbScore\" position=\"410,"+str(size_h-85)+"\" size=\"110,40\" valign=\"center\" font=\"Regular;17\" />" +\
-		"<ePixmap name=\"green\" position=\"5,"+str(size_h-45)+"\" zPosition=\"3\" size=\"140,40\" pixmap=\"skin_default/buttons/green.png\" transparent=\"1\" alphatest=\"on\" /> \n" +\
-		"<ePixmap name=\"yellow\" position=\""+str(size_w-145)+","+str(size_h-45)+"\" zPosition=\"3\" size=\"140,40\" pixmap=\"skin_default/buttons/yellow.png\" transparent=\"1\" alphatest=\"on\" /> \n" +\
-		"<widget name=\"key_green\" position=\"5,"+str(size_h-45)+"\" zPosition=\"4\" size=\"140,40\" valign=\"center\" halign=\"center\" font=\"Regular;18\" transparent=\"1\" foregroundColor=\"white\" shadowColor=\"black\" shadowOffset=\"-1,-1\" /> \n" +\
-		"<widget name=\"key_yellow\" position=\""+str(size_w-145)+","+str(size_h-45)+"\" zPosition=\"4\" size=\"140,40\" valign=\"center\" halign=\"center\" font=\"Regular;18\" transparent=\"1\" foregroundColor=\"white\" shadowColor=\"black\" shadowOffset=\"-1,-1\" /> \n" +\
+		self.skin = "<screen position=\"" + str(x0) + "," + str(y0) + "\" size=\"" + str(size_w) + "," + str(size_h) + "\" title=\"eSame  v0.1\" >" +\
+		"<widget name=\"frame\" position=\"" + str(5 + stone_space) + "," + str(5 + stone_space) + "\" size=\"" + str(stone_width) + "," + str(stone_height) + "\" pixmap=\"" + path + "focus.png\" zPosition=\"1\" alphatest=\"on\" />" +\
+		"<widget name=\"lbColors\" position=\"5," + str(size_h - 85) + "\" size=\"170,40\" valign=\"center\" font=\"Regular;17\" />" +\
+		"<widget name=\"lbBoard\" position=\"175," + str(size_h - 85) + "\" size=\"140,40\" valign=\"center\" font=\"Regular;17\" />" +\
+		"<widget name=\"lbMarked\" position=\"310," + str(size_h - 85) + "\" size=\"100,40\" valign=\"center\" font=\"Regular;17\" />" +\
+		"<widget name=\"lbScore\" position=\"410," + str(size_h - 85) + "\" size=\"110,40\" valign=\"center\" font=\"Regular;17\" />" +\
+		"<ePixmap name=\"green\" position=\"5," + str(size_h - 45) + "\" zPosition=\"3\" size=\"140,40\" pixmap=\"skin_default/buttons/green.png\" transparent=\"1\" alphatest=\"on\" /> \n" +\
+		"<ePixmap name=\"yellow\" position=\"" + str(size_w - 145) + "," + str(size_h - 45) + "\" zPosition=\"3\" size=\"140,40\" pixmap=\"skin_default/buttons/yellow.png\" transparent=\"1\" alphatest=\"on\" /> \n" +\
+		"<widget name=\"key_green\" position=\"5," + str(size_h - 45) + "\" zPosition=\"4\" size=\"140,40\" valign=\"center\" halign=\"center\" font=\"Regular;18\" transparent=\"1\" foregroundColor=\"white\" shadowColor=\"black\" shadowOffset=\"-1,-1\" /> \n" +\
+		"<widget name=\"key_yellow\" position=\"" + str(size_w - 145) + "," + str(size_h - 45) + "\" zPosition=\"4\" size=\"140,40\" valign=\"center\" halign=\"center\" font=\"Regular;18\" transparent=\"1\" foregroundColor=\"white\" shadowColor=\"black\" shadowOffset=\"-1,-1\" /> \n" +\
 		skincontent + "</screen>"
 
 		Screen.__init__(self, session)
@@ -122,7 +122,7 @@ class eSame(Screen):
 		self["key_green"] = Button("new game")
 		self["key_yellow"] = Button("reset game")
 		for x in list(range(self.maxstones)):
-			self["stone"+str(x)] = Pixmap()
+			self["stone" + str(x)] = Pixmap()
 
 		self.maxentry = self.maxstones - 1
 
@@ -146,7 +146,7 @@ class eSame(Screen):
 		self.moveEvent(self.focus)
 
 	def timerEvent(self):
-		self.Slice=(self.Slice+1) % self.maxslices
+		self.Slice = (self.Slice + 1) % self.maxslices
 		self.paintEvent()
 
 	def paintEvent(self):

@@ -150,7 +150,7 @@ def readFilePatterns():
 			header, patterns = json.load(f)
 			patterns = [tuple(p) for p in patterns]
 		except Exception as e:
-			log.exception(_("Your pattern file is corrupt")  + "\n" + path + "\n\n" + str(e))
+			log.exception(_("Your pattern file is corrupt") + "\n" + path + "\n\n" + str(e))
 		finally:
 			if f is not None:
 				f.close()

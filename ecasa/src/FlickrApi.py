@@ -86,13 +86,13 @@ class PictureGenerator:
 		return Picture(self.__list[idx], owner=self.__owner)
 	def __iter__(self):
 		self.idx = 0
-		self.len = len(self)-1
+		self.len = len(self) - 1
 		return self
 	def next(self):
 		idx = self.idx
 		if idx > self.len:
 			raise StopIteration
-		self.idx = idx+1
+		self.idx = idx + 1
 		return self[idx]
 	__next__ = next
 	def __len__(self):

@@ -13,10 +13,10 @@ class KmlPlace:
 
         lat = float(lats)
         lon = float(lons)
-        if lat<0.0:
-            lat = lat*(-1.0)
-        if lon<0.0:
-            lon=lon*(-1.0)
+        if lat < 0.0:
+            lat = lat * (-1.0)
+        if lon < 0.0:
+            lon = lon * (-1.0)
         self.lat = lat
         self.lon = lon
 
@@ -28,7 +28,7 @@ class KmlPlace:
         return gx, gy, zoomlevel
 
     def __str__(self):
-        return "KmlPlace ('"+self.name+"','"+str(self.lat)+"','"+str(self.lon)+"')"
+        return "KmlPlace ('" + self.name + "','" + str(self.lat) + "','" + str(self.lon) + "')"
 
 class KmlFolder:
     parent = None
@@ -72,6 +72,6 @@ class RootFolder:
         list = []
         for file in listdir(path):
             if file.endswith(self.extension):
-                list.append((file.split('.')[0], path+file))
+                list.append((file.split('.')[0], path + file))
         return list
 

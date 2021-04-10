@@ -221,9 +221,9 @@ if DEBUG:
 			PluginComponent.pluginSort_baseRemovePlugin(self, plugin, *args, **kwargs)
 		except ValueError as ve:
 			revMap = reverse(WHEREMAP)
-			print("-"*40)
-			print("-"*40)
-			print("-"*40)
+			print("-" * 40)
+			print("-" * 40)
+			print("-" * 40)
 			print("[PluginSort] pluginList: %s" % (repr([(x.name, x.path, repr([revMap[y] for y in x.where])) for x in self.pluginList]),))
 			for w in plugin.where:
 				print("[PluginSort] plugins[%s]: %s" % (revMap[w], repr([(x.name, x.path, repr([revMap[y] for y in x.where])) for x in self.plugins[w]])))

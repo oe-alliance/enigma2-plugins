@@ -98,7 +98,7 @@ class UserDialog(Screen, ConfigListScreen):
 		self["key_red"] = StaticText(_("Close"))
 
 	def layoutFinished(self):
-		self.setTitle(_("Enter user and password for host: ")+ self.hostinfo)
+		self.setTitle(_("Enter user and password for host: ") + self.hostinfo)
 
 	# helper function to convert ips from a sring to a list of ints
 	def convertIP(self, ip):

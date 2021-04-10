@@ -41,7 +41,7 @@ def addFavoriteFolders():
 	config.plugins.mc_favorites.folders.append(ConfigSubsection())
 	config.plugins.mc_favorites.folders[i].name = ConfigText("", False)
 	config.plugins.mc_favorites.folders[i].basedir = ConfigText("/", False)
-	config.plugins.mc_favorites.foldercount.value = i+1
+	config.plugins.mc_favorites.foldercount.value = i + 1
 	return i
 for i in list(range(0, config.plugins.mc_favorites.foldercount.value)):
 	addFavoriteFolders()
@@ -75,7 +75,7 @@ def addVlcServerConfig():
 	config.plugins.mc_vlc.servers[i].host = ConfigText("", False)
 	config.plugins.mc_vlc.servers[i].httpport = ConfigInteger(8080, (0, 65535))
 	config.plugins.mc_vlc.servers[i].basedir = ConfigText("/", False)
-	config.plugins.mc_vlc.servercount.value = i+1
+	config.plugins.mc_vlc.servercount.value = i + 1
 	return i
 for i in list(range(0, config.plugins.mc_vlc.servercount.value)):
 	addVlcServerConfig()

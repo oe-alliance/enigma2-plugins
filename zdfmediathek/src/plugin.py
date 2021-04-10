@@ -46,7 +46,7 @@ std_headers = {
 
 MAIN_PAGE = "http://www.zdf.de"
 
-PNG_PATH = resolveFilename(SCOPE_PLUGINS)+"/Extensions/ZDFMediathek/"
+PNG_PATH = resolveFilename(SCOPE_PLUGINS) + "/Extensions/ZDFMediathek/"
 
 TYPE_NOTHING = 0
 TYPE_MOVIE = 1
@@ -180,11 +180,11 @@ def getCounts(counts):
 	if '">' in count:
 		while '">' in count:
 			idx = count.index('">')
-			count = count[idx+2:]
+			count = count[idx + 2:]
 	if '"/>' in count:
 		while '"/>' in count:
 			idx = count.index('"/>')
-			count = count[idx+3:]
+			count = count[idx + 3:]
 	return count
 
 def getCategoryDetails(div):
@@ -221,25 +221,25 @@ def getCategoryDetails(div):
 	counts = reonecat.findall(div)
 	if len(counts):
 		count = getCounts(counts)
-		list.append("%sBeitraege"%count)
+		list.append("%sBeitraege" % count)
 	else:
 		reonecat = re.compile(r'">(.+?)BEITR&Auml;GE ZUM THEMA</a></p>', re.DOTALL)
 		counts = reonecat.findall(div)
 		if len(counts):
 			count = getCounts(counts)
-			list.append("%sBeitraege"%count)
+			list.append("%sBeitraege" % count)
 		else:
 			reonecat = re.compile(r'">(.+?)BEITR&Auml;GE ZUR RUBRIK</a></p>', re.DOTALL)
 			counts = reonecat.findall(div)
 			if len(counts):
 				count = getCounts(counts)
-				list.append("%sBeitraege"%count)
+				list.append("%sBeitraege" % count)
 			else:
 				reonecat = re.compile(r'">(.+?)BEITR&Auml;GE</a></p>', re.DOTALL)
 				counts = reonecat.findall(div)
 				if len(counts):
 					count = getCounts(counts)
-					list.append("%sBeitraege"%count)
+					list.append("%sBeitraege" % count)
 	# Alles gefunden?
 	if len(list) == 5:
 		return list
@@ -259,19 +259,19 @@ def getMovieUrl(url):
 	if ('rtsp' in txt) and ('.mp4' in txt):
 		idx = txt.index('rtsp')
 		idx2 = txt.index('.mp4')
-		return txt[idx:idx2+4]
+		return txt[idx:idx2 + 4]
 	if ('rtsp' in txt) and ('.sdp' in txt):
 		idx = txt.index('rtsp')
 		idx2 = txt.index('.sdp')
-		return txt[idx:idx2+4]
+		return txt[idx:idx2 + 4]
 	elif ('mms' in txt) and ('.wmv' in txt):
 		idx = txt.index('mms')
 		idx2 = txt.index('.wmv')
-		return txt[idx:idx2+4]
+		return txt[idx:idx2 + 4]
 	elif ('http' in txt) and ('.asx?' in txt):
 		idx = txt.index('http')
 		idx2 = txt.index('.asx?')
-		return txt[idx:idx2+4]
+		return txt[idx:idx2 + 4]
 	elif ('mms' in txt) and ('reflector:' in txt):
 		idx = txt.index('mms')
 		idx2 = txt.index('" />')
@@ -341,7 +341,7 @@ def getRightMenu(html):
 		while (start in html) and (end in html):
 			idx = html.index(start)
 			html = html[idx:]
-			reonecat = re.compile(r'%s(.+?)%s'%(start, end), re.DOTALL)
+			reonecat = re.compile(r'%s(.+?)%s' % (start, end), re.DOTALL)
 			blocks = reonecat.findall(html)
 			if blocks:
 				reonecat = re.compile(r'<div class="image">(.+?)</li>', re.DOTALL)
@@ -362,7 +362,7 @@ def getRightMenu(html):
 			if 'href="' in more:
 				while 'href="' in more:
 					idx = more.index('href="')
-					more = more[idx+6:]
+					more = more[idx + 6:]
 			list.append([more, "", "", "", "Weitere Beitraege laden."])
 	if len(list):
 		return [TYPE_MOVIELIST_CATEGORY, list]
@@ -393,7 +393,7 @@ class LeftMenuList(MenuList):
 		elif text.startswith("- Morgen"):
 			text = "- Morgen"
 		if selected:
-			res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(20, 20), png=LoadPixmap(cached=True, path=PNG_PATH+"active.png")))
+			res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(20, 20), png=LoadPixmap(cached=True, path=PNG_PATH + "active.png")))
 		if active:
 			res.append(MultiContentEntryText(pos=(25, 0), size=(175, 20), font=0, text=text, color=0xf47d19))
 		else:
@@ -436,15 +436,15 @@ class LeftMenuList(MenuList):
 		self.select(0)
 
 	def last(self):
-		self.select(len(self.menu)-1)
+		self.select(len(self.menu) - 1)
 
 	def previous(self):
 		if len(self.menu):
-			self.select(self.current-1)
+			self.select(self.current - 1)
 
 	def next(self):
 		if len(self.menu):
-			self.select(self.current+1)
+			self.select(self.current + 1)
 
 ###################################################
 
@@ -526,7 +526,7 @@ class RightMenuList(List):
 			thumbID = thumbUrl.rsplit("/", 1)[1]
 			thumbFile = None
 			if not thumbUrl.startswith("http://"):
-				thumbUrl = "%s%s"%(MAIN_PAGE, thumbUrl)
+				thumbUrl = "%s%s" % (MAIN_PAGE, thumbUrl)
 			try:
 				req = Request(thumbUrl)
 				url_handle = urlopen(req)
@@ -764,7 +764,7 @@ class ZDFMediathek(Screen, HelpableScreen):
 		self.working = True
 		if not page:
 			page = "/ZDFmediathek/hauptnavigation/startseite?flash=off"
-		url = "%s%s"%(MAIN_PAGE, page)
+		url = "%s%s" % (MAIN_PAGE, page)
 		getPage(six.ensure_binary(url)).addCallback(self.gotPage).addErrback(self.error)
 
 	def error(self, err=""):
@@ -781,13 +781,13 @@ class ZDFMediathek(Screen, HelpableScreen):
 					if x[1].endswith(".asx"):
 						if len(x[0]) > 8:
 							x[0] = x[0].split("<li>")[-1]
-						tmplist.append(("%s %s"%(x[0], x[1].split(".")[-1]), x[1]))
+						tmplist.append(("%s %s" % (x[0], x[1].split(".")[-1]), x[1]))
 					if x[1].endswith(".mov"):
 						continue
 				else:
 					if x[1].endswith(".asx"):
 						continue
-					tmplist.append(("%s %s"%(x[0], x[1].split(".")[-1]), x[1]))
+					tmplist.append(("%s %s" % (x[0], x[1].split(".")[-1]), x[1]))
 			if len(tmplist):
 				if len(tmplist) == 1:  #only one entry, play directly.
 					self.play(tmplist[0])
@@ -834,7 +834,7 @@ class ZDFMediathek(Screen, HelpableScreen):
 
 	def searchCallback(self, callback):
 		if callback and (callback != ""):
-			self.getPage("/ZDFmediathek/suche?sucheText=%s&offset=0&flash=off"%(callback.replace(" ", "+")))
+			self.getPage("/ZDFmediathek/suche?sucheText=%s&offset=0&flash=off" % (callback.replace(" ", "+")))
 
 	def play(self, callback):
 		self.working = False

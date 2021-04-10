@@ -28,7 +28,7 @@ from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 from Components.Sources.StaticText import StaticText
 from Components.GUIComponent import GUIComponent
-from enigma import eServiceReference,  RT_WRAP, RT_VALIGN_CENTER, RT_HALIGN_LEFT, gFont, eListbox, eListboxPythonMultiContent, eTPM
+from enigma import eServiceReference, RT_WRAP, RT_VALIGN_CENTER, RT_HALIGN_LEFT, gFont, eListbox, eListboxPythonMultiContent, eTPM
 
 import gdata.youtube
 import gdata.youtube.service
@@ -51,8 +51,8 @@ config.plugins.yttrailer = ConfigSubsection()
 config.plugins.yttrailer.show_in_extensionsmenu = ConfigYesNo(default=False)
 config.plugins.yttrailer.best_resolution = ConfigSelection(default="2", choices=[("0", _("1080p")), ("1", _("720p")), ("2", _("No HD streaming"))])
 config.plugins.yttrailer.ext_descr = ConfigText(default="german", fixed_size=False)
-config.plugins.yttrailer.max_results =  ConfigInteger(5, limits=(1, 10))
-config.plugins.yttrailer.close_player_with_exit =  ConfigYesNo(default=False)
+config.plugins.yttrailer.max_results = ConfigInteger(5, limits=(1, 10))
+config.plugins.yttrailer.close_player_with_exit = ConfigYesNo(default=False)
 
 from Screens.EventView import EventViewBase
 baseEventViewBase__init__ = None
@@ -195,7 +195,7 @@ class YTTrailer:
 			split = entry.media.player.url.split("=")
 			ret = split.pop()
 			if ret.startswith('youtube_gdata'):
-				tmpval=split.pop()
+				tmpval = split.pop()
 				if tmpval.endswith("&feature"):
 					tmp = tmpval.split("&")
 					ret = tmp.pop(0)
@@ -282,7 +282,7 @@ class YTTrailer:
 
 					if fmtid != "" and fmturl != "" and fmtid in VIDEO_FMT_PRIORITY_MAP:
 						video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
-						fmt_infomap[int(fmtid)] = "%s" %(unquote_plus(fmturl))
+						fmt_infomap[int(fmtid)] = "%s" % (unquote_plus(fmturl))
 					fmturl = fmtid = ""
 
 				except:
@@ -304,7 +304,7 @@ class YTTrailer:
 					if result[80:88] == rnd:
 						print("[YTTrailer] found best available video format:", video_fmt_map[sorted(six.iterkeys(video_fmt_map))[0]]['fmtid'])
 						best_video = video_fmt_map[sorted(six.iterkeys(video_fmt_map))[0]]
-						video_url = "%s" %(best_video['fmturl'].split(';')[0])
+						video_url = "%s" % (best_video['fmturl'].split(';')[0])
 						print("[YTTrailer] found best available video url:", video_url)
 
 		return video_url
@@ -361,7 +361,7 @@ class TrailerList(GUIComponent, object):
 	def buildList(self, entry):
 		width = self.l.getItemSize().width()
 		res = [None]
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, 24, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, entry.media.title.text))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, 24, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, entry.media.title.text))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 28, width, 40, 1, RT_WRAP, entry.media.description.text))
 		return res
 

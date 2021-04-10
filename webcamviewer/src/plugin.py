@@ -136,7 +136,7 @@ def Plugins(path, **kwargs):
 class ViewerSelectScreen(Screen):
 	skin = ""
 	def __init__(self, session, args=0):
-		skin =  """<screen position="93,70" size="550,450">
+		skin = """<screen position="93,70" size="550,450">
 		<widget name="list" position="0,0" size="550,450"  />
 		</screen>"""
 		self.skin = skin
@@ -197,10 +197,10 @@ class Slideshow:
 				self.wbviewer.do()
 			self.currentslideshowitem = currentslideshowitem
 		elif int(config.plugins.pictureviewer.slideshowmode.value) is SLIDESHOWMODE_REPEAT:
-			print("["+myname+"] restarting slideshow")
+			print("[" + myname + "] restarting slideshow")
 			self.start()
 		else:
-			print("["+myname+"] slideshow finished")
+			print("[" + myname + "] slideshow finished")
 			self.wbviewer.exit()
 			self.cb()
 
@@ -215,7 +215,7 @@ class PictureViewer(Screen):
 	loadedslideshowlistlistname = False
 
 	def __init__(self, session, args=0):
-		skin =  """<screen position="93,70" size="550,450" title="%s">
+		skin = """<screen position="93,70" size="550,450" title="%s">
 		<widget name="menu" position="1,1" size="275,400"  scrollbarMode="showOnDemand" />
 		<widget name="pixmap" position="275,1" size="275,200" backgroundColor="red" />
 		<widget name="slist" position="275,200" size="275,200"  scrollbarMode="showOnDemand" />
@@ -234,7 +234,7 @@ class PictureViewer(Screen):
 		self["pixmap"] = self.preview
 
 		self.slideshowfiles = []
-		self.slideshowlist =MenuList(self.slideshowfiles)
+		self.slideshowlist = MenuList(self.slideshowfiles)
 		self["slist"] = self.slideshowlist
 
 		self["key_red"] = Label("")
@@ -285,9 +285,9 @@ class PictureViewer(Screen):
 						list
 				)
 			except IOError as e:
-				print("["+myname+"] IOError:", e)
+				print("[" + myname + "] IOError:", e)
 			except OSError as e:
-				print("["+myname+"] OSError:", e)
+				print("[" + myname + "] OSError:", e)
 
 	def KeyRed(self):
 		if self.currList == "filelist":
@@ -322,31 +322,31 @@ class PictureViewer(Screen):
 					   if x.startswith("#"):
 						   pass
 					   elif not os.path.exists(file):
-						   print("["+myname+"] loaded file from filelist isnt avaible! ignoreing ->", file)
+						   print("[" + myname + "] loaded file from filelist isnt avaible! ignoreing ->", file)
 					   else:
 						   list.append((_(file.split("/")[-1]), file))
 				   self.slideshowfiles = list
 				   self["slist"].l.setList(self.slideshowfiles)
 				   self.loadedslideshowlistlistname = filename.replace(config.plugins.pictureviewer.slideshowext.value, "")
 			   except IOError as e:
-				   print("["+myname+"] error:", e)
+				   print("[" + myname + "] error:", e)
 
 	def fileToSaveFilelistEntered(self, filename):
 		if filename is not None:
-			print("["+myname+"] saving list to ", config.plugins.pictureviewer.slideshowdir.value+filename + config.plugins.pictureviewer.slideshowext.value)
+			print("[" + myname + "] saving list to ", config.plugins.pictureviewer.slideshowdir.value + filename + config.plugins.pictureviewer.slideshowext.value)
 			try:
 				if not os.path.exists(config.plugins.pictureviewer.slideshowdir.value):
 					print("+" * 10, os.path.basename(filename))
 					os.mkdir(config.plugins.pictureviewer.slideshowdir.value)
-				fp = open(config.plugins.pictureviewer.slideshowdir.value + filename+config.plugins.pictureviewer.slideshowext.value, "w")
-				fp.write("# this is a slideshow file for "+myname+" made by V"+myversion+"\n")
+				fp = open(config.plugins.pictureviewer.slideshowdir.value + filename + config.plugins.pictureviewer.slideshowext.value, "w")
+				fp.write("# this is a slideshow file for " + myname + " made by V" + myversion + "\n")
 				fp.write("# you can make your own... each line with full path of the imagefile\n")
 				fp.write("# by importing this file,we will ignoring a file if is doesnt exist\n")
 				for x in self.slideshowfiles:
 					fp.write(x[1] + "\n")
 				fp.close()
 			except IOError as e:
-				print("["+myname+"] error:", e)
+				print("[" + myname + "] error:", e)
 
 	def KeyYellow(self):
 		if self.currList == "filelist":
@@ -392,11 +392,11 @@ class PictureViewer(Screen):
 				if selection[1] == True: # isDir
 					pass
 				else:
-					print("["+myname+"] file selected ", selection[0])
+					print("[" + myname + "] file selected ", selection[0])
 					if os.path.isfile(selection[0]):
 						self.session.open(PictureScreen, selection[0].split("/")[-1], selection[0])
 					else:
-						print("["+myname+"] file not found ", selection[0])
+						print("[" + myname + "] file not found ", selection[0])
 		else:
 			self.updateInfoPanel()
 
@@ -433,7 +433,7 @@ class PictureViewer(Screen):
 			selectedfile = self["menu"].getSelection()[0]
 		else:
 			selectedfile = self["slist"].l.getCurrentSelection()[1]
-		sc=AVSwitch().getFramebufferScale()
+		sc = AVSwitch().getFramebufferScale()
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.updateInfoPanelCB)
 		self.picload.setPara((self["pixmap"].instance.size().width(), self["pixmap"].instance.size().height(), sc[0], sc[1], False, 1, "#FF000000"))
@@ -462,8 +462,8 @@ class WebcamViewer(Screen, InfoBarNotifications):
 		screen_y = 576
 		size_x = 350
 		size_y = 250
-		pos_x = (screen_x/2)-(size_x/2)
-		pos_y = (screen_y/2)-(size_y/2)
+		pos_x = (screen_x / 2) - (size_x / 2)
+		pos_y = (screen_y / 2) - (size_y / 2)
 		skin = """
 		<screen position="%i,%i" size="%i,%i" title="%s">
 			<widget name="menu" position="1,1" size="%i,%i"  scrollbarMode="showOnDemand"/>
@@ -503,8 +503,8 @@ class WebcamViewer(Screen, InfoBarNotifications):
 	def getMenuData(self):
 		xloader = XMLloader()
 		self.menutitle = xloader.getScreenXMLTitle(self.xmlnode)
-		data =[]
-		if self.menutitle =="Mainmenu":
+		data = []
+		if self.menutitle == "Mainmenu":
 			data.append((_("webcam.travel"), "webcam.travel"))
 		for node in self.xmlnode.childNodes:
 			if node.nodeType != xml.dom.minidom.Element.nodeType or node.tagName != 'menu':
@@ -518,7 +518,7 @@ class WebcamViewer(Screen, InfoBarNotifications):
 				continue
 			nodex = {}
 			nodex['name'] = xloader.get_txt(node, "name", "no name")
-			nodex['url'] =xloader.get_txt(node, "url", "no url")
+			nodex['url'] = xloader.get_txt(node, "url", "no url")
 			data.append((_(nodex['name']), ["cam", nodex['url']]))
 		return data
 ###################
@@ -564,7 +564,7 @@ class PictureList(MenuList):
 
 		if self.showDirectories:
 			for x in directories:
-				name = (directory+x).split('/')[-1]
+				name = (directory + x).split('/')[-1]
 				self.list.append(self.getPictureEntryComponent(name, '/'.join(directory.split('/')[:-1]) + '/' + x + '/', True))
 
 		if self.showFiles:

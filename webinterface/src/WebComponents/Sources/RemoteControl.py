@@ -30,7 +30,7 @@ class RemoteControl(Source):
 		else:
 			self.remotetype = self.TYPE_STANDARD
 
-		print("[RemoteControl.__init__] Configured RCU-Type is '%s'" %(self.remotetype))
+		print("[RemoteControl.__init__] Configured RCU-Type is '%s'" % (self.remotetype))
 
 	def handleCommand(self, cmd):
 		self.cmd = cmd
@@ -82,7 +82,7 @@ class RemoteControl(Source):
 		#Release the key
 		self.eam.keyPressed(remotetype, key, self.FLAG_BREAK)
 
-		print("[RemoteControl.sendEvent] command was was sent (key: %s, flag: %s)" %(key, flag))
-		return (True, _("RC command '%s' has been issued") %str(key))
+		print("[RemoteControl.sendEvent] command was was sent (key: %s, flag: %s)" % (key, flag))
+		return (True, _("RC command '%s' has been issued") % str(key))
 
 	result = property(lambda self: self.res)

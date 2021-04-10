@@ -5,9 +5,9 @@ from os import popen as os_popen, statvfs as os_statvfs, path as os_path
 from shutil import move as sh_move
 
 class PkgConfList(Source):
-	LIST=0
-	SWITCH=1
-	MEM=2
+	LIST = 0
+	SWITCH = 1
+	MEM = 2
 	
 	def __init__(self, session, func=LIST, wap=False):
 		Source.__init__(self)
@@ -44,7 +44,7 @@ class PkgConfList(Source):
 		except OSError:
 			return (False, "-1")
 		freespace = stat.f_bfree / 1000 * stat.f_bsize / 1000
-		return (True, '%d' %freespace)
+		return (True, '%d' % freespace)
 			
 	def getList(self):
 		list = []
@@ -53,7 +53,7 @@ class PkgConfList(Source):
 			file = n[:-1]
 			if file.endswith(".conf") or file.endswith(".off"):
 				print("[PkgConfList] file ", file)
-				text =""
+				text = ""
 				with open("/etc/opkg/" + file) as f:
 					text = f.read()
 					print("[PkgConfList] text ", text)

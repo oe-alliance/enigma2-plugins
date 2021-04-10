@@ -67,7 +67,7 @@ VERSION = "0.6"
 # 0.4 First public version
 # 0.5 Minor code optimization
 # 0.6 Simplify translation code: Setting the os LANGUAGE variable isn't needed anymore
-pluginPrintname = "[ShowClock Ver. %s]" %VERSION
+pluginPrintname = "[ShowClock Ver. %s]" % VERSION
 debug = False # If set True, plugin will print some additional status info to track logic flow
 ###############################################################################
 
@@ -82,7 +82,7 @@ height = getDesktop(0).size().height()
 config.plugins.ShowClock.position_x = ConfigNumber(default=int(width * 0.7))
 config.plugins.ShowClock.position_y = ConfigNumber(default=45)
 if debug:
-	print(pluginPrintname, "Clock X,Y position: %d,%d" %(config.plugins.ShowClock.position_x.value, config.plugins.ShowClock.position_y.value))
+	print(pluginPrintname, "Clock X,Y position: %d,%d" % (config.plugins.ShowClock.position_x.value, config.plugins.ShowClock.position_y.value))
 
 ##############################################################################
 
@@ -242,7 +242,7 @@ class ShowClockPositioner(Screen):
 		self.pos = (config.plugins.ShowClock.position_x.value, config.plugins.ShowClock.position_y.value)
 		self.limit = (width - self.instance.size().width(), height - self.instance.size().height())
 		if debug:
-			print(pluginPrintname, "Clock X,Y limit: %d,%d" %(self.limit[0], self.limit[1]))	
+			print(pluginPrintname, "Clock X,Y limit: %d,%d" % (self.limit[0], self.limit[1]))	
 		self.instance.move(ePoint(min(self.pos[0], self.limit[0]), min(self.pos[1], self.limit[1]))) # ensure clock visabilty even if resolution has changed
 	
 	def moveRelative(self, x=0, y=0):
@@ -390,7 +390,7 @@ def Plugins(**kwargs):
 		]
 	if config.plugins.ShowClock.menu.value == "plugin":
 		list.append(PluginDescriptor(
-			name=config.plugins.ShowClock.name.value + " "  + _("Ver.") + " " + VERSION, 
+			name=config.plugins.ShowClock.name.value + " " + _("Ver.") + " " + VERSION, 
 			description=config.plugins.ShowClock.description.value, 
 			where=PluginDescriptor.WHERE_PLUGINMENU, 
 			icon="plugin.png", 
@@ -398,7 +398,7 @@ def Plugins(**kwargs):
 		)
 	else:
 		list.append(PluginDescriptor(
-			name=config.plugins.ShowClock.name.value + " "  + _("Ver.") + " " + VERSION, 
+			name=config.plugins.ShowClock.name.value + " " + _("Ver.") + " " + VERSION, 
 			description=config.plugins.ShowClock.description.value, 
 			where=PluginDescriptor.WHERE_EXTENSIONSMENU, 
 			fnc=setup)

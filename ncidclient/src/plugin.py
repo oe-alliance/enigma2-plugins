@@ -375,7 +375,7 @@ class NcidClientPhonebook:
 					fNew.close()
 					# os.remove(phonebookFilename)
 					eBackgroundFileEraser.getInstance().erase(phonebookFilename)
-					os.rename(phonebookFilename + str(os.getpid()), 	phonebookFilename)
+					os.rename(phonebookFilename + str(os.getpid()), phonebookFilename)
 					debug("[NcidClientPhonebook] removed %s from Phonebook.txt" % number)
 					return True
 

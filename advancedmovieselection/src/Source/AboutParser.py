@@ -41,7 +41,7 @@ class VersionInfo():
 
 class AboutParser:
     @classmethod
-    def setLocale(self, lng, path=resolveFilename(SCOPE_PLUGINS)+"Extensions/AdvancedMovieSelection/"):
+    def setLocale(self, lng, path=resolveFilename(SCOPE_PLUGINS) + "Extensions/AdvancedMovieSelection/"):
         global CHANGES
         print("[AdvancedMovieSelection] Set changes locale to", lng)
         CHANGES = {}

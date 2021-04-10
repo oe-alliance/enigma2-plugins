@@ -26,7 +26,7 @@ class EPG(Source):
 		self.isBouquet = False
 
 	def handleCommand(self, cmd):
-		print("[WebComponents.EPG] setting command to '%s' " %cmd)
+		print("[WebComponents.EPG] setting command to '%s' " % cmd)
 		self.command = cmd
 
 	def do_func(self):
@@ -72,7 +72,7 @@ class EPG(Source):
 		return self.getEPGNowNext(ref, 1, True)
 
 	def getBouquetEPGMulti(self, ref):
-		return self.getEPGofBouquet(ref,  True)
+		return self.getEPGofBouquet(ref, True)
 
 	def getEPGNowNext(self, ref, type, service=False):
 		print("[WebComponents.EPG] getting EPG NOW/NEXT", ref)

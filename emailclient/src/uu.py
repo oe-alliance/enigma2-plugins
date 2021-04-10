@@ -76,7 +76,7 @@ def encode(in_file, out_file, name=None, mode=None):
     #
     # Write the data
     #
-    out_file.write('begin %o %s\n' % ((mode&0o777), name))
+    out_file.write('begin %o %s\n' % ((mode & 0o777), name))
     data = in_file.read(45)
     while len(data) > 0:
         out_file.write(binascii.b2a_uu(data))
@@ -138,7 +138,7 @@ def decode(in_file, out_file=None, mode=None, quiet=0):
             data = binascii.a2b_uu(s)
         except binascii.Error as v:
             # Workaround for broken uuencoders by /Fredrik Lundh
-            nbytes = (((ord(s[0])-32) & 63) * 4 + 5) // 3
+            nbytes = (((ord(s[0]) - 32) & 63) * 4 + 5) // 3
             data = binascii.a2b_uu(s[:nbytes])
             if not quiet:
                 sys.stderr.write("Warning: %s\n" % v)

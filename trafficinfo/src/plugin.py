@@ -52,14 +52,14 @@ class TrafficInfoMain(Screen):
         self["itemdetails"] = Label("")
         self["actions"] = ActionMap(["ChannelSelectBaseActions", "WizardActions", "DirectionActions", "MenuActions", "NumberActions"], 
             {
-             "ok": 	            self.go,
-             "back":            self.exit,
-             "nextBouquet":     self.selectSectionlist,
-             "prevBouquet":     self.selectItemlist,
-             "down": 	        self.down,
-             "up": 	            self.up,
-             "left":	        self.left,
-             "right":	        self.right,
+             "ok": self.go,
+             "back": self.exit,
+             "nextBouquet": self.selectSectionlist,
+             "prevBouquet": self.selectItemlist,
+             "down": self.down,
+             "up": self.up,
+             "left": self.left,
+             "right": self.right,
              }, -1)
         self.statuslabelcleartimer = eTimer()
         self.statuslabelcleartimer.timeout.get().append(self.clearStatusLabel)
@@ -105,7 +105,7 @@ class TrafficInfoMain(Screen):
     def onSectionSelected(self):
         c = self["sectionlist"].getCurrent()
         if c is not None:
-            self.setTitle("Verkehrsinfo: "+c[1].name)
+            self.setTitle("Verkehrsinfo: " + c[1].name)
             self.getItemsOfSection(c[1])
         
     def onItemSelected(self):
@@ -130,7 +130,7 @@ class TrafficInfoMain(Screen):
     
     def sectionsLoadingFaild(self, raw):
         self.loadinginprogress = False
-        self.setStatusLabel("loading sections failed"+raw)
+        self.setStatusLabel("loading sections failed" + raw)
         
     def sectionsLoaded(self, raw):
         self.loadinginprogress = False
@@ -138,7 +138,7 @@ class TrafficInfoMain(Screen):
             xmldoc = xml.dom.minidom.parseString(raw)
             self.sections = []
             for i in xmldoc.getElementsByTagName("a"):
-                link = "/"+i.getAttribute("href")
+                link = "/" + i.getAttribute("href")
                 name = i.toxml().split(">")[1].split("<")[0]
                 self.sections.append(TrafficInfoSection(name, link))
             self.onSectionsLoaded()
@@ -158,10 +158,10 @@ class TrafficInfoMain(Screen):
         self["sectionlist"].instance.moveSelectionTo(0)
 
     def onItemsLoaded(self):
-        list=[]
+        list = []
         for item in self.trafficitems:
             res = [item]
-            res.append(MultiContentEntryText(pos=(0, 0), size=(75, 20), font=0, flags=RT_HALIGN_LEFT|RT_WRAP, text=item.street))
+            res.append(MultiContentEntryText(pos=(0, 0), size=(75, 20), font=0, flags=RT_HALIGN_LEFT | RT_WRAP, text=item.street))
             res.append(MultiContentEntryText(pos=(75, 0), size=(455, 20), font=1, flags=RT_HALIGN_LEFT, text=item.direction))
             list.append(res)
         self["itemlist"].l.setList(list)
@@ -171,14 +171,14 @@ class TrafficInfoMain(Screen):
     ##########
     def getItemsOfSection(self, section):
         print("loading section", section.name, section.link)
-        self.setStatusLabel("loading messages "+section.name)
+        self.setStatusLabel("loading messages " + section.name)
         self.loadinginprogress = True    
-        getPage(six.ensure_binary("http://wap.verkehrsinfo.de"+section.link)).addCallback(self.trafficitemsLoaded).addErrback(self.trafficitemsLoadingFaild)
+        getPage(six.ensure_binary("http://wap.verkehrsinfo.de" + section.link)).addCallback(self.trafficitemsLoaded).addErrback(self.trafficitemsLoadingFaild)
 
     def trafficitemsLoadingFaild(self, raw):
         self.loadinginprogress = False
         print("loading items faild", raw)
-        self.setStatusLabel("loading messages faild"+raw)
+        self.setStatusLabel("loading messages faild" + raw)
         
     def trafficitemsLoaded(self, raw):
         self.loadinginprogress = False
@@ -186,7 +186,7 @@ class TrafficInfoMain(Screen):
             raw = raw.replace("&amp", "")
             xmldoc = xml.dom.minidom.parseString(raw)
             self.trafficitems = []
-            for item in  xmldoc.getElementsByTagName("p"):
+            for item in xmldoc.getElementsByTagName("p"):
                 self.trafficitems.append(self.parseItem(item))
             self.onItemsLoaded()
         except xml.parsers.expat.ExpatError as e:
@@ -195,12 +195,12 @@ class TrafficInfoMain(Screen):
             self.setStatusLabel("loading messages faild! Parsing Error")
         
     def parseItem(self, item):
-        source=item.toxml()
-        i= item.getElementsByTagName("b")
-        source=source.replace(i[0].toxml(), "")
+        source = item.toxml()
+        i = item.getElementsByTagName("b")
+        source = source.replace(i[0].toxml(), "")
         street = i[0].toxml().replace("<b>", "").replace("</b>", "").replace("\n", "")
         
-        source=source.replace(i[1].toxml(), "")
+        source = source.replace(i[1].toxml(), "")
         direction = i[1].toxml().replace("<b>", "").replace("</b>", "").replace("\n", "")
         details = source.replace("<p>", "").replace("</p>", "").replace("<small>", "").replace("</small>", "").replace("<br/>", "").replace("\n", "")
         if street == "<b/>":
@@ -223,7 +223,7 @@ class TrafficInfoSection:
         self.link = link.encode("utf-8")
 
     def __str__(self):
-        return "name="+self.name+", link="+self.link
+        return "name=" + self.name + ", link=" + self.link
 
 ####################
 class TrafficInfoItem:
@@ -233,7 +233,7 @@ class TrafficInfoItem:
         self.text = text.encode("utf-8")
 
     def __str__(self):
-        return "street="+self.street+", dir="+self.direction+", text="+self.text
+        return "street=" + self.street + ", dir=" + self.direction + ", text=" + self.text
 
 #############################
 def main(session, **kwargs):
