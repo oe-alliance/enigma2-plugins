@@ -1,4 +1,4 @@
-﻿import sys
+import sys
 import struct
 
 # GetFPS function by areq propably

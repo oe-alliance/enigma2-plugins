@@ -1,4 +1,4 @@
-﻿## MediaInfoDLL - All info about media files, for DLL
+## MediaInfoDLL - All info about media files, for DLL
 #  Copyright (C) 2007-2009 Jerome Martinez, Zen@MediaArea.net
 #
 #  This library is free software: you can redistribute it and/or modify it
