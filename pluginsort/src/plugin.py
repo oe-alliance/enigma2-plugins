@@ -512,7 +512,7 @@ def autostart(reason, *args, **kwargs):
 
 					# HACK: re-add autostart entry to internal list inside PluginComponent
 					if hadAutostart:
-						plugin.where = [ PluginDescriptor.WHERE_AUTOSTART ]
+						plugin.where = [PluginDescriptor.WHERE_AUTOSTART]
 						plugins.pluginList.append(plugin)
 
 				# we're keeping the entry, just fix the weight

@@ -47,7 +47,7 @@ def SPChannelContextMenu__init__(self, session, csel):
 		self["menu"].list.insert(0, ChoiceEntryComponent(text=(SHOWINFO, boundFunction(self.SPchannelShowSeriesInfo))))
 
 def channelShowSeriesInfo(self):
-	log.debug( "[SeriesPlugin] channelShowSeriesInfo ")
+	log.debug("[SeriesPlugin] channelShowSeriesInfo ")
 	if config.plugins.seriesplugin.enabled.value:
 		try:
 			from enigma import eServiceCenter

@@ -114,7 +114,7 @@ class MSNWeather:
 	def setIconExtension(self, iconextension):
 		self.iconextension = iconextension
 		
-	def getWeatherData(self, degreetype, locationcode, city, callback, callbackShowIcon, callbackAllIconsDownloaded=None ):
+	def getWeatherData(self, degreetype, locationcode, city, callback, callbackShowIcon, callbackAllIconsDownloaded=None):
 		self.initialize()
 		language = config.osd.language.value.replace("_","-")
 		if language == "en-EN": # hack
@@ -221,7 +221,7 @@ class MSNWeather:
 		
 		if len(IconDownloadList) != 0:
 			ds = defer.DeferredSemaphore(tokens=len(IconDownloadList))
-			downloads = [ds.run(download,item ).addErrback(self.errorIconDownload, item).addCallback(self.finishedIconDownload,item) for item in IconDownloadList]
+			downloads = [ds.run(download,item).addErrback(self.errorIconDownload, item).addCallback(self.finishedIconDownload,item) for item in IconDownloadList]
 			finished = defer.DeferredList(downloads).addErrback(self.error).addCallback(self.finishedAllDownloadFiles)
 		else:
 			self.finishedAllDownloadFiles(None)

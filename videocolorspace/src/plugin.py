@@ -35,7 +35,7 @@ def pluginOpen(session, **kwargs):
 def startSetup(menuid):
     if getImageDistro() in ('openhdf'):
         if menuid != "video_menu":
-            return [ ]
+            return []
     else:
         if menuid != "system":
             return []

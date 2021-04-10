@@ -76,7 +76,7 @@ class BabelzapperConfiguration(Screen, ConfigListScreen):
 		self["buttongreen"] = Label(_("OK"))
 		self["buttonyellow"] = Label(_("Info"))
 		self["buttonblue"] = Label(_("About"))
-		self["setupActions"] = ActionMap([ "ColorActions", "SetupActions" ],
+		self["setupActions"] = ActionMap(["ColorActions", "SetupActions"],
 			{
 			"green": self.save,
 			"red": self.cancel,
@@ -117,7 +117,7 @@ class BabelzapperConfiguration(Screen, ConfigListScreen):
 		self.close(False)
 
 	def readme(self):
-		self.session.open(Console,_("Babelzapper readme.txt"),["cat %s" % (babelzapper_readme) ])
+		self.session.open(Console,_("Babelzapper readme.txt"),["cat %s" % (babelzapper_readme)])
  
 	def about(self):
 		self.session.open(MessageBox, _("Babelzapper Version %s\nby gutemine and garbage") % babelzapper_version, MessageBox.TYPE_INFO)

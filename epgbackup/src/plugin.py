@@ -195,7 +195,7 @@ def Plugins(**kwargs):
 	]
 	
 	if config.plugins.epgbackup.show_setup_in.value == "system":
-		pluginList.append (PluginDescriptor(
+		pluginList.append(PluginDescriptor(
 			name=extPrefix + " " + _("EXTENSIONNAME_SETUP"),
 			description=_("Keep EPG-Data over Crashes"),
 			where=PluginDescriptor.WHERE_MENU,

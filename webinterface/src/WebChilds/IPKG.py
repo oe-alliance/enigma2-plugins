@@ -6,9 +6,9 @@ from twisted.web import server, resource, http
 class IPKGResource(resource.Resource):
 	IPKG_PATH = "/usr/bin/opkg"
 
-	SIMPLECMDS = ( "list", "list_installed", "list_upgradable", "update", "upgrade" )
-	PACKAGECMDS = ( "info", "status", "install", "remove" )
-	FILECMDS = ( "search", )
+	SIMPLECMDS = ("list", "list_installed", "list_upgradable", "update", "upgrade")
+	PACKAGECMDS = ("info", "status", "install", "remove")
+	FILECMDS = ("search", )
 
 	def render(self, request):
 		self.args = request.args

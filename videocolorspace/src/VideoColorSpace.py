@@ -62,12 +62,12 @@ class VideoColorSpace(Screen, ConfigListScreen):
         Screen.__init__(self, session)
 
         self.session = session
-        self.onChangedEntry = [ ]
+        self.onChangedEntry = []
         self.current_mode = getColorSpace()
         config.VideoColorSpace.color_space.value = self.current_mode
         config.VideoColorSpace.color_space.save()
 
-        l = [ ]
+        l = []
         l.append(getConfigListEntry(_("Mode:"), config.VideoColorSpace.color_space))
         ConfigListScreen.__init__(self, l, session=self.session)
 

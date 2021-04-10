@@ -33,7 +33,7 @@ class AutoTimerBaseResource(resource.Resource):
 
 class AutoTimerDoParseResource(AutoTimerBaseResource):
 	def parsecallback(self, ret):
-		rets = self.renderBackground (self.req, ret)
+		rets = self.renderBackground(self.req, ret)
 		self.req.write(rets)
 		self.req.finish()
 	def render(self, req):
@@ -41,13 +41,13 @@ class AutoTimerDoParseResource(AutoTimerBaseResource):
 		# todo timeout / error handling
 		autotimer.parseEPG(callback=self.parsecallback)
 		return server.NOT_DONE_YET
-	def renderBackground(self, req ,ret):
+	def renderBackground(self, req,ret):
 		output = _("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[6]), len(ret[5]))
 		return self.returnResult(req, True, output)
 
 class AutoTimerSimulateResource(AutoTimerBaseResource):
 	def parsecallback(self, timers, skipped):
-		ret = self.renderBackground (self.req, timers)
+		ret = self.renderBackground(self.req, timers)
 		self.req.write(ret)
 		self.req.finish()
 	def render(self, req):
@@ -55,7 +55,7 @@ class AutoTimerSimulateResource(AutoTimerBaseResource):
 		# todo timeout / error handling
 		autotimer.parseEPG(simulateOnly=True, callback=self.parsecallback)
 		return server.NOT_DONE_YET
-	def renderBackground(self, req ,timers):
+	def renderBackground(self, req,timers):
 
 		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimersimulate api_version=\"", str(API_VERSION), "\">\n"]
 		extend = returnlist.extend
@@ -81,7 +81,7 @@ class AutoTimerSimulateResource(AutoTimerBaseResource):
 #TODO
 class AutoTimerTestResource(AutoTimerBaseResource):
 	def parsecallback(self, timers, skipped):
-		ret = self.renderBackground (self.req, timers, skipped)
+		ret = self.renderBackground(self.req, timers, skipped)
 		self.req.write(ret)
 		self.req.finish()
 	def render(self, req):
@@ -89,7 +89,7 @@ class AutoTimerTestResource(AutoTimerBaseResource):
 		# todo timeout / error handling
 		autotimer.parseEPG(simulateOnly=True, callback=self.parsecallback)
 		return server.NOT_DONE_YET
-	def renderBackground(self, req ,timers, skipped):
+	def renderBackground(self, req,timers, skipped):
 
 		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimertest api_version=\"", str(API_VERSION), "\">\n"]
 		extend = returnlist.extend
@@ -162,7 +162,7 @@ class AutoTimerRemoveAutoTimerResource(AutoTimerBaseResource):
 class AutoTimerAddXMLAutoTimerResource(AutoTimerBaseResource):
 	def render_POST(self, req):
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application/xhtml+xml;' )
+		req.setHeader('Content-type', 'application/xhtml+xml;')
 		req.setHeader('charset', 'UTF-8')	
 		autotimer.readXmlTimer(req.args['xml'][0])
 		if config.plugins.autotimer.always_write_config.value:
@@ -172,7 +172,7 @@ class AutoTimerAddXMLAutoTimerResource(AutoTimerBaseResource):
 class AutoTimerUploadXMLConfigurationAutoTimerResource(AutoTimerBaseResource):
 	def render_POST(self, req):
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application/xhtml+xml;' )
+		req.setHeader('Content-type', 'application/xhtml+xml;')
 		req.setHeader('charset', 'UTF-8')	
 		autotimer.readXml(xml_string=req.args['xml'][0])
 		if config.plugins.autotimer.always_write_config.value:
@@ -574,7 +574,7 @@ class AutoTimerSettingsResource(resource.Resource):
 				<e2settingvalue>%s</e2settingvalue>
 				<e2settingtitle>%s</e2settingtitle>
 				<e2settingdescription>%s</e2settingdescription>
-			</e2setting>""" % (key, cfg.value , title , description )
+			</e2setting>""" % (key, cfg.value, title, description)
 
 		resultstr += """<e2setting>
 				<e2settingname>hasVps</e2settingname>
@@ -596,7 +596,7 @@ class AutoTimerSettingsResource(resource.Resource):
 					<e2settingname>autotimer_version</e2settingname>
 					<e2settingvalue>%s</e2settingvalue>
 				</e2setting>
-			</e2settings>""" % (hasVps, hasSeriesPlugin, CURRENT_CONFIG_VERSION, API_VERSION, AUTOTIMER_VERSION )
+			</e2settings>""" % (hasVps, hasSeriesPlugin, CURRENT_CONFIG_VERSION, API_VERSION, AUTOTIMER_VERSION)
 
 		return resultstr
 

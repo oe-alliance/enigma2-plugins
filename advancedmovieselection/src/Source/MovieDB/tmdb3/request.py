@@ -40,7 +40,7 @@ def set_cache(engine=None, *args, **kwargs):
     """Specify caching engine and properties."""
     cache.configure(engine, *args, **kwargs)
 
-class Request( urllib2.Request ):
+class Request(urllib2.Request):
     _api_key = None
     _base_url = "http://api.themoviedb.org/3/"
 

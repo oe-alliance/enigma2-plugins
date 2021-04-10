@@ -20,7 +20,7 @@ check_pdc_interval_unavailable = 3600*24*30*2
 
 class VPS_check_PDC:
 	def __init__(self):
-		self.checked_services = { }
+		self.checked_services = {}
 		self.load_pdc()
 
 	def load_pdc(self):
@@ -34,7 +34,7 @@ class VPS_check_PDC:
 					has_pdc = xml.get("has_pdc")
 					last_check = xml.get("last_check")
 					default_vps = xml.get("default_vps")
-					self.checked_services[serviceref] = { }
+					self.checked_services[serviceref] = {}
 					self.checked_services[serviceref]["last_check"] = int(last_check)
 					self.checked_services[serviceref]["has_pdc"] = int(has_pdc)
 					if default_vps and default_vps != "None":
@@ -92,7 +92,7 @@ class VPS_check_PDC:
 			except:
 				pass
 		else:
-			self.checked_services[service_str] = { }
+			self.checked_services[service_str] = {}
 			self.checked_services[service_str]["has_pdc"] = state
 			self.checked_services[service_str]["last_check"] = time()
 			self.checked_services[service_str]["default_vps"] = default_vps

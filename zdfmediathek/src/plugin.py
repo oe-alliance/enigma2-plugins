@@ -459,8 +459,8 @@ class RightMenuList(List):
 	
 	png_cache = {}
 	
-	def __init__(self, list=[ ], enableWrapAround=False):
-		List.__init__(self, list, enableWrapAround, item_height=50 )
+	def __init__(self, list=[], enableWrapAround=False):
+		List.__init__(self, list, enableWrapAround, item_height=50)
 		self.pixmaps_to_load = []
 		self.picloads = {}
 		self.listCompleted = []
@@ -493,9 +493,9 @@ class RightMenuList(List):
 		elif self.type == TYPE_MOVIELIST_CATEGORY:
 			for entry in self.list:
 				if entry[4] != "Weitere Beitraege laden.":
-					self.listCompleted.append(( entry[0],entry[1],entry[2],entry[3],entry[4],entry[3].rsplit("/",1)[1]))
+					self.listCompleted.append((entry[0],entry[1],entry[2],entry[3],entry[4],entry[3].rsplit("/",1)[1]))
 				else:
-					self.listCompleted.append(( entry[0],entry[1],entry[2],entry[3],entry[4], None))
+					self.listCompleted.append((entry[0],entry[1],entry[2],entry[3],entry[4], None))
 
 	def buildEntry(self, vurl, txt1, title, turl, txt2, thumbid):
 		#print "[ZDF Mediathek - buildEntry ] --> ", txt1, title, txt2, thumbid
@@ -508,7 +508,7 @@ class RightMenuList(List):
 				menupng = RightMenuEntryPixmap(thumbid, self.png_cache)
 		else:
 			menupng = RightMenuEntryPixmap(thumbid, self.png_cache)
-		return(( vurl, txt1, title, turl, txt2, thumbid, menupng ))
+		return((vurl, txt1, title, turl, txt2, thumbid, menupng))
 
 	def getMovieCategoryIndexByThumbID(self, ThumbID):
 		idx = 0
@@ -556,7 +556,7 @@ class RightMenuList(List):
 		print "[ZDF Mediathek] downloadThumbnailError:", thumbID, err.getErrorMessage()
 
 	def downloadThumbnailCallback(self, txt, thumbFile, thumbID):
-		if (os_path.exists( thumbFile) == True):
+		if (os_path.exists(thumbFile) == True):
 			self.pixmaps_to_load.remove(thumbID)
 			sc = AVSwitch().getFramebufferScale()
 			self.picloads[thumbID] = ePicLoad()
@@ -875,7 +875,7 @@ class ZDFMediathek(Screen, HelpableScreen):
 
 	def chechCachedFile(self):
 		try:
-			f = open ("/tmp/mpstream/progress.txt")
+			f = open("/tmp/mpstream/progress.txt")
 			content = f.read()
 			f.close()
 			list = content.split("-")

@@ -17,7 +17,7 @@ class ServiceList(resource.Resource):
 
 class ServiceListReload(resource.Resource):
 	def render(self, request):
-		request.setHeader('Content-type', 'application/xhtml+xml;' )
+		request.setHeader('Content-type', 'application/xhtml+xml;')
 		request.setHeader('charset', 'UTF-8')
 
 		try:
@@ -93,7 +93,7 @@ class ServiceListSave(resource.Resource):
 #			raise http.HTTPError(responsecode.BAD_REQUEST)
 
 	def render(self, request):
-		request.setHeader('Content-type', 'application/xhtml+xml;' )
+		request.setHeader('Content-type', 'application/xhtml+xml;')
 		request.setHeader('charset', 'UTF-8')
 
 		try:

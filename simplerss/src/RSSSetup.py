@@ -15,7 +15,7 @@ class RSSFeedEdit(ConfigListScreen, Screen):
 
 	def __init__(self, session, id):
 		Screen.__init__(self, session)
-		self.skinName = [ "RSSFeedEdit", "Setup" ]
+		self.skinName = ["RSSFeedEdit", "Setup"]
 
 		s = config.plugins.simpleRSS.feed[id]
 		list = [

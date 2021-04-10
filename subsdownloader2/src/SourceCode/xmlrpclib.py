@@ -701,7 +701,7 @@ class Marshaller:
             f = self.dispatch[InstanceType]
         f(self, value, write)
 
-    def dump_nil (self, value, write):
+    def dump_nil(self, value, write):
         if not self.allow_none:
             raise TypeError, "cannot marshal None unless allow_none is enabled"
         write("<value><nil/></value>")
@@ -887,7 +887,7 @@ class Unmarshaller:
 
     dispatch = {}
 
-    def end_nil (self, data):
+    def end_nil(self, data):
         self.append(None)
         self._value = 0
     dispatch["nil"] = end_nil
@@ -1040,7 +1040,7 @@ class MultiCall:
     def __call__(self):
         marshalled_list = []
         for name, args in self.__call_list:
-            marshalled_list.append({'methodName' : name, 'params' : args})
+            marshalled_list.append({'methodName': name, 'params': args})
 
         return MultiCallIterator(self.__server.system.multicall(marshalled_list))
 

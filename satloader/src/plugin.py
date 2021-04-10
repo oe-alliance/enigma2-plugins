@@ -490,7 +490,7 @@ class SatloaderList(MenuList):
 		self.setList(self.list)
 
 	def getSelectionsList(self):
-		return [ (item[0][0], item[0][1], item[0][2]) for item in self.list if item[0][3] ]
+		return [(item[0][0], item[0][1], item[0][2]) for item in self.list if item[0][3]]
 
 #######################
 

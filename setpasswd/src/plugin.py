@@ -87,10 +87,10 @@ class ChangePasswdScreen(Screen):
 		retval = self.container.execute("echo -e '%s\n%s' | (passwd %s)" %(self.password,self.password,self.user))
 		if retval==0:
 			message=_("Sucessfully changed password for root user to: ") + self.password
-			self.session.open(MessageBox, message , MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, message, MessageBox.TYPE_INFO)
 		else:
 			message=_("Unable to change/reset password for root user")
-			self.session.open(MessageBox, message , MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, message, MessageBox.TYPE_ERROR)
 
 	def dataAvail(self,data):
 		self.output_line += data
@@ -121,7 +121,7 @@ class ChangePasswdScreen(Screen):
 def startChange(menuid):
 	if getImageDistro() in ('teamblue'):
 		if menuid != "general_menu":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
 			return []

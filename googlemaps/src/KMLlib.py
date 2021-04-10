@@ -20,8 +20,8 @@ class KmlPlace:
 
     def getTile(self,zoomlevel):
         mercator = GlobalMercator()
-        mx, my = mercator.LatLonToMeters( self.lat, self.lon )
-        tminx, tminy = mercator.MetersToTile( mx, my, zoomlevel )
+        mx, my = mercator.LatLonToMeters(self.lat, self.lon)
+        tminx, tminy = mercator.MetersToTile(mx, my, zoomlevel)
         gx, gy = mercator.GoogleTile(tminx, tminy, zoomlevel)#+1?
         return gx,gy,zoomlevel
 

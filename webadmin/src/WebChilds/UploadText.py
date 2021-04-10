@@ -36,7 +36,7 @@ class UploadTextResource(resource.Resource):
 			req.setHeader('Content-type', 'text/html')
 			return "filesize was 0, not uploaded"
 		else:
-			print "[UploadTextResource] text:" ,data
+			print "[UploadTextResource] text:",data
 
 		filename = req.args['filename'][0]
 

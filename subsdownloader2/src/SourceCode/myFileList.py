@@ -66,7 +66,7 @@ EXTENSIONS = {
 
 
 def FileEntryComponent(name, absolute=None, isDir=False):
-	res = [ (absolute, isDir) ]
+	res = [(absolute, isDir)]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 40, 2, 1000, 22, 0, RT_HALIGN_LEFT, name))
 	if isDir:
 		png = LoadPixmap("/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/res/dir.png")
@@ -166,11 +166,11 @@ class FileList(MenuList):
 				path = os_path.join(p.mountpoint, "")
 				if path not in self.inhibitMounts and not self.inParentDirs(path, self.inhibitDirs):
 					self.list.append(FileEntryComponent(name=p.description, absolute=path, isDir=True))
-			files = [ ]
-			directories = [ ]
+			files = []
+			directories = []
 		elif directory is None:
-			files = [ ]
-			directories = [ ]
+			files = []
+			directories = []
 		elif self.useServiceRef:
 			root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + directory)
 			if self.additional_extensions:
@@ -231,9 +231,9 @@ class FileList(MenuList):
 					EXext = "nothing"
 				if (self.matchingPattern is None) or (EXext in self.matchingPattern):
 					if nx is None:
-						self.list.append(FileEntryComponent(name=name, absolute=x , isDir=False))
+						self.list.append(FileEntryComponent(name=name, absolute=x, isDir=False))
 					else:
-						res = [ (x, False) ]
+						res = [(x, False)]
 						res.append((eListboxPythonMultiContent.TYPE_TEXT, 40, 2, 1000, 22, 0, RT_HALIGN_LEFT, name + " [" + self.getTSLength(path) + "]"))
 						png = LoadPixmap("/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/res/movie.png")
 						res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 12, 3, 20, 20, png))

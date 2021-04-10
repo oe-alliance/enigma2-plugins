@@ -22,10 +22,10 @@ def autostart(reason, **kwargs):
 	if "session" in kwargs:
 		session = kwargs["session"]
 		root = File(eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/WebBouquetEditor/web-data"))
-		root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True) )
+		root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True))
 		root.putChild('tmp', File('/tmp'))
 		root.putChild("uploadfile",WebUploadResource(session))
-		addExternalChild( ("bouqueteditor", root, "BouquetEditor", 1, True) )
+		addExternalChild(("bouqueteditor", root, "BouquetEditor", 1, True))
 
 def Plugins(**kwargs):
 	list = [PluginDescriptor(name="WebBouquetEditor", description=_("WebBouquetEditor"), where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart)]

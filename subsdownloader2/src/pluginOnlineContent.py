@@ -59,7 +59,7 @@ class InstallDownloadableContent():
 	self.session = session
 	self.cmdList = []
 	for item in url_to_download:
-	    self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": item }))
+	    self.cmdList.append((IpkgComponent.CMD_INSTALL, {"package": item}))
 		
     def __install__(self):
 	self.session.openWithCallback(self.__restartMessage__, Ipkg, cmdList=self.cmdList)

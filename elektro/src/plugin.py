@@ -83,26 +83,26 @@ elektroShutdownThreshold = 60 * 20 # we only go to sleep if and only if we won't
 if debug:
 	print pluginPrintname, "Setting config defaults"
 config.plugins.elektro = ConfigSubsection()
-config.plugins.elektro.nextday = ConfigClock(default=((6 * 60 + 0) * 60) )
-config.plugins.elektro.nextday2 = ConfigClock(default=((6 * 60 + 0) * 60) )
+config.plugins.elektro.nextday = ConfigClock(default=((6 * 60 + 0) * 60))
+config.plugins.elektro.nextday2 = ConfigClock(default=((6 * 60 + 0) * 60))
 config.plugins.elektro.profile = ConfigSelection(choices=[("1", "Profile 1"), ("2", "Profile 2")], default="1")
 config.plugins.elektro.profileShift = ConfigYesNo(default=False)
 
 config.plugins.elektro.sleep = ConfigSubDict()
 for i in range(7):
-	config.plugins.elektro.sleep[i] = ConfigClock(default=((1 * 60 + 0) * 60) )
+	config.plugins.elektro.sleep[i] = ConfigClock(default=((1 * 60 + 0) * 60))
 
 config.plugins.elektro.wakeup = ConfigSubDict()
 for i in range(7):
-	config.plugins.elektro.wakeup[i] = ConfigClock(default=((9 * 60 + 0) * 60) )
+	config.plugins.elektro.wakeup[i] = ConfigClock(default=((9 * 60 + 0) * 60))
 
 config.plugins.elektro.sleep2 = ConfigSubDict()
 for i in range(7):
-	config.plugins.elektro.sleep2[i] = ConfigClock(default=((1 * 60 + 0) * 60) )
+	config.plugins.elektro.sleep2[i] = ConfigClock(default=((1 * 60 + 0) * 60))
 
 config.plugins.elektro.wakeup2 = ConfigSubDict()
 for i in range(7):
-	config.plugins.elektro.wakeup2[i] = ConfigClock(default=((9 * 60 + 0) * 60) )
+	config.plugins.elektro.wakeup2[i] = ConfigClock(default=((9 * 60 + 0) * 60))
 
 config.plugins.elektro.ip = ConfigSubDict()
 for i in range(10):
@@ -186,11 +186,11 @@ def autostart(reason, **kwargs):
 
 
 def clkToTime(clock):
-	return ( (int)(clock.value[0]) * 60 + (int)(clock.value[1]) ) * 60
+	return ((int)(clock.value[0]) * 60 + (int)(clock.value[1])) * 60
 
 def getTime():
 	ltime = localtime()
-	return ( (int)(ltime.tm_hour) * 60 + (int)(ltime.tm_min) ) * 60
+	return ((int)(ltime.tm_hour) * 60 + (int)(ltime.tm_min)) * 60
 
 def getPrintTime(secs):
 	return strftime("%H:%M:%S", gmtime(secs))
@@ -332,7 +332,7 @@ def Plugins(**kwargs):
 			wakeupfnc=getNextWakeup)
 		]
 	if config.plugins.elektro.menu.value == "plugin":
-		list.append (PluginDescriptor(
+		list.append(PluginDescriptor(
 			name=config.plugins.elektro.name.value,
 			description=config.plugins.elektro.description.value + " " + _("Ver.") + " " + elektro_pluginversion,
 			where=PluginDescriptor.WHERE_PLUGINMENU,
@@ -340,7 +340,7 @@ def Plugins(**kwargs):
 			fnc=main)
 		)
 	else:
-		list.append (PluginDescriptor(
+		list.append(PluginDescriptor(
 			name=config.plugins.elektro.name.value,
 			description=config.plugins.elektro.description.value + " " + _("Ver.") + " " + elektro_pluginversion,
 			where=PluginDescriptor.WHERE_EXTENSIONSMENU,
@@ -429,7 +429,7 @@ class ElektroIP(ConfigListScreen,Screen):
 		self.list = []
 
 		for i in range(10):
-			self.list.append(getConfigListEntry(_("IP Address") , config.plugins.elektro.ip[i]))
+			self.list.append(getConfigListEntry(_("IP Address"), config.plugins.elektro.ip[i]))
 
 		ConfigListScreen.__init__(self, self.list)
 
@@ -807,7 +807,7 @@ class DoElektro(Screen):
 		if time_s < (wakeuptime - elektroShutdownThreshold): # Wakeup is in the future -> sleep!
 			trysleep = True
 			print pluginPrintname, "Wakeup is in the future -> Sleep:", str(time_s), " <", str(wakeuptime)
-		if sleeptime < time_s : #Sleep is in the past -> sleep!
+		if sleeptime < time_s: #Sleep is in the past -> sleep!
 			trysleep = True
 			print pluginPrintname, "Sleep is in the past -> Sleep:", str(sleeptime), " <", str(time_s)
 
@@ -846,7 +846,7 @@ class DoElektro(Screen):
 			print pluginPrintname, "(5) trysleep:", trysleep
 			print pluginPrintname, "in standby returns", Standby.inStandby
 			print pluginPrintname, "forecesleep is", config.plugins.elektro.force.value
-		if not ((Standby.inStandby) or (config.plugins.elektro.force.value == True) ):
+		if not ((Standby.inStandby) or (config.plugins.elektro.force.value == True)):
 			print pluginPrintname, "not in standby and not enforcing to sleep, so setting trysleep to false"
 			trysleep = False
 

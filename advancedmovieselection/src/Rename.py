@@ -72,7 +72,7 @@ class MovieRetitle(Screen, ConfigListScreen):
             "save": self.keyGo,
             "cancel": self.keyCancel,
         }, -2)
-        self.list = [ ]
+        self.list = []
         ConfigListScreen.__init__(self, self.list, session=self.session)
         self.createSetup()
         self["Path"] = Label(_("Location:") + ' ' + os.path.dirname(os.path.splitext(path)[0]))

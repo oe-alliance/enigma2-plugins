@@ -32,7 +32,7 @@ from . import _
 from Logger import log
 
 # Constants
-IDENTIFIER_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Identifiers/" )
+IDENTIFIER_PATH = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Identifiers/")
 
 
 class Modules(object):
@@ -81,7 +81,7 @@ class Modules(object):
 				continue
 			
 			try:
-				module = imp.load_module( name, fp, pathname, description)
+				module = imp.load_module(name, fp, pathname, description)
 			except Exception as e:
 				log.debug("[SP Modules] Load exception: " + str(e))
 			finally:
@@ -105,7 +105,7 @@ class Modules(object):
 				continue
 			
 			# Continue only if the class is a subclass of the corresponding base class
-			if not issubclass( attr, base):
+			if not issubclass(attr, base):
 				log.debug("[SP Modules] Warning no subclass of base: " + str(name))
 				continue
 			

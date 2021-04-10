@@ -66,9 +66,9 @@ class GameCell:
 
 	def paint(self):
 		fg    = RGB(255,255,255) # foreground
-		blue  = RGB(  0,  0,255) # background water
+		blue  = RGB(0,  0,255) # background water
 		focus = RGB(192,192,  0) # background focus
-		green = RGB(  0,255,  0) # background Ship
+		green = RGB(0,255,  0) # background Ship
 		red   = RGB(255,  0,  0) # background Ship hit
 
 		if self.value_ == 0:
@@ -172,7 +172,7 @@ class Schiffe(Screen):
 					if type == "Background":
 						bgcolor = int(color[1:], 0x10)
 		if not bgcolor:
-			bgcolor = RGB(  0,  0,  0)
+			bgcolor = RGB(0,  0,  0)
 
 		self.skin = Schiffe.skin
 		Screen.__init__(self, session)
@@ -190,14 +190,14 @@ class Schiffe(Screen):
 
 		self["actions"] = ActionMap(["WizardActions", "ColorActions", "SetupActions"],
 		{
-			"ok"    : self.ok_pressed,
-			"up"    : self.up_pressed,
-			"down"  : self.down_pressed,
-			"left"  : self.left_pressed,
-			"right" : self.right_pressed,
-			"red"   : self.quit_game,
-			"green" : self.new_game,
-			"blue"  : self.solve_game,
+			"ok": self.ok_pressed,
+			"up": self.up_pressed,
+			"down": self.down_pressed,
+			"left": self.left_pressed,
+			"right": self.right_pressed,
+			"red": self.quit_game,
+			"green": self.new_game,
+			"blue": self.solve_game,
 			"cancel": self.quit_game
 		})
 
@@ -372,7 +372,7 @@ class Schiffe(Screen):
 	def save_game(self):
 		if not self.gameover:
 			sav = open(SAVEFILE, "w")
-			sav.write( "%d %d\n" % (self.moves, self.cnt) )
+			sav.write("%d %d\n" % (self.moves, self.cnt))
 
 			for i, cell in enumerate(self.boxCells):
 				sav.write("%d " % cell.value())
@@ -439,7 +439,7 @@ def ships(field):
 	row = []
 	for x in range(XMAX + 3):
 		row.append(0)
-	for y in range(YMAX+ 3 ):
+	for y in range(YMAX+ 3):
 		shadow.append(row[:])
 
 	for shipLen in range(5, 1, -1):
@@ -578,11 +578,11 @@ def calcNewField(field):
 		
 		if field[x+y*XMAX] == 3: #hit ship
 			field[x+y*XMAX] = 4
-			if x>0      and y>0     :
+			if x>0      and y>0:
 				field[x+y*XMAX-1-XMAX] = 1
 			if x>0      and y<YMAX-1:
 				field[x+y*XMAX-1+XMAX] = 1
-			if x<XMAX-1 and y>0     :
+			if x<XMAX-1 and y>0:
 				field[x+y*XMAX+1-XMAX] = 1
 			if x<XMAX-1 and y<YMAX-1:
 				field[x+y*XMAX+1+XMAX] = 1

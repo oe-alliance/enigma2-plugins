@@ -177,8 +177,7 @@ class OFDB(Screen):
 		'(?P<g_original>Originaltitel):[\s\S]*?class=\"Daten\">(?P<original>.*?)</td>'
 		'(?:.*?(?P<g_country>Herstellungsland):[\s\S]*?class="Daten">(?P<country>.*?)(?:\.\.\.|</td>))*'
 		'(?:.*?(?P<g_year>Erscheinungsjahr):[\s\S]*?class="Daten">(?P<year>.*?)</td>)*'
-		'(?:.*?(?P<g_director>Regie):[\s\S]*?class="Daten">(?P<director>.*?)(?:\.\.\.|</td>))*'
-		, re.DOTALL)
+		'(?:.*?(?P<g_director>Regie):[\s\S]*?class="Daten">(?P<director>.*?)(?:\.\.\.|</td>))*'		, re.DOTALL)
 
 	def resetLabels(self):
 		self["detailslabel"].setText("")
@@ -208,7 +207,7 @@ class OFDB(Screen):
 			self["extralabel"].pageDown()
 
 	def showMenu(self):
-		if ( self.Page is 1 or self.Page is 2 ) and self.resultlist:
+		if (self.Page is 1 or self.Page is 2) and self.resultlist:
 			self["menu"].show()
 			self["stars"].hide()
 			self["starsbg"].hide()

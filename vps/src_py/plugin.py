@@ -70,13 +70,13 @@ def doneConfig(session, **kwargs):
 def startSetup(menuid):
 	if getImageDistro() in ('teamblue'):
 		if menuid != "general_menu":
-			return [ ]
+			return []
 	elif getImageDistro() in ('openhdf'):
 		if menuid != "record_menu":
-			return [ ]
+			return []
 	elif getImageDistro() in ('openvix'):
 		if menuid != "rec":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
 			return []

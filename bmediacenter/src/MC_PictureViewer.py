@@ -66,7 +66,7 @@ class MC_PictureViewer(Screen, HelpableScreen):
 		self["currentfolder"].setText(str(currDir))
 		self.filelist = []
 		self["filelist"] = []
-		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib" , "/proc", "/ram", "/root" , "/sbin", "/sys", "/tmp", "/usr", "/var"]
+		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib", "/proc", "/ram", "/root", "/sbin", "/sys", "/tmp", "/usr", "/var"]
 		self.filelist = FileList(currDir, showDirectories=True, showFiles=True, showMountpoints=True, isTop=False, matchingPattern="(?i)^.*\.(jpeg|jpg|jpe|png|bmp)", inhibitDirs=inhibitDirs)
 		self["filelist"] = self.filelist
 		self["filelist"].show()
@@ -79,7 +79,7 @@ class MC_PictureViewer(Screen, HelpableScreen):
 		#self.picload.PictureData.get().append(self.showPic)
 
 	def startslideshow(self):
-		self.session.openWithCallback(self.returnVal , MC_PicView, self.filelist.getFileList(), self.filelist.getSelectionIndex(), self.filelist.getCurrentDirectory(), True)
+		self.session.openWithCallback(self.returnVal, MC_PicView, self.filelist.getFileList(), self.filelist.getSelectionIndex(), self.filelist.getCurrentDirectory(), True)
 
 	def up(self):
 		self["filelist"].up()
@@ -272,7 +272,7 @@ class MC_PicThumbViewer(Screen, HelpableScreen):
 			return
 
 		pos = self.positionlist[self.filelist[self.index][T_FRAME_POS]]
-		self["frame"].moveTo( pos[0], pos[1], 1)
+		self["frame"].moveTo(pos[0], pos[1], 1)
 		self["frame"].startMoving()
 		if self.currPage != self.filelist[self.index][T_PAGE]:
 			self.currPage = self.filelist[self.index][T_PAGE]
@@ -633,7 +633,7 @@ class Selectmusic(Screen):
 		currDir = config.plugins.mc_ap.lastDir.value
 		if not pathExists(currDir):
 			currDir = "/"
-		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib" , "/proc", "/ram", "/root" , "/sbin", "/sys", "/tmp", "/usr", "/var"]		
+		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib", "/proc", "/ram", "/root", "/sbin", "/sys", "/tmp", "/usr", "/var"]		
 		self.filelist = FileList(currDir, useServiceRef=True, showDirectories=True, showFiles=True, matchingPattern="(?i)^.*\.(m3u|mp2|mp3|wav|wave|pls|wma|m4a|ogg|ra|flac)", inhibitDirs=inhibitDirs)
 		self["filelist"] = self.filelist
 		self["currentfolder"] = Label()

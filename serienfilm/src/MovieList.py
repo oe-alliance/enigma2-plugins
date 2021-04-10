@@ -76,7 +76,7 @@ class MovieList(GUIComponent):
 		self.redrawList()
 		self.l.setBuildFunc(self.buildMovieListEntry)
 
-		self.onSelectionChanged = [ ]
+		self.onSelectionChanged = []
 
 	def connectSelChanged(self, fnc):
 		if not fnc in self.onSelectionChanged:
@@ -148,7 +148,7 @@ class MovieList(GUIComponent):
 		else:
 			len = ""
 
-		res = [ None ]
+		res = [None]
 		begin_string = ""
 		date_string = ""
 
@@ -346,13 +346,13 @@ class MovieList(GUIComponent):
 		self.serviceHandler = eServiceCenter.getInstance()
 		parentLstEntry = self.realDirUp(root)
 
-		self.rootlst = [ ]
+		self.rootlst = []
 
 		self.root = root
 		list = self.serviceHandler.list(root)
 		if list is None:
 			print "[SF-Plugin] listing of movies failed"
-			list = [ ]	
+			list = []	
 			return
 		tags = set()
 
@@ -471,7 +471,7 @@ class MovieList(GUIComponent):
 
 	def update_repcnt(self, serlst, repcnt):
 		for i in range(repcnt + 1):
-			serlst[-( i+1 )][3][1] =  "#" + str(i)
+			serlst[-(i+1)][3][1] =  "#" + str(i)
 
 	def createSublists(self):
 		self.serdate = 0

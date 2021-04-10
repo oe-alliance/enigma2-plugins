@@ -17,7 +17,7 @@ class StartupToStandbyConfiguration(Screen, ConfigListScreen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = [ "StartupToStandbyConfiguration", "Setup" ]
+		self.skinName = ["StartupToStandbyConfiguration", "Setup"]
 
 		# Summary
 		self.setup_title = _("StartupToStandby Configuration")

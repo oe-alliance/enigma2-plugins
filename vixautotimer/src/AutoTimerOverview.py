@@ -226,7 +226,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		from plugin import autotimerHelp
 		if autotimerHelp:
 			list.insert(0, (_("Help"), "help"))
-			list.insert(1, (_("Frequently asked questions") , "faq"))
+			list.insert(1, (_("Frequently asked questions"), "faq"))
 
 		if config.plugins.autotimer.editor.value == "wizard":
 			list.append((_("Create a new timer using the classic editor"), "newplain"))

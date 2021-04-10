@@ -9,10 +9,10 @@ class VolumeInfo(Converter):
 	
 	def __init__(self, type):
 		Converter.__init__(self, type)
-		self.type = { "Result" : self.RESULT,
-					  "ResultText" : self.RESULTTEXT,
-					  "Volume" : self.VOLUME,
-					  "IsMuted" : self.ISMUTED
+		self.type = {"Result": self.RESULT,
+					  "ResultText": self.RESULTTEXT,
+					  "Volume": self.VOLUME,
+					  "IsMuted": self.ISMUTED
 					}[type]
 
 	@cached

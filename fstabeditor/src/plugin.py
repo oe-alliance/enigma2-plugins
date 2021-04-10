@@ -54,7 +54,7 @@ class fstabMenuList(MenuList):
 		self.l.setItemHeight(220)
 		
 def fstabMenuListEntry(devicename, mountpoint,fstype, options, dumpfreq, passnum):
-	res = [ (devicename, mountpoint,fstype, options, dumpfreq, passnum) ]
+	res = [(devicename, mountpoint,fstype, options, dumpfreq, passnum)]
 	res.append(MultiContentEntryText(pos=(230,15),size=(370,25), font=0, text=devicename))
 	res.append(MultiContentEntryText(pos=(230,60),size=(370,25), font=0, text=mountpoint))
 	res.append(MultiContentEntryText(pos=(230,90),size=(370,25), font=0, text=fstype))
@@ -122,7 +122,7 @@ class fstabViewerScreen(Screen,HelpableScreen):
 	def buildScreen(self):
 		self.fstabEntryList = []
 		if fileExists("/etc/fstab"):
-			fstabFile = open("/etc/fstab" ,"r")
+			fstabFile = open("/etc/fstab","r")
 			global entryList
 			entryList = []
 			self.counter = 0

@@ -32,9 +32,9 @@ class ServicePlayable(Source):
 			self.info = self.sci.info(refToPlay)
 
 		if refPlaying is None:
-			return self.convertStrTrueFalse( self.info.isPlayable(refToPlay) )
+			return self.convertStrTrueFalse(self.info.isPlayable(refToPlay))
 		else:
-			return self.convertStrTrueFalse( self.info.isPlayable(refToPlay, refPlaying))
+			return self.convertStrTrueFalse(self.info.isPlayable(refToPlay, refPlaying))
 
 		return false
 
@@ -75,6 +75,6 @@ class ServicePlayable(Source):
 
 
 	list = property(getList)
-	lut = { "ServiceReference" : 0,
-			"ServicePlayable" : 1
+	lut = {"ServiceReference": 0,
+			"ServicePlayable": 1
 			}

@@ -58,7 +58,7 @@ class SeriesPluginTimer(object):
 			if timer.sp_in_queue:
 				msg = _("Skipping timer because it is already in queue")
 				log.warning(msg, timer.name)
-				timer.log(601, "[SeriesPlugin]" + " " + msg )
+				timer.log(601, "[SeriesPlugin]" + " " + msg)
 				return
 		
 		# We have to compare the length,
@@ -69,25 +69,25 @@ class SeriesPluginTimer(object):
 		if TAG in timer.tags:
 			msg = _("Skipping timer because it is already handled") + "\n\n" + _("Can be configured within the setup")
 			log.info(msg, timer.name)
-			timer.log(607, "[SeriesPlugin]" + " " + msg )
+			timer.log(607, "[SeriesPlugin]" + " " + msg)
 			return
 		
 		if timer.begin < time() + 60:
 			msg = _("Skipping timer because it starts in less than 60 seconds")
 			log.debug(msg, timer.name)
-			timer.log(604, "[SeriesPlugin]" + " " + msg )
+			timer.log(604, "[SeriesPlugin]" + " " + msg)
 			return
 		
 		if timer.isRunning():
 			msg = _("Skipping timer because it is already running")
 			log.debug(msg, timer.name)
-			timer.log(605, "[SeriesPlugin]" + " " + msg )
+			timer.log(605, "[SeriesPlugin]" + " " + msg)
 			return
 		
 		if timer.justplay:
 			msg = _("Skipping timer because it is a just play timer")
 			log.debug(msg, timer.name)
-			timer.log(606, "[SeriesPlugin]" + " " + msg )
+			timer.log(606, "[SeriesPlugin]" + " " + msg)
 			return
 		
 		
@@ -98,14 +98,14 @@ class SeriesPluginTimer(object):
 			event = epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
 			log.debug("lookupEventId", timer.eit, event)
 		if not(event):
-			event = epgcache.lookupEventTime( timer.service_ref.ref, timer.begin + ((timer.end - timer.begin) /2) )
-			log.debug("lookupEventTime", event )
+			event = epgcache.lookupEventTime(timer.service_ref.ref, timer.begin + ((timer.end - timer.begin) /2))
+			log.debug("lookupEventTime", event)
 		
 		if event:
-			if not ( len(timer.name) == len(event.getEventName()) ):
-				msg = _("Skipping timer because it is already modified %s" % (timer.name) )
+			if not (len(timer.name) == len(event.getEventName())):
+				msg = _("Skipping timer because it is already modified %s" % (timer.name))
 				log.info(msg)
-				timer.log(602, "[SeriesPlugin]" + " " + msg )
+				timer.log(602, "[SeriesPlugin]" + " " + msg)
 				return
 			begin = event.getBeginTime() or 0
 			duration = event.getDuration() or 0
@@ -115,7 +115,7 @@ class SeriesPluginTimer(object):
 			if config.plugins.seriesplugin.timer_eit_check.value:
 				msg = _("Skipping timer because no event was found")
 				log.info(msg, timer.name)
-				timer.log(603, "[SeriesPlugin]" + " " + msg )
+				timer.log(603, "[SeriesPlugin]" + " " + msg)
 				return
 			else:
 				# We don't know the exact margins, we will assume the E2 default margins
@@ -124,7 +124,7 @@ class SeriesPluginTimer(object):
 				end = timer.end - (config.recording.margin_after.value * 60)
 		
 		
-		timer.log(600, "[SeriesPlugin]" + " " + _("Try to find infos for %s" % (timer.name) ) )
+		timer.log(600, "[SeriesPlugin]" + " " + _("Try to find infos for %s" % (timer.name)))
 		
 		seriesPlugin = getInstance()
 		
@@ -163,7 +163,7 @@ class SeriesPluginTimer(object):
 				timer.tags.append(TAG)
 		
 		elif data:
-			msg = _("Failed: %s." % ( str( data ) ))
+			msg = _("Failed: %s." % (str(data)))
 			log.debug(msg)
 			timer.log(611, "[SeriesPlugin]" + " " + msg)
 			SeriesPluginTimer.data.append(

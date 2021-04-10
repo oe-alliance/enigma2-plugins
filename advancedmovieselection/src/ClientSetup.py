@@ -46,7 +46,7 @@ class ClientSetupList(GUIComponent):
         self.l.setFont(1, gFont("Regular", 18))
         self.l.setItemHeight(100)
         self.l.setBuildFunc(self.buildMovieListEntry)
-        self.onSelectionChanged = [ ]
+        self.onSelectionChanged = []
         self.staticIP = ip_address
 
     def connectSelChanged(self, fnc):
@@ -62,7 +62,7 @@ class ClientSetupList(GUIComponent):
             x()
 
     def buildMovieListEntry(self, client):
-        res = [ None ]
+        res = [None]
         width = self.l.getItemSize().width()
         width_up_r = 250
         width_up_l = width - width_up_r

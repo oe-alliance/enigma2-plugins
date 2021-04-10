@@ -185,7 +185,7 @@ class DreamExplorerII(Screen):
 		self.sesion = session
 		self.altservice = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.MyBox = HardwareInfo().get_device_name()
-		self.commando = [ "ls" ]
+		self.commando = ["ls"]
 		self.selectedDir = "/tmp/"
 		self.booklines = []
 		self.MediaPattern = "^.*\.(ts|m2ts|mp3|wav|ogg|jpg|jpeg|jpe|png|bmp|mpg|mpeg|mkv|mp4|mov|divx|wmv|avi|mp2|m4a|flac|ifo|vob|iso|sh|flv|3gp|mod)"
@@ -273,30 +273,30 @@ class DreamExplorerII(Screen):
 					dei = self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("Bootlogo-package:\\n"+filename), list=askList)
 					dei.setTitle(_("Dream-Explorer : Install..."))
 				elif testFileName.endswith(".tar.gz"):
-					self.commando = [ "tar -xzvf " + filename + " -C /" ]
+					self.commando = ["tar -xzvf " + filename + " -C /"]
 					askList = [(_("Cancel"), "NO"),(_("Install this package"), "YES")]
 					dei = self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("GZ-package:\\n"+filename), list=askList)
 					dei.setTitle(_("Dream-Explorer : Install..."))
 				elif testFileName.endswith(".tar.bz2"):
-					self.commando = [ "tar -xjvf " + filename + " -C /" ]
+					self.commando = ["tar -xjvf " + filename + " -C /"]
 					askList = [(_("Cancel"), "NO"),(_("Install this package"), "YES")]
 					dei = self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("BZ2-package:\\n"+filename), list=askList)
 					dei.setTitle(_("Dream-Explorer : Install..."))
 				elif testFileName.endswith(".ipk"):
 					if fileExists("/usr/bin/opkg"):
-						self.commando = [ "opkg install " + filename ]
+						self.commando = ["opkg install " + filename]
 					else:
-						self.commando = [ "ipkg install " + filename ]
+						self.commando = ["ipkg install " + filename]
 					askList = [(_("Cancel"), "NO"),(_("Install this package"), "YES")]
 					dei = self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("IPKG-package:\\n"+filename), list=askList)
 					dei.setTitle(_("Dream-Explorer : Install..."))
 				elif testFileName.endswith(".pyc") or testFileName.endswith(".pyo"):
-					self.commando = [ "/usr/lib/enigma2/python/Plugins/Extensions/DreamExplorer/pyc2xml " + filename ]
+					self.commando = ["/usr/lib/enigma2/python/Plugins/Extensions/DreamExplorer/pyc2xml " + filename]
 					askList = [(_("Cancel"), "NO"),(_("Disassemble to bytecode..."), "YES")]
 					dei = self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("Pyc-Script:\\n"+filename), list=askList)
 					dei.setTitle(_("Dream-Explorer : Disassemble..."))
 				elif testFileName.endswith(".sh"):
-					self.commando = [ filename ]
+					self.commando = [filename]
 					askList = [(_("Cancel"), "NO"),(_("View this shell-script"), "VIEW"),(_("Start execution"), "YES")]
 					self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("Do you want to execute?\\n"+filename), list=askList)
 				else:
@@ -379,7 +379,7 @@ class DreamExplorerII(Screen):
 		global PicPlayerAviable
 		answer = answer and answer[1]
 		if answer == "YES":
-			self.session.open(Console, cmdlist=[ self.commando[0] ])
+			self.session.open(Console, cmdlist=[self.commando[0]])
 		elif answer == "YES2ALL":
 			self.session.open(Console, cmdlist=self.commando)
 		elif answer == "PACKLOGOS":
@@ -885,7 +885,7 @@ class PictureExplorerII(Screen):
 			self.EXpicload.startDecode(self.whatPic)
 		if self.whatDir is not None:
 			pidx = 0
-			for root, dirs, files in os_walk(self.whatDir ):
+			for root, dirs, files in os_walk(self.whatDir):
 				for name in files:
 					if name.endswith(".jpg") or name.endswith(".jpeg") or name.endswith(".Jpg") or name.endswith(".Jpeg") or name.endswith(".JPG") or name.endswith(".JPEG"):
 						self.picList.append(name)
@@ -953,7 +953,7 @@ class MoviePlayer(MP_parent):
 	def doEofInternal(self, playing):
 		if not self.execing:
 			return
-		if not playing :
+		if not playing:
 			return
 		self.leavePlayer()
 
@@ -996,7 +996,7 @@ class MusicExplorer(MoviePlayer):
 
 	def searchMusic(self):
 		midx = 0
-		for root, dirs, files in os_walk(self.MusicDir ):
+		for root, dirs, files in os_walk(self.MusicDir):
 			for name in files:
 				name = name.lower()
 				if name.endswith(".mp3") or name.endswith(".mp2") or name.endswith(".ogg") or name.endswith(".wav") or name.endswith(".flac") or name.endswith(".m4a"):
@@ -1028,7 +1028,7 @@ class MusicExplorer(MoviePlayer):
 	def doEofInternal(self, playing):
 		if not self.execing:
 			return
-		if not playing :
+		if not playing:
 			return
 		self.seekFwd()
 

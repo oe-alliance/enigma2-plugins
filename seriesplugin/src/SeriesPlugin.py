@@ -47,8 +47,8 @@ except Exception as e:
 
 
 # Constants
-AUTOTIMER_PATH  = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/AutoTimer/" )
-SERIESPLUGIN_PATH  = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/" )
+AUTOTIMER_PATH  = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/AutoTimer/")
+SERIESPLUGIN_PATH  = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/")
 
 # Globals
 instance = None
@@ -59,7 +59,7 @@ CompiledRegexpReplaceDirChars = re.compile('[^/\w\-_\. ]')
 
 def dump(obj):
 	for attr in dir(obj):
-		log.debug( " %s = %s" % (attr, getattr(obj, attr)) )
+		log.debug(" %s = %s" % (attr, getattr(obj, attr)))
 
 
 def getInstance():
@@ -72,32 +72,32 @@ def getInstance():
 		from plugin import VERSION
 		
 		log.debug(" SERIESPLUGIN NEW INSTANCE " + VERSION)
-		log.debug( " ", strftime("%a, %d %b %Y %H:%M:%S", localtime()) )
+		log.debug(" ", strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 		
 		try:
 			from Tools.HardwareInfo import HardwareInfo
-			log.debug( " DeviceName " + HardwareInfo().get_device_name().strip() )
+			log.debug(" DeviceName " + HardwareInfo().get_device_name().strip())
 		except:
 			sys.exc_clear()
 		
 		try:
 			from Components.About import about
-			log.debug( " EnigmaVersion " + about.getEnigmaVersionString().strip() )
-			log.debug( " ImageVersion " + about.getVersionString().strip() )
+			log.debug(" EnigmaVersion " + about.getEnigmaVersionString().strip())
+			log.debug(" ImageVersion " + about.getVersionString().strip())
 		except:
 			sys.exc_clear()
 		
 		try:
 			#http://stackoverflow.com/questions/1904394/python-selecting-to-read-the-first-line-only
-			log.debug( " dreamboxmodel " + open("/proc/stb/info/model").readline().strip() )
-			log.debug( " imageversion " + open("/etc/image-version").readline().strip() )
-			log.debug( " imageissue " + open("/etc/issue.net").readline().strip() )
+			log.debug(" dreamboxmodel " + open("/proc/stb/info/model").readline().strip())
+			log.debug(" imageversion " + open("/etc/image-version").readline().strip())
+			log.debug(" imageissue " + open("/etc/issue.net").readline().strip())
 		except:
 			sys.exc_clear()
 		
 		try:
 			for key, value in config.plugins.seriesplugin.dict().iteritems():
-				log.debug( " config..%s = %s" % (key, str(value.value)) )
+				log.debug(" config..%s = %s" % (key, str(value.value)))
 		except Exception as e:
 			sys.exc_clear()
 		
@@ -106,7 +106,7 @@ def getInstance():
 			if config.plugins.seriesplugin.replace_chars.value:
 				CompiledRegexpReplaceChars = re.compile('['+config.plugins.seriesplugin.replace_chars.value.replace("\\", "\\\\\\\\")+']')
 		except:
-			log.exception( " Config option 'Replace Chars' is no valid regular expression" )
+			log.exception(" Config option 'Replace Chars' is no valid regular expression")
 			CompiledRegexpReplaceChars = re.compile("[:\!/\\,\(\)'\?]")
 		
 		# Check autotimer
@@ -120,11 +120,11 @@ def getInstance():
 			except ImportError:
 				AUTOTIMER_VERSION = "deprecated"
 				deprecated = True
-			log.debug( " AutoTimer: " + AUTOTIMER_VERSION )
+			log.debug(" AutoTimer: " + AUTOTIMER_VERSION)
 			if deprecated:
-				log.warning( _("Your autotimer is deprecated")  + "\n" +_("Please update it") )
+				log.warning(_("Your autotimer is deprecated")  + "\n" +_("Please update it"))
 		except ImportError:
-			log.debug( " AutoTimer: Not found" )
+			log.debug(" AutoTimer: Not found")
 		
 		# Check dependencies
 		start = True
@@ -135,7 +135,7 @@ def getInstance():
 				find_module(dependency)
 			except ImportError:
 				start = False
-				log.error( _("Error missing dependency")  + "\n" + "python-"+dependency + "\n\n" +_("Please install missing python paket manually") )
+				log.error(_("Error missing dependency")  + "\n" + "python-"+dependency + "\n\n" +_("Please install missing python paket manually"))
 		if start:
 			instance = SeriesPlugin()
 		
@@ -170,7 +170,7 @@ def refactorTitle(org_, data):
 	if data:
 		if config.plugins.seriesplugin.pattern_title.value and not config.plugins.seriesplugin.pattern_title.value == "Off" and not config.plugins.seriesplugin.pattern_title.value == "Disabled":
 			data["org"] = org
-			cust_ = config.plugins.seriesplugin.pattern_title.value.strip().format( **data )
+			cust_ = config.plugins.seriesplugin.pattern_title.value.strip().format(**data)
 			cust = cust_.replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace('  ',' ')
 			log.debug(" refactor title", cust_, cust)
 			return cust
@@ -188,7 +188,7 @@ def refactorDescription(org_, data):
 	if data:
 		if config.plugins.seriesplugin.pattern_description.value and not config.plugins.seriesplugin.pattern_description.value == "Off" and not config.plugins.seriesplugin.pattern_description.value == "Disabled":
 			data["org"] = org
-			cust_ = config.plugins.seriesplugin.pattern_description.value.strip().format( **data )
+			cust_ = config.plugins.seriesplugin.pattern_description.value.strip().format(**data)
 			cust = cust_.replace("\n", " ").replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace('  ',' ')
 			log.debug(" refactor desc", cust_, cust)
 			return cust
@@ -202,7 +202,7 @@ def refactorDirectory(org, data):
 	if data:
 		if config.plugins.seriesplugin.pattern_directory.value and not config.plugins.seriesplugin.pattern_directory.value == "Off" and not config.plugins.seriesplugin.pattern_directory.value == "Disabled":
 			data["org"] = org
-			cust_ = config.plugins.seriesplugin.pattern_directory.value.strip().format( **data )
+			cust_ = config.plugins.seriesplugin.pattern_directory.value.strip().format(**data)
 			cust_ = cust_.replace("\n", "").replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace("  ", " ").replace("//", "/")
 			dir = CompiledRegexpReplaceDirChars.sub(' ', cust_)
 			log.debug(" refactor dir", org, cust_, dir)
@@ -224,11 +224,11 @@ def normalizeResult(result):
 		result['rawseason']  = season_  or config.plugins.seriesplugin.default_season.value
 		result['rawepisode'] = episode_ or config.plugins.seriesplugin.default_episode.value
 		if season_:
-			result['season']  = int( CompiledRegexpNonDecimal.sub('', str(season_)) or config.plugins.seriesplugin.default_season.value or "0" )
+			result['season']  = int(CompiledRegexpNonDecimal.sub('', str(season_)) or config.plugins.seriesplugin.default_season.value or "0")
 		else:
 			result['season']  = int(config.plugins.seriesplugin.default_season.value) or 0
 		if episode_:
-			result['episode'] = int( CompiledRegexpNonDecimal.sub('', str(episode_)) or config.plugins.seriesplugin.default_episode.value or "0" )
+			result['episode'] = int(CompiledRegexpNonDecimal.sub('', str(episode_)) or config.plugins.seriesplugin.default_episode.value or "0")
 		else:
 			result['episode'] = int(config.plugins.seriesplugin.default_episode.value) or 0
 		
@@ -329,7 +329,7 @@ class SeriesPluginWorker(Thread):
 			
 			config.plugins.seriesplugin.lookup_counter.value += 1
 			
-			self.__messages.push( (item.callback, normalizeResult(result)) )
+			self.__messages.push((item.callback, normalizeResult(result)))
 			
 			self.__pump.send(0)
 		
@@ -355,13 +355,13 @@ class SeriesPlugin(Modules, ChannelsBase):
 		#http://bugs.python.org/issue7980
 		datetime.strptime('2012-01-01', '%Y-%m-%d')
 		
-		self.identifier_elapsed = self.instantiateModuleWithName( config.plugins.seriesplugin.identifier_elapsed.value )
+		self.identifier_elapsed = self.instantiateModuleWithName(config.plugins.seriesplugin.identifier_elapsed.value)
 		#log.debug(self.identifier_elapsed)
 		
-		self.identifier_today = self.instantiateModuleWithName( config.plugins.seriesplugin.identifier_today.value )
+		self.identifier_today = self.instantiateModuleWithName(config.plugins.seriesplugin.identifier_today.value)
 		#log.debug(self.identifier_today)
 		
-		self.identifier_future = self.instantiateModuleWithName( config.plugins.seriesplugin.identifier_future.value )
+		self.identifier_future = self.instantiateModuleWithName(config.plugins.seriesplugin.identifier_future.value)
 		#log.debug(self.identifier_future)
 		
 		pattern = config.plugins.seriesplugin.pattern_title.value
@@ -392,7 +392,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 				import NavigationInstance
 				if NavigationInstance.instance.RecordTimer.isRecording():
 					msg = _("Skip check during running records") + "\n\n" + _("Can be configured within the setup")
-					log.warning( msg)
+					log.warning(msg)
 					if callable(callback):
 						callback(msg)
 					return msg
@@ -420,7 +420,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 		elif future:
 			identifier = self.identifier_future
 		else:
-			identifier = self.modules and self.instantiateModule( self.modules.itervalues().next() )
+			identifier = self.modules and self.instantiateModule(self.modules.itervalues().next())
 		
 		if not identifier:
 			msg = _("No identifier available") + "\n\n" + _("Please check Your installation")
@@ -452,14 +452,14 @@ class SeriesPlugin(Modules, ChannelsBase):
 
 			if block == False:
 				
-				self.thread.add( ThreadItem(identifier, callback, name, begin, end, serviceref) )
+				self.thread.add(ThreadItem(identifier, callback, name, begin, end, serviceref))
 				
 			else:
 				
 				result = None
 				
 				try:
-					result = identifier.getEpisode( name, begin, end, serviceref )
+					result = identifier.getEpisode(name, begin, end, serviceref)
 				except Exception, e:
 					log.exception("Worker:", str(e))
 					
@@ -485,7 +485,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 			or (config.plugins.seriesplugin.lookup_counter.value == 100) \
 			or (config.plugins.seriesplugin.lookup_counter.value % 1000 == 0):
 			from plugin import ABOUT
-			about = ABOUT.format( **{'lookups': config.plugins.seriesplugin.lookup_counter.value} )
+			about = ABOUT.format(**{'lookups': config.plugins.seriesplugin.lookup_counter.value})
 			AddPopup(
 				about,
 				MessageBox.TYPE_INFO,

@@ -266,7 +266,7 @@ class AutomaticVolumeAdjustmentEntryConfigScreen(ConfigListScreen, Screen):
 			self.current = entry
 			self.currentref = entry.servicereference.value
 			self.currentvalue = entry.adjustvalue.value
-		self.list = [ ]
+		self.list = []
 		self.service = getConfigListEntry(_("Servicename"), self.current.name)
 		self.list.append(self.service)
 		self.adjustValue = getConfigListEntry(_("Adjustment value"), self.current.adjustvalue)

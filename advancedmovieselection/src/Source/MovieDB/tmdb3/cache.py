@@ -16,7 +16,7 @@ from cache_engine import Engines
 import cache_null
 import cache_file
 
-class Cache( object ):
+class Cache(object):
     """
     This class implements a persistent cache, backed in a file specified in
     the object creation. The file is protected for safe, concurrent access
@@ -77,7 +77,7 @@ class Cache( object ):
         """
         return self.Cached(self, callback)
 
-    class Cached( object ):
+    class Cached(object):
         def __init__(self, cache, callback, func=None, inst=None):
             self.cache = cache
             self.callback = callback

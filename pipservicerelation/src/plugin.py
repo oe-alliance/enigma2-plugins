@@ -201,7 +201,7 @@ class PipServiceRelationEntryConfigScreen(ConfigListScreen, Screen):
 			self.currentKey = entry[0]
 			self.ref1 =  NoSave(ConfigDirectory(default=ServiceReference(eServiceReference(entry[0])).getServiceName()))
 			self.ref2 =  NoSave(ConfigDirectory(default=ServiceReference(eServiceReference(entry[1])).getServiceName()))
-		self.list = [ ]
+		self.list = []
 		self.serviceref1 =  getConfigListEntry(_("Service"), self.ref1)
 		self.serviceref2 =  getConfigListEntry(_("Related Pip Service"), self.ref2)
 		self.list.append(self.serviceref1)

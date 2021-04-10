@@ -183,10 +183,10 @@ class SudokuCell:
 
 	def paint(self):
 		fg    = RGB(255,255,255) # foreground
-		black = RGB(  0,  0,  0) # background readonly
+		black = RGB(0,  0,  0) # background readonly
 		focus = RGB(192,192,  0) # background focus
-		grey  = RGB( 70, 70, 70) # background not readonly
-		green = RGB(  0,255,  0) # background solved
+		grey  = RGB(70, 70, 70) # background not readonly
+		green = RGB(0,255,  0) # background solved
 		red   = RGB(255,  0,  0) # background error
 
 		b  = 2
@@ -276,7 +276,7 @@ class Sudoku(Screen):
 					if type == "Background":
 						bgcolor = int(color[1:], 0x10)
 		#if not bgcolor:
-		bgcolor = RGB(  0,  0,  0)
+		bgcolor = RGB(0,  0,  0)
 
 		self.skin = Sudoku.skin
 		Screen.__init__(self, session)
@@ -298,26 +298,26 @@ class Sudoku(Screen):
 
 		self["actions"] = ActionMap(["WizardActions", "ColorActions", "SetupActions"],
 		{
-			"0"     : self.bt_0_pressed,
-			"1"     : self.bt_1_pressed,
-			"2"     : self.bt_2_pressed,
-			"3"     : self.bt_3_pressed,
-			"4"     : self.bt_4_pressed,
-			"5"     : self.bt_5_pressed,
-			"6"     : self.bt_6_pressed,
-			"7"     : self.bt_7_pressed,
-			"8"     : self.bt_8_pressed,
-			"9"     : self.bt_9_pressed,
-			"up"    : self.up_pressed,
-			"down"  : self.down_pressed,
-			"left"  : self.left_pressed,
-			"right" : self.right_pressed,
-			"red"   : self.bt_solve_game,
-			"green" : self.bt_new_game,
+			"0": self.bt_0_pressed,
+			"1": self.bt_1_pressed,
+			"2": self.bt_2_pressed,
+			"3": self.bt_3_pressed,
+			"4": self.bt_4_pressed,
+			"5": self.bt_5_pressed,
+			"6": self.bt_6_pressed,
+			"7": self.bt_7_pressed,
+			"8": self.bt_8_pressed,
+			"9": self.bt_9_pressed,
+			"up": self.up_pressed,
+			"down": self.down_pressed,
+			"left": self.left_pressed,
+			"right": self.right_pressed,
+			"red": self.bt_solve_game,
+			"green": self.bt_new_game,
 			"yellow": self.bt_check_game,
-			"blue"  : self.bt_restart_game,
+			"blue": self.bt_restart_game,
 			"cancel": self.quit,
-			"deleteForward" : self.next_pressed,
+			"deleteForward": self.next_pressed,
 			"deleteBackward": self.previous_pressed,
 		})
 		# fill canvas with background color...
@@ -614,7 +614,7 @@ class Sudoku(Screen):
 	# save actual game to file...
 	def save_game(self):
 		sav = open(SAVEFILE, "w")
-		sav.write( "%d %d\n" % (self.gameLevel, self.cnt) )
+		sav.write("%d %d\n" % (self.gameLevel, self.cnt))
 
 		for j in range(0, 9):
 			for i in range(0, 9):

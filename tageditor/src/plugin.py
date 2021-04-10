@@ -296,7 +296,7 @@ class MovieTagEditor(TagEditor):
 		else:
 			tags = []
 		TagEditor.__init__(self, session, tags, args, parent=parent)
-		self.skinName = [ "MovieTagEditor", "TagEditor" ]
+		self.skinName = ["MovieTagEditor", "TagEditor"]
 
 	def saveTags(self, file, tags):
 		if os_path.exists(file + ".ts.meta"):

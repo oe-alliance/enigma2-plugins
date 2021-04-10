@@ -28,10 +28,10 @@ class Bonjour:
 		text = service.get('text', None)
 		if text:
 			if isinstance(text, (basestring)):
-				lines.append( '\t\t<txt-record>%s</txt-record>\n' %(text) )
+				lines.append('\t\t<txt-record>%s</txt-record>\n' %(text))
 			else:
 				for txt in text:
-					lines.append( '\t\t<txt-record>%s</txt-record>\n' %(txt))
+					lines.append('\t\t<txt-record>%s</txt-record>\n' %(txt))
 		lines.extend([
 					'\t</service>\n',
 					'</service-group>\n'
@@ -117,7 +117,7 @@ class Bonjour:
 		self.files = {}
 		if path.exists(self.AVAHI_SERVICES_DIR):
 			print "[Bonjour.reloadConfig] reloading config"
-			service_files = filter( lambda x: x.endswith('.service'), listdir(self.AVAHI_SERVICES_DIR) )
+			service_files = filter(lambda x: x.endswith('.service'), listdir(self.AVAHI_SERVICES_DIR))
 			for file in service_files:
 				self.__parse(file)
 
@@ -178,20 +178,20 @@ class Bonjour:
 		name += protocol.upper()
 
 		return {
-				'file' : file,
-				'name' : name,
-				'type' : type,
-				'port' : port,
-				'text' : text
+				'file': file,
+				'name': name,
+				'type': type,
+				'port': port,
+				'text': text
 				}
 
 	def buildServiceFull(self, file, name, type, port, text=[], udp=False):
 		return {
-				'file' : file,
-				'name' : name,
-				'type' : type,
-				'port' : port,
-				'text' : text
+				'file': file,
+				'name': name,
+				'type': type,
+				'port': port,
+				'text': text
 				}
 
 	def registerDefaultServices(self):

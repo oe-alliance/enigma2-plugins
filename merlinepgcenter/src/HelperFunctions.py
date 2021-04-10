@@ -116,7 +116,7 @@ class ResizeScrollLabel(ScrollLabel):
 		ScrollLabel.__init__(self, text)
 		
 	def resize(self, s):
-		lineheight=fontRenderClass.getInstance().getLineHeight( self.long_text.getFont() )
+		lineheight=fontRenderClass.getInstance().getLineHeight(self.long_text.getFont())
 		if not lineheight:
 			lineheight = 30 # assume a random lineheight if nothing is visible
 		lines = (int)(s.height() / lineheight)
@@ -129,7 +129,7 @@ class ResizeScrollLabel(ScrollLabel):
 
 class PiconLoader():
 	def __init__(self):
-		self.nameCache = { }
+		self.nameCache = {}
 		config.plugins.merlinEpgCenter.epgPaths.addNotifier(self.piconPathChanged, initial_call=False)
 		
 	def getPiconFilename(self, sRef):

@@ -122,7 +122,7 @@ class Mosaic(Screen):
 
 	skin += """<widget name="countdown" position="80,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />""" % (height-50, windowWidth)
 	skin += """<widget name="count" position="%d,%d" size="%d,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" halign="right" />
-	</screen>""" % (positions[2][0] ,height-50, windowWidth)
+	</screen>""" % (positions[2][0],height-50, windowWidth)
 
 	def __init__(self, session, services):
 		Screen.__init__(self, session)

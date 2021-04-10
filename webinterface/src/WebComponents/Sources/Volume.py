@@ -9,7 +9,7 @@ class Volume(Source):
 		global globalActionMap # hackalert :)
 		self.actionmap = globalActionMap
 		self.volctrl = eDVBVolumecontrol.getInstance() # this is not nice
-		self.vol = ( True, "State", self.volctrl.getVolume(), self.volctrl.isMuted() )
+		self.vol = (True, "State", self.volctrl.getVolume(), self.volctrl.isMuted())
 
 	def handleCommand(self, cmd):
 		l = []

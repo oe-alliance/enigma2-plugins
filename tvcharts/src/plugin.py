@@ -54,7 +54,7 @@ config.plugins.tvcharts.submitplugins = ConfigYesNo(default=True)
 config.plugins.tvcharts.bouquetfilter = ConfigYesNo(default=True)
 
 ##########################################################
-session = [ ]
+session = []
 
 #Channellist Menu Entry
 class ChannelListMenu(MenuList):
@@ -66,7 +66,7 @@ class ChannelListMenu(MenuList):
 		self.l.setItemHeight(76)
 
 def ChannelListEntryComponent(type, channelname, serviceref, eventid, eventname, starttime, endtime, usercount, percent):
-	res = [ (serviceref, eventid) ]
+	res = [(serviceref, eventid)]
 
 	# PIXMAP / PICON
 	pixmap = resolveFilename(SCOPE_ACTIVE_SKIN, "picon_default.png")
@@ -384,11 +384,11 @@ class TVChartsMain(Screen):
 class TVChartsSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = [ "TVChartsSetup", "Setup" ]
+		self.skinName = ["TVChartsSetup", "Setup"]
 		self.setup_title = _("TV Charts Settings")
 
-		self.onChangedEntry = [ ]
-		self.list = [ ]
+		self.onChangedEntry = []
+		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -409,7 +409,7 @@ class TVChartsSetup(Screen, ConfigListScreen):
 		self.setTitle(self.setup_title)
 
 	def createSetup(self):
-		self.list = [ getConfigListEntry(_("TV Charts Plugin Enable"), config.plugins.tvcharts.enabled) ]
+		self.list = [getConfigListEntry(_("TV Charts Plugin Enable"), config.plugins.tvcharts.enabled)]
 		if config.plugins.tvcharts.enabled.value:
 			self.list.extend((
 				getConfigListEntry(_("Max Toplist Entries"), config.plugins.tvcharts.maxentries),
@@ -561,7 +561,7 @@ class DBUpdateStatus(Screen):
 				print "[TVCharts] Error loading plugins!"
 		
 		# Status Update
-		getPage(url='http://www.dreambox-plugins.de/feeds/TVCharts/status.php', agent="Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)", timeout=60, method='POST', headers={'Content-Type':'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid' : self.BoxID, 'devicename' : self.DeviceName, 'imageversion' : self.ImageVersion, 'enigmaversion' : self.EnigmaVersion, 'lastchannel' : channel_name, 'lastevent' : event_name, 'eventdescr' : event_description, 'lastbegin' : event_begin, 'lastserviceref' : self.serviceref, 'timerlist' : self.timerlist, 'pluginlist' : self.pluginlist})).addErrback(self.updateError)
+		getPage(url='http://www.dreambox-plugins.de/feeds/TVCharts/status.php', agent="Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)", timeout=60, method='POST', headers={'Content-Type':'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid': self.BoxID, 'devicename': self.DeviceName, 'imageversion': self.ImageVersion, 'enigmaversion': self.EnigmaVersion, 'lastchannel': channel_name, 'lastevent': event_name, 'eventdescr': event_description, 'lastbegin': event_begin, 'lastserviceref': self.serviceref, 'timerlist': self.timerlist, 'pluginlist': self.pluginlist})).addErrback(self.updateError)
 
 		# Restart Timer
 		self.DBStatusTimer.start(900000, True)
@@ -586,4 +586,4 @@ def Plugins(path, **kwargs):
 	return [
 		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart),
 		PluginDescriptor(name="TV Charts", description="TV Charts Plugin", icon="plugin.png", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
-		PluginDescriptor(name="TV Charts", description="TV Charts Plugin", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main) ]
+		PluginDescriptor(name="TV Charts", description="TV Charts Plugin", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)]

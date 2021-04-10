@@ -32,7 +32,7 @@ from . import _
 
 
 def YouTubePlaylistEntryComponent(entry):
-	res = [ entry ]
+	res = [entry]
 
 	res.append(MultiContentEntryText(pos=(5, 5), size=(550, 18), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text=entry.getTitle()))
 	res.append(MultiContentEntryText(pos=(5, 23), size=(550, 14), font=1, color=0xFFA323, color_sel=0xFFA323, flags=RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text=entry.getDescription()))
@@ -88,7 +88,7 @@ class YouTubePlaylistScreen(Screen):
 	def deletePlaylist(self):
 		playList = self["list"].getCurrent()[0]
 		if playList is not None:
-			self.session.openWithCallback(self.deleteCallback, MessageBox, _("Really delete %(playlist)s?") % {"playlist" : playList.getTitle()})
+			self.session.openWithCallback(self.deleteCallback, MessageBox, _("Really delete %(playlist)s?") % {"playlist": playList.getTitle()})
 
 
 	def deleteCallback(self, result):

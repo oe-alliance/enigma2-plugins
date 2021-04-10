@@ -39,7 +39,7 @@ class TorrentLocationBox(LocationBox):
 		# XXX: implement bookmarks
 		LocationBox.__init__(self, session)
 
-		self.skinName = [ "TorrentLocationBox", "LocationBox" ]
+		self.skinName = ["TorrentLocationBox", "LocationBox"]
 
 		# non-standard filelist which shows .tor(rent) files
 		self["filelist"] = FileList(None, showDirectories=True, showFiles=True, matchingPattern="^.*\.tor(rent)?")
@@ -224,10 +224,10 @@ class EmissionOverview(Screen, HelpableScreen):
 			self.sortCallback,
 			ChoiceBox,
 			_("Which sorting method do you prefer?"),
-			[(_("by eta") ,SORT_TYPE_TIME),
-			(_("by progress") ,SORT_TYPE_PROGRESS),
-			(_("by age") ,SORT_TYPE_ADDED),
-			(_("by speed") ,SORT_TYPE_SPEED)]
+			[(_("by eta"),SORT_TYPE_TIME),
+			(_("by progress"),SORT_TYPE_PROGRESS),
+			(_("by age"),SORT_TYPE_ADDED),
+			(_("by speed"),SORT_TYPE_SPEED)]
 		)
 
 	def pauseShown(self):

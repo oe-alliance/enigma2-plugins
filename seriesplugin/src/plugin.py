@@ -218,7 +218,7 @@ def getSeasonEpisode4(service_ref, name, begin, end, description, path, *args, *
 		try:
 			return bareGetEpisode(service_ref, name, begin, end, description, path, True, False, False)
 		except Exception as e:
-			log.exception( "SeriesPlugin getSeasonEpisode4 exception " + str(e))
+			log.exception("SeriesPlugin getSeasonEpisode4 exception " + str(e))
 			return str(e)
 
 def showResult(*args, **kwargs):
@@ -293,7 +293,7 @@ def getSeasonEpisode(service_ref, name, begin, end, description, path, *args, **
 			else:
 				return str(result)
 		except Exception as e:
-			log.exception( "SeriesPlugin getSeasonEpisode4 exception " + str(e))
+			log.exception("SeriesPlugin getSeasonEpisode4 exception " + str(e))
 			return str(e)
 
 
@@ -302,28 +302,28 @@ def getSeasonEpisode(service_ref, name, begin, end, description, path, *args, **
 def Plugins(**kwargs):
 	descriptors = []
 	
-	descriptors.append( PluginDescriptor(
+	descriptors.append(PluginDescriptor(
 											name=NAME + " " + _("Setup"),
 											description=NAME + " " + _("Setup"),
 											where=PluginDescriptor.WHERE_PLUGINMENU,
 											fnc=setup,
 											icon="plugin.png",
-											needsRestart=False) )
+											needsRestart=False))
 	
 	if config.plugins.seriesplugin.enabled.value:
 		
-		descriptors.append( PluginDescriptor(
+		descriptors.append(PluginDescriptor(
 													where=PluginDescriptor.WHERE_SESSIONSTART,
 													needsRestart=False,
-													fnc=start) )
+													fnc=start))
 
 		if config.plugins.seriesplugin.menu_info.value:
-			descriptors.append( PluginDescriptor(
+			descriptors.append(PluginDescriptor(
 													name=SHOWINFO,
 													description=SHOWINFO,
 													where=PluginDescriptor.WHERE_EVENTINFO,
 													needsRestart=False,
-													fnc=info) )
+													fnc=info))
 
 		if config.plugins.seriesplugin.menu_extensions.value:
 			descriptors.append(PluginDescriptor(
@@ -331,7 +331,7 @@ def Plugins(**kwargs):
 													description=SHOWINFO,
 													where=PluginDescriptor.WHERE_EXTENSIONSMENU,
 													fnc=sp_extension,
-													needsRestart=False) )
+													needsRestart=False))
 		
 		if config.plugins.seriesplugin.check_timer_list.value:
 			descriptors.append(PluginDescriptor(
@@ -339,32 +339,32 @@ def Plugins(**kwargs):
 													description=CHECKTIMERS,
 													where=PluginDescriptor.WHERE_EXTENSIONSMENU,
 													fnc=checkTimers,
-													needsRestart=False) )
+													needsRestart=False))
 		
 		if config.plugins.seriesplugin.menu_movie_info.value:
-			descriptors.append( PluginDescriptor(
+			descriptors.append(PluginDescriptor(
 													name=SHOWINFO,
 													description=SHOWINFO,
 													where=PluginDescriptor.WHERE_MOVIELIST,
 													fnc=movielist_info,
-													needsRestart=False) )
+													needsRestart=False))
 		
 		if config.plugins.seriesplugin.menu_movie_rename.value:
-			descriptors.append( PluginDescriptor(
+			descriptors.append(PluginDescriptor(
 													name=RENAMESERIES,
 													description=RENAMESERIES,
 													where=PluginDescriptor.WHERE_MOVIELIST,
 													fnc=movielist_rename,
-													needsRestart=False) )
+													needsRestart=False))
 		
 		if config.plugins.seriesplugin.menu_channel.value:
 			try:
-				descriptors.append( PluginDescriptor(
+				descriptors.append(PluginDescriptor(
 													name=SHOWINFO,
 													description=SHOWINFO,
 													where=PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU,
 													fnc=channel,
-													needsRestart=False) )
+													needsRestart=False))
 			except:
 				addSeriesPlugin(WHERE_CHANNELMENU, SHOWINFO)
 		
@@ -377,9 +377,9 @@ def Plugins(**kwargs):
 # Add / Remove menu functions
 def addSeriesPlugin(menu, title, fnc=None):
 	# Add to menu
-	if( menu == WHERE_EPGMENU ):
+	if(menu == WHERE_EPGMENU):
 		SPEPGSelectionInit()
-	elif( menu == WHERE_CHANNELMENU ):
+	elif(menu == WHERE_CHANNELMENU):
 		try:
 			addSeriesPlugin(PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU, SHOWINFO, fnc)
 		except:
@@ -387,7 +387,7 @@ def addSeriesPlugin(menu, title, fnc=None):
 	else:
 		from Components.PluginComponent import plugins
 		if plugins:
-			for p in plugins.getPlugins( where=menu ):
+			for p in plugins.getPlugins(where=menu):
 				if p.name == title:
 					# Plugin is already in menu
 					break
@@ -401,14 +401,14 @@ def addSeriesPlugin(menu, title, fnc=None):
 																needsRestart=False,
 																fnc=fnc)
 				if menu in plugins.plugins:
-					plugins.plugins[ menu ].append(plugin)
+					plugins.plugins[menu].append(plugin)
 
 
 def removeSeriesPlugin(menu, title):
 	# Remove from menu
-	if( menu == WHERE_EPGMENU ):
+	if(menu == WHERE_EPGMENU):
 		SPEPGSelectionUndo()
-	elif( menu == WHERE_CHANNELMENU ):
+	elif(menu == WHERE_CHANNELMENU):
 		try:
 			removeSeriesPlugin(PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU, SHOWINFO)
 		except:
@@ -416,8 +416,8 @@ def removeSeriesPlugin(menu, title):
 	else:
 		from Components.PluginComponent import plugins
 		if plugins:
-			for p in plugins.getPlugins( where=menu ):
+			for p in plugins.getPlugins(where=menu):
 				if p.name == title:
-					plugins.plugins[ menu ].remove(p)
+					plugins.plugins[menu].remove(p)
 					break
 

@@ -245,10 +245,10 @@ class TravelWebcamviewer(Screen):
 		self.finish_loading = True
 
 	def buildEntryCam(self, cam):
-		return ((cam, cam.title, cam.webcamid,"last update",self.thumbnails[cam.webcamid], _("Last updated: ")+cam.last_update, _("Views: ")+cam.view_count, _("User: ")+cam.user, _("Ratings: ")+cam.rating_avg ))
+		return ((cam, cam.title, cam.webcamid,"last update",self.thumbnails[cam.webcamid], _("Last updated: ")+cam.last_update, _("Views: ")+cam.view_count, _("User: ")+cam.user, _("Ratings: ")+cam.rating_avg))
 
 	def buildEntryStatus(self, text):
-		return (("loading ...", "please wait just a moment","cccccccccccc","last update","1111111111111", _("Last updated: "), _("Views: "), _("Duration: ") , _("Ratings: ") ))
+		return (("loading ...", "please wait just a moment","cccccccccccc","last update","1111111111111", _("Last updated: "), _("Views: "), _("Duration: "), _("Ratings: ")))
 
 	def hasNextPage(self):
 		if (self.per_page*(self.page+1)>self.count):

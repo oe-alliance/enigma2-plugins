@@ -87,7 +87,7 @@ def Plugins(path,**kwargs):
     list = [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=startScrobbler)]
 
     if config.plugins.LastFM.menu.value == "plugin":
-        list.append (PluginDescriptor(
+        list.append(PluginDescriptor(
             name=config.plugins.LastFM.name.value, 
             description=config.plugins.LastFM.description.value + " "  + _("Ver.") + " " + lastfm_pluginversion, 
             where=PluginDescriptor.WHERE_PLUGINMENU,
@@ -95,7 +95,7 @@ def Plugins(path,**kwargs):
             fnc=main)
             )
     else:
-        list.append (PluginDescriptor(
+        list.append(PluginDescriptor(
             name=config.plugins.LastFM.name.value, 
             description=config.plugins.LastFM.description.value + " "  + _("Ver.") + " " + lastfm_pluginversion, 
             where=PluginDescriptor.WHERE_EXTENSIONSMENU, 
@@ -147,14 +147,7 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         self.imageconverter = ImageConverter(116,116,self.setCoverArt)
         Screen.__init__(self, session)
         
-        self.tabs=[(_("Personal Stations"),self.loadPersonalStations)
-                   ,(_("Global Tags"),self.loadGlobalTags)
-                   ,(_("Top Tracks"),self.loadTopTracks)
-                   ,(_("Recent Tracks"),self.loadRecentTracks)
-                   ,(_("Loved Tracks"),self.loadLovedTracks)
-                   ,(_("Banned Tracks"),self.loadBannedTracks)
-                   ,(_("Friends"),self.loadFriends)
-                   ,(_("Neighbours"),self.loadNeighbours)
+        self.tabs=[(_("Personal Stations"),self.loadPersonalStations),(_("Global Tags"),self.loadGlobalTags),(_("Top Tracks"),self.loadTopTracks),(_("Recent Tracks"),self.loadRecentTracks),(_("Loved Tracks"),self.loadLovedTracks),(_("Banned Tracks"),self.loadBannedTracks),(_("Friends"),self.loadFriends),(_("Neighbours"),self.loadNeighbours)
                    ]
         tablist =[]
         for tab in self.tabs:
@@ -188,7 +181,7 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
              "red": self.action_startstop,
              "green": self.skipTrack,
              "yellow": self.love,
-             "blue": self.banTrack ,
+             "blue": self.banTrack,
              "historyNext": self.action_nextTab,
              "historyBack": self.action_prevTab,
              
@@ -560,7 +553,7 @@ class LastFMSaveScreen(Screen):
 			 "red": self.parent.action_startstop,
              "green": self.parent.skipTrack,
              "yellow": self.parent.love,
-             "blue": self.parent.banTrack ,
+             "blue": self.parent.banTrack,
              }, -1)
         
         self.onLayoutFinish.append(self.update)

@@ -483,11 +483,11 @@ class FC2webChart(resource.Resource):
 					H = 0
 					R = 0
 					S = int(DT[6])
-					if (S & 1)>0 :
+					if (S & 1)>0:
 						B = 3
-					if (S & 2)>0 :
+					if (S & 2)>0:
 						H = 6
-					if (S & 4)>0 :
+					if (S & 4)>0:
 						R = 9
 					html += "dT.AddPoint(\"%s; %s; %d; %d; %d\", %s, null);\n" % (DT[1].replace(",","."),DT[5],B,H,R,tmp)
 					html += "dR.AddPoint(\"%s\", %s, null);\n" % (DT[2],tmp)
@@ -504,10 +504,10 @@ class FC2webChart(resource.Resource):
 def BoxStatus():
 	h = ""
 	S = int(FC2werte[5])
-	if (S & 1)>0 :
+	if (S & 1)>0:
 		h += "<img border=\"0\" src=\"/fancontrol/FC2on.png\" width=\"20\" height=\"20\" title=\"Box On\" align=\"left\" hspace=\"2\" vspace=\"5\">\n"
-	if (S & 2)>0 :
+	if (S & 2)>0:
 		h += "<img border=\"0\" src=\"/fancontrol/FC2hdd.png\" width=\"20\" height=\"20\" title=\"HDD On\" align=\"left\" hspace=\"2\" vspace=\"5\">\n"
-	if (S & 4)>0 :
+	if (S & 4)>0:
 		h += "<img border=\"0\" src=\"/fancontrol/FC2record.png\" width=\"20\" height=\"20\" title=\"Recording\" align=\"left\" hspace=\"2\" vspace=\"5\">\n"
 	return h

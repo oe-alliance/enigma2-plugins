@@ -254,7 +254,7 @@ class StreamMenu(MenuList):
     def buildList(self,listnew):
         list=[]
         for stream in listnew:
-            res = [ stream ]
+            res = [stream]
             res.append(MultiContentEntryText(pos=(5, 5), size=(500, 25), font=0, text=stream.getName()))
             res.append(MultiContentEntryText(pos=(5, 26), size=(500, 24), font=1, text=stream.getDescription()))
             list.append(res)

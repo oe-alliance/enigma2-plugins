@@ -110,7 +110,7 @@ class SubtitleDB(object):
         ''' Downloads the given url and returns its contents.'''
         try:
             log.debug("Downloading %s" % url)
-            req = urllib2.Request(url, headers={'Referer' : url, 'User-Agent' : USER_AGENT})
+            req = urllib2.Request(url, headers={'Referer': url, 'User-Agent': USER_AGENT})
             if timeout:
                 socket.setdefaulttimeout(timeout)
             f = urllib2.urlopen(req)
@@ -169,29 +169,29 @@ class SubtitleDB(object):
             (tvshow, season, episode, teams) = matches_tvshow.groups()
             tvshow = tvshow.replace(".", " ").strip()
             teams = teams.split('.')
-            return {'type' : 'tvshow', 'name' : tvshow.strip(), 'season' : int(season), 'episode' : int(episode), 'teams' : teams}
+            return {'type': 'tvshow', 'name': tvshow.strip(), 'season': int(season), 'episode': int(episode), 'teams': teams}
         else:
             matches_tvshow = self.tvshowRegex2.match(filename)
             if matches_tvshow:
                 (tvshow, season, episode, teams) = matches_tvshow.groups()
                 tvshow = tvshow.replace(".", " ").strip()
                 teams = teams.split('.')
-                return {'type' : 'tvshow', 'name' : tvshow.strip(), 'season' : int(season), 'episode' : int(episode), 'teams' : teams}
+                return {'type': 'tvshow', 'name': tvshow.strip(), 'season': int(season), 'episode': int(episode), 'teams': teams}
             else:
                 matches_movie = self.movieRegex.match(filename)
                 if matches_movie:
                     (movie, year, teams) = matches_movie.groups()
                     teams = teams.split('.')
                     part = None
-                    if "cd1" in teams :
+                    if "cd1" in teams:
                         teams.remove('cd1')
                         part = 1
-                    if "cd2" in teams :
+                    if "cd2" in teams:
                         teams.remove('cd2')
                         part = 2
-                    return {'type' : 'movie', 'name' : movie.strip(), 'year' : year, 'teams' : teams, 'part' : part}
+                    return {'type': 'movie', 'name': movie.strip(), 'year': year, 'teams': teams, 'part': part}
                 else:
-                    return {'type' : 'unknown', 'name' : filename, 'teams' : [] }
+                    return {'type': 'unknown', 'name': filename, 'teams': []}
 
     def hashFile(self, name):
         '''

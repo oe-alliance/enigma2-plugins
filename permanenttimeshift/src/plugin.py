@@ -1680,11 +1680,11 @@ InfoBarInstantRecord.recordQuestionCallback = recordQuestionCallback
 class PermanentTimeShiftSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = [ "PTSSetup", "Setup" ]
+		self.skinName = ["PTSSetup", "Setup"]
 		self.setup_title = _("Permanent Timeshift Settings Version %s") %VERSION
 
-		self.onChangedEntry = [ ]
-		self.list = [ ]
+		self.onChangedEntry = []
+		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -1705,7 +1705,7 @@ class PermanentTimeShiftSetup(Screen, ConfigListScreen):
 		self.setTitle(self.setup_title)
 
 	def createSetup(self):
-		self.list = [ getConfigListEntry(_("Permanent Timeshift Enable"), config.plugins.pts.enabled) ]
+		self.list = [getConfigListEntry(_("Permanent Timeshift Enable"), config.plugins.pts.enabled)]
 		if config.plugins.pts.enabled.value:
 			self.list.extend((
 				getConfigListEntry(_("Permanent Timeshift Max Events"), config.plugins.pts.maxevents),
@@ -1759,14 +1759,14 @@ class PermanentTimeShiftSetup(Screen, ConfigListScreen):
 def startSetup(menuid):
 	if getImageDistro() in ('openhdf'):
 		if menuid != "record_menu":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
-			return [ ]
+			return []
 	return [(_("Timeshift Settings"), PTSSetupMenu, "pts_setup", 50)]
 
 def PTSSetupMenu(session, **kwargs):
 	session.open(PermanentTimeShiftSetup)
 
 def Plugins(path, **kwargs):
-	return [ PluginDescriptor(name=_("Permanent Timeshift Settings"), description=_("Permanent Timeshift Settings"), where=PluginDescriptor.WHERE_MENU, fnc=startSetup) ]
+	return [PluginDescriptor(name=_("Permanent Timeshift Settings"), description=_("Permanent Timeshift Settings"), where=PluginDescriptor.WHERE_MENU, fnc=startSetup)]

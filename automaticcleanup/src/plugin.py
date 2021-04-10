@@ -284,7 +284,7 @@ class AutomaticCleanup:
 			print pluginPrintname, "Setting backups cleanup disabled"
 				
 	def filterSettings(self):
-		self.deleteList = [ ]
+		self.deleteList = []
 		
 		keep = int(config.plugins.AutomaticCleanup.keepSettings.value)
 		if keep > -1: # don't keep all setting backups
@@ -294,7 +294,7 @@ class AutomaticCleanup:
 				print pluginPrintname, "Keeping the %i latest settings"  % keep
 				# add all settings > config.plugins.AutomaticCleanup.keepSettings.value
 				# to a new list. the settings in this new list will be deleted later.
-				self.deleteList = self.settingList[0 : self.numSettings - keep + 1] # increment for uncounted latest
+				self.deleteList = self.settingList[0: self.numSettings - keep + 1] # increment for uncounted latest
 
 		if int(config.plugins.AutomaticCleanup.deleteSettingsOlderThan.value) > -1:
 			print pluginPrintname, "Searching for outdated setting backup(s)"
@@ -489,11 +489,11 @@ def setup(session, **kwargs):
 def startSetup(menuid):
 	if getImageDistro() in ('teamblue'):
 		if menuid != "general_menu":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
 			return []
 	return [(_("System cleanup"), setup, "AutomaticCleanup", 50)]
 	
 def Plugins(**kwargs):
-	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart), PluginDescriptor(name="System cleanup", description=_("Automatic System Cleanup Setup"), where=PluginDescriptor.WHERE_MENU, fnc=startSetup) ]
+	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart), PluginDescriptor(name="System cleanup", description=_("Automatic System Cleanup Setup"), where=PluginDescriptor.WHERE_MENU, fnc=startSetup)]

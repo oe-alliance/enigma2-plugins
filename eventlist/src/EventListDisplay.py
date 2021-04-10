@@ -62,7 +62,7 @@ class EventListDisplay(Renderer):
 
 	def applySkin(self, desktop, parent):
 
-		attribs = [ ]
+		attribs = []
 		from enigma import eSize
 
 		def parseSize(str):

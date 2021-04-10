@@ -46,11 +46,11 @@ class UploadPkgResource(resource.Resource):
 		filename = mbasename(req.args['filename'][0])
 		print "[filename]", filename
 		if not filename.endswith(".ipk"):
-			return self.res % (_("wrong filetype!") ,_("Close"), _("Add"))
+			return self.res % (_("wrong filetype!"),_("Close"), _("Add"))
 		
 		if not data:
 			req.setResponseCode(http.OK)
-			return self.res % ( _("filesize was 0, not uploaded") ,
+			return self.res % (_("filesize was 0, not uploaded"),
 					_("Close"),
 					 _("Add")
 					)

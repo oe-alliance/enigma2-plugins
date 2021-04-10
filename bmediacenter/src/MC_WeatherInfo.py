@@ -204,7 +204,7 @@ class MC_WeatherInfo(Screen):
 				self.webSite = childs.attrib.get("url").encode("utf-8", 'ignore')
 			for items in childs:
 				if items.tag == "current":
-					self["currentTemp"].text = "%s°%s" % (items.attrib.get("temperature").encode("utf-8", 'ignore') , degreetype)
+					self["currentTemp"].text = "%s°%s" % (items.attrib.get("temperature").encode("utf-8", 'ignore'), degreetype)
 					self["condition"].text = items.attrib.get("skytext").encode("utf-8", 'ignore')
 					self["humidity"].text = _("Humidity: %s %%") % items.attrib.get("humidity").encode("utf-8", 'ignore')
 					self["wind_condition"].text = items.attrib.get("winddisplay").encode("utf-8", 'ignore')
@@ -242,7 +242,7 @@ class MC_WeatherInfo(Screen):
 						self.showIcon(index,filenamepng)
 		if len(IconDownloadList) != 0:
 			ds = defer.DeferredSemaphore(tokens=len(IconDownloadList))
-			downloads = [ds.run(download,item ).addErrback(self.errorIconDownload, item).addCallback(self.finishedIconDownload,item) for item in IconDownloadList]
+			downloads = [ds.run(download,item).addErrback(self.errorIconDownload, item).addCallback(self.finishedIconDownload,item) for item in IconDownloadList]
 			finished = defer.DeferredList(downloads).addErrback(self.error)
 		stadt = config.plugins.mc_wi.Entry[self.weatherPluginEntryIndex - 1].city.value
 		stadt = stadt.split(",")[0]

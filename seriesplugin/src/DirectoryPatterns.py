@@ -33,24 +33,24 @@ from Logger import log
 scheme_fallback = [
 		("Off", "Disabled"),
 		
-		("{org:s}/{series:s}/{season:02d}/"               , "Original/Series/01/"),
-		("{org:s}/{series:s}/S{season:02d}/"              , "Original/Series/S01/"),
-		("{org:s}/{series:s}/{rawseason:s}/"              , "Original/Series/Raw/"),
+		("{org:s}/{series:s}/{season:02d}/", "Original/Series/01/"),
+		("{org:s}/{series:s}/S{season:02d}/", "Original/Series/S01/"),
+		("{org:s}/{series:s}/{rawseason:s}/", "Original/Series/Raw/"),
 		
-		("{org:s}/{series:s}/Season {season:02d}/"        , "Original/Series/Season 01/"),
-		("{org:s}/{series:s}/Season {rawseason:s}/"       , "Original/Series/Season Raw/"),
+		("{org:s}/{series:s}/Season {season:02d}/", "Original/Series/Season 01/"),
+		("{org:s}/{series:s}/Season {rawseason:s}/", "Original/Series/Season Raw/"),
 		
-		("{org:s}/{series:s} {season:02d}/"               , "Original/Series 01/"),
-		("{org:s}/{series:s} S{season:02d}/"              , "Original/Series S01/"),
+		("{org:s}/{series:s} {season:02d}/", "Original/Series 01/"),
+		("{org:s}/{series:s} S{season:02d}/", "Original/Series S01/"),
 		
-		("{org:s}/{series:s} Season {season:02d}/"        , "Original/Series Season 01/"),
-		("{org:s}/{series:s} Season {rawseason:s}/"       , "Original/Series Season Raw/"),
+		("{org:s}/{series:s} Season {season:02d}/", "Original/Series Season 01/"),
+		("{org:s}/{series:s} Season {rawseason:s}/", "Original/Series Season Raw/"),
 		
-		("{org:s}/{service:s}/{series:s}/Season {rawseason:s}/" , "Original/Service/Series/Season Raw/"),
-		("{org:s}/{channel:s}/{series:s}/Season {rawseason:s}/" , "Original/Channel/Series/Season Raw/"),
+		("{org:s}/{service:s}/{series:s}/Season {rawseason:s}/", "Original/Service/Series/Season Raw/"),
+		("{org:s}/{channel:s}/{series:s}/Season {rawseason:s}/", "Original/Channel/Series/Season Raw/"),
 		
-		("{org:s}/{date:s}/{series:s}/" , "Date/Series/"),
-		("{org:s}/{time:s}/{series:s}/" , "Time/Series/")
+		("{org:s}/{date:s}/{series:s}/", "Date/Series/"),
+		("{org:s}/{time:s}/{series:s}/", "Time/Series/")
 	]
 
 def readDirectoryPatterns():

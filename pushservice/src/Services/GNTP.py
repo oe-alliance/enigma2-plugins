@@ -45,25 +45,25 @@ class GNTP(ServiceBase):
 		#self.sockets = []
 		
 		# Default configuration
-		self.setOption( 'growlhost',  NoSave(ConfigText(default="host", fixed_size=False)),  _("Growl Host name") )
-		self.setOption( 'growlport',  NoSave(ConfigNumber(default=23053)),                   _("Growl Port") )
-		self.setOption( 'timeout',    NoSave(ConfigNumber(default=3)),                       _("Timeout") )
-		self.setOption( 'password',   NoSave(ConfigPassword()),                                _("Password") )
-		self.setOption( 'sticky',     NoSave(ConfigYesNo(default=True)),                     _("Send as sticky") )
-		self.setOption( 'priority',   NoSave(ConfigNumber(default=1)),                       _("Send with priority") )
+		self.setOption('growlhost',  NoSave(ConfigText(default="host", fixed_size=False)),  _("Growl Host name"))
+		self.setOption('growlport',  NoSave(ConfigNumber(default=23053)),                   _("Growl Port"))
+		self.setOption('timeout',    NoSave(ConfigNumber(default=3)),                       _("Timeout"))
+		self.setOption('password',   NoSave(ConfigPassword()),                                _("Password"))
+		self.setOption('sticky',     NoSave(ConfigYesNo(default=True)),                     _("Send as sticky"))
+		self.setOption('priority',   NoSave(ConfigNumber(default=1)),                       _("Send with priority"))
 
 	def push(self, callback, errback, pluginname, subject, body="", attachments=[]):
 		from Plugins.Extensions.PushService.plugin import NAME, VERSION, SUPPORT, DONATE
 		
 		box = config.pushservice.boxname.value
-		app = APP_NAME.format( **{'box': box, 'name': NAME} )
-		nottype = NOTIFICATION_TYPE.format( **{'box': box, 'name': NAME} )
+		app = APP_NAME.format(**{'box': box, 'name': NAME})
+		nottype = NOTIFICATION_TYPE.format(**{'box': box, 'name': NAME})
 		
 		# Prepare message
 		if body == "":
 			body = subject
-		subject = GROWL_SUBJECT_TEMPLATE.format( **{'box': box, 'subject': subject} )
-		body = GROWL_BODY_TEMPLATE.format( **{'body': str(body), 'name': NAME, 'version': VERSION, 'plugin': pluginname, 'support': SUPPORT, 'donate': DONATE} )
+		subject = GROWL_SUBJECT_TEMPLATE.format(**{'box': box, 'subject': subject})
+		body = GROWL_BODY_TEMPLATE.format(**{'body': str(body), 'name': NAME, 'version': VERSION, 'plugin': pluginname, 'support': SUPPORT, 'donate': DONATE})
 		
 		# Registrate
 		growl = gntp.notifier.GrowlNotifier(

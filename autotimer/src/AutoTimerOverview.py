@@ -270,7 +270,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		from plugin import autotimerHelp
 		if autotimerHelp:
 			list.insert(0, (_("Help"), "help"))
-			list.insert(1, (_("Frequently asked questions") , "faq"))
+			list.insert(1, (_("Frequently asked questions"), "faq"))
 
 		self.session.openWithCallback(
 			self.menuCallback,

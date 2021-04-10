@@ -33,7 +33,7 @@ class TPMChallenge(Source):
 
 			if random != None:
 
-				value = b64encode( tpm.computeSignature( b64decode(random) ) )
+				value = b64encode(tpm.computeSignature(b64decode(random)))
 				return (None, None, value, True, _('Challenge executed, please verify the result!'))
 			else:
 				return (None, None, None, False, _('Obligatory parameter "random" for cmd="%s" missing') %self.CHALLENGE)

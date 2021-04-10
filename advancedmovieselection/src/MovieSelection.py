@@ -709,7 +709,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
             self.skinName.insert(0, SkinTools.appendResolution("AdvancedMovieSelection_Preview_noCover_"))
         if not config.AdvancedMovieSelection.showpreview.value and config.AdvancedMovieSelection.video_preview.value and config.AdvancedMovieSelection.video_preview_fullscreen.value and config.movielist.description.value == MovieList.HIDE_DESCRIPTION:
             self.skinName.insert(0, SkinTools.appendResolution("AdvancedMovieSelection_Preview_noDescription_noCover_"))
-        self.tags = [ ]
+        self.tags = []
         self.showLastDir = showLastDir
         if not config.AdvancedMovieSelection.startonfirst.value and not selectedmovie:
             if config.AdvancedMovieSelection.last_selected_service.value != "":
@@ -1404,7 +1404,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
 
     def showTagsMenu(self, tagele):
         self.selected_tags_ele = tagele
-        list = [(self.getTagDescription(tag)) for tag in self.tags ]
+        list = [(self.getTagDescription(tag)) for tag in self.tags]
         selection = 0
         current = self.selected_tags and "".join(self.selected_tags)
         for index, item in enumerate(list):

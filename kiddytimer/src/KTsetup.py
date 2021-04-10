@@ -51,10 +51,10 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         self.list = [
             getConfigListEntry(_("Enabled"), config.plugins.KiddyTimer.enabled),
             getConfigListEntry(_("PIN"), config.plugins.KiddyTimer.pin),
-            getConfigListEntry(_("Don't monitor TV started before"), config.plugins.KiddyTimer.monitorStartTime ), 
-            getConfigListEntry(_("Don't monitor TV started after"), config.plugins.KiddyTimer.monitorEndTime ), 
-            getConfigListEntry(_("Style of timer"), config.plugins.KiddyTimer.timerStyle ),
-            getConfigListEntry(_("Timeout for activation dialog"), config.plugins.KiddyTimer.activationDialogTimeout )
+            getConfigListEntry(_("Don't monitor TV started before"), config.plugins.KiddyTimer.monitorStartTime), 
+            getConfigListEntry(_("Don't monitor TV started after"), config.plugins.KiddyTimer.monitorEndTime), 
+            getConfigListEntry(_("Style of timer"), config.plugins.KiddyTimer.timerStyle),
+            getConfigListEntry(_("Timeout for activation dialog"), config.plugins.KiddyTimer.activationDialogTimeout)
             ]
         for i in range(0,7):
             self.list.append(getConfigListEntry(KTglob.DAYNAMES[i], config.plugins.KiddyTimer.dayTimes[i].timeValue))                
@@ -68,7 +68,7 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         
         # Plugin Information
         self.remainingTime = config.plugins.KiddyTimer.remainingTime.value
-        sRemainingTime = KTglob.getTimeFromSeconds(self.remainingTime , True )
+        sRemainingTime = KTglob.getTimeFromSeconds(self.remainingTime, True)
 
         self["PluginInfo"] = Label(_("Plugin: %(plugin)s , Version: %(version)s") %dict(plugin=KTglob.PLUGIN_BASE,version=KTglob.PLUGIN_VERSION))
         self["RemainingTime"] = Label(_("Remaining time: %s") %sRemainingTime)
@@ -116,7 +116,7 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         config.plugins.KiddyTimer.remainingTime.value = int(self.remainingTime)
         config.plugins.KiddyTimer.remainingTime.save()
 
-        sRemainingTime = KTglob.getTimeFromSeconds(self.remainingTime , True )
+        sRemainingTime = KTglob.getTimeFromSeconds(self.remainingTime, True)
         self["RemainingTime"].setText(_("Remaining time: %s") %sRemainingTime)
 
     def save(self):
@@ -176,13 +176,13 @@ class KiddyTimerPositioner(Screen, MovableScreen):
             self["TimerTransparent"].show()
             self["TimerTransparentText"].show()
 
-        self["actions"] = ActionMap(["OkCancelActions"] , 
+        self["actions"] = ActionMap(["OkCancelActions"], 
         {
          "ok":      self.keyOK,
          "cancel":  self.keyCancel
         }, -1)
 
-        MovableScreen.__init__(self, config.plugins.KiddyTimer, [], 82 , 82)
+        MovableScreen.__init__(self, config.plugins.KiddyTimer, [], 82, 82)
         self.startMoving()
         
     def keyOK(self):

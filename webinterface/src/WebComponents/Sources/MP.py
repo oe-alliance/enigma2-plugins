@@ -39,7 +39,7 @@ class MP(Source):
 		elif func is self.REMOVE:
 			self.result = self.removeFile(cmd)
 		elif func is self.ADD:
-			param = { "file" : cmd, "root" : None}
+			param = {"file": cmd, "root": None}
 			self.result = self.addFile(param)
 
 	def tryOpenMP(self, noCreate=False):
@@ -112,9 +112,9 @@ class MP(Source):
 		filelist = FileList(path, showDirectories=True, showFiles=True, matchingPattern=matchingPattern, useServiceRef=useServiceRef, isTop=False)
 		list = filelist.getFileList()
 		if useServiceRef is True:
-			returnList = [ (x[0][0].toString(), x[0][1], path) if x[0][1] is False else (x[0][0], x[0][1], path) for x in list ]
+			returnList = [(x[0][0].toString(), x[0][1], path) if x[0][1] is False else (x[0][0], x[0][1], path) for x in list]
 		else:
-			returnList = [ (param["path"] + x[0][0], x[0][1], path) if x[0][1] is False else (x[0][0], x[0][1], path) for x in list ]
+			returnList = [(param["path"] + x[0][0], x[0][1], path) if x[0][1] is False else (x[0][0], x[0][1], path) for x in list]
 
 		return returnList
 

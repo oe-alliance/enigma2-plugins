@@ -211,22 +211,22 @@ class LastFM(LastFMHandler):
         return result
     
 
-    def XMLgetElementsByTagName( self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES ):
+    def XMLgetElementsByTagName(self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES):
         for namespace in possibleNamespaces:
             children = node.getElementsByTagNameNS(namespace, tagName)
             if len(children):
                 return children
         return []
 
-    def XMLnode_data( self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES):
+    def XMLnode_data(self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES):
         children = self.XMLgetElementsByTagName(node, tagName, possibleNamespaces)
         node = len(children) and children[0] or None
         return node and "".join([child.data.encode("utf-8") for child in node.childNodes]) or None
 
-    def XMLget_txt( self, node, tagName, default_txt="" ):
-        return self.XMLnode_data( node, tagName ) or self.XMLnode_data( node, tagName, self.DUBLIN_CORE ) or default_txt
+    def XMLget_txt(self, node, tagName, default_txt=""):
+        return self.XMLnode_data(node, tagName) or self.XMLnode_data(node, tagName, self.DUBLIN_CORE) or default_txt
 
-    def getGlobalTags( self ,force_reload=False):
+    def getGlobalTags(self,force_reload=False):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
@@ -326,11 +326,11 @@ class LastFM(LastFMHandler):
             data =[]
             for node in self.XMLgetElementsByTagName(rssDocument, 'track'):
                 nodex={}
-                nodex['name'] = self.XMLget_txt(node, "name", "N/A" )
-                nodex['artist'] =  self.XMLget_txt(node, "artist", "N/A" )
-                nodex['playcount'] = self.XMLget_txt(node, "playcount", "N/A" )
+                nodex['name'] = self.XMLget_txt(node, "name", "N/A")
+                nodex['artist'] =  self.XMLget_txt(node, "artist", "N/A")
+                nodex['playcount'] = self.XMLget_txt(node, "playcount", "N/A")
                 nodex['stationurl'] =  "lastfm://artist/"+nodex['artist'].replace(" ","%20")+"/similarartists"#+nodex['name'].replace(" ","%20")
-                nodex['url'] =  self.XMLget_txt(node, "url", "N/A" )
+                nodex['url'] =  self.XMLget_txt(node, "url", "N/A")
                 nodex['_display'] = nodex['artist']+" - "+nodex['name']
                 data.append(nodex)
             return True,data
@@ -381,7 +381,7 @@ class LastFM(LastFMHandler):
             for node in self.XMLgetElementsByTagName(rssDocument, 'user'):
                 nodex={}
                 nodex['name'] = node.getAttribute("username").encode("utf-8")
-                nodex['url'] =  self.XMLget_txt(node, "url", "N/A" )
+                nodex['url'] =  self.XMLget_txt(node, "url", "N/A")
                 nodex['stationurl'] =  "lastfm://user/"+nodex['name']+"/personal"
                 nodex['_display'] = nodex['name']
                 data.append(nodex)
@@ -403,9 +403,9 @@ class LastFM(LastFMHandler):
     def changeStationCB(self,result):
         res = self._parselines(result)
         if res["response"] == "OK":
-            self.onStationChanged (_("Station changed"))
+            self.onStationChanged(_("Station changed"))
         else:
-            self.onCommandFailed (_("Server returned") + " " +res["response"])
+            self.onCommandFailed(_("Server returned") + " " +res["response"])
 
 ############
 class LastFMPlaylist:
@@ -422,8 +422,8 @@ class LastFMPlaylist:
     
     def __init__(self,xmlsource):
         self.xmldoc = parseString(xmlsource)
-        self.name = unquote_plus(self._get_txt( self.xmldoc, "title", "no playlistname" ))
-        self.creator =self._get_txt( self.xmldoc, "creator", "no playlistcreator" )
+        self.name = unquote_plus(self._get_txt(self.xmldoc, "title", "no playlistname"))
+        self.creator =self._get_txt(self.xmldoc, "creator", "no playlistcreator")
         self.parseTracks()
 
     def getTracks(self):
@@ -441,30 +441,30 @@ class LastFMPlaylist:
             for node in self._getElementsByTagName(self.xmldoc, 'track'):
                 nodex={}
                 nodex['station'] =  self.name
-                nodex['location'] =  self._get_txt( node, "location", "no location" )
-                nodex['title'] =  self._get_txt( node, "title", "no title" )
-                nodex['id'] =  self._get_txt( node, "id", "no id" )
-                nodex['album'] =  self._get_txt( node, "album", "no album" )
-                nodex['creator'] =  self._get_txt( node, "creator", "no creator" )
-                nodex['duration'] =  int(self._get_txt( node, "duration", "0" ))
-                nodex['image'] =  self._get_txt( node, "image", "no image" )
+                nodex['location'] =  self._get_txt(node, "location", "no location")
+                nodex['title'] =  self._get_txt(node, "title", "no title")
+                nodex['id'] =  self._get_txt(node, "id", "no id")
+                nodex['album'] =  self._get_txt(node, "album", "no album")
+                nodex['creator'] =  self._get_txt(node, "creator", "no creator")
+                nodex['duration'] =  int(self._get_txt(node, "duration", "0"))
+                nodex['image'] =  self._get_txt(node, "image", "no image")
                 self.tracks.append(nodex)
             self.length = len(self.tracks)
             return True
         except:
             return False
     
-    def _getElementsByTagName( self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES ):
+    def _getElementsByTagName(self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES):
         for namespace in possibleNamespaces:
             children = node.getElementsByTagNameNS(namespace, tagName)
             if len(children):
                 return children
         return []
 
-    def _node_data( self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES):
+    def _node_data(self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES):
         children = self._getElementsByTagName(node, tagName, possibleNamespaces)
         node = len(children) and children[0] or None
         return node and "".join([child.data.encode("utf-8") for child in node.childNodes]) or None
 
-    def _get_txt( self, node, tagName, default_txt="" ):
-        return self._node_data( node, tagName ) or self._node_data( node, tagName, self.DUBLIN_CORE ) or default_txt
+    def _get_txt(self, node, tagName, default_txt=""):
+        return self._node_data(node, tagName) or self._node_data(node, tagName, self.DUBLIN_CORE) or default_txt

@@ -144,16 +144,16 @@ class AutoTimerList(MenuList):
 			channels.append(ServiceReference(t).getServiceName())
 		for t in timer.bouquets:
 			bouquets.append(ServiceReference(t).getServiceName())
-		if len(channels) >0 :
+		if len(channels) >0:
 			channel = _("[S]  ")
 			channel += ", ".join(channels)
-		elif len(bouquets) >0 :
+		elif len(bouquets) >0:
 			channel = _("[B]  ")
 			channel += ", ".join(bouquets)
 		else:
 			channel = _('All channels')
 
-		res = [ None ]
+		res = [None]
 		if icon:
 			if skinparms:
 				x, y, w, h = parameters.get("AutotimerEnabledIcon",(iconMargin, 0, statusIconHeight, statusIconWidth))

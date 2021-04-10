@@ -79,7 +79,7 @@ config.plugins.subsdownloader.ItasaPassword = ConfigPassword(default="password",
 #Create Subtitle Server plugin list
 PERISCOPE_PLUGINS = list_XBMC_Periscope_plugins('/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/SourceCode/periscope/services/')
 SUBTITLE_SERVER_LIST = [(("NapiProjekt"),"NapiProjekt"), (("Napisy24"),"Napisy24")]
-for server in PERISCOPE_PLUGINS :
+for server in PERISCOPE_PLUGINS:
 	SUBTITLE_SERVER_LIST.append((server,server))
 XBMC_PLUGINS = list_XBMC_Periscope_plugins('/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/SourceCode/xbmc_subtitles/services/')
 for server in XBMC_PLUGINS:
@@ -130,7 +130,7 @@ class SubsDownloaderApplication(Screen):
 		widget_source_x_position = int(0.766 * Skin_width)
 		widget_source_y_position = int(0.1081*Skin_height)
 		widget_source_x_size = int(0.191*Skin_width)
-		widget_source_y_size = int (26)
+		widget_source_y_size = int(26)
 		font_size = int(int(0.0174*Skin_width))
 		
 		self.skin = "<screen position=\"center,"+str(int(0.078*Skin_height))+"\" size=\"" + str(Skin_width) + "," + str(Skin_height) +"\" title= \"Subtitle downloader\" > \
@@ -687,8 +687,8 @@ class SubsDownloaderApplication(Screen):
 						self.setServerAvailableSubtitles_for_PERISCOPE(self.subtitle_database)
 				elif config.plugins.subsdownloader.subtitleserver.value in  XBMC_PLUGINS:
 					
-					exec ('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import *' % config.plugins.subsdownloader.subtitleserver.value)
-					exec ('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import service as SERVICE' % config.plugins.subsdownloader.subtitleserver.value)        
+					exec('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import *' % config.plugins.subsdownloader.subtitleserver.value)
+					exec('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import service as SERVICE' % config.plugins.subsdownloader.subtitleserver.value)        
 					
 					temp_struct = GuessFileData_from_FileName(SubtitleDatabase.tvshowRegex, SubtitleDatabase.tvshowRegex2, SubtitleDatabase.movieRegex)
 					show_name, show_type, show_season, show_episode = temp_struct.return_movie_data_to_XBMC(self.movie_filename)
@@ -931,25 +931,25 @@ class SubsDownloaderApplication(Screen):
 						if DVDPlayerAviable:
 							self.session.open(DVDPlayer, dvd_filelist=[filename])
 					elif testFileName.endswith(".tar.gz"):
-						self.commando = [ "tar -xzvf " + filename + " -C /" ]
+						self.commando = ["tar -xzvf " + filename + " -C /"]
 						askList = [(_("Cancel"), "NO"),(_("Install this package"), "YES")]
 						dei = self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("GZ-package:\\n"+filename), list=askList)
 						dei.setTitle(_("Subtitle Downloader : Install..."))
 					elif testFileName.endswith(".tar.bz2"):
-						self.commando = [ "tar -xjvf " + filename + " -C /" ]
+						self.commando = ["tar -xjvf " + filename + " -C /"]
 						askList = [(_("Cancel"), "NO"),(_("Install this package"), "YES")]
 						dei = self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("BZ2-package:\\n"+filename), list=askList)
 						dei.setTitle(_("SubsDownloader : Install..."))
 					elif testFileName.endswith(".ipk"):
 						if fileExists("/usr/bin/opkg"):
-							self.commando = [ "opkg install " + filename ]
+							self.commando = ["opkg install " + filename]
 						else:
-							self.commando = [ "ipkg install " + filename ]
+							self.commando = ["ipkg install " + filename]
 							askList = [(_("Cancel"), "NO"),(_("Install this package"), "YES")]
 							dei = self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("IPKG-package:\\n"+filename), list=askList)
 							dei.setTitle(_("SubsDownloader : Install..."))
 					elif testFileName.endswith(".sh"):
-						self.commando = [ filename ]
+						self.commando = [filename]
 						askList = [(_("Cancel"), "NO"),(_("View this shell-script"), "VIEW"),(_("Start execution"), "YES")]
 						self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("Do you want to execute?\\n"+filename), list=askList)
 					else:
@@ -971,16 +971,16 @@ class SubsDownloaderApplication(Screen):
 				if config.plugins.subsdownloader.subtitleserver.value == "DMnapi":
 					pass #PASS BECAUSE DMnapi DOWNLOAD ONLY PL FILE AND IT'S DIRECTLY IN DOWNLOAD SUBTITLE FUNCTION.
 				if config.plugins.subsdownloader.subtitleserver.value in  XBMC_PLUGINS:
-					exec ('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import *' % config.plugins.subsdownloader.subtitleserver.value)
-					exec ('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import service as SERVICE' % config.plugins.subsdownloader.subtitleserver.value) 
+					exec('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import *' % config.plugins.subsdownloader.subtitleserver.value)
+					exec('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import service as SERVICE' % config.plugins.subsdownloader.subtitleserver.value) 
 					pos = self["subsList"].getCurrent()[1]
 					tmp_sub_dir = sub_folder = self.movie_filename.rsplit("/",1)[0]
 					zipped_subs_path = self.movie_filename.rsplit(".",1)[0]+".zip" #for some plugins
-					TRUE_FALSE, language, subtitle_filename = SERVICE.download_subtitles (self.subtitle_database, pos, zipped_subs_path, tmp_sub_dir, sub_folder, self.__session_id, self.session)
+					TRUE_FALSE, language, subtitle_filename = SERVICE.download_subtitles(self.subtitle_database, pos, zipped_subs_path, tmp_sub_dir, sub_folder, self.__session_id, self.session)
 					
 				if config.plugins.subsdownloader.subtitleserver.value == "Napisy24":
 					whichSubtitleDownload = self["subsList"].getCurrent()[1]
-					if self.subtitles.save_downloaded_zip (whichSubtitleDownload)== True:
+					if self.subtitles.save_downloaded_zip(whichSubtitleDownload)== True:
 						subtitle_filename = self.subtitles.extract_zip_file()
 						try:
 							os.remove(self.subtitles.ZipFilePath) #remove downloaded zip file
@@ -1000,7 +1000,7 @@ class SubsDownloaderApplication(Screen):
 								self.convert_subtitle_to_movie(x['movie'], x['subtitle'])
 						else:
 							self["fileList"].refresh()
-							self.session.open(MessageBox, _("%i file(s) was extracted and I didn't match them automatically this time. \n Please make local convertion (long TEXT).") % (len(subtitle_filename)) , MessageBox.TYPE_INFO, timeout=10)
+							self.session.open(MessageBox, _("%i file(s) was extracted and I didn't match them automatically this time. \n Please make local convertion (long TEXT).") % (len(subtitle_filename)), MessageBox.TYPE_INFO, timeout=10)
 				if subtitle_filename == [] or subtitle_filename == "":
 					self.session.open(MessageBox, _("There is problem with downloading or saveing subtitles on storage device."), MessageBox.TYPE_INFO, timeout=5)
 			
@@ -1087,7 +1087,7 @@ class FileManagerCommands(Screen):
 	def ExitWithDoingSomething(self):
 		def delete_command_notification(callback):
 			if callback == True:
-				self.close (("delete", self.file_to_manage))
+				self.close(("delete", self.file_to_manage))
 			
 			else:
 				self.ExitWithoutDoingNothing()
@@ -1099,11 +1099,11 @@ class FileManagerCommands(Screen):
 		elif returnValue == "delete":
 			self.session.openWithCallback(delete_command_notification, MessageBox,_("Do You realy want to delete: /n %s" % self.file_to_manage), MessageBox.TYPE_YESNO, default=False)
 		elif returnValue == "copy":
-			self.close (("copy", self.file_to_manage))
+			self.close(("copy", self.file_to_manage))
 		elif returnValue == "move":
-			self.close (("move", self.file_to_manage))
+			self.close(("move", self.file_to_manage))
 		elif returnValue == "rename":
-			self.close (("rename", self.file_to_manage))
+			self.close(("rename", self.file_to_manage))
 	
 	
 	
@@ -1191,12 +1191,12 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 		#TODO RETURN TO APPLICATION AND NOTIFICATRION ABOIUT NOT SAVEING
 		for x in self["config"].list:
 			x[1].cancel()
-		self.close ()
+		self.close()
 	
 	def saveConfig(self):
 		for x in self["config"].list:
 			x[1].save()
-		self.close ()
+		self.close()
 
 		
 #######################################################################
@@ -1343,7 +1343,7 @@ class PictureExplorerII(Screen):
 			self.EXpicload.startDecode(self.whatPic)
 		if self.whatDir is not None:
 			pidx = 0
-			for root, dirs, files in os_walk(self.whatDir ):
+			for root, dirs, files in os_walk(self.whatDir):
 				for name in files:
 					if name.endswith(".jpg") or name.endswith(".jpeg") or name.endswith(".Jpg") or name.endswith(".Jpeg") or name.endswith(".JPG") or name.endswith(".JPEG"):
 						self.picList.append(name)
@@ -1473,7 +1473,7 @@ class MoviePlayer(MP_parent):
 	def doEofInternal(self, playing):
 		if not self.execing:
 			return
-		if not playing :
+		if not playing:
 			return
 		self.leavePlayer()
 
@@ -1532,7 +1532,7 @@ class MusicExplorer(MoviePlayer_4_MusicExploret):
 			
 	def searchMusic(self):
 		midx = 0
-		for root, dirs, files in os_walk(self.MusicDir ):
+		for root, dirs, files in os_walk(self.MusicDir):
 			for name in files:
 				name = name.lower()
 				if name.endswith(".mp3") or name.endswith(".mp2") or name.endswith(".ogg") or name.endswith(".wav") or name.endswith(".flac") or name.endswith(".m4a"):
@@ -1564,7 +1564,7 @@ class MusicExplorer(MoviePlayer_4_MusicExploret):
 	def doEofInternal(self, playing):
 		if not self.execing:
 			return
-		if not playing :
+		if not playing:
 			return
 		self.seekFwd()
 

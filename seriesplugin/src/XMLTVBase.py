@@ -73,25 +73,25 @@ class XMLTVBase(object):
 		root.set('created_by', NAME)
 		root.append(Comment(_("Don't edit this manually unless you really know what you are doing")))
 		
-		element = SubElement( root, "source", type="gen_xmltv", channels="wunschliste.channels.xml" )
+		element = SubElement(root, "source", type="gen_xmltv", channels="wunschliste.channels.xml")
 		
-		SubElement( element, "description" ).text = "Wunschliste XMLTV"
-		SubElement( element, "url" ).text = config.plugins.seriesplugin.xmltv_url.value
+		SubElement(element, "description").text = "Wunschliste XMLTV"
+		SubElement(element, "url").text = config.plugins.seriesplugin.xmltv_url.value
 		
-		etree = ElementTree( root )
+		etree = ElementTree(root)
 		
 		indent(etree.getroot())
 		
 		if config.plugins.seriesplugin.epgimport.value:
 			log.debug("Write: xml channels for epgimport")
 			try:
-				self.epgimport.writeXML( etree )
+				self.epgimport.writeXML(etree)
 			except Exception as e:
 				log.exception("Exception in write XML: " + str(e))
 		
 		if config.plugins.seriesplugin.xmltvimport.value:
 			log.debug("Write: xml channels for xmltvimport")
 			try:
-				self.xmltvimport.writeXML( etree )
+				self.xmltvimport.writeXML(etree)
 			except Exception as e:
 				log.exception("Exception in write XML: " + str(e))

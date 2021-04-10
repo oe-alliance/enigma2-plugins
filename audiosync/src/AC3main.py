@@ -53,8 +53,8 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
         self["ChannelImg"] = MultiPixmap()
         self["GlobalImg"] = MultiPixmap()
         
-        self["ChannelLabel"] = MultiColorLabel( _("Service delay"))
-        self["GlobalLabel"] = MultiColorLabel( _("Global delay"))
+        self["ChannelLabel"] = MultiColorLabel(_("Service delay"))
+        self["GlobalLabel"] = MultiColorLabel(_("Global delay"))
 
         # Slider
         self["AudioSliderBar"] = ProgressBar()
@@ -160,7 +160,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
         sAudio = self.AC3delay.whichAudio
         sNumber = str(number)
         if self.AC3delay.whichAudio == AC3GLOB or self.AC3delay.whichAudio == PCMGLOB:
-            iStep = ( self.keyStep[sNumber] // 25 ) * 25
+            iStep = (self.keyStep[sNumber] // 25) * 25
         else:
             iStep = self.keyStep[sNumber]        
         iSliderValue = iStep-self.lowerBound
@@ -170,7 +170,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
     def keyNumberRelative(self, number):
         sNumber = str(number)
         if self.AC3delay.whichAudio == AC3GLOB or self.AC3delay.whichAudio == PCMGLOB:
-            iStep = ( self.stepSize[sNumber] // 25 ) * 25
+            iStep = (self.stepSize[sNumber] // 25) * 25
         else:
             iStep = self.stepSize[sNumber]
 
@@ -214,7 +214,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
             else:
                 sResponse = _("Invalid selection")
                 iType = MessageBox.TYPE_ERROR
-                self.session.open(MessageBox, sResponse , iType)
+                self.session.open(MessageBox, sResponse, iType)
                 
     def menuSaveDelayToKey(self):
         sAudio = self.AC3delay.whichAudio
@@ -253,7 +253,7 @@ class AC3SetCustomValue:
     def DoSetCustomValue(self,answer):
         if answer is None:
             self.session.open(MessageBox,_("Setting key canceled"), MessageBox.TYPE_INFO)
-        elif answer[1] in ("2" , "5" , "8"):
+        elif answer[1] in ("2", "5", "8"):
             if answer[1] == "2":
                 config.plugins.AC3LipSync.absoluteStep2.setValue(self.iDelay)
                 config.plugins.AC3LipSync.absoluteStep2.save()

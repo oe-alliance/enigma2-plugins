@@ -301,7 +301,7 @@ class LDIFParser:
     """
     Unfold several folded lines with trailing space into one line
     """
-    unfolded_lines = [ self._stripLineSep(self._line) ]
+    unfolded_lines = [self._stripLineSep(self._line)]
     self._line = self._input_file.readline()
     while self._line and self._line[0]==' ':
       unfolded_lines.append(self._stripLineSep(self._line[1:]))

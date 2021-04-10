@@ -193,11 +193,11 @@ class MediaInfo:
 		self.MediaInfo_Delete(self.Handle)
 	def Open(self, File):
 		if type(File)==str:
-			return self.MediaInfoA_Open (self.Handle, File)
+			return self.MediaInfoA_Open(self.Handle, File)
 		elif MustUseAnsi:
-			return self.MediaInfoA_Open (self.Handle, File.encode("utf-8"))
+			return self.MediaInfoA_Open(self.Handle, File.encode("utf-8"))
 		else:
-			return self.MediaInfo_Open (self.Handle, File)
+			return self.MediaInfo_Open(self.Handle, File)
 	def Open_Buffer(self, Begin, Begin_Size, End=None, End_Size=0):
 		return self.MediaInfo_Open_Buffer(self.Handle, Begin, Begin_Size, End, End_Size)
 	def Save(self):
@@ -374,33 +374,33 @@ class MediaInfoList:
 	def Open(self, Files, Options=FileOptions.Nothing):
 		return MediaInfoList_Open(self.Handle, Files, Options)
 	def Open_Buffer(self, Begin, Begin_Size, End=None, End_Size=0):
-		return MediaInfoList_Open_Buffer (self.Handle, Begin, Begin_Size, End, End_Size)
+		return MediaInfoList_Open_Buffer(self.Handle, Begin, Begin_Size, End, End_Size)
 	def Save(self, FilePos):
 		return MediaInfoList_Save(self.Handle, FilePos)
 	def Close(self, FilePos):
-		MediaInfoList_Close (self.Handle, FilePos)
+		MediaInfoList_Close(self.Handle, FilePos)
 
 	#General information
 	def Inform(self, FilePos, Reserved=0):
-		return MediaInfoList_Inform (self.Handle, FilePos, Reserved)
+		return MediaInfoList_Inform(self.Handle, FilePos, Reserved)
 	def GetI(self, FilePos, StreamKind, StreamNumber, Parameter, InfoKind=Info.Text):
-		return MediaInfoList_GetI (self.Handle, FilePos, StreamKind, StreamNumber, Parameter, InfoKind)
+		return MediaInfoList_GetI(self.Handle, FilePos, StreamKind, StreamNumber, Parameter, InfoKind)
 	def Get(self, FilePos, StreamKind, StreamNumber, Parameter, InfoKind=Info.Text, SearchKind=Info.Name):
-		return MediaInfoList_Get (self.Handle, FilePos, StreamKind, StreamNumber, (Parameter), InfoKind, SearchKind)
+		return MediaInfoList_Get(self.Handle, FilePos, StreamKind, StreamNumber, (Parameter), InfoKind, SearchKind)
 	def SetI(self, ToSet, FilePos, StreamKind, StreamNumber, Parameter, OldParameter=u""):
-		return MediaInfoList_SetI (self, Handle, ToSet, FilePos, StreamKind, StreamNumber, Parameter, OldParameter)
+		return MediaInfoList_SetI(self, Handle, ToSet, FilePos, StreamKind, StreamNumber, Parameter, OldParameter)
 	def Set(self, ToSet, FilePos, StreamKind, StreamNumber, Parameter, OldParameter=u""):
-		return MediaInfoList_Set (self.Handle, ToSet, FilePos, StreamKind, StreamNumber, Parameter, OldParameter)
+		return MediaInfoList_Set(self.Handle, ToSet, FilePos, StreamKind, StreamNumber, Parameter, OldParameter)
 
 	#Options
 	def Option(self, Option, Value=u""):
-		return MediaInfoList_Option (self.Handle, Option, Value)
+		return MediaInfoList_Option(self.Handle, Option, Value)
 	def Option_Static(self, Option, Value=u""):
 		return MediaInfoList_Option(None, Option, Value)
 	def State_Get(self):
-		return MediaInfoList_State_Get (self.Handle)
+		return MediaInfoList_State_Get(self.Handle)
 	def Count_Get(self, FilePos, StreamKind, StreamNumber):
-		return MediaInfoList_Count_Get (self.Handle, FilePos, StreamKind, StreamNumber=-1)
+		return MediaInfoList_Count_Get(self.Handle, FilePos, StreamKind, StreamNumber=-1)
 	def Count_Get_Files(self):
-		return MediaInfoList_Count_Get_Files (self.Handle)
+		return MediaInfoList_Count_Get_Files(self.Handle)
 

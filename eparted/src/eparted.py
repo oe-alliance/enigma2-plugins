@@ -425,7 +425,7 @@ class Cpart(Screen):
 		if mkpart:
 			fs = val[PA_FS]
 			com = "parted -s -a optimal %s mkpart primary %s %s%s %s%s" % (self.__devpath, fs, val[PA_START], self.__unit, val[PA_END], self.__unit)
-			list.append((com , _("create partition %s") % partnr, None))
+			list.append((com, _("create partition %s") % partnr, None))
 		
 		mountdev = None
 		if val[PA_FS] == "linux-swap":
@@ -441,7 +441,7 @@ class Cpart(Screen):
 				mkfs += " -f"
 
 		com = "%s %s%s" % (mkfs, self.__devpath, partnr)
-		list.append((com , _("make filesystem '%s' on partition %s (%d %s)") % (val[PA_FS], partnr, val[PA_SIZE], self.__unit), mountdev))
+		list.append((com, _("make filesystem '%s' on partition %s (%d %s)") % (val[PA_FS], partnr, val[PA_SIZE], self.__unit), mountdev))
 		
 	def __delPart2Comlist(self, list, val):
 		partnr = val[PA_NR]

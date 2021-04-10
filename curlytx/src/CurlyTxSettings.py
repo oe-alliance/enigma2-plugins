@@ -204,7 +204,7 @@ class CurlyTxSettings(ConfigListScreen, HelpableScreen, Screen):
 class CurlyTxPageEdit(Screen, ConfigListScreen):
     def __init__(self, session, page, new=False):
         Screen.__init__(self, session)
-        self.skinName = [ "CurlyTxPageEdit", "Setup" ]
+        self.skinName = ["CurlyTxPageEdit", "Setup"]
 
         self["key_red"]   = StaticText(_("Cancel"))
         self["key_green"] = StaticText(_("OK"))

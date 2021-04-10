@@ -51,7 +51,7 @@ class ServiceBase(ModuleBase):
 	def push(self, callback, errback, pluginname, subject, body="", attachments=[]):
 		# Will be called, if a plugin wants to send a notification
 		# At the end a service has to call one of the functions: callback or errback
-		errback( "Not implemented: " + self.getName() + ".push()")
+		errback("Not implemented: " + self.getName() + ".push()")
 
 #	def test(self, plugin, subject, body="", attachments=[], callback=None, errback=None):
 #		# Normally you don't have to overwrite this function

@@ -28,7 +28,7 @@ from ServiceXML import iWebTVStations
 config.plugins.dreamMediathek = ConfigSubsection()
 config.plugins.dreamMediathek.general = ConfigSubsection()
 config.plugins.dreamMediathek.general.on_movie_stop = ConfigSelection(default="ask", choices=[
-	("ask", _("Ask user")), ("quit", _("Return to movie list")), ("playnext", _("Play next video")), ("playagain", _("Play video again")) ])
+	("ask", _("Ask user")), ("quit", _("Return to movie list")), ("playnext", _("Play next video")), ("playagain", _("Play video again"))])
 config.plugins.dreamMediathek.general.on_exit = ConfigSelection(default="ask", choices=[
 	("ask", _("Ask user")), ("quit", _("Return to movie list"))])
 
@@ -101,7 +101,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 		self.state = self.STATE_PLAYING
 		self.lastseekstate = self.STATE_PLAYING
 
-		self.onPlayStateChanged = [ ]
+		self.onPlayStateChanged = []
 		self.__seekableStatusChanged()
 	
 		self.play()
@@ -304,7 +304,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 	def doEofInternal(self, playing):
 		if not self.execing:
 			return
-		if not playing :
+		if not playing:
 			return
 		self.handleLeave(config.usage.on_movie_eof.value)
 

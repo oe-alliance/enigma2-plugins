@@ -184,7 +184,7 @@ class WidgetDesktop(Screen):
 															  }, -1)
 		self.onLayoutFinish.append(self.restoreSkin)
 		self.onLayoutFinish.append(self._onLoadFinished)
-		self.onClose.append(self._onClose )
+		self.onClose.append(self._onClose)
 	
 	def importWidgetElements(self,widget,wname):
 		for elementname in widget[1].elements.keys():

@@ -40,7 +40,7 @@ class WerbeZapperChoiceBox(ChoiceBox):
 		
 		# Start timer to update the ChoiceBox every second
 		self.update_timer.start(1000)
-		self.setTitle( "WerbeZapper" )
+		self.setTitle("WerbeZapper")
 		self.update()
 
 	def update(self):
@@ -48,11 +48,11 @@ class WerbeZapperChoiceBox(ChoiceBox):
 		text = ""
 		if self.monitored_event:
 			name = self.monitored_event and self.monitored_event.getEventName()
-			remaining = ( self.monitored_event.getDuration() - ( time() - self.monitored_event.getBeginTime() ) )
+			remaining = (self.monitored_event.getDuration() - (time() - self.monitored_event.getBeginTime()))
 			if remaining > 0:
 				text += _("Monitoring: %s (%d:%02d Min)") % (name, remaining/60, remaining%60)
 		if self.zap_time:
-			remaining = int( math.floor( self.zap_time - time() ) )
+			remaining = int(math.floor(self.zap_time - time()))
 			if remaining > 0:
 				remainstr = ("%d:%02d") % (remaining/60, remaining%60)
 				text += "\n" + _("Zapping back in %d:%02d Min") % (remaining/60, remaining%60)
@@ -110,7 +110,7 @@ class WerbeZapper(Screen):
 
 		# Number keys
 		choices = [
-								( _("Custom"), 'custom'),
+								(_("Custom"), 'custom'),
 								('1 ' + _('minute'),  1),
 								('2 ' + _('minutes'), 2),
 								('3 ' + _('minutes'), 3),
@@ -121,39 +121,39 @@ class WerbeZapper(Screen):
 								('8 ' + _('minutes'), 8),
 								('9 ' + _('minutes'), 9),
 							]
-		keys.extend( [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ] )
+		keys.extend(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
 
 		# Dummy entry to seperate the color keys
-		choices.append( ( "------", 'close' ) )
-		keys.append( "" )  # No key
+		choices.append(("------", 'close'))
+		keys.append("")  # No key
 
 		# Blue key - Covers the monitoring functions without closing Werbezapper
 		if self.monitor_timer.isActive():
-			choices.append( ( _("Stop monitoring"), 'stopmonitoring' ) )
+			choices.append((_("Stop monitoring"), 'stopmonitoring'))
 		else:
-			choices.append( ( _("Start monitoring"), 'startmonitoring' ) )
-		keys.append( "blue" )
+			choices.append((_("Start monitoring"), 'startmonitoring'))
+		keys.append("blue")
 
 		# Red key - Covers all stop and close functions
 		if self.zap_timer.isActive():
 			if self.zap_time:
-				remaining = int( math.floor( self.zap_time - time() ) )
+				remaining = int(math.floor(self.zap_time - time()))
 				remaining = remaining if remaining > 0 else 0
 				remaining /= 60
 				select = remaining if 0 < remaining and remaining < 10 else select
-			choices.append( ( _("Stop timer"), 'stoptimer' ) )
-			keys.append( "red" )
+			choices.append((_("Stop timer"), 'stoptimer'))
+			keys.append("red")
 		else:
-			choices.append( ( "------", 'close' ) )
-			keys.append( "" )  # No key
+			choices.append(("------", 'close'))
+			keys.append("")  # No key
 
 		# Green key - Manual rezap
 		if self.zap_timer.isActive():
-			choices.append( ( _("Rezap"), 'rezap' ) )
-			keys.append( "green" )
+			choices.append((_("Rezap"), 'rezap'))
+			keys.append("green")
 		else:
-			choices.append( ( "------", 'close' ) )
-			keys.append( "" )  # No key
+			choices.append(("------", 'close'))
+			keys.append("")  # No key
 
 		# Select Timer Length
 		self.session.openWithCallback(
@@ -245,8 +245,8 @@ class WerbeZapper(Screen):
 		if event:
 			# Set monitoring end time
 			self.monitored_event = event
-			duration = event.getDuration() - ( time() - event.getBeginTime() )
-			self.monitor_timer.startLongTimer( int( duration ) )
+			duration = event.getDuration() - (time() - event.getBeginTime())
+			self.monitor_timer.startLongTimer(int(duration))
 			if notify:
 				name = event and event.getEventName()
 				AddPopup(
@@ -295,7 +295,7 @@ class WerbeZapper(Screen):
 				# Is the zap away check already running
 				if not self.delay_timer.isActive():
 					# Delay the zap away check only once
-					self.delay_timer.startLongTimer( 3 )
+					self.delay_timer.startLongTimer(3)
 
 	def zappedAway(self):
 		# Verify that the currently played service has changed
@@ -324,8 +324,8 @@ class WerbeZapper(Screen):
 		#print ServiceReference.ServiceReference(self.servicelist.getRoot())
 
 		# Start Timer
-		self.zap_time = time() + ( duration * 60 )
-		self.zap_timer.startLongTimer( int( duration * 60 ) )
+		self.zap_time = time() + (duration * 60)
+		self.zap_timer.startLongTimer(int(duration * 60))
 		
 		if notify:
 			# Remind the User of what he just did

@@ -76,7 +76,7 @@ class PushService(PushServiceBase):
 		print "PushService next", self.state
 		
 		if self.state == PSBOOT:
-			self.startTimer( int(config.pushservice.bootdelay.value), PSBOOTRUN )
+			self.startTimer(int(config.pushservice.bootdelay.value), PSBOOTRUN)
 		
 		elif self.state == PSBOOTRUN \
 			or self.state == PSFIRST:
@@ -85,13 +85,13 @@ class PushService(PushServiceBase):
 			ltime = lotime[3]*60 + lotime[4]
 			ctime = cltime[0]*60 + cltime[1]
 			seconds = 60 * abs(ctime - ltime)
-			self.startTimer( seconds, PSFIRSTRUN )
+			self.startTimer(seconds, PSFIRSTRUN)
 		
 		elif self.state == PSFIRSTRUN \
 			or self.state == PSCYCLE:
 			period = int(config.pushservice.period.value)
 			if period > 0:
-				self.startTimer( period*60*60, PSCYCLE )
+				self.startTimer(period*60*60, PSCYCLE)
 
 	def do(self):
 		self.run()
@@ -100,7 +100,7 @@ class PushService(PushServiceBase):
 	def startTimer(self, seconds, state=None):
 		if state:
 			self.state = state
-		self.timer.startLongTimer( seconds )
+		self.timer.startLongTimer(seconds)
 
 	def stopTimer(self):
 		if self.timer.isActive():

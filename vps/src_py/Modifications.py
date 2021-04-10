@@ -97,7 +97,7 @@ def new_RecordTimer_loadTimer(self, *args, **kwargs):
 
 	# added by VPS-Plugin
 	try:
-		vps_timers = { }
+		vps_timers = {}
 
 		if xmlroot is not None:
 			for xml in xmlroot.findall("timer"):
@@ -105,7 +105,7 @@ def new_RecordTimer_loadTimer(self, *args, **kwargs):
 				end = xml.get("end")
 				serviceref = xml.get("serviceref").encode("utf-8")
 
-				vps_timers[serviceref + begin + end] = { }
+				vps_timers[serviceref + begin + end] = {}
 				vps_overwrite = xml.get("vps_overwrite")
 				if vps_overwrite and vps_overwrite == "1":
 					vps_timers[serviceref + begin + end]["overwrite"] = True

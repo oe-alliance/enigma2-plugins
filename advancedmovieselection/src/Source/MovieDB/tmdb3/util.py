@@ -10,13 +10,13 @@ from copy import copy
 from locales import get_locale
 from tmdb_auth import get_session
 
-class NameRepr( object ):
+class NameRepr(object):
     """Mixin for __repr__ methods using 'name' attribute."""
     def __repr__(self):
         return u"<{0.__class__.__name__} '{0.name}'>"\
                                 .format(self).encode('utf-8')
 
-class SearchRepr( object ):
+class SearchRepr(object):
     """
     Mixin for __repr__ methods for classes with '_name' and
     '_request' attributes.
@@ -25,7 +25,7 @@ class SearchRepr( object ):
         name = self._name if self._name else self._request._kwargs['query']
         return u"<Search Results: {0}>".format(name).encode('utf-8')
 
-class Poller( object ):
+class Poller(object):
     """
     Wrapper for an optional callable to populate an Element derived class
     with raw data, or data from a Request.
@@ -100,7 +100,7 @@ class Poller( object ):
                 unfilled = True
         return unfilled
 
-class Data( object ):
+class Data(object):
     """
     Basic response definition class
     This maps to a single key in a JSON dictionary received from the API
@@ -162,10 +162,10 @@ class Data( object ):
         else:
             self.handler = lambda x: handler(x)
 
-class Datapoint( Data ):
+class Datapoint(Data):
     pass
 
-class Datalist( Data ):
+class Datalist(Data):
     """
     Response definition class for list data
     This maps to a key in a JSON dictionary storing a list of data
@@ -209,7 +209,7 @@ class Datalist( Data ):
                     data.sort(key=lambda x: getattr(x, self.sort))
         inst._data[self.field] = data
 
-class Datadict( Data ):
+class Datadict(Data):
     """
     Response definition class for dictionary data
     This maps to a key in a JSON dictionary storing a dictionary of data
@@ -259,7 +259,7 @@ class Datadict( Data ):
                 data[self.getkey(val)] = val
         inst._data[self.field] = data
 
-class ElementType( type ):
+class ElementType(type):
     """
     MetaClass used to pre-process Element-derived classes and set up the
     Data definitions
@@ -360,7 +360,7 @@ class ElementType( type ):
         obj.__init__()
         return obj
 
-class Element( object ):
+class Element(object):
     __metaclass__ = ElementType
     _lang = 'en'
 

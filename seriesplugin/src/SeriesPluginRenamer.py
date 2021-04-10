@@ -75,7 +75,7 @@ def rename(servicepath, name, short, data):
 		# Before renaming change content
 		rewriteMeta(servicepath, name, data)
 	except Exception as e:
-		log.exception("rewriteMeta:", str(e) )
+		log.exception("rewriteMeta:", str(e))
 		result = "rewriteMeta:" + str(e)
 	
 	if config.plugins.seriesplugin.pattern_title.value and not config.plugins.seriesplugin.pattern_title.value == "Off":
@@ -85,7 +85,7 @@ def rename(servicepath, name, short, data):
 			try:
 				renameFiles(servicepath, name, data)
 			except Exception as e:
-				log.exception("renameFiles:", str(e) )
+				log.exception("renameFiles:", str(e))
 				result = "renameFiles:" + str(e)
 	
 	return result
@@ -167,7 +167,7 @@ def osrename(src, dst):
 	#Py3 for f in glob( escape(src) + "*" ):
 	glob_src = CompiledRegexpGlobEscape.sub("[\\1]", src)
 	log.debug("glob_src      ", glob_src)
-	for f in glob( glob_src + ".*" ):
+	for f in glob(glob_src + ".*"):
 		log.debug("servicepathRnm", f)
 		to = f.replace(src, dst)
 		log.debug("servicepathTo ", to)
@@ -179,10 +179,10 @@ def osrename(src, dst):
 				log.exception("rename error", f, to)
 		elif config.plugins.seriesplugin.rename_existing_files.value:
 			log.debug("Destination file already exists", to, " - Append '_'")
-			return osrename( src, dst + "_")
+			return osrename(src, dst + "_")
 			break
 		else:
-			log.warning( _("Skipping rename because file already exists") + "\n" + to + "\n\n" + _("Can be configured within the setup") )
+			log.warning(_("Skipping rename because file already exists") + "\n" + to + "\n\n" + _("Can be configured within the setup"))
 	return True
 
 
@@ -229,7 +229,7 @@ class SeriesPluginRenamer(object):
 					
 					servicepath = service.getPath()
 					
-					if not os.path.exists( servicepath ):
+					if not os.path.exists(servicepath):
 						log.debug("File not exists: " + servicepath)
 						continue
 					
@@ -292,14 +292,14 @@ class SeriesPluginRenamer(object):
 			result = rename(servicepath, name, short, data)
 		
 		elif data and isinstance(data, basestring):
-			msg = _("Failed: %s." % ( str( data ) ))
+			msg = _("Failed: %s." % (str(data)))
 			log.debug(msg)
-			self.data.append( name + ": " + msg )
+			self.data.append(name + ": " + msg)
 		
 		else:
 			msg = _("No data available")
 			log.debug(msg)
-			self.data.append( name + ": " + msg )
+			self.data.append(name + ": " + msg)
 		
 		self.counter = self.counter +1
 		

@@ -105,7 +105,7 @@ class EpgCenterList(GUIComponent):
 		
 		self.l = eListboxPythonMultiContent()
 		self.l.setBuildFunc(self.buildEpgEntry)
-		self.onSelectionChanged = [ ]
+		self.onSelectionChanged = []
 		
 		if self.videoMode == MODE_SD or self.videoMode == MODE_XD:
 			self.overallFontHeight = 36
@@ -300,7 +300,7 @@ class EpgCenterList(GUIComponent):
 		else:
 			textColor = None
 			
-		res = [ None ]
+		res = [None]
 		
 		if config.plugins.merlinEpgCenter.showListNumbers.value:
 			if ((self.mode == SINGLE_EPG and not self.similarShown) or self.mode == UPCOMING) and self.instance.getCurrentIndex() != 0:
@@ -611,7 +611,7 @@ class EpgCenterList(GUIComponent):
 	def queryEPG(self, servicelist):
 		if self.epgcache is not None:
 			return self.epgcache.lookupEvent(servicelist)
-		return [ ]
+		return []
 
 	def fillMultiEPG(self, bouquet, bouquetIndex, mode, stime=-1):
 		EpgCenterList.currentBouquetIndex = bouquetIndex
@@ -637,7 +637,7 @@ class EpgCenterList(GUIComponent):
 			else:
 				tmpList = self.list
 
-			servicelist = [ x[3] and (x[2], 1, x[3]) or (x[2], 1, 0) for x in tmpList ] # build servicelist with "event after given start_time" and set the start time
+			servicelist = [x[3] and (x[2], 1, x[3]) or (x[2], 1, 0) for x in tmpList] # build servicelist with "event after given start_time" and set the start time
 			servicelist.insert(0, returnTuples)
 			
 		if self.listStyle == STYLE_SINGLE_LINE:
@@ -654,9 +654,9 @@ class EpgCenterList(GUIComponent):
 		if sRef:
 			if showOutdated:
 				now = time()
-				queryString = [ '0IRBDTSE', (sRef, 0, now - KEEP_OUTDATED_TIME * 60, KEEP_OUTDATED_TIME) ]
+				queryString = ['0IRBDTSE', (sRef, 0, now - KEEP_OUTDATED_TIME * 60, KEEP_OUTDATED_TIME)]
 			else:
-				queryString = [ '0IRBDTSE', (sRef, 0, -1, -1) ]
+				queryString = ['0IRBDTSE', (sRef, 0, -1, -1)]
 			self.list = self.queryEPG(queryString)
 			
 		if self.listStyle == STYLE_SINGLE_LINE:
@@ -704,7 +704,7 @@ class EpgCenterList(GUIComponent):
 		
 	@staticmethod
 	def getServiceList(bouquet, stime=-1, sRefOnly=False):
-		services = [ ]
+		services = []
 		servicelist = eServiceCenter.getInstance().list(bouquet)
 		if not servicelist is None:
 			while True:
@@ -874,7 +874,7 @@ class EpgCenterTimerlist(TimerList):
 		
 		self.l = eListboxPythonMultiContent()
 		self.l.setBuildFunc(self.buildTimerEntry)
-		self.onSelectionChanged = [ ]
+		self.onSelectionChanged = []
 		
 		if self.videoMode == MODE_SD or self.videoMode == MODE_XD:
 			self.overallFontHeight = 36
@@ -974,7 +974,7 @@ class EpgCenterTimerlist(TimerList):
 		if timer.justplay:
 			state = "(ZAP) " + state
 			
-		res = [ None ]
+		res = [None]
 		
 		if config.plugins.merlinEpgCenter.showListNumbers.value:
 			number = str(self.instance.getCurrentIndex() + 1)

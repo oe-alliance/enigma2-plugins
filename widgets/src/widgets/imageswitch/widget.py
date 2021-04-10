@@ -42,7 +42,7 @@ class WebPixmap(Pixmap):
             self.onLoadFinished(None)
         elif url is not None:
             self.tmpfile = tmpfile
-            head = { }
+            head = {}
             agt = "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.0.2) Gecko/2008091620 Firefox/3.0.2"
             downloadPage(url,self.tmpfile,headers=head,agent=agt).addCallback(self.onLoadFinished).addErrback(self.onLoadFailed)
         elif self.default:

@@ -63,7 +63,7 @@ def MovieSelectionInit():
 	MovieSelection.getPluginCaption = getPluginCaption
 
 def MovieSelection__init__(self, session, selectedmovie=None):
-	baseMovieSelection__init__ (self, session, selectedmovie)
+	baseMovieSelection__init__(self, session, selectedmovie)
 	self["key_red"] = Button(self.getPluginCaption(str(config.plugins.MovieSelectionQuickButton.red.value)))
 	self["key_green"] = Button(self.getPluginCaption(str(config.plugins.MovieSelectionQuickButton.green.value)))
 	self["key_yellow"] = Button(self.getPluginCaption(str(config.plugins.MovieSelectionQuickButton.yellow.value)))

@@ -95,5 +95,5 @@ def main(session,**kwargs):
 
 def Plugins(**kwargs):
 	list = [PluginDescriptor(name="BitrateViewer", description=_("BitrateViewer"), 
-		where=[PluginDescriptor.WHERE_EXTENSIONSMENU ], fnc=main)]
+		where=[PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main)]
 	return list

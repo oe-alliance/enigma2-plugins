@@ -83,7 +83,7 @@ class ProgressList(GUIComponent):
         self.l.setItemHeight(155)
         self.l.setBuildFunc(self.buildListEntry)
         
-        self.onSelectionChanged = [ ]
+        self.onSelectionChanged = []
 
     def connectSelChanged(self, fnc):
         if not fnc in self.onSelectionChanged:
@@ -98,7 +98,7 @@ class ProgressList(GUIComponent):
             x()
 
     def buildListEntry(self, job):
-        res = [ None ]
+        res = [None]
         try:
             width = self.l.getItemSize().width()
             
@@ -378,7 +378,7 @@ class MovieMove(ChoiceBox):
     def gotFilename(self, destinationpath):
         if destinationpath:
             self.destinationpath = destinationpath
-            listtmp = [(_("Move"), "move"), (_("Copy"), "copy"), (_("Abort"), "abort") ]
+            listtmp = [(_("Move"), "move"), (_("Copy"), "copy"), (_("Abort"), "abort")]
             self.session.openWithCallback(self.doAction, ChoiceBox, title=((_("How to proceed '%s'") % self.name) + ' ' + (_("from %s") % self.sourcepath) + ' ' + (_("to %s") % self.destinationpath) + ' ' + _("be moved/copied?")), list=listtmp)
     
     def doAction(self, confirmed):

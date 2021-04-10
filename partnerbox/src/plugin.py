@@ -224,7 +224,7 @@ class CurrentRemoteTV(Screen):
 			self.session.nav.stopService()
 			sref = eServiceReference(ENIGMA_WEBSERVICE_ID, 0, url)
 			self.session.nav.playService(sref, adjust=False)
-			self.session.openWithCallback(self.RemotePlayerFinished, RemotePlayer,"" ,"", 0, 0, self.PartnerboxEntry, servicereference)
+			self.session.openWithCallback(self.RemotePlayerFinished, RemotePlayer,"","", 0, 0, self.PartnerboxEntry, servicereference)
 		else:
 			self.close()
 
@@ -465,7 +465,7 @@ class RemoteTimer(Screen):
 			self.E2TimerList = FillE2TimerList(xmlstring)
 		else:
 			self.E2TimerList = FillE1TimerList(xmlstring)
-		self["timerlist"].setList([ (x,) for x in self.E2TimerList])
+		self["timerlist"].setList([(x,) for x in self.E2TimerList])
 
 	def toggleTimer(self):
 		try:
@@ -535,10 +535,10 @@ class RemoteTimerBouquetList(Screen):
 		pass
 
 	def startRun(self):
-		if self.useinternal == 1 :
+		if self.useinternal == 1:
 			BouquetList = []
 			a = Services(self.session)
-			ref = eServiceReference( service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
+			ref = eServiceReference(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 			BouquetList = a.buildList(ref, False)
 			self["bouquetlist"].buildList(BouquetList)
 		else:
@@ -665,7 +665,7 @@ class RemoteTimerChannelList(Screen):
 			self.zapTimer.stop()
 
 	def startRun(self):
-		if self.useinternal == 1 :
+		if self.useinternal == 1:
 			ChannelList = []
 			a = Services(self.session)
 			Channelref = eServiceReference(self.servicereference)
@@ -829,7 +829,7 @@ class RemoteTimerChannelList(Screen):
 					f = urllib.urlopen(url)
 					sxml = f.read()
 					eventstart, eventduration, eventtitle, eventdescriptionextended, eventdescription, eventid = self.XMLReadEPGDataE1(sxml)
-					self.E2ChannelList.append(E2EPGListAllData(servicereference=servicereference, servicename=servicename, eventstart=eventstart, eventduration=eventduration, eventtitle=eventtitle, eventid=eventid , eventdescription=eventdescription, eventdescriptionextended=eventdescriptionextended))
+					self.E2ChannelList.append(E2EPGListAllData(servicereference=servicereference, servicename=servicename, eventstart=eventstart, eventduration=eventduration, eventtitle=eventtitle, eventid=eventid, eventdescription=eventdescription, eventdescriptionextended=eventdescriptionextended))
 		self["channellist"].buildList(self.E2ChannelList)
 
 	def XMLReadEPGDataE1(self,xmlstring):
@@ -997,8 +997,8 @@ class RemotePlayer(Screen, InfoBarAudioSelection):
 			return
 		if SystemInfo.get("NumVideoDecoders", 1) > 1:
 			if InfoBar.instance is not None:
-				modeslist = [ ]
-				keyslist = [ ]
+				modeslist = []
+				keyslist = []
 				if InfoBar.pipShown(InfoBar.instance):
 					slist = self.servicelist
 					if slist:
@@ -1398,7 +1398,7 @@ class RemoteTimerEPGList(Screen):
 				eventdescriptionextended = str(events.findtext("details", '').decode("utf-8").encode("utf-8", 'ignore'))
 			except:
 				eventdescriptionextended = ""
-			E1ListEPG.append(E2EPGListAllData(servicereference=servicereference, servicename=servicename, eventid=1, eventstart=eventstart, eventduration=eventduration, eventtitle=eventtitle, eventdescription=eventdescription, eventdescriptionextended=eventdescriptionextended  ))
+			E1ListEPG.append(E2EPGListAllData(servicereference=servicereference, servicename=servicename, eventid=1, eventstart=eventstart, eventduration=eventduration, eventtitle=eventtitle, eventdescription=eventdescription, eventdescriptionextended=eventdescriptionextended))
 		self["epglist"].buildList(E1ListEPG, self.E2TimerList)
 		if self.ListCurrentIndex != 0:
 			sel = self["epglist"].moveSelectionTo(self.ListCurrentIndex)
@@ -1434,7 +1434,7 @@ class RemoteTimerEPGList(Screen):
 				eventdescriptionextended = str(events.findtext("e2eventdescriptionextended", '').decode("utf-8").encode("utf-8", 'ignore'))
 			except:
 				eventdescriptionextended = ""
-			E2ListEPG.append(E2EPGListAllData(servicereference=servicereference, servicename=servicename, eventid=eventid, eventstart=eventstart, eventduration=eventduration, eventtitle=eventtitle, eventdescription=eventdescription, eventdescriptionextended=eventdescriptionextended  ))
+			E2ListEPG.append(E2EPGListAllData(servicereference=servicereference, servicename=servicename, eventid=eventid, eventstart=eventstart, eventduration=eventduration, eventtitle=eventtitle, eventdescription=eventdescription, eventdescriptionextended=eventdescriptionextended))
 		self["epglist"].buildList(E2ListEPG, self.E2TimerList)
 		if self.ListCurrentIndex != 0:
 			sel = self["epglist"].moveSelectionTo(self.ListCurrentIndex)
@@ -1477,7 +1477,7 @@ class RemoteTimerEPGList(Screen):
 			dirname = ""
 			type = PlaylistEntry.RecTimerEntry|PlaylistEntry.recDVR
 			description = cur[0].eventtitle
-		timerentry = E2Timer(servicereference=cur[0].servicereference, servicename=cur[0].servicename, name=cur[0].eventtitle, disabled=0, timebegin=cur[0].eventstart, timeend=cur[0].eventstart + cur[0].eventduration, duration=cur[0].eventduration, startprepare=0, state=0 , repeated=0, justplay=0, eventId=cur_eventId, afterevent=3, dirname=dirname, description=description, type=type)
+		timerentry = E2Timer(servicereference=cur[0].servicereference, servicename=cur[0].servicename, name=cur[0].eventtitle, disabled=0, timebegin=cur[0].eventstart, timeend=cur[0].eventstart + cur[0].eventduration, duration=cur[0].eventduration, startprepare=0, state=0, repeated=0, justplay=0, eventId=cur_eventId, afterevent=3, dirname=dirname, description=description, type=type)
 		self.session.openWithCallback(self.RemoteTimerEntryFinished, RemoteTimerEntry, timerentry, self.Locations)
 
 	def RemoteTimerEntryFinished(self, answer):
@@ -1586,13 +1586,13 @@ class E2TimerMenu(GUIComponent, object):
 
 	def buildEntry(self, timer):
 		width = self.l.getItemSize().width()
-		res = [ timer ]
+		res = [timer]
 		x, y, h = skin.parameters.get("PartnerBoxTimerServicename",(0, 0, 30))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.servicename + '      ' + self.getOrbitalPos(timer.servicereference)))
 		x, y, h = skin.parameters.get("PartnerBoxTimerName",(0, 30, 20))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.name))
 		repeatedtext = ""
-		days = [ _("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat"), _("Sun") ]
+		days = [_("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat"), _("Sun")]
 		icon = None
 		x, y, w, h = skin.parameters.get("PartnerBoxE2TimerTime",(0, 50, 150, 20))
 		if timer.repeated:
@@ -1657,16 +1657,16 @@ class E2TimerMenu(GUIComponent, object):
 
 	def buildEntryE1(self,timer):
 		width = self.l.getItemSize().width()
-		res = [ timer ]
+		res = [timer]
 		x, y, h = skin.parameters.get("PartnerBoxTimerServicename",(0, 0, 30))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.servicename))
 		x, y, h = skin.parameters.get("PartnerBoxTimerName",(0, 30, 20))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.description))
 
 		repeatedtext = ""
-		days = [ _("Sun"), _("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat") ]
+		days = [_("Sun"), _("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat")]
 		x, y, w, h = skin.parameters.get("PartnerBoxE1TimerTime",(0, 50, 170, 20))
-		if timer.type & PlaylistEntry.isRepeating :
+		if timer.type & PlaylistEntry.isRepeating:
 			mask = PlaylistEntry.Su
 			count = 0
 			for x in range(0, 7):
@@ -1778,7 +1778,7 @@ class E2BouquetList(MenuList):
 		self.list=[]
 		width = self.l.getItemSize().width()
 		for bouquets in listnew:
-			res = [ bouquets ]
+			res = [bouquets]
 			x, y, h = skin.parameters.get("PartnerBoxBouquetListName",(0, 0, 30))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, bouquets.servicename))
 			self.list.append(res)
@@ -1788,7 +1788,7 @@ class E2BouquetList(MenuList):
 class E2ChannelList(MenuList):
 	def __init__(self, list, selChangedCB=None, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		self.onSelChanged = [ ]
+		self.onSelChanged = []
 		if selChangedCB is not None:
 			self.onSelChanged.append(selChangedCB)
 		font = skin.fonts.get("PartnerBoxChannelList0", ("Regular", 20, 70))
@@ -1823,7 +1823,7 @@ class E2ChannelList(MenuList):
 		self.list=[]
 		width = self.l.getItemSize().width()
 		for epgdata in listnew:
-			res = [ epgdata ]
+			res = [epgdata]
 			event_text = epgdata.eventtitle
 			if event_text == "None":
 				event_text = ''
@@ -1847,7 +1847,7 @@ class E2ChannelList(MenuList):
 class E2EPGList(MenuList):
 	def __init__(self, list, selChangedCB=None, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		self.onSelChanged = [ ]
+		self.onSelChanged = []
 		if selChangedCB is not None:
 			self.onSelChanged.append(selChangedCB)
 		font = skin.fonts.get("PartnerBoxChannelEPGList0", ("Regular", 22, 30))
@@ -1855,7 +1855,7 @@ class E2EPGList(MenuList):
 		self.ItemHeight = int(font[2])
 		font = skin.fonts.get("PartnerBoxChannelEPGList1", ("Regular", 16))
 		self.l.setFont(1, gFont(font[0], font[1]))
-		self.days = [ _("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat"), _("Sun") ]
+		self.days = [_("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat"), _("Sun")]
 		self.timer_list = []
 		self.clock_pixmap = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Partnerbox/icons/remote_epgclock.png')
 		self.clock_add_pixmap = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Partnerbox/icons/remote_epgclock_add.png')
@@ -1902,7 +1902,7 @@ class E2EPGList(MenuList):
 		self.list=[]
 		self.timer_list = timerlist
 		for epgdata in listnew:
-			res = [ epgdata ]
+			res = [epgdata]
 			rec=epgdata.eventstart and (self.isInTimer(epgdata.eventstart, epgdata.eventduration, epgdata.servicereference))
 			esize = self.l.getItemSize()
 			width = esize.width()
@@ -2067,7 +2067,7 @@ class RemoteTimerEventView(Screen):
 			<widget name="channel" position="240,395" size="305,25" font="Regular;22" halign="right" />
 		</screen>"""
 
-	def __init__(self, session, E2Timerlist, epgdata , partnerboxentry):
+	def __init__(self, session, E2Timerlist, epgdata, partnerboxentry):
 		self.session = session
 		Screen.__init__(self, session)
 		self.setTitle(_("Eventview"))
@@ -2129,7 +2129,7 @@ class RemoteTimerEventView(Screen):
 		endtime = int(self.epgdata.eventstart + self.epgdata.eventduration)
 		t = localtime(self.epgdata.eventstart)
 		datetime = ("%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
-		duration = (" (%d " + _("mins")+")") % ((self.epgdata.eventduration ) / 60)
+		duration = (" (%d " + _("mins")+")") % ((self.epgdata.eventduration) / 60)
 		self["datetime"].setText(datetime)
 		self["duration"].setText(duration)
 		self["key_red"].setText("")
@@ -2228,7 +2228,7 @@ def callbackPartnerboxServiceList(self, result):
 			if not mutableList is None:
 				service = self.setPartnerboxService(item, partnerboxentry)
 				if not mutableList.addService(service):
-					self.csel.bouquetNumOffsetCache = { }
+					self.csel.bouquetNumOffsetCache = {}
 					mutableList.flushChanges()
 					self.csel.servicelist.addService(service)
 		elif isBouquet == 1:

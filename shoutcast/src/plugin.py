@@ -132,7 +132,7 @@ def main(session,**kwargs):
 def Plugins(**kwargs):
 	list = [PluginDescriptor(name="SHOUTcast", description=_("listen to shoutcast internet-radio"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=main)] # always show in plugin menu
 	if config.plugins.shoutcast.showinextensions.value:
-		list.append (PluginDescriptor(name="SHOUTcast", description=_("listen to shoutcast internet-radio"), where=[PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main))
+		list.append(PluginDescriptor(name="SHOUTcast", description=_("listen to shoutcast internet-radio"), where=[PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main))
 	return list
 
 class SHOUTcastWidget(Screen):
@@ -297,8 +297,8 @@ class SHOUTcastWidget(Screen):
 			return
 		if SystemInfo.get("NumVideoDecoders", 1) > 1:
 			if InfoBar.instance is not None:
-				modeslist = [ ]
-				keyslist = [ ]
+				modeslist = []
+				keyslist = []
 				if InfoBar.pipShown(InfoBar.instance):
 					slist = self.servicelist
 					if slist:
@@ -481,7 +481,7 @@ class SHOUTcastWidget(Screen):
 				if len(self.currentStreamingURL) != 0:
 					self.session.openWithCallback(self.InputBoxStartRecordingCallback, InputBox, windowTitle=_("Recording length"),  title=_("Enter in minutes (0 means unlimited)"), text="0", type=Input.NUMBER)
 				else:
-					self.session.open(MessageBox, _("Only running streamings can be recorded!"), type=MessageBox.TYPE_INFO,timeout=20 )
+					self.session.open(MessageBox, _("Only running streamings can be recorded!"), type=MessageBox.TYPE_INFO,timeout=20)
 		else:
 			if self.pipZapAvailable is not None and SystemInfo.get("NumVideoDecoders", 1) > 1:
 				self.activatePiP()
@@ -508,7 +508,7 @@ class SHOUTcastWidget(Screen):
 					self.headerTextString = _("SHOUTcast station list for %s") % self.stationListHeader
 					self["headertext"].setText(self.headerTextString)
 					self["list"].setMode(self.mode)
-					self["list"].setList([ (x,) for x in self.stationList])
+					self["list"].setList([(x,) for x in self.stationList])
 					self["list"].moveToIndex(self.stationListIndex)
 					if self.reloadStationListTimerVar != 0:
 						self.reloadStationListTimer.start(60000 * self.reloadStationListTimerVar)
@@ -535,12 +535,12 @@ class SHOUTcastWidget(Screen):
 		favoriteList = []
 		for item in self.favoriteConfig.Entries:
 			favoriteList.append(Favorite(configItem=item))
-		self["list"].setList([ (x,) for x in favoriteList])
+		self["list"].setList([(x,) for x in favoriteList])
 		if len(favoriteList):
 			self["list"].moveToIndex(favoriteListIndex)
 		self["list"].show()
 
-	def getGenreList(self, genre="all" , id=0):
+	def getGenreList(self, genre="all", id=0):
 		self["headertext"].setText("")
 		self["statustext"].setText(_("Getting SHOUTcast genre list for %s..." % genre))
 		self["list"].hide()
@@ -602,7 +602,7 @@ class SHOUTcastWidget(Screen):
 	def showGenreList(self):
 		self["headertext"].setText(_("SHOUTcast genre list"))
 		self["list"].setMode(self.mode)
-		self["list"].setList([ (x,) for x in self.genreList])
+		self["list"].setList([(x,) for x in self.genreList])
 		self["list"].moveToIndex(self.genreListIndex)
 		self["list"].show()
 
@@ -709,7 +709,7 @@ class SHOUTcastWidget(Screen):
 		self["list"].setMode(self.mode)
 		self.stationList = self.fillStationList(xmlstring)
 		self["statustext"].setText("")
-		self["list"].setList([ (x,) for x in self.stationList])
+		self["list"].setList([(x,) for x in self.stationList])
 		if len(self.stationList):
 			self["list"].moveToIndex(self.stationListIndex)
 		self["list"].show()
@@ -1105,7 +1105,7 @@ class Cover(Pixmap):
 class SHOUTcastList(GUIComponent, object):
 	def buildEntry(self, item):
 		width = self.l.getItemSize().width()
-		res = [ None ]
+		res = [None]
 		if self.mode == 0: # GENRELIST
 			print "[SHOUTcast] list name=%s haschilds=%s opened=%s\n" % (item.name, item.haschilds, item.opened)
 			if item.parentid == "0": # main genre
@@ -1137,7 +1137,7 @@ class SHOUTcastList(GUIComponent, object):
 		GUIComponent.__init__(self)
 		self.l = eListboxPythonMultiContent()
 		self.fontsize0, self.fontsize1, self.cenrylist, self.favlist, self.para, self.parb, self.parc, self.pard = skin.parameters.get("SHOUTcastListItem",(20, 18, 22, 69, 20, 23, 43, 22))
-		self.onSelectionChanged = [ ]
+		self.onSelectionChanged = []
 		self.mode = 0
 
 	def setMode(self, mode):

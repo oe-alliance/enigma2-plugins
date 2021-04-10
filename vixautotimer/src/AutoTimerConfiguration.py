@@ -705,7 +705,7 @@ def buildConfig(defaultTimer, timers, webif=False):
 
 		# Counter
 		if timer.hasCounter():
-			extend((' lastBegin="', str(timer.getLastBegin()), '" counter="', str(timer.getCounter()), '" left="', str(timer.getCounterLeft()) ,'"'))
+			extend((' lastBegin="', str(timer.getLastBegin()), '" counter="', str(timer.getCounter()), '" left="', str(timer.getCounterLeft()),'"'))
 			if timer.hasCounterFormatString():
 				extend((' lastActivation="', str(timer.getCounterLimit()), '"'))
 				extend((' counterFormat="', str(timer.getCounterFormatString()), '"'))

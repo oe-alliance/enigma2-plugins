@@ -61,7 +61,7 @@ class AutoMount():
 			mountusing = 1
 			for nfs in autofs.findall("nfs"):
 				for mount in nfs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 					try:
 						data['mountusing'] = 'autofs'.encode("UTF-8")
 						data['mounttype'] = 'nfs'.encode("UTF-8")
@@ -78,7 +78,7 @@ class AutoMount():
 						print "[MountManager] Error reading Mounts:", e
 			for cifs in autofs.findall("cifs"):
 				for mount in cifs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 					try:
 						data['mountusing'] = 'autofs'.encode("UTF-8")
 						data['mounttype'] = 'cifs'.encode("UTF-8")
@@ -100,7 +100,7 @@ class AutoMount():
 			mountusing = 2
 			for nfs in fstab.findall("nfs"):
 				for mount in nfs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 					try:
 						data['mountusing'] = 'fstab'.encode("UTF-8")
 						data['mounttype'] = 'nfs'.encode("UTF-8")
@@ -117,7 +117,7 @@ class AutoMount():
 						print "[MountManager] Error reading Mounts:", e
 			for cifs in fstab.findall("cifs"):
 				for mount in cifs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 					try:
 						data['mountusing'] = 'fstab'.encode("UTF-8")
 						data['mounttype'] = 'cifs'.encode("UTF-8")
@@ -139,7 +139,7 @@ class AutoMount():
 			mountusing = 3
 			for nfs in enigma2.findall("nfs"):
 				for mount in nfs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 					try:
 						data['mountusing'] = 'enigma2'.encode("UTF-8")
 						data['mounttype'] = 'nfs'.encode("UTF-8")
@@ -157,7 +157,7 @@ class AutoMount():
 				# Read out CIFS Mounts
 			for cifs in enigma2.findall("cifs"):
 				for mount in cifs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 					try:
 						data['mountusing'] = 'enigma2'.encode("UTF-8")
 						data['mounttype'] = 'cifs'.encode("UTF-8")
@@ -178,7 +178,7 @@ class AutoMount():
 		if mountusing == 0:
 			for nfs in tree.findall("nfs"):
 				for mount in nfs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 					try:
 						data['mountusing'] = 'old_enigma2'.encode("UTF-8")
 						data['mounttype'] = 'nfs'.encode("UTF-8")
@@ -195,7 +195,7 @@ class AutoMount():
 						print "[MountManager] Error reading Mounts:", e
 			for cifs in tree.findall("cifs"):
 				for mount in cifs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 					try:
 						data['mountusing'] = 'old_enigma2'.encode("UTF-8")
 						data['mounttype'] = 'cifs'.encode("UTF-8")
@@ -522,7 +522,7 @@ class AutoMount():
 			elif sharedata['mounttype'] == 'cifs':
 				sharetemp = '://' + sharedata['ip'] + '/' + sharedata['sharedir']
 			if sharetemp:
-				self.removeEntryFromFile(sharetemp+'\n', '/etc/auto.network' , ' ')
+				self.removeEntryFromFile(sharetemp+'\n', '/etc/auto.network', ' ')
 				self.removeEntryFromFile(sharetemp, '/etc/fstab')
 		self.automounts.clear()
 		self.automounts = self.newautomounts
@@ -540,7 +540,7 @@ class AutoMount():
 		self.removeConsole.eBatch(command, self.removeMountPointFinished, [path, callback], debug=True)
 
 	def removeMountPointFinished(self, extra_args):
-		(path, callback ) = extra_args
+		(path, callback) = extra_args
 		if os.path.exists(path):
 			if not os.path.ismount(path):
 				try:

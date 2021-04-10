@@ -38,7 +38,7 @@ class VersionList(GUIComponent):
         self.l.setBuildFunc(self.buildMovieSelectionListEntry)
         self.l.setFont(0, gFont("Regular", 20))                             
         self.l.setItemHeight(30)
-        self.onSelectionChanged = [ ]
+        self.onSelectionChanged = []
 
     def connectSelChanged(self, fnc):
         if not fnc in self.onSelectionChanged:
@@ -54,8 +54,8 @@ class VersionList(GUIComponent):
 
     def buildMovieSelectionListEntry(self, version):
         width = self.l.getItemSize().width()
-        res = [ None ]        
-        res.append((eListboxPythonMultiContent.TYPE_TEXT, 5, 2, width - 30 , 23, 0, RT_HALIGN_LEFT, "%s" % version.getVersion()))
+        res = [None]        
+        res.append((eListboxPythonMultiContent.TYPE_TEXT, 5, 2, width - 30, 23, 0, RT_HALIGN_LEFT, "%s" % version.getVersion()))
         return res
 
     GUI_WIDGET = eListbox

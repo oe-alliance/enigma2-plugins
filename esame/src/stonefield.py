@@ -193,7 +193,7 @@ class StoneField:
 		for col in range(lastcol-1):
 			empty = True
 			#for (int row = 0; row < sizey; row++)
-			for row in range (self.sizey):
+			for row in range(self.sizey):
 				if self.field[self.Map(col, row)].color:
 					empty = False
 					break

@@ -39,7 +39,7 @@ class E2ServiceList:
 		self.servicereference = servicereference
 		self.servicename = servicename
 
-class Services( Source ):
+class Services(Source):
 	def __init__(self, session):
 		Source.__init__(self)
 		self.session = session

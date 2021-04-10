@@ -42,7 +42,7 @@ THREE_D_TOP_BOTTOM = 2
 
 modes = {	THREE_D_OFF: "off",
 			THREE_D_SIDE_BY_SIDE: "sbs",
-			THREE_D_TOP_BOTTOM: "tab" }
+			THREE_D_TOP_BOTTOM: "tab"}
 reversemodes = dict((value, key) for key, value in modes.iteritems())
 
 def setZOffset(configElement):
@@ -249,7 +249,7 @@ def opensettings(session, **kwargs):
 def settings(menuid, **kwargs):
 	if getImageDistro() in ('openhdf'):
 		if menuid != "video_menu":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
 			return []

@@ -38,7 +38,7 @@ from InfoBarTunerState import InfoBarTunerState, addExtension, removeExtension, 
 class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = [ "InfoBarTunerStateConfiguration", "Setup" ]
+		self.skinName = ["InfoBarTunerStateConfiguration", "Setup"]
 		
 		# Summary
 		from Plugins.Extensions.InfoBarTunerState.plugin import NAME, VERSION
@@ -79,60 +79,60 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 #         _config list entry
 #         _                                                     , config element
 		self.config = [
-			(  _("Enable InfoBarTunerState")                          , config.infobartunerstate.enabled ),
-			(  separator                                              , config.infobartunerstate.about ),
-			(  _("Add Show to extension menu")                        , config.infobartunerstate.extensions_menu_show ),
-			(  _("Add Setup to extension menu")                       , config.infobartunerstate.extensions_menu_setup ),
+			(_("Enable InfoBarTunerState"), config.infobartunerstate.enabled),
+			(separator, config.infobartunerstate.about),
+			(_("Add Show to extension menu"), config.infobartunerstate.extensions_menu_show),
+			(_("Add Setup to extension menu"), config.infobartunerstate.extensions_menu_setup),
 #			(  _("Pop-Up time in seconds")                            , config.infobartunerstate.popup_time ),
-			(  _("Show and hide with InfoBar")                        , config.infobartunerstate.show_infobar ),
-			(  _("Show on events")                                    , config.infobartunerstate.show_events ),
+			(_("Show and hide with InfoBar"), config.infobartunerstate.show_infobar),
+			(_("Show on events"), config.infobartunerstate.show_events),
 #			(  _("Show on events")                                    , config.infobartunerstate.show_on_events ),
-			(  _("Show streams")                                      , config.infobartunerstate.show_streams ),
+			(_("Show streams"), config.infobartunerstate.show_streams),
 			
-			(  _("MoviePlayer integration")                           , config.infobartunerstate.show_overwrite ),
-			(  _("Time format begin")                                 , config.infobartunerstate.time_format_begin ),
-			(  _("Time format end")                                   , config.infobartunerstate.time_format_end ),
-			(  _("Number of pending records in list")                 , config.infobartunerstate.number_pending_records ),
-			(  _("Number of finished records in list")                , config.infobartunerstate.number_finished_records ),
-			(  _("Number of seconds for displaying finished records") , config.infobartunerstate.timeout_finished_records ),
-			(  separator                                              , config.infobartunerstate.about ),
+			(_("MoviePlayer integration"), config.infobartunerstate.show_overwrite),
+			(_("Time format begin"), config.infobartunerstate.time_format_begin),
+			(_("Time format end"), config.infobartunerstate.time_format_end),
+			(_("Number of pending records in list"), config.infobartunerstate.number_pending_records),
+			(_("Number of finished records in list"), config.infobartunerstate.number_finished_records),
+			(_("Number of seconds for displaying finished records"), config.infobartunerstate.timeout_finished_records),
+			(separator, config.infobartunerstate.about),
 		]
 		
-		for i, configinfobartunerstatefield in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
+		for i, configinfobartunerstatefield in enumerate(config.infobartunerstate.fields.dict().itervalues()):
 			self.config.append(
-			(  _("Field %d content") % (i)                            , configinfobartunerstatefield )
+			(_("Field %d content") % (i), configinfobartunerstatefield)
 			)
-		for i, configinfobartunerstatefieldwidth in enumerate( config.infobartunerstate.fieldswidth.dict().itervalues() ):
+		for i, configinfobartunerstatefieldwidth in enumerate(config.infobartunerstate.fieldswidth.dict().itervalues()):
 			self.config.append(
-			(  _("Field %d width") % (i)                            , configinfobartunerstatefieldwidth )
+			(_("Field %d width") % (i), configinfobartunerstatefieldwidth)
 			)
 
-		self.config.extend( [
-			(  separator                                              , config.infobartunerstate.about ),
-			(  _("Horizontal offset left in pixel")                   , config.infobartunerstate.offset_horizontal ),
-			(  _("Horizontal offset right in pixel")                  , config.infobartunerstate.offset_rightside ),
-			(  _("Vertical offset in pixel")                          , config.infobartunerstate.offset_vertical ),
-			(  _("Text padding offset in pixel")                      , config.infobartunerstate.offset_padding ),
-			(  _("Text spacing offset in pixel")                      , config.infobartunerstate.offset_spacing ),
-			(  _("Variable field width")                              , config.infobartunerstate.variable_field_width ),
-			(  _("Placeholder for Progressbar")                       , config.infobartunerstate.placeholder_pogressbar ),
-			(  _("List goes up")                       				  , config.infobartunerstate.list_goesup ),
-			(  _("Background transparency")                           , config.infobartunerstate.background_transparency ),
-			(  _("Overwrite Infobar timeout")                         , config.infobartunerstate.infobar_timeout ),
-		] )
+		self.config.extend([
+			(separator, config.infobartunerstate.about),
+			(_("Horizontal offset left in pixel"), config.infobartunerstate.offset_horizontal),
+			(_("Horizontal offset right in pixel"), config.infobartunerstate.offset_rightside),
+			(_("Vertical offset in pixel"), config.infobartunerstate.offset_vertical),
+			(_("Text padding offset in pixel"), config.infobartunerstate.offset_padding),
+			(_("Text spacing offset in pixel"), config.infobartunerstate.offset_spacing),
+			(_("Variable field width"), config.infobartunerstate.variable_field_width),
+			(_("Placeholder for Progressbar"), config.infobartunerstate.placeholder_pogressbar),
+			(_("List goes up"), config.infobartunerstate.list_goesup),
+			(_("Background transparency"), config.infobartunerstate.background_transparency),
+			(_("Overwrite Infobar timeout"), config.infobartunerstate.infobar_timeout),
+		])
 		
-		self.config.extend( [
-			(  separatorE2Usage                                       , config.infobartunerstate.about ),
-			(  _("Infobar timeout")                                   , config.usage.infobar_timeout ),
-			(  _("Show Message when Recording starts")                , config.usage.show_message_when_recording_starts ),
-		] )
+		self.config.extend([
+			(separatorE2Usage, config.infobartunerstate.about),
+			(_("Infobar timeout"), config.usage.infobar_timeout),
+			(_("Show Message when Recording starts"), config.usage.show_message_when_recording_starts),
+		])
 
 	def createConfig(self):
 		list = []
 		for conf in self.config:
 			# 0 entry text
 			# 1 variable
-			list.append( getConfigListEntry( conf[0], conf[1]) )
+			list.append(getConfigListEntry(conf[0], conf[1]))
 			if not config.infobartunerstate.enabled.value:
 				break
 		self.list = list
@@ -168,13 +168,13 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 		fieldicon = []
 		fieldprogress = []
 		text = ""
-		for i, c in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
+		for i, c in enumerate(config.infobartunerstate.fields.dict().itervalues()):
 			if c.value == "Name":
-				fieldname.append( i )
+				fieldname.append(i)
 			if c.value == "TypeIcon":
-				fieldicon.append( i )
+				fieldicon.append(i)
 			if c.value == "TimerProgressGraphical":
-				fieldprogress.append( i )
+				fieldprogress.append(i)
 		
 		if len(fieldname) > 1:
 			text += _("Only one Name field allowed:") + "\n" \

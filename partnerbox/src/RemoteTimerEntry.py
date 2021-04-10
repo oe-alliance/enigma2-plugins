@@ -526,7 +526,7 @@ def RemoteTimerCreateSetup(self, widget):
 			cfg = self.timerentry_vpsplugin_enabled
 		else:
 			cfg = self.timerentry_vps_in_timerevent
-		self.list.append(getConfigListEntry(_("Enable VPS"), cfg ))
+		self.list.append(getConfigListEntry(_("Enable VPS"), cfg))
 	self[widget].list = self.list
 	self[widget].l.setList(self.list)
 
@@ -558,7 +558,7 @@ def RemoteTimerGo(self):
 			except:
 				pass
 			channel = urllib.quote(servicename)
-			sCommand = "%s/addTimerEvent?ref=%s&start=%d&duration=%d&descr=%s&channel=%s&after_event=%s&action=%s" % (http, service_ref , begin, end - begin, descr, channel, afterevent, action)
+			sCommand = "%s/addTimerEvent?ref=%s&start=%d&duration=%d&descr=%s&channel=%s&after_event=%s&action=%s" % (http, service_ref, begin, end - begin, descr, channel, afterevent, action)
 			sendPartnerBoxWebCommand(sCommand, None,3, "root", str(self.entryguilist[int(self.timerentry_remote.value)][2].password.value)).addCallback(boundFunction(AddTimerE1Callback,self, self.session)).addErrback(boundFunction(AddTimerError,self, self.session))
 		else:
 			# E2

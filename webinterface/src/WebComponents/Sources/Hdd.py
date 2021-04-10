@@ -30,8 +30,8 @@ class Hdd(Source):
 		return disks
 
 	list = property(getList)
-	lut = { "Model" : 0,
-			"Capacity" : 1,
-			"Free" : 2
+	lut = {"Model": 0,
+			"Capacity": 1,
+			"Free": 2
 		}
 

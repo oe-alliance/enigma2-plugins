@@ -15,7 +15,7 @@ class AutoTimerEditor(Source):
 		self.session = session
 		self.command = None
 		self.bouquet_rootstr = ""
-		self.result = ( False, "one two three four unknown command" )
+		self.result = (False, "one two three four unknown command")
 
 	def handleCommand(self, cmd):
 		print "[WebComponents.AutoTimerEditor] handleCommand with cmd = ", cmd
@@ -24,7 +24,7 @@ class AutoTimerEditor(Source):
 		elif self.func is self.RESTORE:
 			self.result = self.restoreFiles(cmd)
 		else:
-			self.result = ( False, "one two three four unknown command" )
+			self.result = (False, "one two three four unknown command")
 
 	def backupFiles(self, param):
 		filename = param

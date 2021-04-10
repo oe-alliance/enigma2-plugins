@@ -19,8 +19,8 @@ config.plugins.KiddyTimer.lastStatus = ConfigText(default="") # Used for cheat d
 config.plugins.KiddyTimer.monitorStartTime = ConfigClock(default=KTglob.FOUROCLOCK)
 config.plugins.KiddyTimer.monitorEndTime = ConfigClock(default=KTglob.EIGHTOCLOCKNOON)
 config.plugins.KiddyTimer.activationDialogTimeout = ConfigInteger(default=10)
-config.plugins.KiddyTimer.pin = ConfigPIN(default=1111 , censor="*")
-config.plugins.KiddyTimer.remainingTime = ConfigInteger(default=int(KTglob.ONEHOUR), limits=(0,86400) )
+config.plugins.KiddyTimer.pin = ConfigPIN(default=1111, censor="*")
+config.plugins.KiddyTimer.remainingTime = ConfigInteger(default=int(KTglob.ONEHOUR), limits=(0,86400))
 
 config.plugins.KiddyTimer.dayTimes = ConfigSubList()
 for i in range(0, 7):

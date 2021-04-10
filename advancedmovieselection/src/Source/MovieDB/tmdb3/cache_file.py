@@ -55,7 +55,7 @@ def _donothing(*args, **kwargs):
 
 try:
     import fcntl
-    class Flock( object ):
+    class Flock(object):
         """
         Context manager to flock file for the duration the object exists.
         Referenced file will be automatically unflocked as the interpreter
@@ -94,7 +94,7 @@ try:
 
 except ImportError:
     import msvcrt
-    class Flock( object ):
+    class Flock(object):
         LOCK_EX = msvcrt.LK_LOCK
         LOCK_SH = msvcrt.LK_LOCK
 
@@ -130,7 +130,7 @@ except ImportError:
         return os.path.expandvars(os.path.join('%TEMP%',filename))
 
 
-class FileCacheObject( CacheObject ):
+class FileCacheObject(CacheObject):
     _struct = struct.Struct('dII') # double and two ints
                                    # timestamp, lifetime, position
 
@@ -197,7 +197,7 @@ class FileCacheObject( CacheObject ):
         fd.write(self._buff.getvalue())
 
 
-class FileEngine( CacheEngine ):
+class FileEngine(CacheEngine):
     """Simple file-backed engine."""
     name = 'file'
     _struct = struct.Struct('HH') # two shorts for version and count

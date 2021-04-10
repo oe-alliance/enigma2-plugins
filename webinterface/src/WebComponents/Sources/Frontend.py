@@ -7,6 +7,6 @@ class Frontend(Source):
 
 	list = property(getList)
 	lut = {
-		"Name" : 0,
-		"Type" : 1
+		"Name": 0,
+		"Type": 1
 	}

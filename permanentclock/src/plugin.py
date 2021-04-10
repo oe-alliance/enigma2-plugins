@@ -556,10 +556,10 @@ def startConfig(session, **kwargs):
 def main(menuid):
 	if getImageDistro() in ('teamblue'):
 		if menuid != "general_menu":
-			return [ ]
+			return []
 	elif getImageDistro() in ('openhdf'):
 		if menuid != "gui_menu":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
 			return []

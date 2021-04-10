@@ -30,7 +30,7 @@ try:
 except ImportError:
     from md5 import md5
     
-languages = { 'pl': 'PL', 'en': 'ENG' }
+languages = {'pl': 'PL', 'en': 'ENG'}
 
 class NapiProjekt():
     def __init__(self):
@@ -38,9 +38,9 @@ class NapiProjekt():
         pass
         
     def f(self,z):
-        idx = [ 0xe, 0x3,  0x6, 0x8, 0x2 ]
-        mul = [   2,   2,    5,   4,   3 ]
-        add = [   0, 0xd, 0x10, 0xb, 0x5 ]
+        idx = [0xe, 0x3,  0x6, 0x8, 0x2]
+        mul = [2,   2,    5,   4,   3]
+        add = [0, 0xd, 0x10, 0xb, 0x5]
         
         b = []
         for i in xrange(len(idx)):
@@ -50,7 +50,7 @@ class NapiProjekt():
             
             t = a + int(z[i], 16)
             v = int(z[t:t+2], 16)
-            b.append( ("%x" % (v*m))[-1] )
+            b.append(("%x" % (v*m))[-1])
 
         return ''.join(b)
     

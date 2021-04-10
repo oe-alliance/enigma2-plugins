@@ -67,7 +67,7 @@ class UserManager(Screen):
 					continue
 				else:
 					hostpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
-					self.list.append(( file[:-6],'edit',file,hostpng ))
+					self.list.append((file[:-6],'edit',file,hostpng))
 		self["config"].setList(self.list)
 
 	def exit(self):

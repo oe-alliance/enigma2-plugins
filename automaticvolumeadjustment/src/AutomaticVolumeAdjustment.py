@@ -46,7 +46,7 @@ class AutomaticVolumeAdjustment(Screen):
 		self.lastAdjustedValue = 0 # remember delta from last automatic volume up/down
 		self.currentVolume = 0 # only set when AC3 or DTS is available
 		self.enabled = False # AutomaticVolumeAdjustment enabled in setup?
-		self.serviceList = { } # values from config
+		self.serviceList = {} # values from config
 		configVA = AutomaticVolumeAdjustmentConfig() # get config values
 		assert not AutomaticVolumeAdjustment.instance, "only one AutomaticVolumeAdjustment instance is allowed!"
 		AutomaticVolumeAdjustment.instance = self # set instance
@@ -57,7 +57,7 @@ class AutomaticVolumeAdjustment(Screen):
 
 	def initializeConfigValues(self, configVA, fromOutside):
 		print "[AutomaticVolumeAdjustment] initialize config values..."
-		self.serviceList = { }
+		self.serviceList = {}
 		self.modus = configVA.config.modus.value # get modus
 		if self.modus == "0": # Automatic volume adjust mode
 			for c in configVA.config.Entries:

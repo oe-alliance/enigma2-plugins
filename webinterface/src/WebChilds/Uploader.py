@@ -12,7 +12,7 @@ class UploadResource(resource.Resource):
 	def out_POST(self, req, state, statetext, isXml):
 		req.setResponseCode(http.OK)
 		if isXml:
-			req.setHeader('Content-type', 'application/xhtml+xml;' )
+			req.setHeader('Content-type', 'application/xhtml+xml;')
 			req.setHeader('charset', 'UTF-8')
 			return """<?xml version="1.0" encoding="UTF-8" ?>
 <e2simplexmlresult>

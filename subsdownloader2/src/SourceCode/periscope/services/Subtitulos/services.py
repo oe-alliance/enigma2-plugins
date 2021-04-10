@@ -42,17 +42,17 @@ log = logging.getLogger(__name__)
              u"Italian" : "it",
              u"Català" : "ca"}"""
 
-LANGUAGES = {"English (US)" : "en",
-             "English (UK)" : "en",
-             "English" : "en",
-             "French" : "fr",
-             "Brazilian" : "pt-br",
-             "Portuguese" : "pt",
-             "Español (Latinoamérica)" : "es",
-             "Español (España)" : "es",
-             "Español" : "es",
-             "Italian" : "it",
-             "Català" : "ca"}
+LANGUAGES = {"English (US)": "en",
+             "English (UK)": "en",
+             "English": "en",
+             "French": "fr",
+             "Brazilian": "pt-br",
+             "Portuguese": "pt",
+             "Español (Latinoamérica)": "es",
+             "Español (España)": "es",
+             "Español": "es",
+             "Italian": "it",
+             "Català": "ca"}
 
 class Subtitulos(SubtitleDatabase.SubtitleDB):
     url = "http://www.subtitulos.es"
@@ -115,14 +115,14 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
 
             nexts = subs.findAll("ul", {"class":"sslist"})
             for lang_html in nexts:
-                langLI = lang_html.findNext("li",{"class":"li-idioma"} )
+                langLI = lang_html.findNext("li",{"class":"li-idioma"})
                 lang = self.getLG(langLI.find("strong").contents[0].string.strip())
         
-                statusLI = lang_html.findNext("li",{"class":"li-estado green"} )
+                statusLI = lang_html.findNext("li",{"class":"li-estado green"})
                 status = statusLI.contents[0].string.strip()
 
                 link = statusLI.findNext("span", {"class":"descargar green"}).find("a")["href"]
-                if status == "Completado" and subteams.issubset(teams) and (not langs or lang in langs) :
+                if status == "Completado" and subteams.issubset(teams) and (not langs or lang in langs):
                     result = {}
                     result["release"] = "%s.S%.2dE%.2d.%s" %(name.replace("-", ".").title(), int(season), int(episode), '.'.join(subteams))
                     result["lang"] = lang
@@ -159,7 +159,7 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
 
     def downloadFile(self, url, filename):
         ''' Downloads the given url to the given filename '''
-        req = urllib2.Request(url, headers={'Referer' : url, 'User-Agent' : 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.1.3)'})
+        req = urllib2.Request(url, headers={'Referer': url, 'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.1.3)'})
         
         f = urllib2.urlopen(req)
         dump = open(filename, "wb")

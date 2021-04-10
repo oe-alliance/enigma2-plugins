@@ -106,5 +106,5 @@ class XMLFile(object):
 			mtime = -1
 		
 		# Save time and cache file content
-		self.__mtime = os.path.getmtime( path )
+		self.__mtime = os.path.getmtime(path)
 		self.__cache = etree

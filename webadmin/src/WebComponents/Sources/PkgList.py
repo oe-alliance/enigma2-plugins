@@ -44,10 +44,10 @@ class PkgList(Source):
 				if map.has_key(package[PKG_NAME]):
 					if map[package[PKG_NAME]][0] > package[PKG_REL]:
 						continue
-				map.update( { package[PKG_NAME] : [ (package[PKG_REL][:-1] if len(package) < 3 else package[PKG_REL]),
+				map.update({package[PKG_NAME]: [(package[PKG_REL][:-1] if len(package) < 3 else package[PKG_REL]),
 					("" if len(package) < 3 else package[PKG_INFO][:-1]),
-					 "0" , 
-					 "0"] } )
+					 "0", 
+					 "0"]})
 			out = os_popen("opkg list-installed")
 			for line in out:
 				package = line.split(' - ')
@@ -64,7 +64,7 @@ class PkgList(Source):
 			keys=map.keys()
 			keys.sort()
 			
-			return [ (name, map[name][0], map[name][1], map[name][2], map[name][3]) for name in keys ]
+			return [(name, map[name][0], map[name][1], map[name][2], map[name][3]) for name in keys]
 		except Exception, e:
 			print "[PkgList] except: ",str(e)
 			return []
@@ -80,31 +80,31 @@ class PkgList(Source):
 		if self.wap:
 			# packagename starts with: filter=<one char>
 			if len(self.cmd) == 1:
-				return [ p for p in PKGCACHE if p[0].startswith(self.cmd) ]
+				return [p for p in PKGCACHE if p[0].startswith(self.cmd)]
 			# static parameter "filter=installed"
 			elif(self.cmd == "installed"):
-				return [ (p[0],
+				return [(p[0],
 						p[1],
 						p[2],
 						(_("Yes") if p[3] == "1" else _("No")),
 						(_("Yes") if p[4] == "1" else _("No"))
-						) for p in PKGCACHE if p[3] == "1" ]
+						) for p in PKGCACHE if p[3] == "1"]
 			# static parameter "filter=upgradable"
 			elif(self.cmd == "upgradable"):
-				return [ (p[0],
+				return [(p[0],
 						p[1],
 						p[2],
 						(_("Yes") if p[3] == "1" else _("No")),
 						(_("Yes") if p[4] == "1" else _("No"))
-						) for p in PKGCACHE if p[4] == "1" ]
+						) for p in PKGCACHE if p[4] == "1"]
 			# packagename search filter=...
 			else:
-				return [ (p[0],
+				return [(p[0],
 						p[1],
 						p[2],
 						(_("Yes") if p[3] == "1" else _("No")),
 						(_("Yes") if p[4] == "1" else _("No"))
-						) for p in PKGCACHE if self.cmd in p[0] or self.cmd in p[2] ]
+						) for p in PKGCACHE if self.cmd in p[0] or self.cmd in p[2]]
 		else:
 			# packagename starts with: filter=<one char>
 			#if len(self.cmd) == 1:
@@ -121,9 +121,9 @@ class PkgList(Source):
 			return PKGCACHE
 
 	list = property(getOpkgfeed)
-	lut = {"Packagename" : 0,
-		"Release" : 1,
-		"Info" : 2,
-		"State" : 3,
-		"Update" : 4,
+	lut = {"Packagename": 0,
+		"Release": 1,
+		"Info": 2,
+		"State": 3,
+		"Update": 4,
 	}

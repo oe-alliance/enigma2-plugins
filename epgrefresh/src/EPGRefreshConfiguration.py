@@ -44,7 +44,7 @@ class EPGHelpContextMenu(FixedMenu):
 			(_("Cancel"), self.close)]
 
 		FixedMenu.__init__(self, session, _("EPGRefresh Configuration Help"), menu)
-		self.skinName = ["EPGRefreshConfigurationHelpContextMenu", "Menu" ]
+		self.skinName = ["EPGRefreshConfigurationHelpContextMenu", "Menu"]
 
 class EPGFunctionMenu(FixedMenu):
 	FUNCTION_RETURN_FORCEREFRESH = 0
@@ -60,7 +60,7 @@ class EPGFunctionMenu(FixedMenu):
 		menu.append((_("Cancel"), self.close))
 
 		FixedMenu.__init__(self, session, _("EPGRefresh Functions"), menu)
-		self.skinName = ["EPGRefreshConfigurationFunctionContextMenu", "Menu" ]
+		self.skinName = ["EPGRefreshConfigurationFunctionContextMenu", "Menu"]
 
 class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 	"""Configuration of EPGRefresh"""

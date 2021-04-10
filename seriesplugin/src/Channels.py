@@ -105,17 +105,17 @@ def getServicesOfBouquet(bouquet):
 		
 		if (eServiceReference(serviceref).flags & eServiceReference.isDirectory):
 			# handle directory services
-			log.debug("SPC: found directory %s" % (serviceref) )
-			chlist.extend( getServicesOfBouquet(serviceref) )
+			log.debug("SPC: found directory %s" % (serviceref))
+			chlist.extend(getServicesOfBouquet(serviceref))
 		
 		elif (eServiceReference(serviceref).flags & eServiceReference.isGroup):
 			# handle group services
-			log.debug("SPC: found group %s" % (serviceref) )
-			chlist.extend( getServicesOfBouquet(serviceref) )
+			log.debug("SPC: found group %s" % (serviceref))
+			chlist.extend(getServicesOfBouquet(serviceref))
 		
 		elif not (eServiceReference(serviceref).flags & eServiceReference.isMarker):
 			# playable
-			log.debug("SPC: found playable service %s" % (serviceref) )
+			log.debug("SPC: found playable service %s" % (serviceref))
 			chlist.append((servicename, re.sub('::.*', ':', serviceref), unifyChannel(servicename)))
 		
 	return chlist
@@ -123,15 +123,15 @@ def getServicesOfBouquet(bouquet):
 def buildSTBchannellist(BouquetName=None):
 	chlist = []
 	tvbouquets = getTVBouquets()
-	log.debug("SPC: found %s bouquet: %s" % (len(tvbouquets), tvbouquets) )
+	log.debug("SPC: found %s bouquet: %s" % (len(tvbouquets), tvbouquets))
 
 	if not BouquetName:
 		for bouquet in tvbouquets:
-			chlist.extend( getServicesOfBouquet(bouquet[0]) )
+			chlist.extend(getServicesOfBouquet(bouquet[0]))
 	else:
 		for bouquet in tvbouquets:
 			if bouquet[1] == BouquetName:
-				chlist.extend( getServicesOfBouquet(bouquet[0]) )
+				chlist.extend(getServicesOfBouquet(bouquet[0]))
 	
 	return chlist
 
@@ -150,7 +150,7 @@ def compareChannels(ref, remote):
 	log.debug("compareChannels", ref, remote)
 	remote = remote.lower()
 	if ref in ChannelsBase.channels:
-		( name, alternatives ) = ChannelsBase.channels[ref]
+		(name, alternatives) = ChannelsBase.channels[ref]
 		for altname in alternatives:
 			if altname.lower() in remote or remote in altname.lower():
 				return True
@@ -159,7 +159,7 @@ def compareChannels(ref, remote):
 
 def lookupChannelByReference(ref):
 	if ref in ChannelsBase.channels:
-		( name, alternatives ) = ChannelsBase.channels[ref]
+		(name, alternatives) = ChannelsBase.channels[ref]
 		altnames = []
 		for altname in alternatives:
 			if altname:
@@ -195,18 +195,18 @@ class ChannelsBase(XMLFile):
 		log.debug("SP addChannel name remote", name, remote)
 		
 		if ref in ChannelsBase.channels:
-			( name, alternatives ) = ChannelsBase.channels[ref]
+			(name, alternatives) = ChannelsBase.channels[ref]
 			if remote not in alternatives:
 				alternatives.append(remote)
-				ChannelsBase.channels[ref] = ( name, alternatives )
+				ChannelsBase.channels[ref] = (name, alternatives)
 		else:
-			ChannelsBase.channels[ref] = ( name, [remote] )
+			ChannelsBase.channels[ref] = (name, [remote])
 		ChannelsBase.channels_changed = True
 	
 	def replaceChannel(self, ref, name, remote):
 		log.debug("SP addChannel name remote", name, remote)
 		
-		ChannelsBase.channels[ref] = ( name, [remote] )
+		ChannelsBase.channels[ref] = (name, [remote])
 		ChannelsBase.channels_changed = True
 
 	def removeChannel(self, ref):
@@ -229,7 +229,7 @@ class ChannelsBase(XMLFile):
 					channels = {}
 					version = root.get("version", "1")
 					if version.startswith("1"):
-						log.warning( _("Skipping old channels file") )
+						log.warning(_("Skipping old channels file"))
 					elif version.startswith("2") or version.startswith("3") or version.startswith("4"):
 						log.debug("Channel XML Version 4")
 						ChannelsBase.channels_changed = True
@@ -240,9 +240,9 @@ class ChannelsBase(XMLFile):
 								if name and reference:
 									alternatives = []
 									for alternative in element.findall("Alternative"):
-										alternatives.append( alternative.text )
+										alternatives.append(alternative.text)
 									channels[reference] = (name, list(set(alternatives)))
-									log.debug("Channel", reference, channels[reference] )
+									log.debug("Channel", reference, channels[reference])
 					else:
 						# XMLTV compatible channels file
 						log.debug("Channel XML Version 5")
@@ -250,17 +250,17 @@ class ChannelsBase(XMLFile):
 							for element in root.findall("channel"):
 								alternatives = []
 								id = element.get("id", "")
-								alternatives.append( id )
+								alternatives.append(id)
 								name = element.get("name", "")
 								reference = element.text
 								#Test customization but XML conform
 								for web in element.findall("web"):
-									alternatives.append( web.text )
+									alternatives.append(web.text)
 								channels[reference] = (name, list(set(alternatives)))
-								log.debug("Channel", reference, channels[reference] )
+								log.debug("Channel", reference, channels[reference])
 					return channels
 				
-				channels = parse( etree.getroot() )
+				channels = parse(etree.getroot())
 				log.debug("Channel XML load", len(channels))
 			else:
 				channels = {}
@@ -299,19 +299,19 @@ class ChannelsBase(XMLFile):
 							if alternatives:
 								# Add channel
 								web = alternatives[0]
-								element = SubElement( root, "channel", name=stringToXML(name), id=stringToXML(web) )
+								element = SubElement(root, "channel", name=stringToXML(name), id=stringToXML(web))
 								element.text = stringToXML(reference)
 								del alternatives[0]
 								if alternatives:
 									for web in alternatives:
-										SubElement( element, "web" ).text = stringToXML(web)
+										SubElement(element, "web").text = stringToXML(web)
 					return root
 				
-				etree = ElementTree( build( root, channels ) )
+				etree = ElementTree(build(root, channels))
 				
 				indent(etree.getroot())
 				
-				self.writeXML( etree )
+				self.writeXML(etree)
 				
 				if config.plugins.seriesplugin.epgimport.value:
 					log.debug("Write: xml channels for epgimport")

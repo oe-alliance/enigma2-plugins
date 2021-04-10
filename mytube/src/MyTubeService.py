@@ -86,19 +86,19 @@ class CVevoSignAlgoExtractor:
             # a.split("") -> list(a)
             match = re.search('(\w+?)\.split\(""\)', lines[i])
             if match:
-                lines[i] = lines[i].replace( match.group(0), 'list(' + match.group(1)  + ')')
+                lines[i] = lines[i].replace(match.group(0), 'list(' + match.group(1)  + ')')
             # a.length -> len(a)
             match = re.search('(\w+?)\.length', lines[i])
             if match:
-                lines[i] = lines[i].replace( match.group(0), 'len(' + match.group(1)  + ')')
+                lines[i] = lines[i].replace(match.group(0), 'len(' + match.group(1)  + ')')
             # a.slice(3) -> a[3:]
             match = re.search('(\w+?)\.slice\(([0-9]+?)\)', lines[i])
             if match:
-                lines[i] = lines[i].replace( match.group(0), match.group(1) + ('[%s:]' % match.group(2)) )
+                lines[i] = lines[i].replace(match.group(0), match.group(1) + ('[%s:]' % match.group(2)))
             # a.join("") -> "".join(a)
             match = re.search('(\w+?)\.join\(("[^"]*?")\)', lines[i])
             if match:
-                lines[i] = lines[i].replace( match.group(0), match.group(2) + '.join(' + match.group(1) + ')' )
+                lines[i] = lines[i].replace(match.group(0), match.group(2) + '.join(' + match.group(1) + ')')
         return "\n".join(lines)
 
     def _getLocalFunBody(self, funName):
@@ -110,16 +110,16 @@ class CVevoSignAlgoExtractor:
         return ''
 
     def _getAllLocalSubFunNames(self, mainFunBody):
-        match = re.compile('[ =(,](\w+?)\([^)]*?\)').findall( mainFunBody )
+        match = re.compile('[ =(,](\w+?)\([^)]*?\)').findall(mainFunBody)
         if len(match):
             # first item is name of main function, so omit it
-            funNameTab = set( match[1:] )
+            funNameTab = set(match[1:])
             return funNameTab
         return set()
 
     def decryptSignature(self, s, playerUrl):
         playerUrl = playerUrl[:4] != 'http' and 'http:'+playerUrl or playerUrl
-        printDBG("decrypt_signature sign_len[%d] playerUrl[%s]" % (len(s), playerUrl) )
+        printDBG("decrypt_signature sign_len[%d] playerUrl[%s]" % (len(s), playerUrl))
 
         # clear local data
         self._cleanTmpVariables()
@@ -144,7 +144,7 @@ class CVevoSignAlgoExtractor:
                 printDBG('Can not get main signature function name')
                 return ''
 
-            self._getfullAlgoCode( mainFunName )
+            self._getfullAlgoCode(mainFunName)
 
             # wrap all local algo function into one function extractedSignatureAlgo()
             algoLines = self.fullAlgoCode.split('\n')
@@ -157,11 +157,11 @@ class CVevoSignAlgoExtractor:
 
             # after this function we should have all needed code in self.fullAlgoCode
 
-            printDBG( "---------------------------------------" )
-            printDBG( "|    ALGO FOR SIGNATURE DECRYPTION    |" )
-            printDBG( "---------------------------------------" )
-            printDBG( self.fullAlgoCode                         )
-            printDBG( "---------------------------------------" )
+            printDBG("---------------------------------------")
+            printDBG("|    ALGO FOR SIGNATURE DECRYPTION    |")
+            printDBG("---------------------------------------")
+            printDBG(self.fullAlgoCode)
+            printDBG("---------------------------------------")
 
             try:
                 algoCodeObj = compile(self.fullAlgoCode, '', 'exec')
@@ -177,11 +177,11 @@ class CVevoSignAlgoExtractor:
         vGlobals = {"__builtins__": None, 'len': len, 'list': list}
 
         # local variable to pass encrypted sign and get decrypted sign
-        vLocals = { 'inSignature': s, 'outSignature': '' }
+        vLocals = {'inSignature': s, 'outSignature': ''}
 
         # execute prepared code
         try:
-            exec( algoCodeObj, vGlobals, vLocals )
+            exec(algoCodeObj, vGlobals, vLocals)
         except:
             printDBG('decryptSignature exec code EXCEPTION')
             return ''
@@ -198,12 +198,12 @@ class CVevoSignAlgoExtractor:
         return vLocals['outSignature']
 
     # Note, this method is using a recursion
-    def _getfullAlgoCode( self, mainFunName, recDepth=0 ):
+    def _getfullAlgoCode(self, mainFunName, recDepth=0):
         if self.MAX_REC_DEPTH <= recDepth:
             printDBG('_getfullAlgoCode: Maximum recursion depth exceeded')
             return 
 
-        funBody = self._getLocalFunBody( mainFunName )
+        funBody = self._getLocalFunBody(mainFunName)
         if '' != funBody:
             funNames = self._getAllLocalSubFunNames(funBody)
             if len(funNames):
@@ -211,7 +211,7 @@ class CVevoSignAlgoExtractor:
                     if funName not in self.allLocalFunNamesTab:
                         self.allLocalFunNamesTab.append(funName)
                         printDBG("Add local function %s to known functions" % mainFunName)
-                        self._getfullAlgoCode( funName, recDepth + 1 )
+                        self._getfullAlgoCode(funName, recDepth + 1)
 
             # conver code from javascript to python 
             funBody = self._jsToPy(funBody)
@@ -372,7 +372,7 @@ class MyTubeFeedEntry():
 		return myTubeService.addToFavorites(video_id)
 
 	def PrintEntryDetails(self):
-		EntryDetails = { 'Title': None, 'TubeID': None, 'Published': None, 'Published': None, 'Description': None, 'Category': None, 'Tags': None, 'Duration': None, 'Views': None, 'Rating': None, 'Thumbnails': None}
+		EntryDetails = {'Title': None, 'TubeID': None, 'Published': None, 'Published': None, 'Description': None, 'Category': None, 'Tags': None, 'Duration': None, 'Views': None, 'Rating': None, 'Thumbnails': None}
 		EntryDetails['Title'] = self.entry.media.title.text
 		EntryDetails['TubeID'] = self.getTubeId()
 		EntryDetails['Description'] = self.getDescription()
@@ -425,12 +425,12 @@ class MyTubeFeedEntry():
 	# link resolving from xbmc youtube plugin
 	def getVideoUrl(self):
 		VIDEO_FMT_PRIORITY_MAP = {
-			'38' : 1, #MP4 Original (HD)
-			'37' : 2, #MP4 1080p (HD)
-			'22' : 3, #MP4 720p (HD)
-			'18' : 4, #MP4 360p
-			'35' : 5, #FLV 480p
-			'34' : 6, #FLV 360p
+			'38': 1, #MP4 Original (HD)
+			'37': 2, #MP4 1080p (HD)
+			'22': 3, #MP4 720p (HD)
+			'18': 4, #MP4 360p
+			'35': 5, #FLV 480p
+			'34': 6, #FLV 360p
 		}
 		video_url = None
 		video_id = str(self.getTubeId())
@@ -489,7 +489,7 @@ class MyTubeFeedEntry():
 								fmturl = value
 
 					if fmtid != "" and fmturl != "" and VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
-						video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
+						video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
 						fmt_infomap[int(fmtid)] = "%s" %(unquote_plus(fmturl))
 					fmturl = fmtid = ""
 
@@ -499,7 +499,7 @@ class MyTubeFeedEntry():
 			else:
 				(fmtid,fmturl) = fmtstring.split('|')
 			if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid) and fmtid != "":
-				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
+				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
 				fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
 		print "[MyTube] got",sorted(fmt_infomap.iterkeys())
 		if video_fmt_map and len(video_fmt_map):
@@ -586,7 +586,7 @@ class MyTubePlayerService():
 		}
 		
 		print "[MyTube] MyTubePlayerService - Starting external curl auth request"
-		result = os.popen('curl -s -k -X POST "%s" -d "%s"' % (gdata.youtube.service.YOUTUBE_CLIENTLOGIN_AUTHENTICATION_URL , urlencode(opts))).read()
+		result = os.popen('curl -s -k -X POST "%s" -d "%s"' % (gdata.youtube.service.YOUTUBE_CLIENTLOGIN_AUTHENTICATION_URL, urlencode(opts))).read()
 		
 		return result
 

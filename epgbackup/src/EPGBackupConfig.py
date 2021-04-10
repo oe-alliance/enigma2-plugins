@@ -118,7 +118,7 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 	def menu(self):
 		menuList = []
 		if config.plugins.epgbackup.backup_enabled.value:
-			menuList.extend( [
+			menuList.extend([
 				(_("Restore EPG-Backups (Date)"), "MENU_RETURN_RESTORE_DATE"),
 				(_("Restore EPG-Backups (Size)"), "MENU_RETURN_RESTORE_SIZE"),
 				(_("Make a EPG-Backup"), "MENU_RETURN_DO_BACKUP"),

@@ -29,7 +29,7 @@ def hidePlugin(plugin):
 
 def PluginComponent_getPlugins(self, where):
 	if not isinstance(where, list):
-		where = [ where ]
+		where = [where]
 
 	res = []
 	if PluginDescriptor.WHERE_EXTENSIONSMENU in where:
@@ -44,7 +44,7 @@ def PluginComponent_getPlugins(self, where):
 
 	if PluginDescriptor.WHERE_EVENTINFO in where:
 		hide = config.plugins.pluginhider.hideeventinfo.value
-		res.extend((x for x in self.plugins.get(PluginDescriptor.WHERE_EVENTINFO , []) if x.name not in hide))
+		res.extend((x for x in self.plugins.get(PluginDescriptor.WHERE_EVENTINFO, []) if x.name not in hide))
 		where.remove(PluginDescriptor.WHERE_EVENTINFO)
 
 	if where:
@@ -79,7 +79,7 @@ def main(session, *args, **kwargs):
 def menu(menuid):
 	if getImageDistro() in ('teamblue'):
 		if menuid != "general_menu":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
 			return []

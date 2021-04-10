@@ -9,7 +9,7 @@ class UploadResource(resource.Resource):
 
 	def render_POST(self, req):
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application/xhtml+xml;' )
+		req.setHeader('Content-type', 'application/xhtml+xml;')
 		req.setHeader('charset', 'UTF-8')	
 		data = req.args['file'][0]
 		if not data:
@@ -19,7 +19,7 @@ class UploadResource(resource.Resource):
 					<e2statetext>Filesize was 0, not uploaded</e2statetext>
 				</e2simplexmlresult>\n"""
 			return result
-		fd = os_open( self.FILENAME, os_O_WRONLY|os_O_CREAT )
+		fd = os_open(self.FILENAME, os_O_WRONLY|os_O_CREAT)
 		if fd:
 			cnt = os_write(fd, data)
 			os_close(fd)

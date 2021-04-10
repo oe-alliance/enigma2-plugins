@@ -43,7 +43,7 @@ from Logger import log
 from WebChannels import WebChannels
 
 # Constants
-PIXMAP_PATH = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/SeriesPlugin/Images/" )
+PIXMAP_PATH = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/SeriesPlugin/Images/")
 
 colorRed    = 0xf23d21
 colorGreen  = 0x389416
@@ -74,12 +74,12 @@ class MatchList(MenuList):
 			tlf = TemplatedListFonts()
 			self.l.setFont(0, gFont(tlf.face(tlf.MEDIUM), tlf.size(tlf.MEDIUM)))
 		else:
-			self.l.setFont(0, gFont('Regular', 20 ))
+			self.l.setFont(0, gFont('Regular', 20))
 
 	def applySkin(self, desktop, parent): 
 		# This is a very bad way to get the skin attributes
 		# This function is called for every skin element, we should parse the attributes depending on the element name
-		attribs = [ ] 
+		attribs = [] 
 		if self.skinAttributes is not None:
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "font":
@@ -117,23 +117,23 @@ class MatchList(MenuList):
 		l = [(stbSender, webSender, serviceref, status),]
 		
 		pos = self.margin + self.iconPosX
-		l.append( (eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, pos, self.iconPosY, self.iconSize,     self.iconSize,  loadPNG(imageStatus)) )
+		l.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, pos, self.iconPosY, self.iconSize,     self.iconSize,  loadPNG(imageStatus)))
 		
 		pos += self.iconSize + self.margin
-		l.append( (eListboxPythonMultiContent.TYPE_TEXT,             pos, 0,             self.colWidthStb,  self.itemHeight, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, stbSender) )
+		l.append((eListboxPythonMultiContent.TYPE_TEXT,             pos, 0,             self.colWidthStb,  self.itemHeight, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, stbSender))
 		
 		pos += self.colWidthStb + self.margin
-		l.append( (eListboxPythonMultiContent.TYPE_TEXT,             pos, 0,             self.colWidthWeb,  self.itemHeight, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, webSender) )
+		l.append((eListboxPythonMultiContent.TYPE_TEXT,             pos, 0,             self.colWidthWeb,  self.itemHeight, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, webSender))
 		
 		pos += self.colWidthWeb + self.margin
-		l.append( (eListboxPythonMultiContent.TYPE_TEXT,             pos, 0,             size.width()-pos, self.itemHeight,  0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, "", colorYellow) )
+		l.append((eListboxPythonMultiContent.TYPE_TEXT,             pos, 0,             size.width()-pos, self.itemHeight,  0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, "", colorYellow))
 		
 		return l
 
 
 class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 	
-	skinfile = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Skins/ChannelEditor.xml" )
+	skinfile = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Skins/ChannelEditor.xml")
 	skin = open(skinfile).read()
 	
 	def __init__(self, session):
@@ -144,7 +144,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 		
 		self.session = session
 		
-		self.skinName = [ "SeriesPluginChannelEditor" ]
+		self.skinName = ["SeriesPluginChannelEditor"]
 		
 		log.debug("ChannelEditor")
 		
@@ -159,31 +159,31 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 		
 		# Define Actions
 		self["actions_1"] = HelpableActionMap(self, "SetupActions", {
-			"ok"       : (self.keyAdd, _("Show popup to add Stb Channel")),
-			"cancel"   : (self.keyCancel, _("Cancel and close")),
-			"deleteForward"   : (self.keyResetChannelMapping, _("Reset channels")),
+			"ok": (self.keyAdd, _("Show popup to add Stb Channel")),
+			"cancel": (self.keyCancel, _("Cancel and close")),
+			"deleteForward": (self.keyResetChannelMapping, _("Reset channels")),
 		}, -1)
 		self["actions_2"] = HelpableActionMap(self, "DirectionActions", {
-			"left"     : (self.keyLeft, _("Previeous page")),
-			"right"    : (self.keyRight, _("Next page")),
-			"up"       : (self.keyUp, _("One row up")),
-			"down"     : (self.keyDown, _("One row down")),
+			"left": (self.keyLeft, _("Previeous page")),
+			"right": (self.keyRight, _("Next page")),
+			"up": (self.keyUp, _("One row up")),
+			"down": (self.keyDown, _("One row down")),
 		}, -1)
 		self["actions_3"] = HelpableActionMap(self, "ChannelSelectBaseActions", {
 			"nextBouquet":	(self.nextBouquet, _("Next bouquet")),
 			"prevBouquet":	(self.prevBouquet, _("Previous bouquet")),
 		}, -1)
 		self["actions_4"] = HelpableActionMap(self, "ColorActions", {
-			"red"      : (self.keyCancel, _("Cancel and close")),
-			"green"    : (self.keySave, _("Save and close")),
-			"blue"     : (self.keyRemove, _("Remove channel")),
-			"yellow"   : (self.tryToMatchChannels, _("Auto match")),
+			"red": (self.keyCancel, _("Cancel and close")),
+			"green": (self.keySave, _("Save and close")),
+			"blue": (self.keyRemove, _("Remove channel")),
+			"yellow": (self.tryToMatchChannels, _("Auto match")),
 		}, -2) # higher priority
 		
 		self.helpList[0][2].sort()
 
 		self["helpActions"] = ActionMap(["HelpActions",], {
-			"displayHelp"      : self.showHelp
+			"displayHelp": self.showHelp
 		}, 0)
 
 		self['list'] = MatchList()
@@ -201,7 +201,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 	def showMessage(self):
 		if self.showMessage in self.onShown:
 			self.onShown.remove(self.showMessage)
-			self.session.open( MessageBox, _("If You are using SD and HD channels in parallel, You have to match both channels separately!"), MessageBox.TYPE_INFO )
+			self.session.open(MessageBox, _("If You are using SD and HD channels in parallel, You have to match both channels separately!"), MessageBox.TYPE_INFO)
 
 	def readChannels(self, bouquet=None):
 		self.stbToWebChlist = []
@@ -231,7 +231,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 		log.debug("Load Web channels")
 		data = self.getWebChannels()
 		if data:
-			temp = [ (x,unifyChannel(x)) for x in data]
+			temp = [(x,unifyChannel(x)) for x in data]
 		else:
 			self.setTitle(_("Problem during loading Webchannels"))
 			temp = []
@@ -245,7 +245,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 		return ""
 	
 	def showChannels(self):
-		self.setTitle(_("STB- / Web-Channel for bouquet:") + " " + self.bouquet )
+		self.setTitle(_("STB- / Web-Channel for bouquet:") + " " + self.bouquet)
 		if len(self.stbChlist) != 0:
 			for servicename,serviceref,uservicename in self.stbChlist:
 				#log.debug("servicename", servicename, uservicename)
@@ -258,7 +258,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 					self.stbToWebChlist.append((servicename, "", serviceref, "0"))
 		
 		if len(self.stbToWebChlist) != 0:
-			self['list'].setList( self.stbToWebChlist )
+			self['list'].setList(self.stbToWebChlist)
 		else:
 			log.debug("Error creating webChlist..")
 			self.setTitle(_("Error check log file"))
@@ -303,7 +303,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 						self.stbToWebChlist.append((servicename, "", serviceref, "0"))
 						
 		if len(self.stbToWebChlist) != 0:
-			self['list'].setList( self.stbToWebChlist )
+			self['list'].setList(self.stbToWebChlist)
 		else:
 			log.debug("Error creating webChlist..")
 			self.setTitle(_("Error check log file"))
@@ -326,7 +326,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 			if webSender:
 				idx = self.getIndexOfWebSender(self.webChlist)
 			log.debug("keyAdd webSender", webSender, idx)
-			self.session.openWithCallback( boundFunction(self.addConfirm, servicename, serviceref, webSender), ChoiceBox,_("Add Web Channel"), self.webChlist, None, idx)
+			self.session.openWithCallback(boundFunction(self.addConfirm, servicename, serviceref, webSender), ChoiceBox,_("Add Web Channel"), self.webChlist, None, idx)
 	
 	def getIndexOfServiceref(self, serviceref):
 		for pos,stbWebChl in enumerate(self.stbToWebChlist):
@@ -344,13 +344,13 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 			idx = self.getIndexOfServiceref(serviceref)
 			log.debug("addConfirm", servicename, serviceref, remote, idx)
 			if idx is not False:
-				self.setTitle(_("Channel '- %(servicename)s - %(remote)s -' added.") % {'servicename': servicename, 'remote':remote } )
+				self.setTitle(_("Channel '- %(servicename)s - %(remote)s -' added.") % {'servicename': servicename, 'remote':remote})
 				self.addChannel(serviceref, servicename, remote)
 				self.stbToWebChlist[idx] = (servicename, remote, serviceref, "1")
-				self['list'].setList( self.stbToWebChlist )
+				self['list'].setList(self.stbToWebChlist)
 		elif servicename and serviceref and remote and webSender:
 			log.debug("add or replace", servicename, serviceref, remote, webSender)
-			self.session.openWithCallback( boundFunction(self.addOrReplace, servicename, serviceref, webSender, remote), MessageBox,_("Add channel (Yes) or replace it (No)"), MessageBox.TYPE_YESNO, default=False)
+			self.session.openWithCallback(boundFunction(self.addOrReplace, servicename, serviceref, webSender, remote), MessageBox,_("Add channel (Yes) or replace it (No)"), MessageBox.TYPE_YESNO, default=False)
 
 	def addOrReplace(self, servicename, serviceref, webSender, remote, result):
 		idx = self.getIndexOfServiceref(serviceref)
@@ -360,17 +360,17 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 		
 		if result:
 			log.debug("add", servicename, serviceref, remote, webSender)
-			self.setTitle(_("Channel '- %(servicename)s - %(remote)s -' added.") % {'servicename': servicename, 'remote':remote } )
+			self.setTitle(_("Channel '- %(servicename)s - %(remote)s -' added.") % {'servicename': servicename, 'remote':remote})
 			self.addChannel(serviceref, servicename, remote)
 			self.stbToWebChlist[idx] = (servicename, webSender+" / "+remote, serviceref, "1")
 			
 		else:
 			log.debug("replace", servicename, serviceref, remote, webSender)
-			self.setTitle(_("Channel '- %(servicename)s - %(remote)s -' replaced.") % {'servicename': servicename, 'remote':remote } )
+			self.setTitle(_("Channel '- %(servicename)s - %(remote)s -' replaced.") % {'servicename': servicename, 'remote':remote})
 			self.replaceChannel(serviceref, servicename, remote)
 			self.stbToWebChlist[idx] = (servicename, remote, serviceref, "1")
 			
-		self['list'].setList( self.stbToWebChlist )
+		self['list'].setList(self.stbToWebChlist)
 
 	def keyRemove(self):
 		check = self['list'].getCurrent()
@@ -382,7 +382,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 			log.debug("keyRemove", servicename, webSender, serviceref, state)
 			if serviceref:
 				#TODO handle multiple links/alternatives - show a choicebox
-				self.session.openWithCallback( boundFunction(self.removeConfirm, servicename, serviceref), MessageBox, _("Remove '%s'?") % servicename, MessageBox.TYPE_YESNO, default=False)
+				self.session.openWithCallback(boundFunction(self.removeConfirm, servicename, serviceref), MessageBox, _("Remove '%s'?") % servicename, MessageBox.TYPE_YESNO, default=False)
 
 	def removeConfirm(self, servicename, serviceref, answer):
 		if not answer:
@@ -394,7 +394,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 				self.setTitle(_("Channel '- %s -' removed.") % servicename)
 				self.removeChannel(serviceref)
 				self.stbToWebChlist[idx] = (servicename, "", serviceref, "0")
-				self['list'].setList( self.stbToWebChlist )
+				self['list'].setList(self.stbToWebChlist)
 
 	def keyResetChannelMapping(self):
 		self.session.openWithCallback(self.channelReset, MessageBox, _("Reset channel list?"), MessageBox.TYPE_YESNO)

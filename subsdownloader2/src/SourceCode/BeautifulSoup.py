@@ -487,11 +487,11 @@ class Tag(PageElement):
             i[v] = k
         return i
 
-    XML_ENTITIES_TO_SPECIAL_CHARS = { "apos" : "'",
-                                      "quot" : '"',
-                                      "amp" : "&",
-                                      "lt" : "<",
-                                      "gt" : ">" }
+    XML_ENTITIES_TO_SPECIAL_CHARS = {"apos": "'",
+                                      "quot": '"',
+                                      "amp": "&",
+                                      "lt": "<",
+                                      "gt": ">"}
 
     XML_SPECIAL_CHARS_TO_ENTITIES = _invert(XML_ENTITIES_TO_SPECIAL_CHARS)
 
@@ -1075,7 +1075,7 @@ class BeautifulStoneSoup(Tag, SGMLParser):
     # can be replaced with a single space. A text node that contains
     # fancy Unicode spaces (usually non-breaking) should be left
     # alone.
-    STRIP_ASCII_SPACES = { 9: None, 10: None, 12: None, 13: None, 32: None, }
+    STRIP_ASCII_SPACES = {9: None, 10: None, 12: None, 13: None, 32: None, }
 
     def __init__(self, markup="", parseOnlyThese=None, fromEncoding=None,
                  markupMassage=True, smartQuotesTo=XML_ENTITIES,
@@ -1152,7 +1152,7 @@ class BeautifulStoneSoup(Tag, SGMLParser):
             n = int(name)
         except ValueError:
             return
-        if not 0 <= n <= 127 : # ASCII ends at 127, not 255
+        if not 0 <= n <= 127: # ASCII ends at 127, not 255
             return
         return self.convert_codepoint(n)
 
@@ -1163,8 +1163,7 @@ class BeautifulStoneSoup(Tag, SGMLParser):
             if not hasattr(self, 'originalEncoding'):
                 self.originalEncoding = None
         else:
-            dammit = UnicodeDammit\
-                     (markup, [self.fromEncoding, inDocumentEncoding],
+            dammit = UnicodeDammit(markup, [self.fromEncoding, inDocumentEncoding],
                       smartQuotesTo=self.smartQuotesTo, isHTML=isHTML)
             markup = dammit.unicode
             self.originalEncoding = dammit.originalEncoding
@@ -1519,12 +1518,12 @@ class BeautifulSoup(BeautifulStoneSoup):
         BeautifulStoneSoup.__init__(self, *args, **kwargs)
 
     SELF_CLOSING_TAGS = buildTagMap(None,
-                                    ('br' , 'hr', 'input', 'img', 'meta',
+                                    ('br', 'hr', 'input', 'img', 'meta',
                                     'spacer', 'link', 'frame', 'base', 'col'))
 
     PRESERVE_WHITESPACE_TAGS = set(['pre', 'textarea'])
 
-    QUOTE_TAGS = {'script' : None, 'textarea' : None}
+    QUOTE_TAGS = {'script': None, 'textarea': None}
 
     #According to the HTML standard, each of these inline tags can
     #contain another tag of the same type. Furthermore, it's common
@@ -1538,21 +1537,21 @@ class BeautifulSoup(BeautifulStoneSoup):
     NESTABLE_BLOCK_TAGS = ('blockquote', 'div', 'fieldset', 'ins', 'del')
 
     #Lists can contain other lists, but there are restrictions.
-    NESTABLE_LIST_TAGS = { 'ol' : [],
-                           'ul' : [],
-                           'li' : ['ul', 'ol'],
-                           'dl' : [],
-                           'dd' : ['dl'],
-                           'dt' : ['dl'] }
+    NESTABLE_LIST_TAGS = {'ol': [],
+                           'ul': [],
+                           'li': ['ul', 'ol'],
+                           'dl': [],
+                           'dd': ['dl'],
+                           'dt': ['dl']}
 
     #Tables can contain other tables, but there are restrictions.
-    NESTABLE_TABLE_TAGS = {'table' : [],
-                           'tr' : ['table', 'tbody', 'tfoot', 'thead'],
-                           'td' : ['tr'],
-                           'th' : ['tr'],
-                           'thead' : ['table'],
-                           'tbody' : ['table'],
-                           'tfoot' : ['table'],
+    NESTABLE_TABLE_TAGS = {'table': [],
+                           'tr': ['table', 'tbody', 'tfoot', 'thead'],
+                           'td': ['tr'],
+                           'th': ['tr'],
+                           'thead': ['table'],
+                           'tbody': ['table'],
+                           'tfoot': ['table'],
                            }
 
     NON_NESTABLE_BLOCK_TAGS = ('address', 'form', 'p', 'pre')
@@ -1760,8 +1759,8 @@ class UnicodeDammit:
     # meta tags to the corresponding Python codec names. It only covers
     # values that aren't in Python's aliases and can't be determined
     # by the heuristics in find_codec.
-    CHARSET_ALIASES = { "macintosh" : "mac-roman",
-                        "x-sjis" : "shift-jis" }
+    CHARSET_ALIASES = {"macintosh": "mac-roman",
+                        "x-sjis": "shift-jis"}
 
     def __init__(self, markup, overrideEncodings=[],
                  smartQuotesTo='xml', isHTML=False):
@@ -1824,8 +1823,7 @@ class UnicodeDammit:
         if self.smartQuotesTo and proposed.lower() in("windows-1252",
                                                       "iso-8859-1",
                                                       "iso-8859-2"):
-            markup = re.compile("([\x80-\x9f])").sub \
-                     (lambda(x): self._subMSChar(x.group(1)),
+            markup = re.compile("([\x80-\x9f])").sub(lambda(x): self._subMSChar(x.group(1)),
                       markup)
 
         try:
@@ -1976,38 +1974,38 @@ class UnicodeDammit:
             ''.join(map(chr, range(256))), ''.join(map(chr, emap)))
         return s.translate(c.EBCDIC_TO_ASCII_MAP)
 
-    MS_CHARS = { '\x80' : ('euro', '20AC'),
-                 '\x81' : ' ',
-                 '\x82' : ('sbquo', '201A'),
-                 '\x83' : ('fnof', '192'),
-                 '\x84' : ('bdquo', '201E'),
-                 '\x85' : ('hellip', '2026'),
-                 '\x86' : ('dagger', '2020'),
-                 '\x87' : ('Dagger', '2021'),
-                 '\x88' : ('circ', '2C6'),
-                 '\x89' : ('permil', '2030'),
-                 '\x8A' : ('Scaron', '160'),
-                 '\x8B' : ('lsaquo', '2039'),
-                 '\x8C' : ('OElig', '152'),
-                 '\x8D' : '?',
-                 '\x8E' : ('#x17D', '17D'),
-                 '\x8F' : '?',
-                 '\x90' : '?',
-                 '\x91' : ('lsquo', '2018'),
-                 '\x92' : ('rsquo', '2019'),
-                 '\x93' : ('ldquo', '201C'),
-                 '\x94' : ('rdquo', '201D'),
-                 '\x95' : ('bull', '2022'),
-                 '\x96' : ('ndash', '2013'),
-                 '\x97' : ('mdash', '2014'),
-                 '\x98' : ('tilde', '2DC'),
-                 '\x99' : ('trade', '2122'),
-                 '\x9a' : ('scaron', '161'),
-                 '\x9b' : ('rsaquo', '203A'),
-                 '\x9c' : ('oelig', '153'),
-                 '\x9d' : '?',
-                 '\x9e' : ('#x17E', '17E'),
-                 '\x9f' : ('Yuml', ''),}
+    MS_CHARS = {'\x80': ('euro', '20AC'),
+                 '\x81': ' ',
+                 '\x82': ('sbquo', '201A'),
+                 '\x83': ('fnof', '192'),
+                 '\x84': ('bdquo', '201E'),
+                 '\x85': ('hellip', '2026'),
+                 '\x86': ('dagger', '2020'),
+                 '\x87': ('Dagger', '2021'),
+                 '\x88': ('circ', '2C6'),
+                 '\x89': ('permil', '2030'),
+                 '\x8A': ('Scaron', '160'),
+                 '\x8B': ('lsaquo', '2039'),
+                 '\x8C': ('OElig', '152'),
+                 '\x8D': '?',
+                 '\x8E': ('#x17D', '17D'),
+                 '\x8F': '?',
+                 '\x90': '?',
+                 '\x91': ('lsquo', '2018'),
+                 '\x92': ('rsquo', '2019'),
+                 '\x93': ('ldquo', '201C'),
+                 '\x94': ('rdquo', '201D'),
+                 '\x95': ('bull', '2022'),
+                 '\x96': ('ndash', '2013'),
+                 '\x97': ('mdash', '2014'),
+                 '\x98': ('tilde', '2DC'),
+                 '\x99': ('trade', '2122'),
+                 '\x9a': ('scaron', '161'),
+                 '\x9b': ('rsaquo', '203A'),
+                 '\x9c': ('oelig', '153'),
+                 '\x9d': '?',
+                 '\x9e': ('#x17E', '17E'),
+                 '\x9f': ('Yuml', ''),}
 
 #######################################################################
 

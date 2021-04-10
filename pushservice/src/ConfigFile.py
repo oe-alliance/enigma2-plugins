@@ -95,6 +95,6 @@ class ConfigFile(object):
 				f.close()
 		
 		# Save time and cache file content
-		self.mtime = os.path.getmtime( path )
+		self.mtime = os.path.getmtime(path)
 		self.cache = etree
 

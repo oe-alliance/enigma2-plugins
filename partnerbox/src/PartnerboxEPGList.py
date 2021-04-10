@@ -62,7 +62,7 @@ def Partnerbox_EPGListInit():
 def Partnerbox_EPGList__init__(self, type=0, selChangedCB=None, timer=None, time_epoch=120, overjump_empty=False, graphic=False):
 	baseEPGList__init__(self, type, selChangedCB, timer, time_epoch, overjump_empty, graphic)
 
-	self.clocks = [ LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, 'icons/epgclock_add.png')),
+	self.clocks = [LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, 'icons/epgclock_add.png')),
 		LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, 'icons/epgclock_pre.png')),
 		LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, 'icons/epgclock.png')),
 		LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, 'icons/epgclock_prepost.png')),
@@ -78,7 +78,7 @@ def Partnerbox_EPGList__init__(self, type=0, selChangedCB=None, timer=None, time
 		LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, 'icons/epgclock_prepost.png')),
 		LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, 'icons/epgclock_post.png'))]
 
-	self.selclocks = [ LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, 'icons/epgclock_add.png')),
+	self.selclocks = [LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, 'icons/epgclock_add.png')),
 		LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, 'icons/epgclock_selpre.png')),
 		LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, 'icons/epgclock.png')),
 		LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, 'icons/epgclock_selprepost.png')),
@@ -159,9 +159,9 @@ def Partnerbox_EPGList__init__(self, type=0, selChangedCB=None, timer=None, time
 	if self.screenwidth and self.screenwidth == 1920:
 		global sf
 		sf = 1.5
-		self.posx, self.posy , self.picx, self.picy, self.gap = skinparameter.get("EpgListIcon", (2,13,25,25,2))
+		self.posx, self.posy, self.picx, self.picy, self.gap = skinparameter.get("EpgListIcon", (2,13,25,25,2))
 	else:
-		self.posx, self.posy , self.picx, self.picy, self.gap = skinparameter.get("EpgListIcon", (1,11,23,23,1))
+		self.posx, self.posy, self.picx, self.picy, self.gap = skinparameter.get("EpgListIcon", (1,11,23,23,1))
 
 	self.serviceFontSizeGraph = int(20 * sf)
 	self.eventFontSizeGraph = int(18 * sf)

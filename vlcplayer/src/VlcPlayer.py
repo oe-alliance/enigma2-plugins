@@ -100,7 +100,7 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 			return self.name
 
 		def getInfoObject(self, *args, **kwargs):
-			return { }
+			return {}
 
 		def getInfo(self, what):
 			return -1
@@ -134,7 +134,7 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 		self.setChanged()
 
 	def setChanged(self):
-		self.changed( (self.CHANGED_SPECIFIC, iPlayableService.evStart) )
+		self.changed((self.CHANGED_SPECIFIC, iPlayableService.evStart))
 
 	def setServer(self, server):
 		self.server = server
@@ -249,7 +249,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 		self.onClose.append(self.__onClose)
 
 		class VlcPlayerActionMap(ActionMap):
-			def __init__(self, player, contexts=[ ], actions={ }, prio=0):
+			def __init__(self, player, contexts=[], actions={}, prio=0):
 				ActionMap.__init__(self, contexts, actions, prio)
 				self.player = player
 

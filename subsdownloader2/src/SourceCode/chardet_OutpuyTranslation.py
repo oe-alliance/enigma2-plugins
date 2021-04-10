@@ -18,9 +18,9 @@ def chardetOutputTranslation(recognizedCoding):
 		return "cp1251"
 	elif supposedEncoding == "ascii" or supposedEncoding == "iso-8859-1":
 		return "ascii"
-	elif supposedEncoding == "utf-8" :
+	elif supposedEncoding == "utf-8":
 		return "UTF-8"
-	elif supposedEncoding == "windows-1255" :
+	elif supposedEncoding == "windows-1255":
 		return "cp1255"
 	elif supposedEncoding == "utf-16le":
 		return "UTF-16LE"	
@@ -35,7 +35,7 @@ def chardetOutputTranslation(recognizedCoding):
 		UTF-32 BE, LE, 3412-ordered, or 2143-ordered (with a BOM)"""
 		#NOT SUPPORTED TET
 		#self.session.open(MessageBox,_("I can't manage encodeing: %s (probability %s). So I can't convert properly subtitles to UTF-8.\nTo chcange it in future please send to developer information about unsupported CodePage (or this screenshot)." % (recognizedCoding['encoding'], recognizedCoding['confidence'])), MessageBox.TYPE_INFO, timeout = 5)
-		print ("I can't manage encodeing: %s (probability %s). So I can't convert properly subtitles to UTF-8.\nTo chcange it in future please send to developer information about unsupported CodePage (or this screenshot)." % (recognizedCoding['encoding'], recognizedCoding['confidence']))
+		print("I can't manage encodeing: %s (probability %s). So I can't convert properly subtitles to UTF-8.\nTo chcange it in future please send to developer information about unsupported CodePage (or this screenshot)." % (recognizedCoding['encoding'], recognizedCoding['confidence']))
 		#TODO Email notyfication about error
 		#self.subtitle_codepade = "None"
 		return "None"

@@ -9,7 +9,7 @@ class SwitchService(Source):
 		Source.__init__(self)
 		self.session = session
 		self.info = None
-		self.res = ( False, _("Obligatory parameter sRef is missing") )
+		self.res = (False, _("Obligatory parameter sRef is missing"))
 
 	def handleCommand(self, cmd):
 		self.res = self.switchService(cmd)
@@ -64,12 +64,12 @@ class SwitchService(Source):
 					elif eref.getName() != "":
 						name = eref.getName()
 
-					return ( True, _("Active service is now '%s'") %name )
+					return (True, _("Active service is now '%s'") %name)
 				else:
-					return ( False, _("Obligatory parameter 'sRef' is missing") )
+					return (False, _("Obligatory parameter 'sRef' is missing"))
 			else:
-				return ( False, _("Cannot zap while device is in Standby") )
+				return (False, _("Cannot zap while device is in Standby"))
 		else:
-			return ( False, _("Zapping is disabled in WebInterface Configuration") )
+			return (False, _("Zapping is disabled in WebInterface Configuration"))
 
 	result = property(lambda self: self.res)

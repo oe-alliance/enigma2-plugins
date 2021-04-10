@@ -194,7 +194,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		self["ftpbrowserBaseActions"] = HelpableActionMap(self, "ftpbrowserBaseActions",
 			{
 				"ok": (self.ok, _("enter directory/get file/put file")),
-				"cancel": (self.cancel , _("close")),
+				"cancel": (self.cancel, _("close")),
 				"menu": (self.menu, _("open menu")),
 			}, -2)
 

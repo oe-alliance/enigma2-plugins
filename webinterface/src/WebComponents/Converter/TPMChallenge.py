@@ -10,11 +10,11 @@ class TPMChallenge(Converter):
     
     def __init__(self, type):
         Converter.__init__(self, type)
-        self.type = { "Level2Cert" : self.L2C,
-                      "Level3Cert" : self.L3C,
-                      "Value" : self.VALUE,
-                      "Result" : self.RESULT,
-                      "Text" : self.TEXT
+        self.type = {"Level2Cert": self.L2C,
+                      "Level3Cert": self.L3C,
+                      "Value": self.VALUE,
+                      "Result": self.RESULT,
+                      "Text": self.TEXT
                     }[type]
 
     @cached

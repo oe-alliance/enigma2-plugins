@@ -15,7 +15,7 @@ from Components.config import config, getConfigListEntry
 class EmissionSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = [ "EmissionSetup", "Setup" ]
+		self.skinName = ["EmissionSetup", "Setup"]
 
 		# Summary
 		self.setup_title = _("eMission settings")

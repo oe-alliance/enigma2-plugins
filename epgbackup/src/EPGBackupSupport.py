@@ -27,7 +27,7 @@ BOOTCOUNTERFILE="/tmp/.EPGBackup.boot.counter"
 FORCERESTORENOFILES="FORCEBACKUP_NOFILES"
 FORCERESTORECANCEL="FORCEBACKUP_CANCEL"
 FORCERESTOREGENERALERROR="FORCEBACKUP_GENERAL_ERROR"
-EPGBACKUP_SHELL_CONSTANTS = { 'INSTALL': 'install',
+EPGBACKUP_SHELL_CONSTANTS = {'INSTALL': 'install',
 		'UNINSTALL': 'uninstall',
 		'FORCERESTORE': 'restore',
 		'MAKEBACKUP': 'backup',
@@ -228,7 +228,7 @@ class EPGBackupSupport:
 				return
 			else:
 				showError = False
-				backupfile = backupinfo [1].rstrip()
+				backupfile = backupinfo[1].rstrip()
 				if FORCERESTOREGENERALERROR == backupfile:
 					showError = True
 				elif FORCERESTORECANCEL != backupfile and FORCERESTORENOFILES != backupfile:
@@ -256,7 +256,7 @@ class EPGBackupSupport:
 		if backupinfo is None:
 			return
 		else:
-			backupfile = backupinfo [1].rstrip()
+			backupfile = backupinfo[1].rstrip()
 			if FORCERESTORECANCEL != backupfile and FORCERESTORENOFILES != backupfile:
 				self.executeShScript(EPGBACKUP_SHELL_CONSTANTS["SETFORCERESTORE"], backupfile)
 				self.session.open(MessageBox,
@@ -276,9 +276,9 @@ class EPGBackupSupport:
 						backupfile = backupfile.replace(EPGBACKUP_SHELL_CONSTANTS["STRINGBIGGEST"], _("FILELIST_BIGGEST"))
 						backupfile = backupfile.replace(EPGBACKUP_SHELL_CONSTANTS["STRINGYOUNGEST"], _("FILELIST_YOUNGEST"))
 						backupfile = backupfile.replace(EPGBACKUP_SHELL_CONSTANTS["STRINGFORCED"], _("FILELIST_FORCED"))
-						backupList.append(( backupfile, backupfile.split(" ")[0] ))
+						backupList.append((backupfile, backupfile.split(" ")[0]))
 		except:
-			backupList.append(( FORCERESTOREGENERALERROR, _("General Error!") ))
+			backupList.append((FORCERESTOREGENERALERROR, _("General Error!")))
 			debugOut("getBackupFiles-Error:\n" + str(format_exc()), forced=True)
 		return backupList
 	

@@ -120,7 +120,7 @@ class BackupRestore(ConfigListScreen, Screen, SkinResolutionHelper):
             "green": self.openFilebrowser,
             "yellow": self.backup
         }, -2)
-        self.list = [ ]
+        self.list = []
         self.backup_dirs = config.movielist.videodirs.value[:]
         default = config.usage.default_path.value
         if default not in self.backup_dirs:
@@ -208,7 +208,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
             "nextBouquet": self.nextBouquet,
             "prevBouquet": self.prevBouquet,
         }, -2)
-        self.list = [ ]
+        self.list = []
         ConfigListScreen.__init__(self, self.list, session=self.session)
         if not self.showHelp in self["config"].onSelectionChanged:
             self["config"].onSelectionChanged.append(self.showHelp)
@@ -731,7 +731,7 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
         self.initConfigList()
 
     def checkOwnButtonText(self, l, text, own_text):
-        l1 = [ descr[0] for descr in l ]
+        l1 = [descr[0] for descr in l]
         if own_text and not own_text in l1:
             l.append((own_text, own_text))
             l1.append(own_text)
@@ -1037,7 +1037,7 @@ class AdvancedMovieSelectionOwnButtonName(Screen, ConfigListScreen):
             "red": self.keySave,
             "cancel": self.keyCancel
         }, -2) 
-        self["VirtualKB"] = ActionMap(["VirtualKeyboardActions" ],
+        self["VirtualKB"] = ActionMap(["VirtualKeyboardActions"],
         {
             "showVirtualKeyboard": self.KeyText,
         }, -1)

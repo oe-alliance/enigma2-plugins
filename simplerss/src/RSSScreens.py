@@ -127,7 +127,7 @@ class RSSEntryView(RSSBaseView):
 		else:
 			self["content"] = ScrollLabel()
 
-		self["actions"] = ActionMap([ "OkCancelActions", "ChannelSelectBaseActions", "ColorActions", "DirectionActions" ],
+		self["actions"] = ActionMap(["OkCancelActions", "ChannelSelectBaseActions", "ColorActions", "DirectionActions"],
 		{
 			"cancel": self.close,
 			"ok": self.selectEnclosure,
@@ -250,7 +250,7 @@ class RSSFeedView(RSSBaseView):
 		self["info"] = StaticText()
 
 		if not newItems:
-			self["actions"] = ActionMap([ "OkCancelActions", "ChannelSelectBaseActions", "MenuActions", "ColorActions" ],
+			self["actions"] = ActionMap(["OkCancelActions", "ChannelSelectBaseActions", "MenuActions", "ColorActions"],
 			{
 				"ok": self.showCurrentEntry,
 				"cancel": self.close,
@@ -264,7 +264,7 @@ class RSSFeedView(RSSBaseView):
 
 			self.timer = None
 		else:
-			self["actions"] = ActionMap([ "OkCancelActions" ],
+			self["actions"] = ActionMap(["OkCancelActions"],
 			{
 				"cancel": self.close,
 			})
@@ -399,7 +399,7 @@ class RSSOverview(RSSBaseView):
 	def __init__(self, session, poller):
 		RSSBaseView.__init__(self, session, poller)
 
-		self["actions"] = ActionMap([ "OkCancelActions", "MenuActions", "ColorActions" ],
+		self["actions"] = ActionMap(["OkCancelActions", "MenuActions", "ColorActions"],
 		{
 			"ok": self.showCurrentEntry,
 			"cancel": self.close,
