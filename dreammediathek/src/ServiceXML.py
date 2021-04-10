@@ -12,8 +12,10 @@ import six
 #WEBTV_STATIONS = "/etc/enigma2/webtv_stations.xml"
 WEBTV_STATIONS = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/dreamMediathek/webtv_stations.xml")
 
+
 class WebTVStations():
 	"""Manages WebTVStations declared in a XML-Document."""
+
 	def __init__(self):
 		print("[WebTVStations] INIT")
 		self.webtv_stations = {}
@@ -45,6 +47,7 @@ class WebTVStations():
 
 	def getWebTVStationsList(self):
 		return sorted(six.iterkeys(self.webtv_stations))
+
 
 iWebTVStations = WebTVStations()
 

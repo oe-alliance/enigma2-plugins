@@ -67,4 +67,5 @@ class Sensors:
 					
 					self.sensors_list.append((self.TYPE_TEMPERATURE, name, unit, "/proc/stb/sensors/%s" % dirname))
 
+
 sensors = Sensors()

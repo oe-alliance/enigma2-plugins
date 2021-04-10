@@ -26,6 +26,7 @@ class PagedIterator(Iterator):
             raise StopIteration
         return self._parent[self._index]
 
+
 class UnpagedData(object):
     def copy(self):
         return self.__class__()
@@ -35,6 +36,7 @@ class UnpagedData(object):
 
     def __rmul__(self, other):
         return (self.copy() for a in list(range(other)))
+
 
 class PagedList(Sequence):
     """
@@ -93,11 +95,13 @@ class PagedList(Sequence):
         raise NotImplementedError("PagedList._getpage() must be provided " +
                                   "by subclass")
 
+
 class PagedRequest(PagedList):
     """
     Derived PageList that provides a list-like object with automatic paging
     intended for use with search requests.
     """
+
     def __init__(self, request, handler=None):
         self._request = request
         if handler:

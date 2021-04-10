@@ -3,6 +3,7 @@
 from Plugins.SystemPlugins.AdvHdmi.plugin import advhdmiHooks, _print
 from Components.config import config
 
+
 class AdvHdmiCecIF():
 	# Param: 
 	#   hookKey: an unique identifier

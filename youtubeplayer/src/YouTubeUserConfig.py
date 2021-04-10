@@ -62,8 +62,8 @@ class __YouTubeUserConfig():
 		for usernum in list(range(0, config.plugins.youtubeplayer.usercount.value)):
 			self.new()
 
-
 	# Add a new server or load a configsection if existing
+
 	def new(self):
 		newUserConfigSubsection = ConfigSubsection()
 		config.plugins.youtubeplayer.users.append(newUserConfigSubsection)

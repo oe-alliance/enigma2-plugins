@@ -24,6 +24,8 @@ import random
 from six.moves import range
 
 #good old C function :D
+
+
 def rand():
 	return random.randint(0, 32767)
 
@@ -87,7 +89,6 @@ class vierg(Screen):
 
 		self.onLayoutFinish.append(self.new_game)
 
-
 	def drawRect(self, x, y, color="bg1"):
 		if color == "blue":
 			bg = self.blue
@@ -99,7 +100,6 @@ class vierg(Screen):
 			bg = self.bg1
 		self["Canvas"].fill(2 * self.bsize + x, 2 * self.bsize + y, self.csize, self.csize, bg)
 		self["Canvas"].flush()
-
 
 	def gameIsOver(self, mask):
 		k = self.testGameOver(mask)
@@ -114,7 +114,6 @@ class vierg(Screen):
 			self["message"].setText(_("You lose!"))
 		self.gameover = True
 		return True
-
 
 	def ok_pressed(self):
 		if not self.gameover and not self.locked:
@@ -134,13 +133,11 @@ class vierg(Screen):
 				return
 			self.aniFall()
 
-
 	def left_pressed(self):
 		if self.ipos > 0 and not self.gameover and not self.locked:
 			self.drawRect(self.ipos * self.fsize, 0, "bg0")
 			self.ipos -= 1
 			self.drawRect(self.ipos * self.fsize, 0, "red")
-
 
 	def right_pressed(self):
 		if self.ipos < 6 and not self.gameover and not self.locked:
@@ -148,11 +145,9 @@ class vierg(Screen):
 			self.ipos += 1
 			self.drawRect(self.ipos * self.fsize, 0, "red")
 
-
 	def quit(self):
 		self.aniTimer.stop()
 		self.close()
-
 
 	def new_game(self):
 		self["message"].setText("")
@@ -170,7 +165,6 @@ class vierg(Screen):
 		self.ipos = 3
 		self.drawRect(self.ipos * self.fsize, 0, "red")
 
-
 	def aniTimerHandler(self):
 		self.drawRect(self.aniList[self.aniCnt][0], self.aniList[self.aniCnt][1], self.aniList[self.aniCnt][2])
 		if self.aniCnt < len(self.aniList) - 1:
@@ -179,11 +173,9 @@ class vierg(Screen):
 			self.aniTimer.stop()
 			self.locked = False
 
-
 	def aniFall(self):	
 		self.aniCnt = 0
 		self.aniTimer.start(100)
-
 
 	def fall(self, x, dr, v):
 		for y in range(6):
@@ -199,11 +191,9 @@ class vierg(Screen):
 		if v == 2:
 			self.aniList.append((self.ipos * self.fsize, 0, "red"))
 
-
 	def cPlay(self, x):
 		self.aniList.append((x * self.fsize, 0, "blue"))
 		self.fall(x, "blue", 2)
-
 
 	def vFall(self, x, v):
 		idx = x
@@ -213,7 +203,6 @@ class vierg(Screen):
 				return idx
 			idx += 7
 		return -1
-
 
 	def testGameOver(self, mask):
 		idx = 0
@@ -253,7 +242,6 @@ class vierg(Screen):
 				return 0
 			idx += 1
 		return 2
-
 
 	def myPlay(self):
 		tst = []

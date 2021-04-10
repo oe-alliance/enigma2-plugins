@@ -19,6 +19,7 @@ if hasattr(static.File, 'render_GET'):
 else:
 	File = static.File
 
+
 def autostart(reason, **kwargs):
 	if "session" in kwargs:
 		session = kwargs["session"]
@@ -27,6 +28,7 @@ def autostart(reason, **kwargs):
 		root.putChild('tmp', File('/tmp'))
 		root.putChild("uploadfile", WebUploadResource(session))
 		addExternalChild(("bouqueteditor", root, "BouquetEditor", 1, True))
+
 
 def Plugins(**kwargs):
 	list = [PluginDescriptor(name="WebBouquetEditor", description=_("WebBouquetEditor"), where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart)]

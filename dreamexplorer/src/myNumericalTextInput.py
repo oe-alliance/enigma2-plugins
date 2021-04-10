@@ -2,6 +2,7 @@
 from enigma import eTimer
 from Components.Language import language
 
+
 class myNumericalTextInput:
 	def __init__(self, nextFunc=None, handleTimeout=True, search=False):
 		self.mapping = []

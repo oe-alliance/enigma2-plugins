@@ -36,7 +36,6 @@ class ControllerBase(ModuleBase):
 		ControllerBase.UniqueCounter += 1
 		self.uniqueid = ControllerBase.UniqueCounter
 
-
 	################################################
 	# Base class functions
 	@classmethod
@@ -47,9 +46,9 @@ class ControllerBase(ModuleBase):
 	def resetUniqueID():
 		ControllerBase.UniqueCounter = 0
 
-
 	################################################
 	# Functions to be implemented in the plugin
+
 	def run(self, callback, errback):
 		# At the end a plugin has to call one of the functions: callback or errback
 		# Callback should return with at least one of the parameter: Header, Body, Attachment

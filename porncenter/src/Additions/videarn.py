@@ -7,6 +7,7 @@ from six.moves.urllib.request import urlopen
 
 ##################################################
 
+
 class VidearnMovie(Movie):
 	def __init__(self, name, url, thumb):
 		Movie.__init__(self, name, url, thumb)
@@ -24,6 +25,7 @@ class VidearnMovie(Movie):
 			return None
 
 ##################################################
+
 
 class VidearnSub(Plugin):
 	def __init__(self, name, url):
@@ -58,6 +60,7 @@ class VidearnSub(Plugin):
 
 ##################################################
 
+
 class Videarn(Plugin):
 	def __init__(self):
 		Plugin.__init__(self, "videarn.com", "videarn.png")
@@ -83,6 +86,7 @@ class Videarn(Plugin):
 			print("[%s] Error: %s" % (self.name, error))
 
 ##################################################
+
 
 def getPlugin():
 	return Videarn()

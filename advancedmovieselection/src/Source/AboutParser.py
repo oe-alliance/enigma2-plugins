@@ -25,6 +25,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 CHANGES = None
 
+
 class VersionInfo():
     def __init__(self, version="", info=""):
         self.version = version
@@ -38,6 +39,7 @@ class VersionInfo():
     
     def __repr__(self):
         return self.version + "\n" + self.info 
+
 
 class AboutParser:
     @classmethod

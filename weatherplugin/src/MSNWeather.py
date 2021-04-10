@@ -33,6 +33,7 @@ from Tools.Directories import resolveFilename, SCOPE_SKIN
 from six.moves.urllib.parse import quote as urllib_quote
 import six
 
+
 class WeatherIconItem:
 	def __init__(self, url="", filename="", index=-1, error=False):
 		self.url = url
@@ -40,6 +41,7 @@ class WeatherIconItem:
 		self.index = index
 		self.error = error
 		
+
 class MSNWeatherItem:
 	def __init__(self):
 		self.temperature = ""
@@ -60,6 +62,7 @@ class MSNWeatherItem:
 		self.iconFilename = ""
 		self.code = ""
 		
+
 class MSNWeather:
 
 	ERROR = 0
@@ -146,7 +149,6 @@ class MSNWeather:
 		if self.callback is not None:
 			self.callback(self.ERROR, errormessage)
 			
-	
 	def errorIconDownload(self, error=None, item=None):
 		item.error = True
 		if os_path.exists(item.filename): # delete 0 kb file
@@ -230,5 +232,6 @@ class MSNWeather:
 		if self.callback is not None:
 			self.callback(self.OK, None)
 		
+
 def download(item):
 	return downloadPage(six.ensure_binary(item.url), open(item.filename, 'wb'))

@@ -17,6 +17,7 @@ from .config import createPage, loadDefaultPageOptions
 from Components.config import config, getConfigListEntry, ConfigSelection
 from Components.ConfigList import ConfigList, ConfigListScreen
 
+
 class CurlyTxSettings(ConfigListScreen, HelpableScreen, Screen):
     skin = """
 	<screen name="Setup" position="center,center" size="560,430" title="Settings">
@@ -199,7 +200,6 @@ class CurlyTxSettings(ConfigListScreen, HelpableScreen, Screen):
         del cfg.pages[:]
         for i in cfg.pages.stored_values:
             cfg.pages.append(createPage())
-
 
 
 class CurlyTxPageEdit(Screen, ConfigListScreen):

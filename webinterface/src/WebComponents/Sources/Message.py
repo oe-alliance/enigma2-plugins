@@ -3,6 +3,7 @@ from Components.Sources.Source import Source
 from Screens.MessageBox import MessageBox
 from os import system, path
 
+
 class Message(Source):
 	PRINT = 0
 	ANSWER = 1

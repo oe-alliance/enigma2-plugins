@@ -38,12 +38,10 @@ class YouTubePlayer(VlcPlayer):
 			"info": self.showVideoInfo,
 		}, -1)
 
-
 	def showVideoInfo(self):
 		if self.shown:
 			self.hideInfobar()
 		self.infoCallback()
-
 
 	def openContextMenu(self):
 		if self.shown:
@@ -52,7 +50,6 @@ class YouTubePlayer(VlcPlayer):
 		for entry in self.contextMenuEntries:
 			contextMenuList.appendEntry(entry)
 		self.session.openWithCallback(self.menuActionCoosen, YouTubeEntryContextMenu, contextMenuList, self.name)
-
 
 	def menuActionCoosen(self, cookie):
 		if cookie is not None:

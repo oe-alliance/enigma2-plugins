@@ -10,11 +10,14 @@ from .MountManager import AutoMountManager
 
 plugin_path = ""
 
+
 def NetworkBrowserMain(session, iface=None, **kwargs):
 	session.open(NetworkBrowser, iface, plugin_path)
 
+
 def MountManagerMain(session, iface=None, **kwargs):
 	session.open(AutoMountManager, iface, plugin_path)
+
 
 def NetworkBrowserCallFunction(iface):
 	interfaceState = iNetwork.getAdapterAttribute(iface, "up")
@@ -23,16 +26,20 @@ def NetworkBrowserCallFunction(iface):
 	else:
 		return None
 
+
 def MountManagerCallFunction(iface):
 	return MountManagerMain
+
 
 def RemountMain(session, iface=None, **kwargs):
 	from .AutoMount import iAutoMount
 	iAutoMount.getAutoMountPoints() 
 
+
 def RemountCallFunction(iface):
 	if iNetwork.getAdapterAttribute(iface, "up"):
 		return RemountMain
+
 
 def Plugins(path, **kwargs):
 	global plugin_path

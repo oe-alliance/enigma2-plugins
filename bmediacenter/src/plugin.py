@@ -33,6 +33,8 @@ except:
 	dvdplayer = False
 
 mcpath = '/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/'
+
+
 class DMC_MainMenu(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -81,6 +83,7 @@ class DMC_MainMenu(Screen):
 			if fileExists("/media/upnp") is False:
 				os.mkdir("/media/upnp")
 			os.system('djmount /media/upnp &')
+
 	def next(self):
 		self["menu"].selectNext()
 		if self["menu"].getIndex() == 1:
@@ -88,11 +91,13 @@ class DMC_MainMenu(Screen):
 		if self["menu"].getIndex() == 9:
 			self["menu"].setIndex(1)
 		self.update()
+
 	def prev(self):
 		self["menu"].selectPrevious()
 		if self["menu"].getIndex() == 0:
 			self["menu"].setIndex(8)
 		self.update()
+
 	def update(self):
 		if self["menu"].getIndex() == 1:
 			self["left"].instance.setPixmapFromFile(mcpath + "MenuIconSettingssw.png")
@@ -129,6 +134,7 @@ class DMC_MainMenu(Screen):
 #		if config.plugins.mc_global.vfd.value == "on":
 #			evfd.getInstance().vfd_write_string(self["menu"].getCurrent()[0])
 		self["text"].setText(self["menu"].getCurrent()[0])
+
 	def okbuttonClick(self):
 		from Screens.MessageBox import MessageBox
 		selection = self["menu"].getCurrent()
@@ -164,9 +170,11 @@ class DMC_MainMenu(Screen):
 				self.session.open(MC_Settings)
 			else:
 				self.session.open(MessageBox, ("Error: Could not find plugin %s\ncoming soon ... :)") % (selection[1]), MessageBox.TYPE_INFO)
+
 	def error(self, error):
 		from Screens.MessageBox import MessageBox
 		self.session.open(MessageBox, ("UNEXPECTED ERROR:\n%s") % (error), MessageBox.TYPE_INFO)
+
 	def Exit(self):
 #		self.session.nav.stopService()
 		# Restore OSD Transparency Settings
@@ -186,12 +194,17 @@ class DMC_MainMenu(Screen):
 		self.session.nav.playService(self.oldbmcService)
 		self.close()
 
+
 def main(session, **kwargs):
 	session.open(DMC_MainMenu)
+
+
 def menu(menuid, **kwargs):
 	if menuid == "mainmenu":
 		return [(_("Media Center"), main, "dmc_mainmenu", 44)]
 	return []
+
+
 def Plugins(**kwargs):
 	if config.plugins.mc_globalsettings.showinmainmenu.value == True and config.plugins.mc_globalsettings.showinextmenu.value == True:
 		return [

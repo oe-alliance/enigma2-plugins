@@ -27,8 +27,10 @@ from skin import parameters as skinparameter
 PluginLanguageDomain = "ZapHistoryBrowser"
 PluginLanguagePath = "Extensions/ZapHistoryBrowser/locale/"
 
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -36,6 +38,7 @@ def _(txt):
 	else:
 		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
+
 
 language.addCallback(localeInit())
 
@@ -49,6 +52,7 @@ config.plugins.ZapHistoryConfigurator.history_tv = ConfigSet(choices=[])
 config.plugins.ZapHistoryConfigurator.history_radio = ConfigSet(choices=[])
 
 ################################################
+
 
 def addToHistory(instance, ref):
 	if config.plugins.ZapHistoryConfigurator.enable_zap_history.value == "off":
@@ -79,7 +83,9 @@ def addToHistory(instance, ref):
 				config.plugins.ZapHistoryConfigurator.history_radio.value = [[y.toString() for y in x] for x in instance.history]
 			config.plugins.ZapHistoryConfigurator.save()
 
+
 ChannelSelection.addToHistory = addToHistory
+
 
 def newInit(self, session):
 	baseInit(self, session)
@@ -97,10 +103,12 @@ def newInit(self, session):
 		else:
 			self.history_pos = len(self.history_radio) - 1
 
+
 baseInit = ChannelSelection.__init__
 ChannelSelection.__init__ = newInit
 
 ################################################
+
 
 class ZapHistoryConfigurator(ConfigListScreen, Screen):
 	skin = """
@@ -144,6 +152,7 @@ class ZapHistoryConfigurator(ConfigListScreen, Screen):
 
 ################################################
 
+
 class ZapHistoryBrowserList(MenuList):
 	def __init__(self, list, enableWrapAround=False):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
@@ -178,6 +187,7 @@ def ZapHistoryBrowserListEntry(serviceName, eventName):
 	return res
 
 ################################################
+
 
 class ZapHistoryBrowser(Screen, ProtectedScreen):
 	skin = """
@@ -298,8 +308,10 @@ class ZapHistoryBrowser(Screen, ProtectedScreen):
 
 ################################################
 
+
 def main(session, servicelist, **kwargs):
 	session.open(ZapHistoryBrowser, servicelist)
+
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("Zap-History Browser"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)

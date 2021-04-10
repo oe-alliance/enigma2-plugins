@@ -12,6 +12,7 @@ from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText
 from Components.ActionMap import ActionMap
 
+
 class BonjourScreen(Screen):	
 	skin = """
 	<screen position="center,center" size="600,400" title="Bonjour" >
@@ -78,6 +79,7 @@ class BonjourScreen(Screen):
 			MultiContentEntryText(pos=(5, 45), size=(570, 30), font=1, text=text)
 		]
 		
+
 def opencontrol(session):
 	bonjour.reloadConfig()
 	session.open(BonjourScreen, bonjour.services, bonjour.files)

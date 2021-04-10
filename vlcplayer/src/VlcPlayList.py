@@ -17,6 +17,7 @@ from Components.MenuList import MenuList
 
 from skin import parseFont
 
+
 class VlcPlayList(MenuList):
 	def __init__(self, getPlaylistEntriesCB):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
@@ -39,7 +40,6 @@ class VlcPlayList(MenuList):
 					attribs.append((attrib, value))
 			self.skinAttributes = attribs
 		return MenuList.applySkin(self, desktop, parent)
-
 
 	def buildListboxEntry(self, name, path):
 		size = self.l.getItemSize()

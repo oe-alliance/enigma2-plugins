@@ -70,6 +70,7 @@ class YourClass():
 		loadSkin(skinFile, "")
 """
 
+
 class SkinFinder(object):
 	skinList = None
 	skinDir = None

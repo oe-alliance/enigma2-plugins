@@ -64,6 +64,7 @@ NOTIFICATIONID = 'AutoTimerNotification'
 CONFLICTNOTIFICATIONID = 'AutoTimerConflictEncounteredNotification'
 SIMILARNOTIFICATIONID = 'AutoTimerSimilarUsedNotification'
 
+
 def getTimeDiff(timer, begin, end):
 	if begin <= timer.begin <= end:
 		return end - timer.begin
@@ -100,6 +101,7 @@ def getTimeDiff(timer, begin, end):
 # 		result.raiseException()
 # 	return result
 
+
 typeMap = {
 	"exact": eEPGCache.EXAKT_TITLE_SEARCH,
 	"partial": eEPGCache.PARTIAL_TITLE_SEARCH,
@@ -121,6 +123,7 @@ caseMap = {
 # 
 # 	def __repr__(self):
 # 		return str(type(self))
+
 
 class AutoTimer:
 	"""Read and save xml configuration, query EPGCache"""

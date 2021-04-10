@@ -35,6 +35,8 @@ from sys import stdout
 import os
 
 VERSION = "2.1.4"
+
+
 class EPGHelpContextMenu(FixedMenu):
 	HELP_RETURN_MAINHELP = 0
 	HELP_RETURN_KEYHELP = 1
@@ -46,6 +48,7 @@ class EPGHelpContextMenu(FixedMenu):
 
 		FixedMenu.__init__(self, session, _("EPGRefresh Configuration Help"), menu)
 		self.skinName = ["EPGRefreshConfigurationHelpContextMenu", "Menu"]
+
 
 class EPGFunctionMenu(FixedMenu):
 	FUNCTION_RETURN_FORCEREFRESH = 0
@@ -62,6 +65,7 @@ class EPGFunctionMenu(FixedMenu):
 
 		FixedMenu.__init__(self, session, _("EPGRefresh Functions"), menu)
 		self.skinName = ["EPGRefreshConfigurationFunctionContextMenu", "Menu"]
+
 
 class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 	"""Configuration of EPGRefresh"""

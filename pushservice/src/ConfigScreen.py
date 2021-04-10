@@ -132,6 +132,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 		
 		# Override selectionChanged because our config tuples are bigger
 		self.onChangedEntry = []
+
 		def selectionChanged():
 			current = self["config"].getCurrent()
 			if self["config"].current != current:

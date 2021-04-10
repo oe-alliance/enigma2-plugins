@@ -26,6 +26,7 @@ from __future__ import print_function
 from __future__ import absolute_import
 from .Globals import printStackTrace
 
+
 class RecordTimerEvent():
     def __init__(self):
         self.on_state_changed = []
@@ -56,9 +57,11 @@ class RecordTimerEvent():
         except:
             printStackTrace()
 
+
 recordTimerEvent = RecordTimerEvent()
 
 from Components.config import config
+
 
 class CoverLoader():
     def __init__(self):

@@ -22,6 +22,7 @@ from Components.config import config
 
 from .YouTubeContextMenu import YouTubeEntryContextMenu, YouTubeEntryContextMenuList
 
+
 class DirectYouTubePlayerSummary(Screen):
 	skin = """
 	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="132,64">
@@ -207,7 +208,6 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 		if self.state == self.STATE_PAUSED:
 			self.setSeekState(self.STATE_PLAYING)
 
-
 	def playNextFile(self):
 		print("[YTB] playNextFile")
 		if self.currentList != None:
@@ -233,7 +233,6 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 			else:
 				self.playService(media, name)
 				self.showInfobar()
-
 
 	def getSeek(self):
 		service = self.session.nav.getCurrentService()
@@ -314,7 +313,6 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 		if abs(pts) > 100 and config.usage.show_infobar_on_skip.value:
 			self.showInfobar()
 
-
 	def doEofInternal(self, playing):
 		if not self.execing:
 			return
@@ -322,12 +320,10 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 			return
 		self.close()
 
-
 	def showVideoInfo(self):
 		if self.shown:
 			self.hideInfobar()
 		self.infoCallback()
-
 
 	def openContextMenu(self):
 		if self.shown:
@@ -336,7 +332,6 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 		for entry in self.contextMenuEntries:
 			contextMenuList.appendEntry(entry)
 		self.session.openWithCallback(self.menuActionCoosen, YouTubeEntryContextMenu, contextMenuList, self.name)
-
 
 	def menuActionCoosen(self, cookie):
 		if cookie is not None:

@@ -153,6 +153,8 @@ class AdvHdmiCecSetup(Screen, ConfigListScreen):
 				pass
 
 # Timespans
+
+
 class TimeSpanEntryList(MenuList):
 	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
@@ -184,6 +186,7 @@ class TimeSpanEntryList(MenuList):
 		if aktidx >= config.plugins.AdvHdmiCec.entriescount.value:
 			aktidx = (config.plugins.AdvHdmiCec.entriescount.value - 1)
 		self.moveToIndex(aktidx)
+
 
 class TimeSpanListScreen(Screen):
 	skin = """
@@ -276,6 +279,7 @@ class TimeSpanListScreen(Screen):
 		configfile.save()
 		self._updateList()
 
+
 class TimeSpanConfigScreen(Screen, ConfigListScreen):
 	skin = """
 		<screen name="adv_hdmi_timespan_config" position="center,center" size="550,430" title="ignoreit" >
@@ -353,23 +357,29 @@ class TimeSpanConfigScreen(Screen, ConfigListScreen):
 		ConfigListScreen.cancelConfirm(self, True)
 
 # functionality
+
+
 def sessionstart(reason, **kwargs):
 	global g_AdvHdmi_sessionstarted
 	if reason == 0:
 		g_AdvHdmi_sessionstarted = True
 		
+
 def autostart(reason, **kwargs):
 	global g_AdvHdmi_sessionstarted
 	if reason == 0:
 		g_AdvHdmi_sessionstarted = True
 
+
 def main(session, **kwargs):
 	session.open(AdvHdmiCecSetup)
+
 
 def showinSetup(menuid):
 	if menuid != "system":
 		return []
 	return [(_("Advanced HDMI-Cec Setup"), main, "", 46)]
+
 
 def Plugins(**kwargs):
 	list = [

@@ -167,6 +167,7 @@ class downloadJob(Job):
 		Job.__init__(self, title)
 		downloadTask(self, url, file)
 
+
 class downloadTask(Task):
 	def __init__(self, job, url, file):
 		Task.__init__(self, job, ("download task"))
@@ -196,9 +197,6 @@ class downloadTask(Task):
 			error_message = failure_instance.getErrorMessage()
 			print("[http_failed] " + error_message)
 			Task.processFinished(self, 1)
-
-
-
 
 
 class MyTubePlayerMainScreen(Screen, ConfigListScreen):
@@ -299,7 +297,6 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self["ButtonBlue"].hide()
 		self["result"] = Label("")
 
-
 		self["searchactions"] = ActionMap(["ShortcutActions", "WizardActions", "HelpActions", "MediaPlayerActions", "DirectionActions"],
 		{
 			"ok": self.keyOK,
@@ -330,7 +327,6 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			"right": self.keyRight,
 			"0": self.toggleScreenVisibility
 		}, -2)
-
 
 		self["videoactions"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "MovieSelectionActions", "HelpActions", "DirectionActions"],
 		{
@@ -460,7 +456,6 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self.searchContextEntries.append(self.SearchConfigEntry)
 		self["config"].list = self.searchContextEntries
 		self["config"].l.setList(self.searchContextEntries)
-
 
 	def tryUserLogin(self):
 		if config.plugins.mytube.general.username.value == "" or config.plugins.mytube.general.password.value == "":
@@ -818,6 +813,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		elif self.currList == "historylist":
 			if self.HistoryWindow is not None and self.HistoryWindow.shown:
 				self.HistoryWindow.down()
+
 	def keyRight(self):
 		print("self.currList im KeyRight", self.currList)
 		if self.propagateUpDownNormally:
@@ -843,6 +839,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			elif self.currList == "historylist":
 				if self.HistoryWindow is not None and self.HistoryWindow.shown:
 					self.HistoryWindow.pageDown()
+
 	def keyStdFeed(self):
 		self.hideSuggestions()
 		menulist = []
@@ -952,7 +949,6 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self["feedlist"].updateList(self.videolist)
 		else:
 			self.setState('noVideos')
-
 
 	def switchToHistory(self):
 		print("switchToHistory")
@@ -1678,7 +1674,6 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 				"showEventInfo": self.showVideoInfo,
 			}, -2)
 
-
 		self.lastservice = lastservice
 
 		self.hidetimer = eTimer()
@@ -1789,7 +1784,6 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		print("unPauseService")
 		if self.state == self.STATE_PAUSED:
 			self.setSeekState(self.STATE_PLAYING)
-
 
 	def getSeek(self):
 		service = self.session.nav.getCurrentService()

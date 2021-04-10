@@ -26,6 +26,8 @@ def main(session, servicelist, **kwargs):
 	zapperInstance.showSelection()
 
 # Instant start / stop monitoring
+
+
 def startstop(session, servicelist, **kwargs):
 	# Create Instance if none present
 	global zapperInstance
@@ -38,12 +40,14 @@ def startstop(session, servicelist, **kwargs):
 	else:
 		zapperInstance.stopMonitoring()
 
+
 def cleanup():
 	global zapperInstance
 	if zapperInstance is not None:
 		zapperInstance.shutdown()
 		zapperInstance.doClose()
 		zapperInstance = None
+
 
 def Plugins(**kwargs):
 	return [

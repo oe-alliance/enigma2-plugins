@@ -99,7 +99,9 @@ def getPluginCaption(pname):
         return _(pname)
     return _("Nothing")
 
+
 toggleSeenButton = None
+
 
 class QuickButton:
     def __init__(self):

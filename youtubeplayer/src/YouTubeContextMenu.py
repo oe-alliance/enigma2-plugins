@@ -29,7 +29,6 @@ class YouTubeEntryContextMenuList(MenuList):
 		self.menuList = []
 		MenuList.__init__(self, self.menuList)
 
-		
 	def appendEntry(self, entry):
 		self.menuList.append(entry)
 
@@ -48,14 +47,11 @@ class YouTubeEntryContextMenu(Screen):
 		
 		self.onFirstExecBegin.append(self.setTitleDelaied)
 
-
 	def okbuttonClick(self):
 		self.close(self["menu"].getCurrent()[1])
 		
-
 	def cancelClick(self):
 		self.close(None)
-
 
 	def setTitleDelaied(self):
 		self.setTitle(self.tmpTitle)

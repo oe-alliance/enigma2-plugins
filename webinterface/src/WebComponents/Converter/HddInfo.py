@@ -1,5 +1,6 @@
 from Components.Converter.Converter import Converter
 
+
 class HddInfo(Converter):
 	MODEL = 0
 	CAPACITY = 1

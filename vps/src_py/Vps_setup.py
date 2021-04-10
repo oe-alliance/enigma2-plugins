@@ -11,6 +11,7 @@ from Components.config import config, getConfigListEntry
 
 VERSION = "1.34"
 
+
 class VPS_Setup(Screen, ConfigListScreen):
 
 	if getDesktop(0).size().width() <= 1280:
@@ -133,7 +134,6 @@ class VPS_Setup(Screen, ConfigListScreen):
 			x[1].save()
 
 		self.close(self.session)
-
 
 
 class VPS_Screen_Info(Screen):

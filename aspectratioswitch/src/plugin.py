@@ -88,6 +88,7 @@ for aspect in ASPECT:
 
 aspect_ratio_switch = None
 
+
 class AspectRatioSwitchSetup(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="550,500" title="AspectRatioSwitch Setup">
@@ -159,6 +160,7 @@ class AspectRatioSwitchSetup(ConfigListScreen, Screen):
 		
 		self.close()
 
+
 class AspectRatioSwitch:
 
 	def __init__(self):
@@ -228,6 +230,7 @@ class AspectRatioSwitch:
 			Notifications.AddPopup(text=_("Aspect ratio switched from:\n   %s\nto:\n   %s") % (ASPECTMSG[ASPECT[aspectnum]], ASPECTMSG[ASPECT[newaspectnum]]), type=MessageBox.TYPE_INFO, timeout=5, id='AspectRatioSwitch')
 			print(pluginPrintname, "Aspect ratio switched from %d - %s to %d - %s" % (aspectnum, ASPECT[aspectnum], newaspectnum, ASPECT[newaspectnum]))
 			
+
 def autostart(reason, **kwargs):
 	#STANDARD beim Systemstart	
 	global aspect_ratio_switch
@@ -277,8 +280,10 @@ def autostart(reason, **kwargs):
 		if aspect_ratio_switch is not None:
 			aspect_ratio_switch.disable()
 
+
 def main(session, **kwargs):
 	session.open(AspectRatioSwitchSetup)
+
 
 def Plugins(**kwargs):
 			

@@ -51,38 +51,31 @@ std_headers = {
 	'Accept-Language': 'en-us,en;q=0.5',
 }
 
+
 class YouTubeUser():
 	def __init__(self, cfg):
 		self.cfg = cfg
 
-
 	def getCfg(self):
 		return self.cfg
-
 
 	def getName(self):
 		return self.cfg.name.value
 
-
 	def name(self):
 		return self.cfg.name
-
 
 	def getEmail(self):
 		return self.cfg.email.value
 
-
 	def email(self):
 		return self.cfg.email
-
 
 	def getPassword(self):
 		return self.cfg.password.value
 
-
 	def password(self):
 		return self.cfg.password
-
 
 	def login(self):
 		return interface.login(self)
@@ -96,7 +89,6 @@ class YouTubeFeed():
 		self.entries = []
 		self.update()
 
-
 	def update(self):
 		print("[YTB] YouTubeFeed::update()")
 		sequenceNumber = int(self.feed.start_index.text)
@@ -105,32 +97,26 @@ class YouTubeFeed():
 			self.entries.append(YouTubeEntry(self, entry, sequenceNumber, self.favoritesFeed))
 			sequenceNumber = sequenceNumber + 1
 
-
 	def getTitle(self):
 		return self.feed.title.text
-
 
 	def getEntries(self):
 		print("[YTB] YouTubeFeed::getEntries()")
 		return self.entries
 
-
 	def itemCount(self):
 		print("[YTB] YouTubeFeed::itemCount()")
 		return self.feed.items_per_page.text
 
-
 	def getTotalResults(self):
 		return self.feed.total_results.text
 	
-
 	def getNextFeed(self):
 		print("[YTB] YouTubeFeed::getNextFeed()")
 		for link in self.feed.link:
 			if link.rel == "next":
 				return link.href
 		return None
-
 
 	def getPreviousFeed(self):
 		print("[YTB] YouTubeFeed::getPreviousFeed()")
@@ -139,14 +125,12 @@ class YouTubeFeed():
 				return link.href
 		return None
 
-
 	def getSelfFeed(self):
 		print("[YTB] YouTubeFeed::getSelfFeed()")
 		for link in self.feed.link:
 			if link.rel == "self":
 				return link.href
 		return None
-
 
 	def loadThumbnails(self, callback):
 		print("[YTB] YouTubeFeed::loadThumbnails()")
@@ -163,10 +147,8 @@ class YouTubeEntry():
 		self.favoritesFeed = favoritesFeed
 		self.thumbnail = {}
 
-
 	def isPlaylistEntry(self):
 		return False
-
 
 	def getYouTubeId(self):
 		print("[YTB] YouTubeEntry::getYouTubeId()")
@@ -181,23 +163,19 @@ class YouTubeEntry():
 					ret = tmp.pop(0)
 		return ret
 
-
 	def getTitle(self):
 		print("[YTB] YouTubeEntry::getTitle()")
 		return self.entry.media.title.text
 
-
 	def getDescription(self):
 		print("[YTB] YouTubeEntry::getDescription()")
 		return self.entry.media.description.text
-
 
 	def getThumbnailUrl(self, index):
 		print("[YTB] YouTubeEntry::getThumbnailUrl")
 		if index < len(self.entry.media.thumbnail):
 			return self.entry.media.thumbnail[index].url
 		return None
-
 
 	def getRelatedFeed(self):
 		print("[YTB] YouTubeEntry::getRelatedFeed()")
@@ -207,7 +185,6 @@ class YouTubeEntry():
 				print("Found Related: ", link.href)
 				return link.href
 
-
 	def getResponsesFeed(self):
 		print("[YTB] YouTubeEntry::getResponseFeed()")
 		for link in self.entry.link:
@@ -215,7 +192,6 @@ class YouTubeEntry():
 			if link.rel.endswith("video.responses"):
 				print("Found Responses: ", link.href)
 				return link.href
-
 
 	def loadThumbnail(self, index, callback):
 		print("[YTB] YouTubeEntry::loadThumbnail()")
@@ -225,7 +201,6 @@ class YouTubeEntry():
 			self.thumbnail[str(index)] = None
 			cookie = {"entry": self, "file": thumbnailFile, "callback": callback, "index": index}
 			downloadPage(six.ensure_binary(thumbnailUrl), thumbnailFile).addCallback(fetchFinished, cookie).addErrback(fetchFailed, cookie)
-
 
 	def loadThumbnails(self, callback):
 		print("[YTB] YouTubeEntry::loadThumbnails()")
@@ -242,7 +217,6 @@ class YouTubeEntry():
 					return None
 		else:
 			return url
-
 
 	def getVideoUrl(self, fmt):
 		video_id = str(self.getYouTubeId())
@@ -283,24 +257,20 @@ class YouTubeEntry():
 					break
 			return video_real_url #, 'OK'
 
-
 	def getDuration(self):
 		if self.entry.media is not None and self.entry.media.duration is not None:
 			return self.entry.media.duration.seconds
 		return "not available"
 
-	
 	def getRatingAverage(self):
 		if self.entry.rating is not None:
 			return self.entry.rating.average
 		return "not available"
 
-
 	def getNumRaters(self):
 		if self.entry.rating is not None:
 			return self.entry.rating.num_raters
 		return ""
-	
 	
 	def getRatingMax(self):
 		if self.entry.rating is not None:
@@ -312,19 +282,16 @@ class YouTubeEntry():
 			return self.entry.rating.min
 		return "not available"
 
-	
 	def getFavoriteCount(self):
 		if self.entry.statistics is not None:
 			return self.entry.statistics.favorite_count
 		return "not available"
-	
 	
 	def getViewCount(self):
 		if self.entry.statistics is not None:
 			return self.entry.statistics.view_count
 		return "not available"
 
-	
 	def getAuthor(self):
 		authorList = []
 		for author in self.entry.author:
@@ -332,26 +299,21 @@ class YouTubeEntry():
 		authors = ", ".join(authorList)
 		return authors
 
-	
 	def getPublishedOn(self):
 		if self.entry.published is not None:
 			return self.entry.published.text
 		return "unknown"
 
-	
 	def getCategory(self):
 		return self.entry.GetYouTubeCategoryAsString()
 
-	
 	def getTags(self):
 		if self.entry.media is not None and self.entry.media.keywords is not None:
 			return self.entry.media.keywords.text
 		return "not available"
 
-
 	def belongsToFavorites(self):
 		return self.favoritesFeed
-
 
 	def belongsToPlaylistId(self):
 		return self.playlistId
@@ -364,17 +326,14 @@ class YouTubePlaylistFeed():
 		self.entries = []
 		self.update()
 
-
 	def update(self):
 		print("[YTB] YouTubePlayListFeed::update()")
 		for entry in self.feed.entry:
 			self.entries.append(YouTubePlaylistEntry(entry))
 
-
 	def getTitle(self):
 		print("[YTB] YouTubePlayListFeed::getTitle()")
 		return self.feed.title.text
-
 
 	def getEntries(self):
 		print("[YTB] YouTubePlayListFeed::getEntries()")
@@ -386,22 +345,18 @@ class YouTubePlaylistEntry():
 		print("[YTB] YouTubePlaylistEntry::__init__()")
 		self.entry = entry
 
-
 	def getTitle(self):
 		print("[YTB] YouTubePlaylistEntry::getTitle()")
 		return self.entry.title.text
-
 
 	def getDescription(self):
 		print("[YTB] YouTubePlaylistEntry::getDescription()")
 		return self.entry.description.text
 
-
 	def getFeed(self, index=0):
 		print("[YTB] YouTubePlaylistEntry::getFeed()")
 		return self.entry.feed_link[index].href
 
-	
 	def getSelfFeed(self):
 		print("[YTB] YouTubeFeed::getSelfFeed()")
 		for link in self.entry.link:
@@ -414,7 +369,6 @@ class YouTubePlaylistVideoFeed(YouTubeFeed):
 	def __init__(self, feed):
 		print("[YTB] YouTubePlaylistVideoFeed::__init__()")
 		YouTubeFeed.__init__(self, feed)
-
 
 	def update(self):
 		print("[YTB] YouTubePlaylistVideoFeed::update()")
@@ -437,10 +391,8 @@ class YouTubePlaylistVideoEntry(YouTubeEntry):
 		print("[YTB] YouTubePlaylistVideoEntry::__init__()")
 		YouTubeEntry.__init__(self, feed, entry, sequenceNumber)
 
-
 	def isPlaylistEntry(self):
 		return True
-
 
 	def getSelf(self):
 		print("[YTB] YouTubePlaylistVideoEntry::getSelfFeed()")
@@ -449,8 +401,8 @@ class YouTubePlaylistVideoEntry(YouTubeEntry):
 				return link.href
 		return None
 
-
 	YOUTUBE_DEVELOPER_TAG_SCHEME = "http://gdata.youtube.com/schemas/2007/developertags.cat"
+
 	def getCategory(self):
 		for category in self.entry.media.category:
 			if category.scheme != YouTubePlaylistVideoEntry.YOUTUBE_DEVELOPER_TAG_SCHEME:
@@ -465,18 +417,15 @@ class YouTubeInterface():
 	def __init__(self):
 		print("[YTB] YouTubeInterface::__init__()")
 
-
 	def open(self):
 		self.ytService = gdata.youtube.service.YouTubeService()
 		print("[YTB] YouTubeInterface::open()")
 		self.loggedIn = False
 
-
 	def close(self):
 		print("[YTB] YouTubeInterface::close()")
 		del self.ytService
 		self.loggedIn = False
-
 
 	def login(self, user):
 		print("[YTB] YouTubeInterface::login()")
@@ -497,10 +446,8 @@ class YouTubeInterface():
 				ret = True
 		return ret
 
-
 	def isLoggedIn(self):
 		return self.loggedIn
-
 
 	def search(self, searchTerms, startIndex=1, maxResults=25,
 					orderby="relevance", time="all_time", racy="include", 
@@ -525,19 +472,15 @@ class YouTubeInterface():
 			feed = None
 		return feed
 
-
 	def getFeed(self, url):
 		return YouTubeFeed(self.ytService.GetYouTubeVideoFeed(url))
-
 
 	def getUserFavoritesFeed(self, userName="default"):
 		return YouTubeFeed(self.ytService.GetUserFavoritesFeed(userName), favoritesFeed=True)
 
-
 	def getUserPlaylistFeed(self, playlistEntry):
 		print("[YTB] getUserPlaylistFeed: ", playlistEntry.getFeed())
 		return YouTubePlaylistVideoFeed(self.ytService.GetYouTubePlaylistVideoFeed(playlistEntry.getFeed()))
-
 
 	def addToFavorites(self, entry):
 		response = self.ytService.AddVideoEntryToFavorites(entry.entry)
@@ -548,17 +491,14 @@ class YouTubeInterface():
 		else:
 			return None
 
-
 	def removeFromFavorites(self, entry):
 		response = self.ytService.DeleteVideoEntryFromFavorites(entry.getYouTubeId())
 		if response is True:
 			print("[YTB] Video deleted from favorites")
 		return response
 
-
 	def getPlaylistFeed(self):
 		return YouTubePlaylistFeed(self.ytService.GetYouTubePlaylistFeed())
-
 
 	def addPlaylist(self, name, description, private):
 		newPlaylist = None
@@ -567,12 +507,10 @@ class YouTubeInterface():
   			newPlaylist = YouTubePlaylistEntry(newPlaylistEntry)
 		return newPlaylist
 
-
 	def deletePlaylist(self, playlistEntry):
 		playListUrl = playlistEntry.getSelfFeed()
 		return self.ytService.DeletePlaylist(playListUrl)
 
-	
 	def removeFromPlaylist(self, playlistVideoEntry):
 		print("[YTB] Removing from Playlist")
 		response = self.ytService.Delete(playlistVideoEntry.getSelf())
@@ -581,7 +519,6 @@ class YouTubeInterface():
 		else:
 			print("[YTB] Delete unsuccessfull")
 		return response
-
 
 	def addToPlaylist(self, playlistEntry, videoEntry):
 		print("[YTB] Adding to Playlist")

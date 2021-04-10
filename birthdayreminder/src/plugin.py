@@ -59,13 +59,16 @@ birthdaytimer = BirthdayTimer()
 def settings(session, **kwargs):
 	session.open(BirthdayReminderSettings, birthdaytimer)
 	
+
 def autostart(reason, **kwargs):
 	if reason == 1:
 		birthdaytimer.stop()
 		
+
 def main(session, **kwargs):
 	session.open(BirthdayReminder, birthdaytimer)
 	
+
 def Plugins(**kwargs):
 	list = []
 	list.append(PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart))

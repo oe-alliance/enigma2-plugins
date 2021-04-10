@@ -62,6 +62,7 @@ def bareGetEpisode(service_ref, name, begin, end, description, path, future=True
 	
 	return result
 
+
 def bareShowResult():
 	global loop_data, loop_counter
 	

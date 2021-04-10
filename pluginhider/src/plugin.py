@@ -21,12 +21,14 @@ config.plugins.pluginhider.hideeventinfo = ConfigSet(choices=[])
 
 hasPluginWeight = True
 
+
 def hidePlugin(plugin):
 	"""Convenience function for external code to hide a plugin."""
 	hide = config.plugins.pluginhider.hideplugins.value
 	if not plugin.name in hide:
 		hide.append(plugin.name)
 		config.plugins.pluginhider.hideplugins.save()
+
 
 def PluginComponent_getPlugins(self, where):
 	if not isinstance(where, list):
@@ -54,6 +56,7 @@ def PluginComponent_getPlugins(self, where):
 		res.sort(key=attrgetter('weight'))
 	return res
 
+
 def autostart(reason, *args, **kwargs):
 	if reason == 0:
 		if hasattr(PluginComponent, 'pluginHider_baseGetPlugins'):
@@ -74,8 +77,10 @@ def autostart(reason, *args, **kwargs):
 			import sys
 			traceback.print_stack(limit=5, file=sys.stdout)
 
+
 def main(session, *args, **kwargs):
 	session.open(PluginHiderSetup)
+
 
 def menu(menuid):
 	if getImageDistro() in ('teamblue'):
@@ -85,6 +90,7 @@ def menu(menuid):
 		if menuid != "system":
 			return []
 	return [(_("Hide Plugins"), main, "pluginhider_setup", None)]
+
 
 def Plugins(**kwargs):
 	pd = PluginDescriptor(

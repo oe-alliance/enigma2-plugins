@@ -7,6 +7,7 @@ from twisted.web import resource, http
 from tempfile import mkstemp
 from re import search
 
+
 class UploadTextResource(resource.Resource):
 	default_uploaddir = "/tmp/"
 

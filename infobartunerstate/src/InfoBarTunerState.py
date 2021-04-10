@@ -107,6 +107,8 @@ def overwriteInfoBar():
 		InfoBarShowHide._InfoBarShowHide__onHide = InfoBarHideTunerState
 
 # InfoBar Events
+
+
 def recoverInfoBar():
 	global InfoBarShow, InfoBarHide
 	if InfoBarShow:
@@ -116,6 +118,7 @@ def recoverInfoBar():
 		InfoBarShowHide._InfoBarShowHide__onHide = InfoBarHide
 		InfoBarHide = None
 
+
 def InfoBarShowTunerState(self):
 	from Plugins.Extensions.InfoBarTunerState.plugin import gInfoBarTunerState
 	global gInfoBarTunerState
@@ -124,6 +127,7 @@ def InfoBarShowTunerState(self):
 		InfoBarShow(self)
 	if gInfoBarTunerState:
 		gInfoBarTunerState.show()
+
 
 def InfoBarHideTunerState(self):
 	from Plugins.Extensions.InfoBarTunerState.plugin import gInfoBarTunerState
@@ -161,6 +165,7 @@ def addExtension():
 				plugin = PluginDescriptor(name=IBTSSETUP, description=IBTSSETUP, where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart=False, fnc=setup)
 				plugins.plugins[PluginDescriptor.WHERE_EXTENSIONSMENU].append(plugin)
 
+
 def removeExtension():
 	# Remove from extension menu
 	from Components.PluginComponent import plugins
@@ -178,6 +183,8 @@ def removeExtension():
 
 #######################################################
 # Logical background task
+
+
 class InfoBarTunerState(object):
 	def __init__(self, session):
 		self.session = session
@@ -1293,6 +1300,7 @@ def getTimerID(timer):
 	#return str( timer.name ) + str( timer.repeatedbegindate ) + str( timer.service_ref ) + str( timer.justplay )
 	return str(timer)
 
+
 def getTimer(id):
 	#for timer in self.session.nav.RecordTimer.timer_list + self.session.nav.RecordTimer.processed_timers:
 	for timer in NavigationInstance.instance.RecordTimer.timer_list + NavigationInstance.instance.RecordTimer.processed_timers:
@@ -1301,11 +1309,13 @@ def getTimer(id):
 			return timer
 	return None
 
+
 def getStreamID(stream):
 	#TEST_MULTIPLESTREAMS
 	#if id == str(stream.getRecordServiceRef()) + str(stream.clientIP):
 	##if(id == str(stream.getRecordServiceRef().toString()) + str(stream.clientIP)):
 	return str(stream.screenIndex) + str(stream.clientIP)
+
 
 def getStream(id):
 	try:
@@ -1319,6 +1329,7 @@ def getStream(id):
 				return stream
 	return None
 
+
 def getTuner(service):
 	# service must be an instance of iPlayableService or iRecordableService
 	#TODO detect stream of HDD
@@ -1331,6 +1342,7 @@ def getTuner(service):
 			return (chr(int(number) + ord('A')), type)
 	return "", ""
 
+
 def readBouquetList(self):
 	serviceHandler = eServiceCenter.getInstance()
 	refstr = '1:134:1:0:0:0:0:0:0:0:FROM BOUQUET \"bouquets.tv\" ORDER BY bouquet'
@@ -1339,6 +1351,7 @@ def readBouquetList(self):
 	list = serviceHandler.list(bouquetroot)
 	if list is not None:
 		self.bouquetlist = list.getContent("CN", True)
+
 
 def getNumber(actservice):
 	# actservice must be an instance of eServiceReference
@@ -1373,6 +1386,7 @@ def getNumber(actservice):
 							if actservice == service:
 								return number
 	return None
+
 
 def getNextPendingRecordTimers():
 	timer_list = []

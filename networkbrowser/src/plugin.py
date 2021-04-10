@@ -16,6 +16,7 @@ from .AutoMount import iAutoMount
 plugin_path = ""
 mountagaincheckpoller = None
 
+
 class MountAgainCheckPoller:
 	def __init__(self, session):
 		self.session = session
@@ -62,6 +63,7 @@ class MountAgainCheckPoller:
 	def JobSched(self):
 		self.timer.startLongTimer(int(config.networkbrowser.automountpolltimer.value) * 3600)
 
+
 def autostart(reason, session=None, **kwargs):
 	global mountagaincheckpoller
 	global _session
@@ -72,27 +74,35 @@ def autostart(reason, session=None, **kwargs):
 				mountagaincheckpoller = MountAgainCheckPoller(session)
 		# session.nav.RecordTimer.isRecording()
 
+
 def NetworkBrowserMain(session, iface=None, **kwargs):
 	session.open(NetworkBrowser, iface, plugin_path)
+
 
 def MountManagerMain(session, iface=None, **kwargs):
 	session.open(AutoMountManager, iface, plugin_path)
 
+
 def NetworkBrowserCallFunction(iface):
 	return NetworkBrowserMain
 
+
 def MountManagerCallFunction(iface):
 	return MountManagerMain
+
 
 def RemountMain(session, iface=None, **kwargs):
 	from .AutoMount import iAutoMount
 	iAutoMount.getAutoMountPoints() 
 
+
 def RemountCallFunction(iface):
 	return RemountMain
 
+
 def SchedMount(session, **kwargs):
 	session.open(MountAgainCheck)
+
 
 def Plugins(path, **kwargs):
 	global plugin_path

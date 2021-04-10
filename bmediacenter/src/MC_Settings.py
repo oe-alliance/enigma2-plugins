@@ -19,6 +19,8 @@ mcpath = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultH
 #	from enigma import evfd
 #except Exception as e:
 #	print("Media Center: Import evfd failed")
+
+
 class MC_Settings(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -47,12 +49,16 @@ class MC_Settings(Screen):
 		self.list.append(getConfigListEntry(_("Show MC in Main-Menu"), config.plugins.mc_globalsettings.showinmainmenu))
 		self.list.append(getConfigListEntry(_("Show MC in Extension-Menu"), config.plugins.mc_globalsettings.showinextmenu))
 		self.list.append(getConfigListEntry(_("UPNP Enabled"), config.plugins.mc_globalsettings.upnp_enable))
+
 	def keyLeft(self):
 		self["configlist"].handleKey(KEY_LEFT)
+
 	def keyRight(self):
 		self["configlist"].handleKey(KEY_RIGHT)
+
 	def keyNumber(self, number):
 		self["configlist"].handleKey(KEY_0 + number)
+
 	def keyOK(self):
 		config.plugins.mc_globalsettings.save()
 #		if config.plugins.mc_global.vfd.value == "on":

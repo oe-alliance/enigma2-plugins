@@ -2,6 +2,7 @@
 from __future__ import print_function
 from Components.Sources.Source import Source
 
+
 class PkgList(Source):
 	LIST = 0
 	UPDATE = 1

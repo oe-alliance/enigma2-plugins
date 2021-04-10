@@ -18,6 +18,7 @@ from .plugin import autotimer
 
 API_VERSION = "1.3"
 
+
 class AutoTimerBaseResource(resource.Resource):
 	def returnResult(self, req, state, statetext):
 		req.setResponseCode(http.OK)
@@ -29,6 +30,7 @@ class AutoTimerBaseResource(resource.Resource):
 	<e2state>%s</e2state>
 	<e2statetext>%s</e2statetext>
 </e2simplexmlresult>""" % ('True' if state else 'False', statetext)
+
 
 class AutoTimerBackgroundThread(threading.Thread):
 	def __init__(self, req, fnc):
@@ -52,6 +54,7 @@ class AutoTimerBackgroundThread(threading.Thread):
 				req.finish()
 			reactor.callFromThread(finishRequest)
 
+
 class AutoTimerBackgroundingResource(AutoTimerBaseResource, threading.Thread):
 	def render(self, req):
 		AutoTimerBackgroundThread(req, self.renderBackground)
@@ -60,12 +63,14 @@ class AutoTimerBackgroundingResource(AutoTimerBaseResource, threading.Thread):
 	def renderBackground(self, req):
 		pass
 
+
 class AutoTimerDoParseResource(AutoTimerBackgroundingResource):
 	def renderBackground(self, req):
 		ret = autotimer.parseEPG()
 		output = _("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5]))
 
 		return self.returnResult(req, True, output)
+
 
 class AutoTimerSimulateResource(AutoTimerBackgroundingResource):
 	def renderBackground(self, req):
@@ -93,6 +98,7 @@ class AutoTimerSimulateResource(AutoTimerBackgroundingResource):
 		req.setHeader('charset', 'UTF-8')
 		return ''.join(returnlist)
 
+
 class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 	def render(self, req):
 		# We re-read the config so we won't display empty or wrong information
@@ -107,6 +113,7 @@ class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 		req.setHeader('charset', 'UTF-8')
 		return ''.join(autotimer.getXml())
 
+
 class AutoTimerRemoveAutoTimerResource(AutoTimerBaseResource):
 	def render(self, req):
 		id = req.args.get("id")
@@ -115,6 +122,7 @@ class AutoTimerRemoveAutoTimerResource(AutoTimerBaseResource):
 			return self.returnResult(req, True, _("AutoTimer was removed"))
 		else:
 			return self.returnResult(req, False, _("missing parameter \"id\""))
+
 
 class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 	# TODO: recheck if we can modify regular config parser to work on this
@@ -367,6 +375,7 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 
 		return self.returnResult(req, True, message)
 
+
 class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 	def render(self, req):
 		for key, value in iteritems(req.args):
@@ -411,6 +420,7 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 				plugin.autopoller = None
 
 		return self.returnResult(req, True, _("config changed."))
+
 
 class AutoTimerSettingsResource(resource.Resource):
 	def render(self, req):

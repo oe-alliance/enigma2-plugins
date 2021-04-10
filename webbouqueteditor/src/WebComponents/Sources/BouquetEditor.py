@@ -10,6 +10,7 @@ from Components.ParentalControl import parentalControl, IMG_WHITESERVICE, IMG_WH
 from re import compile as re_compile
 from Components.NimManager import nimmanager 
 
+
 class BouquetEditor(Source):
 
 	ADD_BOUQUET = 0
@@ -30,7 +31,6 @@ class BouquetEditor(Source):
 	BACKUP_PATH = "/tmp"
 	BACKUP_FILENAME = "webbouqueteditor_backup.tar"
 	
-
 	def __init__(self, session, func=ADD_BOUQUET):
 		Source.__init__(self)
 		self.func = func
@@ -39,7 +39,6 @@ class BouquetEditor(Source):
 		self.bouquet_rootstr = ""
 		self.result = (False, "one two three four unknown command")
 		
-
 	def handleCommand(self, cmd):
 		print("[WebComponents.BouquetEditor] handleCommand with cmd = ", cmd)
 		if self.func is self.ADD_BOUQUET:
@@ -117,7 +116,6 @@ class BouquetEditor(Source):
 				return (False, "Bouquetlist is not editable!")
 		else:
 			return (False, "Multi-Bouquet is not enabled!")
-
 
 	def addProviderToBouquetlist(self, param):
 		print("[WebComponents.BouquetEditor] addProviderToBouquet with param = ", param)

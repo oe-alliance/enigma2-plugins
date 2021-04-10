@@ -85,8 +85,10 @@ config.plugins.Uploaded.password = ConfigText(default="", fixed_size=False)
 PluginLanguageDomain = "RSDownloader"
 PluginLanguagePath = "Extensions/RSDownloader/locale/"
 
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -95,9 +97,11 @@ def _(txt):
 		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
+
 language.addCallback(localeInit())
 
 ##############################################################################
+
 
 def writeLog(message):
 	if config.plugins.RSDownloader.write_log.value:
@@ -109,6 +113,7 @@ def writeLog(message):
 			pass
 
 ##############################################################################
+
 
 def _parse(url):
 	url = url.strip()
@@ -131,6 +136,7 @@ def _parse(url):
 	if path == "":
 		path = "/"
 	return scheme, host, port, path, username, password
+
 
 class ProgressDownload:
 	def __init__(self, url, outputfile, contextFactory=None, *args, **kwargs):
@@ -158,6 +164,7 @@ class ProgressDownload:
 
 ##############################################################################
 
+
 def get(url):
 	try:
 		data = urlopen(url)
@@ -165,11 +172,13 @@ def get(url):
 	except:
 		return ""
    
+
 def post(url, data):
 	try:
 		return urlopen(url, data).read()
 	except:
 		return ""
+
 
 def matchGet(rex, string):
 	match = re.search(rex, string)
@@ -182,6 +191,7 @@ def matchGet(rex, string):
 		return False
 
 ##############################################################################
+
 
 def reconnect(host='fritz.box', port=49000):
 	writeLog("Reconnecting fritz.Box...")
@@ -210,6 +220,7 @@ def reconnect(host='fritz.box', port=49000):
 
 ##############################################################################
 
+
 def reconnect_script():
 	script = config.plugins.RSDownloader.reconnect_script.value
 	if script != "" and fileExists(script):
@@ -220,12 +231,14 @@ def reconnect_script():
 
 ##############################################################################
 
+
 std_headers = {
 	'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2',
 	'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
 	'Accept': 'text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5',
 	'Accept-Language': 'en-us,en;q=0.5',
 }
+
 
 class RSDownload:
 	def __init__(self, url):
@@ -490,6 +503,7 @@ class RSDownload:
 		return mrl
 
 ##############################################################################
+
 
 class RS:
 	def __init__(self):
@@ -770,9 +784,11 @@ class RS:
 		self.downloads = tmp
 		self.startDownloading()
 
+
 rapidshare = RS()
 
 ##############################################################################
+
 
 class ChangedScreen(Screen):
 	def __init__(self, session, parent=None):
@@ -783,6 +799,7 @@ class ChangedScreen(Screen):
 		self.setTitle(_("RS Downloader"))
 
 ##############################################################################
+
 
 class ReconnectScriptSelector(ChangedScreen):
 	skin = """
@@ -804,6 +821,7 @@ class ReconnectScriptSelector(ChangedScreen):
 				self.close("%s/%s" % (self["list"].getCurrentDirectory(), cur[0][0]))
 
 ##############################################################################
+
 
 class RSConfig(ConfigListScreen, ChangedScreen):
 	skin = """
@@ -886,6 +904,7 @@ class RSConfig(ConfigListScreen, ChangedScreen):
 			self["config"].setList(self["config"].getList())
 
 ##############################################################################
+
 
 class RSSearch(Screen):
 	skin = """
@@ -994,6 +1013,7 @@ class RSSearch(Screen):
 
 ##############################################################################
 
+
 class RSLogScreen(ChangedScreen):
 	skin = """
 		<screen position="center,center" size="560,450" title="RS Downloader">
@@ -1023,6 +1043,7 @@ class RSLogScreen(ChangedScreen):
 
 ##############################################################################
 
+
 class RSContainerSelector(ChangedScreen):
 	skin = """
 		<screen position="center,center" size="560,450" title="RS Downloader">
@@ -1039,6 +1060,7 @@ class RSContainerSelector(ChangedScreen):
 		self.close(cur)
 
 ##############################################################################
+
 
 class UnrarEntry:
 	def __init__(self, name, password, package=None):
@@ -1105,6 +1127,7 @@ class UnrarEntry:
 			return True
 
 ##############################################################################
+
 
 class Unrar:
 	def __init__(self):
@@ -1207,9 +1230,12 @@ class Unrar:
 			f.close()
 		except:
 			writeLog("Error writing unrar xml file: %s" % self.xmlFile)
+
+
 unrar = Unrar()
 
 ##############################################################################
+
 
 class UnrarPackageSelector(ChangedScreen):
 	skin = """
@@ -1261,6 +1287,7 @@ class UnrarPackageSelector(ChangedScreen):
 		self.close([self.name, callback])
 
 ##############################################################################
+
 
 class UnrarManager(ChangedScreen):
 	skin = """
@@ -1317,6 +1344,7 @@ class UnrarManager(ChangedScreen):
 
 ##############################################################################
 
+
 class RSList(MenuList):
 	def __init__(self, list):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
@@ -1324,6 +1352,7 @@ class RSList(MenuList):
 		self.l.setFont(0, gFont("Regular", 20))
 
 ##############################################################################
+
 
 def RSListEntry(download):
 	res = [(download)]
@@ -1336,6 +1365,7 @@ def RSListEntry(download):
 	return res
 
 ##############################################################################
+
 
 class RSMain(ChangedScreen):
 	skin = """
@@ -1458,7 +1488,6 @@ class RSMain(ChangedScreen):
 		if callback is not None and callback != "":
 			self.session.openWithCallback(self.searchScreenCallback, RSSearch, callback)
 
-
 	def searchScreenCallback(self):
 		self.refreshTimer.stop()
 		rapidshare.startDownloading()
@@ -1520,6 +1549,7 @@ class RSMain(ChangedScreen):
 
 ##############################################################################
 
+
 def autostart(reason, **kwargs):
 	if reason == 0:
 		rapidshare.startDownloading()
@@ -1529,10 +1559,12 @@ def autostart(reason, **kwargs):
 
 ##############################################################################
 
+
 def main(session, **kwargs):
 	session.open(RSMain)
 
 ##############################################################################
+
 
 def Plugins(**kwargs):
 	return [

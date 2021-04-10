@@ -30,6 +30,7 @@ import socket
 
 serverInstance = None
 
+
 def getIpAddress(iface):
     interfaces = []
     # parse the interfaces-file
@@ -50,6 +51,7 @@ def getIpAddress(iface):
                 return split[1]
     return None
 
+
 class TCPHandler(SocketServer.BaseRequestHandler):
     """
     The RequestHandler class for our server.
@@ -69,6 +71,7 @@ class TCPHandler(SocketServer.BaseRequestHandler):
             self.request.send(MessageQueue.getRequest(data))
         except Exception as e:
             print(e)
+
 
 class MessageServer():
     def __init__(self):
@@ -151,4 +154,5 @@ class MessageServer():
         self.ip_from = ip_from
         self.ip_to = ip_to
         
+
 serverInstance = MessageServer()

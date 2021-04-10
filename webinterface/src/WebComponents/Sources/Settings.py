@@ -1,6 +1,7 @@
 from Components.config import config
 from Components.Sources.Source import Source
 
+
 class Settings(Source):
 	def __init__(self, session):
 		self.cmd = []

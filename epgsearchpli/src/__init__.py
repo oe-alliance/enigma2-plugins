@@ -7,14 +7,17 @@ import gettext
 # Config
 from Components.config import config, ConfigSet, ConfigSubsection, ConfigText, ConfigNumber, ConfigYesNo, ConfigSelection
 
+
 def localeInit():
 	gettext.bindtextdomain("EPGSearch", resolveFilename(SCOPE_PLUGINS, "Extensions/EPGSearch/locale"))
+
 
 def _(txt):
 	t = gettext.dgettext("EPGSearch", txt)
 	if t == txt:
 		t = gettext.gettext(txt)
 	return t
+
 
 # Language
 localeInit()

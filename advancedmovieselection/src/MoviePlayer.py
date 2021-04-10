@@ -52,10 +52,12 @@ if fileExists("/etc/grautec/dm8000/tft_dm8000.ko"):
 else:
     TFT_8000_Present = False
 
+
 def cutlist_changed(self):
     if playerChoice and playerChoice.isPlaying():
         self.cutlist = [] # we need to update the property 
     self.cutlist = self.source.cutlist or []
+
 
 from Components.Renderer.PositionGauge import PositionGauge
 PositionGauge.cutlist_changed = cutlist_changed
@@ -70,6 +72,7 @@ def showMovies(self):
         self.session.open(AboutDetails)
         config.AdvancedMovieSelection.version.value = __version__
         config.AdvancedMovieSelection.version.save()
+
 
 class MoviePlayerExtended_summary(Screen):
     def __init__(self, session, parent):
@@ -95,6 +98,7 @@ class MoviePlayerExtended_summary(Screen):
         self["Seperator1"].hide()   
         self["Seperator2"].hide()   
     
+
 class SelectionEventInfo:
     def __init__(self):
         self["ServiceEvent"] = ServiceEvent()
@@ -130,6 +134,7 @@ class SelectionEventInfo:
                     self["ServiceEvent"].newService(serviceref)  
             self["ShortDesc"].setText(desc)
             self["ServiceEvent"].newService(serviceref)
+
 
 class PlayerBase(MoviePreview, SelectionEventInfo):
     def __init__(self, session):
@@ -410,11 +415,13 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
             else:
                 self.close()
 
+
 if pluginPresent.DVDPlayer:
     if fileExists('/usr/lib/enigma2/python/Screens/DVD.pyo'):
         from Screens.DVD import DVDPlayer as eDVDPlayer
     else:
         from Plugins.Extensions.DVDPlayer.plugin import DVDPlayer as eDVDPlayer
+
     class DVDPlayer(DVDCutListSupport, eDVDPlayer, PlayerBase):
         def __init__(self, session, service):
             DVDCutListSupport.__init__(self, service)
@@ -456,6 +463,7 @@ if pluginPresent.BludiscPlayer:
     from Plugins.Extensions.BludiscPlayer.plugin import BludiscPlayer as eBludiscPlayer, BludiscMenu as eBludiscMenu
     from enigma import eServiceReference
     from .Source.CueSheetSupport import BludiscCutListSupport
+
     class BludiscPlayer(BludiscCutListSupport, eBludiscPlayer):
         def __init__(self, session, service, file_name, is_main_movie):
             s = eServiceReferenceBludisc(service)
@@ -509,6 +517,7 @@ if pluginPresent.BludiscPlayer:
             from .Source.ISOInfo import ISOInfo
             ISOInfo().umount()
             self.close()
+
 
 class PlayerChoice():
     def __init__(self, session):
@@ -573,6 +582,7 @@ class PlayerChoice():
 
     def stopPlaying(self):
         self.playing = False
+
 
 def initPlayerChoice(session):
     global playerChoice

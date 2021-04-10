@@ -29,15 +29,19 @@ from enigma import eTimer
 from .Source.Globals import SkinResolutionHelper
 
 from Screens.NumericalTextInputHelpDialog import NumericalTextInputHelpDialog
+
+
 class AdvancedTextInputHelpDialog(NumericalTextInputHelpDialog, SkinResolutionHelper):
     def __init__(self, session, textinput):
         NumericalTextInputHelpDialog.__init__(self, session, textinput)
         SkinResolutionHelper.__init__(self)
 
+
 class AdvancedKeyBoard(VirtualKeyBoard, NumericalTextInput, SkinResolutionHelper):
     KEYBOARD = 0x01
     NUM_KEYB = 0x02
     BOTH = KEYBOARD | NUM_KEYB
+
     def __init__(self, session, title="", text=""):
         #VirtualKeyBoard.__init__(self, session, title, text) Changed by Topfi, added parameter names
         VirtualKeyBoard.__init__(self, session, title=title, text=text)

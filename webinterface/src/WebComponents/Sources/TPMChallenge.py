@@ -6,6 +6,7 @@ from base64 import b64encode, b64decode
 
 tpm = eTPM()
 
+
 class TPMChallenge(Source):
 	CERTIFICATES = "certificates"
 	CHALLENGE = "challenge"

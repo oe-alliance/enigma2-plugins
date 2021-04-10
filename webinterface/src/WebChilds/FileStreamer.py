@@ -4,6 +4,7 @@ from urllib import unquote
 from os import path as os_path
 from Tools.Directories import resolveFilename, SCOPE_HDD
 
+
 class FileStreamer(resource.Resource):
 	addSlash = True
 

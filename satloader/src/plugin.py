@@ -15,6 +15,7 @@ import os
 import six
 #######################
 
+
 class Satloader(Screen):
 	framewidth = getDesktop(0).size().width()
 	if framewidth == 1280:
@@ -117,6 +118,7 @@ class Satloader(Screen):
 
 #######################
 
+
 class SatloaderAbout(Screen):
 	skin = """
 		<screen position="center,center" size="360,280" title="%s">
@@ -134,6 +136,7 @@ class SatloaderAbout(Screen):
 		}, -1)
 
 #######################
+
 
 class SatloaderBouquet(Screen):
 	framewidth = getDesktop(0).size().width()
@@ -247,6 +250,7 @@ class SatloaderBouquet(Screen):
 			self["info"].setText("%s" % (_("GUI needs a restart.")))
 
 #######################
+
 
 class SatloaderMultiSat(Screen):
 	framewidth = getDesktop(0).size().width()
@@ -377,6 +381,7 @@ class SatloaderMultiSat(Screen):
 
 #######################
 
+
 class TransponderSelection(Screen):
 	framewidth = getDesktop(0).size().width()
 	if framewidth == 1280:
@@ -474,6 +479,7 @@ class TransponderSelection(Screen):
 
 #######################
 
+
 class SatloaderList(MenuList):
 	def __init__(self, list):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
@@ -499,6 +505,7 @@ class SatloaderList(MenuList):
 
 #######################
 
+
 def SatListEntry(description, value, index, selected):
 	if selected == None:
 		res = [
@@ -519,11 +526,13 @@ def SatListEntry(description, value, index, selected):
 
 #######################
 
+
 def main(session, **kwargs):
 	print("\n[Satloader] start\n")
 	session.open(Satloader)
 
 #######################
+
 
 def Plugins(**kwargs):
 	return [

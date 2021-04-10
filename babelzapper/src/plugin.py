@@ -40,8 +40,10 @@ config.plugins.babelzapper.enabled = ConfigEnableDisable(default=False)
 config.plugins.babelzapper.changetime = ConfigInteger(default=1000, limits=(200, 10000))
 config.plugins.babelzapper.exit2escape = ConfigEnableDisable(default=False)
 
+
 def main(session, **kwargs):
 	session.open(BabelzapperConfiguration)
+
 
 def autostart(reason, **kwargs):
 #	global session
@@ -50,9 +52,11 @@ def autostart(reason, **kwargs):
 		print("[BABELZAPPER] autostart")
 		session.open(BabelZapperStartup)
 
+
 def Plugins(**kwargs):
 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart),
 		PluginDescriptor(name="Babelzapper", description=_("Mute button remote control"), where=PluginDescriptor.WHERE_PLUGINMENU, icon="babelzapper.png", fnc=main)]
+
 
 class BabelzapperConfiguration(Screen, ConfigListScreen):
 	skin = """
@@ -64,6 +68,7 @@ class BabelzapperConfiguration(Screen, ConfigListScreen):
 		<widget name="buttonblue" position="340,200" size="100,40" backgroundColor="blue" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/>
 		<ePixmap position="175,80" size="100,100" pixmap="%s/babel.png" transparent="1" alphatest="on" />	
 	</screen>""" % babelzapper_plugindir
+
 	def __init__(self, session, args=0):
 		Screen.__init__(self, session)
 		self.list = []
@@ -123,8 +128,10 @@ class BabelzapperConfiguration(Screen, ConfigListScreen):
 	def about(self):
 		self.session.open(MessageBox, _("Babelzapper Version %s\nby gutemine and garbage") % babelzapper_version, MessageBox.TYPE_INFO)
 
+
 class BabelZapperStartup(Screen):
 	skin = ""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skin = BabelZapperStartup.skin
@@ -391,12 +398,14 @@ class BabelZapperStartup(Screen):
 		self.babelDialog.show()
 		self.nextKeyTimer.start(config.plugins.babelzapper.changetime.value, True)
 
+
 class BabelZapper(Screen):
 	skin = """
 		<screen position="center,60" size="180,30" flags="wfNoBorder">
 		<widget name="babelzapper" position="1,1" size="180,30" font="Regular;26" valign="center" halign="center" backgroundColors="black,white,#00AAAAAA,red,green,yellow,blue" foregroundColors="black,white,#00AAAAAA,red,green,yellow,blue">
 		</widget>
 		</screen>"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skin = BabelZapper.skin

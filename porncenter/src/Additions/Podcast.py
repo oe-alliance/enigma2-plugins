@@ -6,6 +6,7 @@ import re
 
 ##################################################
 
+
 def encodeUrl(url):
 	url = url.replace("&amp;", "&")
 	url = url.replace("&lt;", "<")
@@ -19,6 +20,7 @@ def encodeUrl(url):
 	return url
 
 ##################################################
+
 
 class Podcast(Plugin):
 	def __init__(self, name, icon, url):

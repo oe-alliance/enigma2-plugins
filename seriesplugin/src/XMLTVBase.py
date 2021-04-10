@@ -55,7 +55,6 @@ class XMLTVBase(object):
 				self.xmltvimportversion = etree.getroot().get("version", "1")
 				log.debug("readXMLTVConfig: XMLTVImport Version " + self.xmltvimportversion)
 		
-	
 	def writeXMLTVConfig(self):
 		
 		if int(self.epgimportversion[0]) >= 5 and int(self.xmltvimportversion[0]) >= 5:

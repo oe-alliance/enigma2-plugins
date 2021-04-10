@@ -42,6 +42,7 @@ basetimerAdd = None
 basefinishedAdd = None
 baseonCreate = None
 
+
 def Partnerbox_EPGSelectionInit():
 	global baseEPGSelection__init__, baseEPGSelection_zapTo, baseonSelectionChanged, basetimerAdd, basefinishedAdd, baseonCreate
 	if baseEPGSelection__init__ is None:
@@ -76,6 +77,7 @@ def Partnerbox_EPGSelectionInit():
 	EPGSelection.remoteTimerMenu = remoteTimerMenu
 	EPGSelection.PartnerboxInit = PartnerboxInit
 
+
 def Partnerbox_EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None, parent=None, EPGtype=None, StartBouquet=None, StartRef=None, bouquets=None):
 	#check if alternatives are defined
 	#if isinstance(service, eServiceReference):
@@ -83,6 +85,7 @@ def Partnerbox_EPGSelection__init__(self, session, service, zapFunc=None, eventi
 	#		service = eServiceCenter.getInstance().list(eServiceReference("%s" %(service.toString()))).getContent("S")[0]
 	baseEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB, EPGtype, StartBouquet, StartRef, bouquets)
 	self.PartnerboxInit(True)
+
 
 def PartnerboxInit(self, filterRef):
 	self.filterRef = filterRef
@@ -97,6 +100,7 @@ def PartnerboxInit(self, filterRef):
 		except:
 			self.partnerboxentry = None
 		self.setRedbutton()
+
 
 def setRedbutton(self):
 	if not hasattr(self, 'partnerboxentry'):
@@ -150,6 +154,7 @@ def Partnerbox_EPGSelection_zapTo(self):
 	except: 
 		pass
 
+
 def RedCallback(self, ret):
 	ret = ret and ret[1]
 	if ret:
@@ -178,6 +183,7 @@ def RedCallback(self, ret):
 		else:
 			pass
 
+
 def NewPartnerBoxSelected(self, session, what, partnerboxentry=None):
 	try:
 		if partnerboxentry is not None:
@@ -203,6 +209,7 @@ def NewPartnerBoxSelected(self, session, what, partnerboxentry=None):
 	except:
 		pass
 
+
 def Partnerbox_onSelectionChanged(self):
 	try:
 		baseonSelectionChanged(self)
@@ -210,6 +217,7 @@ def Partnerbox_onSelectionChanged(self):
 		self.setRedbutton()
 	except:
 		pass
+
 
 def Partnerbox_timerAdd(self):
 	try:
@@ -249,6 +257,7 @@ def Partnerbox_timerAdd(self):
 						action = _("Add internal timer")
 					menu = [(_("Edit remote timer"), "remote"), (action, "internal")]
 					buttons = ["red", "green"]
+
 					def timerAction(choice):
 						if choice is not None:
 							if choice[1] == "remote":
@@ -261,11 +270,13 @@ def Partnerbox_timerAdd(self):
 	except:
 		pass
 
+
 def remoteTimerMenu(self, timerentry):
 	try:
 		menu = [(_("Delete timer"), "delete"), (_("Timer Overview"), "timerlist")]
 		buttons = ["red", "green"]
 		title_text = timerentry.repeated and _("Attention, this is repeated timer!\n") or ""
+
 		def remoteTimerAction(choice):
 			if choice is not None:
 				if choice[1] == "delete":
@@ -278,6 +289,7 @@ def remoteTimerMenu(self, timerentry):
 	except:
 		pass
 
+
 def Partnerbox_finishedAdd(self, answer):
 	try:
 		basefinishedAdd(self, answer)
@@ -285,6 +297,7 @@ def Partnerbox_finishedAdd(self, answer):
 		self.setRedbutton()
 	except:
 		pass
+
 
 def Partnerbox_onCreate(self):
 	try:
@@ -294,6 +307,7 @@ def Partnerbox_onCreate(self):
 		self.GetPartnerboxTimerlist()
 	except:
 		pass
+
 
 def GetPartnerboxTimerlist(self):
 	try:
@@ -308,6 +322,7 @@ def GetPartnerboxTimerlist(self):
 			sendPartnerBoxWebCommand(sCommand, None, 3, "root", self.partnerboxentry.password.value).addCallback(self.GetPartnerboxTimerlistCallback).addErrback(GetPartnerboxTimerlistCallbackError)
 	except:
 		pass
+
 
 def GetPartnerboxTimerlistCallback(self, sxml=None):
 	try:
@@ -326,12 +341,14 @@ def GetPartnerboxTimerlistCallback(self, sxml=None):
 	except:
 		pass
 
+
 def GetPartnerboxTimerlistCallbackError(self, error=None):
 	try:
 		if error is not None:
 			print(str(error.getErrorMessage()))
 	except:
 		pass
+
 
 def CheckRemoteTimer(self):
 	try:
@@ -349,6 +366,7 @@ def CheckRemoteTimer(self):
 	except:
 		pass
 
+
 def DeleteTimerConfirmed(self, timerentry, answer):
 	try:
 		if answer:
@@ -364,6 +382,7 @@ def DeleteTimerConfirmed(self, timerentry, answer):
 	except:
 		pass
 
+
 def DeleteTimerCallback(self, callback=None):
 	try:
 		curService = None
@@ -374,6 +393,7 @@ def DeleteTimerCallback(self, callback=None):
 		self["list"].l.invalidate()
 	except:
 		pass
+
 
 def DeleteTimerCallbackError(self, error=None):
 	try:

@@ -45,12 +45,14 @@ def startIndependent():
 	instance = SeriesPluginIndependent()
 	return instance
 
+
 def stopIndependent():
 	#Rename to closeInstance
 	global instance
 	if instance:
 		instance.stop()
 		instance = None
+
 
 def runIndependent():
 	try:

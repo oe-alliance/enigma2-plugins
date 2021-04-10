@@ -49,6 +49,7 @@ our_print = lambda *args, **kwargs: print("[EcasaGui]", *args, **kwargs)
 
 AUTHENTICATION_ERROR_ID = "EcasaAuthenticationError"
 
+
 class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 	"""Base class for so-called "picture walls"."""
 	PICS_PER_PAGE = 15
@@ -82,6 +83,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		<!-- TODO: find some better picture -->
 		<widget name="highlight" position="30,142" size="90,5"/>
 		</screen>"""
+
 	def __init__(self, session, api=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
@@ -267,6 +269,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 			highlighted = 0
 		our_print("right. before:", self.highlighted, ", after:", highlighted)
 		self.highlighted = highlighted
+
 	def nextPage(self):
 		our_print("nextPage")
 		if not self.pictures:
@@ -280,6 +283,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 			if offset + self.highlighted > Len:
 				self.highlighted = Len - offset - 1
 		self.setup()
+
 	def prevPage(self):
 		our_print("prevPage")
 		if not self.pictures:
@@ -333,14 +337,17 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 			# TODO: indicate in gui
 		else:
 			self.session.open(EcasaPicture, photo, api=self.api, prevFunc=self.prevFunc, nextFunc=self.nextFunc)
+
 	def albums(self):
 		self.session.open(EcasaAlbumview, self.api, user=config.plugins.ecasa.user.value)
+
 	def search(self):
 		self.session.openWithCallback(
 			self.searchCallback,
 			NTIVirtualKeyBoard,
 			title=_("Enter text to search for")
 		)
+
 	def searchCallback(self, text=None):
 		if text:
 			# Maintain history
@@ -435,8 +442,10 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		)
 		self["waitingtext"].hide()
 
+
 class EcasaOverview(EcasaPictureWall):
 	"""Overview and supposed entry point of ecasa. Shows featured pictures on the "EcasaPictureWall"."""
+
 	def __init__(self, session):
 		EcasaPictureWall.__init__(self, session)
 		self.skinName = ["EcasaOverview", "EcasaPictureWall"]
@@ -471,8 +480,10 @@ class EcasaOverview(EcasaPictureWall):
 		EcasaPictureWall.layoutFinished(self)
 		self.setTitle(_("eCasa: %s") % (_("Featured Photos")))
 
+
 class EcasaFeedview(EcasaPictureWall):
 	"""Display a nonspecific feed."""
+
 	def __init__(self, session, thread, api=None, title=None):
 		EcasaPictureWall.__init__(self, session, api=api)
 		self.skinName = ["EcasaFeedview", "EcasaPictureWall"]
@@ -487,6 +498,7 @@ class EcasaFeedview(EcasaPictureWall):
 
 	def albums(self):
 		pass
+
 
 class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 	"""Displays albums."""
@@ -510,6 +522,7 @@ class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 			</convert>
 		</widget>
 	</screen>"""
+
 	def __init__(self, session, api, user='default'):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
@@ -572,6 +585,7 @@ class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 			NTIVirtualKeyBoard,
 			title=_("Enter username")
 		)
+
 	def searchCallback(self, text=None):
 		if text:
 			# Maintain history
@@ -607,10 +621,12 @@ class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 		if ret:
 			self.searchCallback(ret[1])
 
+
 class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 	"""Display a single picture and its metadata."""
 	PAGE_PICTURE = 0
 	PAGE_INFO = 1
+
 	def __init__(self, session, photo, api=None, prevFunc=None, nextFunc=None):
 		size_w = getDesktop(0).size().width()
 		size_h = getDesktop(0).size().height()
@@ -811,6 +827,7 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		if self.prevFunc:
 			self.reloadData(self.prevFunc())
 		self['pixmap'].instance.setPixmap(None)
+
 	def next(self):
 		if self.nextFunc:
 			self.reloadData(self.nextFunc())

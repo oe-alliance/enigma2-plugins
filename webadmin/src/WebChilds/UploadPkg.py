@@ -11,12 +11,14 @@ from twisted.web import resource, http
 
 from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
 
+
 def mbasename(fname):
 	l = fname.split('/')
 	win = l[len(l) - 1]
 	l2 = win.split('\\')
 	return l2[len(l2) - 1]
 	
+
 class UploadPkgResource(resource.Resource):
 	res = """
 	<?xml version="1.0" encoding="UTF-8"?>

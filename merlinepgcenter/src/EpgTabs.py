@@ -74,6 +74,8 @@ class EpgBaseTab():
 		pass
 		
 # epg now tab
+
+
 class EpgNowTab(EpgBaseTab):
 	def __init__(self, tabList):
 		self.tabList = tabList
@@ -98,6 +100,8 @@ class EpgNowTab(EpgBaseTab):
 		self.tabList.l.invalidate()
 		
 # epg next tab
+
+
 class EpgNextTab(EpgBaseTab):
 	def __init__(self, tabList):
 		self.tabList = tabList
@@ -122,6 +126,8 @@ class EpgNextTab(EpgBaseTab):
 		self.tabList.l.invalidate()
 		
 # epg single tab
+
+
 class EpgSingleTab(EpgBaseTab):
 
 	SORT_MODE_TIME = 0
@@ -276,6 +282,8 @@ class EpgSingleTab(EpgBaseTab):
 			index += 1
 			
 # epg prime time tab
+
+
 class EpgPrimeTimeTab(EpgBaseTab):
 	def __init__(self, tabList):
 		self.tabList = tabList
@@ -300,12 +308,16 @@ class EpgPrimeTimeTab(EpgBaseTab):
 		self.tabList.l.invalidate()
 		
 # epg timer list tab
+
+
 class EpgTimerListTab(EpgBaseTab):
 	def __init__(self, tabList):
 		self.tabList = tabList
 		EpgBaseTab.__init__(self)
 		
 # epg search history tab
+
+
 class EpgSearchHistoryTab(EpgBaseTab):
 	def __init__(self, tabList):
 		self.tabList = tabList
@@ -315,6 +327,8 @@ class EpgSearchHistoryTab(EpgBaseTab):
 		self.tabList.show()
 		
 # epg search manual tab
+
+
 class EpgSearchManualTab(EpgBaseTab):
 	def __init__(self, tabList, searchLabel):
 		self.tabList = tabList
@@ -345,6 +359,8 @@ class EpgSearchManualTab(EpgBaseTab):
 			history.insert(0, searchString)
 			
 # epg search result tab
+
+
 class EpgSearchResultTab(EpgBaseTab):
 	def __init__(self, tabList):
 		self.tabList = tabList

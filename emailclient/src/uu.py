@@ -40,8 +40,10 @@ import six
 
 __all__ = ["Error", "encode", "decode"]
 
+
 class Error(Exception):
     pass
+
 
 def encode(in_file, out_file, name=None, mode=None):
     """Uuencode file"""
@@ -149,6 +151,7 @@ def decode(in_file, out_file=None, mode=None, quiet=0):
     if opened:
         out_file.close()
 
+
 def test():
     """uuencode/uudecode main program"""
 
@@ -185,6 +188,7 @@ def test():
                 print(sys.argv[0], ': cannot do -t from stdin')
                 sys.exit(1)
         encode(input, output)
+
 
 if __name__ == '__main__':
     test()

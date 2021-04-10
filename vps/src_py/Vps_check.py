@@ -20,6 +20,7 @@ import six
 check_pdc_interval_available = 3600 * 24 * 30 * 12
 check_pdc_interval_unavailable = 3600 * 24 * 30 * 2
 
+
 class VPS_check_PDC:
 	def __init__(self):
 		self.checked_services = {}
@@ -104,6 +105,7 @@ class VPS_check_PDC:
 	def recheck(self, has_pdc, last_check):
 		return not ((has_pdc == 1 and last_check > (time() - check_pdc_interval_available)) or (has_pdc == 0 and last_check > (time() - check_pdc_interval_unavailable)))
 
+
 Check_PDC = VPS_check_PDC()
 
 
@@ -145,7 +147,6 @@ class VPS_check(Screen):
 		self.has_pdc, self.last_check, self.default_vps = Check_PDC.check_service(self.service)
 
 		self.check.start(50, True)
-
 
 	def doCheck(self):
 		if not Check_PDC.recheck(self.has_pdc, self.last_check):
@@ -281,6 +282,7 @@ class VPS_check_PDC_Screen(VPS_check):
 			Check_PDC.setServicePDC(self.service, self.has_pdc, 1) # nicht mehr nachfragen
 
 		self.close()
+
 
 class VPS_check_on_instanttimer(VPS_check):
 	def __init__(self, session, service, timer):

@@ -6,6 +6,7 @@ from Screens.MessageBox import MessageBox
 #DO NOT REMOVE THE FOLLOWING IMPORT, it ensures that config.sleeptimer.defaulttime is there
 import Screens.SleepTimerEdit
 
+
 class SleepTimer(Source):
 	def __init__(self, session):
 		Source.__init__(self)

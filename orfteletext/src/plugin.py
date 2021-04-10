@@ -18,7 +18,6 @@
 #######################################################################
 
 
-
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
@@ -33,22 +32,18 @@ from os import system as os_system
 from Components.config import config, ConfigSubsection, ConfigText, ConfigInteger
 
 
-
 config.plugins.ORFteletext = ConfigSubsection()
 config.plugins.ORFteletext.startHZ = ConfigInteger(default=100)
 config.plugins.ORFteletext.startNZ = ConfigInteger(default=1)
 config.plugins.ORFteletext.adr = ConfigText(default="ORF")
 
 
-
 def Plugins(**kwargs):
 	return [PluginDescriptor(name="ORF-Teletext", description=_("ORF-Teletext"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main), ]
 
 
-
 def main(session, **kwargs):
 	session.open(ORFteletextScreen)
-
 
 
 class ORFteletextScreen(Screen):
@@ -88,6 +83,7 @@ class ORFteletextScreen(Screen):
 				<eLabel font="Regular;20" foregroundColor="#00ffc000" position="504,480" size="120,26" transparent="1" text="SPORT"/>
 				<eLabel font="Regular;20" foregroundColor="#00879ce1" position="504,510" size="120,26" transparent="1" text="INDEX"/>
 			</screen>"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self["seite"] = Label("100")
@@ -228,6 +224,7 @@ class ORFteletextScreen(Screen):
 			self.seite = 150
 		self.subseite = 1
 		self.lade2(self.seite, self.subseite)
+
 	def gelb(self):
 		self.seite = 200
 		self.subseite = 1
@@ -241,7 +238,6 @@ class ORFteletextScreen(Screen):
 		self.subseite = 1
 		self.lade2(self.seite, self.subseite)
 			
-
 	def Info(self):
 		if config.plugins.ORFteletext.adr.value == "ORF":
 			config.plugins.ORFteletext.adr.value = "SAT1"

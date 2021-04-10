@@ -34,10 +34,12 @@ class E2EPGListAllData:
 		self.eventdescription = eventdescription
 		self.eventdescriptionextended = eventdescriptionextended
 
+
 class E2ServiceList:
 	def __init__(self, servicereference="", servicename=""):
 		self.servicereference = servicereference
 		self.servicename = servicename
+
 
 class Services(Source):
 	def __init__(self, session):

@@ -71,6 +71,7 @@ except ImportError as ie:
 else:
 	hasSeriesPlugin = True
 
+
 class SimpleBouquetSelection(SimpleChannelSelection):
 	def __init__(self, session, title):
 		SimpleChannelSelection.__init__(self, session, title)
@@ -84,6 +85,7 @@ class SimpleBouquetSelection(SimpleChannelSelection):
 			# We return the currently active path here
 			# Asking the user if this is what he wants might be better though
 			self.close(self.servicePath[-1])
+
 
 class AutoTimerChannelSelection(SimpleChannelSelection):
 	def __init__(self, session, autotimer):
@@ -106,6 +108,7 @@ class AutoTimerChannelSelection(SimpleChannelSelection):
 				AutoTimerEPGSelection,
 				ref
 			)
+
 
 class AutoTimerEPGSelection(EPGSelection):
 	def __init__(self, *args):
@@ -130,8 +133,10 @@ class AutoTimerEPGSelection(EPGSelection):
 	def onSelectionChanged(self):
 		pass
 
+
 class AutoTimerEditorBase:
 	""" Base Class for all Editors """
+
 	def __init__(self, timer, editingDefaults=False):
 		# Keep Timer
 		self.timer = timer
@@ -398,9 +403,12 @@ class AutoTimerEditorBase:
 				self.timerentry_tags
 			)
 
+
 HD = False
 if getDesktop(0).size().width() >= 1280:
 	HD = True
+
+
 class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 	"""Edit AutoTimer"""
 	if HD:
@@ -940,6 +948,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		# Close
 		self.close(self.timer)
 
+
 class AutoTimerEditorSilent(AutoTimerEditor):
 	def __init__(self, session, timer, editingDefaults=False):
 		AutoTimerEditor.__init__(self, session, timer, editingDefaults)
@@ -1072,6 +1081,7 @@ class AutoTimerEditorSilent(AutoTimerEditor):
 	def retval(self):
 		return self.returnVal
 
+
 class AutoTimerFilterEditor(Screen, ConfigListScreen):
 	"""Edit AutoTimer Filter"""
 
@@ -1142,7 +1152,6 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 
 	def setCustomTitle(self):
 		self.setTitle(_("Edit AutoTimer filters"))
-
 
 	def changed(self):
 		for x in self.onChangedEntry:
@@ -1293,6 +1302,7 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 			self.excludes,
 			self.includes
 		))
+
 
 class AutoTimerServiceEditor(Screen, ConfigListScreen):
 	"""Edit allowed Services of a AutoTimer"""
@@ -1464,6 +1474,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 			self.services
 		))
 
+
 def addAutotimerFromSearchString(session, match):
 	from .AutoTimerComponent import preferredAutoTimerComponent
 	from .AutoTimerImporter import AutoTimerImporter
@@ -1491,6 +1502,7 @@ def addAutotimerFromSearchString(session, match):
 		None,		# Proposed dirname, can we get anything useful here?
 		[]			# Proposed tags
 	)
+
 
 def addAutotimerFromEvent(session, evt=None, service=None):
 	from .AutoTimerComponent import preferredAutoTimerComponent
@@ -1544,6 +1556,7 @@ def addAutotimerFromEvent(session, evt=None, service=None):
 		[]			# Proposed tags
 	)
 
+
 def addAutotimerFromTimer(session, timer):
 	from .AutoTimerComponent import preferredAutoTimerComponent
 	from .AutoTimerImporter import AutoTimerImporter
@@ -1579,6 +1592,7 @@ def addAutotimerFromTimer(session, timer):
 		None,		# Proposed dirname
 		[]			# Proposed tags
 	)
+
 
 def addAutotimerFromService(session, service=None):
 	from .AutoTimerComponent import preferredAutoTimerComponent
@@ -1639,6 +1653,7 @@ def addAutotimerFromService(session, service=None):
 		tags		# Proposed tags
 	)
 
+
 def editAutotimerFromTimer(session, timer):
 	from .plugin import autotimer
 
@@ -1649,6 +1664,7 @@ def editAutotimerFromTimer(session, timer):
 			session.openWithCallback(editorCallback, AutoTimerEditor, search)
 			break
 
+
 def importerCallback(ret):
 	if ret:
 		ret, session = ret
@@ -1658,6 +1674,7 @@ def importerCallback(ret):
 			AutoTimerEditor,
 			ret
 		)
+
 
 def addAutotimerFromEventSilent(session, evt=None, service=None):
 	from .plugin import autotimer
@@ -1709,6 +1726,7 @@ def addAutotimerFromEventSilent(session, evt=None, service=None):
 	AutoTimerEditorSilentDialog = session.instantiateDialog(AutoTimerEditorSilent, newTimer)
 	retval = AutoTimerEditorSilentDialog.retval()
 	session.deleteDialogWithCallback(editorCallback, AutoTimerEditorSilentDialog, retval)
+
 
 def editorCallback(ret):
 	if ret:

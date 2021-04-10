@@ -11,26 +11,32 @@ from copy import copy
 from .locales import get_locale
 from .tmdb_auth import get_session
 
+
 class NameRepr(object):
     """Mixin for __repr__ methods using 'name' attribute."""
+
     def __repr__(self):
         return u"<{0.__class__.__name__} '{0.name}'>"\
                                 .format(self).encode('utf-8')
+
 
 class SearchRepr(object):
     """
     Mixin for __repr__ methods for classes with '_name' and
     '_request' attributes.
     """
+
     def __repr__(self):
         name = self._name if self._name else self._request._kwargs['query']
         return u"<Search Results: {0}>".format(name).encode('utf-8')
+
 
 class Poller(object):
     """
     Wrapper for an optional callable to populate an Element derived class
     with raw data, or data from a Request.
     """
+
     def __init__(self, func, lookup, inst=None):
         self.func = func
         self.lookup = lookup
@@ -101,11 +107,13 @@ class Poller(object):
                 unfilled = True
         return unfilled
 
+
 class Data(object):
     """
     Basic response definition class
     This maps to a single key in a JSON dictionary received from the API
     """
+
     def __init__(self, field, initarg=None, handler=None, poller=None,
                  raw=True, default=u'', lang=False):
         """
@@ -163,14 +171,17 @@ class Data(object):
         else:
             self.handler = lambda x: handler(x)
 
+
 class Datapoint(Data):
     pass
+
 
 class Datalist(Data):
     """
     Response definition class for list data
     This maps to a key in a JSON dictionary storing a list of data
     """
+
     def __init__(self, field, handler=None, poller=None, sort=None, raw=True):
         """
         This defines how the dictionary value is to be processed by the poller
@@ -194,6 +205,7 @@ class Datalist(Data):
         """
         super(Datalist, self).__init__(field, None, handler, poller, raw)
         self.sort = sort
+
     def __set__(self, inst, value):
         data = []
         if value:
@@ -210,11 +222,13 @@ class Datalist(Data):
                     data.sort(key=lambda x: getattr(x, self.sort))
         inst._data[self.field] = data
 
+
 class Datadict(Data):
     """
     Response definition class for dictionary data
     This maps to a key in a JSON dictionary storing a dictionary of data
     """
+
     def __init__(self, field, handler=None, poller=None, raw=True,
                        key=None, attr=None):
         """
@@ -249,6 +263,7 @@ class Datadict(Data):
         else:
             raise TypeError("Datadict requires `key` or `attr` be defined " +
                             "for populating the dictionary")
+
     def __set__(self, inst, value):
         data = {}
         if value:
@@ -259,6 +274,7 @@ class Datadict(Data):
                     val._session = inst._session
                 data[self.getkey(val)] = val
         inst._data[self.field] = data
+
 
 class ElementType(type):
     """
@@ -360,6 +376,7 @@ class ElementType(type):
 
         obj.__init__()
         return obj
+
 
 class Element(object):
     __metaclass__ = ElementType

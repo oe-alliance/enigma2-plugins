@@ -86,6 +86,7 @@ if debug:
 
 ##############################################################################
 
+
 class ShowClockSetup(Screen, ConfigListScreen): # config
 
 	skin = """
@@ -222,6 +223,7 @@ class ShowClockSetup(Screen, ConfigListScreen): # config
 
 ##############################################################################
 
+
 class ShowClockPositioner(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)           
@@ -273,6 +275,7 @@ class ShowClockPositioner(Screen):
 		
 ##############################################################################
 
+
 class ShowClock(Screen):
 
 	def __init__(self, session):
@@ -287,6 +290,7 @@ class ShowClock(Screen):
 			)) # ensure clock visabilty even if resolution has changed     
 
 ##############################################################################
+
 
 class ShowClockMain():
 	def __init__(self):
@@ -313,9 +317,11 @@ class ShowClockMain():
 				self.timer.startLongTimer(config.plugins.ShowClock.showTimeout.value)
 			showClock.dialog.show()
 		
+
 showClock = ShowClockMain()
 
 ##############################################################################
+
 
 def clockSkin():
 	if width < 1280:
@@ -368,10 +374,12 @@ def clockSkin():
 	
 ##############################################################################
 
+
 def sessionstart(reason, **kwargs):
 	if reason == 0:
 		showClock.gotSession(kwargs["session"])
 	
+
 def setup(session, **kwargs):
 	try:	
 	 	session.open(ShowClockSetup)
@@ -379,6 +387,7 @@ def setup(session, **kwargs):
 		print(pluginPrintname, "Pluginexecution failed")
 
 ##############################################################################
+
 
 def Plugins(**kwargs):
 	

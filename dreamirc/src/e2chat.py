@@ -30,8 +30,10 @@ from .dreamIRCTools import *
 #from myScrollLabel import *
 #from dreamIRCMainMenu import *
 
+
 class ContactsList:
     """A GUI object that displays a contacts list"""
+
     def __init__(self, chatui):
         """
         @param chatui: ???
@@ -86,6 +88,7 @@ class ContactsList:
 
 class Conversation:
     """A GUI window of a conversation with a specific person"""
+
     def __init__(self, person, chatui):
         """
         @type person: L{Person<interfaces.IPerson>}
@@ -149,8 +152,10 @@ class Conversation:
         """
         self.pipe.add("-!- %s " % (message))
 
+
 class GroupConversation:
     """A conversation with a group of people."""
+
     def __init__(self, group, chatui):
         """
         @type group: L{Group<interfaces.IGroup>}
@@ -258,7 +263,6 @@ class GroupConversation:
         self.pipe.add("-!- %s left %s" % (member, self.group.name))
         self.refreshMemberList()
         
-        
     def refreshMemberList(self):
         self.pipe.clearBuddyList()
         self.members.sort(lambda x, y: cmp(x.lower(), y.lower()))
@@ -268,8 +272,10 @@ class GroupConversation:
         print("Buddylist of #%s : \n%s" % (self.group.name, self.pipe.showBuddyList()))
         self.pipe.updateBuddyWindow()
         
+
 class ChatUI:
     """A GUI chat client"""
+
     def __init__(self):
         self.conversations = {}      # cache of all direct windows
         self.groupConversations = {} # cache of all group windows
@@ -322,7 +328,6 @@ class ChatUI:
         """
         self.pipe.debug("contactlist = %s" % self.contactsList)
         return self.contactsList
-
 
     def getConversation(self, person, Class=Conversation, stayHidden=0):
         """For the given person object, returns the conversation window

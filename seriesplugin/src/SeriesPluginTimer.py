@@ -42,6 +42,8 @@ TAG = "SeriesPlugin"
 
 #######################################################
 # Label timer
+
+
 class SeriesPluginTimer(object):
 
 	data = []
@@ -91,7 +93,6 @@ class SeriesPluginTimer(object):
 			timer.log(606, "[SeriesPlugin]" + " " + msg)
 			return
 		
-		
 		event = None
 		epgcache = eEPGCache.getInstance()
 		
@@ -123,7 +124,6 @@ class SeriesPluginTimer(object):
 				log.debug("We don't know the exact margins, we will assume the E2 default margins")
 				begin = timer.begin + (config.recording.margin_before.value * 60)
 				end = timer.end - (config.recording.margin_after.value * 60)
-		
 		
 		timer.log(600, "[SeriesPlugin]" + " " + _("Try to find infos for %s" % (timer.name)))
 		

@@ -30,10 +30,12 @@ from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Screens.Screen import Screen
 
+
 def getColorSpace():
     mode = commands.getoutput('cat /proc/stb/video/hdmi_colorspace')
     print("[VideoColorSpace] current hdmi_colorspace:", mode)
     return mode
+
 
 def setColorSpace(mode):
     print("[VideoColorSpace] set hdmi_colorspace:", mode)
@@ -42,6 +44,7 @@ def setColorSpace(mode):
         print("[VideoColorSpace] error setting hdmi_colorspace")
         getColorSpace()
 
+
 def initializeConfig():
     modes = commands.getoutput('cat /proc/stb/video/hdmi_colorspace_choices').split()
     config.VideoColorSpace = ConfigSubsection()
@@ -49,6 +52,7 @@ def initializeConfig():
     value = config.VideoColorSpace.color_space.value
     if value != getColorSpace() and value != "None":
         setColorSpace(value)
+
 
 class VideoColorSpace(Screen, ConfigListScreen):
     skin = """

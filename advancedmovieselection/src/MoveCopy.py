@@ -32,6 +32,7 @@ from enigma import eTimer
 import os
 import time
 
+
 def openDialog(job, session):
     error = job.getError()
     # abort all if we have no session
@@ -52,6 +53,7 @@ def openDialog(job, session):
         text += _("Error") + ": " + str(error) + "\r\n"
         session.open(MessageBox, text, MessageBox.TYPE_ERROR)
 
+
 class MoveCopyNotifier():
     def __init__(self):
         self.timer = eTimer()
@@ -69,11 +71,13 @@ class MoveCopyNotifier():
         self.session = session
         self.timer.start(10000, False)
 
+
 moveCopyNotifier = MoveCopyNotifier()
 
 from Components.GUIComponent import GUIComponent
 from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryProgress
+
 
 class ProgressList(GUIComponent):
     def __init__(self):
@@ -230,12 +234,14 @@ class ProgressList(GUIComponent):
     def moveDown(self):
         self.instance.moveSelection(self.instance.moveDown)
 
+
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from enigma import eTimer
 from Components.ActionMap import HelpableActionMap
 from Components.Button import Button
 from .Source.Globals import SkinResolutionHelper
+
 
 class MoveCopyProgress(Screen, HelpableScreen, SkinResolutionHelper):
     def __init__(self, session):
@@ -325,6 +331,7 @@ class MoveCopyProgress(Screen, HelpableScreen, SkinResolutionHelper):
             self.setTitle(app_info)
         else:
             self.setTitle(_("Move/Copy progress"))
+
 
 class MovieMove(ChoiceBox):
     def __init__(self, session, csel, service):

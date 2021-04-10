@@ -69,6 +69,7 @@ class IAccount(Interface):
         @returntype: L{Person<IPerson>}
         """
 
+
 class IClient(Interface):
     """
     @ivar account: The Account I am a Client for.
@@ -205,6 +206,7 @@ class IConversation(Interface):
         """
         @param person: XXX Shouldn't this always be Conversation.person?
         """
+
 
 class IGroupConversation(Interface):
     def show():

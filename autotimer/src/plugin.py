@@ -32,6 +32,8 @@ except Exception as e:
 #pragma mark -
 
 # Autostart
+
+
 def autostart(reason, **kwargs):
 	global autopoller
 
@@ -62,6 +64,8 @@ def autostart(reason, **kwargs):
 			autotimer.writeXml()
 
 # Webgui
+
+
 def sessionstart(reason, **kwargs):
 	if reason == 0 and "session" in kwargs:
 		try:
@@ -108,6 +112,8 @@ def sessionstart(reason, **kwargs):
 			addExternalChild(("autotimereditor", root, "AutoTimer", "1", True))
 
 # Mainfunction
+
+
 def main(session, **kwargs):
 	global autopoller
 
@@ -133,6 +139,7 @@ def main(session, **kwargs):
 		autotimer
 	)
 
+
 def editCallback(session):
 	global autopoller
 
@@ -157,11 +164,15 @@ def editCallback(session):
 		autopoller = None
 
 # Movielist
+
+
 def movielist(session, service, **kwargs):
 	from .AutoTimerEditor import addAutotimerFromService
 	addAutotimerFromService(session, service)
 
 # Event Info
+
+
 def eventinfo(session, servicelist, **kwargs):
 	from .AutoTimerEditor import AutoTimerEPGSelection
 	ref = session.nav.getCurrentlyPlayingServiceReference()
@@ -169,8 +180,11 @@ def eventinfo(session, servicelist, **kwargs):
 
 # XXX: we need this helper function to identify the descriptor
 # Extensions menu
+
+
 def extensionsmenu(session, **kwargs):
 	main(session, **kwargs)
+
 
 def housekeepingExtensionsmenu(el):
 	if el.value:
@@ -181,6 +195,7 @@ def housekeepingExtensionsmenu(el):
 		except ValueError as ve:
 			print("[AutoTimer] housekeepingExtensionsmenu got confused, tried to remove non-existant plugin entry... ignoring.")
 
+
 def timezoneChanged(self):
 	global autopoller
 	global autotimer
@@ -189,6 +204,7 @@ def timezoneChanged(self):
 		autopoller.stop()
 		autotimer.parseEPG(autoPoll=True)
 		autopoller.start()
+
 
 try:
 	config.timezone.val.addNotifier(timezoneChanged, initial_call=False, immediate_feedback=False)
@@ -199,6 +215,7 @@ config.plugins.autotimer.show_in_extensionsmenu.addNotifier(housekeepingExtensio
 extDescriptor = PluginDescriptor(name="AutoTimer", description=_("Edit Timers and scan for new Events"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=extensionsmenu, needsRestart=False)
 # TRANSLATORS: description of AutoTimer in PluginBrowser
 pluginlist = PluginDescriptor(name="AutoTimer", description=_("Edit Timers and scan for new Events"), where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main, needsRestart=False)
+
 
 def Plugins(**kwargs):
 	l = [
@@ -215,6 +232,7 @@ def Plugins(**kwargs):
 	if config.plugins.autotimer.show_in_plugins.value:
 		l.append(pluginlist)
 	return l
+
 
 def timermenu(menuid):
 	if menuid == "timermenu":

@@ -8,13 +8,16 @@ from twisted.mail import imap4
 # defer.setDebugging(True)
 from . import debug #@UnresolvedImport # pylint: disable-msg=F0401
 
+
 class SimpleIMAP4Client(imap4.IMAP4Client):
 	greetDeferred = None
+
 	def serverGreeting(self, caps):
 		debug("[SimpleIMAP4Client] serverGreeting: %s" % caps)
 		self.serverCapabilities = caps
 		if self.greetDeferred is not None:
 			self.greetDeferred(self)
+
 
 class SimpleIMAP4ClientFactory(protocol.ReconnectingClientFactory):
 	
@@ -48,6 +51,7 @@ class SimpleIMAP4ClientFactory(protocol.ReconnectingClientFactory):
 		# debug("[SimpleIMAP4ClientFactory] clientConnectionLost: %s" %reason.getErrorMessage())
 		self.e2session.onConnectionLost(reason)
 		protocol.ReconnectingClientFactory.clientConnectionLost(self, connector, reason)
+
 
 def createFactory(e2session, username, hostname, port):
 	debug("createFactory: for %s@%s:%s" % (username, hostname, port))

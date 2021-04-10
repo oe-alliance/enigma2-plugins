@@ -25,6 +25,7 @@ of the version attribue.
 """
 CURRENT_CONFIG_VERSION = "7"
 
+
 def getValue(definitions, default):
 	# Initialize Output
 	ret = ""
@@ -41,6 +42,7 @@ def getValue(definitions, default):
 
 	# Return stripped output or (if empty) default
 	return ret.strip() or default
+
 
 def parseConfig(configuration, list, version=None, uniqueTimerId=0, defaultTimer=None):
 	try:
@@ -69,6 +71,7 @@ def parseConfig(configuration, list, version=None, uniqueTimerId=0, defaultTimer
 
 		if parseEntry(timer, baseTimer):
 			list.append(baseTimer)
+
 
 def parseEntry(element, baseTimer, defaults=False):
 	if not defaults:
@@ -269,6 +272,7 @@ def parseEntry(element, baseTimer, defaults=False):
 
 	return True
 
+
 def parseConfigOld(configuration, list, uniqueTimerId=0):
 	print("[AutoTimer] Trying to parse old config")
 
@@ -302,7 +306,6 @@ def parseConfigOld(configuration, list, uniqueTimerId=0):
 		else:
 			# Setting match to name
 			match = name
-
 
 		# See if Timer is ensabled (V2+)
 		enabled = timer.get("enabled")
@@ -521,6 +524,7 @@ def parseConfigOld(configuration, list, uniqueTimerId=0):
 				bouquets=bouquets,
 				tags=tags
 		))
+
 
 def buildConfig(defaultTimer, timers, webif=False):
 	# Generate List in RAM

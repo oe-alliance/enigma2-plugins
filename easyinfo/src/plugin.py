@@ -18,7 +18,6 @@
 #######################################################################
 
 
-
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -45,7 +44,6 @@ from enigma import eListboxPythonMultiContent, gFont, getDesktop, eTimer, eServi
 from time import localtime, time, mktime
 
 
-
 EINbaseInfoBarPlugins__init__ = None
 EINStartOnlyOneTime = False
 EINsession = None
@@ -59,7 +57,6 @@ elif sz_w == 1024:
 	SKINTYPE = 2
 else:
 	SKINTYPE = 1
-
 
 
 CHOICELIST = [("no", _("Disabled")),
@@ -103,10 +100,8 @@ config.plugins.EasyInfo.Primetime3 = ConfigClock(default=75600)
 config.plugins.EasyInfo.buttTV = ConfigSelection(default="easysel", choices=[("no", _("Disabled")), ("easysel", _("Easy-Selection")), ("easypg", _("Easy-PG"))])
 
 
-
 def Plugins(**kwargs):
 	return [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=EasyInfoAutostart)]
-
 
 
 def EasyInfoAutostart(reason, **kwargs):
@@ -120,7 +115,6 @@ def EasyInfoAutostart(reason, **kwargs):
 		InfoBarPlugins.info = info
 		if config.plugins.EasyInfo.buttTV.value != "no":
 			InfoBarPlugins.tvbut = tvbut
-
 
 
 def InfoBarPlugins__init__(self):
@@ -143,7 +137,6 @@ def InfoBarPlugins__init__(self):
 	EINbaseInfoBarPlugins__init__(self)
 
 
-
 def info(self):
 	if config.plugins.EasyInfo.EvInStart.value == "yes":
 		epglist = []
@@ -163,7 +156,6 @@ def info(self):
 			self.session.open(EasyInfo)
 	else:
 		self.session.open(EasyInfo)
-
 
 
 def tvbut(self):
@@ -194,7 +186,6 @@ def tvbut(self):
 			InfoBar_instance.dlg_stack.append(InfoBar_instance.session.open(EasyPG, IBservices, EINzapTo, None, EINchangeBouquetCB))
 
 
-
 def getPluginByName(sstr):
 	sret = " "
 	for xs in CHOICELIST:
@@ -202,7 +193,6 @@ def getPluginByName(sstr):
 			sret = xs[1]
 			break
 	return sret
-
 
 
 def EINPanelEntryComponent(key, text):
@@ -218,17 +208,16 @@ def EINPanelEntryComponent(key, text):
 	return res
 
 
-
 class EINPanelList(MenuList):
 	def __init__(self, list, selection=0, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setItemHeight(60)
 		self.selection = selection
+
 	def postWidgetCreate(self, instance):
 		MenuList.postWidgetCreate(self, instance)
 		self.moveToIndex(self.selection)
-
 
 
 class ConfigEasyInfo(ConfigListScreen, Screen):
@@ -238,6 +227,7 @@ class ConfigEasyInfo(ConfigListScreen, Screen):
 			<eLabel font="Regular;20" foregroundColor="#00ff4A3C" halign="center" position="20,385" size="140,26" text="Cancel"/>
 			<eLabel font="Regular;20" foregroundColor="#0056C856" halign="center" position="165,385" size="140,26" text="Save"/>
 		</screen>"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.setTitle(_("EasyInfo settings..."))
@@ -278,7 +268,6 @@ class ConfigEasyInfo(ConfigListScreen, Screen):
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close()
-
 
 
 class EasyInfo(Screen):
@@ -386,6 +375,7 @@ class EasyInfo(Screen):
 		EINiconspath = '/usr/lib/enigma2/python/Plugins/Extensions/EasyInfo/icons/'
 	else:
 		EINiconspath = '/usr/lib/enigma2/python/Plugins/Extensions/EasyInfo/'
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
@@ -512,7 +502,6 @@ class EasyInfo(Screen):
 		self.go()
 
 
-
 def EINchangeBouquetCB(direction, epg):
 	global EINposition
 	IBbouquets = InfoBar_instance.servicelist.getBouquetList()
@@ -529,7 +518,6 @@ def EINchangeBouquetCB(direction, epg):
 		epg.setServices(IBservices)
 
 
-
 def EINzapTo(NewService):
 	IBbouquets = InfoBar_instance.servicelist.getBouquetList()
 	NewBbouquet = IBbouquets[EINposition][1]
@@ -539,7 +527,6 @@ def EINzapTo(NewService):
 	InfoBar_instance.servicelist.enterPath(NewBbouquet)
 	InfoBar_instance.servicelist.setCurrentSelection(NewService)
 	InfoBar_instance.servicelist.zap()
-
 
 
 def EINcallbackFunc(answer):
@@ -676,7 +663,6 @@ def EINcallbackFunc(answer):
 		EINsession.open(MessageBox, text=_('This function is yet not available!'), type=MessageBox.TYPE_INFO)
 
 
-
 class EasyEvent(Screen, EventViewBase):
 	def __init__(self, session, Event, Ref, callback=None, singleEPGCB=None, multiEPGCB=None):
 		Screen.__init__(self, session)
@@ -752,7 +738,6 @@ class EasyEvent(Screen, EventViewBase):
 		self.close()
 
 
-
 class EvNewList(EPGList):
 	def __init__(self, type=EPG_TYPE_MULTI, selChangedCB=None, timer=None):
 		EPGList.__init__(self, type, selChangedCB, timer)
@@ -826,7 +811,6 @@ class EvNewList(EPGList):
 			index += 1
 		if x[1] != refstr:
 			self.instance.moveSelectionTo(0)
-
 
 
 class EasyPG(EPGSelection, Screen):
@@ -923,6 +907,7 @@ class EasyPG(EPGSelection, Screen):
 			<eLabel font="Regular;18" position="540,526" size="150,25" text="Next" transparent="1"/>
 		</screen>
 		"""
+
 	def __init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None):
 		Screen.__init__(self, session)
 		EPGSelection.__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB)
@@ -1054,7 +1039,6 @@ class EasyPG(EPGSelection, Screen):
 		self.GoFirst()
 
 
-
 class ESListNext(EPGList):
 	def __init__(self, type=EPG_TYPE_MULTI, selChangedCB=None, timer=None):
 		EPGList.__init__(self, type, selChangedCB, timer)
@@ -1124,7 +1108,6 @@ class ESListNext(EPGList):
 			self.instance.moveSelectionTo(0)
 
 
-
 class EasySelection(EPGSelection, Screen):
 	if SKINTYPE == 3:
 		skin = """
@@ -1150,6 +1133,7 @@ class EasySelection(EPGSelection, Screen):
 			<widget name="list" position="50,38" scrollbarMode="showOnDemand" size="620,500" transparent="1"/>
 		</screen>
 		"""
+
 	def __init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None):
 		Screen.__init__(self, session)
 		EPGSelection.__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB)

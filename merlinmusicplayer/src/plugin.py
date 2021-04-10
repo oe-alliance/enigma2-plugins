@@ -108,6 +108,7 @@ from threading import Thread, Lock
 
 DESKTOP_WIDTH = getDesktop(0).size().width()
 
+
 class ThreadQueue:
 	def __init__(self):
 		self.__list = []
@@ -126,8 +127,10 @@ class ThreadQueue:
 		lock.release()
 		return ret
 
+
 THREAD_WORKING = 1
 THREAD_FINISHED = 2
+
 
 class PathToDatabase(Thread):
 	def __init__(self):
@@ -240,7 +243,9 @@ class PathToDatabase(Thread):
 			self.__running = False
 			Thread.__init__(self)
 
+
 pathToDatabase = PathToDatabase()
+
 
 class iDreamAddToDatabase(Screen):
 	skin = """<screen name="iDreamAddToDatabase" position="center,center" size="560,320" title="Add music files to iDream database">
@@ -252,6 +257,7 @@ class iDreamAddToDatabase(Screen):
 			<widget render="Label" source="key_red" position="0,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_green" position="140,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
+
 	def __init__(self, session, initDir):
 		Screen.__init__(self, session)
 		self.setTitle(_("Add music files to iDream database"))
@@ -287,12 +293,14 @@ class iDreamAddToDatabase(Screen):
 	def __onClose(self):
 		pathToDatabase.MessagePump.recv_msg.get().remove(self.gotThreadMsg)	
 
+
 class myHTTPClientFactory(HTTPClientFactory):
 	def __init__(self, url, method='GET', postdata=None, headers=None,
 	agent="SHOUTcast", timeout=0, cookies=None,
 	followRedirect=1, lastModified=None, etag=None):
 		HTTPClientFactory.__init__(self, url, method=method, postdata=postdata,
 		headers=headers, agent=agent, timeout=timeout, cookies=cookies, followRedirect=followRedirect)
+
 
 def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
 	if hasattr(client, '_parse'):
@@ -312,10 +320,12 @@ def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
 	reactor.connectTCP(host, port, factory, timeout=timeout)
 	return factory.deferred
 
+
 class MethodArguments:
 	def __init__(self, method=None, arguments=None):
 		self.method = method
 		self.arguments = arguments
+
 
 class CacheList:
 	def __init__(self, cache=True, index=0, listview=[], headertext="", methodarguments=None):
@@ -324,6 +334,7 @@ class CacheList:
 		self.listview = listview
 		self.headertext = headertext
 		self.methodarguments = methodarguments
+
 
 class Item:
 	def __init__(self, text="", mode=0, id=-1, navigator=False, artistID=0, albumID=0, title="", artist="", filename="", bitrate=None, length="", genre="", track="", date="", album="", playlistID=0, genreID=0, songID=0, join=True, PTS=None):
@@ -361,6 +372,7 @@ class Item:
 		self.songID = songID
 		self.PTS = PTS
 
+
 def OpenDatabase():
 		connectstring = os_path.join(config.plugins.merlinmusicplayer.databasepath.value, "iDream.db")
 		db_exists = False
@@ -385,6 +397,7 @@ def OpenDatabase():
 				connection.execute('CREATE TABLE IF NOT EXISTS CurrentSongList (ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, song_id INTEGER, filename TEXT NOT NULL, title TEXT, artist TEXT, album TEXT, genre TEXT, bitrate TEXT, length TEXT, track TEXT, date TEXT, PTS INTEGER);')
 		return connection
 
+
 def getEncodedString(value):
 	returnValue = ""
 	try:
@@ -398,6 +411,7 @@ def getEncodedString(value):
 			except UnicodeDecodeError:
 				returnValue = "n/a"
 	return returnValue
+
 
 def getID3Tags(root, filename):
 	audio = None
@@ -472,6 +486,7 @@ def getID3Tags(root, filename):
 
 	return audio, isAudio, title, genre, artist, album, tracknr, track, date, length, bitrate
 
+
 class MerlinMusicPlayerScreenSaver(Screen):
 
 	sz_w = getDesktop(0).size().width()
@@ -495,7 +510,6 @@ class MerlinMusicPlayerScreenSaver(Screen):
 			<widget name="display" position="200,315" size="720,24" zPosition="1" transparent="1" font="Regular;20" foregroundColor="#fcc000" />
 			</screen>"""
 		
-	
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
@@ -556,6 +570,7 @@ class MerlinMusicPlayerScreenSaver(Screen):
 
 	def createSummary(self):
 		return MerlinMusicPlayerLCDScreen
+
 
 class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 
@@ -864,6 +879,7 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 		self.currentPiP = ""
 		if self.showHideTimer.isActive():
 			self.showHideTimer.stop()
+
 
 class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications):
 	sz_w = getDesktop(0).size().width()
@@ -1503,6 +1519,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 	def createSummary(self):
 		return MerlinMusicPlayerLCDScreen
 
+
 class MerlinMusicPlayerLyrics(Screen):
 
 	sz_w = getDesktop(0).size().width()
@@ -1538,7 +1555,6 @@ class MerlinMusicPlayerLyrics(Screen):
 			<widget name="lyric_text" position="50,150" zPosition="2" size="620,350" font="Regular;18" transparent="0"  backgroundColor="#00000000"/>
 			</screen>"""
 		
-	
 	def __init__(self, session, currentsong):
 		self.session = session
 		Screen.__init__(self, session)
@@ -1602,6 +1618,7 @@ class MerlinMusicPlayerLyrics(Screen):
 	def pageDown(self):
 		self["lyric_text"].pageDown()
 
+
 class MerlinMusicPlayerSongList(Screen):
 	
 	sz_w = getDesktop(0).size().width()
@@ -1634,11 +1651,9 @@ class MerlinMusicPlayerSongList(Screen):
 			<widget name="list" position="50,110" zPosition="2" size="620,350" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
 			</screen>"""
 		
-	
 	def __init__(self, session, songlist, index, idreammode):
 		self.session = session
 		Screen.__init__(self, session)
-		
 		
 		self["headertext"] = Label(_("Merlin Music Player Songlist"))
 		self["list"] = iDreamList()
@@ -1698,6 +1713,7 @@ class MerlinMusicPlayerSongList(Screen):
 	def createSummary(self):
 		return MerlinMusicPlayerLCDScreenText
 
+
 class iDreamMerlin(Screen):
 	sz_w = getDesktop(0).size().width()
 	if sz_w == 1280:
@@ -1743,6 +1759,7 @@ class iDreamMerlin(Screen):
 				<widget name="headertext" position="50,77" zPosition="1" size="620,23" font="Regular;20" transparent="1"  foregroundColor="#fcc000" backgroundColor="#00000000"/>
 				<widget name="list" position="50,110" zPosition="2" size="620,350" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
 			</screen>"""
+
 	def __init__(self, session, servicelist):
 		self.session = session
 		Screen.__init__(self, session)
@@ -2005,7 +2022,6 @@ class iDreamMerlin(Screen):
 			self.mode = 20
 			self["list"].setMode(self.mode)
 			self.buildSearchSongList(sql_where, text, oldmode, True)
-
 
 	def keyNumber_pressed(self, number):
 		if number == 0 and self.mode != 0:
@@ -2729,6 +2745,7 @@ class iDreamList(GUIComponent, object):
 			self.displaySongMode = False
 			self.l.setItemHeight(self.item)
 
+
 class MerlinMediaPixmap(Pixmap):
 	def __init__(self):
 		Pixmap.__init__(self)
@@ -2804,6 +2821,7 @@ class SelectPath(Screen):
 			<widget render="Label" source="key_red" position="0,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_green" position="140,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
+
 	def __init__(self, session, initDir):
 		Screen.__init__(self, session)
 		self.setTitle(_("Select path"))
@@ -2859,6 +2877,7 @@ class SelectPath(Screen):
 		else:
 			self["target"].setText(_("Invalid Location"))
 
+
 class MerlinMusicPlayerLCDScreen(Screen):
 	skin = """
 		<screen position="0,0" size="132,64">
@@ -2879,6 +2898,7 @@ class MerlinMusicPlayerLCDScreen(Screen):
 			self["text1"].setText(text)
 		elif line == 4:
 			self["text4"].setText(text)
+
 
 class MerlinMusicPlayerLCDScreenText(Screen):
 	skin = """
@@ -2903,6 +2923,7 @@ class MerlinMusicPlayerLCDScreenText(Screen):
 			self["text3"].setText(text)
 		elif line == 4:
 			self["text4"].setText(text)
+
 
 class MerlinMusicPlayerSetup(Screen, ConfigListScreen):
 	sz_w = getDesktop(0).size().width()
@@ -2935,7 +2956,6 @@ class MerlinMusicPlayerSetup(Screen, ConfigListScreen):
 				<widget render="Label" source="key_green" position="200,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="config" position="50,80" size="620,350" backgroundColor="#00000000" scrollbarMode="showOnDemand" />
 			</screen>"""
-
 
 	def __init__(self, session, databasePath):
 		Screen.__init__(self, session)
@@ -3038,7 +3058,6 @@ class MerlinMusicPlayerFileList(Screen):
 			<widget name="list" position="50,110" zPosition="2" size="620,350" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
 			</screen>"""
 		
-	
 	def __init__(self, session, servicelist):
 		self.session = session
 		Screen.__init__(self, session)
@@ -3400,23 +3419,28 @@ class MerlinMusicPlayerFileList(Screen):
 	def createSummary(self):
 		return MerlinMusicPlayerLCDScreenText
 
+
 def main(session, **kwargs):
 	servicelist = InfoBar.instance and InfoBar.instance.servicelist
 	session.open(iDreamMerlin, servicelist)
 
+
 def merlinmusicplayerfilelist(session, **kwargs):
 	servicelist = InfoBar.instance and InfoBar.instance.servicelist
 	session.open(MerlinMusicPlayerFileList, servicelist)
+
 
 def menu_merlinmusicplayerfilelist(menuid, **kwargs):
 	if menuid == "mainmenu" and config.plugins.merlinmusicplayer.merlinmusicplayermainmenu.value:
 		return [(_("Merlin Music Player"), merlinmusicplayerfilelist, "merlin_music_player", 46)]
 	return []
 
+
 def menu_idream(menuid, **kwargs):
 	if menuid == "mainmenu" and config.plugins.merlinmusicplayer.idreammainmenu.value:
 		return [(_("iDream"), main, "idream", 47)]
 	return []
+
 
 def Plugins(**kwargs):
 	list = [PluginDescriptor(name=_("iDream"), description=_("Receiver Music Database"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="iDream.png", fnc=main)]

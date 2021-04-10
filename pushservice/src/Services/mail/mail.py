@@ -41,6 +41,7 @@ from twisted.internet.defer import Deferred
 from twisted.internet.ssl import ClientContextFactory
 from twisted.mail.smtp import ESMTPSenderFactory
 
+
 class Message(object):
     def __init__(self, from_addr, to_addrs, subject, message, mime="text/plain", charset="utf-8"):
         self.subject = subject

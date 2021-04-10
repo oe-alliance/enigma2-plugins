@@ -1,5 +1,6 @@
 from Plugins.Extensions.WebInterface.WebScreens import WebScreen
 
+
 class BouquetEditorWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)

@@ -4,12 +4,14 @@ from enigma import eConsoleAppContainer
 from twisted.web import server, resource, http
 from Plugins.Extensions.WebInterface.WebChilds.IPKG import IPKGConsoleStream, IPKGResource
 
+
 class PKGResource(IPKGResource):
 	def execCmd(self, request, parms=[]):
 		cmd = self.buildCmd(parms)
 		request.setResponseCode(http.OK)
 		PKGConsoleStream(request, cmd)
 		return server.NOT_DONE_YET
+
 
 class PKGConsoleStream(IPKGConsoleStream):
 	def __init__(self, request, cmd):

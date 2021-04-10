@@ -50,6 +50,7 @@ from .RecordAdapter import RecordAdapter
 CONFIG = "/etc/enigma2/epgrefresh.xml"
 XML_VERSION = "1"
 
+
 class EPGRefresh:
 	"""Simple Class to refresh EPGData"""
 
@@ -373,7 +374,6 @@ class EPGRefresh:
 			print("[EPGRefresh] Debug: Call " + str(finishTodo))
 			finishTodo(*args, **kwargs)
 		
-
 	def _ToDoCallAutotimer(self):
 		if config.plugins.epgrefresh.parse_autotimer.value != "never":
 			if config.plugins.epgrefresh.parse_autotimer.value in ("ask_yes", "ask_no"):
@@ -571,5 +571,6 @@ class EPGRefresh:
 		except:
 			print("[EPGRefresh] showPendingServices Error!")
 			print_exc(file=stdout)
+
 
 epgrefresh = EPGRefresh()

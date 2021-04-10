@@ -5,6 +5,7 @@ from Components.config import config
 from Screens.InfoBar import InfoBar, MoviePlayer
 from enigma import eServiceReference, iPlayableServicePtr
 
+
 class SwitchService(Source):
 	def __init__(self, session):
 		Source.__init__(self)

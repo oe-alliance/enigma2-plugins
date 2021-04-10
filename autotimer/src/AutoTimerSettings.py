@@ -31,6 +31,7 @@ HD = False
 if getDesktop(0).size().width() >= 1280:
 	HD = True
 
+
 def getAutoTimerSettingsDefinitions():
 	hours_minutes = config.plugins.autotimer.unit.value == "hour" and _("hours") or _("minutes")
 	return [
@@ -63,6 +64,7 @@ def getAutoTimerSettingsDefinitions():
 		[_("Remove not existing events"), config.plugins.autotimer.check_eit_and_remove, "check_eit_and_remove", _("Check the event id (eit) and remove the timer if there is no corresponding EPG event. Due to compatibility issues with SerienRecorder and IPRec, only timer created by AutoTimer are affected.")],
 		[_("Always write config"), config.plugins.autotimer.always_write_config, "always_write_config", _("Write the config file after every change which the user quits by saving.")]
 	]
+
 
 class AutoTimerSettings(ConfigListScreen, Screen):
 	if HD:

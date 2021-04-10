@@ -32,6 +32,7 @@ from Components.ScrollLabel import ScrollLabel
 from .Source.Globals import SkinTools
 from . import Version
 
+
 class VersionList(GUIComponent):
     def __init__(self):
         GUIComponent.__init__(self)
@@ -82,6 +83,7 @@ class VersionList(GUIComponent):
         l = self.l.getCurrentSelection()
         return l and l[0]
 
+
 class AdvancedMovieSelectionAbout(Screen):
     def __init__(self, session):
         Screen.__init__(self, session)
@@ -112,6 +114,7 @@ class AdvancedMovieSelectionAbout(Screen):
 
     def showchanges(self):
         self.session.openWithCallback(self.close, AboutDetails)
+
 
 class AboutDetails(Screen):
     def __init__(self, session):

@@ -141,6 +141,7 @@ def rewriteMeta(servicepath, name, data):
 		metafile.close()
 	return True
 
+
 def renameFiles(servicepath, name, data):
 	log.debug("servicepath", servicepath)
 	
@@ -167,6 +168,7 @@ def renameFiles(servicepath, name, data):
 	
 	return osrename(src, dst)
 	
+
 def osrename(src, dst):
 	#Py3 for f in glob( escape(src) + "*" ):
 	glob_src = CompiledRegexpGlobEscape.sub("[\\1]", src)

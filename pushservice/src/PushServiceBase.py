@@ -70,9 +70,9 @@ class PushServiceBase(Modules, ConfigFile):
 		self.servicemodules = self.loadModules(SERVICE_PATH, ServiceBase)
 		self.controllermodules = self.loadModules(CONTROLLER_PATH, ControllerBase)
 
-
 	######################################
 	# Setter / Getter
+
 	def getServices(self):
 		return self.services or []
 
@@ -153,9 +153,9 @@ class PushServiceBase(Modules, ConfigFile):
 		if controller in self.controllers:
 			self.controllers.remove(controller)
 
-
 	######################################
 	# Config
+
 	def copyto(self, destination):
 		destination.services = self.services
 		destination.controllers = self.controllers
@@ -179,6 +179,7 @@ class PushServiceBase(Modules, ConfigFile):
 			ServiceBase.resetUniqueID()
 			ControllerBase.resetUniqueID()
 			# Parse Config
+
 			def parse(root, typ, modules):
 				instances = []
 				if root:
@@ -245,9 +246,9 @@ class PushServiceBase(Modules, ConfigFile):
 		
 		self.writeXML(root)
 
-
 	######################################
 	# Controller handling
+
 	def begin(self):
 		# Loop over all Services
 		for service in self.getServices():

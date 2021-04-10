@@ -15,6 +15,7 @@ from twisted.internet.defer import succeed
 from . import e2support, interfaces, dreamIRCTools
 from zope.interface import implementer
 
+
 class IRCPerson(e2support.AbstractPerson):
 
     def imperson_whois(self):
@@ -265,6 +266,7 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
     def joinGroup(self, name):
         self.join(name)
         self.getGroupConversation(name)
+
 
 @implementer(interfaces.IAccount)
 class IRCAccount(e2support.AbstractAccount):

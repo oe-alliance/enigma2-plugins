@@ -10,6 +10,7 @@ from Tools.HardwareInfo import HardwareInfo
 import os
 import NavigationInstance
 
+
 class AC3delay:
     def __init__(self):
         self.iService = None

@@ -32,6 +32,7 @@ def write_cache(cache_file, cache_data):
 	dump(cache_data, fd, -1)
 	fd.close()
 
+
 def valid_cache(cache_file, cache_ttl):
 	#See if the cache file exists and is still living
 	try:
@@ -44,12 +45,14 @@ def valid_cache(cache_file, cache_ttl):
 	else:
 		return 1
 
+
 def load_cache(cache_file):
 	#Does a cPickle load
 	fd = open(cache_file, 'rb')
 	cache_data = load(fd)
 	fd.close()
 	return cache_data
+
 
 class UserDialog(Screen, ConfigListScreen):
 	skin = """

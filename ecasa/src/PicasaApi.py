@@ -18,8 +18,11 @@ import six
 _PicasaApi__returnPhotos = lambda photos: photos.entry
 
 from .PictureApi import PictureApi
+
+
 class PicasaApi(PictureApi):
 	"""Wrapper around gdata/picasa API to make our life a little easier."""
+
 	def __init__(self, email=None, password=None, cache='/tmp/ecasa'):
 		"""Initialize API, login to google servers"""
 		PictureApi.__init__(self, cache=cache)
@@ -122,5 +125,6 @@ class PicasaApi(PictureApi):
 				lambda value: self.copyPhoto(photo, target, recursive=False)
 			)
 			return False
+
 
 __all__ = ['PicasaApi']

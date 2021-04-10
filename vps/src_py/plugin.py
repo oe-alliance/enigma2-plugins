@@ -28,6 +28,7 @@ config.plugins.vps.infotext = ConfigInteger(default=0)
 #
 config.plugins.vps.enabled.save_forced = True
 
+
 def autostart(reason, **kwargs):
 	if reason == 0:
 		if "session" in kwargs:
@@ -65,8 +66,10 @@ def autostart(reason, **kwargs):
 def setup(session, **kwargs):
 	session.openWithCallback(doneConfig, VPS_Setup)
 
+
 def doneConfig(session, **kwargs):
 	vps_timers.checkTimer()
+
 
 def startSetup(menuid):
 	if getImageDistro() in ('teamblue'):
@@ -83,9 +86,9 @@ def startSetup(menuid):
 			return []
 	return [(_("VPS Settings"), setup, "vps", 50)]
 
+
 def getNextWakeup():
 	return vps_timers.NextWakeup()
-
 
 
 def Plugins(**kwargs):

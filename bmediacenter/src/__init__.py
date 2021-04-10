@@ -24,18 +24,26 @@ config.plugins.mc_globalsettings.currentplatform.value = currentmcplatform
 PluginLanguageDomain = "HDMUMediaCenter"
 PluginLanguagePath = "Extensions/BMediaCenter/locale"
 # Load Language
+
+
 def localeInit():
 	lang = language.getLanguage()[:2] 
 	os.environ["LANGUAGE"] = lang
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
+
 def _(txt):
 	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
 		t = gettext.gettext(txt)
 	return t
+
+
 localeInit()
 language.addCallback(localeInit)
 # Favorite Folders
+
+
 def addFavoriteFolders():
 	i = len(config.plugins.mc_favorites.folders)
 	config.plugins.mc_favorites.folders.append(ConfigSubsection())
@@ -43,6 +51,8 @@ def addFavoriteFolders():
 	config.plugins.mc_favorites.folders[i].basedir = ConfigText("/", False)
 	config.plugins.mc_favorites.foldercount.value = i + 1
 	return i
+
+
 for i in list(range(0, config.plugins.mc_favorites.foldercount.value)):
 	addFavoriteFolders()
 # VLC PLAYER CONFIG
@@ -69,6 +79,7 @@ config.plugins.mc_vlc.notranscode = ConfigYesNo(False)
 config.plugins.mc_vlc.servercount = ConfigInteger(0)
 config.plugins.mc_vlc.servers = ConfigSubList()
 
+
 def addVlcServerConfig():
 	i = len(config.plugins.mc_vlc.servers)
 	config.plugins.mc_vlc.servers.append(ConfigSubsection())
@@ -77,5 +88,7 @@ def addVlcServerConfig():
 	config.plugins.mc_vlc.servers[i].basedir = ConfigText("/", False)
 	config.plugins.mc_vlc.servercount.value = i + 1
 	return i
+
+
 for i in list(range(0, config.plugins.mc_vlc.servercount.value)):
 	addVlcServerConfig()

@@ -104,6 +104,7 @@ config.movielist.showtags = ConfigInteger(default=MovieList.HIDE_TAGS)
 
 SHOW_ALL_MOVIES = _("Show all movies")
 
+
 def getDateString():
     t = localtime()
     if t.tm_wday == 0:
@@ -128,6 +129,7 @@ def getDateString():
         desc = strftime("%d.%m.%Y\n%A", t)
     return desc
 
+
 def getSortDescription():
     text = _("Sorted:") + " "
     if config.movielist.moviesort.value == MovieList.SORT_ALPHANUMERIC:
@@ -140,6 +142,7 @@ def getSortDescription():
         return text + _("Ascending")
     return text + _("Unknown")
     
+
 def getBeginTimeString(info, serviceref):
     if not info or not serviceref:
         return ""
@@ -154,11 +157,15 @@ def getBeginTimeString(info, serviceref):
         desc = d.strftime("%d.%m.%Y - %H:%M")
     return desc
 
+
 from Screens.LocationBox import LocationBox
+
+
 def ScanLocationBox(session, text, dir, minFree=None):
     inhibitDirs = ["/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/usr", "/var"]
     config.AdvancedMovieSelection.videodirs.load()
     return LocationBox(session, text=text, currDir=dir, bookmarks=config.AdvancedMovieSelection.videodirs, autoAdd=False, editDir=False, inhibitDirs=inhibitDirs, minFree=minFree)
+
 
 class MovieContextMenu(Screen):
     def __init__(self, session, csel, service):
@@ -630,6 +637,7 @@ class MovieContextMenu(Screen):
         self.csel.selectScanLocations()
         self.close()        
         
+
 class SelectionEventInfo:
     def __init__(self):
         self["Service"] = ServiceEvent()
@@ -661,6 +669,7 @@ class SelectionEventInfo:
             if not config.AdvancedMovieSelection.showpreview.value and config.AdvancedMovieSelection.video_preview.value:
                 self.loadPreview(serviceref)        
         
+
 class AdvancedMovieSelection_summary(Screen):
     def __init__(self, session, parent):
         self.skinName = ["AdvancedMovieSelection_summary"]
@@ -685,8 +694,10 @@ class AdvancedMovieSelection_summary(Screen):
         self["Seperator1"].setText("")    
         self["Seperator2"].setText("")    
 
+
 class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, QuickButton, VideoPreview, MovieSearch):
     LIB_UPDATE_INTERVAL = 250
+
     def __init__(self, session, selectedmovie=None, showLastDir=False):
         print("enter movieselection")
         self.stopwatch = StopWatch()
@@ -1448,6 +1459,7 @@ class MoviebarPositionSetupText(Screen):
         self.skinName = SkinTools.appendResolution("AdvancedMovieSelectionMoviebarPositionSetup")
         self["howtotext"] = StaticText(_("Use direction keys to move the Moviebar.\nPress OK button for save or the EXIT button to cancel.\nUse the red button for reset to the original position."))
 
+
 class MoviebarPositionSetup(Screen):
     def __init__(self, session):
         Screen.__init__(self, session)
@@ -1471,7 +1483,6 @@ class MoviebarPositionSetup(Screen):
         self.instance.move(ePoint(self.orgpos.x() + offsetX, self.orgpos.y() + offsetY))
         self.screenMoviebarPositionSetupText = self.session.instantiateDialog(MoviebarPositionSetupText)
         self.screenMoviebarPositionSetupText.show()
-
 
     def red(self):
         self.instance.move(ePoint(self.orgpos.x(), self.orgpos.y()))

@@ -13,10 +13,13 @@ if not issubclass(OriginalPluginBrowser, InfoBarNotifications):
 else:
 	NotifiablePluginBrowser = OriginalPluginBrowser
 
+
 def install():
 	PBBase.PluginBrowser = NotifiablePluginBrowser
 
+
 def uninstall():
 	PBBase.PluginBrowser = OriginalPluginBrowser
+
 
 __all__ = ['OriginalPluginBrowser', 'NotifiablePluginBrowser', 'install', 'uninstall']

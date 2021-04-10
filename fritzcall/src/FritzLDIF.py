@@ -39,8 +39,10 @@ import logging
 logger = logging.getLogger("[FritzCall] LDIF")
 debug = logger.debug
 
+
 def out(number, name):
 	print(number + '#' + name)
+
 
 class FindNumber(ldif.LDIFParser):
 	def __init__(self, number, inp, outFun):
@@ -123,6 +125,7 @@ class FindNumber(ldif.LDIFParser):
 						self._input_file.close()
 						return
 
+
 class ReadNumbers(ldif.LDIFParser):
 	def __init__(self, inPut, outFun):
 		ldif.LDIFParser.__init__(self, inPut)
@@ -189,8 +192,10 @@ class ReadNumbers(ldif.LDIFParser):
 						nameHM = nameHM + ', ' + addressB.replace('\n', ', ').replace('\r', '').replace('#', '')
 					self.outFun(no, nameHM)
 
+
 def lookedUp(number, name):
 	print(number + ' ' + name)
+
 
 if __name__ == '__main__':
 	import os

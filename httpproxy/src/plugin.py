@@ -74,6 +74,7 @@ class HTTPProxyConfigScreen(ConfigListScreen, Screen):
 
 ###############################################################################
 
+
 class myProxyRequest(proxy.ProxyRequest):
     RESPONSE_CLIENTED_DENIED = "this client it not allowed to connect"
     ports = {'http': 80}
@@ -122,16 +123,21 @@ class myProxyRequest(proxy.ProxyRequest):
                 ''' now i am quite careful with logging webstuff with E2 '''
                 pass
 
+
 class ProxyProtocol(proxy.Proxy):
     requestFactory = myProxyRequest
+
 
 class ProxyFactory(http.HTTPFactory):
         protocol = ProxyProtocol
 
 ###############################################################################
+
+
 def main(session, **kwargs):
     """ open config screen """
     session.open(HTTPProxyConfigScreen)
+
 
 def autostart(reason, **kwargs):
     """ start proxy in background """

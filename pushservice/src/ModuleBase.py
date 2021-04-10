@@ -42,7 +42,6 @@ class ModuleBase(object):
 		# [ (key, value, description, config element) , ]
 		#self.options['enabled'] = ConfigYesNo( default = False )
 
-
 	################################################
 	# Base classmethod functions
 	@classmethod
@@ -50,9 +49,9 @@ class ModuleBase(object):
 		# Return the Class
 		return cls.__name__
 
-
 	################################################
 	# Base functions
+
 	def getName(self):
 		# Return the Class Name
 		return self.__class__.__name__
@@ -117,9 +116,9 @@ class ModuleBase(object):
 	def getConfigOptions(self):
 		return [(key, option, description) for (key, (option, description)) in list(self.options.items())]
 
-
 	################################################
 	# Functions to be implemented in the plugin
+
 	def begin(self):
 		# Is called after starting PushSerive
 		pass

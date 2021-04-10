@@ -18,6 +18,7 @@ from .AutoTimerSettings import getAutoTimerSettingsDefinitions
 
 API_VERSION = "1.6"
 
+
 class AutoTimerBaseResource(resource.Resource):
 	def returnResult(self, req, state, statetext):
 		req.setResponseCode(http.OK)
@@ -30,30 +31,36 @@ class AutoTimerBaseResource(resource.Resource):
 	<e2statetext>%s</e2statetext>
 </e2simplexmlresult>\n""" % ('True' if state else 'False', statetext))
 
+
 class AutoTimerDoParseResource(AutoTimerBaseResource):
 	def parsecallback(self, ret):
 		rets = self.renderBackground(self.req, ret)
 		self.req.write(six.ensure_binary(rets))
 		self.req.finish()
+
 	def render(self, req):
 		self.req = req
 		# todo timeout / error handling
 		autotimer.parseEPG(callback=self.parsecallback)
 		return server.NOT_DONE_YET
+
 	def renderBackground(self, req, ret):
 		output = _("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[6]), len(ret[5]))
 		return self.returnResult(req, True, output)
+
 
 class AutoTimerSimulateResource(AutoTimerBaseResource):
 	def parsecallback(self, timers, skipped):
 		rets = self.renderBackground(self.req, timers)
 		self.req.write(six.ensure_binary(rets))
 		self.req.finish()
+
 	def render(self, req):
 		self.req = req
 		# todo timeout / error handling
 		autotimer.parseEPG(simulateOnly=True, callback=self.parsecallback)
 		return server.NOT_DONE_YET
+
 	def renderBackground(self, req, timers):
 
 		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimersimulate api_version=\"", str(API_VERSION), "\">\n"]
@@ -78,16 +85,20 @@ class AutoTimerSimulateResource(AutoTimerBaseResource):
 		req.setHeader('charset', 'UTF-8')
 		return ''.join(returnlist)
 #TODO
+
+
 class AutoTimerTestResource(AutoTimerBaseResource):
 	def parsecallback(self, timers, skipped):
 		rets = self.renderBackground(self.req, timers, skipped)
 		self.req.write(six.ensure_binary(rets))
 		self.req.finish()
+
 	def render(self, req):
 		self.req = req
 		# todo timeout / error handling
 		autotimer.parseEPG(simulateOnly=True, callback=self.parsecallback)
 		return server.NOT_DONE_YET
+
 	def renderBackground(self, req, timers, skipped):
 
 		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimertest api_version=\"", str(API_VERSION), "\">\n"]
@@ -130,6 +141,7 @@ class AutoTimerTestResource(AutoTimerBaseResource):
 		req.setHeader('charset', 'UTF-8')
 		return ''.join(returnlist)
 
+
 class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 	def render(self, req):
 		# We re-read the config so we won't display empty or wrong information
@@ -147,6 +159,7 @@ class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 		req.setHeader('charset', 'UTF-8')
 		return six.ensure_binary(''.join(autotimer.getXml(webif)))
 
+
 class AutoTimerRemoveAutoTimerResource(AutoTimerBaseResource):
 	def render(self, req):
 		id = req.args.get(b"id")
@@ -158,6 +171,7 @@ class AutoTimerRemoveAutoTimerResource(AutoTimerBaseResource):
 		else:
 			return self.returnResult(req, False, _("missing parameter \"id\""))
 
+
 class AutoTimerAddXMLAutoTimerResource(AutoTimerBaseResource):
 	def render_POST(self, req):
 		req.setResponseCode(http.OK)
@@ -168,6 +182,7 @@ class AutoTimerAddXMLAutoTimerResource(AutoTimerBaseResource):
 			autotimer.writeXml()
 		return self.returnResult(req, True, _("AutoTimer was added successfully"))
 		
+
 class AutoTimerUploadXMLConfigurationAutoTimerResource(AutoTimerBaseResource):
 	def render_POST(self, req):
 		req.setResponseCode(http.OK)
@@ -177,6 +192,7 @@ class AutoTimerUploadXMLConfigurationAutoTimerResource(AutoTimerBaseResource):
 		if config.plugins.autotimer.always_write_config.value:
 			autotimer.writeXml()
 		return self.returnResult(req, True, _("AutoTimers were changed successfully."))	
+
 
 class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 	# TODO: recheck if we can modify regular config parser to work on this
@@ -553,6 +569,7 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 				plugin.autopoller = None
 
 		return self.returnResult(req, True, _("config changed."))
+
 
 class AutoTimerSettingsResource(resource.Resource):
 	def render(self, req):

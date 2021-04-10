@@ -13,6 +13,7 @@ from Components.Sources.StaticText import StaticText
 # Configuration
 from Components.config import config, getConfigListEntry
 
+
 class PipzapSetup(Screen, ConfigListScreen):
 	skin = """<screen name="PipzapSetup" position="center,center" size="565,370">
 		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
@@ -45,6 +46,7 @@ class PipzapSetup(Screen, ConfigListScreen):
 			session=session,
 			on_change=self.changed
 		)
+
 		def selectionChanged():
 			if self["config"].current:
 				self["config"].current[1].onDeselect(self.session)

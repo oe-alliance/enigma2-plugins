@@ -11,6 +11,7 @@ from Components.config import config
 from six.moves.urllib.parse import quote_plus
 import six
 
+
 def getAspect():
 	val = AVSwitch().getAspectRatioSetting()
 	if val == 0 or val == 1:
@@ -20,6 +21,7 @@ def getAspect():
 	elif val == 4 or val == 5:
 		r = (16 * 576, 10 * 720)
 	return r
+
 
 class WebPixmap(Pixmap):
 	def __init__(self, default=None):

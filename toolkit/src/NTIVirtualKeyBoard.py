@@ -2,6 +2,7 @@ from Tools.NumericalTextInput import NumericalTextInput
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.ActionMap import NumberActionMap
 
+
 class NTIVirtualKeyBoard(VirtualKeyBoard, NumericalTextInput):
 	def __init__(self, session, **kwargs):
 		VirtualKeyBoard.__init__(self, session, **kwargs)

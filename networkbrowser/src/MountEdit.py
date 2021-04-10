@@ -19,6 +19,7 @@ from re import sub as re_sub
 
 from boxbranding import getImageDistro
 
+
 class AutoMountEdit(Screen, ConfigListScreen):
 	skin = """
 		<screen name="AutoMountEdit" position="center,center" size="560,450" title="MountEdit">

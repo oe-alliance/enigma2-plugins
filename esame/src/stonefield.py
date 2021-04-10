@@ -12,12 +12,15 @@
 import random
 from six.moves import range
 
+
 class Stone:
 	color = 0
 	changed = False
 	marked = False
 
 # This class is derived from StoneField.cpp (kSame) by Marcus Kreutzberger	
+
+
 class StoneField:
 	def __init__(self, width, height, colors, board):
 		self.sizex = width

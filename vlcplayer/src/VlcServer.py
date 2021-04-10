@@ -23,6 +23,7 @@ from six.moves.urllib.request import urlopen
 
 seed()
 
+
 def normpath(path):
 	if path is None:
 		return None
@@ -39,6 +40,7 @@ def normpath(path):
 	elif path == ".":
 		return None
 	return path
+
 
 class VlcServer:
 	def __init__(self, cfg):

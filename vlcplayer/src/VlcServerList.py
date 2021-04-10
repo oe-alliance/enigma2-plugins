@@ -27,6 +27,7 @@ from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, gFont
 import os
 from skin import parseFont
 
+
 class VlcServerList(MenuList):
 	def __init__(self):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
@@ -75,6 +76,7 @@ class VlcServerList(MenuList):
 	def getSelection(self):
 		cur = self.l.getCurrentSelection()
 		return cur and cur[0]
+
 
 class VlcServerListScreen(Screen):
 	skin = """

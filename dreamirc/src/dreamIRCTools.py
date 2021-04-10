@@ -51,6 +51,7 @@ y = 0
 
 accounts_xml = "/etc/dreamIRC.xml"
 
+
 class ChatWindow(ScrollLabel):
 	def __init__(self, session):
 		ScrollLabel.__init__(self, text="")
@@ -67,6 +68,7 @@ class ChatWindow(ScrollLabel):
 			self.lastPage()
 			self.pipe.setLastMsg("")
 
+
 class BuddyWindow(ScrollLabel):
 	def __init__(self, session):
 		ScrollLabel.__init__(self, text="")
@@ -79,6 +81,7 @@ class BuddyWindow(ScrollLabel):
 		if (self.oldlist != BuddyList):
 			self.setText(BuddyList)
 			self.oldlist = BuddyList
+
 
 class ChanName(Label):
 	def __init__(self, session):
@@ -94,6 +97,7 @@ class ChanName(Label):
 		if (self.oldname != self.newname):
 			self.setText(self.newname)
 			self.oldname = self.newname
+
 
 class MessagePipe():
 	def __init__(self):
@@ -196,6 +200,7 @@ class MessageLogger:
 	def close(self):
 		self.file.close()
 
+
 def readLogFile(args):
 	try:
 		fp = open(args[0], 'r')
@@ -208,6 +213,7 @@ def readLogFile(args):
 		output = args[1]
 	return output
 
+
 def getMacAddress():
 	for line in os.popen("/sbin/ifconfig"):
 		if line.find('Ether') > -1:
@@ -215,6 +221,7 @@ def getMacAddress():
 			new_mac = mac.replace(":", "")
 			break
 	return new_mac
+
 
 def debug():
 	try:	

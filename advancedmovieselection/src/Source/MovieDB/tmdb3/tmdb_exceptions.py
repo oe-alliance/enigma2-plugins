@@ -6,6 +6,7 @@
 # Author: Raymond Wagner
 #-----------------------
 
+
 class TMDBError(Exception):
     Error = 0
     KeyError = 10
@@ -30,29 +31,38 @@ class TMDBError(Exception):
             self.errno = getattr(self, 'TMDB' + self.__class__.__name__, errno)
         self.args = (msg,)
 
+
 class TMDBKeyError(TMDBError):
     pass
+
 
 class TMDBKeyMissing(TMDBKeyError):
     pass
 
+
 class TMDBKeyInvalid(TMDBKeyError):
     pass
+
 
 class TMDBKeyRevoked(TMDBKeyInvalid):
     pass
 
+
 class TMDBRequestError(TMDBError):
     pass
+
 
 class TMDBRequestInvalid(TMDBRequestError):
     pass
 
+
 class TMDBPagingIssue(TMDBRequestError):
     pass
 
+
 class TMDBCacheError(TMDBRequestError):
     pass
+
 
 class TMDBCacheReadError(TMDBCacheError):
     def __init__(self, filename):
@@ -60,11 +70,13 @@ class TMDBCacheReadError(TMDBCacheError):
             "User does not have permission to access cache file: {0}.".format(filename))
         self.filename = filename
 
+
 class TMDBCacheWriteError(TMDBCacheError):
     def __init__(self, filename):
         super(TMDBCacheWriteError, self).__init__(
             "User does not have permission to write cache file: {0}.".format(filename))
         self.filename = filename
+
 
 class TMDBCacheDirectoryError(TMDBCacheError):
     def __init__(self, filename):
@@ -72,8 +84,10 @@ class TMDBCacheDirectoryError(TMDBCacheError):
             "Directory containing cache file does not exist: {0}.".format(filename))
         self.filename = filename
 
+
 class TMDBImageSizeError(TMDBError):
     pass
+
 
 class TMDBHTTPError(TMDBError):
     def __init__(self, err):
@@ -81,8 +95,10 @@ class TMDBHTTPError(TMDBError):
         self.response = err.fp.read()
         super(TMDBHTTPError, self).__init__(str(err))
 
+
 class TMDBOffline(TMDBError):
     pass
+
 
 class TMDBLocaleError(TMDBError):
     pass

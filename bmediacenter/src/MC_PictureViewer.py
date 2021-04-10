@@ -35,11 +35,17 @@ config.plugins.mc_pp.loop = ConfigEnableDisable(default=True)
 config.plugins.mc_pp.music = ConfigText(default=resolveFilename(SCOPE_MEDIA))
 config.plugins.mc_pp.musicenable = ConfigEnableDisable(default=False)
 mcpath = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/"
+
+
 def getAspect():
 	val = AVSwitch().getAspectRatioSetting()
 	return val / 2
+
+
 def getScale():
 	return AVSwitch().getFramebufferScale()
+
+
 class MC_PictureViewer(Screen, HelpableScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -87,15 +93,19 @@ class MC_PictureViewer(Screen, HelpableScreen):
 	def up(self):
 		self["filelist"].up()
 		self.ThumbTimer.start(500, True)
+
 	def down(self):
 		self["filelist"].down()
 		self.ThumbTimer.start(500, True)
+
 	def leftUp(self):
 		self["filelist"].pageUp()
 		self.ThumbTimer.start(500, True)
+
 	def rightDown(self):
 		self["filelist"].pageDown()
 		self.ThumbTimer.start(500, True)
+
 	def showPic(self, picInfo=""):
 		ptr = self.picload.getData()
 		if ptr != None:
@@ -122,6 +132,7 @@ class MC_PictureViewer(Screen, HelpableScreen):
 			self.filelist.descent()
 		else:
 			self.session.openWithCallback(self.returnVal, MC_PicView, self.filelist.getFileList(), self.filelist.getSelectionIndex(), self.filelist.getCurrentDirectory(), False)
+
 	def StartThumb(self):
 		self.session.openWithCallback(self.returnVal, MC_PicThumbViewer, self.filelist.getFileList(), self.filelist.getSelectionIndex(), self.filelist.getCurrentDirectory())
 
@@ -131,6 +142,7 @@ class MC_PictureViewer(Screen, HelpableScreen):
 		else:
 			self["filelist"].changeDir(jumpto)
 			self["currentfolder"].setText(("%s") % (jumpto))
+
 	def returnVal(self, val=0):
 		if val > 0:
 			for x in self.filelist.getFileList():
@@ -146,6 +158,7 @@ class MC_PictureViewer(Screen, HelpableScreen):
 
 	def Settings(self):
 		self.session.open(MC_PicSetup)
+
 	def Exit(self):
 		if self.filelist.getCurrentDirectory() is None:
 			config.plugins.mc_pp.lastDir.value = "/"
@@ -153,12 +166,15 @@ class MC_PictureViewer(Screen, HelpableScreen):
 			config.plugins.mc_pp.lastDir.value = self.filelist.getCurrentDirectory()
 		config.plugins.mc_pp.save()
 		self.close()
+
+
 #-------------------------------------------------------#
 T_INDEX = 0
 T_FRAME_POS = 1
 T_PAGE = 2
 T_NAME = 3
 T_FULL = 4
+
 
 class MC_PicThumbViewer(Screen, HelpableScreen):
 	def __init__(self, session, piclist, lastindex, path):
@@ -315,16 +331,19 @@ class MC_PicThumbViewer(Screen, HelpableScreen):
 		if self.index < 0:
 			self.index = self.maxentry
 		self.paintFrame()
+
 	def key_right(self):
 		self.index += 1
 		if self.index > self.maxentry:
 			self.index = 0
 		self.paintFrame()
+
 	def key_up(self):
 		self.index -= self.thumbsX
 		if self.index < 0:
 			self.index = self.maxentry
 		self.paintFrame()
+
 	def key_down(self):
 		self.index += self.thumbsX
 		if self.index > self.maxentry:
@@ -359,6 +378,8 @@ class MC_PicThumbViewer(Screen, HelpableScreen):
 		del self.picload
 		self.close(self.index + self.dirlistcount)
 #-------------------------------------------------------#
+
+
 class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, HelpableScreen):
 	def __init__(self, session, filelist, index, path, startslide):
 		self.textcolor = config.plugins.mc_pp.textcolor.value
@@ -437,8 +458,10 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 		if config.plugins.mc_pp.infoline.value == False:
 			self["file"].hide()
 		self.start_decode()
+
 	def checkSkipShowHideLock(self):
 		self.updatedSeekState()
+
 	def updatedSeekState(self):
 		if self.seekstate == self.SEEK_STATE_PAUSE:
 			self.playlist.pauseFile()
@@ -448,6 +471,7 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 			self.playlist.forwardFile()
 		elif self.isStateBackward(self.seekstate):
 			self.playlist.rewindFile()
+
 	def doEOF(self):
 		self.session.nav.stopService()
 		if config.plugins.mc_pp.musicenable.value == True and config.plugins.mc_pp.music.value != "none":
@@ -531,6 +555,8 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 		self.session.nav.stopService()
 		self.close(self.lastindex + self.dirlistcount)
 #-------------------------------------------------------#
+
+
 class Pic_Exif(Screen):
 	def __init__(self, session, exiflist):
 		self.skin = """<screen position="80,120" size="560,360" title="Info" >
@@ -558,6 +584,8 @@ class Pic_Exif(Screen):
 				list.append((exifdesc[x], name))
 		self["menu"] = List(list)
 #-------------------------------------------------------#
+
+
 class MC_PicSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		self.skin = """<screen position="center,center" size="480,310" title="Settings" >
@@ -576,9 +604,11 @@ class MC_PicSetup(Screen, ConfigListScreen):
 				"right": self.keyRight
 			}, -2)
 		self.createsetup()
+
 	def changedEntry(self):
 		for x in self.onChangedEntry:
 			x()
+
 	def createsetup(self):
 		list = [
 			getConfigListEntry(_("Slideshow Interval (sec.)"), config.plugins.mc_pp.slidetime),
@@ -600,24 +630,30 @@ class MC_PicSetup(Screen, ConfigListScreen):
 			list.extend(sublist)
 		self["config"].list = list
 		self["config"].setList(list)
+
 	def exit(self):
 		for x in self["config"].list:
 			x[1].save()
 		self.close()
+
 	def keyLeft(self):
 		self["config"].handleKey(KEY_LEFT)
 		if self["config"].getCurrent()[1] == config.plugins.mc_pp.musicenable:
 			self.createsetup()
 		if self["config"].getCurrent()[1] == config.plugins.mc_pp.music:
 			self.session.open(Selectmusic)
+
 	def keyRight(self):
 		self["config"].handleKey(KEY_RIGHT)
 		if self["config"].getCurrent()[1] == config.plugins.mc_pp.musicenable:
 			self.createsetup()
 		if self["config"].getCurrent()[1] == config.plugins.mc_pp.music:
 			self.session.open(Selectmusic)
+
 	def keyNumber(self, number):
 		self["config"].handleKey(KEY_0 + number)
+
+
 class Selectmusic(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -641,14 +677,19 @@ class Selectmusic(Screen):
 		self["filelist"] = self.filelist
 		self["currentfolder"] = Label()
 		self["currentfolder"].setText(str(currDir))
+
 	def up(self):
 		self["filelist"].up()
+
 	def down(self):
 		self["filelist"].down()
+
 	def leftUp(self):
 		self["filelist"].pageUp()
+
 	def rightDown(self):
 		self["filelist"].pageDown()
+
 	def KeyOk(self):
 		self.filename = self.filelist.getFilename()
 		self["currentfolder"].setText(str(self.filelist.getCurrentDirectory()))

@@ -22,8 +22,10 @@ from xml.etree.cElementTree import fromstring as cet_fromstring
 from six.moves.urllib.request import FancyURLopener
 import json
 
+
 class MyOpener(FancyURLopener):
 	version = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'
+
 
 class SuggestionsQueryThread(Thread):
 	def __init__(self, query, param, callback, errorback):
@@ -54,6 +56,7 @@ class SuggestionsQueryThread(Thread):
 		if not self.canceled:
 			message = self.messages.pop()
 			message[1](message[0])
+
 
 class ConfigTextWithGoogleSuggestions(ConfigText):
 	def __init__(self, default="", fixed_size=True, visible_width=False):
@@ -161,10 +164,12 @@ class ConfigTextWithGoogleSuggestions(ConfigText):
 		if self.suggestionsWindow is not None:
 			self.suggestionsWindow.enableSelection(value)
 
+
 default = resolveFilename(SCOPE_HDD)
 tmp = config.movielist.videodirs.value
 if default not in tmp:
 	tmp.append(default)
+
 
 class MyTubeSuggestionsListScreen(Screen):
 	skin = """

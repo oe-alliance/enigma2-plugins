@@ -19,7 +19,6 @@ from __future__ import absolute_import
 #######################################################################
 
 
-
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.EventView import EventViewSimple
@@ -70,12 +69,10 @@ config.plugins.MerlinEPG.ZapOnOK = ConfigYesNo(default=False)
 config.plugins.MerlinEPG.PageUDonBouquets = ConfigYesNo(default=True)
 
 
-
 def Plugins(**kwargs):
 	list = [(PluginDescriptor(name="Merlin Programm Guide", description="Merlin Programm Guide", where=PluginDescriptor.WHERE_EVENTINFO, fnc=startMerlinPG))]
 	list.append(PluginDescriptor(name="Merlin Programm Guide", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=startMerlinPGnew))
 	return list
-
 
 
 def startMerlinPG(session, servicelist, **kwargs):
@@ -83,7 +80,6 @@ def startMerlinPG(session, servicelist, **kwargs):
 		session.open(Merlin_PGII, servicelist)
 	else:
 		session.open(Merlin_PGd, servicelist)
-
 
 
 def startMerlinPGnew(session, **kwargs):
@@ -97,7 +93,6 @@ def startMerlinPGnew(session, **kwargs):
 			session.open(Merlin_PGII)
 		else:
 			session.open(Merlin_PGd)
-
 
 
 class MerlinPGsetup(ConfigListScreen, Screen):
@@ -131,7 +126,6 @@ class MerlinPGsetup(ConfigListScreen, Screen):
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close()
-
 
 
 class MerlinEPGList(EPGList):
@@ -195,7 +189,6 @@ class MerlinEPGList(EPGList):
 				self.moveDown()
 			else:
 				break
-
 
 
 class Merlin_PGII(Screen):
@@ -683,7 +676,6 @@ class Merlin_PGII(Screen):
 			self.session.open(MessageBox, text=_('EPGsearch is not installed!'), type=MessageBox.TYPE_ERROR)
 
 
-
 class Merlin_PGd(Screen):
 	try:
 		sz_w = getDesktop(0).size().width()
@@ -982,7 +974,6 @@ class Merlin_PGd(Screen):
 			self.session.open(MessageBox, text=_('EPGsearch is not installed!'), type=MessageBox.TYPE_ERROR)
 
 
-
 if epgSpresent:
 	class myEPGSearchList(EPGSearchList):
 		def __init__(self, type=EPG_TYPE_SINGLE, selChangedCB=None, timer=None):
@@ -1003,7 +994,6 @@ if epgSpresent:
 			]
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left(), r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, EventName + " <" + serviceref.getServiceName()))
 			return res
-
 
 
 if epgSpresent:

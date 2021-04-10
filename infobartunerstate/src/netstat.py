@@ -30,6 +30,7 @@ STATE = {
 		'0B': 'CLOSING'
 		}
  
+
 def _load():
 	''' Read the table of tcp connections & remove header  '''
 	with open(PROC_TCP, 'r') as f:
@@ -37,20 +38,25 @@ def _load():
 		content.pop(0)
 	return content
  
+
 def _hex2dec(s):
 	return str(int(s, 16))
  
+
 def _ip(s):
 	ip = [(_hex2dec(s[6:8])), (_hex2dec(s[4:6])), (_hex2dec(s[2:4])), (_hex2dec(s[0:2]))]
 	return '.'.join(ip)
  
+
 def _remove_empty(array):
 	return [x for x in array if x != '']
  
+
 def _convert_ip_port(array):
 	host, port = array.split(':')
 	return _ip(host), _hex2dec(port)
  
+
 def netstat(getstate=None, getuid=True, getpid=True, readable=True):
 	'''
 	Function to return a list with status of tcp connections at linux systems
@@ -98,6 +104,7 @@ def netstat(getstate=None, getuid=True, getpid=True, readable=True):
 		result.append(nline)
 	return result
  
+
 def _get_pid_of_inode(inode):
 	'''
 	To retrieve the process pid, check every running process and look for one using

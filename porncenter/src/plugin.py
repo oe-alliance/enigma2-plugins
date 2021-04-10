@@ -41,8 +41,10 @@ HEIGHT = size.height()
 PluginLanguageDomain = "PornCenter"
 PluginLanguagePath = "Extensions/PornCenter/locale/"
 
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -50,6 +52,7 @@ def _(txt):
 	else:
 		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
+
 
 language.addCallback(localeInit())
 
@@ -63,6 +66,7 @@ config.plugins.PornCenter.bufferDevice = ConfigText(default="/media/hdd/", fixed
 config.plugins.PornCenter.keepStored = ConfigSelection(choices={"delete": _("delete"), "keep": _("keep on device"), "ask": _("ask me")}, default="delete")
 
 ##################################################
+
 
 class BufferThread():
 	def __init__(self):
@@ -101,9 +105,11 @@ class BufferThread():
 		self.error = ""
 		self.download.stop()
 
+
 bufferThread = BufferThread()
 
 ##################################################
+
 
 class PornCenterBuffer(Screen):
 	skin = """
@@ -155,6 +161,7 @@ class PornCenterBuffer(Screen):
 
 ##################################################
 
+
 class ChangedMoviePlayer(MoviePlayer):
 	def __init__(self, session, service):
 		MoviePlayer.__init__(self, session, service)
@@ -181,6 +188,7 @@ class ChangedMoviePlayer(MoviePlayer):
 		pass
 
 ##################################################
+
 
 class PornCenterLocationSelection(Screen):
 	skin = """
@@ -232,6 +240,7 @@ class PornCenterLocationSelection(Screen):
 			self.instance.setTitle("?")
 
 ##################################################
+
 
 class PornCenterConfig(ConfigListScreen, Screen):
 	skin = """
@@ -289,6 +298,7 @@ class PornCenterConfig(ConfigListScreen, Screen):
 
 ##################################################
 
+
 class PinChecker:
 	def __init__(self):
 		self.pin_entered = False
@@ -301,9 +311,12 @@ class PinChecker:
 
 	def lock(self):
 		self.pin_entered = False
+
+
 pinchecker = PinChecker()
 
 ##################################################
+
 
 class PornCenterList(MenuList):
 	def __init__(self):
@@ -329,6 +342,7 @@ class PornCenterList(MenuList):
 		self.setList(list)
 
 ##################################################
+
 
 class PornCenterSub(Screen, ProtectedScreen):
 	def __init__(self, session, plugin=None):
@@ -433,6 +447,7 @@ class PornCenterSub(Screen, ProtectedScreen):
 
 ##################################################
 
+
 class PornCenterMain(PornCenterSub):
 	if HEIGHT == 576:
 		LISTHEIGHT = 450
@@ -450,14 +465,17 @@ class PornCenterMain(PornCenterSub):
 
 ##################################################
 
+
 def main_closed(callback=None):
 	cache.session.nav.playService(cache.oldService)
+
 
 def main(session, **kwargs):
 	cache.session = session
 	cache.oldService = session.nav.getCurrentlyPlayingServiceReference()
 	session.nav.stopService()
 	session.openWithCallback(main_closed, PornCenterMain)
+
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name=config.plugins.PornCenter.name.value, description=config.plugins.PornCenter.description.value, where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU], fnc=main, icon="plugin.png")

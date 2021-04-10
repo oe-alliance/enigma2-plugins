@@ -1,6 +1,7 @@
 from Components.Sources.Source import Source
 from Components.Harddisk import harddiskmanager
 
+
 class Hdd(Source):
 	def __init__(self, devicecount=0):
 		Source.__init__(self)

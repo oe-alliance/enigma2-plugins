@@ -3,6 +3,7 @@ from Components.Renderer.Renderer import Renderer
 from skin import parseColor
 from enigma import eCanvas, eSize, gRGB, eRect
 
+
 class PermanentClockWatches(Renderer):
 	def __init__(self):
 		Renderer.__init__(self)
@@ -74,6 +75,7 @@ class PermanentClockWatches(Renderer):
 					self.numval = sss
 					self.instance.clear(self.bColor)
 					self.hand()
+
 	def postWidgetCreate(self, instance):
 		def parseSize(str):
 			(x, y,) = str.split(',')

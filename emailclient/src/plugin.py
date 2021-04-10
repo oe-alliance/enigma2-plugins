@@ -42,6 +42,7 @@ config.plugins.emailimap.timeout = ConfigInteger(default=0, limits=(0, 90)) # in
 config.plugins.emailimap.verbose = ConfigEnableDisable(default=True)
 config.plugins.emailimap.debug = ConfigEnableDisable(default=False)
 
+
 def decodeHeader(text, default=''):
 	if text is None:
 		return _(default)
@@ -60,9 +61,11 @@ def decodeHeader(text, default=''):
 	except UnicodeDecodeError: # for faulty mail software systems
 		return textNew.decode('iso-8859-1').encode('utf-8')
 
+
 IS_UNSEEN = 0
 IS_SEEN = 1
 IS_DELETED = 2 
+
 
 class EmailScreen(Screen):
 	'''
@@ -201,7 +204,6 @@ class EmailScreen(Screen):
 		else:
 			self["infolabel"].setText(_("no mailbox?!?!"))
 			
-
 	def _onHeaderList(self, result, flagsList):
 		'''
 		
@@ -295,8 +297,10 @@ class EmailScreen(Screen):
 			MultiContentEntryText(pos=(5, 2 * (scaleV(20, 18) + 1)), size=(self.messagelistWidth, scaleV(20, 18) + 5), font=font, text=message.getSubject(), color=color, color_sel=color)
 		]
 
+
 class ScreenMailView(Screen):
 	skin = ""
+
 	def __init__(self, session, account, message, uid, flags):
 		'''
 		Principal screen to show one mail message.
@@ -441,6 +445,8 @@ class ScreenMailView(Screen):
 			# nothing happens here. What shall we do now with the attachment?
 
 ############
+
+
 class EmailBody:
 	def __init__(self, data):
 		self.data = data
@@ -470,11 +476,12 @@ class EmailBody:
 		except UnicodeDecodeError:
 			return text
 		
-
 	def getContenttype(self):
 		return self.data.get_content_type()
 
 ############
+
+
 class EmailAttachment:
 	def __init__(self, filename, contenttype, data):
 		self.filename = filename
@@ -500,8 +507,10 @@ class EmailAttachment:
 	def getData(self):
 		return self.data
 
+
 def UTF7toUTF8(string): # pylint: disable-msg=C0103
 	return imap4.decoder(string)[0]
+
 
 def UTF8toUTF7(string): # pylint: disable-msg=C0103
 	return imap4.encoder(string.decode('utf-8'))[0]
@@ -591,6 +600,7 @@ class CheckMail:
 			message += m.getSenderString() + '\n' + m.getSubject() + '\n\n'
 		Notifications.AddNotification(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=config.plugins.emailimap.timeout.value)
 
+
 class MessageHeader(object):
 	def __init__(self, uid, message):
 		self.uid = uid #must be int
@@ -621,6 +631,7 @@ class MessageHeader(object):
 
 	def __str__(self):
 		return "<MessageHeader uid=" + str(self.uid) + ", subject=" + self.getSubject() + ">"
+
 
 @implementer(imap4.IMailboxListener)
 class EmailAccount():
@@ -933,6 +944,7 @@ class EmailAccount():
 			self.inboxPos = 1
 		self.mailboxList = mylist
 
+
 class EmailAccountList(Screen):
 	# pylint: disable-msg=W0212
 	def __init__(self, session):
@@ -1070,6 +1082,7 @@ class EmailAccountList(Screen):
 			acc.removeCallback()
 		self.close()
 
+
 from Tools.Directories import resolveFilename, SCOPE_SYSETC, SCOPE_CONFIG, SCOPE_PLUGINS
 import csv
 
@@ -1082,6 +1095,8 @@ MAILCONF = resolveFilename(SCOPE_CONFIG, "EmailClient.csv")
 # we need versioning on the config data
 #
 CONFIG_VERSION = 1
+
+
 def writeAccounts():
 	fd = open(MAILCONF, 'w')
 	fd.write(str(CONFIG_VERSION) + '\n')
@@ -1089,6 +1104,7 @@ def writeAccounts():
 	for acc in mailAccounts:
 		out.writerow(acc.getConfig())
 	fd.close()
+
 
 def getAccounts():
 	debug("[] getAccounts")
@@ -1132,8 +1148,10 @@ def getAccounts():
 		if version != CONFIG_VERSION:
 			writeAccounts()
 
+
 def main(session, **kwargs): #@UnusedVariable kwargs # pylint: disable-msg=W0613
 	session.open(EmailAccountList)
+
 
 def autostart(reason, **kwargs): #@UnusedVariable reason
 	debug("[EmailClient] - Autostart reason: %d kwargs: %s" % (reason, repr(kwargs)))
@@ -1150,7 +1168,9 @@ def autostart(reason, **kwargs): #@UnusedVariable reason
 		for acc in mailAccounts:
 			acc.exit()
 
+
 initLog()
+
 
 def Plugins(path, **kwargs): #@UnusedVariable kwargs # pylint: disable-msg=W0613,C0103
 	return [

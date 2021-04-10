@@ -22,13 +22,11 @@
 #######################################################################
 
 
-
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.AVSwitch import AVSwitch
 from Components.Pixmap import Pixmap
 from enigma import ePicLoad, getDesktop
-
 
 
 class ShowMe(Screen):

@@ -24,6 +24,7 @@ from .EPGRefreshService import EPGRefreshService
 # Show ServiceName instead of ServiceReference
 from ServiceReference import ServiceReference
 
+
 class SimpleBouquetSelection(SimpleChannelSelection):
 	def __init__(self, session, title):
 		SimpleChannelSelection.__init__(self, session, title)
@@ -37,6 +38,7 @@ class SimpleBouquetSelection(SimpleChannelSelection):
 			# We return the currently active path here
 			# Asking the user if this is what he wants might be better though
 			self.close(self.servicePath[-1])
+
 
 class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 	"""Edit Services to be refreshed by EPGRefresh"""

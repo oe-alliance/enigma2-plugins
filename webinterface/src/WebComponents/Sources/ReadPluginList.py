@@ -3,6 +3,7 @@ from Components.Sources.Source import Source
 from Components.PluginComponent import plugins
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
+
 class ReadPluginList(Source):
 	def __init__(self, session):
 		Source.__init__(self)

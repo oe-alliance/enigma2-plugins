@@ -80,6 +80,8 @@ from Plugins.Plugin import PluginDescriptor
 
 gUserScriptExists = False
 # Autostart
+
+
 def autostart(reason, **kwargs):
 	global epgbackup
 	global gUserScriptExists
@@ -100,6 +102,7 @@ def autostart(reason, **kwargs):
 		except:
 			pass
 
+
 def openconfig(session, **kwargs):
 	try:
 		from .EPGBackupConfig import EPGBackupConfig
@@ -107,16 +110,20 @@ def openconfig(session, **kwargs):
 	except:
 		debugOut("Config-Import-Error:\n" + str(format_exc()), forced=True)
 
+
 def showinSetup(menuid):
 	if menuid == "system":
 		return [(extPrefix + " " + _("EXTENSIONNAME_SETUP"), openconfig, "EPGBackupConfig", None)]
 	return []
 
+
 def makeBackup(session, **kwargs):
 	epgbackup.makeBackup(interactive=True)
 
+
 def restoreBackup(session, **kwargs):
 	epgbackup.forceDefaultRestore()
+
 
 def doneConfiguring(session, needsRestart):
 	if needsRestart:
@@ -124,9 +131,11 @@ def doneConfiguring(session, needsRestart):
 			_("To apply your Changes the GUI has to be restarted.\nDo you want to restart the GUI now?"),
 			MessageBox.TYPE_YESNO, title=_("EPGBackup Config V %s") % (PLUGIN_VERSION), timeout=30)
 
+
 def restartGUICB(session, answer):
 	if answer is True:
 		session.open(TryQuitMainloop, 3)
+
 
 SetupPlugDescExt = PluginDescriptor(name=extPrefix + " " + _("EXTENSIONNAME_SETUP"),
 	description=_("Backup and restore EPG Data, including integration of EPGRefresh-plugin"), where=PluginDescriptor.WHERE_EXTENSIONSMENU,
@@ -145,6 +154,7 @@ RestorePlugDescExt = PluginDescriptor(name=extPrefix + " " + _("Restore Backup")
 	fnc=restoreBackup,
 	needsRestart=False)
 
+
 def AdjustPlugin(enable, PlugDescriptor):
 	try:
 		if enable:
@@ -155,6 +165,7 @@ def AdjustPlugin(enable, PlugDescriptor):
 		pass
 	except:
 		debugOut("AdjustPlugin-Error:\n" + str(format_exc()), forced=True)
+
 
 def PluginHousekeeping(configentry):
 	PlugDescInstall = []
@@ -186,9 +197,11 @@ def PluginHousekeeping(configentry):
 	for PlugDescriptor in PlugDescInstall:
 		AdjustPlugin(True, PlugDescriptor)
 
+
 config.plugins.epgbackup.show_setup_in.addNotifier(PluginHousekeeping, initial_call=False, immediate_feedback=True)
 config.plugins.epgbackup.show_make_backup_in_extmenu.addNotifier(PluginHousekeeping, initial_call=False, immediate_feedback=True)
 config.plugins.epgbackup.show_backuprestore_in_extmenu.addNotifier(PluginHousekeeping, initial_call=False, immediate_feedback=True)
+
 
 def Plugins(**kwargs):
 	pluginList = [

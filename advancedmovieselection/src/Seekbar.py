@@ -34,6 +34,7 @@ from Tools.KeyBindings import addKeyBinding
 import keymapparser
 from .Source.Globals import SkinTools
 
+
 class Seekbar(ConfigListScreen, Screen):
     def __init__(self, session, instance, fwd):
         Screen.__init__(self, session)
@@ -164,12 +165,15 @@ class Seekbar(ConfigListScreen, Screen):
 ##############################################
 # This hack overwrites the functions seekFwdManual and seekBackManual of the InfoBarSeek class (MoviePlayer and DVDPlayer)
 
+
 def seekbar(instance, fwd=True):
     if instance and instance.session:
         instance.session.open(Seekbar, instance, fwd)
 
+
 def seekbarBack(instance):
     seekbar(instance, False)
+
 
 MoviePlayer.seekFwdManual = seekbar
 MoviePlayer.seekBackManual = seekbarBack
@@ -184,6 +188,8 @@ if pluginPresent.DVDPlayer:
 # This hack puts the functions seekFwdManual and seekBackManual to the maped keys to seekbarRight and seekbarLeft
 
 DoBind = ActionMap.doBind
+
+
 def doBind(instance):
     if not instance.bound:
         for ctx in instance.contexts:
@@ -194,6 +200,7 @@ def doBind(instance):
                     instance.actions["seekbarLeft"] = instance.actions["seekBackManual"]
             DoBind(instance)
 
+
 if config.AdvancedMovieSelection.overwrite_left_right.value:
     ActionMap.doBind = doBind
 
@@ -202,6 +209,8 @@ if config.AdvancedMovieSelection.overwrite_left_right.value:
 
 KeymapError = keymapparser.KeymapError
 ParseKeys = keymapparser.parseKeys
+
+
 def parseKeys(context, filename, actionmap, device, keys):
     if context == "InfobarSeekActions":
         if device == "generic":
@@ -239,6 +248,7 @@ def parseKeys(context, filename, actionmap, device, keys):
             ParseKeys(context, filename, actionmap, device, keys)
     else:
         ParseKeys(context, filename, actionmap, device, keys)
+
 
 if config.AdvancedMovieSelection.overwrite_left_right.value:
     keymapparser.parseKeys = parseKeys

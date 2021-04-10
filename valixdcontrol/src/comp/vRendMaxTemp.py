@@ -23,6 +23,7 @@ from Tools.HardwareInfo import HardwareInfo
 from enigma import eLabel
 from Renderer import Renderer
 
+
 class vRendMaxTemp(Renderer, VariableText):
 	def __init__(self):
 		Renderer.__init__(self)

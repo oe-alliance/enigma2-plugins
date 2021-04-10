@@ -32,6 +32,7 @@ try:
 except:
 	TextBoundary = False
 
+
 class DAYS:
 	MONDAY = 0
 	TUESDAY = 1
@@ -42,6 +43,7 @@ class DAYS:
 	SUNDAY = 6
 	WEEKEND = 'weekend'
 	WEEKDAY = 'weekday'
+
 
 class AutoTimerList(MenuList):
 	"""Defines a simple Component to show Timer name"""
@@ -92,18 +94,25 @@ class AutoTimerList(MenuList):
 	def applySkin(self, desktop, parent):
 		def itemHeight(value):
 			self.itemHeight = int(value)
+
 		def ServiceNameFont(value):
 			self.ServiceNameFont = parseFont(value, ((1, 1), (1, 1)))
+
 		def EventNameFont(value):
 			self.EventNameFont = parseFont(value, ((1, 1), (1, 1)))
+
 		def DayNameFont(value):
 			self.DayNameFont = parseFont(value, ((1, 1), (1, 1)))
+
 		def rowHeight(value):
 			self.rowHeight = int(value)
+
 		def rowSplit1(value):
 			self.rowSplit1 = int(value)
+
 		def rowSplit2(value):
 			self.rowSplit2 = int(value)
+
 		def iconMargin(value):
 			self.iconMargin = int(value)
 		for (attrib, value) in list(self.skinAttributes):

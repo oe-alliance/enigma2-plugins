@@ -47,12 +47,15 @@ modes = {	THREE_D_OFF: "off",
 			THREE_D_TOP_BOTTOM: "tab"}
 reversemodes = dict((value, key) for key, value in six.iteritems(modes))
 
+
 def setZOffset(configElement):
 	open("/proc/stb/fb/primary/zoffset", "w").write(str(configElement.value))
+
 
 def getmode():
 	mode = reversemodes.get(open("/proc/stb/fb/primary/3d", "r").read().strip(), None)
 	return mode
+
 
 def toggleDisplay(configElement):
 	from Components.Lcd import LCD
@@ -64,12 +67,15 @@ def toggleDisplay(configElement):
 		LCD().setBright(0)
 	eDBoxLCD.getInstance().update()
 
+
 def leaveStandby():
 	toggleDisplay(config.plugins.threed.toggleState)
+
 
 def standbyCounterChanged(configElement):
 	from Screens.Standby import inStandby
 	inStandby.onClose.append(leaveStandby)
+
 
 config.plugins.threed = ConfigSubsection()
 config.plugins.threed.showSBSmenu = ConfigYesNo(default=False)
@@ -77,6 +83,7 @@ config.plugins.threed.showTBmenu = ConfigYesNo(default=False)
 config.plugins.threed.zoffset = ConfigSlider(default=0, increment=1, limits=[0, 10])
 config.plugins.threed.zoffset.addNotifier(setZOffset)
 config.plugins.threed.autothreed = ConfigSelection(default="0", choices=[("0", _("off")), ("1", _("on with side by side")), ("2", _("on with top/bottom"))])
+
 
 def switchmode(mode):
 	if mode in list(modes.keys()):
@@ -87,17 +94,22 @@ def switchmode(mode):
 			config.plugins.threed.toggleState.setValue(getmode() != THREE_D_OFF)
 			toggleDisplay(config.plugins.threed.toggleState)
 
+
 def switchsbs(session, **kwargs):
 	switchmode(THREE_D_SIDE_BY_SIDE)
+
 
 def switchtb(session, **kwargs):
 	switchmode(THREE_D_TOP_BOTTOM)
 
+
 def switchoff(session, **kwargs):
 	switchmode(THREE_D_OFF)
 
+
 class AutoThreeD(Screen):
 	instance = None
+
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
@@ -152,6 +164,7 @@ class AutoThreeD(Screen):
 
 	def setLastMode(self, mode):
 		self.lastmode = mode
+
 
 class ThreeDSettings(Screen, ConfigListScreen):
 	skin = """
@@ -245,8 +258,10 @@ class ThreeDSettings(Screen, ConfigListScreen):
 		self.updateButtons()
 		self.createSetup()
 
+
 def opensettings(session, **kwargs):
 	session.open(ThreeDSettings)
+
 
 def settings(menuid, **kwargs):
 	if getImageDistro() in ('openhdf'):
@@ -257,8 +272,10 @@ def settings(menuid, **kwargs):
 			return []
 	return [(_("3D settings"), opensettings, "3d_settings", 10)]
 
+
 def autostart(session, **kwargs):
 	AutoThreeD(session)
+
 
 def Plugins(**kwargs):
 	pluginlist = []

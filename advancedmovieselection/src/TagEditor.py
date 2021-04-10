@@ -39,6 +39,7 @@ from .Source.ServiceProvider import ServiceCenter
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN, SCOPE_CONFIG
 from .Source.Globals import SkinTools
 
+
 class TagEditor(Screen):
     def __init__(self, session, tags, txt=None, parent=None):
         Screen.__init__(self, session, parent=parent)
@@ -305,6 +306,7 @@ class TagEditor(Screen):
         if not self.origtags == self.tags:
             self.saveTagsFile(self.tags)
         self.close(list)
+
 
 class MovieTagEditor(TagEditor):
     def __init__(self, session, service, parent):

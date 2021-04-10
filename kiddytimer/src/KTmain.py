@@ -32,6 +32,7 @@ PARAM_SETTIMER = 7
 PARAM_ENABLETIMERONCE = 8
 PARAM_RESETTIMER = 9
 
+
 class KiddyTimerScreen(Screen):    
 
     def __init__(self, session):
@@ -90,6 +91,7 @@ class KiddyTimerScreen(Screen):
             self.percentageList.append(i)
       
 ##############################################################################
+
 
 class KiddyTimer():
 
@@ -292,7 +294,6 @@ class KiddyTimer():
             iSeconds = self.sessionTime - iSeconds 
         self.setSessionTime(iSeconds)
         
-
     def setSessionTime(self, iSeconds):
         self.sessionTime = iSeconds
         if self.sessionTime > self.currentDayTime:
@@ -418,6 +419,7 @@ class KiddyTimer():
             self.session.openWithCallback(self.modifySessionTime, MinuteInput)
         else:
             self.session.open(MessageBox, _("Invalid selection"), MessageBox.TYPE_ERROR, 5)
+
 
 # Assign global variable kiddyTimer
 kiddyTimer = KiddyTimer()

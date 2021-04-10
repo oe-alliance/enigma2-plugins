@@ -33,6 +33,7 @@ from Components.Sources.StaticText import StaticText
 from Components.Pixmap import Pixmap
 import os
 
+
 class EventViewBase:    
     def __init__(self, event, ref, callback=None, similarEPGCB=None):
         self.similarEPGCB = similarEPGCB
@@ -149,6 +150,7 @@ class EventViewBase:
         if pluginPresent.OFDb and name:
             from Plugins.Extensions.OFDb.plugin import OFDB
             self.session.open(OFDB, name)
+
 
 class EventViewSimple(Screen, EventViewBase, MoviePreview):
     def __init__(self, session, event, ref, callback=None, similarEPGCB=None):

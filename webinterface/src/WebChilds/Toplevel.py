@@ -34,8 +34,10 @@ if hasattr(static.File, 'render_GET'):
 else:
 	File = static.File
 
+
 def addExternalChild(child):
 	externalChildren.append(child)
+
 
 def getToplevel(session):
 	root = File(util.sibpath(__file__, "web-data/tpl/default"))
@@ -59,7 +61,6 @@ def getToplevel(session):
 		root.putChild("media", File(resolveFilename(SCOPE_MEDIA)))
 		root.putChild("hdd", File(resolveFilename(SCOPE_MEDIA, "hdd")))
 
-
 	importExternalModules()
 
 	for child in externalChildren:
@@ -68,10 +69,12 @@ def getToplevel(session):
 
 	return root
 
+
 class RedirectorResource(resource.Resource):
 	"""
 		this class can be used to redirect a request to a specified uri
 	"""
+
 	def __init__(self, uri):
 		self.uri = uri
 		resource.Resource.__init__(self)

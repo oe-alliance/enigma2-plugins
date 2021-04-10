@@ -8,6 +8,7 @@ from Tools.FuzzyDate import FuzzyTime
 from os import stat as os_stat
 import os
 
+
 class Movie(Source):
 	LIST = 0
 	DEL = 1
@@ -146,6 +147,7 @@ class Movie(Source):
 						threading.Thread.__init__(self)
 						self.fnc = fnc
 						self.start()
+
 					def run(self):
 						self.fnc()
 				StupidThread(moveFunc)

@@ -56,9 +56,11 @@ class Callable:
     def __init__(self, anycallable):
         self.__call__ = anycallable
 
+
 # Controls how sequences are uncoded. If true, elements may be given multiple values by
 #  assigning a sequence.
 doseq = 1
+
 
 class MultipartPostHandler(urllib2.BaseHandler):
     handler_order = urllib2.HTTPHandler.handler_order - 10 # needs to run first
@@ -119,6 +121,7 @@ class MultipartPostHandler(urllib2.BaseHandler):
 
     https_request = http_request
 
+
 def main():
     import tempfile
     import sys
@@ -140,6 +143,7 @@ def main():
             validateFile(arg)
     else:
         validateFile("http://www.google.com")
+
 
 if __name__ == "__main__":
     main()

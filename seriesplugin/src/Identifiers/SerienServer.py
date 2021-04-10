@@ -47,7 +47,6 @@ class SerienServer(IdentifierBase2):
 		# On Success: Return a single season, episode, title tuple
 		# On Failure: Return a empty list or String or None
 		
-		
 		# Check preconditions
 		if not name:
 			msg = _("Skipping lookup because no show name is specified")
@@ -61,7 +60,6 @@ class SerienServer(IdentifierBase2):
 			msg = _("Skipping lookup because no channel is specified")
 			log.warning(msg)
 			return msg
-		
 		
 		self.name = name
 		self.begin = begin

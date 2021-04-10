@@ -63,10 +63,8 @@ class YouTubeAddPlaylistDialog(Screen, ConfigListScreen):
 
 		ConfigListScreen.__init__(self, cfglist, session)
 
-
 	def keySave(self):
 		self.close(True, playlistContext)
-
 
 	def keyCancel(self):
 		self.close(False, playlistContext)

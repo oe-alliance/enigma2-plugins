@@ -4,6 +4,7 @@ from Components.config import config
 from twisted.web import server, resource, http
 import six
 
+
 class IPKGResource(resource.Resource):
 	IPKG_PATH = "/usr/bin/opkg"
 
@@ -90,6 +91,7 @@ class IPKGResource(resource.Resource):
 			return self.args[key][0]
 		else:
 			return None
+
 
 class IPKGConsoleStream:
 	def __init__(self, request, cmd):

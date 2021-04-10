@@ -12,6 +12,7 @@ from RecordTimer import RecordTimerEntry, RecordTimer, AFTEREVENT, parseEvent
 from xml.sax.saxutils import unescape
 from time import time, strftime, localtime, mktime
 
+
 class Timer(Source):
 	LIST = 0
 	ADDBYID = 1
@@ -69,7 +70,6 @@ class Timer(Source):
 
 		self.session.nav.RecordTimer.cleanup()
 		return (True, _("List of Timers has been cleaned"))
-
 
 	def delTimer(self, param):
 		print("[WebComponents.Timer] delTimer")
@@ -214,6 +214,7 @@ class Timer(Source):
 # Otherwise, and if the parameters channelOld, beginOld and endOld are set,
 # an existing timer with corresponding values will be changed.
 #===============================================================================
+
 	def editTimer(self, param):
 		print("[WebComponents.Timer] editTimer")
 
@@ -375,7 +376,6 @@ class Timer(Source):
 				print(traceback.format_exc())
 				return (False, _("Changing the timer for '%s' failed!") % name)
 
-
 			return (False, _("Could not find timer '%s' with given start and end time!") % name)
 
 		#Try adding a new Timer
@@ -443,7 +443,6 @@ class Timer(Source):
 
 			return (False, _("Conflicting Timer(s) detected! %s") % (msg))
 
-
 	def writeTimerList(self, force=False):
 		# is there an easier and better way? :\
 		if config.plugins.Webinterface.autowritetimer.value or force:
@@ -452,7 +451,6 @@ class Timer(Source):
 			return (True, _("TimerList has been saved"))
 		else:
 			return (False, _("TimerList has not been saved"))
-
 
 	def getResult(self):
 		return self.res

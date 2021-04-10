@@ -3,6 +3,7 @@ from Components.Sources.ServiceList import ServiceList
 from Screens.ChannelSelection import service_types_tv
 from enigma import eServiceReference
 
+
 class ServiceListRecursive(Source):
 	FETCH = 0
 

@@ -44,8 +44,10 @@ SEVERITYMAP = {
 	MessageBox.TYPE_ERROR: SEVERITY['err'],
 }
 
+
 class SyslogNetworkProtocol(DatagramProtocol):
 	addr = None
+
 	def __init__(self, host):
 		self.host = host
 
@@ -112,6 +114,7 @@ class SyslogNetworkProtocol(DatagramProtocol):
 			timeout=10, # XXX: un-hardcode timeout?
 			close_on_any_key=True,
 		)
+
 
 class SyslogAbstraction:
 	def __init__(self, host):

@@ -6,6 +6,7 @@ import re
 
 ##################################################
 
+
 class bangYouLaterSub(Plugin):
 	def __init__(self, name, url):
 		self.url = url
@@ -38,6 +39,7 @@ class bangYouLaterSub(Plugin):
 
 ##################################################
 
+
 class bangYouLater(Plugin):
 	def __init__(self):
 		Plugin.__init__(self, "Bang You Later", "bangyoulater.png")
@@ -60,6 +62,7 @@ class bangYouLater(Plugin):
 			print("[%s] Error: %s" % (self.name, error))
 
 ##################################################
+
 
 def getPlugin():
 	return bangYouLater()

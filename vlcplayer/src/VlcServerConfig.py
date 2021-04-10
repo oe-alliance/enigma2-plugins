@@ -29,6 +29,7 @@ from Screens.Screen import Screen
 from .VlcServer import VlcServer
 from . import _
 
+
 class ConfigMutable(ConfigElement):
 	def __init__(self, configElementDict, defaultKey):
 		ConfigElement.__init__(self)

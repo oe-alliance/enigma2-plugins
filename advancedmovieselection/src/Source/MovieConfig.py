@@ -37,6 +37,7 @@ if not fileExists(__CONF__):
     copyfile(resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/AdvancedMovieSelection/AdvancedMovieSelection.conf"), __CONF__)
 DMCONFFILE = __CONF__
 
+
 class MovieConfig:
     def __init__(self):
         self.readDMconf()

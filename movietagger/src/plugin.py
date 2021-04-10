@@ -17,6 +17,7 @@ from Tools.Directories import *
 
 VERSION = "1.3"
 
+
 class MovieTagger(Screen):
 	skin = """
 		<screen position="center,70" size="600,460" title="Movie Tagger" >
@@ -147,7 +148,6 @@ class MovieTagger(Screen):
 		self.updateCurrentTagList()
 		self.updateAllTagList()
 
-
 	def removeTag(self, tagname):
 		newtags = []
 		for i in self.tags:
@@ -156,7 +156,6 @@ class MovieTagger(Screen):
 		self.setTags(" ".join(newtags))
 		self.updateCurrentTagList()
 		self.updateAllTagList()
-
 
 	def setTags(self, tagstring, service=False, userNotice=True):
 		if service is False:
@@ -175,7 +174,6 @@ class MovieTagger(Screen):
 				self.session.open(MessageBox, _("Can't write movietags, because no meta-file found!"), MessageBox.TYPE_ERROR)
 			return False
 
-
 	def readMETAData(self, filename):
 		if pathExists(filename):
 			fp = open(filename, "r")
@@ -188,6 +186,7 @@ class MovieTagger(Screen):
 			return data
 		else:
 			return False
+
 	def writeMETAData(self, filename, metadata):
 		if pathExists(filename):
 			fp = open(filename, "w")
@@ -296,6 +295,7 @@ class MovieTagger(Screen):
 		if newTag >= 0:
 			self.addTag(newTag.strip().replace(" ", "_"))
 
+
 class TagMenuList(MenuList):
 	def __init__(self, list, enableWrapAround=False):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
@@ -306,11 +306,13 @@ class TagMenuList(MenuList):
 		MenuList.postWidgetCreate(self, instance)
 		instance.setItemHeight(25)
 
+
 def main(session, service, **kwargs):
 	try:
 		session.open(MovieTagger, service)
 	except Exception as e:
 		raise e
+
 
 def Plugins(path, **kwargs):
  	return PluginDescriptor(name="Movie Tagger", description=_("Movie Tagger..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main)

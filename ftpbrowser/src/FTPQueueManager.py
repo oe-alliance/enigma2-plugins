@@ -13,6 +13,7 @@ from Components.Sources.StaticText import StaticText
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
+
 class FTPQueueManagerSummary(Screen):
 	skin = """
 	<screen position="0,0" size="132,64">
@@ -24,6 +25,7 @@ class FTPQueueManagerSummary(Screen):
 			<convert type="ClockToText">WithSeconds</convert>
 		</widget>
 	</screen>"""
+
 
 class FTPQueueManager(Screen):
 	skin = """

@@ -76,6 +76,7 @@ MEDIAEXTENSIONS = {
         "mp3": "audio"
     }
 
+
 class MovieList(GUIComponent):
     SORT_ALPHANUMERIC = 1
     SORT_RECORDED = 2
@@ -1012,7 +1013,6 @@ class MovieList(GUIComponent):
             mi = MovieInfo(tt1.getName(), tt1, info)
             self.list.insert(db_index, (mi,))
         
-                
         # finally, store a list of all tags which were found. these can be presented to the user to filter the list
         self.tags = sorted(tags)
 

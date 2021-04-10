@@ -9,5 +9,6 @@ class FrontendstatusWidget(Widget):
         self.elements["frontendstatuswidget_AGC"] = Label(_("AGC") + ":")
         self.elements["frontendstatuswidget_BER"] = Label(_("BER") + ":")
 
+
 def get_widget(session):
     return FrontendstatusWidget(session)

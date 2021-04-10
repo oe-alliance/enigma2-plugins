@@ -19,6 +19,7 @@ from Components.ActionMap import HelpableActionMap
 from Components.Sources.StaticText import StaticText
 from enigma import getDesktop
 
+
 class AutoTimerOverviewSummary(Screen):
 	skin = """
 	<screen position="0,0" size="132,64">
@@ -45,9 +46,12 @@ class AutoTimerOverviewSummary(Screen):
 	def selectionChanged(self, text):
 		self["entry"].text = text
 
+
 HD = False
 if getDesktop(0).size().width() >= 1280:
 	HD = True
+
+
 class AutoTimerOverview(Screen, HelpableScreen):
 	"""Overview of AutoTimers"""
 	if HD:
@@ -357,7 +361,6 @@ class AutoTimerOverview(Screen, HelpableScreen):
 						newTimer
 					)
 				
-
 	def save(self):
 		# Just close here, saving will be done by cb
 		self.close(self.session)

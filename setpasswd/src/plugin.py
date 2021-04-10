@@ -28,6 +28,7 @@ import six
 from boxbranding import getImageDistro
 title = _("Change Root Password")
 
+
 class ChangePasswdScreen(Screen):
 	skin = """
 		<screen position="65,160" size="585,250" title="%s" >
@@ -122,6 +123,7 @@ class ChangePasswdScreen(Screen):
 		if callback is not None and len(callback):
 			self.buildList(callback)
 
+
 def startChange(menuid):
 	if getImageDistro() in ('teamblue'):
 		if menuid != "general_menu":
@@ -131,8 +133,10 @@ def startChange(menuid):
 			return []
 	return [(title, main, "change_root_passwd", 50)]
 
+
 def main(session, **kwargs):
 	session.open(ChangePasswdScreen)
+
 
 def Plugins(**kwargs):
 	return PluginDescriptor(

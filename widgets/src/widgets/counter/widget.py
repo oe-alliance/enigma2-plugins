@@ -3,6 +3,7 @@ from Plugins.Extensions.Widgets.Widget import Widget
 from Components.Label import Label
 from enigma import eTimer
 
+
 class CounterWidget(Widget):
     def __init__(self, session):
         Widget.__init__(self, session, name="Simple Counter Widget", description="Example of a Widget with dynamicly changing Text", version="0.1", author="3c5x9", homepage="cvs://schwerkraft")
@@ -30,5 +31,6 @@ class CounterWidget(Widget):
         except Exception as e:
             pass
         
+
 def get_widget(session):
     return CounterWidget(session)

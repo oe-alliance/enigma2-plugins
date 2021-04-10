@@ -13,6 +13,7 @@ from . import NOTIFICATIONID
 
 SNP_TCP_PORT = 9887
 
+
 class SnarlNetworkProtocol(LineReceiver):
 	def __init__(self, client=False):
 		self.client = client
@@ -89,6 +90,7 @@ class SnarlNetworkProtocol(LineReceiver):
 		payload = "SNP/1.0/0/OK"
 		self.sendLine(payload)
 
+
 class SnarlNetworkProtocolClientFactory(ClientFactory):
 	client = None
 
@@ -114,6 +116,7 @@ class SnarlNetworkProtocolClientFactory(ClientFactory):
 	def removeClient(self, client):
 		self.client = None
 
+
 class SnarlNetworkProtocolServerFactory(ServerFactory):
 	protocol = SnarlNetworkProtocol
 
@@ -132,6 +135,7 @@ class SnarlNetworkProtocolServerFactory(ServerFactory):
 	def stopFactory(self):
 		for client in self.clients:
 			client.stop()
+
 
 class SnarlNetworkProtocolAbstraction:
 	clientPort = None

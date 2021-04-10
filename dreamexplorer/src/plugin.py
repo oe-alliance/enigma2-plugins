@@ -71,12 +71,10 @@ from time import strftime as time_strftime
 from time import localtime as time_localtime
 
 
-
 config.plugins.DreamExplorer = ConfigSubsection()
 config.plugins.DreamExplorer.startDir = ConfigText(default="/")
 config.plugins.DreamExplorer.MediaFilter = ConfigText(default="off")
 config.plugins.DreamExplorer.CopyDest = ConfigText(default="/")
-
 
 
 explSession = None
@@ -88,7 +86,6 @@ else:
 	HDSkn = False
 
 
-
 def Plugins(**kwargs):
 	list = [PluginDescriptor(name="Dream-Explorer", description=_("Explore your Dreambox."), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="dreamexplorer.png", fnc=main)]
 	list.append(PluginDescriptor(name=_("Dream-Explorer"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main))
@@ -96,10 +93,8 @@ def Plugins(**kwargs):
 	return list
 
 
-
 def main(session, **kwargs):
 	session.open(DreamExplorerII)
-
 
 
 def autostart(reason, **kwargs):
@@ -109,10 +104,10 @@ def autostart(reason, **kwargs):
 			explSession = kwargs["session"]
 			InfoBar.showMovies = showExpl
 
+
 def showExpl(dummy_self=None):
 	global explSession
 	explSession.open(DreamExplorerII)
-
 
 
 ######## DREAM-EXPLORER START #######################
@@ -723,7 +718,6 @@ class DreamExplorerII(Screen):
 ######## DREAM-EXPLORER END ####################### 
 
 
-
 class vEditor(Screen):
 	global HDSkn
 	if HDSkn:
@@ -814,11 +808,11 @@ class vEditor(Screen):
 			self.close()
 
 
-
 class MviExplorer(Screen):
 	skin = """
 		<screen position="-300,-300" size="10,10" title="mvi-Explorer">
 		</screen>"""
+
 	def __init__(self, session, file):
 		self.skin = MviExplorer.skin
 		Screen.__init__(self, session)
@@ -829,9 +823,9 @@ class MviExplorer(Screen):
 			"back": self.close
 		}, -1)
 		self.onLayoutFinish.append(self.showMvi)
+
 	def showMvi(self):
 		os_system("/usr/bin/showiframe " + self.file_name)
-
 
 
 class PictureExplorerII(Screen):
@@ -937,7 +931,6 @@ class PictureExplorerII(Screen):
 			self["State"].setText(_(self.whatPic))
 
 
-
 class MoviePlayer(MP_parent):
 	def __init__(self, session, service):
 		self.session = session
@@ -970,7 +963,6 @@ class MoviePlayer(MP_parent):
 			self.session.nav.playService(self.lastservice)
 
 
-
 class MusicExplorer(MoviePlayer):
 	skin = """
 	<screen backgroundColor="#50070810" flags="wfNoBorder" name="MusicExplorer" position="center,center" size="720,30">
@@ -981,6 +973,7 @@ class MusicExplorer(MoviePlayer):
 			<convert type="ServiceName">Name</convert>
 		</widget>
 	</screen>"""
+
 	def __init__(self, session, service, MusicDir, theFile):
 		self.session = session
 		MoviePlayer.__init__(self, session, service)
@@ -1034,7 +1027,6 @@ class MusicExplorer(MoviePlayer):
 		self.seekFwd()
 
 
-
 def ScanSysem_str():
 	try:
 		ret = ""
@@ -1059,16 +1051,15 @@ def ScanSysem_str():
 		return "N/A"
 
 
-
 class vInputBox(InputBox):
 	vibnewx = str(getDesktop(0).size().width() - 80)
 	sknew = '<screen name="vInputBox" position="center,center" size="' + vibnewx + ',70" title="Input...">\n'
 	sknew = sknew + '<widget name="text" position="5,5" size="1270,25" font="Regular;15"/>\n<widget name="input" position="0,40" size="'
 	sknew = sknew + vibnewx + ',30" font="Regular;20"/>\n</screen>'
 	skin = sknew
+
 	def __init__(self, session, title="", windowTitle=_("Input"), useableChars=None, **kwargs):
 		InputBox.__init__(self, session, title, windowTitle, useableChars, **kwargs)
-
 
 
 class CPmaniger(Screen):
@@ -1213,6 +1204,7 @@ class SoftLinkScreen(Screen):
 				<eLabel font="Regular;18" halign="left" position="35,425" size="120,25" text="Set name" transparent="1" valign="center" zPosition="6"/>
 				<eLabel font="Regular;18" halign="left" position="345,425" size="220,25" text="Make a softlink" transparent="1" valign="center" zPosition="6"/>
 			</screen>"""
+
 	def __init__(self, session, source="/tmp/"):
 		self.skin = SoftLinkScreen.skin
 		Screen.__init__(self, session)

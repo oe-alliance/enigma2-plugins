@@ -5,6 +5,7 @@ from Components.Label import Label
 from Components.config import config, getConfigListEntry
 from Components.ActionMap import ActionMap
 
+
 class WebcamViewerMenu(ConfigListScreen, Screen):
 	skin = """
 		<screen position="100,100" size="550,400" title="Setup" >
@@ -12,6 +13,7 @@ class WebcamViewerMenu(ConfigListScreen, Screen):
 		<widget name="key_red" position="10,360" size="100,40" backgroundColor="red" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/> 
 		<widget name="key_green" position="120,360" size="100,40" backgroundColor="green" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/> 
 		</screen>"""
+
 	def __init__(self, session, args=0):
 		Screen.__init__(self, session)
 		self.list = []

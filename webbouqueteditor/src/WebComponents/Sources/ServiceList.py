@@ -4,6 +4,7 @@ from enigma import eServiceCenter, eServiceReference
 from Components.ParentalControl import parentalControl, IMG_WHITESERVICE, IMG_WHITEBOUQUET, IMG_BLACKSERVICE, IMG_BLACKBOUQUET
 from Components.config import config
 
+
 class ServiceList(Source):
 	def __init__(self, root, command_func=None, validate_commands=True):
 		Source.__init__(self)

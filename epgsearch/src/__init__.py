@@ -17,8 +17,10 @@ from six.moves import range
 PluginLanguageDomain = "EPGSearch"
 PluginLanguagePath = "Extensions/EPGSearch/locale"
 
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -26,6 +28,7 @@ def _(txt):
 	else:
 		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
+
 
 language.addCallback(localeInit())
 
@@ -46,6 +49,7 @@ config.plugins.epgsearch.add_search_to_epg = ConfigYesNo(default=True)
 
 orbposDisabled = 3600
 
+
 def getNamespaces(namespaces):
 	lamedbServices = eServiceReference("1:7:1:0:0:0:0:0:0:0:" + " || ".join(['(satellitePosition == %d)' % (x >> 16) for x in namespaces]))
 	hasNamespaces = set()
@@ -63,6 +67,7 @@ def getNamespaces(namespaces):
 					return hasNamespaces
 			serviceIterator = servicelist.getNext()
 	return hasNamespaces
+
 
 def orbposChoicelist():
 	choiceList = [(orbposDisabled, _('disabled'), 0)]
@@ -87,8 +92,10 @@ def orbposChoicelist():
 	]
 	return choiceList
 
+
 def isOrbposName(name):
 	return name.startswith("orbpos") and name[6:].isdigit()
+
 
 def doSave():
 	saveFile = False
@@ -99,12 +106,14 @@ def doSave():
 	if saveFile:
 		configfile.save()
 
+
 def unusedOrbPosConfList():
 	numorbpos = int(config.plugins.epgsearch.numorbpos.value)
 	return [
 		item for item in six.iteritems(config.plugins.epgsearch.dict())
 		if isOrbposName(item[0]) and int(item[0][6:]) >= numorbpos
 	]
+
 
 def initOrbposConfigs():
 	choiceList = orbposChoicelist()
@@ -129,6 +138,7 @@ def initOrbposConfigs():
 		for i in range(min(maxEntries, len(orbPosList))):
 			getattr(config.plugins.epgsearch, "orbpos" + str(i)).value = orbPosList[i][0].value
 
+
 def updateOrbposConfig(save=False):
 	choiceList = orbposChoicelist()
 	updateNumOrbpos(choiceList, save)
@@ -148,11 +158,14 @@ def updateOrbposConfig(save=False):
 	return len(choiceList)
 
 # Set old items to default so that they will disappear from the settings file
+
+
 def purgeOrbposConfig():
 	for name, confItem in unusedOrbPosConfList():
 		if confItem.value != confItem.default:
 			confItem.value = confItem.default
 	doSave()
+
 
 def updateUnusedOrbposConfig(choiceList, save):
 	setChoiceList = [(str(orbpos), desc) for (orbpos, desc, flags) in choiceList]
@@ -160,6 +173,7 @@ def updateUnusedOrbposConfig(choiceList, save):
 		confItem.setChoices(setChoiceList, default=str(orbposDisabled))
 	if save:
 		doSave()
+
 
 def getOrbposConfList(includeDisabled=False):
 	return [
@@ -171,6 +185,7 @@ def getOrbposConfList(includeDisabled=False):
 		)
 	]
 
+
 def updateNumOrbpos(choiceList, save):
 	maxEntries = max(len(choiceList) - 1, 0)
 	oldVal = int(config.plugins.epgsearch.numorbpos.value)
@@ -180,6 +195,7 @@ def updateNumOrbpos(choiceList, save):
 		config.plugins.epgsearch.numorbpos.value = str(maxEntries)
 	config.plugins.epgsearch.numorbpos.setChoices(choices, default="1")
 	updateUnusedOrbposConfig(choiceList, save)
+
 
 initOrbposConfigs()
 updateOrbposConfig(save=True)

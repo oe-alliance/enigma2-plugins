@@ -61,20 +61,27 @@ DESKTOP_HEIGHT = getDesktop(0).size().height()
 # else something scaled accordingly
 # if one of the parameters is -1, scale proportionally
 #
+
+
 def scaleH(y2, y1):
 	if y2 == -1:
 		y2 = y1 * 1280 / 720
 	elif y1 == -1:
 		y1 = y2 * 720 / 1280
 	return scale(y2, y1, 1280, 720, DESKTOP_WIDTH)
+
+
 def scaleV(y2, y1):
 	if y2 == -1:
 		y2 = y1 * 720 / 576
 	elif y1 == -1:
 		y1 = y2 * 576 / 720
 	return scale(y2, y1, 720, 576, DESKTOP_HEIGHT)
+
+
 def scale(y2, y1, x2, x1, x):
 	return (y2 - y1) * (x - x1) / (x2 - x1) + y1
+
 
 def getMountedDevices():
 	def handleMountpoint(loc):
@@ -102,6 +109,7 @@ def getMountedDevices():
 		mountedDevs += [(os.path.join(netDir, p), _("Network mount")) for p in os.listdir(netDir)]
 	mountedDevs = list(map(handleMountpoint, mountedDevs))
 	return mountedDevs
+
 
 config.plugins.NcidClient = ConfigSubsection()
 config.plugins.NcidClient.debug = ConfigEnableDisable(default=False)
@@ -133,6 +141,7 @@ ncidsrv = None
 
 avon = {}
 
+
 def initAvon():
 	avonFileName = resolveFilename(SCOPE_PLUGINS, "Extensions/NcidClient/avon.dat")
 	if os.path.exists(avonFileName):
@@ -144,6 +153,7 @@ def initAvon():
 				parts = line.split(':')
 				if len(parts) == 2:
 					avon[parts[0].replace('-', '').replace('*', '').replace('/', '')] = parts[1]
+
 
 def resolveNumberWithAvon(number, countrycode):
 	if not number or number[0] != '0':
@@ -162,6 +172,7 @@ def resolveNumberWithAvon(number, countrycode):
 		if normNumber[:i] in avon:
 			return '[' + avon[normNumber[:i]].strip() + ']'
 	return ""
+
 
 def handleReverseLookupResult(name):
 	found = re.match("NA: ([^;]*);VN: ([^;]*);STR: ([^;]*);HNR: ([^;]*);PLZ: ([^;]*);ORT: ([^;]*)", name)
@@ -191,6 +202,7 @@ def handleReverseLookupResult(name):
 			name += city
 	return name
 
+
 from xml.dom.minidom import parse
 
 import six
@@ -198,6 +210,8 @@ from six.moves import reload_module
 
 
 cbcInfos = {}
+
+
 def initCbC():
 	callbycallFileName = resolveFilename(SCOPE_PLUGINS, "Extensions/NcidClient/callbycall_world.xml")
 	if os.path.exists(callbycallFileName):
@@ -208,6 +222,7 @@ def initCbC():
 				cbcInfos[code] = cbc.getElementsByTagName("callbycall")
 	else:
 		debug("[NcidClient] initCbC: callbycallFileName does not exist?!?!")
+
 
 def stripCbCPrefix(number, countrycode):
 	if number and number[:2] != "00" and countrycode in cbcInfos:
@@ -233,6 +248,7 @@ FBF_dectActive = 6
 FBF_faxActive = 7
 FBF_rufumlActive = 8
 
+
 class NcidCall:
 	def __init__(self):
 		debug("[NcidCall] __init__")
@@ -248,6 +264,7 @@ class NcidCall:
 			self._callScreen.close()
 			self._callScreen = None
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR, timeout=config.plugins.NcidClient.timeout.value)
+
 
 class NcidClientPhonebook:
 	def __init__(self):
@@ -661,7 +678,9 @@ class NcidClientPhonebook:
 		def exit(self):
 			self.close()
 
+
 phonebook = NcidClientPhonebook()
+
 
 class NcidClientSetup(Screen, ConfigListScreen):
 
@@ -807,6 +826,7 @@ class NcidClientSetup(Screen, ConfigListScreen):
 
 standbyMode = False
 
+
 class NcidCallList:
 	def __init__(self):
 		self.callList = []
@@ -869,9 +889,12 @@ class NcidCallList:
 		# my_global_session.open(NcidDisplayCalls, text)
 		self.callList = []
 
+
 callList = NcidCallList()
 
 global_muted = None
+
+
 def notifyCall(date, number, caller):
 	if Standby.inStandby is None or config.plugins.NcidClient.afterStandby.value == "each":
 		global global_muted
@@ -904,6 +927,7 @@ def notifyCall(date, number, caller):
 
 countries = {}
 reverselookupMtime = 0
+
 
 class NcidReverseLookupAndNotify:
 	def __init__(self, number, caller, date):
@@ -949,6 +973,7 @@ class NcidReverseLookupAndNotify:
 			else:
 				self.caller = name
 		notifyCall(self.date, self.number, self.caller)
+
 
 class NcidLineReceiver(LineReceiver):
 	def __init__(self):
@@ -1036,12 +1061,14 @@ class NcidLineReceiver(LineReceiver):
 
 		self.notifyAndReset()
 
+
 class NcidClientFactory(ReconnectingClientFactory):
 	initialDelay = 20
 	maxDelay = 30
 
 	def __init__(self):
 		self.hangup_ok = False
+
 	def startedConnecting(self, connector): #@UnusedVariable # pylint: disable=W0613
 		if config.plugins.NcidClient.connectionVerbose.value:
 			Notifications.AddNotification(MessageBox, _("Connecting to NCID Server..."), type=MessageBox.TYPE_INFO, timeout=2)
@@ -1072,6 +1099,7 @@ class NcidClientFactory(ReconnectingClientFactory):
 		# config.plugins.NcidClient.enable.value = False
 		ncidsrv = None
 
+
 class NcidClient:
 	def __init__(self):
 		self.dialog = None
@@ -1095,10 +1123,13 @@ class NcidClient:
 			self.desc[1].disconnect()
 			self.desc = None
 
+
 def main(session):
 	session.open(NcidClientSetup)
 
+
 ncid_call = None
+
 
 def autostart(reason, **kwargs):
 	global ncid_call
@@ -1115,6 +1146,7 @@ def autostart(reason, **kwargs):
 	elif reason == 1:
 		ncid_call.shutdown()
 		ncid_call = None
+
 
 def Plugins(**kwargs): #@UnusedVariable # pylint: disable=W0613,C0103
 	what = _("Display Fon calls on screen")

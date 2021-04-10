@@ -33,11 +33,13 @@ if 'HTTPSConnection' not in dir(httplib):
 	# python on enimga2 has no https socket support
 	gdata.youtube.service.YOUTUBE_USER_FEED_URI = 'http://gdata.youtube.com/feeds/api/users'
 
+
 def validate_cert(cert, key):
 	buf = decrypt_block(cert[8:], key)
 	if buf is None:
 		return None
 	return buf[36:107] + cert[139:196]
+
 
 def get_rnd():
 	try:
@@ -45,6 +47,7 @@ def get_rnd():
 		return rnd
 	except:
 		return None
+
 
 std_headers = {
 	'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
@@ -62,11 +65,12 @@ std_headers = {
 #	version = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'
 
 
-
 def printDBG(s):
     print(s)
 
 # source from https://github.com/rg3/youtube-dl/issues/1208
+
+
 class CVevoSignAlgoExtractor:
     # MAX RECURSION Depth for security
     MAX_REC_DEPTH = 5
@@ -221,7 +225,9 @@ class CVevoSignAlgoExtractor:
             self.fullAlgoCode += '\n' + funBody + '\n'
         return
        
+
 decryptor = CVevoSignAlgoExtractor()
+
 
 class GoogleSuggestions():
 	def __init__(self):
@@ -274,6 +280,7 @@ class GoogleSuggestions():
 						return None
 		else:
 			return None
+
 
 class MyTubeFeedEntry():
 	def __init__(self, feed, entry, favoritesFeed=False):
@@ -343,7 +350,6 @@ class MyTubeFeedEntry():
 		if self.entry.rating is not None:
 			return self.entry.rating.average
 		return 0
-
 
 	def getNumRaters(self):
 		if self.entry.rating is not None:
@@ -535,6 +541,7 @@ class MyTubeFeedEntry():
 		myuri = 'http://gdata.youtube.com/feeds/api/users/%s/uploads' % username
 		print("Found Uservideos: ", myuri)
 		return myuri
+
 
 class MyTubePlayerService():
 #	Do not change the client_id and developer_key in the login-section!
@@ -807,6 +814,7 @@ class MyTubePlayerService():
 		
 		return int(int(self.feed.start_index.text) / int(self.itemCount())) + 1
 
+
 class YoutubeQueryThread(Thread):
 	def __init__(self, query, param, gotFeed, gotFeedError, callback, errorback):
 		Thread.__init__(self)
@@ -843,6 +851,7 @@ class YoutubeQueryThread(Thread):
 				self.gotFeed(message[1], message[2])
 			else:
 				self.gotFeedError(message[1], message[2])
+
 
 myTubeService = MyTubePlayerService()
 

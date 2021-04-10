@@ -8,6 +8,7 @@ from twisted.internet.defer import Deferred
 from xml.etree.cElementTree import fromstring as cet_fromstring
 import six
 
+
 class GoogleReader:
 	def __init__(self, username=None, password=None):
 		self.username = username
@@ -99,12 +100,14 @@ class GoogleReader:
 			# XXX: we might want to give some information here besides "we failed"
 			defer.errback()
 
+
 if __name__ == '__main__':
 	from twisted.internet import reactor
 	import sys
 	Deferred.debug = True
 
 	googleReader = GoogleReader(sys.argv[1], sys.argv[2])
+
 	def googleLoggedIn(sid=None):
 		print("Got Token:", sid)
 		googleReader.getSubscriptionList().addCallbacks(googleSubscriptionList, errback=googleSubscriptionFailed)

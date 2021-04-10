@@ -42,6 +42,7 @@ import sys
 x = 0
 y = 0
 
+
 class dreamIRCMainMenu(Screen):
 
 	from enigma import getDesktop
@@ -88,7 +89,6 @@ class dreamIRCMainMenu(Screen):
 				<widget name="blue.desc" position="490,420" size="110,20" font="Regular;16" />
 			</screen>"""
 		
-	
 	def __init__(self, session, args=0):
 		global x, y
 		self.skin = dreamIRCMainMenu.skin
@@ -267,8 +267,10 @@ class dreamIRCMainMenu(Screen):
 			print(" TEXT = %s   - laenge = %d  !!!!" % (callback, len(callback)))
 			self.pipe.addOutText(callback)
 
+
 def main(session, **kwargs):
         session.open(dreamIRCMainMenu)
+
 
 def Plugins(**kwargs):
         return PluginDescriptor(

@@ -24,6 +24,7 @@ from six.moves import range
 
 SAVEFILE = "/usr/lib/enigma2/python/Plugins/Extensions/Sudoku/Sudoku.sav"
 
+
 def RGB(r, g, b):
 	return (r << 16) | (g << 8) | b
 
@@ -40,7 +41,6 @@ def Plugins(**kwargs):
 class board:
 	boardlist = []
 	partialboardlist = []
-
 
 	def generate(self, numFilled=(9 * 9)):
 		slots = []
@@ -72,7 +72,6 @@ class board:
 			j = fillOrder[i]
 			self.partialboardlist[j[0]][j[1]] = self.boardlist[j[0]][j[1]]
 
-
 	def search(self, slots, index):
 		nums = []
 		fillOrder = []
@@ -98,13 +97,11 @@ class board:
 			self.boardlist[x][y] = 0
 		return False
 
-
 	def check(self):
 		for i in range(0, 9):
 			if (not self.checkRow(i)) or (not self.checkCol(i)) or (not self.checkSquare(i)):
 				return False
 		return True
-
 
 	def checkRow(self, row):
 		found = []
@@ -115,7 +112,6 @@ class board:
 				found.append(self.boardlist[i][row])
 		return True
 
-
 	def checkCol(self, col):
 		found = []
 		for j in range(0, 9):
@@ -124,7 +120,6 @@ class board:
 					return False
 				found.append(self.boardlist[col][j])
 		return True
-
 
 	def checkSquare(self, square):
 		found = []
@@ -153,34 +148,26 @@ class SudokuCell:
 		self.readonly_ = False
 		self.bg_color = 0
 
-
 	def setValue(self, v):
 		self.value_ = v
-
 
 	def value(self):
 		return self.value_
 
-
 	def setFocus(self, f):
 		self.focus_ = f
-
 
 	def focus(self):
 		return self.focus_
 
-
 	def setReadonly(self, r):
 		self.readonly_ = r
-
 
 	def readonly(self):
 		return self.readonly_
 
-
 	def color(self, col):
 		self.bg_color = col
-
 
 	def paint(self):
 		fg = RGB(255, 255, 255) # foreground
@@ -347,46 +334,35 @@ class Sudoku(Screen):
 
 		self.onLayoutFinish.append(self.load_game)
 
-
 	def bt_0_pressed(self):
 		self.key_event1(0)
-
 
 	def bt_1_pressed(self):
 		self.key_event1(1)
 
-
 	def bt_2_pressed(self):
 		self.key_event1(2)
-
 
 	def bt_3_pressed(self):
 		self.key_event1(3)
 
-
 	def bt_4_pressed(self):
 		self.key_event1(4)
-
 
 	def bt_5_pressed(self):
 		self.key_event1(5)
 
-
 	def bt_6_pressed(self):
 		self.key_event1(6)
-
 
 	def bt_7_pressed(self):
 		self.key_event1(7)
 
-
 	def bt_8_pressed(self):
 		self.key_event1(8)
 
-
 	def bt_9_pressed(self):
 		self.key_event1(9)
-
 
 	def key_event1(self, key):
 		cell = self.board_cells[self.xFocus][self.yFocus]
@@ -395,7 +371,6 @@ class Sudoku(Screen):
 			cell.color(1) #grey
 			cell.paint()
 			self.check_game(False)
-
 
 	def up_pressed(self):
 		if self.yFocus > 0:
@@ -407,7 +382,6 @@ class Sudoku(Screen):
 			cell.setFocus(True)
 			cell.paint()
 
-
 	def down_pressed(self):
 		if self.yFocus < 8:
 			cell = self.board_cells[self.xFocus][self.yFocus]
@@ -417,7 +391,6 @@ class Sudoku(Screen):
 			cell = self.board_cells[self.xFocus][self.yFocus]
 			cell.setFocus(True)
 			cell.paint()
-
 
 	def left_pressed(self):
 		if self.xFocus > 0:
@@ -429,7 +402,6 @@ class Sudoku(Screen):
 			cell.setFocus(True)
 			cell.paint()
 
-
 	def right_pressed(self):
 		if self.xFocus < 8:
 			cell = self.board_cells[self.xFocus][self.yFocus]
@@ -440,10 +412,8 @@ class Sudoku(Screen):
 			cell.setFocus(True)
 			cell.paint()
 
-
 	def next_pressed(self):
 		self.session.openWithCallback(self.next_pressedCallback, MessageBox, _("Change the game level and start new game?"))
-
 
 	def next_pressedCallback(self, result):
 		if result:
@@ -453,10 +423,8 @@ class Sudoku(Screen):
 			self.setGamelLevelLabel()
 			self.new_game()
 
-
 	def previous_pressed(self):
 		self.session.openWithCallback(self.previous_pressedCallback, MessageBox, _("Change the game level and start new game?"))
-
 
 	def previous_pressedCallback(self, result):
 		if result:
@@ -465,7 +433,6 @@ class Sudoku(Screen):
 				self.gameLevel = 3
 			self.setGamelLevelLabel()
 			self.new_game()
-
 
 	def setGamelLevelLabel(self):
 		if self.gameLevel == 0:
@@ -477,31 +444,26 @@ class Sudoku(Screen):
 		elif self.gameLevel == 3:
 			self["gamelevel"].setText("< impossible >")
 
-
 	def bt_new_game(self):
 		self.new_game()
-
 
 	def bt_check_game(self):
 		self.cnt += 100
 		self.check_game(True)
 
-
 	def bt_restart_game(self):
 		self.restart_game()
 
-
 	def bt_solve_game(self):
 		self.solve_game()
-
 
 	def quit(self):
 		self.timer.stop()
 		self.save_game()
 		self.close()
 
-
 	# displays time in title...
+
 	def timerHandler(self):
 		if self.cnt > 0:
 			self.instance.setTitle("Sudoku 0.1 %10d sec" % self.cnt)
@@ -509,8 +471,8 @@ class Sudoku(Screen):
 		else:
 			self.instance.setTitle("Sudoku 0.1")
 
-
 	# look for wrong cells...
+
 	def check_game(self, highlight):
 		empty = False
 		correct = True
@@ -552,8 +514,8 @@ class Sudoku(Screen):
 					cell.paint()
 					cell.setReadonly(True)
 
-
 	# create new game...
+
 	def new_game(self):
 		cell = self.board_cells[self.xFocus][self.yFocus]
 		cell.setFocus(True)
@@ -580,8 +542,8 @@ class Sudoku(Screen):
 		self.cnt = 1
 		self.timer.start(1000)
 
-
 	# Restart game...
+
 	def restart_game(self):
 		solved = True
 		
@@ -598,8 +560,8 @@ class Sudoku(Screen):
 		if solved:
 			self.new_game()
 
-
 	# display all values and stop game...
+
 	def solve_game(self):
 		self.cnt = 0
 		for j in range(0, 9):
@@ -611,8 +573,8 @@ class Sudoku(Screen):
 				cell.color(0) #black
 				cell.paint()
 
-
 	# save actual game to file...
+
 	def save_game(self):
 		sav = open(SAVEFILE, "w")
 		sav.write("%d %d\n" % (self.gameLevel, self.cnt))
@@ -623,8 +585,8 @@ class Sudoku(Screen):
 
 		sav.close()
 
-
 	# load game from file...
+
 	def load_game(self):
 		solved = True
 

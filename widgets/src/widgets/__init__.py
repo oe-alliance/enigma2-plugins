@@ -5,6 +5,7 @@ from os.path import abspath, splitext
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from xml.etree.cElementTree import parse
 
+
 def importSingleWidget(session, widgetdir):
     print("importing widget from", widgetdir)
     widgetname = widgetdir.split("/")[-1]
@@ -26,7 +27,6 @@ def importSingleWidget(session, widgetdir):
     print("#" * 20)
     
     
-
 def importWidgets(session,):
     widgets = []
     dir = abspath(resolveFilename(SCOPE_PLUGINS) + "Extensions/Widgets/widgets/")

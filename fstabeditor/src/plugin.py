@@ -45,9 +45,11 @@ import os
 entryList = []
 lengthList = [0, 0, 0, 0]
 
+
 def main(session, **kwargs):
     session.open(fstabViewerScreen)
 	
+
 class fstabMenuList(MenuList):
 	def __init__(self, list):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
@@ -55,6 +57,7 @@ class fstabMenuList(MenuList):
 		self.l.setFont(1, gFont("Regular", 18))
 		self.l.setItemHeight(220)
 		
+
 def fstabMenuListEntry(devicename, mountpoint, fstype, options, dumpfreq, passnum):
 	res = [(devicename, mountpoint, fstype, options, dumpfreq, passnum)]
 	res.append(MultiContentEntryText(pos=(230, 15), size=(370, 25), font=0, text=devicename))
@@ -172,6 +175,7 @@ class fstabViewerScreen(Screen, HelpableScreen):
 		os.system("cp /etc/fstab.backup /etc/fstab")
 		self.buildScreen()
 		
+
 class fstabEditorScreen(Screen, ConfigListScreen, HelpableScreen):
 	skin = """
 		<screen position="center,center" size="600,380" title="fstab-Editor" >
@@ -286,5 +290,6 @@ class fstabEditorScreen(Screen, ConfigListScreen, HelpableScreen):
 			elif self.selectedEntry == 0:
 				self.devicename.value = mountpoint
 		
+
 def Plugins(**kwargs):
     return [PluginDescriptor(name="fstab-Editor", description=_("Plugin to edit fstab"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="fstabEditor.png", fnc=main)]

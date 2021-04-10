@@ -32,6 +32,7 @@ from enigma import eEnv
 
 CONFIG_FILE_VOLUME = eEnv.resolve('${sysconfdir}/enigma2/ava_volume.cfg')
 
+
 def getVolumeDict():
 	if os_path.exists(CONFIG_FILE_VOLUME):
 		pkl_file = open(CONFIG_FILE_VOLUME, 'rb')
@@ -41,11 +42,13 @@ def getVolumeDict():
 			return volumedict
 	return {}
 
+
 def saveVolumeDict(dict):
 	pkl_file = open(CONFIG_FILE_VOLUME, 'wb')
 	if pkl_file:
 		pickle_dump(dict, pkl_file)
 		pkl_file.close()
+
 
 class AutomaticVolumeAdjustmentConfig():
 	def __init__(self):

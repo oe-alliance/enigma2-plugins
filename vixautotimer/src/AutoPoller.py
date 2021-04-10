@@ -13,6 +13,7 @@ from Tools.Notifications import AddPopup
 from Screens.MessageBox import MessageBox
 import NavigationInstance
 
+
 class AutoPoller:
 	"""Automatically Poll AutoTimer"""
 

@@ -15,12 +15,14 @@ class Interface(StreamInterface):
     nameshort = "Favorites"
     description = "you can save Streams in your Favorites in a local list, to exec them directly without search for long time."
     selectedStream = None
+
     def getList(self):
         list = []
         for stream in SHOUTcasterFavorites().getStreams():
             list.append(stream)
         self.list = list
         self.OnListLoaded()
+
     def getMenuItems(self, selectedStream, generic=False):
         self.selectedStream = selectedStream
         list = []
@@ -39,17 +41,22 @@ class Interface(StreamInterface):
         if self.selectedStream is not None:
             SHOUTcasterFavorites().deleteStreamWithName(self.selectedStream.getName())
         self.getList()
+
     def addStream(self):
         print("favorites addStream")
         if self.selectedStream is not None:
             SHOUTcasterFavorites().addStream(self.selectedStream)
         #self.getList()
 ############################################################################### 
+
+
 class SHOUTcasterFavorites:
     configfile = "/etc/NETcaster.conf"
+
     def __init__(self):
         self.configparser = ConfigParser()
         self.configparser.read(self.configfile)
+
     def getStreams(self):
         streams = []
         sections = self.configparser.sections()
@@ -58,11 +65,13 @@ class SHOUTcasterFavorites:
                 stream = self.getStreamByName(section)
                 streams.append(stream)
         return streams
+
     def isStream(self, streamname):
         if self.configparser.has_section(streamname) is True:
             return True
         else:
             return False
+
     def getStreamByName(self, streamname):
         print("[" + myname + "] load " + streamname + " from config")
         if self.isStream(streamname) is True:

@@ -1,5 +1,6 @@
 from Components.Pixmap import MultiPixmap
  
+
 class KTmultiPixmap(MultiPixmap):
     def __init__(self):
         MultiPixmap.__init__(self)

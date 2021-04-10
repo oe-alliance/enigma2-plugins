@@ -46,6 +46,7 @@ from .ClientSetup import ClientSetup
 from .Source.Globals import pluginPresent, SkinTools
 from .Source.Config import qButtons
 
+
 class ConfigList(eConfigList.ConfigList):
     def __init__(self, list, session=None):
         eConfigList.ConfigList.__init__(self, list, session=session)
@@ -66,6 +67,7 @@ class ConfigList(eConfigList.ConfigList):
             self.current[1].onDeselect(self.session)
         instance.selectionChanged.get().remove(self.selectionChanged)
         instance.setContent(None)
+
 
 class ConfigListScreen(eConfigList.ConfigListScreen):
     def __init__(self, list, session=None, on_change=None):
@@ -108,7 +110,10 @@ class ConfigListScreen(eConfigList.ConfigListScreen):
         if not self.handleInputHelpers in self["config"].onSelectionChanged:
             self["config"].onSelectionChanged.append(self.handleInputHelpers)
 
+
 from .Source.Globals import SkinResolutionHelper
+
+
 class BackupRestore(ConfigListScreen, Screen, SkinResolutionHelper):
     def __init__(self, session, csel=None):
         Screen.__init__(self, session)
@@ -187,6 +192,7 @@ class BackupRestore(ConfigListScreen, Screen, SkinResolutionHelper):
         self.backup_config_path.setValue(answer)
         config.AdvancedMovieSelection.backup_path.value = answer
         config.AdvancedMovieSelection.backup_path.save()
+
 
 class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
     def __init__(self, session, csel=None):
@@ -601,6 +607,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
             
     def RecPathSettings(self):
         self.session.open(RecordPathsSettings)
+
 
 class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
     def __init__(self, session, csel=None):
@@ -1021,6 +1028,7 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
 
     def ownname(self):
         self.session.openWithCallback(self.createConfig, AdvancedMovieSelectionOwnButtonName)
+
 
 class AdvancedMovieSelectionOwnButtonName(Screen, ConfigListScreen):        
     def __init__(self, session):

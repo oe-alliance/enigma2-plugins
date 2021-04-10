@@ -23,6 +23,8 @@ config.plugins.namezap.style = ConfigSelection(choices=[
 )
 
 NumberZap = InfoBarGenerics.NumberZap
+
+
 class NameZap(NumberZap):
 	STYLE_NUMBER = 0
 	STYLE_NAME = 1
@@ -96,12 +98,15 @@ class NameZap(NumberZap):
 			else:
 				self["name"].setText("%s (%s)" % (sname, self.field))
 
+
 def autostart(reason, *args, **kwargs):
 	if reason == 0:
 		InfoBarGenerics.NumberZap = NameZap
 
+
 def main(session, *args, **kwargs):
 	session.open(NamezapSetup)
+
 
 def menu(menuid):
 	if getImageDistro() in ('teamblue'):
@@ -114,6 +119,7 @@ def menu(menuid):
 		if menuid != "system":
 			return []
 	return [(_("NameZAP Setup"), main, "namezap_setup", None)]
+
 
 def Plugins(**kwargs):
 	return [

@@ -1,5 +1,6 @@
 from threading import Lock
 
+
 class ThreadQueue:
 	def __init__(self):
 		self.__list = []

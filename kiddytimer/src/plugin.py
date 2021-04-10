@@ -30,12 +30,15 @@ for i in list(range(0, 7)):
     config.plugins.KiddyTimer.dayTimes.append(s)
     del s
 
+
 def setup(session, **kwargs):
     session.open(KiddyTimerSetup)
+
 
 def sessionstart(reason, **kwargs):
     if reason == 0:
         kiddyTimer.gotSession(kwargs["session"])
+
 
 def autostart(reason, **kwargs):
     if reason == 1:
@@ -43,9 +46,11 @@ def autostart(reason, **kwargs):
         kiddyTimer.stopTimer()
         kiddyTimer = None
 
+
 def extensionMenu(session, **kwargs):
     kiddyTimer.showExtensionsMenu()
         
+
 def Plugins(path, **kwargs):
     # Assign global variable plugin_path
     KTglob.plugin_path = path

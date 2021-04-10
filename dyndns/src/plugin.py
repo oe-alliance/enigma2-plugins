@@ -23,6 +23,7 @@ config.plugins.DynDNS.hostname = ConfigText(default="", fixed_size=False)
 config.plugins.DynDNS.user = ConfigText(default="", fixed_size=False)
 config.plugins.DynDNS.password = ConfigText(default="", fixed_size=False)
 
+
 class DynDNSScreenMain(ConfigListScreen, Screen):
     skin = """
         <screen position="100,100" size="550,400" title="DynDNS Setup" >
@@ -30,6 +31,7 @@ class DynDNSScreenMain(ConfigListScreen, Screen):
         <widget name="buttonred" position="10,360" size="100,40" backgroundColor="red" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/>
         <widget name="buttongreen" position="120,360" size="100,40" backgroundColor="green" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/>
         </screen>"""
+
     def __init__(self, session, args=0):
         self.session = session
         Screen.__init__(self, session)
@@ -62,10 +64,12 @@ class DynDNSScreenMain(ConfigListScreen, Screen):
             x[1].cancel()
         self.close(False)
 
+
 class DynDNSService:
 	enabled = False
 	sessions = []
 	lastip = ""
+
 	def __init__(self):
 		self.timer = eTimer()
 		self.timer.timeout.get().append(self.checkCurrentIP)
@@ -118,8 +122,10 @@ class DynDNSService:
 		htmlFile.close()
 		return htmlData
 
+
 def onPluginStart(session, **kwargs):
 	session.openWithCallback(onPluginStartCB, DynDNSScreenMain)
+
 
 def onPluginStartCB(changed):
 	print("[DynDNS] config changed=", changed)
@@ -128,8 +134,10 @@ def onPluginStartCB(changed):
 		dyndnsservice.disable()
 		dyndnsservice.enable()
 
+
 global dyndnsservice
 dyndnsservice = DynDNSService()
+
 
 def onSessionStart(reason, **kwargs):
 	global dyndnsservice
@@ -140,6 +148,7 @@ def onSessionStart(reason, **kwargs):
 			dyndnsservice.enable()
 		elif reason == 1:
 			dyndnsservice.disable()
+
 
 def Plugins(path, **kwargs):
 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=onSessionStart),

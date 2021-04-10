@@ -25,6 +25,7 @@ from Poll import Poll
 from Components.Element import cached
 from time import time
 
+
 class EventPosition(Poll, Converter, object):
 	def __init__(self, type):
 		Poll.__init__(self)
@@ -56,11 +57,9 @@ class EventPosition(Poll, Converter, object):
 	def getCutlist(self):
 		return []
 
-
 	position = property(getPosition)
 	length = property(getLength)
 	cutlist = property(getCutlist)
-
 
 	def changed(self, what):
 		if what[0] != self.CHANGED_CLEAR:

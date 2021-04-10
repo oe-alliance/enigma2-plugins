@@ -45,6 +45,8 @@ EXTENSIONS = {
 		"iso": "iso",
 		"img": "img"
 	}
+
+
 def FileEntryComponent(name, absolute=None, isDir=False, directory="/", size=0, timestamp=0):
 	res = [(absolute, isDir, name)]
 	if name == "..":
@@ -64,6 +66,8 @@ def FileEntryComponent(name, absolute=None, isDir=False, directory="/", size=0, 
 	if png is not None:
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 2, 20, 20, png))
 	return res
+
+
 class FileList(MenuList):
 	def __init__(self, directory, showDirectories=True, showFiles=True, showMountpoints=True, matchingPattern=None, useServiceRef=False, inhibitDirs=False, inhibitMounts=False, isTop=False, enableWrapAround=False, additionalExtensions=None, sort="default"):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
@@ -86,15 +90,18 @@ class FileList(MenuList):
 		self.l.setFont(0, gFont("Regular", 18))
 		self.l.setItemHeight(21)
 		self.serviceHandler = eServiceCenter.getInstance()
+
 	def refreshMountpoints(self):
 		self.mountpoints = [os_path.join(p.mountpoint, "") for p in harddiskmanager.getMountedPartitions()]
 		self.mountpoints.sort(reverse=True)
+
 	def getMountpoint(self, file):
 		file = os_path.join(os_path.realpath(file), "")
 		for m in self.mountpoints:
 			if file.startswith(m):
 				return m
 		return False
+
 	def getMountpointLink(self, file):
 		if os_path.realpath(file) == file:
 			return self.getMountpoint(file)
@@ -108,24 +115,29 @@ class FileList(MenuList):
 				last = file
 				file = os_path.dirname(file)
 			return os_path.join(last, "")
+
 	def getSelection(self):
 		if self.l.getCurrentSelection() is None:
 			return None
 		return self.l.getCurrentSelection()[0]
+
 	def getCurrentEvent(self):
 		l = self.l.getCurrentSelection()
 		if not l or l[0][1] == True:
 			return None
 		else:
 			return self.serviceHandler.info(l[0][0]).getEvent(l[0][0])
+
 	def getFileList(self):
 		return self.list
+
 	def inParentDirs(self, dir, parents):
 		dir = os_path.realpath(dir)
 		for p in parents:
 			if dir.startswith(p):
 				return True
 		return False
+
 	def changeDir(self, directory, sort="default", select=None):
 		isDir = False
 		if sort == "shuffle":
@@ -286,16 +298,20 @@ class FileList(MenuList):
 				if p == select:
 					self.moveToIndex(i)
 				i += 1
+
 	def getCurrentDirectory(self):
 		return self.current_directory
+
 	def canDescent(self):
 		if self.getSelection() is None:
 			return False
 		return self.getSelection()[1]
+
 	def descent(self):
 		if self.getSelection() is None:
 			return
 		self.changeDir(self.getSelection()[0], select=self.current_directory)
+
 	def gotoParent(self):
 		if self.current_directory is not None:
 			if self.current_directory == self.current_mountpoint and self.showMountpoints:
@@ -303,10 +319,12 @@ class FileList(MenuList):
 			else:
 				absolute = '/'.join(self.current_directory.split('/')[:-2]) + '/'
 			self.changeDir(absolute, select=self.current_directory)
+
 	def getName(self):
 		if self.getSelection() is None:
 			return False
 		return self.getSelection()[2]
+
 	def getFilename(self):
 		if self.getSelection() is None:
 			return None
@@ -314,6 +332,7 @@ class FileList(MenuList):
 		if isinstance(x, eServiceReference):
 			x = x.getPath()
 		return x
+
 	def getServiceRef(self):
 		if self.getSelection() is None:
 			return None
@@ -321,17 +340,23 @@ class FileList(MenuList):
 		if isinstance(x, eServiceReference):
 			return x
 		return None
+
 	def execBegin(self):
 		harddiskmanager.on_partition_list_change.append(self.partitionListChanged)
+
 	def execEnd(self):
 		harddiskmanager.on_partition_list_change.remove(self.partitionListChanged)
+
 	def refresh(self, sort="default"):
 		self.sort = sort
 		self.changeDir(self.current_directory, self.sort, self.getFilename())
+
 	def partitionListChanged(self, action, device):
 		self.refreshMountpoints()
 		if self.current_directory is None:
 			self.refresh()
+
+
 def MultiFileSelectEntryComponent(name, absolute=None, isDir=False, selected=False):
 	res = [(absolute, isDir, selected, name)]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 55, 1, 470, 20, 0, RT_HALIGN_LEFT, name))
@@ -354,6 +379,8 @@ def MultiFileSelectEntryComponent(name, absolute=None, isDir=False, selected=Fal
 			icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/lock_on.png"))
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 2, 0, 25, 25, icon))
 	return res
+
+
 class MultiFileSelectList(FileList):
 	def __init__(self, preselectedFiles, directory, showMountpoints=False, matchingPattern=None, showDirectories=True, showFiles=True, useServiceRef=False, inhibitDirs=False, inhibitMounts=False, isTop=False, enableWrapAround=False, additionalExtensions=None):
 		self.selectedFiles = preselectedFiles
@@ -364,9 +391,11 @@ class MultiFileSelectList(FileList):
 		self.l.setItemHeight(25)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.onSelectionChanged = []
+
 	def selectionChanged(self):
 		for f in self.onSelectionChanged:
 			f()
+
 	def changeSelectionState(self):
 		idx = self.l.getCurrentSelectionIndex()
 		count = 0
@@ -399,8 +428,10 @@ class MultiFileSelectList(FileList):
 			count += 1
 		self.list = newList
 		self.l.setList(self.list)
+
 	def getSelectedList(self):
 		return self.selectedFiles
+
 	def changeDir(self, directory, select=None):
 		self.list = []
 		# if we are just entering from the list of mount points:

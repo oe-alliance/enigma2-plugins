@@ -34,6 +34,7 @@ CurrentIP = None
 remote_timer_list = None
 oldIP = None
 
+
 def getTimerType(refstr, beginTime, duration, eventId, timer_list):
 	pre = 1
 	post = 2
@@ -59,6 +60,7 @@ def getTimerType(refstr, beginTime, duration, eventId, timer_list):
 		return False
 	else:
 		return True
+
 
 def isInTimerList(begin, duration, service, eventid, timer_list):
 	time_match = 0
@@ -99,6 +101,7 @@ def isInTimerList(begin, duration, service, eventid, timer_list):
 					timerentry = x
 				break
 	return timerentry
+
 
 def isInRepeatTimer(self, timer, event):
 	time_match = 0
@@ -200,6 +203,7 @@ def isInRepeatTimer(self, timer, event):
 				is_editable = True
 	return time_match and is_editable
 
+
 class E2Timer:
 	def __init__(self, servicereference="", servicename="", name="", disabled=0, timebegin=0, timeend=0, duration=0, startprepare=0, state=0, repeated=0, justplay=0, eventId=0, afterevent=3, dirname="", description="", type=0):
 		self.servicereference = servicereference
@@ -225,6 +229,7 @@ class E2Timer:
 			if type & PlaylistEntry.isRepeating:
 				self.repeated = 1
 			self.dirname = "/media/hdd/movie/"
+
 
 def FillE2TimerList(xmlstring, sreference=None):
 	E2TimerList = []
@@ -316,6 +321,7 @@ def FillE2TimerList(xmlstring, sreference=None):
 				type=0))
 	return E2TimerList
 
+
 def FillE1TimerList(xmlstring, sreference=None):
 	E1TimerList = []
 	try:
@@ -350,12 +356,14 @@ def FillE1TimerList(xmlstring, sreference=None):
 			E1TimerList.append(E2Timer(servicereference=servicereference, servicename=servicename, name="", disabled=0, timebegin=timebegin, timeend=0, duration=duration, startprepare=0, state=0, repeated=0, justplay=0, eventId=-1, afterevent=0, dirname="", description=description, type=typedata))
 	return E1TimerList
 
+
 class myHTTPClientFactory(HTTPClientFactory):
 	def __init__(self, url, method='GET', postdata=None, headers=None,
 	agent="Twisted Remotetimer", timeout=0, cookies=None,
 	followRedirect=1, lastModified=None, etag=None):
 		HTTPClientFactory.__init__(self, url, method=method, postdata=postdata,
 		headers=headers, agent=agent, timeout=timeout, cookies=cookies, followRedirect=followRedirect)
+
 
 def url_parse(url, defaultPort=None):
 	parsed = urlparse.urlparse(url)
@@ -371,6 +379,7 @@ def url_parse(url, defaultPort=None):
 		host, port = host.split(':')
 		port = int(port)
 	return scheme, host, port, path
+
 
 def sendPartnerBoxWebCommand(url, contextFactory=None, timeout=60, username="root", password="", *args, **kwargs):
 	#scheme, host, port, path = client._parse(url)
@@ -390,6 +399,7 @@ def sendPartnerBoxWebCommand(url, contextFactory=None, timeout=60, username="roo
 	factory = myHTTPClientFactory(url, *args, **kwargs)
 	reactor.connectTCP(host, port, factory, timeout=timeout)
 	return factory.deferred
+
 
 class PlaylistEntry:
 
@@ -428,6 +438,7 @@ class PlaylistEntry:
 	Fr = 16777216
 	Sa = 33554432
 
+
 def SetPartnerboxTimerlist(partnerboxentry=None, sreference=None):
 	global remote_timer_list
 	global CurrentIP
@@ -452,6 +463,7 @@ def SetPartnerboxTimerlist(partnerboxentry=None, sreference=None):
 			remote_timer_list = FillE1TimerList(sxml, sreference)
 	except:
 		pass
+
 
 def getServiceRef(sreference):
 		if not sreference:

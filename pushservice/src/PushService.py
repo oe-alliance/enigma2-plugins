@@ -55,9 +55,9 @@ class PushService(PushServiceBase):
 		
 		#TODO Run in a new thread
 
-
 	######################################
 	# Statemachine and timer
+
 	def start(self):
 		print("PushService start")
 		self.stopTimer()

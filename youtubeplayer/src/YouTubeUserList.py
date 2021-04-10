@@ -33,6 +33,7 @@ from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, gFont
 
 from . import _
 
+
 def YouTubeUserListEntry(youTubeUser, defaultUser):
 	res = [youTubeUser]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 470, 20, 0, RT_HALIGN_LEFT, youTubeUser.getName()))
@@ -101,10 +102,8 @@ class YouTubeUserListScreen(Screen):
 		
 		self.onLayoutFinish.append(self.initialUserlistUpdate)
 
-
 	def showTestScreen(self):
 		self.suggestionsWindow.show()
-
 
 	def initialUserlistUpdate(self):
 		self.updateUserlist()
@@ -112,10 +111,8 @@ class YouTubeUserListScreen(Screen):
 			defaultIndex = youTubeUserConfig.getUserlist().index(self.defaultUser)
 			self.userlist.moveToIndex(defaultIndex)
 
-
 	def updateUserlist(self):
 		self.userlist.update(youTubeUserConfig.getUserlist(), self.defaultUser)
-
 
 	def keyDelete(self):
 		user = self.userlist.getSelection()
@@ -127,11 +124,9 @@ class YouTubeUserListScreen(Screen):
 			youTubeUserConfig.delete(self.userlist.getSelection())
 			self.updateUserlist()
 
-
 	def keyAddUser(self):
 		newUser = youTubeUserConfig.new()
 		self.session.openWithCallback(self.addCallback, YouTubeUserConfigScreen, newUser)
-
 
 	def addCallback(self, result, user):
 		if result:
@@ -140,12 +135,10 @@ class YouTubeUserListScreen(Screen):
 		else:
 			youTubeUserConfig.delete(user)
 
-
 	def keyEditUser(self):
 		user = self.userlist.getSelection()
 		if user is not None:
 			self.session.openWithCallback(self.editCallback, YouTubeUserConfigScreen, user)
-
 
 	def editCallback(self, result, user):
 		if result:
@@ -156,34 +149,27 @@ class YouTubeUserListScreen(Screen):
 		else:
 			youTubeUserConfig.cancel(user)
 
-
 	def keySetAsDefault(self):
 		self.defaultUser = self.userlist.getSelection()
 		index = self.userlist.getSelectedIndex()
 		self.updateUserlist()
 		self.userlist.moveToIndex(index)
 
-
 	def up(self):
 		self.userlist.up()
-
 
 	def down(self):
 		self.userlist.down()
 
-
 	def left(self):
 		self.userlist.pageUp()
-
 
 	def right(self):
 		self.userlist.pageDown()
 
-
 	def close(self, loginState=LOGIN_CANCEL):
 		youTubeUserConfig.setAsDefault(self.defaultUser)
 		Screen.close(self, loginState)
-
 
 	def ok(self):
 		try:

@@ -18,6 +18,8 @@ from .Logger import log
 # Override EPGSelection enterDateTime
 EPGSelection_enterDateTime = None
 #EPGSelection_openOutdatedEPGSelection = None
+
+
 def SPEPGSelectionInit():
 	print("[SeriesPlugin] override EPGSelection")
 	global EPGSelection_enterDateTime #, EPGSelection_openOutdatedEPGSelection
@@ -29,6 +31,7 @@ def SPEPGSelectionInit():
 		#EPGSelection.openOutdatedEPGSelection = openOutdatedEPGSelection
 		EPGSelection.SPcloseafterfinish = closeafterfinish
 
+
 def SPEPGSelectionUndo():
 	print("[SeriesPlugin] undo override EPGSelection")
 	global EPGSelection_enterDateTime #, EPGSelection_openOutdatedEPGSelection
@@ -38,6 +41,7 @@ def SPEPGSelectionUndo():
 		EPGSelection_enterDateTime = None
 		#EPGSelection.openOutdatedEPGSelection = EPGSelection_openOutdatedEPGSelection
 		#EPGSelection_openOutdatedEPGSelection = None
+
 
 def enterDateTime(self):
 	from Screens.EpgSelection import EPG_TYPE_SINGLE, EPG_TYPE_MULTI, EPG_TYPE_SIMILAR
@@ -57,6 +61,7 @@ def enterDateTime(self):
 #def openOutdatedEPGSelection(self, reason=None):
 #	if reason == 1:
 #		EPGSelection_enterDateTime(self)
+
 
 def closeafterfinish(self, retval=None):
 	self.close()
