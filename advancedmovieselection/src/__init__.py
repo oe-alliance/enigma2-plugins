@@ -13,8 +13,10 @@ loadSkin(resolveFilename(SCOPE_PLUGINS) + "Extensions/AdvancedMovieSelection/ski
 PluginLanguageDomain = "AdvancedMovieSelection"
 PluginLanguagePath = "Extensions/AdvancedMovieSelection/locale/"
 
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -22,6 +24,7 @@ def _(txt):
 	else:
 		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
 		return gettext.gettext(txt)
+
 
 language.addCallback(localeInit())
 # Andy Blackburn: [Translation] end

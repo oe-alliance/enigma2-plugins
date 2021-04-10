@@ -34,6 +34,7 @@ SORT_TYPE_PROGRESS = 1
 SORT_TYPE_ADDED = 2
 SORT_TYPE_SPEED = 3
 
+
 class TorrentLocationBox(LocationBox):
 	def __init__(self, session):
 		# XXX: implement bookmarks
@@ -75,6 +76,7 @@ class TorrentLocationBox(LocationBox):
 		if self.currList == "filelist":
 			if not self["filelist"].canDescent():
 				self.selectConfirmed(True)
+
 
 class EmissionOverview(Screen, HelpableScreen):
 	skin = """<screen name="EmissionOverview" title="Torrent Overview" position="75,135" size="565,330">
@@ -478,6 +480,7 @@ class EmissionOverview(Screen, HelpableScreen):
 		config.plugins.emission.last_tab.value = self.list_type
 		config.plugins.emission.last_tab.save()
 		Screen.close(self)
+
 
 __all__ = ['LIST_TYPE_ALL', 'LIST_TYPE_DOWNLOADING',
 	'LIST_TYPE_SEEDING', 'EmissionOverview', 'SORT_TYPE_TIME',

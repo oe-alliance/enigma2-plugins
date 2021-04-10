@@ -161,16 +161,19 @@ try:
 except NameError:
     _bool_is_builtin = 0
 
+
 def _decode(data, encoding, is8bit=re.compile("[\x80-\xff]").search):
     # decode non-ascii string (if possible)
     if unicode and encoding and is8bit(data):
         data = unicode(data, encoding)
     return data
 
+
 def escape(s, replace=string.replace):
     s = replace(s, "&", "&amp;")
     s = replace(s, "<", "&lt;")
     return replace(s, ">", "&gt;",)
+
 
 if unicode:
     def _stringify(string):
@@ -215,8 +218,10 @@ INTERNAL_ERROR = -32603
 ##
 # Base class for all kinds of client-side errors.
 
+
 class Error(Exception):
     """Base class for client errors."""
+
     def __str__(self):
         return repr(self)
 
@@ -230,14 +235,17 @@ class Error(Exception):
 # @param errmsg The HTTP error message.
 # @param headers The HTTP header dictionary.
 
+
 class ProtocolError(Error):
     """Indicates an HTTP protocol error."""
+
     def __init__(self, url, errcode, errmsg, headers):
         Error.__init__(self)
         self.url = url
         self.errcode = errcode
         self.errmsg = errmsg
         self.headers = headers
+
     def __repr__(self):
         return (
             "<ProtocolError for %s: %s %s>" %
@@ -248,6 +256,7 @@ class ProtocolError(Error):
 # Indicates a broken XML-RPC response package.  This exception is
 # raised by the unmarshalling layer, if the XML-RPC response is
 # malformed.
+
 
 class ResponseError(Error):
     """Indicates a broken response package."""
@@ -262,12 +271,15 @@ class ResponseError(Error):
 # @param faultCode The XML-RPC fault code.
 # @param faultString The XML-RPC fault string.
 
+
 class Fault(Error):
     """Indicates an XML-RPC fault package."""
+
     def __init__(self, faultCode, faultString, **extra):
         Error.__init__(self)
         self.faultCode = faultCode
         self.faultString = faultString
+
     def __repr__(self):
         return (
             "<Fault %s: %s>" %
@@ -284,6 +296,7 @@ class Fault(Error):
 #
 # @param value A boolean value.  Any true value is interpreted as True,
 #              all other values are interpreted as False.
+
 
 from sys import modules
 mod_dict = modules[__name__].__dict__
@@ -355,6 +368,7 @@ del modules, mod_dict
 # @param value The time, given as an ISO 8601 string, a time
 #              tuple, or a integer time value.
 
+
 def _strftime(value):
     if datetime:
         if isinstance(value, datetime.datetime):
@@ -368,6 +382,7 @@ def _strftime(value):
         value = time.localtime(value)
 
     return "%04d%02d%02dT%02d:%02d:%02d" % value[:6]
+
 
 class DateTime:
     """DateTime wrapper for an ISO 8601 string or time tuple or
@@ -453,11 +468,13 @@ class DateTime:
         out.write(self.value)
         out.write("</dateTime.iso8601></value>\n")
 
+
 def _datetime(data):
     # decode xml element contents into a DateTime structure.
     value = DateTime()
     value.decode(data)
     return value
+
 
 def _datetime_type(data):
     t = time.strptime(data, "%Y%m%dT%H:%M:%S")
@@ -469,11 +486,13 @@ def _datetime_type(data):
 #
 # @param data An 8-bit string containing arbitrary data.
 
+
 import base64
 try:
     import cStringIO as StringIO
 except ImportError:
     import StringIO
+
 
 class Binary:
     """Wrapper for binary data."""
@@ -502,11 +521,13 @@ class Binary:
         base64.encode(StringIO.StringIO(self.data), out)
         out.write("</base64></value>\n")
 
+
 def _binary(data):
     # decode xml element contents into a Binary structure
     value = Binary()
     value.decode(data)
     return value
+
 
 WRAPPERS = (DateTime, Binary)
 if not _bool_is_builtin:
@@ -607,10 +628,12 @@ else:
             self._parser.Parse("", 1) # end of data
             del self._target, self._parser # get rid of circular references
 
+
 class SlowParser:
     """Default XML parser (based on xmllib.XMLParser)."""
     # this is about 10 times slower than sgmlop, on roundtrip
     # testing.
+
     def __init__(self, target):
         import xmllib # lazy subclassing (!)
         if xmllib.XMLParser not in SlowParser.__bases__:
@@ -634,6 +657,7 @@ class SlowParser:
 # @param encoding Default encoding for 8-bit strings.  The default
 #     value is None (interpreted as UTF-8).
 # @see dumps
+
 
 class Marshaller:
     """Generate an XML-RPC params chunk from a Python data structure.
@@ -809,6 +833,7 @@ class Marshaller:
 #
 # @see loads
 
+
 class Unmarshaller:
     """Unmarshal an XML-RPC response, based on incoming XML event
     messages (start, data, end).  Call close() to get the resulting
@@ -980,16 +1005,20 @@ class Unmarshaller:
 ## Multicall support
 #
 
+
 class _MultiCallMethod:
     # some lesser magic to store calls made to a MultiCall object
     # for batch execution
     def __init__(self, call_list, name):
         self.__call_list = call_list
         self.__name = name
+
     def __getattr__(self, name):
         return _MultiCallMethod(self.__call_list, "%s.%s" % (self.__name, name))
+
     def __call__(self, *args):
         self.__call_list.append((self.__name, args))
+
 
 class MultiCallIterator:
     """Iterates over the results of a multicall. Exceptions are
@@ -1007,6 +1036,7 @@ class MultiCallIterator:
         else:
             raise ValueError,\
                   "unexpected type in multicall result"
+
 
 class MultiCall:
     """server -> a object used to boxcar method calls
@@ -1053,6 +1083,7 @@ class MultiCall:
 #
 # return A (parser, unmarshaller) tuple.
 
+
 def getparser(use_datetime=0):
     """getparser() -> parser, unmarshaller
 
@@ -1092,6 +1123,7 @@ def getparser(use_datetime=0):
 #     it must contain exactly one element).
 # @keyparam encoding The packet encoding.
 # @return A string containing marshalled data.
+
 
 def dumps(params, methodname=None, methodresponse=None, encoding=None,
           allow_none=0):
@@ -1172,6 +1204,7 @@ def dumps(params, methodname=None, methodresponse=None, encoding=None,
 #     (None if not present).
 # @see Fault
 
+
 def loads(data, use_datetime=0):
     """data -> unmarshalled data, method name
 
@@ -1196,8 +1229,10 @@ class _Method:
     def __init__(self, send, name):
         self.__send = send
         self.__name = name
+
     def __getattr__(self, name):
         return _Method(self.__send, "%s.%s" % (self.__name, name))
+
     def __call__(self, *args):
         return self.__send(self.__name, args)
 
@@ -1206,6 +1241,7 @@ class _Method:
 # <p>
 # You can create custom transports by subclassing this method, and
 # overriding selected methods.
+
 
 class Transport:
     """Handles an HTTP transaction to an XML-RPC server."""
@@ -1397,6 +1433,7 @@ class Transport:
 ##
 # Standard transport class for XML-RPC over HTTPS.
 
+
 class SafeTransport(Transport):
     """Handles an HTTPS transaction to an XML-RPC server."""
 
@@ -1432,6 +1469,7 @@ class SafeTransport(Transport):
 # @keyparam verbose Use a true value to enable debugging output.
 #    (printed to standard output).
 # @see Transport
+
 
 class ServerProxy:
     """uri [,options] -> a logical connection to an XML-RPC server
@@ -1513,6 +1551,7 @@ class ServerProxy:
     # result getattr(server, "strange-python-name")(args)
 
 # compatibility
+
 
 Server = ServerProxy
 

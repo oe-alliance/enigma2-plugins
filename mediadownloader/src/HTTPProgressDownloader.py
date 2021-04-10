@@ -1,5 +1,6 @@
 from twisted.web.client import HTTPDownloader
 
+
 class HTTPProgressDownloader(HTTPDownloader):
 	"""Download to a file and keep track of progress."""
 

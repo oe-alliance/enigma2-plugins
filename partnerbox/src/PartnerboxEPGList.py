@@ -59,6 +59,7 @@ def Partnerbox_EPGListInit():
 	EPGList.space = 0
 	EPGList.iconDistance = 0
 
+
 def Partnerbox_EPGList__init__(self, type=0, selChangedCB=None, timer=None, time_epoch=120, overjump_empty=False, graphic=False):
 	baseEPGList__init__(self, type, selChangedCB, timer, time_epoch, overjump_empty, graphic)
 
@@ -180,6 +181,7 @@ def Partnerbox_EPGList__init__(self, type=0, selChangedCB=None, timer=None, time
 	self.eventNameWrap = 'yes'
 	self.NumberOfRows = None
 
+
 def Partnerbox_SingleEntry(self, service, eventId, beginTime, duration, EventName):
 	if self.listSizeWidth != self.l.getItemSize().width(): #recalc size if scrollbar is shown
 		self.recalcEntrySize()
@@ -232,6 +234,7 @@ def Partnerbox_SingleEntry(self, service, eventId, beginTime, duration, EventNam
 	else:
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, EventName, foreColor, foreColorSel, backColor, backColorSel))
 	return res
+
 
 def Partnerbox_SimilarEntry(self, service, eventId, beginTime, service_name, duration):
 	if self.listSizeWidth != self.l.getItemSize().width(): #recalc size if scrollbar is shown
@@ -321,6 +324,7 @@ def getClockTypesEntry(self, service, eventId, beginTime, duration):
 		return rec[1]
 	else:
 		return None
+
 
 def isInTimer(self, eventid, begin, duration, service):
 	returnValue = None
@@ -500,6 +504,7 @@ def isInTimer(self, eventid, begin, duration, service):
 						returnValue = (time_match, [type])
 	return returnValue
 
+
 def isInRemoteTimer(self, begin, duration, service):
 	time_match = 0
 	chktime = None
@@ -537,6 +542,7 @@ def isInRemoteTimer(self, begin, duration, service):
 				break
 	return time_match
 
+
 def getRemoteClockPixmap(self, refstr, beginTime, duration, eventId):
 	pre_clock = 1
 	post_clock = 2
@@ -563,6 +569,7 @@ def getRemoteClockPixmap(self, refstr, beginTime, duration, eventId):
 		return self.remote_clock_post_pixmap
 	else:
 		return self.remote_clock_prepost_pixmap
+
 
 def getRemoteClockZapPixmap(self, refstr, beginTime, duration, eventId):
 	type = 0

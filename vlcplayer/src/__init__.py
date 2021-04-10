@@ -14,8 +14,10 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os
 import gettext
 
+
 def localeInit():
 	gettext.bindtextdomain("VlcPlayer", resolveFilename(SCOPE_PLUGINS, "Extensions/VlcPlayer/locale"))
+
 
 def _(txt):
 	t = gettext.dgettext("VlcPlayer", txt)
@@ -23,5 +25,6 @@ def _(txt):
 		print "[VLC] fallback to default translation for", txt
 		t = gettext.gettext(txt)
 	return t
+
 
 localeInit()

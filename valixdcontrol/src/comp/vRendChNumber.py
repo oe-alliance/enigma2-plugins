@@ -24,6 +24,7 @@ from Screens.InfoBar import InfoBar
 
 MYCHANSEL = InfoBar.instance.servicelist
 
+
 class vRendChNumber(Renderer, VariableText):
 	def __init__(self):
 		Renderer.__init__(self)

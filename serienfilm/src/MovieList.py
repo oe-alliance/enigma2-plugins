@@ -17,6 +17,7 @@ import os.path
 from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformation, \
 	RT_HALIGN_LEFT, RT_HALIGN_RIGHT, eServiceReference, eServiceCenter
 
+
 class MovieList(GUIComponent):
 	SORT_ALPHANUMERIC = 1
 	SORT_RECORDED = 2
@@ -45,7 +46,6 @@ class MovieList(GUIComponent):
 	MAXTIME = 0x7fffffff
 
 	gsflists = []
-
 
 	def __init__(self, root, list_type=None, sort_type=None, show_times=None, sftitle_episode_separator=None, MovieSelectionSelf=None):
 		GUIComponent.__init__(self)
@@ -104,7 +104,6 @@ class MovieList(GUIComponent):
 
 	def setTitleEpiSep(self, sftitle_episode_separator):
 		self.sftitle_episode_separator = sftitle_episode_separator
-
 
 	def redrawList(self):
 		if self.list_type & MovieList.LISTTYPE_ORIGINAL:
@@ -300,10 +299,8 @@ class MovieList(GUIComponent):
 			self.list[ele0][3][1] = None	# remove "#0" from only lonely surviving movie
 #			print "[SF-Plugin] removeService: remove #0 from " + self.list[ele0][3][2]
 
-
 	def __len__(self):
 		return len(self.list)
-
 
 	def playDirectory(self, serviceref):
 		if serviceref.type == (eServiceReference.idUser | eServiceReference.idDVB) and serviceref.flags == eServiceReference.canDescent:
@@ -336,8 +333,6 @@ class MovieList(GUIComponent):
 				parent.flags = eServiceReference.flagDirectory | eServiceReference.sort1
 				tinfo = [self.REAL_DIR | self.REAL_UP, self.fupMap, "  0", txt, service, 1]	# "  0" sorts before VIRT_UP
 				return ((parent, info, begin, tinfo))
-
-
 
 	def load(self, root, filter_tags):
 		# this lists our root service, then building a 
@@ -398,7 +393,6 @@ class MovieList(GUIComponent):
 		self.list = self.rootlst
 		self.createSublists()
 
-
 		if self.sort_type == self.SORT_RECORDED:
 			self.sortLists()
 
@@ -451,7 +445,6 @@ class MovieList(GUIComponent):
 
 # pixmap:			pixmap (DIR_UP...) or String (#0, #1 ... for multiple recordings)
 # SFLIDX0...999		entry# in serlst, 0 == rootlist
-
 
 	def serflm(self, film, episode):
 		fdate = film[2]
@@ -535,9 +528,6 @@ class MovieList(GUIComponent):
 				self.update_repcnt(serlst, repcnt)
 #		print "[SF-Plugin] sflist has %d entries" % (len(self.sflists))
 		gsflists = self.sflists
-
-
-
 
 	def sortLists(self):
 		if self.sort_type == self.SORT_ALPHANUMERIC:

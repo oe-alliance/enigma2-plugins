@@ -5,6 +5,7 @@ from twisted.web import resource, http
 from tempfile import mkstemp
 from re import search
 
+
 class UploadResource(resource.Resource):
 	default_uploaddir = "/tmp/"
 	restricted_paths = frozenset(("/bin/", "/boot/", "/dev/", "/etc/", "/lib/", "/proc/", "/sbin/", "/sys/", "/usr/", "/var/"))

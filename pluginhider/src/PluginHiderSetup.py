@@ -26,6 +26,8 @@ import inspect
 LIST_PLUGINS = 0
 LIST_EXTENSIONS = 1
 LIST_EVENTINFO = 2
+
+
 class PluginHiderSetup(Screen, HelpableScreen):
 	skin = """<screen name="PluginHiderSetup" title="PluginHider Setup" position="center,center" size="565,395">
 		<ePixmap position="0,358" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />

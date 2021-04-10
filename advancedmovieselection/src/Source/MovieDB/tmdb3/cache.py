@@ -16,6 +16,7 @@ from cache_engine import Engines
 import cache_null
 import cache_file
 
+
 class Cache(object):
     """
     This class implements a persistent cache, backed in a file specified in
@@ -25,6 +26,7 @@ class Cache(object):
     data types are supported.
     Data is stored in a simple format {key:(expiretimestamp, data)}
     """
+
     def __init__(self, engine=None, *args, **kwargs):
         self._engine = None
         self._data = {}

@@ -18,6 +18,7 @@ config.plugins.AudioRestart.restartDelay = ConfigInteger(default=5, limits=(0, 3
 PLUGIN_BASE = "AudioRestart"
 PLUGIN_VERSION = "0.1"
 
+
 class AudioRestart():
     def __init__(self):
         self.activateTimer = eTimer()
@@ -62,6 +63,7 @@ class AudioRestart():
                         blnReturn = True
         return blnReturn
     
+
 class AudioRestartSetup(ConfigListScreen, Screen):
     skin = """
     <screen position="center,center" size="560,400" title="Audio Restart Setup">
@@ -128,14 +130,17 @@ class AudioRestartSetup(ConfigListScreen, Screen):
             x[1].cancel()
         self.close()
 
+
 def sessionstart(reason, **kwargs):
     if reason == 0:
         AudioRestart()
+
 
 def setup(session, **kwargs):
 #    reload(AC3setup)
     session.open(AudioRestartSetup, plugin_path)
         
+
 def Plugins(path, **kwargs):
     global plugin_path
     plugin_path = path

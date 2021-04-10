@@ -10,6 +10,7 @@ from Components.ActionMap import ActionMap
 from Components.Sources.Boolean import Boolean
 from Components.Pixmap import Pixmap
 
+
 class RSSFeedEdit(ConfigListScreen, Screen):
 	"""Edit an RSS-Feed"""
 
@@ -45,6 +46,7 @@ class RSSFeedEdit(ConfigListScreen, Screen):
 		config.plugins.simpleRSS.feed[self.id].save()
 		config.plugins.simpleRSS.feed.save()
 		self.close()
+
 
 class RSSSetup(ConfigListScreen, Screen):
 	"""Setup for SimpleRSS, quick-edit for Feed-URIs and settings present."""
@@ -209,6 +211,7 @@ class RSSSetup(ConfigListScreen, Screen):
 		# Keep feedcount sane
 		simpleRSS.feedcount.value = len(simpleRSS.feed)
 		simpleRSS.feedcount.save()
+
 
 def addFeed(address, auto=False):
 	l = config.plugins.simpleRSS.feed

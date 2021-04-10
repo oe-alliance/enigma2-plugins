@@ -2,6 +2,7 @@ from Plugins.Extensions.WebInterface.WebComponents.Sources.Timer import Timer
 from Plugins.SystemPlugins.vps.Vps import vps_timers
 import time
 
+
 class Vps(Timer):
 	def addTimerByEventID(self, param):
 		state, statetext = Timer.addTimerByEventID(self, param)
@@ -84,6 +85,7 @@ class Vps(Timer):
 		print newlist
 		return newlist
 	list = property(getList)
+
 
 # build new lut
 tempLut = Timer.lut.copy()

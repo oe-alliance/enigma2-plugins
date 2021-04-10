@@ -11,8 +11,10 @@ from Components.config import config
 
 from . import _, STARTNOTIFICATIONID, NOTIFICATIONDOMAIN
 
+
 class MainPictureAdapter:
 	backgroundCapable = True
+
 	def __init__(self, session):
 		self.navcore = session.nav
 

@@ -48,6 +48,7 @@ total = 0
 movie_title = ""
 tmdb_logodir = resolveFilename(SCOPE_PLUGINS) + "Extensions/AdvancedMovieSelection/images"
 
+
 class DownloadMovies(Screen):
     def __init__(self, session, items, service=None):
         Screen.__init__(self, session)
@@ -227,6 +228,7 @@ class DownloadMovies(Screen):
             movie_title = newTitle.strip()
             self.refreshTimer.start(100, True)
 
+
 class FetchingMovies(Thread):
     def __init__(self, items):
         Thread.__init__(self)
@@ -261,7 +263,6 @@ class FetchingMovies(Thread):
         finally:
             self.finish()
 
-        
     def finish(self):
         global fetchingMovies, this_session, is_hidden
         fetchingMovies = None

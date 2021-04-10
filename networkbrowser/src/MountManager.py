@@ -21,6 +21,7 @@ from MountEdit import AutoMountEdit
 from AutoMount import iAutoMount, AutoMount
 from UserManager import UserManager
 
+
 class AutoMountManager(Screen):
 	skin = """
 		<screen name="AutoMountManager" position="center,center" size="560,400" title="AutoMountManager">
@@ -41,6 +42,7 @@ class AutoMountManager(Screen):
 			<ePixmap pixmap="skin_default/div-h.png" position="0,360" zPosition="1" size="560,2" />
 			<widget source="introduction" render="Label" position="10,370" size="540,21" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1"/>
 		</screen>"""
+
 	def __init__(self, session, iface, plugin_path):
 		self.skin_path = plugin_path
 		self.session = session
@@ -167,12 +169,14 @@ class AutoMountManager(Screen):
 	def createSetup(self):
 		self.session.open(MountManagerMenu)
 
+
 config.networkbrowser = ConfigSubsection()
 config.networkbrowser.automountpoll = ConfigYesNo(default=False)
 config.networkbrowser.automountpolltimer = ConfigSelection(default=1, choices=[
 	("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("7", "7"), ("8", "8"), ("9", "9"), ("10", "10"),
 	("11", "11"), ("12", "12"), ("13", "13"), ("14", "14"), ("15", "15"), ("16", "16"), ("17", "17"), ("18", "18"), ("19", "19"), ("20", "20"),
 	("21", "21"), ("22", "22"), ("23", "23"), ("24", "24")])
+
 
 class MountManagerMenu(Screen, ConfigListScreen):
 	def __init__(self, session):

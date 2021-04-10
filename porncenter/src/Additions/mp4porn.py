@@ -5,6 +5,7 @@ import urllib2
 
 ##################################################
 
+
 class MP4PornMovie(Movie):
 	def __init__(self, name, url, thumb):
 		Movie.__init__(self, name, url, thumb)
@@ -22,6 +23,7 @@ class MP4PornMovie(Movie):
 			return None
 
 ##################################################
+
 
 class MP4Porn(Plugin):
 	def __init__(self):
@@ -51,6 +53,7 @@ class MP4Porn(Plugin):
 			self.moreEntries = False
 
 ##################################################
+
 
 def getPlugin():
 	return MP4Porn()

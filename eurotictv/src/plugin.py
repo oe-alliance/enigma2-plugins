@@ -18,6 +18,7 @@ from ServiceReference import ServiceReference
 from Tools.Directories import SCOPE_PLUGINS, resolveFilename
 from __init__ import _
 
+
 class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 	STATE_DISCONNECTED, STATE_CONNECTING, STATE_PLAYING, STATE_PAUSED, STATE_FAILURE = range(5)
 	STATE_NAMES = [_("disconnected"), _("connecting..."), _("LIVE"), _("pause"), _("No Connection")]
@@ -200,8 +201,10 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 	def exit(self):
 		self.close()
 
+
 def main(session, **kwargs):
 	session.open(EuroticTVPlayer)
+
 
 def Plugins(**kwargs):
  	return PluginDescriptor(name="eUroticTV", description=_("Watch eUroticTV via HTTP Live Streaming"), where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", needsRestart=True, fnc=main)

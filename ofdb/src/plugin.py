@@ -24,8 +24,10 @@ import gettext
 PluginLanguageDomain = "OFDb"
 PluginLanguagePath = "Extensions/OFDb/locale"
 
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -34,7 +36,9 @@ def _(txt):
 		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
 		return gettext.gettext(txt)
 
+
 language.addCallback(localeInit())
+
 
 class OFDBChannelSelection(SimpleChannelSelection):
 	def __init__(self, session):
@@ -63,6 +67,7 @@ class OFDBChannelSelection(SimpleChannelSelection):
 		if ret:
 			self.close(ret)
 
+
 class OFDBEPGSelection(EPGSelection):
 	def __init__(self, session, ref, openPlugin=True):
 		EPGSelection.__init__(self, session, ref)
@@ -90,6 +95,7 @@ class OFDBEPGSelection(EPGSelection):
 
 	def onSelectionChanged(self):
 		pass
+
 
 class OFDB(Screen):
 	skin = """
@@ -469,6 +475,7 @@ class OFDB(Screen):
 	def createSummary(self):
 		return OFDbLCDScreen
 
+
 class OFDbLCDScreen(Screen):
 	skin = """
 	<screen position="0,0" size="132,64" title="OFDb Plugin">
@@ -482,6 +489,7 @@ class OFDbLCDScreen(Screen):
 		Screen.__init__(self, session)
 		self["headline"] = Label(_("OFDb Plugin"))
 
+
 def eventinfo(session, eventName="", **kwargs):
 	if not eventName:
 		s = session.nav.getCurrentService()
@@ -491,8 +499,10 @@ def eventinfo(session, eventName="", **kwargs):
 			eventName = event and event.getEventName() or ''
 	session.open(OFDB, eventName)
 
+
 def main(session, eventName="", **kwargs):
 	session.open(OFDB, eventName)
+
 
 def Plugins(**kwargs):
 	try:

@@ -4,6 +4,7 @@ from Tools.Directories import fileExists
 from twisted import version
 from socket import has_ipv6, AF_INET6, inet_ntop, inet_pton
 
+
 def normalize_ipv6(orig):
 	net = []
 
@@ -22,6 +23,7 @@ def normalize_ipv6(orig):
 		addr += "/" + net[1]
 
 	return (addr)
+
 
 def getAdapterIPv6(interface):
 	addr = _("IPv4-only kernel")
@@ -66,6 +68,7 @@ class Interface:
 		self.netmask = None
 		self.gateway = None
 		self.ipv6 = None
+
 
 class Network(Source):
 	LAN = 0

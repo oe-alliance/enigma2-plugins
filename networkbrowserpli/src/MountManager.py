@@ -18,6 +18,7 @@ from MountEdit import AutoMountEdit
 from AutoMount import iAutoMount, AutoMount
 from UserManager import UserManager
 
+
 class AutoMountManager(Screen):
 	skin = """
 		<screen name="AutoMountManager" position="center,center" size="560,400" title="AutoMountManager">
@@ -38,6 +39,7 @@ class AutoMountManager(Screen):
 			<ePixmap pixmap="skin_default/div-h.png" position="0,360" zPosition="1" size="560,2" />
 			<widget source="introduction" render="Label" position="10,370" size="540,21" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1"/>
 		</screen>"""
+
 	def __init__(self, session, iface, plugin_path):
 		self.skin_path = plugin_path
 		self.session = session

@@ -40,6 +40,7 @@ from os import path as os_path, unlink as os_unlink, rename as os_rename, \
 from time import time
 import re
 
+
 def FTPFileEntryComponent(file, directory):
 	isDir = True if file['filetype'] == 'd' else False
 	name = file['filename']
@@ -65,6 +66,7 @@ def FTPFileEntryComponent(file, directory):
 
 	return res
 
+
 class ModifiedFTPFileListProtocol(FTPFileListProtocol):
     fileLinePattern = re.compile(
         r'^(?P<filetype>.)(?P<perms>.{9})\s+(?P<nlinks>\d*)\s*'
@@ -72,6 +74,7 @@ class ModifiedFTPFileListProtocol(FTPFileListProtocol):
         r'(?P<date>...\s+\d+\s+[\d:]+)\s+(?P<filename>.*?)'
         r'( -> (?P<linktarget>[^\r]*))?\r?$'
     )
+
 
 class FTPFileList(FileList):
 	def __init__(self):
@@ -133,6 +136,7 @@ class FTPFileList(FileList):
 
 		self.isValid = False
 		self.l.setList(self.list)
+
 
 class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 	skin = """
@@ -327,6 +331,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 			def callback(ret=None):
 				AddPopup(_("Renamed %s to %s.") % (fileName, newName), MessageBox.TYPE_INFO, -1)
+
 			def errback(ret=None):
 				AddPopup(_("Could not rename %s.") % (fileName), MessageBox.TYPE_ERROR, -1)
 
@@ -382,6 +387,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 			def callback(ret=None):
 				AddPopup(_("Removed %s.") % (fileName), MessageBox.TYPE_INFO, -1)
+
 			def errback(ret=None):
 				AddPopup(_("Could not delete %s.") % (fileName), MessageBox.TYPE_ERROR, -1)
 
@@ -505,7 +511,6 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 				self.queue = [(False, remoteDirectory + file, localDirectory + file, remoteFileExists(remoteDirectory + file)) for file in os_listdir(localDirectory) if os_path.isfile(localDirectory + file)]
 				self.nextQueue()
-
 
 	def getFileCallback(self, ret, absRemoteFile, absLocalFile, fileSize):
 		if not ret:

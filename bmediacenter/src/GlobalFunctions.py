@@ -18,11 +18,14 @@ import os
 import re
 from os import path as os_path
 #------------------------------------------------------------------------------------------
+
+
 class MC_VideoInfoView(Screen):
 	skin = """
 		<screen position="80,130" size="560,320" title="View Video Info" >
 			<widget name="infolist" position="5,5" size="550,310" selectionDisabled="1" />
 		</screen>"""
+
 	def __init__(self, session, fullname, name, ref):
 		self.skin = MC_VideoInfoView.skin
 		Screen.__init__(self, session)
@@ -45,6 +48,8 @@ class MC_VideoInfoView(Screen):
 			tlist.append(ServiceInfoListEntry("sVideoWidth: ", currPlay.info().getInfoString(iServiceInformation.sVideoWidth)))
 			tlist.append(ServiceInfoListEntry("sVideoHeight: ", currPlay.info().getInfoString(iServiceInformation.sVideoHeight)))
 			tlist.append(ServiceInfoListEntry("sDescription: ", currPlay.info().getInfoString(iServiceInformation.sDescription)))
+
+
 class Showiframe():
 	def __init__(self):
 		lib = "/usr/lib/"
@@ -56,10 +61,14 @@ class Showiframe():
 		except OSError, e: 
 			self.showSinglePic = dlsym(self.showiframe, "_Z13showSinglePicPKc")
 			self.finishShowSinglePic = dlsym(self.showiframe, "_Z19finishShowSinglePicv")
+
 	def showStillpicture(self, pic):
 		call_function(self.showSinglePic, (pic, ))
+
 	def finishStillPicture(self):
 		call_function(self.finishShowSinglePic, ())
+
+
 def shortname(movie, showing=None):
 	movielist = movie.split('/')
 	for n in movielist:

@@ -5,6 +5,7 @@ from xml.etree.ElementTree import ParseError
 from os import path, listdir
 from os import remove as os_remove, fsync
 
+
 class Bonjour:
 	AVAHI_SERVICES_DIR = '/etc/avahi/services/'
 	AVAHI_START_SCRIPT = '/etc/init.d/avahi-daemon'
@@ -111,7 +112,6 @@ class Bonjour:
 
 		self.files[service['file']] = None
 
-
 	def reloadConfig(self):
 		self.services = []
 		self.files = {}
@@ -122,7 +122,6 @@ class Bonjour:
 				self.__parse(file)
 
 		self.registerDefaultServices()
-
 
 	def registerService(self, service, replace=False):
 		print "[Bonjour.registerService] %s" % service
@@ -136,7 +135,6 @@ class Bonjour:
 				if replace and service['file'] in self.files:
 					self.__removeServiceFromList(service)
 
-
 				self.services.append(service)
 				self.files[service['file']] = len(self.services) - 1
 
@@ -145,7 +143,6 @@ class Bonjour:
 		else:
 			print "[Bonjour.registerService] Missing port or type definition in %s%s" % (self.AVAHI_SERVICES_DIR, service['file'])
 			return False
-
 
 	def updateService(self, service):
 		if 'type' in service and 'port' in service and 'file' in service:
@@ -165,7 +162,6 @@ class Bonjour:
 	def unregisterService(self, protocol):
 		if self.__deleteService(protocol):
 			self.reloadConfig()
-
 
 	def buildService(self, protocol, port, text=[], udp=False):
 		file = "%s.service" % protocol
@@ -215,5 +211,6 @@ class Bonjour:
 		filepath = "%s%s" % (self.AVAHI_SERVICES_DIR, service['file'])
 		if not path.exists(filepath):
 			self.registerService(service)
+
 
 bonjour = Bonjour()

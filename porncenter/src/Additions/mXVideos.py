@@ -5,6 +5,7 @@ import urllib2
 
 ##################################################
 
+
 class mXVideosMovie(Movie):
 	def __init__(self, name, url, thumb):
 		Movie.__init__(self, name, url, thumb)
@@ -22,6 +23,7 @@ class mXVideosMovie(Movie):
 			return None
 
 ##################################################
+
 
 class mXVideosSub(Plugin):
 	def __init__(self, name, url):
@@ -53,6 +55,7 @@ class mXVideosSub(Plugin):
 
 ##################################################
 
+
 class mXVideos(Plugin):
 	def __init__(self):
 		Plugin.__init__(self, "mXVideos", "mXVideos.png")
@@ -79,6 +82,7 @@ class mXVideos(Plugin):
 			print "[%s] Error: %s" % (self.name, error)
 
 ##################################################
+
 
 def getPlugin():
 	return mXVideos()

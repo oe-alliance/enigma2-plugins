@@ -13,6 +13,8 @@ from EPGSearch import EPGSearch, EPGSearchEPGSelection
 from Plugins.Plugin import PluginDescriptor
 
 # Mainfunction
+
+
 def main(session, *args, **kwargs):
 	s = session.nav.getCurrentService()
 	if s:
@@ -34,6 +36,8 @@ def main(session, *args, **kwargs):
 		session.open(EPGSearch)
 
 # Event Info
+
+
 def eventinfo(session, eventName="", **kwargs):
 	if not eventName:
 		s = session.nav.getCurrentService()
@@ -43,17 +47,22 @@ def eventinfo(session, eventName="", **kwargs):
 			eventName = event and event.getEventName() or ''
 	session.open(EPGSearch, eventName)
 
+
 def seachhistory(session, *args, **kwargs):
 	session.open(EPGSearch, openHistory=True)
 
 # Movielist
+
+
 def movielist(session, service, **kwargs):
 	serviceHandler = eServiceCenter.getInstance()
 	info = serviceHandler.info(service)
 	name = info and info.getName(service) or ''
 	session.open(EPGSearch, name)
 
+
 pluginlist = PluginDescriptor(name=_("EPGSearch"), description=_("Search EPG"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main, needsRestart=False)
+
 
 def Plugins(**kwargs):
 	l = [

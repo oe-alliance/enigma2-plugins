@@ -28,6 +28,7 @@ from Globals import printStackTrace
 from Components.config import config
 from CueSheetSupport import hasLastPosition
 
+
 class SortProvider():
     SORT_ALPHANUMERIC = 1
     SORT_RECORDED = 2
@@ -322,6 +323,7 @@ class MovieLibrary(dict, SortProvider):
 
 from xml.dom.minidom import Document
 
+
 class dict2xml(object):
     def __init__(self, structure):
         if len(structure) == 1:
@@ -377,6 +379,7 @@ class dict2xml(object):
             f.close()        
         except:
             printStackTrace()
+
 
 if __name__ == '__main__':
     example = {'auftrag': {"kommiauftragsnr": 2103839, "anliefertermin": "2009-11-25", "prioritaet": 7, "ort": u"Huecksenwagen", "positionen": [{"menge": 12, "artnr": "14640/XL", "posnr": 1}, ], "versandeinweisungen": [{"guid": "2103839-XalE", "bezeichner": "avisierung48h", "anweisung": "48h vor Anlieferung unter 0900-LOGISTIK avisieren"}, ]}}

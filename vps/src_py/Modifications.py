@@ -34,6 +34,8 @@ __vps_TimerEntry_createSetup_has_widget = len(__getargs(TimerEntry.createSetup).
 
 # We cater for any parameters thrown at us and pass it all on.
 #
+
+
 def new_RecordTimer_saveTimer(self, *args, **kwargs):
 	self._saveTimer_old_rn_vps(*args, **kwargs)
 
@@ -138,6 +140,8 @@ def new_RecordTimer_loadTimer(self, *args, **kwargs):
 
 # We cater for any parameters thrown at us and pass it all on.
 #
+
+
 def new_TimerEntry_createConfig(self, *args, **kwargs):
 
 # Pass on all we were given
@@ -162,7 +166,6 @@ def new_TimerEntry_createConfig(self, *args, **kwargs):
 			if has_pdc == 1 or default_vps == 1:
 				self.timerentry_vpsplugin_dontcheck_pdc = True
 				default_value = config.plugins.vps.vps_default.value
-
 
 		self.timerentry_vpsplugin_enabled = ConfigSelection(choices=[("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes"))], default=default_value)
 
@@ -252,6 +255,8 @@ def new_TimerEntry_createSetup(self, widget="config"):
 
 # We cater for any parameters thrown at us and pass it all on.
 #
+
+
 def new_TimerEntry_newConfig(self, *args, **kwargs):
 
 # Pass on all we were given
@@ -311,6 +316,7 @@ def new_TimerEntry_finishedChannelSelection(self, *args, **kwargs):
 		print("[VPS] new_TimerEntry_finishedChannelSelection : ", exc)
 		pass
 
+
 # Do we have TimerEntryBase?
 # If so, we have to intercept its __init__ and set the session filed in
 # self, as otherwise our createConfig intercept will fail as in the
@@ -343,6 +349,8 @@ except:
 
 # We cater for any parameters thrown at us and pass it all on.
 #
+
+
 def new_InfoBarInstantRecord_recordQuestionCallback(self, answer, *args, **kwargs):
 
 # Pass on all we were given
@@ -375,6 +383,8 @@ def new_InfoBarInstantRecord_recordQuestionCallback(self, answer, *args, **kwarg
 		pass
 
 # VPS-Plugin in Enigma-Klassen einhängen
+
+
 def register_vps():
 	global vps_already_registered
 
@@ -388,7 +398,6 @@ def register_vps():
 
 		RecordTimer._loadTimer_old_rn_vps = RecordTimer.loadTimer
 		RecordTimer.loadTimer = new_RecordTimer_loadTimer
-
 
 		TimerEntry._createConfig_old_rn_vps = TimerEntry.createConfig
 		TimerEntry.createConfig = new_TimerEntry_createConfig

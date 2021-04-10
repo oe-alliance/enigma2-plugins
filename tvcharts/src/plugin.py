@@ -57,6 +57,8 @@ config.plugins.tvcharts.bouquetfilter = ConfigYesNo(default=True)
 session = []
 
 #Channellist Menu Entry
+
+
 class ChannelListMenu(MenuList):
 	def __init__(self, list, enableWrapAround=False):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
@@ -64,6 +66,7 @@ class ChannelListMenu(MenuList):
 		self.l.setFont(1, gFont("Regular", 20))
 		self.l.setFont(2, gFont("Regular", 16))
 		self.l.setItemHeight(76)
+
 
 def ChannelListEntryComponent(type, channelname, serviceref, eventid, eventname, starttime, endtime, usercount, percent):
 	res = [(serviceref, eventid)]
@@ -102,6 +105,7 @@ def ChannelListEntryComponent(type, channelname, serviceref, eventid, eventname,
 ##############################
 #####   TV Charts MAIN   #####
 ##############################
+
 
 class TVChartsMain(Screen):
 
@@ -381,6 +385,8 @@ class TVChartsMain(Screen):
 ############################
 #####  SETTINGS SCREEN #####
 ############################
+
+
 class TVChartsSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -573,14 +579,18 @@ class DBUpdateStatus(Screen):
 #############################
 #####    INIT PLUGIN    #####
 #############################
+
+
 def main(session, **kwargs):
 	session.open(TVChartsMain)
+
 
 def autostart(reason, **kwargs):
 	global session
 	if "session" in kwargs:
 		session = kwargs["session"]
 		DBUpdateStatus(session)
+
 
 def Plugins(path, **kwargs):
 	return [

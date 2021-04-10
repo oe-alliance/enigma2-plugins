@@ -15,11 +15,13 @@ from __init__ import _
 
 mcut_path = eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/MovieCut/bin/mcut")
 
+
 def main(session, service, **kwargs):
 	# Hack to make sure it is executable
 	if not access(mcut_path, X_OK):
 		chmod(mcut_path, 493)
 	session.open(MovieCut, service, **kwargs)
+
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name="MovieCut", description=_("Execute cuts..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main)
@@ -27,6 +29,7 @@ def Plugins(**kwargs):
 
 import struct
 cutsParser = struct.Struct('>QI')  # big-endian, 64-bit PTS and 32-bit type
+
 
 def _getCutsLength(filename, len_sec):
 	len_pts = in_pts = 0
@@ -148,6 +151,7 @@ class MovieCut(ChoiceBox):
 	def noFail(self, job, task, problems):
 	    return False
 
+
 class CutTask(Task):
 	def __init__(self, job, session, name, inpath, outpath, inlen, outlen, cmd, args):
 		Task.__init__(self, job, name)
@@ -197,6 +201,7 @@ class CutTask(Task):
 			   _("Cutting failed for movie \"%s\"") + ":\n" + _("Read/write error (disk full?)"),
 			   _("Cutting was aborted for movie \"%s\""))[self.returncode]
 		self.session.open(MessageBox, msg % self.name, type=MessageBox.TYPE_ERROR if self.returncode else MessageBox.TYPE_INFO, timeout=10)
+
 
 class AdvancedCutInput(Screen, ConfigListScreen):
 	def __init__(self, session, name, path, descr):

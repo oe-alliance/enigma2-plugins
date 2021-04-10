@@ -2,6 +2,7 @@
 from Components.Sources.Source import Source
 from enigma import eServiceCenter, eServiceReference, eEPGCache
 
+
 class EPG(Source):
 	BOUQUETNOW = 0
 	BOUQUETNEXT = 1

@@ -32,6 +32,7 @@ import skin
 # for localized messages
 from . import _
 
+
 def initPartnerboxEntryConfig():
 	config.plugins.Partnerbox.Entries.append(ConfigSubsection())
 	i = len(config.plugins.Partnerbox.Entries) - 1
@@ -44,6 +45,7 @@ def initPartnerboxEntryConfig():
 	config.plugins.Partnerbox.Entries[i].zaptoservicewhenstreaming = ConfigYesNo(default=True)
 	return config.plugins.Partnerbox.Entries[i]
 
+
 def initConfig():
 	count = config.plugins.Partnerbox.entriescount.value
 	if count != 0:
@@ -52,9 +54,12 @@ def initConfig():
 			initPartnerboxEntryConfig()
 			i += 1
 
+
 HD = False
 if getDesktop(0).size().width() >= 1280:
 	HD = True
+
+
 class PartnerboxSetup(ConfigListScreen, Screen):
 	if HD:
 		skin = """ <screen position="center,center" size="700,400" title="Partnerbox Setup" >
@@ -153,6 +158,7 @@ class PartnerboxSetup(ConfigListScreen, Screen):
 		from Tools.Directories import SCOPE_PLUGINS, resolveFilename
 		plugins.clearPluginList()
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+
 
 class PartnerboxEntriesListConfigScreen(Screen):
 	skin = """
@@ -306,6 +312,7 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		from PartnerboxFunctions import sendPartnerBoxWebCommand
 		sendPartnerBoxWebCommand(sCommand, None, 3, username, password)
 
+
 class PartnerboxEntryList(MenuList):
 	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
@@ -314,6 +321,7 @@ class PartnerboxEntryList(MenuList):
 		self.ItemHeight = int(font[2])
 		font = skin.fonts.get("PartnerBoxEntryList1", ("Regular", 18))
 		self.l.setFont(1, gFont(font[0], font[1]))
+
 	def postWidgetCreate(self, instance):
 		MenuList.postWidgetCreate(self, instance)
 		instance.setItemHeight(self.ItemHeight)
@@ -339,6 +347,7 @@ class PartnerboxEntryList(MenuList):
 			self.list.append(res)
 		self.l.setList(self.list)
 		self.moveToIndex(0)
+
 
 class PartnerboxEntryConfigScreen(ConfigListScreen, Screen):
 	skin = """

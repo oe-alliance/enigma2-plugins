@@ -27,6 +27,7 @@
 
 from constants import eStart, eError, eItsMe
 
+
 class CodingStateMachine:
     def __init__(self, sm):
         self._mModel = sm

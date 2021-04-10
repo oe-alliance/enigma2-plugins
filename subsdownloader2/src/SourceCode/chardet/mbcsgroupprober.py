@@ -36,6 +36,7 @@ from euckrprober import EUCKRProber
 from big5prober import Big5Prober
 from euctwprober import EUCTWProber
 
+
 class MBCSGroupProber(CharSetGroupProber):
     def __init__(self):
         CharSetGroupProber.__init__(self)

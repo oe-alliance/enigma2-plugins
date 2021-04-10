@@ -5,7 +5,6 @@ from Renderer import Renderer
 from os import path, statvfs
 
 
-
 class vRendMovieDirSize(Renderer, VariableText):
 	def __init__(self):
 		Renderer.__init__(self)

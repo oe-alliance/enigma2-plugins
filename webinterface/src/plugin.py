@@ -76,8 +76,11 @@ CERT_FILE = resolveFilename(SCOPE_CONFIG, "cert.pem")
 #===============================================================================
 # Helperclass to close running Instances of the Webinterface
 #===============================================================================
+
+
 class Closer:
 	counter = 0
+
 	def __init__(self, session, callback=None, l2k=None):
 		self.callback = callback
 		self.session = session
@@ -85,6 +88,7 @@ class Closer:
 #===============================================================================
 # Closes all running Instances of the Webinterface
 #===============================================================================
+
 	def stop(self):
 		global running_defered
 		for d in running_defered:
@@ -109,6 +113,7 @@ class Closer:
 		if self.counter < 1:
 			if self.callback is not None:
 				self.callback(self.session, self.l2k)
+
 
 def installCertificates(session):
 	if not os_exists(CERT_FILE) \
@@ -167,6 +172,8 @@ def restartWebserver(session, l2k):
 #===============================================================================
 # start the Webinterface for all configured Interfaces
 #===============================================================================
+
+
 def startWebserver(session, l2k):
 	global running_defered
 	global toplevel
@@ -219,6 +226,8 @@ def startWebserver(session, l2k):
 #===============================================================================
 # stop the Webinterface for all configured Interfaces
 #===============================================================================
+
+
 def stopWebserver(session):
 	try:
 		del session.mediaplayer
@@ -237,6 +246,8 @@ def stopWebserver(session):
 # Starts an Instance of the Webinterface
 # on given ipaddress, port, w/o auth, w/o ssl
 #===============================================================================
+
+
 def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usessl=False):
 	if hw.get_device_name().lower() != "dm7025":
 		l3k = None
@@ -300,6 +311,7 @@ def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usess
 		#print "[Webinterface] starting FAILED on %s:%i!" % (ipaddress, port), e
 		#return False
 
+
 class ChainedOpenSSLContextFactory(ssl.DefaultOpenSSLContextFactory):
 	def __init__(self, privateKeyFileName, certificateChainFileName, sslmethod=SSL.SSLv23_METHOD):
 		self.privateKeyFileName = privateKeyFileName
@@ -312,6 +324,7 @@ class ChainedOpenSSLContextFactory(ssl.DefaultOpenSSLContextFactory):
 		ctx.use_certificate_chain_file(self.certificateChainFileName)
 		ctx.use_privatekey_file(self.privateKeyFileName)
 		self._context = ctx
+
 
 class SimpleSession(object):
 	def __init__(self, expires=0):
@@ -342,6 +355,8 @@ class SimpleSession(object):
 
 #Every request made will pass this Resource (as it is the root resource)
 #Any "global" checks should be done here
+
+
 class HTTPRootResource(resource.Resource):
 	SESSION_PROTECTED_PATHS = ['/web/', '/opkg', '/ipkg']
 	SESSION_EXCEPTIONS = [
@@ -409,6 +424,8 @@ class HTTPRootResource(resource.Resource):
 # HTTPAuthResource
 # Handles HTTP Authorization for a given Resource
 #===============================================================================
+
+
 class HTTPAuthResource(HTTPRootResource):
 	def __init__(self, res, realm):
 		HTTPRootResource.__init__(self, res)
@@ -467,6 +484,7 @@ class HTTPAuthResource(HTTPRootResource):
 			print "[Webinterface.HTTPAuthResource.getChildWithDefault] !!! unauthorized !!!"
 			return self.unauthorized(request)
 
+
 # Password verfication stuff
 from crypt import crypt
 from pwd import getpwnam
@@ -492,12 +510,15 @@ def check_passwd(name, passwd):
 
 	return crypt(passwd, cryptedpass) == cryptedpass
 
+
 global_session = None
 
 #===============================================================================
 # sessionstart
 # Actions to take place on Session start
 #===============================================================================
+
+
 def sessionstart(reason, session):
 	global global_session
 	global_session = session
@@ -517,6 +538,7 @@ def registerBonjourService(protocol, port):
 		print "[WebInterface.registerBonjourService] %s" % e
 		return False
 
+
 def unregisterBonjourService(protocol):
 	try:
 		from Plugins.Extensions.Bonjour.Bonjour import bonjour
@@ -529,6 +551,7 @@ def unregisterBonjourService(protocol):
 		print "[WebInterface.unregisterBonjourService] %s" % e
 		return False
 
+
 def checkBonjour():
 	if (not config.plugins.Webinterface.http.enabled.value) or (not config.plugins.Webinterface.enabled.value):
 		unregisterBonjourService('http')
@@ -540,6 +563,8 @@ def checkBonjour():
 # Actions to take place after Network is up (startup the Webserver)
 #===============================================================================
 #def networkstart(reason, **kwargs):
+
+
 def networkstart(reason, session):
 	l2r = False
 	l2k = None
@@ -566,8 +591,10 @@ def networkstart(reason, session):
 			stopWebserver(session)
 			checkBonjour()
 
+
 def openconfig(session, **kwargs):
 	session.openWithCallback(configCB, WebIfConfigScreen)
+
 
 def configCB(result, session):
 	l2r = False
@@ -593,6 +620,7 @@ def configCB(result, session):
 			checkBonjour()
 		else:
 			print "[WebIf] config not changed"
+
 
 def Plugins(**kwargs):
 	p = PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart)

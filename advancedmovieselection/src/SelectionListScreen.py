@@ -33,6 +33,7 @@ from Components.SelectionList import SelectionList
 from Screens.HelpMenu import HelpableScreen
 from Source.Globals import SkinResolutionHelper
 
+
 class SelectionListScreen(Screen, HelpableScreen, SkinResolutionHelper):
     def __init__(self, session, title, item_descr, selected_items):
         Screen.__init__(self, session)

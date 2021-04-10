@@ -43,6 +43,7 @@ config.startupserviceleavingstandbymode.lastservice = ConfigText(default="")
 config.startupserviceleavingstandbymode.lastroot = ConfigText(default="")
 config.startupserviceleavingstandbymode.lastmode = ConfigText(default="tv")
 
+
 def leaveStandby():
 	if config.startupserviceleavingstandbymode.lastservice.value != "" and config.startupserviceleavingstandbymode.lastroot.value != "":
 		from Screens.InfoBar import InfoBar
@@ -50,6 +51,7 @@ def leaveStandby():
 			InfoBar.instance.servicelist.setModeTv()
 		else:
 			InfoBar.instance.servicelist.setModeRadio()
+
 
 def standbyCounterChanged(configElement):
 	if config.startupserviceleavingstandbymode.lastservice.value != "" and config.startupserviceleavingstandbymode.lastroot.value != "":
@@ -64,6 +66,7 @@ def standbyCounterChanged(configElement):
 			config_last.lastroot.value = config.startupserviceleavingstandbymode.lastroot.value
 			config_last.save()
 			inStandby.onClose.append(leaveStandby)
+
 
 def main(session, **kwargs):
 	# copy startupservice data to config.tv or config.radio if available
@@ -92,10 +95,13 @@ def main(session, **kwargs):
 		pass
 	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
+
 ###########################################
 # ChannelContextMenu
 ###########################################
 baseChannelContextMenu__init__ = None
+
+
 def startUpServiceInit():
 	global baseChannelContextMenu__init__
 	if baseChannelContextMenu__init__ is None:
@@ -107,6 +113,7 @@ def startUpServiceInit():
 	ChannelContextMenu.setStartUpService = setStartUpService
 	ChannelContextMenu.resetStartUpService = resetStartUpService
 
+
 def startUpService__init__(self, session, csel):
 	baseChannelContextMenu__init__(self, session, csel)
 	current = csel.getCurrentSelection()
@@ -117,6 +124,7 @@ def startUpService__init__(self, session, csel):
 			if not (current.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)):
 				self["menu"].list.insert(1, ChoiceEntryComponent(text=(_("set as startup service"), boundFunction(self.startUpServiceContextMenuCallback, True))))
 				self["menu"].list.insert(2, ChoiceEntryComponent(text=(_("reset startup service"), boundFunction(self.startUpServiceContextMenuCallback, False))))
+
 
 def startUpServiceContextMenuCallback(self, add):
 	if add:
@@ -130,6 +138,7 @@ def startUpServiceContextMenuCallback(self, add):
 				(_("reset startup service for leaving standby mode..."), boundFunction(self.resetStartUpService, config.startupserviceleavingstandbymode)),
 			]
 	self.session.openWithCallback(self.startUpServiceMenuCallback, ChoiceBox, list=options)
+
 
 def startUpServiceMenuCallback(self, ret):
 	ret and ret[1]()
@@ -154,12 +163,14 @@ def setStartUpService(self, configElement):
 	else:
 		 self.session.openWithCallback(self.close, MessageBox, _("If you see this message, please switch to the service you want to mark as startservice and try again."), MessageBox.TYPE_ERROR)
 
+
 def resetStartUpService(self, configElement):
 	configElement.lastroot.value = ""
 	configElement.lastmode.value = "tv"
 	configElement.lastservice.value = ""
 	configElement.save()
 	self.close()
+
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(name="StartUpService", description="set startup service", where=PluginDescriptor.WHERE_SESSIONSTART, fnc=main)]

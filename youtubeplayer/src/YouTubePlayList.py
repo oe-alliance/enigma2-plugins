@@ -68,7 +68,6 @@ class YouTubePlaylistScreen(Screen):
 			"cancel"	: self.close
 		}, -1)
 
-
 	def loadPlaylist(self):
 		self.list = []
 		try:
@@ -80,16 +79,13 @@ class YouTubePlaylistScreen(Screen):
 					e), MessageBox.TYPE_ERROR)
 		self["list"].setList(self.list)
 
-
 	def choosePlaylist(self):
 		Screen.close(self, self["list"].getCurrent()[0])
-
 
 	def deletePlaylist(self):
 		playList = self["list"].getCurrent()[0]
 		if playList is not None:
 			self.session.openWithCallback(self.deleteCallback, MessageBox, _("Really delete %(playlist)s?") % {"playlist": playList.getTitle()})
-
 
 	def deleteCallback(self, result):
 		if result:
@@ -97,17 +93,14 @@ class YouTubePlaylistScreen(Screen):
 				self.list.remove(self["list"].getCurrent())
 				self["list"].setList(self.list)
 
-
 	def addPlaylist(self):
 		self.session.openWithCallback(self.addCallback, YouTubeAddPlaylistDialog)
-
 
 	def addCallback(self, result, playlistContext):
 		if result:
 			entry = interface.addPlaylist(playlistContext.name.value, playlistContext.description.value, playlistContext.private.value)
 			self.list.append(YouTubePlaylistEntryComponent(entry))
 			self["list"].setList(self.list)
-
 
 	def close(self):
 		Screen.close(self, None)

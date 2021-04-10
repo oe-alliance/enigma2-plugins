@@ -24,6 +24,7 @@ from subprocess import Popen, PIPE
 
 #from Plugins.Bp.geminimain.gTools import cleanexit
 
+
 def getMountP():
 	try:
 		mounts = open("/proc/mounts")
@@ -34,6 +35,7 @@ def getMountP():
 	mounts.close()
 	return lines
 
+
 def ismounted(dev, mp):
 	for x in getMountP():
 		parts = x.strip().split(" ")
@@ -42,6 +44,7 @@ def ismounted(dev, mp):
 			if parts[0] == dev or parts[1] == mp:
 				return parts[1]
 	return False
+
 
 def getFreeSize(mp):
 	try:
@@ -52,10 +55,12 @@ def getFreeSize(mp):
 
 #-----------------------------------------------------------------------------
 
+
 class FlashExpander(Screen):
 	skin = """<screen position="center,center" size="580,50" title="FlashExpander v0.33">
 			<widget name="list" position="5,5" size="570,40" />
 		</screen>"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
@@ -90,6 +95,7 @@ class FlashExpander(Screen):
 		#cleanexit(__name__)
 
 #-----------------------------------------------------------------------------
+
 
 class FEconf(Screen):
 	skin = """<screen position="center,center" size="640,160" title="%s">

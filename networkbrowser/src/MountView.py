@@ -12,6 +12,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, 
 from AutoMount import iAutoMount, AutoMount
 from MountEdit import AutoMountEdit
 
+
 class AutoMountView(Screen):
 	skin = """
 		<screen name="AutoMountView" position="90,140" size="560,350" title="MountView">

@@ -15,6 +15,7 @@ import interfaces
 import dreamIRCTools
 from zope.interface import implements
 
+
 class IRCPerson(e2support.AbstractPerson):
 
     def imperson_whois(self):
@@ -266,6 +267,7 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
     def joinGroup(self, name):
         self.join(name)
         self.getGroupConversation(name)
+
 
 class IRCAccount(e2support.AbstractAccount):
     implements(interfaces.IAccount)

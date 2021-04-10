@@ -18,6 +18,7 @@ def main(session, **kwargs):
         import traceback
         traceback.print_exc()
 
+
 def menuHook(menuid):
     """ Called whenever a menu is created """
     if menuid == "mainmenu" and config.plugins.CurlyTx.menuMain.value:

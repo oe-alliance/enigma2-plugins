@@ -18,6 +18,7 @@ class StreamPlayer:
     currentplaylistitemnumber = 0
     playlist = None
     onClose = []
+
     def __init__(self, session, args=0):
         self.session = session
         self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
@@ -26,6 +27,7 @@ class StreamPlayer:
                 iPlayableService.evStart: self.__onStart,
                 iPlayableService.evEOF: self.__onStop,
             })
+
     def __onStart(self):
         self.trackstarttime = time()
     
@@ -52,6 +54,7 @@ class StreamPlayer:
             remaining = int((track["duration"] / 1000) - (time() - self.trackstarttime))
             minutes = int(remaining / 60)
             seconds = int(remaining - (minutes * 60))
+
             def shiftchars(integer, char):
                 if integer in range(0, 10):
                     return char + str(integer)

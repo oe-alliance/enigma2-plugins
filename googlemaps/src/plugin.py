@@ -37,6 +37,7 @@ plugin_path = ""
 not_found_pic = "404.png"
 not_found_pic_overlay = "404_transparent.png"
 
+
 def applySkinVars(skin, dict):
     for key in dict.keys():
         try:
@@ -45,13 +46,16 @@ def applySkinVars(skin, dict):
             print e, "@key=", key
     return skin
 
+
 def getURL(x, y, z):
     url = "http://khm0.google.de/kh/v=53&x=%i&y=%i&z=%i" % (x, y, z)
     return url
 
+
 def getMapURL(x, y, z):
     url = "http://mt3.google.com/vt/v=w2t.97&hl=de&x=%i&y=%i&z=%i&s=G" % (x, y, z)
     return url
+
 
 def getMaptilesFromLonLat(lon, lat, zoomlevel):
     # calc map tiles
@@ -61,6 +65,7 @@ def getMaptilesFromLonLat(lon, lat, zoomlevel):
     gx, gy = mercator.GoogleTile(tminx, tminy, zoomlevel)
     return gx, gy
 
+
 class GoogleMapsConfigScreen(ConfigListScreen, Screen):
     skin = """
         <screen position="100,100" size="550,400" title="Google Maps Setup" >
@@ -69,6 +74,7 @@ class GoogleMapsConfigScreen(ConfigListScreen, Screen):
         <widget name="key_green" position="120,360" size="100,40" backgroundColor="green" valign="center" halign="center" zPosition="1"  foregroundColor="white" font="Regular;18"/>
         <widget name="label" position="240,360" size="200,40"  valign="center" halign="center" zPosition="1"  foregroundColor="white" font="Regular;18"/>
         </screen>"""
+
     def __init__(self, session, args=0):
         self.session = session
         Screen.__init__(self, session)
@@ -106,6 +112,7 @@ class GoogleMapsConfigScreen(ConfigListScreen, Screen):
             x[1].cancel()
         self.close(False)
 
+
 class GoogleMapsMainScreen(Screen, HelpableScreen):
     raw_skin = """
             <screen position="{screen.position}" size="{screen.size}" title="GoogleMaps" flags="wfNoBorder">
@@ -140,6 +147,7 @@ class GoogleMapsMainScreen(Screen, HelpableScreen):
 
             </screen>
             """
+
     def __init__(self, session):
         self.session = session
         size_w = int(getDesktop(0).size().width() * 0.9)
@@ -478,6 +486,7 @@ class GoogleMapsGeoSearchScreen(InputBox):
                 <widget name="previewo" position="{preview.position}" size="{preview.size}"  zPosition="2" alphatest="blend"/>
             </screen>
             """
+
     def __init__(self, session):
         self.session = session
         screen_size_w = int(getDesktop(0).size().width() * 0.9)
@@ -613,14 +622,17 @@ class GoogleMapsGeoSearchScreen(InputBox):
 
 ##################################
 
+
 def start_from_mainmenu(menuid, **kwargs):
     #starting from main menu
     if menuid == "mainmenu":
         return [(_("Google Maps"), start_from_pluginmenu, "googlemaps", 46)]
     return []
 
+
 originalservice = None
 mysession = None
+
 
 def start_from_pluginmenu(session, **kwargs):
     global originalservice, mysession
@@ -630,12 +642,14 @@ def start_from_pluginmenu(session, **kwargs):
         session.nav.stopService()
     session.openWithCallback(mainCB, GoogleMapsMainScreen)
 
+
 def mainCB():
     global originalservice, mysession
     mysession.nav.playService(originalservice)
     config.plugins.GoogleMaps.position.x.save()
     config.plugins.GoogleMaps.position.y.save()
     config.plugins.GoogleMaps.position.z.save()
+
 
 def Plugins(path, **kwargs):
     global plugin_path

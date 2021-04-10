@@ -17,6 +17,7 @@ if hasattr(static.File, 'render_GET'):
 else:
 	File = static.File
 
+
 def autostart(reason, **kwargs):
 	if reason == 0 and "session" in kwargs:
 		session = kwargs["session"]
@@ -30,6 +31,7 @@ def autostart(reason, **kwargs):
 		root.putChild("script", Script())
 		addExternalChild(("webadmin", root, "WebAdmin", 1, True, "_self"))
 			
+
 def Plugins(**kwargs):
 	return [PluginDescriptor(name="WebAdmin",
 			where=PluginDescriptor.WHERE_SESSIONSTART,

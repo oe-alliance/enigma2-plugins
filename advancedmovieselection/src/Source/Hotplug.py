@@ -25,8 +25,10 @@ from MovieConfig import MovieConfig
 from ServiceProvider import eServiceReferenceHotplug
 from enigma import eTimer
 
+
 class Hotplug():
     NTFS_3G_DRIVER_DELAY = 3000
+
     def __init__(self):
         self.notifier = []
         self.hotplugServices = []

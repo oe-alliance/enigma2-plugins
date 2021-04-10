@@ -5,6 +5,7 @@ import urllib2
 
 ##################################################
 
+
 class PornRabbitMovie(Movie):
 	def __init__(self, name, url, thumb):
 		Movie.__init__(self, name, url, thumb)
@@ -22,6 +23,7 @@ class PornRabbitMovie(Movie):
 			return None
 
 ##################################################
+
 
 class PornRabbitSub(Plugin):
 	def __init__(self, name, url):
@@ -73,6 +75,7 @@ class PornRabbitSub(Plugin):
 
 ##################################################
 
+
 class PornRabbit(Plugin):
 	def __init__(self):
 		Plugin.__init__(self, "Porn Rabbit", "pornrabbit.png")
@@ -105,6 +108,7 @@ class PornRabbit(Plugin):
 			print "[%s] Error: %s" % (self.name, error)
 
 ##################################################
+
 
 def getPlugin():
 	return PornRabbit()

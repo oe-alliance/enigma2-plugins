@@ -36,8 +36,10 @@ configDir = eEnv.resolve("${sysconfdir}") + "/podcast/"
 PluginLanguageDomain = "Podcast"
 PluginLanguagePath = "Extensions/Podcast/locale/"
 
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -46,14 +48,17 @@ def _(txt):
 		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
 		return gettext.gettext(txt)
 
+
 language.addCallback(localeInit())
 
 ###################################################
+
 
 def remove(file):
 	system('rm "' + file + '"')
 
 ###################################################
+
 
 class ChangedMoviePlayer(MoviePlayer):
 	def __init__(self, session, service):
@@ -82,12 +87,14 @@ class ChangedMoviePlayer(MoviePlayer):
 
 ###################################################
 
+
 config.plugins.Podcast = ConfigSubsection()
 config.plugins.Podcast.buffer = ConfigYesNo(default=True)
 config.plugins.Podcast.bufferDevice = ConfigText(default="/media/hdd/", fixed_size=False)
 config.plugins.Podcast.keepStored = ConfigSelection(choices={"delete": _("delete"), "keep": _("keep on device"), "ask": _("ask me")}, default="delete")
 
 ###################################################
+
 
 def encodeUrl(url):
 	url = url.replace("&amp;", "&")
@@ -101,6 +108,7 @@ def encodeUrl(url):
 	url = url.replace("&#187;", ">>")
 	return url
 
+
 def getText(nodelist):
     	rc = []
 	for node in nodelist:
@@ -109,6 +117,7 @@ def getText(nodelist):
 	return ''.join(rc)
                                 
 ###################################################
+
 
 class BufferThread():
 	def __init__(self):
@@ -147,9 +156,11 @@ class BufferThread():
 		self.error = ""
 		self.download.stop()
 
+
 bufferThread = BufferThread()
 
 ###################################################
+
 
 class PodcastBuffer(Screen):
 	skin = """
@@ -200,6 +211,7 @@ class PodcastBuffer(Screen):
 		self.close(None)
 
 ###################################################
+
 
 class PodcastMovies(Screen):
 	skin = """
@@ -307,6 +319,7 @@ class PodcastMovies(Screen):
 
 ###################################################
 
+
 class PodcastPodcasts(Screen):
 	skin = """
 		<screen position="center,center" size="420,360" title="%s" >
@@ -337,6 +350,7 @@ class PodcastPodcasts(Screen):
 
 ###################################################
 
+
 class PodcastProvider(Screen):
 	skin = """
 		<screen position="center,center" size="420,360" title="%s" >
@@ -365,6 +379,7 @@ class PodcastProvider(Screen):
 			self.session.open(PodcastPodcasts, cur)
 
 ###################################################
+
 
 class PodcastXML(Screen):
 	skin = """
@@ -433,6 +448,8 @@ class PodcastXML(Screen):
 
 # Sadly Feedly OPML URL is not stable, seems to change after a while :(
 # Deactivated in selection
+
+
 class PodcastFeedly(Screen):
 	skin = """
 		<screen position="center,center" size="420,360" title="%s" >
@@ -489,6 +506,7 @@ class PodcastFeedly(Screen):
                                                                         			
 ###################################################
 
+
 class LocationSelection(Screen):
 	skin = """
 	<screen position="center,center" size="560,300" title="%s">
@@ -544,6 +562,7 @@ class LocationSelection(Screen):
 
 ###################################################
 
+
 class PodcastConfig(ConfigListScreen, Screen):
 	skin = """
 	<screen position="center,center" size="560,180" title="%s">
@@ -562,7 +581,6 @@ class PodcastConfig(ConfigListScreen, Screen):
 		
 		ConfigListScreen.__init__(self, [])
 			
-		
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], {"green": self.save, "cancel": self.exit}, -1)
 		
 		self.onLayoutFinish.append(self.createConfig)
@@ -605,6 +623,7 @@ class PodcastConfig(ConfigListScreen, Screen):
 
 ###################################################
 
+
 class Podcast(Screen):
 	skin = """
 		<screen position="center,center" size="560,360" title="%s" >
@@ -624,7 +643,6 @@ class Podcast(Screen):
 		
 		self["actions"] = ActionMap(["ColorActions", "OkCancelActions"], {"ok": self.ok, "cancel": self.close, "blue": self.help}, -1)
 		
-
 		# Feedly removed until found a way to get a stable source URL
 		self["list"] = MenuList([
 			_("from xml"),
@@ -653,8 +671,10 @@ class Podcast(Screen):
 
 ###################################################
 
+
 def main(session, **kwargs):
 	session.open(Podcast)
+
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("Podcast"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)

@@ -8,6 +8,8 @@ from traceback import format_exc
 from . import _
 
 PLUGIN_VERSION = "1.1.2"
+
+
 def debugOut(outtxt, outfile=None, fmode="aw", forced=False, outPrefix="[EPGBackup]"):
 	try: # fails if called too early during Enigma startup
 		if config.plugins.epgbackup.enable_debug.value or forced:
@@ -22,6 +24,7 @@ def debugOut(outtxt, outfile=None, fmode="aw", forced=False, outPrefix="[EPGBack
 	except:
 		pass
 
+
 def _getLogFilename(outfile=None):
 	if outfile == None:
 		if config.plugins.epgbackup.plugin_debug_in_file.value:
@@ -32,6 +35,7 @@ def _getLogFilename(outfile=None):
 			else:
 				outfile = "/tmp/EPGBackup.log"
 	return outfile
+
 
 # Notification-Domain
 EPGBACKUP_NOTIFICATIONDOMAIN = "EPGBackup"

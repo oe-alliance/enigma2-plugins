@@ -29,6 +29,7 @@ import constants
 import sys
 from charsetprober import CharSetProber
 
+
 class CharSetGroupProber(CharSetProber):
     def __init__(self):
         CharSetProber.__init__(self)

@@ -38,6 +38,7 @@ trash_count = 0
 trash_size = 0
 async_trash = None
 
+
 class AsynchTrash(Thread):
     def __init__(self, items, wait_ms=0, min_age=0):
         Thread.__init__(self)
@@ -62,6 +63,7 @@ class AsynchTrash(Thread):
                 print e
         global async_trash
         async_trash = None
+
 
 class eServiceReferenceTrash():
     def __init__(self, path):
@@ -98,6 +100,7 @@ class eServiceReferenceTrash():
     def getShortDescription(self):
         return self.short_description
 
+
 def updateInfo(path):
     global trash_count, trash_size
     trash_count = trash_count + 1
@@ -107,11 +110,13 @@ def updateInfo(path):
         from ServiceUtils import getFolderSize
         trash_size += getFolderSize(os.path.dirname(path))
 
+
 def resetInfo():
     global trash_count, trash_size
     trash_count = 0
     trash_size = 0
     
+
 class Trashcan:
     @staticmethod
     def listAllMovies(root):

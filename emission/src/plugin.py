@@ -27,6 +27,7 @@ from transmissionrpc import Client, TransmissionError
 
 NOTIFICATIONID = 'EmissionAutodownloadError'
 
+
 def simplerss_update_callback(id=None):
 	try:
 		from Plugins.Extensions.SimpleRSS.plugin import rssPoller
@@ -69,6 +70,7 @@ def simplerss_update_callback(id=None):
 				NOTIFICATIONID
 			)
 
+
 def simplerss_handle_callback(el):
 	try:
 		from Plugins.Extensions.SimpleRSS.RSSPoller import update_callbacks
@@ -101,13 +103,16 @@ def simplerss_handle_callback(el):
 		elif simplerss_update_callback in update_callbacks:
 			update_callbacks.remove(simplerss_update_callback)
 
+
 config.plugins.emission.autodownload_from_simplerss.addNotifier(simplerss_handle_callback, immediate_feedback=False)
+
 
 def main(session, **kwargs):
 	#reload(EmissionOverview)
 	session.open(
 		EmissionOverview.EmissionOverview
 	)
+
 
 def filescan_open(item, session, **kwargs):
 	client = Client(
@@ -137,9 +142,11 @@ def filescan_open(item, session, **kwargs):
 		timeout=5
 	)
 
+
 from mimetypes import add_type
 add_type("application/x-bittorrent", ".tor")
 add_type("application/x-bittorrent", ".torrent")
+
 
 def filescan(**kwargs):
 	from Components.Scanner import Scanner, ScanPath
@@ -155,6 +162,7 @@ def filescan(**kwargs):
 			openfnc=filescan_open,
 		)
 	]
+
 
 def Plugins(**kwargs):
 	return [

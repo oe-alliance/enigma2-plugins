@@ -3,6 +3,7 @@ from enigma import eServiceCenter, eServiceReference
 from Components.ParentalControl import LIST_BLACKLIST
 from Components.config import config
 
+
 class ProtectionSettings(Source):
 	def __init__(self):
 		Source.__init__(self)

@@ -19,6 +19,7 @@ except:
 	
 from skin import parseColor, parseFont
 
+
 class DAYS:
 	MONDAY = 0
 	TUESDAY = 1
@@ -29,6 +30,7 @@ class DAYS:
 	SUNDAY = 6
 	WEEKEND = 'weekend'
 	WEEKDAY = 'weekday'
+
 
 class AutoTimerList(MenuList):
 	"""Defines a simple Component to show Timer name"""

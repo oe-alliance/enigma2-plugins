@@ -4,6 +4,7 @@ import struct
 # GetFPS function by areq propably
 #found on http://www.mail-archive.com/pld-cvs-commit@lists.pld-linux.org/msg215309.html
 
+
 class GetFPS(object):
     def __init__(self, filename):
         self.filename = filename

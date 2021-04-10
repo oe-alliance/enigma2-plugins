@@ -34,6 +34,7 @@ from chardistribution import EUCJPDistributionAnalysis
 from jpcntx import EUCJPContextAnalysis
 from mbcssm import EUCJPSMModel
 
+
 class EUCJPProber(MultiByteCharSetProber):
     def __init__(self):
         MultiByteCharSetProber.__init__(self)

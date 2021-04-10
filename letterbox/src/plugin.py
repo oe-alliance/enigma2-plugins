@@ -8,12 +8,15 @@ from enigma import iPlayableService, eAVSwitch
 # list of mode choices to cycle through
 MODE_CHOICES = ["letterbox", "panscan"]
 
+
 def get_mode():
 	return config.av.policy_43.value
+
 
 def set_mode(mode):
 	config.av.policy_43.value = mode
 	config.av.policy_43.save()
+
 
 class LetterBox(Screen):
 	def __init__(self, session):
@@ -40,15 +43,19 @@ class LetterBox(Screen):
 		self.session.open(MessageBox, _("Display 4:3 content as") + "\n" + aspectratio[config.av.policy_43.value], MessageBox.TYPE_INFO, 3)
 		self.used = True
 
+
 letterbox = None
+
 
 def zoom_init(reason, **kwargs):
 	global letterbox
 	letterbox = LetterBox(kwargs["session"])
 
+
 def zoom_toggle(session, **kwargs):
 	global letterbox
 	letterbox.toggle()
+
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(name="LetterBox Zoom",

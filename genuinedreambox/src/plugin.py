@@ -58,6 +58,7 @@ TPMD_CMD_COMPUTE_SIGNATURE = 0x0003
 TPMD_CMD_APP_CERT = 0x0004
 TPMD_PV_2 = 0x02
 
+
 class genuineDreambox(Screen):
 	skin = """
 		<screen position="center,center" size="620,420" title="%s" >
@@ -316,8 +317,10 @@ class genuineDreambox(Screen):
 		self.closeUds()
 		self.close() 
 
+
 def main(session, **kwargs):
 		session.open(genuineDreambox)
+
 
 def Plugins(path, **kwargs):
 		global plugin_path

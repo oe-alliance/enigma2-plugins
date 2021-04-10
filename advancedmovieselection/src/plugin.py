@@ -29,6 +29,7 @@ from Source.Config import initializeConfig
 
 initializeConfig()
 
+
 def sessionstart(reason, **kwargs):
     if reason == 0:
         session = kwargs["session"]
@@ -65,6 +66,7 @@ def sessionstart(reason, **kwargs):
                 traceback.print_exc(file=sys.stdout)
                 print '-' * 50
 
+
 def pluginOpen(session, **kwargs):
     from MoviePlayer import initPlayerChoice
     initPlayerChoice(session)
@@ -72,12 +74,15 @@ def pluginOpen(session, **kwargs):
     from MoviePlayer import playerChoice
     session.openWithCallback(playerChoice.playService, MovieSelection)
 
+
 def openProgress(session, **kwargs):
     from MoveCopy import MoveCopyProgress
     session.open(MoveCopyProgress)
 
+
 def pluginMenu(session, **kwargs):
     session.open(AdvancedMovieSelectionSetup)
+
 
 def Setup(menuid, **kwargs):
     # black_64: move AMS setup to: Menu > Settings > System
@@ -85,6 +90,7 @@ def Setup(menuid, **kwargs):
     if menuid == "system":
         return [(_("Setup Advanced Movie Selection"), pluginMenu, "SetupAdvancedMovieSelection", None)]
     return []
+
 
 def tmdbInfo(session, eventName="", **kwargs):
     try:
@@ -99,6 +105,7 @@ def tmdbInfo(session, eventName="", **kwargs):
     except Exception, e:
         print e
         
+
 def tvdbInfo(session, eventName="", **kwargs):
     try:
         s = session.nav.getCurrentService()
@@ -113,6 +120,7 @@ def tvdbInfo(session, eventName="", **kwargs):
             session.open(TheTVDBMain, None, eventName, shortdescr) 
     except Exception, e:
         print e
+
 
 def Plugins(**kwargs):
     try:

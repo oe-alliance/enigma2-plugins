@@ -32,6 +32,7 @@ import sys
 from constants import eStart, eError, eItsMe
 from charsetprober import CharSetProber
 
+
 class MultiByteCharSetProber(CharSetProber):
     def __init__(self):
         CharSetProber.__init__(self)

@@ -20,6 +20,7 @@ class AccountManager:
 	@ivar accounts: A collection of available accounts.
 	@type accounts: mapping of strings to L{Account<interfaces.IAccount>}s.
 	"""
+
 	def __init__(self, session):
 		self.chatui = e2chat.ChatUI()
 		self.config = dreamIRCSetup.dreamIRCConfig()

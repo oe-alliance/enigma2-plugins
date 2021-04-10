@@ -22,12 +22,14 @@
 from enigma import getDesktop
 from Tools.Directories import fileExists, resolveFilename, SCOPE_HDD, SCOPE_CURRENT_SKIN, SCOPE_CURRENT_PLUGIN
 
+
 def printStackTrace():
     import sys
     import traceback
     print "--- [AdvancedMovieSelection] STACK TRACE ---"
     traceback.print_exc(file=sys.stdout)
     print '-' * 50
+
 
 class SkinResolutionHelper():
     def __init__(self, alternativeSkinName=None):
@@ -36,10 +38,12 @@ class SkinResolutionHelper():
         else:
             self.skinName = SkinTools.appendResolution(self.__class__.__name__)
 
+
 class SkinTools():
     DESKTOP_WIDTH_SD = 720
     DESKTOP_WIDTH_XD = 1024
     DESKTOP_WIDTH_HD = 1280
+
     def __init__(self):
         pass
     
@@ -61,6 +65,7 @@ class SkinTools():
         except:
             desktopWidth = SkinTools.DESKTOP_WIDTH_SD
         return desktopWidth
+
 
 class Installed:
     def __init__(self):

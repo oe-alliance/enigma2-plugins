@@ -136,6 +136,7 @@ scheme_fallback = [
 		("{date:s} {time:s} {channel:s} {series:s} S{season:02d} E{rawepisode:s} {title:s}", "Date Time Channel Series S01 ERaw Title")
 	]
 
+
 def readFilePatterns():
 	path = config.plugins.seriesplugin.pattern_file.value
 	obj = None

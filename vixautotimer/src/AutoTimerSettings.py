@@ -20,6 +20,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
 
+
 class AutoTimerSettings(Screen, ConfigListScreen):
 	skin = """<screen name="AutoTimerSettings" position="center,center" size="565,370">
 		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
@@ -63,6 +64,7 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 			session=session,
 			on_change=self.changed
 		)
+
 		def selectionChanged():
 			if self["config"].current:
 				self["config"].current[1].onDeselect(self.session)

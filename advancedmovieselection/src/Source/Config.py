@@ -198,6 +198,7 @@ config.AdvancedMovieSelection.movielibrary_show_mark_cnt = ConfigInteger(default
 config.AdvancedMovieSelection.hide_seen_movies = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.qButtons = ConfigText()
 
+
 class QuickButtons():
     def __init__(self):
         self.qlist = [('red', ''), ('red_long', ''), ('green', ''), ('green_long', ''), ('yellow', ''), ('yellow_long', ''), ('blue', ''), ('blue_long', '')]
@@ -239,13 +240,17 @@ class QuickButtons():
         except:
             printStackTrace()
     
+
 qButtons = QuickButtons()
+
 
 def initializeConfig():
     pass
 
+
 CONFIG_BACKUP = ("AdvancedMovieSelection", "movielist")
 BACKUP_FILE_NAME = "AMS.settings.backup"
+
 
 def getChanges(config_entry, changes):
     print "get changes for:", config_entry
@@ -256,6 +261,7 @@ def getChanges(config_entry, changes):
             txt = "config.%s.%s=%s" % (config_entry, item, conf.saved_value)
             print txt
             changes.append(txt)
+
 
 def createBackup(path="/media/hdd/"):
     changes = []
@@ -273,6 +279,7 @@ def createBackup(path="/media/hdd/"):
         printStackTrace()
         return
     return file_name
+
 
 def loadBackup(file_name):
     print "load backup", file_name 

@@ -15,6 +15,8 @@ from Logger import log
 #######################################################
 # Override ChannelContextMenu
 ChannelContextMenu__init__ = None
+
+
 def SPChannelContextMenuInit():
 	print "[SeriesPlugin] override ChannelContextMenu.__init__"
 	global ChannelContextMenu__init__
@@ -25,6 +27,7 @@ def SPChannelContextMenuInit():
 		ChannelContextMenu.SPchannelShowSeriesInfo = channelShowSeriesInfo
 		ChannelContextMenu.SPcloseafterfinish = closeafterfinish
 
+
 def SPChannelContextMenuUndo():
 	print "[SeriesPlugin] override ChannelContextMenu.__init__"
 	global ChannelContextMenu__init__
@@ -32,6 +35,7 @@ def SPChannelContextMenuUndo():
 		from Screens.ChannelSelection import ChannelContextMenu
 		ChannelContextMenu.__init__ = ChannelContextMenu__init__
 		ChannelContextMenu__init__ = None
+
 
 def SPChannelContextMenu__init__(self, session, csel):
 	from Components.ChoiceList import ChoiceEntryComponent
@@ -46,6 +50,7 @@ def SPChannelContextMenu__init__(self, session, csel):
 		from Plugins.Extensions.SeriesPlugin.plugin import SHOWINFO
 		self["menu"].list.insert(0, ChoiceEntryComponent(text=(SHOWINFO, boundFunction(self.SPchannelShowSeriesInfo))))
 
+
 def channelShowSeriesInfo(self):
 	log.debug("[SeriesPlugin] channelShowSeriesInfo ")
 	if config.plugins.seriesplugin.enabled.value:
@@ -58,6 +63,7 @@ def channelShowSeriesInfo(self):
 			self.session.openWithCallback(self.SPcloseafterfinish, SeriesPluginInfoScreen, service, event)
 		except Exception as e:
 			log.debug(_("SeriesPlugin info exception ") + str(e))
+
 
 def closeafterfinish(self, retval=None):
 	self.close()

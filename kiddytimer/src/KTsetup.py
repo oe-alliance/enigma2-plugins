@@ -17,6 +17,7 @@ from __init__ import _
 import KTglob
 import time
 
+
 class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
     skin = ("""
     <screen position="center,center" size="560,440" title="%s Setup">
@@ -139,6 +140,7 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         
     def protectedWithPin(self):
         return config.plugins.KiddyTimer.pin.getValue()
+
 
 class KiddyTimerPositioner(Screen, MovableScreen):
     def __init__(self, session):

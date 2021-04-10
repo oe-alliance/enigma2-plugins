@@ -29,6 +29,7 @@ from Logger import log
 # Do we have to cleanup it
 cache = {}
 
+
 def clearCache():
 	global cache
 	cache = {}

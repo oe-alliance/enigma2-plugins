@@ -27,6 +27,7 @@ from Tools.Directories import pathExists
 
 lastpath = ""
 
+
 class FileBrowser(Screen):
     def __init__(self, session, current_path=None):
         Screen.__init__(self, session)

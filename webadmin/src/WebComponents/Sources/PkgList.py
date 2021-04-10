@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from Components.Sources.Source import Source
 
+
 class PkgList(Source):
 	LIST = 0
 	UPDATE = 1

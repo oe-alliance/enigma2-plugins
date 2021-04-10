@@ -15,6 +15,7 @@ from Components.Sources.StaticText import StaticText
 
 from RSSList import RSSFeedList
 
+
 class RSSSummary(Screen):
 	skin = """
 	<screen position="0,0" size="132,64">
@@ -37,6 +38,7 @@ class RSSSummary(Screen):
 
 	def selectionChanged(self, text):
 		self["entry"].text = text
+
 
 class RSSBaseView(Screen):
 	"""Base Screen for all Screens used in SimpleRSS"""
@@ -99,6 +101,7 @@ class RSSBaseView(Screen):
 				type=MessageBox.TYPE_INFO,
 				timeout=5
 			)
+
 
 class RSSEntryView(RSSBaseView):
 	"""Shows a RSS Item"""
@@ -218,6 +221,7 @@ class RSSEntryView(RSSBaseView):
 	def selectEnclosure(self):
 		if self.data is not None:
 			RSSBaseView.selectEnclosure(self, self.data[3])
+
 
 class RSSFeedView(RSSBaseView):
 	"""Shows a RSS-Feed"""
@@ -385,6 +389,7 @@ class RSSFeedView(RSSBaseView):
 			return
 
 		RSSBaseView.selectEnclosure(self, current_entry[3])
+
 
 class RSSOverview(RSSBaseView):
 	"""Shows an Overview over all RSS-Feeds known to rssPoller"""

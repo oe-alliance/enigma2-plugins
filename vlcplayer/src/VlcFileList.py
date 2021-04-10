@@ -41,6 +41,7 @@ PLAYLIST_EXTENSIONS = {
 		"xspf": "playlist.png",
 	}
 
+
 class VlcFileList(MenuList):
 	def __init__(self, getFilesAndDirsCB, baseDir, matchingPattern):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)

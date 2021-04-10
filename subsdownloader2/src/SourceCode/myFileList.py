@@ -20,7 +20,6 @@
 #######################################################################
 
 
-
 from re import compile as re_compile
 from os import path as os_path, listdir, stat as os_stat
 from Components.MenuList import MenuList
@@ -64,7 +63,6 @@ EXTENSIONS = {
 	}
 
 
-
 def FileEntryComponent(name, absolute=None, isDir=False):
 	res = [(absolute, isDir)]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 40, 2, 1000, 22, 0, RT_HALIGN_LEFT, name))
@@ -80,7 +78,6 @@ def FileEntryComponent(name, absolute=None, isDir=False):
 	if png is not None:
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 12, 3, 20, 20, png))
 	return res
-
 
 
 class FileList(MenuList):

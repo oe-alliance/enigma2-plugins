@@ -53,6 +53,7 @@ scheme_fallback = [
 		("{org:s}/{time:s}/{series:s}/", "Time/Series/")
 	]
 
+
 def readDirectoryPatterns():
 	path = config.plugins.seriesplugin.pattern_file_directories.value
 	obj = None

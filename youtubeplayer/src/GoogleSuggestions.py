@@ -36,10 +36,8 @@ class GoogleSuggestions():
 			self.prepQuerry = self.prepQuerry + "hl=" + hl + "&"
 		self.prepQuerry = self.prepQuerry + "jsonp=self.gotSuggestions&q="
 
-
 	def gotSuggestions(self, suggestslist):
 		self.callback(suggestslist)
-
 
 	def getSuggestions(self, querryString):
 		if querryString is not "":
@@ -64,7 +62,6 @@ class GoogleSuggestions():
 			self.conn.close()
 		else:
 			self.callback(None)
-
 
 
 #class GoogleSuggestions():

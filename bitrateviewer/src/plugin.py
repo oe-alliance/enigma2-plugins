@@ -27,6 +27,7 @@ from Components.ActionMap import ActionMap
 from enigma import iServiceInformation, getDesktop
 from bitratecalc import eBitrateCalculator
 
+
 class BitrateCalculator(Screen):
 	sz_w = getDesktop(0).size().width()
 	if sz_w == 1280:
@@ -92,6 +93,7 @@ class BitrateCalculator(Screen):
 
 def main(session, **kwargs):
 	session.open(BitrateCalculator)
+
 
 def Plugins(**kwargs):
 	list = [PluginDescriptor(name="BitrateViewer", description=_("BitrateViewer"), 

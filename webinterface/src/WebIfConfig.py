@@ -14,6 +14,7 @@ from Components.MultiContent import MultiContentEntryText
 
 from Components.ActionMap import ActionMap
 
+
 class WebIfConfigScreen(ConfigListScreen, Screen):
 	skin = """
 		<screen name="WebIfConfigScreen" position="center,center" size="560,400" title="Webinterface: Main Setup">

@@ -22,6 +22,7 @@ gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 gettext.textdomain("enigma2")
 gettext.bindtextdomain("FritzCall", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/FritzCall/locale/"))
 
+
 def _(txt): # pylint: disable=C0103
 	td = gettext.dgettext("FritzCall", txt)
 	if td == txt:
@@ -29,6 +30,8 @@ def _(txt): # pylint: disable=C0103
 	return td
 
 # scramble text
+
+
 def __(text, front=True):
 	#===========================================================================
 	# if len(text) > 5:
@@ -44,7 +47,10 @@ def __(text, front=True):
 		out = out + text[i * 2] + '.'
 	return out
 
+
 import re
+
+
 def normalizePhoneNumber(intNo):
 	
 	found = re.match(r'^\+' + config.plugins.FritzCall.country.value.replace('00', '') + '(.*)', intNo)

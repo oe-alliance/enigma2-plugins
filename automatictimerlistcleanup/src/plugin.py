@@ -35,6 +35,7 @@ from . import _
 config.plugins.automatictimerlistcleanup = ConfigSubsection()
 config.plugins.automatictimerlistcleanup.type = ConfigSelection(default="-1", choices=[("-1", _("disabled")), ("0", _("immediately after recording")), ("1", _("older than 1 day")), ("3", _("older than 3 days")), ("7", _("older than 1 week")), ("14", _("older than 2 weeks")), ("28", _("older than 4 weeks")), ("42", _("older than 6 weeks"))])
 
+
 class AutomaticTimerlistCleanUpSetup(Screen, ConfigListScreen): # config
 
 	skin = """
@@ -71,8 +72,10 @@ class AutomaticTimerlistCleanUpSetup(Screen, ConfigListScreen): # config
 			x[1].cancel()
 		self.close(False)
 
+
 class AutomaticTimerlistCleanUp:
 	TIMER_INTERVAL = 86400 # check timerlist every 24 hour
+
 	def __init__(self, session):
 		self.session = session
 		print "[AutomaticTimerlistCleanUp] Starting AutomaticTimerlistCleanUp..."
@@ -110,17 +113,21 @@ class AutomaticTimerlistCleanUp:
 				self.timer.stop()
 			self.cleanupTimerlist() # and check if entries have to be cleaned up in the timerlist
 
+
 def autostart(session, **kwargs):
 	AutomaticTimerlistCleanUp(session) # start plugin at sessionstart
 	
+
 def setup(session, **kwargs):
 	session.open(AutomaticTimerlistCleanUpSetup) # start setup
+
 
 def startSetup(menuid):
 	if menuid != "system": # show setup only in system level menu
 		return []
 	return [(_("Automatic Timerlist Cleanup Setup"), setup, "automatictimerlistcleanup", 46)]
 	
+
 def Plugins(**kwargs):
 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart), PluginDescriptor(name="Automatic Timerlist Cleanup Setup", description=_("Automatic Timerlist Cleanup Setup"), where=PluginDescriptor.WHERE_MENU, fnc=startSetup)]
 

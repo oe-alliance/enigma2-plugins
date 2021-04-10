@@ -1,6 +1,7 @@
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 
+
 class VolumeInfo(Converter):
 	RESULT = 0
 	RESULTTEXT = 1

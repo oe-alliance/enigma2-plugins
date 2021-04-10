@@ -3,6 +3,7 @@ from Components.Sources.Source import Source
 from Components.FileList import FileList
 from os import path as os_path
 
+
 class MP(Source):
 	LIST = 0
 	PLAY = 1

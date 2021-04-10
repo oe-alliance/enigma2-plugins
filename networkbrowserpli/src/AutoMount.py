@@ -9,6 +9,7 @@ from xml.etree.cElementTree import parse as cet_parse
 
 XML_FSTAB = "/etc/enigma2/automounts.xml"
 
+
 def rm_rf(d): # only for removing the ipkg stuff from /media/hdd subdirs
 	try:
 		for path in (os.path.join(d, f) for f in os.listdir(d)):
@@ -20,8 +21,10 @@ def rm_rf(d): # only for removing the ipkg stuff from /media/hdd subdirs
 	except Exception, ex:
 	        print "AutoMount failed to remove", d, "Error:", ex
 
+
 class AutoMount():
 	"""Manages Mounts declared in a XML-Document."""
+
 	def __init__(self):
 		self.automounts = {}
 		self.restartConsole = Console()

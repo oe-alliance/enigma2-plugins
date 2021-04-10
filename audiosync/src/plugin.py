@@ -21,9 +21,11 @@ config.plugins.AC3LipSync.absoluteStep8 = ConfigInteger(default=0, limits=(-1000
 config.plugins.AC3LipSync.position_x = ConfigInteger(default=0)
 config.plugins.AC3LipSync.position_y = ConfigInteger(default=0)
 
+
 def main(session, **kwargs):
 #	 reload(AC3main)
 	session.open(AC3main.AC3LipSync, plugin_path)
+
 
 def startSetup(menuid, **kwargs):
 	if getImageDistro() == "ventonsupport":
@@ -42,13 +44,16 @@ def startSetup(menuid, **kwargs):
 		else:
 			return []
 
+
 def setup(session, **kwargs):
 #	 reload(AC3setup)
 	session.open(AC3setup.AC3LipSyncSetup, plugin_path)
 
+
 def audioMenu(session, **kwargs):
 #	 reload(AC3setup)
 	session.open(AC3main.AC3LipSync, plugin_path)
+
 
 def Plugins(path, **kwargs):
 	global plugin_path

@@ -20,16 +20,22 @@ sorts = [('default', _("default")), ('alpha', _("alphabet")), ('alphareverse', _
 config.plugins.mc_vp_sortmode.enabled = ConfigSelection(sorts)
 config.plugins.mc_vp.dvd = ConfigSelection(default="dvd", choices=[("dvd", "dvd"), ("movie", "movie")])
 config.plugins.mc_vp.lastDir = ConfigText(default=resolveFilename(SCOPE_MEDIA))
+
+
 class MoviePlayer(OrgMoviePlayer):
 	def __init__(self, session, service, slist=None, lastservice=None):
 		self.session = session
 		OrgMoviePlayer.__init__(self, session, service, slist=None, lastservice=None)
 		self.skinName = "MoviePlayer"
 		OrgMoviePlayer.WithoutStopClose = True
+
 	def doEofInternal(self, playing):
 		self.leavePlayer()
+
 	def leavePlayer(self):
 		self.close()
+
+
 class MC_VideoPlayer(Screen, HelpableScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -70,6 +76,7 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 		self.filelist = FileList(currDir, useServiceRef=True, showDirectories=True, showFiles=True, matchingPattern="(?i)^.*\.(ts|vob|mpg|mpeg|avi|mkv|dat|iso|img|mp4|wmv|flv|divx|mov|ogm|m2ts)", additionalExtensions=None, sort=sort)
 		self["filelist"] = self.filelist
 		self["filelist"].show()
+
 	def up(self):
 		self["filelist"].up()
 		if self.mvion == True:
@@ -78,6 +85,7 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 			return
 		else:
 			self.cover()
+
 	def down(self):
 		self["filelist"].down()
 		if self.mvion == True:
@@ -86,6 +94,7 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 			return
 		else:
 			self.cover()
+
 	def leftUp(self):
 		self["filelist"].pageUp()
 		if self.mvion == True:
@@ -96,6 +105,7 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 			if self.mvion == True:
 				self.showiframe.finishStillPicture()
 			self.cover()
+
 	def rightDown(self):
 		self["filelist"].pageDown()
 		if self.mvion == True:
@@ -105,15 +115,19 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 				self.showiframe.finishStillPicture()
 		else:
 			self.cover()
+
 	def NextFavFolder(self):
 		return
+
 	def PrevFavFolder(self):
 		return
+
 	def showFileInfo(self):
 		if self["filelist"].canDescent():
 			return
 		else:
 			self.session.open(MC_VideoInfoView, self["filelist"].getCurrentDirectory() + self["filelist"].getFilename(), self["filelist"].getFilename(), self["filelist"].getServiceRef())
+
 	def KeyOk(self):
 		self.filename = self.filelist.getFilename()
 		print self.filename
@@ -134,6 +148,7 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 		else:
 			self.showiframe.finishStillPicture()
 			self.session.open(MoviePlayer, self["filelist"].getServiceRef(), slist=None, lastservice=None)
+
 	def cover(self):
 		filename = self["filelist"].getName()
 		short = shortname(filename)
@@ -148,6 +163,7 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 			if self.mvion == True:
 				self.showiframe.showStillpicture("/usr/share/enigma2/black.mvi")
 				self.mvion = False
+
 	def KeyMenu(self):
 #		if self["filelist"].canDescent():
 #			if self.filelist.getCurrent()[0][1]:
@@ -157,11 +173,14 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 #					foldername = foldername[-2]
 #					self.session.open(MC_FolderOptions,self.currentDirectory, foldername)
 		return
+
 	def updd(self):
 		sort = config.plugins.mc_vp_sortmode.enabled.value
 		self.filelist.refresh(sort)
+
 	def KeySettings(self):
 		self.session.openWithCallback(self.updd, VideoPlayerSettings)
+
 	def Exit(self):
 		if self.filelist.getCurrentDirectory() is None:
 			config.plugins.mc_vp.lastDir.value = "/"
@@ -174,11 +193,14 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 			pass
 		self.showiframe.finishStillPicture()
 		self.close()
+
+
 class VideoPlayerSettings(Screen, ConfigListScreen):
 	skin = """
 		<screen position="160,220" size="400,120" title="Media Center - VideoPlayer Settings" >
 			<widget name="config" position="10,10" size="380,100" />
 		</screen>"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self["actions"] = NumberActionMap(["SetupActions", "OkCancelActions"],
@@ -190,6 +212,7 @@ class VideoPlayerSettings(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("Play DVD as:"), config.plugins.mc_vp.dvd))
 		self.list.append(getConfigListEntry(_("Filelist Sorting:"), config.plugins.mc_vp_sortmode.enabled))
 		ConfigListScreen.__init__(self, self.list, session)
+
 	def keyOK(self):
 		config.plugins.mc_vp.save()
 		self.close()

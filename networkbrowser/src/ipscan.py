@@ -18,6 +18,7 @@ except ImportError:
 
 ############################################################################
 
+
 class PortScanner(object):
 	"""
 	PortScanner allows to use nmap from python

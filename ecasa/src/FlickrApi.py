@@ -14,27 +14,34 @@ from twisted.web.client import downloadPage
 
 our_print = lambda *args, **kwargs: print("[FlickrApi]", *args, **kwargs)
 
+
 class FakeExif:
 	def __init__(self):
 		pass
+
 	def __getattr__(self, attr):
 		if attr == 'make':
 			return None
 		elif attr == 'model':
 			return None
 
+
 class FakeNode:
 	def __init__(self, value):
 		self.text = value
 
+
 class Picture:
 	"""A picture from Flickr. Makes API compatible with the one from gdata as straight-forward as possible."""
+
 	def __init__(self, obj, owner=None):
 		self.__obj = obj
 		self.__owner = owner
+
 	@property
 	def obj(self):
 		return self.__obj
+
 	def __getattr__(self, attr):
 		if attr == 'title':
 			return FakeNode(self.__obj.get('title'))
@@ -66,10 +73,12 @@ class Picture:
 		elif attr.startswith('_'):
 			raise AttributeError("No such attribute '%s'" % (attr,))
 		return self.__obj.get(attr)
+
 	def __getitem__(self, idx):
 		if idx != 0:
 			raise IndexError("no such index")
 		return self
+
 	def __repr__(self):
 		return '<Ecasa.FlickrApi.Picture: %s>' % (self.title.text,)
 	__str__ = __repr__
@@ -77,16 +86,20 @@ class Picture:
 #		from xml.etree.cElementTree import dump
 #		dump(self.__obj)
 
+
 class PictureGenerator:
 	def __init__(self, fset, owner=None):
 		self.__list = fset
 		self.__owner = owner
+
 	def __getitem__(self, idx):
 		return Picture(self.__list[idx], owner=self.__owner)
+
 	def __iter__(self):
 		self.idx = 0
 		self.len = len(self) - 1
 		return self
+
 	def next(self):
 		idx = self.idx
 		if idx > self.len:
@@ -94,14 +107,20 @@ class PictureGenerator:
 		self.idx = idx + 1
 		return self[idx]
 	__next__ = next
+
 	def __len__(self):
 		return len(self.__list)
+
 	def index(self, obj):
 		return self.__list.index(obj.obj)
 
+
 from PictureApi import PictureApi
+
+
 class FlickrApi(PictureApi):
 	"""Wrapper around flickr API to make our life a little easier."""
+
 	def __init__(self, api_key=None, cache='/tmp/ecasa'):
 		"""Initialize API, login to flickr servers"""
 		PictureApi.__init__(self, cache=cache)
@@ -212,5 +231,6 @@ class FlickrApi(PictureApi):
 				lambda value: self.copyPhoto(photo, target, recursive=False)
 			)
 			return False
+
 
 __all__ = ['FlickrApi']

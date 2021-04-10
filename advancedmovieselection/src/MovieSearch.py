@@ -27,8 +27,10 @@ from Screens.InputBox import InputBox
 from Components.ActionMap import ActionMap, NumberActionMap
 from enigma import eTimer
 
+
 class PopupInputHelpDialog(NumericalTextInputHelpDialog):
     pass
+
 
 class PopupInputDialog(InputBox):
     def __init__(self, session):
@@ -51,6 +53,7 @@ class PopupInputDialog(InputBox):
     def hide(self):
         self.configText.help_window.hide()
         return Screen.hide(self)
+
 
 class MovieSearch():
     def __init__(self):

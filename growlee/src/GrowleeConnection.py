@@ -7,6 +7,7 @@ from twisted.internet import reactor
 
 from . import NOTIFICATIONID
 
+
 def emergencyDisable(*args, **kwargs):
 	if args:
 		try:
@@ -30,9 +31,11 @@ def emergencyDisable(*args, **kwargs):
 		10
 	)
 
+
 def gotNotification():
 	if hasattr(Notifications, 'notificationQueue'):
 		notifications = Notifications.notificationQueue.queue
+
 		def handler(note):
 			return note.fnc, note.screen, note.args, note.kwargs, note.id
 	else:
@@ -54,6 +57,7 @@ def gotNotification():
 			description = description
 
 			growleeConnection.sendNotification(title="Dreambox", description=description, priority=priority, timeout=timeout, id=id)
+
 
 class GrowleeConnection:
 	connections = []
@@ -115,6 +119,7 @@ class GrowleeConnection:
 		if self.pending == 0:
 			reactor.callLater(1, defer, True)
 		return defer
+
 
 growleeConnection = GrowleeConnection()
 

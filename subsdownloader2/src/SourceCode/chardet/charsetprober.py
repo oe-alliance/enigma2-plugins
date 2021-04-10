@@ -29,6 +29,7 @@
 import constants
 import re
 
+
 class CharSetProber:
     def __init__(self):
         pass

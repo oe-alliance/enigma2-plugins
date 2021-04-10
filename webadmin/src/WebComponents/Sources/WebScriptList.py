@@ -2,6 +2,7 @@
 from Components.Sources.Source import Source
 from os import popen as os_popen, path as os_path
 
+
 class WebScriptList(Source):
 	LIST = 0
 	EXEC = 1

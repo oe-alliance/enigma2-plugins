@@ -5,6 +5,7 @@ from twisted.web import resource, http, http_headers, server
 from os import path as os_path, remove as os_remove
 from os.path import getsize as os_path_getsize
 
+
 class GrabResource(resource.Resource):
 	'''
 		this is a interface to Seddis AiO Dreambox Screengrabber
@@ -81,11 +82,13 @@ class GrabResource(resource.Resource):
 
 		return server.NOT_DONE_YET
 
+
 class GrabStream:
 	'''
 		used to start the grab-bin in the console in the background
 		while this takes some time, the browser must wait until the grabis finished
 	'''
+
 	def __init__(self, request, cmd, target=None, save=False):
 		self.target = target
 		self.save = save

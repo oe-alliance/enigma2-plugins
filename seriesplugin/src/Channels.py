@@ -75,6 +75,8 @@ ChannelReplaceDict = OrderedDict([
 ])
 CompiledRegexpChannelUnify = re.compile('|'.join(ChannelReplaceDict))
 CompiledRegexpChannelRemoveSpecialChars = re.compile('[^a-zA-Z0-9]')
+
+
 def unifyChannel(text):
 	def translate(match):
 		m = match.group(0)
@@ -94,9 +96,11 @@ def getServiceList(ref):
 	serviceHandler = eServiceCenter.getInstance()
 	return serviceHandler.list(root).getContent("SN", True)
 
+
 def getTVBouquets():
 	from Screens.ChannelSelection import service_types_tv
 	return getServiceList(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
+
 
 def getServicesOfBouquet(bouquet):
 	bouquetlist = getServiceList(bouquet)
@@ -120,6 +124,7 @@ def getServicesOfBouquet(bouquet):
 		
 	return chlist
 
+
 def buildSTBchannellist(BouquetName=None):
 	chlist = []
 	tvbouquets = getTVBouquets()
@@ -135,6 +140,7 @@ def buildSTBchannellist(BouquetName=None):
 	
 	return chlist
 
+
 def getChannel(ref):
 	if isinstance(ref, eServiceReference):
 		servicereference = ServiceReference(ref)
@@ -146,6 +152,7 @@ def getChannel(ref):
 		return servicereference.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
 	return ""
 
+
 def compareChannels(ref, remote):
 	log.debug("compareChannels", ref, remote)
 	remote = remote.lower()
@@ -156,6 +163,7 @@ def compareChannels(ref, remote):
 				return True
 		
 	return False
+
 
 def lookupChannelByReference(ref):
 	if ref in ChannelsBase.channels:

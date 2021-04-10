@@ -30,6 +30,7 @@ from codingstatemachine import CodingStateMachine
 from chardistribution import EUCKRDistributionAnalysis
 from mbcssm import EUCKRSMModel
 
+
 class EUCKRProber(MultiByteCharSetProber):
     def __init__(self):
         MultiByteCharSetProber.__init__(self)

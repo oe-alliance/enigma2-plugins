@@ -39,6 +39,7 @@ ePureAscii = 0
 eEscAscii = 1
 eHighbyte = 2
 
+
 class UniversalDetector:
     def __init__(self):
         self._highBitDetector = re.compile(r'[\x80-\xFF]')

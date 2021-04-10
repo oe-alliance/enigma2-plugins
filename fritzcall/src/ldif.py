@@ -63,6 +63,7 @@ for c in CHANGE_TYPES:
 SAFE_STRING_PATTERN = '(^(\000|\n|\r| |:|<)|[\000\n\r\200-\377]+|[ ]+$)'
 safe_string_re = re.compile(SAFE_STRING_PATTERN)
 
+
 def is_dn(s):
   """
   returns 1 if s is a LDAP DN

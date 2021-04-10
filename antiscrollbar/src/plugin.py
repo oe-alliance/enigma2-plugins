@@ -23,6 +23,7 @@ config.plugins.antiscrollbar.autostart = ConfigYesNo(default=True)
 config.plugins.antiscrollbar.modescount = ConfigInteger(0)
 config.plugins.antiscrollbar.mode = ConfigSubList()
 
+
 def initConfig():
     modescount = config.plugins.antiscrollbar.modescount.value
     if modescount == 0:
@@ -43,7 +44,9 @@ def initConfig():
 
             i += 1
 
+
 initConfig()
+
 
 def readConfig():
     srefs = {}
@@ -58,6 +61,8 @@ def readConfig():
     return srefs
 
 ###############################################################################
+
+
 class AntiScrollOverlay(Screen):
     def __init__(self, session):
         self.size = [0, 0]
@@ -172,8 +177,10 @@ class AntiScrollConfig(ConfigListScreen, Screen):
             x[1].cancel()
         self.close(False, self.session)
 
+
 class CurrentSeviceConfig(Screen):
     step = 5
+
     def __init__(self, session, mode):
         print "editing " + mode.sref.value
         self.mode = mode
@@ -263,12 +270,12 @@ class CurrentSeviceConfig(Screen):
     def move(self, x, y):
       self.instance.move(ePoint(x, y))
 
-
     def resize(self, w, h):
       self.instance.resize(eSize(*(w, h)))
       self["label"].instance.resize(eSize(*(w, h)))
 
 #############################
+
 
 activebar = None
 
@@ -282,16 +289,19 @@ def main(session, **kwargs):
     except:
         session.openWithCallback(mainCB, AntiScrollConfig)
 
+
 def mainCB(saved, session):
     global activebar, doshow
     if not activebar:
         activebar = session.instantiateDialog(AntiScrollOverlay)
     activebar.evStart()
 
+
 def autostart(session, **kwargs):
     global activebar
     if config.plugins.antiscrollbar.autostart.value:
         activebar = session.instantiateDialog(AntiScrollOverlay)
+
 
 def Plugins(**kwargs):
   return [PluginDescriptor(name=myname, description="overlay for scrolling bars", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main, icon="plugin.png"),

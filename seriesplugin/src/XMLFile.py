@@ -32,6 +32,7 @@ from Tools.XMLTools import stringToXML
 from . import _
 from Logger import log
 
+
 def indent(elem, level=0):
 	i = "\n" + level * "  "
 	if len(elem):

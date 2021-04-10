@@ -41,6 +41,7 @@ DEBUG = False
 config.plugins.pluginsort = ConfigSubsection()
 config.plugins.pluginsort.show_help = ConfigYesNo(default=True)
 
+
 def MyPluginEntryComponent(plugin, backcolor_sel=None):
 	if plugin.icon is None:
 		png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/plugin.png"))
@@ -52,8 +53,10 @@ def MyPluginEntryComponent(plugin, backcolor_sel=None):
 		#plugin, backcolor_sel, plugin.name, plugin.description, png,
 	]
 
+
 # TODO: make selected color themable
 SelectedPluginEntryComponent = lambda plugin: MyPluginEntryComponent(plugin, backcolor_sel=8388608)
+
 
 class MyPluginList(PluginList):
 	def __init__(self, *args, **kwargs):
@@ -75,18 +78,22 @@ class MyPluginList(PluginList):
 		instance = self.__instance()
 		if instance:
 			instance.moveSelection(instance.moveUp)
+
 	def down(self):
 		instance = self.__instance()
 		if instance:
 			instance.moveSelection(instance.moveDown)
+
 	def pageUp(self):
 		instance = self.__instance()
 		if instance:
 			instance.moveSelection(instance.pageUp)
+
 	def pageDown(self):
 		instance = self.__instance()
 		if instance:
 			instance.moveSelection(instance.pageDown)
+
 
 WHEREMAP = {}
 pdict = PluginDescriptor.__dict__
@@ -101,6 +108,7 @@ try:
 except AttributeError:
 	iteritems = lambda d: d.items()
 reverse = lambda map: dict((v, k) for k, v in iteritems(map))
+
 
 class PluginWeights:
 	def __init__(self):
@@ -179,7 +187,9 @@ class PluginWeights:
 			else:
 				self.plugins[x] = {plugin.name: plugin.weight}
 
+
 pluginWeights = PluginWeights()
+
 
 def PluginComponent_addPlugin(self, plugin, *args, **kwargs):
 	if len(plugin.where) > 1:
@@ -211,6 +221,7 @@ def PluginComponent_addPlugin(self, plugin, *args, **kwargs):
 			print("[PluginSort] Adding %s to list of installed plugins (%s, %s)." % (plugin.name, plugin.path, repr(plugin.where)))
 		self.installedPluginList.append(plugin)
 
+
 if DEBUG:
 	def PluginComponent_removePlugin(self, plugin, *args, **kwargs):
 		print("[PluginSort] Supposed to remove plugin: %s (%s, %s)." % (plugin.name, plugin.path, repr(plugin.where)))
@@ -228,6 +239,8 @@ if DEBUG:
 	PluginComponent.removePlugin = PluginComponent_removePlugin
 
 OriginalPluginBrowser = PluginBrowser.PluginBrowser
+
+
 class SortingPluginBrowser(OriginalPluginBrowser):
 	def __init__(self, *args, **kwargs):
 		self.movemode = False
@@ -468,6 +481,7 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 			self["yellow"].setText(_("End Sort"))
 		self.movemode = not self.movemode
 
+
 def autostart(reason, *args, **kwargs):
 	if reason == 0:
 		if hasattr(PluginComponent, 'pluginSort_baseAddPlugin'):
@@ -481,6 +495,7 @@ def autostart(reason, *args, **kwargs):
 
 			# we use a copy for installed plugins because we might change the 'where'-lists
 			plugins.installedPluginList = plugins.pluginList[:]
+
 			def PluginComponent__setattr__(self, key, value):
 				if key == 'installedPluginList':
 					return
@@ -536,7 +551,6 @@ def autostart(reason, *args, **kwargs):
 				InfoBarPlugins.pluginSort_baseGetPluginList = InfoBarPlugins.getPluginList
 				InfoBarPlugins.getPluginList = InfoBarPlugins_getPluginList
 
-
 			PluginBrowser.PluginBrowser = SortingPluginBrowser
 	else:
 		if hasattr(PluginComponent, 'pluginSort_baseAddPlugin'):
@@ -546,6 +560,7 @@ def autostart(reason, *args, **kwargs):
 			InfoBarPlugins.getPluginList = InfoBarPlugins.pluginSort_baseGetPluginList
 			del InfoBarPlugins.pluginSort_baseGetPluginList
 		PluginBrowser.PluginBrowser = OriginalPluginBrowser
+
 
 #pragma mark - Help
 try:
@@ -558,6 +573,7 @@ except Exception as e:
 	print("[PluginSort] Unable to initialize MPHelp:", e, "- Help not available!")
 	pluginSortHelp = None
 #pragma mark -
+
 
 def Plugins(**kwargs):
 	return [

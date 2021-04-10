@@ -10,6 +10,7 @@ from Components.ActionMap import ActionMap
 
 from . import _, initLog, debug, scaleV, DESKTOP_WIDTH, DESKTOP_HEIGHT #@UnresolvedImport# pylint: disable-msg=C0103,F0401
 
+
 class EmailConfigOptions(ConfigListScreen, Screen):
 	noButtons = 2
 	width = max(noButtons * 140 + 100, 550)
@@ -72,6 +73,7 @@ class EmailConfigOptions(ConfigListScreen, Screen):
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close(False)
+
 
 class EmailConfigAccount(ConfigListScreen, Screen):
 	width = max(2 * 140 + 100, 550)

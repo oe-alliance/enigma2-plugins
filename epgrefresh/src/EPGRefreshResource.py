@@ -17,6 +17,7 @@ except ImportError as ie:
 
 API_VERSION = "1.4"
 
+
 class EPGRefreshStartRefreshResource(resource.Resource):
 	def render(self, req):
 		state = False
@@ -36,6 +37,7 @@ class EPGRefreshStartRefreshResource(resource.Resource):
  <e2state>%s</e2state>
  <e2statetext>%s</e2statetext>
 </e2simplexmlresult>""" % ('true' if state else 'false', output)
+
 
 class EPGRefreshAddRemoveServiceResource(resource.Resource):
 	TYPE_ADD = 0
@@ -131,6 +133,7 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
  <e2statetext>%s</e2statetext>
 </e2simplexmlresult> """ % ('True' if state else 'False', output)
 
+
 class EPGRefreshListServicesResource(resource.Resource):
 	def render(self, req):
 		# show xml
@@ -138,6 +141,7 @@ class EPGRefreshListServicesResource(resource.Resource):
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 		return ''.join(epgrefresh.buildConfiguration(webif=True))
+
 
 class EPGRefreshPreviewServicesResource(resource.Resource):
 	def render(self, req):
@@ -189,6 +193,7 @@ class EPGRefreshPreviewServicesResource(resource.Resource):
 			))
 		returnlist.append('\n</e2servicelist>')
 		return ''.join(returnlist)
+
 
 class EPGRefreshChangeSettingsResource(resource.Resource):
 	def render(self, req):
@@ -255,6 +260,7 @@ class EPGRefreshChangeSettingsResource(resource.Resource):
  <e2state>true</e2state>
  <e2statetext>%s</e2statetext>
 </e2simplexmlresult>""" % (statetext,)
+
 
 class EPGRefreshSettingsResource(resource.Resource):
 	def render(self, req):

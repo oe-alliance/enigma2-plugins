@@ -43,12 +43,14 @@ from Screens.InfoBarGenerics import InfoBarPlugins
 baseInfoBarPlugins__init__ = None
 ENABLE_RED_BUTTON = False
 
+
 def getHBBTVInstalled():
 	try:
 		from Plugins.Extensions.HbbTV.HbbTV import HbbTV
 		return config.plugins.hbbtv.enabled.value
 	except ImportError:
 		return False
+
 
 def autostart(reason, **kwargs):
 	global baseInfoBarPlugins__init__, ENABLE_RED_BUTTON
@@ -65,14 +67,17 @@ def autostart(reason, **kwargs):
 			ENABLE_RED_BUTTON = True
 			InfoBarPlugins.red = red
 
+
 def setup(session, **kwargs):
 	session.open(QuickbuttonSetup)
+
 
 def Plugins(**kwargs):
 
 	list = [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart)]	
 	list.append(PluginDescriptor(name="Setup Quickbutton", description=_("setup for Quickbutton"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="setup_quickbutton.png", fnc=setup))
 	return list
+
 
 def InfoBarPlugins__init__(self):
 	from Screens.InfoBarGenerics import InfoBarEPG
@@ -88,7 +93,6 @@ def InfoBarPlugins__init__(self):
 				self["HbbtvActions"].setEnabled(False)
 		self["QuickbuttonActions"] = HelpableActionMap(self, "QuickbuttonActions", x)
 
-			
 	else:
 		InfoBarPlugins.__init__ = InfoBarPlugins.__init__
 		InfoBarPlugins.greenlong = None
@@ -99,20 +103,26 @@ def InfoBarPlugins__init__(self):
 			InfoBarPlugins.red = None
 	baseInfoBarPlugins__init__(self)
 
+
 def greenlong(self):
 	startPlugin(self, str(config.plugins.Quickbutton.green.value))
+
 
 def yellowlong(self):
 	startPlugin(self, str(config.plugins.Quickbutton.yellow.value))
 
+
 def redlong(self):
 	startPlugin(self, str(config.plugins.Quickbutton.red.value))
+
 
 def bluelong(self):
 	startPlugin(self, str(config.plugins.Quickbutton.blue.value))
 
+
 def red(self):
 	startPlugin(self, str(config.plugins.Quickbutton.red_b.value))
+
 
 def startPlugin(self, pname):
 	msgText = _("Unknown Error")

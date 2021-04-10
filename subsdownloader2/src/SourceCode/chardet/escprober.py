@@ -31,6 +31,7 @@ from escsm import HZSMModel, ISO2022CNSMModel, ISO2022JPSMModel, ISO2022KRSMMode
 from charsetprober import CharSetProber
 from codingstatemachine import CodingStateMachine
 
+
 class EscCharSetProber(CharSetProber):
     def __init__(self):
         CharSetProber.__init__(self)

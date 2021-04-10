@@ -16,8 +16,6 @@ from Widget import Widget
 from widgets import importWidgets, importSingleWidget
 		
 
-
-
 SIBbase__init__ = None
 SIB_StartOnlyOneTime = False
 SIB_TOGGLE_SHOW = InfoBar.toggleShow
@@ -36,15 +34,14 @@ def Plugins(**kwargs):
 	return [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=SIBautostart)]
 
 
-
 class ReplaceInfoBar():
 	def __init__(self):
 		pass
+
 	@cached
 	def Replace(self):
 		return True
 	boolean = property(Replace)
-
 
 
 def SIBautostart(reason, **kwargs):
@@ -55,7 +52,6 @@ def SIBautostart(reason, **kwargs):
 		InfoBarPlugins.__init__ = InfoBarPlugins__init__
 		InfoBarPlugins.switch = switch
 		InfoBarPlugins.swOff = swOff
-
 
 
 def InfoBarPlugins__init__(self):
@@ -71,7 +67,6 @@ def InfoBarPlugins__init__(self):
 		InfoBarPlugins.switch = None
 		InfoBarPlugins.swOff = None
 	SIBbase__init__(self)
-
 
 
 def switch(self):
@@ -94,7 +89,6 @@ def switch(self):
 			SIB_SWOFF(InfoBar.instance)
 
 
-
 def swOff(self):
 	if InfoBar and InfoBar.instance and ReplaceInfoBar.Replace:
 		global SIB_STATE
@@ -102,6 +96,8 @@ def swOff(self):
 		self.SIBtimer.stop()
 		SIB_SWOFF(InfoBar.instance)
 ####
+
+
 def lookupScreenSkin(screenname):
 	for skin in dom_skins:
 		for scr in skin[1].findall("screen"):
@@ -109,6 +105,8 @@ def lookupScreenSkin(screenname):
 				return scr
 	return False
 ####
+
+
 def lookupWidgetConfig():
 	for skin in dom_skins:
 		for scr in skin[1].findall("widgetconfig"):
@@ -116,6 +114,7 @@ def lookupWidgetConfig():
 				return scr
 	return False
 	
+
 def getWidgetForPosition(session, positionname):
 	#print "positionname value",config.plugins.Widgets.active_widgets[positionname].value
 	wpath = config.plugins.Widgets.active_widgets[positionname].value
@@ -124,6 +123,7 @@ def getWidgetForPosition(session, positionname):
 	else:
 		return importSingleWidget(session, wpath)
 	
+
 class WidgetDesktop(Screen):
 	
 	selection_x = 0
@@ -139,7 +139,6 @@ class WidgetDesktop(Screen):
 		
 		loadSkinReal(eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/Widgets/skin.xml"))
 		
-
 		cfg = lookupWidgetConfig()
 		if cfg is not False:
 			for config in cfg.getchildren():
@@ -154,8 +153,6 @@ class WidgetDesktop(Screen):
 			for y in range(1, self.num_widgets_y + 1):
 				self.positions.append("w%i_%i" % (x, y))
 				
-
-		
 		scr = lookupScreenSkin("WidgetDesktop")
 		if scr is not False:
 			self.original_screen = scr
@@ -208,7 +205,6 @@ class WidgetDesktop(Screen):
 		for old in self.original_screen_newchilds:
 			self.original_screen.remove(old)
 		
-					
 	def initBackgrounds(self):
 		for x in range(1, self.num_widgets_x + 1):
 			for y in range(1, self.num_widgets_y + 1):
@@ -310,6 +306,8 @@ class WidgetDesktop(Screen):
 			return False
 
 ###########
+
+
 class WidgetPositionConfigScreen(Screen):
 	def __init__(self, session, x, y, widget=False):
 		self.session = session
@@ -333,7 +331,6 @@ class WidgetPositionConfigScreen(Screen):
 		self["homepage"] = Label("")
 		self["key_green"] = Label(_("ok"))
 		self["key_red"] = Label(_("cancel"))
-		
 		
 		self["actions"] = ActionMap(["WidgetPositionConfigScreenActions"], {
 															  "ok": self.ok,
@@ -379,13 +376,12 @@ class WidgetPositionConfigScreen(Screen):
 				self["author"].setText(value[1].author)
 				self["homepage"].setText(value[1].homepage)
 		
-		
-	
 	def setValue(self, value):
 		config.plugins.Widgets.active_widgets["w%i_%i" % (self.position_x, self.position_y)].value = value
 		config.plugins.Widgets.active_widgets["w%i_%i" % (self.position_x, self.position_y)].save()
 		self.close()
         
+
 ############################################################################
 #    Copyright (C) 2008 by Volker Christian                                #
 #    Volker.Christian@fh-hagenberg.at                                      #

@@ -17,6 +17,7 @@ from AutoTimerList import AutoTimerList
 from Components.ActionMap import HelpableActionMap
 from Components.Sources.StaticText import StaticText
 
+
 class AutoTimerOverviewSummary(Screen):
 	skin = """
 	<screen position="0,0" size="132,64">
@@ -42,6 +43,7 @@ class AutoTimerOverviewSummary(Screen):
 
 	def selectionChanged(self, text):
 		self["entry"].text = text
+
 
 class AutoTimerOverview(Screen, HelpableScreen):
 	"""Overview of AutoTimers"""

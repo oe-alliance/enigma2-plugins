@@ -38,8 +38,10 @@ XML_CONFIG = "/etc/enigma2/menusort.xml"
 DEBUG = False
 HIDDENWEIGHT = -195948557
 
+
 class baseMethods:
 	pass
+
 
 class MenuWeights:
 	def __init__(self):
@@ -106,7 +108,10 @@ class MenuWeights:
 
 	def set(self, tuple):
 		self.weights[tuple[0]] = (tuple[3], tuple[4])
+
+
 menuWeights = MenuWeights()
+
 
 def Menu__init__(self, session, parent, *args, **kwargs):
 	baseMethods.Menu__init__(self, session, parent, *args, **kwargs)
@@ -124,6 +129,7 @@ def Menu__init__(self, session, parent, *args, **kwargs):
 		del list[:i]
 
 	self["menu"].list = list
+
 
 class SortableMenuList(MenuList):
 	def __init__(self, list):
@@ -170,12 +176,14 @@ class SortableMenuList(MenuList):
 			l.insert(1, (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, height, 0, RT_HALIGN_LEFT | RT_WRAP, '', None, None, None, self.selectedColor, None, None))
 		return l
 
+
 class SortableMenu(Menu, HelpableScreen):
 	skin = """<screen name="SortableMenu" position="center,center" size="210,280">
 		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 		<widget source="key_blue" render="Label" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="menu" position="5,45" size="200,225" scrollbarMode="showOnDemand" font="Regular;23" />
 		</screen>"""
+
 	def __init__(self, *args, **kwargs):
 		baseMethods.Menu__init__(self, *args, **kwargs) # using the base initializer saves us a few cycles
 		HelpableScreen.__init__(self)
@@ -307,6 +315,7 @@ class SortableMenu(Menu, HelpableScreen):
 	def keyNumberGlobal(self, number):
 		pass
 
+
 def autostart(reason, *args, **kwargs):
 	if reason == 0:
 		try:
@@ -322,8 +331,10 @@ def autostart(reason, *args, **kwargs):
 	else:
 		Menu.__init__ = baseMethods.Menu__init__
 
+
 def main(session, *args, **kwargs):
 	session.open(SortableMenu, mdom.getroot())
+
 
 def Plugins(**kwargs):
 	return [

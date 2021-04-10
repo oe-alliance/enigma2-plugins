@@ -106,6 +106,7 @@ class LastFMScrobbler(object):
 
 ############
 
+
 class Track(object):
     def __init__(self, artist, name, album, length=-1, mbid=None, tracktime=None):
         self.params = {}
@@ -136,6 +137,8 @@ class Track(object):
         encodedict["t[" + str(num) + "]"] = self.name
         encodedict["b[" + str(num) + "]"] = self.album
 ##########
+
+
 class EventListener:
     time2wait4submit = 30
     
@@ -195,7 +198,6 @@ class EventListener:
                                   length=tracklength,
                                  )
              
-             
     def getTrack(self, artist=None, title=None, album=None, length=-1):
         if artist == "" or artist is None:
             print "[LastFMScrobbler] CurrentlyPlayingServiceReference has no Artist, not submitting to LastFM"
@@ -206,7 +208,6 @@ class EventListener:
         else:
             return Track(artist, title, album, length=length)
             
-    
     def checkTrack(self, track):
         trackcurrent = self.getCurrentServiceType()
         if str(track) == str(trackcurrent):

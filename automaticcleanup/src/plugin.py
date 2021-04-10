@@ -483,8 +483,10 @@ class AutomaticCleanup:
 def autostart(session, **kwargs):
 	AutomaticCleanup(session) # start plugin at sessionstart
 
+
 def setup(session, **kwargs):
 	session.open(AutomaticCleanupSetup) # start setup
+
 
 def startSetup(menuid):
 	if getImageDistro() in ('teamblue'):
@@ -495,5 +497,6 @@ def startSetup(menuid):
 			return []
 	return [(_("System cleanup"), setup, "AutomaticCleanup", 50)]
 	
+
 def Plugins(**kwargs):
 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart), PluginDescriptor(name="System cleanup", description=_("Automatic System Cleanup Setup"), where=PluginDescriptor.WHERE_MENU, fnc=startSetup)]

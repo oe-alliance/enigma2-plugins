@@ -15,6 +15,7 @@ from enigma import ePoint
 from AutoMount import iAutoMount, AutoMount
 from re import sub as re_sub
 
+
 class AutoMountEdit(Screen, ConfigListScreen):
 	skin = """
 		<screen name="AutoMountEdit" position="center,center" size="560,450" title="MountEdit">
@@ -66,7 +67,6 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		self["HelpWindow"] = Pixmap()
 		self["introduction"] = StaticText(_("Press OK to activate the settings."))
 		self["key_red"] = StaticText(_("Cancel"))
-
 
 	def layoutFinished(self):
 		self.setTitle(_("Mounts editor"))

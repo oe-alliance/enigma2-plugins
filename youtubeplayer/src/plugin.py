@@ -47,10 +47,8 @@ class YouTubeManager():
 		self.session = session
 		interface.open()
 
-
 	def openSearchDialog(self):
 		self.session.openWithCallback(self.searchDialogClosed, YouTubeSearchDialog)
-
 
 	def searchDialogClosed(self, what, searchContext=None):
 		print "[YTB] searchDialogClosed: ", what
@@ -71,10 +69,8 @@ class YouTubeManager():
 			else:
 				callback(YouTubeUserListScreen.LOGIN_SUCCESS)
 
-
 	def openStandardFeeds(self):
 		self.session.openWithCallback(self.standardFeedSelected, YouTubeStdFeedSelectionScreen)
-
 
 	def standardFeedSelected(self, stdFeedUrl):
 		if stdFeedUrl is not None:
@@ -82,7 +78,6 @@ class YouTubeManager():
 			dlg.loadStandardFeed(stdFeedUrl)
 		else:
 			self.openSearchDialog()
-
 
 	def openPlaylists(self, loginState):
 		if loginState == YouTubeUserListScreen.LOGIN_SUCCESS:
@@ -95,14 +90,12 @@ class YouTubeManager():
 		else:
 			self.backToSearchDialog()
 
-
 	def playlistChoosen(self, playlist):
 		if playlist is not None:
 			dlg = self.session.openWithCallback(self.youTubeListScreenClosed, YouTubeListScreen)
 			dlg.loadPlaylistFeed(playlist)
 		else:
 			self.openSearchDialog()
-
 
 	def openFavorites(self, loginState):
 		if loginState == YouTubeUserListScreen.LOGIN_SUCCESS:
@@ -115,10 +108,8 @@ class YouTubeManager():
 		else:
 			self.backToSearchDialog()
 
-
 	def backToSearchDialog(self, dummy=True):
 		self.openSearchDialog()
-
 
 	def youTubeListScreenClosed(self, proceed):
 		if proceed:

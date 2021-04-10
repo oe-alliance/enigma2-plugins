@@ -38,6 +38,7 @@ from langthaimodel import TIS620ThaiModel
 from langhebrewmodel import Win1255HebrewModel
 from hebrewprober import HebrewProber
 
+
 class SBCSGroupProber(CharSetGroupProber):
     def __init__(self):
         CharSetGroupProber.__init__(self)

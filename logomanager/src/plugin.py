@@ -23,6 +23,7 @@ def filescan_open(list, session, **kwargs):
     print "filescan_open", list, kwargs
     session.open(LogoManagerScreen, file=list[0].path)
 
+
 def start_from_filescan(**kwargs):
     from Components.Scanner import Scanner, ScanPath
     print "start_from_filescan", kwargs
@@ -43,6 +44,7 @@ def main(session, **kwargs):
     else:
         session.open(LogoManagerScreen)
 
+
 def Plugins(path, **kwargs):
     global plugin_path
     plugin_path = path
@@ -57,6 +59,8 @@ def Plugins(path, **kwargs):
              PluginDescriptor(name="Logo Manager", where=PluginDescriptor.WHERE_FILESCAN, fnc=start_from_filescan)
             ]
 ###############################################################################
+
+
 class LogoManagerScreen(Screen):
     skin = """
         <screen flags="wfNoBorder" position="60,450" size="600,29" title="Logo Manager" >
@@ -153,7 +157,6 @@ class LogoManagerScreen(Screen):
             filelist.append(i[1])
         self.reloadPictures(filelist)
 
-
     def setlist_to_avaiable(self):
         """ fills the list with all found new MVIs"""
         filelist = []
@@ -162,7 +165,6 @@ class LogoManagerScreen(Screen):
                 filelist.append(config.plugins.logomanager.path.value + i)
         filelist.sort()
         self.reloadPictures(filelist)
-
 
     def action_install(self):
         """ choicebox, to select target to install an mvi to"""
@@ -178,7 +180,6 @@ class LogoManagerScreen(Screen):
         for i in filelist:
                 list.append((i.split("/")[-1], i))
         self["filelist"].l.setList(list)
-
 
     def showMVI(self, mvifile):
         """ shows a mvi """
@@ -200,6 +201,7 @@ class LogoManagerScreen(Screen):
         """ make /boot writeprotected back again """
         os_system("mount -o r,remount /boot")
 
+
 class LogoManagerConfigScreen(ConfigListScreen, Screen):
     skin = """
         <screen position="100,100" size="550,400" title="LogoManager Setup" >
@@ -207,6 +209,7 @@ class LogoManagerConfigScreen(ConfigListScreen, Screen):
         <widget name="buttonred" position="10,360" size="100,40" backgroundColor="red" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/>
         <widget name="buttongreen" position="120,360" size="100,40" backgroundColor="green" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/>
         </screen>"""
+
     def __init__(self, session, args=0):
         self.session = session
         Screen.__init__(self, session)

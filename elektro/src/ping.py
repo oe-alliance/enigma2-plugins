@@ -46,6 +46,8 @@ ICMP_ECHO_REQUEST = 8 # Seems to be the same on Solaris.
 
 # I'm not too confident that this is right but testing seems
 # to suggest that it gives the same answers as in_cksum in ping.c
+
+
 def checksum(str):
   sum = 0
   countTo = (len(str) / 2) * 2
@@ -70,6 +72,7 @@ def checksum(str):
   
   return answer
 
+
 def receiveOnePing(mySocket, ID, timeout):
   timeLeft = timeout
   while 1:
@@ -91,6 +94,7 @@ def receiveOnePing(mySocket, ID, timeout):
     if timeLeft <= 0:
       return None
 
+
 def sendOnePing(mySocket, destAddr, ID):
   # Header is type (8), code (8), checksum (16), id (16), sequence (16)
   myChecksum = 0
@@ -108,6 +112,7 @@ def sendOnePing(mySocket, destAddr, ID):
   mySocket.sendto(packet, (destAddr, 1)) # Don't know about the 1 
   return None
   
+
 def doOne(destAddr, timeout=10):
   # Returns either the delay (in seconds) or none on timeout.
   icmp = getprotobyname("icmp")
@@ -118,6 +123,7 @@ def doOne(destAddr, timeout=10):
   mySocket.close()
   return delay
 
+
 def main():
   if len(sys.argv) < 2:
     print "Usage: %s hostname" % os.path.basename(sys.argv[0])
@@ -127,6 +133,7 @@ def main():
   delay = doOne(dest)
   print delay
   return None
+
 
 if __name__ == '__main__':
   main()

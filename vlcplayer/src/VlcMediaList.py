@@ -22,6 +22,7 @@ from VlcFileList import VlcFileList
 from VlcPlayList import VlcPlayList
 from . import _
 
+
 class VlcMediaListScreen(Screen):
 	skin = """
 		<screen size="560,400" position="80,100" name="VLC Media List" >

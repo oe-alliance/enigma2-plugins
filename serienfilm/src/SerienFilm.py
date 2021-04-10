@@ -16,7 +16,6 @@ from Screens.MessageBox import MessageBox
 SerienFilmVersion = "v1.1"
 
 
-
 class SerienFilmCfg(Screen):
 	skin = """
 		<screen position="130,150" size="500,200" title="SerienFilm setup" >
@@ -143,7 +142,6 @@ class EpiSepCfg(Screen):
 				text=str(len(self.newsep)),
 				type=Input.NUMBER)
 
-
 	def setSeparatorSize(self, length):
 		len = int(length)
 		self.setSeparator(self.newsep[:len].ljust(len))
@@ -155,7 +153,6 @@ class EpiSepCfg(Screen):
 		self.newsep = sep
 		self.secondlevel[0] = self.secondformat % (sep, len(sep))
 		self.sfsetLabel()
-
 
 	def sfsetLabel(self):
 		if self.level == 1:

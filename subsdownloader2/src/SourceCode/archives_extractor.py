@@ -16,6 +16,7 @@ import zipfile
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 class zip_extractor():
      def __init__(self, zip__path, destination_dir=None, extracted_extension_filter=None):
           self.__zip__path = zip__path
@@ -63,6 +64,8 @@ class zip_extractor():
           else:
                print "%s is not a zip file." % zip__path
                return False
+
+
 """ 
 class rar_extractor():
      def __init__(self, rar__path, destination_dir = None, extracted_extension_filter = None):

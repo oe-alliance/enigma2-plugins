@@ -5,6 +5,7 @@
 
 from Components.config import config, ConfigYesNo, ConfigSelection, ConfigNumber, ConfigText, ConfigSubsection, ConfigSubList, ConfigInteger
 
+
 def createPage():
     """ Create and return a configuration page object """
     s = ConfigSubsection()
@@ -16,6 +17,7 @@ def createPage():
     s.fontSize = ConfigInteger(20, (1, 100))
     return s
 
+
 def loadDefaultPageOptions():
     defaults = []
     for i in range(0, len(config.plugins.CurlyTx.pages)):
@@ -24,6 +26,7 @@ def loadDefaultPageOptions():
         config.plugins.CurlyTx.defaultPage.setChoices(defaults, "0")
     else:
         config.plugins.CurlyTx.defaultPage = ConfigSelection(defaults, "0")
+
 
 #configuration setup
 config.plugins.CurlyTx = ConfigSubsection()

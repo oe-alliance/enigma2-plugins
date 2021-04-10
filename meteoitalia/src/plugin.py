@@ -24,6 +24,7 @@ from enigma import loadPic, eTimer
 
 METEOITALIA_ABOUT_TXT = "Meteo Italia Info Plugin v 0.1\n\nAuthor(s): Bacicciosat - Lupomeo\nGraphics: Army\nPackage Maintainer: Spaeleus\nRss Meteo: www.google.it\n"
 
+
 class meteoitMain(Screen):
 	skin = """
 	<screen position="center,center" size="720,576" flags="wfNoBorder">
@@ -44,7 +45,6 @@ class meteoitMain(Screen):
 		<widget name="lab14" position="480,450" halign="center" size="240,80" zPosition="1" font="Regular;20" valign="top" transparent="1" />
 	</screen>"""
 
-
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
@@ -63,7 +63,6 @@ class meteoitMain(Screen):
 		self["lab13"] = Pixmap()
 		self["lab14"] = Label("")
 		
-		
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
 		{
 			"red": self.key_red,
@@ -79,6 +78,7 @@ class meteoitMain(Screen):
 
 
 #We use a timer to show the Window in the meanwhile we are connecting to google Server
+
 	def startShow(self):
 		self["lab1"].setText("Attendere prego, connessione al server in corso...")
 		self.activityTimer.start(10)
@@ -183,13 +183,11 @@ class meteoitMain(Screen):
 			else:
 				maintext = "Error getting XML document!"
 		
-		
 		self["lab1"].setText(maintext)
 			
 
-
-
 # Download icon from Google if we have not yet.
+
 	def checkIcon(self, filename):
 		parts = filename.split("/")
 		totsp = (len(parts) - 1)
@@ -265,6 +263,7 @@ class meteoitMain(Screen):
 	def key_red(self):
 		self.session.openWithCallback(self.updateInfo, MeteoitSelectCity)
 
+
 class MeteoitSelectCity(Screen):
 	skin = """
 	<screen position="center,center" size="720,576" flags="wfNoBorder">
@@ -274,7 +273,6 @@ class MeteoitSelectCity(Screen):
 		</widget>
 		<widget name="lab1" position="10,520" halign="center" size="700,30" zPosition="1" font="Regular;24" valign="top" foregroundColor="#639ACB" transparent="1" />
 	</screen>"""
-
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -313,7 +311,6 @@ class MeteoitSelectCity(Screen):
 			out = open(cfgfile, "w")
 			out.write(city)
 		self.close()
-
 
 
 def main(session, **kwargs):

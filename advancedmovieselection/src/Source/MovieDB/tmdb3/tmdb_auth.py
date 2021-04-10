@@ -11,6 +11,8 @@
 from datetime import datetime as _pydatetime, \
                      tzinfo as _pytzinfo
 import re
+
+
 class datetime(_pydatetime):
     """Customized datetime class with ISO format parsing."""
     _reiso = re.compile('(?P<year>[0-9]{4})'
@@ -32,6 +34,7 @@ class datetime(_pydatetime):
             if direc == '-':
                 hr = -1 * int(hr)
             self._offset = timedelta(hours=int(hr), minutes=int(min))
+
         def utcoffset(self, dt): return self._offset
         def tzname(self, dt): return ''
         def dst(self, dt): return timedelta(0)
@@ -59,14 +62,17 @@ class datetime(_pydatetime):
             dt.append(tz)
         return cls(*dt)
 
+
 from request import Request
 from tmdb_exceptions import *
 
 syssession = None
 
+
 def set_session(sessionid):
     global syssession
     syssession = Session(sessionid)
+
 
 def get_session(sessionid=None):
     global syssession
@@ -76,6 +82,7 @@ def get_session(sessionid=None):
         return syssession
     else:
         return Session.new()
+
 
 class Session(object):
 

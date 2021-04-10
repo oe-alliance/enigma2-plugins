@@ -18,6 +18,7 @@ import struct
 
 ###-------------------------  Log  ------------------###############
    
+
 def log(module, msg):
 #---
 #-  xbmc.output("### [%s-%s] - %s" % (__scriptname__,module,msg,),level=xbmc.LOGDEBUG )
@@ -26,6 +27,8 @@ def log(module, msg):
 #+++ 
 
 ###-------------------------  Hash  -----------------###############
+
+
 def hashFile(filename): 
     try: 
       longlongformat = '<LL'  # signed long, unsigned long 
@@ -110,7 +113,6 @@ def regex_tvshow(compare, file, sub=""):
         return True
     else:
         return "", "", ""    
-
 
 
 """
@@ -572,6 +574,7 @@ LANGUAGES = (
     ("Spanish (Spain)", "28", "es", "spa", "100", 30240),
     ("Chinese (Traditional)", "17", "zh", "chi", "100", 30207),
     ("Chinese (Simplified)", "17", "zh", "chi", "100", 30207))
+
 
 def languageTranslate(lang, lang_from, lang_to):
   for x in LANGUAGES:

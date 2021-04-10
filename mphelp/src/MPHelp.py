@@ -6,6 +6,7 @@ from Components.ActionMap import ActionMap
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
 
+
 class HelpPage:
 	def __init__(self, title, text):
 		self.__title = title
@@ -13,6 +14,7 @@ class HelpPage:
 
 	def getTitle(self):
 		return self.__title
+
 	def getText(self):
 		return self.__text
 
@@ -22,6 +24,7 @@ class HelpPage:
 		elif item == 1:
 			return self.getText()
 		raise IndexError("no more items")
+
 
 class MPHelp(Screen):
 	skin = """
@@ -114,5 +117,6 @@ class MPHelp(Screen):
 			self["key_blue"].setText(">>")
 		else:
 			self["key_blue"].setText("")
+
 
 __all__ = ['HelpPage', 'MPHelp']

@@ -5,6 +5,7 @@ from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, \
 
 from skin import parseFont
 
+
 class RSSFeedList(MenuList):
 	def __init__(self, entries):
 		MenuList.__init__(self, entries, False, content=eListboxPythonMultiContent)

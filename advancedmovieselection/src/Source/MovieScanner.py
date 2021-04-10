@@ -40,6 +40,7 @@ from Hotplug import hotplug
 SCAN_EXCLUDE = (ISOInfo.MOUNT_PATH, "DUMBO", "TIMOTHY", "/media/swap", "/media/ram", "/media/ba")
 AUDIO_EXCLUDE = ("mp3", "ogg", "wav", "m4a")
 
+
 def getDirectories(l, root, hidden=False):
     root = os.path.realpath(root) + os.sep
     if not autoNetwork.isMountOnline(root):

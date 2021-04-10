@@ -108,6 +108,7 @@ config.plugins.subsdownloader.SubsDownloader3rdLang = ConfigSelection(default="G
 config.plugins.subsdownloader.Napisy24SearchMethod = ConfigSelection(default="IMDB", choices=[(_("IMDB"), "IMDB"), (_("IMDB then movie filname"), "IMDB then movie filname"), (_("movie filname"), "movie filname")])
 config.plugins.subsdownloader.Napisy24MovieNameMethod = ConfigYesNo(default=True)
 
+
 class SubsDownloaderApplication(Screen):
 	def __init__(self, session, args=0):
 		
@@ -279,7 +280,6 @@ class SubsDownloaderApplication(Screen):
 			else:
 				self.CommertialBannerTimer.start(7500, False)
 		
-
 	def skinVisibility(self):
 		if self.isVisible == True:
 			self.isVisible = False
@@ -292,7 +292,6 @@ class SubsDownloaderApplication(Screen):
 			self["myActionMap_hidded"].setEnabled(False)
 			self.show()
 		             
-	
 	def set_title(self):
 		if is_libmediainfo == False:
 			self.setTitle("Subtitle downloader (without libmediainfo)")
@@ -426,8 +425,9 @@ class SubsDownloaderApplication(Screen):
 			self.set_listFile_enabled()
 			
 
-
 # !!!!!!!!!!!! PICTURE FUNCTIONS !!!!!!!!!!!!!!	
+
+
 	def display_Server_Picture(self):
 		"""Function display suittalbe picture in ["serverPicture"] (based on subtitle server)""" 
 		self.serverPicturePath = "/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/%s.jpg" % config.plugins.subsdownloader.subtitleserver.value
@@ -455,8 +455,6 @@ class SubsDownloaderApplication(Screen):
 		else:
 			return commertial_pictures
 				
-		
-		
 	def Show_Commertial_Picture(self):
 		"""This function is required to init witget ["commertialPicture"] and picture class self.CommertialPicture"""
 		self.CommertialPicture.setPara([self["commertialPicture"].instance.size().width(), self["commertialPicture"].instance.size().height(), self.EXscale[0], self.EXscale[1], 0, 1, "#002C2C39"])
@@ -485,7 +483,6 @@ class SubsDownloaderApplication(Screen):
 		self["fileList"].refresh()
 
 # !!!!!!!!!!!! PICTURE FUNCTIONS !!!!!!!!!!!!!!	
-		
 		
 	def clearSubList(self):
 		"""Clear subList and prevent to download unwanted subtitle"""
@@ -697,7 +694,6 @@ class SubsDownloaderApplication(Screen):
 					lang3 = config.plugins.subsdownloader.SubsDownloader3rdLang.value
 					self.subtitle_database, self.__session_id, self.__msg = SERVICE.search_subtitles(self.movie_filename, show_name, show_type, "year", show_season, show_episode, Subtitle_Downloader_temp_dir, False, lang1, lang2, lang3, True, self.session)
 
-					
 					#self.subtitle_database= self.subtitles.XBMC_search_subtitles(self.movie_filename,config.plugins.subsdownloader.SubsDownloader1stLang.value,config.plugins.subsdownloader.SubsDownloader2ndLang.value,config.plugins.subsdownloader.SubsDownloader3rdLang.value)
 					if self.subtitle_database == []:
 						self.clearSubList()
@@ -874,7 +870,6 @@ class SubsDownloaderApplication(Screen):
 		self.set_listFile_enabled()
 		self.showFilemanagerScreen_command = None		
 		self.clearSubList()
-		
 		
 	def set_listSubs_enabled(self):
 		"""If subtitle was found and list was generated function makes self["subsList"] as active.
@@ -1054,6 +1049,7 @@ class SubsDownloaderApplication(Screen):
 				index = index + 1
 		return slist, foundIndex		
 
+
 class FileManagerCommands(Screen):	
 	def __init__(self, session, file_to_manage):
 		self.file_to_manage = file_to_manage
@@ -1083,7 +1079,6 @@ class FileManagerCommands(Screen):
 	def ExitWithoutDoingNothing(self):
 		self.close(["Do_nothing", self.file_to_manage])
 	
-		
 	def ExitWithDoingSomething(self):
 		def delete_command_notification(callback):
 			if callback == True:
@@ -1092,7 +1087,6 @@ class FileManagerCommands(Screen):
 			else:
 				self.ExitWithoutDoingNothing()
 			
-		
 		returnValue = self["myCommands"].l.getCurrentSelection()[1]
 		if returnValue == "exit":
 			self.ExitWithoutDoingNothing()
@@ -1104,7 +1098,6 @@ class FileManagerCommands(Screen):
 			self.close(("move", self.file_to_manage))
 		elif returnValue == "rename":
 			self.close(("rename", self.file_to_manage))
-	
 	
 	
 class SubsDownloaderConfig(ConfigListScreen, Screen):	
@@ -1290,10 +1283,12 @@ class vEditor(Screen):
 		else:
 			self.close()
 
+
 class MviExplorer(Screen):
 	skin = """
 		<screen position="-300,-300" size="10,10" title="mvi-Explorer">
 		</screen>"""
+
 	def __init__(self, session, file):
 		self.skin = MviExplorer.skin
 		Screen.__init__(self, session)
@@ -1304,9 +1299,9 @@ class MviExplorer(Screen):
 			"back": self.close
 		}, -1)
 		self.onLayoutFinish.append(self.showMvi)
+
 	def showMvi(self):
 		os.system("/usr/bin/showiframe " + self.file_name)
-
 
 
 class PictureExplorerII(Screen):
@@ -1392,6 +1387,7 @@ class PictureExplorerII(Screen):
 		else:
 			self["State"].visible = True
 			self["State"].setText(_(self.whatPic))
+
 
 class MoviePlayer(MP_parent):
 	def __init__(self, session, filename):
@@ -1488,6 +1484,7 @@ class MoviePlayer(MP_parent):
 		if not(self.WithoutStopClose):
 			self.session.nav.playService(self.lastservice)
 
+
 class MoviePlayer_4_MusicExploret(MP_parent):
 	def __init__(self, session, service):
 		self.session = session
@@ -1501,6 +1498,7 @@ class MoviePlayer_4_MusicExploret(MP_parent):
 	def leavePlayerConfirmed(self, answer):
 		pass
 	
+
 class MusicExplorer(MoviePlayer_4_MusicExploret):
 	skin = """
 	<screen backgroundColor="#50070810" flags="wfNoBorder" name="MusicExplorer" position="center,center" size="720,30">
@@ -1511,6 +1509,7 @@ class MusicExplorer(MoviePlayer_4_MusicExploret):
 			<convert type="ServiceName">Name</convert>
 		</widget>
 	</screen>"""
+
 	def __init__(self, session, service, MusicDir, theFile):
 		self.session = session
 		MoviePlayer_4_MusicExploret.__init__(self, session, service)
@@ -1521,7 +1520,6 @@ class MusicExplorer(MoviePlayer_4_MusicExploret):
 		self.searchMusic()
 		self.onLayoutFinish.append(self.showMMI)
 		MoviePlayer_4_MusicExploret.WithoutStopClose = False
-
 
 	def showMMI(self):
 		try:
@@ -1569,6 +1567,7 @@ class MusicExplorer(MoviePlayer_4_MusicExploret):
 		self.seekFwd()
 
 ###########################################################################
+
 
 def main(session, **kwargs):
 	print "\n[SubsDownloaderApplication] start\n"	

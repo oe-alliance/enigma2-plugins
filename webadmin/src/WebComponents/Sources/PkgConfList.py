@@ -3,6 +3,7 @@ from Components.Sources.Source import Source
 from os import popen as os_popen, statvfs as os_statvfs, path as os_path
 from shutil import move as sh_move
 
+
 class PkgConfList(Source):
 	LIST = 0
 	SWITCH = 1

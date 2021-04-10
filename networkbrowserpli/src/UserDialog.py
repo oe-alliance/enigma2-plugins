@@ -17,6 +17,7 @@ from os import path as os_path, unlink, stat, mkdir
 from time import time
 from stat import ST_MTIME
 
+
 def write_cache(cache_file, cache_data):
 	#Does a cPickle dump
 	if not os_path.isdir(os_path.dirname(cache_file)):
@@ -27,6 +28,7 @@ def write_cache(cache_file, cache_data):
 	fd = open(cache_file, 'w')
 	dump(cache_data, fd, -1)
 	fd.close()
+
 
 def valid_cache(cache_file, cache_ttl):
 	#See if the cache file exists and is still living
@@ -40,12 +42,14 @@ def valid_cache(cache_file, cache_ttl):
 	else:
 		return 1
 
+
 def load_cache(cache_file):
 	#Does a cPickle load
 	fd = open(cache_file)
 	cache_data = load(fd)
 	fd.close()
 	return cache_data
+
 
 class UserDialog(Screen, ConfigListScreen):
 	skin = """

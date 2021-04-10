@@ -57,6 +57,7 @@ CompiledRegexpNonDecimal = re.compile(r'[^\d]')
 CompiledRegexpReplaceChars = None
 CompiledRegexpReplaceDirChars = re.compile('[^/\w\-_\. ]')
 
+
 def dump(obj):
 	for attr in dir(obj):
 		log.debug(" %s = %s" % (attr, getattr(obj, attr)))
@@ -141,11 +142,13 @@ def getInstance():
 		
 	return instance
 
+
 def stopWorker():
 	global instance
 	if instance is not None:
 		log.debug(" SERIESPLUGIN STOP WORKER")
 		instance.stop()
+
 
 def resetInstance():
 	if config.plugins.seriesplugin.lookup_counter.isChanged():
@@ -179,6 +182,7 @@ def refactorTitle(org_, data):
 	else:
 		return org
 
+
 def refactorDescription(org_, data):
 	if CompiledRegexpReplaceChars:
 		org = CompiledRegexpReplaceChars.sub('', org_)
@@ -197,6 +201,7 @@ def refactorDescription(org_, data):
 	else:
 		return org
 
+
 def refactorDirectory(org, data):
 	dir = org
 	if data:
@@ -212,6 +217,7 @@ def refactorDirectory(org, data):
 			except:
 				log.exception("makedirs exception", dir)
 	return dir
+
 
 def normalizeResult(result):
 	if result and isinstance(result, dict):

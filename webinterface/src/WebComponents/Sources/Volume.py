@@ -3,6 +3,7 @@ from Components.Sources.Source import Source
 from GlobalActions import globalActionMap
 from Components.VolumeControl import VolumeControl
 
+
 class Volume(Source):
 	def __init__(self, session):
 		Source.__init__(self)

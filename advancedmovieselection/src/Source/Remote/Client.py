@@ -26,6 +26,7 @@ that they, too, receive or can get the source code. And you must show them these
 from MessageServer import serverInstance
 import socket
 
+
 class MessageQueue:
     @staticmethod
     def getRequest(data):
@@ -63,8 +64,10 @@ class MessageQueue:
             request = str(config.AdvancedMovieSelection.last_auto_empty_wastebasket.value)
         return request
 
+
 def getClients():
     return serverInstance.active_clients
+
 
 def isAnyRecording():
     clients = getClients()
@@ -72,6 +75,7 @@ def isAnyRecording():
         if client.isRecording():
             return True
     return False
+
 
 class Client:
     def __init__(self, ip, port):
@@ -137,5 +141,6 @@ class Client:
             pass
         return ev
     
+
 if __name__ == "__main__":
     print Client("192.168.0.97", 20000).isRecording()

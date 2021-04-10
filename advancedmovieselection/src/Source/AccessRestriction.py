@@ -26,6 +26,7 @@ import os
 
 VSR = ["VSR-0", "VSR-6", "VSR-12", "VSR-16", "VSR-18"]
 
+
 class AccessRestriction:
     def __init__(self):
         self.access = 18
@@ -93,5 +94,6 @@ class AccessRestriction:
             metafile.close()
         except Exception, e:
             print e
+
 
 accessRestriction = AccessRestriction()

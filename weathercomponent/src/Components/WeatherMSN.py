@@ -23,8 +23,10 @@
 from enigma import eEnv, eTimer
 from Plugins.Extensions.WeatherPlugin.MSNWeather import MSNWeather
 
+
 class WeatherMSN:
 	TIMER_INTERVAL = 1800
+
 	def __init__(self):
 		self.weatherData = MSNWeather()
 		self.callbacks = []
@@ -56,4 +58,5 @@ class WeatherMSN:
 		for x in self.callbacks:
 			x(result, errortext)
 	
+
 weathermsn = WeatherMSN()

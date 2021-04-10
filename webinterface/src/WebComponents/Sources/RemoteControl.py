@@ -2,6 +2,8 @@ from enigma import eActionMap
 from Components.Sources.Source import Source
 from Tools.HardwareInfo import HardwareInfo
 from Components.config import config
+
+
 class RemoteControl(Source):
 	# Flags
 	FLAG_MAKE = 0

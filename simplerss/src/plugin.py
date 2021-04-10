@@ -42,6 +42,8 @@ del simpleRSS, i
 rssPoller = None
 
 # Main Function
+
+
 def main(session, **kwargs):
 	# Get Global rssPoller-Object
 	global rssPoller
@@ -61,6 +63,8 @@ def main(session, **kwargs):
 		session.openWithCallback(closed, RSSSetup, rssPoller)
 
 # Plugin window has been closed
+
+
 def closed():
 	# If SimpleRSS should not run in Background: shutdown
 	if not (config.plugins.simpleRSS.autostart.value or
@@ -73,6 +77,8 @@ def closed():
 		rssPoller = None
 
 # Autostart
+
+
 def autostart(reason, **kwargs):
 	global rssPoller
 
@@ -93,6 +99,8 @@ def autostart(reason, **kwargs):
 			rssPoller = None
 
 # Filescan
+
+
 def filescan_open(item, session, **kwargs):
 	from RSSSetup import addFeed
 
@@ -111,6 +119,8 @@ def filescan_open(item, session, **kwargs):
 	)
 
 # Filescanner
+
+
 def filescan(**kwargs):
 	from Components.Scanner import Scanner, ScanPath
 
@@ -130,6 +140,7 @@ def filescan(**kwargs):
 			openfnc=filescan_open,
 		)
 	]
+
 
 def Plugins(**kwargs):
 	from Plugins.Plugin import PluginDescriptor

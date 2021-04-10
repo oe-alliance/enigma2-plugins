@@ -62,6 +62,7 @@ def startPictureviewer(session, **kwargs):
 		session.nav.stopService()
 	session.openWithCallback(mainCB, PictureViewer)
 
+
 def startWebcamviewer(session, **kwargs):
 	global originalservice, mysession
 	mysession = session
@@ -104,12 +105,11 @@ def startWebcamviewer(session, **kwargs):
 		)
 
 
-
-
 def mainCB():
 	global originalservice, mysession
 	if config.plugins.pictureviewer.stopserviceonstart.value:
 		mysession.nav.playService(originalservice)
+
 
 def Plugins(path, **kwargs):
 	p = [
@@ -131,8 +131,11 @@ def Plugins(path, **kwargs):
 	return p
 
 ###################
+
+
 class ViewerSelectScreen(Screen):
 	skin = ""
+
 	def __init__(self, session, args=0):
 		skin = """<screen position="93,70" size="550,450">
 		<widget name="list" position="0,0" size="550,450"  />
@@ -205,6 +208,8 @@ class Slideshow:
 	def cb(self):
 		self.callback()
 ###################
+
+
 class PictureViewer(Screen):
 	skin = ""
 	filelist = []
@@ -437,7 +442,6 @@ class PictureViewer(Screen):
 		self.picload.setPara((self["pixmap"].instance.size().width(), self["pixmap"].instance.size().height(), sc[0], sc[1], False, 1, "#FF000000"))
 		self.picload.startDecode(selectedfile)
 
-
 	def updateInfoPanelCB(self, picInfo=None):
 		ptr = self.picload.getData()
 		if ptr is not None:
@@ -451,9 +455,12 @@ class PictureViewer(Screen):
 	def openMenu(self):
 		self.session.open(WebcamViewerMenu)
 ###################
+
+
 class WebcamViewer(Screen, InfoBarNotifications):
 	skin = ""
 	filelist = []
+
 	def __init__(self, session, xmlnode, args=0):
 		self.xmlnode = xmlnode
 		screen_x = 736
@@ -522,6 +529,8 @@ class WebcamViewer(Screen, InfoBarNotifications):
 ###################
 
 ##################
+
+
 class PictureList(MenuList):
 	def __init__(self, directory, matchingPattern=None, enableWrapAround=False):
 		MenuList.__init__(self, None, enableWrapAround, eListboxPythonMultiContent)
@@ -619,6 +628,7 @@ class XMLloader:
 		  'http://my.netscape.com/rdf/simple/0.9/' # RSS 0.90
 		)
 	DUBLIN_CORE = ('http://purl.org/dc/elements/1.1/',)
+
 	def getElementsByTagName(self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES):
 		for namespace in possibleNamespaces:
 			children = node.getElementsByTagNameNS(namespace, tagName)

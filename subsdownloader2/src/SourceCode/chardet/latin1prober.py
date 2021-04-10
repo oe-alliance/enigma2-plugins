@@ -93,6 +93,7 @@ Latin1ClassModel = ( \
    0, 3, 1, 3, 1, 1, 3, 3,  # ASO
 )
 
+
 class Latin1Prober(CharSetProber):
     def __init__(self):
         CharSetProber.__init__(self)

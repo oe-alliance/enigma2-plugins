@@ -98,6 +98,7 @@ for x in LANGUAGES:
   #languageTranslate(x[0], 0, 3)
   OS_LANGS.update({languageTranslate(x[0], 0, 2): languageTranslate(x[0], 0, 3)})
 
+
 class OpenSubtitle(SubtitleDatabase.SubtitleDB):
     url = "http://www.opensubtitles.org/"
     site_name = "OpenSubtitles"
@@ -154,7 +155,6 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
 #        except:
 #            return "None"
         
-
     def hashFile(self, name):
         '''
         Calculates the Hash à-la Media Player Classic as it is the hash used by OpenSubtitles.
@@ -178,7 +178,6 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
             hash += l_value 
             hash = hash & 0xFFFFFFFFFFFFFFFF #to remain as 64bit number  
                  
-
         f.seek(max(0, filesize - 65536), 0) 
         for x in range(65536 / bytesize): 
             buffer = f.read(bytesize) 
@@ -240,7 +239,6 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
             logging.error("Open subtitles could not be contacted for logout")
         socket.setdefaulttimeout(None)
         return sublinks
-        
         
     def get_results(self, token, search):
         logging.debug("query: token='%s', search='%s'" % (token, search))

@@ -199,6 +199,7 @@ class AutomaticVolumeAdjustmentEntriesListConfigScreen(Screen):
 			self.automaticVolumeAdjustmentInstance.initializeConfigValues(self["entrylist"].configVA, True) # submit config values
 		self.updateList()
 
+
 class AutomaticVolumeAdjustmentEntryList(MenuList):
 	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
@@ -229,6 +230,7 @@ class AutomaticVolumeAdjustmentEntryList(MenuList):
 		self.list = list
 		self.l.setList(list)
 		self.moveToIndex(0)
+
 
 class AutomaticVolumeAdjustmentEntryConfigScreen(ConfigListScreen, Screen):
 	skin = """

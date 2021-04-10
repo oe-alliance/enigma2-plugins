@@ -94,6 +94,7 @@ def resolveNumber(number, default=None, phonebook=None, debug=logging.debug):
 	# if len(number) > 20: number = number[:20]
 	return number
 
+
 def cleanNumber(number):
 	# self.debug("[FritzCallFBF] " + number)
 	number = re.sub("<.*?>", "", number)
@@ -109,6 +110,7 @@ def cleanNumber(number):
 	if config.plugins.FritzCall.countrycode.value and number.startswith(config.plugins.FritzCall.countrycode.value):
 		number = '0' + number[len(config.plugins.FritzCall.countrycode.value):]
 	return number
+
 
 class FritzCallFBF(object):
 	logger = logging.getLogger("FritzCallFBF.old")
@@ -1118,6 +1120,7 @@ class FritzCallFBF(object):
 		text = _("FRITZ!Box - Error getting blacklist: %s") % error.getErrorMessage()
 		self._notify(text)
 
+
 class FritzCallFBF_05_27(object):
 	logger = logging.getLogger("FritzCall.FBF_05_27")
 	debug = logger.debug
@@ -1816,6 +1819,7 @@ class FritzCallFBF_05_27(object):
 		self.debug("[FritzCallFBF_05_27] _errorBlacklist: %s", error)
 		text = _("FRITZ!Box - Error getting blacklist: %s") % error.getErrorMessage()
 		self._notify(text)
+
 
 class FritzCallFBF_05_50(object):
 	logger = logging.getLogger("FritzCall.FBF_05_50")
@@ -2622,6 +2626,7 @@ class FritzCallFBF_05_50(object):
 		text = _("FRITZ!Box - Error getting blacklist: %s") % error.getErrorMessage()
 		self._notify(text)
 		self._logout(md5Sid, "_errorBlacklist")
+
 
 class FritzCallFBF_06_35(object):
 	logger = logging.getLogger("FritzCall.FBF_06_35")
@@ -3479,7 +3484,9 @@ class FritzCallFBF_06_35(object):
 		self._notify(text)
 		self._logout(md5Sid, "_errorBlacklist")
 
+
 TIMEOUT = 20
+
 
 class FritzCallFBF_upnp():
 	logger = logging.getLogger("FritzCall.FBF_upnp")
@@ -4299,7 +4306,6 @@ class FritzCallFBF_upnp():
 					else:
 						Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 
-
 		self.debug(repr(self.blacklist))
 
 	def dial(self, number):  # @UnusedVariable # pylint: disable=W0613
@@ -4324,6 +4330,7 @@ class FritzCallFBF_upnp():
 			self.fc.call_action(self._getInfo, "DeviceConfig", "Reboot")
 		else:
 			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
+
 
 class FritzCallFBF_dummy(object):
 	logger = logging.getLogger("FritzCall.FBF_dummy")

@@ -23,6 +23,7 @@ cache = Cache(filename='pytmdb3.cache')
 #DEBUG = True
 #cache = Cache(engine='null')
 
+
 def set_key(key):
     """
     Specify the API key to use retrieving data from themoviedb.org. This
@@ -36,9 +37,11 @@ def set_key(key):
         raise TMDBKeyInvalid("Specified API key must be 128-bit hex")
     Request._api_key = key
 
+
 def set_cache(engine=None, *args, **kwargs):
     """Specify caching engine and properties."""
     cache.configure(engine, *args, **kwargs)
+
 
 class Request(urllib2.Request):
     _api_key = None
@@ -125,6 +128,7 @@ class Request(urllib2.Request):
             pprint.PrettyPrinter().pprint(data)
         return data
 
+
 status_handlers = {
     1: None,
     2: TMDBRequestInvalid('Invalid service - This service does not exist.'),
@@ -149,6 +153,7 @@ status_handlers = {
    15: TMDBError('Failed'),
    16: TMDBError('Device Denied'),
    17: TMDBError('Session Denied')}
+
 
 def handle_status(data, query):
     status = status_handlers[data.get('status_code', 1)]

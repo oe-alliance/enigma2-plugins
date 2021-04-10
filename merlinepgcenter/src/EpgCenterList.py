@@ -862,6 +862,7 @@ class EpgCenterList(GUIComponent):
 							
 		return timerPixmaps, zapPixmaps, isRunning
 		
+
 class EpgCenterTimerlist(TimerList):
 	def __init__(self, list, videoMode, piconLoader, piconSize, listStyle):
 		self.videoMode = videoMode

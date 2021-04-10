@@ -25,6 +25,7 @@ SIOCGIFCONF = 0x8912
 BYTES = 4096
 testOK = False
 
+
 class __VlcManager():
 	def __init__(self, session):
 		print "[VLC] VlcManager"
@@ -99,8 +100,10 @@ class __VlcManager():
 		if proceed:
 			self.openServerlist()
 
+
 def main(session, **kwargs):
 	__VlcManager(session).startSession()
+
 
 def Plugins(**kwargs):
 	return PluginDescriptor(

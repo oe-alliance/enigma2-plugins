@@ -26,6 +26,7 @@
 from Components.AVSwitch import AVSwitch
 from enigma import ePicLoad
 
+
 class PicLoader:
     def __init__(self, width, height, sc=None):
         self.picload = ePicLoad()

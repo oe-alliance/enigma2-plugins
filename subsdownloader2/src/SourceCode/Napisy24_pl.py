@@ -24,6 +24,7 @@ from Plugins.Extensions.SubsDownloader2.SourceCode.periscope import SubtitleData
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+
 class XML_to_Dict():
     def __init__(self):
 	pass
@@ -62,6 +63,7 @@ class XML_to_Dict():
 		node.parentNode.removeChild(node)
 		if unlink:
 			node.unlink()
+
 
 class Napisy24_pl(XML_to_Dict, zip_extractor):    
     def __init__(self, moviePath, movieNameString=None):
@@ -204,7 +206,6 @@ class Napisy24_pl(XML_to_Dict, zip_extractor):
 	    print "XML subtitle list  not downloaded or converterd."
 	    return False
 	    
-    
     def return_xml_dict_entry_value(self, dict_entry, dict_entry_position):
 	"""From subtitle dictionary function returns value."""
 	value = self.subtitle_dict[dict_entry][dict_entry_position]
@@ -216,7 +217,6 @@ class Napisy24_pl(XML_to_Dict, zip_extractor):
 	return extractor.extract_zipped_file()
 	#os.remove(self.ZipFilePath)
 
-	
     def save_downloaded_zip(self, dict_entry_to_download):
 	"""Function saves downloaded zip string on given path anf destroy 
 	self.zip_string if saveing is succesfull."""
@@ -265,6 +265,7 @@ class Napisy24_pl(XML_to_Dict, zip_extractor):
 	    print "Feild to download subtitle zip."
             return False
 
+
 class GuessFileData_from_FileName(SubtitleDatabase.SubtitleDB):
     def __init__(self, tvshowRegex, tvshowRegex2, movieRegex):
         self.tvshowRegex = SubtitleDatabase.tvshowRegex
@@ -307,7 +308,6 @@ class CompareMovie_and_Subtite_FileData(GuessFileData_from_FileName):
                 movie_file_extensions.append(x)        
         return movie_file_extensions
 
-    
     def __return_movie_file_list(self, movie_path):
         """Funstion takes movie file path and based on EXTENSIONS from myListy.pl
         returns list of movies in movie file directory"""
@@ -378,7 +378,6 @@ class CompareMovie_and_Subtite_FileData(GuessFileData_from_FileName):
         return compare_result
         #musi sprawdzic czy film jest najbardziej prawdopodobny
             
-        
     def give_movie_subtitle_consistent_data(self, movie_file_data, subtitle_file_data):
         """Returns best matching movie <--> subtitle table."""
         m_s_temp_data = []

@@ -10,6 +10,7 @@ import urllib2
 
 ##################################################
 
+
 class Cache:
 	def __init__(self):
 		self.sc = AVSwitch().getFramebufferScale()
@@ -31,9 +32,12 @@ class Cache:
 	def startCallbackTimer(self):
 		self.finishCallbackTimer.stop()
 		self.finishCallbackTimer.start(5000, 1)
+
+
 cache = Cache()
 
 ##################################################
+
 
 class Movie:
 	def __init__(self, name, url, thumb=None):
@@ -84,6 +88,7 @@ class Movie:
 
 ##################################################
 
+
 class Plugin:
 	def __init__(self, name, thumb):
 		self.type = "Plugin"
@@ -111,6 +116,7 @@ class Plugin:
 			print "[%s] Error: %s" % (self.name, error)
 
 ##################################################
+
 
 def getPlugins():
 	try:

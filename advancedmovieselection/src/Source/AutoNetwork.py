@@ -26,6 +26,7 @@
 import os
 import ping
 
+
 class Network():
     AUTO_NETORK = "/etc/auto.network"
     AUTO_MASTER = "/etc/auto.master"
@@ -82,6 +83,7 @@ class Network():
             print self.auto_network
         except Exception, e:
             print e
+
 
 autoNetwork = Network()
 

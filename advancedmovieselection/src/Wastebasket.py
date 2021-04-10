@@ -53,6 +53,7 @@ from ClientSetup import ClientSetup
 from Components.Pixmap import Pixmap
 from Source.Globals import SkinTools
 
+
 class TrashMovieList(GUIComponent):
     def __init__(self, root):
         GUIComponent.__init__(self)
@@ -180,6 +181,7 @@ class TrashMovieList(GUIComponent):
         d = datetime.fromtimestamp(begin)
         return d.strftime("%H:%M")
     
+
 class Wastebasket(Screen, HelpableScreen):
     def __init__(self, session):
         Screen.__init__(self, session)
@@ -391,9 +393,12 @@ class Wastebasket(Screen, HelpableScreen):
             self.session.open(MessageBox, _("Restore failed!"), MessageBox.TYPE_ERROR)
         self.close()
 
+
 import Screens.Standby
 from time import mktime, strftime
 from datetime import timedelta
+
+
 class WastebasketTimer():
     def __init__(self, session):
         self.session = session
@@ -514,7 +519,9 @@ class WastebasketTimer():
                 config.AdvancedMovieSelection.last_auto_empty_wastebasket.save()
                 self.configChange()
 
+
 waste_timer = None
+
 
 def createWasteTimer(session):
     global waste_timer
@@ -525,6 +532,7 @@ def createWasteTimer(session):
     else:
         waste_timer.stopTimer()
         print "[AdvancedMovieSelection] Auto empty from wastebasket disabled..."
+
 
 def configChange():
     if waste_timer:

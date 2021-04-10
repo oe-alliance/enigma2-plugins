@@ -7,8 +7,10 @@ import gettext
 PluginLanguageDomain = "StartUpService"
 PluginLanguagePath = "SystemPlugins/StartUpService/locale"
 
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -16,5 +18,6 @@ def _(txt):
 	else:
 		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
 		return gettext.gettext(txt)
+
 
 language.addCallback(localeInit())

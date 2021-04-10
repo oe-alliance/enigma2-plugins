@@ -92,6 +92,7 @@ def localeInit():
 	os_environ["LANGUAGE"] = lang      # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
 	gettext.bindtextdomain("SeriesPlugin", resolveFilename(SCOPE_PLUGINS, "Extensions/SeriesPlugin/locale"))
 
+
 _ = lambda txt: gettext.dgettext("SeriesPlugin", txt) if txt else ""
 
 localeInit()

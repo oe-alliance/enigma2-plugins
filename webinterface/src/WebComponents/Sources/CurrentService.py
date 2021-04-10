@@ -1,5 +1,6 @@
 from Components.Sources.Source import Source
 
+
 class CurrentService(Source):
 	def __init__(self, session):
 		Source.__init__(self)

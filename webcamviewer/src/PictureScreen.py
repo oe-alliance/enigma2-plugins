@@ -12,6 +12,7 @@ from twisted.web.client import HTTPDownloader
 from twisted.internet import reactor
 from urlparse import urlparse, urlunparse
 
+
 def _parse(url, defaultPort=None):
 	url = url.strip()
 	parsed = urlparse(url)
@@ -47,8 +48,8 @@ def _parse(url, defaultPort=None):
 
 	return scheme, host, port, path, username, password
 
-def download(url, file, contextFactory=None, *args, **kwargs):
 
+def download(url, file, contextFactory=None, *args, **kwargs):
 	"""Download a remote file from http(s) or ftp.
 
 	@param file: path to file on filesystem, or file-like object.
@@ -102,10 +103,12 @@ def download(url, file, contextFactory=None, *args, **kwargs):
 
 	return factory.deferred
 
+
 class PictureScreen(Screen):
 	skin = ""
 	processing = False # if fetching or converting is active
 	autoreload = False
+
 	def __init__(self, session, title, filename, slideshowcallback=None, args=0):
 		self.slideshowcallback = slideshowcallback
 		self.screentitle = title

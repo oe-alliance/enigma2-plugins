@@ -55,6 +55,7 @@ config.plugins.remoteTimer.password = ConfigPassword(default="", fixed_size=Fals
 config.plugins.remoteTimer.default = ConfigYesNo(default=False)
 config.plugins.remoteTimer.remotedir = ConfigYesNo(default=False)
 
+
 def localGetPage(url):
 	username = config.plugins.remoteTimer.username.value
 	password = config.plugins.remoteTimer.password.value
@@ -67,12 +68,14 @@ def localGetPage(url):
 
 	return getPage(url, headers=headers)
 
+
 class RemoteService:
 	def __init__(self, sref, sname):
 		self.sref = sref
 		self.sname = sname
 
 	getServiceName = lambda self: self.sname
+
 
 class RemoteTimerScreen(Screen):
 	skin = """
@@ -195,6 +198,7 @@ class RemoteTimerScreen(Screen):
 				for timer in root.findall("e2timer")
 			]
 
+
 class E2Timer:
 	def __init__(self, sref="", sname="", name="", disabled=0, failed=0,
 			timebegin=0, timeend=0, duration=0, startprepare=0,
@@ -217,6 +221,7 @@ class E2Timer:
 		self.description = description
 		self.isAutoTimer = isAutoTimer
 		self.ice_timer_id = ice_timer_id
+
 
 class RemoteTimerSetup(Screen, ConfigListScreen):
 	skin = """
@@ -264,8 +269,10 @@ class RemoteTimerSetup(Screen, ConfigListScreen):
 	def Exit(self):
 		self.close()
 
+
 baseTimerEntrySetup = None
 baseTimerEntryGo = None
+
 
 def timerInit():
 	global baseTimerEntrySetup, baseTimerEntryGo
@@ -275,6 +282,7 @@ def timerInit():
 		baseTimerEntryGo = TimerEntry.keyGo
 	TimerEntry.createSetup = createNewnigma2Setup
 	TimerEntry.keyGo = newnigma2KeyGo
+
 
 def createNewnigma2Setup(self, widget="config"):
 	try:
@@ -286,6 +294,7 @@ def createNewnigma2Setup(self, widget="config"):
 
 	# force re-reading the list
 	self[widget].list = self.list
+
 
 def newnigma2SubserviceSelected(self, service):
 	if service is not None:
@@ -299,6 +308,7 @@ def newnigma2SubserviceSelected(self, service):
 
 		self.timerentry_service_ref = service_ref
 		self.timer.eit = eit
+
 
 def newnigma2KeyGo(self):
 	if not self.timerentry_remote.value:
@@ -389,9 +399,11 @@ def newnigma2KeyGo(self):
 		defer.addCallback(boundFunction(_gotPageLoad, self.session, self))
 		defer.addErrback(boundFunction(errorLoad, self.session))
 
+
 def _gotPageLoadCb(timerEntry, doClose, *args):
 	if doClose:
 		timerEntry.keyCancel()
+
 
 def _gotPageLoad(session, timerEntry, html):
 	remoteresponse = parseXml(html)
@@ -405,6 +417,7 @@ def _gotPageLoad(session, timerEntry, html):
 		MessageBox.TYPE_INFO
 	)
 
+
 def errorLoad(session, error):
 	#print "[RemoteTimer] errorLoad ERROR:", error
 	session.open(
@@ -412,6 +425,7 @@ def errorLoad(session, error):
 		_("ERROR - Set Timer on Remote Receiver via WebIf:\n%s") % (error),
 		MessageBox.TYPE_INFO
 	)
+
 
 def parseXml(string):
 	try:
@@ -424,6 +438,7 @@ def parseXml(string):
 		return "ERROR XML PARSE"
 
 #------------------------------------------------------------------------------------------
+
 
 def autostart(reason, **kwargs):
 	if "session" in kwargs:
@@ -441,8 +456,10 @@ def timermenu(menuid, **kwargs):
 	else:
 		return []
 
+
 def main(session, **kwargs):
 	session.open(RemoteTimerScreen)
+
 
 def Plugins(**kwargs):
 	plugin = []

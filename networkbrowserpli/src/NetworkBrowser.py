@@ -26,6 +26,7 @@ from AutoMount import iAutoMount
 from MountEdit import AutoMountEdit
 from UserDialog import UserDialog
 
+
 def write_cache(cache_file, cache_data):
 	#Does a cPickle dump
 	if not os_path.isdir(os_path.dirname(cache_file)):
@@ -36,6 +37,7 @@ def write_cache(cache_file, cache_data):
 	fd = open(cache_file, 'w')
 	dump(cache_data, fd, -1)
 	fd.close()
+
 
 def valid_cache(cache_file, cache_ttl):
 	#See if the cache file exists and is still living
@@ -49,6 +51,7 @@ def valid_cache(cache_file, cache_ttl):
 	else:
 		return 1
 
+
 def load_cache(cache_file):
 	#Does a cPickle load
 	fd = open(cache_file)
@@ -56,10 +59,12 @@ def load_cache(cache_file):
 	fd.close()
 	return cache_data
 
+
 class NetworkDescriptor:
 	def __init__(self, name="NetworkServer", description=""):
 		self.name = name
 		self.description = description
+
 
 class NetworkBrowser(Screen):
 	skin = """
@@ -572,6 +577,7 @@ class NetworkBrowser(Screen):
 	def MountEditClosed(self, returnValue=None):
 		if returnValue == None:
 			self.updateNetworkList()
+
 
 class ScanIP(Screen, ConfigListScreen):
 	skin = """

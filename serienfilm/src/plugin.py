@@ -21,6 +21,7 @@ def pluginConfig(session, **kwargs):
 
 gLeavePlayerConfirmed = None
 
+
 def showMoviesSF(self):
 	try:
 #		print "[SF-Plugin] showMoviesSF.InfoBar"
@@ -28,11 +29,13 @@ def showMoviesSF(self):
 	except Exception, e:
 		print "[SF-Plugin] showMoviesSF exception:\n" + str(e)
 
+
 def showMoviesMP(self):
 	ref = self.session.nav.getCurrentlyPlayingServiceReference()
 #	print "[SF-Plugin] SF:MoviePlayer.showMoviesMP"
 #	print "[SF-Plugin] SF:MoviePlayer.showMoviesMP, ref=" + str(ref)
 	self.session.openWithCallback(self.movieSelected, MovieSelection, ref)
+
 
 def leavePlayerConfirmedMP(self, answer):
 	answer1 = answer and answer[1]
@@ -47,6 +50,7 @@ def leavePlayerConfirmedMP(self, answer):
 
 
 from skin import readSkin
+
 
 def doInstantiateDialogSF(self, screen, arguments, kwargs, desktop):
 	# create dialog
@@ -77,6 +81,7 @@ def doInstantiateDialogSF(self, screen, arguments, kwargs, desktop):
 
 
 RUNPLUGIN = 1
+
 
 def autostart(reason, **kwargs):
 	if RUNPLUGIN != 1:

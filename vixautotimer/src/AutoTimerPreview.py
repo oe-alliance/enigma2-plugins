@@ -13,6 +13,7 @@ from Components.Sources.StaticText import StaticText
 from ServiceReference import ServiceReference
 from Tools.FuzzyDate import FuzzyTime
 
+
 class AutoTimerPreview(Screen):
 	"""Preview Timers which would be set"""
 

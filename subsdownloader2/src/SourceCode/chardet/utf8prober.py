@@ -34,6 +34,7 @@ from mbcssm import UTF8SMModel
 
 ONE_CHAR_PROB = 0.5
 
+
 class UTF8Prober(CharSetProber):
     def __init__(self):
         CharSetProber.__init__(self)

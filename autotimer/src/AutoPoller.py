@@ -11,6 +11,7 @@ import NavigationInstance
 # Debug
 from datetime import datetime, timedelta
 
+
 class AutoPoller:
 	"""Automatically Poll AutoTimer"""
 

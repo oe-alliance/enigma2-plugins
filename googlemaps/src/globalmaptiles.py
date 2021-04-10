@@ -65,6 +65,7 @@ Class is available under the open-source GDAL license (www.gdal.org).
 
 import math
 
+
 class GlobalMercator(object):
     """
     TMS Global Mercator Profile
@@ -277,6 +278,7 @@ class GlobalMercator(object):
 
 #---------------------
 
+
 class GlobalGeodetic(object):
     """
     TMS Global Geodetic Profile
@@ -345,7 +347,6 @@ class GlobalGeodetic(object):
             (tx + 1) * 256 * res - 180,
             (ty + 1) * 256 * res - 90
         )
-
 
 
 """

@@ -54,6 +54,7 @@ LANGUAGES = {"English (US)": "en",
              "Italian": "it",
              "Català": "ca"}
 
+
 class Subtitulos(SubtitleDatabase.SubtitleDB):
     url = "http://www.subtitulos.es"
     site_name = "Subtitulos"
@@ -64,7 +65,6 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
         self.host = "http://www.subtitulos.es"
         self.release_pattern = re.compile("Versi&oacute;n (.+) ([0-9]+).([0-9])+ megabytes")
         
-
     def process(self, filepath, langs):
         ''' main method to call on the plugin, pass the filename and the wished 
         languages and it will query the subtitles source '''

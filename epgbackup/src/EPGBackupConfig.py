@@ -25,6 +25,7 @@ from traceback import format_exc
 from plugin import gUserScriptExists
 from plugin import epgbackup
 			
+
 class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 	skin = """
 		<screen name="EPGBackupSetup" position="center,center" size="700,520" >
@@ -281,12 +282,15 @@ class EPGBackupConfig(Screen, HelpableScreen, ConfigListScreen):
 				x()
 			except Exception:
 				pass
+
 	def getCurrentEntry(self):
 		if self["config"].getCurrent():
 			return self["config"].getCurrent()[0]
+
 	def getCurrentValue(self):
 		if self["config"].getCurrent():
 			return str(self["config"].getCurrent()[1].getText())
+
 	def createSummary(self):
 		return SetupSummary
 

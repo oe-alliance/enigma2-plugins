@@ -6,9 +6,11 @@
 from twisted.web.client import getPage
 from xml.etree.cElementTree import fromstring
 
+
 class AtomFeed:
     """ Simple XML parser that extracts pages from a atom feed """
     ns = "{http://www.w3.org/2005/Atom}"
+
     def __init__(self, url, callback, errorCallback):
         """ Fetches the URL
 

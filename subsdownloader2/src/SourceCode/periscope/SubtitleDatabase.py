@@ -39,8 +39,10 @@ log = logging.getLogger(__name__)
 
 USER_AGENT = 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.1.3)'
 
+
 class SubtitleDB(object):
     ''' Base (kind of abstract) class that represent a SubtitleDB, usually a website. Should be rewritten using abc module in Python 2.6/3K'''
+
     def __init__(self, langs, revertlangs=None):
         if langs:
             self.langs = langs
@@ -227,8 +229,10 @@ class SubtitleDB(object):
 
 class InvalidFileException(Exception):
     ''' Exception object to be raised when the file is invalid'''
+
     def __init__(self, filename, reason):
         self.filename = filename
         self.reason = reason
+
     def __str__(self):
         return (repr(filename), repr(reason))

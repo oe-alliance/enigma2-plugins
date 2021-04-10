@@ -55,6 +55,8 @@ rootbouquet_tv = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouque
 rootbouquet_radio = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.radio" ORDER BY bouquet'
 
 # Modified EPGSearchList with support for PartnerBox
+
+
 class EPGSearchList(EPGList):
 	def __init__(self, type=EPG_TYPE_SINGLE, selChangedCB=None, timer=None):
 		EPGList.__init__(self, type, selChangedCB, timer)
@@ -190,6 +192,8 @@ class EPGSearchList(EPGList):
 		return ("%d.%d\xc2\xb0%s") % (op // 10, op % 10, direction)
 
 # main class of plugin
+
+
 class EPGSearch(EPGSelection):
 
 	# Ignore these flags in services from bouquets
@@ -816,6 +820,7 @@ class EPGSearch(EPGSelection):
 				filtServiceRefSet.add(srefstr)
 		return filtServiceRefSet
 
+
 class EPGSearchTimerImport(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -862,6 +867,7 @@ class EPGSearchTimerImport(Screen):
 	def cancel(self):
 		self.close(None)
 
+
 class EPGSearchChannelSelection(SimpleChannelSelection):
 	def __init__(self, session):
 		SimpleChannelSelection.__init__(self, session, _("Channel Selection"))
@@ -884,6 +890,7 @@ class EPGSearchChannelSelection(SimpleChannelSelection):
 	def epgClosed(self, ret=None):
 		if ret:
 			self.close(ret)
+
 
 class EPGSearchEPGSelection(EPGSelection):
 	def __init__(self, session, ref, openPlugin, eventid=None):

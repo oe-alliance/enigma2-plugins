@@ -24,6 +24,7 @@ that they, too, receive or can get the source code. And you must show them these
 '''
 from Globals import printStackTrace
 
+
 class RecordTimerEvent():
     def __init__(self):
         self.on_state_changed = []
@@ -54,9 +55,11 @@ class RecordTimerEvent():
         except:
             printStackTrace()
 
+
 recordTimerEvent = RecordTimerEvent()
 
 from Components.config import config
+
 
 class CoverLoader():
     def __init__(self):

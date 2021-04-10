@@ -30,6 +30,7 @@ afterevent = {
 	AFTEREVENT.AUTO: _("auto")
 }
 
+
 class AutoTimerImportSelector(Screen):
 	def __init__(self, session, autotimer):
 		Screen.__init__(self, session)
@@ -93,6 +94,7 @@ class AutoTimerImportSelector(Screen):
 
 	def cancel(self):
 		self.close(None)
+
 
 class AutoTimerImporter(Screen):
 	"""Import AutoTimer from Timer"""

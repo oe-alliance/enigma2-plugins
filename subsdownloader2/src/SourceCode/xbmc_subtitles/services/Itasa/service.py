@@ -210,5 +210,6 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     screen_session.open(MessageBox, _(" Login to Itasa failed. Check your username/password at the configuration menu."), MessageBox.TYPE_INFO, timeout=5)
     return False, "None", []
 
+
 def __restartMessage__(screen_session, callback=None):
         screen_session.open(MessageBox, _("Please restart GUI to apply changes.\n\n If UNRAR package haven't been installed it means that Your image doesn't have it. \n You can download package from project Google Code page or unpack rar manually and make local convertion."), MessageBox.TYPE_INFO, timeout=25)

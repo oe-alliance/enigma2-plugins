@@ -28,6 +28,7 @@ from enigma import eEPGCache, eServiceReference
 from time import localtime, strftime, mktime, time
 from datetime import datetime, timedelta
 
+
 class EventList(Converter, object):
 	def __init__(self, type):
 		Converter.__init__(self, type)
@@ -45,6 +46,7 @@ class EventList(Converter, object):
 					if value == "yes":
 						self.primetime = 1
 				i += 1  			
+
 	@cached
 	def getContent(self):
 		contentList = []

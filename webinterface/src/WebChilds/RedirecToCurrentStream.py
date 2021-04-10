@@ -1,10 +1,12 @@
 from twisted.web import resource, server
 from ServiceReference import ServiceReference
 
+
 class RedirecToCurrentStreamResource(resource.Resource):
 	"""
 		used to redirect the client to the streamproxy with the current service tuned on TV
 	"""
+
 	def __init__(self, session):
 		resource.Resource.__init__(self)
 		self.session = session

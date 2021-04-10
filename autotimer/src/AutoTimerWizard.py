@@ -19,6 +19,7 @@ from Components.config import getConfigListEntry, KEY_0, KEY_DELETE, \
 # Wizard XML Path
 from Tools import Directories
 
+
 class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 	STEP_ID_BASIC = 2
 	STEP_ID_TIMESPAN = 5

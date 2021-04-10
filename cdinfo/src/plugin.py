@@ -19,6 +19,7 @@ config.plugins.CDInfo.CDDB_port = ConfigInteger(8880, limits=(1, 65536))
 config.plugins.CDInfo.CDDB_timeout = ConfigInteger(20, limits=(-1, 60))
 config.plugins.CDInfo.CDDB_cache = ConfigYesNo(default=True)
 
+
 class CDInfo(ConfigListScreen, Screen):
 	skin = """
 		<screen position="90,95" size="560,430" title="CDInfo" >
@@ -89,6 +90,7 @@ class CDInfo(ConfigListScreen, Screen):
 		for x in self["config"].list:
 			x[1].save()
 		self.close(True)
+
 
 class Query:
 	def __init__(self, mediaplayer):
@@ -248,8 +250,10 @@ class Query:
 		self.mp.readTitleInformation()
 		self.cdtext_output = ""
 
+
 def main(session, **kwargs):
 	session.open(CDInfo)
+
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(name="CDInfo", description=_("AudioCD info from CDDB & CD-Text"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main, icon="plugin.png")]

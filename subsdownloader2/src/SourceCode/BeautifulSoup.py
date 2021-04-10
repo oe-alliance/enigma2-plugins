@@ -104,11 +104,13 @@ markupbase._declname_match = re.compile(r'[a-zA-Z][-_.:a-zA-Z0-9]*\s*').match
 
 DEFAULT_OUTPUT_ENCODING = "utf-8"
 
+
 def _match_css_class(str):
     """Build a RE to match the given CSS class."""
     return re.compile(r"(^|.*\s)%s($|\s)" % str)
 
 # First, the classes that represent markup elements.
+
 
 class PageElement(object):
     """Contains the navigational information for some part of the page
@@ -421,6 +423,7 @@ class PageElement(object):
                 s = unicode(s)
         return s
 
+
 class NavigableString(unicode, PageElement):
 
     def __new__(cls, value):
@@ -456,10 +459,12 @@ class NavigableString(unicode, PageElement):
         else:
             return self
 
+
 class CData(NavigableString):
 
     def __str__(self, encoding=DEFAULT_OUTPUT_ENCODING):
         return "<![CDATA[%s]]>" % NavigableString.__str__(self, encoding)
+
 
 class ProcessingInstruction(NavigableString):
     def __str__(self, encoding=DEFAULT_OUTPUT_ENCODING):
@@ -468,13 +473,16 @@ class ProcessingInstruction(NavigableString):
             output = self.substituteEncoding(output, encoding)
         return "<?%s?>" % self.toEncoding(output, encoding)
 
+
 class Comment(NavigableString):
     def __str__(self, encoding=DEFAULT_OUTPUT_ENCODING):
         return "<!--%s-->" % NavigableString.__str__(self, encoding)
 
+
 class Declaration(NavigableString):
     def __str__(self, encoding=DEFAULT_OUTPUT_ENCODING):
         return "<!%s>" % NavigableString.__str__(self, encoding)
+
 
 class Tag(PageElement):
 
@@ -1003,14 +1011,17 @@ class SoupStrainer:
                 result = matchAgainst == markup
         return result
 
+
 class ResultSet(list):
     """A ResultSet is just a list that keeps track of the SoupStrainer
     that created it."""
+
     def __init__(self, source):
         list.__init__([])
         self.source = source
 
 # Now, some helper functions.
+
 
 def buildTagMap(default, *args):
     """Turns a list of maps, lists, or scalars into a single map.
@@ -1032,6 +1043,7 @@ def buildTagMap(default, *args):
     return built
 
 # Now, the parser classes.
+
 
 class BeautifulStoneSoup(Tag, SGMLParser):
 
@@ -1254,7 +1266,6 @@ class BeautifulStoneSoup(Tag, SGMLParser):
             self.previous = o
             self.currentTag.contents.append(o)
 
-
     def _popToTag(self, name, inclusivePop=True):
         """Pops the tag stack up to and including the most recent
         instance of the given tag. If inclusivePop is false, pops the tag
@@ -1278,7 +1289,6 @@ class BeautifulStoneSoup(Tag, SGMLParser):
         return mostRecentTag
 
     def _smartPop(self, name):
-
         """We need to pop up to the previous tag of this type, unless
         one of this tag's nesting reset triggers comes between this
         tag and the previous tag of this type, OR unless this tag is a
@@ -1463,6 +1473,7 @@ class BeautifulStoneSoup(Tag, SGMLParser):
                 j = i + len(toHandle)
         return j
 
+
 class BeautifulSoup(BeautifulStoneSoup):
 
     """This parser knows the following facts about HTML:
@@ -1616,8 +1627,10 @@ class BeautifulSoup(BeautifulStoneSoup):
         if tag and tagNeedsEncodingSubstitution:
             tag.containsSubstitutions = True
 
+
 class StopParsing(Exception):
     pass
+
 
 class ICantBelieveItsBeautifulSoup(BeautifulSoup):
 
@@ -1655,6 +1668,7 @@ class ICantBelieveItsBeautifulSoup(BeautifulSoup):
                                 I_CANT_BELIEVE_THEYRE_NESTABLE_BLOCK_TAGS,
                                 I_CANT_BELIEVE_THEYRE_NESTABLE_INLINE_TAGS)
 
+
 class MinimalSoup(BeautifulSoup):
     """The MinimalSoup class is for parsing HTML that contains
     pathologically bad markup. It makes no assumptions about tag
@@ -1667,6 +1681,7 @@ class MinimalSoup(BeautifulSoup):
 
     RESET_NESTING_TAGS = buildTagMap('noscript')
     NESTABLE_TAGS = {}
+
 
 class BeautifulSOAP(BeautifulStoneSoup):
     """This class will push a tag with only a single string child into
@@ -1707,14 +1722,24 @@ class BeautifulSOAP(BeautifulStoneSoup):
 #"RobustParser.py" (or, in cases of extreme enterprisiness,
 #"RobustParserBeanInterface.class") and using the following
 #enterprise-friendly class aliases:
+
+
 class RobustXMLParser(BeautifulStoneSoup):
     pass
+
+
 class RobustHTMLParser(BeautifulSoup):
     pass
+
+
 class RobustWackAssHTMLParser(ICantBelieveItsBeautifulSoup):
     pass
+
+
 class RobustInsanelyWackAssHTMLParser(MinimalSoup):
     pass
+
+
 class SimplifyingSOAPParser(BeautifulSOAP):
     pass
 
@@ -1727,6 +1752,7 @@ class SimplifyingSOAPParser(BeautifulSOAP):
 # Universal Feed Parser. It does not rewrite the XML or HTML to
 # reflect a new encoding: that happens in BeautifulStoneSoup.handle_pi
 # (XML) and BeautifulSoup.start_meta (HTML).
+
 
 # Autodetects character encodings.
 # Download from http://chardet.feedparser.org/
@@ -1748,6 +1774,7 @@ try:
     import iconv_codec
 except ImportError:
     pass
+
 
 class UnicodeDammit:
     """A class for detecting the encoding of a *ML document and
@@ -1930,7 +1957,6 @@ class UnicodeDammit:
                 xml_encoding = sniffed_xml_encoding
         return xml_data, xml_encoding, sniffed_xml_encoding
 
-
     def find_codec(self, charset):
         return self._codec(self.CHARSET_ALIASES.get(charset, charset)) \
                or (charset and self._codec(charset.replace("-", ""))) \
@@ -1949,6 +1975,7 @@ class UnicodeDammit:
         return codec
 
     EBCDIC_TO_ASCII_MAP = None
+
     def _ebcdic_to_ascii(self, s):
         c = self.__class__
         if not c.EBCDIC_TO_ASCII_MAP:

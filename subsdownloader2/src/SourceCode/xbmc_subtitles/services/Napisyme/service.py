@@ -51,6 +51,8 @@ def getallsubs(content, title, subtitles_list, file_original_path):
       subtitles_list.append({'filename': tytul_pelny, 'sync': sync_value, 'link': link, 'language_flag': obraz_flagi, 'language_name': lang, 'rating': ""})
 
 #def search_subtitles( file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack ): #standard input
+
+
 def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack, screen_sessiom): #standard input
     subtitles_list = []
     msg = ""
@@ -83,6 +85,8 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     return subtitles_list, "", "" #standard output
 
 #def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id): #standard input
+
+
 def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id, screen_session):  #standard input
     import urllib
     f = urllib.urlopen(subtitles_list[pos]["link"])

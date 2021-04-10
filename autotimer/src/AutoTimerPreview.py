@@ -16,6 +16,8 @@ from enigma import getDesktop
 HD = False
 if getDesktop(0).size().width() >= 1280:
 	HD = True
+
+
 class AutoTimerPreview(Screen):
 	"""Preview Timers which would be set"""
 	if HD:

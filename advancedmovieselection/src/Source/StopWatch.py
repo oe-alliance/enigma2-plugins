@@ -36,6 +36,7 @@ mult in 1.38282775879e-05 sec
 __version__ = '0.3.1'
 __author__ = 'John Paulett <http://blog.7oars.com>'
 
+
 class StopWatch(object):
     def __init__(self):
         self.__stopped = None
@@ -86,6 +87,7 @@ class StopWatch(object):
         """Nicely format the elapsed time
         """
         return str(self.elapsed) + ' sec'
+
 
 def clockit(func):
     """Function decorator that times the evaluation of *func* and prints the

@@ -10,6 +10,7 @@ except ImportError as ie:
 from GrowleeConnection import emergencyDisable
 from . import NOTIFICATIONID
 
+
 class ProwlAPI:
 	def __init__(self, host):
 		self.enable_outgoing = host.enable_outgoing.value

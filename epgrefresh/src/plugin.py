@@ -127,6 +127,7 @@ from Plugins.Plugin import PluginDescriptor
 #pragma mark - Workaround for unset clock
 from enigma import eDVBLocalTimeHandler
 
+
 def timeCallback(isCallback=True):
 	"""Time Callback/Autostart management."""
 	thInstance = eDVBLocalTimeHandler.getInstance()
@@ -140,6 +141,8 @@ def timeCallback(isCallback=True):
 	epgrefresh.start()
 
 # Autostart
+
+
 def autostart(reason, **kwargs):
 	if reason == 0 and "session" in kwargs:
 		session = kwargs["session"]
@@ -157,6 +160,7 @@ def autostart(reason, **kwargs):
 		
 	elif reason == 1:
 		epgrefresh.stop()
+
 
 def getNextWakeup():
 	# Return invalid time if not automatically refreshing
@@ -183,11 +187,14 @@ def getNextWakeup():
 	setConfigWakeupTime(begin + 86400)
 	return begin + 86400
 
+
 def setConfigWakeupTime(value):
 	config.plugins.epgrefresh.wakeup_time.value = value
 	config.plugins.epgrefresh.save()
 
 # Mainfunction
+
+
 def main(session, **kwargs):
 	try:
 		from EPGRefreshConfiguration import EPGRefreshConfiguration
@@ -199,14 +206,18 @@ def main(session, **kwargs):
 		print("[EPGRefresh] Error while Opening EPGRefreshConfiguration")
 		print_exc(file=stdout)
 
+
 def forceRefresh(session, **kwargs):
 	epgrefresh.forceRefresh(session)
+
 
 def stopRunningRefresh(session, **kwargs):
 	epgrefresh.stopRunningRefresh(session)
 
+
 def showPendingServices(session, **kwargs):
 	epgrefresh.showPendingServices(session)
+
 
 def doneConfiguring(session, needsRestart):
 	if needsRestart:
@@ -216,11 +227,13 @@ def doneConfiguring(session, needsRestart):
 	else:
 		_startAfterConfig(session)
 
+
 def restartGUICB(session, answer):
 	if answer is True:
 		session.open(TryQuitMainloop, 3)
 	else:
 		_startAfterConfig(session)
+
 
 def _startAfterConfig(session):
 	if config.plugins.epgrefresh.enabled.value:
@@ -228,6 +241,8 @@ def _startAfterConfig(session):
 			epgrefresh.start(session)
 
 # Eventinfo
+
+
 def eventinfo(session, servicelist, **kwargs):
 	ref = session.nav.getCurrentlyPlayingServiceReference()
 	if not ref:
@@ -242,14 +257,18 @@ def eventinfo(session, servicelist, **kwargs):
 
 # XXX: we need this helper function to identify the descriptor
 # Extensions menu
+
+
 def extensionsmenu(session, **kwargs):
 	main(session, **kwargs)
+
 
 extSetupDescriptor = PluginDescriptor(_("EPG-Refresh_SetUp"), description=_("Automatically refresh EPG"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=extensionsmenu, needsRestart=False)
 extRunDescriptor = PluginDescriptor(_("EPG-Refresh_Refresh now"), description=_("Start EPGrefresh immediately"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=forceRefresh, needsRestart=False)
 extStopDescriptor = PluginDescriptor(_("EPG-Refresh_Stop Refresh"), description=_("Stop Running EPG-refresh"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=stopRunningRefresh, needsRestart=False)
 extPendingServDescriptor = PluginDescriptor(_("EPG-Refresh_Pending Services"), description=_("Show the pending Services for refresh"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=showPendingServices, needsRestart=False)
 extPluginDescriptor = PluginDescriptor(	name=_("EPGRefresh"), description=_("Automatically refresh EPG"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main, icon="EPGRefresh.png", needsRestart=False)
+
 
 def AdjustExtensionsmenu(enable, PlugDescriptor):
 	if enable:
@@ -261,6 +280,7 @@ def AdjustExtensionsmenu(enable, PlugDescriptor):
 		except ValueError as ve:
 			if PlugDescriptor != extRunDescriptor:
 				print("[EPGRefresh] AdjustExtensionsmenu got confused, tried to remove non-existant plugin entry... ignoring.")
+
 
 def housekeepingExtensionsmenu(configentry, force=False):
 	if force or (epgrefresh != None and not epgrefresh.isRunning()):
@@ -275,9 +295,11 @@ def housekeepingExtensionsmenu(configentry, force=False):
 		if PlugDescriptor is not None:
 			AdjustExtensionsmenu(configentry.value, PlugDescriptor)
 
+
 config.plugins.epgrefresh.show_in_plugins.addNotifier(housekeepingExtensionsmenu, initial_call=False, immediate_feedback=True)
 config.plugins.epgrefresh.show_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call=False, immediate_feedback=True)
 config.plugins.epgrefresh.show_run_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call=False, immediate_feedback=True)
+
 
 def menu_main(menuid, **kwargs):
 	if getImageDistro() in ("openvix", "openatv", "openspa", "openhdf"):
@@ -286,6 +308,7 @@ def menu_main(menuid, **kwargs):
 	else:
 		return []
 	return [(_("EPGRefresh"), main, "epgrefresh", None)]
+
 
 def Plugins(**kwargs):
 	# NOTE: this might be a little odd to check this, but a user might expect
@@ -318,7 +341,6 @@ def Plugins(**kwargs):
 					description=_("Automatically refresh EPG"),
 					where=PluginDescriptor.WHERE_MENU,
 					fnc=menu_main))
-
 
 	if config.plugins.epgrefresh.show_in_extensionsmenu.value:
 		extSetupDescriptor.needsRestart = needsRestart

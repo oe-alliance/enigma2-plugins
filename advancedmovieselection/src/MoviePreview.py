@@ -33,6 +33,7 @@ from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN
 
 nocover = None
 
+
 class MoviePreview():
     def __init__(self, session):
         self.onHide.append(self.hideDialog)
@@ -114,17 +115,23 @@ class MoviePreview():
     def hideDialog(self):
         self.working = False
 
+
 from Screens.Screen import Screen
 from enigma import getDesktop
+
+
 class DVDOverlay(Screen):
     def __init__(self, session, args=None):
         desktop_size = getDesktop(0).size()
         DVDOverlay.skin = """<screen name="DVDOverlay" position="0,0" size="%d,%d" flags="wfNoBorder" zPosition="-1" backgroundColor="transparent" />""" % (desktop_size.width(), desktop_size.height())
         Screen.__init__(self, session)
 
+
 from ServiceReference import ServiceReference
 from Screens.InfoBarGenerics import InfoBarCueSheetSupport
 from Source.ServiceProvider import CueSheet
+
+
 class VideoPreview():
     def __init__(self):
         self.fwd_timer = eTimer()

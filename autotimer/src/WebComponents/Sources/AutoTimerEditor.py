@@ -2,6 +2,7 @@ from Components.Sources.Source import Source
 from os import remove, path, popen
 from re import compile as re_compile
 
+
 class AutoTimerEditor(Source):
 	BACKUP = 0
 	RESTORE = 1

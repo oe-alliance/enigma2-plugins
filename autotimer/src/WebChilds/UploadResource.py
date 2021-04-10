@@ -1,8 +1,10 @@
 from os import write as os_write, close as os_close, O_WRONLY as os_O_WRONLY, O_CREAT as os_O_CREAT, open as os_open, remove as os_remove
 from twisted.web import resource, http
 
+
 class UploadResource(resource.Resource):
 	FILENAME = "/tmp/autotimer_backup.tar"
+
 	def __init__(self, session):
 		self.session = session
 		resource.Resource.__init__(self)

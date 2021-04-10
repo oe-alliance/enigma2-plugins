@@ -53,8 +53,10 @@ from cache_engine import CacheEngine, CacheObject
 def _donothing(*args, **kwargs):
     pass
 
+
 try:
     import fcntl
+
     class Flock(object):
         """
         Context manager to flock file for the duration the object exists.
@@ -70,8 +72,10 @@ try:
             self.fileobj = fileobj
             self.operation = operation
             self.callback = callback
+
         def __enter__(self):
             fcntl.flock(self.fileobj, self.operation)
+
         def __exit__(self, exc_type, exc_value, exc_tb):
             suppress = False
             if callable(self.callback):
@@ -94,6 +98,7 @@ try:
 
 except ImportError:
     import msvcrt
+
     class Flock(object):
         LOCK_EX = msvcrt.LK_LOCK
         LOCK_SH = msvcrt.LK_LOCK
@@ -102,9 +107,11 @@ except ImportError:
             self.fileobj = fileobj
             self.operation = operation
             self.callback = callback
+
         def __enter__(self):
             self.size = os.path.getsize(self.fileobj.name)
             msvcrt.locking(self.fileobj.fileno(), self.operation, self.size)
+
         def __exit__(self, exc_type, exc_value, exc_tb):
             suppress = False
             if callable(self.callback):
@@ -160,6 +167,7 @@ class FileCacheObject(CacheObject):
                 self._size = self._buff.tell()
             self._size = size
         return self._size
+
     @size.setter
     def size(self, value): self._size = value
 
@@ -171,6 +179,7 @@ class FileCacheObject(CacheObject):
             except:
                 pass
         return self._key
+
     @key.setter
     def key(self, value): self._key = value
 
@@ -179,6 +188,7 @@ class FileCacheObject(CacheObject):
         if self._data is None:
             self._key, self._data = json.loads(self._buff.getvalue())
         return self._data
+
     @data.setter
     def data(self, value): self._data = value
 

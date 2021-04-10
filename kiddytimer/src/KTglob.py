@@ -43,6 +43,7 @@ SKIN = """
 
 ##############################################################################
 
+
 def getTodaysTimeInSeconds():
     # Number of the current day
     dayNr = int(time.strftime("%w", time.localtime()))
@@ -50,9 +51,11 @@ def getTodaysTimeInSeconds():
     iDayTime = getSecondsFromClock(config.plugins.KiddyTimer.dayTimes[dayNr].timeValue.value)
     return(iDayTime)
 
+
 def getSecondsFromClock(aClock):
     iSeconds = 60 * (int(aClock[0]) * 60 + int(aClock[1]))
     return iSeconds
+
 
 def getTimeFromSeconds(iSecondsLeft, bReturnSeconds):
         iHours = int(iSecondsLeft // 3600)

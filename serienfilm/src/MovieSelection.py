@@ -33,6 +33,7 @@ config.movielist.sflisttype = ConfigInteger(default=MovieList.LISTTYPE_MINIMAL)
 config.movielist.sftimes = ConfigInteger(default=MovieList.SHOW_DURATION | MovieList.SHOW_DIRECTORIES)
 config.movielist.sftitle_episode_separator = ConfigText(default=_x(": "))
 
+
 def setPreferredTagEditor(te):
 	global preferredTagEditor
 	try:
@@ -46,11 +47,14 @@ def setPreferredTagEditor(te):
 		preferredTagEditor = te
 		print "Preferred tag editor set to ", preferredTagEditor
 
+
 def getPreferredTagEditor():
 	global preferredTagEditor
 	return preferredTagEditor
 
+
 setPreferredTagEditor(None)
+
 
 class MovieContextMenu(Screen):
 	def __init__(self, session, csel, service):
@@ -191,6 +195,7 @@ class MovieContextMenu(Screen):
 			self.csel["freeDiskSpace"].update()
 			self.close()
 
+
 class SelectionEventInfo:
 	def __init__(self):
 		print "[SF-Plugin] SF:SelectionEventInfo init"
@@ -207,6 +212,7 @@ class SelectionEventInfo:
 	def updateEventInfo(self):
 		serviceref = self.getCurrent()
 		self["Service"].newService(serviceref)
+
 
 class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 	def __init__(self, session, selectedmovie=None):
@@ -266,7 +272,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 					"showMovies": (self.doPathSelect, _("select the movie path")),
 				})
 
-
 		self["MovieSelectionActions"] = HelpableActionMap(self, "MovieSelectionActions",
 			{
 				"contextMenu": (self.doContext, _("menu")),
@@ -295,7 +300,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 				"5": (self.toggleMinimal, _x("Toggle style minimal / compact")),
 				"8": (self.toggleTags, _x("Toggle description / tags display")),
 			})
-
 
 		self.onShown.append(self.go)
 		self.onLayoutFinish.append(self.saveListsize)

@@ -6,6 +6,8 @@ NS_RSS_09 = "{http://my.netscape.com/rdf/simple/0.9/}"
 NS_RSS_10 = "{http://purl.org/rss/1.0/}"
 
 # based on http://effbot.org/zone/element-rss-wrapper.htm
+
+
 class ElementWrapper:
 	def __init__(self, element, ns=""):
 		self._element = element
@@ -15,6 +17,7 @@ class ElementWrapper:
 		if tag.startswith('__'):
 			raise AttributeError(tag)
 		return self._element.findtext(self._ns + tag)
+
 
 class RSSEntryWrapper(ElementWrapper):
 	def __getattr__(self, tag):
@@ -38,6 +41,7 @@ class RSSEntryWrapper(ElementWrapper):
 		elif tag == "summary":
 			tag = "description"
 		return ElementWrapper.__getattr__(self, tag)
+
 
 class PEAEntryWrapper(ElementWrapper):
 	def __getattr__(self, tag):
@@ -71,6 +75,7 @@ class PEAEntryWrapper(ElementWrapper):
 
 		return ElementWrapper.__getattr__(self, tag)
 
+
 class RSSWrapper(ElementWrapper):
 	def __init__(self, channel, items, ns=""):
 		self._items = items
@@ -97,6 +102,7 @@ class RSSWrapper(ElementWrapper):
 	def __getitem__(self, index):
 		return RSSEntryWrapper(self._items[index], self._ns)
 
+
 class RSS1Wrapper(RSSWrapper):
 	def __init__(self, feed, ns):
 		RSSWrapper.__init__(
@@ -109,6 +115,7 @@ class RSS1Wrapper(RSSWrapper):
 			tag = 'image'
 		return ElementWrapper.__getattr__(self, tag)
 
+
 class RSS2Wrapper(RSSWrapper):
 	def __init__(self, feed, ns):
 		channel = feed.find("channel")
@@ -120,6 +127,7 @@ class RSS2Wrapper(RSSWrapper):
 		if tag == 'logo':
 			tag = 'image'
 		return ElementWrapper.__getattr__(self, tag)
+
 
 class PEAWrapper(RSSWrapper):
 	def __init__(self, feed, ns):
@@ -135,6 +143,7 @@ class PEAWrapper(RSSWrapper):
 		if tag == "description":
 			tag = "subtitle"
 		return ElementWrapper.__getattr__(self, tag)
+
 
 class BaseFeed:
 	"""Base-class for all Feeds. Initializes needed Elements."""
@@ -153,8 +162,10 @@ class BaseFeed:
 	def __str__(self):
 		return "<%s, \"%s\", \"%s\", %d items>" % (self.__class__, self.title, self.description, len(self.history))
 
+
 class UniversalFeed(BaseFeed):
 	"""Feed which can handle rdf, rss and atom feeds utilizing abstraction wrappers."""
+
 	def __init__(self, uri, autoupdate, sync=False):
 		BaseFeed.__init__(self, uri)
 

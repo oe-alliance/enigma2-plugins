@@ -91,6 +91,7 @@ class BirthdayTimerEntry(TimerEntry):
 	def timeChanged(self):
 		self.state = self.StatePrepared
 		
+
 class BirthdayTimer(Timer, BirthdayStore):
 	def __init__(self):
 		BirthdayStore.__init__(self)

@@ -7,6 +7,8 @@ from urllib import unquote as urllib_unquote
 import Components.ParentalControl
 
 ##########################
+
+
 class ServiceList(resource.Resource):
 	def __init__(self, session):
 
@@ -14,6 +16,7 @@ class ServiceList(resource.Resource):
 		resource.Resource.__init__(self)
 		self.putChild("reload", ServiceListReload())
 		self.putChild("save", ServiceListSave())
+
 
 class ServiceListReload(resource.Resource):
 	def render(self, request):
@@ -43,6 +46,7 @@ class ServiceListReload(resource.Resource):
 							<e2state>False</e2state>
 							<e2statetext>Error while loading Servicelist!</e2statetext>
 						</e2simplexmlresult>"""
+
 
 class ServiceListSave(resource.Resource):
 	TYPE_TV = 0

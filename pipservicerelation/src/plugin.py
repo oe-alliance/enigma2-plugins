@@ -39,6 +39,7 @@ from enigma import eEnv
 basePictureInPicture__init__ = None
 CONFIG_FILE = eEnv.resolve('${libdir}/enigma2/python/Plugins/SystemPlugins/PiPServiceRelation/psr_config')
 
+
 def getRelationDict():
 	if os_path.exists(CONFIG_FILE):
 		pkl_file = open(CONFIG_FILE, 'rb')
@@ -48,14 +49,17 @@ def getRelationDict():
 			return volumedict
 	return {}
 
+
 def saveRelationDict(dict):
 	pkl_file = open(CONFIG_FILE, 'wb')
 	if pkl_file:
 		pickle_dump(dict, pkl_file)
 		pkl_file.close()
 
+
 def autostart_PictureInPicture(session, **kwargs):
 	init_pipservicerelation()
+
 
 def setup(session, **kwargs):
 	session.open(PipServiceRelationSetup)
@@ -133,6 +137,7 @@ class PipServiceRelationSetup(Screen):
 		del self["entrylist"].configPSR[sel[0]]
 		saveRelationDict(self["entrylist"].configPSR)
 		self.updateList()
+
 
 class PipServiceRelationEntryList(MenuList):
 	def __init__(self, list, enableWrapAround=True):
@@ -247,6 +252,7 @@ class PipServiceRelationEntryConfigScreen(ConfigListScreen, Screen):
 	def keyCancel(self):
 		ConfigListScreen.cancelConfirm(self, True)
 
+
 def init_pipservicerelation():
 	global basePictureInPicture__init__, basePictureInPicture_playService
 	if basePictureInPicture__init__ is None:
@@ -258,6 +264,7 @@ def init_pipservicerelation():
 def PictureInPicture__init__(self, session):
 	basePictureInPicture__init__(self, session)
 	self.pipServiceRelation = getRelationDict()
+
 
 def playService(self, service):
 	current_service = service
@@ -277,6 +284,7 @@ def playService(self, service):
 		else:
 			self.pipservice = None
 	return False
+
 
 def Plugins(**kwargs):
 	list = []

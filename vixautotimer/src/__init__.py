@@ -41,8 +41,10 @@ config.plugins.autotimer.skip_during_records = ConfigYesNo(default=False)
 PluginLanguageDomain = "AutoTimer"
 PluginLanguagePath = "Extensions/AutoTimer/locale"
  
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -50,6 +52,7 @@ def _(txt):
 	else:
 		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
 		return gettext.gettext(txt)
+
 
 language.addCallback(localeInit())
 

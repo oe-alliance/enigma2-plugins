@@ -26,11 +26,13 @@ from Globals import printStackTrace
 from enigma import eServiceReference, iServiceInformation
 from Config import config
 
+
 class MovieInfo():
     idDVB = eServiceReference.idDVB
     idDVD = 0x1111 # 4369
     idMP3 = 0x1001 # 4097
     idBD = 0x0004
+
     def __init__(self, name, serviceref, info=None, begin=-1, length=-1, file_name=None):
         self.name = name
         self.info = info
@@ -70,6 +72,7 @@ class MovieInfo():
         if this_tags is None or this_tags == ['']:
             this_tags = []
         return this_tags
+
 
 class DirectoryInfo():
     def __init__(self, dir_path):
@@ -133,7 +136,6 @@ class DirectoryInfo():
             if metafile is not None:
                 metafile.close()
 
-    
     def setSortType(self, sort_type):
         self.sort_type = sort_type
     
@@ -182,6 +184,7 @@ class DirectoryInfo():
         #if di.isDiskSpaceChanged():
         #    di.updateFolderSize()
         #    di.write()
+
 
 class DirectoryEvent(DirectoryInfo):
     def __init__(self, serviceref):

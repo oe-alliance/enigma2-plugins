@@ -7,8 +7,10 @@ from Tools.Directories import pathExists, fileExists, resolveFilename, SCOPE_PLU
 #WEBTV_STATIONS = "/etc/enigma2/webtv_stations.xml"
 WEBTV_STATIONS = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/dreamMediathek/webtv_stations.xml")
 
+
 class WebTVStations():
 	"""Manages WebTVStations declared in a XML-Document."""
+
 	def __init__(self):
 		print "[WebTVStations] INIT"
 		self.webtv_stations = {}
@@ -40,6 +42,7 @@ class WebTVStations():
 
 	def getWebTVStationsList(self):
 		return sorted(self.webtv_stations.iterkeys())
+
 
 iWebTVStations = WebTVStations()
 

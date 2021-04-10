@@ -26,6 +26,8 @@ import commands
 config.plugins.mc_wi = ConfigSubsection()
 config.plugins.mc_wi.entrycount = ConfigInteger(0)
 config.plugins.mc_wi.Entry = ConfigSubList()
+
+
 def initWeatherPluginEntryConfig():
 	s = ConfigSubsection()
 	s.city = ConfigText(default="Berlin", visible_width=100, fixed_size=False)
@@ -33,6 +35,8 @@ def initWeatherPluginEntryConfig():
 	s.weatherlocationcode = ConfigText(default="", visible_width=100, fixed_size=False)
 	config.plugins.mc_wi.Entry.append(s)
 	return s
+
+
 def initConfig():
 	count = config.plugins.mc_wi.entrycount.value
 	if count != 0:
@@ -40,16 +44,24 @@ def initConfig():
 		while i < count:
 			initWeatherPluginEntryConfig()
 			i += 1
+
+
 initConfig()
 path = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/"
+
+
 class WeatherIconItem:
 	def __init__(self, url="", filename="", index=-1, error=False):
 		self.url = url
 		self.filename = filename
 		self.index = index
 		self.error = error
+
+
 def download(item):
 	return downloadPage(item.url, file(item.filename, 'wb'))
+
+
 class MC_WeatherInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -99,6 +111,7 @@ class MC_WeatherInfo(Screen):
 	def exit(self):
 		self.showiframe.finishStillPicture()
 		self.close()
+
 	def startRun(self):
 		if self.weatherPluginEntry is not None:
 			self["statustext"].text = _("Loading information...")
@@ -106,6 +119,7 @@ class MC_WeatherInfo(Screen):
 			getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
 		else:
 			self["statustext"].text = _("No locations defined...\nPress 'Blue' to do that.")
+
 	def mvidown(self, stadt):
 		downlink = "http://www.meinestadt.de/" + stadt + "/bilder"
 		downname = "/tmp/.stadtindex"
@@ -113,11 +127,13 @@ class MC_WeatherInfo(Screen):
 		if fileExists(downname):
 			os.system("rm -rf " + downname)
 		downloadPage(downlink, downname).addCallback(self.jpgdown, stadd).addErrback(self.error)
+
 	def jpgdown(self, value, stadd):
 		downlink = commands.getoutput("cat /tmp/.stadtindex | grep \"background-image:url('http://mytown.de/\" | cut -d \"'\" -f2")
 		stadt = stadd
 		downname = "/tmp/" + stadt + ".jpg"
 		downloadPage(downlink, downname).addCallback(self.makemvi, stadt).addErrback(self.error)
+
 	def makemvi(self, value, stadt):
 		mviname = "/tmp/" + stadt + ".m1v"
 		if fileExists(mviname) is False:
@@ -131,6 +147,7 @@ class MC_WeatherInfo(Screen):
 				subprocess.Popen(cmd).wait()
 			if fileExists(mviname):
 				self.showiframe.showStillpicture(mviname)
+
 	def nextItem(self):
 		if self.weatherPluginEntryCount != 0:
 			if self.weatherPluginEntryIndex < self.weatherPluginEntryCount:
@@ -138,6 +155,7 @@ class MC_WeatherInfo(Screen):
 			else:
 				self.weatherPluginEntryIndex = 1
 			self.setItem()
+
 	def previousItem(self):
 		if self.weatherPluginEntryCount != 0:
 			if self.weatherPluginEntryIndex >= 2:
@@ -145,10 +163,12 @@ class MC_WeatherInfo(Screen):
 			else:
 				self.weatherPluginEntryIndex = self.weatherPluginEntryCount
 			self.setItem()
+
 	def setItem(self):
 		self.weatherPluginEntry = config.plugins.mc_wi.Entry[self.weatherPluginEntryIndex - 1]
 		self.clearFields()
 		self.startRun()
+
 	def clearFields(self):
 		self["CurrentCity"].text = ""
 		self["currentTemp"].text = ""
@@ -262,8 +282,10 @@ class MC_WeatherInfo(Screen):
 			self.mvion = True
 		else:
 			self.mvidown(stadt)
+
 	def config(self):
 		self.session.openWithCallback(self.setupFinished, WeatherSetup)
+
 	def setupFinished(self, index, entry=None):
 		self.weatherPluginEntryCount = config.plugins.mc_wi.entrycount.value
 		if self.weatherPluginEntryCount >= 1:
@@ -278,33 +300,41 @@ class MC_WeatherInfo(Screen):
 			self.weatherPluginEntryIndex = -1
 		self.clearFields()
 		self.startRun()
+
 	def error(self, error=None):
 		self.mvion = False
 		self.showiframe.showStillpicture("/usr/share/enigma2/black.mvi")
 		if error is not None:
 			self.clearFields()
 			self["statustext"].text = str(error.getErrorMessage())
+
+
 class WeatherIcon(Pixmap):
 	def __init__(self):
 		Pixmap.__init__(self)
 		self.IconFileName = ""
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.paintIconPixmapCB)
+
 	def onShow(self):
 		Pixmap.onShow(self)
 		sc = AVSwitch().getFramebufferScale()
 		self.picload.setPara((self.instance.size().width(), self.instance.size().height(), sc[0], sc[1], True, 2, '#ff000000'))
+
 	def paintIconPixmapCB(self, picInfo=None):
 		ptr = self.picload.getData()
 		if ptr is not None:
 			self.instance.setPixmap(ptr.__deref__())
 		else:
 			self.instance.setPixmap(None)
+
 	def updateIcon(self, filename):
 		new_IconFileName = filename
 		if (self.IconFileName != new_IconFileName):
 			self.IconFileName = new_IconFileName
 			self.picload.startDecode(self.IconFileName)
+
+
 class WeatherSetup(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -326,18 +356,23 @@ class WeatherSetup(Screen):
 			 "blue": self.keyDelete,
 			 }, -1)
 		self.updateList()
+
 	def updateList(self):
 		self["entrylist"].buildList()
+
 	def keyClose(self):
 		self.close(-1, None)
+
 	def keyGreen(self):
 		self.session.openWithCallback(self.updateList, MSNWeatherPluginEntryConfigScreen, None)
+
 	def keyOK(self):
 		try:
 			sel = self["entrylist"].l.getCurrentSelection()[0]
 		except:
 			sel = None
 		self.close(self["entrylist"].getCurrentIndex(), sel)
+
 	def keyYellow(self):
 		try:
 			sel = self["entrylist"].l.getCurrentSelection()[0]
@@ -346,6 +381,7 @@ class WeatherSetup(Screen):
 		if sel is None:
 			return
 		self.session.openWithCallback(self.updateList, MSNWeatherPluginEntryConfigScreen, sel)
+
 	def keyDelete(self):
 		try:
 			sel = self["entrylist"].l.getCurrentSelection()[0]
@@ -354,6 +390,7 @@ class WeatherSetup(Screen):
 		if sel is None:
 			return
 		self.session.openWithCallback(self.deleteConfirm, MessageBox, _("Really delete this Entry?"))
+
 	def deleteConfirm(self, result):
 		if not result:
 			return
@@ -365,16 +402,21 @@ class WeatherSetup(Screen):
 		config.plugins.mc_wi.save()
 		configfile.save()
 		self.updateList()
+
+
 class WeatherPluginEntryList(MenuList):
 	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setFont(1, gFont("Regular", 18))
+
 	def postWidgetCreate(self, instance):
 		MenuList.postWidgetCreate(self, instance)
 		instance.setItemHeight(20)
+
 	def getCurrentIndex(self):
 		return self.instance.getCurrentIndex()
+
 	def buildList(self):
 		list = []
 		for c in config.plugins.mc_wi.Entry:
@@ -387,6 +429,8 @@ class WeatherPluginEntryList(MenuList):
 		self.list = list
 		self.l.setList(list)
 		self.moveToIndex(0)
+
+
 class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 	skin = """
 		<screen name="MSNWeatherPluginEntryConfigScreen" position="center,center" size="550,400">
@@ -400,6 +444,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 			<widget render="Label" source="key_yellow" position="280,10" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="yellow" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget source="key_blue" render="Label" position="420,10" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
+
 	def __init__(self, session, entry):
 		Screen.__init__(self, session)
 		self.title = _("WeatherPlugin: Edit Entry")
@@ -428,6 +473,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 			getConfigListEntry(_("System"), self.current.degreetype)
 		]
 		ConfigListScreen.__init__(self, cfglist, session)
+
 	def searchLocation(self):
 		if self.current.city.value != "":
 			language = config.osd.language.value.replace("_", "-")
@@ -437,6 +483,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 			getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
 		else:
 			self.session.open(MessageBox, _("You need to enter a valid city name before you can search for the location code."), MessageBox.TYPE_ERROR)
+
 	def keySave(self):
 		if self.current.city.value != "" and self.current.weatherlocationcode.value != "":
 			if self.newmode == 1:
@@ -451,15 +498,18 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 				self.session.open(MessageBox, _("Please enter a valid city name."), MessageBox.TYPE_ERROR)
 			else:
 				self.session.open(MessageBox, _("Please enter a valid location code for the city."), MessageBox.TYPE_ERROR)
+
 	def keyCancel(self):
 		if self.newmode == 1:
 			config.plugins.mc_wi.Entry.remove(self.current)
 		ConfigListScreen.cancelConfirm(self, True)
+
 	def keyDelete(self):
 		if self.newmode == 1:
 			self.keyCancel()
 		else:
 			self.session.openWithCallback(self.deleteConfirm, MessageBox, _("Really delete this WeatherPlugin Entry?"))
+
 	def deleteConfirm(self, result):
 		if not result:
 			return
@@ -470,16 +520,21 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 		config.plugins.mc_wi.save()
 		configfile.save()
 		self.close()		
+
 	def xmlCallback(self, xmlstring):
 		if xmlstring:
 			self.session.openWithCallback(self.searchCallback, MSNWeatherPluginSearch, xmlstring)
+
 	def error(self, error=None):
 		if error is not None:
 			print error
+
 	def searchCallback(self, result):
 		if result:
 			self.current.weatherlocationcode.value = result[0]
 			self.current.city.value = result[1]
+
+
 class MSNWeatherPluginSearch(Screen):
 	skin = """
 		<screen name="MSNWeatherPluginSearch" position="center,center" size="550,400">
@@ -491,6 +546,7 @@ class MSNWeatherPluginSearch(Screen):
 			<ePixmap position="280,10" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
 			<ePixmap position="420,10" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 		</screen>""" 
+
 	def __init__(self, session, xmlstring):
 		Screen.__init__(self, session)
 		self.title = _("MSN location search result")
@@ -505,10 +561,13 @@ class MSNWeatherPluginSearch(Screen):
 			 "red": self.keyClose,
 			 }, -1)
 		self.updateList(xmlstring)
+
 	def updateList(self, xmlstring):
 		self["entrylist"].buildList(xmlstring)
+
 	def keyClose(self):
 		self.close(None)
+
 	def keyOK(self):
 		pass
 		try:
@@ -516,16 +575,21 @@ class MSNWeatherPluginSearch(Screen):
 		except:
 			sel = None
 		self.close(sel)
+
+
 class MSNWeatherPluginSearchResultList(MenuList):
 	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setFont(1, gFont("Regular", 18))
+
 	def postWidgetCreate(self, instance):
 		MenuList.postWidgetCreate(self, instance)
 		instance.setItemHeight(44)
+
 	def getCurrentIndex(self):
 		return self.instance.getCurrentIndex()
+
 	def buildList(self, xml):
 		root = cet_fromstring(xml)
 		searchlocation = ""

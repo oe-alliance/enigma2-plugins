@@ -1,6 +1,8 @@
 from os import listdir
 from os.path import abspath, splitext
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+
+
 def importExternalModules():
 	dir = abspath(resolveFilename(SCOPE_PLUGINS) + "Extensions/WebInterface/WebChilds/External/")
 	for file in listdir(dir):

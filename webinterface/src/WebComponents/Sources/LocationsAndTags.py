@@ -3,6 +3,7 @@ from Components.config import config
 from Tools.Directories import resolveFilename, SCOPE_CONFIG, SCOPE_HDD
 import os
 
+
 class LocationsAndTags(Source):
 	CURRLOCATION = 0
 	LOCATIONS = 1
