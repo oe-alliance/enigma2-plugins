@@ -356,7 +356,7 @@ class NetworkBrowser(Screen):
 		self.list = []
 		self.network = {}
 		for x in self.networklist:
-			if not self.network.has_key(x[2]):
+			if x[2] not in self.network:
 				self.network[x[2]] = []
 			self.network[x[2]].append((NetworkDescriptor(name=x[1], description=x[2]), x))
 
@@ -383,7 +383,7 @@ class NetworkBrowser(Screen):
 		self.network = {}
 		self.mounts = iAutoMount.getMountsList() # reloading mount list
 		for x in self.networklist:
-			if not self.network.has_key(x[2]):
+			if x[2] not in self.network:
 				self.network[x[2]] = []
 			self.network[x[2]].append((NetworkDescriptor(name=x[1], description=x[2]), x))
 		self.network.keys().sort()

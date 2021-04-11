@@ -203,7 +203,7 @@ class Mosaic(Screen):
 		self.close()
 
 	def deleteConsoleCallbacks(self):
-		if self.Console.appContainers.has_key(self.consoleCmd):
+		if self.consoleCmd in self.Console.appContainers:
 			del self.Console.appContainers[self.consoleCmd].dataAvail[:]
 			del self.Console.appContainers[self.consoleCmd].appClosed[:]
 			del self.Console.appContainers[self.consoleCmd]

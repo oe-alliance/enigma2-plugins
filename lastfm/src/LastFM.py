@@ -110,7 +110,7 @@ class LastFM(LastFMHandler):
 
     def connectCB(self, data):
         self.info = self._parselines(data)
-        if self.info.has_key("session"):
+        if "session" in self.info:
             self.lastfmsession = self.info["session"]
             if self.lastfmsession.startswith("FAILED"):
                 self.onConnectFailed(self.info["msg"])
@@ -165,19 +165,19 @@ class LastFM(LastFMHandler):
         return "lastfm://user/%s/loved" % username
 
     def getSimilarArtistsURL(self, artist=None):
-        if artist is None and self.metadata.has_key('artist'):
+        if artist is None and 'artist' in self.metadata:
             return "lastfm://artist/%s/similarartists" % self.metadata['artist'].replace(" ", "%20")
         else:
             return "lastfm://artist/%s/similarartists" % artist.replace(" ", "%20")
 
     def getArtistsLikedByFans(self, artist=None):
-        if artist is None and self.metadata.has_key('artist'):
+        if artist is None and 'artist' in self.metadata:
             return "lastfm://artist/%s/fans" % self.metadata['artist'].replace(" ", "%20")
         else:
             return "lastfm://artist/%s/fans" % artist.replace(" ", "%20")
 
     def getArtistGroup(self, artist=None):
-        if artist is None and self.metadata.has_key('artist'):
+        if artist is None and 'artist' in self.metadata:
             return "lastfm://group/%s" % self.metadata['artist'].replace(" ", "%20")
         else:
             return "lastfm://group/%s" % artist.replace(" ", "%20")

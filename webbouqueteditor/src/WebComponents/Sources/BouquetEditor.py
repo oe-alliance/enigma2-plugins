@@ -142,7 +142,7 @@ class BouquetEditor(Source):
 			if param["mode"] is not None:
 				mode = int(param["mode"])
 
-		if param.has_key("BouquetRefRoot"):
+		if "BouquetRefRoot" in param:
 			bouquet_root = param["BouquetRefRoot"] # only when removing alternative
 		else:
 			bouquet_root = None

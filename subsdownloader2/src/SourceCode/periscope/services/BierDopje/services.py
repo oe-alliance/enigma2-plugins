@@ -128,9 +128,9 @@ class BierDopje(SubtitleDatabase.SubtitleDB):
 
         # Query the show to get the show id
         showName = guessedData['name'].lower()
-        if exceptions.has_key(showName):
+        if showName in exceptions:
             show_id = exceptions.get(showName)
-        elif self.cache['showids'].has_key(showName):
+        elif showName in self.cache['showids']:
             show_id = self.cache['showids'].get(showName)
         else:
             getShowId_url = "%sGetShowByName/%s" % (self.api, urllib.quote(showName))

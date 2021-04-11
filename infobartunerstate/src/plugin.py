@@ -208,7 +208,7 @@ def setup(session, **kwargs):
 def start(reason, **kwargs):
 	print "InfoBarTunerState start"
 	if reason == 0: # start
-		if kwargs.has_key("session"):
+		if "session" in kwargs:
 			if config.infobartunerstate.enabled.value:
 				global gInfoBarTunerState
 				session = kwargs["session"]

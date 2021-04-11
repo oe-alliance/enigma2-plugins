@@ -149,7 +149,7 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 		try:
 			self.stats = self.server.status()
 			self.lastrefresh = time()
-			if self.stats and self.stats.has_key("time"):
+			if self.stats and "time" in self.stats:
 				print "Time: ", self.stats["time"]
 		except Exception, e:
 			print e
@@ -165,7 +165,7 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 		return self
 
 	def getPlayPosition(self):
-		if self.stats and self.stats.has_key("time"):
+		if self.stats and "time" in self.stats:
 			pos = float(self.stats["time"])
 			if self.player.state == VlcPlayer.STATE_PLAYING:
 				pos += time() - self.lastrefresh
@@ -174,7 +174,7 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 			return (True, 0)
 
 	def getLength(self):
-		if self.stats and self.stats.has_key("length"):
+		if self.stats and "length" in self.stats:
 			return (False, int(self.stats["length"]) * 90000)
 		else:
 			return (True, 0)

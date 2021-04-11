@@ -98,7 +98,7 @@ def main(session, **kwargs):
 
 def autostart(reason, **kwargs):
 	if reason == 0:
-		if kwargs.has_key("session"):
+		if "session" in kwargs:
 			global explSession
 			explSession = kwargs["session"]
 			InfoBar.showMovies = showExpl

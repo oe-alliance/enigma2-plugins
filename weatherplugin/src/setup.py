@@ -300,7 +300,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 			errormessage = ""
 			root = cet_fromstring(xmlstring)
 			for childs in root:
-				if childs.tag == "weather" and childs.attrib.has_key("errormessage"):
+				if childs.tag == "weather" and "errormessage" in childs.attrib:
 					errormessage = childs.attrib.get("errormessage").encode("utf-8", 'ignore')
 					break
 			if len(errormessage) != 0:

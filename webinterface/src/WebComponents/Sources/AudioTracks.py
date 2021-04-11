@@ -80,7 +80,7 @@ class AudioTracks(Source):
 					for lang in languages:
 						if cnt:
 							language += ' / '
-						if LanguageCodes.has_key(lang):
+						if lang in LanguageCodes:
 							language += LanguageCodes[lang][0]
 						else:
 							language += lang

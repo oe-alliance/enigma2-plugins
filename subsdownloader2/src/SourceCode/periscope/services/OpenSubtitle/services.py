@@ -262,7 +262,7 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
                 result["link"] = r['SubDownloadLink']
                 result["page"] = r['SubDownloadLink']
                 result["lang"] = self.getLG(r['SubLanguageID'])
-                if search.has_key("query"): #We are using the guessed file name, let's remove some results
+                if "query" in search: #We are using the guessed file name, let's remove some results
                     if r["MovieReleaseName"].startswith(self.filename):
                         sublinks.append(result)
                     else:

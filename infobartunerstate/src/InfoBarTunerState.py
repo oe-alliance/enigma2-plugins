@@ -521,7 +521,7 @@ class InfoBarTunerState(object):
 
 						# Only add timer if not recording
 						#if not self.entries.has_key(str( timer ):
-						if self.entries.has_key(id):
+						if id in self.entries:
 							nextwins.remove(id)
 							win = self.entries[id]
 							win.updateName(name)
@@ -532,13 +532,13 @@ class InfoBarTunerState(object):
 						win.updateTimes(begin, end, win.endless)
 						self.entries[id] = win
 					else:
-						if self.entries.has_key(id):
+						if id in self.entries:
 							del self.entries[id]
 
 			# Close all not touched next windows
 			if nextwins:
 				for id in nextwins:
-					if self.entries.has_key(id):
+					if id in self.entries:
 						del self.entries[id]
 
 	def show(self, autohide=False, forceshow=False):

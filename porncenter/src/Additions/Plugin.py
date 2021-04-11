@@ -130,7 +130,7 @@ def getPlugins():
 		if file.endswith(".py") and not file in ["__init__.py", "Plugin.py", "Podcast.py"]:
 			try:
 				plugin = my_import('.'.join(["Plugins", "Extensions", "PornCenter", "Additions", file[:-3]]))
-				if not plugin.__dict__.has_key("getPlugin"):
+				if "getPlugin" not in plugin.__dict__:
 					print "Plugin %s doesn't have 'getPlugin'-call." % file
 					continue
 				p = plugin.getPlugin()

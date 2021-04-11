@@ -49,7 +49,7 @@ class EventListDisplay(Renderer):
 		for item in content:
 			i = 0
 			while i < 3:
-				if self.columns.has_key(str(i)):
+				if str(i) in self.columns:
 					value = self.columns[str(i)]
 					self.instance.writeText(eRect(value[0], y + int((self.rowHeight - value[4]) / 2), value[1], self.rowHeight), value[2], self.backgroundColor, value[3], item[value[5]], value[6])
 				i += 1

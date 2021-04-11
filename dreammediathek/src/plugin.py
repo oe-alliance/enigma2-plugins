@@ -157,11 +157,11 @@ class dreamMediathekStationsScreen(Screen):
 		provider = None
 		title = None
 		streamurl = None
-		if iWebTVStations.webtv_stations[station].has_key("provider"):
+		if "provider" in iWebTVStations.webtv_stations[station]:
 			provider = iWebTVStations.webtv_stations[station]["provider"]
-		if iWebTVStations.webtv_stations[station].has_key("title"):
+		if "title" in iWebTVStations.webtv_stations[station]:
 			title = iWebTVStations.webtv_stations[station]["title"]
-		if iWebTVStations.webtv_stations[station].has_key("streamurl"):
+		if "streamurl" in iWebTVStations.webtv_stations[station]:
 			streamurl = iWebTVStations.webtv_stations[station]["streamurl"]
 		return((provider, title, streamurl))
 

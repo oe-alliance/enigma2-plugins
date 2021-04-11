@@ -174,7 +174,7 @@ class AC3delay:
                 i = oAudioTracks.getTrackInfo(x)
                 language = i.getLanguage()
                 description = i.getDescription()
-                if LanguageCodes.has_key(language):
+                if language in LanguageCodes:
                     language = LanguageCodes[language][0]
                 if len(description):
                     description += " (" + language + ")"

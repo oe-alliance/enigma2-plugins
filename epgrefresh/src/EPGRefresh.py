@@ -86,7 +86,7 @@ class EPGRefresh:
 
 	def removeFinishNotifier(self, notifier):
 		notifierKey = str(notifier)
-		if self.finishNotifiers.has_key(notifierKey):
+		if notifierKey in self.finishNotifiers:
 			self.finishNotifiers.pop(notifierKey)
 
 	def readConfiguration(self):

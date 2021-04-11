@@ -391,7 +391,7 @@ def sendPartnerBoxWebCommand(url, contextFactory=None, timeout=60, username="roo
 	basicAuth = encodestring(("%s:%s") % (username, password))
 	authHeader = "Basic " + basicAuth.strip()
 	AuthHeaders = {"Authorization": authHeader}
-	if kwargs.has_key("headers"):
+	if "headers" in kwargs:
 		kwargs["headers"].update(AuthHeaders)
 	else:
 		kwargs["headers"] = AuthHeaders

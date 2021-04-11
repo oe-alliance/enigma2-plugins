@@ -167,14 +167,14 @@ class AutoMount():
 		path = os.path.join('/media/net', data['sharename'])
 		if os.path.exists(path):
 			if os.path.ismount(path):
-				if self.automounts.has_key(data['sharename']):
+				if data['sharename'] in self.automounts:
 					self.automounts[data['sharename']]['isMounted'] = True
 					desc = data['sharename']
 					if self.automounts[data['sharename']]['hdd_replacement'] == 'True': #hdd replacement hack
 						self.makeHDDlink(path)
 					harddiskmanager.addMountedPartition(path, desc)
 			else:
-				if self.automounts.has_key(data['sharename']):
+				if data['sharename'] in self.automounts:
 					self.automounts[data['sharename']]['isMounted'] = False
 				if os.path.exists(path):
 					if not os.path.ismount(path):
@@ -225,13 +225,13 @@ class AutoMount():
 		return self.automounts
 
 	def getMountsAttribute(self, mountpoint, attribute):
-		if self.automounts.has_key(mountpoint):
-			if self.automounts[mountpoint].has_key(attribute):
+		if mountpoint in self.automounts:
+			if attribute in self.automounts[mountpoint]:
 				return self.automounts[mountpoint][attribute]
 		return None
 
 	def setMountsAttribute(self, mountpoint, attribute, value):
-		if self.automounts.has_key(mountpoint):
+		if mountpoint in self.automounts:
 			self.automounts[mountpoint][attribute] = value
 
 	def writeMountsConfig(self):

@@ -88,7 +88,7 @@ class MovieLibrary(dict, SortProvider):
         return self.tags
 
     def getCreate(self, location):
-        if not self["db"].has_key(location):
+        if location not in self["db"]:
             #print "new locatio:", location
             item = {}
             item["movies"] = []
@@ -109,7 +109,7 @@ class MovieLibrary(dict, SortProvider):
         item["sort_type"] = sort_type
 
     def getSortType(self, location):
-        if not self["db"].has_key(location):
+        if location not in self["db"]:
             return -1
         return self["db"][location]["sort_type"]
 
@@ -240,14 +240,14 @@ class MovieLibrary(dict, SortProvider):
         for location in dir_list:
             root = os.path.realpath(location) + os.sep
             print "?", root
-            if not self["db"].has_key(root):
+            if root not in self["db"]:
                 l.append(location)
         print "missing locations", l
         return sorted(l)
 
     def getSubDirectories(self, location):
         l = []
-        if not self["db"].has_key(location):
+        if location not in self["db"]:
             return l
         for key, item in self["db"].iteritems():
             if key.startswith(location):
@@ -275,7 +275,7 @@ class MovieLibrary(dict, SortProvider):
 
     def getInfo(self, location):
         location = os.path.realpath(location) + os.sep
-        if not self["db"].has_key(location):
+        if location not in self["db"]:
             return
         movie_cnt = 0
         dir_cnt = -1

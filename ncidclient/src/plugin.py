@@ -168,7 +168,7 @@ def resolveNumberWithAvon(number, countrycode):
 
 	# debug('normNumer: ' + normNumber)
 	for i in reversed(range(min(10, len(number)))):
-		if avon.has_key(normNumber[:i]):
+		if normNumber[:i] in avon:
 			return '[' + avon[normNumber[:i]].strip() + ']'
 	return ""
 
@@ -219,7 +219,7 @@ def initCbC():
 
 
 def stripCbCPrefix(number, countrycode):
-	if number and number[:2] != "00" and cbcInfos.has_key(countrycode):
+	if number and number[:2] != "00" and countrycode in cbcInfos:
 		for cbc in cbcInfos[countrycode]:
 			if len(cbc.getElementsByTagName("length")) < 1 or len(cbc.getElementsByTagName("prefix")) < 1:
 				debug("[NcidClient] stripCbCPrefix: entries for " + countrycode + " %s invalid")
@@ -329,14 +329,14 @@ class NcidClientPhonebook:
 			if number[0] != '0':
 				number = prefix + number
 				# debug("[NcidClientPhonebook] search: added prefix: %s" %number)
-			elif number[:len(prefix)] == prefix and self.phonebook.has_key(number[len(prefix):]):
+			elif number[:len(prefix)] == prefix and number[len(prefix):] in self.phonebook:
 				# debug("[NcidClientPhonebook] search: same prefix")
 				name = self.phonebook[number[len(prefix):]]
 				# debug("[NcidClientPhonebook] search: result: %s" %name)
 		else:
 			prefix = ""
 
-		if not name and self.phonebook.has_key(number):
+		if not name and number in self.phonebook:
 			name = self.phonebook[number]
 
 		return name.replace(", ", "\n").strip()
@@ -1129,7 +1129,7 @@ def autostart(reason, **kwargs):
 	global ncid_call
 
 	# ouch, this is a hack
-	if kwargs.has_key("session"):
+	if "session" in kwargs:
 		global my_global_session
 		my_global_session = kwargs["session"]
 		return
