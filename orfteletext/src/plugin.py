@@ -3,7 +3,7 @@
 #    ORFteletext for Dreambox-Enigma2
 #    Coded by Vali (c)2010
 #
-#  This plugin is licensed under the Creative Commons 
+#  This plugin is licensed under the Creative Commons
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 #  To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/
 #  or send a letter to Creative Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -12,11 +12,10 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 #######################################################################
-
 
 
 from Screens.Screen import Screen
@@ -33,27 +32,23 @@ from os import system as os_system
 from Components.config import config, ConfigSubsection, ConfigText, ConfigInteger
 
 
-
 config.plugins.ORFteletext = ConfigSubsection()
 config.plugins.ORFteletext.startHZ = ConfigInteger(default=100)
 config.plugins.ORFteletext.startNZ = ConfigInteger(default=1)
 config.plugins.ORFteletext.adr = ConfigText(default="ORF")
 
 
-
 def Plugins(**kwargs):
-	return [PluginDescriptor(name="ORF-Teletext", description=_("ORF-Teletext"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),]
-
+	return [PluginDescriptor(name="ORF-Teletext", description=_("ORF-Teletext"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main), ]
 
 
 def main(session, **kwargs):
 	session.open(ORFteletextScreen)
 
 
-
 class ORFteletextScreen(Screen):
 	if (getDesktop(0).size().width()) == 1280:
-		skin="""
+		skin = """
 			<screen flags="wfNoBorder" position="0,0" size="1280,720" title="ORF-Teletext" backgroundColor="#00121214">
 				<widget backgroundColor="#ffffffff" position="30,163" render="Pig" size="700,394" source="session.VideoPicture" zPosition="1"/>
 				<widget name="Picture" position="740,192" size="480,336" zPosition="1"/>
@@ -65,7 +60,7 @@ class ORFteletextScreen(Screen):
 				<eLabel font="Regular;20" foregroundColor="#00879ce1" position="760,650" size="120,26" transparent="1" text="INDEX"/>
 			</screen>"""
 	elif (getDesktop(0).size().width()) == 1024:
-		skin="""
+		skin = """
 			<screen flags="wfNoBorder" position="0,0" size="1024,576" title="ORF-Teletext" backgroundColor="#00121214">
 				<widget backgroundColor="#ffffffff" position="30,156" render="Pig" size="470,264" source="session.VideoPicture" zPosition="1"/>
 				<widget name="Picture" position="504,120" size="480,336" zPosition="1"/>
@@ -77,7 +72,7 @@ class ORFteletextScreen(Screen):
 				<eLabel font="Regular;20" foregroundColor="#00879ce1" position="504,510" size="120,26" transparent="1" text="INDEX"/>
 			</screen>"""
 	else:
-		skin="""
+		skin = """
 			<screen flags="wfNoBorder" position="0,0" size="720,576" title="ORF-Teletext" backgroundColor="#00121214">
 				<widget name="seite" position="250,50" size="200,24" font="Regular;22" transparent="1"/>
 				<widget name="wohin" position="250,75" size="200,24" font="Regular;22" foregroundColor="#ff4a3c" transparent="1"/>
@@ -88,6 +83,7 @@ class ORFteletextScreen(Screen):
 				<eLabel font="Regular;20" foregroundColor="#00ffc000" position="504,480" size="120,26" transparent="1" text="SPORT"/>
 				<eLabel font="Regular;20" foregroundColor="#00879ce1" position="504,510" size="120,26" transparent="1" text="INDEX"/>
 			</screen>"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self["seite"] = Label("100")
@@ -130,7 +126,7 @@ class ORFteletextScreen(Screen):
 		self.onLayoutFinish.append(self.firstStart)
 
 	def firstStart(self):
-		self.lade2(self.seite,self.subseite)
+		self.lade2(self.seite, self.subseite)
 
 	def Show_Picture(self):
 		if self.whatPic is not None:
@@ -159,9 +155,9 @@ class ORFteletextScreen(Screen):
 		if config.plugins.ORFteletext.adr.value == "ORF":
 			adr = "http://teletext.orf.at/" + lz + "00/" + hz + "_000" + nz + ".png"
 		elif config.plugins.ORFteletext.adr.value == "SAT1":
-			adr = "http://www.sat1.at/service/teletext/cache_de/" + hz + "_0" + nz + ".png" 
+			adr = "http://www.sat1.at/service/teletext/cache_de/" + hz + "_0" + nz + ".png"
 		neu = "wget -O /tmp/bild " + adr
-		self["seite"].setText(hz+"-"+nz+" at "+config.plugins.ORFteletext.adr.value)
+		self["seite"].setText(hz + "-" + nz + " at " + config.plugins.ORFteletext.adr.value)
 		os_system(neu)
 		if fileExists("/tmp/bild"):
 			self.whatPic = "/tmp/bild"
@@ -170,30 +166,30 @@ class ORFteletextScreen(Screen):
 		self.Show_Picture()
 
 	def showMe(self):
-		self.lade2(self.seite,self.subseite)
+		self.lade2(self.seite, self.subseite)
 
 	def seitePlus(self):
 		if self.subseite < 9:
 			self.subseite = self.subseite + 1
 		else:
 			self.subseite = 1
-		self.lade2(self.seite,self.subseite)
+		self.lade2(self.seite, self.subseite)
 
 	def seiteMinus(self):
 		if self.subseite > 1:
 			self.subseite = self.subseite - 1
 		else:
 			self.subseite = 1
-		self.lade2(self.seite,self.subseite)
+		self.lade2(self.seite, self.subseite)
 
-	def keyNumberGlobal(self,number):
+	def keyNumberGlobal(self, number):
 		if len(self.strseite) < 3:
 			self.strseite = self.strseite + str(number)
 			self["wohin"].setText(self.strseite)
 		if len(self.strseite) == 3:
 			self.seite = int(self.strseite)
 			self.subseite = 1
-			self.lade2(self.seite,self.subseite)
+			self.lade2(self.seite, self.subseite)
 			self.strseite = ""
 			self["wohin"].setText(self.strseite)
 		if len(self.strseite) > 3:
@@ -206,7 +202,7 @@ class ORFteletextScreen(Screen):
 		else:
 			self.seite = 100
 		self.subseite = 1
-		self.lade2(self.seite,self.subseite)
+		self.lade2(self.seite, self.subseite)
 
 	def zurueck(self):
 		if self.seite > 100:
@@ -214,12 +210,12 @@ class ORFteletextScreen(Screen):
 		else:
 			self.seite = 100
 		self.subseite = 1
-		self.lade2(self.seite,self.subseite)	
+		self.lade2(self.seite, self.subseite)
 
 	def rot(self):
 		self.seite = 111
 		self.subseite = 1
-		self.lade2(self.seite,self.subseite)
+		self.lade2(self.seite, self.subseite)
 
 	def gruen(self):
 		if config.plugins.ORFteletext.adr.value == "ORF":
@@ -227,11 +223,12 @@ class ORFteletextScreen(Screen):
 		elif config.plugins.ORFteletext.adr.value == "SAT1":
 			self.seite = 150
 		self.subseite = 1
-		self.lade2(self.seite,self.subseite)
+		self.lade2(self.seite, self.subseite)
+
 	def gelb(self):
 		self.seite = 200
 		self.subseite = 1
-		self.lade2(self.seite,self.subseite)
+		self.lade2(self.seite, self.subseite)
 
 	def blau(self):
 		if config.plugins.ORFteletext.adr.value == "ORF":
@@ -239,8 +236,7 @@ class ORFteletextScreen(Screen):
 		elif config.plugins.ORFteletext.adr.value == "SAT1":
 			self.seite = 104
 		self.subseite = 1
-		self.lade2(self.seite,self.subseite)
-			
+		self.lade2(self.seite, self.subseite)
 
 	def Info(self):
 		if config.plugins.ORFteletext.adr.value == "ORF":
@@ -252,7 +248,3 @@ class ORFteletextScreen(Screen):
 		self.seite = 100
 		self.subseite = 1
 		self.showMe()
-
-
-
-

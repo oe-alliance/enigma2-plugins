@@ -6,12 +6,14 @@ from twisted.protocols.ftp import FTPClient, FTPFileListProtocol
 from os import SEEK_END
 
 # XXX: did I ever actually test supportPartial?
+
+
 class FTPProgressDownloader(Protocol):
 	"""Download to a file from FTP and keep track of progress."""
 
-	def __init__(self, host, port, path, fileOrName, username = 'anonymous', \
-		password = 'my@email.com', writeProgress = None, passive = True, \
-		supportPartial = False, *args, **kwargs):
+	def __init__(self, host, port, path, fileOrName, username='anonymous',
+		password='my@email.com', writeProgress=None, passive=True,
+		supportPartial=False, *args, **kwargs):
 
 		timeout = 30
 
@@ -23,7 +25,7 @@ class FTPProgressDownloader(Protocol):
 		self.currentlength = 0
 		self.totallength = None
 		if writeProgress and type(writeProgress) is not list:
-			writeProgress = [ writeProgress ]
+			writeProgress = [writeProgress]
 		self.writeProgress = writeProgress
 
 		# Output
@@ -33,7 +35,7 @@ class FTPProgressDownloader(Protocol):
 		else:
 			self.file = fileOrName
 
-		creator = ClientCreator(reactor, FTPClient, username, password, passive = passive)
+		creator = ClientCreator(reactor, FTPClient, username, password, passive=passive)
 
 		creator.connectTCP(host, port, timeout).addCallback(self.controlConnectionMade).addErrback(self.connectionFailed)
 
@@ -52,7 +54,7 @@ class FTPProgressDownloader(Protocol):
 		code, msg = msgs[0].split()
 		if code == '213':
 			self.totallength = int(msg)
-			for cb in self.writeProgress or [ ]:
+			for cb in self.writeProgress or []:
 				cb(0, self.totallength)
 
 			# We know the size, so start fetching
@@ -73,7 +75,7 @@ class FTPProgressDownloader(Protocol):
 			return
 
 		self.totallength = self.filelist.files[0]['size']
-		for cb in self.writeProgress or [ ]:
+		for cb in self.writeProgress or []:
 			cb(0, self.totallength)
 
 		# Invalidate list
@@ -108,7 +110,7 @@ class FTPProgressDownloader(Protocol):
 
 		offset = self.resume and offset or 0
 
-		d = self.ftpclient.retrieveFile(self.path, self, offset = offset)
+		d = self.ftpclient.retrieveFile(self.path, self, offset=offset)
 		d.addCallback(self.ftpFinish).addErrback(self.connectionFailed)
 
 	def dataReceived(self, data):
@@ -130,13 +132,13 @@ class FTPProgressDownloader(Protocol):
 			self.file = None
 			raise ie
 
-	def ftpFinish(self, code = 0, message = None):
+	def ftpFinish(self, code=0, message=None):
 		self.ftpclient.quit()
 		if self.file is not None:
 			self.file.close()
 		self.deferred.callback(code)
 
-	def connectionFailed(self, reason = None):
+	def connectionFailed(self, reason=None):
 		if self.file is not None:
 			self.file.close()
 		self.deferred.errback(reason)

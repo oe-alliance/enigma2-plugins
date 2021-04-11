@@ -16,6 +16,7 @@ from enigma import eTimer
 
 from . import EmissionBandwidth
 
+
 class EmissionDetailview(Screen, HelpableScreen):
 	skin = """<screen name="EmissionDetailview" title="Torrent View" position="75,75" size="565,450">
 		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
@@ -58,7 +59,7 @@ class EmissionDetailview(Screen, HelpableScreen):
 		</widget>
 	</screen>"""
 
-	def __init__(self, session, daemon, torrent, prevFunc = None, nextFunc = None):
+	def __init__(self, session, daemon, torrent, prevFunc=None, nextFunc=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		self.transmission = daemon
@@ -82,7 +83,7 @@ class EmissionDetailview(Screen, HelpableScreen):
 		{
 			"yellow": (self.toggleStatus, _("toggle download status")),
 			"green": (self.bandwidth, _("open bandwidth settings")),
-			"blue": (self.remove , _("remove torrent")),
+			"blue": (self.remove, _("remove torrent")),
 		})
 
 		self["key_red"] = StaticText(_("Close"))
@@ -110,7 +111,7 @@ class EmissionDetailview(Screen, HelpableScreen):
 		self.timer.callback.append(self.updateList)
 		self.timer.start(0, 1)
 
-	def bandwidthCallback(self, ret = None):
+	def bandwidthCallback(self, ret=None):
 		if ret:
 			try:
 				self.transmission.change([self.torrentid], **ret)
@@ -118,8 +119,8 @@ class EmissionDetailview(Screen, HelpableScreen):
 				self.session.open(
 					MessageBox,
 					_("Error communicating with transmission-daemon: %s.") % (te),
-					type = MessageBox.TYPE_ERROR,
-					timeout = 5
+					type=MessageBox.TYPE_ERROR,
+					timeout=5
 				)
 		self.updateList()
 
@@ -134,8 +135,8 @@ class EmissionDetailview(Screen, HelpableScreen):
 			self.session.open(
 				MessageBox,
 				_("Error communicating with transmission-daemon: %s.") % (te),
-				type = MessageBox.TYPE_ERROR,
-				timeout = 5
+				type=MessageBox.TYPE_ERROR,
+				timeout=5
 			)
 			# XXX: this seems silly but cleans the gui and restarts the timer :-)
 			self.updateList()
@@ -181,8 +182,8 @@ class EmissionDetailview(Screen, HelpableScreen):
 			self.session.open(
 				MessageBox,
 				_("Error communicating with transmission-daemon: %s.") % (te),
-				type = MessageBox.TYPE_ERROR,
-				timeout = 5
+				type=MessageBox.TYPE_ERROR,
+				timeout=5
 			)
 
 	def remove(self):
@@ -195,22 +196,22 @@ class EmissionDetailview(Screen, HelpableScreen):
 			(_("yes, including data"), "data")]
 		)
 
-	def removeCallback(self, ret = None):
+	def removeCallback(self, ret=None):
 		if ret:
 			ret = ret[1]
 			try:
 				if ret == "yes":
-					self.transmission.remove([self.torrentid], delete_data = False)
+					self.transmission.remove([self.torrentid], delete_data=False)
 					self.close()
 				elif ret == "data":
-					self.transmission.remove([self.torrentid], delete_data = True)
+					self.transmission.remove([self.torrentid], delete_data=True)
 					self.close()
 			except transmission.TransmissionError as te:
 				self.session.open(
 					MessageBox,
 					_("Error communicating with transmission-daemon: %s.") % (te),
-					type = MessageBox.TYPE_ERROR,
-					timeout = 5
+					type=MessageBox.TYPE_ERROR,
+					timeout=5
 				)
 
 	def updateList(self, *args, **kwargs):
@@ -241,13 +242,13 @@ class EmissionDetailview(Screen, HelpableScreen):
 				progressText = str(torrent.recheckProgress) # XXX: what is this? :D
 			elif status == 'downloading':
 				peerText = _("Downloading from %d of %d peers") % (torrent.peersSendingToUs, torrent.peersConnected)
-				progressText = _("Downloaded %d of %d MB (%d%%)") % (torrent.downloadedEver/1048576, torrent.sizeWhenDone/1048576, torrent.progress)
+				progressText = _("Downloaded %d of %d MB (%d%%)") % (torrent.downloadedEver / 1048576, torrent.sizeWhenDone / 1048576, torrent.progress)
 			elif status == 'seeding':
 				peerText = _("Seeding to %d of %d peers") % (torrent.peersGettingFromUs, torrent.peersConnected)
-				progressText = _("Downloaded %d and uploaded %d MB") % (torrent.downloadedEver/1048576, torrent.uploadedEver/1048576)
+				progressText = _("Downloaded %d and uploaded %d MB") % (torrent.downloadedEver / 1048576, torrent.uploadedEver / 1048576)
 			elif status == 'stopped':
 				peerText = _("stopped")
-				progressText = _("Downloaded %d and uploaded %d MB") % (torrent.downloadedEver/1048576, torrent.uploadedEver/1048576)
+				progressText = _("Downloaded %d and uploaded %d MB") % (torrent.downloadedEver / 1048576, torrent.uploadedEver / 1048576)
 			self["peers"].text = peerText
 			self["progress_text"].text = progressText
 			self["ratio"].text = _("Ratio: %.2f") % (torrent.ratio)
@@ -264,13 +265,13 @@ class EmissionDetailview(Screen, HelpableScreen):
 			for id, x in files.items():
 				completed = x['completed']
 				size = x['size'] or 1 # to avoid division by zero ;-)
-				l.append((id, x['priority'], str(completed/1048576) + " MB", \
-					x['selected'], str(x['name']), str(size/1048576) + " MB", \
-					x['selected'] and _("downloading") or _("skipping"), \
-					int(100*(completed / float(size)))
+				l.append((id, x['priority'], str(completed / 1048576) + " MB",
+					x['selected'], str(x['name']), str(size / 1048576) + " MB",
+					x['selected'] and _("downloading") or _("skipping"),
+					int(100 * (completed / float(size)))
 				))
 
-			index = min(self["files"].index, len(l)-1)
+			index = min(self["files"].index, len(l) - 1)
 			self["files"].setList(l)
 			self["files"].index = index
 		self.timer.startLongTimer(5)
@@ -298,7 +299,7 @@ class EmissionDetailview(Screen, HelpableScreen):
 						self.session.open(
 							MessageBox,
 							_("Unselecting the only file scheduled for download is not possible through RPC."),
-							type = MessageBox.TYPE_ERROR
+							type=MessageBox.TYPE_ERROR
 						)
 						self.updateList()
 						return
@@ -310,12 +311,11 @@ class EmissionDetailview(Screen, HelpableScreen):
 				self.session.open(
 					MessageBox,
 					_("Error communicating with transmission-daemon: %s.") % (te),
-					type = MessageBox.TYPE_ERROR,
-					timeout = 5
+					type=MessageBox.TYPE_ERROR,
+					timeout=5
 				)
 			self.updateList()
 
 	def close(self):
 		self.timer.stop()
 		Screen.close(self)
-

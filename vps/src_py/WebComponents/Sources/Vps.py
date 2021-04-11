@@ -2,6 +2,7 @@ from Plugins.Extensions.WebInterface.WebComponents.Sources.Timer import Timer
 from Plugins.SystemPlugins.vps.Vps import vps_timers
 import time
 
+
 class Vps(Timer):
 	def addTimerByEventID(self, param):
 		state, statetext = Timer.addTimerByEventID(self, param)
@@ -85,12 +86,13 @@ class Vps(Timer):
 		return newlist
 	list = property(getList)
 
+
 # build new lut
 tempLut = Timer.lut.copy()
 maxVal = max(tempLut.values())
-tempLut["vpsplugin_enabled"] = maxVal+1
-tempLut["vpsplugin_overwrite"] = maxVal+2
-tempLut["vpsplugin_time"] = maxVal+3
+tempLut["vpsplugin_enabled"] = maxVal + 1
+tempLut["vpsplugin_overwrite"] = maxVal + 2
+tempLut["vpsplugin_time"] = maxVal + 3
 Vps.lut = tempLut
 
 del tempLut, maxVal

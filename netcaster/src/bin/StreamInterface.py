@@ -2,7 +2,8 @@
 from twisted.internet import reactor
 from twisted.web import client
 
-valid_types = ("MP3","PLS") #list of playable mediatypes
+valid_types = ("MP3", "PLS") #list of playable mediatypes
+
 
 def getPage(url, contextFactory=None, *args, **kwargs):
 	if hasattr(client, '_parse'):
@@ -20,13 +21,14 @@ def getPage(url, contextFactory=None, *args, **kwargs):
 		path = uri.path
 	factory = LimitedHTTPClientFactory(url, *args, **kwargs)
 	if scheme == 'https':
-		from twisted.internet import ssl 
+		from twisted.internet import ssl
 		if contextFactory is None:
 			contextFactory = ssl.ClientContextFactory()
 		reactor.connectSSL(host, port, factory, contextFactory)
 	else:
 		reactor.connectTCP(host, port, factory)
 	return factory.deferred
+
 
 class LimitedHTTPClientFactory(HTTPClientFactory):
 
@@ -61,18 +63,19 @@ class LimitedHTTPClientFactory(HTTPClientFactory):
 			self.waiting = 0
 			self.deferred.callback(self.buf)
 
+
 class StreamInterface:
-    def __init__(self,session,cbListLoaded=None):
+    def __init__(self, session, cbListLoaded=None):
         self.session = session
         self.cbListLoaded = cbListLoaded
 
-        self.list= [] # contains the streams in this iface
+        self.list = [] # contains the streams in this iface
 
     def getList(self):
         #loads a list auf Streams into self.list
         pass
 
-    def getMenuItems(self,selectedStream,generic=False):
+    def getMenuItems(self, selectedStream, generic=False):
         # this return a list of MenuEntries of actions of this iterface
         # list=(("item1",func1),("item2",func2), ... )
         #
@@ -86,23 +89,32 @@ class StreamInterface:
             self.cbListLoaded(self.list)
 
 ###############################################################################
+
+
 class Stream:
     isfavorite = False
-    def __init__(self,name,description,url,type="mp3"):
+
+    def __init__(self, name, description, url, type="mp3"):
         self.name = name
         self.description = description
         self.url = url
-        self.type=type
+        self.type = type
+
     def getName(self):
         return self.name
+
     def getDescription(self):
         return self.description
-    def setName(self,name):
+
+    def setName(self, name):
         self.name = name
-    def setDescription(self,description):
+
+    def setDescription(self, description):
         self.description = description
-    def setURL(self,url):
+
+    def setURL(self, url):
         self.url = url
+
     def getURL(self, callback):
     	self.callback = callback
         if self.type.lower() == "pls":
@@ -111,7 +123,7 @@ class Stream:
             self.callback(self.url)
 
     def getPLSContent(self):
-        print "loading PLS of stream ",self.name,self.url
+        print "loading PLS of stream ", self.name, self.url
     	getPage(self.url).addCallback(self._gotPLSContent).addErrback(self._errorPLSContent)
 
     def _gotPLSContent(self, lines):
@@ -133,12 +145,14 @@ class Stream:
         self.type = "mp3"
         self.callback(self.url)
 
-    def setFavorite(self,TrueFalse):
+    def setFavorite(self, TrueFalse):
         self.isfavorite = TrueFalse
+
     def isFavorite(self):
         return self.isfavorite
-    def setType(self,type):
-        self.type=type
+
+    def setType(self, type):
+        self.type = type
+
     def getType(self):
         return self.type
-

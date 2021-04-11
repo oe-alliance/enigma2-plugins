@@ -70,12 +70,10 @@ from time import strftime as time_strftime
 from time import localtime as time_localtime
 
 
-
 config.plugins.DreamExplorer = ConfigSubsection()
 config.plugins.DreamExplorer.startDir = ConfigText(default="/")
 config.plugins.DreamExplorer.MediaFilter = ConfigText(default="off")
 config.plugins.DreamExplorer.CopyDest = ConfigText(default="/")
-
 
 
 explSession = None
@@ -87,31 +85,28 @@ else:
 	HDSkn = False
 
 
-
 def Plugins(**kwargs):
-	list = [PluginDescriptor(name="Dream-Explorer", description=_("Explore your Dreambox."), where = [PluginDescriptor.WHERE_PLUGINMENU], icon="dreamexplorer.png", fnc=main)]
- 	list.append(PluginDescriptor(name=_("Dream-Explorer"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main))
+	list = [PluginDescriptor(name="Dream-Explorer", description=_("Explore your Dreambox."), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="dreamexplorer.png", fnc=main)]
+ 	list.append(PluginDescriptor(name=_("Dream-Explorer"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main))
 	#list.append(PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART],fnc = autostart))
 	return list
-
 
 
 def main(session, **kwargs):
 	session.open(DreamExplorerII)
 
 
-
 def autostart(reason, **kwargs):
 	if reason == 0:
-		if kwargs.has_key("session"):
+		if "session" in kwargs:
 			global explSession
 			explSession = kwargs["session"]
 			InfoBar.showMovies = showExpl
 
-def showExpl(dummy_self = None):
+
+def showExpl(dummy_self=None):
 	global explSession
 	explSession.open(DreamExplorerII)
-
 
 
 ######## DREAM-EXPLORER START #######################
@@ -170,7 +165,7 @@ class DreamExplorerII(Screen):
 			<eLabel font="Regular;16" halign="left" position="465,425" size="100,25" text="Bookmarks" transparent="1" valign="center" zPosition="6"/>
 			</screen>"""
 
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		self.skin = DreamExplorerII.skin
 		Screen.__init__(self, session)
 
@@ -185,7 +180,7 @@ class DreamExplorerII(Screen):
 		self.sesion = session
 		self.altservice = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.MyBox = HardwareInfo().get_device_name()
-		self.commando = [ "ls" ]
+		self.commando = ["ls"]
 		self.selectedDir = "/tmp/"
 		self.booklines = []
 		self.MediaPattern = "^.*\.(ts|m2ts|mp3|wav|ogg|jpg|jpeg|jpe|png|bmp|mpg|mpeg|mkv|mp4|mov|divx|wmv|avi|mp2|m4a|flac|ifo|vob|iso|sh|flv|3gp|mod)"
@@ -195,11 +190,11 @@ class DreamExplorerII(Screen):
 			StartMeOn = None
 		if (config.plugins.DreamExplorer.MediaFilter.value == "off"):
 			self.MediaFilter = False
-			self["filelist"] = myFileList(StartMeOn, showDirectories = True, showFiles = True, matchingPattern = None, useServiceRef = False)
+			self["filelist"] = myFileList(StartMeOn, showDirectories=True, showFiles=True, matchingPattern=None, useServiceRef=False)
 		else:
 			self.MediaFilter = True
-			self["filelist"] = myFileList(StartMeOn, showDirectories = True, showFiles = True, matchingPattern = self.MediaPattern, useServiceRef = False)
-		self["TEMPfl"] = FileList("/", matchingPattern = "(?i)^.*\.(jpeg|jpg|jpe|png|bmp)")
+			self["filelist"] = myFileList(StartMeOn, showDirectories=True, showFiles=True, matchingPattern=self.MediaPattern, useServiceRef=False)
+		self["TEMPfl"] = FileList("/", matchingPattern="(?i)^.*\.(jpeg|jpg|jpe|png|bmp)")
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "MenuActions", "EPGSelectActions", "InfobarActions"],
 		{
 			"ok": self.ok,
@@ -237,14 +232,14 @@ class DreamExplorerII(Screen):
 					fileRef = eServiceReference("4097:0:0:0:0:0:0:0:0:0:" + filename)
 					self.session.open(MoviePlayer, fileRef)
 				elif (testFileName.endswith(".avi")) or (testFileName.endswith(".mp4")) or (testFileName.endswith(".divx")) or (testFileName.endswith(".wmv")) or (testFileName.endswith(".mov")) or (testFileName.endswith(".flv")) or (testFileName.endswith(".3gp")):
-					if not(self.MyBox=="dm7025"):	
+					if not(self.MyBox == "dm7025"):
 						fileRef = eServiceReference("4097:0:0:0:0:0:0:0:0:0:" + filename)
 						self.session.open(MoviePlayer, fileRef)
 				elif (testFileName.endswith(".mp3")) or (testFileName.endswith(".wav")) or (testFileName.endswith(".ogg")) or (testFileName.endswith(".m4a")) or (testFileName.endswith(".mp2")) or (testFileName.endswith(".flac")):
-					if (self.MyBox=="dm7025") and ((testFileName.endswith(".m4a")) or (testFileName.endswith(".mp2")) or (testFileName.endswith(".flac"))):
+					if (self.MyBox == "dm7025") and ((testFileName.endswith(".m4a")) or (testFileName.endswith(".mp2")) or (testFileName.endswith(".flac"))):
 						return
 					if MMPavaiable:
-						SongList,SongIndex = self.searchMusic()
+						SongList, SongIndex = self.searchMusic()
 						try:
 							self.session.open(MerlinMusicPlayerScreen, SongList, SongIndex, False, self.altservice, None)
 						except:
@@ -254,7 +249,7 @@ class DreamExplorerII(Screen):
 						m_dir = self["filelist"].getCurrentDirectory()
 						self.session.open(MusicExplorer, fileRef, m_dir, testFileName)
 				elif (testFileName.endswith(".jpg")) or (testFileName.endswith(".jpeg")) or (testFileName.endswith(".jpe")) or (testFileName.endswith(".png")) or (testFileName.endswith(".bmp")):
-					if self["filelist"].getSelectionIndex()!=0:
+					if self["filelist"].getSelectionIndex() != 0:
 						Pdir = self["filelist"].getCurrentDirectory()
 						self.session.open(PictureExplorerII, filename, Pdir)
 				elif (testFileName.endswith(".mvi")):
@@ -268,39 +263,39 @@ class DreamExplorerII(Screen):
 					if DVDPlayerAviable:
 						self.session.open(DVDPlayer, dvd_filelist=[filename])
 				elif testFileName.endswith(".bootlogo.tar.gz"):
-					self.commando = ["mount -rw /boot -o remount", "sleep 3","tar -xzvf " + filename + " -C /", "mount -ro /boot -o remount"]
-					askList = [(_("Cancel"), "NO"),(_("Install new bootlogo..."), "YES2ALL")]
-					dei = self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("Bootlogo-package:\\n"+filename), list=askList)
+					self.commando = ["mount -rw /boot -o remount", "sleep 3", "tar -xzvf " + filename + " -C /", "mount -ro /boot -o remount"]
+					askList = [(_("Cancel"), "NO"), (_("Install new bootlogo..."), "YES2ALL")]
+					dei = self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("Bootlogo-package:\\n" + filename), list=askList)
 					dei.setTitle(_("Dream-Explorer : Install..."))
 				elif testFileName.endswith(".tar.gz"):
-					self.commando = [ "tar -xzvf " + filename + " -C /" ]
-					askList = [(_("Cancel"), "NO"),(_("Install this package"), "YES")]
-					dei = self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("GZ-package:\\n"+filename), list=askList)
+					self.commando = ["tar -xzvf " + filename + " -C /"]
+					askList = [(_("Cancel"), "NO"), (_("Install this package"), "YES")]
+					dei = self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("GZ-package:\\n" + filename), list=askList)
 					dei.setTitle(_("Dream-Explorer : Install..."))
 				elif testFileName.endswith(".tar.bz2"):
-					self.commando = [ "tar -xjvf " + filename + " -C /" ]
-					askList = [(_("Cancel"), "NO"),(_("Install this package"), "YES")]
-					dei = self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("BZ2-package:\\n"+filename), list=askList)
+					self.commando = ["tar -xjvf " + filename + " -C /"]
+					askList = [(_("Cancel"), "NO"), (_("Install this package"), "YES")]
+					dei = self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("BZ2-package:\\n" + filename), list=askList)
 					dei.setTitle(_("Dream-Explorer : Install..."))
 				elif testFileName.endswith(".ipk"):
 					if fileExists("/usr/bin/opkg"):
-						self.commando = [ "opkg install " + filename ]
+						self.commando = ["opkg install " + filename]
 					else:
-						self.commando = [ "ipkg install " + filename ]
-					askList = [(_("Cancel"), "NO"),(_("Install this package"), "YES")]
-					dei = self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("IPKG-package:\\n"+filename), list=askList)
+						self.commando = ["ipkg install " + filename]
+					askList = [(_("Cancel"), "NO"), (_("Install this package"), "YES")]
+					dei = self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("IPKG-package:\\n" + filename), list=askList)
 					dei.setTitle(_("Dream-Explorer : Install..."))
 				elif testFileName.endswith(".pyc") or testFileName.endswith(".pyo"):
-					self.commando = [ "/usr/lib/enigma2/python/Plugins/Extensions/DreamExplorer/pyc2xml " + filename ]
-					askList = [(_("Cancel"), "NO"),(_("Disassemble to bytecode..."), "YES")]
-					dei = self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("Pyc-Script:\\n"+filename), list=askList)
+					self.commando = ["/usr/lib/enigma2/python/Plugins/Extensions/DreamExplorer/pyc2xml " + filename]
+					askList = [(_("Cancel"), "NO"), (_("Disassemble to bytecode..."), "YES")]
+					dei = self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("Pyc-Script:\\n" + filename), list=askList)
 					dei.setTitle(_("Dream-Explorer : Disassemble..."))
 				elif testFileName.endswith(".sh"):
-					self.commando = [ filename ]
-					askList = [(_("Cancel"), "NO"),(_("View this shell-script"), "VIEW"),(_("Start execution"), "YES")]
-					self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("Do you want to execute?\\n"+filename), list=askList)
+					self.commando = [filename]
+					askList = [(_("Cancel"), "NO"), (_("View this shell-script"), "VIEW"), (_("Start execution"), "YES")]
+					self.session.openWithCallback(self.SysExecution, ChoiceBox, title=_("Do you want to execute?\\n" + filename), list=askList)
 				else:
-					xfile=os_stat(filename)
+					xfile = os_stat(filename)
 					if (xfile.st_size < 61440):
 						self.session.open(vEditor, filename)
 
@@ -322,17 +317,17 @@ class DreamExplorerII(Screen):
 			if self.MediaFilter:
 				self.setTitle(_("[Media files] " + self["filelist"].getCurrentDirectory()))
 			else:
-				self.setTitle(_("[All files] " + self["filelist"].getCurrentDirectory()))	
+				self.setTitle(_("[All files] " + self["filelist"].getCurrentDirectory()))
 		except:
 			self.setTitle(_("Dream-Explorer"))
 
 	def explContextMenu(self):
 		if self.MediaFilter:
-			mftext="Disable"
+			mftext = "Disable"
 		else:
-			mftext="Enable"
+			mftext = "Enable"
 		if self["filelist"].canDescent():
-			if self["filelist"].getSelectionIndex()!=0:
+			if self["filelist"].getSelectionIndex() != 0:
 				self.selectedDir = self["filelist"].getSelection()[0]
 				if self.selectedDir + "\n" in self.booklines:
 					BMtext = "Remove directory from Bookmarks"
@@ -379,13 +374,13 @@ class DreamExplorerII(Screen):
 		global PicPlayerAviable
 		answer = answer and answer[1]
 		if answer == "YES":
-			self.session.open(Console, cmdlist = [ self.commando[0] ])
+			self.session.open(Console, cmdlist=[self.commando[0]])
 		elif answer == "YES2ALL":
-			self.session.open(Console, cmdlist = self.commando)
+			self.session.open(Console, cmdlist=self.commando)
 		elif answer == "PACKLOGOS":
-			self.session.open(Console, cmdlist = ["cd /tmp/", "tar -czf /tmp/dreambox.bootlogo.tar.gz /usr/share/bootlogo.mvi /usr/share/bootlogo_wait.mvi /usr/share/backdrop.mvi /boot/bootlogo.jpg"])
+			self.session.open(Console, cmdlist=["cd /tmp/", "tar -czf /tmp/dreambox.bootlogo.tar.gz /usr/share/bootlogo.mvi /usr/share/bootlogo_wait.mvi /usr/share/backdrop.mvi /boot/bootlogo.jpg"])
 		elif answer == "VIEW":
-			yfile=os_stat(self.commando[0])
+			yfile = os_stat(self.commando[0])
 			if (yfile.st_size < 61440):
 				self.session.open(vEditor, self.commando[0])
 		elif answer == "PLAYDIRPICTURE":
@@ -402,13 +397,13 @@ class DreamExplorerII(Screen):
 				dei = self.session.open(MessageBox, _("Error by writing bookmarks !!!"), MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 			if newbooklist is not None:
-				self.booklines.append(self.selectedDir+"\n")
+				self.booklines.append(self.selectedDir + "\n")
 				for one_line in self.booklines:
 					newbooklist.write(one_line)
 				newbooklist.close()
 		elif answer == "DELLINK":
 			temp_book = []
-			for bidx in range(len(self.booklines)-1):
+			for bidx in range(len(self.booklines) - 1):
 				if not(self.selectedDir in self.booklines[bidx]):
 					temp_book.append(self.booklines[bidx])
 			self.booklines = []
@@ -424,14 +419,14 @@ class DreamExplorerII(Screen):
 				newbooklist.close()
 		elif answer == "FILTER":
 			if self.MediaFilter:
-				self.MediaFilter=False
+				self.MediaFilter = False
 				config.plugins.DreamExplorer.MediaFilter.value = "off"
 				config.plugins.DreamExplorer.MediaFilter.save()
 				self["filelist"].matchingPattern = None
 				self["filelist"].refresh()
 				self.updateLocationInfo()
 			else:
-				self.MediaFilter=True
+				self.MediaFilter = True
 				config.plugins.DreamExplorer.MediaFilter.value = "on"
 				config.plugins.DreamExplorer.MediaFilter.save()
 				self["filelist"].matchingPattern = self.MediaPattern
@@ -443,7 +438,7 @@ class DreamExplorerII(Screen):
 			self.session.openWithCallback(self.callbackNewDir, vInputBox, title=_(self["filelist"].getCurrentDirectory()), windowTitle=_("Create new directory in..."), text="name")
 		elif answer == "SETSTARTDIR":
 			newStartDir = self["filelist"].getSelection()[0]
-			dei = self.session.openWithCallback(self.callbackSetStartDir,MessageBox,_("Do you want to set\n"+newStartDir+"\nas start directory?"), MessageBox.TYPE_YESNO)
+			dei = self.session.openWithCallback(self.callbackSetStartDir, MessageBox, _("Do you want to set\n" + newStartDir + "\nas start directory?"), MessageBox.TYPE_YESNO)
 			dei.setTitle(_("Dream-Explorer..."))
 		elif answer == "SORTNAME":
 			list = self.sortName()
@@ -479,21 +474,21 @@ class DreamExplorerII(Screen):
 
 	def Humanizer(self, size):
 		if (size < 1024):
-			humansize = str(size)+" B"
+			humansize = str(size) + " B"
 		elif (size < 1048576):
-			humansize = str(size/1024)+" KB"
+			humansize = str(size / 1024) + " KB"
 		else:
-			humansize = str(size/1048576)+" MB"
+			humansize = str(size / 1048576) + " MB"
 		return humansize
 
 	def Info(self):
 		if self["filelist"].canDescent():
-			if self["filelist"].getSelectionIndex()!=0:
+			if self["filelist"].getSelectionIndex() != 0:
 				curSelDir = self["filelist"].getSelection()[0]
 				dir_stats = os_stat(curSelDir)
-				dir_infos = "size "+str(self.Humanizer(dir_stats.st_size))+"    "
-				dir_infos = dir_infos+"last-mod "+time_strftime("%d.%m.%Y %H:%M:%S",time_localtime(dir_stats.st_mtime))+"    "
-				dir_infos = dir_infos+"mode "+str(dir_stats.st_mode)
+				dir_infos = "size " + str(self.Humanizer(dir_stats.st_size)) + "    "
+				dir_infos = dir_infos + "last-mod " + time_strftime("%d.%m.%Y %H:%M:%S", time_localtime(dir_stats.st_mtime)) + "    "
+				dir_infos = dir_infos + "mode " + str(dir_stats.st_mode)
 				self.setTitle(_(dir_infos))
 			else:
 				dei = self.session.open(MessageBox, _("Dreambox: " + self.MyBox + "\n\n" + ScanSysem_str()), MessageBox.TYPE_INFO)
@@ -501,9 +496,9 @@ class DreamExplorerII(Screen):
 		else:
 			curSelFile = self["filelist"].getCurrentDirectory() + self["filelist"].getFilename()
 			file_stats = os_stat(curSelFile)
-			file_infos = "size "+str(self.Humanizer(file_stats.st_size))+"    "
-			file_infos = file_infos+"last-mod "+time_strftime("%d.%m.%Y %H:%M:%S",time_localtime(file_stats.st_mtime))+"    "
-			file_infos = file_infos+"mode "+str(file_stats.st_mode)
+			file_infos = "size " + str(self.Humanizer(file_stats.st_size)) + "    "
+			file_infos = file_infos + "last-mod " + time_strftime("%d.%m.%Y %H:%M:%S", time_localtime(file_stats.st_mtime)) + "    "
+			file_infos = file_infos + "mode " + str(file_stats.st_mode)
 			self.setTitle(_(file_infos))
 			if curSelFile.endswith(".ts"):
 				serviceref = eServiceReference("1:0:0:0:0:0:0:0:0:0:" + curSelFile)
@@ -531,16 +526,16 @@ class DreamExplorerII(Screen):
 
 	def ExecDelete(self):
 		if self.MediaFilter:
-			dei = self.session.open(MessageBox,_('Turn off the media-filter first.'), MessageBox.TYPE_INFO)
+			dei = self.session.open(MessageBox, _('Turn off the media-filter first.'), MessageBox.TYPE_INFO)
 			dei.setTitle(_("Dream-Explorer..."))
 			return
 		if not(self["filelist"].canDescent()):
 			DELfilename = self["filelist"].getCurrentDirectory() + self["filelist"].getFilename()
-			dei = self.session.openWithCallback(self.callbackExecDelete,MessageBox,_("Do you realy want to DELETE:\n"+DELfilename), MessageBox.TYPE_YESNO)
+			dei = self.session.openWithCallback(self.callbackExecDelete, MessageBox, _("Do you realy want to DELETE:\n" + DELfilename), MessageBox.TYPE_YESNO)
 			dei.setTitle(_("Dream-Explorer - DELETE file..."))
-		elif (self["filelist"].getSelectionIndex()!=0) and (self["filelist"].canDescent()):
+		elif (self["filelist"].getSelectionIndex() != 0) and (self["filelist"].canDescent()):
 			DELDIR = self["filelist"].getSelection()[0]
-			dei = self.session.openWithCallback(self.callbackDelDir,MessageBox,_("Do you realy want to DELETE:\n"+DELDIR+'\n\nYou do it at your own risk!'), MessageBox.TYPE_YESNO)
+			dei = self.session.openWithCallback(self.callbackDelDir, MessageBox, _("Do you realy want to DELETE:\n" + DELDIR + '\n\nYou do it at your own risk!'), MessageBox.TYPE_YESNO)
 			dei.setTitle(_("Dream-Explorer - DELETE DIRECTORY..."))
 
 	def callbackExecDelete(self, answer):
@@ -551,7 +546,7 @@ class DreamExplorerII(Screen):
 				os_system(order)
 				self["filelist"].refresh()
 			except:
-				dei = self.session.open(MessageBox,_("%s \nFAILED!" % order), MessageBox.TYPE_ERROR)
+				dei = self.session.open(MessageBox, _("%s \nFAILED!" % order), MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 				self["filelist"].refresh()
 
@@ -563,21 +558,21 @@ class DreamExplorerII(Screen):
 				os_system(order)
 				self["filelist"].refresh()
 			except:
-				dei = self.session.open(MessageBox,_("%s \nFAILED!" % order), MessageBox.TYPE_ERROR)
+				dei = self.session.open(MessageBox, _("%s \nFAILED!" % order), MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 				self["filelist"].refresh()
 
 	def ExecRename(self):
 		if self.MediaFilter:
-			dei = self.session.open(MessageBox,_('Turn off the media-filter first.'), MessageBox.TYPE_INFO)
+			dei = self.session.open(MessageBox, _('Turn off the media-filter first.'), MessageBox.TYPE_INFO)
 			dei.setTitle(_("Dream-Explorer..."))
 			return
 		if not(self["filelist"].canDescent()):
 			RENfilename = self["filelist"].getFilename()
-			self.session.openWithCallback(self.callbackExecRename, vInputBox, title=_("old:  "+RENfilename), windowTitle=_("Rename file..."), text=RENfilename)
-		elif (self["filelist"].getSelectionIndex()!=0) and (self["filelist"].canDescent()):
+			self.session.openWithCallback(self.callbackExecRename, vInputBox, title=_("old:  " + RENfilename), windowTitle=_("Rename file..."), text=RENfilename)
+		elif (self["filelist"].getSelectionIndex() != 0) and (self["filelist"].canDescent()):
 			RENDIR = self["filelist"].getSelection()[0]
-			self.session.openWithCallback(self.callbackRenDir, vInputBox, title=_("old:  "+RENDIR), windowTitle=_("Rename directory..."), text=RENDIR)
+			self.session.openWithCallback(self.callbackRenDir, vInputBox, title=_("old:  " + RENDIR), windowTitle=_("Rename directory..."), text=RENDIR)
 
 	def callbackExecRename(self, answer):
 		if answer is not None:
@@ -587,7 +582,7 @@ class DreamExplorerII(Screen):
 				os_rename(source, dest)
 				self["filelist"].refresh()
 			except:
-				dei = self.session.open(MessageBox,_("Rename: %s \nFAILED!" % answer), MessageBox.TYPE_ERROR)
+				dei = self.session.open(MessageBox, _("Rename: %s \nFAILED!" % answer), MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 				self["filelist"].refresh()
 
@@ -599,7 +594,7 @@ class DreamExplorerII(Screen):
 				os_rename(source, dest)
 				self["filelist"].refresh()
 			except:
-				dei = self.session.open(MessageBox,_("Rename: %s \nFAILED!" % answer), MessageBox.TYPE_ERROR)
+				dei = self.session.open(MessageBox, _("Rename: %s \nFAILED!" % answer), MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 				self["filelist"].refresh()
 
@@ -607,8 +602,8 @@ class DreamExplorerII(Screen):
 		if answer is None:
 			return
 		dest = self["filelist"].getCurrentDirectory()
-		if (" " in answer) or (" " in dest) or (answer==""):
-			dei = self.session.open(MessageBox,_("File name error !"), MessageBox.TYPE_ERROR)
+		if (" " in answer) or (" " in dest) or (answer == ""):
+			dei = self.session.open(MessageBox, _("File name error !"), MessageBox.TYPE_ERROR)
 			dei.setTitle(_("Dream-Explorer"))
 			return
 		else:
@@ -618,7 +613,7 @@ class DreamExplorerII(Screen):
 					os_system(order)
 				self["filelist"].refresh()
 			except:
-				dei = self.session.open(MessageBox,_("%s \nFAILED!" % order), MessageBox.TYPE_ERROR)
+				dei = self.session.open(MessageBox, _("%s \nFAILED!" % order), MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 				self["filelist"].refresh()
 
@@ -626,8 +621,8 @@ class DreamExplorerII(Screen):
 		if answer is None:
 			return
 		dest = self["filelist"].getCurrentDirectory()
-		if (" " in answer) or (" " in dest) or (answer==""):
-			dei = self.session.open(MessageBox,_("Directory name error !"), MessageBox.TYPE_ERROR)
+		if (" " in answer) or (" " in dest) or (answer == ""):
+			dei = self.session.open(MessageBox, _("Directory name error !"), MessageBox.TYPE_ERROR)
 			dei.setTitle(_("Dream-Explorer"))
 			return
 		else:
@@ -637,19 +632,19 @@ class DreamExplorerII(Screen):
 					os_mkdir(order)
 				self["filelist"].refresh()
 			except:
-				dei = self.session.open(MessageBox,_("%s \nFAILED!" % order), MessageBox.TYPE_ERROR)
+				dei = self.session.open(MessageBox, _("%s \nFAILED!" % order), MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 				self["filelist"].refresh()
 
 	def go2CPmaniger(self):
 		if self.MediaFilter:
-			dei = self.session.open(MessageBox,_('Turn off the media-filter first.'), MessageBox.TYPE_INFO)
+			dei = self.session.open(MessageBox, _('Turn off the media-filter first.'), MessageBox.TYPE_INFO)
 			dei.setTitle(_("Dream-Explorer..."))
 			return
 		if not(self["filelist"].canDescent()):
 			source = self["filelist"].getCurrentDirectory() + self["filelist"].getFilename()
 			self.session.openWithCallback(self.callbackCPmaniger, CPmaniger, source)
-		elif (self["filelist"].getSelectionIndex()!=0) and (self["filelist"].canDescent()): #NEW
+		elif (self["filelist"].getSelectionIndex() != 0) and (self["filelist"].canDescent()): #NEW
 			source = self["filelist"].getSelection()[0]
 			self.session.openWithCallback(self.callbackCPmaniger, CPmaniger, source)
 
@@ -667,7 +662,7 @@ class DreamExplorerII(Screen):
 			if self.MediaFilter:
 				self.setTitle(_("[sort by Name] " + self["filelist"].getCurrentDirectory()))
 			else:
-				self.setTitle(_("[sort by Name] " + self["filelist"].getCurrentDirectory()))	
+				self.setTitle(_("[sort by Name] " + self["filelist"].getCurrentDirectory()))
 		except:
 			self.setTitle(_("Dream-Explorer"))
 
@@ -677,7 +672,7 @@ class DreamExplorerII(Screen):
 			if self.MediaFilter:
 				self.setTitle(_("[sort by Date] " + self["filelist"].getCurrentDirectory()))
 			else:
-				self.setTitle(_("[sort by Date] " + self["filelist"].getCurrentDirectory()))	
+				self.setTitle(_("[sort by Date] " + self["filelist"].getCurrentDirectory()))
 		except:
 			self.setTitle(_("Dream-Explorer"))
 
@@ -690,11 +685,11 @@ class DreamExplorerII(Screen):
 		for name in files:
 			testname = name.lower()
 			if testname.endswith(".mp3") or name.endswith(".m4a") or name.endswith(".ogg") or name.endswith(".flac"):
-				slist.append((Item(text = name, filename = os_path.join(self["filelist"].getCurrentDirectory(),name)),))
+				slist.append((Item(text=name, filename=os_path.join(self["filelist"].getCurrentDirectory(), name)),))
 				if self["filelist"].getFilename() == name:
 					foundIndex = index
 				index = index + 1
-		return slist,foundIndex
+		return slist, foundIndex
 
 	def explExit(self):
 		self.session.nav.playService(self.altservice)
@@ -719,8 +714,7 @@ class DreamExplorerII(Screen):
 			pass
 		self.close()
 
-######## DREAM-EXPLORER END ####################### 
-
+######## DREAM-EXPLORER END #######################
 
 
 class vEditor(Screen):
@@ -764,7 +758,7 @@ class vEditor(Screen):
 			warningtext = "\nhave been CHANGED! Do you want to save it?\n\nWARNING!"
 			warningtext = warningtext + "\n\nThe Editor-Funktions are beta (not full tested) !!!"
 			warningtext = warningtext + "\nThe author are NOT RESPONSIBLE\nfor DATA LOST OR DISORDERS !!!"
-			dei = self.session.openWithCallback(self.SaveFile, MessageBox,_(self.file_name+warningtext), MessageBox.TYPE_YESNO)
+			dei = self.session.openWithCallback(self.SaveFile, MessageBox, _(self.file_name + warningtext), MessageBox.TYPE_YESNO)
 			dei.setTitle(_("Dream-Explorer..."))
 		else:
 			self.close()
@@ -784,7 +778,7 @@ class vEditor(Screen):
 			self.selLine = self["filedata"].getSelectionIndex()
 			self.oldLine = self.list[self.selLine]
 			editableText = self.list[self.selLine][:-1]
-			self.session.openWithCallback(self.callbackEditLine, vInputBox, title=_("old:  "+self.list[self.selLine]), windowTitle=_("Edit line "+str(self.selLine+1)), text=editableText)
+			self.session.openWithCallback(self.callbackEditLine, vInputBox, title=_("old:  " + self.list[self.selLine]), windowTitle=_("Edit line " + str(self.selLine + 1)), text=editableText)
 		except:
 			dei = self.session.open(MessageBox, _("This line is not editable!"), MessageBox.TYPE_ERROR)
 			dei.setTitle(_("Error..."))
@@ -795,7 +789,7 @@ class vEditor(Screen):
 				if x == self.oldLine:
 					self.isChanged = True
 					self.list.remove(x)
-					self.list.insert(self.selLine, newline+'\n')
+					self.list.insert(self.selLine, newline + '\n')
 		self.selLine = None
 		self.oldLine = None
 
@@ -813,11 +807,11 @@ class vEditor(Screen):
 			self.close()
 
 
-
 class MviExplorer(Screen):
 	skin = """
 		<screen position="-300,-300" size="10,10" title="mvi-Explorer">
 		</screen>"""
+
 	def __init__(self, session, file):
 		self.skin = MviExplorer.skin
 		Screen.__init__(self, session)
@@ -828,16 +822,16 @@ class MviExplorer(Screen):
 			"back": self.close
 		}, -1)
 		self.onLayoutFinish.append(self.showMvi)
+
 	def showMvi(self):
 		os_system("/usr/bin/showiframe " + self.file_name)
-
 
 
 class PictureExplorerII(Screen):
 	global HDSkn
 	if HDSkn:
 		if (getDesktop(0).size().width()) > 1030:
-			skin="""
+			skin = """
 				<screen flags="wfNoBorder" position="0,0" size="1280,720" title="Picture-Explorer" backgroundColor="#00121214">
 					<widget name="Picture" position="0,0" size="1280,720" zPosition="1" alphatest="on" />
 					<widget name="State" font="Regular;20" halign="center" position="0,650" size="1280,70" backgroundColor="#01080911" foregroundColor="#fcc000" transparent="0" zPosition="9"/>
@@ -849,13 +843,13 @@ class PictureExplorerII(Screen):
 					<widget name="State" font="Regular;20" halign="center" position="0,506" size="1024,70" backgroundColor="#01080911" foregroundColor="#fcc000" transparent="0" zPosition="9"/>
 				</screen>"""
 	else:
-		skin="""
+		skin = """
 			<screen flags="wfNoBorder" position="0,0" size="720,576" title="Picture-Explorer" backgroundColor="#00121214">
 				<widget name="Picture" position="0,0" size="720,576" zPosition="1" alphatest="on" />
 				<widget name="State" font="Regular;20" halign="center" position="0,506" size="720,70" backgroundColor="#01080911" foregroundColor="#fcc000" transparent="0" zPosition="9"/>
 			</screen>"""
 
-	def __init__(self, session, whatPic = None, whatDir = None):
+	def __init__(self, session, whatPic=None, whatDir=None):
 		self.skin = PictureExplorerII.skin
 		Screen.__init__(self, session)
 		self.session = session
@@ -866,7 +860,7 @@ class PictureExplorerII(Screen):
 		self.EXscale = (AVSwitch().getFramebufferScale())
 		self.EXpicload = ePicLoad()
 		self["Picture"] = Pixmap()
-		self["State"] = Label(_('loading... '+self.whatPic))
+		self["State"] = Label(_('loading... ' + self.whatPic))
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions"],
 		{
 			"ok": self.info,
@@ -885,7 +879,7 @@ class PictureExplorerII(Screen):
 			self.EXpicload.startDecode(self.whatPic)
 		if self.whatDir is not None:
 			pidx = 0
-			for root, dirs, files in os_walk(self.whatDir ):
+			for root, dirs, files in os_walk(self.whatDir):
 				for name in files:
 					if name.endswith(".jpg") or name.endswith(".jpeg") or name.endswith(".Jpg") or name.endswith(".Jpeg") or name.endswith(".JPG") or name.endswith(".JPEG"):
 						self.picList.append(name)
@@ -902,30 +896,30 @@ class PictureExplorerII(Screen):
 			self["Picture"].instance.setPixmap(ptr)
 
 	def Pright(self):
-		if len(self.picList)>2:
-			if self.Pindex<(len(self.picList)-1):
+		if len(self.picList) > 2:
+			if self.Pindex < (len(self.picList) - 1):
 				self.Pindex = self.Pindex + 1
 				self.whatPic = self.whatDir + str(self.picList[self.Pindex])
 				self["State"].visible = True
-				self["State"].setText(_('loading... '+self.whatPic))
+				self["State"].setText(_('loading... ' + self.whatPic))
 				self.EXpicload.startDecode(self.whatPic)
 			else:
 				self["State"].setText(_("wait..."))
 				self["State"].visible = False
-				self.session.open(MessageBox,_('No more picture-files.'), MessageBox.TYPE_INFO)
+				self.session.open(MessageBox, _('No more picture-files.'), MessageBox.TYPE_INFO)
 
 	def Pleft(self):
-		if len(self.picList)>2:
-			if self.Pindex>0:
+		if len(self.picList) > 2:
+			if self.Pindex > 0:
 				self.Pindex = self.Pindex - 1
 				self.whatPic = self.whatDir + str(self.picList[self.Pindex])
 				self["State"].visible = True
-				self["State"].setText(_('loading... '+self.whatPic))
+				self["State"].setText(_('loading... ' + self.whatPic))
 				self.EXpicload.startDecode(self.whatPic)
 			else:
 				self["State"].setText(_("wait..."))
 				self["State"].visible = False
-				self.session.open(MessageBox,_('No more picture-files.'), MessageBox.TYPE_INFO)
+				self.session.open(MessageBox, _('No more picture-files.'), MessageBox.TYPE_INFO)
 
 	def info(self):
 		if self["State"].visible:
@@ -934,7 +928,6 @@ class PictureExplorerII(Screen):
 		else:
 			self["State"].visible = True
 			self["State"].setText(_(self.whatPic))
-
 
 
 class MoviePlayer(MP_parent):
@@ -953,7 +946,7 @@ class MoviePlayer(MP_parent):
 	def doEofInternal(self, playing):
 		if not self.execing:
 			return
-		if not playing :
+		if not playing:
 			return
 		self.leavePlayer()
 
@@ -969,7 +962,6 @@ class MoviePlayer(MP_parent):
 			self.session.nav.playService(self.lastservice)
 
 
-
 class MusicExplorer(MoviePlayer):
 	skin = """
 	<screen backgroundColor="#50070810" flags="wfNoBorder" name="MusicExplorer" position="center,center" size="720,30">
@@ -980,6 +972,7 @@ class MusicExplorer(MoviePlayer):
 			<convert type="ServiceName">Name</convert>
 		</widget>
 	</screen>"""
+
 	def __init__(self, session, service, MusicDir, theFile):
 		self.session = session
 		MoviePlayer.__init__(self, session, service)
@@ -996,7 +989,7 @@ class MusicExplorer(MoviePlayer):
 
 	def searchMusic(self):
 		midx = 0
-		for root, dirs, files in os_walk(self.MusicDir ):
+		for root, dirs, files in os_walk(self.MusicDir):
 			for name in files:
 				name = name.lower()
 				if name.endswith(".mp3") or name.endswith(".mp2") or name.endswith(".ogg") or name.endswith(".wav") or name.endswith(".flac") or name.endswith(".m4a"):
@@ -1006,42 +999,41 @@ class MusicExplorer(MoviePlayer):
 					midx = midx + 1
 
 	def seekFwd(self):
-		if len(self.musicList)>2:
-			if self.Mindex<(len(self.musicList)-1):
+		if len(self.musicList) > 2:
+			if self.Mindex < (len(self.musicList) - 1):
 				self.Mindex = self.Mindex + 1
 				nextfile = self.MusicDir + str(self.musicList[self.Mindex])
 				nextRef = eServiceReference("4097:0:0:0:0:0:0:0:0:0:" + nextfile)
 				self.session.nav.playService(nextRef)
 			else:
-				self.session.open(MessageBox,_('No more playable files.'), MessageBox.TYPE_INFO)
+				self.session.open(MessageBox, _('No more playable files.'), MessageBox.TYPE_INFO)
 
 	def seekBack(self):
-		if len(self.musicList)>2:
-			if self.Mindex>0:
+		if len(self.musicList) > 2:
+			if self.Mindex > 0:
 				self.Mindex = self.Mindex - 1
 				nextfile = self.MusicDir + str(self.musicList[self.Mindex])
 				nextRef = eServiceReference("4097:0:0:0:0:0:0:0:0:0:" + nextfile)
 				self.session.nav.playService(nextRef)
 			else:
-				self.session.open(MessageBox,_('No more playable files.'), MessageBox.TYPE_INFO)
+				self.session.open(MessageBox, _('No more playable files.'), MessageBox.TYPE_INFO)
 
 	def doEofInternal(self, playing):
 		if not self.execing:
 			return
-		if not playing :
+		if not playing:
 			return
 		self.seekFwd()
-
 
 
 def ScanSysem_str():
 	try:
 		ret = ""
 		out_line = os_popen("uptime").readline()
-		ret = ret  + "at" + out_line + "\n"
+		ret = ret + "at" + out_line + "\n"
 		out_lines = []
 		out_lines = os_popen("cat /proc/meminfo").readlines()
-		for lidx in range(len(out_lines)-1):
+		for lidx in range(len(out_lines) - 1):
 			tstLine = out_lines[lidx].split()
 			if "MemTotal:" in tstLine:
 				ret = ret + out_lines[lidx]
@@ -1049,7 +1041,7 @@ def ScanSysem_str():
 				ret = ret + out_lines[lidx] + "\n"
 		out_lines = []
 		out_lines = os_popen("cat /proc/stat").readlines()
-		for lidx in range(len(out_lines)-1):
+		for lidx in range(len(out_lines) - 1):
 			tstLine = out_lines[lidx].split()
 			if "procs_running" in tstLine:
 				ret = ret + "Running processes: " + tstLine[1]
@@ -1058,16 +1050,15 @@ def ScanSysem_str():
 		return "N/A"
 
 
-
 class vInputBox(InputBox):
-	vibnewx = str(getDesktop(0).size().width()-80)
-	sknew = '<screen name="vInputBox" position="center,center" size="'+vibnewx+',70" title="Input...">\n'
+	vibnewx = str(getDesktop(0).size().width() - 80)
+	sknew = '<screen name="vInputBox" position="center,center" size="' + vibnewx + ',70" title="Input...">\n'
 	sknew = sknew + '<widget name="text" position="5,5" size="1270,25" font="Regular;15"/>\n<widget name="input" position="0,40" size="'
 	sknew = sknew + vibnewx + ',30" font="Regular;20"/>\n</screen>'
 	skin = sknew
-	def __init__(self, session, title = "", windowTitle = _("Input"), useableChars = None, **kwargs):
-		InputBox.__init__(self, session, title, windowTitle, useableChars, **kwargs)
 
+	def __init__(self, session, title="", windowTitle=_("Input"), useableChars=None, **kwargs):
+		InputBox.__init__(self, session, title, windowTitle, useableChars, **kwargs)
 
 
 class CPmaniger(Screen):
@@ -1107,7 +1098,7 @@ class CPmaniger(Screen):
 				<eLabel font="Regular;18" halign="left" position="345,425" size="120,25" text="COPY" transparent="1" valign="center" zPosition="6"/>
 			</screen>"""
 
-	def __init__(self, session, source = "/tmp/none"):
+	def __init__(self, session, source="/tmp/none"):
 		self.skin = CPmaniger.skin
 		Screen.__init__(self, session)
 		self.sesion = session
@@ -1115,7 +1106,7 @@ class CPmaniger(Screen):
 		self["key_red"] = StaticText(_("Move"))
 		self["key_yellow"] = StaticText(_("Copy"))
 		self["File"] = Label(_("WARNING! they doing now COPY or MOVE\n" + source + "\nto:"))
-		self["CPto"] = myFileList(config.plugins.DreamExplorer.CopyDest.value, showDirectories = True, showFiles = False, matchingPattern = "^.*\.*", useServiceRef = False)
+		self["CPto"] = myFileList(config.plugins.DreamExplorer.CopyDest.value, showDirectories=True, showFiles=False, matchingPattern="^.*\.*", useServiceRef=False)
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
 		{
 			"ok": self.ok,
@@ -1128,7 +1119,7 @@ class CPmaniger(Screen):
 	def OneDescent(self):
 		if self["CPto"].canDescent():
 			self["CPto"].descent()
-	
+
 	def ok(self):
 		if self["CPto"].canDescent():
 			self["CPto"].descent()
@@ -1137,9 +1128,9 @@ class CPmaniger(Screen):
 		self.close(" ")
 
 	def CopyFile(self):
-		if self["CPto"].getSelectionIndex()!=0:
+		if self["CPto"].getSelectionIndex() != 0:
 			dest = self["CPto"].getSelection()[0]
-			if self.src[len(self.src)-1] == '/':
+			if self.src[len(self.src) - 1] == '/':
 				order = 'cp -af \"' + self.src + '\" \"' + dest + '\"'
 			else:
 				order = 'cp \"' + self.src + '\" \"' + dest + '\"'
@@ -1148,14 +1139,14 @@ class CPmaniger(Screen):
 				config.plugins.DreamExplorer.CopyDest.save()
 				os_system(order)
 			except:
-				dei = self.session.open(MessageBox,_("%s \nFAILED!" % order), MessageBox.TYPE_ERROR)
+				dei = self.session.open(MessageBox, _("%s \nFAILED!" % order), MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 			self.close(" ")
 
 	def MoveFile(self):
-		if self["CPto"].getSelectionIndex()!=0:
+		if self["CPto"].getSelectionIndex() != 0:
 			dest = self["CPto"].getSelection()[0]
-			if self.src[len(self.src)-1] == '/':
+			if self.src[len(self.src) - 1] == '/':
 				order = 'cp -af \"' + self.src + '\" \"' + dest + '\"'
 				DELorder = 'rm -r \"' + self.src + '\"'
 			else:
@@ -1166,12 +1157,12 @@ class CPmaniger(Screen):
 				config.plugins.DreamExplorer.CopyDest.save()
 				os_system(order)
 			except:
-				dei = self.session.open(MessageBox,_("%s \nFAILED!" % order), MessageBox.TYPE_ERROR)
+				dei = self.session.open(MessageBox, _("%s \nFAILED!" % order), MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 			try:
 				os_system(DELorder)
 			except:
-				dei = self.session.open(MessageBox,_("%s \nFAILED!" % DELorder), MessageBox.TYPE_ERROR)
+				dei = self.session.open(MessageBox, _("%s \nFAILED!" % DELorder), MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 			self.close(" ")
 
@@ -1212,14 +1203,15 @@ class SoftLinkScreen(Screen):
 				<eLabel font="Regular;18" halign="left" position="35,425" size="120,25" text="Set name" transparent="1" valign="center" zPosition="6"/>
 				<eLabel font="Regular;18" halign="left" position="345,425" size="220,25" text="Make a softlink" transparent="1" valign="center" zPosition="6"/>
 			</screen>"""
-	def __init__(self, session, source = "/tmp/"):
+
+	def __init__(self, session, source="/tmp/"):
 		self.skin = SoftLinkScreen.skin
 		Screen.__init__(self, session)
 		self.sesion = session
 		self.src = source
 		self.newSLname = " "
 		self["File"] = Label("Set first the Softlink name ...")
-		self["SLto"] = myFileList('/', showDirectories=True, showFiles=True, matchingPattern = None, useServiceRef = False)
+		self["SLto"] = myFileList('/', showDirectories=True, showFiles=True, matchingPattern=None, useServiceRef=False)
 		self["key_red"] = StaticText(_("Set name"))
 		self["key_yellow"] = StaticText(_("Make a softlink"))
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
@@ -1236,8 +1228,8 @@ class SoftLinkScreen(Screen):
 	def callbackSetLinkName(self, answer):
 		if answer is None:
 			return
-		if (" " in answer) or (answer==""):
-			dei = self.session.open(MessageBox,_("Softlink name error !"), MessageBox.TYPE_ERROR)
+		if (" " in answer) or (answer == ""):
+			dei = self.session.open(MessageBox, _("Softlink name error !"), MessageBox.TYPE_ERROR)
 			dei.setTitle(_("Dream-Explorer"))
 			return
 		else:
@@ -1252,8 +1244,8 @@ class SoftLinkScreen(Screen):
 		self.close(" ")
 
 	def MakeSLnow(self):
-		if self.newSLname!=" ":
-			if self["SLto"].getSelectionIndex()!=0:
+		if self.newSLname != " ":
+			if self["SLto"].getSelectionIndex() != 0:
 				if self["SLto"].canDescent():
 					order = 'ln -s \"' + self["SLto"].getSelection()[0] + '\" \"' + self.newSLname + '\"'
 				else:
@@ -1261,15 +1253,5 @@ class SoftLinkScreen(Screen):
 				os_system(order)
 				self.close(" ")
 		else:
-			dei = self.session.open(MessageBox,_("Softlink name error !"), MessageBox.TYPE_ERROR)
+			dei = self.session.open(MessageBox, _("Softlink name error !"), MessageBox.TYPE_ERROR)
 			dei.setTitle(_("Dream-Explorer"))
-
-
-
-
-
-
-
-
-
-

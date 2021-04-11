@@ -7,10 +7,13 @@ from twisted.internet import reactor
 
 from . import NOTIFICATIONID
 
+
 def emergencyDisable(*args, **kwargs):
 	if args:
-		try: args[0].printTraceback()
-		except Exception: pass
+		try:
+			args[0].printTraceback()
+		except Exception:
+			pass
 
 	global growleeConnection
 	if growleeConnection:
@@ -28,9 +31,11 @@ def emergencyDisable(*args, **kwargs):
 		10
 	)
 
+
 def gotNotification():
 	if hasattr(Notifications, 'notificationQueue'):
 		notifications = Notifications.notificationQueue.queue
+
 		def handler(note):
 			return note.fnc, note.screen, note.args, note.kwargs, note.id
 	else:
@@ -52,6 +57,7 @@ def gotNotification():
 			description = description
 
 			growleeConnection.sendNotification(title="Dreambox", description=description, priority=priority, timeout=timeout, id=id)
+
 
 class GrowleeConnection:
 	connections = []
@@ -94,10 +100,11 @@ class GrowleeConnection:
 
 			self.connections.append((connection, host))
 
-	def maybeClose(self, resOrFail, defer = None):
+	def maybeClose(self, resOrFail, defer=None):
 		self.pending -= 1
 		if self.pending == 0:
-			if defer: defer.callback(True)
+			if defer:
+				defer.callback(True)
 
 	def stop(self):
 		defer = Deferred()
@@ -106,12 +113,12 @@ class GrowleeConnection:
 			d = connection.stop()
 			if d is not None:
 				self.pending += 1
-				d.addBoth(self.maybeClose, defer = defer)
+				d.addBoth(self.maybeClose, defer=defer)
 		del self.connections[:]
 
 		if self.pending == 0:
 			reactor.callLater(1, defer, True)
 		return defer
 
-growleeConnection = GrowleeConnection()
 
+growleeConnection = GrowleeConnection()

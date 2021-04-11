@@ -18,9 +18,11 @@ class Enum:
 class StatusEnum(Enum):
     group = 'Status'
 
+
 OFFLINE = Enum('Offline')
 ONLINE = Enum('Online')
 AWAY = Enum('Away')
+
 
 class OfflineError(Exception):
     print "[dreamIRC] offline - %s" % Exception

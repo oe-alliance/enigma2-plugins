@@ -230,6 +230,7 @@ class GrowlNotifier(object):
 		logger.error('Invalid response: %s', response.error())
 		return response.error()
 
+
 if __name__ == '__main__':
 	# If we're running this module directly we're likely running it as a test
 	# so extra debugging is useful

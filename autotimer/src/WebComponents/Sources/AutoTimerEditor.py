@@ -2,6 +2,7 @@ from Components.Sources.Source import Source
 from os import remove, path, popen
 from re import compile as re_compile
 
+
 class AutoTimerEditor(Source):
 	BACKUP = 0
 	RESTORE = 1
@@ -15,7 +16,7 @@ class AutoTimerEditor(Source):
 		self.session = session
 		self.command = None
 		self.bouquet_rootstr = ""
-		self.result = ( False, "one two three four unknown command" )
+		self.result = (False, "one two three four unknown command")
 
 	def handleCommand(self, cmd):
 		print "[WebComponents.AutoTimerEditor] handleCommand with cmd = ", cmd
@@ -24,18 +25,18 @@ class AutoTimerEditor(Source):
 		elif self.func is self.RESTORE:
 			self.result = self.restoreFiles(cmd)
 		else:
-			self.result = ( False, "one two three four unknown command" )
+			self.result = (False, "one two three four unknown command")
 
 	def backupFiles(self, param):
 		filename = param
 		if not filename:
 			filename = self.BACKUP_FILENAME
-		invalidCharacters= re_compile(r'[^A-Za-z0-9_. ]+|^\.|\.$|^ | $|^$')
-		tarFilename= "%s.tar" % invalidCharacters.sub('_', filename)
+		invalidCharacters = re_compile(r'[^A-Za-z0-9_. ]+|^\.|\.$|^ | $|^$')
+		tarFilename = "%s.tar" % invalidCharacters.sub('_', filename)
 		backupFilename = path.join(self.BACKUP_PATH, tarFilename)
 		if path.exists(backupFilename):
 			remove(backupFilename)
-		checkfile = path.join(self.BACKUP_PATH,'.autotimeredit')
+		checkfile = path.join(self.BACKUP_PATH, '.autotimeredit')
 		f = open(checkfile, 'w')
 		if f:
 			files = []
@@ -48,7 +49,7 @@ class AutoTimerEditor(Source):
 				if not path.exists(arg):
 					return (False, "Error while preparing backup file, %s does not exists." % arg)
 				tarFiles += "%s " % arg
-			lines = popen("tar cvf %s %s" % (backupFilename,tarFiles)).readlines()
+			lines = popen("tar cvf %s %s" % (backupFilename, tarFiles)).readlines()
 			remove(checkfile)
 			return (True, tarFilename)
 		else:
@@ -76,7 +77,7 @@ class AutoTimerEditor(Source):
 					except Exception:
 						# TODO: proper error handling
 						pass
-				
+
 				remove(backupFilename)
 				return (True, "AutoTimer-settings were restored successfully")
 			else:

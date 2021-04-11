@@ -5,8 +5,8 @@
 #  Coded by Dr.Best (c) 2011
 #  Support: www.dreambox-tools.info
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -15,7 +15,7 @@
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 from Plugins.Plugin import PluginDescriptor
@@ -39,6 +39,7 @@ from enigma import eEnv
 basePictureInPicture__init__ = None
 CONFIG_FILE = eEnv.resolve('${libdir}/enigma2/python/Plugins/SystemPlugins/PiPServiceRelation/psr_config')
 
+
 def getRelationDict():
 	if os_path.exists(CONFIG_FILE):
 		pkl_file = open(CONFIG_FILE, 'rb')
@@ -48,16 +49,19 @@ def getRelationDict():
 			return volumedict
 	return {}
 
+
 def saveRelationDict(dict):
 	pkl_file = open(CONFIG_FILE, 'wb')
 	if pkl_file:
 		pickle_dump(dict, pkl_file)
 		pkl_file.close()
 
+
 def autostart_PictureInPicture(session, **kwargs):
 	init_pipservicerelation()
 
-def setup(session,**kwargs):
+
+def setup(session, **kwargs):
 	session.open(PipServiceRelationSetup)
 
 
@@ -87,14 +91,14 @@ class PipServiceRelationSetup(Screen):
 		self["key_yellow"] = StaticText(_("Add"))
 		self["key_blue"] = StaticText(_("Edit"))
 		self["entrylist"] = PipServiceRelationEntryList([])
-		self["actions"] = ActionMap(["WizardActions","MenuActions","ShortcutActions"],
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
 			{
-			 "ok"	:	self.keyBlue,
-			 "back"	:	self.keyClose,
-			 "red"	:	self.keyDelete,
-			 "green":	self.keyClose,
-			 "yellow":	self.keyYellow,
-			 "blue": 	self.keyBlue,
+			 "ok": self.keyBlue,
+			 "back": self.keyClose,
+			 "red": self.keyDelete,
+			 "green": self.keyClose,
+			 "yellow": self.keyYellow,
+			 "blue": self.keyBlue,
 			 }, -1)
 		self["entrylist"].setConfig(getRelationDict())
 		self.updateList()
@@ -106,18 +110,22 @@ class PipServiceRelationSetup(Screen):
 		self.close()
 
 	def keyBlue(self):
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		if sel is None:
 			return
-		self.session.openWithCallback(self.updateList,PipServiceRelationEntryConfigScreen,sel, self["entrylist"].configPSR)
+		self.session.openWithCallback(self.updateList, PipServiceRelationEntryConfigScreen, sel, self["entrylist"].configPSR)
 
 	def keyYellow(self):
-		self.session.openWithCallback(self.updateList,PipServiceRelationEntryConfigScreen,None, self["entrylist"].configPSR)
+		self.session.openWithCallback(self.updateList, PipServiceRelationEntryConfigScreen, None, self["entrylist"].configPSR)
 
 	def keyDelete(self):
-		try:sel = self["entrylist"].l.getCurrentSelection()[0]
-		except: sel = None
+		try:
+			sel = self["entrylist"].l.getCurrentSelection()[0]
+		except:
+			sel = None
 		if sel is None:
 			return
 		self.session.openWithCallback(self.deleteConfirm, MessageBox, _("Do you really want to delete this entry?"))
@@ -130,8 +138,9 @@ class PipServiceRelationSetup(Screen):
 		saveRelationDict(self["entrylist"].configPSR)
 		self.updateList()
 
+
 class PipServiceRelationEntryList(MenuList):
-	def __init__(self, list, enableWrapAround = True):
+	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setFont(1, gFont("Regular", 18))
@@ -143,17 +152,17 @@ class PipServiceRelationEntryList(MenuList):
 
 	def getCurrentIndex(self):
 		return self.instance.getCurrentIndex()
-		
+
 	def setConfig(self, configPSR):
 		self.configPSR = configPSR
-		
+
 	def buildList(self):
 		list = []
 		for c in self.configPSR.items():
 			res = [
 				c,
-				(eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 320, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, ServiceReference(eServiceReference(c[0])).getServiceName()),
-				(eListboxPythonMultiContent.TYPE_TEXT, 330, 0,320, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, ServiceReference(eServiceReference(c[1])).getServiceName()),
+				(eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 320, 20, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, ServiceReference(eServiceReference(c[0])).getServiceName()),
+				(eListboxPythonMultiContent.TYPE_TEXT, 330, 0, 320, 20, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, ServiceReference(eServiceReference(c[1])).getServiceName()),
 			]
 			list.append(res)
 		self.list = list
@@ -174,7 +183,7 @@ class PipServiceRelationEntryConfigScreen(ConfigListScreen, Screen):
 			<widget source="key_green" render="Label" position="140,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 
-	def __init__(self, session, entry, configPSR):	
+	def __init__(self, session, entry, configPSR):
 		self.session = session
 		Screen.__init__(self, session)
 		self.title = _("PipServiceRelation - Entry Config")
@@ -191,19 +200,19 @@ class PipServiceRelationEntryConfigScreen(ConfigListScreen, Screen):
 		self.entry = entry
 		if entry is None:
 			self.currentKey = None
-			self.ref1 =  NoSave(ConfigDirectory(default = _("Press OK to select a service")))
-			self.ref2 =  NoSave(ConfigDirectory(default = _("Press OK to select a related PiP service")))
+			self.ref1 = NoSave(ConfigDirectory(default=_("Press OK to select a service")))
+			self.ref2 = NoSave(ConfigDirectory(default=_("Press OK to select a related PiP service")))
 		else:
 			self.currentKey = entry[0]
-			self.ref1 =  NoSave(ConfigDirectory(default = ServiceReference(eServiceReference(entry[0])).getServiceName()))
-			self.ref2 =  NoSave(ConfigDirectory(default = ServiceReference(eServiceReference(entry[1])).getServiceName()))
-		self.list = [ ]
-		self.serviceref1 =  getConfigListEntry(_("Service"), self.ref1)
-		self.serviceref2 =  getConfigListEntry(_("Related Pip Service"), self.ref2)
+			self.ref1 = NoSave(ConfigDirectory(default=ServiceReference(eServiceReference(entry[0])).getServiceName()))
+			self.ref2 = NoSave(ConfigDirectory(default=ServiceReference(eServiceReference(entry[1])).getServiceName()))
+		self.list = []
+		self.serviceref1 = getConfigListEntry(_("Service"), self.ref1)
+		self.serviceref2 = getConfigListEntry(_("Related Pip Service"), self.ref2)
 		self.list.append(self.serviceref1)
 		self.list.append(self.serviceref2)
 		ConfigListScreen.__init__(self, self.list, session)
-		
+
 	def keySelect(self):
 		cur = self["config"].getCurrent()
 		if cur == self.serviceref1:
@@ -216,9 +225,9 @@ class PipServiceRelationEntryConfigScreen(ConfigListScreen, Screen):
 			else:
 				sname = ""
 			descr = _("Related PiP service for %s") % sname
-		self.session.openWithCallback(boundFunction(self.channelSelected,index), SimpleChannelSelection, descr)
-			
-	def channelSelected(self, index, ref = None):
+		self.session.openWithCallback(boundFunction(self.channelSelected, index), SimpleChannelSelection, descr)
+
+	def channelSelected(self, index, ref=None):
 		if ref:
 			if self.entry:
 				val1 = self.entry[0]
@@ -243,6 +252,7 @@ class PipServiceRelationEntryConfigScreen(ConfigListScreen, Screen):
 	def keyCancel(self):
 		ConfigListScreen.cancelConfirm(self, True)
 
+
 def init_pipservicerelation():
 	global basePictureInPicture__init__, basePictureInPicture_playService
 	if basePictureInPicture__init__ is None:
@@ -255,9 +265,10 @@ def PictureInPicture__init__(self, session):
 	basePictureInPicture__init__(self, session)
 	self.pipServiceRelation = getRelationDict()
 
+
 def playService(self, service):
 	current_service = service
-	n_service = self.pipServiceRelation.get(service.toString(),None)
+	n_service = self.pipServiceRelation.get(service.toString(), None)
 	if n_service is not None:
 		service = eServiceReference(n_service)
 	if service and (service.flags & eServiceReference.isGroup):
@@ -274,9 +285,9 @@ def playService(self, service):
 			self.pipservice = None
 	return False
 
+
 def Plugins(**kwargs):
 	list = []
-	list.append(PluginDescriptor(name="Setup PiPServiceRelation", description=_("setup for PiPServiceRelation"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon = "PiPServiceRelation.png", fnc=setup))
-	list.append(PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart_PictureInPicture))
+	list.append(PluginDescriptor(name="Setup PiPServiceRelation", description=_("setup for PiPServiceRelation"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="PiPServiceRelation.png", fnc=setup))
+	list.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart_PictureInPicture))
 	return list
-

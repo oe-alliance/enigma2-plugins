@@ -24,15 +24,15 @@ FACILITY = {
 }
 
 SEVERITY = {
-	'emerg': 0, 'alert':1, 'crit': 2, 'err': 3,
+	'emerg': 0, 'alert': 1, 'crit': 2, 'err': 3,
 	'warning': 4, 'notice': 5, 'info': 6, 'debug': 7
 }
 
 try:
 	dict.iteritems
-	reverse = lambda map: dict((v,k) for k,v in map.iteritems())
+	reverse = lambda map: dict((v, k) for k, v in map.iteritems())
 except AttributeError:
-	reverse = lambda map: dict((v,k) for k,v in map.items())
+	reverse = lambda map: dict((v, k) for k, v in map.items())
 
 SEVERITYMAP = {
 	-1: SEVERITY['info'],
@@ -42,8 +42,10 @@ SEVERITYMAP = {
 	MessageBox.TYPE_ERROR: SEVERITY['err'],
 }
 
+
 class SyslogNetworkProtocol(DatagramProtocol):
 	addr = None
+
 	def __init__(self, host):
 		self.host = host
 
@@ -105,11 +107,12 @@ class SyslogNetworkProtocol(DatagramProtocol):
 		Notifications.AddNotificationWithID(
 			NOTIFICATIONID,
 			MessageBox,
-			text = message,
-			type = type,
-			timeout = 10, # XXX: un-hardcode timeout?
-			close_on_any_key = True,
+			text=message,
+			type=type,
+			timeout=10, # XXX: un-hardcode timeout?
+			close_on_any_key=True,
 		)
+
 
 class SyslogAbstraction:
 	def __init__(self, host):

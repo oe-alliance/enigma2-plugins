@@ -44,13 +44,16 @@ caseMap = {
 	"insensitive": eEPGCache.NO_CASE_CHECK
 }
 
+
 def GetTypeMap():
 	search_type = config.plugins.epgsearch.search_type.value
 	return typeMap.get(search_type, eEPGCache.PARTIAL_TITLE_SEARCH)
 
+
 def GetCaseMap():
 	search_case = config.plugins.epgsearch.search_case.value
 	return caseMap.get(search_case, eEPGCache.NO_CASE_CHECK)
+
 
 # Partnerbox installed and icons in epglist enabled?
 try:
@@ -78,6 +81,8 @@ except ImportError:
 	autoTimerAvailable = False
 
 # Modified EPGSearchList with support for PartnerBox
+
+
 class EPGSearchList(EPGList):
 	searchPiconPaths = ['/usr/share/enigma2/picon/', '/media/hdd/picon/', '/media/usb/picon/']
 
@@ -95,7 +100,7 @@ class EPGSearchList(EPGList):
 		self.skinColumns = False
 		self.tw = 90
 		self.dy = 0
-		self.piconSize = 50,30
+		self.piconSize = 50, 30
 		self.piconDistance = 5
 		self.pboxDistance = 80
 
@@ -211,7 +216,8 @@ class EPGSearchList(EPGList):
 					checking_time = x.begin < begin or begin <= x.begin <= end
 					if xbt.tm_yday != xet.tm_yday:
 						oday = bday - 1
-						if oday == -1: oday = 6
+						if oday == -1:
+							oday = 6
 						offset_day = x.repeated & (1 << oday)
 					xbegin = 1440 + xbt.tm_hour * 60 + xbt.tm_min
 					xend = xbegin + ((timer_end - x.begin) / 60)
@@ -327,7 +333,7 @@ class EPGSearchList(EPGList):
 				remaining = _(" (%d min)") % (duration / 60)
 			else:
 				prefix = "+"
-				total = ((beginTime+duration) - nowTime) / 60
+				total = ((beginTime + duration) - nowTime) / 60
 				if total <= 0:
 					prefix = ""
 				remaining = _(" (%s%d min)") % (prefix, total)
@@ -342,24 +348,24 @@ class EPGSearchList(EPGList):
 				self.picon.setPara((self.piconSize[0], self.piconSize[1], 1, 1, False, 1, '#000f0f0f'))
 				self.picon.startDecode(picon, 0, 0, False)
 				png = self.picon.getData()
-				dy = int((self.height - self.piconSize[1])/2.)
+				dy = int((self.height - self.piconSize[1]) / 2.)
 				res = [
 					None, # no private data needed
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r1.left(), r1.top()+ dy, self.piconSize[0], self.piconSize[1], png),
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r1.left(), r1.top() + dy, self.piconSize[0], self.piconSize[1], png),
 					(eListboxPythonMultiContent.TYPE_TEXT, r1.left() + dx, r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, self.days[t[6]]),
-					(eListboxPythonMultiContent.TYPE_TEXT, r2.left() + dx, r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
+					(eListboxPythonMultiContent.TYPE_TEXT, r2.left() + dx, r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4]))
 				]
 			else:
 				res = [
 					None, # no private data needed
 					(eListboxPythonMultiContent.TYPE_TEXT, r1.left() + dx, r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, self.days[t[6]]),
-					(eListboxPythonMultiContent.TYPE_TEXT, r2.left() + dx, r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
+					(eListboxPythonMultiContent.TYPE_TEXT, r2.left() + dx, r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4]))
 				]
 		else:
 			res = [
 				None, # no private data needed
 				(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, self.days[t[6]]),
-				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
+				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4]))
 			]
 		if config.plugins.epgsearch.picons.value:
 			if rec1 or rec2:
@@ -382,18 +388,18 @@ class EPGSearchList(EPGList):
 						res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left() + i * self.space + dx, r3.top() + self.dy, self.iconSize, self.iconSize, self.clocks[clock_types[i]]))
 					res.extend((
 						(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left() + (i + 1) * self.space + dx, r3.top() + self.dy, self.iconSize, self.iconSize, clock_pic_partnerbox),
-						(eListboxPythonMultiContent.TYPE_TEXT, r3.left() + (i + 1) * self.space + self.pboxDistance + self.nextIcon, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName + remaining)))
+						(eListboxPythonMultiContent.TYPE_TEXT, r3.left() + (i + 1) * self.space + self.pboxDistance + self.nextIcon, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName + remaining)))
 				else:
 					if rec1:
 						for i in range(len(clock_types)):
 							res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left() + i * self.space + dx, r3.top() + self.dy, self.iconSize, self.iconSize, self.clocks[clock_types[i]]))
-						res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left() + (i + 1) * self.space + dx + self.nextIcon, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName + remaining))
+						res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left() + (i + 1) * self.space + dx + self.nextIcon, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName + remaining))
 					else:
 						res.extend((
 						(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left() + dx, r3.top() + self.dy, self.iconSize, self.iconSize, clock_pic),
-						(eListboxPythonMultiContent.TYPE_TEXT, r3.left() + self.pboxDistance + self.nextIcon, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName + remaining)))
+						(eListboxPythonMultiContent.TYPE_TEXT, r3.left() + self.pboxDistance + self.nextIcon, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName + remaining)))
 			else:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left() + dx, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName + remaining))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left() + dx, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName + remaining))
 		else:
 			if rec1 or rec2:
 				if rec1:
@@ -415,18 +421,18 @@ class EPGSearchList(EPGList):
 						res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left() + i * self.space, r3.top() + self.dy, self.iconSize, self.iconSize, self.clocks[clock_types[i]]))
 					res.extend((
 						(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left() + (i + 1) * self.space, r3.top() + self.dy, self.iconSize, self.iconSize, clock_pic_partnerbox),
-						(eListboxPythonMultiContent.TYPE_TEXT, r3.left() + (i + 1) * self.space + self.nextIcon, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName + remaining)))
+						(eListboxPythonMultiContent.TYPE_TEXT, r3.left() + (i + 1) * self.space + self.nextIcon, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName + remaining)))
 				else:
 					if rec1:
 						for i in range(len(clock_types)):
 							res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left() + i * self.iconSize, r3.top() + self.dy, self.iconSize, self.iconSize, self.clocks[clock_types[i]]))
-						res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left() + (i + 1) * self.space + self.nextIcon, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName + remaining))
+						res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left() + (i + 1) * self.space + self.nextIcon, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName + remaining))
 					else:
 						res.extend((
 						(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left(), r3.top() + self.dy, self.iconSize, self.iconSize, clock_pic),
-						(eListboxPythonMultiContent.TYPE_TEXT, r3.left() + self.space + self.nextIcon, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName + remaining)))
+						(eListboxPythonMultiContent.TYPE_TEXT, r3.left() + self.space + self.nextIcon, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName + remaining)))
 			else:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left(), r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName + remaining))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left(), r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName + remaining))
 		return res
 
 	def recalcEntrySize(self):
@@ -440,7 +446,7 @@ class EPGSearchList(EPGList):
 		self.space = self.iconSize + self.iconDistance
 		self.nextIcon = self.iconSize + 2 * self.iconDistance
 		self.height = height
-		self.dy = int((height - self.iconSize)/2.)
+		self.dy = int((height - self.iconSize) / 2.)
 
 		if self.type == EPG_TYPE_SINGLE:
 			if self.skinColumns:
@@ -449,30 +455,30 @@ class EPGSearchList(EPGList):
 				x += self.col[0]
 				self.datetime_rect = Rect(x, 0, self.gap(self.col[1]), height)
 				x += self.col[1]
-				self.descr_rect = Rect(x, 0, width-x, height)
+				self.descr_rect = Rect(x, 0, width - x, height)
 			else:
-				self.weekday_rect = Rect(0, 0, width/20*2-10, height)
-				self.datetime_rect = Rect(width/20*2, 0, width/20*5-15, height)
-				self.descr_rect = Rect(width/20*7, 0, width/20*13, height)
+				self.weekday_rect = Rect(0, 0, width / 20 * 2 - 10, height)
+				self.datetime_rect = Rect(width / 20 * 2, 0, width / 20 * 5 - 15, height)
+				self.descr_rect = Rect(width / 20 * 7, 0, width / 20 * 13, height)
 		elif self.type == EPG_TYPE_MULTI:
 			if self.skinColumns:
 				x = 0
 				self.service_rect = Rect(x, 0, self.gap(self.col[0]), height)
 				x += self.col[0]
-				self.progress_rect = Rect(x, 8, self.gap(self.col[1]), height-16)
+				self.progress_rect = Rect(x, 8, self.gap(self.col[1]), height - 16)
 				self.start_end_rect = Rect(x, 0, self.gap(self.col[1]), height)
 				x += self.col[1]
-				self.descr_rect = Rect(x, 0, width-x, height)
+				self.descr_rect = Rect(x, 0, width - x, height)
 			else:
-				xpos = 0;
-				w = width/10*3;
-				self.service_rect = Rect(xpos, 0, w-10, height)
-				xpos += w;
-				w = width/10*2;
-				self.start_end_rect = Rect(xpos, 0, w-10, height)
-				self.progress_rect = Rect(xpos, 4, w-10, height-8)
+				xpos = 0
+				w = width / 10 * 3
+				self.service_rect = Rect(xpos, 0, w - 10, height)
 				xpos += w
-				w = width/10*5;
+				w = width / 10 * 2
+				self.start_end_rect = Rect(xpos, 0, w - 10, height)
+				self.progress_rect = Rect(xpos, 4, w - 10, height - 8)
+				xpos += w
+				w = width / 10 * 5
 				self.descr_rect = Rect(xpos, 0, width, height)
 		else: # EPG_TYPE_SIMILAR
 			if self.skinColumns:
@@ -481,18 +487,18 @@ class EPGSearchList(EPGList):
 				x += self.col[0]
 				self.datetime_rect = Rect(x, 0, self.gap(self.col[1]), height)
 				x += self.col[1]
-				self.descr_rect = Rect(x, 0, width-x, height)
+				self.descr_rect = Rect(x, 0, width - x, height)
 			else:
-				self.weekday_rect = Rect(0, 0, width/20*2-10, height)
-				self.datetime_rect = Rect(width/20*2, 0, width/20*5-15, height)
-				self.service_rect = Rect(width/20*7, 0, width/20*13, height)
+				self.weekday_rect = Rect(0, 0, width / 20 * 2 - 10, height)
+				self.datetime_rect = Rect(width / 20 * 2, 0, width / 20 * 5 - 15, height)
+				self.service_rect = Rect(width / 20 * 7, 0, width / 20 * 13, height)
 
 	def findPicon(self, service=None):
 		if service is not None:
 			sname = ':'.join(service.split(':')[:11])
 			pos = sname.rfind(':')
 			if pos != -1:
-				sname = sname[:pos].rstrip(':').replace(':','_')
+				sname = sname[:pos].rstrip(':').replace(':', '_')
 				for path in self.searchPiconPaths:
 					pngname = path + sname + ".png"
 					if fileExists(pngname):
@@ -502,32 +508,42 @@ class EPGSearchList(EPGList):
 	def applySkin(self, desktop, parent):
 		def warningWrongSkinParameter(string):
 			print "[EPGList] wrong '%s' skin parameters" % string
+
 		def setEventItemFont(value):
-			self.eventItemFont = parseFont(value, ((1,1),(1,1)))
+			self.eventItemFont = parseFont(value, ((1, 1), (1, 1)))
+
 		def setEventTimeFont(value):
-			self.eventTimeFont = parseFont(value, ((1,1),(1,1)))
+			self.eventTimeFont = parseFont(value, ((1, 1), (1, 1)))
+
 		def setIconDistance(value):
 			self.iconDistance = int(value)
+
 		def setIconShift(value):
 			self.dy = int(value)
+
 		def setTimeWidth(value):
 			self.tw = int(value)
+
 		def setColWidths(value):
 			self.col = map(int, value.split(','))
 			if len(self.col) == 2:
 				self.skinColumns = True
 			else:
 				warningWrongSkinParameter(attrib)
+
 		def setPiconSize(value):
 			self.piconSize = map(int, value.split(','))
 			if len(self.piconSize) == 2:
 				self.skinColumns = True
 			else:
 				warningWrongSkinParameter(attrib)
+
 		def setPiconDistance(value):
 			self.piconDistance = int(value)
+
 		def setColGap(value):
 			self.colGap = int(value)
+
 		def setPboxDistance(value):
 			self.pboxDistance = int(value)
 		for (attrib, value) in self.skinAttributes[:]:
@@ -541,6 +557,8 @@ class EPGSearchList(EPGList):
 		return GUIComponent.applySkin(self, desktop, parent)
 
 # main class of plugin
+
+
 class EPGSearch(EPGSelection):
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
@@ -563,13 +581,13 @@ class EPGSearch(EPGSelection):
 		self["Service"] = ServiceEvent()
 		self["Event"] = Event()
 		self.type = EPG_TYPE_SINGLE
-		self.currentService=None
+		self.currentService = None
 		self.zapFunc = None
 		self.sort_type = 0
 		self["key_green"] = Button(_("Add timer"))
 		self.key_green_choice = self.ADD_TIMER
 		self.key_red_choice = self.EMPTY
-		self["list"] = EPGSearchList(type = self.type, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
+		self["list"] = EPGSearchList(type=self.type, selChangedCB=self.onSelectionChanged, timer=session.nav.RecordTimer)
 		self["actions"] = ActionMap(["EPGSelectActions", "OkCancelActions", "MenuActions"],
 			{
 				"menu": self.menu,
@@ -718,7 +736,7 @@ class EPGSearch(EPGSelection):
 				(_("Lookup in TMBD"), "runtmbd"),
 				(_("Partnerbox Entries"), "partnerbox"),
 				]
-				dlg = self.session.openWithCallback(self.RedbuttonCallback,ChoiceBox,title= _("Select action:"), list = list)
+				dlg = self.session.openWithCallback(self.RedbuttonCallback, ChoiceBox, title=_("Select action:"), list=list)
 				dlg.setTitle(_("Choice list RED Button"))
 			else:
 				self.zapTo()
@@ -773,7 +791,7 @@ class EPGSearch(EPGSelection):
 		self.session.openWithCallback(
 			self.searchEPG,
 			VirtualKeyBoard,
-			title = _("Enter text to search for")
+			title=_("Enter text to search for")
 		)
 
 	def menu(self):
@@ -807,7 +825,7 @@ class EPGSearch(EPGSelection):
 		self.session.openWithCallback(
 			self.menuCallback,
 			ChoiceBox,
-			list = options
+			list=options
 		)
 
 	def menuCallback(self, ret):
@@ -818,6 +836,7 @@ class EPGSearch(EPGSelection):
 			self.searchEPG,
 			EPGSearchTimerImport
 		)
+
 	def openTimerslist(self):
 		try:
 			from Screens.TimerEdit import TimerEditList
@@ -849,7 +868,7 @@ class EPGSearch(EPGSelection):
 			self.session.open(
 				MessageBox,
 				_("Could not read AutoTimer timer list: %s") % e,
-				type = MessageBox.TYPE_ERROR
+				type=MessageBox.TYPE_ERROR
 			)
 		else:
 			# Fetch match strings
@@ -859,8 +878,8 @@ class EPGSearch(EPGSelection):
 			self.session.openWithCallback(
 				self.searchEPGWrapper,
 				ChoiceBox,
-				title = _("Select text to search for"),
-				list = options
+				title=_("Select text to search for"),
+				list=options
 			)
 		finally:
 			# Remove instance if there wasn't one before
@@ -926,7 +945,7 @@ class EPGSearch(EPGSelection):
 		history = config.plugins.epgsearch.history.value
 		if len(history) > 0:
 			del history[0:]
-			self.session.open(MessageBox, _("List of history is cleared !"), type = MessageBox.TYPE_INFO, timeout = 3)
+			self.session.open(MessageBox, _("List of history is cleared !"), type=MessageBox.TYPE_INFO, timeout=3)
 
 	def setup(self):
 		self.session.open(EPGSearchSetup)
@@ -938,22 +957,22 @@ class EPGSearch(EPGSelection):
 			self.session.openWithCallback(
 				self.searchEPGWrapper,
 				ChoiceBox,
-				title = _("Select text to search for"),
-				list = options
+				title=_("Select text to search for"),
+				list=options
 			)
 		else:
 			self.session.open(
 				MessageBox,
 				_("No history !"),
-				type = MessageBox.TYPE_INFO,
-				timeout = 3
+				type=MessageBox.TYPE_INFO,
+				timeout=3
 			)
 
 	def searchEPGWrapper(self, ret):
 		if ret:
 			self.searchEPG(ret[1])
 
-	def searchEPG(self, searchString = None, searchSave = True):
+	def searchEPG(self, searchString=None, searchSave=True):
 		if searchString:
 			self.do_filter = None
 			self.eventid = None
@@ -996,7 +1015,7 @@ class EPGSearch(EPGSelection):
 			l.l.setList(ret)
 
 	def sortEPGList(self, epglist):
-		usr_ref_list = [ ]
+		usr_ref_list = []
 		serviceHandler = eServiceCenter.getInstance()
 		if not config.usage.multibouquet.value:
 			service_types_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 22) || (type == 25) || (type == 134) || (type == 195)'
@@ -1006,8 +1025,9 @@ class EPGSearch(EPGSelection):
 			if not servicelist is None:
 				while True:
 					service = servicelist.getNext()
-					if not service.valid(): break
-					if not (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
+					if not service.valid():
+						break
+					if not (service.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)):
 						usr_ref_list.append(service.toString())
 		else:
 			bqrootstr = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouquet'
@@ -1016,16 +1036,18 @@ class EPGSearch(EPGSelection):
 			if not bouquetlist is None:
 				while True:
 					bouquet = bouquetlist.getNext()
-					if not bouquet.valid(): break
+					if not bouquet.valid():
+						break
 					if bouquet.flags & eServiceReference.isDirectory and not bouquet.flags & eServiceReference.isInvisible:
 						servicelist = serviceHandler.list(bouquet)
 						if not servicelist is None:
 							while True:
 								service = servicelist.getNext()
-								if not service.valid(): break
-								if not (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
+								if not service.valid():
+									break
+								if not (service.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)):
 									usr_ref_list.append(service.toString())
-		result = [ ]
+		result = []
 		if config.plugins.epgsearch.favorit_name.value:
 			for e in epglist:
 				for x in usr_ref_list:
@@ -1040,6 +1062,7 @@ class EPGSearch(EPGSelection):
 					if y == e[0]:
 						result.append(e)
 		return result
+
 
 class EPGSearchTimerImport(Screen):
 	def __init__(self, session):
@@ -1077,7 +1100,7 @@ class EPGSearchTimerImport(Screen):
 
 		for timer in self.session.nav.RecordTimer.processed_timers:
 			l.append((timer, True))
-		l.sort(key = lambda x: x[0].begin)
+		l.sort(key=lambda x: x[0].begin)
 
 	def search(self):
 		cur = self["timerlist"].getCurrent()
@@ -1086,6 +1109,7 @@ class EPGSearchTimerImport(Screen):
 
 	def cancel(self):
 		self.close(None)
+
 
 class EPGSearchChannelSelection(SimpleChannelSelection):
 	def __init__(self, session):
@@ -1109,9 +1133,10 @@ class EPGSearchChannelSelection(SimpleChannelSelection):
 				False
 			)
 
-	def epgClosed(self, ret = None):
+	def epgClosed(self, ret=None):
 		if ret:
 			self.close(ret)
+
 
 class CurrentSearchSingleSelection(EPGSelection):
 	def __init__(self, session, ref, event_id=None):
@@ -1126,6 +1151,7 @@ class CurrentSearchSingleSelection(EPGSelection):
 				self["list"].moveToEventId(self.event_id)
 		except:
 			pass
+
 
 class EPGSearchEPGSelection(EPGSelection):
 	def __init__(self, session, ref, openPlugin):

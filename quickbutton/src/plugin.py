@@ -31,17 +31,18 @@ from Screens.MessageBox import MessageBox
 from . import _
 
 config.plugins.Quickbutton = ConfigSubsection()
-config.plugins.Quickbutton.overwritehbbtvredbutton = ConfigYesNo(default = False)
-config.plugins.Quickbutton.red = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
-config.plugins.Quickbutton.red_b = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
-config.plugins.Quickbutton.green = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
-config.plugins.Quickbutton.yellow = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
-config.plugins.Quickbutton.blue = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
+config.plugins.Quickbutton.overwritehbbtvredbutton = ConfigYesNo(default=False)
+config.plugins.Quickbutton.red = ConfigText(default=_("Nothing"), visible_width=50, fixed_size=False)
+config.plugins.Quickbutton.red_b = ConfigText(default=_("Nothing"), visible_width=50, fixed_size=False)
+config.plugins.Quickbutton.green = ConfigText(default=_("Nothing"), visible_width=50, fixed_size=False)
+config.plugins.Quickbutton.yellow = ConfigText(default=_("Nothing"), visible_width=50, fixed_size=False)
+config.plugins.Quickbutton.blue = ConfigText(default=_("Nothing"), visible_width=50, fixed_size=False)
 
 
-from  Screens.InfoBarGenerics import InfoBarPlugins
+from Screens.InfoBarGenerics import InfoBarPlugins
 baseInfoBarPlugins__init__ = None
 ENABLE_RED_BUTTON = False
+
 
 def getHBBTVInstalled():
 	try:
@@ -50,8 +51,9 @@ def getHBBTVInstalled():
 	except ImportError:
 		return False
 
+
 def autostart(reason, **kwargs):
-	global baseInfoBarPlugins__init__,ENABLE_RED_BUTTON
+	global baseInfoBarPlugins__init__, ENABLE_RED_BUTTON
 	if "session" in kwargs:
 		session = kwargs["session"]
 		if baseInfoBarPlugins__init__ is None:
@@ -65,14 +67,17 @@ def autostart(reason, **kwargs):
 			ENABLE_RED_BUTTON = True
 			InfoBarPlugins.red = red
 
-def setup(session,**kwargs):
+
+def setup(session, **kwargs):
 	session.open(QuickbuttonSetup)
+
 
 def Plugins(**kwargs):
 
-	list = [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)]	
-	list.append(PluginDescriptor(name="Setup Quickbutton", description=_("setup for Quickbutton"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon = "setup_quickbutton.png", fnc=setup))
+	list = [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart)]
+	list.append(PluginDescriptor(name="Setup Quickbutton", description=_("setup for Quickbutton"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="setup_quickbutton.png", fnc=setup))
 	return list
+
 
 def InfoBarPlugins__init__(self):
 	from Screens.InfoBarGenerics import InfoBarEPG
@@ -86,9 +91,8 @@ def InfoBarPlugins__init__(self):
 			hbbtvinstalled = getHBBTVInstalled()
 			if config.plugins.Quickbutton.overwritehbbtvredbutton.value and hbbtvinstalled:
 				self["HbbtvActions"].setEnabled(False)
-		self["QuickbuttonActions"] = HelpableActionMap(self, "QuickbuttonActions",x)
+		self["QuickbuttonActions"] = HelpableActionMap(self, "QuickbuttonActions", x)
 
-			
 	else:
 		InfoBarPlugins.__init__ = InfoBarPlugins.__init__
 		InfoBarPlugins.greenlong = None
@@ -99,22 +103,28 @@ def InfoBarPlugins__init__(self):
 			InfoBarPlugins.red = None
 	baseInfoBarPlugins__init__(self)
 
+
 def greenlong(self):
-	startPlugin(self,str(config.plugins.Quickbutton.green.value))
+	startPlugin(self, str(config.plugins.Quickbutton.green.value))
+
 
 def yellowlong(self):
 	startPlugin(self, str(config.plugins.Quickbutton.yellow.value))
 
+
 def redlong(self):
 	startPlugin(self, str(config.plugins.Quickbutton.red.value))
+
 
 def bluelong(self):
 	startPlugin(self, str(config.plugins.Quickbutton.blue.value))
 
+
 def red(self):
 	startPlugin(self, str(config.plugins.Quickbutton.red_b.value))
 
-def startPlugin(self,pname):
+
+def startPlugin(self, pname):
 	msgText = _("Unknown Error")
 	no_plugin = True
 	if pname != _("Nothing"):
@@ -134,19 +144,19 @@ def startPlugin(self,pname):
 				self.session.open(MediaPlayer)
 				no_plugin = False
 			except Exception, e:
-				msgText = _("Error!\nError Text: %s"%e)
+				msgText = _("Error!\nError Text: %s" % e)
 		elif pname == _("Plugin browser"):
 			from Screens.PluginBrowser import PluginBrowser
 			self.session.open(PluginBrowser)
 			no_plugin = False
 		elif pname == _("switch 4:3 content display"):
-			ar = {	"pillarbox": _("Pillarbox"), 
-				"panscan": _("Pan&Scan"),  
+			ar = {	"pillarbox": _("Pillarbox"),
+				"panscan": _("Pan&Scan"),
 				"scale": _("Just Scale")}
-			switch = { "pillarbox":"panscan", "panscan":"scale", "scale":"pillarbox" }
-			config.av.policy_43.value =  switch[config.av.policy_43.value]
+			switch = {"pillarbox": "panscan", "panscan": "scale", "scale": "pillarbox"}
+			config.av.policy_43.value = switch[config.av.policy_43.value]
 			config.av.policy_43.save()
-			self.session.open(MessageBox,_("Display 4:3 content as") + " " + ar[config.av.policy_43.value], MessageBox.TYPE_INFO, timeout = 3)
+			self.session.open(MessageBox, _("Display 4:3 content as") + " " + ar[config.av.policy_43.value], MessageBox.TYPE_INFO, timeout=3)
 			no_plugin = False
 		elif pname == _("Timer"):
 			from Screens.TimerEdit import TimerEditList
@@ -165,7 +175,7 @@ def startPlugin(self,pname):
 						hbbtv_instance._showApplicationList()
 		else:
 			plugin = None
-			for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]):
+			for p in plugins.getPlugins(where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]):
 				if pname == str(p.name):
 					plugin = p
 			if plugin is not None:
@@ -173,13 +183,13 @@ def startPlugin(self,pname):
 					self.runPlugin(plugin)
 					no_plugin = False
 				except Exception, e:
-					msgText = _("Error!\nError Text: %s"%e)
-			else: 
+					msgText = _("Error!\nError Text: %s" % e)
+			else:
 				msgText = _("Plugin not found!")
 	else:
 		msgText = _("No plugin assigned!")
 	if no_plugin:
-		self.session.open(MessageBox,msgText, MessageBox.TYPE_INFO)
+		self.session.open(MessageBox, msgText, MessageBox.TYPE_INFO)
 
 
 class QuickbuttonSetup(ConfigListScreen, Screen):
@@ -192,7 +202,7 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 			<ePixmap name="green" pixmap="skin_default/buttons/green.png" position="140,350" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
 		</screen>"""
 
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("OK"))
@@ -205,7 +215,7 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 			"left": self.keyLeft,
 			"right": self.keyRight,
 		}, -2)
-		ConfigListScreen.__init__(self, [], session = session)
+		ConfigListScreen.__init__(self, [], session=session)
 		self.hbbtvinstalled = getHBBTVInstalled()
 		self.overwriteHBBTVButton = config.plugins.Quickbutton.overwritehbbtvredbutton
 		self.createSetup("config")
@@ -218,21 +228,21 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 		yellow_selectedindex = self.getStaticPluginName(config.plugins.Quickbutton.yellow.value)
 		blue_selectedindex = self.getStaticPluginName(config.plugins.Quickbutton.blue.value)
 		# feste Vorgaben...koennte man noch erweitern, da hole ich mir sinnvolle Vorschlaege aus Foren noch ein...
-		self.entryguilist.append(("0",_("Nothing")))
-		self.entryguilist.append(("1",_("Single EPG")))
-		self.entryguilist.append(("2",_("Multi EPG")))
-		self.entryguilist.append(("3",_("MediaPlayer")))
-		self.entryguilist.append(("4",_("Plugin browser")))
-		self.entryguilist.append(("5",_("switch 4:3 content display")))
-		self.entryguilist.append(("6",_("Timer")))
+		self.entryguilist.append(("0", _("Nothing")))
+		self.entryguilist.append(("1", _("Single EPG")))
+		self.entryguilist.append(("2", _("Multi EPG")))
+		self.entryguilist.append(("3", _("MediaPlayer")))
+		self.entryguilist.append(("4", _("Plugin browser")))
+		self.entryguilist.append(("5", _("switch 4:3 content display")))
+		self.entryguilist.append(("6", _("Timer")))
 		if self.hbbtvinstalled:
-			self.entryguilist.append(("7",_("HbbTV Applications")))
+			self.entryguilist.append(("7", _("HbbTV Applications")))
 			index = 8
 		else:
 			index = 7
 		# Vorgaben aus EXTENSIONSMENU, PLUGINMENU
-		for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]):
-			self.entryguilist.append((str(index),str(p.name)))
+		for p in plugins.getPlugins(where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]):
+			self.entryguilist.append((str(index), str(p.name)))
 			if config.plugins.Quickbutton.red.value == str(p.name):
 				red_selectedindex = str(index)
 			if config.plugins.Quickbutton.red_b.value == str(p.name):
@@ -248,21 +258,21 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 		if self.hbbtvinstalled and ENABLE_RED_BUTTON:
 			self.overwriteHBBTVButtonEntry = getConfigListEntry(_("Overwrite HBBTV-red-button"), self.overwriteHBBTVButton)
 			cfglist.append(self.overwriteHBBTVButtonEntry)
-		self.redchoice = ConfigSelection(default = red_selectedindex, choices = self.entryguilist)
-		self.greenchoice = ConfigSelection(default = green_selectedindex, choices = self.entryguilist)
-		self.yellowchoice = ConfigSelection(default = yellow_selectedindex, choices = self.entryguilist)
-		self.bluechoice = ConfigSelection(default = blue_selectedindex, choices = self.entryguilist)
+		self.redchoice = ConfigSelection(default=red_selectedindex, choices=self.entryguilist)
+		self.greenchoice = ConfigSelection(default=green_selectedindex, choices=self.entryguilist)
+		self.yellowchoice = ConfigSelection(default=yellow_selectedindex, choices=self.entryguilist)
+		self.bluechoice = ConfigSelection(default=blue_selectedindex, choices=self.entryguilist)
 		cfglist.append(getConfigListEntry(_("assigned to long red"), self.redchoice))
 		cfglist.append(getConfigListEntry(_("assigned to long green"), self.greenchoice))
 		cfglist.append(getConfigListEntry(_("assigned to long yellow"), self.yellowchoice))
 		cfglist.append(getConfigListEntry(_("assigned to long blue"), self.bluechoice))
 		if ENABLE_RED_BUTTON and (self.overwriteHBBTVButton.value or not self.hbbtvinstalled):
-			self.red_b_choice = ConfigSelection(default = red_b_selectedindex, choices = self.entryguilist)
+			self.red_b_choice = ConfigSelection(default=red_b_selectedindex, choices=self.entryguilist)
 			cfglist.append(getConfigListEntry(_("assigned to red"), self.red_b_choice))
 		self[widget].list = cfglist
 		self[widget].l.setList(cfglist)
 
-	def getStaticPluginName(self,value):
+	def getStaticPluginName(self, value):
 		if value == _("Single EPG"):
 			return "1"
 		elif value == _("Multi EPG"):

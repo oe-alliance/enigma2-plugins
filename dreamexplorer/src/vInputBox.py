@@ -19,7 +19,6 @@
 #######################################################################
 
 
-
 from Screens.Screen import Screen
 from Screens.NumericalTextInputHelpDialog import NumericalTextInputHelpDialog
 from Components.ActionMap import NumberActionMap
@@ -30,23 +29,23 @@ from myNumericalTextInput import myNumericalTextInput
 from enigma import eRCInput, getPrevAsciiCode, getDesktop
 
 
-
 class vInputBox(Screen, myNumericalTextInput):
-	vibnewx = str(getDesktop(0).size().width()-80)
-	sknew = '<screen name="vInputBox" position="center,center" size="'+vibnewx+',70" title="Input...">\n'
+	vibnewx = str(getDesktop(0).size().width() - 80)
+	sknew = '<screen name="vInputBox" position="center,center" size="' + vibnewx + ',70" title="Input...">\n'
 	sknew = sknew + '<widget name="text" position="5,5" size="1270,25" font="Console;16"/>\n<widget name="input" position="0,40" size="'
 	sknew = sknew + vibnewx + ',30" font="Console;22"/>\n</screen>'
 	skin = sknew
-	def __init__(self, session, title = "", windowTitle = _("Input"), useableChars = None, **kwargs):
+
+	def __init__(self, session, title="", windowTitle=_("Input"), useableChars=None, **kwargs):
 		Screen.__init__(self, session)
-		myNumericalTextInput.__init__(self, nextFunc = None, handleTimeout = False)
+		myNumericalTextInput.__init__(self, nextFunc=None, handleTimeout=False)
 		self.session = session
 		self["text"] = Label(title)
 		self["input"] = Input(**kwargs)
 		self.onShown.append(boundFunction(self.setTitle, windowTitle))
 		if useableChars is not None:
 			self["input"].setUseableChars(useableChars)
-		self["actions"] = NumberActionMap(["WizardActions", "InputBoxActions", "InputAsciiActions", "KeyboardInputActions"], 
+		self["actions"] = NumberActionMap(["WizardActions", "InputBoxActions", "InputAsciiActions", "KeyboardInputActions"],
 		{
 			"gotAsciiCode": self.gotAsciiCode,
 			"ok": self.go,
@@ -122,9 +121,3 @@ class vInputBox(Screen, myNumericalTextInput):
 
 	def keyInsert(self):
 		self["input"].toggleOverwrite()
-
-
-
-
-
-

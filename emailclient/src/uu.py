@@ -36,8 +36,10 @@ import sys
 
 __all__ = ["Error", "encode", "decode"]
 
+
 class Error(Exception):
     pass
+
 
 def encode(in_file, out_file, name=None, mode=None):
     """Uuencode file"""
@@ -72,7 +74,7 @@ def encode(in_file, out_file, name=None, mode=None):
     #
     # Write the data
     #
-    out_file.write('begin %o %s\n' % ((mode&0777),name))
+    out_file.write('begin %o %s\n' % ((mode & 0777), name))
     data = in_file.read(45)
     while len(data) > 0:
         out_file.write(binascii.b2a_uu(data))
@@ -134,7 +136,7 @@ def decode(in_file, out_file=None, mode=None, quiet=0):
             data = binascii.a2b_uu(s)
         except binascii.Error, v:
             # Workaround for broken uuencoders by /Fredrik Lundh
-            nbytes = (((ord(s[0])-32) & 63) * 4 + 5) // 3
+            nbytes = (((ord(s[0]) - 32) & 63) * 4 + 5) // 3
             data = binascii.a2b_uu(s[:nbytes])
             if not quiet:
                 sys.stderr.write("Warning: %s\n" % v)
@@ -144,6 +146,7 @@ def decode(in_file, out_file=None, mode=None, quiet=0):
         raise Error('Truncated input file')
     if opened:
         out_file.close()
+
 
 def test():
     """uuencode/uudecode main program"""
@@ -181,6 +184,7 @@ def test():
                 print sys.argv[0], ': cannot do -t from stdin'
                 sys.exit(1)
         encode(input, output)
+
 
 if __name__ == '__main__':
     test()

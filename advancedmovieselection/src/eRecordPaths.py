@@ -8,7 +8,8 @@ from Components.ActionMap import ActionMap
 from Tools.Directories import fileExists
 from Components.UsageConfig import preferredPath
 
-class RecordPathsSettings(Screen,ConfigListScreen):
+
+class RecordPathsSettings(Screen, ConfigListScreen):
 	skin = """
 		<screen name="RecordPathsSettings" position="160,150" size="450,200" title="Recording paths">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="10,0" size="140,40" alphatest="on" />
@@ -45,13 +46,13 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 			configele.value = configele.last_value
 			self.session.open(
 				MessageBox,
-				_("The directory %s is not writable.\nMake sure you select a writable directory instead.")%dir,
-				type = MessageBox.TYPE_ERROR
+				_("The directory %s is not writable.\nMake sure you select a writable directory instead.") % dir,
+				type=MessageBox.TYPE_ERROR
 				)
 			return False
 
 	def initConfigList(self):
-		self.styles = [ ("<default>", _("<Default movie location>")), ("<current>", _("<Current movielist location>")), ("<timer>", _("<Last timer location>")) ]
+		self.styles = [("<default>", _("<Default movie location>")), ("<current>", _("<Current movielist location>")), ("<timer>", _("<Last timer location>"))]
 		styles_keys = [x[0] for x in self.styles]
 		tmp = config.movielist.videodirs.value
 		default = config.usage.default_path.value
@@ -59,28 +60,28 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 			tmp = tmp[:]
 			tmp.append(default)
 		print "DefaultPath: ", default, tmp
-		self.default_dirname = ConfigSelection(default = default, choices = tmp)
+		self.default_dirname = ConfigSelection(default=default, choices=tmp)
 		tmp = config.movielist.videodirs.value
 		default = config.usage.timer_path.value
 		if default not in tmp and default not in styles_keys:
 			tmp = tmp[:]
 			tmp.append(default)
 		print "TimerPath: ", default, tmp
-		self.timer_dirname = ConfigSelection(default = default, choices = self.styles+tmp)
+		self.timer_dirname = ConfigSelection(default=default, choices=self.styles + tmp)
 		tmp = config.movielist.videodirs.value
 		default = config.usage.instantrec_path.value
 		if default not in tmp and default not in styles_keys:
 			tmp = tmp[:]
 			tmp.append(default)
 		print "InstantrecPath: ", default, tmp
-		self.instantrec_dirname = ConfigSelection(default = default, choices = self.styles+tmp)
+		self.instantrec_dirname = ConfigSelection(default=default, choices=self.styles + tmp)
 		default = config.usage.timeshift_path.value
 		tmp = config.usage.allowed_timeshift_paths.value
 		if default not in tmp:
 			tmp = tmp[:]
 			tmp.append(default)
 		print "TimeshiftPath: ", default, tmp
-		self.timeshift_dirname = ConfigSelection(default = default, choices = tmp)
+		self.timeshift_dirname = ConfigSelection(default=default, choices=tmp)
 		self.timeshift_dirname.last_value = self.timeshift_dirname.value
 		self.default_dirname.addNotifier(self.checkReadWriteDir, initial_call=False, immediate_feedback=False)
 		self.default_dirname.last_value = self.default_dirname.value
@@ -162,13 +163,13 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 				if default not in tmp and default not in styles_keys:
 					tmp = tmp[:]
 					tmp.append(default)
-				self.timer_dirname.setChoices(self.styles+tmp, default=default)
+				self.timer_dirname.setChoices(self.styles + tmp, default=default)
 				tmp = config.movielist.videodirs.value
 				default = self.instantrec_dirname.value
 				if default not in tmp and default not in styles_keys:
 					tmp = tmp[:]
 					tmp.append(default)
-				self.instantrec_dirname.setChoices(self.styles+tmp, default=default)
+				self.instantrec_dirname.setChoices(self.styles + tmp, default=default)
 				self.entrydirname.value = res
 			if config.usage.allowed_timeshift_paths.value != self.lasttimeshiftdirs:
 				tmp = config.usage.allowed_timeshift_paths.value
@@ -186,7 +187,7 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 		if self.checkReadWriteDir(currentry[1]):
 			config.usage.default_path.value = self.default_dirname.value
 			config.usage.timer_path.value = self.timer_dirname.value
-			config.usage.instantrec_path.value = self.instantrec_dirname.value 
+			config.usage.instantrec_path.value = self.instantrec_dirname.value
 			config.usage.timeshift_path.value = self.timeshift_dirname.value
 			config.usage.default_path.save()
 			config.usage.timer_path.save()
@@ -196,4 +197,3 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 
 	def cancel(self):
 		self.close()
-

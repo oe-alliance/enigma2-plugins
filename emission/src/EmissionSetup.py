@@ -12,10 +12,11 @@ from Components.Sources.StaticText import StaticText
 # Configuration
 from Components.config import config, getConfigListEntry
 
+
 class EmissionSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = [ "EmissionSetup", "Setup" ]
+		self.skinName = ["EmissionSetup", "Setup"]
 
 		# Summary
 		self.setup_title = _("eMission settings")
@@ -30,8 +31,8 @@ class EmissionSetup(Screen, ConfigListScreen):
 				getConfigListEntry(_("Port"), config.plugins.emission.port),
 				getConfigListEntry(_("Auto-add torrent enclosures from SimpleRSS"), config.plugins.emission.autodownload_from_simplerss),
 			],
-			session = session,
-			on_change = self.changed
+			session=session,
+			on_change=self.changed
 		)
 
 		# Initialize widgets
@@ -66,4 +67,3 @@ class EmissionSetup(Screen, ConfigListScreen):
 
 	def createSummary(self):
 		return SetupSummary
-

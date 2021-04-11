@@ -3,7 +3,7 @@
 #    Ai-HD-Skins Control for Dreambox/Enigma-2
 #    Coded by Vali (c)2009-2011
 #
-#  This plugin is licensed under the Creative Commons 
+#  This plugin is licensed under the Creative Commons
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 #  To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/
 #  or send a letter to Creative Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -12,11 +12,10 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 #######################################################################
-
 
 
 from Plugins.Plugin import PluginDescriptor
@@ -35,9 +34,8 @@ from os import system
 from enigma import eEnv
 
 
-
-config.plugins.vhd  = ConfigSubsection()
-config.plugins.vhd.Style = ConfigSelection(default="dmm", choices = [
+config.plugins.vhd = ConfigSubsection()
+config.plugins.vhd.Style = ConfigSelection(default="dmm", choices=[
 				("dmm", _("DMM-Board")),
 				("shadow", _("Shadow")),
 				("beyonddreams", _("BeyondDreams-HD")),
@@ -46,32 +44,27 @@ config.plugins.vhd.Style = ConfigSelection(default="dmm", choices = [
 				("dc", _("Concinnity")),
 				("bluesofdream", _("BluesOfDream-HD"))
 				])
-config.plugins.vhd.ChannSelector = ConfigSelection(default="full", choices = [
+config.plugins.vhd.ChannSelector = ConfigSelection(default="full", choices=[
 				("full", _("Full")),
 				("vert", _("Full vertikal")),
 				("pig", _("mini TV")),
 				("simple", _("Simple"))
 				])
-config.plugins.vhd.OledStyle = ConfigSelection(default="full", choices = [
+config.plugins.vhd.OledStyle = ConfigSelection(default="full", choices=[
 				("full", _("Full")),
 				("simple", _("Simple"))
 				])
-
 
 
 def main(session, **kwargs):
 	session.open(AIHDsetup)
 
 
-
 def Plugins(**kwargs):
-	return PluginDescriptor(name="Ai.HD Controler", description=_("Configuration tool for All.In HD skins"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main)
-
+	return PluginDescriptor(name="Ai.HD Controler", description=_("Configuration tool for All.In HD skins"), where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main)
 
 
 #######################################################################
-
-
 
 
 class AIHDsetup(ConfigListScreen, Screen):
@@ -96,9 +89,9 @@ class AIHDsetup(ConfigListScreen, Screen):
 		list.append(getConfigListEntry(_("Channel and EPG selectors style:"), config.plugins.vhd.ChannSelector))
 		list.append(getConfigListEntry(_("OLED display style:"), config.plugins.vhd.OledStyle))
 		ConfigListScreen.__init__(self, list)
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], 
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 									{
-									"red": self.exit, 
+									"red": self.exit,
 									"green": self.save,
 									"cancel": self.exit
 									}, -1)
@@ -147,11 +140,11 @@ class AIHDsetup(ConfigListScreen, Screen):
 			for x in oled_lines:
 				skin_lines.append(x)
 			skn_file = self.daten + "channelselector-"
-			if config.plugins.vhd.ChannSelector.value=="pig":
+			if config.plugins.vhd.ChannSelector.value == "pig":
 				skn_file = skn_file + "pig.xml"
-			elif config.plugins.vhd.ChannSelector.value=="simple":
+			elif config.plugins.vhd.ChannSelector.value == "simple":
 				skn_file = skn_file + "simple.xml"
-			elif config.plugins.vhd.ChannSelector.value=="vert":
+			elif config.plugins.vhd.ChannSelector.value == "vert":
 				skn_file = skn_file + "vert.xml"
 			else:
 				skn_file = skn_file + "full.xml"
@@ -172,7 +165,7 @@ class AIHDsetup(ConfigListScreen, Screen):
 			xFile.close()
 		except:
 			self.session.open(MessageBox, _("Error by processing the skin file !!!"), MessageBox.TYPE_ERROR)
-		restartbox = self.session.openWithCallback(self.restartGUI,MessageBox,_("GUI needs a restart to apply a new skin.\nDo you want to Restart the GUI now?"), MessageBox.TYPE_YESNO)
+		restartbox = self.session.openWithCallback(self.restartGUI, MessageBox, _("GUI needs a restart to apply a new skin.\nDo you want to Restart the GUI now?"), MessageBox.TYPE_YESNO)
 		restartbox.setTitle(_("Restart GUI now?"))
 
 	def restartGUI(self, answer):
@@ -185,10 +178,3 @@ class AIHDsetup(ConfigListScreen, Screen):
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close()
-
-
-
-
-
-
-

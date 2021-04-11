@@ -2,6 +2,7 @@
 from Components.Sources.Source import Source
 from enigma import eServiceCenter, eServiceReference, eEPGCache
 
+
 class EPG(Source):
 	BOUQUETNOW = 0
 	BOUQUETNEXT = 1
@@ -25,7 +26,7 @@ class EPG(Source):
 		self.isBouquet = False
 
 	def handleCommand(self, cmd):
-		print "[WebComponents.EPG] setting command to '%s' " %cmd
+		print "[WebComponents.EPG] setting command to '%s' " % cmd
 		self.command = cmd
 
 	def do_func(self):
@@ -71,7 +72,7 @@ class EPG(Source):
 		return self.getEPGNowNext(ref, 1, True)
 
 	def getBouquetEPGMulti(self, ref):
-		return self.getEPGofBouquet(ref,  True)
+		return self.getEPGofBouquet(ref, True)
 
 	def getEPGNowNext(self, ref, type, service=False):
 		print "[WebComponents.EPG] getting EPG NOW/NEXT", ref
@@ -123,11 +124,11 @@ class EPG(Source):
 
 		if "endTime" in param:
 			if not param["endTime"] is None:
-				endtime = int( float(param["endTime"]) )
+				endtime = int(float(param["endTime"]))
 				if endtime < 0:
 					endtime = -1
 
-		events = self.epgcache.lookupEvent([options , (service, 0, time, endtime)]);
+		events = self.epgcache.lookupEvent([options, (service, 0, time, endtime)])
 
 		if events:
 			if self.endtime:
@@ -155,7 +156,7 @@ class EPG(Source):
 
 		return list
 
-	def getEPGofBouquet(self, param, multi = False):
+	def getEPGofBouquet(self, param, multi=False):
 		print "[WebComponents.EPG] getting EPG for Bouquet", param
 
 		if 'bRef' not in param:
@@ -171,7 +172,7 @@ class EPG(Source):
 
 		if "endTime" in param:
 			if not param["endTime"] is None:
-				endtime = int( float(param["endTime"]) )
+				endtime = int(float(param["endTime"]))
 				if endtime < 0:
 					endtime = -1
 
@@ -200,15 +201,15 @@ class EPG(Source):
 
 		self.search = True
 
-		events = self.epgcache.search(('IBDTSERN', 256, eEPGCache.PARTIAL_TITLE_SEARCH, needle, 1));
+		events = self.epgcache.search(('IBDTSERN', 256, eEPGCache.PARTIAL_TITLE_SEARCH, needle, 1))
 		if events:
 			return events
 		return ()
 
 	def searchSimilarEvent(self, needle):
-		print "[WebComponents.EPG] searching similar eventid: ",needle
+		print "[WebComponents.EPG] searching similar eventid: ", needle
 
-		events = self.epgcache.search(('IBDCTSERN', 256, eEPGCache.SIMILAR_BROADCASTINGS_SEARCH, needle['sRef'], int(needle['eventid'])));
+		events = self.epgcache.search(('IBDCTSERN', 256, eEPGCache.SIMILAR_BROADCASTINGS_SEARCH, needle['sRef'], int(needle['eventid'])))
 		if events:
 			return events
 		return ()

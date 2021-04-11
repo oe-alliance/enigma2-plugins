@@ -10,6 +10,7 @@ except ImportError as ie:
 from GrowleeConnection import emergencyDisable
 from . import NOTIFICATIONID
 
+
 class ProwlAPI:
 	def __init__(self, host):
 		self.enable_outgoing = host.enable_outgoing.value
@@ -28,10 +29,9 @@ class ProwlAPI:
 			'priority': priority,
 		}
 
-		getPage('https://prowl.weks.net/publicapi/add/', method = 'POST', headers = headers, postdata = urlencode(data)).addErrback(emergencyDisable)
+		getPage('https://prowl.weks.net/publicapi/add/', method='POST', headers=headers, postdata=urlencode(data)).addErrback(emergencyDisable)
 
 	def stop(self):
 		defer = Deferred()
 		reactor.callLater(1, defer.callback, True)
 		return defer
-

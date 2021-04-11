@@ -34,7 +34,7 @@ from ConfigTextWithSuggestions import ConfigTextWithSuggestions
 from . import _
 
 searchContext = Config()
-searchContext.searchTerm = ConfigTextWithSuggestions("", False, threaded = True)
+searchContext.searchTerm = ConfigTextWithSuggestions("", False, threaded=True)
 searchContext.orderBy = ConfigSelection(
 				[
 				 ("relevance", _("Relevance")),
@@ -227,7 +227,7 @@ searchContext.lr = ConfigSelection(
 				 ("yi", _("Yiddish")),
 				 ("yo", _("Yoruba")),
 				 ("za", _("Zhuang")),
-				 ("zu", _("Zulu")) 
+				 ("zu", _("Zulu"))
 				], None)
 searchContext.sortOrder = ConfigSelection(
 				[
@@ -236,11 +236,11 @@ searchContext.sortOrder = ConfigSelection(
 				], "ascending")
 
 
-SEARCH		= 1
-STDFEEDS 	= 2
-PLAYLISTS 	= 3
-FAVORITES 	= 4
-CANCEL		= 5
+SEARCH = 1
+STDFEEDS = 2
+PLAYLISTS = 3
+FAVORITES = 4
+CANCEL = 5
 
 
 class YouTubeSearchDialog(Screen, ConfigListScreen):
@@ -250,19 +250,19 @@ class YouTubeSearchDialog(Screen, ConfigListScreen):
 		self.session = session
 
 		self.propagateUpDownNormally = True
-		
+
 		self["actions"] = ActionMap(["YouTubeSearchDialogActions"],
 		{
-			"standard"	:	self.keyStdFeeds,
-			"search"	:	self.keySearch,
-			"playlists"	:	self.keyPlaylists,
-			"favorites"	:	self.keyFavorites,
+			"standard": self.keyStdFeeds,
+			"search": self.keySearch,
+			"playlists": self.keyPlaylists,
+			"favorites": self.keyFavorites,
 
-			"cancel"	:	self.keyCancel,
-			"left"		:	self.keyLeft,
-			"right"		:	self.keyRight,
-			"up"		:	self.keyUp,
-			"down"		:	self.keyDown,
+			"cancel": self.keyCancel,
+			"left": self.keyLeft,
+			"right": self.keyRight,
+			"up": self.keyUp,
+			"down": self.keyDown,
 		}, -2)
 
 		self["key_red"] = Button(_("Std.Feeds"))
@@ -282,7 +282,6 @@ class YouTubeSearchDialog(Screen, ConfigListScreen):
 
 		ConfigListScreen.__init__(self, searchContextEntries, session)
 
-
 	def keyOK(self):
 		if isinstance(self["config"].getCurrent()[1], ConfigTextWithSuggestions):
 			if not self.propagateUpDownNormally:
@@ -295,14 +294,12 @@ class YouTubeSearchDialog(Screen, ConfigListScreen):
 		else:
 			ConfigListScreen.keyOK(self)
 
-
 	def keyUp(self):
 		if self.propagateUpDownNormally:
 			self["config"].instance.moveSelection(self["config"].instance.moveUp)
 		else:
 			self["config"].getCurrent()[1].suggestionListUp()
 			self["config"].invalidateCurrent()
-
 
 	def keyDown(self):
 		if self.propagateUpDownNormally:
@@ -311,7 +308,6 @@ class YouTubeSearchDialog(Screen, ConfigListScreen):
 			self["config"].getCurrent()[1].suggestionListDown()
 			self["config"].invalidateCurrent()
 
-
 	def keyRight(self):
 		if self.propagateUpDownNormally:
 			ConfigListScreen.keyRight(self)
@@ -319,14 +315,12 @@ class YouTubeSearchDialog(Screen, ConfigListScreen):
 			self["config"].getCurrent()[1].suggestionListPageDown()
 			self["config"].invalidateCurrent()
 
-
 	def keyLeft(self):
 		if self.propagateUpDownNormally:
 			ConfigListScreen.keyLeft(self)
 		else:
 			self["config"].getCurrent()[1].suggestionListPageUp()
 			self["config"].invalidateCurrent()
-
 
 	def keyCancel(self):
 		if self.propagateUpDownNormally:
@@ -336,7 +330,6 @@ class YouTubeSearchDialog(Screen, ConfigListScreen):
 			self["config"].getCurrent()[1].cancelSuggestionList()
 			self["config"].invalidateCurrent()
 
-
 	def keySearch(self):
 		if searchContext.searchTerm.value != "":
 			if isinstance(self["config"].getCurrent()[1], ConfigTextWithSuggestions) and not self.propagateUpDownNormally:
@@ -344,20 +337,17 @@ class YouTubeSearchDialog(Screen, ConfigListScreen):
 				self["config"].getCurrent()[1].deactivateSuggestionList()
 			self.close(SEARCH, searchContext)
 
-
 	def keyStdFeeds(self):
 		if isinstance(self["config"].getCurrent()[1], ConfigTextWithSuggestions) and not self.propagateUpDownNormally:
 			self.propagateUpDownNormally = True
 			self["config"].getCurrent()[1].deactivateSuggestionList()
 		self.close(STDFEEDS)
 
-
 	def keyPlaylists(self):
 		if isinstance(self["config"].getCurrent()[1], ConfigTextWithSuggestions) and not self.propagateUpDownNormally:
 			self.propagateUpDownNormally = True
 			self["config"].getCurrent()[1].deactivateSuggestionList()
 		self.close(PLAYLISTS)
-
 
 	def keyFavorites(self):
 		if isinstance(self["config"].getCurrent()[1], ConfigTextWithSuggestions) and not self.propagateUpDownNormally:

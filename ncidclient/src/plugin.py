@@ -31,7 +31,8 @@ from twisted.internet import reactor
 from twisted.internet.protocol import ReconnectingClientFactory
 from twisted.protocols.basic import LineReceiver
 
-import re, os
+import re
+import os
 
 from datetime import datetime
 
@@ -59,20 +60,27 @@ DESKTOP_HEIGHT = getDesktop(0).size().height()
 # else something scaled accordingly
 # if one of the parameters is -1, scale proportionally
 #
+
+
 def scaleH(y2, y1):
 	if y2 == -1:
 		y2 = y1 * 1280 / 720
 	elif y1 == -1:
 		y1 = y2 * 720 / 1280
 	return scale(y2, y1, 1280, 720, DESKTOP_WIDTH)
+
+
 def scaleV(y2, y1):
 	if y2 == -1:
 		y2 = y1 * 720 / 576
 	elif y1 == -1:
 		y1 = y2 * 576 / 720
 	return scale(y2, y1, 720, 576, DESKTOP_HEIGHT)
+
+
 def scale(y2, y1, x2, x1, x):
 	return (y2 - y1) * (x - x1) / (x2 - x1) + y1
+
 
 def getMountedDevices():
 	def handleMountpoint(loc):
@@ -100,6 +108,7 @@ def getMountedDevices():
 		mountedDevs += map(lambda p: (os.path.join(netDir, p), _("Network mount")), os.listdir(netDir))
 	mountedDevs = map(handleMountpoint, mountedDevs)
 	return mountedDevs
+
 
 config.plugins.NcidClient = ConfigSubsection()
 config.plugins.NcidClient.debug = ConfigEnableDisable(default=False)
@@ -131,6 +140,7 @@ ncidsrv = None
 
 avon = {}
 
+
 def initAvon():
 	avonFileName = resolveFilename(SCOPE_PLUGINS, "Extensions/NcidClient/avon.dat")
 	if os.path.exists(avonFileName):
@@ -142,6 +152,7 @@ def initAvon():
 				parts = line.split(':')
 				if len(parts) == 2:
 					avon[parts[0].replace('-', '').replace('*', '').replace('/', '')] = parts[1]
+
 
 def resolveNumberWithAvon(number, countrycode):
 	if not number or number[0] != '0':
@@ -157,9 +168,10 @@ def resolveNumberWithAvon(number, countrycode):
 
 	# debug('normNumer: ' + normNumber)
 	for i in reversed(range(min(10, len(number)))):
-		if avon.has_key(normNumber[:i]):
+		if normNumber[:i] in avon:
 			return '[' + avon[normNumber[:i]].strip() + ']'
 	return ""
+
 
 def handleReverseLookupResult(name):
 	found = re.match("NA: ([^;]*);VN: ([^;]*);STR: ([^;]*);HNR: ([^;]*);PLZ: ([^;]*);ORT: ([^;]*)", name)
@@ -189,8 +201,11 @@ def handleReverseLookupResult(name):
 			name += city
 	return name
 
+
 from xml.dom.minidom import parse
 cbcInfos = {}
+
+
 def initCbC():
 	callbycallFileName = resolveFilename(SCOPE_PLUGINS, "Extensions/NcidClient/callbycall_world.xml")
 	if os.path.exists(callbycallFileName):
@@ -202,8 +217,9 @@ def initCbC():
 	else:
 		debug("[NcidClient] initCbC: callbycallFileName does not exist?!?!")
 
+
 def stripCbCPrefix(number, countrycode):
-	if number and number[:2] != "00" and cbcInfos.has_key(countrycode):
+	if number and number[:2] != "00" and countrycode in cbcInfos:
 		for cbc in cbcInfos[countrycode]:
 			if len(cbc.getElementsByTagName("length")) < 1 or len(cbc.getElementsByTagName("prefix")) < 1:
 				debug("[NcidClient] stripCbCPrefix: entries for " + countrycode + " %s invalid")
@@ -226,6 +242,7 @@ FBF_dectActive = 6
 FBF_faxActive = 7
 FBF_rufumlActive = 8
 
+
 class NcidCall:
 	def __init__(self):
 		debug("[NcidCall] __init__")
@@ -241,6 +258,7 @@ class NcidCall:
 			self._callScreen.close()
 			self._callScreen = None
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR, timeout=config.plugins.NcidClient.timeout.value)
+
 
 class NcidClientPhonebook:
 	def __init__(self):
@@ -311,14 +329,14 @@ class NcidClientPhonebook:
 			if number[0] != '0':
 				number = prefix + number
 				# debug("[NcidClientPhonebook] search: added prefix: %s" %number)
-			elif number[:len(prefix)] == prefix and self.phonebook.has_key(number[len(prefix):]):
+			elif number[:len(prefix)] == prefix and number[len(prefix):] in self.phonebook:
 				# debug("[NcidClientPhonebook] search: same prefix")
 				name = self.phonebook[number[len(prefix):]]
 				# debug("[NcidClientPhonebook] search: result: %s" %name)
 		else:
 			prefix = ""
 
-		if not name and self.phonebook.has_key(number):
+		if not name and number in self.phonebook:
 			name = self.phonebook[number]
 
 		return name.replace(", ", "\n").strip()
@@ -368,7 +386,7 @@ class NcidClientPhonebook:
 					fNew.close()
 					# os.remove(phonebookFilename)
 					eBackgroundFileEraser.getInstance().erase(phonebookFilename)
-					os.rename(phonebookFilename + str(os.getpid()), 	phonebookFilename)
+					os.rename(phonebookFilename + str(os.getpid()), phonebookFilename)
 					debug("[NcidClientPhonebook] removed %s from Phonebook.txt" % number)
 					return True
 
@@ -519,7 +537,7 @@ class NcidClientPhonebook:
 					self.deleteConfirmed,
 					MessageBox,
 					_("Do you really want to delete entry for\n\n%(number)s\n\n%(name)s?")
-					% { 'number':str(cur[2]), 'name':str(cur[0]).replace(", ", "\n") }
+					% {'number': str(cur[2]), 'name': str(cur[0]).replace(", ", "\n")}
 								)
 			else:
 				self.session.open(MessageBox, _("No entry selected"), MessageBox.TYPE_INFO)
@@ -584,7 +602,7 @@ class NcidClientPhonebook:
 						"ok": self.add,
 					}, -2)
 
-					self.list = [ ]
+					self.list = []
 					ConfigListScreen.__init__(self, self.list, session=session)
 					self.name = name
 					self.number = number
@@ -654,7 +672,9 @@ class NcidClientPhonebook:
 		def exit(self):
 			self.close()
 
+
 phonebook = NcidClientPhonebook()
+
 
 class NcidClientSetup(Screen, ConfigListScreen):
 
@@ -727,7 +747,7 @@ class NcidClientSetup(Screen, ConfigListScreen):
 		self.createSetup()
 
 	def createSetup(self):
-		self.list = [ ]
+		self.list = []
 		self.list.append(getConfigListEntry(_("Call monitoring"), config.plugins.NcidClient.enable))
 		if config.plugins.NcidClient.enable.value:
 			self.list.append(getConfigListEntry(_("NCID server (Name or IP)"), config.plugins.NcidClient.hostname))
@@ -800,9 +820,10 @@ class NcidClientSetup(Screen, ConfigListScreen):
 
 standbyMode = False
 
+
 class NcidCallList:
 	def __init__(self):
-		self.callList = [ ]
+		self.callList = []
 
 	def add(self, date, number, caller):
 		debug("[NcidCallList] add: %s %s" % (number, caller))
@@ -860,11 +881,14 @@ class NcidCallList:
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO)
 		# TODO please HELP: from where can I get a session?
 		# my_global_session.open(NcidDisplayCalls, text)
-		self.callList = [ ]
+		self.callList = []
+
 
 callList = NcidCallList()
 
 global_muted = None
+
+
 def notifyCall(date, number, caller):
 	if Standby.inStandby is None or config.plugins.NcidClient.afterStandby.value == "each":
 		global global_muted
@@ -880,7 +904,7 @@ def notifyCall(date, number, caller):
 		#
 		# if not yet done, register function to show call list
 		global standbyMode
-		if not standbyMode :
+		if not standbyMode:
 			standbyMode = True
 			Standby.inStandby.onHide.append(callList.display) #@UndefinedVariable
 		# add text/timeout to call list
@@ -895,8 +919,9 @@ def notifyCall(date, number, caller):
 #		the necessary data for the notification
 #===============================================================================
 
-countries = { }
+countries = {}
 reverselookupMtime = 0
+
 
 class NcidReverseLookupAndNotify:
 	def __init__(self, number, caller, date):
@@ -942,6 +967,7 @@ class NcidReverseLookupAndNotify:
 			else:
 				self.caller = name
 		notifyCall(self.date, self.number, self.caller)
+
 
 class NcidLineReceiver(LineReceiver):
 	def __init__(self):
@@ -1029,12 +1055,14 @@ class NcidLineReceiver(LineReceiver):
 
 		self.notifyAndReset()
 
+
 class NcidClientFactory(ReconnectingClientFactory):
 	initialDelay = 20
 	maxDelay = 30
 
 	def __init__(self):
 		self.hangup_ok = False
+
 	def startedConnecting(self, connector): #@UnusedVariable # pylint: disable=W0613
 		if config.plugins.NcidClient.connectionVerbose.value:
 			Notifications.AddNotification(MessageBox, _("Connecting to NCID Server..."), type=MessageBox.TYPE_INFO, timeout=2)
@@ -1065,6 +1093,7 @@ class NcidClientFactory(ReconnectingClientFactory):
 		# config.plugins.NcidClient.enable.value = False
 		ncidsrv = None
 
+
 class NcidClient:
 	def __init__(self):
 		self.dialog = None
@@ -1088,16 +1117,19 @@ class NcidClient:
 			self.desc[1].disconnect()
 			self.desc = None
 
+
 def main(session):
 	session.open(NcidClientSetup)
 
+
 ncid_call = None
+
 
 def autostart(reason, **kwargs):
 	global ncid_call
 
 	# ouch, this is a hack
-	if kwargs.has_key("session"):
+	if "session" in kwargs:
 		global my_global_session
 		my_global_session = kwargs["session"]
 		return
@@ -1109,8 +1141,8 @@ def autostart(reason, **kwargs):
 		ncid_call.shutdown()
 		ncid_call = None
 
+
 def Plugins(**kwargs): #@UnusedVariable # pylint: disable=W0613,C0103
 	what = _("Display Fon calls on screen")
-	return [ PluginDescriptor(name="NCID Client", description=what, where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main),
-		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart) ]
-
+	return [PluginDescriptor(name="NCID Client", description=what, where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main),
+		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]

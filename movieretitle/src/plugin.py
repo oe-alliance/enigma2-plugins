@@ -15,17 +15,19 @@ from enigma import eTimer, eServiceCenter, iServiceInformation, eConsoleAppConta
 from os import path as os_path, rename as os_rename, unlink as os_unlink, fsync
 from Components.Sources.Boolean import Boolean
 
+
 def main(session, service, **kwargs):
 	session.open(MovieRetitle, service, session.current_dialog, **kwargs)
 
+
 def Plugins(**kwargs):
-	return PluginDescriptor(name="MovieRetitle", description=_("change name..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc=main)
+	return PluginDescriptor(name="MovieRetitle", description=_("change name..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main)
 
 
 class MovieRetitle(Screen, ConfigListScreen):
-	def __init__(self, session, service, parent, args = 0):
-		Screen.__init__(self, session, parent = parent)
-		self.skinName = [ "MovieRetitle", "Setup" ]
+	def __init__(self, session, service, parent, args=0):
+		Screen.__init__(self, session, parent=parent)
+		self.skinName = ["MovieRetitle", "Setup"]
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
@@ -48,13 +50,13 @@ class MovieRetitle(Screen, ConfigListScreen):
 		self["key_green"] = StaticText(_("OK"))
 		self["key_red"] = StaticText(_("Cancel"))
 
-		self.input_file = ConfigText(default = self.file, fixed_size = False, visible_width = 42)
-		self.input_title = ConfigText(default = self.orig_title, fixed_size = False, visible_width = 42)
-		self.input_descr = ConfigText(default = self.descr, fixed_size = False, visible_width = 42)
+		self.input_file = ConfigText(default=self.file, fixed_size=False, visible_width=42)
+		self.input_title = ConfigText(default=self.orig_title, fixed_size=False, visible_width=42)
+		self.input_descr = ConfigText(default=self.descr, fixed_size=False, visible_width=42)
 		tmp = config.movielist.videodirs.value
 		if not self.dir in tmp:
 			tmp.append(self.dir)
-		self.input_dir = ConfigSelection(choices = tmp, default = self.dir)
+		self.input_dir = ConfigSelection(choices=tmp, default=self.dir)
 
 		self["actions"] = ActionMap(["SetupActions"],
 		{
@@ -71,10 +73,10 @@ class MovieRetitle(Screen, ConfigListScreen):
 			self.locationEl
 		]
 
-		ConfigListScreen.__init__(self, l, session = session)
+		ConfigListScreen.__init__(self, l, session=session)
 
 		self.onLayoutFinish.append(self.setCustomTitle)
-		
+
 	def setCustomTitle(self):
 		self.setTitle(_("Name and Description Input"))
 
@@ -121,13 +123,13 @@ class MovieRetitle(Screen, ConfigListScreen):
 			if not descr and descr != "":
 				descr = olddescr
 			metafile = open(file + ".ts.meta", "w")
-			metafile.write("%s%s\n%s\n%s" %(sid, title, descr, rest))
+			metafile.write("%s%s\n%s\n%s" % (sid, title, descr, rest))
 			metafile.flush()
 			fsync(metafile.fileno())
 			metafile.close()
 
 	def maybeMoveMovieFiles(self, fr, to):
-		if os_path.exists(to+".ts"):
+		if os_path.exists(to + ".ts"):
 			self.inter_fr = fr
 			self.inter_to = to
 			self.session.openWithCallback(self.confirmedReplace, MessageBox, _("Target file %s.ts already exist.\nDo you want to replace it?") % (to), MessageBox.TYPE_YESNO)
@@ -165,7 +167,8 @@ class MovieRetitle(Screen, ConfigListScreen):
 			try:
 				# when started from MovieSelection Quickbutton Plugin, MovieSelection is parent, not MovieContextMenu --> try again
 				self.parent.reloadList()
-			except: pass
+			except:
+				pass
 
 	def baseName(self, str):
 		name = str.split('/')[-1]
@@ -181,11 +184,12 @@ class MovieRetitle(Screen, ConfigListScreen):
 		else:
 			return dir + name
 
+
 class MovieRetitleBackgroundMover:
 	def __init__(self):
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.moveNextSuffBG)
-		self.currid = 0;
+		self.currid = 0
 		self.queue = []
 		self.running = False
 		self.messageQueue = []
@@ -207,9 +211,9 @@ class MovieRetitleBackgroundMover:
 				i += 1
 			if not done:
 				self.messageQueue.append((session, id, txt))
-		self.tryLaunchMessage(callback = cb)
+		self.tryLaunchMessage(callback=cb)
 
-	def tryLaunchMessage(self, dummy=0, callback = None):
+	def tryLaunchMessage(self, dummy=0, callback=None):
 		global global_message_block
 		self.messageTimer.stop()
 		if not self.messageQueue:
@@ -241,7 +245,7 @@ class MovieRetitleBackgroundMover:
 		global_message_block = False
 		if closeprev:
 			closeprev.close(True)
-		self.tryLaunchMessage(callback = callback)
+		self.tryLaunchMessage(callback=callback)
 
 	def enqueue(self, cb, session, fr, to):
 		self.currid += 1
@@ -297,7 +301,7 @@ class MovieRetitleBackgroundMover:
 			self.message(self.ele[0], self.ele[1], None, mess)
 			self.runDone(0)
 
+
 global_background_mover = MovieRetitleBackgroundMover()
 
 global_message_block = False
-

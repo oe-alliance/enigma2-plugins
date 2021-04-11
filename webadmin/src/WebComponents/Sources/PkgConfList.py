@@ -3,18 +3,19 @@ from Components.Sources.Source import Source
 from os import popen as os_popen, statvfs as os_statvfs, path as os_path
 from shutil import move as sh_move
 
+
 class PkgConfList(Source):
-	LIST=0
-	SWITCH=1
-	MEM=2
-	
+	LIST = 0
+	SWITCH = 1
+	MEM = 2
+
 	def __init__(self, session, func=LIST, wap=False):
 		Source.__init__(self)
 		self.func = func
 		self.wap = wap
 		self.session = session
-		self.res = ( False, "Missing or Wrong Argument" )
-			
+		self.res = (False, "Missing or Wrong Argument")
+
 	def handleCommand(self, cmd):
 		if cmd is not None:
 			if self.func is self.SWITCH:
@@ -23,8 +24,8 @@ class PkgConfList(Source):
 				self.res = self.getMem()
 			elif self.func is self.LIST:
 				pass
-			
-	def switch(self,cmd):
+
+	def switch(self, cmd):
 		if cmd:
 			try:
 				file = cmd["file"]
@@ -36,15 +37,15 @@ class PkgConfList(Source):
 					return (True, file)
 			except Exception, e:
 				return (False, str(e))
-			
+
 	def getMem(self):
 		try:
 			stat = os_statvfs("/")
 		except OSError:
 			return (False, "-1")
 		freespace = stat.f_bfree / 1000 * stat.f_bsize / 1000
-		return (True, '%d' %freespace)
-			
+		return (True, '%d' % freespace)
+
 	def getList(self):
 		list = []
 		files = os_popen("ls /etc/opkg")
@@ -52,10 +53,10 @@ class PkgConfList(Source):
 			file = n[:-1]
 			if file.endswith(".conf") or file.endswith(".off"):
 				print "[PkgConfList] file ", file
-				text =""
+				text = ""
 				with open("/etc/opkg/" + file) as f:
 					text = f.read()
-					print "[PkgConfList] text ",text
+					print "[PkgConfList] text ", text
 					f.close()
 				list.append((file, text))
 		return list
@@ -63,11 +64,10 @@ class PkgConfList(Source):
 	def getResult(self):
 		if self.func is not self.LIST:
 			return self.res
-		return ( False, "illegal call" )
+		return (False, "illegal call")
 
 	result = property(getResult)
-	
+
 	list = property(getList)
-	lut = {"Name": 0
-			, "Text": 1
+	lut = {"Name": 0			, "Text": 1
 		}

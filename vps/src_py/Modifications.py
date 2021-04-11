@@ -22,7 +22,8 @@ vps_already_registered = False
 # of which takes a positional parameter whilst the other does not).
 # In both Py2 and Py3. It's not pretty as we have to count the args...
 #
-import sys, inspect
+import sys
+import inspect
 if sys.version_info[0] == 2:
 	__getargs = inspect.getargspec
 else:
@@ -33,6 +34,8 @@ __vps_TimerEntry_createSetup_has_widget = len(__getargs(TimerEntry.createSetup).
 
 # We cater for any parameters thrown at us and pass it all on.
 #
+
+
 def new_RecordTimer_saveTimer(self, *args, **kwargs):
 	self._saveTimer_old_rn_vps(*args, **kwargs)
 
@@ -96,7 +99,7 @@ def new_RecordTimer_loadTimer(self, *args, **kwargs):
 
 	# added by VPS-Plugin
 	try:
-		vps_timers = { }
+		vps_timers = {}
 
 		if xmlroot is not None:
 			for xml in xmlroot.findall("timer"):
@@ -104,7 +107,7 @@ def new_RecordTimer_loadTimer(self, *args, **kwargs):
 				end = xml.get("end")
 				serviceref = xml.get("serviceref").encode("utf-8")
 
-				vps_timers[serviceref + begin + end] = { }
+				vps_timers[serviceref + begin + end] = {}
 				vps_overwrite = xml.get("vps_overwrite")
 				if vps_overwrite and vps_overwrite == "1":
 					vps_timers[serviceref + begin + end]["overwrite"] = True
@@ -137,6 +140,8 @@ def new_RecordTimer_loadTimer(self, *args, **kwargs):
 
 # We cater for any parameters thrown at us and pass it all on.
 #
+
+
 def new_TimerEntry_createConfig(self, *args, **kwargs):
 
 # Pass on all we were given
@@ -162,15 +167,14 @@ def new_TimerEntry_createConfig(self, *args, **kwargs):
 				self.timerentry_vpsplugin_dontcheck_pdc = True
 				default_value = config.plugins.vps.vps_default.value
 
-
-		self.timerentry_vpsplugin_enabled = ConfigSelection(choices = [("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes"))], default = default_value)
+		self.timerentry_vpsplugin_enabled = ConfigSelection(choices=[("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes"))], default=default_value)
 
 		if self.timer.vpsplugin_time is not None:
-			self.timerentry_vpsplugin_time_date = ConfigDateTime(default = self.timer.vpsplugin_time, formatstring = _("%d.%B %Y"), increment = 86400)
-			self.timerentry_vpsplugin_time_clock = ConfigClock(default = self.timer.vpsplugin_time)
+			self.timerentry_vpsplugin_time_date = ConfigDateTime(default=self.timer.vpsplugin_time, formatstring=_("%d.%B %Y"), increment=86400)
+			self.timerentry_vpsplugin_time_clock = ConfigClock(default=self.timer.vpsplugin_time)
 		else:
-			self.timerentry_vpsplugin_time_date = ConfigDateTime(default = self.timer.begin, formatstring = _("%d.%B %Y"), increment = 86400)
-			self.timerentry_vpsplugin_time_clock = ConfigClock(default = self.timer.begin)
+			self.timerentry_vpsplugin_time_date = ConfigDateTime(default=self.timer.begin, formatstring=_("%d.%B %Y"), increment=86400)
+			self.timerentry_vpsplugin_time_clock = ConfigClock(default=self.timer.begin)
 	except Exception as exc:
 		print("[VPS] new_TimerEntry_createConfig : ", exc)
 		pass
@@ -251,6 +255,8 @@ def new_TimerEntry_createSetup(self, widget="config"):
 
 # We cater for any parameters thrown at us and pass it all on.
 #
+
+
 def new_TimerEntry_newConfig(self, *args, **kwargs):
 
 # Pass on all we were given
@@ -310,6 +316,7 @@ def new_TimerEntry_finishedChannelSelection(self, *args, **kwargs):
 		print("[VPS] new_TimerEntry_finishedChannelSelection : ", exc)
 		pass
 
+
 # Do we have TimerEntryBase?
 # If so, we have to intercept its __init__ and set the session filed in
 # self, as otherwise our createConfig intercept will fail as in the
@@ -342,13 +349,15 @@ except:
 
 # We cater for any parameters thrown at us and pass it all on.
 #
+
+
 def new_InfoBarInstantRecord_recordQuestionCallback(self, answer, *args, **kwargs):
 
 # Pass on all we were given
 	self._recordQuestionCallback_old_rn_vps(answer, *args, **kwargs)
 
 	try:
-		entry = len(self.recording)-1
+		entry = len(self.recording) - 1
 		if answer is not None and answer[1] == "event" and config.plugins.vps.instanttimer.value != "no" and entry is not None and entry >= 0:
 # If we aren't checking PDC, just put the values in directly
 #
@@ -374,6 +383,8 @@ def new_InfoBarInstantRecord_recordQuestionCallback(self, answer, *args, **kwarg
 		pass
 
 # VPS-Plugin in Enigma-Klassen einhängen
+
+
 def register_vps():
 	global vps_already_registered
 
@@ -387,7 +398,6 @@ def register_vps():
 
 		RecordTimer._loadTimer_old_rn_vps = RecordTimer.loadTimer
 		RecordTimer.loadTimer = new_RecordTimer_loadTimer
-
 
 		TimerEntry._createConfig_old_rn_vps = TimerEntry.createConfig
 		TimerEntry.createConfig = new_TimerEntry_createConfig

@@ -1,13 +1,13 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 #  Advanced Movie Selection for Dreambox-Enigma2
 #
 #  The plugin is developed on the basis from a lot of single plugins (thx for the code @ all)
 #  Coded by JackDaniel & cmikula(c)2011
 #  Support: www.i-have-a-dreambox.com
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -16,7 +16,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 from __init__ import _
@@ -44,10 +44,11 @@ from ClientSetup import ClientSetup
 from Source.Globals import pluginPresent, SkinTools
 from Source.Config import qButtons
 
+
 class ConfigList(eConfigList.ConfigList):
     def __init__(self, list, session=None):
         eConfigList.ConfigList.__init__(self, list, session=session)
-    
+
     def selectionChanged(self):
         if isinstance(self.current, tuple) and len(self.current) >= 2:
             self.current[1].onDeselect(self.session)
@@ -64,6 +65,7 @@ class ConfigList(eConfigList.ConfigList):
             self.current[1].onDeselect(self.session)
         instance.selectionChanged.get().remove(self.selectionChanged)
         instance.setContent(None)
+
 
 class ConfigListScreen(eConfigList.ConfigListScreen):
     def __init__(self, list, session=None, on_change=None):
@@ -95,18 +97,21 @@ class ConfigListScreen(eConfigList.ConfigListScreen):
             "showVirtualKeyboard": self.KeyText,
         }, -2)
         self["VirtualKB"].setEnabled(False)
-        
+
         self["config"] = ConfigList(list, session=session)
-        
+
         if on_change is not None:
             self.__changed = on_change
         else:
             self.__changed = lambda: None
-        
+
         if not self.handleInputHelpers in self["config"].onSelectionChanged:
             self["config"].onSelectionChanged.append(self.handleInputHelpers)
 
+
 from Source.Globals import SkinResolutionHelper
+
+
 class BackupRestore(ConfigListScreen, Screen, SkinResolutionHelper):
     def __init__(self, session, csel=None):
         Screen.__init__(self, session)
@@ -120,7 +125,7 @@ class BackupRestore(ConfigListScreen, Screen, SkinResolutionHelper):
             "green": self.openFilebrowser,
             "yellow": self.backup
         }, -2)
-        self.list = [ ]
+        self.list = []
         self.backup_dirs = config.movielist.videodirs.value[:]
         default = config.usage.default_path.value
         if default not in self.backup_dirs:
@@ -141,10 +146,10 @@ class BackupRestore(ConfigListScreen, Screen, SkinResolutionHelper):
 
     def setWindowTitle(self):
         self.setTitle(_("Backup/Restore Advanced Movie Selection settings"))
-    
+
     def getBackupPath(self):
         return self.backup_config_path.getValue()
-    
+
     def backup(self):
         from Source.Config import createBackup
         path = self.getBackupPath()
@@ -154,7 +159,7 @@ class BackupRestore(ConfigListScreen, Screen, SkinResolutionHelper):
             self.close()
         else:
             self.session.open(MessageBox, _("Error creating settings backup!"), type=MessageBox.TYPE_ERROR)
-    
+
     def openFilebrowser(self):
         from FileBrowser import FileBrowser
         path = self.getBackupPath()
@@ -167,14 +172,14 @@ class BackupRestore(ConfigListScreen, Screen, SkinResolutionHelper):
             loadBackup(answer)
             self.session.open(MessageBox, _("Some settings changes require close/reopen the movielist to take effect."), type=MessageBox.TYPE_INFO)
             self.close()
-            
+
     def okPressed(self):
         from Screens.LocationBox import LocationBox
         path = self.getBackupPath()
         from Components.config import ConfigLocations
         locations = ConfigLocations(self.backup_dirs)
         self.session.openWithCallback(self.dirnameSelected, LocationBox, _("Please select backup path here:"), currDir=path, bookmarks=locations)
-    
+
     def dirnameSelected(self, answer):
         if not answer:
             return
@@ -185,6 +190,7 @@ class BackupRestore(ConfigListScreen, Screen, SkinResolutionHelper):
         self.backup_config_path.setValue(answer)
         config.AdvancedMovieSelection.backup_path.value = answer
         config.AdvancedMovieSelection.backup_path.save()
+
 
 class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
     def __init__(self, session, csel=None):
@@ -208,7 +214,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
             "nextBouquet": self.nextBouquet,
             "prevBouquet": self.prevBouquet,
         }, -2)
-        self.list = [ ]
+        self.list = []
         ConfigListScreen.__init__(self, self.list, session=self.session)
         if not self.showHelp in self["config"].onSelectionChanged:
             self["config"].onSelectionChanged.append(self.showHelp)
@@ -227,7 +233,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
         self.onLayoutFinish.append(self.saveListsize)
         self.pluginsavailable()
         self.onHide.append(self.updateSettings)
-        self.setMenubutton()       
+        self.setMenubutton()
 
     def setMenubutton(self):
         if config.AdvancedMovieSelection.use_wastebasket.value:
@@ -244,7 +250,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
             self.csel["list"].updateSettings()
             self.csel["list"].updateHotplugDevices()
             self.csel.reloadList()
-        
+
     def saveListsize(self):
         listsize = self["config"].instance.size()
         self.listWidth = listsize.width()
@@ -269,7 +275,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
         self.checkListentrys()
 
     def checkListentrys(self):
-        needRefresh = False          
+        needRefresh = False
         if config.AdvancedMovieSelection.show_dirsize.isChanged():
             config.AdvancedMovieSelection.show_dirsize.save()
             needRefresh = True
@@ -308,14 +314,14 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
         if config.AdvancedMovieSelection.video_preview.isChanged():
             config.AdvancedMovieSelection.video_preview.save()
             needRefresh = True
-        if config.AdvancedMovieSelection.video_preview.isChanged(): 
+        if config.AdvancedMovieSelection.video_preview.isChanged():
             if not config.AdvancedMovieSelection.video_preview_fullscreen.value:
                 config.AdvancedMovieSelection.video_preview.save()
                 needRefresh = True
             else:
                 config.AdvancedMovieSelection.video_preview.save()
                 needRefresh = True
-                self.needsReopenFlag = True 
+                self.needsReopenFlag = True
         if config.AdvancedMovieSelection.minitv.isChanged():
             config.AdvancedMovieSelection.minitv.save()
             if not config.AdvancedMovieSelection.minitv.value:
@@ -332,7 +338,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
             config.AdvancedMovieSelection.video_preview.save()
             config.AdvancedMovieSelection.video_preview_fullscreen.save()
             self.needsReopenFlag = True
-        
+
         if needRefresh:
             self.createSetup()
 
@@ -348,7 +354,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
             if config.AdvancedMovieSelection.use_wastebasket.value:
                 self["MenuIcon"].show()
             else:
-                self["MenuIcon"].hide()            
+                self["MenuIcon"].hide()
         if config.AdvancedMovieSelection.debug.isChanged():
             config.AdvancedMovieSelection.debug.save()
             from Source.Debug import Debug
@@ -383,14 +389,14 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
             self.list.append(getConfigListEntry(_("Show mark movie in extensions menu from movielist:"), config.AdvancedMovieSelection.showmark, _("Displays mark movie as seen/unseen in the menu at the movie list.")))
             self.list.append(getConfigListEntry(_("Mark movie as seen at position (in percent):"), config.AdvancedMovieSelection.moviepercentseen, _("With this option you can assign as when a film is marked as seen.")))
         self.list.append(getConfigListEntry(_("Show movie plugins in extensions menu from movielist:"), config.AdvancedMovieSelection.pluginmenu_list, _("Displays E2 movie list extensions in the menu at the movie list.")))
-        self.list.append(getConfigListEntry(_("Show color key setup in extensions menu from movielist:"), config.AdvancedMovieSelection.showcolorkey, _("Displays color key setup option in the menu at the movie list.")))        
+        self.list.append(getConfigListEntry(_("Show color key setup in extensions menu from movielist:"), config.AdvancedMovieSelection.showcolorkey, _("Displays color key setup option in the menu at the movie list.")))
         self.list.append(getConfigListEntry(_("Show sort options in extensions menu from movielist:"), config.AdvancedMovieSelection.showsort, _("Displays sorting function in the menu at the movie list.")))
-        self.list.append(getConfigListEntry(_("Show list styles in extensions menu from movielist:"), config.AdvancedMovieSelection.showliststyle, _("Displays various lists typs in the menu at the movie list (Minimal,Compact...).")))        
+        self.list.append(getConfigListEntry(_("Show list styles in extensions menu from movielist:"), config.AdvancedMovieSelection.showliststyle, _("Displays various lists typs in the menu at the movie list (Minimal,Compact...).")))
         self.list.append(getConfigListEntry(_("Show delete option in extensions menu from movielist:"), config.AdvancedMovieSelection.showdelete, _("Displays the movie delete function in the menu at the movie list.")))
         self.list.append(getConfigListEntry(_("Show move/copy option in extensions menu from movielist:"), config.AdvancedMovieSelection.showmove, _("Displays the movie move/copy function in the menu at the movie list.")))
         self.list.append(getConfigListEntry(_("Show move/copy progress on begin/end:"), config.AdvancedMovieSelection.show_move_copy_progress, _("Show the movie move/copy progress on begin and show notification on end of move/copy action.")))
         self.list.append(getConfigListEntry(_("Show movie search in extensions menu from movielist:"), config.AdvancedMovieSelection.showsearch, _("Displays the movie search function in the menu at the movie list.")))
-        self.list.append(getConfigListEntry(_("Show covers in movielist:"), config.AdvancedMovieSelection.showpreview, _("Displays the cover in the movie list."))) 
+        self.list.append(getConfigListEntry(_("Show covers in movielist:"), config.AdvancedMovieSelection.showpreview, _("Displays the cover in the movie list.")))
         if config.AdvancedMovieSelection.showpreview.value:
             self.list.append(getConfigListEntry(_("Set coversize:"), config.AdvancedMovieSelection.tmdb_poster_size, _("Here you can determine the coverfile size for the download/save.")))
             self.list.append(getConfigListEntry(_("Download cover from TMDB after timer is finished:"), config.AdvancedMovieSelection.cover_auto_download, _("If this function is enabled the cover is automatically downloaded from TMDB after timer is finished.")))
@@ -400,10 +406,10 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
             self.list.append(getConfigListEntry(_("Show delete cover in extensions menu from movielist:"), config.AdvancedMovieSelection.show_cover_del, _("Displays delete cover function in the menu at the movie list.")))
             self.list.append(getConfigListEntry(_("Show delete movie info in extensions menu from movielist:"), config.AdvancedMovieSelection.show_info_del, _("Displays delete movie info function in the menu at the movie list.")))
             self.list.append(getConfigListEntry(_("Show Provider Logo:"), config.AdvancedMovieSelection.show_picon, _("Displays the Provider Logo when no Cover available.")))
-            self.list.append(getConfigListEntry(_("Show update genre in extensions menu from movielist:"), config.AdvancedMovieSelection.show_update_genre, _("Displays Update all genre in meta from eit options in the menu at the movie list.")))     
+            self.list.append(getConfigListEntry(_("Show update genre in extensions menu from movielist:"), config.AdvancedMovieSelection.show_update_genre, _("Displays Update all genre in meta from eit options in the menu at the movie list.")))
         if config.AdvancedMovieSelection.show_picon.value:
-            self.list.append(getConfigListEntry(_("Show Provider Logo in original size:"), config.AdvancedMovieSelection.piconsize, _("Displays the Provider Logo in original size. Otherwise, the provider logo be displayed zoomed up to cover size.")))    
-            self.list.append(getConfigListEntry(_("Provider Logo path:"), config.AdvancedMovieSelection.piconpath, _("Where to look for the provider logos? (Default is /usr/share/enigma2/picon)"))) 
+            self.list.append(getConfigListEntry(_("Show Provider Logo in original size:"), config.AdvancedMovieSelection.piconsize, _("Displays the Provider Logo in original size. Otherwise, the provider logo be displayed zoomed up to cover size.")))
+            self.list.append(getConfigListEntry(_("Provider Logo path:"), config.AdvancedMovieSelection.piconpath, _("Where to look for the provider logos? (Default is /usr/share/enigma2/picon)")))
         self.list.append(getConfigListEntry(_("Show rename in extensions menu from movielist:"), config.AdvancedMovieSelection.showrename, _("Displays rename function in the menu at the movie list.")))
         self.list.append(getConfigListEntry(_("Show TMDb Info & D/L in extensions menu from movielist:"), config.AdvancedMovieSelection.showtmdb, _("Displays TMDb Info & D/L in the menu at the movie list.")))
         self.list.append(getConfigListEntry(_("Show TheTVDB Info & D/L in extensions menu from movielist:"), config.AdvancedMovieSelection.showthetvdb, _("Displays TheTVDB Info & D/L in the menu at the movie list.")))
@@ -492,7 +498,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
             self["help"].setText(current[2])
         else:
             self["help"].setText(_("No Helptext available!"))
-        
+
     def pluginsavailable(self):
         if pluginPresent.IMDb:
             self["IMDbtxt"].setText(_("IMDb plugin installed. Assign function to info button is possible."))
@@ -505,11 +511,11 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
         if pluginPresent.TMDb:
             self["TMDbtxt"].setText(_("TMDb plugin installed. Assign function to info button is possible."))
         else:
-            self["TMDbtxt"].setText(_("TMDb plugin NOT installed. Assign function to info button is NOT possible.")) 
-        if  pluginPresent.YTTrailer:
+            self["TMDbtxt"].setText(_("TMDb plugin NOT installed. Assign function to info button is NOT possible."))
+        if pluginPresent.YTTrailer:
             self["Trailertxt"].setText(_("YTTrailer plugin installed. Search for trailers on the Web is possible."))
         else:
-            self["Trailertxt"].setText(_("YTTrailer plugin NOT installed. Search for trailers on the Web is NOT possible."))           
+            self["Trailertxt"].setText(_("YTTrailer plugin NOT installed. Search for trailers on the Web is NOT possible."))
 
     def cancelConfirm(self, result):
         if not result:
@@ -534,7 +540,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
         if config.AdvancedMovieSelection.movie_launch.isChanged():
             self.needsRestartFlag = True
         if config.AdvancedMovieSelection.overwrite_left_right.isChanged():
-            self.needsRestartFlag = True        
+            self.needsRestartFlag = True
         if config.usage.load_length_of_movies_in_moviellist.isChanged() and config.usage.load_length_of_movies_in_moviellist.value == False:
             config.AdvancedMovieSelection.showprogessbarinmovielist.value = False
             config.AdvancedMovieSelection.showiconstatusinmovielist.value = False
@@ -552,10 +558,10 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
             else:
                 serverInstance.shutdown()
                 serverInstance.active_clients = []
-        
+
         from Source.EpgListExtension import epgListExtension
         epgListExtension.setEnabled(config.AdvancedMovieSelection.epg_extension.value)
-        
+
         if self.csel:
             self.csel.updateSettings()
         if self.needsRestartFlag == True:
@@ -590,30 +596,31 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
 
     def save(self, retval=None):
         ConfigListScreen.keySave(self)
-            
+
     def about(self):
         self.session.open(AdvancedMovieSelectionAbout)
-        
+
     def buttonsetup(self):
         self.session.open(AdvancedMovieSelectionButtonSetup, self.csel)
-            
+
     def RecPathSettings(self):
         self.session.open(RecordPathsSettings)
+
 
 class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
     def __init__(self, session, csel=None):
         Screen.__init__(self, session)
         self.csel = csel
         self.skinName = SkinTools.appendResolution("AdvancedMovieSelectionButtonSetup")
-        self["important"] = StaticText() # TODO: deprecated - backward patch for oe1.6 compatibility 
+        self["important"] = StaticText() # TODO: deprecated - backward patch for oe1.6 compatibility
         self["key_red"] = Button(_("Cancel"))
         self["key_green"] = Button(_("Save/Close"))
         self["key_yellow"] = Button(_("Own button description"))
         self["OKIcon"] = Pixmap()
         self["OKIcon"].hide()
-        
+
         ConfigListScreen.__init__(self, [])
-        
+
         self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
         {
             "green": self.keySave,
@@ -631,7 +638,7 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
     def keyRight(self):
         ConfigListScreen.keyRight(self)
         self.selectionChanged()
-        
+
     def setCustomTitle(self):
         self.setTitle(_("Movie Quick Button Setup"))
 
@@ -692,7 +699,7 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
         self.entryguilist2.append(("NAS-Movies", _("NAS-Movies")))
         self.entryguilist3 = []
         self.entryguilist3.append(("Display plugin name", _("Display plugin name")))
-        self.entryguilist3.append(("Display plugin description", _("Display plugin description")))        
+        self.entryguilist3.append(("Display plugin description", _("Display plugin description")))
 
         for p in plugins.getPlugins(where=[PluginDescriptor.WHERE_MOVIELIST]):
             self.entryguilist.append(str(p.name))
@@ -701,7 +708,7 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
         for button, function in qButtons.get():
             print button, function
             if function == "" or not self.checkEntry(function, self.entryguilist):
-                print "[no config entry]", button, function 
+                print "[no config entry]", button, function
                 function = "Nothing"
             csel = (button, ConfigSelection(default=function, choices=self.entryguilist))
             self.qbutton_choicelist.append(csel)
@@ -731,7 +738,7 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
         self.initConfigList()
 
     def checkOwnButtonText(self, l, text, own_text):
-        l1 = [ descr[0] for descr in l ]
+        l1 = [descr[0] for descr in l]
         if own_text and not own_text in l1:
             l.append((own_text, own_text))
             l1.append(own_text)
@@ -812,7 +819,7 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
                 text = _(button)
             cle = getConfigListEntry(_("Quickbutton:") + " %s" % (text), config_sel)
             self.list.append(cle)
-            
+
         self.button_caption = getConfigListEntry(_("Button caption"), self.buttoncaptionchoice)
         self.list.append(self.button_caption)
         self.home_button_text = getConfigListEntry(_("Home button text"), self.homebuttontextchoice)
@@ -850,7 +857,7 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
         self["config"].setList(self.list)
         if not self.selectionChanged in self["config"].onSelectionChanged:
             self["config"].onSelectionChanged.append(self.selectionChanged)
-            
+
     def selectionChanged(self):
         current = self["config"].getCurrent()
         if current == self.homepath:
@@ -868,7 +875,7 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
         elif current == self.bookmark6:
             self.enableOKIcon()
         elif current == self.bookmark7:
-            self.enableOKIcon()    
+            self.enableOKIcon()
         elif current[1].getValue() == "Sort":
             self.enableOKIcon()
         else:
@@ -885,12 +892,12 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
         self.lastvideodirs = config.movielist.videodirs.value
         if currentry[1].getValue() == "Sort":
             from MovieList import MovieList
-            sorts = [] 
+            sorts = []
             sorts.append((str(MovieList.SORT_ALPHANUMERIC), _("Alphabetic sort")))
             sorts.append((str(MovieList.SORT_DATE_ASC), _("Sort by date (ascending)")))
             sorts.append((str(MovieList.SORT_DATE_DESC), _("Sort by date (descending)")))
             sorts.append((str(MovieList.SORT_DESCRIPTION), _("Sort by description")))
-            
+
             sels = config.AdvancedMovieSelection.sort_functions.value.split()
             if len(sels) == 0:
                 for s in sorts:
@@ -904,8 +911,8 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
             self.entrydirname = self.bookmark1_dirname
             self.session.openWithCallback(self.dirnameSelected, MovieLocationBox, _("Movie Quick Button Bookmark 1 path"), preferredPath(self.bookmark1_dirname.value))
         elif currentry == self.bookmark2:
-            self.entrydirname = self.bookmark2_dirname 
-            self.session.openWithCallback(self.dirnameSelected, MovieLocationBox, _("Movie Quick Button Bookmark 2 path"), preferredPath(self.bookmark2_dirname.value))     
+            self.entrydirname = self.bookmark2_dirname
+            self.session.openWithCallback(self.dirnameSelected, MovieLocationBox, _("Movie Quick Button Bookmark 2 path"), preferredPath(self.bookmark2_dirname.value))
         elif currentry == self.bookmark3:
             self.entrydirname = self.bookmark3_dirname
             self.session.openWithCallback(self.dirnameSelected, MovieLocationBox, _("Movie Quick Button Bookmark 3 path"), preferredPath(self.bookmark3_dirname.value))
@@ -913,8 +920,8 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
             self.entrydirname = self.bookmark4_dirname
             self.session.openWithCallback(self.dirnameSelected, MovieLocationBox, _("Movie Quick Button Bookmark 4 path"), preferredPath(self.bookmark4_dirname.value))
         elif currentry == self.bookmark5:
-            self.entrydirname = self.bookmark5_dirname 
-            self.session.openWithCallback(self.dirnameSelected, MovieLocationBox, _("Movie Quick Button Bookmark 5 path"), preferredPath(self.bookmark5_dirname.value))     
+            self.entrydirname = self.bookmark5_dirname
+            self.session.openWithCallback(self.dirnameSelected, MovieLocationBox, _("Movie Quick Button Bookmark 5 path"), preferredPath(self.bookmark5_dirname.value))
         elif currentry == self.bookmark6:
             self.entrydirname = self.bookmark6_dirname
             self.session.openWithCallback(self.dirnameSelected, MovieLocationBox, _("Movie Quick Button Bookmark 6 path"), preferredPath(self.bookmark6_dirname.value))
@@ -922,7 +929,7 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
             self.entrydirname = self.bookmark7_dirname
             self.session.openWithCallback(self.dirnameSelected, MovieLocationBox, _("Movie Quick Button Bookmark 7 path"), preferredPath(self.bookmark7_dirname.value))
         else:
-            self.keySave()                 
+            self.keySave()
 
     def sortTypeSelected(self, res):
         if res is not None:
@@ -981,7 +988,7 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
                     tmp = tmp[:]
                     tmp.append(default)
                 self.bookmark7_dirname.setChoices(tmp, default=default)
-                
+
     def keySave(self):
         for button, config_sel in self.qbutton_choicelist:
             fn = config_sel.getValue()
@@ -997,7 +1004,7 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
         config.AdvancedMovieSelection.bookmark5path.value = self.bookmark5_dirname.value
         config.AdvancedMovieSelection.bookmark6path.value = self.bookmark6_dirname.value
         config.AdvancedMovieSelection.bookmark7path.value = self.bookmark7_dirname.value
-        
+
         config.AdvancedMovieSelection.hometext.value = self.homebuttontextchoice.getValue()
         config.AdvancedMovieSelection.bookmark1text.value = self.bookmark1buttontextchoice.getValue()
         config.AdvancedMovieSelection.bookmark2text.value = self.bookmark2buttontextchoice.getValue()
@@ -1020,7 +1027,8 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
     def ownname(self):
         self.session.openWithCallback(self.createConfig, AdvancedMovieSelectionOwnButtonName)
 
-class AdvancedMovieSelectionOwnButtonName(Screen, ConfigListScreen):        
+
+class AdvancedMovieSelectionOwnButtonName(Screen, ConfigListScreen):
     def __init__(self, session):
         Screen.__init__(self, session)
         self.skinName = SkinTools.appendResolution("AdvancedMovieSelectionOwnButtonName")
@@ -1030,14 +1038,14 @@ class AdvancedMovieSelectionOwnButtonName(Screen, ConfigListScreen):
         self.bookmark3button = None
         self.bookmark4button = None
         self.bookmark5button = None
-        self.bookmark6button = None 
-        self.bookmark7button = None                
+        self.bookmark6button = None
+        self.bookmark7button = None
         self["setupActions"] = ActionMap(["ColorActions", "OkCancelActions"],
         {
             "red": self.keySave,
             "cancel": self.keyCancel
-        }, -2) 
-        self["VirtualKB"] = ActionMap(["VirtualKeyboardActions" ],
+        }, -2)
+        self["VirtualKB"] = ActionMap(["VirtualKeyboardActions"],
         {
             "showVirtualKeyboard": self.KeyText,
         }, -1)
@@ -1120,7 +1128,7 @@ class AdvancedMovieSelectionOwnButtonName(Screen, ConfigListScreen):
         if callback is not None and len(callback):
             config.AdvancedMovieSelection.bookmark7owntext.setValue(callback)
             self["config"].invalidate(self.bookmark7button)
-        
+
     def createSetup(self, retval=None):
         self.list = []
         self.homebutton = getConfigListEntry(_("Home button description:"), config.AdvancedMovieSelection.homeowntext)

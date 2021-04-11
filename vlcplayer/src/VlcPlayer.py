@@ -32,10 +32,12 @@ from Screens.ChoiceBox import ChoiceBox
 from Components.Button import Button
 from os import system
 
+
 def isValidServiceId(id):
 	testSRef = eServiceReference(id, 0, "Just a TestReference")
 	info = eServiceCenter.getInstance().info(testSRef)
 	return info is not None
+
 
 ENIGMA_SERVICEGS_ID = 0x1001
 ENIGMA_SERVICETS_ID = 0x1002
@@ -76,9 +78,9 @@ def isDvdUrl(url):
 
 
 def splitDvdUrl(url):
-	pos = url.rfind("@", len(url)-8)
+	pos = url.rfind("@", len(url) - 8)
 	if pos > 0:
-		track = url[pos+1:]
+		track = url[pos + 1:]
 		url = url[0:pos]
 		if track.find(":") >= 0:
 			track, chapter = track.split(":")
@@ -100,7 +102,7 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 			return self.name
 
 		def getInfoObject(self, *args, **kwargs):
-			return { }
+			return {}
 
 		def getInfo(self, what):
 			return -1
@@ -126,15 +128,15 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 	def setName(self, name):
 		i = name.rfind("/")
 		if i >= 0:
-			name = name[i+1:]
+			name = name[i + 1:]
 		i = name.rfind("\\")
 		if i >= 0:
-			name = name[i+1:]
+			name = name[i + 1:]
 		self.__info.name = name
 		self.setChanged()
 
 	def setChanged(self):
-		self.changed( (self.CHANGED_SPECIFIC, iPlayableService.evStart) )
+		self.changed((self.CHANGED_SPECIFIC, iPlayableService.evStart))
 
 	def setServer(self, server):
 		self.server = server
@@ -147,7 +149,7 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 		try:
 			self.stats = self.server.status()
 			self.lastrefresh = time()
-			if self.stats and self.stats.has_key("time"):
+			if self.stats and "time" in self.stats:
 				print "Time: ", self.stats["time"]
 		except Exception, e:
 			print e
@@ -163,23 +165,24 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 		return self
 
 	def getPlayPosition(self):
-		if self.stats and self.stats.has_key("time"):
+		if self.stats and "time" in self.stats:
 			pos = float(self.stats["time"])
 			if self.player.state == VlcPlayer.STATE_PLAYING:
 				pos += time() - self.lastrefresh
-			return (False, int(pos*90000))
+			return (False, int(pos * 90000))
 		else:
 			return (True, 0)
 
 	def getLength(self):
-		if self.stats and self.stats.has_key("length"):
-			return (False, int(self.stats["length"])*90000)
+		if self.stats and "length" in self.stats:
+			return (False, int(self.stats["length"]) * 90000)
 		else:
 			return (True, 0)
 
 	# iPlayableService
 	def cueSheet(self): return None
 	def pause(self): return self.player
+
 	def audioTracks(self):
 		return self.player.audioTracks()
 
@@ -193,8 +196,10 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 	def audioDelay(self): return None
 	def rdsDecoder(self): return None
 	def stream(self): return None
+
 	def start(self):
 		self.player.play()
+
 	def stop(self):
 		self.player.stop()
 
@@ -249,7 +254,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 		self.onClose.append(self.__onClose)
 
 		class VlcPlayerActionMap(ActionMap):
-			def __init__(self, player, contexts = [ ], actions = { }, prio=0):
+			def __init__(self, player, contexts=[], actions={}, prio=0):
 				ActionMap.__init__(self, contexts, actions, prio)
 				self.player = player
 
@@ -262,7 +267,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 					key = int(action[8:])
 					time = [-config.seek.selfdefined_13.value, False, config.seek.selfdefined_13.value,
 							-config.seek.selfdefined_46.value, False, config.seek.selfdefined_46.value,
-							-config.seek.selfdefined_79.value, False, config.seek.selfdefined_79.value][key-1]
+							-config.seek.selfdefined_79.value, False, config.seek.selfdefined_79.value][key - 1]
 					self.player.seekRelative(time)
 					return 1
 				else:
@@ -292,8 +297,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 			}, -2)
 
 		print "[VLC] evEOF=%d" % iPlayableService.evEOF
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evEOF: self.__evEOF,
 				iPlayableService.evSOF: self.__evSOF
 			})
@@ -308,7 +312,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 
 	def choiceJumping(self):
 		try:
-			self.session.openWithCallback(self.choicesCallback, ChoiceBox, title=_("Choice of minutes to jump"), list=[(_("1 minute"), "1"), (_("3 minutes"), "3"),(_("5 minutes"), "5"), (_("10 minutes"), "10"),(_("15 minutes"), "15"), (_("20 minutes"), "20"),(_("30 minutes"), "30"),])
+			self.session.openWithCallback(self.choicesCallback, ChoiceBox, title=_("Choice of minutes to jump"), list=[(_("1 minute"), "1"), (_("3 minutes"), "3"), (_("5 minutes"), "5"), (_("10 minutes"), "10"), (_("15 minutes"), "15"), (_("20 minutes"), "20"), (_("30 minutes"), "30"), ])
 		except:
 			pass
 
@@ -331,7 +335,6 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 			self.seek_time = 1800
 		else:
 			pass
-
 
 	def openVCS(self):
 		try:
@@ -383,7 +386,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 		if url is not None:
 			self.url = url
 			if self.server.getUseCachedir():
-				self.session.openWithCallback(self.actions, ChoiceBox, title=_("Select method?"), list=[(_("Direct play"), "dirplay"), (_("Save as .ts and play"), "cache"),])
+				self.session.openWithCallback(self.actions, ChoiceBox, title=_("Select method?"), list=[(_("Direct play"), "dirplay"), (_("Save as .ts and play"), "cache"), ])
 			else:
 				self.actions((_("Direct play"), "dirplay"))
 
@@ -577,10 +580,10 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 					self.showInfobar()
 
 	def audioTracks(self):
-		return self.session.nav.getCurrentService() and self.session.nav.getCurrentService().audioTracks();
+		return self.session.nav.getCurrentService() and self.session.nav.getCurrentService().audioTracks()
 
 	def subtitle(self):
-		return self.session.nav.getCurrentService() and self.session.nav.getCurrentService().subtitle();
+		return self.session.nav.getCurrentService() and self.session.nav.getCurrentService().subtitle()
 
 	def seekRelative(self, delta):
 		"""delta is seconds as integer number
@@ -619,7 +622,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 			self.seekRelative(-self.seek_time)
 
 	def seekToMinute(self, minutes):
-		self.server.seek(str(int(minutes)*60))
+		self.server.seek(str(int(minutes) * 60))
 		self.showInfobar()
 
 	def seekManual(self):

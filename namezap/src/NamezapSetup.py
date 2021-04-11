@@ -15,6 +15,7 @@ from Components.Sources.StaticText import StaticText
 # Configuration
 from Components.config import config, getConfigListEntry
 
+
 class NamezapSetup(Screen, ConfigListScreen):
 	skin = """<screen name="NamezapSetup" position="center,center" size="565,370">
 		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
@@ -38,9 +39,10 @@ class NamezapSetup(Screen, ConfigListScreen):
 			[
 				getConfigListEntry(_("Zapper Style"), config.plugins.namezap.style, _("Controls the visual appearance of the number zap dialog.")),
 			],
-			session = session,
-			on_change = self.changed
+			session=session,
+			on_change=self.changed
 		)
+
 		def selectionChanged():
 			if self["config"].current:
 				self["config"].current[1].onDeselect(self.session)
@@ -90,4 +92,3 @@ class NamezapSetup(Screen, ConfigListScreen):
 
 	def createSummary(self):
 		return SetupSummary
-

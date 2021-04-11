@@ -8,14 +8,14 @@ from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Sources.StaticText import StaticText
 from Components.Sources.List import List
 from Components.AVSwitch import AVSwitch
-from Components.config import config, Config, ConfigSelection, ConfigSubsection, ConfigText, getConfigListEntry, ConfigYesNo, ConfigIP, ConfigNumber,ConfigLocations
+from Components.config import config, Config, ConfigSelection, ConfigSubsection, ConfigText, getConfigListEntry, ConfigYesNo, ConfigIP, ConfigNumber, ConfigLocations
 from Components.config import KEY_DELETE, KEY_BACKSPACE, KEY_LEFT, KEY_RIGHT, KEY_HOME, KEY_END, KEY_TOGGLEOW, KEY_ASCII, KEY_TIMEOUT
 from Components.ConfigList import ConfigListScreen
 from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
 
 from Tools.Directories import pathExists, fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_HDD, SCOPE_CURRENT_PLUGIN, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
-from enigma import eTimer, quitMainloop,eListbox,ePoint, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent, eListbox, gFont, getDesktop, ePicLoad, eServiceCenter, iServiceInformation, eServiceReference,iSeekableService,iServiceInformation, iPlayableService, iPlayableServicePtr
+from enigma import eTimer, quitMainloop, eListbox, ePoint, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent, eListbox, gFont, getDesktop, ePicLoad, eServiceCenter, iServiceInformation, eServiceReference, iSeekableService, iServiceInformation, iPlayableService, iPlayableServicePtr
 from os import path as os_path, system as os_system, unlink, stat, mkdir, popen, makedirs, listdir, access, rename, remove, W_OK, R_OK, F_OK
 from twisted.web import client
 from twisted.internet import reactor
@@ -27,9 +27,9 @@ from ServiceXML import iWebTVStations
 
 config.plugins.dreamMediathek = ConfigSubsection()
 config.plugins.dreamMediathek.general = ConfigSubsection()
-config.plugins.dreamMediathek.general.on_movie_stop = ConfigSelection(default = "ask", choices = [
-	("ask", _("Ask user")), ("quit", _("Return to movie list")), ("playnext", _("Play next video")), ("playagain", _("Play video again")) ])
-config.plugins.dreamMediathek.general.on_exit = ConfigSelection(default = "ask", choices = [
+config.plugins.dreamMediathek.general.on_movie_stop = ConfigSelection(default="ask", choices=[
+	("ask", _("Ask user")), ("quit", _("Return to movie list")), ("playnext", _("Play next video")), ("playagain", _("Play video again"))])
+config.plugins.dreamMediathek.general.on_exit = ConfigSelection(default="ask", choices=[
 	("ask", _("Ask user")), ("quit", _("Return to movie list"))])
 
 
@@ -62,7 +62,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 		</widget>
 		</screen>"""
 
-	def __init__(self, session, service, lastservice, infoCallback = None, nextCallback = None, prevCallback = None):
+	def __init__(self, session, service, lastservice, infoCallback=None, nextCallback=None, prevCallback=None):
 		Screen.__init__(self, session)
 		InfoBarNotifications.__init__(self)
 		self.session = session
@@ -74,13 +74,12 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 		self.nextservice = None
 
 		print "evEOF=%d" % iPlayableService.evEOF
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evSeekableStatusChanged: self.__seekableStatusChanged,
 				iPlayableService.evStart: self.__serviceStarted,
 				iPlayableService.evEOF: self.__evEOF,
 			})
-		
+
 		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions", "MovieSelectionActions"],
 		{
 				"ok": self.ok,
@@ -92,7 +91,6 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 				"showEventInfo": self.showVideoInfo,
 			}, -2)
 
-
 		self.lastservice = lastservice
 
 		self.hidetimer = eTimer()
@@ -102,12 +100,12 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 		self.state = self.STATE_PLAYING
 		self.lastseekstate = self.STATE_PLAYING
 
-		self.onPlayStateChanged = [ ]
+		self.onPlayStateChanged = []
 		self.__seekableStatusChanged()
-	
+
 		self.play()
 		self.onClose.append(self.__onClose)
-		
+
 	def __onClose(self):
 		self.session.nav.stopService()
 
@@ -139,15 +137,14 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 	def showVideoInfo(self):
 		if self.shown:
 			self.hideInfobar()
-		if self.infoCallback is not None:	
+		if self.infoCallback is not None:
 			self.infoCallback()
-
 
 	def playNextFile(self):
 		print "playNextFile"
 		if self.nextCallback() is not None:
-			nextservice,error = self.nextCallback()
-			print "nextservice--->",nextservice
+			nextservice, error = self.nextCallback()
+			print "nextservice--->", nextservice
 			if nextservice is None:
 				self.handleLeave(config.plugins.dreamMediathek.general.on_movie_stop.value, error)
 			else:
@@ -157,7 +154,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 	def playPrevFile(self):
 		print "playPrevFile"
 		if self.prevCallback() is not None:
-			prevservice,error = self.prevCallback()
+			prevservice, error = self.prevCallback()
 			if prevservice is None:
 				self.handleLeave(config.plugins.dreamMediathek.general.on_movie_stop.value, error)
 			else:
@@ -169,7 +166,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 		if self.state != self.STATE_IDLE:
 			self.stopCurrent()
 		self.play()
-	
+
 	def playService(self, newservice):
 		if self.state != self.STATE_IDLE:
 			self.stopCurrent()
@@ -179,7 +176,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 	def play(self):
 		if self.state == self.STATE_PAUSED:
 			if self.shown:
-				self.__setHideTimer()	
+				self.__setHideTimer()
 		self.state = self.STATE_PLAYING
 		self.session.nav.playService(self.service)
 		if self.shown:
@@ -201,12 +198,11 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 		print "pauseService"
 		if self.state == self.STATE_PLAYING:
 			self.setSeekState(self.STATE_PAUSED)
-		
+
 	def unPauseService(self):
 		print "unPauseService"
 		if self.state == self.STATE_PAUSED:
 			self.setSeekState(self.STATE_PLAYING)
-
 
 	def getSeek(self):
 		service = self.session.nav.getCurrentService()
@@ -239,9 +235,9 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 	def setSeekState(self, wantstate):
 		print "setSeekState"
 		if wantstate == self.STATE_PAUSED:
-			print "trying to switch to Pause- state:",self.STATE_PAUSED
+			print "trying to switch to Pause- state:", self.STATE_PAUSED
 		elif wantstate == self.STATE_PLAYING:
-			print "trying to switch to playing- state:",self.STATE_PLAYING
+			print "trying to switch to playing- state:", self.STATE_PLAYING
 		service = self.session.nav.getCurrentService()
 		if service is None:
 			print "No Service found"
@@ -269,10 +265,10 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 
 		for c in self.onPlayStateChanged:
 			c(self.state)
-		
+
 		return True
 
-	def handleLeave(self, how, error = False):
+	def handleLeave(self, how, error=False):
 		self.is_closing = True
 		if how == "ask":
 			list = (
@@ -282,9 +278,9 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 				(_("Yes, but play previous video"), "playprev"),
 			)
 			if error is False:
-				self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Stop playing this movie?"), list = list)
+				self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Stop playing this movie?"), list=list)
 			else:
-				self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("No playable video found! Stop playing this movie?"), list = list)
+				self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("No playable video found! Stop playing this movie?"), list=list)
 		else:
 			self.leavePlayerConfirmed([True, how])
 
@@ -301,11 +297,10 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 			self.playPrevFile()
 		elif answer == "playagain":
 			self.playagain()
-			
+
 	def doEofInternal(self, playing):
 		if not self.execing:
 			return
-		if not playing :
+		if not playing:
 			return
 		self.handleLeave(config.usage.on_movie_eof.value)
-

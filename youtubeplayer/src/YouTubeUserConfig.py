@@ -61,8 +61,8 @@ class __YouTubeUserConfig():
 		for usernum in range(0, config.plugins.youtubeplayer.usercount.value):
 			self.new()
 
-
 	# Add a new server or load a configsection if existing
+
 	def new(self):
 		newUserConfigSubsection = ConfigSubsection()
 		config.plugins.youtubeplayer.users.append(newUserConfigSubsection)
@@ -71,7 +71,7 @@ class __YouTubeUserConfig():
 			newUserConfigSubsection.name.default = ""
 		newUserConfigSubsection.email = ConfigText("", False)
 		newUserConfigSubsection.password = ConfigText("", False)
-		
+
 		newUser = YouTubeUser(newUserConfigSubsection)
 
 		self.userlist.append(newUser)
@@ -128,8 +128,8 @@ class YouTubeUserConfigScreen(Screen, ConfigListScreen):
 		self.user = user
 		self["actions"] = ActionMap(["YouTubeUserConfigScreenActions"],
 		{
-			"save"		:	self.keySave,
-			"cancel"	:	self.keyCancel
+			"save"		: self.keySave,
+			"cancel"	: self.keyCancel
 		}, -2)
 
 		self["key_red"] = Button(_("Cancel"))

@@ -32,13 +32,15 @@ from Components.config import config
 from Tools.Directories import resolveFilename, SCOPE_SKIN
 from urllib import quote as urllib_quote
 
+
 class WeatherIconItem:
-	def __init__(self, url = "", filename = "", index = -1, error = False):
+	def __init__(self, url="", filename="", index=-1, error=False):
 		self.url = url
 		self.filename = filename
 		self.index = index
 		self.error = error
-		
+
+
 class MSNWeatherItem:
 	def __init__(self):
 		self.temperature = ""
@@ -58,7 +60,8 @@ class MSNWeatherItem:
 		self.shortday = ""
 		self.iconFilename = ""
 		self.code = ""
-		
+
+
 class MSNWeather:
 
 	ERROR = 0
@@ -88,9 +91,10 @@ class MSNWeather:
 		if filename is not None:
 			try:
 				extension = os_path.splitext(filename)[1].lower()
-			except: pass
+			except:
+				pass
 		return extension
-		
+
 	def initialize(self):
 		self.city = ""
 		self.degreetype = ""
@@ -100,34 +104,34 @@ class MSNWeather:
 		self.callback = None
 		self.callbackShowIcon = None
 		self.callbackAllIconsDownloaded = None
-		
+
 	def cancel(self):
 		self.callback = None
 		self.callbackShowIcon = None
-		
+
 	def setIconPath(self, iconpath):
 		if not os_path.exists(iconpath):
 			os_mkdir(iconpath)
 		self.iconpath = iconpath
-		
+
 	def setIconExtension(self, iconextension):
 		self.iconextension = iconextension
-		
-	def getWeatherData(self, degreetype, locationcode, city, callback, callbackShowIcon, callbackAllIconsDownloaded = None ):
+
+	def getWeatherData(self, degreetype, locationcode, city, callback, callbackShowIcon, callbackAllIconsDownloaded=None):
 		self.initialize()
-		language = config.osd.language.value.replace("_","-")
+		language = config.osd.language.value.replace("_", "-")
 		if language == "en-EN": # hack
 			language = "en-US"
 		elif language == "no-NO": # hack
 			language = "nn-NO"
 		self.city = city
 		self.callback = callback
-		self.callbackShowIcon  = callbackShowIcon
+		self.callbackShowIcon = callbackShowIcon
 		self.callbackAllIconsDownloaded = callbackAllIconsDownloaded
 		url = "http://weather.service.msn.com/data.aspx?src=windows&weadegreetype=%s&culture=%s&wealocations=%s" % (degreetype, language, urllib_quote(locationcode))
 		getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
-		
-	def getDefaultWeatherData(self, callback = None, callbackAllIconsDownloaded = None):
+
+	def getDefaultWeatherData(self, callback=None, callbackAllIconsDownloaded=None):
 		self.initialize()
 		weatherPluginEntryCount = config.plugins.WeatherPlugin.entrycount.value
 		if weatherPluginEntryCount >= 1:
@@ -136,32 +140,31 @@ class MSNWeather:
 			return 1
 		else:
 			return 0
-		
-	def error(self, error = None):
+
+	def error(self, error=None):
 		errormessage = ""
 		if error is not None:
 			errormessage = str(error.getErrorMessage())
 		if self.callback is not None:
 			self.callback(self.ERROR, errormessage)
-			
-	
-	def errorIconDownload(self, error = None, item = None):
+
+	def errorIconDownload(self, error=None, item=None):
 		item.error = True
 		if os_path.exists(item.filename): # delete 0 kb file
 			os_remove(item.filename)
 
 	def finishedIconDownload(self, result, item):
 		if not item.error:
-			self.showIcon(item.index,item.filename)
-		
+			self.showIcon(item.index, item.filename)
+
 	def showIcon(self, index, filename):
 		if self.callbackShowIcon is not None:
 				self.callbackShowIcon(index, filename)
-				
+
 	def finishedAllDownloadFiles(self, result):
 		if self.callbackAllIconsDownloaded is not None:
 			self.callbackAllIconsDownloaded()
-		
+
 	def xmlCallback(self, xmlstring):
 		IconDownloadList = []
 		root = cet_fromstring(xmlstring)
@@ -190,16 +193,16 @@ class MSNWeather:
 					currentWeather.feelslike = items.attrib.get("feelslike").encode("utf-8", 'ignore')
 					currentWeather.skycode = "%s%s" % (items.attrib.get("skycode").encode("utf-8", 'ignore'), self.iconextension)
 					currentWeather.code = items.attrib.get("skycode").encode("utf-8", 'ignore')
-					filename = "%s%s"  % (self.iconpath, currentWeather.skycode)
+					filename = "%s%s" % (self.iconpath, currentWeather.skycode)
 					currentWeather.iconFilename = filename
 					if not os_path.exists(filename):
 						url = "%s%s" % (self.imagerelativeurl, currentWeather.skycode)
-						IconDownloadList.append(WeatherIconItem(url = url,filename = filename, index = -1))
+						IconDownloadList.append(WeatherIconItem(url=url, filename=filename, index=-1))
 					else:
-						self.showIcon(-1,filename)
+						self.showIcon(-1, filename)
 					self.weatherItems[str(-1)] = currentWeather
 				elif items.tag == "forecast" and index <= 4:
-					index +=1
+					index += 1
 					weather = MSNWeatherItem()
 					weather.date = items.attrib.get("date").encode("utf-8", 'ignore')
 					weather.day = items.attrib.get("day").encode("utf-8", 'ignore')
@@ -209,24 +212,25 @@ class MSNWeather:
 					weather.skytextday = items.attrib.get("skytextday").encode("utf-8", 'ignore')
 					weather.skycodeday = "%s%s" % (items.attrib.get("skycodeday").encode("utf-8", 'ignore'), self.iconextension)
 					weather.code = items.attrib.get("skycodeday").encode("utf-8", 'ignore')
-					filename = "%s%s"  % (self.iconpath, weather.skycodeday)
+					filename = "%s%s" % (self.iconpath, weather.skycodeday)
 					weather.iconFilename = filename
 					if not os_path.exists(filename):
 						url = "%s%s" % (self.imagerelativeurl, weather.skycodeday)
-						IconDownloadList.append(WeatherIconItem(url = url,filename = filename, index = index))
+						IconDownloadList.append(WeatherIconItem(url=url, filename=filename, index=index))
 					else:
-						self.showIcon(index,filename)
+						self.showIcon(index, filename)
 					self.weatherItems[str(index)] = weather
-		
+
 		if len(IconDownloadList) != 0:
 			ds = defer.DeferredSemaphore(tokens=len(IconDownloadList))
-			downloads = [ds.run(download,item ).addErrback(self.errorIconDownload, item).addCallback(self.finishedIconDownload,item) for item in IconDownloadList]
+			downloads = [ds.run(download, item).addErrback(self.errorIconDownload, item).addCallback(self.finishedIconDownload, item) for item in IconDownloadList]
 			finished = defer.DeferredList(downloads).addErrback(self.error).addCallback(self.finishedAllDownloadFiles)
 		else:
 			self.finishedAllDownloadFiles(None)
-			
+
 		if self.callback is not None:
 			self.callback(self.OK, None)
-		
+
+
 def download(item):
 	return downloadPage(item.url, file(item.filename, 'wb'))

@@ -27,8 +27,9 @@ NoExplicitHeaderFiles = frozenset(('getpid.xml', 'tvbrowser.xml', ))
 """
 TextJavascriptHeaderFiles = frozenset(('strings.js.xml', ))
 
+
 class ScreenPage(resource.Resource):
-	def __init__(self, session, path, addSlash = False):
+	def __init__(self, session, path, addSlash=False):
 		resource.Resource.__init__(self)
 
 		self.session = session
@@ -57,10 +58,10 @@ class ScreenPage(resource.Resource):
 		elif os_path.isdir(path) and self.addSlash is True:
 			uri = "%s/" % (request.path)
 			request.redirect(uri)
-			return "";
+			return ""
 
 		else:
-			return resource.ErrorPage(http.NOT_FOUND, "Error 404 - Page not found", "The requested resource is not available").render(request);
+			return resource.ErrorPage(http.NOT_FOUND, "Error 404 - Page not found", "The requested resource is not available").render(request)
 
 		return server.NOT_DONE_YET
 
@@ -72,4 +73,3 @@ class ScreenPage(resource.Resource):
 
 		path += ".xml"
 		return ScreenPage(self.session, path)
-

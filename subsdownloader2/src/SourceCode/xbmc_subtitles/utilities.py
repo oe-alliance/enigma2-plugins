@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 
 import sys
 import os
@@ -17,56 +17,59 @@ import struct
 #---
 
 ###-------------------------  Log  ------------------###############
-   
-def log(module,msg):
+
+
+def log(module, msg):
 #---
 #-  xbmc.output("### [%s-%s] - %s" % (__scriptname__,module,msg,),level=xbmc.LOGDEBUG )
 #+++
   print(msg, module, "D")
-#+++ 
+#+++
 
 ###-------------------------  Hash  -----------------###############
-def hashFile(filename): 
-    try: 
-      longlongformat = '<LL'  # signed long, unsigned long 
-      bytesize = struct.calcsize(longlongformat) 
-      f = open(filename, "rb") 
-          
+
+
+def hashFile(filename):
+    try:
+      longlongformat = '<LL'  # signed long, unsigned long
+      bytesize = struct.calcsize(longlongformat)
+      f = open(filename, "rb")
+
       filesize = os.path.getsize(filename)
-      hash = filesize 
-          
+      hash = filesize
+
       if filesize < 65536 * 2:
         return "Error"
       b = f.read(65536)
-      for x in range(65536/bytesize):
-        buffer = b[x*bytesize:x*bytesize+bytesize]
-        (l2, l1)= struct.unpack(longlongformat, buffer) 
-        l_value = (long(l1) << 32) | long(l2) 
-        hash += l_value 
+      for x in range(65536 / bytesize):
+        buffer = b[x * bytesize:x * bytesize + bytesize]
+        (l2, l1) = struct.unpack(longlongformat, buffer)
+        l_value = (long(l1) << 32) | long(l2)
+        hash += l_value
         hash = hash & 0xFFFFFFFFFFFFFFFF #to remain as 64bit number
-      
-      f.seek(max(0,filesize-65536),0)
+
+      f.seek(max(0, filesize - 65536), 0)
       b = f.read(65536)
-      for x in range(65536/bytesize):
-        buffer = b[x*bytesize:x*bytesize+bytesize]
+      for x in range(65536 / bytesize):
+        buffer = b[x * bytesize:x * bytesize + bytesize]
         (l2, l1) = struct.unpack(longlongformat, buffer)
         l_value = (long(l1) << 32) | long(l2)
         hash += l_value
         hash = hash & 0xFFFFFFFFFFFFFFFF
-      
-      f.close() 
-      returnedhash =  "%016x" % hash 
+
+      f.close()
+      returnedhash = "%016x" % hash
       return returnedhash
-    
-    except(IOError): 
+
+    except(IOError):
       return "IOError"
 
 
-###-------------------------- match sub to file  -------------################        
+###-------------------------- match sub to file  -------------################
 
-def regex_tvshow(compare, file, sub = ""):
-    regex_expressions = [ '[Ss]([0-9]+)[][._-]*[Ee]([0-9]+)([^\\\\/]*)$',
-                        '[\._ \-]([0-9]+)x([0-9]+)([^\\/]*)',                     # foo.1x09 
+def regex_tvshow(compare, file, sub=""):
+    regex_expressions = ['[Ss]([0-9]+)[][._-]*[Ee]([0-9]+)([^\\\\/]*)$',
+                        '[\._ \-]([0-9]+)x([0-9]+)([^\\/]*)',                     # foo.1x09
                         '[\._ \-]([0-9]+)([0-9][0-9])([\._ \-][^\\/]*)',          # foo.109
                         '([0-9]+)([0-9][0-9])([\._ \-][^\\/]*)',
                         '[\\\\/\\._ -]([0-9]+)([0-9][0-9])[^\\/]*',
@@ -79,41 +82,42 @@ def regex_tvshow(compare, file, sub = ""):
                         ]
     sub_info = ""
     tvshow = 0
-    
+
     for regex in regex_expressions:
-      response_file = re.findall(regex, file)                  
-      if len(response_file) > 0 : 
-        print "Regex File Se: %s, Ep: %s," % (str(response_file[0][0]),str(response_file[0][1]),)
+      response_file = re.findall(regex, file)
+      if len(response_file) > 0:
+        print "Regex File Se: %s, Ep: %s," % (str(response_file[0][0]), str(response_file[0][1]),)
         tvshow = 1
-        if not compare :
+        if not compare:
             title = re.split(regex, file)[0]
-            for char in ['[', ']', '_', '(', ')','.','-']: 
+            for char in ['[', ']', '_', '(', ')', '.', '-']:
                title = title.replace(char, ' ')
-            if title.endswith(" "): title = title[:-1]
-            return title,response_file[0][0], response_file[0][1]
+            if title.endswith(" "):
+              title = title[:-1]
+            return title, response_file[0][0], response_file[0][1]
         else:
             break
-    
+
     if (tvshow == 1):
-      for regex in regex_expressions:       
+      for regex in regex_expressions:
         response_sub = re.findall(regex, sub)
-        if len(response_sub) > 0 :
-          try :
+        if len(response_sub) > 0:
+          try:
               sub_info = "Regex Subtitle Ep: %s," % (str(response_sub[0][1]),)
               if (int(response_sub[0][1]) == int(response_file[0][1])):
                 return True
-          except: pass      
+          except:
+            pass
       return False
-    if compare :
+    if compare:
         return True
     else:
-        return "","",""    
-
+        return "", "", ""
 
 
 """
 def toOpenSubtitles_two( id ):
-  languages = { 
+  languages = {
   	"None"                       : "none",
     "Albanian"                   : "sq",
     "Arabic"                     : "ar",
@@ -235,7 +239,7 @@ def onetotwo(id):
     "52"                  :  "fa"
   }
   return languages[ id ]
-        
+
 
 def twotoone(id):
   languages = {
@@ -285,10 +289,10 @@ def twotoone(id):
     "vi"                  :  "51"
   }
   return languages[ id ]
-        
+
 
 def toOpenSubtitlesId( id ):
-  languages = { 
+  languages = {
   	"None"                : "none",
     "Albanian"            : "alb",
     "Arabic"              : "ara",
@@ -353,7 +357,7 @@ def toOpenSubtitlesId( id ):
 
 
 def toScriptLang(id):
-  languages = { 
+  languages = {
     "0"                   : "Albanian",
     "1"                   : "Arabic",
     "2"                   : "Belarusian",
@@ -399,10 +403,10 @@ def toScriptLang(id):
     "42"                  : "Ukrainian",
     "43"                  : "Vietnamese",
   }
-  return languages[ id ]       
-        
+  return languages[ id ]
+
 def toSublightLanguage(id):
-  languages = { 
+  languages = {
   	"0"                   : "None",
     "alb"                 : "Albanian",
     "ara"                 : "Arabic",
@@ -450,10 +454,10 @@ def toSublightLanguage(id):
     "vie"                 : "Vietnamese",
   }
   return languages[ id ]
-  
+
 def twotofull(id):
   languages = {
-            
+
 
     "sq"                  :  "Albanian",
     "ar"                  :  "Arabic",
@@ -503,75 +507,76 @@ def twotofull(id):
 
 
   }
-  return languages[ id ] 
+  return languages[ id ]
 """
 
-LANGUAGES      = (
-    
+LANGUAGES = (
+
     # Full Language name[0]     podnapisi[1]  ISO 639-1[2]   ISO 639-1 Code[3]   Script Setting Language[4]   localized name id number[5]
-    
-    ("Albanian"                   , "29",       "sq",            "alb",                 "0",                     30201  ),
-    ("Arabic"                     , "12",       "ar",            "ara",                 "1",                     30202  ),
-    ("Belarusian"                 , "0" ,       "hy",            "arm",                 "2",                     30203  ),
-    ("Bosnian"                    , "10",       "bs",            "bos",                 "3",                     30204  ),
-    ("Bulgarian"                  , "33",       "bg",            "bul",                 "4",                     30205  ),
-    ("Catalan"                    , "53",       "ca",            "cat",                 "5",                     30206  ),
-    ("Chinese"                    , "17",       "zh",            "chi",                 "6",                     30207  ),
-    ("Croatian"                   , "38",       "hr",            "hrv",                 "7",                     30208  ),
-    ("Czech"                      , "7",        "cs",            "cze",                 "8",                     30209  ),
-    ("Danish"                     , "24",       "da",            "dan",                 "9",                     30210  ),
-    ("Dutch"                      , "23",       "nl",            "dut",                 "10",                    30211  ),
-    ("English"                    , "2",        "en",            "eng",                 "11",                    30212  ),
-    ("Estonian"                   , "20",       "et",            "est",                 "12",                    30213  ),
-    ("Persian"                    , "52",       "fa",            "per",                 "13",                    30247  ),
-    ("Finnish"                    , "31",       "fi",            "fin",                 "14",                    30214  ),
-    ("French"                     , "8",        "fr",            "fre",                 "15",                    30215  ),
-    ("German"                     , "5",        "de",            "ger",                 "16",                    30216  ),
-    ("Greek"                      , "16",       "el",            "ell",                 "17",                    30217  ),
-    ("Hebrew"                     , "22",       "he",            "heb",                 "18",                    30218  ),
-    ("Hindi"                      , "42",       "hi",            "hin",                 "19",                    30219  ),
-    ("Hungarian"                  , "15",       "hu",            "hun",                 "20",                    30220  ),
-    ("Icelandic"                  , "6",        "is",            "ice",                 "21",                    30221  ),
-    ("Indonesian"                 , "0",        "id",            "ind",                 "22",                    30222  ),
-    ("Italian"                    , "9",        "it",            "ita",                 "23",                    30224  ),
-    ("Japanese"                   , "11",       "ja",            "jpn",                 "24",                    30225  ),
-    ("Korean"                     , "4",        "ko",            "kor",                 "25",                    30226  ),
-    ("Latvian"                    , "21",       "lv",            "lav",                 "26",                    30227  ),
-    ("Lithuanian"                 , "0",        "lt",            "lit",                 "27",                    30228  ),
-    ("Macedonian"                 , "35",       "mk",            "mac",                 "28",                    30229  ),
-    ("Norwegian"                  , "3",        "no",            "nor",                 "29",                    30230  ),
-    ("Polish"                     , "26",       "pl",            "pol",                 "30",                    30232  ),
-    ("Portuguese"                 , "32",       "pt",            "por",                 "31",                    30233  ),
-    ("PortugueseBrazil"           , "48",       "pb",            "pob",                 "32",                    30234  ),
-    ("Romanian"                   , "13",       "ro",            "rum",                 "33",                    30235  ),
-    ("Russian"                    , "27",       "ru",            "rus",                 "34",                    30236  ),
-    ("Serbian"                    , "36",       "sr",            "scc",                 "35",                    30237  ),
-    ("Slovak"                     , "37",       "sk",            "slo",                 "36",                    30238  ),
-    ("Slovenian"                  , "1",        "sl",            "slv",                 "37",                    30239  ),
-    ("Spanish"                    , "28",       "es",            "spa",                 "38",                    30240  ),
-    ("Swedish"                    , "25",       "sv",            "swe",                 "39",                    30242  ),
-    ("Thai"                       , "0",        "th",            "tha",                 "40",                    30243  ),
-    ("Turkish"                    , "30",       "tr",            "tur",                 "41",                    30244  ),
-    ("Ukrainian"                  , "46",       "uk",            "ukr",                 "42",                    30245  ),
-    ("Vietnamese"                 , "51",       "vi",            "vie",                 "43",                    30246  ),
-    ("BosnianLatin"               , "10",       "bs",            "bos",                 "100",                   30204  ),
-    ("Farsi"                      , "52",       "fa",            "per",                 "13",                    30247  ),
-    ("English (US)"               , "2",        "en",            "eng",                 "100",                   30212  ),
-    ("English (UK)"               , "2",        "en",            "eng",                 "100",                   30212  ),
-    ("Portuguese (Brazilian)"     , "48",       "pt-br",         "pob",                 "100",                   30234  ),
-    ("Portuguese (Brazil)"        , "48",       "pb",            "pob",                 "32",                    30234  ),
-    ("Portuguese-BR"              , "48",       "pb",            "pob",                 "32",                    30234  ),
-    ("Brazilian"                  , "48",       "pb",            "pob",                 "32",                    30234  ),
-    ("Español (Latinoamérica)"    , "28",       "es",            "spa",                 "100",                   30240  ),
-    ("Español (España)"           , "28",       "es",            "spa",                 "100",                   30240  ),
-    ("Spanish (Latin America)"    , "28",       "es",            "spa",                 "100",                   30240  ),
-    ("Español"                    , "28",       "es",            "spa",                 "100",                   30240  ),
-    ("SerbianLatin"               , "36",       "sr",            "scc",                 "100",                   30237  ),
-    ("Spanish (Spain)"            , "28",       "es",            "spa",                 "100",                   30240  ),
-    ("Chinese (Traditional)"      , "17",       "zh",            "chi",                 "100",                   30207  ),
-    ("Chinese (Simplified)"       , "17",       "zh",            "chi",                 "100",                   30207  ) )
+
+    ("Albanian", "29", "sq", "alb", "0", 30201),
+    ("Arabic", "12", "ar", "ara", "1", 30202),
+    ("Belarusian", "0", "hy", "arm", "2", 30203),
+    ("Bosnian", "10", "bs", "bos", "3", 30204),
+    ("Bulgarian", "33", "bg", "bul", "4", 30205),
+    ("Catalan", "53", "ca", "cat", "5", 30206),
+    ("Chinese", "17", "zh", "chi", "6", 30207),
+    ("Croatian", "38", "hr", "hrv", "7", 30208),
+    ("Czech", "7", "cs", "cze", "8", 30209),
+    ("Danish", "24", "da", "dan", "9", 30210),
+    ("Dutch", "23", "nl", "dut", "10", 30211),
+    ("English", "2", "en", "eng", "11", 30212),
+    ("Estonian", "20", "et", "est", "12", 30213),
+    ("Persian", "52", "fa", "per", "13", 30247),
+    ("Finnish", "31", "fi", "fin", "14", 30214),
+    ("French", "8", "fr", "fre", "15", 30215),
+    ("German", "5", "de", "ger", "16", 30216),
+    ("Greek", "16", "el", "ell", "17", 30217),
+    ("Hebrew", "22", "he", "heb", "18", 30218),
+    ("Hindi", "42", "hi", "hin", "19", 30219),
+    ("Hungarian", "15", "hu", "hun", "20", 30220),
+    ("Icelandic", "6", "is", "ice", "21", 30221),
+    ("Indonesian", "0", "id", "ind", "22", 30222),
+    ("Italian", "9", "it", "ita", "23", 30224),
+    ("Japanese", "11", "ja", "jpn", "24", 30225),
+    ("Korean", "4", "ko", "kor", "25", 30226),
+    ("Latvian", "21", "lv", "lav", "26", 30227),
+    ("Lithuanian", "0", "lt", "lit", "27", 30228),
+    ("Macedonian", "35", "mk", "mac", "28", 30229),
+    ("Norwegian", "3", "no", "nor", "29", 30230),
+    ("Polish", "26", "pl", "pol", "30", 30232),
+    ("Portuguese", "32", "pt", "por", "31", 30233),
+    ("PortugueseBrazil", "48", "pb", "pob", "32", 30234),
+    ("Romanian", "13", "ro", "rum", "33", 30235),
+    ("Russian", "27", "ru", "rus", "34", 30236),
+    ("Serbian", "36", "sr", "scc", "35", 30237),
+    ("Slovak", "37", "sk", "slo", "36", 30238),
+    ("Slovenian", "1", "sl", "slv", "37", 30239),
+    ("Spanish", "28", "es", "spa", "38", 30240),
+    ("Swedish", "25", "sv", "swe", "39", 30242),
+    ("Thai", "0", "th", "tha", "40", 30243),
+    ("Turkish", "30", "tr", "tur", "41", 30244),
+    ("Ukrainian", "46", "uk", "ukr", "42", 30245),
+    ("Vietnamese", "51", "vi", "vie", "43", 30246),
+    ("BosnianLatin", "10", "bs", "bos", "100", 30204),
+    ("Farsi", "52", "fa", "per", "13", 30247),
+    ("English (US)", "2", "en", "eng", "100", 30212),
+    ("English (UK)", "2", "en", "eng", "100", 30212),
+    ("Portuguese (Brazilian)", "48", "pt-br", "pob", "100", 30234),
+    ("Portuguese (Brazil)", "48", "pb", "pob", "32", 30234),
+    ("Portuguese-BR", "48", "pb", "pob", "32", 30234),
+    ("Brazilian", "48", "pb", "pob", "32", 30234),
+    ("Español (Latinoamérica)", "28", "es", "spa", "100", 30240),
+    ("Español (España)", "28", "es", "spa", "100", 30240),
+    ("Spanish (Latin America)", "28", "es", "spa", "100", 30240),
+    ("Español", "28", "es", "spa", "100", 30240),
+    ("SerbianLatin", "36", "sr", "scc", "100", 30237),
+    ("Spanish (Spain)", "28", "es", "spa", "100", 30240),
+    ("Chinese (Traditional)", "17", "zh", "chi", "100", 30207),
+    ("Chinese (Simplified)", "17", "zh", "chi", "100", 30207))
+
 
 def languageTranslate(lang, lang_from, lang_to):
   for x in LANGUAGES:
-    if lang == x[lang_from] :
+    if lang == x[lang_from]:
       return x[lang_to]

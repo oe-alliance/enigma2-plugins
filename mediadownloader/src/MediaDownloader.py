@@ -23,11 +23,12 @@ except ImportError as ie:
 
 import time
 
-def _parse(url, defaultPort = None):
+
+def _parse(url, defaultPort=None):
 	url = url.strip()
 	parsed = urlparse(url)
 	scheme = parsed[0]
-	path = urlunparse(('','')+parsed[2:])
+	path = urlunparse(('', '') + parsed[2:])
 
 	if defaultPort is None:
 		if scheme == 'https':
@@ -58,9 +59,9 @@ def _parse(url, defaultPort = None):
 
 	return scheme, host, port, path, username, password
 
-def download(url, file, writeProgress = None, contextFactory = None, \
-	*args, **kwargs):
 
+def download(url, file, writeProgress=None, contextFactory=None,
+	*args, **kwargs):
 	"""Download a remote file and provide current-/total-length.
 
 	@param file: path to file on filesystem, or file-like object.
@@ -122,6 +123,7 @@ def download(url, file, writeProgress = None, contextFactory = None, \
 
 	return factory.deferred
 
+
 class MediaDownloader(Screen):
 	"""Simple Plugin which downloads a given file. If not targetfile is specified the user will be asked
 	for a location (see LocationBox). If doOpen is True the Plugin will try to open it after downloading."""
@@ -133,7 +135,7 @@ class MediaDownloader(Screen):
 			<widget source="speed" render="Label" position="338,65" size="200,30" halign="right" font="Regular;23" />
 		</screen>"""
 
-	def __init__(self, session, file, askOpen = False, downloadTo = None, callback = None):
+	def __init__(self, session, file, askOpen=False, downloadTo=None, callback=None):
 		Screen.__init__(self, session)
 
 		# Save arguments local
@@ -155,7 +157,7 @@ class MediaDownloader(Screen):
 
 		# Set Limit if we know it already (Server might not tell it)
 		if self.file.size:
-			self["progress"].writeValues(0, self.file.size*1048576)
+			self["progress"].writeValues(0, self.file.size * 1048576)
 
 		# Call getFilename as soon as we are able to open a new screen
 		self.onExecBegin.append(self.getFilename)
@@ -177,8 +179,8 @@ class MediaDownloader(Screen):
 				LocationBox,
 				_("Where to save?"),
 				path.basename(self.file.path),
-				minFree = self.file.size,
-				bookmarks = config.plugins.mediadownloader.bookmarks
+				minFree=self.file.size,
+				bookmarks=config.plugins.mediadownloader.bookmarks
 			)
 
 	def gotFilename(self, res):
@@ -216,7 +218,7 @@ class MediaDownloader(Screen):
 
 			lastApprox = round(((newLength - self.lastLength) / (newTime - lastTime) / 1024), 2)
 
-			secLen = int(round(((max-pos) / 1024) / lastApprox))
+			secLen = int(round(((max - pos) / 1024) / lastApprox))
 			self["eta"].text = _("ETA %d:%02d min") % (secLen / 60, secLen % 60)
 			self["speed"].text = _("%d kb/s") % (lastApprox)
 
@@ -232,8 +234,8 @@ class MediaDownloader(Screen):
 			self.session.open(
 				MessageBox,
 				_("No suitable Viewer found!"),
-				type = MessageBox.TYPE_ERROR,
-				timeout = 5
+				type=MessageBox.TYPE_ERROR,
+				timeout=5
 			)
 
 		# Calback with Filename on success
@@ -242,14 +244,14 @@ class MediaDownloader(Screen):
 
 		self.close()
 
-	def gotFile(self, data = ""):
+	def gotFile(self, data=""):
 		# Ask if file should be opened unless told not to
 		if self.askOpen:
 			self.session.openWithCallback(
 				self.openCallback,
 				MessageBox,
 				_("Do you want to try to open the downloaded file?"),
-				type = MessageBox.TYPE_YESNO
+				type=MessageBox.TYPE_YESNO
 			)
 		# Otherwise callback and close
 		else:
@@ -259,15 +261,15 @@ class MediaDownloader(Screen):
 
 			self.close()
 
-	def error(self, msg = ""):
+	def error(self, msg=""):
 		if msg != "":
 			print("[MediaDownloader] Error downloading:", msg)
 
 		self.session.open(
 			MessageBox,
 			_("Error while downloading file %s") % (self.file.path),
-			type = MessageBox.TYPE_ERROR,
-			timeout = 3
+			type=MessageBox.TYPE_ERROR,
+			timeout=3
 		)
 
 		# Calback with None on failure

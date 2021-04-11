@@ -8,7 +8,8 @@
 
 from collections import Sequence, Iterator
 
-class PagedIterator( Iterator ):
+
+class PagedIterator(Iterator):
     def __init__(self, parent):
         self._parent = parent
         self._index = -1
@@ -23,7 +24,8 @@ class PagedIterator( Iterator ):
             raise StopIteration
         return self._parent[self._index]
 
-class UnpagedData( object ):
+
+class UnpagedData(object):
     def copy(self):
         return self.__class__()
 
@@ -33,7 +35,8 @@ class UnpagedData( object ):
     def __rmul__(self, other):
         return (self.copy() for a in range(other))
 
-class PagedList( Sequence ):
+
+class PagedList(Sequence):
     """
     List-like object, with support for automatically grabbing additional
     pages from a data source.
@@ -63,7 +66,7 @@ class PagedList( Sequence ):
             raise IndexError("list index outside range")
         if (index >= len(self._data)) \
                 or isinstance(self._data[index], UnpagedData):
-            self._populatepage(index/self._pagesize + 1)
+            self._populatepage(index / self._pagesize + 1)
         return self._data[index]
 
     def __setitem__(self, index, value):
@@ -76,9 +79,9 @@ class PagedList( Sequence ):
         raise NotImplementedError
 
     def _populatepage(self, page):
-        pagestart = (page-1) * self._pagesize
+        pagestart = (page - 1) * self._pagesize
         if len(self._data) < pagestart:
-            self._data.extend(UnpagedData()*(pagestart-len(self._data)))
+            self._data.extend(UnpagedData() * (pagestart - len(self._data)))
         if len(self._data) == pagestart:
             self._data.extend(self._getpage(page))
         else:
@@ -87,17 +90,20 @@ class PagedList( Sequence ):
                 pagestart += 1
 
     def _getpage(self, page):
-        raise NotImplementedError("PagedList._getpage() must be provided "+\
+        raise NotImplementedError("PagedList._getpage() must be provided " +
                                   "by subclass")
 
-class PagedRequest( PagedList ):
+
+class PagedRequest(PagedList):
     """
     Derived PageList that provides a list-like object with automatic paging
     intended for use with search requests.
     """
+
     def __init__(self, request, handler=None):
         self._request = request
-        if handler: self._handler = handler
+        if handler:
+            self._handler = handler
         super(PagedRequest, self).__init__(self._getpage(1), 20)
 
     def _getpage(self, page):
@@ -109,4 +115,3 @@ class PagedRequest( PagedList ):
                 yield None
             else:
                 yield self._handler(item)
-

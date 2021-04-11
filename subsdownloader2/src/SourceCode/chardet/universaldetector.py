@@ -14,19 +14,20 @@
 # modify it under the terms of the GNU Lesser General Public
 # License as published by the Free Software Foundation; either
 # version 2.1 of the License, or (at your option) any later version.
-# 
+#
 # This library is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 # Lesser General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 # 02110-1301  USA
 ######################### END LICENSE BLOCK #########################
 
-import constants, sys
+import constants
+import sys
 from latin1prober import Latin1Prober # windows-1252
 from mbcsgroupprober import MBCSGroupProber # multi-byte character sets
 from sbcsgroupprober import SBCSGroupProber # single-byte character sets
@@ -37,6 +38,7 @@ MINIMUM_THRESHOLD = 0.20
 ePureAscii = 0
 eEscAscii = 1
 eHighbyte = 2
+
 
 class UniversalDetector:
     def __init__(self):
@@ -59,11 +61,13 @@ class UniversalDetector:
             prober.reset()
 
     def feed(self, aBuf):
-        if self.done: return
+        if self.done:
+            return
 
         aLen = len(aBuf)
-        if not aLen: return
-        
+        if not aLen:
+            return
+
         if not self._mGotData:
             # If the data starts with BOM, we know it is UTF
             if aBuf[:3] == '\xEF\xBB\xBF':
@@ -72,7 +76,7 @@ class UniversalDetector:
             elif aBuf[:4] == '\xFF\xFE\x00\x00':
                 # FF FE 00 00  UTF-32, little-endian BOM
                 self.result = {'encoding': "UTF-32LE", 'confidence': 1.0}
-            elif aBuf[:4] == '\x00\x00\xFE\xFF': 
+            elif aBuf[:4] == '\x00\x00\xFE\xFF':
                 # 00 00 FE FF  UTF-32, big-endian BOM
                 self.result = {'encoding': "UTF-32BE", 'confidence': 1.0}
             elif aBuf[:4] == '\xFE\xFF\x00\x00':
@@ -119,13 +123,14 @@ class UniversalDetector:
                     break
 
     def close(self):
-        if self.done: return
+        if self.done:
+            return
         if not self._mGotData:
             if constants._debug:
                 sys.stderr.write('no data received!\n')
             return
         self.done = constants.True
-        
+
         if self._mInputState == ePureAscii:
             self.result = {'encoding': 'ascii', 'confidence': 1.0}
             return self.result
@@ -135,7 +140,8 @@ class UniversalDetector:
             maxProberConfidence = 0.0
             maxProber = None
             for prober in self._mCharSetProbers:
-                if not prober: continue
+                if not prober:
+                    continue
                 proberConfidence = prober.get_confidence()
                 if proberConfidence > maxProberConfidence:
                     maxProberConfidence = proberConfidence
@@ -148,7 +154,8 @@ class UniversalDetector:
         if constants._debug:
             sys.stderr.write('no probers hit minimum threshhold\n')
             for prober in self._mCharSetProbers[0].mProbers:
-                if not prober: continue
-                sys.stderr.write('%s confidence = %s\n' % \
-                                 (prober.get_charset_name(), \
+                if not prober:
+                    continue
+                sys.stderr.write('%s confidence = %s\n' %
+                                 (prober.get_charset_name(),
                                   prober.get_confidence()))

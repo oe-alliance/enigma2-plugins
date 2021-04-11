@@ -3,6 +3,7 @@ from __future__ import print_function
 import os
 import shutil
 
+
 def list_recursive(dirname):
 	for file in os.listdir(dirname):
 		fn = os.path.join(dirname, file)
@@ -11,6 +12,7 @@ def list_recursive(dirname):
 		elif os.path.isdir(fn):
 			for f in list_recursive(fn):
 				yield f
+
 
 def remove_empty(dirname):
 	files = os.listdir(dirname)
@@ -25,8 +27,10 @@ def remove_empty(dirname):
 		except OSError as ose:
 			print("Unable to remove directory", dirname + ":", ose)
 
+
 class PictureApi:
 	"""Base class for browser APIs"""
+
 	def __init__(self, cache='/tmp/ecasa'):
 		self.cache = cache
 
@@ -99,5 +103,6 @@ class PictureApi:
 				else:
 					curSize -= stat.st_size
 			remove_empty(self.cache)
+
 
 __all__ = ['PictureApi']

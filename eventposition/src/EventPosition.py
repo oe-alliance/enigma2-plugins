@@ -25,11 +25,12 @@ from Poll import Poll
 from Components.Element import cached
 from time import time
 
+
 class EventPosition(Poll, Converter, object):
 	def __init__(self, type):
 		Poll.__init__(self)
 		Converter.__init__(self, type)
-		self.poll_interval = 30*1000
+		self.poll_interval = 30 * 1000
 		self.poll_enabled = True
 
 	@cached
@@ -56,11 +57,9 @@ class EventPosition(Poll, Converter, object):
 	def getCutlist(self):
 		return []
 
-
 	position = property(getPosition)
 	length = property(getLength)
 	cutlist = property(getCutlist)
-
 
 	def changed(self, what):
 		if what[0] != self.CHANGED_CLEAR:

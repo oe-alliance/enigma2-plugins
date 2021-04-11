@@ -1,12 +1,14 @@
 # -*- Python -*-
 #
 # Copyright (c) 2001-2004 Twisted Matrix Laboratories.
-# See LICENSE for details. 
+# See LICENSE for details.
 
 #
 import string
 import ircsupport
-import e2chat, dreamIRCTools, dreamIRCSetup
+import e2chat
+import dreamIRCTools
+import dreamIRCSetup
 
 
 class AccountManager:
@@ -18,14 +20,15 @@ class AccountManager:
 	@ivar accounts: A collection of available accounts.
 	@type accounts: mapping of strings to L{Account<interfaces.IAccount>}s.
 	"""
-	def __init__(self,session):
+
+	def __init__(self, session):
 		self.chatui = e2chat.ChatUI()
 		self.config = dreamIRCSetup.dreamIRCConfig()
 		self.accounts = self.config.load()
 		self.pipe = dreamIRCTools.MessagePipe()
 
 	def startConnect(self):
-		if self.accounts==False:
+		if self.accounts == False:
 			self.pipe.debug("You have defined no valid accounts.")
 		else:
 			for acct in self.accounts:
@@ -40,14 +43,14 @@ class AccountManager:
 		"""
 		data = []
 		for account in self.accounts:
-			data.append((account.accountName, account.isOnline(),account.autoLogin, account.gatewayType))
+			data.append((account.accountName, account.isOnline(), account.autoLogin, account.gatewayType))
 		return data
 
 	def isEmpty(self):
 		return len(self.accounts) == 0
 
 	def getConnectionInfo(self):
-		if self.accounts==False:
+		if self.accounts == False:
 			self.pipe.debug("You have defined no valid accounts.")
 			return [0]
 		else:
@@ -71,4 +74,3 @@ class AccountManager:
 
 	def quit(self):
 		pass
-

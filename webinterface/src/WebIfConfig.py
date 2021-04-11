@@ -1,4 +1,4 @@
-Version = '$Header$';
+Version = '$Header$'
 
 from __init__ import *
 
@@ -13,6 +13,7 @@ from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText
 
 from Components.ActionMap import ActionMap
+
 
 class WebIfConfigScreen(ConfigListScreen, Screen):
 	skin = """
@@ -54,10 +55,10 @@ class WebIfConfigScreen(ConfigListScreen, Screen):
 		self.createSetup()
 
 	def createSetup(self):
-		list = [ getConfigListEntry(_("Start Webinterface"), config.plugins.Webinterface.enabled), ]
+		list = [getConfigListEntry(_("Start Webinterface"), config.plugins.Webinterface.enabled), ]
 
 		if config.plugins.Webinterface.enabled.value:
-			list.extend( [
+			list.extend([
 				getConfigListEntry(_("Show Setup in Extensions menu"), config.plugins.Webinterface.show_in_extensionsmenu),
 				getConfigListEntry(_("Enable /media"), config.plugins.Webinterface.includemedia),
 				getConfigListEntry(_("Allow zapping via Webinterface"), config.plugins.Webinterface.allowzapping),
@@ -72,7 +73,7 @@ class WebIfConfigScreen(ConfigListScreen, Screen):
 					getConfigListEntry(_("Enable HTTP Authentication"), config.plugins.Webinterface.http.auth)
 				])
 
-			list.append( getConfigListEntry(_("Enable HTTPS Access"), config.plugins.Webinterface.https.enabled) )
+			list.append(getConfigListEntry(_("Enable HTTPS Access"), config.plugins.Webinterface.https.enabled))
 			if config.plugins.Webinterface.https.enabled.value == True:
 				list.extend([
 					getConfigListEntry(_("HTTPS Port"), config.plugins.Webinterface.https.port),
@@ -100,5 +101,3 @@ class WebIfConfigScreen(ConfigListScreen, Screen):
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close(False, self.session)
-
-

@@ -17,6 +17,7 @@ from Components.MenuList import MenuList
 
 from skin import parseFont
 
+
 class VlcPlayList(MenuList):
 	def __init__(self, getPlaylistEntriesCB):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
@@ -27,11 +28,11 @@ class VlcPlayList(MenuList):
 		self.getPlaylistEntriesCB = getPlaylistEntriesCB
 
 	def applySkin(self, desktop, parent):
-		attribs = [ ]
+		attribs = []
 		if self.skinAttributes is not None:
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "font":
-					self.font = parseFont(value, ((1,1),(1,1)))
+					self.font = parseFont(value, ((1, 1), (1, 1)))
 					self.l.setFont(0, self.font)
 				elif attrib == "itemHeight":
 					self.l.setItemHeight(int(value))
@@ -39,7 +40,6 @@ class VlcPlayList(MenuList):
 					attribs.append((attrib, value))
 			self.skinAttributes = attribs
 		return MenuList.applySkin(self, desktop, parent)
-
 
 	def buildListboxEntry(self, name, path):
 		size = self.l.getItemSize()
@@ -63,7 +63,7 @@ class VlcPlayList(MenuList):
 			for file in files:
 				name, path = file
 				fileEntries.append((name, path))
-			fileEntries.sort(cmp = lambda x, y: cmp(x[1][7], y[1][7]))
+			fileEntries.sort(cmp=lambda x, y: cmp(x[1][7], y[1][7]))
 		self.list = fileEntries
 		self.l.setList(self.list)
 		self.moveToIndex(0)
@@ -87,4 +87,3 @@ class VlcPlayList(MenuList):
 			self.moveToIndex(i)
 			return self.getCurrent()
 		return None, None
-

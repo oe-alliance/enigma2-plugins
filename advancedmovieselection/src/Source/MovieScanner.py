@@ -1,12 +1,12 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 #  Advanced Movie Selection for Dreambox-Enigma2
 #
 #  Coded by cmikula & JackDaniel (c)2012
 #  Support: www.i-have-a-dreambox.com
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -15,7 +15,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 
@@ -39,6 +39,7 @@ from Hotplug import hotplug
 
 SCAN_EXCLUDE = (ISOInfo.MOUNT_PATH, "DUMBO", "TIMOTHY", "/media/swap", "/media/ram", "/media/ba")
 AUDIO_EXCLUDE = ("mp3", "ogg", "wav", "m4a")
+
 
 def getDirectories(l, root, hidden=False):
     root = os.path.realpath(root) + os.sep
@@ -83,7 +84,7 @@ class MovieScanner():
         #self.full_used_detect = 0
         self.enabled = False
         self.last_update = None
-    
+
     def setEnabled(self, enabled):
         self.enabled = enabled
         print "[AdvancedMovieSelection] Set MovieScanner:", str(enabled)
@@ -94,14 +95,14 @@ class MovieScanner():
         else:
             recordTimerEvent.removeCallback(self.timerStateChanged)
             self.removeHotplugNotifier()
-    
+
     def updateReloadTime(self):
         self.last_update = datetime.now()
 
     def getLastUpdate(self):
         if self.last_update is not None:
             return self.last_update.strftime("%d.%m.%Y %H:%M")
-    
+
     def isMovieRecorded(self, name):
         entries = self.movielibrary.findMovies(name)
         for mi in entries:
@@ -110,7 +111,7 @@ class MovieScanner():
         if len(entries) > 0:
             return 2
         return 0
-    
+
     def reloadMoviesAsync(self, dir_list=None, delay=0):
         if self.isWorking:
             print "[AdvancedMovieSelection] MovieScanner action canceled! reload in progress"
@@ -133,7 +134,7 @@ class MovieScanner():
         for p in config.AdvancedMovieSelection.videodirs.value:
             getDirectories(new_list, p)
         return new_list
-    
+
     @clockit
     def updateMovieList(self, dir_list=None, delay=0):
         print "[AdvancedMovieSelection] Start scanning movies"
@@ -148,15 +149,15 @@ class MovieScanner():
             if dir_list is None:
                 self.movielibrary.clearAll()
                 dir_list = self.updateDirectories()
-            
+
             # print "-" * 80
             # for p in dir_list:
             #    print p
             # print "-" * 80
-            
+
             for p in dir_list:
                 self.scanForMovies(p)
-            
+
             # self.full_used_detect = self.getFullUsed()
             if self.callback is not None:
                 self.callback()
@@ -199,10 +200,10 @@ class MovieScanner():
                     if serviceref.getPath()[:-1].endswith(TRASH_NAME):
                         continue
                     serviceref = eServiceReferenceBludisc(serviceref, True)
-                
+
                 if not dvd and not bludisc:
                     continue
-                
+
                 if False:
                     # add folder dir
                     tempDir = serviceref.getPath()
@@ -213,21 +214,21 @@ class MovieScanner():
                     serviceref.setName(dirName)
                     dirs.append((serviceref, None, -1, -1))
                     continue
-            
+
             # check hidden files
             temp = serviceref.getPath()
             parts = temp.split(os.sep)
             if self.movieConfig.isHidden(parts[-1]):
                 continue
-            
+
             ext = temp.split(".")[-1].lower()
             if ext in AUDIO_EXCLUDE:
                 continue
-            
+
             # check currently moving files
             if serviceUtil.isServiceMoving(serviceref):
                 continue
-            
+
             # check iso and img files
             extension = serviceref.getPath().split(".")[-1].lower()
             if extension == "iso" or extension == "img":
@@ -257,7 +258,7 @@ class MovieScanner():
         dir_size = getDirSize(root)
         self.movielibrary.addMovieList(root, l, dir_size)
         self.movielibrary.addTags(tags)
-    
+
     def findMovies___(self, name):
         l = []
         for mi in self.list:
@@ -276,7 +277,7 @@ class MovieScanner():
 
     def timerStateChanged(self, timer):
         try:
-            from timer import TimerEntry 
+            from timer import TimerEntry
             print "timer.event", timer.name
             print "timer.state", timer.state
             if timer.state == TimerEntry.StateRunning:
@@ -327,7 +328,7 @@ class MovieScanner():
             if not os.path.exists(location):
                 self.updateReloadTime()
                 self.movielibrary.removeLocation(location)
-            
+
         # print "*" * 80
 
     def updateServiceInfo(self, serviceref):
@@ -344,14 +345,14 @@ class MovieScanner():
 
     def addHotplugNotifier(self):
         if not self.checkAllAvailable in hotplug.notifier:
-            print "add hotplugNotifier" 
+            print "add hotplugNotifier"
             hotplug.notifier.append(self.checkAllAvailable)
             hotplug.hotplugChanged()
-        
+
     def removeHotplugNotifier(self):
         if self.checkAllAvailable in hotplug.notifier:
-            print "remove hotplugNotifier" 
+            print "remove hotplugNotifier"
             hotplug.notifier.remove(self.checkAllAvailable)
-    
+
 
 movieScanner = MovieScanner()

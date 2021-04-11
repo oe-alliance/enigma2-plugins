@@ -21,6 +21,7 @@ from MountEdit import AutoMountEdit
 from AutoMount import iAutoMount, AutoMount
 from UserManager import UserManager
 
+
 class AutoMountManager(Screen):
 	skin = """
 		<screen name="AutoMountManager" position="center,center" size="560,400" title="AutoMountManager">
@@ -41,13 +42,14 @@ class AutoMountManager(Screen):
 			<ePixmap pixmap="skin_default/div-h.png" position="0,360" zPosition="1" size="560,2" />
 			<widget source="introduction" render="Label" position="10,370" size="540,21" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1"/>
 		</screen>"""
-	def __init__(self, session, iface ,plugin_path):
+
+	def __init__(self, session, iface, plugin_path):
 		self.skin_path = plugin_path
 		self.session = session
 		self.hostname = None
 		self.restartLanRef = None
 		Screen.__init__(self, session)
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 		{
 			"ok": self.keyOK,
@@ -96,11 +98,11 @@ class AutoMountManager(Screen):
 			okpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/ok.png"))
 		else:
 			okpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/ok.png"))
-		self.list.append((_("Add new network mount point"),"add", _("Add a new NFS or CIFS mount point to your Receiver."), okpng ))
-		self.list.append((_("Mountpoints management"),"view", _("View, edit or delete mountpoints on your Receiver."), okpng ))
-		self.list.append((_("User management"),"user", _("View, edit or delete usernames and passwords for your network."), okpng))
-		self.list.append((_("Change hostname"),"hostname", _("Change the hostname of your Receiver."), okpng))
-		self.list.append((_("Setup Mount Again"),"mountagain", _("Schedule a auto remount of your network shares."), okpng))
+		self.list.append((_("Add new network mount point"), "add", _("Add a new NFS or CIFS mount point to your Receiver."), okpng))
+		self.list.append((_("Mountpoints management"), "view", _("View, edit or delete mountpoints on your Receiver."), okpng))
+		self.list.append((_("User management"), "user", _("View, edit or delete usernames and passwords for your network."), okpng))
+		self.list.append((_("Change hostname"), "hostname", _("Change the hostname of your Receiver."), okpng))
+		self.list.append((_("Setup Mount Again"), "mountagain", _("Schedule a auto remount of your network shares."), okpng))
 		self["config"].setList(self.list)
 		if config.usage.sort_settings.value:
 			self["config"].list.sort()
@@ -108,7 +110,7 @@ class AutoMountManager(Screen):
 	def exit(self):
 		self.close()
 
-	def keyOK(self, returnValue = None):
+	def keyOK(self, returnValue=None):
 		if returnValue == None:
 			returnValue = self["config"].getCurrent()[1]
 			if returnValue is "add":
@@ -136,9 +138,9 @@ class AutoMountManager(Screen):
 			fp = open('/etc/hostname', 'r')
 			self.hostname = fp.readline().rstrip('\n')
 			fp.close()
-			self.session.openWithCallback(self.hostnameCallback, VirtualKeyBoard, title = (_("Enter new hostname for your Receiver")), text = self.hostname)
+			self.session.openWithCallback(self.hostnameCallback, VirtualKeyBoard, title=(_("Enter new hostname for your Receiver")), text=self.hostname)
 
-	def hostnameCallback(self, callback = None):
+	def hostnameCallback(self, callback=None):
 		if callback is not None and len(callback):
 			fp = open('/etc/hostname', 'w+')
 			fp.write(callback + '\n')
@@ -149,7 +151,7 @@ class AutoMountManager(Screen):
 
 	def restartLan(self):
 		iNetwork.restartNetwork(self.restartLanDataAvail)
-		self.restartLanRef = self.session.openWithCallback(self.restartfinishedCB, MessageBox, _("Please wait while your network is restarting..."), type = MessageBox.TYPE_INFO, enable_input = False)
+		self.restartLanRef = self.session.openWithCallback(self.restartfinishedCB, MessageBox, _("Please wait while your network is restarting..."), type=MessageBox.TYPE_INFO, enable_input=False)
 
 	def restartLanDataAvail(self, data):
 		if data is True:
@@ -160,21 +162,23 @@ class AutoMountManager(Screen):
 			if self.restartLanRef.execing:
 				self.restartLanRef.close(True)
 
-	def restartfinishedCB(self,data):
+	def restartfinishedCB(self, data):
 		if data is True:
-			self.session.open(MessageBox, _("Finished restarting your network"), type = MessageBox.TYPE_INFO, timeout = 10, default = False)
+			self.session.open(MessageBox, _("Finished restarting your network"), type=MessageBox.TYPE_INFO, timeout=10, default=False)
 
 	def createSetup(self):
 		self.session.open(MountManagerMenu)
 
-config.networkbrowser = ConfigSubsection()
-config.networkbrowser.automountpoll = ConfigYesNo(default = False)
-config.networkbrowser.automountpolltimer = ConfigSelection(default = 1, choices = [
-	("1", "1"),("2", "2"),("3", "3"),("4", "4"),("5", "5"),("6", "6"),("7", "7"),("8", "8"),("9", "9"),("10", "10"),
-	("11", "11"),("12", "12"),("13", "13"),("14", "14"),("15", "15"),("16", "16"),("17", "17"),("18", "18"),("19", "19"),("20", "20"),
-	("21", "21"),("22", "22"),("23", "23"),("24", "24")])
 
-class MountManagerMenu(Screen,ConfigListScreen):
+config.networkbrowser = ConfigSubsection()
+config.networkbrowser.automountpoll = ConfigYesNo(default=False)
+config.networkbrowser.automountpolltimer = ConfigSelection(default=1, choices=[
+	("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("7", "7"), ("8", "8"), ("9", "9"), ("10", "10"),
+	("11", "11"), ("12", "12"), ("13", "13"), ("14", "14"), ("15", "15"), ("16", "16"), ("17", "17"), ("18", "18"), ("19", "19"), ("20", "20"),
+	("21", "21"), ("22", "22"), ("23", "23"), ("24", "24")])
+
+
+class MountManagerMenu(Screen, ConfigListScreen):
 	def __init__(self, session):
 		from Components.Sources.StaticText import StaticText
 		Screen.__init__(self, session)
@@ -190,9 +194,9 @@ class MountManagerMenu(Screen,ConfigListScreen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 		self.createSetup()
 
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -234,7 +238,7 @@ class MountManagerMenu(Screen,ConfigListScreen):
 	def keySave(self):
 		self.saveAll()
 		self.close()
-	
+
 	def cancelConfirm(self, result):
 		if not result:
 			return
