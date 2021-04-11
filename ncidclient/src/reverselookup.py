@@ -150,18 +150,18 @@ class ReverseLookupAndNotify:
 			return
 
 		if self.number[:2] == "00":
-			if countries.has_key(self.number[:3]):	 #	e.g. USA
+			if self.number[:3] in countries:	 #	e.g. USA
 				self.countrycode = self.number[:3]
-			elif countries.has_key(self.number[:4]):
+			elif self.number[:4] in countries:
 				self.countrycode = self.number[:4]
-			elif countries.has_key(self.number[:5]):
+			elif self.number[:5] in countries:
 				self.countrycode = self.number[:5]
 			else:
 				debug("[ReverseLookupAndNotify] Country cannot be reverse handled")
 				self.notifyAndReset()
 				return
 
-		if countries.has_key(self.countrycode):
+		if self.countrycode in countries:
 			debug("[ReverseLookupAndNotify] Found website for reverse lookup")
 			self.websites = countries[self.countrycode]
 			self.nextWebsiteNo = 1

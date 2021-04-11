@@ -87,7 +87,7 @@ def autostart(reason, **kwargs):
 	if RUNPLUGIN != 1:
 		return
 	if reason == 0: # start
-		if kwargs.has_key("session"):
+		if "session" in kwargs:
 			global gLeavePlayerConfirmed
 			Session = kwargs["session"]
 			print "[SF-Plugin] autostart, Session = " + str(Session) + "\n"

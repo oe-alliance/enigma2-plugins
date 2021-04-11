@@ -42,7 +42,7 @@ class PkgList(Source):
 						self.err = True
 						return
 
-				if map.has_key(package[PKG_NAME]):
+				if package[PKG_NAME] in map:
 					if map[package[PKG_NAME]][0] > package[PKG_REL]:
 						continue
 				map.update({package[PKG_NAME]: [(package[PKG_REL][:-1] if len(package) < 3 else package[PKG_REL]),
@@ -52,13 +52,13 @@ class PkgList(Source):
 			out = os_popen("opkg list-installed")
 			for line in out:
 				package = line.split(' - ')
-				if map.has_key(package[PKG_NAME]):
+				if package[PKG_NAME] in map:
 					map[package[PKG_NAME]][2] = "1"
 
 			out = os_popen("opkg list-upgradable")
 			for line in out:
 				package = line.split(' - ')
-				if map.has_key(package[PKG_NAME]):
+				if package[PKG_NAME] in map:
 					map[package[PKG_NAME]][0] = package[PKG_REL].replace("experimental-", "exp. ") + " -> " + package[PKG_INFO][:-1].replace("experimental-", "exp. ")
 					map[package[PKG_NAME]][3] = "1"
 

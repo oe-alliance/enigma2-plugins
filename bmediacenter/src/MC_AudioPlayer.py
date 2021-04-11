@@ -331,7 +331,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 			if self.filelist.getServiceRef().type == 4098: # playlist
 				ServiceRef = self.filelist.getServiceRef()
 				extension = ServiceRef.getPath()[ServiceRef.getPath().rfind('.') + 1:]
-				if self.playlistparsers.has_key(extension):
+				if extension in self.playlistparsers:
 					self.playlist.clear()
 					playlist = self.playlistparsers[extension]()
 					list = playlist.open(ServiceRef.getPath())
@@ -492,7 +492,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		elif self.filelist.getServiceRef().type == 4098: # playlist
 			ServiceRef = self.filelist.getServiceRef()
 			extension = ServiceRef.getPath()[ServiceRef.getPath().rfind('.') + 1:]
-			if self.playlistparsers.has_key(extension):
+			if extension in self.playlistparsers:
 				playlist = self.playlistparsers[extension]()
 				list = playlist.open(ServiceRef.getPath())
 				for x in list:
@@ -786,7 +786,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 			self.screensavercheckup()
 		ServiceRef = self.filelist.getServiceRef()
 		extension = ServiceRef.getPath()[ServiceRef.getPath().rfind('.') + 1:]
-		if self.playlistparsers.has_key(extension):
+		if extension in self.playlistparsers:
 			self.playlist.clear()
 			playlist = self.playlistparsers[extension]()
 			list = playlist.open(ServiceRef.getPath())
@@ -1266,7 +1266,7 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 		if path is not None:
 			self.playlist.clear()
 			extension = path[0].rsplit('.', 1)[-1]
-			if self.playlistparsers.has_key(extension):
+			if extension in self.playlistparsers:
 				playlist = self.playlistparsers[extension]()
 				list = playlist.open(path[1])
 				for x in list:

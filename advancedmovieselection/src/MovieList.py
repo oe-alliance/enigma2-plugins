@@ -427,7 +427,7 @@ class MovieList(GUIComponent):
                 extension = serviceref.toString().split('.')
                 extension = extension[-1].lower()
                 offset = 25
-                if MEDIAEXTENSIONS.has_key(extension):
+                if extension in MEDIAEXTENSIONS:
                     media_ext = MEDIAEXTENSIONS[extension]
                     if media_ext == "audio":
                         png = LoadPixmap(resolveFilename(SCOPE_CURRENT_PLUGIN, IMAGE_PATH + media_ext + ".png"))

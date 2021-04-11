@@ -33,7 +33,7 @@ class ConfigMutable(ConfigElement):
 	def __init__(self, configElementDict, defaultKey):
 		ConfigElement.__init__(self)
 		self.configElementDict = configElementDict
-		if self.configElementDict.has_key(defaultKey):
+		if defaultKey in self.configElementDict:
 			self.currentConfig = self.configElementDict[defaultKey]
 			self.currentKey = defaultKey
 			self.defaultKey = self.currentKey
@@ -42,7 +42,7 @@ class ConfigMutable(ConfigElement):
 		self.elements[key] = configElement
 
 	def setAsCurrent(self, key):
-		if self.configElementDict.has_key(key):
+		if key in self.configElementDict:
 			self.currentConfig = self.configElementDict[key]
 			self.currentKey = key
 			self.saved_value = self.currentConfig.saved_value

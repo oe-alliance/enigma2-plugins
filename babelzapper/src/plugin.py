@@ -46,7 +46,7 @@ def main(session, **kwargs):
 
 def autostart(reason, **kwargs):
 #	global session
-	if kwargs.has_key("session") and reason == 0:
+	if "session" in kwargs and reason == 0:
 		session = kwargs["session"]
 		print "[BABELZAPPER] autostart"
 		session.open(BabelZapperStartup)

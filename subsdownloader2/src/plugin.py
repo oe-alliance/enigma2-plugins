@@ -508,7 +508,7 @@ class SubsDownloaderApplication(Screen):
 		comend self["subsList"].setList(self.serverAvailableSubtitles)"""
 		self.serverAvailableSubtitles = []
 		position = 0
-		if serverList[0].has_key('no_files'):
+		if 'no_files' in serverList[0]:
 			for x in serverList:
 				self.serverAvailableSubtitles.append(("[" + str(x['language_name']) + "]_" + str(x['no_files']) + "cd__" + str(x['filename']), position))
 				position = position + 1

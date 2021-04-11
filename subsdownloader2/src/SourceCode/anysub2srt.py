@@ -157,7 +157,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 		m = re1.match(list.pop(0), 0)
 		if m:
 		    time = int(m.group(1)) * 3600 + int(m.group(2)) * 60 + int(m.group(3))
-		    if subs.has_key(time):
+		    if time in subs:
 			subs[time].extend(m.group(4).strip().split("|"))
 		    else:
 			subs[time] = m.group(4).strip().split("|")
@@ -168,7 +168,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
         times.sort()
         for i in range(0, len(times)):
             next_time = 1
-            while not subs.has_key(times[i] + next_time) and next_time < 4:
+            while times[i] + next_time not in subs and next_time < 4:
                 next_time = next_time + 1
             subt = [times[i], times[i] + next_time]
             subt.extend(subs[times[i]])

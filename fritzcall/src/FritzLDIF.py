@@ -64,23 +64,23 @@ class FindNumber(ldif.LDIFParser):
 
 		address = ""
 		addressB = ""
-		if entry.has_key('telephoneNumber') or (entry.has_key('homePhone') and self.number == normalizePhoneNumber(entry['homePhone'][0])) or (entry.has_key('mobile') and self.number == normalizePhoneNumber(entry['mobile'][0])):
+		if 'telephoneNumber' in entry or ('homePhone' in entry and self.number == normalizePhoneNumber(entry['homePhone'][0])) or ('mobile' in entry and self.number == normalizePhoneNumber(entry['mobile'][0])):
 			# debug("[FritzCallPhonebook] LDIF get address")
-			if entry.has_key('telephoneNumber'):
+			if 'telephoneNumber' in entry:
 				no = normalizePhoneNumber(entry['telephoneNumber'][0])
 			else:
 				no = 0
-			if self.number == no or (entry.has_key('homePhone') and self.number == normalizePhoneNumber(entry['homePhone'][0])) or (entry.has_key('mobile') and self.number == normalizePhoneNumber(entry['mobile'][0])):
+			if self.number == no or ('homePhone' in entry and self.number == normalizePhoneNumber(entry['homePhone'][0])) or ('mobile' in entry and self.number == normalizePhoneNumber(entry['mobile'][0])):
 				nameB = (name + ' (' + _('business') + ')') if name else ""
-				if entry.has_key('company'):
+				if 'company' in entry:
 					nameB = (nameB + ', ' + entry['company'][0]) if nameB else entry['company'][0]
-				if entry.has_key('l'):
+				if 'l' in entry:
 					addressB = entry['l'][0]
-					if entry.has_key('postalCode'):
+					if 'postalCode' in entry:
 						addressB = entry['postalCode'][0] + ' ' + addressB
-					if entry.has_key('c'):
+					if 'c' in entry:
 						addressB = addressB + ', ' + entry['c'][0]
-					if entry.has_key('street'):
+					if 'street' in entry:
 						addressB = entry['street'][0] + ', ' + addressB
 					# debug("[FritzCallPhonebook] LDIF address: " + addressB)
 					if self.number == no:
@@ -97,18 +97,18 @@ class FindNumber(ldif.LDIFParser):
 						self._input_file.close()
 						return
 		for i in ['homePhone', 'mobile']:
-			if entry.has_key(i):
+			if i in entry:
 				no = normalizePhoneNumber(entry[i][0])
 				if self.number == no:
 					if i == 'mobile':
 						name = name + ' (' + _('mobile') + ')'
 					else:
 						name = name + ' (' + _('home') + ')'
-					if entry.has_key('mozillaHomeLocalityName'):
+					if 'mozillaHomeLocalityName' in entry:
 						address = entry['mozillaHomeLocalityName'][0]
-						if entry.has_key('mozillaHomePostalCode'):
+						if 'mozillaHomePostalCode' in entry:
 							address = entry['mozillaHomePostalCode'][0] + ' ' + address
-						if entry.has_key('mozillaHomeCountryName'):
+						if 'mozillaHomeCountryName' in entry:
 							address = address + ', ' + entry['mozillaHomeCountryName'][0]
 							debug("[FritzCallPhonebook] LDIF home address: " + addressB)
 						result = name + ', ' + address.replace('\n', ', ').replace('\r', '').replace('#', '')
@@ -148,41 +148,41 @@ class ReadNumbers(ldif.LDIFParser):
 
 		address = ""
 		addressB = ""
-		if entry.has_key('telephoneNumber') or entry.has_key('homePhone') or entry.has_key('mobile'):
+		if 'telephoneNumber' in entry or 'homePhone' in entry or 'mobile' in entry:
 			# debug("[FritzCallPhonebook] LDIF get address")
 			nameB = (name + ' (' + _('business') + ')') if name else ""
-			if entry.has_key('company'):
+			if 'company' in entry:
 				nameB = (nameB + ', ' + entry['company'][0]) if nameB else entry['company'][0]
-			if entry.has_key('l'):
+			if 'l' in entry:
 				addressB = entry['l'][0]
-				if entry.has_key('postalCode'):
+				if 'postalCode' in entry:
 					addressB = entry['postalCode'][0] + ' ' + addressB
-				if entry.has_key('c'):
+				if 'c' in entry:
 					addressB = addressB + ', ' + entry['c'][0]
-				if entry.has_key('street'):
+				if 'street' in entry:
 					addressB = entry['street'][0] + ', ' + addressB
 				# debug("[FritzCallPhonebook] LDIF address: " + addressB)
-				if entry.has_key('telephoneNumber'):
+				if 'telephoneNumber' in entry:
 					no = normalizePhoneNumber(entry['telephoneNumber'][0])
 					result = nameB + ', ' + addressB.replace('\n', ', ').replace('\r', '').replace('#', '')
 					self.outFun(no, result)
 			else:
-				if entry.has_key('telephoneNumber'):
+				if 'telephoneNumber' in entry:
 					no = normalizePhoneNumber(entry['telephoneNumber'][0])
 					result = nameB.replace('\n', ', ').replace('\r', '').replace('#', '')
 					self.outFun(no, result)
 		for i in ['homePhone', 'mobile']:
-			if entry.has_key(i):
+			if i in entry:
 				no = normalizePhoneNumber(entry[i][0])
 				if i == 'mobile':
 					nameHM = name + ' (' + _('mobile') + ')'
 				else:
 					nameHM = name + ' (' + _('home') + ')'
-				if entry.has_key('mozillaHomeLocalityName'):
+				if 'mozillaHomeLocalityName' in entry:
 					address = entry['mozillaHomeLocalityName'][0]
-					if entry.has_key('mozillaHomePostalCode'):
+					if 'mozillaHomePostalCode' in entry:
 						address = entry['mozillaHomePostalCode'][0] + ' ' + address
-					if entry.has_key('mozillaHomeCountryName'):
+					if 'mozillaHomeCountryName' in entry:
 						address = address + ', ' + entry['mozillaHomeCountryName'][0]
 					result = nameHM + ', ' + address.replace('\n', ', ').replace('\r', '').replace('#', '')
 					self.outFun(no, result)

@@ -7,7 +7,7 @@ class HelpableNumberActionMap(HelpableActionMap):
 
     def action(self, contexts, action):
         numbers = ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
-        if (action in numbers and self.actions.has_key(action)):
+        if (action in numbers and action in self.actions):
             res = self.actions[action](int(action))
             if res is not None:
                 return res

@@ -81,7 +81,7 @@ if fileExists("/etc/grautec/dm8000/tft_dm8000.ko"):
 else:
     TFT_8000_Present = False
 
-if not config.content.items.has_key("movielist"):
+if "movielist" not in config.content.items:
     print "e2 config.movielist not exists"
     config.movielist = ConfigSubsection()
 # all config.entries from Screens.MovieSelection

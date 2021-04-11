@@ -347,12 +347,12 @@ class StreamingWebScreen(WebScreen):
 			f(event, self)
 
 	def getRecordService(self):
-		if self.has_key("StreamService"):
+		if "StreamService" in self:
 			return self["StreamService"].getService()
 		return None
 
 	def getRecordServiceRef(self):
-		if self.has_key("StreamService"):
+		if "StreamService" in self:
 			return self["StreamService"].ref
 		return None
 

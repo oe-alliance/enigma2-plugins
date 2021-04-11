@@ -181,7 +181,7 @@ def NASpowerdown(Nname, Nuser, Npass, Ncommand, Nport):
 
 def autostart(reason, **kwargs):
 	global session
-	if reason == 0 and kwargs.has_key("session"):
+	if reason == 0 and "session" in kwargs:
 		session = kwargs["session"]
 		session.open(DoElektro)
 

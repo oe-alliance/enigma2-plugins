@@ -450,7 +450,7 @@ class HTTPAuthResource(HTTPRootResource):
 		http_session = request.getSession().sessionNamespaces
 
 		# if the auth-information has not yet been stored to the http_session
-		if not http_session.has_key('authenticated'):
+		if 'authenticated' not in http_session:
 			if request.getUser() != '':
 				http_session['authenticated'] = check_passwd(request.getUser(), request.getPassword())
 			else:

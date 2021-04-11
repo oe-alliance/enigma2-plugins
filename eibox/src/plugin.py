@@ -281,7 +281,7 @@ class EIBObjects(object):
 						      elif key == "value":
 							value = item.nodeValue
 						      i += 1
-						    if object_id and value != None and self.ids.has_key(object_id):
+						    if object_id and value != None and object_id in self.ids:
 							  EIBObject = self.ids[object_id]
 							  EIBObject.value = value
 							  if config.eib.debug.value:

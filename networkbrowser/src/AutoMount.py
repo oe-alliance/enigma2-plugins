@@ -344,7 +344,7 @@ class AutoMount():
 
 		if os.path.exists(path):
 			if data['mountusing'] == 'autofs':
-				if self.automounts.has_key(data['sharename']):
+				if data['sharename'] in self.automounts:
 					self.automounts[data['sharename']]['isMounted'] = True
 					desc = data['sharename']
 					harddiskmanager.addMountedPartition(sharepath, desc)
@@ -356,12 +356,12 @@ class AutoMount():
 					elif not os.path.exists(hdd_dir):
 						os.symlink(path, hdd_dir)
 			elif os.path.ismount(path):
-				if self.automounts.has_key(data['sharename']):
+				if data['sharename'] in self.automounts:
 					self.automounts[data['sharename']]['isMounted'] = True
 					desc = data['sharename']
 					harddiskmanager.addMountedPartition(path, desc)
 			else:
-				if self.automounts.has_key(data['sharename']):
+				if data['sharename'] in self.automounts:
 					self.automounts[data['sharename']]['isMounted'] = False
 				if os.path.exists(path):
 					if not os.path.ismount(path):
@@ -394,13 +394,13 @@ class AutoMount():
 		return self.automounts
 
 	def getMountsAttribute(self, mountpoint, attribute):
-		if self.automounts.has_key(mountpoint):
-			if self.automounts[mountpoint].has_key(attribute):
+		if mountpoint in self.automounts:
+			if attribute in self.automounts[mountpoint]:
 				return self.automounts[mountpoint][attribute]
 		return None
 
 	def setMountsAttribute(self, mountpoint, attribute, value):
-		if self.automounts.has_key(mountpoint):
+		if mountpoint in self.automounts:
 			self.automounts[mountpoint][attribute] = value
 
 	def removeEntryFromFile(self, entry, filename, separator=None):

@@ -343,33 +343,33 @@ class CompareMovie_and_Subtite_FileData(GuessFileData_from_FileName):
             for y in subtitle_file_data:
                 wynik = 0
                 #Cause and effect for subtitle and movie guesseFileData results
-                if x[1].has_key('type') and y[1].has_key('type'):
+                if 'type' in x[1] and 'type' in y[1]:
                     if x[1]['type'] == y[1]['type']:
                         #wynik = wynik + 0.1600
 			wynik = wynik + 0.0900
-                if x[1].has_key('name') and y[1].has_key('name'):
+                if 'name' in x[1] and 'name' in y[1]:
                     if x[1]['name'] == y[1]['name']:
                         #wynik = wynik +0.0900
 			wynik = wynik + 0.1600
-                if x[1].has_key('season') and y[1].has_key('season'):
+                if 'season' in x[1] and 'season' in y[1]:
                     if x[1]['season'] == y[1]['season']:
                         wynik = wynik + 0.0225
-                if x[1].has_key('episode') and y[1].has_key('episode'):
+                if 'episode' in x[1] and 'episode' in y[1]:
                     if x[1]['episode'] == y[1]['episode']:
                         wynik = wynik + 0.0225
-                if x[1].has_key('season') and y[1].has_key('part'):
+                if 'season' in x[1] and 'part' in y[1]:
                     if x[1]['season'] == y[1]['part']:
                         wynik = wynik + 0.0060
-                if x[1].has_key('episode') and y[1].has_key('part'):
+                if 'episode' in x[1] and 'part' in y[1]:
                     if x[1]['episode'] == y[1]['part']:
                         wynik = wynik + 0.0060
-                if x[1].has_key('part') and y[1].has_key('part'):
+                if 'part' in x[1] and 'part' in y[1]:
                     if x[1]['part'] == y[1]['part']:
                         wynik = wynik + 0.0400
-                if x[1].has_key('teams') and y[1].has_key('teams'):
+                if 'teams' in x[1] and 'teams' in y[1]:
                     if x[1]['teams'] == y[1]['teams']:
                         wynik = wynik + 0.0025
-                if x[1].has_key('year') and y[1].has_key('year'):
+                if 'year' in x[1] and 'year' in y[1]:
                     if x[1]['year'] == y[1]['year']:
                         wynik = wynik + 0.0049
                 #Cause and effect for subtitle and movie guesseFileData results
