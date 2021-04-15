@@ -26,6 +26,8 @@ import inspect
 LIST_PLUGINS = 0
 LIST_EXTENSIONS = 1
 LIST_EVENTINFO = 2
+
+
 class PluginHiderSetup(Screen, HelpableScreen):
 	skin = """<screen name="PluginHiderSetup" title="PluginHider Setup" position="center,center" size="565,395">
 		<ePixmap position="0,358" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
@@ -90,7 +92,7 @@ class PluginHiderSetup(Screen, HelpableScreen):
 				if len(args) == 1:
 					plugin(session=self.session)
 				elif instance and instance.servicelist:
-					plugin(session=self.session,servicelist=instance.servicelist)
+					plugin(session=self.session, servicelist=instance.servicelist)
 				else:
 					session.open(MessageBox, _("Could not start Plugin:") + "\n" + _("Unable to access InfoBar."), type=MessageBox.TYPE_ERROR)
 

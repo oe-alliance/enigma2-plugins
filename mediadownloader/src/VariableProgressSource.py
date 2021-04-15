@@ -1,5 +1,6 @@
 from Components.Sources.Source import Source
 
+
 class VariableProgressSource(Source):
 	"""Source to feed Progress Renderer from HTTPProgressDownloader"""
 

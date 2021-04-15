@@ -68,6 +68,7 @@ except ImportError as ie:
 else:
 	hasSeriesPlugin = True
 
+
 class SimpleBouquetSelection(SimpleChannelSelection):
 	def __init__(self, session, title):
 		SimpleChannelSelection.__init__(self, session, title)
@@ -81,6 +82,7 @@ class SimpleBouquetSelection(SimpleChannelSelection):
 			# We return the currently active path here
 			# Asking the user if this is what he wants might be better though
 			self.close(self.servicePath[-1])
+
 
 class AutoTimerChannelSelection(SimpleChannelSelection):
 	def __init__(self, session, autotimer):
@@ -104,10 +106,13 @@ class AutoTimerChannelSelection(SimpleChannelSelection):
 				ref
 			)
 
+
 class AutoTimerEPGSelection(EPGSelection):
 	def __init__(self, *args):
-		try: EPGSelection.__init__(self, *args, EPGtype='single')
-		except:  EPGSelection.__init__(self, *args)
+		try:
+			EPGSelection.__init__(self, *args, EPGtype='single')
+		except:
+			EPGSelection.__init__(self, *args)
 		self.skinName = "EPGSelection"
 
 	def infoKeyPressed(self):
@@ -120,14 +125,16 @@ class AutoTimerEPGSelection(EPGSelection):
 		if not evt:
 			return
 
-		addAutotimerFromEvent(self.session, evt = evt, service = sref)
+		addAutotimerFromEvent(self.session, evt=evt, service=sref)
 
 	def onSelectionChanged(self):
 		pass
 
+
 class AutoTimerEditorBase:
 	""" Base Class for all Editors """
-	def __init__(self, timer, editingDefaults = False):
+
+	def __init__(self, timer, editingDefaults=False):
 		# Keep Timer
 		self.timer = timer
 		self.editingDefaults = editingDefaults
@@ -167,27 +174,27 @@ class AutoTimerEditorBase:
 
 	def createSetup(self, timer):
 		# Name
-		self.name = NoSave(ConfigText(default = timer.name, fixed_size = False))
+		self.name = NoSave(ConfigText(default=timer.name, fixed_size=False))
 
 		# Match
-		self.match = NoSave(ConfigText(default = timer.match, fixed_size = False))
+		self.match = NoSave(ConfigText(default=timer.match, fixed_size=False))
 
 		# Encoding
 		default = timer.encoding
 		selection = ['UTF-8', 'ISO8859-15']
 		if default not in selection:
 			selection.append(default)
-		self.encoding = NoSave(ConfigSelection(choices = selection, default = default))
+		self.encoding = NoSave(ConfigSelection(choices=selection, default=default))
 
 		# ...
-		self.searchType = NoSave(ConfigSelection(choices = [("partial", _("partial match")), ("exact", _("exact match")), ("start", _("title starts with")), ("description", _("description match"))], default = timer.searchType))
-		self.searchCase = NoSave(ConfigSelection(choices = [("sensitive", _("case-sensitive search")), ("insensitive", _("case-insensitive search"))], default = timer.searchCase))
+		self.searchType = NoSave(ConfigSelection(choices=[("partial", _("partial match")), ("exact", _("exact match")), ("start", _("title starts with")), ("description", _("description match"))], default=timer.searchType))
+		self.searchCase = NoSave(ConfigSelection(choices=[("sensitive", _("case-sensitive search")), ("insensitive", _("case-insensitive search"))], default=timer.searchCase))
 
 		# Alternatives override
-		self.overrideAlternatives = NoSave(ConfigYesNo(default = timer.overrideAlternatives))
+		self.overrideAlternatives = NoSave(ConfigYesNo(default=timer.overrideAlternatives))
 
 		# Justplay
-		self.justplay = NoSave(ConfigSelection(choices = [("zap", _("zap")), ("record", _("record"))], default = {0: "record", 1: "zap"}[int(timer.justplay)]))
+		self.justplay = NoSave(ConfigSelection(choices=[("zap", _("zap")), ("record", _("record"))], default={0: "record", 1: "zap"}[int(timer.justplay)]))
 		self.setEndtime = NoSave(ConfigYesNo(default=timer.setEndtime))
 
 		# Timespan
@@ -208,9 +215,9 @@ class AutoTimerEditorBase:
 			now[3] = 23
 			now[4] = 15
 			end = mktime(now)
-		self.timespan = NoSave(ConfigEnableDisable(default = default))
-		self.timespanbegin = NoSave(ConfigClock(default = begin))
-		self.timespanend = NoSave(ConfigClock(default = end))
+		self.timespan = NoSave(ConfigEnableDisable(default=default))
+		self.timespanbegin = NoSave(ConfigClock(default=begin))
+		self.timespanend = NoSave(ConfigClock(default=end))
 
 		# Timeframe
 		if timer.hasTimeframe():
@@ -224,9 +231,9 @@ class AutoTimerEditorBase:
 			now[4] = 0
 			begin = mktime(now)
 			end = begin + 604800 # today + 7d
-		self.timeframe = NoSave(ConfigEnableDisable(default = default))
-		self.timeframebegin = NoSave(ConfigDateTime(begin, _("%d.%B %Y"), increment = 86400))
-		self.timeframeend = NoSave(ConfigDateTime(end, _("%d.%B %Y"), increment = 86400))
+		self.timeframe = NoSave(ConfigEnableDisable(default=default))
+		self.timeframebegin = NoSave(ConfigDateTime(begin, _("%d.%B %Y"), increment=86400))
+		self.timeframeend = NoSave(ConfigDateTime(end, _("%d.%B %Y"), increment=86400))
 
 		# Services have their own Screen
 
@@ -239,9 +246,9 @@ class AutoTimerEditorBase:
 			default = False
 			begin = 5
 			end = 5
-		self.offset = NoSave(ConfigEnableDisable(default = default))
-		self.offsetbegin = NoSave(ConfigNumber(default = begin))
-		self.offsetend = NoSave(ConfigNumber(default = end))
+		self.offset = NoSave(ConfigEnableDisable(default=default))
+		self.offsetbegin = NoSave(ConfigNumber(default=begin))
+		self.offsetend = NoSave(ConfigNumber(default=end))
 
 		# AfterEvent
 		if timer.hasAfterEvent():
@@ -254,11 +261,11 @@ class AutoTimerEditorBase:
 			}[timer.afterevent[0][0]]
 		else:
 			default = "default"
-		self.afterevent = NoSave(ConfigSelection(choices = [
+		self.afterevent = NoSave(ConfigSelection(choices=[
 			("default", _("standard")), ("nothing", _("do nothing")),
 			("standby", _("go to standby")),
 			("deepstandby", _("go to deep standby")),
-			("auto", _("auto"))], default = default))
+			("auto", _("auto"))], default=default))
 
 		# AfterEvent (Timespan)
 		if timer.hasAfterEvent() and timer.afterevent[0][1][0] is not None:
@@ -277,12 +284,12 @@ class AutoTimerEditorBase:
 			now[3] = 7
 			now[4] = 0
 			end = mktime(now)
-		self.afterevent_timespan = NoSave(ConfigEnableDisable(default = default))
-		self.afterevent_timespanbegin = NoSave(ConfigClock(default = begin))
-		self.afterevent_timespanend = NoSave(ConfigClock(default = end))
+		self.afterevent_timespan = NoSave(ConfigEnableDisable(default=default))
+		self.afterevent_timespanbegin = NoSave(ConfigClock(default=begin))
+		self.afterevent_timespanend = NoSave(ConfigClock(default=end))
 
 		# Enabled
-		self.enabled = NoSave(ConfigYesNo(default = timer.enabled))
+		self.enabled = NoSave(ConfigYesNo(default=timer.enabled))
 
 		# Maxduration
 		if timer.hasDuration():
@@ -290,22 +297,22 @@ class AutoTimerEditorBase:
 			duration = timer.getDuration()
 		else:
 			default = False
-			duration =70
-		self.duration = NoSave(ConfigEnableDisable(default = default))
-		self.durationlength = NoSave(ConfigNumber(default = duration))
+			duration = 70
+		self.duration = NoSave(ConfigEnableDisable(default=default))
+		self.durationlength = NoSave(ConfigNumber(default=duration))
 
 		# Counter
 		if timer.hasCounter():
 			default = timer.matchCount
 		else:
 			default = 0
-		self.counter = NoSave(ConfigNumber(default = default))
-		self.counterLeft = NoSave(ConfigNumber(default = timer.matchLeft))
+		self.counter = NoSave(ConfigNumber(default=default))
+		self.counterLeft = NoSave(ConfigNumber(default=timer.matchLeft))
 		default = timer.getCounterFormatString()
 		selection = [("", _("Never")), ("%m", _("Monthly")), ("%U", _("Weekly (Sunday)")), ("%W", _("Weekly (Monday)"))]
 		if default not in ('', '%m', '%U', '%W'):
 			selection.append((default, _("Custom (%s)") % (default)))
-		self.counterFormatString = NoSave(ConfigSelection(selection, default = default))
+		self.counterFormatString = NoSave(ConfigSelection(selection, default=default))
 
 		# Avoid Duplicate Description
 		self.avoidDuplicateDescription = NoSave(ConfigSelection([
@@ -314,7 +321,7 @@ class AutoTimerEditorBase:
 				("2", _("On any service")),
 				("3", _("Any service/recording")),
 			],
-			default = str(timer.getAvoidDuplicateDescription())
+			default=str(timer.getAvoidDuplicateDescription())
 		))
 
 		# Search for Duplicate Desciption in...
@@ -323,7 +330,7 @@ class AutoTimerEditorBase:
 				("1", _("Title and Short description")),
 				("2", _("Title and all descriptions")),
 			],
-		    default = str(timer.searchForDuplicateDescription)
+		    default=str(timer.searchForDuplicateDescription)
 		))
 
 		# Custom Location
@@ -332,31 +339,31 @@ class AutoTimerEditorBase:
 		else:
 			default = False
 
-		self.useDestination = NoSave(ConfigYesNo(default = default))
+		self.useDestination = NoSave(ConfigYesNo(default=default))
 
 		default = timer.destination or Directories.resolveFilename(Directories.SCOPE_HDD)
 		choices = config.movielist.videodirs.value
 
 		if default not in choices:
 			choices.append(default)
-		self.destination = NoSave(ConfigSelection(default = default, choices = choices))
+		self.destination = NoSave(ConfigSelection(default=default, choices=choices))
 
 		# Tags
 		self.timerentry_tags = timer.tags
-		self.tags = NoSave(ConfigSelection(choices = [len(self.timerentry_tags) == 0 and _("None") or ' '.join(self.timerentry_tags)]))
+		self.tags = NoSave(ConfigSelection(choices=[len(self.timerentry_tags) == 0 and _("None") or ' '.join(self.timerentry_tags)]))
 
 		# Vps
-		self.vps_enabled = NoSave(ConfigYesNo(default = timer.vps_enabled))
-		self.vps_overwrite = NoSave(ConfigYesNo(default = timer.vps_overwrite))
+		self.vps_enabled = NoSave(ConfigYesNo(default=timer.vps_enabled))
+		self.vps_overwrite = NoSave(ConfigYesNo(default=timer.vps_overwrite))
 
 		# SeriesPlugin
-		self.series_labeling = NoSave(ConfigYesNo(default = timer.series_labeling))
+		self.series_labeling = NoSave(ConfigYesNo(default=timer.series_labeling))
 
 	def pathSelected(self, res):
 		if res is not None:
 			# I'm pretty sure this will always fail
 			if config.movielist.videodirs.value != self.destination.choices:
-					self.destination.setChoices(config.movielist.videodirs.value, default = res)
+					self.destination.setChoices(config.movielist.videodirs.value, default=res)
 			self.destination.value = res
 
 	def chooseDestination(self):
@@ -367,7 +374,7 @@ class AutoTimerEditorBase:
 			MovieLocationBox,
 			_("Choose target folder"),
 			self.destination.value,
-			minFree = 100 # Same requirement as in Screens.TimerEntry
+			minFree=100 # Same requirement as in Screens.TimerEntry
 		)
 
 	def tagEditFinished(self, ret):
@@ -383,6 +390,7 @@ class AutoTimerEditorBase:
 				preferredTagEditor,
 				self.timerentry_tags
 			)
+
 
 class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 	"""Edit AutoTimer"""
@@ -401,7 +409,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		<widget source="help" render="Label" position="5,280" size="555,63" font="Regular;21" />
 	</screen>"""
 
-	def __init__(self, session, timer, editingDefaults = False):
+	def __init__(self, session, timer, editingDefaults=False):
 		Screen.__init__(self, session)
 
 		AutoTimerEditorBase.__init__(self, timer, editingDefaults)
@@ -411,24 +419,24 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		self.onChangedEntry = []
 
 		# We might need to change shown items, so add some notifiers
-		self.justplay.addNotifier(self.reloadList, initial_call = False)
-		self.timespan.addNotifier(self.reloadList, initial_call = False)
-		self.timeframe.addNotifier(self.reloadList, initial_call = False)
-		self.offset.addNotifier(self.reloadList, initial_call = False)
-		self.duration.addNotifier(self.reloadList, initial_call = False)
-		self.afterevent.addNotifier(self.reloadList, initial_call = False)
-		self.afterevent_timespan.addNotifier(self.reloadList, initial_call = False)
-		self.counter.addNotifier(self.reloadList, initial_call = False)
-		self.avoidDuplicateDescription.addNotifier(self.reloadList, initial_call = False)
-		self.useDestination.addNotifier(self.reloadList, initial_call = False)
-		self.vps_enabled.addNotifier(self.reloadList, initial_call = False)
-		self.series_labeling.addNotifier(self.reloadList, initial_call = False)
+		self.justplay.addNotifier(self.reloadList, initial_call=False)
+		self.timespan.addNotifier(self.reloadList, initial_call=False)
+		self.timeframe.addNotifier(self.reloadList, initial_call=False)
+		self.offset.addNotifier(self.reloadList, initial_call=False)
+		self.duration.addNotifier(self.reloadList, initial_call=False)
+		self.afterevent.addNotifier(self.reloadList, initial_call=False)
+		self.afterevent_timespan.addNotifier(self.reloadList, initial_call=False)
+		self.counter.addNotifier(self.reloadList, initial_call=False)
+		self.avoidDuplicateDescription.addNotifier(self.reloadList, initial_call=False)
+		self.useDestination.addNotifier(self.reloadList, initial_call=False)
+		self.vps_enabled.addNotifier(self.reloadList, initial_call=False)
+		self.series_labeling.addNotifier(self.reloadList, initial_call=False)
 
 		self.refresh()
 		self.initHelpTexts()
 
 		# XXX: no help for numericaltextinput since it is shown on top of our help
-		ConfigListScreen.__init__(self, self.list, on_change = self.changed)
+		ConfigListScreen.__init__(self, self.list, on_change=self.changed)
 		self["config"].onSelectionChanged.append(self.updateHelp)
 
 		# Initialize Buttons
@@ -714,8 +722,8 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.session.open(
 					MessageBox,
 					_("The match attribute is mandatory."),
-					type = MessageBox.TYPE_ERROR,
-					timeout = 5
+					type=MessageBox.TYPE_ERROR,
+					timeout=5
 			)
 		# Check if we have a trailing whitespace
 		elif self.match.value[-1:] == " ":
@@ -785,7 +793,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		# Offset
 		if self.offset.value:
-			self.timer.offset = (self.offsetbegin.value*60, self.offsetend.value*60)
+			self.timer.offset = (self.offsetbegin.value * 60, self.offsetend.value * 60)
 		else:
 			self.timer.offset = None
 
@@ -809,7 +817,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		# Maxduration
 		if self.duration.value:
-			self.timer.maxduration = self.durationlength.value*60
+			self.timer.maxduration = self.durationlength.value * 60
 		else:
 			self.timer.maxduration = None
 
@@ -855,8 +863,9 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		# Close
 		self.close(self.timer)
 
+
 class AutoTimerEditorSilent(AutoTimerEditor):
-	def __init__(self, session, timer, editingDefaults = False):
+	def __init__(self, session, timer, editingDefaults=False):
 		AutoTimerEditor.__init__(self, session, timer, editingDefaults)
 		self.skinName = "AutoTimerEditor"
 		self.onLayoutFinish.append(self.save)
@@ -911,7 +920,7 @@ class AutoTimerEditorSilent(AutoTimerEditor):
 
 		# Offset
 		if self.offset.value:
-			self.timer.offset = (self.offsetbegin.value*60, self.offsetend.value*60)
+			self.timer.offset = (self.offsetbegin.value * 60, self.offsetend.value * 60)
 		else:
 			self.timer.offset = None
 
@@ -935,7 +944,7 @@ class AutoTimerEditorSilent(AutoTimerEditor):
 
 		# Maxduration
 		if self.duration.value:
-			self.timer.maxduration = self.durationlength.value*60
+			self.timer.maxduration = self.durationlength.value * 60
 		else:
 			self.timer.maxduration = None
 
@@ -984,6 +993,7 @@ class AutoTimerEditorSilent(AutoTimerEditor):
 	def retval(self):
 		return self.returnVal
 
+
 class AutoTimerFilterEditor(Screen, ConfigListScreen):
 	"""Edit AutoTimer Filter"""
 
@@ -1006,16 +1016,16 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 		self.setup_title = _("AutoTimer Filters")
 		self.onChangedEntry = []
 
-		self.typeSelection = NoSave(ConfigSelection(choices = [
+		self.typeSelection = NoSave(ConfigSelection(choices=[
 			("title", _("in Title")),
 			("short", _("in Shortdescription")),
 			("desc", _("in Description")),
 			("day", _("on Weekday"))]
 		))
-		self.typeSelection.addNotifier(self.refresh, initial_call = False)
+		self.typeSelection.addNotifier(self.refresh, initial_call=False)
 
-		self.enabled = NoSave(ConfigYesNo(default = filterset))
-		self.enabled.addNotifier(self.refresh, initial_call = False)
+		self.enabled = NoSave(ConfigYesNo(default=filterset))
+		self.enabled.addNotifier(self.refresh, initial_call=False)
 
 		self.excludes = excludes
 		self.includes = includes
@@ -1025,7 +1035,7 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 
 		self.reloadList()
 
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changed)
 
 		# Initialize Buttons
 		self["key_red"] = StaticText(_("Cancel"))
@@ -1054,7 +1064,6 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 
 	def setCustomTitle(self):
 		self.setTitle(_("Edit AutoTimer filters"))
-
 
 	def changed(self):
 		for x in self.onChangedEntry:
@@ -1110,12 +1119,12 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 
 			# Weekdays are presented as ConfigSelection
 			self.list.extend([
-				getConfigListEntry(_("Exclude"), NoSave(ConfigSelection(choices = weekdays, default = x)))
+				getConfigListEntry(_("Exclude"), NoSave(ConfigSelection(choices=weekdays, default=x)))
 					for x in self.excludes[3]
 			])
 			self.lenExcludes = len(self.list)
 			self.list.extend([
-				getConfigListEntry(_("Include"), NoSave(ConfigSelection(choices = weekdays, default = x)))
+				getConfigListEntry(_("Include"), NoSave(ConfigSelection(choices=weekdays, default=x)))
 					for x in self.includes[3]
 			])
 			return
@@ -1127,12 +1136,12 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 			self.idx = 2
 
 		self.list.extend([
-			getConfigListEntry(_("Exclude"), NoSave(ConfigText(default = x, fixed_size = False)))
+			getConfigListEntry(_("Exclude"), NoSave(ConfigText(default=x, fixed_size=False)))
 				for x in self.excludes[self.idx]
 		])
 		self.lenExcludes = len(self.list)
 		self.list.extend([
-			getConfigListEntry(_("Include"), NoSave(ConfigText(default = x, fixed_size = False)))
+			getConfigListEntry(_("Include"), NoSave(ConfigText(default=x, fixed_size=False)))
 				for x in self.includes[self.idx]
 		])
 
@@ -1170,9 +1179,9 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 				text = ret[0]
 
 			if self.typeSelection.value == "day":
-				entry = getConfigListEntry(text, NoSave(ConfigSelection(choices = weekdays)))
+				entry = getConfigListEntry(text, NoSave(ConfigSelection(choices=weekdays)))
 			else:
-				entry = getConfigListEntry(text, NoSave(ConfigText(fixed_size = False)))
+				entry = getConfigListEntry(text, NoSave(ConfigText(fixed_size=False)))
 
 			list.insert(pos, entry)
 			self["config"].setList(list)
@@ -1199,6 +1208,7 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 			self.excludes,
 			self.includes
 		))
+
 
 class AutoTimerServiceEditor(Screen, ConfigListScreen):
 	"""Edit allowed Services of a AutoTimer"""
@@ -1227,16 +1237,16 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 			bouquetlist[:]
 		)
 
-		self.enabled = NoSave(ConfigEnableDisable(default = servicerestriction))
-		self.typeSelection = NoSave(ConfigSelection(choices = [
+		self.enabled = NoSave(ConfigEnableDisable(default=servicerestriction))
+		self.typeSelection = NoSave(ConfigSelection(choices=[
 			("channels", _("Channels")),
 			("bouquets", _("Bouquets"))]
 		))
-		self.typeSelection.addNotifier(self.refresh, initial_call = False)
+		self.typeSelection.addNotifier(self.refresh, initial_call=False)
 
 		self.reloadList()
 
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changed)
 
 		# Initialize Buttons
 		self["key_red"] = StaticText(_("Cancel"))
@@ -1291,7 +1301,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 			self.idx = 1
 
 		self.list.extend([
-			getConfigListEntry(_("Record on"), NoSave(ConfigSelection(choices = [(str(x), ServiceReference(str(x)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))])))
+			getConfigListEntry(_("Record on"), NoSave(ConfigSelection(choices=[(str(x), ServiceReference(str(x)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))])))
 				for x in self.services[self.idx]
 		])
 
@@ -1341,11 +1351,11 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 				# strip all after last : when adding a (non alternative) channel
 				pos = sname.rfind(':')
 				if pos != -1:
-					if sname[pos-1] == ':':
+					if sname[pos - 1] == ':':
 						pos -= 1
-					sname = sname[:pos+1]
+					sname = sname[:pos + 1]
 
-			list.append(getConfigListEntry(_("Record on"), NoSave(ConfigSelection(choices = [(sname, ServiceReference(args[0]).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))))
+			list.append(getConfigListEntry(_("Record on"), NoSave(ConfigSelection(choices=[(sname, ServiceReference(args[0]).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))))
 			self["config"].setList(list)
 
 	def cancel(self):
@@ -1369,6 +1379,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 			self.enabled.value,
 			self.services
 		))
+
 
 def addAutotimerFromSearchString(session, match):
 	from AutoTimerComponent import preferredAutoTimerComponent
@@ -1398,7 +1409,8 @@ def addAutotimerFromSearchString(session, match):
 		[]			# Proposed tags
 	)
 
-def addAutotimerFromEvent(session, evt = None, service = None):
+
+def addAutotimerFromEvent(session, evt=None, service=None):
 	from AutoTimerComponent import preferredAutoTimerComponent
 	from AutoTimerImporter import AutoTimerImporter
 	from plugin import autotimer
@@ -1415,15 +1427,15 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 			# strip all after last :
 			pos = service.rfind(':')
 			if pos != -1:
-				if service[pos-1] == ':':
+				if service[pos - 1] == ':':
 					pos -= 1
-				service = service[:pos+1]
+				service = service[:pos + 1]
 
 		sref = ServiceReference(myref)
 	if evt:
 		# timespan defaults to +- 1h
-		begin = evt.getBeginTime()-3600
-		end = begin + evt.getDuration()+7200
+		begin = evt.getBeginTime() - 3600
+		end = begin + evt.getDuration() + 7200
 	else:
 		begin = end = 0
 
@@ -1450,7 +1462,8 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 		[]			# Proposed tags
 	)
 
-def addAutotimerFromService(session, service = None):
+
+def addAutotimerFromService(session, service=None):
 	from AutoTimerComponent import preferredAutoTimerComponent
 	from AutoTimerImporter import AutoTimerImporter
 	from plugin import autotimer
@@ -1467,9 +1480,9 @@ def addAutotimerFromService(session, service = None):
 		# strip all after last :
 		pos = sref.rfind(':')
 		if pos != -1:
-			if sref[pos-1] == ':':
+			if sref[pos - 1] == ':':
 				pos -= 1
-			sref = sref[:pos+1]
+			sref = sref[:pos + 1]
 
 		sref = ServiceReference(sref)
 	if info:
@@ -1509,6 +1522,7 @@ def addAutotimerFromService(session, service = None):
 		tags		# Proposed tags
 	)
 
+
 def importerCallback(ret):
 	if ret:
 		ret, session = ret
@@ -1519,7 +1533,8 @@ def importerCallback(ret):
 			ret
 		)
 
-def addAutotimerFromEventSilent(session, evt = None, service = None):
+
+def addAutotimerFromEventSilent(session, evt=None, service=None):
 	from plugin import autotimer
 
 	autotimer.readXml()
@@ -1533,14 +1548,14 @@ def addAutotimerFromEventSilent(session, evt = None, service = None):
 			# strip all after last :
 			pos = service.rfind(':')
 			if pos != -1:
-				if service[pos-1] == ':':
+				if service[pos - 1] == ':':
 					pos -= 1
-				service = service[:pos+1]
+				service = service[:pos + 1]
 
 	if evt:
 		# timespan defaults to +- 1h
-		begin = evt.getBeginTime()-3600
-		end = begin + evt.getDuration()+7200
+		begin = evt.getBeginTime() - 3600
+		end = begin + evt.getDuration() + 7200
 	else:
 		begin = end = 0
 
@@ -1552,8 +1567,8 @@ def addAutotimerFromEventSilent(session, evt = None, service = None):
 	newTimer.name = name
 	newTimer.match = name
 	if newTimer.timespan[0]:
-		newTimer.timespan = ((begin[3], begin[4]), (end[3], end[4]),False)
-	
+		newTimer.timespan = ((begin[3], begin[4]), (end[3], end[4]), False)
+
 	if newTimer.include:
 		includes = [
 				newTimer.getIncludedTitle(),
@@ -1562,13 +1577,14 @@ def addAutotimerFromEventSilent(session, evt = None, service = None):
 				[str(begin.tm_wday)],
 		]
 		newTimer.include = includes
-	
+
 	newTimer.services = [service]
 	newTimer.enabled = True
 
 	AutoTimerEditorSilentDialog = session.instantiateDialog(AutoTimerEditorSilent, newTimer)
 	retval = AutoTimerEditorSilentDialog.retval()
 	session.deleteDialogWithCallback(editorCallback, AutoTimerEditorSilentDialog, retval)
+
 
 def editorCallback(ret):
 	if ret:
@@ -1583,4 +1599,3 @@ def editorCallback(ret):
 
 		autotimer.readXml()
 		autotimer.parseEPG()
-

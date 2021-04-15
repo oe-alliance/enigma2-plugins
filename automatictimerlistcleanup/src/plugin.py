@@ -6,8 +6,8 @@
 #  Coded by Dr.Best (c) 2010
 #  Support: www.dreambox-tools.info
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -16,7 +16,7 @@
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 from Plugins.Plugin import PluginDescriptor
@@ -33,7 +33,8 @@ from timer import TimerEntry
 from . import _
 
 config.plugins.automatictimerlistcleanup = ConfigSubsection()
-config.plugins.automatictimerlistcleanup.type = ConfigSelection(default = "-1", choices = [("-1",_("disabled")), ("0",_("immediately after recording")),("1",_("older than 1 day")),("3",_("older than 3 days")),("7",_("older than 1 week")),("14",_("older than 2 weeks")),("28",_("older than 4 weeks")),("42",_("older than 6 weeks"))])
+config.plugins.automatictimerlistcleanup.type = ConfigSelection(default="-1", choices=[("-1", _("disabled")), ("0", _("immediately after recording")), ("1", _("older than 1 day")), ("3", _("older than 3 days")), ("7", _("older than 1 week")), ("14", _("older than 2 weeks")), ("28", _("older than 4 weeks")), ("42", _("older than 6 weeks"))])
+
 
 class AutomaticTimerlistCleanUpSetup(Screen, ConfigListScreen): # config
 
@@ -52,7 +53,7 @@ class AutomaticTimerlistCleanUpSetup(Screen, ConfigListScreen): # config
 		Screen.__init__(self, session)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
-		self.list = [ ]
+		self.list = []
 		self.list.append(getConfigListEntry(_("Cleanup timerlist-entries"), config.plugins.automatictimerlistcleanup.type))
 		ConfigListScreen.__init__(self, self.list, session)
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -71,38 +72,40 @@ class AutomaticTimerlistCleanUpSetup(Screen, ConfigListScreen): # config
 			x[1].cancel()
 		self.close(False)
 
+
 class AutomaticTimerlistCleanUp:
 	TIMER_INTERVAL = 86400 # check timerlist every 24 hour
+
 	def __init__(self, session):
 		self.session = session
 		print "[AutomaticTimerlistCleanUp] Starting AutomaticTimerlistCleanUp..."
 		self.timer = eTimer() # check timer
 		self.timer.callback.append(self.cleanupTimerlist)
 		self.cleanupTimerlist() # always check immediately after starting plugin
-		config.plugins.automatictimerlistcleanup.type.addNotifier(self.configChange, initial_call = False)
+		config.plugins.automatictimerlistcleanup.type.addNotifier(self.configChange, initial_call=False)
 		self.session.nav.RecordTimer.on_state_change.append(self.timerentryOnStateChange)
 
 	def cleanupTimerlist(self):
 		if int(config.plugins.automatictimerlistcleanup.type.value) > -1: # check only if feature is enabled
 			value = time() - int(config.plugins.automatictimerlistcleanup.type.value) * 86400 # calculate end time for comparison with processed timers
-			print "[AutomaticTimerlistCleanUp] Cleaning up timerlist-entries older than ",strftime("%c", localtime(value))
-			self.session.nav.RecordTimer.processed_timers = [ timerentry for timerentry in self.session.nav.RecordTimer.processed_timers if timerentry.disabled or (timerentry.end and timerentry.end > value) ] # cleanup timerlist
-			print "[AutomaticTimerlistCleanUp] Next automatic timerlist cleanup at ", strftime("%c", localtime(time()+self.TIMER_INTERVAL))
+			print "[AutomaticTimerlistCleanUp] Cleaning up timerlist-entries older than ", strftime("%c", localtime(value))
+			self.session.nav.RecordTimer.processed_timers = [timerentry for timerentry in self.session.nav.RecordTimer.processed_timers if timerentry.disabled or (timerentry.end and timerentry.end > value)] # cleanup timerlist
+			print "[AutomaticTimerlistCleanUp] Next automatic timerlist cleanup at ", strftime("%c", localtime(time() + self.TIMER_INTERVAL))
 			self.timer.startLongTimer(self.TIMER_INTERVAL) # check again in x secs
 		else:
 			print "[AutomaticTimerlistCleanUp] disabled"
-		
-	def configChange(self, configElement = None):
+
+	def configChange(self, configElement=None):
 		# config was changed in setup
 		if self.timer.isActive(): # stop timer if running
 			self.timer.stop()
 		print "[AutomaticTimerlistCleanUp] Setup values have changed"
 		if int(config.plugins.automatictimerlistcleanup.type.value) > -1:
-			print "[AutomaticTimerlistCleanUp] Next automatic timerlist cleanup at ", strftime("%c", localtime(time()+120))
-			self.timer.startLongTimer(120) # check timerlist in 2 minutes after changing 
+			print "[AutomaticTimerlistCleanUp] Next automatic timerlist cleanup at ", strftime("%c", localtime(time() + 120))
+			self.timer.startLongTimer(120) # check timerlist in 2 minutes after changing
 		else:
 			print "[AutomaticTimerlistCleanUp] disabled"
-		
+
 	def timerentryOnStateChange(self, timer):
 		if int(config.plugins.automatictimerlistcleanup.type.value) > -1 and timer.state == TimerEntry.StateEnded and timer.cancelled is not True: #if enabled, timerentry ended and it was not cancelled by user
 			print "[AutomaticTimerlistCleanUp] Timerentry has been changed to StateEnd"
@@ -110,17 +113,20 @@ class AutomaticTimerlistCleanUp:
 				self.timer.stop()
 			self.cleanupTimerlist() # and check if entries have to be cleaned up in the timerlist
 
+
 def autostart(session, **kwargs):
 	AutomaticTimerlistCleanUp(session) # start plugin at sessionstart
-	
+
+
 def setup(session, **kwargs):
 	session.open(AutomaticTimerlistCleanUpSetup) # start setup
+
 
 def startSetup(menuid):
 	if menuid != "system": # show setup only in system level menu
 		return []
 	return [(_("Automatic Timerlist Cleanup Setup"), setup, "automatictimerlistcleanup", 46)]
-	
-def Plugins(**kwargs):
-	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart), PluginDescriptor(name="Automatic Timerlist Cleanup Setup", description=_("Automatic Timerlist Cleanup Setup"), where = PluginDescriptor.WHERE_MENU, fnc=startSetup) ]
 
+
+def Plugins(**kwargs):
+	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart), PluginDescriptor(name="Automatic Timerlist Cleanup Setup", description=_("Automatic Timerlist Cleanup Setup"), where=PluginDescriptor.WHERE_MENU, fnc=startSetup)]

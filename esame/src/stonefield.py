@@ -11,12 +11,15 @@
 
 import random
 
+
 class Stone:
 	color = 0
 	changed = False
 	marked = False
 
-# This class is derived from StoneField.cpp (kSame) by Marcus Kreutzberger	
+# This class is derived from StoneField.cpp (kSame) by Marcus Kreutzberger
+
+
 class StoneField:
 	def __init__(self, width, height, colors, board):
 		self.sizex = width
@@ -28,7 +31,7 @@ class StoneField:
 			tmp = Stone()
 			self.field.append(tmp)
 
-		self.newGame(board,colors)
+		self.newGame(board, colors)
 		self.m_gotBonus = False
 
 	def count(self, color):
@@ -37,10 +40,10 @@ class StoneField:
 			if stone.color == color:
 				c += 1
 		return c
-	
+
 	def width(self):
-		return self.sizex;
-	
+		return self.sizex
+
 	def height(self):
 		return self.sizey
 
@@ -55,7 +58,7 @@ class StoneField:
 
 	def reset(self):
 		random.seed(self.board)
-		i=0
+		i = 0
 		for stone in self.field:
 			if i < 75:
 				stone.color = 1
@@ -80,7 +83,7 @@ class StoneField:
 	def Map(self, x, y):
 		return x + y * self.sizex
 
-	def mark1(self, x, y, force = False):
+	def mark1(self, x, y, force=False):
 		index = self.Map(x, y)
 
 		if index < 0:
@@ -116,13 +119,13 @@ class StoneField:
 		self.marked += 1
 
 		# mark left
-		if index % self.sizex != 0: 
+		if index % self.sizex != 0:
 			self.mark2(index - 1, color)
 		# mark right
 		if (index + 1) % self.sizex != 0:
 			self.mark2(index + 1, color)
 		# mark upward
-		if index >= self.sizex: 
+		if index >= self.sizex:
 			self.mark2(index - self.sizex, color)
 		# mark downward
 		if index < (self.sizex - 1) * self.sizey:
@@ -133,12 +136,12 @@ class StoneField:
 			return
 
 		for stone in self.field:
-			stone.marked = False;
-			stone.changed = True;
+			stone.marked = False
+			stone.changed = True
 
 		self.marked = 0
 
-	def remove(self, x, y, force = False):
+	def remove(self, x, y, force=False):
 		index = self.Map(x, y)
 
 		if index < 0:
@@ -186,14 +189,14 @@ class StoneField:
 
 		# find the last column that has something
 		lastcol = self.sizex
-		while lastcol > 0 and not self.field[self.Map(lastcol-1, self.sizey-1)].color:
+		while lastcol > 0 and not self.field[self.Map(lastcol - 1, self.sizey - 1)].color:
 			lastcol -= 1
 
 		#for (int col=0;col<lastcol-1;) {
-		for col in range(lastcol-1):
+		for col in range(lastcol - 1):
 			empty = True
 			#for (int row = 0; row < sizey; row++)
-			for row in range (self.sizey):
+			for row in range(self.sizey):
 				if self.field[self.Map(col, row)].color:
 					empty = False
 					break
@@ -219,7 +222,7 @@ class StoneField:
 				self.field[source].changed = True
 
 		# add a bonus, if field is empty
-		if not self.field[self.Map(0, self.sizey-1)].color:
+		if not self.field[self.Map(0, self.sizey - 1)].color:
 			self.score += 1000
 			self.m_gotBonus = True
 
@@ -230,24 +233,24 @@ class StoneField:
 	def isGameover(self):
 		i = self.maxstone - 1
 		#register unsigned char color;
-		
+
 		if self.gameover >= 0:
 			return bool(self.gameover)
-		
+
 		while i >= 0:
 			# ignore empty fields
-			while  i >= 0 and self.field[i].color == 0:
+			while i >= 0 and self.field[i].color == 0:
 				i -= 1
 			# Wenn Stein gefunden,
 			# dann die Nachbarn auf gleiche Farbe pruefen.
 			color = self.field[i].color
 			while i >= 0 and color:
 				# check left
-				if i % self.sizex != 0 and self.field[i - 1].color==color:
+				if i % self.sizex != 0 and self.field[i - 1].color == color:
 					self.gameover = (i < 0)
 					return bool(self.gameover)
 				# check upward
-				if i >= self.sizex and self.field[i - self.sizex].color==color:
+				if i >= self.sizex and self.field[i - self.sizex].color == color:
 					self.gameover = (i < 0)
 					return bool(self.gameover)
 				i -= 1
@@ -258,22 +261,21 @@ class StoneField:
 
 	def hasBonus(self):
 		return self.m_gotBonus
-	
+
 	def getBoard(self):
 		return self.board
-	
+
 	def getScore(self):
 		return self.score
-	
+
 	def getColors(self):
 		return self.colors
-	
+
 	def getMarked(self):
 		return self.marked
-	
+
 	def getFieldSize(self):
 		return self.maxstone
-	
+
 	def getField(self):
 		return self.field
-

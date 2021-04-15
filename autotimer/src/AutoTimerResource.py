@@ -19,6 +19,7 @@ from AutoTimerSettings import getAutoTimerSettingsDefinitions
 
 API_VERSION = "1.6"
 
+
 class AutoTimerBaseResource(resource.Resource):
 	def returnResult(self, req, state, statetext):
 		req.setResponseCode(http.OK)
@@ -31,31 +32,37 @@ class AutoTimerBaseResource(resource.Resource):
 	<e2statetext>%s</e2statetext>
 </e2simplexmlresult>\n""" % ('True' if state else 'False', statetext)
 
+
 class AutoTimerDoParseResource(AutoTimerBaseResource):
 	def parsecallback(self, ret):
-		rets = self.renderBackground (self.req, ret)
+		rets = self.renderBackground(self.req, ret)
 		self.req.write(rets)
 		self.req.finish()
+
 	def render(self, req):
 		self.req = req
 		# todo timeout / error handling
-		autotimer.parseEPG(callback = self.parsecallback)
+		autotimer.parseEPG(callback=self.parsecallback)
 		return server.NOT_DONE_YET
-	def renderBackground(self, req ,ret):
+
+	def renderBackground(self, req, ret):
 		output = _("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[6]), len(ret[5]))
 		return self.returnResult(req, True, output)
 
+
 class AutoTimerSimulateResource(AutoTimerBaseResource):
 	def parsecallback(self, timers, skipped):
-		ret = self.renderBackground (self.req, timers)
+		ret = self.renderBackground(self.req, timers)
 		self.req.write(ret)
 		self.req.finish()
+
 	def render(self, req):
 		self.req = req
 		# todo timeout / error handling
-		autotimer.parseEPG(simulateOnly=True, callback = self.parsecallback)
+		autotimer.parseEPG(simulateOnly=True, callback=self.parsecallback)
 		return server.NOT_DONE_YET
-	def renderBackground(self, req ,timers):
+
+	def renderBackground(self, req, timers):
 
 		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimersimulate api_version=\"", str(API_VERSION), "\">\n"]
 		extend = returnlist.extend
@@ -79,17 +86,21 @@ class AutoTimerSimulateResource(AutoTimerBaseResource):
 		req.setHeader('charset', 'UTF-8')
 		return ''.join(returnlist)
 #TODO
+
+
 class AutoTimerTestResource(AutoTimerBaseResource):
 	def parsecallback(self, timers, skipped):
-		ret = self.renderBackground (self.req, timers, skipped)
+		ret = self.renderBackground(self.req, timers, skipped)
 		self.req.write(ret)
 		self.req.finish()
+
 	def render(self, req):
 		self.req = req
 		# todo timeout / error handling
-		autotimer.parseEPG(simulateOnly=True, callback = self.parsecallback)
+		autotimer.parseEPG(simulateOnly=True, callback=self.parsecallback)
 		return server.NOT_DONE_YET
-	def renderBackground(self, req ,timers, skipped):
+
+	def renderBackground(self, req, timers, skipped):
 
 		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimertest api_version=\"", str(API_VERSION), "\">\n"]
 		extend = returnlist.extend
@@ -123,13 +134,14 @@ class AutoTimerTestResource(AutoTimerBaseResource):
 					'   <e2message>', stringToXML(message), '</e2message>\n'
 					'</e2testtimer>\n'
 				))
-		
+
 		returnlist.append('</e2autotimertest>')
 
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 		return ''.join(returnlist)
+
 
 class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 	def render(self, req):
@@ -148,6 +160,7 @@ class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 		req.setHeader('charset', 'UTF-8')
 		return ''.join(autotimer.getXml(webif))
 
+
 class AutoTimerRemoveAutoTimerResource(AutoTimerBaseResource):
 	def render(self, req):
 		id = req.args.get("id")
@@ -159,25 +172,28 @@ class AutoTimerRemoveAutoTimerResource(AutoTimerBaseResource):
 		else:
 			return self.returnResult(req, False, _("missing parameter \"id\""))
 
+
 class AutoTimerAddXMLAutoTimerResource(AutoTimerBaseResource):
 	def render_POST(self, req):
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application/xhtml+xml;' )
-		req.setHeader('charset', 'UTF-8')	
+		req.setHeader('Content-type', 'application/xhtml+xml;')
+		req.setHeader('charset', 'UTF-8')
 		autotimer.readXmlTimer(req.args['xml'][0])
 		if config.plugins.autotimer.always_write_config.value:
 			autotimer.writeXml()
 		return self.returnResult(req, True, _("AutoTimer was added successfully"))
-		
+
+
 class AutoTimerUploadXMLConfigurationAutoTimerResource(AutoTimerBaseResource):
 	def render_POST(self, req):
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application/xhtml+xml;' )
-		req.setHeader('charset', 'UTF-8')	
+		req.setHeader('Content-type', 'application/xhtml+xml;')
+		req.setHeader('charset', 'UTF-8')
 		autotimer.readXml(xml_string=req.args['xml'][0])
 		if config.plugins.autotimer.always_write_config.value:
 			autotimer.writeXml()
-		return self.returnResult(req, True, _("AutoTimers were changed successfully."))	
+		return self.returnResult(req, True, _("AutoTimers were changed successfully."))
+
 
 class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 	# TODO: recheck if we can modify regular config parser to work on this
@@ -212,13 +228,16 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 
 			# Name
 			timer.name = unquote(get("name", timer.name)).strip()
-			if not timer.name: timer.name = timer.match
+			if not timer.name:
+				timer.name = timer.match
 
 			# Enabled
 			enabled = get("enabled")
 			if enabled is not None:
-				try: enabled = int(enabled)
-				except ValueError: enabled = enabled == "yes"
+				try:
+					enabled = int(enabled)
+				except ValueError:
+					enabled = enabled == "yes"
 				timer.enabled = enabled
 
 			# Timeframe
@@ -242,8 +261,10 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		# Justplay
 		justplay = get("justplay")
 		if justplay is not None:
-			try: justplay = int(justplay)
-			except ValueError: justplay = justplay == "zap"
+			try:
+				justplay = int(justplay)
+			except ValueError:
+				justplay = justplay == "zap"
 			timer.justplay = justplay
 		setEndtime = get("setEndtime")
 		if setEndtime is not None:
@@ -270,9 +291,9 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 					# strip all after last :
 					pos = value.rfind(':')
 					if pos != -1:
-						if value[pos-1] == ':':
+						if value[pos - 1] == ':':
 							pos -= 1
-						value = value[:pos+1]
+						value = value[:pos + 1]
 
 				if myref.valid():
 					appendlist.append(value)
@@ -282,7 +303,8 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		servicelist = get("bouquets")
 		if servicelist is not None:
 			servicelist = unquote(servicelist).split(',')
-			while '' in servicelist: servicelist.remove('')
+			while '' in servicelist:
+				servicelist.remove('')
 			timer.bouquets = servicelist
 
 		# Offset
@@ -304,7 +326,8 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			if afterevent == "default":
 				timer.afterevent = []
 			else:
-				try: afterevent = int(afterevent)
+				try:
+					afterevent = int(afterevent)
 				except ValueError:
 					afterevent = {
 						"nothing": AFTEREVENT.NONE,
@@ -324,7 +347,7 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		# Maxduration
 		maxduration = get("maxduration")
 		if maxduration:
-			timer.maxduration = int(maxduration)*60
+			timer.maxduration = int(maxduration) * 60
 		elif maxduration == '':
 			timer.maxduration = None
 
@@ -339,10 +362,14 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			shortdescription = [unquote(x) for x in shortdescription] if shortdescription else includes[1]
 			description = [unquote(x) for x in description] if description else includes[2]
 			dayofweek = [unquote(x) for x in dayofweek] if dayofweek else includes[3]
-			while '' in title: title.remove('')
-			while '' in shortdescription: shortdescription.remove('')
-			while '' in description: description.remove('')
-			while '' in dayofweek: dayofweek.remove('')
+			while '' in title:
+				title.remove('')
+			while '' in shortdescription:
+				shortdescription.remove('')
+			while '' in description:
+				description.remove('')
+			while '' in dayofweek:
+				dayofweek.remove('')
 			timer.include = (title, shortdescription, description, dayofweek)
 
 		# Excludes
@@ -356,15 +383,20 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			shortdescription = [unquote(x) for x in shortdescription] if shortdescription else excludes[1]
 			description = [unquote(x) for x in description] if description else excludes[2]
 			dayofweek = [unquote(x) for x in dayofweek] if dayofweek else excludes[3]
-			while '' in title: title.remove('')
-			while '' in shortdescription: shortdescription.remove('')
-			while '' in description: description.remove('')
-			while '' in dayofweek: dayofweek.remove('')
+			while '' in title:
+				title.remove('')
+			while '' in shortdescription:
+				shortdescription.remove('')
+			while '' in description:
+				description.remove('')
+			while '' in dayofweek:
+				dayofweek.remove('')
 			timer.exclude = (title, shortdescription, description, dayofweek)
 
 		tags = req.args.get("tag")
 		if tags:
-			while '' in tags: tags.remove('')
+			while '' in tags:
+				tags.remove('')
 			timer.tags = [unquote(x) for x in tags]
 
 		timer.matchCount = int(get("counter", timer.matchCount))
@@ -382,13 +414,17 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		# vps
 		enabled = get("vps_enabled")
 		if enabled is not None:
-			try: enabled = int(enabled)
-			except ValueError: enabled = enabled == "yes"
+			try:
+				enabled = int(enabled)
+			except ValueError:
+				enabled = enabled == "yes"
 			timer.vps_enabled = enabled
 		vps_overwrite = get("vps_overwrite")
 		if vps_overwrite is not None:
-			try: vps_overwrite = int(vps_overwrite)
-			except ValueError: vps_overwrite = vps_overwrite == "yes"
+			try:
+				vps_overwrite = int(vps_overwrite)
+			except ValueError:
+				vps_overwrite = vps_overwrite == "yes"
 			timer.vps_overwrite = vps_overwrite
 		if not timer.vps_enabled and timer.vps_overwrite:
 			timer.vps_overwrite = False
@@ -396,8 +432,10 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		# SeriesPlugin
 		series_labeling = get("series_labeling")
 		if series_labeling is not None:
-			try: series_labeling = int(series_labeling)
-			except ValueError: series_labeling = series_labeling == "yes"
+			try:
+				series_labeling = int(series_labeling)
+			except ValueError:
+				series_labeling = series_labeling == "yes"
 			timer.series_labeling = series_labeling
 
 		# Always zap
@@ -414,6 +452,47 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			autotimer.writeXml()
 
 		return self.returnResult(req, True, message)
+
+
+class AutoTimerChangeResource(AutoTimerBaseResource):
+	def render(self, req):
+		def get(name, default=None):
+			ret = req.args.get(name)
+			return ret[0] if ret else default
+
+		id = get("id")
+		timer = None
+		if id is not None:
+			id = int(id)
+			for possibleMatch in autotimer.getTimerList():
+				if possibleMatch.id == id:
+					timer = possibleMatch
+					break
+
+		if timer is None:
+			return self.returnResult(req, False, _("unable to find timer with id %i" % (id,)))
+
+		# Name
+		name = get("name")
+		if name is not None:
+			timer.name = unquote(name).strip()
+
+		# Enabled
+		enabled = get("enabled")
+		if enabled is not None:
+			try:
+				enabled = int(enabled)
+			except ValueError:
+				enabled = enabled == "yes"
+			timer.enabled = enabled
+
+		message = _("AutoTimer was changed successfully")
+
+		if config.plugins.autotimer.always_write_config.value:
+			autotimer.writeXml()
+
+		return self.returnResult(req, True, message)
+
 
 class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 	def render(self, req):
@@ -482,6 +561,7 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 
 		return self.returnResult(req, True, _("config changed."))
 
+
 class AutoTimerSettingsResource(resource.Resource):
 	def render(self, req):
 		req.setResponseCode(http.OK)
@@ -506,13 +586,13 @@ class AutoTimerSettingsResource(resource.Resource):
 
 		resultstr = """<?xml version=\"1.0\" encoding=\"UTF-8\" ?><e2settings>"""
 
-		for (title,cfg,key,description) in defs:
+		for (title, cfg, key, description) in defs:
 			resultstr += """<e2setting>
 				<e2settingname>config.plugins.autotimer.%s</e2settingname>
 				<e2settingvalue>%s</e2settingvalue>
 				<e2settingtitle>%s</e2settingtitle>
 				<e2settingdescription>%s</e2settingdescription>
-			</e2setting>""" % (key, cfg.value , title , description )
+			</e2setting>""" % (key, cfg.value, title, description)
 
 		resultstr += """<e2setting>
 				<e2settingname>hasVps</e2settingname>
@@ -534,7 +614,6 @@ class AutoTimerSettingsResource(resource.Resource):
 					<e2settingname>autotimer_version</e2settingname>
 					<e2settingvalue>%s</e2settingvalue>
 				</e2setting>
-			</e2settings>""" % (hasVps, hasSeriesPlugin, CURRENT_CONFIG_VERSION, API_VERSION, AUTOTIMER_VERSION )
+			</e2settings>""" % (hasVps, hasSeriesPlugin, CURRENT_CONFIG_VERSION, API_VERSION, AUTOTIMER_VERSION)
 
 		return resultstr
-

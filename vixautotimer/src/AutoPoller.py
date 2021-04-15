@@ -11,6 +11,7 @@ from Tools.Notifications import AddPopup
 from Screens.MessageBox import MessageBox
 import NavigationInstance
 
+
 class AutoPoller:
 	"""Automatically Poll AutoTimer"""
 
@@ -22,7 +23,7 @@ class AutoPoller:
 	def start(self):
 		if self.query not in self.timer.callback:
 			self.timer.callback.append(self.query)
-		self.timer.startLongTimer(config.plugins.autotimer.delay.value*60)
+		self.timer.startLongTimer(config.plugins.autotimer.delay.value * 60)
 
 	def stop(self):
 		if self.query in self.timer.callback:
@@ -40,18 +41,20 @@ class AutoPoller:
 				print "[AutoTimer] Auto Poll Started"
 				# Ignore any program errors
 				try:
-					ret = autotimer.parseEPG(autoPoll = True)
+					ret = autotimer.parseEPG(autoPoll=True)
 				except Exception:
 					# Dump error to stdout
-					import traceback, sys
+					import traceback
+					import sys
 					traceback.print_exc(file=sys.stdout)
 			elif not config.plugins.autotimer.onlyinstandby.value:
 				print "[AutoTimer] Auto Poll Started"
 				# Ignore any program errors
 				try:
-					ret = autotimer.parseEPG(autoPoll = True)
+					ret = autotimer.parseEPG(autoPoll=True)
 				except Exception:
 					# Dump error to stdout
-					import traceback, sys
+					import traceback
+					import sys
 					traceback.print_exc(file=sys.stdout)
-		self.timer.startLongTimer(config.plugins.autotimer.interval.value*60)
+		self.timer.startLongTimer(config.plugins.autotimer.interval.value * 60)

@@ -1,5 +1,6 @@
 from Plugins.Extensions.WebInterface.WebScreens import WebScreen
 
+
 class BouquetEditorWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
@@ -18,4 +19,3 @@ class BouquetEditorWebScreen(WebScreen):
 		self["Restore"] = BouquetEditor(session, func=BouquetEditor.RESTORE)
 		self["RenameService"] = BouquetEditor(session, func=BouquetEditor.RENAME_SERVICE)
 		self["AddMarkerToBouquet"] = BouquetEditor(session, func=BouquetEditor.ADD_MARKER_TO_BOUQUET)
-		

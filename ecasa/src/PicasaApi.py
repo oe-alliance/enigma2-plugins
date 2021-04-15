@@ -17,8 +17,11 @@ from twisted.web.client import downloadPage
 _PicasaApi__returnPhotos = lambda photos: photos.entry
 
 from PictureApi import PictureApi
+
+
 class PicasaApi(PictureApi):
 	"""Wrapper around gdata/picasa API to make our life a little easier."""
+
 	def __init__(self, email=None, password=None, cache='/tmp/ecasa'):
 		"""Initialize API, login to google servers"""
 		PictureApi.__init__(self, cache=cache)
@@ -66,11 +69,14 @@ class PicasaApi(PictureApi):
 		return __returnPhotos(featured)
 
 	def downloadPhoto(self, photo, thumbnail=False):
-		if not photo: return
+		if not photo:
+			return
 
 		cache = os.path.join(self.cache, 'thumb', photo.albumid.text) if thumbnail else os.path.join(self.cache, photo.albumid.text)
-		try: os.makedirs(cache)
-		except OSError: pass
+		try:
+			os.makedirs(cache)
+		except OSError:
+			pass
 
 		url = photo.media.thumbnail[0].url if thumbnail else photo.media.content[0].url
 		filename = url.split('/')[-1]
@@ -81,8 +87,8 @@ class PicasaApi(PictureApi):
 			reactor.callLater(0, d.callback, (fullname, photo))
 		else:
 			downloadPage(url, fullname).addCallbacks(
-				lambda value:d.callback((fullname, photo)),
-				lambda error:d.errback((error, photo)))
+				lambda value: d.callback((fullname, photo)),
+				lambda error: d.errback((error, photo)))
 		return d
 
 	def copyPhoto(self, photo, target, recursive=True):
@@ -101,7 +107,8 @@ class PicasaApi(PictureApi):
 		Raises:
 		shutil.Error if an error occured during moving the file.
 		"""
-		if not photo: return
+		if not photo:
+			return
 
 		cache = os.path.join(self.cache, photo.albumid.text)
 		filename = photo.media.content[0].url.split('/')[-1]
@@ -114,8 +121,9 @@ class PicasaApi(PictureApi):
 		else:
 			print("[PicasaApi] Photo does not exist in cache, trying to download with deferred copy operation")
 			self.downloadPhoto(photo).addCallback(
-				lambda value:self.copyPhoto(photo, target, recursive=False)
+				lambda value: self.copyPhoto(photo, target, recursive=False)
 			)
 			return False
+
 
 __all__ = ['PicasaApi']

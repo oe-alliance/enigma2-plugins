@@ -15,13 +15,16 @@ from VlcServerList import VlcServerListScreen
 from VlcMediaList import VlcMediaListScreen
 from VlcServerConfig import vlcServerConfig
 from Screens.MessageBox import MessageBox
-import array, struct, fcntl
+import array
+import struct
+import fcntl
 from socket import socket, AF_INET, SOCK_STREAM, SOCK_DGRAM, SHUT_RDWR
 from os import system as os_system, path as os_path
 
 SIOCGIFCONF = 0x8912
 BYTES = 4096
 testOK = False
+
 
 class __VlcManager():
 	def __init__(self, session):
@@ -57,12 +60,14 @@ class __VlcManager():
 				self.testHost = "%s" % selectedServer.getHost()
 				link = "down"
 				for iface in self.get_iface_list():
-					if "lo" in iface: continue
-					if os_path.exists("/sys/class/net/%s/operstate"%(iface)):
-						fd = open("/sys/class/net/%s/operstate"%(iface), "r")
+					if "lo" in iface:
+						continue
+					if os_path.exists("/sys/class/net/%s/operstate" % (iface)):
+						fd = open("/sys/class/net/%s/operstate" % (iface), "r")
 						link = fd.read().strip()
 						fd.close()
-					if link != "down": break
+					if link != "down":
+						break
 				if link != "down":
 					s = socket(AF_INET, SOCK_STREAM)
 					s.settimeout(self.testTime)
@@ -78,7 +83,7 @@ class __VlcManager():
 					else:
 						self.openServerlist()
 						server_name = selectedServer.getName()
-						self.session.open(MessageBox, _("No ping from Server:\n%s\n%s") % (server_name, self.testHost), MessageBox.TYPE_ERROR, timeout = 5)
+						self.session.open(MessageBox, _("No ping from Server:\n%s\n%s") % (server_name, self.testHost), MessageBox.TYPE_ERROR, timeout=5)
 			else:
 				self.session.openWithCallback(self.medialistClosed, VlcMediaListScreen, selectedServer).keyUpdate()
 
@@ -88,19 +93,21 @@ class __VlcManager():
 		bytelen = struct.unpack('iL', fcntl.ioctl(sck.fileno(), SIOCGIFCONF, struct.pack('iL', BYTES, names.buffer_info()[0])))[0]
 		sck.close()
 		namestr = names.tostring()
-		return [namestr[i:i+32].split('\0', 1)[0] for i in range(0, bytelen, 32)]
+		return [namestr[i:i + 32].split('\0', 1)[0] for i in range(0, bytelen, 32)]
 
-	def medialistClosed(self, proceed = False):
+	def medialistClosed(self, proceed=False):
 		print "[VLC] medialistClosed"
 		if proceed:
 			self.openServerlist()
 
+
 def main(session, **kwargs):
 	__VlcManager(session).startSession()
+
 
 def Plugins(**kwargs):
 	return PluginDescriptor(
 		name=_("VLC Video Player"),
 		description=_("A video streaming solution based on VLC"),
-		where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
-		icon = "plugin.png", fnc = main)
+		where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU],
+		icon="plugin.png", fnc=main)

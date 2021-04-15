@@ -13,8 +13,10 @@ from Components.config import config
 
 from . import _, STARTNOTIFICATIONID, ENDNOTIFICATIONID, NOTIFICATIONDOMAIN
 
+
 class PipAdapter:
 	backgroundCapable = False
+
 	def __init__(self, session, hide=True):
 		if SystemInfo.get("NumVideoDecoders", 1) < 2:
 			self.pipAvail = False
@@ -54,7 +56,8 @@ class PipAdapter:
 		# Instantiate PiP
 		self.session.pip = self.session.instantiateDialog(PictureInPicture)
 		self.session.pip.show()
-		if self.hide: self.hidePiP()
+		if self.hide:
+			self.hidePiP()
 		self.session.pipshown = True # Always pretends it's shown (since the ressources are present)
 		newservice = self.session.nav.getCurrentlyPlayingServiceReference()
 		if self.session.pip.playService(newservice):
@@ -62,7 +65,8 @@ class PipAdapter:
 
 	def play(self, service):
 		print("[EPGRefresh.PipAdapter.play]")
-		if not self.pipAvail: return False
+		if not self.pipAvail:
+			return False
 
 		if not self.session.pipshown: # make sure pip still exists
 			self.initPiP()
@@ -73,14 +77,17 @@ class PipAdapter:
 		return False
 
 	def stop(self):
-		if not self.pipAvail: return
+		if not self.pipAvail:
+			return
 
 		if config.plugins.epgrefresh.enablemessage.value:
 			Notifications.AddPopup(_("EPG refresh finished.") + "\n" + _("PiP available now."), MessageBox.TYPE_INFO, 4, ENDNOTIFICATIONID)
 
 		# remove pip preemptively
-		try: del self.session.pip
-		except Exception: pass
+		try:
+			del self.session.pip
+		except Exception:
+			pass
 
 		# reset pip and remove it if unable to play service
 		if self.wasShown:
@@ -94,4 +101,3 @@ class PipAdapter:
 				del self.session.pip
 		else:
 			self.session.pipshown = False
-

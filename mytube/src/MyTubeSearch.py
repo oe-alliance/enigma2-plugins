@@ -21,8 +21,10 @@ from StringIO import StringIO
 from urllib import FancyURLopener
 import json
 
+
 class MyOpener(FancyURLopener):
 	version = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'
+
 
 class SuggestionsQueryThread(Thread):
 	def __init__(self, query, param, callback, errorback):
@@ -54,8 +56,9 @@ class SuggestionsQueryThread(Thread):
 			message = self.messages.pop()
 			message[1](message[0])
 
+
 class ConfigTextWithGoogleSuggestions(ConfigText):
-	def __init__(self, default = "", fixed_size = True, visible_width = False):
+	def __init__(self, default="", fixed_size=True, visible_width=False):
 		ConfigText.__init__(self, default, fixed_size, visible_width)
 		self.suggestions = GoogleSuggestions()
 		self.suggestionsThread = None
@@ -65,7 +68,7 @@ class ConfigTextWithGoogleSuggestions(ConfigText):
 	def prepareSuggestionsThread(self):
 		self.suggestions.hl = "en"
 		if config.plugins.mytube.search.lr.value is not None:
-			self.suggestions.hl=config.plugins.mytube.search.lr.value
+			self.suggestions.hl = config.plugins.mytube.search.lr.value
 
 	def suggestionsThreadStarted(self):
 		if self.suggestionsThreadRunning:
@@ -82,12 +85,12 @@ class ConfigTextWithGoogleSuggestions(ConfigText):
 
 	def propagateSuggestions(self, suggestionsList):
 		self.cancelSuggestionsThread()
-		print "[MyTube - ConfigTextWithGoogleSuggestions] propagateSuggestions:",suggestionsList
+		print "[MyTube - ConfigTextWithGoogleSuggestions] propagateSuggestions:", suggestionsList
 		if self.suggestionsWindow:
 			self.suggestionsWindow.update(suggestionsList)
 
 	def gotSuggestionsError(self, val):
-		print "[MyTube - ConfigTextWithGoogleSuggestions] gotSuggestionsError:",val
+		print "[MyTube - ConfigTextWithGoogleSuggestions] gotSuggestionsError:", val
 
 	def getSuggestions(self):
 		self.prepareSuggestionsThread()
@@ -156,14 +159,16 @@ class ConfigTextWithGoogleSuggestions(ConfigText):
 		self.value = self.tmpValue
 		return self.deactivateSuggestionList()
 
-	def enableSuggestionSelection(self,value):
+	def enableSuggestionSelection(self, value):
 		if self.suggestionsWindow is not None:
 			self.suggestionsWindow.enableSelection(value)
+
 
 default = resolveFilename(SCOPE_HDD)
 tmp = config.movielist.videodirs.value
 if default not in tmp:
 	tmp.append(default)
+
 
 class MyTubeSuggestionsListScreen(Screen):
 	skin = """
@@ -208,13 +213,13 @@ class MyTubeSuggestionsListScreen(Screen):
 						name = None
 						numresults = None
 						if suggesttype[count] == u'NAVIGATION':
-							count +=1
+							count += 1
 							continue
 						name = str(suggest)
 						numresults = suggestrelevance[count]
 						if name and numresults:
-							self.suggestlist.append((name, numresults ))
-						count +=1
+							self.suggestlist.append((name, numresults))
+						count += 1
 				"""for suggestion in suggestions_tree.findall("CompleteSuggestion"):
 					name = None
 					numresults = None
@@ -229,7 +234,7 @@ class MyTubeSuggestionsListScreen(Screen):
 					self.suggestlist.sort(key=lambda x: int(x[1]))
 					self.suggestlist.reverse()
 					for entry in self.suggestlist:
-						self.list.append((entry[0], str(entry[1]) + _(" Results") ))
+						self.list.append((entry[0], str(entry[1]) + _(" Results")))
 					self["suggestionslist"].setList(self.list)
 					self["suggestionslist"].setIndex(0)
 		else:
@@ -278,7 +283,7 @@ class MyTubeSuggestionsListScreen(Screen):
 		print self["suggestionslist"].getCurrent()[0]
 		return self["suggestionslist"].getCurrent()[0]
 
-	def enableSelection(self,value):
+	def enableSelection(self, value):
 		self["suggestionslist"].selectionEnabled(value)
 
 
@@ -380,7 +385,7 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 				MovieLocationBox,
 				_("Choose target folder"),
 				config.plugins.mytube.general.videodir.value,
-				minFree = 100 # We require at least 100MB free space
+				minFree=100 # We require at least 100MB free space
 			)
 		else:
 			self.keySave()
@@ -507,7 +512,7 @@ class MyTubeTasksScreen(Screen):
 	def rebuildTaskList(self):
 		self.tasklist = []
 		for job in job_manager.getPendingJobs():
-			self.tasklist.append((job,job.name,job.getStatustext(),int(100*job.progress/float(job.end)) ,str(100*job.progress/float(job.end)) + "%" ))
+			self.tasklist.append((job, job.name, job.getStatustext(), int(100 * job.progress / float(job.end)), str(100 * job.progress / float(job.end)) + "%"))
 		self['tasklist'].setList(self.tasklist)
 		self['tasklist'].updateList(self.tasklist)
 		self.Timer.startLongTimer(2)
@@ -524,7 +529,7 @@ class MyTubeTasksScreen(Screen):
 			self.session.openWithCallback(self.JobViewCB, JobView, job)
 
 	def JobViewCB(self, why):
-		print "WHY---",why
+		print "WHY---", why
 
 	def keyCancel(self):
 		self.close()
@@ -553,7 +558,7 @@ class MyTubeHistoryScreen(Screen):
 		Screen.__init__(self, session)
 		self.session = session
 		self.historylist = []
-		print "self.historylist",self.historylist
+		print "self.historylist", self.historylist
 		self["historylist"] = List(self.historylist)
 		self.activeState = False
 
@@ -563,10 +568,10 @@ class MyTubeHistoryScreen(Screen):
 		self.history = config.plugins.mytube.general.history.value.split(',')
 		if self.history[0] == '':
 			del self.history[0]
-		print "self.history",self.history
+		print "self.history", self.history
 		self.historylist = []
 		for entry in self.history:
-			self.historylist.append(( str(entry),))
+			self.historylist.append((str(entry),))
 		self["historylist"].setList(self.historylist)
 		self["historylist"].updateList(self.historylist)
 
@@ -603,4 +608,3 @@ class MyTubeHistoryScreen(Screen):
 		print "down"
 		self["historylist"].selectNext()
 		return self.getSelection()
-

@@ -11,6 +11,7 @@ from Components.config import config, getConfigListEntry
 
 VERSION = "1.34"
 
+
 class VPS_Setup(Screen, ConfigListScreen):
 
 	if getDesktop(0).size().width() <= 1280:
@@ -44,7 +45,7 @@ class VPS_Setup(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 
 		#Summary
-		self.setup_title = _("VPS Setup Version %s") %VERSION
+		self.setup_title = _("VPS Setup Version %s") % VERSION
 
 		self.vps_enabled = getConfigListEntry(_("Enable VPS-Plugin"), config.plugins.vps.enabled)
 		self.vps_do_PDC_check = getConfigListEntry(_("Check for PDC"), config.plugins.vps.do_PDC_check)
@@ -63,7 +64,7 @@ class VPS_Setup(Screen, ConfigListScreen):
 		self.list.append(self.vps_default)
 		self.list.append(self.vps_instanttimer)
 
-		ConfigListScreen.__init__(self, self.list, session = session)
+		ConfigListScreen.__init__(self, self.list, session=session)
 		self["config"].onSelectionChanged.append(self.updateHelp)
 
 		# Initialize Buttons
@@ -133,7 +134,6 @@ class VPS_Setup(Screen, ConfigListScreen):
 			x[1].save()
 
 		self.close(self.session)
-
 
 
 class VPS_Screen_Info(Screen):

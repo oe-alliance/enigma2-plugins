@@ -8,14 +8,14 @@ from . import EmissionOverview
 from EmissionOverview import LIST_TYPE_ALL, SORT_TYPE_ADDED
 
 config.plugins.emission = ConfigSubsection()
-config.plugins.emission.hostname = ConfigText(default = "localhost", fixed_size = False)
-config.plugins.emission.username = ConfigText(default = "", fixed_size = False)
-config.plugins.emission.password = ConfigText(default = "", fixed_size = False)
-config.plugins.emission.port = ConfigNumber(default = 9091)
-config.plugins.emission.autodownload_from_simplerss = ConfigYesNo(default = False)
+config.plugins.emission.hostname = ConfigText(default="localhost", fixed_size=False)
+config.plugins.emission.username = ConfigText(default="", fixed_size=False)
+config.plugins.emission.password = ConfigText(default="", fixed_size=False)
+config.plugins.emission.port = ConfigNumber(default=9091)
+config.plugins.emission.autodownload_from_simplerss = ConfigYesNo(default=False)
 # XXX: this is not compatible to the previous version and WILL break if not the default was used
-config.plugins.emission.last_tab = ConfigNumber(default = LIST_TYPE_ALL)
-config.plugins.emission.last_sort = ConfigNumber(default = SORT_TYPE_ADDED)
+config.plugins.emission.last_tab = ConfigNumber(default=LIST_TYPE_ALL)
+config.plugins.emission.last_sort = ConfigNumber(default=SORT_TYPE_ADDED)
 
 # by default sockets (and therefore urllib2 which transmissionrpc uses)
 # block so we set a default timeout of 10s for all sockets...
@@ -27,7 +27,8 @@ from transmissionrpc import Client, TransmissionError
 
 NOTIFICATIONID = 'EmissionAutodownloadError'
 
-def simplerss_update_callback(id = None):
+
+def simplerss_update_callback(id=None):
 	try:
 		from Plugins.Extensions.SimpleRSS.plugin import rssPoller
 	except ImportError:
@@ -42,10 +43,10 @@ def simplerss_update_callback(id = None):
 					if file.mimetype == "application/x-bittorrent":
 						if client is None:
 							client = Client(
-								address = config.plugins.emission.hostname.value,
-								port = config.plugins.emission.port.value,
-								user = config.plugins.emission.username.value,
-								password = config.plugins.emission.password.value
+								address=config.plugins.emission.hostname.value,
+								port=config.plugins.emission.port.value,
+								user=config.plugins.emission.username.value,
+								password=config.plugins.emission.password.value
 							)
 						try:
 							# XXX: we might want to run this in the background cause this might block...
@@ -68,6 +69,7 @@ def simplerss_update_callback(id = None):
 				5,
 				NOTIFICATIONID
 			)
+
 
 def simplerss_handle_callback(el):
 	try:
@@ -101,7 +103,9 @@ def simplerss_handle_callback(el):
 		elif simplerss_update_callback in update_callbacks:
 			update_callbacks.remove(simplerss_update_callback)
 
-config.plugins.emission.autodownload_from_simplerss.addNotifier(simplerss_handle_callback, immediate_feedback = False)
+
+config.plugins.emission.autodownload_from_simplerss.addNotifier(simplerss_handle_callback, immediate_feedback=False)
+
 
 def main(session, **kwargs):
 	#reload(EmissionOverview)
@@ -109,12 +113,13 @@ def main(session, **kwargs):
 		EmissionOverview.EmissionOverview
 	)
 
+
 def filescan_open(item, session, **kwargs):
 	client = Client(
-		address = config.plugins.emission.hostname.value,
-		port = config.plugins.emission.port.value,
-		user = config.plugins.emission.username.value,
-		password = config.plugins.emission.password.value
+		address=config.plugins.emission.hostname.value,
+		port=config.plugins.emission.port.value,
+		user=config.plugins.emission.username.value,
+		password=config.plugins.emission.password.value
 	)
 
 	added = 0
@@ -133,34 +138,35 @@ def filescan_open(item, session, **kwargs):
 	session.open(
 		MessageBox,
 		_("%d Torrents(s) were scheduled for download, %d failed.") % (added, errors),
-		type = MessageBox.TYPE_INFO,
-		timeout = 5
+		type=MessageBox.TYPE_INFO,
+		timeout=5
 	)
+
 
 from mimetypes import add_type
 add_type("application/x-bittorrent", ".tor")
 add_type("application/x-bittorrent", ".torrent")
+
 
 def filescan(**kwargs):
 	from Components.Scanner import Scanner, ScanPath
 
 	return [
 		Scanner(
-			mimetypes = ("application/x-bittorrent",),
-			paths_to_scan =
-				(
-					ScanPath(path = "", with_subdirs = False),
+			mimetypes=("application/x-bittorrent",),
+			paths_to_scan=(
+					ScanPath(path="", with_subdirs=False),
 				),
-			name = "BitTorrrent Download",
-			description = _("Download torrent..."),
-			openfnc = filescan_open,
+			name="BitTorrrent Download",
+			description=_("Download torrent..."),
+			openfnc=filescan_open,
 		)
 	]
 
+
 def Plugins(**kwargs):
 	return [
-		PluginDescriptor(name = "eMission", description = _("enigma2 frontend to transmission-daemon"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main, needsRestart = False),
-		PluginDescriptor(name = "eMission...", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main, needsRestart = False),
-		PluginDescriptor(where = PluginDescriptor.WHERE_FILESCAN, fnc = filescan, needsRestart = False),
+		PluginDescriptor(name="eMission", description=_("enigma2 frontend to transmission-daemon"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main, needsRestart=False),
+		PluginDescriptor(name="eMission...", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main, needsRestart=False),
+		PluginDescriptor(where=PluginDescriptor.WHERE_FILESCAN, fnc=filescan, needsRestart=False),
 	]
-

@@ -18,6 +18,7 @@ from Screens.MessageBox import MessageBox
 from PipzapSetup import PipzapSetup
 from Components.PluginComponent import plugins
 
+
 class baseMethods:
 	pass
 
@@ -26,6 +27,8 @@ class baseMethods:
 #pragma mark -
 
 # ChannelContextMenu: switch "Activate Picture in Picture" for pip/mainpicture
+
+
 def ChannelContextMenu___init__(self, session, csel, *args, **kwargs):
 	baseMethods.ChannelContextMenu__init__(self, session, csel, *args, **kwargs)
 
@@ -45,6 +48,7 @@ def ChannelContextMenu___init__(self, session, csel, *args, **kwargs):
 			x += 1
 		self["menu"].setList(list)
 
+
 def ChannelContextMenu_playMain(self):
 	# XXX: we want to keep the current selection
 	sel = self.csel.getCurrentSelection()
@@ -53,6 +57,8 @@ def ChannelContextMenu_playMain(self):
 	self.close()
 
 # do not hide existing pip
+
+
 def ChannelContextMenu_showServiceInPiP(self):
 	if not self.pipAvailable:
 		return
@@ -71,18 +77,22 @@ def ChannelContextMenu_showServiceInPiP(self):
 		del self.session.pip
 		self.session.openWithCallback(self.close, MessageBox, _("Could not open Picture in Picture"), MessageBox.TYPE_ERROR)
 
+
 def ChannelSelectionBase__init__(self, *args, **kwargs):
 	baseMethods.ChannelSelectionBase__init__(self, *args, **kwargs)
 	self.dopipzap = False
 	self.enable_pipzap = False
 
+
 def ChannelSelectionBase_setCurrentSelection(self, service, *args, **kwargs):
 	if service:
 		baseMethods.ChannelSelectionBase_setCurrentSelection(self, service, *args, **kwargs)
 
+
 def ChannelSelection_channelSelected(self, *args, **kwargs):
 	self.enable_pipzap = True
 	baseMethods.ChannelSelection_channelSelected(self, *args, **kwargs)
+
 
 def ChannelSelection_togglePipzap(self):
 	assert(self.session.pip)
@@ -118,13 +128,14 @@ def ChannelSelection_togglePipzap(self):
 	self.setTitle(title)
 	self.buildTitleString()
 
+
 def ChannelSelection_zap(self, *args, **kwargs):
 	if self.enable_pipzap and self.dopipzap:
 		if not self.session.pipshown:
 			self.session.pip = self.session.instantiateDialog(PictureInPicture)
 			self.session.pip.show()
 			self.session.pipshown = True
-		self.revertMode=None
+		self.revertMode = None
 		ref = self.session.pip.getCurrentService()
 		nref = self.getCurrentSelection()
 		if ref is None or ref != nref:
@@ -144,10 +155,12 @@ def ChannelSelection_zap(self, *args, **kwargs):
 			self.setCurrentSelection(self.session.pip.getCurrentService())
 	self.enable_pipzap = False
 
+
 def ChannelSelection_setHistoryPath(self, *args, **kwargs):
 	baseMethods.ChannelSelection_setHistoryPath(self, *args, **kwargs)
 	if self.dopipzap:
 		self.setCurrentSelection(self.session.pip.getCurrentService())
+
 
 def ChannelSelection_cancel(self, *args, **kwargs):
 	if self.revertMode is None and self.dopipzap:
@@ -160,6 +173,7 @@ def ChannelSelection_cancel(self, *args, **kwargs):
 #pragma mark MoviePlayer
 #pragma mark -
 
+
 def MoviePlayer__init__(self, *args, **kwargs):
 	baseMethods.MoviePlayer__init__(self, *args, **kwargs)
 	self.servicelist = InfoBar.instance and InfoBar.instance.servicelist
@@ -168,7 +182,8 @@ def MoviePlayer__init__(self, *args, **kwargs):
 		{
 			"left": self.left,
 			"right": self.right
-		}, prio = -2)
+		}, prio=-2)
+
 
 def MoviePlayer_up(self):
 	slist = self.servicelist
@@ -178,6 +193,7 @@ def MoviePlayer_up(self):
 	else:
 		self.showMovies()
 
+
 def MoviePlayer_down(self):
 	slist = self.servicelist
 	if slist and slist.dopipzap:
@@ -185,6 +201,7 @@ def MoviePlayer_down(self):
 		self.session.execDialog(slist)
 	else:
 		self.showMovies()
+
 
 def MoviePlayer_right(self):
 	# XXX: gross hack, we do not really seek if changing channel in pip :-)
@@ -210,6 +227,7 @@ def MoviePlayer_right(self):
 	else:
 		InfoBarSeek.seekFwd(self)
 
+
 def MoviePlayer_left(self):
 	slist = self.servicelist
 	if slist and slist.dopipzap:
@@ -233,12 +251,14 @@ def MoviePlayer_left(self):
 	else:
 		InfoBarSeek.seekBack(self)
 
+
 def MoviePlayer_swapPiP(self):
 	pass
 
 #pragma mark -
 #pragma mark InfoBarGenerics
 #pragma mark -
+
 
 def InfoBarNumberZap_zapToNumber(self, *args, **kwargs):
 	try:
@@ -247,13 +267,16 @@ def InfoBarNumberZap_zapToNumber(self, *args, **kwargs):
 		pass
 	baseMethods.InfoBarNumberZap_zapToNumber(self, *args, **kwargs)
 
+
 def InfoBarChannelSelection_zapUp(self, *args, **kwargs):
 	self.servicelist.enable_pipzap = True
 	baseMethods.InfoBarChannelSelection_zapUp(self, *args, **kwargs)
 
+
 def InfoBarChannelSelection_zapDown(self, *args, **kwargs):
 	self.servicelist.enable_pipzap = True
 	baseMethods.InfoBarChannelSelection_zapDown(self, *args, **kwargs)
+
 
 def InfoBarEPG_zapToService(self, *args, **kwargs):
 	try:
@@ -261,6 +284,7 @@ def InfoBarEPG_zapToService(self, *args, **kwargs):
 	except AttributeError as ae:
 		pass
 	baseMethods.InfoBarEPG_zapToService(self, *args, **kwargs)
+
 
 def InfoBarShowMovies__init__(self):
 	baseMethods.InfoBarShowMovies__init__(self)
@@ -270,6 +294,7 @@ def InfoBarShowMovies__init__(self):
 			"up": (self.up, _("movie list")),
 			"down": (self.down, _("movie list"))
 		})
+
 
 def InfoBarPiP__init__(self):
 	baseMethods.InfoBarPiP__init__(self)
@@ -281,17 +306,20 @@ def InfoBarPiP__init__(self):
 					"switchPiP": (self.togglePipzap, _("zap in pip window...")),
 				})
 
+
 def InfoBarPiP_pipzapAvailable(self):
 	try:
 		return True if self.servicelist and self.session.pipshown else False
 	except AttributeError as ae:
 		return False
 
+
 def InfoBarPiP_getTogglePipzapName(self):
 	slist = self.servicelist
 	if slist and slist.dopipzap:
 		return _("Zap focus to main screen")
 	return _("Zap focus to Picture in Picture")
+
 
 def InfoBarPiP_togglePipzap(self):
 	# supposed to fix some problems with permanent timeshift patch
@@ -305,6 +333,7 @@ def InfoBarPiP_togglePipzap(self):
 	if slist:
 		slist.togglePipzap()
 
+
 def InfoBarPiP_togglePipzapHelpable(self):
 	"""Stupid helper for InfoBarPiP_togglePipzap to optimize away the check if help should be shown if it already was."""
 	InfoBarPiP.togglePipzap = InfoBarPiP_togglePipzap
@@ -315,6 +344,7 @@ def InfoBarPiP_togglePipzapHelpable(self):
 		config.plugins.pipzap.save()
 
 	self.togglePipzap()
+
 
 def InfoBarPiP_showPiP(self, *args, **kwargs):
 	try:
@@ -334,6 +364,8 @@ def InfoBarPiP_showPiP(self, *args, **kwargs):
 	baseMethods.InfoBarPiP_showPiP(self, *args, **kwargs)
 
 # Using the base implementation would cause nasty bugs, so ignore it here
+
+
 def InfoBarPiP_swapPiP(self):
 	swapservice = self.session.nav.getCurrentlyPlayingServiceReference()
 	pipref = self.session.pip.getCurrentService()
@@ -360,10 +392,12 @@ def InfoBarPiP_swapPiP(self):
 #pragma mark Picture in Picture
 #pragma mark -
 
+
 class PictureInPictureZapping(Screen):
 	skin = """<screen name="PictureInPictureZapping" flags="wfNoBorder" position="50,50" size="90,26" title="PiPZap" zPosition="-1">
 		<eLabel text="PiP-Zap" position="0,0" size="90,26" foregroundColor="#00ff66" font="Regular;26" />
 	</screen>"""
+
 	def refreshPosition(self):
 		x = config.av.pip.value[0]
 		y = config.av.pip.value[1]
@@ -379,16 +413,20 @@ class PictureInPictureZapping(Screen):
 			y = height - 55
 		self.instance.move(ePoint(x, y))
 
+
 def PictureInPicture__init__(self, session, *args, **kwargs):
 	baseMethods.PictureInPicture__init__(self, session, *args, **kwargs)
 	self.pipActive = session.instantiateDialog(PictureInPictureZapping)
+
 
 def PictureInPicture_active(self):
 	if config.plugins.pipzap.show_label.value:
 		self.pipActive.show()
 
+
 def PictureInPicture_inactive(self):
 	self.pipActive.hide()
+
 
 def PictureInPicture_move(self, *args, **kwargs):
 	baseMethods.PictureInPicture_move(self, *args, **kwargs)
@@ -397,6 +435,7 @@ def PictureInPicture_move(self, *args, **kwargs):
 #pragma mark -
 #pragma mark - Help
 #pragma mark -
+
 
 try:
 	if SystemInfo.get("NumVideoDecoders", 1) > 1:
@@ -407,12 +446,13 @@ try:
 		file.close()
 		pipzapHelp = registerHelp(*reader)
 except Exception as e:
-	print("[pipzap] Unable to initialize MPHelp:", e,"- Help not available!")
+	print("[pipzap] Unable to initialize MPHelp:", e, "- Help not available!")
 	pipzapHelp = None
 
 #pragma mark -
 #pragma mark Plugin
 #pragma mark -
+
 
 def overwriteFunctions():
 	"""Overwrite existing functions here to increase system stability a bit."""
@@ -449,7 +489,7 @@ def overwriteFunctions():
 	baseMethods.ChannelSelection_channelSelected = ChannelSelection.channelSelected
 	ChannelSelection.channelSelected = ChannelSelection_channelSelected
 
-	ChannelSelection.togglePipzap = ChannelSelection_togglePipzap 
+	ChannelSelection.togglePipzap = ChannelSelection_togglePipzap
 
 	baseMethods.ChannelSelection_zap = ChannelSelection.zap
 	ChannelSelection.zap = ChannelSelection_zap
@@ -510,15 +550,18 @@ def overwriteFunctions():
 	baseMethods.PictureInPicture_move = PictureInPicture.move
 	PictureInPicture.move = PictureInPicture_move
 
+
 config.plugins.pipzap = ConfigSubsection()
-config.plugins.pipzap.enable_hotkey = ConfigEnableDisable(default = True)
-config.plugins.pipzap.show_in_plugins = ConfigEnableDisable(default = False)
-config.plugins.pipzap.show_label = ConfigEnableDisable(default = True)
-config.plugins.pipzap.show_help = ConfigEnableDisable(default = True)
+config.plugins.pipzap.enable_hotkey = ConfigEnableDisable(default=True)
+config.plugins.pipzap.show_in_plugins = ConfigEnableDisable(default=False)
+config.plugins.pipzap.show_label = ConfigEnableDisable(default=True)
+config.plugins.pipzap.show_help = ConfigEnableDisable(default=True)
+
 
 def autostart(reason, **kwargs):
 	if reason == 0:
 		overwriteFunctions()
+
 
 def activate(session, *args, **kwargs):
 	infobar = InfoBar.instance
@@ -529,13 +572,16 @@ def activate(session, *args, **kwargs):
 	else:
 		session.open(MessageBox, _("pipzap not properly installed.\nPlease restart Enigma2."), MessageBox.TYPE_ERROR)
 
+
 def main(session, *args, **kwargs):
 	session.open(PipzapSetup)
+
 
 def menu(menuid):
 	if menuid != "system":
 		return []
 	return [(_("pipzap"), main, "pipzap_setup", None)]
+
 
 def housekeepingPluginmenu(el):
 	if el.value:
@@ -543,8 +589,10 @@ def housekeepingPluginmenu(el):
 	else:
 		plugins.removePlugin(activateDescriptor)
 
+
 config.plugins.pipzap.show_in_plugins.addNotifier(housekeepingPluginmenu, initial_call=False, immediate_feedback=True)
 activateDescriptor = PluginDescriptor(name="pipzap", description=_("Toggle pipzap status"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=activate, needsRestart=False)
+
 
 def showHideNotifier(el):
 	infobar = InfoBar.instance
@@ -559,7 +607,9 @@ def showHideNotifier(el):
 			else:
 				session.pip.inactive()
 
+
 config.plugins.pipzap.show_label.addNotifier(showHideNotifier, initial_call=False, immediate_feedback=True)
+
 
 def Plugins(**kwargs):
 	# do not add any entry if only one (or less :P) video decoders present

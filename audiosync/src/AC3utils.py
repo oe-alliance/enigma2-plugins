@@ -2,13 +2,13 @@ AC3 = "AC3"
 PCM = "PCM"
 AC3GLOB = "AC3GLOB"
 PCMGLOB = "PCMGLOB"
-AC3PCM = (AC3,PCM,AC3GLOB,PCMGLOB)
+AC3PCM = (AC3, PCM, AC3GLOB, PCMGLOB)
 
 PLUGIN_BASE = "AudioSync"
 PLUGIN_VERSION = "1.2"
 
 MOVEPOSITIONSTEP = 10
-       
+
 SKIN = """
         <screen flags="wfNoBorder" position="30,30" size="600,460" title="Audio Sync" zPosition="1" backgroundColor="#ff000000">
             <ePixmap pixmap="~/img/AudioSyncBG.png" zPosition="1" position="0,0" size="600,460" alphatest="on" transparent="1" />
@@ -30,4 +30,4 @@ SKIN = """
                 font="Regular;14" valign="center" halign="left" backgroundColor="#232323" foregroundColor="#ffffff" transparent="1"/>
             <widget name="key_blue" position="425,15" zPosition="4" size="160,20"
                 font="Regular;14" valign="center" halign="left" backgroundColor="#232323" foregroundColor="#ffffff" transparent="1" />
-        </screen>"""        
+        </screen>"""

@@ -38,73 +38,77 @@ from xml.dom.minidom import Node
 from Tools import XMLTools
 from Tools.XMLTools import elementsWithTag, mergeText
 
-ChatText=str()
-OutTextTmp=str()
-BuddyList=str()
-NewMsg=str()
-Channel=str("ChatBox")
+ChatText = str()
+OutTextTmp = str()
+BuddyList = str()
+NewMsg = str()
+Channel = str("ChatBox")
 
-x=0
-y=0
+x = 0
+y = 0
 
-accounts_xml="/etc/dreamIRC.xml"
+accounts_xml = "/etc/dreamIRC.xml"
+
 
 class ChatWindow(ScrollLabel):
-	def __init__(self,session):
-		ScrollLabel.__init__(self,text="")
-		self.timer=eTimer()
+	def __init__(self, session):
+		ScrollLabel.__init__(self, text="")
+		self.timer = eTimer()
 		self.timer.timeout.get().append(self.updateChatWindow)
 		self.timer.start(250)
-		self.pipe=MessagePipe()
-		self.oldText=""
-		
+		self.pipe = MessagePipe()
+		self.oldText = ""
+
 	def updateChatWindow(self):
-		if (len(self.pipe.LastMsg()) >0) or (self.oldText!=self.pipe.getChatText()):
-			self.oldText=self.pipe.getChatText()
+		if (len(self.pipe.LastMsg()) > 0) or (self.oldText != self.pipe.getChatText()):
+			self.oldText = self.pipe.getChatText()
 			self.setText(self.pipe.getChatText())
 			self.lastPage()
 			self.pipe.setLastMsg("")
 
+
 class BuddyWindow(ScrollLabel):
-	def __init__(self,session):
-		ScrollLabel.__init__(self,text="")
-		self.timer=eTimer()
+	def __init__(self, session):
+		ScrollLabel.__init__(self, text="")
+		self.timer = eTimer()
 		self.timer.timeout.get().append(self.updateBuddyWindow)
 		self.timer.start(500)
-		self.oldlist=""
+		self.oldlist = ""
 
 	def updateBuddyWindow(self):
 		if (self.oldlist != BuddyList):
 			self.setText(BuddyList)
-			self.oldlist =BuddyList
+			self.oldlist = BuddyList
+
 
 class ChanName(Label):
-	def __init__(self,session):
-		Label.__init__(self,text=Channel)
-		self.timer=eTimer()
+	def __init__(self, session):
+		Label.__init__(self, text=Channel)
+		self.timer = eTimer()
 		self.timer.timeout.get().append(self.updateChanName)
 		self.timer.start(500)
-		self.oldname=self.text
-		self.pipe=MessagePipe()
+		self.oldname = self.text
+		self.pipe = MessagePipe()
 
 	def updateChanName(self):
-		self.newname=self.pipe.updateDesc()
+		self.newname = self.pipe.updateDesc()
 		if (self.oldname != self.newname):
 			self.setText(self.newname)
-			self.oldname=self.newname
+			self.oldname = self.newname
+
 
 class MessagePipe():
 	def __init__(self):
 		global BuddyList
-		self.logger=MessageLogger(open("/var/log/dreamIRC.log", "a"))
-		self.debug_state=debug()
-		if self.debug_state==True:
-			self.debuglogger=MessageLogger(open("/var/log/dreamIRC_debug.log", "a"))
+		self.logger = MessageLogger(open("/var/log/dreamIRC.log", "a"))
+		self.debug_state = debug()
+		if self.debug_state == True:
+			self.debuglogger = MessageLogger(open("/var/log/dreamIRC_debug.log", "a"))
 
 	def updateBuddyWindow(self):
-		global BuddyList 
+		global BuddyList
 		return BuddyList
-	
+
 	def getChatText(self):
 		global ChatText
 		return ChatText
@@ -113,58 +117,58 @@ class MessagePipe():
 		global NewMsg
 		return NewMsg
 
-	def setLastMsg(self,text):
+	def setLastMsg(self, text):
 		global NewMsg
-		NewMsg=str(text)
+		NewMsg = str(text)
 
 	def getOutText(self):
 		global OutTextTmp
 		return OutTextTmp
 
-	def addOutText(self,text):
+	def addOutText(self, text):
 		global OutTextTmp
-		OutTextTmp =str(text)
+		OutTextTmp = str(text)
 
 	def clearOutText(self):
 		global OutTextTmp
-		OutTextTmp=str("")
+		OutTextTmp = str("")
 		return OutTextTmp
 
-	def add(self,text):
+	def add(self, text):
 		timestamp = time.strftime("[%H:%M:%S]", time.localtime(time.time()))
 		global ChatText, NewMsg
-		ChatText=ChatText+"%s %s\n" % (timestamp,text)
-		NewMsg="%s %s" % (timestamp,text)
-		self.logger.log("%s %s" %(timestamp,text))
-		if self.debug_state==True:
-			self.debuglogger.log("%s %s" %(timestamp,text))
+		ChatText = ChatText + "%s %s\n" % (timestamp, text)
+		NewMsg = "%s %s" % (timestamp, text)
+		self.logger.log("%s %s" % (timestamp, text))
+		if self.debug_state == True:
+			self.debuglogger.log("%s %s" % (timestamp, text))
 
-	def debug(self,text):
-		if self.debug_state==True:
+	def debug(self, text):
+		if self.debug_state == True:
 			timestamp = time.strftime("[%H:%M:%S]", time.localtime(time.time()))
-			self.debuglogger.log("%s %s" %(timestamp,text))
+			self.debuglogger.log("%s %s" % (timestamp, text))
 		else:
 			print text
 
 	def clear(self):
 		global ChatText
-		ChatText=str("")
+		ChatText = str("")
 
 	def close(self):
 		self.logger.close()
-		if self.debug_state==True:
-			self.debuglogger.close()	
+		if self.debug_state == True:
+			self.debuglogger.close()
 
-	def buildBuddyList(self,text):
-		global BuddyList    
-		BuddyList= BuddyList+ "%s\n" %text
+	def buildBuddyList(self, text):
+		global BuddyList
+		BuddyList = BuddyList + "%s\n" % text
 
 	def clearBuddyList(self):
 		global BuddyList
-		BuddyList=""
+		BuddyList = ""
 
 	def showBuddyList(self):
-		global BuddyList    
+		global BuddyList
 
 		return BuddyList
 
@@ -172,19 +176,19 @@ class MessagePipe():
 		global Channel
 		return Channel
 
-	def getCannelName(self,text):
+	def getCannelName(self, text):
 		global Channel
-		Channel = "ChatBox #" + "%s\n" %text
-		
+		Channel = "ChatBox #" + "%s\n" % text
+
 	def resetDesc(self):
 		global Channel
 		Channel = "ChatBox"
-	
+
 
 class MessageLogger:
 	def __init__(self, file):
 		self.file = file
-		print '[dreamIRC] %s  MESSAGE LOGGER = %s \n'% (time.strftime("[%H:%M:%S]", time.localtime(time.time())),self.file)
+		print '[dreamIRC] %s  MESSAGE LOGGER = %s \n' % (time.strftime("[%H:%M:%S]", time.localtime(time.time())), self.file)
 
 	def log(self, message):
 		print '[dreamIRC] %s\n' % (message)
@@ -193,6 +197,7 @@ class MessageLogger:
 
 	def close(self):
 		self.file.close()
+
 
 def readLogFile(args):
 	try:
@@ -206,23 +211,25 @@ def readLogFile(args):
 		output = args[1]
 	return output
 
+
 def getMacAddress():
 	for line in os.popen("/sbin/ifconfig"):
 		if line.find('Ether') > -1:
 			mac = line.split()[4]
-			new_mac = mac.replace(":","")
+			new_mac = mac.replace(":", "")
 			break
 	return new_mac
 
+
 def debug():
-	try:	
+	try:
 		doc = xml.dom.minidom.parse(accounts_xml)
 		root = doc.childNodes[0]
 		for node in elementsWithTag(root.childNodes, "account"):
 			debug = node.getAttribute("debug")
-		if debug=="False":
+		if debug == "False":
 			return False
-		else:	
+		else:
 			return True
 	except IOError:
 		return False

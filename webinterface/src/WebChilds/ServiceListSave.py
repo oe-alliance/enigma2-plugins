@@ -7,6 +7,8 @@ from urllib import unquote as urllib_unquote
 import Components.ParentalControl
 
 ##########################
+
+
 class ServiceList(resource.Resource):
 	def __init__(self, session):
 
@@ -15,9 +17,10 @@ class ServiceList(resource.Resource):
 		self.putChild("reload", ServiceListReload())
 		self.putChild("save", ServiceListSave())
 
+
 class ServiceListReload(resource.Resource):
 	def render(self, request):
-		request.setHeader('Content-type', 'application/xhtml+xml;' )
+		request.setHeader('Content-type', 'application/xhtml+xml;')
 		request.setHeader('charset', 'UTF-8')
 
 		try:
@@ -43,6 +46,7 @@ class ServiceListReload(resource.Resource):
 							<e2state>False</e2state>
 							<e2statetext>Error while loading Servicelist!</e2statetext>
 						</e2simplexmlresult>"""
+
 
 class ServiceListSave(resource.Resource):
 	TYPE_TV = 0
@@ -93,7 +97,7 @@ class ServiceListSave(resource.Resource):
 #			raise http.HTTPError(responsecode.BAD_REQUEST)
 
 	def render(self, request):
-		request.setHeader('Content-type', 'application/xhtml+xml;' )
+		request.setHeader('Content-type', 'application/xhtml+xml;')
 		request.setHeader('charset', 'UTF-8')
 
 		try:
@@ -164,7 +168,7 @@ class ServiceListSave(resource.Resource):
 
 	def parseXML(self, xmldata):
 		print "parsing xmldata with length", len(xmldata)
-		xmldoc = xml_dom_minidom_parseString(xmldata);
+		xmldoc = xml_dom_minidom_parseString(xmldata)
 		blist = xmldoc.getElementsByTagName("e2bouquetlist")[0]
 		print "Num TV Bouquets", len(blist.getElementsByTagName('e2tvbouquetlist')[0].getElementsByTagName('e2bouquet'))
 		print "Num RADIO Bouquets", len(blist.getElementsByTagName('e2radiobouquetlist')[0].getElementsByTagName('e2bouquet'))
@@ -180,7 +184,7 @@ class ServiceListSave(resource.Resource):
 			bref = urllib_unquote(bouquet.getElementsByTagName('e2bouquetreference')[0].childNodes[0].data)
 			bname = urllib_unquote(bouquet.getElementsByTagName('e2bouquetname')[0].childNodes[0].data)
 			#print "Bouquet",bref,bname
-			list.append({'bname':bname, 'bref':bref, 'services':self.parseServices(bouquet)})
+			list.append({'bname': bname, 'bref': bref, 'services': self.parseServices(bouquet)})
 		return list
 
 	def parseServices(self, xmlnode):
@@ -191,7 +195,7 @@ class ServiceListSave(resource.Resource):
 			sname = urllib_unquote(service.getElementsByTagName('e2servicename')[0].childNodes[0].data)
 			sname = sname.replace(self.undefinded_tag, "<n/a>").replace(self.undefinded_and, "&")
 			#print sref,sname
-			list.append({'sref':sref, 'sname':sname})
+			list.append({'sref': sref, 'sname': sname})
 		return list
 
 	def createBouquetFile(self, type, bname, list_services, counter):
@@ -233,4 +237,3 @@ class ServiceListSave(resource.Resource):
 
 	def getFilenameForIndex(self, type):
 		return "bouquets" + self.EXTENSIONS[type]
-

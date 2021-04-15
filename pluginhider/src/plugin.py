@@ -20,6 +20,7 @@ config.plugins.pluginhider.hideeventinfo = ConfigSet(choices=[])
 
 hasPluginWeight = True
 
+
 def hidePlugin(plugin):
 	"""Convenience function for external code to hide a plugin."""
 	hide = config.plugins.pluginhider.hideplugins.value
@@ -27,9 +28,10 @@ def hidePlugin(plugin):
 		hide.append(plugin.name)
 		config.plugins.pluginhider.hideplugins.save()
 
+
 def PluginComponent_getPlugins(self, where):
 	if not isinstance(where, list):
-		where = [ where ]
+		where = [where]
 
 	res = []
 	if PluginDescriptor.WHERE_EXTENSIONSMENU in where:
@@ -44,7 +46,7 @@ def PluginComponent_getPlugins(self, where):
 
 	if PluginDescriptor.WHERE_EVENTINFO in where:
 		hide = config.plugins.pluginhider.hideeventinfo.value
-		res.extend((x for x in self.plugins.get(PluginDescriptor.WHERE_EVENTINFO , []) if x.name not in hide))
+		res.extend((x for x in self.plugins.get(PluginDescriptor.WHERE_EVENTINFO, []) if x.name not in hide))
 		where.remove(PluginDescriptor.WHERE_EVENTINFO)
 
 	if where:
@@ -53,11 +55,13 @@ def PluginComponent_getPlugins(self, where):
 		res.sort(key=attrgetter('weight'))
 	return res
 
+
 def autostart(reason, *args, **kwargs):
 	if reason == 0:
 		if hasattr(PluginComponent, 'pluginHider_baseGetPlugins'):
 			print("[PluginHider] Something went wrong as our autostart handler was called multiple times for startup, printing traceback and ignoring.")
-			import traceback, sys
+			import traceback
+			import sys
 			traceback.print_stack(limit=5, file=sys.stdout)
 		else:
 			PluginComponent.pluginHider_baseGetPlugins = PluginComponent.getPlugins
@@ -68,23 +72,27 @@ def autostart(reason, *args, **kwargs):
 			del PluginComponent.pluginHider_baseGetPlugins
 		else:
 			print("[PluginHider] Something went wrong as our autostart handler was called multiple times for shutdown, printing traceback and ignoring.")
-			import traceback, sys
+			import traceback
+			import sys
 			traceback.print_stack(limit=5, file=sys.stdout)
+
 
 def main(session, *args, **kwargs):
 	session.open(PluginHiderSetup)
 
+
 def menu(menuid):
 	if getImageDistro() in ('teamblue'):
 		if menuid != "general_menu":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
 			return []
 	return [(_("Hide Plugins"), main, "pluginhider_setup", None)]
 
+
 def Plugins(**kwargs):
-	pd =  PluginDescriptor(
+	pd = PluginDescriptor(
 		where=PluginDescriptor.WHERE_AUTOSTART,
 		fnc=autostart,
 		needsRestart=False,

@@ -25,16 +25,17 @@ from Components.Sources.StaticText import StaticText
 
 from . import _
 
+
 class YouTubeStdFeedSelectionScreen(Screen):
 	STD_FEED = "http://gdata.youtube.com/feeds/api/standardfeeds/"
-	
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
-		self["actions"] = ActionMap(["OkCancelActions"], 
+		self["actions"] = ActionMap(["OkCancelActions"],
 			{
-				"ok"		:	self.ok,
-				"cancel"	:	self.close
+				"ok"		: self.ok,
+				"cancel"	: self.close
 			})
 
 		menu = [(_("Most Viewed"), "most_viewed")]
@@ -49,10 +50,8 @@ class YouTubeStdFeedSelectionScreen(Screen):
 
 		self["menu"] = List(menu)
 
-
 	def ok(self):
 		Screen.close(self, self.STD_FEED + self["menu"].getCurrent()[1])
-
 
 	def close(self):
 		Screen.close(self, None)

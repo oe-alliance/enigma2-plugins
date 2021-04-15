@@ -4,10 +4,12 @@ from SVDRP import SimpleVDRProtocolAbstraction
 
 connection = None
 
+
 def autostart(reason, **kwargs):
 	global connection
 	if reason == 0 and connection is None:
 		connection = SimpleVDRProtocolAbstraction()
+
 
 def Plugins(**kwargs):
 	return [
@@ -17,4 +19,3 @@ def Plugins(**kwargs):
 			needsRestart=False,
 		),
 	]
-

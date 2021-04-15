@@ -1,4 +1,4 @@
-Version = '$Header$';
+Version = '$Header$'
 
 from Components.Sources.Source import Source
 from Components.Sources.ServiceList import ServiceList
@@ -8,6 +8,7 @@ from enigma import eServiceReference
 
 from re import sub
 from time import strftime, localtime, time
+
 
 class WAPfunctions(Source):
 	LISTTIME = 0
@@ -19,16 +20,16 @@ class WAPfunctions(Source):
 	TAGLIST = 6
 	DELETEOLD = 7
 
-	lut = {	"Name":0,
-			"Value":1,
-			"Selected":2
+	lut = {	"Name": 0,
+			"Value": 1,
+			"Selected": 2
 	}
 
 	def __init__(self, session, func=LISTTIME):
 		self.func = func
 		Source.__init__(self)
 		self.session = session
-		self.result = ( "unknown command (%s)" % (self.func), )
+		self.result = ("unknown command (%s)" % (self.func), )
 
 	def handleCommand(self, cmd):
 		print "WAPfunctions: handleCommand", cmd
@@ -49,7 +50,7 @@ class WAPfunctions(Source):
 		elif self.func is self.DELETEOLD:
 			self.result = self.deleteOldSaved(cmd)
 		else:
-			self.result = ( "unknown command cmd(%s) self.func(%s)" % (cmd, self.func), )
+			self.result = ("unknown command cmd(%s) self.func(%s)" % (cmd, self.func), )
 
 	def fillListTime(self, param):
 		print "fillListTime", param
@@ -89,7 +90,7 @@ class WAPfunctions(Source):
 			if p != "sRef" and param[p] != None:
 				key = p
 
-		if key == "smin" or key == "emin" :
+		if key == "smin" or key == "emin":
 			start = 0
 			end = 59
 		elif key == "shour" or key == "ehour":
@@ -134,16 +135,13 @@ class WAPfunctions(Source):
 		repeated = param or 0
 		repeated = int(repeated)
 
-		self.lut = {"Name":0
-			, "Value":1
-			, "Description":2
-			, "Selected":3
+		self.lut = {"Name": 0			, "Value": 1			, "Description": 2			, "Selected": 3
 		}
 
-		mo = ["mo", 	1, "Mo "]#"Monday"]
-		tu = ["tu", 	2, "Tu "]#"Tuesday"]
-		we = ["we", 	4, "We "]#"Wednesday"]
-		th = ["th", 	8, "Th "]#"Thursday"]
+		mo = ["mo", 1, "Mo "]#"Monday"]
+		tu = ["tu", 2, "Tu "]#"Tuesday"]
+		we = ["we", 4, "We "]#"Wednesday"]
+		th = ["th", 8, "Th "]#"Thursday"]
 		fr = ["fr", 16, "Fr "]#"Friday"]
 		sa = ["sa", 32, "Sa "]#"Saturday"]
 		su = ["su", 64, "Su "]#"Sunday"]

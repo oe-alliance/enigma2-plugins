@@ -41,6 +41,7 @@ PLAYLIST_EXTENSIONS = {
 		"xspf": "playlist.png",
 	}
 
+
 class VlcFileList(MenuList):
 	def __init__(self, getFilesAndDirsCB, baseDir, matchingPattern):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
@@ -53,11 +54,11 @@ class VlcFileList(MenuList):
 		self.changeRegex(matchingPattern)
 
 	def applySkin(self, desktop, parent):
-		attribs = [ ]
+		attribs = []
 		if self.skinAttributes is not None:
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "font":
-					self.font = parseFont(value, ((1,1),(1,1)))
+					self.font = parseFont(value, ((1, 1), (1, 1)))
 					self.l.setFont(0, self.font)
 				elif attrib == "itemHeight":
 					self.l.setItemHeight(int(value))
@@ -79,9 +80,9 @@ class VlcFileList(MenuList):
 		else:
 			extension = name.split('.')
 			extension = extension[-1].lower()
-			if MEDIA_EXTENSIONS.has_key(extension):
+			if extension in MEDIA_EXTENSIONS:
 				png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "extensions/" + MEDIA_EXTENSIONS[extension] + ".png"))
-			elif PLAYLIST_EXTENSIONS.has_key(extension):
+			elif extension in PLAYLIST_EXTENSIONS:
 				png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/VlcPlayer/") + PLAYLIST_EXTENSIONS[extension])
 			else:
 				png = None
@@ -104,8 +105,8 @@ class VlcFileList(MenuList):
 			for directory in directories:
 				name, path = directory
 				directoryEntries.append((path, True, name))
-			fileEntries.sort(cmp = lambda x, y: cmp(x[0], y[0]))
-			directoryEntries.sort(cmp = lambda x, y: cmp(x[0], y[0]))
+			fileEntries.sort(cmp=lambda x, y: cmp(x[0], y[0]))
+			directoryEntries.sort(cmp=lambda x, y: cmp(x[0], y[0]))
 			success = True
 		self.list = directoryEntries + fileEntries
 		self.l.setList(self.list)

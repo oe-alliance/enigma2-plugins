@@ -4,7 +4,8 @@ from Components.NimManager import nimmanager
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 from boxbranding import getImageDistro
 from enigma import eServiceReference, eServiceCenter
-import os, gettext
+import os
+import gettext
 
 # Config
 from Components.config import config, configfile, ConfigSet, ConfigSubsection, ConfigSelection, ConfigSelectionNumber, ConfigYesNo, ConfigSatlist
@@ -12,8 +13,10 @@ from Components.config import config, configfile, ConfigSet, ConfigSubsection, C
 PluginLanguageDomain = "EPGSearch"
 PluginLanguagePath = "Extensions/EPGSearch/locale"
 
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -22,24 +25,26 @@ def _(txt):
 		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
 		return gettext.gettext(txt)
 
+
 language.addCallback(localeInit())
 
 config.plugins.epgsearch = ConfigSubsection()
-config.plugins.epgsearch.showinplugins = ConfigYesNo(default = False)
+config.plugins.epgsearch.showinplugins = ConfigYesNo(default=False)
 __searchDefaultScope = "currentbouquet" if getImageDistro() in ("easy-gui-aus", "beyonwiz") else "all"
 config.plugins.epgsearch.scope = ConfigSelection(choices=[("all", _("all services")), ("allbouquets", _("all bouquets")), ("currentbouquet", _("current bouquet")), ("currentservice", _("current service")), ("ask", _("ask user"))], default=__searchDefaultScope)
 config.plugins.epgsearch.defaultscope = ConfigSelection(choices=[("all", _("all services")), ("allbouquets", _("all bouquets")), ("currentbouquet", _("current bouquet")), ("currentservice", _("current service"))], default=__searchDefaultScope)
-config.plugins.epgsearch.search_type = ConfigSelection(default = "partial", choices = [("partial", _("partial match")), ("exact", _("exact match")), ("start", _("title starts with"))])
-config.plugins.epgsearch.search_case = ConfigSelection(default = "insensitive", choices = [("insensitive", _("case-insensitive search")), ("sensitive", _("case-sensitive search"))])
+config.plugins.epgsearch.search_type = ConfigSelection(default="partial", choices=[("partial", _("partial match")), ("exact", _("exact match")), ("start", _("title starts with"))])
+config.plugins.epgsearch.search_case = ConfigSelection(default="insensitive", choices=[("insensitive", _("case-insensitive search")), ("sensitive", _("case-sensitive search"))])
 allowShowOrbital = getImageDistro() not in ("easy-gui-aus", "beyonwiz")
-config.plugins.epgsearch.showorbital = ConfigYesNo(default = allowShowOrbital)
-config.plugins.epgsearch.history = ConfigSet(choices = [])
+config.plugins.epgsearch.showorbital = ConfigYesNo(default=allowShowOrbital)
+config.plugins.epgsearch.history = ConfigSet(choices=[])
 # XXX: configtext is more flexible but we cannot use this for a (not yet created) gui config
-config.plugins.epgsearch.encoding = ConfigSelection(choices = ['UTF-8', 'ISO8859-15'], default = 'UTF-8')
-config.plugins.epgsearch.history_length = ConfigSelectionNumber(0, 50, 1, default = 10)
-config.plugins.epgsearch.add_search_to_epg = ConfigYesNo(default = True)
+config.plugins.epgsearch.encoding = ConfigSelection(choices=['UTF-8', 'ISO8859-15'], default='UTF-8')
+config.plugins.epgsearch.history_length = ConfigSelectionNumber(0, 50, 1, default=10)
+config.plugins.epgsearch.add_search_to_epg = ConfigYesNo(default=True)
 
 orbposDisabled = 3600
+
 
 def getNamespaces(namespaces):
 	lamedbServices = eServiceReference("1:7:1:0:0:0:0:0:0:0:" + " || ".join(map(lambda x: '(satellitePosition == %d)' % (x >> 16), namespaces)))
@@ -58,6 +63,7 @@ def getNamespaces(namespaces):
 					return hasNamespaces
 			serviceIterator = servicelist.getNext()
 	return hasNamespaces
+
 
 def orbposChoicelist():
 	choiceList = [(orbposDisabled, _('disabled'), 0)]
@@ -82,8 +88,10 @@ def orbposChoicelist():
 	]
 	return choiceList
 
+
 def isOrbposName(name):
 	return name.startswith("orbpos") and name[6:].isdigit()
+
 
 def doSave():
 	saveFile = False
@@ -94,12 +102,14 @@ def doSave():
 	if saveFile:
 		configfile.save()
 
+
 def unusedOrbPosConfList():
 	numorbpos = int(config.plugins.epgsearch.numorbpos.value)
 	return [
 		item for item in config.plugins.epgsearch.dict().iteritems()
 		if isOrbposName(item[0]) and int(item[0][6:]) >= numorbpos
 	]
+
 
 def initOrbposConfigs():
 	choiceList = orbposChoicelist()
@@ -124,6 +134,7 @@ def initOrbposConfigs():
 		for i in range(min(maxEntries, len(orbPosList))):
 			getattr(config.plugins.epgsearch, "orbpos" + str(i)).value = orbPosList[i][0].value
 
+
 def updateOrbposConfig(save=False):
 	choiceList = orbposChoicelist()
 	updateNumOrbpos(choiceList, save)
@@ -143,11 +154,14 @@ def updateOrbposConfig(save=False):
 	return len(choiceList)
 
 # Set old items to default so that they will disappear from the settings file
+
+
 def purgeOrbposConfig():
 	for name, confItem in unusedOrbPosConfList():
 		if confItem.value != confItem.default:
 			confItem.value = confItem.default
 	doSave()
+
 
 def updateUnusedOrbposConfig(choiceList, save):
 	setChoiceList = [(str(orbpos), desc) for (orbpos, desc, flags) in choiceList]
@@ -155,6 +169,7 @@ def updateUnusedOrbposConfig(choiceList, save):
 		confItem.setChoices(setChoiceList, default=str(orbposDisabled))
 	if save:
 		doSave()
+
 
 def getOrbposConfList(includeDisabled=False):
 	return [
@@ -166,6 +181,7 @@ def getOrbposConfList(includeDisabled=False):
 		)
 	]
 
+
 def updateNumOrbpos(choiceList, save):
 	maxEntries = max(len(choiceList) - 1, 0)
 	oldVal = int(config.plugins.epgsearch.numorbpos.value)
@@ -175,6 +191,7 @@ def updateNumOrbpos(choiceList, save):
 		config.plugins.epgsearch.numorbpos.value = str(maxEntries)
 	config.plugins.epgsearch.numorbpos.setChoices(choices, default="1")
 	updateUnusedOrbposConfig(choiceList, save)
+
 
 initOrbposConfigs()
 updateOrbposConfig(save=True)

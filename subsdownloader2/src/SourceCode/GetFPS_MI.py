@@ -8,16 +8,18 @@ MI.Open(filename)
 float(MI.Get(Stream.Video, 0, "FrameRate")[0:6])
 """
 
+
 class GetFPS(object):
     def __init__(self, filename):
         self.filename = filename
-    
+
     def fps(self):
         MI = MediaInfo()
         MI.Open(self.filename)
         fps = float(MI.Get(Stream.Video, 0, "FrameRate"))
         MI.Close()
-        return fps 
+        return fps
+
 
 """
 MI = MediaInfo()
@@ -59,4 +61,3 @@ MI.Close()
 aa = To_Display.encode('ascii','replace')
 print To_Display.encode('ascii','replace')    # replaces non ASCII letters by ? so it can be printed on screen
 """
-

@@ -3,6 +3,7 @@ from Components.Sources.Source import Source
 from Components.SystemInfo import SystemInfo
 from Tools.ISO639 import LanguageCodes
 
+
 class AudioTracks(Source):
 	GET = 0
 	SET = 1
@@ -79,7 +80,7 @@ class AudioTracks(Source):
 					for lang in languages:
 						if cnt:
 							language += ' / '
-						if LanguageCodes.has_key(lang):
+						if lang in LanguageCodes:
 							language += LanguageCodes[lang][0]
 						else:
 							language += lang

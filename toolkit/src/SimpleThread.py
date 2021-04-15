@@ -3,6 +3,7 @@ from enigma import ePythonMessagePump
 import threading
 from twisted.internet import defer
 
+
 class SimpleThread(threading.Thread):
 	def __init__(self, fnc):
 		threading.Thread.__init__(self)
@@ -27,5 +28,6 @@ class SimpleThread(threading.Thread):
 			self.__err = e
 		finally:
 			self.__pump.send(0)
+
 
 __all__ = ['SimpleThread']

@@ -1,8 +1,10 @@
 # mXVideos plugin by AliAbdul
 from Plugin import Movie, Plugin
-import re, urllib2
+import re
+import urllib2
 
 ##################################################
+
 
 class mXVideosMovie(Movie):
 	def __init__(self, name, url, thumb):
@@ -16,11 +18,12 @@ class mXVideosMovie(Movie):
 		reonecat = re.compile(r'Watch Video: <a href="(.+?)">MP4</a>')
 		list = reonecat.findall(data)
 		if list and len(list) > 0:
-			return "http://m.xvideos.com"+list[0]
+			return "http://m.xvideos.com" + list[0]
 		else:
 			return None
 
 ##################################################
+
 
 class mXVideosSub(Plugin):
 	def __init__(self, name, url):
@@ -37,12 +40,12 @@ class mXVideosSub(Plugin):
 		movies = []
 		reonecat = re.compile(r'src="(.+?)" /></a><div class="scene_title"><a href="(.+?)"> (.+?)</a></div></div>', re.DOTALL)
 		for thumb, url, name in reonecat.findall(page):
-			movies.append(mXVideosMovie(name, "http://m.xvideos.com"+url, thumb))
+			movies.append(mXVideosMovie(name, "http://m.xvideos.com" + url, thumb))
 		self.callback(movies)
 
 	def getMoreEntries(self):
 		if self.moreEntries:
-			self.getEntries(self.callback, self.currPage+1)
+			self.getEntries(self.callback, self.currPage + 1)
 
 	def getPageError(self, error=None):
 		if error and self.currPage == 1:
@@ -51,6 +54,7 @@ class mXVideosSub(Plugin):
 			self.moreEntries = False
 
 ##################################################
+
 
 class mXVideos(Plugin):
 	def __init__(self):
@@ -68,15 +72,17 @@ class mXVideos(Plugin):
 			if idx == 0:
 				idx += 1
 				name = "Amateur"
-			plugins.append(mXVideosSub("mXVideos - "+name, url))
+			plugins.append(mXVideosSub("mXVideos - " + name, url))
 		if len(plugins):
 			del plugins[-1]
 		self.callback(plugins)
 
 	def getPageError(self, error=None):
-		if error: print "[%s] Error: %s" % (self.name, error)
+		if error:
+			print "[%s] Error: %s" % (self.name, error)
 
 ##################################################
+
 
 def getPlugin():
 	return mXVideos()

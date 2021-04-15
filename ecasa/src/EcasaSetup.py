@@ -12,6 +12,7 @@ from Components.Sources.StaticText import StaticText
 # Configuration
 from Components.config import config, getConfigListEntry
 
+
 class EcasaSetup(Screen, ConfigListScreen):
 	skin = """<screen name="EcasaSetup" position="center,center" size="565,370">
 		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
@@ -37,7 +38,7 @@ class EcasaSetup(Screen, ConfigListScreen):
 		l = [
 			getConfigListEntry(_("Google Username"), config.plugins.ecasa.google_username, _("Username to use for authentication with google. Leave empty for unauthenticated use.")),
 			getConfigListEntry(_("Google Password"), config.plugins.ecasa.google_password, _("Password to the google account.")),
-			getConfigListEntry(_("Flickr API Key"), config.plugins.ecasa.flickr_api_key , _("API Key used to access Flickr. You can request one by logging in to Flickr from your computer.")),
+			getConfigListEntry(_("Flickr API Key"), config.plugins.ecasa.flickr_api_key, _("API Key used to access Flickr. You can request one by logging in to Flickr from your computer.")),
 			getConfigListEntry(_("Albums of"), config.plugins.ecasa.user, _("Show albums for this user by default. Use \"default\" for currently logged in user.")),
 			getConfigListEntry(_("Search results"), config.plugins.ecasa.searchlimit, _("Number of search results to display at most.")),
 			getConfigListEntry(_("Slideshow interval"), config.plugins.ecasa.slideshow_interval, _("Interval in slideshow before new picture is being shown.")),
@@ -55,6 +56,7 @@ class EcasaSetup(Screen, ConfigListScreen):
 			session=session,
 			on_change=self.changed
 		)
+
 		def selectionChanged():
 			if self["config"].current:
 				self["config"].current[1].onDeselect(self.session)
@@ -108,6 +110,8 @@ class EcasaSetup(Screen, ConfigListScreen):
 		return SetupSummary
 
 	def close(self, *args, **kwargs):
-		try: self["config"].getCurrent()[1].help_window.instance.hide()
-		except AttributeError: pass
+		try:
+			self["config"].getCurrent()[1].help_window.instance.hide()
+		except AttributeError:
+			pass
 		Screen.close(self, *args, **kwargs)

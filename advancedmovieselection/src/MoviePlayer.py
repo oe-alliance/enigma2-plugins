@@ -1,13 +1,13 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 #  Advanced Movie Selection for Dreambox-Enigma2
 #
 #  The plugin is developed on the basis from a lot of single plugins (thx for the code @ all)
 #  Coded by JackDaniel and cmikula (c)2012
 #  Support: www.i-have-a-dreambox.com
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -16,7 +16,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 
@@ -50,10 +50,12 @@ if fileExists("/etc/grautec/dm8000/tft_dm8000.ko"):
 else:
     TFT_8000_Present = False
 
+
 def cutlist_changed(self):
     if playerChoice and playerChoice.isPlaying():
-        self.cutlist = [] # we need to update the property 
-    self.cutlist = self.source.cutlist or [ ]
+        self.cutlist = [] # we need to update the property
+    self.cutlist = self.source.cutlist or []
+
 
 from Components.Renderer.PositionGauge import PositionGauge
 PositionGauge.cutlist_changed = cutlist_changed
@@ -68,6 +70,7 @@ def showMovies(self):
         self.session.open(AboutDetails)
         config.AdvancedMovieSelection.version.value = __version__
         config.AdvancedMovieSelection.version.save()
+
 
 class MoviePlayerExtended_summary(Screen):
     def __init__(self, session, parent):
@@ -90,9 +93,10 @@ class MoviePlayerExtended_summary(Screen):
 		self["Seperator2"].show()
 
     def hideSeperator(self):
-		self["Seperator1"].hide()   
-		self["Seperator2"].hide()   
-    
+		self["Seperator1"].hide()
+		self["Seperator2"].hide()
+
+
 class SelectionEventInfo:
     def __init__(self):
         self["ServiceEvent"] = ServiceEvent()
@@ -116,7 +120,7 @@ class SelectionEventInfo:
                 return
             desc = ""
             if event:
-                desc = event.getShortDescription()              
+                desc = event.getShortDescription()
             if name == desc or desc == "":
                 if config.AdvancedMovieSelection.show_date_shortdesc.value and config.AdvancedMovieSelection.show_begintime.value:
                     desc = getBeginTimeString(info, serviceref)
@@ -125,9 +129,10 @@ class SelectionEventInfo:
                 else:
                     desc = ""
                     self["ShortDesc"].setText(desc)
-                    self["ServiceEvent"].newService(serviceref)  
+                    self["ServiceEvent"].newService(serviceref)
             self["ShortDesc"].setText(desc)
             self["ServiceEvent"].newService(serviceref)
+
 
 class PlayerBase(MoviePreview, SelectionEventInfo):
     def __init__(self, session):
@@ -139,16 +144,15 @@ class PlayerBase(MoviePreview, SelectionEventInfo):
                 "showEventInfoPlugin": (self.openServiceList, _("Open servicelist"))
             })
         self.endless_loop = False
-        self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-            {
+        self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
                 iPlayableService.evEnd: self.__evServiceEnd
             })
-    
+
     def __evServiceEnd(self):
         if not self.is_closing and not self.new_service_started:
             print "Close on timer switch!!!"
             self.close()
-    
+
     def openServiceList(self):
         pass
 
@@ -172,14 +176,13 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
                 {
                     "back": (self.leavePlayer, _("Leave movie player"))
                 })
-        if config.AdvancedMovieSelection.exitkey.value and not config.AdvancedMovieSelection.exitprompt.value: 
+        if config.AdvancedMovieSelection.exitkey.value and not config.AdvancedMovieSelection.exitprompt.value:
             self["closeactions"] = HelpableActionMap(self, "WizardActions",
                 {
                     "back": (self.close, _("Leave movie player"))
                 })
-        if config.AdvancedMovieSelection.use_original_movieplayer_summary.value == True: 
-            self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-                {
+        if config.AdvancedMovieSelection.use_original_movieplayer_summary.value == True:
+            self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
                         iPlayableService.evUpdatedInfo: self.__updateInfo
                 })
         self.firstime = True
@@ -206,7 +209,7 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
                     desc = getBeginTimeString(info, serviceref)
                     self.summaries.showSeperator()
                     self.summaries.updateTitle(name)
-                    self.summaries.updateShortDescription(desc)                    
+                    self.summaries.updateShortDescription(desc)
                 elif config.AdvancedMovieSelection.show_date_shortdesc.value and not config.AdvancedMovieSelection.show_begintime.value:
                     desc = getDateString()
                     self.summaries.showSeperator()
@@ -224,10 +227,10 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
 
     def __onExecBegin(self):
         if self.firstime:
-            orgpos = self.instance.position()    
+            orgpos = self.instance.position()
             self.instance.move(ePoint(orgpos.x() + config.AdvancedMovieSelection.movieplayer_infobar_position_offset_x.value, orgpos.y() + config.AdvancedMovieSelection.movieplayer_infobar_position_offset_y.value))
             self.firstime = False
-    
+
     def standbyCounterChanged(self, configElement):
         pass # prevent merlin crash, Select last played movie is disabled
 
@@ -251,7 +254,7 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
                             if InfoBar.instance:
                                 servicelist = InfoBar.instance.servicelist
                                 self.session.open(AdvancedProgramGuide, servicelist)
-        
+
         elif pluginPresent.MerlinEPGCenter and not pluginPresent.AdvancedProgramGuide and not pluginPresent.CoolTVGuide and not pluginPresent.MerlinEPGCenter:
             from Plugins.Extensions.MerlinEPG.plugin import Merlin_PGII, Merlin_PGd
             if config.plugins.MerlinEPG.StartFirst.value and config.plugins.MerlinEPG.Columns.value:
@@ -271,11 +274,11 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
                             if InfoBar.instance:
                                 servicelist = InfoBar.instance.servicelist
                                 self.session.open(Merlin_PGd, servicelist)
-        
+
         elif pluginPresent.CoolTVGuide and not pluginPresent.AdvancedProgramGuide and not pluginPresent.MerlinEPGCenter and not pluginPresent.MerlinEPGCenter:
             from Plugins.Extensions.CoolTVGuide.plugin import main as ctvmain
             ctvmain(self.session)
-        
+
         elif pluginPresent.MerlinEPGCenter and not pluginPresent.CoolTVGuide and not pluginPresent.AdvancedProgramGuide and not pluginPresent.MerlinEPGCenter:
             from Plugins.Extensions.MerlinEPGCenter.plugin import MerlinEPGCenterStarter
             MerlinEPGCenterStarter.instance.openMerlinEPGCenter()
@@ -286,7 +289,7 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
         ref = self.session.nav.getCurrentlyPlayingServiceReference()
         self.playingservice = ref # movie list may change the currently playing
         self.session.openWithCallback(self.newServiceSelected, MovieSelection, ref, True)
-    
+
     def newServiceSelected(self, service):
         if service:
             self.new_service_started = True
@@ -307,7 +310,7 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
         if not playing:
             return
         self.leavePlayerConfirmed([True, "restart"])
-    
+
     def handleLeave(self, how):
         self.playerClosed()
         self.is_closing = True
@@ -318,7 +321,7 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
                     (_("No"), "continue")
                 )
             else:
-                loop_msg = self.endless_loop and _("No, but stop endless loop") or _("No, but start endless loop") 
+                loop_msg = self.endless_loop and _("No, but stop endless loop") or _("No, but start endless loop")
                 list = (
                     (_("Yes"), "quit"),
                     (_("Yes, returning to movie list"), "movielist"),
@@ -367,7 +370,7 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
 #                if offline.deleteFromDisk(0):
 #                    self.session.openWithCallback(self.close, MessageBox, _("You cannot delete this!"), MessageBox.TYPE_ERROR)
 #                    return
-                
+
         if answer in ("quit", "quitanddeleteconfirmed"):
             self.close()
         elif answer == "standby":
@@ -410,11 +413,13 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
             else:
                 self.close()
 
+
 if pluginPresent.DVDPlayer:
     if fileExists('/usr/lib/enigma2/python/Screens/DVD.pyo'):
         from Screens.DVD import DVDPlayer as eDVDPlayer
     else:
         from Plugins.Extensions.DVDPlayer.plugin import DVDPlayer as eDVDPlayer
+
     class DVDPlayer(DVDCutListSupport, eDVDPlayer, PlayerBase):
         def __init__(self, session, service):
             DVDCutListSupport.__init__(self, service)
@@ -428,7 +433,7 @@ if pluginPresent.DVDPlayer:
                 self.exitCB([None, "exit"])
             else:
                 eDVDPlayer.askLeavePlayer(self)
-        
+
         def exitCB(self, answer):
             if answer is not None:
                 if answer[1] == "browser":
@@ -448,7 +453,7 @@ if pluginPresent.DVDPlayer:
                 p = playerChoice.getPlayerForService(s)
                 if not isinstance(self, p):
                     self.close(service)
-                elif self.currentService != service: 
+                elif self.currentService != service:
                     self.playerClosed(service)
                     self.FileBrowserClosed(service.getDVD()[0])
 
@@ -456,6 +461,7 @@ if pluginPresent.BludiscPlayer:
     from Plugins.Extensions.BludiscPlayer.plugin import BludiscPlayer as eBludiscPlayer, BludiscMenu as eBludiscMenu
     from enigma import eServiceReference
     from Source.CueSheetSupport import BludiscCutListSupport
+
     class BludiscPlayer(BludiscCutListSupport, eBludiscPlayer):
         def __init__(self, session, service, file_name, is_main_movie):
             s = eServiceReferenceBludisc(service)
@@ -473,15 +479,15 @@ if pluginPresent.BludiscPlayer:
                     (_("No"), "continue")
                 )
                 from Screens.ChoiceBox import ChoiceBox
-                self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Stop playing this movie?"), list = list)
+                self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Stop playing this movie?"), list=list)
             else:
                 self.leavePlayerConfirmed([True, "quit"])
-    
+
     class BludiscMenu(eBludiscMenu):
         def __init__(self, session, service):
             eBludiscMenu.__init__(self, session, service.getBludisc())
             self.file_name = service.getPath()
-        
+
         def getMainMovieIndex(self):
             index = -1
             dur = 0
@@ -491,7 +497,7 @@ if pluginPresent.BludiscPlayer:
                         dur = duration
                         index = idx
             return index
- 
+
         def ok(self):
             if type(self["menu"].getCurrent()) is type(None):
                 self.exit()
@@ -499,16 +505,17 @@ if pluginPresent.BludiscPlayer:
             name = self["menu"].getCurrent()[0]
             idx = self["menu"].getCurrent()[1]
             newref = eServiceReference(0x04, 0, "%s:%03d" % (self.bd_mountpoint, idx))
-            newref.setData(1,1)
+            newref.setData(1, 1)
             newref.setName("Bludisc title %d" % idx)
             print "[Bludisc] playService: ", name, newref.toString()
             main_movie = idx == self.getMainMovieIndex()
             self.session.openWithCallback(self.moviefinished, BludiscPlayer, newref, self.file_name, main_movie)
-        
+
         def exit(self):
             from Source.ISOInfo import ISOInfo
             ISOInfo().umount()
             self.close()
+
 
 class PlayerChoice():
     def __init__(self, session):
@@ -531,7 +538,7 @@ class PlayerChoice():
                 if iso_format == ISOInfo.BLUDISC:
                     service = iso.getService(service)
         return service
-    
+
     def getPlayerForService(self, service):
         player = None
         if service is not None:
@@ -562,17 +569,18 @@ class PlayerChoice():
         elif self.dialog:
             self.dialog.close()
             self.dialog = None
-    
+
     def playerClosed(self, service=None):
         self.playing = False
         if service:
             self.playService(service)
-    
+
     def isPlaying(self):
         return self.playing
 
     def stopPlaying(self):
         self.playing = False
+
 
 def initPlayerChoice(session):
     global playerChoice

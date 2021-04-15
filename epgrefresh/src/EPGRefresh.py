@@ -50,6 +50,7 @@ from RecordAdapter import RecordAdapter
 CONFIG = "/etc/enigma2/epgrefresh.xml"
 XML_VERSION = "1"
 
+
 class EPGRefresh:
 	"""Simple Class to refresh EPGData"""
 
@@ -63,11 +64,11 @@ class EPGRefresh:
 		self.beginOfTimespan = 0
 		self.refreshAdapter = None
 		# to call additional tasks (from other plugins)
-		self.finishNotifiers = { }
+		self.finishNotifiers = {}
 
 		# Mtime of configuration files
 		self.configMtime = -1
-		
+
 		# Todos after finish
 		self._initFinishTodos()
 
@@ -76,7 +77,7 @@ class EPGRefresh:
 
 	def _initFinishTodos(self):
 		self.finishTodos = [self._ToDoCallAutotimer, self._ToDoAutotimerCalled, self._callFinishNotifiers, self.finish]
-	
+
 	def addFinishNotifier(self, notifier):
 		if not callable(notifier):
 			print("[EPGRefresh] notifier" + str(notifier) + " isn't callable")
@@ -85,7 +86,7 @@ class EPGRefresh:
 
 	def removeFinishNotifier(self, notifier):
 		notifierKey = str(notifier)
-		if self.finishNotifiers.has_key(notifierKey):
+		if notifierKey in self.finishNotifiers:
 			self.finishNotifiers.pop(notifierKey)
 
 	def readConfiguration(self):
@@ -121,10 +122,10 @@ class EPGRefresh:
 				pos = value.rfind(':')
 				# don't split alternative service
 				if value.find('1:134:1') == -1 and pos != -1:
-					value = value[:pos+1]
+					value = value[:pos + 1]
 
 				duration = service.get('duration', None)
-				duration = duration and int(duration)*factor
+				duration = duration and int(duration) * factor
 
 				self.services[0].add(EPGRefreshService(value, duration))
 		for bouquet in configuration.findall("bouquet"):
@@ -134,7 +135,7 @@ class EPGRefresh:
 				duration = duration and int(duration)
 				self.services[1].add(EPGRefreshService(value, duration))
 
-	def buildConfiguration(self, webif = False):
+	def buildConfiguration(self, webif=False):
 		list = ['<?xml version="1.0" ?>\n<epgrefresh version="', XML_VERSION, '">\n\n']
 
 		if webif:
@@ -175,7 +176,7 @@ class EPGRefresh:
 			self.refreshAdapter.stop()
 			self.refreshAdapter = None
 
-	def forceRefresh(self, session = None):
+	def forceRefresh(self, session=None):
 		print("[EPGRefresh] Forcing start of EPGRefresh")
 		if self.session is None:
 			if session is not None:
@@ -186,8 +187,8 @@ class EPGRefresh:
 		self.forcedScan = True
 		self.prepareRefresh()
 		return True
-	
-	def stopRunningRefresh(self, session = None):
+
+	def stopRunningRefresh(self, session=None):
 		print("[EPGRefresh] Forcing stop of EPGRefresh")
 		if self.session is None:
 			if session is not None:
@@ -196,7 +197,7 @@ class EPGRefresh:
 				return False
 		self.doStopRunningRefresh = True
 
-	def start(self, session = None):
+	def start(self, session=None):
 		if session is not None:
 			self.session = session
 
@@ -220,7 +221,7 @@ class EPGRefresh:
 			except:
 				continue
 
-			if (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
+			if (service.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)):
 				continue
 
 			channelID = '%08x%04x%04x' % (
@@ -284,13 +285,13 @@ class EPGRefresh:
 
 	def isRunning(self):
 		return self.isrunning
-	
+
 	def isRefreshAllowed(self):
 		if self.isRunning():
 			message = _("There is still a refresh running. The Operation isn't allowed at this moment.")
 			try:
 				if self.session != None:
-					self.session.open(MessageBox, message, \
+					self.session.open(MessageBox, message,
 						 MessageBox.TYPE_INFO, timeout=10)
 			except:
 				print("[EPGRefresh] Error while opening Messagebox!")
@@ -345,7 +346,7 @@ class EPGRefresh:
 			print("[EPGRefresh] flushing EPG cache...")
 			from enigma import eEPGCache
 			epgcache = eEPGCache.getInstance()
-			epgcache.flushEPG()			
+			epgcache.flushEPG()
 		self.refresh()
 
 	def cleanUp(self):
@@ -353,7 +354,7 @@ class EPGRefresh:
 		config.plugins.epgrefresh.lastscan.value = int(time())
 		config.plugins.epgrefresh.lastscan.save()
 		self.doStopRunningRefresh = False
-		
+
 		try:
 			from plugin import AdjustExtensionsmenu, housekeepingExtensionsmenu, extStopDescriptor, extPendingServDescriptor, extRunDescriptor
 			AdjustExtensionsmenu(False, extPendingServDescriptor)
@@ -363,7 +364,7 @@ class EPGRefresh:
 		except:
 			print("[EPGRefresh] Error while removing 'Stop Running EPG-Refresh' to Extensionmenu:")
 			print_exc(file=stdout)
-		
+
 		# Start Todo-Chain
 		self._nextTodo()
 
@@ -373,7 +374,6 @@ class EPGRefresh:
 			finishTodo = self.finishTodos.pop(0)
 			print("[EPGRefresh] Debug: Call " + str(finishTodo))
 			finishTodo(*args, **kwargs)
-		
 
 	def _ToDoCallAutotimer(self):
 		if config.plugins.epgrefresh.parse_autotimer.value != "never":
@@ -381,9 +381,9 @@ class EPGRefresh:
 				defaultanswer = True if config.plugins.epgrefresh.parse_autotimer.value == "ask_yes" else False
 				if self.forcedScan:
 					# only if we are interactive
-					Notifications.AddNotificationWithCallback(self._ToDoCallAutotimerCB, MessageBox, \
-						text = _("EPG refresh finished.\nShould AutoTimer be search for new matches?"), \
-						type = MessageBox.TYPE_YESNO, default = defaultanswer, timeout = 10)
+					Notifications.AddNotificationWithCallback(self._ToDoCallAutotimerCB, MessageBox,
+						text=_("EPG refresh finished.\nShould AutoTimer be search for new matches?"),
+						type=MessageBox.TYPE_YESNO, default=defaultanswer, timeout=10)
 				else:
 					self._ToDoCallAutotimerCB(parseAT=defaultanswer)
 			else:
@@ -402,12 +402,12 @@ class EPGRefresh:
 			try:
 				# Import Instance
 				from Plugins.Extensions.AutoTimer.plugin import autotimer
-	
+
 				if autotimer is None:
 					# Create an instance
 					from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
 					autotimer = AutoTimer()
-	
+
 				# Parse EPG
 				deferred = autotimer.parseEPGAsync(simulateOnly=False)
 				deferred.addCallback(self._nextTodo)
@@ -419,11 +419,11 @@ class EPGRefresh:
 				print("[EPGRefresh] Could not start AutoTimer:" + str(format_exc()))
 		else:
 			self._nextTodo()
-	
+
 	def _autotimerErrback(self, failure):
 		print("[EPGRefresh] Debug: AutoTimer failed:" + str(failure))
 		if config.plugins.epgrefresh.enablemessage.value:
-			Notifications.AddPopup(_("AutoTimer failed with error %s") % (str(failure)), \
+			Notifications.AddPopup(_("AutoTimer failed with error %s") % (str(failure)),
 				MessageBox.TYPE_ERROR, 100)
 		self._nextTodo()
 
@@ -436,25 +436,25 @@ class EPGRefresh:
 #					% (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5])),
 #					MessageBox.TYPE_INFO, 10)
 		self._nextTodo()
-	
+
 	def _callFinishNotifiers(self, *args, **kwargs):
 		for notifier in self.finishNotifiers.keys():
 			print("[EPGRefresh] Debug: call " + str(notifier))
 			self.finishNotifiers[notifier]()
 		self._nextTodo()
-	
+
 	def finish(self, *args, **kwargs):
 		print("[EPGRefresh] Debug: Refresh finished!")
 		if config.plugins.epgrefresh.enablemessage.value:
 			Notifications.AddPopup(_("EPG refresh finished."), MessageBox.TYPE_INFO, 4, ENDNOTIFICATIONID)
 		epgrefreshtimer.cleanup()
 		self.maybeStopAdapter()
-		
+
 		# shutdown if we're supposed to go to deepstandby and not recording
 		if not self.forcedScan and config.plugins.epgrefresh.afterevent.value \
 			and not Screens.Standby.inTryQuitMainloop:
 			self.forcedScan = False
-		
+
 			if Screens.Standby.inStandby:
 				self.session.open(Screens.Standby.TryQuitMainloop, 1)
 			else:
@@ -462,12 +462,12 @@ class EPGRefresh:
 		self.forcedScan = False
 		self.isrunning = False
 		self._nextTodo()
-		
+
 	def refresh(self):
 		if self.doStopRunningRefresh:
 			self.cleanUp()
 			return
-		
+
 		if self.forcedScan:
 			self.nextService()
 		else:
@@ -475,7 +475,7 @@ class EPGRefresh:
 			if self.beginOfTimespan < config.plugins.epgrefresh.lastscan.value:
 				return
 			if config.plugins.epgrefresh.force.value \
-				or (Screens.Standby.inStandby and \
+				or (Screens.Standby.inStandby and
 					not self.session.nav.RecordTimer.isRecording()):
 
 				self.nextService()
@@ -492,9 +492,9 @@ class EPGRefresh:
 
 					# Recheck later
 					epgrefreshtimer.add(EPGRefreshTimerEntry(
-							time() + config.plugins.epgrefresh.delay_standby.value*60,
+							time() + config.plugins.epgrefresh.delay_standby.value * 60,
 							self.refresh,
-							nocheck = True)
+							nocheck=True)
 					)
 
 	def createWaitTimer(self):
@@ -529,7 +529,7 @@ class EPGRefresh:
 					print("[EPGRefresh] Service is protected, skipping!")
 					self.refresh()
 					return
-			
+
 			# If the current adapter is unable to run in background and we are in fact in background now,
 			# fall back to main picture
 			if (not self.refreshAdapter.backgroundCapable and Screens.Standby.inStandby):
@@ -547,9 +547,9 @@ class EPGRefresh:
 			epgrefreshtimer.add(EPGRefreshTimerEntry(
 				time() + delay,
 				self.refresh,
-				nocheck = True)
+				nocheck=True)
 			)
-	
+
 	def showPendingServices(self, session):
 		LISTMAX = 10
 		servcounter = 0
@@ -564,13 +564,14 @@ class EPGRefresh:
 					txt = ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
 					servtxt = servtxt + str(txt) + "\n"
 				servcounter = servcounter + 1
-			
+
 			if servcounter > LISTMAX:
 				servtxt = servtxt + _("%d more services") % (servcounter)
-			session.open(MessageBox, _("Following Services have to be scanned:") \
+			session.open(MessageBox, _("Following Services have to be scanned:")
 				+ "\n" + servtxt, MessageBox.TYPE_INFO)
 		except:
 			print("[EPGRefresh] showPendingServices Error!")
 			print_exc(file=stdout)
+
 
 epgrefresh = EPGRefresh()

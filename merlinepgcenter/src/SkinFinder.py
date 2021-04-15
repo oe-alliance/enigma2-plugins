@@ -6,8 +6,8 @@
 #  Coded by Shaderman (c) 2011
 #  Support: www.dreambox-tools.info
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -16,7 +16,7 @@
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 
@@ -36,7 +36,7 @@ along with more (optional) custom skins.
 
 SKINLIST:
 A list of 3 tuples (full path and filename of a skin file, basename of the skin file).
-		
+
 config.plugins.yourConfigText.skin.value:
 A ConfigText value of a skin filename.
 
@@ -58,7 +58,7 @@ SKINLIST =	[ # order is important (HD, XD, SD)!
 		(resolveFilename(SCOPE_CURRENT_PLUGIN, ''.join([SKINDIR, "XD_default.xml"])), "XD_default.xml"),
 		(resolveFilename(SCOPE_CURRENT_PLUGIN, ''.join([SKINDIR, "SD_default.xml"])), "SD_default.xml")
 		]
-		
+
 class YourClass():
 	(skinFile, skinList) = SkinFinder.getSkinData(SKINLIST, SKINDIR, config.plugins.yourConfigText.skin.value)
 	if skinFile is not None:
@@ -69,23 +69,24 @@ class YourClass():
 		loadSkin(skinFile, "")
 """
 
+
 class SkinFinder(object):
 	skinList = None
 	skinDir = None
-	
+
 	@staticmethod
 	def getSkinData(skinList, skinDir, currentSkinValue):
 		SkinFinder.skinList = skinList[:] # we don't want the passed list to be modified, let's use a copy instead
 		SkinFinder.skinDir = skinDir
-		
+
 		if currentSkinValue == "":
 			firstRun = True
 		else:
 			firstRun = False
-			
+
 		# build a list of the filenames from our (default) skin list
 		skinListFiles = [x[0] for x in SkinFinder.skinList]
-		
+
 		# try to find additional skins and add them to our list
 		path = resolveFilename(SCOPE_CURRENT_PLUGIN, ''.join([skinDir, "*.xml"]))
 		for fileName in iglob(path):
@@ -94,7 +95,7 @@ class SkinFinder(object):
 				SkinFinder.skinList.append((fileName, baseName))
 				if not firstRun:
 					skinListFiles.append(fileName)
-					
+
 		if not firstRun:
 			# try to find the config value in our list of files
 			if currentSkinValue in skinListFiles:
@@ -106,7 +107,7 @@ class SkinFinder(object):
 		else:
 			# get the index of the detected skin in our list of default skins
 			skinIndex = SkinFinder.getDefaultSkinEntry()
-			
+
 		if skinIndex is not None:
 			skinFile = SkinFinder.skinList[skinIndex][0]
 			print '[SkinFinder] found skin file', skinFile
@@ -114,7 +115,7 @@ class SkinFinder(object):
 		else:
 			print '[SkinFinder] unable to find any skin!'
 			return None
-			
+
 	@staticmethod
 	def getDefaultSkinEntry():
 		desktopSize = getDesktop(0).size()
@@ -126,14 +127,13 @@ class SkinFinder(object):
 			fileName = resolveFilename(SCOPE_CURRENT_PLUGIN, ''.join([SkinFinder.skinDir, SkinFinder.skinList[2][1]]))
 		else:
 			fileName = None
-			
+
 		if fileName is not None:
 			try:
 				index = [x[0] for x in SkinFinder.skinList].index(fileName)
 				return index
 			except ValueError:
 				pass
-				
+
 		print '[SkinFinder] skin index error! File:', fileName
 		return None
-		

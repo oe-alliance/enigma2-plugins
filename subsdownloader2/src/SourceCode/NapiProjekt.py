@@ -29,52 +29,53 @@ try:
     from hashlib import md5 as md5
 except ImportError:
     from md5 import md5
-    
-languages = { 'pl': 'PL', 'en': 'ENG' }
+
+languages = {'pl': 'PL', 'en': 'ENG'}
+
 
 class NapiProjekt():
     def __init__(self):
         self.error_ = 0
         pass
-        
-    def f(self,z):
-        idx = [ 0xe, 0x3,  0x6, 0x8, 0x2 ]
-        mul = [   2,   2,    5,   4,   3 ]
-        add = [   0, 0xd, 0x10, 0xb, 0x5 ]
-        
+
+    def f(self, z):
+        idx = [0xe, 0x3, 0x6, 0x8, 0x2]
+        mul = [2, 2, 5, 4, 3]
+        add = [0, 0xd, 0x10, 0xb, 0x5]
+
         b = []
         for i in xrange(len(idx)):
             a = add[i]
             m = mul[i]
             i = idx[i]
-            
+
             t = a + int(z[i], 16)
-            v = int(z[t:t+2], 16)
-            b.append( ("%x" % (v*m))[-1] )
+            v = int(z[t:t + 2], 16)
+            b.append(("%x" % (v * m))[-1])
 
         return ''.join(b)
-    
+
     def getnapi(self, filename):
         self.filename = filename
         self.d = md5()
-        
+
         self.d.update(open(self.filename).read(10485760))
-        
+
         self.lang = 'pl'
-        
+
         self.url = "http://napiprojekt.pl/unit_napisy/dl.php?l=%s&f=%s&t=%s&v=pynapi&kolejka=false&nick=&pass=&napios=%s" % \
             (languages[self.lang], self.d.hexdigest(), self.f(self.d.hexdigest()), os.name)
-        
+
         repeat = 3
         self.sub = None
         http_code = 200
-        
+
         while repeat > 0:
             repeat = repeat - 1
             try:
                 self.sub = urllib.urlopen(self.url)
                 if hasattr(self.sub, 'getcode'):
-                    http_code = self.sub.getcode() 
+                    http_code = self.sub.getcode()
                     self.sub = self.sub.read()
                     self.error_ = 0
             except (IOError, OSError), e:
@@ -88,7 +89,7 @@ class NapiProjekt():
                 time.sleep(0.5)
                 self.error_ = 1
                 continue
-    
+
             if self.sub.startswith('NPc'):
                 print >> sys.stderr, "%s: %d/%d: Subtitle NOT FOUND" % (prog, i, i_total)
                 repeat = -1
@@ -104,20 +105,18 @@ class NapiProjekt():
             if repeat == -1:
                 self.error_ = 1
                 continue
-        
+
     def save(self):
         if self.error_ == 1:
             return "None"
         else:
             #subFilePath = str(self.filename).split(".")[0]+'.srt'
-            subFilePath = str(self.filename).rsplit(".", 1)[0]+'.srt'
-            savefile = open(subFilePath,"w")
+            subFilePath = str(self.filename).rsplit(".", 1)[0] + '.srt'
+            savefile = open(subFilePath, "w")
             savefile.write(self.sub)
             savefile.close()
             return subFilePath
 
-
-    
 
 """file = '/home/silelis/Pulpit/Reservoir Dogs_1992_DVDrip_XviD-Ekolb/Reservoir Dogs_1992_DVDrip_XviD-Ekolb.avi'
 a=NapiProjekt(file)

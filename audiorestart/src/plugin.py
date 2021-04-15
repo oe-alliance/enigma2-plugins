@@ -2,7 +2,7 @@ from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSel
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import NumberActionMap
 from Components.Button import Button
-from Components.Label import Label,MultiColorLabel
+from Components.Label import Label, MultiColorLabel
 from Components.SystemInfo import SystemInfo
 from enigma import eTimer
 from Plugins.Plugin import PluginDescriptor
@@ -12,30 +12,31 @@ from __init__ import _
 import NavigationInstance
 
 config.plugins.AudioRestart = ConfigSubsection()
-config.plugins.AudioRestart.restartSelection = ConfigSelection( default = "disabled", choices = [("disabled", _("disabled")), ("restart", _("after restart")), ("standby", _("after standby")), ("both", _("after restart/standby"))])
-config.plugins.AudioRestart.restartDelay = ConfigInteger(default = 5, limits = (0,30))
+config.plugins.AudioRestart.restartSelection = ConfigSelection(default="disabled", choices=[("disabled", _("disabled")), ("restart", _("after restart")), ("standby", _("after standby")), ("both", _("after restart/standby"))])
+config.plugins.AudioRestart.restartDelay = ConfigInteger(default=5, limits=(0, 30))
 
 PLUGIN_BASE = "AudioRestart"
 PLUGIN_VERSION = "0.1"
+
 
 class AudioRestart():
     def __init__(self):
         self.activateTimer = eTimer()
         self.activateTimer.callback.append(self.restartAudio)
         if config.plugins.AudioRestart.restartSelection.value in ["standby", "both"]:
-            config.misc.standbyCounter.addNotifier(self.enterStandby, initial_call = False)
+            config.misc.standbyCounter.addNotifier(self.enterStandby, initial_call=False)
         if config.plugins.AudioRestart.restartSelection.value in ["restart", "both"]:
             self.startTimer()
-        
-    def enterStandby(self,configElement):
+
+    def enterStandby(self, configElement):
         Standby.inStandby.onClose.append(self.endStandby)
-      
+
     def endStandby(self):
         self.startTimer()
 
     def startTimer(self):
-        self.intDelay = config.plugins.AudioRestart.restartDelay.value*1000
-        print "[AudioSync] audio restart in ",self.intDelay
+        self.intDelay = config.plugins.AudioRestart.restartDelay.value * 1000
+        print "[AudioSync] audio restart in ", self.intDelay
         self.activateTimer.start(self.intDelay, True)
 
     def restartAudio(self):
@@ -61,7 +62,8 @@ class AudioRestart():
                     if (description.find("AC3") != -1 or description.find("AC-3") != -1) or description.find("DTS") != -1:
                         blnReturn = True
         return blnReturn
-    
+
+
 class AudioRestartSetup(ConfigListScreen, Screen):
     skin = """
     <screen position="center,center" size="560,400" title="Audio Restart Setup">
@@ -93,7 +95,7 @@ class AudioRestartSetup(ConfigListScreen, Screen):
             getConfigListEntry(_("Restart audio"), config.plugins.AudioRestart.restartSelection),
             getConfigListEntry(_("Restart audio delay (in sec)"), config.plugins.AudioRestart.restartDelay)
         ]
-        
+
         ConfigListScreen.__init__(self, self.list)
 
         self["config"].list = self.list
@@ -101,7 +103,7 @@ class AudioRestartSetup(ConfigListScreen, Screen):
         self.skin_path = plugin_path
 
         # Plugin Information
-        self["PluginInfo"] = Label(_("Plugin: %(plugin)s , Version: %(version)s") %dict(plugin=PLUGIN_BASE,version=PLUGIN_VERSION))
+        self["PluginInfo"] = Label(_("Plugin: %(plugin)s , Version: %(version)s") % dict(plugin=PLUGIN_BASE, version=PLUGIN_VERSION))
 
         # BUTTONS
         self["key_red"] = Button(_("Cancel"))
@@ -128,19 +130,22 @@ class AudioRestartSetup(ConfigListScreen, Screen):
             x[1].cancel()
         self.close()
 
+
 def sessionstart(reason, **kwargs):
     if reason == 0:
         AudioRestart()
 
+
 def setup(session, **kwargs):
 #    reload(AC3setup)
     session.open(AudioRestartSetup, plugin_path)
-        
-def Plugins(path,**kwargs):
+
+
+def Plugins(path, **kwargs):
     global plugin_path
     plugin_path = path
-    pluginList = [ PluginDescriptor(name=_("Audio restart Setup"), description=_("Setup for the AudioRestart Plugin"), icon = "AudioRestart.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=setup)]
+    pluginList = [PluginDescriptor(name=_("Audio restart Setup"), description=_("Setup for the AudioRestart Plugin"), icon="AudioRestart.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=setup)]
     if config.plugins.AudioRestart.restartSelection.value <> "disabled":
-        pluginAutoStart = PluginDescriptor(name="Audio restart", description = _("Restart audio"), where=PluginDescriptor.WHERE_SESSIONSTART, fnc = sessionstart)
+        pluginAutoStart = PluginDescriptor(name="Audio restart", description=_("Restart audio"), where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart)
         pluginList.append(pluginAutoStart)
     return pluginList

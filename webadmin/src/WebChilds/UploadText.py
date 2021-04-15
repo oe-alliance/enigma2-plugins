@@ -6,12 +6,13 @@ from twisted.web import resource, http
 from tempfile import mkstemp
 from re import search
 
+
 class UploadTextResource(resource.Resource):
 	default_uploaddir = "/tmp/"
 
 	def render_POST(self, req):
 		uploaddir = self.default_uploaddir
-		print "[UploadTextResource] req.args ",req.args
+		print "[UploadTextResource] req.args ", req.args
 		if req.args['path'][0]:
 			if os_path.isdir(req.args['path'][0]):
 				uploaddir = req.args['path'][0]
@@ -22,7 +23,7 @@ class UploadTextResource(resource.Resource):
 				req.setResponseCode(http.OK)
 				req.setHeader('Content-type', 'text/html')
 				return "path '%s' to upload not existing!" % req.args['path'][0]
-			
+
 			if uploaddir[:10] == "/etc/opkg/" or uploaddir[:12] == "/usr/script/":
 				pass
 			else:
@@ -30,21 +31,21 @@ class UploadTextResource(resource.Resource):
 				req.setHeader('Content-type', 'text/html')
 				return "illegal upload directory: " + req.args['path'][0]
 
-			data = req.args['text'][0].replace('\r\n','\n')
+			data = req.args['text'][0].replace('\r\n', '\n')
 		if not data:
 			req.setResponseCode(http.OK)
 			req.setHeader('Content-type', 'text/html')
 			return "filesize was 0, not uploaded"
 		else:
-			print "[UploadTextResource] text:" ,data
+			print "[UploadTextResource] text:", data
 
 		filename = req.args['filename'][0]
 
-		fd, fn = mkstemp(dir = uploaddir)
+		fd, fn = mkstemp(dir=uploaddir)
 		cnt = os_write(fd, data)
 		os_close(fd)
 		os_chmod(fn, 0755)
-		
+
 		if cnt <= 0: # well, actually we should check against len(data) but lets assume we fail big time or not at all
 			try:
 				os_unlink(fn)
@@ -61,10 +62,10 @@ class UploadTextResource(resource.Resource):
 					<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 							"http://www.w3.org/TR/html4/loose.dtd">
 					<html>
-					
+
 					<head>
 					<meta content="text/html; charset=UTF-8" http-equiv="content-type">
-					
+
 					<link href="/web-data/tpl/default/style.min.css" type="text/css" rel="stylesheet">
 					<link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico">
 					</head>
@@ -78,7 +79,7 @@ class UploadTextResource(resource.Resource):
 							<input type="button" value="%s" onClick="window.close();">
 						</form>
 					</body>
-					</html>""" %(file, _("Close"))
+					</html>""" % (file, _("Close"))
 
 	def render_GET(self, req):
 		try:

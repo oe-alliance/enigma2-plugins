@@ -1,8 +1,10 @@
 # pornrabbit plugin by AliAbdul
 from Plugin import Movie, Plugin
-import re, urllib2
+import re
+import urllib2
 
 ##################################################
+
 
 class PornRabbitMovie(Movie):
 	def __init__(self, name, url, thumb):
@@ -16,11 +18,12 @@ class PornRabbitMovie(Movie):
 		reonecat = re.compile(r'<span class="download"><a href="(.+?).mp4"')
 		list = reonecat.findall(data)
 		if list and len(list) > 0:
-			return list[0]+".mp4"
+			return list[0] + ".mp4"
 		else:
 			return None
 
 ##################################################
+
 
 class PornRabbitSub(Plugin):
 	def __init__(self, name, url):
@@ -41,7 +44,7 @@ class PornRabbitSub(Plugin):
 		for t, x1, n, x2, u in reonecat.findall(div):
 			name = n
 			thumb = t
-			url = "http://www.pornrabbit.com"+u
+			url = "http://www.pornrabbit.com" + u
 		return (name, url, thumb)
 
 	def getPageCallback(self, page):
@@ -62,7 +65,7 @@ class PornRabbitSub(Plugin):
 
 	def getMoreEntries(self):
 		if self.moreEntries:
-			self.getEntries(self.callback, self.currPage+1)
+			self.getEntries(self.callback, self.currPage + 1)
 
 	def getPageError(self, error=None):
 		if error and self.currPage == 1:
@@ -71,6 +74,7 @@ class PornRabbitSub(Plugin):
 			self.moreEntries = False
 
 ##################################################
+
 
 class PornRabbit(Plugin):
 	def __init__(self):
@@ -100,9 +104,11 @@ class PornRabbit(Plugin):
 		self.callback(plugins)
 
 	def getPageError(self, error=None):
-		if error: print "[%s] Error: %s" % (self.name, error)
+		if error:
+			print "[%s] Error: %s" % (self.name, error)
 
 ##################################################
+
 
 def getPlugin():
 	return PornRabbit()

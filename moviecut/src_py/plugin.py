@@ -15,18 +15,21 @@ from __init__ import _
 
 mcut_path = eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/MovieCut/bin/mcut")
 
+
 def main(session, service, **kwargs):
 	# Hack to make sure it is executable
 	if not access(mcut_path, X_OK):
 		chmod(mcut_path, 493)
 	session.open(MovieCut, service, **kwargs)
 
+
 def Plugins(**kwargs):
-	return PluginDescriptor(name="MovieCut", description=_("Execute cuts..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc=main)
+	return PluginDescriptor(name="MovieCut", description=_("Execute cuts..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main)
 
 
 import struct
 cutsParser = struct.Struct('>QI')  # big-endian, 64-bit PTS and 32-bit type
+
 
 def _getCutsLength(filename, len_sec):
 	len_pts = in_pts = 0
@@ -148,6 +151,7 @@ class MovieCut(ChoiceBox):
 	def noFail(self, job, task, problems):
 	    return False
 
+
 class CutTask(Task):
 	def __init__(self, job, session, name, inpath, outpath, inlen, outlen, cmd, args):
 		Task.__init__(self, job, name)
@@ -185,23 +189,24 @@ class CutTask(Task):
 			self.returncode = 11
 
 		msg = (_("The movie \"%s\" is successfully cut"),
-			   _("Cutting failed for movie \"%s\"")+":\n"+_("Bad arguments"),
-			   _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open input .ts file"),
-			   _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open input .cuts file"),
-			   _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open input .ap file"),
-			   _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open output .ts file"),
-			   _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open output .cuts file"),
-			   _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open output .ap file"),
-			   _("Cutting failed for movie \"%s\"")+":\n"+_("Empty .ap file"),
-			   _("Cutting failed for movie \"%s\"")+":\n"+_("No cuts specified"),
-			   _("Cutting failed for movie \"%s\"")+":\n"+_("Read/write error (disk full?)"),
+			   _("Cutting failed for movie \"%s\"") + ":\n" + _("Bad arguments"),
+			   _("Cutting failed for movie \"%s\"") + ":\n" + _("Couldn't open input .ts file"),
+			   _("Cutting failed for movie \"%s\"") + ":\n" + _("Couldn't open input .cuts file"),
+			   _("Cutting failed for movie \"%s\"") + ":\n" + _("Couldn't open input .ap file"),
+			   _("Cutting failed for movie \"%s\"") + ":\n" + _("Couldn't open output .ts file"),
+			   _("Cutting failed for movie \"%s\"") + ":\n" + _("Couldn't open output .cuts file"),
+			   _("Cutting failed for movie \"%s\"") + ":\n" + _("Couldn't open output .ap file"),
+			   _("Cutting failed for movie \"%s\"") + ":\n" + _("Empty .ap file"),
+			   _("Cutting failed for movie \"%s\"") + ":\n" + _("No cuts specified"),
+			   _("Cutting failed for movie \"%s\"") + ":\n" + _("Read/write error (disk full?)"),
 			   _("Cutting was aborted for movie \"%s\""))[self.returncode]
 		self.session.open(MessageBox, msg % self.name, type=MessageBox.TYPE_ERROR if self.returncode else MessageBox.TYPE_INFO, timeout=10)
+
 
 class AdvancedCutInput(Screen, ConfigListScreen):
 	def __init__(self, session, name, path, descr):
 		Screen.__init__(self, session)
-		self.skinName = [ "AdvancedCutInput", "Setup" ]
+		self.skinName = ["AdvancedCutInput", "Setup"]
 
 		self["key_green"] = StaticText(_("OK"))
 		self["key_red"] = StaticText(_("Cancel"))
@@ -212,17 +217,17 @@ class AdvancedCutInput(Screen, ConfigListScreen):
 			title = name
 		dir = self.dirName(path)
 		file = self.baseName(path) + " cut"
-		self.input_replace = ConfigSelection(choices = [("no", _("No")), ("yes", _("Yes"))], default = "no")
-		self.input_file = ConfigText(default = file, fixed_size = False, visible_width = 45)
-		self.input_title = ConfigText(default = title, fixed_size = False, visible_width = 45)
-		self.input_descr = ConfigText(default = descr, fixed_size = False, visible_width = 45)
+		self.input_replace = ConfigSelection(choices=[("no", _("No")), ("yes", _("Yes"))], default="no")
+		self.input_file = ConfigText(default=file, fixed_size=False, visible_width=45)
+		self.input_title = ConfigText(default=title, fixed_size=False, visible_width=45)
+		self.input_descr = ConfigText(default=descr, fixed_size=False, visible_width=45)
 		tmp = config.movielist.videodirs.value
 		if not dir in tmp:
 			tmp.append(dir)
-		self.input_dir = ConfigSelection(choices = tmp, default = dir)
-		self.input_manual = ConfigSelection(choices = [("no", _("Cutlist")), ("yes", _("Manual specification"))], default = "no")
+		self.input_dir = ConfigSelection(choices=tmp, default=dir)
+		self.input_manual = ConfigSelection(choices=[("no", _("Cutlist")), ("yes", _("Manual specification"))], default="no")
 		self.input_space = ConfigNothing()
-		self.input_manualcuts = ConfigText(default = "", fixed_size = False)
+		self.input_manualcuts = ConfigText(default="", fixed_size=False)
 		self.input_manualcuts.setUseableChars(" 0123456789:.")
 
 		self["actions"] = ActionMap(["SetupActions"],

@@ -32,36 +32,36 @@ from Plugins.SystemPlugins.SoftwareManager.SoftwareTools import iSoftwareTools
 
 # Constants
 SUBJECT = _("IPKG Update Notification")
-BODY    = _("There are updates available:\n%s")
+BODY = _("There are updates available:\n%s")
 
 
 class IPKGUpdateNotification(ControllerBase):
-	
+
 	ForceSingleInstance = True
-	
+
 	def __init__(self):
 		# Is called on instance creation
 		ControllerBase.__init__(self)
-		
+
 		# Default configuration
-		self.setOption( 'selfcheck', NoSave(ConfigYesNo( default = False )), _("Start update check if not done yet") )
+		self.setOption('selfcheck', NoSave(ConfigYesNo(default=False)), _("Start update check if not done yet"))
 
 	def run(self, callback, errback):
 		# At the end a plugin has to call one of the functions: callback or errback
 		# Callback should return with at least one of the parameter: Header, Body, Attachment
 		# If empty or none is returned, nothing will be sent
-		if iSoftwareTools.lastDownloadDate is not None and iSoftwareTools.lastDownloadDate > ( time() - (24*60*60) ):
+		if iSoftwareTools.lastDownloadDate is not None and iSoftwareTools.lastDownloadDate > (time() - (24 * 60 * 60)):
 			# Last refresh was within one day
 			return self.buildList(callback, errback)
 		else:
 			print "IPKGUpdateNotification run else"
 			if self.getValue('selfcheck'):
 				# Refresh package list
-				iSoftwareTools.startSoftwareTools( boundFunction(self.getUpdateInfosCB, callback, errback) )
+				iSoftwareTools.startSoftwareTools(boundFunction(self.getUpdateInfosCB, callback, errback))
 				return
 		callback()
 
-	def getUpdateInfosCB(self, callback, errback, retval = None):
+	def getUpdateInfosCB(self, callback, errback, retval=None):
 		if retval is not None:
 			if retval is True:
 				if iSoftwareTools.available_updates is not 0:
@@ -87,7 +87,7 @@ class IPKGUpdateNotification(ControllerBase):
 					# Call update
 					iSoftwareTools.lastDownloadDate = time()
 					iSoftwareTools.list_updating = True
-					iSoftwareTools.getUpdates( boundFunction(self.getUpdateInfosCB, callback, errback) )
+					iSoftwareTools.getUpdates(boundFunction(self.getUpdateInfosCB, callback, errback))
 					return
 		callback()
 
@@ -105,7 +105,6 @@ class IPKGUpdateNotification(ControllerBase):
 					break
 			updates += packagename + " :\t" + instversion + " :\t" + updversion + "\n"
 		if updates:
-			callback( SUBJECT, BODY % (updates) )
+			callback(SUBJECT, BODY % (updates))
 		else:
 			callback()
-

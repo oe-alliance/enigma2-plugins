@@ -27,6 +27,6 @@ def sessionstart(session, **kwargs):
 	from Components.Sources.MSNWeather import MSNWeather
 	session.screen["MSNWeather"] = MSNWeather()
 
+
 def Plugins(**kwargs):
-	return  [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = sessionstart)]
-	
+	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart)]

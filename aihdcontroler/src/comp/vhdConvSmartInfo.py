@@ -3,7 +3,7 @@
 #    SmartInfo-Converter for Dreambox/Enigma-2
 #    Coded by Vali (c)2009-2011
 #
-#  This plugin is licensed under the Creative Commons 
+#  This plugin is licensed under the Creative Commons
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 #  To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/
 #  or send a letter to Creative Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -12,11 +12,10 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 #######################################################################
-
 
 
 from enigma import iServiceInformation
@@ -26,10 +25,10 @@ from Components.Sensors import sensors
 from Poll import Poll
 
 
-
 class vhdConvSmartInfo(Poll, Converter, object):
 	SMART_LABEL = 0
 	SMART_INFO_H = 1
+
 	def __init__(self, type):
 		Converter.__init__(self, type)
 		Poll.__init__(self)
@@ -39,24 +38,21 @@ class vhdConvSmartInfo(Poll, Converter, object):
 			}[type]
 		self.poll_interval = 30000
 		self.poll_enabled = True
-		self.ar_fec = ["Auto", "1/2", "2/3", "3/4", "5/6", "7/8", "3/5", "4/5", "8/9", "9/10","None","None","None","None","None"]
+		self.ar_fec = ["Auto", "1/2", "2/3", "3/4", "5/6", "7/8", "3/5", "4/5", "8/9", "9/10", "None", "None", "None", "None", "None"]
 		self.ar_pol = ["H", "V", "CL", "CR", "na", "na", "na", "na", "na", "na", "na", "na"]
 
-
-
 	@cached
-	
 	def getText(self):
 		service = self.source.service
 		info = service and service.info()
 		if not info:
-			return ""	
+			return ""
 		Ret_Text = ""
 		if (self.type == self.SMART_INFO_H):
 			xresol = info.getInfo(iServiceInformation.sVideoWidth)
 			yresol = info.getInfo(iServiceInformation.sVideoHeight)
 			feinfo = (service and service.frontendInfo())
-			if (feinfo is not None) and (xresol>0):
+			if (feinfo is not None) and (xresol > 0):
 				#Ret_Text = str(xresol) + "x" + str(yresol) + "   "
 				if (yresol > 580):
 					Ret_Text = "HD     "
@@ -80,9 +76,9 @@ class vhdConvSmartInfo(Poll, Converter, object):
 						if (frontendData.get("tuner_type") == "DVB-S"):
 							orbital_pos = int(frontendData["orbital_position"])
 							if orbital_pos > 1800:
-								orb_pos = str((float(3600 - orbital_pos))/10.0) + "W"
+								orb_pos = str((float(3600 - orbital_pos)) / 10.0) + "W"
 							elif orbital_pos > 0:
-								orb_pos = str((float(orbital_pos))/10.0) + "E"
+								orb_pos = str((float(orbital_pos)) / 10.0) + "E"
 						Ret_Text = Ret_Text + "Pos: " + orb_pos + "   "
 					elif (frontendData.get("tuner_type") == "DVB-T"):
 						frequency = (str((frontendData.get("frequency") / 1000)) + " MHz")
@@ -101,13 +97,12 @@ class vhdConvSmartInfo(Poll, Converter, object):
 						maxtemp = tt
 						sensotN = sensors.getSensorName(id)
 						if sensotN == "undefined":
-							sensotN = "sensor-"+str(id)
+							sensotN = "sensor-" + str(id)
 				Ret_Text = "max. Box-Temp:  " + str(maxtemp) + "°C / " + sensotN + "\n" + Ret_Text
 			except:
 				pass
 			return Ret_Text
 		return "n/a"
-		
 
 	text = property(getText)
 
@@ -115,18 +110,8 @@ class vhdConvSmartInfo(Poll, Converter, object):
 		Converter.changed(self, what)
 
 	def kurz(self, langTxt):
-		if (len(langTxt)>23):
-			retT = langTxt[:20]+"..."
+		if (len(langTxt) > 23):
+			retT = langTxt[:20] + "..."
 			return retT
 		else:
 			return langTxt
-
-
-
-
-
-
-
-
-
-

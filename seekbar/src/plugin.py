@@ -15,7 +15,9 @@ from Screens.InfoBar import MoviePlayer
 from Screens.Screen import Screen
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Tools.KeyBindings import addKeyBinding
-import os, gettext, keymapparser
+import os
+import gettext
+import keymapparser
 
 ##############################################
 
@@ -28,8 +30,10 @@ config.plugins.Seekbar.sensibility = ConfigInteger(default=10, limits=(1, 10))
 PluginLanguageDomain = "Seekbar"
 PluginLanguagePath = "Extensions/Seekbar/locale/"
 
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -38,9 +42,11 @@ def _(txt):
 		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
 		return gettext.gettext(txt)
 
+
 language.addCallback(localeInit())
 
 ##############################################
+
 
 class Seekbar(ConfigListScreen, Screen):
 	skin = """
@@ -59,7 +65,7 @@ class Seekbar(ConfigListScreen, Screen):
 
 	def __init__(self, session, instance, fwd):
 		Screen.__init__(self, session)
-		
+
 		self.session = session
 		self.infobarInstance = instance
 		self.fwd = fwd
@@ -83,7 +89,7 @@ class Seekbar(ConfigListScreen, Screen):
 				if self.length and position:
 					if int(position[1]) > 0:
 						self.percent = float(position[1]) * 100.0 / float(self.length[1])
-		
+
 		self.minuteInput = ConfigNumber(default=5)
 		self.positionEntry = ConfigSelection(choices=["<>"], default="<>")
 		if self.fwd:
@@ -95,16 +101,16 @@ class Seekbar(ConfigListScreen, Screen):
 			getConfigListEntry(_("Go to position:"), self.positionEntry),
 			getConfigListEntry(_("Sensibility:"), config.plugins.Seekbar.sensibility),
 			getConfigListEntry(_("Overwrite left and right buttons:"), config.plugins.Seekbar.overwrite_left_right)])
-		
+
 		self["cursor"] = MovingPixmap()
 		self["time"] = Label()
-		
+
 		self["actions"] = ActionMap(["WizardActions"], {"back": self.exit}, -1)
-		
+
 		self.cursorTimer = eTimer()
 		self.cursorTimer.callback.append(self.updateCursor)
 		self.cursorTimer.start(200, False)
-		
+
 		self.onLayoutFinish.append(self.firstStart)
 
 	def firstStart(self):
@@ -117,7 +123,7 @@ class Seekbar(ConfigListScreen, Screen):
 
 			self["cursor"].startMoving()
 			pts = int(float(self.length[1]) / 100.0 * self.percent)
-			self["time"].setText("%d:%02d" % ((pts/60/90000), ((pts/90000)%60)))
+			self["time"].setText("%d:%02d" % ((pts / 60 / 90000), ((pts / 90000) % 60)))
 
 	def exit(self):
 		self.cursorTimer.stop()
@@ -134,7 +140,7 @@ class Seekbar(ConfigListScreen, Screen):
 					if newPosition > oldPosition:
 						pts = newPosition - oldPosition
 					else:
-						pts = -1*(oldPosition - newPosition)
+						pts = -1 * (oldPosition - newPosition)
 					DVDPlayer.doSeekRelative(self.infobarInstance, pts)
 				else:
 					self.seek.seekTo(int(float(self.length[1]) / 100.0 * self.percent))
@@ -142,7 +148,7 @@ class Seekbar(ConfigListScreen, Screen):
 		elif sel == self.minuteInput:
 			pts = self.minuteInput.value * 60 * 90000
 			if self.fwd == False:
-				pts = -1*pts
+				pts = -1 * pts
 			if self.dvd:
 				DVDPlayer.doSeekRelative(self.infobarInstance, pts)
 			elif self.vdb:
@@ -179,25 +185,28 @@ class Seekbar(ConfigListScreen, Screen):
 ##############################################
 # This hack overwrites the functions seekFwdManual and seekBackManual of the InfoBarSeek class (MoviePlayer, DVDPlayer, VideoDB)
 
+
 def seekbar(instance, fwd=True):
 	if instance and instance.session:
 		instance.session.open(Seekbar, instance, fwd)
 
+
 def seekbarBack(instance):
 	seekbar(instance, False)
+
 
 MoviePlayer.seekFwdManual = seekbar
 MoviePlayer.seekBackManual = seekbarBack
 
-dvdPlayer = "%s%s"%(resolveFilename(SCOPE_PLUGINS), "Extensions/DVDPlayer/plugin.py")
-if fileExists(dvdPlayer) or fileExists("%sc"%dvdPlayer):
+dvdPlayer = "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/DVDPlayer/plugin.py")
+if fileExists(dvdPlayer) or fileExists("%sc" % dvdPlayer):
 	from Plugins.Extensions.DVDPlayer.plugin import DVDPlayer
 	DVDPlayer.seekFwdManual = seekbar
 	DVDPlayer.seekBackManual = seekbarBack
 else:
 	DVDPlayer = None
 
-videodb = "%s%s"%(resolveFilename(SCOPE_PLUGINS), "Extensions/VideoDB/plugin.py")
+videodb = "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/VideoDB/plugin.py")
 if fileExists(videodb):
 	from Plugins.Extensions.VideoDB.Player import VideoDBPlayer
 	VideoDBPlayer.seekFwdManual = seekbar
@@ -208,15 +217,18 @@ if fileExists(videodb):
 # This hack puts the functions seekFwdManual and seekBackManual to the maped keys to seekbarRight and seekbarLeft
 
 DoBind = ActionMap.doBind
+
+
 def doBind(instance):
 	if not instance.bound:
 		for ctx in instance.contexts:
 			if ctx == "InfobarSeekActions":
-				if instance.actions.has_key("seekFwdManual"):
+				if "seekFwdManual" in instance.actions:
 					instance.actions["seekbarRight"] = instance.actions["seekFwdManual"]
-				if instance.actions.has_key("seekBackManual"):
+				if "seekBackManual" in instance.actions:
 					instance.actions["seekbarLeft"] = instance.actions["seekBackManual"]
 			DoBind(instance)
+
 
 if config.plugins.Seekbar.overwrite_left_right.value:
 	ActionMap.doBind = doBind
@@ -226,6 +238,8 @@ if config.plugins.Seekbar.overwrite_left_right.value:
 
 KeymapError = keymapparser.KeymapError
 ParseKeys = keymapparser.parseKeys
+
+
 def parseKeys(context, filename, actionmap, device, keys):
 	if context == "InfobarSeekActions":
 		if device == "generic":
@@ -238,7 +252,7 @@ def parseKeys(context, filename, actionmap, device, keys):
 				if id == "KEY_RIGHT":
 					mapto = "seekbarRight"
 				flags = get_attr("flags")
-				flag_ascii_to_id = lambda x: {'m':1,'b':2,'r':4,'l':8}[x]
+				flag_ascii_to_id = lambda x: {'m': 1, 'b': 2, 'r': 4, 'l': 8}[x]
 				flags = sum(map(flag_ascii_to_id, flags))
 				assert mapto, "%s: must specify mapto in context %s, id '%s'" % (filename, context, id)
 				assert id, "%s: must specify id in context %s, mapto '%s'" % (filename, context, mapto)
@@ -264,12 +278,14 @@ def parseKeys(context, filename, actionmap, device, keys):
 	else:
 		ParseKeys(context, filename, actionmap, device, keys)
 
+
 if config.plugins.Seekbar.overwrite_left_right.value:
 	keymapparser.parseKeys = parseKeys
 	keymapparser.removeKeymap(config.usage.keymap.value)
 	keymapparser.readKeymap(config.usage.keymap.value)
 
 ##############################################
+
 
 def Plugins(**kwargs):
 	return []

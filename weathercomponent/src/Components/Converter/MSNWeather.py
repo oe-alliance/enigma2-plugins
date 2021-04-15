@@ -23,6 +23,7 @@
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 
+
 class MSNWeather(Converter, object):
 
 	CURRENT = -1
@@ -31,7 +32,7 @@ class MSNWeather(Converter, object):
 	DAY2 = 2
 	DAY3 = 3
 	DAY4 = 4
-	DAY5 = 5	
+	DAY5 = 5
 	TEMPERATURE_HEIGH = 6
 	TEMPERATURE_LOW = 7
 	TEMPERATURE_TEXT = 8
@@ -93,7 +94,6 @@ class MSNWeather(Converter, object):
 				if self.mode == self.ICON and len(dd) == 4:
 					self.path = dd[2]
 					self.extension = dd[3]
-					
 
 	def getIndex(self, key):
 		if key == "current":
@@ -143,9 +143,9 @@ class MSNWeather(Converter, object):
 			return self.source.getDate(self.index)
 		else:
 			return ""
-	
+
 	text = property(getText)
-	
+
 	@cached
 	def getIconFilename(self):
 		if self.mode == self.ICON and self.index in (self.CURRENT, self.DAY1, self.DAY2, self.DAY3, self.DAY4, self.DAY5):
@@ -155,5 +155,5 @@ class MSNWeather(Converter, object):
 				return self.source.getWeatherIconFilename(self.index)
 		else:
 			return ""
-			
+
 	iconfilename = property(getIconFilename)

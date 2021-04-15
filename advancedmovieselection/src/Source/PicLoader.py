@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# 
+#
 #    Copyright (C) 2011 cmikula
 #
 #    In case of reuse of this source code please do not remove this copyright.
@@ -18,13 +18,14 @@
 #    For more information on the GNU General Public License see:
 #    <http://www.gnu.org/licenses/>.
 #
-#    For example, if you distribute copies of such a program, whether gratis or for a fee, you 
-#    must pass on to the recipients the same freedoms that you received. You must make sure 
+#    For example, if you distribute copies of such a program, whether gratis or for a fee, you
+#    must pass on to the recipients the same freedoms that you received. You must make sure
 #    that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 #
 
 from Components.AVSwitch import AVSwitch
 from enigma import ePicLoad
+
 
 class PicLoader:
     def __init__(self, width, height, sc=None):
@@ -37,7 +38,6 @@ class PicLoader:
         self.picload.startDecode(filename, 0, 0, False)
         data = self.picload.getData()
         return data
-    
+
     def destroy(self):
         del self.picload
-

@@ -23,17 +23,16 @@ from ModuleBase import ModuleBase
 class ServiceBase(ModuleBase):
 	# You only have to overwrite the functions You need
 	# If You don't have to save something, You don't need getOptions / setOptions
-	
+
 	UniqueCounter = 0
-	
+
 	ForceSingleInstance = True
-	
+
 	def __init__(self):
 		ModuleBase.__init__(self)
 		# Is called on instance creation
 		ServiceBase.UniqueCounter += 1
 		self.uniqueid = ServiceBase.UniqueCounter
-
 
 	################################################
 	# Base class functions
@@ -45,13 +44,13 @@ class ServiceBase(ModuleBase):
 	def resetUniqueID():
 		ServiceBase.UniqueCounter = 0
 
-
 	################################################
 	# Functions to be implemented in the plugin
+
 	def push(self, callback, errback, pluginname, subject, body="", attachments=[]):
 		# Will be called, if a plugin wants to send a notification
 		# At the end a service has to call one of the functions: callback or errback
-		errback( "Not implemented: " + self.getName() + ".push()")
+		errback("Not implemented: " + self.getName() + ".push()")
 
 #	def test(self, plugin, subject, body="", attachments=[], callback=None, errback=None):
 #		# Normally you don't have to overwrite this function

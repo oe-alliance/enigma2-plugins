@@ -18,13 +18,14 @@ unrar_link = "http://subs-downloader.googlecode.com/files/unrar_1.0.1_all.ipk"
 URL_text_file = "http://subs-downloader.googlecode.com/svn/commertial_banners.txt"
 Subtitle_Downloader_temp_dir = '/tmp/SubsDownloader_cache/'
 
+
 class IsNewVersionCheck(threading.Thread):
     def __init__(self, session):
 	self.session = session
         threading.Thread.__init__(self)
         self.__latest_version_info_url = "http://subs-downloader.googlecode.com/svn/current_version.txt"
         self.__installed_version_info_file = "/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/about.nfo"
-                
+
     def run(self):
         error_detected = 0
 	latest_vestion_data = None
@@ -34,7 +35,7 @@ class IsNewVersionCheck(threading.Thread):
             current_vestion_data.close()
             print "Current version: %s" % str(current_verion)
         except:
-            error_detected = 1        
+            error_detected = 1
         try:
             latest_vestion_data = urllib.urlopen(self.__latest_version_info_url)
             latest_verion = latest_vestion_data.readlines()
@@ -42,37 +43,37 @@ class IsNewVersionCheck(threading.Thread):
             print "Latest version: %s" % str(latest_verion[0])
         except:
             error_detected = 1
-                  
+
         if error_detected == 1:
             return False
         else:
-            if latest_verion[0] > current_verion:		
-                print "Jest nowa wersja pluginu" 
-                self.session.open(PluginIpkUpdate,latest_verion[1])
+            if latest_verion[0] > current_verion:
+                print "Jest nowa wersja pluginu"
+                self.session.open(PluginIpkUpdate, latest_verion[1])
             else:
                 print "Posiadasz najnowsza wersje pluginu"
                 return False
 
 
 class InstallDownloadableContent():
-    def __init__(self,session, url_to_download):
+    def __init__(self, session, url_to_download):
 	self.session = session
 	self.cmdList = []
 	for item in url_to_download:
-	    self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": item }))
-		
-    def __install__(self):
-	self.session.openWithCallback(self.__restartMessage__, Ipkg, cmdList = self.cmdList)
-    
-    def __restartMessage__(self):
-	self.session.openWithCallback(self.__restartGUI__, MessageBox,_("Do You want to restart GUI to apply changes?"), MessageBox.TYPE_YESNO, default = False)
+	    self.cmdList.append((IpkgComponent.CMD_INSTALL, {"package": item}))
 
-    def __restartGUI__(self, callback = None):
+    def __install__(self):
+	self.session.openWithCallback(self.__restartMessage__, Ipkg, cmdList=self.cmdList)
+
+    def __restartMessage__(self):
+	self.session.openWithCallback(self.__restartGUI__, MessageBox, _("Do You want to restart GUI to apply changes?"), MessageBox.TYPE_YESNO, default=False)
+
+    def __restartGUI__(self, callback=None):
 	if callback == True:
 	    quitMainloop(3)
 	elif callback == False:
 	    pass
-            
+
 
 class PluginIpkUpdate(Screen): #, IsNewVersionCheck):
 	skin = """
@@ -80,6 +81,7 @@ class PluginIpkUpdate(Screen): #, IsNewVersionCheck):
 			<widget name="myMenu" position="10,10" size="420,240" scrollbarMode="showOnDemand" />
 		</screen>"""
 	#def __init__(self, session, args = 0):
+
 	def __init__(self, session, new_version_url):
 		self.session = session
 	        self.new_wersion_url = new_version_url
@@ -87,7 +89,7 @@ class PluginIpkUpdate(Screen): #, IsNewVersionCheck):
 		#self.autoupdate = IsNewVersionCheck()
 		list.append((_("Install plugin"), "install"))
 		list.append((_("Not now"), "exit"))
-		
+
 		Screen.__init__(self, session)
 		self["myMenu"] = MenuList(list)
 		self["myActionMap"] = ActionMap(["SetupActions"],
@@ -96,24 +98,23 @@ class PluginIpkUpdate(Screen): #, IsNewVersionCheck):
 			#"cancel": self.close(None)
 		}, -1)
 		#self.new_wersion_url = self.autoupdate.run()
-		
+
 	def go(self):
 		returnValue = self["myMenu"].l.getCurrentSelection()[1]
 		if returnValue is not None:
-			if returnValue is "install":			    
+			if returnValue is "install":
 			    if self.new_wersion_url != False:
 				self.libmediaInfoInstallation = InstallDownloadableContent(self.session, [self.new_wersion_url])
 				self.libmediaInfoInstallation.__install__()
 			    else:
-				self.session.openWithCallback(self.__close_screen__,MessageBox,_("There is problem with server connection. \n Please try again later."), MessageBox.TYPE_INFO)
+				self.session.openWithCallback(self.__close_screen__, MessageBox, _("There is problem with server connection. \n Please try again later."), MessageBox.TYPE_INFO)
 			elif returnValue is "exit":
 			    self.__close_screen__()
-			    
-	                                  
-	def __close_screen__(self, callback= None):
-	    self.close(None)		
-		
-		
+
+	def __close_screen__(self, callback=None):
+	    self.close(None)
+
+
 #def flagcounetr(CallBackFunction):
 #    flag = urllib.urlopen(flag_counter_url,)
 #    #Subtitle_Downloader_temp_dir = '/tmp/SubsDownloader_cache/' # Sprawdzac czy sciezka jest taka sama jak w plugin.py
@@ -122,11 +123,11 @@ class PluginIpkUpdate(Screen): #, IsNewVersionCheck):
 #    flag.close()
 #    picture_file.close()
 #    CallBackFunction
-    
+
 class CommertialBannerDownload(threading.Thread):
     def __init__(self):
 	threading.Thread.__init__(self)
-	      
+
     def __download_picture_urls(self):
 	picture_links = []
 	try:
@@ -150,14 +151,14 @@ class CommertialBannerDownload(threading.Thread):
 	for x in pictures_URLS:
 	    try:
 		flag = urllib.urlopen(x,)
-		picture_file = open((Subtitle_Downloader_temp_dir+"%s.png" % picture_counter), "wb")
+		picture_file = open((Subtitle_Downloader_temp_dir + "%s.png" % picture_counter), "wb")
 		picture_file.write(flag.read())
 		flag.close()
 		picture_file.close()
-		picture_counter = picture_counter+1
+		picture_counter = picture_counter + 1
 	    except:
 		print "Failed to download picture no %i", picture_counter
 	return True
-     
+
     def run(self):
 	return self.__download_pictures()

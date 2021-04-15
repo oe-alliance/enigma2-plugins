@@ -6,7 +6,6 @@ class ModuleBase(object):
 	def __init__(self):
 		pass
 
-
 	################################################
 	# Base classmethod functions
 	@classmethod
@@ -14,9 +13,9 @@ class ModuleBase(object):
 		# Return the Class
 		return cls.__name__
 
-
 	################################################
 	# Base functions
+
 	def getName(self, dummy=None):
 		# Return the Class Name
 		return self.__class__.__name__

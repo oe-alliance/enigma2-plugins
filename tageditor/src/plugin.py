@@ -13,8 +13,10 @@ from Components.SelectionList import SelectionList
 from enigma import eServiceReference, eServiceCenter, iServiceInformation
 from os import path as os_path
 
+
 def main(session, service, **kwargs):
 	session.open(MovieTagEditor, service, session.current_dialog, **kwargs)
+
 
 def Plugins(**kwargs):
 	try:
@@ -23,7 +25,8 @@ def Plugins(**kwargs):
 	except Exception:
 		pass
 	# TRANSLATORS: this is the string used in the movie context menu for TagEditor
-	return PluginDescriptor(name = "TagEditor", description = _("edit tags"), where = PluginDescriptor.WHERE_MOVIELIST, fnc = main, needsRestart = False)
+	return PluginDescriptor(name="TagEditor", description=_("edit tags"), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart=False)
+
 
 class TagEditor(Screen):
 	skin = """
@@ -40,8 +43,8 @@ class TagEditor(Screen):
 		<widget name="list" position="5,40" size="590,270" scrollbarMode="showOnDemand" />
 	</screen>"""
 
-	def __init__(self, session, tags, txt = None, args = 0, parent = None):
-		Screen.__init__(self, session, parent = parent)
+	def __init__(self, session, tags, txt=None, args=0, parent=None):
+		Screen.__init__(self, session, parent=parent)
 
 		# Initialize Buttons
 		self["key_red"] = StaticText(_("Cancel"))
@@ -82,11 +85,11 @@ class TagEditor(Screen):
 		self.session.openWithCallback(
 			self.addCustomCallback,
 			InputBox,
-			title = _("Please enter the new tag")
+			title=_("Please enter the new tag")
 		)
 
 	def addCustomCallback(self, ret):
-		ret = ret and ret.strip().replace(" ","_").capitalize()
+		ret = ret and ret.strip().replace(" ", "_").capitalize()
 		tags = self.tags
 		if ret and ret not in tags:
 			tags.append(ret)
@@ -106,7 +109,7 @@ class TagEditor(Screen):
 	def saveTagsFile(self, tags):
 		try:
 			file = open("/etc/enigma2/movietags", "w")
-			file.write("\n".join(tags)+"\n")
+			file.write("\n".join(tags) + "\n")
 			file.close()
 		except IOError as ioe:
 			pass
@@ -138,7 +141,7 @@ class TagEditor(Screen):
 			tags = " ".join(tags)
 			if tags != oldtags:
 				metafile = open(file, "w")
-				metafile.write("%s%s%s%s%s" %(sid, title, descr, time, tags))
+				metafile.write("%s%s%s%s%s" % (sid, title, descr, time, tags))
 				metafile.close()
 
 	def foreachTimerTags(self, func):
@@ -171,7 +174,7 @@ class TagEditor(Screen):
 						continue
 					func(serviceref, tags)
 
-	def updateMenuList(self, tags, extrasel = []):
+	def updateMenuList(self, tags, extrasel=[]):
 		seltags = [x[1] for x in self["list"].getSelectionsList()] + extrasel
 		tags.sort()
 		self["list"].setList([])
@@ -192,7 +195,7 @@ class TagEditor(Screen):
 		self.updateMenuList(tags)
 		self.tags = tags
 
-	def listReplace(self, lst, fr, to = None):
+	def listReplace(self, lst, fr, to=None):
 		if fr in lst:
 			lst.remove(fr)
 			if to != None and not to in lst:
@@ -205,8 +208,8 @@ class TagEditor(Screen):
 		self.session.openWithCallback(
 			self.renameTagCallback,
 			InputBox,
-			title = _("Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)") % (self.thistag[1]),
-			text = self.thistag[1]
+			title=_("Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)") % (self.thistag[1]),
+			text=self.thistag[1]
 		)
 
 	def renameTagCallback(self, res):
@@ -262,7 +265,7 @@ class TagEditor(Screen):
 			(_("Delete unused tags"), self.removeUnused),
 			(_("Delete all tags..."), self.removeAll)
 		]
-		self.session.openWithCallback(self.menuCallback, ChoiceBox, title = "", list = menu)
+		self.session.openWithCallback(self.menuCallback, ChoiceBox, title="", list=menu)
 
 	def menuCallback(self, choice):
 		if choice:
@@ -281,8 +284,9 @@ class TagEditor(Screen):
 			self.saveTagsFile(self.tags)
 		self.close(list)
 
+
 class MovieTagEditor(TagEditor):
-	def __init__(self, session, service, parent, args = 0):
+	def __init__(self, session, service, parent, args=0):
 		self.service = service
 		serviceHandler = eServiceCenter.getInstance()
 		info = serviceHandler.info(service)
@@ -295,8 +299,8 @@ class MovieTagEditor(TagEditor):
 			tags = tags.split(' ')
 		else:
 			tags = []
-		TagEditor.__init__(self, session, tags, args, parent = parent)
-		self.skinName = [ "MovieTagEditor", "TagEditor" ]
+		TagEditor.__init__(self, session, tags, args, parent=parent)
+		self.skinName = ["MovieTagEditor", "TagEditor"]
 
 	def saveTags(self, file, tags):
 		if os_path.exists(file + ".ts.meta"):
@@ -310,7 +314,7 @@ class MovieTagEditor(TagEditor):
 			tags = " ".join(tags)
 			if tags != oldtags:
 				metafile = open(file + ".ts.meta", "w")
-				metafile.write("%s%s%s%s%s" %(sid, title, descr, time, tags))
+				metafile.write("%s%s%s%s%s" % (sid, title, descr, time, tags))
 				metafile.close()
 
 	def cancel(self):
@@ -337,4 +341,3 @@ class MovieTagEditor(TagEditor):
 			parentscreen.close()
 		except AttributeError:
 			pass
-

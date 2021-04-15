@@ -15,12 +15,13 @@ from .Vps import vps_exe, vps_timers
 import NavigationInstance
 from xml.etree.cElementTree import parse as xml_parse
 
-check_pdc_interval_available = 3600*24*30*12
-check_pdc_interval_unavailable = 3600*24*30*2
+check_pdc_interval_available = 3600 * 24 * 30 * 12
+check_pdc_interval_unavailable = 3600 * 24 * 30 * 2
+
 
 class VPS_check_PDC:
 	def __init__(self):
-		self.checked_services = { }
+		self.checked_services = {}
 		self.load_pdc()
 
 	def load_pdc(self):
@@ -34,7 +35,7 @@ class VPS_check_PDC:
 					has_pdc = xml.get("has_pdc")
 					last_check = xml.get("last_check")
 					default_vps = xml.get("default_vps")
-					self.checked_services[serviceref] = { }
+					self.checked_services[serviceref] = {}
 					self.checked_services[serviceref]["last_check"] = int(last_check)
 					self.checked_services[serviceref]["has_pdc"] = int(has_pdc)
 					if default_vps and default_vps != "None":
@@ -92,7 +93,7 @@ class VPS_check_PDC:
 			except:
 				pass
 		else:
-			self.checked_services[service_str] = { }
+			self.checked_services[service_str] = {}
 			self.checked_services[service_str]["has_pdc"] = state
 			self.checked_services[service_str]["last_check"] = time()
 			self.checked_services[service_str]["default_vps"] = default_vps
@@ -101,6 +102,7 @@ class VPS_check_PDC:
 
 	def recheck(self, has_pdc, last_check):
 		return not ((has_pdc == 1 and last_check > (time() - check_pdc_interval_available)) or (has_pdc == 0 and last_check > (time() - check_pdc_interval_unavailable)))
+
 
 Check_PDC = VPS_check_PDC()
 
@@ -143,7 +145,6 @@ class VPS_check(Screen):
 		self.has_pdc, self.last_check, self.default_vps = Check_PDC.check_service(self.service)
 
 		self.check.start(50, True)
-
 
 	def doCheck(self):
 		if not Check_PDC.recheck(self.has_pdc, self.last_check):
@@ -196,7 +197,7 @@ class VPS_check(Screen):
 		onid = self.service.getData(3)
 		demux = "/dev/dvb/adapter0/demux" + str(self.demux)
 
-		cmd = vps_exe + " "+ demux +" 10 "+ str(onid) +" "+ str(tsid) +" "+ str(sid) +" 0"
+		cmd = vps_exe + " " + demux + " 10 " + str(onid) + " " + str(tsid) + " " + str(sid) + " 0"
 		self.program.execute(cmd)
 
 	def program_closed(self, retval):
@@ -239,7 +240,7 @@ class VPS_check(Screen):
 
 
 class VPS_check_PDC_Screen(VPS_check):
-	def __init__(self, session, service, timer_entry, manual_timer = True):
+	def __init__(self, session, service, timer_entry, manual_timer=True):
 		self.timer_entry = timer_entry
 		self.manual_timer = manual_timer
 		VPS_check.__init__(self, session, service)
@@ -250,15 +251,15 @@ class VPS_check_PDC_Screen(VPS_check):
 				self.close()
 			elif self.has_pdc == 0: # kein PDC
 				#nachfragen
-				self.session.openWithCallback(self.finish_callback, MessageBox, _("The selected channel doesn't support VPS for manually programmed timers!\n Do you really want to enable VPS?"), default = False)
+				self.session.openWithCallback(self.finish_callback, MessageBox, _("The selected channel doesn't support VPS for manually programmed timers!\n Do you really want to enable VPS?"), default=False)
 			else: # konnte nicht ermitteln
-				self.session.openWithCallback(self.finish_callback, MessageBox, _("The VPS-Plugin couldn't check if the selected channel supports VPS for manually programmed timers!\n Do you really want to enable VPS?"), default = False)
+				self.session.openWithCallback(self.finish_callback, MessageBox, _("The VPS-Plugin couldn't check if the selected channel supports VPS for manually programmed timers!\n Do you really want to enable VPS?"), default=False)
 		else:
 			if self.has_pdc == 1: # PDC vorhanden
 				self.close()
 			else:
 				choiceList = [(_("No"), 0), (_("Yes"), 1), (_("Yes, don't ask again"), 2)]
-				self.session.openWithCallback(self.finish_callback2, ChoiceBox, title = _("VPS-Plugin couldn't check if the selected channel supports VPS.\n Do you really want to enable VPS?"), list = choiceList)
+				self.session.openWithCallback(self.finish_callback2, ChoiceBox, title=_("VPS-Plugin couldn't check if the selected channel supports VPS.\n Do you really want to enable VPS?"), list=choiceList)
 
 	def finish_callback(self, result):
 		if not result:
@@ -279,6 +280,7 @@ class VPS_check_PDC_Screen(VPS_check):
 
 		self.close()
 
+
 class VPS_check_on_instanttimer(VPS_check):
 	def __init__(self, session, service, timer):
 		self.timer = timer
@@ -293,9 +295,9 @@ class VPS_check_on_instanttimer(VPS_check):
 			elif config.plugins.vps.instanttimer.value == "yes_safe":
 				self.enable_vps_safe()
 			else:
-				self.session.openWithCallback(self.finish_callback, ChoiceBox, title = _("The channel may support VPS\n Do you want to enable VPS?"), list = choiceList)
+				self.session.openWithCallback(self.finish_callback, ChoiceBox, title=_("The channel may support VPS\n Do you want to enable VPS?"), list=choiceList)
 		else:
-			self.session.openWithCallback(self.finish_callback, ChoiceBox, title = _("VPS-Plugin couldn't check if the channel supports VPS.\n Do you want to enable VPS anyway?"), list = choiceList)
+			self.session.openWithCallback(self.finish_callback, ChoiceBox, title=_("VPS-Plugin couldn't check if the channel supports VPS.\n Do you want to enable VPS anyway?"), list=choiceList)
 
 	def enable_vps(self):
 		self.timer.vpsplugin_enabled = True
