@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BirthdayReminder 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Shaderman <shaderman@dreambox-tools.info>\n"
 "Language-Team:  <shaderman@dreambox-tools.info>\n"
@@ -82,6 +82,10 @@ msgstr "Abbrechen"
 msgid "Change path"
 msgstr "Pfad ändern"
 
+#, fuzzy
+msgid "Choose the filename:"
+msgstr "Dateiname:"
+
 msgid "Date format:"
 msgstr "Datumsformat:"
 
@@ -109,6 +113,9 @@ msgstr "Geburtstage bearbeiten"
 
 msgid "Edit the selected entry"
 msgstr "Gewählten Eintrag bearbeiten"
+
+msgid "Enter the name of the person:"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -211,6 +218,9 @@ msgstr ""
 "Heute ist %s's Geburtstag!\n"
 "\n"
 "Sie/er wurde am %s geboren und ist jetzt %s Jahr(e) alt."
+
+msgid "VirtualKeyBoard"
+msgstr ""
 
 msgid "What do you want to do?"
 msgstr "Was wollen Sie tun?"

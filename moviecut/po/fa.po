@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: movie cut Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2012-08-27 01:06+0330\n"
 "Last-Translator: Persian Prince <persianprince@persianpros.org>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -19,12 +19,6 @@ msgstr ""
 
 msgid "Advanced cut specification..."
 msgstr "مشخصات برش پیشرفته ..."
-
-#, python-format
-msgid ""
-"Another movie is currently cut.\n"
-"The movie \"%s\" will be cut in the background after it."
-msgstr ""
 
 msgid "Bad arguments"
 msgstr "استدلال بد"
@@ -79,6 +73,10 @@ msgstr "برش نده"
 msgid "Empty .ap file"
 msgstr ""
 
+#, fuzzy
+msgid "Execute cuts"
+msgstr "اجراسازی برش ها ..."
+
 msgid "Execute cuts..."
 msgstr "اجراسازی برش ها ..."
 
@@ -121,10 +119,6 @@ msgstr "جایگزینی نسخه اصلی :"
 
 msgid "Replace the original movie with the cut movie"
 msgstr "جایگزینی فیلم اصلی با فیلم برش خورده"
-
-#, python-format
-msgid "The movie \"%s\" is cut in the background."
-msgstr ""
 
 #, python-format
 msgid "The movie \"%s\" is successfully cut"

@@ -1,0 +1,129 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Automatic System Cleanup Setup"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid ""
+"Cleanup timerlist, orphaned movie files and stored setting backups automatically.\n"
+"\n"
+"Modify the settings to match your preferences. More detailed explanations given with each adjustable option."
+msgstr ""
+
+msgid "Delete crashlogs"
+msgstr ""
+
+msgid "Delete orphaned movie files"
+msgstr ""
+
+msgid "Delete system setting backups"
+msgstr ""
+
+msgid "Delete timerlist entries"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid "If enabled, orphaned movie files will be automatically deleted from movie directories."
+msgstr ""
+
+msgid "Maximum number of crashlogs"
+msgstr ""
+
+msgid "Maximum number of system setting backups"
+msgstr ""
+
+msgid "Maximum number of system setting backups to keep, regardless of retention period."
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Sorry, this feature is not available due to license reasons. To get the full version, please search the web for \"dreambox automaticcleanup.\""
+msgstr ""
+
+msgid "Specify, how long expired timer list entries shall be kept at most. Deactivated repeat timer entries won't be deleted ever."
+msgstr ""
+
+msgid "Specify, how long system setting backups shall be kept at most (even if maximum number is not yet exceeded). Latest backup will be kept anyway!"
+msgstr ""
+
+msgid "System cleanup"
+msgstr ""
+
+msgid "Timerlist cleanup is enabled in EMC plugin! To avoid crashes, we won't delete entries whilst this option is enabled in EMC."
+msgstr ""
+
+msgid "Ver."
+msgstr ""
+
+msgid "all"
+msgstr ""
+
+msgid "cleanup disabled"
+msgstr ""
+
+msgid "immediately after recording"
+msgstr ""
+
+msgid "last 10"
+msgstr ""
+
+msgid "last 2"
+msgstr ""
+
+msgid "last 3"
+msgstr ""
+
+msgid "last 5"
+msgstr ""
+
+msgid "older than 1 day"
+msgstr ""
+
+msgid "older than 1 week"
+msgstr ""
+
+msgid "older than 2 weeks"
+msgstr ""
+
+msgid "older than 3 days"
+msgstr ""
+
+msgid "older than 3 months"
+msgstr ""
+
+msgid "older than 4 weeks"
+msgstr ""
+
+msgid "older than 6 months"
+msgstr ""
+
+msgid "older than 6 weeks"
+msgstr ""
+
+msgid "only last one"
+msgstr ""
+
+msgid "void"
+msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-09 17:02+0100\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2018-06-03 00:57+0200\n"
 "Last-Translator: Kojo\n"
 "Language-Team: AndyBlac/TimoJ/Kojo_\n"
@@ -89,6 +89,9 @@ msgstr "Kaikki kanavat"
 msgid "All non-repeating timers"
 msgstr "Kaikki kerta-ajastukset"
 
+msgid "Allow double timer for different services"
+msgstr ""
+
 msgid "Always write config"
 msgstr "Kirjoita asetuksiin aina"
 
@@ -142,6 +145,10 @@ msgstr "Automaattiajastus poistettu"
 
 msgid "AutoTimers"
 msgstr "Automaattiajastukset"
+
+#, fuzzy
+msgid "AutoTimers were changed successfully."
+msgstr "Automaattiajastuksen muutos onnistui"
 
 msgid "Autotimer Settings"
 msgstr "Autotimer Asetukset"
@@ -369,6 +376,9 @@ msgstr "Arvaa olemassa oleva ajastus alku/loppuajan perusteella"
 msgid "Help"
 msgstr "Ohje"
 
+msgid "Here you can specify whether simultaneous timers of the same program can be created. This allows simultaneous recording of a program with different resolutions. (e.g. SD service and HD service)"
+msgstr ""
+
 msgid "Hour"
 msgstr "Tunti"
 
@@ -383,6 +393,17 @@ msgstr "Jos päällä, hakua ei tehdä jos EPGRefresh on ajossa."
 
 msgid "If enabled, the polling will be skipped if a recording is in progress."
 msgstr "Jos päällä, haku ei ole käytössä tallennuksien aikana."
+
+#, fuzzy
+msgid "If specified bouquets"
+msgstr "Rajoita tiettyihin kanaviin"
+
+#, fuzzy
+msgid "If specified services"
+msgstr "Rajoita tiettyihin palveluihin"
+
+msgid "If specified services or bouquets"
+msgstr ""
 
 msgid "If this is disabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
 msgstr "Jos tämä on pois päältä, Autotimer EI hae asetettuja ajastuksia automaattisesti, mutta tekee sen, jos poistut käyttöliittymästä painamalla vihreää nappia."
@@ -994,6 +1015,12 @@ msgstr ""
 "Asetustiedosto ei ole kunnollinen:\n"
 "%s"
 
+msgid "[B]  "
+msgstr ""
+
+msgid "[S]  "
+msgstr ""
+
 #. TRANSLATORS: AutoTimer title in MovieList (automatically opens importer, I consider this no further interaction)
 msgid "add AutoTimer"
 msgstr "Lisää automaattiajastus"
@@ -1092,55 +1119,3 @@ msgstr "kanavanvaihto"
 
 msgid "zap and record"
 msgstr "zap ja tallenna"
-
-#~ msgid "Add zap timer instead of record timer?"
-#~ msgstr "Lisää vain kanavanvaihto eikä tallennusajastusta?"
-
-#~ msgid "Any time"
-#~ msgstr "Kaikki ajat"
-
-#~ msgid "Configure AutoTimer behavior"
-#~ msgstr "Automaattiajastuksen asetukset"
-
-#~ msgid "Do you really want to delete %s?"
-#~ msgstr "Haluatko poistaa %s?"
-
-#~ msgid ""
-#~ "Found a total of %d matching Events.\n"
-#~ "%d Timer were added and\n"
-#~ "%d modified,\n"
-#~ "%d conflicts encountered,\n"
-#~ "%d similars added."
-#~ msgstr ""
-#~ "Löytyi yhteensä %d ehtojen mukaista ohjelmaa.\n"
-#~ "%d ajastusta lisätiin ja\n"
-#~ "%d muutettiin,\n"
-#~ "%d ristiriitaa löytyi,\n"
-#~ "%d samankaltaista lisättiin."
-
-#~ msgid "Other filters (edit in filter menu)"
-#~ msgstr "Muut suodattimet"
-
-#~ msgid "Restriction to certain bouquets (edit in services menu)"
-#~ msgstr "Rajoita vain valittuihin suosikkilistoihin"
-
-#~ msgid "Restriction to certain days of week (edit in filter menu)"
-#~ msgstr "Rajoita vain valittuihin viikonpäiviin"
-
-#~ msgid "Restriction to certain services (edit in services menu)"
-#~ msgstr "Rajoita vain valittuihin palveluihin"
-
-#~ msgid "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
-#~ msgstr "Aika (minuutteina) jonka automaattiajastus odottaa haun jälkeen ennen uuden ohjelmatietohaun aloittamista."
-
-#~ msgid "This is the delay in minutes that the AutoTimer will wait on initial launch to not delay enigma2 startup time."
-#~ msgstr "Tämä on viive (minuuttia) jonka automaattiajastus odottaa ensikäynnistyksessä jotta se ei hidasta Enigma2:n käynnistymistä."
-
-#~ msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
-#~ msgstr "Jos tätä ei ole valittu päälle, automaattiajastus ei hae automaattiajastettuja ohjelmia, niitä haetaan vain samalla kun poistut käyttöliittymästä vihreällä näppäimellä."
-
-#~ msgid "Use blue key to edit bouquets or services."
-#~ msgstr "Käytä sinistä näppäintä valitaksesi suosikkilistat tai palvelut"
-
-#~ msgid "Use yellow key to edit filters."
-#~ msgstr "Käytä keltaista näppäintä valitaksesi suodattimet"

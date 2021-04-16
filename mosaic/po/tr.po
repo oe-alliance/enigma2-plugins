@@ -21,12 +21,7 @@ msgid "Countdown:"
 msgstr "Sayaç:"
 
 msgid "Error while creating screenshot. You need grab version 0.8 or higher!"
-msgstr ""
-"Ekran görüntüsü oluşturulurken hata oluştu. Grab sürüm 0.8 veya daha üstü "
-"gerekli!"
+msgstr "Ekran görüntüsü oluşturulurken hata oluştu. Grab sürüm 0.8 veya daha üstü gerekli!"
 
 msgid "Mosaic"
 msgstr "Mozaik"
-
-#~ msgid "%s does not exist!"
-#~ msgstr "%s mevcut değil!"

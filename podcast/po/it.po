@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - podcast\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-04 18:33+0100\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@118como.org>\n"
@@ -18,95 +18,63 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/podcast\n"
 
-#: .../enigma2-plugins/podcast/src/plugin.py:62
-msgid "Stop playing this movie?"
-msgstr "Arrestare la riproduzione?"
+msgid "Buffer device:"
+msgstr "Supporto buffer:"
 
-#: .../enigma2-plugins/podcast/src/plugin.py:74
-#: .../enigma2-plugins/podcast/src/plugin.py:157
-#: .../enigma2-plugins/podcast/src/plugin.py:208
-#: .../enigma2-plugins/podcast/src/plugin.py:312
-#: .../enigma2-plugins/podcast/src/plugin.py:342
-#: .../enigma2-plugins/podcast/src/plugin.py:371
-#: .../enigma2-plugins/podcast/src/plugin.py:438
-#: .../enigma2-plugins/podcast/src/plugin.py:499
-#: .../enigma2-plugins/podcast/src/plugin.py:552
-#: .../enigma2-plugins/podcast/src/plugin.py:613
-#: .../enigma2-plugins/podcast/src/plugin.py:656
-msgid "Podcast"
-msgstr "Podcast"
+msgid "Buffer file handling:"
+msgstr "Gestione buffer file:"
 
-#: .../enigma2-plugins/podcast/src/plugin.py:86
-msgid "delete"
-msgstr "Rimuovere"
+msgid "Buffer:"
+msgstr "Buffer:"
 
-#: .../enigma2-plugins/podcast/src/plugin.py:86
-msgid "keep on device"
-msgstr "Conservare sul supporto"
+msgid "Delete this movie?"
+msgstr "Cancellare il filmato?"
 
-#: .../enigma2-plugins/podcast/src/plugin.py:86
-msgid "ask me"
-msgstr "Chiedere"
-
-#: .../enigma2-plugins/podcast/src/plugin.py:169
 #, python-format
 msgid "Downloading movie: %s"
 msgstr "Download filmato in corso: %s"
 
-#: .../enigma2-plugins/podcast/src/plugin.py:254
-msgid "Delete this movie?"
-msgstr "Cancellare il filmato?"
-
-#: .../enigma2-plugins/podcast/src/plugin.py:296
 msgid "Error getting movies"
 msgstr "Errore in acquisizione filmati"
 
-#: .../enigma2-plugins/podcast/src/plugin.py:304
-msgid "Length"
-msgstr "Durata"
-
-#: .../enigma2-plugins/podcast/src/plugin.py:304
-msgid "Type"
-msgstr "Tipo"
-
-#: .../enigma2-plugins/podcast/src/plugin.py:455
-msgid "No Feedly configuration"
-msgstr "Nessuna configurazione Feedly"
-
-#: .../enigma2-plugins/podcast/src/plugin.py:504
-msgid "Select"
-msgstr "Selezionare"
-
-#: .../enigma2-plugins/podcast/src/plugin.py:557
-msgid "Save"
-msgstr "Salvare"
-
-#: .../enigma2-plugins/podcast/src/plugin.py:569
-msgid "Buffer:"
-msgstr "Buffer:"
-
-#: .../enigma2-plugins/podcast/src/plugin.py:570
-msgid "Buffer device:"
-msgstr "Supporto buffer:"
-
-#: .../enigma2-plugins/podcast/src/plugin.py:571
-msgid "Buffer file handling:"
-msgstr "Gestione buffer file:"
-
-#: .../enigma2-plugins/podcast/src/plugin.py:619
-msgid "Help"
-msgstr "Aiuto"
-
-#: .../enigma2-plugins/podcast/src/plugin.py:626
-#: .../enigma2-plugins/podcast/src/plugin.py:631
-msgid "from xml"
-msgstr "da xml"
-
-#: .../enigma2-plugins/podcast/src/plugin.py:627
-msgid "configuration"
-msgstr "Configurazione"
-
-#: .../enigma2-plugins/podcast/src/plugin.py:633
 msgid "Feedly OPML"
 msgstr "Feedly OPML"
 
+msgid "Help"
+msgstr "Aiuto"
+
+msgid "Length"
+msgstr "Durata"
+
+msgid "No Feedly configuration"
+msgstr "Nessuna configurazione Feedly"
+
+msgid "Podcast"
+msgstr "Podcast"
+
+msgid "Save"
+msgstr "Salvare"
+
+msgid "Select"
+msgstr "Selezionare"
+
+msgid "Stop playing this movie?"
+msgstr "Arrestare la riproduzione?"
+
+msgid "Type"
+msgstr "Tipo"
+
+msgid "ask me"
+msgstr "Chiedere"
+
+msgid "configuration"
+msgstr "Configurazione"
+
+msgid "delete"
+msgstr "Rimuovere"
+
+msgid "from xml"
+msgstr "da xml"
+
+msgid "keep on device"
+msgstr "Conservare sul supporto"

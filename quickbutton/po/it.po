@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - quickbutton\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -46,6 +46,9 @@ msgstr ""
 "Errore!\n"
 "Tipo errore: %s"
 
+msgid "HbbTV Applications"
+msgstr ""
+
 msgid "Just Scale"
 msgstr "Scalare solamente"
 
@@ -63,6 +66,9 @@ msgstr "Nulla"
 
 msgid "OK"
 msgstr "Ok"
+
+msgid "Overwrite HBBTV-red-button"
+msgstr ""
 
 msgid "Pan&Scan"
 msgstr "Pan&Scan"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-28 16:17+0100\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: ims\n"
@@ -14,71 +14,98 @@ msgstr ""
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-SearchPath-0: ../src_py\n"
 
-#: ../src_py/Vps_setup.py:31
-msgid "Enable VPS-Plugin"
-msgstr "Povolit VPS-plugin"
+msgid "%d.%B %Y"
+msgstr "%d %B %Y"
 
-#: ../src_py/Vps_setup.py:32
-msgid "Starting time"
-msgstr "Čas začátku"
-
-#: ../src_py/Vps_setup.py:33
-msgid "Wakeup from Deep-Standby is allowed"
-msgstr "Probuzení z hlubokého spánku je povoleno"
-
-#: ../src_py/Vps_setup.py:34
-msgid "Seeking connected events"
-msgstr "Hledání spojených událostí"
-
-#: ../src_py/Vps_setup.py:35
-msgid "VPS enabled by default"
-msgstr "VPS povoleno standardně"
-
-#: ../src_py/Vps_setup.py:36
-msgid "Enable VPS on instant records"
-msgstr "Povolit VPS pro okamžité nahrávání"
-
-#: ../src_py/Vps_setup.py:50
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: ../src_py/Vps_setup.py:51
-msgid "OK"
-msgstr "OK"
+msgid "Check for PDC"
+msgstr ""
 
-#: ../src_py/Vps_setup.py:52
-msgid "Information"
-msgstr "Informace"
+msgid "Check for PDC availability on each service"
+msgstr ""
 
-#: ../src_py/Vps_setup.py:68
-msgid "This plugin can determine whether a programme begins earlier or lasts longer. The channel has to provide reliable data."
-msgstr "Tento plugin může určit, zda program začíná dříve nebo bude delší. Vysílání musí poskytovat spolehlivé údaje!"
+msgid "Enable VPS"
+msgstr "Povolit VPS"
 
-#: ../src_py/Vps_setup.py:70
-msgid "If possible, x minutes before a timer starts VPS-Plugin will control whether the programme begins earlier. (0 disables feature)"
-msgstr "Pokud je to možné, kontroluje se x minut před skutečným začátkem, zda program nezačíná dříve. (0 deaktivuje tuto možnost)"
-
-#: ../src_py/Vps_setup.py:72
 msgid "Enable VPS by default (new timers)"
 msgstr "Povolí VPS jako standardní (pro nové časovače)"
 
-#: ../src_py/Vps_setup.py:74
-msgid "If enabled and necessary, the plugin will wake up the Dreambox from Deep-Standby for the defined starting time to control whether the programme begins earlier."
-msgstr "Pokud je povoleno a je potřeba, bude plugin probouzet box z hlubokého spánku pro nastavený čas začátku a bude kontrolovat, zda program nezačíná dříve."
+msgid "Enable VPS on instant records"
+msgstr "Povolit VPS pro okamžité nahrávání"
 
-#: ../src_py/Vps_setup.py:76
+msgid "Enable VPS-Plugin"
+msgstr "Povolit VPS-plugin"
+
 msgid "If a programme is interrupted and divided into separate events, the plugin will search for the connected events."
 msgstr "Pokud je program přerušen a rozdělen na jednotlivé události, plugin bude hledat spojené události."
 
-#: ../src_py/Vps_setup.py:78
-msgid "When yes, VPS will be enabled on instant records (stop after current event), if the channel supports VPS."
-msgstr "Jestliže ano, pak v případě, že kanál podporuje VPS bude VPS povolen v okamžitém nahrávání (zastavit po aktuální události)."
+#, fuzzy
+msgid "If enabled and necessary, the plugin will wake up the Receiver from Deep-Standby for the defined starting time to control whether the programme begins earlier."
+msgstr "Pokud je povoleno a je potřeba, bude plugin probouzet box z hlubokého spánku pro nastavený čas začátku a bude kontrolovat, zda program nezačíná dříve."
 
-#: ../src_py/Vps_setup.py:99
+msgid "If possible, x minutes before a timer starts VPS-Plugin will control whether the programme begins earlier. (0 disables feature)"
+msgstr "Pokud je to možné, kontroluje se x minut před skutečným začátkem, zda program nezačíná dříve. (0 deaktivuje tuto možnost)"
+
+msgid "In order to record a timer, the TV was switched to the recording service!\n"
+msgstr "Aby bylo možno zaznamenat časovač, TV bude přepnuta na nahrávaný program! \n"
+
+msgid "Information"
+msgstr "Informace"
+
+msgid "No"
+msgstr "Ne"
+
+msgid "OK"
+msgstr "OK"
+
 msgid "Really close without saving settings?"
 msgstr "Opravdu zavřít bez uloženého nastavení?"
 
-#: ../src_py/Vps_setup.py:120
+msgid "Seeking connected events"
+msgstr "Hledání spojených událostí"
+
+msgid "Starting time"
+msgstr "Čas začátku"
+
+msgid ""
+"The VPS-Plugin couldn't check if the selected channel supports VPS for manually programmed timers!\n"
+" Do you really want to enable VPS?"
+msgstr ""
+"VPS-plugin nemohl zjistit, zda zvolený kanál podporuje VPS pro ručně programované časovače!\n"
+" Chcete skutečně povolit VPS?"
+
+msgid ""
+"The channel may support VPS\n"
+" Do you want to enable VPS?"
+msgstr ""
+"Kanál  může podporovat VPS\n"
+"Chcete povolit VPS?"
+
+msgid ""
+"The selected channel doesn't support VPS for manually programmed timers!\n"
+" Do you really want to enable VPS?"
+msgstr ""
+"Zvolený kanál nepodporuje VPS pro ručně programované časovače!\n"
+" Chcete skutečně povolit VPS?"
+
+msgid "This plugin can determine whether a programme begins earlier or lasts longer. The channel has to provide reliable data."
+msgstr "Tento plugin může určit, zda program začíná dříve nebo bude delší. Vysílání musí poskytovat spolehlivé údaje!"
+
+msgid "VPS Settings"
+msgstr "Nastavení VPS"
+
+#, python-format
+msgid "VPS Setup Version %s"
+msgstr "Nastavení VPS - verze %s"
+
+msgid "VPS enabled by default"
+msgstr "VPS povoleno standardně"
+
+msgid "VPS-Plugin Information"
+msgstr "Informace VPS-Pluginu"
+
 msgid ""
 "VPS-Plugin can react on delays arising in the startTime or endTime of a programme. VPS is only supported by certain channels!\n"
 "\n"
@@ -127,87 +154,9 @@ msgstr ""
 "\n"
 "Pro časovače programované ručně (nikoliv za pomoci EPG) je nutné nastavit VPS-Time pro povolení VPS. VPS-Time (také známý jako PDC) je čas začátku uváděný např. v časopisech. Pokud nastavíte VPS-Time, musíte ponechat název časovače prázdný!"
 
-#: ../src_py/Modifications.py:141
-#: ../src_py/Vps_check.py:250
-#: ../src_py/Vps_check.py:276
-#: ../src_py/plugin.py:16
-#: ../src_py/plugin.py:17
-msgid "No"
-msgstr "Ne"
-
-#: ../src_py/Modifications.py:141
-#: ../src_py/Vps_check.py:276
-#: ../src_py/plugin.py:16
-#: ../src_py/plugin.py:17
-msgid "Yes (safe mode)"
-msgstr "Ano (bezpečný mód)"
-
-#: ../src_py/Modifications.py:141
-#: ../src_py/Vps_check.py:250
-#: ../src_py/Vps_check.py:276
-#: ../src_py/plugin.py:16
-#: ../src_py/plugin.py:17
-msgid "Yes"
-msgstr "Ano"
-
-#: ../src_py/Modifications.py:144
-#: ../src_py/Modifications.py:147
-msgid "%d.%B %Y"
-msgstr "%d %B %Y"
-
-#: ../src_py/Modifications.py:161
-msgid "Enable VPS"
-msgstr "Povolit VPS"
-
-#: ../src_py/Modifications.py:177
-msgid "VPS-Time (date)"
-msgstr "VPS-Time (datum)"
-
-#: ../src_py/Modifications.py:178
-msgid "VPS-Time (time)"
-msgstr "VPS-Time (čas)"
-
-#: ../src_py/Vps_check.py:112
 msgid "VPS-Plugin checks if the channel supports VPS ..."
 msgstr "VPS-plugin zjišťuje, zda kanál podporuje VPS ..."
 
-#: ../src_py/Vps_check.py:243
-msgid ""
-"The selected channel doesn't support VPS for manually programmed timers!\n"
-" Do you really want to enable VPS?"
-msgstr ""
-"Zvolený kanál nepodporuje VPS pro ručně programované časovače!\n"
-" Chcete skutečně povolit VPS?"
-
-#: ../src_py/Vps_check.py:245
-msgid ""
-"The VPS-Plugin couldn't check if the selected channel supports VPS for manually programmed timers!\n"
-" Do you really want to enable VPS?"
-msgstr ""
-"VPS-plugin nemohl zjistit, zda zvolený kanál podporuje VPS pro ručně programované časovače!\n"
-" Chcete skutečně povolit VPS?"
-
-#: ../src_py/Vps_check.py:250
-msgid "Yes, don't ask again"
-msgstr "Ano, více se neptat"
-
-#: ../src_py/Vps_check.py:251
-msgid ""
-"VPS-Plugin couldn't check if the selected channel supports VPS.\n"
-" Do you really want to enable VPS?"
-msgstr ""
-"VPS-Plugin nemohl zkontrolovat, zda zvolený kanál podporuje VPS.\n"
-" Chcete opravdu povolit VPS?"
-
-#: ../src_py/Vps_check.py:284
-msgid ""
-"The channel may support VPS\n"
-" Do you want to enable VPS?"
-msgstr ""
-"Kanál  může podporovat VPS\n"
-"Chcete povolit VPS?"
-
-#: ../src_py/Vps_check.py:286
 msgid ""
 "VPS-Plugin couldn't check if the channel supports VPS.\n"
 " Do you want to enable VPS anyway?"
@@ -215,40 +164,33 @@ msgstr ""
 "VPS-Plugin nemohl zkontrolovat, jestli kanál podporuje VPS.\n"
 " Chcete VPS přesto povolit?"
 
-#: ../src_py/plugin.py:17
+msgid ""
+"VPS-Plugin couldn't check if the selected channel supports VPS.\n"
+" Do you really want to enable VPS?"
+msgstr ""
+"VPS-Plugin nemohl zkontrolovat, zda zvolený kanál podporuje VPS.\n"
+" Chcete opravdu povolit VPS?"
+
+msgid "VPS-Time (date)"
+msgstr "VPS-Time (datum)"
+
+msgid "VPS-Time (time)"
+msgstr "VPS-Time (čas)"
+
+msgid "Wakeup from Deep-Standby is allowed"
+msgstr "Probuzení z hlubokého spánku je povoleno"
+
+msgid "When yes, VPS will be enabled on instant records (stop after current event), if the channel supports VPS."
+msgstr "Jestliže ano, pak v případě, že kanál podporuje VPS bude VPS povolen v okamžitém nahrávání (zastavit po aktuální události)."
+
+msgid "Yes"
+msgstr "Ano"
+
+msgid "Yes (safe mode)"
+msgstr "Ano (bezpečný mód)"
+
+msgid "Yes, don't ask again"
+msgstr "Ano, více se neptat"
+
 msgid "always ask"
 msgstr "vždy se ptát"
-
-#: ../src_py/Vps.py:402
-msgid "In order to record a timer, the TV was switched to the recording service!\n"
-msgstr "Aby bylo možno zaznamenat časovač, TV bude přepnuta na nahrávaný program! \n"
-
-#~ msgid "Recording controlled by channel"
-#~ msgstr "Nahrávání řízené vysíláním"
-
-#~ msgid "Recordings can be controlled by channel"
-#~ msgstr "Nahrávání může být řízeno vysíláním"
-
-#~ msgid "Recordings are controlled by channel by default"
-#~ msgstr "Nahrávání je řízeno vysíláním standardně"
-
-#~ msgid ""
-#~ "If enabled, you can decide whether a timer should be controlled by "
-#~ "channel (Running-Status). Programmed start and end time will be ignored."
-#~ msgstr ""
-#~ "Jestliže je povoleno, můžete určit, zda bude časovač řízen informacemi z "
-#~ "vysílání (Running-Status). V tomto případě budou naprogramované časy "
-#~ "ignorovány!"
-
-#~ msgid "Enable \"Recording controlled by channel\" by default (new timers)"
-#~ msgstr ""
-#~ "Povolí \"Nahrávání řízené vysíláním\" jako standardní (pro nové časovače)"
-
-msgid "VPS Setup Version %s"
-msgstr "Nastavení VPS - verze %s"
-
-msgid "VPS Settings"
-msgstr "Nastavení VPS"
-
-msgid "VPS-Plugin Information"
-msgstr "Informace VPS-Pluginu"

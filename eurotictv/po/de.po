@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eUroticTV\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2011-11-22 13:17+0100\n"
 "Last-Translator: Andreas Frisch <fraxinas@openembedded.org>\n"
 "Language-Team: \n"
@@ -35,6 +35,9 @@ msgstr ""
 msgid "Streaming error: %s"
 msgstr ""
 
+msgid "Watch eUroticTV via HTTP Live Streaming"
+msgstr "Genießen Sie eUroticTV mittels HTTP Live Streaming"
+
 msgid "connecting..."
 msgstr "verbinden..."
 
@@ -43,6 +46,3 @@ msgstr ""
 
 msgid "pause"
 msgstr ""
-
-#~ msgid "Watch eUroticTV via HTTP Live Streaming"
-#~ msgstr "Genießen Sie eUroticTV mittels HTTP Live Streaming"

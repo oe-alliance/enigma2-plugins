@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eParted(POT)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-26 10:09-0000\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2015-10-23 23:49+0300\n"
 "Last-Translator: Hasan Kiran <Sunder67@hotmail.com>\n"
 "Language-Team: Turkish <sunder67@hotmail.com>\n"
@@ -18,99 +18,76 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/plugin.py:10
-msgid "eParted"
-msgstr "eParted"
+msgid "End"
+msgstr "Son"
 
-#: ../src/plugin.py:10
-msgid "creating and manipulating partition tables"
-msgstr "bölüm tabloları oluşturma ve manipülasyonu"
-
-#: ../src/eparted.py:102
 #, python-format
 msgid "Error command '%s'"
 msgstr "'%s' komut hatası"
 
-#: ../src/eparted.py:172
-msgid "partition(s)"
-msgstr "bölüm(ler)"
-
-#: ../src/eparted.py:190
-msgid "add partition"
-msgstr "bölüm ekle"
-
-#: ../src/eparted.py:214
-#, python-format
-msgid "size in %s (max %d %s):"
-msgstr "boyutunda %s (azami %d %s):"
-
-#: ../src/eparted.py:215
-msgid "filesystem:"
-msgstr "dosya sistemi:"
-
-#: ../src/eparted.py:218
-msgid "cancel"
-msgstr "iptal"
-
-#: ../src/eparted.py:219
-msgid "ok"
-msgstr "tamam"
-
-#: ../src/eparted.py:310
 msgid "Nr"
 msgstr ""
 
-#: ../src/eparted.py:311 ../src/eparted.py:520
-msgid "Start"
-msgstr "Başlat"
+msgid "Please Wait"
+msgstr "Lütfen Bekleyin"
 
-#: ../src/eparted.py:312
-msgid "End"
-msgstr "Son"
-
-#: ../src/eparted.py:313
 msgid "Size"
 msgstr "Boyut"
 
-#: ../src/eparted.py:314
+msgid "Start"
+msgstr "Başlat"
+
 msgid "Type"
 msgstr "Türü"
 
-#: ../src/eparted.py:327
 msgid "add"
 msgstr "ekle"
 
-#: ../src/eparted.py:332
-msgid "delete"
-msgstr "sil"
+msgid "add partition"
+msgstr "bölüm ekle"
 
-#: ../src/eparted.py:337
-msgid "free"
-msgstr "boş"
+msgid "cancel"
+msgstr "iptal"
 
-#: ../src/eparted.py:428
 #, python-format
 msgid "create partition %s"
 msgstr " %s bölüm oluştur"
 
-#: ../src/eparted.py:444
-#, python-format
-msgid "make filesystem '%s' on partition %s (%d %s)"
-msgstr "%s bölümünü  '%s' dosya sistemi yap (%d %s)"
+msgid "creating and manipulating partition tables"
+msgstr "bölüm tabloları oluşturma ve manipülasyonu"
 
-#: ../src/eparted.py:453
+msgid "delete"
+msgstr "sil"
+
 #, python-format
 msgid "delete partition %s"
 msgstr "%s bölüm sil"
 
-#: ../src/eparted.py:486 ../src/eparted.py:518
+msgid "eParted"
+msgstr "eParted"
+
 msgid "execute"
 msgstr "çalıştır"
 
-#: ../src/eparted.py:580 ../src/eparted.py:586
+msgid "filesystem:"
+msgstr "dosya sistemi:"
+
+msgid "free"
+msgstr "boş"
+
+#, python-format
+msgid "make filesystem '%s' on partition %s (%d %s)"
+msgstr "%s bölümünü  '%s' dosya sistemi yap (%d %s)"
+
+msgid "ok"
+msgstr "tamam"
+
+msgid "partition(s)"
+msgstr "bölüm(ler)"
+
 msgid "quit"
 msgstr "çık"
 
-#: ../src/eparted.py:594
-msgid "Please Wait"
-msgstr "Lütfen Bekleyin"
+#, python-format
+msgid "size in %s (max %d %s):"
+msgstr "boyutunda %s (azami %d %s):"

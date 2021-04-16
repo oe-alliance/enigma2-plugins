@@ -7,115 +7,128 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 20:03+0100\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: 2011-09-28 14:07+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
-#: ../src_py/Modifications.py:149
-#: ../src_py/Modifications.py:152
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
-#: ../src_py/Vps_setup.py:52
 msgid "Cancel"
 msgstr "Annuleer"
 
-#: ../src_py/Vps_setup.py:78
-msgid "Enable \"Recording controlled by channel\" by default (new timers)"
-msgstr "\"Recording controlled by channel\" standaard ingeschakeld(niewe timers)"
+msgid "Check for PDC"
+msgstr ""
 
-#: ../src_py/Modifications.py:166
+msgid "Check for PDC availability on each service"
+msgstr ""
+
 msgid "Enable VPS"
 msgstr "VPS inschakelen"
 
-#: ../src_py/Vps_setup.py:76
 msgid "Enable VPS by default (new timers)"
 msgstr "VPS standaard ingeschakeld (nieuwe timers)"
 
-#: ../src_py/Vps_setup.py:31
+msgid "Enable VPS on instant records"
+msgstr ""
+
 msgid "Enable VPS-Plugin"
 msgstr "VPS-Plugin inschakelen"
 
-#: ../src_py/Vps_setup.py:82
 msgid "If a programme is interrupted and divided into separate events, the plugin will search for the connected events."
 msgstr "Als een programma wordt onderbroken en in aparte events is verdeeld, zal de plugin zoeken naar de verbonden gebeurtenissen."
 
-#: ../src_py/Vps_setup.py:80
-msgid "If enabled and necessary, the plugin will wake up the Dreambox from Deep-Standby for the defined starting time to control whether the programme begins earlier."
+#, fuzzy
+msgid "If enabled and necessary, the plugin will wake up the Receiver from Deep-Standby for the defined starting time to control whether the programme begins earlier."
 msgstr "Indien ingeschakeld en noodzakelijk, zal de plugin uw Dreambox uit Deep-Standby halen voor de bepaalde starttijd, om te controleren of het programma eerder begint."
 
-#: ../src_py/Vps_setup.py:74
-msgid "If enabled, you can decide whether a timer should be controlled by channel (Running-Status). Programmed start and end time will be ignored."
-msgstr "Indien ingeschakeld, kunt u beslissen of een timer moet worden gecontroleerd door het kanaal ( Running-Status). De geprogrammeerde start- en eindtijd zullen worden genegeerd."
-
-#: ../src_py/Vps_setup.py:72
 msgid "If possible, x minutes before a timer starts VPS-Plugin will control whether the programme begins earlier. (0 disables feature)"
 msgstr "Indien mogelijk zal de plugin x minuten voor de ingestelde starttijd controleren of een programma eerder begint. (0 schakelt deze optie uit)"
 
-#: ../src_py/Vps.py:421
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "Om de opname te kunnen maken, is uw TV overgeschakeld naar het op te nemen kanaal!\n"
 
-#: ../src_py/Vps_setup.py:54
 msgid "Information"
 msgstr "Informatie"
 
-#: ../src_py/Vps_check.py:238
 msgid "No"
 msgstr "Nee"
 
-#: ../src_py/Vps_setup.py:53
 msgid "OK"
 msgstr "OK"
 
-#: ../src_py/Vps_setup.py:103
 msgid "Really close without saving settings?"
 msgstr "Echt afsluiten zonder de gegevens op te slaan?"
 
-#: ../src_py/Modifications.py:171
-msgid "Recording controlled by channel"
-msgstr "Opname gecontroleerd door kanaal"
-
-#: ../src_py/Vps_setup.py:37
-msgid "Recordings are controlled by channel by default"
-msgstr "Opnames worden standaard gecontroleerd dor het kanaal"
-
-#: ../src_py/Vps_setup.py:33
-msgid "Recordings can be controlled by channel"
-msgstr "Opnames kunnen worden gecontroleerd dor het kanaal"
-
-#: ../src_py/Vps_setup.py:35
 msgid "Seeking connected events"
 msgstr "Zoekt verbonden events"
 
-#: ../src_py/Vps_setup.py:32
 msgid "Starting time"
 msgstr "Start tijd"
 
-#: ../src_py/Vps_setup.py:124
 msgid ""
-"The VPS-Plugin can react on delays arising in the startTime or endTime of a programme. VPS is only supported by certain channels!\n"
+"The VPS-Plugin couldn't check if the selected channel supports VPS for manually programmed timers!\n"
+" Do you really want to enable VPS?"
+msgstr ""
+"De VPS-Plugin kon niet vaststellen of het geselecteerde kanaal ondersteuning biedt voor handmatig geprogrammeerde timers!\n"
+"Wilt u VPS echt inschakelen?"
+
+#, fuzzy
+msgid ""
+"The channel may support VPS\n"
+" Do you want to enable VPS?"
+msgstr ""
+"VPS-Plugin kon niet controleren of het geselecteerde kanaal VPS ondersteunt.\n"
+"Wilt u VPS echt inschakelen?"
+
+msgid ""
+"The selected channel doesn't support VPS for manually programmed timers!\n"
+" Do you really want to enable VPS?"
+msgstr ""
+"Het geselecteerde kanaal ondersteunt geen VPS voor handmatige timers!\n"
+"Wilt u VPS echt inschakelen?"
+
+msgid "This plugin can determine whether a programme begins earlier or lasts longer. The channel has to provide reliable data."
+msgstr "De plugin kon niet vaststellen of een programma eerder begint of langer duurt. Het kanaal heeft geen betrouwbare gegevens."
+
+msgid "VPS Settings"
+msgstr ""
+
+#, python-format
+msgid "VPS Setup Version %s"
+msgstr ""
+
+msgid "VPS enabled by default"
+msgstr "VPS standaard ingeschakeld"
+
+#, fuzzy
+msgid "VPS-Plugin Information"
+msgstr "Informatie"
+
+#, fuzzy
+msgid ""
+"VPS-Plugin can react on delays arising in the startTime or endTime of a programme. VPS is only supported by certain channels!\n"
 "\n"
-"If you enable VPS, the recording is definitely starting at the latest at the startTime. The recording may start earlier or lasts longer.\n"
+"If you enable VPS, the recording will only start, when the channel flags the programme as running.\n"
 "\n"
-"If you also enable \"Recording controlled by channel\", the recording will only start, when the channel flags the programme as running.\n"
+"If you select \"yes (safe mode)\", the recording is definitely starting at the latest at the startTime you defined. The recording may start earlier or last longer.\n"
 "\n"
 "\n"
 "Supported channels\n"
 "\n"
 "Germany:\n"
-" ARD, ZDF, Sky and DMAX\n"
+" ARD and ZDF\n"
 "\n"
 "Austria:\n"
-" ORF and Servus TV\n"
+" ORF\n"
 "\n"
 "Switzerland:\n"
 " SF\n"
@@ -148,35 +161,17 @@ msgstr ""
 "\n"
 "Als een timer handmatig is ingesteld (niet via de EPG), is het noodzakelijk om  VPS-Time in te stellen om VPS in te schakelen. VPS-Time (ook bekend als PDC) is de eerst gepubliceerde starttijd, zoals die b.v. in tijdschriften staat. Als u een VPS-Time instelt, moet u de timer naam leeg laten."
 
-#: ../src_py/Vps_check.py:233
-msgid ""
-"The VPS-Plugin couldn't check if the selected channel supports VPS for manually programmed timers!\n"
-" Do you really want to enable VPS?"
-msgstr ""
-"De VPS-Plugin kon niet vaststellen of het geselecteerde kanaal ondersteuning biedt voor handmatig geprogrammeerde timers!\n"
-"Wilt u VPS echt inschakelen?"
-
-#: ../src_py/Vps_check.py:231
-msgid ""
-"The selected channel doesn't support VPS for manually programmed timers!\n"
-" Do you really want to enable VPS?"
-msgstr ""
-"Het geselecteerde kanaal ondersteunt geen VPS voor handmatige timers!\n"
-"Wilt u VPS echt inschakelen?"
-
-#: ../src_py/Vps_setup.py:70
-msgid "This plugin can determine whether a programme begins earlier or lasts longer. The channel has to provide reliable data."
-msgstr "De plugin kon niet vaststellen of een programma eerder begint of langer duurt. Het kanaal heeft geen betrouwbare gegevens."
-
-#: ../src_py/Vps_setup.py:36
-msgid "VPS enabled by default"
-msgstr "VPS standaard ingeschakeld"
-
-#: ../src_py/Vps_check.py:111
 msgid "VPS-Plugin checks if the channel supports VPS ..."
 msgstr "VPS-Plugin controleert of het kanaal VPS ondersteunt..."
 
-#: ../src_py/Vps_check.py:239
+#, fuzzy
+msgid ""
+"VPS-Plugin couldn't check if the channel supports VPS.\n"
+" Do you want to enable VPS anyway?"
+msgstr ""
+"VPS-Plugin kon niet controleren of het geselecteerde kanaal VPS ondersteunt.\n"
+"Wilt u VPS echt inschakelen?"
+
 msgid ""
 "VPS-Plugin couldn't check if the selected channel supports VPS.\n"
 " Do you really want to enable VPS?"
@@ -184,23 +179,26 @@ msgstr ""
 "VPS-Plugin kon niet controleren of het geselecteerde kanaal VPS ondersteunt.\n"
 "Wilt u VPS echt inschakelen?"
 
-#: ../src_py/Modifications.py:185
 msgid "VPS-Time (date)"
 msgstr "VPS-Time (datum)"
 
-#: ../src_py/Modifications.py:186
 msgid "VPS-Time (time)"
 msgstr "VPS-Time (tijd)"
 
-#: ../src_py/Vps_setup.py:34
 msgid "Wakeup from Deep-Standby is allowed"
 msgstr "Opstarten vanuit Deep-Standby toegestaan"
 
-#: ../src_py/Vps_check.py:238
+msgid "When yes, VPS will be enabled on instant records (stop after current event), if the channel supports VPS."
+msgstr ""
+
 msgid "Yes"
 msgstr "Ja"
 
-#: ../src_py/Vps_check.py:238
+msgid "Yes (safe mode)"
+msgstr ""
+
 msgid "Yes, don't ask again"
 msgstr "Ja, niet opnieuw vragen"
 
+msgid "always ask"
+msgstr ""

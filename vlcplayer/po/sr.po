@@ -4,10 +4,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - vlcplayer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-31 01:42+0100\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: 2009-09-10 21:33+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,146 +18,75 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/vlcplayer\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/vlcplayer\n"
 
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:294
-msgid "Cancel"
-msgstr "Otkaži"
+msgid "1 minute"
+msgstr ""
 
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:295
-msgid "OK"
-msgstr "OK"
+msgid "10 minutes"
+msgstr ""
 
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:300
-msgid "Server Profile Name"
-msgstr "Ime server profila"
+msgid "15 minutes"
+msgstr ""
 
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:301
-msgid "Enter VLC-Server as FQDN or IP-Address"
-msgstr "Upišite VLC server kao FQDN ili IP adresu"
+msgid "20 minutes"
+msgstr ""
 
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:302
-msgid "Server Address"
-msgstr "Adresa servera"
+msgid "3 minutes"
+msgstr ""
 
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:304
-msgid "HTTP Port"
-msgstr "HTTP Port"
+msgid "30 minutes"
+msgstr ""
 
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:305
-msgid "Movie Directory"
-msgstr "Film direktorijum"
+msgid "5 minutes"
+msgstr ""
 
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:306
-msgid "DVD Device (leave empty for default)"
-msgstr "DVD uređaj (ostavite prazno za stand.)"
-
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:308
-msgid "Transcode MPEG/DVD Video"
-msgstr "Konvertuj MPEG/DVD sliku"
-
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:309
-msgid "Video Codec"
-msgstr "Video kodek"
-
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:310
-msgid "Video Bitrate"
-msgstr "Video bitrejt"
-
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:311
-msgid "Video Norm"
-msgstr "Video standard"
-
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:312
-#, python-format
-msgid "Overscan Correction [in %(percentsign)s of Video width]"
-msgstr "Oversken ispravka [in %(percentsign)s video širine]"
-
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:314
-msgid "Subtitle overlay"
-msgstr "Dopuna subtitla"
-
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:316
-msgid "Transcode MPEG/DVD Audio"
-msgstr "Konvertuj MPEG/DVD zvuk"
-
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:317
-msgid "Audio Codec"
-msgstr "Audio kodek"
-
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:318
-msgid "Audio Bitrate"
-msgstr "Audio bitrejt"
-
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:319
-msgid "Audio Samplerate"
-msgstr "Audio semplrejt"
-
-#: /home/dario/Plugins/vlcplayer/src/VlcServerConfig.py:320
-msgid "Audio Channels"
-msgstr "Audio kanali"
-
-#: /home/dario/Plugins/vlcplayer/src/plugin.py:69
 msgid "A video streaming solution based on VLC"
 msgstr "Video striming rešenje bazirano na VLC"
 
-#: /home/dario/Plugins/vlcplayer/src/VlcMediaList.py:55
-#: /home/dario/Plugins/vlcplayer/src/VlcMediaList.py:119
-msgid "filter off"
-msgstr "Filter isklj."
+#, fuzzy
+msgid "Audio"
+msgstr "Audio kodek"
 
-#: /home/dario/Plugins/vlcplayer/src/VlcMediaList.py:56
-msgid "refresh"
-msgstr "osveži"
+msgid "Audio Bitrate"
+msgstr "Audio bitrejt"
 
-#: /home/dario/Plugins/vlcplayer/src/VlcMediaList.py:57
-msgid "Serverlist"
-msgstr "Server lista"
+msgid "Audio Channels"
+msgstr "Audio kanali"
 
-#: /home/dario/Plugins/vlcplayer/src/VlcMediaList.py:58
-msgid "play DVD"
-msgstr "Pusti DVD"
+msgid "Audio Codec"
+msgstr "Audio kodek"
 
-#: /home/dario/Plugins/vlcplayer/src/VlcMediaList.py:62
-msgid "Filelist"
-msgstr "Lista datoteka"
+msgid "Audio Samplerate"
+msgstr "Audio semplrejt"
 
-#: /home/dario/Plugins/vlcplayer/src/VlcMediaList.py:63
-msgid "Playlist"
-msgstr "Plejlista"
+#, fuzzy
+msgid "Cache Directory"
+msgstr "Film direktorijum"
 
-#: /home/dario/Plugins/vlcplayer/src/VlcMediaList.py:122
-msgid "filter on"
-msgstr "Filter uklj."
+msgid "Cancel"
+msgstr "Otkaži"
 
-#: /home/dario/Plugins/vlcplayer/src/VlcMediaList.py:127
-#, python-format
-msgid ""
-"Error updating filelist from server %(server)s:\n"
-"%(error)s"
+msgid "Choice of minutes to jump"
 msgstr ""
-"Greška u ažur. liste datoteka sa servera %(server)s:\n"
-"%(error)s"
 
-#: /home/dario/Plugins/vlcplayer/src/VlcMediaList.py:164
-#, python-format
-msgid ""
-"Error loading playlist %(media)s into server %(server)s:\n"
-"%(error)s"
+msgid "Choose an action:"
 msgstr ""
-"Greška u učitavanju plejliste %(media)s na server %(server)s:\n"
-"%(error)s"
 
-#: /home/dario/Plugins/vlcplayer/src/VlcMediaList.py:180
-#: /home/dario/Plugins/vlcplayer/src/VlcMediaList.py:196
-#: /home/dario/Plugins/vlcplayer/src/VlcMediaList.py:201
-#, python-format
-msgid ""
-"Error loading playlist into server %(server)s:\n"
-"%(error)s"
+msgid "DVD Device (leave empty for default)"
+msgstr "DVD uređaj (ostavite prazno za stand.)"
+
+msgid "Direct play"
 msgstr ""
-"Greška u učitavanju plejliste na server %(server)s:\n"
-"%(error)s"
 
-#: /home/dario/Plugins/vlcplayer/src/VlcMediaList.py:186
+#, fuzzy
+msgid "Edit VLC Server"
+msgstr "edit server"
+
+msgid "Enter VLC-Server as FQDN or IP-Address"
+msgstr "Upišite VLC server kao FQDN ili IP adresu"
+
+msgid "Enter subtitles as Track or Language"
+msgstr ""
+
 #, python-format
 msgid ""
 "Error loading filelist into server %(server)s:\n"
@@ -165,41 +95,30 @@ msgstr ""
 "Greška u učitavanju liste datoteka na server %(server)s:\n"
 "%(error)s"
 
-#: /home/dario/Plugins/vlcplayer/src/VlcServerList.py:98
-msgid "List of known VLC-Server Profiles"
-msgstr "Lista poznatih VLC server profila"
-
-#: /home/dario/Plugins/vlcplayer/src/VlcServerList.py:100
-msgid "delete server"
-msgstr "obriši server"
-
-#: /home/dario/Plugins/vlcplayer/src/VlcServerList.py:101
-msgid "add server"
-msgstr "dodaj server"
-
-#: /home/dario/Plugins/vlcplayer/src/VlcServerList.py:102
-msgid "edit server"
-msgstr "edit server"
-
-#: /home/dario/Plugins/vlcplayer/src/VlcServerList.py:103
-msgid "set default"
-msgstr "set default"
-
-#: /home/dario/Plugins/vlcplayer/src/VlcServerList.py:144
-msgid "Really delete this Server?"
-msgstr "Really delete this Server?"
-
-#: /home/dario/Plugins/vlcplayer/src/VlcPlayer.py:320
+#, python-format
 msgid ""
-"No valid Enigma-Service to play a VLC-Stream\n"
-"Check your installation and try again!"
+"Error loading playlist %(media)s into server %(server)s:\n"
+"%(error)s"
 msgstr ""
-"No valid Enigma-Service to play a VLC-Stream\n"
-"Check your installation and try again!"
+"Greška u učitavanju plejliste %(media)s na server %(server)s:\n"
+"%(error)s"
 
-#: /home/dario/Plugins/vlcplayer/src/VlcPlayer.py:330
-#: /home/dario/Plugins/vlcplayer/src/VlcPlayer.py:365
-#: /home/dario/Plugins/vlcplayer/src/VlcPlayer.py:393
+#, python-format
+msgid ""
+"Error loading playlist into server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Greška u učitavanju plejliste na server %(server)s:\n"
+"%(error)s"
+
+#, python-format
+msgid ""
+"Error updating filelist from server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Greška u ažur. liste datoteka sa servera %(server)s:\n"
+"%(error)s"
+
 #, python-format
 msgid ""
 "Error with VLC server:\n"
@@ -208,11 +127,158 @@ msgstr ""
 "Error with VLC server:\n"
 "%s"
 
-#: /home/dario/Plugins/vlcplayer/src/VlcPlayer.py:445
+msgid "FQDN"
+msgstr ""
+
+msgid "Filelist"
+msgstr "Lista datoteka"
+
+msgid "HTTP Port"
+msgstr "HTTP Port"
+
+msgid "IP-Address"
+msgstr ""
+
+msgid ""
+"Latest compatible version VLC 2.0.7\n"
+"Setup VLC for PC:\n"
+"Tools -> Preferences -> All -> Interface -> Main Interface -> Select Web\n"
+"Find file c:/Program Files/VideoLAN/VLC/Lua/http/.hosts and insert your box ip (without #).\n"
+"Add shortcut to the startup of the background start VLC 'C:\\Program Files\\VideoLAN\\VLC\vlc.exe --intf telnet --extraintf http'"
+msgstr ""
+
+msgid "List of known profiles. Note: key info - help"
+msgstr ""
+
+msgid "Movie Directory"
+msgstr "Film direktorijum"
+
 msgid "No more files in this directory"
 msgstr "No more files in this directory"
 
-#: /home/dario/Plugins/vlcplayer/src/VlcPlayer.py:472
+#, python-format
+msgid ""
+"No ping from Server:\n"
+"%s\n"
+"%s"
+msgstr ""
+
 msgid "No previous file in this directory"
 msgstr "No previous file in this directory"
 
+msgid ""
+"No valid Enigma-Service to play a VLC-Stream\n"
+"Check your installation and try again!"
+msgstr ""
+"No valid Enigma-Service to play a VLC-Stream\n"
+"Check your installation and try again!"
+
+msgid "OK"
+msgstr "OK"
+
+#, python-format
+msgid "Overscan Correction [in %(percentsign)s of Video width]"
+msgstr "Oversken ispravka [in %(percentsign)s video širine]"
+
+msgid "Ping IP-Address when open Server"
+msgstr ""
+
+msgid "Playlist"
+msgstr "Plejlista"
+
+msgid "Really delete this Server?"
+msgstr "Really delete this Server?"
+
+#, fuzzy
+msgid "Reset default"
+msgstr "set default"
+
+msgid "Save as .ts and play"
+msgstr ""
+
+#, fuzzy
+msgid "Select VLC-Server profile"
+msgstr "Lista poznatih VLC server profila"
+
+msgid "Select method?"
+msgstr ""
+
+msgid "Server Address"
+msgstr "Adresa servera"
+
+msgid "Server Profile Name"
+msgstr "Ime server profila"
+
+msgid "Serverlist"
+msgstr "Server lista"
+
+#, fuzzy
+msgid "Set as default"
+msgstr "set default"
+
+msgid "Subtitle overlay"
+msgstr "Dopuna subtitla"
+
+#, fuzzy
+msgid "Subtitles"
+msgstr "Dopuna subtitla"
+
+msgid "Transcode MPEG/DVD Audio"
+msgstr "Konvertuj MPEG/DVD zvuk"
+
+msgid "Transcode MPEG/DVD Video"
+msgstr "Konvertuj MPEG/DVD sliku"
+
+msgid "Use saving to Cache Directory"
+msgstr ""
+
+msgid "VLC < 2.x"
+msgstr ""
+
+msgid "VLC Media List"
+msgstr ""
+
+msgid "VLC Video Player"
+msgstr ""
+
+msgid "Video Bitrate"
+msgstr "Video bitrejt"
+
+msgid "Video Codec"
+msgstr "Video kodek"
+
+msgid "Video Norm"
+msgstr "Video standard"
+
+msgid "Yellow subtitles"
+msgstr ""
+
+msgid "add server"
+msgstr "dodaj server"
+
+msgid "delete server"
+msgstr "obriši server"
+
+msgid "edit server"
+msgstr "edit server"
+
+msgid "filter off"
+msgstr "Filter isklj."
+
+msgid "filter on"
+msgstr "Filter uklj."
+
+msgid "languages"
+msgstr ""
+
+msgid "play DVD"
+msgstr "Pusti DVD"
+
+msgid "refresh"
+msgstr "osveži"
+
+msgid "set default"
+msgstr "set default"
+
+msgid "tracks"
+msgstr ""

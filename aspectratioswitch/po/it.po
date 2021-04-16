@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emigma2 plugin - aspectratioswitch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-25 00:29+0100\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2012-10-25 00:42+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -18,126 +18,30 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/aspectratioswitch\n"
 
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:65
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:80
-msgid "4:3 Letterbox"
-msgstr "4:3 Letterbox"
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:66
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:80
-msgid "4:3 PanScan"
-msgstr "4:3 PanScan"
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:67
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:80
-msgid "16:9"
-msgstr "16:9"
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:68
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:80
-msgid "16:9 always"
-msgstr "16:9 sempre"
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:69
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:80
 msgid "16:10 Letterbox"
 msgstr "16:10 Letterbox"
 
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:70
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:80
 msgid "16:10 PanScan"
 msgstr "16:10 PanScan"
 
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:71
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:80
+msgid "16:9"
+msgstr "16:9"
+
 msgid "16:9 Letterbox"
 msgstr "16:9 Letterbox"
 
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:78
-msgid "Bouquet +/- long"
-msgstr "Press. lunga tasti bouquet"
+msgid "16:9 always"
+msgstr "16:9 sempre"
 
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:78
-msgid "Help key long"
-msgstr "Press. lunga tasto Help"
+msgid "4:3 Letterbox"
+msgstr "4:3 Letterbox"
 
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:78
-msgid "Radio key long"
-msgstr "Press. lunga tasto Radio"
+msgid "4:3 PanScan"
+msgstr "4:3 PanScan"
 
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:78
-msgid "PVR key long"
-msgstr "Press. lunga tasto PWR"
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:83
-msgid "Plugin menu"
-msgstr "Menu Plugin"
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:83
-msgid "Extensions menu"
-msgstr "Menu Estensioni"
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:105
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:135
-msgid "AspectRatioSwitch Setup"
+msgid "Aspect Ratio Switch setup"
 msgstr "Configurazione rapporto d'aspetto"
 
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:108
-msgid "Quick switching via remote control"
-msgstr "Commutazione rapida via telecomando"
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:109
-msgid "Key mapping"
-msgstr "Mappa tasti"
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:110
-msgid "Show switch message"
-msgstr "Mostrare messaggio alla commutazione"
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:112
-#, python-format
-msgid "Include %s"
-msgstr "Includere %s"
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:113
-msgid "Set aspect ratio on startup"
-msgstr "Configurare il rapporto d'aspetto all'avvio"
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:114
-msgid "Startup aspect ratio"
-msgstr "Rapporto d'aspetto all'avvio"
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:115
-msgid "Show Setup in"
-msgstr "Mostrare configurazione in"
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:120
-msgid "Cancel"
-msgstr "Annull."
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:121
-msgid "Save"
-msgstr "Salvare"
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:122
-msgid "Use the configured key(s) on your remote control to switch aspect ratio modes. If any 'Quickbutton' actions were assigned to these keys, they will be disabled as long as this plugin is activated!"
-msgstr "Utilizzare i tasti configurati sul telecomando per commutare il rapporto d'aspetto. Se altre funzioni risultassero assegnate ai medesimi tasti, saranno disabilitate fintanto che questo plugin sarà attivo."
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:135
-msgid "Ver."
-msgstr "Ver."
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:141
-#, python-format
-msgid "You need to include at least %d aspect ratio modes!"
-msgstr "E' necessario includere almeno %d rapporti d'aspetto."
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:175
-#, python-format
-msgid "Changing keymap failed (%s)."
-msgstr "Cambio keymap fallito: (%s)"
-
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:226
 #, python-format
 msgid ""
 "Aspect ratio switched from:\n"
@@ -150,13 +54,68 @@ msgstr ""
 "a:\n"
 "   %s"
 
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:287
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:291
-msgid "Aspect Ratio Switch setup"
+msgid "AspectRatioSwitch Setup"
 msgstr "Configurazione rapporto d'aspetto"
 
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:287
-#: .../enigma2-plugins/aspectratioswitch/src/plugin.py:291
+msgid "Bouquet +/- long"
+msgstr "Press. lunga tasti bouquet"
+
+msgid "Cancel"
+msgstr "Annull."
+
+#, python-format
+msgid "Changing keymap failed (%s)."
+msgstr "Cambio keymap fallito: (%s)"
+
+msgid "Extensions menu"
+msgstr "Menu Estensioni"
+
+msgid "Help key long"
+msgstr "Press. lunga tasto Help"
+
+#, python-format
+msgid "Include %s"
+msgstr "Includere %s"
+
+msgid "Key mapping"
+msgstr "Mappa tasti"
+
+msgid "PVR key long"
+msgstr "Press. lunga tasto PWR"
+
+msgid "Plugin menu"
+msgstr "Menu Plugin"
+
 msgid "Quick switching of aspect ratio setting"
 msgstr "Gestione configurazione rapporto d'aspetto"
 
+msgid "Quick switching via remote control"
+msgstr "Commutazione rapida via telecomando"
+
+msgid "Radio key long"
+msgstr "Press. lunga tasto Radio"
+
+msgid "Save"
+msgstr "Salvare"
+
+msgid "Set aspect ratio on startup"
+msgstr "Configurare il rapporto d'aspetto all'avvio"
+
+msgid "Show Setup in"
+msgstr "Mostrare configurazione in"
+
+msgid "Show switch message"
+msgstr "Mostrare messaggio alla commutazione"
+
+msgid "Startup aspect ratio"
+msgstr "Rapporto d'aspetto all'avvio"
+
+msgid "Use the configured key(s) on your remote control to switch aspect ratio modes. If any 'Quickbutton' actions were assigned to these keys, they will be disabled as long as this plugin is activated!"
+msgstr "Utilizzare i tasti configurati sul telecomando per commutare il rapporto d'aspetto. Se altre funzioni risultassero assegnate ai medesimi tasti, saranno disabilitate fintanto che questo plugin sarà attivo."
+
+msgid "Ver."
+msgstr "Ver."
+
+#, python-format
+msgid "You need to include at least %d aspect ratio modes!"
+msgstr "E' necessario includere almeno %d rapporti d'aspetto."

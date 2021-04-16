@@ -80,6 +80,3 @@ msgid ""
 msgstr ""
 "genisoimage job terminato.\n"
 "Cancellare la cartella DVD?"
-
-#~ msgid "DVD Name"
-#~ msgstr "Nome DVD"

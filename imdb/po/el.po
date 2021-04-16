@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-09-29 04:50+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2016-09-29 04:52+0300\n"
 "Last-Translator: MCelliot_g <mcelliot_g@hotmail.com>\n"
 "Language-Team: \n"
@@ -18,236 +18,229 @@ msgstr ""
 "X-Generator: Poedit 1.8.8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: plugin.py:65
-msgid "Channel Selection"
-msgstr "Επιλογή Καναλιών"
-
-#: plugin.py:94
-msgid "Lookup"
-msgstr "Αναζήτηση"
-
-#: plugin.py:171
-msgid "The Internet Movie Database"
-msgstr "Η Διαδικτυακή Βάση Δεδομένων Ταινιών"
-
-#: plugin.py:187
-msgid "Exit"
-msgstr "Έξοδος"
-
-#: plugin.py:314
-msgid "Ambiguous results"
-msgstr "Διφορούμενα αποτελέσματα"
-
-#: plugin.py:315
-msgid "Please select the matching entry"
-msgstr "Παρακαλώ επιλέξτε το στοιχείο που ταιριάζει"
-
-#: plugin.py:318
-msgid "Title Menu"
-msgstr "Μενού Τίτλου"
-
-#: plugin.py:319 plugin.py:706
-msgid "Details"
-msgstr "Λεπτομέρειες"
-
-#: plugin.py:340 plugin.py:663 plugin.py:679
-#, python-format
-msgid "Re-Query IMDb: %s..."
-msgstr "Επαναζήτηση IMDb: %s..."
-
-#: plugin.py:374
-msgid "Enter search"
-msgstr "Εισαγωγή αναζήτησης"
-
-#: plugin.py:375
-msgid "Select from EPG"
-msgstr "Επιλογή από το EPG"
-
-#: plugin.py:376
-msgid "Setup"
-msgstr "Εγκατάσταση"
-
-#: plugin.py:383
-msgid "Save current Details as .html for offline use"
-msgstr "Αποθήκευση τρεχουσών Πληροφοριών ως .html για χρήση εκτός σύνδεσης"
-
-#: plugin.py:384
-msgid "Save current Details as .txt"
-msgstr "Αποθήκευση τρεχουσών Πληροφοριών ως .txt"
-
-#: plugin.py:385
-msgid "Save current Poster and Details as .txt"
-msgstr "Αποθήκευση τρέχοντος Πόστερ και Πληροφοριών ως .txt"
-
-#: plugin.py:390
-msgid "Play Trailer"
-msgstr "Αναπαραγωγή Τρέιλερ"
-
-#: plugin.py:391
-msgid "Search Trailer"
-msgstr "Αναζήτηση Τρέιλερ"
-
-#: plugin.py:397
-msgid "IMDb Menu"
-msgstr "IMDb Μενού"
-
-#: plugin.py:422
-msgid "IMDb can not get Movie Information to write to .txt file!"
-msgstr "Αδυναμία λήψης Πληροφοριών Ταινίας για εγγραφή σε αρχείο .txt!"
-
-#: plugin.py:434
-msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
-msgstr ""
-"Αδυναμία λήψης Πληροφοριών Ταινίας για εγγραφή σε αρχεία .jpg και .txt!"
-
-#: plugin.py:439
-msgid "IMDb Save - Download completed"
-msgstr "Η Αποθήκευση Λήψης IMDb ολοκληρώθηκε"
-
-#: plugin.py:458 plugin.py:461
-msgid "Content:"
-msgstr "Περιεχόμενο:"
-
-#: plugin.py:467 plugin.py:470
-msgid "Runtime:"
-msgstr "Χρονική διάρκεια:"
-
-#: plugin.py:478 plugin.py:480
-msgid "Genre:"
-msgstr "Είδος:"
-
-#: plugin.py:486 plugin.py:489
-msgid "Production Countries:"
-msgstr "Χώρες Παραγωγής:"
-
-#: plugin.py:495 plugin.py:498
-msgid "Release Date:"
-msgstr "Ημερομηνία Κυκλοφορίας:"
-
-#: plugin.py:507 plugin.py:509 plugin.py:736
-msgid "User Rating"
-msgstr "Βαθμολογία Χρηστών"
-
-#: plugin.py:552
-msgid "Enter text to search for"
-msgstr "Εισαγωγή κειμένου αναζήτησης"
-
-#: plugin.py:600
-#, python-format
-msgid "Query IMDb: %s"
-msgstr "Αναζήτηση IMDb: %s..."
-
-#: plugin.py:608
-msgid "Could't get event name"
-msgstr "Αδυναμία λήψης ονόματος εκπομπής"
-
-#: plugin.py:644
-msgid "IMDb Download completed"
-msgstr "Η Λήψη IMDb ολοκληρώθηκε"
-
-#: plugin.py:673
-msgid "No IMDb match."
-msgstr "Χωρίς συσχέτιση στο IMDb."
-
-#: plugin.py:674
-msgid "No IMDb match:"
-msgstr "Χωρίς συσχέτιση στο IMDb:"
-
-#: plugin.py:686
-msgid "IMDb query failed!"
-msgstr "Η αναζήτηση στο IMDb απέτυχε!"
-
-#: plugin.py:689
-msgid "IMDb Download failed"
-msgstr "Η Λήψη IMDb απέτυχε"
-
-#: plugin.py:697
-msgid "IMDb Re-Download completed"
-msgstr "Η επανάληψη λήψης IMDb ολοκληρώθηκε"
-
-#: plugin.py:704
-msgid "No details found."
-msgstr "Δεν βρέθηκαν πληροφορίες."
-
-#: plugin.py:707 plugin.py:789
-msgid "IMDb Details parsed"
-msgstr "Οι Λεπτομέρειες IMDb αναλύθηκαν"
-
-#: plugin.py:732
-msgid "no user rating yet"
-msgstr "χωρίς βαθμολογία χρήστη ακόμα"
-
-#: plugin.py:749
 msgid " as "
 msgstr " ως "
 
-#: plugin.py:753
+msgid "* = Restart Required"
+msgstr "* = Απαιτείται Επανεκκίνηση"
+
+msgid "Ambiguous results"
+msgstr "Διφορούμενα αποτελέσματα"
+
+msgid "Cancel"
+msgstr "Ακύρωση"
+
 msgid "Cast: "
 msgstr "Πρωταγωνιστές: "
 
-#: plugin.py:755
-msgid "No cast list found in the database."
-msgstr "Δεν βρέθηκε η λίστα των ηθοποιών στη βάση δεδομένων."
+msgid "Content:"
+msgstr "Περιεχόμενο:"
 
-#: plugin.py:761
+msgid "Could't get event name"
+msgstr "Αδυναμία λήψης ονόματος εκπομπής"
+
+msgid "Details"
+msgstr "Λεπτομέρειες"
+
 #, python-format
 msgid "Downloading Movie Poster: %s..."
 msgstr "Λήψη Πόστερ Ταινίας: %s..."
 
-#: plugin.py:783
+#, fuzzy
+msgid "Enable this to be able to access IMDb search setup from within the plugin browser."
+msgstr "Η ενεργοποίηση αυτής της επιλογής δίνει πρόσβαση στην Αναζήτηση EPG μέσα από τον πλοηγό προσθέτων."
+
+#, fuzzy
+msgid "Enable this to be able to access IMDb searches from within the movie list."
+msgstr "Η ενεργοποίηση αυτής της επιλογής δίνει πρόσβαση στην Αναζήτηση EPG μέσα από τον πλοηγό προσθέτων."
+
+#, fuzzy
+msgid "Enable this to be able to access IMDb searches from within the plugin browser."
+msgstr "Η ενεργοποίηση αυτής της επιλογής δίνει πρόσβαση στην Αναζήτηση EPG μέσα από τον πλοηγό προσθέτων."
+
+msgid "Enter search"
+msgstr "Εισαγωγή αναζήτησης"
+
+msgid "Enter text to search for"
+msgstr "Εισαγωγή κειμένου αναζήτησης"
+
+msgid "Exit"
+msgstr "Έξοδος"
+
+#, fuzzy
+msgid "Exit IMDb search"
+msgstr "Εισαγωγή αναζήτησης"
+
 msgid "Extra Info"
 msgstr "Πρόσθετες Πληροφορίες"
 
-#: plugin.py:819
+msgid "Genre:"
+msgstr "Είδος:"
+
+msgid "IMDb Details parsed"
+msgstr "Οι Λεπτομέρειες IMDb αναλύθηκαν"
+
+msgid "IMDb Download completed"
+msgstr "Η Λήψη IMDb ολοκληρώθηκε"
+
+msgid "IMDb Download failed"
+msgstr "Η Λήψη IMDb απέτυχε"
+
+msgid "IMDb Menu"
+msgstr "IMDb Μενού"
+
 msgid "IMDb Plugin"
 msgstr "Πρόσθετο IMDb"
 
-#: plugin.py:836
-msgid "* = Restart Required"
-msgstr "* = Απαιτείται Επανεκκίνηση"
+msgid "IMDb Re-Download completed"
+msgstr "Η επανάληψη λήψης IMDb ολοκληρώθηκε"
 
-#: plugin.py:842
+msgid "IMDb Save - Download completed"
+msgstr "Η Αποθήκευση Λήψης IMDb ολοκληρώθηκε"
+
 msgid "IMDb Setup"
 msgstr "Ρυθμίσεις IMDb"
 
-#: plugin.py:846
+msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
+msgstr "Αδυναμία λήψης Πληροφοριών Ταινίας για εγγραφή σε αρχεία .jpg και .txt!"
+
+msgid "IMDb can not get Movie Information to write to .txt file!"
+msgstr "Αδυναμία λήψης Πληροφοριών Ταινίας για εγγραφή σε αρχείο .txt!"
+
+msgid "IMDb query failed!"
+msgstr "Η αναζήτηση στο IMDb απέτυχε!"
+
+#, fuzzy
+msgid "IMDb search"
+msgstr "Χωρίς συσχέτιση στο IMDb."
+
+#, fuzzy
+msgid "IMDb setup"
+msgstr "Ρυθμίσεις IMDb"
+
+#, fuzzy
+msgid "Menu"
+msgstr "IMDb Μενού"
+
+msgid "No IMDb match."
+msgstr "Χωρίς συσχέτιση στο IMDb."
+
+msgid "No IMDb match:"
+msgstr "Χωρίς συσχέτιση στο IMDb:"
+
+msgid "No cast list found in the database."
+msgstr "Δεν βρέθηκε η λίστα των ηθοποιών στη βάση δεδομένων."
+
+msgid "No details found."
+msgstr "Δεν βρέθηκαν πληροφορίες."
+
 msgid "OK"
 msgstr "OK"
 
-#: plugin.py:847
-msgid "Cancel"
-msgstr "Ακύρωση"
+msgid "Page down"
+msgstr ""
 
-#: plugin.py:873
-msgid "Show in plugin browser"
+msgid "Page up"
+msgstr ""
+
+msgid "Play Trailer"
+msgstr "Αναπαραγωγή Τρέιλερ"
+
+msgid "Please select the matching entry"
+msgstr "Παρακαλώ επιλέξτε το στοιχείο που ταιριάζει"
+
+msgid "Plot Outline"
+msgstr ""
+
+msgid "Production Countries:"
+msgstr "Χώρες Παραγωγής:"
+
+#, python-format
+msgid "Query IMDb: %s"
+msgstr "Αναζήτηση IMDb: %s..."
+
+#, python-format
+msgid "Re-Query IMDb: %s..."
+msgstr "Επαναζήτηση IMDb: %s..."
+
+msgid "Release Date:"
+msgstr "Ημερομηνία Κυκλοφορίας:"
+
+msgid "Runtime:"
+msgstr "Χρονική διάρκεια:"
+
+msgid "Save current Details as .html for offline use"
+msgstr "Αποθήκευση τρεχουσών Πληροφοριών ως .html για χρήση εκτός σύνδεσης"
+
+msgid "Save current Details as .txt"
+msgstr "Αποθήκευση τρεχουσών Πληροφοριών ως .txt"
+
+msgid "Save current Poster and Details as .txt"
+msgstr "Αποθήκευση τρέχοντος Πόστερ και Πληροφοριών ως .txt"
+
+msgid "Search Trailer"
+msgstr "Αναζήτηση Τρέιλερ"
+
+#, fuzzy
+msgid "Search for details from the Internet Movie Database"
+msgstr "Αναζήτηση λεπτομερειών από τη Διαδικτυακή Βάση Δεδομένων Ταινιών"
+
+#, fuzzy
+msgid "Settings for Internet Movie Database searches"
+msgstr "Η Διαδικτυακή Βάση Δεδομένων Ταινιών"
+
+msgid "Setup"
+msgstr "Εγκατάσταση"
+
+msgid "Show episode and year information for cast when available. Takes effect after the next fetch of show details."
+msgstr ""
+
+msgid "Show episode and year information in cast list"
+msgstr ""
+
+msgid "Show full movie or series name in title menu"
+msgstr ""
+
+msgid "Show in movie list"
+msgstr ""
+
+msgid "Show list of matched movies an series"
+msgstr ""
+
+msgid "Show movie and series basic details"
+msgstr ""
+
+msgid "Show movie and series extra details"
+msgstr ""
+
+#, fuzzy
+msgid "Show search in plugin browser"
 msgstr "Εμφάνιση στον πλοηγό προσθέτων"
 
-#: plugin.py:873
-msgid ""
-"Enable this to be able to access the IMDb from within the plugin browser."
-msgstr ""
-"Η ενεργοποίηση αυτής της επιλογής δίνει πρόσβαση στην Αναζήτηση EPG μέσα από "
-"τον πλοηγό προσθέτων."
+#, fuzzy
+msgid "Show setup in plugin browser"
+msgstr "Εμφάνιση στον πλοηγό προσθέτων"
 
-#: plugin.py:874
+msgid "Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name."
+msgstr ""
+
+msgid "The Internet Movie Database"
+msgstr "Η Διαδικτυακή Βάση Δεδομένων Ταινιών"
+
+msgid "This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas."
+msgstr "Αυτή η επιλογή επιτρέπει την προσθήκη λέξεων/φράσεων προς αγνόηση στην αναζήτηση στο IMDb. παρακαλώ διαχωρίστε με κόμμα"
+
+msgid "Title Menu"
+msgstr "Μενού Τίτλου"
+
+msgid "Unknown category"
+msgstr ""
+
+msgid "User Rating"
+msgstr "Βαθμολογία Χρηστών"
+
 msgid "Words / phrases to ignore "
 msgstr "Λέξεις / φράσεις προς αγνόηση "
 
-#: plugin.py:874
-msgid ""
-"This option allows you add words/phrases for IMDb to ignore when searching. "
-"Please separate the words/phrases with commas."
-msgstr ""
-"Αυτή η επιλογή επιτρέπει την προσθήκη λέξεων/φράσεων προς αγνόηση στην "
-"αναζήτηση στο IMDb. παρακαλώ διαχωρίστε με κόμμα"
-
-#: plugin.py:954 plugin.py:976 plugin.py:979
-msgid "IMDb Details"
-msgstr "Λεπτομέρειες IMDb"
-
-#: plugin.py:976 plugin.py:980
-msgid "Query details from the Internet Movie Database"
-msgstr "Αναζήτηση λεπτομερειών από τη Διαδικτυακή Βάση Δεδομένων Ταινιών"
-
-#~ msgid "Query IMDb: %s..."
-#~ msgstr "Αναζήτηση IMDb: %s..."
+msgid "no user rating yet"
+msgstr "χωρίς βαθμολογία χρήστη ακόμα"

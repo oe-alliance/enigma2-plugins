@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Podcast plugin Turkish locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: 2009-06-06 23:53+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -13,14 +13,7 @@ msgstr ""
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/"
-"enigma2/python/Plugins/Extensions/Podcast\n"
-
-msgid " (Audio)"
-msgstr " (Ses)"
-
-msgid " (Video)"
-msgstr " (Video)"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast\n"
 
 msgid "Buffer device:"
 msgstr "Tampon aygıtı:"
@@ -38,29 +31,21 @@ msgstr "Bu film silmek istiyor musunuz?"
 msgid "Downloading movie: %s"
 msgstr "%s filmi indiriliyor!"
 
-msgid "Error getting categories"
-msgstr "Kategoriler getirilirken hata oluştu"
-
-msgid "Error getting episodes"
-msgstr "Bölümler getirilirken hata oluştu"
-
-msgid "Error getting genres"
-msgstr "Türler getirilirken hata oluştu"
-
 msgid "Error getting movies"
 msgstr "Filmler getirilirken hata oluştu"
 
-msgid "Error getting podcast url"
-msgstr "Podcast adresi getirilirken hata oluştu"
+msgid "Feedly OPML"
+msgstr ""
 
-msgid "Error getting podcasts"
-msgstr "Podcastler getirilirken hata oluştu"
-
-msgid "Error getting rss feed"
-msgstr "RSS beslemesi getirilirken hata oluştu"
+msgid "Help"
+msgstr ""
 
 msgid "Length"
 msgstr "Boyut"
+
+#, fuzzy
+msgid "No Feedly configuration"
+msgstr "ayarlar"
 
 msgid "Podcast"
 msgstr "Podcast"
@@ -91,12 +76,3 @@ msgstr "xml'den al"
 
 msgid "keep on device"
 msgstr "cihazda tut"
-
-msgid "podcast.com"
-msgstr "podcast.com"
-
-msgid "podcast.de"
-msgstr "podcast.de"
-
-#~ msgid "Date"
-#~ msgstr "Tarih"

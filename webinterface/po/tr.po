@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 Webinterface locale tr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-20 16:50+0100\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: 2012-12-30 13:44+0100\n"
 "Last-Translator: Ismail Demir <ismail.demir@gmx.at>\n"
 "Language-Team: Ismail Demir <ismail.demir@gmx.at>\n"
@@ -14,1228 +14,967 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/plugin.py:516
-msgid "Webinterface"
-msgstr "Web arayüzü"
-
-#: src/plugin.py:516
-#: src/plugin.py:519
-msgid "Configuration for the Webinterface"
-msgstr "Web arayüzünü yapılandırın"
-
-#: src/WebIfConfig.py:34
-msgid "Cancel"
-msgstr "Vazgeç"
-
-#: src/WebIfConfig.py:35
-msgid "OK"
-msgstr "Tamam"
-
-#: src/WebIfConfig.py:60
-msgid "Start Webinterface"
-msgstr "Web arayüzünü başlat"
-
-#: src/WebIfConfig.py:61
-msgid "Show Setup in Extensions menu"
-msgstr ""
-
-#: src/WebIfConfig.py:62
-msgid "Enable /media"
-msgstr "/media yönetimine izin ver"
-
-#: src/WebIfConfig.py:63
-msgid "Allow zapping via Webinterface"
-msgstr "Web arayüzünden kanal değişimine izin ver"
-
-#: src/WebIfConfig.py:64
-msgid "Autowrite timer"
-msgstr "Zamanlayıcı otomatik yazma"
-
-#: src/WebIfConfig.py:65
-msgid "Load movie-length"
-msgstr "Kaydedilmiş dosyalarda süreyi göster"
-
-#: src/WebIfConfig.py:66
-msgid "Enable HTTP Access"
-msgstr ""
-
-#: src/WebIfConfig.py:71
-msgid "HTTP Port"
-msgstr "HTTP Portu"
-
-#: src/WebIfConfig.py:72
-msgid "Enable HTTP Authentication"
-msgstr ""
-
-#: src/WebIfConfig.py:77
-msgid "Enable HTTPS Access"
-msgstr ""
-
-#: src/WebIfConfig.py:81
-msgid "HTTPS Port"
-msgstr ""
-
-#: src/WebIfConfig.py:82
-msgid "Enable HTTPS Authentication"
-msgstr ""
-
-#: src/WebIfConfig.py:88
-msgid "Enable Streaming Authentication"
-msgstr ""
-
-#: src/WebIfConfig.py:94
-msgid "Webinterface: Main Setup"
-msgstr "Web arayüzü: Ana kurulum"
-
-#: src/WebComponents/Converter/HddInfo.py:32
-msgid "N/A"
-msgstr "Kullanılamaz"
-
-#: src/WebComponents/Sources/Strings.py:13
-msgid "TeleVision"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:14
-msgid "TV"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:15
-msgid "Radio"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:16
-msgid "Movies"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:17
-msgid "Timer"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:18
-msgid "Timers"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:19
-msgid "BoxControl"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:20
-msgid "Extras"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:21
-msgid "WebTV"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:22
-msgid "Volume"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:23
-msgid "EPG-Search"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:24
-msgid "Search EPG"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:25
-msgid "Clear search"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:26
-msgid "Bouquets"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:27
-msgid "No Bouquets to Display"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:28
-msgid "Please select any bouquet"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:29
-msgid "Providers"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:30
-msgid "Satellites"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:31
-msgid "All"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:32
-msgid "Tag Filter"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:33
-msgid "All Timers"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:34
-msgid "Create Timer"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:35
-msgid "Cleanup"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:36
-msgid "Cleans up the list of timers by removing e.g. finished timers"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:37
-msgid "No Timer Available!"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:38
-#: src/WebComponents/Sources/Strings.py:108
-msgid "Edit Timer"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:39
-msgid "Enable"
-msgstr "Aç"
-
-#: src/WebComponents/Sources/Strings.py:40
-msgid "Activate"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:41
-msgid "Deactivate"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:42
-#, fuzzy
-msgid "Disable"
-msgstr "Devre dışı"
-
-#: src/WebComponents/Sources/Strings.py:43
-msgid "Delete"
-msgstr "Sil"
-
-#: src/WebComponents/Sources/Strings.py:44
-msgid "Delete Timer"
-msgstr "Zamanlayıcıyı Sil"
-
-#: src/WebComponents/Sources/Strings.py:45
-msgid "Legend"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:46
-msgid "Waiting"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:47
-#: src/WebComponents/Sources/Strings.py:85
-msgid "Error"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:48
-msgid "Running"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:49
-msgid "Finished"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:50
-msgid "Action"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:51
-msgid "Record"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:52
-msgid "Zap"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:53
-msgid "Note: For recurring events dates are not mandatory."
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:54
-msgid "Note: For one-time events the days don't have to be specified."
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:55
-msgid "Begins"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:56
-msgid "Ends"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:57
-msgid "Days"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:58
-msgid "Channel"
-msgstr "Kanal"
-
-#: src/WebComponents/Sources/Strings.py:59
-msgid "Name"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:60
-msgid "Description"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:61
-msgid "Location"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:62
-msgid "Tags"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:63
-msgid "After event"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:64
-msgid "Do Nothing"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:65
-msgid "of"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:66
-msgid "Standby"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:67
-msgid "Shutdown"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:68
-msgid "Auto"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:69
-msgid "Save"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:70
-msgid "Power Control"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:71
-#: src/WebComponents/Sources/Strings.py:87
-msgid "Send Message"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:72
-msgid "WebRemote"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:73
-msgid "Screenshot (All)"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:74
-msgid "Screenshot (Video)"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:75
-msgid "Screenshot (OSD)"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:76
-msgid "Toggle Standby"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:77
-msgid "Deepstandby"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:78
-msgid "Reboot"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:79
-msgid "Restart enigma2"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:80
-msgid "Message"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:81
-msgid "Timeout"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:82
-msgid "Type"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:83
-msgid "Info"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:84
-msgid "Warning"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:86
-msgid "Send"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:88
-msgid "Mediaplayer"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:89
-msgid "Device Info"
-msgstr "Cihaz bilgileri"
-
-#: src/WebComponents/Sources/Strings.py:90
-msgid "Settings"
-msgstr "Ayarlar"
-
-#: src/WebComponents/Sources/Strings.py:91
-msgid "Tools"
-msgstr "Araçlar"
-
-#: src/WebComponents/Sources/Strings.py:92
-msgid "About"
-msgstr "Hakkında"
-
-#: src/WebComponents/Sources/Strings.py:93
-msgid "Click to show/hide extended description"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:94
-msgid "Show EPG for"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:95
-msgid "Stream Channel"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:96
-msgid "Stream"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:97
-msgid "Instant Record"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:98
-msgid "Record current event"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:99
-msgid "Start infinite recording"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:100
-msgid "Open Signal Panel"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:101
-msgid "Zap to"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:102
-msgid "Open Multi-EPG for"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:103
-msgid "Load Bouquet"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:104
-msgid "Playlist for"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:105
-msgid "Lookup on IMDb.com"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:106
-msgid "Add Timer"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:107
-msgid "Add Zap Timer"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:109
-msgid "No Service to show"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:110
-msgid "please select a submenu on the left..."
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:111
-msgid "Filter Services"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:112
-msgid "Authors"
-msgstr "Yazarlar"
-
-#: src/WebComponents/Sources/Strings.py:113
-msgid "and many contributors"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:114
-msgid "JavaScript Libraries"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:115
-msgid "License"
-msgstr "Lisans"
-
-#: src/WebComponents/Sources/Strings.py:116
-msgid "Device & Versions"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:117
-msgid "Device Name"
-msgstr "Cihaz adı"
-
-#: src/WebComponents/Sources/Strings.py:118
-msgid "Enigma2 Version"
-msgstr "Enigma2 sürümü"
-
-#: src/WebComponents/Sources/Strings.py:119
-msgid "Image Version"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:120
-msgid "Frontprocessor Version"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:121
-#, fuzzy
-msgid "Webinterface Version"
-msgstr "Web arayüzü"
-
-#: src/WebComponents/Sources/Strings.py:122
-msgid "Tuners"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:123
-msgid "Harddisk"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:124
-msgid "Capacity"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:125
-msgid "Free Space"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:126
-msgid "Network Interface"
-msgstr "Ağ arayüzü"
-
-#: src/WebComponents/Sources/Strings.py:127
-msgid "Mac Address"
-msgstr "Mac Adresi"
-
-#: src/WebComponents/Sources/Strings.py:128
-msgid "DHCP enabled"
-msgstr "DHCP açık"
-
-#: src/WebComponents/Sources/Strings.py:129
-msgid "IP Address"
-msgstr "IP Adresi"
-
-#: src/WebComponents/Sources/Strings.py:130
-msgid "Netmask"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:131
-msgid "Gateway"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:132
-msgid "Video Size"
-msgstr "Ekran boyutu"
-
-#: src/WebComponents/Sources/Strings.py:133
-msgid "Widescreen"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:134
-msgid "Audio PID"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:135
-msgid "Video PID"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:136
-msgid "PCR PID"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:137
-msgid "PMT PID"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:138
-msgid "Text PID"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:139
-msgid "TSID"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:140
-msgid "ONID"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:141
-msgid "SID"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:142
-msgid "Nothing running..."
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:143
-msgid "Technical Information"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:144
-msgid "Nothing found..."
-msgstr "Birşey bulunamadı"
-
-#: src/WebComponents/Sources/Strings.py:145
-msgid "No movies to show..."
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:146
-msgid "Download"
-msgstr "Yükle"
-
-#: src/WebComponents/Sources/Strings.py:147
-msgid "Volume Down"
-msgstr "Ses kıs"
-
-#: src/WebComponents/Sources/Strings.py:148
-msgid "Down"
-msgstr "Aşağı"
-
-#: src/WebComponents/Sources/Strings.py:149
-msgid "Mute"
-msgstr "Sessiz"
-
-#: src/WebComponents/Sources/Strings.py:150
-msgid "Unmute"
-msgstr "Ses aç"
-
-#: src/WebComponents/Sources/Strings.py:151
-msgid "Volume Up"
-msgstr "Ses yükselt"
-
-#: src/WebComponents/Sources/Strings.py:152
-msgid "Up"
-msgstr "Yukarı"
-
-#: src/WebComponents/Sources/Strings.py:153
-msgid "Get a Screenshot"
-msgstr "Ekran görüntüsü al"
-
-#: src/WebComponents/Sources/Strings.py:154
-msgid "Grab Video & OSD"
-msgstr "Video & OSD görüntüsü al"
-
-#: src/WebComponents/Sources/Strings.py:155
-msgid "Send \\\"long\\\" keypress"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:156
-msgid "Refresh Screenshot"
-msgstr "Ekran görüntüsünü yenile"
-
-#: src/WebComponents/Sources/Strings.py:157
-msgid "WARNING: Cookies are required to store the settings!"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:158
-msgid "Enable Debug"
-msgstr "Hata düzeltme"
-
-#: src/WebComponents/Sources/Strings.py:159
-msgid "Update interval for current service (min. 10 sec)"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:160
-msgid "Update-Interval for EPG of the current bouquets (min. 60 sec)"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:161
-msgid "sec"
-msgstr "sn"
-
-#: src/WebComponents/Sources/Strings.py:162
-msgid "Previous"
-msgstr "Önceki"
-
-#: src/WebComponents/Sources/Strings.py:163
-msgid "Play"
-msgstr "Çal"
-
-#: src/WebComponents/Sources/Strings.py:164
-msgid "Next"
-msgstr "Sonra"
-
-#: src/WebComponents/Sources/Strings.py:165
-msgid "Stop"
-msgstr "Dur"
-
-#: src/WebComponents/Sources/Strings.py:166
-msgid "Filebrowser"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:167
-msgid "Playlist"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:168
-msgid "Save Playlist"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:169
-msgid "Close MediaPlayer"
-msgstr ""
-
-#: src/WebComponents/Sources/Strings.py:170
-msgid "No items to show..."
-msgstr ""
-
-#: src/WebComponents/Sources/LocationsAndTags.py:17
-msgid "one two three four unknown command"
-msgstr ""
-
-#: src/WebComponents/Sources/LocationsAndTags.py:69
-#, python-format
-msgid "Path %s can not be created"
-msgstr ""
-
-#: src/WebComponents/Sources/LocationsAndTags.py:71
-#, python-format
-msgid "Path %s does not exist"
-msgstr ""
-
-#: src/WebComponents/Sources/LocationsAndTags.py:74
-#, python-format
-msgid "Location '%s' is already existing"
-msgstr ""
-
-#: src/WebComponents/Sources/LocationsAndTags.py:78
-#, python-format
-msgid "Location '%s' added successfully"
-msgstr ""
-
-#: src/WebComponents/Sources/LocationsAndTags.py:83
-msgid "Missing value for parameter dirname"
-msgstr ""
-
-#: src/WebComponents/Sources/LocationsAndTags.py:92
-#, python-format
-msgid "Location '%s' removed successfully"
-msgstr ""
-
-#: src/WebComponents/Sources/LocationsAndTags.py:94
-#, python-format
-msgid "Location '%s' does not exist"
-msgstr ""
-
-#: src/WebComponents/Sources/Message.py:17
-#, python-format
-msgid "unknown command (%s)"
-msgstr ""
-
-#: src/WebComponents/Sources/Message.py:31
-msgid "No Messagetext given"
-msgstr ""
-
-#: src/WebComponents/Sources/Message.py:38
-#, python-format
-msgid "type %s is not a number"
-msgstr ""
-
-#: src/WebComponents/Sources/Message.py:50
-#, python-format
-msgid "Unsupported Messagetype %s"
-msgstr ""
-
-#: src/WebComponents/Sources/Message.py:62
-msgid "Message sent successfully!"
-msgstr ""
-
-#: src/WebComponents/Sources/ReadPluginList.py:14
-msgid "List of Plugins has been read"
-msgstr ""
-
-#: src/WebComponents/Sources/SleepTimer.py:16
-msgid "Obligatory parameters missing [cmd [set,get], time [0-999], action [standby,shutdown], enabled [True,False]"
-msgstr ""
-
-#: src/WebComponents/Sources/SleepTimer.py:34
-msgid "Sleeptimer is enabled"
-msgstr ""
-
-#: src/WebComponents/Sources/SleepTimer.py:40
-msgid "Sleeptimer is disabled"
-msgstr ""
-
-#: src/WebComponents/Sources/SleepTimer.py:52
-#, python-format
-msgid "ERROR: Obligatory parameter 'enabled' [True,False] has unspecified value '%s'"
-msgstr ""
-
-#: src/WebComponents/Sources/SleepTimer.py:60
-msgid "ERROR: Obligatory parameter 'time' [0-999] is missing"
-msgstr ""
-
-#: src/WebComponents/Sources/SleepTimer.py:86
-msgid "The sleep timer has been disabled."
-msgstr ""
-
-#: src/WebComponents/Sources/SleepTimer.py:87
-msgid "Sleeptimer has been disabled"
-msgstr ""
-
-#: src/WebComponents/Sources/SleepTimer.py:90
-#, python-format
-msgid "The sleep timer has been activated for %s minutes."
-msgstr ""
-
-#: src/WebComponents/Sources/SleepTimer.py:91
-#, python-format
-msgid "Sleeptimer set to %s minutes"
-msgstr ""
-
-#: src/WebComponents/Sources/SleepTimer.py:104
-#, python-format
-msgid "ERROR: Obligatory parameter 'cmd' [get,set] has unspecified value '%s'"
-msgstr ""
-
-#: src/WebComponents/Sources/SleepTimer.py:110
-msgid "ERROR: Cannot set SleepTimer while device is in Standby-Mode"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:64
-#, python-format
-msgid "Unknown function: '%s'"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:70
-msgid "List of Timers has been cleaned"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:79
-#: src/WebComponents/Sources/Timer.py:225
-#: src/WebComponents/Sources/Timer.py:398
-#: src/WebComponents/Sources/Movie.py:40
-#: src/WebComponents/Sources/Movie.py:67
-msgid "Missing Parameter: sRef"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:84
-#: src/WebComponents/Sources/Timer.py:231
-msgid "Missing Parameter: begin"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:89
-#: src/WebComponents/Sources/Timer.py:235
-msgid "Missing Parameter: end"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:95
-#, python-format
-msgid "The timer '%s' has been deleted successfully"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:97
-msgid "The timer has NOT been deleted"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:244
-#, python-format
-msgid "Illegal Parameter value for Parameter begin : '%s'"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:247
-msgid "Missing Parameter: name"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:251
-msgid "Missing Parameter: description"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:259
-#, python-format
-msgid "Illegal Parameter value for Parameter edit : '%s'"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:267
-#, python-format
-msgid "Event with id %d not found"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:305
-msgid "Missing Parameter: channelOld"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:310
-msgid "Missing Parameter: beginOld"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:314
-msgid "Missing Parameter: endOld"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:360
-#: src/WebComponents/Sources/Timer.py:386
-#: src/WebComponents/Sources/Timer.py:433
-#, python-format
-msgid "Conflicting Timer(s) detected! %s"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:365
-#, python-format
-msgid "Changing the timer for '%s' failed!"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:368
-#, python-format
-msgid "Could not find timer '%s' with given start and end time!"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:379
-#: src/WebComponents/Sources/Timer.py:426
-#, python-format
-msgid "Timer '%s' added"
-msgstr "Zamanlayıcı eklendi: %s"
-
-#: src/WebComponents/Sources/Timer.py:391
-#, python-format
-msgid "Could not add timer '%s'!"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:400
-msgid "Missing Parameter: eventid"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:418
-msgid "EventId not found"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:441
-msgid "TimerList has been saved"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:443
-msgid "TimerList has not been saved"
-msgstr ""
-
-#: src/WebComponents/Sources/ServiceListReload.py:21
-msgid "reloaded both"
-msgstr ""
-
-#: src/WebComponents/Sources/ServiceListReload.py:24
-msgid "reloaded lamedb"
-msgstr ""
-
-#: src/WebComponents/Sources/ServiceListReload.py:27
-msgid "reloaded bouquets"
-msgstr ""
-
-#: src/WebComponents/Sources/ServiceListReload.py:44
-#, python-format
-msgid "missing or wrong parameter mode [%i=both, %i=lamedb only, %i=userbouqets only]"
-msgstr ""
-
-#: src/WebComponents/Sources/Movie.py:22
-msgid "Missing or Wrong Argument"
-msgstr ""
-
-#: src/WebComponents/Sources/Movie.py:50
-#: src/WebComponents/Sources/Movie.py:91
-msgid "this recording"
-msgstr ""
-
-#: src/WebComponents/Sources/Movie.py:57
-#, python-format
-msgid "Could not delete Movie '%s'"
-msgstr ""
-
-#: src/WebComponents/Sources/Movie.py:59
-#, python-format
-msgid "Movie '%s' deleted"
-msgstr ""
-
-#: src/WebComponents/Sources/Movie.py:61
-#: src/WebComponents/Sources/Movie.py:154
-#, python-format
-msgid "Illegal Parameter Value: sRef - '%s'"
-msgstr ""
-
-#: src/WebComponents/Sources/Movie.py:69
-msgid "Missing Paramter: dirname"
-msgstr ""
-
-#: src/WebComponents/Sources/Movie.py:96
-msgid "Source and destination folders are the same."
-msgstr ""
-
-#: src/WebComponents/Sources/Movie.py:98
-#, python-format
-msgid "'%s' does not exist in source directory."
-msgstr ""
-
-#: src/WebComponents/Sources/Movie.py:100
-#, python-format
-msgid "'%s' already exists in destination directory '%s', set force=1 to move anyway."
-msgstr ""
-
-#: src/WebComponents/Sources/Movie.py:102
-#, python-format
-msgid "Destination dir '%s' does not exist."
-msgstr ""
-
-#: src/WebComponents/Sources/Movie.py:118
-#, python-format
-msgid "Movie '%s' has unknown suffix '%s'."
-msgstr ""
-
-#: src/WebComponents/Sources/Movie.py:147
-#, python-format
-msgid "Moving Movie '%s' to '%s' in background."
-msgstr ""
-
-#: src/WebComponents/Sources/Movie.py:151
-#, python-format
-msgid "Movie '%s' moved to '%s' without errors."
-msgstr ""
-
-#: src/WebComponents/Sources/Movie.py:153
 #, python-format
 msgid "%d error while moving Movie '%s' to '%s': %s"
 msgstr ""
 
-#: src/WebComponents/Sources/Movie.py:169
-msgid "undefined"
-msgstr "tanımlanmamış"
-
-#: src/WebComponents/Sources/Movie.py:178
-msgid "disabled"
-msgstr "devre dışı"
-
-#: src/WebComponents/Sources/Movie.py:210
-msgid "illegal call"
-msgstr ""
-
-#: src/WebComponents/Sources/MP.py:20
 #, python-format
-msgid "Unknown command (%s)"
+msgid "%s of %s min"
 msgstr ""
 
-#: src/WebComponents/Sources/MP.py:128
-#: src/WebComponents/Sources/MP.py:157
-#: src/WebComponents/Sources/MP.py:182
-#: src/WebComponents/Sources/MP.py:201
-#: src/WebComponents/Sources/MP.py:212
-#: src/WebComponents/Sources/MP.py:239
-msgid "Mediaplayer not installed"
-msgstr "Mediaplayer yüklü değil"
-
-#: src/WebComponents/Sources/MP.py:134
-msgid "Missing or invalid parameter file"
-msgstr ""
-
-#: src/WebComponents/Sources/MP.py:139
-#: src/WebComponents/Sources/MP.py:163
 #, python-format
-msgid "'%s' is neither a valid reference nor a valid file"
+msgid "'%s' already exists in destination directory '%s', set force=1 to move anyway."
 msgstr ""
 
-#: src/WebComponents/Sources/MP.py:149
 #, python-format
-msgid "Playback of '%s' started"
+msgid "'%s' does not exist in source directory."
 msgstr ""
 
-#: src/WebComponents/Sources/MP.py:151
 #, python-format
 msgid "'%s' has been added to playlist"
 msgstr ""
 
-#: src/WebComponents/Sources/MP.py:171
 #, python-format
-msgid "'%s' removed from playlist"
+msgid "'%s' is neither a valid reference nor a valid file"
 msgstr ""
 
-#: src/WebComponents/Sources/MP.py:174
 #, python-format
 msgid "'%s' not found in playlist"
 msgstr ""
 
-#: src/WebComponents/Sources/MP.py:190
 #, python-format
-msgid "Playlist '%s' does not exist"
+msgid "'%s' removed from playlist"
 msgstr ""
 
-#: src/WebComponents/Sources/MP.py:205
-#, python-format
-msgid "Playlist saved to '%s'"
+msgid "0"
 msgstr ""
 
-#: src/WebComponents/Sources/MP.py:214
-msgid "Mediaplayer was not active"
+msgid "1"
 msgstr ""
 
-#: src/WebComponents/Sources/MP.py:233
-#, python-format
-msgid "Unknown parameter %s"
-msgstr "Bilinmeyen parametre: %s"
-
-#: src/WebComponents/Sources/MP.py:234
-#, python-format
-msgid "Command '%s' executed"
+msgid "15"
 msgstr ""
 
-#: src/WebComponents/Sources/AudioTracks.py:11
-msgid "False"
-msgstr "Yanlış"
-
-#: src/WebComponents/Sources/AudioTracks.py:37
-msgid "Success"
-msgstr "Başarılı"
-
-#: src/WebComponents/Sources/AudioTracks.py:50
-msgid "AC3 Downmix enabled"
+msgid "2"
 msgstr ""
 
-#: src/WebComponents/Sources/AudioTracks.py:50
+msgid "3"
+msgstr ""
+
 msgid "AC3 Downmix disabled"
 msgstr ""
 
-#: src/WebComponents/Sources/AudioTracks.py:53
-msgid "This device does not support AC3 Downmix"
+msgid "AC3 Downmix enabled"
 msgstr ""
 
-#: src/WebComponents/Sources/Volume.py:17
-msgid "State"
+msgid "About"
+msgstr "Hakkında"
+
+msgid "Action"
 msgstr ""
 
-#: src/WebComponents/Sources/Volume.py:20
-#: src/WebComponents/Sources/Volume.py:23
-msgid "Volume changed"
-msgstr "Ses değişti"
-
-#: src/WebComponents/Sources/Volume.py:26
-msgid "Mute toggled"
-msgstr "Sessiz"
-
-#: src/WebComponents/Sources/Volume.py:37
-#, python-format
-msgid "Volume set to %i"
+msgid "Activate"
 msgstr ""
 
-#: src/WebComponents/Sources/Volume.py:39
-#, python-format
-msgid "Wrong parameter format 'set=%s'. Use set=set15"
-msgstr ""
-
-#: src/WebComponents/Sources/Volume.py:41
-#, python-format
-msgid "Unknown Volume command %s"
-msgstr ""
-
-#: src/WebComponents/Sources/TPMChallenge.py:29
-msgid "LEVEL2 and LEVEL3 Certifcates (Base64-encoded)"
-msgstr ""
-
-#: src/WebComponents/Sources/TPMChallenge.py:37
-msgid "Challenge executed, please verify the result!"
-msgstr ""
-
-#: src/WebComponents/Sources/TPMChallenge.py:39
-#, python-format
-msgid "Obligatory parameter \"random\" for cmd=\"%s\" missing"
-msgstr ""
-
-#: src/WebComponents/Sources/TPMChallenge.py:41
-#, python-format
-msgid "Unknown for parameter \"cmd\" [%s|%s]"
-msgstr ""
-
-#: src/WebComponents/Sources/SwitchService.py:12
-msgid "Obligatory parameter sRef is missing"
-msgstr ""
-
-#: src/WebComponents/Sources/SwitchService.py:68
 #, python-format
 msgid "Active service is now '%s'"
 msgstr ""
 
-#: src/WebComponents/Sources/SwitchService.py:70
-msgid "Obligatory parameter 'sRef' is missing"
+#, python-format
+msgid "Add %s to playlist"
 msgstr ""
 
-#: src/WebComponents/Sources/SwitchService.py:72
+msgid "Add Timer"
+msgstr ""
+
+msgid "Add Zap Timer"
+msgstr ""
+
+msgid "Add/Save"
+msgstr ""
+
+msgid "After event"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "All Timers"
+msgstr ""
+
+msgid "Allow zapping via Webinterface"
+msgstr "Web arayüzünden kanal değişimine izin ver"
+
+msgid "Audio PID"
+msgstr ""
+
+msgid "Authors"
+msgstr "Yazarlar"
+
+msgid "Auto"
+msgstr ""
+
+msgid "Autowrite timer"
+msgstr "Zamanlayıcı otomatik yazma"
+
+msgid "Begins"
+msgstr ""
+
+msgid "Bouquets"
+msgstr ""
+
+msgid "BoxControl"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Vazgeç"
+
 msgid "Cannot zap while device is in Standby"
 msgstr ""
 
-#: src/WebComponents/Sources/SwitchService.py:74
-msgid "Zapping is disabled in WebInterface Configuration"
+msgid "Capacity"
 msgstr ""
 
-#: src/WebComponents/Sources/RemoteControl.py:22
+msgid "Challenge executed, please verify the result!"
+msgstr ""
+
+#, python-format
+msgid "Change to %s"
+msgstr ""
+
+#, python-format
+msgid "Changing the timer for '%s' failed!"
+msgstr ""
+
+msgid "Channel"
+msgstr "Kanal"
+
+msgid "Cleans up the list of timers by removing e.g. finished timers"
+msgstr ""
+
+msgid "Cleanup"
+msgstr ""
+
+msgid "Clear search"
+msgstr ""
+
+msgid "Click to show/hide extended description"
+msgstr ""
+
+msgid "Close MediaPlayer"
+msgstr ""
+
+#, python-format
+msgid "Command '%s' executed"
+msgstr ""
+
+msgid "Configuration for the Webinterface"
+msgstr "Web arayüzünü yapılandırın"
+
+#, python-format
+msgid "Conflicting Timer(s) detected! %s"
+msgstr ""
+
+#, python-format
+msgid "Could not add timer '%s'!"
+msgstr ""
+
+#, python-format
+msgid "Could not delete Movie '%s'"
+msgstr ""
+
+#, python-format
+msgid "Could not find timer '%s' with given start and end time!"
+msgstr ""
+
+msgid "Create Timer"
+msgstr ""
+
+msgid "DHCP enabled"
+msgstr "DHCP açık"
+
+msgid "Days"
+msgstr ""
+
+msgid "Deactivate"
+msgstr ""
+
+msgid "Deepstandby"
+msgstr ""
+
+msgid "Delete"
+msgstr "Sil"
+
+#, fuzzy, python-format
+msgid "Delete %s"
+msgstr "Sil"
+
+msgid "Delete Timer"
+msgstr "Zamanlayıcıyı Sil"
+
+msgid "Description"
+msgstr ""
+
+#, python-format
+msgid "Destination dir '%s' does not exist."
+msgstr ""
+
+msgid "Device & Versions"
+msgstr ""
+
+msgid "Device Info"
+msgstr "Cihaz bilgileri"
+
+msgid "Device Name"
+msgstr "Cihaz adı"
+
+#, fuzzy
+msgid "Disable"
+msgstr "Devre dışı"
+
+msgid "Do Nothing"
+msgstr ""
+
+msgid "Down"
+msgstr "Aşağı"
+
+#, fuzzy, python-format
+msgid "Downlad %s"
+msgstr "Yükle"
+
+msgid "Download"
+msgstr "Yükle"
+
+msgid "EPG-Search"
+msgstr ""
+
+msgid "ERROR: Cannot set SleepTimer while device is in Standby-Mode"
+msgstr ""
+
+#, python-format
+msgid "ERROR: Obligatory parameter 'cmd' [get,set] has unspecified value '%s'"
+msgstr ""
+
+#, python-format
+msgid "ERROR: Obligatory parameter 'enabled' [True,False] has unspecified value '%s'"
+msgstr ""
+
+msgid "ERROR: Obligatory parameter 'time' [0-999] is missing"
+msgstr ""
+
+msgid "Edit Timer"
+msgstr ""
+
+msgid "Enable"
+msgstr "Aç"
+
+msgid "Enable /media"
+msgstr "/media yönetimine izin ver"
+
+msgid "Enable Debug"
+msgstr "Hata düzeltme"
+
+msgid "Enable HTTP Access"
+msgstr ""
+
+msgid "Enable HTTP Authentication"
+msgstr ""
+
+msgid "Enable HTTPS Access"
+msgstr ""
+
+msgid "Enable HTTPS Authentication"
+msgstr ""
+
+msgid "Enable Streaming Authentication"
+msgstr ""
+
+msgid "Ends"
+msgstr ""
+
+msgid "Enigma2 Version"
+msgstr "Enigma2 sürümü"
+
+msgid "Error"
+msgstr ""
+
+msgid "EventId not found"
+msgstr ""
+
+msgid "Extras"
+msgstr ""
+
+msgid "False"
+msgstr "Yanlış"
+
+msgid "Filebrowser"
+msgstr ""
+
+msgid "Filter Services"
+msgstr ""
+
+msgid "Finished"
+msgstr ""
+
+msgid "Free Space"
+msgstr ""
+
+msgid "Frontprocessor Version"
+msgstr ""
+
+msgid "Gateway"
+msgstr ""
+
+msgid "Get a Screenshot"
+msgstr "Ekran görüntüsü al"
+
+msgid "Grab Video & OSD"
+msgstr "Video & OSD görüntüsü al"
+
+msgid "HTTP Port"
+msgstr "HTTP Portu"
+
+msgid "HTTPS Port"
+msgstr ""
+
+msgid "Harddisk"
+msgstr ""
+
+msgid "IP Address"
+msgstr "IP Adresi"
+
+msgid "IPv4-only Python/Twisted"
+msgstr ""
+
+msgid "IPv4-only kernel"
+msgstr ""
+
+#, fuzzy
+msgid "IPv6 address(es)"
+msgstr "IP Adresi"
+
+#, python-format
+msgid "Illegal Parameter Value: sRef - '%s'"
+msgstr ""
+
+#, python-format
+msgid "Illegal Parameter value for Parameter begin : '%s'"
+msgstr ""
+
+#, python-format
+msgid "Illegal Parameter value for Parameter eit : '%s'"
+msgstr ""
+
+msgid "Image Version"
+msgstr ""
+
+msgid "Info"
+msgstr ""
+
+msgid "Instant Record"
+msgstr ""
+
+msgid "JavaScript Libraries"
+msgstr ""
+
+msgid "LEVEL2 and LEVEL3 Certifcates (Base64-encoded)"
+msgstr ""
+
+msgid "Legend"
+msgstr ""
+
+msgid "License"
+msgstr "Lisans"
+
+msgid "List of Plugins has been read"
+msgstr ""
+
+msgid "List of Timers has been cleaned"
+msgstr ""
+
+msgid "Load Bouquet"
+msgstr ""
+
+msgid "Load movie-length"
+msgstr "Kaydedilmiş dosyalarda süreyi göster"
+
+msgid "Location"
+msgstr ""
+
+#, python-format
+msgid "Location '%s' added successfully"
+msgstr ""
+
+#, python-format
+msgid "Location '%s' does not exist"
+msgstr ""
+
+#, python-format
+msgid "Location '%s' is already existing"
+msgstr ""
+
+#, python-format
+msgid "Location '%s' removed successfully"
+msgstr ""
+
+msgid "Lookup on IMDb.com"
+msgstr ""
+
+msgid "Mac Address"
+msgstr "Mac Adresi"
+
+msgid "Mediaplayer"
+msgstr ""
+
+msgid "Mediaplayer not installed"
+msgstr "Mediaplayer yüklü değil"
+
+msgid "Mediaplayer was not active"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "Message sent successfully!"
+msgstr ""
+
+msgid "Missing Parameter: begin"
+msgstr ""
+
+msgid "Missing Parameter: beginOld"
+msgstr ""
+
+msgid "Missing Parameter: channelOld"
+msgstr ""
+
+msgid "Missing Parameter: description"
+msgstr ""
+
+msgid "Missing Parameter: end"
+msgstr ""
+
+msgid "Missing Parameter: endOld"
+msgstr ""
+
+msgid "Missing Parameter: eventid"
+msgstr ""
+
+msgid "Missing Parameter: name"
+msgstr ""
+
+msgid "Missing Parameter: sRef"
+msgstr ""
+
+msgid "Missing Paramter: dirname"
+msgstr ""
+
+msgid "Missing or Wrong Argument"
+msgstr ""
+
+msgid "Missing or invalid parameter file"
+msgstr ""
+
 msgid "Missing or wrong argument"
 msgstr ""
 
-#: src/WebComponents/Sources/RemoteControl.py:46
+msgid "Missing value for parameter dirname"
+msgstr ""
+
+#, python-format
+msgid "Movie '%s' deleted"
+msgstr ""
+
+#, python-format
+msgid "Movie '%s' has unknown suffix '%s'."
+msgstr ""
+
+#, python-format
+msgid "Movie '%s' moved to '%s' without errors."
+msgstr ""
+
+msgid "Movies"
+msgstr ""
+
+#, python-format
+msgid "Moving Movie '%s' to '%s' in background."
+msgstr ""
+
+msgid "Mute"
+msgstr "Sessiz"
+
+msgid "Mute toggled"
+msgstr "Sessiz"
+
+msgid "N/A"
+msgstr "Kullanılamaz"
+
+msgid "Name"
+msgstr ""
+
+msgid "Netmask"
+msgstr ""
+
+msgid "Network Interface"
+msgstr "Ağ arayüzü"
+
+msgid "Next"
+msgstr "Sonra"
+
+msgid "No Bouquets to Display"
+msgstr ""
+
+msgid "No Messagetext given"
+msgstr ""
+
+msgid "No Service to show"
+msgstr ""
+
+msgid "No Timer Available!"
+msgstr ""
+
+msgid "No items to show..."
+msgstr ""
+
+msgid "No movies to show..."
+msgstr ""
+
+msgid "Note: For one-time events the days don't have to be specified."
+msgstr ""
+
+msgid "Note: For recurring events dates are not mandatory."
+msgstr ""
+
+msgid "Nothing found..."
+msgstr "Birşey bulunamadı"
+
+msgid "Nothing running..."
+msgstr ""
+
+msgid "OK"
+msgstr "Tamam"
+
+msgid "ONID"
+msgstr ""
+
+#, python-format
+msgid "Obligatory parameter \"random\" for cmd=\"%s\" missing"
+msgstr ""
+
 msgid "Obligatory parameter 'command' is missing!"
 msgstr ""
 
-#: src/WebComponents/Sources/RemoteControl.py:52
-msgid "the command was not > 0"
+msgid "Obligatory parameter 'sRef' is missing"
 msgstr ""
 
-#: src/WebComponents/Sources/RemoteControl.py:85
+msgid "Obligatory parameter sRef is missing"
+msgstr ""
+
+msgid "Obligatory parameters missing [cmd [set,get], time [0-999], action [standby,shutdown], enabled [True,False]"
+msgstr ""
+
+#, python-format
+msgid "Open Multi-EPG for %s"
+msgstr ""
+
+msgid "Open Signal Panel"
+msgstr ""
+
+msgid "PCR PID"
+msgstr ""
+
+msgid "PMT PID"
+msgstr ""
+
+#, python-format
+msgid "Path %s can not be created"
+msgstr ""
+
+#, python-format
+msgid "Path %s does not exist"
+msgstr ""
+
+msgid "Play"
+msgstr "Çal"
+
+#, fuzzy, python-format
+msgid "Play %s"
+msgstr "Çal"
+
+#, python-format
+msgid "Playback of '%s' started"
+msgstr ""
+
+msgid "Playlist"
+msgstr ""
+
+#, python-format
+msgid "Playlist '%s' does not exist"
+msgstr ""
+
+#, python-format
+msgid "Playlist for %s"
+msgstr ""
+
+#, python-format
+msgid "Playlist saved to '%s'"
+msgstr ""
+
+msgid "Please select any bouquet"
+msgstr ""
+
+msgid "Power Control"
+msgstr ""
+
+msgid "Previous"
+msgstr "Önceki"
+
+msgid "Providers"
+msgstr ""
+
 #, python-format
 msgid "RC command '%s' has been issued"
 msgstr ""
 
-#~ msgid "Webinterface: List of configured Interfaces"
-#~ msgstr "Web arayüzü: Yapılandırılmış arayüz listesi"
+msgid "Radio"
+msgstr ""
 
-#~ msgid "SSL"
-#~ msgstr "SSL"
+msgid "Reboot"
+msgstr ""
 
-#~ msgid "Add"
-#~ msgstr "Ekle"
+msgid "Record"
+msgstr ""
 
-#~ msgid "yes"
-#~ msgstr "evet"
+msgid "Record current event"
+msgstr ""
 
-#~ msgid "no"
-#~ msgstr "hayır"
+msgid "Refresh Screenshot"
+msgstr "Ekran görüntüsünü yenile"
 
-#~ msgid "Webinterface: Edit Interface"
-#~ msgstr "Web arayüzü: Arayüzleri düzenle"
+#, python-format
+msgid "Remove %s from playlist"
+msgstr ""
 
-#~ msgid "Require Authorization"
-#~ msgstr "Oturum izni gerekli mi?"
+msgid "Restart enigma2"
+msgstr ""
 
-#~ msgid "SSL Encryption"
-#~ msgstr "SSL şifrelemesi"
+msgid "Running"
+msgstr ""
 
-#~ msgid "Really delete this Interface?"
-#~ msgstr "Bu arayüzü silmek istiyor musunuz?"
+msgid "SID"
+msgstr ""
+
+msgid "Satellites"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Save Playlist"
+msgstr ""
+
+msgid "Screenshot (All)"
+msgstr ""
+
+msgid "Screenshot (OSD)"
+msgstr ""
+
+msgid "Screenshot (Video)"
+msgstr ""
+
+msgid "Search EPG"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "Send Message"
+msgstr ""
+
+msgid "Send \\\"long\\\" keypress"
+msgstr ""
+
+msgid "Settings"
+msgstr "Ayarlar"
+
+#, python-format
+msgid "Show EPG for %s"
+msgstr ""
+
+msgid "Show Setup in Extensions menu"
+msgstr ""
+
+msgid "Shutdown"
+msgstr ""
+
+msgid "Simple Anti-Hijack Measures (may break clients)"
+msgstr ""
+
+msgid "Sleeptimer has been disabled"
+msgstr ""
+
+msgid "Sleeptimer is disabled"
+msgstr ""
+
+msgid "Sleeptimer is enabled"
+msgstr ""
+
+#, python-format
+msgid "Sleeptimer set to %s minutes"
+msgstr ""
+
+msgid "Source and destination folders are the same."
+msgstr ""
+
+msgid "Standby"
+msgstr ""
+
+msgid "Start Webinterface"
+msgstr "Web arayüzünü başlat"
+
+msgid "Start infinite recording"
+msgstr ""
+
+msgid "State"
+msgstr ""
+
+msgid "Stop"
+msgstr "Dur"
+
+msgid "Stream"
+msgstr ""
+
+#, python-format
+msgid "Stream %s"
+msgstr ""
+
+msgid "Success"
+msgstr "Başarılı"
+
+msgid "TSID"
+msgstr ""
+
+msgid "TV"
+msgstr ""
+
+msgid "Tag Filter"
+msgstr ""
+
+msgid "Tags"
+msgstr ""
+
+msgid "Technical Information"
+msgstr ""
+
+msgid "TeleVision"
+msgstr ""
+
+msgid "Text PID"
+msgstr ""
+
+#, python-format
+msgid "The sleep timer has been activated for %s minutes."
+msgstr ""
+
+msgid "The sleep timer has been disabled."
+msgstr ""
+
+#, python-format
+msgid "The timer '%s' has been deleted successfully"
+msgstr ""
+
+msgid "The timer has NOT been deleted"
+msgstr ""
+
+msgid "This device does not support AC3 Downmix"
+msgstr ""
+
+msgid "Timeout"
+msgstr ""
+
+msgid "Timer"
+msgstr ""
+
+#, python-format
+msgid "Timer '%s' added"
+msgstr "Zamanlayıcı eklendi: %s"
+
+msgid "TimerList has been saved"
+msgstr ""
+
+msgid "TimerList has not been saved"
+msgstr ""
+
+msgid "Timers"
+msgstr ""
+
+msgid "Toggle Standby"
+msgstr ""
+
+msgid "Token-based security (may break clients)"
+msgstr ""
+
+msgid "Tools"
+msgstr "Araçlar"
+
+msgid "Tuners"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+#, python-format
+msgid "Unknown Volume command %s"
+msgstr ""
+
+#, python-format
+msgid "Unknown command (%s)"
+msgstr ""
+
+#, python-format
+msgid "Unknown for parameter \"cmd\" [%s|%s]"
+msgstr ""
+
+#, python-format
+msgid "Unknown function: '%s'"
+msgstr ""
+
+#, python-format
+msgid "Unknown parameter %s"
+msgstr "Bilinmeyen parametre: %s"
+
+msgid "Unmute"
+msgstr "Ses aç"
+
+#, python-format
+msgid "Unsupported Messagetype %s"
+msgstr ""
+
+msgid "Up"
+msgstr "Yukarı"
+
+msgid "Update interval for current service (min. 10 sec)"
+msgstr ""
+
+msgid "Update-Interval for EPG of the current bouquets (min. 60 sec)"
+msgstr ""
+
+msgid "Video PID"
+msgstr ""
+
+msgid "Video Size"
+msgstr "Ekran boyutu"
+
+msgid "Volume"
+msgstr ""
+
+msgid "Volume Down"
+msgstr "Ses kıs"
+
+msgid "Volume Up"
+msgstr "Ses yükselt"
+
+msgid "Volume changed"
+msgstr "Ses değişti"
+
+#, python-format
+msgid "Volume set to %i"
+msgstr ""
+
+msgid "WARNING: Cookies are required to store the settings!"
+msgstr ""
+
+msgid "Waiting"
+msgstr ""
+
+msgid "Warning"
+msgstr ""
+
+msgid "WebRemote"
+msgstr ""
+
+msgid "WebTV"
+msgstr ""
+
+msgid "Webinterface"
+msgstr "Web arayüzü"
+
+#, fuzzy
+msgid "Webinterface Version"
+msgstr "Web arayüzü"
+
+msgid "Webinterface: Main Setup"
+msgstr "Web arayüzü: Ana kurulum"
+
+msgid "Widescreen"
+msgstr ""
+
+#, python-format
+msgid "Wrong parameter format 'set=%s'. Use set=set15"
+msgstr ""
+
+msgid "Zap"
+msgstr ""
+
+#, python-format
+msgid "Zap to %s"
+msgstr ""
+
+msgid "Zapping is disabled in WebInterface Configuration"
+msgstr ""
+
+msgid "and many contributors"
+msgstr ""
+
+msgid "disabled"
+msgstr "devre dışı"
+
+msgid "illegal call"
+msgstr ""
+
+#, python-format
+msgid "missing or wrong parameter mode [%i=both, %i=lamedb only, %i=userbouqets only, %i=transponders, %i=parentalcontrol white-/blacklist]"
+msgstr ""
+
+msgid "none/IPv4-only network"
+msgstr ""
+
+msgid "of"
+msgstr ""
+
+msgid "one two three four unknown command"
+msgstr ""
+
+msgid "please select a submenu on the left..."
+msgstr ""
+
+msgid "reloaded both"
+msgstr ""
+
+msgid "reloaded bouquets"
+msgstr ""
+
+msgid "reloaded lamedb"
+msgstr ""
+
+msgid "sec"
+msgstr "sn"
+
+msgid "submit-message"
+msgstr ""
+
+msgid "the command was not > 0"
+msgstr ""
+
+msgid "this recording"
+msgstr ""
+
+#, python-format
+msgid "type %s is not a number"
+msgstr ""
+
+msgid "undefined"
+msgstr "tanımlanmamış"
+
+#, python-format
+msgid "unknown command (%s)"
+msgstr ""

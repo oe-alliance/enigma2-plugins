@@ -173,12 +173,3 @@ msgstr "Prodleva před aktivací (v ms):"
 
 msgid "sets the Audio Delay (LipSync)"
 msgstr "nastaví prodlevu audia (LipSync)"
-
-#~ msgid "Save"
-#~ msgstr "Uložit"
-
-#~ msgid "Select channel audio"
-#~ msgstr "Vybrat audio stopu"
-
-#~ msgid "Switch audio"
-#~ msgstr "Přepnout audio"

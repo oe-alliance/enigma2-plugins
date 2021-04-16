@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PermanentClock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: 2008-11-26 18:24-0000\n"
 "Last-Translator: AliAbdul <aliabdul1978@hotmail.de>\n"
 "Language-Team: Nabil Hanna <nabil1978@web.de>\n"
@@ -14,8 +14,7 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/permanentclock/"
-"src\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/permanentclock/src\n"
 
 msgid "Activate permanent clock"
 msgstr "Aktiviere permanente Uhr"
@@ -23,23 +22,76 @@ msgstr "Aktiviere permanente Uhr"
 msgid "Change permanent clock position"
 msgstr "Position der permanenten Uhr ändern"
 
-msgid "Deactivate permanent clock"
-msgstr "Deaktiviere permanente Uhr"
-
-msgid "Show digital clock"
-msgstr "Wechsle auf digitale Uhr"
+#, fuzzy
+msgid "Choice color clock:"
+msgstr "Wechsle auf analoge Uhr"
 
 msgid "Color analog clock"
 msgstr "Farbe für Analoguhr"
 
-msgid "Show analog clock"
-msgstr "Wechsle auf analoge Uhr"
-
 msgid "Color digital clock"
 msgstr "Farbe für digitale Uhr"
+
+msgid "Deactivate permanent clock"
+msgstr "Deaktiviere permanente Uhr"
+
+msgid "Disable key 'long EXIT' show/hide"
+msgstr ""
+
+msgid "Enable key 'long EXIT' show/hide"
+msgstr ""
+
+msgid "PLi-transparent"
+msgstr ""
 
 msgid "Permanent Clock"
 msgstr "Permanente Uhr"
 
+#, fuzzy
+msgid "Permanent Clock Setup"
+msgstr "Permanente Uhr"
+
+msgid "Save"
+msgstr ""
+
+msgid "Set slider"
+msgstr ""
+
+msgid "Set slider step (1 - 20):"
+msgstr ""
+
+msgid "Show analog clock"
+msgstr "Wechsle auf analoge Uhr"
+
+msgid "Show digital clock"
+msgstr "Wechsle auf digitale Uhr"
+
 msgid "Shows the clock permanent on the screen"
 msgstr "Zeigt eine Uhr permanent auf dem Bildschirm"
+
+msgid "black-blue"
+msgstr ""
+
+msgid "black-white"
+msgstr ""
+
+msgid "black-yellow"
+msgstr ""
+
+msgid "blue"
+msgstr ""
+
+msgid "large white"
+msgstr ""
+
+msgid "large yellow"
+msgstr ""
+
+msgid "transparent"
+msgstr ""
+
+msgid "white"
+msgstr ""
+
+msgid "yellow"
+msgstr ""

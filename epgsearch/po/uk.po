@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-24 04:13+0200\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2019-06-03 10:31+0300\n"
 "Last-Translator: kvinto <badsystem@ukr.net>\n"
 "Language-Team: <sat-ukraine.info>\n"
@@ -14,14 +14,20 @@ msgstr ""
 "X-Generator: Poedit 2.2.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
+msgid "%e/%m, %H:%M"
+msgstr ""
+
+#. TRANSLATORS: EPGSearch title in EventInfo dialog (does not require further user interaction)
+#. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#, python-format
 msgid "%ssearch EPG"
 msgstr "%sпошук ЕПГ"
 
+#. TRANSLATORS: EPGSearch search from search history in EventInfo dialog (requires the user to select a history item to search for)
+#. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#, python-format
 msgid "%ssearch EPG from history..."
 msgstr "%sпошук ЕПГ в історії..."
-
-msgid "Add/remove/edit timer for highlighted event"
-msgstr "Додати/видалити/редагувати таймер для виділеної події"
 
 msgid "Add AutoTimer"
 msgstr "Додати АвтоТаймер"
@@ -38,6 +44,9 @@ msgstr "Додати переключення таймера для виділе
 msgid "Add an AutoTimer for highlighted event"
 msgstr "Додати АвтоТаймер для виділеної події"
 
+msgid "Add/remove/edit timer for highlighted event"
+msgstr "Додати/видалити/редагувати таймер для виділеної події"
+
 msgid "All bouquets"
 msgstr "Всі фаворити"
 
@@ -50,15 +59,16 @@ msgstr "Відміна"
 msgid "Channel Selection"
 msgstr "Вибір каналу"
 
-msgid "Close dialog"
-msgstr "Закрити діалогове вікно"
-
 msgid "Choose the encoding type for searches, helpful for foreign languages."
 msgstr "Виберіть тип кодування для пошуку, корисно для іноземних мов."
+
+msgid "Close dialog"
+msgstr "Закрити діалогове вікно"
 
 msgid "Control where to search in the EPG. When 'all bouquets' is set, all bouquets are searched, even if 'Enable multiple bouquets' is disabled."
 msgstr "Вказати де шукати в ЕПГ. Коли встановлено «всі фаворити», буде проведено пошук, навіть коли відключена функція «Дозволити декілька фаворитів»."
 
+#, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr "Could not read AutoTimer timer list: %s"
 
@@ -67,6 +77,19 @@ msgstr "Поточний фаворит"
 
 msgid "Current service"
 msgstr "Поточний канал"
+
+msgid "DVB-C"
+msgstr ""
+
+#, fuzzy
+msgid "DVB-C Cable services"
+msgstr "всі канали"
+
+msgid "DVB-T"
+msgstr ""
+
+msgid "DVB-T Terrestrial services"
+msgstr ""
 
 msgid "Default scope when asked"
 msgstr "Запит меж за замовчуванням"
@@ -101,11 +124,11 @@ msgstr "Вихід з ЕПГ-Пошуку"
 msgid "Filter results by source"
 msgstr "Фільтр результатів"
 
-msgid "IMDb Search"
-msgstr "IMDb пошук"
-
 msgid "IMDB search for highlighted event"
 msgstr "Пошук IMDB для виділеної події"
+
+msgid "IMDb Search"
+msgstr "IMDb пошук"
 
 msgid "Import from AutoTimer"
 msgstr "Імпортувати з АвтоТаймера"
@@ -116,19 +139,20 @@ msgstr "Імпортувати з ЕПГ"
 msgid "Import from Timer"
 msgstr "Імпортувати з таймерів"
 
-msgid "Include/exclude search results from this type of source"
-msgstr "Включити/виключити результати пошуку даного типу джерела"
-
-msgid "Include/exclude sources"
-msgstr "Включити/виключити джерела"
-
 msgid "Include or exclude results depending on their source (e.g. by satellite)"
 msgstr "Включити або виключити результати в залежності від їх джерела (наприклад, супутники)"
 
 msgid "Include results from"
 msgstr "Ввімкнути результати з"
 
-msgid "Is the search case-sensitive or case-insensitive"
+msgid "Include/exclude search results from this type of source"
+msgstr "Включити/виключити результати пошуку даного типу джерела"
+
+msgid "Include/exclude sources"
+msgstr "Включити/виключити джерела"
+
+#, fuzzy
+msgid "Is the search case-sensitive or case-insensitive?"
 msgstr "Вказати чи пошук має бути чутливим до регістру"
 
 msgid "Length of history"
@@ -160,6 +184,9 @@ msgstr "Кількість фільтрів для включення/виклю
 
 msgid "Number of inclusions/exclusions"
 msgstr "Кількість включень/виключень"
+
+msgid "OK"
+msgstr ""
 
 msgid "Open selected in IMDb"
 msgstr "Відкрити вибране в IMDb"
@@ -197,7 +224,8 @@ msgstr "Виберіть таймер для пошуку"
 msgid "Select text to search for"
 msgstr "Виберіть текст для пошуку"
 
-msgid "Set type of match used to compare program titles with the search string"
+#, fuzzy
+msgid "Set type of match used to compare program titles with the search string."
 msgstr "Встановити тип використання відповідності для порівняння назв програм з пошуковим рядком"
 
 msgid "Sets the default search scope when the user is asked."
@@ -242,14 +270,45 @@ msgstr "всі фаворити"
 msgid "all services"
 msgstr "всі канали"
 
+msgid "ask user"
+msgstr ""
+
+msgid "case-insensitive search"
+msgstr ""
+
+msgid "case-sensitive search"
+msgstr ""
+
 msgid "current bouquet"
 msgstr "вибраний фаворит"
+
+#, fuzzy
+msgid "current service"
+msgstr "Поточний канал"
+
+msgid "disabled"
+msgstr ""
+
+msgid "exact match"
+msgstr ""
+
+#, fuzzy
+msgid "exclude"
+msgstr "включати"
 
 msgid "include"
 msgstr "включати"
 
+msgid "partial match"
+msgstr ""
+
+#. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
 msgid "search EPG"
 msgstr "пошук ЕПГ"
 
+#. TRANSLATORS: EPGSearch search from search history in MovieList (requires the user to select a history item to search for)
 msgid "search EPG from history..."
 msgstr "пошук ЕПГ в історії..."
+
+msgid "title starts with"
+msgstr ""

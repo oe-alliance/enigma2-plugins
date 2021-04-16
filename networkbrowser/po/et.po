@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-25 18:59+0200\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2017-10-14 15:11+0300\n"
 "Last-Translator: rimas\n"
 "Language-Team: none\n"
@@ -18,115 +18,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.4\n"
 
-#: MountEdit.py:69
-msgid "Press OK to activate the settings."
-msgstr "Sätete jõustamiseks vajuta OK."
-
-#: MountEdit.py:70 MountManager.py:188 NetworkBrowser.py:600
-msgid "Cancel"
-msgstr "Tühista"
-
-#: MountEdit.py:71 MountManager.py:189
-msgid "Save"
-msgstr "Salvesta"
-
-#: MountEdit.py:90
-msgid "Mounts editor"
-msgstr "Haakepunktid"
-
-#: MountEdit.py:120
-msgid "AUTOFS (mount as needed)"
-msgstr "AUTOFS (haagi vajadusel)"
-
-#: MountEdit.py:121
-msgid "FSTAB (mount at boot)"
-msgstr "FSTAB (haagi alglaadimisel)"
-
-#: MountEdit.py:122
-msgid "Enigma2 (mount using enigma2)"
-msgstr "Enigma2 (haagi enigma2 abil)"
-
-#: MountEdit.py:123
-msgid "Enigma2 old format (mount using linux)"
-msgstr "Enigma2 vana vorming (haagi linuksi abil)"
-
-#: MountEdit.py:126
-msgid "CIFS share"
-msgstr "CIFS võrgujagu"
-
-#: MountEdit.py:127
-msgid "NFS share"
-msgstr "NFS võrgujagu"
-
-#: MountEdit.py:223
-msgid "Mount using"
-msgstr "Haagi kasutades"
-
-#: MountEdit.py:225
-msgid "Active"
-msgstr "Aktiivne"
-
-#: MountEdit.py:227
-msgid "Local share name"
-msgstr "Kohaliku võrgujao nimi"
-
-#: MountEdit.py:229
-msgid "Mount type"
-msgstr "Haakimise tüüp"
-
-#: MountEdit.py:231
-msgid "Server IP"
-msgstr "Serveri IP"
-
-#: MountEdit.py:233
-msgid "Server share"
-msgstr "Serveri võrgujagu"
-
-#: MountEdit.py:235
-msgid "Use as HDD replacement"
-msgstr "Kasuta kõvaketta asendajana"
-
-#: MountEdit.py:237
-msgid "Mount options"
-msgstr "Haakimise valikud"
-
-#: MountEdit.py:240 UserDialog.py:128
-msgid "Username"
-msgstr "Kasutajanimi"
-
-#: MountEdit.py:242 UserDialog.py:130
-msgid "Password"
-msgstr "Parool"
-
-#: MountEdit.py:267
-msgid "Enter share name:"
-msgstr "Sisesta võrgujao nimi:"
-
-#: MountEdit.py:269
-msgid "Enter share directory:"
-msgstr "Sisesta võrgujao kataloog:"
-
-#: MountEdit.py:271
-msgid "Enter options:"
-msgstr "Sisesta valikud:"
-
-#: MountEdit.py:273 UserDialog.py:139
-msgid "Enter username:"
-msgstr "Sisesta kasutajanimi:"
-
-#: MountEdit.py:275 UserDialog.py:141
-msgid "Enter password:"
-msgstr "Sisesta parool:"
-
-#: MountEdit.py:334
-msgid ""
-"You have changed the share name!\n"
-"Update existing entry and continue?\n"
-msgstr ""
-"Võrgujao nime muudeti!\n"
-"Kas uuendada olemasolevat ja jätkata?\n"
-
-#: MountEdit.py:336
 msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
@@ -134,124 +25,12 @@ msgstr ""
 "Sellise nimega haakepunkt on juba olemas!\n"
 "Kas uuendada olemasolev ja jätkata?\n"
 
-#: MountEdit.py:338
-msgid ""
-"Are you sure you want to save this network mount?\n"
-"\n"
-msgstr ""
-"Kas salvestada see võrgu haakepunkt?\n"
-"\n"
+msgid "AUTOFS (mount as needed)"
+msgstr "AUTOFS (haagi vajadusel)"
 
-#: MountEdit.py:364
-msgid "Please wait while updating your network mount..."
-msgstr "Võrgu haakepunkti uuendamine..."
+msgid "Active"
+msgstr "Aktiivne"
 
-#: MountEdit.py:376
-msgid "Your network mount has been updated."
-msgstr "Võrgu haakepunkt uuendati."
-
-#: MountEdit.py:402
-msgid "Please wait for activation of your network mount..."
-msgstr "Võrgu haakepunkti jõustamine..."
-
-#: MountEdit.py:415
-msgid "Your network mount has been activated."
-msgstr "Võrgu haakepunkt jõustati."
-
-#: MountManager.py:58 MountView.py:64 NetworkBrowser.py:116 UserDialog.py:91
-#: UserManager.py:50
-msgid "Close"
-msgstr "Sulge"
-
-#: MountManager.py:59
-msgid "Press OK to select."
-msgstr "Valimiseks vajuta OK."
-
-#: MountManager.py:87 plugin.py:101
-msgid "Mount Manager"
-msgstr "Haakepunktid"
-
-#: MountManager.py:99
-msgid "Add new network mount point"
-msgstr "Lisa uus võrgu haakepunkt"
-
-#: MountManager.py:99
-msgid "Add a new NFS or CIFS mount point to your Receiver."
-msgstr "Lisa vastuvõtjale uus NFS või CIFS haakepunkt."
-
-#: MountManager.py:100
-msgid "Mountpoints management"
-msgstr "Haakepunktid"
-
-#: MountManager.py:100
-msgid "View, edit or delete mountpoints on your Receiver."
-msgstr "Vaata, muuda või eemalda haakepunkte."
-
-#: MountManager.py:101
-msgid "User management"
-msgstr "Kasutajate haldamine"
-
-#: MountManager.py:101
-msgid "View, edit or delete usernames and passwords for your network."
-msgstr "Vaata, muuda või eemalda võrgu kasutajanimesi ja paroole."
-
-#: MountManager.py:102
-msgid "Change hostname"
-msgstr "Muuda masinanime"
-
-#: MountManager.py:102
-msgid "Change the hostname of your Receiver."
-msgstr "Muuda vastuvõtja masinanime."
-
-#: MountManager.py:103 MountManager.py:182
-msgid "Setup Mount Again"
-msgstr "Ajastatud haakimine"
-
-#: MountManager.py:103
-msgid "Schedule a auto remount of your network shares."
-msgstr "Ajasta võrgujagude automaatne haakimine."
-
-#: MountManager.py:139
-msgid "Enter new hostname for your Receiver"
-msgstr "Sisesta vastuvõtja masinanimi"
-
-#: MountManager.py:152
-msgid "Please wait while your network is restarting..."
-msgstr "Võrgu taaskäivitamine..."
-
-#: MountManager.py:165
-msgid "Finished restarting your network"
-msgstr "Võrk taaskäivitatud"
-
-#: MountManager.py:206 MountManager.py:214
-msgid "Schedule MountAgain"
-msgstr "Ajasta uuesti haakimine"
-
-#: MountManager.py:208
-msgid "Re-mount network shares every (in hours)"
-msgstr "Haagi võrgujaod uuesti iga (tund)"
-
-#: MountManager.py:245
-msgid "Really close without saving settings?"
-msgstr "Kas väljuda seadeid salvestamata?"
-
-#: MountView.py:49
-msgid "Mount Viewer"
-msgstr "Haakepunktid"
-
-#: MountView.py:60
-msgid ""
-"Mounted/\n"
-"Unmounted"
-msgstr ""
-"Haagitud/\n"
-"Haakimata"
-
-#: MountView.py:61
-msgid "Mount informations"
-msgstr "Haakepunkt"
-
-#: MountView.py:62
 msgid ""
 "Active/\n"
 "Inactive"
@@ -259,173 +38,287 @@ msgstr ""
 "Aktiivne/\n"
 "Passiivne"
 
-#: MountView.py:63
-msgid "Press OK to edit the settings."
-msgstr "Sätete muutmiseks vajuta OK."
+msgid "Add a new NFS or CIFS mount point to your Receiver."
+msgstr "Lisa vastuvõtjale uus NFS või CIFS haakepunkt."
 
-#: MountView.py:65
-msgid "Delete mount"
-msgstr "Kustuta haakepunkt"
+msgid "Add new network mount point"
+msgstr "Lisa uus võrgu haakepunkt"
 
-#: MountView.py:115
-msgid "IP:"
-msgstr "IP:"
-
-#: MountView.py:116
-msgid "Dir:"
-msgstr "Kat:"
-
-#: MountView.py:155
-msgid "Are you sure you want to remove your network mount ?"
-msgstr "Kas eemaldada võrgu haakepunkt?"
-
-#: MountView.py:166
-msgid "Please wait while removing your network mount..."
-msgstr "Võrgu haakepunkti eemaldamine..."
-
-#: MountView.py:190
-msgid "Your network mount has been removed."
-msgstr "Võrgu haakepunkt eemaldati."
-
-#: NetworkBrowser.py:117
-msgid "Mount manager"
-msgstr "Haakepunktid"
-
-#: NetworkBrowser.py:118
-msgid "Rescan"
-msgstr "Uus otsing"
-
-#: NetworkBrowser.py:119
-msgid "Expert"
-msgstr "Ekspert"
-
-#: NetworkBrowser.py:120
-msgid "Press OK to mount!"
-msgstr "Haakimiseks vajuta OK!"
-
-#: NetworkBrowser.py:181
-msgid "Browse network neighbourhood"
-msgstr "Sirvi võrgunaabrust"
-
-#: NetworkBrowser.py:216 NetworkBrowser.py:218
-msgid "Searching your network. Please wait..."
-msgstr "Võrguotsing. Oota..."
-
-#: NetworkBrowser.py:225 NetworkBrowser.py:227
-msgid "No network devices found!"
-msgstr "Võrgukaarti ei leitud!"
-
-#: NetworkBrowser.py:467
-msgid "Press OK to mount this share!"
-msgstr "Võrgujao haakimiseks vajuta OK!"
-
-#: NetworkBrowser.py:477 NetworkBrowser.py:478
-msgid "Press OK to collapse this host"
-msgstr "Selle masina kitsendamiseks vajuta OK"
-
-#: NetworkBrowser.py:480 NetworkBrowser.py:481
-msgid "Press OK to expand this host"
-msgstr "Selle masina laiendamiseks vajuta OK"
-
-#: NetworkBrowser.py:510
-msgid "Do you want to enter a username and password for this host?"
-msgstr "Kas määrata sellele masinale kasutajanimi ja parool?"
-
-#: NetworkBrowser.py:601
-msgid "Scan NFS share"
-msgstr "Otsi NFS võrgujagu"
-
-#: NetworkBrowser.py:602
-msgid "Scan range"
-msgstr "Otsingu vahemik"
-
-#: NetworkBrowser.py:617
-msgid "IP Address"
-msgstr "IP aadress"
-
-#: NetworkBrowser.py:632
-msgid "Enter IP to scan..."
-msgstr "Sisesta otsimiseks IP"
-
-#: plugin.py:35 plugin.py:100
-msgid "Network Browser"
-msgstr "Võrgu uurimine"
-
-#: plugin.py:42
-msgid "Mounting network shares..."
-msgstr "Võrgujagude haakimine..."
-
-#: plugin.py:51
 msgid "Adding schedule..."
 msgstr "Ajakava lisamine..."
 
-#: plugin.py:100
-msgid "Search for network shares"
-msgstr "Otsi võrgujagusi"
+msgid "Are you sure you want to remove your network mount ?"
+msgstr "Kas eemaldada võrgu haakepunkt?"
 
-#: plugin.py:100
-msgid "Search for network shares..."
-msgstr "Otsi võrgujagusi..."
+msgid ""
+"Are you sure you want to save this network mount?\n"
+"\n"
+msgstr ""
+"Kas salvestada see võrgu haakepunkt?\n"
+"\n"
 
-#: plugin.py:101
-msgid "Manage network shares"
-msgstr "Võrgujaod"
-
-#: plugin.py:101
-msgid "Manage your network shares..."
-msgstr "Võrgujaod..."
-
-#: plugin.py:102
-msgid "Mount Again"
-msgstr "Haagi uuesti"
-
-#: plugin.py:102
 msgid "Attempt to mount shares again"
 msgstr "Proovi võrgujaod uuesti haakida"
 
-#: plugin.py:102
-msgid "Mount again"
-msgstr "Haagi uuesti"
-
-#: plugin.py:102
 msgid "Attempt to recover lost mounts (in background)"
 msgstr "Proovi taastada kaotatud haakepunktid (taustal)"
 
-#: UserDialog.py:90
-msgid "Press OK to save settings."
-msgstr "Sätete salvestamiseks vajuta OK."
+msgid "Browse network neighbourhood"
+msgstr "Sirvi võrgunaabrust"
 
-#: UserDialog.py:94
-msgid "Enter user and password for host: "
-msgstr "Sisesta kasutajanimi ja parool masinale: "
+msgid "CIFS share"
+msgstr "CIFS võrgujagu"
 
-#: UserManager.py:51
-msgid "Press OK to edit selected settings."
-msgstr "Valitud sätete muutmiseks vajuta OK."
+msgid "Cancel"
+msgstr "Tühista"
 
-#: UserManager.py:52
+msgid "Change hostname"
+msgstr "Muuda masinanime"
+
+msgid "Change the hostname of your Receiver."
+msgstr "Muuda vastuvõtja masinanime."
+
+msgid "Close"
+msgstr "Sulge"
+
 msgid "Delete"
 msgstr "Kustuta"
 
-#: UserManager.py:60
+msgid "Delete mount"
+msgstr "Kustuta haakepunkt"
+
+msgid "Dir:"
+msgstr "Kat:"
+
+msgid "Do you want to enter a username and password for this host?"
+msgstr "Kas määrata sellele masinale kasutajanimi ja parool?"
+
+msgid "Enigma2 (mount using enigma2)"
+msgstr "Enigma2 (haagi enigma2 abil)"
+
+msgid "Enigma2 old format (mount using linux)"
+msgstr "Enigma2 vana vorming (haagi linuksi abil)"
+
+msgid "Enter IP to scan..."
+msgstr "Sisesta otsimiseks IP"
+
+msgid "Enter new hostname for your Receiver"
+msgstr "Sisesta vastuvõtja masinanimi"
+
+msgid "Enter options:"
+msgstr "Sisesta valikud:"
+
+msgid "Enter password:"
+msgstr "Sisesta parool:"
+
+msgid "Enter share directory:"
+msgstr "Sisesta võrgujao kataloog:"
+
+msgid "Enter share name:"
+msgstr "Sisesta võrgujao nimi:"
+
+msgid "Enter user and password for host: "
+msgstr "Sisesta kasutajanimi ja parool masinale: "
+
+msgid "Enter username:"
+msgstr "Sisesta kasutajanimi:"
+
+msgid "Expert"
+msgstr "Ekspert"
+
+msgid "FSTAB (mount at boot)"
+msgstr "FSTAB (haagi alglaadimisel)"
+
+msgid "Finished restarting your network"
+msgstr "Võrk taaskäivitatud"
+
+msgid "IP Address"
+msgstr "IP aadress"
+
+msgid "IP:"
+msgstr "IP:"
+
+msgid "Local share name"
+msgstr "Kohaliku võrgujao nimi"
+
+msgid "Manage network shares"
+msgstr "Võrgujaod"
+
+msgid "Manage your network shares..."
+msgstr "Võrgujaod..."
+
+msgid "Mount Again"
+msgstr "Haagi uuesti"
+
+msgid "Mount Manager"
+msgstr "Haakepunktid"
+
+msgid "Mount Viewer"
+msgstr "Haakepunktid"
+
+msgid "Mount again"
+msgstr "Haagi uuesti"
+
+msgid "Mount informations"
+msgstr "Haakepunkt"
+
+msgid "Mount manager"
+msgstr "Haakepunktid"
+
+msgid "Mount options"
+msgstr "Haakimise valikud"
+
+msgid "Mount type"
+msgstr "Haakimise tüüp"
+
+msgid "Mount using"
+msgstr "Haagi kasutades"
+
+msgid ""
+"Mounted/\n"
+"Unmounted"
+msgstr ""
+"Haagitud/\n"
+"Haakimata"
+
+msgid "Mounting network shares..."
+msgstr "Võrgujagude haakimine..."
+
+msgid "Mountpoints management"
+msgstr "Haakepunktid"
+
+msgid "Mounts editor"
+msgstr "Haakepunktid"
+
+msgid "NFS share"
+msgstr "NFS võrgujagu"
+
+msgid "Network Browser"
+msgstr "Võrgu uurimine"
+
+msgid "No network devices found!"
+msgstr "Võrgukaarti ei leitud!"
+
+msgid "Password"
+msgstr "Parool"
+
+msgid "Please wait for activation of your network mount..."
+msgstr "Võrgu haakepunkti jõustamine..."
+
+msgid "Please wait while removing your network mount..."
+msgstr "Võrgu haakepunkti eemaldamine..."
+
+msgid "Please wait while updating your network mount..."
+msgstr "Võrgu haakepunkti uuendamine..."
+
+msgid "Please wait while your network is restarting..."
+msgstr "Võrgu taaskäivitamine..."
+
+msgid "Press OK to activate the settings."
+msgstr "Sätete jõustamiseks vajuta OK."
+
+msgid "Press OK to collapse this host"
+msgstr "Selle masina kitsendamiseks vajuta OK"
+
+msgid "Press OK to edit selected settings."
+msgstr "Valitud sätete muutmiseks vajuta OK."
+
+msgid "Press OK to edit the settings."
+msgstr "Sätete muutmiseks vajuta OK."
+
+msgid "Press OK to expand this host"
+msgstr "Selle masina laiendamiseks vajuta OK"
+
+msgid "Press OK to mount this share!"
+msgstr "Võrgujao haakimiseks vajuta OK!"
+
+msgid "Press OK to mount!"
+msgstr "Haakimiseks vajuta OK!"
+
+msgid "Press OK to save settings."
+msgstr "Sätete salvestamiseks vajuta OK."
+
+msgid "Press OK to select."
+msgstr "Valimiseks vajuta OK."
+
+msgid "Re-mount network shares every (in hours)"
+msgstr "Haagi võrgujaod uuesti iga (tund)"
+
+msgid "Really close without saving settings?"
+msgstr "Kas väljuda seadeid salvestamata?"
+
+msgid "Rescan"
+msgstr "Uus otsing"
+
+msgid "Save"
+msgstr "Salvesta"
+
+msgid "Scan NFS share"
+msgstr "Otsi NFS võrgujagu"
+
+msgid "Scan range"
+msgstr "Otsingu vahemik"
+
+msgid "Schedule MountAgain"
+msgstr "Ajasta uuesti haakimine"
+
+msgid "Schedule a auto remount of your network shares."
+msgstr "Ajasta võrgujagude automaatne haakimine."
+
+msgid "Search for network shares"
+msgstr "Otsi võrgujagusi"
+
+msgid "Search for network shares..."
+msgstr "Otsi võrgujagusi..."
+
+msgid "Searching your network. Please wait..."
+msgstr "Võrguotsing. Oota..."
+
+msgid "Server IP"
+msgstr "Serveri IP"
+
+msgid "Server share"
+msgstr "Serveri võrgujagu"
+
+msgid "Setup Mount Again"
+msgstr "Ajastatud haakimine"
+
+msgid "Use as HDD replacement"
+msgstr "Kasuta kõvaketta asendajana"
+
+msgid "User management"
+msgstr "Kasutajate haldamine"
+
 msgid "Usermanager"
 msgstr "Kasutajate haldamine"
 
-#~ msgid ""
-#~ "A mount entry with this name already exists!\n"
-#~ "and is not this share folder, please use a different name.\n"
-#~ msgstr ""
-#~ "Selle nimega haakepunkt on juba olemas!\n"
-#~ "ja ei ole see võrgujagu. Kasuta muud nime.\n"
+msgid "Username"
+msgstr "Kasutajanimi"
 
-#~ msgid "FSTAB (mount using linux)"
-#~ msgstr "FSTAB (haagi linuksi abil)"
+msgid "View, edit or delete mountpoints on your Receiver."
+msgstr "Vaata, muuda või eemalda haakepunkte."
 
-#~ msgid "Mounts management"
-#~ msgstr "Haakepunktid"
+msgid "View, edit or delete usernames and passwords for your network."
+msgstr "Vaata, muuda või eemalda võrgu kasutajanimesi ja paroole."
 
-#~ msgid "Do you want to enter a username and password for this host?\n"
-#~ msgstr "Kas sisestad selle masina kasutajanime ja salasõna?\n"
+msgid ""
+"You have changed the share name!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+"Võrgujao nime muudeti!\n"
+"Kas uuendada olemasolevat ja jätkata?\n"
 
-#~ msgid "Enigma2 (mount using enigma2"
-#~ msgstr "Enigma2 (haagi kasutades enigma2"
+#, python-format
+msgid ""
+"Your network interface %s is not properly configured, so a network scan cannot be done.\n"
+"Please configure the interface and try again."
+msgstr ""
+
+msgid "Your network mount has been activated."
+msgstr "Võrgu haakepunkt jõustati."
+
+msgid "Your network mount has been removed."
+msgstr "Võrgu haakepunkt eemaldati."
+
+msgid "Your network mount has been updated."
+msgstr "Võrgu haakepunkt uuendati."

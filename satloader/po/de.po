@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugin-extensions-satloader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-01 23:02+0100\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: 2013-01-01 23:02+0100\n"
 "Last-Translator: Ismail Demir <ismail.demir@gmx.at>\n"
 "Language-Team: Ismail Demir <ismail.demir@gmx.at>\n"
@@ -15,153 +15,100 @@ msgstr ""
 "X-Poedit-Basepath: /home/ismail/enigma2-plugins/satloader/src\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: plugin.py:54
-#: plugin.py:164
-#: plugin.py:282
-#: plugin.py:404
-msgid "Cancel"
-msgstr "Abbrechen"
+msgid "About"
+msgstr "Über"
 
-#: plugin.py:55
-msgid "Install"
-msgstr "Installiere"
-
-#: plugin.py:56
 msgid "Bouquet"
 msgstr "Bouquet"
 
-#: plugin.py:57
-msgid "Multi Sat"
-msgstr "Multi Sat"
+msgid "Cancel"
+msgstr "Abbrechen"
 
-#: plugin.py:77
-msgid "Press ok or green button to install satellites.xml"
-msgstr "Drücken Sie OK- oder grüne Taste, um die satellites.xml zu installieren"
+msgid "Do you want to restart the GUI now?"
+msgstr "Wollen Sie jetzt wirklich neu starten?"
 
-#: plugin.py:84
-#: plugin.py:177
-msgid "Please wait..."
-msgstr "Bitte warten..."
+msgid "Download:"
+msgstr "Download:"
 
-#: plugin.py:100
-#: plugin.py:101
-#: plugin.py:333
-#: plugin.py:334
+msgid "Downloading bouquets failed!"
+msgstr "Herunterladen der Bouquet's fehlgeschlagen!"
+
 msgid "Downloading satellites failed!"
 msgstr "Herunterladen der Satelliten fehlgeschlagen!"
 
-#: plugin.py:104
-msgid "satellites.xml is updated"
-msgstr "satellites.xml wurde aktualisiert"
+msgid "Downloading succesfull! Parsing ..."
+msgstr "Herunterladen erfolgreich! Analysiere"
 
-#: plugin.py:104
-#: plugin.py:199
-#: plugin.py:321
+msgid "Frequency:"
+msgstr "Frequenz:"
+
 msgid "GUI needs a restart to apply changes."
 msgstr ""
 "Das System muss neu gestartet werden,\n"
 "um die Änderungen übernehmen zu können."
 
-#: plugin.py:104
-#: plugin.py:199
-#: plugin.py:321
-msgid "Do you want to restart the GUI now?"
-msgstr "Wollen Sie jetzt wirklich neu starten?"
-
-#: plugin.py:105
-#: plugin.py:200
-#: plugin.py:322
-msgid "Restart GUI now?"
-msgstr "Benutzeroberfläche jetzt neu starten?"
-
-#: plugin.py:111
-#: plugin.py:239
-#: plugin.py:366
 msgid "GUI needs a restart."
 msgstr "Das System muss neu gestartet werden."
 
-#: plugin.py:119
-msgid "About"
-msgstr "Über"
+msgid "Install"
+msgstr "Installiere"
 
-#: plugin.py:165
-#: plugin.py:405
-msgid "Save"
-msgstr "Speichern"
+msgid "Multi Sat"
+msgstr "Multi Sat"
 
-#: plugin.py:199
-msgid "selected bouquets are installed"
-msgstr "ausgewählte Bouquet's"
-
-#: plugin.py:203
-msgid "Please select at least one bouquet"
-msgstr "Bitte wählen Sie mindestens einen Bouquet aus"
-
-#: plugin.py:206
-#: plugin.py:207
-msgid "Downloading bouquets failed!"
-msgstr "Herunterladen der Bouquet's fehlgeschlagen!"
-
-#: plugin.py:210
-#: plugin.py:337
-msgid "Downloading succesfull! Parsing ..."
-msgstr "Herunterladen erfolgreich! Analysiere"
-
-#: plugin.py:229
-msgid "Press ok button to select bouquet"
-msgstr "Drücken Sie OK-Taste um eine Bouquet auszuwählen"
-
-#: plugin.py:233
-#: plugin.py:360
-msgid "Parsing failed!"
-msgstr "Analyse fehlgeschlagen!"
-
-#: plugin.py:281
-msgid "Source:"
-msgstr "Quelle:"
-
-#: plugin.py:283
 msgid "OK"
 msgstr "OK"
 
-#: plugin.py:284
-msgid "Transponder"
-msgstr "Transponder"
+msgid "Parsing failed!"
+msgstr "Analyse fehlgeschlagen!"
 
-#: plugin.py:297
-msgid "Download:"
-msgstr "Download:"
+msgid "Please select at least one bouquet"
+msgstr "Bitte wählen Sie mindestens einen Bouquet aus"
 
-#: plugin.py:321
-msgid "satellites.xml has been built."
-msgstr "satellites.xml wurde erstellt."
-
-#: plugin.py:324
 msgid "Please select at least one satellite"
 msgstr "Bitte wählen Sie mindestens einen Satelliten aus"
 
-#: plugin.py:356
-msgid "Press ok button to select satellite"
-msgstr "Drücken Sie OK-Taste um einen Satelliten auszuwählen"
-
-#: plugin.py:383
-#: plugin.py:395
-msgid "Transponder selection"
-msgstr "Transponderauswahl"
-
-#: plugin.py:434
-msgid "Frequency:"
-msgstr "Frequenz:"
-
-#: plugin.py:434
-msgid "Symbol Rate:"
-msgstr "Symbol Rate:"
-
-#: plugin.py:458
-msgid "has been saved."
-msgstr "wurde gespeichert."
-
-#: plugin.py:461
 msgid "Please select at least one transponder"
 msgstr "Bitte wählen Sie mindestens einen Transponder aus"
 
+msgid "Please wait..."
+msgstr "Bitte warten..."
+
+msgid "Press ok button to select bouquet"
+msgstr "Drücken Sie OK-Taste um eine Bouquet auszuwählen"
+
+msgid "Press ok button to select satellite"
+msgstr "Drücken Sie OK-Taste um einen Satelliten auszuwählen"
+
+msgid "Press ok or green button to install satellites.xml"
+msgstr "Drücken Sie OK- oder grüne Taste, um die satellites.xml zu installieren"
+
+msgid "Restart GUI now?"
+msgstr "Benutzeroberfläche jetzt neu starten?"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Source:"
+msgstr "Quelle:"
+
+msgid "Symbol Rate:"
+msgstr "Symbol Rate:"
+
+msgid "Transponder"
+msgstr "Transponder"
+
+msgid "Transponder selection"
+msgstr "Transponderauswahl"
+
+msgid "has been saved."
+msgstr "wurde gespeichert."
+
+msgid "satellites.xml has been built."
+msgstr "satellites.xml wurde erstellt."
+
+msgid "satellites.xml is updated"
+msgstr "satellites.xml wurde aktualisiert"
+
+msgid "selected bouquets are installed"
+msgstr "ausgewählte Bouquet's"

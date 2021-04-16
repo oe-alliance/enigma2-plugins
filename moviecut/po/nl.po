@@ -126,13 +126,3 @@ msgstr "De opname \"%s\" is succesvol gesneden"
 
 msgid "Yes"
 msgstr "Ja"
-
-#~ msgid ""
-#~ "Another movie is currently cut.\n"
-#~ "The movie \"%s\" will be cut in the background after it."
-#~ msgstr ""
-#~ "Een ander bestand wordt momenteel behandeld.\n"
-#~ "De opname \"%s\" zal hierna op de achtergrond behandeld worden."
-
-#~ msgid "The movie \"%s\" is cut in the background."
-#~ msgstr "De opname \"%s\" is op de achtergrond gesneden."

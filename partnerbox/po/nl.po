@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-25 10:00+0200\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2013-07-25 17:48+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
@@ -19,8 +19,26 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
+#, python-format
+msgid "%02d.%02d - %02d.%02d"
+msgstr ""
+
+msgid "%a"
+msgstr ""
+
+#, python-format
+msgid "%d min"
+msgstr ""
+
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
+
+msgid "%e/%m, %-H:%M"
+msgstr ""
+
+#, python-format
+msgid "%s%d min"
+msgstr ""
 
 msgid "(ZAP)"
 msgstr "(ZAP)"
@@ -31,8 +49,15 @@ msgstr "<onbekend>"
 msgid "Abort"
 msgstr "Breek af"
 
+msgid "Activate Picture in Picture"
+msgstr ""
+
 msgid "Add"
 msgstr "Voeg toe"
+
+#, fuzzy
+msgid "Add internal timer"
+msgstr "Voeg timer toe"
 
 msgid "Add timer"
 msgstr "Voeg timer toe"
@@ -40,8 +65,20 @@ msgstr "Voeg timer toe"
 msgid "After event"
 msgstr "Na event"
 
+msgid "Alternative"
+msgstr ""
+
+msgid "Alternative services are not supported!"
+msgstr ""
+
 msgid "Apply"
 msgstr "Pas toe"
+
+msgid "Attention, this is repeated timer!\n"
+msgstr ""
+
+msgid "Bouquet List"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Annuleer"
@@ -52,11 +89,26 @@ msgstr "Verander PIN"
 msgid "Channel"
 msgstr "Kanaal"
 
+msgid "Choice list Partnerbox"
+msgstr ""
+
+msgid "Choose action:"
+msgstr ""
+
+msgid "Choose bouquet"
+msgstr ""
+
 msgid "Clean up"
 msgstr "Opschonen"
 
 msgid "Cleaning up finished timer entries..."
 msgstr "Bezig met opschonen afgewerkte timers..."
+
+msgid "DVB-C"
+msgstr ""
+
+msgid "DVB-T"
+msgstr ""
 
 msgid "DVR"
 msgstr "PVR"
@@ -64,11 +116,31 @@ msgstr "PVR"
 msgid "Date"
 msgstr "Datum"
 
+#, fuzzy
+msgid "Deep Standby"
+msgstr "ga naar deep standby"
+
 msgid "Delete"
 msgstr "Verwijder"
 
+#, fuzzy
+msgid "Delete timer"
+msgstr "Verwijder timer"
+
 msgid "Description"
 msgstr "Beschrijving"
+
+msgid "Disable Picture in Picture"
+msgstr ""
+
+#, fuzzy, python-format
+msgid ""
+"Do you really want to delete the remote timer \n"
+"%s ?"
+msgstr ""
+"Wilt u echt de timer \n"
+"%s  \n"
+"verwijderen?"
 
 #, python-format
 msgid ""
@@ -85,10 +157,32 @@ msgstr "EPG Selectie"
 msgid "Edit"
 msgstr "Bewerk:"
 
+msgid "Edit internal timer"
+msgstr ""
+
+#, fuzzy
+msgid "Edit remote timer"
+msgstr "Remote Timer"
+
+#, fuzzy
+msgid "Enable Partnerbox-Function in Channel Selector"
+msgstr "Schakel Partnerbox-Functie in TimerEvent in"
+
 msgid "Enable Partnerbox-Function in EPGList"
 msgstr "Schakel Partnerbox-Functie in EPG-Lijst in"
 
 msgid "Enable Partnerbox-Function in TimerEvent"
+msgstr "Schakel Partnerbox-Functie in TimerEvent in"
+
+#, fuzzy
+msgid "Enable Red Button-Function in single/multi EPG"
+msgstr "Schakel Partnerbox-Functie in EPG-Lijst in"
+
+msgid "Enable VPS"
+msgstr ""
+
+#, fuzzy
+msgid "Enable VPS-Function in TimerEvent"
 msgstr "Schakel Partnerbox-Functie in TimerEvent in"
 
 msgid "Enable first Partnerbox-entry in Timeredit as default"
@@ -109,6 +203,10 @@ msgstr "Enigma Type"
 msgid "Enter the service pin"
 msgstr "Voer de service PIN in"
 
+#, fuzzy
+msgid "Error: "
+msgstr "Fout: Achterhaald"
+
 msgid "Error: No space left"
 msgstr "Fout: geen ruimte genoeg"
 
@@ -120,6 +218,9 @@ msgstr "Fout: gebruiker heeft afgebroken"
 
 msgid "Error: Zap failed"
 msgstr "Fout: ZAP mislukt"
+
+msgid "Eventview"
+msgstr ""
 
 msgid "Fri"
 msgstr "vr"
@@ -133,11 +234,21 @@ msgstr "Bezig kanaal informatie te verkrijgen..."
 msgid "Getting EPG Information..."
 msgstr "Bezig EPG informatie te verkrijgen..."
 
+#, fuzzy
+msgid "Getting EPG data..."
+msgstr "Bezig EPG informatie te verkrijgen..."
+
 msgid "Getting Partnerbox Bouquet Information..."
 msgstr "Bezig Partnerbox boeket informatie te verkrijgen..."
 
 msgid "Getting Partnerbox Information..."
 msgstr "Bezig Partnerbox informatie te verkrijgen..."
+
+msgid "Getting timerlist data..."
+msgstr ""
+
+msgid "Give Enigma time to fill epg cache..."
+msgstr ""
 
 msgid "IP"
 msgstr "IP"
@@ -145,17 +256,27 @@ msgstr "IP"
 msgid "Info"
 msgstr "Informatie"
 
+msgid "Internet services are not supported!"
+msgstr ""
+
 msgid "Location"
 msgstr "Lokatie"
 
-msgid "Manage timer for other receiveres in network"
+#, fuzzy
+msgid "Manage timer for other dreamboxes in network"
 msgstr "Beheer timers voor andere ontvangers in uw netwerk"
+
+msgid "Menu PiP"
+msgstr ""
 
 msgid "Mon"
 msgstr "ma"
 
 msgid "Monday"
 msgstr "maandag"
+
+msgid "Move Picture in Picture"
+msgstr ""
 
 msgid "NGRAB"
 msgstr "NGRAB"
@@ -169,6 +290,14 @@ msgstr "Nee"
 msgid "OK"
 msgstr "OK"
 
+#, fuzzy
+msgid "Partnerbox"
+msgstr "Partnerbox entries"
+
+#, fuzzy
+msgid "Partnerbox - RemotePlayer"
+msgstr "Partnerbox entries"
+
 #, python-format
 msgid ""
 "Partnerbox Answer: \n"
@@ -180,11 +309,27 @@ msgstr ""
 msgid "Partnerbox Entries"
 msgstr "Partnerbox entries"
 
+#, fuzzy
+msgid "Partnerbox RemoteTimer"
+msgstr "Partnerbox entries"
+
+#, fuzzy
+msgid "Partnerbox Setup"
+msgstr "Partnerbox entries"
+
 msgid "Partnerbox: Edit Entry"
 msgstr "Partnerbox: bewerk entry"
 
 msgid "Partnerbox: List of Entries"
 msgstr "Partnerbox: Lijst met entries"
+
+#, fuzzy
+msgid "Partnerbox: RemoteTV Player"
+msgstr "Partnerbox: bewerk entry"
+
+#, fuzzy
+msgid "Partnerbox: RemoteTimer"
+msgstr "Partnerbox entries"
 
 msgid "Password"
 msgstr "Wachtwoord"
@@ -192,20 +337,59 @@ msgstr "Wachtwoord"
 msgid "Port"
 msgstr "Port"
 
+msgid "Power"
+msgstr ""
+
+msgid "Press OK to edit timer..."
+msgstr ""
+
 msgid "Really delete this Partnerbox Entry?"
 msgstr "Deze Partnerbox entry echt verwijderen?"
+
+#, fuzzy
+msgid "Remote Player"
+msgstr "Remote Timer"
 
 msgid "Remote Timer"
 msgstr "Remote Timer"
 
+#, fuzzy
+msgid "RemoteTimer Timerlist"
+msgstr "Remote Timer"
+
 msgid "Remove timer"
 msgstr "Verwijder timer"
+
+msgid "Repeated Timer are not supported!"
+msgstr ""
+
+msgid "Restart"
+msgstr ""
+
+msgid "Restart enigma"
+msgstr ""
 
 msgid "Sat"
 msgstr "za"
 
 msgid "Saturday"
 msgstr "zaterdag"
+
+#, python-format
+msgid "Select action for remote timer '%s':"
+msgstr ""
+
+#, python-format
+msgid "Select action for timer '%s':"
+msgstr ""
+
+#, fuzzy
+msgid "Select action:"
+msgstr "EPG Selectie"
+
+#, fuzzy
+msgid "Select operation for partnerbox"
+msgstr "Partnerbox instellingen"
 
 msgid "Servicelists/EPG"
 msgstr "Servicelijsten/EPG"
@@ -216,14 +400,49 @@ msgstr "Toon 'RemoteTV Player' in extensie-menu"
 msgid "Show 'RemoteTimer' in E-Menu"
 msgstr "Toon 'RemoteTimer' in extensie-menu"
 
+#, fuzzy
+msgid "Show 'RemoteTimer' in Event View context menu"
+msgstr "Toon 'RemoteTimer' in extensie-menu"
+
+#, fuzzy
+msgid "Show 'RemoteTimer' in Eventinfo menu"
+msgstr "Toon 'RemoteTimer' in extensie-menu"
+
 msgid "Show 'Stream current Service' in E-Menu"
 msgstr "Toon Stream current Service' in extensie-menu"
+
+msgid "Show all icon for event in EPGList"
+msgstr ""
+
+msgid "Show duration time for event"
+msgstr ""
+
+msgid "Shutdown"
+msgstr ""
+
+msgid "Standard Zap"
+msgstr ""
+
+#, fuzzy
+msgid "Standby"
+msgstr "ga naar standby"
 
 msgid "StartTime"
 msgstr "Starttijd"
 
+#, python-format
+msgid "Starting Remote Player (IP = %s)"
+msgstr ""
+
+msgid "Stream"
+msgstr ""
+
 msgid "Stream TV from your Partnerbox"
 msgstr "Stream TV van uw Partnerbox"
+
+#, fuzzy
+msgid "Stream current Service from Partnerbox"
+msgstr "Stream huidige service van Partnerbox"
 
 msgid "Stream current service from partnerbox"
 msgstr "Stream huidige service van Partnerbox"
@@ -243,11 +462,34 @@ msgstr "do"
 msgid "Thursday"
 msgstr "donderdag"
 
+msgid "Timer Overview"
+msgstr ""
+
 msgid "Timer Type"
 msgstr "Timer Type"
 
 msgid "Timer can not be added...no locations on partnerbox available."
 msgstr "Timer kan niet worden toegevoegd...geen ruimte op de partnerbox beschikbaar."
+
+#, fuzzy
+msgid "Timer entry"
+msgstr "Timer Type"
+
+msgid "Timer event deleted successfully."
+msgstr ""
+
+msgid "Timer event was created successfully."
+msgstr ""
+
+#, fuzzy
+msgid "Timer menu"
+msgstr "Timer Type"
+
+msgid "Toggle Standby"
+msgstr ""
+
+msgid "Toggle status (on/off)"
+msgstr ""
 
 msgid "Tue"
 msgstr "di"
@@ -255,23 +497,41 @@ msgstr "di"
 msgid "Tuesday"
 msgstr "dinsdag"
 
+msgid "Wakeup"
+msgstr ""
+
 msgid "Wed"
 msgstr "wo"
 
 msgid "Wednesday"
 msgstr "woensdag"
 
+msgid "Yes"
+msgstr ""
+
+msgid "Yes (safe mode)"
+msgstr ""
+
 msgid "You can not add services or bouquets from Enigma1-receivers into the channellist..."
 msgstr "U kunt geen zenders en favorieten van Enigma1-ontvangers toevoegen aan de kanaallijst..."
-
-msgid "You have to restart Enigma2 to activate your new preferences!"
-msgstr "U moet Enigma2 herstarten om uw instellingen door te voeren!"
 
 msgid "Zap"
 msgstr "Zap"
 
+msgid "Zap focus to Picture in Picture"
+msgstr ""
+
+msgid "Zap focus to main screen"
+msgstr ""
+
 msgid "Zap to service when streaming"
 msgstr "Zap naar service tijdens streamen"
+
+msgid "Zap/"
+msgstr ""
+
+msgid "Zapping to "
+msgstr ""
 
 msgid "about to start"
 msgstr "op het punt te beginnen"
@@ -329,4 +589,3 @@ msgstr "zap"
 
 msgid "zapped"
 msgstr "gezapd"
-

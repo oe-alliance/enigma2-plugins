@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "All"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Delete failed!"
+msgstr ""
+
+#, python-format
+msgid "Directory %s nonexistent."
+msgstr ""
+
+#, python-format
+msgid ""
+"Do you really want to delete %s\n"
+"%s?"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Exit"
+msgstr ""
+
+msgid "No tags are set on these movies."
+msgstr ""
+
+msgid "Please select tag to filter..."
+msgstr ""
+
+msgid "Please select the movie path..."
+msgstr ""
+
+msgid "Please wait... Loading list..."
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr ""
+
+msgid "Recorded files..."
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Tag 1"
+msgstr ""
+
+msgid "Tag 2"
+msgstr ""
+
+msgid "Tags"
+msgstr ""
+
+msgid "You cannot delete this!"
+msgstr ""
+
+msgid "delete..."
+msgstr ""
+
+msgid "exit movielist"
+msgstr ""
+
+msgid "group movies of a series to virtual directories"
+msgstr ""
+
+msgid "menu"
+msgstr ""
+
+msgid "select movie"
+msgstr ""
+
+msgid "select the movie path"
+msgstr ""
+
+msgid "show all"
+msgstr ""
+
+msgid "show event details"
+msgstr ""
+
+msgid "show first selected tag"
+msgstr ""
+
+msgid "show second selected tag"
+msgstr ""
+
+msgid "show tag menu"
+msgstr ""
+
+msgid "this recording"
+msgstr ""

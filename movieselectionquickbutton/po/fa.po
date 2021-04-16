@@ -2,115 +2,90 @@ msgid ""
 msgstr ""
 "Project-Id-Version: movie selection quick button Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-01 22:29+0200\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Persian Prince <persianprince@persianpros.org>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"Language: Persian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Language: Persian\n"
 
-#: ../src/plugin.py:38 ../src/plugin.py:92 ../src/plugin.py:93
-#: ../src/plugin.py:117 ../src/plugin.py:179 ../src/plugin.py:230
-msgid "Delete"
-msgstr "حذف کردن"
-
-#: ../src/plugin.py:39 ../src/plugin.py:40 ../src/plugin.py:41
-#: ../src/plugin.py:91 ../src/plugin.py:116 ../src/plugin.py:178
-msgid "Nothing"
-msgstr "هیچ چی"
-
-#: ../src/plugin.py:42
-msgid "display plugin name"
-msgstr "نمایش نام پلاگین"
-
-#: ../src/plugin.py:42
-msgid "display plugin description"
-msgstr "نمایش توضیحات پلاگین"
-
-#: ../src/plugin.py:72
-msgid "Assign plugin to red key pressed"
-msgstr "تنظیم دسترسی به پلاگین مورد نظر با فشردن دکمه قرمز"
-
-#: ../src/plugin.py:73
-msgid "Assign plugin to green key pressed"
-msgstr "تنظیم دسترسی به پلاگین مورد نظر با فشردن دکمه سبز"
-
-#: ../src/plugin.py:74
-msgid "Assign plugin to yellow key pressed"
-msgstr "تنظیم دسترسی به پلاگین مورد نظر با فشردن دکمه زرد"
-
-#: ../src/plugin.py:75
 msgid "Assign plugin to blue key pressed"
 msgstr "تنظیم دسترسی به پلاگین مورد نظر با فشردن دکمه آبی"
 
-#: ../src/plugin.py:94 ../src/plugin.py:95 ../src/plugin.py:121
-#: ../src/plugin.py:180 ../src/plugin.py:232
-msgid "Home"
-msgstr "خانه"
+msgid "Assign plugin to green key pressed"
+msgstr "تنظیم دسترسی به پلاگین مورد نظر با فشردن دکمه سبز"
 
-#: ../src/plugin.py:96 ../src/plugin.py:124 ../src/plugin.py:181
-#: ../src/plugin.py:234
-msgid "Sort"
-msgstr "دسته بندی"
+msgid "Assign plugin to red key pressed"
+msgstr "تنظیم دسترسی به پلاگین مورد نظر با فشردن دکمه قرمز"
 
-#: ../src/plugin.py:98 ../src/plugin.py:130
-msgid "sort by date"
-msgstr "دسته بندی بر پایه زمان "
+msgid "Assign plugin to yellow key pressed"
+msgstr "تنظیم دسترسی به پلاگین مورد نظر با فشردن دکمه زرد"
 
-#: ../src/plugin.py:100 ../src/plugin.py:127
-msgid "alphabetic sort"
-msgstr " دسته بندی برپایه الفبا"
+msgid "Cancel"
+msgstr "لغو کردن"
 
-#: ../src/plugin.py:113
-msgid "Unknown Error"
-msgstr "خطای ناشناس"
+msgid "Delete"
+msgstr "حذف کردن"
 
-#: ../src/plugin.py:152
 #, python-format
 msgid ""
 "Error!\n"
 "Error Text: %s"
 msgstr ""
 
-#: ../src/plugin.py:154
-msgid "Plugin not found!"
-msgstr "پلاگین مورد نظر پیدا نشد !"
+msgid "Home"
+msgstr "خانه"
 
-#: ../src/plugin.py:156
 msgid "No plugin assigned!"
 msgstr "هیچ پلاگینی اختصاص داده نشده است"
 
-#: ../src/plugin.py:175
-msgid "Cancel"
-msgstr "لغو کردن"
+msgid "Nothing"
+msgstr "هیچ چی"
 
-#: ../src/plugin.py:176
 msgid "OK"
 msgstr "اوکی"
 
-#: ../src/plugin.py:203
-msgid "assigned to red"
-msgstr "اختصاص داده شده به رنگ قرمز"
+msgid "Plugin not found!"
+msgstr "پلاگین مورد نظر پیدا نشد !"
 
-#: ../src/plugin.py:204
-msgid "assigned to green"
-msgstr "اختصاص داده شده به رنگ سبز"
+msgid "Setup for MovieSelection QuickButton"
+msgstr "راه اندازی دکمه انتخاب سریع فیلم"
 
-#: ../src/plugin.py:205
-msgid "assigned to yellow"
-msgstr "اختصاص داده شده به رنگ زرد"
+msgid "Show Setup in Extensions menu"
+msgstr ""
 
-#: ../src/plugin.py:206
+msgid "Sort"
+msgstr "دسته بندی"
+
+msgid "Unknown Error"
+msgstr "خطای ناشناس"
+
+msgid "alphabetic sort"
+msgstr " دسته بندی برپایه الفبا"
+
 msgid "assigned to blue"
 msgstr "اختصاص داده شده به رنگ آبی"
 
-#: ../src/plugin.py:207
+msgid "assigned to green"
+msgstr "اختصاص داده شده به رنگ سبز"
+
+msgid "assigned to red"
+msgstr "اختصاص داده شده به رنگ قرمز"
+
+msgid "assigned to yellow"
+msgstr "اختصاص داده شده به رنگ زرد"
+
 msgid "button caption"
 msgstr "دکمه سرتیتر"
 
-#: ../src/plugin.py:248
-msgid "Setup for MovieSelection QuickButton"
-msgstr "راه اندازی دکمه انتخاب سریع فیلم"
+msgid "display plugin description"
+msgstr "نمایش توضیحات پلاگین"
+
+msgid "display plugin name"
+msgstr "نمایش نام پلاگین"
+
+msgid "sort by date"
+msgstr "دسته بندی بر پایه زمان "

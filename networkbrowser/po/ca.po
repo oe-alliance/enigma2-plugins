@@ -1,12 +1,11 @@
 # translation of ca.po to
 # Copyright (C) 2006 THE tuxbox-enigma'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the tuxbox-enigma package.
-
 msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2017-09-16 19:47+0200\n"
 "Last-Translator: JR <openspateam@gmail.com>\n"
 "Language-Team: catalan\n"
@@ -25,12 +24,8 @@ msgstr ""
 "Un muntatge amb aquest nom ja existeix!\n"
 "Actualitzar l'entrada existent i continuar?\n"
 
-msgid ""
-"A mount entry with this name already exists!\n"
-"and is not this share folder, please use a different name.\n"
+msgid "AUTOFS (mount as needed)"
 msgstr ""
-"Un muntatge amb aquest nom ja existeix!\n"
-"i no és aquesta carpeta compartida, utilitza un nom diferent.\n"
 
 msgid "Active"
 msgstr "Actiu"
@@ -130,7 +125,8 @@ msgstr "Introduir nom d'usuari"
 msgid "Expert"
 msgstr ""
 
-msgid "FSTAB (mount using linux)"
+#, fuzzy
+msgid "FSTAB (mount at boot)"
 msgstr "FSTAB (muntar utilitzant linux)"
 
 msgid "Finished restarting your network"
@@ -166,6 +162,10 @@ msgstr "Muntar de nou"
 msgid "Mount informations"
 msgstr "Informació de muntatge"
 
+#, fuzzy
+msgid "Mount manager"
+msgstr "Administrador de muntatges"
+
 msgid "Mount options"
 msgstr "Opcions de muntatge"
 
@@ -191,9 +191,6 @@ msgstr "Administrador de punts de muntatge"
 msgid "Mounts editor"
 msgstr "Editor de muntatges"
 
-msgid "Mounts management"
-msgstr "Administració de muntatges"
-
 msgid "NFS share"
 msgstr "NFS"
 
@@ -205,6 +202,10 @@ msgstr "No s'ha trobat dispositius de xarxa"
 
 msgid "Password"
 msgstr "Contrassenya"
+
+#, fuzzy
+msgid "Please wait for activation of your network mount..."
+msgstr "Si us plau, espera mentre s'actualitza el muntatge..."
 
 msgid "Please wait while removing your network mount..."
 msgstr "Si us plau, espera mentre s'elimina el teu muntatge..."
@@ -284,6 +285,9 @@ msgstr "Recurs compartit del servidor"
 msgid "Setup Mount Again"
 msgstr "Configurar Muntar de nou"
 
+msgid "Use as HDD replacement"
+msgstr "utilitza com reemplaçament del HDD"
+
 msgid "User management"
 msgstr "Administració d'usuaris"
 
@@ -299,6 +303,19 @@ msgstr "Veure, editar o eliminar muntatges del teu receptor."
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Veure, editar o eliminar noms d'usuari i contrassenyes de la teva xarxa."
 
+msgid ""
+"You have changed the share name!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+"¡Has canviat el nom del muntatge!\n"
+"Actualitzar l'existent i continuar?\n"
+
+#, python-format
+msgid ""
+"Your network interface %s is not properly configured, so a network scan cannot be done.\n"
+"Please configure the interface and try again."
+msgstr ""
+
 msgid "Your network mount has been activated."
 msgstr "El teu muntatge s'ha activat."
 
@@ -307,19 +324,3 @@ msgstr "El teu muntatge s'ha eliminat."
 
 msgid "Your network mount has been updated."
 msgstr "El teu muntatge s'ha actualitzat."
-
-msgid "Use as HDD replacement"
-msgstr "utilitza com reemplaçament del HDD"
-
-msgid "The harddisk"
-msgstr "Disc dur"
-
-msgid ""
-"You have changed the share name!\n"
-"Update existing entry and continue?\n"
-msgstr ""
-"¡Has canviat el nom del muntatge!\n"
-"Actualitzar l'existent i continuar?\n"
-
-msgid "Mount shares again"
-msgstr "Muntar recursos de xarxa de nou"

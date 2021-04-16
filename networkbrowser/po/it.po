@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - networkbrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2009-10-29 14:01+0100\n"
 "Last-Translator:  Alexwilmac\n"
 "Language: \n"
@@ -25,10 +25,8 @@ msgstr ""
 "Voce di mount già esistente!\n"
 "Aggiornarla con la configurazione corrente e continuare?\n"
 
-msgid ""
-"A mount entry with this name already exists!\n"
-"and is not this share folder, please use a different name.\n"
-msgstr ""
+msgid "AUTOFS (mount as needed)"
+msgstr "AUTOFS (monta quando serve)"
 
 msgid "Active"
 msgstr "Attivo"
@@ -128,14 +126,8 @@ msgstr "Inserire nome Utente: "
 msgid "Expert"
 msgstr "Avanzato"
 
-msgid "FSTAB (mount using linux)"
-msgstr "FSTAB (montaggio usando Linux)"
-
 msgid "FSTAB (mount at boot)"
 msgstr "FSTAB (monta all'avvio)"
-
-msgid "AUTOFS (mount as needed)"
-msgstr "AUTOFS (monta quando serve)"
 
 msgid "Finished restarting your network"
 msgstr "Riavvio rete terminato"
@@ -170,6 +162,10 @@ msgstr "Monta di nuovo"
 msgid "Mount informations"
 msgstr "Informazioni mount"
 
+#, fuzzy
+msgid "Mount manager"
+msgstr "Gestore mount"
+
 msgid "Mount options"
 msgstr "Opzioni mount"
 
@@ -194,9 +190,6 @@ msgstr "Gestione dei punti di mount"
 
 msgid "Mounts editor"
 msgstr "Editor mount"
-
-msgid "Mounts management"
-msgstr "Gestione mount"
 
 msgid "NFS share"
 msgstr "Condivisione NFS"
@@ -291,6 +284,9 @@ msgstr "Condivisione Server"
 msgid "Setup Mount Again"
 msgstr "Imposta i rimontaggi"
 
+msgid "Use as HDD replacement"
+msgstr "Usare in sostituzione HDD"
+
 msgid "User management"
 msgstr "Gestione Utenti"
 
@@ -306,6 +302,20 @@ msgstr "Esamina, modifica o cancella i punti di mount."
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Esamina, modifica o elimina nome Utente e Password per la rete."
 
+#, fuzzy
+msgid ""
+"You have changed the share name!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+"Voce di mount già esistente!\n"
+"Aggiornarla con la configurazione corrente e continuare?\n"
+
+#, python-format
+msgid ""
+"Your network interface %s is not properly configured, so a network scan cannot be done.\n"
+"Please configure the interface and try again."
+msgstr ""
+
 msgid "Your network mount has been activated."
 msgstr "Mount di rete attivato."
 
@@ -314,12 +324,3 @@ msgstr "Mount di rete rimosso."
 
 msgid "Your network mount has been updated."
 msgstr "Mount di rete aggiornato."
-
-msgid "Use as HDD replacement"
-msgstr "Usare in sostituzione HDD"
-
-#~ msgid "MountManager"
-#~ msgstr "Gestore mount"
-
-#~ msgid "NetworkBrowser"
-#~ msgstr "Sfoglia la rete"

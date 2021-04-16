@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: 2012-12-03 15:01+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -45,6 +45,9 @@ msgstr ">= 256 kbps"
 msgid ">= 64 kbps"
 msgstr ">= 64 kbps"
 
+msgid "Activate Picture in Picture"
+msgstr ""
+
 msgid "Add current playing stream to favorite"
 msgstr "Add current playing stream to favorite"
 
@@ -71,6 +74,9 @@ msgstr "Bit rate: %s kbps"
 msgid "Cancel"
 msgstr "Cancel"
 
+msgid "Choose action:"
+msgstr ""
+
 msgid "Config"
 msgstr "Config"
 
@@ -82,6 +88,9 @@ msgstr "Coverwidth:"
 
 msgid "Create a directory for each stream"
 msgstr "Create a directory for each stream"
+
+msgid "Disable Picture in Picture"
+msgstr ""
 
 msgid "Do you really want to stop the recording?"
 msgstr "Do you really want to stop the recording?"
@@ -95,6 +104,10 @@ msgstr "Enter new name for favorite item"
 msgid "Enter text to search for"
 msgstr "Enter text to search for"
 
+#, python-format
+msgid "Error create directory %s!"
+msgstr ""
+
 msgid "Error downloading cover..."
 msgstr "Error downloading cover..."
 
@@ -103,6 +116,9 @@ msgstr "Favorite list"
 
 msgid "Favorites"
 msgstr "Favorites"
+
+msgid "First play streaming!"
+msgstr ""
 
 msgid "Genres"
 msgstr "Genres"
@@ -139,6 +155,12 @@ msgstr "Hide"
 msgid "Invalid Location"
 msgstr "Invalid Location"
 
+msgid "Menu PiP"
+msgstr ""
+
+msgid "Move Picture in Picture"
+msgstr ""
+
 msgid "No streaming data found..."
 msgstr "No streaming data found..."
 
@@ -172,6 +194,10 @@ msgstr "Rip to single file, name is timestamped"
 msgid "SHOUTcast genre list"
 msgstr "SHOUTcast genre list"
 
+#, fuzzy
+msgid "SHOUTcast setup"
+msgstr "SHOUTcast genre list"
+
 #, python-format
 msgid "SHOUTcast station list for %s"
 msgstr "SHOUTcast station list for %s"
@@ -182,6 +208,9 @@ msgstr "Search"
 #, python-format
 msgid "Searching SHOUTcast for %s..."
 msgstr "Searching SHOUTcast for %s..."
+
+msgid "Select record path for streamripper"
+msgstr ""
 
 msgid "Show cover:"
 msgstr "Show cover:"
@@ -212,6 +241,12 @@ msgstr "Title: %s"
 msgid "Title: n/a"
 msgstr "Title: n/a"
 
+msgid "Zap focus to Picture in Picture"
+msgstr ""
+
+msgid "Zap focus to main screen"
+msgstr ""
+
 msgid "every five minutes"
 msgstr "every five minutes"
 
@@ -237,3 +272,6 @@ msgstr "rename current selected favorite"
 #, python-format
 msgid "search-criteria %s"
 msgstr "search-criteria %s"
+
+msgid "streamripper not installed!"
+msgstr ""

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 EPGRefresh plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2009-09-24 20:37+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -14,23 +14,34 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-msgid ""
-"After a successful refresh the AutoTimer will automatically search for new "
-"matches if this is enabled."
+#, fuzzy, python-format
+msgid "%d more services"
+msgstr "Kanal Düzenle"
+
+msgid "After a successful refresh the AutoTimer will automatically search for new matches if this is enabled. The options 'Ask*' has only affect on a manually refresh. If EPG-Refresh was called in background the default-Answer will be executed!"
 msgstr ""
 
-msgid ""
-"An automated refresh will start after this time of day, but before the time "
-"specified in next setting."
+msgid "An automated refresh will start after this time of day, but before the time specified in next setting."
 msgstr ""
 
-msgid ""
-"An automated refresh will start before this time of day, but after the time "
-"specified in previous setting."
+msgid "An automated refresh will start before this time of day, but after the time specified in previous setting."
+msgstr ""
+
+msgid "Ask default No"
+msgstr ""
+
+msgid "Ask default Yes"
+msgstr ""
+
+#, python-format
+msgid "AutoTimer failed with error %s"
 msgstr ""
 
 msgid "Automatically refresh EPG"
 msgstr "Otomatik EPG yenileyici"
+
+msgid "Background only"
+msgstr ""
 
 msgid "Bouquets"
 msgstr "Buketler"
@@ -41,10 +52,22 @@ msgstr "Vazgeç"
 msgid "Channels"
 msgstr "Kanallar"
 
+msgid "Close and forget changes"
+msgstr ""
+
+msgid "Close and save changes"
+msgstr ""
+
 msgid "Congratulations"
 msgstr ""
 
 msgid "Delay if not in standby (minutes)"
+msgstr ""
+
+msgid "Delete"
+msgstr "sil"
+
+msgid "Display more Options"
 msgstr ""
 
 msgid "Duration to stay on service (seconds)"
@@ -59,13 +82,49 @@ msgstr ""
 msgid "EPG refresh finished."
 msgstr ""
 
+msgid ""
+"EPG refresh finished.\n"
+"Should AutoTimer be search for new matches?"
+msgstr ""
+
 msgid "EPG refresh started in background."
 msgstr ""
 
 msgid "EPG refresh starts scanning channels."
 msgstr ""
 
+#, fuzzy
+msgid "EPG-Refresh_Pending Services"
+msgstr "EPG Yenileyici - Kanallar"
+
+#, fuzzy
+msgid "EPG-Refresh_Refresh now"
+msgstr "EPG Yenileyici - Kanallar"
+
+#, fuzzy
+msgid "EPG-Refresh_SetUp"
+msgstr "EPG Yenileyici - Kanallar"
+
+#, fuzzy
+msgid "EPG-Refresh_Stop Refresh"
+msgstr "EPG Yenileyici - Kanallar"
+
+msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
+msgstr ""
+
+#, fuzzy
+msgid "EPGRefresh"
+msgstr "Otomatik EPG yenileyiciye ekle"
+
 msgid "EPGRefresh Configuration"
+msgstr "EPG Yenileyici Ayarları"
+
+#, fuzzy
+msgid "EPGRefresh Configuration Help"
+msgstr "EPG Yenileyici Ayarları"
+
+#, fuzzy
+msgid "EPGRefresh Functions"
 msgstr "EPG Yenileyici Ayarları"
 
 msgid "EPGRefresh Help"
@@ -86,9 +145,16 @@ msgstr "Düzenleniyor"
 msgid "Editing the service list"
 msgstr ""
 
-msgid ""
-"Enable this to be able to access the EPGRefresh configuration from within "
-"the extension menu."
+msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
+msgstr ""
+
+msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
+msgstr ""
+
+msgid "Enable this to be able to access the EPGRefresh configuration from within the plugin menu."
+msgstr ""
+
+msgid "Enable this to be able to start the EPGRefresh from within the extension menu."
 msgstr ""
 
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
@@ -97,26 +163,38 @@ msgstr ""
 msgid "Fake recording"
 msgstr ""
 
+#, fuzzy
+msgid "Flush EPG before refresh"
+msgstr "EPG'yi öncesinde yenile"
+
+msgid "Following Services have to be scanned:"
+msgstr ""
+
 msgid "Force scan even if receiver is in use."
 msgstr "Alıcı kullanılırken dahi aramaya zorla"
 
-msgid ""
-"If the receiver currently isn't in standby, this is the duration which "
-"EPGRefresh will wait before retry."
+msgid "Foreground also"
 msgstr ""
 
-msgid ""
-"If this is enabled, the plugin will wake up the receiver from deep standby "
-"if possible. Otherwise it needs to be switched on already."
+msgid "Functions"
 msgstr ""
 
-msgid ""
-"If you want to refresh the EPG in background, you can choose the method "
-"which best suits your needs here, e.g. hidden, fake reocrding or regular "
-"Picture in Picture."
+msgid "General Help"
+msgstr ""
+
+msgid "If the receiver currently isn't in standby, this is the duration which EPGRefresh will wait before retry."
+msgstr ""
+
+msgid "If this is enabled, the plugin will wake up the receiver from standby if possible. Otherwise it needs to be switched on already."
+msgstr ""
+
+msgid "If you want to refresh the EPG in background, you can choose the method which best suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture."
 msgstr ""
 
 msgid "Inherit Services from AutoTimer"
+msgstr ""
+
+msgid "Key Help"
 msgstr ""
 
 #, python-format
@@ -126,11 +204,24 @@ msgstr ""
 msgid "Main Picture"
 msgstr ""
 
+msgid "Move page down"
+msgstr ""
+
+msgid "Move page up"
+msgstr ""
+
 msgid "New"
 msgstr "Yeni"
 
+msgid "No"
+msgstr ""
+
 msgid "OK"
 msgstr "Tamam"
+
+#, fuzzy
+msgid "Pending Services"
+msgstr "Kanal Düzenle"
 
 msgid "PiP available now."
 msgstr ""
@@ -168,154 +259,126 @@ msgstr "Yenilemek için buket seçin"
 msgid "Select channel to refresh"
 msgstr "Yenilemek için kanal seçin"
 
-msgid "Show in extension menu"
+msgid "Should protected services be skipped if refresh was started in interactive-mode?"
+msgstr ""
+
+msgid "Show 'EPGRefresh Start now' in extension menu."
+msgstr ""
+
+msgid "Show Advanced Options"
+msgstr ""
+
+msgid "Show Setup in extension menu"
+msgstr ""
+
+msgid "Show Setup in plugins"
+msgstr ""
+
+#, fuzzy
+msgid "Show last EPGRefresh - Time"
+msgstr "Otomatik EPG Yenileyici"
+
+msgid "Show more Functions"
 msgstr ""
 
 msgid "Show popup when refresh starts and ends."
 msgstr ""
 
+#, fuzzy
+msgid "Show the pending Services for refresh"
+msgstr "Yenilecek kanalları düzenle"
+
 msgid "Shutdown after EPG refresh."
 msgstr ""
+
+#, fuzzy
+msgid "Skip protected Services"
+msgstr "Kanal Düzenle"
+
+msgid "Start EPGrefresh immediately"
+msgstr ""
+
+#, fuzzy
+msgid "Stop Running EPG-refresh"
+msgstr "EPG Yenileyici Yapılandır"
+
+#, fuzzy
+msgid "Stop running refresh"
+msgstr "Yenilemeden sonra Receiver'ı kapat"
 
 msgid "The configuration menu"
 msgstr ""
 
-msgid ""
-"This help screen is supposed to give you a quick look at everything "
-"EPGRefresh has to offer.\n"
-"You can abort it at any time by pressing the RED or EXIT button on your "
-"remote control or bring it up at a later point by pressing the HELP button "
-"from the configuration menu (more on that later).\n"
-"\n"
-"\n"
-"But you really should consider to take the few minutes it takes to read "
-"these help pages."
+msgid "There is still a refresh running. The Operation isn't allowed at this moment."
 msgstr ""
 
 msgid ""
-"This is the duration each service/channel will stay active during a refresh."
+"This help screen is supposed to give you a quick look at everything EPGRefresh has to offer.\n"
+"You can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by pressing the HELP button from the configuration menu (more on that later).\n"
+"\n"
+"\n"
+"But you really should consider to take the few minutes it takes to read these help pages."
+msgstr ""
+
+msgid "This is the duration each service/channel will stay active during a refresh."
 msgstr ""
 
 msgid ""
-"This is the entry point of EPGRefresh. From this menu you can configure "
-"every aspect of the plugin and start a manual refresh of the EPG.\n"
-"The configuration options each have an explaination which is supposed to "
-"help you to understand their effects better. Please give reading them a try, "
-"they can save you a lot of time.\n"
+"This is the entry point of EPGRefresh. From this menu you can configure every aspect of the plugin.\n"
+"The configuration options each have an explaination which is supposed to help you to understand their effects better. Please give reading them a try, they can save you a lot of time.\n"
 "\n"
-"Using the YELLOW button you can start a refresh manually and the INFO button "
-"brings up the date the last refresh was completed successfully.\n"
+"Using the YELLOW button you can start a refresh manually. You also be able to enable the functionalities in the Extensionmenu. The INFO button brings up the date the last refresh was completed successfully. You will also find an Extensionmenu-Entry to stop a running Refresh.\n"
 "The BLUE key opens the service editor (next page)."
 msgstr ""
 
-msgid ""
-"This might have been an automated bootup to refresh the EPG. For this to "
-"happen it is recommended to put the receiver to Standby.\n"
-"Do you want to do this now?"
+msgid "This setting controls whether or not an informational message will be shown at start and completion of refresh."
+msgstr ""
+
+msgid "This setting controls whether or not the refresh will be initiated even though the receiver is active (either not in standby or currently recording)."
+msgstr ""
+
+msgid "This setting controls whether the receiver should be set to standby after refresh is completed."
 msgstr ""
 
 msgid ""
-"This setting controls whether or not an informational message will be shown "
-"at start and completion of refresh."
+"To apply your Changes the GUI has to be restarted.\n"
+"Do you want to restart the GUI now?"
 msgstr ""
 
-msgid ""
-"This setting controls whether or not the refresh will be initiated even "
-"though the receiver is active (either not in standby or currently recording)."
-msgstr ""
-
-msgid ""
-"This setting controls whether the receiver should be set to deep standby "
-"after refresh is completed."
-msgstr ""
-
-msgid ""
-"Unless this is enabled, EPGRefresh won't automatically run but needs to be "
-"explicitly started by the yellow button in this menu."
+msgid "Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu."
 msgstr ""
 
 msgid "Version"
 msgstr ""
 
-msgid "Wake up from deep standby for EPG refresh"
-msgstr ""
+#, fuzzy
+msgid "Wake up from standby for EPG refresh."
+msgstr "Derin uyku kipinden açılış yapılırken EPG'yi yenile"
 
 msgid "Welcome to EPGRefresh"
 msgstr ""
 
 msgid ""
-"While the screen does not immediately show it, it does have a lot to offer. "
-"The topmost line allows you to choose between the editor for channels and "
-"bouquets and the following lines contain the channels/bouquets you chose to "
-"refresh.\n"
+"While the screen does not immediately show it, it does have a lot to offer. The topmost line allows you to choose between the editor for channels and bouquets and the following lines contain the channels/bouquets you chose to refresh.\n"
 "\n"
-"You can use the BLUE button to add a new entry to the list or the YELLOW "
-"button to remove an existing one.\n"
+"You can use the BLUE button to add a new entry to the list or the YELLOW button to remove an existing one.\n"
 "\n"
 "\n"
-"For most people it should be sufficient to add the 'Favourites' bouquet by "
-"selecting 'Bouquets' in the first line and by adding it using the BLUE "
-"button."
+"For most people it should be sufficient to add the 'Favourites' bouquet by selecting 'Bouquets' in the first line and by adding it using the BLUE button."
+msgstr ""
+
+msgid "Yes"
 msgstr ""
 
 msgid ""
 "You now know how to do your first steps in EPGRefresh.\n"
 "\n"
-"As a final note I want to hint you at the fact that this plugin will not do "
-"anything on its own without YOU telling it to. So if you want the refresh to "
-"happen automatically in the background you need to configure the plugin to "
-"do so.\n"
-"This was not done to cause you any inconvenience but rather to give you the "
-"freedom of choice."
+"As a final note I want to hint you at the fact that this plugin will not do anything on its own without YOU telling it to. So if you want the refresh to happen automatically in the background you need to configure the plugin to do so.\n"
+"This was not done to cause you any inconvenience but rather to give you the freedom of choice."
 msgstr ""
 
 msgid "add to EPGRefresh"
 msgstr "Otomatik EPG yenileyiciye ekle"
 
-msgid "Delete"
-msgstr "sil"
-
 msgid "never"
 msgstr ""
-
-#~ msgid "Automated EPGRefresher"
-#~ msgstr "Otomatik EPG Yenileyici"
-
-#~ msgid "Configure EPGRefresh"
-#~ msgstr "EPG Yenileyici Yapılandır"
-
-#~ msgid "Delay when not in Standby (in m)"
-#~ msgstr "Uyku kipinde değilken ki gecikme (dk)"
-
-#~ msgid "Inherit Services from AutoTimer if available"
-#~ msgstr "Otomatik zamanlayıcı uygunsa kanalları devral"
-
-#~ msgid "Make AutoTimer parse EPG if available"
-#~ msgstr "Uygunsa EPG'yi ayrıştırmak için otomatik zamanlayıcı ekle"
-
-#~ msgid "Refresh EPG after"
-#~ msgstr "EPG'yi sonrasında yenile"
-
-#~ msgid "Refresh EPG before"
-#~ msgstr "EPG'yi öncesinde yenile"
-
-#~ msgid "Refresh automatically"
-#~ msgstr "Otomatik yenile"
-
-#~ msgid "Shutdown after refresh"
-#~ msgstr "Yenilemeden sonra Receiver'ı kapat"
-
-#~ msgid ""
-#~ "This might have been an automated bootup to refresh the EPG. For this to "
-#~ "happen it is recommmended to put the receiver to Standby.\n"
-#~ "Do you want to do this now?"
-#~ msgstr ""
-#~ "Elektronik program rehberinin (EPG) tezelenebilmesi için Receiver'ınızın "
-#~ "hazırda bekleme kipinde olması önerilir.\n"
-#~ "Receiver'ınızı şimdi hazırda bekleme kipine almak istiyor musunuz?"
-
-#~ msgid "Time to stay on service (in m)"
-#~ msgstr "Kanalda kalma süresi (dk)"
-
-#~ msgid "Wakeup from Deep-Standby to refresh EPG"
-#~ msgstr "Derin uyku kipinden açılış yapılırken EPG'yi yenile"

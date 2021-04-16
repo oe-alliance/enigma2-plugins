@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VideoColorSpace\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-11 11:26+0300\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: 2017-07-11 11:28+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -14,30 +14,23 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/plugin.py:37
 msgid "A/V-Color space settings"
 msgstr "Vaizdo spalvų erdvės nustatymai"
 
-#: ../src/plugin.py:42 ../src/plugin.py:43 ../src/VideoColorSpace.py:86
-msgid "Color space setup"
-msgstr "Spalvų erdvės sąranka"
-
-#: ../src/plugin.py:42 ../src/plugin.py:43
-msgid "Setup color space for video"
-msgstr "Derinti vaizdo spalvų erdvę"
-
-#: ../src/VideoColorSpace.py:71
-msgid "Mode:"
-msgstr "Režimas:"
-
-#: ../src/VideoColorSpace.py:80
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: ../src/VideoColorSpace.py:81
+msgid "Color space setup"
+msgstr "Spalvų erdvės sąranka"
+
+msgid "Mode:"
+msgstr "Režimas:"
+
 msgid "OK"
 msgstr "Gerai"
+
+msgid "Setup color space for video"
+msgstr "Derinti vaizdo spalvų erdvę"

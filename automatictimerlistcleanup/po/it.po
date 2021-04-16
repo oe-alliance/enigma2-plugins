@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - automatictimerlistcleanup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-04 03:11+0100\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,53 +17,38 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/automatictimerlistcleanup\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/automatictimerlistcleanup\n"
 
-#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:36
-msgid "disabled"
-msgstr "disabilitato"
-
-#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:36
-msgid "immediately after recording"
-msgstr "Immediatamente dopo la registrazione"
-
-#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:36
-msgid "older than 1 day"
-msgstr "Più vecchi di 1 giorno"
-
-#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:36
-msgid "older than 3 days"
-msgstr "Più vecchi di 3 giorni"
-
-#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:36
-msgid "older than 1 week"
-msgstr "Più vecchi di 1 settimana"
-
-#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:36
-msgid "older than 2 weeks"
-msgstr "Più vecchi di 2 settimane"
-
-#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:36
-msgid "older than 4 weeks"
-msgstr "Più vecchi di 4 settimane"
-
-#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:36
-msgid "older than 6 weeks"
-msgstr "Più vecchi di 6 settimane"
-
-#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:49
-#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:122
-#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:125
 msgid "Automatic Timerlist Cleanup Setup"
 msgstr "Configurazione Automatic Timerlist Cleanup"
 
-#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:53
 msgid "Cancel"
 msgstr "Annull."
 
-#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:54
-msgid "OK"
-msgstr "Ok"
-
-#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:56
 msgid "Cleanup timerlist-entries"
 msgstr "Ripulitura elenco timer"
 
+msgid "OK"
+msgstr "Ok"
+
+msgid "disabled"
+msgstr "disabilitato"
+
+msgid "immediately after recording"
+msgstr "Immediatamente dopo la registrazione"
+
+msgid "older than 1 day"
+msgstr "Più vecchi di 1 giorno"
+
+msgid "older than 1 week"
+msgstr "Più vecchi di 1 settimana"
+
+msgid "older than 2 weeks"
+msgstr "Più vecchi di 2 settimane"
+
+msgid "older than 3 days"
+msgstr "Più vecchi di 3 giorni"
+
+msgid "older than 4 weeks"
+msgstr "Più vecchi di 4 settimane"
+
+msgid "older than 6 weeks"
+msgstr "Più vecchi di 6 settimane"

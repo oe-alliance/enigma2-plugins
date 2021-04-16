@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KiddyTimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Tode <sagichnet@gmx.net>\n"
 "Language-Team: \n"
@@ -170,10 +170,9 @@ msgstr "Verbleibende Zeit setzen"
 msgid "Smiley"
 msgstr "Smiley"
 
-#: ..\src/plugin.py:16
-msgid "no Image"
-msgstr "kein Bild"
-
+#, fuzzy
+msgid "Start KiddyTimer"
+msgstr "KiddyTimer"
 
 msgid "Stop KiddyTimer (this session only)"
 msgstr "KiddyTimer stoppen (nur diese Session)"
@@ -199,5 +198,5 @@ msgstr ""
 msgid "Wednesday"
 msgstr ""
 
-#~ msgid "0"
-#~ msgstr "0"
+msgid "no Image"
+msgstr "kein Bild"

@@ -2,22 +2,48 @@
 # Copyright (C) 2008 THE enigma'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the enigma package.
 # Alex <info@laetsch.de>, 2008.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2.plugins.vlcplayer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-17 13:14+0100\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: 2009-02-17 13:20+0200\n"
 "Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
 "Language-Team: German <de@li.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+msgid "1 minute"
+msgstr ""
+
+msgid "10 minutes"
+msgstr ""
+
+msgid "15 minutes"
+msgstr ""
+
+msgid "20 minutes"
+msgstr ""
+
+msgid "3 minutes"
+msgstr ""
+
+msgid "30 minutes"
+msgstr ""
+
+msgid "5 minutes"
+msgstr ""
+
 msgid "A video streaming solution based on VLC"
 msgstr "Video streaming basierend auf dem VLC"
+
+#, fuzzy
+msgid "Audio"
+msgstr "Audio Codec"
 
 msgid "Audio Bitrate"
 msgstr "Audio Bitrate"
@@ -31,14 +57,34 @@ msgstr "Audio Codec"
 msgid "Audio Samplerate"
 msgstr "Audio Samplerate"
 
+#, fuzzy
+msgid "Cache Directory"
+msgstr "Film-Verzeichnis"
+
 msgid "Cancel"
+msgstr ""
+
+msgid "Choice of minutes to jump"
+msgstr ""
+
+msgid "Choose an action:"
 msgstr ""
 
 msgid "DVD Device (leave empty for default)"
 msgstr "DVD Laufwerk (leer für default)"
 
+msgid "Direct play"
+msgstr ""
+
+#, fuzzy
+msgid "Edit VLC Server"
+msgstr "ändern"
+
 msgid "Enter VLC-Server as FQDN or IP-Address"
 msgstr "VLC-Server mit Namen oder IP-Adresse"
+
+msgid "Enter subtitles as Track or Language"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -80,20 +126,41 @@ msgstr ""
 "Fehler beim VLC server:\n"
 "%s"
 
+msgid "FQDN"
+msgstr ""
+
 msgid "Filelist"
 msgstr "Filelist"
 
 msgid "HTTP Port"
 msgstr "HTTP Port"
 
-msgid "List of known VLC-Server Profiles"
-msgstr "Liste bekannter VLC-Server Profile"
+msgid "IP-Address"
+msgstr ""
+
+msgid ""
+"Latest compatible version VLC 2.0.7\n"
+"Setup VLC for PC:\n"
+"Tools -> Preferences -> All -> Interface -> Main Interface -> Select Web\n"
+"Find file c:/Program Files/VideoLAN/VLC/Lua/http/.hosts and insert your box ip (without #).\n"
+"Add shortcut to the startup of the background start VLC 'C:\\Program Files\\VideoLAN\\VLC\vlc.exe --intf telnet --extraintf http'"
+msgstr ""
+
+msgid "List of known profiles. Note: key info - help"
+msgstr ""
 
 msgid "Movie Directory"
 msgstr "Film-Verzeichnis"
 
 msgid "No more files in this directory"
 msgstr "Keine weiteren Dateien in diesem Verzeichnis"
+
+#, python-format
+msgid ""
+"No ping from Server:\n"
+"%s\n"
+"%s"
+msgstr ""
 
 msgid "No previous file in this directory"
 msgstr "Keine vorhergehenden Dateien in diesem Verzeichnis"
@@ -112,11 +179,28 @@ msgstr ""
 msgid "Overscan Correction [in %(percentsign)s of Video width]"
 msgstr "Overscan Korrektur [in %(percentsign)s der Videobreite]"
 
+msgid "Ping IP-Address when open Server"
+msgstr ""
+
 msgid "Playlist"
 msgstr "Wiedergabeliste"
 
 msgid "Really delete this Server?"
 msgstr "Diesen Server wirklich löschen?"
+
+#, fuzzy
+msgid "Reset default"
+msgstr "als Standard"
+
+msgid "Save as .ts and play"
+msgstr ""
+
+#, fuzzy
+msgid "Select VLC-Server profile"
+msgstr "Liste bekannter VLC-Server Profile"
+
+msgid "Select method?"
+msgstr ""
 
 msgid "Server Address"
 msgstr "Server Adresse"
@@ -127,7 +211,15 @@ msgstr "Server Profilname"
 msgid "Serverlist"
 msgstr "Serverliste"
 
+#, fuzzy
+msgid "Set as default"
+msgstr "als Standard"
+
 msgid "Subtitle overlay"
+msgstr "Untertitel einblenden"
+
+#, fuzzy
+msgid "Subtitles"
 msgstr "Untertitel einblenden"
 
 msgid "Transcode MPEG/DVD Audio"
@@ -135,6 +227,18 @@ msgstr "Wandle MPEG/DVD Audio um"
 
 msgid "Transcode MPEG/DVD Video"
 msgstr "Wandle MPEG/DVD Video um"
+
+msgid "Use saving to Cache Directory"
+msgstr ""
+
+msgid "VLC < 2.x"
+msgstr ""
+
+msgid "VLC Media List"
+msgstr ""
+
+msgid "VLC Video Player"
+msgstr ""
 
 msgid "Video Bitrate"
 msgstr "Video Bitrate"
@@ -144,6 +248,9 @@ msgstr "Video Codec"
 
 msgid "Video Norm"
 msgstr "Videostandard"
+
+msgid "Yellow subtitles"
+msgstr ""
 
 msgid "add server"
 msgstr "neu"
@@ -160,6 +267,9 @@ msgstr "Filter aus"
 msgid "filter on"
 msgstr "Filter an"
 
+msgid "languages"
+msgstr ""
+
 msgid "play DVD"
 msgstr "starte DVD"
 
@@ -168,3 +278,6 @@ msgstr "aktualisieren"
 
 msgid "set default"
 msgstr "als Standard"
+
+msgid "tracks"
+msgstr ""

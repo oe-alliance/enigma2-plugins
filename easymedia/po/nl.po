@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EasyMedia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2011-10-12 10:20+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Rob van der Does\n"
@@ -60,6 +60,13 @@ msgstr "Bestanden"
 msgid "Files browser:"
 msgstr "Bestandsbrowser:"
 
+msgid "InternetRadio"
+msgstr ""
+
+#, fuzzy
+msgid "InternetRadio player:"
+msgstr "Internet radio-speler:"
+
 msgid "MediaPlayer"
 msgstr "MediaPlayer"
 
@@ -93,9 +100,6 @@ msgstr "MyVideo/speler is niet geïnstalleerd!"
 msgid "MyVideo player:"
 msgstr "MyVideo/speler:"
 
-msgid "NetRadio player:"
-msgstr "Internet radio-speler:"
-
 msgid "No File-Manager installed!"
 msgstr "Geen bestandsmanager geïnstalleerd!"
 
@@ -122,9 +126,6 @@ msgstr "Radio"
 
 msgid "Radio-mode"
 msgstr "Radio-Mode"
-
-msgid "SHOUTcast"
-msgstr "SHOUTcast"
 
 msgid "SHOUTcast Plugin is not installed!"
 msgstr "SHOUTcast Plugin is niet geïnstalleerd!"
@@ -200,4 +201,3 @@ msgstr "ZDFmediatheek-speler:"
 
 msgid "iDream"
 msgstr "iDream"
-

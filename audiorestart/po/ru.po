@@ -54,4 +54,3 @@ msgstr "после ожидания"
 
 msgid "disabled"
 msgstr "отключен"
-

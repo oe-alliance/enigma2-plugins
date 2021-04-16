@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Podcast\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-02 20:47+0100\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Bengt Giger <bengt.giger@id.ethz.ch>\n"
 "Language-Team: Bengt Giger <bengt.giger@id.ethz.ch>\n"
@@ -12,91 +12,66 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 1.6.4\n"
-"X-Poedit-SearchPath-0: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/"
-"enigma2/python/Plugins/Extensions/Podcast\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast\n"
 "X-Poedit-SearchPath-1: ..\\src\n"
 
-#: ..\src/plugin.py:62
-msgid "Stop playing this movie?"
-msgstr "Abspielen beenden?"
+msgid "Buffer device:"
+msgstr "Puffergerät:"
 
-#: ..\src/plugin.py:74 ..\src/plugin.py:157 ..\src/plugin.py:208
-#: ..\src/plugin.py:312 ..\src/plugin.py:342 ..\src/plugin.py:371
-#: ..\src/plugin.py:417 ..\src/plugin.py:465 ..\src/plugin.py:518
-#: ..\src/plugin.py:579 ..\src/plugin.py:612
-msgid "Podcast"
-msgstr "Podcast"
+msgid "Buffer file handling:"
+msgstr "Behandlung der Pufferdatei:"
 
-#: ..\src/plugin.py:86
-msgid "delete"
-msgstr "lösche"
+msgid "Buffer:"
+msgstr "Puffer:"
 
-#: ..\src/plugin.py:86
-msgid "keep on device"
-msgstr "behalte auf Gerät"
+msgid "Delete this movie?"
+msgstr "Diesen Film löschen?"
 
-#: ..\src/plugin.py:86
-msgid "ask me"
-msgstr "frage mich"
-
-#: ..\src/plugin.py:169
 #, python-format
 msgid "Downloading movie: %s"
 msgstr "Film wird heruntergeladen: %s"
 
-#: ..\src/plugin.py:254
-msgid "Delete this movie?"
-msgstr "Diesen Film löschen?"
-
-#: ..\src/plugin.py:296
 msgid "Error getting movies"
 msgstr "Fehler beim Ermitteln der Filme"
 
-#: ..\src/plugin.py:304
-msgid "Length"
-msgstr "Länge"
-
-#: ..\src/plugin.py:304
-msgid "Type"
-msgstr "Typ"
-
-#: ..\src/plugin.py:430
-msgid "No Feedly configuration"
-msgstr "Keine Konfiguration für Feedly"
-
-#: ..\src/plugin.py:470
-msgid "Select"
-msgstr "Selektiere"
-
-#: ..\src/plugin.py:523
-msgid "Save"
-msgstr "Speichern"
-
-#: ..\src/plugin.py:535
-msgid "Buffer:"
-msgstr "Puffer:"
-
-#: ..\src/plugin.py:536
-msgid "Buffer device:"
-msgstr "Puffergerät:"
-
-#: ..\src/plugin.py:537
-msgid "Buffer file handling:"
-msgstr "Behandlung der Pufferdatei:"
-
-#: ..\src/plugin.py:585
-msgid "Help"
-msgstr "Hilfe"
-
-#: ..\src/plugin.py:590 ..\src/plugin.py:596
-msgid "from xml"
-msgstr "aus XML"
-
-#: ..\src/plugin.py:591 ..\src/plugin.py:598
 msgid "Feedly OPML"
 msgstr ""
 
-#: ..\src/plugin.py:592
+msgid "Help"
+msgstr "Hilfe"
+
+msgid "Length"
+msgstr "Länge"
+
+msgid "No Feedly configuration"
+msgstr "Keine Konfiguration für Feedly"
+
+msgid "Podcast"
+msgstr "Podcast"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Select"
+msgstr "Selektiere"
+
+msgid "Stop playing this movie?"
+msgstr "Abspielen beenden?"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "ask me"
+msgstr "frage mich"
+
 msgid "configuration"
 msgstr "Konfiguration"
 
+msgid "delete"
+msgstr "lösche"
+
+msgid "from xml"
+msgstr "aus XML"
+
+msgid "keep on device"
+msgstr "behalte auf Gerät"

@@ -7,34 +7,92 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 19:35+0300\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: 2017-07-10 19:36+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: \n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.2\n"
-"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: lt\n"
 
-#: ../src/plugin.py:175 ../src/plugin.py:183
 msgid "Activate permanent clock"
 msgstr "Įjungti nuolatinį laikrodį"
 
-#: ../src/plugin.py:176
 msgid "Change permanent clock position"
 msgstr "Keisti nuolatinio laikrodžio vietą"
 
-#: ../src/plugin.py:173 ../src/plugin.py:183
+msgid "Choice color clock:"
+msgstr ""
+
+msgid "Color analog clock"
+msgstr ""
+
+msgid "Color digital clock"
+msgstr ""
+
 msgid "Deactivate permanent clock"
 msgstr "Išjungti nuolatinį laikrodį"
 
-#: ../src/plugin.py:48 ../src/plugin.py:161 ../src/plugin.py:205
-#: ../src/plugin.py:212
+msgid "Disable key 'long EXIT' show/hide"
+msgstr ""
+
+msgid "Enable key 'long EXIT' show/hide"
+msgstr ""
+
+msgid "PLi-transparent"
+msgstr ""
+
 msgid "Permanent Clock"
 msgstr "Nuolatinis laikrodis"
 
-#: ../src/plugin.py:212
+#, fuzzy
+msgid "Permanent Clock Setup"
+msgstr "Nuolatinis laikrodis"
+
+msgid "Save"
+msgstr ""
+
+msgid "Set slider"
+msgstr ""
+
+msgid "Set slider step (1 - 20):"
+msgstr ""
+
+msgid "Show analog clock"
+msgstr ""
+
+msgid "Show digital clock"
+msgstr ""
+
 msgid "Shows the clock permanent on the screen"
 msgstr "Ekane pastoviai rodo laikrodį"
+
+msgid "black-blue"
+msgstr ""
+
+msgid "black-white"
+msgstr ""
+
+msgid "black-yellow"
+msgstr ""
+
+msgid "blue"
+msgstr ""
+
+msgid "large white"
+msgstr ""
+
+msgid "large yellow"
+msgstr ""
+
+msgid "transparent"
+msgstr ""
+
+msgid "white"
+msgstr ""
+
+msgid "yellow"
+msgstr ""

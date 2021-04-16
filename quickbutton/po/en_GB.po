@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-05 22:58+0000\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: 2012-03-16 16:31+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -46,6 +46,9 @@ msgstr ""
 "Error!\n"
 "Error Text: %s"
 
+msgid "HbbTV Applications"
+msgstr ""
+
 msgid "Just Scale"
 msgstr "Just Scale"
 
@@ -63,6 +66,9 @@ msgstr "Nothing"
 
 msgid "OK"
 msgstr "OK"
+
+msgid "Overwrite HBBTV-red-button"
+msgstr ""
 
 msgid "Pan&Scan"
 msgstr "Pan&Scan"
@@ -105,4 +111,3 @@ msgstr "setup for Quickbutton"
 
 msgid "switch 4:3 content display"
 msgstr "switch 4:3 content display"
-

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox enigma2-plugins 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-24 04:13+0200\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2019-06-10 21:38+0300\n"
 "Last-Translator: kvinto <badsystem@ukr.net>\n"
 "Language-Team: <sat-ukraine.info>\n"
@@ -14,15 +14,15 @@ msgstr ""
 "X-Generator: Poedit 2.2.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-msgid "AUTOFS (mount as needed)"
-msgstr "AUTOFS (під’єднання за потребою)"
-
 msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
 msgstr ""
 "Монтування з такою назвою вже існує!\n"
 "Оновити існуючий запис і продовжити?\n"
+
+msgid "AUTOFS (mount as needed)"
+msgstr "AUTOFS (під’єднання за потребою)"
 
 msgid "Active"
 msgstr "Активний"
@@ -279,6 +279,10 @@ msgstr "Ресурси сервера"
 msgid "Setup Mount Again"
 msgstr "Повторне налаштування з’єднання"
 
+#, fuzzy
+msgid "Use as HDD replacement"
+msgstr "використовувати HDD в якості заміни"
+
 msgid "User management"
 msgstr "Управління користувачами"
 
@@ -301,6 +305,12 @@ msgstr ""
 "Ви змінили ім'я ресурсу!\n"
 "Оновити існуючий запис і продовжити?\n"
 
+#, python-format
+msgid ""
+"Your network interface %s is not properly configured, so a network scan cannot be done.\n"
+"Please configure the interface and try again."
+msgstr ""
+
 msgid "Your network mount has been activated."
 msgstr "Ваше мережеве з’єднання було активовано."
 
@@ -309,6 +319,3 @@ msgstr "Ваша мережеве з’єднання було видалено.
 
 msgid "Your network mount has been updated."
 msgstr "Ваше мережеве з’єднання було оновлено."
-
-msgid "use as HDD replacement"
-msgstr "використовувати HDD в якості заміни"

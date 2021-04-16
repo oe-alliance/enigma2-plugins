@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Quickbutton\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -43,6 +43,9 @@ msgstr ""
 "Greška!\n"
 "Tekst greške: %s"
 
+msgid "HbbTV Applications"
+msgstr ""
+
 msgid "Just Scale"
 msgstr "Samo razmeri"
 
@@ -60,6 +63,9 @@ msgstr "Ništa"
 
 msgid "OK"
 msgstr "OK"
+
+msgid "Overwrite HBBTV-red-button"
+msgstr ""
 
 msgid "Pan&Scan"
 msgstr "Pan&Scan"
@@ -102,6 +108,3 @@ msgstr "Podešavanje za Brzu tipku"
 
 msgid "switch 4:3 content display"
 msgstr "Zameni sadržaj 4:3 prikaza"
-
-#~ msgid "EPG List"
-#~ msgstr "EPG lista"

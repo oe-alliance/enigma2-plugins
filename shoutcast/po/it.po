@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - shoutcast\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-26 12:31+0000\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleusòcroci.org>\n"
@@ -45,6 +45,9 @@ msgstr ">= 256 kbps"
 msgid ">= 64 kbps"
 msgstr ">= 64 kbps"
 
+msgid "Activate Picture in Picture"
+msgstr ""
+
 msgid "Add current playing stream to favorite"
 msgstr "Aggiungere lo stream in riproduzione ai preferiti"
 
@@ -71,6 +74,9 @@ msgstr "Bit rate: %s kbps"
 msgid "Cancel"
 msgstr "Annull."
 
+msgid "Choose action:"
+msgstr ""
+
 msgid "Config"
 msgstr "Configurazione"
 
@@ -82,6 +88,9 @@ msgstr ""
 
 msgid "Create a directory for each stream"
 msgstr "Creare una directory per ogni stream"
+
+msgid "Disable Picture in Picture"
+msgstr ""
 
 msgid "Do you really want to stop the recording?"
 msgstr "Arrestare la registrazione?"
@@ -95,6 +104,10 @@ msgstr "Inserire il nuovo nome per il preferito"
 msgid "Enter text to search for"
 msgstr "Inserire il testo da cercare"
 
+#, python-format
+msgid "Error create directory %s!"
+msgstr ""
+
 msgid "Error downloading cover..."
 msgstr ""
 
@@ -103,6 +116,9 @@ msgstr "Elenco preferiti"
 
 msgid "Favorites"
 msgstr "Preferiti"
+
+msgid "First play streaming!"
+msgstr ""
 
 msgid "Genres"
 msgstr "Generi"
@@ -137,6 +153,12 @@ msgstr "Nascondere"
 msgid "Invalid Location"
 msgstr "Destinazione non valida"
 
+msgid "Menu PiP"
+msgstr ""
+
+msgid "Move Picture in Picture"
+msgstr ""
+
 msgid "No streaming data found..."
 msgstr "Nessuno dato stream trovato..."
 
@@ -170,6 +192,10 @@ msgstr "Salvare in un unico file"
 msgid "SHOUTcast genre list"
 msgstr "Elenco generi SHOUTcast"
 
+#, fuzzy
+msgid "SHOUTcast setup"
+msgstr "Elenco generi SHOUTcast"
+
 #, python-format
 msgid "SHOUTcast station list for %s"
 msgstr "Elenco stazioni SHOUTcast per %s"
@@ -180,6 +206,9 @@ msgstr "Ricercare"
 #, python-format
 msgid "Searching SHOUTcast for %s..."
 msgstr "Ricerca di SHOUTcast per %s in corso..."
+
+msgid "Select record path for streamripper"
+msgstr ""
 
 msgid "Show cover:"
 msgstr ""
@@ -210,6 +239,12 @@ msgstr "Titolo: %s"
 msgid "Title: n/a"
 msgstr "Titolo: n/a"
 
+msgid "Zap focus to Picture in Picture"
+msgstr ""
+
+msgid "Zap focus to main screen"
+msgstr ""
+
 msgid "every five minutes"
 msgstr "ogni cinque minuti"
 
@@ -235,3 +270,6 @@ msgstr "Rinominare il preferito selezionato"
 #, python-format
 msgid "search-criteria %s"
 msgstr "criterio di ricerca %s"
+
+msgid "streamripper not installed!"
+msgstr ""

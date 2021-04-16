@@ -92,4 +92,3 @@ msgstr "Specify whether plugin shall show up in plugin menu or extensions menu (
 
 msgid "Ver."
 msgstr "Ver."
-

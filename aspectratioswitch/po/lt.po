@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Aspect Ratio Switch V.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-12 12:09+0100\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis Pulokas <vyteniui@gmail.com>\n"
@@ -13,145 +13,108 @@ msgstr ""
 "X-Poedit-KeywordsList: _(\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/plugin.py:64 ../src/plugin.py:79
-msgid "4:3 Letterbox"
-msgstr "4:3 juostos viršuje ir apačioje"
-
-#: ../src/plugin.py:65 ../src/plugin.py:79
-msgid "4:3 PanScan"
-msgstr "4:3 nukerpant šonus"
-
-#: ../src/plugin.py:66 ../src/plugin.py:79
-msgid "16:9"
-msgstr "16:9"
-
-#: ../src/plugin.py:67 ../src/plugin.py:79
-msgid "16:9 always"
-msgstr "visada 16:9"
-
-#: ../src/plugin.py:68 ../src/plugin.py:79
 msgid "16:10 Letterbox"
 msgstr "16:10 juostos viršuje ir apačioje"
 
-#: ../src/plugin.py:69 ../src/plugin.py:79
 msgid "16:10 PanScan"
 msgstr "16:10 nukerpant šonus"
 
-#: ../src/plugin.py:70 ../src/plugin.py:79
+msgid "16:9"
+msgstr "16:9"
+
 msgid "16:9 Letterbox"
 msgstr "16:9 juostos viršuje ir apačioje"
 
-#: ../src/plugin.py:77
-msgid "Bouquet +/- long"
-msgstr "'Bukietas' +/- ilgas paspaudimas"
+msgid "16:9 always"
+msgstr "visada 16:9"
 
-#: ../src/plugin.py:77
-msgid "Help key long"
-msgstr "Ilgas 'Help' paspaudimas"
+msgid "4:3 Letterbox"
+msgstr "4:3 juostos viršuje ir apačioje"
 
-#: ../src/plugin.py:77
-msgid "Radio key long"
-msgstr "Ilgas 'Radio' paspaudimas"
+msgid "4:3 PanScan"
+msgstr "4:3 nukerpant šonus"
 
-#: ../src/plugin.py:77
-msgid "PVR key long"
-msgstr "Ilgas 'PVR' paspaudimas"
-
-#: ../src/plugin.py:82
-msgid "Plugin menu"
-msgstr "Įskiepių meniu"
-
-#: ../src/plugin.py:82
-msgid "Extensions menu"
-msgstr "Plėtinių meniu"
-
-#: ../src/plugin.py:104 ../src/plugin.py:134
-msgid "AspectRatioSwitch Setup"
+msgid "Aspect Ratio Switch setup"
 msgstr "Vaizdo formatų perjungimo sąranka"
 
-#: ../src/plugin.py:107
-msgid "Quick switching via remote control"
-msgstr "Greitas perjungimas nuotoliniu pultu"
-
-#: ../src/plugin.py:108
-msgid "Key mapping"
-msgstr "Mygtukų priskyrimas"
-
-#: ../src/plugin.py:109
-msgid "Show switch message"
-msgstr "Rodyti perjungimo pranešimą"
-
-#: ../src/plugin.py:111
-#, python-format
-msgid "Include %s"
-msgstr "Įtraukti %s"
-
-#: ../src/plugin.py:112
-msgid "Set aspect ratio on startup"
-msgstr "Nustatyti vaizdo formatą startuojant"
-
-#: ../src/plugin.py:113
-msgid "Startup aspect ratio"
-msgstr "Vaizdo formatas startuojant"
-
-#: ../src/plugin.py:114
-msgid "Show Setup in"
-msgstr "Rodyti sąranką"
-
-#: ../src/plugin.py:119
-msgid "Cancel"
-msgstr "Atšaukti"
-
-#: ../src/plugin.py:120
-msgid "Save"
-msgstr "Išsaugoti"
-
-#: ../src/plugin.py:121
-msgid ""
-"Use the configured key(s) on your remote control to switch aspect ratio "
-"modes. If any 'Quickbutton' actions were assigned to these keys, they will "
-"be disabled as long as this plugin is activated!"
-msgstr ""
-"Proporcijų režimams perjungti naudokite nuotolinio pulto paskirtą(-us) "
-"mygtuką(-us). Jei šiems mygtukams priskirti kokie kiti veiksmai, jie bus "
-"išjungti, kol veikia šis įskiepis!"
-
-#: ../src/plugin.py:134
-msgid "Ver."
-msgstr "vers."
-
-#: ../src/plugin.py:140
-#, python-format
-msgid "You need to include at least %d aspect ratio modes!"
-msgstr "Turite įtraukti bent %d vaizdo formato režimus!"
-
-#: ../src/plugin.py:174
-#, python-format
-msgid "Changing keymap failed (%s)."
-msgstr "Pakeisti klaviatūros išdėstymo nepavyko (%s)."
-
-#: ../src/plugin.py:225
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Aspect ratio switched from:\n"
-" %s\n"
+"   %s\n"
 "to:\n"
-" %s"
+"   %s"
 msgstr ""
 "Formatas perjungtas iš:\n"
 "  %s\n"
 " į:\n"
 " %s"
 
-#: ../src/plugin.py:258 ../src/plugin.py:262
-msgid "Aspect Ratio Switch setup"
+msgid "AspectRatioSwitch Setup"
 msgstr "Vaizdo formatų perjungimo sąranka"
 
-#: ../src/plugin.py:258 ../src/plugin.py:262
+msgid "Bouquet +/- long"
+msgstr "'Bukietas' +/- ilgas paspaudimas"
+
+msgid "Cancel"
+msgstr "Atšaukti"
+
+#, python-format
+msgid "Changing keymap failed (%s)."
+msgstr "Pakeisti klaviatūros išdėstymo nepavyko (%s)."
+
+msgid "Extensions menu"
+msgstr "Plėtinių meniu"
+
+msgid "Help key long"
+msgstr "Ilgas 'Help' paspaudimas"
+
+#, python-format
+msgid "Include %s"
+msgstr "Įtraukti %s"
+
+msgid "Key mapping"
+msgstr "Mygtukų priskyrimas"
+
+msgid "PVR key long"
+msgstr "Ilgas 'PVR' paspaudimas"
+
+msgid "Plugin menu"
+msgstr "Įskiepių meniu"
+
 msgid "Quick switching of aspect ratio setting"
 msgstr "Greitas vaizdo formatų perjungimas"
+
+msgid "Quick switching via remote control"
+msgstr "Greitas perjungimas nuotoliniu pultu"
+
+msgid "Radio key long"
+msgstr "Ilgas 'Radio' paspaudimas"
+
+msgid "Save"
+msgstr "Išsaugoti"
+
+msgid "Set aspect ratio on startup"
+msgstr "Nustatyti vaizdo formatą startuojant"
+
+msgid "Show Setup in"
+msgstr "Rodyti sąranką"
+
+msgid "Show switch message"
+msgstr "Rodyti perjungimo pranešimą"
+
+msgid "Startup aspect ratio"
+msgstr "Vaizdo formatas startuojant"
+
+msgid "Use the configured key(s) on your remote control to switch aspect ratio modes. If any 'Quickbutton' actions were assigned to these keys, they will be disabled as long as this plugin is activated!"
+msgstr "Proporcijų režimams perjungti naudokite nuotolinio pulto paskirtą(-us) mygtuką(-us). Jei šiems mygtukams priskirti kokie kiti veiksmai, jie bus išjungti, kol veikia šis įskiepis!"
+
+msgid "Ver."
+msgstr "vers."
+
+#, python-format
+msgid "You need to include at least %d aspect ratio modes!"
+msgstr "Turite įtraukti bent %d vaizdo formato režimus!"

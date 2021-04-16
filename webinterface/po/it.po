@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - webinterface\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-23 22:27+0100\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: 2014-02-23 22:30+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -14,1266 +14,968 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Poedit-Basepath: ../enigma2-plugins/webinterface\n"
 "X-Generator: Poedit 1.5.4\n"
-"X-Poedit-SearchPath-0: ../enigma2-plugins/"
-"webinterface\n"
+"X-Poedit-SearchPath-0: ../enigma2-plugins/webinterface\n"
 
-#: ../enigma2-plugins/webinterface/src/WebIfConfig.py:32
-msgid "Cancel"
-msgstr "Annull."
-
-#: ../enigma2-plugins/webinterface/src/WebIfConfig.py:33
-msgid "OK"
-msgstr "Ok"
-
-#: ../enigma2-plugins/webinterface/src/WebIfConfig.py:57
-msgid "Start Webinterface"
-msgstr "Avviare Interfaccia web"
-
-#: ../enigma2-plugins/webinterface/src/WebIfConfig.py:61
-msgid "Show Setup in Extensions menu"
-msgstr "Mostrare Configurazione nel menu Estensioni"
-
-#: ../enigma2-plugins/webinterface/src/WebIfConfig.py:62
-msgid "Enable /media"
-msgstr "Abilitare /media"
-
-#: ../enigma2-plugins/webinterface/src/WebIfConfig.py:63
-msgid "Allow zapping via Webinterface"
-msgstr "Consentire zapping via webif"
-
-#: ../enigma2-plugins/webinterface/src/WebIfConfig.py:64
-msgid "Autowrite timer"
-msgstr "Scrittura automatica timer"
-
-#: ../enigma2-plugins/webinterface/src/WebIfConfig.py:65
-msgid "Load movie-length"
-msgstr "Caricare durata registrazioni"
-
-#: ../enigma2-plugins/webinterface/src/WebIfConfig.py:66
-msgid "Enable HTTP Access"
-msgstr "Abilitare accesso HTTP"
-
-#: ../enigma2-plugins/webinterface/src/WebIfConfig.py:71
-msgid "HTTP Port"
-msgstr "Porta HTTP"
-
-#: ../enigma2-plugins/webinterface/src/WebIfConfig.py:72
-msgid "Enable HTTP Authentication"
-msgstr "Abilitare autenticazione HTTP"
-
-#: ../enigma2-plugins/webinterface/src/WebIfConfig.py:75
-msgid "Enable HTTPS Access"
-msgstr "Abilitare accesso HTTPS"
-
-#: ../enigma2-plugins/webinterface/src/WebIfConfig.py:78
-msgid "HTTPS Port"
-msgstr "Porta HTTPS"
-
-#: ../enigma2-plugins/webinterface/src/WebIfConfig.py:79
-msgid "Enable HTTPS Authentication"
-msgstr "Abilitare autenticazione HTTPS"
-
-#: ../enigma2-plugins/webinterface/src/WebIfConfig.py:83
-msgid "Enable Streaming Authentication"
-msgstr "Abilitare autenticazione streaming"
-
-#: ../enigma2-plugins/webinterface/src/WebIfConfig.py:84
-msgid "Simple Anti-Hijack Measures (may break clients)"
-msgstr "Semplice misura anti-Hijack (potrebbe scollegare i client)"
-
-#: ../enigma2-plugins/webinterface/src/WebIfConfig.py:85
-msgid "Token-based security (may break clients)"
-msgstr "Sicurezza token-based (potrebbe scollegare i client)"
-
-#: ../enigma2-plugins/webinterface/src/WebIfConfig.py:90
-msgid "Webinterface: Main Setup"
-msgstr "Interfaccia web - Configurazione"
-
-#: ../enigma2-plugins/webinterface/src/plugin.py:589
-msgid "Webinterface"
-msgstr "Webinterface"
-
-#: ../enigma2-plugins/webinterface/src/plugin.py:589
-#: ../enigma2-plugins/webinterface/src/plugin.py:592
-msgid "Configuration for the Webinterface"
-msgstr "Configurazione Interfaccia web"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Converter/HddInfo.py:32
-msgid "N/A"
-msgstr "N/A"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/AudioTracks.py:11
-msgid "False"
-msgstr "Falso"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/AudioTracks.py:37
-msgid "Success"
-msgstr "Correttamente"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/AudioTracks.py:39
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/AudioTracks.py:41
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:48
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:86
-msgid "Error"
-msgstr "Errore"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/AudioTracks.py:50
-msgid "AC3 Downmix enabled"
-msgstr "Downmix AC3 abilitato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/AudioTracks.py:50
-msgid "AC3 Downmix disabled"
-msgstr "Downmix AC3 disabilitato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/AudioTracks.py:53
-msgid "This device does not support AC3 Downmix"
-msgstr "Il dispositivo non supporta il downmix AC3"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/LocationsAndTags.py:17
-msgid "one two three four unknown command"
-msgstr "Uno due tre quattro comando sconosciuto"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/LocationsAndTags.py:69
-#, python-format
-msgid "Path %s can not be created"
-msgstr "Il percorso %s non può essere creato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/LocationsAndTags.py:71
-#, python-format
-msgid "Path %s does not exist"
-msgstr "Il percorso %s non esiste"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/LocationsAndTags.py:74
-#, python-format
-msgid "Location '%s' is already existing"
-msgstr "La destinazione %s è già presente"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/LocationsAndTags.py:78
-#, python-format
-msgid "Location '%s' added successfully"
-msgstr "Destinazione %s aggiunta correttamente"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/LocationsAndTags.py:83
-msgid "Missing value for parameter dirname"
-msgstr "Parametro dirname: valore mancante."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/LocationsAndTags.py:92
-#, python-format
-msgid "Location '%s' removed successfully"
-msgstr "Destinazione %s rimossa correttamente"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/LocationsAndTags.py:94
-#, python-format
-msgid "Location '%s' does not exist"
-msgstr "La destinazione %s non esiste"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:20
-#, python-format
-msgid "Unknown command (%s)"
-msgstr "Comando sconosciuto (%s)"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:128
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:157
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:182
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:201
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:212
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:239
-msgid "Mediaplayer not installed"
-msgstr "mediaPlayer non installato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:134
-msgid "Missing or invalid parameter file"
-msgstr "Parametro file errato o mancante"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:139
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:163
-#, python-format
-msgid "'%s' is neither a valid reference nor a valid file"
-msgstr "%s non è un riferimento o un file valido "
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:149
-#, python-format
-msgid "Playback of '%s' started"
-msgstr "Avviata riproduzione di %s"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:151
-#, python-format
-msgid "'%s' has been added to playlist"
-msgstr "%s aggiunto alla playlist"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:171
-#, python-format
-msgid "'%s' removed from playlist"
-msgstr "%s rimosso dalla playlist"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:174
-#, python-format
-msgid "'%s' not found in playlist"
-msgstr "%s non trovato nella playlist"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:190
-#, python-format
-msgid "Playlist '%s' does not exist"
-msgstr "La playlist %s non esiste"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:205
-#, python-format
-msgid "Playlist saved to '%s'"
-msgstr "Playlist salvata in %s"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:214
-msgid "Mediaplayer was not active"
-msgstr "MediaPlayer non attivo"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:233
-#, python-format
-msgid "Unknown parameter %s"
-msgstr "Parametro sconosciuto (%s)"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/MP.py:234
-#, python-format
-msgid "Command '%s' executed"
-msgstr "Comando %s eseguito"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Message.py:17
-#, python-format
-msgid "unknown command (%s)"
-msgstr "Comando sconosciuto (%s)"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Message.py:31
-msgid "No Messagetext given"
-msgstr "Nessun messaggio di testo"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Message.py:38
-#, python-format
-msgid "type %s is not a number"
-msgstr "Il tipo %s non è un numero"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Message.py:50
-#, python-format
-msgid "Unsupported Messagetype %s"
-msgstr "Tipo di messaggio non supportato (%s)"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Message.py:62
-msgid "Message sent successfully!"
-msgstr "Messaggio inviato con successo."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:22
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Backup.py:31
-msgid "Missing or Wrong Argument"
-msgstr "Argomento errato o mancante"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:40
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:67
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:79
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:225
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:406
-msgid "Missing Parameter: sRef"
-msgstr "Parametro mancante: sRef"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:50
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:91
-msgid "this recording"
-msgstr "Questa registrazione"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:57
-#, python-format
-msgid "Could not delete Movie '%s'"
-msgstr "Impossibile rimuovere la registrazione %s"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:59
-#, python-format
-msgid "Movie '%s' deleted"
-msgstr "Registrazione %s rimossa"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:61
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:154
-#, python-format
-msgid "Illegal Parameter Value: sRef - '%s'"
-msgstr "Valore parametro illegale: sRef - %s"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:69
-msgid "Missing Paramter: dirname"
-msgstr "Parametro mancante: dirname"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:96
-msgid "Source and destination folders are the same."
-msgstr "Le cartelle di origine e destinazione coincidono."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:98
-#, python-format
-msgid "'%s' does not exist in source directory."
-msgstr "%s non esiste nella directory sorgente."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:100
-#, python-format
-msgid ""
-"'%s' already exists in destination directory '%s', set force=1 to move "
-"anyway."
-msgstr ""
-"%s esiste già nella directori destinazione %s: impostare force=1 per "
-"sovrascrivere."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:102
-#, python-format
-msgid "Destination dir '%s' does not exist."
-msgstr "La directory destinazione %s non esiste."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:118
-#, python-format
-msgid "Movie '%s' has unknown suffix '%s'."
-msgstr "La registrazione%s possiede un suffisso sconosciuto: %s"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:147
-#, python-format
-msgid "Moving Movie '%s' to '%s' in background."
-msgstr "Spostamento di %s a %s in background in corso."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:151
-#, python-format
-msgid "Movie '%s' moved to '%s' without errors."
-msgstr "Registrazione %s spostata in %s con successo."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:153
 #, python-format
 msgid "%d error while moving Movie '%s' to '%s': %s"
 msgstr "%d errori nello spostamento della registrazione %s in %s: %s"
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:169
-msgid "undefined"
-msgstr "Non definito"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:178
-msgid "disabled"
-msgstr "Disabilitato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Movie.py:210
-msgid "illegal call"
-msgstr "Chiamata illegale"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/ReadPluginList.py:14
-msgid "List of Plugins has been read"
-msgstr "Elenco plugin letto"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/RemoteControl.py:22
-msgid "Missing or wrong argument"
-msgstr "Argomento errato o mancante"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/RemoteControl.py:46
-msgid "Obligatory parameter 'command' is missing!"
-msgstr "Parametro richiesto mancante: command"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/RemoteControl.py:52
-msgid "the command was not > 0"
-msgstr "Il comando non è > 0"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/RemoteControl.py:85
 #, python-format
-msgid "RC command '%s' has been issued"
-msgstr "Il comando \"%s\" è stato inviato"
+msgid "%s of %s min"
+msgstr "%s di %s min"
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/ServiceListReload.py:25
-msgid "reloaded both"
-msgstr "Ricaricati entrambi"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/ServiceListReload.py:28
-msgid "reloaded lamedb"
-msgstr "Ricaricato lamedb"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/ServiceListReload.py:31
-msgid "reloaded bouquets"
-msgstr "Ricaricati bouquet"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/ServiceListReload.py:58
 #, python-format
-msgid ""
-"missing or wrong parameter mode [%i=both, %i=lamedb only, %i=userbouqets "
-"only, %i=transponders, %i=parentalcontrol white-/blacklist]"
+msgid "'%s' already exists in destination directory '%s', set force=1 to move anyway."
+msgstr "%s esiste già nella directori destinazione %s: impostare force=1 per sovrascrivere."
+
+#, python-format
+msgid "'%s' does not exist in source directory."
+msgstr "%s non esiste nella directory sorgente."
+
+#, python-format
+msgid "'%s' has been added to playlist"
+msgstr "%s aggiunto alla playlist"
+
+#, python-format
+msgid "'%s' is neither a valid reference nor a valid file"
+msgstr "%s non è un riferimento o un file valido "
+
+#, python-format
+msgid "'%s' not found in playlist"
+msgstr "%s non trovato nella playlist"
+
+#, python-format
+msgid "'%s' removed from playlist"
+msgstr "%s rimosso dalla playlist"
+
+msgid "0"
 msgstr ""
-"Parametro mancante o errato [%i=entrambe, %i=solo lamedb, %i=solo bouquet "
-"%i=transponder, %i=controllo parentale white-/blacklist]"
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/SleepTimer.py:16
-msgid ""
-"Obligatory parameters missing [cmd [set,get], time [0-999], action [standby,"
-"shutdown], enabled [True,False]"
+msgid "1"
 msgstr ""
-"Parametri richiesti mancanti: [cmd [set,get], time [0-999], action [standby, "
-"shutdown], enabled [True,False]"
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/SleepTimer.py:34
-msgid "Sleeptimer is enabled"
-msgstr "Sleep timer abilitato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/SleepTimer.py:40
-msgid "Sleeptimer is disabled"
-msgstr "Sleep timer disabilitato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/SleepTimer.py:52
-#, python-format
-msgid ""
-"ERROR: Obligatory parameter 'enabled' [True,False] has unspecified value '%s'"
+msgid "15"
 msgstr ""
-"ERRORE: valore non atteso nel parametro richiesto \"abilitato\" [True,"
-"False]: %s "
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/SleepTimer.py:60
-msgid "ERROR: Obligatory parameter 'time' [0-999] is missing"
-msgstr "ERRORE: parametro richiesto \"time\" [0-999] non presente"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/SleepTimer.py:86
-msgid "The sleep timer has been disabled."
-msgstr "Sleep timer disattivato."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/SleepTimer.py:87
-msgid "Sleeptimer has been disabled"
-msgstr "Sleep timer è stato disabilitato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/SleepTimer.py:90
-#, python-format
-msgid "The sleep timer has been activated for %s minutes."
-msgstr "Sleep timer è stato attivato per %s minuti.."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/SleepTimer.py:91
-#, python-format
-msgid "Sleeptimer set to %s minutes"
-msgstr "Sleep timer è stato impostato a %s minuti.."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/SleepTimer.py:104
-#, python-format
-msgid "ERROR: Obligatory parameter 'cmd' [get,set] has unspecified value '%s'"
+msgid "2"
 msgstr ""
-"ERRORE: valore non atteso nel parametro richiesto \"cmd\" [get,set]: %s "
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/SleepTimer.py:110
-msgid "ERROR: Cannot set SleepTimer while device is in Standby-Mode"
+msgid "3"
 msgstr ""
-"ERRORE: impossibile configurare uno Sleep timer con l'apparato in standby"
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/SwitchService.py:12
-msgid "Obligatory parameter sRef is missing"
-msgstr "Parametro richiesto mancante: sRef"
+msgid "AC3 Downmix disabled"
+msgstr "Downmix AC3 disabilitato"
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/SwitchService.py:67
+msgid "AC3 Downmix enabled"
+msgstr "Downmix AC3 abilitato"
+
+msgid "About"
+msgstr "Info"
+
+msgid "Action"
+msgstr "Azione"
+
+msgid "Activate"
+msgstr "Attivato"
+
 #, python-format
 msgid "Active service is now '%s'"
 msgstr "Canale ativo: %s"
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/SwitchService.py:69
-msgid "Obligatory parameter 'sRef' is missing"
-msgstr "Parametro richiesto mancante: sRef"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/SwitchService.py:71
-msgid "Cannot zap while device is in Standby"
-msgstr "Zap non consentito con il decoder in standby"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/SwitchService.py:73
-msgid "Zapping is disabled in WebInterface Configuration"
-msgstr "Zapping disabilitato nell'impostazione interfaccia web"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/TPMChallenge.py:29
-msgid "LEVEL2 and LEVEL3 Certifcates (Base64-encoded)"
-msgstr "Certificati LEVEL2 e LEVEL3 (Base64-encoded)"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/TPMChallenge.py:37
-msgid "Challenge executed, please verify the result!"
-msgstr "Challenge eseguito: verificare il risultato."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/TPMChallenge.py:39
-#, python-format
-msgid "Obligatory parameter \"random\" for cmd=\"%s\" missing"
-msgstr "Parametro richiesto mancante: random per cmd=%s"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/TPMChallenge.py:41
-#, python-format
-msgid "Unknown for parameter \"cmd\" [%s|%s]"
-msgstr "Parametro sconosciuto per cmd [%s|%s]"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:64
-#, python-format
-msgid "Unknown function: '%s'"
-msgstr "Funzion sconosciuta (%s)"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:70
-msgid "List of Timers has been cleaned"
-msgstr "Elenco timer ripulito"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:84
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:231
-msgid "Missing Parameter: begin"
-msgstr "Parametro mancante: begin"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:89
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:235
-msgid "Missing Parameter: end"
-msgstr "Parametro mancante: end"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:95
-#, python-format
-msgid "The timer '%s' has been deleted successfully"
-msgstr "Timer %s rimosso correttamente."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:97
-msgid "The timer has NOT been deleted"
-msgstr "Il timer non è stato rimosso"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:244
-#, python-format
-msgid "Illegal Parameter value for Parameter begin : '%s'"
-msgstr "Valore non consentito per il parametro inizio: %s"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:252
-msgid "Missing Parameter: name"
-msgstr "Parametro mancante: name"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:256
-msgid "Missing Parameter: description"
-msgstr "Parametro mancante: description"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:264
-#, python-format
-msgid "Illegal Parameter value for Parameter eit : '%s'"
-msgstr "Valore non consentito per il parametro eit: %s"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:312
-msgid "Missing Parameter: channelOld"
-msgstr "Parametro mancante: channelOld"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:317
-msgid "Missing Parameter: beginOld"
-msgstr "Parametro mancante: beginOld"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:321
-msgid "Missing Parameter: endOld"
-msgstr "Parametro mancante: endOld"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:367
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:394
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:441
-#, python-format
-msgid "Conflicting Timer(s) detected! %s"
-msgstr "Rilevati timer in conflitto. %s"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:373
-#, python-format
-msgid "Changing the timer for '%s' failed!"
-msgstr "%s: mofifica timer fallita."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:376
-#, python-format
-msgid "Could not find timer '%s' with given start and end time!"
-msgstr ""
-"Impossibile trovare un timer %s in base a questi orari di inizio e fine."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:387
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:434
-#, python-format
-msgid "Timer '%s' added"
-msgstr "Timer %s aggiunto"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:399
-#, python-format
-msgid "Could not add timer '%s'!"
-msgstr "Impossibile aggiungere il timer %s."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:408
-msgid "Missing Parameter: eventid"
-msgstr "Parametro mancante: eventid"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:426
-msgid "EventId not found"
-msgstr "Eventid non trovato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:449
-msgid "TimerList has been saved"
-msgstr "L'elenco timer è stato salvato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py:451
-msgid "TimerList has not been saved"
-msgstr "L'elenco timer non è stato salvato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Volume.py:17
-msgid "State"
-msgstr "Stato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Volume.py:20
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Volume.py:23
-msgid "Volume changed"
-msgstr "Volume modificato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Volume.py:26
-msgid "Mute toggled"
-msgstr "Mute commutato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Volume.py:37
-#, python-format
-msgid "Volume set to %i"
-msgstr "Livello volume: %i"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Volume.py:39
-#, python-format
-msgid "Wrong parameter format 'set=%s'. Use set=set15"
-msgstr "\"set=%s\": formato parametro errato. Usare set=set15"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Volume.py:41
-#, python-format
-msgid "Unknown Volume command %s"
-msgstr "Comando violume sconosciuto: %s"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:14
-msgid "TeleVision"
-msgstr "Televisione"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:15
-msgid "TV"
-msgstr "TV"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:16
-msgid "Radio"
-msgstr "Radio"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:17
-msgid "Movies"
-msgstr "Film"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:18
-msgid "Timer"
-msgstr "Timer"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:19
-msgid "Timers"
-msgstr "Timer"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:20
-msgid "BoxControl"
-msgstr "BoxControl"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:21
-msgid "Extras"
-msgstr "Extra"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:22
-msgid "WebTV"
-msgstr "WebTV"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:23
-msgid "Volume"
-msgstr "Volume"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:24
-msgid "EPG-Search"
-msgstr "Ricerca EPG"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:25
-msgid "Search EPG"
-msgstr "Cercare EPG"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:26
-msgid "Clear search"
-msgstr "Azzerare ricerca"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:27
-msgid "Bouquets"
-msgstr "Bouquet"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:28
-msgid "No Bouquets to Display"
-msgstr "Nessun bouquet da mostrare"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:29
-msgid "Please select any bouquet"
-msgstr "Selezionare un bouquet"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:30
-msgid "Providers"
-msgstr "Provider"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:31
-msgid "Satellites"
-msgstr "Satelliti"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:32
-msgid "All"
-msgstr "Tutti"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:33
-msgid "Tag Filter"
-msgstr "Filtro etich."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:34
-msgid "All Timers"
-msgstr "Tutti i timer"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:35
-msgid "Create Timer"
-msgstr "Agg. Timer"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:36
-msgid "Cleanup"
-msgstr "El. conclusi"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:37
-msgid "Cleans up the list of timers by removing e.g. finished timers"
-msgstr "Ripulire l'elenco timer cancellando ad esempio quelli terminati"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:38
-msgid "No Timer Available!"
-msgstr "Timer non disponibili"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:39
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:109
-msgid "Edit Timer"
-msgstr "Modificare timer"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:40
-msgid "Enable"
-msgstr "Abilitare"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:41
-msgid "Activate"
-msgstr "Attivato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:42
-msgid "Deactivate"
-msgstr "Disattivato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:43
-msgid "Disable"
-msgstr "Disabilitare"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:44
-msgid "Delete"
-msgstr "Canc."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:45
-msgid "Delete Timer"
-msgstr "Rimuovere timer"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:46
-msgid "Legend"
-msgstr "Legenda"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:47
-msgid "Waiting"
-msgstr "In attesa"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:49
-msgid "Running"
-msgstr "Attivato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:50
-msgid "Finished"
-msgstr "Terminato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:51
-msgid "Action"
-msgstr "Azione"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:52
-msgid "Record"
-msgstr "Registrare"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:53
-msgid "Zap"
-msgstr "Zap"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:54
-msgid "Note: For recurring events dates are not mandatory."
-msgstr "Nota: per gli eventi ricorrenti la data non è obbligatoria."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:55
-msgid "Note: For one-time events the days don't have to be specified."
-msgstr "Nota: per gli eventi singoli la specifica del giorno non è richiesta."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:56
-msgid "Begins"
-msgstr "Inizia"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:57
-msgid "Ends"
-msgstr "Termina"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:58
-msgid "Days"
-msgstr "Giorni"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:59
-msgid "Channel"
-msgstr "Canale"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:60
-msgid "Name"
-msgstr "Nome"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:61
-msgid "Description"
-msgstr "Descrizione"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:62
-msgid "Location"
-msgstr "Destinazione"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:63
-msgid "Tags"
-msgstr "Etich."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:64
-msgid "After event"
-msgstr "Dopo l'evento"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:65
-msgid "Do Nothing"
-msgstr "Non fare nulla"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:66
-msgid "of"
-msgstr "di"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:67
-msgid "Standby"
-msgstr "Standby"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:68
-msgid "Shutdown"
-msgstr "Spegnere"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:69
-msgid "Auto"
-msgstr "Auto"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:70
-msgid "Save"
-msgstr "Salvare"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:71
-msgid "Power Control"
-msgstr "Power Control"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:72
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:88
-msgid "Send Message"
-msgstr "Inviare messaggio"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:73
-msgid "WebRemote"
-msgstr "WebRemote"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:74
-msgid "Screenshot (All)"
-msgstr "Screenshot (tutto)"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:75
-msgid "Screenshot (Video)"
-msgstr "Screenshot (Video)"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:76
-msgid "Screenshot (OSD)"
-msgstr "Screenshot (OSD)"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:77
-msgid "Toggle Standby"
-msgstr "Commutare standby"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:78
-msgid "Deepstandby"
-msgstr "Deepstandby"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:79
-msgid "Reboot"
-msgstr "Riavvio"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:80
-msgid "Restart enigma2"
-msgstr "Riavviare enigma2"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:81
-msgid "Message"
-msgstr "Messaggio"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:82
-msgid "Timeout"
-msgstr "Timeout"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:83
-msgid "Type"
-msgstr "Tipo"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:84
-msgid "Info"
-msgstr "Info"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:85
-msgid "Warning"
-msgstr "Avviso"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:87
-msgid "Send"
-msgstr "Inviare"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:89
-msgid "Mediaplayer"
-msgstr "MediaPlayer"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:90
-msgid "Device Info"
-msgstr "Info supporto"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:91
-msgid "Settings"
-msgstr "Config."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:92
-msgid "Tools"
-msgstr "Strumenti"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:93
-msgid "About"
-msgstr "Info"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:94
-msgid "Click to show/hide extended description"
-msgstr "Click >> mostrare/nascondere la descrizione estesa"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:95
-#, python-format
-msgid "Show EPG for %s"
-msgstr "Mostrare EPG per %s"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:96
-#, python-format
-msgid "Stream %s"
-msgstr "Stream %s"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:97
-msgid "Stream"
-msgstr "Stream"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:98
-msgid "Instant Record"
-msgstr "Registrazione istantanea"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:99
-msgid "Record current event"
-msgstr "Registrare l'evento corrente"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:100
-msgid "Start infinite recording"
-msgstr "Avviare registrazione illimitata"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:101
-msgid "Open Signal Panel"
-msgstr "Pannello Open Signal"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:102
-#, python-format
-msgid "Zap to %s"
-msgstr "Zap a %s"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:103
-#, python-format
-msgid "Open Multi-EPG for %s"
-msgstr "Aprire Multi-EPG per %s"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:104
-msgid "Load Bouquet"
-msgstr "Caricare il bouquet"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:105
-#, python-format
-msgid "Playlist for %s"
-msgstr "Playlist per %s"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:106
-msgid "Lookup on IMDb.com"
-msgstr "Ricercare su IMDb.com"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:107
-msgid "Add Timer"
-msgstr "Agg. timer"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:108
-msgid "Add Zap Timer"
-msgstr "Aggiungere timer zap"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:110
-msgid "No Service to show"
-msgstr "Nessun canale da mostrare"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:111
-msgid "please select a submenu on the left..."
-msgstr "Selezionare un sottomenu a sx..."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:112
-msgid "Filter Services"
-msgstr "Filtri canali"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:113
-msgid "Authors"
-msgstr "Autori"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:114
-msgid "and many contributors"
-msgstr "e molti con il contributo di molti"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:115
-msgid "JavaScript Libraries"
-msgstr "Librerie JavaScript"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:116
-msgid "License"
-msgstr "Licenza"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:117
-msgid "Device & Versions"
-msgstr "Supporto e versione"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:118
-msgid "Device Name"
-msgstr "Nome dispositivo"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:119
-msgid "Enigma2 Version"
-msgstr "Versione Enigma2"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:120
-msgid "Image Version"
-msgstr "Versione Immagine"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:121
-msgid "Frontprocessor Version"
-msgstr "Versione Frontprocessor"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:122
-msgid "Webinterface Version"
-msgstr "Versione Webinterface"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:123
-msgid "Tuners"
-msgstr "Tuner"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:124
-msgid "Harddisk"
-msgstr "Harddisk"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:125
-msgid "Capacity"
-msgstr "Capacità"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:126
-msgid "Free Space"
-msgstr "Spazio libero"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:127
-msgid "Network Interface"
-msgstr "Interfaccia di rete"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:128
-msgid "Mac Address"
-msgstr "Indirizzo Mac"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:129
-msgid "DHCP enabled"
-msgstr "DHCP abilitato"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:130
-msgid "IP Address"
-msgstr "Indirizzo IP"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:131
-msgid "Netmask"
-msgstr "Netmask"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:132
-msgid "Gateway"
-msgstr "Gateway"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:133
-msgid "Video Size"
-msgstr "Dimensioni video"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:134
-msgid "Widescreen"
-msgstr "Schermo panoramico"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:135
-msgid "Audio PID"
-msgstr "PID audio"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:136
-msgid "Video PID"
-msgstr "PID Video"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:137
-msgid "PCR PID"
-msgstr "PID PCR"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:138
-msgid "PMT PID"
-msgstr "PID PMT"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:139
-msgid "Text PID"
-msgstr "PID text"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:140
-msgid "TSID"
-msgstr "TSID"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:141
-msgid "ONID"
-msgstr "ONID"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:142
-msgid "SID"
-msgstr "SID"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:143
-msgid "Nothing running..."
-msgstr "Nulla è attivo"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:144
-msgid "Technical Information"
-msgstr "Informazioni tecniche"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:145
-msgid "Nothing found..."
-msgstr "Nessuna corrispondenza trovata."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:146
-msgid "No movies to show..."
-msgstr "Nessuna registrazione da mostrare..."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:147
-msgid "Download"
-msgstr "Download"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:148
-msgid "Volume Down"
-msgstr "Volume -"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:149
-msgid "Down"
-msgstr "Giù"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:150
-msgid "Mute"
-msgstr "Muto"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:151
-msgid "Unmute"
-msgstr "Mute off"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:152
-msgid "Volume Up"
-msgstr "Volume +"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:153
-msgid "Up"
-msgstr "Sù"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:154
-msgid "Get a Screenshot"
-msgstr "Ottenere uno screenshot"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:155
-msgid "Grab Video & OSD"
-msgstr "Screenshot video e OSD"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:156
-msgid "Send \\\"long\\\" keypress"
-msgstr "Pressione prolungata"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:157
-msgid "Refresh Screenshot"
-msgstr "Aggiornare screenshot"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:158
-msgid "WARNING: Cookies are required to store the settings!"
-msgstr "Attenzione: cookies richiesti per memorizzare la configurazione."
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:159
-msgid "Enable Debug"
-msgstr "Abilitare debug"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:160
-msgid "Update interval for current service (min. 10 sec)"
-msgstr "Intervallo di aggiornamento per il canale corrente min. 10 sec)"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:161
-msgid "Update-Interval for EPG of the current bouquets (min. 60 sec)"
-msgstr "Intervallo di aggiornamento EPG per il bouquet corrente (min. 60 sec)"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:162
-msgid "sec"
-msgstr "sec"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:163
-msgid "Previous"
-msgstr "Precedente"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:164
-msgid "Play"
-msgstr "Play"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:165
-#, python-format
-msgid "Play %s"
-msgstr "Play %s"
-
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:166
 #, python-format
 msgid "Add %s to playlist"
 msgstr "Aggiungere %s alla Playlist"
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:167
-#, python-format
-msgid "Remove %s from playlist"
-msgstr "Cancellare %s dalla Playlist"
+msgid "Add Timer"
+msgstr "Agg. timer"
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:168
-#, python-format
-msgid "Downlad %s"
-msgstr "Downlad %s"
+msgid "Add Zap Timer"
+msgstr "Aggiungere timer zap"
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:169
-#, python-format
-msgid "Delete %s"
-msgstr "Cancellare %s"
+#, fuzzy
+msgid "Add/Save"
+msgstr "Salvare"
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:170
+msgid "After event"
+msgstr "Dopo l'evento"
+
+msgid "All"
+msgstr "Tutti"
+
+msgid "All Timers"
+msgstr "Tutti i timer"
+
+msgid "Allow zapping via Webinterface"
+msgstr "Consentire zapping via webif"
+
+msgid "Audio PID"
+msgstr "PID audio"
+
+msgid "Authors"
+msgstr "Autori"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Autowrite timer"
+msgstr "Scrittura automatica timer"
+
+msgid "Begins"
+msgstr "Inizia"
+
+msgid "Bouquets"
+msgstr "Bouquet"
+
+msgid "BoxControl"
+msgstr "BoxControl"
+
+msgid "Cancel"
+msgstr "Annull."
+
+msgid "Cannot zap while device is in Standby"
+msgstr "Zap non consentito con il decoder in standby"
+
+msgid "Capacity"
+msgstr "Capacità"
+
+msgid "Challenge executed, please verify the result!"
+msgstr "Challenge eseguito: verificare il risultato."
+
 #, python-format
 msgid "Change to %s"
 msgstr "Cambiare in %s"
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:171
-msgid "Next"
-msgstr "Successivo"
+#, python-format
+msgid "Changing the timer for '%s' failed!"
+msgstr "%s: mofifica timer fallita."
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:172
-msgid "Stop"
-msgstr "Stop"
+msgid "Channel"
+msgstr "Canale"
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:173
-msgid "Filebrowser"
-msgstr "Browser file"
+msgid "Cleans up the list of timers by removing e.g. finished timers"
+msgstr "Ripulire l'elenco timer cancellando ad esempio quelli terminati"
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:174
-msgid "Playlist"
-msgstr "Playlist"
+msgid "Cleanup"
+msgstr "El. conclusi"
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:175
-msgid "Save Playlist"
-msgstr "Salvare la playlist"
+msgid "Clear search"
+msgstr "Azzerare ricerca"
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:176
+msgid "Click to show/hide extended description"
+msgstr "Click >> mostrare/nascondere la descrizione estesa"
+
 msgid "Close MediaPlayer"
 msgstr "Chiudere MediaPlayer"
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:177
+#, python-format
+msgid "Command '%s' executed"
+msgstr "Comando %s eseguito"
+
+msgid "Configuration for the Webinterface"
+msgstr "Configurazione Interfaccia web"
+
+#, python-format
+msgid "Conflicting Timer(s) detected! %s"
+msgstr "Rilevati timer in conflitto. %s"
+
+#, python-format
+msgid "Could not add timer '%s'!"
+msgstr "Impossibile aggiungere il timer %s."
+
+#, python-format
+msgid "Could not delete Movie '%s'"
+msgstr "Impossibile rimuovere la registrazione %s"
+
+#, python-format
+msgid "Could not find timer '%s' with given start and end time!"
+msgstr "Impossibile trovare un timer %s in base a questi orari di inizio e fine."
+
+msgid "Create Timer"
+msgstr "Agg. Timer"
+
+msgid "DHCP enabled"
+msgstr "DHCP abilitato"
+
+msgid "Days"
+msgstr "Giorni"
+
+msgid "Deactivate"
+msgstr "Disattivato"
+
+msgid "Deepstandby"
+msgstr "Deepstandby"
+
+msgid "Delete"
+msgstr "Canc."
+
+#, python-format
+msgid "Delete %s"
+msgstr "Cancellare %s"
+
+msgid "Delete Timer"
+msgstr "Rimuovere timer"
+
+msgid "Description"
+msgstr "Descrizione"
+
+#, python-format
+msgid "Destination dir '%s' does not exist."
+msgstr "La directory destinazione %s non esiste."
+
+msgid "Device & Versions"
+msgstr "Supporto e versione"
+
+msgid "Device Info"
+msgstr "Info supporto"
+
+msgid "Device Name"
+msgstr "Nome dispositivo"
+
+msgid "Disable"
+msgstr "Disabilitare"
+
+msgid "Do Nothing"
+msgstr "Non fare nulla"
+
+msgid "Down"
+msgstr "Giù"
+
+#, python-format
+msgid "Downlad %s"
+msgstr "Downlad %s"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "EPG-Search"
+msgstr "Ricerca EPG"
+
+msgid "ERROR: Cannot set SleepTimer while device is in Standby-Mode"
+msgstr "ERRORE: impossibile configurare uno Sleep timer con l'apparato in standby"
+
+#, python-format
+msgid "ERROR: Obligatory parameter 'cmd' [get,set] has unspecified value '%s'"
+msgstr "ERRORE: valore non atteso nel parametro richiesto \"cmd\" [get,set]: %s "
+
+#, python-format
+msgid "ERROR: Obligatory parameter 'enabled' [True,False] has unspecified value '%s'"
+msgstr "ERRORE: valore non atteso nel parametro richiesto \"abilitato\" [True,False]: %s "
+
+msgid "ERROR: Obligatory parameter 'time' [0-999] is missing"
+msgstr "ERRORE: parametro richiesto \"time\" [0-999] non presente"
+
+msgid "Edit Timer"
+msgstr "Modificare timer"
+
+msgid "Enable"
+msgstr "Abilitare"
+
+msgid "Enable /media"
+msgstr "Abilitare /media"
+
+msgid "Enable Debug"
+msgstr "Abilitare debug"
+
+msgid "Enable HTTP Access"
+msgstr "Abilitare accesso HTTP"
+
+msgid "Enable HTTP Authentication"
+msgstr "Abilitare autenticazione HTTP"
+
+msgid "Enable HTTPS Access"
+msgstr "Abilitare accesso HTTPS"
+
+msgid "Enable HTTPS Authentication"
+msgstr "Abilitare autenticazione HTTPS"
+
+msgid "Enable Streaming Authentication"
+msgstr "Abilitare autenticazione streaming"
+
+msgid "Ends"
+msgstr "Termina"
+
+msgid "Enigma2 Version"
+msgstr "Versione Enigma2"
+
+msgid "Error"
+msgstr "Errore"
+
+msgid "EventId not found"
+msgstr "Eventid non trovato"
+
+msgid "Extras"
+msgstr "Extra"
+
+msgid "False"
+msgstr "Falso"
+
+msgid "Filebrowser"
+msgstr "Browser file"
+
+msgid "Filter Services"
+msgstr "Filtri canali"
+
+msgid "Finished"
+msgstr "Terminato"
+
+msgid "Free Space"
+msgstr "Spazio libero"
+
+msgid "Frontprocessor Version"
+msgstr "Versione Frontprocessor"
+
+msgid "Gateway"
+msgstr "Gateway"
+
+msgid "Get a Screenshot"
+msgstr "Ottenere uno screenshot"
+
+msgid "Grab Video & OSD"
+msgstr "Screenshot video e OSD"
+
+msgid "HTTP Port"
+msgstr "Porta HTTP"
+
+msgid "HTTPS Port"
+msgstr "Porta HTTPS"
+
+msgid "Harddisk"
+msgstr "Harddisk"
+
+msgid "IP Address"
+msgstr "Indirizzo IP"
+
+msgid "IPv4-only Python/Twisted"
+msgstr ""
+
+msgid "IPv4-only kernel"
+msgstr ""
+
+#, fuzzy
+msgid "IPv6 address(es)"
+msgstr "Indirizzo IP"
+
+#, python-format
+msgid "Illegal Parameter Value: sRef - '%s'"
+msgstr "Valore parametro illegale: sRef - %s"
+
+#, python-format
+msgid "Illegal Parameter value for Parameter begin : '%s'"
+msgstr "Valore non consentito per il parametro inizio: %s"
+
+#, python-format
+msgid "Illegal Parameter value for Parameter eit : '%s'"
+msgstr "Valore non consentito per il parametro eit: %s"
+
+msgid "Image Version"
+msgstr "Versione Immagine"
+
+msgid "Info"
+msgstr "Info"
+
+msgid "Instant Record"
+msgstr "Registrazione istantanea"
+
+msgid "JavaScript Libraries"
+msgstr "Librerie JavaScript"
+
+msgid "LEVEL2 and LEVEL3 Certifcates (Base64-encoded)"
+msgstr "Certificati LEVEL2 e LEVEL3 (Base64-encoded)"
+
+msgid "Legend"
+msgstr "Legenda"
+
+msgid "License"
+msgstr "Licenza"
+
+msgid "List of Plugins has been read"
+msgstr "Elenco plugin letto"
+
+msgid "List of Timers has been cleaned"
+msgstr "Elenco timer ripulito"
+
+msgid "Load Bouquet"
+msgstr "Caricare il bouquet"
+
+msgid "Load movie-length"
+msgstr "Caricare durata registrazioni"
+
+msgid "Location"
+msgstr "Destinazione"
+
+#, python-format
+msgid "Location '%s' added successfully"
+msgstr "Destinazione %s aggiunta correttamente"
+
+#, python-format
+msgid "Location '%s' does not exist"
+msgstr "La destinazione %s non esiste"
+
+#, python-format
+msgid "Location '%s' is already existing"
+msgstr "La destinazione %s è già presente"
+
+#, python-format
+msgid "Location '%s' removed successfully"
+msgstr "Destinazione %s rimossa correttamente"
+
+msgid "Lookup on IMDb.com"
+msgstr "Ricercare su IMDb.com"
+
+msgid "Mac Address"
+msgstr "Indirizzo Mac"
+
+msgid "Mediaplayer"
+msgstr "MediaPlayer"
+
+msgid "Mediaplayer not installed"
+msgstr "mediaPlayer non installato"
+
+msgid "Mediaplayer was not active"
+msgstr "MediaPlayer non attivo"
+
+msgid "Message"
+msgstr "Messaggio"
+
+msgid "Message sent successfully!"
+msgstr "Messaggio inviato con successo."
+
+msgid "Missing Parameter: begin"
+msgstr "Parametro mancante: begin"
+
+msgid "Missing Parameter: beginOld"
+msgstr "Parametro mancante: beginOld"
+
+msgid "Missing Parameter: channelOld"
+msgstr "Parametro mancante: channelOld"
+
+msgid "Missing Parameter: description"
+msgstr "Parametro mancante: description"
+
+msgid "Missing Parameter: end"
+msgstr "Parametro mancante: end"
+
+msgid "Missing Parameter: endOld"
+msgstr "Parametro mancante: endOld"
+
+msgid "Missing Parameter: eventid"
+msgstr "Parametro mancante: eventid"
+
+msgid "Missing Parameter: name"
+msgstr "Parametro mancante: name"
+
+msgid "Missing Parameter: sRef"
+msgstr "Parametro mancante: sRef"
+
+msgid "Missing Paramter: dirname"
+msgstr "Parametro mancante: dirname"
+
+msgid "Missing or Wrong Argument"
+msgstr "Argomento errato o mancante"
+
+msgid "Missing or invalid parameter file"
+msgstr "Parametro file errato o mancante"
+
+msgid "Missing or wrong argument"
+msgstr "Argomento errato o mancante"
+
+msgid "Missing value for parameter dirname"
+msgstr "Parametro dirname: valore mancante."
+
+#, python-format
+msgid "Movie '%s' deleted"
+msgstr "Registrazione %s rimossa"
+
+#, python-format
+msgid "Movie '%s' has unknown suffix '%s'."
+msgstr "La registrazione%s possiede un suffisso sconosciuto: %s"
+
+#, python-format
+msgid "Movie '%s' moved to '%s' without errors."
+msgstr "Registrazione %s spostata in %s con successo."
+
+msgid "Movies"
+msgstr "Film"
+
+#, python-format
+msgid "Moving Movie '%s' to '%s' in background."
+msgstr "Spostamento di %s a %s in background in corso."
+
+msgid "Mute"
+msgstr "Muto"
+
+msgid "Mute toggled"
+msgstr "Mute commutato"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "Netmask"
+msgstr "Netmask"
+
+msgid "Network Interface"
+msgstr "Interfaccia di rete"
+
+msgid "Next"
+msgstr "Successivo"
+
+msgid "No Bouquets to Display"
+msgstr "Nessun bouquet da mostrare"
+
+msgid "No Messagetext given"
+msgstr "Nessun messaggio di testo"
+
+msgid "No Service to show"
+msgstr "Nessun canale da mostrare"
+
+msgid "No Timer Available!"
+msgstr "Timer non disponibili"
+
 msgid "No items to show..."
 msgstr "Nessuna voce da mostrare"
 
-#: ../enigma2-plugins/webinterface/src/WebComponents/Sources/Strings.py:178
+msgid "No movies to show..."
+msgstr "Nessuna registrazione da mostrare..."
+
+msgid "Note: For one-time events the days don't have to be specified."
+msgstr "Nota: per gli eventi singoli la specifica del giorno non è richiesta."
+
+msgid "Note: For recurring events dates are not mandatory."
+msgstr "Nota: per gli eventi ricorrenti la data non è obbligatoria."
+
+msgid "Nothing found..."
+msgstr "Nessuna corrispondenza trovata."
+
+msgid "Nothing running..."
+msgstr "Nulla è attivo"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "ONID"
+msgstr "ONID"
+
 #, python-format
-msgid "%s of %s min"
-msgstr "%s di %s min"
+msgid "Obligatory parameter \"random\" for cmd=\"%s\" missing"
+msgstr "Parametro richiesto mancante: random per cmd=%s"
+
+msgid "Obligatory parameter 'command' is missing!"
+msgstr "Parametro richiesto mancante: command"
+
+msgid "Obligatory parameter 'sRef' is missing"
+msgstr "Parametro richiesto mancante: sRef"
+
+msgid "Obligatory parameter sRef is missing"
+msgstr "Parametro richiesto mancante: sRef"
+
+msgid "Obligatory parameters missing [cmd [set,get], time [0-999], action [standby,shutdown], enabled [True,False]"
+msgstr "Parametri richiesti mancanti: [cmd [set,get], time [0-999], action [standby, shutdown], enabled [True,False]"
+
+#, python-format
+msgid "Open Multi-EPG for %s"
+msgstr "Aprire Multi-EPG per %s"
+
+msgid "Open Signal Panel"
+msgstr "Pannello Open Signal"
+
+msgid "PCR PID"
+msgstr "PID PCR"
+
+msgid "PMT PID"
+msgstr "PID PMT"
+
+#, python-format
+msgid "Path %s can not be created"
+msgstr "Il percorso %s non può essere creato"
+
+#, python-format
+msgid "Path %s does not exist"
+msgstr "Il percorso %s non esiste"
+
+msgid "Play"
+msgstr "Play"
+
+#, python-format
+msgid "Play %s"
+msgstr "Play %s"
+
+#, python-format
+msgid "Playback of '%s' started"
+msgstr "Avviata riproduzione di %s"
+
+msgid "Playlist"
+msgstr "Playlist"
+
+#, python-format
+msgid "Playlist '%s' does not exist"
+msgstr "La playlist %s non esiste"
+
+#, python-format
+msgid "Playlist for %s"
+msgstr "Playlist per %s"
+
+#, python-format
+msgid "Playlist saved to '%s'"
+msgstr "Playlist salvata in %s"
+
+msgid "Please select any bouquet"
+msgstr "Selezionare un bouquet"
+
+msgid "Power Control"
+msgstr "Power Control"
+
+msgid "Previous"
+msgstr "Precedente"
+
+msgid "Providers"
+msgstr "Provider"
+
+#, python-format
+msgid "RC command '%s' has been issued"
+msgstr "Il comando \"%s\" è stato inviato"
+
+msgid "Radio"
+msgstr "Radio"
+
+msgid "Reboot"
+msgstr "Riavvio"
+
+msgid "Record"
+msgstr "Registrare"
+
+msgid "Record current event"
+msgstr "Registrare l'evento corrente"
+
+msgid "Refresh Screenshot"
+msgstr "Aggiornare screenshot"
+
+#, python-format
+msgid "Remove %s from playlist"
+msgstr "Cancellare %s dalla Playlist"
+
+msgid "Restart enigma2"
+msgstr "Riavviare enigma2"
+
+msgid "Running"
+msgstr "Attivato"
+
+msgid "SID"
+msgstr "SID"
+
+msgid "Satellites"
+msgstr "Satelliti"
+
+msgid "Save"
+msgstr "Salvare"
+
+msgid "Save Playlist"
+msgstr "Salvare la playlist"
+
+msgid "Screenshot (All)"
+msgstr "Screenshot (tutto)"
+
+msgid "Screenshot (OSD)"
+msgstr "Screenshot (OSD)"
+
+msgid "Screenshot (Video)"
+msgstr "Screenshot (Video)"
+
+msgid "Search EPG"
+msgstr "Cercare EPG"
+
+msgid "Send"
+msgstr "Inviare"
+
+msgid "Send Message"
+msgstr "Inviare messaggio"
+
+msgid "Send \\\"long\\\" keypress"
+msgstr "Pressione prolungata"
+
+msgid "Settings"
+msgstr "Config."
+
+#, python-format
+msgid "Show EPG for %s"
+msgstr "Mostrare EPG per %s"
+
+msgid "Show Setup in Extensions menu"
+msgstr "Mostrare Configurazione nel menu Estensioni"
+
+msgid "Shutdown"
+msgstr "Spegnere"
+
+msgid "Simple Anti-Hijack Measures (may break clients)"
+msgstr "Semplice misura anti-Hijack (potrebbe scollegare i client)"
+
+msgid "Sleeptimer has been disabled"
+msgstr "Sleep timer è stato disabilitato"
+
+msgid "Sleeptimer is disabled"
+msgstr "Sleep timer disabilitato"
+
+msgid "Sleeptimer is enabled"
+msgstr "Sleep timer abilitato"
+
+#, python-format
+msgid "Sleeptimer set to %s minutes"
+msgstr "Sleep timer è stato impostato a %s minuti.."
+
+msgid "Source and destination folders are the same."
+msgstr "Le cartelle di origine e destinazione coincidono."
+
+msgid "Standby"
+msgstr "Standby"
+
+msgid "Start Webinterface"
+msgstr "Avviare Interfaccia web"
+
+msgid "Start infinite recording"
+msgstr "Avviare registrazione illimitata"
+
+msgid "State"
+msgstr "Stato"
+
+msgid "Stop"
+msgstr "Stop"
+
+msgid "Stream"
+msgstr "Stream"
+
+#, python-format
+msgid "Stream %s"
+msgstr "Stream %s"
+
+msgid "Success"
+msgstr "Correttamente"
+
+msgid "TSID"
+msgstr "TSID"
+
+msgid "TV"
+msgstr "TV"
+
+msgid "Tag Filter"
+msgstr "Filtro etich."
+
+msgid "Tags"
+msgstr "Etich."
+
+msgid "Technical Information"
+msgstr "Informazioni tecniche"
+
+msgid "TeleVision"
+msgstr "Televisione"
+
+msgid "Text PID"
+msgstr "PID text"
+
+#, python-format
+msgid "The sleep timer has been activated for %s minutes."
+msgstr "Sleep timer è stato attivato per %s minuti.."
+
+msgid "The sleep timer has been disabled."
+msgstr "Sleep timer disattivato."
+
+#, python-format
+msgid "The timer '%s' has been deleted successfully"
+msgstr "Timer %s rimosso correttamente."
+
+msgid "The timer has NOT been deleted"
+msgstr "Il timer non è stato rimosso"
+
+msgid "This device does not support AC3 Downmix"
+msgstr "Il dispositivo non supporta il downmix AC3"
+
+msgid "Timeout"
+msgstr "Timeout"
+
+msgid "Timer"
+msgstr "Timer"
+
+#, python-format
+msgid "Timer '%s' added"
+msgstr "Timer %s aggiunto"
+
+msgid "TimerList has been saved"
+msgstr "L'elenco timer è stato salvato"
+
+msgid "TimerList has not been saved"
+msgstr "L'elenco timer non è stato salvato"
+
+msgid "Timers"
+msgstr "Timer"
+
+msgid "Toggle Standby"
+msgstr "Commutare standby"
+
+msgid "Token-based security (may break clients)"
+msgstr "Sicurezza token-based (potrebbe scollegare i client)"
+
+msgid "Tools"
+msgstr "Strumenti"
+
+msgid "Tuners"
+msgstr "Tuner"
+
+msgid "Type"
+msgstr "Tipo"
+
+#, python-format
+msgid "Unknown Volume command %s"
+msgstr "Comando violume sconosciuto: %s"
+
+#, python-format
+msgid "Unknown command (%s)"
+msgstr "Comando sconosciuto (%s)"
+
+#, python-format
+msgid "Unknown for parameter \"cmd\" [%s|%s]"
+msgstr "Parametro sconosciuto per cmd [%s|%s]"
+
+#, python-format
+msgid "Unknown function: '%s'"
+msgstr "Funzion sconosciuta (%s)"
+
+#, python-format
+msgid "Unknown parameter %s"
+msgstr "Parametro sconosciuto (%s)"
+
+msgid "Unmute"
+msgstr "Mute off"
+
+#, python-format
+msgid "Unsupported Messagetype %s"
+msgstr "Tipo di messaggio non supportato (%s)"
+
+msgid "Up"
+msgstr "Sù"
+
+msgid "Update interval for current service (min. 10 sec)"
+msgstr "Intervallo di aggiornamento per il canale corrente min. 10 sec)"
+
+msgid "Update-Interval for EPG of the current bouquets (min. 60 sec)"
+msgstr "Intervallo di aggiornamento EPG per il bouquet corrente (min. 60 sec)"
+
+msgid "Video PID"
+msgstr "PID Video"
+
+msgid "Video Size"
+msgstr "Dimensioni video"
+
+msgid "Volume"
+msgstr "Volume"
+
+msgid "Volume Down"
+msgstr "Volume -"
+
+msgid "Volume Up"
+msgstr "Volume +"
+
+msgid "Volume changed"
+msgstr "Volume modificato"
+
+#, python-format
+msgid "Volume set to %i"
+msgstr "Livello volume: %i"
+
+msgid "WARNING: Cookies are required to store the settings!"
+msgstr "Attenzione: cookies richiesti per memorizzare la configurazione."
+
+msgid "Waiting"
+msgstr "In attesa"
+
+msgid "Warning"
+msgstr "Avviso"
+
+msgid "WebRemote"
+msgstr "WebRemote"
+
+msgid "WebTV"
+msgstr "WebTV"
+
+msgid "Webinterface"
+msgstr "Webinterface"
+
+msgid "Webinterface Version"
+msgstr "Versione Webinterface"
+
+msgid "Webinterface: Main Setup"
+msgstr "Interfaccia web - Configurazione"
+
+msgid "Widescreen"
+msgstr "Schermo panoramico"
+
+#, python-format
+msgid "Wrong parameter format 'set=%s'. Use set=set15"
+msgstr "\"set=%s\": formato parametro errato. Usare set=set15"
+
+msgid "Zap"
+msgstr "Zap"
+
+#, python-format
+msgid "Zap to %s"
+msgstr "Zap a %s"
+
+msgid "Zapping is disabled in WebInterface Configuration"
+msgstr "Zapping disabilitato nell'impostazione interfaccia web"
+
+msgid "and many contributors"
+msgstr "e molti con il contributo di molti"
+
+msgid "disabled"
+msgstr "Disabilitato"
+
+msgid "illegal call"
+msgstr "Chiamata illegale"
+
+#, python-format
+msgid "missing or wrong parameter mode [%i=both, %i=lamedb only, %i=userbouqets only, %i=transponders, %i=parentalcontrol white-/blacklist]"
+msgstr "Parametro mancante o errato [%i=entrambe, %i=solo lamedb, %i=solo bouquet %i=transponder, %i=controllo parentale white-/blacklist]"
+
+msgid "none/IPv4-only network"
+msgstr ""
+
+msgid "of"
+msgstr "di"
+
+msgid "one two three four unknown command"
+msgstr "Uno due tre quattro comando sconosciuto"
+
+msgid "please select a submenu on the left..."
+msgstr "Selezionare un sottomenu a sx..."
+
+msgid "reloaded both"
+msgstr "Ricaricati entrambi"
+
+msgid "reloaded bouquets"
+msgstr "Ricaricati bouquet"
+
+msgid "reloaded lamedb"
+msgstr "Ricaricato lamedb"
+
+msgid "sec"
+msgstr "sec"
+
+msgid "submit-message"
+msgstr ""
+
+msgid "the command was not > 0"
+msgstr "Il comando non è > 0"
+
+msgid "this recording"
+msgstr "Questa registrazione"
+
+#, python-format
+msgid "type %s is not a number"
+msgstr "Il tipo %s non è un numero"
+
+msgid "undefined"
+msgstr "Non definito"
+
+#, python-format
+msgid "unknown command (%s)"
+msgstr "Comando sconosciuto (%s)"

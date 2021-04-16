@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-05 22:58+0000\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: 2012-03-05 22:58+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,116 +17,64 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/plugin.py:849
-msgid " (Audio)"
-msgstr " (Audio)"
-
-#: ../src/plugin.py:851
-msgid " (Video)"
-msgstr " (Video)"
-
-#: ../src/plugin.py:671
 msgid "Buffer device:"
 msgstr "Buffer device:"
 
-#: ../src/plugin.py:672
 msgid "Buffer file handling:"
 msgstr "Buffer file handling:"
 
-#: ../src/plugin.py:670
 msgid "Buffer:"
 msgstr "Buffer:"
 
-#: ../src/plugin.py:243 ../src/plugin.py:767
 msgid "Delete this movie?"
 msgstr "Delete this movie?"
 
-#: ../src/plugin.py:158
 #, python-format
 msgid "Downloading movie: %s"
 msgstr "Downloading movie: %s"
 
-#: ../src/plugin.py:912 ../src/plugin.py:964
-msgid "Error getting categories"
-msgstr "Error getting categories"
-
-#: ../src/plugin.py:797
-msgid "Error getting episodes"
-msgstr "Error getting episodes"
-
-#: ../src/plugin.py:476 ../src/plugin.py:537 ../src/plugin.py:586
-msgid "Error getting genres"
-msgstr "Error getting genres"
-
-#: ../src/plugin.py:292
 msgid "Error getting movies"
 msgstr "Error getting movies"
 
-#: ../src/plugin.py:802
-msgid "Error getting podcast url"
-msgstr "Error getting podcast url"
+msgid "Feedly OPML"
+msgstr ""
 
-#: ../src/plugin.py:859
-msgid "Error getting podcasts"
-msgstr "Error getting podcasts"
+msgid "Help"
+msgstr ""
 
-#: ../src/plugin.py:481
-msgid "Error getting rss feed"
-msgstr "Error getting rss feed"
-
-#: ../src/plugin.py:300
 msgid "Length"
 msgstr "Length"
 
-#: ../src/plugin.py:70 ../src/plugin.py:146 ../src/plugin.py:197
-#: ../src/plugin.py:336 ../src/plugin.py:366 ../src/plugin.py:395
-#: ../src/plugin.py:427 ../src/plugin.py:490 ../src/plugin.py:546
-#: ../src/plugin.py:600 ../src/plugin.py:653 ../src/plugin.py:709
-#: ../src/plugin.py:727 ../src/plugin.py:811 ../src/plugin.py:868
-#: ../src/plugin.py:921 ../src/plugin.py:973 ../src/plugin.py:1004
+#, fuzzy
+msgid "No Feedly configuration"
+msgstr "configuration"
+
 msgid "Podcast"
 msgstr "Podcast"
 
-#: ../src/plugin.py:658
 msgid "Save"
 msgstr "Save"
 
-#: ../src/plugin.py:605
 msgid "Select"
 msgstr "Select"
 
-#: ../src/plugin.py:58
 msgid "Stop playing this movie?"
 msgstr "Stop playing this movie?"
 
-#: ../src/plugin.py:300
 msgid "Type"
 msgstr "Type"
 
-#: ../src/plugin.py:82
 msgid "ask me"
 msgstr "ask me"
 
-#: ../src/plugin.py:985
 msgid "configuration"
 msgstr "configuration"
 
-#: ../src/plugin.py:82
 msgid "delete"
 msgstr "delete"
 
-#: ../src/plugin.py:984 ../src/plugin.py:993
 msgid "from xml"
 msgstr "from xml"
 
-#: ../src/plugin.py:82
 msgid "keep on device"
 msgstr "keep on device"
-
-#: ../src/plugin.py:983 ../src/plugin.py:991
-msgid "podcast.com"
-msgstr "podcast.com"
-
-#: ../src/plugin.py:982 ../src/plugin.py:989
-msgid "podcast.de"
-msgstr "podcast.de"

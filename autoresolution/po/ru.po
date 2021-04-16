@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: litvcom\n"
 "Language-Team: \n"
@@ -13,12 +13,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.11\n"
 
-msgid "Autoresolution"
-msgstr "Авторазрешение экрана"
+msgid "Alternative resolution when native not supported"
+msgstr ""
+
+msgid "Ask before changing videomode"
+msgstr ""
 
 msgid "Auto frame rate (refresh need 'multi')"
 msgstr "Авто (необходимо выбрать частоту обновления - 'multi')"
 
+msgid "Autoresolution"
+msgstr "Авторазрешение экрана"
+
+#, python-format
 msgid ""
 "Autoresolution Plugin Testmode:\n"
 "Is %s OK?"
@@ -32,14 +39,18 @@ msgstr "Переключение"
 msgid "Autoresolution is not working in Scart/DVI-PC Mode"
 msgstr "Авторазрешение не работает в режиме Scart/DVI-PC Mode"
 
-msgid "Autoresolution settings"
-msgstr "Настройки авторазрешения экрана"
-
 msgid "Autoresolution videomode setup"
 msgstr "Установка видеорежима"
 
 msgid "Cancel"
 msgstr "Отменить"
+
+#, python-format
+msgid ""
+"Changing framerate for current service?\n"
+"Current framerate: %s\n"
+"New framerate: %s\n"
+msgstr ""
 
 msgid "Deinterlacer mode for interlaced content"
 msgstr "Устранение чересстрочности (чересстрочный контент)"
@@ -59,11 +70,34 @@ msgstr "Включить режим 1080p25"
 msgid "Enable 1080p30 Mode"
 msgstr "Включить режим 1080p30"
 
+#, fuzzy
+msgid "Enable 2160p24 Mode"
+msgstr "Включить режим 720p24"
+
+#, fuzzy
+msgid "Enable 2160p25 Mode"
+msgstr "Включить режим 1080p25"
+
+#, fuzzy
+msgid "Enable 2160p30 Mode"
+msgstr "Включить режим 1080p30"
+
 msgid "Enable 720p24 Mode"
+msgstr "Включить режим 720p24"
+
+#, fuzzy
+msgid "Enable 720p50 Mode"
 msgstr "Включить режим 720p24"
 
 msgid "Enable Autoresolution"
 msgstr "Включить"
+
+msgid "Exit"
+msgstr ""
+
+#, fuzzy
+msgid "FHD 50/60HZ Progressive Mode"
+msgstr "Чересстрочная развертка SD 30/60Гц"
 
 msgid "HD Interlace Mode"
 msgstr "Чересстрочная развёртка HD"
@@ -74,14 +108,31 @@ msgstr "Прогрессивная развёртка HD"
 msgid "Lock timeout"
 msgstr "Время ожидания"
 
+#, fuzzy
+msgid "Manual resolution"
+msgstr "Включить"
+
+#, fuzzy
+msgid "Manual resolution is not working in Scart/DVI-PC mode!"
+msgstr "Авторазрешение не работает в режиме Scart/DVI-PC Mode"
+
+msgid "Message timeout"
+msgstr ""
+
 msgid "Mode"
 msgstr "Режим"
 
 msgid "OK"
 msgstr "OK"
 
+msgid "Please select a resolution..."
+msgstr ""
+
 msgid "Refresh Rate"
 msgstr "Частота обновления"
+
+msgid "Return back without confirmation after 10 sec."
+msgstr ""
 
 msgid "Running in testmode"
 msgstr "Запуск в тестовом режиме"
@@ -101,14 +152,52 @@ msgstr "Чересстрочная развертка SD 30/60Гц"
 msgid "SD 30/60HZ Progressive Mode"
 msgstr "Чересстрочная развертка SD 30/60Гц"
 
+msgid "Show 'Manual resolution' in extensions menu"
+msgstr ""
+
 msgid "Show info screen"
 msgstr "Отображать информацию"
+
+msgid "This resolution is OK?"
+msgstr ""
+
+#, fuzzy
+msgid "UHD Interlace Mode"
+msgstr "Чересстрочная развёртка HD"
+
+#, fuzzy
+msgid "UHD Progressive Mode"
+msgstr "Прогрессивная развёртка HD"
+
+msgid "Use 60HZ instead 30HZ"
+msgstr ""
+
+msgid "Video: "
+msgstr ""
+
+#, python-format
+msgid "Videocontent: %sx%s%s %sHZ"
+msgstr ""
+
+#, python-format
+msgid "Videomode: %s"
+msgstr ""
+
+#, python-format
+msgid "Videomode: %s %s %s"
+msgstr ""
+
+msgid "auto"
+msgstr ""
 
 msgid "bob"
 msgstr "удвоения частоты кадров"
 
 msgid "default"
 msgstr "по умолчанию"
+
+msgid "manual"
+msgstr ""
 
 msgid "off"
 msgstr "выкл."

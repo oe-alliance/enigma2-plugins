@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins-extension-MyTube\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-10 09:10+0200\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2009-07-13 16:59+0100\n"
 "Last-Translator: Sebastian <zbigzbig2@op.pl>\n"
 "Language-Team: none\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,12 +14,15 @@ msgstr ""
 "X-Poedit-Country: POLAND\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: _\n"
-"X-Poedit-Basepath: V:\\eclipse_3-4\\workspace\\enigma2-plugins\\enigma2-"
-"plugins\\MyTube\n"
+"X-Poedit-Basepath: V:\\eclipse_3-4\\workspace\\enigma2-plugins\\enigma2-plugins\\MyTube\n"
 "X-Poedit-SearchPath-0: src\n"
 
 msgid " Results"
 msgstr ""
+
+#, fuzzy
+msgid "Add to favorites"
+msgstr "Ulubione"
 
 msgid "Added: "
 msgstr "Dodano: "
@@ -42,6 +46,9 @@ msgid "Australia"
 msgstr ""
 
 msgid "Author: "
+msgstr ""
+
+msgid "Auto paginate on last entry:"
 msgstr ""
 
 msgid "Autos & Vehicles"
@@ -113,6 +120,9 @@ msgstr ""
 msgid "Gaming"
 msgstr ""
 
+msgid "Genuine Dreambox validation failed!"
+msgstr ""
+
 msgid "Germany"
 msgstr ""
 
@@ -121,6 +131,9 @@ msgstr ""
 
 msgid "HD videos"
 msgstr "Filmy HD"
+
+msgid "Hello"
+msgstr ""
 
 msgid "Help"
 msgstr ""
@@ -155,6 +168,12 @@ msgstr ""
 msgid "Load feed on startup:"
 msgstr "Załaduj listę podczas startu:"
 
+msgid "Login OK"
+msgstr ""
+
+msgid "Login failed"
+msgstr ""
+
 msgid "Mexico"
 msgstr ""
 
@@ -176,13 +195,37 @@ msgstr "Najnowsze"
 msgid "Most responded"
 msgstr "Najbardziej odpowiednie"
 
+#, fuzzy
+msgid "Most shared"
+msgstr "Najczęściej dyskutowane"
+
 msgid "Most viewed"
 msgstr "Najczęściej ogladane"
 
 msgid "Music"
 msgstr ""
 
+#, fuzzy
+msgid "My Favorites"
+msgstr "Ulubione"
+
+#, fuzzy
+msgid "My History"
+msgstr "Historia"
+
+msgid "My Recommendations"
+msgstr ""
+
+msgid "My Subscriptions"
+msgstr ""
+
 msgid "My TubePlayer"
+msgstr ""
+
+msgid "My Uploads"
+msgstr ""
+
+msgid "My Watch Later"
 msgstr ""
 
 msgid "MyTube Settings"
@@ -207,6 +250,9 @@ msgid "MyTubeVideohelpScreen"
 msgstr ""
 
 msgid "New Zealand"
+msgstr ""
+
+msgid "New subscription added"
 msgstr ""
 
 msgid "News & Politics"
@@ -281,7 +327,14 @@ msgstr ""
 msgid "Relevance"
 msgstr "Trafności"
 
+msgid "Reset tv-screen after playback:"
+msgstr ""
+
 msgid "Response video entries."
+msgstr ""
+
+#, python-format
+msgid "Results: %s - Page: %s "
 msgstr ""
 
 msgid "Return to movie list"
@@ -338,6 +391,9 @@ msgstr "Kategorie"
 msgid "Stop playing this movie?"
 msgstr "Zatrzymać odtwarzanie filmu?"
 
+msgid "Subscribe to user"
+msgstr ""
+
 msgid "Sweden"
 msgstr ""
 
@@ -371,6 +427,9 @@ msgstr "Najlepiej oceniane"
 msgid "Travel & Events"
 msgstr ""
 
+msgid "Trending videos"
+msgstr ""
+
 msgid "Trying to download the Youtube feed entries. Please wait..."
 msgstr "Pobieranie listy filmów z YouTube. Proszę czekać..."
 
@@ -378,6 +437,19 @@ msgid "Trying to download the Youtube search results. Please wait..."
 msgstr "Pobieranie wyników wyszukiwania z YouTube"
 
 msgid "United States"
+msgstr ""
+
+msgid "Unknown error"
+msgstr ""
+
+#, fuzzy
+msgid "User video entries."
+msgstr "Nie, ale przełącz na stronę główną"
+
+msgid "Verify your Dreambox authenticity by running the genuine dreambox plugin!"
+msgstr ""
+
+msgid "Video successfully added to favorites"
 msgstr ""
 
 msgid "Videobrowser exit behavior:"
@@ -398,14 +470,17 @@ msgstr "Pokaż filmy"
 msgid "View response videos"
 msgstr "Pokaż moje oglądane"
 
+#, fuzzy
+msgid "View user videos"
+msgstr "Pokaż moje oglądane"
+
 msgid "Views: "
 msgstr "Obejrzano: "
 
 msgid ""
 "Welcome to the MyTube Youtube Player.\n"
 "\n"
-"Use the Bouqet+ button to navigate to the search field and the Bouqet- to "
-"navigate to the video entries.\n"
+"Use the Bouqet+ button to navigate to the search field and the Bouqet- to navigate to the video entries.\n"
 "\n"
 "To play a movie just press OK on your remote control.\n"
 "\n"
@@ -417,8 +492,7 @@ msgid ""
 msgstr ""
 "Wtam w odtwarzaczu MyTube.\n"
 "\n"
-"Użyj przycisku Bouquet+ aby przejść do okna wyszukiwania filmów i użyj "
-"przycisku Bouquet- aby przejsc do wybierania filmów.\n"
+"Użyj przycisku Bouquet+ aby przejść do okna wyszukiwania filmów i użyj przycisku Bouquet- aby przejsc do wybierania filmów.\n"
 "Aby odtworzyć film nacisnij OK.\n"
 "\n"
 "Nacisnij info aby zobaczyć opis filmu.\n"
@@ -430,11 +504,9 @@ msgstr ""
 msgid ""
 "Welcome to the MyTube Youtube Player.\n"
 "\n"
-"While entering your search term(s) you will get suggestions displayed "
-"matching your search term.\n"
+"While entering your search term(s) you will get suggestions displayed matching your search term.\n"
 "\n"
-"To select a suggestion press DOWN on your remote, select the desired result "
-"and press OK on your remote to start the search.\n"
+"To select a suggestion press DOWN on your remote, select the desired result and press OK on your remote to start the search.\n"
 "\n"
 "Press exit to get back to the input field."
 msgstr ""
@@ -448,17 +520,8 @@ msgstr "Tak, ale odtwórz następny film"
 msgid "Yes, but play previous video"
 msgstr "Tak, ale odtwórz poprzedni film"
 
-#~ msgid "MyTube Player Main Screen..."
-#~ msgstr "MyTube - Strona Główna"
+msgid "Youtube Password (reopen plugin on change):"
+msgstr ""
 
-#~ msgid "Please wait..."
-#~ msgstr "Proszę czekać..."
-
-#~ msgid "Press OK to save changes!!!"
-#~ msgstr "Nacisnij OK aby zapisać zmiany!!!"
-
-#~ msgid "Search"
-#~ msgstr "Szukaj"
-
-#~ msgid "There was an error getting the feed entries. Try again..."
-#~ msgstr "Bład podczas pobierania wpisów z YouTube. Powtórz jeszcze raz..."
+msgid "Youtube Username (reopen plugin on change):"
+msgstr ""

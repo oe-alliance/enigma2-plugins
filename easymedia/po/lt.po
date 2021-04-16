@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EasyMedia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 14:49+0300\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2017-07-10 14:51+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -11,263 +11,193 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: ../src/plugin.py:256
 msgid " added to EasyMedia"
 msgstr "įtraukta į EasyMedia"
 
-#: ../src/plugin.py:262
 msgid " removed from EasyMedia"
 msgstr "pašalinta iš EasyMedia"
 
-#: ../src/plugin.py:237
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
 
-#: ../src/plugin.py:220
 msgid "Add/remove plugin"
 msgstr "Pridėti/pašalinti įskiepį"
 
-#: ../src/plugin.py:333
 msgid "Bookmarks"
 msgstr "Atžymos"
 
-#: ../src/plugin.py:354
 msgid "DVD Player"
 msgstr "DVD grotuvas"
 
-#: ../src/plugin.py:189
 msgid "DVD player:"
 msgstr "DVD grotuvas:"
 
-#: ../src/plugin.py:523
 msgid "DVDPlayer Plugin is not installed!"
 msgstr "DVD grotuvo įskiepis neįdiegtas!"
 
-#: ../src/plugin.py:55 ../src/plugin.py:56 ../src/plugin.py:57
-#: ../src/plugin.py:58 ../src/plugin.py:59 ../src/plugin.py:60
-#: ../src/plugin.py:61 ../src/plugin.py:62 ../src/plugin.py:63
-#: ../src/plugin.py:64 ../src/plugin.py:65 ../src/plugin.py:66
-#: ../src/plugin.py:67 ../src/plugin.py:68 ../src/plugin.py:69
 msgid "Disabled"
 msgstr "Išjungta"
 
-#: ../src/plugin.py:56
 msgid "DreamExplorer"
 msgstr "Dream naršyklė"
 
-#: ../src/plugin.py:177
 msgid "EasyMedia settings..."
 msgstr "EasyMedia parametrai ..."
 
-#: ../src/plugin.py:57 ../src/plugin.py:58 ../src/plugin.py:59
-#: ../src/plugin.py:60 ../src/plugin.py:61 ../src/plugin.py:62
-#: ../src/plugin.py:63 ../src/plugin.py:64 ../src/plugin.py:65
-#: ../src/plugin.py:66 ../src/plugin.py:67 ../src/plugin.py:68
-#: ../src/plugin.py:69
 msgid "Enabled"
 msgstr "Įjungta"
 
-#: ../src/plugin.py:56
 msgid "Filebrowser"
 msgstr "Failų naršyklė"
 
-#: ../src/plugin.py:360
 msgid "Files"
 msgstr "Failai"
 
-#: ../src/plugin.py:182
 msgid "Files browser:"
 msgstr "Failų naršyklė:"
 
-#: ../src/plugin.py:55
+msgid "InternetRadio"
+msgstr ""
+
+#, fuzzy
+msgid "InternetRadio player:"
+msgstr "NetRadio grotuvas:"
+
 msgid "MediaPlayer"
 msgstr "Mediagrotuvas"
 
-#: ../src/plugin.py:554
 msgid "Merlin iDream is not installed!"
 msgstr "Merlin iDream neįdiegtas!"
 
-#: ../src/plugin.py:55
 msgid "MerlinMusicPlayer"
 msgstr "Merlin muzikos grotuvas"
 
-#: ../src/plugin.py:286 ../src/plugin.py:330
 msgid "Movies"
 msgstr "Filmai"
 
-#: ../src/plugin.py:345
 msgid "Music"
 msgstr "Muzika"
 
-#: ../src/plugin.py:181
 msgid "Music player:"
 msgstr "Muzikos grotuvas:"
 
-#: ../src/plugin.py:369
 msgid "MyTube Player"
 msgstr "MyTube grotuvas"
 
-#: ../src/plugin.py:529
 msgid "MyTube Plugin is not installed!"
 msgstr "MyTube įskiepis neįdiegtas!"
 
-#: ../src/plugin.py:378
 msgid "MyVideo"
 msgstr "MyVideo"
 
-#: ../src/plugin.py:560
 msgid "MyVideo Player is not installed!"
 msgstr "MyVideo grotuvas neįdiegtas!"
 
-#: ../src/plugin.py:194
 msgid "MyVideo player:"
 msgstr "MyVideo grotuvas:"
 
-#: ../src/plugin.py:191
-msgid "NetRadio player:"
-msgstr "NetRadio grotuvas:"
-
-#: ../src/plugin.py:511
 msgid "No File-Manager installed!"
 msgstr "Failo tvarkytuvas neįdiegtas!"
 
-#: ../src/plugin.py:499
 msgid "No Music-Player installed!"
 msgstr "Muzikos grotuvas neįdiegtas!"
 
-#: ../src/plugin.py:75
 msgid "Not easy way to start EasyMedia"
 msgstr "Nelengvas būdas atverti EasyMedia"
 
-#: ../src/plugin.py:471
 msgid "Nothing"
 msgstr "Nieko"
 
-#: ../src/plugin.py:489
 msgid "Picture-player is not installed!"
 msgstr "Nuotraukų grotuvas neįdiegtas!"
 
-#: ../src/plugin.py:185
 msgid "PicturePlayer:"
 msgstr "Nuotraukų grotuvas:"
 
-#: ../src/plugin.py:342
 msgid "Pictures"
 msgstr "Nuotraukos"
 
-#: ../src/plugin.py:351
 msgid "Radio"
 msgstr "Radijas"
 
-#: ../src/plugin.py:470
 msgid "Radio-mode"
 msgstr "Radijo-režimas"
 
-#: ../src/plugin.py:363
-msgid "SHOUTcast"
-msgstr "SHOUTcast"
-
-#: ../src/plugin.py:535
 msgid "SHOUTcast Plugin is not installed!"
 msgstr "SHOUTcast įskiepis neįdiegtas!"
 
-#: ../src/plugin.py:483
 msgid "Select bookmark..."
 msgstr "Pasirinkite atžymą..."
 
-#: ../src/plugin.py:192
 msgid "Show Merlin-iDream:"
 msgstr "Rodyti Merlin-iDream:"
 
-#: ../src/plugin.py:183
 msgid "Show bookmarks:"
 msgstr "Rodyti žymeles:"
 
-#: ../src/plugin.py:186
 msgid "Show tv/radio switch:"
 msgstr "Rodyti tv/radijo jungiklį:"
 
-#: ../src/plugin.py:235
 msgid "Some plugins are not available:\n"
 msgstr "Kai kurių įskiepiai neprieinami:\n"
 
-#: ../src/plugin.py:469
 msgid "TV-mode"
 msgstr "TV-režimas"
 
-#: ../src/plugin.py:336
 msgid "Timer"
 msgstr "Laikmatis"
 
-#: ../src/plugin.py:184
 msgid "Timer:"
 msgstr "Laikmatis:"
 
-#: ../src/plugin.py:56
 msgid "TuxCom"
 msgstr "TuxCom"
 
-#: ../src/plugin.py:349
 msgid "Tv/Radio"
 msgstr "TV / Radijas"
 
-#: ../src/plugin.py:372
 msgid "VLC Player"
 msgstr "VLC grotuvas"
 
-#: ../src/plugin.py:547
 msgid "VLC Player is not installed!"
 msgstr "VLC grotuvas neįdiegtas!"
 
-#: ../src/plugin.py:188
 msgid "VLC player:"
 msgstr "VLC grotuvas:"
 
-#: ../src/plugin.py:180
 msgid "Video database:"
 msgstr "Vaizdo duomenų bazė:"
 
-#: ../src/plugin.py:339
 msgid "VideoDB"
 msgstr "Vaizdo DB"
 
-#: ../src/plugin.py:566
 msgid "VideoDB is not installed!"
 msgstr "VideoDB neįdiegta!"
 
-#: ../src/plugin.py:357
 msgid "Weather"
 msgstr "Orai"
 
-#: ../src/plugin.py:517
 msgid "Weather Plugin is not installed!"
 msgstr "Orų įskiepis neįdiegtas."
 
-#: ../src/plugin.py:190
 msgid "Weather plugin:"
 msgstr "Orų įskiepis:"
 
-#: ../src/plugin.py:187
 msgid "YouTube player:"
 msgstr "YouTube grotuvas:"
 
-#: ../src/plugin.py:375
 msgid "ZDFmediathek"
 msgstr "ZDFmediathek"
 
-#: ../src/plugin.py:541
 msgid "ZDFmediathek Plugin is not installed!"
 msgstr "ZDFmediathek įskiepis neįdiegtas!"
 
-#: ../src/plugin.py:193
 msgid "ZDFmediathek player:"
 msgstr "ZDFmediathek grotuvas:"
 
-#: ../src/plugin.py:366
 msgid "iDream"
 msgstr "iDream"

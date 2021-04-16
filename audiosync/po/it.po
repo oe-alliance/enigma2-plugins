@@ -178,15 +178,3 @@ msgstr "Attesa prima di attivare (ms):"
 
 msgid "sets the Audio Delay (LipSync)"
 msgstr "Configurare il ritardo audio (LipSync)"
-
-#~ msgid " "
-#~ msgstr " "
-
-#~ msgid "Save"
-#~ msgstr "Salvare"
-
-#~ msgid "Select channel audio"
-#~ msgstr "Selezionare il canale audio"
-
-#~ msgid "Switch audio"
-#~ msgstr "Cambiare audio"

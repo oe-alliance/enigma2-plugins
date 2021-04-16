@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-25 08:17+0100\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2018-07-05 15:22+0200\n"
 "Last-Translator: Kojo\n"
 "Language-Team: Samzan/Kojo\n"
@@ -34,9 +34,6 @@ msgstr "Peruuta"
 
 msgid "Cast: "
 msgstr "Pääosissa:"
-
-msgid "Channel Selection"
-msgstr "Kanavavalinta"
 
 msgid "Content:"
 msgstr "Sisältö:"
@@ -117,9 +114,6 @@ msgstr "IMDb-haku"
 msgid "IMDb setup"
 msgstr "IMDb-asetukset"
 
-msgid "Lookup"
-msgstr "Tiedot"
-
 msgid "Menu"
 msgstr "Valikko"
 
@@ -185,9 +179,6 @@ msgstr "Etsi traileria"
 msgid "Search for details from the Internet Movie Database"
 msgstr "Etsi IMDb:stä lisätietoja"
 
-msgid "Select from EPG"
-msgstr "Valitse ohjelmaoppaasta"
-
 msgid "Settings for Internet Movie Database searches"
 msgstr "IMDb-haun asetukset"
 
@@ -244,15 +235,3 @@ msgstr "Hylättävät sanat / lauseet"
 
 msgid "no user rating yet"
 msgstr "Ei arvostelua vielä"
-
-#~ msgid "Enable this to be able to access the IMDb from within the plugin browser."
-#~ msgstr "Sallii pääsyn IMDb hakuun lisäosavalikosta"
-
-#~ msgid "IMDb Details"
-#~ msgstr "IMDb tiedot"
-
-#~ msgid "Query details from the Internet Movie Database"
-#~ msgstr "Hakutulokset"
-
-#~ msgid "Show in plugin browser"
-#~ msgstr "Näytä lisäosavalikossa"

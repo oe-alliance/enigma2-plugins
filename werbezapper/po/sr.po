@@ -83,13 +83,3 @@ msgstr "Minuta"
 
 msgid "minutes"
 msgstr "Minuti"
-
-#~ msgid ""
-#~ "Timer already running.\n"
-#~ "Stop it?"
-#~ msgstr ""
-#~ "Tajmer još radi.\n"
-#~ "Zaustaviti?"
-
-#~ msgid "Zapping back in %d Minutes"
-#~ msgstr "Prebacivanje nazad %d minuta"

@@ -15,8 +15,7 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
-"X-Poedit-SearchPath-0: V:\\eclipse\\workspaces\\pydev\\enigma2-plugins"
-"\\enigma2-plugins\\ncidclient\\src\n"
+"X-Poedit-SearchPath-0: V:\\eclipse\\workspaces\\pydev\\enigma2-plugins\\enigma2-plugins\\ncidclient\\src\n"
 
 #. TRANSLATORS: this is a window title.
 msgid "Add entry to phonebook"

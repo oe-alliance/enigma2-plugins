@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,145 +17,109 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/plugin.py:1379
 msgid "Abort all downloads"
 msgstr ""
 
-#: ../src/plugin.py:1272 ../src/plugin.py:1352
 msgid "Add"
 msgstr ""
 
-#: ../src/plugin.py:1376
 msgid "Add downloads from txt files"
 msgstr ""
 
-#: ../src/plugin.py:1377
 msgid "Add files from container"
 msgstr ""
 
-#: ../src/plugin.py:916
 #, python-format
 msgid "Added %s to the download-list."
 msgstr ""
 
-#: ../src/plugin.py:830
 msgid "Allow downloading on friday:"
 msgstr ""
 
-#: ../src/plugin.py:826
 msgid "Allow downloading on monday:"
 msgstr ""
 
-#: ../src/plugin.py:831
 msgid "Allow downloading on saturday:"
 msgstr ""
 
-#: ../src/plugin.py:832
 msgid "Allow downloading on sunday:"
 msgstr ""
 
-#: ../src/plugin.py:829
 msgid "Allow downloading on thursday:"
 msgstr ""
 
-#: ../src/plugin.py:827
 msgid "Allow downloading on tuesday:"
 msgstr ""
 
-#: ../src/plugin.py:828
 msgid "Allow downloading on wednesday:"
 msgstr ""
 
-#: ../src/plugin.py:276 ../src/plugin.py:307 ../src/plugin.py:339
-#: ../src/plugin.py:393 ../src/plugin.py:427
 msgid "Checking"
 msgstr ""
 
-#: ../src/plugin.py:839
 msgid "Choose reconnect script:"
 msgstr ""
 
-#: ../src/plugin.py:1381
 msgid "Clear finished downloads"
 msgstr ""
 
-#: ../src/plugin.py:1388
 msgid "Close plugin"
 msgstr ""
 
-#: ../src/plugin.py:1353
 msgid "Config"
 msgstr ""
 
-#: ../src/plugin.py:1271 ../src/plugin.py:1350
 msgid "Delete"
 msgstr ""
 
-#: ../src/plugin.py:1436
 #, python-format
 msgid "Delete %s?"
 msgstr ""
 
-#: ../src/plugin.py:1374
 msgid "Delete download"
 msgstr ""
 
-#: ../src/plugin.py:1378
 msgid "Delete failed downloads"
 msgstr ""
 
-#: ../src/plugin.py:1383
 msgid "Delete log"
 msgstr ""
 
-#: ../src/plugin.py:834
 msgid "Don't download after:"
 msgstr ""
 
-#: ../src/plugin.py:833
 msgid "Don't download before:"
 msgstr ""
 
-#: ../src/plugin.py:841
 msgid "Don't reconnect after:"
 msgstr ""
 
-#: ../src/plugin.py:840
 msgid "Don't reconnect before:"
 msgstr ""
 
-#: ../src/plugin.py:1530
 msgid "Download files from rapidshare"
 msgstr ""
 
-#: ../src/plugin.py:816
 msgid "Download in the background:"
 msgstr ""
 
-#: ../src/plugin.py:331 ../src/plugin.py:342 ../src/plugin.py:365
-#: ../src/plugin.py:371 ../src/plugin.py:738
 msgid "Downloading"
 msgstr ""
 
-#: ../src/plugin.py:824
 msgid "Downloads directory:"
 msgstr ""
 
-#: ../src/plugin.py:1244
 msgid "Enter unrar password:"
 msgstr ""
 
-#: ../src/plugin.py:918
 #, python-format
 msgid "Error while adding %s to the download-list!"
 msgstr ""
 
-#: ../src/plugin.py:1509
 #, python-format
 msgid "Error while decrypting %s!"
 msgstr ""
 
-#: ../src/plugin.py:972
 #, python-format
 msgid ""
 "Error while searching http://rapidshare-search-engine.com!\n"
@@ -163,162 +127,120 @@ msgid ""
 "Error: %s"
 msgstr ""
 
-#: ../src/plugin.py:928
 msgid ""
 "Error while searching http://rapidshare-search-engine.com!\n"
 "\n"
 "Error: Nothing found, sorry."
 msgstr ""
 
-#: ../src/plugin.py:400 ../src/plugin.py:412 ../src/plugin.py:547
-#: ../src/plugin.py:728 ../src/plugin.py:753
 msgid "Failed"
 msgstr ""
 
-#: ../src/plugin.py:406 ../src/plugin.py:547 ../src/plugin.py:653
-#: ../src/plugin.py:720 ../src/plugin.py:1433
 msgid "Finished"
 msgstr ""
 
-#: ../src/plugin.py:825
 msgid "Ignore download times:"
 msgstr ""
 
-#: ../src/plugin.py:1387
 msgid "Install unrar"
 msgstr ""
 
-#: ../src/plugin.py:1420
 msgid "Installing unrar..."
 msgstr ""
 
-#: ../src/plugin.py:823
 msgid "Lists directory:"
 msgstr ""
 
-#: ../src/plugin.py:983
 msgid "Loading next page... please wait!"
 msgstr ""
 
-#: ../src/plugin.py:977
 msgid "Loading previous page... please wait!"
 msgstr ""
 
-#: ../src/plugin.py:843
 msgid "Mark files < 1 MB as failed:"
 msgstr ""
 
-#: ../src/plugin.py:835
 msgid "Maximal downloads:"
 msgstr ""
 
-#: ../src/plugin.py:1354
 msgid "Menu"
 msgstr ""
 
-#: ../src/plugin.py:59
 msgid "No reconnect"
 msgstr ""
 
-#: ../src/plugin.py:929
 msgid "Nothing found, sorry."
 msgstr ""
 
-#: ../src/plugin.py:1385
 msgid "Open unrar Manager"
 msgstr ""
 
-#: ../src/plugin.py:945
 #, python-format
 msgid "Page %d / %d. Push < > to switch the page..."
 msgstr ""
 
-#: ../src/plugin.py:820
 msgid "Password (netload.in):"
 msgstr ""
 
-#: ../src/plugin.py:822
 msgid "Password (uploaded.to):"
 msgstr ""
 
-#: ../src/plugin.py:818
 msgid "Password:"
 msgstr ""
 
-#: ../src/plugin.py:1389
 msgid "Please choose a function..."
 msgstr ""
 
-#: ../src/plugin.py:774 ../src/plugin.py:1530
 msgid "RS Downloader"
 msgstr ""
 
-#: ../src/plugin.py:838
 msgid "Reconnect type:"
 msgstr ""
 
-#: ../src/plugin.py:842
 msgid "Restart failed after 10 minutes:"
 msgstr ""
 
-#: ../src/plugin.py:1380
 msgid "Restart failed downloads"
 msgstr ""
 
-#: ../src/plugin.py:813
 msgid "Save"
 msgstr ""
 
-#: ../src/plugin.py:59
 msgid "Script"
 msgstr ""
 
-#: ../src/plugin.py:1351
 msgid "Search"
 msgstr ""
 
-#: ../src/plugin.py:1445
 msgid "Search http://rapidshare-search-engine.com for:"
 msgstr ""
 
-#: ../src/plugin.py:1382
 msgid "Show log"
 msgstr ""
 
-#: ../src/plugin.py:836
 msgid "Take x downloads to list:"
 msgstr ""
 
-#: ../src/plugin.py:1298
 msgid "Unrar is already working!"
 msgstr ""
 
-#: ../src/plugin.py:1375
 msgid "Use search engine"
 msgstr ""
 
-#: ../src/plugin.py:819
 msgid "Username (netload.in):"
 msgstr ""
 
-#: ../src/plugin.py:821
 msgid "Username (uploaded.to):"
 msgstr ""
 
-#: ../src/plugin.py:817
 msgid "Username:"
 msgstr ""
 
-#: ../src/plugin.py:229 ../src/plugin.py:296 ../src/plugin.py:320
-#: ../src/plugin.py:379 ../src/plugin.py:414 ../src/plugin.py:563
-#: ../src/plugin.py:584 ../src/plugin.py:744 ../src/plugin.py:758
 msgid "Waiting"
 msgstr ""
 
-#: ../src/plugin.py:837
 msgid "Write log:"
 msgstr ""
 
-#: ../src/plugin.py:59
 msgid "fritz.Box"
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,192 +17,149 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/plugin.py:102
 #, python-format
 msgid "%d Feed(s) were added to configuration."
 msgstr ""
 
-#: ../src/plugin.py:134
 msgid "A simple to use RSS reader"
 msgstr ""
 
-#: ../src/RSSSetup.py:22
 msgid "Autoupdate"
 msgstr ""
 
-#: ../src/RSSSetup.py:28 ../src/RSSSetup.py:78
 msgid "Cancel"
 msgstr ""
 
-#: ../src/RSSScreens.py:460 ../src/RSSScreens.py:465
 msgid "Close"
 msgstr ""
 
-#: ../src/RSSSetup.py:81
 msgid "Delete"
 msgstr ""
 
-#: ../src/RSSScreens.py:126 ../src/RSSScreens.py:213
 msgid "Enclosures"
 msgstr ""
 
-#: ../src/RSSScreens.py:414 ../src/RSSScreens.py:442
 msgid "Entries"
 msgstr ""
 
-#: ../src/RSSScreens.py:121 ../src/RSSScreens.py:208 ../src/RSSScreens.py:316
 #, python-format
 msgid "Entry %s/%s"
 msgstr ""
 
-#: ../src/RSSScreens.py:57
-msgid ""
-"Error while parsing Feed, this usually means there is something wrong with "
-"it."
+msgid "Error while parsing Feed, this usually means there is something wrong with it."
 msgstr ""
 
-#: ../src/RSSPoller.py:84
 msgid "Failed to get subscriptions from Google Reader."
 msgstr ""
 
-#: ../src/RSSPoller.py:65
 msgid "Failed to login to Google Reader."
 msgstr ""
 
-#: ../src/RSSSetup.py:103
 msgid "Feed"
 msgstr ""
 
-#: ../src/RSSScreens.py:415 ../src/RSSScreens.py:443
 #, python-format
 msgid "Feed %s/%s"
 msgstr ""
 
-#: ../src/RSSSetup.py:23
 msgid "Feed URI"
 msgstr ""
 
-#: ../src/RSSScreens.py:319 ../src/RSSScreens.py:321
 msgid "Feed is empty."
 msgstr ""
 
-#: ../src/RSSSetup.py:118
 msgid "Fetch feeds from Google Reader?"
 msgstr ""
 
-#: ../src/RSSScreens.py:98
 msgid "Found no Enclosure we can display."
 msgstr ""
 
-#: ../src/RSSSetup.py:124
 msgid "Google Password"
 msgstr ""
 
-#: ../src/RSSSetup.py:123
 msgid "Google Username"
 msgstr ""
 
-#: ../src/RSSSetup.py:110
 msgid "Keep running in background"
 msgstr ""
 
-#: ../src/RSSSetup.py:80
 msgid "New"
 msgstr ""
 
-#: ../src/RSSPoller.py:37
 msgid "New Items"
 msgstr ""
 
-#: ../src/RSSPoller.py:38
 msgid "New Items since last Auto-Update"
 msgstr ""
 
-#: ../src/RSSScreens.py:152 ../src/RSSScreens.py:215
 msgid "No such Item."
 msgstr ""
 
-#: ../src/plugin.py:15
 msgid "Notification"
 msgstr ""
 
-#: ../src/RSSSetup.py:29 ../src/RSSSetup.py:79
 msgid "OK"
 msgstr ""
 
-#: ../src/plugin.py:16
 msgid "Preview"
 msgstr ""
 
-#: ../src/RSSSetup.py:139
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
 msgstr ""
 
-#: ../src/RSSPoller.py:193
 #, python-format
 msgid "Received %d new news item(s)."
 msgstr ""
 
-#: ../src/RSSScreens.py:459 ../src/RSSScreens.py:464
 msgid "Setup"
 msgstr ""
 
-#: ../src/RSSSetup.py:116
 msgid "Show new Messages as"
 msgstr ""
 
-#: ../src/RSSScreens.py:423
 msgid "Simple RSS Reader"
 msgstr ""
 
-#: ../src/RSSSetup.py:42 ../src/RSSSetup.py:96
 msgid "Simple RSS Reader Setup"
 msgstr ""
 
-#: ../src/RSSScreens.py:146 ../src/RSSScreens.py:308
 #, python-format
 msgid "Simple RSS Reader: %s"
 msgstr ""
 
-#: ../src/RSSPoller.py:124
 #, python-format
 msgid ""
 "Sorry, this type of feed is unsupported:\n"
 "%s"
 msgstr ""
 
-#: ../src/RSSSetup.py:107
 msgid "Start automatically with Enigma2"
 msgstr ""
 
-#: ../src/plugin.py:124
 msgid "Subscribe Newsfeed..."
 msgstr ""
 
-#: ../src/RSSScreens.py:458
+msgid "Ticker"
+msgstr ""
+
 msgid "Update Feed"
 msgstr ""
 
-#: ../src/RSSSetup.py:117
 msgid "Update Interval (min)"
 msgstr ""
 
-#: ../src/RSSScreens.py:83
 msgid ""
 "Update is being done in Background.\n"
 "Contents will automatically be updated when it's done."
 msgstr ""
 
-#: ../src/plugin.py:145
 msgid "View RSS..."
 msgstr ""
 
-#: ../src/RSSScreens.py:471
 msgid "What to do?"
 msgstr ""
 
-#: ../src/plugin.py:17
 msgid "none"
 msgstr ""

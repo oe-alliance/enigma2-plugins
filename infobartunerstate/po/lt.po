@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: InfoBarTunerState\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 17:25+0300\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2017-07-10 17:25+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: \n"
@@ -18,285 +18,325 @@ msgstr ""
 "X-Poedit-Basepath: .../enigma2-plugins/infobartunerstate\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/infobartunerstate\n"
 
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:45
-msgid "Configuration"
-msgstr "Konfigūracija"
+msgid ""
+"  (C) 2012 by betonme @ IHAD \n"
+"\n"
+msgstr ""
 
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:49
-msgid "Cancel"
-msgstr "Atšaukti"
+msgid "  If You like this plugin and want to support it,\n"
+msgstr ""
 
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:50
-msgid "OK"
-msgstr "Gerai"
+msgid "  SUPPORT: "
+msgstr ""
 
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:77
-msgid "Usage"
-msgstr "Naudojimas"
+msgid ""
+"  Thanks a lot ! \n"
+"  PayPal: "
+msgstr ""
 
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:85
-msgid "Enable InfoBarTunerState"
-msgstr "Įjungti InfoBarTunerState"
+msgid ""
+"  feel free to donate via PayPal. \n"
+"\n"
+msgstr ""
 
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:87
-msgid "Add to extension menu"
-msgstr "Rodyti tarp plėtinių meniu"
+msgid "  or if just want to say ''thanks'',\n"
+msgstr ""
 
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:89
-msgid "Show and hide with InfoBar"
-msgstr "Rodyti ir slėpti su infojuosta"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:90
-msgid "Show on events"
-msgstr "Rodyti įvykiams"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:91
-msgid "MoviePlayer integration"
-msgstr "Integruoti į filmų grotuvą"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:92
-msgid "Time format"
-msgstr "Laiko formatas"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:93
-msgid "Number of finished records in list"
-msgstr "Baigtų įrašų skaičius sąraše"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:94
-msgid "Number of seconds for displaying finished records"
-msgstr "Kiek sekundžių rodyti baigto įrašo pranešimą"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:100
-#, python-format
-msgid "Field %d content"
-msgstr "Lauko %d turinys"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:105
-msgid "Horizontal offset in pixel"
-msgstr "Horizontalus poslinkis pikseliais"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:106
-msgid "Vertical offset in pixel"
-msgstr "Vertikalus poslinkis pikseliais"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:107
-msgid "Text padding offset in pixel"
-msgstr "Teksto užpildymo poslinkis pikseliais"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:108
-msgid "Text spacing offset in pixel"
-msgstr "Teksto tarpų poslinkis pikseliais"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:109
-msgid "Background transparency"
-msgstr "Fono skaidrumas"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:114
-msgid "Infobar timeout"
-msgstr "Infojuosta išsijungs po"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:115
-msgid "Show Message when Recording starts"
-msgstr "Rodyti žinutę, kad prasideda įrašymas"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:148
-msgid "Only one Icon field allowed:"
-msgstr "Leidžiamas tik vienas piktogramos laukas:"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:153
-msgid "Only one Graphical Progress field allowed:"
-msgstr "Leidžiamas tik vienas grafinio progreso laukas:"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:775
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:776
-msgid "-"
-msgstr "-"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:873
-msgid "Record"
-msgstr "Įrašas"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:875
-msgid "Stream"
-msgstr "Srautas"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:877
-msgid "Finished"
-msgstr "Baigta"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:889
 #, python-format
 msgid "%d"
 msgstr "%d"
 
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:902
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:909
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:917
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:920
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:935
-#, python-format
-msgid "%d Min"
-msgstr "%d min."
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:939
 #, python-format
 msgid "%d %%"
 msgstr "%d %%"
 
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:969
-#, python-format
-msgid "%d MB"
-msgstr "%d MB"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:973
 #, python-format
 msgid "%d GB"
 msgstr "%d GB"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:37
-msgid "InfoBar Tuner State"
-msgstr "Imtuvo stovis infojuostoje"
+#, python-format
+msgid "%d MB"
+msgstr "%d MB"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:38
-msgid "Show InfoBar Tuner State"
-msgstr "Roryti infojuostoje imtuvo stovį"
+#, python-format
+msgid "%d Min"
+msgstr "%d min."
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:49
-msgid "Type (Icon)"
-msgstr "Tipas (piktograma)"
+msgid "-"
+msgstr "-"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:50
-msgid "Type (Text)"
-msgstr "Tipas (tekstas)"
+#, fuzzy
+msgid "-    HH:MM"
+msgstr "HH:MM"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:51
-msgid "Tuner"
-msgstr "Imtuvas"
+#, fuzzy
+msgid "Add Setup to extension menu"
+msgstr "Rodyti tarp plėtinių meniu"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:52
-msgid "Tuner Type"
-msgstr "Imtuvo tipas"
+#, fuzzy
+msgid "Add Show to extension menu"
+msgstr "Rodyti tarp plėtinių meniu"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:53
-msgid "Channel Number"
-msgstr "Kanalo numeris"
+msgid "Background transparency"
+msgstr "Fono skaidrumas"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:54
-msgid "Channel Name"
-msgstr "Kanalo pavadinimas"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:55
-msgid "Name"
-msgstr "Pavadinimas"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:56
-msgid "Time Left / Duration"
-msgstr "Liko laiko / Trukmė"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:57
-msgid "Time Left"
-msgstr "Liko laiko"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:58
-msgid "Time Elapsed"
-msgstr "Praėjo laiko"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:59
 msgid "Begin"
 msgstr "Pradžia"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:60
-msgid "End"
-msgstr "Pabaiga"
+msgid "Cancel"
+msgstr "Atšaukti"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:61
-msgid "Duration"
-msgstr "Trukmė"
+msgid "Channel Name"
+msgstr "Kanalo pavadinimas"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:62
-msgid "Timer Progress (Graphical)"
-msgstr "Laikmačio eiga (grafinė)"
+msgid "Channel Number"
+msgstr "Kanalo numeris"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:63
-msgid "Timer Progress (Text)"
-msgstr "Laikmačio eiga (tekstinė)"
+msgid "Configuration"
+msgstr "Konfigūracija"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:64
-msgid "Destination"
-msgstr "Paskirtis"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:65
-msgid "Stream Client"
-msgstr "Srauto klientas"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:66
-msgid "Stream Client with Port"
-msgstr "Srauto klientas ir prievadas"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:67
-msgid "Destination / Client"
-msgstr "Paskirtis / klientas"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:70
-msgid "File Size"
-msgstr "Failo dydis"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:71
-msgid "Free Space"
-msgstr "Laisva vieta"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:72
-msgid "None"
-msgstr "Joks"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:76
-msgid "HH:MM"
-msgstr "HH:MM"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:77
 msgid "DD.MM HH:MM"
 msgstr "MM.DD HH:MM"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:78
-msgid "MM/DD HH:MM"
+#, fuzzy
+msgid "DD.MM. HH:MM"
 msgstr "MM.DD HH:MM"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:79
 msgid "DD.MM.YYYY HH:MM"
 msgstr "YYYY.MM.DD HH:MM"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:80
-msgid "YYYY/MM/DD HH:MM"
-msgstr "YYYY.MM.DD HH:MM"
+msgid "Destination"
+msgstr "Paskirtis"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:81
+msgid "Destination / Client"
+msgstr "Paskirtis / klientas"
+
+msgid "Duration"
+msgstr "Trukmė"
+
+msgid "Enable InfoBarTunerState"
+msgstr "Įjungti InfoBarTunerState"
+
+msgid "End"
+msgstr "Pabaiga"
+
+#, fuzzy
+msgid "End record"
+msgstr "Įrašas"
+
+#, python-format
+msgid "Field %d content"
+msgstr "Lauko %d turinys"
+
+#, fuzzy, python-format
+msgid "Field %d width"
+msgstr "Lauko %d turinys"
+
+msgid "File Size"
+msgstr "Failo dydis"
+
+msgid "Finished"
+msgstr "Baigta"
+
+msgid "Free Space"
+msgstr "Laisva vieta"
+
+msgid "HH:MM"
+msgstr "HH:MM"
+
 msgid "HH:MM DD.MM"
 msgstr "HH:MM MM.DD"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:82
-msgid "HH:MM MM/DD"
-msgstr "HH:MM MM.DD"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:83
 msgid "HH:MM DD.MM.YYYY"
 msgstr "HH:MM YYYY.MM.DD"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:84
+msgid "HH:MM MM/DD"
+msgstr "HH:MM MM.DD"
+
 msgid "HH:MM YYYY/MM/DD"
 msgstr "HH:MM YYYY.MM.DD"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:141
-msgid "configuration"
-msgstr "konfigūracija"
+#, fuzzy
+msgid "Horizontal offset left in pixel"
+msgstr "Horizontalus poslinkis pikseliais"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:190
+#, fuzzy
+msgid "Horizontal offset right in pixel"
+msgstr "Horizontalus poslinkis pikseliais"
+
+#, fuzzy
+msgid "InfoBarTunerState"
+msgstr "Imtuvo stovis infojuostoje"
+
+#, fuzzy
+msgid "InfoBarTunerState Setup"
+msgstr "Imtuvo stovis infojuostoje"
+
+msgid "InfoBarTunerState is disabled"
+msgstr "Imtuvo stovis infojuostoje išjungtas"
+
+msgid "Infobar timeout"
+msgstr "Infojuosta išsijungs po"
+
+msgid "List goes up"
+msgstr ""
+
+msgid "MM/DD HH:MM"
+msgstr "MM.DD HH:MM"
+
+msgid "MoviePlayer integration"
+msgstr "Integruoti į filmų grotuvą"
+
+msgid "Name"
+msgstr "Pavadinimas"
+
+msgid "None"
+msgstr "Joks"
+
 msgid "Nothing running"
 msgstr "Niekas neveikia"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:194
-msgid "InfoBarTunerState is disabled"
-msgstr "Imtuvo stovis infojuostoje išjungtas"
+msgid "Number of finished records in list"
+msgstr "Baigtų įrašų skaičius sąraše"
+
+#, fuzzy
+msgid "Number of pending records in list"
+msgstr "Baigtų įrašų skaičius sąraše"
+
+msgid "Number of seconds for displaying finished records"
+msgstr "Kiek sekundžių rodyti baigto įrašo pranešimą"
+
+msgid "OK"
+msgstr "Gerai"
+
+msgid "Only one Graphical Progress field allowed:"
+msgstr "Leidžiamas tik vienas grafinio progreso laukas:"
+
+msgid "Only one Icon field allowed:"
+msgstr "Leidžiamas tik vienas piktogramos laukas:"
+
+#, fuzzy
+msgid "Only one Name field allowed:"
+msgstr "Leidžiamas tik vienas piktogramos laukas:"
+
+#, fuzzy
+msgid "Overwrite Infobar timeout"
+msgstr "Infojuosta išsijungs po"
+
+msgid "Placeholder for Progressbar"
+msgstr ""
+
+msgid "Prepare / Start / End record"
+msgstr ""
+
+msgid "Prepare record"
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr ""
+
+msgid "Record"
+msgstr "Įrašas"
+
+#, fuzzy
+msgid "Show InfoBarTunerState"
+msgstr "Roryti infojuostoje imtuvo stovį"
+
+msgid "Show Message when Recording starts"
+msgstr "Rodyti žinutę, kad prasideda įrašymas"
+
+msgid "Show and hide with InfoBar"
+msgstr "Rodyti ir slėpti su infojuosta"
+
+msgid "Show on events"
+msgstr "Rodyti įvykiams"
+
+#, fuzzy
+msgid "Show streams"
+msgstr "Srautas"
+
+msgid "Start / End record"
+msgstr ""
+
+msgid "Start record"
+msgstr ""
+
+msgid "Stream"
+msgstr "Srautas"
+
+msgid "Stream Client"
+msgstr "Srauto klientas"
+
+msgid "Stream Client with Port"
+msgstr "Srauto klientas ir prievadas"
+
+msgid "Text padding offset in pixel"
+msgstr "Teksto užpildymo poslinkis pikseliais"
+
+msgid "Text spacing offset in pixel"
+msgstr "Teksto tarpų poslinkis pikseliais"
+
+msgid "Time Elapsed"
+msgstr "Praėjo laiko"
+
+msgid "Time Left"
+msgstr "Liko laiko"
+
+msgid "Time Left / Duration"
+msgstr "Liko laiko / Trukmė"
+
+#, fuzzy
+msgid "Time format begin"
+msgstr "Laiko formatas"
+
+#, fuzzy
+msgid "Time format end"
+msgstr "Laiko formatas"
+
+msgid "Timer Progress (Graphical)"
+msgstr "Laikmačio eiga (grafinė)"
+
+msgid "Timer Progress (Text)"
+msgstr "Laikmačio eiga (tekstinė)"
+
+msgid "Tuner"
+msgstr "Imtuvas"
+
+#, fuzzy
+msgid "Tuner State"
+msgstr "Imtuvo stovis infojuostoje"
+
+msgid "Tuner Type"
+msgstr "Imtuvo tipas"
+
+msgid "Type (Icon)"
+msgstr "Tipas (piktograma)"
+
+msgid "Type (Text)"
+msgstr "Tipas (tekstas)"
+
+msgid "Usage"
+msgstr "Naudojimas"
+
+msgid "Variable field width"
+msgstr ""
+
+msgid "Vertical offset in pixel"
+msgstr "Vertikalus poslinkis pikseliais"
+
+#, fuzzy
+msgid "WD DD.MM. HH:MM"
+msgstr "MM.DD HH:MM"
+
+#, fuzzy
+msgid "WD, DD.MM. HH:MM"
+msgstr "MM.DD HH:MM"
+
+msgid "YYYY/MM/DD HH:MM"
+msgstr "YYYY.MM.DD HH:MM"
+
+msgid "configuration"
+msgstr "konfigūracija"

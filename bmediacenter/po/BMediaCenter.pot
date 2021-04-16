@@ -1,0 +1,570 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid ""
+"\n"
+"Album: "
+msgstr ""
+
+msgid ""
+"\n"
+"Artist: "
+msgstr ""
+
+msgid ""
+"\n"
+"Comment: "
+msgstr ""
+
+msgid ""
+"\n"
+"Genre: "
+msgstr ""
+
+msgid ""
+"\n"
+"Year: "
+msgstr ""
+
+#, python-format
+msgid "%s"
+msgstr ""
+
+msgid "70-80er"
+msgstr ""
+
+msgid "A background update check is is progress, please wait a few minutes and try again."
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Alternative"
+msgstr ""
+
+msgid "Ambient"
+msgstr ""
+
+msgid "Artist"
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "Big Band"
+msgstr ""
+
+msgid "Bluegrass"
+msgstr ""
+
+msgid "Blues"
+msgstr ""
+
+msgid "Cache Thumbnails"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Checking Feeds"
+msgstr ""
+
+msgid "Chillout"
+msgstr ""
+
+msgid "City"
+msgstr ""
+
+msgid "Classic"
+msgstr ""
+
+msgid "Classic Rock"
+msgstr ""
+
+msgid "Countrymusic"
+msgstr ""
+
+msgid "DVD Player"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Delete failed!"
+msgstr ""
+
+msgid "Directory"
+msgstr ""
+
+msgid "Directory:"
+msgstr ""
+
+#, python-format
+msgid "Do you really want to delete %s?"
+msgstr ""
+
+msgid "Do you really want to delete this directory and it's content ?"
+msgstr ""
+
+msgid "Do you really want to delete this file ?"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+#, python-format
+msgid ""
+"Error loading filelist into server %s:\n"
+"%s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Error loading playlist %s into server %s:\n"
+"%s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Error loading playlist into server %s:\n"
+"%s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Error switching directory:\n"
+"%s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Error updating file- and playlist from server %s:\n"
+"%s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Error updating filelist from server %s:\n"
+"%s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Error with VLC server:\n"
+"%s"
+msgstr ""
+
+msgid "Favorites"
+msgstr ""
+
+#, python-format
+msgid "Feels like %s"
+msgstr ""
+
+msgid "File Browser"
+msgstr ""
+
+msgid "Filelist Sorting:"
+msgstr ""
+
+msgid "Frame size in full view"
+msgstr ""
+
+msgid "Hip Hop"
+msgstr ""
+
+msgid "Hits"
+msgstr ""
+
+#, python-format
+msgid "Humidity: %s %%"
+msgstr ""
+
+msgid "Installing Service"
+msgstr ""
+
+msgid "List of Storage Devices"
+msgstr ""
+
+msgid "List of storage Devices"
+msgstr ""
+
+msgid "Loading information..."
+msgstr ""
+
+msgid "Location code"
+msgstr ""
+
+msgid "Lyrics"
+msgstr ""
+
+msgid "MSN location search result"
+msgstr ""
+
+msgid "Media Center"
+msgstr ""
+
+msgid "Moviemusic"
+msgstr ""
+
+msgid "Music"
+msgstr ""
+
+msgid "My Music"
+msgstr ""
+
+msgid "My Pictures"
+msgstr ""
+
+msgid "My Videos"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Name:"
+msgstr ""
+
+msgid ""
+"No locations defined...\n"
+"Press 'Blue' to do that."
+msgstr ""
+
+msgid "No lyrics found"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+#, python-format
+msgid "Observation point: %s"
+msgstr ""
+
+#, python-format
+msgid "Observation time: %s"
+msgstr ""
+
+msgid "Oldies"
+msgstr ""
+
+msgid "Parent Directory"
+msgstr ""
+
+msgid "Parent directory"
+msgstr ""
+
+msgid "Party"
+msgstr ""
+
+msgid "Play DVD as:"
+msgstr ""
+
+msgid "Please enter a valid city name."
+msgstr ""
+
+msgid "Please enter a valid location code for the city."
+msgstr ""
+
+msgid "Please enter filename (empty = use current date)"
+msgstr ""
+
+msgid "Please select a playlist to delete..."
+msgstr ""
+
+msgid "Please select a playlist..."
+msgstr ""
+
+msgid "Please wait whilst feeds state is checked."
+msgstr ""
+
+msgid "Really delete this Entry?"
+msgstr ""
+
+msgid "Really delete this Server?"
+msgstr ""
+
+msgid "Really delete this WeatherPlugin Entry?"
+msgstr ""
+
+msgid "Really delete this favorite?"
+msgstr ""
+
+msgid "Reggae"
+msgstr ""
+
+#, python-format
+msgid "Response -> lyrics for: %s (%s)"
+msgstr ""
+
+msgid "Rock"
+msgstr ""
+
+msgid "Rundfunk"
+msgstr ""
+
+msgid "Save Playlist"
+msgstr ""
+
+msgid "Scaling Mode"
+msgstr ""
+
+msgid "Screensaver Enable:"
+msgstr ""
+
+msgid "Screensaver Interval"
+msgstr ""
+
+msgid "Screensaver Style:"
+msgstr ""
+
+msgid "Search Code"
+msgstr ""
+
+msgid "Select music"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Show MC in Extension-Menu"
+msgstr ""
+
+msgid "Show MC in Main-Menu"
+msgstr ""
+
+msgid "Slideshow Interval (sec.)"
+msgstr ""
+
+msgid "Smooth"
+msgstr ""
+
+msgid "Sorry feeds are down for maintenance, please try again later."
+msgstr ""
+
+msgid "Soul"
+msgstr ""
+
+msgid "System"
+msgstr ""
+
+msgid "Techno/House"
+msgstr ""
+
+#, python-format
+msgid "This Dreambox can't decode %s video streams!"
+msgstr ""
+
+msgid "Thumbnail Height"
+msgstr ""
+
+msgid "Thumbnail Width"
+msgstr ""
+
+msgid "Title: "
+msgstr ""
+
+msgid "UPNP Enabled"
+msgstr ""
+
+msgid "VLC Player"
+msgstr ""
+
+msgid "Weather Info"
+msgstr ""
+
+msgid "WeatherPlugin: Edit Entry"
+msgstr ""
+
+msgid "WeatherPlugin: List of Entries"
+msgstr ""
+
+msgid "Web Radio"
+msgstr ""
+
+msgid "Worldmusic"
+msgstr ""
+
+msgid "You have to close playlist before you can go to the next song while playing from file browser."
+msgstr ""
+
+msgid "You have to close playlist before you can go to the previous song while playing from file browser."
+msgstr ""
+
+msgid "You need to enter a valid city name before you can search for the location code."
+msgstr ""
+
+#, python-format
+msgid "Your %s %s is not connected to the internet, please check your network settings and try again."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your %s %s will be restarted after the installation of service\n"
+"Ready to install %s ?"
+msgstr ""
+
+msgid "add all files in directory to playlist"
+msgstr ""
+
+msgid "add directory to playlist"
+msgstr ""
+
+msgid "add file to playlist"
+msgstr ""
+
+msgid "add file to playlist and play"
+msgstr ""
+
+msgid "alphabet"
+msgstr ""
+
+msgid "alphabet backward"
+msgstr ""
+
+msgid "backgroundcolor"
+msgstr ""
+
+msgid "better"
+msgstr ""
+
+msgid "black"
+msgstr ""
+
+msgid "blue"
+msgstr ""
+
+msgid "by Exif"
+msgstr ""
+
+msgid "clear playlist"
+msgstr ""
+
+msgid "date"
+msgstr ""
+
+msgid "date backward"
+msgstr ""
+
+msgid "default"
+msgstr ""
+
+msgid "delete directory"
+msgstr ""
+
+msgid "delete file"
+msgstr ""
+
+msgid "delete from playlist"
+msgstr ""
+
+msgid "delete saved playlist"
+msgstr ""
+
+msgid "filename"
+msgstr ""
+
+msgid "green"
+msgstr ""
+
+msgid "imperial system"
+msgstr ""
+
+msgid "load playlist"
+msgstr ""
+
+msgid "manual"
+msgstr ""
+
+msgid "metric system"
+msgstr ""
+
+msgid "none"
+msgstr ""
+
+msgid "nothing connected"
+msgstr ""
+
+msgid "please wait, loading picture..."
+msgstr ""
+
+msgid "please wait..."
+msgstr ""
+
+msgid "red"
+msgstr ""
+
+msgid "save playlist"
+msgstr ""
+
+msgid "show Infoline"
+msgstr ""
+
+msgid "shuffle"
+msgstr ""
+
+msgid "simple"
+msgstr ""
+
+msgid "size"
+msgstr ""
+
+msgid "size backward"
+msgstr ""
+
+msgid "slide picture in loop"
+msgstr ""
+
+msgid "textcolor"
+msgstr ""
+
+msgid "yellow"
+msgstr ""
+
+msgid "Audio Player"
+msgstr ""
+
+msgid "Audioplayer Settings"
+msgstr ""
+
+msgid "Favorite Folders"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "InfoBar"
+msgstr ""
+
+msgid "Media Center - VLC Favorites"
+msgstr ""
+
+msgid "Media Center - VLC Player - Serverlist"
+msgstr ""
+
+msgid "Music Playlist"
+msgstr ""
+
+msgid "Pic Viewer"
+msgstr ""
+
+msgid "VLC Player - Medialist"
+msgstr ""
+
+msgid "Video Player"
+msgstr ""

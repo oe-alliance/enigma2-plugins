@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moviecut\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2012-02-15 21:20+0100\n"
 "Last-Translator: James Blond <lblond@aol.com>\n"
 "Language-Team: \n"
@@ -18,33 +18,8 @@ msgstr ""
 "X-Poedit-SearchPath-0: /200\n"
 "X-Poedit-SearchPath-1: /200/bin\n"
 
-#: /200/plugin.py:23
-msgid "Execute cuts..."
-msgstr "Schnitt ausführen..."
-
-#: /200/plugin.py:37
-msgid "Don't cut"
-msgstr "nicht schneiden"
-
-#: /200/plugin.py:38
-msgid "Replace the original movie with the cut movie"
-msgstr "Ersetze Original Film durch geschnittenen Film"
-
-#: /200/plugin.py:39
-msgid "Place the cut movie in a new file ending with \" cut\""
-msgstr "Anlegen einer neuen Filmdatei mit der Endung \"cut\""
-
-#: /200/plugin.py:40
 msgid "Advanced cut specification..."
 msgstr "Erweiterte Schnitteinstellungen"
-
-#, python-format
-msgid ""
-"Another movie is currently cut.\n"
-"The movie \"%s\" will be cut in the background after it."
-msgstr ""
-"Ein anderer Film wird gerade geschnitten.\n"
-"Der Film \"%s\" wird danach im Hintergrund geschnitten."
 
 msgid "Bad arguments"
 msgstr "ungültige Parameter"
@@ -93,8 +68,18 @@ msgstr "Schnitt fehlgeschlagen für Film \"%s\""
 msgid "Cutting was aborted for movie \"%s\""
 msgstr "Schnitt wurde abgebrochen für den Film \"%s\""
 
+msgid "Don't cut"
+msgstr "nicht schneiden"
+
 msgid "Empty .ap file"
 msgstr "Leere .ap Datei"
+
+#, fuzzy
+msgid "Execute cuts"
+msgstr "Schnitt ausführen..."
+
+msgid "Execute cuts..."
+msgstr "Schnitt ausführen..."
 
 #, python-format
 msgid "How would you like to cut \"%s\"?"
@@ -124,15 +109,17 @@ msgstr "Keine Schnitte angegeben"
 msgid "OK"
 msgstr "OK"
 
+msgid "Place the cut movie in a new file ending with \" cut\""
+msgstr "Anlegen einer neuen Filmdatei mit der Endung \"cut\""
+
 msgid "Read/write error (disk full?)"
 msgstr "lese/schreib Fehler (Festplatte voll?)"
 
 msgid "Replace original:"
 msgstr "Ersetze Original:"
 
-#, python-format
-msgid "The movie \"%s\" is cut in the background."
-msgstr "Der Film \"%s\" wird im Hintergrund geschnitten."
+msgid "Replace the original movie with the cut movie"
+msgstr "Ersetze Original Film durch geschnittenen Film"
 
 #, python-format
 msgid "The movie \"%s\" is successfully cut"
@@ -140,4 +127,3 @@ msgstr "Der Film \"%s\" wurde erfolgreich geschnitten"
 
 msgid "Yes"
 msgstr "Ja"
-

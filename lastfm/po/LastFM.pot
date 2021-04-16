@@ -1,0 +1,290 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#, python-format
+msgid "%s name"
+msgstr ""
+
+msgid "Album"
+msgstr ""
+
+msgid "Artist"
+msgstr ""
+
+msgid "Ban"
+msgstr ""
+
+msgid "Ban Track, never play"
+msgstr ""
+
+msgid "Banned Tracks"
+msgstr ""
+
+msgid "Banned Tracks loaded"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Extensions menu"
+msgstr ""
+
+msgid "Friends"
+msgstr ""
+
+msgid "Friends loaded"
+msgstr ""
+
+msgid "Global Tags"
+msgstr ""
+
+msgid "Global Tags loaded"
+msgstr ""
+
+msgid "Group of"
+msgstr ""
+
+msgid "Interval for Coverart Animation"
+msgstr ""
+
+msgid "Interval to refresh Metadata (seconds)"
+msgstr ""
+
+msgid "Last.FM"
+msgstr ""
+
+msgid "Last.FM Username"
+msgstr ""
+
+msgid "LastFM Proxy port"
+msgstr ""
+
+msgid "Listen to Last.FM Internet Radio"
+msgstr ""
+
+msgid "Loading Friends"
+msgstr ""
+
+msgid "Loading Global Tags"
+msgstr ""
+
+msgid "Loading Loved Tracks"
+msgstr ""
+
+msgid "Loading Neighbours"
+msgstr ""
+
+msgid "Loading Recent Tracks"
+msgstr ""
+
+msgid "Loading Top Tacks"
+msgstr ""
+
+msgid "Love"
+msgstr ""
+
+msgid "Loved Tracks"
+msgstr ""
+
+msgid "Loved Tracks loaded"
+msgstr ""
+
+msgid "Mark Track as loved"
+msgstr ""
+
+msgid "Name (needs GUI restart)"
+msgstr ""
+
+msgid "Neighbours"
+msgstr ""
+
+msgid "Neighbours Tracks"
+msgstr ""
+
+msgid "Neighbours loaded"
+msgstr ""
+
+msgid "Next Selection"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Open"
+msgstr ""
+
+msgid "Page backward Selections"
+msgstr ""
+
+msgid "Page forward Selections"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Personal Recommendations"
+msgstr ""
+
+msgid "Personal Stations"
+msgstr ""
+
+msgid "Play"
+msgstr ""
+
+msgid "Play Artist Radio..."
+msgstr ""
+
+msgid "Play Group Radio..."
+msgstr ""
+
+msgid "Play Tag Radio..."
+msgstr ""
+
+msgid "Plugin menu"
+msgstr ""
+
+msgid "Previous Selection"
+msgstr ""
+
+msgid "Quit"
+msgstr ""
+
+msgid "Recent Tracks"
+msgstr ""
+
+msgid "Recent Tracks loaded"
+msgstr ""
+
+msgid "Recommendation level"
+msgstr ""
+
+msgid "Select next Tab"
+msgstr ""
+
+msgid "Select prev Tab"
+msgstr ""
+
+msgid "Send now playing Audio Tracks"
+msgstr ""
+
+msgid "Server returned"
+msgstr ""
+
+msgid "Setup"
+msgstr ""
+
+msgid "Show Coverart"
+msgstr ""
+
+msgid "Show Coverart Animation in Screensaver"
+msgstr ""
+
+msgid "Show Coverart in Screensaver"
+msgstr ""
+
+msgid "Show in (needs GUI restart)"
+msgstr ""
+
+msgid "Skip"
+msgstr ""
+
+msgid "Skip current Track"
+msgstr ""
+
+msgid "Speed for Coverart Animation"
+msgstr ""
+
+msgid "Start/stop streaming"
+msgstr ""
+
+msgid "Starting stream"
+msgstr ""
+
+msgid "Station changed"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "Stream stopped"
+msgstr ""
+
+msgid "Switch to selected Station"
+msgstr ""
+
+msgid "Timeout Statustext (seconds)"
+msgstr ""
+
+msgid "Timeout to select a Tab (seconds)"
+msgstr ""
+
+msgid "Top Tracks"
+msgstr ""
+
+msgid "Top Tracks loaded"
+msgstr ""
+
+msgid "Track"
+msgstr ""
+
+msgid "Track banned"
+msgstr ""
+
+msgid "Track loved"
+msgstr ""
+
+msgid "Track skipped"
+msgstr ""
+
+msgid "Tracks liked by Fans of"
+msgstr ""
+
+msgid "Tracks similar to"
+msgstr ""
+
+msgid "Use LastFM Proxy"
+msgstr ""
+
+msgid "Use Screensaver"
+msgstr ""
+
+msgid "Ver."
+msgstr ""
+
+msgid "Wait before Screensaver (seconds)"
+msgstr ""
+
+msgid "logging into last.FM"
+msgstr ""
+
+msgid "login failed! "
+msgstr ""
+
+msgid "login successful"
+msgstr ""
+
+msgid "playing:"
+msgstr ""
+
+#, python-format
+msgid "please enter an %s name to listen to"
+msgstr ""

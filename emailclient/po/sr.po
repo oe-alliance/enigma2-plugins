@@ -77,8 +77,7 @@ msgstr "Subjekt"
 msgid ""
 "[EmailAccount] %(name)s: _cbCapabilities:\n"
 "####################################################################################################\n"
-"# If you have problems to log into your imap-server, please send me the "
-"output of the following line\n"
+"# If you have problems to log into your imap-server, please send me the output of the following line\n"
 "# cbCapabilities: %(capa)s\n"
 "####################################################################################################\n"
 msgstr ""
@@ -243,52 +242,3 @@ msgstr "Korisn. ime"
 
 msgid "view Emails via IMAP4"
 msgstr "vidi imejlove preko IMAP4"
-
-#~ msgid "Box '%s' is empty"
-#~ msgstr "Sanduče %s je prazno"
-
-#~ msgid "In"
-#~ msgstr "U"
-
-#~ msgid ""
-#~ "In order of missing standart python library files\n"
-#~ "i have copied the nessary files now.\n"
-#~ "But you have to restart your Box\n"
-#~ " to apply this!"
-#~ msgstr ""
-#~ "Zbog nedostatka stand. python lib. datoteka\n"
-#~ "sada sam kopirao potrebne datoteke.\n"
-#~ "Ali vi treba da restartujete vaš boks\n"
-#~ "da ovo primenite!"
-
-#~ msgid "Mailbox"
-#~ msgstr "Pošt. sand."
-
-#, fuzzy
-#~ msgid "Yes"
-#~ msgstr "da"
-
-#~ msgid "loading headers %(from)d-%(to)d of Box '%(name)s'"
-#~ msgstr "učitavam zaglavlja %(from)d-%(to)d iz sand.'%(name)s'"
-
-#~ msgid "logged in"
-#~ msgstr "regstrovan"
-
-#~ msgid "mail check process stopped"
-#~ msgstr "proces provere poruka zaustavljen"
-
-#~ msgid "max of Headers to load"
-#~ msgstr "maksimum zaglavlja za učitavanje"
-
-#~ msgid "no"
-#~ msgstr "ne"
-
-#~ msgid "notify about new mails"
-#~ msgstr "obavesti o novim porukama"
-
-#, fuzzy
-#~ msgid "unread messages in mailbox %s"
-#~ msgstr "nepročitane poruke u sandučetu"
-
-#~ msgid "yes"
-#~ msgstr "da"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-19 17:00+0100\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2009-07-29 20:37+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -295,9 +295,7 @@ msgstr "FRITZ!Box durumu"
 msgid "FRITZ!Box PhoneBook to read"
 msgstr ""
 
-msgid ""
-"FRITZ!Box firmware version not configured! Please set it in the "
-"configuration."
+msgid "FRITZ!Box firmware version not configured! Please set it in the configuration."
 msgstr ""
 
 msgid "FRITZ!Box not available for calling"
@@ -592,9 +590,7 @@ msgstr ""
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Arama uyarıları için zaman aşımı süresi (saniye)"
 
-msgid ""
-"To enjoy more functionalities of your FRITZ!Box, configure the firmware "
-"version!"
+msgid "To enjoy more functionalities of your FRITZ!Box, configure the firmware version!"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
@@ -660,8 +656,7 @@ msgid "WLAN not active"
 msgstr ""
 
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
-msgstr ""
-"FRITZ!Box'ta çağrı görüntülemeyi etkinleştirmek için #96*5* 'ı aramalısınız!"
+msgstr "FRITZ!Box'ta çağrı görüntülemeyi etkinleştirmek için #96*5* 'ı aramalısınız!"
 
 msgid ""
 "You need to set the password of the FRITZ!Box\n"
@@ -675,6 +670,9 @@ msgstr ""
 "Bağlantı sorunu yaşarsanız, tekrar deneyin."
 
 msgid "before 05.27"
+msgstr ""
+
+msgid "business"
 msgstr ""
 
 msgid "call diversions active"
@@ -800,207 +798,3 @@ msgstr "iş"
 
 msgid "wrong user or password?"
 msgstr ""
-
-#~ msgid "Areacode to add to Outgoing Calls (if necessary)"
-#~ msgstr "Giden aramalara alan kodu ekle (gerekirse)"
-
-#~ msgid "CF Drive"
-#~ msgstr "CF Sürücü"
-
-#~ msgid ""
-#~ "Call\n"
-#~ "\n"
-#~ "%s(number)\n"
-#~ "\n"
-#~ "%s(name)?"
-#~ msgstr ""
-#~ "%s(number)\n"
-#~ "\n"
-#~ "%s(name)\n"
-#~ "\n"
-#~ "aransın mı?"
-
-#~ msgid "Can't create PhoneBook.txt"
-#~ msgstr "PhoneBook.txt oluşturulamıyor"
-
-#~ msgid ""
-#~ "Corrupt phonebook entry\n"
-#~ "for number %d\n"
-#~ "Deleting."
-#~ msgstr ""
-#~ "%d numaralı\n"
-#~ "bozuk rehber kaydı\n"
-#~ "siliniyor."
-
-#~ msgid "Could not load calls from FRITZ!Box - Error: %s"
-#~ msgstr "Aramalar, FRITZ!Box'dan yüklenemiyor - Hata: %s"
-
-#~ msgid "Debug"
-#~ msgstr "Hata ayıklama"
-
-#~ msgid "Dialling failed - Error: %s"
-#~ msgstr "Arama başlatılamadı! - Hata: %s"
-
-#~ msgid ""
-#~ "Do you really want to overwrite entry for %(number)s\n"
-#~ "\n"
-#~ "%(name)s\n"
-#~ "\n"
-#~ "with\n"
-#~ "\n"
-#~ "%(newname)s?"
-#~ msgstr ""
-#~ "%(number)s için tanımladığınız\n"
-#~ "\n"
-#~ "%(name)s kaydını\n"
-#~ "\n"
-#~ "%(newname)s olarak\n"
-#~ "\n"
-#~ "değiştirmek istiyor musunuz?"
-
-#~ msgid ""
-#~ "Do you want to add a phonebook entry\n"
-#~ "\n"
-#~ "%(name)s\n"
-#~ "\n"
-#~ "for\n"
-#~ "\n"
-#~ "%(number)s?"
-#~ msgstr ""
-#~ "%(number)s için\n"
-#~ "\n"
-#~ "%(name)s\n"
-#~ "\n"
-#~ "olarak\n"
-#~ "\n"
-#~ "rehbere eklemek istiyor musunuz?"
-
-#~ msgid ""
-#~ "Do you want to add a phonebook entry for\n"
-#~ "\n"
-#~ "%s?"
-#~ msgstr ""
-#~ "%s kaydını\n"
-#~ "\n"
-#~ "rehbere eklemek istiyor musunuz?"
-
-#, fuzzy
-#~ msgid ""
-#~ "Do you want to reverse search for\n"
-#~ "\n"
-#~ "%s?"
-#~ msgstr ""
-#~ "%s kaydını\n"
-#~ "\n"
-#~ "rehbere eklemek istiyor musunuz?"
-
-#~ msgid "Edit phonebook entry"
-#~ msgstr "Rehber kaydını düzelt"
-
-#~ msgid "Enter Search Terms"
-#~ msgstr "Arama terimlerini düzelt"
-
-#~ msgid "FRITZ!Box - Could not load phonebook: %s"
-#~ msgstr "Rehber, FRITZ!Box'dan yüklenemiyor: %s"
-
-#, fuzzy
-#~ msgid "FRITZ!Box Fon has no mailbox"
-#~ msgstr "FRITZ!Box Fon Durumu"
-
-#~ msgid "FRITZ!Box Login failed! - Wrong Password!"
-#~ msgstr "FRITZ!Box oturumu başlatılamadı! - Parola hatalı!"
-
-#~ msgid "FRITZ!Box Login failed: "
-#~ msgstr "FRITZ!Box oturumu başlatılamadı: "
-
-#~ msgid "Flash"
-#~ msgstr "Flaş"
-
-#~ msgid "Full screen display"
-#~ msgstr "Tam ekran göster"
-
-#~ msgid "Harddisk"
-#~ msgstr "Sabit disk"
-
-#~ msgid ""
-#~ "Incoming Call on %(date)s from\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "to: %(phone)s"
-#~ msgstr ""
-#~ "%(date)s tarihli Gelen Aramalar\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "kime: %(phone)s"
-
-#~ msgid "Minuten"
-#~ msgstr "dakika"
-
-#~ msgid "Mute on call"
-#~ msgstr "Çağrı olduğunda sessize al"
-
-#~ msgid "No call redirection active"
-#~ msgstr "Çağrı yönlendirme etkin değil"
-
-#~ msgid "One call redirection active"
-#~ msgstr "Bir çağrı yönlendirmesi etkin"
-
-#~ msgid ""
-#~ "Outgoing Call on %(date)s to\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "from: %(phone)s"
-#~ msgstr ""
-#~ "%(date)s tarihli Giden Aramalar\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "kimden: %(phone)s"
-
-#~ msgid "PhoneBook Location"
-#~ msgstr "Rehber konumu"
-
-#~ msgid "Reverse Lookup Caller ID (select country below)"
-#~ msgstr "Arayan kimliğini hizmet sağlayıcıdan sorgula (ülke seçin)"
-
-#~ msgid "Reverse lookup for "
-#~ msgstr "Hizmet sağlayıcıdan isim sorgula : "
-
-#~ msgid "Reverse lookup not successful"
-#~ msgstr "İsim sorgulama başarısız"
-
-#~ msgid "Reverse lookup successful"
-#~ msgstr "İsim sorgulama başarılı"
-
-#~ msgid "Sekunden"
-#~ msgstr "saniye"
-
-#~ msgid "Show Calls for specific MSN"
-#~ msgstr "Belirlenen MSN aramalarını göster"
-
-#~ msgid "Stunden"
-#~ msgstr "saat"
-
-#, fuzzy
-#~ msgid "Toggle "
-#~ msgstr "WLAN aç/kapa"
-
-#, fuzzy
-#~ msgid "USB Device"
-#~ msgstr "USB Bellek"
-
-#~ msgid "WLAN off"
-#~ msgstr "WLAN kapat"
-
-#~ msgid "WLAN on"
-#~ msgstr "WLAN aç"
-
-#~ msgid "call redirections active"
-#~ msgstr "çağrı yönlendirmesi etkin"

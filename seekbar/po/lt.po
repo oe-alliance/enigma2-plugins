@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Seekbar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-11 07:54+0300\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -13,31 +13,23 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SearchPath-0: /home/aliabdul/dream/lt/ltteam/trunk/additions/"
-"plugins/seekbar/src\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/lt/ltteam/trunk/additions/plugins/seekbar/src\n"
 
-#: /home/aliabdul/dream/lt/ltteam/trunk/additions/plugins/seekbar/src/plugin.py:54
-msgid "Seek"
-msgstr "Ieškoti"
-
-#: /home/aliabdul/dream/lt/ltteam/trunk/additions/plugins/seekbar/src/plugin.py:81
-msgid "Jump x minutes forward:"
-msgstr "Peršokti X minučių pirmyn:"
-
-#: /home/aliabdul/dream/lt/ltteam/trunk/additions/plugins/seekbar/src/plugin.py:83
-msgid "Jump x minutes back:"
-msgstr "Peršokti X minučių atgal:"
-
-#: /home/aliabdul/dream/lt/ltteam/trunk/additions/plugins/seekbar/src/plugin.py:86
 msgid "Go to position:"
 msgstr "Į poziciją:"
 
-#: /home/aliabdul/dream/lt/ltteam/trunk/additions/plugins/seekbar/src/plugin.py:87
-msgid "Sensibility:"
-msgstr "Jautrumas:"
+msgid "Jump x minutes back:"
+msgstr "Peršokti X minučių atgal:"
 
-#: /home/aliabdul/dream/lt/ltteam/trunk/additions/plugins/seekbar/src/plugin.py:88
+msgid "Jump x minutes forward:"
+msgstr "Peršokti X minučių pirmyn:"
+
 msgid "Overwrite left and right buttons:"
 msgstr "Perrašyti '< / >' mygtukus:"
+
+msgid "Seek"
+msgstr "Ieškoti"
+
+msgid "Sensibility:"
+msgstr "Jautrumas:"

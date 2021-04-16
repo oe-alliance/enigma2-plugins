@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2011-09-28 12:37+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
@@ -19,27 +19,21 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
-#: ../src/plugin.py:276
 msgid "Add Tag"
 msgstr "Voeg Tag toe"
 
-#: ../src/plugin.py:269
 msgid "Add new Tag"
 msgstr "Voeg nieuwe Tag toe"
 
-#: ../src/plugin.py:260
 msgid "Assigned Tags"
 msgstr "Toegewezen Tags"
 
-#: ../src/plugin.py:174
 msgid "Can't write movietags, because no meta-file found!"
 msgstr "Kan movietags niet schrijven, omdat er geen meta-file gevonden is!"
 
-#: ../src/plugin.py:278
 msgid "Clear all Tags"
 msgstr "Verwijder alle Tags"
 
-#: ../src/plugin.py:256
 msgid ""
 "Clear all Tags?\n"
 "\n"
@@ -51,48 +45,35 @@ msgstr ""
 "Alle Tags in alle opnames zullen worden verwijderd!\n"
 "Weet u het zeker?"
 
-#: ../src/plugin.py:252
 msgid "Enter the new Tag"
 msgstr "Voer de nieuwe Tag in"
 
-#: ../src/plugin.py:259
 msgid "Movie Tagger"
 msgstr "Movie Tagger"
 
-#: ../src/plugin.py:315
 msgid "Movie Tagger..."
 msgstr "Movie Tagger..."
 
-#: ../src/plugin.py:264
 msgid "Predefined Tag"
 msgstr "Voorgeïnstalleerde Tag"
 
-#: ../src/plugin.py:268
 msgid "Remove Tag"
 msgstr "Verwijder Tag"
 
-#: ../src/plugin.py:261
 msgid "Specified Tags"
 msgstr "Gespecificeerde Tags"
 
-#: ../src/plugin.py:271
-#: ../src/plugin.py:279
 msgid "Toggle List"
 msgstr "Wissel lijst"
 
-#: ../src/plugin.py:262
 msgid "Used Tag"
 msgstr "Gebruikte Tag"
 
-#: ../src/plugin.py:263
 msgid "User-specific Tag"
 msgstr "Gebruiker specifieke Tag"
 
-#: ../src/plugin.py:259
 msgid "Ver."
 msgstr "Ver."
 
-#: ../src/plugin.py:252
 msgid "Whitepace will be replaced by \"_\""
 msgstr "Witruimte zal worden vervangen door \"_\""
-

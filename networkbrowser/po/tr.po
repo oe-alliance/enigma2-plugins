@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: e2 NetworkBrowser Plugin Turkish locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2009-02-23 18:43+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
 "Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
@@ -23,9 +23,7 @@ msgstr ""
 "Bu isimde bir bağlantı kaydı zaten mevcut!\n"
 "Mevcut olanın üzerine yazmak ve devam etmek istiyor musunuz?\n"
 
-msgid ""
-"A mount entry with this name already exists!\n"
-"and is not this share folder, please use a different name.\n"
+msgid "AUTOFS (mount as needed)"
 msgstr ""
 
 msgid "Active"
@@ -126,7 +124,7 @@ msgstr "Kullanıcı adı girin:"
 msgid "Expert"
 msgstr ""
 
-msgid "FSTAB (mount using linux)"
+msgid "FSTAB (mount at boot)"
 msgstr ""
 
 msgid "Finished restarting your network"
@@ -162,6 +160,10 @@ msgstr ""
 msgid "Mount informations"
 msgstr "Bağlantı bilgileri"
 
+#, fuzzy
+msgid "Mount manager"
+msgstr "Ağ diski yönetimi"
+
 msgid "Mount options"
 msgstr "Bağlantı seçenekleri"
 
@@ -186,9 +188,6 @@ msgstr "Bağlantı noktası yönetimi"
 
 msgid "Mounts editor"
 msgstr "Bağlantı düzenleyici"
-
-msgid "Mounts management"
-msgstr "Ağ Diski Yönetimi"
 
 msgid "NFS share"
 msgstr "NFS paylaşım"
@@ -283,6 +282,9 @@ msgstr "Paylaşım klasörü"
 msgid "Setup Mount Again"
 msgstr ""
 
+msgid "Use as HDD replacement"
+msgstr ""
+
 msgid "User management"
 msgstr "Kullanıcı yönetimi"
 
@@ -298,6 +300,20 @@ msgstr ""
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Ağınızdaki kullanıcı hesaplarını inceleyin, düzenleyin veya silin."
 
+#, fuzzy
+msgid ""
+"You have changed the share name!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+"Bu isimde bir bağlantı kaydı zaten mevcut!\n"
+"Mevcut olanın üzerine yazmak ve devam etmek istiyor musunuz?\n"
+
+#, python-format
+msgid ""
+"Your network interface %s is not properly configured, so a network scan cannot be done.\n"
+"Please configure the interface and try again."
+msgstr ""
+
 msgid "Your network mount has been activated."
 msgstr "Ağ diski bağlantınız etkinleştirildi."
 
@@ -306,12 +322,3 @@ msgstr "Ağ diski bağlantınız kaldırıldı."
 
 msgid "Your network mount has been updated."
 msgstr "Ağ diski bağlantınız güncellendi."
-
-msgid "Use as HDD replacement"
-msgstr ""
-
-#~ msgid "MountManager"
-#~ msgstr "Ağ diski yönetimi"
-
-#~ msgid "NetworkBrowser"
-#~ msgstr "Ağ gezgini"

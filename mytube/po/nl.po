@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: networkwizard_nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-26 21:49+0200\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2013-10-06 17:53+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
@@ -123,6 +123,9 @@ msgstr "Frankrijk"
 
 msgid "Gaming"
 msgstr "Gaming"
+
+msgid "Genuine Dreambox validation failed!"
+msgstr ""
 
 msgid "Germany"
 msgstr "Duitsland"
@@ -443,6 +446,9 @@ msgstr "Onbekende fout"
 msgid "User video entries."
 msgstr ""
 
+msgid "Verify your Dreambox authenticity by running the genuine dreambox plugin!"
+msgstr ""
+
 msgid "Video successfully added to favorites"
 msgstr ""
 
@@ -526,27 +532,3 @@ msgstr "Youtube wachtwoord (heropen de plugin na aanpassen):"
 
 msgid "Youtube Username (reopen plugin on change):"
 msgstr "Youtube gebruikersnaam (heropen de plugin na aanpassen)."
-
-#~ msgid "Ascanding"
-#~ msgstr "Oplopend"
-
-#~ msgid "Category"
-#~ msgstr "Categorie"
-
-#~ msgid "From Region"
-#~ msgstr "Van regio"
-
-#~ msgid "No, but play next video"
-#~ msgstr "Nee, speel de volgende video af"
-
-#~ msgid "No, but play previous video"
-#~ msgstr "Nee, speel de vorige video af"
-
-#~ msgid "Order by"
-#~ msgstr "Sorteer op"
-
-#~ msgid "Restricted Content"
-#~ msgstr "Vertrouwelijke inhoud"
-
-#~ msgid "Search"
-#~ msgstr "Zoek"

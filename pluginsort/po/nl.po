@@ -24,9 +24,7 @@ msgstr ""
 msgid "Download Plugins"
 msgstr "Download Plugins"
 
-#: ../src/plugin.py:276
-#: ../src/plugin.py:290
-#: ../src/plugin.py:414
+#: ../src/plugin.py:276 ../src/plugin.py:290 ../src/plugin.py:414
 msgid "End Sort"
 msgstr "Beëindig sorteren"
 
@@ -44,9 +42,7 @@ msgstr "Behandel extensies"
 msgid "Remove Plugins"
 msgstr "Verwijder Plugins"
 
-#: ../src/plugin.py:276
-#: ../src/plugin.py:290
-#: ../src/plugin.py:402
+#: ../src/plugin.py:276 ../src/plugin.py:290 ../src/plugin.py:402
 msgid "Sort"
 msgstr "Sorteer"
 
@@ -91,4 +87,3 @@ msgstr "verplaats extensies"
 #: ../src/plugin.py:362
 msgid "move movie extensions"
 msgstr "verplaats movie extensies"
-

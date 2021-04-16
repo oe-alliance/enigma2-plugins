@@ -1,0 +1,219 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "A NAS/Server can be shut down. Is required activated Telnet."
+msgstr ""
+
+msgid "Active Time Profile"
+msgstr ""
+
+msgid "Automatically shut down to deep standby"
+msgstr ""
+
+msgid "Avoid deep standby when HDD is active, e.g. for FTP"
+msgstr ""
+
+msgid "Both profiles are used alternately. When shutting down the other profile is enabled. This allows two time cycles per day. Do not overlap the times."
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Check IPs (press OK to edit)"
+msgstr ""
+
+msgid "Command [poweroff, shutdown -h,...]"
+msgstr ""
+
+msgid "Connection Error"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Do not wake up at the end of next deep standby interval."
+msgstr ""
+
+msgid "Don't wake up"
+msgstr ""
+
+msgid "Elektro Power Save"
+msgstr ""
+
+msgid "Enable Elektro Power Save"
+msgstr ""
+
+msgid "Extensions menu"
+msgstr ""
+
+msgid "Force sleep (even when not in standby)"
+msgstr ""
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
+msgstr ""
+
+msgid "Friday"
+msgstr ""
+
+msgid "Go to Standby now?"
+msgstr ""
+
+msgid "Go to sleep now?"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid "Holiday mode (experimental)"
+msgstr ""
+
+msgid "IP Address"
+msgstr ""
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr ""
+
+msgid "Monday"
+msgstr ""
+
+msgid "NAS Poweroff (press OK to edit)"
+msgstr ""
+
+msgid "NAS/Server Name or IP"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Next day starts at"
+msgstr ""
+
+msgid "Ok"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Plugin menu"
+msgstr ""
+
+msgid "Puts the box in standby mode after boot."
+msgstr ""
+
+msgid "Run"
+msgstr ""
+
+msgid "Saturday"
+msgstr ""
+
+msgid "Show in"
+msgstr ""
+
+msgid "Showing Elektro readme.txt"
+msgstr ""
+
+msgid "Sleep"
+msgstr ""
+
+msgid "Specify how long to show the standby query on boot screen. This value can be set to ensure the box does not shut down to deep standby again too fast when in standby mode."
+msgstr ""
+
+msgid "Specify plugin description to be used in menu (needs GUI restart)."
+msgstr ""
+
+msgid "Specify plugin name to be used in menu (needs GUI restart)."
+msgstr ""
+
+msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
+msgstr ""
+
+msgid "Standby on boot"
+msgstr ""
+
+msgid "Standby on boot screen timeout"
+msgstr ""
+
+msgid "Standby on manual boot"
+msgstr ""
+
+msgid "Sunday"
+msgstr ""
+
+msgid "Telnet Port"
+msgstr ""
+
+msgid "The active Time Profile is (1 or 2)."
+msgstr ""
+
+msgid "The box always enters deep standby mode, except for recording."
+msgstr ""
+
+msgid "This list of IP addresses is checked. Elektro waits until addresses no longer responds to ping."
+msgstr ""
+
+msgid "Thursday"
+msgstr ""
+
+msgid "Times"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
+msgid "Unless this is enabled, this plugin won't run automatically."
+msgstr ""
+
+msgid "Use both profiles alternately"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "Ver."
+msgstr ""
+
+msgid "Wait for the HDD to enter sleep mode. Depending on the configuration this can prevent the box entirely from entering deep standby mode."
+msgstr ""
+
+msgid "Waiting until poweroff"
+msgstr ""
+
+msgid "Wakeup"
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""
+
+msgid "Whether to put the box in standby when booted manually. On manual boot the box will not go to standby before the next deep standby interval starts, even if this option is set. This option is only active if 'Standby on boot' option is set, too."
+msgstr ""
+
+msgid "no Name"
+msgstr ""
+
+msgid "please wait..."
+msgstr ""
+
+msgid "readme.txt"
+msgstr ""
+
+msgid "yes, Profile 1"
+msgstr ""
+
+msgid "yes, Profile 2"
+msgstr ""

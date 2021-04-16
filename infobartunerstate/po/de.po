@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 InfoBarTunerState Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2012-05-08 18:53+0100\n"
 "Last-Translator: Ralf Biedermann <ralf.biedermann@rbsoft.de>\n"
 "Language-Team: none\n"
@@ -206,6 +206,10 @@ msgstr "Nur ein Icon erlaubt:"
 msgid "Only one Name field allowed:"
 msgstr ""
 
+#, fuzzy
+msgid "Overwrite Infobar timeout"
+msgstr "InfoBar Timeout"
+
 msgid "Placeholder for Progressbar"
 msgstr ""
 
@@ -313,9 +317,3 @@ msgstr ""
 
 msgid "configuration"
 msgstr "Konfiguration"
-
-#~ msgid "Horizontal offset in pixel"
-#~ msgstr "Horizontaler Offset in Pixel"
-
-#~ msgid "Time format"
-#~ msgstr "Zeitformat"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: epg search Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-22 20:42+0100\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2014-11-22 20:45+0100\n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -18,103 +18,227 @@ msgstr ""
 "X-Poedit-Language: Persian\n"
 "X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
 
-msgid "Search"
-msgstr "جستجو"
-
-msgid "New Search"
-msgstr "جستجوی جدید"
-
-msgid "History"
-msgstr "پیشینه"
-
-msgid "Add timer"
-msgstr "اضافه کردن تایمر"
-
-msgid "EPG Search"
-msgstr "جستجو برنامه راهنمای الکترونیک"
-
-msgid "Enter text to search for"
-msgstr "وارد کردن یک متن به منظور جستجو برای "
-
-msgid "Import from Timer"
-msgstr "وارد کردن از تایمر"
-
-msgid "Import from EPG"
-msgstr "وارد کردن از برنامه راهنمای الکترونیک"
-
-msgid "Import from AutoTimer"
-msgstr "وارد کردن از تایمر خودکار"
-
-msgid "Save search as AutoTimer"
-msgstr "ذخیره سازی جستجو به عنوان یک تایمر خودکار"
-
-msgid "Export selected as AutoTimer"
-msgstr "صادر کردن منتخب به عنوان یک تایمر خودکار "
-
-msgid "Setup"
+#, python-format
+msgid " (%d min)"
 msgstr ""
 
 #, python-format
-msgid "Could not read AutoTimer timer list: %s"
-msgstr "%s نمی توانست لیست تایمر پلاگین تایمر خودکار را بخواند"
-
-msgid "Select text to search for"
-msgstr "انتخاب یک متن برای جستجوی"
-
-msgid "No history"
-msgstr "بدون پیشینه"
-
-msgid "Cancel"
-msgstr "لغو کردن"
-
-msgid "OK"
-msgstr "موزد تایید است"
-
-msgid "Select a timer to search"
-msgstr "انتخاب یک تایمر برای جستجو "
-
-msgid "Channel Selection"
-msgstr "انتخاب کانال"
-
-msgid "Search EPG"
-msgstr "جستجوی یک برنامه راهنمای الکترونیک"
-
-msgid "search EPG..."
-msgstr "جستجوی برنامه راهنمای الکترونیک"
-
-#, fuzzy
-msgid "search EPG"
-msgstr "جستجوی یک برنامه راهنمای الکترونیک"
-
-#, fuzzy
-msgid "Search event in EPG"
-msgstr "جستجوی یک برنامه راهنمای الکترونیک"
-
-#, fuzzy
-msgid "EPGSearch Setup"
-msgstr "جستجو برنامه راهنمای الکترونیک"
-
-msgid "Length of History"
-msgstr ""
-
-msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
-msgstr ""
-
-msgid "Add \"Search\" Button to EPG"
-msgstr ""
-
-msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
-msgstr ""
-
-msgid "Add \"Search event in EPG\" to event menu"
-msgstr ""
-
-msgid "Adds \"Search event in EPG\" item into the event menu."
+msgid " (%s%d min)"
 msgstr ""
 
 msgid "Add \"Search event in EPG\" to channel menu"
 msgstr ""
 
-msgid "Adds \"Search event in EPG\" item into the channel selection context menu."
+msgid "Add \"Search event in EPG\" to event menu"
 msgstr ""
 
+msgid "Add \"Search\" Button to EPG"
+msgstr ""
+
+msgid "Add timer"
+msgstr "اضافه کردن تایمر"
+
+msgid "Adds \"Search event in EPG\" item into the channel selection context menu (needs restart GUI)"
+msgstr ""
+
+msgid "Adds \"Search event in EPG\" item into the event menu (needs restart GUI)"
+msgstr ""
+
+msgid "Cancel"
+msgstr "لغو کردن"
+
+msgid "Channel Selection"
+msgstr "انتخاب کانال"
+
+msgid "Choice list"
+msgstr ""
+
+msgid "Choice list EPGSearch"
+msgstr ""
+
+msgid "Choice list RED Button"
+msgstr ""
+
+msgid "Choosing an encoding. \"UTF-8\" to search for EPG cyrillic."
+msgstr ""
+
+#, fuzzy
+msgid "Clear history"
+msgstr "بدون پیشینه"
+
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "%s نمی توانست لیست تایمر پلاگین تایمر خودکار را بخواند"
+
+msgid "Display name service as in bouquets"
+msgstr ""
+
+msgid "EPG Search"
+msgstr "جستجو برنامه راهنمای الکترونیک"
+
+#, fuzzy
+msgid "EPGSearch"
+msgstr "جستجو برنامه راهنمای الکترونیک"
+
+#, fuzzy
+msgid "EPGSearch Setup"
+msgstr "جستجو برنامه راهنمای الکترونیک"
+
+#, fuzzy
+msgid "Encoding Search to EPG"
+msgstr "جستجوی یک برنامه راهنمای الکترونیک"
+
+msgid "Enter text to search for"
+msgstr "وارد کردن یک متن به منظور جستجو برای "
+
+msgid "Export selected as AutoTimer"
+msgstr "صادر کردن منتخب به عنوان یک تایمر خودکار "
+
+msgid "History"
+msgstr "پیشینه"
+
+msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
+msgstr ""
+
+msgid "If 'Search only bouquets' is enabled, show service name as in bouquets for renamed services."
+msgstr ""
+
+msgid "If this setting is enabled, searching EPG in only services in user bouquets."
+msgstr ""
+
+msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
+msgstr ""
+
+msgid "If this setting is enabled, the plugin adds picons."
+msgstr ""
+
+msgid "Import from AutoTimer"
+msgstr "وارد کردن از تایمر خودکار"
+
+msgid "Import from EPG"
+msgstr "وارد کردن از برنامه راهنمای الکترونیک"
+
+msgid "Import from Timer"
+msgstr "وارد کردن از تایمر"
+
+msgid "Length of History"
+msgstr ""
+
+msgid "List of history is cleared !"
+msgstr ""
+
+msgid "Lookup in TMBD"
+msgstr ""
+
+msgid "New Search"
+msgstr "جستجوی جدید"
+
+#, fuzzy
+msgid "No history !"
+msgstr "بدون پیشینه"
+
+msgid "OK"
+msgstr "موزد تایید است"
+
+msgid "Open selected in IMDb"
+msgstr ""
+
+msgid "Partnerbox Entries"
+msgstr ""
+
+msgid "Save search as AutoTimer"
+msgstr "ذخیره سازی جستجو به عنوان یک تایمر خودکار"
+
+msgid "Search"
+msgstr "جستجو"
+
+msgid "Search EPG by title event"
+msgstr ""
+
+#, fuzzy
+msgid "Search event in EPG"
+msgstr "جستجوی یک برنامه راهنمای الکترونیک"
+
+msgid "Search for TMDb info"
+msgstr ""
+
+msgid "Search only bouquets"
+msgstr ""
+
+msgid "Search strictness"
+msgstr ""
+
+#, fuzzy
+msgid "Search type"
+msgstr "جستجو"
+
+msgid "Search type for filter"
+msgstr ""
+
+msgid "Select a timer to search"
+msgstr "انتخاب یک تایمر برای جستجو "
+
+msgid "Select action:"
+msgstr ""
+
+msgid "Select channel"
+msgstr ""
+
+msgid "Select text to search for"
+msgstr "انتخاب یک متن برای جستجوی"
+
+msgid "Select type for filter search. Press button P +/- for show/hide filter in description after search."
+msgstr ""
+
+msgid "Select type for search, \"partial match\" for the most extensive search."
+msgstr ""
+
+msgid "Select type: 'Search and Select channel' or 'Search'."
+msgstr ""
+
+msgid "Select whether or not you want to enforce case correctness."
+msgstr ""
+
+msgid "Setup"
+msgstr ""
+
+msgid "Timers list"
+msgstr ""
+
+msgid "Type blue Button"
+msgstr ""
+
+msgid "Use Picons"
+msgstr ""
+
+msgid "Zap to selected service"
+msgstr ""
+
+msgid "case-insensitive search"
+msgstr ""
+
+msgid "case-sensitive search"
+msgstr ""
+
+msgid "choice (Search and standard)"
+msgstr ""
+
+msgid "exact match"
+msgstr ""
+
+#, fuzzy
+msgid "only Search"
+msgstr "جستجو"
+
+msgid "partial match"
+msgstr ""
+
+#, fuzzy
+msgid "search EPG"
+msgstr "جستجوی یک برنامه راهنمای الکترونیک"
+
+msgid "search EPG..."
+msgstr "جستجوی برنامه راهنمای الکترونیک"
+
+msgid "title starts with"
+msgstr ""

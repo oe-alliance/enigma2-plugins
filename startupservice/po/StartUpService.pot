@@ -8,34 +8,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-28 12:29+0200\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/plugin.py:82
-msgid "set as startup service"
-msgstr ""
-
-#: ../src/plugin.py:83
-msgid "reset startup service"
-msgstr ""
-
-#: ../src/plugin.py:102
 msgid "If you see this message, please switch to the service you want to mark as startservice and try again."
 msgstr ""
 
-msgid "set as startup service after booting..."
-msgstr ""
-
-msgid "set as startup service after leaving standby mode..."
+msgid "reset startup service"
 msgstr ""
 
 msgid "reset startup service for booting..."
 msgstr ""
 
 msgid "reset startup service for leaving standby mode..."
+msgstr ""
+
+msgid "set as startup service"
+msgstr ""
+
+msgid "set as startup service after booting..."
+msgstr ""
+
+msgid "set as startup service after leaving standby mode..."
 msgstr ""

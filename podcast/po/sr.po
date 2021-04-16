@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 Plugin - Podcast\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2021-04-16 16:24+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -14,14 +14,7 @@ msgstr ""
 "X-Poedit-Country: SERBIA\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/"
-"enigma2/python/Plugins/Extensions/Podcast\n"
-
-msgid " (Audio)"
-msgstr " (Audio) "
-
-msgid " (Video)"
-msgstr " (Video) "
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast\n"
 
 msgid "Buffer device:"
 msgstr "Bafer uređaj:"
@@ -39,29 +32,21 @@ msgstr "Obriši ovaj film?"
 msgid "Downloading movie: %s"
 msgstr "Preuzimanje filma: %s"
 
-msgid "Error getting categories"
-msgstr "Greška u dobijanju kategorija"
-
-msgid "Error getting episodes"
-msgstr "Greška u dobijanju epizoda"
-
-msgid "Error getting genres"
-msgstr "Greška u dobijanju žanrova"
-
 msgid "Error getting movies"
 msgstr "Greška u dobijanju filmova"
 
-msgid "Error getting podcast url"
-msgstr "Greška u dobijanju podkast url-a"
+msgid "Feedly OPML"
+msgstr ""
 
-msgid "Error getting podcasts"
-msgstr "Greška u dobijanju podkasta"
-
-msgid "Error getting rss feed"
-msgstr "Greška u dobijanju RSS fida"
+msgid "Help"
+msgstr ""
 
 msgid "Length"
 msgstr "Dužina"
+
+#, fuzzy
+msgid "No Feedly configuration"
+msgstr "Konfiguracija"
 
 msgid "Podcast"
 msgstr "Podkast"
@@ -92,12 +77,3 @@ msgstr "iz xml"
 
 msgid "keep on device"
 msgstr "zadrži na uređaju"
-
-msgid "podcast.com"
-msgstr "podcast.com "
-
-msgid "podcast.de"
-msgstr "podcast.de "
-
-#~ msgid "Date"
-#~ msgstr "Datum "

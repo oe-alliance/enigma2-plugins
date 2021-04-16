@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2021-04-16 16:23+0430\n"
 "PO-Revision-Date: 2008-02-14 11:44+0100\n"
 "Last-Translator: theMMMMMM <theMMMMMM@gmail.com>\n"
 "Language-Team: none\n"
@@ -25,9 +25,7 @@ msgid ""
 "Update existing entry and continue?\n"
 msgstr ""
 
-msgid ""
-"A mount entry with this name already exists!\n"
-"and is not this share folder, please use a different name.\n"
+msgid "AUTOFS (mount as needed)"
 msgstr ""
 
 msgid "Active"
@@ -124,7 +122,7 @@ msgstr ""
 msgid "Expert"
 msgstr ""
 
-msgid "FSTAB (mount using linux)"
+msgid "FSTAB (mount at boot)"
 msgstr ""
 
 msgid "Finished restarting your network"
@@ -160,6 +158,9 @@ msgstr ""
 msgid "Mount informations"
 msgstr ""
 
+msgid "Mount manager"
+msgstr ""
+
 msgid "Mount options"
 msgstr ""
 
@@ -181,9 +182,6 @@ msgid "Mountpoints management"
 msgstr ""
 
 msgid "Mounts editor"
-msgstr ""
-
-msgid "Mounts management"
 msgstr ""
 
 msgid "NFS share"
@@ -279,6 +277,9 @@ msgstr ""
 msgid "Setup Mount Again"
 msgstr ""
 
+msgid "Use as HDD replacement"
+msgstr ""
+
 msgid "User management"
 msgstr ""
 
@@ -294,6 +295,17 @@ msgstr ""
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr ""
 
+msgid ""
+"You have changed the share name!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your network interface %s is not properly configured, so a network scan cannot be done.\n"
+"Please configure the interface and try again."
+msgstr ""
+
 msgid "Your network mount has been activated."
 msgstr ""
 
@@ -301,7 +313,4 @@ msgid "Your network mount has been removed."
 msgstr ""
 
 msgid "Your network mount has been updated."
-msgstr ""
-
-msgid "Use as HDD replacement"
 msgstr ""
