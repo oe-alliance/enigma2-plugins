@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 Permanent Clock Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2008-11-27 10:38+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
 "Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
@@ -20,11 +20,75 @@ msgstr "Kalıcı saati etkinleştir"
 msgid "Change permanent clock position"
 msgstr "Kalıcı saat pozisyonunu değiştir"
 
+msgid "Choice color clock:"
+msgstr ""
+
+msgid "Color analog clock"
+msgstr ""
+
+msgid "Color digital clock"
+msgstr ""
+
 msgid "Deactivate permanent clock"
 msgstr "Kalıcı saati kapat"
+
+msgid "Disable key 'long EXIT' show/hide"
+msgstr ""
+
+msgid "Enable key 'long EXIT' show/hide"
+msgstr ""
+
+msgid "PLi-transparent"
+msgstr ""
 
 msgid "Permanent Clock"
 msgstr "Kalıcı Saat"
 
+#, fuzzy
+msgid "Permanent Clock Setup"
+msgstr "Kalıcı Saat"
+
+msgid "Save"
+msgstr ""
+
+msgid "Set slider"
+msgstr ""
+
+msgid "Set slider step (1 - 20):"
+msgstr ""
+
+msgid "Show analog clock"
+msgstr ""
+
+msgid "Show digital clock"
+msgstr ""
+
 msgid "Shows the clock permanent on the screen"
 msgstr "Kalıcı saati ekranda gösterir"
+
+msgid "black-blue"
+msgstr ""
+
+msgid "black-white"
+msgstr ""
+
+msgid "black-yellow"
+msgstr ""
+
+msgid "blue"
+msgstr ""
+
+msgid "large white"
+msgstr ""
+
+msgid "large yellow"
+msgstr ""
+
+msgid "transparent"
+msgstr ""
+
+msgid "white"
+msgstr ""
+
+msgid "yellow"
+msgstr ""

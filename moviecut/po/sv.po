@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MovieCut\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2012-02-26 22:23+0100\n"
 "Last-Translator: Anders Holst <aho@sics.se>\n"
 "Language-Team: none\n"
@@ -16,14 +16,6 @@ msgstr ""
 
 msgid "Advanced cut specification..."
 msgstr "Avancerad klipp-specifikation..."
-
-#, python-format
-msgid ""
-"Another movie is currently cut.\n"
-"The movie \"%s\" will be cut in the background after it."
-msgstr ""
-"En annan film håller på att klippas.\n"
-"Filmen \"%s\" kommer att klippas i bakgrunden efter det."
 
 msgid "Bad arguments"
 msgstr "Felaktiga argument"
@@ -78,6 +70,10 @@ msgstr "Klipp inte"
 msgid "Empty .ap file"
 msgstr "Tom .ap-fil"
 
+#, fuzzy
+msgid "Execute cuts"
+msgstr "Utför klipp..."
+
 msgid "Execute cuts..."
 msgstr "Utför klipp..."
 
@@ -120,10 +116,6 @@ msgstr "Ersätt originalet:"
 
 msgid "Replace the original movie with the cut movie"
 msgstr "Ersätt originalet med den klippta filmen"
-
-#, python-format
-msgid "The movie \"%s\" is cut in the background."
-msgstr "Filmen \"%s\" klipps i bakgrunden."
 
 #, python-format
 msgid "The movie \"%s\" is successfully cut"

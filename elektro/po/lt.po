@@ -2,284 +2,217 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Elektro Power Save\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-29 17:21+Mitteleuropäische Sommerzeit\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2016-01-24 15:44+0200\n"
 "Last-Translator: joergm6 <joergm6@online.de>\n"
 "Language-Team: Vytenis P. <Vyteniui@gmail.com>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: lt\n"
 "X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: plugin.py:110
-msgid "Elektro Power Save"
-msgstr "Elektro Power Save"
-
-#: plugin.py:111
-msgid "Automatically shut down to deep standby"
-msgstr "Automatiškai išjungti į gilų budėjimą"
-
-#: plugin.py:112
-msgid "Extensions menu"
-msgstr "Plėtinių meniu"
-
-#: plugin.py:112
-msgid "Plugin menu"
-msgstr "Įskiepio meniu"
-
-#: plugin.py:124
-msgid "yes, Profile 1"
-msgstr "taip, profilis 1"
-
-#: plugin.py:124
-msgid "yes, Profile 2"
-msgstr "taip, profilis 2"
-
-#: plugin.py:134
-msgid "Monday"
-msgstr "pirmadienis"
-
-#: plugin.py:135
-msgid "Tuesday"
-msgstr "antradienis"
-
-#: plugin.py:136
-msgid "Wednesday"
-msgstr "trečiadienis"
-
-#: plugin.py:137
-msgid "Thursday"
-msgstr "ketvirtadienis"
-
-#: plugin.py:138
-msgid "Friday"
-msgstr "penktadienis"
-
-#: plugin.py:139
-msgid "Saturday"
-msgstr "šeštadienis"
-
-#: plugin.py:140
-msgid "Sunday"
-msgstr "sekmadienis"
-
-#: plugin.py:150
-msgid "no Name"
-msgstr "Be pavadinimo"
-
-#: plugin.py:151
-msgid "Connection Error"
-msgstr "Jungimosi klaida"
-
-#: plugin.py:211 plugin.py:222 plugin.py:230 plugin.py:530
-msgid "Ver."
-msgstr "Vers."
-
-#: plugin.py:263 plugin.py:268
-msgid "Wakeup"
-msgstr "Pažadinti"
-
-#: plugin.py:264 plugin.py:269
-msgid "Sleep"
-msgstr "Budėjimo būsena"
-
-#: plugin.py:265 plugin.py:270
-msgid "Next day starts at"
-msgstr "Kita diena prasideda"
-
-#: plugin.py:266 plugin.py:271
-msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
-msgstr "Jei Vu+ turėtų būti išjungtas pvz. pirmadienio naktį 1 val., iš tikrųjų jau bus antradienis. Kad leisti šį pasirinkimą, skirtingas kitos dienos pradžios laikas gali būti nurodytas čia."
-
-#: plugin.py:275 plugin.py:321 plugin.py:400 plugin.py:507
-msgid "Cancel"
-msgstr "Atšaukti"
-
-#: plugin.py:276 plugin.py:322 plugin.py:401 plugin.py:508
-msgid "Ok"
-msgstr "Gerai"
-
-#: plugin.py:317
-msgid "IP Address"
-msgstr "IP adresas"
-
-#: plugin.py:354
-msgid "please wait..."
-msgstr "palaukite..."
-
-#: plugin.py:391
-msgid "NAS/Server Name or IP"
-msgstr "NAS/serverio pavadinimas, arba IP"
-
-#: plugin.py:392
-msgid "Username"
-msgstr "Vartotojo vardas"
-
-#: plugin.py:393
-msgid "Password"
-msgstr "Slaptažodis"
-
-#: plugin.py:394
-msgid "Command [poweroff, shutdown -h,...]"
-msgstr "Komanda [poweroff shutdown -h,...]"
-
-#: plugin.py:395
-msgid "Telnet Port"
-msgstr "Telnet prievadas"
-
-#: plugin.py:396
-msgid "Waiting until poweroff"
-msgstr "Laukiama išjungimo"
-
-#: plugin.py:402
-msgid "Run"
-msgstr "Vykdyti"
-
-#: plugin.py:461
-msgid "Active Time Profile"
-msgstr "Aktyvus laiko profilis"
-
-#: plugin.py:462
-msgid "The active Time Profile is (1 or 2)."
-msgstr "Aktyvus laiko profilis yra (1 arba 2)."
-
-#: plugin.py:463
-msgid "Enable Elektro Power Save"
-msgstr "Įjungti el. energijos taupymą"
-
-#: plugin.py:464
-msgid "Unless this is enabled, this plugin won't run automatically."
-msgstr "Kol čia neįjungta, įskiepis automatiškai nepasileis."
-
-#: plugin.py:465
-msgid "Use both profiles alternately"
-msgstr "Abu profilius naudoti pakaitomis"
-
-#: plugin.py:466
-msgid "Both profiles are used alternately. When shutting down the other profile is enabled. This allows two time cycles per day. Do not overlap the times."
-msgstr "Abu profiliai naudojami pakaitomis. Kai išjungtas vienas, kitas profilis yra įjungtas. Taip galomi du laiko ciklai per dieną. Laikai neturi persidengti."
-
-#: plugin.py:467 plugin.py:624
-msgid "Standby on boot"
-msgstr "Startuoti budinčiame režime"
-
-#: plugin.py:468
-msgid "Puts the box in standby mode after boot."
-msgstr "Po starto perveda į budėjimo režimą."
-
-#: plugin.py:469
-msgid "Standby on manual boot"
-msgstr "Rankiniu būdu startuoti budinčiame režime"
-
-#: plugin.py:470
-msgid "Whether to put the box in standby when booted manually. On manual boot the box will not go to standby before the next deep standby interval starts, even if this option is set. This option is only active if 'Standby on boot' option is set, too."
-msgstr "Startavus rankiniu būdu, ar pereiti į budėjimo režimą? Paleidus ranka aparatas nepereis į budėjimą, kol neprasidės kitas gilaus budėjimo intervalas, net jei čia įjungta. Ši parinktis aktyvi tik tada, jei įjungta \"Startuoti budinčiame režime\"."
-
-#: plugin.py:471
-msgid "Standby on boot screen timeout"
-msgstr "Lango 'Startuoti budinčiame režime' delsa"
-
-#: plugin.py:472
-msgid "Specify how long to show the standby query on boot screen. This value can be set to ensure the box does not shut down to deep standby again too fast when in standby mode."
-msgstr "Nurodykite, kiek laiko rodyti budėjimo užklausą įkrovos ekrane. Šis dydis gali būti nustatytas, siekiant užtikrinti, kad aparatas neišsijungtų į gilaus budėjimo režimą per greitai, kai veikia budėjimo režimu."
-
-#: plugin.py:473
-msgid "Force sleep (even when not in standby)"
-msgstr "Priverstinis budėjimas (ir kai ne budėjime)"
-
-#: plugin.py:474
-msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
-msgstr "Priverstinai išjungs į gilų budėjimą, jei ir ne iš budėjimo. Planiniai įrašymai lieka nepakitę."
-
-#: plugin.py:475
-msgid "Avoid deep standby when HDD is active, e.g. for FTP"
-msgstr "Neleisti giliaus budėjimo, kai HDD aktyvus, pvz., naudoja FTP"
-
-#: plugin.py:476
-msgid "Wait for the HDD to enter sleep mode. Depending on the configuration this can prevent the box entirely from entering deep standby mode."
-msgstr "Laukite, kol HDD pereis į budėjimo režimą. Priklausomai nuo konfigūracijos, tai gali neleisti visiškai pereiti į gilaus budėjimo režimą."
-
-#: plugin.py:477
-msgid "Check IPs (press OK to edit)"
-msgstr "Tikrinkite IP (spauskite 'OK', kad redaguoti)"
-
-#: plugin.py:478
-msgid "This list of IP addresses is checked. Elektro waits until addresses no longer responds to ping."
-msgstr "Tai patikrintų IP adresų sąrašas. Elektro laukia, kol adresai nebereaguos į ping."
-
-#: plugin.py:479
-msgid "NAS Poweroff (press OK to edit)"
-msgstr "NAS išjungimas (spauskite 'OK', kad redaguoti)"
-
-#: plugin.py:480
 msgid "A NAS/Server can be shut down. Is required activated Telnet."
 msgstr "NAS/serveris gali būti išjungtas. Tam būtinas aktyvus telnet."
 
-#: plugin.py:481
-msgid "Don't wake up"
-msgstr "Neprabusti"
+msgid "Active Time Profile"
+msgstr "Aktyvus laiko profilis"
 
-#: plugin.py:482
-msgid "Do not wake up at the end of next deep standby interval."
-msgstr "Neprabusti iš gilaus budėjimo kito intervalo pabaigoje."
+msgid "Automatically shut down to deep standby"
+msgstr "Automatiškai išjungti į gilų budėjimą"
 
-#: plugin.py:483
-msgid "Holiday mode (experimental)"
-msgstr "Atostogų režimas (eksperimentinis)"
+msgid "Avoid deep standby when HDD is active, e.g. for FTP"
+msgstr "Neleisti giliaus budėjimo, kai HDD aktyvus, pvz., naudoja FTP"
 
-#: plugin.py:484
-msgid "The box always enters deep standby mode, except for recording."
-msgstr "Aparatas visada pereina į gilaus budėjimo režimą, jei nebus įrašymų."
+msgid "Both profiles are used alternately. When shutting down the other profile is enabled. This allows two time cycles per day. Do not overlap the times."
+msgstr "Abu profiliai naudojami pakaitomis. Kai išjungtas vienas, kitas profilis yra įjungtas. Taip galomi du laiko ciklai per dieną. Laikai neturi persidengti."
 
-#: plugin.py:485
-msgid "Show in"
-msgstr "Rodyti"
+msgid "Cancel"
+msgstr "Atšaukti"
 
-#: plugin.py:486
-msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
-msgstr "Nurodykite, ar įskiepis bus rodomas tarp įskiepių, ar tarp plėtinių meniu (reikės GUI paleisti iš naujo)."
+msgid "Check IPs (press OK to edit)"
+msgstr "Tikrinkite IP (spauskite 'OK', kad redaguoti)"
 
-#: plugin.py:487
-msgid "Name"
-msgstr "Pavadinimas"
+msgid "Command [poweroff, shutdown -h,...]"
+msgstr "Komanda [poweroff shutdown -h,...]"
 
-#: plugin.py:488
-msgid "Specify plugin name to be used in menu (needs GUI restart)."
-msgstr "Nurodykite įskiepio pavadinimą, kuris bus naudojamas meniu (reikės GUI paleisti iš naujo)."
+msgid "Connection Error"
+msgstr "Jungimosi klaida"
 
-#: plugin.py:489
 msgid "Description"
 msgstr "Aprašymas"
 
-#: plugin.py:490
-msgid "Specify plugin description to be used in menu (needs GUI restart)."
-msgstr "Nurodykite įskiepio aprašymą, kuris bus naudojamas meniu (reikės GUI paleisti iš naujo)."
+msgid "Do not wake up at the end of next deep standby interval."
+msgstr "Neprabusti iš gilaus budėjimo kito intervalo pabaigoje."
 
-#: plugin.py:509
-msgid "Help"
-msgstr "Pagalba"
+msgid "Don't wake up"
+msgstr "Neprabusti"
 
-#: plugin.py:510
-msgid "Times"
-msgstr "Kartai"
+msgid "Elektro Power Save"
+msgstr "Elektro Power Save"
 
-#: plugin.py:558
-msgid "Showing Elektro readme.txt"
-msgstr "Rodoma Elektro readme.txt"
+msgid "Enable Elektro Power Save"
+msgstr "Įjungti el. energijos taupymą"
 
-#: plugin.py:558
-msgid "readme.txt"
-msgstr "readme.txt"
+msgid "Extensions menu"
+msgstr "Plėtinių meniu"
 
-#: plugin.py:650
+msgid "Force sleep (even when not in standby)"
+msgstr "Priverstinis budėjimas (ir kai ne budėjime)"
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
+msgstr "Priverstinai išjungs į gilų budėjimą, jei ir ne iš budėjimo. Planiniai įrašymai lieka nepakitę."
+
+msgid "Friday"
+msgstr "penktadienis"
+
 msgid "Go to Standby now?"
 msgstr "Įjungti budėjimo režimą?"
 
-#: plugin.py:828
 msgid "Go to sleep now?"
 msgstr "Įjungti miego režimą?"
+
+msgid "Help"
+msgstr "Pagalba"
+
+msgid "Holiday mode (experimental)"
+msgstr "Atostogų režimas (eksperimentinis)"
+
+msgid "IP Address"
+msgstr "IP adresas"
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr "Jei Vu+ turėtų būti išjungtas pvz. pirmadienio naktį 1 val., iš tikrųjų jau bus antradienis. Kad leisti šį pasirinkimą, skirtingas kitos dienos pradžios laikas gali būti nurodytas čia."
+
+msgid "Monday"
+msgstr "pirmadienis"
+
+msgid "NAS Poweroff (press OK to edit)"
+msgstr "NAS išjungimas (spauskite 'OK', kad redaguoti)"
+
+msgid "NAS/Server Name or IP"
+msgstr "NAS/serverio pavadinimas, arba IP"
+
+msgid "Name"
+msgstr "Pavadinimas"
+
+msgid "Next day starts at"
+msgstr "Kita diena prasideda"
+
+msgid "Ok"
+msgstr "Gerai"
+
+msgid "Password"
+msgstr "Slaptažodis"
+
+msgid "Plugin menu"
+msgstr "Įskiepio meniu"
+
+msgid "Puts the box in standby mode after boot."
+msgstr "Po starto perveda į budėjimo režimą."
+
+msgid "Run"
+msgstr "Vykdyti"
+
+msgid "Saturday"
+msgstr "šeštadienis"
+
+msgid "Show in"
+msgstr "Rodyti"
+
+msgid "Showing Elektro readme.txt"
+msgstr "Rodoma Elektro readme.txt"
+
+msgid "Sleep"
+msgstr "Budėjimo būsena"
+
+msgid "Specify how long to show the standby query on boot screen. This value can be set to ensure the box does not shut down to deep standby again too fast when in standby mode."
+msgstr "Nurodykite, kiek laiko rodyti budėjimo užklausą įkrovos ekrane. Šis dydis gali būti nustatytas, siekiant užtikrinti, kad aparatas neišsijungtų į gilaus budėjimo režimą per greitai, kai veikia budėjimo režimu."
+
+msgid "Specify plugin description to be used in menu (needs GUI restart)."
+msgstr "Nurodykite įskiepio aprašymą, kuris bus naudojamas meniu (reikės GUI paleisti iš naujo)."
+
+msgid "Specify plugin name to be used in menu (needs GUI restart)."
+msgstr "Nurodykite įskiepio pavadinimą, kuris bus naudojamas meniu (reikės GUI paleisti iš naujo)."
+
+msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
+msgstr "Nurodykite, ar įskiepis bus rodomas tarp įskiepių, ar tarp plėtinių meniu (reikės GUI paleisti iš naujo)."
+
+msgid "Standby on boot"
+msgstr "Startuoti budinčiame režime"
+
+msgid "Standby on boot screen timeout"
+msgstr "Lango 'Startuoti budinčiame režime' delsa"
+
+msgid "Standby on manual boot"
+msgstr "Rankiniu būdu startuoti budinčiame režime"
+
+msgid "Sunday"
+msgstr "sekmadienis"
+
+msgid "Telnet Port"
+msgstr "Telnet prievadas"
+
+msgid "The active Time Profile is (1 or 2)."
+msgstr "Aktyvus laiko profilis yra (1 arba 2)."
+
+msgid "The box always enters deep standby mode, except for recording."
+msgstr "Aparatas visada pereina į gilaus budėjimo režimą, jei nebus įrašymų."
+
+msgid "This list of IP addresses is checked. Elektro waits until addresses no longer responds to ping."
+msgstr "Tai patikrintų IP adresų sąrašas. Elektro laukia, kol adresai nebereaguos į ping."
+
+msgid "Thursday"
+msgstr "ketvirtadienis"
+
+msgid "Times"
+msgstr "Kartai"
+
+msgid "Tuesday"
+msgstr "antradienis"
+
+msgid "Unless this is enabled, this plugin won't run automatically."
+msgstr "Kol čia neįjungta, įskiepis automatiškai nepasileis."
+
+msgid "Use both profiles alternately"
+msgstr "Abu profilius naudoti pakaitomis"
+
+msgid "Username"
+msgstr "Vartotojo vardas"
+
+msgid "Ver."
+msgstr "Vers."
+
+msgid "Wait for the HDD to enter sleep mode. Depending on the configuration this can prevent the box entirely from entering deep standby mode."
+msgstr "Laukite, kol HDD pereis į budėjimo režimą. Priklausomai nuo konfigūracijos, tai gali neleisti visiškai pereiti į gilaus budėjimo režimą."
+
+msgid "Waiting until poweroff"
+msgstr "Laukiama išjungimo"
+
+msgid "Wakeup"
+msgstr "Pažadinti"
+
+msgid "Wednesday"
+msgstr "trečiadienis"
+
+msgid "Whether to put the box in standby when booted manually. On manual boot the box will not go to standby before the next deep standby interval starts, even if this option is set. This option is only active if 'Standby on boot' option is set, too."
+msgstr "Startavus rankiniu būdu, ar pereiti į budėjimo režimą? Paleidus ranka aparatas nepereis į budėjimą, kol neprasidės kitas gilaus budėjimo intervalas, net jei čia įjungta. Ši parinktis aktyvi tik tada, jei įjungta \"Startuoti budinčiame režime\"."
+
+msgid "no Name"
+msgstr "Be pavadinimo"
+
+msgid "please wait..."
+msgstr "palaukite..."
+
+msgid "readme.txt"
+msgstr "readme.txt"
+
+msgid "yes, Profile 1"
+msgstr "taip, profilis 1"
+
+msgid "yes, Profile 2"
+msgstr "taip, profilis 2"

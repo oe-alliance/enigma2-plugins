@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-15 13:09+0000\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2012-03-14 12:27+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
@@ -20,27 +20,6 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<onbekend>"
 
-msgid ""
-"A finished record timer wants to set your\n"
-"receiver to standby. Do that now?"
-msgstr ""
-"Een afgewerkte timer wil uw ontvanger in standby zetten\n"
-"Wilt u dat?"
-
-msgid ""
-"A finished record timer wants to shut down\n"
-"your receiver. Shutdown now?"
-msgstr ""
-"Een afgewerkte timer wil uw ontvanger uitschakelen\n"
-"Nu uitschakelen?"
-
-msgid ""
-"A timer failed to record!\n"
-"Disable TV and try again?\n"
-msgstr ""
-"Een opname is mislukt!\n"
-"TV uitschakelen en opnieuw proberen?\n"
-
 msgid "Add"
 msgstr "Voeg toe"
 
@@ -49,6 +28,9 @@ msgstr "Voeg timer toe"
 
 msgid "Adjust font size:"
 msgstr "Pas lettergrootte aan:"
+
+msgid "Adjust service name column width:"
+msgstr ""
 
 msgid "Amount of recordings left:"
 msgstr "Aantal overgebleven opnames:"
@@ -89,9 +71,6 @@ msgstr "Algemeen"
 msgid "IMDb"
 msgstr "IMDb"
 
-msgid "In order to record a timer, the TV was switched to the recording service!\n"
-msgstr "Om een opname te kunnen maken, is de TV naar het op te nemen kanaal overgeschakeld!\n"
-
 msgid "Included days:"
 msgstr "Inbegrepen dagen:"
 
@@ -115,6 +94,9 @@ msgstr "Locatie:"
 
 msgid "Match title:"
 msgstr "Titel overeenkomst:"
+
+msgid "Merlin EPG Center"
+msgstr ""
 
 msgid "Monday"
 msgstr "maandag"
@@ -236,9 +218,6 @@ msgstr "Toon korte beschrijving:"
 msgid "Show text input help for epg search:"
 msgstr "Toon tekstinvoer-help voor EPG-search:"
 
-msgid "Show timer messages:"
-msgstr "Toon timer berichten:"
-
 msgid "Show video picture:"
 msgstr "Toon video:"
 
@@ -296,23 +275,35 @@ msgstr "uitgeschakeld"
 msgid "done!"
 msgstr "gereed!"
 
-msgid "four parts"
-msgstr "vier delen"
+msgid "list and event info: four parts"
+msgstr ""
 
-msgid "gradient"
-msgstr "gradient"
+msgid "list and event info: gradient"
+msgstr ""
 
-msgid "percent (text)"
-msgstr "percentage (tekst)"
+msgid "list and event info: percent (text)"
+msgstr ""
+
+msgid "list and event info: simple"
+msgstr ""
+
+msgid "list: off, event info: four parts"
+msgstr ""
+
+msgid "list: off, event info: gradient"
+msgstr ""
+
+msgid "list: off, event info: percent (text)"
+msgstr ""
+
+msgid "list: off, event info: simple"
+msgstr ""
 
 msgid "recording..."
 msgstr "aan het opnemen..."
 
 msgid "return"
 msgstr "ga terug"
-
-msgid "simple"
-msgstr "eenvoudig"
 
 msgid "single line style"
 msgstr "enkele lijn stijl"
@@ -325,4 +316,3 @@ msgstr "met korte beschrijving"
 
 msgid "zapped"
 msgstr "gezapped"
-

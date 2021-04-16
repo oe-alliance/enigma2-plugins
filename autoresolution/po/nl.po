@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-09 23:22+0000\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2017-11-10 15:05+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Rob van der Does\n"
@@ -17,6 +17,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.4\n"
+
+msgid "Alternative resolution when native not supported"
+msgstr ""
+
+msgid "Ask before changing videomode"
+msgstr ""
 
 msgid "Auto frame rate (refresh need 'multi')"
 msgstr "Auto frame rate (verversen benodigt 'multi')"
@@ -38,14 +44,18 @@ msgstr "Autoresolutie schakelaar"
 msgid "Autoresolution is not working in Scart/DVI-PC Mode"
 msgstr "Autoresolutie werkt niet in Scart/DVI-PC Modus"
 
-msgid "Autoresolution settings"
-msgstr "Autoresolutie instellingen"
-
 msgid "Autoresolution videomode setup"
 msgstr "Autoresolutie videomodus instellingen"
 
 msgid "Cancel"
 msgstr "Annuleer"
+
+#, python-format
+msgid ""
+"Changing framerate for current service?\n"
+"Current framerate: %s\n"
+"New framerate: %s\n"
+msgstr ""
 
 msgid "Deinterlacer mode for interlaced content"
 msgstr "Deinterlacer modus voor interlaced content"
@@ -83,6 +93,13 @@ msgstr "Schakel 720p50 modus in"
 msgid "Enable Autoresolution"
 msgstr "Schakel Autoresolutie in"
 
+msgid "Exit"
+msgstr ""
+
+#, fuzzy
+msgid "FHD 50/60HZ Progressive Mode"
+msgstr "SD 30/60HZ Progressieve modus"
+
 msgid "HD Interlace Mode"
 msgstr "HD Interlace modus"
 
@@ -92,14 +109,31 @@ msgstr "HD Progressive modus"
 msgid "Lock timeout"
 msgstr "Lock timeout"
 
+#, fuzzy
+msgid "Manual resolution"
+msgstr "Schakel Autoresolutie in"
+
+#, fuzzy
+msgid "Manual resolution is not working in Scart/DVI-PC mode!"
+msgstr "Autoresolutie werkt niet in Scart/DVI-PC Modus"
+
+msgid "Message timeout"
+msgstr ""
+
 msgid "Mode"
 msgstr "Mode"
 
 msgid "OK"
 msgstr "OK"
 
+msgid "Please select a resolution..."
+msgstr ""
+
 msgid "Refresh Rate"
 msgstr "Refresh Rate"
+
+msgid "Return back without confirmation after 10 sec."
+msgstr ""
 
 msgid "Running in testmode"
 msgstr "Draait in testmode"
@@ -119,14 +153,27 @@ msgstr "SD 30/60HZ Interlace modus"
 msgid "SD 30/60HZ Progressive Mode"
 msgstr "SD 30/60HZ Progressieve modus"
 
+msgid "Show 'Manual resolution' in extensions menu"
+msgstr ""
+
 msgid "Show info screen"
 msgstr "Toon informatiescherm"
+
+msgid "This resolution is OK?"
+msgstr ""
 
 msgid "UHD Interlace Mode"
 msgstr "UHD Interlace modus."
 
 msgid "UHD Progressive Mode"
 msgstr "UHD Progressieve modus."
+
+msgid "Use 60HZ instead 30HZ"
+msgstr ""
+
+#, fuzzy
+msgid "Video: "
+msgstr "Videomode: %s"
 
 #, python-format
 msgid "Videocontent: %sx%s%s %sHZ"

@@ -4,10 +4,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin vlcPlayer Turkish locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-17 13:14+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
 "Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,39 +16,75 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../src/plugin.py:69
+msgid "1 minute"
+msgstr ""
+
+msgid "10 minutes"
+msgstr ""
+
+msgid "15 minutes"
+msgstr ""
+
+msgid "20 minutes"
+msgstr ""
+
+msgid "3 minutes"
+msgstr ""
+
+msgid "30 minutes"
+msgstr ""
+
+msgid "5 minutes"
+msgstr ""
+
 msgid "A video streaming solution based on VLC"
 msgstr "VLC bazlı video stream çözümü"
 
-#: ../src/VlcServerConfig.py:318
+#, fuzzy
+msgid "Audio"
+msgstr "Ses Kodeği"
+
 msgid "Audio Bitrate"
 msgstr "Ses bit oranı"
 
-#: ../src/VlcServerConfig.py:320
 msgid "Audio Channels"
 msgstr "Ses Kanalları"
 
-#: ../src/VlcServerConfig.py:317
 msgid "Audio Codec"
 msgstr "Ses Kodeği"
 
-#: ../src/VlcServerConfig.py:319
 msgid "Audio Samplerate"
 msgstr "Ses Örnekleme Oranı"
 
-#: ../src/VlcServerConfig.py:294
+#, fuzzy
+msgid "Cache Directory"
+msgstr "Film Klasörü"
+
 msgid "Cancel"
 msgstr "Vazgeç"
 
-#: ../src/VlcServerConfig.py:306
+msgid "Choice of minutes to jump"
+msgstr ""
+
+msgid "Choose an action:"
+msgstr ""
+
 msgid "DVD Device (leave empty for default)"
 msgstr "DVD Aygıtı (varsayılan için boş bırakın)"
 
-#: ../src/VlcServerConfig.py:301
+msgid "Direct play"
+msgstr ""
+
+#, fuzzy
+msgid "Edit VLC Server"
+msgstr "sunucu düzenle"
+
 msgid "Enter VLC-Server as FQDN or IP-Address"
 msgstr "VLC sunucu adını veya IP adresini girin"
 
-#: ../src/VlcMediaList.py:186
+msgid "Enter subtitles as Track or Language"
+msgstr ""
+
 #, python-format
 msgid ""
 "Error loading filelist into server %(server)s:\n"
@@ -56,7 +93,6 @@ msgstr ""
 "Dosya listesi %(server)s sunucusuna yüklenirken\n"
 "%(error)s hatası oluştu"
 
-#: ../src/VlcMediaList.py:164
 #, python-format
 msgid ""
 "Error loading playlist %(media)s into server %(server)s:\n"
@@ -65,9 +101,6 @@ msgstr ""
 "%(media)s oynatma listesi %(server)s sunucusuna yüklenirken\n"
 "%(error)s hatası oluştu"
 
-#: ../src/VlcMediaList.py:180
-#: ../src/VlcMediaList.py:196
-#: ../src/VlcMediaList.py:201
 #, python-format
 msgid ""
 "Error loading playlist into server %(server)s:\n"
@@ -76,7 +109,6 @@ msgstr ""
 "Oynatma listesi %(server)s sunucusuna yüklenirken\n"
 "%(error)s hatası oluştu"
 
-#: ../src/VlcMediaList.py:127
 #, python-format
 msgid ""
 "Error updating filelist from server %(server)s:\n"
@@ -85,9 +117,6 @@ msgstr ""
 "Dosya listesi %(server)s sunucusuna güncellenirken\n"
 "%(error)s hatası oluştu"
 
-#: ../src/VlcPlayer.py:330
-#: ../src/VlcPlayer.py:365
-#: ../src/VlcPlayer.py:393
 #, python-format
 msgid ""
 "Error with VLC server:\n"
@@ -96,31 +125,45 @@ msgstr ""
 "VLC sunucuda hata oluştu:\n"
 "%s"
 
-#: ../src/VlcMediaList.py:62
+msgid "FQDN"
+msgstr ""
+
 msgid "Filelist"
 msgstr "Dosya Listesi"
 
-#: ../src/VlcServerConfig.py:304
 msgid "HTTP Port"
 msgstr "HTTP Port"
 
-#: ../src/VlcServerList.py:80
-msgid "List of known VLC-Server Profiles"
-msgstr "Bilinen VLC Sunucu Profilleri"
+msgid "IP-Address"
+msgstr ""
 
-#: ../src/VlcServerConfig.py:305
+msgid ""
+"Latest compatible version VLC 2.0.7\n"
+"Setup VLC for PC:\n"
+"Tools -> Preferences -> All -> Interface -> Main Interface -> Select Web\n"
+"Find file c:/Program Files/VideoLAN/VLC/Lua/http/.hosts and insert your box ip (without #).\n"
+"Add shortcut to the startup of the background start VLC 'C:\\Program Files\\VideoLAN\\VLC\vlc.exe --intf telnet --extraintf http'"
+msgstr ""
+
+msgid "List of known profiles. Note: key info - help"
+msgstr ""
+
 msgid "Movie Directory"
 msgstr "Film Klasörü"
 
-#: ../src/VlcPlayer.py:445
 msgid "No more files in this directory"
 msgstr "Bu klasörde başka dosya yok"
 
-#: ../src/VlcPlayer.py:472
+#, python-format
+msgid ""
+"No ping from Server:\n"
+"%s\n"
+"%s"
+msgstr ""
+
 msgid "No previous file in this directory"
 msgstr "Önceki dosya bu klasörde yok"
 
-#: ../src/VlcPlayer.py:320
 msgid ""
 "No valid Enigma-Service to play a VLC-Stream\n"
 "Check your installation and try again!"
@@ -128,102 +171,112 @@ msgstr ""
 "VLC stream oynatım becerisi olan, bilinen bir enigma servisi bulunamadı\n"
 "Ayarlarınızı kontrol edin ve tekrar deneyin!"
 
-#: ../src/VlcServerConfig.py:295
 msgid "OK"
 msgstr "Tamam"
 
-#: ../src/VlcServerConfig.py:312
 #, python-format
 msgid "Overscan Correction [in %(percentsign)s of Video width]"
 msgstr "Overscan Doğrulama [Video genişliğinin %(percentsign)s 'i]"
 
-#: ../src/VlcMediaList.py:63
+msgid "Ping IP-Address when open Server"
+msgstr ""
+
 msgid "Playlist"
 msgstr "Oynatma Listesi"
 
-#: ../src/VlcServerList.py:126
 msgid "Really delete this Server?"
 msgstr "Bu sunucu silinsin mi?"
 
-#: ../src/VlcServerConfig.py:302
+#, fuzzy
+msgid "Reset default"
+msgstr "varsayılana ata"
+
+msgid "Save as .ts and play"
+msgstr ""
+
+#, fuzzy
+msgid "Select VLC-Server profile"
+msgstr "Bilinen VLC Sunucu Profilleri"
+
+msgid "Select method?"
+msgstr ""
+
 msgid "Server Address"
 msgstr "Sunucu Adresi"
 
-#: ../src/VlcServerConfig.py:300
 msgid "Server Profile Name"
 msgstr "Sunucu Profil Adı"
 
-#: ../src/VlcMediaList.py:57
 msgid "Serverlist"
 msgstr "Sunucular"
 
-#: ../src/VlcServerConfig.py:314
+#, fuzzy
+msgid "Set as default"
+msgstr "varsayılana ata"
+
 msgid "Subtitle overlay"
 msgstr "Altyazı kaplaması"
 
-#: ../src/VlcServerConfig.py:316
+#, fuzzy
+msgid "Subtitles"
+msgstr "Altyazı kaplaması"
+
 msgid "Transcode MPEG/DVD Audio"
 msgstr "MPEG/DVD Ses transkodla"
 
-#: ../src/VlcServerConfig.py:308
 msgid "Transcode MPEG/DVD Video"
 msgstr "MPEG/DVD Video transkodla"
 
-#: ../src/VlcServerConfig.py:310
+msgid "Use saving to Cache Directory"
+msgstr ""
+
+msgid "VLC < 2.x"
+msgstr ""
+
+msgid "VLC Media List"
+msgstr ""
+
+msgid "VLC Video Player"
+msgstr ""
+
 msgid "Video Bitrate"
 msgstr "Video bit oranı"
 
-#: ../src/VlcServerConfig.py:309
 msgid "Video Codec"
 msgstr "Video Kodek"
 
-#: ../src/VlcServerConfig.py:311
 msgid "Video Norm"
 msgstr "Video Standartı"
 
-#: ../src/VlcServerList.py:83
+msgid "Yellow subtitles"
+msgstr ""
+
 msgid "add server"
 msgstr "sunucu ekle"
 
-#: ../src/VlcServerList.py:82
 msgid "delete server"
 msgstr "sunucu sil"
 
-#: ../src/VlcServerList.py:84
 msgid "edit server"
 msgstr "sunucu düzenle"
 
-#: ../src/VlcMediaList.py:55
-#: ../src/VlcMediaList.py:119
 msgid "filter off"
 msgstr "filtre kapalı"
 
-#: ../src/VlcMediaList.py:122
 msgid "filter on"
 msgstr "filtre açık"
 
-#: ../src/VlcMediaList.py:58
+msgid "languages"
+msgstr ""
+
 msgid "play DVD"
 msgstr "DVD oynat"
 
-#: ../src/VlcMediaList.py:56
 msgid "refresh"
 msgstr "yenile"
 
-#: ../src/VlcServerList.py:85
 msgid "set default"
 msgstr "varsayılana ata"
 
-#~ msgid "Correct aspect ratio to"
-#~ msgstr "En-boy oranına uyarla :"
-#~ msgid "Symbolic Servername"
-#~ msgstr "Sembolik Sunucu adı"
-#~ msgid "Video Height"
-#~ msgstr "Video Boy"
-#~ msgid "Video Width"
-#~ msgstr "Video En"
-#~ msgid "show filelist"
-#~ msgstr "dosya listesini göster"
-#~ msgid "show playlist"
-#~ msgstr "oynatma listesini göster"
-
+msgid "tracks"
+msgstr ""

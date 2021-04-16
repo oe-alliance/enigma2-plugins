@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 - Plugin Elektro Power Save\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-26 11:35+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2009-09-27 17:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,96 +16,205 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: plugin.py:110
-msgid "Monday"
-msgstr "Ponedeljak"
+msgid "A NAS/Server can be shut down. Is required activated Telnet."
+msgstr ""
 
-#: plugin.py:111
-msgid "Tuesday"
-msgstr "Utorak"
+msgid "Active Time Profile"
+msgstr ""
 
-#: plugin.py:112
-msgid "Wednesday"
-msgstr "Sreda"
+msgid "Automatically shut down to deep standby"
+msgstr ""
 
-#: plugin.py:113
-msgid "Thursday"
-msgstr "Četvrtak"
+msgid "Avoid deep standby when HDD is active, e.g. for FTP"
+msgstr ""
 
-#: plugin.py:114
-msgid "Friday"
-msgstr "Petak "
+msgid "Both profiles are used alternately. When shutting down the other profile is enabled. This allows two time cycles per day. Do not overlap the times."
+msgstr ""
 
-#: plugin.py:115
-msgid "Saturday"
-msgstr "Subota"
-
-#: plugin.py:116
-msgid "Sunday"
-msgstr "Nedelja"
-
-#: plugin.py:195
-msgid "Enable Elektro Power Save"
-msgstr "Uključi štednju elektr. energije"
-
-#: plugin.py:196
-#: plugin.py:300
-msgid "Standby on boot"
-msgstr "Pripravnost posle podizanja"
-
-#: plugin.py:197
-msgid "Standby on manual boot"
-msgstr "Pripravnost posle ručnog podizanja"
-
-#: plugin.py:198
-msgid "Standby on boot screen timeout"
-msgstr "Predah ekrana posle dizanja u stendbaj"
-
-#: plugin.py:199
-msgid "Force sleep (even when not in standby)"
-msgstr "Nateraj u mod spavanja (iako nije u pripravnosti)"
-
-#: plugin.py:200
-msgid "Dont wake up"
-msgstr "Ne budi"
-
-#: plugin.py:201
-msgid "Holiday mode (experimental)"
-msgstr "Mod odmora (Eksperimentalno)"
-
-#: plugin.py:203
-msgid "Next day starts at"
-msgstr "Sledećeg dana startuj u"
-
-#: plugin.py:206
-msgid "Wakeup"
-msgstr "Buđenje"
-
-#: plugin.py:207
-msgid "Sleep"
-msgstr "Spavanje"
-
-#: plugin.py:211
 msgid "Cancel"
 msgstr "Otkaži"
 
-#: plugin.py:212
-msgid "Ok"
-msgstr "OK"
+msgid "Check IPs (press OK to edit)"
+msgstr ""
 
-#: plugin.py:213
-msgid "Help"
-msgstr "Pomoć"
+msgid "Command [poweroff, shutdown -h,...]"
+msgstr ""
 
-#: plugin.py:237
-msgid "Showing Elektro readme.txt"
-msgstr "Prikazujem Elektro readme.txt"
+msgid "Connection Error"
+msgstr ""
 
-#: plugin.py:323
+msgid "Description"
+msgstr ""
+
+msgid "Do not wake up at the end of next deep standby interval."
+msgstr ""
+
+#, fuzzy
+msgid "Don't wake up"
+msgstr "Ne budi"
+
+#, fuzzy
+msgid "Elektro Power Save"
+msgstr "Uključi štednju elektr. energije"
+
+msgid "Enable Elektro Power Save"
+msgstr "Uključi štednju elektr. energije"
+
+msgid "Extensions menu"
+msgstr ""
+
+msgid "Force sleep (even when not in standby)"
+msgstr "Nateraj u mod spavanja (iako nije u pripravnosti)"
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
+msgstr ""
+
+msgid "Friday"
+msgstr "Petak "
+
 msgid "Go to Standby now?"
 msgstr "Idi u pripravnost sada?"
 
-#: plugin.py:465
 msgid "Go to sleep now?"
 msgstr "Idi u mod spavanja sada?"
 
+msgid "Help"
+msgstr "Pomoć"
+
+msgid "Holiday mode (experimental)"
+msgstr "Mod odmora (Eksperimentalno)"
+
+msgid "IP Address"
+msgstr ""
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr ""
+
+msgid "Monday"
+msgstr "Ponedeljak"
+
+msgid "NAS Poweroff (press OK to edit)"
+msgstr ""
+
+msgid "NAS/Server Name or IP"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Next day starts at"
+msgstr "Sledećeg dana startuj u"
+
+msgid "Ok"
+msgstr "OK"
+
+msgid "Password"
+msgstr ""
+
+msgid "Plugin menu"
+msgstr ""
+
+msgid "Puts the box in standby mode after boot."
+msgstr ""
+
+msgid "Run"
+msgstr ""
+
+msgid "Saturday"
+msgstr "Subota"
+
+msgid "Show in"
+msgstr ""
+
+msgid "Showing Elektro readme.txt"
+msgstr "Prikazujem Elektro readme.txt"
+
+msgid "Sleep"
+msgstr "Spavanje"
+
+msgid "Specify how long to show the standby query on boot screen. This value can be set to ensure the box does not shut down to deep standby again too fast when in standby mode."
+msgstr ""
+
+msgid "Specify plugin description to be used in menu (needs GUI restart)."
+msgstr ""
+
+msgid "Specify plugin name to be used in menu (needs GUI restart)."
+msgstr ""
+
+msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
+msgstr ""
+
+msgid "Standby on boot"
+msgstr "Pripravnost posle podizanja"
+
+msgid "Standby on boot screen timeout"
+msgstr "Predah ekrana posle dizanja u stendbaj"
+
+msgid "Standby on manual boot"
+msgstr "Pripravnost posle ručnog podizanja"
+
+msgid "Sunday"
+msgstr "Nedelja"
+
+msgid "Telnet Port"
+msgstr ""
+
+msgid "The active Time Profile is (1 or 2)."
+msgstr ""
+
+msgid "The box always enters deep standby mode, except for recording."
+msgstr ""
+
+msgid "This list of IP addresses is checked. Elektro waits until addresses no longer responds to ping."
+msgstr ""
+
+msgid "Thursday"
+msgstr "Četvrtak"
+
+msgid "Times"
+msgstr ""
+
+msgid "Tuesday"
+msgstr "Utorak"
+
+msgid "Unless this is enabled, this plugin won't run automatically."
+msgstr ""
+
+msgid "Use both profiles alternately"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "Ver."
+msgstr ""
+
+msgid "Wait for the HDD to enter sleep mode. Depending on the configuration this can prevent the box entirely from entering deep standby mode."
+msgstr ""
+
+msgid "Waiting until poweroff"
+msgstr ""
+
+msgid "Wakeup"
+msgstr "Buđenje"
+
+msgid "Wednesday"
+msgstr "Sreda"
+
+msgid "Whether to put the box in standby when booted manually. On manual boot the box will not go to standby before the next deep standby interval starts, even if this option is set. This option is only active if 'Standby on boot' option is set, too."
+msgstr ""
+
+msgid "no Name"
+msgstr ""
+
+msgid "please wait..."
+msgstr ""
+
+msgid "readme.txt"
+msgstr ""
+
+msgid "yes, Profile 1"
+msgstr ""
+
+msgid "yes, Profile 2"
+msgstr ""

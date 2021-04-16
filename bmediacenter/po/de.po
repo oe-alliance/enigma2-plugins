@@ -2,21 +2,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BMediaCenter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-26 22:27+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2013-01-26 22:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: bonkel\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: C:\\Users\\Benny\\Documents\\HDMU\\git\\plugins"
-"\\Extensions\\BMediaCenter\n"
+"X-Poedit-Basepath: C:\\Users\\Benny\\Documents\\HDMU\\git\\plugins\\Extensions\\BMediaCenter\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: C:\\Users\\Benny\\Documents\\HDMU\\git\\plugins"
-"\\Extensions\\BMediaCenter\n"
+"X-Poedit-SearchPath-0: C:\\Users\\Benny\\Documents\\HDMU\\git\\plugins\\Extensions\\BMediaCenter\n"
+
+msgid ""
+"\n"
+"Album: "
+msgstr ""
 
 msgid ""
 "\n"
@@ -34,16 +38,89 @@ msgstr ""
 
 msgid ""
 "\n"
+"Genre: "
+msgstr ""
+
+msgid ""
+"\n"
 "Year: "
 msgstr ""
 "\n"
 "Jahr:"
 
+#, python-format
+msgid "%s"
+msgstr ""
+
+msgid "70-80er"
+msgstr ""
+
+msgid "A background update check is is progress, please wait a few minutes and try again."
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Alternative"
+msgstr ""
+
+msgid "Ambient"
+msgstr ""
+
+#, fuzzy
+msgid "Artist"
+msgstr ""
+"\n"
+"Interpret: "
+
+msgid "Audio Player"
+msgstr ""
+
+msgid "Audioplayer Settings"
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "Big Band"
+msgstr ""
+
+msgid "Bluegrass"
+msgstr ""
+
+msgid "Blues"
+msgstr ""
+
 msgid "Cache Thumbnails"
 msgstr "Vorschau cachen"
 
+msgid "Cancel"
+msgstr ""
+
+msgid "Checking Feeds"
+msgstr ""
+
+msgid "Chillout"
+msgstr ""
+
 msgid "City"
 msgstr "Stadt"
+
+msgid "Classic"
+msgstr ""
+
+msgid "Classic Rock"
+msgstr ""
+
+msgid "Countrymusic"
+msgstr ""
+
+msgid "DVD Player"
+msgstr ""
+
+#, fuzzy
+msgid "Delete"
+msgstr "Löschen fehlgeschlagen"
 
 msgid "Delete failed!"
 msgstr "Löschen fehlgeschlagen"
@@ -54,6 +131,7 @@ msgstr "Ordner"
 msgid "Directory:"
 msgstr "Ordner:"
 
+#, python-format
 msgid "Do you really want to delete %s?"
 msgstr "Möchtest du wirklich %s löschen?"
 
@@ -63,6 +141,10 @@ msgstr "Willst du diesen Ordner samt den Inhalt wirklich löschen?"
 msgid "Do you really want to delete this file ?"
 msgstr "Willst du die Datei wirklich löschen?"
 
+msgid "Edit"
+msgstr ""
+
+#, python-format
 msgid ""
 "Error loading filelist into server %s:\n"
 "%s"
@@ -70,6 +152,7 @@ msgstr ""
 "Fehler beim Laden der Dateiliste in den Server %s:\n"
 "%s"
 
+#, python-format
 msgid ""
 "Error loading playlist %s into server %s:\n"
 "%s"
@@ -77,6 +160,7 @@ msgstr ""
 "Fehler beim Aktualisieren %s der Wiedergabeliste vom Server %s:\n"
 "%s"
 
+#, python-format
 msgid ""
 "Error loading playlist into server %s:\n"
 "%s"
@@ -84,6 +168,15 @@ msgstr ""
 "Fehler beim Laden der Wiedergabeliste in den Server %s:\n"
 "%s"
 
+#, fuzzy, python-format
+msgid ""
+"Error switching directory:\n"
+"%s"
+msgstr ""
+"Fehler mit dem VLC Server :\n"
+"%s"
+
+#, python-format
 msgid ""
 "Error updating file- and playlist from server %s:\n"
 "%s"
@@ -91,6 +184,7 @@ msgstr ""
 "Fehler beim Aktualisieren der Datei- und Wiedergabeliste vom Server %s:\n"
 "%s"
 
+#, python-format
 msgid ""
 "Error updating filelist from server %s:\n"
 "%s"
@@ -98,6 +192,7 @@ msgstr ""
 "Fehler beim Aktualisieren der Dateiliste vom Server %s:\n"
 "%s"
 
+#, python-format
 msgid ""
 "Error with VLC server:\n"
 "%s"
@@ -105,14 +200,83 @@ msgstr ""
 "Fehler mit dem VLC Server :\n"
 "%s"
 
+#, fuzzy
+msgid "Favorite Folders"
+msgstr "Favoriten"
+
 msgid "Favorites"
 msgstr "Favoriten"
+
+#, python-format
+msgid "Feels like %s"
+msgstr ""
+
+msgid "File Browser"
+msgstr ""
+
+msgid "Filelist Sorting:"
+msgstr ""
+
+msgid "Frame size in full view"
+msgstr ""
+
+msgid "Hip Hop"
+msgstr ""
+
+msgid "Hits"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+#, python-format
+msgid "Humidity: %s %%"
+msgstr ""
+
+msgid "InfoBar"
+msgstr ""
+
+msgid "Installing Service"
+msgstr ""
 
 msgid "List of Storage Devices"
 msgstr "Liste der Speichergeräte"
 
+#, fuzzy
+msgid "List of storage Devices"
+msgstr "Liste der Speichergeräte"
+
+msgid "Loading information..."
+msgstr ""
+
+msgid "Location code"
+msgstr ""
+
 msgid "Lyrics"
 msgstr "Songtexte"
+
+msgid "MSN location search result"
+msgstr ""
+
+msgid "Media Center"
+msgstr ""
+
+msgid "Media Center - VLC Favorites"
+msgstr ""
+
+msgid "Media Center - VLC Player - Serverlist"
+msgstr ""
+
+msgid "Moviemusic"
+msgstr ""
+
+#, fuzzy
+msgid "Music"
+msgstr "Meine Musik"
+
+#, fuzzy
+msgid "Music Playlist"
+msgstr "Wiedergabeliste speichern"
 
 msgid "My Music"
 msgstr "Meine Musik"
@@ -123,8 +287,56 @@ msgstr "Meine Bilder"
 msgid "My Videos"
 msgstr "Meine Videos"
 
+msgid "Name"
+msgstr ""
+
+msgid "Name:"
+msgstr ""
+
+msgid ""
+"No locations defined...\n"
+"Press 'Blue' to do that."
+msgstr ""
+
 msgid "No lyrics found"
 msgstr "Keine Songtexte gefunden"
+
+msgid "OK"
+msgstr ""
+
+#, python-format
+msgid "Observation point: %s"
+msgstr ""
+
+#, python-format
+msgid "Observation time: %s"
+msgstr ""
+
+msgid "Oldies"
+msgstr ""
+
+#, fuzzy
+msgid "Parent Directory"
+msgstr "Ordner"
+
+#, fuzzy
+msgid "Parent directory"
+msgstr "Ordner löschen"
+
+msgid "Party"
+msgstr ""
+
+msgid "Pic Viewer"
+msgstr ""
+
+msgid "Play DVD as:"
+msgstr ""
+
+msgid "Please enter a valid city name."
+msgstr ""
+
+msgid "Please enter a valid location code for the city."
+msgstr ""
 
 msgid "Please enter filename (empty = use current date)"
 msgstr "Bitte gib den Dateinamen ein (leer= benutz aktuelles Datum)"
@@ -135,27 +347,87 @@ msgstr "Bitte wähle eine Wiedergabeliste die gelöscht werden soll..."
 msgid "Please select a playlist..."
 msgstr "Bitte wählen Sie eine Wiedergabeliste..."
 
+msgid "Please wait whilst feeds state is checked."
+msgstr ""
+
+#, fuzzy
+msgid "Really delete this Entry?"
+msgstr "Willst du diesen Server wirklich löschen?"
+
 msgid "Really delete this Server?"
 msgstr "Willst du diesen Server wirklich löschen?"
+
+#, fuzzy
+msgid "Really delete this WeatherPlugin Entry?"
+msgstr "Willst du diesen Favoriten wirklich löschen?"
 
 msgid "Really delete this favorite?"
 msgstr "Willst du diesen Favoriten wirklich löschen?"
 
+msgid "Reggae"
+msgstr ""
+
+#, python-format
 msgid "Response -> lyrics for: %s (%s)"
 msgstr "Rückmeldung -> Songtexte für %s (%s)"
+
+msgid "Rock"
+msgstr ""
+
+msgid "Rundfunk"
+msgstr ""
 
 msgid "Save Playlist"
 msgstr "Wiedergabeliste speichern"
 
+msgid "Scaling Mode"
+msgstr ""
+
+#, fuzzy
+msgid "Screensaver Enable:"
+msgstr "Bildschirmschoner Intervall"
+
 msgid "Screensaver Interval"
 msgstr "Bildschirmschoner Intervall"
+
+#, fuzzy
+msgid "Screensaver Style:"
+msgstr "Bildschirmschoner Intervall"
+
+msgid "Search Code"
+msgstr ""
+
+msgid "Select music"
+msgstr ""
 
 msgid "Settings"
 msgstr "Einstellungen"
 
+msgid "Show MC in Extension-Menu"
+msgstr ""
+
+msgid "Show MC in Main-Menu"
+msgstr ""
+
 msgid "Slideshow Interval (sec.)"
 msgstr "Slideshow Intervall (sek.)"
 
+msgid "Smooth"
+msgstr ""
+
+msgid "Sorry feeds are down for maintenance, please try again later."
+msgstr ""
+
+msgid "Soul"
+msgstr ""
+
+msgid "System"
+msgstr ""
+
+msgid "Techno/House"
+msgstr ""
+
+#, python-format
 msgid "This Dreambox can't decode %s video streams!"
 msgstr "Diese OpenAFF Box kann diese  Videostreams nicht wiedergeben! (%s)"
 
@@ -168,22 +440,51 @@ msgstr "Vorschau Breite"
 msgid "Title: "
 msgstr "Titel:"
 
+msgid "UPNP Enabled"
+msgstr ""
+
+msgid "VLC Player"
+msgstr ""
+
+msgid "VLC Player - Medialist"
+msgstr ""
+
+msgid "Video Player"
+msgstr ""
+
 msgid "Weather Info"
 msgstr "Wetter Infos"
 
-msgid ""
-"You have to close playlist before you can go to the next song while playing "
-"from file browser."
+msgid "WeatherPlugin: Edit Entry"
 msgstr ""
-"Du musst die Wiedergabeliste schließen, bevor du den nächsten Song aus dem "
-"Filebrowser abspielen kannst."
 
-msgid ""
-"You have to close playlist before you can go to the previous song while "
-"playing from file browser."
+msgid "WeatherPlugin: List of Entries"
 msgstr ""
-"Du musst die Wiedergabeliste schließen, bevor du den vorhergehenden Song aus "
-"dem Filebrowser abspielen kannst."
+
+msgid "Web Radio"
+msgstr ""
+
+msgid "Worldmusic"
+msgstr ""
+
+msgid "You have to close playlist before you can go to the next song while playing from file browser."
+msgstr "Du musst die Wiedergabeliste schließen, bevor du den nächsten Song aus dem Filebrowser abspielen kannst."
+
+msgid "You have to close playlist before you can go to the previous song while playing from file browser."
+msgstr "Du musst die Wiedergabeliste schließen, bevor du den vorhergehenden Song aus dem Filebrowser abspielen kannst."
+
+msgid "You need to enter a valid city name before you can search for the location code."
+msgstr ""
+
+#, python-format
+msgid "Your %s %s is not connected to the internet, please check your network settings and try again."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your %s %s will be restarted after the installation of service\n"
+"Ready to install %s ?"
+msgstr ""
 
 msgid "add all files in directory to playlist"
 msgstr "Alle Dateien im Ordner zur Wiedergabeliste hinzufügen"
@@ -197,6 +498,12 @@ msgstr "Datei zur Wiedergabeliste hinzufügen"
 msgid "add file to playlist and play"
 msgstr "Datei zur Wiedergabeliste hinzufügen und abspielen"
 
+msgid "alphabet"
+msgstr ""
+
+msgid "alphabet backward"
+msgstr ""
+
 msgid "backgroundcolor"
 msgstr "Hintergrundfarbe"
 
@@ -209,8 +516,20 @@ msgstr "schwarz"
 msgid "blue"
 msgstr "blau"
 
+msgid "by Exif"
+msgstr ""
+
 msgid "clear playlist"
 msgstr "Wiedergabeliste leeren"
+
+msgid "date"
+msgstr ""
+
+msgid "date backward"
+msgstr ""
+
+msgid "default"
+msgstr ""
 
 msgid "delete directory"
 msgstr "Ordner löschen"
@@ -230,16 +549,29 @@ msgstr "Dateiname"
 msgid "green"
 msgstr "grÃ¼n"
 
+msgid "imperial system"
+msgstr ""
+
 msgid "load playlist"
 msgstr "Wiedergabeliste laden"
 
 msgid "manual"
 msgstr "manuell"
 
+msgid "metric system"
+msgstr ""
+
+msgid "none"
+msgstr ""
+
 msgid "nothing connected"
 msgstr "Keine Verbindung"
 
 msgid "please wait, loading picture..."
+msgstr "Bitte warten während das Bild geladen wird..."
+
+#, fuzzy
+msgid "please wait..."
 msgstr "Bitte warten während das Bild geladen wird..."
 
 msgid "red"
@@ -251,8 +583,20 @@ msgstr "Wiedergabeliste speichern"
 msgid "show Infoline"
 msgstr "Information anzeigen"
 
+msgid "shuffle"
+msgstr ""
+
 msgid "simple"
 msgstr "Einfach"
+
+msgid "size"
+msgstr ""
+
+msgid "size backward"
+msgstr ""
+
+msgid "slide picture in loop"
+msgstr ""
 
 msgid "textcolor"
 msgstr "Textfarbe"

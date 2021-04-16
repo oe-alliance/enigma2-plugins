@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZapStatistic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-11 17:15+0300\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2017-07-11 17:15+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -12,93 +12,68 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SearchPath-0: /home/aliabdul/dream/ltteam/trunk/additions/plugins/"
-"zapstatistic/src\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src\n"
 
-#: ../src/plugin.py:570
 msgid "Close plugin"
 msgstr "uždaryti įskiepį"
 
-#: ../src/plugin.py:431
 msgid "Delete"
 msgstr "Pašalinti"
 
-#: ../src/plugin.py:563
 msgid "Delete all entries"
 msgstr "Šalinti visus įrašus"
 
-#: ../src/plugin.py:562
 msgid "Delete entry"
 msgstr "Šalinti įrašą"
 
-#: ../src/plugin.py:434
 msgid "Durations"
 msgstr "Trukmė"
 
-#: ../src/plugin.py:561
 msgid "Play entry"
 msgstr "Atkurti turinį"
 
-#: ../src/plugin.py:571
 msgid "Please choose a function..."
 msgstr "Pasirinkite funkciją..."
 
-#: ../src/plugin.py:569
 msgid "Show combined duration window"
 msgstr "Rodyti kompleksinį trukmės langą"
 
-#: ../src/plugin.py:568
 msgid "Show duration window"
 msgstr "Rodyti trukmės langą"
 
-#: ../src/plugin.py:598
 msgid "Shows the watched services with some statistic"
 msgstr "Rodo žiūrėtus kanalus su trupučiu statistikos."
 
-#: ../src/plugin.py:452
 msgid "Sort (date+)"
 msgstr "Rūšiuoti (data +)"
 
-#: ../src/plugin.py:456 ../src/plugin.py:539
 msgid "Sort (date-)"
 msgstr "Rūšiuoti (data-)"
 
-#: ../src/plugin.py:229 ../src/plugin.py:327
 msgid "Sort (duration+)"
 msgstr "Rūšiuoti (trukmė +)"
 
-#: ../src/plugin.py:230 ../src/plugin.py:328
 msgid "Sort (duration-)"
 msgstr "Rūšiuoti (trukmė –)"
 
-#: ../src/plugin.py:227 ../src/plugin.py:325 ../src/plugin.py:451
 msgid "Sort (name+)"
 msgstr "Rūšiuoti (pavadinimas +)"
 
-#: ../src/plugin.py:228 ../src/plugin.py:326 ../src/plugin.py:454
-#: ../src/plugin.py:524
 msgid "Sort (name-)"
 msgstr "Rūšiuoti (pavadinimas -)"
 
-#: ../src/plugin.py:566
 msgid "Sort by date (ascending)"
 msgstr "Rūšiuoti pagal datą didėjančiai"
 
-#: ../src/plugin.py:567
 msgid "Sort by date (descending)"
 msgstr "Rūšiuoti pagal datą mažėjančiai"
 
-#: ../src/plugin.py:564
 msgid "Sort by name (ascending)"
 msgstr "Rūšiuoti pagal pavadinimą didėjančiai"
 
-#: ../src/plugin.py:565
 msgid "Sort by name (descending)"
 msgstr "Rūšiuoti pagal pavadinimą mažėjančiai"
 
-#: ../src/plugin.py:220 ../src/plugin.py:317 ../src/plugin.py:422
-#: ../src/plugin.py:598
 msgid "Zap Statistic"
 msgstr "Perjungimo statistika"

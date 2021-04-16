@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LastFM-plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-05 22:58+0000\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -13,370 +13,278 @@ msgstr ""
 "X-Poedit-KeywordsList: _(\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/plugin.py:359
 #, python-format
 msgid "%s name"
 msgstr "%s pavadinimas"
 
-#: ../src/plugin.py:167
 msgid "Album"
 msgstr "Albumas"
 
-#: ../src/plugin.py:165
 msgid "Artist"
 msgstr "Atlikėjas"
 
-#: ../src/plugin.py:181
 msgid "Ban"
 msgstr "Uždrausti"
 
-#: ../src/plugin.py:208
 msgid "Ban Track, never play"
 msgstr "Uždrausti takelį, niekada negroti"
 
-#: ../src/plugin.py:155
 msgid "Banned Tracks"
 msgstr "Uždraustos"
 
-#: ../src/plugin.py:271
 msgid "Banned Tracks loaded"
 msgstr "Įkelti uždrausti takeliai"
 
-#: ../src/LastFMConfig.py:55
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: ../src/LastFMConfig.py:36
 msgid "Description"
 msgstr "Aprašymas"
 
-#: ../src/plugin.py:34
 msgid "Extensions menu"
 msgstr "Plėtinių meniu"
 
-#: ../src/plugin.py:156
 msgid "Friends"
 msgstr "Draugai"
 
-#: ../src/plugin.py:283
 msgid "Friends loaded"
 msgstr "Įkelti draugų"
 
-#: ../src/plugin.py:151
 msgid "Global Tags"
 msgstr "Visuotiniai žanrai"
 
-#: ../src/plugin.py:259
 msgid "Global Tags loaded"
 msgstr "Įkelti visuotiniai žanrai"
 
-#: ../src/plugin.py:490
 msgid "Group of"
 msgstr "Grupė"
 
-#: ../src/LastFMConfig.py:52
 msgid "Interval for Coverart Animation"
 msgstr "Viršelių animacijos intervalas"
 
-#: ../src/LastFMConfig.py:46
 msgid "Interval to refresh Metadata (seconds)"
 msgstr "Metaduomenų atnaujinimo intervalas (sek.)"
 
-#: ../src/LastFMConfig.py:14 ../src/plugin.py:35
 msgid "Last.FM"
 msgstr "Last.FM"
 
-#: ../src/LastFMConfig.py:37
 msgid "Last.FM Username"
 msgstr "Last.FM Vartotojas"
 
-#: ../src/LastFMConfig.py:41
 msgid "LastFM Proxy port"
 msgstr "Lastfm tarpinio serverio prievadas"
 
-#: ../src/plugin.py:36
 msgid "Listen to Last.FM Internet Radio"
 msgstr "Klausyti Last.FM internetinio radijo"
 
-#: ../src/plugin.py:521
 msgid "Loading Friends"
 msgstr "Įkeliami draugų"
 
-#: ../src/plugin.py:497
 msgid "Loading Global Tags"
 msgstr "Įkeliami visuotiniai žanrai"
 
-#: ../src/plugin.py:509 ../src/plugin.py:513
 msgid "Loading Loved Tracks"
 msgstr "Įkeliami patikę takeliai"
 
-#: ../src/plugin.py:517
 msgid "Loading Neighbours"
 msgstr "Įkeliami kaimyniniai"
 
-#: ../src/plugin.py:505
 msgid "Loading Recent Tracks"
 msgstr "Įkeliami naujausi takeliai"
 
-#: ../src/plugin.py:501
 msgid "Loading Top Tacks"
 msgstr "Įkeliami klausomiausi takeliai"
 
-#: ../src/plugin.py:180
 msgid "Love"
 msgstr "Patinka"
 
-#: ../src/plugin.py:154 ../src/plugin.py:457
 msgid "Loved Tracks"
 msgstr "Patikusios"
 
-#: ../src/plugin.py:275
 msgid "Loved Tracks loaded"
 msgstr "Įkelti patikę takeliai"
 
-#: ../src/plugin.py:207
 msgid "Mark Track as loved"
 msgstr "Pažymėti takelį, kaip patikusį"
 
-#: ../src/LastFMConfig.py:35
 msgid "Name (needs GUI restart)"
 msgstr "Vardas (reikės GUI paleisti iš naujo)"
 
-#: ../src/plugin.py:157
 msgid "Neighbours"
 msgstr "Kaimynai"
 
-#: ../src/plugin.py:452
 msgid "Neighbours Tracks"
 msgstr "Kaimynų takeliai"
 
-#: ../src/plugin.py:279
 msgid "Neighbours loaded"
 msgstr "Įkelti kaimyniniai"
 
-#: ../src/plugin.py:201
 msgid "Next Selection"
 msgstr "Sekantis"
 
-#: ../src/LastFMConfig.py:56
 msgid "OK"
 msgstr "Gerai"
 
-#: ../src/plugin.py:209
 msgid "Open"
 msgstr "Atverti"
 
-#: ../src/plugin.py:204
 msgid "Page backward Selections"
 msgstr "Grįžti puslapiu atgal"
 
-#: ../src/plugin.py:203
 msgid "Page forward Selections"
 msgstr "Peršokti puslapiu pirmyn"
 
-#: ../src/LastFMConfig.py:38
 msgid "Password"
 msgstr "Slaptažodis"
 
-#: ../src/plugin.py:447
 msgid "Personal Recommendations"
 msgstr "Asmeninės rekomendacijos"
 
-#: ../src/plugin.py:150
 msgid "Personal Stations"
 msgstr "Asmeninės stotys"
 
-#: ../src/plugin.py:178 ../src/plugin.py:407
 msgid "Play"
 msgstr "Atkurti"
 
-#: ../src/plugin.py:462
 msgid "Play Artist Radio..."
 msgstr "Groti atlikėjus..."
 
-#: ../src/plugin.py:467
 msgid "Play Group Radio..."
 msgstr "Groti grupes..."
 
-#: ../src/plugin.py:472
 msgid "Play Tag Radio..."
 msgstr "Groti žanrus..."
 
-#: ../src/plugin.py:34
 msgid "Plugin menu"
 msgstr "Įskiepio meniu"
 
-#: ../src/plugin.py:202
 msgid "Previous Selection"
 msgstr "Ankstesnis"
 
-#: ../src/plugin.py:210
 msgid "Quit"
 msgstr "Baigti"
 
-#: ../src/plugin.py:153
 msgid "Recent Tracks"
 msgstr "Naujausios"
 
-#: ../src/plugin.py:267
 msgid "Recent Tracks loaded"
 msgstr "Įkelti naujausi takeliai"
 
-#: ../src/LastFMConfig.py:42
 msgid "Recommendation level"
 msgstr "Rekomendacijų lygis"
 
-#: ../src/plugin.py:199
 msgid "Select next Tab"
 msgstr "Pasirinkti kitą skirtuką"
 
-#: ../src/plugin.py:200
 msgid "Select prev Tab"
 msgstr "Pasirinkti ankstesnį skirtuką"
 
-#: ../src/LastFMConfig.py:39
 msgid "Send now playing Audio Tracks"
 msgstr "Siųsti dabar grojančius takelius"
 
-#: ../src/LastFM.py:407
 msgid "Server returned"
 msgstr "Serveris grąžino"
 
-#: ../src/LastFMConfig.py:27 ../src/plugin.py:209
 msgid "Setup"
 msgstr "Sąranka"
 
-#: ../src/LastFMConfig.py:43
 msgid "Show Coverart"
 msgstr "Rodyti viršelius"
 
-#: ../src/LastFMConfig.py:50
 msgid "Show Coverart Animation in Screensaver"
 msgstr "Rodyti ekrano užsklandoje viršelių animaciją"
 
-#: ../src/LastFMConfig.py:49
 msgid "Show Coverart in Screensaver"
 msgstr "Rodyti ekrano užsklandoje viršelius"
 
-#: ../src/LastFMConfig.py:34
 msgid "Show in (needs GUI restart)"
 msgstr "Rodyti tarp (reikės GUI paleisti iš naujo)"
 
-#: ../src/plugin.py:179
 msgid "Skip"
 msgstr "Praleisti"
 
-#: ../src/plugin.py:206
 msgid "Skip current Track"
 msgstr "Praleisti šį takelį"
 
-#: ../src/LastFMConfig.py:51
 msgid "Speed for Coverart Animation"
 msgstr "Viršelių animacijos greitis"
 
-#: ../src/plugin.py:205
 msgid "Start/stop streaming"
 msgstr "Pradėti/Stabdyti transliaciją"
 
-#: ../src/plugin.py:386
 msgid "Starting stream"
 msgstr "Transliacija pradedama"
 
-#: ../src/LastFM.py:405
 msgid "Station changed"
 msgstr "Stotis pakeista"
 
-#: ../src/plugin.py:404
 msgid "Stop"
 msgstr "Stabdyti"
 
-#: ../src/plugin.py:384
 msgid "Stream stopped"
 msgstr "Transliacija nutraukta"
 
-#: ../src/plugin.py:198
 msgid "Switch to selected Station"
 msgstr "Perjungti į pasirinktą stotį"
 
-#: ../src/LastFMConfig.py:44
 msgid "Timeout Statustext (seconds)"
 msgstr "Stovio teksto trukmė (sek.)"
 
-#: ../src/LastFMConfig.py:45
 msgid "Timeout to select a Tab (seconds)"
 msgstr "Skirtuko pasirinkimo trukmė (sek.)"
 
-#: ../src/plugin.py:152
 msgid "Top Tracks"
 msgstr "Klausomiausios"
 
-#: ../src/plugin.py:263
 msgid "Top Tracks loaded"
 msgstr "Įkelti klausomiausi takeliai"
 
-#: ../src/plugin.py:168
 msgid "Track"
 msgstr "Takelis"
 
-#: ../src/plugin.py:253
 msgid "Track banned"
 msgstr "Uždraustas takelis"
 
-#: ../src/plugin.py:250
 msgid "Track loved"
 msgstr "Patikęs takelis"
 
-#: ../src/plugin.py:247
 msgid "Track skipped"
 msgstr "Takelis praleistas"
 
-#: ../src/plugin.py:485
 msgid "Tracks liked by Fans of"
 msgstr "Takeliai, patikę fanams"
 
-#: ../src/plugin.py:480
 msgid "Tracks similar to"
 msgstr "Takeliai, panašūs į"
 
-#: ../src/LastFMConfig.py:40
 msgid "Use LastFM Proxy"
 msgstr "Naudoti LastFM tarpinį serverį"
 
-#: ../src/LastFMConfig.py:47
 msgid "Use Screensaver"
 msgstr "Naudoti ekrano užsklandą"
 
-#: ../src/plugin.py:92 ../src/plugin.py:100 ../src/plugin.py:135
-#: ../src/plugin.py:413
 msgid "Ver."
 msgstr "Vers."
 
-#: ../src/LastFMConfig.py:48
 msgid "Wait before Screensaver (seconds)"
 msgstr "Laikas iki ekrano užsklandos (sek.)"
 
-#: ../src/plugin.py:232
 msgid "logging into last.FM"
 msgstr "jungiamasi prie Last.FM"
 
-#: ../src/plugin.py:244
 msgid "login failed! "
 msgstr "neprisijungta! "
 
-#: ../src/plugin.py:241
 msgid "login successful"
 msgstr "prisijungta"
 
-#: ../src/plugin.py:619
 msgid "playing:"
 msgstr "grojama:"
 
-#: ../src/plugin.py:358
 #, python-format
 msgid "please enter an %s name to listen to"
 msgstr "įrašykite pavadinimą %s, kurio norite klausytis"

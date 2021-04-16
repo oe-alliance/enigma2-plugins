@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-09 13:57+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2015-07-22 17:55+0200\n"
 "Last-Translator: Timo\n"
 "Language-Team: Kojo_\n"
@@ -283,6 +283,9 @@ msgstr "Palvelinjako"
 msgid "Setup Mount Again"
 msgstr "MountAgain asetukset"
 
+msgid "Use as HDD replacement"
+msgstr "Käytä korvaavana kovalevynä"
+
 msgid "User management"
 msgstr "Käyttäjien hallinnointi"
 
@@ -305,6 +308,12 @@ msgstr ""
 "Vaihdoit jakosi nimeä!\n"
 "Päivitä syöttämäsi tiedot ja jatka?\n"
 
+#, python-format
+msgid ""
+"Your network interface %s is not properly configured, so a network scan cannot be done.\n"
+"Please configure the interface and try again."
+msgstr ""
+
 msgid "Your network mount has been activated."
 msgstr "Verkkoliitoksesi on aktivoitu."
 
@@ -313,7 +322,3 @@ msgstr "Verkkoliitoksesi on poistettu."
 
 msgid "Your network mount has been updated."
 msgstr "Verkkoliitoksesi on päivitetty."
-
-msgid "Use as HDD replacement"
-msgstr "Käytä korvaavana kovalevynä"
-

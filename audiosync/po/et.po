@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-15 14:10+0000\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2013-05-03 17:27+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: \n"
@@ -17,238 +17,162 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/AC3main.py:61
-#: ../src/AC3main.py:143
-#: ../src/AC3main.py:230
-#: ../src/AC3main.py:234
-#: ../src/AC3main.py:235
 #, python-format
 msgid "%i ms"
 msgstr "%i ms"
 
-#: ../src/plugin.py:45
 msgid "Audio Sync"
 msgstr "Heli sünkroonimine"
 
-#: ../src/AC3setup.py:30
-#: ../src/plugin.py:31
-#: ../src/plugin.py:44
 msgid "Audio Sync Setup"
 msgstr "Heli sünkroonimine"
 
-#: ../src/AC3main.py:69
-#: ../src/AC3setup.py:56
 msgid "Cancel"
 msgstr "Tühista"
 
-#: ../src/MovableScreen.py:35
 msgid "Center screen at the lower border"
 msgstr "Tsentreeri alumisel piiril"
 
-#: ../src/MovableScreen.py:29
 msgid "Center screen at the upper border"
 msgstr "Tsentreeri ülemisel piiril"
 
-#: ../src/AC3main.py:79
-#: ../src/AC3main.py:80
 msgid "Change active delay"
 msgstr "Muuda viidet"
 
-#: ../src/AC3main.py:64
 msgid "Channel audio:"
 msgstr "Helikanal:"
 
-#: ../src/AC3main.py:82
 msgid "Decrease delay"
 msgstr "Vähenda viidet"
 
-#: ../src/AC3main.py:86
-#: ../src/AC3main.py:88
-#: ../src/AC3main.py:90
 #, python-format
 msgid "Decrease delay by %i ms (can be set)"
 msgstr "Vähenda viidet %i ms"
 
-#: ../src/AC3main.py:78
-#: ../src/AC3main.py:83
 msgid "Discard changes and close plugin"
 msgstr "Tühista muudatused ja sulge laiendus"
 
-#: ../src/MovableScreen.py:21
-#: ../src/MovableScreen.py:26
 msgid "Discard changes and close screen"
 msgstr "Tühista muudatused ja sulge aken"
 
-#: ../src/AC3main.py:57
 msgid "Global delay"
 msgstr "Üldine viide"
 
-#: ../src/AC3main.py:81
 msgid "Increase delay"
 msgstr "Suurenda viidet"
 
-#: ../src/AC3main.py:87
-#: ../src/AC3main.py:89
-#: ../src/AC3main.py:91
 #, python-format
 msgid "Increase delay by %i ms (can be set)"
 msgstr "Suurenda viidet %i ms (saab määrata)"
 
-#: ../src/AC3main.py:215
-#: ../src/AC3main.py:269
 msgid "Invalid selection"
 msgstr "Kehtetu valik"
 
-#: ../src/AC3main.py:267
 #, python-format
 msgid "Key %(Key)s successfully set to %(delay)i ms"
 msgstr "Nupp %(Key)s edukalt seatud %(delay)i ms"
 
-#: ../src/AC3main.py:250
 #, python-format
 msgid "Key %(key)s (current value: %(value)i ms)"
 msgstr "Nupp %(key)s (hetke väärtus: %(value)i ms)"
 
-#: ../src/AC3main.py:208
 msgid "Menu"
 msgstr "Menüü"
 
-#: ../src/AC3main.py:205
 msgid "Move plugin screen"
 msgstr "Liiguta laienduse ekraani"
 
-#: ../src/MovableScreen.py:25
 msgid "Move screen down"
 msgstr "Liiguta ekraani allapoole"
 
-#: ../src/MovableScreen.py:32
 msgid "Move screen to the center of your TV"
 msgstr "Liiguta ekraan oma TV keskmesse"
 
-#: ../src/MovableScreen.py:22
 msgid "Move screen to the left"
 msgstr "Liiguta ekraani vasakule"
 
-#: ../src/MovableScreen.py:34
 msgid "Move screen to the lower left corner"
 msgstr "Liiguta ekraani alumisse vasakusse nurka"
 
-#: ../src/MovableScreen.py:36
 msgid "Move screen to the lower right corner"
 msgstr "Liiguta ekraani alumisse paremasse nurka"
 
-#: ../src/MovableScreen.py:31
 msgid "Move screen to the middle of the left border"
 msgstr "Liiguta ekraan vasaku ääre keskele"
 
-#: ../src/MovableScreen.py:33
 msgid "Move screen to the middle of the right border"
 msgstr "Liiguta ekraan parema ääre keskele"
 
-#: ../src/MovableScreen.py:23
 msgid "Move screen to the right"
 msgstr "Liiguta ekraan paremale"
 
-#: ../src/MovableScreen.py:28
 msgid "Move screen to the upper left corner"
 msgstr "Liiguta ekraan ülemisse vasakusse nurka"
 
-#: ../src/MovableScreen.py:30
 msgid "Move screen to the upper right corner"
 msgstr "Liiguta ekraan ülemisse paremasse nurka"
 
-#: ../src/MovableScreen.py:24
 msgid "Move screen up"
 msgstr "Liiguta ekraan üles"
 
-#: ../src/AC3main.py:70
-#: ../src/AC3setup.py:57
 msgid "OK"
 msgstr "OK"
 
-#: ../src/AC3main.py:76
 msgid "Open plugin menu"
 msgstr "Ava laienduse menüü"
 
-#: ../src/AC3setup.py:40
 msgid "Outer Bound (+/-)"
 msgstr "Väline piir (+/-)"
 
-#: ../src/AC3setup.py:36
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Lisa: %(plugin)s , Versioon: %(version)s"
 
-#: ../src/MovableScreen.py:37
 msgid "Reset saved position"
 msgstr "Lähtesta salvestatud asukoht"
 
-#: ../src/AC3main.py:85
 msgid "Save current delay to key"
 msgstr "Salvesta kehtiv viide võtmeks"
 
-#: ../src/AC3main.py:71
 msgid "Save to key"
 msgstr "Salvesta võtmeks"
 
-#: ../src/AC3main.py:77
-#: ../src/AC3main.py:84
 msgid "Save values and close plugin"
 msgstr "Salvesta väärtused ja sulge laiendus"
 
-#: ../src/MovableScreen.py:20
-#: ../src/MovableScreen.py:27
 msgid "Save values and close screen"
 msgstr "Salvesta väärtused ja sulge aken"
 
-#: ../src/AC3main.py:244
 #, python-format
 msgid "Select the key you want to set to %i ms"
 msgstr "Vali nupp, mille tahad seada %i ms jaoks"
 
-#: ../src/AC3main.py:56
 msgid "Service delay"
 msgstr "Kanali viide"
 
-#: ../src/AC3main.py:92
-#: ../src/AC3main.py:93
-#: ../src/AC3main.py:94
-#: ../src/AC3main.py:95
 #, python-format
 msgid "Set delay to %i ms (can be set)"
 msgstr "Määra viide %i ms (saab muuta)"
 
-#: ../src/AC3main.py:255
 msgid "Setting key canceled"
 msgstr "Seadistuse nupp on tühistatud"
 
-#: ../src/plugin.py:44
 msgid "Setup for the Audio Sync Plugin"
 msgstr "Audio Sync seaded"
 
-#: ../src/AC3setup.py:41
 msgid "Step in ms for arrow keys"
 msgstr "Noolenuppude samm (ms)"
 
-#: ../src/AC3setup.py:46
-#: ../src/AC3setup.py:47
-#: ../src/AC3setup.py:48
 #, python-format
 msgid "Step in ms for key %i"
 msgstr "Nupu %i samm (ms)"
 
-#: ../src/AC3setup.py:43
-#: ../src/AC3setup.py:44
-#: ../src/AC3setup.py:45
 #, python-format
 msgid "Step in ms for keys '%s'"
 msgstr "Nuppude '%s' samm (ms)"
 
-#: ../src/AC3setup.py:42
 msgid "Wait time in ms before activation:"
 msgstr "Ooteaeg enne aktiveerimist (ms):"
 
-#: ../src/plugin.py:45
 msgid "sets the Audio Delay (LipSync)"
 msgstr "määrab heli viiteaja (LipSync)"
-

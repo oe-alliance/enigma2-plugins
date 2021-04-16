@@ -1,0 +1,253 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "<empty>"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Arabic"
+msgstr ""
+
+msgid "Background caching"
+msgstr ""
+
+msgid "Brightness"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Central and Southeast Europe"
+msgstr ""
+
+msgid "Clear all"
+msgstr ""
+
+msgid "Contrast"
+msgstr ""
+
+msgid "Cyrillic"
+msgstr ""
+
+msgid "Debug"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Delete all favorites?"
+msgstr ""
+
+msgid "Delete favorite?"
+msgstr ""
+
+msgid "Disabled"
+msgstr ""
+
+msgid "Discard changes?"
+msgstr ""
+
+msgid "Display edges"
+msgstr ""
+
+msgid "Display first and last row."
+msgstr ""
+
+msgid "Eastern Europe"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+#, python-format
+msgid "Enter text for page %s"
+msgstr ""
+
+msgid "Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically."
+msgstr ""
+
+msgid "Hebrew / Arabic"
+msgstr ""
+
+msgid "If caching is disabled, each teletext page will searched when you entered its number."
+msgstr ""
+
+msgid "No teletext available."
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Position and size"
+msgstr ""
+
+msgid "Print debug messages to /tmp/dbttcp.log."
+msgstr ""
+
+msgid "Region"
+msgstr ""
+
+msgid "Scale filter"
+msgstr ""
+
+msgid "Scale filter zoom"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Select brightness."
+msgstr ""
+
+msgid "Select contrast."
+msgstr ""
+
+msgid "Select splitting mode."
+msgstr ""
+
+msgid "Select teletext"
+msgstr ""
+
+msgid "Select teletext version to use."
+msgstr ""
+
+msgid "Select transparency."
+msgstr ""
+
+msgid "Select your favourite scale filter."
+msgstr ""
+
+msgid "Select your region to use the proper font."
+msgstr ""
+
+msgid "Splitting mode"
+msgstr ""
+
+msgid "TeleText favorites"
+msgstr ""
+
+msgid "TeleText settings"
+msgstr ""
+
+msgid "Text level"
+msgstr ""
+
+msgid "Transparency"
+msgstr ""
+
+msgid "Turkish / Greek"
+msgstr ""
+
+msgid "Western Europe and Turkey"
+msgstr ""
+
+msgid "Western and Central Europe"
+msgstr ""
+
+msgid "anisotropic"
+msgstr ""
+
+msgid "bilinear"
+msgstr ""
+
+msgid "blue teletext link"
+msgstr ""
+
+msgid "enter page number"
+msgstr ""
+
+msgid "enter page number / page 100"
+msgstr ""
+
+msgid "enter page number / rezap"
+msgstr ""
+
+msgid "exit"
+msgstr ""
+
+msgid "favorites / decrease height"
+msgstr ""
+
+msgid "green teletext link"
+msgstr ""
+
+msgid "next channel / channel list"
+msgstr ""
+
+msgid "next page / catch page / move"
+msgstr ""
+
+msgid "next sub page / move"
+msgstr ""
+
+msgid "picture and teletext"
+msgstr ""
+
+msgid "prev channel / channel list"
+msgstr ""
+
+msgid "prev page / catch page / move"
+msgstr ""
+
+msgid "prev sub page / move"
+msgstr ""
+
+msgid "red teletext link"
+msgstr ""
+
+msgid "sharp"
+msgstr ""
+
+msgid "sharper"
+msgstr ""
+
+msgid "split screen"
+msgstr ""
+
+msgid "start page catching / select page"
+msgstr ""
+
+msgid "teletext and picture"
+msgstr ""
+
+msgid "teletext in picture"
+msgstr ""
+
+msgid "teletext settings"
+msgstr ""
+
+msgid "toggle flof/top"
+msgstr ""
+
+msgid "toggle info"
+msgstr ""
+
+msgid "toggle transparency"
+msgstr ""
+
+msgid "yellow teletext link"
+msgstr ""
+
+msgid "zoom / increase height"
+msgstr ""

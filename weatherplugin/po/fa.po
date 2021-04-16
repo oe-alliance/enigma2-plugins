@@ -104,12 +104,3 @@ msgstr ""
 
 msgid "metric system"
 msgstr ""
-
-#~ msgid "City or Postal Code"
-#~ msgstr "شهر یا کد پستی"
-
-#~ msgid "Current: %s"
-#~ msgstr "وضعیت موجود %s"
-
-#~ msgid "Language"
-#~ msgstr "زبان "

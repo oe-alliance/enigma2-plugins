@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - yttrailer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-19 14:40+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2012-02-19 14:44+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -18,53 +18,38 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/yttrailer\n"
 
-#: .../enigma2-plugins/yttrailer/src/plugin.py:51
 msgid "1080p"
 msgstr "1080p"
 
-#: .../enigma2-plugins/yttrailer/src/plugin.py:51
 msgid "720p"
 msgstr "720p"
 
-#: .../enigma2-plugins/yttrailer/src/plugin.py:51
-msgid "No HD streaming"
-msgstr "No streaming HD"
-
-#: .../enigma2-plugins/yttrailer/src/plugin.py:92
-#: .../enigma2-plugins/yttrailer/src/plugin.py:94
-msgid "YouTube-Trailer Setup"
-msgstr "Configurazione YouTube-Trailer"
-
-#: .../enigma2-plugins/yttrailer/src/plugin.py:366
-#: .../enigma2-plugins/yttrailer/src/plugin.py:372
-msgid "leave movie player..."
-msgstr "Uscire da riproduzione registrazioni..."
-
-#: .../enigma2-plugins/yttrailer/src/plugin.py:412
-msgid "Cancel"
-msgstr "Annull."
-
-#: .../enigma2-plugins/yttrailer/src/plugin.py:413
-msgid "Save"
-msgstr "Salvare"
-
-#: .../enigma2-plugins/yttrailer/src/plugin.py:416
-msgid "Show Setup in Extensions menu"
-msgstr "Mostrare Configurazione nel menu Estensioni."
-
-#: .../enigma2-plugins/yttrailer/src/plugin.py:417
-msgid "Extended search filter"
-msgstr "Filtro ricerca estesa"
-
-#: .../enigma2-plugins/yttrailer/src/plugin.py:418
 msgid "Best resolution"
 msgstr "Risoluzione migliore"
 
-#: .../enigma2-plugins/yttrailer/src/plugin.py:419
-msgid "Max. results in list-mode"
-msgstr "N. max risultati in modalità elenco"
+msgid "Cancel"
+msgstr "Annull."
 
-#: .../enigma2-plugins/yttrailer/src/plugin.py:420
 msgid "Close Player with exit-key"
 msgstr "Chiudere il player con tasto EXIT"
 
+msgid "Extended search filter"
+msgstr "Filtro ricerca estesa"
+
+msgid "Max. results in list-mode"
+msgstr "N. max risultati in modalità elenco"
+
+msgid "No HD streaming"
+msgstr "No streaming HD"
+
+msgid "Save"
+msgstr "Salvare"
+
+msgid "Show Setup in Extensions menu"
+msgstr "Mostrare Configurazione nel menu Estensioni."
+
+msgid "YouTube-Trailer Setup"
+msgstr "Configurazione YouTube-Trailer"
+
+msgid "leave movie player..."
+msgstr "Uscire da riproduzione registrazioni..."

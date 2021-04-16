@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2012-05-17 19:16+0100\n"
 "Last-Translator: jerry <ws79@centrum.cz>\n"
 "Language-Team: jerry\n"
@@ -23,9 +23,7 @@ msgstr ""
 "Připojený záznam s tímto názvem již existuje!\n"
 "Aktualizovat existující a pokračovat?\n"
 
-msgid ""
-"A mount entry with this name already exists!\n"
-"and is not this share folder, please use a different name.\n"
+msgid "AUTOFS (mount as needed)"
 msgstr ""
 
 msgid "Active"
@@ -126,7 +124,8 @@ msgstr "Vložte uživatele:"
 msgid "Expert"
 msgstr "Expertní"
 
-msgid "FSTAB (mount using linux)"
+#, fuzzy
+msgid "FSTAB (mount at boot)"
 msgstr "FSTAB (připojit přes linux)"
 
 msgid "Finished restarting your network"
@@ -162,6 +161,10 @@ msgstr "Připojit znovu"
 msgid "Mount informations"
 msgstr "Info připojení"
 
+#, fuzzy
+msgid "Mount manager"
+msgstr "Správce připojení"
+
 msgid "Mount options"
 msgstr "Volby připojení"
 
@@ -186,9 +189,6 @@ msgstr "Správa bodů připojení"
 
 msgid "Mounts editor"
 msgstr "Editor připojení"
-
-msgid "Mounts management"
-msgstr "Správa připojení"
 
 msgid "NFS share"
 msgstr "Disk NFS"
@@ -283,6 +283,9 @@ msgstr "Sdílený server"
 msgid "Setup Mount Again"
 msgstr "Nastavit znovupřipojení"
 
+msgid "Use as HDD replacement"
+msgstr "použít jako náhradu HDD"
+
 msgid "User management"
 msgstr "Správa uživatelů"
 
@@ -298,6 +301,20 @@ msgstr "Prohlíží, edituje nebo maže přípojné body na vašem stb."
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Prohlíží, edituje nebo maže uživatelská jména a hesla pro vaši síť."
 
+#, fuzzy
+msgid ""
+"You have changed the share name!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+"Připojený záznam s tímto názvem již existuje!\n"
+"Aktualizovat existující a pokračovat?\n"
+
+#, python-format
+msgid ""
+"Your network interface %s is not properly configured, so a network scan cannot be done.\n"
+"Please configure the interface and try again."
+msgstr ""
+
 msgid "Your network mount has been activated."
 msgstr "Vaše síťové připojení byl aktivováno."
 
@@ -306,15 +323,3 @@ msgstr "Vaše síťová připojení bylo odebráno."
 
 msgid "Your network mount has been updated."
 msgstr "Vaše síťová připojení byl aktualizováno."
-
-msgid "Use as HDD replacement"
-msgstr "použít jako náhradu HDD"
-
-#~ msgid "Do you want to enter a username and password for this host?\n"
-#~ msgstr "Chcete zadat uživatelské jméno a heslo pro tento počítač?\n"
-
-#~ msgid "Enigma2 (mount using enigma2"
-#~ msgstr "Enigma2 (připojit přes enigma2"
-
-#~ msgid "Ready to install \"%s\" ?"
-#~ msgstr "Můžu instalovat \"%s\" ?"

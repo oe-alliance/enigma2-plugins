@@ -5,10 +5,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2011-06-27 15:57+Mitteleuropäische Sommerzeit\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2011-10-12 10:22+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Rob van der Does\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,285 +18,203 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
-#: plugin.py:110
-msgid "Elektro Power Save"
-msgstr "Elektro Power Save"
-
-#: plugin.py:111
-msgid "Automatically shut down to deep standby"
-msgstr "Automatisch uitschakelen in deep standby"
-
-#: plugin.py:112
-msgid "Extensions menu"
-msgstr "Extentie menu"
-
-#: plugin.py:112
-msgid "Plugin menu"
-msgstr "Plugin menu"
-
-#: plugin.py:124
-msgid "yes, Profile 1"
-msgstr "ja, Profiel 1"
-
-#: plugin.py:124
-msgid "yes, Profile 2"
-msgstr "ja, Profiel 2"
-
-#: plugin.py:134
-msgid "Monday"
-msgstr "Maandag"
-
-#: plugin.py:135
-msgid "Tuesday"
-msgstr "Dinsdag"
-
-#: plugin.py:136
-msgid "Wednesday"
-msgstr "Woensdag"
-
-#: plugin.py:137
-msgid "Thursday"
-msgstr "Donderdag"
-
-#: plugin.py:138
-msgid "Friday"
-msgstr "Vrijdag"
-
-#: plugin.py:139
-msgid "Saturday"
-msgstr "Zaterdag"
-
-#: plugin.py:140
-msgid "Sunday"
-msgstr "Zondag"
-
-#: plugin.py:150
-msgid "no Name"
-msgstr "geen naam"
-
-#: plugin.py:151
-msgid "Connection Error"
-msgstr "Verbindingsfout"
-
-#: plugin.py:211
-#: plugin.py:222
-#: plugin.py:230
-#: plugin.py:530
-msgid "Ver."
-msgstr "Ver."
-
-#: plugin.py:263
-#: plugin.py:268
-msgid "Wakeup"
-msgstr "Start"
-
-#: plugin.py:264
-#: plugin.py:269
-msgid "Sleep"
-msgstr "Stop"
-
-#: plugin.py:265
-#: plugin.py:270
-msgid "Next day starts at"
-msgstr "Volgende dag start om"
-
-#: plugin.py:266
-#: plugin.py:271
-msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
-msgstr "Als bijvoorbeeld de box verondersteld wordt om in deep standby te schakelen op maandag om 01u00, is het feitelijk al dinsdag. Om dit correct te laten verlopen kan het uur van de dagschakeling ingesteld worden (vb. 03u00)"
-
-#: plugin.py:275
-#: plugin.py:321
-#: plugin.py:400
-#: plugin.py:507
-msgid "Cancel"
-msgstr "Annuleren"
-
-#: plugin.py:276
-#: plugin.py:322
-#: plugin.py:401
-#: plugin.py:508
-msgid "Ok"
-msgstr "OK"
-
-#: plugin.py:317
-msgid "IP Address"
-msgstr "IP adres"
-
-#: plugin.py:354
-msgid "please wait..."
-msgstr "even geduld..."
-
-#: plugin.py:391
-msgid "NAS/Server Name or IP"
-msgstr "NAS/Server naam of IP"
-
-#: plugin.py:392
-msgid "Username"
-msgstr "Gebruikersnaam"
-
-#: plugin.py:393
-msgid "Password"
-msgstr "Paswoord"
-
-#: plugin.py:394
-msgid "Command [poweroff, shutdown -h,...]"
-msgstr "Opdracht [poweroff, shutdown -h,...]"
-
-#: plugin.py:395
-msgid "Telnet Port"
-msgstr "Telnet Poort"
-
-#: plugin.py:396
-msgid "Waiting until poweroff"
-msgstr "Wachten tot poweroff"
-
-#: plugin.py:402
-msgid "Run"
-msgstr "Uitvoeren"
-
-#: plugin.py:461
-msgid "Active Time Profile"
-msgstr "Actief profiel"
-
-#: plugin.py:462
-msgid "The active Time Profile is (1 or 2)."
-msgstr "Het actief profiel is (1 of 2)"
-
-#: plugin.py:463
-msgid "Enable Elektro Power Save"
-msgstr "Elektro Power Save activeren"
-
-#: plugin.py:464
-msgid "Unless this is enabled, this plugin won't run automatically."
-msgstr "Activeren im de plugin automatisch te starten."
-
-#: plugin.py:465
-msgid "Use both profiles alternately"
-msgstr "Profielen alternerend activeren"
-
-#: plugin.py:466
-msgid "Both profiles are used alternately. When shutting down the other profile is enabled. This allows two time cycles per day. Do not overlap the times."
-msgstr "Beide profielen worden alternerend gebruikt. Bij het uitschakelen wordt het profiel gewisseld. Dit laat 2 periodes per dag toe. De tijden niet overlappen. "
-
-#: plugin.py:467
-#: plugin.py:624
-msgid "Standby on boot"
-msgstr "Standby na start"
-
-#: plugin.py:468
-msgid "Puts the box in standby mode after boot."
-msgstr "Box wordt in standby geschakeld na start."
-
-#: plugin.py:469
-msgid "Standby on manual boot"
-msgstr "Standby na manuele start"
-
-#: plugin.py:470
-msgid "Whether to put the box in standby when booted manually. On manual boot the box will not go to standby before the next deep standby interval starts, even if this option is set. This option is only active if 'Standby on boot' option is set, too."
-msgstr "Box wordt in standby geschakeld na manuele start. Deze optie is enkel actief indien 'Standby na start' eveneens ingeschakeld is."
-
-#: plugin.py:471
-msgid "Standby on boot screen timeout"
-msgstr "Uitstel van de 'Standby na start'"
-
-#: plugin.py:472
-msgid "Specify how long to show the standby query on boot screen. This value can be set to ensure the box does not shut down to deep standby again too fast when in standby mode."
-msgstr "Instellen hoe lang de standby-boodschap weergegeven wordt."
-
-#: plugin.py:473
-msgid "Force sleep (even when not in standby)"
-msgstr "Stop forceren (zelfs indien niet in standby)"
-
-#: plugin.py:474
-msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
-msgstr "Forceert de deep standby, zelfs indien niet in standby.  Geplande opnames worden uitgevoerd."
-
-#: plugin.py:475
-msgid "Avoid deep standby when HDD is active, e.g. for FTP"
-msgstr "Deep standby uitstellen als HDD actief is, vb. FTP"
-
-#: plugin.py:476
-msgid "Wait for the HDD to enter sleep mode. Depending on the configuration this can prevent the box entirely from entering deep standby mode."
-msgstr "Wachten tot de HDD in slaap mode gaat.  Afhankelijk van de configuratie kan dit voorkomen dat de box in deep standby gaat."
-
-#: plugin.py:477
-msgid "Check IPs (press OK to edit)"
-msgstr "IP's controleren (druk OK om te editeren)"
-
-#: plugin.py:478
-msgid "This list of IP addresses is checked. Elektro waits until addresses no longer responds to ping."
-msgstr "Deze lijst van IP adressen wordt gecontrolleerd.  Elektro wacht tot de adressen niet meer reageren op een ping."
-
-#: plugin.py:479
-msgid "NAS Poweroff (press OK to edit)"
-msgstr "NAS uitschakelen (druk OK om te editeren)"
-
-#: plugin.py:480
 msgid "A NAS/Server can be shut down. Is required activated Telnet."
 msgstr "Een NAS/Server kan uitgeschakeld worden. Telnet-toegang is vereist."
 
-#: plugin.py:481
-msgid "Don't wake up"
-msgstr "Niet opstarten."
+msgid "Active Time Profile"
+msgstr "Actief profiel"
 
-#: plugin.py:482
-msgid "Do not wake up at the end of next deep standby interval."
-msgstr "Niet opstarten aan het einde van het volgende deep standby interval."
+msgid "Automatically shut down to deep standby"
+msgstr "Automatisch uitschakelen in deep standby"
 
-#: plugin.py:483
-msgid "Holiday mode (experimental)"
-msgstr "Vakantie-mode (experimenteel)"
+msgid "Avoid deep standby when HDD is active, e.g. for FTP"
+msgstr "Deep standby uitstellen als HDD actief is, vb. FTP"
 
-#: plugin.py:484
-msgid "The box always enters deep standby mode, except for recording."
-msgstr "De box gaat altijd in deep standby, uitgezonderd voor opnames."
+msgid "Both profiles are used alternately. When shutting down the other profile is enabled. This allows two time cycles per day. Do not overlap the times."
+msgstr "Beide profielen worden alternerend gebruikt. Bij het uitschakelen wordt het profiel gewisseld. Dit laat 2 periodes per dag toe. De tijden niet overlappen. "
 
-#: plugin.py:485
-msgid "Show in"
-msgstr "Weergeven in"
+msgid "Cancel"
+msgstr "Annuleren"
 
-#: plugin.py:486
-msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
-msgstr "Instellen of het plugin verschijnt in Plugin of Extentie menu (E2 herstart noodzakelijk)"
+msgid "Check IPs (press OK to edit)"
+msgstr "IP's controleren (druk OK om te editeren)"
 
-#: plugin.py:487
-msgid "Name"
-msgstr "Naam"
+msgid "Command [poweroff, shutdown -h,...]"
+msgstr "Opdracht [poweroff, shutdown -h,...]"
 
-#: plugin.py:488
-msgid "Specify plugin name to be used in menu (needs GUI restart)."
-msgstr "Instellen welke naam verschijnt in het menu (E2 herstart noodzakelijk)."
+msgid "Connection Error"
+msgstr "Verbindingsfout"
 
-#: plugin.py:489
 msgid "Description"
 msgstr "Beschrijving"
 
-#: plugin.py:490
-msgid "Specify plugin description to be used in menu (needs GUI restart)."
-msgstr "Instellen welke beschrijving verschijnt in het menu (E2 herstart noodzakelijk)."
+msgid "Do not wake up at the end of next deep standby interval."
+msgstr "Niet opstarten aan het einde van het volgende deep standby interval."
 
-#: plugin.py:509
-msgid "Help"
-msgstr "Help"
+msgid "Don't wake up"
+msgstr "Niet opstarten."
 
-#: plugin.py:510
-msgid "Times"
-msgstr "Uren"
+msgid "Elektro Power Save"
+msgstr "Elektro Power Save"
 
-#: plugin.py:558
-msgid "Showing Elektro readme.txt"
-msgstr "Toon Elektro readme.txt"
+msgid "Enable Elektro Power Save"
+msgstr "Elektro Power Save activeren"
 
-#: plugin.py:558
-msgid "readme.txt"
-msgstr "readme.txt"
+msgid "Extensions menu"
+msgstr "Extentie menu"
 
-#: plugin.py:650
+msgid "Force sleep (even when not in standby)"
+msgstr "Stop forceren (zelfs indien niet in standby)"
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
+msgstr "Forceert de deep standby, zelfs indien niet in standby.  Geplande opnames worden uitgevoerd."
+
+msgid "Friday"
+msgstr "Vrijdag"
+
 msgid "Go to Standby now?"
 msgstr "In Standby schakelen?"
 
-#: plugin.py:828
 msgid "Go to sleep now?"
 msgstr "In Deep Standby schakelen?"
 
+msgid "Help"
+msgstr "Help"
+
+msgid "Holiday mode (experimental)"
+msgstr "Vakantie-mode (experimenteel)"
+
+msgid "IP Address"
+msgstr "IP adres"
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr "Als bijvoorbeeld de box verondersteld wordt om in deep standby te schakelen op maandag om 01u00, is het feitelijk al dinsdag. Om dit correct te laten verlopen kan het uur van de dagschakeling ingesteld worden (vb. 03u00)"
+
+msgid "Monday"
+msgstr "Maandag"
+
+msgid "NAS Poweroff (press OK to edit)"
+msgstr "NAS uitschakelen (druk OK om te editeren)"
+
+msgid "NAS/Server Name or IP"
+msgstr "NAS/Server naam of IP"
+
+msgid "Name"
+msgstr "Naam"
+
+msgid "Next day starts at"
+msgstr "Volgende dag start om"
+
+msgid "Ok"
+msgstr "OK"
+
+msgid "Password"
+msgstr "Paswoord"
+
+msgid "Plugin menu"
+msgstr "Plugin menu"
+
+msgid "Puts the box in standby mode after boot."
+msgstr "Box wordt in standby geschakeld na start."
+
+msgid "Run"
+msgstr "Uitvoeren"
+
+msgid "Saturday"
+msgstr "Zaterdag"
+
+msgid "Show in"
+msgstr "Weergeven in"
+
+msgid "Showing Elektro readme.txt"
+msgstr "Toon Elektro readme.txt"
+
+msgid "Sleep"
+msgstr "Stop"
+
+msgid "Specify how long to show the standby query on boot screen. This value can be set to ensure the box does not shut down to deep standby again too fast when in standby mode."
+msgstr "Instellen hoe lang de standby-boodschap weergegeven wordt."
+
+msgid "Specify plugin description to be used in menu (needs GUI restart)."
+msgstr "Instellen welke beschrijving verschijnt in het menu (E2 herstart noodzakelijk)."
+
+msgid "Specify plugin name to be used in menu (needs GUI restart)."
+msgstr "Instellen welke naam verschijnt in het menu (E2 herstart noodzakelijk)."
+
+msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
+msgstr "Instellen of het plugin verschijnt in Plugin of Extentie menu (E2 herstart noodzakelijk)"
+
+msgid "Standby on boot"
+msgstr "Standby na start"
+
+msgid "Standby on boot screen timeout"
+msgstr "Uitstel van de 'Standby na start'"
+
+msgid "Standby on manual boot"
+msgstr "Standby na manuele start"
+
+msgid "Sunday"
+msgstr "Zondag"
+
+msgid "Telnet Port"
+msgstr "Telnet Poort"
+
+msgid "The active Time Profile is (1 or 2)."
+msgstr "Het actief profiel is (1 of 2)"
+
+msgid "The box always enters deep standby mode, except for recording."
+msgstr "De box gaat altijd in deep standby, uitgezonderd voor opnames."
+
+msgid "This list of IP addresses is checked. Elektro waits until addresses no longer responds to ping."
+msgstr "Deze lijst van IP adressen wordt gecontrolleerd.  Elektro wacht tot de adressen niet meer reageren op een ping."
+
+msgid "Thursday"
+msgstr "Donderdag"
+
+msgid "Times"
+msgstr "Uren"
+
+msgid "Tuesday"
+msgstr "Dinsdag"
+
+msgid "Unless this is enabled, this plugin won't run automatically."
+msgstr "Activeren im de plugin automatisch te starten."
+
+msgid "Use both profiles alternately"
+msgstr "Profielen alternerend activeren"
+
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+msgid "Ver."
+msgstr "Ver."
+
+msgid "Wait for the HDD to enter sleep mode. Depending on the configuration this can prevent the box entirely from entering deep standby mode."
+msgstr "Wachten tot de HDD in slaap mode gaat.  Afhankelijk van de configuratie kan dit voorkomen dat de box in deep standby gaat."
+
+msgid "Waiting until poweroff"
+msgstr "Wachten tot poweroff"
+
+msgid "Wakeup"
+msgstr "Start"
+
+msgid "Wednesday"
+msgstr "Woensdag"
+
+msgid "Whether to put the box in standby when booted manually. On manual boot the box will not go to standby before the next deep standby interval starts, even if this option is set. This option is only active if 'Standby on boot' option is set, too."
+msgstr "Box wordt in standby geschakeld na manuele start. Deze optie is enkel actief indien 'Standby na start' eveneens ingeschakeld is."
+
+msgid "no Name"
+msgstr "geen naam"
+
+msgid "please wait..."
+msgstr "even geduld..."
+
+msgid "readme.txt"
+msgstr "readme.txt"
+
+msgid "yes, Profile 1"
+msgstr "ja, Profiel 1"
+
+msgid "yes, Profile 2"
+msgstr "ja, Profiel 2"

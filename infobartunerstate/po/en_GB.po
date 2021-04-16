@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2012-03-16 14:22+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -207,6 +207,10 @@ msgstr "Only one Icon field allowed:"
 msgid "Only one Name field allowed:"
 msgstr ""
 
+#, fuzzy
+msgid "Overwrite Infobar timeout"
+msgstr "Infobar timeout"
+
 msgid "Placeholder for Progressbar"
 msgstr ""
 
@@ -314,18 +318,3 @@ msgstr "YYYY/MM/DD HH:MM"
 
 msgid "configuration"
 msgstr "configuration"
-
-#~ msgid "Add to extension menu"
-#~ msgstr "Add to extension menu"
-
-#~ msgid "Horizontal offset in pixel"
-#~ msgstr "Horizontal offset in pixel"
-
-#~ msgid "InfoBar Tuner State"
-#~ msgstr "InfoBar Tuner State"
-
-#~ msgid "Show InfoBar Tuner State"
-#~ msgstr "Show InfoBar Tuner State"
-
-#~ msgid "Time format"
-#~ msgstr "Time format"

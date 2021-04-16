@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-14 07:40+0200\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2013-05-09 14:48+0400\n"
 "Last-Translator: Sowa <v-yants@yandex.ru>\n"
 "Language-Team: RU locale by Sowa\n"
@@ -16,8 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.5\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #, python-format
 msgid ""
@@ -51,8 +50,16 @@ msgstr "Активировать VPS"
 msgid "Add"
 msgstr "Добавить"
 
+#, fuzzy
+msgid "Add filters"
+msgstr "добавить фильтры"
+
 msgid "Add new AutoTimer"
 msgstr "Добавить новый АвтоТаймер"
+
+#, fuzzy
+msgid "Add services"
+msgstr "добавить сервисы"
 
 msgid "Add similar timer on conflict"
 msgstr "Добавляемый конфликтует с альтернативным таймером"
@@ -66,6 +73,10 @@ msgstr "Добавить таймер переключения вместо та
 msgid "After event"
 msgstr "После события"
 
+#, fuzzy
+msgid "All channels"
+msgstr "Каналы"
+
 msgid "All non-repeating timers"
 msgstr "Все неповторяющиеся таймеры"
 
@@ -74,6 +85,9 @@ msgstr "Количество записей осталось"
 
 msgid "Any service/recording"
 msgstr "Любые сервисы/записи"
+
+msgid "Any time"
+msgstr ""
 
 msgid "Auto Timers"
 msgstr "Авто Таймеры"
@@ -120,31 +134,14 @@ msgstr "Начало промежутка времени"
 msgid "Bouquets"
 msgstr "Букеты"
 
-msgid ""
-"By enabling this events will not be matched if they don't occur on certain "
-"dates."
-msgstr ""
-"Если эта опция включена, таймер быть добавлен только по определенным датам."
+msgid "By enabling this events will not be matched if they don't occur on certain dates."
+msgstr "Если эта опция включена, таймер быть добавлен только по определенным датам."
 
-msgid ""
-"By enabling this you will be notified about similar timers added during "
-"automated polling. There is no intelligence involved, so it might bother you "
-"about the same conflict over and over."
-msgstr ""
-"При включении этой функции вы будете уведомлены о подобных таймерах, "
-"добавленных во время автоматизированного опроса. Функция не интелектуальна, "
-"и это приведет к повторящемуся сообщению о том же самом конфликте снова и "
-"снова."
+msgid "By enabling this you will be notified about similar timers added during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
+msgstr "При включении этой функции вы будете уведомлены о подобных таймерах, добавленных во время автоматизированного опроса. Функция не интелектуальна, и это приведет к повторящемуся сообщению о том же самом конфликте снова и снова."
 
-msgid ""
-"By enabling this you will be notified about timer conflicts found during "
-"automated polling. There is no intelligence involved, so it might bother you "
-"about the same conflict over and over."
-msgstr ""
-"При включении этой функции вы будете уведомлены о подобных таймерах, "
-"добавленных во время автоматизированного опроса. Функция не интелектуальна, "
-"и это приведет к повторящемуся сообщению о том же самом конфликте снова и "
-"снова."
+msgid "By enabling this you will be notified about timer conflicts found during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
+msgstr "При включении этой функции вы будете уведомлены о подобных таймерах, добавленных во время автоматизированного опроса. Функция не интелектуальна, и это приведет к повторящемуся сообщению о том же самом конфликте снова и снова."
 
 msgid "Cancel"
 msgstr "Отменить"
@@ -166,6 +163,9 @@ msgstr "Выберите целевую папку"
 
 msgid "Classic"
 msgstr "Классический"
+
+msgid "Close"
+msgstr ""
 
 msgid "Close and forget changes"
 msgstr "Закрыть без сохранения изменений"
@@ -204,12 +204,8 @@ msgstr "Другое расположение"
 msgid "Custom offset"
 msgstr "Пользовательское смещение"
 
-msgid ""
-"Defines where to search for duplicates (only title, short description or "
-"even extended description)"
-msgstr ""
-"Определяет, где искать дубликаты (только в названии, кратком описание или в "
-"расширенном описании)"
+msgid "Defines where to search for duplicates (only title, short description or even extended description)"
+msgstr "Определяет, где искать дубликаты (только в названии, кратком описание или в расширенном описании)"
 
 msgid "Delete"
 msgstr "Удалить"
@@ -237,11 +233,19 @@ msgstr "Редактировать сервисы (автотаймера)"
 msgid "Edit Timers and scan for new Events"
 msgstr "Редактировние таймеров и поиск новых событий"
 
+#, fuzzy
+msgid "Edit filters"
+msgstr "редактировать фильтры"
+
 msgid "Edit new timer defaults"
 msgstr "Редактировать значения по умолчанию для нового таймера"
 
 msgid "Edit selected AutoTimer"
 msgstr "Редактировать выбранный автотаймер"
+
+#, fuzzy
+msgid "Edit services"
+msgstr "редактирование сервисов"
 
 msgid "Editing"
 msgstr "Редактирование"
@@ -255,31 +259,26 @@ msgstr "Включить фильтрацию"
 msgid "Enable Service Restriction"
 msgstr "Включить ограничение сервисов "
 
-msgid ""
-"Enable this to be able to access the AutoTimer Overview from within the "
-"extension menu."
+msgid "Enable this to be able to access the AutoTimer Overview from within the extension menu."
 msgstr "Включить пункт обзора автотаймеров в меню расширений."
 
-msgid ""
-"Enable this to be able to access the AutoTimer Overview from within the "
-"plugin browser."
+msgid "Enable this to be able to access the AutoTimer Overview from within the plugin browser."
 msgstr "Включить пункт обзора автотаймеров в меню плагинов."
 
 msgid "Enabled"
 msgstr "Включено"
 
-msgid ""
-"Encoding the channel uses for it's EPG data. You only need to change this if "
-"you're searching for special characters like the german umlauts."
-msgstr ""
-"Этот пункт используется для вклучения отображения национальных символов в "
-"EPG канала."
+msgid "Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."
+msgstr "Этот пункт используется для вклучения отображения национальных символов в EPG канала."
 
 msgid "End of \"after event\" timespan"
 msgstr "Конец промежутка времени \"после события\""
 
 msgid "End of timespan"
 msgstr "Конеец промежутка времени"
+
+msgid "Everyday"
+msgstr ""
 
 msgid "Exact match"
 msgstr "Точное совпадение"
@@ -290,26 +289,35 @@ msgstr "Исключить"
 msgid "Execute \"after event\" during timespan"
 msgstr "Выполнить \"после события\" в течение промежутка времени"
 
+msgid "FAQ"
+msgstr ""
+
 msgid "Filter"
 msgstr "Фильтр"
 
 msgid ""
-"Filters are another powerful tool when matching events. An AutoTimer can be "
-"restricted to certain Weekdays or only match an event with a text inside eg "
-"it's Description.\n"
+"Filters are another powerful tool when matching events. An AutoTimer can be restricted to certain Weekdays or only match an event with a text inside eg it's Description.\n"
 "Press BLUE to add a new restriction and YELLOW to remove the selected one."
 msgstr ""
-"Фильтры являются еще одним мощным инструментом. Когда происходят "
-"соответствующие события, автотаймеры могут быть ограничены определенными "
-"дними недели или соответствовать только событию с оределенным текстом, "
-"например, его описанием.\n"
-"Нажмите СИНЮЮ, что-бы добавить новое ограничение или ЖЕЛТУЮ, что-бы удалить "
-"выбраный фильтр."
+"Фильтры являются еще одним мощным инструментом. Когда происходят соответствующие события, автотаймеры могут быть ограничены определенными дними недели или соответствовать только событию с оределенным текстом, например, его описанием.\n"
+"Нажмите СИНЮЮ, что-бы добавить новое ограничение или ЖЕЛТУЮ, что-бы удалить выбраный фильтр."
 
-msgid ""
-"First day to match events. No event that begins before this date will be "
-"matched."
+msgid "First day to match events. No event that begins before this date will be matched."
 msgstr "Первый день. События ДО этой даты, будут игнорироваться."
+
+#, python-format
+msgid ""
+"Found a total of %d matching Events.\n"
+"%d Timer were added and\n"
+"%d modified,\n"
+"%d conflicts encountered,\n"
+"%d similars added."
+msgstr ""
+"Найдено всего %d соответствующих событий.\n"
+"%d таймеров было добавлено и\n"
+"%d изменено,\n"
+"%d обнаружено конфликов,\n"
+"%d подобных добавлено."
 
 #, python-format
 msgid ""
@@ -327,22 +335,16 @@ msgstr ""
 "%d не изменено,\n"
 "%d подобных добавлено."
 
-#, python-format
-msgid ""
-"Found a total of %d matching Events.\n"
-"%d Timer were added and\n"
-"%d modified,\n"
-"%d conflicts encountered,\n"
-"%d similars added."
-msgstr ""
-"Найдено всего %d соответствующих событий.\n"
-"%d таймеров было добавлено и\n"
-"%d изменено,\n"
-"%d обнаружено конфликов,\n"
-"%d подобных добавлено."
-
 msgid "Frequently asked questions"
 msgstr "Часто задаваемые вопросы"
+
+#, fuzzy
+msgid "Frequently asked questions about the AutoTimer"
+msgstr "Часто задаваемые вопросы"
+
+#, fuzzy
+msgid "Fri"
+msgstr "пятница"
 
 msgid "Friday"
 msgstr "пятница"
@@ -356,39 +358,22 @@ msgstr "Определить сущест. таймеры на основ. на�
 msgid "Help"
 msgstr "Помощь"
 
-msgid ""
-"If a timer conflict occurs, AutoTimer will search outside the timespan for a "
-"similar event and add it."
-msgstr ""
-"В случае конфликта таймеров, АвтоТаймер ищет подобную передачу в другое "
-"время и добавляет её."
+msgid "If a timer conflict occurs, AutoTimer will search outside the timespan for a similar event and add it."
+msgstr "В случае конфликта таймеров, АвтоТаймер ищет подобную передачу в другое время и добавляет её."
 
-msgid "If enabled, the polling will be skipped if the Dreambox is recording."
-msgstr ""
-"При включении, активируется избирательный пропуск, если ресивер уже "
-"находится в режиме записи."
+#, fuzzy
+msgid "If enabled, the polling will be skipped if a recording is in progress."
+msgstr "При включении, активируется избирательный пропуск, если ресивер уже находится в режиме записи."
 
-#, python-format
-msgid ""
-"If this is enabled an existing timer will also be considered recording an "
-"event if it records at least 80%% of the it."
-msgstr ""
-"При включеии этой функции будет рассмотрены записи событий текущих таймеров, "
-"если записано не менее 80%% от них."
+#, fuzzy, python-format
+msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80% of the it."
+msgstr "При включеии этой функции будет рассмотрены записи событий текущих таймеров, если записано не менее 80%% от них."
 
-msgid ""
-"If this is selected, the name of the respective AutoTimer will be added as a "
-"tag to timers created by this plugin."
-msgstr ""
-"Если выбрана эта опция, то имя автотаймера добавляется в качестве тегов в "
-"созданный таймер."
+msgid "If this is selected, the name of the respective AutoTimer will be added as a tag to timers created by this plugin."
+msgstr "Если выбрана эта опция, то имя автотаймера добавляется в качестве тегов в созданный таймер."
 
-msgid ""
-"If this is selected, the tag \"AutoTimer\" will be given to timers created "
-"by this plugin."
-msgstr ""
-"При активации этого пункта тег \"автотаймер\" будет присвоен таймерам "
-"созданным этим плагином."
+msgid "If this is selected, the tag \"AutoTimer\" will be given to timers created by this plugin."
+msgstr "При активации этого пункта тег \"автотаймер\" будет присвоен таймерам созданным этим плагином."
 
 msgid "Import AutoTimer"
 msgstr "Импортировать автотаймер"
@@ -409,33 +394,22 @@ msgid "Include AutoTimer name in tags"
 msgstr "Включать наименования автотаймеров в теги"
 
 msgid ""
-"It's possible to restrict an AutoTimer to certain Services or Bouquets or to "
-"deny specific ones.\n"
-"An Event will only match this AutoTimer if it's on a specific and not denied "
-"Service (inside a Bouquet).\n"
+"It's possible to restrict an AutoTimer to certain Services or Bouquets or to deny specific ones.\n"
+"An Event will only match this AutoTimer if it's on a specific and not denied Service (inside a Bouquet).\n"
 "Press BLUE to add a new restriction and YELLOW to remove the selected one."
 msgstr ""
-"Автотаймер может быть запрещен или разрешен определенным каналам или "
-"букетом\n"
-"Событие будет соответствовать только этому автотаймеру (в пределах одного "
-"букета).\n"
+"Автотаймер может быть запрещен или разрешен определенным каналам или букетом\n"
+"Событие будет соответствовать только этому автотаймеру (в пределах одного букета).\n"
 "Нажмите СИНИЙ для добавки новых ограничений или ЖЕЛТЫЙ для их удаления."
 
-msgid ""
-"Label Timers with season, episode and title, according to the SeriesPlugin "
-"settings."
-msgstr ""
-"Этикетка таймера (для сериалов) содержащая сезон, эпизод и названия, в "
-"соответствии с настройками SeriesPlugin."
+msgid "Label Timers with season, episode and title, according to the SeriesPlugin settings."
+msgstr "Этикетка таймера (для сериалов) содержащая сезон, эпизод и названия, в соответствии с настройками SeriesPlugin."
 
 msgid "Label series"
 msgstr "Этикетка сериала"
 
-msgid ""
-"Last day to match events. Events have to begin before this date to be "
-"matched."
-msgstr ""
-"Последний день. События, произошедшие после этой даты, будут игнорироваться."
+msgid "Last day to match events. Events have to begin before this date to be matched."
+msgstr "Последний день. События, произошедшие после этой даты, будут игнорироваться."
 
 msgid "Location"
 msgstr "Расположение"
@@ -443,12 +417,8 @@ msgstr "Расположение"
 msgid "Lower bound of timespan."
 msgstr "Нижняя граница промежутка времени."
 
-msgid ""
-"Lower bound of timespan. Nothing before this time will be matched. Offsets "
-"are not taken into account!"
-msgstr ""
-"Нижняя граница промежутка времени: ничто до этого времени не будет "
-"сопоставляться. Смещение не учитывается!"
+msgid "Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into account!"
+msgstr "Нижняя граница промежутка времени: ничто до этого времени не будет сопоставляться. Смещение не учитывается!"
 
 #, python-format
 msgid "Match Timespan: %02d:%02d - %02d:%02d"
@@ -464,15 +434,15 @@ msgstr "Найти в названии: %s"
 msgid "Maximum duration (in m)"
 msgstr "Максимальная продолжительность (в мин)"
 
-msgid ""
-"Maximum event duration to match. If an event is longer than this amount of "
-"time (without offset) it won't be matched."
-msgstr ""
-"Максимальная продолжительность события. Когда программа идет дольше, чем "
-"этот период времени, она не добавляется. Смещения не учитываются."
+msgid "Maximum event duration to match. If an event is longer than this amount of time (without offset) it won't be matched."
+msgstr "Максимальная продолжительность события. Когда программа идет дольше, чем этот период времени, она не добавляется. Смещения не учитываются."
 
 msgid "Modify existing timers"
 msgstr "Изменение существующих таймеров"
+
+#, fuzzy
+msgid "Mon"
+msgstr "Понедельник"
 
 msgid "Monday"
 msgstr "Понедельник"
@@ -532,6 +502,7 @@ msgstr "Только в соответствии с заданным проме�
 msgid "Only on Service: %s"
 msgstr "Только для сервиса: %s"
 
+#, python-format
 msgid "Only on Weekday: %s"
 msgstr "Только в будние дни: %s"
 
@@ -550,16 +521,20 @@ msgstr "Интервал опроса (в минутах)"
 msgid "Poll automatically"
 msgstr "Автоматический поиск"
 
-msgid ""
-"Power state to change to after recordings. Select \"standard\" to not change "
-"the default behavior of enigma2 or values changed by yourself."
-msgstr ""
-"Состояние питания, в которое перейдет ресивер после окончания записи."
-"Выберите \"стандарт\", чтобы не изменить поведение по умолчанию или значений "
-"в настройках enigma2 "
+msgid "Power state to change to after recordings. Select \"standard\" to not change the default behavior of enigma2 or values changed by yourself."
+msgstr "Состояние питания, в которое перейдет ресивер после окончания записи.Выберите \"стандарт\", чтобы не изменить поведение по умолчанию или значений в настройках enigma2 "
 
 msgid "Preview AutoTimer"
 msgstr "Предпросмотр АвтоТаймера"
+
+msgid "Question: I found a problem with the AutoTimer, can you fix it?/nAnswer: First try the AutoTimer version in a recent (experimental) Image to see if the problem was fixed. Then read the Help again and the upcoming FAQs to make sure that this is actually a problem and not expected behavior./nIf you still think there is something wrong with the AutoTimer, please visit http://www.dream-multimedia-tv.de/board and post your problem there./n/nQ: The plugin only adds timers when leaving the configuration, not automatically. What can I do?/nA: From the Overview press MENU and enter the 'Setup'. In this screen enable 'Poll automatically' and you should be good to go."
+msgstr ""
+
+msgid "Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: The show I'm trying to record contains umlauts in its title. AutoTimer does not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For german stations 'ISO8859-15' should be selected./n/nQ: I seem to be unable to record two subsequent events. There is only a single timer created that spans (part of) both events./nA: From the Overview press MENU and enter the 'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
+msgstr ""
+
+msgid "Question: You keep talking about help being provided for each parameter. I'm unable to read it (in part or in full)./nAnswer: Try using the default skin and if it works ask the creator of your regular skin. If it still does not work your image might not provide the actual default skin so contact the creator of your image."
+msgstr ""
 
 msgid "Really close without saving settings?"
 msgstr "Действительно закрыть без сохранения настройки?"
@@ -585,6 +560,9 @@ msgstr "Ограничить \"после событий\" для определ
 msgid "Restrict to events on certain dates"
 msgstr "Ограничение на события в определенные даты"
 
+msgid "Sat"
+msgstr ""
+
 msgid "Saturday"
 msgstr "Суббота"
 
@@ -597,16 +575,8 @@ msgstr "Точность поиска"
 msgid "Search type"
 msgstr "Тип поиска"
 
-msgid ""
-"Select \"exact match\" to enforce \"Match title\" to match exactly, "
-"\"partial match\" if you only want to search for a part of the event title "
-"or \"description match\" if you only want to search for a part of the event "
-"description"
-msgstr ""
-"Выберите \"точно\" для обеспечения точного совпадения \"В названии\" или "
-"\"частичное соответствие\", если вы хотите найти только часть названия "
-"событий или \"в описании\", если вы хотите искать только часть описания "
-"события"
+msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description"
+msgstr "Выберите \"точно\" для обеспечения точного совпадения \"В названии\" или \"частичное соответствие\", если вы хотите найти только часть названия событий или \"в описании\", если вы хотите искать только часть описания события"
 
 msgid "Select a timer to import"
 msgstr "Выберите таймер для импорта"
@@ -629,12 +599,8 @@ msgstr "Выберите, хотите ли вы обеспечить совпа
 msgid "Set End Time"
 msgstr "Указать время окончания"
 
-msgid ""
-"Set an end time for the timer. If you do, the timespan of the event might be "
-"blocked for recordings."
-msgstr ""
-"Установите время окончания таймера. Если да, то отрезок времени события "
-"может быть заблокирован для записей."
+msgid "Set an end time for the timer. If you do, the timespan of the event might be blocked for recordings."
+msgstr "Установите время окончания таймера. Если да, то отрезок времени события может быть заблокирован для записей."
 
 msgid "Set maximum duration"
 msgstr "Установить максимальную продолжительность"
@@ -649,14 +615,10 @@ msgid "Should this AutoTimer be restricted to a timespan?"
 msgstr "Должен ли этот АвтоТаймер быть ограничен отрезком времени?"
 
 msgid "Should this AutoTimer only match up to a certain event duration?"
-msgstr ""
-"Должен ли автотаймер соответствовать только известной продолжительности "
-"события?"
+msgstr "Должен ли автотаймер соответствовать только известной продолжительности события?"
 
-msgid ""
-"Should timers created by this AutoTimer be recorded to a custom location?"
-msgstr ""
-"Должны ли таймеры, созданные этим АвтоТаймером, быть записаны в другое место?"
+msgid "Should timers created by this AutoTimer be recorded to a custom location?"
+msgstr "Должны ли таймеры, созданные этим АвтоТаймером, быть записаны в другое место?"
 
 msgid "Show in extension menu"
 msgstr "Показать в меню расширения"
@@ -679,6 +641,13 @@ msgstr "Сортировать автотаймер"
 msgid "Sort Time"
 msgstr "Сортировать по времени"
 
+msgid "Startup delay (in min)"
+msgstr ""
+
+#, fuzzy
+msgid "Sun"
+msgstr "Воскресенье"
+
 msgid "Sunday"
 msgstr "Воскресенье"
 
@@ -692,13 +661,17 @@ msgid "Tags the Timer/Recording will have."
 msgstr "Будет иметь тэги таймера/записи."
 
 msgid ""
-"Thank you for using the wizard. Your new AutoTimer has been added to the "
-"List.\n"
+"Thank you for using the wizard. Your new AutoTimer has been added to the List.\n"
 "Please press OK to continue."
 msgstr ""
-"Благодарим вас за использование мастера. Ваш новый автотаймер был добавлен в "
-"список.\n"
+"Благодарим вас за использование мастера. Ваш новый автотаймер был добавлен в список.\n"
 "Пожалуйста, нажмите OK для продолжения."
+
+msgid "The 'Overview'"
+msgstr ""
+
+msgid "The AutoTimer overview is the standard entry point to this plugin./n/nIf AutoTimers are configured you can choose them from a list to change them (OK button on your remove) or remove them (YELLOW button on your remote)./nNew Timers can be added by pressing the BLUE button and the control menu can be opened using the MENU button./n/nWhen leaving the plugin using the GREEN button it will search the EPG for matching events ONCE. To configure a regular search interval of the plugin to search for events open the control menu and enter the plugin setup."
+msgstr ""
 
 msgid ""
 "The Timer will not be added to the List.\n"
@@ -707,67 +680,55 @@ msgstr ""
 "Таймер не будет добавлен в список.\n"
 "Пожалуйста, нажмите кнопку ОК, чтобы закрыть этот мастер."
 
-msgid ""
-"The Timespan of an AutoTimer is the first 'advanced' attribute. If a "
-"timespan is specified an event will only match this AutoTimer if it lies "
-"inside of this timespan."
-msgstr ""
-"'Временной параметр' автотаймера является одним из «продвинутых» атрибутов. "
-"Временной параметр указанных событий будет соответствовать только этому "
-"автотаймеру, если он лежит внутри этого отрезка времени."
+msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
+msgstr "'Временной параметр' автотаймера является одним из «продвинутых» атрибутов. Временной параметр указанных событий будет соответствовать только этому автотаймеру, если он лежит внутри этого отрезка времени."
 
-msgid ""
-"The counter can automatically be reset to the limit at certain intervals."
+msgid "The control menu hides less frequently used options of the plugin, including the configuration and default settings for new AutoTimers./n/nWhile you can just open the menu and take a look for yourself, let's go through the available options:/n - Help:/n   What you are looking at right now/n - Preview:/n   Simulate EPG search, helps finding errors in your setup./n - Import existing Timer:/n   Create a new AutoTimer based on an existing regular timer./n - Import from EPG:/n   Create an AutoTimer based on an EPG event./n - Setup:/n   Generic configuration of the plugin./n - Edit new timer defaults:/n   Configure default values for new AutoTimers./n - Create a new timer using the wizard/classic editor:/n   Use the non-default editor to create a new AutoTimer."
 msgstr ""
-"Счетчик можно автоматически сбросывать лимит через определенные промежутки "
-"времени."
 
-msgid ""
-"The editor to be used for new AutoTimers. This can either be the Wizard or "
-"the classic editor."
-msgstr ""
-"Редактор, который будет использоваться для новых АвтоТаймеров. Это может "
-"быть либо мастер, либо классический редактор."
+msgid "The counter can automatically be reset to the limit at certain intervals."
+msgstr "Счетчик можно автоматически сбросывать лимит через определенные промежутки времени."
+
+msgid "The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
+msgstr "Редактор, который будет использоваться для новых АвтоТаймеров. Это может быть либо мастер, либо классический редактор."
 
 msgid "The match attribute is mandatory."
 msgstr "Атрибут совпадения является обязательным."
 
-msgid ""
-"This is a name you can give the AutoTimer. It will be shown in the Overview "
-"and the Preview."
+msgid "This FAQ is supposed to help everyone unwilling to help themselves by reading all the provided help available, and those who did not find a solution to their problems within the provided documentation./n/nTo make these hints a little easier to read, they are split up on multiple pages. You can go to the next page using the BLUE button on your remote control and back using the YELLOW one. Pressing the RED button or EXIT will close the FAQ."
 msgstr ""
-"Это имя вы можете дать автотаймеру. Оно будет показано в 'Обзор'е и "
-"'Предпросмотр'е."
 
-msgid ""
-"This is the delay in minutes that the AutoTimer will wait after a search to "
-"search the EPG again."
+msgid "This help screen is supposed to give you a quick look at everything the AutoTimer has to offer./nYou can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by selecting it from the control menu using the MENU button from the regular entry point of the plugin (more on that later)./n/n/nBut you really should consider to take the few minutes it takes to read these help pages."
 msgstr ""
-"Это задержка в минутах, котрую автотаймер ожидает после поиска, чтобы снова "
-"искать EPG."
 
-msgid ""
-"This is what will be looked for in event titles. Note that looking for e.g. "
-"german umlauts can be tricky as you have to know the encoding the channel "
-"uses."
+msgid "This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."
+msgstr "Это имя вы можете дать автотаймеру. Оно будет показано в 'Обзор'е и 'Предпросмотр'е."
+
+msgid "This is mostly a matter of taste./nThe Wizard provides you with a reduced set of options and presents them in smaller sets at a time. It is mostly aimed at users not very experienced with this plugin or the 'expert' level features of enigma2./n/nYou can check out the 'classic' editor by opening an existing timer from the overview and if you prefer this view over the wizard you can change the default editor in the setup dialog."
 msgstr ""
-"Это то, что будет искаться в названий событии. Обратите внимание, что ищете, "
-"например немецкие умляуты могут осложнить поиск, вы должны знать кодировку, "
-"которую использует канал в EPG."
+
+msgid "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
+msgstr "Это задержка в минутах, котрую автотаймер ожидает после поиска, чтобы снова искать EPG."
+
+#, fuzzy
+msgid "This is the delay in minutes that the AutoTimer will wait on initial launch to not delay enigma2 startup time."
+msgstr "Это задержка в минутах, котрую автотаймер ожидает после поиска, чтобы снова искать EPG."
+
+msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
+msgstr "Это то, что будет искаться в названий событии. Обратите внимание, что ищете, например немецкие умляуты могут осложнить поиск, вы должны знать кодировку, которую использует канал в EPG."
+
+msgid "This screen should be pretty straight-forward. If the option name does not give its meaning away there should be an explanation for each of them when you select them. If there is no visible explanation this is most likely a skin issue and please try if the default skin fixes the issue./n/nA lot of effort has been put in making the parameters as easy to understand as possible, so give reading them a try ;-)."
+msgstr ""
 
 msgid "This setting controls the behavior when a timer matches a found event."
-msgstr ""
-"Эта настройка управляет поведением, когда таймер соответствует найденному "
-"событию."
+msgstr "Эта настройка управляет поведением, когда таймер соответствует найденному событию."
 
-msgid ""
-"This toggles the behavior on timer conflicts. If an AutoTimer matches an "
-"event that conflicts with an existing timer it will not ignore this event "
-"but add it disabled."
-msgstr ""
-"Этот параметр переключает поведение при конфликте таймеров. Если автотаймер "
-"соответствует событию, которое конфликтует с существующим таймером он не "
-"будет игнорировать это событие, но добавит его в отключенные."
+msgid "This toggles the behavior on timer conflicts. If an AutoTimer matches an event that conflicts with an existing timer it will not ignore this event but add it disabled."
+msgstr "Этот параметр переключает поведение при конфликте таймеров. Если автотаймер соответствует событию, которое конфликтует с существующим таймером он не будет игнорировать это событие, но добавит его в отключенные."
+
+#, fuzzy
+msgid "Thur"
+msgstr "четверг"
 
 msgid "Thursday"
 msgstr "четверг"
@@ -790,33 +751,31 @@ msgstr "Название и короткое описание"
 msgid "Title and all descriptions"
 msgstr "Название и все описание"
 
+#, fuzzy
+msgid "Tue"
+msgstr "вторник"
+
 msgid "Tuesday"
 msgstr "вторник"
 
-msgid ""
-"Unless this is enabled AutoTimer will NOT automatically look for events "
-"matching your AutoTimers but only when you leave the GUI with the green "
-"button."
-msgstr ""
-"Если этот параметр не будет включен, автотаймер НЕ будет автоматически "
-"искать события, соответствующие вашим автотаймерам, но только если вы не "
-"покидаете управление ЗЕЛЕНОЙ кнопкой."
+msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
+msgstr "Если этот параметр не будет включен, автотаймер НЕ будет автоматически искать события, соответствующие вашим автотаймерам, но только если вы не покидаете управление ЗЕЛЕНОЙ кнопкой."
 
 msgid "Upper bound of timespan."
 msgstr "Верхний предел промежутка времени."
 
-msgid ""
-"Upper bound of timespan. Nothing after this time will be matched. Offsets "
-"are not taken into account!"
-msgstr ""
-"Верхний предел промежутка времени. Ничего после этого времени не будут "
-"совпадать. Смещения не учитывается!"
+msgid "Upper bound of timespan. Nothing after this time will be matched. Offsets are not taken into account!"
+msgstr "Верхний предел промежутка времени. Ничего после этого времени не будут совпадать. Смещения не учитывается!"
 
 msgid "Use a custom location"
 msgstr "Используйте другое место"
 
 msgid "Use automatic selection of alternates."
 msgstr "Использование автоматического выбора альтернатив."
+
+#, fuzzy
+msgid "Wed"
+msgstr "будний день"
 
 msgid "Wednesday"
 msgstr "среда"
@@ -833,56 +792,41 @@ msgstr "Еженедельно (понедельник)"
 msgid "Weekly (Sunday)"
 msgstr "Еженедельно (воскресенье)"
 
+msgid "Welcome to the AutoTimer-Plugin"
+msgstr ""
+
 msgid ""
 "Welcome.\n"
 "\n"
-"This Wizard will help you to create a new AutoTimer by providing "
-"descriptions for common settings."
+"This Wizard will help you to create a new AutoTimer by providing descriptions for common settings."
 msgstr ""
 "Добро пожаловать.\n"
 "\n"
-"Этот мастер поможет вам создать новый автотаймер путем предоставления "
-"описаний общих настроек."
+"Этот мастер поможет вам создать новый автотаймер путем предоставления описаний общих настроек."
 
-msgid ""
-"When supporting \"Fast Scan\" the service type is ignored. You don't need to "
-"enable this unless your Image supports \"Fast Scan\" and you are using it."
+msgid "What is this 'control menu' you keep talking about?"
 msgstr ""
-"Когда поддержано \"Быстрое сканирование\" тип сервиса игнорируется. Вам не "
-"нужно включить его, если ваш имидж поддерживает \"Быстрое сканирование\" и "
-"вы используете его."
 
-msgid ""
-"When this is enabled AutoTimer will ONLY check for new events whilst in "
-"stanadby."
-msgstr ""
-"Если эта опция включена, автотаймер будет проверять только новые события в "
-"режиме ожидания."
+msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
+msgstr "Когда поддержано \"Быстрое сканирование\" тип сервиса игнорируется. Вам не нужно включить его, если ваш имидж поддерживает \"Быстрое сканирование\" и вы используете его."
 
-msgid ""
-"When this option is enabled the AutoTimer won't match events where another "
-"timer with the same description already exists in the timer list."
-msgstr ""
-"Если эта опция включена, автотаймер не будет соответствовать событиям, когда "
-"уже существует другой таймер с таким же описанием в списке таймеров."
+msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."
+msgstr "Если эта опция включена, автотаймер будет проверять только новые события в режиме ожидания."
 
-msgid ""
-"With this option enabled the channel to record will be selected automaticliy "
-"using your list of alternates."
-msgstr ""
-"Если эта опция включена, канал для записи будет выбрана автоматически с "
-"помощью списка альтернатив."
+msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."
+msgstr "Если эта опция включена, автотаймер не будет соответствовать событиям, когда уже существует другой таймер с таким же описанием в списке таймеров."
 
-msgid ""
-"With this option you can restrict the AutoTimer to a certain amount of "
-"scheduled recordings. Set this to 0 to disable this functionality."
-msgstr ""
-"С помощью этой опции вы можете ограничить автотаймер определенным "
-"количеством запланированных записей. Установите в 0, чтобы отключить эту "
-"функцию."
+msgid "With this option enabled the channel to record will be selected automaticliy using your list of alternates."
+msgstr "Если эта опция включена, канал для записи будет выбрана автоматически с помощью списка альтернатив."
+
+msgid "With this option you can restrict the AutoTimer to a certain amount of scheduled recordings. Set this to 0 to disable this functionality."
+msgstr "С помощью этой опции вы можете ограничить автотаймер определенным количеством запланированных записей. Установите в 0, чтобы отключить эту функцию."
 
 msgid "Wizard"
 msgstr "Мастер"
+
+msgid "Wizard or Classic Editor?"
+msgstr ""
 
 msgid "Yes"
 msgstr "Да"
@@ -890,31 +834,22 @@ msgstr "Да"
 msgid "Yes, keep them."
 msgstr "Да, сохранить их."
 
-msgid ""
-"You can control for how many days in the future timers are added. Set this "
-"to 0 to disable this feature."
-msgstr ""
-"Вы можете контролировать, на сколько дней в будущем будут добавлены таймеры. "
-"Установите в 0, чтобы отключить эту функцию."
+msgid "You can control for how many days in the future timers are added. Set this to 0 to disable this feature."
+msgstr "Вы можете контролировать, на сколько дней в будущем будут добавлены таймеры. Установите в 0, чтобы отключить эту функцию."
 
 msgid ""
 "You can set the basic properties of an AutoTimer here.\n"
-"While 'Name' is just a human-readable name displayed in the Overview, 'Match "
-"in title' is what is looked for in the EPG."
+"While 'Name' is just a human-readable name displayed in the Overview, 'Match in title' is what is looked for in the EPG."
 msgstr ""
 "Здесь Вы можете установить основные свойства АвтоТаймера.\n"
-"Хотя 'Имя' просто имя в человеческом понимании, отображаемое в 'Обзор'е, "
-"'Совпадение в названии' является тем, что ищется в EPG."
+"Хотя 'Имя' просто имя в человеческом понимании, отображаемое в 'Обзор'е, 'Совпадение в названии' является тем, что ищется в EPG."
 
 msgid ""
-"You did not provide a valid 'Match in title' Attribute for your new "
-"AutoTimer.\n"
+"You did not provide a valid 'Match in title' Attribute for your new AutoTimer.\n"
 "As this is a mandatory Attribute you cannot continue without doing so."
 msgstr ""
-"Вы не предоставили действительного 'Совпадение в названии' атрибута для "
-"вашего нового автотаймера.\n"
-"Поскольку это является обязательным атрибутом вы не сможете продолжить без "
-"него."
+"Вы не предоставили действительного 'Совпадение в названии' атрибута для вашего нового автотаймера.\n"
+"Поскольку это является обязательным атрибутом вы не сможете продолжить без него."
 
 #, python-format
 msgid ""
@@ -924,9 +859,11 @@ msgstr ""
 "Вы ввели \"%s\" как текст для соответствия.\n"
 "Хотите удалить конечные пробелы?"
 
+msgid "You now know almost everything there is to know about the AutoTimer-Plugin./n/nAs a final hint I can't stress how important it is to take a look at the help texts that are shown in the setup dialogs as they cover the most frequently asked questions. Surprisingly even after the hints were added ;-)."
+msgstr ""
+
 msgid ""
-"You successfully configured a new AutoTimer. Do you want to add it to the "
-"list?\n"
+"You successfully configured a new AutoTimer. Do you want to add it to the list?\n"
 "\n"
 "You can go back a step by pressing EXIT on your remote."
 msgstr ""
@@ -939,8 +876,7 @@ msgid ""
 "Please confirm if this was intentional, if not they will be removed."
 msgstr ""
 "Ваш 'Совпадение в названии' атрибут заканчивается пробелом.\n"
-"Пожалуйста, подтвердите, если это было сделано намеренно, если это не так, "
-"они будут удалены."
+"Пожалуйста, подтвердите, если это было сделано намеренно, если это не так, они будут удалены."
 
 #, python-format
 msgid ""
@@ -958,12 +894,6 @@ msgstr "добавить автотаймер"
 msgid "add AutoTimer..."
 msgstr "добавить АвтоТаймер..."
 
-msgid "add filters"
-msgstr "добавить фильтры"
-
-msgid "add services"
-msgstr "добавить сервисы"
-
 msgid "auto"
 msgstr "автоматически"
 
@@ -979,9 +909,6 @@ msgstr "поиск с учетом регистра"
 msgid "config changed."
 msgstr "конфигураця изменилась."
 
-msgid "delete"
-msgstr "удалить"
-
 msgid "description match"
 msgstr "в описании"
 
@@ -990,12 +917,6 @@ msgstr "отключить"
 
 msgid "do nothing"
 msgstr "ничего не делать"
-
-msgid "edit filters"
-msgstr "редактировать фильтры"
-
-msgid "edit services"
-msgstr "редактирование сервисов"
 
 msgid "enable"
 msgstr "включить"

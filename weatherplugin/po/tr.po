@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-18 09:15+0300\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2015-10-18 10:16+0300\n"
 "Last-Translator: Hasan Kiran <Sunder67@hotmail.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -17,48 +17,41 @@ msgstr ""
 "X-Generator: Poedit 1.8.4\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../src/setup.py:73
 msgid "Add"
 msgstr "Ekle"
 
-#: ../src/setup.py:72
 msgid "Back"
 msgstr "Geri"
 
-#: ../src/setup.py:177
 msgid "Cancel"
 msgstr "İptal"
 
-#: ../src/setup.py:70
 msgid "City"
 msgstr "Şehir"
 
-#: ../src/setup.py:189
-msgid "City or Postal Code"
-msgstr "Şehir veya Posta Kodu"
-
-#: ../src/plugin.py:208
-#, python-format
-msgid "Current: %s"
-msgstr "Güncel: %s"
-
-#: ../src/setup.py:75 ../src/setup.py:179
 msgid "Delete"
 msgstr "Sil"
 
-#: ../src/setup.py:74
 msgid "Edit"
 msgstr "Düzenle"
 
-#: ../src/plugin.py:135
+#, python-format
+msgid "Feels like %s"
+msgstr "%s hissediliyor"
+
 msgid "Getting weather information..."
 msgstr "Hava durumu bilgileri alınıyor..."
 
-#: ../src/setup.py:71 ../src/setup.py:190
-msgid "Language"
-msgstr "Lisan"
+#, python-format
+msgid "Humidity: %s %%"
+msgstr "Nem: %% %s"
 
-#: ../src/plugin.py:139
+msgid "Location code"
+msgstr "Konum kodu"
+
+msgid "MSN location search result"
+msgstr "MSN konum arama sonucu"
+
 msgid ""
 "No locations defined...\n"
 "Press 'Menu' to do that."
@@ -66,61 +59,16 @@ msgstr ""
 "Konum tanımlanmadı...\n"
 "Bunu yapmak için 'Menü'ye basın."
 
-#: ../src/setup.py:178
 msgid "OK"
 msgstr "TAMAM"
 
-#: ../src/setup.py:114 ../src/setup.py:213
-msgid "Really delete this WeatherPlugin Entry?"
-msgstr "Hava durumu eklenti girişlerini gerçekten silmek istiyor musun?"
-
-#: ../src/plugin.py:64
-msgid "Show Weather Forecast"
-msgstr "Hava Durumunu Göster"
-
-#: ../src/plugin.py:64 ../src/plugin.py:95
-msgid "Weather Plugin"
-msgstr "Hava Durumu Eklentisi"
-
-#: ../src/setup.py:164
-msgid "WeatherPlugin: Edit Entry"
-msgstr "Hava Durumu Eklentisi: Girişi Düzenle"
-
-#: ../src/setup.py:65
-msgid "WeatherPlugin: List of Entries"
-msgstr "Hava Durumu Eklentisi: Girişlerin Listesi"
-
-msgid "Location code"
-msgstr "Konum kodu"
-
-msgid "System"
-msgstr "Sistem"
-
-msgid "Search Code"
-msgstr "Arama Kodu"
-
-msgid "metric system"
-msgstr "metrik sistem"
-
-msgid "imperial system"
-msgstr "emperyalist sistem"
-
-msgid "Observation time: %s"
-msgstr "Gözlem zamanı: %s"
-
+#, python-format
 msgid "Observation point: %s"
 msgstr "Gözlem noktası: %s"
 
-msgid "Feels like %s"
-msgstr "%s hissediliyor"
-
-msgid "Humidity: %s %%"
-msgstr "Nem: %% %s"
-
-msgid ""
-"You need to enter a valid city name before you can search for the location "
-"code."
-msgstr ""
+#, python-format
+msgid "Observation time: %s"
+msgstr "Gözlem zamanı: %s"
 
 msgid "Please enter a valid city name."
 msgstr "Geçerli bir şehir adı girin."
@@ -128,5 +76,32 @@ msgstr "Geçerli bir şehir adı girin."
 msgid "Please enter a valid location code for the city."
 msgstr "Şehir için geçerli bir konum kodunu girin."
 
-msgid "MSN location search result"
-msgstr "MSN konum arama sonucu"
+msgid "Really delete this WeatherPlugin Entry?"
+msgstr "Hava durumu eklenti girişlerini gerçekten silmek istiyor musun?"
+
+msgid "Search Code"
+msgstr "Arama Kodu"
+
+msgid "Show Weather Forecast"
+msgstr "Hava Durumunu Göster"
+
+msgid "System"
+msgstr "Sistem"
+
+msgid "Weather Plugin"
+msgstr "Hava Durumu Eklentisi"
+
+msgid "WeatherPlugin: Edit Entry"
+msgstr "Hava Durumu Eklentisi: Girişi Düzenle"
+
+msgid "WeatherPlugin: List of Entries"
+msgstr "Hava Durumu Eklentisi: Girişlerin Listesi"
+
+msgid "You need to enter a valid city name before you can search for the location code."
+msgstr ""
+
+msgid "imperial system"
+msgstr "emperyalist sistem"
+
+msgid "metric system"
+msgstr "metrik sistem"

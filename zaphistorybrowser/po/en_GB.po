@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-05 22:58+0000\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2012-03-16 16:36+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -17,52 +17,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/plugin.py:182
 msgid "Clear"
 msgstr "Clear"
 
-#: ../src/plugin.py:185
 msgid "Config"
 msgstr "Config"
 
-#: ../src/plugin.py:183
 msgid "Delete"
 msgstr "Delete"
 
-#: ../src/plugin.py:112
 msgid "Enable zap history:"
 msgstr "Enable zap history:"
 
-#: ../src/plugin.py:114
 msgid "Enigma1-like history:"
 msgstr "Enigma1-like history:"
 
-#: ../src/plugin.py:113
 msgid "Maximum zap history entries:"
 msgstr "Maximum zap history entries:"
 
-#: ../src/plugin.py:184
-msgid "Zap & Close"
-msgstr "Zap & Close"
+msgid "Zap"
+msgstr ""
 
-#: ../src/plugin.py:170
-#: ../src/plugin.py:281
 msgid "Zap-History Browser"
 msgstr "Zap-History Browser"
 
-#: ../src/plugin.py:105
 msgid "Zap-History Configurator"
 msgstr "Zap-History Configuration"
 
-#: ../src/plugin.py:43
 msgid "disabled"
 msgstr "disabled"
 
-#: ../src/plugin.py:43
 msgid "disabled at parental lock"
 msgstr "disabled at parental lock"
 
-#: ../src/plugin.py:43
 msgid "enabled"
 msgstr "enabled"
-

@@ -68,4 +68,3 @@ msgstr "Titel"
 
 msgid "change name..."
 msgstr "Wijzig naam..."
-

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 IMDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-24 18:47+0200\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2018-04-24 21:43+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
@@ -20,350 +20,227 @@ msgstr ""
 "X-Generator: Poedit 2.0.7\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: src/plugin.py:72
-msgid "Channel Selection"
-msgstr "Zenderkeuze"
-
-#: src/plugin.py:105 src/plugin.py:135
-msgid "Lookup"
-msgstr "Opzoeken"
-
-#: src/plugin.py:198
-msgid "The Internet Movie Database"
-msgstr "De Internet Movie Database"
-
-#: src/plugin.py:214
-msgid "Exit"
-msgstr "Afsluiten"
-
-#: src/plugin.py:226 src/plugin.py:233 src/plugin.py:239
-msgid "Show movie and series basic details"
-msgstr "Toon film en serie beknopte informatie"
-
-#: src/plugin.py:227 src/plugin.py:231
-#| msgid "Enter search"
-msgid "Exit IMDb search"
-msgstr "IMDb zoeken afsluiten"
-
-#: src/plugin.py:232
-msgid "Show list of matched movies an series"
-msgstr "Toon lijst van overeenkomende films en series"
-
-#: src/plugin.py:234
-msgid "Show movie and series extra details"
-msgstr "Toon film en series extra informatie"
-
-#: src/plugin.py:238
-msgid "Menu"
-msgstr "IMDb-menu"
-
-#: src/plugin.py:243
-msgid "Page down"
-msgstr "Pagina omlaag"
-
-#: src/plugin.py:244
-msgid "Page up"
-msgstr "Pagina omhoog"
-
-#: src/plugin.py:350
-msgid "Ambiguous results"
-msgstr "Geen eenduidige resultaten"
-
-#: src/plugin.py:351
-msgid "Please select the matching entry"
-msgstr "Maak de juiste keuze"
-
-#: src/plugin.py:354
-msgid "Title Menu"
-msgstr "Titelmenu"
-
-#: src/plugin.py:355 src/plugin.py:748
-msgid "Details"
-msgstr "Details"
-
-#: src/plugin.py:376 src/plugin.py:705 src/plugin.py:721
-#, python-format
-msgid "Re-Query IMDb: %s..."
-msgstr "Nieuwe zoekopdracht op IMDb: %s..."
-
-#: src/plugin.py:410
-msgid "Enter search"
-msgstr "Zoekopdracht"
-
-#: src/plugin.py:411
-msgid "Select from EPG"
-msgstr "Selecteer uit de EPG"
-
-#: src/plugin.py:412
-msgid "Setup"
-msgstr "Instellingen"
-
-#: src/plugin.py:419
-msgid "Save current Details as .html for offline use"
-msgstr "Huidige informatie opslaan als .html voor offline gebruik"
-
-#: src/plugin.py:420
-msgid "Save current Details as .txt"
-msgstr "Huidige informatie opslaan als .txt"
-
-#: src/plugin.py:421
-msgid "Save current Poster and Details as .txt"
-msgstr "Huidige poster en informatie opslaan als .txt"
-
-#: src/plugin.py:426
-msgid "Play Trailer"
-msgstr "Speel trailer"
-
-#: src/plugin.py:427
-msgid "Search Trailer"
-msgstr "Zoek trailer"
-
-#: src/plugin.py:433
-msgid "IMDb Menu"
-msgstr "IMDb-menu"
-
-#: src/plugin.py:458
-msgid "IMDb can not get Movie Information to write to .txt file!"
-msgstr "IMDb kan filminformatie niet naar .txt bestand schrijven!"
-
-#: src/plugin.py:470
-msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
-msgstr "IMDb kan filminformatie niet naar .jpg en .txt bestanden schrijven!"
-
-#: src/plugin.py:475
-msgid "IMDb Save - Download completed"
-msgstr "IMDb opslaan en download gereed"
-
-#: src/plugin.py:494 src/plugin.py:497
-msgid "Content:"
-msgstr "Inhoud:"
-
-#: src/plugin.py:503 src/plugin.py:506
-msgid "Runtime:"
-msgstr "Duur:"
-
-#: src/plugin.py:514 src/plugin.py:516
-msgid "Genre:"
-msgstr "Genre:"
-
-#: src/plugin.py:522 src/plugin.py:525
-msgid "Production Countries:"
-msgstr "Productieland(en):"
-
-#: src/plugin.py:531 src/plugin.py:534
-msgid "Release Date:"
-msgstr "Releasedatum:"
-
-#: src/plugin.py:543 src/plugin.py:545 src/plugin.py:781
-msgid "User Rating"
-msgstr "Gebruikerswaardering"
-
-#: src/plugin.py:590
-msgid "Enter text to search for"
-msgstr "Zoek naar (tekst)"
-
-#: src/plugin.py:641
-#, python-format
-msgid "Query IMDb: %s"
-msgstr "Zoekopdracht IMDb: %s"
-
-#: src/plugin.py:649
-msgid "Could't get event name"
-msgstr "Kon de naam van het programma niet bepalen"
-
-#: src/plugin.py:685
-msgid "IMDb Download completed"
-msgstr "Download van IMDb voltooid"
-
-#: src/plugin.py:715
-msgid "No IMDb match."
-msgstr "Geen overeenkomst op IMDb."
-
-#: src/plugin.py:716
-msgid "No IMDb match:"
-msgstr "Geen overeenkomst op IMDb van:"
-
-#: src/plugin.py:728
-msgid "IMDb query failed!"
-msgstr "Zoeken op IMDb mislukt!"
-
-#: src/plugin.py:731
-msgid "IMDb Download failed"
-msgstr "Download van IMDb mislukt"
-
-#: src/plugin.py:739
-msgid "IMDb Re-Download completed"
-msgstr "IMDB-download nogmaals uitgevoerd"
-
-#: src/plugin.py:746
-msgid "No details found."
-msgstr "Geen informatie gevonden."
-
-#: src/plugin.py:749 src/plugin.py:861
-msgid "IMDb Details parsed"
-msgstr "IMDB-informatie ingelezen"
-
-#: src/plugin.py:777
-msgid "no user rating yet"
-msgstr "nog geen gebruikers waardering"
-
-#: src/plugin.py:795
 msgid " as "
 msgstr " als "
 
-#: src/plugin.py:799
+msgid "* = Restart Required"
+msgstr "* = Herstart noodzakelijk"
+
+msgid "Ambiguous results"
+msgstr "Geen eenduidige resultaten"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
 msgid "Cast: "
 msgstr "Cast: "
 
-#: src/plugin.py:801
-msgid "No cast list found in the database."
-msgstr "Geen cast in de database gevonden."
+msgid "Channel Selection"
+msgstr "Zenderkeuze"
 
-#: src/plugin.py:809
+msgid "Content:"
+msgstr "Inhoud:"
+
+msgid "Could't get event name"
+msgstr "Kon de naam van het programma niet bepalen"
+
+msgid "Details"
+msgstr "Details"
+
 #, python-format
 msgid "Downloading Movie Poster: %s..."
 msgstr "Filmposter wordt gedownload: %s..."
 
-#: src/plugin.py:822 src/plugin.py:828 src/plugin.py:855
+msgid "Enable this to be able to access IMDb search setup from within the plugin browser."
+msgstr "Inschakelen om IMDb zoek instellingen vanuit de pluginbrowser te kunnen benaderen."
+
+msgid "Enable this to be able to access IMDb searches from within the movie list."
+msgstr "Inschakelen om zoeken op IMDb vanuit de opnamelijst te kunnen benaderen."
+
+msgid "Enable this to be able to access IMDb searches from within the plugin browser."
+msgstr "Inschakelen om zoeken op IMDb vanuit de pluginbrowser te kunnen benaderen."
+
+msgid "Enter search"
+msgstr "Zoekopdracht"
+
+msgid "Enter text to search for"
+msgstr "Zoek naar (tekst)"
+
+msgid "Exit"
+msgstr "Afsluiten"
+
+msgid "Exit IMDb search"
+msgstr "IMDb zoeken afsluiten"
+
 msgid "Extra Info"
 msgstr "Extra info"
 
-#: src/plugin.py:842
-msgid "Plot Outline"
-msgstr "Verhaallijn"
+msgid "Genre:"
+msgstr "Genre:"
 
-#: src/plugin.py:846
-msgid "Unknown category"
-msgstr "Onbekende categorie"
+msgid "IMDb Details parsed"
+msgstr "IMDB-informatie ingelezen"
 
-#: src/plugin.py:891
+msgid "IMDb Download completed"
+msgstr "Download van IMDb voltooid"
+
+msgid "IMDb Download failed"
+msgstr "Download van IMDb mislukt"
+
+msgid "IMDb Menu"
+msgstr "IMDb-menu"
+
 msgid "IMDb Plugin"
 msgstr "IMDb-plugin"
 
-#: src/plugin.py:908
-msgid "* = Restart Required"
-msgstr "* = Herstart noodzakelijk"
+msgid "IMDb Re-Download completed"
+msgstr "IMDB-download nogmaals uitgevoerd"
 
-#: src/plugin.py:914
+msgid "IMDb Save - Download completed"
+msgstr "IMDb opslaan en download gereed"
+
 msgid "IMDb Setup"
 msgstr "IMDb-instellingen"
 
-#: src/plugin.py:918
-msgid "OK"
-msgstr "Bevestigen"
+msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
+msgstr "IMDb kan filminformatie niet naar .jpg en .txt bestanden schrijven!"
 
-#: src/plugin.py:919
-msgid "Cancel"
-msgstr "Annuleren"
+msgid "IMDb can not get Movie Information to write to .txt file!"
+msgstr "IMDb kan filminformatie niet naar .txt bestand schrijven!"
 
-#: src/plugin.py:945
-msgid "Show search in plugin browser"
-msgstr "Toon IMDb-zoeken in pluginbrowser"
+msgid "IMDb query failed!"
+msgstr "Zoeken op IMDb mislukt!"
 
-#: src/plugin.py:945
-msgid ""
-"Enable this to be able to access IMDb searches from within the plugin "
-"browser."
-msgstr ""
-"Inschakelen om zoeken op IMDb vanuit de pluginbrowser te kunnen benaderen."
-
-#: src/plugin.py:946
-msgid "Show setup in plugin browser"
-msgstr "Toon IMDb-instellingen in pluginbrowser"
-
-#: src/plugin.py:946
-msgid ""
-"Enable this to be able to access IMDb search setup from within the plugin "
-"browser."
-msgstr ""
-"Inschakelen om IMDb zoek instellingen vanuit de pluginbrowser te kunnen "
-"benaderen."
-
-#: src/plugin.py:947
-msgid "Show in movie list"
-msgstr "Toon in opnamelijst"
-
-#: src/plugin.py:947
-msgid ""
-"Enable this to be able to access IMDb searches from within the movie list."
-msgstr ""
-"Inschakelen om zoeken op IMDb vanuit de opnamelijst te kunnen benaderen."
-
-#: src/plugin.py:948
-msgid "Words / phrases to ignore "
-msgstr "Woorden / zinnen die genegeerd worden "
-
-#: src/plugin.py:948
-msgid ""
-"This option allows you add words/phrases for IMDb to ignore when searching. "
-"Please separate the words/phrases with commas."
-msgstr ""
-"Deze optie maakt het mogelijk woorden/zinnen uit te sluiten van de "
-"zoekopdracht. Gebruik een komma als scheidingsteken."
-
-#: src/plugin.py:949
-msgid "Show full movie or series name in title menu"
-msgstr "Toon volledige film en serie naam in titelmenu"
-
-#: src/plugin.py:949
-msgid ""
-"Show the whole IMDb title information for a movie or series, including, for "
-"example, alternative names and whether it's a series. Takes effect after the "
-"next search of IMDb for a show name."
-msgstr ""
-"Toon de gehele IMDb titel informatie voor een film of serie, inclusief bv, "
-"alternatieve namen en of het een serie betreft. Beschikbaar na eerstvolgende "
-"zoekopdracht of IMDb opdracht voor programma informatie."
-
-#: src/plugin.py:950
-msgid "Show episode and year information in cast list"
-msgstr "Toon aflevering en jaarinformatie in castlijst"
-
-#: src/plugin.py:950
-msgid ""
-"Show episode and year information for cast when available. Takes effect "
-"after the next fetch of show details."
-msgstr ""
-"Toon aflevering en jaarinformatie voor personages indien beschikbaar. "
-"Beschikbaar na eerstvolgende keer binnenhalen van programmainformatie."
-
-#: src/plugin.py:1070 src/plugin.py:1092 src/plugin.py:1093 src/plugin.py:1102
-#| msgid "No IMDb match."
 msgid "IMDb search"
 msgstr "IMDb-zoeken"
 
-#: src/plugin.py:1071 src/plugin.py:1103
-msgid "Search for details from the Internet Movie Database"
-msgstr "Internet Movie Database informatie raadplegen"
-
-#: src/plugin.py:1081
 msgid "IMDb setup"
 msgstr "IMDb-instellingen"
 
-#: src/plugin.py:1082
-#| msgid "The Internet Movie Database"
+msgid "Lookup"
+msgstr "Opzoeken"
+
+msgid "Menu"
+msgstr "IMDb-menu"
+
+msgid "No IMDb match."
+msgstr "Geen overeenkomst op IMDb."
+
+msgid "No IMDb match:"
+msgstr "Geen overeenkomst op IMDb van:"
+
+msgid "No cast list found in the database."
+msgstr "Geen cast in de database gevonden."
+
+msgid "No details found."
+msgstr "Geen informatie gevonden."
+
+msgid "OK"
+msgstr "Bevestigen"
+
+msgid "Page down"
+msgstr "Pagina omlaag"
+
+msgid "Page up"
+msgstr "Pagina omhoog"
+
+msgid "Play Trailer"
+msgstr "Speel trailer"
+
+msgid "Please select the matching entry"
+msgstr "Maak de juiste keuze"
+
+msgid "Plot Outline"
+msgstr "Verhaallijn"
+
+msgid "Production Countries:"
+msgstr "Productieland(en):"
+
+#, python-format
+msgid "Query IMDb: %s"
+msgstr "Zoekopdracht IMDb: %s"
+
+#, python-format
+msgid "Re-Query IMDb: %s..."
+msgstr "Nieuwe zoekopdracht op IMDb: %s..."
+
+msgid "Release Date:"
+msgstr "Releasedatum:"
+
+msgid "Runtime:"
+msgstr "Duur:"
+
+msgid "Save current Details as .html for offline use"
+msgstr "Huidige informatie opslaan als .html voor offline gebruik"
+
+msgid "Save current Details as .txt"
+msgstr "Huidige informatie opslaan als .txt"
+
+msgid "Save current Poster and Details as .txt"
+msgstr "Huidige poster en informatie opslaan als .txt"
+
+msgid "Search Trailer"
+msgstr "Zoek trailer"
+
+msgid "Search for details from the Internet Movie Database"
+msgstr "Internet Movie Database informatie raadplegen"
+
+msgid "Select from EPG"
+msgstr "Selecteer uit de EPG"
+
 msgid "Settings for Internet Movie Database searches"
 msgstr "Internet Movie Database zoekopdracht instellingen"
 
-#~ msgid "IMDb Details"
-#~ msgstr "IMDb-informatie"
+msgid "Setup"
+msgstr "Instellingen"
 
-#~ msgid ""
-#~ "IMDb can not get Movie Information, to\n"
-#~ " write .jpg and .txt-file!"
-#~ msgstr ""
-#~ "IMDb kan geen filminformatie vinden,\n"
-#~ "schrijven als .jpg en .txt bestanden "
+msgid "Show episode and year information for cast when available. Takes effect after the next fetch of show details."
+msgstr "Toon aflevering en jaarinformatie voor personages indien beschikbaar. Beschikbaar na eerstvolgende keer binnenhalen van programmainformatie."
 
-#~ msgid ""
-#~ "IMDb can not get Movie Information, to\n"
-#~ " write .txt-file!"
-#~ msgstr ""
-#~ "IMDb kan geen filminformatie vinden,\n"
-#~ "schrijven als .txt bestand "
+msgid "Show episode and year information in cast list"
+msgstr "Toon aflevering en jaarinformatie in castlijst"
 
-#~ msgid "Query IMDb: %s..."
-#~ msgstr "Zoekt in de IMDb: %s..."
+msgid "Show full movie or series name in title menu"
+msgstr "Toon volledige film en serie naam in titelmenu"
 
-#~ msgid "Words/pharse's to ingore"
-#~ msgstr "Woorden/zinnen die genegeerd moeten worden"
+msgid "Show in movie list"
+msgstr "Toon in opnamelijst"
+
+msgid "Show list of matched movies an series"
+msgstr "Toon lijst van overeenkomende films en series"
+
+msgid "Show movie and series basic details"
+msgstr "Toon film en serie beknopte informatie"
+
+msgid "Show movie and series extra details"
+msgstr "Toon film en series extra informatie"
+
+msgid "Show search in plugin browser"
+msgstr "Toon IMDb-zoeken in pluginbrowser"
+
+msgid "Show setup in plugin browser"
+msgstr "Toon IMDb-instellingen in pluginbrowser"
+
+msgid "Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name."
+msgstr "Toon de gehele IMDb titel informatie voor een film of serie, inclusief bv, alternatieve namen en of het een serie betreft. Beschikbaar na eerstvolgende zoekopdracht of IMDb opdracht voor programma informatie."
+
+msgid "The Internet Movie Database"
+msgstr "De Internet Movie Database"
+
+msgid "This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas."
+msgstr "Deze optie maakt het mogelijk woorden/zinnen uit te sluiten van de zoekopdracht. Gebruik een komma als scheidingsteken."
+
+msgid "Title Menu"
+msgstr "Titelmenu"
+
+msgid "Unknown category"
+msgstr "Onbekende categorie"
+
+msgid "User Rating"
+msgstr "Gebruikerswaardering"
+
+msgid "Words / phrases to ignore "
+msgstr "Woorden / zinnen die genegeerd worden "
+
+msgid "no user rating yet"
+msgstr "nog geen gebruikers waardering"

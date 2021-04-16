@@ -3,69 +3,52 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-14 19:59+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2015-10-17 15:02+0300\n"
-"Last-Translator: Hasan Kiran "
-"<Sunder67@hotmail.com>\n"
+"Last-Translator: Hasan Kiran <Sunder67@hotmail.com>\n"
 "Language-Team: Turkish <Sunder67@hotmail.com>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _(\n"
 "X-Poedit-Basepath: .\n"
-"Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.8.4\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/plugin.py:36
-msgid "disabled"
-msgstr "devre dışı"
-
-#: ../src/plugin.py:36
-msgid "immediately after recording"
-msgstr "kayıttan hemen sonra"
-
-#: ../src/plugin.py:36
-msgid "older than 1 day"
-msgstr "1 günden daha eski"
-
-#: ../src/plugin.py:36
-msgid "older than 3 days"
-msgstr "3 günden daha eski"
-
-#: ../src/plugin.py:36
-msgid "older than 1 week"
-msgstr "1 haftadan daha eski"
-
-#: ../src/plugin.py:36
-msgid "older than 2 weeks"
-msgstr "2 haftadan daha eski"
-
-#: ../src/plugin.py:36
-msgid "older than 4 weeks"
-msgstr "4 haftadan daha eski"
-
-#: ../src/plugin.py:36
-msgid "older than 6 weeks"
-msgstr "6 haftadan daha eski"
-
-#: ../src/plugin.py:49 ../src/plugin.py:125
 msgid "Automatic Timerlist Cleanup Setup"
 msgstr "Otomatik Timerlist Temizleme Kurulumu"
 
-#: ../src/plugin.py:122 ../src/plugin.py:125
-msgid "Timerlist Cleanup Setup"
-msgstr "Timerlist Temizleme Kurulumu"
-
-#: ../src/plugin.py:53
 msgid "Cancel"
 msgstr "İptal"
 
-#: ../src/plugin.py:54
+msgid "Cleanup timerlist-entries"
+msgstr "Timerlist-girdileri temizleme"
+
 msgid "OK"
 msgstr "Tamam"
 
-#: ../src/plugin.py:56
-msgid "Cleanup timerlist-entries"
-msgstr "Timerlist-girdileri temizleme"
+msgid "disabled"
+msgstr "devre dışı"
+
+msgid "immediately after recording"
+msgstr "kayıttan hemen sonra"
+
+msgid "older than 1 day"
+msgstr "1 günden daha eski"
+
+msgid "older than 1 week"
+msgstr "1 haftadan daha eski"
+
+msgid "older than 2 weeks"
+msgstr "2 haftadan daha eski"
+
+msgid "older than 3 days"
+msgstr "3 günden daha eski"
+
+msgid "older than 4 weeks"
+msgstr "4 haftadan daha eski"
+
+msgid "older than 6 weeks"
+msgstr "6 haftadan daha eski"

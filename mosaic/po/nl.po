@@ -30,6 +30,3 @@ msgstr "Fout bij het maken van een schermafdruk. Grab versie 0.8 of hoger is nod
 
 msgid "Mosaic"
 msgstr "Mosaic"
-
-#~ msgid "%s does not exist!"
-#~ msgstr "%s bestaat niet !"

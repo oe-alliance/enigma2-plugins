@@ -24,12 +24,7 @@ msgid "Countdown:"
 msgstr "Telt ôf:"
 
 msgid "Error while creating screenshot. You need grab version 0.8 or higher!"
-msgstr ""
-"Flater by it meitsjen fan in skermôfdruk. Grab ferzje 0.8 of heecher is "
-"nedich !"
+msgstr "Flater by it meitsjen fan in skermôfdruk. Grab ferzje 0.8 of heecher is nedich !"
 
 msgid "Mosaic"
 msgstr "Mosaic"
-
-#~ msgid "%s does not exist!"
-#~ msgstr "%s bestiit net !"

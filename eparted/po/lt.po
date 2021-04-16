@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eParted(POT)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 15:14+0300\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2017-07-10 15:15+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -14,103 +14,79 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/plugin.py:10
-msgid "eParted"
-msgstr "eParted"
+msgid "End"
+msgstr "Pabaiga"
 
-#: ../src/plugin.py:10
-msgid "creating and manipulating partition tables"
-msgstr "kurti ir manipuliuoti skaidinių lenteles"
-
-#: ../src/eparted.py:102
 #, python-format
 msgid "Error command '%s'"
 msgstr "Klaida komandoje '%s'"
 
-#: ../src/eparted.py:172
-msgid "partition(s)"
-msgstr "skaidinys(iai)"
-
-#: ../src/eparted.py:190
-msgid "add partition"
-msgstr "pridėti skaidinį"
-
-#: ../src/eparted.py:214
-#, python-format
-msgid "size in %s (max %d %s):"
-msgstr "Dydis %s (maks. %d %s):"
-
-#: ../src/eparted.py:215
-msgid "filesystem:"
-msgstr "failų sistema :"
-
-#: ../src/eparted.py:218
-msgid "cancel"
-msgstr "atšaukti"
-
-#: ../src/eparted.py:219
-msgid "ok"
-msgstr "gerai"
-
-#: ../src/eparted.py:310
 msgid "Nr"
 msgstr "Nr."
 
-#: ../src/eparted.py:311 ../src/eparted.py:520
-msgid "Start"
-msgstr "Pradėti"
+msgid "Please Wait"
+msgstr "Palaukite"
 
-#: ../src/eparted.py:312
-msgid "End"
-msgstr "Pabaiga"
-
-#: ../src/eparted.py:313
 msgid "Size"
 msgstr "Dydis"
 
-#: ../src/eparted.py:314
+msgid "Start"
+msgstr "Pradėti"
+
 msgid "Type"
 msgstr "Tipas"
 
-#: ../src/eparted.py:327
 msgid "add"
 msgstr "pridėti"
 
-#: ../src/eparted.py:332
-msgid "delete"
-msgstr "šalinti"
+msgid "add partition"
+msgstr "pridėti skaidinį"
 
-#: ../src/eparted.py:337
-msgid "free"
-msgstr "laisva"
+msgid "cancel"
+msgstr "atšaukti"
 
-#: ../src/eparted.py:428
 #, python-format
 msgid "create partition %s"
 msgstr "sukurti skaidinį %s"
 
-#: ../src/eparted.py:444
-#, python-format
-msgid "make filesystem '%s' on partition %s (%d %s)"
-msgstr "sukurti failų sistemą '%s' skaidinyje %s (%d %s)"
+msgid "creating and manipulating partition tables"
+msgstr "kurti ir manipuliuoti skaidinių lenteles"
 
-#: ../src/eparted.py:453
+msgid "delete"
+msgstr "šalinti"
+
 #, python-format
 msgid "delete partition %s"
 msgstr "šalinti skaidinį %s"
 
-#: ../src/eparted.py:486 ../src/eparted.py:518
+msgid "eParted"
+msgstr "eParted"
+
 msgid "execute"
 msgstr "vykdyti"
 
-#: ../src/eparted.py:580 ../src/eparted.py:586
+msgid "filesystem:"
+msgstr "failų sistema :"
+
+msgid "free"
+msgstr "laisva"
+
+#, python-format
+msgid "make filesystem '%s' on partition %s (%d %s)"
+msgstr "sukurti failų sistemą '%s' skaidinyje %s (%d %s)"
+
+msgid "ok"
+msgstr "gerai"
+
+msgid "partition(s)"
+msgstr "skaidinys(iai)"
+
 msgid "quit"
 msgstr "baigti"
 
-#: ../src/eparted.py:594
-msgid "Please Wait"
-msgstr "Palaukite"
+#, python-format
+msgid "size in %s (max %d %s):"
+msgstr "Dydis %s (maks. %d %s):"

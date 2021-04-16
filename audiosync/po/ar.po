@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AudioSync\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
 "Language-Team: mosad\n"
@@ -15,6 +15,7 @@ msgstr ""
 "X-Generator: Poedit 2.2.1\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#, python-format
 msgid "%i ms"
 msgstr "%i جزء من الثانية"
 
@@ -42,6 +43,7 @@ msgstr "صوت القناة:"
 msgid "Decrease delay"
 msgstr "قلل التأخير"
 
+#, python-format
 msgid "Decrease delay by %i ms (can be set)"
 msgstr "قلل التأخير بـ %i مللى ثانيه (يمكن إعدادها)"
 
@@ -57,15 +59,18 @@ msgstr "تأخير عالمي"
 msgid "Increase delay"
 msgstr "زيادة التأخير"
 
+#, python-format
 msgid "Increase delay by %i ms (can be set)"
 msgstr "زيادة التأخير بمقدار %i مللى ثانيه (يمكن الضبط)"
 
 msgid "Invalid selection"
 msgstr "إختيار غير صالح"
 
+#, fuzzy, python-format
 msgid "Key %(Key)s successfully set to %(delay)i ms"
 msgstr "مفتاح % (مفاتيح) تم الضبط بنجاح %(تأخير) جزء من الثانية"
 
+#, fuzzy, python-format
 msgid "Key %(key)s (current value: %(value)i ms)"
 msgstr "مفتاح % (مفاتيح) القيمة الحالية %(قيمة) جزء من الثانية."
 
@@ -117,6 +122,7 @@ msgstr "أفتح قائمة البلج إنز"
 msgid "Outer Bound (+/-)"
 msgstr "الالتزام الخارجي (+/)"
 
+#, fuzzy, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "البرنامج المساعد: s % (البرنامج المساعد)، الإصدار: s % (الإصدار)"
 
@@ -135,12 +141,14 @@ msgstr "حفظ القيم وإغلاق البلج إن"
 msgid "Save values and close screen"
 msgstr "حفظ القيم وإغلاق الشاشة"
 
+#, python-format
 msgid "Select the key you want to set to %i ms"
 msgstr "أختار المفتاح الذى تريد الضبط إلى %i جزء من الثانيه"
 
 msgid "Service delay"
 msgstr "تأخير الخدمة"
 
+#, python-format
 msgid "Set delay to %i ms (can be set)"
 msgstr "أضبط التاخير الى %i جزء من الثانيه (يمكن ضبطها)"
 
@@ -153,9 +161,11 @@ msgstr "إعدادات بلجن أنز مزامنة الصوت"
 msgid "Step in ms for arrow keys"
 msgstr "خطوة جزء من الثانية للمفاتيح الأسهم"
 
+#, fuzzy, python-format
 msgid "Step in ms for key %i"
 msgstr "خطوة جزء من الثانية لمفتاح ٪i"
 
+#, python-format
 msgid "Step in ms for keys '%s'"
 msgstr "خطوة جزء من الثانية لمفاتيح '%s'"
 

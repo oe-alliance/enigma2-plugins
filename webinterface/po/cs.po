@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins-extensions-webinterface\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-26 23:16+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: jerry <jerry00@quick.cz>\n"
 "Language-Team: jerry00@quick.cz\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,77 +16,968 @@ msgstr ""
 "X-Poedit-Language: Czech\n"
 "X-Poedit-SearchPath-0: src\n"
 
-#: src/plugin.py:496
-msgid "Webinterface"
-msgstr "Webové rozhraní"
+#, python-format
+msgid "%d error while moving Movie '%s' to '%s': %s"
+msgstr ""
+
+#, python-format
+msgid "%s of %s min"
+msgstr ""
+
+#, python-format
+msgid "'%s' already exists in destination directory '%s', set force=1 to move anyway."
+msgstr ""
+
+#, python-format
+msgid "'%s' does not exist in source directory."
+msgstr ""
+
+#, python-format
+msgid "'%s' has been added to playlist"
+msgstr ""
+
+#, python-format
+msgid "'%s' is neither a valid reference nor a valid file"
+msgstr ""
+
+#, python-format
+msgid "'%s' not found in playlist"
+msgstr ""
+
+#, python-format
+msgid "'%s' removed from playlist"
+msgstr ""
+
+msgid "0"
+msgstr ""
+
+msgid "1"
+msgstr ""
+
+msgid "15"
+msgstr ""
+
+msgid "2"
+msgstr ""
+
+msgid "3"
+msgstr ""
+
+msgid "AC3 Downmix disabled"
+msgstr ""
+
+msgid "AC3 Downmix enabled"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Action"
+msgstr ""
+
+msgid "Activate"
+msgstr ""
+
+#, python-format
+msgid "Active service is now '%s'"
+msgstr ""
+
+#, python-format
+msgid "Add %s to playlist"
+msgstr ""
+
+msgid "Add Timer"
+msgstr ""
+
+msgid "Add Zap Timer"
+msgstr ""
+
+msgid "Add/Save"
+msgstr ""
+
+msgid "After event"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "All Timers"
+msgstr ""
+
+msgid "Allow zapping via Webinterface"
+msgstr "Povolit přepínání přes Webové rozhraní"
+
+msgid "Audio PID"
+msgstr ""
+
+msgid "Authors"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Autowrite timer"
+msgstr "Auto časovač"
+
+msgid "Begins"
+msgstr ""
+
+msgid "Bouquets"
+msgstr ""
+
+msgid "BoxControl"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Zrušit"
+
+msgid "Cannot zap while device is in Standby"
+msgstr ""
+
+msgid "Capacity"
+msgstr ""
+
+msgid "Challenge executed, please verify the result!"
+msgstr ""
+
+#, python-format
+msgid "Change to %s"
+msgstr ""
+
+#, python-format
+msgid "Changing the timer for '%s' failed!"
+msgstr ""
+
+msgid "Channel"
+msgstr ""
+
+msgid "Cleans up the list of timers by removing e.g. finished timers"
+msgstr ""
+
+msgid "Cleanup"
+msgstr ""
+
+msgid "Clear search"
+msgstr ""
+
+msgid "Click to show/hide extended description"
+msgstr ""
+
+msgid "Close MediaPlayer"
+msgstr ""
+
+#, python-format
+msgid "Command '%s' executed"
+msgstr ""
 
 msgid "Configuration for the Webinterface"
 msgstr "Konfigurace Webového rozhraní"
 
-msgid "Show Setup in Extensions menu"
-msgstr "Zobrazit nastavení v menu modrého tlačítka"
+#, python-format
+msgid "Conflicting Timer(s) detected! %s"
+msgstr ""
 
-#: src/WebIfConfig.py:34
-msgid "Cancel"
-msgstr "Zrušit"
+#, python-format
+msgid "Could not add timer '%s'!"
+msgstr ""
 
-#: src/WebIfConfig.py:35
-msgid "OK"
-msgstr "Ok"
+#, python-format
+msgid "Could not delete Movie '%s'"
+msgstr ""
 
-#: src/WebIfConfig.py:58
-msgid "Start Webinterface"
-msgstr "Spustit Webové rozhraní"
+#, python-format
+msgid "Could not find timer '%s' with given start and end time!"
+msgstr ""
 
-#: src/WebIfConfig.py:59
+msgid "Create Timer"
+msgstr ""
+
+msgid "DHCP enabled"
+msgstr ""
+
+msgid "Days"
+msgstr ""
+
+msgid "Deactivate"
+msgstr ""
+
+msgid "Deepstandby"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+#, python-format
+msgid "Delete %s"
+msgstr ""
+
+msgid "Delete Timer"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+#, python-format
+msgid "Destination dir '%s' does not exist."
+msgstr ""
+
+msgid "Device & Versions"
+msgstr ""
+
+msgid "Device Info"
+msgstr ""
+
+msgid "Device Name"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Do Nothing"
+msgstr ""
+
+msgid "Down"
+msgstr ""
+
+#, python-format
+msgid "Downlad %s"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+msgid "EPG-Search"
+msgstr ""
+
+msgid "ERROR: Cannot set SleepTimer while device is in Standby-Mode"
+msgstr ""
+
+#, python-format
+msgid "ERROR: Obligatory parameter 'cmd' [get,set] has unspecified value '%s'"
+msgstr ""
+
+#, python-format
+msgid "ERROR: Obligatory parameter 'enabled' [True,False] has unspecified value '%s'"
+msgstr ""
+
+msgid "ERROR: Obligatory parameter 'time' [0-999] is missing"
+msgstr ""
+
+msgid "Edit Timer"
+msgstr ""
+
+#, fuzzy
+msgid "Enable"
+msgstr "Povolit /média"
+
 msgid "Enable /media"
 msgstr "Povolit /média"
 
-#: src/WebIfConfig.py:60
-msgid "Allow zapping via Webinterface"
-msgstr "Povolit přepínání přes Webové rozhraní"
+#, fuzzy
+msgid "Enable Debug"
+msgstr "Povolit /média"
 
-#: src/WebIfConfig.py:61
-msgid "Autowrite timer"
-msgstr "Auto časovač"
-
-#: src/WebIfConfig.py:62
-msgid "Load movie-length"
-msgstr "Načíst délku filmu"
-
-#: src/WebIfConfig.py:63
 msgid "Enable HTTP Access"
 msgstr "Povolit HTTP přístup"
 
-#: src/WebIfConfig.py:68
-msgid "HTTP Port"
-msgstr ""
-
-#: src/WebIfConfig.py:69
 msgid "Enable HTTP Authentication"
 msgstr "Povolit autorizaci HTTP"
 
-#: src/WebIfConfig.py:74
 msgid "Enable HTTPS Access"
 msgstr "Povolit přístup na HTTPS"
 
-#: src/WebIfConfig.py:78
-msgid "HTTPS Port"
-msgstr ""
-
-#: src/WebIfConfig.py:79
 msgid "Enable HTTPS Authentication"
 msgstr "Povolit autorizaci HTTPS"
 
-#: src/WebIfConfig.py:85
 msgid "Enable Streaming Authentication"
 msgstr "Autorizovat streamy"
 
-#: src/WebIfConfig.py:91
-msgid "Webinterface: Main Setup"
-msgstr "Webové rozhraní: Nastavení"
+msgid "Ends"
+msgstr ""
 
-#: src/WebComponents/Converter/HddInfo.py:32
+msgid "Enigma2 Version"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "EventId not found"
+msgstr ""
+
+msgid "Extras"
+msgstr ""
+
+msgid "False"
+msgstr ""
+
+msgid "Filebrowser"
+msgstr ""
+
+msgid "Filter Services"
+msgstr ""
+
+msgid "Finished"
+msgstr ""
+
+msgid "Free Space"
+msgstr ""
+
+msgid "Frontprocessor Version"
+msgstr ""
+
+msgid "Gateway"
+msgstr ""
+
+msgid "Get a Screenshot"
+msgstr ""
+
+msgid "Grab Video & OSD"
+msgstr ""
+
+msgid "HTTP Port"
+msgstr ""
+
+msgid "HTTPS Port"
+msgstr ""
+
+msgid "Harddisk"
+msgstr ""
+
+msgid "IP Address"
+msgstr ""
+
+msgid "IPv4-only Python/Twisted"
+msgstr ""
+
+msgid "IPv4-only kernel"
+msgstr ""
+
+msgid "IPv6 address(es)"
+msgstr ""
+
+#, python-format
+msgid "Illegal Parameter Value: sRef - '%s'"
+msgstr ""
+
+#, python-format
+msgid "Illegal Parameter value for Parameter begin : '%s'"
+msgstr ""
+
+#, python-format
+msgid "Illegal Parameter value for Parameter eit : '%s'"
+msgstr ""
+
+msgid "Image Version"
+msgstr ""
+
+msgid "Info"
+msgstr ""
+
+msgid "Instant Record"
+msgstr ""
+
+msgid "JavaScript Libraries"
+msgstr ""
+
+msgid "LEVEL2 and LEVEL3 Certifcates (Base64-encoded)"
+msgstr ""
+
+msgid "Legend"
+msgstr ""
+
+msgid "License"
+msgstr ""
+
+msgid "List of Plugins has been read"
+msgstr ""
+
+msgid "List of Timers has been cleaned"
+msgstr ""
+
+msgid "Load Bouquet"
+msgstr ""
+
+msgid "Load movie-length"
+msgstr "Načíst délku filmu"
+
+msgid "Location"
+msgstr ""
+
+#, python-format
+msgid "Location '%s' added successfully"
+msgstr ""
+
+#, python-format
+msgid "Location '%s' does not exist"
+msgstr ""
+
+#, python-format
+msgid "Location '%s' is already existing"
+msgstr ""
+
+#, python-format
+msgid "Location '%s' removed successfully"
+msgstr ""
+
+msgid "Lookup on IMDb.com"
+msgstr ""
+
+msgid "Mac Address"
+msgstr ""
+
+msgid "Mediaplayer"
+msgstr ""
+
+msgid "Mediaplayer not installed"
+msgstr ""
+
+msgid "Mediaplayer was not active"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "Message sent successfully!"
+msgstr ""
+
+msgid "Missing Parameter: begin"
+msgstr ""
+
+msgid "Missing Parameter: beginOld"
+msgstr ""
+
+msgid "Missing Parameter: channelOld"
+msgstr ""
+
+msgid "Missing Parameter: description"
+msgstr ""
+
+msgid "Missing Parameter: end"
+msgstr ""
+
+msgid "Missing Parameter: endOld"
+msgstr ""
+
+msgid "Missing Parameter: eventid"
+msgstr ""
+
+msgid "Missing Parameter: name"
+msgstr ""
+
+msgid "Missing Parameter: sRef"
+msgstr ""
+
+msgid "Missing Paramter: dirname"
+msgstr ""
+
+msgid "Missing or Wrong Argument"
+msgstr ""
+
+msgid "Missing or invalid parameter file"
+msgstr ""
+
+msgid "Missing or wrong argument"
+msgstr ""
+
+msgid "Missing value for parameter dirname"
+msgstr ""
+
+#, python-format
+msgid "Movie '%s' deleted"
+msgstr ""
+
+#, python-format
+msgid "Movie '%s' has unknown suffix '%s'."
+msgstr ""
+
+#, python-format
+msgid "Movie '%s' moved to '%s' without errors."
+msgstr ""
+
+msgid "Movies"
+msgstr ""
+
+#, python-format
+msgid "Moving Movie '%s' to '%s' in background."
+msgstr ""
+
+msgid "Mute"
+msgstr ""
+
+msgid "Mute toggled"
+msgstr ""
+
 msgid "N/A"
 msgstr "Není"
 
+msgid "Name"
+msgstr ""
+
+msgid "Netmask"
+msgstr ""
+
+#, fuzzy
+msgid "Network Interface"
+msgstr "Spustit Webové rozhraní"
+
+msgid "Next"
+msgstr ""
+
+msgid "No Bouquets to Display"
+msgstr ""
+
+msgid "No Messagetext given"
+msgstr ""
+
+msgid "No Service to show"
+msgstr ""
+
+msgid "No Timer Available!"
+msgstr ""
+
+msgid "No items to show..."
+msgstr ""
+
+msgid "No movies to show..."
+msgstr ""
+
+msgid "Note: For one-time events the days don't have to be specified."
+msgstr ""
+
+msgid "Note: For recurring events dates are not mandatory."
+msgstr ""
+
+msgid "Nothing found..."
+msgstr ""
+
+msgid "Nothing running..."
+msgstr ""
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "ONID"
+msgstr ""
+
+#, python-format
+msgid "Obligatory parameter \"random\" for cmd=\"%s\" missing"
+msgstr ""
+
+msgid "Obligatory parameter 'command' is missing!"
+msgstr ""
+
+msgid "Obligatory parameter 'sRef' is missing"
+msgstr ""
+
+msgid "Obligatory parameter sRef is missing"
+msgstr ""
+
+msgid "Obligatory parameters missing [cmd [set,get], time [0-999], action [standby,shutdown], enabled [True,False]"
+msgstr ""
+
+#, python-format
+msgid "Open Multi-EPG for %s"
+msgstr ""
+
+msgid "Open Signal Panel"
+msgstr ""
+
+msgid "PCR PID"
+msgstr ""
+
+msgid "PMT PID"
+msgstr ""
+
+#, python-format
+msgid "Path %s can not be created"
+msgstr ""
+
+#, python-format
+msgid "Path %s does not exist"
+msgstr ""
+
+msgid "Play"
+msgstr ""
+
+#, python-format
+msgid "Play %s"
+msgstr ""
+
+#, python-format
+msgid "Playback of '%s' started"
+msgstr ""
+
+msgid "Playlist"
+msgstr ""
+
+#, python-format
+msgid "Playlist '%s' does not exist"
+msgstr ""
+
+#, python-format
+msgid "Playlist for %s"
+msgstr ""
+
+#, python-format
+msgid "Playlist saved to '%s'"
+msgstr ""
+
+msgid "Please select any bouquet"
+msgstr ""
+
+msgid "Power Control"
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid "Providers"
+msgstr ""
+
+#, python-format
+msgid "RC command '%s' has been issued"
+msgstr ""
+
+msgid "Radio"
+msgstr ""
+
+msgid "Reboot"
+msgstr ""
+
+msgid "Record"
+msgstr ""
+
+msgid "Record current event"
+msgstr ""
+
+msgid "Refresh Screenshot"
+msgstr ""
+
+#, python-format
+msgid "Remove %s from playlist"
+msgstr ""
+
+msgid "Restart enigma2"
+msgstr ""
+
+msgid "Running"
+msgstr ""
+
+msgid "SID"
+msgstr ""
+
+msgid "Satellites"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Save Playlist"
+msgstr ""
+
+msgid "Screenshot (All)"
+msgstr ""
+
+msgid "Screenshot (OSD)"
+msgstr ""
+
+msgid "Screenshot (Video)"
+msgstr ""
+
+msgid "Search EPG"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "Send Message"
+msgstr ""
+
+msgid "Send \\\"long\\\" keypress"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+#, python-format
+msgid "Show EPG for %s"
+msgstr ""
+
+msgid "Show Setup in Extensions menu"
+msgstr "Zobrazit nastavení v menu modrého tlačítka"
+
+msgid "Shutdown"
+msgstr ""
+
+msgid "Simple Anti-Hijack Measures (may break clients)"
+msgstr ""
+
+msgid "Sleeptimer has been disabled"
+msgstr ""
+
+msgid "Sleeptimer is disabled"
+msgstr ""
+
+msgid "Sleeptimer is enabled"
+msgstr ""
+
+#, python-format
+msgid "Sleeptimer set to %s minutes"
+msgstr ""
+
+msgid "Source and destination folders are the same."
+msgstr ""
+
+msgid "Standby"
+msgstr ""
+
+msgid "Start Webinterface"
+msgstr "Spustit Webové rozhraní"
+
+msgid "Start infinite recording"
+msgstr ""
+
+msgid "State"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "Stream"
+msgstr ""
+
+#, python-format
+msgid "Stream %s"
+msgstr ""
+
+msgid "Success"
+msgstr ""
+
+msgid "TSID"
+msgstr ""
+
+msgid "TV"
+msgstr ""
+
+msgid "Tag Filter"
+msgstr ""
+
+msgid "Tags"
+msgstr ""
+
+msgid "Technical Information"
+msgstr ""
+
+msgid "TeleVision"
+msgstr ""
+
+msgid "Text PID"
+msgstr ""
+
+#, python-format
+msgid "The sleep timer has been activated for %s minutes."
+msgstr ""
+
+msgid "The sleep timer has been disabled."
+msgstr ""
+
+#, python-format
+msgid "The timer '%s' has been deleted successfully"
+msgstr ""
+
+msgid "The timer has NOT been deleted"
+msgstr ""
+
+msgid "This device does not support AC3 Downmix"
+msgstr ""
+
+msgid "Timeout"
+msgstr ""
+
+msgid "Timer"
+msgstr ""
+
+#, python-format
+msgid "Timer '%s' added"
+msgstr ""
+
+msgid "TimerList has been saved"
+msgstr ""
+
+msgid "TimerList has not been saved"
+msgstr ""
+
+msgid "Timers"
+msgstr ""
+
+msgid "Toggle Standby"
+msgstr ""
+
+msgid "Token-based security (may break clients)"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+msgid "Tuners"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+#, python-format
+msgid "Unknown Volume command %s"
+msgstr ""
+
+#, python-format
+msgid "Unknown command (%s)"
+msgstr ""
+
+#, python-format
+msgid "Unknown for parameter \"cmd\" [%s|%s]"
+msgstr ""
+
+#, python-format
+msgid "Unknown function: '%s'"
+msgstr ""
+
+#, python-format
+msgid "Unknown parameter %s"
+msgstr ""
+
+msgid "Unmute"
+msgstr ""
+
+#, python-format
+msgid "Unsupported Messagetype %s"
+msgstr ""
+
+msgid "Up"
+msgstr ""
+
+msgid "Update interval for current service (min. 10 sec)"
+msgstr ""
+
+msgid "Update-Interval for EPG of the current bouquets (min. 60 sec)"
+msgstr ""
+
+msgid "Video PID"
+msgstr ""
+
+msgid "Video Size"
+msgstr ""
+
+msgid "Volume"
+msgstr ""
+
+msgid "Volume Down"
+msgstr ""
+
+msgid "Volume Up"
+msgstr ""
+
+msgid "Volume changed"
+msgstr ""
+
+#, python-format
+msgid "Volume set to %i"
+msgstr ""
+
+msgid "WARNING: Cookies are required to store the settings!"
+msgstr ""
+
+msgid "Waiting"
+msgstr ""
+
+msgid "Warning"
+msgstr ""
+
+msgid "WebRemote"
+msgstr ""
+
+msgid "WebTV"
+msgstr ""
+
+msgid "Webinterface"
+msgstr "Webové rozhraní"
+
+#, fuzzy
+msgid "Webinterface Version"
+msgstr "Webové rozhraní"
+
+msgid "Webinterface: Main Setup"
+msgstr "Webové rozhraní: Nastavení"
+
+msgid "Widescreen"
+msgstr ""
+
+#, python-format
+msgid "Wrong parameter format 'set=%s'. Use set=set15"
+msgstr ""
+
+msgid "Zap"
+msgstr ""
+
+#, python-format
+msgid "Zap to %s"
+msgstr ""
+
+msgid "Zapping is disabled in WebInterface Configuration"
+msgstr ""
+
+msgid "and many contributors"
+msgstr ""
+
+msgid "disabled"
+msgstr ""
+
+msgid "illegal call"
+msgstr ""
+
+#, python-format
+msgid "missing or wrong parameter mode [%i=both, %i=lamedb only, %i=userbouqets only, %i=transponders, %i=parentalcontrol white-/blacklist]"
+msgstr ""
+
+msgid "none/IPv4-only network"
+msgstr ""
+
+msgid "of"
+msgstr ""
+
+msgid "one two three four unknown command"
+msgstr ""
+
+msgid "please select a submenu on the left..."
+msgstr ""
+
+msgid "reloaded both"
+msgstr ""
+
+msgid "reloaded bouquets"
+msgstr ""
+
+msgid "reloaded lamedb"
+msgstr ""
+
+msgid "sec"
+msgstr ""
+
+msgid "submit-message"
+msgstr ""
+
+msgid "the command was not > 0"
+msgstr ""
+
+msgid "this recording"
+msgstr ""
+
+#, python-format
+msgid "type %s is not a number"
+msgstr ""
+
+msgid "undefined"
+msgstr ""
+
+#, python-format
+msgid "unknown command (%s)"
+msgstr ""

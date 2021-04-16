@@ -77,6 +77,3 @@ msgstr "UUID leggere"
 
 msgid "unknown"
 msgstr ""
-
-#~ msgid "Do you want to reboot your Dreambox?"
-#~ msgstr "Nuova partenza della Dreambox?"

@@ -2,156 +2,120 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-11 07:17+0300\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2017-07-11 07:41+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: \n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.2\n"
-"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: lt\n"
 
-#: ../src/plugin.py:1379
 msgid "Abort all downloads"
 msgstr "Nutraukti visus siuntimus"
 
-#: ../src/plugin.py:1272 ../src/plugin.py:1352
 msgid "Add"
 msgstr "Pridėti"
 
-#: ../src/plugin.py:1376
 msgid "Add downloads from txt files"
 msgstr "Pridėti parsiuntimus iš txt failų"
 
-#: ../src/plugin.py:1377
 msgid "Add files from container"
 msgstr "Pridėti failus iš talpyklos"
 
-#: ../src/plugin.py:916
 #, python-format
 msgid "Added %s to the download-list."
 msgstr "%s įtraukta į parsisiuntimo sąrašą."
 
-#: ../src/plugin.py:830
 msgid "Allow downloading on friday:"
 msgstr "Leisti atsisiųsti penktadieniais:"
 
-#: ../src/plugin.py:826
 msgid "Allow downloading on monday:"
 msgstr "Leisti atsisiųsti pirmadieniais:"
 
-#: ../src/plugin.py:831
 msgid "Allow downloading on saturday:"
 msgstr "Leisti atsisiųsti šeštadieniais:"
 
-#: ../src/plugin.py:832
 msgid "Allow downloading on sunday:"
 msgstr "Leisti atsisiųsti  sekmadieniais:"
 
-#: ../src/plugin.py:829
 msgid "Allow downloading on thursday:"
 msgstr "Leisti atsisiųsti ketvirtadieniais:"
 
-#: ../src/plugin.py:827
 msgid "Allow downloading on tuesday:"
 msgstr "Leisti atsisiųsti  antradieniais:"
 
-#: ../src/plugin.py:828
 msgid "Allow downloading on wednesday:"
 msgstr "Leisti atsisiųsti trečiadieniais:"
 
-#: ../src/plugin.py:276 ../src/plugin.py:307 ../src/plugin.py:339
-#: ../src/plugin.py:393 ../src/plugin.py:427
 msgid "Checking"
 msgstr "Tikrinama"
 
-#: ../src/plugin.py:839
 msgid "Choose reconnect script:"
 msgstr "Pasirinkite pakartotinio prisijungimo scenarijų:"
 
-#: ../src/plugin.py:1381
 msgid "Clear finished downloads"
 msgstr "Išvalyti baigtus parsiuntimus"
 
-#: ../src/plugin.py:1388
 msgid "Close plugin"
 msgstr "Uždaryti įskiepį"
 
-#: ../src/plugin.py:1353
 msgid "Config"
 msgstr "Nustatymas"
 
-#: ../src/plugin.py:1271 ../src/plugin.py:1350
 msgid "Delete"
 msgstr "Ištrinti"
 
-#: ../src/plugin.py:1436
 #, python-format
 msgid "Delete %s?"
 msgstr "Ištrinti %s?"
 
-#: ../src/plugin.py:1374
 msgid "Delete download"
 msgstr "Trinti parsiuntimą"
 
-#: ../src/plugin.py:1378
 msgid "Delete failed downloads"
 msgstr "Trinti nepavykusius parsiuntimus"
 
-#: ../src/plugin.py:1383
 msgid "Delete log"
 msgstr "Trinti žurnalą"
 
-#: ../src/plugin.py:834
 msgid "Don't download after:"
 msgstr "Neparsiuntinėti po:"
 
-#: ../src/plugin.py:833
 msgid "Don't download before:"
 msgstr "Neparsiuntinėti iki:"
 
-#: ../src/plugin.py:841
 msgid "Don't reconnect after:"
 msgstr "Neprisijunginėti po:"
 
-#: ../src/plugin.py:840
 msgid "Don't reconnect before:"
 msgstr "Neprisijunginėti iki:"
 
-#: ../src/plugin.py:1530
 msgid "Download files from rapidshare"
 msgstr "Parsiųsti failus iš Rapidshare"
 
-#: ../src/plugin.py:816
 msgid "Download in the background:"
 msgstr "Parsiųsti fone:"
 
-#: ../src/plugin.py:331 ../src/plugin.py:342 ../src/plugin.py:365
-#: ../src/plugin.py:371 ../src/plugin.py:738
 msgid "Downloading"
 msgstr "Parsiunčiama"
 
-#: ../src/plugin.py:824
 msgid "Downloads directory:"
 msgstr "Parsiuntimų katalogas:"
 
-#: ../src/plugin.py:1244
 msgid "Enter unrar password:"
 msgstr "Išarchyvavimo slaptažodis:"
 
-#: ../src/plugin.py:918
 #, python-format
 msgid "Error while adding %s to the download-list!"
 msgstr "Klaida, įtraukiant %s į parsiuntimų sąrašą!"
 
-#: ../src/plugin.py:1509
 #, python-format
 msgid "Error while decrypting %s!"
 msgstr "Klaida, iššifruojant %s!"
 
-#: ../src/plugin.py:972
 #, python-format
 msgid ""
 "Error while searching http://rapidshare-search-engine.com!\n"
@@ -162,7 +126,6 @@ msgstr ""
 "\n"
 "Klaida: %s"
 
-#: ../src/plugin.py:928
 msgid ""
 "Error while searching http://rapidshare-search-engine.com!\n"
 "\n"
@@ -172,155 +135,114 @@ msgstr ""
 "\n"
 "Klaida: atleiskite, nieko nerasta."
 
-#: ../src/plugin.py:400 ../src/plugin.py:412 ../src/plugin.py:547
-#: ../src/plugin.py:728 ../src/plugin.py:753
 msgid "Failed"
 msgstr "Nepavyko"
 
-#: ../src/plugin.py:406 ../src/plugin.py:547 ../src/plugin.py:653
-#: ../src/plugin.py:720 ../src/plugin.py:1433
 msgid "Finished"
 msgstr "Baigtas"
 
-#: ../src/plugin.py:825
 msgid "Ignore download times:"
 msgstr "Nepaisyti parsiuntimo laiko:"
 
-#: ../src/plugin.py:1387
 msgid "Install unrar"
 msgstr "Įdiegti unRAR"
 
-#: ../src/plugin.py:1420
 msgid "Installing unrar..."
 msgstr "Diegiamas unRAR..."
 
-#: ../src/plugin.py:823
 msgid "Lists directory:"
 msgstr "Sąrašų katalogas:"
 
-#: ../src/plugin.py:983
 msgid "Loading next page... please wait!"
 msgstr "Įkeliamas sekantis puslapis... Palaukite!"
 
-#: ../src/plugin.py:977
 msgid "Loading previous page... please wait!"
 msgstr "Įkeliamas ankstesnis puslapis... Palaukite!"
 
-#: ../src/plugin.py:843
 msgid "Mark files < 1 MB as failed:"
 msgstr "Failus < 1 MB žymėti, kaip nepavykusius:"
 
-#: ../src/plugin.py:835
 msgid "Maximal downloads:"
 msgstr "Daugiausiai parsiuntimų:"
 
-#: ../src/plugin.py:1354
 msgid "Menu"
 msgstr "Meniu"
 
-#: ../src/plugin.py:59
 msgid "No reconnect"
 msgstr "Nesijungti pakartotinai"
 
-#: ../src/plugin.py:929
 msgid "Nothing found, sorry."
 msgstr "Atleiskite, nieko netasta."
 
-#: ../src/plugin.py:1385
 msgid "Open unrar Manager"
 msgstr "Atverti unRAR valdymą"
 
-#: ../src/plugin.py:945
 #, python-format
 msgid "Page %d / %d. Push < > to switch the page..."
 msgstr "Psl. %d / %d. Puslapiui perjungti, spauskite '< >'..."
 
-#: ../src/plugin.py:820
 msgid "Password (netload.in):"
 msgstr "Slaptažodis (netload.in):"
 
-#: ../src/plugin.py:822
 msgid "Password (uploaded.to):"
 msgstr "Slaptažodis (uploaded.to):"
 
-#: ../src/plugin.py:818
 msgid "Password:"
 msgstr "Slaptažodis:"
 
-#: ../src/plugin.py:1389
 msgid "Please choose a function..."
 msgstr "Pasirinkite funkciją..."
 
-#: ../src/plugin.py:774 ../src/plugin.py:1530
 msgid "RS Downloader"
 msgstr "Rapidshare parsiuntimas"
 
-#: ../src/plugin.py:838
 msgid "Reconnect type:"
 msgstr "Pakartotinio prisijungimo tipas:"
 
-#: ../src/plugin.py:842
 msgid "Restart failed after 10 minutes:"
 msgstr "Po 10 min. nepavykusius paleisti iš naujo:"
 
-#: ../src/plugin.py:1380
 msgid "Restart failed downloads"
 msgstr "Nepavykusius paleisti iš naujo parsiuntimus"
 
-#: ../src/plugin.py:813
 msgid "Save"
 msgstr "Įrašyti"
 
-#: ../src/plugin.py:59
 msgid "Script"
 msgstr "Scenarijus"
 
-#: ../src/plugin.py:1351
 msgid "Search"
 msgstr "Paieška"
 
-#: ../src/plugin.py:1445
 msgid "Search http://rapidshare-search-engine.com for:"
 msgstr "Ieškoti http://rapidshare-search-engine.com:"
 
-#: ../src/plugin.py:1382
 msgid "Show log"
 msgstr "Rodyti žurnalą"
 
-#: ../src/plugin.py:836
 msgid "Take x downloads to list:"
 msgstr "X parsiuntimų į sąrašą:"
 
-#: ../src/plugin.py:1298
 msgid "Unrar is already working!"
 msgstr "Išarchyvavimas jau vyksta!"
 
-#: ../src/plugin.py:1375
 msgid "Use search engine"
 msgstr "Naudokite paieškos variklį"
 
-#: ../src/plugin.py:819
 msgid "Username (netload.in):"
 msgstr "Vartotojas (netload.in):"
 
-#: ../src/plugin.py:821
 msgid "Username (uploaded.to):"
 msgstr "Vartotojas (uploaded.to):"
 
-#: ../src/plugin.py:817
 msgid "Username:"
 msgstr "Vartotojas:"
 
-#: ../src/plugin.py:229 ../src/plugin.py:296 ../src/plugin.py:320
-#: ../src/plugin.py:379 ../src/plugin.py:414 ../src/plugin.py:563
-#: ../src/plugin.py:584 ../src/plugin.py:744 ../src/plugin.py:758
 msgid "Waiting"
 msgstr "Laukiama"
 
-#: ../src/plugin.py:837
 msgid "Write log:"
 msgstr "Rašyti žurnalą:"
 
-#: ../src/plugin.py:59
 msgid "fritz.Box"
 msgstr "FRITZ!Box"

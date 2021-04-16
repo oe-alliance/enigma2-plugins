@@ -52,6 +52,3 @@ msgstr "YouTube-Trailer Setup"
 
 msgid "leave movie player..."
 msgstr "leave movie player..."
-
-#~ msgid "YT-Trailer Setup"
-#~ msgstr "YT-Trailer Setup"

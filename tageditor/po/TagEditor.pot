@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,33 +17,26 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/plugin.py:259
 msgid "Add new tag..."
 msgstr ""
 
-#: ../src/plugin.py:47
 msgid "Cancel"
 msgstr ""
 
-#: ../src/plugin.py:263
 msgid "Delete all tags..."
 msgstr ""
 
-#: ../src/plugin.py:261
 msgid "Delete this tag..."
 msgstr ""
 
-#: ../src/plugin.py:262
 msgid "Delete unused tags"
 msgstr ""
 
-#: ../src/plugin.py:245
 msgid ""
 "Do you really want to delete all tags everywhere?\n"
 "(Note that 'Cancel' will not undo this!)"
 msgstr ""
 
-#: ../src/plugin.py:228
 #, python-format
 msgid ""
 "Do you really want to delete tag \"%s\" everywhere?\n"
@@ -51,38 +44,28 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: This is the title of the TagEditor main screen
-#: ../src/plugin.py:79
 msgid "Edit Tags"
 msgstr ""
 
-#: ../src/plugin.py:50
 msgid "Load"
 msgstr ""
 
-#: ../src/plugin.py:49
 msgid "New"
 msgstr ""
 
-#: ../src/plugin.py:48
 msgid "OK"
 msgstr ""
 
-#: ../src/plugin.py:85
 msgid "Please enter the new tag"
 msgstr ""
 
-#: ../src/plugin.py:260
 msgid "Rename this tag..."
 msgstr ""
 
-#: ../src/plugin.py:208
 #, python-format
-msgid ""
-"Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo "
-"this!)"
+msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
 msgstr ""
 
 #. TRANSLATORS: this is the string used in the movie context menu for TagEditor
-#: ../src/plugin.py:26
 msgid "edit tags"
 msgstr ""
