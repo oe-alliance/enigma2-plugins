@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 EPGSearch Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-22 20:42+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2014-11-22 20:47+0100\n"
 "Last-Translator: Magnus Nilsson <mag_nilsson@hotmail.com>\n"
 "Language-Team: none\n"
@@ -17,101 +17,226 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-msgid "Search"
-msgstr "Sök"
-
-msgid "New Search"
-msgstr "Ny sökning"
-
-msgid "History"
-msgstr "Historik"
-
-msgid "Add timer"
-msgstr "Lägg till timer"
-
-msgid "EPG Search"
-msgstr "EPG sökning"
-
-msgid "Enter text to search for"
-msgstr "Skriv in text att söka efter"
-
-msgid "Import from Timer"
-msgstr "Importera från timer"
-
-msgid "Import from EPG"
-msgstr "Importera från EPG"
-
-msgid "Import from AutoTimer"
-msgstr "Importera från AutoTimer"
-
-msgid "Save search as AutoTimer"
-msgstr "Spara sökning som AutoTimer"
-
-msgid "Export selected as AutoTimer"
-msgstr "Exportera vald som AutoTimer"
-
-msgid "Setup"
-msgstr "Inställning"
-
 #, python-format
-msgid "Could not read AutoTimer timer list: %s"
-msgstr "Kunde inte läsa timerlistan för AutoTimer: %s"
-
-msgid "Select text to search for"
-msgstr "Välj text att söka efter"
-
-msgid "No history"
-msgstr "Ingen historik"
-
-msgid "Cancel"
-msgstr "Avbryt"
-
-msgid "OK"
-msgstr "OK"
-
-msgid "Select a timer to search"
-msgstr "Välj en timer för sökning"
-
-msgid "Channel Selection"
-msgstr "Kanalval"
-
-msgid "Search EPG"
-msgstr "Sök EPG"
-
-msgid "search EPG..."
-msgstr "Sök EPG..."
-
-msgid "search EPG"
-msgstr "Sök EPG"
-
-#, fuzzy
-msgid "Search event in EPG"
-msgstr "Sök EPG"
-
-msgid "EPGSearch Setup"
-msgstr "Inställningar för EPG Sökning"
-
-msgid "Length of History"
-msgstr "Längd på historik"
-
-msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
-msgstr "Hur många poster som skall vara i sökhistoriken som mest. 0 inaktiverar historia helt!"
-
-msgid "Add \"Search\" Button to EPG"
-msgstr "Lägg \"Sök\" knappen till EPG"
-
-msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
-msgstr "Om denna inställning är aktiverad, kommer pluginet att lägga till \"sök\" knapp till den vanliga EPG:n."
-
-msgid "Add \"Search event in EPG\" to event menu"
+msgid " (%d min)"
 msgstr ""
 
-msgid "Adds \"Search event in EPG\" item into the event menu."
+#, python-format
+msgid " (%s%d min)"
 msgstr ""
 
 msgid "Add \"Search event in EPG\" to channel menu"
 msgstr ""
 
-msgid "Adds \"Search event in EPG\" item into the channel selection context menu."
+msgid "Add \"Search event in EPG\" to event menu"
 msgstr ""
 
+msgid "Add \"Search\" Button to EPG"
+msgstr "Lägg \"Sök\" knappen till EPG"
+
+msgid "Add timer"
+msgstr "Lägg till timer"
+
+msgid "Adds \"Search event in EPG\" item into the channel selection context menu (needs restart GUI)"
+msgstr ""
+
+msgid "Adds \"Search event in EPG\" item into the event menu (needs restart GUI)"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "Channel Selection"
+msgstr "Kanalval"
+
+msgid "Choice list"
+msgstr ""
+
+msgid "Choice list EPGSearch"
+msgstr ""
+
+msgid "Choice list RED Button"
+msgstr ""
+
+msgid "Choosing an encoding. \"UTF-8\" to search for EPG cyrillic."
+msgstr ""
+
+#, fuzzy
+msgid "Clear history"
+msgstr "Ingen historik"
+
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "Kunde inte läsa timerlistan för AutoTimer: %s"
+
+msgid "Display name service as in bouquets"
+msgstr ""
+
+msgid "EPG Search"
+msgstr "EPG sökning"
+
+#, fuzzy
+msgid "EPGSearch"
+msgstr "EPG sökning"
+
+msgid "EPGSearch Setup"
+msgstr "Inställningar för EPG Sökning"
+
+#, fuzzy
+msgid "Encoding Search to EPG"
+msgstr "Lägg \"Sök\" knappen till EPG"
+
+msgid "Enter text to search for"
+msgstr "Skriv in text att söka efter"
+
+msgid "Export selected as AutoTimer"
+msgstr "Exportera vald som AutoTimer"
+
+msgid "History"
+msgstr "Historik"
+
+msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
+msgstr "Hur många poster som skall vara i sökhistoriken som mest. 0 inaktiverar historia helt!"
+
+msgid "If 'Search only bouquets' is enabled, show service name as in bouquets for renamed services."
+msgstr ""
+
+msgid "If this setting is enabled, searching EPG in only services in user bouquets."
+msgstr ""
+
+msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
+msgstr "Om denna inställning är aktiverad, kommer pluginet att lägga till \"sök\" knapp till den vanliga EPG:n."
+
+#, fuzzy
+msgid "If this setting is enabled, the plugin adds picons."
+msgstr "Om denna inställning är aktiverad, kommer pluginet att lägga till \"sök\" knapp till den vanliga EPG:n."
+
+msgid "Import from AutoTimer"
+msgstr "Importera från AutoTimer"
+
+msgid "Import from EPG"
+msgstr "Importera från EPG"
+
+msgid "Import from Timer"
+msgstr "Importera från timer"
+
+msgid "Length of History"
+msgstr "Längd på historik"
+
+msgid "List of history is cleared !"
+msgstr ""
+
+msgid "Lookup in TMBD"
+msgstr ""
+
+msgid "New Search"
+msgstr "Ny sökning"
+
+#, fuzzy
+msgid "No history !"
+msgstr "Ingen historik"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Open selected in IMDb"
+msgstr ""
+
+msgid "Partnerbox Entries"
+msgstr ""
+
+msgid "Save search as AutoTimer"
+msgstr "Spara sökning som AutoTimer"
+
+msgid "Search"
+msgstr "Sök"
+
+msgid "Search EPG by title event"
+msgstr ""
+
+#, fuzzy
+msgid "Search event in EPG"
+msgstr "Sök EPG"
+
+msgid "Search for TMDb info"
+msgstr ""
+
+msgid "Search only bouquets"
+msgstr ""
+
+msgid "Search strictness"
+msgstr ""
+
+#, fuzzy
+msgid "Search type"
+msgstr "Sök"
+
+msgid "Search type for filter"
+msgstr ""
+
+msgid "Select a timer to search"
+msgstr "Välj en timer för sökning"
+
+msgid "Select action:"
+msgstr ""
+
+msgid "Select channel"
+msgstr ""
+
+msgid "Select text to search for"
+msgstr "Välj text att söka efter"
+
+msgid "Select type for filter search. Press button P +/- for show/hide filter in description after search."
+msgstr ""
+
+msgid "Select type for search, \"partial match\" for the most extensive search."
+msgstr ""
+
+msgid "Select type: 'Search and Select channel' or 'Search'."
+msgstr ""
+
+msgid "Select whether or not you want to enforce case correctness."
+msgstr ""
+
+msgid "Setup"
+msgstr "Inställning"
+
+msgid "Timers list"
+msgstr ""
+
+msgid "Type blue Button"
+msgstr ""
+
+msgid "Use Picons"
+msgstr ""
+
+msgid "Zap to selected service"
+msgstr ""
+
+msgid "case-insensitive search"
+msgstr ""
+
+msgid "case-sensitive search"
+msgstr ""
+
+msgid "choice (Search and standard)"
+msgstr ""
+
+msgid "exact match"
+msgstr ""
+
+#, fuzzy
+msgid "only Search"
+msgstr "Sök"
+
+msgid "partial match"
+msgstr ""
+
+msgid "search EPG"
+msgstr "Sök EPG"
+
+msgid "search EPG..."
+msgstr "Sök EPG..."
+
+msgid "title starts with"
+msgstr ""

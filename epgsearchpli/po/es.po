@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-22 20:42+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2014-11-22 20:45+0100\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -17,104 +17,227 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Search"
-msgstr "Buscar"
+#, python-format
+msgid " (%d min)"
+msgstr ""
 
-msgid "New Search"
-msgstr "Nueva búsqueda"
+#, python-format
+msgid " (%s%d min)"
+msgstr ""
 
-msgid "History"
-msgstr "Historia"
+msgid "Add \"Search event in EPG\" to channel menu"
+msgstr ""
+
+msgid "Add \"Search event in EPG\" to event menu"
+msgstr ""
+
+msgid "Add \"Search\" Button to EPG"
+msgstr ""
 
 msgid "Add timer"
+msgstr ""
+
+msgid "Adds \"Search event in EPG\" item into the channel selection context menu (needs restart GUI)"
+msgstr ""
+
+msgid "Adds \"Search event in EPG\" item into the event menu (needs restart GUI)"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Channel Selection"
+msgstr "Selección canal"
+
+msgid "Choice list"
+msgstr ""
+
+msgid "Choice list EPGSearch"
+msgstr ""
+
+msgid "Choice list RED Button"
+msgstr ""
+
+msgid "Choosing an encoding. \"UTF-8\" to search for EPG cyrillic."
+msgstr ""
+
+#, fuzzy
+msgid "Clear history"
+msgstr "Historia"
+
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr ""
+
+msgid "Display name service as in bouquets"
 msgstr ""
 
 #, fuzzy
 msgid "EPG Search"
 msgstr "Buscar"
 
-msgid "Enter text to search for"
-msgstr "Introduzca texto a buscar"
-
-msgid "Import from Timer"
-msgstr "Importar desde la Programación"
-
-msgid "Import from EPG"
-msgstr "Importar desde el EPG"
-
 #, fuzzy
-msgid "Import from AutoTimer"
-msgstr "Importar desde la Programación"
-
-msgid "Save search as AutoTimer"
-msgstr ""
-
-msgid "Export selected as AutoTimer"
-msgstr ""
-
-msgid "Setup"
-msgstr ""
-
-#, python-format
-msgid "Could not read AutoTimer timer list: %s"
-msgstr ""
-
-msgid "Select text to search for"
-msgstr "Seleccionar texto a buscar"
-
-#, fuzzy
-msgid "No history"
-msgstr "Historia"
-
-msgid "Cancel"
-msgstr "Cancelar"
-
-msgid "OK"
-msgstr "OK"
-
-msgid "Select a timer to search"
-msgstr "Seleccionar una programación a buscar"
-
-msgid "Channel Selection"
-msgstr "Selección canal"
-
-msgid "Search EPG"
-msgstr "Buscar EPG"
-
-msgid "search EPG..."
-msgstr "Buscar EPG..."
-
-msgid "search EPG"
-msgstr "Buscar EPG"
-
-#, fuzzy
-msgid "Search event in EPG"
-msgstr "Buscar EPG"
+msgid "EPGSearch"
+msgstr "Buscar"
 
 msgid "EPGSearch Setup"
 msgstr ""
 
-msgid "Length of History"
+#, fuzzy
+msgid "Encoding Search to EPG"
+msgstr "Buscar EPG"
+
+msgid "Enter text to search for"
+msgstr "Introduzca texto a buscar"
+
+msgid "Export selected as AutoTimer"
 msgstr ""
+
+msgid "History"
+msgstr "Historia"
 
 msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
 msgstr ""
 
-msgid "Add \"Search\" Button to EPG"
+msgid "If 'Search only bouquets' is enabled, show service name as in bouquets for renamed services."
+msgstr ""
+
+msgid "If this setting is enabled, searching EPG in only services in user bouquets."
 msgstr ""
 
 msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
 msgstr ""
 
-msgid "Add \"Search event in EPG\" to event menu"
+msgid "If this setting is enabled, the plugin adds picons."
 msgstr ""
 
-msgid "Adds \"Search event in EPG\" item into the event menu."
+#, fuzzy
+msgid "Import from AutoTimer"
+msgstr "Importar desde la Programación"
+
+msgid "Import from EPG"
+msgstr "Importar desde el EPG"
+
+msgid "Import from Timer"
+msgstr "Importar desde la Programación"
+
+msgid "Length of History"
 msgstr ""
 
-msgid "Add \"Search event in EPG\" to channel menu"
+msgid "List of history is cleared !"
 msgstr ""
 
-msgid "Adds \"Search event in EPG\" item into the channel selection context menu."
+msgid "Lookup in TMBD"
 msgstr ""
 
+msgid "New Search"
+msgstr "Nueva búsqueda"
+
+#, fuzzy
+msgid "No history !"
+msgstr "Historia"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Open selected in IMDb"
+msgstr ""
+
+msgid "Partnerbox Entries"
+msgstr ""
+
+msgid "Save search as AutoTimer"
+msgstr ""
+
+msgid "Search"
+msgstr "Buscar"
+
+msgid "Search EPG by title event"
+msgstr ""
+
+#, fuzzy
+msgid "Search event in EPG"
+msgstr "Buscar EPG"
+
+msgid "Search for TMDb info"
+msgstr ""
+
+msgid "Search only bouquets"
+msgstr ""
+
+msgid "Search strictness"
+msgstr ""
+
+#, fuzzy
+msgid "Search type"
+msgstr "Buscar"
+
+msgid "Search type for filter"
+msgstr ""
+
+msgid "Select a timer to search"
+msgstr "Seleccionar una programación a buscar"
+
+msgid "Select action:"
+msgstr ""
+
+msgid "Select channel"
+msgstr ""
+
+msgid "Select text to search for"
+msgstr "Seleccionar texto a buscar"
+
+msgid "Select type for filter search. Press button P +/- for show/hide filter in description after search."
+msgstr ""
+
+msgid "Select type for search, \"partial match\" for the most extensive search."
+msgstr ""
+
+msgid "Select type: 'Search and Select channel' or 'Search'."
+msgstr ""
+
+msgid "Select whether or not you want to enforce case correctness."
+msgstr ""
+
+msgid "Setup"
+msgstr ""
+
+msgid "Timers list"
+msgstr ""
+
+msgid "Type blue Button"
+msgstr ""
+
+msgid "Use Picons"
+msgstr ""
+
+msgid "Zap to selected service"
+msgstr ""
+
+msgid "case-insensitive search"
+msgstr ""
+
+msgid "case-sensitive search"
+msgstr ""
+
+msgid "choice (Search and standard)"
+msgstr ""
+
+msgid "exact match"
+msgstr ""
+
+#, fuzzy
+msgid "only Search"
+msgstr "Buscar"
+
+msgid "partial match"
+msgstr ""
+
+msgid "search EPG"
+msgstr "Buscar EPG"
+
+msgid "search EPG..."
+msgstr "Buscar EPG..."
+
+msgid "title starts with"
+msgstr ""

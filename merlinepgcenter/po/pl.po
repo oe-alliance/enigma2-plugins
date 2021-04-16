@@ -1,10 +1,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MerlinEPGCenter\n"
-"POT-Creation-Date: 2011-12-18 21:20+CET\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: kosmacz <anteneczka@gmail.com>\n"
 "Language-Team: Shaderman <shaderman@dreambox-tools.info>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,27 +17,6 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<nieznany>"
 
-msgid ""
-"A finished record timer wants to set your\n"
-"Dreambox to standby. Do that now?"
-msgstr ""
-"Timer zakończył nagranie i chce przełączyć\n"
-"Dreamboxa do trybu czuwania. Zrobić to ? "
-
-msgid ""
-"A finished record timer wants to shut down\n"
-"your Dreambox. Shutdown now?"
-msgstr ""
-"Timer zakończył nagranie i chce wyłączyć\n"
-"Dreamboxa. Zrobić to ?"
-
-msgid ""
-"A timer failed to record!\n"
-"Disable TV and try again?\n"
-msgstr ""
-"Nagrywanie z Timera nie powiodło się!\n"
-"Wyłączyć TV i spróbować ponownie?\n"
-
 msgid "Add"
 msgstr "Dodaj"
 
@@ -44,6 +25,9 @@ msgstr "Dodaj Timer"
 
 msgid "Adjust font size:"
 msgstr "Dopasuj rozmiar czcionki:"
+
+msgid "Adjust service name column width:"
+msgstr ""
 
 msgid "Amount of recordings left:"
 msgstr "Pozostała ilość nagrań:"
@@ -84,9 +68,6 @@ msgstr "Ogólne"
 msgid "IMDb"
 msgstr "IMDb"
 
-msgid "In order to record a timer, the TV was switched to the recording service!\n"
-msgstr "W celu nagrania z timera, TV został przełączony do usługi nagrywania!\n"
-
 msgid "Included days:"
 msgstr "Dołączone dni:"
 
@@ -110,6 +91,9 @@ msgstr "Położenie:"
 
 msgid "Match title:"
 msgstr "Dopasuj tytuł:"
+
+msgid "Merlin EPG Center"
+msgstr ""
 
 msgid "Monday"
 msgstr "Poniedziałek"
@@ -203,9 +187,6 @@ msgstr "Nadawca:"
 msgid "Set search term"
 msgstr "Ustaw szukany termin"
 
-msgid "Show MiniTV:"
-msgstr "Pokaż MiniTV:"
-
 msgid "Show begin/remain times:"
 msgstr "Pokaż rozpoczęty i pozostały czas:"
 
@@ -272,9 +253,6 @@ msgstr "Jutro"
 msgid "Tuesday"
 msgstr "Wtorek"
 
-msgid "Unknown date"
-msgstr "Nieznana data"
-
 msgid "Upcoming"
 msgstr "Nadchodzące"
 
@@ -296,23 +274,35 @@ msgstr "wyłączony"
 msgid "done!"
 msgstr "zrobione!"
 
-msgid "four parts"
-msgstr "z czterech części"
+msgid "list and event info: four parts"
+msgstr ""
 
-msgid "gradient"
-msgstr "gradacja"
+msgid "list and event info: gradient"
+msgstr ""
 
-msgid "percent (text)"
-msgstr "procenty (tekst)"
+msgid "list and event info: percent (text)"
+msgstr ""
+
+msgid "list and event info: simple"
+msgstr ""
+
+msgid "list: off, event info: four parts"
+msgstr ""
+
+msgid "list: off, event info: gradient"
+msgstr ""
+
+msgid "list: off, event info: percent (text)"
+msgstr ""
+
+msgid "list: off, event info: simple"
+msgstr ""
 
 msgid "recording..."
 msgstr "nagrywanie..."
 
 msgid "return"
 msgstr "powrót"
-
-msgid "simple"
-msgstr "prosty"
 
 msgid "single line style"
 msgstr "pojedyńczy styl lini"
@@ -325,4 +315,3 @@ msgstr "z krótkim opisem"
 
 msgid "zapped"
 msgstr "Przełączony (ZAP)"
-

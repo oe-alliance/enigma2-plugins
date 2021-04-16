@@ -8,720 +8,548 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-27 15:42+0300\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: PartnerboxEPGList.py:102 PartnerboxEPGList.py:225
+#, python-format
+msgid "%02d.%02d - %02d.%02d"
+msgstr ""
+
+msgid "%a"
+msgstr ""
+
 #, python-format
 msgid "%d min"
 msgstr ""
 
-#: RemoteTimerEntry.py:150 RemoteTimerEntry.py:465
 msgid "%d.%B %Y"
 msgstr ""
 
-#: PartnerboxEPGList.py:108 PartnerboxEPGList.py:237 plugin.py:1767
+msgid "%e/%m, %-H:%M"
+msgstr ""
+
 #, python-format
 msgid "%s%d min"
 msgstr ""
 
-#: plugin.py:1539 plugin.py:1544 plugin.py:1607 plugin.py:1612
 msgid "(ZAP)"
 msgstr ""
 
-#: plugin.py:1565 plugin.py:1635 plugin.py:1637
 msgid "<unknown>"
 msgstr ""
 
-#: plugin.py:2259
 msgid "Abort"
 msgstr ""
 
-#: plugin.py:986
 msgid "Activate Picture in Picture"
 msgstr ""
 
-#: PartnerboxSetup.py:185
 msgid "Add"
 msgstr ""
 
-#: PartnerboxEPGSelection.py:244
 msgid "Add internal timer"
 msgstr ""
 
-#: plugin.py:1226 plugin.py:1287
 msgid "Add timer"
 msgstr ""
 
-#: RemoteTimerEntry.py:196 RemoteTimerEntry.py:198 RemoteTimerEntry.py:518
-#: RemoteTimerEntry.py:520
 msgid "After event"
 msgstr ""
 
-#: plugin.py:1651
 msgid "Alternative"
 msgstr ""
 
-#: plugin.py:2148
 msgid "Alternative services are not supported!"
 msgstr ""
 
-#: plugin.py:2255
 msgid "Apply"
 msgstr ""
 
-#: PartnerboxEPGSelection.py:263 plugin.py:413 plugin.py:1439
 msgid "Attention, this is repeated timer!\n"
 msgstr ""
 
-#: plugin.py:612
 msgid "Bouquet List"
 msgstr ""
 
-#: PartnerboxSetup.py:84 PartnerboxSetup.py:359 RemoteTimerEntry.py:89
 msgid "Cancel"
 msgstr ""
 
-#: plugin.py:2132
 msgid "Change pin code"
 msgstr ""
 
-#: RemoteTimerEntry.py:190 RemoteTimerEntry.py:512
 msgid "Channel"
 msgstr ""
 
-#: PartnerboxEPGSelection.py:139
 msgid "Choice list Partnerbox"
 msgstr ""
 
-#: plugin.py:988
 msgid "Choose action:"
 msgstr ""
 
-#: plugin.py:493
 msgid "Choose bouquet"
 msgstr ""
 
-#: plugin.py:323
 msgid "Clean up"
 msgstr ""
 
-#: plugin.py:396
 msgid "Cleaning up finished timer entries..."
 msgstr ""
 
-#: plugin.py:1658
 msgid "DVB-C"
 msgstr ""
 
-#: plugin.py:1656
 msgid "DVB-T"
 msgstr ""
 
-#: RemoteTimerEntry.py:147 RemoteTimerEntry.py:462
 msgid "DVR"
 msgstr ""
 
-#: RemoteTimerEntry.py:177 RemoteTimerEntry.py:499
 msgid "Date"
 msgstr ""
 
-#: PartnerboxSetup.py:259
 msgid "Deep Standby"
 msgstr ""
 
-#: PartnerboxSetup.py:188 PartnerboxSetup.py:361
 msgid "Delete"
 msgstr ""
 
-#: PartnerboxEPGSelection.py:261 plugin.py:317
 msgid "Delete timer"
 msgstr ""
 
-#: RemoteTimerEntry.py:174 RemoteTimerEntry.py:496
 msgid "Description"
 msgstr ""
 
-#: plugin.py:983
 msgid "Disable Picture in Picture"
 msgstr ""
 
-#: PartnerboxEPGSelection.py:226
 #, python-format
 msgid ""
 "Do you really want to delete the remote timer \n"
 "%s ?"
 msgstr ""
 
-#: PartnerboxEPGSelection.py:267 plugin.py:417 plugin.py:1440
 #, python-format
 msgid ""
 "Do you really want to delete the timer \n"
 "%s ?"
 msgstr ""
 
-#: plugin.py:322 plugin.py:332 plugin.py:618 plugin.py:781 plugin.py:1222
 msgid "EPG Selection"
 msgstr ""
 
-#: PartnerboxSetup.py:186
 msgid "Edit"
 msgstr ""
 
-#: PartnerboxEPGSelection.py:242
 msgid "Edit internal timer"
 msgstr ""
 
-#: PartnerboxEPGSelection.py:245
 msgid "Edit remote timer"
 msgstr ""
 
-#: PartnerboxSetup.py:115
 msgid "Enable Partnerbox-Function in Channel Selector"
 msgstr ""
 
-#: PartnerboxSetup.py:110
 msgid "Enable Partnerbox-Function in EPGList"
 msgstr ""
 
-#: PartnerboxSetup.py:106
 msgid "Enable Partnerbox-Function in TimerEvent"
 msgstr ""
 
-#: PartnerboxSetup.py:112
 msgid "Enable Red Button-Function in single/multi EPG"
 msgstr ""
 
-#: RemoteTimerEntry.py:526
 msgid "Enable VPS"
 msgstr ""
 
-#: PartnerboxSetup.py:109
 msgid "Enable VPS-Function in TimerEvent"
 msgstr ""
 
-#: PartnerboxSetup.py:108
 msgid "Enable first Partnerbox-entry in Timeredit as default"
 msgstr ""
 
-#: RemoteTimerEntry.py:183 RemoteTimerEntry.py:188 RemoteTimerEntry.py:505
-#: RemoteTimerEntry.py:510
 msgid "EndTime"
 msgstr ""
 
-#: PartnerboxSetup.py:41
 msgid "Enigma 1"
 msgstr ""
 
-#: PartnerboxSetup.py:41
 msgid "Enigma 2"
 msgstr ""
 
-#: PartnerboxSetup.py:184 PartnerboxSetup.py:374
 msgid "Enigma Type"
 msgstr ""
 
-#: plugin.py:2132
 msgid "Enter the service pin"
 msgstr ""
 
-#: plugin.py:1635
 msgid "Error: "
 msgstr ""
 
-#: plugin.py:1627
 msgid "Error: No space left"
 msgstr ""
 
-#: plugin.py:1633
 msgid "Error: Outdated"
 msgstr ""
 
-#: plugin.py:1629
 msgid "Error: User aborted"
 msgstr ""
 
-#: plugin.py:1631
 msgid "Error: Zap failed"
 msgstr ""
 
-#: plugin.py:2000
 msgid "Eventview"
 msgstr ""
 
-#: plugin.py:1522 plugin.py:1594 plugin.py:1785
 msgid "Fri"
 msgstr ""
 
-#: RemoteTimerEntry.py:163 RemoteTimerEntry.py:476
 msgid "Friday"
 msgstr ""
 
-#: plugin.py:623
 msgid "Getting Channel Information..."
 msgstr ""
 
-#: plugin.py:1230
 msgid "Getting EPG Information..."
 msgstr ""
 
-#: plugin.py:1480
 msgid "Getting EPG data..."
 msgstr ""
 
-#: plugin.py:495
 msgid "Getting Partnerbox Bouquet Information..."
 msgstr ""
 
-#: plugin.py:285
 msgid "Getting Partnerbox Information..."
 msgstr ""
 
-#: plugin.py:1474
 msgid "Getting timerlist data..."
 msgstr ""
 
-#: plugin.py:719
 msgid "Give Enigma time to fill epg cache..."
 msgstr ""
 
-#: PartnerboxSetup.py:182 PartnerboxSetup.py:372
 msgid "IP"
 msgstr ""
 
-#: plugin.py:621 plugin.py:782 plugin.py:1229 plugin.py:1282
 msgid "Info"
 msgstr ""
 
-#: plugin.py:2151
 msgid "Internet services are not supported!"
 msgstr ""
 
-#: RemoteTimerEntry.py:193 RemoteTimerEntry.py:515
 msgid "Location"
 msgstr ""
 
-#: plugin.py:153 plugin.py:158
 msgid "Manage timer for other dreamboxes in network"
 msgstr ""
 
-#: plugin.py:989
 msgid "Menu PiP"
 msgstr ""
 
-#: plugin.py:1522 plugin.py:1594 plugin.py:1785
 msgid "Mon"
 msgstr ""
 
-#: RemoteTimerEntry.py:163 RemoteTimerEntry.py:476
 msgid "Monday"
 msgstr ""
 
-#: plugin.py:981
 msgid "Move Picture in Picture"
 msgstr ""
 
-#: RemoteTimerEntry.py:147 RemoteTimerEntry.py:462
 msgid "NGRAB"
 msgstr ""
 
-#: PartnerboxSetup.py:181 PartnerboxSetup.py:371 RemoteTimerEntry.py:173
-#: RemoteTimerEntry.py:495
 msgid "Name"
 msgstr ""
 
-#: RemoteTimerEntry.py:320 RemoteTimerEntry.py:488
 msgid "No"
 msgstr ""
 
-#: PartnerboxSetup.py:85 PartnerboxSetup.py:360 RemoteTimerEntry.py:88
 msgid "OK"
 msgstr ""
 
-#: plugin.py:156
 msgid "Partnerbox"
 msgstr ""
 
-#: plugin.py:909
 msgid "Partnerbox - RemotePlayer"
 msgstr ""
 
-#: RemoteTimerEntry.py:599 RemoteTimerEntry.py:611
 #, python-format
 msgid ""
 "Partnerbox Answer: \n"
 "%s"
 msgstr ""
 
-#: PartnerboxEPGSelection.py:134 PartnerboxSetup.py:86
 msgid "Partnerbox Entries"
 msgstr ""
 
-#: PartnerboxEPGSelection.py:135
 msgid "Partnerbox RemoteTimer"
 msgstr ""
 
-#: PartnerboxEPGSelection.py:136 PartnerboxSetup.py:82
 msgid "Partnerbox Setup"
 msgstr ""
 
-#: PartnerboxSetup.py:349
 msgid "Partnerbox: Edit Entry"
 msgstr ""
 
-#: PartnerboxSetup.py:179
 msgid "Partnerbox: List of Entries"
 msgstr ""
 
-#: plugin.py:160
 msgid "Partnerbox: RemoteTV Player"
 msgstr ""
 
-#: plugin.py:153 plugin.py:155 plugin.py:158
 msgid "Partnerbox: RemoteTimer"
 msgstr ""
 
-#: PartnerboxSetup.py:375
 msgid "Password"
 msgstr ""
 
-#: PartnerboxSetup.py:183 PartnerboxSetup.py:373
 msgid "Port"
 msgstr ""
 
-#: PartnerboxSetup.py:187
 msgid "Power"
 msgstr ""
 
-#: plugin.py:324
 msgid "Press OK to edit timer..."
 msgstr ""
 
-#: PartnerboxSetup.py:233 PartnerboxSetup.py:400
 msgid "Really delete this Partnerbox Entry?"
 msgstr ""
 
-#: plugin.py:184
 msgid "Remote Player"
 msgstr ""
 
-#: RemoteTimerEntry.py:361
 msgid "Remote Timer"
 msgstr ""
 
-#: plugin.py:299
 msgid "RemoteTimer Timerlist"
 msgstr ""
 
-#: plugin.py:1291
 msgid "Remove timer"
 msgstr ""
 
-#: plugin.py:360
 msgid "Repeated Timer are not supported!"
 msgstr ""
 
-#: PartnerboxSetup.py:256
 msgid "Restart"
 msgstr ""
 
-#: PartnerboxSetup.py:255
 msgid "Restart enigma"
 msgstr ""
 
-#: plugin.py:1522 plugin.py:1594 plugin.py:1785
 msgid "Sat"
 msgstr ""
 
-#: RemoteTimerEntry.py:163 RemoteTimerEntry.py:476
 msgid "Saturday"
 msgstr ""
 
-#: PartnerboxEPGSelection.py:272
 #, python-format
 msgid "Select action for remote timer '%s':"
 msgstr ""
 
-#: PartnerboxEPGSelection.py:253
 #, python-format
 msgid "Select action for timer '%s':"
 msgstr ""
 
-#: PartnerboxEPGSelection.py:138
 msgid "Select action:"
 msgstr ""
 
-#: PartnerboxSetup.py:263
 msgid "Select operation for partnerbox"
 msgstr ""
 
-#: PartnerboxSetup.py:376
 msgid "Servicelists/EPG"
 msgstr ""
 
-#: PartnerboxSetup.py:104
 msgid "Show 'RemoteTV Player' in E-Menu"
 msgstr ""
 
-#: PartnerboxSetup.py:103
 msgid "Show 'RemoteTimer' in E-Menu"
 msgstr ""
 
-#: PartnerboxSetup.py:102
 msgid "Show 'RemoteTimer' in Event View context menu"
 msgstr ""
 
-#: PartnerboxSetup.py:100
 msgid "Show 'RemoteTimer' in Eventinfo menu"
 msgstr ""
 
-#: PartnerboxSetup.py:105
 msgid "Show 'Stream current Service' in E-Menu"
 msgstr ""
 
-#: PartnerboxSetup.py:114
 msgid "Show all icon for event in EPGList"
 msgstr ""
 
-#: PartnerboxSetup.py:113
 msgid "Show duration time for event"
 msgstr ""
 
-#: PartnerboxSetup.py:261
 msgid "Shutdown"
 msgstr ""
 
-#: PartnerboxEPGSelection.py:133
 msgid "Standard Zap"
 msgstr ""
 
-#: PartnerboxSetup.py:254
 msgid "Standby"
 msgstr ""
 
-#: RemoteTimerEntry.py:179 RemoteTimerEntry.py:501
 msgid "StartTime"
 msgstr ""
 
-#: plugin.py:199
 #, python-format
 msgid "Starting Remote Player (IP = %s)"
 msgstr ""
 
-#: plugin.py:1653
 msgid "Stream"
 msgstr ""
 
-#: plugin.py:160
 msgid "Stream TV from your Partnerbox"
 msgstr ""
 
-#: plugin.py:162
 msgid "Stream current Service from Partnerbox"
 msgstr ""
 
-#: plugin.py:162
 msgid "Stream current service from partnerbox"
 msgstr ""
 
-#: plugin.py:1522 plugin.py:1594 plugin.py:1785
 msgid "Sun"
 msgstr ""
 
-#: RemoteTimerEntry.py:163 RemoteTimerEntry.py:476
 msgid "Sunday"
 msgstr ""
 
-#: plugin.py:2138
 msgid "The pin code you entered is wrong."
 msgstr ""
 
-#: plugin.py:1522 plugin.py:1594 plugin.py:1785
 msgid "Thu"
 msgstr ""
 
-#: RemoteTimerEntry.py:163 RemoteTimerEntry.py:476
 msgid "Thursday"
 msgstr ""
 
-#: PartnerboxEPGSelection.py:261
 msgid "Timer Overview"
 msgstr ""
 
-#: RemoteTimerEntry.py:175 RemoteTimerEntry.py:497
 msgid "Timer Type"
 msgstr ""
 
-#: RemoteTimerEntry.py:235 RemoteTimerEntry.py:571
 msgid "Timer can not be added...no locations on partnerbox available."
 msgstr ""
 
-#: RemoteTimerEntry.py:83
 msgid "Timer entry"
 msgstr ""
 
-#: plugin.py:1465
 msgid "Timer event deleted successfully."
 msgstr ""
 
-#: RemoteTimerEntry.py:610
 msgid "Timer event was created successfully."
 msgstr ""
 
-#: PartnerboxEPGSelection.py:342
 msgid "Timer menu"
 msgstr ""
 
-#: PartnerboxSetup.py:258
 msgid "Toggle Standby"
 msgstr ""
 
-#: plugin.py:318
 msgid "Toggle status (on/off)"
 msgstr ""
 
-#: plugin.py:1522 plugin.py:1594 plugin.py:1785
 msgid "Tue"
 msgstr ""
 
-#: RemoteTimerEntry.py:163 RemoteTimerEntry.py:476
 msgid "Tuesday"
 msgstr ""
 
-#: PartnerboxSetup.py:253
 msgid "Wakeup"
 msgstr ""
 
-#: plugin.py:1522 plugin.py:1594 plugin.py:1785
 msgid "Wed"
 msgstr ""
 
-#: RemoteTimerEntry.py:163 RemoteTimerEntry.py:476
 msgid "Wednesday"
 msgstr ""
 
-#: RemoteTimerEntry.py:488
 msgid "Yes"
 msgstr ""
 
-#: RemoteTimerEntry.py:488
 msgid "Yes (safe mode)"
 msgstr ""
 
-#: plugin.py:2129
-msgid ""
-"You can not add services or bouquets from Enigma1-receivers into the "
-"channellist..."
+msgid "You can not add services or bouquets from Enigma1-receivers into the channellist..."
 msgstr ""
 
-#: PartnerboxEPGSelection.py:194 plugin.py:615
 msgid "Zap"
 msgstr ""
 
-#: plugin.py:977
 msgid "Zap focus to Picture in Picture"
 msgstr ""
 
-#: plugin.py:975
 msgid "Zap focus to main screen"
 msgstr ""
 
-#: PartnerboxSetup.py:377
 msgid "Zap to service when streaming"
 msgstr ""
 
-#: PartnerboxEPGSelection.py:112 PartnerboxEPGSelection.py:188
-#: PartnerboxEPGSelection.py:192
 msgid "Zap/"
 msgstr ""
 
-#: plugin.py:701
 msgid "Zapping to "
 msgstr ""
 
-#: plugin.py:1552
 msgid "about to start"
 msgstr ""
 
-#: plugin.py:2113
 msgid "add Partnerbox bouquet"
 msgstr ""
 
-#: plugin.py:2106
 msgid "add Partnerbox service"
 msgstr ""
 
-#: RemoteTimerEntry.py:144 RemoteTimerEntry.py:458
 msgid "auto"
 msgstr ""
 
-#: plugin.py:1569
 msgid "disabled"
 msgstr ""
 
-#: RemoteTimerEntry.py:144 RemoteTimerEntry.py:148 RemoteTimerEntry.py:458
-#: RemoteTimerEntry.py:463
 msgid "do nothing"
 msgstr ""
 
-#: plugin.py:1562 plugin.py:1624
 msgid "done!"
 msgstr ""
 
-#: RemoteTimerEntry.py:144 RemoteTimerEntry.py:148 RemoteTimerEntry.py:458
-#: RemoteTimerEntry.py:463
 msgid "go to deep standby"
 msgstr ""
 
-#: RemoteTimerEntry.py:144 RemoteTimerEntry.py:148 RemoteTimerEntry.py:458
-#: RemoteTimerEntry.py:463
 msgid "go to standby"
 msgstr ""
 
-#: plugin.py:914 plugin.py:1146 plugin.py:1541 plugin.py:1546 plugin.py:1609
-#: plugin.py:1612 plugin.py:1614 plugin.py:1769 plugin.py:2059
 msgid "mins"
 msgstr ""
 
-#: RemoteTimerEntry.py:143 RemoteTimerEntry.py:457
 msgid "record"
 msgstr ""
 
-#: plugin.py:1559 plugin.py:1622
 msgid "recording..."
 msgstr ""
 
-#: plugin.py:156
 msgid "setup for partnerbox"
 msgstr ""
 
-#: plugin.py:2035
 msgid "unknown service"
 msgstr ""
 
-#: PartnerboxSetup.py:43
 msgid "use external"
 msgstr ""
 
-#: PartnerboxSetup.py:43
 msgid "use internal"
 msgstr ""
 
-#: plugin.py:1549 plugin.py:1617
 msgid "waiting"
 msgstr ""
 
-#: RemoteTimerEntry.py:143 RemoteTimerEntry.py:147 RemoteTimerEntry.py:457
-#: RemoteTimerEntry.py:462
 msgid "zap"
 msgstr ""
 
-#: plugin.py:1556 plugin.py:1620
 msgid "zapped"
 msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeatherPlugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-14 23:32+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2015-11-14 23:42+0100\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: Björn Freise <mcfreis@gmx.net>\n"
@@ -20,19 +20,41 @@ msgstr ""
 "X-Generator: Poedit 1.7.4\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: plugin.py:54 plugin.py:90
-msgid "Weather Plugin"
-msgstr "Wetterinformationen"
+msgid "Add"
+msgstr "Hinzufügen"
 
-#: plugin.py:54
-msgid "Show Weather Forecast"
-msgstr "Zeigt die Wettervorhersage"
+msgid "Back"
+msgstr "Zurück"
 
-#: plugin.py:141
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "City"
+msgstr "Ort"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#, python-format
+msgid "Feels like %s"
+msgstr "Gefühlte Temp. %s"
+
 msgid "Getting weather information..."
 msgstr "Laden der Wetterinformationen..."
 
-#: plugin.py:148
+#, python-format
+msgid "Humidity: %s %%"
+msgstr "Luftfeuchtigkeit: %s %%"
+
+msgid "Location code"
+msgstr "Location-Code"
+
+msgid "MSN location search result"
+msgstr "Suchresultat MSN Location-Code"
+
 msgid ""
 "No locations defined...\n"
 "Press 'Menu' to do that."
@@ -40,102 +62,49 @@ msgstr ""
 "Keine Einträge vorhanden.\n"
 "Bitte 'Menu' drücken, um einen Eintrag anzulegen."
 
-#: plugin.py:209
-#, python-format
-msgid "Humidity: %s %%"
-msgstr "Luftfeuchtigkeit: %s %%"
+msgid "OK"
+msgstr "OK"
 
-#: plugin.py:212
-#, python-format
-msgid "Observation time: %s"
-msgstr "Stand: %s"
-
-#: plugin.py:213
 #, python-format
 msgid "Observation point: %s"
 msgstr "Messstation: %s"
 
-#: plugin.py:214
 #, python-format
-msgid "Feels like %s"
-msgstr "Gefühlte Temp. %s"
+msgid "Observation time: %s"
+msgstr "Stand: %s"
 
-#: setup.py:43
-msgid "metric system"
-msgstr "Metrisches System"
-
-#: setup.py:43
-msgid "imperial system"
-msgstr "Englisches Maßsystem"
-
-#: setup.py:74
-msgid "WeatherPlugin: List of Entries"
-msgstr "WeatherPlugin: Liste der Einträge"
-
-#: setup.py:75 setup.py:198
-msgid "City"
-msgstr "Ort"
-
-#: setup.py:76 setup.py:200
-msgid "System"
-msgstr "System"
-
-#: setup.py:77 setup.py:294
-msgid "Back"
-msgstr "Zurück"
-
-#: setup.py:78
-msgid "Add"
-msgstr "Hinzufügen"
-
-#: setup.py:79
-msgid "Edit"
-msgstr "Bearbeiten"
-
-#: setup.py:80 setup.py:187
-msgid "Delete"
-msgstr "Löschen"
-
-#: setup.py:119 setup.py:241
-msgid "Really delete this WeatherPlugin Entry?"
-msgstr "Soll der Eintrag wirklich gelöscht werden?"
-
-#: setup.py:175
-msgid "WeatherPlugin: Edit Entry"
-msgstr "Wetterinformationen: Eintrag bearbeiten"
-
-#: setup.py:185
-msgid "Cancel"
-msgstr "Abbrechen"
-
-#: setup.py:186 setup.py:295
-msgid "OK"
-msgstr "OK"
-
-#: setup.py:188
-msgid "Search Code"
-msgstr "Code suchen"
-
-#: setup.py:199
-msgid "Location code"
-msgstr "Location-Code"
-
-#: setup.py:215
-msgid ""
-"You need to enter a valid city name before you can search for the location "
-"code."
-msgstr ""
-"Es muss ein Stadtnamen eingeben werden bevor man nach dem Location-Code "
-"suchen kann."
-
-#: setup.py:228
 msgid "Please enter a valid city name."
 msgstr "Bitte einen gültigen Stadtnamen eingeben."
 
-#: setup.py:230
 msgid "Please enter a valid location code for the city."
 msgstr "Bitte einen gültigen Location-Code für die Stadt eingeben."
 
-#: setup.py:293
-msgid "MSN location search result"
-msgstr "Suchresultat MSN Location-Code"
+msgid "Really delete this WeatherPlugin Entry?"
+msgstr "Soll der Eintrag wirklich gelöscht werden?"
+
+msgid "Search Code"
+msgstr "Code suchen"
+
+msgid "Show Weather Forecast"
+msgstr "Zeigt die Wettervorhersage"
+
+msgid "System"
+msgstr "System"
+
+msgid "Weather Plugin"
+msgstr "Wetterinformationen"
+
+msgid "WeatherPlugin: Edit Entry"
+msgstr "Wetterinformationen: Eintrag bearbeiten"
+
+msgid "WeatherPlugin: List of Entries"
+msgstr "WeatherPlugin: Liste der Einträge"
+
+msgid "You need to enter a valid city name before you can search for the location code."
+msgstr "Es muss ein Stadtnamen eingeben werden bevor man nach dem Location-Code suchen kann."
+
+msgid "imperial system"
+msgstr "Englisches Maßsystem"
+
+msgid "metric system"
+msgstr "Metrisches System"

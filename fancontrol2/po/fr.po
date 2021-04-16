@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-11 12:35+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2011-07-13 18:30+0100\n"
 "Last-Translator: joergm6 <joergm6@online.de>\n"
 "Language-Team: french\n"
@@ -15,6 +15,7 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Country: FRENCH\n"
 
+#, python-format
 msgid "%s   %02d C"
 msgstr "%s   %02d C"
 
@@ -27,12 +28,16 @@ msgstr "3Pin"
 msgid "4Pin"
 msgstr "4Pin"
 
+msgid "4Pin (PID)"
+msgstr ""
+
 msgid "Action in case of Fan failure"
 msgstr "Action en cas de défaillance du ventilateur"
 
 msgid "Auto-Delete Data older than (Days)"
 msgstr "Effacement auto données plus vieilles que (en jours)"
 
+#, python-format
 msgid "Auto-Delete older %s Days"
 msgstr "Effacement-Auto plus vieux que %s jour"
 
@@ -57,9 +62,11 @@ msgstr "Choisir chemin"
 msgid "Control disabled"
 msgstr "Contrôle désactivé"
 
+#, python-format
 msgid "Current rpm  %4d"
 msgstr "Rpm actuelles  %4d"
 
+#, python-format
 msgid "Current value: %s"
 msgstr "Valeur actuelle: %s"
 
@@ -69,11 +76,16 @@ msgstr "Effacer"
 msgid "Delete older 48h"
 msgstr "Effacer plus vieux que 48h"
 
+#, python-format
 msgid "Disk free : %d MByte"
 msgstr "Disque libre : %d MByte"
 
 msgid "Download"
 msgstr "T&eacute;l&eacute;chargement"
+
+#, fuzzy
+msgid "Enable Console Logging"
+msgstr "Activer jounal événements"
 
 msgid "Enable Data Logging"
 msgstr "Activer journal données"
@@ -81,11 +93,23 @@ msgstr "Activer journal données"
 msgid "Enable Event Logging"
 msgstr "Activer jounal événements"
 
+msgid "Enable Thread use"
+msgstr ""
+
 msgid "End temperature C"
 msgstr "Température finale en C"
 
 msgid "Extended Control Range"
 msgstr "Echelle contrôle étendu"
+
+msgid "Fan Control"
+msgstr ""
+
+msgid "Fan Control 2"
+msgstr ""
+
+msgid "Fan Control 2 - Monitor"
+msgstr ""
 
 msgid "Fan is not working!"
 msgstr "Le ventilateur ne fonctionne pas!"
@@ -99,9 +123,11 @@ msgstr "Type ventilateur"
 msgid "FanControl2 emergency, Box Shutdown now?"
 msgstr "Alerte FanControl2, éteindre boîte maintenant ?"
 
+#, python-format
 msgid "File %s does not exists"
 msgstr "Le fichier %s n'existe pas"
 
+#, python-format
 msgid "Filesize : %d %sByte"
 msgstr "Taille fichier : %d %sByte"
 
@@ -127,39 +153,54 @@ msgstr "Voltage initial"
 msgid "Logging path"
 msgstr "Chemin des journaux"
 
+#, python-format
 msgid "Logging-Path: %s"
 msgstr "Chemin des journaux: %s"
 
+#, python-format
 msgid "Max Fan %d rpm at PWM=255 (%s)"
 msgstr "Ventilateur max %d rpm à PWM=255 (%s)"
 
+#, python-format
 msgid "Max Fan %d rpm at PWM=255 and VLT=255 (%s)"
 msgstr "Ventilateur max %d rpm à PWM=255 et VLT=255 (%s)"
 
+#, python-format
 msgid "Max Fan %d rpm at VLT=255 (%s)"
 msgstr "Ventilateur max %d rpm à VLT=255 (%s)"
 
+#, python-format
 msgid "Min Fan Start %d rpm at PWM=%d"
 msgstr "Démarrage ventilateur min %d rpm à PWM=%d"
 
+#, python-format
 msgid "Min Fan Start %d rpm at VLT=%d"
 msgstr "Démarrage ventilateur min %d rpm à VLT=%d"
 
+#, python-format
 msgid "Min Fan Start %d rpm at VLT=%d and PWM=0"
 msgstr "Démarrage ventilateur min %d rpm à VLT=%d et PWM=0"
 
+#, python-format
 msgid "Min Fan Stop %d rpm at PWM=%d (%s)"
 msgstr "Stop ventilateur min %d rpm à PWM=%d (%s)"
 
+#, python-format
 msgid "Min Fan Stop %d rpm at VLT=%d (%s)"
 msgstr "Stop ventilateur min %d rpm à VLT=%d (%s)"
 
+#, python-format
 msgid "Min Fan Stop %d rpm at VLT=%d and PWM=0 (%s)"
 msgstr "Stop ventilateur min %d rpm à VLT=%d et PWM=0 (%s)"
 
 msgid "Number of WebIF-Log-Entries"
 msgstr "Nombre de WebIF-Log-entries"
 
+#, python-format
+msgid "PID Ctl Err %03.2f %%"
+msgstr ""
+
+#, python-format
 msgid "PWM  %03d"
 msgstr "PWM  %03d"
 
@@ -171,6 +212,9 @@ msgstr "Sauver"
 
 msgid "Sensors"
 msgstr "Capteurs"
+
+msgid "Show Fan Speed as"
+msgstr ""
 
 msgid "Show Monitor in Extension-Menu"
 msgstr "Montrer Moniteur dans le menu-extension"
@@ -184,18 +228,21 @@ msgstr "Vitesse"
 msgid "Static temp C"
 msgstr "Température statique C"
 
+#, python-format
 msgid "Target rpm  %4d"
 msgstr "Rpm cible  %4d"
 
 msgid "Temperature"
 msgstr "Temp&eacute;rature"
 
+#, python-format
 msgid "Temperature C  %4.1f"
 msgstr "Température C  %4.1f"
 
 msgid "Voltage"
 msgstr "Voltage"
 
+#, python-format
 msgid "Voltage  %03d"
 msgstr "Voltage  %03d"
 
@@ -208,6 +255,7 @@ msgstr "automatique"
 msgid "below Tunerslot 4"
 msgstr "à coté fente tuner 4"
 
+#, python-format
 msgid "currentRPM:%d targetRPM:%d Temp:%4.1f"
 msgstr "RPM actuelles:%d RPM cible:%d Temp:%4.1f"
 
@@ -253,6 +301,9 @@ msgstr "pas actif"
 msgid "over Security Card"
 msgstr "sur la carte sécurité"
 
+msgid "please set fan type (3Pin or 4Pin)"
+msgstr ""
+
 msgid "please wait (until 3min)..."
 msgstr "veuillez patienter (jusqu'à 3min)..."
 
@@ -264,6 +315,9 @@ msgstr "lire HDD-Température si HDD en Standby-Mode"
 
 msgid "readme.txt"
 msgstr "readmefr.txt"
+
+msgid "setup Fancontol inStandby mode"
+msgstr ""
 
 msgid "turn off"
 msgstr "stopper"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2011-09-28 12:39+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
@@ -19,41 +19,29 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
-#: ../src/NamezapSetup.py:57
 msgid "Cancel"
 msgstr "Annuleer"
 
-#: ../src/NamezapSetup.py:39
 msgid "Controls the visual appearance of the number zap dialog."
 msgstr "Bepaalt het visuele uiterlijk van de nummer zap dialoog."
 
-#: ../src/NamezapSetup.py:33
-#: ../src/NamezapSetup.py:74
-#: ../src/plugin.py:107
 msgid "NameZAP Setup"
 msgstr "NameZAP instellingen"
 
-#: ../src/plugin.py:19
 msgid "Number and Name"
 msgstr "Nummer en naam"
 
-#: ../src/NamezapSetup.py:56
 msgid "OK"
 msgstr "OK"
 
-#: ../src/plugin.py:17
 msgid "Only Number"
 msgstr "Alleen nummer"
 
-#: ../src/plugin.py:18
 msgid "Service Name"
 msgstr "Service Naam"
 
-#: ../src/plugin.py:91
 msgid "Unknown Service"
 msgstr "Onbekende Service"
 
-#: ../src/NamezapSetup.py:39
 msgid "Zapper Style"
 msgstr "Zapper Style"
-

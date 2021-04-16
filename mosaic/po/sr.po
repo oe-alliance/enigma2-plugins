@@ -23,11 +23,7 @@ msgid "Countdown:"
 msgstr "Odbrojavanje:"
 
 msgid "Error while creating screenshot. You need grab version 0.8 or higher!"
-msgstr ""
-"Greška kod kreiranja snimka ekrana. Treba vam grab verzija 0.8 ili viša!"
+msgstr "Greška kod kreiranja snimka ekrana. Treba vam grab verzija 0.8 ili viša!"
 
 msgid "Mosaic"
 msgstr "Mozaik"
-
-#~ msgid "%s does not exist!"
-#~ msgstr "%s ne postoji!"

@@ -78,12 +78,3 @@ msgid ""
 msgstr ""
 "genisoimage Job erledigt.\n"
 "DVD Ordner löschen?"
-
-#~ msgid "Could not install needed dvdbackup package!"
-#~ msgstr "Konnte das benötigte dvdbackup Paket nicht installieren!"
-
-#~ msgid "DVD Name"
-#~ msgstr "DVD Name"
-
-#~ msgid "Installing..."
-#~ msgstr "Installiere..."

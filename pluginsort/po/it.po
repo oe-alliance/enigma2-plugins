@@ -85,4 +85,3 @@ msgstr "Aiuto"
 #: .../enigma2-plugins/pluginsort/src/plugin.py:396
 msgid "Unable to load PluginHider"
 msgstr "Impossibile caricare PluginHider"
-

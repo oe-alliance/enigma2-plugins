@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-05 22:58+0000\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2012-03-16 16:33+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -17,27 +17,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/plugin.py:259
 msgid "Add new tag..."
 msgstr "Add new tag..."
 
-#: ../src/plugin.py:47
 msgid "Cancel"
 msgstr "Cancel"
 
-#: ../src/plugin.py:263
 msgid "Delete all tags..."
 msgstr "Delete all tags..."
 
-#: ../src/plugin.py:261
 msgid "Delete this tag..."
 msgstr "Delete this tag..."
 
-#: ../src/plugin.py:262
 msgid "Delete unused tags"
 msgstr "Delete unused tags"
 
-#: ../src/plugin.py:245
 msgid ""
 "Do you really want to delete all tags everywhere?\n"
 "(Note that 'Cancel' will not undo this!)"
@@ -45,7 +39,6 @@ msgstr ""
 "Do you really want to delete all tags everywhere?\n"
 "(Note that 'Cancel' will not undo this!)"
 
-#: ../src/plugin.py:228
 #, python-format
 msgid ""
 "Do you really want to delete tag \"%s\" everywhere?\n"
@@ -55,37 +48,28 @@ msgstr ""
 "(Note that 'Cancel' will not undo this!)"
 
 #. TRANSLATORS: This is the title of the TagEditor main screen
-#: ../src/plugin.py:79
 msgid "Edit Tags"
 msgstr "Edit Tags"
 
-#: ../src/plugin.py:50
 msgid "Load"
 msgstr "Load"
 
-#: ../src/plugin.py:49
 msgid "New"
 msgstr "New"
 
-#: ../src/plugin.py:48
 msgid "OK"
 msgstr "OK"
 
-#: ../src/plugin.py:85
 msgid "Please enter the new tag"
 msgstr "Please enter the new tag"
 
-#: ../src/plugin.py:260
 msgid "Rename this tag..."
 msgstr "Rename this tag..."
 
-#: ../src/plugin.py:208
 #, python-format
 msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
 msgstr "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
 
 #. TRANSLATORS: this is the string used in the movie context menu for TagEditor
-#: ../src/plugin.py:26
 msgid "edit tags"
 msgstr "edit tags"
-

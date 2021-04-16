@@ -252,4 +252,3 @@ msgstr "Schrijf log:"
 
 msgid "fritz.Box"
 msgstr "fritz.Box"
-

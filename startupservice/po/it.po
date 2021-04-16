@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - startupservice\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-04 23:40+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,31 +17,23 @@ msgstr ""
 "X-Poedit-Basepath: .../enigma2-plugins/startupservice\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/startupservice\n"
 
-#: .../enigma2-plugins/startupservice/src/plugin.py:116
-msgid "set as startup service"
-msgstr "Configurare come canale di avvio"
-
-#: .../enigma2-plugins/startupservice/src/plugin.py:117
-msgid "reset startup service"
-msgstr "Reset del canale di avvio"
-
-#: .../enigma2-plugins/startupservice/src/plugin.py:122
-msgid "set as startup service after booting..."
-msgstr "Configurare come canale da sintonizzare all'avvio..."
-
-#: .../enigma2-plugins/startupservice/src/plugin.py:123
-msgid "set as startup service after leaving standby mode..."
-msgstr "Configurare come canale da sintonizzare in uscita dallo standby..."
-
-#: .../enigma2-plugins/startupservice/src/plugin.py:127
-msgid "reset startup service for booting..."
-msgstr "Reset del canale da sintonizzare all'avvio..."
-
-#: .../enigma2-plugins/startupservice/src/plugin.py:128
-msgid "reset startup service for leaving standby mode..."
-msgstr "Reset del canale da sintonizzare in uscita dallo standby..."
-
-#: .../enigma2-plugins/startupservice/src/plugin.py:153
 msgid "If you see this message, please switch to the service you want to mark as startservice and try again."
 msgstr "Se viene visualizzato questo messaggio, posizionarsi sul canale da utilizzare come canale di avvio e riprovare."
 
+msgid "reset startup service"
+msgstr "Reset del canale di avvio"
+
+msgid "reset startup service for booting..."
+msgstr "Reset del canale da sintonizzare all'avvio..."
+
+msgid "reset startup service for leaving standby mode..."
+msgstr "Reset del canale da sintonizzare in uscita dallo standby..."
+
+msgid "set as startup service"
+msgstr "Configurare come canale di avvio"
+
+msgid "set as startup service after booting..."
+msgstr "Configurare come canale da sintonizzare all'avvio..."
+
+msgid "set as startup service after leaving standby mode..."
+msgstr "Configurare come canale da sintonizzare in uscita dallo standby..."

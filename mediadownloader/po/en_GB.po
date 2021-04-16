@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-05 22:58+0000\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2012-03-16 14:24+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -17,50 +17,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/MediaDownloader.py:220
 #, python-format
 msgid "%d kb/s"
 msgstr "%d kb/s"
 
-#: ../src/MediaDownloader.py:153
 msgid "?? kb/s"
 msgstr "?? kb/s"
 
-#: ../src/MediaDownloader.py:250
 msgid "Do you want to try to open the downloaded file?"
 msgstr "Do you want to try to open the downloaded file?"
 
-#: ../src/plugin.py:83
 msgid "Download..."
 msgstr "Download..."
 
-#: ../src/MediaDownloader.py:150
 msgid "Downloading..."
 msgstr "Downloading..."
 
-#: ../src/MediaDownloader.py:219
 #, python-format
 msgid "ETA %d:%02d min"
 msgstr "ETA %d:%02d min"
 
-#: ../src/MediaDownloader.py:152
 msgid "ETA ??:?? h"
 msgstr "ETA ??:?? h"
 
-#: ../src/MediaDownloader.py:267
 #, python-format
 msgid "Error while downloading file %s"
 msgstr "Error while downloading file %s"
 
-#: ../src/MediaDownloader.py:233
 msgid "No suitable Viewer found!"
 msgstr "No suitable Viewer found!"
 
-#: ../src/MediaDownloader.py:177
 msgid "Where to save?"
 msgstr "Where to save?"
 
-#: ../src/plugin.py:58
 msgid "Which file do you want to download?"
 msgstr "Which file do you want to download?"
-

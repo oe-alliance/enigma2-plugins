@@ -28,4 +28,3 @@ msgstr "Error while creating screenshot. You need grab version 0.8 or higher!"
 
 msgid "Mosaic"
 msgstr "Mosaic"
-

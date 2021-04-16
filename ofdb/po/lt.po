@@ -7,112 +7,88 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 19:13+0300\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2017-07-10 19:16+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: \n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.2\n"
-"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: lt\n"
 
-#: ../src/plugin.py:219
 msgid "Ambiguous results"
 msgstr "Dviprasmiški rezultatai"
 
-#: ../src/plugin.py:435
 msgid "Cast: "
 msgstr "Vaidina: "
 
-#: ../src/plugin.py:41
 msgid "Channel Selection"
 msgstr "Kanalo parinkimas"
 
-#: ../src/plugin.py:316
 msgid "Could't get Eventname"
 msgstr "Nepavyksta gauti pavadinimo"
 
-#: ../src/plugin.py:224 ../src/plugin.py:385
 msgid "Details"
 msgstr "Išsamiau"
 
-#: ../src/plugin.py:444
 #, python-format
 msgid "Downloading Movie Poster: %s..."
 msgstr "Parsisiunčiamas filmo plakatas: %s..."
 
-#: ../src/plugin.py:141
 msgid "Exit"
 msgstr "Uždaryti"
 
-#: ../src/plugin.py:70
 msgid "Lookup"
 msgstr "Paieška"
 
-#: ../src/plugin.py:369 ../src/plugin.py:370
 msgid "No OFDb match."
 msgstr "OFDb atitikimo nėra."
 
-#: ../src/plugin.py:437
 msgid "No cast list found in the database."
 msgstr "Aktorių sąrašo duomenų bazėje nerasta."
 
-#: ../src/plugin.py:383
 msgid "No details found."
 msgstr "Išsamaus aprašymo nėra."
 
-#: ../src/plugin.py:386 ../src/plugin.py:455
 msgid "OFDb Details parsed"
 msgstr "OFDb informacija apdorota"
 
-#: ../src/plugin.py:347
 msgid "OFDb Download completed"
 msgstr "OFDb parsisiuntimas baigtas"
 
-#: ../src/plugin.py:320
 msgid "OFDb Download failed"
 msgstr "Atsisiųsti iš OFDb nepavyko"
 
-#: ../src/plugin.py:484
 msgid "OFDb Plugin"
 msgstr "OFDb įskiepis"
 
-#: ../src/plugin.py:375
 msgid "OFDb Re-Download completed"
 msgstr "OFDb parsisiųstas iš naujo"
 
-#: ../src/plugin.py:372
 msgid "OFDb query failed!"
 msgstr "OFDb užklausa nepavyko!"
 
-#: ../src/plugin.py:220
 msgid "Please select the matching entry"
 msgstr "Pasirinkite atitinkantį įrašą"
 
-#: ../src/plugin.py:306
 #, python-format
 msgid "Query OFDb: %s..."
 msgstr "Užklausti OFDb: %s..."
 
-#: ../src/plugin.py:496 ../src/plugin.py:501 ../src/plugin.py:508
 msgid "Query details from the Online-Filmdatenbank"
 msgstr "Užklausti detaliau Internetinėje Filmų Duombazėje"
 
-#: ../src/plugin.py:235
 #, python-format
 msgid "Re-Query OFDb: %s..."
 msgstr "Perklausti OFDb: %s..."
 
-#: ../src/plugin.py:132
 msgid "The Online-Filmdatenbank"
 msgstr "Internetinė Filmų Duombazė"
 
-#: ../src/plugin.py:223
 msgid "Title Menu"
 msgstr "Pavadinimų meniu"
 
-#: ../src/plugin.py:416
 msgid "no user rating yet"
 msgstr "vertinimų dar nėra"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-05 22:58+0000\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2012-03-16 13:23+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -17,279 +17,190 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/plugin.py:256
 msgid " added to EasyMedia"
 msgstr " added to EasyMedia"
 
-#: ../src/plugin.py:262
 msgid " removed from EasyMedia"
 msgstr " removed from EasyMedia"
 
-#: ../src/plugin.py:237
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
 
-#: ../src/plugin.py:220
 msgid "Add/remove plugin"
 msgstr "Add/remove plugin"
 
-#: ../src/plugin.py:333
 msgid "Bookmarks"
 msgstr "Bookmarks"
 
-#: ../src/plugin.py:354
 msgid "DVD Player"
 msgstr "DVD Player"
 
-#: ../src/plugin.py:189
 msgid "DVD player:"
 msgstr "DVD player:"
 
-#: ../src/plugin.py:523
 msgid "DVDPlayer Plugin is not installed!"
 msgstr "DVDPlayer Plugin is not installed!"
 
-#: ../src/plugin.py:55
-#: ../src/plugin.py:56
-#: ../src/plugin.py:57
-#: ../src/plugin.py:58
-#: ../src/plugin.py:59
-#: ../src/plugin.py:60
-#: ../src/plugin.py:61
-#: ../src/plugin.py:62
-#: ../src/plugin.py:63
-#: ../src/plugin.py:64
-#: ../src/plugin.py:65
-#: ../src/plugin.py:66
-#: ../src/plugin.py:67
-#: ../src/plugin.py:68
-#: ../src/plugin.py:69
 msgid "Disabled"
 msgstr "Disabled"
 
-#: ../src/plugin.py:56
 msgid "DreamExplorer"
 msgstr "DreamExplorer"
 
-#: ../src/plugin.py:177
 msgid "EasyMedia settings..."
 msgstr "EasyMedia settings..."
 
-#: ../src/plugin.py:57
-#: ../src/plugin.py:58
-#: ../src/plugin.py:59
-#: ../src/plugin.py:60
-#: ../src/plugin.py:61
-#: ../src/plugin.py:62
-#: ../src/plugin.py:63
-#: ../src/plugin.py:64
-#: ../src/plugin.py:65
-#: ../src/plugin.py:66
-#: ../src/plugin.py:67
-#: ../src/plugin.py:68
-#: ../src/plugin.py:69
 msgid "Enabled"
 msgstr "Enabled"
 
-#: ../src/plugin.py:56
 msgid "Filebrowser"
 msgstr "File browser"
 
-#: ../src/plugin.py:360
 msgid "Files"
 msgstr "Files"
 
-#: ../src/plugin.py:182
 msgid "Files browser:"
 msgstr "Files browser:"
 
-#: ../src/plugin.py:55
+msgid "InternetRadio"
+msgstr ""
+
+#, fuzzy
+msgid "InternetRadio player:"
+msgstr "NetRadio player:"
+
 msgid "MediaPlayer"
 msgstr "MediaPlayer"
 
-#: ../src/plugin.py:554
 msgid "Merlin iDream is not installed!"
 msgstr "Merlin iDream is not installed!"
 
-#: ../src/plugin.py:55
 msgid "MerlinMusicPlayer"
 msgstr "MerlinMusicPlayer"
 
-#: ../src/plugin.py:286
-#: ../src/plugin.py:330
 msgid "Movies"
 msgstr "Movies"
 
-#: ../src/plugin.py:345
 msgid "Music"
 msgstr "Music"
 
-#: ../src/plugin.py:181
 msgid "Music player:"
 msgstr "Music player:"
 
-#: ../src/plugin.py:369
 msgid "MyTube Player"
 msgstr "MyTube Player"
 
-#: ../src/plugin.py:529
 msgid "MyTube Plugin is not installed!"
 msgstr "MyTube Plugin is not installed!"
 
-#: ../src/plugin.py:378
 msgid "MyVideo"
 msgstr "MyVideo"
 
-#: ../src/plugin.py:560
 msgid "MyVideo Player is not installed!"
 msgstr "MyVideo Player is not installed!"
 
-#: ../src/plugin.py:194
 msgid "MyVideo player:"
 msgstr "MyVideo player:"
 
-#: ../src/plugin.py:191
-msgid "NetRadio player:"
-msgstr "NetRadio player:"
-
-#: ../src/plugin.py:511
 msgid "No File-Manager installed!"
 msgstr "No File-Manager installed!"
 
-#: ../src/plugin.py:499
 msgid "No Music-Player installed!"
 msgstr "No Music-Player installed!"
 
-#: ../src/plugin.py:75
 msgid "Not easy way to start EasyMedia"
 msgstr "Not easy way to start EasyMedia"
 
-#: ../src/plugin.py:471
 msgid "Nothing"
 msgstr "Nothing"
 
-#: ../src/plugin.py:489
 msgid "Picture-player is not installed!"
 msgstr "Picture-player is not installed!"
 
-#: ../src/plugin.py:185
 msgid "PicturePlayer:"
 msgstr "PicturePlayer:"
 
-#: ../src/plugin.py:342
 msgid "Pictures"
 msgstr "Pictures"
 
-#: ../src/plugin.py:351
 msgid "Radio"
 msgstr "Radio"
 
-#: ../src/plugin.py:470
 msgid "Radio-mode"
 msgstr "Radio-mode"
 
-#: ../src/plugin.py:363
-msgid "SHOUTcast"
-msgstr "SHOUTcast"
-
-#: ../src/plugin.py:535
 msgid "SHOUTcast Plugin is not installed!"
 msgstr "SHOUTcast Plugin is not installed!"
 
-#: ../src/plugin.py:483
 msgid "Select bookmark..."
 msgstr "Select bookmark..."
 
-#: ../src/plugin.py:192
 msgid "Show Merlin-iDream:"
 msgstr "Show Merlin-iDream:"
 
-#: ../src/plugin.py:183
 msgid "Show bookmarks:"
 msgstr "Show bookmarks:"
 
-#: ../src/plugin.py:186
 msgid "Show tv/radio switch:"
 msgstr "Show tv/radio switch:"
 
-#: ../src/plugin.py:235
 msgid "Some plugins are not available:\n"
 msgstr "Some plugins are not available:\n"
 
-#: ../src/plugin.py:469
 msgid "TV-mode"
 msgstr "TV-mode"
 
-#: ../src/plugin.py:336
 msgid "Timer"
 msgstr "Timer"
 
-#: ../src/plugin.py:184
 msgid "Timer:"
 msgstr "Timer:"
 
-#: ../src/plugin.py:56
 msgid "TuxCom"
 msgstr "TuxCom"
 
-#: ../src/plugin.py:349
 msgid "Tv/Radio"
 msgstr "Tv/Radio"
 
-#: ../src/plugin.py:372
 msgid "VLC Player"
 msgstr "VLC Player"
 
-#: ../src/plugin.py:547
 msgid "VLC Player is not installed!"
 msgstr "VLC Player is not installed!"
 
-#: ../src/plugin.py:188
 msgid "VLC player:"
 msgstr "VLC player:"
 
-#: ../src/plugin.py:180
 msgid "Video database:"
 msgstr "Video database:"
 
-#: ../src/plugin.py:339
 msgid "VideoDB"
 msgstr "VideoDB"
 
-#: ../src/plugin.py:566
 msgid "VideoDB is not installed!"
 msgstr "VideoDB is not installed!"
 
-#: ../src/plugin.py:357
 msgid "Weather"
 msgstr "Weather"
 
-#: ../src/plugin.py:517
 msgid "Weather Plugin is not installed!"
 msgstr "Weather Plugin is not installed!"
 
-#: ../src/plugin.py:190
 msgid "Weather plugin:"
 msgstr "Weather plugin:"
 
-#: ../src/plugin.py:187
 msgid "YouTube player:"
 msgstr "YouTube player:"
 
-#: ../src/plugin.py:375
 msgid "ZDFmediathek"
 msgstr "ZDFmediathek"
 
-#: ../src/plugin.py:541
 msgid "ZDFmediathek Plugin is not installed!"
 msgstr "ZDFmediathek Plugin is not installed!"
 
-#: ../src/plugin.py:193
 msgid "ZDFmediathek player:"
 msgstr "ZDFmediathek player:"
 
-#: ../src/plugin.py:366
 msgid "iDream"
 msgstr "iDream"
-

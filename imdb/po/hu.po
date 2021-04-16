@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: IMDb v1.0\n"
-"Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: yyyy-mm-dd hh:mm+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2018-04-19 17:35+0200\n"
 "Last-Translator: Alec <alex1vagyok@gmail.com>\n"
 "Language-Team: alec <alex1vagyok@gmail.com>\n"
@@ -18,231 +18,229 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: plugin.py:65
-msgid "Channel Selection"
-msgstr "Csatorna kiválasztása"
-
-#: plugin.py:94
-msgid "Lookup"
-msgstr "Lekérdezés"
-
-#: plugin.py:171
-msgid "The Internet Movie Database"
-msgstr "Internetes filmadatbázis"
-
-#: plugin.py:187
-msgid "Exit"
-msgstr "Kilépés"
-
-#: plugin.py:314
-msgid "Ambiguous results"
-msgstr "Nem egyértelmű eredmények"
-
-#: plugin.py:315
-msgid "Please select the matching entry"
-msgstr "Kérjük, válassza ki a megfelelő bejegyzést"
-
-#: plugin.py:318
-msgid "Title Menu"
-msgstr "Cím menü"
-
-#: plugin.py:319 plugin.py:706
-msgid "Details"
-msgstr "Tartalom"
-
-#: plugin.py:340 plugin.py:663 plugin.py:679
-#, python-format
-msgid "Re-Query IMDb: %s..."
-msgstr "IMDb újra kérdezés: %s..."
-
-#: plugin.py:374
-msgid "Enter search"
-msgstr "Keresés"
-
-#: plugin.py:375
-msgid "Select from EPG"
-msgstr "Válasszon az EPG műsorújságból"
-
-#: plugin.py:376
-msgid "Setup"
-msgstr "Beállítás"
-
-#: plugin.py:383
-msgid "Save current Details as .html for offline use"
-msgstr "Az aktuális részleteket az .html fájlként mentheti offline használatra"
-
-#: plugin.py:384
-msgid "Save current Details as .txt"
-msgstr "Az aktuális részletek mentése .txt fájlként"
-
-#: plugin.py:385
-msgid "Save current Poster and Details as .txt"
-msgstr "Az aktuális poszter és részletek mentése .txt formátumban"
-
-#: plugin.py:390
-msgid "Play Trailer"
-msgstr "Filmelőzetes lejátszása"
-
-#: plugin.py:391
-msgid "Search Trailer"
-msgstr "Filmelőzetes keresése"
-
-#: plugin.py:397
-msgid "IMDb Menu"
-msgstr "IMDb bállítás"
-
-#: plugin.py:422
-msgid "IMDb can not get Movie Information to write to .txt file!"
-msgstr "A IMDb nem tudja letölteni a film adatokat a .txt fájlba!"
-
-#: plugin.py:434
-msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
-msgstr "A IMDb nem kap filminformációkat a .jpg és .txt fájlok írásához!"
-
-#: plugin.py:439
-msgid "IMDb Save - Download completed"
-msgstr "IMDb Mentés - Letöltés befejeződött"
-
-#: plugin.py:458 plugin.py:461
-msgid "Content:"
-msgstr "Tartalom:"
-
-#: plugin.py:467 plugin.py:470
-msgid "Runtime:"
-msgstr "Futásidő:"
-
-#: plugin.py:478 plugin.py:480
-msgid "Genre:"
-msgstr "Műfaj:"
-
-#: plugin.py:486 plugin.py:489
-msgid "Production Countries:"
-msgstr "Származási hely:"
-
-#: plugin.py:495 plugin.py:498
-msgid "Release Date:"
-msgstr "Kiadás Dátuma:"
-
-#: plugin.py:507 plugin.py:509 plugin.py:736
-msgid "User Rating"
-msgstr "Felhasználói értékelés"
-
-#: plugin.py:552
-msgid "Enter text to search for"
-msgstr "Írja be a keresendő szöveget"
-
-#: plugin.py:600
-#, python-format
-msgid "Query IMDb: %s"
-msgstr "IMDb lekérdezés: %s"
-
-#: plugin.py:608
-msgid "Could't get event name"
-msgstr "Nem sikerült elérni az esemény nevét"
-
-#: plugin.py:644
-msgid "IMDb Download completed"
-msgstr "IMDb letöltés befejeződött"
-
-#: plugin.py:673
-msgid "No IMDb match."
-msgstr "Nincs IMDb egyezőség:"
-
-#: plugin.py:674
-msgid "No IMDb match:"
-msgstr "Nincs IMDb egyezőség:"
-
-#: plugin.py:686
-msgid "IMDb query failed!"
-msgstr "A IMDb lekérdezés sikertelen!"
-
-#: plugin.py:689
-msgid "IMDb Download failed"
-msgstr "IMDb letöltés sikertelen"
-
-#: plugin.py:697
-msgid "IMDb Re-Download completed"
-msgstr "A IMDb újra letöltésé befejeződött"
-
-#: plugin.py:704
-msgid "No details found."
-msgstr "Nincs részlet."
-
-#: plugin.py:707 plugin.py:789
-msgid "IMDb Details parsed"
-msgstr "IMDb tartalom mutatása"
-
-#: plugin.py:732
-msgid "no user rating yet"
-msgstr "nincs még felhasználói értékelés"
-
-#: plugin.py:749
 msgid " as "
 msgstr " mint "
 
-#: plugin.py:753
+msgid "* = Restart Required"
+msgstr "* = Újraindítás szükséges"
+
+msgid "Ambiguous results"
+msgstr "Nem egyértelmű eredmények"
+
+msgid "Cancel"
+msgstr "Mégse"
+
 msgid "Cast: "
 msgstr "Szereplők: "
 
-#: plugin.py:755
-msgid "No cast list found in the database."
-msgstr "Nincs szereplő lista az adatbázisban."
+msgid "Content:"
+msgstr "Tartalom:"
 
-#: plugin.py:761
+msgid "Could't get event name"
+msgstr "Nem sikerült elérni az esemény nevét"
+
+msgid "Details"
+msgstr "Tartalom"
+
 #, python-format
 msgid "Downloading Movie Poster: %s..."
 msgstr "Film poster letöltése: %s..."
 
-#: plugin.py:783
+#, fuzzy
+msgid "Enable this to be able to access IMDb search setup from within the plugin browser."
+msgstr "Engedélyezze ezt, hogy hozzáférjen a IMDb-hoz a bővítmény böngészőben."
+
+#, fuzzy
+msgid "Enable this to be able to access IMDb searches from within the movie list."
+msgstr "Engedélyezze ezt, hogy hozzáférjen a IMDb-hoz a bővítmény böngészőben."
+
+#, fuzzy
+msgid "Enable this to be able to access IMDb searches from within the plugin browser."
+msgstr "Engedélyezze ezt, hogy hozzáférjen a IMDb-hoz a bővítmény böngészőben."
+
+msgid "Enter search"
+msgstr "Keresés"
+
+msgid "Enter text to search for"
+msgstr "Írja be a keresendő szöveget"
+
+msgid "Exit"
+msgstr "Kilépés"
+
+#, fuzzy
+msgid "Exit IMDb search"
+msgstr "Keresés"
+
 msgid "Extra Info"
 msgstr "Extra információ"
 
-#: plugin.py:819
+msgid "Genre:"
+msgstr "Műfaj:"
+
+msgid "IMDb Details parsed"
+msgstr "IMDb tartalom mutatása"
+
+msgid "IMDb Download completed"
+msgstr "IMDb letöltés befejeződött"
+
+msgid "IMDb Download failed"
+msgstr "IMDb letöltés sikertelen"
+
+msgid "IMDb Menu"
+msgstr "IMDb bállítás"
+
 msgid "IMDb Plugin"
 msgstr "IMDb bővítmény"
 
-#: plugin.py:836
-msgid "* = Restart Required"
-msgstr "* = Újraindítás szükséges"
+msgid "IMDb Re-Download completed"
+msgstr "A IMDb újra letöltésé befejeződött"
 
-#: plugin.py:842
+msgid "IMDb Save - Download completed"
+msgstr "IMDb Mentés - Letöltés befejeződött"
+
 msgid "IMDb Setup"
 msgstr "IMDb beállítás"
 
-#: plugin.py:846
+msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
+msgstr "A IMDb nem kap filminformációkat a .jpg és .txt fájlok írásához!"
+
+msgid "IMDb can not get Movie Information to write to .txt file!"
+msgstr "A IMDb nem tudja letölteni a film adatokat a .txt fájlba!"
+
+msgid "IMDb query failed!"
+msgstr "A IMDb lekérdezés sikertelen!"
+
+#, fuzzy
+msgid "IMDb search"
+msgstr "Nincs IMDb egyezőség:"
+
+#, fuzzy
+msgid "IMDb setup"
+msgstr "IMDb beállítás"
+
+#, fuzzy
+msgid "Menu"
+msgstr "IMDb bállítás"
+
+msgid "No IMDb match."
+msgstr "Nincs IMDb egyezőség:"
+
+msgid "No IMDb match:"
+msgstr "Nincs IMDb egyezőség:"
+
+msgid "No cast list found in the database."
+msgstr "Nincs szereplő lista az adatbázisban."
+
+msgid "No details found."
+msgstr "Nincs részlet."
+
 msgid "OK"
 msgstr "OK"
 
-#: plugin.py:847
-msgid "Cancel"
-msgstr "Mégse"
+msgid "Page down"
+msgstr ""
 
-#: plugin.py:873
-msgid "Show in plugin browser"
+msgid "Page up"
+msgstr ""
+
+msgid "Play Trailer"
+msgstr "Filmelőzetes lejátszása"
+
+msgid "Please select the matching entry"
+msgstr "Kérjük, válassza ki a megfelelő bejegyzést"
+
+msgid "Plot Outline"
+msgstr ""
+
+msgid "Production Countries:"
+msgstr "Származási hely:"
+
+#, python-format
+msgid "Query IMDb: %s"
+msgstr "IMDb lekérdezés: %s"
+
+#, python-format
+msgid "Re-Query IMDb: %s..."
+msgstr "IMDb újra kérdezés: %s..."
+
+msgid "Release Date:"
+msgstr "Kiadás Dátuma:"
+
+msgid "Runtime:"
+msgstr "Futásidő:"
+
+msgid "Save current Details as .html for offline use"
+msgstr "Az aktuális részleteket az .html fájlként mentheti offline használatra"
+
+msgid "Save current Details as .txt"
+msgstr "Az aktuális részletek mentése .txt fájlként"
+
+msgid "Save current Poster and Details as .txt"
+msgstr "Az aktuális poszter és részletek mentése .txt formátumban"
+
+msgid "Search Trailer"
+msgstr "Filmelőzetes keresése"
+
+#, fuzzy
+msgid "Search for details from the Internet Movie Database"
+msgstr "A lekérdezés részletei az Internetes filmadatbázisból"
+
+#, fuzzy
+msgid "Settings for Internet Movie Database searches"
+msgstr "Internetes filmadatbázis"
+
+msgid "Setup"
+msgstr "Beállítás"
+
+msgid "Show episode and year information for cast when available. Takes effect after the next fetch of show details."
+msgstr ""
+
+msgid "Show episode and year information in cast list"
+msgstr ""
+
+msgid "Show full movie or series name in title menu"
+msgstr ""
+
+msgid "Show in movie list"
+msgstr ""
+
+msgid "Show list of matched movies an series"
+msgstr ""
+
+msgid "Show movie and series basic details"
+msgstr ""
+
+msgid "Show movie and series extra details"
+msgstr ""
+
+#, fuzzy
+msgid "Show search in plugin browser"
 msgstr "Megjelenítés a bővítmény böngészöben"
 
-#: plugin.py:873
-msgid ""
-"Enable this to be able to access the IMDb from within the plugin browser."
-msgstr "Engedélyezze ezt, hogy hozzáférjen a IMDb-hoz a bővítmény böngészőben."
+#, fuzzy
+msgid "Show setup in plugin browser"
+msgstr "Megjelenítés a bővítmény böngészöben"
 
-#: plugin.py:874
+msgid "Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name."
+msgstr ""
+
+msgid "The Internet Movie Database"
+msgstr "Internetes filmadatbázis"
+
+msgid "This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas."
+msgstr "Ez az opció lehetővé teszi szavak és kifejezések hozzáadását a IMDb-hoz, melyek figyelmen kívül lesznek hagyva mikor a keresés történik. Kérjük, a szavakat/mondatokat vesszökkel válasszák el."
+
+msgid "Title Menu"
+msgstr "Cím menü"
+
+msgid "Unknown category"
+msgstr ""
+
+msgid "User Rating"
+msgstr "Felhasználói értékelés"
+
 msgid "Words / phrases to ignore "
 msgstr "Szavak / kifejezések figyelmen kívül hagyása "
 
-#: plugin.py:874
-msgid ""
-"This option allows you add words/phrases for IMDb to ignore when searching. "
-"Please separate the words/phrases with commas."
-msgstr ""
-"Ez az opció lehetővé teszi szavak és kifejezések hozzáadását a IMDb-hoz, "
-"melyek figyelmen kívül lesznek hagyva mikor a keresés történik. Kérjük, a "
-"szavakat/mondatokat vesszökkel válasszák el."
-
-#: plugin.py:954 plugin.py:976 plugin.py:979
-msgid "IMDb Details"
-msgstr "IMDb tartalom mutatása"
-
-#: plugin.py:976 plugin.py:980
-msgid "Query details from the Internet Movie Database"
-msgstr "A lekérdezés részletei az Internetes filmadatbázisból"
+msgid "no user rating yet"
+msgstr "nincs még felhasználói értékelés"

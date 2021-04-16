@@ -94,13 +94,3 @@ msgstr "minuut"
 
 msgid "minutes"
 msgstr "minuten"
-
-#~ msgid ""
-#~ "Timer already running.\n"
-#~ "Stop it?"
-#~ msgstr ""
-#~ "Timer reeds gestart.\n"
-#~ "Deze stoppen?"
-
-#~ msgid "Zapping back in %d Minutes"
-#~ msgstr "Terug zappen in %d minuten"

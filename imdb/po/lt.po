@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: IMDb-VTi\n"
-"Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-04-24 18:47+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2018-07-07 07:24+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -15,325 +15,221 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.8\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: src/plugin.py:72
-msgid "Channel Selection"
-msgstr "Kanalo pasirinkimas"
-
-#: src/plugin.py:105 src/plugin.py:135
-msgid "Lookup"
-msgstr "Ieškoti"
-
-#: src/plugin.py:198
-msgid "The Internet Movie Database"
-msgstr "Internetinė filmų duomenų bazė"
-
-#: src/plugin.py:214
-msgid "Exit"
-msgstr "Užverti"
-
-#: src/plugin.py:226 src/plugin.py:233 src/plugin.py:239
-msgid "Show movie and series basic details"
-msgstr "Rodyti filmų ir serialų pagrindinę informaciją"
-
-#: src/plugin.py:227 src/plugin.py:231
-msgid "Exit IMDb search"
-msgstr "Užverti IMDB paiešką"
-
-#: src/plugin.py:232
-msgid "Show list of matched movies an series"
-msgstr "Rodyti atitinkančių serialų ir filmų sąrašą"
-
-#: src/plugin.py:234
-msgid "Show movie and series extra details"
-msgstr "Rodyti filmų ir serialų papildomą informaciją"
-
-#: src/plugin.py:238
-msgid "Menu"
-msgstr "Meniu"
-
-#: src/plugin.py:243
-msgid "Page down"
-msgstr "Puslapį žemyn"
-
-#: src/plugin.py:244
-msgid "Page up"
-msgstr "Puslapį aukštyn"
-
-#: src/plugin.py:350
-msgid "Ambiguous results"
-msgstr "Dviprasmiški rezultatai"
-
-#: src/plugin.py:351
-msgid "Please select the matching entry"
-msgstr "Pasirinkite atitinkantį įrašą"
-
-#: src/plugin.py:354
-msgid "Title Menu"
-msgstr "Pavadinimų meniu"
-
-#: src/plugin.py:355 src/plugin.py:748
-msgid "Details"
-msgstr "Išsamiau"
-
-#: src/plugin.py:376 src/plugin.py:705 src/plugin.py:721
-#, python-format
-msgid "Re-Query IMDb: %s..."
-msgstr "Perklausti IMDb: %s..."
-
-#: src/plugin.py:410
-msgid "Enter search"
-msgstr "Atverti paiešką"
-
-#: src/plugin.py:411
-msgid "Select from EPG"
-msgstr "Pasirinkti iš EPG"
-
-#: src/plugin.py:412
-msgid "Setup"
-msgstr "Sąranka"
-
-#: src/plugin.py:419
-msgid "Save current Details as .html for offline use"
-msgstr "Išsaugoti šį aprašymą .html faile, kad skaityti be interneto"
-
-#: src/plugin.py:420
-msgid "Save current Details as .txt"
-msgstr "Išsaugoti šį aprašymą tekstiniame faile"
-
-#: src/plugin.py:421
-msgid "Save current Poster and Details as .txt"
-msgstr "Išsaugoti šį plakatą ir aprašymą tekstiniame faile"
-
-#: src/plugin.py:426
-msgid "Play Trailer"
-msgstr "Žiūrėti anonsą"
-
-#: src/plugin.py:427
-msgid "Search Trailer"
-msgstr "Ieškoti anonso"
-
-#: src/plugin.py:433
-msgid "IMDb Menu"
-msgstr "IMDb meniu"
-
-#: src/plugin.py:458
-msgid "IMDb can not get Movie Information to write to .txt file!"
-msgstr "IMDb neranda informacijos apie filmą, kad išsaugoti .txt faile!"
-
-#: src/plugin.py:470
-msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
-msgstr ""
-"IMDb neranda informacijos apie filmą, kad išsaugoti ją .jpg ir .txt failuose!"
-
-#: src/plugin.py:475
-msgid "IMDb Save - Download completed"
-msgstr "IMDb informacija parsiųsta ir išsaugota"
-
-#: src/plugin.py:494 src/plugin.py:497
-msgid "Content:"
-msgstr "Turinys:"
-
-#: src/plugin.py:503 src/plugin.py:506
-msgid "Runtime:"
-msgstr "Trukmė:"
-
-#: src/plugin.py:514 src/plugin.py:516
-msgid "Genre:"
-msgstr "Žanras:"
-
-#: src/plugin.py:522 src/plugin.py:525
-msgid "Production Countries:"
-msgstr "Šalys gamintojos:"
-
-#: src/plugin.py:531 src/plugin.py:534
-msgid "Release Date:"
-msgstr "Išleidimo data:"
-
-#: src/plugin.py:543 src/plugin.py:545 src/plugin.py:781
-msgid "User Rating"
-msgstr "Vartotojų įvertinimas"
-
-#: src/plugin.py:590
-msgid "Enter text to search for"
-msgstr "Įrašykite ieškomą tekstą"
-
-#: src/plugin.py:641
-#, python-format
-msgid "Query IMDb: %s"
-msgstr "Užklausti IMDb: %s"
-
-#: src/plugin.py:649
-msgid "Could't get event name"
-msgstr "Pavadinimo nerasta"
-
-#: src/plugin.py:685
-msgid "IMDb Download completed"
-msgstr "IMDb parsisiuntimas baigtas"
-
-#: src/plugin.py:715
-msgid "No IMDb match."
-msgstr "IMDb atitikimo nėra."
-
-#: src/plugin.py:716
-msgid "No IMDb match:"
-msgstr "Nėra atitikimo IMDb:"
-
-#: src/plugin.py:728
-msgid "IMDb query failed!"
-msgstr "IMDb užklausa nepavyko!"
-
-#: src/plugin.py:731
-msgid "IMDb Download failed"
-msgstr "IMDb atsisiųsti nepavyko"
-
-#: src/plugin.py:739
-msgid "IMDb Re-Download completed"
-msgstr "IMDb parsisiųstas iš naujo"
-
-#: src/plugin.py:746
-msgid "No details found."
-msgstr "Išsamaus aprašymo nėra."
-
-#: src/plugin.py:749 src/plugin.py:861
-msgid "IMDb Details parsed"
-msgstr "IMDb išsami informacija apdorota"
-
-#: src/plugin.py:777
-msgid "no user rating yet"
-msgstr "vartotojai dar nereitingavo"
-
-#: src/plugin.py:795
 msgid " as "
 msgstr " kaip "
 
-#: src/plugin.py:799
+msgid "* = Restart Required"
+msgstr "* = būtina paleisti iš naujo"
+
+msgid "Ambiguous results"
+msgstr "Dviprasmiški rezultatai"
+
+msgid "Cancel"
+msgstr "Atšaukti"
+
 msgid "Cast: "
 msgstr "Vaidina: "
 
-#: src/plugin.py:801
-msgid "No cast list found in the database."
-msgstr "Aktorių sąrašo duomenų bazėje nerasta."
+msgid "Content:"
+msgstr "Turinys:"
 
-#: src/plugin.py:809
+msgid "Could't get event name"
+msgstr "Pavadinimo nerasta"
+
+msgid "Details"
+msgstr "Išsamiau"
+
 #, python-format
 msgid "Downloading Movie Poster: %s..."
 msgstr "Parsisiunčiamas filmo plakatas: %s..."
 
-#: src/plugin.py:822 src/plugin.py:828 src/plugin.py:855
+msgid "Enable this to be able to access IMDb search setup from within the plugin browser."
+msgstr "Kai čia įjungta, IMDb sąranką matysite įskiepių naršyklėje."
+
+msgid "Enable this to be able to access IMDb searches from within the movie list."
+msgstr "Kai čia įjungta, IMDb paiešką matysite filmų sąraše."
+
+msgid "Enable this to be able to access IMDb searches from within the plugin browser."
+msgstr "Kai čia įjungta, IMDb paiešką matysite įskiepių naršyklėje."
+
+msgid "Enter search"
+msgstr "Atverti paiešką"
+
+msgid "Enter text to search for"
+msgstr "Įrašykite ieškomą tekstą"
+
+msgid "Exit"
+msgstr "Užverti"
+
+msgid "Exit IMDb search"
+msgstr "Užverti IMDB paiešką"
+
 msgid "Extra Info"
 msgstr "Papildoma informacija"
 
-#: src/plugin.py:842
-msgid "Plot Outline"
-msgstr "Siužetas trumpai"
+msgid "Genre:"
+msgstr "Žanras:"
 
-#: src/plugin.py:846
-msgid "Unknown category"
-msgstr "Nežinoma kategorija"
+msgid "IMDb Details parsed"
+msgstr "IMDb išsami informacija apdorota"
 
-#: src/plugin.py:891
+msgid "IMDb Download completed"
+msgstr "IMDb parsisiuntimas baigtas"
+
+msgid "IMDb Download failed"
+msgstr "IMDb atsisiųsti nepavyko"
+
+msgid "IMDb Menu"
+msgstr "IMDb meniu"
+
 msgid "IMDb Plugin"
 msgstr "IMDb įskiepis"
 
-#: src/plugin.py:908
-msgid "* = Restart Required"
-msgstr "* = būtina paleisti iš naujo"
+msgid "IMDb Re-Download completed"
+msgstr "IMDb parsisiųstas iš naujo"
 
-#: src/plugin.py:914
+msgid "IMDb Save - Download completed"
+msgstr "IMDb informacija parsiųsta ir išsaugota"
+
 msgid "IMDb Setup"
 msgstr "IMDb sąranka"
 
-#: src/plugin.py:918
-msgid "OK"
-msgstr "Gerai"
+msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
+msgstr "IMDb neranda informacijos apie filmą, kad išsaugoti ją .jpg ir .txt failuose!"
 
-#: src/plugin.py:919
-msgid "Cancel"
-msgstr "Atšaukti"
+msgid "IMDb can not get Movie Information to write to .txt file!"
+msgstr "IMDb neranda informacijos apie filmą, kad išsaugoti .txt faile!"
 
-#: src/plugin.py:945
-msgid "Show search in plugin browser"
-msgstr "Rodyti paiešką įskiepių naršyklėje"
+msgid "IMDb query failed!"
+msgstr "IMDb užklausa nepavyko!"
 
-#: src/plugin.py:945
-msgid ""
-"Enable this to be able to access IMDb searches from within the plugin "
-"browser."
-msgstr "Kai čia įjungta, IMDb paiešką matysite įskiepių naršyklėje."
-
-#: src/plugin.py:946
-msgid "Show setup in plugin browser"
-msgstr "Rodyti sąranką įskiepių naršyklėje"
-
-#: src/plugin.py:946
-msgid ""
-"Enable this to be able to access IMDb search setup from within the plugin "
-"browser."
-msgstr "Kai čia įjungta, IMDb sąranką matysite įskiepių naršyklėje."
-
-#: src/plugin.py:947
-msgid "Show in movie list"
-msgstr "Rodyti filmų sąraše"
-
-#: src/plugin.py:947
-msgid ""
-"Enable this to be able to access IMDb searches from within the movie list."
-msgstr "Kai čia įjungta, IMDb paiešką matysite filmų sąraše."
-
-#: src/plugin.py:948
-msgid "Words / phrases to ignore "
-msgstr "Ignoruotini žodžiai ir frazės "
-
-#: src/plugin.py:948
-msgid ""
-"This option allows you add words/phrases for IMDb to ignore when searching. "
-"Please separate the words/phrases with commas."
-msgstr ""
-"Ši parinktis į IMDb paiešką leidžia įtraukti ignoruotinus žodžius ir frazes. "
-"Atskirkite juos kableliais."
-
-#: src/plugin.py:949
-msgid "Show full movie or series name in title menu"
-msgstr "Rodyti pilną filmo ar serijos pavadinimą antraštės meniu"
-
-#: src/plugin.py:949
-msgid ""
-"Show the whole IMDb title information for a movie or series, including, for "
-"example, alternative names and whether it's a series. Takes effect after the "
-"next search of IMDb for a show name."
-msgstr ""
-"Rodyti pilną filmo ar serijos pavadinimą antraštės meniu, įskaitant, "
-"pavyzdžiui, alternatyvų pavadinimą ir ar tai serija/serialas. Įsigalioja tik "
-"sekančioje IMDb įvykio pavadinimo paieškoje."
-
-#: src/plugin.py:950
-msgid "Show episode and year information in cast list"
-msgstr "Vaidinusių sąraše rodyti epizodo ir metų informaciją"
-
-#: src/plugin.py:950
-msgid ""
-"Show episode and year information for cast when available. Takes effect "
-"after the next fetch of show details."
-msgstr ""
-"Kada tai įmanoma, aktorių sąraše rodyti epizodo ir metų informaciją. "
-"Įsigalioja sekančioje išsamioje užklausoje."
-
-#: src/plugin.py:1070 src/plugin.py:1092 src/plugin.py:1093 src/plugin.py:1102
 msgid "IMDb search"
 msgstr "IMDb paieška"
 
-#: src/plugin.py:1071 src/plugin.py:1103
-msgid "Search for details from the Internet Movie Database"
-msgstr "Užklausti detaliau internetinėje filmų duomenų bazėje"
-
-#: src/plugin.py:1081
 msgid "IMDb setup"
 msgstr "IMDb sąranka"
 
-#: src/plugin.py:1082
+msgid "Menu"
+msgstr "Meniu"
+
+msgid "No IMDb match."
+msgstr "IMDb atitikimo nėra."
+
+msgid "No IMDb match:"
+msgstr "Nėra atitikimo IMDb:"
+
+msgid "No cast list found in the database."
+msgstr "Aktorių sąrašo duomenų bazėje nerasta."
+
+msgid "No details found."
+msgstr "Išsamaus aprašymo nėra."
+
+msgid "OK"
+msgstr "Gerai"
+
+msgid "Page down"
+msgstr "Puslapį žemyn"
+
+msgid "Page up"
+msgstr "Puslapį aukštyn"
+
+msgid "Play Trailer"
+msgstr "Žiūrėti anonsą"
+
+msgid "Please select the matching entry"
+msgstr "Pasirinkite atitinkantį įrašą"
+
+msgid "Plot Outline"
+msgstr "Siužetas trumpai"
+
+msgid "Production Countries:"
+msgstr "Šalys gamintojos:"
+
+#, python-format
+msgid "Query IMDb: %s"
+msgstr "Užklausti IMDb: %s"
+
+#, python-format
+msgid "Re-Query IMDb: %s..."
+msgstr "Perklausti IMDb: %s..."
+
+msgid "Release Date:"
+msgstr "Išleidimo data:"
+
+msgid "Runtime:"
+msgstr "Trukmė:"
+
+msgid "Save current Details as .html for offline use"
+msgstr "Išsaugoti šį aprašymą .html faile, kad skaityti be interneto"
+
+msgid "Save current Details as .txt"
+msgstr "Išsaugoti šį aprašymą tekstiniame faile"
+
+msgid "Save current Poster and Details as .txt"
+msgstr "Išsaugoti šį plakatą ir aprašymą tekstiniame faile"
+
+msgid "Search Trailer"
+msgstr "Ieškoti anonso"
+
+msgid "Search for details from the Internet Movie Database"
+msgstr "Užklausti detaliau internetinėje filmų duomenų bazėje"
+
 msgid "Settings for Internet Movie Database searches"
 msgstr "Internetinės filmų duomenų bazės nustatymai"
+
+msgid "Setup"
+msgstr "Sąranka"
+
+msgid "Show episode and year information for cast when available. Takes effect after the next fetch of show details."
+msgstr "Kada tai įmanoma, aktorių sąraše rodyti epizodo ir metų informaciją. Įsigalioja sekančioje išsamioje užklausoje."
+
+msgid "Show episode and year information in cast list"
+msgstr "Vaidinusių sąraše rodyti epizodo ir metų informaciją"
+
+msgid "Show full movie or series name in title menu"
+msgstr "Rodyti pilną filmo ar serijos pavadinimą antraštės meniu"
+
+msgid "Show in movie list"
+msgstr "Rodyti filmų sąraše"
+
+msgid "Show list of matched movies an series"
+msgstr "Rodyti atitinkančių serialų ir filmų sąrašą"
+
+msgid "Show movie and series basic details"
+msgstr "Rodyti filmų ir serialų pagrindinę informaciją"
+
+msgid "Show movie and series extra details"
+msgstr "Rodyti filmų ir serialų papildomą informaciją"
+
+msgid "Show search in plugin browser"
+msgstr "Rodyti paiešką įskiepių naršyklėje"
+
+msgid "Show setup in plugin browser"
+msgstr "Rodyti sąranką įskiepių naršyklėje"
+
+msgid "Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name."
+msgstr "Rodyti pilną filmo ar serijos pavadinimą antraštės meniu, įskaitant, pavyzdžiui, alternatyvų pavadinimą ir ar tai serija/serialas. Įsigalioja tik sekančioje IMDb įvykio pavadinimo paieškoje."
+
+msgid "The Internet Movie Database"
+msgstr "Internetinė filmų duomenų bazė"
+
+msgid "This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas."
+msgstr "Ši parinktis į IMDb paiešką leidžia įtraukti ignoruotinus žodžius ir frazes. Atskirkite juos kableliais."
+
+msgid "Title Menu"
+msgstr "Pavadinimų meniu"
+
+msgid "Unknown category"
+msgstr "Nežinoma kategorija"
+
+msgid "User Rating"
+msgstr "Vartotojų įvertinimas"
+
+msgid "Words / phrases to ignore "
+msgstr "Ignoruotini žodžiai ir frazės "
+
+msgid "no user rating yet"
+msgstr "vartotojai dar nereitingavo"

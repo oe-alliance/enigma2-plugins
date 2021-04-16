@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PermanentClock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2009-01-09 17:33+0100\n"
 "Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
 "Language-Team: gerrit <fy@li.org>\n"
@@ -23,11 +23,75 @@ msgstr "Permanent klok ynskeakelje"
 msgid "Change permanent clock position"
 msgstr "Feroarje permanent klok posysje"
 
+msgid "Choice color clock:"
+msgstr ""
+
+msgid "Color analog clock"
+msgstr ""
+
+msgid "Color digital clock"
+msgstr ""
+
 msgid "Deactivate permanent clock"
 msgstr "Permanent klok útskeakelje"
+
+msgid "Disable key 'long EXIT' show/hide"
+msgstr ""
+
+msgid "Enable key 'long EXIT' show/hide"
+msgstr ""
+
+msgid "PLi-transparent"
+msgstr ""
 
 msgid "Permanent Clock"
 msgstr "Permanent klok"
 
+#, fuzzy
+msgid "Permanent Clock Setup"
+msgstr "Permanent klok"
+
+msgid "Save"
+msgstr ""
+
+msgid "Set slider"
+msgstr ""
+
+msgid "Set slider step (1 - 20):"
+msgstr ""
+
+msgid "Show analog clock"
+msgstr ""
+
+msgid "Show digital clock"
+msgstr ""
+
 msgid "Shows the clock permanent on the screen"
 msgstr "Permanent klok immen op it skerm"
+
+msgid "black-blue"
+msgstr ""
+
+msgid "black-white"
+msgstr ""
+
+msgid "black-yellow"
+msgstr ""
+
+msgid "blue"
+msgstr ""
+
+msgid "large white"
+msgstr ""
+
+msgid "large yellow"
+msgstr ""
+
+msgid "transparent"
+msgstr ""
+
+msgid "white"
+msgstr ""
+
+msgid "yellow"
+msgstr ""

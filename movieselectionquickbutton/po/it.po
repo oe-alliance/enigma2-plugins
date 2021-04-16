@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 movieselectionquickbutton\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-19 13:45+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,78 +17,24 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton\n"
 
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:38
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:93
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:94
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:118
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:180
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:232
-msgid "Delete"
-msgstr "Canc."
-
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:39
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:40
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:41
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:92
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:117
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:179
-msgid "Nothing"
-msgstr "Nulla"
-
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:42
-msgid "display plugin name"
-msgstr "Mostrare il nome del plugin"
-
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:42
-msgid "display plugin description"
-msgstr "Mostrare la descrizione del plugin"
-
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:73
-msgid "Assign plugin to red key pressed"
-msgstr "Assegnare il plugin al tasto rosso"
-
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:74
-msgid "Assign plugin to green key pressed"
-msgstr "Assegnare il plugin al tasto rosso"
-
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:75
-msgid "Assign plugin to yellow key pressed"
-msgstr "Assegnare il plugin al tasto  giallo"
-
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:76
 msgid "Assign plugin to blue key pressed"
 msgstr "Assegnare il plugin al tasto blu"
 
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:95
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:96
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:122
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:181
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:234
-msgid "Home"
-msgstr "Nothing"
+msgid "Assign plugin to green key pressed"
+msgstr "Assegnare il plugin al tasto rosso"
 
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:97
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:125
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:182
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:236
-msgid "Sort"
-msgstr "Ordinare"
+msgid "Assign plugin to red key pressed"
+msgstr "Assegnare il plugin al tasto rosso"
 
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:99
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:131
-msgid "sort by date"
-msgstr "Ord. per Data"
+msgid "Assign plugin to yellow key pressed"
+msgstr "Assegnare il plugin al tasto  giallo"
 
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:101
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:128
-msgid "alphabetic sort"
-msgstr "Ord. alfabetico"
+msgid "Cancel"
+msgstr "Annull."
 
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:114
-msgid "Unknown Error"
-msgstr "Errore Sconosciuto"
+msgid "Delete"
+msgstr "Canc."
 
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:153
 #, python-format
 msgid ""
 "Error!\n"
@@ -97,48 +43,56 @@ msgstr ""
 "Errore!\n"
 "Descrizione: %s"
 
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:155
-msgid "Plugin not found!"
-msgstr "Plugin non trovato!"
+msgid "Home"
+msgstr "Nothing"
 
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:157
 msgid "No plugin assigned!"
 msgstr "Nessun plugin assegnato!"
 
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:176
-msgid "Cancel"
-msgstr "Annull."
+msgid "Nothing"
+msgstr "Nulla"
 
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:177
 msgid "OK"
 msgstr "Ok"
 
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:204
-msgid "assigned to red"
-msgstr "Assegnato al tasto rosso"
+msgid "Plugin not found!"
+msgstr "Plugin non trovato!"
 
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:205
-msgid "assigned to green"
-msgstr "Assegnato al tasto verde"
-
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:206
-msgid "assigned to yellow"
-msgstr "Assegnato al tasto giallo"
-
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:207
-msgid "assigned to blue"
-msgstr "Assegnato al tasto blu"
-
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:208
-msgid "button caption"
-msgstr "Intestazione tasto"
-
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:209
-msgid "Show Setup in Extensions menu"
-msgstr "Mostrare Configurazione nel menu Estensioni."
-
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:250
-#: /media/TREKSTOR/git/enigma2-plugins/movieselectionquickbutton/src/plugin.py:254
 msgid "Setup for MovieSelection QuickButton"
 msgstr "Configurazione MovieSelection QuickButton"
 
+msgid "Show Setup in Extensions menu"
+msgstr "Mostrare Configurazione nel menu Estensioni."
+
+msgid "Sort"
+msgstr "Ordinare"
+
+msgid "Unknown Error"
+msgstr "Errore Sconosciuto"
+
+msgid "alphabetic sort"
+msgstr "Ord. alfabetico"
+
+msgid "assigned to blue"
+msgstr "Assegnato al tasto blu"
+
+msgid "assigned to green"
+msgstr "Assegnato al tasto verde"
+
+msgid "assigned to red"
+msgstr "Assegnato al tasto rosso"
+
+msgid "assigned to yellow"
+msgstr "Assegnato al tasto giallo"
+
+msgid "button caption"
+msgstr "Intestazione tasto"
+
+msgid "display plugin description"
+msgstr "Mostrare la descrizione del plugin"
+
+msgid "display plugin name"
+msgstr "Mostrare il nome del plugin"
+
+msgid "sort by date"
+msgstr "Ord. per Data"

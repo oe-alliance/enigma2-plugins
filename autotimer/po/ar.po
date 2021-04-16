@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-31 20:55+0000\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2018-12-08 11:35+0300\n"
 "Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
 "Language-Team: mosad - مساعد الجعيد\n"
@@ -13,6 +13,20 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2\n"
 
+msgid "  Any time"
+msgstr ""
+
+msgid " (if services are enabled, bouquets are ignored.)."
+msgstr ""
+
+msgid " - Version: "
+msgstr ""
+
+#, python-format
+msgid " - Version: %s"
+msgstr ""
+
+#, python-format
 msgid ""
 "%d conflict(s) encountered when trying to add new timers:\n"
 "%s"
@@ -20,6 +34,7 @@ msgstr ""
 "%d تعارضات الواجهة عند محاولة إضافة توقيت جديد:\n"
 "%s"
 
+#, python-format
 msgid ""
 "%d conflict(s) solved with similar timer(s):\n"
 "%s"
@@ -30,6 +45,7 @@ msgstr ""
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
+#, python-format
 msgid "%s: %s at %s"
 msgstr "%s: %s at %s"
 
@@ -42,8 +58,15 @@ msgstr "تفعيل الخادم الإفتراضي الخاص"
 msgid "Add"
 msgstr "إضافة"
 
+msgid "Add filters"
+msgstr ""
+
 msgid "Add new AutoTimer"
 msgstr "إضافة مؤقت تلقائي جديد"
+
+#, fuzzy
+msgid "Add services"
+msgstr "على أى خدمة"
 
 msgid "Add similar timer on conflict"
 msgstr "أضف مؤقت مماثل حسب التعارض"
@@ -51,14 +74,21 @@ msgstr "أضف مؤقت مماثل حسب التعارض"
 msgid "Add timer as disabled on conflict"
 msgstr "إضافة مؤقت غير مفعل عند التعارض"
 
-msgid "Add zap timer instead of record timer?"
-msgstr "أضف مؤقت بدلا من مؤقت التسجيل؟"
-
 msgid "After event"
 msgstr "بعد الحدث"
 
+#, fuzzy
+msgid "All channels"
+msgstr "قنوات"
+
 msgid "All non-repeating timers"
 msgstr "مؤقت غير متكرر"
+
+msgid "Allow double timer for different services"
+msgstr ""
+
+msgid "Always write config"
+msgstr ""
 
 msgid "Amount of recordings left"
 msgstr "ربط التسجيلات على اليسار"
@@ -66,11 +96,19 @@ msgstr "ربط التسجيلات على اليسار"
 msgid "Any service/recording"
 msgstr "أي خدمة / التسجيل"
 
+#, fuzzy
+msgid "Auto Timer"
+msgstr "مؤقتات تلقائية"
+
 msgid "Auto Timers"
 msgstr "مؤقتات تلقائية"
 
 msgid "AutoTimer"
 msgstr "مؤقت تلقائي"
+
+#, fuzzy
+msgid "AutoTimer Context Menu"
+msgstr "فتح قائمة السياق"
 
 msgid "AutoTimer Editor"
 msgstr "محرر المؤقت الآلي"
@@ -90,6 +128,10 @@ msgstr "خدمات المؤقت الآلي"
 msgid "AutoTimer Settings"
 msgstr "إعدادات المؤقت الالى"
 
+#, fuzzy
+msgid "AutoTimer overview"
+msgstr "خدمات المؤقت الآلي"
+
 msgid "AutoTimer was added successfully"
 msgstr "المؤقت التلقائي أضيف بنجاح"
 
@@ -102,6 +144,14 @@ msgstr "تمت إزالة المؤقت التلقائي"
 msgid "AutoTimers"
 msgstr "المؤقتات الألية"
 
+#, fuzzy
+msgid "AutoTimers were changed successfully."
+msgstr "تم تغيير المؤقت التلقائي بنجاح"
+
+#, fuzzy
+msgid "Autotimer Settings"
+msgstr "إعدادات المؤقت الالى"
+
 msgid "Begin of \"after event\" timespan"
 msgstr "تبدء من\"بعد الحدث\" المدة الزمنية"
 
@@ -111,27 +161,14 @@ msgstr "بداية المدى الزمنى"
 msgid "Bouquets"
 msgstr "الباقات"
 
-msgid ""
-"By enabling this events will not be matched if they don't occur on certain "
-"dates."
-msgstr ""
-"من خلال تمكين لن تكون مطابقة هذه الأحداث إذا لم يكن ليحدث في تواريخ معينة."
+msgid "By enabling this events will not be matched if they don't occur on certain dates."
+msgstr "من خلال تمكين لن تكون مطابقة هذه الأحداث إذا لم يكن ليحدث في تواريخ معينة."
 
-msgid ""
-"By enabling this you will be notified about similar timers added during "
-"automated polling. There is no intelligence involved, so it might bother you "
-"about the same conflict over and over."
-msgstr ""
-"من خلال تمكين هذا سيتم إعلامك عن توقيت مماثلة وأضاف خلال التصويت الآلي. ليس "
-"هناك ذكاء معين، لذلك قد يزعجك التعارض نفسه مرارا وتكرارا."
+msgid "By enabling this you will be notified about similar timers added during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
+msgstr "من خلال تمكين هذا سيتم إعلامك عن توقيت مماثلة وأضاف خلال التصويت الآلي. ليس هناك ذكاء معين، لذلك قد يزعجك التعارض نفسه مرارا وتكرارا."
 
-msgid ""
-"By enabling this you will be notified about timer conflicts found during "
-"automated polling. There is no intelligence involved, so it might bother you "
-"about the same conflict over and over."
-msgstr ""
-"من خلال تمكين هذا سيتم إعلامك عن التعارض وتوقيت العثور عليها أثناء التصويت "
-"الآلي. ليس هناك ذكاء معين، لذلك قد يزعجك التعارض نفسه مرارا وتكرارا."
+msgid "By enabling this you will be notified about timer conflicts found during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
+msgstr "من خلال تمكين هذا سيتم إعلامك عن التعارض وتوقيت العثور عليها أثناء التصويت الآلي. ليس هناك ذكاء معين، لذلك قد يزعجك التعارض نفسه مرارا وتكرارا."
 
 msgid "Cancel"
 msgstr "إلغاء"
@@ -148,11 +185,21 @@ msgstr "قنوات"
 msgid "Check for uniqueness in"
 msgstr "التحقق من التفرد في"
 
+msgid "Check the event id (eit) and remove the timer if there is no corresponding EPG event. Due to compatibility issues with SerienRecorder and IPRec, only timer created by AutoTimer are affected."
+msgstr ""
+
 msgid "Choose target folder"
 msgstr "أختار المجلد المراد"
 
 msgid "Classic"
 msgstr "تقليدي"
+
+#, fuzzy
+msgid "Clone selected timer"
+msgstr "حذف المؤقت الآلي المختار"
+
+msgid "Close"
+msgstr ""
 
 msgid "Close and forget changes"
 msgstr "أغلق وتجاهل التغيرات"
@@ -160,14 +207,14 @@ msgstr "أغلق وتجاهل التغيرات"
 msgid "Close and save changes"
 msgstr "أغلق وأحفظ التغيرات"
 
-msgid "Configure AutoTimer behavior"
-msgstr "تكوين عمل المؤقت الآلي"
-
 msgid "Congratulations"
 msgstr "تهانينا"
 
 msgid "Control recording completely by service"
 msgstr "التحكم الكامل بالتسجيل في الخدمة"
+
+msgid "Couldn't load config file!"
+msgstr ""
 
 msgid "Create a new AutoTimer."
 msgstr "تكوين مؤقت آلى جديد."
@@ -178,6 +225,7 @@ msgstr "أنشأ مؤقت جديد بإستخدام المحرر الكلاسي�
 msgid "Create a new timer using the wizard"
 msgstr "أنشأ مؤقت جديد بإستخدام نافذه الاعدادات"
 
+#, python-format
 msgid "Custom (%s)"
 msgstr "العادي (%s)"
 
@@ -187,9 +235,7 @@ msgstr "الموقع العادي"
 msgid "Custom offset"
 msgstr "العوض العادي"
 
-msgid ""
-"Defines where to search for duplicates (only title, short description or "
-"even extended description)"
+msgid "Defines where to search for duplicates (only title, short description or even extended description)"
 msgstr "تعرف أين للبحث عن التكرارات (عنوان فقط، وصف قصير أو الوصف حتى موسع)"
 
 msgid "Delete"
@@ -210,14 +256,23 @@ msgstr "تحرير فلاتر المؤقت الآلي"
 msgid "Edit AutoTimer services"
 msgstr "تحرير خدمات المؤقت الآلي"
 
+#. TRANSLATORS: description of AutoTimer in PluginBrowser
 msgid "Edit Timers and scan for new Events"
 msgstr "تحرير المؤقت والبحث عن أحداث جديدة"
+
+#, fuzzy
+msgid "Edit filters"
+msgstr "تحرير فلاتر المؤقت الآلي"
 
 msgid "Edit new timer defaults"
 msgstr "تحرير إفتراضيات المؤقت الجديد"
 
 msgid "Edit selected AutoTimer"
 msgstr "تحرير المؤقت الآلي المختار"
+
+#, fuzzy
+msgid "Edit services"
+msgstr "تحرير خدمات المؤقت الآلي"
 
 msgid "Editing"
 msgstr "التحرير"
@@ -231,35 +286,33 @@ msgstr "تفعيل الفلاتر"
 msgid "Enable Service Restriction"
 msgstr "تفعيل محدودية الخدمه"
 
-msgid ""
-"Enable this to be able to access the AutoTimer Overview from within the "
-"extension menu."
-msgstr ""
-"تفعيل هذا لتكون قادرا على الدخول الى معاينة المؤقت الآلي من خلال قائمة "
-"الإضافات."
+msgid "Enable this to be able to access the AutoTimer Overview from within the extension menu."
+msgstr "تفعيل هذا لتكون قادرا على الدخول الى معاينة المؤقت الآلي من خلال قائمة الإضافات."
 
-msgid ""
-"Enable this to be able to access the AutoTimer Overview from within the "
-"plugin browser."
-msgstr ""
-"تفعيل هذا لتكون قادرا على الدخول الى معاينة المؤقت الآلي من خلال قائمة البلج "
-"إنز."
+msgid "Enable this to be able to access the AutoTimer Overview from within the plugin browser."
+msgstr "تفعيل هذا لتكون قادرا على الدخول الى معاينة المؤقت الآلي من خلال قائمة البلج إنز."
 
 msgid "Enabled"
 msgstr "تم التفعيل"
 
-msgid ""
-"Encoding the channel uses for it's EPG data. You only need to change this if "
-"you're searching for special characters like the german umlauts."
-msgstr ""
-"ترميز استخدام القناة لبيانات دليل البرامج. تحتاج فقط إلى تغيير هذا إذا كنت "
-"تبحث عن أحرف خاصة مثل علامات تغير في قنوات الصوت الألمانية."
+msgid "Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."
+msgstr "ترميز استخدام القناة لبيانات دليل البرامج. تحتاج فقط إلى تغيير هذا إذا كنت تبحث عن أحرف خاصة مثل علامات تغير في قنوات الصوت الألمانية."
 
 msgid "End of \"after event\" timespan"
 msgstr "النهاية \"بعد الحدث\" المدة الزمنية"
 
 msgid "End of timespan"
 msgstr "نهاية المدة الزمنية"
+
+#, fuzzy
+msgid "Enter or edit description"
+msgstr "فى وصف مختصر"
+
+msgid "Enter or edit match title"
+msgstr ""
+
+msgid "Everyday"
+msgstr ""
 
 msgid "Exact match"
 msgstr "تطابق تام"
@@ -270,6 +323,9 @@ msgstr "إستبعاد"
 msgid "Execute \"after event\" during timespan"
 msgstr "تنفيذ \"بعد الحدث\" أثناء المدة الزمنية"
 
+msgid "Exit"
+msgstr ""
+
 msgid "FAQ"
 msgstr "الأسئلة الشائعة"
 
@@ -277,25 +333,22 @@ msgid "Filter"
 msgstr "فلتر"
 
 msgid ""
-"Filters are another powerful tool when matching events. An AutoTimer can be "
-"restricted to certain Weekdays or only match an event with a text inside eg "
-"it's Description.\n"
+"Filters are another powerful tool when matching events. An AutoTimer can be restricted to certain Weekdays or only match an event with a text inside eg it's Description.\n"
 "Press BLUE to add a new restriction and YELLOW to remove the selected one."
 msgstr ""
-"المرشحات أداه قويه أخرى عند تطابق الاحداث . يمكن قصر المؤقتعلى أيام أسبوع "
-"معينه أو على تماثل حدث بكلمات داخله مثل الوصف \n"
+"المرشحات أداه قويه أخرى عند تطابق الاحداث . يمكن قصر المؤقتعلى أيام أسبوع معينه أو على تماثل حدث بكلمات داخله مثل الوصف \n"
 "أضغط الزر الازرق لإضافة قصر جديد أو الزر الاصفر لحذف ما تختارة."
 
-msgid ""
-"First day to match events. No event that begins before this date will be "
-"matched."
+msgid "First day to match events. No event that begins before this date will be matched."
 msgstr "لتوافق احداث اليوم الحالي . لن تبدأ قبل تاريخ الحدث."
 
+#, fuzzy, python-format
 msgid ""
 "Found a total of %d matching Events.\n"
 "%d Timer were added and\n"
 "%d modified,\n"
 "%d conflicts encountered,\n"
+"%d unchanged,\n"
 "%d similars added."
 msgstr ""
 "العثور على مجموع %d الاحداث المتطابقة .\n"
@@ -310,6 +363,10 @@ msgstr "أسئلة شائعة"
 msgid "Frequently asked questions about the AutoTimer"
 msgstr "الأسئلة الشائعة كثيراً حول المؤقت التلقائي"
 
+#, fuzzy
+msgid "Fri"
+msgstr "الجمعة"
+
 msgid "Friday"
 msgstr "الجمعة"
 
@@ -322,12 +379,47 @@ msgstr "تخمين المؤقت الحالي على أساس البداية / ا
 msgid "Help"
 msgstr "المساعدة"
 
-msgid ""
-"If a timer conflict occurs, AutoTimer will search outside the timespan for a "
-"similar event and add it."
+msgid "Here you can specify whether simultaneous timers of the same program can be created. This allows simultaneous recording of a program with different resolutions. (e.g. SD service and HD service)"
 msgstr ""
-"إذا حدث تعارض للمؤقت، سوف يعمل المؤقت الآلي ببحث خارج المدى الزمني لحدث "
-"مماثل وإضافته."
+
+msgid "Hour"
+msgstr ""
+
+msgid "If 0, the popup will remain open."
+msgstr ""
+
+msgid "If a timer conflict occurs, AutoTimer will search outside the timespan for a similar event and add it."
+msgstr "إذا حدث تعارض للمؤقت، سوف يعمل المؤقت الآلي ببحث خارج المدى الزمني لحدث مماثل وإضافته."
+
+msgid "If enabled, the polling will be skipped if EPGRefresh is currently running."
+msgstr ""
+
+msgid "If enabled, the polling will be skipped if a recording is in progress."
+msgstr ""
+
+msgid "If specified bouquets"
+msgstr ""
+
+#, fuzzy
+msgid "If specified services"
+msgstr "على نفس الخدمة"
+
+msgid "If specified services or bouquets"
+msgstr ""
+
+#, fuzzy
+msgid "If this is disabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
+msgstr "إن لم يكن هذا مفعلا فإن المؤقت الالى لن يبحث آليا عن أحداث تطابق المؤقت الالى الخاص بك، لكن فقط عندما تغادر الواجهه التخطيطيه بالذر الأخضر."
+
+#, python-format
+msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80% of the it."
+msgstr ""
+
+msgid "If this is selected, the name of the respective AutoTimer will be added as a tag to timers created by this plugin."
+msgstr ""
+
+msgid "If this is selected, the tag \"AutoTimer\" will be given to timers created by this plugin."
+msgstr ""
 
 msgid "Import AutoTimer"
 msgstr "إستيراد مؤقت آلى"
@@ -341,20 +433,31 @@ msgstr "إستيراد من دليل البرامج الإلكتروني"
 msgid "Include"
 msgstr "يشمل"
 
-msgid ""
-"It's possible to restrict an AutoTimer to certain Services or Bouquets or to "
-"deny specific ones.\n"
-"An Event will only match this AutoTimer if it's on a specific and not denied "
-"Service (inside a Bouquet).\n"
-"Press BLUE to add a new restriction and YELLOW to remove the selected one."
-msgstr ""
-"من الممكن تقييد المؤقت الآلي لخدمات معينة او باقات او تجاهل المحددة بعينها/"
-"nالحدث فقط ستوافق مع المؤقت الآلي إذا كان محددا وخدمة غير مرفوضة (داخل "
-"الباقات)/nأضغط الزر الازرق لإضافة تقييد جديد والزر الاصفر لإزالة المختار."
+#, fuzzy
+msgid "Include \"AutoTimer\" in tags"
+msgstr "إعدادات المؤقت الالى"
+
+#, fuzzy
+msgid "Include 'AutoTimer' in tags"
+msgstr "إعدادات المؤقت الالى"
+
+#, fuzzy
+msgid "Include AutoTimer name in tags"
+msgstr "إعدادات المؤقت الالى"
 
 msgid ""
-"Last day to match events. Events have to begin before this date to be "
-"matched."
+"It's possible to restrict an AutoTimer to certain Services or Bouquets or to deny specific ones.\n"
+"An Event will only match this AutoTimer if it's on a specific and not denied Service (inside a Bouquet).\n"
+"Press BLUE to add a new restriction and YELLOW to remove the selected one."
+msgstr "من الممكن تقييد المؤقت الآلي لخدمات معينة او باقات او تجاهل المحددة بعينها/nالحدث فقط ستوافق مع المؤقت الآلي إذا كان محددا وخدمة غير مرفوضة (داخل الباقات)/nأضغط الزر الازرق لإضافة تقييد جديد والزر الاصفر لإزالة المختار."
+
+msgid "Label Timers with season, episode and title, according to the SeriesPlugin settings."
+msgstr ""
+
+msgid "Label series"
+msgstr ""
+
+msgid "Last day to match events. Events have to begin before this date to be matched."
 msgstr "لتوافق احداث الامس .الاحداث سوف تبدء قبل التاريخ المتوافق."
 
 msgid "Location"
@@ -363,34 +466,41 @@ msgstr "الموقع"
 msgid "Lower bound of timespan."
 msgstr "الحد الأدنى من المدة الزمنية المحددة."
 
-msgid ""
-"Lower bound of timespan. Nothing before this time will be matched. Offsets "
-"are not taken into account!"
-msgstr ""
-"الحد الأدنى من المدة الزمنية المحددة.لا شي قبل الوقت المتوافق.الإزالة لاتوخذ "
-"بعين الاعتبار داخل الحساب!"
+msgid "Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into account!"
+msgstr "الحد الأدنى من المدة الزمنية المحددة.لا شي قبل الوقت المتوافق.الإزالة لاتوخذ بعين الاعتبار داخل الحساب!"
 
+#, python-format
 msgid "Match Timespan: %02d:%02d - %02d:%02d"
 msgstr "توافق الوقت المحدد : %02d:%02d - %02d:%02d"
 
 msgid "Match title"
 msgstr "مطابقة العنوان"
 
+#, python-format
 msgid "Match title: %s"
 msgstr "عنوان التوافق : %s"
 
 msgid "Maximum duration (in m)"
 msgstr "المدة القصوى (في الدقيقة)"
 
+msgid "Maximum event duration to match. If an event is longer than this amount of time (without offset) it won't be matched."
+msgstr "مدة الحدث القصوى للتوافق. إذا كان حدث أطول من هذا القدر من الوقت (بدون مقابل) لن تكون مطابقة."
+
+#, python-format
 msgid ""
-"Maximum event duration to match. If an event is longer than this amount of "
-"time (without offset) it won't be matched."
+"Message\n"
+"Do you really want to delete %s?"
 msgstr ""
-"مدة الحدث القصوى للتوافق. إذا كان حدث أطول من هذا القدر من الوقت (بدون "
-"مقابل) لن تكون مطابقة."
+
+msgid "Minute"
+msgstr ""
 
 msgid "Modify existing timers"
 msgstr "تعديل المؤقتات الحاليه"
+
+#, fuzzy
+msgid "Mon"
+msgstr "الإثنين"
 
 msgid "Monday"
 msgstr "الإثنين"
@@ -446,9 +556,11 @@ msgstr "اضافة فقط مؤقتات الايام الفائته"
 msgid "Only match during timespan"
 msgstr "تطابق اثناء المدى الزمني فقط"
 
+#, python-format
 msgid "Only on Service: %s"
 msgstr "فقط على الخدمه: %s"
 
+#, python-format
 msgid "Only on Weekday: %s"
 msgstr "فقط على أيام الأسبوع: %s"
 
@@ -461,74 +573,44 @@ msgstr "فتح قائمة السياق"
 msgid "Please provide a Text to match"
 msgstr "من فضلك أدخل نص لمقارنته"
 
+#, fuzzy, python-format
+msgid "Poll Interval (in %s)"
+msgstr "استطلاع الفاصل الزمني (في دقيقة)"
+
 msgid "Poll Interval (in mins)"
 msgstr "استطلاع الفاصل الزمني (في دقيقة)"
 
 msgid "Poll automatically"
 msgstr "الإستطلاع التلقائي"
 
-msgid ""
-"Power state to change to after recordings. Select \"standard\" to not change "
-"the default behavior of enigma2 or values changed by yourself."
+msgid "Poll unit"
 msgstr ""
-"حالة الطاقه التى سيتم التغيير إليها بعد التسجيلات . إختيار \"قياسي\" لعدم "
-"تغيير القيم الافتراضيه للاينجما أو القيم المعدله بواسطتك."
+
+msgid "Poll unit selects whether the poll interval should be interpreted in hours or minutes."
+msgstr ""
+
+msgid "Popup timeout in seconds"
+msgstr ""
+
+msgid "Power state to change to after recordings. Select \"standard\" to not change the default behavior of enigma2 or values changed by yourself."
+msgstr "حالة الطاقه التى سيتم التغيير إليها بعد التسجيلات . إختيار \"قياسي\" لعدم تغيير القيم الافتراضيه للاينجما أو القيم المعدله بواسطتك."
+
+msgid "Preview"
+msgstr ""
 
 msgid "Preview AutoTimer"
 msgstr "معاينة المؤقت الآلى"
 
-msgid ""
-"Question: I found a problem with the AutoTimer, can you fix it?/nAnswer: "
-"First try the AutoTimer version in a recent (experimental) Image to see if "
-"the problem was fixed. Then read the Help again and the upcoming FAQs to "
-"make sure that this is actually a problem and not expected behavior./nIf you "
-"still think there is something wrong with the AutoTimer, please visit http://"
-"www.dream-multimedia-tv.de/board and post your problem there./n/nQ: The "
-"plugin only adds timers when leaving the configuration, not automatically. "
-"What can I do?/nA: From the Overview press MENU and enter the 'Setup'. In "
-"this screen enable 'Poll automatically' and you should be good to go."
-msgstr ""
-"السؤال: لقد وجدت مشكلة مع أوتوتيمر، يمكنك إصلاحه؟ / نانزوير: أولا محاولة "
-"الإصدار أوتوتيمر في صورة (التجريبية) الأخيرة لمعرفة ما إذا كان تم إصلاح "
-"المشكلة. ثم قراءة التعليمات مرة أخرى والأسئلة الشائعة القادمة للتأكد من أن "
-"هذا هو في الواقع مشكلة وليس السلوك المتوقع. / إذا كنت لا تزال تعتقد أن هناك "
-"شيئا خاطئا مع أوتوتيمر، يرجى زيارة هتب: //www.dream-multimedia-tv. دي / "
-"المجلس وبعد مشكلتك هناك ./n/nq: البرنامج المساعد يضيف فقط توقيت عند مغادرة "
-"التكوين، وليس تلقائيا. ماذا يمكنني أن أفعل؟ / نا: من اضغط مينو اضغط على نظرة "
-"عامة وأدخل \"سيتوب\". في هذه الشاشة تمكين \"استطلاع تلقائيا\" ويجب أن تكون "
-"جيدة للذهاب."
+msgid "Question: I found a problem with the AutoTimer, can you fix it?/nAnswer: First try the AutoTimer version in a recent (experimental) Image to see if the problem was fixed. Then read the Help again and the upcoming FAQs to make sure that this is actually a problem and not expected behavior./nIf you still think there is something wrong with the AutoTimer, please visit http://www.dream-multimedia-tv.de/board and post your problem there./n/nQ: The plugin only adds timers when leaving the configuration, not automatically. What can I do?/nA: From the Overview press MENU and enter the 'Setup'. In this screen enable 'Poll automatically' and you should be good to go."
+msgstr "السؤال: لقد وجدت مشكلة مع أوتوتيمر، يمكنك إصلاحه؟ / نانزوير: أولا محاولة الإصدار أوتوتيمر في صورة (التجريبية) الأخيرة لمعرفة ما إذا كان تم إصلاح المشكلة. ثم قراءة التعليمات مرة أخرى والأسئلة الشائعة القادمة للتأكد من أن هذا هو في الواقع مشكلة وليس السلوك المتوقع. / إذا كنت لا تزال تعتقد أن هناك شيئا خاطئا مع أوتوتيمر، يرجى زيارة هتب: //www.dream-multimedia-tv. دي / المجلس وبعد مشكلتك هناك ./n/nq: البرنامج المساعد يضيف فقط توقيت عند مغادرة التكوين، وليس تلقائيا. ماذا يمكنني أن أفعل؟ / نا: من اضغط مينو اضغط على نظرة عامة وأدخل \"سيتوب\". في هذه الشاشة تمكين \"استطلاع تلقائيا\" ويجب أن تكون جيدة للذهاب."
 
-msgid ""
-"Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: "
-"Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: "
-"The show I'm trying to record contains umlauts in its title. AutoTimer does "
-"not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For "
-"german stations 'UTF-8' should be selected./n/nQ: I seem to be unable to "
-"record two subsequent events. There is only a single timer created that "
-"spans (part of) both events./nA: From the Overview press MENU and enter the "
-"'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
-msgstr ""
-"السؤال: بلدي أوتوتيمر ل 'أخبار' لا يسجل 'أخبار في وقت متأخر' ./ نانزوير: "
-"تحقق 'نوع البحث' و 'البحث عن تشدد' ل AutoTimer./n/nQ: البرنامج الذي أحاول "
-"تسجيل يحتوي على أوملوتس في عنوانها. أوتوتيمر لا تجد it./nA: تحقق من \"ترميز "
-"إبغ\" ل أوتوتيمر معين. لمحطات الألمانية 'أوتف-8' ينبغي أن يكون محددا. / ن / "
-"نوق: يبدو لي أن تكون غير قادرة على تسجيل حدثين لاحقة. لا يوجد سوى جهاز توقيت "
-"واحد التي تم إنشاؤها التي تمتد (جزء من) كلا event./nA: من نظرة عامة اضغط "
-"مينو وأدخل \"الإعداد\". في هذه الشاشة تعطيل \"تخمين الموقت الحالي على أساس "
-"بداية / نهاية\"."
+msgid "Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: The show I'm trying to record contains umlauts in its title. AutoTimer does not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For german stations 'UTF-8' should be selected./n/nQ: I seem to be unable to record two subsequent events. There is only a single timer created that spans (part of) both events./nA: From the Overview press MENU and enter the 'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
+msgstr "السؤال: بلدي أوتوتيمر ل 'أخبار' لا يسجل 'أخبار في وقت متأخر' ./ نانزوير: تحقق 'نوع البحث' و 'البحث عن تشدد' ل AutoTimer./n/nQ: البرنامج الذي أحاول تسجيل يحتوي على أوملوتس في عنوانها. أوتوتيمر لا تجد it./nA: تحقق من \"ترميز إبغ\" ل أوتوتيمر معين. لمحطات الألمانية 'أوتف-8' ينبغي أن يكون محددا. / ن / نوق: يبدو لي أن تكون غير قادرة على تسجيل حدثين لاحقة. لا يوجد سوى جهاز توقيت واحد التي تم إنشاؤها التي تمتد (جزء من) كلا event./nA: من نظرة عامة اضغط مينو وأدخل \"الإعداد\". في هذه الشاشة تعطيل \"تخمين الموقت الحالي على أساس بداية / نهاية\"."
 
-msgid ""
-"Question: You keep talking about help being provided for each parameter. I'm "
-"unable to read it (in part or in full)./nAnswer: Try using the default skin "
-"and if it works ask the creator of your regular skin. If it still does not "
-"work your image might not provide the actual default skin so contact the "
-"creator of your image."
+msgid "Question: You keep talking about help being provided for each parameter. I'm unable to read it (in part or in full)./nAnswer: Try using the default skin and if it works ask the creator of your regular skin. If it still does not work your image might not provide the actual default skin so contact the creator of your image."
 msgstr ""
-"السؤال: هل أظل أتحدث عن مساعدة يجري تقديم لكل معلمة. أنا غير قادر على "
-"قراءتها (جزئيا أو كليا) .\n"
-"الإجابة: حاول استخدام الجلد الافتراضي واذا كان يعمل نطلب من الخالق من الجلد "
-"العادي الخاص بك. إذا كان لا يزال لا يعمل صورتك قد لا يوفر الجلد الافتراضي "
-"الفعلي حتى اتصل منشئ الصورة."
+"السؤال: هل أظل أتحدث عن مساعدة يجري تقديم لكل معلمة. أنا غير قادر على قراءتها (جزئيا أو كليا) .\n"
+"الإجابة: حاول استخدام الجلد الافتراضي واذا كان يعمل نطلب من الخالق من الجلد العادي الخاص بك. إذا كان لا يزال لا يعمل صورتك قد لا يوفر الجلد الافتراضي الفعلي حتى اتصل منشئ الصورة."
 
 msgid "Really close without saving settings?"
 msgstr "هل تريد الإغلاق حقا بدون حفظ الإعدادات؟"
@@ -538,6 +620,9 @@ msgstr "تسجيل كحد أقصى من المرات"
 
 msgid "Record on"
 msgstr "التسجيل يعمل"
+
+msgid "Remove not existing events"
+msgstr ""
 
 msgid "Remove selected AutoTimer"
 msgstr "حذف المؤقت الآلي المختار"
@@ -551,8 +636,35 @@ msgstr "إعادة تعيين العد"
 msgid "Restrict \"after event\" to a certain timespan?"
 msgstr "تنفيذ \"بعد الحدث\" مؤكدة المدة الزمنية؟"
 
+msgid ""
+"Restrict autotimer to bouquets.\n"
+"Use the blue key to edit the bouquet filter."
+msgstr ""
+
+msgid ""
+"Restrict autotimer to specific days.\n"
+"Use the yellow key to edit the day filter."
+msgstr ""
+
+msgid ""
+"Restrict autotimer to specific services, channels.\n"
+"Use the blue key to edit the service filter."
+msgstr ""
+
+msgid "Restrict to days"
+msgstr ""
+
 msgid "Restrict to events on certain dates"
 msgstr "تقييد للأحداث في تواريخ معينة"
+
+msgid "Restrict to specific bouquets"
+msgstr ""
+
+msgid "Restrict to specific services"
+msgstr ""
+
+msgid "Sat"
+msgstr ""
 
 msgid "Saturday"
 msgstr "السبت"
@@ -566,15 +678,9 @@ msgstr "دقة البحث"
 msgid "Search type"
 msgstr "نوع البحث"
 
-msgid ""
-"Select \"exact match\" to enforce \"Match title\" to match exactly, "
-"\"partial match\" if you only want to search for a part of the event title "
-"or \"description match\" if you only want to search for a part of the event "
-"description"
-msgstr ""
-"حدد \"تطابق تام\" لفرض \"عنوان المباراة\" لتتطابق تماما \"تطابق جزئي\" إذا "
-"كنت تريد فقط للبحث عن جزء من عنوان الحدث أو \"وصف المباراة\" إذا كنت تريد "
-"فقط للبحث عن جزء من وصف الحدث"
+#, fuzzy
+msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description."
+msgstr "حدد \"تطابق تام\" لفرض \"عنوان المباراة\" لتتطابق تماما \"تطابق جزئي\" إذا كنت تريد فقط للبحث عن جزء من عنوان الحدث أو \"وصف المباراة\" إذا كنت تريد فقط للبحث عن جزء من وصف الحدث"
 
 msgid "Select a timer to import"
 msgstr "أختار المؤقت المراد إدخاله"
@@ -597,18 +703,17 @@ msgstr "أختار الطقس أو إذا كنت تريد فرض حالة صحت
 msgid "Set End Time"
 msgstr "تعيين وقت انتهاء"
 
-msgid ""
-"Set an end time for the timer. If you do, the timespan of the event might be "
-"blocked for recordings."
-msgstr ""
-"تعيين وقت النهاية للتوقيت. إذا قمت بذلك، المدى الزمني للحدث قد يكون قد تم "
-"حظره للتسجيلات."
+msgid "Set an end time for the timer. If you do, the timespan of the event might be blocked for recordings."
+msgstr "تعيين وقت النهاية للتوقيت. إذا قمت بذلك، المدى الزمني للحدث قد يكون قد تم حظره للتسجيلات."
 
 msgid "Set maximum duration"
 msgstr "حدد أقصى مده"
 
 msgid "Set this NO to disable this AutoTimer."
 msgstr "ضبط هذا لا لتعطيل المؤقت الآلي."
+
+msgid "Set timer type: zap, simple record, zap+record (always zap to service before start record)."
+msgstr ""
 
 msgid "Setup"
 msgstr "الضبـط"
@@ -619,8 +724,7 @@ msgstr "هل تريد أن يكون المؤقت الآلي محددا بهذه 
 msgid "Should this AutoTimer only match up to a certain event duration?"
 msgstr "هل هذا المؤقت الآلى سيتطابق مع مده حدث معين ؟"
 
-msgid ""
-"Should timers created by this AutoTimer be recorded to a custom location?"
+msgid "Should timers created by this AutoTimer be recorded to a custom location?"
 msgstr "يجب تسجيل المؤقتات التي أنشاءها هذا المؤقت الآلي إلى موقع مخصص؟"
 
 msgid "Show in extension menu"
@@ -635,16 +739,36 @@ msgstr "عرض التبيهات المتعارضة"
 msgid "Show notification on similars"
 msgstr "عرض التنبيهات المتشابهة"
 
+msgid "Skip poll during epg refresh"
+msgstr ""
+
+msgid "Skip poll during records"
+msgstr ""
+
 msgid "Sort AutoTimer"
 msgstr "تصنيف المؤقت الآلي"
 
 msgid "Sort Time"
 msgstr "تصنيف الوقت"
 
+msgid "Startup delay (in min)"
+msgstr ""
+
+msgid "Startup delay is the number of minutes before polling after a reboot, so as to not delay enigma2 startup time."
+msgstr ""
+
+#, fuzzy
+msgid "Sun"
+msgstr "الاحد"
+
 msgid "Sunday"
 msgstr "الاحد"
 
 msgid "Support \"Fast Scan\"?"
+msgstr "دعم \"البحث السريع\"؟"
+
+#, fuzzy
+msgid "Support 'Fast Scan'?"
 msgstr "دعم \"البحث السريع\"؟"
 
 msgid "Tags"
@@ -654,8 +778,7 @@ msgid "Tags the Timer/Recording will have."
 msgstr "علامات المؤقت / لديك تسجيل."
 
 msgid ""
-"Thank you for using the wizard. Your new AutoTimer has been added to the "
-"List.\n"
+"Thank you for using the wizard. Your new AutoTimer has been added to the List.\n"
 "Please press OK to continue."
 msgstr ""
 "شكرا على استخدامك هذا المعالج. تم إضافة المؤقت الآلي الجديد الى القائمة \n"
@@ -664,23 +787,8 @@ msgstr ""
 msgid "The 'Overview'"
 msgstr "نظرة عامة"
 
-msgid ""
-"The AutoTimer overview is the standard entry point to this plugin./n/nIf "
-"AutoTimers are configured you can choose them from a list to change them (OK "
-"button on your remote) or remove them (YELLOW button on your remote)./nNew "
-"Timers can be added by pressing the BLUE button and the control menu can be "
-"opened using the MENU button./n/nWhen leaving the plugin using the GREEN "
-"button it will search the EPG for matching events ONCE. To configure a "
-"regular search interval of the plugin to search for events open the control "
-"menu and enter the plugin setup."
-msgstr ""
-"نظرة عامة أوتوتيمر هي نقطة الدخول القياسية لهذا plugin./n/nIf يتم تكوين "
-"أوتوتيمرز يمكنك اختيارها من قائمة لتغييرها (زر موافق على جهاز التحكم عن بعد) "
-"أو إزالتها (الزر الأصفر على جهاز التحكم عن بعد) ./ نينو مؤقتات يمكن أن تضاف "
-"عن طريق الضغط على زر الأزرق وقائمة التحكم يمكن فتحها باستخدام زر مينو. / n / "
-"n عند ترك البرنامج المساعد باستخدام الزر الأخضر فإنه سيتم البحث في إبغ "
-"لمطابقة الأحداث مرة واحدة. لتكوين فاصل بحث عادي للمكون الإضافي للبحث عن "
-"الأحداث افتح قائمة التحكم وأدخل إعداد المكون الإضافي."
+msgid "The AutoTimer overview is the standard entry point to this plugin./n/nIf AutoTimers are configured you can choose them from a list to change them (OK button on your remote) or remove them (YELLOW button on your remote)./nNew Timers can be added by pressing the BLUE button and the control menu can be opened using the MENU button./n/nWhen leaving the plugin using the GREEN button it will search the EPG for matching events ONCE. To configure a regular search interval of the plugin to search for events open the control menu and enter the plugin setup."
+msgstr "نظرة عامة أوتوتيمر هي نقطة الدخول القياسية لهذا plugin./n/nIf يتم تكوين أوتوتيمرز يمكنك اختيارها من قائمة لتغييرها (زر موافق على جهاز التحكم عن بعد) أو إزالتها (الزر الأصفر على جهاز التحكم عن بعد) ./ نينو مؤقتات يمكن أن تضاف عن طريق الضغط على زر الأزرق وقائمة التحكم يمكن فتحها باستخدام زر مينو. / n / n عند ترك البرنامج المساعد باستخدام الزر الأخضر فإنه سيتم البحث في إبغ لمطابقة الأحداث مرة واحدة. لتكوين فاصل بحث عادي للمكون الإضافي للبحث عن الأحداث افتح قائمة التحكم وأدخل إعداد المكون الإضافي."
 
 msgid ""
 "The Timer will not be added to the List.\n"
@@ -689,145 +797,70 @@ msgstr ""
 "لن يتم إضافة المؤقت للقائمة. \n"
 "من فضلك أضغط موافق لإغلاق النافذه."
 
-msgid ""
-"The Timespan of an AutoTimer is the first 'advanced' attribute. If a "
-"timespan is specified an event will only match this AutoTimer if it lies "
-"inside of this timespan."
-msgstr ""
-"المدى الزمنى للمؤقت الزمنى هو السمه المتقدمه الاولى. إذا كان المدى الزمنى "
-"محدد ، فإن حدثا سوف يطابق هذا المؤقت الآلى إذا كان يقع فى هذا المدى الزمني."
+msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
+msgstr "المدى الزمنى للمؤقت الزمنى هو السمه المتقدمه الاولى. إذا كان المدى الزمنى محدد ، فإن حدثا سوف يطابق هذا المؤقت الآلى إذا كان يقع فى هذا المدى الزمني."
 
-msgid ""
-"The control menu hides less frequently used options of the plugin, including "
-"the configuration and default settings for new AutoTimers./n/nWhile you can "
-"just open the menu and take a look for yourself, let's go through the "
-"available options:/n - Help:/n   What you are looking at right now/n - "
-"Preview:/n   Simulate EPG search, helps finding errors in your setup./n - "
-"Import existing Timer:/n   Create a new AutoTimer based on an existing "
-"regular timer./n - Import from EPG:/n   Create an AutoTimer based on an EPG "
-"event./n - Setup:/n   Generic configuration of the plugin./n - Edit new "
-"timer defaults:/n   Configure default values for new AutoTimers./n - Create "
-"a new timer using the wizard/classic editor:/n   Use the non-default editor "
-"to create a new AutoTimer."
+msgid "The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "
 msgstr ""
-"قائمة التحكم يخفي خيارات أقل استخداما من البرنامج المساعد، بما في ذلك "
-"إعدادات التكوين والإعدادات الافتراضية ل AutoTimers./n/nWhile يمكنك فقط فتح "
-"القائمة وإلقاء نظرة لنفسك، دعونا نذهب من خلال الخيارات المتاحة: / ن - "
-"مساعدة : / n ما كنت تبحث في الوقت الحالي / n - معاينة: / ن محاكاة البحث إبغ، "
-"يساعد على العثور على أخطاء في الإعداد الخاص بك. / n - استيراد الموقت "
-"الحالي: / ن إنشاء أوتوتيمر جديدة على أساس مؤقت العادية الحالية. - استيراد من "
-"إبغ: / n إنشاء أوتوتيمر استنادا إلى حدث إبغ. / n - الإعداد: / n التكوين "
-"العام لل plugin./n - تحرير الإعدادات الافتراضية مؤقت جديد: / n تكوين القيم "
-"الافتراضية ل AutoTimers./n جديدة جهاز توقيت جديد باستخدام المعالج / محرر "
-"الكلاسيكية: / n استخدام المحرر غير الافتراضي لإنشاء أوتوتيمر جديدة."
 
-msgid ""
-"The counter can automatically be reset to the limit at certain intervals."
+msgid "The control menu hides less frequently used options of the plugin, including the configuration and default settings for new AutoTimers./n/nWhile you can just open the menu and take a look for yourself, let's go through the available options:/n - Help:/n   What you are looking at right now/n - Preview:/n   Simulate EPG search, helps finding errors in your setup./n - Import existing Timer:/n   Create a new AutoTimer based on an existing regular timer./n - Import from EPG:/n   Create an AutoTimer based on an EPG event./n - Setup:/n   Generic configuration of the plugin./n - Edit new timer defaults:/n   Configure default values for new AutoTimers./n - Create a new timer using the wizard/classic editor:/n   Use the non-default editor to create a new AutoTimer."
+msgstr "قائمة التحكم يخفي خيارات أقل استخداما من البرنامج المساعد، بما في ذلك إعدادات التكوين والإعدادات الافتراضية ل AutoTimers./n/nWhile يمكنك فقط فتح القائمة وإلقاء نظرة لنفسك، دعونا نذهب من خلال الخيارات المتاحة: / ن - مساعدة : / n ما كنت تبحث في الوقت الحالي / n - معاينة: / ن محاكاة البحث إبغ، يساعد على العثور على أخطاء في الإعداد الخاص بك. / n - استيراد الموقت الحالي: / ن إنشاء أوتوتيمر جديدة على أساس مؤقت العادية الحالية. - استيراد من إبغ: / n إنشاء أوتوتيمر استنادا إلى حدث إبغ. / n - الإعداد: / n التكوين العام لل plugin./n - تحرير الإعدادات الافتراضية مؤقت جديد: / n تكوين القيم الافتراضية ل AutoTimers./n جديدة جهاز توقيت جديد باستخدام المعالج / محرر الكلاسيكية: / n استخدام المحرر غير الافتراضي لإنشاء أوتوتيمر جديدة."
+
+msgid "The counter can automatically be reset to the limit at certain intervals."
 msgstr "يمكن تلقائيا إعادة تعيين العداد إلى الحد الأقصى على فترات معينة."
 
-msgid ""
-"The editor to be used for new AutoTimers. This can either be the Wizard or "
-"the classic editor."
-msgstr ""
-"محرر لاستخدامها في AutoTimers جديدة. هذا يمكن أن يكون إما معالج أو محرر "
-"الكلاسيكية."
+msgid "The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
+msgstr "محرر لاستخدامها في AutoTimers جديدة. هذا يمكن أن يكون إما معالج أو محرر الكلاسيكية."
 
 msgid "The match attribute is mandatory."
 msgstr "التطابق ميزة إلزامية."
 
-msgid ""
-"This FAQ is supposed to help everyone unwilling to help themselves by "
-"reading all the provided help available, and those who did not find a "
-"solution to their problems within the provided documentation./n/nTo make "
-"these hints a little easier to read, they are split up on multiple pages. "
-"You can go to the next page using the BLUE button on your remote control and "
-"back using the YELLOW one. Pressing the RED button or EXIT will close the "
-"FAQ."
+msgid "This FAQ is supposed to help everyone unwilling to help themselves by reading all the provided help available, and those who did not find a solution to their problems within the provided documentation./n/nTo make these hints a little easier to read, they are split up on multiple pages. You can go to the next page using the BLUE button on your remote control and back using the YELLOW one. Pressing the RED button or EXIT will close the FAQ."
 msgstr ""
-"وهذا يفترض التعليمات لمساعدة الجميع على استعداد لمساعدة أنفسهم من خلال قراءة "
-"كل المساعدة المقدمة المتاحة، وأولئك الذين لم يجدوا حلا لمشاكلهم داخل توثيق.\n"
-" قدمت جعل هذه التلميحات قليلا أسهل للقراءة، فهي تقسيم على عدة صفحات. يمكنك "
-"الذهاب إلى الصفحة التالية باستخدام الزر الأزرق على جهاز التحكم عن بعد ومرة ​​"
-"أخرى باستخدام واحد الأصفر. والضغط على الزر الأحمر أو خروج و إغلاق التعليمات."
+"وهذا يفترض التعليمات لمساعدة الجميع على استعداد لمساعدة أنفسهم من خلال قراءة كل المساعدة المقدمة المتاحة، وأولئك الذين لم يجدوا حلا لمشاكلهم داخل توثيق.\n"
+" قدمت جعل هذه التلميحات قليلا أسهل للقراءة، فهي تقسيم على عدة صفحات. يمكنك الذهاب إلى الصفحة التالية باستخدام الزر الأزرق على جهاز التحكم عن بعد ومرة ​​أخرى باستخدام واحد الأصفر. والضغط على الزر الأحمر أو خروج و إغلاق التعليمات."
 
 msgid ""
-"This help screen is supposed to give you a quick look at everything the "
-"AutoTimer has to offer./nYou can abort it at any time by pressing the RED or "
-"EXIT button on your remote control or bring it up at a later point by "
-"selecting it from the control menu using the MENU button from the regular "
-"entry point of the plugin (more on that later)./n/n/nBut you really should "
-"consider to take the few minutes it takes to read these help pages."
+"This allows you to apply other filters.\n"
+"Use the yellow key to edit other filters."
 msgstr ""
-"وهذا يفترض شاشة التعليمات لإعطائك نظرة سريعة على كل شيء المؤقت التلقائي أن "
-"تفعله.\n"
-" يمكن إسقاطه في أي وقت عن طريق الضغط على زر أحمر أو خروج على جهاز التحكم عن "
-"بعد أو جعله يصل في وقت لاحق عن طريق اختيار من القائمة التحكم باستخدام زر "
-"القائمة من نقطة الدخول العادية من البرنامج المساعد (أكثر على ذلك لاحقا) .\n"
-" لكن هل حقا ينبغي أن تنظر في اتخاذ بضع دقائق اللازم لقراءة هذه الصفحات "
-"المساعدة."
 
-msgid ""
-"This is a name you can give the AutoTimer. It will be shown in the Overview "
-"and the Preview."
+msgid "This help screen is supposed to give you a quick look at everything the AutoTimer has to offer./nYou can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by selecting it from the control menu using the MENU button from the regular entry point of the plugin (more on that later)./n/n/nBut you really should consider to take the few minutes it takes to read these help pages."
 msgstr ""
-"هذا هو الاسم الذى يمكنك إعطاؤه للمؤقت الآلي . سيظهر فى المعاينه والنظره "
-"العامه ."
+"وهذا يفترض شاشة التعليمات لإعطائك نظرة سريعة على كل شيء المؤقت التلقائي أن تفعله.\n"
+" يمكن إسقاطه في أي وقت عن طريق الضغط على زر أحمر أو خروج على جهاز التحكم عن بعد أو جعله يصل في وقت لاحق عن طريق اختيار من القائمة التحكم باستخدام زر القائمة من نقطة الدخول العادية من البرنامج المساعد (أكثر على ذلك لاحقا) .\n"
+" لكن هل حقا ينبغي أن تنظر في اتخاذ بضع دقائق اللازم لقراءة هذه الصفحات المساعدة."
 
-msgid ""
-"This is mostly a matter of taste./nThe Wizard provides you with a reduced "
-"set of options and presents them in smaller sets at a time. It is mostly "
-"aimed at users not very experienced with this plugin or the 'expert' level "
-"features of enigma2./n/nYou can check out the 'classic' editor by opening an "
-"existing timer from the overview and if you prefer this view over the wizard "
-"you can change the default editor in the setup dialog."
+msgid "This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."
+msgstr "هذا هو الاسم الذى يمكنك إعطاؤه للمؤقت الآلي . سيظهر فى المعاينه والنظره العامه ."
+
+msgid "This is mostly a matter of taste./nThe Wizard provides you with a reduced set of options and presents them in smaller sets at a time. It is mostly aimed at users not very experienced with this plugin or the 'expert' level features of enigma2./n/nYou can check out the 'classic' editor by opening an existing timer from the overview and if you prefer this view over the wizard you can change the default editor in the setup dialog."
 msgstr ""
 "وهذا هو الغالب مسألة الذوق \n"
-" معالج يوفر لك مع انخفاض مجموعة من الخيارات، ويقدم لهم في مجموعات أصغر في كل "
-"مرة. وتهدف في الغالب على المستخدمين عدم خبرة كبيرة مع هذا البرنامج المساعد "
-"أو ملامح 'الخبير' مستوى انت في الانجما\n"
-" يمكن أن تحقق من المحرر \"الكلاسيكي\" بفتح الموقت الموجودة من نظرة وإذا كنت "
-"تفضل هذا الرأي على المعالج يمكنك تغيير المحرر الافتراضي في الحوار الإعداد."
+" معالج يوفر لك مع انخفاض مجموعة من الخيارات، ويقدم لهم في مجموعات أصغر في كل مرة. وتهدف في الغالب على المستخدمين عدم خبرة كبيرة مع هذا البرنامج المساعد أو ملامح 'الخبير' مستوى انت في الانجما\n"
+" يمكن أن تحقق من المحرر \"الكلاسيكي\" بفتح الموقت الموجودة من نظرة وإذا كنت تفضل هذا الرأي على المعالج يمكنك تغيير المحرر الافتراضي في الحوار الإعداد."
 
-msgid ""
-"This is the delay in minutes that the AutoTimer will wait after a search to "
-"search the EPG again."
-msgstr ""
-"سيكون هذا التأخير لدقائق معدودة, المؤقت التلقائي سوف ننتظر تفتيش البحث في "
-"دليل البرامج الإلكترونية مرة أخرى."
+#, fuzzy, python-format
+msgid "This is the delay in %s that the AutoTimer will wait after doing a search before searching the EPG again."
+msgstr "سيكون هذا التأخير لدقائق معدودة, المؤقت التلقائي سوف ننتظر تفتيش البحث في دليل البرامج الإلكترونية مرة أخرى."
 
-msgid ""
-"This is what will be looked for in event titles. Note that looking for e.g. "
-"german umlauts can be tricky as you have to know the encoding the channel "
-"uses."
-msgstr ""
-"وهذا ما سيتم بدا عليه في عناوين الحدث. لاحظ أن تبحث عن مثل علامات تغير في "
-"الصوت الألمانية يمكن أن تكون خادعة لديك لمعرفة ترميز تستخدم القناة."
+msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
+msgstr "وهذا ما سيتم بدا عليه في عناوين الحدث. لاحظ أن تبحث عن مثل علامات تغير في الصوت الألمانية يمكن أن تكون خادعة لديك لمعرفة ترميز تستخدم القناة."
 
-msgid ""
-"This screen should be pretty straight-forward. If the option name does not "
-"give its meaning away there should be an explanation for each of them when "
-"you select them. If there is no visible explanation this is most likely a "
-"skin issue and please try if the default skin fixes the issue./n/nA lot of "
-"effort has been put in making the parameters as easy to understand as "
-"possible, so give reading them a try ;-)."
+msgid "This screen should be pretty straight-forward. If the option name does not give its meaning away there should be an explanation for each of them when you select them. If there is no visible explanation this is most likely a skin issue and please try if the default skin fixes the issue./n/nA lot of effort has been put in making the parameters as easy to understand as possible, so give reading them a try ;-)."
 msgstr ""
-"وينبغي أن تكون هذه الشاشة جميلة على التوالي إلى الأمام. إذا لم يكن اسم "
-"الخيار تعطي معناها بعيدا ينبغي أن يكون هناك تفسير لكل منهم عند تحديدها. إذا "
-"لم يكن هناك تفسير واضح وهذا هو الأرجح قضية الجلد ويرجى المحاولة إذا كان "
-"الجلد الافتراضي على إصلاح الكثير من المشاكل \n"
-" ومن الجهد وضعت في جعل المعلمات من السهل أن نفهم ممكن، حتى تعطي القراءة لهم "
-"محاولة ؛-)."
+"وينبغي أن تكون هذه الشاشة جميلة على التوالي إلى الأمام. إذا لم يكن اسم الخيار تعطي معناها بعيدا ينبغي أن يكون هناك تفسير لكل منهم عند تحديدها. إذا لم يكن هناك تفسير واضح وهذا هو الأرجح قضية الجلد ويرجى المحاولة إذا كان الجلد الافتراضي على إصلاح الكثير من المشاكل \n"
+" ومن الجهد وضعت في جعل المعلمات من السهل أن نفهم ممكن، حتى تعطي القراءة لهم محاولة ؛-)."
 
 msgid "This setting controls the behavior when a timer matches a found event."
 msgstr "هذا الاعداد سيتحكم فى التصرف عندمايطابق المؤقت حدث تم العثور عليه."
 
-msgid ""
-"This toggles the behavior on timer conflicts. If an AutoTimer matches an "
-"event that conflicts with an existing timer it will not ignore this event "
-"but add it disabled."
-msgstr ""
-"هذا تبديل السلوك على الصراعات الموقت. إذا يطابق AutoTimer وهو الحدث الذي "
-"يتعارض مع توقيت الحالية فإنه لن تجاهل هذا الحدث ولكن إضافته المعوقين."
+msgid "This toggles the behavior on timer conflicts. If an AutoTimer matches an event that conflicts with an existing timer it will not ignore this event but add it disabled."
+msgstr "هذا تبديل السلوك على الصراعات الموقت. إذا يطابق AutoTimer وهو الحدث الذي يتعارض مع توقيت الحالية فإنه لن تجاهل هذا الحدث ولكن إضافته المعوقين."
+
+#, fuzzy
+msgid "Thur"
+msgstr "الخميس"
 
 msgid "Thursday"
 msgstr "الخميس"
@@ -850,29 +883,32 @@ msgstr "العنوان والوصف القصير"
 msgid "Title and all descriptions"
 msgstr "العنوان وجميع الأوصاف"
 
-msgid "Tuesday"
+#, fuzzy
+msgid "Tue"
 msgstr "الثلاثاء"
 
-msgid ""
-"Unless this is enabled AutoTimer will NOT automatically look for events "
-"matching your AutoTimers but only when you leave the GUI with the green "
-"button."
-msgstr ""
-"إن لم يكن هذا مفعلا فإن المؤقت الالى لن يبحث آليا عن أحداث تطابق المؤقت "
-"الالى الخاص بك، لكن فقط عندما تغادر الواجهه التخطيطيه بالذر الأخضر."
+msgid "Tuesday"
+msgstr "الثلاثاء"
 
 msgid "Upper bound of timespan."
 msgstr "الحد الأعلى من المدى الزمني."
 
-msgid ""
-"Upper bound of timespan. Nothing after this time will be matched. Offsets "
-"are not taken into account!"
-msgstr ""
-"الحد الأعلى من المدى الزمني. لا شيء بعد هذا الوقت سوف تكون مطابقة. لا تؤخذ "
-"بعين الاعتبار إزاحة!"
+msgid "Upper bound of timespan. Nothing after this time will be matched. Offsets are not taken into account!"
+msgstr "الحد الأعلى من المدى الزمني. لا شيء بعد هذا الوقت سوف تكون مطابقة. لا تؤخذ بعين الاعتبار إزاحة!"
 
 msgid "Use a custom location"
 msgstr "استخدام موقع مخصص"
+
+msgid "Use automatic selection of alternates."
+msgstr ""
+
+#, fuzzy
+msgid "Use other filters"
+msgstr "تحرير فلاتر المؤقت الآلي"
+
+#, fuzzy
+msgid "Wed"
+msgstr "يوم في الاسبوع"
 
 msgid "Wednesday"
 msgstr "الاربعاء"
@@ -895,8 +931,7 @@ msgstr "أهلا وسهلا بكم في بلج إنز المؤقت التلقا�
 msgid ""
 "Welcome.\n"
 "\n"
-"This Wizard will help you to create a new AutoTimer by providing "
-"descriptions for common settings."
+"This Wizard will help you to create a new AutoTimer by providing descriptions for common settings."
 msgstr ""
 "مرحبا بكم. \n"
 "\n"
@@ -905,33 +940,20 @@ msgstr ""
 msgid "What is this 'control menu' you keep talking about?"
 msgstr "ما هو هذا \"قائمة التحكم\" واصلتم تتحدث عنه؟"
 
-msgid ""
-"When supporting \"Fast Scan\" the service type is ignored. You don't need to "
-"enable this unless your Image supports \"Fast Scan\" and you are using it."
-msgstr ""
-"عندما يتم دعم \"البحث السريع\" يتم تجاهل نوع الخدمة. لاتحتاج لتمكين هذا مالم "
-"تدعم صورة الخاص بك داخل خاصية \"البحث السريع\" وتقوم بإستخدمها."
+msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
+msgstr "عندما يتم دعم \"البحث السريع\" يتم تجاهل نوع الخدمة. لاتحتاج لتمكين هذا مالم تدعم صورة الخاص بك داخل خاصية \"البحث السريع\" وتقوم بإستخدمها."
 
-msgid ""
-"When this is enabled AutoTimer will ONLY check for new events whilst in "
-"stanadby."
-msgstr ""
-"عندما يتم تمكين هذه المؤقت التلقائي سوف تحقق فقط عن أحداث جديدة بينما الجهاز "
-"في وضع الإستعداد."
+msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."
+msgstr "عندما يتم تمكين هذه المؤقت التلقائي سوف تحقق فقط عن أحداث جديدة بينما الجهاز في وضع الإستعداد."
 
-msgid ""
-"When this option is enabled the AutoTimer won't match events where another "
-"timer with the same description already exists in the timer list."
-msgstr ""
-"عند تفعيل هذا الخيار ، المؤقت الآلي لن يطابق أحداث عند وجود مؤقت آخر بنفس "
-"الوصف فى قائمة المؤقت."
+msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."
+msgstr "عند تفعيل هذا الخيار ، المؤقت الآلي لن يطابق أحداث عند وجود مؤقت آخر بنفس الوصف فى قائمة المؤقت."
 
-msgid ""
-"With this option you can restrict the AutoTimer to a certain amount of "
-"scheduled recordings. Set this to 0 to disable this functionality."
+msgid "With this option enabled the channel to record will be selected automaticliy using your list of alternates."
 msgstr ""
-"مع هذا الخيار يمكنك تقييد المؤقت الآلي إلى كمية معينة من التسجيلات المجدولة. "
-"تعيين هذا إلى 0 لتعطيل هذه الوظيفة."
+
+msgid "With this option you can restrict the AutoTimer to a certain amount of scheduled recordings. Set this to 0 to disable this functionality."
+msgstr "مع هذا الخيار يمكنك تقييد المؤقت الآلي إلى كمية معينة من التسجيلات المجدولة. تعيين هذا إلى 0 لتعطيل هذه الوظيفة."
 
 msgid "Wizard"
 msgstr "نافذة إعدادات"
@@ -939,36 +961,37 @@ msgstr "نافذة إعدادات"
 msgid "Wizard or Classic Editor?"
 msgstr "نافذة الإعدادات أو محرر كلاسيكي؟"
 
+msgid "Write the config file after every change which the user quits by saving."
+msgstr ""
+
 msgid "Yes"
 msgstr "نعم"
+
+msgid "Yes, and delete all timers generated by this autotimer"
+msgstr ""
+
+msgid "Yes, but keep timers generated by this autotimer"
+msgstr ""
 
 msgid "Yes, keep them."
 msgstr "نعم,والإحتفاظ بها."
 
-msgid ""
-"You can control for how many days in the future timers are added. Set this "
-"to 0 to disable this feature."
-msgstr ""
-"يمكنك التحكم عن كم يوما في أجهزة ضبط الوقت في المستقبل تضاف. تعيين هذا إلى 0 "
-"لتعطيل هذه الميزة."
+msgid "You can control for how many days in the future timers are added. Set this to 0 to disable this feature."
+msgstr "يمكنك التحكم عن كم يوما في أجهزة ضبط الوقت في المستقبل تضاف. تعيين هذا إلى 0 لتعطيل هذه الميزة."
 
 msgid ""
 "You can set the basic properties of an AutoTimer here.\n"
-"While 'Name' is just a human-readable name displayed in the Overview, 'Match "
-"in title' is what is looked for in the EPG."
+"While 'Name' is just a human-readable name displayed in the Overview, 'Match in title' is what is looked for in the EPG."
 msgstr ""
 "تستطيع ضبط الخصائص الأساسية للمؤقت الآلي هنا.\n"
-"في حين أن 'اسم' هو مجرد اسم قابل للقراءة البشرية المعروضة في نظرة عامة، "
-"\"المباراة في العنوان\" هو ما بدا عليه في دليل البرامج الإلكترونية."
+"في حين أن 'اسم' هو مجرد اسم قابل للقراءة البشرية المعروضة في نظرة عامة، \"المباراة في العنوان\" هو ما بدا عليه في دليل البرامج الإلكترونية."
 
 msgid ""
-"You did not provide a valid 'Match in title' Attribute for your new "
-"AutoTimer.\n"
+"You did not provide a valid 'Match in title' Attribute for your new AutoTimer.\n"
 "As this is a mandatory Attribute you cannot continue without doing so."
-msgstr ""
-"أنت لم تقدم صالحة &quot;المباراة في عنوان&quot; سمة لAutoTimer الجديد. \\\\ "
-"ناس هذا هو سمة إلزامية كنت لا يمكن أن يستمر دون أن تفعل ذلك."
+msgstr "أنت لم تقدم صالحة &quot;المباراة في عنوان&quot; سمة لAutoTimer الجديد. \\\\ ناس هذا هو سمة إلزامية كنت لا يمكن أن يستمر دون أن تفعل ذلك."
 
+#, python-format
 msgid ""
 "You entered \"%s\" as Text to match.\n"
 "Do you want to remove trailing whitespaces?"
@@ -976,20 +999,13 @@ msgstr ""
 "لقد أدخلت \"%s\" كنص للمطابقه . \n"
 "هل تريد حذف المسافات الزائده ؟"
 
-msgid ""
-"You now know almost everything there is to know about the AutoTimer-Plugin./"
-"n/nAs a final hint I can't stress how important it is to take a look at the "
-"help texts that are shown in the setup dialogs as they cover the most "
-"frequently asked questions. Surprisingly even after the hints were added ;-)."
+msgid "You now know almost everything there is to know about the AutoTimer-Plugin./n/nAs a final hint I can't stress how important it is to take a look at the help texts that are shown in the setup dialogs as they cover the most frequently asked questions. Surprisingly even after the hints were added ;-)."
 msgstr ""
 "أنت تعرف الآن كل شيء تقريبا ما يمكن معرفته عن بلج إنز المؤقت التلقائي\n"
-" تلميحا النهائي ولا أستطيع أن أؤكد كم هو مهم لنلقي نظرة على نصوص التعليمات "
-"التي تظهر في مربعات حوار الإعداد لأنها تغطي الأسئلة الأكثر شيوعا. والمثير "
-"للدهشة حتى بعد أضيفت تلميحات ؛-)."
+" تلميحا النهائي ولا أستطيع أن أؤكد كم هو مهم لنلقي نظرة على نصوص التعليمات التي تظهر في مربعات حوار الإعداد لأنها تغطي الأسئلة الأكثر شيوعا. والمثير للدهشة حتى بعد أضيفت تلميحات ؛-)."
 
 msgid ""
-"You successfully configured a new AutoTimer. Do you want to add it to the "
-"list?\n"
+"You successfully configured a new AutoTimer. Do you want to add it to the list?\n"
 "\n"
 "You can go back a step by pressing EXIT on your remote."
 msgstr ""
@@ -1005,6 +1021,7 @@ msgstr ""
 "\n"
 "يرجى تأكيد إذا كان هذا مقصودا، إذا لم يكن كذلك سيتم إزالتها."
 
+#, python-format
 msgid ""
 "Your config file is not well-formed:\n"
 "%s"
@@ -1012,9 +1029,17 @@ msgstr ""
 "ملف التكوين غير جيد :\n"
 "%s"
 
+msgid "[B]  "
+msgstr ""
+
+msgid "[S]  "
+msgstr ""
+
+#. TRANSLATORS: AutoTimer title in MovieList (automatically opens importer, I consider this no further interaction)
 msgid "add AutoTimer"
 msgstr "إضافة مؤقت تلقائي"
 
+#. TRANSLATORS: AutoTimer title in EventInfo dialog (requires the user to select an event to base the AutoTimer on)
 msgid "add AutoTimer..."
 msgstr "إضافة مؤقت ألى...."
 
@@ -1039,10 +1064,18 @@ msgstr "الوصف المتطابق"
 msgid "disable"
 msgstr "يعطل"
 
+#, fuzzy
+msgid "disabled"
+msgstr "يعطل"
+
 msgid "do nothing"
 msgstr "لا تفعل شيء"
 
 msgid "enable"
+msgstr "تفعيل"
+
+#, fuzzy
+msgid "enabled"
 msgstr "تفعيل"
 
 msgid "exact match"
@@ -1053,6 +1086,9 @@ msgstr "الذهاب الى وضع الاستعداد العميق"
 
 msgid "go to standby"
 msgstr "الذهاب لوضع الاستعداد"
+
+msgid "hours"
+msgstr ""
 
 msgid "in Description"
 msgstr "فى الوصف"
@@ -1065,6 +1101,9 @@ msgstr "فى عنوان"
 
 msgid "mins"
 msgstr "دقائق"
+
+msgid "minutes"
+msgstr ""
 
 msgid "missing parameter \"id\""
 msgstr "وحدة قياس مفقودة \"معرف\""
@@ -1081,8 +1120,19 @@ msgstr "التسجيل"
 msgid "standard"
 msgstr "قياسي"
 
+msgid "title starts with"
+msgstr ""
+
+#, fuzzy, python-format
 msgid "unable to find timer with id %i"
 msgstr "غير قادر على العثور الموقت مع معرف٪ ط"
 
+msgid "unknown"
+msgstr ""
+
 msgid "zap"
 msgstr "الانتقال"
+
+#, fuzzy
+msgid "zap and record"
+msgstr "التسجيل"
