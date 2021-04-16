@@ -2,80 +2,88 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eParted 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-11 10:44+0000\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2012-11-08 22:19+0100\n"
 "Last-Translator: cepheus <cepheus@i-have-a-dreambox.com>\n"
 "Language-Team: mechatron\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-msgid "creating and manipulating partition tables"
-msgstr "Création et modification des tables de partitions"
-
-msgid "partition(s)"
-msgstr ""
-
-msgid "add partition"
-msgstr "Ajout partition"
-
-msgid "size in %s (max %d %s):"
-msgstr "Taille en %s (max %d %s):"
-
-msgid "filesystem:"
-msgstr "Système de fichiers:"
-
-msgid "cancel"
-msgstr "Annuler"
-
-msgid "ok"
-msgstr "OK"
-
-msgid "add"
-msgstr "Ajouter"
-
-msgid "delete"
-msgstr "Effacer"
-
-msgid "free"
-msgstr "libre"
-
-msgid "create partition %s"
-msgstr "Création partition %s"
-
-msgid "make filesystem '%s' on partition %s (%d %s)"
-msgstr "Création système de fichiers '%s' sur partition %s (%d%s)"
-
-msgid "delete partition %s"
-msgstr "Supprimer partition %s"
-
-msgid "execute"
-msgstr "Exécuter"
-
-msgid "Start"
-msgstr "Début"
-
 msgid "End"
 msgstr "Fin"
+
+#, python-format
+msgid "Error command '%s'"
+msgstr "Erreur commande '%s'"
 
 msgid "Nr"
 msgstr ""
 
+msgid "Please Wait"
+msgstr "Attendez s'il vous plaît"
+
 msgid "Size"
 msgstr "Taille"
+
+msgid "Start"
+msgstr "Début"
 
 msgid "Type"
 msgstr ""
 
-msgid "Error command '%s'"
-msgstr "Erreur commande '%s'"
+msgid "add"
+msgstr "Ajouter"
+
+msgid "add partition"
+msgstr "Ajout partition"
+
+msgid "cancel"
+msgstr "Annuler"
+
+#, python-format
+msgid "create partition %s"
+msgstr "Création partition %s"
+
+msgid "creating and manipulating partition tables"
+msgstr "Création et modification des tables de partitions"
+
+msgid "delete"
+msgstr "Effacer"
+
+#, python-format
+msgid "delete partition %s"
+msgstr "Supprimer partition %s"
+
+msgid "eParted"
+msgstr ""
+
+msgid "execute"
+msgstr "Exécuter"
+
+msgid "filesystem:"
+msgstr "Système de fichiers:"
+
+msgid "free"
+msgstr "libre"
+
+#, python-format
+msgid "make filesystem '%s' on partition %s (%d %s)"
+msgstr "Création système de fichiers '%s' sur partition %s (%d%s)"
+
+msgid "ok"
+msgstr "OK"
+
+msgid "partition(s)"
+msgstr ""
 
 msgid "quit"
 msgstr "Quitter"
 
-msgid "Please Wait"
-msgstr "Attendez s'il vous plaît"
+#, python-format
+msgid "size in %s (max %d %s):"
+msgstr "Taille en %s (max %d %s):"

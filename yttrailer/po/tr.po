@@ -7,28 +7,49 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-25 22:29+0200\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2015-10-24 11:05+0300\n"
+"Last-Translator: Hasan Kiran <Sunder67@hotmail.com>\n"
+"Language-Team: \n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Last-Translator: Hasan Kiran <Sunder67@hotmail.com>\n"
-"Language-Team: \n"
-"Language: tr\n"
 "X-Generator: Poedit 1.8.4\n"
 
-msgid "Extended search filter"
-msgstr "Genişletilmiş arama filtresi"
+msgid "1080p"
+msgstr ""
+
+msgid "720p"
+msgstr ""
 
 msgid "Best resolution"
 msgstr "En iyi çözünürlük"
 
-msgid "Max. results in list-mode"
-msgstr "Liste kipinde azami sonuç"
-
 msgid "Cancel"
 msgstr "İptal"
 
+msgid "Close Player with exit-key"
+msgstr ""
+
+msgid "Extended search filter"
+msgstr "Genişletilmiş arama filtresi"
+
+msgid "Max. results in list-mode"
+msgstr "Liste kipinde azami sonuç"
+
+msgid "No HD streaming"
+msgstr ""
+
 msgid "Save"
 msgstr "Kaydet"
+
+msgid "Show Setup in Extensions menu"
+msgstr ""
+
+msgid "YouTube-Trailer Setup"
+msgstr ""
+
+msgid "leave movie player..."
+msgstr ""

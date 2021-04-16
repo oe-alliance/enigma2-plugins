@@ -84,13 +84,3 @@ msgstr ""
 
 msgid "minutes"
 msgstr "Minuten"
-
-#~ msgid ""
-#~ "Timer already running.\n"
-#~ "Stop it?"
-#~ msgstr ""
-#~ "WerbeZapper bereits aktiv.\n"
-#~ "Jetzt anhalten?"
-
-#~ msgid "Zapping back in %d Minutes"
-#~ msgstr "Schalte zurück in %d Minuten"

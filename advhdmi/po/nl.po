@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-25 10:00+0200\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2013-07-25 15:52+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
@@ -19,7 +19,11 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: The Netherlands\n"
 
-msgid "Advanced HDMI Cec Setup"
+msgid "Add"
+msgstr ""
+
+#, fuzzy
+msgid "Advanced HDMI-Cec Control"
 msgstr "Geavanceerde HDMI Cec instellingen"
 
 msgid "Advanced HDMI-Cec Setup"
@@ -31,24 +35,59 @@ msgstr "Op welke tijd moet HDMI-Cec uitgeschakeld worden?"
 msgid "Cancel"
 msgstr "Annuleer"
 
-msgid "Do you want a further period of time to be used?"
-msgstr "Moet er nog een andere periode wordne gebruikt?"
+msgid "Close"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+#, fuzzy
+msgid "Disable HDMI-CEC chronologically"
+msgstr "chronologisch uitschakelen"
+
+msgid "Edit"
+msgstr ""
+
+msgid "Edit HDMI-Cec-Timespan"
+msgstr ""
 
 msgid "Friday"
 msgstr "vrijdag"
 
+msgid "From"
+msgstr ""
+
+msgid "From WD"
+msgstr ""
+
 msgid "From which day of the week, HDMI-Cec should be disabled?"
 msgstr "Vanaf welke dag moet HDMI-Cec uitgeschakeld worden?"
+
+msgid "Hook"
+msgstr ""
 
 msgid "Monday"
 msgstr "maandag"
 
+msgid "No HDMI-Cec-Hooks are registered!"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+#, fuzzy
 msgid ""
-"Partially disabel HDMI-Cec?\n"
+"Partially disable HDMI-Cec?\n"
 "It can be prevented only the signals that are sent from the Dreambox. Signals received by the Dreambox will not be prevented."
 msgstr ""
 "HDMI-Cec gedeeltelijk uitschakelen?\n"
 "Er kan alleen voorkomen worden dat de ontvanger signalen verstuurt. Signalen die ontvangen worden door d eontvanger kunnen niet worden verhinderd."
+
+msgid "Really delete this HDMI-Cec-Timespan Entry?"
+msgstr ""
+
+msgid "Registered HDMI-Cec-Hooks:"
+msgstr ""
 
 msgid "Saturday"
 msgstr "zaterdag"
@@ -56,14 +95,8 @@ msgstr "zaterdag"
 msgid "Save"
 msgstr "Sla op"
 
-msgid "Second timespan from"
-msgstr "Tweede tijdspanne vanaf"
-
-msgid "Second timespan to"
-msgstr "Tweede tijdspanne tot"
-
-msgid "Should HDMI-Cec be disabled at certain times?"
-msgstr "Moet HDMI Cec op bepaalde tijden zijn uitgeschakeld?"
+msgid "Schould debugmessages be printed?"
+msgstr ""
 
 msgid "Should HDMI-Cec be disabled when GUI service startup?"
 msgstr "Moet HDMI Cec zijn uitgeschakeld als de GUI start?"
@@ -71,11 +104,28 @@ msgstr "Moet HDMI Cec zijn uitgeschakeld als de GUI start?"
 msgid "Should HDMI-Cec be disabled when the commands are sent from the web interface?"
 msgstr "Moet HDMI Cec zijn uitgeschakeld als opdrachten via de web-interface worden verstuurd?"
 
+#, fuzzy
+msgid "Should HDMI-Cec be send on Power Off?"
+msgstr "Moet HDMI Cec op bepaalde tijden zijn uitgeschakeld?"
+
+#, fuzzy
+msgid "Should HDMI-Cec be send on Power On?"
+msgstr "Moet HDMI Cec op bepaalde tijden zijn uitgeschakeld?"
+
 msgid "Sunday"
 msgstr "zondag"
 
 msgid "Thursday"
 msgstr "donderdag"
+
+msgid "Timespans"
+msgstr ""
+
+msgid "To"
+msgstr ""
+
+msgid "To WD"
+msgstr ""
 
 msgid "To what day of the week, HDMI-Cec should be disabled?"
 msgstr "Tot welke dag moet HDMI Cec zijn uitgeschakeld?"
@@ -86,6 +136,9 @@ msgstr "dinsdag"
 msgid "Until the time at which, HDMI-Cec should be disabled?"
 msgstr "Tot welke tijd moet HDMI Cec zijn uitgeschakeld?"
 
+msgid "Version: "
+msgstr ""
+
 msgid "Wednesday"
 msgstr "woensdag"
 
@@ -95,11 +148,17 @@ msgstr "Waar moeten de instellingen getoond worden?"
 msgid "disable at GUI-start"
 msgstr "uitschakelen tijdens GUI-start"
 
-msgid "disable chronologically"
-msgstr "chronologisch uitschakelen"
-
 msgid "disable from webinterface"
 msgstr "uitschakelen van web-interface"
+
+msgid "enable Power Off"
+msgstr ""
+
+msgid "enable Power On"
+msgstr ""
+
+msgid "enable debug"
+msgstr ""
 
 msgid "extensions"
 msgstr "extensies"
@@ -113,7 +172,8 @@ msgstr "vanaf dag"
 msgid "manage when HDMI Cec is enabled"
 msgstr "managen als HDMI Cec ingeschakeld is"
 
-msgid "partially disabel HdmiCec"
+#, fuzzy
+msgid "partially disable HdmiCec"
 msgstr "HDNI Cec gedeeltelijk uitschakelen"
 
 msgid "pluginmenue"
@@ -130,7 +190,3 @@ msgstr "tot (HH:MI)"
 
 msgid "to weekday"
 msgstr "tot dag"
-
-msgid "use second timespan"
-msgstr "gebruik tweede tijdspanne"
-

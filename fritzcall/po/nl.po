@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-19 17:00+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -298,9 +298,7 @@ msgstr "FRITZ!Box Status"
 msgid "FRITZ!Box PhoneBook to read"
 msgstr ""
 
-msgid ""
-"FRITZ!Box firmware version not configured! Please set it in the "
-"configuration."
+msgid "FRITZ!Box firmware version not configured! Please set it in the configuration."
 msgstr ""
 
 msgid "FRITZ!Box not available for calling"
@@ -596,9 +594,7 @@ msgstr ""
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Timeout voor gespreksnotificatie (seconden)"
 
-msgid ""
-"To enjoy more functionalities of your FRITZ!Box, configure the firmware "
-"version!"
+msgid "To enjoy more functionalities of your FRITZ!Box, configure the firmware version!"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
@@ -664,9 +660,7 @@ msgid "WLAN not active"
 msgstr ""
 
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
-msgstr ""
-"U moet de monitorfunctie van de FRITZ!Box inschakelen door het drukken van "
-"#96*5*!"
+msgstr "U moet de monitorfunctie van de FRITZ!Box inschakelen door het drukken van #96*5*!"
 
 msgid ""
 "You need to set the password of the FRITZ!Box\n"
@@ -680,6 +674,9 @@ msgstr ""
 "Dit kan een communicatieprobleem zijn, probeer opnieuw."
 
 msgid "before 05.27"
+msgstr ""
+
+msgid "business"
 msgstr ""
 
 msgid "call diversions active"
@@ -808,99 +805,3 @@ msgstr "werk"
 
 msgid "wrong user or password?"
 msgstr ""
-
-#~ msgid "Areacode to add to Outgoing Calls (if necessary)"
-#~ msgstr "Netnummer bij uitgaande gesprekken  (indien nodig)"
-
-#~ msgid "CF Drive"
-#~ msgstr "CF kaart"
-
-#~ msgid "Could not load calls from FRITZ!Box - Error: %s"
-#~ msgstr "Kon de gesprekken niet laden van FRITZ!Box - Fout: %s"
-
-#~ msgid "Debug"
-#~ msgstr "Debug"
-
-#~ msgid "Dialling failed - Error: %s"
-#~ msgstr "FRITZ!Box Login mislukt! - Error: %s"
-
-#~ msgid "Enter Search Terms"
-#~ msgstr "Geef de zoekterm in"
-
-#, fuzzy
-#~ msgid "FRITZ!Box - Could not load phonebook: %s"
-#~ msgstr "Fout bij het laden van het FRITZ!Box telefoonboek -fout: %s"
-
-#~ msgid "FRITZ!Box Login failed! - Wrong Password!"
-#~ msgstr "FRITZ!Box Login mislukt! - Onjuist wachtwoord"
-
-#, fuzzy
-#~ msgid "FRITZ!Box Login failed: "
-#~ msgstr "FRITZ!Box Login mislukt! - Error: %s"
-
-#~ msgid "Flash"
-#~ msgstr "Flash"
-
-#~ msgid "Full screen display"
-#~ msgstr "Volledig scherm"
-
-#~ msgid "Harddisk"
-#~ msgstr "Harde schijf"
-
-#~ msgid ""
-#~ "Incoming Call on %(date)s from\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "to: %(phone)s"
-#~ msgstr ""
-#~ "Binnenkomend gesprek op %(date)s van\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "to: %(phone)s"
-
-#~ msgid "Mute on call"
-#~ msgstr "Muten bij oproep"
-
-#, fuzzy
-#~ msgid "No call redirection active"
-#~ msgstr "Geen mailbox actief"
-
-#, fuzzy
-#~ msgid "One call redirection active"
-#~ msgstr "Eén mailbox actief"
-
-#~ msgid ""
-#~ "Outgoing Call on %(date)s to\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "from: %(phone)s"
-#~ msgstr ""
-#~ "Uitgaand gesprek op %(date)s to\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "van: %(phone)s"
-
-#~ msgid "PhoneBook Location"
-#~ msgstr "Telefoonboek locatie"
-
-#~ msgid "Reverse Lookup Caller ID (select country below)"
-#~ msgstr "Omgekeerd zoeken van een beller ID (select land hieronder)"
-
-#~ msgid "Show Calls for specific MSN"
-#~ msgstr "Laat gesprekken van een specifieke MSN zien"
-
-#, fuzzy
-#~ msgid "Toggle "
-#~ msgstr "WLAN Aan/Uit"
-
-#, fuzzy
-#~ msgid "USB Device"
-#~ msgstr "USB Stick"

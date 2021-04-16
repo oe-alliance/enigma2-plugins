@@ -2,35 +2,40 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 TMBD Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-24 16:16+0200\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2015-09-27 15:44+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: Dima-73@inbox.lv\n"
+"Language: ru_RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2;\n"
-"Language: ru_RU\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Poedit 1.8.4\n"
 
+#, python-format
+msgid "%02d.%02d - %02d.%02d"
+msgstr ""
+
+msgid "%a"
+msgstr ""
+
+#, python-format
 msgid "%d min"
 msgstr "%d мин"
 
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
+msgid "%e/%m, %-H:%M"
+msgstr ""
+
+#, python-format
 msgid "%s%d min"
 msgstr "%s%d мин"
 
 msgid "(ZAP)"
 msgstr "(Перейти)"
-
-msgid "400 Bad Request"
-msgstr "400 Неправильный запрос"
-
-msgid "500 Internal Server Error"
-msgstr "500 Внутренняя ошибка сервера"
 
 msgid "<unknown>"
 msgstr "<неизвестный>"
@@ -53,11 +58,12 @@ msgstr "Добавить таймер"
 msgid "After event"
 msgstr "После события"
 
+#, fuzzy
+msgid "Alternative"
+msgstr "Добавить внутренний таймер"
+
 msgid "Alternative services are not supported!"
 msgstr "Альтернативные сервисы не поддерживаются!"
-
-msgid "An error occurred while connecting: 148: No route to host."
-msgstr "Произошла ошибка '148' при подключении: Отсутствует маршрут адреса."
 
 msgid "Apply"
 msgstr "Применить"
@@ -83,21 +89,20 @@ msgstr "Список выбора Partnerbox"
 msgid "Choose action:"
 msgstr "Выберите действие:"
 
+msgid "Choose bouquet"
+msgstr "Выбор букета"
+
 msgid "Clean up"
 msgstr "Очистить"
 
 msgid "Cleaning up finished timer entries..."
 msgstr "Очистка выполненных таймеров..."
 
-msgid "Connetction was refused by other side: 146: Connetction refused."
+msgid "DVB-C"
 msgstr ""
-"Подключение было отказано с другой стороны: 146: В подключение отказано."
 
-msgid "Could not add timer '%s'!"
-msgstr "Не удалось добавить таймер '%s'!"
-
-msgid "Could not find timer '%s' with given start and end time!"
-msgstr "Не удалось найти таймер '%s' с заданным временем начала и окончания!"
+msgid "DVB-T"
+msgstr ""
 
 msgid "DVR"
 msgstr "DVR"
@@ -111,12 +116,17 @@ msgstr "Режим глубокого ожидания"
 msgid "Delete"
 msgstr "Удалить"
 
+#, fuzzy
+msgid "Delete timer"
+msgstr "Удалить таймер"
+
 msgid "Description"
 msgstr "Описание"
 
 msgid "Disable Picture in Picture"
 msgstr "Отключить PiP"
 
+#, python-format
 msgid ""
 "Do you really want to delete the remote timer \n"
 "%s ?"
@@ -124,6 +134,7 @@ msgstr ""
 "Вы действительно хотите удалить дистанционный таймер \n"
 "%s ?"
 
+#, python-format
 msgid ""
 "Do you really want to delete the timer \n"
 "%s ?"
@@ -179,6 +190,10 @@ msgstr "Тип Энигма"
 msgid "Enter the service pin"
 msgstr "Введите PIN-код сервиса"
 
+#, fuzzy
+msgid "Error: "
+msgstr "Ошибка: устаревший"
+
 msgid "Error: No space left"
 msgstr "Ошибка: нет свободного места"
 
@@ -190,9 +205,6 @@ msgstr "Ошибка: прервано пользователем"
 
 msgid "Error: Zap failed"
 msgstr "Ошибка: переключение не удалось"
-
-msgid "EventId not found"
-msgstr "Номер события не найден"
 
 msgid "Eventview"
 msgstr "Обзор событий"
@@ -260,9 +272,6 @@ msgstr "Имя"
 msgid "No"
 msgstr "нет"
 
-msgid "No matching Timer found"
-msgstr "Не найден соответствующий таймер"
-
 msgid "OK"
 msgstr "ОК"
 
@@ -272,6 +281,7 @@ msgstr "Partnerbox"
 msgid "Partnerbox - RemotePlayer"
 msgstr "Partnerbox - дистанционный плеер"
 
+#, python-format
 msgid ""
 "Partnerbox Answer: \n"
 "%s"
@@ -315,11 +325,12 @@ msgstr "Нажмите ОК для редактирования таймера..
 msgid "Really delete this Partnerbox Entry?"
 msgstr "Действительно удалить этот профиль Partnerbox?"
 
-msgid "Remote Timer"
+#, fuzzy
+msgid "Remote Player"
 msgstr "Дистанционный таймер"
 
-msgid "Remote timers for partnerbox"
-msgstr "'Дистанционный таймер' partnerbox"
+msgid "Remote Timer"
+msgstr "Дистанционный таймер"
 
 msgid "RemoteTimer Timerlist"
 msgstr "Дистанционный таймер - список таймеров"
@@ -342,9 +353,11 @@ msgstr "Сб"
 msgid "Saturday"
 msgstr "Суббота"
 
+#, python-format
 msgid "Select action for remote timer '%s':"
 msgstr "Выберите действие для дистанционного таймера '%s':"
 
+#, python-format
 msgid "Select action for timer '%s':"
 msgstr "Выберите действие для таймера '%s':"
 
@@ -390,8 +403,12 @@ msgstr "Режим ожидания"
 msgid "StartTime"
 msgstr "Время начала"
 
+#, python-format
 msgid "Starting Remote Player (IP = %s)"
 msgstr "Старт дистанционного плеера (IP = %s)"
+
+msgid "Stream"
+msgstr ""
 
 msgid "Stream TV from your Partnerbox"
 msgstr "Стрим ТВ для вашего Partnerbox"
@@ -411,23 +428,14 @@ msgstr "Воскресенье"
 msgid "The pin code you entered is wrong."
 msgstr "Введенный PIN-код неверный."
 
-msgid "The timer '%s' has been %s successfully"
-msgstr "Таймер '%s' был %s успешно"
-
-msgid "The timer '%s' has been deleted successfully"
-msgstr "Таймер '%s' был успешно удален"
-
 msgid "Thu"
 msgstr "Чт"
 
 msgid "Thursday"
 msgstr "Четверг"
 
-msgid "Timer '%s' added"
-msgstr "Таймер '%s' добавлен"
-
-msgid "Timer '%s' not saved while Conflict"
-msgstr "Таймер '%s' не сохранен из-за конфликта"
+msgid "Timer Overview"
+msgstr ""
 
 msgid "Timer Type"
 msgstr "Тип таймера"
@@ -436,6 +444,10 @@ msgid "Timer can not be added...no locations on partnerbox available."
 msgstr ""
 "Таймер не может быть добавлен...\n"
 "Нет доступного места записи в ресивере Partnerbox."
+
+#, fuzzy
+msgid "Timer entry"
+msgstr "Меню таймера"
 
 msgid "Timer event deleted successfully."
 msgstr "Таймер события успешно удален."
@@ -467,18 +479,14 @@ msgstr "Ср"
 msgid "Wednesday"
 msgstr "Среда"
 
+msgid "Yes"
+msgstr ""
+
 msgid "Yes (safe mode)"
 msgstr "Да (безопасный режим)"
 
-msgid ""
-"You can not add services or bouquets from Enigma1-receivers into the "
-"channellist..."
-msgstr ""
-"Вы не можете добавить сервисы или букеты из Энигма1-ресиверов в список "
-"каналов..."
-
-msgid "You have to restart Enigma2 to activate your new preferences!"
-msgstr "Вы должны перезапустить Энигма2 для активации новых настроек!"
+msgid "You can not add services or bouquets from Enigma1-receivers into the channellist..."
+msgstr "Вы не можете добавить сервисы или букеты из Энигма1-ресиверов в список каналов..."
 
 msgid "Zap"
 msgstr "Перейти"
@@ -554,7 +562,3 @@ msgstr "переключить"
 
 msgid "zapped"
 msgstr "переключено"
-
-
-msgid "Choose bouquet"
-msgstr "Выбор букета"

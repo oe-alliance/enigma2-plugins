@@ -81,13 +81,3 @@ msgstr ""
 
 msgid "minutes"
 msgstr "dakika"
-
-#~ msgid ""
-#~ "Timer already running.\n"
-#~ "Stop it?"
-#~ msgstr ""
-#~ "Zamanlayıcı şu an çalışıyor.\n"
-#~ "Durdurulsun mu?"
-
-#~ msgid "Zapping back in %d Minutes"
-#~ msgstr "%d dakika içinde kanal değiştirilecek"

@@ -244,15 +244,3 @@ msgstr "Hylättävät sanat / lauseet"
 
 msgid "no user rating yet"
 msgstr "Ei arvostelua vielä"
-
-#~ msgid "Enable this to be able to access the IMDb from within the plugin browser."
-#~ msgstr "Sallii pääsyn IMDb hakuun lisäosavalikosta"
-
-#~ msgid "IMDb Details"
-#~ msgstr "IMDb tiedot"
-
-#~ msgid "Query details from the Internet Movie Database"
-#~ msgstr "Hakutulokset"
-
-#~ msgid "Show in plugin browser"
-#~ msgstr "Näytä lisäosavalikossa"

@@ -47,11 +47,8 @@ msgstr "Unosi"
 msgid "Entry %s/%s"
 msgstr "Unos %s/%s"
 
-msgid ""
-"Error while parsing Feed, this usually means there is something wrong with "
-"it."
-msgstr ""
-"Greška kod analiziranja fida.ovo obično znači da nešto s njim nije u redu."
+msgid "Error while parsing Feed, this usually means there is something wrong with it."
+msgstr "Greška kod analiziranja fida.ovo obično znači da nešto s njim nije u redu."
 
 msgid "Failed to get subscriptions from Google Reader."
 msgstr "Neuspešno dobijanje odobrenja od Gugl Čitača."

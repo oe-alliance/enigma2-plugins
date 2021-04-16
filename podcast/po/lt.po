@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Podcast\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 19:59+0300\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Nabil Hanna <nabil1978@web.de>\n"
@@ -12,91 +12,66 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SearchPath-0: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/"
-"enigma2/python/Plugins/Extensions/Podcast\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast\n"
 
-#: ..\src/plugin.py:62
-msgid "Stop playing this movie?"
-msgstr "Nutraukti šį filmą ?"
+msgid "Buffer device:"
+msgstr "Talpyklos įrenginys:"
 
-#: ..\src/plugin.py:74 ..\src/plugin.py:157 ..\src/plugin.py:208
-#: ..\src/plugin.py:312 ..\src/plugin.py:342 ..\src/plugin.py:371
-#: ..\src/plugin.py:417 ..\src/plugin.py:465 ..\src/plugin.py:518
-#: ..\src/plugin.py:579 ..\src/plugin.py:612
-msgid "Podcast"
-msgstr "Podcast"
+msgid "Buffer file handling:"
+msgstr "Talpyklos failo palaikymas:"
 
-#: ..\src/plugin.py:86
-msgid "delete"
-msgstr "šalinti"
+msgid "Buffer:"
+msgstr "Talpykla:"
 
-#: ..\src/plugin.py:86
-msgid "keep on device"
-msgstr "laikyti įrenginyje"
+msgid "Delete this movie?"
+msgstr "Pašalinti šį filmą?"
 
-#: ..\src/plugin.py:86
-msgid "ask me"
-msgstr "klausti"
-
-#: ..\src/plugin.py:169
 #, python-format
 msgid "Downloading movie: %s"
 msgstr "Parsisiunčiamas filmas: %s"
 
-#: ..\src/plugin.py:254
-msgid "Delete this movie?"
-msgstr "Pašalinti šį filmą?"
-
-#: ..\src/plugin.py:296
 msgid "Error getting movies"
 msgstr "Filmų įkėlimo klaida"
 
-#: ..\src/plugin.py:304
-msgid "Length"
-msgstr "Ilgis"
-
-#: ..\src/plugin.py:304
-msgid "Type"
-msgstr "Tipas"
-
-#: ..\src/plugin.py:430
-msgid "No Feedly configuration"
-msgstr "Feedly nesukonfigūruotas"
-
-#: ..\src/plugin.py:470
-msgid "Select"
-msgstr "Pasirinkti"
-
-#: ..\src/plugin.py:523
-msgid "Save"
-msgstr "Išsaugoti"
-
-#: ..\src/plugin.py:535
-msgid "Buffer:"
-msgstr "Talpykla:"
-
-#: ..\src/plugin.py:536
-msgid "Buffer device:"
-msgstr "Talpyklos įrenginys:"
-
-#: ..\src/plugin.py:537
-msgid "Buffer file handling:"
-msgstr "Talpyklos failo palaikymas:"
-
-#: ..\src/plugin.py:585
-msgid "Help"
-msgstr "Pagalba"
-
-#: ..\src/plugin.py:590 ..\src/plugin.py:596
-msgid "from xml"
-msgstr "iš XML"
-
-#: ..\src/plugin.py:591 ..\src/plugin.py:598
 msgid "Feedly OPML"
 msgstr "Feedly OPML"
 
-#: ..\src/plugin.py:592
+msgid "Help"
+msgstr "Pagalba"
+
+msgid "Length"
+msgstr "Ilgis"
+
+msgid "No Feedly configuration"
+msgstr "Feedly nesukonfigūruotas"
+
+msgid "Podcast"
+msgstr "Podcast"
+
+msgid "Save"
+msgstr "Išsaugoti"
+
+msgid "Select"
+msgstr "Pasirinkti"
+
+msgid "Stop playing this movie?"
+msgstr "Nutraukti šį filmą ?"
+
+msgid "Type"
+msgstr "Tipas"
+
+msgid "ask me"
+msgstr "klausti"
+
 msgid "configuration"
 msgstr "konfigūracija"
+
+msgid "delete"
+msgstr "šalinti"
+
+msgid "from xml"
+msgstr "iš XML"
+
+msgid "keep on device"
+msgstr "laikyti įrenginyje"

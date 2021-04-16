@@ -94,4 +94,3 @@ msgstr "Geef aan of de plugin in het plugin menu of in het extensie menu getoond
 
 msgid "Ver."
 msgstr "Ver."
-

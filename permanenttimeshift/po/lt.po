@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - permanenttimeshift\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-06 22:38+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2017-07-10 19:43+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis Pulokas <vyteniui@gmail.com>\n"
@@ -12,98 +12,80 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .../enigma2-plugins/permanenttimeshift\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/permanenttimeshift\n"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:77
+msgid ""
+"\n"
+"An Input/output error usually indicates a corrupted filesystem! Please check the filesystem of your timeshift-device!"
+msgstr ""
+"\n"
+"Įvesties/išvesties klaida paprastai rodo failų sistemos gedimus! Patikrinkite laiko poslinkio įrenginio failų sistemą!"
+
+msgid ""
+"A recording is currently running.\n"
+"What do you want to do?"
+msgstr ""
+"Vyksta įrašymas.\n"
+"Ką norite padaryti?"
+
 msgid "Ask user"
 msgstr "Klausti vartotojo"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:77
-msgid "Save and stop"
-msgstr "Išsaugoti ir sustabdyti"
+msgid "Beta: Enable Permanent Recording?"
+msgstr "Beta: Įjungti pastovų įrašymą?"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:77
-msgid "Save and record"
-msgstr "Išsaugoti ir pradėti įrašymą"
+msgid "Cancel"
+msgstr "Atšaukti"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:77
-msgid "Don't save"
-msgstr "Neišsaugoti"
+msgid ""
+"Could not activate Permanent-Timeshift!\n"
+"Timeshift-Path does not exist"
+msgstr ""
+"Nepavyko aktyvuoti nuolatinio laiko poslinkio!\n"
+"Laiko poslinkio įrašų kelias neegzistuoja"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:115
-msgid "Saving Timeshift files"
-msgstr "Laiko poslinkio failai išsaugomi"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:156
-msgid "Merging Timeshift files"
-msgstr "Laiko poslinkio failai sujungiami"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:199
 msgid "Creating AP and SC Files"
 msgstr "Kuriami AP ir SC failai"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:300
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1632
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1633
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1642
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1643
-msgid "Timeshift"
-msgstr "Laiko poslinkis"
+msgid "Creating Hardlink to Timeshift file failed!"
+msgstr "Sukurti kietos nuorodos į laiko poslinkio failą nepavyko!"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:517
-msgid "PTS-Plugin: Restarting Timeshift!"
-msgstr "PTS įskiepis: laiko poslinkis paleidžiamas iš naujo!"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:521
-msgid ""
-"The Timeshift record was not saved yet!\n"
-"What do you want to do now with the timeshift file?"
-msgstr ""
-"Laiko poslinkio įrašas dar nebuvo išsaugotas!\n"
-"Ką dabar norite daryti su laiko poslinkio failu?"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:522
-msgid "Save Timeshift as Movie and stop recording"
-msgstr "Išsaugoti laiko poslinkį, kaip filmą ir nutraukti įrašymą"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:523
-msgid "Save Timeshift as Movie and continue recording"
-msgstr "Išsaugoti laiko poslinkį, kaip filmą ir tęsti įrašymą"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:524
-msgid "Don't save Timeshift as Movie"
-msgstr "Neišsaugoti laiko poslinkio, kaip filmo"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:541
 msgid "Current Event:"
 msgstr "Šis įvykis:"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:562
-msgid "Record"
-msgstr "Įrašas"
+msgid "Default storage device is not available!"
+msgstr "Numatytoji laikmena neprieinama!"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:564
-msgid "Which event do you want to save permanently?"
-msgstr "Kurį įvykį norite išsaugoti visam laikui?"
+msgid "Don't save"
+msgstr "Neišsaugoti"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:598
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:771
-msgid "Saving timeshift as movie now. This might take a while!"
-msgstr "Laiko poslinkis išsaugomas, kaip filmas. Tai gali šiek tiek užtrukti!"
+msgid "Don't save Timeshift as Movie"
+msgstr "Neišsaugoti laiko poslinkio, kaip filmo"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:635
-#, python-format
-msgid "PTS Plugin Error: %s"
-msgstr "PTS įskiepio klaida: %s"
+msgid "Getting Event Info failed!"
+msgstr "Nepavyko gauti įvykio informacijos!"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:638
+msgid ""
+"Maximum Timeshift length per Event reached!\n"
+"Restarting Timeshift now ..."
+msgstr ""
+"Maksimalus laiko poslinkio vienam įvykiui dydis pasiektas!\n"
+"Laiko poslinkis paleidžiamas iš naujo..."
+
+msgid "Merging Timeshift files"
+msgstr "Laiko poslinkio failai sujungiami"
+
+msgid "No HDD found or HDD not initialized!"
+msgstr "HDD nerasta, arba jis neinicializuotas!"
+
 msgid "No Timeshift found to save as recording!"
 msgstr "Laiko poslinkio, išsaugotino, kaip įrašo, nerasta!"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:775
+msgid "No default storage device found!"
+msgstr "Numatytosios laikmenos nerasta!"
+
 #, python-format
 msgid ""
 "Not enough free Diskspace!\n"
@@ -118,221 +100,147 @@ msgstr ""
 "Laisvos vietos: %sMB\n"
 "Kelias: %s"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:785
-msgid "Timeshift save failed!"
-msgstr "Išsaugoti laiko poslinkio nepavyko!"
+msgid "OK"
+msgstr "Gerai"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:822
-msgid "Getting Event Info failed!"
-msgstr "Nepavyko gauti įvykio informacijos!"
+#, python-format
+msgid "PTS Plugin Error: %s"
+msgstr "PTS įskiepio klaida: %s"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:875
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:895
-msgid "Creating Hardlink to Timeshift file failed!"
-msgstr "Sukurti kietos nuorodos į laiko poslinkio failą nepavyko!"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:875
-msgid ""
-"The Filesystem on your Timeshift-Device does not support hardlinks.\n"
-"Make sure it is formated in EXT2 or EXT3!"
-msgstr ""
-"Įrenginio, kur saugomas laiko poslinkis, failų sistema nepalaiko kietųjų "
-"nuorodų.\n"
-"Įsitikinkite, kad jis formatuotas EXT2, arba EXT3!"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:894
-msgid ""
-"\n"
-"An Input/output error usually indicates a corrupted filesystem! Please check "
-"the filesystem of your timeshift-device!"
-msgstr ""
-"\n"
-"Įvesties/išvesties klaida paprastai rodo failų sistemos gedimus! "
-"Patikrinkite laiko poslinkio įrenginio failų sistemą!"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:970
 msgid "PTS-Plugin: Merging records failed!"
 msgstr "PTS įskiepis: įrašų sujungti nepavyko!"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1035
-msgid "Timeshift saved to your harddisk!"
-msgstr "Laiko poslinkis išsaugotas jūsų diske!"
+msgid "PTS-Plugin: Restarting Timeshift!"
+msgstr "PTS įskiepis: laiko poslinkis paleidžiamas iš naujo!"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1264
-msgid ""
-"Could not activate Permanent-Timeshift!\n"
-"Timeshift-Path does not exist"
-msgstr ""
-"Nepavyko aktyvuoti nuolatinio laiko poslinkio!\n"
-"Laiko poslinkio įrašų kelias neegzistuoja"
+msgid "Permanent Timeshift Enable"
+msgstr "Įjungti pastovų laiko poslinkį"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1292
-msgid "Record started! Stopping timeshift now ..."
-msgstr "Įrašas pradėtas! Laiko poslinkis sustabdomas..."
+msgid "Permanent Timeshift Max Events"
+msgstr "Maksimalus laidų skaičius pastoviame laiko poslinkyje"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1339
-msgid ""
-"Maximum Timeshift length per Event reached!\n"
-"Restarting Timeshift now ..."
-msgstr ""
-"Maksimalus laiko poslinkio vienam įvykiui dydis pasiektas!\n"
-"Laiko poslinkis paleidžiamas iš naujo..."
+msgid "Permanent Timeshift Max Length"
+msgstr "Maksimali pastovaus laiko poslinkio trukmė"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1604
-msgid "Unconfigured storage devices found!"
-msgstr "Rasti saugojimo įrenginiai nesukonfigūruoti!"
+msgid "Permanent Timeshift Settings"
+msgstr "Pastovaus laiko poslinkio nustatymai"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1605
-msgid ""
-"Please make sure to set up your storage devices with the storage management "
-"in menu -> setup -> system -> storage devices."
-msgstr ""
-"Nustatykite saugojimo įrenginius su saugojimo valdymu per meniu-> setup -> "
-"system -> storage devices."
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1608
-msgid "No default storage device found!"
-msgstr "Numatytosios laikmenos nerasta!"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1609
-msgid ""
-"Please make sure to set up your default storage device in menu -> setup -> "
-"system -> recording paths."
-msgstr ""
-"Nustatykite numatytąjį saugojimo įrenginį per Meniu-> setup -> system -> "
-"recording paths."
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1614
-msgid "Default storage device is not available!"
-msgstr "Numatytoji laikmena neprieinama!"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1615
-msgid ""
-"Please verify if your default storage device is attached or set up your "
-"default storage device in menu -> setup -> system -> recording paths."
-msgstr ""
-"Patikrinkite, ar numatytasis saugojimo įrenginys yra pajungtas, arba "
-"nustatykite jį per meniu-> setup -> system -> recording paths."
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1619
-msgid "No HDD found or HDD not initialized!"
-msgstr "HDD nerasta, arba jis neinicializuotas!"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1624
-msgid ""
-"A recording is currently running.\n"
-"What do you want to do?"
-msgstr ""
-"Vyksta įrašymas.\n"
-"Ką norite padaryti?"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1625
-msgid "stop recording"
-msgstr "stabdyti įrašymą"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1626
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1638
-msgid "add recording (stop after current event)"
-msgstr "pridėti įrašymą (stabdyti po šio įvykio)"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1627
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1639
-msgid "add recording (indefinitely)"
-msgstr "pridėti įrašymą (neribotam laikui)"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1628
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1640
-msgid "add recording (enter recording duration)"
-msgstr "pridėti įrašymą (įrašykite įrašo trukmę)"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1629
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1641
-msgid "add recording (enter recording endtime)"
-msgstr "pridėti įrašymą (įrašykite pabaigos laiką)"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1630
-msgid "change recording (duration)"
-msgstr "keisti įrašymą (trukmę)"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1631
-msgid "change recording (endtime)"
-msgstr "keisti įrašymą (pabaigos laiką)"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1632
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1642
-msgid "save recording (stop after current event)"
-msgstr "išsaugoti įrašą (sustabdyti po šio įvykio)"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1633
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1643
-msgid "save recording (Select event)"
-msgstr "išsaugoti įrašymą (pasirinkite įvykį)"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1634
-msgid "do nothing"
-msgstr "nieko nedaryti"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1637
-msgid "Start recording?"
-msgstr "Pradėti įrašymą?"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1644
-msgid "don't record"
-msgstr "neįrašinėti"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1661
-msgid "Timeshift will get saved at end of event!"
-msgstr "Laiko poslinkis bus išsaugotas įvykio pabaigoje!"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1680
 #, python-format
 msgid "Permanent Timeshift Settings Version %s"
 msgstr "Pastovaus laiko poslinkio nustatymų versija %s"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1694
-msgid "OK"
-msgstr "Gerai"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1695
-msgid "Cancel"
-msgstr "Atšaukti"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1704
-msgid "Permanent Timeshift Enable"
-msgstr "Įjungti pastovų laiko poslinkį"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1707
-msgid "Permanent Timeshift Max Events"
-msgstr "Maksimalus laidų skaičius pastoviame laiko poslinkyje"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1708
-msgid "Permanent Timeshift Max Length"
-msgstr "Maksimali pastovaus laiko poslinkio trukmė"
-
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1709
 msgid "Permanent Timeshift Start Delay"
 msgstr "Delsa, paleidžiant pastovų laiko poslinkį"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1710
-msgid "Timeshift-Save Action on zap"
-msgstr "Išsaugoti laiko poslinkį, perjungiant kanalą"
+msgid "Please make sure to set up your default storage device in menu -> setup -> system -> recording paths."
+msgstr "Nustatykite numatytąjį saugojimo įrenginį per Meniu-> setup -> system -> recording paths."
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1711
-msgid "Stop timeshift while recording?"
-msgstr "Nutraukti laiko poslinkį įrašinėjant?"
+msgid "Please make sure to set up your storage devices with the storage management in menu -> setup -> system -> storage devices."
+msgstr "Nustatykite saugojimo įrenginius su saugojimo valdymu per meniu-> setup -> system -> storage devices."
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1712
+msgid "Please verify if your default storage device is attached or set up your default storage device in menu -> setup -> system -> recording paths."
+msgstr "Patikrinkite, ar numatytasis saugojimo įrenginys yra pajungtas, arba nustatykite jį per meniu-> setup -> system -> recording paths."
+
+msgid "Record"
+msgstr "Įrašas"
+
+msgid "Record started! Stopping timeshift now ..."
+msgstr "Įrašas pradėtas! Laiko poslinkis sustabdomas..."
+
+msgid "Save Timeshift as Movie and continue recording"
+msgstr "Išsaugoti laiko poslinkį, kaip filmą ir tęsti įrašymą"
+
+msgid "Save Timeshift as Movie and stop recording"
+msgstr "Išsaugoti laiko poslinkį, kaip filmą ir nutraukti įrašymą"
+
+msgid "Save and record"
+msgstr "Išsaugoti ir pradėti įrašymą"
+
+msgid "Save and stop"
+msgstr "Išsaugoti ir sustabdyti"
+
+msgid "Saving Timeshift files"
+msgstr "Laiko poslinkio failai išsaugomi"
+
+msgid "Saving timeshift as movie now. This might take a while!"
+msgstr "Laiko poslinkis išsaugomas, kaip filmas. Tai gali šiek tiek užtrukti!"
+
 msgid "Show PTS Infobar while timeshifting?"
 msgstr "Rodyti PTS infojuostą, naudojant laiko poslinkį?"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1717
-msgid "Beta: Enable Permanent Recording?"
-msgstr "Beta: Įjungti pastovų įrašymą?"
+msgid "Start recording?"
+msgstr "Pradėti įrašymą?"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1758
+msgid "Stop timeshift while recording?"
+msgstr "Nutraukti laiko poslinkį įrašinėjant?"
+
+msgid ""
+"The Filesystem on your Timeshift-Device does not support hardlinks.\n"
+"Make sure it is formated in EXT2 or EXT3!"
+msgstr ""
+"Įrenginio, kur saugomas laiko poslinkis, failų sistema nepalaiko kietųjų nuorodų.\n"
+"Įsitikinkite, kad jis formatuotas EXT2, arba EXT3!"
+
+msgid ""
+"The Timeshift record was not saved yet!\n"
+"What do you want to do now with the timeshift file?"
+msgstr ""
+"Laiko poslinkio įrašas dar nebuvo išsaugotas!\n"
+"Ką dabar norite daryti su laiko poslinkio failu?"
+
+msgid "Timeshift"
+msgstr "Laiko poslinkis"
+
 msgid "Timeshift Settings"
 msgstr "Laiko poslinkio nustatymai"
 
-#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1764
-msgid "Permanent Timeshift Settings"
-msgstr "Pastovaus laiko poslinkio nustatymai"
+msgid "Timeshift save failed!"
+msgstr "Išsaugoti laiko poslinkio nepavyko!"
+
+msgid "Timeshift saved to your harddisk!"
+msgstr "Laiko poslinkis išsaugotas jūsų diske!"
+
+msgid "Timeshift will get saved at end of event!"
+msgstr "Laiko poslinkis bus išsaugotas įvykio pabaigoje!"
+
+msgid "Timeshift-Save Action on zap"
+msgstr "Išsaugoti laiko poslinkį, perjungiant kanalą"
+
+msgid "Unconfigured storage devices found!"
+msgstr "Rasti saugojimo įrenginiai nesukonfigūruoti!"
+
+msgid "Which event do you want to save permanently?"
+msgstr "Kurį įvykį norite išsaugoti visam laikui?"
+
+msgid "add recording (enter recording duration)"
+msgstr "pridėti įrašymą (įrašykite įrašo trukmę)"
+
+msgid "add recording (enter recording endtime)"
+msgstr "pridėti įrašymą (įrašykite pabaigos laiką)"
+
+msgid "add recording (indefinitely)"
+msgstr "pridėti įrašymą (neribotam laikui)"
+
+msgid "add recording (stop after current event)"
+msgstr "pridėti įrašymą (stabdyti po šio įvykio)"
+
+msgid "change recording (duration)"
+msgstr "keisti įrašymą (trukmę)"
+
+msgid "change recording (endtime)"
+msgstr "keisti įrašymą (pabaigos laiką)"
+
+msgid "do nothing"
+msgstr "nieko nedaryti"
+
+msgid "don't record"
+msgstr "neįrašinėti"
+
+msgid "save recording (Select event)"
+msgstr "išsaugoti įrašymą (pasirinkite įvykį)"
+
+msgid "save recording (stop after current event)"
+msgstr "išsaugoti įrašą (sustabdyti po šio įvykio)"
+
+msgid "stop recording"
+msgstr "stabdyti įrašymą"

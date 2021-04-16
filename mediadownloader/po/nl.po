@@ -53,4 +53,3 @@ msgstr "Waar opslaan?"
 
 msgid "Which file do you want to download?"
 msgstr "Welk bestand wilt u downloaden?"
-

@@ -13,8 +13,7 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
-"X-Poedit-SearchPath-0: L:\\Receiver\\Eclipse\\enigma2-plugins\\ac3lipsync"
-"\\src\n"
+"X-Poedit-SearchPath-0: L:\\Receiver\\Eclipse\\enigma2-plugins\\ac3lipsync\\src\n"
 
 # L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:81
 # L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:84
@@ -192,11 +191,3 @@ msgstr "Wachttijd in ms voor activering"
 
 msgid "sets the Audio Delay (LipSync)"
 msgstr "Stelt de audio vertraging (LipSync) in"
-
-#~ msgid " "
-#~ msgstr " "
-
-# L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:98
-# L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3setup.py:59
-#~ msgid "Save"
-#~ msgstr "Bewaren"

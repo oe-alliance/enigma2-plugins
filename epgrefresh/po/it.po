@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgrefresh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-15 08:26+0000\n"
+"POT-Creation-Date: 2014-04-12 10:30+CEST\n"
 "PO-Revision-Date: 2020-04-18 17:11+0200\n"
 "Last-Translator: Alexwilmac\n"
+"Language-Team: \n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,11 +14,7 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Poedit-Basepath: .../epgrefresh\n"
 "X-Generator: Poedit 2.3\n"
-"Language-Team: \n"
 "X-Poedit-SearchPath-0: .../epgrefresh\n"
-
-msgid "Close"
-msgstr "Chiudi"
 
 msgid "%d more services"
 msgstr "%d canali in più"
@@ -110,6 +107,12 @@ msgstr "Funzioni EPGRefresh"
 msgid "EPGRefresh Services"
 msgstr "Canali EPGRefresh"
 
+msgid "EXTENSIONMENU_PREFIX"
+msgstr ""
+
+msgid "EXTENSIONNAME_SETUP"
+msgstr ""
+
 msgid "Edit Services"
 msgstr "Mod. Canali"
 
@@ -122,11 +125,24 @@ msgstr "Modificare"
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr "Abilitando questa opzione, sarà possibile accedere alle impostazioni di EPGRefresh dal menu estensioni."
 
+#, fuzzy
+msgid "Enable this to be able to access the EPGRefresh configuration from within the plugin menu."
+msgstr "Abilitando questa opzione, sarà possibile accedere alle impostazioni di EPGRefresh dal menu estensioni."
+
 msgid "Enable this to be able to start the EPGRefresh from within the extension menu."
 msgstr "Abilitando questa opzione, sarà possibile accedere alle impostazioni di EPGRefresh dal menu estensioni."
 
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr "Estendere l'elenco dei canali da aggiornate in base a quelli usati da Auto Timer?"
+
+msgid "FILELIST_BIGGEST"
+msgstr ""
+
+msgid "FILELIST_FORCED"
+msgstr ""
+
+msgid "FILELIST_YOUNGEST"
+msgstr ""
 
 msgid "Fake recording"
 msgstr "Falsa registrazione"
@@ -139,6 +155,14 @@ msgstr "Forzare la scansione anche se il ricevitore è in uso"
 
 msgid "Foreground also"
 msgstr "Anche in primo piano"
+
+msgid ""
+"Found a total of %d matching Events.\n"
+"%d Timer were added and\n"
+"%d modified,\n"
+"%d conflicts encountered,\n"
+"%d similars added."
+msgstr ""
 
 msgid "Functions"
 msgstr "Funzioni"
@@ -179,8 +203,14 @@ msgstr "Nuovo"
 msgid "No"
 msgstr "No"
 
+msgid "No Backupfiles found"
+msgstr ""
+
 msgid "OK"
 msgstr "Ok"
+
+msgid "PLUGINNAME_EPGRefresh"
+msgstr ""
 
 msgid "Pending Services"
 msgstr "Canali in attesa"
@@ -215,6 +245,9 @@ msgstr "Aggiornamento in corso"
 msgid "Run AutoTimer after refresh"
 msgstr "Avviare Auto Timer dopo un aggiornamento"
 
+msgid "Select a file to force a Backup"
+msgstr ""
+
 msgid "Select bouquet to refresh"
 msgstr "Selezionare bouquet da aggiornare"
 
@@ -231,6 +264,10 @@ msgid "Show Advanced Options"
 msgstr "Mostrare opzioni avanzate"
 
 msgid "Show Setup in extension menu"
+msgstr "Mostrare impostazioni nel Menu estensioni"
+
+#, fuzzy
+msgid "Show Setup in plugins"
 msgstr "Mostrare impostazioni nel Menu estensioni"
 
 msgid "Show last EPGRefresh - Time"
@@ -253,6 +290,10 @@ msgstr "Ignorare i canali protetti"
 
 msgid "Start EPGrefresh immediately"
 msgstr "Avviare EPGRefresh immediatamente"
+
+#, fuzzy
+msgid "Stop Refresh"
+msgstr "aggiungere a EPGRefresh"
 
 msgid "Stop Running EPG-refresh"
 msgstr "Arrestare  l'aggiornamento EPG"
@@ -277,6 +318,14 @@ msgstr "Questa funzione determina se il decoder debba essere posto in standby al
 
 msgid ""
 "To apply your Changes the GUI has to be restarted.\n"
+"Do you want to restart the GUI now?"
+msgstr ""
+"L'attivazione delle nuove impostazioni richiede\n"
+"il riavvio di enigma2. Riavviare?"
+
+#, fuzzy
+msgid ""
+"To load the Backupfile the GUI has to be restarted.\n"
 "Do you want to restart the GUI now?"
 msgstr ""
 "L'attivazione delle nuove impostazioni richiede\n"

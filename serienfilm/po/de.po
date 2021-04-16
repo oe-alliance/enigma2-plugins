@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2010-09-09 13:53+0200\n"
 "Last-Translator: \n"
 "Language-Team: none\n"
@@ -82,6 +82,12 @@ msgstr ""
 msgid "exit movielist"
 msgstr ""
 
+#
+# plugin.py
+#
+msgid "group movies of a series to virtual directories"
+msgstr "Fasse Filme einer Serie in virtuellen Verzeichnissen zusammen"
+
 msgid "menu"
 msgstr ""
 
@@ -108,163 +114,3 @@ msgstr ""
 
 msgid "this recording"
 msgstr ""
-
-# The default title:episode separator is the same in german
-#~ msgid ": "
-#~ msgstr ": "
-
-#~ msgid "Change"
-#~ msgstr "Ändern"
-
-#~ msgid "Configuration of the title:episode separator"
-#~ msgstr "Konfiguration des Titel:Episode Trenners"
-
-#~ msgid "Disable "
-#~ msgstr "Deaktivieren"
-
-#
-# MovieSelection.py
-#
-#~ msgid ""
-#~ "Do you really want to delete series\n"
-#~ "  %s\n"
-#~ "with %d movies?"
-#~ msgstr ""
-#~ "Wollen Sie wirklich die komplette Serie\n"
-#~ "  %s\n"
-#~ "mit %d Filmen löschen?"
-
-#~ msgid "Edit title:episode separator"
-#~ msgstr "Titel:Episode Trenner bearbeiten"
-
-#~ msgid "Enable "
-#~ msgstr "Aktivieren"
-
-#~ msgid "Jump to listbegin"
-#~ msgstr "Springe zum Listenanfang"
-
-#~ msgid "Jump to listend"
-#~ msgstr "Springe zum Listenende"
-
-#~ msgid "Key 0 provides special chracters, key 1 blank"
-#~ msgstr "Taste 0 = Sonderzeichen, Taste 1 Leerzeichen"
-
-#~ msgid "Length of the title:episode separator"
-#~ msgstr "Länge des Titel:Episode Trenners"
-
-#
-# MovieInfo.py
-#
-#~ msgid "Movies"
-#~ msgstr "Filme"
-
-#~ msgid "Number of characters"
-#~ msgstr "Zahl der Zeichen"
-
-#~ msgid "Please delete the files in this Directory!"
-#~ msgstr "Bitte löschen Sie die Filme in diesem Verzeichnis einzeln"
-
-#
-# MovieList.py
-#
-#~ msgid "Series"
-#~ msgstr "Serie"
-
-#~ msgid "Set default"
-#~ msgstr "Standardwert"
-
-#~ msgid "Set size"
-#~ msgstr "Länge ändern"
-
-#~ msgid ""
-#~ "The current title:episode separator is \"%s\" (%d characters)\n"
-#~ "To change it: first Set size and then Edit"
-#~ msgstr ""
-#~ "Der derzeitige Titel:Episode Trenner ist \"%s\" (%d Zeichen)\n"
-#~ "Zum Ändern: erst die Länge ändern, dann Bearbeiten"
-
-#
-# SerienFilm.py
-#
-#~ msgid ""
-#~ "This plugin is configured by the MENU key in the movielist\n"
-#~ "\n"
-#~ "Application details provides the HELP key in the movielist"
-#~ msgstr ""
-#~ "Dieses Plugin wird mit der MENÜ Taste in der Filmliste konfiguriert\n"
-#~ "\n"
-#~ "Details zur Anwendung liefert die HELP Taste in der Filmliste"
-
-#~ msgid "Toggle date / alphabetic sort mode"
-#~ msgstr "Datums / Alphabetische Sortierung umschalten"
-
-#~ msgid "Toggle description / tags display"
-#~ msgstr "Anzeig des Senders / der Tags umschalten"
-
-#~ msgid "Toggle style minimal / compact"
-#~ msgstr "kompakte / einzeilige Listenansicht umschalten"
-
-#~ msgid ""
-#~ "Usually the episode of a series is tansmitted separate of the title in "
-#~ "the description field\n"
-#~ "In a few series however it is appended to the title behind a colon\n"
-#~ "e.g. Tatort: Der Fluch der Mumie\n"
-#~ "\n"
-#~ "A commen part of the title up to this title:episode separator shared by "
-#~ "several movies creates a series"
-#~ msgstr ""
-#~ "Üblicherweise wird der Episodenname einer Serie getrennt vom Serientitel "
-#~ "im Feld \"Beschreibung\" übertragen.\n"
-#~ "Bei einigen wenigen Serien wird er aber mit einem Doppelpunkt an den "
-#~ "Titel angehängt\n"
-#~ "Z.B. Tatort: Der Fluch der Mumie\n"
-#~ "\n"
-#~ "Finden sich mehrere Filme, deren Titel bis zum Doppelpunkt übereinstimmt, "
-#~ "wird dies der Titel einer Serie"
-
-#~ msgid "alphabetic sort  (quick toggle by key 0)"
-#~ msgstr "Aufnahmen alphabetisch sortieren  (Schnellumschaltung mit Taste 0)"
-
-#~ msgid "duplicated"
-#~ msgstr "mehrfach"
-
-#
-# plugin.py
-#
-#~ msgid "group movies of a series to virtual directories"
-#~ msgstr "Fasse Filme einer Serie in virtuellen Verzeichnissen zusammen"
-
-#~ msgid "hide duration"
-#~ msgstr "Spieldauer ausblenden"
-
-#~ msgid "hide recordingtime"
-#~ msgstr "Aufnahmezeitpunkt ausblenden"
-
-#~ msgid "hide the read real directories"
-#~ msgstr "Verberge die roten realen Verzeichnisse"
-
-#~ msgid "list style compact with service  (quick toggle by key 8)"
-#~ msgstr "kompakte Listenansicht mit Sender  (Schnellumschaltung mit Taste 8)"
-
-#~ msgid "list style compact with tags  (quick toggle by key 8)"
-#~ msgstr "kompakte Listenansicht mit tags  (Schnellumschaltung mit Taste 8)"
-
-#~ msgid "list style elaborately"
-#~ msgstr "ausführliche Listenansicht"
-
-# msgid "list style single line  (key 8 shows tags)"
-# msgstr "einzeilige Listenansicht  (Taste 8 zeigt tags)"
-#~ msgid "list style single line  (key = service, 8 = tags)"
-#~ msgstr "einzeilige Listenansicht  (Taste 5 = Sender, 8 = tags)"
-
-#~ msgid "show duration"
-#~ msgstr "Spieldauer anzeigen"
-
-#~ msgid "show real directories in red"
-#~ msgstr "Zeige reale Verzeichnisse in rot an"
-
-#~ msgid "show recordingtime"
-#~ msgstr "Aufnahmezeitpunkt anzeigen"
-
-#~ msgid "sort by date  (quick toggle by key 0)"
-#~ msgstr "Aufnahmen nach Datum sortieren  (Schnellumschaltung mit Taste 0)"

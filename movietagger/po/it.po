@@ -77,15 +77,3 @@ msgstr "Ver."
 
 msgid "Whitepace will be replaced by \"_\""
 msgstr "Gli spazi saranno sostituiti da \"_\""
-
-#~ msgid "blue"
-#~ msgstr "Blu"
-
-#~ msgid "green"
-#~ msgstr "Verde"
-
-#~ msgid "red"
-#~ msgstr "Rosso"
-
-#~ msgid "yellow"
-#~ msgstr "Giallo"

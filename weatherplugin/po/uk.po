@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: litvcom\n"
 "Language-Team: \n"
@@ -13,48 +13,41 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../src/setup.py:73
 msgid "Add"
 msgstr "Додати"
 
-#: ../src/setup.py:72
 msgid "Back"
 msgstr "Назад"
 
-#: ../src/setup.py:177
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: ../src/setup.py:70
 msgid "City"
 msgstr "Місто"
 
-#: ../src/setup.py:189
-msgid "City or Postal Code"
-msgstr "Місто або поштовий індекс"
-
-#: ../src/plugin.py:208
-#, python-format
-msgid "Current: %s"
-msgstr "Поточний: %s"
-
-#: ../src/setup.py:75 ../src/setup.py:179
 msgid "Delete"
 msgstr "Видалити"
 
-#: ../src/setup.py:74
 msgid "Edit"
 msgstr "Редагувати"
 
-#: ../src/plugin.py:135
+#, python-format
+msgid "Feels like %s"
+msgstr "Відчувається як %s"
+
 msgid "Getting weather information..."
 msgstr "Отримання інформації про погоду..."
 
-#: ../src/setup.py:71 ../src/setup.py:190
-msgid "Language"
-msgstr "Мова"
+#, python-format
+msgid "Humidity: %s %%"
+msgstr "Вологість: %% %s"
 
-#: ../src/plugin.py:139
+msgid "Location code"
+msgstr "Код розташування"
+
+msgid "MSN location search result"
+msgstr "Результати пошуку місця розташування"
+
 msgid ""
 "No locations defined...\n"
 "Press 'Menu' to do that."
@@ -62,62 +55,16 @@ msgstr ""
 "Місцезнаходження не визначено...\n"
 "Натисніть 'Menu', щоб зробити це."
 
-#: ../src/setup.py:178
 msgid "OK"
 msgstr "OK"
 
-#: ../src/setup.py:114 ../src/setup.py:213
-msgid "Really delete this WeatherPlugin Entry?"
-msgstr "Дійсно видалити цей запис?"
-
-#: ../src/plugin.py:64
-msgid "Show Weather Forecast"
-msgstr "Показати прогноз погоди"
-
-#: ../src/plugin.py:64 ../src/plugin.py:95
-msgid "Weather Plugin"
-msgstr "Плагін погоди"
-
-#: ../src/setup.py:164
-msgid "WeatherPlugin: Edit Entry"
-msgstr "Изменить запись"
-
-#: ../src/setup.py:65
-msgid "WeatherPlugin: List of Entries"
-msgstr "Список записів"
-
-msgid "Location code"
-msgstr "Код розташування"
-
-msgid "System"
-msgstr "Система"
-
-msgid "Search Code"
-msgstr "Пошук коду"
-
-msgid "metric system"
-msgstr "метрична система"
-
-msgid "imperial system"
-msgstr "англійська система"
-
-msgid "Observation time: %s"
-msgstr "Час спостереження: %s"
-
+#, python-format
 msgid "Observation point: %s"
 msgstr "Пункт: %s"
 
-msgid "Feels like %s"
-msgstr "Відчувається як %s"
-
-msgid "Humidity: %s %%"
-msgstr "Вологість: %% %s"
-
-msgid ""
-"You need to enter a valid city name before you can search for the location "
-"code."
-msgstr ""
-"Перш ніж знайти код місцезнаходження, необхідно ввести дійсну назву міста."
+#, python-format
+msgid "Observation time: %s"
+msgstr "Час спостереження: %s"
 
 msgid "Please enter a valid city name."
 msgstr "Введіть дійсну назву міста."
@@ -125,5 +72,32 @@ msgstr "Введіть дійсну назву міста."
 msgid "Please enter a valid location code for the city."
 msgstr "Введіть дійсний код місця розташування."
 
-msgid "MSN location search result"
-msgstr "Результати пошуку місця розташування"
+msgid "Really delete this WeatherPlugin Entry?"
+msgstr "Дійсно видалити цей запис?"
+
+msgid "Search Code"
+msgstr "Пошук коду"
+
+msgid "Show Weather Forecast"
+msgstr "Показати прогноз погоди"
+
+msgid "System"
+msgstr "Система"
+
+msgid "Weather Plugin"
+msgstr "Плагін погоди"
+
+msgid "WeatherPlugin: Edit Entry"
+msgstr "Изменить запись"
+
+msgid "WeatherPlugin: List of Entries"
+msgstr "Список записів"
+
+msgid "You need to enter a valid city name before you can search for the location code."
+msgstr "Перш ніж знайти код місцезнаходження, необхідно ввести дійсну назву міста."
+
+msgid "imperial system"
+msgstr "англійська система"
+
+msgid "metric system"
+msgstr "метрична система"

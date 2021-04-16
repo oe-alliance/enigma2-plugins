@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WebInterface\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-11 14:56+0300\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2017-07-11 16:56+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
@@ -11,1219 +11,967 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/plugin.py:516
-msgid "Webinterface"
-msgstr "Interneto sąsaja"
-
-#: src/plugin.py:516 src/plugin.py:519
-msgid "Configuration for the Webinterface"
-msgstr "Interneto sąsajos konfigūravimas"
-
-#: src/WebIfConfig.py:34
-msgid "Cancel"
-msgstr "Atšaukti"
-
-#: src/WebIfConfig.py:35
-msgid "OK"
-msgstr "Gerai"
-
-#: src/WebIfConfig.py:60
-msgid "Start Webinterface"
-msgstr "Atverti interneto sąsają"
-
-#: src/WebIfConfig.py:61
-msgid "Show Setup in Extensions menu"
-msgstr "Rodyti sąranką plėtinių naršyklėje"
-
-#: src/WebIfConfig.py:62
-msgid "Enable /media"
-msgstr "Įjungti / Media"
-
-#: src/WebIfConfig.py:63
-msgid "Allow zapping via Webinterface"
-msgstr "Leisti perjungimą per interneto sąsają"
-
-#: src/WebIfConfig.py:64
-msgid "Autowrite timer"
-msgstr "Automatinis laikmačio pildymas"
-
-#: src/WebIfConfig.py:65
-msgid "Load movie-length"
-msgstr "Įkelti filmo trukmę"
-
-#: src/WebIfConfig.py:66
-msgid "Enable HTTP Access"
-msgstr "Leisti HTTP prieigą"
-
-#: src/WebIfConfig.py:71
-msgid "HTTP Port"
-msgstr "HTTP prievadas"
-
-#: src/WebIfConfig.py:72
-msgid "Enable HTTP Authentication"
-msgstr "Įjungti HTTP autentikaciją"
-
-#: src/WebIfConfig.py:77
-msgid "Enable HTTPS Access"
-msgstr "Leisti HTTPS prieigą"
-
-#: src/WebIfConfig.py:81
-msgid "HTTPS Port"
-msgstr "HTTPS prievadas"
-
-#: src/WebIfConfig.py:82
-msgid "Enable HTTPS Authentication"
-msgstr "Įjungti HTTPS autentikaciją"
-
-#: src/WebIfConfig.py:88
-msgid "Enable Streaming Authentication"
-msgstr "Įjungti transliacijos autentikaciją"
-
-#: src/WebIfConfig.py:94
-msgid "Webinterface: Main Setup"
-msgstr "Interneto sąsajos pagrindinė sąranka"
-
-#: src/WebComponents/Converter/HddInfo.py:32
-msgid "N/A"
-msgstr "N/D"
-
-#: src/WebComponents/Sources/Strings.py:13
-msgid "TeleVision"
-msgstr "Televizija"
-
-#: src/WebComponents/Sources/Strings.py:14
-msgid "TV"
-msgstr "TV"
-
-#: src/WebComponents/Sources/Strings.py:15
-msgid "Radio"
-msgstr "Radijas"
-
-#: src/WebComponents/Sources/Strings.py:16
-msgid "Movies"
-msgstr "Filmai"
-
-#: src/WebComponents/Sources/Strings.py:17
-msgid "Timer"
-msgstr "Laikmatis"
-
-#: src/WebComponents/Sources/Strings.py:18
-msgid "Timers"
-msgstr "Laikmačiai"
-
-#: src/WebComponents/Sources/Strings.py:19
-msgid "BoxControl"
-msgstr "Valdymas"
-
-#: src/WebComponents/Sources/Strings.py:20
-msgid "Extras"
-msgstr "Priedai"
-
-#: src/WebComponents/Sources/Strings.py:21
-msgid "WebTV"
-msgstr "Internetinis TV"
-
-#: src/WebComponents/Sources/Strings.py:22
-msgid "Volume"
-msgstr "Garsumas"
-
-#: src/WebComponents/Sources/Strings.py:23
-msgid "EPG-Search"
-msgstr "EPG paieška"
-
-#: src/WebComponents/Sources/Strings.py:24
-msgid "Search EPG"
-msgstr "Ieškoti EPG"
-
-#: src/WebComponents/Sources/Strings.py:25
-msgid "Clear search"
-msgstr "Išvalyti paiešką"
-
-#: src/WebComponents/Sources/Strings.py:26
-msgid "Bouquets"
-msgstr "Bukietai"
-
-#: src/WebComponents/Sources/Strings.py:27
-msgid "No Bouquets to Display"
-msgstr "Nėra rodytinų bukietų"
-
-#: src/WebComponents/Sources/Strings.py:28
-msgid "Please select any bouquet"
-msgstr "Pasirinkite kurį nors bukietą"
-
-#: src/WebComponents/Sources/Strings.py:29
-msgid "Providers"
-msgstr "Tiekėjai"
-
-#: src/WebComponents/Sources/Strings.py:30
-msgid "Satellites"
-msgstr "Palydovai"
-
-#: src/WebComponents/Sources/Strings.py:31
-msgid "All"
-msgstr "Visi"
-
-#: src/WebComponents/Sources/Strings.py:32
-msgid "Tag Filter"
-msgstr "Žymių filtras"
-
-#: src/WebComponents/Sources/Strings.py:33
-msgid "All Timers"
-msgstr "Visi laikmačiai"
-
-#: src/WebComponents/Sources/Strings.py:34
-msgid "Create Timer"
-msgstr "Sukurti laikmatį"
-
-#: src/WebComponents/Sources/Strings.py:35
-msgid "Cleanup"
-msgstr "Išvalymas"
-
-#: src/WebComponents/Sources/Strings.py:36
-msgid "Cleans up the list of timers by removing e.g. finished timers"
-msgstr "Išvalo laikmačių sąrašą pašalindamas, pvz.: baigtus laikmačius"
-
-#: src/WebComponents/Sources/Strings.py:37
-msgid "No Timer Available!"
-msgstr "Nėra galimų laikmačių!"
-
-#: src/WebComponents/Sources/Strings.py:38
-#: src/WebComponents/Sources/Strings.py:108
-msgid "Edit Timer"
-msgstr "Redaguoti laikmatį"
-
-#: src/WebComponents/Sources/Strings.py:39
-msgid "Enable"
-msgstr "Įjungti"
-
-#: src/WebComponents/Sources/Strings.py:40
-msgid "Activate"
-msgstr "Įjungti"
-
-#: src/WebComponents/Sources/Strings.py:41
-msgid "Deactivate"
-msgstr "Išjungti"
-
-#: src/WebComponents/Sources/Strings.py:42
-msgid "Disable"
-msgstr "Išjungti"
-
-#: src/WebComponents/Sources/Strings.py:43
-msgid "Delete"
-msgstr "Ištrinti"
-
-#: src/WebComponents/Sources/Strings.py:44
-msgid "Delete Timer"
-msgstr "Šalinti laikmatį"
-
-#: src/WebComponents/Sources/Strings.py:45
-msgid "Legend"
-msgstr "Paaiškinimai"
-
-#: src/WebComponents/Sources/Strings.py:46
-msgid "Waiting"
-msgstr "Laukiama"
-
-#: src/WebComponents/Sources/Strings.py:47
-#: src/WebComponents/Sources/Strings.py:85
-msgid "Error"
-msgstr "Klaida"
-
-#: src/WebComponents/Sources/Strings.py:48
-msgid "Running"
-msgstr "Veikia"
-
-#: src/WebComponents/Sources/Strings.py:49
-msgid "Finished"
-msgstr "Baigtas"
-
-#: src/WebComponents/Sources/Strings.py:50
-msgid "Action"
-msgstr "Veikmas"
-
-#: src/WebComponents/Sources/Strings.py:51
-msgid "Record"
-msgstr "Įrašas"
-
-#: src/WebComponents/Sources/Strings.py:52
-msgid "Zap"
-msgstr "perjungti"
-
-#: src/WebComponents/Sources/Strings.py:53
-msgid "Note: For recurring events dates are not mandatory."
-msgstr "Pastaba: pasikartojantiems įvykiams datos nebūtinos."
-
-#: src/WebComponents/Sources/Strings.py:54
-msgid "Note: For one-time events the days don't have to be specified."
-msgstr "Pastaba: vienkartiniams įvykiams dienų nurodyti nereikia."
-
-#: src/WebComponents/Sources/Strings.py:55
-msgid "Begins"
-msgstr "Prasideda"
-
-#: src/WebComponents/Sources/Strings.py:56
-msgid "Ends"
-msgstr "Baigiasi"
-
-#: src/WebComponents/Sources/Strings.py:57
-msgid "Days"
-msgstr "Dienos"
-
-#: src/WebComponents/Sources/Strings.py:58
-msgid "Channel"
-msgstr "Kanalas"
-
-#: src/WebComponents/Sources/Strings.py:59
-msgid "Name"
-msgstr "Pavadinimas"
-
-#: src/WebComponents/Sources/Strings.py:60
-msgid "Description"
-msgstr "Aprašymas"
-
-#: src/WebComponents/Sources/Strings.py:61
-msgid "Location"
-msgstr "Padėtis"
-
-#: src/WebComponents/Sources/Strings.py:62
-msgid "Tags"
-msgstr "Žymės"
-
-#: src/WebComponents/Sources/Strings.py:63
-msgid "After event"
-msgstr "Po užduoties"
-
-#: src/WebComponents/Sources/Strings.py:64
-msgid "Do Nothing"
-msgstr "nieko nedaryti"
-
-#: src/WebComponents/Sources/Strings.py:65
-msgid "of"
-msgstr "išjungti"
-
-#: src/WebComponents/Sources/Strings.py:66
-msgid "Standby"
-msgstr "Budintis režimas"
-
-#: src/WebComponents/Sources/Strings.py:67
-msgid "Shutdown"
-msgstr "Išjungti"
-
-#: src/WebComponents/Sources/Strings.py:68
-msgid "Auto"
-msgstr "Automatiškai"
-
-#: src/WebComponents/Sources/Strings.py:69
-msgid "Save"
-msgstr "Išsaugoti"
-
-#: src/WebComponents/Sources/Strings.py:70
-msgid "Power Control"
-msgstr "Maitinimas"
-
-#: src/WebComponents/Sources/Strings.py:71
-#: src/WebComponents/Sources/Strings.py:87
-msgid "Send Message"
-msgstr "Siųsti žinutę"
-
-#: src/WebComponents/Sources/Strings.py:72
-msgid "WebRemote"
-msgstr "Internetinis"
-
-#: src/WebComponents/Sources/Strings.py:73
-msgid "Screenshot (All)"
-msgstr "Ekrano nuotrauka (viskam)"
-
-#: src/WebComponents/Sources/Strings.py:74
-msgid "Screenshot (Video)"
-msgstr "Ekrano nuotrauka (vaizdo)"
-
-#: src/WebComponents/Sources/Strings.py:75
-msgid "Screenshot (OSD)"
-msgstr "Ekrano nuotrauka (ekrano)"
-
-#: src/WebComponents/Sources/Strings.py:76
-msgid "Toggle Standby"
-msgstr "Perjungti budėjimo režimą"
-
-#: src/WebComponents/Sources/Strings.py:77
-msgid "Deepstandby"
-msgstr "Gilus budėjimas"
-
-#: src/WebComponents/Sources/Strings.py:78
-msgid "Reboot"
-msgstr "Paleisti iš naujo"
-
-#: src/WebComponents/Sources/Strings.py:79
-msgid "Restart enigma2"
-msgstr "Paleisti enigma2 iš naujo"
-
-#: src/WebComponents/Sources/Strings.py:80
-msgid "Message"
-msgstr "Pranešimas"
-
-#: src/WebComponents/Sources/Strings.py:81
-msgid "Timeout"
-msgstr "Delsa"
-
-#: src/WebComponents/Sources/Strings.py:82
-msgid "Type"
-msgstr "Tipas"
-
-#: src/WebComponents/Sources/Strings.py:83
-msgid "Info"
-msgstr "Informacija"
-
-#: src/WebComponents/Sources/Strings.py:84
-msgid "Warning"
-msgstr "Perspėjimas"
-
-#: src/WebComponents/Sources/Strings.py:86
-msgid "Send"
-msgstr "Siųsti"
-
-#: src/WebComponents/Sources/Strings.py:88
-msgid "Mediaplayer"
-msgstr "Mediagrotuvas"
-
-#: src/WebComponents/Sources/Strings.py:89
-msgid "Device Info"
-msgstr "Įrenginio informacija"
-
-#: src/WebComponents/Sources/Strings.py:90
-msgid "Settings"
-msgstr "Nuostatos"
-
-#: src/WebComponents/Sources/Strings.py:91
-msgid "Tools"
-msgstr "Įrankiai"
-
-#: src/WebComponents/Sources/Strings.py:92
-msgid "About"
-msgstr "Apie"
-
-#: src/WebComponents/Sources/Strings.py:93
-msgid "Click to show/hide extended description"
-msgstr "Paspauskite, kad atverti/paslėpti išplėstinį aprašymą"
-
-#: src/WebComponents/Sources/Strings.py:94
-msgid "Show EPG for"
-msgstr "Rodyti EPG"
-
-#: src/WebComponents/Sources/Strings.py:95
-msgid "Stream Channel"
-msgstr "Kanalo transliacija"
-
-#: src/WebComponents/Sources/Strings.py:96
-msgid "Stream"
-msgstr "Transliacija"
-
-#: src/WebComponents/Sources/Strings.py:97
-msgid "Instant Record"
-msgstr "Tiesioginis įrašymas"
-
-#: src/WebComponents/Sources/Strings.py:98
-msgid "Record current event"
-msgstr "Įrašyti šį įvykį"
-
-#: src/WebComponents/Sources/Strings.py:99
-msgid "Start infinite recording"
-msgstr "Pradėti neribotą laiku įrašą"
-
-#: src/WebComponents/Sources/Strings.py:100
-msgid "Open Signal Panel"
-msgstr "Atverti sugnalo langą"
-
-#: src/WebComponents/Sources/Strings.py:101
-msgid "Zap to"
-msgstr "Perjungti į"
-
-#: src/WebComponents/Sources/Strings.py:102
-msgid "Open Multi-EPG for"
-msgstr "Atverti daugiakanalį EPG"
-
-#: src/WebComponents/Sources/Strings.py:103
-msgid "Load Bouquet"
-msgstr "Įkelti bukietą"
-
-#: src/WebComponents/Sources/Strings.py:104
-msgid "Playlist for"
-msgstr "Grojaraštis"
-
-#: src/WebComponents/Sources/Strings.py:105
-msgid "Lookup on IMDb.com"
-msgstr "Ieškoti IMDb.com"
-
-#: src/WebComponents/Sources/Strings.py:106
-msgid "Add Timer"
-msgstr "Pridėti laikmatį"
-
-#: src/WebComponents/Sources/Strings.py:107
-msgid "Add Zap Timer"
-msgstr "Pridėti perjungimo laikmatį"
-
-#: src/WebComponents/Sources/Strings.py:109
-msgid "No Service to show"
-msgstr "Nėra atvaizduotinų kanalų"
-
-#: src/WebComponents/Sources/Strings.py:110
-msgid "please select a submenu on the left..."
-msgstr "pasirinkite submeniu kairėje..."
-
-#: src/WebComponents/Sources/Strings.py:111
-msgid "Filter Services"
-msgstr "Filtruoti kanalus"
-
-#: src/WebComponents/Sources/Strings.py:112
-msgid "Authors"
-msgstr "Autoriai"
-
-#: src/WebComponents/Sources/Strings.py:113
-msgid "and many contributors"
-msgstr "ir bendraautoriai"
-
-#: src/WebComponents/Sources/Strings.py:114
-msgid "JavaScript Libraries"
-msgstr "Java scenarijaus bibliotekos"
-
-#: src/WebComponents/Sources/Strings.py:115
-msgid "License"
-msgstr "Licencija"
-
-#: src/WebComponents/Sources/Strings.py:116
-msgid "Device & Versions"
-msgstr "Įrenginys ir versijos"
-
-#: src/WebComponents/Sources/Strings.py:117
-msgid "Device Name"
-msgstr "Įrenginio pavadinimas"
-
-#: src/WebComponents/Sources/Strings.py:118
-msgid "Enigma2 Version"
-msgstr "Enigma2 versija"
-
-#: src/WebComponents/Sources/Strings.py:119
-msgid "Image Version"
-msgstr "Atvaizdo versija"
-
-#: src/WebComponents/Sources/Strings.py:120
-msgid "Frontprocessor Version"
-msgstr "Sąsajos procesoriaus versija"
-
-#: src/WebComponents/Sources/Strings.py:121
-msgid "Webinterface Version"
-msgstr "Interneto sąsajos versija"
-
-#: src/WebComponents/Sources/Strings.py:122
-msgid "Tuners"
-msgstr "Imtuvai"
-
-#: src/WebComponents/Sources/Strings.py:123
-msgid "Harddisk"
-msgstr "HDD"
-
-#: src/WebComponents/Sources/Strings.py:124
-msgid "Capacity"
-msgstr "Talpa"
-
-#: src/WebComponents/Sources/Strings.py:125
-msgid "Free Space"
-msgstr "Laisva vieta"
-
-#: src/WebComponents/Sources/Strings.py:126
-msgid "Network Interface"
-msgstr "Tinklo sąsaja"
-
-#: src/WebComponents/Sources/Strings.py:127
-msgid "Mac Address"
-msgstr "MAC adresas"
-
-#: src/WebComponents/Sources/Strings.py:128
-msgid "DHCP enabled"
-msgstr "DHCP įjungtas"
-
-#: src/WebComponents/Sources/Strings.py:129
-msgid "IP Address"
-msgstr "IP adresas"
-
-msgid "IPv6 address(es)"
-msgstr "IPv6 adresas(ai)"
-
-msgid "IPv4-only kernel"
-msgstr "Tik IP v4 branduolys"
-
-msgid "none/IPv4-only network"
-msgstr "nėra / tik IP v4 tinklas"
-
-msgid "IPv4-only Python/Twisted"
-msgstr "Tik IP v4 Python/Mišrus"
-
-#: src/WebComponents/Sources/Strings.py:130
-msgid "Netmask"
-msgstr "Potinklio kaukė"
-
-#: src/WebComponents/Sources/Strings.py:131
-msgid "Gateway"
-msgstr "Šliuzas"
-
-#: src/WebComponents/Sources/Strings.py:132
-msgid "Video Size"
-msgstr "Kadro dydis"
-
-#: src/WebComponents/Sources/Strings.py:133
-msgid "Widescreen"
-msgstr "Plačiaekranis"
-
-#: src/WebComponents/Sources/Strings.py:134
-msgid "Audio PID"
-msgstr "Garso PID"
-
-#: src/WebComponents/Sources/Strings.py:135
-msgid "Video PID"
-msgstr "Vaizdo PID"
-
-#: src/WebComponents/Sources/Strings.py:136
-msgid "PCR PID"
-msgstr "PCR PID"
-
-#: src/WebComponents/Sources/Strings.py:137
-msgid "PMT PID"
-msgstr "PMT PID"
-
-#: src/WebComponents/Sources/Strings.py:138
-msgid "Text PID"
-msgstr "TXT PID"
-
-#: src/WebComponents/Sources/Strings.py:139
-msgid "TSID"
-msgstr "TSID"
-
-#: src/WebComponents/Sources/Strings.py:140
-msgid "ONID"
-msgstr "ONID"
-
-#: src/WebComponents/Sources/Strings.py:141
-msgid "SID"
-msgstr "SID"
-
-#: src/WebComponents/Sources/Strings.py:142
-msgid "Nothing running..."
-msgstr "Niekas nedirba..."
-
-#: src/WebComponents/Sources/Strings.py:143
-msgid "Technical Information"
-msgstr "Techninė informacija"
-
-#: src/WebComponents/Sources/Strings.py:144
-msgid "Nothing found..."
-msgstr "Nieko nerasta..."
-
-#: src/WebComponents/Sources/Strings.py:145
-msgid "No movies to show..."
-msgstr "Nėra rodytinų įrašų..."
-
-#: src/WebComponents/Sources/Strings.py:146
-msgid "Download"
-msgstr "Parsiuntimas"
-
-#: src/WebComponents/Sources/Strings.py:147
-msgid "Volume Down"
-msgstr "Patildyti"
-
-#: src/WebComponents/Sources/Strings.py:148
-msgid "Down"
-msgstr "Žemyn"
-
-#: src/WebComponents/Sources/Strings.py:149
-msgid "Mute"
-msgstr "Nutildyti"
-
-#: src/WebComponents/Sources/Strings.py:150
-msgid "Unmute"
-msgstr "Įjungti garsą"
-
-#: src/WebComponents/Sources/Strings.py:151
-msgid "Volume Up"
-msgstr "Pagarsinti"
-
-#: src/WebComponents/Sources/Strings.py:152
-msgid "Up"
-msgstr "Aukštyn"
-
-#: src/WebComponents/Sources/Strings.py:153
-msgid "Get a Screenshot"
-msgstr "Ekrano nuotrauka"
-
-#: src/WebComponents/Sources/Strings.py:154
-msgid "Grab Video & OSD"
-msgstr "Vaizdo ir ekrano nuotrauka"
-
-#: src/WebComponents/Sources/Strings.py:155
-msgid "Send \\\"long\\\" keypress"
-msgstr "Ilgas mygtuko paspaudimas"
-
-#: src/WebComponents/Sources/Strings.py:156
-msgid "Refresh Screenshot"
-msgstr "Atnaujinti ekrano nuotrauką"
-
-#: src/WebComponents/Sources/Strings.py:157
-msgid "WARNING: Cookies are required to store the settings!"
-msgstr "ĮSPĖJIMAS: Slapukai būtini nustatymams išsaugoti!"
-
-#: src/WebComponents/Sources/Strings.py:158
-msgid "Enable Debug"
-msgstr "Įjungti klaidų derinimą"
-
-#: src/WebComponents/Sources/Strings.py:159
-msgid "Update interval for current service (min. 10 sec)"
-msgstr "Šio kanalo atnaujinimo intervalas (min. 10 sek.)"
-
-#: src/WebComponents/Sources/Strings.py:160
-msgid "Update-Interval for EPG of the current bouquets (min. 60 sec)"
-msgstr "Šių bukietų EPG atnaujinimo intervalas (min. 60 sek.)"
-
-#: src/WebComponents/Sources/Strings.py:161
-msgid "sec"
-msgstr "sek."
-
-#: src/WebComponents/Sources/Strings.py:162
-msgid "Previous"
-msgstr "Ankstesnis"
-
-#: src/WebComponents/Sources/Strings.py:163
-msgid "Play"
-msgstr "Atkurti"
-
-#: src/WebComponents/Sources/Strings.py:164
-msgid "Next"
-msgstr "Sekantis"
-
-#: src/WebComponents/Sources/Strings.py:165
-msgid "Stop"
-msgstr "Stabdyti"
-
-#: src/WebComponents/Sources/Strings.py:166
-msgid "Filebrowser"
-msgstr "Failų naršyklė"
-
-#: src/WebComponents/Sources/Strings.py:167
-msgid "Playlist"
-msgstr "Grojaraštis"
-
-#: src/WebComponents/Sources/Strings.py:168
-msgid "Save Playlist"
-msgstr "Išsaugoti grojaraštį"
-
-#: src/WebComponents/Sources/Strings.py:169
-msgid "Close MediaPlayer"
-msgstr "Išjungti mediagrotuvą"
-
-#: src/WebComponents/Sources/Strings.py:170
-msgid "No items to show..."
-msgstr "Nėra rodytinų elementų..."
-
-#: src/WebComponents/Sources/LocationsAndTags.py:17
-msgid "one two three four unknown command"
-msgstr "vienas du trys keturi nežinoma komanda"
-
-#: src/WebComponents/Sources/LocationsAndTags.py:69
-#, python-format
-msgid "Path %s can not be created"
-msgstr "Kelio %s sukurti napavyko"
-
-#: src/WebComponents/Sources/LocationsAndTags.py:71
-#, python-format
-msgid "Path %s does not exist"
-msgstr "Kelio %s nėra"
-
-#: src/WebComponents/Sources/LocationsAndTags.py:74
-#, python-format
-msgid "Location '%s' is already existing"
-msgstr "Vieta '%s' jau yra"
-
-#: src/WebComponents/Sources/LocationsAndTags.py:78
-#, python-format
-msgid "Location '%s' added successfully"
-msgstr "Vieta '%s' įtraukta sėkmingai"
-
-#: src/WebComponents/Sources/LocationsAndTags.py:83
-msgid "Missing value for parameter dirname"
-msgstr "Trūksta parametro 'katalogo pavadinimas' reikšmės"
-
-#: src/WebComponents/Sources/LocationsAndTags.py:92
-#, python-format
-msgid "Location '%s' removed successfully"
-msgstr "Vieta '%s' pašalinta sėkmingai"
-
-#: src/WebComponents/Sources/LocationsAndTags.py:94
-#, python-format
-msgid "Location '%s' does not exist"
-msgstr "Vietos '%s' nėra"
-
-#: src/WebComponents/Sources/Message.py:17
-#, python-format
-msgid "unknown command (%s)"
-msgstr "nežinoma komanda (%s)"
-
-#: src/WebComponents/Sources/Message.py:31
-msgid "No Messagetext given"
-msgstr "Nenurodytas pranešimo tekstas"
-
-#: src/WebComponents/Sources/Message.py:38
-#, python-format
-msgid "type %s is not a number"
-msgstr "tipas %s nėra skaičius"
-
-#: src/WebComponents/Sources/Message.py:50
-#, python-format
-msgid "Unsupported Messagetype %s"
-msgstr "Nesuprantanas pranešimo tipas %s"
-
-#: src/WebComponents/Sources/Message.py:62
-msgid "Message sent successfully!"
-msgstr "Pranešimas išsiųstas sėkmingai!"
-
-#: src/WebComponents/Sources/ReadPluginList.py:14
-msgid "List of Plugins has been read"
-msgstr "Įskiepių sąrašas perskaitytas"
-
-#: src/WebComponents/Sources/SleepTimer.py:16
-msgid ""
-"Obligatory parameters missing [cmd [set,get], time [0-999], action [standby,"
-"shutdown], enabled [True,False]"
-msgstr ""
-"Trūksta būtinų parametrų [komanda [set,get], laikas [0-999], veiksmas "
-"[standby,shutdown], leidimas [True,False]"
-
-#: src/WebComponents/Sources/SleepTimer.py:34
-msgid "Sleeptimer is enabled"
-msgstr "Budėjimo laikmatis įjungtas"
-
-#: src/WebComponents/Sources/SleepTimer.py:40
-msgid "Sleeptimer is disabled"
-msgstr "Budėjimo laikmatis išjungtas"
-
-#: src/WebComponents/Sources/SleepTimer.py:52
-#, python-format
-msgid ""
-"ERROR: Obligatory parameter 'enabled' [True,False] has unspecified value '%s'"
-msgstr ""
-"KLAIDA: Nenurodyta privalomo parametro 'leidimas' [True,False] reikšmė '%s'"
-
-#: src/WebComponents/Sources/SleepTimer.py:60
-msgid "ERROR: Obligatory parameter 'time' [0-999] is missing"
-msgstr "KLAIDA: Nėra privalomo parametro 'laikas' [0-999]"
-
-#: src/WebComponents/Sources/SleepTimer.py:86
-msgid "The sleep timer has been disabled."
-msgstr "Budėjimo laikmatis buvo išjungtas."
-
-#: src/WebComponents/Sources/SleepTimer.py:87
-msgid "Sleeptimer has been disabled"
-msgstr "Budėjimo laikmatis išjungtas"
-
-#: src/WebComponents/Sources/SleepTimer.py:90
-#, python-format
-msgid "The sleep timer has been activated for %s minutes."
-msgstr "Budėjimo laikmatis įjungtas %s minutėms."
-
-#: src/WebComponents/Sources/SleepTimer.py:91
-#, python-format
-msgid "Sleeptimer set to %s minutes"
-msgstr "Budėjimo laikmatis nustatytas %s minutėms"
-
-#: src/WebComponents/Sources/SleepTimer.py:104
-#, python-format
-msgid "ERROR: Obligatory parameter 'cmd' [get,set] has unspecified value '%s'"
-msgstr ""
-"KLAIDA: Nenurodyta privalomo parametro 'komanda' [get,set] reikšmė '%s'"
-
-#: src/WebComponents/Sources/SleepTimer.py:110
-msgid "ERROR: Cannot set SleepTimer while device is in Standby-Mode"
-msgstr ""
-"KLAIDA: Negalima nustatyti budėjimo laikmačio, kai įrenginys budėjimo "
-"būsenoje"
-
-#: src/WebComponents/Sources/Timer.py:64
-#, python-format
-msgid "Unknown function: '%s'"
-msgstr "Nežinoma funkcija: '%s'"
-
-#: src/WebComponents/Sources/Timer.py:70
-msgid "List of Timers has been cleaned"
-msgstr "Laikmačių sąrašas išvalytas"
-
-#: src/WebComponents/Sources/Timer.py:79 src/WebComponents/Sources/Timer.py:225
-#: src/WebComponents/Sources/Timer.py:398 src/WebComponents/Sources/Movie.py:40
-#: src/WebComponents/Sources/Movie.py:67
-msgid "Missing Parameter: sRef"
-msgstr "Trūksta parametro: sRef"
-
-#: src/WebComponents/Sources/Timer.py:84 src/WebComponents/Sources/Timer.py:231
-msgid "Missing Parameter: begin"
-msgstr "Trūksta parametro: pradžia"
-
-#: src/WebComponents/Sources/Timer.py:89 src/WebComponents/Sources/Timer.py:235
-msgid "Missing Parameter: end"
-msgstr "Trūksta parametro: pabaiga"
-
-#: src/WebComponents/Sources/Timer.py:95
-#, python-format
-msgid "The timer '%s' has been deleted successfully"
-msgstr "Laikmatis '%s' pašalintas sėkmingai"
-
-#: src/WebComponents/Sources/Timer.py:97
-msgid "The timer has NOT been deleted"
-msgstr "Laikmatis NEpašalintas"
-
-#: src/WebComponents/Sources/Timer.py:244
-#, python-format
-msgid "Illegal Parameter value for Parameter begin : '%s'"
-msgstr "Neteisinga parametro 'pradžia' reikšmė: '%s'"
-
-#: src/WebComponents/Sources/Timer.py:247
-msgid "Missing Parameter: name"
-msgstr "Trūksta parametro: pavadinimas"
-
-#: src/WebComponents/Sources/Timer.py:251
-msgid "Missing Parameter: description"
-msgstr "Trūksta parametro: aprašymas"
-
-#: src/WebComponents/Sources/Timer.py:259
-#, python-format
-msgid "Illegal Parameter value for Parameter edit : '%s'"
-msgstr "Neteisinga parametro 'redaguoti' reikšmė: '%s'"
-
-#: src/WebComponents/Sources/Timer.py:267
-#, python-format
-msgid "Event with id %d not found"
-msgstr "Įvykio su id %d nerasta"
-
-#: src/WebComponents/Sources/Timer.py:305
-msgid "Missing Parameter: channelOld"
-msgstr "Trūksta parametro: 'senas kanalas'"
-
-#: src/WebComponents/Sources/Timer.py:310
-msgid "Missing Parameter: beginOld"
-msgstr "Trūksta parametro: 'sena pradžia'"
-
-#: src/WebComponents/Sources/Timer.py:314
-msgid "Missing Parameter: endOld"
-msgstr "Trūksta parametro: 'sena pabaiga'"
-
-#: src/WebComponents/Sources/Timer.py:360
-#: src/WebComponents/Sources/Timer.py:386
-#: src/WebComponents/Sources/Timer.py:433
-#, python-format
-msgid "Conflicting Timer(s) detected! %s"
-msgstr "Aptiktas laikmačių konfliktas! %s"
-
-#: src/WebComponents/Sources/Timer.py:365
-#, python-format
-msgid "Changing the timer for '%s' failed!"
-msgstr "Pakeisti '%s' laikmačio nepavyko!"
-
-#: src/WebComponents/Sources/Timer.py:368
-#, python-format
-msgid "Could not find timer '%s' with given start and end time!"
-msgstr "Laikmačio '%s' su tokiu pradžios ir pabaigos laiku rasti nepavyko!"
-
-#: src/WebComponents/Sources/Timer.py:379
-#: src/WebComponents/Sources/Timer.py:426
-#, python-format
-msgid "Timer '%s' added"
-msgstr "Laikmatis '%s' įtrauktas"
-
-#: src/WebComponents/Sources/Timer.py:391
-#, python-format
-msgid "Could not add timer '%s'!"
-msgstr "Laikmačio '%s' pridėti nepavyko!"
-
-#: src/WebComponents/Sources/Timer.py:400
-msgid "Missing Parameter: eventid"
-msgstr "Trūksta parametro: įvykio id"
-
-#: src/WebComponents/Sources/Timer.py:418
-msgid "EventId not found"
-msgstr "Įvykio ID nerasta"
-
-#: src/WebComponents/Sources/Timer.py:441
-msgid "TimerList has been saved"
-msgstr "Laikmačių sąrašas išsaugotas"
-
-#: src/WebComponents/Sources/Timer.py:443
-msgid "TimerList has not been saved"
-msgstr "Laikmačių sąrašas neišsaugotas"
-
-#: src/WebComponents/Sources/ServiceListReload.py:21
-msgid "reloaded both"
-msgstr "abu įkelti iš naujo"
-
-#: src/WebComponents/Sources/ServiceListReload.py:24
-msgid "reloaded lamedb"
-msgstr "lamedb įkelta iš naujo"
-
-#: src/WebComponents/Sources/ServiceListReload.py:27
-msgid "reloaded bouquets"
-msgstr "bukietai įkelti iš naujo"
-
-#: src/WebComponents/Sources/ServiceListReload.py:44
-#, python-format
-msgid ""
-"missing or wrong parameter mode [%i=both, %i=lamedb only, %i=userbouqets "
-"only]"
-msgstr ""
-"trūksta, arba neteisingai parametras režimas [%i=abu, %i= tik lamedb, %i=tik "
-"bukietus]"
-
-#: src/WebComponents/Sources/Movie.py:22
-msgid "Missing or Wrong Argument"
-msgstr "Trūksta arba neteisingas argumentas"
-
-#: src/WebComponents/Sources/Movie.py:50 src/WebComponents/Sources/Movie.py:91
-msgid "this recording"
-msgstr "šis įrašas"
-
-#: src/WebComponents/Sources/Movie.py:57
-#, python-format
-msgid "Could not delete Movie '%s'"
-msgstr "Pašalinti įrašo '%s' nepavyko"
-
-#: src/WebComponents/Sources/Movie.py:59
-#, python-format
-msgid "Movie '%s' deleted"
-msgstr "Įrašas '%s' pašalintas"
-
-#: src/WebComponents/Sources/Movie.py:61 src/WebComponents/Sources/Movie.py:154
-#, python-format
-msgid "Illegal Parameter Value: sRef - '%s'"
-msgstr "Neteisinga parametro 'sRef' reikšmė: '%s'"
-
-#: src/WebComponents/Sources/Movie.py:69
-msgid "Missing Paramter: dirname"
-msgstr "Trūksta parametro 'katalogo pavadinimas'"
-
-#: src/WebComponents/Sources/Movie.py:96
-msgid "Source and destination folders are the same."
-msgstr "Šaltinio ir paskirties katalogai tie patys."
-
-#: src/WebComponents/Sources/Movie.py:98
-#, python-format
-msgid "'%s' does not exist in source directory."
-msgstr "'%s' šaltinio kataloge nėra."
-
-#: src/WebComponents/Sources/Movie.py:100
-#, python-format
-msgid ""
-"'%s' already exists in destination directory '%s', set force=1 to move "
-"anyway."
-msgstr ""
-"'%s' paskirties aplanke '%s' jau yra, nustatytkite=1, kad vis tiek perkelti."
-
-#: src/WebComponents/Sources/Movie.py:102
-#, python-format
-msgid "Destination dir '%s' does not exist."
-msgstr "Paskirties katalogo '%s' nėra."
-
-#: src/WebComponents/Sources/Movie.py:118
-#, python-format
-msgid "Movie '%s' has unknown suffix '%s'."
-msgstr "Filmas '%s' turi nežinomas priesagas '%s'."
-
-#: src/WebComponents/Sources/Movie.py:147
-#, python-format
-msgid "Moving Movie '%s' to '%s' in background."
-msgstr "Filmas '%s' fone perkeliamas į '%s'."
-
-#: src/WebComponents/Sources/Movie.py:151
-#, python-format
-msgid "Movie '%s' moved to '%s' without errors."
-msgstr "Filmas '%s' perkeltas į '%s' be klaidų."
-
-#: src/WebComponents/Sources/Movie.py:153
 #, python-format
 msgid "%d error while moving Movie '%s' to '%s': %s"
 msgstr "%d klaida, perkeliant filmą '%s' į '%s': %s"
 
-#: src/WebComponents/Sources/Movie.py:169
-msgid "undefined"
-msgstr "nenustatyta"
-
-#: src/WebComponents/Sources/Movie.py:178
-msgid "disabled"
-msgstr "išjungta"
-
-#: src/WebComponents/Sources/Movie.py:210
-msgid "illegal call"
-msgstr "neteisingas kreipimasis"
-
-#: src/WebComponents/Sources/MP.py:20
 #, python-format
-msgid "Unknown command (%s)"
-msgstr "Nežinoma komanda (%s)"
+msgid "%s of %s min"
+msgstr ""
 
-#: src/WebComponents/Sources/MP.py:128 src/WebComponents/Sources/MP.py:157
-#: src/WebComponents/Sources/MP.py:182 src/WebComponents/Sources/MP.py:201
-#: src/WebComponents/Sources/MP.py:212 src/WebComponents/Sources/MP.py:239
-msgid "Mediaplayer not installed"
-msgstr "Mediagrotuvas neįdiegtas"
-
-#: src/WebComponents/Sources/MP.py:134
-msgid "Missing or invalid parameter file"
-msgstr "Trūksta, arba neteisingas parametras 'failas'"
-
-#: src/WebComponents/Sources/MP.py:139 src/WebComponents/Sources/MP.py:163
 #, python-format
-msgid "'%s' is neither a valid reference nor a valid file"
-msgstr "'%s' neturi galiojančios nuorodos, arba galiojančio failo"
+msgid "'%s' already exists in destination directory '%s', set force=1 to move anyway."
+msgstr "'%s' paskirties aplanke '%s' jau yra, nustatytkite=1, kad vis tiek perkelti."
 
-#: src/WebComponents/Sources/MP.py:149
 #, python-format
-msgid "Playback of '%s' started"
-msgstr "'%s' atkūrimas prasidėjo"
+msgid "'%s' does not exist in source directory."
+msgstr "'%s' šaltinio kataloge nėra."
 
-#: src/WebComponents/Sources/MP.py:151
 #, python-format
 msgid "'%s' has been added to playlist"
 msgstr "'%s'  įtraukta į grojaraštį"
 
-#: src/WebComponents/Sources/MP.py:171
 #, python-format
-msgid "'%s' removed from playlist"
-msgstr "'%s' pašalinta iš grojaraščio"
+msgid "'%s' is neither a valid reference nor a valid file"
+msgstr "'%s' neturi galiojančios nuorodos, arba galiojančio failo"
 
-#: src/WebComponents/Sources/MP.py:174
 #, python-format
 msgid "'%s' not found in playlist"
 msgstr "'%s' grojaraštyje nerasta"
 
-#: src/WebComponents/Sources/MP.py:190
 #, python-format
-msgid "Playlist '%s' does not exist"
-msgstr "Grojaraščio '%s' nėra"
+msgid "'%s' removed from playlist"
+msgstr "'%s' pašalinta iš grojaraščio"
 
-#: src/WebComponents/Sources/MP.py:205
-#, python-format
-msgid "Playlist saved to '%s'"
-msgstr "Grojaraštis išsaugotas '%s'"
+msgid "0"
+msgstr ""
 
-#: src/WebComponents/Sources/MP.py:214
-msgid "Mediaplayer was not active"
-msgstr "Mediagrotuvas neveikia"
+msgid "1"
+msgstr ""
 
-#: src/WebComponents/Sources/MP.py:233
-#, python-format
-msgid "Unknown parameter %s"
-msgstr "Nežinomas patametras %s"
+msgid "15"
+msgstr ""
 
-#: src/WebComponents/Sources/MP.py:234
-#, python-format
-msgid "Command '%s' executed"
-msgstr "Komanda '%s' įvykdyta"
+msgid "2"
+msgstr ""
 
-#: src/WebComponents/Sources/AudioTracks.py:11
-msgid "False"
-msgstr "Ne"
+msgid "3"
+msgstr ""
 
-#: src/WebComponents/Sources/AudioTracks.py:37
-msgid "Success"
-msgstr "Sėkmingai"
-
-#: src/WebComponents/Sources/AudioTracks.py:50
-msgid "AC3 Downmix enabled"
-msgstr "AC3 kanalų suliejimas įjungtas"
-
-#: src/WebComponents/Sources/AudioTracks.py:50
 msgid "AC3 Downmix disabled"
 msgstr "AC3 kanalų suliejimas išjungtas"
 
-#: src/WebComponents/Sources/AudioTracks.py:53
-msgid "This device does not support AC3 Downmix"
-msgstr "Šis modelis nesugeba sulieti AC3 kanalų"
+msgid "AC3 Downmix enabled"
+msgstr "AC3 kanalų suliejimas įjungtas"
 
-#: src/WebComponents/Sources/Volume.py:17
-msgid "State"
-msgstr "Būklė"
+msgid "About"
+msgstr "Apie"
 
-#: src/WebComponents/Sources/Volume.py:20
-#: src/WebComponents/Sources/Volume.py:23
-msgid "Volume changed"
-msgstr "Garsas pakeistas"
+msgid "Action"
+msgstr "Veikmas"
 
-#: src/WebComponents/Sources/Volume.py:26
-msgid "Mute toggled"
-msgstr "Nutildytmas perjungtas"
+msgid "Activate"
+msgstr "Įjungti"
 
-#: src/WebComponents/Sources/Volume.py:37
-#, python-format
-msgid "Volume set to %i"
-msgstr "Nustatytas %i garsas"
-
-#: src/WebComponents/Sources/Volume.py:39
-#, python-format
-msgid "Wrong parameter format 'set=%s'. Use set=set15"
-msgstr "Neteisingas parametro formatas 'set=%s'. Naudokite set=set15 "
-
-#: src/WebComponents/Sources/Volume.py:41
-#, python-format
-msgid "Unknown Volume command %s"
-msgstr "Nežinoma komanda %s"
-
-#: src/WebComponents/Sources/TPMChallenge.py:29
-msgid "LEVEL2 and LEVEL3 Certifcates (Base64-encoded)"
-msgstr "Lygio 2 ir Lygio 3 sertifikatai (koduoti Base64)"
-
-#: src/WebComponents/Sources/TPMChallenge.py:37
-msgid "Challenge executed, please verify the result!"
-msgstr "Įvykdyta, patikrinkite rezultatą!"
-
-#: src/WebComponents/Sources/TPMChallenge.py:39
-#, python-format
-msgid "Obligatory parameter \"random\" for cmd=\"%s\" missing"
-msgstr "Komandoje=\"%s\" trūksta būtino parametro 'atsitiktinis'"
-
-#: src/WebComponents/Sources/TPMChallenge.py:41
-#, python-format
-msgid "Unknown for parameter \"cmd\" [%s|%s]"
-msgstr "Nežinoma parametro 'komanda' reikšmė [%s|%s]"
-
-#: src/WebComponents/Sources/SwitchService.py:12
-msgid "Obligatory parameter sRef is missing"
-msgstr "Trūksta būtino parametro 'sRef'"
-
-#: src/WebComponents/Sources/SwitchService.py:68
 #, python-format
 msgid "Active service is now '%s'"
 msgstr "Dabar rodomas kanalas '%s'"
 
-#: src/WebComponents/Sources/SwitchService.py:70
-msgid "Obligatory parameter 'sRef' is missing"
-msgstr "Trūksta būtino parametro 'sRef'"
+#, fuzzy, python-format
+msgid "Add %s to playlist"
+msgstr "'%s' grojaraštyje nerasta"
 
-#: src/WebComponents/Sources/SwitchService.py:72
+msgid "Add Timer"
+msgstr "Pridėti laikmatį"
+
+msgid "Add Zap Timer"
+msgstr "Pridėti perjungimo laikmatį"
+
+#, fuzzy
+msgid "Add/Save"
+msgstr "Išsaugoti"
+
+msgid "After event"
+msgstr "Po užduoties"
+
+msgid "All"
+msgstr "Visi"
+
+msgid "All Timers"
+msgstr "Visi laikmačiai"
+
+msgid "Allow zapping via Webinterface"
+msgstr "Leisti perjungimą per interneto sąsają"
+
+msgid "Audio PID"
+msgstr "Garso PID"
+
+msgid "Authors"
+msgstr "Autoriai"
+
+msgid "Auto"
+msgstr "Automatiškai"
+
+msgid "Autowrite timer"
+msgstr "Automatinis laikmačio pildymas"
+
+msgid "Begins"
+msgstr "Prasideda"
+
+msgid "Bouquets"
+msgstr "Bukietai"
+
+msgid "BoxControl"
+msgstr "Valdymas"
+
+msgid "Cancel"
+msgstr "Atšaukti"
+
 msgid "Cannot zap while device is in Standby"
 msgstr "Negalima perjungti, kai įrenginys budėjimo režime"
 
-#: src/WebComponents/Sources/SwitchService.py:74
-msgid "Zapping is disabled in WebInterface Configuration"
-msgstr "Perjungimas išjungtas internetinės sąsajos konfigūracijoje"
+msgid "Capacity"
+msgstr "Talpa"
 
-#: src/WebComponents/Sources/RemoteControl.py:22
+msgid "Challenge executed, please verify the result!"
+msgstr "Įvykdyta, patikrinkite rezultatą!"
+
+#, python-format
+msgid "Change to %s"
+msgstr ""
+
+#, python-format
+msgid "Changing the timer for '%s' failed!"
+msgstr "Pakeisti '%s' laikmačio nepavyko!"
+
+msgid "Channel"
+msgstr "Kanalas"
+
+msgid "Cleans up the list of timers by removing e.g. finished timers"
+msgstr "Išvalo laikmačių sąrašą pašalindamas, pvz.: baigtus laikmačius"
+
+msgid "Cleanup"
+msgstr "Išvalymas"
+
+msgid "Clear search"
+msgstr "Išvalyti paiešką"
+
+msgid "Click to show/hide extended description"
+msgstr "Paspauskite, kad atverti/paslėpti išplėstinį aprašymą"
+
+msgid "Close MediaPlayer"
+msgstr "Išjungti mediagrotuvą"
+
+#, python-format
+msgid "Command '%s' executed"
+msgstr "Komanda '%s' įvykdyta"
+
+msgid "Configuration for the Webinterface"
+msgstr "Interneto sąsajos konfigūravimas"
+
+#, python-format
+msgid "Conflicting Timer(s) detected! %s"
+msgstr "Aptiktas laikmačių konfliktas! %s"
+
+#, python-format
+msgid "Could not add timer '%s'!"
+msgstr "Laikmačio '%s' pridėti nepavyko!"
+
+#, python-format
+msgid "Could not delete Movie '%s'"
+msgstr "Pašalinti įrašo '%s' nepavyko"
+
+#, python-format
+msgid "Could not find timer '%s' with given start and end time!"
+msgstr "Laikmačio '%s' su tokiu pradžios ir pabaigos laiku rasti nepavyko!"
+
+msgid "Create Timer"
+msgstr "Sukurti laikmatį"
+
+msgid "DHCP enabled"
+msgstr "DHCP įjungtas"
+
+msgid "Days"
+msgstr "Dienos"
+
+msgid "Deactivate"
+msgstr "Išjungti"
+
+msgid "Deepstandby"
+msgstr "Gilus budėjimas"
+
+msgid "Delete"
+msgstr "Ištrinti"
+
+#, fuzzy, python-format
+msgid "Delete %s"
+msgstr "Ištrinti"
+
+msgid "Delete Timer"
+msgstr "Šalinti laikmatį"
+
+msgid "Description"
+msgstr "Aprašymas"
+
+#, python-format
+msgid "Destination dir '%s' does not exist."
+msgstr "Paskirties katalogo '%s' nėra."
+
+msgid "Device & Versions"
+msgstr "Įrenginys ir versijos"
+
+msgid "Device Info"
+msgstr "Įrenginio informacija"
+
+msgid "Device Name"
+msgstr "Įrenginio pavadinimas"
+
+msgid "Disable"
+msgstr "Išjungti"
+
+msgid "Do Nothing"
+msgstr "nieko nedaryti"
+
+msgid "Down"
+msgstr "Žemyn"
+
+#, fuzzy, python-format
+msgid "Downlad %s"
+msgstr "Parsiuntimas"
+
+msgid "Download"
+msgstr "Parsiuntimas"
+
+msgid "EPG-Search"
+msgstr "EPG paieška"
+
+msgid "ERROR: Cannot set SleepTimer while device is in Standby-Mode"
+msgstr "KLAIDA: Negalima nustatyti budėjimo laikmačio, kai įrenginys budėjimo būsenoje"
+
+#, python-format
+msgid "ERROR: Obligatory parameter 'cmd' [get,set] has unspecified value '%s'"
+msgstr "KLAIDA: Nenurodyta privalomo parametro 'komanda' [get,set] reikšmė '%s'"
+
+#, python-format
+msgid "ERROR: Obligatory parameter 'enabled' [True,False] has unspecified value '%s'"
+msgstr "KLAIDA: Nenurodyta privalomo parametro 'leidimas' [True,False] reikšmė '%s'"
+
+msgid "ERROR: Obligatory parameter 'time' [0-999] is missing"
+msgstr "KLAIDA: Nėra privalomo parametro 'laikas' [0-999]"
+
+msgid "Edit Timer"
+msgstr "Redaguoti laikmatį"
+
+msgid "Enable"
+msgstr "Įjungti"
+
+msgid "Enable /media"
+msgstr "Įjungti / Media"
+
+msgid "Enable Debug"
+msgstr "Įjungti klaidų derinimą"
+
+msgid "Enable HTTP Access"
+msgstr "Leisti HTTP prieigą"
+
+msgid "Enable HTTP Authentication"
+msgstr "Įjungti HTTP autentikaciją"
+
+msgid "Enable HTTPS Access"
+msgstr "Leisti HTTPS prieigą"
+
+msgid "Enable HTTPS Authentication"
+msgstr "Įjungti HTTPS autentikaciją"
+
+msgid "Enable Streaming Authentication"
+msgstr "Įjungti transliacijos autentikaciją"
+
+msgid "Ends"
+msgstr "Baigiasi"
+
+msgid "Enigma2 Version"
+msgstr "Enigma2 versija"
+
+msgid "Error"
+msgstr "Klaida"
+
+msgid "EventId not found"
+msgstr "Įvykio ID nerasta"
+
+msgid "Extras"
+msgstr "Priedai"
+
+msgid "False"
+msgstr "Ne"
+
+msgid "Filebrowser"
+msgstr "Failų naršyklė"
+
+msgid "Filter Services"
+msgstr "Filtruoti kanalus"
+
+msgid "Finished"
+msgstr "Baigtas"
+
+msgid "Free Space"
+msgstr "Laisva vieta"
+
+msgid "Frontprocessor Version"
+msgstr "Sąsajos procesoriaus versija"
+
+msgid "Gateway"
+msgstr "Šliuzas"
+
+msgid "Get a Screenshot"
+msgstr "Ekrano nuotrauka"
+
+msgid "Grab Video & OSD"
+msgstr "Vaizdo ir ekrano nuotrauka"
+
+msgid "HTTP Port"
+msgstr "HTTP prievadas"
+
+msgid "HTTPS Port"
+msgstr "HTTPS prievadas"
+
+msgid "Harddisk"
+msgstr "HDD"
+
+msgid "IP Address"
+msgstr "IP adresas"
+
+msgid "IPv4-only Python/Twisted"
+msgstr "Tik IP v4 Python/Mišrus"
+
+msgid "IPv4-only kernel"
+msgstr "Tik IP v4 branduolys"
+
+msgid "IPv6 address(es)"
+msgstr "IPv6 adresas(ai)"
+
+#, python-format
+msgid "Illegal Parameter Value: sRef - '%s'"
+msgstr "Neteisinga parametro 'sRef' reikšmė: '%s'"
+
+#, python-format
+msgid "Illegal Parameter value for Parameter begin : '%s'"
+msgstr "Neteisinga parametro 'pradžia' reikšmė: '%s'"
+
+#, fuzzy, python-format
+msgid "Illegal Parameter value for Parameter eit : '%s'"
+msgstr "Neteisinga parametro 'redaguoti' reikšmė: '%s'"
+
+msgid "Image Version"
+msgstr "Atvaizdo versija"
+
+msgid "Info"
+msgstr "Informacija"
+
+msgid "Instant Record"
+msgstr "Tiesioginis įrašymas"
+
+msgid "JavaScript Libraries"
+msgstr "Java scenarijaus bibliotekos"
+
+msgid "LEVEL2 and LEVEL3 Certifcates (Base64-encoded)"
+msgstr "Lygio 2 ir Lygio 3 sertifikatai (koduoti Base64)"
+
+msgid "Legend"
+msgstr "Paaiškinimai"
+
+msgid "License"
+msgstr "Licencija"
+
+msgid "List of Plugins has been read"
+msgstr "Įskiepių sąrašas perskaitytas"
+
+msgid "List of Timers has been cleaned"
+msgstr "Laikmačių sąrašas išvalytas"
+
+msgid "Load Bouquet"
+msgstr "Įkelti bukietą"
+
+msgid "Load movie-length"
+msgstr "Įkelti filmo trukmę"
+
+msgid "Location"
+msgstr "Padėtis"
+
+#, python-format
+msgid "Location '%s' added successfully"
+msgstr "Vieta '%s' įtraukta sėkmingai"
+
+#, python-format
+msgid "Location '%s' does not exist"
+msgstr "Vietos '%s' nėra"
+
+#, python-format
+msgid "Location '%s' is already existing"
+msgstr "Vieta '%s' jau yra"
+
+#, python-format
+msgid "Location '%s' removed successfully"
+msgstr "Vieta '%s' pašalinta sėkmingai"
+
+msgid "Lookup on IMDb.com"
+msgstr "Ieškoti IMDb.com"
+
+msgid "Mac Address"
+msgstr "MAC adresas"
+
+msgid "Mediaplayer"
+msgstr "Mediagrotuvas"
+
+msgid "Mediaplayer not installed"
+msgstr "Mediagrotuvas neįdiegtas"
+
+msgid "Mediaplayer was not active"
+msgstr "Mediagrotuvas neveikia"
+
+msgid "Message"
+msgstr "Pranešimas"
+
+msgid "Message sent successfully!"
+msgstr "Pranešimas išsiųstas sėkmingai!"
+
+msgid "Missing Parameter: begin"
+msgstr "Trūksta parametro: pradžia"
+
+msgid "Missing Parameter: beginOld"
+msgstr "Trūksta parametro: 'sena pradžia'"
+
+msgid "Missing Parameter: channelOld"
+msgstr "Trūksta parametro: 'senas kanalas'"
+
+msgid "Missing Parameter: description"
+msgstr "Trūksta parametro: aprašymas"
+
+msgid "Missing Parameter: end"
+msgstr "Trūksta parametro: pabaiga"
+
+msgid "Missing Parameter: endOld"
+msgstr "Trūksta parametro: 'sena pabaiga'"
+
+msgid "Missing Parameter: eventid"
+msgstr "Trūksta parametro: įvykio id"
+
+msgid "Missing Parameter: name"
+msgstr "Trūksta parametro: pavadinimas"
+
+msgid "Missing Parameter: sRef"
+msgstr "Trūksta parametro: sRef"
+
+msgid "Missing Paramter: dirname"
+msgstr "Trūksta parametro 'katalogo pavadinimas'"
+
+msgid "Missing or Wrong Argument"
+msgstr "Trūksta arba neteisingas argumentas"
+
+msgid "Missing or invalid parameter file"
+msgstr "Trūksta, arba neteisingas parametras 'failas'"
+
 msgid "Missing or wrong argument"
 msgstr "Trūkstamas, arba neteisingas argumentas"
 
-#: src/WebComponents/Sources/RemoteControl.py:46
+msgid "Missing value for parameter dirname"
+msgstr "Trūksta parametro 'katalogo pavadinimas' reikšmės"
+
+#, python-format
+msgid "Movie '%s' deleted"
+msgstr "Įrašas '%s' pašalintas"
+
+#, python-format
+msgid "Movie '%s' has unknown suffix '%s'."
+msgstr "Filmas '%s' turi nežinomas priesagas '%s'."
+
+#, python-format
+msgid "Movie '%s' moved to '%s' without errors."
+msgstr "Filmas '%s' perkeltas į '%s' be klaidų."
+
+msgid "Movies"
+msgstr "Filmai"
+
+#, python-format
+msgid "Moving Movie '%s' to '%s' in background."
+msgstr "Filmas '%s' fone perkeliamas į '%s'."
+
+msgid "Mute"
+msgstr "Nutildyti"
+
+msgid "Mute toggled"
+msgstr "Nutildytmas perjungtas"
+
+msgid "N/A"
+msgstr "N/D"
+
+msgid "Name"
+msgstr "Pavadinimas"
+
+msgid "Netmask"
+msgstr "Potinklio kaukė"
+
+msgid "Network Interface"
+msgstr "Tinklo sąsaja"
+
+msgid "Next"
+msgstr "Sekantis"
+
+msgid "No Bouquets to Display"
+msgstr "Nėra rodytinų bukietų"
+
+msgid "No Messagetext given"
+msgstr "Nenurodytas pranešimo tekstas"
+
+msgid "No Service to show"
+msgstr "Nėra atvaizduotinų kanalų"
+
+msgid "No Timer Available!"
+msgstr "Nėra galimų laikmačių!"
+
+msgid "No items to show..."
+msgstr "Nėra rodytinų elementų..."
+
+msgid "No movies to show..."
+msgstr "Nėra rodytinų įrašų..."
+
+msgid "Note: For one-time events the days don't have to be specified."
+msgstr "Pastaba: vienkartiniams įvykiams dienų nurodyti nereikia."
+
+msgid "Note: For recurring events dates are not mandatory."
+msgstr "Pastaba: pasikartojantiems įvykiams datos nebūtinos."
+
+msgid "Nothing found..."
+msgstr "Nieko nerasta..."
+
+msgid "Nothing running..."
+msgstr "Niekas nedirba..."
+
+msgid "OK"
+msgstr "Gerai"
+
+msgid "ONID"
+msgstr "ONID"
+
+#, python-format
+msgid "Obligatory parameter \"random\" for cmd=\"%s\" missing"
+msgstr "Komandoje=\"%s\" trūksta būtino parametro 'atsitiktinis'"
+
 msgid "Obligatory parameter 'command' is missing!"
 msgstr "Trūksta būtino parametro 'komanda'!"
 
-#: src/WebComponents/Sources/RemoteControl.py:52
-msgid "the command was not > 0"
-msgstr "komanda nebuvo > 0"
+msgid "Obligatory parameter 'sRef' is missing"
+msgstr "Trūksta būtino parametro 'sRef'"
 
-#: src/WebComponents/Sources/RemoteControl.py:85
+msgid "Obligatory parameter sRef is missing"
+msgstr "Trūksta būtino parametro 'sRef'"
+
+msgid "Obligatory parameters missing [cmd [set,get], time [0-999], action [standby,shutdown], enabled [True,False]"
+msgstr "Trūksta būtinų parametrų [komanda [set,get], laikas [0-999], veiksmas [standby,shutdown], leidimas [True,False]"
+
+#, fuzzy, python-format
+msgid "Open Multi-EPG for %s"
+msgstr "Atverti daugiakanalį EPG"
+
+msgid "Open Signal Panel"
+msgstr "Atverti sugnalo langą"
+
+msgid "PCR PID"
+msgstr "PCR PID"
+
+msgid "PMT PID"
+msgstr "PMT PID"
+
+#, python-format
+msgid "Path %s can not be created"
+msgstr "Kelio %s sukurti napavyko"
+
+#, python-format
+msgid "Path %s does not exist"
+msgstr "Kelio %s nėra"
+
+msgid "Play"
+msgstr "Atkurti"
+
+#, fuzzy, python-format
+msgid "Play %s"
+msgstr "Atkurti"
+
+#, python-format
+msgid "Playback of '%s' started"
+msgstr "'%s' atkūrimas prasidėjo"
+
+msgid "Playlist"
+msgstr "Grojaraštis"
+
+#, python-format
+msgid "Playlist '%s' does not exist"
+msgstr "Grojaraščio '%s' nėra"
+
+#, fuzzy, python-format
+msgid "Playlist for %s"
+msgstr "Grojaraštis"
+
+#, python-format
+msgid "Playlist saved to '%s'"
+msgstr "Grojaraštis išsaugotas '%s'"
+
+msgid "Please select any bouquet"
+msgstr "Pasirinkite kurį nors bukietą"
+
+msgid "Power Control"
+msgstr "Maitinimas"
+
+msgid "Previous"
+msgstr "Ankstesnis"
+
+msgid "Providers"
+msgstr "Tiekėjai"
+
 #, python-format
 msgid "RC command '%s' has been issued"
 msgstr "Pulto komanda '%s' duota"
+
+msgid "Radio"
+msgstr "Radijas"
+
+msgid "Reboot"
+msgstr "Paleisti iš naujo"
+
+msgid "Record"
+msgstr "Įrašas"
+
+msgid "Record current event"
+msgstr "Įrašyti šį įvykį"
+
+msgid "Refresh Screenshot"
+msgstr "Atnaujinti ekrano nuotrauką"
+
+#, fuzzy, python-format
+msgid "Remove %s from playlist"
+msgstr "'%s' pašalinta iš grojaraščio"
+
+msgid "Restart enigma2"
+msgstr "Paleisti enigma2 iš naujo"
+
+msgid "Running"
+msgstr "Veikia"
+
+msgid "SID"
+msgstr "SID"
+
+msgid "Satellites"
+msgstr "Palydovai"
+
+msgid "Save"
+msgstr "Išsaugoti"
+
+msgid "Save Playlist"
+msgstr "Išsaugoti grojaraštį"
+
+msgid "Screenshot (All)"
+msgstr "Ekrano nuotrauka (viskam)"
+
+msgid "Screenshot (OSD)"
+msgstr "Ekrano nuotrauka (ekrano)"
+
+msgid "Screenshot (Video)"
+msgstr "Ekrano nuotrauka (vaizdo)"
+
+msgid "Search EPG"
+msgstr "Ieškoti EPG"
+
+msgid "Send"
+msgstr "Siųsti"
+
+msgid "Send Message"
+msgstr "Siųsti žinutę"
+
+msgid "Send \\\"long\\\" keypress"
+msgstr "Ilgas mygtuko paspaudimas"
+
+msgid "Settings"
+msgstr "Nuostatos"
+
+#, fuzzy, python-format
+msgid "Show EPG for %s"
+msgstr "Rodyti EPG"
+
+msgid "Show Setup in Extensions menu"
+msgstr "Rodyti sąranką plėtinių naršyklėje"
+
+msgid "Shutdown"
+msgstr "Išjungti"
+
+msgid "Simple Anti-Hijack Measures (may break clients)"
+msgstr ""
+
+msgid "Sleeptimer has been disabled"
+msgstr "Budėjimo laikmatis išjungtas"
+
+msgid "Sleeptimer is disabled"
+msgstr "Budėjimo laikmatis išjungtas"
+
+msgid "Sleeptimer is enabled"
+msgstr "Budėjimo laikmatis įjungtas"
+
+#, python-format
+msgid "Sleeptimer set to %s minutes"
+msgstr "Budėjimo laikmatis nustatytas %s minutėms"
+
+msgid "Source and destination folders are the same."
+msgstr "Šaltinio ir paskirties katalogai tie patys."
+
+msgid "Standby"
+msgstr "Budintis režimas"
+
+msgid "Start Webinterface"
+msgstr "Atverti interneto sąsają"
+
+msgid "Start infinite recording"
+msgstr "Pradėti neribotą laiku įrašą"
+
+msgid "State"
+msgstr "Būklė"
+
+msgid "Stop"
+msgstr "Stabdyti"
+
+msgid "Stream"
+msgstr "Transliacija"
+
+#, fuzzy, python-format
+msgid "Stream %s"
+msgstr "Transliacija"
+
+msgid "Success"
+msgstr "Sėkmingai"
+
+msgid "TSID"
+msgstr "TSID"
+
+msgid "TV"
+msgstr "TV"
+
+msgid "Tag Filter"
+msgstr "Žymių filtras"
+
+msgid "Tags"
+msgstr "Žymės"
+
+msgid "Technical Information"
+msgstr "Techninė informacija"
+
+msgid "TeleVision"
+msgstr "Televizija"
+
+msgid "Text PID"
+msgstr "TXT PID"
+
+#, python-format
+msgid "The sleep timer has been activated for %s minutes."
+msgstr "Budėjimo laikmatis įjungtas %s minutėms."
+
+msgid "The sleep timer has been disabled."
+msgstr "Budėjimo laikmatis buvo išjungtas."
+
+#, python-format
+msgid "The timer '%s' has been deleted successfully"
+msgstr "Laikmatis '%s' pašalintas sėkmingai"
+
+msgid "The timer has NOT been deleted"
+msgstr "Laikmatis NEpašalintas"
+
+msgid "This device does not support AC3 Downmix"
+msgstr "Šis modelis nesugeba sulieti AC3 kanalų"
+
+msgid "Timeout"
+msgstr "Delsa"
+
+msgid "Timer"
+msgstr "Laikmatis"
+
+#, python-format
+msgid "Timer '%s' added"
+msgstr "Laikmatis '%s' įtrauktas"
+
+msgid "TimerList has been saved"
+msgstr "Laikmačių sąrašas išsaugotas"
+
+msgid "TimerList has not been saved"
+msgstr "Laikmačių sąrašas neišsaugotas"
+
+msgid "Timers"
+msgstr "Laikmačiai"
+
+msgid "Toggle Standby"
+msgstr "Perjungti budėjimo režimą"
+
+msgid "Token-based security (may break clients)"
+msgstr ""
+
+msgid "Tools"
+msgstr "Įrankiai"
+
+msgid "Tuners"
+msgstr "Imtuvai"
+
+msgid "Type"
+msgstr "Tipas"
+
+#, python-format
+msgid "Unknown Volume command %s"
+msgstr "Nežinoma komanda %s"
+
+#, python-format
+msgid "Unknown command (%s)"
+msgstr "Nežinoma komanda (%s)"
+
+#, python-format
+msgid "Unknown for parameter \"cmd\" [%s|%s]"
+msgstr "Nežinoma parametro 'komanda' reikšmė [%s|%s]"
+
+#, python-format
+msgid "Unknown function: '%s'"
+msgstr "Nežinoma funkcija: '%s'"
+
+#, python-format
+msgid "Unknown parameter %s"
+msgstr "Nežinomas patametras %s"
+
+msgid "Unmute"
+msgstr "Įjungti garsą"
+
+#, python-format
+msgid "Unsupported Messagetype %s"
+msgstr "Nesuprantanas pranešimo tipas %s"
+
+msgid "Up"
+msgstr "Aukštyn"
+
+msgid "Update interval for current service (min. 10 sec)"
+msgstr "Šio kanalo atnaujinimo intervalas (min. 10 sek.)"
+
+msgid "Update-Interval for EPG of the current bouquets (min. 60 sec)"
+msgstr "Šių bukietų EPG atnaujinimo intervalas (min. 60 sek.)"
+
+msgid "Video PID"
+msgstr "Vaizdo PID"
+
+msgid "Video Size"
+msgstr "Kadro dydis"
+
+msgid "Volume"
+msgstr "Garsumas"
+
+msgid "Volume Down"
+msgstr "Patildyti"
+
+msgid "Volume Up"
+msgstr "Pagarsinti"
+
+msgid "Volume changed"
+msgstr "Garsas pakeistas"
+
+#, python-format
+msgid "Volume set to %i"
+msgstr "Nustatytas %i garsas"
+
+msgid "WARNING: Cookies are required to store the settings!"
+msgstr "ĮSPĖJIMAS: Slapukai būtini nustatymams išsaugoti!"
+
+msgid "Waiting"
+msgstr "Laukiama"
+
+msgid "Warning"
+msgstr "Perspėjimas"
+
+msgid "WebRemote"
+msgstr "Internetinis"
+
+msgid "WebTV"
+msgstr "Internetinis TV"
+
+msgid "Webinterface"
+msgstr "Interneto sąsaja"
+
+msgid "Webinterface Version"
+msgstr "Interneto sąsajos versija"
+
+msgid "Webinterface: Main Setup"
+msgstr "Interneto sąsajos pagrindinė sąranka"
+
+msgid "Widescreen"
+msgstr "Plačiaekranis"
+
+#, python-format
+msgid "Wrong parameter format 'set=%s'. Use set=set15"
+msgstr "Neteisingas parametro formatas 'set=%s'. Naudokite set=set15 "
+
+msgid "Zap"
+msgstr "perjungti"
+
+#, fuzzy, python-format
+msgid "Zap to %s"
+msgstr "Perjungti į"
+
+msgid "Zapping is disabled in WebInterface Configuration"
+msgstr "Perjungimas išjungtas internetinės sąsajos konfigūracijoje"
+
+msgid "and many contributors"
+msgstr "ir bendraautoriai"
+
+msgid "disabled"
+msgstr "išjungta"
+
+msgid "illegal call"
+msgstr "neteisingas kreipimasis"
+
+#, fuzzy, python-format
+msgid "missing or wrong parameter mode [%i=both, %i=lamedb only, %i=userbouqets only, %i=transponders, %i=parentalcontrol white-/blacklist]"
+msgstr "trūksta, arba neteisingai parametras režimas [%i=abu, %i= tik lamedb, %i=tik bukietus]"
+
+msgid "none/IPv4-only network"
+msgstr "nėra / tik IP v4 tinklas"
+
+msgid "of"
+msgstr "išjungti"
+
+msgid "one two three four unknown command"
+msgstr "vienas du trys keturi nežinoma komanda"
+
+msgid "please select a submenu on the left..."
+msgstr "pasirinkite submeniu kairėje..."
+
+msgid "reloaded both"
+msgstr "abu įkelti iš naujo"
+
+msgid "reloaded bouquets"
+msgstr "bukietai įkelti iš naujo"
+
+msgid "reloaded lamedb"
+msgstr "lamedb įkelta iš naujo"
+
+msgid "sec"
+msgstr "sek."
+
+msgid "submit-message"
+msgstr ""
+
+msgid "the command was not > 0"
+msgstr "komanda nebuvo > 0"
+
+msgid "this recording"
+msgstr "šis įrašas"
+
+#, python-format
+msgid "type %s is not a number"
+msgstr "tipas %s nėra skaičius"
+
+msgid "undefined"
+msgstr "nenustatyta"
+
+#, python-format
+msgid "unknown command (%s)"
+msgstr "nežinoma komanda (%s)"

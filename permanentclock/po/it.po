@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - permanentclock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2009-05-31 02:27+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -23,11 +23,75 @@ msgstr "Attivare l'orologio permanente"
 msgid "Change permanent clock position"
 msgstr "Cambiare la posizione dell'orologio"
 
+msgid "Choice color clock:"
+msgstr ""
+
+msgid "Color analog clock"
+msgstr ""
+
+msgid "Color digital clock"
+msgstr ""
+
 msgid "Deactivate permanent clock"
 msgstr "Disattivare l'orologio permanente"
+
+msgid "Disable key 'long EXIT' show/hide"
+msgstr ""
+
+msgid "Enable key 'long EXIT' show/hide"
+msgstr ""
+
+msgid "PLi-transparent"
+msgstr ""
 
 msgid "Permanent Clock"
 msgstr "Permanent Clock"
 
+#, fuzzy
+msgid "Permanent Clock Setup"
+msgstr "Permanent Clock"
+
+msgid "Save"
+msgstr ""
+
+msgid "Set slider"
+msgstr ""
+
+msgid "Set slider step (1 - 20):"
+msgstr ""
+
+msgid "Show analog clock"
+msgstr ""
+
+msgid "Show digital clock"
+msgstr ""
+
 msgid "Shows the clock permanent on the screen"
 msgstr "Mostrare sullo schermo un orologio permanente"
+
+msgid "black-blue"
+msgstr ""
+
+msgid "black-white"
+msgstr ""
+
+msgid "black-yellow"
+msgstr ""
+
+msgid "blue"
+msgstr ""
+
+msgid "large white"
+msgstr ""
+
+msgid "large yellow"
+msgstr ""
+
+msgid "transparent"
+msgstr ""
+
+msgid "white"
+msgstr ""
+
+msgid "yellow"
+msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-09 13:57+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2015-07-25 01:07+0200\n"
 "Last-Translator: Timo\n"
 "Language-Team: Kojo_\n"
@@ -19,11 +19,17 @@ msgstr ""
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-Country: FINLAND\n"
 
+msgid "AutoTimer FAQ"
+msgstr "AutoTimer FAQ"
+
+msgid "AutoTimer Help"
+msgstr "AutoTimer Ohjeita"
+
 msgid "Close"
 msgstr "Sulje"
 
-msgid "AutoTimer FAQ"
-msgstr "AutoTimer FAQ"
+msgid "Congratulations"
+msgstr "Onnittelut"
 
 msgid "FAQ"
 msgstr "FAQ"
@@ -31,26 +37,18 @@ msgstr "FAQ"
 msgid "Frequently asked questions about the AutoTimer"
 msgstr "AutoTimerin usein kysytyt kysymykset"
 
+msgid "Generic setup"
+msgstr "Yleisasetukset"
+
 msgid "Question: I found a problem with the AutoTimer, can you fix it?/nAnswer: First try the AutoTimer version in a recent (experimental) Image to see if the problem was fixed. Then read the Help again and the upcoming FAQs to make sure that this is actually a problem and not expected behavior./nIf you still think there is something wrong with the AutoTimer, please visit http://www.dream-multimedia-tv.de/board and post your problem there./n/nQ: The plugin only adds timers when leaving the configuration, not automatically. What can I do?/nA: From the Overview press MENU and enter the 'Setup'. In this screen enable 'Poll automatically' and you should be good to go."
 msgstr "Kysyttyä: Löysin AutoTimer:sta ongelman, voitko korjata sen?/nVastaus: Lue ensin opastesivut ja FAQ uudestaan ja totea että kyseessä on oikeasti ongelma eikä ominaisuus. Kokeile ensin päivittää vastaanottimeesi viimeisin Beta-image jos ongelma on jo siinä korjattu./nJos olet vieläkin sitä mieltä että kyseessä on ongelma, käy osoitteessa http://www.dream-multimedia-tv.de/board ja kerro heille löytämästäsi ongelmasta./n/nKysyttyä: Plugin lisää ajastuksia kun poistut asetuksista, ei automaattisesti. Mikä avuksi?/nVastaus: Perusvalikossa paina MENU ja mene asetuksiin. Tässä näytössä laita päälle 'Hae automaattisesti'."
 
-msgid "Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: The show I'm trying to record contains umlauts in its title. AutoTimer does not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For german stations 'ISO8859-15' should be selected./n/nQ: I seem to be unable to record two subsequent events. There is only a single timer created that spans (part of) both events./nA: From the Overview press MENU and enter the 'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
+#, fuzzy
+msgid "Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: The show I'm trying to record contains umlauts in its title. AutoTimer does not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For german stations 'UTF-8' should be selected./n/nQ: I seem to be unable to record two subsequent events. There is only a single timer created that spans (part of) both events./nA: From the Overview press MENU and enter the 'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
 msgstr "Kysyttyä: Olen laittanut AutoTimerin ajastamaan hakusanalla 'uutiset', mutta se ei tallenna ohjelmaa 'myöhäisuutiset'./n Vastaus: Tarkasta 'Haun tyyppi' ja 'Haun tarkkuus' valitun tallennuksen asetuksista./n/nKysyttyä: Ajastetun ohjelman otsikko sisältää erikoismerkkejä. AutoTimer ei löydä ohjelmia./nVastaus: Tarkasta asetus 'EPG:n enkoodaus'. Valittavissa on muutama vaihtoehto./n/nKysyttyä: En pysty ajastamaan kahta perättäistä samannimistä ohjelmaa. On vain yksi ajastus joka tallentaa molemmista ohjelmista vain osan./nVastaus: Laita AutoTimerin asetuksista pois päältä seuraava valinta 'Arvaa olemassa oleva ajastus alku/loppuajan perusteella'."
 
 msgid "Question: You keep talking about help being provided for each parameter. I'm unable to read it (in part or in full)./nAnswer: Try using the default skin and if it works ask the creator of your regular skin. If it still does not work your image might not provide the actual default skin so contact the creator of your image."
 msgstr "Kysyttyä: Kerroitte että jokaiselle parametrille on oma aputeksti ruudun alareunassa. En pysty lukemaan sitä (kokonaan tai osittain)./n/nVastaus: Koita ottaa käyttöön oletus skin, ja jos tekstit näkyvät sen kanssa, ota yhteys käyttämäsi skin:n tekijään että sen saisi korjattua. Jos se ei vieläkään näy, käyttämäsi image ei välttämättä toimi skin:n kanssa, jolloin ota yhteys imagen tekijöihin."
-
-msgid "This FAQ is supposed to help everyone unwilling to help themselves by reading all the provided help available, and those who did not find a solution to their problems within the provided documentation./n/nTo make these hints a little easier to read, they are split up on multiple pages. You can go to the next page using the BLUE button on your remote control and back using the YELLOW one. Pressing the RED button or EXIT will close the FAQ."
-msgstr "Tämä FAQ on tarkoitettu niille jotka eivät ole lukeneet tarkempia ohjeita ja niille, jotka eivät ole löytäneet vastausta luettuaan tarkemmat ohjeet./n/nOhjeet ovat pilkottu useammalle sivulle jotta ne olisi helpompi sisäistää. Pääset seuraavalle sivulle painamalla kaukosäätimen SINISTÄ -nappulaa ja takasin painamalla KELTAISTA nappia. PUNAISESTA tai EXIT -napista suljetaan opastesivut."
-
-msgid "AutoTimer Help"
-msgstr "AutoTimer Ohjeita"
-
-msgid "Congratulations"
-msgstr "Onnittelut"
-
-msgid "Generic setup"
-msgstr "Yleisasetukset"
 
 msgid "The 'Overview'"
 msgstr "Yleiskatsaus"
@@ -60,6 +58,9 @@ msgstr "Automaattiajastus -valikosta pääset hallinnoimaan ajastuksiasi./n/nPä
 
 msgid "The control menu hides less frequently used options of the plugin, including the configuration and default settings for new AutoTimers./n/nWhile you can just open the menu and take a look for yourself, let's go through the available options:/n - Help:/n   What you are looking at right now/n - Preview:/n   Simulate EPG search, helps finding errors in your setup./n - Import existing Timer:/n   Create a new AutoTimer based on an existing regular timer./n - Import from EPG:/n   Create an AutoTimer based on an EPG event./n - Setup:/n   Generic configuration of the plugin./n - Edit new timer defaults:/n   Configure default values for new AutoTimers./n - Create a new timer using the wizard/classic editor:/n   Use the non-default editor to create a new AutoTimer."
 msgstr "AutoTimer valikossa on harvemmin tarvittavia toimintoja kuten asetukset. /n/nVoit avata valikon ja käydä itse läpi mitä se sisältää, mutta tässä sisältö lyhyesti:/n-Ohje:/nSe mitä katselet juuri nyt/n-Esikatselu:/nSimuloi EPG.hakua ja auttaa löytämään mahdolliset asetusvirheet./n-Tuo olemassa oleva ajastus:/nLuo automaattiajastus normaaliajastuksen perusteella./n-Tuo ohjelmaoppaasta:/nLuo automaattiajastus EPG:n tiedoista./n-Asetukset:/nPluginin asetukset./n-Muokkaa uusien ajastuksien oletusarvoja./n-Luo uusi ajastus avustustoiminnon avulla:/nErilainen vaihtoehto luoda uusi automaattiajastus."
+
+msgid "This FAQ is supposed to help everyone unwilling to help themselves by reading all the provided help available, and those who did not find a solution to their problems within the provided documentation./n/nTo make these hints a little easier to read, they are split up on multiple pages. You can go to the next page using the BLUE button on your remote control and back using the YELLOW one. Pressing the RED button or EXIT will close the FAQ."
+msgstr "Tämä FAQ on tarkoitettu niille jotka eivät ole lukeneet tarkempia ohjeita ja niille, jotka eivät ole löytäneet vastausta luettuaan tarkemmat ohjeet./n/nOhjeet ovat pilkottu useammalle sivulle jotta ne olisi helpompi sisäistää. Pääset seuraavalle sivulle painamalla kaukosäätimen SINISTÄ -nappulaa ja takasin painamalla KELTAISTA nappia. PUNAISESTA tai EXIT -napista suljetaan opastesivut."
 
 msgid "This help screen is supposed to give you a quick look at everything the AutoTimer has to offer./nYou can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by selecting it from the control menu using the MENU button from the regular entry point of the plugin (more on that later)./n/n/nBut you really should consider to take the few minutes it takes to read these help pages."
 msgstr "Tämä opastevalikko kertoo pikaisesti mitä kaikkea AutoTimer osaa tehdä./nVoit keskeyttää toimintosi painamalla kaukosäätimen PUNAISTA tai EXIT -nappia. Voit palata opasteisiin painamalla MENU -nappulaa selatessasi ajastuksia./n/n/nKäytä hetki lukeaksesi nämä opastesivut läpi jolloin ymmärrät paremmin pluginin toimintoja."
@@ -87,4 +88,3 @@ msgstr ""
 "Nyt tiedät melkein kaiken mitä AutoTimer -plugin:sta on kerrottavaa.\n"
 "\n"
 "Viimeiseksi, käyttäessäsi tätä plugin:ia ja kohdatessasi mahdollisen ongelman, on tärkeää että katsot vihjetekstit jotka näkyy ruudun alareunassa selatessasi valikoita. Ne kattavat suurimman osan mitä löytyy FAQ:sta."
-

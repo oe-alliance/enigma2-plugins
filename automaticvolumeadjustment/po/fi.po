@@ -88,4 +88,3 @@ msgstr "Näytä äänenvoimakkuuspalkki muutoksessa"
 
 msgid "You must select a valid service!"
 msgstr "Sinun on valittava oikea palvelu"
-

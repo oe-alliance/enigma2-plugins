@@ -82,22 +82,14 @@ msgstr "Bewerken"
 msgid "Enter text for page %s"
 msgstr "Tekst voor pagina %s"
 
-msgid ""
-"Enter values (left, top, right, bottom) or press TEXT to move and resize the "
-"teletext graphically."
-msgstr ""
-"Geef de waarden in (links, bovenaan, rechts, onderaan) of druk TEXT, om de "
-"TeleText grafisch te verplaatsen en afmeting aan te passen."
+msgid "Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically."
+msgstr "Geef de waarden in (links, bovenaan, rechts, onderaan) of druk TEXT, om de TeleText grafisch te verplaatsen en afmeting aan te passen."
 
 msgid "Hebrew / Arabic"
 msgstr "Hebreeuws / Arabisch"
 
-msgid ""
-"If caching is disabled, each teletext page will searched when you entered "
-"its number."
-msgstr ""
-"Als de caching uitgeschakeld is, wordt elke pagina pas geladen na ingave van "
-"de paginanummer."
+msgid "If caching is disabled, each teletext page will searched when you entered its number."
+msgstr "Als de caching uitgeschakeld is, wordt elke pagina pas geladen na ingave van de paginanummer."
 
 msgid "No teletext available."
 msgstr "Geen teletext beschikbaar."
@@ -257,51 +249,3 @@ msgstr "gele textlink"
 
 msgid "zoom / increase height"
 msgstr "zoom / hoogte vergroten"
-
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgid "Daemon not running."
-#~ msgstr "Deamon niet actief."
-
-#~ msgid "Message"
-#~ msgstr "Bericht"
-
-#~ msgid "Show message if no teletext available or exit silently."
-#~ msgstr "Bericht weergeven indien geen teletext beschikbaar."
-
-#~ msgid ""
-#~ "Use cursor keys to move teletext. Press MENU to resize teletext. Press OK "
-#~ "to accept new position and size. Press EXIT to return to previous values."
-#~ msgstr ""
-#~ "Gebruik de navigatieknoppen om de TeleText te verplaatsen. Druk MENU om "
-#~ "de TeleText te vergroten. Druken OK om de nieuwe positie en grootte te "
-#~ "gebruiken. Druk EXIT om de vorige instelling te gebruiken."
-
-#~ msgid ""
-#~ "Use cursor keys to resize teletext (move bottom-right corner). Press MENU "
-#~ "to move teletext. Press OK to accept new position and size. Press EXIT to "
-#~ "return to previous values."
-#~ msgstr ""
-#~ "Gebruik de navigatieknoppen om de TeleText te vergroten (rechtse onderste "
-#~ "hoek verplaatsen). Druk MENU om de TeleText te verplaatsen. Druken OK om "
-#~ "de nieuwe positie en grootte te gebruiken. Druk EXIT om de vorige "
-#~ "instelling te gebruiken."
-
-#~ msgid "anti flutter"
-#~ msgstr "anti-flikker"
-
-#~ msgid "anti flutter blurry"
-#~ msgstr "anti-flikker wazig"
-
-#~ msgid "anti flutter sharp"
-#~ msgstr "anti-flikker scherp"
-
-#~ msgid "blurry"
-#~ msgstr "wazig"
-
-#~ msgid "decrease width"
-#~ msgstr "Breedte verkleinen"
-
-#~ msgid "increase width"
-#~ msgstr "Brredte vergroten"

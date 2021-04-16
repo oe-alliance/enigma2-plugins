@@ -288,6 +288,3 @@ msgstr "spielt:"
 #, python-format
 msgid "please enter an %s name to listen to"
 msgstr "bitte einen %s Namen eingeben"
-
-#~ msgid " V."
-#~ msgstr " V."

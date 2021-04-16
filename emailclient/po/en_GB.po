@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-05 22:58+0000\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2012-03-16 13:24+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -17,36 +17,28 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/plugin.py:136
 #, python-format
 msgid "%(name)s (%(user)s@%(server)s)"
 msgstr "%(name)s (%(user)s@%(server)s)"
 
-#: ../src/plugin.py:986
 msgid "Accounts list"
 msgstr "Accounts list"
 
-#: ../src/plugin.py:402
 msgid "Attachments"
 msgstr "Attachments"
 
-#: ../src/plugin.py:398
 msgid "Bodys"
 msgstr "Body's"
 
-#: ../src/plugin.py:346
 msgid "Date"
 msgstr "Date"
 
-#: ../src/plugin.py:1147
 msgid "Email Client"
 msgstr "Email Client"
 
-#: ../src/EmailConfig.py:60
 msgid "Email setup"
 msgstr "Email setup"
 
-#: ../src/plugin.py:182
 #, python-format
 msgid ""
 "EmailClient for %(account)s:\n"
@@ -57,19 +49,15 @@ msgstr ""
 "\n"
 "%(error)s"
 
-#: ../src/plugin.py:344
 msgid "From"
 msgstr "From"
 
-#: ../src/EmailConfig.py:131
 msgid "IMAP Port"
 msgstr "IMAP Port"
 
-#: ../src/EmailConfig.py:130
 msgid "IMAP Server"
 msgstr "IMAP Server"
 
-#: ../src/plugin.py:582
 #, python-format
 msgid ""
 "New mail arrived for account %s:\n"
@@ -78,16 +66,13 @@ msgstr ""
 "New mail arrived for account %s:\n"
 "\n"
 
-#: ../src/plugin.py:1049
 #, python-format
 msgid "Really delete account %s?"
 msgstr "Really delete account %s?"
 
-#: ../src/plugin.py:347
 msgid "Subject"
 msgstr "Subject"
 
-#: ../src/plugin.py:852
 #, python-format
 msgid ""
 "[EmailAccount] %(name)s: _cbCapabilities:\n"
@@ -102,74 +87,52 @@ msgstr ""
 "# cbCapabilities: %(capa)s\n"
 "####################################################################################################\n"
 
-#: ../src/plugin.py:1009
 #, python-format
 msgid "account %s is not connected"
 msgstr "account %s is not connected"
 
-#: ../src/EmailConfig.py:129
 msgid "account name"
 msgstr "account name"
 
-#: ../src/plugin.py:127
-#: ../src/plugin.py:194
-#: ../src/plugin.py:235
-#: ../src/plugin.py:384
-#: ../src/plugin.py:387
-#: ../src/plugin.py:393
 msgid "account not connected"
 msgstr "account not connected"
 
-#: ../src/plugin.py:966
 msgid "add"
 msgstr "add"
 
-#: ../src/EmailConfig.py:39
-#: ../src/EmailConfig.py:102
 msgid "cancel"
 msgstr "cancel"
 
-#: ../src/plugin.py:738
 msgid "cannot access inbox"
 msgstr "cannot access inbox"
 
-#: ../src/plugin.py:815
 msgid "cannot get headers of new messages"
 msgstr "cannot get headers of new messages"
 
-#: ../src/plugin.py:745
 msgid "cannot get list of new messages"
 msgstr "cannot get list of new messages"
 
-#: ../src/plugin.py:834
 msgid "connection failed - retrying"
 msgstr "connection failed - retrying"
 
-#: ../src/EmailConfig.py:53
 msgid "debug"
 msgstr "debug"
 
-#: ../src/plugin.py:355
 msgid "delete"
 msgstr "delete"
 
-#: ../src/EmailConfig.py:52
 msgid "display connection errors"
 msgstr "display connection errors"
 
-#: ../src/EmailConfig.py:51
 msgid "display timeout (seconds)"
 msgstr "display timeout (seconds)"
 
-#: ../src/plugin.py:967
 msgid "edit"
 msgstr "edit"
 
-#: ../src/EmailConfig.py:145
 msgid "empty values - retry"
 msgstr "empty values - retry"
 
-#: ../src/plugin.py:911
 #, python-format
 msgid ""
 "error logging %(who)s in:\n"
@@ -178,133 +141,97 @@ msgstr ""
 "error logging %(who)s in:\n"
 "%(failure)s"
 
-#: ../src/plugin.py:810
 msgid "failed to load message"
 msgstr "failed to load message"
 
-#: ../src/plugin.py:231
 msgid "getting message ..."
 msgstr "getting message ..."
 
-#: ../src/plugin.py:224
 #, python-format
 msgid "have %d messages"
 msgstr "have %d messages"
 
-#: ../src/plugin.py:226
 msgid "have no messages"
 msgstr "have no messages"
 
-#: ../src/plugin.py:206
 msgid "headers loaded, now parsing ..."
 msgstr "headers loaded, now parsing ..."
 
-#: ../src/plugin.py:1091
 #, python-format
 msgid "importing configurations from %s"
 msgstr "importing configurations from %s"
 
-#: ../src/plugin.py:351
 msgid "leave unread"
 msgstr "leave unread"
 
-#: ../src/EmailConfig.py:136
 msgid "list all mailboxes"
 msgstr "list all mailboxes"
 
-#: ../src/plugin.py:189
 msgid "loading headers ..."
 msgstr "loading headers ..."
 
-#: ../src/EmailConfig.py:134
 msgid "mail check interval (minutes)"
 msgstr "mail check interval (minutes)"
 
-#: ../src/EmailConfig.py:135
 msgid "maximum mail size to fetch"
 msgstr "maximum mail size to fetch"
 
-#: ../src/plugin.py:801
 msgid "message too large"
 msgstr "message too large"
 
-#: ../src/plugin.py:1015
-#: ../src/plugin.py:1052
 msgid "no account selected"
 msgstr "no account selected"
 
-#: ../src/plugin.py:346
-#: ../src/plugin.py:604
 msgid "no date"
 msgstr "no date"
 
-#: ../src/plugin.py:425
 msgid "no filename"
 msgstr "no filename"
 
-#: ../src/plugin.py:344
 msgid "no from"
 msgstr "no from"
 
-#: ../src/plugin.py:196
 msgid "no mailbox?!?!"
 msgstr "no mailbox?!?!"
 
-#: ../src/plugin.py:594
 msgid "no sender"
 msgstr "no sender"
 
-#: ../src/plugin.py:347
-#: ../src/plugin.py:597
 msgid "no subject"
 msgstr "no subject"
 
-#: ../src/EmailConfig.py:40
-#: ../src/EmailConfig.py:103
 msgid "ok"
 msgstr "ok"
 
-#: ../src/plugin.py:238
 msgid "parsing message ..."
 msgstr "parsing message ..."
 
-#: ../src/EmailConfig.py:133
 msgid "password"
 msgstr "password"
 
-#: ../src/plugin.py:378
 msgid "really delete mail?"
 msgstr "really delete mail?"
 
-#: ../src/plugin.py:376
 msgid "really undelete mail?"
 msgstr "really undelete mail?"
 
-#: ../src/plugin.py:965
 msgid "remove"
 msgstr "remove"
 
-#: ../src/plugin.py:427
 msgid "select Attachment"
 msgstr "select Attachment"
 
-#: ../src/plugin.py:411
 msgid "select Body"
 msgstr "select Body"
 
-#: ../src/EmailConfig.py:50
 msgid "show deleted entries"
 msgstr "show deleted entries"
 
-#: ../src/plugin.py:353
 msgid "undelete"
 msgstr "undelete"
 
-#: ../src/EmailConfig.py:132
 msgid "user name"
 msgstr "user name"
 
-#: ../src/plugin.py:1147
 msgid "view Emails via IMAP4"
 msgstr "view Emails via IMAP4"
-

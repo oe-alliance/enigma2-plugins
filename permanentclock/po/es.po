@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PermanentClock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2009-01-09 14:31+0100\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -15,8 +15,7 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/permanentclock/"
-"src\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/permanentclock/src\n"
 
 msgid "Activate permanent clock"
 msgstr "Activar el reloj permanente"
@@ -24,11 +23,75 @@ msgstr "Activar el reloj permanente"
 msgid "Change permanent clock position"
 msgstr "Cambiar la posición del reloj permanente"
 
+msgid "Choice color clock:"
+msgstr ""
+
+msgid "Color analog clock"
+msgstr ""
+
+msgid "Color digital clock"
+msgstr ""
+
 msgid "Deactivate permanent clock"
 msgstr "Desactivar el reloj permanente"
+
+msgid "Disable key 'long EXIT' show/hide"
+msgstr ""
+
+msgid "Enable key 'long EXIT' show/hide"
+msgstr ""
+
+msgid "PLi-transparent"
+msgstr ""
 
 msgid "Permanent Clock"
 msgstr "Reloj permanente"
 
+#, fuzzy
+msgid "Permanent Clock Setup"
+msgstr "Reloj permanente"
+
+msgid "Save"
+msgstr ""
+
+msgid "Set slider"
+msgstr ""
+
+msgid "Set slider step (1 - 20):"
+msgstr ""
+
+msgid "Show analog clock"
+msgstr ""
+
+msgid "Show digital clock"
+msgstr ""
+
 msgid "Shows the clock permanent on the screen"
 msgstr "Mostrar el reloj permanente en la pantalla"
+
+msgid "black-blue"
+msgstr ""
+
+msgid "black-white"
+msgstr ""
+
+msgid "black-yellow"
+msgstr ""
+
+msgid "blue"
+msgstr ""
+
+msgid "large white"
+msgstr ""
+
+msgid "large yellow"
+msgstr ""
+
+msgid "transparent"
+msgstr ""
+
+msgid "white"
+msgstr ""
+
+msgid "yellow"
+msgstr ""

@@ -8,127 +8,98 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-14 23:32+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugin.py:54 plugin.py:90
-msgid "Weather Plugin"
+msgid "Add"
 msgstr ""
 
-#: plugin.py:54
-msgid "Show Weather Forecast"
+msgid "Back"
 msgstr ""
 
-#: plugin.py:141
+msgid "Cancel"
+msgstr ""
+
+msgid "City"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+#, python-format
+msgid "Feels like %s"
+msgstr ""
+
 msgid "Getting weather information..."
 msgstr ""
 
-#: plugin.py:148
+#, python-format
+msgid "Humidity: %s %%"
+msgstr ""
+
+msgid "Location code"
+msgstr ""
+
+msgid "MSN location search result"
+msgstr ""
+
 msgid ""
 "No locations defined...\n"
 "Press 'Menu' to do that."
 msgstr ""
 
-#: plugin.py:209
-#, python-format
-msgid "Humidity: %s %%"
+msgid "OK"
 msgstr ""
 
-#: plugin.py:212
-#, python-format
-msgid "Observation time: %s"
-msgstr ""
-
-#: plugin.py:213
 #, python-format
 msgid "Observation point: %s"
 msgstr ""
 
-#: plugin.py:214
 #, python-format
-msgid "Feels like %s"
+msgid "Observation time: %s"
 msgstr ""
 
-#: setup.py:43
-msgid "metric system"
-msgstr ""
-
-#: setup.py:43
-msgid "imperial system"
-msgstr ""
-
-#: setup.py:74
-msgid "WeatherPlugin: List of Entries"
-msgstr ""
-
-#: setup.py:75 setup.py:198
-msgid "City"
-msgstr ""
-
-#: setup.py:76 setup.py:200
-msgid "System"
-msgstr ""
-
-#: setup.py:77 setup.py:294
-msgid "Back"
-msgstr ""
-
-#: setup.py:78
-msgid "Add"
-msgstr ""
-
-#: setup.py:79
-msgid "Edit"
-msgstr ""
-
-#: setup.py:80 setup.py:187
-msgid "Delete"
-msgstr ""
-
-#: setup.py:119 setup.py:241
-msgid "Really delete this WeatherPlugin Entry?"
-msgstr ""
-
-#: setup.py:175
-msgid "WeatherPlugin: Edit Entry"
-msgstr ""
-
-#: setup.py:185
-msgid "Cancel"
-msgstr ""
-
-#: setup.py:186 setup.py:295
-msgid "OK"
-msgstr ""
-
-#: setup.py:188
-msgid "Search Code"
-msgstr ""
-
-#: setup.py:199
-msgid "Location code"
-msgstr ""
-
-#: setup.py:215
-msgid ""
-"You need to enter a valid city name before you can search for the location "
-"code."
-msgstr ""
-
-#: setup.py:228
 msgid "Please enter a valid city name."
 msgstr ""
 
-#: setup.py:230
 msgid "Please enter a valid location code for the city."
 msgstr ""
 
-#: setup.py:293
-msgid "MSN location search result"
+msgid "Really delete this WeatherPlugin Entry?"
+msgstr ""
+
+msgid "Search Code"
+msgstr ""
+
+msgid "Show Weather Forecast"
+msgstr ""
+
+msgid "System"
+msgstr ""
+
+msgid "Weather Plugin"
+msgstr ""
+
+msgid "WeatherPlugin: Edit Entry"
+msgstr ""
+
+msgid "WeatherPlugin: List of Entries"
+msgstr ""
+
+msgid "You need to enter a valid city name before you can search for the location code."
+msgstr ""
+
+msgid "imperial system"
+msgstr ""
+
+msgid "metric system"
 msgstr ""

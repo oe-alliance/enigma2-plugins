@@ -1,287 +1,182 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR ORGANIZATION
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-12-30 14:40+CET\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: ENCODING\n"
-"Generated-By: pygettext.py 1.5\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:49
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:346
-msgid "Cancel"
+msgid "Add"
 msgstr ""
 
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:50
-msgid "Save"
+msgid "Advanced HDMI-Cec Control"
 msgstr ""
 
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:51
-msgid "Timespans"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:88
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:414
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/plugin.py:122
 msgid "Advanced HDMI-Cec Setup"
 msgstr ""
 
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:93
+msgid "At which time, HDMI-Cec should be disabled?"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Disable HDMI-CEC chronologically"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Edit HDMI-Cec-Timespan"
+msgstr ""
+
+msgid "Friday"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "From WD"
+msgstr ""
+
+msgid "From which day of the week, HDMI-Cec should be disabled?"
+msgstr ""
+
+msgid "Hook"
+msgstr ""
+
+msgid "Monday"
+msgstr ""
+
+msgid "No HDMI-Cec-Hooks are registered!"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
 msgid ""
 "Partially disable HDMI-Cec?\n"
 "It can be prevented only the signals that are sent from the Dreambox. Signals received by the Dreambox will not be prevented."
 msgstr ""
 
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:93
-msgid "partially disable HdmiCec"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:95
-msgid "Should HDMI-Cec be disabled when GUI service startup?"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:95
-msgid "disable at GUI-start"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:97
-msgid "Should HDMI-Cec be disabled when the commands are sent from the web interface?"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:97
-msgid "disable from webinterface"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:98
-msgid "Should HDMI-Cec be send on Power On?"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:98
-msgid "enable Power On"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:99
-msgid "Should HDMI-Cec be send on Power Off?"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:99
-msgid "enable Power Off"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:100
-msgid "Schould debugmessages be printed?"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:100
-msgid "enable debug"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:101
-msgid "Where should this setup be displayed?"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:101
-msgid "show in"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:138
-msgid "Advanced HDMI-Cec Control"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:139
-msgid "Version: "
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:141
-msgid "Registered HDMI-Cec-Hooks:"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:143
-msgid "Hook"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:146
-msgid "No HDMI-Cec-Hooks are registered!"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:252
-msgid "From WD"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:253
-msgid "To WD"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:254
-msgid "From"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:255
-msgid "To"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:258
-msgid "Add"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:259
-msgid "Close"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:260
-msgid "Edit"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:261
-msgid "Delete"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:280
-msgid "Disable HDMI-CEC chronologically"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:307
 msgid "Really delete this HDMI-Cec-Timespan Entry?"
 msgstr ""
 
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:347
-msgid "OK"
+msgid "Registered HDMI-Cec-Hooks:"
 msgstr ""
 
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:360
-msgid "From which day of the week, HDMI-Cec should be disabled?"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:360
-msgid "from weekday"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:361
-msgid "To what day of the week, HDMI-Cec should be disabled?"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:361
-msgid "to weekday"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:362
-msgid "At which time, HDMI-Cec should be disabled?"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:362
-msgid "from (HH:MI)"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:363
-msgid "Until the time at which, HDMI-Cec should be disabled?"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:363
-msgid "to (HH:MI)"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:376
-msgid "Edit HDMI-Cec-Timespan"
-msgstr ""
-
-#:
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:428
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:435
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/AdvHdmiCecSetup.py:443
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/plugin.py:136
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/plugin.py:143
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/plugin.py:151
-msgid "manage when HDMI Cec is enabled"
-msgstr ""
-
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/plugin.py:45
-msgid "systemmenue"
-msgstr ""
-
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/plugin.py:46
-msgid "pluginmenue"
-msgstr ""
-
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/plugin.py:47
-msgid "extensions"
-msgstr ""
-
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/plugin.py:51
-msgid "Monday"
-msgstr ""
-
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/plugin.py:52
-msgid "Tuesday"
-msgstr ""
-
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/plugin.py:53
-msgid "Wednesday"
-msgstr ""
-
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/plugin.py:54
-msgid "Thursday"
-msgstr ""
-
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/plugin.py:55
-msgid "Friday"
-msgstr ""
-
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/plugin.py:56
 msgid "Saturday"
 msgstr ""
 
-#: AdvHdmi/usr/lib/enigma2/python/Plugins/SystemPlugins/AdvHdmi/plugin.py:57
+msgid "Save"
+msgstr ""
+
+msgid "Schould debugmessages be printed?"
+msgstr ""
+
+msgid "Should HDMI-Cec be disabled when GUI service startup?"
+msgstr ""
+
+msgid "Should HDMI-Cec be disabled when the commands are sent from the web interface?"
+msgstr ""
+
+msgid "Should HDMI-Cec be send on Power Off?"
+msgstr ""
+
+msgid "Should HDMI-Cec be send on Power On?"
+msgstr ""
+
 msgid "Sunday"
 msgstr ""
 
+msgid "Thursday"
+msgstr ""
+
+msgid "Timespans"
+msgstr ""
+
+msgid "To"
+msgstr ""
+
+msgid "To WD"
+msgstr ""
+
+msgid "To what day of the week, HDMI-Cec should be disabled?"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
+msgid "Until the time at which, HDMI-Cec should be disabled?"
+msgstr ""
+
+msgid "Version: "
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""
+
+msgid "Where should this setup be displayed?"
+msgstr ""
+
+msgid "disable at GUI-start"
+msgstr ""
+
+msgid "disable from webinterface"
+msgstr ""
+
+msgid "enable Power Off"
+msgstr ""
+
+msgid "enable Power On"
+msgstr ""
+
+msgid "enable debug"
+msgstr ""
+
+msgid "extensions"
+msgstr ""
+
+msgid "from (HH:MI)"
+msgstr ""
+
+msgid "from weekday"
+msgstr ""
+
+msgid "manage when HDMI Cec is enabled"
+msgstr ""
+
+msgid "partially disable HdmiCec"
+msgstr ""
+
+msgid "pluginmenue"
+msgstr ""
+
+msgid "show in"
+msgstr ""
+
+msgid "systemmenue"
+msgstr ""
+
+msgid "to (HH:MI)"
+msgstr ""
+
+msgid "to weekday"
+msgstr ""

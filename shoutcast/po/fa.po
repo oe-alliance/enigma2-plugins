@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shoutcast Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Persian Prince <persianprince@persianpros.org>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -38,6 +38,9 @@ msgstr ">= 256 kbps"
 msgid ">= 64 kbps"
 msgstr ">= 64 kbps"
 
+msgid "Activate Picture in Picture"
+msgstr ""
+
 msgid "Add current playing stream to favorite"
 msgstr "افزودن یک موسیقی در حال پخش به لیست مورد علاقه انتخاب شده فعلی"
 
@@ -64,6 +67,9 @@ msgstr ""
 msgid "Cancel"
 msgstr "لغو کردن"
 
+msgid "Choose action:"
+msgstr ""
+
 msgid "Config"
 msgstr "پیکربندی"
 
@@ -75,6 +81,9 @@ msgstr ""
 
 msgid "Create a directory for each stream"
 msgstr "ایجاد یک دایرکتوری برای هر موسیقی در حال پخش"
+
+msgid "Disable Picture in Picture"
+msgstr ""
 
 msgid "Do you really want to stop the recording?"
 msgstr "آیا واقعا می خواهید ضبط کردن را متوقف کنید"
@@ -88,6 +97,10 @@ msgstr "انتخاب یک نام جدید برای لیست علاقه مندی 
 msgid "Enter text to search for"
 msgstr "افزودن یک کلمه در قسمت جستجو"
 
+#, python-format
+msgid "Error create directory %s!"
+msgstr ""
+
 msgid "Error downloading cover..."
 msgstr ""
 
@@ -96,6 +109,9 @@ msgstr "لیست علاقه مندی ها"
 
 msgid "Favorites"
 msgstr "علاقه مندی ها"
+
+msgid "First play streaming!"
+msgstr ""
 
 msgid "Genres"
 msgstr "نوع موسیقی"
@@ -127,6 +143,12 @@ msgstr "مخفی سازی"
 
 msgid "Invalid Location"
 msgstr "مکان ناشناس"
+
+msgid "Menu PiP"
+msgstr ""
+
+msgid "Move Picture in Picture"
+msgstr ""
 
 msgid "No streaming data found..."
 msgstr "هیچ موسیقی در حال پخشی یافت نشد"
@@ -161,6 +183,10 @@ msgstr ""
 msgid "SHOUTcast genre list"
 msgstr "لیست موسیقی های تلوزیونی"
 
+#, fuzzy
+msgid "SHOUTcast setup"
+msgstr "تلویزیون"
+
 #, python-format
 msgid "SHOUTcast station list for %s"
 msgstr ""
@@ -170,6 +196,9 @@ msgstr "جستجو"
 
 #, python-format
 msgid "Searching SHOUTcast for %s..."
+msgstr ""
+
+msgid "Select record path for streamripper"
 msgstr ""
 
 msgid "Show cover:"
@@ -201,6 +230,12 @@ msgstr "عنوان : %s"
 msgid "Title: n/a"
 msgstr ""
 
+msgid "Zap focus to Picture in Picture"
+msgstr ""
+
+msgid "Zap focus to main screen"
+msgstr ""
+
 msgid "every five minutes"
 msgstr "هر 5 دقیقه"
 
@@ -227,23 +262,5 @@ msgstr "تغییر نام لیست مورد علاقه انتخاب شده فع�
 msgid "search-criteria %s"
 msgstr ""
 
-#~ msgid "Description:"
-#~ msgstr "توضیحات"
-
-#~ msgid "Listen to SHOUTcast Internet Radio"
-#~ msgstr "گوش دادن به رادیوی اینترنتی در تلوزیون"
-
-#~ msgid "Name (needs GUI restart):"
-#~ msgstr "نام ( نیاز به یک ریستارت )"
-
-#~ msgid "SHOUTcast"
-#~ msgstr "تلویزیون"
-
-#~ msgid "Setup"
-#~ msgstr "راه اندازی"
-
-#~ msgid "Show in (needs GUI restart):"
-#~ msgstr "نمایش ( نیاز به یک ریستارت )"
-
-#~ msgid "Ver."
-#~ msgstr "ورژن."
+msgid "streamripper not installed!"
+msgstr ""

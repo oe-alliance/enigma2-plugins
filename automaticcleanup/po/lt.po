@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-automaticcleanup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-19 10:59+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2017-07-07 20:34+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -14,193 +14,120 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:89
-msgid "void"
-msgstr "tuščias"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:91
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:95
-msgid "all"
-msgstr "visi"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:93
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:97
-msgid "cleanup disabled"
-msgstr "valymas išjungtas"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:93
-msgid "older than 6 months"
-msgstr "senesni, nei 6 mėnesių"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:93
-msgid "older than 3 months"
-msgstr "senesni, nei 3 mėnesių"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:93
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:97
-msgid "older than 4 weeks"
-msgstr "senesni, nei 4 savaičių"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:93
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:97
-msgid "older than 2 weeks"
-msgstr "senesni, nei 2 savaičių"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:93
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:97
-msgid "older than 1 week"
-msgstr "senesni, nei 1 savaitės"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:95
-msgid "last 10"
-msgstr "paskutiniai 10"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:95
-msgid "last 5"
-msgstr "paskutiniai 5"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:95
-msgid "last 3"
-msgstr "paskutiniai 3"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:95
-msgid "last 2"
-msgstr "paskutiniai 2"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:95
-msgid "only last one"
-msgstr "tik paskutinį"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:97
-msgid "older than 6 weeks"
-msgstr "senesni, nei 6 savaičių"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:97
-msgid "older than 3 days"
-msgstr "senesni, nei 3 dienų"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:97
-msgid "older than 1 day"
-msgstr "senesni, nei 1 dienos"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:97
-msgid "immediately after recording"
-msgstr "iškart po įrašymo"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:124
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:194
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:456
 msgid "Automatic System Cleanup Setup"
 msgstr "Automatinio sistemos valymo sąranka"
 
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:129
-msgid "Delete system setting backups"
-msgstr "Šalinti sistemos nustatymų atsargines kopijas"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:130
-msgid ""
-"Specify, how long system setting backups shall be kept at most (even if "
-"maximum number is not yet exceeded). Latest backup will be kept anyway!"
-msgstr ""
-"Nurodykite, kiek ilgiausiai saugoti sistemos nustatymų atsargines kopijas "
-"(net jei maskimalus skaičius neviršytas). Paskutinė kopija vis tiek išliks!"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:131
-msgid "Maximum number of system setting backups"
-msgstr "Maksimalus sistemos nustatymų atsarginių kopijų skaičius"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:132
-msgid ""
-"Maximum number of system setting backups to keep, regardless of retention "
-"period."
-msgstr ""
-"Maksimalus saugomų sistemos nustatymų atsarginių kopijų skaičius, nepaisant "
-"saugojimo priodo."
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:133
-msgid "Delete orphaned movie files"
-msgstr "Šalinti pavienius filmus"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:134
-msgid ""
-"If enabled, orphaned movie files will be automatically deleted from movie "
-"directories."
-msgstr ""
-"Jei įjungta, pavieniai filmai bus automatiškai ištrinti iš filmų katalogų."
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:135
-msgid "Delete crashlogs"
-msgstr "Šalinti lūžio žurnalus"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:136
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:138
-msgid ""
-"Sorry, this feature is not available due to license reasons. To get the full "
-"version, please search the web for \"dreambox automaticcleanup.\""
-msgstr ""
-"Atleiskite, ši funkcija negalima dėl licencijų priežasčių. Norėdami gauti "
-"pilną versiją, ieškokite internete \"DREAMBOX automaticcleanup\"."
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:137
-msgid "Maximum number of crashlogs"
-msgstr "Maksimalus lūžio žurnalų skaičius"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:150
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:153
-msgid "Delete timerlist entries"
-msgstr "Šalinti laikmačio sąrašo įrašus"
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:151
-msgid ""
-"Timerlist cleanup is enabled in EMC plugin! To avoid crashes, we won't "
-"delete entries whilst this option is enabled in EMC."
-msgstr ""
-"Laikmačių sąrašų valymas įjungtas EMC įskiepyje! Kad išvengti lūžių, mes "
-"negalime ištrinti įrašų, kol ši parinktis įjungta EMC."
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:154
-msgid ""
-"Specify, how long expired timer list entries shall be kept at most. "
-"Deactivated repeat timer entries won't be deleted ever."
-msgstr ""
-"Nurodykite, kiek ilgiausiai saugoti pasibaigusius laikmačio įrašus. "
-"Deaktyvuoti pakartotiniai įrašai nebus ištrinti niekada."
-
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:171
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:172
-msgid "OK"
-msgstr "Gerai"
+msgid ""
+"Cleanup timerlist, orphaned movie files and stored setting backups automatically.\n"
+"\n"
+"Modify the settings to match your preferences. More detailed explanations given with each adjustable option."
+msgstr ""
+"Valyti laikmačius, pavienius filmus ir nustatymų atsargines kopijas automatiškai.\n"
+"\n"
+"Keiskite parametrus, kad atitiktų jūsų poreikius. Išsamesni paaiškinimai prie kiekvieno keičiamo nustatymo."
 
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:173
+msgid "Delete crashlogs"
+msgstr "Šalinti lūžio žurnalus"
+
+msgid "Delete orphaned movie files"
+msgstr "Šalinti pavienius filmus"
+
+msgid "Delete system setting backups"
+msgstr "Šalinti sistemos nustatymų atsargines kopijas"
+
+msgid "Delete timerlist entries"
+msgstr "Šalinti laikmačio sąrašo įrašus"
+
 msgid "Help"
 msgstr "Pagalba"
 
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:194
+msgid "If enabled, orphaned movie files will be automatically deleted from movie directories."
+msgstr "Jei įjungta, pavieniai filmai bus automatiškai ištrinti iš filmų katalogų."
+
+msgid "Maximum number of crashlogs"
+msgstr "Maksimalus lūžio žurnalų skaičius"
+
+msgid "Maximum number of system setting backups"
+msgstr "Maksimalus sistemos nustatymų atsarginių kopijų skaičius"
+
+msgid "Maximum number of system setting backups to keep, regardless of retention period."
+msgstr "Maksimalus saugomų sistemos nustatymų atsarginių kopijų skaičius, nepaisant saugojimo priodo."
+
+msgid "OK"
+msgstr "Gerai"
+
+msgid "Sorry, this feature is not available due to license reasons. To get the full version, please search the web for \"dreambox automaticcleanup.\""
+msgstr "Atleiskite, ši funkcija negalima dėl licencijų priežasčių. Norėdami gauti pilną versiją, ieškokite internete \"DREAMBOX automaticcleanup\"."
+
+msgid "Specify, how long expired timer list entries shall be kept at most. Deactivated repeat timer entries won't be deleted ever."
+msgstr "Nurodykite, kiek ilgiausiai saugoti pasibaigusius laikmačio įrašus. Deaktyvuoti pakartotiniai įrašai nebus ištrinti niekada."
+
+msgid "Specify, how long system setting backups shall be kept at most (even if maximum number is not yet exceeded). Latest backup will be kept anyway!"
+msgstr "Nurodykite, kiek ilgiausiai saugoti sistemos nustatymų atsargines kopijas (net jei maskimalus skaičius neviršytas). Paskutinė kopija vis tiek išliks!"
+
+msgid "System cleanup"
+msgstr "Sistemos išvalymas"
+
+msgid "Timerlist cleanup is enabled in EMC plugin! To avoid crashes, we won't delete entries whilst this option is enabled in EMC."
+msgstr "Laikmačių sąrašų valymas įjungtas EMC įskiepyje! Kad išvengti lūžių, mes negalime ištrinti įrašų, kol ši parinktis įjungta EMC."
+
 msgid "Ver."
 msgstr "vers."
 
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:217
-msgid ""
-"Cleanup timerlist, orphaned movie files and stored setting backups "
-"automatically.\n"
-"\n"
-"Modify the settings to match your preferences. More detailed explanations "
-"given with each adjustable option."
-msgstr ""
-"Valyti laikmačius, pavienius filmus ir nustatymų atsargines kopijas "
-"automatiškai.\n"
-"\n"
-"Keiskite parametrus, kad atitiktų jūsų poreikius. Išsamesni paaiškinimai "
-"prie kiekvieno keičiamo nustatymo."
+msgid "all"
+msgstr "visi"
 
-#: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:453
-msgid "System cleanup"
-msgstr "Sistemos išvalymas"
+msgid "cleanup disabled"
+msgstr "valymas išjungtas"
+
+msgid "immediately after recording"
+msgstr "iškart po įrašymo"
+
+msgid "last 10"
+msgstr "paskutiniai 10"
+
+msgid "last 2"
+msgstr "paskutiniai 2"
+
+msgid "last 3"
+msgstr "paskutiniai 3"
+
+msgid "last 5"
+msgstr "paskutiniai 5"
+
+msgid "older than 1 day"
+msgstr "senesni, nei 1 dienos"
+
+msgid "older than 1 week"
+msgstr "senesni, nei 1 savaitės"
+
+msgid "older than 2 weeks"
+msgstr "senesni, nei 2 savaičių"
+
+msgid "older than 3 days"
+msgstr "senesni, nei 3 dienų"
+
+msgid "older than 3 months"
+msgstr "senesni, nei 3 mėnesių"
+
+msgid "older than 4 weeks"
+msgstr "senesni, nei 4 savaičių"
+
+msgid "older than 6 months"
+msgstr "senesni, nei 6 mėnesių"
+
+msgid "older than 6 weeks"
+msgstr "senesni, nei 6 savaičių"
+
+msgid "only last one"
+msgstr "tik paskutinį"
+
+msgid "void"
+msgstr "tuščias"

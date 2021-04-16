@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,50 +17,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/plugin.py:182
 msgid "Clear"
 msgstr "Очистить"
 
-#: ../src/plugin.py:185
 msgid "Config"
 msgstr "Конфиг"
 
-#: ../src/plugin.py:183
 msgid "Delete"
 msgstr "Удалить"
 
-#: ../src/plugin.py:112
 msgid "Enable zap history:"
 msgstr "Включить историю просмотра:"
 
-#: ../src/plugin.py:114
 msgid "Enigma1-like history:"
 msgstr "Enigma1-история:"
 
-#: ../src/plugin.py:113
 msgid "Maximum zap history entries:"
 msgstr "Число каналов в истории просмотра:"
 
-#: ../src/plugin.py:184
-msgid "Zap & Close"
-msgstr "Сохранить и закрыть"
+msgid "Zap"
+msgstr ""
 
-#: ../src/plugin.py:170 ../src/plugin.py:281
 msgid "Zap-History Browser"
 msgstr "История просмотра"
 
-#: ../src/plugin.py:105
 msgid "Zap-History Configurator"
 msgstr "Настройка истории просмотра"
 
-#: ../src/plugin.py:43
 msgid "disabled"
 msgstr "выкл."
 
-#: ../src/plugin.py:43
 msgid "disabled at parental lock"
 msgstr "выкл. родительским контролем"
 
-#: ../src/plugin.py:43
 msgid "enabled"
 msgstr "вкл."

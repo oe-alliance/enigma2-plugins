@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2012-03-14 12:11+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Andy Blacburn, Rob van der Does\n"
@@ -36,6 +36,9 @@ msgstr "Speel af"
 msgid "Streaming error: %s"
 msgstr "Streaming fout: %s"
 
+msgid "Watch eUroticTV via HTTP Live Streaming"
+msgstr "Bekijk eUroticTV via HTTP Live Streaming"
+
 msgid "connecting..."
 msgstr "bezig met verbinden..."
 
@@ -44,6 +47,3 @@ msgstr "verbinding verbroken"
 
 msgid "pause"
 msgstr "pauze"
-
-#~ msgid "Watch eUroticTV via HTTP Live Streaming"
-#~ msgstr "Bekijk eUroticTV via HTTP Live Streaming"

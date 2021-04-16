@@ -227,4 +227,3 @@ msgstr "ga map in/verkrijg bestand/plaats bestand"
 
 msgid "open menu"
 msgstr "open menu"
-

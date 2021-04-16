@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeatherPlugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-11 14:40+0300\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2017-07-11 14:46+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -11,23 +11,44 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: plugin.py:54 plugin.py:90
-msgid "Weather Plugin"
-msgstr "Orų įskiepis"
+msgid "Add"
+msgstr "Pridėti"
 
-#: plugin.py:54
-msgid "Show Weather Forecast"
-msgstr "Rodo orų prognozę"
+msgid "Back"
+msgstr "Grįžti"
 
-#: plugin.py:141
+msgid "Cancel"
+msgstr "Atšaukti"
+
+msgid "City"
+msgstr "Miestas"
+
+msgid "Delete"
+msgstr "Ištrinti"
+
+msgid "Edit"
+msgstr "Redaguoti"
+
+#, python-format
+msgid "Feels like %s"
+msgstr "Jaučiama, kaip: %s"
+
 msgid "Getting weather information..."
 msgstr "Įkeliama informacija apie orus..."
 
-#: plugin.py:148
+#, python-format
+msgid "Humidity: %s %%"
+msgstr "Drėgnumas: %s %%"
+
+msgid "Location code"
+msgstr "Vietovės kodas"
+
+msgid "MSN location search result"
+msgstr "MSN vietovės paieškos rezultatai"
+
 msgid ""
 "No locations defined...\n"
 "Press 'Menu' to do that."
@@ -35,101 +56,49 @@ msgstr ""
 "Nenurodyta vieta...\n"
 "Kad nurodytumėte, spauskite 'MENU'."
 
-#: plugin.py:209
-#, python-format
-msgid "Humidity: %s %%"
-msgstr "Drėgnumas: %s %%"
+msgid "OK"
+msgstr "Gerai"
 
-#: plugin.py:212
-#, python-format
-msgid "Observation time: %s"
-msgstr "Stebėjimo laikas: %s"
-
-#: plugin.py:213
 #, python-format
 msgid "Observation point: %s"
 msgstr "Stebėjimo vieta: %s"
 
-#: plugin.py:214
 #, python-format
-msgid "Feels like %s"
-msgstr "Jaučiama, kaip: %s"
+msgid "Observation time: %s"
+msgstr "Stebėjimo laikas: %s"
 
-#: setup.py:43
-msgid "metric system"
-msgstr "metrinė sistema"
-
-#: setup.py:43
-msgid "imperial system"
-msgstr "imperinė sistema"
-
-#: setup.py:74
-msgid "WeatherPlugin: List of Entries"
-msgstr "Orų įskiepis - įrašų sąrašas"
-
-#: setup.py:75 setup.py:198
-msgid "City"
-msgstr "Miestas"
-
-#: setup.py:76 setup.py:200
-msgid "System"
-msgstr "Sistema"
-
-#: setup.py:77 setup.py:294
-msgid "Back"
-msgstr "Grįžti"
-
-#: setup.py:78
-msgid "Add"
-msgstr "Pridėti"
-
-#: setup.py:79
-msgid "Edit"
-msgstr "Redaguoti"
-
-#: setup.py:80 setup.py:187
-msgid "Delete"
-msgstr "Ištrinti"
-
-#: setup.py:119 setup.py:241
-msgid "Really delete this WeatherPlugin Entry?"
-msgstr "Ar tikrai ištrinti šį Orų įskiepio įrašą?"
-
-#: setup.py:175
-msgid "WeatherPlugin: Edit Entry"
-msgstr "Orų įskiepis - redaguoti įrašą"
-
-#: setup.py:185
-msgid "Cancel"
-msgstr "Atšaukti"
-
-#: setup.py:186 setup.py:295
-msgid "OK"
-msgstr "Gerai"
-
-#: setup.py:188
-msgid "Search Code"
-msgstr "Paieškos kodas"
-
-#: setup.py:199
-msgid "Location code"
-msgstr "Vietovės kodas"
-
-#: setup.py:215
-msgid ""
-"You need to enter a valid city name before you can search for the location "
-"code."
-msgstr ""
-"Prieš ieškodami vietovės kodo, turite įrašyti teisingą miesto pavadinimą."
-
-#: setup.py:228
 msgid "Please enter a valid city name."
 msgstr "Įrašykite esamą miestą."
 
-#: setup.py:230
 msgid "Please enter a valid location code for the city."
 msgstr "Įrašykite teisingą miesto kodą."
 
-#: setup.py:293
-msgid "MSN location search result"
-msgstr "MSN vietovės paieškos rezultatai"
+msgid "Really delete this WeatherPlugin Entry?"
+msgstr "Ar tikrai ištrinti šį Orų įskiepio įrašą?"
+
+msgid "Search Code"
+msgstr "Paieškos kodas"
+
+msgid "Show Weather Forecast"
+msgstr "Rodo orų prognozę"
+
+msgid "System"
+msgstr "Sistema"
+
+msgid "Weather Plugin"
+msgstr "Orų įskiepis"
+
+msgid "WeatherPlugin: Edit Entry"
+msgstr "Orų įskiepis - redaguoti įrašą"
+
+msgid "WeatherPlugin: List of Entries"
+msgstr "Orų įskiepis - įrašų sąrašas"
+
+msgid "You need to enter a valid city name before you can search for the location code."
+msgstr "Prieš ieškodami vietovės kodo, turite įrašyti teisingą miesto pavadinimą."
+
+msgid "imperial system"
+msgstr "imperinė sistema"
+
+msgid "metric system"
+msgstr "metrinė sistema"

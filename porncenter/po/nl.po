@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2011-10-12 10:50+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: \n"
@@ -19,68 +19,48 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
-#: ../src/plugin.py:55
 msgid "Adult streaming plugins for dm800/dm8000"
 msgstr "Adult streaming plugins voor Dreambox"
 
-#: ../src/plugin.py:255
 msgid "Buffer device:"
 msgstr "Buffer device:"
 
-#: ../src/plugin.py:256
 msgid "Buffer file handling:"
 msgstr "Buffer file handling:"
 
-#: ../src/plugin.py:254
 msgid "Buffer:"
 msgstr "Buffer:"
 
-#: ../src/plugin.py:395
 msgid "Delete this movie?"
 msgstr "Deze film verwijderen?"
 
-#: ../src/plugin.py:253
 msgid "Description:"
 msgstr "Beschrijving:"
 
-#: ../src/plugin.py:120
 #, python-format
 msgid "Downloading movie: %s"
 msgstr "Bezig met downloaden film: %s"
 
-#: ../src/plugin.py:382
 msgid "Error while getting video url!"
 msgstr "Fout met verkrijgen van de video url!"
 
-#: ../src/plugin.py:252
 msgid "Name:"
 msgstr "Naam:"
 
-#: ../src/plugin.py:54
-#: ../src/plugin.py:108
-#: ../src/plugin.py:171
-#: ../src/plugin.py:189
-#: ../src/plugin.py:237
 msgid "Porn Center"
 msgstr "PornoCetrum"
 
-#: ../src/plugin.py:194
 msgid "Select"
 msgstr "Selecteer"
 
-#: ../src/plugin.py:159
 msgid "Stop playing this movie?"
 msgstr "Stop afspelen?"
 
-#: ../src/plugin.py:58
 msgid "ask me"
 msgstr "Vraag mij"
 
-#: ../src/plugin.py:58
 msgid "delete"
 msgstr "Verwijder"
 
-#: ../src/plugin.py:58
 msgid "keep on device"
 msgstr "Bewaar"
-

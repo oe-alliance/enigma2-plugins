@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - eParted\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-28 18:17+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2014-02-28 19:15+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -16,102 +16,76 @@ msgstr ""
 "X-Poedit-Basepath: .../enigma2-plugins/eparted\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/eparted\n"
 
-#: .../enigma2-plugins/eparted/src/eparted.py:102
+msgid "End"
+msgstr "Fine"
+
 #, python-format
 msgid "Error command '%s'"
 msgstr "Errore in esecuzione comando \"%s\""
 
-#: .../enigma2-plugins/eparted/src/eparted.py:172
-msgid "partition(s)"
-msgstr "Partizioni"
-
-#: .../enigma2-plugins/eparted/src/eparted.py:190
-msgid "add partition"
-msgstr "Aggiungere partizione"
-
-#: .../enigma2-plugins/eparted/src/eparted.py:214
-#, python-format
-msgid "size in %s (max %d %s):"
-msgstr "Capacità in %s (max %d %s):"
-
-#: .../enigma2-plugins/eparted/src/eparted.py:215
-msgid "filesystem:"
-msgstr "Filesystem:"
-
-#: .../enigma2-plugins/eparted/src/eparted.py:218
-msgid "cancel"
-msgstr "Annullare"
-
-#: .../enigma2-plugins/eparted/src/eparted.py:219
-msgid "ok"
-msgstr "Ok"
-
-#: .../enigma2-plugins/eparted/src/eparted.py:310
 msgid "Nr"
 msgstr "Numero"
 
-#: .../enigma2-plugins/eparted/src/eparted.py:311
-#: .../enigma2-plugins/eparted/src/eparted.py:520
-msgid "Start"
-msgstr "Inizio"
+msgid "Please Wait"
+msgstr "Attendere"
 
-#: .../enigma2-plugins/eparted/src/eparted.py:312
-msgid "End"
-msgstr "Fine"
-
-#: .../enigma2-plugins/eparted/src/eparted.py:313
 msgid "Size"
 msgstr "Dimensioni"
 
-#: .../enigma2-plugins/eparted/src/eparted.py:314
+msgid "Start"
+msgstr "Inizio"
+
 msgid "Type"
 msgstr "Tipo"
 
-#: .../enigma2-plugins/eparted/src/eparted.py:327
 msgid "add"
 msgstr "Aggiungere"
 
-#: .../enigma2-plugins/eparted/src/eparted.py:332
-msgid "delete"
-msgstr "Rimuovere"
+msgid "add partition"
+msgstr "Aggiungere partizione"
 
-#: .../enigma2-plugins/eparted/src/eparted.py:337
-msgid "free"
-msgstr "Libero"
+msgid "cancel"
+msgstr "Annullare"
 
-#: .../enigma2-plugins/eparted/src/eparted.py:428
 #, python-format
 msgid "create partition %s"
 msgstr "Creare partizione %s "
 
-#: .../enigma2-plugins/eparted/src/eparted.py:444
-#, python-format
-msgid "make filesystem '%s' on partition %s (%d %s)"
-msgstr "Creare un filesystem \"%s\" nella partizione %s  (%d %s)"
+msgid "creating and manipulating partition tables"
+msgstr "Creare e modificare la tabella partizioni"
 
-#: .../enigma2-plugins/eparted/src/eparted.py:453
+msgid "delete"
+msgstr "Rimuovere"
+
 #, python-format
 msgid "delete partition %s"
 msgstr "Rimuovere la partizione %s "
 
-#: .../enigma2-plugins/eparted/src/eparted.py:486
-#: .../enigma2-plugins/eparted/src/eparted.py:518
-msgid "execute"
-msgstr "Eseguire"
-
-#: .../enigma2-plugins/eparted/src/eparted.py:580
-#: .../enigma2-plugins/eparted/src/eparted.py:586
-msgid "quit"
-msgstr "Chiudere"
-
-#: .../enigma2-plugins/eparted/src/eparted.py:594
-msgid "Please Wait"
-msgstr "Attendere"
-
-#: .../enigma2-plugins/eparted/src/plugin.py:10
 msgid "eParted"
 msgstr "eParted"
 
-#: .../enigma2-plugins/eparted/src/plugin.py:10
-msgid "creating and manipulating partition tables"
-msgstr "Creare e modificare la tabella partizioni"
+msgid "execute"
+msgstr "Eseguire"
+
+msgid "filesystem:"
+msgstr "Filesystem:"
+
+msgid "free"
+msgstr "Libero"
+
+#, python-format
+msgid "make filesystem '%s' on partition %s (%d %s)"
+msgstr "Creare un filesystem \"%s\" nella partizione %s  (%d %s)"
+
+msgid "ok"
+msgstr "Ok"
+
+msgid "partition(s)"
+msgstr "Partizioni"
+
+msgid "quit"
+msgstr "Chiudere"
+
+#, python-format
+msgid "size in %s (max %d %s):"
+msgstr "Capacità in %s (max %d %s):"

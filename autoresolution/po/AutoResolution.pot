@@ -1,0 +1,205 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Alternative resolution when native not supported"
+msgstr ""
+
+msgid "Ask before changing videomode"
+msgstr ""
+
+msgid "Auto frame rate (refresh need 'multi')"
+msgstr ""
+
+msgid "Autoresolution"
+msgstr ""
+
+#, python-format
+msgid ""
+"Autoresolution Plugin Testmode:\n"
+"Is %s OK?"
+msgstr ""
+
+msgid "Autoresolution Switch"
+msgstr ""
+
+msgid "Autoresolution is not working in Scart/DVI-PC Mode"
+msgstr ""
+
+msgid "Autoresolution videomode setup"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+#, python-format
+msgid ""
+"Changing framerate for current service?\n"
+"Current framerate: %s\n"
+"New framerate: %s\n"
+msgstr ""
+
+msgid "Deinterlacer mode for interlaced content"
+msgstr ""
+
+msgid "Deinterlacer mode for progressive content"
+msgstr ""
+
+msgid "Delay x seconds after service started"
+msgstr ""
+
+msgid "Enable 1080p24 Mode"
+msgstr ""
+
+msgid "Enable 1080p25 Mode"
+msgstr ""
+
+msgid "Enable 1080p30 Mode"
+msgstr ""
+
+msgid "Enable 2160p24 Mode"
+msgstr ""
+
+msgid "Enable 2160p25 Mode"
+msgstr ""
+
+msgid "Enable 2160p30 Mode"
+msgstr ""
+
+msgid "Enable 720p24 Mode"
+msgstr ""
+
+msgid "Enable 720p50 Mode"
+msgstr ""
+
+msgid "Enable Autoresolution"
+msgstr ""
+
+msgid "Exit"
+msgstr ""
+
+msgid "FHD 50/60HZ Progressive Mode"
+msgstr ""
+
+msgid "HD Interlace Mode"
+msgstr ""
+
+msgid "HD Progressive Mode"
+msgstr ""
+
+msgid "Lock timeout"
+msgstr ""
+
+msgid "Manual resolution"
+msgstr ""
+
+msgid "Manual resolution is not working in Scart/DVI-PC mode!"
+msgstr ""
+
+msgid "Message timeout"
+msgstr ""
+
+msgid "Mode"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Please select a resolution..."
+msgstr ""
+
+msgid "Refresh Rate"
+msgstr ""
+
+msgid "Return back without confirmation after 10 sec."
+msgstr ""
+
+msgid "Running in testmode"
+msgstr ""
+
+msgid "SD 24HZ Progressive mode"
+msgstr ""
+
+msgid "SD 25/50HZ Interlace Mode"
+msgstr ""
+
+msgid "SD 25/50HZ Progressive Mode"
+msgstr ""
+
+msgid "SD 30/60HZ Interlace Mode"
+msgstr ""
+
+msgid "SD 30/60HZ Progressive Mode"
+msgstr ""
+
+msgid "Show 'Manual resolution' in extensions menu"
+msgstr ""
+
+msgid "Show info screen"
+msgstr ""
+
+msgid "This resolution is OK?"
+msgstr ""
+
+msgid "UHD Interlace Mode"
+msgstr ""
+
+msgid "UHD Progressive Mode"
+msgstr ""
+
+msgid "Use 60HZ instead 30HZ"
+msgstr ""
+
+msgid "Video: "
+msgstr ""
+
+#, python-format
+msgid "Videocontent: %sx%s%s %sHZ"
+msgstr ""
+
+#, python-format
+msgid "Videomode: %s"
+msgstr ""
+
+#, python-format
+msgid "Videomode: %s %s %s"
+msgstr ""
+
+msgid "auto"
+msgstr ""
+
+msgid "bob"
+msgstr ""
+
+msgid "default"
+msgstr ""
+
+msgid "manual"
+msgstr ""
+
+msgid "off"
+msgstr ""
+
+msgid "on"
+msgstr ""
+
+msgid "second"
+msgstr ""
+
+msgid "seconds"
+msgstr ""

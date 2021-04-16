@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 IMDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-02 13:33+0000\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2018-12-05 00:28+0300\n"
 "Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
 "Language-Team: mosad - مساعد الجعيد\n"
@@ -10,8 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 2.2\n"
 "X-Poedit-SearchPath-0: ../src\n"
@@ -43,28 +42,18 @@ msgstr "لا يمكن الحصول علي اسم الحدث"
 msgid "Details"
 msgstr "تفاصيل"
 
+#, python-format
 msgid "Downloading Movie Poster: %s..."
 msgstr "تحميل ملصق الفيلم: %s..."
 
-msgid ""
-"Enable this to be able to access IMDb search setup from within the plugin "
-"browser."
-msgstr ""
-"قم بتمكين هذا لتتمكن من الوصول إلى إعداد بحث قاعدة بيانات معلومات الافلام من "
-"داخل متصفح البلج إنز."
+msgid "Enable this to be able to access IMDb search setup from within the plugin browser."
+msgstr "قم بتمكين هذا لتتمكن من الوصول إلى إعداد بحث قاعدة بيانات معلومات الافلام من داخل متصفح البلج إنز."
 
-msgid ""
-"Enable this to be able to access IMDb searches from within the movie list."
-msgstr ""
-"قم بتمكين هذا لتتمكن من الوصول إلى عمليات بحث قاعدة بيانات معلومات الأفلام "
-"من داخل قائمة الأفلام."
+msgid "Enable this to be able to access IMDb searches from within the movie list."
+msgstr "قم بتمكين هذا لتتمكن من الوصول إلى عمليات بحث قاعدة بيانات معلومات الأفلام من داخل قائمة الأفلام."
 
-msgid ""
-"Enable this to be able to access IMDb searches from within the plugin "
-"browser."
-msgstr ""
-"قم بتمكين هذا لتتمكن من الوصول إلى عمليات بحث قاعدة بيانات معلومات الأفلام "
-"من داخل متصفح البلج إنز."
+msgid "Enable this to be able to access IMDb searches from within the plugin browser."
+msgstr "قم بتمكين هذا لتتمكن من الوصول إلى عمليات بحث قاعدة بيانات معلومات الأفلام من داخل متصفح البلج إنز."
 
 msgid "Enter search"
 msgstr "ادخل البحث"
@@ -80,6 +69,9 @@ msgstr "خروج من بحث قاعدة بيانات معلومات الأفلا
 
 msgid "Extra Info"
 msgstr "معلومات إضافية"
+
+msgid "Genre:"
+msgstr ""
 
 msgid "IMDb Details parsed"
 msgstr "تحليل تفاصيل قاعدة بيانات معلومات الأفلام"
@@ -99,6 +91,20 @@ msgstr "بلج إنز قاعدة بيانات معلومات الأفلام"
 msgid "IMDb Re-Download completed"
 msgstr "إكتمال إعادة تحميل قاعدة بيانات معلومات الأفلام"
 
+#, fuzzy
+msgid "IMDb Save - Download completed"
+msgstr "إكتمال إعادة تحميل قاعدة بيانات معلومات الأفلام"
+
+#, fuzzy
+msgid "IMDb Setup"
+msgstr "ضبط قاعدة بيانات معلومات الأفلام"
+
+msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
+msgstr ""
+
+msgid "IMDb can not get Movie Information to write to .txt file!"
+msgstr ""
+
 msgid "IMDb query failed!"
 msgstr "فشل الاستعلام قاعدة بيانات معلومات الأفلام!"
 
@@ -114,6 +120,10 @@ msgstr "المشاهدة"
 msgid "Menu"
 msgstr "قائمة"
 
+#, fuzzy
+msgid "No IMDb match."
+msgstr "لا يوجد تطابق في قاعدة بيانات معلومات الأفلام:"
+
 msgid "No IMDb match:"
 msgstr "لا يوجد تطابق في قاعدة بيانات معلومات الأفلام:"
 
@@ -122,6 +132,9 @@ msgstr "لا توجد قائمة موجودة للممثلين في قاعدة �
 
 msgid "No details found."
 msgstr "لم يتم العثور علي تفاصيل."
+
+msgid "OK"
+msgstr ""
 
 msgid "Page down"
 msgstr "يسار الصفحة"
@@ -135,9 +148,17 @@ msgstr "تشغيل المقطع المختصر"
 msgid "Please select the matching entry"
 msgstr "من فضلك حدد النتائج المتطابقة"
 
+msgid "Plot Outline"
+msgstr ""
+
 msgid "Production Countries:"
 msgstr "البلدان المنتجة:"
 
+#, fuzzy, python-format
+msgid "Query IMDb: %s"
+msgstr "إعادة الاستعلام عن قاعدة بيانات معلومات الأفلام: %s..."
+
+#, python-format
 msgid "Re-Query IMDb: %s..."
 msgstr "إعادة الاستعلام عن قاعدة بيانات معلومات الأفلام: %s..."
 
@@ -171,12 +192,8 @@ msgstr "إعدادات لعمليات البحث في قاعدة بيانات ا
 msgid "Setup"
 msgstr "الضبط"
 
-msgid ""
-"Show episode and year information for cast when available. Takes effect "
-"after the next fetch of show details."
-msgstr ""
-"عرض معلومات الحلقة والسنة ومعلومات الممثلين عندما تكون متوفرة. تؤتي ثمارها "
-"بعد الحصول على تفاصيل العرض القادم."
+msgid "Show episode and year information for cast when available. Takes effect after the next fetch of show details."
+msgstr "عرض معلومات الحلقة والسنة ومعلومات الممثلين عندما تكون متوفرة. تؤتي ثمارها بعد الحصول على تفاصيل العرض القادم."
 
 msgid "Show episode and year information in cast list"
 msgstr "عرض الحلقة و السنة في قائمة الممثلين"
@@ -202,27 +219,20 @@ msgstr "عرض البحث في متصفح البلج إنز"
 msgid "Show setup in plugin browser"
 msgstr "عرض الضبط في متصفح البلج إنز"
 
-msgid ""
-"Show the whole IMDb title information for a movie or series, including, for "
-"example, alternative names and whether it's a series. Takes effect after the "
-"next search of IMDb for a show name."
-msgstr ""
-"عرض معلومات عنوان قاعدة بيانات معلومات الأفلام بالكامل لفيلم أو المسلسل ، "
-"بما في ذلك ، على سبيل المثال ، أسماء بديلة وما إذا كان مسلسل. يأخذ بعد البحث "
-"القادم من قاعدة بيانات معلومات الأفلام أسم المعرض."
+msgid "Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name."
+msgstr "عرض معلومات عنوان قاعدة بيانات معلومات الأفلام بالكامل لفيلم أو المسلسل ، بما في ذلك ، على سبيل المثال ، أسماء بديلة وما إذا كان مسلسل. يأخذ بعد البحث القادم من قاعدة بيانات معلومات الأفلام أسم المعرض."
 
 msgid "The Internet Movie Database"
 msgstr "قاعده بيانات الفيلم علي الإنترنت"
 
-msgid ""
-"This option allows you add words/phrases for IMDb to ignore when searching. "
-"Please separate the words/phrases with commas."
-msgstr ""
-"يتيح لك هذا الخيار إضافة كلمات / عبارات قاعدة بيانات معلومات الأفلام "
-"لتجاهلها عند البحث. يرجى فصل الكلمات / العبارات باستخدام الفواصل."
+msgid "This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas."
+msgstr "يتيح لك هذا الخيار إضافة كلمات / عبارات قاعدة بيانات معلومات الأفلام لتجاهلها عند البحث. يرجى فصل الكلمات / العبارات باستخدام الفواصل."
 
 msgid "Title Menu"
 msgstr "قائمه العناوين"
+
+msgid "Unknown category"
+msgstr ""
 
 msgid "User Rating"
 msgstr "تقييم المستخدم"

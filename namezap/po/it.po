@@ -22,8 +22,7 @@ msgid "Cancel"
 msgstr "Annull."
 
 msgid "Controls the visual appearance of the number zap dialog."
-msgstr ""
-"Controllare l'aspetto delle informazioni numero/nome canale nello zapping."
+msgstr "Controllare l'aspetto delle informazioni numero/nome canale nello zapping."
 
 msgid "NameZAP Setup"
 msgstr "Configurazione NameZAP"

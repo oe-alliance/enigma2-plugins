@@ -64,9 +64,7 @@ msgid "Rename this tag..."
 msgstr "Bu etiketin adını değiştir..."
 
 #, python-format
-msgid ""
-"Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo "
-"this!)"
+msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
 msgstr ""
 "Tüm \"%s\" etiketlerinin adını aşağıdaki şekilde değiştir:\n"
 "(Onaylarsanız, bir sonraki ekrandaki 'Vazgeç' seçimiyle iptal edemezsiniz!)"

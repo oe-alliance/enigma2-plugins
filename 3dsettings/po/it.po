@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - 3dsettings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-01 23:39+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2012-05-01 23:42+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -20,81 +20,59 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/3dsettings\n"
 
-#: .../enigma2-plugins/3dsettings/src/plugin.py:76
-msgid "off"
-msgstr "Off"
-
-#: .../enigma2-plugins/3dsettings/src/plugin.py:76
-msgid "on with side by side"
-msgstr "Attiva: Affiancato"
-
-#: .../enigma2-plugins/3dsettings/src/plugin.py:76
-msgid "on with top/bottom"
-msgstr "Attivo: Sopra/Sotto"
-
-#: .../enigma2-plugins/3dsettings/src/plugin.py:172
-msgid "Cancel"
-msgstr "Annull."
-
-#: .../enigma2-plugins/3dsettings/src/plugin.py:173
-msgid "OK"
-msgstr "Ok"
-
-#: .../enigma2-plugins/3dsettings/src/plugin.py:196
-msgid "Side by side"
-msgstr "Affiancato"
-
-#: .../enigma2-plugins/3dsettings/src/plugin.py:197
-msgid "Top/Bottom"
-msgstr "Sopra/Sotto"
-
-#: .../enigma2-plugins/3dsettings/src/plugin.py:199
-#: .../enigma2-plugins/3dsettings/src/plugin.py:202
 msgid "2D mode"
 msgstr "Mod. 2D"
 
-#: .../enigma2-plugins/3dsettings/src/plugin.py:207
-msgid "Show side by side option in extension menu"
-msgstr "Mostrare l'opzione \"Affiancato\" nel menu estensioni"
-
-#: .../enigma2-plugins/3dsettings/src/plugin.py:208
-msgid "Show top/bottom option in extension menu"
-msgstr "Mostrare l'opzione \"Sopra/Sotto\" nel menu estensioni"
-
-#: .../enigma2-plugins/3dsettings/src/plugin.py:209
-msgid "Switch OSD automatically"
-msgstr "Commutazione automatica OSD"
-
-#: .../enigma2-plugins/3dsettings/src/plugin.py:211
-msgid "Turn off display"
-msgstr "Spegnere il display"
-
-#: .../enigma2-plugins/3dsettings/src/plugin.py:214
-msgid "Offset"
-msgstr "Offset"
-
-#: .../enigma2-plugins/3dsettings/src/plugin.py:252
-#: .../enigma2-plugins/3dsettings/src/plugin.py:266
 msgid "3D settings"
 msgstr "3D: Impostazioni"
 
-#: .../enigma2-plugins/3dsettings/src/plugin.py:260
-msgid "3D: Enable side by side menu"
-msgstr "3D: abilitare il menu \"Affiancato\""
-
-#: .../enigma2-plugins/3dsettings/src/plugin.py:262
-msgid "3D: Enable top/bottom menu"
-msgstr "3D: abilitare il menu \"Sopra/Sotto\""
-
-#: .../enigma2-plugins/3dsettings/src/plugin.py:264
-msgid "3D: disable 3D menu"
-msgstr "3D: disabilitare menu 3D"
-
-#: .../enigma2-plugins/3dsettings/src/plugin.py:264
 msgid "3D: 2D menu"
 msgstr "3D: menu 2D"
 
-#: .../enigma2-plugins/3dsettings/src/plugin.py:266
+msgid "3D: Enable side by side menu"
+msgstr "3D: abilitare il menu \"Affiancato\""
+
+msgid "3D: Enable top/bottom menu"
+msgstr "3D: abilitare il menu \"Sopra/Sotto\""
+
+msgid "3D: disable 3D menu"
+msgstr "3D: disabilitare menu 3D"
+
+msgid "Cancel"
+msgstr "Annull."
+
 msgid "Change 3D settings"
 msgstr "Cambiare impostazioni 3D"
 
+msgid "OK"
+msgstr "Ok"
+
+msgid "Offset"
+msgstr "Offset"
+
+msgid "Show side by side option in extension menu"
+msgstr "Mostrare l'opzione \"Affiancato\" nel menu estensioni"
+
+msgid "Show top/bottom option in extension menu"
+msgstr "Mostrare l'opzione \"Sopra/Sotto\" nel menu estensioni"
+
+msgid "Side by side"
+msgstr "Affiancato"
+
+msgid "Switch OSD automatically"
+msgstr "Commutazione automatica OSD"
+
+msgid "Top/Bottom"
+msgstr "Sopra/Sotto"
+
+msgid "Turn off display"
+msgstr "Spegnere il display"
+
+msgid "off"
+msgstr "Off"
+
+msgid "on with side by side"
+msgstr "Attiva: Affiancato"
+
+msgid "on with top/bottom"
+msgstr "Attivo: Sopra/Sotto"

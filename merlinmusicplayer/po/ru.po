@@ -2,18 +2,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MerlinMusicPlayer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-17 15:07+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2015-10-07 18:57+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openpli.org\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.4\n"
 
+#, python-format
 msgid ""
 "%d files added to database!\n"
 "Press OK to close."
@@ -21,6 +21,7 @@ msgstr ""
 "%d файлов добавлено в базу данных!\n"
 "Нажмите ОК для закрытия."
 
+#, python-format
 msgid ""
 "%s\n"
 " added to database"
@@ -28,6 +29,7 @@ msgstr ""
 "%s\n"
 " добавлено в базу данных"
 
+#, python-format
 msgid ""
 "%s\n"
 " already exists in database!"
@@ -35,6 +37,7 @@ msgstr ""
 "%s\n"
 " уже существует в базе данных!"
 
+#, python-format
 msgid ""
 "%s\n"
 "appended to songlist"
@@ -42,6 +45,7 @@ msgstr ""
 "%s\n"
 "добавляется к списку композиций"
 
+#, python-format
 msgid ""
 "%s\n"
 "inserted and will be played as next song"
@@ -67,9 +71,11 @@ msgstr "Добавить музыкальные файлы в базу данн�
 msgid "Add selected song to a playlist"
 msgstr "Добавить выбранную композицию в плейлист"
 
+#, python-format
 msgid "Album (%s) -> Song List"
 msgstr "Альбом (%s) -> список композиций"
 
+#, python-format
 msgid "Albums (%d)"
 msgstr "Альбомы (%d)"
 
@@ -88,20 +94,20 @@ msgstr "Добавить файл в текущий играющий списо�
 msgid "Append file to current songlist"
 msgstr "Добавить файл в текущий список композиций"
 
+#, python-format
 msgid "Artist (%s) -> Album List"
 msgstr "Исполнитель (%s) -> список альбомов"
 
+#, python-format
 msgid "Artist (%s) -> Song List"
 msgstr "Исполнитель (%s) -> список композиций"
 
+#, python-format
 msgid "Artists (%d)"
 msgstr "Исполнители (%d)"
 
 msgid "Artists List"
 msgstr "Список исполнителей"
-
-msgid "Receiver Music Database"
-msgstr "База данных музыки в ресивере"
 
 msgid "Cancel"
 msgstr "Отмена"
@@ -165,20 +171,20 @@ msgstr ""
 msgid "Filebrowser startup path"
 msgstr "Стартовый путь для браузера файлов"
 
+#, python-format
 msgid "Filelist: %s"
 msgstr "Список файлов: %s"
 
+#, python-format
 msgid "Genre (%s) -> Song List"
 msgstr "Жанр (%s) -> список композиций"
 
 msgid "Genre List"
 msgstr "Список жанров"
 
+#, python-format
 msgid "Genres (%d)"
 msgstr "Жанры (%d)"
-
-msgid "Google image path"
-msgstr "Путь для изображений google"
 
 msgid "Insert file to current playing songlist and play next"
 msgstr "Вставить файл в текущий играющий список композиций и проиграть следующим"
@@ -228,12 +234,14 @@ msgstr "Играть"
 msgid "Play last used songlist after starting"
 msgstr "Воспроизвести последний список композиций после запуска"
 
+#, python-format
 msgid "Playlist (%s) -> Song List"
 msgstr "Плейлист (%s) -> список композиций"
 
 msgid "Playlists"
 msgstr "Плейлисты"
 
+#, python-format
 msgid "Playlists (%d)"
 msgstr "Плейлисты (%d)"
 
@@ -246,12 +254,16 @@ msgstr ""
 " 0 файлов добавлено в базу даных!\n"
 "Нажмите ОК для закрытия."
 
+msgid "Receiver Music Database"
+msgstr "База данных музыки в ресивере"
+
 msgid "Remember last path of filebrowser"
 msgstr "Запоминать последний путь для браузера файлов"
 
 msgid "Repeat is not available yet with cue-files!"
 msgstr "Повтор пока не доступен для cue-файлов!"
 
+#, python-format
 msgid "Response -> lyrics for: %s (%s)"
 msgstr "Ответ -> тест композиции для: %s (%s)"
 
@@ -261,15 +273,19 @@ msgstr "Путь сканирования для муз. файлов и доб�
 msgid "Search in iDream database"
 msgstr "Поиск в базе данных iDream "
 
+#, python-format
 msgid "Search results for \"%s\" in all albums"
 msgstr "Поиск результатов для \"%s\" во всех альбомах"
 
+#, python-format
 msgid "Search results for \"%s\" in all artists"
 msgstr "Поиск результов для \"%s\" во всех исполнителях"
 
+#, python-format
 msgid "Search results for \"%s\" in all titles"
 msgstr "Поиск результов для \"%s\" во всех названиях"
 
+#, python-format
 msgid "Search results for \"%s\" in title, artist or album"
 msgstr "Поиск результов для \"%s\" в названии, исполнителе и альбоме."
 
@@ -294,6 +310,7 @@ msgstr "Показать iDream в главном меню"
 msgid "Shuffle is not available yet with cue-files!"
 msgstr "Перемешивание пока не доступно для cue-файлов!"
 
+#, python-format
 msgid "Songs (%d)"
 msgstr "Композиции (%d)"
 
@@ -304,14 +321,13 @@ msgstr ""
 "Нет назначенных плейлистов.\n"
 "Вы действительно хотите создать новый плейлист?"
 
+#, python-format
 msgid "This Receiver can't decode %s streams!"
 msgstr "Этот ресивер не может декодировать  %s!"
 
+#, python-format
 msgid "Track %s"
 msgstr "Дорожка %s"
-
-msgid "Use google-images for cover art"
-msgstr "Использовать изображения google для обложки"
 
 msgid "Wait for screensaver (in min)"
 msgstr "Ожидание для скринсейвера (в мин)"

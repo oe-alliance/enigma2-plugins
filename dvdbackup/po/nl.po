@@ -82,13 +82,3 @@ msgid ""
 msgstr ""
 "genisoimage klus geklaard.\n"
 "De DVD map verwijderen?"
-
-#~ msgid "Could not install needed dvdbackup package!"
-#~ msgstr "Kon het benodigde dvdbackup pakket niet installeren!"
-
-#~ msgid ""
-#~ "mkisofs job done.\n"
-#~ "Delete DVD directory?"
-#~ msgstr ""
-#~ "mkisofs taak uitgevoerd.\n"
-#~ "Verwijder DVD map?"

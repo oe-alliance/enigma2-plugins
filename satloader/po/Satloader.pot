@@ -1,165 +1,114 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2-plugin-extensions-satloader\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-01 23:02+0100\n"
-"PO-Revision-Date: 2013-01-01 23:02+0100\n"
-"Last-Translator: Ismail Demir <ismail.demir@gmx.at>\n"
-"Language-Team: Ismail Demir <ismail.demir@gmx.at>\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: /home/ismail/enigma2-plugins/satloader/src/\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: .\n"
 
-#: plugin.py:54
-#: plugin.py:164
-#: plugin.py:282
-#: plugin.py:404
-msgid "Cancel"
-msgstr ""
-
-#: plugin.py:55
-msgid "Install"
-msgstr ""
-
-#: plugin.py:56
-msgid "Bouquet"
-msgstr ""
-
-#: plugin.py:57
-msgid "Multi Sat"
-msgstr ""
-
-#: plugin.py:77
-msgid "Press ok or green button to install satellites.xml"
-msgstr ""
-
-#: plugin.py:84
-#: plugin.py:177
-msgid "Please wait..."
-msgstr ""
-
-#: plugin.py:100
-#: plugin.py:101
-#: plugin.py:333
-#: plugin.py:334
-msgid "Downloading satellites failed!"
-msgstr ""
-
-#: plugin.py:104
-msgid "satellites.xml is updated"
-msgstr ""
-
-#: plugin.py:104
-#: plugin.py:199
-#: plugin.py:321
-msgid "GUI needs a restart to apply changes."
-msgstr ""
-
-#: plugin.py:104
-#: plugin.py:199
-#: plugin.py:321
-msgid "Do you want to restart the GUI now?"
-msgstr ""
-
-#: plugin.py:105
-#: plugin.py:200
-#: plugin.py:322
-msgid "Restart GUI now?"
-msgstr ""
-
-#: plugin.py:111
-#: plugin.py:239
-#: plugin.py:366
-msgid "GUI needs a restart."
-msgstr ""
-
-#: plugin.py:119
 msgid "About"
 msgstr ""
 
-#: plugin.py:165
-#: plugin.py:405
-msgid "Save"
+msgid "Bouquet"
 msgstr ""
 
-#: plugin.py:199
-msgid "selected bouquets are installed"
+msgid "Cancel"
 msgstr ""
 
-#: plugin.py:203
-msgid "Please select at least one bouquet"
+msgid "Do you want to restart the GUI now?"
 msgstr ""
 
-#: plugin.py:206
-#: plugin.py:207
-msgid "Downloading bouquets failed!"
-msgstr ""
-
-#: plugin.py:210
-#: plugin.py:337
-msgid "Downloading succesfull! Parsing ..."
-msgstr ""
-
-#: plugin.py:229
-msgid "Press ok button to select bouquet"
-msgstr ""
-
-#: plugin.py:233
-#: plugin.py:360
-msgid "Parsing failed!"
-msgstr ""
-
-#: plugin.py:281
-msgid "Source:"
-msgstr ""
-
-#: plugin.py:283
-msgid "OK"
-msgstr ""
-
-#: plugin.py:284
-msgid "Transponder"
-msgstr ""
-
-#: plugin.py:297
 msgid "Download:"
 msgstr ""
 
-#: plugin.py:321
-msgid "satellites.xml has been built."
+msgid "Downloading bouquets failed!"
 msgstr ""
 
-#: plugin.py:324
-msgid "Please select at least one satellite"
+msgid "Downloading satellites failed!"
 msgstr ""
 
-#: plugin.py:356
-msgid "Press ok button to select satellite"
+msgid "Downloading succesfull! Parsing ..."
 msgstr ""
 
-#: plugin.py:383
-#: plugin.py:395
-msgid "Transponder selection"
-msgstr ""
-
-#: plugin.py:434
 msgid "Frequency:"
 msgstr ""
 
-#: plugin.py:434
-msgid "Symbol Rate:"
+msgid "GUI needs a restart to apply changes."
 msgstr ""
 
-#: plugin.py:458
-msgid "has been saved."
+msgid "GUI needs a restart."
 msgstr ""
 
-#: plugin.py:461
+msgid "Install"
+msgstr ""
+
+msgid "Multi Sat"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Parsing failed!"
+msgstr ""
+
+msgid "Please select at least one bouquet"
+msgstr ""
+
+msgid "Please select at least one satellite"
+msgstr ""
+
 msgid "Please select at least one transponder"
 msgstr ""
 
+msgid "Please wait..."
+msgstr ""
+
+msgid "Press ok button to select bouquet"
+msgstr ""
+
+msgid "Press ok button to select satellite"
+msgstr ""
+
+msgid "Press ok or green button to install satellites.xml"
+msgstr ""
+
+msgid "Restart GUI now?"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Source:"
+msgstr ""
+
+msgid "Symbol Rate:"
+msgstr ""
+
+msgid "Transponder"
+msgstr ""
+
+msgid "Transponder selection"
+msgstr ""
+
+msgid "has been saved."
+msgstr ""
+
+msgid "satellites.xml has been built."
+msgstr ""
+
+msgid "satellites.xml is updated"
+msgstr ""
+
+msgid "selected bouquets are installed"
+msgstr ""
