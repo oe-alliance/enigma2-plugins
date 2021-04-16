@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shoutcast\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-26 12:31+0000\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: koivo <koivo@hdfreaks.cc>\n"
 "Language-Team: Dr.Best <dr.best@dreambox-tools.info>\n"
@@ -43,6 +43,9 @@ msgstr ">= 256 kbps"
 msgid ">= 64 kbps"
 msgstr ">= 64 kbps"
 
+msgid "Activate Picture in Picture"
+msgstr ""
+
 msgid "Add current playing stream to favorite"
 msgstr "Laufender Sender zur Favoritenliste hinzufügen"
 
@@ -69,6 +72,9 @@ msgstr "Bitrate: %s kbps"
 msgid "Cancel"
 msgstr "Abbruch"
 
+msgid "Choose action:"
+msgstr ""
+
 msgid "Config"
 msgstr "Konfiguration"
 
@@ -80,6 +86,9 @@ msgstr ""
 
 msgid "Create a directory for each stream"
 msgstr "Verzeichnis für jeden Stream generieren"
+
+msgid "Disable Picture in Picture"
+msgstr ""
 
 msgid "Do you really want to stop the recording?"
 msgstr "Soll die Aufnahme wirklich beendet werden?"
@@ -93,6 +102,10 @@ msgstr "Neuen Namen für Favoriten eingeben"
 msgid "Enter text to search for"
 msgstr "Suchtext eingeben"
 
+#, python-format
+msgid "Error create directory %s!"
+msgstr ""
+
 msgid "Error downloading cover..."
 msgstr ""
 
@@ -101,6 +114,9 @@ msgstr "Favoritenliste"
 
 msgid "Favorites"
 msgstr "Favoriten"
+
+msgid "First play streaming!"
+msgstr ""
 
 msgid "Genres"
 msgstr "Genres"
@@ -134,6 +150,12 @@ msgstr "Verbergen"
 
 msgid "Invalid Location"
 msgstr "Ungültiger Aufnahmepfad"
+
+msgid "Menu PiP"
+msgstr ""
+
+msgid "Move Picture in Picture"
+msgstr ""
 
 msgid "No streaming data found..."
 msgstr "Keine Daten gefunden..."
@@ -170,6 +192,10 @@ msgstr "In eine einzelne Datei speichern"
 msgid "SHOUTcast genre list"
 msgstr "SHOUTcast Genre Liste"
 
+#, fuzzy
+msgid "SHOUTcast setup"
+msgstr "SHOUTcast Genre Liste"
+
 #, python-format
 msgid "SHOUTcast station list for %s"
 msgstr "SHOUTcast Stationsliste für %s"
@@ -180,6 +206,9 @@ msgstr "Suche"
 #, python-format
 msgid "Searching SHOUTcast for %s..."
 msgstr "Durchsuche SHOUTcast nach %s..."
+
+msgid "Select record path for streamripper"
+msgstr ""
 
 msgid "Show cover:"
 msgstr ""
@@ -210,6 +239,12 @@ msgstr "Titel: %s"
 msgid "Title: n/a"
 msgstr "Titel: n/a"
 
+msgid "Zap focus to Picture in Picture"
+msgstr ""
+
+msgid "Zap focus to main screen"
+msgstr ""
+
 msgid "every five minutes"
 msgstr "alle 5 Minuten"
 
@@ -236,5 +271,5 @@ msgstr "Umbenennen"
 msgid "search-criteria %s"
 msgstr "Suchkriterium %s"
 
-#~ msgid "This Dreambox can't decode %s streams!"
-#~ msgstr "%s kann nicht dekodiert werden."
+msgid "streamripper not installed!"
+msgstr ""

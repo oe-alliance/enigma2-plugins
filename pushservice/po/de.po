@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 PushService Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2011-09-11 11:43+0100\n"
 "Last-Translator: betonme <glaserfrank(at)gmail.com>\n"
 "Language-Team: none\n"
@@ -40,7 +40,22 @@ msgstr ""
 msgid "  or if just want to say ''thanks'',\n"
 msgstr ""
 
+msgid "%H:%M"
+msgstr ""
+
+msgid "%Y.%m.%d %H:%M"
+msgstr ""
+
 msgid "%d.%m.%Y %H:%M"
+msgstr ""
+
+#, python-format
+msgid ""
+"Active timer list:\n"
+"%s"
+msgstr ""
+
+msgid "ActiveTimerPushed"
 msgstr ""
 
 msgid "Add Controller"
@@ -55,7 +70,16 @@ msgstr ""
 msgid "Add service"
 msgstr ""
 
+msgid "Allow HDD wake up"
+msgstr ""
+
 msgid "Back to main screen"
+msgstr ""
+
+msgid "Boot delay"
+msgstr ""
+
+msgid "C 2012 by betonme @ IHAD\n"
 msgstr ""
 
 msgid "Cancel"
@@ -70,7 +94,25 @@ msgstr ""
 msgid "Controllers"
 msgstr ""
 
+msgid "Crashlog(s) are attached"
+msgstr ""
+
+#, python-format
+msgid ""
+"Deactivated timer list:\n"
+"%s"
+msgstr ""
+
+msgid "DeactivatedTimerPushed"
+msgstr ""
+
+msgid "Delete crashlog(s)"
+msgstr ""
+
 msgid "Don't edit this manually unless you really know what you are doing"
+msgstr ""
+
+msgid "Donate {donate:s}"
 msgstr ""
 
 msgid "Dreambox name"
@@ -82,10 +124,63 @@ msgstr ""
 msgid "Exit without saving"
 msgstr ""
 
+#, python-format
+msgid ""
+"Finished record list:\n"
+"%s"
+msgstr ""
+
+msgid "FinishedTimerPushed"
+msgstr ""
+
+msgid "Found CrashLog(s)"
+msgstr ""
+
+msgid "Found active timer(s)"
+msgstr ""
+
+msgid "Found deactivated timer(s)"
+msgstr ""
+
+msgid "Free disk space limit has been reached:\n"
+msgstr ""
+
+msgid "Free space limit in GB"
+msgstr ""
+
+msgid "Free space warning"
+msgstr ""
+
+msgid "Growl Host name"
+msgstr ""
+
+msgid "Growl Port"
+msgstr ""
+
+msgid "IPKG Update Notification"
+msgstr ""
+
 msgid "If You can see this, Your configuration is correct."
 msgstr ""
 
+#, python-format
+msgid "Left:  %s"
+msgstr ""
+
+#, python-format
+msgid "Limit: %d GB\n"
+msgstr ""
+
+msgid "Mail from"
+msgstr ""
+
+msgid "Mail to or leave empty (From will be used)"
+msgstr ""
+
 msgid "Main"
+msgstr ""
+
+msgid "No network connection available."
 msgstr ""
 
 msgid "Nothing to push"
@@ -103,7 +198,17 @@ msgstr ""
 msgid "Page up"
 msgstr ""
 
+msgid "Password"
+msgstr ""
+
+#, python-format
+msgid "Path:  %s\n"
+msgstr ""
+
 msgid "Period in hours (0=disabled)"
+msgstr ""
+
+msgid "Provided by Dreambox Plugin {name:s} {version:s} - {plugin:s}\n"
 msgstr ""
 
 msgid "Push test"
@@ -112,10 +217,54 @@ msgstr ""
 msgid "PushService Config"
 msgstr ""
 
+msgid "PushService Exception in readXML: "
+msgstr ""
+
+msgid "PushService Exception in writeXML: "
+msgstr ""
+
+msgid "PushService Find module exception: "
+msgstr ""
+
+msgid "PushService Instantiate exception: "
+msgstr ""
+
+msgid "PushService Load exception: "
+msgstr ""
+
+#, python-format
+msgid "PushService Module %s:\n"
+msgstr ""
+
+msgid "PushService Module is not callable"
+msgstr ""
+
+msgid "PushService No configuration file present"
+msgstr ""
+
+msgid "PushService No module available: "
+msgstr ""
+
+msgid "PushService No module found: "
+msgstr ""
+
+#, python-format
+msgid "PushService PushMail: Sending message: %s"
+msgstr ""
+
 msgid "PushService Service push() exception"
 msgstr ""
 
 msgid "PushService Test exception:"
+msgstr ""
+
+msgid "PushService Warning attribute not available: "
+msgstr ""
+
+msgid "PushService Warning no class definition: "
+msgstr ""
+
+msgid "PushService Warning no subclass of base: "
 msgstr ""
 
 msgid "PushService autostart exception "
@@ -136,6 +285,20 @@ msgstr ""
 msgid "Really close without saving settings?"
 msgstr ""
 
+msgid "Record Notification"
+msgstr ""
+
+msgid "Record Summary"
+msgstr ""
+
+msgid ""
+"Record finished:\n"
+"  "
+msgstr ""
+
+msgid "Record started:\n"
+msgstr ""
+
 msgid "Remove Controller"
 msgstr ""
 
@@ -145,13 +308,43 @@ msgstr ""
 msgid "Remove controller"
 msgstr ""
 
+msgid "Remove deactivated timer(s)"
+msgstr ""
+
+msgid "Remove finished timer(s)"
+msgstr ""
+
 msgid "Remove service"
 msgstr ""
 
 msgid "Run on boot"
 msgstr ""
 
+msgid "SMTP Port"
+msgstr ""
+
+msgid "SMTP SSL"
+msgstr ""
+
+msgid "SMTP Server"
+msgstr ""
+
+msgid "SMTP TLS"
+msgstr ""
+
 msgid "Save and exit"
+msgstr ""
+
+msgid "Send as sticky"
+msgstr ""
+
+msgid "Send notification on record end"
+msgstr ""
+
+msgid "Send notification on record start"
+msgstr ""
+
+msgid "Send with priority"
 msgstr ""
 
 #, python-format
@@ -171,6 +364,12 @@ msgid "Skipping config option:"
 msgstr ""
 
 msgid "Start time (HH:MM)"
+msgstr ""
+
+msgid "Start update check if not done yet"
+msgstr ""
+
+msgid "Support {support:s}\n"
 msgstr ""
 
 msgid "Test"
@@ -217,47 +416,31 @@ msgid ""
 "Cancel?"
 msgstr ""
 
-msgid "Unexpected error: "
-msgstr ""
-
-msgid "[PushService] Exception in readXML: "
-msgstr ""
-
-msgid "[PushService] Exception in writeXML: "
-msgstr ""
-
-msgid "[PushService] Find module exception: "
-msgstr ""
-
-msgid "[PushService] Instantiate exception: "
-msgstr ""
-
-msgid "[PushService] Load exception: "
+msgid "The PopUp will be shown after all dialogs are closed."
 msgstr ""
 
 #, python-format
-msgid "[PushService] Module %s:\n"
+msgid ""
+"There are updates available:\n"
+"%s"
 msgstr ""
 
-msgid "[PushService] Module is not callable"
+msgid "Timeout"
 msgstr ""
 
-msgid "[PushService] No configuration file present"
+msgid "Unexpected error: "
 msgstr ""
 
-msgid "[PushService] No module available: "
+msgid "Updatefeed not available."
 msgstr ""
 
-msgid "[PushService] No module found: "
+msgid "User name"
 msgstr ""
 
-msgid "[PushService] Warning attribute not available: "
+msgid "Where to check free space"
 msgstr ""
 
-msgid "[PushService] Warning no class definition: "
-msgstr ""
-
-msgid "[PushService] Warning no subclass of base: "
+msgid "[FreeSpace] HDD is idle: "
 msgstr ""
 
 msgid "configuration"
@@ -265,4 +448,27 @@ msgstr ""
 
 #, python-format
 msgid "controller %s returned error(s)"
+msgstr ""
+
+msgid ""
+"{body:s}\n"
+"\n"
+msgstr ""
+
+msgid "{box:s} {name:s}"
+msgstr ""
+
+msgid "{box:s} {name:s}: {plugin:s}: {subject:s}"
+msgstr ""
+
+msgid "{box:s}: {subject:s}"
+msgstr ""
+
+msgid "{name:s}"
+msgstr ""
+
+msgid ""
+"{name:s} {plugin:s}\n"
+"{subject:s}\n"
+"{body:s}"
 msgstr ""

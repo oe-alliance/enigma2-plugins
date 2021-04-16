@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:02+0000\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2012-12-03 15:02+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,8 +17,33 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+msgid "1 minute"
+msgstr ""
+
+msgid "10 minutes"
+msgstr ""
+
+msgid "15 minutes"
+msgstr ""
+
+msgid "20 minutes"
+msgstr ""
+
+msgid "3 minutes"
+msgstr ""
+
+msgid "30 minutes"
+msgstr ""
+
+msgid "5 minutes"
+msgstr ""
+
 msgid "A video streaming solution based on VLC"
 msgstr "A video streaming solution based on VLC"
+
+#, fuzzy
+msgid "Audio"
+msgstr "Audio Codec"
 
 msgid "Audio Bitrate"
 msgstr "Audio Bitrate"
@@ -32,15 +57,35 @@ msgstr "Audio Codec"
 msgid "Audio Samplerate"
 msgstr "Audio Samplerate"
 
+#, fuzzy
+msgid "Cache Directory"
+msgstr "Movie Directory"
+
 msgid "Cancel"
 msgstr "Cancel"
+
+msgid "Choice of minutes to jump"
+msgstr ""
+
+msgid "Choose an action:"
+msgstr ""
 
 msgid "DVD Device (leave empty for default)"
 msgstr "DVD Device (leave empty for default)"
 
+msgid "Direct play"
+msgstr ""
+
+#, fuzzy
+msgid "Edit VLC Server"
+msgstr "edit server"
+
 msgid "Enter VLC-Server as FQDN or IP-Address"
 msgstr "Enter VLC-Server as FQDN or IP-Address"
 
+msgid "Enter subtitles as Track or Language"
+msgstr ""
+
 #, python-format
 msgid ""
 "Error loading filelist into server %(server)s:\n"
@@ -80,6 +125,9 @@ msgid ""
 msgstr ""
 "Error with VLC server:\n"
 "%s"
+
+msgid "FQDN"
+msgstr ""
 
 msgid "Filelist"
 msgstr "Filelist"
@@ -87,14 +135,32 @@ msgstr "Filelist"
 msgid "HTTP Port"
 msgstr "HTTP Port"
 
-msgid "List of known VLC-Server Profiles"
-msgstr "List of known VLC-Server Profiles"
+msgid "IP-Address"
+msgstr ""
+
+msgid ""
+"Latest compatible version VLC 2.0.7\n"
+"Setup VLC for PC:\n"
+"Tools -> Preferences -> All -> Interface -> Main Interface -> Select Web\n"
+"Find file c:/Program Files/VideoLAN/VLC/Lua/http/.hosts and insert your box ip (without #).\n"
+"Add shortcut to the startup of the background start VLC 'C:\\Program Files\\VideoLAN\\VLC\vlc.exe --intf telnet --extraintf http'"
+msgstr ""
+
+msgid "List of known profiles. Note: key info - help"
+msgstr ""
 
 msgid "Movie Directory"
 msgstr "Movie Directory"
 
 msgid "No more files in this directory"
 msgstr "No more files in this directory"
+
+#, python-format
+msgid ""
+"No ping from Server:\n"
+"%s\n"
+"%s"
+msgstr ""
 
 msgid "No previous file in this directory"
 msgstr "No previous file in this directory"
@@ -113,11 +179,28 @@ msgstr "OK"
 msgid "Overscan Correction [in %(percentsign)s of Video width]"
 msgstr "Overscan Correction [in %(percentsign)s of Video width]"
 
+msgid "Ping IP-Address when open Server"
+msgstr ""
+
 msgid "Playlist"
 msgstr "Playlist"
 
 msgid "Really delete this Server?"
 msgstr "Really delete this Server?"
+
+#, fuzzy
+msgid "Reset default"
+msgstr "set default"
+
+msgid "Save as .ts and play"
+msgstr ""
+
+#, fuzzy
+msgid "Select VLC-Server profile"
+msgstr "List of known VLC-Server Profiles"
+
+msgid "Select method?"
+msgstr ""
 
 msgid "Server Address"
 msgstr "Server Address"
@@ -128,7 +211,15 @@ msgstr "Server Profile Name"
 msgid "Serverlist"
 msgstr "Serverlist"
 
+#, fuzzy
+msgid "Set as default"
+msgstr "set default"
+
 msgid "Subtitle overlay"
+msgstr "Subtitle overlay"
+
+#, fuzzy
+msgid "Subtitles"
 msgstr "Subtitle overlay"
 
 msgid "Transcode MPEG/DVD Audio"
@@ -136,6 +227,18 @@ msgstr "Transcode MPEG/DVD Audio"
 
 msgid "Transcode MPEG/DVD Video"
 msgstr "Transcode MPEG/DVD Video"
+
+msgid "Use saving to Cache Directory"
+msgstr ""
+
+msgid "VLC < 2.x"
+msgstr ""
+
+msgid "VLC Media List"
+msgstr ""
+
+msgid "VLC Video Player"
+msgstr ""
 
 msgid "Video Bitrate"
 msgstr "Video Bitrate"
@@ -145,6 +248,9 @@ msgstr "Video Codec"
 
 msgid "Video Norm"
 msgstr "Video Norm"
+
+msgid "Yellow subtitles"
+msgstr ""
 
 msgid "add server"
 msgstr "add server"
@@ -161,6 +267,9 @@ msgstr "filter off"
 msgid "filter on"
 msgstr "filter on"
 
+msgid "languages"
+msgstr ""
+
 msgid "play DVD"
 msgstr "play DVD"
 
@@ -169,3 +278,6 @@ msgstr "refresh"
 
 msgid "set default"
 msgstr "set default"
+
+msgid "tracks"
+msgstr ""

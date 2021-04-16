@@ -3,7 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - AdvHdmi\n"
-"POT-Creation-Date: 2014-02-22 14:57+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2014-02-22 15:14+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -18,252 +19,168 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi\n"
 
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/plugin.py:51
-msgid "systemmenue"
-msgstr "Menu sistema"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/plugin.py:52
-msgid "pluginmenue"
-msgstr "Menu plugin"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/plugin.py:53
-msgid "extensions"
-msgstr "Estensioni"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/plugin.py:57
-msgid "Monday"
-msgstr "Lunedì"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/plugin.py:58
-msgid "Tuesday"
-msgstr "Martedì"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/plugin.py:59
-msgid "Wednesday"
-msgstr "Mercoledì"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/plugin.py:60
-msgid "Thursday"
-msgstr "Giovedì"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/plugin.py:61
-msgid "Friday"
-msgstr "Venerdì"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/plugin.py:62
-msgid "Saturday"
-msgstr "Sabato"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/plugin.py:63
-msgid "Sunday"
-msgstr "Domenica"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/plugin.py:127
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:88
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:412
-msgid "Advanced HDMI-Cec Setup"
-msgstr "Impostazioni Advanced HDMI-Cec"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/plugin.py:138
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/plugin.py:145
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/plugin.py:153
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:426
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:433
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:441
-msgid "manage when HDMI Cec is enabled"
-msgstr "Gestire quando abilitare HDMI-Cec"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:49
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:345
-msgid "Cancel"
-msgstr "Annullare"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:50
-msgid "Save"
-msgstr "Salvare"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:51
-msgid "Timespans"
-msgstr "Intervalli"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:93
-msgid "partially disable HdmiCec"
-msgstr "Disabilitare parzialmente HdmiCec"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:93
-msgid ""
-"Partially disable HDMI-Cec?\n"
-"It can be prevented only the signals that are sent from the Dreambox. "
-"Signals received by the Dreambox will not be prevented."
-msgstr ""
-"Disabilitare parzialmente HDMI-Cec?\n"
-"Possono essere intercettati solo i segnali inviati dal Dreambox. I segnali "
-"ricevuti dal Dreambox non possono essere intercettati."
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:95
-msgid "disable at GUI-start"
-msgstr "Disabilitare all'avvio GUI"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:95
-msgid "Should HDMI-Cec be disabled when GUI service startup?"
-msgstr ""
-"Determinare se disabiliatare HDMI-Cec all'avvio dell'interfaccia grafica."
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:97
-msgid "disable from webinterface"
-msgstr "Disabilitare nella interfaccia web"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:97
-msgid ""
-"Should HDMI-Cec be disabled when the commands are sent from the web "
-"interface?"
-msgstr ""
-"determinare se disabilitare HDMI-Cec nei comandi inviati tramite "
-"l'interfaccia web."
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:98
-msgid "enable Power On"
-msgstr "Abilitare su accensione?"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:98
-msgid "Should HDMI-Cec be send on Power On?"
-msgstr "Inviare HDMI-Cec su accensione?"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:99
-msgid "enable Power Off"
-msgstr "Abilitare su spegnimento"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:99
-msgid "Should HDMI-Cec be send on Power Off?"
-msgstr "Inviare HDMI-Cec su spegnimento?"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:100
-msgid "enable debug"
-msgstr "Abilitare debug"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:100
-msgid "Schould debugmessages be printed?"
-msgstr "Riportare i messaggi di debug?"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:101
-msgid "show in"
-msgstr "Mostrare nel"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:101
-msgid "Where should this setup be displayed?"
-msgstr "Menu nei quali inserire l'accesso  alle impostazioni."
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:138
-msgid "Version: "
-msgstr "Versione: "
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:140
-msgid "Registered HDMI-Cec-Hooks:"
-msgstr "Connessioni registrate HDMI-Cec:"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:142
-msgid "Hook"
-msgstr "Connessione"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:145
-msgid "No HDMI-Cec-Hooks are registered!"
-msgstr "Nessuna connessione HDMI-Cec Registrata."
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:146
-msgid "Advanced HDMI-Cec Control"
-msgstr "Impostazioni Avanzate HDMI-Cec"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:251
-msgid "From WD"
-msgstr "Dal"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:252
-msgid "To WD"
-msgstr "Al"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:253
-msgid "From"
-msgstr "Da"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:254
-msgid "To"
-msgstr "A"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:257
 msgid "Add"
 msgstr "Agg."
 
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:258
-msgid "Close"
-msgstr "Chiudere"
+msgid "Advanced HDMI-Cec Control"
+msgstr "Impostazioni Avanzate HDMI-Cec"
 
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:259
-msgid "Edit"
-msgstr "Modificare"
+msgid "Advanced HDMI-Cec Setup"
+msgstr "Impostazioni Advanced HDMI-Cec"
 
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:260
-msgid "Delete"
-msgstr "Rimuovere"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:279
-msgid "Disable HDMI-CEC chronologically"
-msgstr "Disabilitare HDMI-CEC cronologicamente"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:306
-msgid "Really delete this HDMI-Cec-Timespan Entry?"
-msgstr "Rimuovere la voce per l'intervallo HDMI-Cec?"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:346
-msgid "OK"
-msgstr "Ok"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:359
-msgid "from weekday"
-msgstr "Dal giorno"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:359
-msgid "From which day of the week, HDMI-Cec should be disabled?"
-msgstr "Giorno della settimana in cui iniziare a disabilitare HDMI-Cec."
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:360
-msgid "to weekday"
-msgstr "Al giorno"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:360
-msgid "To what day of the week, HDMI-Cec should be disabled?"
-msgstr "Giorno della settimana in cui cessare la disabilitazione di HDMI-Cec."
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:361
-msgid "from (HH:MI)"
-msgstr "Dalle (HH:MM)"
-
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:361
 msgid "At which time, HDMI-Cec should be disabled?"
 msgstr "Ora in cui iniziare  a disabilitare HDMI-Cec."
 
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:362
-msgid "to (HH:MI)"
-msgstr "Alle (HH:MM)"
+msgid "Cancel"
+msgstr "Annullare"
 
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:362
-msgid "Until the time at which, HDMI-Cec should be disabled?"
-msgstr "Ora in cui cessare la disabilitazione diHDMI.Cec."
+msgid "Close"
+msgstr "Chiudere"
 
-#: /media/dario/TREKSTOR/git/enigma2-plugins/advhdmi/src/AdvHdmiCecSetup.py:375
+msgid "Delete"
+msgstr "Rimuovere"
+
+msgid "Disable HDMI-CEC chronologically"
+msgstr "Disabilitare HDMI-CEC cronologicamente"
+
+msgid "Edit"
+msgstr "Modificare"
+
 msgid "Edit HDMI-Cec-Timespan"
 msgstr "Modificare l'intervallo HDMI-Cec"
 
-#~ msgid "use second timespan"
-#~ msgstr "Usare un secondo intervallo temporale"
+msgid "Friday"
+msgstr "Venerdì"
 
-#~ msgid "Do you want a further period of time to be used?"
-#~ msgstr "Determinare se impostare un ulteriore intervallo temporale."
+msgid "From"
+msgstr "Da"
 
-#~ msgid "Second timespan from"
-#~ msgstr "Secondo intervallo temporale: dalle"
+msgid "From WD"
+msgstr "Dal"
 
-#~ msgid "Second timespan to"
-#~ msgstr "Secondo intervallo temporale: alle"
+msgid "From which day of the week, HDMI-Cec should be disabled?"
+msgstr "Giorno della settimana in cui iniziare a disabilitare HDMI-Cec."
 
-#~ msgid "Advanced HDMI Cec Setup"
-#~ msgstr "Impostazioni Advanced HDMI Cec"
+msgid "Hook"
+msgstr "Connessione"
+
+msgid "Monday"
+msgstr "Lunedì"
+
+msgid "No HDMI-Cec-Hooks are registered!"
+msgstr "Nessuna connessione HDMI-Cec Registrata."
+
+msgid "OK"
+msgstr "Ok"
+
+msgid ""
+"Partially disable HDMI-Cec?\n"
+"It can be prevented only the signals that are sent from the Dreambox. Signals received by the Dreambox will not be prevented."
+msgstr ""
+"Disabilitare parzialmente HDMI-Cec?\n"
+"Possono essere intercettati solo i segnali inviati dal Dreambox. I segnali ricevuti dal Dreambox non possono essere intercettati."
+
+msgid "Really delete this HDMI-Cec-Timespan Entry?"
+msgstr "Rimuovere la voce per l'intervallo HDMI-Cec?"
+
+msgid "Registered HDMI-Cec-Hooks:"
+msgstr "Connessioni registrate HDMI-Cec:"
+
+msgid "Saturday"
+msgstr "Sabato"
+
+msgid "Save"
+msgstr "Salvare"
+
+msgid "Schould debugmessages be printed?"
+msgstr "Riportare i messaggi di debug?"
+
+msgid "Should HDMI-Cec be disabled when GUI service startup?"
+msgstr "Determinare se disabiliatare HDMI-Cec all'avvio dell'interfaccia grafica."
+
+msgid "Should HDMI-Cec be disabled when the commands are sent from the web interface?"
+msgstr "determinare se disabilitare HDMI-Cec nei comandi inviati tramite l'interfaccia web."
+
+msgid "Should HDMI-Cec be send on Power Off?"
+msgstr "Inviare HDMI-Cec su spegnimento?"
+
+msgid "Should HDMI-Cec be send on Power On?"
+msgstr "Inviare HDMI-Cec su accensione?"
+
+msgid "Sunday"
+msgstr "Domenica"
+
+msgid "Thursday"
+msgstr "Giovedì"
+
+msgid "Timespans"
+msgstr "Intervalli"
+
+msgid "To"
+msgstr "A"
+
+msgid "To WD"
+msgstr "Al"
+
+msgid "To what day of the week, HDMI-Cec should be disabled?"
+msgstr "Giorno della settimana in cui cessare la disabilitazione di HDMI-Cec."
+
+msgid "Tuesday"
+msgstr "Martedì"
+
+msgid "Until the time at which, HDMI-Cec should be disabled?"
+msgstr "Ora in cui cessare la disabilitazione diHDMI.Cec."
+
+msgid "Version: "
+msgstr "Versione: "
+
+msgid "Wednesday"
+msgstr "Mercoledì"
+
+msgid "Where should this setup be displayed?"
+msgstr "Menu nei quali inserire l'accesso  alle impostazioni."
+
+msgid "disable at GUI-start"
+msgstr "Disabilitare all'avvio GUI"
+
+msgid "disable from webinterface"
+msgstr "Disabilitare nella interfaccia web"
+
+msgid "enable Power Off"
+msgstr "Abilitare su spegnimento"
+
+msgid "enable Power On"
+msgstr "Abilitare su accensione?"
+
+msgid "enable debug"
+msgstr "Abilitare debug"
+
+msgid "extensions"
+msgstr "Estensioni"
+
+msgid "from (HH:MI)"
+msgstr "Dalle (HH:MM)"
+
+msgid "from weekday"
+msgstr "Dal giorno"
+
+msgid "manage when HDMI Cec is enabled"
+msgstr "Gestire quando abilitare HDMI-Cec"
+
+msgid "partially disable HdmiCec"
+msgstr "Disabilitare parzialmente HdmiCec"
+
+msgid "pluginmenue"
+msgstr "Menu plugin"
+
+msgid "show in"
+msgstr "Mostrare nel"
+
+msgid "systemmenue"
+msgstr "Menu sistema"
+
+msgid "to (HH:MI)"
+msgstr "Alle (HH:MM)"
+
+msgid "to weekday"
+msgstr "Al giorno"

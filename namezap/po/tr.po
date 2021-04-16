@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - namezap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-18 22:35+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2015-03-28 16:50+0200\n"
 "Last-Translator: Hasan Kiran <sunder67@hotmail.com>\n"
 "Language-Team: Turkish <>\n"
@@ -18,40 +18,29 @@ msgstr ""
 "X-Generator: Poedit 1.7.5\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/namezap\n"
 
-#: .../enigma2-plugins/namezap/src/NamezapSetup.py:33
-#: .../enigma2-plugins/namezap/src/NamezapSetup.py:74
-#: .../enigma2-plugins/namezap/src/plugin.py:107
-msgid "NameZAP Setup"
-msgstr "NameZAP Ayarı"
-
-#: .../enigma2-plugins/namezap/src/NamezapSetup.py:39
-msgid "Zapper Style"
-msgstr "Kanal Değişim  Stili"
-
-#: .../enigma2-plugins/namezap/src/NamezapSetup.py:39
-msgid "Controls the visual appearance of the number zap dialog."
-msgstr "Kanal değişim numaralarının görünümünü kontrol eder."
-
-#: .../enigma2-plugins/namezap/src/NamezapSetup.py:56
-msgid "OK"
-msgstr "Tamam"
-
-#: .../enigma2-plugins/namezap/src/NamezapSetup.py:57
 msgid "Cancel"
 msgstr "İptal"
 
-#: .../enigma2-plugins/namezap/src/plugin.py:17
-msgid "Only Number"
-msgstr "Sadece Numara"
+msgid "Controls the visual appearance of the number zap dialog."
+msgstr "Kanal değişim numaralarının görünümünü kontrol eder."
 
-#: .../enigma2-plugins/namezap/src/plugin.py:18
-msgid "Service Name"
-msgstr "Kanal İsmi"
+msgid "NameZAP Setup"
+msgstr "NameZAP Ayarı"
 
-#: .../enigma2-plugins/namezap/src/plugin.py:19
 msgid "Number and Name"
 msgstr "Numara ve İsim"
 
-#: .../enigma2-plugins/namezap/src/plugin.py:91
+msgid "OK"
+msgstr "Tamam"
+
+msgid "Only Number"
+msgstr "Sadece Numara"
+
+msgid "Service Name"
+msgstr "Kanal İsmi"
+
 msgid "Unknown Service"
 msgstr "Bilinmeyen Kanal"
+
+msgid "Zapper Style"
+msgstr "Kanal Değişim  Stili"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: auto timer Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2012-07-24 13:08+0330\n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -19,6 +19,19 @@ msgstr ""
 "X-Poedit-Language: Persian\n"
 "X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
 "X-Poedit-SearchPath-0: D:\\Dreambox\\Plugins\\enigma2-plugins\\autotimer\\src\n"
+
+msgid "  Any time"
+msgstr ""
+
+msgid " (if services are enabled, bouquets are ignored.)."
+msgstr ""
+
+msgid " - Version: "
+msgstr ""
+
+#, python-format
+msgid " - Version: %s"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -48,8 +61,16 @@ msgstr ""
 msgid "Add"
 msgstr "افزودن"
 
+#, fuzzy
+msgid "Add filters"
+msgstr "اضافه کردن یک فیلتر"
+
 msgid "Add new AutoTimer"
 msgstr "افزودن یک تایمر خودکار جدید"
+
+#, fuzzy
+msgid "Add services"
+msgstr "اضافه کردن یک سرویس"
 
 msgid "Add similar timer on conflict"
 msgstr ""
@@ -57,13 +78,20 @@ msgstr ""
 msgid "Add timer as disabled on conflict"
 msgstr ""
 
-msgid "Add zap timer instead of record timer?"
-msgstr "افزودن یک زپ تایمر در عوض تایمر ضبط "
-
 msgid "After event"
 msgstr "بعد از یک رویداد"
 
+#, fuzzy
+msgid "All channels"
+msgstr "کانال ها"
+
 msgid "All non-repeating timers"
+msgstr ""
+
+msgid "Allow double timer for different services"
+msgstr ""
+
+msgid "Always write config"
 msgstr ""
 
 msgid "Amount of recordings left"
@@ -72,11 +100,19 @@ msgstr ""
 msgid "Any service/recording"
 msgstr "هر سرویس / ضبط کردن"
 
+#, fuzzy
+msgid "Auto Timer"
+msgstr "ویرایش تایمر خودکار"
+
 msgid "Auto Timers"
 msgstr ""
 
 msgid "AutoTimer"
 msgstr ""
+
+#, fuzzy
+msgid "AutoTimer Context Menu"
+msgstr "باز کردن محتوا و متن منو"
 
 msgid "AutoTimer Editor"
 msgstr "ویرایشگر تایمر خودکار"
@@ -96,6 +132,9 @@ msgstr "سرویس تایمر خودکار"
 msgid "AutoTimer Settings"
 msgstr ""
 
+msgid "AutoTimer overview"
+msgstr "بازنگری یک تایمر خودکار"
+
 msgid "AutoTimer was added successfully"
 msgstr "تایمر خودکار بصورت موفقیت آمیز اضافه گردید "
 
@@ -107,6 +146,14 @@ msgstr "تایمر خودکار حذف گردید"
 
 msgid "AutoTimers"
 msgstr ""
+
+#, fuzzy
+msgid "AutoTimers were changed successfully."
+msgstr "تایمر خودکار بصورت موفقیت آمیز اضافه گردید "
+
+#, fuzzy
+msgid "Autotimer Settings"
+msgstr "سرویس تایمر خودکار"
 
 msgid "Begin of \"after event\" timespan"
 msgstr "شروع / بعد از یک رویداد / بازه زمانی"
@@ -141,11 +188,21 @@ msgstr "کانال ها"
 msgid "Check for uniqueness in"
 msgstr ""
 
+msgid "Check the event id (eit) and remove the timer if there is no corresponding EPG event. Due to compatibility issues with SerienRecorder and IPRec, only timer created by AutoTimer are affected."
+msgstr ""
+
 msgid "Choose target folder"
 msgstr "انتخاب پوشه مورد نظر"
 
 msgid "Classic"
 msgstr "کلاسیک"
+
+#, fuzzy
+msgid "Clone selected timer"
+msgstr "حذف تایمر خودکار انتخاب شده "
+
+msgid "Close"
+msgstr ""
 
 msgid "Close and forget changes"
 msgstr "بستن و فراموش کردن تغییرات"
@@ -153,13 +210,13 @@ msgstr "بستن و فراموش کردن تغییرات"
 msgid "Close and save changes"
 msgstr "بستن و ذخیره سازی تغییرات"
 
-msgid "Configure AutoTimer behavior"
-msgstr ""
-
 msgid "Congratulations"
 msgstr ""
 
 msgid "Control recording completely by service"
+msgstr ""
+
+msgid "Couldn't load config file!"
 msgstr ""
 
 msgid "Create a new AutoTimer."
@@ -190,10 +247,6 @@ msgstr "حذف کردن"
 msgid "Description"
 msgstr "توضیحات"
 
-#, python-format
-msgid "Do you really want to delete %s?"
-msgstr "%s? آیا واقعا قصد حذف دارید"
-
 msgid "EPG encoding"
 msgstr "کدگزاری برنامه راهنمای الکترونیک"
 
@@ -210,11 +263,19 @@ msgstr "ویرایش سرویس تایمر خودکار"
 msgid "Edit Timers and scan for new Events"
 msgstr ""
 
+#, fuzzy
+msgid "Edit filters"
+msgstr "ویرایش کردن فیلترها"
+
 msgid "Edit new timer defaults"
 msgstr "ویرایش یک پیش فرض جدید برای تایمر"
 
 msgid "Edit selected AutoTimer"
 msgstr "ویرایش تایمر خودکار انتخاب شده "
+
+#, fuzzy
+msgid "Edit services"
+msgstr "ویرایش کردن سرویس"
 
 msgid "Editing"
 msgstr "ویرایش"
@@ -246,6 +307,16 @@ msgstr "در انتهای / بعد از یک رویداد / بازه زمانی"
 msgid "End of timespan"
 msgstr "انتهای بازه زمانی "
 
+#, fuzzy
+msgid "Enter or edit description"
+msgstr "شرحی کوتاه و مختصر"
+
+msgid "Enter or edit match title"
+msgstr ""
+
+msgid "Everyday"
+msgstr ""
+
 msgid "Exact match"
 msgstr "سازگاری دقیق"
 
@@ -254,6 +325,9 @@ msgstr "حذف و رد"
 
 msgid "Execute \"after event\" during timespan"
 msgstr "اجرا / بعد از یک رویداد / در طول یک بازه زمانی"
+
+msgid "Exit"
+msgstr ""
 
 msgid "FAQ"
 msgstr ""
@@ -275,6 +349,7 @@ msgid ""
 "%d Timer were added and\n"
 "%d modified,\n"
 "%d conflicts encountered,\n"
+"%d unchanged,\n"
 "%d similars added."
 msgstr ""
 
@@ -283,6 +358,10 @@ msgstr ""
 
 msgid "Frequently asked questions about the AutoTimer"
 msgstr ""
+
+#, fuzzy
+msgid "Fri"
+msgstr "جمعه"
 
 msgid "Friday"
 msgstr "جمعه"
@@ -296,11 +375,39 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
+msgid "Here you can specify whether simultaneous timers of the same program can be created. This allows simultaneous recording of a program with different resolutions. (e.g. SD service and HD service)"
+msgstr ""
+
+msgid "Hour"
+msgstr ""
+
+msgid "If 0, the popup will remain open."
+msgstr ""
+
 msgid "If a timer conflict occurs, AutoTimer will search outside the timespan for a similar event and add it."
 msgstr ""
 
+msgid "If enabled, the polling will be skipped if EPGRefresh is currently running."
+msgstr ""
+
+msgid "If enabled, the polling will be skipped if a recording is in progress."
+msgstr ""
+
+msgid "If specified bouquets"
+msgstr ""
+
+#, fuzzy
+msgid "If specified services"
+msgstr "ویرایش کردن سرویس"
+
+msgid "If specified services or bouquets"
+msgstr ""
+
+msgid "If this is disabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
+msgstr ""
+
 #, python-format
-msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80%% of the it."
+msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80% of the it."
 msgstr ""
 
 msgid "If this is selected, the name of the respective AutoTimer will be added as a tag to timers created by this plugin."
@@ -323,6 +430,10 @@ msgstr "شامل بودن"
 
 msgid "Include \"AutoTimer\" in tags"
 msgstr ""
+
+#, fuzzy
+msgid "Include 'AutoTimer' in tags"
+msgstr "ویرایش فیلتر تایمر خودکار"
 
 msgid "Include AutoTimer name in tags"
 msgstr ""
@@ -368,8 +479,21 @@ msgstr "بالاترین بازه بر حسب دقیقه"
 msgid "Maximum event duration to match. If an event is longer than this amount of time (without offset) it won't be matched."
 msgstr ""
 
+#, fuzzy, python-format
+msgid ""
+"Message\n"
+"Do you really want to delete %s?"
+msgstr "%s? آیا واقعا قصد حذف دارید"
+
+msgid "Minute"
+msgstr ""
+
 msgid "Modify existing timers"
 msgstr ""
+
+#, fuzzy
+msgid "Mon"
+msgstr "دوشنبه"
 
 msgid "Monday"
 msgstr "دوشنبه"
@@ -439,11 +563,12 @@ msgstr ""
 msgid "Open Context Menu"
 msgstr "باز کردن محتوا و متن منو"
 
-msgid "Override found with alternative service"
-msgstr "در حالت سرویس جایگزین هیچ چیزی در بر نداشت"
-
 msgid "Please provide a Text to match"
 msgstr "لطفا یک متن سازگار وارد نمایید "
+
+#, python-format
+msgid "Poll Interval (in %s)"
+msgstr ""
 
 msgid "Poll Interval (in mins)"
 msgstr ""
@@ -451,8 +576,20 @@ msgstr ""
 msgid "Poll automatically"
 msgstr ""
 
+msgid "Poll unit"
+msgstr ""
+
+msgid "Poll unit selects whether the poll interval should be interpreted in hours or minutes."
+msgstr ""
+
+msgid "Popup timeout in seconds"
+msgstr ""
+
 msgid "Power state to change to after recordings. Select \"standard\" to not change the default behavior of enigma2 or values changed by yourself."
 msgstr "تغییر وضعیت توان بعد از ضبط کردن . انتخاب شده / استاندارد / غیر قابل تغییر به خاطر پیش فرض های انیگما 2 و یا اینکه مقادیر توسط شما تغییر کرده است"
+
+msgid "Preview"
+msgstr "پیش نمایش"
 
 msgid "Preview AutoTimer"
 msgstr "پیش نمایش تایمر خودکار"
@@ -475,6 +612,9 @@ msgstr ""
 msgid "Record on"
 msgstr "ضبط بروی"
 
+msgid "Remove not existing events"
+msgstr ""
+
 msgid "Remove selected AutoTimer"
 msgstr "حذف تایمر خودکار انتخاب شده "
 
@@ -487,8 +627,35 @@ msgstr "تنظیم مجدد تعداد دفعات "
 msgid "Restrict \"after event\" to a certain timespan?"
 msgstr "محدود شده / بعد از رویدادها / در یک بازه زمانی خاص "
 
+msgid ""
+"Restrict autotimer to bouquets.\n"
+"Use the blue key to edit the bouquet filter."
+msgstr ""
+
+msgid ""
+"Restrict autotimer to specific days.\n"
+"Use the yellow key to edit the day filter."
+msgstr ""
+
+msgid ""
+"Restrict autotimer to specific services, channels.\n"
+"Use the blue key to edit the service filter."
+msgstr ""
+
+msgid "Restrict to days"
+msgstr ""
+
 msgid "Restrict to events on certain dates"
 msgstr "محدود سازی یک رویداد در یک زمان خاص"
+
+msgid "Restrict to specific bouquets"
+msgstr ""
+
+msgid "Restrict to specific services"
+msgstr ""
+
+msgid "Sat"
+msgstr ""
 
 msgid "Saturday"
 msgstr "شنبه"
@@ -535,6 +702,9 @@ msgstr "تنظیم بازه نهایی"
 msgid "Set this NO to disable this AutoTimer."
 msgstr "نه کردن غیر فعال کردن تایمر خودکار"
 
+msgid "Set timer type: zap, simple record, zap+record (always zap to service before start record)."
+msgstr ""
+
 msgid "Setup"
 msgstr "راه اندازی"
 
@@ -559,16 +729,35 @@ msgstr ""
 msgid "Show notification on similars"
 msgstr ""
 
+msgid "Skip poll during epg refresh"
+msgstr ""
+
+msgid "Skip poll during records"
+msgstr ""
+
 msgid "Sort AutoTimer"
 msgstr "دسته بندی تایمر خودکار"
 
 msgid "Sort Time"
 msgstr "دسته بندی زمان"
 
+msgid "Startup delay (in min)"
+msgstr ""
+
+msgid "Startup delay is the number of minutes before polling after a reboot, so as to not delay enigma2 startup time."
+msgstr ""
+
+#, fuzzy
+msgid "Sun"
+msgstr "یک شنبه"
+
 msgid "Sunday"
 msgstr "یک شنبه"
 
 msgid "Support \"Fast Scan\"?"
+msgstr ""
+
+msgid "Support 'Fast Scan'?"
 msgstr ""
 
 msgid "Tags"
@@ -596,6 +785,9 @@ msgstr ""
 msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
 msgstr ""
 
+msgid "The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "
+msgstr ""
+
 msgid "The control menu hides less frequently used options of the plugin, including the configuration and default settings for new AutoTimers./n/nWhile you can just open the menu and take a look for yourself, let's go through the available options:/n - Help:/n   What you are looking at right now/n - Preview:/n   Simulate EPG search, helps finding errors in your setup./n - Import existing Timer:/n   Create a new AutoTimer based on an existing regular timer./n - Import from EPG:/n   Create an AutoTimer based on an EPG event./n - Setup:/n   Generic configuration of the plugin./n - Edit new timer defaults:/n   Configure default values for new AutoTimers./n - Create a new timer using the wizard/classic editor:/n   Use the non-default editor to create a new AutoTimer."
 msgstr ""
 
@@ -611,6 +803,11 @@ msgstr "مطابقت ویژگی ها ضروری است"
 msgid "This FAQ is supposed to help everyone unwilling to help themselves by reading all the provided help available, and those who did not find a solution to their problems within the provided documentation./n/nTo make these hints a little easier to read, they are split up on multiple pages. You can go to the next page using the BLUE button on your remote control and back using the YELLOW one. Pressing the RED button or EXIT will close the FAQ."
 msgstr ""
 
+msgid ""
+"This allows you to apply other filters.\n"
+"Use the yellow key to edit other filters."
+msgstr ""
+
 msgid "This help screen is supposed to give you a quick look at everything the AutoTimer has to offer./nYou can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by selecting it from the control menu using the MENU button from the regular entry point of the plugin (more on that later)./n/n/nBut you really should consider to take the few minutes it takes to read these help pages."
 msgstr ""
 
@@ -620,7 +817,8 @@ msgstr "این نامی است که شما می توانید به تایمر خ�
 msgid "This is mostly a matter of taste./nThe Wizard provides you with a reduced set of options and presents them in smaller sets at a time. It is mostly aimed at users not very experienced with this plugin or the 'expert' level features of enigma2./n/nYou can check out the 'classic' editor by opening an existing timer from the overview and if you prefer this view over the wizard you can change the default editor in the setup dialog."
 msgstr ""
 
-msgid "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
+#, python-format
+msgid "This is the delay in %s that the AutoTimer will wait after doing a search before searching the EPG again."
 msgstr ""
 
 msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
@@ -634,6 +832,10 @@ msgstr ""
 
 msgid "This toggles the behavior on timer conflicts. If an AutoTimer matches an event that conflicts with an existing timer it will not ignore this event but add it disabled."
 msgstr ""
+
+#, fuzzy
+msgid "Thur"
+msgstr "پنج شنبه"
 
 msgid "Thursday"
 msgstr "پنج شنبه"
@@ -656,11 +858,12 @@ msgstr ""
 msgid "Title and all descriptions"
 msgstr ""
 
-msgid "Tuesday"
+#, fuzzy
+msgid "Tue"
 msgstr "سه شنبه"
 
-msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
-msgstr ""
+msgid "Tuesday"
+msgstr "سه شنبه"
 
 msgid "Upper bound of timespan."
 msgstr "بالا ترین مرز محدوده زمانی"
@@ -670,6 +873,17 @@ msgstr "بالا ترین حد محدوده زمانی . هیچ چیزی قبل 
 
 msgid "Use a custom location"
 msgstr "استفاده از یک مکان سفارشی"
+
+msgid "Use automatic selection of alternates."
+msgstr ""
+
+#, fuzzy
+msgid "Use other filters"
+msgstr "ویرایش کردن فیلترها"
+
+#, fuzzy
+msgid "Wed"
+msgstr "روزهای هفتگی"
 
 msgid "Wednesday"
 msgstr "چهارشنبه"
@@ -707,7 +921,7 @@ msgstr ""
 msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."
 msgstr ""
 
-msgid "With this option enabled the channel to record on can be changed to a alternative service it is restricted to."
+msgid "With this option enabled the channel to record will be selected automaticliy using your list of alternates."
 msgstr ""
 
 msgid "With this option you can restrict the AutoTimer to a certain amount of scheduled recordings. Set this to 0 to disable this functionality."
@@ -719,7 +933,16 @@ msgstr "ویزارد"
 msgid "Wizard or Classic Editor?"
 msgstr ""
 
+msgid "Write the config file after every change which the user quits by saving."
+msgstr ""
+
 msgid "Yes"
+msgstr ""
+
+msgid "Yes, and delete all timers generated by this autotimer"
+msgstr ""
+
+msgid "Yes, but keep timers generated by this autotimer"
 msgstr ""
 
 msgid "Yes, keep them."
@@ -764,6 +987,12 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid "[B]  "
+msgstr ""
+
+msgid "[S]  "
+msgstr ""
+
 #. TRANSLATORS: AutoTimer title in MovieList (automatically opens importer, I consider this no further interaction)
 msgid "add AutoTimer"
 msgstr ""
@@ -771,12 +1000,6 @@ msgstr ""
 #. TRANSLATORS: AutoTimer title in EventInfo dialog (requires the user to select an event to base the AutoTimer on)
 msgid "add AutoTimer..."
 msgstr "اضافه کردن تایمر خودکار "
-
-msgid "add filters"
-msgstr "اضافه کردن یک فیلتر"
-
-msgid "add services"
-msgstr "اضافه کردن یک سرویس"
 
 msgid "auto"
 msgstr "خودکار"
@@ -793,25 +1016,24 @@ msgstr "جعبه جستجوی حساس"
 msgid "config changed."
 msgstr ""
 
-msgid "delete"
-msgstr "حذف کردن"
-
 msgid "description match"
 msgstr ""
 
 msgid "disable"
 msgstr "غیر فعال کردن"
 
+#, fuzzy
+msgid "disabled"
+msgstr "غیر فعال کردن"
+
 msgid "do nothing"
 msgstr "انجام ندادن هیچ کاری"
 
-msgid "edit filters"
-msgstr "ویرایش کردن فیلترها"
-
-msgid "edit services"
-msgstr "ویرایش کردن سرویس"
-
 msgid "enable"
+msgstr "فعال کردن"
+
+#, fuzzy
+msgid "enabled"
 msgstr "فعال کردن"
 
 msgid "exact match"
@@ -822,6 +1044,9 @@ msgstr "رفتن به حالت استندبای عمیق"
 
 msgid "go to standby"
 msgstr "رفتن به حالت استندبای"
+
+msgid "hours"
+msgstr ""
 
 msgid "in Description"
 msgstr "در حال توضیح"
@@ -834,6 +1059,9 @@ msgstr "عنوان"
 
 msgid "mins"
 msgstr "دقیقه ها"
+
+msgid "minutes"
+msgstr ""
 
 msgid "missing parameter \"id\""
 msgstr ""
@@ -857,20 +1085,12 @@ msgstr ""
 msgid "unable to find timer with id %i"
 msgstr ""
 
+msgid "unknown"
+msgstr ""
+
 msgid "zap"
 msgstr ""
 
-#~ msgid "Ammount of recordings left"
-#~ msgstr "چه میزانی از ضبط باقی مانده است"
-
-#~ msgid "AutoTimer overview"
-#~ msgstr "بازنگری یک تایمر خودکار"
-
-#~ msgid "Maximum event duration to match. If an event is longer than this ammount of time (without offset) it won't be matched."
-#~ msgstr "بیشترین بازه رویدادها برای سازگار شدن . اگر یک رویداد بیشتر از زمان تعیین شده باشد ( بدون آفست ) آن سازگار نحواهد شد."
-
-#~ msgid "Preview"
-#~ msgstr "پیش نمایش"
-
-#~ msgid "Select \"exact match\" to enforce \"Match title\" to match exactly or \"partial match\" if you only want to search for a part of the event title."
-#~ msgstr "انتخاب / کاملا سازگار/ اجرا گذاشتن / کاملا سازگار یا / سازگار نسبی / اگر شما قصد جستجو بخشی از عنوان رخدادها را دارید  "
+#, fuzzy
+msgid "zap and record"
+msgstr "ضبط کردن"

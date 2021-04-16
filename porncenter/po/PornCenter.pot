@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,64 +17,48 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/plugin.py:55
 msgid "Adult streaming plugins for dm800/dm8000"
 msgstr ""
 
-#: ../src/plugin.py:255
 msgid "Buffer device:"
 msgstr ""
 
-#: ../src/plugin.py:256
 msgid "Buffer file handling:"
 msgstr ""
 
-#: ../src/plugin.py:254
 msgid "Buffer:"
 msgstr ""
 
-#: ../src/plugin.py:395
 msgid "Delete this movie?"
 msgstr ""
 
-#: ../src/plugin.py:253
 msgid "Description:"
 msgstr ""
 
-#: ../src/plugin.py:120
 #, python-format
 msgid "Downloading movie: %s"
 msgstr ""
 
-#: ../src/plugin.py:382
 msgid "Error while getting video url!"
 msgstr ""
 
-#: ../src/plugin.py:252
 msgid "Name:"
 msgstr ""
 
-#: ../src/plugin.py:54 ../src/plugin.py:108 ../src/plugin.py:171
-#: ../src/plugin.py:189 ../src/plugin.py:237
 msgid "Porn Center"
 msgstr ""
 
-#: ../src/plugin.py:194
 msgid "Select"
 msgstr ""
 
-#: ../src/plugin.py:159
 msgid "Stop playing this movie?"
 msgstr ""
 
-#: ../src/plugin.py:58
 msgid "ask me"
 msgstr ""
 
-#: ../src/plugin.py:58
 msgid "delete"
 msgstr ""
 
-#: ../src/plugin.py:58
 msgid "keep on device"
 msgstr ""

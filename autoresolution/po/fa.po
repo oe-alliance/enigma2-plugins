@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: auto resolution Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Persian Prince <persianprince@persianpros.org>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -14,6 +14,15 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
+
+msgid "Alternative resolution when native not supported"
+msgstr ""
+
+msgid "Ask before changing videomode"
+msgstr ""
+
+msgid "Auto frame rate (refresh need 'multi')"
+msgstr ""
 
 msgid "Autoresolution"
 msgstr "رزولوشن خودکار"
@@ -30,14 +39,18 @@ msgstr "تغییر رزولوشن خودکار"
 msgid "Autoresolution is not working in Scart/DVI-PC Mode"
 msgstr " کار نمی کندScart/DVI-PC رزولیشن خودکار برای مد"
 
-msgid "Autoresolution settings"
-msgstr "تنظیمات خودکار رزولوشن"
-
 msgid "Autoresolution videomode setup"
 msgstr "راه اندازی  رزولیشن خودکار برای تصاویر ویدئویی"
 
 msgid "Cancel"
 msgstr "لغو کردن"
+
+#, python-format
+msgid ""
+"Changing framerate for current service?\n"
+"Current framerate: %s\n"
+"New framerate: %s\n"
+msgstr ""
 
 msgid "Deinterlacer mode for interlaced content"
 msgstr ""
@@ -57,11 +70,34 @@ msgstr "1080p25 فعالسازی مد"
 msgid "Enable 1080p30 Mode"
 msgstr "1080p30 فعال سازی"
 
+#, fuzzy
+msgid "Enable 2160p24 Mode"
+msgstr "720p24  فعال سازی مد"
+
+#, fuzzy
+msgid "Enable 2160p25 Mode"
+msgstr "1080p25 فعالسازی مد"
+
+#, fuzzy
+msgid "Enable 2160p30 Mode"
+msgstr "1080p30 فعال سازی"
+
 msgid "Enable 720p24 Mode"
+msgstr "720p24  فعال سازی مد"
+
+#, fuzzy
+msgid "Enable 720p50 Mode"
 msgstr "720p24  فعال سازی مد"
 
 msgid "Enable Autoresolution"
 msgstr "فعال سازی خودکار رزولوشن"
+
+msgid "Exit"
+msgstr ""
+
+#, fuzzy
+msgid "FHD 50/60HZ Progressive Mode"
+msgstr "مد تصاعدی برای فرکانس های 30/60 هرتز اس دی"
 
 msgid "HD Interlace Mode"
 msgstr "مد در هم آمیختن برای تصاویر اچ دی"
@@ -69,11 +105,34 @@ msgstr "مد در هم آمیختن برای تصاویر اچ دی"
 msgid "HD Progressive Mode"
 msgstr "مد تصاعدی برای تصاویر اچ دی"
 
+msgid "Lock timeout"
+msgstr ""
+
+#, fuzzy
+msgid "Manual resolution"
+msgstr "فعال سازی خودکار رزولوشن"
+
+#, fuzzy
+msgid "Manual resolution is not working in Scart/DVI-PC mode!"
+msgstr " کار نمی کندScart/DVI-PC رزولیشن خودکار برای مد"
+
+msgid "Message timeout"
+msgstr ""
+
+msgid "Mode"
+msgstr ""
+
 msgid "OK"
 msgstr "اوکی"
 
+msgid "Please select a resolution..."
+msgstr ""
+
 msgid "Refresh Rate"
 msgstr "نرخ بازخوانی"
+
+msgid "Return back without confirmation after 10 sec."
+msgstr ""
 
 msgid "Running in testmode"
 msgstr "راه اندازی در حالت آزمایشی"
@@ -93,8 +152,40 @@ msgstr "مد در هم آمیختن برای فرکانس های 60 /30 هرتز
 msgid "SD 30/60HZ Progressive Mode"
 msgstr "مد تصاعدی برای فرکانس های 30/60 هرتز اس دی"
 
+msgid "Show 'Manual resolution' in extensions menu"
+msgstr ""
+
 msgid "Show info screen"
 msgstr "نمایش اطلاعات صفحه نمایش"
+
+msgid "This resolution is OK?"
+msgstr ""
+
+#, fuzzy
+msgid "UHD Interlace Mode"
+msgstr "مد در هم آمیختن برای تصاویر اچ دی"
+
+#, fuzzy
+msgid "UHD Progressive Mode"
+msgstr "مد تصاعدی برای تصاویر اچ دی"
+
+msgid "Use 60HZ instead 30HZ"
+msgstr ""
+
+msgid "Video: "
+msgstr ""
+
+#, python-format
+msgid "Videocontent: %sx%s%s %sHZ"
+msgstr ""
+
+#, python-format
+msgid "Videomode: %s"
+msgstr ""
+
+#, python-format
+msgid "Videomode: %s %s %s"
+msgstr ""
 
 msgid "auto"
 msgstr "خودکار"
@@ -104,6 +195,9 @@ msgstr "تند و سریع"
 
 msgid "default"
 msgstr "پیش فرض"
+
+msgid "manual"
+msgstr ""
 
 msgid "off"
 msgstr "خاموش"

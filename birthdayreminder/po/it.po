@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - birthday reminder\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2011-12-13 23:25+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -11,14 +11,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: /media/TREKSTOR/enigma2/BirthdayReminder/"
-"BirthdayReminder\n"
+"X-Poedit-Basepath: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: Italy\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SearchPath-0: /media/TREKSTOR/enigma2/BirthdayReminder/"
-"BirthdayReminder\n"
+"X-Poedit-SearchPath-0: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder\n"
 
 #, python-format
 msgid "%s will turn %s in %s!"
@@ -88,6 +86,10 @@ msgstr "Annullare"
 msgid "Change path"
 msgstr "Mod. percorso"
 
+#, fuzzy
+msgid "Choose the filename:"
+msgstr "Nome file compleanni:"
+
 msgid "Date format:"
 msgstr "Formato data"
 
@@ -115,6 +117,9 @@ msgstr "Mod. compleanni"
 
 msgid "Edit the selected entry"
 msgstr "Mod. voce selezionata"
+
+msgid "Enter the name of the person:"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -217,6 +222,9 @@ msgstr ""
 "Oggi è il compleanno di %s!\n"
 "\n"
 "Data di nascita: %s - Età: %s."
+
+msgid "VirtualKeyBoard"
+msgstr ""
 
 msgid "What do you want to do?"
 msgstr "Cosa si desidera fare?"

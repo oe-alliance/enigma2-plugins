@@ -24,8 +24,7 @@ msgid "Countdown:"
 msgstr "Conto alla rovescia: "
 
 msgid "Error while creating screenshot. You need grab version 0.8 or higher!"
-msgstr ""
-"Errone nella creazione screenshot! E' richiesto \"grab\" v0.8 o superiore!"
+msgstr "Errone nella creazione screenshot! E' richiesto \"grab\" v0.8 o superiore!"
 
 msgid "Mosaic"
 msgstr "Mosaic"

@@ -174,12 +174,3 @@ msgstr "توقف زمان در ام اس قبل از فعال سازی"
 
 msgid "sets the Audio Delay (LipSync)"
 msgstr " (LipSync) تنظیم تاخیر صدا بر حسب"
-
-#~ msgid "Save"
-#~ msgstr "ذخیره سازی"
-
-#~ msgid "Select channel audio"
-#~ msgstr "انتخاب یک کانال صوتی"
-
-#~ msgid "Switch audio"
-#~ msgstr "سوئیچ صوتی"

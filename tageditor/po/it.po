@@ -67,12 +67,8 @@ msgid "Rename this tag..."
 msgstr "Rinominare etichetta..."
 
 #, python-format
-msgid ""
-"Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo "
-"this!)"
-msgstr ""
-"Sostituire ovunque l'etichetta \"%s\" con:   (Nota: \"Annull.\" non potrà "
-"annullare!)"
+msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
+msgstr "Sostituire ovunque l'etichetta \"%s\" con:   (Nota: \"Annull.\" non potrà annullare!)"
 
 #. TRANSLATORS: this is the string used in the movie context menu for TagEditor
 msgid "edit tags"

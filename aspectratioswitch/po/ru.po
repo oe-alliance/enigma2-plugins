@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Aspect Ratio Switch V.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: litvcom\n"
 "Language-Team: litvcom\n"
@@ -37,6 +37,7 @@ msgstr "4:3 Панорама"
 msgid "Aspect Ratio Switch setup"
 msgstr "Сотношение сторон"
 
+#, python-format
 msgid ""
 "Aspect ratio switched from:\n"
 "   %s\n"
@@ -57,6 +58,7 @@ msgstr "Bouquet +/- (длинное)"
 msgid "Cancel"
 msgstr "Отменить"
 
+#, python-format
 msgid "Changing keymap failed (%s)."
 msgstr "Не удалось сменить назначение (%s)."
 
@@ -66,6 +68,7 @@ msgstr "Меню расширений"
 msgid "Help key long"
 msgstr "HELP (длинное)"
 
+#, python-format
 msgid "Include %s"
 msgstr "Включать %s"
 
@@ -102,17 +105,12 @@ msgstr "Показывать инф. переключение"
 msgid "Startup aspect ratio"
 msgstr "Задать соотношение при запуске"
 
-msgid ""
-"Use the configured key(s) on your remote control to switch aspect ratio modes. "
-"If any 'Quickbutton' actions were assigned to these keys, they will be "
-"disabled as long as this plugin is activated!"
-msgstr ""
-"Используйте настроенные кнопки на пульте для переключения режимов соотношения "
-"сторон. Если на эти кнопки были назначены действия \"Горячие кнопки\", они "
-"будут отключены до тех пор, пока этот плагин будет активирован!"
+msgid "Use the configured key(s) on your remote control to switch aspect ratio modes. If any 'Quickbutton' actions were assigned to these keys, they will be disabled as long as this plugin is activated!"
+msgstr "Используйте настроенные кнопки на пульте для переключения режимов соотношения сторон. Если на эти кнопки были назначены действия \"Горячие кнопки\", они будут отключены до тех пор, пока этот плагин будет активирован!"
 
 msgid "Ver."
 msgstr " "
 
+#, python-format
 msgid "You need to include at least %d aspect ratio modes!"
 msgstr "Необходимо включить не менее %d режимов!"

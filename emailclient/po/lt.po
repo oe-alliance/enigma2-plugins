@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EmailClient plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 15:11+0300\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2017-07-10 15:11+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -16,39 +16,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../src/plugin.py:136
 #, python-format
 msgid "%(name)s (%(user)s@%(server)s)"
 msgstr "%(name)s (%(user)s@%(server)s"
 
-#: ../src/plugin.py:986
 msgid "Accounts list"
 msgstr "Paskyrų sąrašas"
 
-#: ../src/plugin.py:402
 msgid "Attachments"
 msgstr "Prisegtukai"
 
-#: ../src/plugin.py:398
 msgid "Bodys"
 msgstr "Tekstas"
 
-#: ../src/plugin.py:346
 msgid "Date"
 msgstr "Data"
 
-#: ../src/plugin.py:1147
 msgid "Email Client"
 msgstr "El.pašto klientas"
 
-#: ../src/EmailConfig.py:60
 msgid "Email setup"
 msgstr "El.pašto sąranka"
 
-#: ../src/plugin.py:182
 #, python-format
 msgid ""
 "EmailClient for %(account)s:\n"
@@ -59,19 +50,15 @@ msgstr ""
 "\n"
 "%(error)s"
 
-#: ../src/plugin.py:344
 msgid "From"
 msgstr "Nuo"
 
-#: ../src/EmailConfig.py:131
 msgid "IMAP Port"
 msgstr "IMAP prievadas"
 
-#: ../src/EmailConfig.py:130
 msgid "IMAP Server"
 msgstr "IMAP serveris"
 
-#: ../src/plugin.py:582
 #, python-format
 msgid ""
 "New mail arrived for account %s:\n"
@@ -80,95 +67,73 @@ msgstr ""
 "Į %s paskyrą gautas naujas laiškas:\n"
 "\n"
 
-#: ../src/plugin.py:1049
 #, python-format
 msgid "Really delete account %s?"
 msgstr "Ar tikrai norite pašalinti %s paskyrą?"
 
-#: ../src/plugin.py:347
 msgid "Subject"
 msgstr "Tema"
 
-#: ../src/plugin.py:852
 #, python-format
 msgid ""
 "[EmailAccount] %(name)s: _cbCapabilities:\n"
 "####################################################################################################\n"
-"# If you have problems to log into your imap-server, please send me the "
-"output of the following line\n"
+"# If you have problems to log into your imap-server, please send me the output of the following line\n"
 "# cbCapabilities: %(capa)s\n"
 "####################################################################################################\n"
 msgstr ""
 "[El.pašto paskyra] %(name)s: _cbCapabilities:\n"
 "####################################################################################################\n"
-"# Jei turite prisijungimo prie IMAP serverio problemų, siųskite man šios "
-"eilutės turinį\n"
+"# Jei turite prisijungimo prie IMAP serverio problemų, siųskite man šios eilutės turinį\n"
 "# cbCapabilities: %(capa)s\n"
 "####################################################################################################\n"
 
-#: ../src/plugin.py:1009
 #, python-format
 msgid "account %s is not connected"
 msgstr "prie paskyros %s neprisijungta"
 
-#: ../src/EmailConfig.py:129
 msgid "account name"
 msgstr "paskyros pavadinimas"
 
-#: ../src/plugin.py:127 ../src/plugin.py:194 ../src/plugin.py:235
-#: ../src/plugin.py:384 ../src/plugin.py:387 ../src/plugin.py:393
 msgid "account not connected"
 msgstr "prie paskyros neprisijungta"
 
-#: ../src/plugin.py:966
 msgid "add"
 msgstr "pridėti"
 
-#: ../src/EmailConfig.py:39 ../src/EmailConfig.py:102
 msgid "cancel"
 msgstr "atšaukti"
 
-#: ../src/plugin.py:738
 msgid "cannot access inbox"
 msgstr "gauti laiškai neprieinami"
 
-#: ../src/plugin.py:815
 msgid "cannot get headers of new messages"
 msgstr "nepavyko gauti naujų laiškų antraščių"
 
-#: ../src/plugin.py:745
 msgid "cannot get list of new messages"
 msgstr "nepavyko gauti naujų laiškų sąrašo"
 
-#: ../src/plugin.py:834
 msgid "connection failed - retrying"
 msgstr "prijungti nepavyko - kartojama"
 
-#: ../src/EmailConfig.py:53
 msgid "debug"
 msgstr "klaidų šalinimas"
 
-#: ../src/plugin.py:355
 msgid "delete"
 msgstr "šalinti"
 
-#: ../src/EmailConfig.py:52
 msgid "display connection errors"
 msgstr "rodyti jungimosi klaidas"
 
-#: ../src/EmailConfig.py:51
 msgid "display timeout (seconds)"
 msgstr "rodyti delsą (sek.)"
 
-#: ../src/plugin.py:967
 msgid "edit"
 msgstr "redaguoti"
 
-#: ../src/EmailConfig.py:145
 msgid "empty values - retry"
 msgstr "tuščios reikšmės – kartoti"
 
-#: ../src/plugin.py:911
 #, python-format
 msgid ""
 "error logging %(who)s in:\n"
@@ -177,128 +142,97 @@ msgstr ""
 "klaida prisijungiant %(who)s :\n"
 "%(failure)s"
 
-#: ../src/plugin.py:810
 msgid "failed to load message"
 msgstr "laiško įkelti nepavyko"
 
-#: ../src/plugin.py:231
 msgid "getting message ..."
 msgstr "gaunamas laiškas..."
 
-#: ../src/plugin.py:224
 #, python-format
 msgid "have %d messages"
 msgstr "yra %d laiškų"
 
-#: ../src/plugin.py:226
 msgid "have no messages"
 msgstr "laiškų nėra"
 
-#: ../src/plugin.py:206
 msgid "headers loaded, now parsing ..."
 msgstr "antraštės įkeltos, apdorojama..."
 
-#: ../src/plugin.py:1091
 #, python-format
 msgid "importing configurations from %s"
 msgstr "konfigūracija importuojama iš %s"
 
-#: ../src/plugin.py:351
 msgid "leave unread"
 msgstr "palikti neskaitytą"
 
-#: ../src/EmailConfig.py:136
 msgid "list all mailboxes"
 msgstr "visos pašto dėžutės"
 
-#: ../src/plugin.py:189
 msgid "loading headers ..."
 msgstr "įkeliamos antraštės..."
 
-#: ../src/EmailConfig.py:134
 msgid "mail check interval (minutes)"
 msgstr "paštą tikrinti kas (min.)"
 
-#: ../src/EmailConfig.py:135
 msgid "maximum mail size to fetch"
 msgstr "didžiausias parsiunčiamo laiško dydis"
 
-#: ../src/plugin.py:801
 msgid "message too large"
 msgstr "laiškas per didelis"
 
-#: ../src/plugin.py:1015 ../src/plugin.py:1052
 msgid "no account selected"
 msgstr "nepasirinkta paskyra"
 
-#: ../src/plugin.py:346 ../src/plugin.py:604
 msgid "no date"
 msgstr "nėra datos"
 
-#: ../src/plugin.py:425
 msgid "no filename"
 msgstr "nėra failo pavadinimo"
 
-#: ../src/plugin.py:344
 msgid "no from"
 msgstr "nėra nuo ko"
 
-#: ../src/plugin.py:196
 msgid "no mailbox?!?!"
 msgstr "nėra pašto dėžutės?!?!"
 
-#: ../src/plugin.py:594
 msgid "no sender"
 msgstr "nėra siuntėjo"
 
-#: ../src/plugin.py:347 ../src/plugin.py:597
 msgid "no subject"
 msgstr "nėra temos"
 
-#: ../src/EmailConfig.py:40 ../src/EmailConfig.py:103
 msgid "ok"
 msgstr "gerai"
 
-#: ../src/plugin.py:238
 msgid "parsing message ..."
 msgstr "apdorojama..."
 
-#: ../src/EmailConfig.py:133
 msgid "password"
 msgstr "slaptažodis"
 
-#: ../src/plugin.py:378
 msgid "really delete mail?"
 msgstr "tikrai ištrinti laišką?"
 
-#: ../src/plugin.py:376
 msgid "really undelete mail?"
 msgstr "tikrai atkurti laišką?"
 
-#: ../src/plugin.py:965
 msgid "remove"
 msgstr "pašalinti"
 
-#: ../src/plugin.py:427
 msgid "select Attachment"
 msgstr "pasirinkite prisegtuką"
 
-#: ../src/plugin.py:411
 msgid "select Body"
 msgstr "pasirinkite tekstą"
 
-#: ../src/EmailConfig.py:50
 msgid "show deleted entries"
 msgstr "rodyti ištrintus įrašus"
 
-#: ../src/plugin.py:353
 msgid "undelete"
 msgstr "atkurti"
 
-#: ../src/EmailConfig.py:132
 msgid "user name"
 msgstr "vartotojo vardas"
 
-#: ../src/plugin.py:1147
 msgid "view Emails via IMAP4"
 msgstr "skaityti paštą per IMAP4"

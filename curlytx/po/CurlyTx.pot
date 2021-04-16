@@ -1,0 +1,143 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Add new page"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Close window"
+msgstr ""
+
+msgid "Default page"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Delete selected page"
+msgstr ""
+
+msgid "Dismiss all setting changes"
+msgstr ""
+
+msgid "Edit selected page"
+msgstr ""
+
+msgid "Error fetching URL:"
+msgstr ""
+
+msgid "Error loading page feed:"
+msgstr ""
+
+msgid "Font size"
+msgstr ""
+
+msgid "Go and add a page in the settings"
+msgstr ""
+
+msgid "HTTP response headers for"
+msgstr ""
+
+msgid "Invalid page"
+msgstr ""
+
+msgid "Load pages from feed"
+msgstr ""
+
+msgid "Loading ..."
+msgstr ""
+
+msgid "Menu title"
+msgstr ""
+
+msgid "New"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "No page feed URL defined"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Page URL"
+msgstr ""
+
+msgid "Page feed URL"
+msgstr ""
+
+msgid "Page:"
+msgstr ""
+
+msgid "Prev"
+msgstr ""
+
+msgid ""
+"Really delete this page?\n"
+"It cannot be recovered!"
+msgstr ""
+
+msgid "Reload"
+msgstr ""
+
+msgid "Reload current page URL"
+msgstr ""
+
+msgid "Save settings and close screen"
+msgstr ""
+
+msgid "Scroll page contents down"
+msgstr ""
+
+msgid "Scroll page contents up"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Show HTTP response headers"
+msgstr ""
+
+msgid "Show in extensions menu"
+msgstr ""
+
+msgid "Show in main menu"
+msgstr ""
+
+msgid "Show program settings"
+msgstr ""
+
+msgid "Show this help screen"
+msgstr ""
+
+msgid "Switch to next configured page URL"
+msgstr ""
+
+msgid "Switch to previous configured page URL"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "View remote text files"
+msgstr ""

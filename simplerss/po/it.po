@@ -46,11 +46,8 @@ msgstr "Voci"
 msgid "Entry %s/%s"
 msgstr "Voce %s/%s"
 
-msgid ""
-"Error while parsing Feed, this usually means there is something wrong with "
-"it."
-msgstr ""
-"Errore nell'analisi del feed: normalmente indica qualcosa di errato in esso."
+msgid "Error while parsing Feed, this usually means there is something wrong with it."
+msgstr "Errore nell'analisi del feed: normalmente indica qualcosa di errato in esso."
 
 msgid "Failed to get subscriptions from Google Reader."
 msgstr "Impossibile ottenere sottoscrizioni da Google Reader."

@@ -99,9 +99,7 @@ msgstr "WeatherPlugin: bewerl entry"
 msgid "WeatherPlugin: List of Entries"
 msgstr "WeatherPlugin: Lijst met entries"
 
-msgid ""
-"You need to enter a valid city name before you can search for the location "
-"code."
+msgid "You need to enter a valid city name before you can search for the location code."
 msgstr ""
 
 msgid "imperial system"
@@ -109,12 +107,3 @@ msgstr ""
 
 msgid "metric system"
 msgstr ""
-
-#~ msgid "City or Postal Code"
-#~ msgstr "Stad of postcode"
-
-#~ msgid "Current: %s"
-#~ msgstr "Momenteel: %s"
-
-#~ msgid "Language"
-#~ msgstr "Taal"

@@ -1,0 +1,86 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Clock show timeout"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Extensions menu"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid ""
+"Modify the settings to match your preferences. To change the clock position, select \"Move clock\" and relocate using the direction keys. Press OK to store current position and return to the setup menu or EXIT to cancel the moving.\n"
+"\n"
+"Push key \"Exit long\" to show the clock while watching TV. Clock will disappear after the specified timeout or by pushing key \"Exit long\" again.\n"
+"\n"
+"If GP3 is installed, weekday shows up in selected language, otherwise always in english."
+msgstr ""
+
+msgid "Move clock"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid ""
+"Please use direction keys to move the clock.\n"
+"\n"
+"Press OK to store current position and return to the setup menu or EXIT to cancel the moving."
+msgstr ""
+
+msgid "Plugin menu"
+msgstr ""
+
+msgid "Push \"Exit\" long to show/hide clock"
+msgstr ""
+
+msgid "Show Clock Setup"
+msgstr ""
+
+msgid "Show Clock setup"
+msgstr ""
+
+msgid "Show in"
+msgstr ""
+
+msgid "Specify how long (seconds) the clock shall be shown before it disappears. Set to \"0\" to show clock until hidden manually."
+msgstr ""
+
+msgid "Specify plugin description to be used in menu (needs GUI restart)."
+msgstr ""
+
+msgid "Specify plugin name to be used in menu (needs GUI restart)."
+msgstr ""
+
+msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
+msgstr ""
+
+msgid "Ver."
+msgstr ""

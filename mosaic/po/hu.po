@@ -25,9 +25,7 @@ msgid "Countdown:"
 msgstr "Visszaszámlálás:"
 
 msgid "Error while creating screenshot. You need grab version 0.8 or higher!"
-msgstr ""
-"Hiba történt a képernyőkép készítése során. Szükséged van a grab 0.8 vagy az "
-"újabb verziójára!"
+msgstr "Hiba történt a képernyőkép készítése során. Szükséged van a grab 0.8 vagy az újabb verziójára!"
 
 msgid "Mosaic"
 msgstr "Mosaic"

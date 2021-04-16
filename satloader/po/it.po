@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - satloader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-20 15:20+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2013-01-20 15:23+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -20,151 +20,98 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/satloader\n"
 
-#: .../enigma2-plugins/satloader/src/plugin.py:54
-#: .../enigma2-plugins/satloader/src/plugin.py:165
-#: .../enigma2-plugins/satloader/src/plugin.py:283
-#: .../enigma2-plugins/satloader/src/plugin.py:405
-msgid "Cancel"
-msgstr "Annull."
-
-#: .../enigma2-plugins/satloader/src/plugin.py:55
-msgid "Install"
-msgstr "Installare"
-
-#: .../enigma2-plugins/satloader/src/plugin.py:56
-msgid "Bouquet"
-msgstr "Bouquet"
-
-#: .../enigma2-plugins/satloader/src/plugin.py:57
-msgid "Multi Sat"
-msgstr "Multi Sat"
-
-#: .../enigma2-plugins/satloader/src/plugin.py:77
-msgid "Press ok or green button to install satellites.xml"
-msgstr "Verde o Ok >> Installare satellite.xml"
-
-#: .../enigma2-plugins/satloader/src/plugin.py:84
-#: .../enigma2-plugins/satloader/src/plugin.py:178
-msgid "Please wait..."
-msgstr "Attendere..."
-
-#: .../enigma2-plugins/satloader/src/plugin.py:100
-#: .../enigma2-plugins/satloader/src/plugin.py:101
-#: .../enigma2-plugins/satloader/src/plugin.py:334
-#: .../enigma2-plugins/satloader/src/plugin.py:335
-msgid "Downloading satellites failed!"
-msgstr "Download satelliti fallito."
-
-#: .../enigma2-plugins/satloader/src/plugin.py:104
-msgid "satellites.xml is updated"
-msgstr "satellites.xml è aggiornato"
-
-#: .../enigma2-plugins/satloader/src/plugin.py:104
-#: .../enigma2-plugins/satloader/src/plugin.py:200
-#: .../enigma2-plugins/satloader/src/plugin.py:322
-msgid "GUI needs a restart to apply changes."
-msgstr "L'attivazione delle modifiche richiede il riavvio della GUI."
-
-#: .../enigma2-plugins/satloader/src/plugin.py:104
-#: .../enigma2-plugins/satloader/src/plugin.py:200
-#: .../enigma2-plugins/satloader/src/plugin.py:322
-msgid "Do you want to restart the GUI now?"
-msgstr "Riavviare la GUI?"
-
-#: .../enigma2-plugins/satloader/src/plugin.py:105
-#: .../enigma2-plugins/satloader/src/plugin.py:201
-#: .../enigma2-plugins/satloader/src/plugin.py:323
-msgid "Restart GUI now?"
-msgstr "Riavviare la GUI?"
-
-#: .../enigma2-plugins/satloader/src/plugin.py:111
-#: .../enigma2-plugins/satloader/src/plugin.py:240
-#: .../enigma2-plugins/satloader/src/plugin.py:367
-msgid "GUI needs a restart."
-msgstr "E' richiesto il riavvio della GUI."
-
-#: .../enigma2-plugins/satloader/src/plugin.py:120
 msgid "About"
 msgstr "Info"
 
-#: .../enigma2-plugins/satloader/src/plugin.py:166
-#: .../enigma2-plugins/satloader/src/plugin.py:406
-msgid "Save"
-msgstr "Salvare"
+msgid "Bouquet"
+msgstr "Bouquet"
 
-#: .../enigma2-plugins/satloader/src/plugin.py:200
-msgid "selected bouquets are installed"
-msgstr "I bouquet selezionati sono installati"
+msgid "Cancel"
+msgstr "Annull."
 
-#: .../enigma2-plugins/satloader/src/plugin.py:204
-msgid "Please select at least one bouquet"
-msgstr "Selezionare almeno un bouquet"
+msgid "Do you want to restart the GUI now?"
+msgstr "Riavviare la GUI?"
 
-#: .../enigma2-plugins/satloader/src/plugin.py:207
-#: .../enigma2-plugins/satloader/src/plugin.py:208
-msgid "Downloading bouquets failed!"
-msgstr "Download bouquet fallito."
-
-#: .../enigma2-plugins/satloader/src/plugin.py:211
-#: .../enigma2-plugins/satloader/src/plugin.py:338
-msgid "Downloading succesfull! Parsing ..."
-msgstr "Download terminato. Analisi in corso..."
-
-#: .../enigma2-plugins/satloader/src/plugin.py:230
-msgid "Press ok button to select bouquet"
-msgstr "Ok >> Selezionare un bouquet"
-
-#: .../enigma2-plugins/satloader/src/plugin.py:234
-#: .../enigma2-plugins/satloader/src/plugin.py:361
-msgid "Parsing failed!"
-msgstr "Analisi fallita."
-
-#: .../enigma2-plugins/satloader/src/plugin.py:282
-msgid "Source:"
-msgstr "Sorgente:"
-
-#: .../enigma2-plugins/satloader/src/plugin.py:284
-msgid "OK"
-msgstr "Ok"
-
-#: .../enigma2-plugins/satloader/src/plugin.py:285
-msgid "Transponder"
-msgstr "Transponder"
-
-#: .../enigma2-plugins/satloader/src/plugin.py:298
 msgid "Download:"
 msgstr "Download:"
 
-#: .../enigma2-plugins/satloader/src/plugin.py:322
-msgid "satellites.xml has been built."
-msgstr "satellites.xml è stato compilato."
+msgid "Downloading bouquets failed!"
+msgstr "Download bouquet fallito."
 
-#: .../enigma2-plugins/satloader/src/plugin.py:325
-msgid "Please select at least one satellite"
-msgstr "Selezionare almeno un satellite"
+msgid "Downloading satellites failed!"
+msgstr "Download satelliti fallito."
 
-#: .../enigma2-plugins/satloader/src/plugin.py:357
-msgid "Press ok button to select satellite"
-msgstr "Ok >> Selezionare un satellite"
+msgid "Downloading succesfull! Parsing ..."
+msgstr "Download terminato. Analisi in corso..."
 
-#: .../enigma2-plugins/satloader/src/plugin.py:384
-#: .../enigma2-plugins/satloader/src/plugin.py:396
-msgid "Transponder selection"
-msgstr "Selezione transponder"
-
-#: .../enigma2-plugins/satloader/src/plugin.py:435
 msgid "Frequency:"
 msgstr "Frequenza:"
 
-#: .../enigma2-plugins/satloader/src/plugin.py:435
-msgid "Symbol Rate:"
-msgstr "Symbol Rate:"
+msgid "GUI needs a restart to apply changes."
+msgstr "L'attivazione delle modifiche richiede il riavvio della GUI."
 
-#: .../enigma2-plugins/satloader/src/plugin.py:459
-msgid "has been saved."
-msgstr ": salvataggio eseguito."
+msgid "GUI needs a restart."
+msgstr "E' richiesto il riavvio della GUI."
 
-#: .../enigma2-plugins/satloader/src/plugin.py:462
+msgid "Install"
+msgstr "Installare"
+
+msgid "Multi Sat"
+msgstr "Multi Sat"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "Parsing failed!"
+msgstr "Analisi fallita."
+
+msgid "Please select at least one bouquet"
+msgstr "Selezionare almeno un bouquet"
+
+msgid "Please select at least one satellite"
+msgstr "Selezionare almeno un satellite"
+
 msgid "Please select at least one transponder"
 msgstr "Selezionare almeno un transponder"
 
+msgid "Please wait..."
+msgstr "Attendere..."
+
+msgid "Press ok button to select bouquet"
+msgstr "Ok >> Selezionare un bouquet"
+
+msgid "Press ok button to select satellite"
+msgstr "Ok >> Selezionare un satellite"
+
+msgid "Press ok or green button to install satellites.xml"
+msgstr "Verde o Ok >> Installare satellite.xml"
+
+msgid "Restart GUI now?"
+msgstr "Riavviare la GUI?"
+
+msgid "Save"
+msgstr "Salvare"
+
+msgid "Source:"
+msgstr "Sorgente:"
+
+msgid "Symbol Rate:"
+msgstr "Symbol Rate:"
+
+msgid "Transponder"
+msgstr "Transponder"
+
+msgid "Transponder selection"
+msgstr "Selezione transponder"
+
+msgid "has been saved."
+msgstr ": salvataggio eseguito."
+
+msgid "satellites.xml has been built."
+msgstr "satellites.xml è stato compilato."
+
+msgid "satellites.xml is updated"
+msgstr "satellites.xml è aggiornato"
+
+msgid "selected bouquets are installed"
+msgstr "I bouquet selezionati sono installati"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 SetPasswd Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2009-06-05 00:42+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -21,7 +21,8 @@ msgstr "Vazgeç"
 msgid "Change Root Password"
 msgstr "Root parolasını değiştir"
 
-msgid "Change or reset the root password of your dreambox"
+#, fuzzy
+msgid "Change or reset the root password of your Receiver"
 msgstr "Receiver'ınızın root parolasını değiştirin/sıfırlayın"
 
 msgid "Enter new Password"
