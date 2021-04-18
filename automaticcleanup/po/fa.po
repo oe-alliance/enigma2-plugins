@@ -2,183 +2,126 @@ msgid ""
 msgstr ""
 "Project-Id-Version: automatic cleanup Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-20 07:42+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Persian Prince <persianprince@persianpros.org>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"Language: Persian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _(\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Language: Persian\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/plugin.py:85
-msgid "void"
-msgstr "بی اعتبار"
-
-#: ../src/plugin.py:87 ../src/plugin.py:91
-msgid "all"
-msgstr "همه"
-
-#: ../src/plugin.py:89 ../src/plugin.py:93
-msgid "cleanup disabled"
-msgstr "پاکسازی غیر فعال است"
-
-#: ../src/plugin.py:89
-msgid "older than 6 months"
-msgstr "قدیمی تر از 6 ماه"
-
-#: ../src/plugin.py:89
-msgid "older than 3 months"
-msgstr "قدیمی تر از 3 ماه"
-
-#: ../src/plugin.py:89 ../src/plugin.py:93
-msgid "older than 4 weeks"
-msgstr "قدیمی تر از 4 هفته"
-
-#: ../src/plugin.py:89 ../src/plugin.py:93
-msgid "older than 2 weeks"
-msgstr "قدیمی تر از 2 هفته"
-
-#: ../src/plugin.py:89 ../src/plugin.py:93
-msgid "older than 1 week"
-msgstr "قدیمی تر از 1 هفته"
-
-#: ../src/plugin.py:91
-msgid "last 10"
-msgstr "10 تای آخری"
-
-#: ../src/plugin.py:91
-msgid "last 5"
-msgstr "5 تای آخری"
-
-#: ../src/plugin.py:91
-msgid "last 3"
-msgstr "3 تای آخری"
-
-#: ../src/plugin.py:91
-msgid "last 2"
-msgstr "2 تای آخری"
-
-#: ../src/plugin.py:91
-msgid "only last one"
-msgstr "فقط آخری"
-
-#: ../src/plugin.py:93
-msgid "older than 6 weeks"
-msgstr "قدیمی تر از 6 هفته"
-
-#: ../src/plugin.py:93
-msgid "older than 3 days"
-msgstr "قدیمی تر از 3 روز"
-
-#: ../src/plugin.py:93
-msgid "older than 1 day"
-msgstr "قدیمی تر از 1 روز"
-
-#: ../src/plugin.py:93
-msgid "immediately after recording"
-msgstr "بلافاصله بعد از ضبط کردن"
-
-#: ../src/plugin.py:120 ../src/plugin.py:190 ../src/plugin.py:436
 msgid "Automatic System Cleanup Setup"
 msgstr "تنظیم خودکار پاک سازی سیستم"
 
-#: ../src/plugin.py:125
-msgid "Delete system setting backups"
-msgstr "حذف نسخه پشتیبان تنظیمات سیستمی"
-
-#: ../src/plugin.py:126
-msgid ""
-"Specify, how long system setting backups shall be kept at most (even if "
-"maximum number is not yet exceeded). Latest backup will be kept anyway!"
-msgstr ""
-
-#: ../src/plugin.py:127
-msgid "Maximum number of system setting backups"
-msgstr "بیشترین تعداد نسخه پشتیبان تنظیمات سیستمی"
-
-#: ../src/plugin.py:128
-msgid ""
-"Maximum number of system setting backups to keep, regardless of retention "
-"period."
-msgstr ""
-"بیشترین تعداد نسخه پشتیبان تنظیمات سیستمی بدون در نظر گرفتن بازه زمانی "
-"نگهداری می شود"
-
-#: ../src/plugin.py:129
-msgid "Delete orphaned movie files"
-msgstr "پاک کردن فیلم های بی هویت"
-
-#: ../src/plugin.py:130
-msgid ""
-"If enabled, orphaned movie files will be automatically deleted from movie "
-"directories."
-msgstr ""
-"در صورت فعال سازی این گزینه بصورت خودکار فیلم های بی هویت را از پوشه فیلم ها "
-"پاک کن"
-
-#: ../src/plugin.py:131
-msgid "Delete crashlogs"
-msgstr "پاک سازی گزارش های خرابی"
-
-#: ../src/plugin.py:132 ../src/plugin.py:134
-msgid ""
-"Sorry, this feature is not available due to license reasons. To get the full "
-"version, please search the web for \"dreambox automaticcleanup.\""
-msgstr ""
-
-#: ../src/plugin.py:133
-msgid "Maximum number of crashlogs"
-msgstr "بیشترین تعداد گزارش خرابی ها"
-
-#: ../src/plugin.py:146 ../src/plugin.py:149
-msgid "Delete timerlist entries"
-msgstr "حذف لیست ورودی زمان ها"
-
-#: ../src/plugin.py:147
-msgid ""
-"Timerlist cleanup is enabled in EMC plugin! To avoid crashes, we won't "
-"delete entries whilst this option is enabled in EMC."
-msgstr ""
-"پاک سازی لیست زمان ها از پلاگین ای ام سی فعال گردید به منظور جلوگیری از "
-"خرابی های احتمالی لیست ورودی زمان در این گزینه از پلاگین ای ام سی پاک نخواهد "
-"شد"
-
-#: ../src/plugin.py:150
-msgid ""
-"Specify, how long expired timer list entries shall be kept at most. "
-"Deactivated repeat timer entries won't be deleted ever."
-msgstr ""
-
-#: ../src/plugin.py:167
 msgid "Cancel"
 msgstr "لعو کردن"
 
-#: ../src/plugin.py:168
-msgid "OK"
-msgstr "اوکی"
+msgid ""
+"Cleanup timerlist, orphaned movie files and stored setting backups automatically.\n"
+"\n"
+"Modify the settings to match your preferences. More detailed explanations given with each adjustable option."
+msgstr ""
 
-#: ../src/plugin.py:169
+msgid "Delete crashlogs"
+msgstr "پاک سازی گزارش های خرابی"
+
+msgid "Delete orphaned movie files"
+msgstr "پاک کردن فیلم های بی هویت"
+
+msgid "Delete system setting backups"
+msgstr "حذف نسخه پشتیبان تنظیمات سیستمی"
+
+msgid "Delete timerlist entries"
+msgstr "حذف لیست ورودی زمان ها"
+
 msgid "Help"
 msgstr "کمک"
 
-#: ../src/plugin.py:190
+msgid "If enabled, orphaned movie files will be automatically deleted from movie directories."
+msgstr "در صورت فعال سازی این گزینه بصورت خودکار فیلم های بی هویت را از پوشه فیلم ها پاک کن"
+
+msgid "Maximum number of crashlogs"
+msgstr "بیشترین تعداد گزارش خرابی ها"
+
+msgid "Maximum number of system setting backups"
+msgstr "بیشترین تعداد نسخه پشتیبان تنظیمات سیستمی"
+
+msgid "Maximum number of system setting backups to keep, regardless of retention period."
+msgstr "بیشترین تعداد نسخه پشتیبان تنظیمات سیستمی بدون در نظر گرفتن بازه زمانی نگهداری می شود"
+
+msgid "OK"
+msgstr "اوکی"
+
+msgid "Sorry, this feature is not available due to license reasons. To get the full version, please search the web for \"dreambox automaticcleanup.\""
+msgstr ""
+
+msgid "Specify, how long expired timer list entries shall be kept at most. Deactivated repeat timer entries won't be deleted ever."
+msgstr ""
+
+msgid "Specify, how long system setting backups shall be kept at most (even if maximum number is not yet exceeded). Latest backup will be kept anyway!"
+msgstr ""
+
+msgid "System cleanup"
+msgstr "پاک سازی سیستم"
+
+msgid "Timerlist cleanup is enabled in EMC plugin! To avoid crashes, we won't delete entries whilst this option is enabled in EMC."
+msgstr "پاک سازی لیست زمان ها از پلاگین ای ام سی فعال گردید به منظور جلوگیری از خرابی های احتمالی لیست ورودی زمان در این گزینه از پلاگین ای ام سی پاک نخواهد شد"
+
 msgid "Ver."
 msgstr "ورژن."
 
-#: ../src/plugin.py:213
-msgid ""
-"Cleanup timerlist, orphaned movie files and stored setting backups "
-"automatically.\n"
-"\n"
-"Modify the settings to match your preferences. More detailed explanations "
-"given with each adjustable option."
-msgstr ""
+msgid "all"
+msgstr "همه"
 
-#: ../src/plugin.py:433
-msgid "System cleanup"
-msgstr "پاک سازی سیستم"
+msgid "cleanup disabled"
+msgstr "پاکسازی غیر فعال است"
+
+msgid "immediately after recording"
+msgstr "بلافاصله بعد از ضبط کردن"
+
+msgid "last 10"
+msgstr "10 تای آخری"
+
+msgid "last 2"
+msgstr "2 تای آخری"
+
+msgid "last 3"
+msgstr "3 تای آخری"
+
+msgid "last 5"
+msgstr "5 تای آخری"
+
+msgid "older than 1 day"
+msgstr "قدیمی تر از 1 روز"
+
+msgid "older than 1 week"
+msgstr "قدیمی تر از 1 هفته"
+
+msgid "older than 2 weeks"
+msgstr "قدیمی تر از 2 هفته"
+
+msgid "older than 3 days"
+msgstr "قدیمی تر از 3 روز"
+
+msgid "older than 3 months"
+msgstr "قدیمی تر از 3 ماه"
+
+msgid "older than 4 weeks"
+msgstr "قدیمی تر از 4 هفته"
+
+msgid "older than 6 months"
+msgstr "قدیمی تر از 6 ماه"
+
+msgid "older than 6 weeks"
+msgstr "قدیمی تر از 6 هفته"
+
+msgid "only last one"
+msgstr "فقط آخری"
+
+msgid "void"
+msgstr "بی اعتبار"

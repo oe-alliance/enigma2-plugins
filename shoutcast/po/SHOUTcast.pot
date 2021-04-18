@@ -1,0 +1,268 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#, python-format
+msgid ""
+"%s\n"
+"Press OK to try again..."
+msgstr ""
+
+#, python-format
+msgid ""
+"%s\n"
+"Press green-button to try again..."
+msgstr ""
+
+msgid ">= 128 kbps"
+msgstr ""
+
+msgid ">= 192 kbps"
+msgstr ""
+
+msgid ">= 256 kbps"
+msgstr ""
+
+msgid ">= 64 kbps"
+msgstr ""
+
+msgid "Activate Picture in Picture"
+msgstr ""
+
+msgid "Add current playing stream to favorite"
+msgstr ""
+
+msgid "Add current selected genre to favorite"
+msgstr ""
+
+msgid "Add current selected station to favorite"
+msgstr ""
+
+msgid "Add sequence number to output file"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+#, python-format
+msgid "Audio: %s"
+msgstr ""
+
+#, python-format
+msgid "Bit rate: %s kbps"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Choose action:"
+msgstr ""
+
+msgid "Config"
+msgstr ""
+
+msgid "Coverheight:"
+msgstr ""
+
+msgid "Coverwidth:"
+msgstr ""
+
+msgid "Create a directory for each stream"
+msgstr ""
+
+msgid "Disable Picture in Picture"
+msgstr ""
+
+msgid "Do you really want to stop the recording?"
+msgstr ""
+
+msgid "Enter in minutes (0 means unlimited)"
+msgstr ""
+
+msgid "Enter new name for favorite item"
+msgstr ""
+
+msgid "Enter text to search for"
+msgstr ""
+
+#, python-format
+msgid "Error create directory %s!"
+msgstr ""
+
+msgid "Error downloading cover..."
+msgstr ""
+
+msgid "Favorite list"
+msgstr ""
+
+msgid "Favorites"
+msgstr ""
+
+msgid "First play streaming!"
+msgstr ""
+
+msgid "Genres"
+msgstr ""
+
+#, python-format
+msgid "Getting %s"
+msgstr ""
+
+#, python-format
+msgid "Getting SHOUTcast genre list for %s..."
+msgstr ""
+
+msgid "Getting SHOUTcast genre list..."
+msgstr ""
+
+#, python-format
+msgid ""
+"Getting streaming data from\n"
+"%s"
+msgstr ""
+
+msgid ""
+"Got 0 genres. Could be a network problem.\n"
+"Please try again..."
+msgstr ""
+
+msgid "Hide"
+msgstr ""
+
+msgid "Invalid Location"
+msgstr ""
+
+msgid "Menu PiP"
+msgstr ""
+
+msgid "Move Picture in Picture"
+msgstr ""
+
+msgid "No streaming data found..."
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "Only running streamings can be recorded!"
+msgstr ""
+
+msgid "Record"
+msgstr ""
+
+msgid "Recording length"
+msgstr ""
+
+msgid "Recording location:"
+msgstr ""
+
+msgid "Recording stream station"
+msgstr ""
+
+msgid "Reload station list:"
+msgstr ""
+
+msgid "Rip to single file, name is timestamped"
+msgstr ""
+
+msgid "SHOUTcast genre list"
+msgstr ""
+
+msgid "SHOUTcast setup"
+msgstr ""
+
+#, python-format
+msgid "SHOUTcast station list for %s"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+#, python-format
+msgid "Searching SHOUTcast for %s..."
+msgstr ""
+
+msgid "Select record path for streamripper"
+msgstr ""
+
+msgid "Show cover:"
+msgstr ""
+
+msgid "Show in extension menu:"
+msgstr ""
+
+#, python-format
+msgid "Station: %s"
+msgstr ""
+
+msgid "Stations"
+msgstr ""
+
+msgid "Stop record"
+msgstr ""
+
+msgid "Stream stopped playing, playback of stream stopped!"
+msgstr ""
+
+msgid "Streaming rate:"
+msgstr ""
+
+#, python-format
+msgid "Title: %s"
+msgstr ""
+
+msgid "Title: n/a"
+msgstr ""
+
+msgid "Zap focus to Picture in Picture"
+msgstr ""
+
+msgid "Zap focus to main screen"
+msgstr ""
+
+msgid "every five minutes"
+msgstr ""
+
+msgid "every minute"
+msgstr ""
+
+msgid "every three minutes"
+msgstr ""
+
+#, python-format
+msgid "genre %s"
+msgstr ""
+
+msgid "listen to shoutcast internet-radio"
+msgstr ""
+
+msgid "remove current selected favorite"
+msgstr ""
+
+msgid "rename current selected favorite"
+msgstr ""
+
+#, python-format
+msgid "search-criteria %s"
+msgstr ""
+
+msgid "streamripper not installed!"
+msgstr ""

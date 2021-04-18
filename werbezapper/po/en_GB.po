@@ -93,22 +93,3 @@ msgstr "minute"
 
 msgid "minutes"
 msgstr "minutes"
-
-#~ msgid ""
-#~ "Monitoring:\n"
-#~ "%s (%d:%02d Min)"
-#~ msgstr ""
-#~ "Monitoring:\n"
-#~ "%s (%d:%02d Min)"
-
-#~ msgid "Start monitoring..."
-#~ msgstr "Start monitoring..."
-
-#~ msgid "Stop monitoring: %s"
-#~ msgstr "Stop monitoring: %s"
-
-#~ msgid "Stop timer (%s Min)"
-#~ msgstr "Stop timer (%s Min)"
-
-#~ msgid "Zapping back in (%s Min)"
-#~ msgstr "Zapping back in (%s Min)"

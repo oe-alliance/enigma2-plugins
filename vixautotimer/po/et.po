@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 AutoTimer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-12 21:43+0200\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2013-08-13 19:01+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: none\n"
@@ -355,8 +355,8 @@ msgstr "Vastuolus taimerite korral otsib Autotaimer sarnaseid saateid ajavahemik
 msgid "If enabled, the polling will be skipped if a recording is in progress."
 msgstr "Määrates 'jah', jäetakse salvestamise ajal päring vahele."
 
-#, python-format
-msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80%% of the it."
+#, fuzzy, python-format
+msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80% of the it."
 msgstr "Kui see on lubatud, siis loetakse olemasolev taimer täidetuks, kui salvestatakse vähemalt 80%% saatest."
 
 msgid "If this is selected, the name of the respective AutoTimer will be added as a tag to timers created by this plugin."
@@ -950,4 +950,3 @@ msgstr "taimerit %i ei leitud"
 
 msgid "zap"
 msgstr "kanalivahetus"
-

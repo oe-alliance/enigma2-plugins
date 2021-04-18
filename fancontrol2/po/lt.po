@@ -1,231 +1,135 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: FanControl2-VTi\n"
-"POT-Creation-Date: 2013-10-30 23:21+Mitteleuropäische Zeit\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vytenis P.\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: lt\n"
 "X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: FC2.txt:35
-msgid "below Tunerslot 4"
-msgstr "po 4 imtuvo lizdu"
-
-#: FC2.txt:36
-msgid "near XILINX Spartan"
-msgstr "šalia XILINX Spartan"
-
-#: FC2.txt:37
-msgid "under the WLAN"
-msgstr "prie WLAN"
-
-#: FC2.txt:38
-msgid "left of the Battery"
-msgstr "kairėje nuo baterijos"
-
-#: FC2.txt:39
-msgid "left near Front-CI"
-msgstr "kairėje prie priekinio CI"
-
-#: FC2.txt:40
-msgid "left near Card-Slot"
-msgstr "kairėje prie kortelės lizdo"
-
-#: FC2.txt:41
-msgid "over Security Card"
-msgstr "virš Security Card"
-
-#: FC2.txt:42
-msgid "under the Fan"
-msgstr "prie aušintuvo"
-
-#: FC2.txt:142
-msgid "."
-msgstr ","
-
-#: FC2.txt:187
-msgid "3Pin"
-msgstr "3Pin"
-
-#: FC2.txt:187
-msgid "4Pin"
-msgstr "4Pin"
-
-#: FC2.txt:187
-msgid "4Pin (PID)"
-msgstr "4Pin (PID)"
-
-#: FC2.txt:187
-msgid "Control disabled"
-msgstr "Valdymo išjungtas"
-
-#: FC2.txt:187
-msgid "disabled"
-msgstr "išjungta"
-
-#: FC2.txt:188
-msgid "yes, Except for Recording or HDD"
-msgstr "Taip, išskyrus įrašymą, arba HDD"
-
-#: FC2.txt:188 FC2.txt:201 FC2.txt:205
-msgid "no"
-msgstr "ne"
-
-#: FC2.txt:188 FC2.txt:205
-msgid "yes"
-msgstr "taip"
-
-#: FC2.txt:195
-msgid "Box Shutdown"
-msgstr "Išjungti"
-
-#: FC2.txt:195
-msgid "display Info"
-msgstr "Informacija"
-
-#: FC2.txt:195
-msgid "do nothing"
-msgstr "nieko nedaryti"
-
-#: FC2.txt:205
-msgid "auto"
-msgstr "auto"
-
-#: FC2.txt:205
-msgid "never"
-msgstr "niekada"
-
-#: FC2.txt:364
-msgid "please wait (until 3min)..."
-msgstr "palaukite (iki 3min.)..."
-
-#: FC2.txt:402
-msgid "Min Fan Start %d rpm at PWM=%d"
-msgstr "Min. aušintuvo paleidimas %d aps./min. prie PWM=%d"
-
-#: FC2.txt:408
-msgid "Min Fan Stop %d rpm at PWM=%d (%s)"
-msgstr "Min. aušintuvo sustabdymas %d aps./min. prie PWM=%d (%s)"
-
-#: FC2.txt:414
-msgid "Max Fan %d rpm at PWM=255 (%s)"
-msgstr "Maks. aušintuvo %d aps./min. prie PWM=255 (%s)"
-
-#: FC2.txt:416
-msgid "Extended Control Range"
-msgstr "Išplėstinis kontrolės diapazonas"
-
-#: FC2.txt:426
-msgid "Min Fan Start %d rpm at VLT=%d and PWM=0"
-msgstr "Min. aušintuvo paleidimas %d aps./min. prie VLT=%d ir PWM=0"
-
-#: FC2.txt:429
-msgid "Min Fan Stop %d rpm at VLT=%d and PWM=0 (%s)"
-msgstr "Min. aušintuvo sustabdymas %d aps./min. prie VLT=%d ir PWM=0 (%s)"
-
-#: FC2.txt:436
-msgid "Max Fan %d rpm at PWM=255 and VLT=255 (%s)"
-msgstr "Maks. aušintuvo %d aps./min. prie PWM=255 ir VLT=255 (%s)"
-
-#: FC2.txt:444
-msgid "Min Fan Start %d rpm at VLT=%d"
-msgstr "Min. aušintuvo paleidimas %d aps./min. prie VLT=%d"
-
-#: FC2.txt:447
-msgid "Min Fan Stop %d rpm at VLT=%d (%s)"
-msgstr "Min. aušintuvo sustabdymas %d aps./min. prie VLT=%d (%s)"
-
-#: FC2.txt:452
-msgid "Max Fan %d rpm at VLT=255 (%s)"
-msgstr "Maks. aušintuvo %d aps./min. prie VLT=255 (%s)"
-
-#: FC2.txt:455
-msgid "please set fan type (3Pin or 4Pin)"
-msgstr "Pasirinkite aušintuvo tipą (3, ar 4 kontaktų)"
-
-#: FC2.txt:527 FC2.txt:529 FC2.txt:533
+#, python-format
 msgid "%s   %02d C"
 msgstr "%s   %02d °C"
 
-#: FC2.txt:535
-msgid "press Info for HDD-Temp"
-msgstr "spauskite 'Info' HDD temperatūrai sužinoti"
+msgid "."
+msgstr ","
 
-#: FC2.txt:536 FC2.txt:791
-msgid "Current rpm  %4d"
-msgstr "Dabar aps./min. %4d"
+msgid "3Pin"
+msgstr "3Pin"
 
-#: FC2.txt:568
+msgid "4Pin"
+msgstr "4Pin"
+
+msgid "4Pin (PID)"
+msgstr "4Pin (PID)"
+
 msgid "Action in case of Fan failure"
 msgstr "Veiksmas, kai aušintuvas neveikia"
 
-#: FC2.txt:569
-msgid "Box shutdown at Temperature (C)"
-msgstr "Išjungti, pasiekus temp.(°C)"
-
-#: FC2.txt:570
-msgid "increases overheating protection to (C)"
-msgstr "padidina apsaugą nuo perkaitimo iki (°C)"
-
-#: FC2.txt:571
-msgid "read HDD-Temperature in HDD-Standby-Mode"
-msgstr "skaityti HDD temperatūrą HDD budėjimo režime"
-
-#: FC2.txt:572
-msgid "disable DMM-FanControl"
-msgstr "išjungti DMM aušintuvo valdymą"
-
-#: FC2.txt:573
-msgid "Show Fan Speed as"
-msgstr "Rodyti aušintuvo greitį, kaip"
-
-#: FC2.txt:574
-msgid "Show Plugin in Extension-Menu"
-msgstr "Rodyti įskiepį tarp plėtinių meniu"
-
-#: FC2.txt:575
-msgid "Show Monitor in Extension-Menu"
-msgstr "Rodyti monitorių tarp plėtinių meniu"
-
-#: FC2.txt:576
-msgid "Enable Console Logging"
-msgstr "Įjungti konsolės registravimą"
-
-#: FC2.txt:577
-msgid "Number of WebIF-Log-Entries"
-msgstr "WebIF žurnalo įrašų skaičius"
-
-#: FC2.txt:578
-msgid "Logging path"
-msgstr "Kelias iki žurnalo"
-
-#: FC2.txt:579
-msgid "Enable Data Logging"
-msgstr "Įjungti registravimą"
-
-#: FC2.txt:580
 msgid "Auto-Delete Data older than (Days)"
 msgstr "Automatiškai ištrinti duomenis, senesnius nei (dienų)"
 
-#: FC2.txt:581
-msgid "Enable Event Logging"
-msgstr "Įjungti įvykių registravimą"
+#, python-format
+msgid "Auto-Delete older %s Days"
+msgstr "Auto-šalinti senesnius, nei %s dienų"
 
-#: FC2.txt:582
-msgid "Enable Thread use"
-msgstr "Įjungti gijos naudojimą"
+msgid "Box Shutdown"
+msgstr "Išjungti"
 
-#: FC2.txt:597
+msgid "Box has no fancontrol hardware -> FC2 deactivated"
+msgstr "Aparatas neturi įskiepiui skirtos aparatūros -> FC2 išjungta"
+
+msgid "Box shutdown at Temperature (C)"
+msgstr "Išjungti, pasiekus temp.(°C)"
+
+msgid "Cancel"
+msgstr "Atšaukti"
+
+msgid "Check"
+msgstr "Tikrinti"
+
 msgid "Choose path"
 msgstr "Pasirinkite kelią"
 
-#: FC2.txt:631
+msgid "Control disabled"
+msgstr "Valdymo išjungtas"
+
+#, python-format
+msgid "Current rpm  %4d"
+msgstr "Dabar aps./min. %4d"
+
+#, python-format
+msgid "Current value: %s"
+msgstr "Dabartinė reikšmė: %s"
+
+msgid "Delete"
+msgstr "Pašalinti"
+
+msgid "Delete older 48h"
+msgstr "Šalinti senesnius 48 val."
+
+#, python-format
+msgid "Disk free : %d MByte"
+msgstr "Laisvos vietos : %d MB"
+
+msgid "Download"
+msgstr "Parsisiųsti"
+
+msgid "Enable Console Logging"
+msgstr "Įjungti konsolės registravimą"
+
+msgid "Enable Data Logging"
+msgstr "Įjungti registravimą"
+
+msgid "Enable Event Logging"
+msgstr "Įjungti įvykių registravimą"
+
+msgid "Enable Thread use"
+msgstr "Įjungti gijos naudojimą"
+
+msgid "End temperature C"
+msgstr "Pabaigos temperatūra °C"
+
+msgid "Extended Control Range"
+msgstr "Išplėstinis kontrolės diapazonas"
+
+#, fuzzy
+msgid "Fan Control"
+msgstr "išjungti DMM aušintuvo valdymą"
+
+msgid "Fan Control 2"
+msgstr ""
+
+msgid "Fan Control 2 - Monitor"
+msgstr ""
+
+msgid "Fan is not working!"
+msgstr "Ventiliatorius neveikia!"
+
+msgid "Fan off in Idle Mode"
+msgstr "Aušintuvą išjungti laukimo režime"
+
+msgid "Fan type"
+msgstr "Aušintuvo tipas"
+
+msgid "FanControl2 emergency, Box Shutdown now?"
+msgstr "Avarinė situacija, išjungti aparatą dabar?"
+
+#, python-format
+msgid "File %s does not exists"
+msgstr "Failo %s nėra"
+
+#, python-format
+msgid "Filesize : %d %sByte"
+msgstr "Failo dydis: % d%sBaitų"
+
 msgid ""
 "GUI needs a restart to apply the changes.\n"
 "Do you want to Restart the GUI now?"
@@ -233,166 +137,201 @@ msgstr ""
 "Kad pakeitimai įsigaliotų, grafinę aplinką reikia paleisti iš naujo.\n"
 "Ar norite paleisti iš naujo dabar?"
 
-#: FC2.txt:632
-msgid "Restart GUI now?"
-msgstr "Paleisti grafinę aplinką iš naujo dabar?"
-
-#: FC2.txt:701
-msgid "Fan type"
-msgstr "Aušintuvo tipas"
-
-#: FC2.txt:702
-msgid "Fan off in Idle Mode"
-msgstr "Aušintuvą išjungti laukimo režime"
-
-#: FC2.txt:703
-msgid "min Speed rpm"
-msgstr "minimalus greitis aps./min."
-
-#: FC2.txt:704
-msgid "max Speed rpm"
-msgstr "maksimalus greitis aps./min."
-
-#: FC2.txt:705
-msgid "Static temp C"
-msgstr "Statinė temp. °C"
-
-#: FC2.txt:706
-msgid "End temperature C"
-msgstr "Pabaigos temperatūra °C"
-
-#: FC2.txt:707
-msgid "Initial Voltage"
-msgstr "Pradinė įtampa"
-
-#: FC2.txt:708
-msgid "Initial PWM"
-msgstr "Pradinis PWM"
-
-#: FC2.txt:713
-msgid "Cancel"
-msgstr "Atšaukti"
-
-#: FC2.txt:714
-msgid "Save"
-msgstr "Išsaugoti"
-
-#: FC2.txt:715
-msgid "Check"
-msgstr "Tikrinti"
-
-#: FC2.txt:716
 msgid "Help"
 msgstr "Pagalba"
 
-#: FC2.txt:756
-msgid "Current value: %s"
-msgstr "Dabartinė reikšmė: %s"
-
-#: FC2.txt:789
-msgid "Temperature C  %4.1f"
-msgstr "Temperatūra °C  %4.1f"
-
-#: FC2.txt:790
-msgid "Target rpm  %4d"
-msgstr "Objekto aps./min.  %4d"
-
-#: FC2.txt:792
-msgid "Voltage  %03d"
-msgstr "Įtampa %03d"
-
-#: FC2.txt:793
-msgid "PWM  %03d"
-msgstr "PWM  %03d"
-
-#: FC2.txt:806
-msgid "PID Ctl Err %03.2f %%"
-msgstr "PID vald. klaida %03.2f %%"
-
-#: FC2.txt:828
 msgid "Information"
 msgstr "Informacija"
 
-#: FC2.txt:828
-msgid "readme.txt"
-msgstr "readmede.txt"
+msgid "Initial PWM"
+msgstr "Pradinis PWM"
 
-#: FC2.txt:1019
-msgid "FanControl2 emergency, Box Shutdown now?"
-msgstr "Avarinė situacija, išjungti aparatą dabar?"
+msgid "Initial Voltage"
+msgstr "Pradinė įtampa"
 
-#: FC2.txt:1088
-msgid "Fan is not working!"
-msgstr "Ventiliatorius neveikia!"
+msgid "Logging path"
+msgstr "Kelias iki žurnalo"
 
-#: FC2.txt:1232
-msgid "currentRPM:%d targetRPM:%d Temp:%4.1f"
-msgstr "Dabar aps./min. :%d Obj. aps./min.:%d Temp:%4.1f"
-
-#: FC2.txt:1315
-msgid "Box has no fancontrol hardware -> FC2 deactivated"
-msgstr "Aparatas neturi įskiepiui skirtos aparatūros -> FC2 išjungta"
-
-#: FC2.txt:1395
-msgid "Temperature"
-msgstr "Temperatūra"
-
-#: FC2.txt:1396
-msgid "Speed"
-msgstr "Greitis"
-
-#: FC2.txt:1397
-msgid "Voltage"
-msgstr "Įtampa"
-
-#: FC2.txt:1404
-msgid "Sensors"
-msgstr "Jutikliai"
-
-#: FC2.txt:1499 FC2.txt:1535
-msgid "active"
-msgstr "aktyvus"
-
-#: FC2.txt:1502 FC2.txt:1538
-msgid "turn off"
-msgstr "išjungti"
-
-#: FC2.txt:1505 FC2.txt:1541
-msgid "not active"
-msgstr "neaktyvus"
-
-#: FC2.txt:1508 FC2.txt:1544
-msgid "turn on"
-msgstr "įjungti"
-
-#: FC2.txt:1513 FC2.txt:1515 FC2.txt:1549 FC2.txt:1551
-msgid "Filesize : %d %sByte"
-msgstr "Failo dydis: % d%sBaitų"
-
-#: FC2.txt:1517 FC2.txt:1553
-msgid "Disk free : %d MByte"
-msgstr "Laisvos vietos : %d MB"
-
-#: FC2.txt:1520 FC2.txt:1556
-msgid "Download"
-msgstr "Parsisiųsti"
-
-#: FC2.txt:1524 FC2.txt:1560
-msgid "Delete"
-msgstr "Pašalinti"
-
-#: FC2.txt:1528
-msgid "Delete older 48h"
-msgstr "Šalinti senesnius 48 val."
-
-#: FC2.txt:1531 FC2.txt:1568
-msgid "File %s does not exists"
-msgstr "Failo %s nėra"
-
-#: FC2.txt:1570
+#, python-format
 msgid "Logging-Path: %s"
 msgstr "Logging-Verzeichnis: %s"
 
-#: FC2.txt:1571
-msgid "Auto-Delete older %s Days"
-msgstr "Auto-šalinti senesnius, nei %s dienų"
+#, python-format
+msgid "Max Fan %d rpm at PWM=255 (%s)"
+msgstr "Maks. aušintuvo %d aps./min. prie PWM=255 (%s)"
+
+#, python-format
+msgid "Max Fan %d rpm at PWM=255 and VLT=255 (%s)"
+msgstr "Maks. aušintuvo %d aps./min. prie PWM=255 ir VLT=255 (%s)"
+
+#, python-format
+msgid "Max Fan %d rpm at VLT=255 (%s)"
+msgstr "Maks. aušintuvo %d aps./min. prie VLT=255 (%s)"
+
+#, python-format
+msgid "Min Fan Start %d rpm at PWM=%d"
+msgstr "Min. aušintuvo paleidimas %d aps./min. prie PWM=%d"
+
+#, python-format
+msgid "Min Fan Start %d rpm at VLT=%d"
+msgstr "Min. aušintuvo paleidimas %d aps./min. prie VLT=%d"
+
+#, python-format
+msgid "Min Fan Start %d rpm at VLT=%d and PWM=0"
+msgstr "Min. aušintuvo paleidimas %d aps./min. prie VLT=%d ir PWM=0"
+
+#, python-format
+msgid "Min Fan Stop %d rpm at PWM=%d (%s)"
+msgstr "Min. aušintuvo sustabdymas %d aps./min. prie PWM=%d (%s)"
+
+#, python-format
+msgid "Min Fan Stop %d rpm at VLT=%d (%s)"
+msgstr "Min. aušintuvo sustabdymas %d aps./min. prie VLT=%d (%s)"
+
+#, python-format
+msgid "Min Fan Stop %d rpm at VLT=%d and PWM=0 (%s)"
+msgstr "Min. aušintuvo sustabdymas %d aps./min. prie VLT=%d ir PWM=0 (%s)"
+
+msgid "Number of WebIF-Log-Entries"
+msgstr "WebIF žurnalo įrašų skaičius"
+
+#, python-format
+msgid "PID Ctl Err %03.2f %%"
+msgstr "PID vald. klaida %03.2f %%"
+
+#, python-format
+msgid "PWM  %03d"
+msgstr "PWM  %03d"
+
+msgid "Restart GUI now?"
+msgstr "Paleisti grafinę aplinką iš naujo dabar?"
+
+msgid "Save"
+msgstr "Išsaugoti"
+
+msgid "Sensors"
+msgstr "Jutikliai"
+
+msgid "Show Fan Speed as"
+msgstr "Rodyti aušintuvo greitį, kaip"
+
+msgid "Show Monitor in Extension-Menu"
+msgstr "Rodyti monitorių tarp plėtinių meniu"
+
+msgid "Show Plugin in Extension-Menu"
+msgstr "Rodyti įskiepį tarp plėtinių meniu"
+
+msgid "Speed"
+msgstr "Greitis"
+
+msgid "Static temp C"
+msgstr "Statinė temp. °C"
+
+#, python-format
+msgid "Target rpm  %4d"
+msgstr "Objekto aps./min.  %4d"
+
+msgid "Temperature"
+msgstr "Temperatūra"
+
+#, python-format
+msgid "Temperature C  %4.1f"
+msgstr "Temperatūra °C  %4.1f"
+
+msgid "Voltage"
+msgstr "Įtampa"
+
+#, python-format
+msgid "Voltage  %03d"
+msgstr "Įtampa %03d"
+
+msgid "active"
+msgstr "aktyvus"
+
+msgid "auto"
+msgstr "auto"
+
+msgid "below Tunerslot 4"
+msgstr "po 4 imtuvo lizdu"
+
+#, python-format
+msgid "currentRPM:%d targetRPM:%d Temp:%4.1f"
+msgstr "Dabar aps./min. :%d Obj. aps./min.:%d Temp:%4.1f"
+
+msgid "disabled"
+msgstr "išjungta"
+
+msgid "display Info"
+msgstr "Informacija"
+
+msgid "do nothing"
+msgstr "nieko nedaryti"
+
+msgid "increases overheating protection to (C)"
+msgstr "padidina apsaugą nuo perkaitimo iki (°C)"
+
+msgid "left near Card-Slot"
+msgstr "kairėje prie kortelės lizdo"
+
+msgid "left near Front-CI"
+msgstr "kairėje prie priekinio CI"
+
+msgid "left of the Battery"
+msgstr "kairėje nuo baterijos"
+
+msgid "max Speed rpm"
+msgstr "maksimalus greitis aps./min."
+
+msgid "min Speed rpm"
+msgstr "minimalus greitis aps./min."
+
+msgid "near XILINX Spartan"
+msgstr "šalia XILINX Spartan"
+
+msgid "never"
+msgstr "niekada"
+
+msgid "no"
+msgstr "ne"
+
+msgid "not active"
+msgstr "neaktyvus"
+
+msgid "over Security Card"
+msgstr "virš Security Card"
+
+msgid "please set fan type (3Pin or 4Pin)"
+msgstr "Pasirinkite aušintuvo tipą (3, ar 4 kontaktų)"
+
+msgid "please wait (until 3min)..."
+msgstr "palaukite (iki 3min.)..."
+
+msgid "press Info for HDD-Temp"
+msgstr "spauskite 'Info' HDD temperatūrai sužinoti"
+
+msgid "read HDD-Temperature in HDD-Standby-Mode"
+msgstr "skaityti HDD temperatūrą HDD budėjimo režime"
+
+msgid "readme.txt"
+msgstr "readmede.txt"
+
+msgid "setup Fancontol inStandby mode"
+msgstr ""
+
+msgid "turn off"
+msgstr "išjungti"
+
+msgid "turn on"
+msgstr "įjungti"
+
+msgid "under the Fan"
+msgstr "prie aušintuvo"
+
+msgid "under the WLAN"
+msgstr "prie WLAN"
+
+msgid "yes"
+msgstr "taip"
+
+msgid "yes, Except for Recording or HDD"
+msgstr "Taip, išskyrus įrašymą, arba HDD"

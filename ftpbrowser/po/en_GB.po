@@ -225,4 +225,3 @@ msgstr "enter directory/get file/put file"
 
 msgid "open menu"
 msgstr "open menu"
-

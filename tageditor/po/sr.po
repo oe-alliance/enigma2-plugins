@@ -69,11 +69,8 @@ msgid "Rename this tag..."
 msgstr "Preimenuj ovu oznaku..."
 
 #, python-format
-msgid ""
-"Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo "
-"this!)"
-msgstr ""
-"Zameni oznaku \"%s\" svuda sa:   (Znajte da 'Otkaži' neće ovo vratiti!)"
+msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
+msgstr "Zameni oznaku \"%s\" svuda sa:   (Znajte da 'Otkaži' neće ovo vratiti!)"
 
 #. TRANSLATORS: this is the string used in the movie context menu for TagEditor
 msgid "edit tags"

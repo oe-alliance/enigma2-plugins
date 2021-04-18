@@ -75,4 +75,3 @@ msgstr "Vervang tag \"%s\" overal met:   (Merk op dat 'Annulleer' dit niet onged
 #. TRANSLATORS: this is the string used in the movie context menu for TagEditor
 msgid "edit tags"
 msgstr "Bewerk tags"
-

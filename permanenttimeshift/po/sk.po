@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pts-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-28 23:54+0000\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2010-06-29 19:17+0100\n"
 "Last-Translator: Miroslav Bilka <miroslav.bilka@zoznam.sk>\n"
 "Language-Team: none\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,61 +19,47 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Country: GERMANY\n"
 
-msgid "Save and stop"
-msgstr "Uložiť a zastaviť"
+msgid ""
+"\n"
+"An Input/output error usually indicates a corrupted filesystem! Please check the filesystem of your timeshift-device!"
+msgstr ""
 
-msgid "Save and record"
-msgstr "Uložiť a nahrávať"
+msgid ""
+"A recording is currently running.\n"
+"What do you want to do?"
+msgstr ""
+
+msgid "Ask user"
+msgstr ""
+
+msgid "Beta: Enable Permanent Recording?"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid ""
+"Could not activate Permanent-Timeshift!\n"
+"Timeshift-Path does not exist"
+msgstr ""
+
+msgid "Creating AP and SC Files"
+msgstr ""
+
+msgid "Creating Hardlink to Timeshift file failed!"
+msgstr "Zlyhalo vytvorenie linky na súbor časového posunu!"
+
+msgid "Current Event:"
+msgstr "Aktuálna relácia:"
+
+msgid "Default storage device is not available!"
+msgstr ""
 
 msgid "Don't save"
 msgstr "Neukladať"
 
-msgid "Timeshift"
-msgstr "Časový posun"
-
-msgid ""
-"OH NO!\n"
-"The timeshift that was marked to save at end of event, was lost because you zapped away!"
-msgstr ""
-"OCH NIE!\n"
-"Časový posun sa mal uložit na konci relácie, ale nepodarilo sa to, pretože ste prepli preč!"
-
-msgid "Timeshift saved to your harddisk!"
-msgstr "Časový posun sa uložil na Váš disk!"
-
-msgid "Timeshift copied to your harddisk!"
-msgstr "Časový posun sa skopíroval na Váš disk!"
-
-msgid "Timeshift save failed!"
-msgstr "Časový posun sa nepodarilo uložiť!"
-
-msgid "No Timeshift found to save as recording!"
-msgstr "Žiadny časový posun na uloženie sa nenašiel!"
-
-msgid "Permanent Timeshift Settings"
-msgstr "Nastavenia trvalého časového posunu"
-
-msgid ""
-"The Timeshift record was not saved yet!\n"
-"What do you want to do now with the timeshift file?"
-msgstr ""
-"Časový posun sa ešte neuložil!\n"
-"Čo chceš teraz urobiť so súborom časového posunu?"
-
-msgid "Which event do you want to save permanently?"
-msgstr "Ktorú reláciu chcete uložiť natrvalo?"
-
-msgid "Save Timeshift as Movie and stop recording"
-msgstr "Ulož časový posun ako Film a zastav nahrávanie"
-
-msgid "Save Timeshift as Movie and continue recording"
-msgstr "Ulož časový posun ako Film a pokračuj v nahrávaní"
-
 msgid "Don't save Timeshift as Movie"
 msgstr "Neukladaj časový posun ako Film"
-
-msgid "Current Event:"
-msgstr "Aktuálna relácia:"
 
 msgid "Getting Event Info failed!"
 msgstr "Zlyhalo načítanie informácií o programe!"
@@ -84,14 +71,40 @@ msgstr ""
 "Dosiahli ste maximálnu dĺžku časového posunu!\n"
 "Reštartni teraz časový posun ..."
 
-msgid "Timeshift will get saved at end of event!"
-msgstr "Časový posun sa uloží po skončení programu!"
+#, fuzzy
+msgid "Merging Timeshift files"
+msgstr "Zapni časový posun"
 
-msgid "save recording (stop after current event)"
-msgstr "uloží nahrávku (zastaviť po programe)"
+msgid "No HDD found or HDD not initialized!"
+msgstr ""
 
-msgid "save recording (Select event)"
-msgstr "uloží nahrávku (Vyber program)"
+msgid "No Timeshift found to save as recording!"
+msgstr "Žiadny časový posun na uloženie sa nenašiel!"
+
+msgid "No default storage device found!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Not enough free Diskspace!\n"
+"\n"
+"Filesize: %sMB\n"
+"Free Space: %sMB\n"
+"Path: %s"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+#, python-format
+msgid "PTS Plugin Error: %s"
+msgstr ""
+
+msgid "PTS-Plugin: Merging records failed!"
+msgstr ""
+
+msgid "PTS-Plugin: Restarting Timeshift!"
+msgstr ""
 
 msgid "Permanent Timeshift Enable"
 msgstr "Zapni časový posun"
@@ -102,15 +115,130 @@ msgstr "Maximum programov časového posunu"
 msgid "Permanent Timeshift Max Length"
 msgstr "Maximálna dĺžka časového posunu"
 
+msgid "Permanent Timeshift Settings"
+msgstr "Nastavenia trvalého časového posunu"
+
+#, fuzzy, python-format
+msgid "Permanent Timeshift Settings Version %s"
+msgstr "Nastavenia trvalého časového posunu"
+
 msgid "Permanent Timeshift Start Delay"
 msgstr "Časový posun začne s oneskorením"
+
+msgid "Please make sure to set up your default storage device in menu -> setup -> system -> recording paths."
+msgstr ""
+
+msgid "Please make sure to set up your storage devices with the storage management in menu -> setup -> system -> storage devices."
+msgstr ""
+
+msgid "Please verify if your default storage device is attached or set up your default storage device in menu -> setup -> system -> recording paths."
+msgstr ""
+
+msgid "Record"
+msgstr ""
+
+msgid "Record started! Stopping timeshift now ..."
+msgstr ""
+
+msgid "Save Timeshift as Movie and continue recording"
+msgstr "Ulož časový posun ako Film a pokračuj v nahrávaní"
+
+msgid "Save Timeshift as Movie and stop recording"
+msgstr "Ulož časový posun ako Film a zastav nahrávanie"
+
+msgid "Save and record"
+msgstr "Uložiť a nahrávať"
+
+msgid "Save and stop"
+msgstr "Uložiť a zastaviť"
+
+#, fuzzy
+msgid "Saving Timeshift files"
+msgstr "Časový posun sa nepodarilo uložiť!"
+
+msgid "Saving timeshift as movie now. This might take a while!"
+msgstr ""
+
+msgid "Show PTS Infobar while timeshifting?"
+msgstr ""
+
+msgid "Start recording?"
+msgstr ""
+
+#, fuzzy
+msgid "Stop timeshift while recording?"
+msgstr "Ulož časový posun ako Film a zastav nahrávanie"
+
+msgid ""
+"The Filesystem on your Timeshift-Device does not support hardlinks.\n"
+"Make sure it is formated in EXT2 or EXT3!"
+msgstr ""
+
+msgid ""
+"The Timeshift record was not saved yet!\n"
+"What do you want to do now with the timeshift file?"
+msgstr ""
+"Časový posun sa ešte neuložil!\n"
+"Čo chceš teraz urobiť so súborom časového posunu?"
+
+msgid "Timeshift"
+msgstr "Časový posun"
+
+#, fuzzy
+msgid "Timeshift Settings"
+msgstr "Nastavenia trvalého časového posunu"
+
+msgid "Timeshift save failed!"
+msgstr "Časový posun sa nepodarilo uložiť!"
+
+msgid "Timeshift saved to your harddisk!"
+msgstr "Časový posun sa uložil na Váš disk!"
+
+msgid "Timeshift will get saved at end of event!"
+msgstr "Časový posun sa uloží po skončení programu!"
 
 msgid "Timeshift-Save Action on zap"
 msgstr "Časový posun - uložiť akciu pri zapnutí"
 
-msgid "Clean Timeshift Buffer on zap?"
-msgstr "Vyčistiť buffer časového posunu pri zapnutí?"
+msgid "Unconfigured storage devices found!"
+msgstr ""
 
-msgid "Creating Hardlink to Timeshift file failed!"
-msgstr "Zlyhalo vytvorenie linky na súbor časového posunu!"
+msgid "Which event do you want to save permanently?"
+msgstr "Ktorú reláciu chcete uložiť natrvalo?"
 
+msgid "add recording (enter recording duration)"
+msgstr ""
+
+#, fuzzy
+msgid "add recording (enter recording endtime)"
+msgstr "uloží nahrávku (zastaviť po programe)"
+
+msgid "add recording (indefinitely)"
+msgstr ""
+
+#, fuzzy
+msgid "add recording (stop after current event)"
+msgstr "uloží nahrávku (zastaviť po programe)"
+
+#, fuzzy
+msgid "change recording (duration)"
+msgstr "uloží nahrávku (Vyber program)"
+
+#, fuzzy
+msgid "change recording (endtime)"
+msgstr "uloží nahrávku (Vyber program)"
+
+msgid "do nothing"
+msgstr ""
+
+msgid "don't record"
+msgstr ""
+
+msgid "save recording (Select event)"
+msgstr "uloží nahrávku (Vyber program)"
+
+msgid "save recording (stop after current event)"
+msgstr "uloží nahrávku (zastaviť po programe)"
+
+msgid "stop recording"
+msgstr ""

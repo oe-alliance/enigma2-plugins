@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Quickbutton\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 20:16+0300\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2017-07-10 20:19+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -11,8 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 msgid "Assign plugin to long blue key pressed"
@@ -44,6 +43,9 @@ msgstr ""
 "Įvyko klaida!\n"
 "Pranešimas: %s"
 
+msgid "HbbTV Applications"
+msgstr ""
+
 msgid "Just Scale"
 msgstr "Įtalpinti, keičiant mastelį"
 
@@ -61,6 +63,9 @@ msgstr "Nieko"
 
 msgid "OK"
 msgstr " Gerai"
+
+msgid "Overwrite HBBTV-red-button"
+msgstr "Perrašyti HBBTV 'RAUDONĄ' mygtuką"
 
 msgid "Pan&Scan"
 msgstr "Įtalpinti, nukerpant šonus"
@@ -103,6 +108,3 @@ msgstr "'Quickbutton' sąranka"
 
 msgid "switch 4:3 content display"
 msgstr "perjungti 4:3 santykio vaizdą"
-
-msgid "Overwrite HBBTV-red-button"
-msgstr "Perrašyti HBBTV 'RAUDONĄ' mygtuką"

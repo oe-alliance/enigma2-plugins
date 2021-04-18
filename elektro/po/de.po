@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Elektro Power Save\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-29 17:21+Mitteleuropäische Sommerzeit\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2011-09-29 17:22+0100\n"
 "Last-Translator: joergm6 <joergm6@online.de>\n"
 "Language-Team: Morty <morty@gmx.net>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,285 +16,203 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: plugin.py:110
-msgid "Elektro Power Save"
-msgstr "Elektro Power Save"
-
-#: plugin.py:111
-msgid "Automatically shut down to deep standby"
-msgstr "Elektro Power Save aktivieren"
-
-#: plugin.py:112
-msgid "Extensions menu"
-msgstr "Erweiterungs-Menü"
-
-#: plugin.py:112
-msgid "Plugin menu"
-msgstr "Plugin Menü"
-
-#: plugin.py:124
-msgid "yes, Profile 1"
-msgstr "ja, Profil 1"
-
-#: plugin.py:124
-msgid "yes, Profile 2"
-msgstr "ja, Profil 2"
-
-#: plugin.py:134
-msgid "Monday"
-msgstr "Montag"
-
-#: plugin.py:135
-msgid "Tuesday"
-msgstr "Dienstag"
-
-#: plugin.py:136
-msgid "Wednesday"
-msgstr "Mittwoch"
-
-#: plugin.py:137
-msgid "Thursday"
-msgstr "Donnerstag"
-
-#: plugin.py:138
-msgid "Friday"
-msgstr "Freitag"
-
-#: plugin.py:139
-msgid "Saturday"
-msgstr "Samstag"
-
-#: plugin.py:140
-msgid "Sunday"
-msgstr "Sonntag"
-
-#: plugin.py:150
-msgid "no Name"
-msgstr "kein Name"
-
-#: plugin.py:151
-msgid "Connection Error"
-msgstr "Verbindungs Fehler"
-
-#: plugin.py:211
-#: plugin.py:222
-#: plugin.py:230
-#: plugin.py:530
-msgid "Ver."
-msgstr "Ver."
-
-#: plugin.py:263
-#: plugin.py:268
-msgid "Wakeup"
-msgstr "Aufwachen"
-
-#: plugin.py:264
-#: plugin.py:269
-msgid "Sleep"
-msgstr "Ruhezustand"
-
-#: plugin.py:265
-#: plugin.py:270
-msgid "Next day starts at"
-msgstr "Der nächste Tag beginnt um"
-
-#: plugin.py:266
-#: plugin.py:271
-msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
-msgstr "Soll die Box z.B. Montag Nacht um 1 Uhr in den Deep Standby gehen, ist es genau genommen schon Dienstag. Damit dies trotzdem möglich ist, muss angegeben werden, wann der nächste Tag anfängt."
-
-#: plugin.py:275
-#: plugin.py:321
-#: plugin.py:400
-#: plugin.py:507
-msgid "Cancel"
-msgstr "Abbruch"
-
-#: plugin.py:276
-#: plugin.py:322
-#: plugin.py:401
-#: plugin.py:508
-msgid "Ok"
-msgstr "OK"
-
-#: plugin.py:317
-msgid "IP Address"
-msgstr "IP Adresse"
-
-#: plugin.py:354
-msgid "please wait..."
-msgstr "Bitte warten..."
-
-#: plugin.py:391
-msgid "NAS/Server Name or IP"
-msgstr "NAS/Server Name oder IP"
-
-#: plugin.py:392
-msgid "Username"
-msgstr "Nutzername"
-
-#: plugin.py:393
-msgid "Password"
-msgstr "Passwort"
-
-#: plugin.py:394
-msgid "Command [poweroff, shutdown -h,...]"
-msgstr "Befehl [poweroff, shutdown -h,...]"
-
-#: plugin.py:395
-msgid "Telnet Port"
-msgstr "Telnet Port"
-
-#: plugin.py:396
-msgid "Waiting until poweroff"
-msgstr "Warte bis poweroff"
-
-#: plugin.py:402
-msgid "Run"
-msgstr "Ausführen"
-
-#: plugin.py:461
-msgid "Active Time Profile"
-msgstr "Aktives Zeit Profil"
-
-#: plugin.py:462
-msgid "The active Time Profile is (1 or 2)."
-msgstr "Das aktive Zeit Profile ist (1 oder 2)"
-
-#: plugin.py:463
-msgid "Enable Elektro Power Save"
-msgstr "Elektro Power Save aktivieren"
-
-#: plugin.py:464
-msgid "Unless this is enabled, this plugin won't run automatically."
-msgstr "Aktiviert das Plugin"
-
-#: plugin.py:465
-msgid "Use both profiles alternately"
-msgstr "Beide Profile abwechselnd verwenden"
-
-#: plugin.py:466
-msgid "Both profiles are used alternately. When shutting down the other profile is enabled. This allows two time cycles per day. Do not overlap the times."
-msgstr "Beide Profile werden abwechselnd eingesetzt. Beim Herunterfahren wird des anderen Profil aktiviert. Dieses erlaubt 2 Zeitzyclen pro Tag. Die Zeiten dürfen sich nicht überschneiden."
-
-#: plugin.py:467
-#: plugin.py:624
-msgid "Standby on boot"
-msgstr "Nach dem Booten in den Standby"
-
-#: plugin.py:468
-msgid "Puts the box in standby mode after boot."
-msgstr "Versetzt die Box nach dem Booten in den Standby Modus."
-
-#: plugin.py:469
-msgid "Standby on manual boot"
-msgstr "Nach dem manuellen Booten in den Standby"
-
-#: plugin.py:470
-msgid "Whether to put the box in standby when booted manually. On manual boot the box will not go to standby before the next deep standby interval starts, even if this option is set. This option is only active if 'Standby on boot' option is set, too."
-msgstr "Nach einem manuellen Bootvorgang in den Standby Modus gehen? Die Box geht nach einem manuellen Bootvorgang nicht vor der nächsten Deep Standby-Zeit in den Ruhezustand, selbst wenn diese Option aktiviert ist. Diese Option wird nur wirksam, wenn 'Nach dem Booten in den Standby' auch aktiviert ist."
-
-#: plugin.py:471
-msgid "Standby on boot screen timeout"
-msgstr "Anzeigedauer der Abfrage \"In den Standby?\""
-
-#: plugin.py:472
-msgid "Specify how long to show the standby query on boot screen. This value can be set to ensure the box does not shut down to deep standby again too fast when in standby mode."
-msgstr "Stellt ein, wie lange die Standby-Abfrage angezeigt wird. Dieser Wert kann gesetzt werden um sicher zu stellen, dass sich die Box während der Standby-Zeit nicht zu schnell wieder abschaltet."
-
-#: plugin.py:473
-msgid "Force sleep (even when not in standby)"
-msgstr "Erzwinge Ruhezustand (auch wenn nicht im Standby)"
-
-#: plugin.py:474
-msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
-msgstr "Erzwingt den Ruhezustand auch, wenn die Box nicht im Standby ist. Auf Aufnahmen hat dies keinen Einfluss."
-
-#: plugin.py:475
-msgid "Avoid deep standby when HDD is active, e.g. for FTP"
-msgstr "Kein Deep Standby, wenn die HDD aktiv ist, z. B. für FTP"
-
-#: plugin.py:476
-msgid "Wait for the HDD to enter sleep mode. Depending on the configuration this can prevent the box entirely from entering deep standby mode."
-msgstr "Warten bis die Festplatte in den Ruhemodus geht. Je nach Konfiguration kann dies den Ruhezustand vollständig unterbinden."
-
-#: plugin.py:477
-msgid "Check IPs (press OK to edit)"
-msgstr "Teste IPs (drücke OK zum Editieren)"
-
-#: plugin.py:478
-msgid "This list of IP addresses is checked. Elektro waits until addresses no longer responds to ping."
-msgstr "Diese Liste von IP Adressen wird überprüft. Elektro wartet solange bis keine Adresse mehr auf Ping antwortet."
-
-#: plugin.py:479
-msgid "NAS Poweroff (press OK to edit)"
-msgstr "NAS Poweroff (drücke OK zum Editieren)"
-
-#: plugin.py:480
 msgid "A NAS/Server can be shut down. Is required activated Telnet."
 msgstr "Ein NAS/Server kann heruntergefahren werden. Es muss Telnet aktiviert sein."
 
-#: plugin.py:481
-msgid "Don't wake up"
-msgstr "Nicht aufwachen"
+msgid "Active Time Profile"
+msgstr "Aktives Zeit Profil"
 
-#: plugin.py:482
-msgid "Do not wake up at the end of next deep standby interval."
-msgstr "Die Box wacht nach dem Ende der nächsten Ruhezeit nicht automatisch auf."
+msgid "Automatically shut down to deep standby"
+msgstr "Elektro Power Save aktivieren"
 
-#: plugin.py:483
-msgid "Holiday mode (experimental)"
-msgstr "Urlaubsmodus (experimentell)"
+msgid "Avoid deep standby when HDD is active, e.g. for FTP"
+msgstr "Kein Deep Standby, wenn die HDD aktiv ist, z. B. für FTP"
 
-#: plugin.py:484
-msgid "The box always enters deep standby mode, except for recording."
-msgstr "Die Box bleibt immer im Deep Standby Modus, sofern nicht gerade aufgenommen wird."
+msgid "Both profiles are used alternately. When shutting down the other profile is enabled. This allows two time cycles per day. Do not overlap the times."
+msgstr "Beide Profile werden abwechselnd eingesetzt. Beim Herunterfahren wird des anderen Profil aktiviert. Dieses erlaubt 2 Zeitzyclen pro Tag. Die Zeiten dürfen sich nicht überschneiden."
 
-#: plugin.py:485
-msgid "Show in"
-msgstr "Zeigen in"
+msgid "Cancel"
+msgstr "Abbruch"
 
-#: plugin.py:486
-msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
-msgstr "Auswahl, ob Elektro im Plugin Menü oder Erweiterungs-Menü gezeigt werden soll (erfordert GUI Neustart)."
+msgid "Check IPs (press OK to edit)"
+msgstr "Teste IPs (drücke OK zum Editieren)"
 
-#: plugin.py:487
-msgid "Name"
-msgstr "Name"
+msgid "Command [poweroff, shutdown -h,...]"
+msgstr "Befehl [poweroff, shutdown -h,...]"
 
-#: plugin.py:488
-msgid "Specify plugin name to be used in menu (needs GUI restart)."
-msgstr "Name, unter dem das Plugin im Menü erscheinen soll (erfordert GUI Neustart)."
+msgid "Connection Error"
+msgstr "Verbindungs Fehler"
 
-#: plugin.py:489
 msgid "Description"
 msgstr "Beschreibung"
 
-#: plugin.py:490
-msgid "Specify plugin description to be used in menu (needs GUI restart)."
-msgstr "Beschreibung, mit der das Plugin im Menü erscheinen soll (erfordert GUI Neustart)."
+msgid "Do not wake up at the end of next deep standby interval."
+msgstr "Die Box wacht nach dem Ende der nächsten Ruhezeit nicht automatisch auf."
 
-#: plugin.py:509
-msgid "Help"
-msgstr "Hilfe"
+msgid "Don't wake up"
+msgstr "Nicht aufwachen"
 
-#: plugin.py:510
-msgid "Times"
-msgstr "Uhrzeiten"
+msgid "Elektro Power Save"
+msgstr "Elektro Power Save"
 
-#: plugin.py:558
-msgid "Showing Elektro readme.txt"
-msgstr "Zeige Elektro Readme.txt"
+msgid "Enable Elektro Power Save"
+msgstr "Elektro Power Save aktivieren"
 
-#: plugin.py:558
-msgid "readme.txt"
-msgstr "readme-de.txt"
+msgid "Extensions menu"
+msgstr "Erweiterungs-Menü"
 
-#: plugin.py:650
+msgid "Force sleep (even when not in standby)"
+msgstr "Erzwinge Ruhezustand (auch wenn nicht im Standby)"
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
+msgstr "Erzwingt den Ruhezustand auch, wenn die Box nicht im Standby ist. Auf Aufnahmen hat dies keinen Einfluss."
+
+msgid "Friday"
+msgstr "Freitag"
+
 msgid "Go to Standby now?"
 msgstr "Jetzt in den Standby gehen?"
 
-#: plugin.py:828
 msgid "Go to sleep now?"
 msgstr "Jetzt in den Ruhezustand gehen?"
 
+msgid "Help"
+msgstr "Hilfe"
+
+msgid "Holiday mode (experimental)"
+msgstr "Urlaubsmodus (experimentell)"
+
+msgid "IP Address"
+msgstr "IP Adresse"
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr "Soll die Box z.B. Montag Nacht um 1 Uhr in den Deep Standby gehen, ist es genau genommen schon Dienstag. Damit dies trotzdem möglich ist, muss angegeben werden, wann der nächste Tag anfängt."
+
+msgid "Monday"
+msgstr "Montag"
+
+msgid "NAS Poweroff (press OK to edit)"
+msgstr "NAS Poweroff (drücke OK zum Editieren)"
+
+msgid "NAS/Server Name or IP"
+msgstr "NAS/Server Name oder IP"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Next day starts at"
+msgstr "Der nächste Tag beginnt um"
+
+msgid "Ok"
+msgstr "OK"
+
+msgid "Password"
+msgstr "Passwort"
+
+msgid "Plugin menu"
+msgstr "Plugin Menü"
+
+msgid "Puts the box in standby mode after boot."
+msgstr "Versetzt die Box nach dem Booten in den Standby Modus."
+
+msgid "Run"
+msgstr "Ausführen"
+
+msgid "Saturday"
+msgstr "Samstag"
+
+msgid "Show in"
+msgstr "Zeigen in"
+
+msgid "Showing Elektro readme.txt"
+msgstr "Zeige Elektro Readme.txt"
+
+msgid "Sleep"
+msgstr "Ruhezustand"
+
+msgid "Specify how long to show the standby query on boot screen. This value can be set to ensure the box does not shut down to deep standby again too fast when in standby mode."
+msgstr "Stellt ein, wie lange die Standby-Abfrage angezeigt wird. Dieser Wert kann gesetzt werden um sicher zu stellen, dass sich die Box während der Standby-Zeit nicht zu schnell wieder abschaltet."
+
+msgid "Specify plugin description to be used in menu (needs GUI restart)."
+msgstr "Beschreibung, mit der das Plugin im Menü erscheinen soll (erfordert GUI Neustart)."
+
+msgid "Specify plugin name to be used in menu (needs GUI restart)."
+msgstr "Name, unter dem das Plugin im Menü erscheinen soll (erfordert GUI Neustart)."
+
+msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
+msgstr "Auswahl, ob Elektro im Plugin Menü oder Erweiterungs-Menü gezeigt werden soll (erfordert GUI Neustart)."
+
+msgid "Standby on boot"
+msgstr "Nach dem Booten in den Standby"
+
+msgid "Standby on boot screen timeout"
+msgstr "Anzeigedauer der Abfrage \"In den Standby?\""
+
+msgid "Standby on manual boot"
+msgstr "Nach dem manuellen Booten in den Standby"
+
+msgid "Sunday"
+msgstr "Sonntag"
+
+msgid "Telnet Port"
+msgstr "Telnet Port"
+
+msgid "The active Time Profile is (1 or 2)."
+msgstr "Das aktive Zeit Profile ist (1 oder 2)"
+
+msgid "The box always enters deep standby mode, except for recording."
+msgstr "Die Box bleibt immer im Deep Standby Modus, sofern nicht gerade aufgenommen wird."
+
+msgid "This list of IP addresses is checked. Elektro waits until addresses no longer responds to ping."
+msgstr "Diese Liste von IP Adressen wird überprüft. Elektro wartet solange bis keine Adresse mehr auf Ping antwortet."
+
+msgid "Thursday"
+msgstr "Donnerstag"
+
+msgid "Times"
+msgstr "Uhrzeiten"
+
+msgid "Tuesday"
+msgstr "Dienstag"
+
+msgid "Unless this is enabled, this plugin won't run automatically."
+msgstr "Aktiviert das Plugin"
+
+msgid "Use both profiles alternately"
+msgstr "Beide Profile abwechselnd verwenden"
+
+msgid "Username"
+msgstr "Nutzername"
+
+msgid "Ver."
+msgstr "Ver."
+
+msgid "Wait for the HDD to enter sleep mode. Depending on the configuration this can prevent the box entirely from entering deep standby mode."
+msgstr "Warten bis die Festplatte in den Ruhemodus geht. Je nach Konfiguration kann dies den Ruhezustand vollständig unterbinden."
+
+msgid "Waiting until poweroff"
+msgstr "Warte bis poweroff"
+
+msgid "Wakeup"
+msgstr "Aufwachen"
+
+msgid "Wednesday"
+msgstr "Mittwoch"
+
+msgid "Whether to put the box in standby when booted manually. On manual boot the box will not go to standby before the next deep standby interval starts, even if this option is set. This option is only active if 'Standby on boot' option is set, too."
+msgstr "Nach einem manuellen Bootvorgang in den Standby Modus gehen? Die Box geht nach einem manuellen Bootvorgang nicht vor der nächsten Deep Standby-Zeit in den Ruhezustand, selbst wenn diese Option aktiviert ist. Diese Option wird nur wirksam, wenn 'Nach dem Booten in den Standby' auch aktiviert ist."
+
+msgid "no Name"
+msgstr "kein Name"
+
+msgid "please wait..."
+msgstr "Bitte warten..."
+
+msgid "readme.txt"
+msgstr "readme-de.txt"
+
+msgid "yes, Profile 1"
+msgstr "ja, Profil 1"
+
+msgid "yes, Profile 2"
+msgstr "ja, Profil 2"

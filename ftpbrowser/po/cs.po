@@ -218,9 +218,3 @@ msgstr "vložit adresář/načíst soubor/vložit soubor"
 
 msgid "open menu"
 msgstr "otevřít menu"
-
-#~ msgid "Name"
-#~ msgstr "Název"
-
-#~ msgid "Pasive:"
-#~ msgstr "Pasivní:"

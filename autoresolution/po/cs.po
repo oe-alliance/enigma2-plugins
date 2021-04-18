@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Automatic Screen Resolution V. 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: jerry00 <jerry00@quick.cz>\n"
 "Language-Team: jerry00\n"
@@ -16,6 +16,15 @@ msgstr ""
 "X-Poedit-Country: CZECH\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
+
+msgid "Alternative resolution when native not supported"
+msgstr ""
+
+msgid "Ask before changing videomode"
+msgstr ""
+
+msgid "Auto frame rate (refresh need 'multi')"
+msgstr ""
 
 msgid "Autoresolution"
 msgstr "Auto-rozlišení"
@@ -32,14 +41,18 @@ msgstr ""
 msgid "Autoresolution is not working in Scart/DVI-PC Mode"
 msgstr ""
 
-msgid "Autoresolution settings"
-msgstr ""
-
 msgid "Autoresolution videomode setup"
 msgstr ""
 
 msgid "Cancel"
 msgstr "Zrušit"
+
+#, python-format
+msgid ""
+"Changing framerate for current service?\n"
+"Current framerate: %s\n"
+"New framerate: %s\n"
+msgstr ""
 
 msgid "Deinterlacer mode for interlaced content"
 msgstr "Neprokládat prokládaný obsah"
@@ -59,11 +72,34 @@ msgstr "Zapnout režim 1080p25"
 msgid "Enable 1080p30 Mode"
 msgstr "Zapnout režim 1080p30"
 
+#, fuzzy
+msgid "Enable 2160p24 Mode"
+msgstr "Zapnout režim 720p24"
+
+#, fuzzy
+msgid "Enable 2160p25 Mode"
+msgstr "Zapnout režim 1080p25"
+
+#, fuzzy
+msgid "Enable 2160p30 Mode"
+msgstr "Zapnout režim 1080p30"
+
 msgid "Enable 720p24 Mode"
+msgstr "Zapnout režim 720p24"
+
+#, fuzzy
+msgid "Enable 720p50 Mode"
 msgstr "Zapnout režim 720p24"
 
 msgid "Enable Autoresolution"
 msgstr "Zapnout Auto-rozlišení"
+
+msgid "Exit"
+msgstr ""
+
+#, fuzzy
+msgid "FHD 50/60HZ Progressive Mode"
+msgstr "SD 30/60HZ progresivní režim"
 
 msgid "HD Interlace Mode"
 msgstr "HD prokládaný režim"
@@ -71,10 +107,32 @@ msgstr "HD prokládaný režim"
 msgid "HD Progressive Mode"
 msgstr "HD progresivní režim"
 
+msgid "Lock timeout"
+msgstr ""
+
+#, fuzzy
+msgid "Manual resolution"
+msgstr "Zapnout Auto-rozlišení"
+
+msgid "Manual resolution is not working in Scart/DVI-PC mode!"
+msgstr ""
+
+msgid "Message timeout"
+msgstr ""
+
+msgid "Mode"
+msgstr ""
+
 msgid "OK"
 msgstr ""
 
+msgid "Please select a resolution..."
+msgstr ""
+
 msgid "Refresh Rate"
+msgstr ""
+
+msgid "Return back without confirmation after 10 sec."
 msgstr ""
 
 msgid "Running in testmode"
@@ -95,8 +153,40 @@ msgstr "SD 30/60HZ prokládaný režim"
 msgid "SD 30/60HZ Progressive Mode"
 msgstr "SD 30/60HZ progresivní režim"
 
+msgid "Show 'Manual resolution' in extensions menu"
+msgstr ""
+
 msgid "Show info screen"
 msgstr "Zobrazit panel informací"
+
+msgid "This resolution is OK?"
+msgstr ""
+
+#, fuzzy
+msgid "UHD Interlace Mode"
+msgstr "HD prokládaný režim"
+
+#, fuzzy
+msgid "UHD Progressive Mode"
+msgstr "HD progresivní režim"
+
+msgid "Use 60HZ instead 30HZ"
+msgstr ""
+
+msgid "Video: "
+msgstr ""
+
+#, python-format
+msgid "Videocontent: %sx%s%s %sHZ"
+msgstr ""
+
+#, python-format
+msgid "Videomode: %s"
+msgstr ""
+
+#, python-format
+msgid "Videomode: %s %s %s"
+msgstr ""
 
 msgid "auto"
 msgstr ""
@@ -106,6 +196,9 @@ msgstr ""
 
 msgid "default"
 msgstr "výchozí"
+
+msgid "manual"
+msgstr ""
 
 msgid "off"
 msgstr ""
@@ -118,39 +211,3 @@ msgstr ""
 
 msgid "seconds"
 msgstr ""
-
-#~ msgid "Automatic Timerlist Cleanup Setup"
-#~ msgstr "Automatické nastavení Vyčištění časovače"
-
-#~ msgid "Cleanup timerlist-entries"
-#~ msgstr "Vyčištění položek časovače"
-
-#~ msgid "SD 25/50HZ Progressive mode"
-#~ msgstr "SD 25/50HZ prograsivní režim"
-
-#~ msgid "Timerlist Cleanup Setup"
-#~ msgstr "Nastavení Vyčištění časovače"
-
-#~ msgid "disabled"
-#~ msgstr "vypnuto"
-
-#~ msgid "immediately after recording"
-#~ msgstr "okamžitě po záznamu"
-
-#~ msgid "older than 1 day"
-#~ msgstr "starší jak 1 den"
-
-#~ msgid "older than 1 week"
-#~ msgstr "starší jak 1 týden"
-
-#~ msgid "older than 2 weeks"
-#~ msgstr "starší jak 2 týdny"
-
-#~ msgid "older than 3 days"
-#~ msgstr "starší jak 3 dny"
-
-#~ msgid "older than 4 weeks"
-#~ msgstr "starší jak 4 týdny"
-
-#~ msgid "older than 6 weeks"
-#~ msgstr "starší jak 6 týdnů"

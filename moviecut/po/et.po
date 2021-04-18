@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-15 14:10+0000\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2016-10-30 11:46+0200\n"
 "Last-Translator: rimas\n"
 "Language-Team: rimas\n"
@@ -18,159 +18,112 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.9\n"
 
-#: ../src_py/plugin.py:41
 msgid "Advanced cut specification..."
 msgstr "Lõigete täpsem määramine..."
 
-#: ../src_py/plugin.py:278
-#, python-format
-msgid ""
-"Another movie is currently cut.\n"
-"The movie \"%s\" will be cut in the background after it."
-msgstr ""
-"Hetkel toimub teise filmi lõikamine.\n"
-"Film \"%s\" lõigatakse pärast seda taustal."
-
-#: ../src_py/plugin.py:247
 msgid "Bad arguments"
 msgstr "Kõlbmatud määrangud"
 
-#: ../src_py/plugin.py:88
 msgid "Cancel"
 msgstr "Tühista"
 
-#: ../src_py/plugin.py:179
 msgid "Choose target folder"
 msgstr "Vali sihtkataloog"
 
-#: ../src_py/plugin.py:250
 msgid "Couldn't open input .ap file"
 msgstr "Sisend .ap faili avamine nurjus"
 
-#: ../src_py/plugin.py:249
 msgid "Couldn't open input .cuts file"
 msgstr "Sisend .cuts faili avamine nurjus"
 
-#: ../src_py/plugin.py:248
 msgid "Couldn't open input .ts file"
 msgstr "Sisend .ts faili avamine nurjus"
 
-#: ../src_py/plugin.py:253
 msgid "Couldn't open output .ap file"
 msgstr "Väljund .ap faili avamine nurjus"
 
-#: ../src_py/plugin.py:252
 msgid "Couldn't open output .cuts file"
 msgstr "Väljund .cuts faili avamine nurjus"
 
-#: ../src_py/plugin.py:251
 msgid "Couldn't open output .ts file"
 msgstr "Väljund .ts faili avamine nurjus"
 
-#: ../src_py/plugin.py:131
 msgid "Cut Parameter Input"
 msgstr "Lõikamise määrangud"
 
-#: ../src_py/plugin.py:123
 msgid "Cut source:"
 msgstr "Lõigatav:"
 
-#: ../src_py/plugin.py:104
 msgid "Cutlist"
 msgstr "Lõiked"
 
-#: ../src_py/plugin.py:124
 msgid "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
 msgstr "Lõikekohad (ALGUS LÕPP ALGUS LÕPP ... tsükkel tund:min:sek)"
 
-#: ../src_py/plugin.py:247 ../src_py/plugin.py:248 ../src_py/plugin.py:249
-#: ../src_py/plugin.py:250 ../src_py/plugin.py:251 ../src_py/plugin.py:252
-#: ../src_py/plugin.py:253 ../src_py/plugin.py:254 ../src_py/plugin.py:255
-#: ../src_py/plugin.py:256
 #, python-format
 msgid "Cutting failed for movie \"%s\""
 msgstr "Filmi \"%s\" lõikamine nurjus"
 
-#: ../src_py/plugin.py:257
 #, python-format
 msgid "Cutting was aborted for movie \"%s\""
 msgstr "Filmi \"%s\" lõikamine katkestati"
 
-#: ../src_py/plugin.py:38
 msgid "Don't cut"
 msgstr "Ära lõika"
 
-#: ../src_py/plugin.py:254
 msgid "Empty .ap file"
 msgstr "Tühi .ap fail"
 
-#: ../src_py/plugin.py:24
+#, fuzzy
+msgid "Execute cuts"
+msgstr "Teosta lõikamine..."
+
 msgid "Execute cuts..."
 msgstr "Teosta lõikamine..."
 
-#: ../src_py/plugin.py:43
 #, python-format
 msgid "How would you like to cut \"%s\"?"
 msgstr "Kuidas soovid \"%s\" lõigata?"
 
-#: ../src_py/plugin.py:104
 msgid "Manual specification"
 msgstr "Käsitsi määramine"
 
-#: ../src_py/plugin.py:121
 msgid "New description:"
 msgstr "Uus sisututvustus:"
 
-#: ../src_py/plugin.py:119
 msgid "New filename:"
 msgstr "Uus failinimi:"
 
-#: ../src_py/plugin.py:122
 msgid "New location:"
 msgstr "Uus asukoht:"
 
-#: ../src_py/plugin.py:120
 msgid "New title:"
 msgstr "Uus nimi:"
 
-#: ../src_py/plugin.py:96
 msgid "No"
 msgstr "Ei"
 
-#: ../src_py/plugin.py:255
 msgid "No cuts specified"
 msgstr "Lõikekohad määramata"
 
-#: ../src_py/plugin.py:87
 msgid "OK"
 msgstr "OK"
 
-#: ../src_py/plugin.py:40
 msgid "Place the cut movie in a new file ending with \" cut\""
 msgstr "Loo uus lõigatud \"cut\" lõpuga fail "
 
-#: ../src_py/plugin.py:256
 msgid "Read/write error (disk full?)"
 msgstr "Lugemise/kirjutamise viga (ketas täis?)"
 
-#: ../src_py/plugin.py:118
 msgid "Replace original:"
 msgstr "Asenda algne:"
 
-#: ../src_py/plugin.py:39
 msgid "Replace the original movie with the cut movie"
 msgstr "Asenda algne film lõigatud filmiga"
 
-#: ../src_py/plugin.py:276
-#, python-format
-msgid "The movie \"%s\" is cut in the background."
-msgstr "Filmi \"%s\" lõikamine toimub taustal."
-
-#: ../src_py/plugin.py:246
 #, python-format
 msgid "The movie \"%s\" is successfully cut"
 msgstr "Filmi \"%s\" lõikamine õnnestus"
 
-#: ../src_py/plugin.py:96
 msgid "Yes"
 msgstr "Jah"

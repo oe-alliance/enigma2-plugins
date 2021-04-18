@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,42 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/plugin.py:51
 msgid "Cancel"
 msgstr ""
 
-#: ../src/plugin.py:25
 msgid "Change Root Password"
 msgstr ""
 
-#: ../src/plugin.py:130
-msgid "Change or reset the root password of your dreambox"
+msgid "Change or reset the root password of your Receiver"
 msgstr ""
 
-#: ../src/plugin.py:73
 msgid "Enter new Password"
 msgstr ""
 
-#: ../src/plugin.py:113
 msgid "Enter your password here:"
 msgstr ""
 
-#: ../src/plugin.py:52
 msgid "Set Password"
 msgstr ""
 
-#: ../src/plugin.py:88
 msgid "Sucessfully changed password for root user to: "
 msgstr ""
 
-#: ../src/plugin.py:90
 msgid "Unable to change/reset password for root user"
 msgstr ""
 
-#: ../src/plugin.py:53
 msgid "new Random"
 msgstr ""
 
-#: ../src/plugin.py:54
 msgid "virt. Keyboard"
 msgstr ""

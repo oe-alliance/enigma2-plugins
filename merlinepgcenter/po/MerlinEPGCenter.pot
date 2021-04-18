@@ -1,413 +1,318 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR ORGANIZATION
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-08-07 20:24+CEST\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: ENCODING\n"
-"Generated-By: pygettext.py 1.5\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 
-
-#: ConfigTabs.py:63 EpgCenterList.py:966
-msgid "disabled"
-msgstr ""
-
-#: ConfigTabs.py:98
-msgid "single line style"
-msgstr ""
-
-#: ConfigTabs.py:99
-msgid "with short description"
-msgstr ""
-
-#: ConfigTabs.py:109
-msgid "list and event info: simple"
-msgstr ""
-
-#: ConfigTabs.py:110
-msgid "list and event info: gradient"
-msgstr ""
-
-#: ConfigTabs.py:111
-msgid "list and event info: four parts"
-msgstr ""
-
-#: ConfigTabs.py:112
-msgid "list and event info: percent (text)"
-msgstr ""
-
-#: ConfigTabs.py:113
-msgid "list: off, event info: simple"
-msgstr ""
-
-#: ConfigTabs.py:114
-msgid "list: off, event info: gradient"
-msgstr ""
-
-#: ConfigTabs.py:115
-msgid "list: off, event info: four parts"
-msgstr ""
-
-#: ConfigTabs.py:116
-msgid "list: off, event info: percent (text)"
-msgstr ""
-
-#: ConfigTabs.py:187
-msgid "Prime time:"
-msgstr ""
-
-#: ConfigTabs.py:188
-msgid "Remember last tab:"
-msgstr ""
-
-#: ConfigTabs.py:189
-msgid "Select running service on start:"
-msgstr ""
-
-#: ConfigTabs.py:190
-msgid "Show text input help for epg search:"
-msgstr ""
-
-#: ConfigTabs.py:191
-msgid "Use skin:"
-msgstr ""
-
-#: ConfigTabs.py:192
-msgid "Limit search results to bouquet services:"
-msgstr ""
-
-#: ConfigTabs.py:193
-msgid "Exit on TV <-> Radio switch:"
-msgstr ""
-
-#: ConfigTabs.py:194
-msgid "Adjust font size:"
-msgstr ""
-
-#: ConfigTabs.py:195
-msgid "Embed volume slider:"
-msgstr ""
-
-#: ConfigTabs.py:208
-msgid "Show list numbers:"
-msgstr ""
-
-#: ConfigTabs.py:209
-msgid "Show picons:"
-msgstr ""
-
-#: ConfigTabs.py:211
-msgid "Use picons (50x30) from:"
-msgstr ""
-
-#: ConfigTabs.py:212
-msgid "Show service name:"
-msgstr ""
-
-#: ConfigTabs.py:214
-msgid "Adjust service name column width:"
-msgstr ""
-
-#: ConfigTabs.py:215
-msgid "Show duration:"
-msgstr ""
-
-#: ConfigTabs.py:216
-msgid "Show begin/remain times:"
-msgstr ""
-
-#: ConfigTabs.py:218
-msgid "Show multi colored begin/remain times:"
-msgstr ""
-
-#: ConfigTabs.py:219
-msgid "Increase list item height:"
-msgstr ""
-
-#: ConfigTabs.py:220
-msgid "Space between columns:"
-msgstr ""
-
-#: ConfigTabs.py:221
-msgid "List style:"
-msgstr ""
-
-#: ConfigTabs.py:222
-msgid "Progress bar style:"
-msgstr ""
-
-#: ConfigTabs.py:223
-msgid "Number of upcoming events to show:"
-msgstr ""
-
-#: ConfigTabs.py:251
-msgid "Show event information:"
-msgstr ""
-
-#: ConfigTabs.py:253
-msgid "Show video picture:"
-msgstr ""
-
-#: ConfigTabs.py:254
-msgid "Show blinking picon for running timers:"
-msgstr ""
-
-#: ConfigTabs.py:255
-msgid "Show short description:"
-msgstr ""
-
-#: ConfigTabs.py:273
-msgid "Return to main tab with exit:"
-msgstr ""
-
-#: ConfigTabs.py:274
-msgid "Replace InfoBar single and multi EPG:"
-msgstr ""
-
-#: ConfigTabs.py:275
-msgid "Replace ChannelSelection key up to start with tab:"
-msgstr ""
-
-#: ConfigTabs.py:276
-msgid "Replace ChannelSelection key down to start with tab:"
-msgstr ""
-
-#: ConfigTabs.py:277
-msgid "Replace EventView key to start with tab:"
-msgstr ""
-
-#: EpgCenterList.py:944
-msgid "waiting"
-msgstr ""
-
-#: EpgCenterList.py:947
-msgid "about to start"
-msgstr ""
-
-#: EpgCenterList.py:951
-msgid "zapped"
-msgstr ""
-
-#: EpgCenterList.py:953
-msgid "recording..."
-msgstr ""
-
-#: EpgCenterList.py:956 EpgCenterList.py:962
-msgid "done!"
-msgstr ""
-
-#: EpgCenterList.py:959
 msgid "<unknown>"
 msgstr ""
 
-#: HelperFunctions.py:47
-msgid "Friday"
-msgstr ""
-
-#: HelperFunctions.py:47
-msgid "Monday"
-msgstr ""
-
-#: HelperFunctions.py:47
-msgid "Saturday"
-msgstr ""
-
-#: HelperFunctions.py:47
-msgid "Sunday"
-msgstr ""
-
-#: HelperFunctions.py:47
-msgid "Thursday"
-msgstr ""
-
-#: HelperFunctions.py:47
-msgid "Tuesday"
-msgstr ""
-
-#: HelperFunctions.py:47
-msgid "Wednesday"
-msgstr ""
-
-#: HelperFunctions.py:188
-msgid "Today"
-msgstr ""
-
-#: HelperFunctions.py:191
-msgid "Tomorrow"
-msgstr ""
-
-#: MerlinEPGCenter.py:43
-msgid "Now"
-msgstr ""
-
-#: MerlinEPGCenter.py:43
-msgid "Prime Time"
-msgstr ""
-
-#: MerlinEPGCenter.py:43
-msgid "Search"
-msgstr ""
-
-#: MerlinEPGCenter.py:43
-msgid "Single"
-msgstr ""
-
-#: MerlinEPGCenter.py:43
-msgid "Upcoming"
-msgstr ""
-
-#: MerlinEPGCenter.py:43 MerlinEPGCenter.py:325 MerlinEPGCenter.py:1910
-msgid "Timer"
-msgstr ""
-
-#: MerlinEPGCenter.py:44
-msgid "Event Info"
-msgstr ""
-
-#: MerlinEPGCenter.py:44
-msgid "General"
-msgstr ""
-
-#: MerlinEPGCenter.py:44
-msgid "Keys"
-msgstr ""
-
-#: MerlinEPGCenter.py:44
-msgid "Lists"
-msgstr ""
-
-#: MerlinEPGCenter.py:222
-msgid "Search for:"
-msgstr ""
-
-#: MerlinEPGCenter.py:550
-msgid "Similar"
-msgstr ""
-
-#: MerlinEPGCenter.py:821
-msgid "Record or zap timer"
-msgstr ""
-
-#: MerlinEPGCenter.py:822
-msgid "AutoTimer timer"
-msgstr ""
-
-#: MerlinEPGCenter.py:823
-msgid "Please select a timer type to add:"
-msgstr ""
-
-#: MerlinEPGCenter.py:964
-msgid "Stop current event but not coming events"
-msgstr ""
-
-#: MerlinEPGCenter.py:965
-msgid "Stop current event and disable coming events"
-msgstr ""
-
-#: MerlinEPGCenter.py:966
-msgid "Don't stop current event but disable coming events"
-msgstr ""
-
-#: MerlinEPGCenter.py:968
-msgid "Repeating event currently recording... What do you want to do?"
-msgstr ""
-
-#: MerlinEPGCenter.py:1061
-msgid "Match title:"
-msgstr ""
-
-#: MerlinEPGCenter.py:1067
-msgid "Services:"
-msgstr ""
-
-#: MerlinEPGCenter.py:1073
-msgid "Bouquets:"
-msgstr ""
-
-#: MerlinEPGCenter.py:1079
-msgid "Included days:"
-msgstr ""
-
-#: MerlinEPGCenter.py:1085
-msgid "Excluded days:"
-msgstr ""
-
-#: MerlinEPGCenter.py:1086
-msgid "Record a maximum of x times:"
-msgstr ""
-
-#: MerlinEPGCenter.py:1087
-msgid "Amount of recordings left:"
-msgstr ""
-
-#: MerlinEPGCenter.py:1088
-msgid "Search type:"
-msgstr ""
-
-#: MerlinEPGCenter.py:1089
-msgid "Location:"
-msgstr ""
-
-#: MerlinEPGCenter.py:1291
-msgid "Outdated on"
-msgstr ""
-
-#: MerlinEPGCenter.py:1293
-msgid "Outdated off"
-msgstr ""
-
-#: MerlinEPGCenter.py:1298
-msgid "IMDb"
-msgstr ""
-
-#: MerlinEPGCenter.py:1304
 msgid "Add"
 msgstr ""
 
-#: MerlinEPGCenter.py:1306
-msgid "Remove"
-msgstr ""
-
-#: MerlinEPGCenter.py:1307
-msgid "OK"
-msgstr ""
-
-#: MerlinEPGCenter.py:1308
-msgid "New Search"
-msgstr ""
-
-#: MerlinEPGCenter.py:1318
-msgid "Remove timer"
-msgstr ""
-
-#: MerlinEPGCenter.py:1321 MerlinEPGCenter.py:1329
 msgid "Add timer"
 msgstr ""
 
-#: MerlinEPGCenter.py:1662
+msgid "Adjust font size:"
+msgstr ""
+
+msgid "Adjust service name column width:"
+msgstr ""
+
+msgid "Amount of recordings left:"
+msgstr ""
+
+msgid "AutoTimer timer"
+msgstr ""
+
+msgid "Bouquets:"
+msgstr ""
+
+msgid "Don't stop current event but disable coming events"
+msgstr ""
+
 msgid "Edit Off"
 msgstr ""
 
-#: MerlinEPGCenter.py:1666
 msgid "Edit On"
 msgstr ""
 
-#: MerlinEPGCenter.py:1687
-msgid "return"
+msgid "Embed volume slider:"
 msgstr ""
 
-#: MerlinEPGCenter.py:1899
-msgid "Set search term"
+msgid "Event Info"
 msgstr ""
 
-#: plugin.py:183
+msgid "Excluded days:"
+msgstr ""
+
+msgid "Exit on TV <-> Radio switch:"
+msgstr ""
+
+msgid "Friday"
+msgstr ""
+
+msgid "General"
+msgstr ""
+
+msgid "IMDb"
+msgstr ""
+
+msgid "Included days:"
+msgstr ""
+
+msgid "Increase list item height:"
+msgstr ""
+
+msgid "Keys"
+msgstr ""
+
+msgid "Limit search results to bouquet services:"
+msgstr ""
+
+msgid "List style:"
+msgstr ""
+
+msgid "Lists"
+msgstr ""
+
+msgid "Location:"
+msgstr ""
+
+msgid "Match title:"
+msgstr ""
+
+msgid "Monday"
+msgstr ""
+
 msgid "More than just an EPG..."
 msgstr ""
 
+msgid "New Search"
+msgstr ""
+
+msgid "Now"
+msgstr ""
+
+msgid "Number of upcoming events to show:"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Outdated off"
+msgstr ""
+
+msgid "Outdated on"
+msgstr ""
+
+msgid "Please select a timer type to add:"
+msgstr ""
+
+msgid "Prime Time"
+msgstr ""
+
+msgid "Prime time:"
+msgstr ""
+
+msgid "Progress bar style:"
+msgstr ""
+
+msgid "Record a maximum of x times:"
+msgstr ""
+
+msgid "Record or zap timer"
+msgstr ""
+
+msgid "Remember last tab:"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Remove timer"
+msgstr ""
+
+msgid "Repeating event currently recording... What do you want to do?"
+msgstr ""
+
+msgid "Replace ChannelSelection key down to start with tab:"
+msgstr ""
+
+msgid "Replace ChannelSelection key up to start with tab:"
+msgstr ""
+
+msgid "Replace EventView key to start with tab:"
+msgstr ""
+
+msgid "Replace InfoBar single and multi EPG:"
+msgstr ""
+
+msgid "Return to main tab with exit:"
+msgstr ""
+
+msgid "Saturday"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Search for:"
+msgstr ""
+
+msgid "Search type:"
+msgstr ""
+
+msgid "Select running service on start:"
+msgstr ""
+
+msgid "Services:"
+msgstr ""
+
+msgid "Set search term"
+msgstr ""
+
+msgid "Show begin/remain times:"
+msgstr ""
+
+msgid "Show blinking picon for running timers:"
+msgstr ""
+
+msgid "Show duration:"
+msgstr ""
+
+msgid "Show event information:"
+msgstr ""
+
+msgid "Show list numbers:"
+msgstr ""
+
+msgid "Show multi colored begin/remain times:"
+msgstr ""
+
+msgid "Show picons:"
+msgstr ""
+
+msgid "Show service name:"
+msgstr ""
+
+msgid "Show short description:"
+msgstr ""
+
+msgid "Show text input help for epg search:"
+msgstr ""
+
+msgid "Show video picture:"
+msgstr ""
+
+msgid "Similar"
+msgstr ""
+
+msgid "Single"
+msgstr ""
+
+msgid "Space between columns:"
+msgstr ""
+
+msgid "Stop current event and disable coming events"
+msgstr ""
+
+msgid "Stop current event but not coming events"
+msgstr ""
+
+msgid "Sunday"
+msgstr ""
+
+msgid "Thursday"
+msgstr ""
+
+msgid "Timer"
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid "Tomorrow"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
+msgid "Upcoming"
+msgstr ""
+
+msgid "Use picons (50x30) from:"
+msgstr ""
+
+msgid "Use skin:"
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""
+
+msgid "about to start"
+msgstr ""
+
+msgid "disabled"
+msgstr ""
+
+msgid "done!"
+msgstr ""
+
+msgid "list and event info: four parts"
+msgstr ""
+
+msgid "list and event info: gradient"
+msgstr ""
+
+msgid "list and event info: percent (text)"
+msgstr ""
+
+msgid "list and event info: simple"
+msgstr ""
+
+msgid "list: off, event info: four parts"
+msgstr ""
+
+msgid "list: off, event info: gradient"
+msgstr ""
+
+msgid "list: off, event info: percent (text)"
+msgstr ""
+
+msgid "list: off, event info: simple"
+msgstr ""
+
+msgid "recording..."
+msgstr ""
+
+msgid "return"
+msgstr ""
+
+msgid "single line style"
+msgstr ""
+
+msgid "waiting"
+msgstr ""
+
+msgid "with short description"
+msgstr ""
+
+msgid "zapped"
+msgstr ""
+
+msgid "Merlin EPG Center"
+msgstr ""

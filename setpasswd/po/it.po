@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - setpasswd\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@118como.org>\n"
@@ -23,7 +23,8 @@ msgstr "Annull."
 msgid "Change Root Password"
 msgstr "Cambiare la password di root"
 
-msgid "Change or reset the root password of your dreambox"
+#, fuzzy
+msgid "Change or reset the root password of your Receiver"
 msgstr "Cambiare o annullare la password del Receiver"
 
 msgid "Enter new Password"

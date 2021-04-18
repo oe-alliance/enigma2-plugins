@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Aspect Ratio Switch V.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-12 12:09+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: JuSt611\n"
@@ -15,124 +15,30 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/plugin.py:64 ../src/plugin.py:79
-msgid "4:3 Letterbox"
-msgstr "4:3 Letterbox"
-
-#: ../src/plugin.py:65 ../src/plugin.py:79
-msgid "4:3 PanScan"
-msgstr "4:3 PanScan"
-
-#: ../src/plugin.py:66 ../src/plugin.py:79
-msgid "16:9"
-msgstr "16:9"
-
-#: ../src/plugin.py:67 ../src/plugin.py:79
-msgid "16:9 always"
-msgstr "16:9 immer"
-
-#: ../src/plugin.py:68 ../src/plugin.py:79
 msgid "16:10 Letterbox"
 msgstr "16:10 Letterbox"
 
-#: ../src/plugin.py:69 ../src/plugin.py:79
 msgid "16:10 PanScan"
 msgstr "16:10 PanScan"
 
-#: ../src/plugin.py:70 ../src/plugin.py:79
+msgid "16:9"
+msgstr "16:9"
+
 msgid "16:9 Letterbox"
 msgstr "16:9 Letterbox"
 
-#: ../src/plugin.py:77
-msgid "Bouquet +/- long"
-msgstr "Bouquet +/- lang"
+msgid "16:9 always"
+msgstr "16:9 immer"
 
-#: ../src/plugin.py:77
-msgid "Help key long"
-msgstr "Help-Taste lang"
+msgid "4:3 Letterbox"
+msgstr "4:3 Letterbox"
 
-#: ../src/plugin.py:77
-msgid "Radio key long"
-msgstr "Radio-Taste lang"
+msgid "4:3 PanScan"
+msgstr "4:3 PanScan"
 
-#: ../src/plugin.py:77
-msgid "PVR key long"
-msgstr "PVR-Taste lang"
+msgid "Aspect Ratio Switch setup"
+msgstr "Aspect Ratio Switch einrichten"
 
-#: ../src/plugin.py:82
-msgid "Plugin menu"
-msgstr "Plugin-Menü"
-
-#: ../src/plugin.py:82
-msgid "Extensions menu"
-msgstr "Erweiterungs-Menü"
-
-#: ../src/plugin.py:104 ../src/plugin.py:134
-msgid "AspectRatioSwitch Setup"
-msgstr "AspectRatioSwitch Einstellungen"
-
-#: ../src/plugin.py:107
-msgid "Quick switching via remote control"
-msgstr "Schnellumschaltung per Fernbedienung"
-
-#: ../src/plugin.py:108
-msgid "Key mapping"
-msgstr "Tastenzuordnung"
-
-#: ../src/plugin.py:109
-msgid "Show switch message"
-msgstr "Umschalt-Info zeigen"
-
-#: ../src/plugin.py:111
-#, python-format
-msgid "Include %s"
-msgstr "% s inkludieren"
-
-#: ../src/plugin.py:112
-msgid "Set aspect ratio on startup"
-msgstr "Start-Einstellung bestimmen"
-
-#: ../src/plugin.py:113
-msgid "Startup aspect ratio"
-msgstr "Start-Einstellung"
-
-#: ../src/plugin.py:114
-msgid "Show Setup in"
-msgstr "Setup zeigen in"
-
-#: ../src/plugin.py:119
-msgid "Cancel"
-msgstr "Abbrechen"
-
-#: ../src/plugin.py:120
-msgid "Save"
-msgstr "Speichern"
-
-#: ../src/plugin.py:121
-msgid ""
-"Use the configured key(s) on your remote control to switch aspect ratio "
-"modes. If any 'Quickbutton' actions were assigned to these keys, they will "
-"be disabled as long as this plugin is activated!"
-msgstr ""
-"Zur Umschaltung der Darstellung die eingestellte(n) Taste(n) drücken. Falls "
-"diesen Tasten andere 'Quickbutton'  Funktionen zugeordnet waren, sind sie "
-"deaktiviert, wenn dieses Plugin aktiviert ist!"
-
-#: ../src/plugin.py:134
-msgid "Ver."
-msgstr "Ver."
-
-#: ../src/plugin.py:140
-#, python-format
-msgid "You need to include at least %d aspect ratio modes!"
-msgstr "Es müssen mindestens %d Darstellungs-Modi ausgewählt werden!"
-
-#: ../src/plugin.py:174
-#, python-format
-msgid "Changing keymap failed (%s)."
-msgstr "Laden der keymap nicht möglich (%s)."
-
-#: ../src/plugin.py:225
 #, python-format
 msgid ""
 "Aspect ratio switched from:\n"
@@ -145,10 +51,68 @@ msgstr ""
 "auf:\n"
 "   %s"
 
-#: ../src/plugin.py:258 ../src/plugin.py:262
-msgid "Aspect Ratio Switch setup"
-msgstr "Aspect Ratio Switch einrichten"
+msgid "AspectRatioSwitch Setup"
+msgstr "AspectRatioSwitch Einstellungen"
 
-#: ../src/plugin.py:258 ../src/plugin.py:262
+msgid "Bouquet +/- long"
+msgstr "Bouquet +/- lang"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#, python-format
+msgid "Changing keymap failed (%s)."
+msgstr "Laden der keymap nicht möglich (%s)."
+
+msgid "Extensions menu"
+msgstr "Erweiterungs-Menü"
+
+msgid "Help key long"
+msgstr "Help-Taste lang"
+
+#, python-format
+msgid "Include %s"
+msgstr "% s inkludieren"
+
+msgid "Key mapping"
+msgstr "Tastenzuordnung"
+
+msgid "PVR key long"
+msgstr "PVR-Taste lang"
+
+msgid "Plugin menu"
+msgstr "Plugin-Menü"
+
 msgid "Quick switching of aspect ratio setting"
 msgstr "Schnellumschaltung der Darstellung"
+
+msgid "Quick switching via remote control"
+msgstr "Schnellumschaltung per Fernbedienung"
+
+msgid "Radio key long"
+msgstr "Radio-Taste lang"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Set aspect ratio on startup"
+msgstr "Start-Einstellung bestimmen"
+
+msgid "Show Setup in"
+msgstr "Setup zeigen in"
+
+msgid "Show switch message"
+msgstr "Umschalt-Info zeigen"
+
+msgid "Startup aspect ratio"
+msgstr "Start-Einstellung"
+
+msgid "Use the configured key(s) on your remote control to switch aspect ratio modes. If any 'Quickbutton' actions were assigned to these keys, they will be disabled as long as this plugin is activated!"
+msgstr "Zur Umschaltung der Darstellung die eingestellte(n) Taste(n) drücken. Falls diesen Tasten andere 'Quickbutton'  Funktionen zugeordnet waren, sind sie deaktiviert, wenn dieses Plugin aktiviert ist!"
+
+msgid "Ver."
+msgstr "Ver."
+
+#, python-format
+msgid "You need to include at least %d aspect ratio modes!"
+msgstr "Es müssen mindestens %d Darstellungs-Modi ausgewählt werden!"

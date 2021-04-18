@@ -80,6 +80,3 @@ msgstr "UUID lesen"
 
 msgid "unknown"
 msgstr "unbekannt"
-
-#~ msgid "Do you want to reboot your Dreambox?"
-#~ msgstr "Soll die Dreambox neu gestartet werden?"

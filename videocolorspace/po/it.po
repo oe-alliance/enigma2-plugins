@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - videocolorspace\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-25 14:24+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2012-10-25 14:41+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -20,30 +20,20 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/videocolorspace\n"
 
-#: .../enigma2-plugins/videocolorspace/src/VideoColorSpace.py:71
-msgid "Mode:"
-msgstr "Modalità:"
-
-#: .../enigma2-plugins/videocolorspace/src/VideoColorSpace.py:80
-msgid "Cancel"
-msgstr "Annull."
-
-#: .../enigma2-plugins/videocolorspace/src/VideoColorSpace.py:81
-msgid "OK"
-msgstr "Ok"
-
-#: .../enigma2-plugins/videocolorspace/src/VideoColorSpace.py:86
-#: .../enigma2-plugins/videocolorspace/src/plugin.py:42
-#: .../enigma2-plugins/videocolorspace/src/plugin.py:43
-msgid "Color space setup"
-msgstr "Configurazione spadio dei colori"
-
-#: .../enigma2-plugins/videocolorspace/src/plugin.py:37
 msgid "A/V-Color space settings"
 msgstr "Conf. spazio dei colori A/V"
 
-#: .../enigma2-plugins/videocolorspace/src/plugin.py:42
-#: .../enigma2-plugins/videocolorspace/src/plugin.py:43
+msgid "Cancel"
+msgstr "Annull."
+
+msgid "Color space setup"
+msgstr "Configurazione spadio dei colori"
+
+msgid "Mode:"
+msgstr "Modalità:"
+
+msgid "OK"
+msgstr "Ok"
+
 msgid "Setup color space for video"
 msgstr "Conf. spazio dei colori per il video"
-
