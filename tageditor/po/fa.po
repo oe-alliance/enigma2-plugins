@@ -70,6 +70,3 @@ msgstr ""
 #. TRANSLATORS: this is the string used in the movie context menu for TagEditor
 msgid "edit tags"
 msgstr ""
-
-#~ msgid "edit tags..."
-#~ msgstr "در حال ویرایش کردن برچسب..."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 Elektro Power Save Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-29 17:21+Mitteleuropäische Sommerzeit\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2012-12-30 13:11+0100\n"
 "Last-Translator: Ismail Demir <ismail.demir@gmx.at>\n"
 "Language-Team: Ismail Demir <ismail.demir@gmx.at>\n"
@@ -14,285 +14,203 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: plugin.py:110
-msgid "Elektro Power Save"
-msgstr "Elektro enerji tasarrufçusu"
-
-#: plugin.py:111
-msgid "Automatically shut down to deep standby"
-msgstr ""
-
-#: plugin.py:112
-msgid "Extensions menu"
-msgstr "Eklenti menüsü"
-
-#: plugin.py:112
-msgid "Plugin menu"
-msgstr ""
-
-#: plugin.py:124
-msgid "yes, Profile 1"
-msgstr "evet, Profil 1"
-
-#: plugin.py:124
-msgid "yes, Profile 2"
-msgstr "evet, Profil 2"
-
-#: plugin.py:134
-msgid "Monday"
-msgstr "Pazartesi"
-
-#: plugin.py:135
-msgid "Tuesday"
-msgstr "Salı"
-
-#: plugin.py:136
-msgid "Wednesday"
-msgstr "Çarşamba"
-
-#: plugin.py:137
-msgid "Thursday"
-msgstr "Perşembe"
-
-#: plugin.py:138
-msgid "Friday"
-msgstr "Cuma"
-
-#: plugin.py:139
-msgid "Saturday"
-msgstr "Cumartesi"
-
-#: plugin.py:140
-msgid "Sunday"
-msgstr "Pazar"
-
-#: plugin.py:150
-msgid "no Name"
-msgstr "hayır, Isim"
-
-#: plugin.py:151
-msgid "Connection Error"
-msgstr "Bağlantı hatası"
-
-#: plugin.py:211
-#: plugin.py:222
-#: plugin.py:230
-#: plugin.py:530
-msgid "Ver."
-msgstr "Sürüm"
-
-#: plugin.py:263
-#: plugin.py:268
-msgid "Wakeup"
-msgstr "Uyan"
-
-#: plugin.py:264
-#: plugin.py:269
-msgid "Sleep"
-msgstr "Hazırda beklet"
-
-#: plugin.py:265
-#: plugin.py:270
-msgid "Next day starts at"
-msgstr "Sonraki gün başlangıcı"
-
-#: plugin.py:266
-#: plugin.py:271
-msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
-msgstr ""
-
-#: plugin.py:275
-#: plugin.py:321
-#: plugin.py:400
-#: plugin.py:507
-msgid "Cancel"
-msgstr "Vazgeç"
-
-#: plugin.py:276
-#: plugin.py:322
-#: plugin.py:401
-#: plugin.py:508
-msgid "Ok"
-msgstr "Tamam"
-
-#: plugin.py:317
-msgid "IP Address"
-msgstr "IP adresi"
-
-#: plugin.py:354
-msgid "please wait..."
-msgstr "lütfen bekleyiniz..."
-
-#: plugin.py:391
-msgid "NAS/Server Name or IP"
-msgstr "NAS/Server Adı veya IP adresi"
-
-#: plugin.py:392
-msgid "Username"
-msgstr "Kullanıcı adı"
-
-#: plugin.py:393
-msgid "Password"
-msgstr "Kod"
-
-#: plugin.py:394
-msgid "Command [poweroff, shutdown -h,...]"
-msgstr "Kommando [poweroff, shutdown -h,...]"
-
-#: plugin.py:395
-msgid "Telnet Port"
-msgstr "Telnet portu"
-
-#: plugin.py:396
-msgid "Waiting until poweroff"
-msgstr "Kapana kadar bekleyiniz"
-
-#: plugin.py:402
-msgid "Run"
-msgstr "Çalıştır"
-
-#: plugin.py:461
-msgid "Active Time Profile"
-msgstr "Etkinleşmiş zaman profili"
-
-#: plugin.py:462
-msgid "The active Time Profile is (1 or 2)."
-msgstr ""
-
-#: plugin.py:463
-msgid "Enable Elektro Power Save"
-msgstr "Elektro enerji tasarrufçusunu etkinleştir"
-
-#: plugin.py:464
-msgid "Unless this is enabled, this plugin won't run automatically."
-msgstr ""
-
-#: plugin.py:465
-msgid "Use both profiles alternately"
-msgstr ""
-
-#: plugin.py:466
-msgid "Both profiles are used alternately. When shutting down the other profile is enabled. This allows two time cycles per day. Do not overlap the times."
-msgstr ""
-
-#: plugin.py:467
-#: plugin.py:624
-msgid "Standby on boot"
-msgstr "Açılışta hazırda beklet"
-
-#: plugin.py:468
-msgid "Puts the box in standby mode after boot."
-msgstr ""
-
-#: plugin.py:469
-msgid "Standby on manual boot"
-msgstr "Elle açılırken hazırda beklet"
-
-#: plugin.py:470
-msgid "Whether to put the box in standby when booted manually. On manual boot the box will not go to standby before the next deep standby interval starts, even if this option is set. This option is only active if 'Standby on boot' option is set, too."
-msgstr ""
-
-#: plugin.py:471
-msgid "Standby on boot screen timeout"
-msgstr "Açılış ekranı zaman aşımı süresi"
-
-#: plugin.py:472
-msgid "Specify how long to show the standby query on boot screen. This value can be set to ensure the box does not shut down to deep standby again too fast when in standby mode."
-msgstr ""
-
-#: plugin.py:473
-msgid "Force sleep (even when not in standby)"
-msgstr "Hazırda beklemeye zorla (hazırda beklemede değilken)"
-
-#: plugin.py:474
-msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
-msgstr ""
-
-#: plugin.py:475
-msgid "Avoid deep standby when HDD is active, e.g. for FTP"
-msgstr ""
-
-#: plugin.py:476
-msgid "Wait for the HDD to enter sleep mode. Depending on the configuration this can prevent the box entirely from entering deep standby mode."
-msgstr ""
-
-#: plugin.py:477
-msgid "Check IPs (press OK to edit)"
-msgstr ""
-
-#: plugin.py:478
-msgid "This list of IP addresses is checked. Elektro waits until addresses no longer responds to ping."
-msgstr ""
-
-#: plugin.py:479
-msgid "NAS Poweroff (press OK to edit)"
-msgstr ""
-
-#: plugin.py:480
 msgid "A NAS/Server can be shut down. Is required activated Telnet."
 msgstr ""
 
-#: plugin.py:481
-msgid "Don't wake up"
-msgstr "Asla uyanma"
+msgid "Active Time Profile"
+msgstr "Etkinleşmiş zaman profili"
 
-#: plugin.py:482
-msgid "Do not wake up at the end of next deep standby interval."
+msgid "Automatically shut down to deep standby"
 msgstr ""
 
-#: plugin.py:483
-msgid "Holiday mode (experimental)"
-msgstr "Tatil modu (deneme)"
-
-#: plugin.py:484
-msgid "The box always enters deep standby mode, except for recording."
+msgid "Avoid deep standby when HDD is active, e.g. for FTP"
 msgstr ""
 
-#: plugin.py:485
-msgid "Show in"
+msgid "Both profiles are used alternately. When shutting down the other profile is enabled. This allows two time cycles per day. Do not overlap the times."
 msgstr ""
 
-#: plugin.py:486
-msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
+msgid "Cancel"
+msgstr "Vazgeç"
+
+msgid "Check IPs (press OK to edit)"
 msgstr ""
 
-#: plugin.py:487
-msgid "Name"
-msgstr "Ad"
+msgid "Command [poweroff, shutdown -h,...]"
+msgstr "Kommando [poweroff, shutdown -h,...]"
 
-#: plugin.py:488
-msgid "Specify plugin name to be used in menu (needs GUI restart)."
-msgstr ""
+msgid "Connection Error"
+msgstr "Bağlantı hatası"
 
-#: plugin.py:489
 msgid "Description"
 msgstr "Açıklama"
 
-#: plugin.py:490
-msgid "Specify plugin description to be used in menu (needs GUI restart)."
+msgid "Do not wake up at the end of next deep standby interval."
 msgstr ""
 
-#: plugin.py:509
-msgid "Help"
-msgstr "Yardım"
+msgid "Don't wake up"
+msgstr "Asla uyanma"
 
-#: plugin.py:510
-msgid "Times"
+msgid "Elektro Power Save"
+msgstr "Elektro enerji tasarrufçusu"
+
+msgid "Enable Elektro Power Save"
+msgstr "Elektro enerji tasarrufçusunu etkinleştir"
+
+msgid "Extensions menu"
+msgstr "Eklenti menüsü"
+
+msgid "Force sleep (even when not in standby)"
+msgstr "Hazırda beklemeye zorla (hazırda beklemede değilken)"
+
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
 msgstr ""
 
-#: plugin.py:558
-msgid "Showing Elektro readme.txt"
-msgstr "Elektro benioku.txt gösteriliyor"
+msgid "Friday"
+msgstr "Cuma"
 
-#: plugin.py:558
-msgid "readme.txt"
-msgstr "benioku.txt"
-
-#: plugin.py:650
 msgid "Go to Standby now?"
 msgstr "Hazırda bekletme kipine şimdi geçilsin mi?"
 
-#: plugin.py:828
 msgid "Go to sleep now?"
 msgstr "Uyku kipine şimdi geçilsin mi?"
 
+msgid "Help"
+msgstr "Yardım"
+
+msgid "Holiday mode (experimental)"
+msgstr "Tatil modu (deneme)"
+
+msgid "IP Address"
+msgstr "IP adresi"
+
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr ""
+
+msgid "Monday"
+msgstr "Pazartesi"
+
+msgid "NAS Poweroff (press OK to edit)"
+msgstr ""
+
+msgid "NAS/Server Name or IP"
+msgstr "NAS/Server Adı veya IP adresi"
+
+msgid "Name"
+msgstr "Ad"
+
+msgid "Next day starts at"
+msgstr "Sonraki gün başlangıcı"
+
+msgid "Ok"
+msgstr "Tamam"
+
+msgid "Password"
+msgstr "Kod"
+
+msgid "Plugin menu"
+msgstr ""
+
+msgid "Puts the box in standby mode after boot."
+msgstr ""
+
+msgid "Run"
+msgstr "Çalıştır"
+
+msgid "Saturday"
+msgstr "Cumartesi"
+
+msgid "Show in"
+msgstr ""
+
+msgid "Showing Elektro readme.txt"
+msgstr "Elektro benioku.txt gösteriliyor"
+
+msgid "Sleep"
+msgstr "Hazırda beklet"
+
+msgid "Specify how long to show the standby query on boot screen. This value can be set to ensure the box does not shut down to deep standby again too fast when in standby mode."
+msgstr ""
+
+msgid "Specify plugin description to be used in menu (needs GUI restart)."
+msgstr ""
+
+msgid "Specify plugin name to be used in menu (needs GUI restart)."
+msgstr ""
+
+msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
+msgstr ""
+
+msgid "Standby on boot"
+msgstr "Açılışta hazırda beklet"
+
+msgid "Standby on boot screen timeout"
+msgstr "Açılış ekranı zaman aşımı süresi"
+
+msgid "Standby on manual boot"
+msgstr "Elle açılırken hazırda beklet"
+
+msgid "Sunday"
+msgstr "Pazar"
+
+msgid "Telnet Port"
+msgstr "Telnet portu"
+
+msgid "The active Time Profile is (1 or 2)."
+msgstr ""
+
+msgid "The box always enters deep standby mode, except for recording."
+msgstr ""
+
+msgid "This list of IP addresses is checked. Elektro waits until addresses no longer responds to ping."
+msgstr ""
+
+msgid "Thursday"
+msgstr "Perşembe"
+
+msgid "Times"
+msgstr ""
+
+msgid "Tuesday"
+msgstr "Salı"
+
+msgid "Unless this is enabled, this plugin won't run automatically."
+msgstr ""
+
+msgid "Use both profiles alternately"
+msgstr ""
+
+msgid "Username"
+msgstr "Kullanıcı adı"
+
+msgid "Ver."
+msgstr "Sürüm"
+
+msgid "Wait for the HDD to enter sleep mode. Depending on the configuration this can prevent the box entirely from entering deep standby mode."
+msgstr ""
+
+msgid "Waiting until poweroff"
+msgstr "Kapana kadar bekleyiniz"
+
+msgid "Wakeup"
+msgstr "Uyan"
+
+msgid "Wednesday"
+msgstr "Çarşamba"
+
+msgid "Whether to put the box in standby when booted manually. On manual boot the box will not go to standby before the next deep standby interval starts, even if this option is set. This option is only active if 'Standby on boot' option is set, too."
+msgstr ""
+
+msgid "no Name"
+msgstr "hayır, Isim"
+
+msgid "please wait..."
+msgstr "lütfen bekleyiniz..."
+
+msgid "readme.txt"
+msgstr "benioku.txt"
+
+msgid "yes, Profile 1"
+msgstr "evet, Profil 1"
+
+msgid "yes, Profile 2"
+msgstr "evet, Profil 2"

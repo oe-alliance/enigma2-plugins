@@ -1,0 +1,517 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid ""
+"\n"
+"Cancel?"
+msgstr ""
+
+msgid ""
+"  (C) 2012 by betonme @ IHAD \n"
+"\n"
+msgstr ""
+
+msgid "  Feel free to donate. \n"
+msgstr ""
+
+msgid ""
+"  How much time have You saved?\n"
+"\n"
+msgstr ""
+
+msgid "  PayPal: "
+msgstr ""
+
+msgid "  Support: "
+msgstr ""
+
+msgid "  Terms: "
+msgstr ""
+
+#, python-brace-format
+msgid "  {lookups:d} successful lookups.\n"
+msgstr ""
+
+#, python-format
+msgid "%d min"
+msgstr ""
+
+#, python-format
+msgid "%d records renamed successfully"
+msgstr ""
+
+#, python-format
+msgid "%d timer renamed successfully"
+msgstr ""
+
+msgid "Add Web Channel"
+msgstr ""
+
+msgid "Add channel (Yes) or replace it (No)"
+msgstr ""
+
+msgid "Add tag 'SeriesPlugin' to timer"
+msgstr ""
+
+msgid "Append '_' if file exist"
+msgstr ""
+
+msgid "Auto match"
+msgstr ""
+
+msgid "AutoTimer independent mode"
+msgstr ""
+
+msgid "Can be configured within the setup"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Cancel and close"
+msgstr ""
+
+#, python-format
+msgid "Channel '- %(servicename)s - %(remote)s -' added."
+msgstr ""
+
+#, python-format
+msgid "Channel '- %(servicename)s - %(remote)s -' replaced."
+msgstr ""
+
+#, python-format
+msgid "Channel '- %s -' removed."
+msgstr ""
+
+msgid "Channel Edit"
+msgstr ""
+
+msgid "Channel Editor"
+msgstr ""
+
+msgid "Channel matching file"
+msgstr ""
+
+msgid "Channel matching..."
+msgstr ""
+
+msgid "Channels are not matched"
+msgstr ""
+
+msgid "Check Timer for corresponding EPG events"
+msgstr ""
+
+msgid "Check timer every x minutes"
+msgstr ""
+
+msgid "Check timer list for series (SP)"
+msgstr ""
+
+msgid "Check timer list from extension menu"
+msgstr ""
+
+msgid "Composition of the recording filenames"
+msgstr ""
+
+msgid "Configuration"
+msgstr ""
+
+msgid "Debug: Log file path"
+msgstr ""
+
+msgid "Debug: Print debug messages (Shell)"
+msgstr ""
+
+msgid "Debug: Write Log"
+msgstr ""
+
+msgid "Default episode"
+msgstr ""
+
+msgid "Default season"
+msgstr ""
+
+msgid "Directory pattern file"
+msgstr ""
+
+msgid "Do You want to start renaming?"
+msgstr ""
+
+#, python-format
+msgid "Do you really want to delete %s?"
+msgstr ""
+
+msgid "Don't edit this manually unless you really know what you are doing"
+msgstr ""
+
+msgid "Enable SeriesPlugin"
+msgstr ""
+
+msgid "Enable recording debug (Timer log)"
+msgstr ""
+
+msgid "Enable support for EPGImport"
+msgstr ""
+
+msgid "Enable support for XMLTVImport"
+msgstr ""
+
+msgid "Episode pattern file"
+msgstr ""
+
+msgid ""
+"Episode: {rawepisode:s}\n"
+"{title:s}"
+msgstr ""
+
+msgid "Error check log file"
+msgstr ""
+
+msgid "Error missing dependency"
+msgstr ""
+
+#, python-format
+msgid "Failed: %s."
+msgstr ""
+
+msgid "Finished with errors:\n"
+msgstr ""
+
+msgid "If You are using SD and HD channels in parallel, You have to match both channels separately!"
+msgstr ""
+
+msgid "Independent mode exception"
+msgstr ""
+
+msgid "Load STB channels for bouquet"
+msgstr ""
+
+msgid "Load Web channels for bouquet"
+msgstr ""
+
+msgid "Location and name of log file"
+msgstr ""
+
+#, python-format
+msgid "Lookup of %d episodes was successful"
+msgstr ""
+
+msgid "Main bouquet for channel editor"
+msgstr ""
+
+msgid "Max time drift to match episode"
+msgstr ""
+
+msgid "Next bouquet"
+msgstr ""
+
+msgid "Next page"
+msgstr ""
+
+msgid "No data available"
+msgstr ""
+
+msgid "No identifier available"
+msgstr ""
+
+msgid "No log file found"
+msgstr ""
+
+msgid "No match found"
+msgstr ""
+
+msgid "No matching channel found."
+msgstr ""
+
+msgid "No matching episode found"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "One row down"
+msgstr ""
+
+msgid "One row up"
+msgstr ""
+
+msgid "Please check Your installation"
+msgstr ""
+
+msgid "Please install missing python paket manually"
+msgstr ""
+
+msgid "Please open the Channel Editor and add the channel manually."
+msgstr ""
+
+msgid "Please open the channel editor (setup) and match them"
+msgstr ""
+
+msgid "Please update it"
+msgstr ""
+
+msgid "Poll Interval (in h)"
+msgstr ""
+
+msgid "Poll automatically"
+msgstr ""
+
+msgid "Previeous page"
+msgstr ""
+
+msgid "Previous bouquet"
+msgstr ""
+
+msgid "Problem during loading Webchannels"
+msgstr ""
+
+msgid "Reading log file...\n"
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr ""
+
+msgid "Record"
+msgstr ""
+
+msgid "Record description episode pattern"
+msgstr ""
+
+msgid "Record directory pattern"
+msgstr ""
+
+#, python-format
+msgid "Record rename has been finished with %d errors:\n"
+msgstr ""
+
+msgid "Record title episode pattern"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+#, python-format
+msgid "Remove '%s'?"
+msgstr ""
+
+msgid "Remove channel"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Rename files"
+msgstr ""
+
+msgid "Rename serie(s) (SP)"
+msgstr ""
+
+msgid "Renaming failed"
+msgstr ""
+
+msgid "Replace special characters in title"
+msgstr ""
+
+msgid "Reset channel list?"
+msgstr ""
+
+msgid "Reset channels"
+msgstr ""
+
+msgid "Retrieving Season, Episode and Title..."
+msgstr ""
+
+msgid "STB- / Web-Channel for bouquet:"
+msgstr ""
+
+msgid "Save and close"
+msgstr ""
+
+msgid ""
+"Season: {rawseason:s}\n"
+"{title:s}"
+msgstr ""
+
+msgid ""
+"Season: {rawseason:s}  Episode: {rawepisode:s}\n"
+"{title:s}"
+msgstr ""
+
+msgid "Send debug messages to shell"
+msgstr ""
+
+msgid "SeriesPlugin"
+msgstr ""
+
+msgid "SeriesPlugin Info"
+msgstr ""
+
+msgid "SeriesPlugin extension exception "
+msgstr ""
+
+msgid "SeriesPlugin info exception "
+msgstr ""
+
+msgid "SeriesPlugin is deactivated"
+msgstr ""
+
+msgid "SeriesPlugin label exception "
+msgstr ""
+
+msgid "SeriesPlugin renamer exception "
+msgstr ""
+
+msgid "SeriesPlugin setup exception "
+msgstr ""
+
+msgid "SeriesPlugin test exception "
+msgstr ""
+
+msgid "Setup"
+msgstr ""
+
+msgid "Show Info in movie list menu"
+msgstr ""
+
+msgid "Show Log"
+msgstr ""
+
+msgid "Show Log file"
+msgstr ""
+
+msgid "Show Rename in movie list menu"
+msgstr ""
+
+msgid "Show in channel menu"
+msgstr ""
+
+msgid "Show in epg menu"
+msgstr ""
+
+msgid "Show in extensions menu"
+msgstr ""
+
+msgid "Show in info menu"
+msgstr ""
+
+msgid "Show popup to add Stb Channel"
+msgstr ""
+
+msgid "Show series info (SP)"
+msgstr ""
+
+msgid "Skip check because of pattern match"
+msgstr ""
+
+msgid "Skip check during running records"
+msgstr ""
+
+msgid "Skip search during records"
+msgstr ""
+
+msgid "Skip search if pattern matches"
+msgstr ""
+
+msgid "Skipping lookup because no begin timestamp is specified"
+msgstr ""
+
+msgid "Skipping lookup because no channel is specified"
+msgstr ""
+
+msgid "Skipping lookup because no show name is specified"
+msgstr ""
+
+msgid "Skipping old channels file"
+msgstr ""
+
+msgid "Skipping rename because file already exists"
+msgstr ""
+
+msgid "Skipping timer because it is a just play timer"
+msgstr ""
+
+msgid "Skipping timer because it is already handled"
+msgstr ""
+
+msgid "Skipping timer because it is already in queue"
+msgstr ""
+
+#, python-format
+msgid "Skipping timer because it is already modified %s"
+msgstr ""
+
+msgid "Skipping timer because it is already running"
+msgstr ""
+
+msgid "Skipping timer because it starts in less than 60 seconds"
+msgstr ""
+
+msgid "Skipping timer because no event was found"
+msgstr ""
+
+msgid "Socket timeout"
+msgstr ""
+
+msgid "Startup delay (in min)"
+msgstr ""
+
+#, python-format
+msgid "Success: %s"
+msgstr ""
+
+msgid "Successfully renamed"
+msgstr ""
+
+msgid "Timeout (in min)"
+msgstr ""
+
+msgid "Timeout for Success Popups"
+msgstr ""
+
+msgid "Timeout for Warnings Popups"
+msgstr ""
+
+#, python-format
+msgid "Timer rename has been finished with %d errors:\n"
+msgstr ""
+
+msgid "Title search depths"
+msgstr ""
+
+#, python-format
+msgid "Try to find infos for %s"
+msgstr ""
+
+msgid "Use legacy filenames"
+msgstr ""
+
+msgid "Write debug messages into file"
+msgstr ""
+
+msgid "Your autotimer is deprecated"
+msgstr ""
+
+msgid "Your pattern file is corrupt"
+msgstr ""
+
+msgid "{title:s}"
+msgstr ""
+
+msgid "SeriesPlugin Setup"
+msgstr ""

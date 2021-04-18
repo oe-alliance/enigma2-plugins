@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: NetworkBrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2020-04-22 22:00+0100\n"
 "Last-Translator: BH Team \n"
 "Language-Team: BH Team\n"
@@ -26,12 +26,8 @@ msgstr ""
 "Um montagen de rede com este nome já existe!\n"
 "Atualizar a entrada existente e continuar?\n"
 
-msgid ""
-"A mount entry with this name already exists!\n"
-"and is not this share folder, please use a different name.\n"
-msgstr ""
-"Uma montagem de rede com esse nome já existe!\n"
-"E não é esta a pasta de partilha, por favor use um nome diferente.\n"
+msgid "AUTOFS (mount as needed)"
+msgstr "AUTOFS (montar como necessário)"
 
 msgid "Active"
 msgstr "Ativo"
@@ -131,14 +127,8 @@ msgstr "Nome do utilizador:"
 msgid "Expert"
 msgstr "Especialista"
 
-msgid "FSTAB (mount using linux)"
-msgstr "FSTAB (montar e usar linux)"
-
 msgid "FSTAB (mount at boot)"
 msgstr "FSTAB (montar no arranque)"
-
-msgid "AUTOFS (mount as needed)"
-msgstr "AUTOFS (montar como necessário)"
 
 msgid "Finished restarting your network"
 msgstr "Terminou de reiniciar a sua rede"
@@ -164,9 +154,6 @@ msgstr "Montar de novo"
 msgid "Mount Manager"
 msgstr "Gerir Montagem"
 
-msgid "Mount manager"
-msgstr "Gerir montagem"
-
 msgid "Mount Viewer"
 msgstr "Ver Montagens"
 
@@ -175,6 +162,9 @@ msgstr "Montar de novo"
 
 msgid "Mount informations"
 msgstr "Endereço"
+
+msgid "Mount manager"
+msgstr "Gerir montagem"
 
 msgid "Mount options"
 msgstr "Opções de Montagem"
@@ -200,9 +190,6 @@ msgstr "Gestão de Pontos de Montagem"
 
 msgid "Mounts editor"
 msgstr "Editor de Montagens"
-
-msgid "Mounts management"
-msgstr "Gestão de Montagem"
 
 msgid "NFS share"
 msgstr "Partilha NFS"
@@ -297,6 +284,9 @@ msgstr "Partilha do Servidor"
 msgid "Setup Mount Again"
 msgstr "Definir Montar de novo"
 
+msgid "Use as HDD replacement"
+msgstr "Usar como substituição do Disco Rígido"
+
 msgid "User management"
 msgstr "Gestão de Utilizadores"
 
@@ -312,6 +302,20 @@ msgstr "Ver, editar ou excluir pontos de montagem no seu Recetor."
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Ver, editar ou excluir nomes de utlizador e senhas para a sua rede."
 
+#, fuzzy
+msgid ""
+"You have changed the share name!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+"Um montagen de rede com este nome já existe!\n"
+"Atualizar a entrada existente e continuar?\n"
+
+#, python-format
+msgid ""
+"Your network interface %s is not properly configured, so a network scan cannot be done.\n"
+"Please configure the interface and try again."
+msgstr ""
+
 msgid "Your network mount has been activated."
 msgstr "A sua montagem de rede foi ativada."
 
@@ -320,6 +324,3 @@ msgstr "A sua montagem de rede foi removida."
 
 msgid "Your network mount has been updated."
 msgstr "A sua montagem de rede foi atualizada."
-
-msgid "Use as HDD replacement"
-msgstr "Usar como substituição do Disco Rígido"

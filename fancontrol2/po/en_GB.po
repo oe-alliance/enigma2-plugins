@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fancontrol 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-15 14:10+0000\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2012-03-16 14:19+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -29,6 +29,9 @@ msgstr "3Pin"
 
 msgid "4Pin"
 msgstr "4Pin"
+
+msgid "4Pin (PID)"
+msgstr ""
 
 msgid "Action in case of Fan failure"
 msgstr "Action in case of Fan failure"
@@ -82,11 +85,18 @@ msgstr "Disk free : %d MByte"
 msgid "Download"
 msgstr "Download"
 
+#, fuzzy
+msgid "Enable Console Logging"
+msgstr "Enable Event Logging"
+
 msgid "Enable Data Logging"
 msgstr "Enable Data Logging"
 
 msgid "Enable Event Logging"
 msgstr "Enable Event Logging"
+
+msgid "Enable Thread use"
+msgstr ""
 
 msgid "End temperature C"
 msgstr "End temperature C"
@@ -94,10 +104,20 @@ msgstr "End temperature C"
 msgid "Extended Control Range"
 msgstr "Extended Control Range"
 
+msgid "Fan Control"
+msgstr ""
+
+msgid "Fan Control 2"
+msgstr ""
+
+msgid "Fan Control 2 - Monitor"
+msgstr ""
+
 msgid "Fan is not working!"
 msgstr "Fan is not working!"
 
-msgid "Fan off in Standby"
+#, fuzzy
+msgid "Fan off in Idle Mode"
 msgstr "Fan off in Standby"
 
 msgid "Fan type"
@@ -180,6 +200,10 @@ msgid "Number of WebIF-Log-Entries"
 msgstr "Number of WebIF-Log-Entries"
 
 #, python-format
+msgid "PID Ctl Err %03.2f %%"
+msgstr ""
+
+#, python-format
 msgid "PWM  %03d"
 msgstr "PWM  %03d"
 
@@ -238,9 +262,6 @@ msgstr "below Tuner slot 4"
 msgid "currentRPM:%d targetRPM:%d Temp:%4.1f"
 msgstr "currentRPM:%d targetRPM:%d Temp:%4.1f"
 
-msgid "disable System FanControl"
-msgstr "disable System FanControl"
-
 msgid "disabled"
 msgstr "disabled"
 
@@ -298,6 +319,9 @@ msgstr "read HDD-Temperature in HDD-Standby-Mode"
 msgid "readme.txt"
 msgstr "readme.txt"
 
+msgid "setup Fancontol inStandby mode"
+msgstr ""
+
 msgid "turn off"
 msgstr "turn off"
 
@@ -315,4 +339,3 @@ msgstr "yes"
 
 msgid "yes, Except for Recording or HDD"
 msgstr "yes, Except for Recording or HDD"
-

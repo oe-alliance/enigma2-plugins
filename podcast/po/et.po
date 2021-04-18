@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-15 14:10+0000\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2012-08-25 13:09+0300\n"
 "Last-Translator: rimas\n"
 "Language-Team: rimas\n"
@@ -17,136 +17,64 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/plugin.py:849
-msgid " (Audio)"
-msgstr ""
-
-#: ../src/plugin.py:851
-msgid " (Video)"
-msgstr ""
-
-#: ../src/plugin.py:671
 msgid "Buffer device:"
 msgstr "Puhvri asukoht:"
 
-#: ../src/plugin.py:672
 msgid "Buffer file handling:"
 msgstr "Puhverfaili käsitlemine:"
 
-#: ../src/plugin.py:670
 msgid "Buffer:"
 msgstr "Puhver:"
 
-#: ../src/plugin.py:243
-#: ../src/plugin.py:767
 msgid "Delete this movie?"
 msgstr "Kustutad filmi?"
 
-#: ../src/plugin.py:158
 #, python-format
 msgid "Downloading movie: %s"
 msgstr "Filmi allalaadimine: %s"
 
-#: ../src/plugin.py:912
-#: ../src/plugin.py:964
-msgid "Error getting categories"
-msgstr "Viga kategooriate hankimisel"
-
-#: ../src/plugin.py:797
-msgid "Error getting episodes"
-msgstr "Viga episoodide hankimisel"
-
-#: ../src/plugin.py:476
-#: ../src/plugin.py:537
-#: ../src/plugin.py:586
-msgid "Error getting genres"
-msgstr "Viga žanrite hankimisel"
-
-#: ../src/plugin.py:292
 msgid "Error getting movies"
 msgstr "Viga filmide hankimisel"
 
-#: ../src/plugin.py:802
-msgid "Error getting podcast url"
-msgstr "Viga podcasti url hankimisel"
+msgid "Feedly OPML"
+msgstr ""
 
-#: ../src/plugin.py:859
-msgid "Error getting podcasts"
-msgstr "Viga podcastide hankimisel"
+msgid "Help"
+msgstr ""
 
-#: ../src/plugin.py:481
-msgid "Error getting rss feed"
-msgstr "Viga rss voo hankimisel"
-
-#: ../src/plugin.py:300
 msgid "Length"
 msgstr "Kestus"
 
-#: ../src/plugin.py:70
-#: ../src/plugin.py:146
-#: ../src/plugin.py:197
-#: ../src/plugin.py:336
-#: ../src/plugin.py:366
-#: ../src/plugin.py:395
-#: ../src/plugin.py:427
-#: ../src/plugin.py:490
-#: ../src/plugin.py:546
-#: ../src/plugin.py:600
-#: ../src/plugin.py:653
-#: ../src/plugin.py:709
-#: ../src/plugin.py:727
-#: ../src/plugin.py:811
-#: ../src/plugin.py:868
-#: ../src/plugin.py:921
-#: ../src/plugin.py:973
-#: ../src/plugin.py:1004
+#, fuzzy
+msgid "No Feedly configuration"
+msgstr "seadistus"
+
 msgid "Podcast"
 msgstr ""
 
-#: ../src/plugin.py:658
 msgid "Save"
 msgstr "Salvesta"
 
-#: ../src/plugin.py:605
 msgid "Select"
 msgstr "Vali"
 
-#: ../src/plugin.py:58
 msgid "Stop playing this movie?"
 msgstr "Lõpetada filmi esitus"
 
-#: ../src/plugin.py:300
 msgid "Type"
 msgstr "Tüüp"
 
-#: ../src/plugin.py:82
 msgid "ask me"
 msgstr "küsi"
 
-#: ../src/plugin.py:985
 msgid "configuration"
 msgstr "seadistus"
 
-#: ../src/plugin.py:82
 msgid "delete"
 msgstr "kustuta"
 
-#: ../src/plugin.py:984
-#: ../src/plugin.py:993
 msgid "from xml"
 msgstr "xml failist"
 
-#: ../src/plugin.py:82
 msgid "keep on device"
 msgstr "säilita andmekandjal"
-
-#: ../src/plugin.py:983
-#: ../src/plugin.py:991
-msgid "podcast.com"
-msgstr ""
-
-#: ../src/plugin.py:982
-#: ../src/plugin.py:989
-msgid "podcast.de"
-msgstr ""
-

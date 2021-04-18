@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MovielistPreview\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 17:51+0300\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -12,61 +12,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: /home/aliabdul/dream/ltteam/trunk/additions/plugins/"
-"movielistpreview/src\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src\n"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src/plugin.py:140
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src/plugin.py:301
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src/plugin.py:356
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src/plugin.py:460
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src/plugin.py:538
-msgid "Movielist Preview"
-msgstr "Filmų sąrašo peržiūra"
-
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src/plugin.py:145
-msgid "OK"
-msgstr "Gerai"
-
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src/plugin.py:343
-msgid "Preview created."
-msgstr "Peržiūra sukurta."
-
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src/plugin.py:406
-msgid "Could not find any movie!"
-msgstr "Nepavyko rasti jokių filmų!"
-
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src/plugin.py:419
 #, python-format
 msgid "%s - creating preview for movie %s"
 msgstr "%s - kuriama peržiūra filmui %s"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src/plugin.py:428
-msgid "Everything done ;)"
-msgstr "Viskas atlikta ;)"
-
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src/plugin.py:449
-msgid "Autocreate of previews aborted due user!"
-msgstr "Automatinis peržiūrų sukūrimas, nutrauktas vartotojo!"
-
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src/plugin.py:473
-msgid "Deactivate Movielist Preview"
-msgstr "Išjungti filmų sąrašo peržiūrą"
-
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src/plugin.py:475
 msgid "Activate Movielist Preview"
 msgstr "Įjungti filmų sąrašo peržiūrą"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src/plugin.py:476
-msgid "Create preview"
-msgstr "Sukurti peržiūrą"
-
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src/plugin.py:477
 msgid "Autocreate of missing previews"
 msgstr "Automatiškai kurti trūkstamas peržiūras"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src/plugin.py:478
+msgid "Autocreate of previews aborted due user!"
+msgstr "Automatinis peržiūrų sukūrimas, nutrauktas vartotojo!"
+
 msgid "Change Movielist Preview position"
 msgstr "Keisti filmų sąrašo peržiūros poziciją"
+
+msgid "Could not find any movie!"
+msgstr "Nepavyko rasti jokių filmų!"
+
+msgid "Create preview"
+msgstr "Sukurti peržiūrą"
+
+msgid "Deactivate Movielist Preview"
+msgstr "Išjungti filmų sąrašo peržiūrą"
+
+msgid "Everything done ;)"
+msgstr "Viskas atlikta ;)"
+
+msgid "Movielist Preview"
+msgstr "Filmų sąrašo peržiūra"
+
+msgid "OK"
+msgstr "Gerai"
+
+msgid "Preview created."
+msgstr "Peržiūra sukurta."

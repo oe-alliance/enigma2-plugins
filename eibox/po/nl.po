@@ -54,4 +54,3 @@ msgstr "fout in samenstellen"
 
 msgid "up"
 msgstr "omhoog"
-

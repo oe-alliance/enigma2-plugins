@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2  - FRITZ!Box\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-19 17:00+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2015-04-14 23:22+0200\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -304,11 +304,8 @@ msgstr "FRITZ!Box Fon - Stato"
 msgid "FRITZ!Box PhoneBook to read"
 msgstr "Rubrica FRITZ!Box da caricare"
 
-msgid ""
-"FRITZ!Box firmware version not configured! Please set it in the "
-"configuration."
-msgstr ""
-"Versione firmware FRITZ!Box non inserita. Aggiornare la configurazione."
+msgid "FRITZ!Box firmware version not configured! Please set it in the configuration."
+msgstr "Versione firmware FRITZ!Box non inserita. Aggiornare la configurazione."
 
 msgid "FRITZ!Box not available for calling"
 msgstr "FRITZ!Box non disponibile per le chiamate"
@@ -619,12 +616,8 @@ msgstr ""
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Ritardo notifica chiamate (secondi)"
 
-msgid ""
-"To enjoy more functionalities of your FRITZ!Box, configure the firmware "
-"version!"
-msgstr ""
-"Per godere appieno delle funzionalità della FRITZ!Box, configurare la "
-"versione firmware."
+msgid "To enjoy more functionalities of your FRITZ!Box, configure the firmware version!"
+msgstr "Per godere appieno delle funzionalità della FRITZ!Box, configurare la versione firmware."
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Toggle 1. mailbox"
@@ -704,6 +697,9 @@ msgstr ""
 
 msgid "before 05.27"
 msgstr "anteriore a 05.27"
+
+msgid "business"
+msgstr ""
 
 msgid "call diversions active"
 msgstr ""
@@ -828,39 +824,3 @@ msgstr "Ufficio"
 
 msgid "wrong user or password?"
 msgstr "Utente o password errati?"
-
-#~ msgid "Call redirection active"
-#~ msgstr "deviazione chiamate attiva"
-
-#~ msgid "Debug"
-#~ msgstr "Debug"
-
-#~ msgid "Enter Search Terms"
-#~ msgstr "Inserire criteri di ricerca"
-
-#~ msgid "FRITZ!Box - Could not load phonebook: %s"
-#~ msgstr "FRITZ!Box - Impossibile caricare la rubrica: %s"
-
-#~ msgid "Mute on call"
-#~ msgstr "Mute su Chiamata"
-
-#~ msgid "Name of WLAN guest network"
-#~ msgstr "Nome della rete WLAN Guest"
-
-#~ msgid "No call redirection active"
-#~ msgstr "Nessuna deviazione chiamate attiva"
-
-#~ msgid "One call redirection active"
-#~ msgstr "Una deviazione chiamate attiva"
-
-#~ msgid "Password of WLAN guest network"
-#~ msgstr "Password per la rete WLAN Guest"
-
-#~ msgid "Reverse Lookup Caller ID (select country below)"
-#~ msgstr "Identificativo chiamante (selezionare il Paese!)"
-
-#~ msgid "Secure WLAN guest network"
-#~ msgstr "Sicurezza rete WLAN Guest"
-
-#~ msgid "call redirections active"
-#~ msgstr "deviazione chiamate attiva"

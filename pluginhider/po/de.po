@@ -5,10 +5,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PluginHider\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-09 14:30+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2011-09-09 14:31+0100\n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: SiennaRoot <fk-912737@versanet.de>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,72 +24,52 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/plugin.py:79
-msgid "Hide Plugins"
-msgstr "Plugins ausblenden"
-
-#: ../src/PluginHiderSetup.py:52
-msgid "OK"
-msgstr "OK"
-
-#: ../src/PluginHiderSetup.py:53
 msgid "Cancel"
 msgstr "Abbruch"
 
-#: ../src/PluginHiderSetup.py:55
-msgid "Run"
-msgstr "Starten"
-
-#: ../src/PluginHiderSetup.py:56
-msgid "Plugin/s"
-msgstr "Plugin/s"
-
-#: ../src/PluginHiderSetup.py:57
-msgid "Extension/s"
-msgstr "Erweiterng."
-
-#: ../src/PluginHiderSetup.py:58
-msgid "Eventinfo"
-msgstr "Event Info"
-
-#: ../src/PluginHiderSetup.py:67
-msgid "toggle selection"
-msgstr "Einstellung umkehren"
-
-#: ../src/PluginHiderSetup.py:68
-msgid "end editing"
-msgstr "Bearbeitung beenden"
-
-#: ../src/PluginHiderSetup.py:69
-msgid "save"
-msgstr "speichern"
-
-#: ../src/PluginHiderSetup.py:70
-msgid "run selected plugin"
-msgstr "Ausgewähltes Plugin starten"
-
-#: ../src/PluginHiderSetup.py:71
-msgid "select next tab"
-msgstr "nächsten Tab wählen"
-
-#: ../src/PluginHiderSetup.py:72
-msgid "select previous tab"
-msgstr "vorherigen Tab wählen"
-
-#: ../src/PluginHiderSetup.py:95
 msgid "Could not start Plugin:"
 msgstr "Kann Plugin nicht starten:"
 
-#: ../src/PluginHiderSetup.py:95
-msgid "Unable to access InfoBar."
-msgstr "Kann nicht auf InfoBar zugreifen."
+msgid "Eventinfo"
+msgstr "Event Info"
 
-#: ../src/PluginHiderSetup.py:122
+#, fuzzy
+msgid "Extensions"
+msgstr "Erweiterng."
+
+msgid "Hide Plugins"
+msgstr "Plugins ausblenden"
+
+msgid "OK"
+msgstr "OK"
+
 msgid "PluginHider Setup"
 msgstr "PluginHider Setup"
 
-#~ msgid "Next"
-#~ msgstr "Vor"
+#, fuzzy
+msgid "Plugins"
+msgstr "Plugin/s"
 
-#~ msgid "Previous"
-#~ msgstr "Zurück"
+msgid "Run"
+msgstr "Starten"
+
+msgid "Unable to access InfoBar."
+msgstr "Kann nicht auf InfoBar zugreifen."
+
+msgid "end editing"
+msgstr "Bearbeitung beenden"
+
+msgid "run selected plugin"
+msgstr "Ausgewähltes Plugin starten"
+
+msgid "save"
+msgstr "speichern"
+
+msgid "select next tab"
+msgstr "nächsten Tab wählen"
+
+msgid "select previous tab"
+msgstr "vorherigen Tab wählen"
+
+msgid "toggle selection"
+msgstr "Einstellung umkehren"

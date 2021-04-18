@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - easymedia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -63,6 +63,13 @@ msgstr "File"
 msgid "Files browser:"
 msgstr "Browser file:"
 
+msgid "InternetRadio"
+msgstr ""
+
+#, fuzzy
+msgid "InternetRadio player:"
+msgstr "Player NetRadio:"
+
 msgid "MediaPlayer"
 msgstr "MediaPlayer"
 
@@ -96,9 +103,6 @@ msgstr "Player MyVideo non installato!"
 msgid "MyVideo player:"
 msgstr "Player MyVideo:"
 
-msgid "NetRadio player:"
-msgstr "Player NetRadio:"
-
 msgid "No File-Manager installed!"
 msgstr "Nessun file manager installato!"
 
@@ -125,9 +129,6 @@ msgstr "Radio"
 
 msgid "Radio-mode"
 msgstr "Modalità Radio"
-
-msgid "SHOUTcast"
-msgstr "SHOUTcast"
 
 msgid "SHOUTcast Plugin is not installed!"
 msgstr "Plugin SHOUTcast non installato!"

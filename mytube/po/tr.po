@@ -4,10 +4,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tr 01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-29 17:38+0200\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2009-06-15 21:39+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,617 +16,466 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../src/MyTubeSearch.py:309
 msgid " Results"
 msgstr " Sonuçlar"
 
-#: ../src/plugin.py:1104
-#: ../src/plugin.py:1270
+#, fuzzy
+msgid "Add to favorites"
+msgstr "Favoriler"
+
 msgid "Added: "
 msgstr "Eklenme tarihi: "
 
-#: ../src/MyTubeSearch.py:180
-#: ../src/MyTubeSearch.py:200
-#: ../src/plugin.py:68
-#: ../src/plugin.py:88
 msgid "All"
 msgstr "Tümü"
 
-#: ../src/MyTubeSearch.py:168
-#: ../src/plugin.py:56
 msgid "All Time"
 msgstr "Tüm zamanlar"
 
-#: ../src/plugin.py:423
 msgid "An error occured."
 msgstr "Bir hata oluştu."
 
-#: ../src/MyTubeSearch.py:228
-#: ../src/plugin.py:116
 msgid "Ascending"
 msgstr "Artan"
 
-#: ../src/MyTubeSearch.py:249
-#: ../src/MyTubeSearch.py:252
-#: ../src/plugin.py:136
-#: ../src/plugin.py:139
 msgid "Ask user"
 msgstr "Sor"
 
-#: ../src/MyTubeSearch.py:201
-#: ../src/MyTubeSearch.py:208
-#: ../src/plugin.py:89
-#: ../src/plugin.py:96
 msgid "Australia"
 msgstr "Avustralya"
 
-#: ../src/plugin.py:1267
 msgid "Author: "
 msgstr "Gönderen: "
 
-#: ../src/MyTubeSearch.py:182
-#: ../src/plugin.py:70
+msgid "Auto paginate on last entry:"
+msgstr ""
+
 msgid "Autos & Vehicles"
 msgstr "Otomobil & Araçlar"
 
-#: ../src/MyTubeSearch.py:202
-#: ../src/plugin.py:90
 msgid "Brazil"
 msgstr "Brazilya"
 
-#: ../src/MyTubeSearch.py:203
-#: ../src/plugin.py:91
 msgid "Canada"
 msgstr "Kanada"
 
-#: ../src/MyTubeSearch.py:455
 msgid "Choose target folder"
 msgstr "Hedef klasörü seçin"
 
-#: ../src/MyTubeSearch.py:433
 msgid "Clear history on Exit:"
 msgstr "Çıkışta geçmişi temizle:"
 
-#: ../src/MyTubeSearch.py:393
-#: ../src/MyTubeSearch.py:558
-#: ../src/plugin.py:269
-#: ../src/plugin.py:1209
-#: ../src/plugin.py:1398
 msgid "Close"
 msgstr "Kapat"
 
-#: ../src/MyTubeSearch.py:189
-#: ../src/plugin.py:77
 msgid "Comedy"
 msgstr "Komedi"
 
-#: ../src/MyTubeSearch.py:204
-#: ../src/plugin.py:92
 msgid "Czech Republic"
 msgstr "Çek Cumhuriyeti"
 
-#: ../src/MyTubeSearch.py:229
-#: ../src/plugin.py:117
 msgid "Descending"
 msgstr "Azalan"
 
-#: ../src/MyTubeSearch.py:414
 msgid "Display search results by:"
 msgstr "Sonuçları sıralama türü:"
 
-#: ../src/plugin.py:719
 msgid "Do you want to see more entries?"
 msgstr "Daha fazla başlık görmek istiyor musunuz?"
 
-#: ../src/plugin.py:485
 msgid "Download Video"
 msgstr "Video'yu indir"
 
-#: ../src/MyTubeSearch.py:430
 msgid "Download location"
 msgstr "İndirme konumu"
 
-#: ../src/plugin.py:1238
 msgid "Downloading screenshots. Please wait..."
 msgstr "Ekran görüntüsü indiriliyor. Lütfen bekleyin..."
 
-#: ../src/plugin.py:1104
-#: ../src/plugin.py:1264
 msgid "Duration: "
 msgstr "Süre: "
 
-#: ../src/MyTubeSearch.py:193
-#: ../src/plugin.py:81
 msgid "Education"
 msgstr "Eğitim"
 
-#: ../src/plugin.py:526
 msgid "Enter your search term(s)"
 msgstr "Arama terim(ler)ini girin"
 
-#: ../src/MyTubeSearch.py:192
-#: ../src/plugin.py:80
 msgid "Entertainment"
 msgstr "Eğlence"
 
-#: ../src/plugin.py:371
-#: ../src/plugin.py:413
 msgid "Fetching feed entries"
 msgstr "Bilgiler, youtube'dan alınıyor"
 
-#: ../src/plugin.py:418
 msgid "Fetching search entries"
 msgstr "Arama sonuçları getiriliyor"
 
-#: ../src/MyTubeSearch.py:181
-#: ../src/plugin.py:69
 msgid "Film & Animation"
 msgstr "Film & Animasyon"
 
-#: ../src/MyTubeSearch.py:205
-#: ../src/plugin.py:93
 msgid "France"
 msgstr "Fransa"
 
-#: ../src/MyTubeSearch.py:188
-#: ../src/plugin.py:76
 msgid "Gaming"
 msgstr "Oyun"
 
-#: ../src/MyTubeSearch.py:206
-#: ../src/plugin.py:94
+msgid "Genuine Dreambox validation failed!"
+msgstr ""
+
 msgid "Germany"
 msgstr "Almanya"
 
-#: ../src/MyTubeSearch.py:207
-#: ../src/plugin.py:95
 msgid "Great Britain"
 msgstr "Büyük Britanya"
 
-#: ../src/MyTubeSearch.py:237
-#: ../src/plugin.py:125
-#: ../src/plugin.py:752
 msgid "HD videos"
 msgstr "HD videolar"
 
-#: ../src/plugin.py:1416
+msgid "Hello"
+msgstr ""
+
 msgid "Help"
 msgstr "Yardım"
 
-#: ../src/plugin.py:271
 msgid "History"
 msgstr "Geçmiş"
 
-#: ../src/MyTubeSearch.py:209
-#: ../src/plugin.py:97
 msgid "Holland"
 msgstr "Hollanda"
 
-#: ../src/MyTubeSearch.py:210
-#: ../src/plugin.py:98
 msgid "Hong Kong"
 msgstr "Hong Kong"
 
-#: ../src/MyTubeSearch.py:194
-#: ../src/plugin.py:82
 msgid "Howto & Style"
 msgstr "Moda"
 
-#: ../src/MyTubeSearch.py:211
-#: ../src/plugin.py:99
 msgid "India"
 msgstr "Hindistan"
 
-#: ../src/MyTubeSearch.py:212
-#: ../src/plugin.py:100
 msgid "Ireland"
 msgstr "İrlanda"
 
-#: ../src/MyTubeSearch.py:213
-#: ../src/plugin.py:101
 msgid "Israel"
 msgstr "İsrail"
 
-#: ../src/MyTubeSearch.py:214
-#: ../src/plugin.py:102
 msgid "Italy"
 msgstr "İtalya"
 
-#: ../src/MyTubeSearch.py:215
-#: ../src/plugin.py:103
 msgid "Japan"
 msgstr "Japonya"
 
-#: ../src/MyTubeSearch.py:418
 msgid "Load feed on startup:"
 msgstr "Açılırken seçilen beslemeyi yükle:"
 
-#: ../src/MyTubeSearch.py:216
-#: ../src/plugin.py:104
+msgid "Login OK"
+msgstr ""
+
+msgid "Login failed"
+msgstr ""
+
 msgid "Mexico"
 msgstr "Meksika"
 
-#: ../src/plugin.py:929
 msgid "More video entries."
 msgstr "Daha çok video sonucu."
 
-#: ../src/MyTubeSearch.py:241
-#: ../src/plugin.py:129
-#: ../src/plugin.py:759
 msgid "Most discussed"
 msgstr "En çok tartışılanlar"
 
-#: ../src/MyTubeSearch.py:243
-#: ../src/plugin.py:131
-#: ../src/plugin.py:760
 msgid "Most linked"
 msgstr "En çok linklenenler"
 
-#: ../src/plugin.py:757
 msgid "Most popular"
 msgstr "En çok beğenilenler"
 
-#: ../src/MyTubeSearch.py:245
-#: ../src/plugin.py:133
-#: ../src/plugin.py:758
 msgid "Most recent"
 msgstr "En yeniler"
 
-#: ../src/MyTubeSearch.py:244
-#: ../src/plugin.py:132
-#: ../src/plugin.py:762
 msgid "Most responded"
 msgstr "En çok yorumlananlar"
 
-#: ../src/MyTubeSearch.py:238
-#: ../src/plugin.py:126
-#: ../src/plugin.py:756
+#, fuzzy
+msgid "Most shared"
+msgstr "En çok tartışılanlar"
+
 msgid "Most viewed"
 msgstr "En çok izlenenler"
 
-#: ../src/MyTubeSearch.py:183
-#: ../src/plugin.py:71
 msgid "Music"
 msgstr "Müzik"
 
-#: ../src/plugin.py:1738
+#, fuzzy
+msgid "My Favorites"
+msgstr "Favoriler"
+
+#, fuzzy
+msgid "My History"
+msgstr "Geçmiş"
+
+msgid "My Recommendations"
+msgstr ""
+
+msgid "My Subscriptions"
+msgstr ""
+
 msgid "My TubePlayer"
 msgstr "MyTube oynatıcı"
 
-#: ../src/plugin.py:472
-#: ../src/plugin.py:478
+msgid "My Uploads"
+msgstr ""
+
+msgid "My Watch Later"
+msgstr ""
+
 msgid "MyTube Settings"
 msgstr "MyTube ayarları"
 
-#: ../src/plugin.py:384
 msgid "MyTubePlayer"
 msgstr "MyTube oynatıcı"
 
-#: ../src/plugin.py:450
-#: ../src/plugin.py:452
-#: ../src/plugin.py:459
 msgid "MyTubePlayer Help"
 msgstr "MyTube oynatıcı yardım"
 
-#: ../src/MyTubeSearch.py:571
-#: ../src/MyTubeSearch.py:588
 msgid "MyTubePlayer active video downloads"
 msgstr "MyTube oynatıcı indirilen videolar"
 
-#: ../src/MyTubeSearch.py:407
-#: ../src/MyTubeSearch.py:410
 msgid "MyTubePlayer settings"
 msgstr "MyTube oynatıcı ayarları"
 
-#: ../src/plugin.py:1279
 msgid "MyTubeVideoInfoScreen"
 msgstr "MyTube video bilgi ekranı"
 
-#: ../src/plugin.py:1425
 msgid "MyTubeVideohelpScreen"
 msgstr "MyTube video yardım ekranı"
 
-#: ../src/MyTubeSearch.py:217
-#: ../src/plugin.py:105
 msgid "New Zealand"
 msgstr "Yeni Zelanda"
 
-#: ../src/MyTubeSearch.py:191
-#: ../src/plugin.py:79
+msgid "New subscription added"
+msgstr ""
+
 msgid "News & Politics"
 msgstr "Haberler"
 
-#: ../src/MyTubeSearch.py:176
-#: ../src/plugin.py:64
-#: ../src/plugin.py:571
-#: ../src/plugin.py:577
 msgid "No"
 msgstr "Hayır"
 
-#: ../src/plugin.py:1702
 msgid "No playable video found! Stop playing this movie?"
 msgstr "Oynatılabilir video bulunamadı! Film durdurulsun mu?"
 
-#: ../src/plugin.py:429
 msgid "No videos to display"
 msgstr "Gösterilecek video yok"
 
-#: ../src/plugin.py:1695
 msgid "No, but play video again"
 msgstr "Hayır, ama videoyu yeniden oynat"
 
-#: ../src/plugin.py:572
 msgid "No, but switch to video entries."
 msgstr "Hayır, ama video sonuçlarına geç."
 
-#: ../src/plugin.py:578
 msgid "No, but switch to video search."
 msgstr "Hayır, ama arama ekranına geç."
 
-#: ../src/MyTubeSearch.py:195
-#: ../src/plugin.py:83
 msgid "Nonprofits & Activism"
 msgstr "Kamu yararına dernek"
 
-#: ../src/plugin.py:433
 msgid "Not fetching feed entries"
 msgstr "Bilgiler youtube'dan alınamadı"
 
-#: ../src/MyTubeSearch.py:190
-#: ../src/plugin.py:78
 msgid "People & Blogs"
 msgstr "İnsanlar"
 
-#: ../src/MyTubeSearch.py:184
-#: ../src/plugin.py:72
 msgid "Pets & Animals"
 msgstr "Hayvanlar"
 
-#: ../src/plugin.py:1739
 msgid "Play YouTube movies"
 msgstr "YouTube filmlerini oynatın"
 
-#: ../src/MyTubeSearch.py:249
-#: ../src/plugin.py:136
 msgid "Play next video"
 msgstr "Sonraki videoyu oynat"
 
-#: ../src/MyTubeSearch.py:249
-#: ../src/plugin.py:136
 msgid "Play video again"
 msgstr "Videoyu yeniden oynat"
 
-#: ../src/plugin.py:433
 msgid "Please enter your search term."
 msgstr "Lütfen arama terimini girin."
 
-#: ../src/plugin.py:429
 msgid "Please select a standard feed or try searching for videos."
 msgstr "Lütfen 'Beslemeler'i seçin veya video aramayı deneyin."
 
-#: ../src/MyTubeSearch.py:218
-#: ../src/plugin.py:106
 msgid "Poland"
 msgstr "Polonya"
 
-#: ../src/MyTubeSearch.py:163
-#: ../src/plugin.py:51
 msgid "Published"
 msgstr "Yayın"
 
-#: ../src/MyTubeSearch.py:164
-#: ../src/plugin.py:52
 msgid "Rating"
 msgstr "Puan"
 
-#: ../src/plugin.py:1104
 msgid "Ratings: "
 msgstr "Puan: "
 
-#: ../src/plugin.py:580
 msgid "Really quit MyTube Player?"
 msgstr "MyTube oynatıcı'dan çıkmak istiyor musunuz?"
 
-#: ../src/MyTubeSearch.py:240
-#: ../src/plugin.py:128
-#: ../src/plugin.py:761
 msgid "Recently featured"
 msgstr "Son önerilenler"
 
-#: ../src/plugin.py:936
 msgid "Related video entries."
 msgstr "Benzer videolar"
 
-#: ../src/MyTubeSearch.py:161
-#: ../src/plugin.py:49
 msgid "Relevance"
 msgstr "Uygunluk"
 
-#: ../src/plugin.py:943
+msgid "Reset tv-screen after playback:"
+msgstr ""
+
 msgid "Response video entries."
 msgstr "Video sonuçlarını cevapla."
 
-#: ../src/MyTubeSearch.py:249
-#: ../src/MyTubeSearch.py:252
-#: ../src/plugin.py:136
-#: ../src/plugin.py:139
+#, python-format
+msgid "Results: %s - Page: %s "
+msgstr ""
+
 msgid "Return to movie list"
 msgstr "Film listesine geri dön"
 
-#: ../src/MyTubeSearch.py:219
-#: ../src/plugin.py:107
 msgid "Russia"
 msgstr "Rusya"
 
-#: ../src/MyTubeSearch.py:394
 msgid "Save"
 msgstr "Kaydet"
 
-#: ../src/MyTubeSearch.py:196
-#: ../src/plugin.py:84
 msgid "Science & Technology"
 msgstr "Bilim & Teknoloji"
 
-#: ../src/plugin.py:388
 msgid "Search Term(s)"
 msgstr "Arama terim(ler)i"
 
-#: ../src/MyTubeSearch.py:416
 msgid "Search category:"
 msgstr "Arama kategorisi:"
 
-#: ../src/MyTubeSearch.py:417
 msgid "Search region:"
 msgstr "Arama bölgesi:"
 
-#: ../src/MyTubeSearch.py:415
 msgid "Search restricted content:"
 msgstr "Kısıtlanmış içerikte ara:"
 
-#: ../src/plugin.py:764
 msgid "Select new feed to view."
 msgstr "Görmek istediğiniz beslemeyi seçin."
 
-#: ../src/plugin.py:475
-#: ../src/plugin.py:490
 msgid "Select your choice."
 msgstr "Seçiminizi yapınız."
 
-#: ../src/MyTubeSearch.py:187
-#: ../src/plugin.py:75
 msgid "Short Movies"
 msgstr "Kısa Film"
 
-#: ../src/plugin.py:684
 msgid "Sorry, video is not available!"
 msgstr "Üzgünüm, video mevcut değil!"
 
-#: ../src/MyTubeSearch.py:220
-#: ../src/plugin.py:108
 msgid "South Korea"
 msgstr "Güney Kore"
 
-#: ../src/MyTubeSearch.py:221
-#: ../src/plugin.py:109
 msgid "Spain"
 msgstr "İspanya"
 
-#: ../src/MyTubeSearch.py:185
-#: ../src/plugin.py:73
 msgid "Sports"
 msgstr "Spor"
 
-#: ../src/MyTubeSearch.py:421
 msgid "Start with following feed:"
 msgstr "Açılışta yüklenecek besleme:"
 
-#: ../src/plugin.py:270
 msgid "Std. Feeds"
 msgstr "Beslemeler"
 
-#: ../src/plugin.py:1700
 msgid "Stop playing this movie?"
 msgstr "Film durdurulsun mu?"
 
-#: ../src/MyTubeSearch.py:222
-#: ../src/plugin.py:110
+msgid "Subscribe to user"
+msgstr ""
+
 msgid "Sweden"
 msgstr "İsveç"
 
-#: ../src/plugin.py:1276
 msgid "Tags: "
 msgstr "Etiketler: "
 
-#: ../src/MyTubeSearch.py:223
-#: ../src/plugin.py:111
 msgid "Taiwan"
 msgstr "Tayvan"
 
-#: ../src/plugin.py:423
 msgid "There was an error getting the feed entries. Please try again."
 msgstr "Sonuçlar youtube'dan alınırken hata oluştu. Lütfen tekrar deneyin."
 
-#: ../src/MyTubeSearch.py:169
-#: ../src/plugin.py:57
 msgid "This Month"
 msgstr "Bu ay"
 
-#: ../src/MyTubeSearch.py:170
-#: ../src/plugin.py:58
 msgid "This Week"
 msgstr "Bu hafta"
 
-#: ../src/plugin.py:1420
 msgid "This is the help screen. Feed me with something to display."
 msgstr "Bu yardım ekranıdır."
 
-#: ../src/MyTubeSearch.py:171
-#: ../src/plugin.py:59
 msgid "Today"
 msgstr "Bugün"
 
-#: ../src/MyTubeSearch.py:242
-#: ../src/plugin.py:130
-#: ../src/plugin.py:755
 msgid "Top favorites"
 msgstr "Favoriler"
 
-#: ../src/MyTubeSearch.py:239
-#: ../src/plugin.py:127
-#: ../src/plugin.py:754
 msgid "Top rated"
 msgstr "Yüksek oy alanlar"
 
-#: ../src/MyTubeSearch.py:186
-#: ../src/plugin.py:74
 msgid "Travel & Events"
 msgstr "Gezi"
 
-#: ../src/plugin.py:371
-#: ../src/plugin.py:413
+msgid "Trending videos"
+msgstr ""
+
 msgid "Trying to download the Youtube feed entries. Please wait..."
 msgstr "Youtube sonuçları alınıyor. Lütfen bekleyin..."
 
-#: ../src/plugin.py:418
 msgid "Trying to download the Youtube search results. Please wait..."
 msgstr "Youtube arama sonuçları getiriliyor. Lütfen bekleyin..."
 
-#: ../src/MyTubeSearch.py:224
-#: ../src/plugin.py:112
 msgid "United States"
 msgstr "Amerika"
 
-#: ../src/MyTubeSearch.py:423
+msgid "Unknown error"
+msgstr ""
+
+#, fuzzy
+msgid "User video entries."
+msgstr "Daha çok video sonucu."
+
+msgid "Verify your Dreambox authenticity by running the genuine dreambox plugin!"
+msgstr ""
+
+msgid "Video successfully added to favorites"
+msgstr ""
+
 msgid "Videobrowser exit behavior:"
 msgstr "Video gezgininden çıkıldığında:"
 
-#: ../src/MyTubeSearch.py:422
 msgid "Videoplayer stop/exit behavior:"
 msgstr "Video oynatıcı durdurulduğunda/çıkıldığında:"
 
-#: ../src/MyTubeSearch.py:162
-#: ../src/plugin.py:50
 msgid "View Count"
 msgstr "İzlenme sayısı"
 
-#: ../src/plugin.py:486
 msgid "View active downloads"
 msgstr "İndirilen dosyaları göster"
 
-#: ../src/plugin.py:480
 msgid "View related videos"
 msgstr "Benzer videoları göster"
 
-#: ../src/plugin.py:481
 msgid "View response videos"
 msgstr "Cevaplanan videoları göster"
 
-#: ../src/plugin.py:1104
-#: ../src/plugin.py:1273
+#, fuzzy
+msgid "View user videos"
+msgstr "Cevaplanan videoları göster"
+
 msgid "Views: "
 msgstr "İzlenme: "
 
-#: ../src/plugin.py:260
 msgid ""
 "Welcome to the MyTube Youtube Player.\n"
 "\n"
@@ -651,7 +501,6 @@ msgstr ""
 "\n"
 "bu yardım ekranına ulaşmak için ise HELP tuşunu kullanın. "
 
-#: ../src/plugin.py:259
 msgid ""
 "Welcome to the MyTube Youtube Player.\n"
 "\n"
@@ -669,28 +518,17 @@ msgstr ""
 "\n"
 "Arama kutusuna dönmek için EXIT tuşuna basınız."
 
-#: ../src/MyTubeSearch.py:175
-#: ../src/plugin.py:63
-#: ../src/plugin.py:570
-#: ../src/plugin.py:576
-#: ../src/plugin.py:1694
 msgid "Yes"
 msgstr "Evet"
 
-#: ../src/plugin.py:1696
 msgid "Yes, but play next video"
 msgstr "Evet, ama sonraki videoyu oynat"
 
-#: ../src/plugin.py:1697
 msgid "Yes, but play previous video"
 msgstr "Evet, ama önceki videoyu oynat"
 
-#~ msgid "Ascanding"
-#~ msgstr "Artan"
-#~ msgid "Search"
-#~ msgstr "Ara"
-#~ msgid "Category"
-#~ msgstr "Kategori"
-#~ msgid "Order by"
-#~ msgstr "Sıralama"
+msgid "Youtube Password (reopen plugin on change):"
+msgstr ""
 
+msgid "Youtube Username (reopen plugin on change):"
+msgstr ""

@@ -23,12 +23,7 @@ msgid "Countdown:"
 msgstr "Nedräkning:"
 
 msgid "Error while creating screenshot. You need grab version 0.8 or higher!"
-msgstr ""
-"Fel vid skapandet av screenshot. Version 0.8 eller nyare version av grab "
-"behövs!"
+msgstr "Fel vid skapandet av screenshot. Version 0.8 eller nyare version av grab behövs!"
 
 msgid "Mosaic"
 msgstr "Mosaik"
-
-#~ msgid "%s does not exist!"
-#~ msgstr "%s existerar inte!"

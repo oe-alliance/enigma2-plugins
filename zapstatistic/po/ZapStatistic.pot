@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,88 +17,65 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/plugin.py:570
 msgid "Close plugin"
 msgstr ""
 
-#: ../src/plugin.py:431
 msgid "Delete"
 msgstr ""
 
-#: ../src/plugin.py:563
 msgid "Delete all entries"
 msgstr ""
 
-#: ../src/plugin.py:562
 msgid "Delete entry"
 msgstr ""
 
-#: ../src/plugin.py:434
 msgid "Durations"
 msgstr ""
 
-#: ../src/plugin.py:561
 msgid "Play entry"
 msgstr ""
 
-#: ../src/plugin.py:571
 msgid "Please choose a function..."
 msgstr ""
 
-#: ../src/plugin.py:569
 msgid "Show combined duration window"
 msgstr ""
 
-#: ../src/plugin.py:568
 msgid "Show duration window"
 msgstr ""
 
-#: ../src/plugin.py:598
 msgid "Shows the watched services with some statistic"
 msgstr ""
 
-#: ../src/plugin.py:452
 msgid "Sort (date+)"
 msgstr ""
 
-#: ../src/plugin.py:456 ../src/plugin.py:539
 msgid "Sort (date-)"
 msgstr ""
 
-#: ../src/plugin.py:229 ../src/plugin.py:327
 msgid "Sort (duration+)"
 msgstr ""
 
-#: ../src/plugin.py:230 ../src/plugin.py:328
 msgid "Sort (duration-)"
 msgstr ""
 
-#: ../src/plugin.py:227 ../src/plugin.py:325 ../src/plugin.py:451
 msgid "Sort (name+)"
 msgstr ""
 
-#: ../src/plugin.py:228 ../src/plugin.py:326 ../src/plugin.py:454
-#: ../src/plugin.py:524
 msgid "Sort (name-)"
 msgstr ""
 
-#: ../src/plugin.py:566
 msgid "Sort by date (ascending)"
 msgstr ""
 
-#: ../src/plugin.py:567
 msgid "Sort by date (descending)"
 msgstr ""
 
-#: ../src/plugin.py:564
 msgid "Sort by name (ascending)"
 msgstr ""
 
-#: ../src/plugin.py:565
 msgid "Sort by name (descending)"
 msgstr ""
 
-#: ../src/plugin.py:220 ../src/plugin.py:317 ../src/plugin.py:422
-#: ../src/plugin.py:598
 msgid "Zap Statistic"
 msgstr ""

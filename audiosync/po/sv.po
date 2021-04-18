@@ -173,33 +173,3 @@ msgstr "Väntetid i mS före aktivering:"
 
 msgid "sets the Audio Delay (LipSync)"
 msgstr "sätter ljudfrödröjning (LipSync)"
-
-#~ msgid " "
-#~ msgstr " "
-
-#~ msgid "%s:"
-#~ msgstr "%s:"
-
-#~ msgid "Delay:"
-#~ msgstr "Verzögerung:"
-
-#~ msgid "Global Passthr."
-#~ msgstr "Passthr. Global"
-
-#~ msgid "PCM"
-#~ msgstr "PCM"
-
-#~ msgid "Passthrough"
-#~ msgstr "Passthrough"
-
-#~ msgid "Save"
-#~ msgstr "Spara"
-
-#~ msgid "Select channel audio"
-#~ msgstr "Välj kanal ljud"
-
-#~ msgid "Switch audio"
-#~ msgstr "Byt ljud"
-
-#~ msgid "sets the audio Delay (LipSync)"
-#~ msgstr "Setzt die verschiedenen Audio- Verzögerungen (LipSync)"

@@ -84,13 +84,3 @@ msgstr ""
 
 msgid "minutes"
 msgstr "minutos"
-
-#~ msgid ""
-#~ "Timer already running.\n"
-#~ "Stop it?"
-#~ msgstr ""
-#~ "La alarma ya está ejecutándose.\n"
-#~ "¿La paramos?"
-
-#~ msgid "Zapping back in %d Minutes"
-#~ msgstr "El Zapping volverá en %d Minutos"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - infobartunerstate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2012-05-06 22:36+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -217,6 +217,10 @@ msgstr "Consentire un solo campo icona:"
 msgid "Only one Name field allowed:"
 msgstr ""
 
+#, fuzzy
+msgid "Overwrite Infobar timeout"
+msgstr "Persistenza barra informazioni"
+
 msgid "Placeholder for Progressbar"
 msgstr ""
 
@@ -324,9 +328,3 @@ msgstr "YYYY/MM/GG HH:MM"
 
 msgid "configuration"
 msgstr "Configurazione"
-
-#~ msgid "Horizontal offset in pixel"
-#~ msgstr "Offset orizzontale (pixel)"
-
-#~ msgid "Time format"
-#~ msgstr "Formato ora"

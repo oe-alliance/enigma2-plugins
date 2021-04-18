@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: StartUpService\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-28 11:52+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dr.Best <dr.best@dreambox-tools.info>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,20 +14,11 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-msgid "set as startup service"
-msgstr "Als Startservice setzen"
-
-msgid "reset startup service"
-msgstr "Startservice zurücksetzen"
-
 msgid "If you see this message, please switch to the service you want to mark as startservice and try again."
 msgstr "Wenn diese Nachricht erscheint bitte auf den Kanal schalten, welcher als Startservice gesetzt werden soll, und dann nochmal versuchen."
 
-msgid "set as startup service after booting..."
-msgstr "Als Startservice nach dem Booten setzen..."
-
-msgid "set as startup service after leaving standby mode..."
-msgstr "Als Startservice beim Verlassen des Standby-Modus setzen..."
+msgid "reset startup service"
+msgstr "Startservice zurücksetzen"
 
 msgid "reset startup service for booting..."
 msgstr "Startservice nach dem Booten zurücksetzen..."
@@ -34,3 +26,11 @@ msgstr "Startservice nach dem Booten zurücksetzen..."
 msgid "reset startup service for leaving standby mode..."
 msgstr "Startservice beim Verlassen des Standby-Modus zurücksetzen..."
 
+msgid "set as startup service"
+msgstr "Als Startservice setzen"
+
+msgid "set as startup service after booting..."
+msgstr "Als Startservice nach dem Booten setzen..."
+
+msgid "set as startup service after leaving standby mode..."
+msgstr "Als Startservice beim Verlassen des Standby-Modus setzen..."

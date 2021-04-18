@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-01 14:59+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2015-01-05 12:55+0100\n"
 "Last-Translator: Mariusz1970 <Mariusz1970@onet.eu>\n"
 "Language-Team: none <Mariusz1970@onet.eu>\n"
@@ -10,16 +10,49 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.7.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+
+msgid "%e/%m, %H:%M"
+msgstr ""
+
+#. TRANSLATORS: EPGSearch title in EventInfo dialog (does not require further user interaction)
+#. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#, fuzzy, python-format
+msgid "%ssearch EPG"
+msgstr "szukaj EPG"
+
+#. TRANSLATORS: EPGSearch search from search history in EventInfo dialog (requires the user to select a history item to search for)
+#. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#, fuzzy, python-format
+msgid "%ssearch EPG from history..."
+msgstr "szukaj EPG..."
 
 msgid "Add AutoTimer"
 msgstr "Dodaj AutoTimer"
 
-msgid "Add timer"
+#, fuzzy
+msgid "Add Timer"
 msgstr "Dodaj timer"
+
+msgid "Add a record timer for highlighted event"
+msgstr ""
+
+msgid "Add a zap timer for highlighted event"
+msgstr ""
+
+msgid "Add an AutoTimer for highlighted event"
+msgstr ""
+
+msgid "Add/remove/edit timer for highlighted event"
+msgstr ""
+
+msgid "All bouquets"
+msgstr ""
+
+msgid "All services"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Anuluj"
@@ -27,14 +60,47 @@ msgstr "Anuluj"
 msgid "Channel Selection"
 msgstr "Wybór kanału"
 
-msgid "Choose the encode type for search, helpful for foreign languages."
+#, fuzzy
+msgid "Choose the encoding type for searches, helpful for foreign languages."
 msgstr "Wybierz typ kodowanie do wyszukiwania, przydatne dla języków obcych."
 
+msgid "Close dialog"
+msgstr ""
+
+msgid "Control where to search in the EPG. When 'all bouquets' is set, all bouquets are searched, even if 'Enable multiple bouquets' is disabled."
+msgstr ""
+
+#, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr "Nie można odczytać listy AutoTimer:: %s"
 
+msgid "Current bouquet"
+msgstr ""
+
+msgid "Current service"
+msgstr ""
+
+msgid "DVB-C"
+msgstr ""
+
+msgid "DVB-C Cable services"
+msgstr ""
+
+msgid "DVB-T"
+msgstr ""
+
+msgid "DVB-T Terrestrial services"
+msgstr ""
+
+msgid "Default scope when asked"
+msgstr ""
+
 msgid "EPG Search"
 msgstr "EPG Szukaj"
+
+#, fuzzy
+msgid "EPG Search setup"
+msgstr "EPG Ustawienia wyszukiwania"
 
 msgid "EPGSearch"
 msgstr "EPGSzukaj"
@@ -42,19 +108,29 @@ msgstr "EPGSzukaj"
 msgid "EPGSearch Setup"
 msgstr "EPG Ustawienia wyszukiwania"
 
-msgid ""
-"Enable this to be able to access the EPG-Search from within the plugin "
-"browser."
+#, fuzzy
+msgid "Enable this to allow access to EPG Search from within the plugin browser."
 msgstr "Włącz to, aby mieć dostęp do opisu AutoTimera z menu rozszerzeń"
+
+#, fuzzy
+msgid "Enter new search"
+msgstr "Wpisz tekst do wyszukania"
 
 msgid "Enter text to search for"
 msgstr "Wpisz tekst do wyszukania"
 
-msgid ""
-"How many entries to keep in the search history at most. 0 disables history "
-"entirely!"
+msgid "Exclude results from"
 msgstr ""
-"Ile wpisów zachować w historii wyszukiwania.'0' wyłącza historię w całości!"
+
+#, fuzzy
+msgid "Exit EPG Search"
+msgstr "EPG Szukaj"
+
+msgid "Filter results by source"
+msgstr ""
+
+msgid "IMDB search for highlighted event"
+msgstr ""
 
 msgid "IMDb Search"
 msgstr "IMDb Szukaj"
@@ -68,14 +144,52 @@ msgstr "Importuj z EPG"
 msgid "Import from Timer"
 msgstr "Importu z Timera"
 
-msgid "Length of History"
+msgid "Include or exclude results depending on their source (e.g. by satellite)"
+msgstr ""
+
+msgid "Include results from"
+msgstr ""
+
+msgid "Include/exclude search results from this type of source"
+msgstr ""
+
+msgid "Include/exclude sources"
+msgstr ""
+
+msgid "Is the search case-sensitive or case-insensitive?"
+msgstr ""
+
+#, fuzzy
+msgid "Length of history"
 msgstr "Długość Historii"
+
+#, fuzzy
+msgid "Maximum number of entries in the search history. Set this to 0 to disable search history."
+msgstr "Ile wpisów zachować w historii wyszukiwania.'0' wyłącza historię w całości!"
+
+msgid "Move down"
+msgstr ""
+
+msgid "Move down a page"
+msgstr ""
+
+msgid "Move up"
+msgstr ""
+
+msgid "Move up a page"
+msgstr ""
 
 msgid "New Search"
 msgstr "Nowe wyszukiwanie"
 
 msgid "No history"
 msgstr "Brak historii"
+
+msgid "Number of filters for inclusion/exclusion of results"
+msgstr ""
+
+msgid "Number of inclusions/exclusions"
+msgstr ""
 
 msgid "OK"
 msgstr "OK"
@@ -92,8 +206,28 @@ msgstr "Szukaj"
 msgid "Search EPG"
 msgstr "Szukaj EPG"
 
-msgid "Search Encoding"
+#, fuzzy
+msgid "Search encoding"
 msgstr "Szukaj Kodowanie"
+
+#, fuzzy
+msgid "Search in..."
+msgstr "szukaj EPG..."
+
+#, fuzzy
+msgid "Search scope"
+msgstr "Szukaj Kodowanie"
+
+msgid "Search strictness"
+msgstr ""
+
+#, fuzzy
+msgid "Search type"
+msgstr "Szukaj"
+
+#, fuzzy
+msgid "Searching..."
+msgstr "Szukaj"
 
 msgid "Select a timer to search"
 msgstr "Wybierz timer do wyszukania"
@@ -101,17 +235,91 @@ msgstr "Wybierz timer do wyszukania"
 msgid "Select text to search for"
 msgstr "Zaznacz tekst, aby wyszukać"
 
+msgid "Set type of match used to compare program titles with the search string."
+msgstr ""
+
+msgid "Sets the default search scope when the user is asked."
+msgstr ""
+
 msgid "Setup"
 msgstr "Ustawienia"
+
+#, fuzzy
+msgid "Setup menu"
+msgstr "Ustawienia"
+
+#, fuzzy
+msgid "Show AutoTimer list"
+msgstr "Dodaj AutoTimer"
+
+msgid "Show detailed event information"
+msgstr ""
 
 msgid "Show in plugin browser"
 msgstr "Pokaż przeglądarke pluginów.."
 
+msgid "Show orbital position"
+msgstr ""
+
+msgid "Show satellite orbital positions in the search results."
+msgstr ""
+
 msgid "Show search history"
 msgstr "Pokaż historię wyświetleń"
 
+msgid "Stream"
+msgstr ""
+
+msgid "Use source restrictions below to only include results from the sources, or exclude them."
+msgstr ""
+
+msgid "Zap to channel"
+msgstr ""
+
+msgid "all bouquets"
+msgstr ""
+
+msgid "all services"
+msgstr ""
+
+msgid "ask user"
+msgstr ""
+
+msgid "case-insensitive search"
+msgstr ""
+
+msgid "case-sensitive search"
+msgstr ""
+
+msgid "current bouquet"
+msgstr ""
+
+msgid "current service"
+msgstr ""
+
+msgid "disabled"
+msgstr ""
+
+msgid "exact match"
+msgstr ""
+
+msgid "exclude"
+msgstr ""
+
+msgid "include"
+msgstr ""
+
+msgid "partial match"
+msgstr ""
+
+#. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
 msgid "search EPG"
 msgstr "szukaj EPG"
 
-msgid "search EPG..."
+#. TRANSLATORS: EPGSearch search from search history in MovieList (requires the user to select a history item to search for)
+#, fuzzy
+msgid "search EPG from history..."
 msgstr "szukaj EPG..."
+
+msgid "title starts with"
+msgstr ""

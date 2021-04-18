@@ -2,6 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fan Control 2\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: litvcom\n"
 "Language-Team: \n"
@@ -10,8 +11,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.2\n"
-"POT-Creation-Date: \n"
 
+#, python-format
 msgid "%s   %02d C"
 msgstr "%s   %02d C"
 
@@ -33,6 +34,7 @@ msgstr "Действие в случае отказа вентилятора"
 msgid "Auto-Delete Data older than (Days)"
 msgstr "Автоудаление данных старше чем (дней)"
 
+#, python-format
 msgid "Auto-Delete older %s Days"
 msgstr "Автоудаление старше %s дней"
 
@@ -57,9 +59,11 @@ msgstr "Выбор пути"
 msgid "Control disabled"
 msgstr "Управление отключено"
 
+#, python-format
 msgid "Current rpm  %4d"
 msgstr "Текущие об/мин  %4d"
 
+#, python-format
 msgid "Current value: %s"
 msgstr "Текущее значение: %s"
 
@@ -69,6 +73,7 @@ msgstr "Удалить"
 msgid "Delete older 48h"
 msgstr "Удалить старше 48 часов"
 
+#, python-format
 msgid "Disk free : %d MByte"
 msgstr "Свободный объем HDD: %d Мбайт"
 
@@ -102,12 +107,6 @@ msgstr "Fan Control 2"
 msgid "Fan Control 2 - Monitor"
 msgstr "Fan Control 2 - Монитор"
 
-msgid "Fan Control 2 - Setup"
-msgstr "Fan Control 2 - Настройка"
-
-msgid "Fan Control 2 - Test"
-msgstr "Fan Control 2 - Тест"
-
 msgid "Fan is not working!"
 msgstr "Вентилятор не работает!"
 
@@ -120,9 +119,11 @@ msgstr "Тип вентилятора"
 msgid "FanControl2 emergency, Box Shutdown now?"
 msgstr "Аварийная ситуация, выключить ресивер сейчас?"
 
+#, python-format
 msgid "File %s does not exists"
 msgstr "Файл %s не существует"
 
+#, python-format
 msgid "Filesize : %d %sByte"
 msgstr "Размер файла: %d %sByte"
 
@@ -148,42 +149,54 @@ msgstr "Начальное напряжение"
 msgid "Logging path"
 msgstr "Место хранения журнала"
 
+#, python-format
 msgid "Logging-Path: %s"
 msgstr "Место хранения журнала: %s"
 
+#, python-format
 msgid "Max Fan %d rpm at PWM=255 (%s)"
 msgstr "Максимально оборотов %d на PWM=255 (%s)"
 
+#, python-format
 msgid "Max Fan %d rpm at PWM=255 and VLT=255 (%s)"
 msgstr "Максимально оборотов %d на PWM=255 и VLT=255 (%s)"
 
+#, python-format
 msgid "Max Fan %d rpm at VLT=255 (%s)"
 msgstr "Максимально оборотов %d на VLT=255 (%s)"
 
+#, python-format
 msgid "Min Fan Start %d rpm at PWM=%d"
 msgstr "Минимально для запуска %d об/мин на PWM=%d"
 
+#, python-format
 msgid "Min Fan Start %d rpm at VLT=%d"
 msgstr "Минимально для запуска %d об/мин на VLT=%d"
 
+#, python-format
 msgid "Min Fan Start %d rpm at VLT=%d and PWM=0"
 msgstr "Минимально для запуска %d об/мин на VLT=%d и PWM=0"
 
+#, python-format
 msgid "Min Fan Stop %d rpm at PWM=%d (%s)"
 msgstr "Минимально для остановки %d об/мин на PWM=%d (%s)"
 
+#, python-format
 msgid "Min Fan Stop %d rpm at VLT=%d (%s)"
 msgstr "Минимально для остановки %d об/мин на VLT=%d (%s)"
 
+#, python-format
 msgid "Min Fan Stop %d rpm at VLT=%d and PWM=0 (%s)"
 msgstr "Минимально для остановки %d об/мин на VLT=%d и PWM=0 (%s)"
 
 msgid "Number of WebIF-Log-Entries"
 msgstr "Количество записей журнала для WebIF"
 
+#, python-format
 msgid "PID Ctl Err %03.2f %%"
 msgstr "PID Ctl Err %03.2f %%"
 
+#, python-format
 msgid "PWM  %03d"
 msgstr "PWM  %03d"
 
@@ -211,18 +224,21 @@ msgstr "Скорость"
 msgid "Static temp C"
 msgstr "Статическая температура (C)"
 
+#, python-format
 msgid "Target rpm  %4d"
 msgstr "Выбрано об/мин %4d"
 
 msgid "Temperature"
 msgstr "Температура"
 
+#, python-format
 msgid "Temperature C  %4.1f"
 msgstr "Температура (C)  %4.1f"
 
 msgid "Voltage"
 msgstr "Напряжение"
 
+#, python-format
 msgid "Voltage  %03d"
 msgstr "Напряжение %03d"
 
@@ -235,6 +251,7 @@ msgstr "Авто"
 msgid "below Tunerslot 4"
 msgstr "ниже слота тюнера 4"
 
+#, python-format
 msgid "currentRPM:%d targetRPM:%d Temp:%4.1f"
 msgstr "текущая RPM:%d выбрано RPM:%d темп:%4.1f"
 

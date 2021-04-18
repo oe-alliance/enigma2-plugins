@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,101 +17,77 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/plugin.py:219
 msgid "Ambiguous results"
 msgstr ""
 
-#: ../src/plugin.py:435
 msgid "Cast: "
 msgstr ""
 
-#: ../src/plugin.py:41
 msgid "Channel Selection"
 msgstr ""
 
-#: ../src/plugin.py:316
 msgid "Could't get Eventname"
 msgstr ""
 
-#: ../src/plugin.py:224 ../src/plugin.py:385
 msgid "Details"
 msgstr ""
 
-#: ../src/plugin.py:444
 #, python-format
 msgid "Downloading Movie Poster: %s..."
 msgstr ""
 
-#: ../src/plugin.py:141
 msgid "Exit"
 msgstr ""
 
-#: ../src/plugin.py:70
 msgid "Lookup"
 msgstr ""
 
-#: ../src/plugin.py:369 ../src/plugin.py:370
 msgid "No OFDb match."
 msgstr ""
 
-#: ../src/plugin.py:437
 msgid "No cast list found in the database."
 msgstr ""
 
-#: ../src/plugin.py:383
 msgid "No details found."
 msgstr ""
 
-#: ../src/plugin.py:386 ../src/plugin.py:455
 msgid "OFDb Details parsed"
 msgstr ""
 
-#: ../src/plugin.py:347
 msgid "OFDb Download completed"
 msgstr ""
 
-#: ../src/plugin.py:320
 msgid "OFDb Download failed"
 msgstr ""
 
-#: ../src/plugin.py:484
 msgid "OFDb Plugin"
 msgstr ""
 
-#: ../src/plugin.py:375
 msgid "OFDb Re-Download completed"
 msgstr ""
 
-#: ../src/plugin.py:372
 msgid "OFDb query failed!"
 msgstr ""
 
-#: ../src/plugin.py:220
 msgid "Please select the matching entry"
 msgstr ""
 
-#: ../src/plugin.py:306
 #, python-format
 msgid "Query OFDb: %s..."
 msgstr ""
 
-#: ../src/plugin.py:496 ../src/plugin.py:501 ../src/plugin.py:508
 msgid "Query details from the Online-Filmdatenbank"
 msgstr ""
 
-#: ../src/plugin.py:235
 #, python-format
 msgid "Re-Query OFDb: %s..."
 msgstr ""
 
-#: ../src/plugin.py:132
 msgid "The Online-Filmdatenbank"
 msgstr ""
 
-#: ../src/plugin.py:223
 msgid "Title Menu"
 msgstr ""
 
-#: ../src/plugin.py:416
 msgid "no user rating yet"
 msgstr ""

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Show Clock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-30 13:15+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2012-12-30 13:21+0100\n"
 "Last-Translator: Ismail Demir <ismail.demir@gmx.at>\n"
 "Language-Team: Ismail Demir <ismail.demir@gmx.at>\n"
@@ -15,82 +15,21 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: plugin.py:74
-msgid "Show Clock setup"
-msgstr "Show Clock ayarı"
-
-#: plugin.py:75
-msgid "Push \"Exit\" long to show/hide clock"
-msgstr "\"Exit\"e uzun basarak saati gösterip gizleyebilirsiniz"
-
-#: plugin.py:76
-msgid "Plugin menu"
-msgstr ""
-
-#: plugin.py:76
-msgid "Extensions menu"
-msgstr "Eklenti menüsü"
-
-#: plugin.py:112
-#: plugin.py:167
-msgid "Show Clock Setup"
-msgstr "Show Clock ayar"
-
-#: plugin.py:117
-msgid "Clock show timeout"
-msgstr ""
-
-#: plugin.py:118
-msgid "Specify how long (seconds) the clock shall be shown before it disappears. Set to \"0\" to show clock until hidden manually."
-msgstr ""
-
-#: plugin.py:119
-msgid "Show in"
-msgstr ""
-
-#: plugin.py:120
-msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
-msgstr ""
-
-#: plugin.py:121
-msgid "Name"
-msgstr "Ad"
-
-#: plugin.py:122
-msgid "Specify plugin name to be used in menu (needs GUI restart)."
-msgstr ""
-
-#: plugin.py:123
-msgid "Description"
-msgstr "Açıklama"
-
-#: plugin.py:124
-msgid "Specify plugin description to be used in menu (needs GUI restart)."
-msgstr ""
-
-#: plugin.py:142
 msgid "Cancel"
 msgstr "Vazgeç"
 
-#: plugin.py:143
-msgid "OK"
-msgstr "OK"
+msgid "Clock show timeout"
+msgstr ""
 
-#: plugin.py:144
+msgid "Description"
+msgstr "Açıklama"
+
+msgid "Extensions menu"
+msgstr "Eklenti menüsü"
+
 msgid "Help"
 msgstr "Yardım"
 
-#: plugin.py:145
-msgid "Move clock"
-msgstr ""
-
-#: plugin.py:167
-#: plugin.py:388
-#: plugin.py:396
-msgid "Ver."
-msgstr "Sürüm"
-
-#: plugin.py:205
 msgid ""
 "Modify the settings to match your preferences. To change the clock position, select \"Move clock\" and relocate using the direction keys. Press OK to store current position and return to the setup menu or EXIT to cancel the moving.\n"
 "\n"
@@ -99,10 +38,47 @@ msgid ""
 "If GP3 is installed, weekday shows up in selected language, otherwise always in english."
 msgstr ""
 
-#: plugin.py:213
+msgid "Move clock"
+msgstr ""
+
+msgid "Name"
+msgstr "Ad"
+
+msgid "OK"
+msgstr "OK"
+
 msgid ""
 "Please use direction keys to move the clock.\n"
 "\n"
 "Press OK to store current position and return to the setup menu or EXIT to cancel the moving."
 msgstr ""
 
+msgid "Plugin menu"
+msgstr ""
+
+msgid "Push \"Exit\" long to show/hide clock"
+msgstr "\"Exit\"e uzun basarak saati gösterip gizleyebilirsiniz"
+
+msgid "Show Clock Setup"
+msgstr "Show Clock ayar"
+
+msgid "Show Clock setup"
+msgstr "Show Clock ayarı"
+
+msgid "Show in"
+msgstr ""
+
+msgid "Specify how long (seconds) the clock shall be shown before it disappears. Set to \"0\" to show clock until hidden manually."
+msgstr ""
+
+msgid "Specify plugin description to be used in menu (needs GUI restart)."
+msgstr ""
+
+msgid "Specify plugin name to be used in menu (needs GUI restart)."
+msgstr ""
+
+msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
+msgstr ""
+
+msgid "Ver."
+msgstr "Sürüm"

@@ -88,9 +88,3 @@ msgstr "Filmler"
 
 msgid "no user rating yet"
 msgstr "puan verilmemiş"
-
-#~ msgid "IMDb Details"
-#~ msgstr "IMDb Ayrıntıları"
-
-#~ msgid "User Rating"
-#~ msgstr "Puan"

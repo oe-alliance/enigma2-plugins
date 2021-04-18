@@ -6,89 +6,70 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-01 23:19+CEST\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2015-10-18 10:29+0300\n"
 "Last-Translator: Hasan Kiran <Sunder67@hotmail.com>\n"
 "Language-Team: Turkish <Sunder67@hotmail.com>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.8.4\n"
 
-#: plugin.py:76
-msgid "off"
-msgstr "kapalı"
-
-#: plugin.py:76
-msgid "on with side by side"
-msgstr ""
-
-#: plugin.py:76
-msgid "on with top/bottom"
-msgstr ""
-
-#: plugin.py:172
-msgid "Cancel"
-msgstr "İptal"
-
-#: plugin.py:173
-msgid "OK"
-msgstr "Tamam"
-
-#: plugin.py:196
-msgid "Side by side"
-msgstr "Yan yana"
-
-#: plugin.py:197
-msgid "Top/Bottom"
-msgstr ""
-
-#: plugin.py:199 plugin.py:202
 msgid "2D mode"
 msgstr "2B kipi"
 
-#: plugin.py:207
-msgid "Show side by side option in extension menu"
-msgstr ""
-
-#: plugin.py:208
-msgid "Show top/bottom option in extension menu"
-msgstr ""
-
-#: plugin.py:209
-msgid "Switch OSD automatically"
-msgstr ""
-
-#: plugin.py:211
-msgid "Turn off display"
-msgstr ""
-
-#: plugin.py:214
-msgid "Offset"
-msgstr "Yerleşim"
-
-#: plugin.py:252 plugin.py:266
 msgid "3D settings"
 msgstr "3B ayarlar"
 
-#: plugin.py:260
-msgid "3D: Enable side by side menu"
-msgstr ""
-
-#: plugin.py:262
-msgid "3D: Enable top/bottom menu"
-msgstr ""
-
-#: plugin.py:264
 msgid "3D: 2D menu"
 msgstr "3B: 2B menü"
 
-#: plugin.py:264
+msgid "3D: Enable side by side menu"
+msgstr ""
+
+msgid "3D: Enable top/bottom menu"
+msgstr ""
+
 msgid "3D: disable 3D menu"
 msgstr "3B: 3B menüsünü devre dışı"
 
-#: plugin.py:266
+msgid "Cancel"
+msgstr "İptal"
+
 msgid "Change 3D settings"
 msgstr "3B ayarlarını değiştir"
+
+msgid "OK"
+msgstr "Tamam"
+
+msgid "Offset"
+msgstr "Yerleşim"
+
+msgid "Show side by side option in extension menu"
+msgstr ""
+
+msgid "Show top/bottom option in extension menu"
+msgstr ""
+
+msgid "Side by side"
+msgstr "Yan yana"
+
+msgid "Switch OSD automatically"
+msgstr ""
+
+msgid "Top/Bottom"
+msgstr ""
+
+msgid "Turn off display"
+msgstr ""
+
+msgid "off"
+msgstr "kapalı"
+
+msgid "on with side by side"
+msgstr ""
+
+msgid "on with top/bottom"
+msgstr ""

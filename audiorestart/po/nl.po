@@ -55,4 +55,3 @@ msgstr "na standby"
 
 msgid "disabled"
 msgstr "uitgeschakeld"
-
