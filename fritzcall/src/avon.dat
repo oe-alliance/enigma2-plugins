@@ -1,36 +1,36 @@
-# Sie können Änderungen an dieser Datei selbst 
-# vornehmen. Alle Einträge sind von der Form:
+# Sie kÃ¶nnen Ã„nderungen an dieser Datei selbst 
+# vornehmen. Alle EintrÃ¤ge sind von der Form:
 #
-# +{Ländercode}-{Ortsvorwahl ohne führende 0}:Ortsname
+# +{LÃ¤ndercode}-{Ortsvorwahl ohne fÃ¼hrende 0}:Ortsname
 #
-# bzw. für die Ländereinträge selbst:
+# bzw. fÃ¼r die LÃ¤ndereintrÃ¤ge selbst:
 #
-# +{Ländercode}:Landesname
+# +{LÃ¤ndercode}:Landesname
 #
 #
 # Leere Zeilen und Kommentarzeilen wie diese 
 # werden ignoriert. Es wird jeweils die
-# längste passende Vorwahl für eine Nummer
+# lÃ¤ngste passende Vorwahl fÃ¼r eine Nummer
 # gesucht.
 
 +49:[DE]Deutschland
 
-# länderspezifische ortsunabhängige Sondernummern
+# lÃ¤nderspezifische ortsunabhÃ¤ngige Sondernummern
 #################################################
 
 +49*110:Polizeinotruf
 +49*112:Euronotruf
-+49*115:Zentrale Behördenrufnummer
++49*115:Zentrale BehÃ¶rdenrufnummer
 +49*116116:Sperr-Notruf
-+49*118:Auskünfte
++49*118:AuskÃ¼nfte
 
 
-# länderspezifische Sondernummern
+# lÃ¤nderspezifische Sondernummern
 #################################
 
 +49/1141:Weckdienst
 +49/1191:Zeitansage
-+49/130:Gebührenfrei
++49/130:GebÃ¼hrenfrei
 +49/137:Televotumdienst
 +49/138:Teledialog
 +49/15:Mobilfunk
@@ -45,27 +45,27 @@
 +49/180-4:Service (20 Ct/Anruf)
 +49/181:VPN-Netze
 +49/190:PremiumRate (Preis lt. Ansage)
-+49/190-1:PremiumRate (0,618 €/Min)
-+49/190-2:PremiumRate (0,618 €/Min)
-+49/190-3:PremiumRate (0,618 €/Min)
-+49/190-4:PremiumRate (0,433 €/Min)
-+49/190-5:PremiumRate (0,618 €/Min)
-+49/190-6:PremiumRate (0,433 €/Min)
-+49/190-7:PremiumRate (1,237 €/Min)
-+49/190-8:PremiumRate (1,855 €/Min)
-+49/190-9:PremiumRate (1,237 €/Min)
++49/190-1:PremiumRate (0,618 â‚¬/Min)
++49/190-2:PremiumRate (0,618 â‚¬/Min)
++49/190-3:PremiumRate (0,618 â‚¬/Min)
++49/190-4:PremiumRate (0,433 â‚¬/Min)
++49/190-5:PremiumRate (0,618 â‚¬/Min)
++49/190-6:PremiumRate (0,433 â‚¬/Min)
++49/190-7:PremiumRate (1,237 â‚¬/Min)
++49/190-8:PremiumRate (1,855 â‚¬/Min)
++49/190-9:PremiumRate (1,237 â‚¬/Min)
 +49/191:Online-Knoten
 +49/192:Online-Knoten
 +49/193:Online-Knoten
 +49/194:Online-Knoten
-+49/800:Gebührenfrei
++49/800:GebÃ¼hrenfrei
 +49/900:PremiumRate
-+800:Gebührenfrei
++800:GebÃ¼hrenfrei
 
 # Vorwahlen Inland
 ##################
 
-+49-700:Persönliche Rufnummer
++49-700:PersÃ¶nliche Rufnummer
 
 +49-201:Essen
 +49-202:Wuppertal
@@ -78,7 +78,7 @@
 +49-2053:Velbert-Neviges
 +49-2054:Essen-Kettwig
 +49-2056:Heiligenhaus
-+49-2058:Wülfrath
++49-2058:WÃ¼lfrath
 +49-2064:Dinslaken
 +49-2065:Duisburg-Rheinhausen
 +49-2066:Duisburg-Homberg
@@ -87,7 +87,7 @@
 +49-2102:Ratingen
 +49-2103:Hilden
 +49-2104:Mettmann
-+49-211:Düsseldorf
++49-211:DÃ¼sseldorf
 +49-212:Solingen
 +49-212-0:Solingen
 +49-212-1:Solingen
@@ -100,7 +100,7 @@
 +49-212-8:Solingen
 +49-212-9:Haan Rheinl
 +49-2131:Neuss
-+49-2132:Meerbusch-Büderich
++49-2132:Meerbusch-BÃ¼derich
 +49-2133:Dormagen
 +49-2137:Neuss-Norf
 +49-214:Leverkusen
@@ -113,12 +113,12 @@
 +49-2157:Nettetal-Kaldenkirchen
 +49-2158:Grefrath b Krefeld
 +49-2159:Meerbusch-Osterath
-+49-2161:Mönchengladbach
++49-2161:MÃ¶nchengladbach
 +49-2162:Viersen
 +49-2163:Schwalmtal Niederrhein
-+49-2164:Jüchen-Otzenrath
-+49-2165:Jüchen
-+49-2166:Mönchengladbach-Rheydt
++49-2164:JÃ¼chen-Otzenrath
++49-2165:JÃ¼chen
++49-2166:MÃ¶nchengladbach-Rheydt
 +49-2171:Leverkusen-Opladen
 +49-2173:Langenfeld Rheinl
 +49-2174:Burscheid Rheinl
@@ -127,27 +127,27 @@
 +49-2182:Grevenbroich-Kapellen
 +49-2183:Rommerskirchen
 +49-2191:Remscheid
-+49-2192:Hückeswagen
++49-2192:HÃ¼ckeswagen
 +49-2193:Dabringhausen
 +49-2195:Radevormwald
 +49-2196:Wermelskirchen
 +49-2202:Bergisch Gladbach
-+49-2203:Köln-Porz
++49-2203:KÃ¶ln-Porz
 +49-2204:Bensberg
-+49-2205:Rösrath
++49-2205:RÃ¶srath
 +49-2206:Overath
-+49-2207:Kürten-Dürscheid
++49-2207:KÃ¼rten-DÃ¼rscheid
 +49-2208:Niederkassel
-+49-221:Köln
++49-221:KÃ¶ln
 +49-2222:Bornheim Rheinl
-+49-2223:Königswinter
++49-2223:KÃ¶nigswinter
 +49-2224:Bad Honnef
 +49-2225:Meckenheim Rheinl
 +49-2226:Rheinbach
 +49-2227:Bornheim-Merten
 +49-2228:Remagen-Rolandseck
-+49-2232:Brühl Rheinl
-+49-2233:Hürth Rheinl
++49-2232:BrÃ¼hl Rheinl
++49-2233:HÃ¼rth Rheinl
 +49-2234:Frechen
 +49-2235:Erftstadt
 +49-2236:Wesseling Rheinl
@@ -156,14 +156,14 @@
 +49-2241:Siegburg
 +49-2242:Hennef Sieg
 +49-2243:Eitorf
-+49-2244:Königswinter-Oberpleis
++49-2244:KÃ¶nigswinter-Oberpleis
 +49-2245:Much
 +49-2246:Lohmar
 +49-2247:Neunkirchen-Seelscheid
 +49-2248:Hennef-Uckerath
 +49-2251:Euskirchen
-+49-2252:Zülpich
-+49-2253:Bad Münstereifel
++49-2252:ZÃ¼lpich
++49-2253:Bad MÃ¼nstereifel
 +49-2254:Weilerswist
 +49-2255:Euskirchen-Flamersheim
 +49-2256:Mechernich-Satzvey
@@ -174,28 +174,28 @@
 +49-2264:Marienheide
 +49-2265:Reichshof-Eckenhagen
 +49-2266:Lindlar
-+49-2267:Wipperfürth
-+49-2268:Kürten
-+49-2269:Kierspe-Rönsahl
++49-2267:WipperfÃ¼rth
++49-2268:KÃ¼rten
++49-2269:Kierspe-RÃ¶nsahl
 +49-2271:Bergheim Erft
 +49-2272:Bedburg Erft
 +49-2273:Kerpen-Horrem
 +49-2274:Elsdorf Rheinl
 +49-2275:Kerpen-Buir
 +49-228:Bonn
-+49-2291:Waldbröl
++49-2291:WaldbrÃ¶l
 +49-2292:Windeck Sieg
-+49-2293:Nümbrecht
++49-2293:NÃ¼mbrecht
 +49-2294:Morsbach Sieg
 +49-2295:Ruppichteroth
-+49-2296:Reichshof-Brüchermühle
-+49-2297:Wildbergerhütte
++49-2296:Reichshof-BrÃ¼chermÃ¼hle
++49-2297:WildbergerhÃ¼tte
 +49-2301:Holzwickede
 +49-2302:Witten
 +49-2303:Unna
 +49-2304:Schwerte
 +49-2305:Castrop-Rauxel
-+49-2306:Lünen
++49-2306:LÃ¼nen
 +49-2307:Kamen
 +49-2308:Unna-Hemmerde
 +49-2309:Waltrop
@@ -213,13 +213,13 @@
 +49-2336:Schwelm
 +49-2337:Hagen-Dahl
 +49-2338:Breckerfeld
-+49-2339:Sprockhövel
++49-2339:SprockhÃ¶vel
 +49-234:Bochum
-+49-2351:Lüdenscheid
++49-2351:LÃ¼denscheid
 +49-2352:Altena Westf
 +49-2353:Halver
 +49-2354:Meinerzhagen
-+49-2355:Schalksmühle
++49-2355:SchalksmÃ¼hle
 +49-2357:Herscheid Westf
 +49-2358:Meinerzhagen-Valbert
 +49-2359:Kierspe
@@ -239,11 +239,11 @@
 +49-2374:Iserlohn-Letmathe
 +49-2375:Balve
 +49-2377:Wickede Ruhr
-+49-2378:Fröndenberg-Langschede
++49-2378:FrÃ¶ndenberg-Langschede
 +49-2379:Menden-Asbeck
 +49-2381:Hamm Westf
 +49-2382:Ahlen Westf
-+49-2383:Bönen
++49-2383:BÃ¶nen
 +49-2384:Welver
 +49-2385:Hamm-Rhynern
 +49-2387:Drensteinfurt-Walstedde
@@ -253,36 +253,36 @@
 +49-2392:Werdohl
 +49-2393:Sundern-Allendorf
 +49-2394:Neuenrade-Affeln
-+49-2395:Finnentrop-Rönkhausen
++49-2395:Finnentrop-RÃ¶nkhausen
 +49-2401:Baesweiler
 +49-2402:Stolberg Rheinl
 +49-2403:Eschweiler Rheinl
 +49-2404:Alsdorf Rheinl
-+49-2405:Würselen
++49-2405:WÃ¼rselen
 +49-2406:Herzogenrath
 +49-2407:Herzogenrath-Kohlscheid
-+49-2408:Aachen-Kornelimünster
++49-2408:Aachen-KornelimÃ¼nster
 +49-2409:Stolberg-Gressenich
 +49-241:Aachen
-+49-2421:Düren
++49-2421:DÃ¼ren
 +49-2422:Kreuzau
 +49-2423:Langerwehe
-+49-2424:Vettweiß
++49-2424:VettweiÃŸ
 +49-2425:Nideggen-Embken
-+49-2426:Nörvenich
++49-2426:NÃ¶rvenich
 +49-2427:Nideggen
 +49-2428:Niederzier
-+49-2429:Hürtgenwald
++49-2429:HÃ¼rtgenwald
 +49-2431:Erkelenz
 +49-2432:Wassenberg
-+49-2433:Hückelhoven
++49-2433:HÃ¼ckelhoven
 +49-2434:Wegberg
-+49-2435:Erkelenz-Lövenich
-+49-2436:Wegberg-Rödgen
++49-2435:Erkelenz-LÃ¶venich
++49-2436:Wegberg-RÃ¶dgen
 +49-2440:Nettersheim-Tondorf
 +49-2441:Kall
 +49-2443:Mechernich
-+49-2444:Schleiden-Gemünd
++49-2444:Schleiden-GemÃ¼nd
 +49-2445:Schleiden Eifel
 +49-2446:Heimbach Eifel
 +49-2447:Dahlem b Kall
@@ -294,10 +294,10 @@
 +49-2454:Gangelt
 +49-2455:Waldfeucht
 +49-2456:Selfkant
-+49-2461:Jülich
++49-2461:JÃ¼lich
 +49-2462:Linnich
 +49-2463:Titz
-+49-2464:Aldenhoven b Jülich
++49-2464:Aldenhoven b JÃ¼lich
 +49-2465:Inden
 +49-2471:Roetgen Eifel
 +49-2472:Monschau
@@ -307,15 +307,15 @@
 +49-2484:Mechernich-Eiserfey
 +49-2485:Schleiden-Dreiborn
 +49-2486:Nettersheim
-+49-2501:Münster-Hiltrup
++49-2501:MÃ¼nster-Hiltrup
 +49-2502:Nottuln
 +49-2504:Telgte
 +49-2505:Altenberge Westf
-+49-2506:Münster-Wolbeck
++49-2506:MÃ¼nster-Wolbeck
 +49-2507:Havixbeck
 +49-2508:Drensteinfurt
-+49-2509:Nottuln-Appelhülsen
-+49-251:Münster
++49-2509:Nottuln-AppelhÃ¼lsen
++49-251:MÃ¼nster
 +49-2520:Wadersloh-Diestedde
 +49-2521:Beckum
 +49-2522:Oelde
@@ -327,10 +327,10 @@
 +49-2528:Ennigerloh-Enniger
 +49-2529:Oelde-Stromberg
 +49-2532:Ostbevern
-+49-2533:Münster-Nienberge
-+49-2534:Münster-Roxel
++49-2533:MÃ¼nster-Nienberge
++49-2534:MÃ¼nster-Roxel
 +49-2535:Sendenhorst-Albersloh
-+49-2536:Münster-Albachten
++49-2536:MÃ¼nster-Albachten
 +49-2538:Drensteinfurt-Rinkerode
 +49-2541:Coesfeld
 +49-2542:Gescher
@@ -338,12 +338,12 @@
 +49-2545:Rosendahl-Darfeld
 +49-2546:Coesfeld-Lette
 +49-2547:Rosendahl-Osterwick
-+49-2548:Dülmen-Rorup
++49-2548:DÃ¼lmen-Rorup
 +49-2551:Steinfurt-Burgsteinfurt
 +49-2552:Steinfurt-Borghorst
 +49-2553:Ochtrup
 +49-2554:Laer Kr Steinfurt
-+49-2555:Schöppingen
++49-2555:SchÃ¶ppingen
 +49-2556:Metelen
 +49-2557:Wettringen Kr Steinfurt
 +49-2558:Horstmar
@@ -353,7 +353,7 @@
 +49-2564:Vreden
 +49-2565:Gronau-Epe
 +49-2566:Legden
-+49-2567:Ahaus-Alstätte
++49-2567:Ahaus-AlstÃ¤tte
 +49-2568:Heek
 +49-2571:Greven Westf
 +49-2572:Emsdetten
@@ -368,11 +368,11 @@
 +49-2586:Beelen
 +49-2587:Ennigerloh-Westkirchen
 +49-2588:Harsewinkel-Greffen
-+49-2590:Dülmen-Buldern
-+49-2591:Lüdinghausen
++49-2590:DÃ¼lmen-Buldern
++49-2591:LÃ¼dinghausen
 +49-2592:Selm
 +49-2593:Ascheberg Westf
-+49-2594:Dülmen
++49-2594:DÃ¼lmen
 +49-2595:Olfen
 +49-2596:Nordkirchen
 +49-2597:Senden Westf
@@ -382,36 +382,36 @@
 +49-2602:Montabaur
 +49-2603:Bad Ems
 +49-2604:Nassau Lahn
-+49-2605:Löf
++49-2605:LÃ¶f
 +49-2606:Winningen
 +49-2607:Kobern-Gondorf
 +49-2608:Welschneudorf
 +49-261:Koblenz
-+49-2620:Neuhäusel Westerw
++49-2620:NeuhÃ¤usel Westerw
 +49-2621:Lahnstein
 +49-2622:Bendorf Rhein
 +49-2623:Ransbach-Baumbach
-+49-2624:Höhr-Grenzhausen
++49-2624:HÃ¶hr-Grenzhausen
 +49-2625:Ochtendung
 +49-2626:Selters Westerw
 +49-2627:Braubach
 +49-2628:Rhens
-+49-2630:Mülheim-Kärlich
++49-2630:MÃ¼lheim-KÃ¤rlich
 +49-2631:Neuwied
 +49-2632:Andernach
-+49-2633:Brohl-Lützing
++49-2633:Brohl-LÃ¼tzing
 +49-2634:Rengsdorf
 +49-2635:Rheinbrohl
 +49-2636:Burgbrohl
-+49-2637:Weißenthurm
++49-2637:WeiÃŸenthurm
 +49-2638:Waldbreitbach
 +49-2639:Anhausen Kr Neuwied
 +49-2641:Bad Neuenahr-Ahrweiler
 +49-2642:Remagen
 +49-2643:Altenahr
 +49-2644:Linz a Rhein
-+49-2645:Vettelschoß
-+49-2646:Königsfeld Eifel
++49-2645:VettelschoÃŸ
++49-2646:KÃ¶nigsfeld Eifel
 +49-2647:Kesseling
 +49-2651:Mayen
 +49-2652:Mendig
@@ -433,8 +433,8 @@
 +49-2675:Ediger-Eller
 +49-2676:Ulmen
 +49-2677:Lutzerath
-+49-2678:Büchel b Cochem
-+49-2680:Mündersbach
++49-2678:BÃ¼chel b Cochem
++49-2680:MÃ¼ndersbach
 +49-2681:Altenkirchen Westerw
 +49-2682:Hamm Sieg
 +49-2683:Asbach Westerw
@@ -450,7 +450,7 @@
 +49-2694:Wershofen
 +49-2695:Insul
 +49-2696:Nohn Eifel
-+49-2697:Blankenheim-Ahrhütte
++49-2697:Blankenheim-AhrhÃ¼tte
 +49-271:Siegen
 +49-2721:Lennestadt
 +49-2722:Attendorn
@@ -474,7 +474,7 @@
 +49-2750:Diedenshausen
 +49-2751:Bad Berleburg
 +49-2752:Bad Laasphe
-+49-2753:Erndtebrück
++49-2753:ErndtebrÃ¼ck
 +49-2754:Bad Laasphe-Feudingen
 +49-2755:Bad Berleburg-Schwarzenau
 +49-2758:Bad Berleburg-Girkhausen
@@ -487,7 +487,7 @@
 +49-2771:Dillenburg
 +49-2772:Herborn Hess
 +49-2773:Haiger
-+49-2774:Dietzhölztal
++49-2774:DietzhÃ¶lztal
 +49-2775:Driedorf
 +49-2776:Bad Endbach-Hartenrod
 +49-2777:Breitscheid Hess
@@ -495,7 +495,7 @@
 +49-2779:Greifenstein-Beilstein
 +49-2801:Xanten
 +49-2802:Alpen
-+49-2803:Wesel-Büderich
++49-2803:Wesel-BÃ¼derich
 +49-2804:Xanten-Marienbaum
 +49-281:Wesel
 +49-2821:Kleve Niederrhein
@@ -525,12 +525,12 @@
 +49-2852:Hamminkeln
 +49-2853:Schermbeck
 +49-2855:Voerde Niederrhein
-+49-2856:Hamminkeln-Brünen
++49-2856:Hamminkeln-BrÃ¼nen
 +49-2857:Rees-Mehr
-+49-2858:Hünxe
++49-2858:HÃ¼nxe
 +49-2859:Wesel-Bislich
 +49-2861:Borken Westf
-+49-2862:Südlohn
++49-2862:SÃ¼dlohn
 +49-2863:Velen
 +49-2864:Reken
 +49-2865:Raesfeld
@@ -548,12 +548,12 @@
 +49-2921:Soest
 +49-2922:Werl
 +49-2923:Lippetal-Herzfeld
-+49-2924:Möhnesee
++49-2924:MÃ¶hnesee
 +49-2925:Warstein-Allagen
 +49-2927:Bad Sassendorf
-+49-2928:Soest-Ostönnen
++49-2928:Soest-OstÃ¶nnen
 +49-2931:Arnsberg
-+49-2932:Neheim-Hüsten
++49-2932:Neheim-HÃ¼sten
 +49-2933:Sundern Sauerl
 +49-2934:Sundern-Altenhellefeld
 +49-2935:Sundern-Hachen
@@ -564,15 +564,15 @@
 +49-2943:Erwitte
 +49-2944:Rietberg-Mastholte
 +49-2945:Lippstadt-Benninghausen
-+49-2947:Anröchte
++49-2947:AnrÃ¶chte
 +49-2948:Lippstadt-Rebbeke
-+49-2951:Büren
-+49-2952:Rüthen
-+49-2953:Wünnenberg
-+49-2954:Rüthen-Oestereiden
-+49-2955:Büren-Wewelsburg
-+49-2957:Wünnenberg-Haaren
-+49-2958:Büren-Harth
++49-2951:BÃ¼ren
++49-2952:RÃ¼then
++49-2953:WÃ¼nnenberg
++49-2954:RÃ¼then-Oestereiden
++49-2955:BÃ¼ren-Wewelsburg
++49-2957:WÃ¼nnenberg-Haaren
++49-2958:BÃ¼ren-Harth
 +49-2961:Brilon
 +49-2962:Olsberg
 +49-2963:Brilon-Messinghausen
@@ -582,7 +582,7 @@
 +49-2973:Eslohe Sauerl
 +49-2974:Schmallenberg-Fredeburg
 +49-2975:Schmallenberg-Oberkirchen
-+49-2977:Schmallenberg-Bödefeld
++49-2977:Schmallenberg-BÃ¶defeld
 +49-2981:Winterberg Westf
 +49-2982:Medebach
 +49-2983:Winterberg-Siedlinghausen
@@ -593,7 +593,7 @@
 +49-2993:Marsberg-Canstein
 +49-2994:Marsberg-Westheim
 +49-30:Berlin
-+49-31:Abfrage Netzübergangknoten
++49-31:Abfrage NetzÃ¼bergangknoten
 +49-3301:Oranienburg
 +49-3302:Hennigsdorf
 +49-3303:Birkenwerder
@@ -603,7 +603,7 @@
 +49-33053:Zehlendorf
 +49-33054:Liebenwalde
 +49-33055:Kremmen
-+49-33056:Mühlenbeck
++49-33056:MÃ¼hlenbeck
 +49-3306:Gransee
 +49-3307:Zehdenick
 +49-33080:Marienthal
@@ -616,22 +616,22 @@
 +49-33087:Bredereiche
 +49-33088:Falkenthal
 +49-33089:Himmelpfort
-+49-33093:Fürstenberg
-+49-33094:Löwenberg
++49-33093:FÃ¼rstenberg
++49-33094:LÃ¶wenberg
 +49-331:Potsdam
-+49-33200:Bergholz-Rehbrücke
-+49-33201:Groß Glienicke
-+49-33202:Töplitz
++49-33200:Bergholz-RehbrÃ¼cke
++49-33201:GroÃŸ Glienicke
++49-33202:TÃ¶plitz
 +49-33203:Kleinmachnow
 +49-33204:Beelitz(Mark)
 +49-33205:Michendorf
 +49-33206:Fichtenwalde
-+49-33207:Groß Kreutz
++49-33207:GroÃŸ Kreutz
 +49-33208:Fahrland
 +49-33209:Caputh
 +49-3321:Nauen
 +49-3322:Falkensee
-+49-33230:Börnicke
++49-33230:BÃ¶rnicke
 +49-33231:Pausin
 +49-33232:Brieselang
 +49-33233:Ketzin
@@ -639,11 +639,11 @@
 +49-33235:Friesack
 +49-33237:Paulinenaue
 +49-33238:Senzke
-+49-33239:Groß Behnitz
++49-33239:GroÃŸ Behnitz
 +49-3327:Werder(Havel)
 +49-3328:Teltow
 +49-3329:Stahnsdorf
-+49-3331:Angermünde
++49-3331:AngermÃ¼nde
 +49-3332:Schwedt
 +49-33331:Casekow
 +49-33332:Gartz
@@ -651,22 +651,22 @@
 +49-33334:Greiffenberg
 +49-33335:Pinnow
 +49-33336:Passow
-+49-33337:Altkünkendorf
++49-33337:AltkÃ¼nkendorf
 +49-33338:Stolpe
 +49-3334:Eberswalde-Finow
 +49-3335:Finowfurt
 +49-33361:Joachimsthal
 +49-33362:Liepe
 +49-33363:Altenhof
-+49-33364:Groß Ziethen
-+49-33365:Lüdersdorf
++49-33364:GroÃŸ Ziethen
++49-33365:LÃ¼dersdorf
 +49-33366:Chorin
 +49-33367:Friedrichswalde
 +49-33368:Hohensaaten
 +49-33369:Oderberg
 +49-3337:Biesenthal
 +49-3338:Bernau
-+49-33393:Groß Schönebeck
++49-33393:GroÃŸ SchÃ¶nebeck
 +49-33394:Blumberg
 +49-33395:Zerpenschleuse
 +49-33396:Klosterfelde
@@ -674,18 +674,18 @@
 +49-33398:Werneuchen
 +49-3341:Strausberg
 +49-3342:Neuenhagen
-+49-33432:Müncheberg
++49-33432:MÃ¼ncheberg
 +49-33433:Buckow
 +49-33434:Herzfelde
 +49-33435:Rehfelde
-+49-33436:Prötzel
++49-33436:PrÃ¶tzel
 +49-33437:Reichenberg
 +49-33438:Altlandsberg
 +49-33439:Fredersdorf
 +49-3344:Bad Freienwalde
 +49-33451:Heckelberg
 +49-33452:Neulewin
-+49-33454:Wölsickendorf
++49-33454:WÃ¶lsickendorf
 +49-33456:Wriezen
 +49-33457:Altreetz
 +49-33458:Falkenberg(Mark)
@@ -697,32 +697,32 @@
 +49-33475:Letschin
 +49-33476:Neuhardenberg
 +49-33477:Trebnitz
-+49-33478:Groß Neuendorf
++49-33478:GroÃŸ Neuendorf
 +49-33479:Kietz
 +49-335:Frankfurt(Oder)
 +49-33601:Podelzig
 +49-33602:Alt Zeschdorf
 +49-33603:Falkenhagen
 +49-33604:Lebus
-+49-33605:Booßen
-+49-33606:Müllrose
++49-33605:BooÃŸen
++49-33606:MÃ¼llrose
 +49-33607:Briesen(Mark)
 +49-33608:Jacobsdorf
 +49-33609:Brieskow-Finkenheerd
-+49-3361:Fürstenwalde(Spree)
++49-3361:FÃ¼rstenwalde(Spree)
 +49-3362:Erkner
 +49-33631:Bad Saarow-Pieskow
 +49-33632:Hangelsberg
 +49-33633:Spreenhagen
-+49-33634:Berkenbrück
++49-33634:BerkenbrÃ¼ck
 +49-33635:Arensdorf
-+49-33636:Steinhöfel
++49-33636:SteinhÃ¶fel
 +49-33637:Beerfelde
-+49-33638:Rüdersdorf
-+49-3364:Eisenhüttenstadt
++49-33638:RÃ¼dersdorf
++49-3364:EisenhÃ¼ttenstadt
 +49-33652:Neuzelle
 +49-33653:Ziltendorf
-+49-33654:Fünfeichen
++49-33654:FÃ¼nfeichen
 +49-33655:Grunow
 +49-33656:Bahro
 +49-33657:Steinsdorf
@@ -736,35 +736,35 @@
 +49-33677:Glienicke
 +49-33678:Storkow(Mark)
 +49-33679:Wendisch Rietz
-+49-33701:Großbeeren
-+49-33702:Wünsdorf
++49-33701:GroÃŸbeeren
++49-33702:WÃ¼nsdorf
 +49-33703:Sperenberg
 +49-33704:Baruth(Mark)
 +49-33708:Rangsdorf
 +49-3371:Luckenwalde
-+49-3372:Jüterbog
++49-3372:JÃ¼terbog
 +49-33731:Trebbin
 +49-33732:Hennickendorf
-+49-33733:Stülpe
++49-33733:StÃ¼lpe
 +49-33734:Felgentreu
-+49-33741:Niedergörsdorf
++49-33741:NiedergÃ¶rsdorf
 +49-33742:Oehna
-+49-33743:Blönsdorf
++49-33743:BlÃ¶nsdorf
 +49-33744:Hohenseefeld
 +49-33745:Petkus
 +49-33746:Werbig
 +49-33747:Marzahna
 +49-33748:Treuenbrietzen
-+49-3375:Königs Wusterhausen
-+49-33760:Münchehofe
++49-3375:KÃ¶nigs Wusterhausen
++49-33760:MÃ¼nchehofe
 +49-33762:Zeuthen
 +49-33763:Bestensee
 +49-33764:Mittenwalde(Mark)
-+49-33765:Märkisch-Buchholz
++49-33765:MÃ¤rkisch-Buchholz
 +49-33766:Teupitz
 +49-33767:Friedersdorf
 +49-33768:Prieros
-+49-33769:Töpchin
++49-33769:TÃ¶pchin
 +49-3377:Zossen
 +49-3378:Ludwigsfelde
 +49-3379:Mahlow
@@ -772,27 +772,27 @@
 +49-3382:Lehnin
 +49-33830:Ziesar
 +49-33831:Weseram
-+49-33832:Rogäsen
++49-33832:RogÃ¤sen
 +49-33833:Wollin
 +49-33834:Pritzerbe
 +49-33835:Golzow
 +49-33836:Butzow
 +49-33837:Brielow
-+49-33838:Päwesin
++49-33838:PÃ¤wesin
 +49-33839:Wusterwitz
 +49-33841:Belzig
 +49-33843:Niemegk
-+49-33844:Brück
++49-33844:BrÃ¼ck
 +49-33845:Borkheide
 +49-33846:Dippmannsdorf
-+49-33847:Görzke
++49-33847:GÃ¶rzke
 +49-33848:Raben
 +49-33849:Wiesenburg(Mark)
 +49-3385:Rathenow
 +49-3386:Premnitz
 +49-33870:Zollchow
 +49-33872:Hohennauen
-+49-33873:Großwudicke
++49-33873:GroÃŸwudicke
 +49-33874:Stechow
 +49-33875:Rhinow
 +49-33876:Buschow
@@ -800,15 +800,15 @@
 +49-33878:Nennhausen
 +49-3391:Neuruppin
 +49-33920:Walsleben
-+49-33921:Zechlinerhütte
++49-33921:ZechlinerhÃ¼tte
 +49-33922:Karwesee
 +49-33923:Flecken Zechlin
-+49-33924:Rägelin
++49-33924:RÃ¤gelin
 +49-33925:Wustrau
 +49-33926:Herzberg
 +49-33927:Linum
 +49-33928:Wildberg
-+49-33929:Gühlen Glienicke
++49-33929:GÃ¼hlen Glienicke
 +49-33931:Rheinsberg
 +49-33932:Fehrbellin
 +49-33933:Lindow(Mark)
@@ -834,7 +834,7 @@
 +49-33979:Wusterhausen
 +49-33981:Putlitz
 +49-33982:Hoppenrade
-+49-33983:Groß Pankow
++49-33983:GroÃŸ Pankow
 +49-33984:Blumenthal
 +49-33986:Falkenhagen
 +49-33989:Sadenbeck
@@ -843,10 +843,10 @@
 +49-34202:Delitzsch
 +49-34203:Zwenkau
 +49-34204:Schkeuditz
-+49-34205:Markranstädt
-+49-34206:Rötha
++49-34205:MarkranstÃ¤dt
++49-34206:RÃ¶tha
 +49-34207:Zwochau
-+49-34208:Löbnitz
++49-34208:LÃ¶bnitz
 +49-3421:Torgau
 +49-34221:Gneisenaustadt Schildau
 +49-34222:Arzberg
@@ -854,13 +854,13 @@
 +49-34224:Belgern
 +49-3423:Eilenburg
 +49-34241:Jesewitz
-+49-34242:Hohenprießnitz
-+49-34243:Bad Düben
++49-34242:HohenprieÃŸnitz
++49-34243:Bad DÃ¼ben
 +49-34244:Mockrehna
 +49-3425:Wurzen
-+49-34261:Kühren
++49-34261:KÃ¼hren
 +49-34262:Falkenhain
-+49-34263:Großzschepa
++49-34263:GroÃŸzschepa
 +49-34291:Borsdorf
 +49-34292:Brandis
 +49-34293:Naunhof
@@ -870,11 +870,11 @@
 +49-34297:Liebertwolkwitz
 +49-34298:Taucha
 +49-34299:Gaschwitz
-+49-3431:Döbeln
++49-3431:DÃ¶beln
 +49-34321:Leisnig
-+49-34322:Roßwein
++49-34322:RoÃŸwein
 +49-34324:Ostrau(Sachs)
-+49-34325:Lüttewitz
++49-34325:LÃ¼ttewitz
 +49-34327:Waldheim(Sachs)
 +49-34328:Hartha
 +49-3433:Borna
@@ -888,44 +888,44 @@
 +49-34348:Frohburg
 +49-3435:Oschatz
 +49-34361:Dahlen(Sachs)
-+49-34362:Mügeln
++49-34362:MÃ¼geln
 +49-34363:Cavertitz
 +49-34364:Wermsdorf
 +49-3437:Grimma
 +49-34381:Colditz
 +49-34382:Nerchau
 +49-34383:Trebsen
-+49-34384:Großbothen
++49-34384:GroÃŸbothen
 +49-34385:Mutzschen
-+49-34386:Dürrweitzschen
++49-34386:DÃ¼rrweitzschen
 +49-3441:Zeitz
 +49-34422:Osterfeld
 +49-34423:Heuckewalde
 +49-34424:Reuden
-+49-34425:Droyßig
++49-34425:DroyÃŸig
 +49-34426:Kayna
-+49-3443:Weißenfels
-+49-34441:Hohenmölsen
++49-3443:WeiÃŸenfels
++49-34441:HohenmÃ¶lsen
 +49-34443:Teuchern
-+49-34444:Lützen
-+49-34445:Stößen
-+49-34446:Großkorbetha
++49-34444:LÃ¼tzen
++49-34445:StÃ¶ÃŸen
++49-34446:GroÃŸkorbetha
 +49-3445:Naumburg
 +49-34461:Nebra
 +49-34462:Laucha(Unstrut)
-+49-34463:Bad Kösen
++49-34463:Bad KÃ¶sen
 +49-34464:Freyburg
 +49-34465:Bad Bibra
 +49-34466:Janisroda
 +49-34467:Eckartsberga
 +49-3447:Altenburg
 +49-3448:Meuselwitz
-+49-34491:Schmölln
++49-34491:SchmÃ¶lln
 +49-34492:Lucka
-+49-34493:Gößnitz
++49-34493:GÃ¶ÃŸnitz
 +49-34494:Ehrenhain
 +49-34495:Dobitschen
-+49-34496:Nöbdenitz
++49-34496:NÃ¶bdenitz
 +49-34497:Langenleuba-Niederhain
 +49-34498:Rositz
 +49-345:Halle
@@ -934,21 +934,21 @@
 +49-34602:Landsberg
 +49-34603:Nauendorf
 +49-34604:Niemberg
-+49-34605:Gröbers
++49-34605:GrÃ¶bers
 +49-34606:Teicha
 +49-34607:Wettin
-+49-34609:Salzmünde
++49-34609:SalzmÃ¼nde
 +49-3461:Merseburg
-+49-3462:Bad Dürrenberg
-+49-34632:Mücheln(Geiseltal)
++49-3462:Bad DÃ¼rrenberg
++49-34632:MÃ¼cheln(Geiseltal)
 +49-34633:Braunsbedra
-+49-34635:Bad Lauchstädt
-+49-34636:Schafstädt
++49-34635:Bad LauchstÃ¤dt
++49-34636:SchafstÃ¤dt
 +49-34637:Frankleben
-+49-34638:Zöschen
++49-34638:ZÃ¶schen
 +49-34639:Wallendorf
 +49-3464:Sangerhausen
-+49-34651:Roßla
++49-34651:RoÃŸla
 +49-34652:Allstedt
 +49-34653:Rottleberode
 +49-34654:Stolberg(Harz)
@@ -957,13 +957,13 @@
 +49-34659:Blankenheim
 +49-3466:Artern
 +49-34671:Bad Frankenhausen
-+49-34672:Roßleben
++49-34672:RoÃŸleben
 +49-34673:Heldrungen
-+49-34691:Könnern
++49-34691:KÃ¶nnern
 +49-34692:Alsleben
 +49-3471:Bernburg
 +49-34721:Nienburg
-+49-34722:Preußlitz
++49-34722:PreuÃŸlitz
 +49-3473:Aschersleben
 +49-34741:Frose
 +49-34742:Sylda
@@ -975,25 +975,25 @@
 +49-34771:Querfurt
 +49-34772:Helbra
 +49-34773:Schwittersdorf
-+49-34774:Röblingen a See
++49-34774:RÃ¶blingen a See
 +49-34775:Wippra,kurort
 +49-34776:Rothenschirmbach
 +49-34779:Abberode
 +49-34781:Greifenhagen
-+49-34782:Mansfeld(Südharz)
++49-34782:Mansfeld(SÃ¼dharz)
 +49-34783:Gerbstedt
 +49-34785:Sandersleben
-+49-34901:Roßlau
++49-34901:RoÃŸlau
 +49-34903:Coswig(Anh)
 +49-34904:Oranienbaum
-+49-34905:Wörlitz
++49-34905:WÃ¶rlitz
 +49-34906:Raguhn
 +49-34907:Jeber-Bergfrieden
 +49-34909:Aken
 +49-3491:Wittenberg Lutherstadt
-+49-34920:Kropstädt
++49-34920:KropstÃ¤dt
 +49-34921:Kemberg
-+49-34922:Mühlanger
++49-34922:MÃ¼hlanger
 +49-34923:Cobbelsdorf
 +49-34924:Zahna
 +49-34925:Bad Schmiedeberg
@@ -1003,40 +1003,40 @@
 +49-34929:Straach
 +49-3493:Bitterfeld
 +49-3494:Wolfen
-+49-34953:Gräfenhainichen
++49-34953:GrÃ¤fenhainichen
 +49-34954:Roitzsch
 +49-34955:Gossa
-+49-34956:Zörbig
-+49-3496:Köthen(Anh)
++49-34956:ZÃ¶rbig
++49-3496:KÃ¶then(Anh)
 +49-34973:Osternienburg
-+49-34975:Görzig
-+49-34976:Gröbzig
++49-34975:GÃ¶rzig
++49-34976:GrÃ¶bzig
 +49-34977:Quellendorf
 +49-34978:Radegast
 +49-34979:Wulfen
 +49-3501:Pirna
 +49-35020:Struppen
-+49-35021:Königstein
++49-35021:KÃ¶nigstein
 +49-35022:Bad Schandau
 +49-35023:Bad Gottleuba
 +49-35024:Stadt Wehlen
 +49-35025:Liebstadt
-+49-35026:Dürrröhrsdorf
++49-35026:DÃ¼rrrÃ¶hrsdorf
 +49-35027:Weesenstein
 +49-35028:Krippen
 +49-35032:Langenhennersdorf
 +49-35033:Rosenthal
 +49-3504:Dippoldiswalde
 +49-35052:Kipsdorf,kurort
-+49-35053:Glashütte(Sachs)
++49-35053:GlashÃ¼tte(Sachs)
 +49-35054:Lauenstein
-+49-35055:Höckendorf
++49-35055:HÃ¶ckendorf
 +49-35056:Altenberg
 +49-35057:Hermsdorf(Osterzgeb)
 +49-35058:Pretzschendorf
 +49-351:Dresden
 +49-35200:Arnsdorf
-+49-35201:Langebrück
++49-35201:LangebrÃ¼ck
 +49-35202:Klingenberg
 +49-35203:Tharandt
 +49-35204:Wilsdruff
@@ -1045,25 +1045,25 @@
 +49-35207:Moritzburg
 +49-35208:Radeburg
 +49-35209:Mohorn
-+49-3521:Meißen
-+49-3522:Großenhain
++49-3521:MeiÃŸen
++49-3522:GroÃŸenhain
 +49-3523:Coswig
 +49-35240:Tauscha
 +49-35241:Lommatzsch
 +49-35242:Nossen
-+49-35243:Weinböhla
-+49-35244:Krögis
++49-35243:WeinbÃ¶hla
++49-35244:KrÃ¶gis
 +49-35245:Burkhardswalde
 +49-35246:Ziegenhain
 +49-35247:Zehren
-+49-35248:Schönfeld
-+49-35249:Baßlitz
++49-35248:SchÃ¶nfeld
++49-35249:BaÃŸlitz
 +49-3525:Riesa
-+49-35263:Gröditz
++49-35263:GrÃ¶ditz
 +49-35264:Strehla
 +49-35265:Glaubitz
 +49-35266:Heyda
-+49-35267:Diesbar-Seußlitz
++49-35267:Diesbar-SeuÃŸlitz
 +49-35268:Stauchitz
 +49-3528:Radeberg
 +49-3529:Heidenau
@@ -1071,17 +1071,17 @@
 +49-35322:Doberlug-Kirchhain
 +49-35323:Sonnewalde
 +49-35324:Crinitz
-+49-35325:Rückersdorf
-+49-35326:Schönborn
-+49-35327:Prießen
++49-35325:RÃ¼ckersdorf
++49-35326:SchÃ¶nborn
++49-35327:PrieÃŸen
 +49-35329:Dollenchen
 +49-3533:Elsterwerda
 +49-35341:Bad Liebenwerda
-+49-35342:Mühlberg(Elbe)
++49-35342:MÃ¼hlberg(Elbe)
 +49-35343:Hirschfeld
 +49-3535:Herzberg(Elster)
 +49-35361:Schlieben
-+49-35362:Schönewalde
++49-35362:SchÃ¶newalde
 +49-35363:Fermerswalde
 +49-35364:Lebusa
 +49-35365:Falkenberg(Elster)
@@ -1091,49 +1091,49 @@
 +49-35385:Annaburg
 +49-35386:Prettin
 +49-35387:Seyda
-+49-35388:Klöden
++49-35388:KlÃ¶den
 +49-35389:Holzdorf
 +49-3541:Calau
-+49-3542:Lübbenau
++49-3542:LÃ¼bbenau
 +49-35433:Vetschau
-+49-35434:Altdöbern
++49-35434:AltdÃ¶bern
 +49-35435:Gollmitz
 +49-35436:Laasow
 +49-35439:Zinnitz
 +49-3544:Luckau
 +49-35451:Dahme
-+49-35452:Golßen
++49-35452:GolÃŸen
 +49-35453:Drahnsdorf
 +49-35454:Uckro
 +49-35455:Walddrehna
 +49-35456:Terpt
-+49-3546:Lübben
++49-3546:LÃ¼bben
 +49-35471:Birkenhainchen
 +49-35472:Schlepzig
-+49-35473:Neu Lübbenau
-+49-35474:Schönwalde
++49-35473:Neu LÃ¼bbenau
++49-35474:SchÃ¶nwalde
 +49-35475:Straupitz
 +49-35476:Wittmannsdorf
 +49-35477:Rietzneuendorf
 +49-35478:Goyatz
 +49-355:Cottbus
-+49-35600:Döbern(Nl)
++49-35600:DÃ¶bern(Nl)
 +49-35601:Peitz
 +49-35602:Drebkau
 +49-35603:Burg (Spreew)
 +49-35604:Krieschow
 +49-35605:Komptendorf
 +49-35606:Briesen
-+49-35607:Jänschwalde
-+49-35608:Groß Oßnig
++49-35607:JÃ¤nschwalde
++49-35608:GroÃŸ OÃŸnig
 +49-35609:Drachhausen
 +49-3561:Guben
 +49-3562:Forst
 +49-3563:Spremberg
 +49-3564:Schwarze Pumpe
-+49-35691:Bärenklau
++49-35691:BÃ¤renklau
 +49-35692:Kerkwitz
-+49-35693:Lauschütz
++49-35693:LauschÃ¼tz
 +49-35694:Gosda
 +49-35695:Simmersdorf
 +49-35696:Briesnig
@@ -1144,117 +1144,117 @@
 +49-35723:Bernsdorf(Ol)
 +49-35724:Lohsa
 +49-35725:Wittichenau
-+49-35726:Groß Särchen
++49-35726:GroÃŸ SÃ¤rchen
 +49-35727:Burghammer
 +49-35728:Uhyst
 +49-3573:Senftenberg
 +49-3574:Lauchhammer
 +49-35751:Welzow
 +49-35752:Ruhland
-+49-35753:Großräschen
++49-35753:GroÃŸrÃ¤schen
 +49-35754:Klettwitz
 +49-35755:Ortrand
 +49-35756:Hosena
-+49-3576:Weißwasser
++49-3576:WeiÃŸwasser
 +49-35771:Bad Muskau
 +49-35772:Rietschen
 +49-35773:Schleife
 +49-35774:Boxberg
 +49-35775:Pechern
 +49-3578:Kamenz
-+49-35792:Oßling
++49-35792:OÃŸling
 +49-35793:Elstra
-+49-35795:Königsbrück
++49-35795:KÃ¶nigsbrÃ¼ck
 +49-35796:Panschwitz-Kuckau
 +49-35797:Schwepnitz
-+49-3581:Görlitz
++49-3581:GÃ¶rlitz
 +49-35820:Zodel
 +49-35822:Hagenwerder
 +49-35823:Ostritz
 +49-35825:Kodersdorf
-+49-35826:Königshain
++49-35826:KÃ¶nigshain
 +49-35827:Nieder Seifersdorf
 +49-35828:Reichenbach(Ol)
 +49-35829:Gersdorf
 +49-3583:Zittau
-+49-35841:Großschönau
++49-35841:GroÃŸschÃ¶nau
 +49-35842:Niederoderwitz
 +49-35843:Hirschfelde
 +49-35844:Oybin,kurort
-+49-3585:Löbau
++49-3585:LÃ¶bau
 +49-3586:Neugersdorf (Sachs)
 +49-35872:Neusalza-Spremberg
 +49-35873:Herrnhut
 +49-35874:Bernstadt
 +49-35875:Obercunnersdorf
-+49-35876:Weißenberg
++49-35876:WeiÃŸenberg
 +49-35877:Cunewalde
 +49-3588:Niesky
 +49-35891:Rothenburg(Ol)
 +49-35892:Horka(Ol)
-+49-35893:Mücka
-+49-35894:Hähnichen
++49-35893:MÃ¼cka
++49-35894:HÃ¤hnichen
 +49-35895:Klitten
 +49-3591:Bautzen
 +49-3592:Kirschau
 +49-35930:Seitschen
-+49-35931:Königswartha
++49-35931:KÃ¶nigswartha
 +49-35932:Guttau
 +49-35933:Neschwitz
-+49-35934:Großdubrau
++49-35934:GroÃŸdubrau
 +49-35935:Kleinwelka
 +49-35936:Sohland(Spree)
 +49-35937:Prischwitz
-+49-35938:Großpostwitz(Ol)
++49-35938:GroÃŸpostwitz(Ol)
 +49-35939:Pommritz
 +49-3594:Bischofswerda
 +49-35951:Neukirch(Lausitz)
-+49-35952:Großröhrsdorf
++49-35952:GroÃŸrÃ¶hrsdorf
 +49-35953:Burkau
-+49-35954:Großharthau
++49-35954:GroÃŸharthau
 +49-35955:Pulsnitz
 +49-3596:Neustadt(Sachs)
 +49-35971:Sebnitz
 +49-35973:Stolpen
 +49-35974:Hinterhermsdorf
 +49-35975:Hohnstein
-+49-3601:Mühlhausen
++49-3601:MÃ¼hlhausen
 +49-36020:Ebeleben
 +49-36021:Schlotheim
-+49-36022:Großengottern
++49-36022:GroÃŸengottern
 +49-36023:Horsmar
 +49-36024:Diedorf
-+49-36025:Körner
++49-36025:KÃ¶rner
 +49-36026:Struth
 +49-36027:Lengenfeld Unterm Stein
 +49-36028:Kammerforst
 +49-36029:Menteroda
 +49-3603:Bad Langensalza
 +49-36041:Bad Tennstedt
-+49-36042:Gräfentonna
++49-36042:GrÃ¤fentonna
 +49-36043:Kirchheilingen
 +49-3605:Leinefelde
 +49-3606:Heiligenstadt
 +49-36071:Teistungen
-+49-36072:Weißenborn-Lüderode
++49-36072:WeiÃŸenborn-LÃ¼derode
 +49-36074:Worbis
-+49-36075:Dingelstädt(Eichsfeld)
++49-36075:DingelstÃ¤dt(Eichsfeld)
 +49-36076:Niederorschel
-+49-36077:Großbodungen
++49-36077:GroÃŸbodungen
 +49-36081:Arenshausen
 +49-36082:Ershausen
 +49-36083:Uder
 +49-36084:Heuthen
 +49-36085:Reinholterode
-+49-36087:Wüstheuterode
++49-36087:WÃ¼stheuterode
 +49-361:Erfurt
 +49-36200:Elxleben
 +49-36201:Walschleben
 +49-36202:Neudietendorf
 +49-36203:Vieselbach
 +49-36204:Stotternheim
-+49-36205:Gräfenroda
-+49-36206:Großfahner
++49-36205:GrÃ¤fenroda
++49-36206:GroÃŸfahner
 +49-36207:Plaue
 +49-36208:Ermstedt
 +49-36209:Klettbach
@@ -1263,7 +1263,7 @@
 +49-3623:Friedrichroda
 +49-3624:Ohrdruf
 +49-36252:Tambach-Dietharz
-+49-36253:Georgenthal(Thür)
++49-36253:Georgenthal(ThÃ¼r)
 +49-36254:Friedrichswerth
 +49-36255:Goldbach
 +49-36256:Wechmar
@@ -1274,33 +1274,33 @@
 +49-3629:Stadtilm
 +49-3631:Nordhausen
 +49-3632:Sondershausen
-+49-36330:Großberndten
++49-36330:GroÃŸberndten
 +49-36331:Ilfeld
 +49-36332:Ellrich
 +49-36333:Heringen
 +49-36334:Wolkramshausen
-+49-36335:Großwechsungen
++49-36335:GroÃŸwechsungen
 +49-36336:Klettenberg
 +49-36337:Schiedungen
 +49-36338:Bleicherode
-+49-3634:Sömmerda
-+49-3635:Kölleda
-+49-3636:Greußen
-+49-36370:Großenehrich
-+49-36371:Schloßvippach
++49-3634:SÃ¶mmerda
++49-3635:KÃ¶lleda
++49-3636:GreuÃŸen
++49-36370:GroÃŸenehrich
++49-36371:SchloÃŸvippach
 +49-36372:Kleinneuhausen
-+49-36373:Buttstädt
-+49-36374:Weißensee
-+49-36375:Kindelbrück
-+49-36376:Straußfurt
++49-36373:ButtstÃ¤dt
++49-36374:WeiÃŸensee
++49-36375:KindelbrÃ¼ck
++49-36376:StrauÃŸfurt
 +49-36377:Rastenberg
 +49-36378:Ostramondra
 +49-36379:Holzengel
 +49-3641:Jena
 +49-36421:Camburg
-+49-36422:Reinstädt
-+49-36423:Orlamünde
-+49-36424:Kahla(Thür)
++49-36422:ReinstÃ¤dt
++49-36423:OrlamÃ¼nde
++49-36424:Kahla(ThÃ¼r)
 +49-36425:Isserstedt
 +49-36426:Ottendorf
 +49-36427:Dornburg(Saale)
@@ -1313,26 +1313,26 @@
 +49-36453:Mellingen
 +49-36454:Magdala
 +49-36458:Bad Berka
-+49-36459:Blankenhain(Thür)
++49-36459:Blankenhain(ThÃ¼r)
 +49-36461:Bad Sulza
-+49-36462:Oßmannstedt
++49-36462:OÃŸmannstedt
 +49-36463:Gebstedt
 +49-36464:Wormstedt
 +49-36465:Oberndorf
-+49-3647:Pößneck
++49-3647:PÃ¶ÃŸneck
 +49-36481:Neustadt(Orla)
 +49-36482:Triptis
-+49-36483:Ziegenrück
++49-36483:ZiegenrÃ¼ck
 +49-36484:Knau
 +49-365:Gera
-+49-36601:Hermsdorf(Thür)
++49-36601:Hermsdorf(ThÃ¼r)
 +49-36602:Ronneburg
 +49-36603:Weida
-+49-36604:Münchenbernsdorf
-+49-36605:Bad Köstritz
++49-36604:MÃ¼nchenbernsdorf
++49-36605:Bad KÃ¶stritz
 +49-36606:Kraftsdorf
-+49-36607:Niederpöllnitz
-+49-36608:Seelingstädt
++49-36607:NiederpÃ¶llnitz
++49-36608:SeelingstÃ¤dt
 +49-3661:Greiz
 +49-36621:Elsterberg
 +49-36622:Triebes
@@ -1346,58 +1346,58 @@
 +49-36642:Harra
 +49-36643:Thimmendorf
 +49-36644:Hirschberg(Saale)
-+49-36645:Mühltroff
++49-36645:MÃ¼hltroff
 +49-36646:Tanna
 +49-36647:Saalburg
 +49-36648:Dittersdorf
 +49-36649:Gefell
 +49-36651:Lobenstein
 +49-36652:Wurzbach
-+49-36653:Lehesten(Thüringerw)
++49-36653:Lehesten(ThÃ¼ringerw)
 +49-36691:Eisenberg
-+49-36692:Bürgel
++49-36692:BÃ¼rgel
 +49-36693:Crossen(Elster)
-+49-36694:Schkölen
-+49-36695:Pölzig
++49-36694:SchkÃ¶len
++49-36695:PÃ¶lzig
 +49-36701:Lichte
 +49-36702:Lauscha
-+49-36703:Gräfenthal
++49-36703:GrÃ¤fenthal
 +49-36704:Steinheid
-+49-36705:Oberweißbach
++49-36705:OberweiÃŸbach
 +49-3671:Saalfeld(Saale)
 +49-3672:Rudolstadt
 +49-36730:Sitzendorf
 +49-36731:Unterloquitz
-+49-36732:Könitz
++49-36732:KÃ¶nitz
 +49-36733:Kaulsdorf
 +49-36734:Leutenberg
 +49-36735:Probstzella
 +49-36736:Arnsgereuth
 +49-36737:Drognitz
-+49-36738:Königsee
++49-36738:KÃ¶nigsee
 +49-36739:Rottenbach
 +49-36741:Bad Blankenburg
-+49-36742:Uhlstädt
++49-36742:UhlstÃ¤dt
 +49-36743:Teichel
 +49-36744:Remda
-+49-3675:Sonneberg(Thür)
++49-3675:Sonneberg(ThÃ¼r)
 +49-36761:Heubisch
 +49-36762:Steinach
 +49-36764:Neuhaus-Schierschnitz
 +49-36766:Schalkau
 +49-3677:Ilmenau
-+49-36781:Großbreitenbach
++49-36781:GroÃŸbreitenbach
 +49-36782:Schmiedefeld
-+49-36783:Gehren(Thür)
-+49-36784:Stützerbach
-+49-36785:Gräfinau-Angstedt
++49-36783:Gehren(ThÃ¼r)
++49-36784:StÃ¼tzerbach
++49-36785:GrÃ¤finau-Angstedt
 +49-3679:Neuhaus a Rennweg
 +49-3681:Suhl
 +49-3682:Zella-Mehlis
 +49-3683:Schmalkalden
 +49-36840:Trusetal
 +49-36841:Schleusingen
-+49-36842:Oberhof(Thür)
++49-36842:Oberhof(ThÃ¼r)
 +49-36843:Benshausen
 +49-36844:Rohr
 +49-36845:Gehlberg
@@ -1410,11 +1410,11 @@
 +49-36870:Masserberg
 +49-36871:Heldburg
 +49-36873:Themar
-+49-36874:Schönbrunn
++49-36874:SchÃ¶nbrunn
 +49-36875:Streufdorf
 +49-36878:Brattendorf
 +49-3691:Eisenach
-+49-36920:Großenlupnitz
++49-36920:GroÃŸenlupnitz
 +49-36921:Wutha
 +49-36922:Gerstungen
 +49-36923:Treffurt
@@ -1431,22 +1431,22 @@
 +49-36944:Rentwertshausen
 +49-36945:Henneberg
 +49-36946:Reichenhausen
-+49-36947:Jüchsen
-+49-36948:Römhild
-+49-36949:Obermaßfeld
++49-36947:JÃ¼chsen
++49-36948:RÃ¶mhild
++49-36949:ObermaÃŸfeld
 +49-3695:Bad Salzungen
 +49-36961:Bad Liebenstein
 +49-36962:Vacha
-+49-36963:Dorndorf(Rhön)
++49-36963:Dorndorf(RhÃ¶n)
 +49-36964:Dermbach
 +49-36965:Stadtlengsfeld
 +49-36966:Kaltennordheim
 +49-36967:Geisa
-+49-36968:Roßdorf
++49-36968:RoÃŸdorf
 +49-36969:Merkers
 +49-371:Chemnitz
 +49-37200:Wittgensdorf
-+49-37202:Claußnitz
++49-37202:ClauÃŸnitz
 +49-37203:Gersdorf
 +49-37204:Lichtenstein
 +49-37206:Frankenberg
@@ -1456,14 +1456,14 @@
 +49-3721:Meinersdorf
 +49-3722:Limbach-Oberfrohna
 +49-3723:Hohenstein-Ernstthal
-+49-3724:Burgstädt
++49-3724:BurgstÃ¤dt
 +49-3725:Zschopau
-+49-3726:Flöha
++49-3726:FlÃ¶ha
 +49-3727:Mittweida
 +49-37291:Augustusburg
 +49-37292:Oederan
 +49-37293:Eppendorf
-+49-37294:Grünhainichen
++49-37294:GrÃ¼nhainichen
 +49-37295:Lugau(Erzgeb)
 +49-37296:Stollberg(Erzgeb)
 +49-37297:Thum
@@ -1476,26 +1476,26 @@
 +49-37324:Reinsberg
 +49-37325:Niederbobritzsch
 +49-37326:Frauenstein
-+49-37327:Rechenberg-Bienenmühle
-+49-37328:Großschirma
-+49-37329:Großhartmannsdorf
++49-37327:Rechenberg-BienenmÃ¼hle
++49-37328:GroÃŸschirma
++49-37329:GroÃŸhartmannsdorf
 +49-3733:Annaberg-Buchholz
 +49-37341:Ehrenfriedersdorf
 +49-37342:Cranzahl
-+49-37343:Jöhstadt
++49-37343:JÃ¶hstadt
 +49-37344:Crottendorf
 +49-37346:Geyer
-+49-37347:Bärenstein
++49-37347:BÃ¤renstein
 +49-37348:Oberwiesenthal
 +49-37349:Scheibenberg
 +49-3735:Marienberg
 +49-37360:Olbernhau
 +49-37361:Neuhausen(Erzgeb)
 +49-37362:Seiffen
-+49-37363:Zöblitz
++49-37363:ZÃ¶blitz
 +49-37364:Reitzenhain
 +49-37365:Sayda
-+49-37366:Rübenau
++49-37366:RÃ¼benau
 +49-37367:Lengefeld(Erzgeb)
 +49-37368:Deutschneudorf
 +49-37369:Wolkenstein
@@ -1511,7 +1511,7 @@
 +49-37430:Eichigt
 +49-37431:Mehltheuer(Vogtl)
 +49-37432:Pausa
-+49-37433:Gutenfürst
++49-37433:GutenfÃ¼rst
 +49-37434:Bobenneukirchen
 +49-37435:Reuth
 +49-37436:Weischlitz
@@ -1522,13 +1522,13 @@
 +49-3745:Falkenstein
 +49-37462:Rothenkirchen(Vogtl)
 +49-37463:Bergen
-+49-37464:Schöneck
++49-37464:SchÃ¶neck
 +49-37465:Tannenbergsthal
 +49-37467:Klingenthal
 +49-37468:Treuen
 +49-375:Zwickau
 +49-37600:Neumark(Sachs)
-+49-37601:Mülsen St Jacob
++49-37601:MÃ¼lsen St Jacob
 +49-37602:Kirchberg(Sachs)
 +49-37603:Wildenfels
 +49-37604:Mosel
@@ -1547,18 +1547,18 @@
 +49-3773:Johanngeorgenstadt
 +49-3774:Schwarzenberg(Erzgeb)
 +49-37752:Eibenstock
-+49-37754:Zwönitz
-+49-37755:Schönheide(Erzgeb)
++49-37754:ZwÃ¶nitz
++49-37755:SchÃ¶nheide(Erzgeb)
 +49-37756:Breitenbrunn
-+49-37757:Rittersgrün
++49-37757:RittersgrÃ¼n
 +49-381:Rostock
 +49-38201:Gelbensande
 +49-38202:Volkenshagen
 +49-38203:Bad Doberan
 +49-38204:Broderstorf
 +49-38205:Tessin
-+49-38206:Graal-Müritz
-+49-38207:Stäbelow
++49-38206:Graal-MÃ¼ritz
++49-38207:StÃ¤below
 +49-38208:Kavelstorf
 +49-38209:Sanitz
 +49-3821:Ribnitz-Damgarten
@@ -1569,15 +1569,15 @@
 +49-38224:Gresenhorst
 +49-38225:Trinwillershagen
 +49-38226:Dierhagen,ostseebad
-+49-38227:Lüdershagen
-+49-38228:Dettmannsdorf-Kölzow
-+49-38229:Bad Sülze
++49-38227:LÃ¼dershagen
++49-38228:Dettmannsdorf-KÃ¶lzow
++49-38229:Bad SÃ¼lze
 +49-38231:Barth
-+49-38232:Zingst a Darß
++49-38232:Zingst a DarÃŸ
 +49-38233:Prerow,ostseebad
-+49-38234:Born (Darß)
-+49-38292:Kröpelin
-+49-38293:Kühlungsborn
++49-38234:Born (DarÃŸ)
++49-38292:KrÃ¶pelin
++49-38293:KÃ¼hlungsborn
 +49-38294:Neubukow
 +49-38295:Satow
 +49-38296:Rerik,ostseebad
@@ -1586,11 +1586,11 @@
 +49-38301:Putbus
 +49-38302:Sagard
 +49-38303:Sellin,ostseebad
-+49-38304:Garz(Rügen)
++49-38304:Garz(RÃ¼gen)
 +49-38305:Gingst
 +49-38306:Samtens
 +49-38307:Poseritz
-+49-38308:Göhren
++49-38308:GÃ¶hren
 +49-38309:Trent
 +49-3831:Stralsund
 +49-38320:Tribsees
@@ -1603,18 +1603,18 @@
 +49-38327:Elmenhorst
 +49-38328:Miltzow
 +49-38331:Rakow
-+49-38332:Groß Bisdorf
++49-38332:GroÃŸ Bisdorf
 +49-38333:Horst
 +49-38334:Grammendorf
 +49-3834:Greifswald
 +49-38351:Mesekenhagen
 +49-38352:Kemnitz
-+49-38353:Gützkow
++49-38353:GÃ¼tzkow
 +49-38354:Wusterhusen
-+49-38355:Züssow
++49-38355:ZÃ¼ssow
 +49-38356:Behrenhoff
 +49-3836:Wolgast
-+49-38370:Kröslin
++49-38370:KrÃ¶slin
 +49-38371:Karlshagen
 +49-38372:Usedom
 +49-38373:Katzow
@@ -1626,7 +1626,7 @@
 +49-38379:Benz
 +49-3838:Bergen
 +49-38391:Altenkirchen
-+49-38392:Saßnitz
++49-38392:SaÃŸnitz
 +49-38393:Binz, Ostseebad
 +49-3841:Wismar
 +49-38422:Neukloster
@@ -1637,7 +1637,7 @@
 +49-38427:Blowatz
 +49-38428:Hohenkirchen
 +49-38429:Glasin
-+49-3843:Güstrow
++49-3843:GÃ¼strow
 +49-3844:Schwaan
 +49-38450:Tarnow
 +49-38451:Hoppenrade
@@ -1649,17 +1649,17 @@
 +49-38457:Krakow a See
 +49-38458:Zehna
 +49-38459:Laage
-+49-38461:Bützow
++49-38461:BÃ¼tzow
 +49-38462:Baumgarten
 +49-38464:Bernitt
-+49-38466:Jürgenshagen
++49-38466:JÃ¼rgenshagen
 +49-3847:Sternberg
 +49-38481:Witzin
 +49-38482:Warin
-+49-38483:Brüel
++49-38483:BrÃ¼el
 +49-38484:Ventschow
 +49-38485:Dabel
-+49-38486:Gustävel
++49-38486:GustÃ¤vel
 +49-38488:Demen
 +49-385:Schwerin(Meckl)
 +49-3860:Raben Steinfeld
@@ -1667,21 +1667,21 @@
 +49-3863:Crivitz
 +49-3865:Holthusen
 +49-3866:Cambs
-+49-3867:Lübstorf
++49-3867:LÃ¼bstorf
 +49-3868:Rastow
-+49-3869:Dümmer
++49-3869:DÃ¼mmer
 +49-3871:Parchim
 +49-38720:Grebbin
 +49-38721:Ziegendorf
 +49-38722:Raduhn
 +49-38723:Kladrum
 +49-38724:Siggelkow
-+49-38725:Groß Godems
++49-38725:GroÃŸ Godems
 +49-38726:Spornitz
 +49-38727:Mestlin
-+49-38728:Domsühl
++49-38728:DomsÃ¼hl
 +49-38729:Marnitz
-+49-38731:Lübz
++49-38731:LÃ¼bz
 +49-38732:Gallin
 +49-38733:Karbow
 +49-38735:Plau
@@ -1689,15 +1689,15 @@
 +49-38737:Ganzlin
 +49-38738:Karow
 +49-3874:Ludwigslust
-+49-38750:Malliß
++49-38750:MalliÃŸ
 +49-38751:Picher
 +49-38752:Zierzow
-+49-38753:Wöbbelin
++49-38753:WÃ¶bbelin
 +49-38754:Leussow
 +49-38755:Eldena
 +49-38756:Grabow(Meckl)
 +49-38757:Neustadt-Glewe
-+49-38758:Dömitz
++49-38758:DÃ¶mitz
 +49-38759:Tewswoos
 +49-3876:Perleberg
 +49-3877:Wittenberge
@@ -1707,53 +1707,53 @@
 +49-38783:Dallmin
 +49-38784:Kleinow
 +49-38785:Berge
-+49-38787:Glöwen
-+49-38788:Groß Warnow
++49-38787:GlÃ¶wen
++49-38788:GroÃŸ Warnow
 +49-38789:Wolfshagen
 +49-38791:Bad Wilsnack
 +49-38792:Lenzen(Elbe)
 +49-38793:Dergenthin
 +49-38794:Cumlosen
 +49-38796:Viesecke
-+49-38797:Karstädt
-+49-3881:Grevesmühlen
-+49-38821:Lüdersdorf(Meckl)
++49-38797:KarstÃ¤dt
++49-3881:GrevesmÃ¼hlen
++49-38821:LÃ¼dersdorf(Meckl)
 +49-38822:Diedrichshagen
 +49-38823:Selmsdorf
 +49-38824:Mallentin
-+49-38825:Klütz
++49-38825:KlÃ¼tz
 +49-38826:Dassow
 +49-38827:Kalkhorst
-+49-38828:Schönberg(Meckl)
++49-38828:SchÃ¶nberg(Meckl)
 +49-3883:Hagenow
 +49-38841:Neuhaus(Elbe)
-+49-38842:Lüttenmark
++49-38842:LÃ¼ttenmark
 +49-38843:Bennin
-+49-38844:Gülze
-+49-38845:Kaarßen
++49-38844:GÃ¼lze
++49-38845:KaarÃŸen
 +49-38847:Boizenburg
 +49-38848:Vellahn
 +49-38850:Gammelin
 +49-38851:Zarrentin(Meckl)
 +49-38852:Wittenburg
-+49-38853:Drönnewitz
++49-38853:DrÃ¶nnewitz
 +49-38854:Redefin
-+49-38855:Lübtheen
++49-38855:LÃ¼btheen
 +49-38856:Pritzier
 +49-38858:Lassahn
 +49-38859:Zachun
 +49-3886:Gadebusch
-+49-38871:Mühlen Eichsen
++49-38871:MÃ¼hlen Eichsen
 +49-38872:Rehna
 +49-38873:Carlow
-+49-38874:Lützow
++49-38874:LÃ¼tzow
 +49-38875:Schlagsdorf
 +49-38876:Roggendorf
 +49-39000:Beetzendorf
 +49-39001:Apenburg
 +49-39002:Oebisfelde
-+49-39003:Jübar
-+49-39004:Köckte
++49-39003:JÃ¼bar
++49-39004:KÃ¶ckte
 +49-39005:Kusey
 +49-39006:Miesterhorst
 +49-39007:Tangeln
@@ -1762,7 +1762,7 @@
 +49-3901:Salzwedel
 +49-3902:Diesdorf(Altm)
 +49-39030:Brunau
-+49-39031:Dähre
++49-39031:DÃ¤hre
 +49-39032:Mahlsdorf
 +49-39033:Wallstawe
 +49-39034:Fleetmark
@@ -1773,14 +1773,14 @@
 +49-39039:Bonese
 +49-3904:Haldensleben
 +49-39050:Bartensleben
-+49-39051:Calvörde
++49-39051:CalvÃ¶rde
 +49-39052:Erxleben
-+49-39053:Süplingen
++49-39053:SÃ¼plingen
 +49-39054:Flechtingen
-+49-39055:Hörsingen
-+49-39056:Klüden
-+49-39057:Rätzlingen
-+49-39058:Uthmöden
++49-39055:HÃ¶rsingen
++49-39056:KlÃ¼den
++49-39057:RÃ¤tzlingen
++49-39058:UthmÃ¶den
 +49-39059:Wegenstedt
 +49-39061:Weferlingen
 +49-39062:Bebertal
@@ -1788,18 +1788,18 @@
 +49-39080:Kalbe
 +49-39081:Kakerbeck
 +49-39082:Mieste
-+49-39083:Meßdorf
++49-39083:MeÃŸdorf
 +49-39084:Lindstedt
 +49-39085:Zichtau
-+49-39086:Jävenitz
++49-39086:JÃ¤venitz
 +49-39087:Jerchel
 +49-39088:Letzlingen
 +49-39089:Bismark(Altm)
-+49-3909:Klötze
++49-3909:KlÃ¶tze
 +49-391:Magdeburg
 +49-39200:Gommern
 +49-39201:Wolmirstedt
-+49-39202:Groß Ammensleben
++49-39202:GroÃŸ Ammensleben
 +49-39203:Barleben
 +49-39204:Niederndodeleben
 +49-39205:Langenweddingen
@@ -1808,34 +1808,34 @@
 +49-39208:Loitsche
 +49-39209:Wanzleben
 +49-3921:Burg
-+49-39221:Möckern
-+49-39222:Möser
-+49-39223:Theeßen
-+49-39224:Büden
++49-39221:MÃ¶ckern
++49-39222:MÃ¶ser
++49-39223:TheeÃŸen
++49-39224:BÃ¼den
 +49-39225:Altengrabow
 +49-39226:Hohenziatz
 +49-3923:Zerbst
 +49-39241:Leitzkau
-+49-39242:Prödel
++49-39242:PrÃ¶del
 +49-39243:Nedlitz
 +49-39244:Steutz
 +49-39245:Loburg
 +49-39246:Lindau(Anh)
-+49-39247:Güterglück
++49-39247:GÃ¼terglÃ¼ck
 +49-39248:Dobritz
-+49-3925:Staßfurt
-+49-39262:Güsten
++49-3925:StaÃŸfurt
++49-39262:GÃ¼sten
 +49-39263:Unseburg
 +49-39264:Kroppenstedt
-+49-39265:Löderburg
-+49-39266:Förderstedt
++49-39265:LÃ¶derburg
++49-39266:FÃ¶rderstedt
 +49-39267:Schneidlingen
 +49-39268:Egeln
-+49-3928:Schönebeck(Elbe)
++49-3928:SchÃ¶nebeck(Elbe)
 +49-39291:Calbe(Saale)
 +49-39292:Biederitz
 +49-39293:Dreileben
-+49-39294:Groß Rosenburg
++49-39294:GroÃŸ Rosenburg
 +49-39295:Zuchau
 +49-39296:Welsleben
 +49-39297:Eickendorf
@@ -1843,25 +1843,25 @@
 +49-3931:Stendal
 +49-39320:Schinne
 +49-39321:Arneburg
-+49-39322:Tangermünde
-+49-39323:Schönhausen(Elbe)
-+49-39324:Kläden
++49-39322:TangermÃ¼nde
++49-39323:SchÃ¶nhausen(Elbe)
++49-39324:KlÃ¤den
 +49-39325:Vinzelberg
 +49-39327:Klietz
 +49-39328:Rochau
-+49-39329:Möringen
++49-39329:MÃ¶ringen
 +49-3933:Genthin
 +49-39341:Redekin
 +49-39342:Gladau
 +49-39343:Jerichow
-+49-39344:Güsen
++49-39344:GÃ¼sen
 +49-39345:Parchen
 +49-39346:Tucheim
 +49-39347:Kade
 +49-39348:Klitsche
 +49-39349:Parey(Elbe)
-+49-3935:Tangerhütte
-+49-39361:Lüderitz
++49-3935:TangerhÃ¼tte
++49-39361:LÃ¼deritz
 +49-39362:Grieben
 +49-39363:Angern
 +49-39364:Dolle
@@ -1876,23 +1876,23 @@
 +49-39388:Goldbeck(Altm)
 +49-39389:Iden
 +49-39390:Iden
-+49-39391:Lückstedt
-+49-39392:Rönnebeck
++49-39391:LÃ¼ckstedt
++49-39392:RÃ¶nnebeck
 +49-39393:Werben
 +49-39394:Hohenberg-Krusemark
 +49-39395:Wanzer
 +49-39396:Neukirchen
 +49-39397:Geestgottberg
-+49-39398:Groß Garz
++49-39398:GroÃŸ Garz
 +49-39399:Kleinau
 +49-39400:Wefensleben
 +49-39401:Neuwegersleben
-+49-39402:Völpke
-+49-39403:Gröningen
++49-39402:VÃ¶lpke
++49-39403:GrÃ¶ningen
 +49-39404:Ausleben
-+49-39405:Hötensleben
++49-39405:HÃ¶tensleben
 +49-39406:Harbke
-+49-39407:Seehausen(Börde)
++49-39407:Seehausen(BÃ¶rde)
 +49-39408:Hadmersleben
 +49-39409:Eilsleben
 +49-3941:Halberstadt
@@ -1902,7 +1902,7 @@
 +49-39424:Schwanebeck
 +49-39425:Dingelstedt
 +49-39426:Hessen
-+49-39427:Ströbeck
++49-39427:StrÃ¶beck
 +49-39428:Pabstorf
 +49-3943:Wernigerode
 +49-3944:Blankenburg(Harz)
@@ -1923,8 +1923,8 @@
 +49-39484:Harzgerode
 +49-39485:Gernrode(Harz)
 +49-39487:Friedrichsbrunn
-+49-39488:Güntersberge
-+49-39489:Straßberg
++49-39488:GÃ¼ntersberge
++49-39489:StraÃŸberg
 +49-3949:Oschersleben
 +49-395:Neubrandenburg
 +49-39600:Zwiedorf
@@ -1932,7 +1932,7 @@
 +49-39602:Kleeth
 +49-39603:Burg Stargard
 +49-39604:Wildberg
-+49-39605:Groß Nemerow
++49-39605:GroÃŸ Nemerow
 +49-39606:Glienke
 +49-39607:Kotelow
 +49-39608:Staven
@@ -1941,38 +1941,38 @@
 +49-3963:Woldegk
 +49-3964:Bredenfelde
 +49-3965:Burow
-+49-3966:Cölpin
++49-3966:CÃ¶lpin
 +49-3967:Oertzenhof
-+49-3968:Schönbeck
++49-3968:SchÃ¶nbeck
 +49-3969:Siedenbollentin
 +49-3971:Anklam
 +49-39721:Liepen
 +49-39722:Sarnow
 +49-39723:Krien
-+49-39724:Klein Bünzow
++49-39724:Klein BÃ¼nzow
 +49-39726:Ducherow
 +49-39727:Spantekow
 +49-39728:Medow
 +49-3973:Pasewalk
 +49-39740:Nechlin
 +49-39741:Jatznick
-+49-39742:Brüssow
++49-39742:BrÃ¼ssow
 +49-39743:Zerrenthin
 +49-39744:Rothenklempenow
 +49-39745:Hetzdorf
 +49-39746:Krackow
-+49-39747:Züsedom
++49-39747:ZÃ¼sedom
 +49-39748:Viereck
 +49-39749:Grambow
 +49-39751:Penkun
 +49-39752:Blumenhagen
 +49-39753:Strasburg
-+49-39754:Löcknitz
++49-39754:LÃ¶cknitz
 +49-3976:Torgelow
-+49-39771:Ueckermünde
-+49-39772:Rothemühl
++49-39771:UeckermÃ¼nde
++49-39772:RothemÃ¼hl
 +49-39773:Altwarp
-+49-39774:Mönkebude
++49-39774:MÃ¶nkebude
 +49-39775:Ahlbeck
 +49-39776:Hintersee
 +49-39777:Borkenfriede
@@ -1988,28 +1988,28 @@
 +49-39826:Blankensee
 +49-39827:Schwarz
 +49-39828:Wustrow
-+49-39829:Blankenförde
++49-39829:BlankenfÃ¶rde
 +49-39831:Feldberg
 +49-39832:Wesenberg
 +49-39833:Mirow
 +49-3984:Prenzlau
-+49-39851:Göritz
-+49-39852:Schönermark
++49-39851:GÃ¶ritz
++49-39852:SchÃ¶nermark
 +49-39853:Holzendorf
 +49-39854:Kleptow
 +49-39855:Weggun
 +49-39856:Beenz
 +49-39857:Drense
 +49-39858:Bietikow
-+49-39859:Fürstenwerder
++49-39859:FÃ¼rstenwerder
 +49-39861:Gramzow
-+49-39862:Schmölln
++49-39862:SchmÃ¶lln
 +49-39863:Seehausen
 +49-3987:Templin
 +49-39881:Ringenwalde
 +49-39882:Gollin
-+49-39883:Groß Dölln
-+49-39884:Haßleben
++49-39883:GroÃŸ DÃ¶lln
++49-39884:HaÃŸleben
 +49-39885:Jakobshagen
 +49-39886:Milmersdorf
 +49-39887:Gerswalde
@@ -2021,11 +2021,11 @@
 +49-39923:Priborn
 +49-39924:Stuer
 +49-39925:Wredenhagen
-+49-39926:Grabowhöfe
-+49-39927:Nossentiner Hütte
-+49-39928:Möllenhagen
++49-39926:GrabowhÃ¶fe
++49-39927:Nossentiner HÃ¼tte
++49-39928:MÃ¶llenhagen
 +49-39929:Jabel
-+49-39931:Röbel
++49-39931:RÃ¶bel
 +49-39932:Malchow
 +49-39933:Vollrathsruhe
 +49-39934:Klein Plasten
@@ -2034,7 +2034,7 @@
 +49-39952:Grammentin
 +49-39953:Schwinkendorf
 +49-39954:Stavenhagen
-+49-39955:Jürgenstorf
++49-39955:JÃ¼rgenstorf
 +49-39956:Neukalen
 +49-39957:Gielow
 +49-39959:Dargun
@@ -2042,17 +2042,17 @@
 +49-39971:Gnoien
 +49-39972:Walkendorf
 +49-39973:Altkalen
-+49-39975:Thürkow
-+49-39976:Groß Bützin
-+49-39977:Jördenstorf
-+49-39978:Groß Roge
++49-39975:ThÃ¼rkow
++49-39976:GroÃŸ BÃ¼tzin
++49-39977:JÃ¶rdenstorf
++49-39978:GroÃŸ Roge
 +49-3998:Demmin
 +49-39991:Daberkow
-+49-39992:Görmin
++49-39992:GÃ¶rmin
 +49-39993:Hohenmocker
 +49-39994:Metschow
 +49-39995:Nossendorf
-+49-39996:Törpin
++49-39996:TÃ¶rpin
 +49-39997:Jarmen
 +49-39998:Loitz
 +49-39999:Tutow
@@ -2060,7 +2060,7 @@
 +49-4101:Pinneberg
 +49-4102:Ahrensburg
 +49-4103:Wedel Holst
-+49-4104:Aumühle b Hamburg
++49-4104:AumÃ¼hle b Hamburg
 +49-4105:Seevetal
 +49-4106:Quickborn Kr Pinneberg
 +49-4107:Siek Kr Stormarn
@@ -2070,34 +2070,34 @@
 +49-4121:Elmshorn
 +49-4122:Uetersen
 +49-4123:Barmstedt
-+49-4124:Glückstadt
-+49-4125:Seestermühe
++49-4124:GlÃ¼ckstadt
++49-4125:SeestermÃ¼he
 +49-4126:Horst Holst
 +49-4127:Westerhorn
 +49-4128:Kollmar
 +49-4129:Haseldorf
-+49-4131:Lüneburg
++49-4131:LÃ¼neburg
 +49-4132:Amelinghausen
-+49-4133:Wittorf Kr Lüneburg
-+49-4134:Embsen Kr Lüneburg
++49-4133:Wittorf Kr LÃ¼neburg
++49-4134:Embsen Kr LÃ¼neburg
 +49-4135:Kirchgellersen
 +49-4136:Scharnebeck
 +49-4137:Barendorf
-+49-4138:Betzendorf Kr Lüneburg
++49-4138:Betzendorf Kr LÃ¼neburg
 +49-4139:Hohnstorf
 +49-4140:Estorf Kr Stade
 +49-4141:Stade
 +49-4142:Steinkirchen Kr Stade
 +49-4143:Drochtersen
 +49-4144:Himmelpforten
-+49-4146:Stade-Bützfleth
++49-4146:Stade-BÃ¼tzfleth
 +49-4148:Drochtersen-Assel
 +49-4149:Fredenbeck
 +49-4151:Schwarzenbek
 +49-4152:Geesthacht
 +49-4153:Lauenburg Elbe
 +49-4154:Trittau
-+49-4155:Büchen
++49-4155:BÃ¼chen
 +49-4156:Talkau
 +49-4158:Roseburg
 +49-4159:Basthorst
@@ -2118,8 +2118,8 @@
 +49-4176:Marschacht
 +49-4177:Drage Elbe
 +49-4178:Radbruch
-+49-4179:Winsen-Tönnhausen
-+49-4180:Königsmoor
++49-4179:Winsen-TÃ¶nnhausen
++49-4180:KÃ¶nigsmoor
 +49-4181:Buchholz i d Nordheide
 +49-4182:Tostedt
 +49-4183:Jesteburg
@@ -2132,7 +2132,7 @@
 +49-4191:Kaltenkirchen Holst
 +49-4192:Bad Bramstedt
 +49-4193:Henstedt-Ulzburg
-+49-4194:Sievershütten
++49-4194:SievershÃ¼tten
 +49-4195:Hartenholm
 +49-4202:Achim b Bremen
 +49-4203:Weyhe b Bremen
@@ -2146,17 +2146,17 @@
 +49-4221:Delmenhorst
 +49-4222:Ganderkesee
 +49-4223:Ganderkesee-Bookholzberg
-+49-4224:Groß Ippener
++49-4224:GroÃŸ Ippener
 +49-4230:Verden-Walle
 +49-4231:Verden Aller
 +49-4232:Langwedel Kr Verden
 +49-4233:Blender
-+49-4234:Dörverden
++49-4234:DÃ¶rverden
 +49-4235:Langwedel-Etelsen
 +49-4236:Kirchlinteln
 +49-4237:Bendingbostel
 +49-4238:Neddenaverbergen
-+49-4239:Dörverden-Westen
++49-4239:DÃ¶rverden-Westen
 +49-4240:Syke-Heiligenfelde
 +49-4241:Bassum
 +49-4242:Syke
@@ -2175,15 +2175,15 @@
 +49-4256:Hilgermissen
 +49-4257:Schweringen
 +49-4258:Schwarme
-+49-4260:Visselhövede-Wittorf
-+49-4261:Rotenburg Wümme
-+49-4262:Visselhövede
-+49-4263:Scheeßel
++49-4260:VisselhÃ¶vede-Wittorf
++49-4261:Rotenburg WÃ¼mme
++49-4262:VisselhÃ¶vede
++49-4263:ScheeÃŸel
 +49-4264:Sottrum Kr Rotenburg
 +49-4265:Fintel
 +49-4266:Brockel
-+49-4267:Lauenbrück
-+49-4268:Bötersen
++49-4267:LauenbrÃ¼ck
++49-4268:BÃ¶tersen
 +49-4269:Ahausen-Kirchwalsede
 +49-4271:Sulingen
 +49-4272:Siedenburg
@@ -2191,7 +2191,7 @@
 +49-4274:Varrel b Sulingen
 +49-4275:Ehrenburg
 +49-4276:Borstel b Sulingen
-+49-4277:Schwaförden
++49-4277:SchwafÃ¶rden
 +49-4281:Zeven
 +49-4282:Sittensen
 +49-4283:Tarmstedt
@@ -2214,13 +2214,13 @@
 +49-4307:Raisdorf
 +49-4308:Schwedeneck
 +49-431:Kiel
-+49-4320:Heidmühlen
-+49-4321:Neumünster
++49-4320:HeidmÃ¼hlen
++49-4321:NeumÃ¼nster
 +49-4322:Bordesholm
-+49-4323:Bornhöved
++49-4323:BornhÃ¶ved
 +49-4324:Brokstedt
 +49-4326:Wankendorf
-+49-4327:Großenaspe
++49-4327:GroÃŸenaspe
 +49-4328:Rickling
 +49-4329:Langwedel Holst
 +49-4330:Emkendorf
@@ -2236,34 +2236,34 @@
 +49-4340:Achterwehr
 +49-4342:Preetz
 +49-4343:Laboe
-+49-4344:Schönberg Holst
++49-4344:SchÃ¶nberg Holst
 +49-4346:Gettorf
 +49-4347:Flintbek
-+49-4348:Schönkirchen
-+49-4349:Dänischenhagen
-+49-4351:Eckernförde
++49-4348:SchÃ¶nkirchen
++49-4349:DÃ¤nischenhagen
++49-4351:EckernfÃ¶rde
 +49-4352:Damp
 +49-4353:Ascheffel
 +49-4354:Fleckeby
 +49-4355:Rieseby
-+49-4356:Groß Wittensee
++49-4356:GroÃŸ Wittensee
 +49-4357:Sehestedt Eider
-+49-4358:Loose b Eckernförde
++49-4358:Loose b EckernfÃ¶rde
 +49-4361:Oldenburg i Holst
 +49-4362:Heiligenhafen
 +49-4363:Lensahn
 +49-4364:Dahme
 +49-4365:Heringsdorf
-+49-4366:Grömitz-Cismar
-+49-4367:Großenbrode
++49-4366:GrÃ¶mitz-Cismar
++49-4367:GroÃŸenbrode
 +49-4371:Burg Auf Fehmarn
 +49-4372:Westfehmarn
-+49-4381:Lütjenburg
++49-4381:LÃ¼tjenburg
 +49-4382:Wangels
 +49-4383:Grebin
 +49-4384:Selent
 +49-4385:Hohenfelde b Kiel
-+49-4392:Nortorf b Neumünster
++49-4392:Nortorf b NeumÃ¼nster
 +49-4393:Boostedt
 +49-4394:Bokhorst
 +49-4401:Brake Unterweser
@@ -2282,23 +2282,23 @@
 +49-4425:Wangerland-Hooksiel
 +49-4426:Wangerland-Horumersiel
 +49-4431:Wildeshausen
-+49-4432:Dötlingen-Brettorf
-+49-4433:Dötlingen
++49-4432:DÃ¶tlingen-Brettorf
++49-4433:DÃ¶tlingen
 +49-4434:Colnrade
-+49-4435:Großenkneten
++49-4435:GroÃŸenkneten
 +49-4441:Vechta
 +49-4442:Lohne Oldb
 +49-4443:Dinklage
 +49-4444:Goldenstedt
 +49-4445:Visbek Kr Vechta
 +49-4446:Bakum Kr Vechta
-+49-4447:Vechta-Langförden
++49-4447:Vechta-LangfÃ¶rden
 +49-4451:Varel Jadebusen
 +49-4452:Zetel-Neuenburg
 +49-4453:Zetel
 +49-4454:Jade
 +49-4455:Jade-Schweiburg
-+49-4456:Varel-Altjührden
++49-4456:Varel-AltjÃ¼hrden
 +49-4458:Wiefelstede-Spohle
 +49-4461:Jever
 +49-4462:Wittmund
@@ -2317,75 +2317,75 @@
 +49-4477:Lastrup-Hemmelte
 +49-4478:Cappeln Oldb
 +49-4479:Molbergen-Peheim
-+49-4480:Ovelgönne-Strückhausen
++49-4480:OvelgÃ¶nne-StrÃ¼ckhausen
 +49-4481:Hatten-Sandkrug
 +49-4482:Hatten
-+49-4483:Ovelgönne-Großenmeer
-+49-4484:Hude-Wüsting
++49-4483:OvelgÃ¶nne-GroÃŸenmeer
++49-4484:Hude-WÃ¼sting
 +49-4485:Elsfleth-Huntorf
 +49-4486:Edewecht-Friedrichsfehn
-+49-4487:Großenkneten-Huntlosen
++49-4487:GroÃŸenkneten-Huntlosen
 +49-4488:Westerstede
 +49-4489:Apen
 +49-4491:Friesoythe
 +49-4492:Saterland
 +49-4493:Friesoythe-Gehlenberg
-+49-4494:Bösel b Friesoythe
-+49-4495:Friesoythe-Thüle
++49-4494:BÃ¶sel b Friesoythe
++49-4495:Friesoythe-ThÃ¼le
 +49-4496:Friesoythe-Markhausen
-+49-4497:Barßel-Harkebrügge
++49-4497:BarÃŸel-HarkebrÃ¼gge
 +49-4498:Saterland-Ramsloh
-+49-4499:Barßel
++49-4499:BarÃŸel
 +49-4501:Kastorf Holst
-+49-4502:Lübeck-Travemünde
++49-4502:LÃ¼beck-TravemÃ¼nde
 +49-4503:Timmendorfer Strand
 +49-4504:Ratekau
 +49-4505:Stockelsdorf-Curau
 +49-4506:Stockelsdorf-Krumbeck
 +49-4508:Krummesse
-+49-4509:Groß Grönau
-+49-451:Lübeck
++49-4509:GroÃŸ GrÃ¶nau
++49-451:LÃ¼beck
 +49-4521:Eutin
-+49-4522:Plön
++49-4522:PlÃ¶n
 +49-4523:Malente
-+49-4524:Scharbeutz-Pönitz
-+49-4525:Ahrensbök
++49-4524:Scharbeutz-PÃ¶nitz
++49-4525:AhrensbÃ¶k
 +49-4526:Ascheberg Holst
 +49-4527:Bosau
-+49-4528:Schönwalde a Bungsberg
-+49-4529:Süsel-Bujendorf
++49-4528:SchÃ¶nwalde a Bungsberg
++49-4529:SÃ¼sel-Bujendorf
 +49-4531:Bad Oldesloe
 +49-4532:Bargteheide
 +49-4533:Reinfeld Holstein
 +49-4534:Steinburg Kr Stormarn
 +49-4535:Nahe
 +49-4536:Steinhorst Lauenb
-+49-4537:Sülfeld Holst
++49-4537:SÃ¼lfeld Holst
 +49-4539:Westerau
 +49-4541:Ratzeburg
-+49-4542:Mölln Lauenb
++49-4542:MÃ¶lln Lauenb
 +49-4543:Nusse
 +49-4544:Berkenthin
 +49-4545:Seedorf Lauenb
 +49-4546:Mustin
 +49-4547:Gudow Lauenb
-+49-4550:Bühnsdorf
++49-4550:BÃ¼hnsdorf
 +49-4551:Bad Segeberg
 +49-4552:Leezen
 +49-4553:Geschendorf
 +49-4554:Wahlstedt
 +49-4555:Seedorf b Bad Segeberg
-+49-4556:Ahrensbök-Gnissau
++49-4556:AhrensbÃ¶k-Gnissau
 +49-4557:Blunk
 +49-4558:Todesfelde
 +49-4559:Wensin
 +49-4561:Neustadt i Holst
-+49-4562:Grömitz
++49-4562:GrÃ¶mitz
 +49-4563:Scharbeutz-Haffkrug
 +49-4564:Schashagen
 +49-4602:Freienwill
 +49-4603:Havetoft
-+49-4604:Großenwiehe
++49-4604:GroÃŸenwiehe
 +49-4605:Medelby
 +49-4606:Wanderup
 +49-4607:Janneby
@@ -2394,43 +2394,43 @@
 +49-461:Flensburg
 +49-4621:Schleswig
 +49-4622:Taarstedt
-+49-4623:Böklund
++49-4623:BÃ¶klund
 +49-4624:Kropp
-+49-4625:Jübek
++49-4625:JÃ¼bek
 +49-4626:Treia
-+49-4627:Dörpstedt
++49-4627:DÃ¶rpstedt
 +49-4630:Barderup
-+49-4631:Glücksburg Ostsee
++49-4631:GlÃ¼cksburg Ostsee
 +49-4632:Steinbergkirche
 +49-4633:Satrup
 +49-4634:Husby
-+49-4635:Sörup
++49-4635:SÃ¶rup
 +49-4636:Langballig
 +49-4637:Sterup
 +49-4638:Tarp
 +49-4639:Schafflund
-+49-4641:Süderbrarup
++49-4641:SÃ¼derbrarup
 +49-4642:Kappeln Schlei
 +49-4643:Gelting Angeln
 +49-4644:Karby
 +49-4646:Mohrkirch
 +49-4651:Westerland
-+49-4661:Niebüll
++49-4661:NiebÃ¼ll
 +49-4662:Leck
-+49-4663:Süderlügum
-+49-4664:Neukirchen b Niebüll
-+49-4665:Emmelsbüll-Horsbüll
++49-4663:SÃ¼derlÃ¼gum
++49-4664:Neukirchen b NiebÃ¼ll
++49-4665:EmmelsbÃ¼ll-HorsbÃ¼ll
 +49-4666:Ladelund
-+49-4667:Dagebüll
-+49-4668:Klanxbüll
++49-4667:DagebÃ¼ll
++49-4668:KlanxbÃ¼ll
 +49-4671:Bredstedt
 +49-4672:Langenhorn
 +49-4673:Joldelund
 +49-4674:Ockholm
-+49-4681:Wyk Auf Föhr
++49-4681:Wyk Auf FÃ¶hr
 +49-4682:Amrum
 +49-4683:Oldsum
-+49-4684:Langeneß Hallig
++49-4684:LangeneÃŸ Hallig
 +49-4702:Sandstedt
 +49-4703:Loxstedt-Donnern
 +49-4704:Drangstedt
@@ -2442,7 +2442,7 @@
 +49-4721:Cuxhaven
 +49-4722:Cuxhaven-Altenbruch
 +49-4723:Cuxhaven-Altenwalde
-+49-4724:Cuxhaven-Lüdingworth
++49-4724:Cuxhaven-LÃ¼dingworth
 +49-4725:Helgoland
 +49-4731:Nordenham
 +49-4732:Stadland-Rodenkirchen
@@ -2464,26 +2464,26 @@
 +49-4751:Otterndorf
 +49-4752:Neuhaus Oste
 +49-4753:Balje
-+49-4754:Bülkau
++49-4754:BÃ¼lkau
 +49-4755:Ihlienworth
 +49-4756:Odisheim
 +49-4757:Wanna
 +49-4758:Nordleda
-+49-4761:Bremervörde
++49-4761:BremervÃ¶rde
 +49-4762:Kutenholz
 +49-4763:Gnarrenburg
 +49-4764:Gnarrenburg-Klenkendorf
-+49-4765:Ebersdorf b Bremervörde
++49-4765:Ebersdorf b BremervÃ¶rde
 +49-4766:Basdahl
-+49-4767:Bremervörde-Bevern
++49-4767:BremervÃ¶rde-Bevern
 +49-4768:Hipstedt
-+49-4769:Bremervörde-Iselersheim
++49-4769:BremervÃ¶rde-Iselersheim
 +49-4770:Wischhafen
 +49-4771:Hemmoor
 +49-4772:Oberndorf Oste
 +49-4773:Lamstedt
 +49-4774:Hechthausen
-+49-4775:Großenwörden
++49-4775:GroÃŸenwÃ¶rden
 +49-4776:Osten-Altendorf
 +49-4777:Cadenberge
 +49-4778:Wingst
@@ -2498,7 +2498,7 @@
 +49-4803:Pahlen
 +49-4804:Nordhastedt
 +49-4805:Schafstedt
-+49-4806:Sarzbüttel
++49-4806:SarzbÃ¼ttel
 +49-481:Heide Holst
 +49-4821:Itzehoe
 +49-4822:Kellinghusen
@@ -2507,20 +2507,20 @@
 +49-4825:Burg Dithm
 +49-4826:Hohenlockstedt
 +49-4827:Wacken
-+49-4828:Lägerdorf
++49-4828:LÃ¤gerdorf
 +49-4829:Wewelsfleth
-+49-4830:Süderhastedt
++49-4830:SÃ¼derhastedt
 +49-4832:Meldorf
 +49-4833:Wesselburen
-+49-4834:Büsum
++49-4834:BÃ¼sum
 +49-4835:Albersdorf Holst
 +49-4836:Hennstedt Dithm
 +49-4837:Neuenkirchen Dithm
 +49-4838:Tellingstedt
-+49-4839:Wöhrden Dithm
++49-4839:WÃ¶hrden Dithm
 +49-4841:Husum Nordsee
 +49-4842:Nordstrand
-+49-4843:Viöl
++49-4843:ViÃ¶l
 +49-4844:Pellworm
 +49-4845:Ostenfeld b Husum
 +49-4846:Hattstedt
@@ -2528,7 +2528,7 @@
 +49-4848:Rantrum
 +49-4849:Hooge Hallig
 +49-4851:Marne
-+49-4852:Brunsbüttel
++49-4852:BrunsbÃ¼ttel
 +49-4853:St Michaelisdonn
 +49-4854:Friedrichskoog
 +49-4855:Eddelak
@@ -2536,7 +2536,7 @@
 +49-4857:Barlt
 +49-4858:St Margarethen Holst
 +49-4859:Windbergen
-+49-4861:Tönning
++49-4861:TÃ¶nning
 +49-4862:Garding
 +49-4863:St Peter-Ording
 +49-4864:Oldenswort
@@ -2544,13 +2544,13 @@
 +49-4871:Hohenwestedt
 +49-4872:Hanerau-Hademarschen
 +49-4873:Aukrug
-+49-4874:Todenbüttel
++49-4874:TodenbÃ¼ttel
 +49-4875:Stafstedt
 +49-4876:Reher Holst
 +49-4877:Hennstedt b Itzehoe
 +49-4881:Friedrichstadt
 +49-4882:Lunden
-+49-4883:Süderstapel
++49-4883:SÃ¼derstapel
 +49-4884:Schwabstedt
 +49-4885:Bergenhusen
 +49-4892:Schenefeld Mittelholst
@@ -2561,11 +2561,11 @@
 +49-4920:Wirdum
 +49-4921:Emden
 +49-4922:Borkum
-+49-4923:Krummhörn-Pewsum
++49-4923:KrummhÃ¶rn-Pewsum
 +49-4924:Moormerland-Oldersum
 +49-4925:Hinte
-+49-4926:Krummhörn-Greetsiel
-+49-4927:Krummhörn-Loquard
++49-4926:KrummhÃ¶rn-Greetsiel
++49-4927:KrummhÃ¶rn-Loquard
 +49-4928:Ihlow-Riepe
 +49-4929:Ihlow
 +49-4931:Norden
@@ -2573,15 +2573,15 @@
 +49-4933:Dornum Ostfriesl
 +49-4934:Marienhafe
 +49-4935:Juist
-+49-4936:Großheide
++49-4936:GroÃŸheide
 +49-4938:Hagermarsch
 +49-4939:Baltrum
 +49-4941:Aurich Ostfriesl
-+49-4942:Südbrookmerland
-+49-4943:Großefehn
++49-4942:SÃ¼dbrookmerland
++49-4943:GroÃŸefehn
 +49-4944:Wiesmoor
-+49-4945:Großefehn-Timmel
-+49-4946:Großefehn-Bagband
++49-4945:GroÃŸefehn-Timmel
++49-4946:GroÃŸefehn-Bagband
 +49-4947:Aurich-Ogenbargen
 +49-4948:Wiesmoor-Marcardsmoor
 +49-4950:Holtland
@@ -2596,10 +2596,10 @@
 +49-4959:Dollart
 +49-4961:Papenburg
 +49-4962:Papenburg-Aschendorf
-+49-4963:Dörpen
++49-4963:DÃ¶rpen
 +49-4964:Rhede Ems
 +49-4965:Surwold
-+49-4966:Neubörger
++49-4966:NeubÃ¶rger
 +49-4967:Rhauderfehn-Burlage
 +49-4968:Neulehe
 +49-4971:Esens
@@ -2618,27 +2618,27 @@
 +49-5027:Linsburg
 +49-5028:Pennigsehl
 +49-5031:Wunstorf
-+49-5032:Neustadt a Rübenberge
-+49-5033:Wunstorf-Großenheidorn
++49-5032:Neustadt a RÃ¼benberge
++49-5033:Wunstorf-GroÃŸenheidorn
 +49-5034:Neustadt-Hagen
-+49-5035:Groß Munzel
++49-5035:GroÃŸ Munzel
 +49-5036:Neustadt-Schneeren
 +49-5037:Bad Rehburg
 +49-5041:Springe Deister
-+49-5042:Bad Münder a Deister
++49-5042:Bad MÃ¼nder a Deister
 +49-5043:Lauenau
 +49-5044:Springe-Eldagsen
 +49-5045:Springe-Bennigsen
 +49-5051:Bergen Kr Celle
 +49-5052:Hermannsburg
-+49-5053:Faßberg-Müden
-+49-5054:Bergen-Sülze
-+49-5055:Faßberg
-+49-5056:Winsen-Meißendorf
++49-5053:FaÃŸberg-MÃ¼den
++49-5054:Bergen-SÃ¼lze
++49-5055:FaÃŸberg
++49-5056:Winsen-MeiÃŸendorf
 +49-5060:Bodenburg
 +49-5062:Holle b Hildesheim
 +49-5063:Bad Salzdetfurth
-+49-5064:Groß Düngen
++49-5064:GroÃŸ DÃ¼ngen
 +49-5065:Sibbesse
 +49-5066:Sarstedt
 +49-5067:Bockenem
@@ -2650,7 +2650,7 @@
 +49-5074:Rodewald
 +49-5082:Langlingen
 +49-5083:Hohne b Celle
-+49-5084:Hambühren
++49-5084:HambÃ¼hren
 +49-5085:Burgdorf-Ehlershausen
 +49-5086:Celle-Scheuen
 +49-5101:Pattensen
@@ -2665,7 +2665,7 @@
 +49-5126:Algermissen
 +49-5127:Harsum
 +49-5128:Hohenhameln
-+49-5129:Söhlde
++49-5129:SÃ¶hlde
 +49-5130:Wedemark
 +49-5131:Garbsen
 +49-5132:Lehrte
@@ -2680,7 +2680,7 @@
 +49-5144:Wathlingen
 +49-5145:Beedenbostel
 +49-5146:Wietze
-+49-5147:Uetze-Hänigsen
++49-5147:Uetze-HÃ¤nigsen
 +49-5148:Steinhorst Niedersachs
 +49-5149:Wienhausen
 +49-5151:Hameln
@@ -2688,10 +2688,10 @@
 +49-5153:Salzhemmendorf
 +49-5154:Aerzen
 +49-5155:Emmerthal
-+49-5156:Coppenbrügge
-+49-5157:Emmerthal-Börry
++49-5156:CoppenbrÃ¼gge
++49-5157:Emmerthal-BÃ¶rry
 +49-5158:Hemeringen
-+49-5159:Coppenbrügge-Bisperode
++49-5159:CoppenbrÃ¼gge-Bisperode
 +49-5161:Walsrode
 +49-5162:Fallingbostel
 +49-5163:Fallingbostel-Dorfmark
@@ -2729,67 +2729,67 @@
 +49-5203:Werther Westf
 +49-5204:Steinhagen Westf
 +49-5205:Bielefeld-Sennestadt
-+49-5206:Bielefeld-Jöllenbeck
-+49-5207:Schloß Holte-Stukenbrock
-+49-5208:Leopoldshöhe
-+49-5209:Gütersloh-Friedrichsdorf
++49-5206:Bielefeld-JÃ¶llenbeck
++49-5207:SchloÃŸ Holte-Stukenbrock
++49-5208:LeopoldshÃ¶he
++49-5209:GÃ¼tersloh-Friedrichsdorf
 +49-521:Bielefeld
 +49-5221:Herford
 +49-5222:Bad Salzuflen
-+49-5223:Bünde
++49-5223:BÃ¼nde
 +49-5224:Enger Westf
 +49-5225:Spenge
-+49-5226:Bruchmühlen Westf
++49-5226:BruchmÃ¼hlen Westf
 +49-5228:Vlotho-Exter
 +49-5231:Detmold
 +49-5232:Lage
 +49-5233:Steinheim Westf
 +49-5234:Horn-Bad Meinberg
 +49-5235:Blomberg Lippe
-+49-5236:Blomberg-Großenmarpe
++49-5236:Blomberg-GroÃŸenmarpe
 +49-5237:Augustdorf
 +49-5238:Nieheim-Himmighausen
-+49-5241:Gütersloh
-+49-5242:Rheda-Wiedenbrück
++49-5241:GÃ¼tersloh
++49-5242:Rheda-WiedenbrÃ¼ck
 +49-5244:Rietberg
 +49-5245:Herzebrock-Clarholz
 +49-5246:Verl
 +49-5247:Harsewinkel
-+49-5248:Langenberg Kr Gütersloh
-+49-5250:Delbrück Westf
++49-5248:Langenberg Kr GÃ¼tersloh
++49-5250:DelbrÃ¼ck Westf
 +49-5251:Paderborn
 +49-5252:Bad Lippspringe
 +49-5253:Bad Driburg
-+49-5254:Paderborn-Schloß Neuhaus
++49-5254:Paderborn-SchloÃŸ Neuhaus
 +49-5255:Altenbeken
-+49-5257:Hövelhof
++49-5257:HÃ¶velhof
 +49-5258:Salzkotten
 +49-5259:Bad Driburg-Neuenheerse
 +49-5261:Lemgo
 +49-5262:Extertal
 +49-5263:Barntrup
 +49-5264:Kalletal
-+49-5265:Dörentrup
++49-5265:DÃ¶rentrup
 +49-5266:Lemgo-Kirchheide
-+49-5271:Höxter
++49-5271:HÃ¶xter
 +49-5272:Brakel Westf
 +49-5273:Beverungen
 +49-5274:Nieheim
-+49-5275:Höxter-Ottbergen
-+49-5276:Marienmünster
-+49-5277:Höxter-Fürstenau
-+49-5278:Höxter-Ovenhausen
++49-5275:HÃ¶xter-Ottbergen
++49-5276:MarienmÃ¼nster
++49-5277:HÃ¶xter-FÃ¼rstenau
++49-5278:HÃ¶xter-Ovenhausen
 +49-5281:Bad Pyrmont
 +49-5282:Schieder-Schwalenberg
-+49-5283:Lügde-Rischenau
++49-5283:LÃ¼gde-Rischenau
 +49-5284:Schwalenberg
 +49-5285:Bad Pyrmont-Kleinenberg
 +49-5286:Ottenstein Niedersachs
 +49-5292:Lichtenau-Atteln
 +49-5293:Paderborn-Dahl
-+49-5294:Hövelhof-Espeln
++49-5294:HÃ¶velhof-Espeln
 +49-5295:Lichtenau Westf
-+49-5300:Salzgitter-Üfingen
++49-5300:Salzgitter-Ãœfingen
 +49-5301:Lehre-Essenrode
 +49-5302:Vechelde
 +49-5303:Wendeburg
@@ -2810,13 +2810,13 @@
 +49-5327:Bad Grund Harz
 +49-5328:Altenau Harz
 +49-5329:Schulenberg i Oberharz
-+49-5331:Wolfenbüttel
-+49-5332:Schöppenstedt
++49-5331:WolfenbÃ¼ttel
++49-5332:SchÃ¶ppenstedt
 +49-5333:Dettum
-+49-5334:Hornburg Kr Wolfenbüttel
++49-5334:Hornburg Kr WolfenbÃ¼ttel
 +49-5335:Schladen
 +49-5336:Semmenstedt
-+49-5337:Kissenbrück
++49-5337:KissenbrÃ¼ck
 +49-5339:Gielde
 +49-5341:Salzgitter
 +49-5344:Lengede
@@ -2824,8 +2824,8 @@
 +49-5346:Liebenburg
 +49-5347:Burgdorf b Salzgitter
 +49-5351:Helmstedt
-+49-5352:Schöningen
-+49-5353:Königslutter a Elm
++49-5352:SchÃ¶ningen
++49-5353:KÃ¶nigslutter a Elm
 +49-5354:Jerxheim
 +49-5355:Frellstedt
 +49-5356:Helmstedt-Barmke
@@ -2837,30 +2837,30 @@
 +49-5364:Velpke
 +49-5365:Wolfsburg-Neindorf
 +49-5366:Jembke
-+49-5367:Rühen
++49-5367:RÃ¼hen
 +49-5368:Parsau
 +49-5371:Gifhorn
 +49-5372:Meinersen
 +49-5373:Hillerse Kr Gifhorn
-+49-5374:Isenbüttel
-+49-5375:Müden Aller
++49-5374:IsenbÃ¼ttel
++49-5375:MÃ¼den Aller
 +49-5376:Wesendorf
 +49-5377:Ehra-Lessien
 +49-5378:Sassenburg-Platendorf
-+49-5379:Sassenburg-Grußendorf
++49-5379:Sassenburg-GruÃŸendorf
 +49-5381:Seesen
 +49-5382:Bad Gandersheim
 +49-5383:Lutter a Barenberge
-+49-5384:Seesen-Groß Rhüden
-+49-5401:Georgsmarienhütte
-+49-5402:Bissendorf Kr Osnabrück
++49-5384:Seesen-GroÃŸ RhÃ¼den
++49-5401:GeorgsmarienhÃ¼tte
++49-5402:Bissendorf Kr OsnabrÃ¼ck
 +49-5403:Bad Iburg
 +49-5404:Westerkappeln
-+49-5405:Hasbergen Kr Osnabrück
++49-5405:Hasbergen Kr OsnabrÃ¼ck
 +49-5406:Belm
 +49-5407:Wallenhorst
 +49-5409:Hilter a Teutoburger Wald
-+49-541:Osnabrück
++49-541:OsnabrÃ¼ck
 +49-5421:Dissen a Teutoburger Wald
 +49-5422:Melle
 +49-5423:Versmold
@@ -2870,32 +2870,32 @@
 +49-5427:Melle-Buer
 +49-5428:Melle-Neuenkirchen
 +49-5429:Melle-Wellingholzhausen
-+49-5431:Quakenbrück
-+49-5432:Löningen
++49-5431:QuakenbrÃ¼ck
++49-5432:LÃ¶ningen
 +49-5433:Badbergen
 +49-5434:Essen Oldb
-+49-5435:Berge b Quakenbrück
++49-5435:Berge b QuakenbrÃ¼ck
 +49-5436:Nortrup
 +49-5437:Menslage
-+49-5438:Bakum-Lüsche
-+49-5439:Bersenbrück
++49-5438:Bakum-LÃ¼sche
++49-5439:BersenbrÃ¼ck
 +49-5441:Diepholz
 +49-5442:Barnstorf Kr Diepholz
-+49-5443:Lemförde
++49-5443:LemfÃ¶rde
 +49-5444:Wagenfeld
 +49-5445:Drebber
 +49-5446:Rehden
 +49-5447:Lembruch
 +49-5448:Barver
-+49-5451:Ibbenbüren
++49-5451:IbbenbÃ¼ren
 +49-5452:Mettingen Westf
 +49-5453:Recke
-+49-5454:Hörstel-Riesenbeck
++49-5454:HÃ¶rstel-Riesenbeck
 +49-5455:Tecklenburg-Brochterbeck
 +49-5456:Westerkappeln-Velpe
 +49-5457:Hopsten-Schale
 +49-5458:Hopsten
-+49-5459:Hörstel
++49-5459:HÃ¶rstel
 +49-5461:Bramsche Hase
 +49-5462:Ankum
 +49-5464:Alfhausen
@@ -2914,20 +2914,20 @@
 +49-5483:Lienen
 +49-5484:Lienen-Kattenvenne
 +49-5485:Ladbergen
-+49-5491:Damme Dümmer
++49-5491:Damme DÃ¼mmer
 +49-5492:Steinfeld Oldb
 +49-5493:Neuenkirchen Oldb
 +49-5494:Holdorf Niedersachs
-+49-5495:Neuenkirchen-Vörden
++49-5495:Neuenkirchen-VÃ¶rden
 +49-5502:Dransfeld
-+49-5503:Nörten-Hardenberg
-+49-5504:Friedland Kr Göttingen
++49-5503:NÃ¶rten-Hardenberg
++49-5504:Friedland Kr GÃ¶ttingen
 +49-5505:Hardegsen
 +49-5506:Adelebsen
-+49-5507:Ebergötzen
++49-5507:EbergÃ¶tzen
 +49-5508:Gleichen-Rittmarshausen
 +49-5509:Rosdorf
-+49-551:Göttingen
++49-551:GÃ¶ttingen
 +49-5520:Braunlage
 +49-5521:Herzberg a Harz
 +49-5522:Osterode a Harz
@@ -2943,11 +2943,11 @@
 +49-5534:Eschershausen a d Lenne
 +49-5535:Polle
 +49-5536:Holzminden-Neuhaus
-+49-5541:Münden Niedersachs
++49-5541:MÃ¼nden Niedersachs
 +49-5542:Witzenhausen
 +49-5543:Staufenberg Niedersachs
 +49-5544:Reinhardshagen
-+49-5545:Münden-Hedemünden
++49-5545:MÃ¼nden-HedemÃ¼nden
 +49-5546:Scheden
 +49-5551:Northeim
 +49-5552:Katlenburg
@@ -2965,7 +2965,7 @@
 +49-5573:Uslar-Volpriehausen
 +49-5574:Oberweser
 +49-5582:St Andreasberg
-+49-5583:Braunlage-Hohegeiß
++49-5583:Braunlage-HohegeiÃŸ
 +49-5584:Hattorf a Harz
 +49-5585:Herzberg-Sieber
 +49-5586:Wieda
@@ -2975,11 +2975,11 @@
 +49-5601:Schauenburg
 +49-5602:Hessisch Lichtenau
 +49-5603:Gudensberg
-+49-5604:Großalmerode
++49-5604:GroÃŸalmerode
 +49-5605:Kaufungen
 +49-5606:Zierenberg
 +49-5607:Fuldatal
-+49-5608:Söhrewald
++49-5608:SÃ¶hrewald
 +49-5609:Ahnatal
 +49-561:Kassel
 +49-5621:Bad Wildungen
@@ -2992,7 +2992,7 @@
 +49-5632:Willingen Upland
 +49-5633:Diemelsee
 +49-5634:Waldeck-Sachsenhausen
-+49-5635:Vöhl
++49-5635:VÃ¶hl
 +49-5636:Lichtenfels-Goddelsheim
 +49-5641:Warburg
 +49-5642:Warburg-Scherfede
@@ -3009,7 +3009,7 @@
 +49-5654:Herleshausen
 +49-5655:Wanfried
 +49-5656:Waldkappel
-+49-5657:Meißner
++49-5657:MeiÃŸner
 +49-5658:Wehretal
 +49-5659:Ringgau
 +49-5661:Melsungen
@@ -3028,8 +3028,8 @@
 +49-5682:Borken Hess
 +49-5683:Wabern Hess
 +49-5684:Frielendorf
-+49-5685:Knüllwald
-+49-5686:Schwarzenborn Knüll
++49-5685:KnÃ¼llwald
++49-5686:Schwarzenborn KnÃ¼ll
 +49-5691:Arolsen
 +49-5692:Wolfhagen
 +49-5693:Volkmarsen
@@ -3044,21 +3044,21 @@
 +49-5707:Petershagen
 +49-571:Minden Westf
 +49-5721:Stadthagen
-+49-5722:Bückeburg
++49-5722:BÃ¼ckeburg
 +49-5723:Bad Nenndorf
 +49-5724:Obernkirchen
 +49-5725:Lindhorst b Stadthagen
 +49-5726:Wiedensahl
 +49-5731:Bad Oeynhausen
-+49-5732:Löhne
++49-5732:LÃ¶hne
 +49-5733:Vlotho
 +49-5734:Bergkirchen Westf
-+49-5741:Lübbecke
-+49-5742:Preußisch Oldendorf
++49-5741:LÃ¼bbecke
++49-5742:PreuÃŸisch Oldendorf
 +49-5743:Espelkamp-Gestringen
-+49-5744:Hüllhorst
++49-5744:HÃ¼llhorst
 +49-5745:Stemwede-Levern
-+49-5746:Rödinghausen
++49-5746:RÃ¶dinghausen
 +49-5751:Rinteln
 +49-5752:Auetal-Hattendorf
 +49-5753:Auetal-Bernsen
@@ -3075,13 +3075,13 @@
 +49-5771:Rahden Westf
 +49-5772:Espelkamp
 +49-5773:Stemwede-Wehdem
-+49-5774:Wagenfeld-Ströhen
++49-5774:Wagenfeld-StrÃ¶hen
 +49-5775:Diepenau
-+49-5776:Preußisch Ströhen
++49-5776:PreuÃŸisch StrÃ¶hen
 +49-5777:Diepenau-Essern
 +49-5802:Wrestedt
 +49-5803:Rosche
-+49-5804:Rätzlingen
++49-5804:RÃ¤tzlingen
 +49-5805:Oetzen
 +49-5806:Barum b Bad Bevensen
 +49-5807:Altenmedingen
@@ -3090,24 +3090,24 @@
 +49-5820:Suhlendorf
 +49-5821:Bad Bevensen
 +49-5822:Ebstorf
-+49-5823:Bienenbüttel
++49-5823:BienenbÃ¼ttel
 +49-5824:Bodenteich
 +49-5825:Wieren
 +49-5826:Hitzacker
-+49-5827:Unterlüß
++49-5827:UnterlÃ¼ÃŸ
 +49-5828:Himbergen
 +49-5829:Wriedel
 +49-5831:Wittingen
-+49-5832:Hankensbüttel
++49-5832:HankensbÃ¼ttel
 +49-5833:Brome
 +49-5834:Wittingen-Knesebeck
 +49-5835:Wahrenholz
 +49-5836:Wittingen-Radenbeck
 +49-5837:Sprakensehl
-+49-5838:Groß Oesingen
++49-5838:GroÃŸ Oesingen
 +49-5839:Wittingen-Ohrdorf
 +49-5840:Schnackenburg
-+49-5841:Lüchow Niedersachs
++49-5841:LÃ¼chow Niedersachs
 +49-5842:Schnega
 +49-5843:Wustrow
 +49-5844:Clenze
@@ -3135,29 +3135,29 @@
 +49-5875:Emmendorf
 +49-5882:Gorleben
 +49-5883:Lemgow
-+49-5901:Fürstenau b Bramsche
++49-5901:FÃ¼rstenau b Bramsche
 +49-5902:Freren
-+49-5903:Emsbüren
++49-5903:EmsbÃ¼ren
 +49-5904:Lengerich Emsl
 +49-5905:Beesten
-+49-5906:Lünne
++49-5906:LÃ¼nne
 +49-5907:Geeste
 +49-5908:Wietmarschen-Lohne
 +49-5909:Wettrup
 +49-591:Lingen (Ems)
 +49-5921:Nordhorn
 +49-5922:Bad Bentheim
-+49-5923:Schüttorf
++49-5923:SchÃ¼ttorf
 +49-5924:Bad Bentheim-Gildehaus
 +49-5925:Wietmarschen
 +49-5926:Engden
 +49-5931:Meppen
 +49-5932:Haren Ems
 +49-5933:Lathen
-+49-5934:Haren-Rütenbrock
-+49-5935:Twist-Schöninghsdorf
++49-5934:Haren-RÃ¼tenbrock
++49-5935:Twist-SchÃ¶ninghsdorf
 +49-5936:Twist
-+49-5937:Geeste-Groß Hesepe
++49-5937:Geeste-GroÃŸ Hesepe
 +49-5939:Sustrum
 +49-5941:Neuenhaus Dinkel
 +49-5942:Uelsen
@@ -3168,79 +3168,79 @@
 +49-5947:Laar Vechte
 +49-5948:Itterbeck
 +49-5951:Werlte
-+49-5952:Sögel
-+49-5953:Börger
++49-5952:SÃ¶gel
++49-5953:BÃ¶rger
 +49-5954:Lorup
 +49-5955:Esterwegen
 +49-5956:Rastdorf
 +49-5957:Lindern Oldb
-+49-5961:Haselünne
++49-5961:HaselÃ¼nne
 +49-5962:Herzlake
 +49-5963:Bawinkel
-+49-5964:Lähden
-+49-5965:Klein Berßen
++49-5964:LÃ¤hden
++49-5965:Klein BerÃŸen
 +49-5966:Meppen-Apeldorn
 +49-5971:Rheine
 +49-5973:Neuenkirchen Kr Steinfurt
 +49-5975:Rheine-Mesum
 +49-5976:Salzbergen
 +49-5977:Spelle
-+49-5978:Hörstel-Dreierwalde
-+49-6002:Ober-Mörlen
-+49-6003:Rosbach v d Höhe
++49-5978:HÃ¶rstel-Dreierwalde
++49-6002:Ober-MÃ¶rlen
++49-6003:Rosbach v d HÃ¶he
 +49-6004:Lich-Eberstadt
 +49-6007:Rosbach-Rodheim
 +49-6008:Echzell
-+49-6020:Heigenbrücken
++49-6020:HeigenbrÃ¼cken
 +49-6021:Aschaffenburg
 +49-6022:Obernburg a Main
 +49-6023:Alzenau Unterfr
-+49-6024:Schöllkrippen
-+49-6026:Großostheim
++49-6024:SchÃ¶llkrippen
++49-6026:GroÃŸostheim
 +49-6027:Stockstadt a Main
 +49-6028:Sulzbach a Main
-+49-6029:Mömbris
++49-6029:MÃ¶mbris
 +49-6031:Friedberg Hess
 +49-6032:Bad Nauheim
 +49-6033:Butzbach
-+49-6034:Wöllstadt
++49-6034:WÃ¶llstadt
 +49-6035:Reichelsheim Wetterau
-+49-6036:Wölfersheim
++49-6036:WÃ¶lfersheim
 +49-6039:Karben
 +49-6041:Glauburg
-+49-6042:Büdingen Hess
++49-6042:BÃ¼dingen Hess
 +49-6043:Nidda
 +49-6044:Schotten Hess
 +49-6045:Gedern
 +49-6046:Ortenberg Hess
 +49-6047:Altenstadt Hess
-+49-6048:Büdingen-Eckartshausen
++49-6048:BÃ¼dingen-Eckartshausen
 +49-6049:Kefenrod
-+49-6050:Biebergemünd
++49-6050:BiebergemÃ¼nd
 +49-6051:Gelnhausen
 +49-6052:Bad Orb
-+49-6053:Wächtersbach
++49-6053:WÃ¤chtersbach
 +49-6054:Birstein
 +49-6055:Freigericht
-+49-6056:Bad Soden-Salmünster
-+49-6057:Flörsbachtal
-+49-6058:Gründau
++49-6056:Bad Soden-SalmÃ¼nster
++49-6057:FlÃ¶rsbachtal
++49-6058:GrÃ¼ndau
 +49-6059:Jossgrund
 +49-6061:Michelstadt
 +49-6062:Erbach Odenw
-+49-6063:Bad König
++49-6063:Bad KÃ¶nig
 +49-6066:Michelstadt-Vielbrunn
 +49-6068:Beerfelden
 +49-6071:Dieburg
 +49-6073:Babenhausen Hess
-+49-6074:Rödermark
-+49-6078:Groß-Umstadt
++49-6074:RÃ¶dermark
++49-6078:GroÃŸ-Umstadt
 +49-6081:Usingen
 +49-6082:Niederreifenberg
 +49-6083:Weilrod
 +49-6084:Schmitten Taunus
 +49-6085:Waldsolms
-+49-6086:Grävenwiesbach
++49-6086:GrÃ¤venwiesbach
 +49-6087:Waldems
 +49-6092:Heimbuchenthal
 +49-6093:Laufach
@@ -3251,10 +3251,10 @@
 +49-6102:Neu-Isenburg
 +49-6103:Langen Hess
 +49-6104:Heusenstamm
-+49-6105:Mörfelden-Walldorf
++49-6105:MÃ¶rfelden-Walldorf
 +49-6106:Rodgau
 +49-6107:Kelsterbach
-+49-6108:Mühlheim a Main
++49-6108:MÃ¼hlheim a Main
 +49-6109:Frankfurt-Bergen-Enkheim
 +49-611:Wiesbaden
 +49-6120:Aarbergen
@@ -3274,14 +3274,14 @@
 +49-6136:Nieder-Olm
 +49-6138:Mommenheim
 +49-6139:Budenheim
-+49-6142:Rüsselsheim
++49-6142:RÃ¼sselsheim
 +49-6144:Bischofsheim a Main
-+49-6145:Flörsheim a Main
++49-6145:FlÃ¶rsheim a Main
 +49-6146:Hochheim a Main
 +49-6147:Trebur
 +49-6150:Weiterstadt
 +49-6151:Darmstadt
-+49-6152:Groß-Gerau
++49-6152:GroÃŸ-Gerau
 +49-6154:Ober-Ramstadt
 +49-6155:Griesheim Hess
 +49-6157:Pfungstadt
@@ -3289,23 +3289,23 @@
 +49-6159:Messel
 +49-6161:Brensbach
 +49-6162:Reinheim Odenw
-+49-6163:Höchst i Odenw
++49-6163:HÃ¶chst i Odenw
 +49-6164:Reichelsheim Odenw
 +49-6165:Breuberg
 +49-6166:Fischbachtal
 +49-6167:Modautal
 +49-6171:Oberursel Taunus
-+49-6172:Bad Homburg v d Höhe
++49-6172:Bad Homburg v d HÃ¶he
 +49-6173:Kronberg i Taunus
-+49-6174:Königstein i Taunus
++49-6174:KÃ¶nigstein i Taunus
 +49-6175:Friedrichsdorf Taunus
 +49-6181:Hanau
 +49-6182:Seligenstadt
 +49-6183:Erlensee
 +49-6184:Langenselbold
 +49-6185:Hammersbach Hess
-+49-6186:Großkrotzenburg
-+49-6187:Schöneck Hess
++49-6186:GroÃŸkrotzenburg
++49-6187:SchÃ¶neck Hess
 +49-6188:Kahl a Main
 +49-6190:Hattersheim a Main
 +49-6192:Hofheim a Taunus
@@ -3319,7 +3319,7 @@
 +49-6205:Hockenheim
 +49-6206:Lampertheim
 +49-6207:Wald-Michelbach
-+49-6209:Mörlenbach
++49-6209:MÃ¶rlenbach
 +49-621:Mannheim, Ludwigshafen
 +49-621-1:Mannheim
 +49-621-2:Mannheim
@@ -3342,11 +3342,11 @@
 +49-6220:Wilhelmsfeld
 +49-6221:Heidelberg
 +49-6222:Wiesloch
-+49-6223:Neckargemünd
++49-6223:NeckargemÃ¼nd
 +49-6224:Sandhausen Baden
 +49-6226:Meckesheim
 +49-6227:Walldorf Baden
-+49-6228:Schönau Odenw
++49-6228:SchÃ¶nau Odenw
 +49-6229:Neckarsteinach
 +49-6231:Hochdorf-Assenheim
 +49-6232:Speyer
@@ -3367,10 +3367,10 @@
 +49-6249:Guntersblum
 +49-6251:Bensheim
 +49-6252:Heppenheim Bergstr
-+49-6253:Fürth Odenw
++49-6253:FÃ¼rth Odenw
 +49-6254:Lautertal Odenw
 +49-6255:Lindenfels
-+49-6256:Lampertheim-Hüttenfeld
++49-6256:Lampertheim-HÃ¼ttenfeld
 +49-6257:Seeheim-Jugenheim
 +49-6258:Gernsheim
 +49-6261:Mosbach Baden
@@ -3378,21 +3378,21 @@
 +49-6263:Neckargerach
 +49-6264:Neudenau
 +49-6265:Billigheim Baden
-+49-6266:Haßmersheim
++49-6266:HaÃŸmersheim
 +49-6267:Fahrenbach Baden
-+49-6268:Hüffenhardt
-+49-6269:Gundelsheim Württ
++49-6268:HÃ¼ffenhardt
++49-6269:Gundelsheim WÃ¼rtt
 +49-6271:Eberbach Baden
 +49-6272:Hirschhorn Neckar
 +49-6274:Waldbrunn Odenw
 +49-6275:Rothenberg Odenw
 +49-6276:Hesseneck
 +49-6281:Buchen Odenw
-+49-6282:Walldürn
++49-6282:WalldÃ¼rn
 +49-6283:Hardheim Odenw
 +49-6284:Mudau
-+49-6285:Walldürn-Altheim
-+49-6286:Walldürn-Rippberg
++49-6285:WalldÃ¼rn-Altheim
++49-6286:WalldÃ¼rn-Rippberg
 +49-6287:Limbach Baden
 +49-6291:Adelsheim
 +49-6292:Seckach
@@ -3401,7 +3401,7 @@
 +49-6295:Rosenberg Baden
 +49-6296:Ahorn Baden
 +49-6297:Ravenstein Baden
-+49-6298:Möckmühl
++49-6298:MÃ¶ckmÃ¼hl
 +49-6301:Otterbach Pfalz
 +49-6302:Winnweiler
 +49-6303:Enkenbach-Alsenborn
@@ -3409,27 +3409,27 @@
 +49-6305:Hochspeyer
 +49-6306:Trippstadt
 +49-6307:Schopp
-+49-6308:Olsbrücken
++49-6308:OlsbrÃ¼cken
 +49-631:Kaiserslautern
-+49-6321:Neustadt a d Weinstraße
-+49-6322:Bad Dürkheim
++49-6321:Neustadt a d WeinstraÃŸe
++49-6322:Bad DÃ¼rkheim
 +49-6323:Edenkoben
-+49-6324:Haßloch
++49-6324:HaÃŸloch
 +49-6325:Lambrecht Pfalz
 +49-6326:Deidesheim
 +49-6327:Neustadt-Lachen
 +49-6328:Elmstein
 +49-6329:Weidenthal Pfalz
 +49-6331:Pirmasens
-+49-6332:Zweibrücken
++49-6332:ZweibrÃ¼cken
 +49-6333:Waldfischbach-Burgalben
-+49-6334:Thaleischweiler-Fröschen
++49-6334:Thaleischweiler-FrÃ¶schen
 +49-6335:Trulben
 +49-6336:Dellfeld
-+49-6337:Großbundenbach
++49-6337:GroÃŸbundenbach
 +49-6338:Hornbach Pfalz
-+49-6339:Großsteinhausen
-+49-6340:Wörth-Schaidt
++49-6339:GroÃŸsteinhausen
++49-6340:WÃ¶rth-Schaidt
 +49-6341:Landau i d Pfalz
 +49-6342:Schweigen-Rechtenbach
 +49-6343:Bad Bergzabern
@@ -3444,21 +3444,21 @@
 +49-6353:Freinsheim
 +49-6355:Albisheim Pfrimm
 +49-6356:Carlsberg Pfalz
-+49-6357:Standenbühl
++49-6357:StandenbÃ¼hl
 +49-6358:Kriegsfeld
-+49-6359:Grünstadt
++49-6359:GrÃ¼nstadt
 +49-6361:Rockenhausen
 +49-6362:Alsenz
 +49-6363:Niederkirchen
-+49-6364:Nußbach Pfalz
++49-6364:NuÃŸbach Pfalz
 +49-6371:Landstuhl
-+49-6372:Bruchmühlbach-Miesau
-+49-6373:Schönenberg-Kübelberg
++49-6372:BruchmÃ¼hlbach-Miesau
++49-6373:SchÃ¶nenberg-KÃ¼belberg
 +49-6374:Weilerbach
 +49-6375:Wallhalben
 +49-6381:Kusel
 +49-6382:Lauterecken
-+49-6383:Glan-Münchweiler
++49-6383:Glan-MÃ¼nchweiler
 +49-6384:Konken
 +49-6385:Reichenbach-Steegen
 +49-6386:Altenkirchen Pfalz
@@ -3467,12 +3467,12 @@
 +49-6392:Hauenstein Pfalz
 +49-6393:Fischbach b Dahn
 +49-6394:Bundenthal
-+49-6395:Münchweiler a d Rodalb
++49-6395:MÃ¼nchweiler a d Rodalb
 +49-6396:Hinterweidenthal
 +49-6397:Leimen Pfalz
 +49-6398:Vorderweidenthal
-+49-6400:Mücke
-+49-6401:Grünberg Hess
++49-6400:MÃ¼cke
++49-6401:GrÃ¼nberg Hess
 +49-6402:Hungen
 +49-6403:Linden Hess
 +49-6404:Lich Hess
@@ -3481,7 +3481,7 @@
 +49-6407:Rabenau
 +49-6408:Buseck
 +49-6409:Biebertal
-+49-641:Gießen
++49-641:GieÃŸen
 +49-6420:Lahntal
 +49-6421:Marburg
 +49-6422:Kirchhain
@@ -3489,30 +3489,30 @@
 +49-6424:Ebsdorfergrund
 +49-6425:Rauschenberg Hess
 +49-6426:Fronhausen
-+49-6427:Cölbe-Schönstadt
++49-6427:CÃ¶lbe-SchÃ¶nstadt
 +49-6428:Stadtallendorf
 +49-6429:Schweinsberg Hessen
-+49-6430:Hahnstätten
++49-6430:HahnstÃ¤tten
 +49-6431:Limburg a d Lahn
 +49-6432:Diez
 +49-6433:Hadamar
 +49-6434:Bad Camberg
 +49-6435:Wallmerod
 +49-6436:Dornburg
-+49-6438:Hünfelden
++49-6438:HÃ¼nfelden
 +49-6439:Holzappel
-+49-6440:Kölschhausen
++49-6440:KÃ¶lschhausen
 +49-6441:Wetzlar
 +49-6442:Braunfels
 +49-6443:Ehringshausen Dill
 +49-6444:Bischoffen
-+49-6445:Schöffengrund
++49-6445:SchÃ¶ffengrund
 +49-6446:Hohenahr
-+49-6447:Langgöns-Niederkleen
++49-6447:LanggÃ¶ns-Niederkleen
 +49-6449:Ehringshausen
 +49-6451:Frankenberg Eder
 +49-6452:Battenberg Eder
-+49-6453:Gemünden Wohra
++49-6453:GemÃ¼nden Wohra
 +49-6454:Lichtenfels-Sachsenberg
 +49-6455:Frankenau Hess
 +49-6456:Haina Kloster
@@ -3520,16 +3520,16 @@
 +49-6458:Rosenthal Hess
 +49-6461:Biedenkopf
 +49-6462:Gladenbach
-+49-6464:Angelburg-Gönnern
++49-6464:Angelburg-GÃ¶nnern
 +49-6465:Breidenbach b Biedenkopf
 +49-6466:Dautphetal-Friedensdorf
 +49-6467:Hatzfeld Eder
 +49-6468:Dautphetal-Mornshausen
 +49-6471:Weilburg
-+49-6472:Weilmünster
++49-6472:WeilmÃ¼nster
 +49-6473:Leun
 +49-6474:Villmar
-+49-6475:Weilmünster-Wolfenhausen
++49-6475:WeilmÃ¼nster-Wolfenhausen
 +49-6476:Mengerskirchen
 +49-6477:Greifenstein-Nenderoth
 +49-6478:Greifenstein-Ulm
@@ -3548,7 +3548,7 @@
 +49-6506:Welschbillig
 +49-6507:Neumagen-Dhron
 +49-6508:Hetzerath Mosel
-+49-6509:Büdlich
++49-6509:BÃ¼dlich
 +49-651:Trier
 +49-6522:Mettendorf
 +49-6523:Holsthum
@@ -3558,31 +3558,31 @@
 +49-6527:Oberweis
 +49-6531:Bernkastel-Kues
 +49-6532:Zeltingen-Rachtig
-+49-6533:Morbach Hunsrück
-+49-6534:Mülheim Mosel
++49-6533:Morbach HunsrÃ¼ck
++49-6534:MÃ¼lheim Mosel
 +49-6535:Osann-Monzel
 +49-6536:Kleinich
 +49-6541:Traben-Trarbach
 +49-6542:Bullay
-+49-6543:Büchenbeuren
++49-6543:BÃ¼chenbeuren
 +49-6544:Rhaunen
 +49-6545:Blankenrath
 +49-6550:Irrhausen
-+49-6551:Prüm
++49-6551:PrÃ¼m
 +49-6552:Olzheim
-+49-6553:Schönecken
++49-6553:SchÃ¶necken
 +49-6554:Waxweiler
 +49-6555:Bleialf
 +49-6556:Pronsfeld
 +49-6557:Hallschlag
-+49-6558:Büdesheim Eifel
++49-6558:BÃ¼desheim Eifel
 +49-6559:Leidenborn
 +49-6561:Bitburg
 +49-6562:Speicher
 +49-6563:Kyllburg
 +49-6564:Neuerburg Eifel
 +49-6565:Dudeldorf
-+49-6566:Körperich
++49-6566:KÃ¶rperich
 +49-6567:Oberkail
 +49-6568:Wolsfeld
 +49-6569:Bickendorf
@@ -3607,8 +3607,8 @@
 +49-6593:Hillesheim Eifel
 +49-6594:Birresborn
 +49-6595:Dockweiler
-+49-6596:Üdersdorf
-+49-6597:Jünkerath
++49-6596:Ãœdersdorf
++49-6597:JÃ¼nkerath
 +49-6599:Weidenbach b Gerolstein
 +49-661:Fulda
 +49-6620:Philippsthal Werra
@@ -3624,7 +3624,7 @@
 +49-6630:Schwalmtal-Storndorf
 +49-6631:Alsfeld
 +49-6633:Homberg Ohm
-+49-6634:Gemünden Felda
++49-6634:GemÃ¼nden Felda
 +49-6635:Kirtorf
 +49-6636:Romrod
 +49-6637:Feldatal
@@ -3640,17 +3640,17 @@
 +49-6648:Bad Salzschlirf
 +49-6650:Hosenfeld
 +49-6651:Rasdorf
-+49-6652:Hünfeld
++49-6652:HÃ¼nfeld
 +49-6653:Burghaun
-+49-6654:Gersfeld Rhön
++49-6654:Gersfeld RhÃ¶n
 +49-6655:Neuhof Kr Fulda
 +49-6656:Ebersburg
 +49-6657:Hofbieber
 +49-6658:Poppenhausen Wasserkuppe
 +49-6659:Eichenzell
-+49-6660:Steinau-Marjoß
-+49-6661:Schlüchtern
-+49-6663:Steinau a d Straße
++49-6660:Steinau-MarjoÃŸ
++49-6661:SchlÃ¼chtern
++49-6663:Steinau a d StraÃŸe
 +49-6664:Sinntal-Sterbfritz
 +49-6665:Sinntal-Altengronau
 +49-6666:Freiensteinau
@@ -3664,42 +3664,42 @@
 +49-6675:Breitenbach a Herzberg
 +49-6676:Hohenroda
 +49-6677:Neuenstein Hess
-+49-6678:Wildeck-Hönebach
++49-6678:Wildeck-HÃ¶nebach
 +49-6681:Hilders
-+49-6682:Tann Rhön
++49-6682:Tann RhÃ¶n
 +49-6683:Ehrenberg
 +49-6684:Hofbieber-Schwarzbach
 +49-6691:Schwalmstadt
 +49-6692:Neustadt Hess
 +49-6693:Neuental
-+49-6694:Neukirchen Knüll
++49-6694:Neukirchen KnÃ¼ll
 +49-6695:Jesberg
 +49-6696:Gilserberg
 +49-6697:Willingshausen
 +49-6698:Schrecksbach
 +49-6701:Sprendlingen Rheinhess
-+49-6703:Wöllstein Rheinhess
++49-6703:WÃ¶llstein Rheinhess
 +49-6704:Langenlonsheim
 +49-6706:Wallhausen Nahe
 +49-6707:Windesheim
-+49-6708:Bad Münster-Ebernburg
-+49-6709:Fürfeld Kr Bad Kreuznach
++49-6708:Bad MÃ¼nster-Ebernburg
++49-6709:FÃ¼rfeld Kr Bad Kreuznach
 +49-671:Bad Kreuznach
 +49-6721:Bingen a Rhein
-+49-6722:Rüdesheim a Rhein
++49-6722:RÃ¼desheim a Rhein
 +49-6723:Oestrich-Winkel
-+49-6724:Stromberg Hunsrück
++49-6724:Stromberg HunsrÃ¼ck
 +49-6725:Gau-Algesheim
 +49-6726:Lorch Rheingau
 +49-6727:Gensingen
 +49-6728:Ober-Hilbersheim
 +49-6731:Alzey
-+49-6732:Wörrstadt
++49-6732:WÃ¶rrstadt
 +49-6733:Gau-Odernheim
 +49-6734:Flonheim
 +49-6735:Eppelsheim
 +49-6736:Bechenheim
-+49-6737:Köngernheim
++49-6737:KÃ¶ngernheim
 +49-6741:St Goar
 +49-6742:Boppard
 +49-6743:Bacharach
@@ -3714,18 +3714,18 @@
 +49-6755:Odernheim a Glan
 +49-6756:Winterbach, Soonwald
 +49-6757:Becherbach b Kirn
-+49-6758:Waldböckelheim
-+49-6761:Simmern Hunsrück
++49-6758:WaldbÃ¶ckelheim
++49-6761:Simmern HunsrÃ¼ck
 +49-6762:Kastellaun
-+49-6763:Kirchberg Hunsrück
-+49-6764:Rheinböllen
-+49-6765:Gemünden Hunsrück
++49-6763:Kirchberg HunsrÃ¼ck
++49-6764:RheinbÃ¶llen
++49-6765:GemÃ¼nden HunsrÃ¼ck
 +49-6766:Kisselbach
 +49-6771:St Goarshausen
-+49-6772:Nastätten
++49-6772:NastÃ¤tten
 +49-6773:Kamp-Bornhofen
 +49-6774:Kaub
-+49-6775:Strüth Taunus
++49-6775:StrÃ¼th Taunus
 +49-6776:Dachsenhausen
 +49-6781:Idar-Oberstein
 +49-6782:Birkenfeld Nahe
@@ -3736,13 +3736,13 @@
 +49-6787:Niederbrombach
 +49-6788:Sien
 +49-6789:Heimbach Nahe
-+49-6802:Völklingen-Lauterbach
++49-6802:VÃ¶lklingen-Lauterbach
 +49-6803:Mandelbachtal-Ommersheim
 +49-6804:Mandelbachtal
 +49-6805:Kleinblittersdorf
 +49-6806:Heusweiler
-+49-6809:Großrosseln
-+49-681:Saarbrücken
++49-6809:GroÃŸrosseln
++49-681:SaarbrÃ¼cken
 +49-6821:Neunkirchen Saar
 +49-6824:Ottweiler
 +49-6825:Illingen Saar
@@ -3753,14 +3753,14 @@
 +49-6833:Rehlingen-Siersburg
 +49-6834:Bous
 +49-6835:Beckingen
-+49-6836:Überherrn
++49-6836:Ãœberherrn
 +49-6837:Wallerfangen
 +49-6838:Saarwellingen
 +49-6841:Homburg Saar
 +49-6842:Blieskastel
 +49-6843:Gersheim
 +49-6844:Blieskastel-Altheim
-+49-6848:Homburg-Einöd
++49-6848:Homburg-EinÃ¶d
 +49-6849:Kirkel
 +49-6851:St Wendel
 +49-6852:Nohfelden
@@ -3769,13 +3769,13 @@
 +49-6855:Freisen
 +49-6856:St Wendel-Niederkirchen
 +49-6857:Namborn
-+49-6858:Ottweiler-Fürth
++49-6858:Ottweiler-FÃ¼rth
 +49-6861:Merzig
 +49-6864:Mettlach
 +49-6865:Mettlach-Orscholz
 +49-6866:Perl-Nennig
 +49-6867:Perl
-+49-6868:Mettlach-Tünsdorf
++49-6868:Mettlach-TÃ¼nsdorf
 +49-6869:Merzig-Silwingen
 +49-6871:Wadern
 +49-6872:Losheim Saar
@@ -3786,55 +3786,55 @@
 +49-6881:Lebach
 +49-6887:Schmelz Saar
 +49-6888:Lebach-Steinbach
-+49-6893:Saarbrücken-Ensheim
++49-6893:SaarbrÃ¼cken-Ensheim
 +49-6894:St Ingbert
 +49-6897:Sulzbach Saar
-+49-6898:Völklingen
++49-6898:VÃ¶lklingen
 +49-69:Frankfurt a Main
 +49-7021:Kirchheim Unter Teck
-+49-7022:Nürtingen
++49-7022:NÃ¼rtingen
 +49-7023:Weilheim a d Teck
 +49-7024:Wendlingen a Neckar
 +49-7025:Neuffen
 +49-7026:Lenningen
-+49-7031:Böblingen
++49-7031:BÃ¶blingen
 +49-7032:Herrenberg
 +49-7033:Weil Der Stadt
 +49-7034:Ehningen
-+49-7041:Mühlacker
++49-7041:MÃ¼hlacker
 +49-7042:Vaihingen a d Enz
 +49-7043:Maulbronn
-+49-7044:Mönsheim
++49-7044:MÃ¶nsheim
 +49-7045:Oberderdingen
 +49-7046:Zaberfeld
 +49-7051:Calw
 +49-7052:Bad Liebenzell
 +49-7053:Bad Teinach-Zavelstein
-+49-7054:Wildberg Württ
++49-7054:Wildberg WÃ¼rtt
 +49-7055:Neuweiler Kr Calw
 +49-7056:Gechingen
-+49-7062:Beilstein Württ
++49-7062:Beilstein WÃ¼rtt
 +49-7063:Bad Wimpfen
 +49-7066:Bad Rappenau-Bonfeld
-+49-7071:Tübingen
++49-7071:TÃ¼bingen
 +49-7072:Gomaringen
 +49-7073:Ammerbuch
 +49-7081:Wildbad i Schwarzw
-+49-7082:Neuenbürg Württ
++49-7082:NeuenbÃ¼rg WÃ¼rtt
 +49-7083:Bad Herrenalb
-+49-7084:Schömberg b Neuenbürg
-+49-7085:Enzklösterle
++49-7084:SchÃ¶mberg b NeuenbÃ¼rg
++49-7085:EnzklÃ¶sterle
 +49-711:Stuttgart
 +49-7121:Reutlingen
-+49-7122:St Johann Württ
-+49-7123:Metzingen Württ
++49-7122:St Johann WÃ¼rtt
++49-7123:Metzingen WÃ¼rtt
 +49-7124:Trochtelfingen Hohenz
 +49-7125:Bad Urach
 +49-7126:Burladingen-Melchingen
 +49-7127:Neckartenzlingen
-+49-7128:Sonnenbühl
-+49-7129:Lichtenstein Württ
-+49-7130:Löwenstein Württ
++49-7128:SonnenbÃ¼hl
++49-7129:Lichtenstein WÃ¼rtt
++49-7130:LÃ¶wenstein WÃ¼rtt
 +49-7131:Heilbronn Neckar
 +49-7132:Neckarsulm
 +49-7133:Lauffen a Neckar
@@ -3843,38 +3843,38 @@
 +49-7136:Bad Friedrichshall
 +49-7138:Schwaigern
 +49-7139:Neuenstadt a Kocher
-+49-7141:Ludwigsburg Württ
++49-7141:Ludwigsburg WÃ¼rtt
 +49-7142:Bietigheim-Bissingen
 +49-7143:Besigheim
 +49-7144:Marbach a Neckar
-+49-7145:Markgröningen
++49-7145:MarkgrÃ¶ningen
 +49-7146:Remseck a Neckar
-+49-7147:Sachsenheim Württ
-+49-7148:Großbottwar
-+49-7150:Korntal-Münchingen
++49-7147:Sachsenheim WÃ¼rtt
++49-7148:GroÃŸbottwar
++49-7150:Korntal-MÃ¼nchingen
 +49-7151:Waiblingen
-+49-7152:Leonberg Württ
++49-7152:Leonberg WÃ¼rtt
 +49-7153:Plochingen
 +49-7154:Kornwestheim
 +49-7156:Ditzingen
 +49-7157:Waldenbuch
 +49-7158:Neuhausen Auf Den Fildern
 +49-7159:Renningen
-+49-7161:Göppingen
-+49-7162:Süßen
++49-7161:GÃ¶ppingen
++49-7162:SÃ¼ÃŸen
 +49-7163:Ebersbach a d Fils
-+49-7164:Boll Kr Göppingen
-+49-7165:Göppingen-Hohenstaufen
++49-7164:Boll Kr GÃ¶ppingen
++49-7165:GÃ¶ppingen-Hohenstaufen
 +49-7166:Adelberg
-+49-7171:Schwäbisch Gmünd
-+49-7172:Lorch Württ
++49-7171:SchwÃ¤bisch GmÃ¼nd
++49-7172:Lorch WÃ¼rtt
 +49-7173:Heubach
-+49-7174:Mögglingen
++49-7174:MÃ¶gglingen
 +49-7175:Leinzell
 +49-7176:Spraitbach
-+49-7181:Schorndorf Württ
++49-7181:Schorndorf WÃ¼rtt
 +49-7182:Welzheim
-+49-7183:Rudersberg Württ
++49-7183:Rudersberg WÃ¼rtt
 +49-7184:Kaisersbach
 +49-7191:Backnang
 +49-7192:Murrhardt
@@ -3883,21 +3883,21 @@
 +49-7195:Winnenden
 +49-7202:Karlsbad
 +49-7203:Walzbachtal
-+49-7204:Malsch-Völkersbach
++49-7204:Malsch-VÃ¶lkersbach
 +49-721:Karlsruhe
 +49-7220:Forbach-Hundsbach
 +49-7221:Baden-Baden
 +49-7222:Rastatt
-+49-7223:Bühl Baden
++49-7223:BÃ¼hl Baden
 +49-7224:Gernsbach
 +49-7225:Gaggenau
-+49-7226:Bühl-Sand
++49-7226:BÃ¼hl-Sand
 +49-7227:Lichtenau Baden
 +49-7228:Forbach
 +49-7229:Iffezheim
 +49-7231:Pforzheim
-+49-7232:Königsbach-Stein
-+49-7233:Niefern-Öschelbronn
++49-7232:KÃ¶nigsbach-Stein
++49-7233:Niefern-Ã–schelbronn
 +49-7234:Tiefenbronn
 +49-7235:Unterreichenbach Kr Calw
 +49-7236:Keltern
@@ -3914,13 +3914,13 @@
 +49-7250:Kraichtal
 +49-7251:Bruchsal
 +49-7252:Bretten
-+49-7253:Bad Schönborn
-+49-7254:Waghäusel
++49-7253:Bad SchÃ¶nborn
++49-7254:WaghÃ¤usel
 +49-7255:Graben-Neudorf
 +49-7256:Philippsburg
 +49-7257:Bruchsal-Untergrombach
 +49-7258:Oberderdingen-Flehingen
-+49-7259:Östringen-Odenheim
++49-7259:Ã–stringen-Odenheim
 +49-7260:Sinsheim-Hilsbach
 +49-7261:Sinsheim
 +49-7262:Eppingen
@@ -3931,22 +3931,22 @@
 +49-7267:Gemmingen
 +49-7268:Bad Rappenau-Obergimpern
 +49-7269:Sulzfeld
-+49-7271:Wörth a Rhein
-+49-7272:Rülzheim
++49-7271:WÃ¶rth a Rhein
++49-7272:RÃ¼lzheim
 +49-7273:Hagenbach Pfalz
 +49-7274:Germersheim
 +49-7275:Kandel
 +49-7276:Herxheim b Landau
-+49-7277:Wörth-Büchelberg
++49-7277:WÃ¶rth-BÃ¼chelberg
 +49-7300:Roggenburg
 +49-7302:Pfaffenhofen a d Roth
 +49-7303:Illertissen
-+49-7304:Blaustein Württ
++49-7304:Blaustein WÃ¼rtt
 +49-7305:Erbach Donau
-+49-7306:Vöhringen Iller
++49-7306:VÃ¶hringen Iller
 +49-7307:Senden Iller
 +49-7308:Nersingen
-+49-7309:Weißenhorn
++49-7309:WeiÃŸenhorn
 +49-731:Ulm Donau
 +49-7321:Heidenheim a d Brenz
 +49-7322:Giengen a d Brenz
@@ -3955,7 +3955,7 @@
 +49-7325:Sontheim a d Brenz
 +49-7326:Neresheim
 +49-7327:Dischingen
-+49-7328:Königsbronn
++49-7328:KÃ¶nigsbronn
 +49-7329:Steinheim a Albuch
 +49-7331:Geislingen a d Steige
 +49-7332:Lauterstein
@@ -3967,37 +3967,37 @@
 +49-7340:Neenstetten
 +49-7343:Buch b Illertissen
 +49-7344:Blaubeuren
-+49-7345:Langenau Württ
++49-7345:Langenau WÃ¼rtt
 +49-7346:Illerkirchberg
 +49-7347:Dietenheim
 +49-7348:Beimerstetten
-+49-7351:Biberach a d Riß
++49-7351:Biberach a d RiÃŸ
 +49-7352:Ochsenhausen
 +49-7353:Schwendi
 +49-7354:Erolzheim
-+49-7355:Hochdorf Riß
++49-7355:Hochdorf RiÃŸ
 +49-7356:Schemmerhofen
 +49-7357:Attenweiler
-+49-7358:Eberhardzell-Füramos
++49-7358:Eberhardzell-FÃ¼ramos
 +49-7361:Aalen
 +49-7362:Bopfingen
 +49-7363:Lauchheim
 +49-7364:Oberkochen
-+49-7365:Essingen Württ
-+49-7366:Abtsgmünd
++49-7365:Essingen WÃ¼rtt
++49-7366:AbtsgmÃ¼nd
 +49-7367:Aalen-Ebnat
-+49-7371:Riedlingen Württ
++49-7371:Riedlingen WÃ¼rtt
 +49-7373:Zwiefalten
 +49-7374:Uttenweiler
 +49-7375:Obermarchtal
 +49-7376:Langenenslingen
-+49-7381:Münsingen
-+49-7382:Römerstein
-+49-7383:Münsingen-Buttenhausen
-+49-7384:Schelklingen-Hütten
++49-7381:MÃ¼nsingen
++49-7382:RÃ¶merstein
++49-7383:MÃ¼nsingen-Buttenhausen
++49-7384:Schelklingen-HÃ¼tten
 +49-7385:Gomadingen
 +49-7386:Hayingen
-+49-7387:Hohenstein Württ
++49-7387:Hohenstein WÃ¼rtt
 +49-7388:Pfronstetten
 +49-7389:Heroldstatt
 +49-7391:Ehingen Donau
@@ -4009,13 +4009,13 @@
 +49-7403:Dunningen
 +49-7404:Epfendorf
 +49-741:Rottweil
-+49-7420:Deißlingen
++49-7420:DeiÃŸlingen
 +49-7422:Schramberg
 +49-7423:Oberndorf a Neckar
 +49-7424:Spaichingen
 +49-7425:Trossingen
 +49-7426:Gosheim
-+49-7427:Schömberg b Balingen
++49-7427:SchÃ¶mberg b Balingen
 +49-7428:Rosenfeld
 +49-7429:Egesheim
 +49-7431:Albstadt-Ebingen
@@ -4023,20 +4023,20 @@
 +49-7433:Balingen
 +49-7434:Winterlingen
 +49-7435:Albstadt-Laufen
-+49-7436:Meßstetten-Oberdigisheim
++49-7436:MeÃŸstetten-Oberdigisheim
 +49-7440:Bad Rippoldsau
 +49-7441:Freudenstadt
 +49-7442:Baiersbronn
 +49-7443:Dornstetten
 +49-7444:Alpirsbach
 +49-7445:Pfalzgrafenweiler
-+49-7446:Loßburg
++49-7446:LoÃŸburg
 +49-7447:Baiersbronn-Schwarzenberg
 +49-7448:Seewald
 +49-7449:Baiersbronn-Obertal
 +49-7451:Horb a Neckar
 +49-7452:Nagold
-+49-7453:Altensteig Württ
++49-7453:Altensteig WÃ¼rtt
 +49-7454:Sulz a Neckar
 +49-7455:Dornhan
 +49-7456:Haiterbach
@@ -4045,37 +4045,37 @@
 +49-7459:Nagold-Hochdorf
 +49-7461:Tuttlingen
 +49-7462:Immendingen
-+49-7463:Mühlheim a d Donau
++49-7463:MÃ¼hlheim a d Donau
 +49-7464:Talheim Kr Tuttlingen
 +49-7465:Emmingen-Liptingen
 +49-7466:Beuron
 +49-7467:Neuhausen Ob Eck
 +49-7471:Hechingen
 +49-7472:Rottenburg a Neckar
-+49-7473:Mössingen
++49-7473:MÃ¶ssingen
 +49-7474:Haigerloch
 +49-7475:Burladingen
 +49-7476:Bisingen
 +49-7477:Jungingen b Hechingen
 +49-7478:Hirrlingen
 +49-7482:Horb-Dettingen
-+49-7483:Horb-Mühringen
++49-7483:Horb-MÃ¼hringen
 +49-7484:Simmersfeld
 +49-7485:Empfingen
 +49-7486:Horb-Altheim
 +49-7502:Wolpertswende
-+49-7503:Wilhelmsdorf Württ
++49-7503:Wilhelmsdorf WÃ¼rtt
 +49-7504:Horgenzell
 +49-7505:Fronreute
 +49-7506:Wangen-Leupolz
 +49-751:Ravensburg
 +49-7520:Bodnegg
-+49-7522:Wangen i Allgäu
++49-7522:Wangen i AllgÃ¤u
 +49-7524:Bad Waldsee
 +49-7525:Aulendorf
 +49-7527:Wolfegg
 +49-7528:Neukirch b Tettnang
-+49-7529:Waldburg Württ
++49-7529:Waldburg WÃ¼rtt
 +49-7531:Konstanz
 +49-7532:Meersburg
 +49-7533:Allensbach
@@ -4086,29 +4086,29 @@
 +49-7544:Markdorf
 +49-7545:Immenstaad a Bodensee
 +49-7546:Oberteuringen
-+49-7551:Überlingen Bodensee
++49-7551:Ãœberlingen Bodensee
 +49-7552:Pfullendorf
 +49-7553:Salem Baden
 +49-7554:Heiligenberg Baden
 +49-7555:Deggenhausertal
-+49-7556:Uhldingen-Mühlhofen
-+49-7557:Herdwangen-Schönach
++49-7556:Uhldingen-MÃ¼hlhofen
++49-7557:Herdwangen-SchÃ¶nach
 +49-7558:Illmensee
-+49-7561:Leutkirch i Allgäu
-+49-7562:Isny i Allgäu
-+49-7563:Kißlegg
++49-7561:Leutkirch i AllgÃ¤u
++49-7562:Isny i AllgÃ¤u
++49-7563:KiÃŸlegg
 +49-7564:Bad Wurzach
 +49-7565:Aichstetten Kr Ravensburg
-+49-7566:Argenbühl
++49-7566:ArgenbÃ¼hl
 +49-7567:Leutkirch-Friesenhofen
 +49-7568:Bad Wurzach-Hauerz
 +49-7569:Isny-Eisenbach
 +49-7570:Sigmaringen-Gutenstein
 +49-7571:Sigmaringen
-+49-7572:Mengen Württ
++49-7572:Mengen WÃ¼rtt
 +49-7573:Stetten a Kalten Markt
 +49-7574:Gammertingen
-+49-7575:Meßkirch
++49-7575:MeÃŸkirch
 +49-7576:Krauchenwies
 +49-7577:Veringenstadt
 +49-7578:Wald Hohenz
@@ -4119,25 +4119,25 @@
 +49-7584:Altshausen
 +49-7585:Ostrach
 +49-7586:Herbertingen
-+49-7587:Hoßkirch
++49-7587:HoÃŸkirch
 +49-7602:Oberried Breisgau
 +49-761:Freiburg i Breisgau
 +49-7620:Schopfheim-Gersbach
-+49-7621:Lörrach
++49-7621:LÃ¶rrach
 +49-7622:Schopfheim
 +49-7623:Rheinfelden Baden
 +49-7624:Grenzach-Wyhlen
 +49-7625:Zell i Wiesental
 +49-7626:Kandern
-+49-7627:Steinen Kr Lörrach
++49-7627:Steinen Kr LÃ¶rrach
 +49-7628:Efringen-Kirchen
 +49-7629:Tegernau Baden
-+49-7631:Müllheim Baden
++49-7631:MÃ¼llheim Baden
 +49-7632:Badenweiler
 +49-7633:Staufen Breisgau
 +49-7634:Sulzburg
 +49-7635:Schliengen
-+49-7636:Münstertal Schwarzw
++49-7636:MÃ¼nstertal Schwarzw
 +49-7641:Emmendingen
 +49-7642:Endingen Kaiserstuhl
 +49-7643:Herbolzheim Breisgau
@@ -4147,8 +4147,8 @@
 +49-7651:Titisee-Neustadt
 +49-7652:Hinterzarten
 +49-7653:Lenzkirch
-+49-7654:Löffingen
-+49-7655:Feldberg-Altglashütten
++49-7654:LÃ¶ffingen
++49-7655:Feldberg-AltglashÃ¼tten
 +49-7656:Schluchsee
 +49-7657:Eisenbach Hochschwarzw
 +49-7660:St Peter Schwarzw
@@ -4160,10 +4160,10 @@
 +49-7666:Denzlingen
 +49-7667:Breisach a Rhein
 +49-7668:Ihringen
-+49-7669:St Märgen
++49-7669:St MÃ¤rgen
 +49-7671:Todtnau
 +49-7672:St Blasien
-+49-7673:Schönau i Schwarzw
++49-7673:SchÃ¶nau i Schwarzw
 +49-7674:Todtmoos
 +49-7675:Bernau Baden
 +49-7676:Feldberg Schwarzw
@@ -4177,7 +4177,7 @@
 +49-7704:Geisingen Baden
 +49-7705:Wolterdingen Schwarzw
 +49-7706:Oberbaldingen
-+49-7707:Bräunlingen
++49-7707:BrÃ¤unlingen
 +49-7708:Geisingen-Leipferdingen
 +49-7709:Wutach
 +49-771:Donaueschingen
@@ -4186,32 +4186,32 @@
 +49-7722:Triberg i Schwarzw
 +49-7723:Furtwangen
 +49-7724:St Georgen i Schwarzw
-+49-7725:Königsfeld i Schwarzwald
-+49-7726:Bad Dürrheim
-+49-7727:Vöhrenbach
++49-7725:KÃ¶nigsfeld i Schwarzwald
++49-7726:Bad DÃ¼rrheim
++49-7727:VÃ¶hrenbach
 +49-7728:Niedereschach
 +49-7729:Tennenbronn
 +49-7731:Singen Hohentwiel
 +49-7732:Radolfzell a Bodensee
 +49-7733:Engen Hegau
 +49-7734:Gailingen
-+49-7735:Öhningen
++49-7735:Ã–hningen
 +49-7736:Tengen
-+49-7738:Steißlingen
++49-7738:SteiÃŸlingen
 +49-7739:Hilzingen
 +49-7741:Tiengen Hochrhein
 +49-7742:Klettgau
-+49-7743:Ühlingen
-+49-7744:Stühlingen
++49-7743:Ãœhlingen
++49-7744:StÃ¼hlingen
 +49-7745:Jestetten
-+49-7746:Wutöschingen
++49-7746:WutÃ¶schingen
 +49-7747:Berau
 +49-7748:Grafenhausen Hochschwarzw
 +49-7751:Waldshut
 +49-7753:Albbruck
-+49-7754:Görwihl
++49-7754:GÃ¶rwihl
 +49-7755:Weilheim Kr Waldshut
-+49-7761:Bad Säckingen
++49-7761:Bad SÃ¤ckingen
 +49-7762:Wehr Baden
 +49-7763:Murg
 +49-7764:Herrischried
@@ -4219,7 +4219,7 @@
 +49-7771:Stockach
 +49-7773:Bodman-Ludwigshafen
 +49-7774:Eigeltingen
-+49-7775:Mühlingen
++49-7775:MÃ¼hlingen
 +49-7777:Sauldorf
 +49-7802:Oberkirch Baden
 +49-7803:Gengenbach
@@ -4249,56 +4249,56 @@
 +49-7843:Renchen
 +49-7844:Rheinau
 +49-7851:Kehl
-+49-7852:Willstätt
++49-7852:WillstÃ¤tt
 +49-7853:Kehl-Bodersweier
 +49-7854:Kehl-Goldscheuer
 +49-7903:Mainhardt
 +49-7904:Ilshofen
 +49-7905:Langenburg
 +49-7906:Braunsbach
-+49-7907:Schwäbisch Hall-Sulzdorf
-+49-791:Schwäbisch Hall
++49-7907:SchwÃ¤bisch Hall-Sulzdorf
++49-791:SchwÃ¤bisch Hall
 +49-7930:Boxberg Baden
 +49-7931:Bad Mergentheim
-+49-7932:Niederstetten Württ
++49-7932:Niederstetten WÃ¼rtt
 +49-7933:Creglingen
 +49-7934:Weikersheim
 +49-7935:Schrozberg
 +49-7936:Schrozberg-Bartenstein
-+49-7937:Dörzbach
++49-7937:DÃ¶rzbach
 +49-7938:Mulfingen Jagst
 +49-7939:Schrozberg-Spielbach
-+49-7940:Künzelsau
-+49-7941:Öhringen
-+49-7942:Neuenstein Württ
-+49-7943:Schöntal Jagst
++49-7940:KÃ¼nzelsau
++49-7941:Ã–hringen
++49-7942:Neuenstein WÃ¼rtt
++49-7943:SchÃ¶ntal Jagst
 +49-7944:Kupferzell
-+49-7945:Wüstenrot
++49-7945:WÃ¼stenrot
 +49-7946:Bretzfeld
 +49-7947:Forchtenberg
-+49-7948:Öhringen-Ohrnberg
++49-7948:Ã–hringen-Ohrnberg
 +49-7949:Pfedelbach-Untersteinbach
 +49-7950:Schnelldorf Mittelfr
 +49-7951:Crailsheim
 +49-7952:Gerabronn
 +49-7953:Blaufelden
 +49-7954:Kirchberg a d Jagst
-+49-7955:Wallhausen Württ
-+49-7957:Kreßberg
++49-7955:Wallhausen WÃ¼rtt
++49-7957:KreÃŸberg
 +49-7958:Rot Am See-Brettheim
 +49-7959:Frankenhardt
 +49-7961:Ellwangen Jagst
 +49-7962:Fichtenau
 +49-7963:Adelmannsfelden
-+49-7964:Stödtlen
-+49-7965:Ellwangen-Röhlingen
++49-7964:StÃ¶dtlen
++49-7965:Ellwangen-RÃ¶hlingen
 +49-7966:Unterschneidheim
 +49-7967:Jagstzell
 +49-7971:Gaildorf
 +49-7972:Gschwend b Gaildorf
 +49-7973:Obersontheim
-+49-7974:Bühlerzell
-+49-7975:Untergröningen
++49-7974:BÃ¼hlerzell
++49-7975:UntergrÃ¶ningen
 +49-7976:Sulzbach-Laufen
 +49-7977:Oberrot b Gaildorf
 +49-8020:Weyarn
@@ -4319,7 +4319,7 @@
 +49-8036:Stephanskirchen Simssee
 +49-8038:Vogtareuth
 +49-8039:Rott a Inn
-+49-8041:Bad Tölz
++49-8041:Bad TÃ¶lz
 +49-8042:Lenggries
 +49-8043:Jachenau
 +49-8045:Lenggries-Fall
@@ -4329,13 +4329,13 @@
 +49-8053:Bad Endorf
 +49-8054:Breitbrunn a Chiemsee
 +49-8055:Halfing
-+49-8056:Eggstätt
++49-8056:EggstÃ¤tt
 +49-8057:Aschau-Sachrang
 +49-8061:Bad Aibling
-+49-8062:Bruckmühl Mangfall
++49-8062:BruckmÃ¼hl Mangfall
 +49-8063:Feldkirchen-Westerham
 +49-8064:Au b Bad Aibling
-+49-8065:Tuntenhausen-Schönau
++49-8065:Tuntenhausen-SchÃ¶nau
 +49-8066:Bad Feilnbach
 +49-8067:Tuntenhausen
 +49-8071:Wasserburg a Inn
@@ -4351,11 +4351,11 @@
 +49-8085:St Wolfgang Kr Erding
 +49-8086:Buchbach Oberbay
 +49-8091:Kirchseeon
-+49-8092:Grafing b München
++49-8092:Grafing b MÃ¼nchen
 +49-8093:Glonn Kr Ebersberg
-+49-8094:Steinhöring
++49-8094:SteinhÃ¶ring
 +49-8095:Aying
-+49-8102:Höhenkirchen
++49-8102:HÃ¶henkirchen
 +49-8104:Sauerlach
 +49-8105:Gilching
 +49-8106:Vaterstetten
@@ -4371,8 +4371,8 @@
 +49-8136:Markt Indersdorf
 +49-8137:Petershausen
 +49-8138:Schwabhausen b Dachau
-+49-8139:Röhrmoos
-+49-8141:Fürstenfeldbruck
++49-8139:RÃ¶hrmoos
++49-8141:FÃ¼rstenfeldbruck
 +49-8142:Olching
 +49-8143:Inning a Ammersee
 +49-8144:Grafrath
@@ -4380,7 +4380,7 @@
 +49-8146:Moorenweis
 +49-8151:Starnberg
 +49-8152:Herrsching a Ammersee
-+49-8153:Weßling
++49-8153:WeÃŸling
 +49-8157:Feldafing
 +49-8158:Tutzing
 +49-8161:Freising
@@ -4388,10 +4388,10 @@
 +49-8166:Allershausen Oberbay
 +49-8167:Zolling
 +49-8168:Attenkirchen
-+49-8170:Straßlach-Dingharting
++49-8170:StraÃŸlach-Dingharting
 +49-8171:Wolfratshausen
 +49-8176:Egling b Wolfratshausen
-+49-8177:Münsing Starnberger See
++49-8177:MÃ¼nsing Starnberger See
 +49-8178:Icking
 +49-8179:Eurasburg a d Isar
 +49-8191:Landsberg a Lech
@@ -4399,24 +4399,24 @@
 +49-8193:Geltendorf
 +49-8194:Vilgertshofen
 +49-8195:Weil Kr Landsberg
-+49-8196:Pürgen
++49-8196:PÃ¼rgen
 +49-8202:Althegnenberg
-+49-8203:Großaitingen
++49-8203:GroÃŸaitingen
 +49-8204:Mickhausen
 +49-8205:Dasing
 +49-8206:Egling
 +49-8207:Affing
 +49-8208:Eurasburg b Augsburg
 +49-821:Augsburg
-+49-8221:Günzburg
++49-8221:GÃ¼nzburg
 +49-8222:Burgau Schwab
 +49-8223:Ichenhausen
 +49-8224:Offingen Donau
 +49-8225:Jettingen-Scheppach
 +49-8226:Bibertal
 +49-8230:Gablingen
-+49-8231:Königsbrunn b Augsburg
-+49-8232:Schwabmünchen
++49-8231:KÃ¶nigsbrunn b Augsburg
++49-8232:SchwabmÃ¼nchen
 +49-8233:Kissing
 +49-8234:Bobingen
 +49-8236:Fischach
@@ -4425,16 +4425,16 @@
 +49-8239:Langenneufnach
 +49-8241:Buchloe
 +49-8243:Fuchstal
-+49-8245:Türkheim Wertach
++49-8245:TÃ¼rkheim Wertach
 +49-8246:Waal Schwab
-+49-8247:Bad Wörishofen
++49-8247:Bad WÃ¶rishofen
 +49-8248:Lamerdingen
 +49-8249:Ettringen Wertach
 +49-8250:Hilgertshausen-Tandern
 +49-8251:Aichach
 +49-8252:Schrobenhausen
-+49-8253:Pöttmes
-+49-8254:Altomünster
++49-8253:PÃ¶ttmes
++49-8254:AltomÃ¼nster
 +49-8257:Inchenhofen
 +49-8258:Sielenbach
 +49-8259:Schiltberg
@@ -4460,20 +4460,20 @@
 +49-8292:Dinkelscherben
 +49-8293:Welden b Augsburg
 +49-8294:Horgau
-+49-8295:Altenmünster Schwab
++49-8295:AltenmÃ¼nster Schwab
 +49-8296:Villenbach
-+49-8302:Görisried
++49-8302:GÃ¶risried
 +49-8303:Waltenhofen
 +49-8304:Wildpoldsried
 +49-8306:Ronsberg
-+49-831:Kempten Allgäu
++49-831:Kempten AllgÃ¤u
 +49-8320:Missen-Wilhams
 +49-8321:Sonthofen
 +49-8322:Oberstdorf
-+49-8323:Immenstadt i Allgäu
++49-8323:Immenstadt i AllgÃ¤u
 +49-8324:Hindelang
 +49-8325:Oberstaufen-Thalkirchdorf
-+49-8326:Fischen i Allgäu
++49-8326:Fischen i AllgÃ¤u
 +49-8327:Rettenberg
 +49-8328:Balderschwang
 +49-8329:Riezlern
@@ -4481,69 +4481,69 @@
 +49-8331:Memmingen
 +49-8332:Ottobeuren
 +49-8333:Babenhausen Schwab
-+49-8334:Grönenbach
++49-8334:GrÃ¶nenbach
 +49-8335:Fellheim
 +49-8336:Erkheim
 +49-8337:Altenstadt Iller
-+49-8338:Böhen
++49-8338:BÃ¶hen
 +49-8340:Baisweil
 +49-8341:Kaufbeuren
 +49-8342:Marktoberdorf
 +49-8343:Aitrang
 +49-8344:Westendorf b Kaufbeuren
-+49-8345:Stöttwang
++49-8345:StÃ¶ttwang
 +49-8346:Pforzen
 +49-8347:Friesenried
 +49-8348:Bidingen
-+49-8349:Stötten a Auerberg
++49-8349:StÃ¶tten a Auerberg
 +49-8361:Nesselwang
-+49-8362:Füssen
++49-8362:FÃ¼ssen
 +49-8363:Pfronten
 +49-8364:Seeg
 +49-8365:Wertach
 +49-8366:Oy-Mittelberg
-+49-8367:Roßhaupten Forggensee
++49-8367:RoÃŸhaupten Forggensee
 +49-8368:Halblech
-+49-8369:Rückholz
++49-8369:RÃ¼ckholz
 +49-8370:Wiggensbach
-+49-8372:Obergünzburg
++49-8372:ObergÃ¼nzburg
 +49-8373:Altusried
 +49-8374:Dietmannsried
 +49-8375:Weitnau
-+49-8376:Sulzberg Allgäu
++49-8376:Sulzberg AllgÃ¤u
 +49-8377:Unterthingau
 +49-8378:Buchenberg b Kempten
 +49-8379:Waltenhofen-Oberdorf
 +49-8380:Achberg
-+49-8381:Lindenberg i Allgäu
++49-8381:Lindenberg i AllgÃ¤u
 +49-8382:Lindau Bodensee
-+49-8383:Grünenbach Allgäu
-+49-8384:Röthenbach Allgäu
++49-8383:GrÃ¼nenbach AllgÃ¤u
++49-8384:RÃ¶thenbach AllgÃ¤u
 +49-8385:Hergatz
 +49-8386:Oberstaufen
 +49-8387:Weiler-Simmerberg
 +49-8388:Hergensweiler
-+49-8389:Weißensberg
++49-8389:WeiÃŸensberg
 +49-8392:Markt Rettenbach
-+49-8393:Holzgünz
++49-8393:HolzgÃ¼nz
 +49-8394:Lautrach
-+49-8395:Tannheim Württ
-+49-8402:Münchsmünster
-+49-8403:Pförring
++49-8395:Tannheim WÃ¼rtt
++49-8402:MÃ¼nchsmÃ¼nster
++49-8403:PfÃ¶rring
 +49-8404:Oberdolling
 +49-8405:Stammham b Ingolstadt
-+49-8406:Böhmfeld
-+49-8407:Großmehring
++49-8406:BÃ¶hmfeld
++49-8407:GroÃŸmehring
 +49-841:Ingolstadt Donau
-+49-8421:Eichstätt Bay
++49-8421:EichstÃ¤tt Bay
 +49-8422:Dollnstein
 +49-8423:Titting
 +49-8424:Nassenfels
-+49-8426:Walting Kr Eichstätt
++49-8426:Walting Kr EichstÃ¤tt
 +49-8427:Wellheim
 +49-8431:Neuburg a d Donau
 +49-8432:Burgheim
-+49-8433:Königsmoos
++49-8433:KÃ¶nigsmoos
 +49-8434:Rennertshofen
 +49-8435:Oberhausen
 +49-8441:Pfaffenhofen a d Ilm
@@ -4551,7 +4551,7 @@
 +49-8443:Hohenwart Paar
 +49-8444:Schweitenkirchen
 +49-8445:Gerolsbach
-+49-8446:Pörnbach
++49-8446:PÃ¶rnbach
 +49-8450:Ingolstadt-Zuchering
 +49-8452:Geisenfeld
 +49-8453:Reichertshofen Oberbay
@@ -4564,28 +4564,28 @@
 +49-8461:Beilngries
 +49-8462:Berching
 +49-8463:Greding
-+49-8464:Dietfurt a d Altmühl
++49-8464:Dietfurt a d AltmÃ¼hl
 +49-8465:Kipfenberg
 +49-8466:Denkendorf Oberbay
 +49-8467:Kinding
 +49-8468:Altmannstein-Pondorf
 +49-8469:Freystadt-Burggriesbach
 +49-8501:Thyrnau
-+49-8502:Fürstenzell
++49-8502:FÃ¼rstenzell
 +49-8503:Neuhaus a Inn
 +49-8504:Tittling
 +49-8505:Hutthurm
-+49-8506:Bad Höhenstadt
++49-8506:Bad HÃ¶henstadt
 +49-8507:Neuburg a Inn
 +49-8509:Ruderting
 +49-851:Passau
 +49-8531:Pocking
 +49-8532:Griesbach i Rottal
-+49-8533:Rotthalmünster
++49-8533:RotthalmÃ¼nster
 +49-8534:Tettenweis
 +49-8535:Haarbach
-+49-8536:Kößlarn
-+49-8537:Bad Füssing-Aigen
++49-8536:KÃ¶ÃŸlarn
++49-8537:Bad FÃ¼ssing-Aigen
 +49-8538:Pocking-Hartkirchen
 +49-8541:Vilshofen Niederbay
 +49-8542:Ortenburg
@@ -4600,9 +4600,9 @@
 +49-8551:Freyung
 +49-8552:Grafenau Niederbay
 +49-8553:Spiegelau
-+49-8554:Schönberg Niederbay
++49-8554:SchÃ¶nberg Niederbay
 +49-8555:Perlesreut
-+49-8556:Haidmühle
++49-8556:HaidmÃ¼hle
 +49-8557:Mauth
 +49-8558:Hohenau Niederbay
 +49-8561:Pfarrkirchen Niederbay
@@ -4615,7 +4615,7 @@
 +49-8573:Ering
 +49-8574:Wittibreut
 +49-8581:Waldkirchen Niederbay
-+49-8582:Röhrnbach
++49-8582:RÃ¶hrnbach
 +49-8583:Neureichenau
 +49-8584:Breitenberg Niederbay
 +49-8585:Grainet
@@ -4631,8 +4631,8 @@
 +49-8628:Kienberg Oberbay
 +49-8629:Palling
 +49-8630:Oberneukirchen
-+49-8631:Mühldorf a Inn
-+49-8633:Tüßling
++49-8631:MÃ¼hldorf a Inn
++49-8633:TÃ¼ÃŸling
 +49-8634:Garching a d Alz
 +49-8635:Pleiskirchen
 +49-8636:Ampfing
@@ -4641,7 +4641,7 @@
 +49-8639:Neumarkt-St Veit
 +49-8640:Reit Im Winkl
 +49-8641:Grassau
-+49-8642:Übersee
++49-8642:Ãœbersee
 +49-8649:Schleching
 +49-8650:Marktschellenberg
 +49-8651:Bad Reichenhall
@@ -4649,7 +4649,7 @@
 +49-8654:Freilassing
 +49-8656:Anger
 +49-8657:Ramsau b Berchtesgaden
-+49-8661:Grabenstätt Chiemsee
++49-8661:GrabenstÃ¤tt Chiemsee
 +49-8662:Siegsdorf Kr Traunstein
 +49-8663:Ruhpolding
 +49-8664:Chieming
@@ -4657,8 +4657,8 @@
 +49-8666:Teisendorf
 +49-8667:Seeon-Seebruck
 +49-8669:Traunreut
-+49-8670:Reischach Kr Altötting
-+49-8671:Altötting
++49-8670:Reischach Kr AltÃ¶tting
++49-8671:AltÃ¶tting
 +49-8677:Burghausen Salzach
 +49-8678:Marktl
 +49-8679:Burgkirchen a d Alz
@@ -4666,10 +4666,10 @@
 +49-8682:Laufen Salzach
 +49-8683:Tittmoning
 +49-8684:Fridolfing
-+49-8685:Kirchanschöring
++49-8685:KirchanschÃ¶ring
 +49-8686:Petting
 +49-8687:Taching-Tengling
-+49-8702:Wörth a d Isar
++49-8702:WÃ¶rth a d Isar
 +49-8703:Essenbach
 +49-8704:Altdorf-Pfettrach
 +49-8705:Altfraunhofen
@@ -4683,7 +4683,7 @@
 +49-8723:Arnstorf
 +49-8724:Massing
 +49-8725:Wurmannsquick
-+49-8726:Schönau Niederbay
++49-8726:SchÃ¶nau Niederbay
 +49-8727:Falkenberg Niederbay
 +49-8728:Geratskirchen
 +49-8731:Dingolfing
@@ -4717,22 +4717,22 @@
 +49-8785:Rottenburg-Oberroning
 +49-8801:Seeshaupt
 +49-8802:Huglfing
-+49-8803:Peißenberg
-+49-8805:Hohenpeißenberg
++49-8803:PeiÃŸenberg
++49-8805:HohenpeiÃŸenberg
 +49-8806:Utting a Ammersee
-+49-8807:Dießen a Ammersee
-+49-8808:Pähl
++49-8807:DieÃŸen a Ammersee
++49-8808:PÃ¤hl
 +49-8809:Wessobrunn
 +49-881:Weilheim Oberbay
 +49-8821:Garmisch-Partenkirchen
 +49-8822:Oberammergau
 +49-8823:Mittenwald
 +49-8824:Oberau Loisach
-+49-8825:Krün
++49-8825:KrÃ¼n
 +49-8841:Murnau a Staffelsee
 +49-8845:Bad Kohlgrub
 +49-8846:Uffing a Staffelsee
-+49-8847:Obersöchering
++49-8847:ObersÃ¶chering
 +49-8851:Kochel a See
 +49-8856:Penzberg
 +49-8857:Benediktbeuern
@@ -4743,26 +4743,26 @@
 +49-8867:Rottenbuch Oberbay
 +49-8868:Schwabsoien
 +49-8869:Kinsau
-+49-89:München
-+49-906:Donauwörth
++49-89:MÃ¼nchen
++49-906:DonauwÃ¶rth
 +49-9070:Tapfheim
 +49-9071:Dillingen a d Donau
 +49-9072:Lauingen Donau
 +49-9073:Gundelfingen a d Donau
-+49-9074:Höchstädt a d Donau
-+49-9075:Glött
++49-9074:HÃ¶chstÃ¤dt a d Donau
++49-9075:GlÃ¶tt
 +49-9076:Wittislingen
 +49-9077:Bachhagel
 +49-9078:Mertingen
 +49-9080:Harburg Schwaben
-+49-9081:Nördlingen
++49-9081:NÃ¶rdlingen
 +49-9082:Oettingen
-+49-9083:Möttingen
++49-9083:MÃ¶ttingen
 +49-9084:Bissingen Schwab
 +49-9085:Alerheim
 +49-9086:Fremdingen
 +49-9087:Marktoffingen
-+49-9088:Mönchsdeggingen
++49-9088:MÃ¶nchsdeggingen
 +49-9089:Bissingen-Unterringingen
 +49-9090:Rain Lech
 +49-9091:Monheim Schwab
@@ -4775,23 +4775,23 @@
 +49-9102:Wilhermsdorf
 +49-9103:Cadolzburg
 +49-9104:Emskirchen
-+49-9105:Großhabersdorf
++49-9105:GroÃŸhabersdorf
 +49-9106:Markt Erlbach
 +49-9107:Trautskirchen
-+49-911:Nürnberg
++49-911:NÃ¼rnberg
 +49-9120:Leinburg
 +49-9122:Schwabach
 +49-9123:Lauf a d Pegnitz
 +49-9126:Eckental
-+49-9127:Roßtal
++49-9127:RoÃŸtal
 +49-9128:Feucht
 +49-9129:Wendelstein
 +49-9131:Erlangen
 +49-9132:Herzogenaurach
 +49-9133:Baiersdorf Mittelfr
 +49-9134:Neunkirchen a Brand
-+49-9135:Heßdorf Mittelfr
-+49-9141:Weißenburg i Bay
++49-9135:HeÃŸdorf Mittelfr
++49-9141:WeiÃŸenburg i Bay
 +49-9142:Treuchtlingen
 +49-9143:Pappenheim Mittelfr
 +49-9144:Pleinfeld
@@ -4799,7 +4799,7 @@
 +49-9146:Markt Berolzheim
 +49-9147:Nennslingen
 +49-9148:Ettenstatt
-+49-9149:Weißenburg-Suffersheim
++49-9149:WeiÃŸenburg-Suffersheim
 +49-9151:Hersbruck
 +49-9152:Hartenstein
 +49-9153:Schnaittach
@@ -4813,12 +4813,12 @@
 +49-9163:Dachsbach
 +49-9164:Langenfeld Mittelfr
 +49-9165:Sugenheim
-+49-9166:Münchsteinach
++49-9166:MÃ¼nchsteinach
 +49-9167:Oberscheinfeld
 +49-9170:Schwanstetten
 +49-9171:Roth Mittelfr
-+49-9172:Georgensgmünd
-+49-9173:Thalmässing
++49-9172:GeorgensgmÃ¼nd
++49-9173:ThalmÃ¤ssing
 +49-9174:Hilpoltstein
 +49-9175:Spalt
 +49-9176:Allersberg
@@ -4830,15 +4830,15 @@
 +49-9182:Velburg
 +49-9183:Burgthann
 +49-9184:Deining Oberpf
-+49-9185:Mühlhausen Oberpf
++49-9185:MÃ¼hlhausen Oberpf
 +49-9186:Lauterhofen Oberpf
-+49-9187:Altdorf b Nürnberg
++49-9187:Altdorf b NÃ¼rnberg
 +49-9188:Postbauer-Heng
 +49-9189:Berg b Neumarkt Oberpf
 +49-9190:Heroldsbach
 +49-9191:Forchheim Oberfr
-+49-9192:Gräfenberg
-+49-9193:Höchstadt a d Aisch
++49-9192:GrÃ¤fenberg
++49-9193:HÃ¶chstadt a d Aisch
 +49-9194:Ebermannstadt
 +49-9195:Adelsdorf
 +49-9196:Wiesenttal
@@ -4851,7 +4851,7 @@
 +49-9204:Plankenfels
 +49-9205:Vorbach
 +49-9206:Mistelgau-Obernsees
-+49-9207:Königsfeld Oberfr
++49-9207:KÃ¶nigsfeld Oberfr
 +49-9208:Bindlach
 +49-9209:Emtmannsberg
 +49-921:Bayreuth
@@ -4869,16 +4869,16 @@
 +49-9234:Neusorg
 +49-9235:Thierstein
 +49-9236:Nagel
-+49-9238:Röslau
++49-9238:RÃ¶slau
 +49-9241:Pegnitz
-+49-9242:Gößweinstein
++49-9242:GÃ¶ÃŸweinstein
 +49-9243:Pottenstein
 +49-9244:Betzenstein
 +49-9245:Obertrubach
 +49-9246:Pegnitz-Trockau
-+49-9251:Münchberg
++49-9251:MÃ¼nchberg
 +49-9252:Helmbrechts
-+49-9253:Weißenstadt
++49-9253:WeiÃŸenstadt
 +49-9254:Gefrees
 +49-9255:Marktleugast
 +49-9256:Stammbach
@@ -4887,19 +4887,19 @@
 +49-9261:Kronach
 +49-9262:Wallenfels
 +49-9263:Ludwigsstadt
-+49-9264:Küps
++49-9264:KÃ¼ps
 +49-9265:Pressig
 +49-9266:Mitwitz
 +49-9267:Nordhalben
 +49-9268:Teuschnitz
 +49-9269:Tettau
-+49-9270:Creußen
++49-9270:CreuÃŸen
 +49-9271:Eckersdorf-Alladorf
 +49-9272:Fichtelberg
 +49-9273:Bad Berneck
 +49-9274:Hollfeld
 +49-9275:Speichersdorf
-+49-9276:Bischofsgrün
++49-9276:BischofsgrÃ¼n
 +49-9277:Warmensteinach
 +49-9278:Weidenberg
 +49-9279:Mistelgau
@@ -4916,13 +4916,13 @@
 +49-9292:Konradsreuth
 +49-9293:Berg Oberfr
 +49-9294:Regnitzlosau
-+49-9295:Töpen
++49-9295:TÃ¶pen
 +49-9302:Rottendorf Unterfr
 +49-9303:Eibelstadt
 +49-9305:Estenfeld
 +49-9306:Kist
 +49-9307:Altertheim
-+49-931:Würzburg
++49-931:WÃ¼rzburg
 +49-9321:Kitzingen
 +49-9323:Iphofen
 +49-9324:Dettelbach
@@ -4932,32 +4932,32 @@
 +49-9332:Marktbreit
 +49-9333:Sommerhausen
 +49-9334:Giebelstadt
-+49-9335:Aub Kr Würzburg
-+49-9336:Bütthard
-+49-9337:Gaukönigshofen
-+49-9338:Röttingen Unterfr
++49-9335:Aub Kr WÃ¼rzburg
++49-9336:BÃ¼tthard
++49-9337:GaukÃ¶nigshofen
++49-9338:RÃ¶ttingen Unterfr
 +49-9339:Ippesheim
-+49-9340:Königheim-Brehmen
++49-9340:KÃ¶nigheim-Brehmen
 +49-9341:Tauberbischofsheim
 +49-9342:Wertheim
-+49-9343:Lauda-Königshofen
++49-9343:Lauda-KÃ¶nigshofen
 +49-9344:Gerchsheim
-+49-9345:Külsheim Baden
-+49-9346:Grünsfeld
++49-9345:KÃ¼lsheim Baden
++49-9346:GrÃ¼nsfeld
 +49-9347:Wittighausen
 +49-9348:Werbach-Gamburg
 +49-9349:Werbach-Wenkheim
-+49-9350:Eußenheim-Hundsbach
-+49-9351:Gemünden a Main
++49-9350:EuÃŸenheim-Hundsbach
++49-9351:GemÃ¼nden a Main
 +49-9352:Lohr a Main
 +49-9353:Karlstadt
 +49-9354:Rieneck
 +49-9355:Frammersbach
 +49-9356:Burgsinn
-+49-9357:Gräfendorf
-+49-9358:Gössenheim
++49-9357:GrÃ¤fendorf
++49-9358:GÃ¶ssenheim
 +49-9359:Karlstadt-Wiesenfeld
-+49-9360:Thüngen
++49-9360:ThÃ¼ngen
 +49-9363:Arnstein Unterfr
 +49-9364:Zellingen
 +49-9365:Rimpar
@@ -4971,7 +4971,7 @@
 +49-9375:Freudenberg Baden
 +49-9376:Collenberg
 +49-9377:Freudenberg-Boxtal
-+49-9378:Eichenbühl-Riedern
++49-9378:EichenbÃ¼hl-Riedern
 +49-9381:Volkach
 +49-9382:Gerolzhofen
 +49-9383:Wiesentheid
@@ -4985,7 +4985,7 @@
 +49-9395:Triefenstein
 +49-9396:Urspringen b Lohr
 +49-9397:Wertheim-Dertingen
-+49-9398:Birkenfeld b Würzburg
++49-9398:Birkenfeld b WÃ¼rzburg
 +49-9401:Neutraubling
 +49-9402:Regenstauf
 +49-9403:Donaustauf
@@ -4999,15 +4999,15 @@
 +49-9420:Feldkirchen Niederbay
 +49-9421:Straubing
 +49-9422:Bogen Niederbay
-+49-9423:Geiselhöring
-+49-9424:Straßkirchen
++49-9423:GeiselhÃ¶ring
++49-9424:StraÃŸkirchen
 +49-9426:Oberschneiding
 +49-9427:Leiblfing
 +49-9428:Kirchroth
 +49-9429:Rain Niederbay
 +49-9431:Schwandorf
 +49-9433:Nabburg
-+49-9434:Bodenwöhr
++49-9434:BodenwÃ¶hr
 +49-9435:Schwarzenfeld
 +49-9436:Nittenau
 +49-9438:Fensterbach
@@ -5032,14 +5032,14 @@
 +49-9466:Stamsried
 +49-9467:Michelsneukirchen
 +49-9468:Zell Oberpf
-+49-9469:Roding-Neubäu
++49-9469:Roding-NeubÃ¤u
 +49-9471:Burglengenfeld
 +49-9472:Hohenfels Oberpf
-+49-9473:Kallmünz
-+49-9474:Schmidmühlen
-+49-9480:Sünching
++49-9473:KallmÃ¼nz
++49-9474:SchmidmÃ¼hlen
++49-9480:SÃ¼nching
 +49-9481:Pfatter
-+49-9482:Wörth a d Donau
++49-9482:WÃ¶rth a d Donau
 +49-9484:Brennberg
 +49-9491:Hemau
 +49-9492:Parsberg
@@ -5053,11 +5053,11 @@
 +49-9504:Stadelhofen
 +49-9505:Litzendorf
 +49-951:Bamberg
-+49-9521:Haßfurt
++49-9521:HaÃŸfurt
 +49-9522:Eltmann
 +49-9523:Hofheim Unterfr
 +49-9524:Zeil a Main
-+49-9525:Königsberg i Bay
++49-9525:KÃ¶nigsberg i Bay
 +49-9526:Riedbach
 +49-9527:Knetzgau
 +49-9528:Donnersdorf
@@ -5068,30 +5068,30 @@
 +49-9534:Burgpreppach
 +49-9535:Pfarrweisach
 +49-9536:Kirchlauter
-+49-9542:Scheßlitz
++49-9542:ScheÃŸlitz
 +49-9543:Hirschaid
 +49-9544:Baunach
 +49-9545:Buttenheim
 +49-9546:Burgebrach
 +49-9547:Zapfendorf
-+49-9548:Mühlhausen Mittelfr
++49-9548:MÃ¼hlhausen Mittelfr
 +49-9549:Lisberg
 +49-9551:Burgwindheim
 +49-9552:Burghaslach
 +49-9553:Ebrach Oberfr
 +49-9554:Untersteinbach Unterfr
-+49-9555:Schlüsselfeld-Aschbach
++49-9555:SchlÃ¼sselfeld-Aschbach
 +49-9556:Geiselwind
 +49-9560:Grub a Forst
 +49-9561:Coburg
 +49-9562:Sonnefeld
-+49-9563:Rödental
++49-9563:RÃ¶dental
 +49-9564:Rodach
 +49-9565:Untersiemau
 +49-9566:Meeder
-+49-9567:Seßlach-Gemünda
++49-9567:SeÃŸlach-GemÃ¼nda
 +49-9568:Neustadt b Coburg
-+49-9569:Seßlach
++49-9569:SeÃŸlach
 +49-9571:Lichtenfels Bay
 +49-9572:Burgkunstadt
 +49-9573:Staffelstein Oberfr
@@ -5099,8 +5099,8 @@
 +49-9575:Weismain
 +49-9576:Lichtenfels-Isling
 +49-9602:Neustadt a d Waldnaab
-+49-9603:Floß
-+49-9604:Wernberg-Köblitz
++49-9603:FloÃŸ
++49-9604:Wernberg-KÃ¶blitz
 +49-9605:Weiherhammer
 +49-9606:Pfreimd
 +49-9607:Luhe-Wildenau
@@ -5117,12 +5117,12 @@
 +49-9632:Waldsassen
 +49-9633:Mitterteich
 +49-9634:Wiesau
-+49-9635:Bärnau
-+49-9636:Plößberg
++49-9635:BÃ¤rnau
++49-9636:PlÃ¶ÃŸberg
 +49-9637:Falkenberg Oberpf
 +49-9638:Neualbenreuth
-+49-9639:Mähring
-+49-9641:Grafenwöhr
++49-9639:MÃ¤hring
++49-9641:GrafenwÃ¶hr
 +49-9642:Kemnath Stadt
 +49-9643:Auerbach Oberpf
 +49-9644:Pressath
@@ -5130,12 +5130,12 @@
 +49-9646:Freihung
 +49-9647:Kirchenthumbach
 +49-9648:Neustadt a Kulm
-+49-9651:Vohenstrauß
++49-9651:VohenstrauÃŸ
 +49-9652:Waidhaus
 +49-9653:Eslarn
 +49-9654:Pleystein
-+49-9655:Tännesberg
-+49-9656:Moosbach b Vohenstrauß
++49-9655:TÃ¤nnesberg
++49-9656:Moosbach b VohenstrauÃŸ
 +49-9657:Waldthurn
 +49-9658:Georgenberg
 +49-9659:Leuchtenberg
@@ -5143,12 +5143,12 @@
 +49-9662:Vilseck
 +49-9663:Neukirchen b Sulzbach
 +49-9664:Hahnbach
-+49-9665:Königstein Oberpf
++49-9665:KÃ¶nigstein Oberpf
 +49-9666:Illschwang
 +49-9671:Oberviechtach
 +49-9672:Neunburg Vorm Wald
 +49-9673:Tiefenbach Oberpf
-+49-9674:Schönsee
++49-9674:SchÃ¶nsee
 +49-9675:Altendorf b Nabburg
 +49-9676:Winklarn
 +49-9677:Oberviechtach-Pullenried
@@ -5159,46 +5159,46 @@
 +49-9704:Euerdorf
 +49-9708:Bad Bocklet
 +49-971:Bad Kissingen
-+49-9720:Üchtelhausen
++49-9720:Ãœchtelhausen
 +49-9721:Schweinfurt
 +49-9722:Werneck
-+49-9723:Röthlein
++49-9723:RÃ¶thlein
 +49-9724:Stadtlauringen
 +49-9725:Poppenhausen Unterfr
 +49-9726:Euerbach
 +49-9727:Schonungen-Marktsteinach
-+49-9728:Wülfershausen Unterfr
++49-9728:WÃ¼lfershausen Unterfr
 +49-9729:Grettstadt
 +49-9732:Hammelburg
-+49-9733:Münnerstadt
++49-9733:MÃ¼nnerstadt
 +49-9734:Burkardroth
-+49-9735:Maßbach
++49-9735:MaÃŸbach
 +49-9736:Oberthulba
 +49-9737:Wartmannsroth
 +49-9738:Rottershausen
-+49-9741:Bad Brückenau
-+49-9742:Kalbach Rhön
++49-9741:Bad BrÃ¼ckenau
++49-9742:Kalbach RhÃ¶n
 +49-9744:Zeitlofs-Detter
 +49-9745:Wildflecken
 +49-9746:Zeitlofs
 +49-9747:Geroda
 +49-9748:Motten
 +49-9749:Oberbach Unterfr
-+49-9761:Bad Königshofen
++49-9761:Bad KÃ¶nigshofen
 +49-9762:Saal a d Saale
 +49-9763:Sulzdorf a d Lederhecke
-+49-9764:Höchheim
++49-9764:HÃ¶chheim
 +49-9765:Trappstadt
-+49-9766:Großwenkheim
++49-9766:GroÃŸwenkheim
 +49-9771:Bad Neustadt
-+49-9772:Bischofsheim a d Rhön
++49-9772:Bischofsheim a d RhÃ¶n
 +49-9773:Unsleben
 +49-9774:Oberelsbach
-+49-9775:Schönau a d Brend
++49-9775:SchÃ¶nau a d Brend
 +49-9776:Mellrichstadt
-+49-9777:Ostheim v d Rhön
++49-9777:Ostheim v d RhÃ¶n
 +49-9778:Fladungen
-+49-9779:Nordheim v d Rhön
++49-9779:Nordheim v d RhÃ¶n
 +49-9802:Ansbach-Katterbach
 +49-9803:Colmberg
 +49-9804:Aurach
@@ -5211,10 +5211,10 @@
 +49-9825:Herrieden
 +49-9826:Weidenbach Mittelfr
 +49-9827:Lichtenau Mittelfr
-+49-9828:Rügland
++49-9828:RÃ¼gland
 +49-9829:Flachslanden
 +49-9831:Gunzenhausen
-+49-9832:Wassertrüdingen
++49-9832:WassertrÃ¼dingen
 +49-9833:Heidenheim Mittelfr
 +49-9834:Theilenhofen
 +49-9835:Ehingen
@@ -5228,17 +5228,17 @@
 +49-9846:Ipsheim
 +49-9847:Ergersheim
 +49-9848:Simmershofen
-+49-9851:Dinkelsbühl
++49-9851:DinkelsbÃ¼hl
 +49-9852:Feuchtwangen
 +49-9853:Wilburgstetten
 +49-9854:Wittelshofen
 +49-9855:Dentlein a Forst
-+49-9856:Dürrwangen
++49-9856:DÃ¼rrwangen
 +49-9857:Schopfloch Mittelfr
 +49-9861:Rothenburg Ob Der Tauber
 +49-9865:Adelshofen
 +49-9867:Geslau
-+49-9868:Schillingsfürst
++49-9868:SchillingsfÃ¼rst
 +49-9869:Wettringen Mittelfr
 +49-9871:Windsbach
 +49-9872:Heilsbronn
@@ -5247,12 +5247,12 @@
 +49-9875:Wolframs-Eschenbach
 +49-9876:Rohr Mittelfr
 +49-9901:Hengersberg
-+49-9903:Schöllnach
++49-9903:SchÃ¶llnach
 +49-9904:Lalling
 +49-9905:Bernried Niederbay
 +49-9906:Mariaposching
 +49-9907:Zenting
-+49-9908:Schöfweg
++49-9908:SchÃ¶fweg
 +49-991:Deggendorf
 +49-9920:Bischofsmais
 +49-9921:Regen
@@ -5269,14 +5269,14 @@
 +49-9933:Wallersdorf
 +49-9935:Stephansposching
 +49-9936:Wallerfing
-+49-9937:Oberpöring
++49-9937:OberpÃ¶ring
 +49-9938:Moos Niederbay
-+49-9941:Kötzting
++49-9941:KÃ¶tzting
 +49-9942:Viechtach
 +49-9943:Lam Oberpf
 +49-9944:Miltach
 +49-9945:Arnbruck
-+49-9946:Hohenwarth b Kötzting
++49-9946:Hohenwarth b KÃ¶tzting
 +49-9947:Neukirchen b Hl Blut
 +49-9948:Eschlkam
 +49-9951:Landau a d Isar
@@ -5292,13 +5292,13 @@
 +49-9965:St Englmar
 +49-9966:Wiesenfelden
 +49-9971:Cham
-+49-9972:Waldmünchen
++49-9972:WaldmÃ¼nchen
 +49-9973:Furth i Wald
 +49-9974:Traitsching
-+49-9975:Waldmünchen-Geigant
-+49-9976:Rötz
++49-9975:WaldmÃ¼nchen-Geigant
++49-9976:RÃ¶tz
 +49-9977:Arnschwang
-+49-9978:Schönthal Oberpf
++49-9978:SchÃ¶nthal Oberpf
 
 
 #Ausland
@@ -5412,7 +5412,7 @@
 +1-757:Newport News
 +1-760:Palm Springs
 +1-765:Kokomo
-+1-773:Chicago (Süd)
++1-773:Chicago (SÃ¼d)
 +1-781:Arlington
 +1-785:Topeka
 +1/800:Toll Free
@@ -5449,7 +5449,7 @@
 +1-941:Sarasota
 +1-954:Fort Lauderdale
 
-+20:[ET]Ägypten
++20:[ET]Ã„gypten
 +20-3:Alexandria
 +20-97:Assuan
 +20-13:Banha
@@ -5469,12 +5469,12 @@
 +20-40:El-Mahalla El-Kobra, Tanta
 +20-55:Zagazig
 
-+240:Äquatorialguinea
++240:Ã„quatorialguinea
 +240-8:Bata
 +240-9:Malabo
 
 
-+251:[ET]Äthiopien
++251:[ET]Ã„thiopien
 +251-1:Addis Abeba
 +251-7:Jimma
 +251-3:Dessie
@@ -5631,7 +5631,7 @@
 +1246:Barbados
 
 
-+375:[BY]Belarus (Weißrußland)
++375:[BY]Belarus (WeiÃŸruÃŸland)
 +375-1634:Baranovichi
 +375-225:Bobruisk
 +375-1777:Borisov
@@ -5663,7 +5663,7 @@
 +32-85:Huy
 +32-57:Ieper
 +32-64:Binche, La Louviere
-+32-16:Aarschot, Löwen
++32-16:Aarschot, LÃ¶wen
 +32-89:Maaseik
 +32-84:Marche-en-Famenne
 +32-15:Mechelen
@@ -5680,13 +5680,13 @@
 +32-61:Bastonge, Bievre, Betrix, Bouillon, Tienen
 +32-12:Tongeren
 +32-58:Veurne
-+32-80:Amel, Büllingen, Bütgenbach, Burg-Reuland, Vielsalm
++32-80:Amel, BÃ¼llingen, BÃ¼tgenbach, Burg-Reuland, Vielsalm
 +32-63:Arlon, Virton
 +32-68:Ath, Vloesberg
 +32-71:Walcourt
 +32-56:Waregem
 +32-19:Borgworm, Waremme
-+32-2:Brüssel, Waterloo
++32-2:BrÃ¼ssel, Waterloo
 +32-10:Wavre
 +32-87:Welkenraedt
 +32-86:Aubel, Barvaux, Werbomont
@@ -5695,7 +5695,7 @@
 +32-11:Wijchmaal
 +32-69:Antoing, Blaton, Bleharies, Willemeau
 +32-3:Antwerpen, Boom, Broechem, Zandhoven
-+32-50:Blankenberge, Brügge, Zeebrugge
++32-50:Blankenberge, BrÃ¼gge, Zeebrugge
 +32-9:Zelzate
 
 
@@ -5754,21 +5754,21 @@
 +55-31:Belo Horizonte
 +55-47:Blumenau
 +55-95:Boa Vista
-+55-61:Brasília
++55-61:BrasÃ­lia
 +55-19:Campinas
 +55-67:Campo Grande
 +55-24:Campos
 +55-33:Caratinga
-+55-65:Cuiabá
++55-65:CuiabÃ¡
 +55-41:Curitiba
-+55-48:Florianópolis
++55-48:FlorianÃ³polis
 +55-88:Fortaleza
-+55-45:Foz do Iguacú
++55-45:Foz do IguacÃº
 +55-62:Goiania
 +55-73:Itabuna
 +55-83:Joao Pessoa
-+55-96:Macapá
-+55-82:Maceió
++55-96:MacapÃ¡
++55-82:MaceiÃ³
 +55-92:Manaus
 +55-84:Natal
 +55-63:Palmas
@@ -5779,10 +5779,10 @@
 +55-71:Salvador
 +55-13:Santos
 +55-21:Sao Goncalo
-+55-98:Sao Luís
++55-98:Sao LuÃ­s
 +55-11:Sao Paulo
 +55-86:Teresina
-+55-27:Vitória
++55-27:VitÃ³ria
 
 
 +1284:Britische Jungferninseln
@@ -5865,7 +5865,7 @@
 +56-41:Talcahuano
 +56-45:Temuco
 +56-63:Valdivia
-+56-32:Viña del Mar
++56-32:ViÃ±a del Mar
 
 
 +86:[CN]China (Volksrepublik)
@@ -5915,7 +5915,7 @@
 +506:Costa Rica
 
 
-+225:Côte d´Ivoire (Elfenbeinküste)
++225:CÃ´te dÂ´Ivoire (ElfenbeinkÃ¼ste)
 
 
 +1767:Dominica
@@ -5927,8 +5927,8 @@
 +253:Dschibuti
 
 
-+45:[DK]Dänemark
-+45-56:Rønne (Bornholm)
++45:[DK]DÃ¤nemark
++45-56:RÃ¸nne (Bornholm)
 
 
 +593:[EC]Ecuador
@@ -5937,7 +5937,7 @@
 +593-5:Quevedo
 +593-3:Riobamba
 +593-2:Santo Domingo
-+593-6:Tulcán
++593-6:TulcÃ¡n
 
 
 +503:El Salvador
@@ -5949,22 +5949,22 @@
 
 +372:[EE]Estland
 +372-47:Haapsalu
-+372-77:Jögeva
-+372-33:Kohtla-Järve
++372-77:JÃ¶geva
++372-33:Kohtla-JÃ¤rve
 +372-45:Kuressaare
-+372-46:Kärdla
++372-46:KÃ¤rdla
 +372-35:Narva
 +372-38:Paide
-+372-44:Pärnu
-+372-79:Pölva
++372-44:PÃ¤rnu
++372-79:PÃ¶lva
 +372-32:Rakvere
 +372-48:Rapla
-+372-39:Sillamäe
++372-39:SillamÃ¤e
 +372-2:Tallinn
 +372-7:Tartu
 +372-76:Valga
 +372-43:Viljandi
-+372-78:Vöru
++372-78:VÃ¶ru
 
 
 +500:Falklandinseln
@@ -5975,12 +5975,12 @@
 
 +358:[FI]Finnland
 +358-13:Joensuu, Nurmes
-+358-14:Jyväskylä
-+358-15:Mikkeli, Savolinna, Pieksamäki
++358-14:JyvÃ¤skylÃ¤
++358-15:Mikkeli, Savolinna, PieksamÃ¤ki
 +358-16:Lappland
 +358-17:Varkaus, Kuopio, Isalmi
 +358-18:Aland
-+358-19:Porvoo, Riihimäki, Tammisaari
++358-19:Porvoo, RiihimÃ¤ki, Tammisaari
 +358-2:Turku
 +358-3:Tampere, Toijala
 +358-4:Sondernummern, 
@@ -5999,13 +5999,13 @@
 +33-1:Versailles
 
 
-+594:Französisch-Guayana
++594:FranzÃ¶sisch-Guayana
 
 
-+689:Französisch-Polynesien
++689:FranzÃ¶sisch-Polynesien
 
 
-+298:Färöer
++298:FÃ¤rÃ¶er
 
 
 +241:Gabun
@@ -6112,7 +6112,7 @@
 +30-695:Zakynthos
 
 
-+44:[UK]Großbritannien und Nordirland
++44:[UK]GroÃŸbritannien und Nordirland
 +44-113:Leeds
 +44-114:Sheffield
 +44-115:Nottingham
@@ -6322,15 +6322,15 @@
 +44-1466:Huntly
 +44-1467:Inverurie
 +44-1469:Killingholme
-+44-1470:Isle of Skye – Edinbane
-+44-1471:Isle of Skye – Broadford
++44-1470:Isle of Skye â€“ Edinbane
++44-1471:Isle of Skye â€“ Broadford
 +44-1472:Grimsby
 +44-1473:Ipswich
 +44-1474:Gravesend
 +44-1475:Greenock
 +44-1476:Grantham
 +44-1477:Holmes Chapel
-+44-1478:Isle of Skye – Portree
++44-1478:Isle of Skye â€“ Portree
 +44-1479:Grantown-on-Spey
 +44-1480:Huntingdon
 +44-1481:Guernsey
@@ -6486,14 +6486,14 @@
 +44-1676:Meriden
 +44-1677:Bedale
 +44-1678:Bala
-+44-1680:Isle of Mull – Craignure
-+44-1681:Isle of Mull – Fionnphort
++44-1680:Isle of Mull â€“ Craignure
++44-1681:Isle of Mull â€“ Fionnphort
 +44-1683:Moffat
 +44-1684:Malvern
 +44-1685:Merthyr Tydfil
 +44-1686:Llanidloes / Newtown
 +44-1687:Mallaig
-+44-1688:Isle of Mull – Tobermory
++44-1688:Isle of Mull â€“ Tobermory
 +44-1689:Orpington
 +44-1690:Betws-y-Coed
 +44-1691:Oswestry
@@ -6729,10 +6729,10 @@
 +44-8:Freephone
 +44-9:Premium
 
-+299:Grönland
++299:GrÃ¶nland
 
 
-+590:Guadeloupe (einschl. St. Barthélemy u. St. Martin (Nördl.Teil))
++590:Guadeloupe (einschl. St. BarthÃ©lemy u. St. Martin (NÃ¶rdl.Teil))
 
 
 +1671:Guam
@@ -6991,7 +6991,7 @@
 +39-0423:Montebelluna
 +39-0424:Asiago
 +39-0425:Rovigo
-+39-0426:Àdria/Porte Tolle
++39-0426:Ã€dria/Porte Tolle
 +39-0427:Maniago
 +39-0428:Tarvisio
 +39-0429:Montagnana
@@ -7106,13 +7106,13 @@
 +39-0861:Teramo
 +39-0862:L'Aquila
 +39-0863:Avezzano
-+39-0864:Pràtola Peligna
-+39-0865:Isèrnia
++39-0864:PrÃ tola Peligna
++39-0865:IsÃ¨rnia
 +39-0871:Chieti
 +39-0872:Atessa
 +39-0873:Vasto
 +39-0874:Campobasso
-+39-0875:Tèrmoli
++39-0875:TÃ¨rmoli
 +39-0881:Foggia
 +39-0882:San Severo
 +39-0883:Andria/Barletta
@@ -7315,18 +7315,18 @@
 
 +57:[CO]Kolumbien
 +57-67:Armenia
-+57-1:Bogotá
++57-1:BogotÃ¡
 +57-7:Bucaramanga
 +57-2:Cali
 +57-5:Cartagena
-+57-75:Cúcuta
-+57-82:Ibagué
++57-75:CÃºcuta
++57-82:IbaguÃ©
 +57-68:Manizales
-+57-4:Medellín
-+57-47:Montería
++57-4:MedellÃ­n
++57-47:MonterÃ­a
 +57-27:Pasto
 +57-63:Pereira
-+57-28:Popayán
++57-28:PopayÃ¡n
 +57-54:Santa Marta
 +57-87:Tunja
 +57-8:Villavicencio
@@ -7382,7 +7382,7 @@
 
 
 +53:[CU]Kuba
-+53-322:Camagüey
++53-322:CamagÃ¼ey
 +53-7:Havanna
 +53-24:Holguin
 +53-226:Santiago de Cuba
@@ -7571,7 +7571,7 @@
 +356:Malta
 
 
-+1670:Marianen, Nördliche
++1670:Marianen, NÃ¶rdliche
 
 
 +212:[MA]Marokko
@@ -7637,7 +7637,7 @@
 +52-65:Mexicali
 +52-5:Mexico Stadt
 +52-8:Monterrey
-+52-99:Mérida
++52-99:MÃ©rida
 +52-631:Nogales
 +52-87:Nuevo Laredo
 +52-878:Piedras Negras
@@ -7652,7 +7652,7 @@
 +52-17:Torreon
 
 
-+691:Mikronesien, Föderierte Staaten von
++691:Mikronesien, FÃ¶derierte Staaten von
 
 
 +373:Moldau Republik
@@ -7704,7 +7704,7 @@
 
 +264:[NA]Namibia
 +264-63:Keetmanshoop
-+264-6331:Lüderitz
++264-6331:LÃ¼deritz
 +264-6332:Oranjemund
 +264-6751:Oshakati
 +264-651:Otjiwarongo
@@ -7893,7 +7893,7 @@
 +31-90:Sonderdienste (bezahlt)
 
 
-+599:[AN]Niederländische Antillen
++599:[AN]NiederlÃ¤ndische Antillen
 +599-7:Bonaire
 +599-9:Curacao
 +599-4:Saba
@@ -7933,7 +7933,7 @@
 +47-22:Oslo
 
 
-+43:[AT]Österreich
++43:[AT]Ã–sterreich
 +43-5:private Netze
 +43-50:private Netze
 +43-517:private Netze
@@ -7959,15 +7959,15 @@
 +43-2165:Hainburg an der Donau
 +43-2166:Parndorf
 +43-2167:Neusiedl am See
-+43-2169:Götzendorf an der Leitha
++43-2169:GÃ¶tzendorf an der Leitha
 +43-2172:Frauenkirchen
 +43-2173:Gols
 +43-2174:Pamhagen
 +43-2175:Apetlon
-+43-2176:St. Andrä am Zicksee
++43-2176:St. AndrÃ¤ am Zicksee
 +43-2177:Podersdorf am See
 +43-2212:Orth an der Donau
-+43-2213:Schönfeld im Marchfeld
++43-2213:SchÃ¶nfeld im Marchfeld
 +43-2214:Engelhartstetten
 +43-2215:Oberhausen
 +43-2216:Leopoldsdorf im Marchfeld
@@ -7978,14 +7978,14 @@
 +43-2233:Pressbaum
 +43-2234:Gramatneusiedl
 +43-2235:Lanzendorf
-+43-2236:Mödling
++43-2236:MÃ¶dling
 +43-2237:Sittendorf bei Wien
 +43-2238:Dornbach im Wienerwald
 +43-2239:Breitenfurt bei Wien
-+43-2242:Königstetten
++43-2242:KÃ¶nigstetten
 +43-2243:Klosterneuburg
 +43-2244:Langenzersdorf
-+43-2245:Großebersdorf
++43-2245:GroÃŸebersdorf
 +43-2246:Gerasdorf bei Wien
 +43-2247:Deutsch Wagram
 +43-2248:Parbasdorf
@@ -7997,14 +7997,14 @@
 +43-2256:Leobersdorf
 +43-2257:Klausen-Leopoldsdorf
 +43-2258:Alland
-+43-2259:Münchendorf
++43-2259:MÃ¼nchendorf
 +43-2262:Korneuburg
 +43-2263:Kreuzstetten
 +43-2264:Leobendorf
 +43-2265:Hausleiten
 +43-2266:Stockerau
 +43-2267:Sierndorf
-+43-2268:Großmugl
++43-2268:GroÃŸmugl
 +43-2269:Niederhollabrunn
 +43-2271:Weinzierl
 +43-2272:Freundorf bei Tulln
@@ -8015,30 +8015,30 @@
 +43-2277:Zwentendorf an der Donau
 +43-2278:Absdorf
 +43-2279:Kirchberg am Wagram
-+43-2282:Gänserndorf
++43-2282:GÃ¤nserndorf
 +43-2283:Angern an der March
 +43-2284:Oberweiden
-+43-2285:Groißenbrunn
++43-2285:GroiÃŸenbrunn
 +43-2286:Obersiebenbrunn
-+43-2287:Bockfließ
++43-2287:BockflieÃŸ
 +43-2288:Auersthal
-+43-2289:Groß Schweinbarth
++43-2289:GroÃŸ Schweinbarth
 +43-2522:Laa an der Thaya
 +43-2523:Kirchstetten
 +43-2524:Hagenberg
 +43-2525:Gnadendorf
-+43-2526:Großharras, Unterstinkenbrunn
++43-2526:GroÃŸharras, Unterstinkenbrunn
 +43-2527:Zwingendorf
 +43-2532:Zistersdorf
 +43-2533:Palterndorf
 +43-2534:Obersulz
 +43-2535:Hohenau an der March
-+43-2536:Drösing
-+43-2538:Dürnkrut
++43-2536:DrÃ¶sing
++43-2538:DÃ¼rnkrut
 +43-2552:Poysdorf
 +43-2554:Drasenhofen
 +43-2555:Herrnbaumgarten
-+43-2556:Großkrut
++43-2556:GroÃŸkrut
 +43-2557:Altlichtenwarth
 +43-2572:Eibesthal
 +43-2573:Kettlasbrunn
@@ -8050,13 +8050,13 @@
 +43-2611:Klostermarienberg
 +43-2612:Oberpullendorf
 +43-2613:Deutschkreutz
-+43-2614:Großwarasdorf
++43-2614:GroÃŸwarasdorf
 +43-2615:Frankenau
 +43-2616:Deutsch Gerisdorf
-+43-2617:Draßmarkt
++43-2617:DraÃŸmarkt
 +43-2618:Kobersdorf
 +43-2619:Lackenbach
-+43-2620:Höflein an der Hohen Wand
++43-2620:HÃ¶flein an der Hohen Wand
 +43-2621:Sieggraben
 +43-2622:Wiener Neustadt
 +43-2623:Landegg
@@ -8064,16 +8064,16 @@
 +43-2625:Bad Sauerbrunn
 +43-2626:Forchtenstein
 +43-2627:Bromberg
-+43-2628:Blumau-Neurißhof
++43-2628:Blumau-NeuriÃŸhof
 +43-2629:Warth
 +43-2630:Buchbach
-+43-2631:Lichtenwörth-Nadelburg
++43-2631:LichtenwÃ¶rth-Nadelburg
 +43-2632:Miesenbach
 +43-2633:Alkersdorf
 +43-2634:Gutenstein
 +43-2635:Neunkirchen
 +43-2636:Gutenstein
-+43-2637:Grünbach am Schneeberg
++43-2637:GrÃ¼nbach am Schneeberg
 +43-2638:Breitenau am Steinfelde
 +43-2639:Bad Fischau-Brunn
 +43-2641:Aspangberg
@@ -8090,7 +8090,7 @@
 +43-2664:Semmering
 +43-2665:Breitenstein am Semmering
 +43-2666:Edlach an der Rax
-+43-2667:Naßwald
++43-2667:NaÃŸwald
 +43-2672:Berndorf
 +43-2673:Altenmarkt-Thenneberg
 +43-2674:Altenmarkt-Thenneberg
@@ -8099,36 +8099,36 @@
 +43-2683:Purbach am Neusiedlersee
 +43-2684:Oslip
 +43-2685:Rust
-+43-2686:Draßburg
++43-2686:DraÃŸburg
 +43-2687:Antau
-+43-2688:Großhöflein
++43-2688:GroÃŸhÃ¶flein
 +43-2689:Wimpassing an der Leitha
-+43-2711:Dürnstein
++43-2711:DÃ¼rnstein
 +43-2712:Aggsbach
 +43-2713:Spitz
 +43-2714:Rossatz
-+43-2715:Weißenkirchen in der Wachau
++43-2715:WeiÃŸenkirchen in der Wachau
 +43-2716:Eisenbergeramt
-+43-2717:Gföhl
++43-2717:GfÃ¶hl
 +43-2718:Allentsgschwendt
-+43-2719:Droß
++43-2719:DroÃŸ
 +43-2722:Kilb
 +43-2723:Hofstetten, Pielach
 +43-2724:Schwarzenbach an der Pielach
 +43-2725:Frankenfels
 +43-2726:Frankenfels
 +43-2728:Annaberg
-+43-2731:Altpölla
++43-2731:AltpÃ¶lla
 +43-2732:Krems an der Donau
-+43-2733:Schönberg am Kamp
++43-2733:SchÃ¶nberg am Kamp
 +43-2734:Langenlois
 +43-2735:Brunn im Felde
 +43-2736:Paudorf
 +43-2738:Fels am Wagram
 +43-2739:Angern
 +43-2741:Afing
-+43-2742:St. Pölten
-+43-2743:Böheimkirchen
++43-2742:St. PÃ¶lten
++43-2743:BÃ¶heimkirchen
 +43-2744:St. Christophen
 +43-2745:Wilhelmsburg an der Traisen
 +43-2746:Traisen
@@ -8140,8 +8140,8 @@
 +43-2754:Loosdorf, Bez. Melk
 +43-2755:Mank
 +43-2756:Ruprechtshofen
-+43-2757:Pöchlarn
-+43-2758:Artstetten-Pöbring
++43-2757:PÃ¶chlarn
++43-2758:Artstetten-PÃ¶bring
 +43-2762:Freiland
 +43-2763:Lilienfeld
 +43-2764:Hainfeld
@@ -8153,22 +8153,22 @@
 +43-2772:Neulengbach
 +43-2773:Pressbaum
 +43-2774:Altlengbach
-+43-2782:Anzenberg, Bez. St. Pölten
++43-2782:Anzenberg, Bez. St. PÃ¶lten
 +43-2783:Traismauer
 +43-2784:Langmannersdorf
-+43-2786:Oberwölbling
-+43-2812:Groß Gerungs
++43-2786:OberwÃ¶lbling
++43-2812:GroÃŸ Gerungs
 +43-2813:Altmelon
-+43-2814:Groß Gerungs
-+43-2815:Großschönau
++43-2814:GroÃŸ Gerungs
++43-2815:GroÃŸschÃ¶nau
 +43-2816:Karlstift
 +43-2822:Zwettl
-+43-2823:Großglobnitz
++43-2823:GroÃŸglobnitz
 +43-2824:Allentsteig
-+43-2825:Göpfritz an der Wild
-+43-2826:Gföhl
++43-2825:GÃ¶pfritz an der Wild
++43-2826:GfÃ¶hl
 +43-2827:Altmelon
-+43-2828:Groß Gerungs
++43-2828:GroÃŸ Gerungs
 +43-2829:Jagenbach
 +43-2841:Vitis
 +43-2842:Waidhofen an der Thaya
@@ -8179,9 +8179,9 @@
 +43-2847:Blumau an der Wild
 +43-2848:Heidenreichstein
 +43-2849:Schwarzenau
-+43-2852:Gmünd
++43-2852:GmÃ¼nd
 +43-2853:Schrems
-+43-2854:Großglobnitz
++43-2854:GroÃŸglobnitz
 +43-2855:Nondorf
 +43-2856:Weitra
 +43-2857:St. Martin
@@ -8193,13 +8193,13 @@
 +43-2865:Eisgarn
 +43-2872:Ottenschlag
 +43-2873:Kottes
-+43-2874:Bärnkopf
++43-2874:BÃ¤rnkopf
 +43-2875:Engelbrechts
-+43-2876:Albrechtsberg an der Großen Krems
++43-2876:Albrechtsberg an der GroÃŸen Krems
 +43-2877:Gloden
 +43-2878:Spielberg
 +43-2912:Geras
-+43-2913:Hötzelsdorf
++43-2913:HÃ¶tzelsdorf
 +43-2914:Japons
 +43-2915:Drosendorf an der Thaya
 +43-2916:Mallersbach
@@ -8209,13 +8209,13 @@
 +43-2945:Deinzendorf
 +43-2946:Pillersdorf
 +43-2947:Heinrichsdorf
-+43-2948:Pleißing
++43-2948:PleiÃŸing
 +43-2949:Hardegg
 +43-2951:Guntersdorf
 +43-2952:Hollabrunn
 +43-2953:Eggendorf im Thale
 +43-2954:Breitenwaida
-+43-2955:Großweikersdorf
++43-2955:GroÃŸweikersdorf
 +43-2956:Glaubendorf
 +43-2957:Hohenwarth, Manhartsberg
 +43-2958:Burgschleinitz
@@ -8226,7 +8226,7 @@
 +43-2985:Freischling
 +43-2986:Irnfritz
 +43-2987:St. Leonhard am Hornerwald
-+43-2988:Neupölla
++43-2988:NeupÃ¶lla
 +43-2989:Brunn an der Wild
 +43-3112:Gleisdorf
 +43-3113:Albersdorf-Prebuch
@@ -8247,14 +8247,14 @@
 +43-3135:Karlsdorf bei Graz
 +43-3136:Dobl
 +43-3137:Mooskirchen
-+43-3140:Köflach
++43-3140:KÃ¶flach
 +43-3142:Voitsberg
 +43-3143:Greisdorf
-+43-3144:Köflach
++43-3144:KÃ¶flach
 +43-3145:Edelschrott
 +43-3146:Modriach
 +43-3147:Graden
-+43-3148:Bärnbach
++43-3148:BÃ¤rnbach
 +43-3149:Eisbach
 +43-3150:Baumgarten bei Gnas
 +43-3151:Aug-Radisch
@@ -8262,7 +8262,7 @@
 +43-3153:Auersbach
 +43-3155:Stein
 +43-3157:Kapfenstein
-+43-3158:Bairisch Kölldorf
++43-3158:Bairisch KÃ¶lldorf
 +43-3159:Bad Gleichenberg
 +43-316:Graz
 +43-3170:Fischbach
@@ -8279,20 +8279,20 @@
 +43-3183:Allerheiligen bei Wildon
 +43-3184:Wolfsberg im Schwarzautal
 +43-3185:Hengsberg
-+43-3322:Güssing
++43-3322:GÃ¼ssing
 +43-3323:Deutsch Ehrensdorf
 +43-3324:Deutsch Bieling
 +43-3325:Deutsch Minihof
 +43-3326:Bocksdorf
 +43-3327:Deutsch Tschantschendorf
-+43-3328:Eisenhüttl
++43-3328:EisenhÃ¼ttl
 +43-3329:Jennersdorf
-+43-3331:Mönichwald
++43-3331:MÃ¶nichwald
 +43-3332:Hartberg
 +43-3333:Sebersdorf
 +43-3334:Ebersdorf
 +43-3335:Greinbach
-+43-3336:Mönichwald
++43-3336:MÃ¶nichwald
 +43-3337:Kleinschlag
 +43-3338:Dechantskirchen
 +43-3339:Friedberg
@@ -8304,27 +8304,27 @@
 +43-3357:Pinkafeld
 +43-3358:Hackerberg
 +43-3359:Grafenschachen
-+43-3362:Großpetersdorf
++43-3362:GroÃŸpetersdorf
 +43-3363:Rechnitz
 +43-3364:Burg
-+43-3365:Deutsch Schützen
++43-3365:Deutsch SchÃ¼tzen
 +43-3366:Badersdorf
-+43-3382:Fürstenfeld
++43-3382:FÃ¼rstenfeld
 +43-3383:Burgau
 +43-3385:Bad Waltersdorf
 +43-3386:Blaindorf
 +43-3387:Hatzendorf
 +43-3452:Leibnitz
 +43-3453:Vogau
-+43-3454:Großklein
++43-3454:GroÃŸklein
 +43-3455:Arnfels
 +43-3456:Eichberg-Trautenburg
-+43-3457:Gleinstätten
++43-3457:GleinstÃ¤tten
 +43-3460:Soboth
 +43-3461:Garanas
 +43-3462:Deutschlandsberg
 +43-3463:Bad Gams
-+43-3464:Groß St. Florian
++43-3464:GroÃŸ St. Florian
 +43-3465:Limberg bei Wies
 +43-3466:Aibl
 +43-3467:Garanas
@@ -8340,7 +8340,7 @@
 +43-3513:Gaal
 +43-3514:Kobenz
 +43-3515:Feistritz bei Knittelfeld
-+43-3516:Großlobming
++43-3516:GroÃŸlobming
 +43-3532:Murau
 +43-3533:Turrach
 +43-3534:Falkendorf
@@ -8356,13 +8356,13 @@
 +43-3577:Zeltweg
 +43-3578:Amering
 +43-3579:Oberkurzheim
-+43-3581:Oberwölz-Stadt
++43-3581:OberwÃ¶lz-Stadt
 +43-3582:Scheifling
 +43-3583:St. Georgen ob Judenburg
 +43-3584:Kulm am Zirbitz
 +43-3585:St. Blasen
 +43-3586:Kulm am Zirbitz
-+43-3587:Schönberg-Lachtal
++43-3587:SchÃ¶nberg-Lachtal
 +43-3588:Frojach-Katsch
 +43-3611:Admont
 +43-3612:Liezen
@@ -8376,7 +8376,7 @@
 +43-3623:Bad Mitterndorf
 +43-3624:Pichl-Kainisch
 +43-3631:Weyer
-+43-3632:Weißenbach an der Enns
++43-3632:WeiÃŸenbach an der Enns
 +43-3633:Landl
 +43-3634:Hieflau
 +43-3635:Radmer
@@ -8387,14 +8387,14 @@
 +43-3682:Aigen im Ennstal
 +43-3683:Donnersbach
 +43-3684:Irdning
-+43-3685:Gröbming
++43-3685:GrÃ¶bming
 +43-3686:Aich
 +43-3687:Schladming
 +43-3688:Tauplitz
-+43-3689:St. Nikolai, Sölktal
++43-3689:St. Nikolai, SÃ¶lktal
 +43-3832:Kraubath an der Mur
 +43-3833:Traboch
-+43-3834:Wald am Schoberpaß
++43-3834:Wald am SchoberpaÃŸ
 +43-3842:Leoben
 +43-3843:St. Michael in Obersteiermark
 +43-3844:Kammern im Liesingtal
@@ -8403,18 +8403,18 @@
 +43-3847:Trofaiach
 +43-3848:Eisenerz
 +43-3849:Vordernberg
-+43-3852:Mürzzuschlag
++43-3852:MÃ¼rzzuschlag
 +43-3853:Spital am Semmering
 +43-3854:Krieglach
 +43-3855:Alpl
 +43-3856:Veitsch
 +43-3857:Altenberg an der Rax
-+43-3858:Mitterdorf im Mürztal
-+43-3859:Mürzsteg
++43-3858:Mitterdorf im MÃ¼rztal
++43-3859:MÃ¼rzsteg
 +43-3861:Aflenz
 +43-3862:Kapfenberg
 +43-3863:Seewiesen
-+43-3864:Allerheiligen im Mürztal
++43-3864:Allerheiligen im MÃ¼rztal
 +43-3865:Kindberg
 +43-3866:Breitenau am Hochlantsch
 +43-3867:Pernegg an der Mur
@@ -8422,14 +8422,14 @@
 +43-3869:St. Katharein an der Laming
 +43-3882:Mariazell
 +43-3883:Halltal
-+43-3884:Gußwerk
-+43-3885:Gußwerk
-+43-3886:Gußwerk
++43-3884:GuÃŸwerk
++43-3885:GuÃŸwerk
++43-3886:GuÃŸwerk
 +43-4212:St. Veit an der Glan
 +43-4213:Kappel am Krappfeld
-+43-4214:Brückl
++43-4214:BrÃ¼ckl
 +43-4215:Liebenfels
-+43-4220:Köttmannsdorf
++43-4220:KÃ¶ttmannsdorf
 +43-4221:Gallizien
 +43-4223:Maria Saal
 +43-4224:Pischeldorf
@@ -8437,10 +8437,10 @@
 +43-4226:St. Margareten im Rosental
 +43-4227:Ferlach
 +43-4228:Feistritz im Rosental
-+43-4229:Krumpendorf am Wörther See
++43-4229:Krumpendorf am WÃ¶rther See
 +43-4230:Globasnitz
 +43-4231:Diex
-+43-4232:Völkermarkt
++43-4232:VÃ¶lkermarkt
 +43-4233:Griffen
 +43-4234:Ruden
 +43-4235:Bleiburg
@@ -8461,52 +8461,52 @@
 +43-4254:Faak am See
 +43-4255:Arnoldstein
 +43-4256:Feistritz an der Gail
-+43-4257:Fürnitz
++43-4257:FÃ¼rnitz
 +43-4258:Gummern
 +43-4262:Althofen
-+43-4263:Hüttenberg
++43-4263:HÃ¼ttenberg
 +43-4264:Eberstein
 +43-4265:Deutsch Griffen
-+43-4266:Straßburg
++43-4266:StraÃŸburg
 +43-4267:Grades
 +43-4268:Friesach
 +43-4269:Flattnitz
 +43-4271:Steuerberg
-+43-4272:Pörtschach am Wörther See
++43-4272:PÃ¶rtschach am WÃ¶rther See
 +43-4273:Reifnitz
-+43-4274:Velden am Wörther See
++43-4274:Velden am WÃ¶rther See
 +43-4275:Ebene Reichenau
-+43-4276:Feldkirchen in Kärnten
++43-4276:Feldkirchen in KÃ¤rnten
 +43-4277:Glanegg
 +43-4278:Gnesau
 +43-4279:Deutsch Griffen, Sirnitz
 +43-4282:Egg bei Hermagor
-+43-4283:Förolach
++43-4283:FÃ¶rolach
 +43-4284:Kirchbach
 +43-4285:Rattendorf
 +43-4286:St. Lorenzen im Gitschtal
-+43-4350:Bad St. Leonhard im Lavanttal, Klippitztörl
++43-4350:Bad St. Leonhard im Lavanttal, KlippitztÃ¶rl
 +43-4352:Wolfsberg
 +43-4353:Prebl
 +43-4354:Preitenegg
 +43-4355:Eitweg
-+43-4356:Lavamünd
++43-4356:LavamÃ¼nd
 +43-4357:St. Georgen, Lavanttal
-+43-4358:St. Andrä, Lavanttal
++43-4358:St. AndrÃ¤, Lavanttal
 +43-4359:Reichenfels
 +43-463:Klagenfurt
 +43-4710:Oberdrauburg
 +43-4712:Greifenburg
-+43-4713:Techendorf, Weißensee
++43-4713:Techendorf, WeiÃŸensee
 +43-4714:Dellach im Drautal
-+43-4715:Kötschach-Mauthen
++43-4715:KÃ¶tschach-Mauthen
 +43-4716:Birnbaum
 +43-4717:Steinfeld
 +43-4718:Dellach im Gailtal
-+43-4732:Gmünd
++43-4732:GmÃ¼nd
 +43-4733:Malta
 +43-4734:Rennweg
-+43-4735:Kremsbrücke
++43-4735:KremsbrÃ¼cke
 +43-4736:Innerkrems
 +43-4761:Stockenboi
 +43-4762:Spittal an der Drau
@@ -8518,13 +8518,13 @@
 +43-4783:Kolbnitz
 +43-4784:Mallnitz
 +43-4785:Flattach
-+43-4822:Winklern, Mölltal
++43-4822:Winklern, MÃ¶lltal
 +43-4823:Rangersdorf
 +43-4824:Heiligenblut
-+43-4825:Großkirchheim
-+43-4826:Mörtschach
++43-4825:GroÃŸkirchheim
++43-4826:MÃ¶rtschach
 +43-4842:Sillian
-+43-4843:Außervillgraten
++43-4843:AuÃŸervillgraten
 +43-4846:Abfaltersbach
 +43-4847:Obertilliach
 +43-4848:Kartitsch
@@ -8536,8 +8536,8 @@
 +43-4873:St. Jakob in Defereggen
 +43-4874:Virgen, Osttirol
 +43-4875:Matrei in Osttirol
-+43-4876:Kals am Großglockner
-+43-4877:Prägraten
++43-4876:Kals am GroÃŸglockner
++43-4877:PrÃ¤graten
 +43-4879:St. Veit in Defereggen
 +43-512:Innsbruck
 +43-5212:Seefeld in Tirol
@@ -8549,26 +8549,26 @@
 +43-5226:Neustift im Stubaital
 +43-5230:Sellrain
 +43-5232:Kematen in Tirol
-+43-5234:Götzens
++43-5234:GÃ¶tzens
 +43-5236:Gries im Sellrain
 +43-5238:Zirl
-+43-5239:Kühtai
++43-5239:KÃ¼htai
 +43-5242:Schwaz
 +43-5243:Maurach
 +43-5244:Jenbach
-+43-5245:Hinterriß
++43-5245:HinterriÃŸ
 +43-5246:Achenkirch
 +43-5248:Steinberg am Rofan
 +43-5252:Oetz, Tirol
-+43-5253:Längenfeld
-+43-5254:Sölden
++43-5253:LÃ¤ngenfeld
++43-5254:SÃ¶lden
 +43-5255:Umhausen
 +43-5256:Untergurgl
 +43-5262:Telfs
 +43-5263:Silz, Tirol
 +43-5264:Mieming
 +43-5265:Nassereith
-+43-5266:Ötztal-Bahnhof
++43-5266:Ã–tztal-Bahnhof
 +43-5272:Steinach am Brenner
 +43-5273:Matrei am Brenner
 +43-5274:Gries am Brenner
@@ -8576,36 +8576,36 @@
 +43-5276:Gschnitz
 +43-5278:Navis
 +43-5279:Steinach am Brenner
-+43-5280:Fügenberg
++43-5280:FÃ¼genberg
 +43-5282:Zell am Ziller
 +43-5283:Kaltenbach, Zillertal
 +43-5284:Gerlos
 +43-5285:Mayrhofen
 +43-5286:Ginzling
 +43-5287:Tux
-+43-5288:Fügen
++43-5288:FÃ¼gen
 +43-5289:Brandberg im Zillertal
 +43-5331:Brandenberg, Tirol
-+43-5332:Wörgl
-+43-5333:Söll
++43-5332:WÃ¶rgl
++43-5333:SÃ¶ll
 +43-5334:Brixen im Thale
 +43-5335:Hopfgarten im Brixental
 +43-5336:Alpbach
 +43-5337:Brixlegg
 +43-5338:Kundl
-+43-5339:Wildschönau
++43-5339:WildschÃ¶nau
 +43-5352:St. Johann in Tirol
 +43-5353:Waidring
 +43-5354:Fieberbrunn
 +43-5355:Jochberg
-+43-5356:Kitzbühel
++43-5356:KitzbÃ¼hel
 +43-5357:Kirchberg in Tirol
 +43-5358:Ellmau
 +43-5359:Hochfilzen
 +43-5372:Kufstein
 +43-5373:Ebbs
 +43-5374:Walchsee
-+43-5375:Kössen
++43-5375:KÃ¶ssen
 +43-5376:Thiersee
 +43-5412:Imst
 +43-5413:St. Leonhard im Pitztal
@@ -8614,20 +8614,20 @@
 +43-5418:Mils bei Imst
 +43-5441:Kappl
 +43-5442:Zams
-+43-5443:Galtür
++43-5443:GaltÃ¼r
 +43-5444:Ischgl
 +43-5445:Landeck
 +43-5446:St. Anton am Arlberg
 +43-5447:Flirsch
 +43-5448:Pettneu am Arlberg
-+43-5449:Fließ
++43-5449:FlieÃŸ
 +43-5472:Prutz
 +43-5473:Nauders
 +43-5474:Pfunds
 +43-5475:Feichten im Kaunertal
 +43-5476:Serfaus
-+43-5477:Tösens
-+43-5510:Damüls
++43-5477:TÃ¶sens
++43-5510:DamÃ¼ls
 +43-5512:Egg
 +43-5513:Hittisau
 +43-5514:Bezau
@@ -8635,13 +8635,13 @@
 +43-5516:Doren
 +43-5517:Riezlern, Kleinwalsertal
 +43-5518:Mellau
-+43-5519:Schröcken
++43-5519:SchrÃ¶cken
 +43-5522:Feldkirch
-+43-5523:Götzis
++43-5523:GÃ¶tzis
 +43-5524:Satteins
 +43-5525:Bludesch
 +43-5526:Laterns
-+43-5550:Thüringen
++43-5550:ThÃ¼ringen
 +43-5552:Bludenz
 +43-5553:Raggal
 +43-5554:Buchboden
@@ -8650,14 +8650,14 @@
 +43-5558:Gaschurn
 +43-5559:Brand
 +43-5572:Dornbirn
-+43-5573:Hörbranz
++43-5573:HÃ¶rbranz
 +43-5574:Bregenz
 +43-5575:Langen, Bregenz
 +43-5576:Hohenems
 +43-5577:Lustenau
-+43-5578:Höchst
++43-5578:HÃ¶chst
 +43-5579:Alberschwende
-+43-5582:Klösterle
++43-5582:KlÃ¶sterle
 +43-5583:Lech
 +43-5585:Dalaas
 +43-5632:Stanzach
@@ -8681,12 +8681,12 @@
 +43-6138:St. Wolfgang im Salzkammergut
 +43-6210:Lochen
 +43-6212:Eugendorf
-+43-6213:Straßwalchen
++43-6213:StraÃŸwalchen
 +43-6214:Eugendorf
 +43-6215:Lengau
 +43-6216:Neumarkt am Wallersee
 +43-6217:Berndorf bei Salzburg
-+43-6218:Pöndorf
++43-6218:PÃ¶ndorf
 +43-6219:Mattsee
 +43-6221:Ebenau
 +43-6223:Anthering
@@ -8702,23 +8702,23 @@
 +43-6235:Thalgau
 +43-6240:Adnet
 +43-6241:St. Koloman
-+43-6242:Rußbach am Paß Gschütt
++43-6242:RuÃŸbach am PaÃŸ GschÃ¼tt
 +43-6243:Abtenau
 +43-6244:Golling an der Salzach
 +43-6245:Hallein
-+43-6246:Grödig
-+43-6247:Großgmain
++43-6246:GrÃ¶dig
++43-6247:GroÃŸgmain
 +43-6272:Oberndorf bei Salzburg
 +43-6274:Lamprechtshausen
-+43-6276:Nußdorf am Haunsberg
++43-6276:NuÃŸdorf am Haunsberg
 +43-6277:Franking
 +43-6278:Geretsberg
 +43-6412:St. Johann im Pongau
 +43-6413:Wagrain
-+43-6414:Großarl
++43-6414:GroÃŸarl
 +43-6415:Schwarzach im Pongau
 +43-6416:Lend
-+43-6417:Hüttschlag
++43-6417:HÃ¼ttschlag
 +43-6418:Kleinarl
 +43-6432:Bad Hofgastein
 +43-6433:Dorfgastein
@@ -8730,56 +8730,56 @@
 +43-6456:Obertauern
 +43-6457:Flachau
 +43-6458:Flachau
-+43-6461:Dienten am Hochkönig
++43-6461:Dienten am HochkÃ¶nig
 +43-6462:Bischofshofen
 +43-6463:Abtenau
 +43-6464:Eben im Pongau
 +43-6466:Werfenweng
-+43-6467:Mühlbach am Hochkönig
++43-6467:MÃ¼hlbach am HochkÃ¶nig
 +43-6468:Werfen
 +43-6470:Tamsweg
 +43-6471:Tweng
 +43-6472:Mauterndorf, Lungau
-+43-6473:Weißpriach
-+43-6474:St. Andrä im Lungau
++43-6473:WeiÃŸpriach
++43-6474:St. AndrÃ¤ im Lungau
 +43-6475:Ramingstein
 +43-6476:St. Margarethen im Lungau
 +43-6477:Muhr
 +43-6478:Zederhaus
 +43-6479:Muhr
-+43-6483:Göriach, Salzburg
++43-6483:GÃ¶riach, Salzburg
 +43-6484:Lessach, Salzburg
 +43-6541:Saalbach
 +43-6542:Zell am See
 +43-6543:Taxenbach
 +43-6544:Rauris
-+43-6545:Bruck an der Großglocknerstraße
-+43-6546:Fusch an der Großglocknerstraße
++43-6545:Bruck an der GroÃŸglocknerstraÃŸe
++43-6546:Fusch an der GroÃŸglocknerstraÃŸe
 +43-6547:Kaprun
 +43-6548:Niedernsill
 +43-6549:Piesendorf
 +43-6562:Mittersill
 +43-6563:Uttendorf, Pinzgau
 +43-6564:Krimml
-+43-6565:Neukirchen am Großvenediger
-+43-6566:Mühlbach, Oberpinzgau
++43-6565:Neukirchen am GroÃŸvenediger
++43-6566:MÃ¼hlbach, Oberpinzgau
 +43-6582:Leogang
 +43-6583:Saalfelden am Steinernen Meer
 +43-6584:Maria Alm am Steinernen Meer
 +43-6588:Lofer
 +43-6589:Unken
 +43-662:Salzburg
-+43-7:Linz KW[OÖ] 
-+43-7211:Reichenau im Mühlkreis
++43-7:Linz KW[OÃ–] 
++43-7211:Reichenau im MÃ¼hlkreis
 +43-7212:Zwettl an der Rodl
 +43-7213:Bad Leonfelden
 +43-7214:Reichenthal
-+43-7215:Hellmonsödt
++43-7215:HellmonsÃ¶dt
 +43-7216:Helfenberg
-+43-7217:St. Veit im Mühlkreis
++43-7217:St. Veit im MÃ¼hlkreis
 +43-7218:Traberg
-+43-7219:Vorderweißenbach
-+43-7221:Hörsching
++43-7219:VorderweiÃŸenbach
++43-7221:HÃ¶rsching
 +43-7223:Enns
 +43-7224:Asten
 +43-7225:Hargelsberg
@@ -8789,7 +8789,7 @@
 +43-7229:Traun
 +43-7230:Alberndorf in der Riedmark
 +43-7231:Herzogsdorf
-+43-7232:St. Martin im Mühlkreis
++43-7232:St. Martin im MÃ¼hlkreis
 +43-7233:Feldkirchen an der Donau
 +43-7234:Ottensheim
 +43-7235:Gallneukirchen
@@ -8797,7 +8797,7 @@
 +43-7237:St. Georgen an der Gusen
 +43-7238:Mauthausen
 +43-7239:Lichtenberg bei Linz
-+43-7240:Kremsmünster
++43-7240:KremsmÃ¼nster
 +43-7241:Steinerkirchen an der Traun
 +43-7242:Wels
 +43-7243:Marchtrenk
@@ -8811,10 +8811,10 @@
 +43-7251:Schiedlberg
 +43-7252:Steyr
 +43-7253:Wolfern
-+43-7254:Großraming
++43-7254:GroÃŸraming
 +43-7255:Losenstein
 +43-7256:Ternberg
-+43-7257:Grünburg
++43-7257:GrÃ¼nburg
 +43-7258:Bad Hall
 +43-7259:Sierning
 +43-7261:Bad Zell
@@ -8823,9 +8823,9 @@
 +43-7264:Rechberg
 +43-7265:Pabneukirchen
 +43-7266:Bad Kreuzen
-+43-7267:Königswiesen
++43-7267:KÃ¶nigswiesen
 +43-7268:Bad Kreuzen
-+43-7269:Münzbach
++43-7269:MÃ¼nzbach
 +43-7272:Eferding
 +43-7273:Aschach an der Donau
 +43-7274:Alkoven, Wilhering
@@ -8833,13 +8833,13 @@
 +43-7277:Waizenkirchen
 +43-7278:Neukirchen am Walde
 +43-7279:Haibach ob der Donau
-+43-7280:Schwarzenberg am Böhmerwald
-+43-7281:Aigen im Mühlkreis
++43-7280:Schwarzenberg am BÃ¶hmerwald
++43-7281:Aigen im MÃ¼hlkreis
 +43-7282:Neufelden
 +43-7283:Sarleinsbach
 +43-7284:Oberkappel
-+43-7285:Hofkirchen im Mühlkreis
-+43-7286:Lembach im Mühlkreis
++43-7285:Hofkirchen im MÃ¼hlkreis
++43-7286:Lembach im MÃ¼hlkreis
 +43-7287:Kollerschlag
 +43-7288:Klaffer am Hochficht
 +43-7289:Rohrbach in
@@ -8848,7 +8848,7 @@
 +43-7355:Gaflenz
 +43-7357:Weyer
 +43-7412:Ybbs an der Donau
-+43-7413:Artstetten-Pöbring
++43-7413:Artstetten-PÃ¶bring
 +43-7414:Hofamt Priel
 +43-7415:Yspertal
 +43-7416:Ruprechtshofen
@@ -8868,7 +8868,7 @@
 +43-7472:Amstetten
 +43-7473:Blindenmarkt
 +43-7474:Neuhofen an der Ybbs
-+43-7475:Öhling
++43-7475:Ã–hling
 +43-7476:Seitenstetten
 +43-7477:Haidershofen
 +43-7478:Wallsee
@@ -8878,7 +8878,7 @@
 +43-7483:Wieselburg an der Erlauf
 +43-7484:St. Georgen am Reith
 +43-7485:Lunz am See
-+43-7486:Göstling an der Ybbs
++43-7486:GÃ¶stling an der Ybbs
 +43-7487:Scheibbs
 +43-7488:Wolfpassing
 +43-7489:Purgstall an der Erlauf
@@ -8888,7 +8888,7 @@
 +43-7565:Klaus an der Pyhrnbahn
 +43-7566:Spital am Pyhrn
 +43-7582:Kirchdorf an der Krems
-+43-7583:Kremsmünster
++43-7583:KremsmÃ¼nster
 +43-7584:Molln
 +43-7585:Klaus an der Pyhrnbahn
 +43-7586:Pettenbach
@@ -8898,36 +8898,36 @@
 +43-7613:Laakirchen
 +43-7614:Vorchdorf
 +43-7615:Scharnstein
-+43-7616:Grünau im Almtal
++43-7616:GrÃ¼nau im Almtal
 +43-7617:Traunkirchen
-+43-7618:Altmünster
++43-7618:AltmÃ¼nster
 +43-7619:Kirchham
 +43-7662:Lenzing
 +43-7663:Steinbach am Attersee
-+43-7664:Schörfling am Attersee
-+43-7665:Nußdorf am Attersee
++43-7664:SchÃ¶rfling am Attersee
++43-7665:NuÃŸdorf am Attersee
 +43-7666:Attersee
 +43-7667:St. Georgen im Attergau
-+43-7672:Vöcklabruck
++43-7672:VÃ¶cklabruck
 +43-7673:Schwanenstadt
 +43-7674:Attnang-Puchheim
 +43-7675:Ampflwang im Hausruckwald
 +43-7676:Ottnang am Hausruck
-+43-7682:Vöcklamarkt
++43-7682:VÃ¶cklamarkt
 +43-7683:Frankenburg
-+43-7684:Vöcklamarkt
++43-7684:VÃ¶cklamarkt
 +43-7711:Suben
-+43-7712:Schärding
++43-7712:SchÃ¤rding
 +43-7713:Schardenberg
 +43-7714:Vichtenstein
-+43-7716:Münzkirchen
++43-7716:MÃ¼nzkirchen
 +43-7717:Engelhartszell
 +43-7718:Waldkirchen am Wesen
 +43-7719:Taufkirchen an der Pram
 +43-7722:Braunau am Inn
 +43-7723:Altheim
 +43-7724:Burgkirchen
-+43-7727:Überackern
++43-7727:Ãœberackern
 +43-7728:Geretsberg
 +43-7729:Pischelsdorf am Engelbach
 +43-7732:Haag am Hausruck
@@ -8944,9 +8944,9 @@
 +43-7748:Eggelsberg
 +43-7750:Hohenzell
 +43-7751:Ort im Innkreis
-+43-7752:Aurolzmünster
++43-7752:AurolzmÃ¼nster
 +43-7753:Eberschwang
-+43-7754:Lohnsburg am Kobernaußerwald
++43-7754:Lohnsburg am KobernauÃŸerwald
 +43-7755:Aspach, Innkreis
 +43-7757:Gurten
 +43-7758:Kirchdorf am Inn
@@ -8959,17 +8959,17 @@
 +43-7767:Eggerding
 +43-7941:Kefermarkt
 +43-7942:Freistadt
-+43-7943:Grünbach
++43-7943:GrÃ¼nbach
 +43-7944:Sandl
 +43-7945:St. Oswald bei Freistadt
 +43-7946:Bad Zell
 +43-7947:Gutau
-+43-7948:Hirschbach im Mühlkreis
++43-7948:Hirschbach im MÃ¼hlkreis
 +43-7949:Leopoldschlag
 +43-7952:Gutau
 +43-7953:Kaltenberg
 +43-7954:Dimbach
-+43-7955:Mönchdorf
++43-7955:MÃ¶nchdorf
 +43-7956:Kaltenberg
 
 +968:Oman
@@ -8999,18 +8999,18 @@
 
 
 +595:[PY]Paraguay
-+595-291:Aregúa
-+595-511:Caacupé
-+595-28:Capiatá
++595-291:AregÃºa
++595-511:CaacupÃ©
++595-28:CapiatÃ¡
 +595-61:Ciudad del Este
 +595-548:Colonia Independencia
-+595-31:Concepción
++595-31:ConcepciÃ³n
 +595-521:Coronel Oviedo
-+595-71:Encarnación
++595-71:EncarnaciÃ³n
 +595-21:Fernando de la Mora
 +595-91:Filadelfia
 +595-75:Hohenau
-+595-294:Itauguá
++595-294:ItauguÃ¡
 +595-36:Pedro Juan Caballero
 +595-86:Pilar
 +595-512:San Bernardino
@@ -9156,7 +9156,7 @@
 +250:Ruanda
 
 
-+40:[RO]Rumänien
++40:[RO]RumÃ¤nien
 +40-257:Arad
 +40-234:Bacau
 +40-262:Baia Mare
@@ -9200,7 +9200,7 @@
 +40-40:Tulcea
 
 
-+7:[RU]Russische Föderation
++7:[RU]Russische FÃ¶deration
 +7-39022:Abakan
 +7-818:Archangelsk
 +7-8512:Astrachan
@@ -9282,7 +9282,7 @@
 +7-0732:Woronesh
 
 
-+262:Réunion
++262:RÃ©union
 
 
 +677:Salomonen
@@ -9303,7 +9303,7 @@
 +259:Sansibar
 
 
-+239:Sao Tomé und Príncipe
++239:Sao TomÃ© und PrÃ­ncipe
 
 
 +966:[SA]Saudi Arabien
@@ -9324,20 +9324,20 @@
 +46-921:Boden
 +46-33:Boras
 +46-571:Charlottenberg
-+46-171:Enköping
++46-171:EnkÃ¶ping
 +46-16:Eskilstuna
 +46-223:Fagersta
 +46-23:Falun
 +46-493:Gamleby
 +46-497:Gotland
-+46-31:Göteborg
++46-31:GÃ¶teborg
 +46-35:Halmstad
 +46-696:Hammarstrand
 +46-922:Haparanda
 +46-225:Hedemora
-+46-42:Höganäs
-+46-415:Hörby
-+46-36:Jönköping
++46-42:HÃ¶ganÃ¤s
++46-415:HÃ¶rby
++46-36:JÃ¶nkÃ¶ping
 +46-480:Kalmar
 +46-454:Karlshamm
 +46-586:Karlskoga
@@ -9346,39 +9346,39 @@
 +46-980:Kiruna
 +46-44:Kristianstad
 +46-418:Landskrona
-+46-13:Linköping
++46-13:LinkÃ¶ping
 +46-920:Lulea
 +46-46:Lund
-+46-40:Malmö
++46-40:MalmÃ¶
 +46-530:Mellerud
 +46-141:Motala
-+46-11:Norrköping
-+46-155:Nyköping
++46-11:NorrkÃ¶ping
++46-155:NykÃ¶ping
 +46-457:Ronneby
 +46-26:Sandviken
 +46-511:Skara
 +46-8:Stockholm
-+46-152:Strängnäs
++46-152:StrÃ¤ngnÃ¤s
 +46-60:Sundsvall
-+46-293:Söderfors
-+46-270:Söderhamm
++46-293:SÃ¶derfors
++46-270:SÃ¶derhamm
 +46-410:Trelleborg
-+46-520:Trollhättan
++46-520:TrollhÃ¤ttan
 +46-5222:Uddevalla
 +46-321:Ulricehamm
 +46-90:Umea
 +46-18:Uppsala
-+46-21:Västeras
-+46-490:Västervik
++46-21:VÃ¤steras
++46-490:VÃ¤stervik
 +46-411:Ystad
-+46-251:Älvdalen
-+46-485:Öland
-+46-19:Örebro
-+46-63:Östersund
++46-251:Ã„lvdalen
++46-485:Ã–land
++46-19:Ã–rebro
++46-63:Ã–stersund
 
 
 +41:[CH]Schweiz
-+41-1:Zürich
++41-1:ZÃ¼rich
 +41-21:Vevey
 +41-22:Satigny
 +41-24:Yverdon
@@ -9568,24 +9568,24 @@
 +34-670:Mobilfunk
 +34-689:Mobilfunk
 +34-967:Albacete
-+34-950:Almería
++34-950:AlmerÃ­a
 +34-920:Avila
 +34-926:Ciudad Real
 +34-969:Cuenca
-+34-957:Córdoba
++34-957:CÃ³rdoba
 +34-94:Durango
 +34-958:Granada
 +34-949:Guadalajara
 +34-959:Huelva
 +34-974:Huesca
-+34-953:Jaén
-+34-987:León
++34-953:JaÃ©n
++34-987:LeÃ³n
 +34-973:Lleida
-+34-941:Logroño
++34-941:LogroÃ±o
 +34-982:Lugo
 +34-947:Miranda del Ebro
 +34-968:Murcia
-+34-924:Mérida
++34-924:MÃ©rida
 +34-988:Orense
 +34-98:Oviedo
 +34-979:Palencia
@@ -9601,7 +9601,7 @@
 +34-981:Santiago de Compostela
 +34-921:Segovia
 +34-975:Soria
-+34-971:Sóller
++34-971:SÃ³ller
 +34-978:Teruel
 +34-925:Toledo
 +34-95:Torremolinos
@@ -9611,9 +9611,9 @@
 +34-983:Valladolid
 +34-93:Vic
 +34-986:Vigo
-+34-964:Vinarós
++34-964:VinarÃ³s
 +34-945:Vitoria-Gasteiz
-+34-96:Xàtiva
++34-96:XÃ tiva
 +34-980:Zamora
 +34-976:Zaragoza
 
@@ -9671,7 +9671,7 @@
 +963-43:Tartous
 
 
-+27:[ZA]Südafrika
++27:[ZA]SÃ¼dafrika
 +27-149:Carltonville
 +27-31:Durban
 +27-431:East London
@@ -9816,7 +9816,7 @@
 +688:Tuvalu
 
 
-+90:[TR]Türkei
++90:[TR]TÃ¼rkei
 +90-416:Adiyaman
 +90-272:Afyon
 +90-472:Agri
@@ -9832,7 +9832,7 @@
 +90-488:Batman
 +90-458:Bayburt
 +90-228:Bilecik
-+90-426:Bingöl
++90-426:BingÃ¶l
 +90-434:Bitlis
 +90-374:Bolu
 +90-248:Burdur
@@ -9849,7 +9849,7 @@
 +90-222:Eskisehir
 +90-342:Gaziantep
 +90-454:Giresun
-+90-456:Gümüshane
++90-456:GÃ¼mÃ¼shane
 +90-438:Hakkari
 +90-326:Hatay
 +90-476:Igdir
@@ -9866,7 +9866,7 @@
 +90-386:Kirsehir
 +90-262:Kocaeli
 +90-332:Konya
-+90-274:Kütahya
++90-274:KÃ¼tahya
 +90-422:Malatya
 +90-236:Manisa
 +90-482:Mardin
@@ -9951,53 +9951,53 @@
 +36-79:Baja
 +36-35:Balassagyarmat
 +36-1:Budapest
-+36-53:Cegléd
-+36-63:Csongrád
-+36-25:Dunaújváros
++36-53:CeglÃ©d
++36-63:CsongrÃ¡d
++36-25:DunaÃºjvÃ¡ros
 +36-33:Esztergom
-+36-36:Füzesabony
-+36-28:Gödöllö
-+36-52:Hajdúszoboszló
-+36-57:Jászberény
-+36-82:Kaposvár
++36-36:FÃ¼zesabony
++36-28:GÃ¶dÃ¶llÃ¶
++36-52:HajdÃºszoboszlÃ³
++36-57:JÃ¡szberÃ©ny
++36-82:KaposvÃ¡r
 +36-59:Karcag
-+36-76:Kecskemét
++36-76:KecskemÃ©t
 +36-77:Kiskunhalas
-+36-78:Kiskörös
++36-78:KiskÃ¶rÃ¶s
 +36-85:Marcali
 +36-46:Miskolc
-+36-69:Mohács
-+36-96:Mosonmagyaróvár
-+36-37:Mátraháza
-+36-44:Mátészalka
++36-69:MohÃ¡cs
++36-96:MosonmagyarÃ³vÃ¡r
++36-37:MÃ¡trahÃ¡za
++36-44:MÃ¡tÃ©szalka
 +36-93:Nagykanizsa
-+36-42:Nyiregyháza
-+36-68:Orosháza
++36-42:NyiregyhÃ¡za
++36-68:OroshÃ¡za
 +36-48:Ozd
 +36-75:Paks
-+36-89:Pápa
-+36-32:Salgótarján
-+36-72:Siklós
++36-89:PÃ¡pa
++36-32:SalgÃ³tarjÃ¡n
++36-72:SiklÃ³s
 +36-99:Sopron
 +36-66:Szarvas
 +36-62:Szeged
-+36-74:Szekszárd
-+36-24:Szigetszentmiklós
-+36-73:Szigetvár
++36-74:SzekszÃ¡rd
++36-24:SzigetszentmiklÃ³s
++36-73:SzigetvÃ¡r
 +36-56:Szolnok
 +36-94:Szombathely
-+36-22:Székesfehérvár
-+36-47:Sátoraljaújhely
-+36-34:Tatabánya
++36-22:SzÃ©kesfehÃ©rvÃ¡r
++36-47:SÃ¡toraljaÃºjhely
++36-34:TatabÃ¡nya
 +36-87:Tihany
-+36-49:Tiszaújváros
-+36-88:Veszprém
-+36-26:Visegrád
++36-49:TiszaÃºjvÃ¡ros
++36-88:VeszprÃ©m
++36-26:VisegrÃ¡d
 +36-92:Zalakaros
-+36-83:Zalaszentgrót
-+36-84:Zamárdi
-+36-27:Zebegény
-+36-23:Zsámbék
++36-83:ZalaszentgrÃ³t
++36-84:ZamÃ¡rdi
++36-27:ZebegÃ©ny
++36-23:ZsÃ¡mbÃ©k
 
 
 +598:[UY]Uruguay
@@ -10044,16 +10044,16 @@
 +58-64:Cabimas
 +58-2:Caracas
 +58-94:Carupano
-+58-85:Ciudad Bolívar
++58-85:Ciudad BolÃ­var
 +58-33:Colonia Tovar
 +58-68:Coro
 +58-93:Cumana
 +58-57:Guanare
 +58-32:Los Teques
-+58-31:Maiquetía
++58-31:MaiquetÃ­a
 +58-61:Maracaibo
 +58-43:Maracay
-+58-91:Maturín
++58-91:MaturÃ­n
 +58-74:Merida
 +58-95:Porlamar
 +58-48:Puerto Ayacucho
