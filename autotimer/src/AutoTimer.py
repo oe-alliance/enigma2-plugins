@@ -338,27 +338,27 @@ class AutoTimer:
 				break
 
 	def parseTimer(self, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, skipped, existing, timerdict, moviedict, taskname, simulateOnly=False):
-                def getNonSearchableEvents(servicelist):
-                        servicelist.insert(0, 'RITBDSE')
-                        allevents = epgcache.lookupEvent(servicelist) or []
-                        if timer.searchType == 'exact':
-                                for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
-                                        if match == (name if casesensitive else name.lower()):
-                                                epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
-                        elif timer.searchType == 'partial':
-                                for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
-                                        if match in (name if casesensitive else name.lower()):
-                                                epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
-                        elif timer.searchType == 'description':
-                                for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
-                                        if match in (shortdesc if casesensitive else shortdesc.lower()) or match in (extdesc if casesensitive else extdesc.lower()):
-                                                epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
-                        elif timer.searchType == 'start':
-                                for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
-                                        if (name if casesensitive else name.lower()).startswith(match):
-                                                epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
-                        else:
-                                print('[AutoTimer] Invalid search type: %s' % (timer.searchType))
+		def getNonSearchableEvents(servicelist):
+			servicelist.insert(0, 'RITBDSE')
+			allevents = epgcache.lookupEvent(servicelist) or []
+			if timer.searchType == 'exact':
+				for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
+					if match == (name if casesensitive else name.lower()):
+						epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
+			elif timer.searchType == 'partial':
+				for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
+					if match in (name if casesensitive else name.lower()):
+						epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
+			elif timer.searchType == 'description':
+				for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
+					if match in (shortdesc if casesensitive else shortdesc.lower()) or match in (extdesc if casesensitive else extdesc.lower()):
+						epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
+			elif timer.searchType == 'start':
+				for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
+					if (name if casesensitive else name.lower()).startswith(match):
+						epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
+			else:
+				print('[AutoTimer] Invalid search type: %s' % (timer.searchType))
 
 		new = 0
 		modified = 0
@@ -408,28 +408,28 @@ class AutoTimer:
 				info = serviceHandler.info(bouquetroot)
 				if info:
 					bouquetlist.append(bouquetroot)
-                if test:
-                        getNonSearchableEvents(test)
+		if test:
+			getNonSearchableEvents(test)
 
-                for bouquet in bouquetlist:
-                        test = []
-                        if type(bouquet) == str:
-                                bouquet = eServiceReference(bouquet)
-                        services = serviceHandler.list(bouquet)
-                        if services:
-                                service = services.getNext()
-                                while service.valid():
-                                        playable = not service.flags & (eServiceReference.isMarker | eServiceReference.isDirectory) or service.flags & eServiceReference.isNumberedMarker
-                                        if playable:
-                                                sname = service.toString()
-                                                pos = sname.rfind(':')
-                                                if pos != -1:
-                                                        if sname[pos-1] == ':':
-                                                                pos -= 1
-                                                        sname = sname[:pos+1]
-                                                test.append((sname, 0, -1, -1))
-                                        service = services.getNext()
-                        getNonSearchableEvents(test)
+		for bouquet in bouquetlist:
+			test = []
+			if type(bouquet) == str:
+				bouquet = eServiceReference(bouquet)
+			services = serviceHandler.list(bouquet)
+			if services:
+				service = services.getNext()
+				while service.valid():
+					playable = not service.flags & (eServiceReference.isMarker | eServiceReference.isDirectory) or service.flags & eServiceReference.isNumberedMarker
+					if playable:
+						sname = service.toString()
+						pos = sname.rfind(':')
+						if pos != -1:
+							if sname[pos-1] == ':':
+								pos -= 1
+							sname = sname[:pos+1]
+						test.append((sname, 0, -1, -1))
+					service = services.getNext()
+			getNonSearchableEvents(test)
 
 		# Search EPG, default to empty list
 		if timer.searchType in typeMap:
