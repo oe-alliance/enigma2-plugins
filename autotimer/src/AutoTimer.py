@@ -436,7 +436,7 @@ class AutoTimer:
 			EPG_searchType = typeMap[timer.searchType]
 		else:
 			EPG_searchType = typeMap["partial"]
-                epgmatches.extend(epgcache.search(('RITBDSE', 3000, typeMap[timer.searchType], match, caseMap[timer.searchCase])) or [])
+		epgmatches.extend(epgcache.search(('RITBDSE', 3000, typeMap[timer.searchType], match, caseMap[timer.searchCase])) or [])
 
 		# Sort list of tuples by begin time 'B'
 		epgmatches.sort(key=itemgetter(3))
