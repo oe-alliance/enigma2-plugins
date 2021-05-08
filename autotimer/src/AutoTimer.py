@@ -410,7 +410,6 @@ class AutoTimer:
 				info = serviceHandler.info(bouquetroot)
 				if info:
 					bouquetlist.append(bouquetroot)
-
 		if test:
 			getNonSearchableEvents(test)
 
