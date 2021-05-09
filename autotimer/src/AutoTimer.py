@@ -340,6 +340,9 @@ class AutoTimer:
 				break
 
 	def parseTimer(self, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, skipped, existing, timerdict, moviedict, taskname, simulateOnly=False):
+		def removeDuplicates(lst):
+			return [t for t in (set(tuple(i) for i in lst))]
+
 		def getNonSearchableEvents(servicelist):
 			servicelist.insert(0, 'RITBDSE')
 			allevents = epgcache.lookupEvent(servicelist) or []
@@ -438,7 +441,11 @@ class AutoTimer:
 			EPG_searchType = typeMap[timer.searchType]
 		else:
 			EPG_searchType = typeMap["partial"]
+
 		epgmatches.extend(epgcache.search(('RITBDSE', 3000, EPG_searchType, match, caseMap[timer.searchCase])) or [])
+
+		# Remove duplicates
+		epgmatches = removeDuplicates(epgmatches)
 
 		# Sort list of tuples by begin time 'B'
 		epgmatches.sort(key=itemgetter(3))
