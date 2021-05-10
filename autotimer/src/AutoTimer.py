@@ -338,31 +338,6 @@ class AutoTimer:
 				break
 
 	def parseTimer(self, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, skipped, existing, timerdict, moviedict, taskname, simulateOnly=False):
-		def removeDuplicates(lst):
-			return [t for t in (set(tuple(i) for i in lst))]
-
-		def getNonSearchableEvents(servicelist):
-			servicelist.insert(0, 'RITBDSE')
-			allevents = epgcache.lookupEvent(servicelist) or []
-			if timer.searchType == 'exact':
-				for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
-					if match == (name if casesensitive else name.lower()):
-						epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
-			elif timer.searchType == 'partial':
-				for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
-					if match in (name if casesensitive else name.lower()):
-						epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
-			elif timer.searchType == 'description':
-				for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
-					if match in (shortdesc if casesensitive else shortdesc.lower()) or match in (extdesc if casesensitive else extdesc.lower()):
-						epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
-			elif timer.searchType == 'start':
-				for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
-					if (name if casesensitive else name.lower()).startswith(match):
-						epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
-			else:
-				print('[AutoTimer] Invalid search type: %s' % (timer.searchType))
-
 		new = 0
 		modified = 0
 
@@ -380,70 +355,80 @@ class AutoTimer:
 			except UnicodeDecodeError:
 				pass
 
-		epgmatches = []
+		if timer.searchType == "description":
+			epgmatches = []
 
-		casesensitive = timer.searchCase == "sensitive"
-		if not casesensitive:
-			match = match.lower()
+			casesensitive = timer.searchCase == "sensitive"
+			if not casesensitive:
+				match = match.lower()
 
-		test = []
-		bouquetlist = []
-		if timer.services:
-			test = [(service, 0, -1, -1) for service in timer.services]
-		elif timer.bouquets:
-			bouquetlist = timer.bouquets
-		else: # Get all bouquets
-			refstr = '1:134:1:0:0:0:0:0:0:0:FROM BOUQUET \"bouquets.tv\" ORDER BY bouquet'
-			bouquetroot = eServiceReference(refstr)
-			mask = eServiceReference.isDirectory
-			if config.usage.multibouquet.value:
-				bouquets = serviceHandler.list(bouquetroot)
-				if bouquets:
-					while True:
-						s = bouquets.getNext()
-						if not s.valid():
-							break
-						if s.flags & mask:
-							info = serviceHandler.info(s)
-							if info:
-								bouquetlist.append(s)
-			else:
-				info = serviceHandler.info(bouquetroot)
-				if info:
-					bouquetlist.append(bouquetroot)
-		if test:
-			getNonSearchableEvents(test)
-
-		for bouquet in bouquetlist:
 			test = []
-			if type(bouquet) == str:
-				bouquet = eServiceReference(bouquet)
-			services = serviceHandler.list(bouquet)
-			if services:
-				service = services.getNext()
-				while service.valid():
-					playable = not service.flags & (eServiceReference.isMarker | eServiceReference.isDirectory) or service.flags & eServiceReference.isNumberedMarker
-					if playable:
-						sname = service.toString()
-						pos = sname.rfind(':')
-						if pos != -1:
-							if sname[pos-1] == ':':
-								pos -= 1
-							sname = sname[:pos+1]
-						test.append((sname, 0, -1, -1))
-					service = services.getNext()
-			getNonSearchableEvents(test)
+			if timer.services:
+				test = [(service, 0, -1, -1) for service in timer.services]
+			elif timer.bouquets:
+				for bouquet in timer.bouquets:
+					services = serviceHandler.list(eServiceReference(bouquet))
+					if services:
+						while True:
+							service = services.getNext()
+							if not service.valid():
+								break
+							playable = not (service.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)) or (service.flags & eServiceReference.isNumberedMarker)
+							if playable:
+								test.append((service.toString(), 0, -1, -1))
+			else: # Get all bouquets
+				bouquetlist = []
+				refstr = '1:134:1:0:0:0:0:0:0:0:FROM BOUQUET \"bouquets.tv\" ORDER BY bouquet'
+				bouquetroot = eServiceReference(refstr)
+				mask = eServiceReference.isDirectory
+				if config.usage.multibouquet.value:
+					bouquets = serviceHandler.list(bouquetroot)
+					if bouquets:
+						while True:
+							s = bouquets.getNext()
+							if not s.valid():
+								break
+							if s.flags & mask:
+								info = serviceHandler.info(s)
+								if info:
+									bouquetlist.append(s)
+				else:
+					info = serviceHandler.info(bouquetroot)
+					if info:
+						bouquetlist.append(bouquetroot)
+				if bouquetlist:
+					for bouquet in bouquetlist:
+						if not bouquet.valid():
+							break
+					if bouquet.flags & eServiceReference.isDirectory:
+						services = serviceHandler.list(bouquet)
+						if services:
+							while True:
+								service = services.getNext()
+								if not service.valid():
+									break
+								playable = not (service.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)) or (service.flags & eServiceReference.isNumberedMarker)
+								if playable:
+									test.append((service.toString(), 0, -1, -1))
 
-		# Search EPG, default to empty list
-		if timer.searchType in typeMap:
-			EPG_searchType = typeMap[timer.searchType]
+			if test:
+				# Get all events
+				#  eEPGCache.lookupEvent( [ format of the returned tuples, ( service, 0 = event intersects given start_time, start_time -1 for now_time), ] )
+				test.insert(0, 'RITBDSE')
+				allevents = epgcache.lookupEvent(test) or []
+
+				# Filter events
+				for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
+					if match in (shortdesc if casesensitive else shortdesc.lower()) or match in (extdesc if casesensitive else extdesc.lower()):
+						epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
+
 		else:
-			EPG_searchType = typeMap["partial"]
-
-		epgmatches.extend(epgcache.search(('RITBDSE', 3000, EPG_searchType, match, caseMap[timer.searchCase])) or [])
-
-		# Remove duplicates
-		epgmatches = removeDuplicates(epgmatches)
+			# Search EPG, default to empty list
+			if timer.searchType in typeMap:
+				EPG_searchType = typeMap[timer.searchType]
+			else:
+				EPG_searchType = typeMap["partial"]
+			epgmatches = epgcache.search(('RITBDSE', 3000, EPG_searchType, match, caseMap[timer.searchCase])) or []
 
 		# Sort list of tuples by begin time 'B'
 		epgmatches.sort(key=itemgetter(3))
