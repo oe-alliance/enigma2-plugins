@@ -1,3 +1,4 @@
+from __future__ import print_function
 ##
 ## DVD Backup plugin for enigma2 by AliAbdul
 ## using the great open source dvdbackup by Olaf Beck
@@ -25,6 +26,7 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE
 import gettext
 import os
 import stat
+import six
 
 #################################################
 
@@ -40,7 +42,7 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
 
@@ -77,8 +79,8 @@ def eject(dev):
 		ioctl_flag = int(0x5309)
 		ioctl(cd.fileno(), ioctl_flag)
 		cd.close()
-	except IOError, err:
-		print err
+	except IOError as err:
+		print(err)
 
 #################################################
 
@@ -123,6 +125,7 @@ class DVDBackup:
 		self.console.ePopen("dvdbackup --info -i %s" % config.plugins.DVDBackup.device.value, self.gotInfo)
 
 	def gotInfo(self, result, retval, extra_args):
+		result = six.ensure_str(result)
 		if result and result.__contains__("File Structure DVD") and result.__contains__("Main feature:"):
 			result = result[result.index("File Structure DVD"): result.index("Main feature:")]
 			lines = result.split("\n")
@@ -152,13 +155,13 @@ class DVDBackup:
 				self.working = False
 		else:
 			message(_("Could not read the DVD informations!"))
-			print "[DVD Backup]", result
+			print("[DVD Backup]", result)
 			self.working = False
 
 	def dvdbackupFinished(self, result, retval, extra_args):
 		if retval != 0:
 			message(_("Error while backup of DVD!"))
-			print "[DVD Backup]", retval, result
+			print("[DVD Backup]", retval, result)
 			self.working = False
 		else:
 			if config.plugins.DVDBackup.create_iso.value:
@@ -174,6 +177,7 @@ class DVDBackup:
 				self.finished()
 
 	def genisoimageProgress(self, name, data):
+		data = six.ensure_str(data)
 		if data.__contains__("%"):
 			for x in data.split("\n"):
 				if x.__contains__("%"):
@@ -187,7 +191,7 @@ class DVDBackup:
 	def genisoimageCallback(self, result, retval, extra_args):
 		if retval != 0:
 			message(_("Error while backup of DVD!"))
-			print "[DVD Backup]", result
+			print("[DVD Backup]", result)
 			self.working = False
 		else:
 			self.genisoimage.progress = 100
@@ -415,6 +419,7 @@ class DVDBackupScreen(ConfigListScreen, Screen):
 	def gotInfo(self, result, retval, extra_args):
 		config.plugins.DVDBackup.name.value = _("Name of DVD")
 		if result:
+			result = six.ensure_str(result)
 			lines = result.split("\n")
 			for line in lines:
 				if line.startswith("DVD-Video information of the DVD with title "):

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from enigma import eServiceReference
 from enigma import iPlayableService
 from Components.ServiceEventTracker import ServiceEventTracker
@@ -56,7 +57,7 @@ class StreamPlayer:
             seconds = int(remaining - (minutes * 60))
 
             def shiftchars(integer, char):
-                if integer in range(0, 10):
+                if integer in list(range(0, 10)):
                     return char + str(integer)
                 else:
                     return str(integer)
@@ -70,9 +71,9 @@ class StreamPlayer:
 
         track = self.playlist.getTrack(self.currentplaylistitemnumber)
         if track is False:
-            print "no track to play"
+            print("no track to play")
         elif track['location'] != "no location":
-            print "playing item " + str(self.currentplaylistitemnumber) + "/" + str(self.playlist.length) + " with url ", track['location']
+            print("playing item " + str(self.currentplaylistitemnumber) + "/" + str(self.playlist.length) + " with url ", track['location'])
             reactor.callLater(1, self._delayedPlay, eServiceReference(4097, 0, track['location']))
             self.is_playing = True
 

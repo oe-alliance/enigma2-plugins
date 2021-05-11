@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 IMDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2018-12-05 00:28+0300\n"
 "Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
 "Language-Team: mosad - مساعد الجعيد\n"
@@ -29,6 +29,9 @@ msgstr "إلغاء"
 
 msgid "Cast: "
 msgstr "الممثلين: "
+
+msgid "Channel Selection"
+msgstr "إختيار القناة"
 
 msgid "Content:"
 msgstr "المحتوى:"
@@ -111,6 +114,9 @@ msgstr "البحث في قاعدة بيانات معلومات الأفلام"
 msgid "IMDb setup"
 msgstr "ضبط قاعدة بيانات معلومات الأفلام"
 
+msgid "Lookup"
+msgstr "المشاهدة"
+
 msgid "Menu"
 msgstr "قائمة"
 
@@ -176,6 +182,9 @@ msgstr "بحث عن المقطع المختصر"
 
 msgid "Search for details from the Internet Movie Database"
 msgstr "البحث عن التفاصيل من قاعده بيانات الأفلام على الإنترنت"
+
+msgid "Select from EPG"
+msgstr "حدد من دليل البرامج الإلكترونية"
 
 msgid "Settings for Internet Movie Database searches"
 msgstr "إعدادات لعمليات البحث في قاعدة بيانات الأفلام على الإنترنت"

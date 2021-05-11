@@ -1,12 +1,15 @@
 # -*- coding: UTF-8 -*-
 # for localized messages
+from __future__ import print_function
 from . import _
 
 from Plugins.Plugin import PluginDescriptor
 from Tools.Downloader import downloadWithProgress
-from enigma import ePicLoad, eServiceCenter
+from enigma import ePicLoad, eServiceReference, eServiceCenter
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
+from Screens.EpgSelection import EPGSelection
+from Screens.ChannelSelection import SimpleChannelSelection
 from Screens.ChoiceBox import ChoiceBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.ActionMap import ActionMap, HelpableActionMap
@@ -21,26 +24,29 @@ from Components.ProgressBar import ProgressBar
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
 from Components.MovieList import KNOWN_EXTENSIONS
-from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 import os
 import re
+
+from six.moves.urllib.parse import quote_plus
+
 try:
 	import htmlentitydefs
-	from urllib import quote_plus
-	iteritems = lambda d: d.iteritems()
+	iteritems = lambda d: six.iteritems(d)
 except ImportError as ie:
 	from html import entities as htmlentitydefs
-	from urllib.parse import quote_plus
 	iteritems = lambda d: d.items()
 	unichr = chr
 import os
+import gettext
+import six
+from six.moves.html_parser import HTMLParser
 
 # Configuration
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo, ConfigText
 from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
-
-from HTMLParser import HTMLParser
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 
 def transHTML(text):
@@ -58,7 +64,7 @@ config.plugins.imdb.showlongmenuinfo = ConfigYesNo(default=False)
 config.plugins.imdb.showepisodeinfo = ConfigYesNo(default=False)
 
 
-def quoteEventName(eventName, safe="/()" + ''.join(map(chr, range(192, 255)))):
+def quoteEventName(eventName, safe="/()" + ''.join(map(chr, list(range(192, 255))))):
 	# BBC uses '\x86' markers in program names, remove them
 	try:
 		text = eventName.decode('utf8').replace(u'\x86', u'').replace(u'\x87', u'').encode('utf8')
@@ -66,6 +72,75 @@ def quoteEventName(eventName, safe="/()" + ''.join(map(chr, range(192, 255)))):
 		text = eventName
 	# IMDb doesn't seem to like urlencoded characters at all, hence the big "safe" list
 	return quote_plus(text, safe='+')
+
+
+class IMDBChannelSelection(SimpleChannelSelection):
+	def __init__(self, session):
+		SimpleChannelSelection.__init__(self, session, _("Channel Selection"))
+		self.skinName = "SimpleChannelSelection"
+
+		self["ChannelSelectEPGActions"] = ActionMap(["ChannelSelectEPGActions"],
+			{
+				"showEPGList": self.channelSelected
+			}
+		)
+
+	def channelSelected(self):
+		ref = self.getCurrentSelection()
+		if (ref.flags & 7) == 7:
+			self.enterPath(ref)
+		elif not (ref.flags & eServiceReference.isMarker):
+			info = eServiceCenter.getInstance().info(ref)
+			evt = info and info.getEvent(ref, -1)
+			event_id = evt and evt.getEventId() or None
+			self.session.openWithCallback(
+				self.epgClosed,
+				IMDBEPGSelection,
+				ref,
+				eventid=event_id,
+				openPlugin=False
+			)
+
+	def epgClosed(self, ret=None):
+		if ret:
+			self.close(ret)
+
+
+class IMDBEPGSelection(EPGSelection):
+	def __init__(self, session, ref, eventid=None, openPlugin=True):
+		EPGSelection.__init__(self, session, ref.toString(), eventid=eventid)
+		self.skinName = "EPGSelection"
+		self["key_green"].setText(_("Lookup"))
+		self.openPlugin = openPlugin
+
+	def infoKeyPressed(self):
+		self.greenButtonPressed()
+
+	def timerAdd(self):
+		self.greenButtonPressed()
+
+	def greenButtonPressed(self):
+		self.closeEventViewDialog()
+		from Screens.InfoBar import InfoBar
+		InfoBarInstance = InfoBar.instance
+		if not InfoBarInstance.LongButtonPressed:
+			cur = self["list"].getCurrent()
+			evt = cur[0]
+			sref = cur[1]
+			if not evt:
+				return
+
+			if self.openPlugin:
+				self.session.open(
+					IMDB,
+					evt.getEventName()
+				)
+			else:
+				self.close(evt.getEventName())
+
+	def onSelectionChanged(self):
+		super(IMDBEPGSelection, self).onSelectionChanged()
+		self["key_green"].setText(_("Lookup"))
 
 
 class IMDB(Screen, HelpableScreen):
@@ -93,9 +168,13 @@ class IMDB(Screen, HelpableScreen):
 		</screen>"""
 
 	# Some HTML entities as utf-8
-	NBSP = unichr(htmlentitydefs.name2codepoint['nbsp']).encode("utf8")
-	RAQUO = unichr(htmlentitydefs.name2codepoint['raquo']).encode("utf8")
-	HELLIP = unichr(htmlentitydefs.name2codepoint['hellip']).encode("utf8")
+	NBSP = six.unichr(htmlentitydefs.name2codepoint['nbsp'])
+	RAQUO = six.unichr(htmlentitydefs.name2codepoint['raquo'])
+	HELLIP = six.unichr(htmlentitydefs.name2codepoint['hellip'])
+	if six.PY2:
+		NBSP = NBSP.encode("utf8")
+		RAQUO = RAQUO.encode("utf8")
+		HELLIP = HELLIP.encode("utf8")
 
 	def __init__(self, session, eventName, callbackNeeded=False, save=False, savepath=None, localpath=None):
 		Screen.__init__(self, session)
@@ -273,7 +352,7 @@ class IMDB(Screen, HelpableScreen):
 			self["extralabel"].pageDown()
 
 	def showMenu(self):
-		if (self.Page is 1 or self.Page is 2) and self.resultlist:
+		if (self.Page == 1 or self.Page == 2) and self.resultlist:
 			self["menu"].show()
 			self["stars"].hide()
 			self["starsbg"].hide()
@@ -342,6 +421,7 @@ class IMDB(Screen, HelpableScreen):
 	def contextMenuPressed(self):
 		list = [
 			(_("Enter search"), self.openVirtualKeyBoard),
+			(_("Select from EPG"), self.openChannelSelection),
 			(_("Setup"), self.setup),
 		]
 
@@ -377,32 +457,32 @@ class IMDB(Screen, HelpableScreen):
 				if self.fetchurl is not None:
 					download = downloadWithProgress(self.fetchurl, isave)
 					download.start().addCallback(self.IMDBsave).addErrback(self.http_failed)
-		except Exception, e:
-			print('[IMDb] saveHtmlDetails exception failure: ', str(e))
+		except Exception as e:
+			print(('[IMDb] saveHtmlDetails exception failure: ', str(e)))
 
 	def saveTxtDetails(self):
 		try:
 			if self.savingpath is not None:
 				getTXT = self.IMDBsavetxt()
 				if getTXT is not None:
-					file(self.savingpath + ".txt", 'w').write(getTXT)
+					open(self.savingpath + ".txt", 'w').write(getTXT)
 				else:
 					from Screens.MessageBox import MessageBox
 					self.session.open(MessageBox, (_('IMDb can not get Movie Information to write to .txt file!')), MessageBox.TYPE_INFO, 10)
-		except Exception, e:
-			print('[IMDb] saveTxtDetails exception failure: ', str(e))
+		except Exception as e:
+			print(('[IMDb] saveTxtDetails exception failure: ', str(e)))
 
 	def savePosterTxtDetails(self):
 		try:
 			if self.savingpath is not None:
 				getTXT = self.IMDBsavetxt(True)
 				if getTXT is not None:
-					file(self.savingpath + ".txt", 'w').write(getTXT)
+					open(self.savingpath + ".txt", 'w').write(getTXT)
 				else:
 					from Screens.MessageBox import MessageBox
 					self.session.open(MessageBox, (_('IMDb can not get Movie Information to write to .jpg and .txt files!')), MessageBox.TYPE_INFO, 10)
-		except Exception, e:
-			print('[IMDb] savePosterTxtDetails exception failure: ', str(e))
+		except Exception as e:
+			print(('[IMDb] savePosterTxtDetails exception failure: ', str(e)))
 
 	def IMDBsave(self, string):
 		self["statusbar"].setText(_("IMDb Save - Download completed"))
@@ -425,8 +505,8 @@ class IMDB(Screen, HelpableScreen):
 				try:
 					text = ' '.join(self.htmltags.sub('', extrainfos.group("synopsis").replace("\n", ' ').replace("<br>", '\n').replace("<br />", '\n')).replace(' |' + self.NBSP, '').replace(self.NBSP, ' ').split()) + "\n"
 					overview = _("Content:") + " " + text
-				except Exception, e:
-					print('[IMDb] IMDBsavetxt exception failure in get overview: ', str(e))
+				except Exception as e:
+					print(('[IMDb] IMDBsavetxt exception failure in get overview: ', str(e)))
 					overview = (_("Content:"))
 #				print'[IMDb] IMDBsavetxt overview: ', overview
 
@@ -434,8 +514,8 @@ class IMDB(Screen, HelpableScreen):
 				try:
 					time = ' '.join(self.htmltags.sub('', extrainfos.group(category).replace("\n", ' ').replace("<br>", '\n').replace("<br />", '\n')).replace(' |' + self.NBSP, '').replace(self.NBSP, ' ').split())
 					runtime = _("Runtime:") + " " + time
-				except Exception, e:
-					print('[IMDb] IMDBsavetxt exception failure in get runtime: ', str(e))
+				except Exception as e:
+					print(('[IMDb] IMDBsavetxt exception failure in get runtime: ', str(e)))
 					runtime = (_("Runtime:"))
 #				print'[IMDb] IMDBsavetxt runtime: ', runtime
 
@@ -453,8 +533,8 @@ class IMDB(Screen, HelpableScreen):
 			try:
 				land = ' '.join(self.htmltags.sub('', self.generalinfos.group("country").replace('\n', ' ')).split())
 				country = _("Production Countries:") + " " + land
-			except Exception, e:
-				print('[IMDb] IMDBsavetxt exception failure in get country: ', str(e))
+			except Exception as e:
+				print(('[IMDb] IMDBsavetxt exception failure in get country: ', str(e)))
 				country = (_("Production Countries:"))
 #			print'[IMDb] IMDBsavetxt country: ', country
 
@@ -462,8 +542,8 @@ class IMDB(Screen, HelpableScreen):
 			try:
 				date = ' '.join(self.htmltags.sub('', self.generalinfos.group("premiere").replace('\n', ' ')).split())
 				release = _("Release Date:") + " " + date
-			except Exception, e:
-				print('[IMDb] IMDBsavetxt exception failure in get release: ', str(e))
+			except Exception as e:
+				print(('[IMDb] IMDBsavetxt exception failure in get release: ', str(e)))
 				release = (_("Release Date:"))
 #			print'[IMDb] IMDBsavetxt release: ', release
 
@@ -488,8 +568,8 @@ class IMDB(Screen, HelpableScreen):
 						print("[IMDB] downloading poster " + posterurl + " to " + postersave)
 						download = downloadWithProgress(posterurl, postersave)
 						download.start().addErrback(self.http_failed)
-				except Exception, e:
-					print('[IMDb] IMDBsavetxt exception failure in get poster: ', str(e))
+				except Exception as e:
+					print(('[IMDb] IMDBsavetxt exception failure in get poster: ', str(e)))
 
 		return overview + "\n\n" + runtime + "\n" + genre + "\n" + country + "\n" + release + "\n" + rating + "\n"
 
@@ -522,6 +602,12 @@ class IMDB(Screen, HelpableScreen):
 			text=self.eventName
 		)
 
+	def openChannelSelection(self):
+		self.session.openWithCallback(
+			self.gotSearchString,
+			IMDBChannelSelection
+		)
+
 	def gotSearchString(self, ret=None):
 		if ret:
 			self.eventName = ret
@@ -538,7 +624,7 @@ class IMDB(Screen, HelpableScreen):
 
 	def getIMDB(self, search=False):
 		self.resetLabels()
-		if not isinstance(self.eventName, basestring):
+		if not isinstance(self.eventName, six.string_types):
 			self["statusbar"].setText("")
 			return
 		if not self.eventName:
@@ -597,14 +683,23 @@ class IMDB(Screen, HelpableScreen):
 				entitydict[key] = x.group(1)
 
 		if 'charset="utf-8"' in in_html or 'charset=utf-8' in in_html:
-			for key, codepoint in iteritems(entitydict):
-				in_html = in_html.replace(key, unichr(int(codepoint)).encode('utf8'))
+			for key, codepoint in six.iteritems(entitydict):
+				cp = six.unichr(int(codepoint))
+				if six.PY2:
+					cp = cp.encode('utf8')
+				in_html = in_html.replace(key, cp)
 			self.inhtml = in_html
 			return
 
-		for key, codepoint in iteritems(entitydict):
-			in_html = in_html.replace(key, unichr(int(codepoint)).encode('latin-1', 'ignore'))
-		self.inhtml = in_html.decode('latin-1').encode('utf8')
+		for key, codepoint in six.iteritems(entitydict):
+			cp = six.unichr(int(codepoint))
+			if six.PY2:
+				cp = cp.encode('latin-1', 'ignore')
+			in_html = in_html.replace(key, cp)
+		if six.PY2:
+			self.inhtml = in_html.decode('latin-1').encode('utf8')
+		else:
+			self.inhtml = in_html.decode('latin-1')
 
 	def IMDBquery(self, string):
 		self["statusbar"].setText(_("IMDb Download completed"))
@@ -657,7 +752,7 @@ class IMDB(Screen, HelpableScreen):
 		if error_message == "" and failure_instance is not None:
 			error_message = failure_instance.getErrorMessage()
 			text += ": " + error_message
-		print("[IMDB] ", text)
+		print(("[IMDB] ", text))
 		self["statusbar"].setText(text)
 
 	def IMDBquery2(self, string):
@@ -995,7 +1090,11 @@ def movielistSearch(session, serviceref, **kwargs):
 	eventName = info and info.getName(serviceref) or ''
 	(root, ext) = os.path.splitext(eventName)
 	if ext in KNOWN_EXTENSIONS:
-		eventName = re.sub("[\W_]+", ' ', root.decode("utf8"), 0, re.LOCALE | re.UNICODE).encode("utf8")
+		if six.PY2:
+			_root = root.decode("utf8")
+		eventName = re.sub("[\W_]+", ' ', _root, 0, re.LOCALE | re.UNICODE)
+		if six.PY2:
+			eventName = eventName.encode("utf8")
 	session.open(IMDB, eventName)
 
 

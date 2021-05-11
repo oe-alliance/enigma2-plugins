@@ -20,10 +20,7 @@ from Components.config import config, ConfigInteger, ConfigSubsection, \
 		ConfigText, ConfigPassword, ConfigYesNo, getConfigListEntry
 
 # For new and improved _parse
-try:
-	from urlparse import urlparse, urlunparse
-except ImportError as ie:
-	from urllib.parse import urlparse, urlunparse
+from six.moves.urllib.parse import urlparse, urlunparse
 
 
 def _parse(url, defaultPort=None):

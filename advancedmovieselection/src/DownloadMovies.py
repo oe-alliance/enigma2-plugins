@@ -19,7 +19,9 @@
 #  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
-from __init__ import _
+from __future__ import print_function
+from __future__ import absolute_import
+from .__init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.Label import Label
@@ -31,13 +33,13 @@ from threading import Thread
 from enigma import eServiceReference, ePicLoad
 from timer import eTimer
 from Components.MenuList import MenuList
-from Source.ServiceProvider import ServiceCenter
-from Source.EventInformationTable import createEIT
-from Source.MovieDB import tmdb, downloadCover
+from .Source.ServiceProvider import ServiceCenter
+from .Source.EventInformationTable import createEIT
+from .Source.MovieDB import tmdb, downloadCover
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.ScrollLabel import ScrollLabel
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUGIN
-from Source.Globals import SkinTools, printStackTrace
+from .Source.Globals import SkinTools, printStackTrace
 import os
 
 is_hidden = False
@@ -167,7 +169,7 @@ class DownloadMovies(Screen):
         if len(results) == 0:
             self.setTitle(_("Nothing found for: %s") % (movie_title))
             self["key_green"].setText(_("OK"))
-            print "No info found for: " + movie_title
+            print("No info found for: " + movie_title)
             return False
 
         self.l = []
@@ -207,8 +209,8 @@ class DownloadMovies(Screen):
                 sc = AVSwitch().getFramebufferScale()
                 self.picload.setPara((self["poster"].instance.size().width(), self["poster"].instance.size().height(), sc[0], sc[1], False, 1, "#ff000000"))
                 self.picload.startDecode(jpg_file)
-            except Exception, e:
-                print e
+            except Exception as e:
+                print(e)
 
     def pageUp(self):
         self["description"].pageUp()
@@ -244,7 +246,7 @@ class FetchingMovies(Thread):
             for item_list in self.items:
                 try:
                     if self.cancel:
-                        #print "Movie download cancelled"
+                        #print("Movie download cancelled")
                         self.finish()
                         return
                     service = item_list[0]
@@ -267,7 +269,7 @@ class FetchingMovies(Thread):
         global fetchingMovies, this_session, is_hidden
         fetchingMovies = None
         current = total
-        #print "Movie download finished"
+        #print("Movie download finished")
         if is_hidden == True:
             this_session.open(MessageBox, (_("Download and save from movie infos and covers complete.")), MessageBox.TYPE_INFO) # Topfi: removed last parameter
             this_session = None

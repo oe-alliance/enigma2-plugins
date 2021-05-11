@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from re import sub
 from datetime import datetime
 from md5 import md5
@@ -7,7 +8,8 @@ from enigma import iServiceInformation, iPlayableService
 from Components.config import config
 from twisted.web.client import getPage
 
-from urllib import urlencode as urllib_urlencode
+from six.moves.urllib.parse import urlencode as urllib_urlencode
+import six
 
 # for localized messages
 from . import _
@@ -32,7 +34,7 @@ class LastFMScrobbler(object):
         self.tracks2Submit.remove(track)
 
     def handshake(self):
-        print "[LastFMScrobbler] try logging into lastfm-submission-server"
+        print("[LastFMScrobbler] try logging into lastfm-submission-server")
         url = "http://" + self.host + ":" + str(self.port) + "?" + urllib_urlencode({
             "hs": "true",
             "p": "1.1",
@@ -40,7 +42,7 @@ class LastFMScrobbler(object):
             "v": self.version,
             "u": self.user
             })
-        getPage(url).addCallback(self.handshakeCB).addErrback(self.handshakeCBError)
+        getPage(six.ensure_binary(url)).addCallback(self.handshakeCB).addErrback(self.handshakeCBError)
 
     def handshakeCBError(self, data):
         self.failed(data.split("\n"))
@@ -58,21 +60,21 @@ class LastFMScrobbler(object):
         self.md5 = sub("\n$", "", lines[0])
         self.submiturl = sub("\n$", "", lines[1])
         self.loggedin = True
-        print "[LastFMScrobbler] logged in"
+        print("[LastFMScrobbler] logged in")
         self.submit()
 
     def baduser(self, lines):
-        print "[LastFMScrobbler] Bad user"
+        print("[LastFMScrobbler] Bad user")
 
     def failed(self, lines):
-        print "[LastFMScrobbler] FAILED", lines[0]
+        print("[LastFMScrobbler] FAILED", lines[0])
 
     def submit(self):
         if self.loggedin is False:
             self.handshake()
             return False
         tracks = self.tracks2Submit
-        print "[LastFMScrobbler] Submitting ", len(tracks), " tracks"
+        print("[LastFMScrobbler] Submitting ", len(tracks), " tracks")
         md5response = md5(md5(self.password).hexdigest() + self.md5).hexdigest()
         post = {}
         post["u"] = self.user
@@ -84,11 +86,11 @@ class LastFMScrobbler(object):
         (host, port) = self.submiturl.split("/")[2].split(":")
         url = "http://" + host + ":" + port + "/" + "/".join(self.submiturl.split("/")[3:])
         data = self.encode(post)
-        getPage(url, method="POST", headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(data))}, postdata=data).addCallback(self.submitCB).addErrback(self.submitCBError)
+        getPage(six.ensure_binary(url), method="POST", headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(data))}, postdata=data).addCallback(self.submitCB).addErrback(self.submitCBError)
 
     def encode(self, postdict):
         result = []
-        for key, value in postdict.items():
+        for key, value in list(postdict.items()):
             result.append(key + "=" + value)
         return "&".join(result)
 
@@ -98,10 +100,10 @@ class LastFMScrobbler(object):
     def submitCB(self, data):
         results = data.split("\n")
         if results[0].startswith("OK"):
-            print "[LastFMScrobbler] Submitting successful"
+            print("[LastFMScrobbler] Submitting successful")
             self.tracks2Submit = []
         if results[0].startswith("FAILED"):
-            print "[LastFMScrobbler] Submitting failed,", results[0]
+            print("[LastFMScrobbler] Submitting failed,", results[0])
             self.failed([results[0], "INTERVAL 0"])
 
 ############
@@ -155,14 +157,14 @@ class EventListener:
             track = self.getCurrentServiceType()
             try:
                 self.tracks_checking_for.index(str(track))
-            except ValueError, e:
+            except ValueError as e:
                 if track is not False:
                     self.tracks_checking_for.append(str(track))
                     if track.length < self.time2wait4submit:
                         waittime = self.time2wait4submit
                     else:
                         waittime = track.length / 2
-                    print "[LastFMScrobbler] waiting", waittime, "sec. until checking if the track " + str(track) + " is still playing"
+                    print("[LastFMScrobbler] waiting", waittime, "sec. until checking if the track " + str(track) + " is still playing")
                     reactor.callLater(waittime, self.checkTrack, track)
 
     def startListenToEvents(self):
@@ -181,7 +183,7 @@ class EventListener:
             #print "[LastFMScrobbler] CurrentlyPlayingServiceReference is not a File, not submitting to LastFM"
             return False
         elif self.streamplayer.is_playing:
-            print "[LastFMScrobbler] LastFm-Plugin is playing"
+            print("[LastFMScrobbler] LastFm-Plugin is playing")
             trdata = self.streamplayer.playlist.getTrack(self.streamplayer.currentplaylistitemnumber)
             track = self.getTrack(artist=trdata['creator'], title=trdata['title'], album=trdata['album'], length=(trdata["duration"] / 1000))
             return track
@@ -200,10 +202,10 @@ class EventListener:
 
     def getTrack(self, artist=None, title=None, album=None, length=-1):
         if artist == "" or artist is None:
-            print "[LastFMScrobbler] CurrentlyPlayingServiceReference has no Artist, not submitting to LastFM"
+            print("[LastFMScrobbler] CurrentlyPlayingServiceReference has no Artist, not submitting to LastFM")
             return False
         elif title == "" or title is None:
-            print "[LastFMScrobbler] CurrentlyPlayingServiceReference has no Tracktitle, not submitting to LastFM"
+            print("[LastFMScrobbler] CurrentlyPlayingServiceReference has no Tracktitle, not submitting to LastFM")
             return False
         else:
             return Track(artist, title, album, length=length)
@@ -211,10 +213,10 @@ class EventListener:
     def checkTrack(self, track):
         trackcurrent = self.getCurrentServiceType()
         if str(track) == str(trackcurrent):
-            print "[LastFMScrobbler] sending track to lastfm as now playing... " + str(track)
+            print("[LastFMScrobbler] sending track to lastfm as now playing... " + str(track))
             self.scrobbler = LastFMScrobbler()
             self.scrobbler.addTrack2Submit(track)
             self.scrobbler.submit()
             self.tracks_checking_for.remove(str(track))
         else:
-            print "[LastFMScrobbler] track is not playing, skipping sending " + str(track)
+            print("[LastFMScrobbler] track is not playing, skipping sending " + str(track))

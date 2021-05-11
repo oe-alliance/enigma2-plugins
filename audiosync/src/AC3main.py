@@ -1,20 +1,23 @@
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
-from AC3utils import AC3, PCM, AC3GLOB, PCMGLOB, AC3PCM, SKIN
-from AC3delay import AC3delay
+from .AC3utils import AC3, PCM, AC3GLOB, PCMGLOB, AC3PCM, SKIN
+from .AC3delay import AC3delay
 from enigma import ePoint
-from HelpableNumberActionMap import HelpableNumberActionMap
+from .HelpableNumberActionMap import HelpableNumberActionMap
 from Components.Label import Label, MultiColorLabel
 from Components.Pixmap import MultiPixmap
 from Components.ProgressBar import ProgressBar
 from Components.config import config
-from MovableScreen import MovableScreen
+from .MovableScreen import MovableScreen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from __init__ import _
+from .__init__ import _
+
+import six
 
 
 class AC3LipSync(Screen, HelpableScreen, MovableScreen):
@@ -194,7 +197,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen):
     def keyCancel(self):
         for sAudio in AC3PCM:
             iSliderValue = self.currentValue[sAudio]
-            if iSliderValue <> self.savedValue[sAudio]:
+            if iSliderValue != self.savedValue[sAudio]:
                 self.AC3delay.whichAudio = sAudio
                 self.AC3delay.setSystemDelay(sAudio, self.savedValue[sAudio], False)
         self.close()
@@ -247,7 +250,7 @@ class AC3SetCustomValue:
 
     def getKeyList(self):
         keyList = []
-        for i, iValue in self.keyStep.iteritems():
+        for i, iValue in six.iteritems(self.keyStep):
             if i != "0":
                 keyList.append((_("Key %(key)s (current value: %(value)i ms)") % dict(key=i, value=iValue), i))
         return keyList

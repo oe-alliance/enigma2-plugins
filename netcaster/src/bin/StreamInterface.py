@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from twisted.internet import reactor
 from twisted.web import client
-
+import six
 valid_types = ("MP3", "PLS") #list of playable mediatypes
 
 
@@ -52,7 +53,7 @@ class LimitedHTTPClientFactory(HTTPClientFactory):
 		if self.status == '200':
 			self.curlength += len(d)
 			if self.curlength >= self.LIMIT:
-				print "[LimitedHTTPClientFactory] reached limit"
+				print("[LimitedHTTPClientFactory] reached limit")
 				# XXX: timing out here is pretty hackish imo
 				self.p.timeout()
 				return
@@ -116,32 +117,32 @@ class Stream:
         self.url = url
 
     def getURL(self, callback):
-    	self.callback = callback
+        self.callback = callback
         if self.type.lower() == "pls":
-        	self.getPLSContent()
+            self.getPLSContent()
         else:
             self.callback(self.url)
 
     def getPLSContent(self):
-        print "loading PLS of stream ", self.name, self.url
-    	getPage(self.url).addCallback(self._gotPLSContent).addErrback(self._errorPLSContent)
+        print("loading PLS of stream ", self.name, self.url)
+        getPage(six.ensure_binary(self.url)).addCallback(self._gotPLSContent).addErrback(self._errorPLSContent)
 
     def _gotPLSContent(self, lines):
-		if lines.startswith("ICY "):
-			print "[NETcaster] PLS expected, but got ICY stream"
-			self.type = "mp3"
-			self.callback(self.url)
-		else:
-			for line in lines.split('\n'):
-			    if line.startswith("File"):
-			        url = line.split("=")[1].rstrip().strip()
-			        self.callback(url)
-			        break
-			    print "Skipping:", line
+        if lines.startswith("ICY "):
+            print("[NETcaster] PLS expected, but got ICY stream")
+            self.type = "mp3"
+            self.callback(self.url)
+        else:
+            for line in lines.split('\n'):
+                if line.startswith("File"):
+                    url = line.split("=")[1].rstrip().strip()
+                    self.callback(url)
+                    break
+                print("Skipping:", line)
 
     def _errorPLSContent(self, data):
-        print "[NETcaster] _errorPLSContent", data
-        print "[NETcaster] _errorPLSContent let's assume it's a stream"
+        print("[NETcaster] _errorPLSContent", data)
+        print("[NETcaster] _errorPLSContent let's assume it's a stream")
         self.type = "mp3"
         self.callback(self.url)
 

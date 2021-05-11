@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
-from AutoTimer import AutoTimer
-from AutoTimerConfiguration import CURRENT_CONFIG_VERSION
+from __future__ import absolute_import
+from .AutoTimer import AutoTimer
+from .AutoTimerConfiguration import CURRENT_CONFIG_VERSION
 from RecordTimer import AFTEREVENT
 from twisted.internet import reactor
 from twisted.web import http, resource, server
@@ -13,7 +14,7 @@ from ServiceReference import ServiceReference
 from Tools.XMLTools import stringToXML
 from enigma import eServiceReference
 from . import _, config, iteritems, plugin
-from plugin import autotimer
+from .plugin import autotimer
 
 API_VERSION = "1.3"
 
@@ -410,7 +411,7 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 
 		if config.plugins.autotimer.autopoll.value:
 			if plugin.autopoller is None:
-				from AutoPoller import AutoPoller
+				from .AutoPoller import AutoPoller
 				plugin.autopoller = AutoPoller()
 			plugin.autopoller.start(initial=False)
 		else:

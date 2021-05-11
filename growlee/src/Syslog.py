@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 
 from twisted.internet.protocol import DatagramProtocol
 from twisted.internet import reactor
@@ -9,8 +10,9 @@ from os import uname
 
 from Screens.MessageBox import MessageBox
 from Tools import Notifications
+import six
 
-from GrowleeConnection import emergencyDisable
+from .GrowleeConnection import emergencyDisable
 from . import NOTIFICATIONID
 
 SYSLOG_UDP_PORT = 514
@@ -30,7 +32,7 @@ SEVERITY = {
 
 try:
 	dict.iteritems
-	reverse = lambda map: dict((v, k) for k, v in map.iteritems())
+	reverse = lambda map: dict((v, k) for k, v in six.iteritems(map))
 except AttributeError:
 	reverse = lambda map: dict((v, k) for k, v in map.items())
 

@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Mosaic by AliAbdul
+from __future__ import print_function
 from Components.ActionMap import NumberActionMap
 from Components.config import config, ConfigSubsection, ConfigInteger
 from Components.Console import Console
@@ -16,6 +17,7 @@ from Tools.Directories import resolveFilename, SCOPE_SKIN_IMAGE, SCOPE_LANGUAGE,
 from Tools.LoadPixmap import LoadPixmap
 import os
 import gettext
+import six
 
 ################################################
 
@@ -44,7 +46,7 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
 
@@ -67,7 +69,7 @@ class Mosaic(Screen):
 	positions = []
 	x = 80
 	y = 50
-	for i in range(1, 10):
+	for i in list(range(1, 10)):
 		positions.append([x, y])
 		x += windowWidth
 		x += ((width - 160) - (windowWidth * 3)) / 2
@@ -145,7 +147,7 @@ class Mosaic(Screen):
 		self.state = self.PLAY
 
 		self["playState"] = Pixmap()
-		for i in range(1, 10):
+		for i in list(range(1, 10)):
 			self["window" + str(i)] = Pixmap()
 			self["video" + str(i)] = VideoWindow(decoder=0, fb_width=self.width, fb_height=self.height)
 			self["video" + str(i)].hide()
@@ -308,7 +310,8 @@ class Mosaic(Screen):
 			self.working = False
 			self.updateTimer.start(1, 1)
 		else:
-			print "[Mosaic] retval: %d result: %s" % (retval, result)
+			result = six.ensure_str(result)
+			print("[Mosaic] retval: %d result: %s" % (retval, result))
 
 			try:
 				f = open(grab_errorlog, "w")

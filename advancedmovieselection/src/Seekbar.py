@@ -19,7 +19,8 @@
 #  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigNumber, ConfigSelection, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
@@ -31,7 +32,7 @@ from Screens.InfoBar import MoviePlayer
 from Screens.Screen import Screen
 from Tools.KeyBindings import addKeyBinding
 import keymapparser
-from Source.Globals import SkinTools
+from .Source.Globals import SkinTools
 
 
 class Seekbar(ConfigListScreen, Screen):
@@ -177,7 +178,7 @@ def seekbarBack(instance):
 MoviePlayer.seekFwdManual = seekbar
 MoviePlayer.seekBackManual = seekbarBack
 
-from Source.Globals import pluginPresent
+from .Source.Globals import pluginPresent
 if pluginPresent.DVDPlayer:
     from Plugins.Extensions.DVDPlayer.plugin import DVDPlayer
     DVDPlayer.seekFwdManual = seekbar

@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 
 #pragma mark - Flickr API
 
-import flickrapi
+from . import flickrapi
 import os
 import shutil
 import types
@@ -11,7 +12,7 @@ import types
 from twisted.internet import reactor
 from twisted.internet.defer import Deferred
 from twisted.web.client import downloadPage
-
+import six
 our_print = lambda *args, **kwargs: print("[FlickrApi]", *args, **kwargs)
 
 
@@ -115,7 +116,7 @@ class PictureGenerator:
 		return self.__list.index(obj.obj)
 
 
-from PictureApi import PictureApi
+from .PictureApi import PictureApi
 
 
 class FlickrApi(PictureApi):
@@ -151,7 +152,7 @@ class FlickrApi(PictureApi):
 
 	def getAlbum(self, album):
 		# workaround to allow displaying the photostream without changes to the gui. we use it as a virtual album (or 'set' in flickr) and use the nsid as album object
-		if isinstance(album, types.StringType):
+		if isinstance(album, bytes):
 			photos = self.flickr_api.people_getPublicPhotos(user_id=album, per_page='500', total='500', extras='url_l,url_o,url_m,url_s,url_t,description')
 			pset = photos.find('photos')
 		else:
@@ -190,7 +191,7 @@ class FlickrApi(PictureApi):
 		if os.path.exists(fullname):
 			reactor.callLater(0, d.callback, (fullname, photo))
 		else:
-			downloadPage(url, fullname).addCallbacks(
+			downloadPage(six.ensure_binary(url), fullname).addCallbacks(
 				lambda value: d.callback((fullname, photo)),
 				lambda error: d.errback((error, photo)))
 		return d

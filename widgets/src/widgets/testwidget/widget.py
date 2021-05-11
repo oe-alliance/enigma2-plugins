@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Plugins.Extensions.Widgets.Widget import Widget
 from Components.Label import Label
 
@@ -9,7 +10,7 @@ class TestWidget(Widget):
         self.elements["testwidget_blablub"] = Label("bla bla blub")
 
     def onLoadFinished(self, instance):
-        print "refresh TestWidget"
+        print("refresh TestWidget")
 
 
 def get_widget(session):

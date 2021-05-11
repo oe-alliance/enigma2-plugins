@@ -1,7 +1,8 @@
+from __future__ import print_function
 from enigma import eConsoleAppContainer
 from Components.config import config
-
 from twisted.web import server, resource, http
+import six
 
 
 class IPKGResource(resource.Resource):
@@ -33,7 +34,7 @@ class IPKGResource(resource.Resource):
 
 	def buildCmd(self, parms=[]):
 		cmd = [IPKGResource.IPKG_PATH, "ipkg", self.command] + parms
-		print "[IPKG.py] cmd: %s" % cmd
+		print("[IPKG.py] cmd: %s" % cmd)
 		return cmd
 
 	def execCmd(self, request, parms=[]):
@@ -117,7 +118,8 @@ class IPKGConsoleStream:
 			self.request.finish()
 
 	def dataAvail(self, data):
-		print"[IPKGConsoleStream].dataAvail: '%s'" % data
+		data = six.ensure_str(data)
+		print("[IPKGConsoleStream].dataAvail: '%s'" % data)
 		#FIXME - filter strange reapeated outputs since we switched to opkg
 		if data != self.lastdata or self.lastdata is None and self.stillAlive:
 			self.lastdata = data

@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from twisted.web.client import downloadPage
 from enigma import ePicLoad, eServiceReference
@@ -16,10 +17,13 @@ from Components.Language import language
 from Components.ProgressBar import ProgressBar
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 import re
-import htmlentitydefs
-import urllib
+from six.moves.urllib.parse import quote
 import os
 import gettext
+
+import six
+from six.moves import html_entities
+
 
 PluginLanguageDomain = "OFDb"
 PluginLanguagePath = "Extensions/OFDb/locale"
@@ -33,7 +37,7 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
 
@@ -213,7 +217,7 @@ class OFDB(Screen):
 			self["extralabel"].pageDown()
 
 	def showMenu(self):
-		if (self.Page is 1 or self.Page is 2) and self.resultlist:
+		if (self.Page == 1 or self.Page == 2) and self.resultlist:
 			self["menu"].show()
 			self["stars"].hide()
 			self["starsbg"].hide()
@@ -240,8 +244,8 @@ class OFDB(Screen):
 			self["statusbar"].setText(_("Re-Query OFDb: %s...") % (title))
 			localfile = "/tmp/ofdbquery2.html"
 			fetchurl = "http://www.ofdb.de/film/" + link
-			print "[OFDb] downloading query " + fetchurl + " to " + localfile
-			downloadPage(fetchurl, localfile).addCallback(self.OFDBquery2).addErrback(self.fetchFailed)
+			print("[OFDb] downloading query " + fetchurl + " to " + localfile)
+			downloadPage(six.ensure_binary(fetchurl), localfile).addCallback(self.OFDBquery2).addErrback(self.fetchFailed)
 			self["menu"].hide()
 			self.resetLabels()
 			self.Page = 1
@@ -276,8 +280,8 @@ class OFDB(Screen):
 	def channelSelectionClosed(self, ret=None):
 		if ret:
 			self.eventName = ret
- 			self.Page = 0
- 			self.resultlist = []
+			self.Page = 0
+			self.resultlist = []
 			self["menu"].hide()
 			self["ratinglabel"].show()
 			self["castlabel"].show()
@@ -289,14 +293,14 @@ class OFDB(Screen):
 
 	def getOFDB(self):
 		self.resetLabels()
-		if self.eventName is "":
+		if self.eventName == "":
 			s = self.session.nav.getCurrentService()
 			info = s and s.info()
 			event = info and info.getEvent(0) # 0 = now, 1 = next
 			if event:
 				self.eventName = event.getEventName()
 
-		if self.eventName is not "":
+		if self.eventName != "":
 			try:
 				pos = self.eventName.index(" (")
 				self.eventName = self.eventName[0:pos]
@@ -310,18 +314,18 @@ class OFDB(Screen):
 
 			self["statusbar"].setText(_("Query OFDb: %s...") % (self.eventName))
 			try:
-				self.eventName = urllib.quote(self.eventName)
+				self.eventName = quote(self.eventName)
 			except:
-				self.eventName = urllib.quote(self.eventName.decode('utf8').encode('ascii', 'ignore'))
+				self.eventName = quote(self.eventName.decode('utf8').encode('ascii', 'ignore'))
 			localfile = "/tmp/ofdbquery.html"
 			fetchurl = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=DTitel&SText=" + self.eventName
-			print "[OFDb] Downloading Query " + fetchurl + " to " + localfile
-			downloadPage(fetchurl, localfile).addCallback(self.OFDBquery).addErrback(self.fetchFailed)
+			print("[OFDb] Downloading Query " + fetchurl + " to " + localfile)
+			downloadPage(six.ensure_binary(fetchurl), localfile).addCallback(self.OFDBquery).addErrback(self.fetchFailed)
 		else:
 			self["statusbar"].setText(_("Could't get Eventname"))
 
 	def fetchFailed(self, string):
-		print "[OFDb] fetch failed " + string
+		print("[OFDb] fetch failed " + string)
 		self["statusbar"].setText(_("OFDb Download failed"))
 
 	def html2utf8(self, in_html):
@@ -334,21 +338,21 @@ class OFDB(Screen):
 		for x in entities:
 			entitydict[x.group(1)] = x.group(2)
 
-		for key, name in entitydict.items():
-			entitydict[key] = htmlentitydefs.name2codepoint[name]
+		for key, name in list(entitydict.items()):
+			entitydict[key] = html_entities.name2codepoint[name]
 
 		entities = htmlentitynumbermask.finditer(in_html)
 
 		for x in entities:
 			entitydict[x.group(1)] = x.group(2)
 
-		for key, codepoint in entitydict.items():
-			in_html = in_html.replace(key, (unichr(int(codepoint)).encode('utf8')))
+		for key, codepoint in list(entitydict.items()):
+			in_html = in_html.replace(key, (six.unichr(int(codepoint)).encode('utf8')))
 
 		self.inhtml = in_html
 
 	def OFDBquery(self, string):
-		print "[OFDBquery]"
+		print("[OFDBquery]")
 		self["statusbar"].setText(_("OFDb Download completed"))
 
 		self.html2utf8(open("/tmp/ofdbquery.html", "r").read())
@@ -383,7 +387,7 @@ class OFDB(Screen):
 		self.OFDBparse()
 
 	def OFDBparse(self):
-		print "[OFDBparse]"
+		print("[OFDBparse]")
 		self.Page = 1
 		Detailstext = _("No details found.")
 		if self.generalinfos:
@@ -436,7 +440,7 @@ class OFDB(Screen):
 				if cast:
 					for x in cast:
 						Casttext += "\n" + self.htmltags.sub('', x.group(1))
-					if Casttext is not "":
+					if Casttext != "":
 						Casttext = _("Cast: ") + Casttext
 					else:
 						Casttext = _("No cast list found in the database.")
@@ -448,10 +452,10 @@ class OFDB(Screen):
 				posterurl = posterurl.group(1)
 				self["statusbar"].setText(_("Downloading Movie Poster: %s...") % (posterurl))
 				localfile = "/tmp/poster.jpg"
-				print "[OFDb] downloading poster " + posterurl + " to " + localfile
-				downloadPage(posterurl, localfile).addCallback(self.OFDBPoster).addErrback(self.fetchFailed)
+				print("[OFDb] downloading poster " + posterurl + " to " + localfile)
+				downloadPage(six.ensure_binary(posterurl), localfile).addCallback(self.OFDBPoster).addErrback(self.fetchFailed)
 			else:
-				print "no jpg poster!"
+				print("no jpg poster!")
 				self.OFDBPoster(noPoster=True)
 
 		self["detailslabel"].setText(Detailstext)

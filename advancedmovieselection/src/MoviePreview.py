@@ -19,14 +19,16 @@
 #  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
+from __future__ import print_function
+from __future__ import absolute_import
 from Components.AVSwitch import AVSwitch
 from Components.Pixmap import Pixmap
 from enigma import ePicLoad, gPixmapPtr, eTimer
 from Tools.Directories import fileExists
 import os
 from Components.config import config
-from Source.ServiceProvider import eServiceReferenceDvd, getServiceInfoValue, ServiceCenter, eServiceReferenceBludisc
-from Source.ISOInfo import ISOInfo
+from .Source.ServiceProvider import eServiceReferenceDvd, getServiceInfoValue, ServiceCenter, eServiceReferenceBludisc
+from .Source.ISOInfo import ISOInfo
 from enigma import iServiceInformation, eServiceReference
 from os import environ
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN
@@ -129,7 +131,7 @@ class DVDOverlay(Screen):
 
 from ServiceReference import ServiceReference
 from Screens.InfoBarGenerics import InfoBarCueSheetSupport
-from Source.ServiceProvider import CueSheet
+from .Source.ServiceProvider import CueSheet
 
 
 class VideoPreview():
@@ -205,12 +207,12 @@ class VideoPreview():
     def playMovie(self):
         if self.service and self.enabled:
             if self.service.flags & eServiceReference.mustDescent or isinstance(self.service, eServiceReferenceBludisc):
-                print "Skipping video preview"
+                print("Skipping video preview")
                 self.__playLastService()
                 return
-            from MoviePlayer import playerChoice
+            from .MoviePlayer import playerChoice
             if playerChoice and playerChoice.isPlaying():
-                print "Skipping video preview"
+                print("Skipping video preview")
                 return
             cpsr = self.session.nav.getCurrentlyPlayingServiceReference()
             if cpsr and cpsr == self.service:
@@ -221,7 +223,7 @@ class VideoPreview():
             if isinstance(self.service, eServiceReferenceDvd):
                 if self.service.isIsoImage():
                     if ISOInfo().getFormatISO9660(self.service) != ISOInfo.DVD:
-                        print "Skipping video preview"
+                        print("Skipping video preview")
                         self.__playLastService()
                         return
                 newref = eServiceReference(4369, 0, self.service.getPath())
@@ -231,7 +233,7 @@ class VideoPreview():
                     subs.enableSubtitles(self.dvdScreen.instance, None)
             else:
                 self.session.nav.playService(self.service)
-            print "play", self.service.getPath()
+            print("play", self.service.getPath())
             self.currentlyPlayingService = self.service
             seekable = self.getSeek()
             if seekable:
@@ -247,14 +249,14 @@ class VideoPreview():
                         if self.service.getPath().endswith('ts'):
                             seekable.seekTo(last)
                         else:
-                            self.minutes = long(last / 90000 / 60)
+                            self.minutes = int(last / 90000 / 60)
                             if isinstance(self.service, eServiceReferenceDvd):
                                 self.resume_point = last
                                 self.dvd_preview_timer.start(1000, True)
                                 return
                             self.fwd_timer.start(1000, True)
-                except Exception, e:
-                    print e
+                except Exception as e:
+                    print(e)
 
     def fwd(self):
         self.seekRelativ(self.minutes)
@@ -268,7 +270,7 @@ class VideoPreview():
         return None
 
     def playLastDVD(self, answer=True):
-        print "playLastDVD", self.resume_point
+        print("playLastDVD", self.resume_point)
         service = self.session.nav.getCurrentService()
         if service:
             if answer == True:

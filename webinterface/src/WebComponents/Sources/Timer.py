@@ -1,3 +1,4 @@
+from __future__ import print_function
 Version = '$Header$'
 
 from enigma import eServiceReference, eEPGCache
@@ -65,13 +66,13 @@ class Timer(Source):
 			self.res = (False, _("Unknown function: '%s'") % (self.func))
 
 	def cleanupTimer(self):
-		print "[WebComponents.Timer] cleanupTimer"
+		print("[WebComponents.Timer] cleanupTimer")
 
 		self.session.nav.RecordTimer.cleanup()
 		return (True, _("List of Timers has been cleaned"))
 
 	def delTimer(self, param):
-		print "[WebComponents.Timer] delTimer"
+		print("[WebComponents.Timer] delTimer")
 
 		if 'sRef' in param:
 			service_ref = ServiceReference(param['sRef'])
@@ -112,7 +113,7 @@ class Timer(Source):
 		to delete something:
 			&command=del&&year={year}&month={month}&day={day}&shour={start_hour}&smin={start_minute}&ehour={end_hour}&emin={end_minute}&sRef={urlencode(channel_name_external, "utf8")}
 		"""
-		print "[WebComponents.Timer] tvbrowser"
+		print("[WebComponents.Timer] tvbrowser")
 
 		listDate = ('year', 'month', 'day', 'shour', 'smin', 'ehour', 'emin')
 		for element in listDate:
@@ -176,7 +177,7 @@ class Timer(Source):
 			service = self.session.nav.getCurrentService()
 			event = service.info().getEvent(0)
 		except Exception:
-			print "[Webcomponents.Timer] recordNow Exception!"
+			print("[Webcomponents.Timer] recordNow Exception!")
 
 		begin = time()
 		end = begin + 3600 * 10
@@ -215,7 +216,7 @@ class Timer(Source):
 #===============================================================================
 
 	def editTimer(self, param):
-		print "[WebComponents.Timer] editTimer"
+		print("[WebComponents.Timer] editTimer")
 
 		#OK first we need to parse all of your Parameters
 		#For some of them (like afterEvent or justplay) we can use default values
@@ -266,7 +267,7 @@ class Timer(Source):
 			except ValueError:
 				return (False, _("Illegal Parameter value for Parameter eit : '%s'") % eit)
 
-		print "[WebComponents.Sources.Timer]: eit=%d" % eit
+		print("[WebComponents.Sources.Timer]: eit=%d" % eit)
 		if eit != 0:
 			#check if the given event exists, if it doesn't the timer may be already running
 			epgcache = eEPGCache.getInstance()
@@ -275,7 +276,7 @@ class Timer(Source):
 				eit = event.getEventId()
 				#TODO add some subservice handling
 			else:
-				print "[WebComponents.Sources.Timer] event not found, will be ignored"
+				print("[WebComponents.Sources.Timer] event not found, will be ignored")
 
 		disabled = False #Default to: Enabled
 		if 'disabled' in param:
@@ -359,10 +360,10 @@ class Timer(Source):
 
 								if conflicts is None:
 									self.recordtimer.timeChanged(timer) #go and save it
-									print "[WebComponents.Timer] editTimer: Timer changed!"
+									print("[WebComponents.Timer] editTimer: Timer changed!")
 									return (True, "Timer '%s' changed" % (timer.name))
 								else:
-									print "[WebComponents.Timer] editTimer conflicting Timers: %s" % (conflicts)
+									print("[WebComponents.Timer] editTimer conflicting Timers: %s" % (conflicts))
 									msg = ""
 									for t in conflicts:
 										msg = "%s / %s" % (msg, t.name)
@@ -372,7 +373,7 @@ class Timer(Source):
 			except Exception as e:
 				#obviously some value was not good, return an error
 				import traceback
-				print traceback.format_exc()
+				print(traceback.format_exc())
 				return (False, _("Changing the timer for '%s' failed!") % name)
 
 			return (False, _("Could not find timer '%s' with given start and end time!") % name)
@@ -388,22 +389,22 @@ class Timer(Source):
 			if conflicts is None:
 				return (True, _("Timer '%s' added") % (timer.name))
 			else:
-				print "[WebComponents.Timer] editTimer conflicting Timers: %s" % (conflicts)
+				print("[WebComponents.Timer] editTimer conflicting Timers: %s" % (conflicts))
 				msg = ""
 				for timer in conflicts:
 					msg = "%s / %s" % (msg, timer.name)
 
 				return (False, _("Conflicting Timer(s) detected! %s") % (msg))
 
-		except Exception, e:
+		except Exception as e:
 			#something went wrong, most possibly one of the given paramater-values was wrong
-			print "[WebComponents.Timer] editTimer exception: %s" % (e)
+			print("[WebComponents.Timer] editTimer exception: %s" % (e))
 			return (False, _("Could not add timer '%s'!") % name)
 
 		return (False, "Unexpected Error")
 
 	def addTimerByEventID(self, param):
-		print "[WebComponents.Timer] addTimerByEventID", param
+		print("[WebComponents.Timer] addTimerByEventID", param)
 		if param['sRef'] is None:
 			return (False, _("Missing Parameter: sRef"))
 		if param['eventid'] is None:
@@ -435,7 +436,7 @@ class Timer(Source):
 		if conflicts is None:
 			return (True, _("Timer '%s' added") % (timer.name))
 		else:
-			print "[WebComponents.Timer] editTimer conflicting Timers: %s" % (conflicts)
+			print("[WebComponents.Timer] editTimer conflicting Timers: %s" % (conflicts))
 			msg = ""
 			for timer in conflicts:
 				msg = "%s / %s" % (msg, timer.name)
@@ -445,7 +446,7 @@ class Timer(Source):
 	def writeTimerList(self, force=False):
 		# is there an easier and better way? :\
 		if config.plugins.Webinterface.autowritetimer.value or force:
-			print "Timer.py writing timer to flash"
+			print("Timer.py writing timer to flash")
 			self.session.nav.RecordTimer.saveTimer()
 			return (True, _("TimerList has been saved"))
 		else:

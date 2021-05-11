@@ -25,6 +25,7 @@ For example, if you distribute copies of such a program, whether gratis or for a
 must pass on to the recipients the same freedoms that you received. You must make sure
 that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 '''
+from __future__ import print_function
 import os
 import glob
 import shutil
@@ -59,8 +60,8 @@ class AsynchTrash(Thread):
                 return
             try:
                 Trashcan.delete(service.getPath(), self.min_age)
-            except Exception, e:
-                print e
+            except Exception as e:
+                print(e)
         global async_trash
         async_trash = None
 
@@ -155,12 +156,12 @@ class Trashcan:
 
     @staticmethod
     def trash(filename):
-        print "trash: ", filename
+        print("trash: ", filename)
         os.rename(filename, filename + TRASH_NAME)
 
     @staticmethod
     def restore(filename):
-        print "restore: ", filename
+        print("restore: ", filename)
         os.rename(filename, filename.replace(TRASH_NAME, ""))
 
     @staticmethod
@@ -168,16 +169,16 @@ class Trashcan:
         if min_age > 0:
             # Make sure the file/directory has a ctime that didn't
             # change for at least the intended removal minimum age
-            print "check retention time", filename
+            print("check retention time", filename)
             nowSec = int(time.time())
             fCtime = os.path.getctime(filename)
-            print "ctime:", str(fCtime), "now:", str(nowSec)
+            print("ctime:", str(fCtime), "now:", str(nowSec))
             if nowSec < (fCtime + min_age):
-                print "skipped, too young: ", str(nowSec - fCtime), "<", str(min_age)
+                print("skipped, too young: ", str(nowSec - fCtime), "<", str(min_age))
                 return
 
         movie_ext = ["gm", "sc", "ap", "cuts"]
-        print "delete: ", filename
+        print("delete: ", filename)
         #path = os.path.split(filename)[0]
         original_name = filename.replace(TRASH_NAME, "")
         if os.path.isfile(filename):
@@ -196,15 +197,15 @@ class Trashcan:
         for ext in movie_ext:
             to_delete = original_name + "." + ext
             if os.path.exists(to_delete):
-                print to_delete
+                print(to_delete)
                 os.remove(to_delete)
 
         if os.path.exists(jpg):
-            print jpg
+            print(jpg)
             os.remove(jpg)
 
         if os.path.exists(eit):
-            print eit
+            print(eit)
             os.remove(eit)
 
         if os.path.exists(filename):
@@ -213,7 +214,7 @@ class Trashcan:
                 filename = original_name
                 from ServiceProvider import ServiceCenter, eServiceReference
                 service = eServiceReference(eServiceReference.idDVB, 0, filename)
-                print "[erase file]", filename
+                print("[erase file]", filename)
                 serviceHandler = ServiceCenter.getInstance()
                 offline = serviceHandler.offlineOperations(service)
                 result = False
@@ -223,9 +224,9 @@ class Trashcan:
                         result = True
 
                 if result == False:
-                    print "Error"
+                    print("Error")
             else:
-                print "[erase dir]", filename
+                print("[erase dir]", filename)
                 shutil.rmtree(filename)
 
     @staticmethod

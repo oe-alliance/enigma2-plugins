@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Components.Sources.Source import Source
 from Components.config import config
 from Tools.Directories import resolveFilename, SCOPE_CONFIG, SCOPE_HDD
@@ -46,12 +47,12 @@ class LocationsAndTags(Source):
 			while "" in tags:
 				tags.remove("")
 			file.close()
-		except IOError, ioe:
+		except IOError as ioe:
 			tags = ()
 		return tags
 
 	def addLocation(self, param):
-		print "[WebComponents.LocationsAndTags] addLocation: ", param
+		print("[WebComponents.LocationsAndTags] addLocation: ", param)
 		if param['dirname'] is None:
 			return (False, "Missing Parameter: dirname")
 		dirname = param['dirname']
@@ -79,7 +80,7 @@ class LocationsAndTags(Source):
 		return (True, _("Location '%s' added successfully") % (dirname))
 
 	def removeLocation(self, param):
-		print "[WebComponents.LocationsAndTags] removeLocation: ", param
+		print("[WebComponents.LocationsAndTags] removeLocation: ", param)
 		if len(param) == 0:
 			return (False, _("Missing value for parameter dirname"))
 		dirname = param

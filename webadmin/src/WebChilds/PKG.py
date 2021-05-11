@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from enigma import eConsoleAppContainer
 from twisted.web import server, resource, http
 from Plugins.Extensions.WebInterface.WebChilds.IPKG import IPKGConsoleStream, IPKGResource
@@ -44,7 +45,7 @@ class PKGConsoleStream(IPKGConsoleStream):
 
 	def cmdFinished(self, data):
 		if self.stillAlive:
-			print "[PKGConsoleStream].self.cmd ", self.cmd
+			print("[PKGConsoleStream].self.cmd ", self.cmd)
 			if "/usr/bin/opkg" in self.cmd and not "update" in self.cmd:
 				html = """</p>
 						<hr>

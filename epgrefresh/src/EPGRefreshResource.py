@@ -1,18 +1,24 @@
+# -*- coding: UTF-8 -*-
+from __future__ import print_function, absolute_import
+
 from twisted.web import http, resource
-from EPGRefresh import epgrefresh
-from EPGRefreshService import EPGRefreshService
+from .EPGRefresh import epgrefresh
+from .EPGRefreshService import EPGRefreshService
 from enigma import eServiceReference
 from Components.config import config
 from Components.NimManager import nimmanager
 from time import localtime
-from OrderedSet import OrderedSet
+from .OrderedSet import OrderedSet
 from ServiceReference import ServiceReference
 from Tools.XMLTools import stringToXML
+
+from six.moves.urllib.parse import unquote
+import six
+
+
 try:
-	from urllib import unquote
-	iteritems = lambda d: d.iteritems()
+	iteritems = lambda d: six.iteritems(d)
 except ImportError as ie:
-	from urllib.parse import unquote
 	iteritems = lambda d: d.items()
 
 API_VERSION = "1.4"
@@ -32,11 +38,11 @@ class EPGRefreshStartRefreshResource(resource.Resource):
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 
-		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
+		return six.ensure_binary("""<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2simplexmlresult>
  <e2state>%s</e2state>
  <e2statetext>%s</e2statetext>
-</e2simplexmlresult>""" % ('true' if state else 'false', output)
+</e2simplexmlresult>""" % ('true' if state else 'false', output))
 
 
 class EPGRefreshAddRemoveServiceResource(resource.Resource):
@@ -51,7 +57,7 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 		do_add = self.type == self.TYPE_ADD
 		state = False
 
-		if 'multi' in req.args:
+		if b'multi' in req.args:
 			if epgrefresh.services[0]:
 				epgrefresh.services[0].clear()
 				state = True
@@ -59,14 +65,15 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 				epgrefresh.services[1].clear()
 				state = True
 
-		if 'sref' in req.args:
-			duration = req.args.get("duration", None)
+		if b'sref' in req.args:
+			duration = req.args.get(b"duration", None)
 			try:
 				duration = duration and int(duration)
 			except ValueError as ve:
 				output = 'invalid value for "duration": ' + str(duration)
 			else:
-				for sref in req.args.get('sref'):
+				for _sref in req.args.get(b'sref'):
+					sref = six.ensure_str(_sref)
 					sref = unquote(sref)
 					ref = eServiceReference(sref)
 					if not ref.valid():
@@ -120,18 +127,18 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 		else:
 			output = 'missing argument "sref"'
 
-		if 'multi' in req.args:
+		if b'multi' in req.args:
 			output = 'service restriction changed'
 
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 
-		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
+		return six.ensure_binary("""<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2simplexmlresult>
  <e2state>%s</e2state>
  <e2statetext>%s</e2statetext>
-</e2simplexmlresult> """ % ('True' if state else 'False', output)
+</e2simplexmlresult> """ % ('True' if state else 'False', output))
 
 
 class EPGRefreshListServicesResource(resource.Resource):
@@ -140,7 +147,7 @@ class EPGRefreshListServicesResource(resource.Resource):
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
-		return ''.join(epgrefresh.buildConfiguration(webif=True))
+		return six.ensure_binary(''.join(epgrefresh.buildConfiguration(webif=True)))
 
 
 class EPGRefreshPreviewServicesResource(resource.Resource):
@@ -149,10 +156,11 @@ class EPGRefreshPreviewServicesResource(resource.Resource):
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 
-		if 'sref' in req.args:
+		if b'sref' in req.args:
 			services = OrderedSet()
 			bouquets = OrderedSet()
-			for sref in req.args.get('sref'):
+			for _sref in req.args.get(b'sref'):
+				sref = six.ensure_str(_sref)
 				sref = unquote(sref)
 				ref = eServiceReference(sref)
 				if not ref.valid():
@@ -192,14 +200,15 @@ class EPGRefreshPreviewServicesResource(resource.Resource):
 				' </e2service>\n',
 			))
 		returnlist.append('\n</e2servicelist>')
-		return ''.join(returnlist)
+		return six.ensure_binary(''.join(returnlist))
 
 
 class EPGRefreshChangeSettingsResource(resource.Resource):
 	def render(self, req):
 		statetext = "config changed."
-		for key, value in iteritems(req.args):
-			value = value[0]
+		for _key, _value in iteritems(req.args):
+			value = six.ensure_str(_value[0])
+			key = six.ensure_str(_key)
 			if key == "enabled":
 				config.plugins.epgrefresh.enabled.value = True if value == "true" else False
 			elif key == "enablemessage":
@@ -255,11 +264,11 @@ class EPGRefreshChangeSettingsResource(resource.Resource):
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 
-		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
+		return six.ensure_binary("""<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2simplexmlresult>
  <e2state>true</e2state>
  <e2statetext>%s</e2statetext>
-</e2simplexmlresult>""" % (statetext,)
+</e2simplexmlresult>""" % (statetext,))
 
 
 class EPGRefreshSettingsResource(resource.Resource):
@@ -289,7 +298,7 @@ class EPGRefreshSettingsResource(resource.Resource):
 		except ImportError as ie:
 			pass
 
-		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
+		return six.ensure_binary("""<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2settings>
  <e2setting>
   <e2settingname>config.plugins.epgrefresh.enabled</e2settingname>
@@ -377,4 +386,4 @@ class EPGRefreshSettingsResource(resource.Resource):
 				canDoBackgroundRefresh,
 				hasAutoTimer,
 				API_VERSION,
-			)
+			))

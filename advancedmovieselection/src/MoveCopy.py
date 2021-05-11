@@ -19,13 +19,15 @@
 #  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
-from __init__ import _
+from __future__ import print_function
+from __future__ import absolute_import
+from .__init__ import _
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.LocationBox import MovieLocationBox
 from Components.config import config
-from Source.ServiceUtils import serviceUtil, realSize, diskUsage
-from Source.ServiceProvider import ServiceCenter
+from .Source.ServiceUtils import serviceUtil, realSize, diskUsage
+from .Source.ServiceProvider import ServiceCenter
 from enigma import eTimer
 import os
 import time
@@ -37,7 +39,7 @@ def openDialog(job, session):
     if not session:
         return
     # update movie list to show new copied or moved movies
-    from MovieSelection import MovieSelection
+    from .MovieSelection import MovieSelection
     if isinstance(session.current_dialog, MovieSelection):
         session.current_dialog.updateList(job)
         if not error:
@@ -59,7 +61,7 @@ class MoveCopyNotifier():
         pass
 
     def __timeout(self):
-        print "MoveCopyNotifier", str(serviceUtil.getJobs())
+        print("MoveCopyNotifier", str(serviceUtil.getJobs()))
         for job in serviceUtil.getJobs():
             if job.isFinished():
                 openDialog(job, self.session)
@@ -179,8 +181,8 @@ class ProgressList(GUIComponent):
 
             res.append(MultiContentEntryText(pos=(width - 200, 9), size=(195, 26), font=0, flags=RT_HALIGN_RIGHT, text=realSize(copied)))
             #res.append(MultiContentEntryText(pos=(width - 150, 32), size=(145, 22), font=1, flags=RT_HALIGN_RIGHT, text=etime))
-        except Exception, e:
-            print e
+        except Exception as e:
+            print(e)
         return res
 
     def moveToIndex(self, index):
@@ -238,7 +240,7 @@ from Screens.HelpMenu import HelpableScreen
 from enigma import eTimer
 from Components.ActionMap import HelpableActionMap
 from Components.Button import Button
-from Source.Globals import SkinResolutionHelper
+from .Source.Globals import SkinResolutionHelper
 
 
 class MoveCopyProgress(Screen, HelpableScreen, SkinResolutionHelper):
@@ -414,7 +416,7 @@ class MovieMove(ChoiceBox):
             serviceUtil.clear()
             text = []
             for s in services:
-                print s.getName()
+                print(s.getName())
                 text.append(s.getName())
             self.session.open(MessageBox, _("Movie(s) are already in the destination directory. Operation cancelled!") + "\r\n\r\n" + "\r\n".join(text), MessageBox.TYPE_INFO)
             return

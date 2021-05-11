@@ -19,15 +19,16 @@
 #  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.config import config
-from Source.ServiceProvider import ServiceCenter, ServiceEvent
+from .Source.ServiceProvider import ServiceCenter, ServiceEvent
 from Components.ScrollLabel import ScrollLabel
-from MoviePreview import MoviePreview
-from Source.Globals import SkinTools, pluginPresent
+from .MoviePreview import MoviePreview
+from .Source.Globals import SkinTools, pluginPresent
 from Components.Sources.StaticText import StaticText
 from Components.Pixmap import Pixmap
 import os

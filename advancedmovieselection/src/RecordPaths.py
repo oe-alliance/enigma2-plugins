@@ -19,9 +19,11 @@
 #  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
-from __init__ import _
+from __future__ import print_function
+from __future__ import absolute_import
+from .__init__ import _
 # Topfi: use local eRecordPaths instead of Screens.RecordPaths
-from eRecordPaths import RecordPathsSettings as eRecordPathsSettings
+from .eRecordPaths import RecordPathsSettings as eRecordPathsSettings
 from Screens.LocationBox import MovieLocationBox
 from Components.config import config, ConfigSelection, getConfigListEntry
 from Components.UsageConfig import preferredPath
@@ -42,7 +44,7 @@ class RecordPathsSettings(eRecordPathsSettings):
         if default not in tmp:
             tmp = tmp[:]
             tmp.append(default)
-        print "MoveCopyPath: ", default, tmp
+        print("MoveCopyPath: ", default, tmp)
         self.movecopy_dirname = ConfigSelection(default=default, choices=tmp)
         self.movecopy_dirname.addNotifier(self.checkReadWriteDir, initial_call=False, immediate_feedback=False)
         self.movecopy_dirname.last_value = config.AdvancedMovieSelection.movecopydirs.value

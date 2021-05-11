@@ -1,12 +1,13 @@
+from __future__ import absolute_import
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config, ConfigInteger, ConfigSubsection, ConfigSelection, \
     ConfigSubList, ConfigText, ConfigYesNo, ConfigDateTime, ConfigClock, ConfigPIN
-from KTmain import kiddyTimer
-from KTsetup import KiddyTimerSetup
+from .KTmain import kiddyTimer
+from .KTsetup import KiddyTimerSetup
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
-from __init__ import _
-import KTglob
+from .__init__ import _
+from . import KTglob
 import time
 
 config.plugins.KiddyTimer = ConfigSubsection()
@@ -23,7 +24,7 @@ config.plugins.KiddyTimer.pin = ConfigPIN(default=1111, censor="*")
 config.plugins.KiddyTimer.remainingTime = ConfigInteger(default=int(KTglob.ONEHOUR), limits=(0, 86400))
 
 config.plugins.KiddyTimer.dayTimes = ConfigSubList()
-for i in range(0, 7):
+for i in list(range(0, 7)):
     s = ConfigSubsection()
     s.timeValue = ConfigClock(default=KTglob.ONEOCLOCK)
     config.plugins.KiddyTimer.dayTimes.append(s)

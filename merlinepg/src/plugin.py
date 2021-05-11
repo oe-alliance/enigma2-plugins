@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 #######################################################################
 #
 #    Merlin Programm Guide for Dreambox-Enigma2
@@ -36,7 +37,7 @@ from Tools.LoadPixmap import LoadPixmap
 from enigma import eServiceReference, eServiceCenter, getDesktop, eTimer, gFont, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_WRAP, eEPGCache
 from RecordTimer import RecordTimerEntry, parseEvent, AFTEREVENT
 from ServiceReference import ServiceReference
-from ShowMe import ShowMe
+from .ShowMe import ShowMe
 from time import localtime, strftime
 if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/AutoTimer/AutoTimerEditor.pyo"):
 	from Plugins.Extensions.AutoTimer.AutoTimerEditor import addAutotimerFromEvent
@@ -55,6 +56,7 @@ if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/EPGSearch/EPGSearch.py
 else:
 	epgSpresent = False
 
+from six.moves import range
 
 config.plugins.MerlinEPG = ConfigSubsection()
 config.plugins.MerlinEPG.Columns = ConfigYesNo(default=True)
@@ -68,7 +70,7 @@ config.plugins.MerlinEPG.PageUDonBouquets = ConfigYesNo(default=True)
 
 
 def Plugins(**kwargs):
- 	list = [(PluginDescriptor(name="Merlin Programm Guide", description="Merlin Programm Guide", where=PluginDescriptor.WHERE_EVENTINFO, fnc=startMerlinPG))]
+	list = [(PluginDescriptor(name="Merlin Programm Guide", description="Merlin Programm Guide", where=PluginDescriptor.WHERE_EVENTINFO, fnc=startMerlinPG))]
 	list.append(PluginDescriptor(name="Merlin Programm Guide", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=startMerlinPGnew))
 	return list
 

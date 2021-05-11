@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - IMDb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2015-02-02 22:44+0100\n"
 "Last-Translator: mimi74\n"
 "Language-Team: french-EGAMI\n"
@@ -28,6 +28,9 @@ msgstr "Annuler"
 
 msgid "Cast: "
 msgstr "Cast: "
+
+msgid "Channel Selection"
+msgstr "Sélection chaîne"
 
 msgid "Content:"
 msgstr ""
@@ -116,6 +119,9 @@ msgstr "Aucune IMDb correspondante."
 msgid "IMDb setup"
 msgstr "IMDb Configuration"
 
+msgid "Lookup"
+msgstr "Chercher"
+
 msgid "Menu"
 msgstr ""
 
@@ -182,6 +188,9 @@ msgstr "Recherche bande annonce"
 #, fuzzy
 msgid "Search for details from the Internet Movie Database"
 msgstr "Récupérer détails depuis la base de données internet des films"
+
+msgid "Select from EPG"
+msgstr "Sélectionner depuis EPG"
 
 #, fuzzy
 msgid "Settings for Internet Movie Database searches"

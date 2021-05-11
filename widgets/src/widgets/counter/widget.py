@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Plugins.Extensions.Widgets.Widget import Widget
 from Components.Label import Label
 from enigma import eTimer
@@ -13,7 +14,7 @@ class CounterWidget(Widget):
 
     def onLoadFinished(self, instance):
         self.instance = instance
-        print "refresh CounterWidget"
+        print("refresh CounterWidget")
 
         self.getElement("counter_title").setText("###")
         self.Timer.start(200)
@@ -27,7 +28,7 @@ class CounterWidget(Widget):
         try:
             self.getElement("counter_title").setText(str(self.counter))
             self.Timer.start(200)
-        except Exception, e:
+        except Exception as e:
             pass
 
 

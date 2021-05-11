@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from Components.Sources.Source import Source
 
 
@@ -28,7 +29,7 @@ class PkgList(Source):
 		try:
 			out = os_popen("opkg update")
 			for line in out:
-				print "[loadOpkgfeed]", line
+				print("[loadOpkgfeed]", line)
 
 			out = os_popen("opkg list")
 			for line in out:
@@ -62,12 +63,12 @@ class PkgList(Source):
 					map[package[PKG_NAME]][0] = package[PKG_REL].replace("experimental-", "exp. ") + " -> " + package[PKG_INFO][:-1].replace("experimental-", "exp. ")
 					map[package[PKG_NAME]][3] = "1"
 
-			keys = map.keys()
+			keys = list(map.keys())
 			keys.sort()
 
 			return [(name, map[name][0], map[name][1], map[name][2], map[name][3]) for name in keys]
-		except Exception, e:
-			print "[PkgList] except: ", str(e)
+		except Exception as e:
+			print("[PkgList] except: ", str(e))
 			return []
 
 	def getOpkgfeed(self):

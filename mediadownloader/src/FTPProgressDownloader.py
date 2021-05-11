@@ -24,7 +24,7 @@ class FTPProgressDownloader(Protocol):
 		# Initialize
 		self.currentlength = 0
 		self.totallength = None
-		if writeProgress and type(writeProgress) is not list:
+		if writeProgress and not isinstance(writeProgress, list):
 			writeProgress = [writeProgress]
 		self.writeProgress = writeProgress
 

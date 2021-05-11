@@ -1,7 +1,8 @@
+from __future__ import print_function
+from __future__ import absolute_import
 # bangyoulater plugin by AliAbdul
-from Plugin import Movie, Plugin
+from .Plugin import Movie, Plugin
 import re
-import urllib2
 
 ##################################################
 
@@ -32,7 +33,7 @@ class bangYouLaterSub(Plugin):
 
 	def getPageError(self, error=None):
 		if error and self.currPage == 1:
-			print "[%s] Error: %s" % (self.name, error)
+			print("[%s] Error: %s" % (self.name, error))
 		else:
 			self.moreEntries = False
 
@@ -58,7 +59,7 @@ class bangYouLater(Plugin):
 
 	def getPageError(self, error=None):
 		if error:
-			print "[%s] Error: %s" % (self.name, error)
+			print("[%s] Error: %s" % (self.name, error))
 
 ##################################################
 

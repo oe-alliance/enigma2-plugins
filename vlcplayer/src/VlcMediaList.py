@@ -9,6 +9,8 @@
 # version.
 #===============================================================================
 
+from __future__ import absolute_import
+from future.utils import raise_
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Button import Button
@@ -18,8 +20,8 @@ from Screens.Screen import Screen
 
 from pyexpat import ExpatError
 
-from VlcFileList import VlcFileList
-from VlcPlayList import VlcPlayList
+from .VlcFileList import VlcFileList
+from .VlcPlayList import VlcPlayList
 from . import _
 
 
@@ -93,7 +95,7 @@ class VlcMediaListScreen(Screen):
 		try:
 			for id in self.playlistIds:
 				self.server.delete(id)
-		except Exception, e:
+		except Exception as e:
 			pass
 
 	def close(self, proceed=False):
@@ -122,7 +124,7 @@ class VlcMediaListScreen(Screen):
 			self["key_red"].setText(_("filter on"))
 		try:
 			self.updateFilelist()
-		except Exception, e:
+		except Exception as e:
 			self.session.open(
 				MessageBox, _("Error updating filelist from server %(server)s:\n%(error)s") % (
 						{"server": self.server.getName(), "error": e}
@@ -159,7 +161,7 @@ class VlcMediaListScreen(Screen):
 						self.playlistIds.append(id)
 						self.updatePlaylist()
 						self.switchToPlayList()
-				except Exception, e:
+				except Exception as e:
 					self.session.open(
 						MessageBox, _("Error loading playlist %(media)s into server %(server)s:\n%(error)s") % (
 								{"media": media, "server": self.server.getName(), "error": e}
@@ -175,13 +177,13 @@ class VlcMediaListScreen(Screen):
 	def getFilesAndDirsCB(self, currentDirectory, regex):
 		try:
 			return self.server.getFilesAndDirs(currentDirectory, regex)
-		except ExpatError, e:
+		except ExpatError as e:
 			self.session.open(
 				MessageBox, _("Error loading playlist into server %(server)s:\n%(error)s") % (
 						{"server": self.server.getName(), "error": e}
 					), MessageBox.TYPE_ERROR)
-			raise ExpatError, e
-		except Exception, e:
+			raise ExpatError
+		except Exception as e:
 			self.session.open(
 				MessageBox, _("Error loading filelist into server %(server)s:\n%(error)s") % (
 						{"server": self.server.getName(), "error": e}
@@ -191,12 +193,12 @@ class VlcMediaListScreen(Screen):
 	def getPlaylistEntriesCB(self):
 		try:
 			return self.server.getPlaylistEntries()
-		except ExpatError, e:
+		except ExpatError as e:
 			self.session.open(
 				MessageBox, _("Error loading playlist into server %(server)s:\n%(error)s") % (
 						{"server": self.server.getName(), "error": e}
 					), MessageBox.TYPE_ERROR)
-		except Exception, e:
+		except Exception as e:
 			self.session.open(
 				MessageBox, _("Error loading playlist into server %(server)s:\n%(error)s") % (
 						{"server": self.server.getName(), "error": e}

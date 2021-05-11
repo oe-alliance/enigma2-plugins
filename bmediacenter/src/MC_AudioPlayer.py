@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
+from __future__ import absolute_import
 from enigma import eTimer, iServiceInformation, iPlayableService, ePicLoad, RT_VALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, gFont, eListbox, ePoint, eListboxPythonMultiContent, eServiceCenter
 from Components.MenuList import MenuList
 from Screens.Screen import Screen
@@ -21,11 +23,11 @@ from Components.Playlist import PlaylistIOInternal, PlaylistIOM3U, PlaylistIOPLS
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import *
 from Tools.Directories import resolveFilename, fileExists, pathExists, createDir, SCOPE_MEDIA, SCOPE_PLAYLIST, SCOPE_SKIN_IMAGE
-from MC_Filelist import FileList
+from .MC_Filelist import FileList
 from Screens.InfoBarGenerics import InfoBarSeek
 import os
 from os import path as os_path, remove as os_remove, listdir as os_listdir
-from __init__ import _
+from .__init__ import _
 config.plugins.mc_ap = ConfigSubsection()
 sorts = [('default', _("default")), ('alpha', _("alphabet")), ('alphareverse', _("alphabet backward")), ('date', _("date")), ('datereverse', _("date backward")), ('size', _("size")), ('sizereverse', _("size backward"))]
 config.plugins.mc_ap_sortmode = ConfigSubsection()
@@ -45,8 +47,8 @@ config.plugins.mc_ap.whichjpg = ConfigSelection(screensaverlist)
 playlist = []
 #try:
 #	from enigma import evfd
-#except Exception, e:
-#	print "Media Center: Import evfd failed"
+#except Exception as e:
+#	print("Media Center: Import evfd failed")
 radirl = "http://ipkserver.hdmedia-universe.com/bmcradio/"
 #for lyrics
 
@@ -99,7 +101,7 @@ mcpath = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/"
 def PlaylistEntryComponent(serviceref):
 	res = [serviceref]
 	text = serviceref.getName()
-	if text is "":
+	if text == "":
 		text = os_path.split(serviceref.getPath().split('/')[-1])[1]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 25, 1, 470, 22, 0, RT_VALIGN_CENTER, text))
 	return res
@@ -205,8 +207,8 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 				config.av.downmix_ac3.value = True
 				config.av.downmix_ac3.save()
 				os.system("touch /tmp/.ac3on")
-		except Exception, e:
-			print "Media Center: no ac3"
+		except Exception as e:
+			print("Media Center: no ac3")
 		self["play"] = Pixmap()
 		self["green"] = Pixmap()
 		self["screensaver"] = MediaPixmap()
@@ -557,7 +559,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 				self.jpgIndex += 1
 			else:
 				self.jpgIndex = 0
-			print "MediaCenter: Last JPG Index: " + str(self.jpgLastIndex)
+			print("MediaCenter: Last JPG Index: " + str(self.jpgLastIndex))
 			if self.jpgLastIndex != self.jpgIndex or self.jpgLastIndex == -1:
 				if config.plugins.mc_ap.whichjpg.value == "default":
 					path = mcpath + "saver/" + self.jpgList[self.jpgIndex]
@@ -568,7 +570,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 				time = config.plugins.mc_ap.jpg_delay.getValue() * 1000
 				self.JpgTimer.start(time, True)
 		else:
-			print "MediaCenter: No Background Files found ..."
+			print("MediaCenter: No Background Files found ...")
 
 	def doEOF(self):
 		if MC_AudioPlayer.playlistplay == 1:
@@ -703,8 +705,8 @@ class MC_WebRadio(Screen, HelpableScreen):
 				config.av.downmix_ac3.value = True
 				config.av.downmix_ac3.save()
 				os.system("touch /tmp/.ac3on")
-		except Exception, e:
-			print "Media Center: no ac3"
+		except Exception as e:
+			print("Media Center: no ac3")
 		self["play"] = Pixmap()
 		self["screensaver"] = MediaPixmap()
 		MC_AudioPlayer.STATE = "NONE"
@@ -922,7 +924,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 				time = config.plugins.mc_ap.jpg_delay.getValue() * 1000
 				self.JpgTimer.start(time, True)
 		else:
-			print "MediaCenter: No Background Files found ..."
+			print("MediaCenter: No Background Files found ...")
 
 	def doEOF(self):
 		self.StopPlayback()
@@ -1258,8 +1260,8 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 		try:
 			for i in os_listdir(playlistdir):
 				listpath.append((i, playlistdir + i))
-		except IOError, e:
-			print "Error while scanning subdirs ", e
+		except IOError as e:
+			print("Error while scanning subdirs ", e)
 		self.session.openWithCallback(self.load_pls, ChoiceBox, title=_("Please select a playlist..."), list=listpath)
 
 	def load_pls(self, path):
@@ -1279,8 +1281,8 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 		try:
 			for i in os_listdir(playlistdir):
 				listpath.append((i, playlistdir + i))
-		except IOError, e:
-			print "Error while scanning subdirs ", e
+		except IOError as e:
+			print("Error while scanning subdirs ", e)
 		self.session.openWithCallback(self.delete_saved_pls, ChoiceBox, title=_("Please select a playlist to delete..."), list=listpath)
 
 	def delete_saved_pls(self, path):
@@ -1292,7 +1294,7 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 		if confirmed:
 			try:
 				os_remove(self.delname)
-			except OSError, e:
+			except OSError as e:
 				self.session.open(MessageBox, _("Delete failed!"), MessageBox.TYPE_ERROR)
 
 	def addPlaylistParser(self, parser, extension):
@@ -1345,7 +1347,7 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 				time = config.plugins.mc_ap.jpg_delay.getValue() * 1000
 				self.JpgTimer.start(time, True)
 		else:
-			print "MediaCenter: No Background Files found ..."
+			print("MediaCenter: No Background Files found ...")
 
 	def showLyrics(self):
 		if MC_AudioPlayer.STATE == "PLAY":
@@ -1425,7 +1427,7 @@ class Lyrics(Screen):
 				titlely = curPlay.info().getName().split('/')[-1]
 			if artistly == "":
 				artistly = titlely
-		from urllib import quote
+		from six.moves.urllib.parse import quote
 		url = "http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist=%s&song=%s" % (quote(artistly), quote(titlely))
 		sendUrlCommand(url, None, 10).addCallback(self.gotLyrics).addErrback(self.urlError)
 		return "No lyrics found in id3-tag, trying api.chartlyrics.com..."

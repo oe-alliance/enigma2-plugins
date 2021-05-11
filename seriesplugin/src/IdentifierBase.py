@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # by betonme @2012
 
+from __future__ import absolute_import
 from collections import defaultdict
 
 from thread import start_new_thread
@@ -23,9 +24,9 @@ from Components.config import config
 from Tools.BoundFunction import boundFunction
 
 # Internal
-from ModuleBase import ModuleBase
-from Cacher import Cacher
-from Logger import log
+from .ModuleBase import ModuleBase
+from .Cacher import Cacher
+from .Logger import log
 
 
 class MyException(Exception):

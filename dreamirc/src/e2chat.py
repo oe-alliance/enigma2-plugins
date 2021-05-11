@@ -4,6 +4,8 @@
 #
 
 """Base classes for Instance Messenger clients."""
+from __future__ import print_function
+from __future__ import absolute_import
 from enigma import *
 from Screens.Screen import Screen
 
@@ -21,10 +23,10 @@ from Plugins.Plugin import PluginDescriptor
 from Tools.NumericalTextInput import *
 from Tools.Directories import *
 
-from locals import OFFLINE, ONLINE, AWAY
-import dreamIRCTools
+from .locals import OFFLINE, ONLINE, AWAY
+from . import dreamIRCTools
 from enigma import *
-from dreamIRCTools import *
+from .dreamIRCTools import *
 #from myScrollLabel import *
 #from dreamIRCMainMenu import *
 
@@ -263,11 +265,11 @@ class GroupConversation:
 
     def refreshMemberList(self):
         self.pipe.clearBuddyList()
-        self.members.sort(lambda x, y: cmp(string.lower(x), string.lower(y)))
+        self.members.sort(lambda x, y: cmp(x.lower(), y.lower()))
         self.pipe.getCannelName(self.group.name)
         for member in self.members:
             self.pipe.buildBuddyList(str(member))
-        print "Buddylist of #%s : \n%s" % (self.group.name, self.pipe.showBuddyList())
+        print("Buddylist of #%s : \n%s" % (self.group.name, self.pipe.showBuddyList()))
         self.pipe.updateBuddyWindow()
 
 
@@ -426,7 +428,7 @@ class ChatUI:
             self.persons[person.name, person.account] = person
 
     def sendOutPipe(self):
-        print "groupchat %s" % self.pipe.OutText
+        print("groupchat %s" % self.pipe.OutText)
         if len(self.pipe.OutText()) > 0:
             self.sendText(self.pipe.OutText())
             self.pipe.clearOutText()

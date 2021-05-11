@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # for localized messages
-from __init__ import _
+from __future__ import absolute_import
+from __future__ import print_function
+from .__init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
@@ -12,10 +14,11 @@ from Components.Sources.StaticText import StaticText
 from Components.Pixmap import Pixmap
 from Components.ActionMap import ActionMap, NumberActionMap
 from enigma import ePoint
-from cPickle import dump, load
 from os import path as os_path, unlink, stat, mkdir
 from time import time
 from stat import ST_MTIME
+
+from six.moves.cPickle import dump, load
 
 
 def write_cache(cache_file, cache_data):
@@ -24,8 +27,8 @@ def write_cache(cache_file, cache_data):
 		try:
 			mkdir(os_path.dirname(cache_file))
 		except OSError:
-			print os_path.dirname(cache_file), 'is a file'
-	fd = open(cache_file, 'w')
+			print(os_path.dirname(cache_file), 'is a file')
+	fd = open(cache_file, 'wb')
 	dump(cache_data, fd, -1)
 	fd.close()
 
@@ -45,7 +48,7 @@ def valid_cache(cache_file, cache_ttl):
 
 def load_cache(cache_file):
 	#Does a cPickle load
-	fd = open(cache_file)
+	fd = open(cache_file, 'rb')
 	cache_data = load(fd)
 	fd.close()
 	return cache_data
@@ -115,7 +118,7 @@ class UserDialog(Screen, ConfigListScreen):
 		self.password = None
 
 		if os_path.exists(self.cache_file):
-			print 'Loading user cache from ', self.cache_file
+			print('Loading user cache from ', self.cache_file)
 			try:
 				self.hostdata = load_cache(self.cache_file)
 				username = self.hostdata['username']
@@ -167,10 +170,10 @@ class UserDialog(Screen, ConfigListScreen):
 		ConfigListScreen.keyRight(self)
 
 	def selectionChanged(self):
-		current = self["config"].getCurrent()
-		helpwindowpos = self["HelpWindow"].getPosition()
-		if current[1].help_window.instance is not None:
-			current[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
+		pass
+#		if self["config"].getCurrent()[1].help_window and self["config"].getCurrent()[1].help_window.instance is not None:
+#			helpwindowpos = self["HelpWindow"].getPosition()
+#			self["config"].getCurrent()[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
 
 	def ok(self):
 		current = self["config"].getCurrent()

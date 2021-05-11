@@ -21,12 +21,13 @@
 #  distributed other than under the conditions noted above.
 #
 # for localized messages
+from __future__ import absolute_import
 from . import _
 
 from Plugins.Plugin import PluginDescriptor
-from AutomaticVolumeAdjustmentSetup import AutomaticVolumeAdjustmentConfigScreen
-from AutomaticVolumeAdjustment import AutomaticVolumeAdjustment
-from AutomaticVolumeAdjustmentConfig import saveVolumeDict
+from .AutomaticVolumeAdjustmentSetup import AutomaticVolumeAdjustmentConfigScreen
+from .AutomaticVolumeAdjustment import AutomaticVolumeAdjustment
+from .AutomaticVolumeAdjustmentConfig import saveVolumeDict
 from boxbranding import getImageDistro
 
 

@@ -19,12 +19,14 @@
 #  distributed other than under the conditions noted above.
 #
 
+from __future__ import print_function
+from __future__ import absolute_import
 import os
-from LocaleInit import _
+from .LocaleInit import _
 from ServiceUtils import diskUsage, getDirSize, realSize
-from Globals import printStackTrace
+from .Globals import printStackTrace
 from enigma import eServiceReference, iServiceInformation
-from Config import config
+from .Config import config
 
 
 class MovieInfo():
@@ -118,11 +120,11 @@ class DirectoryInfo():
 
     def write(self):
         if self.meta_file == '/.meta':
-            print "[AdvancedMovieSelection] Write new meta skipped"
+            print("[AdvancedMovieSelection] Write new meta skipped")
             return
         metafile = None
         try:
-            print "[AdvancedMovieSelection] Write new meta:", self.meta_file, self.sort_type, self.used
+            print("[AdvancedMovieSelection] Write new meta:", self.meta_file, self.sort_type, self.used)
             metafile = open(self.meta_file, "w")
             metafile.write(str(self.name) + '\n')
             metafile.write(str(self.sort_type) + '\n')
@@ -146,13 +148,13 @@ class DirectoryInfo():
         total, used, free = diskUsage(self.dir_path)
         result = self.used != used
         if result and update:
-            print "[AdvancedMovieSelection] update disc usage:", total, self.used, used, free
+            print("[AdvancedMovieSelection] update disc usage:", total, self.used, used, free)
             self.used = used
         return result
 
     def updateFolderSize(self):
         self.dir_size = getDirSize(self.dir_path)
-        print "scanned folder size", self.dir_size
+        print("scanned folder size", self.dir_size)
 
     def getmount(self, path=None):
         path = path and path or self.dir_path
@@ -194,7 +196,7 @@ class DirectoryEvent(DirectoryInfo):
         if isinstance(serviceref, eServiceReferenceListAll):
             self.is_movielibrary = True
         elif serviceref is not None:
-            from MovieScanner import movieScanner
+            from .MovieScanner import movieScanner
             dbinfo = movieScanner.movielibrary.getInfo(serviceref.getPath())
             if dbinfo is not None:
                 self.mov_count = dbinfo[0]
@@ -208,7 +210,7 @@ class DirectoryEvent(DirectoryInfo):
         return self.dir_path
 
     def getDBDescription(self):
-        from MovieScanner import movieScanner
+        from .MovieScanner import movieScanner
         self.dir_size = movieScanner.movielibrary.getSize()
         self.dir_count, self.mov_count = movieScanner.movielibrary.getFullCount()
         text1 = []

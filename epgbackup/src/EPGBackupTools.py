@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 from Components.config import config
 from time import localtime
 from traceback import format_exc
@@ -20,7 +21,7 @@ def debugOut(outtxt, outfile=None, fmode="aw", forced=False, outPrefix="[EPGBack
 			if outfile != None:
 				deb = open(outfile, fmode)
 				deb.write("%s %s\n" % (outPrefix, outtxt))
-			print "%s %s" % (outPrefix, outtxt)
+			print("%s %s" % (outPrefix, outtxt))
 	except:
 		pass
 

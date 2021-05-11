@@ -1,4 +1,5 @@
-from __init__ import _, _debug, _log
+from __future__ import absolute_import
+from .__init__ import _, _debug, _log
 
 from enigma import iServiceInformation, iPlayableService, eSocketNotifier, getDesktop, ePoint, eSize, eServiceReference
 
@@ -266,7 +267,7 @@ class TeleText(Screen):
       if config.plugins.TeleText.debug.value:
         log("... connecting")
       s.connect('/tmp/dbttcd.socket')
-    except socket.error, msg:
+    except socket.error as msg:
       log("couldn't connect to /tmp/dbttcd.socket")
       log(msg)
       return
@@ -285,7 +286,7 @@ class TeleText(Screen):
         totalsent = totalsent + sent
       s.close()
       s = None
-    except socket.error, msg:
+    except socket.error as msg:
       log("couldn't send data to /tmp/dbttcd.socket")
       log(msg)
 
@@ -971,7 +972,7 @@ class TeleText(Screen):
     if len(self.pid_list) > 0:
       service = self.pid_list[self.pid_index]
       log("get favorites of service %s [%s]" % (service[1], service[0]))
-      for i in range(10):
+      for i in list(range(10)):
         text = self.favorites.getFavorite(service[0], i)
         if text is not None:
           page = int(text[0])

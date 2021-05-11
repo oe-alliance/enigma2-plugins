@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -7,7 +8,7 @@ from enigma import eServiceCenter
 from Components.config import config
 
 # Plugin
-from EPGSearch import EPGSearch, EPGSearchEPGSelection
+from .EPGSearch import EPGSearch, EPGSearchEPGSelection
 
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor

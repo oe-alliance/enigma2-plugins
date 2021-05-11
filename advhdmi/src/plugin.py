@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 from traceback import print_exc
 from sys import stdout, exc_info
 from . import _
@@ -21,7 +22,7 @@ def _print(outtxt):
 	ltim = localtime()
 	headerstr = "[AdvHdmiCec] %04d%02d%02d-%02d%02d%02d " % (ltim[0], ltim[1], ltim[2], ltim[3], ltim[4], ltim[5])
 	outtxt = headerstr + outtxt
-	print outtxt
+	print(outtxt)
 
 
 try:
@@ -34,6 +35,10 @@ except ImportError:
 
 # overwrite functions
 from Plugins.SystemPlugins.HdmiCec.plugin import Cec
+
+import six
+
+
 try:
 	from Plugins.Extensions.WebInterface.WebComponents.Sources.RemoteControl import RemoteControl
 	from Plugins.Extensions.WebInterface.WebComponents.Sources.PowerState import PowerState
@@ -134,7 +139,7 @@ def callHook(advhdmi_event):
 	if config.plugins.AdvHdmiCec.debug.value:
 		_print("Debug: call Hooks for Event '" + str(advhdmi_event) + "'")
 	if advhdmiHooks:
-		for hookKey, hook in advhdmiHooks.iteritems():
+		for hookKey, hook in six.iteritems(advhdmiHooks):
 			if config.plugins.AdvHdmiCec.debug.value:
 				_print("Debug: call Hook '" + str(hookKey) + "'")
 			try:

@@ -20,6 +20,7 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_CURRENT_SKIN
 from enigma import eTimer, gFont, getDesktop, RT_HALIGN_CENTER, RT_VALIGN_CENTER
 import random
 import xml.etree.cElementTree
+from six.moves import range
 
 SAVEFILE = "/usr/lib/enigma2/python/Plugins/Extensions/Sudoku/Sudoku.sav"
 

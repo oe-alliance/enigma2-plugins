@@ -23,8 +23,10 @@
 
 
 # OWN IMPORTS
-from BirthdayNetworking import BroadcastProtocol, TransferServerFactory, TransferClientFactory
-from BirthdayReminder import BirthdayStore, getAge
+from __future__ import print_function
+from __future__ import absolute_import
+from .BirthdayNetworking import BroadcastProtocol, TransferServerFactory, TransferClientFactory
+from .BirthdayReminder import BirthdayStore, getAge
 
 # PYTHON IMPORTS
 from datetime import datetime, date, timedelta, time as dt_time
@@ -54,10 +56,10 @@ class BirthdayTimerEntry(TimerEntry):
 	def activate(self):
 		if self.preremind:
 			when = config.plugins.birthdayreminder.preremind.getText()
-			print "[Birthday Reminder] %s will turn %s in %s!" % (self.bDay[0], getAge(self.bDay[1]) + 1, when)
+			print("[Birthday Reminder] %s will turn %s in %s!" % (self.bDay[0], getAge(self.bDay[1]) + 1, when))
 			text = _("%s will turn %s in %s!") % (self.bDay[0], getAge(self.bDay[1]) + 1, when)
 		else:
-			print "[Birthday Reminder] It's %s's birthday today!" % self.bDay[0]
+			print("[Birthday Reminder] It's %s's birthday today!" % self.bDay[0])
 
 			if config.plugins.birthdayreminder.dateFormat.value == "mmddyyyy":
 				format = "%m/%d/%Y"
@@ -117,7 +119,7 @@ class BirthdayTimer(Timer, BirthdayStore):
 
 	def start(self):
 		if not self.getSize():
-			print "[Birthday Reminder] Got no birthdays, no timers to add."
+			print("[Birthday Reminder] Got no birthdays, no timers to add.")
 			return
 
 		self.addAllTimers()
@@ -125,7 +127,7 @@ class BirthdayTimer(Timer, BirthdayStore):
 	def stop(self):
 		self.stopNetworking()
 
-		print "[Birthday Reminder] stopping timer..."
+		print("[Birthday Reminder] stopping timer...")
 
 		self.timer.stop()
 		self.timer_list = []
@@ -136,7 +138,7 @@ class BirthdayTimer(Timer, BirthdayStore):
 		config.plugins.birthdayreminder.notificationTimeChanged.notifiers.remove(self.cbNotificationTimeChanged)
 
 	def startNetworking(self):
-		print "[Birthday Reminder] starting network communication..."
+		print("[Birthday Reminder] starting network communication...")
 
 		port = config.plugins.birthdayreminder.broadcastPort.value
 		self.transferServerProtocol = TransferServerFactory(self)
@@ -145,23 +147,23 @@ class BirthdayTimer(Timer, BirthdayStore):
 			self.transferServerPort = reactor.listenTCP(port, self.transferServerProtocol)
 			self.broadcastPort = reactor.listenUDP(port, self.broadcastProtocol)
 		except:
-			print "[Birthday Reminder] can't listen on port", port
+			print("[Birthday Reminder] can't listen on port", port)
 
 	def stopNetworking(self):
-		print "[Birthday Reminder] stopping network communication..."
+		print("[Birthday Reminder] stopping network communication...")
 		self.broadcastPort and self.broadcastPort.stopListening()
 		self.transferServerPort and self.transferServerPort.stopListening()
 
 	def requestBirthdayList(self, addr):
-		print "[Birthday Reminder] requesting birthday list from", addr[0]
+		print("[Birthday Reminder] requesting birthday list from", addr[0])
 		reactor.connectTCP(addr[0], 7374, TransferClientFactory(self, "requestingList"))
 
 	def sendPingResponse(self, addr):
-		print "[Birthday Reminder] sending ping response to", addr[0]
+		print("[Birthday Reminder] sending ping response to", addr[0])
 		reactor.connectTCP(addr[0], 7374, TransferClientFactory(self, "pong"))
 
 	def updateTimer(self, oldBirthday, newBirthday):
-		print "[Birthday Reminder] updating timer for", oldBirthday[0]
+		print("[Birthday Reminder] updating timer for", oldBirthday[0])
 
 		self.removeTimersForEntry(oldBirthday)
 		self.addTimer(newBirthday)
@@ -172,9 +174,9 @@ class BirthdayTimer(Timer, BirthdayStore):
 
 	def addTimer(self, entry, preremind=False):
 		if preremind:
-			print "[Birthday Reminder] Adding preremind timer for", entry[0]
+			print("[Birthday Reminder] Adding preremind timer for", entry[0])
 		else:
-			print "[Birthday Reminder] Adding birthday timer for", entry[0]
+			print("[Birthday Reminder] Adding birthday timer for", entry[0])
 
 		timeList = config.plugins.birthdayreminder.notificationTime.value
 		notifyTime = dt_time(timeList[0], timeList[1])
@@ -217,15 +219,15 @@ class BirthdayTimer(Timer, BirthdayStore):
 		for timer in self.timer_list[:]:
 			if timer.bDay == entry:
 				if timer.preremind:
-					print "[Birthday Reminder] Removing preremind timer for", entry[0]
+					print("[Birthday Reminder] Removing preremind timer for", entry[0])
 				else:
-					print "[Birthday Reminder] Removing birthday timer for", entry[0]
+					print("[Birthday Reminder] Removing birthday timer for", entry[0])
 				self.timer_list.remove(timer)
 
 		self.calcNextActivation()
 
 	def removePreremindTimers(self):
-		print "[Birthday Reminder] Removing all preremind timers..."
+		print("[Birthday Reminder] Removing all preremind timers...")
 		for timer in self.timer_list[:]:
 			if timer.preremind:
 				self.timer_list.remove(timer)
@@ -233,7 +235,7 @@ class BirthdayTimer(Timer, BirthdayStore):
 		self.calcNextActivation()
 
 	def addAllTimers(self):
-		print "[Birthday Reminder] Adding timers for all birthdays..."
+		print("[Birthday Reminder] Adding timers for all birthdays...")
 		bDayList = self.getBirthdayList()
 		for entry in bDayList:
 			self.addTimer(entry)
@@ -251,18 +253,18 @@ class BirthdayTimer(Timer, BirthdayStore):
 			self.removePreremindTimers()
 		else: # we need to add or change timers
 			if config.plugins.birthdayreminder.preremindChanged.value: # there are no preremind timers, add new timers
-				print "[Birthday Reminder] Adding new preremind timers..."
+				print("[Birthday Reminder] Adding new preremind timers...")
 				for timer in self.timer_list[:]:
 					self.addTimer(timer.bDay, preremind=True)
 			else: # change existing preremind timers
-				print "[Birthday Reminder] Changing date of preremind timers..."
+				print("[Birthday Reminder] Changing date of preremind timers...")
 				self.removePreremindTimers()
 
 				for timer in self.timer_list[:]:
 					self.addTimer(timer.bDay, preremind=True)
 
 	def cbNotificationTimeChanged(self, configElement=None):
-		print "[Birthday Reminder] Changing timer times..."
+		print("[Birthday Reminder] Changing timer times...")
 
 		timeList = config.plugins.birthdayreminder.notificationTime.value
 		notifyTime = dt_time(timeList[0], timeList[1])

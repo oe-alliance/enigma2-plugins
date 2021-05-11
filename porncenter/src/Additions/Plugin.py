@@ -1,3 +1,4 @@
+from __future__ import print_function
 # PornCenter by AliAbdul
 from Components.AVSwitch import AVSwitch
 from enigma import ePicLoad, eTimer
@@ -6,8 +7,8 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.Import import my_import
 from Tools.LoadPixmap import LoadPixmap
 from twisted.web.client import downloadPage, getPage
-import urllib2
-
+from six.moves.urllib.request import Request, urlopen
+import six
 ##################################################
 
 
@@ -47,8 +48,8 @@ class Movie:
 		self.thumb = None
 		if thumb:
 			try:
-				req = urllib2.Request(thumb)
-				url_handle = urllib2.urlopen(req)
+				req = Request(thumb)
+				url_handle = urlopen(req)
 				headers = url_handle.info()
 				contentType = headers.getheader("content-type")
 			except:
@@ -63,11 +64,11 @@ class Movie:
 			else:
 				self.thumbnailFile = None
 			if self.thumbnailFile:
-				downloadPage(thumb, self.thumbnailFile).addCallback(self.decodeThumbnail).addErrback(self.error)
+				downloadPage(six.ensure_binary(thumb), self.thumbnailFile).addCallback(self.decodeThumbnail).addErrback(self.error)
 
 	def error(self, error=None):
 		if error:
-			print error
+			print(error)
 
 	def decodeThumbnail(self, str=None):
 		self.picload = ePicLoad()
@@ -106,24 +107,23 @@ class Plugin:
 		pass
 
 	def getPage(self, url):
-		getPage(url).addCallback(self.getPageCallback).addErrback(self.getPageError)
+		getPage(six.ensure_binary(url)).addCallback(self.getPageCallback).addErrback(self.getPageError)
 
 	def getPageCallback(self, page):
 		pass
 
 	def getPageError(self, error=None):
 		if error:
-			print "[%s] Error: %s" % (self.name, error)
+			print("[%s] Error: %s" % (self.name, error))
 
 ##################################################
 
 
 def getPlugins():
 	try:
-		files = listdir(resolveFilename(SCOPE_PLUGINS) + "/Extensions/PornCenter/Additions")
-		files.sort()
-	except Exception, exc:
-		print "[PornCenter] failed to search for plugins:", exc
+		files = sorted(listdir(resolveFilename(SCOPE_PLUGINS) + "/Extensions/PornCenter/Additions"))
+	except Exception as exc:
+		print("[PornCenter] failed to search for plugins:", exc)
 		files = []
 	plugins = []
 	for file in files:
@@ -131,12 +131,12 @@ def getPlugins():
 			try:
 				plugin = my_import('.'.join(["Plugins", "Extensions", "PornCenter", "Additions", file[:-3]]))
 				if "getPlugin" not in plugin.__dict__:
-					print "Plugin %s doesn't have 'getPlugin'-call." % file
+					print("Plugin %s doesn't have 'getPlugin'-call." % file)
 					continue
 				p = plugin.getPlugin()
 				if p:
 					plugins.append(p)
-			except Exception, exc:
-				print "Plugin %s failed to load: %s" % (file, exc)
+			except Exception as exc:
+				print("Plugin %s failed to load: %s" % (file, exc))
 				continue
 	return plugins

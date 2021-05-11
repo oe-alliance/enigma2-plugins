@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 IMDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2013-03-19 22:23+0100\n"
 "Last-Translator: xxx\n"
 "Language-Team: none\n"
@@ -31,6 +31,9 @@ msgstr "Avbryt"
 
 msgid "Cast: "
 msgstr "Roll: "
+
+msgid "Channel Selection"
+msgstr "Kanallista"
 
 msgid "Content:"
 msgstr ""
@@ -119,6 +122,9 @@ msgstr "Ingen IMDb matchning."
 msgid "IMDb setup"
 msgstr "IMDb-inställningar"
 
+msgid "Lookup"
+msgstr "Sök"
+
 msgid "Menu"
 msgstr ""
 
@@ -185,6 +191,9 @@ msgstr "Sök Trailer"
 #, fuzzy
 msgid "Search for details from the Internet Movie Database"
 msgstr "Filminformation från Internet Movie Databas"
+
+msgid "Select from EPG"
+msgstr "Välj från EPG"
 
 #, fuzzy
 msgid "Settings for Internet Movie Database searches"

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # for localized messages
+from __future__ import print_function
 from . import _x
 
 from Components.GUIComponent import GUIComponent
@@ -14,8 +15,12 @@ from enigma import eEnv
 import copy
 import os.path
 
-from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformation, \
-	RT_HALIGN_LEFT, RT_HALIGN_RIGHT, eServiceReference, eServiceCenter
+from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformation
+
+from six.moves import reload_module
+
+
+RT_HALIGN_LEFT, RT_HALIGN_RIGHT, eServiceReference, eServiceCenter
 
 
 class MovieList(GUIComponent):
@@ -254,7 +259,7 @@ class MovieList(GUIComponent):
 		instance.setContent(None)
 		instance.selectionChanged.get().remove(self.selectionChanged)
 
-	def reload(self, root=None, filter_tags=None):
+	def reload_module(self, root=None, filter_tags=None):
 		if root is not None:
 			self.load(root, filter_tags)
 		else:
@@ -282,7 +287,7 @@ class MovieList(GUIComponent):
 		repeats = 0		# update repeatcount "#x" of surviving movies
 		ele0 = 0
 #		print "[SF-Plugin] removeService: searching " + tinfo[2]
-		for i in range(1, len(self.list)):
+		for i in list(range(1, len(self.list))):
 			m = self.list[i]
 			t = m[3]
 #			print "[SF-Plugin] removeService try: %x, %s -- %s" % (m[0].flags,  str(t[1]), str(t[2]))
@@ -319,7 +324,7 @@ class MovieList(GUIComponent):
 		parent = None
 		info = self.serviceHandler.info(root)
 		pwd = info and info.getName(root)
-		print "[SF-Plugin] MovieList.realDirUp: pwd = >%s<" % (str(pwd))
+		print("[SF-Plugin] MovieList.realDirUp: pwd = >%s<" % (str(pwd)))
 		if pwd and os.path.exists(pwd) and not os.path.samefile(pwd, defaultMoviePath()):
 			parentdir = pwd[:pwd.rfind("/", 0, -1)] + "/"
 			parent = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + parentdir)
@@ -346,12 +351,12 @@ class MovieList(GUIComponent):
 		self.root = root
 		list = self.serviceHandler.list(root)
 		if list is None:
-			print "[SF-Plugin] listing of movies failed"
+			print("[SF-Plugin] listing of movies failed")
 			list = []
 			return
 		tags = set()
 
-		while 1:
+		while True:
 			serviceref = list.getNext()
 			if not serviceref.valid():
 				break
@@ -463,7 +468,7 @@ class MovieList(GUIComponent):
 		return film
 
 	def update_repcnt(self, serlst, repcnt):
-		for i in range(repcnt + 1):
+		for i in list(range(repcnt + 1)):
 			serlst[-(i + 1)][3][1] = "#" + str(i)
 
 	def createSublists(self):

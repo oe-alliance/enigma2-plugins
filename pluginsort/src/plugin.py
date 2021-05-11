@@ -35,6 +35,9 @@ from Tools.XMLTools import stringToXML
 
 from shutil import copyfile, Error
 
+import six
+
+
 XML_CONFIG = "/etc/enigma2/pluginsort.xml"
 DEBUG = False
 
@@ -104,7 +107,7 @@ del pdict
 
 try:
 	dict.iteritems
-	iteritems = lambda d: d.iteritems()
+	iteritems = lambda d: six.iteritems(d)
 except AttributeError:
 	iteritems = lambda d: d.items()
 reverse = lambda map: dict((v, k) for k, v in iteritems(map))
@@ -155,7 +158,7 @@ class PluginWeights:
 		extend = lst.extend
 
 		idmap = reverse(WHEREMAP)
-		for key in self.plugins.keys():
+		for key in list(self.plugins.keys()):
 			whereplugins = self.plugins.get(key, None)
 			if not whereplugins:
 				continue

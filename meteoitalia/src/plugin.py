@@ -18,9 +18,14 @@ from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Tools.Directories import fileExists
 
-from urllib2 import Request, urlopen, URLError, HTTPError
+from six.moves.urllib.request import Request, urlopen
+from six.moves.urllib.error import URLError, HTTPError
+
 from xml.dom import minidom, Node
 from enigma import loadPic, eTimer
+
+import six
+
 
 METEOITALIA_ABOUT_TXT = "Meteo Italia Info Plugin v 0.1\n\nAuthor(s): Bacicciosat - Lupomeo\nGraphics: Army\nPackage Maintainer: Spaeleus\nRss Meteo: www.google.it\n"
 
@@ -92,47 +97,47 @@ class meteoitMain(Screen):
 		myurl = self.get_Url()
 		req = Request(myurl)
 		try:
-    			handler = urlopen(req)
-		except HTTPError, e:
-    			maintext = "Error: connection failed !"
-		except URLError, e:
-    			maintext = "Error: Page not available !"
+			handler = urlopen(req)
+		except HTTPError as e:
+			maintext = "Error: connection failed !"
+		except URLError as e:
+			maintext = "Error: Page not available !"
 		else:
 			xml_response = handler.read()
 			#xml_response = handler.read().decode('iso-8859-1').encode('utf-8')
 			xml_response = self.checkXmlSanity(xml_response)
-   			dom = minidom.parseString(xml_response)
-    			handler.close()
+			dom = minidom.parseString(xml_response)
+			handler.close()
 
 			maintext = ""
 			tmptext = ""
 			if (dom):
 				weather_data = {}
-    				weather_dom = dom.getElementsByTagName('weather')[0]
-    				data_structure = {
-        				'forecast_information': ('postal_code', 'current_date_time'),
-        				'current_conditions': ('condition', 'temp_c', 'humidity', 'wind_condition', 'icon')
-    				}
-    				for (tag, list_of_tags2) in data_structure.iteritems():
-        				tmp_conditions = {}
-       					for tag2 in list_of_tags2:
-            					try:
-                					tmp_conditions[tag2] = weather_dom.getElementsByTagName(tag)[0].getElementsByTagName(tag2)[0].getAttribute('data')
-            					except IndexError:
-                					pass
-        				weather_data[tag] = tmp_conditions
+				weather_dom = dom.getElementsByTagName('weather')[0]
+				data_structure = {
+					'forecast_information': ('postal_code', 'current_date_time'),
+					'current_conditions': ('condition', 'temp_c', 'humidity', 'wind_condition', 'icon')
+					}
+				for (tag, list_of_tags2) in six.iteritems(data_structure):
+					tmp_conditions = {}
+					for tag2 in list_of_tags2:
+						try:
+							tmp_conditions[tag2] = weather_dom.getElementsByTagName(tag)[0].getElementsByTagName(tag2)[0].getAttribute('data')
+						except IndexError:
+							pass
+						weather_data[tag] = tmp_conditions
 
-    				forecast_conditions = ('day_of_week', 'low', 'high', 'icon', 'condition')
-    				forecasts = []
+					forecast_conditions = ('day_of_week', 'low', 'high', 'icon', 'condition')
+					forecasts = []
 
 				for forecast in dom.getElementsByTagName('forecast_conditions'):
-        				tmp_forecast = {}
-        				for tag in forecast_conditions:
-            					tmp_forecast[tag] = forecast.getElementsByTagName(tag)[0].getAttribute('data')
-        				forecasts.append(tmp_forecast)
+					tmp_forecast = {}
+					for tag in forecast_conditions:
+						tmp_forecast[tag] = forecast.getElementsByTagName(tag)[0].getAttribute('data')
+						forecasts.append(tmp_forecast)
 
-    				weather_data['forecasts'] = forecasts
-    				dom.unlink()
+					weather_data['forecasts'] = forecasts
+					dom.unlink()
 
 				maintext = "Il tempo di oggi a " + str(weather_data['forecast_information']['postal_code'])
 				mytime = str(weather_data['forecast_information']['current_date_time'])
@@ -201,7 +206,7 @@ class meteoitMain(Screen):
 				content = handler.read()
 				fileout = open(localfile, "wb")
 				fileout.write(content)
-    				handler.close()
+				handler.close()
 				fileout.close()
 
 		return localfile

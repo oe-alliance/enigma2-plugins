@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Zap Statistic by AliAbdul
+from __future__ import print_function
 from Components.ActionMap import ActionMap
 from Components.config import config
 from Components.Label import Label
@@ -19,6 +20,9 @@ from xml.etree.cElementTree import parse
 import os
 import gettext
 
+import six
+
+
 ###########################################################
 
 PluginLanguageDomain = "ZapStatistic"
@@ -33,7 +37,7 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
 
@@ -44,7 +48,7 @@ language.addCallback(localeInit())
 
 def decode_charset(str, charset):
 	try:
-		uni = unicode(str, charset, 'strict')
+		uni = six.text_type(str, charset, 'strict')
 	except:
 		uni = str
 	return uni
@@ -135,7 +139,7 @@ class ZapStatistic:
 					if ref and begin and end:
 						self.zapEntries.append(ZapEntry(ref, float(begin), float(end)))
 			except:
-				print "[ZapStatistic] Error while reading xml file"
+				print("[ZapStatistic] Error while reading xml file")
 
 	def saveZapEntries(self):
 		xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<zapstastistic>\n'
@@ -149,7 +153,7 @@ class ZapStatistic:
 			f.write(xml.encode("UTF-8"))
 			f.close()
 		except:
-			print "[ZapStatistic] Error while writing xml file"
+			print("[ZapStatistic] Error while writing xml file")
 
 	def handlePlayServiceCommand(self, ref):
 		self.handleStopServiceCommand()

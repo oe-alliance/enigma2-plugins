@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from Components.Language import language
 from Components.NimManager import nimmanager
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
@@ -9,6 +10,9 @@ import gettext
 
 # Config
 from Components.config import config, configfile, ConfigSet, ConfigSubsection, ConfigSelection, ConfigSelectionNumber, ConfigYesNo, ConfigSatlist
+
+import six
+from six.moves import range
 
 PluginLanguageDomain = "EPGSearch"
 PluginLanguagePath = "Extensions/EPGSearch/locale"
@@ -22,7 +26,7 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
 
@@ -47,7 +51,7 @@ orbposDisabled = 3600
 
 
 def getNamespaces(namespaces):
-	lamedbServices = eServiceReference("1:7:1:0:0:0:0:0:0:0:" + " || ".join(map(lambda x: '(satellitePosition == %d)' % (x >> 16), namespaces)))
+	lamedbServices = eServiceReference("1:7:1:0:0:0:0:0:0:0:" + " || ".join(['(satellitePosition == %d)' % (x >> 16) for x in namespaces]))
 	hasNamespaces = set()
 	if not namespaces:
 		return hasNamespaces
@@ -95,7 +99,7 @@ def isOrbposName(name):
 
 def doSave():
 	saveFile = False
-	for name, confItem in config.plugins.epgsearch.dict().iteritems():
+	for name, confItem in six.iteritems(config.plugins.epgsearch.dict()):
 		if (name == "numorbpos" or isOrbposName(name)) and confItem.isChanged():
 			saveFile = True
 			confItem.save()
@@ -106,7 +110,7 @@ def doSave():
 def unusedOrbPosConfList():
 	numorbpos = int(config.plugins.epgsearch.numorbpos.value)
 	return [
-		item for item in config.plugins.epgsearch.dict().iteritems()
+		item for item in six.iteritems(config.plugins.epgsearch.dict())
 		if isOrbposName(item[0]) and int(item[0][6:]) >= numorbpos
 	]
 
@@ -124,7 +128,7 @@ def initOrbposConfigs():
 	# If the list got smaller, try to preserve the values of as
 	# many entries as possible in the new list.
 	orbPosList = []
-	for name in (name for name in config.plugins.epgsearch.getSavedValue().keys() if isOrbposName(name)):
+	for name in (name for name in list(config.plugins.epgsearch.getSavedValue().keys()) if isOrbposName(name)):
 		setattr(config.plugins.epgsearch, name, ConfigSatlist(choiceList, default=orbposDisabled))
 		if listShrank:
 			orbPosList.append((getattr(config.plugins.epgsearch, name), int(name[6:])))

@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.InputBox import InputBox
 from Screens.ChoiceBox import ChoiceBox
@@ -31,7 +32,7 @@ def initConfig():
     else:
         i = 0
         while i < modescount:
-            print "[" + myname + ".initConfig] i is %s" % i
+            print("[" + myname + ".initConfig] i is %s" % i)
             config.plugins.antiscrollbar.mode.append(ConfigSubsection())
             config.plugins.antiscrollbar.mode[i].sref = ConfigText("")
             config.plugins.antiscrollbar.mode[i].sizex = ConfigInteger(0)
@@ -140,13 +141,13 @@ class AntiScrollConfig(ConfigListScreen, Screen):
         }, -2)
 
     def openCurrentSeviceConfig(self):
-        print "yellow"
+        print("yellow")
         smode = False
         for mode in config.plugins.antiscrollbar.mode:
             if mode.sref.value == self.session.nav.getCurrentlyPlayingServiceReference().toString():
                 smode = mode
         if smode is False:
-            print "new config " * 40
+            print("new config " * 40)
             i = config.plugins.antiscrollbar.modescount.value
             config.plugins.antiscrollbar.mode.append(ConfigSubsection())
             config.plugins.antiscrollbar.mode[i].sref = ConfigText("")
@@ -166,13 +167,13 @@ class AntiScrollConfig(ConfigListScreen, Screen):
         self.session.open(CurrentSeviceConfig, smode)
 
     def save(self):
-        print "saving"
+        print("saving")
         for x in self["config"].list:
             x[1].save()
         self.close(True, self.session)
 
     def cancel(self):
-        print "cancel"
+        print("cancel")
         for x in self["config"].list:
             x[1].cancel()
         self.close(False, self.session)
@@ -182,7 +183,7 @@ class CurrentSeviceConfig(Screen):
     step = 5
 
     def __init__(self, session, mode):
-        print "editing " + mode.sref.value
+        print("editing " + mode.sref.value)
         self.mode = mode
         self.size = [mode.sizex.value, mode.sizey.value]
         self.enabled = mode.enabled.value

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 #######################################################################
 #
 #    Series Plugin for Enigma-2
@@ -20,6 +20,7 @@
 #TODO Add optional popup
 
 # for localized messages
+from __future__ import absolute_import
 from . import _
 
 # Config
@@ -31,8 +32,8 @@ from time import localtime
 #from ServiceReference import ServiceReference
 
 # Plugin internal
-from SeriesPluginTimer import SeriesPluginTimer
-from Logger import log
+from .SeriesPluginTimer import SeriesPluginTimer
+from .Logger import log
 
 
 # Globals

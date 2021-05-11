@@ -1,4 +1,4 @@
-import urllib
+from __future__ import print_function
 from twisted.web.client import getPage
 from xml.dom.minidom import parseString
 
@@ -13,6 +13,8 @@ from Components.MenuList import MenuList
 from Components.Input import Input
 from Components.config import config, ConfigSubList, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
+from six.moves import urllib
+import six
 
 from Plugins.Extensions.GoogleMaps.globalmaptiles import GlobalMercator
 from Plugins.Extensions.GoogleMaps.KMLlib import RootFolder, KmlFolder, KmlPlace
@@ -39,11 +41,11 @@ not_found_pic_overlay = "404_transparent.png"
 
 
 def applySkinVars(skin, dict):
-    for key in dict.keys():
+    for key in list(dict.keys()):
         try:
             skin = skin.replace('{' + key + '}', dict[key])
-        except Exception, e:
-            print e, "@key=", key
+        except Exception as e:
+            print(e, "@key=", key)
     return skin
 
 
@@ -101,13 +103,13 @@ class GoogleMapsConfigScreen(ConfigListScreen, Screen):
         }, -2)
 
     def save(self):
-        print "saving"
+        print("saving")
         for x in self["config"].list:
             x[1].save()
         self.close(True)
 
     def cancel(self):
-        print "cancel"
+        print("cancel")
         for x in self["config"].list:
             x[1].cancel()
         self.close(False)
@@ -301,7 +303,7 @@ class GoogleMapsMainScreen(Screen, HelpableScreen):
         self["placeslist"].setList(list)
 
     def openFolderRoot(self, name, filepath):
-        print "openFolderRoot", name, filepath
+        print("openFolderRoot", name, filepath)
         root = RootFolder()
         folderx = root.getFolderFromFile(filepath)
         list = []
@@ -318,7 +320,7 @@ class GoogleMapsMainScreen(Screen, HelpableScreen):
         self["placeslist"].setList(list)
 
     def openFolder(self, name, foldery):
-        print "open Folder", name, foldery
+        print("open Folder", name, foldery)
         list = []
         if foldery.parent is None:
             l = lambda name, folder: self.buildMenuRoot()
@@ -416,7 +418,7 @@ class GoogleMapsMainScreen(Screen, HelpableScreen):
 
     #################
     def setNewXYZ(self, x, y, z):
-        print x, y, z
+        print(x, y, z)
         if z < 0 or z >= 30:
             return
         self.x = x
@@ -555,7 +557,7 @@ class GoogleMapsGeoSearchScreen(InputBox):
             self.do_preview_timer.timeout.get().append(lambda: self.loadPreview(lon, lat))
             self.do_preview_timer.start(1500)
         else:
-            pass #print "nothing selected"
+            pass #print("nothing selected")
 
     def loadPreview(self, lon, lat):
         self.do_preview_timer.stop()
@@ -596,10 +598,10 @@ class GoogleMapsGeoSearchScreen(InputBox):
         self.do_search_timer.stop()
         config.plugins.GoogleMaps.last_searchkey.value = searchkey
         self["infotext"].setText("searching with '%s' ..." % (searchkey))
-        s = urllib.quote(searchkey)
+        s = urllib.parse.quote(searchkey)
         url = "http://maps.google.com/maps/geo?q=%s&output=xml&key=abcdefg&oe=utf8" % s
         cb = lambda result: self.onLoadFinished(searchkey, result)
-        getPage(url).addCallback(cb).addErrback(self.onLoadFailed)
+        getPage(six.ensure_binary(url)).addCallback(cb).addErrback(self.onLoadFailed)
 
     def onLoadFinished(self, searchkey, result):
         xmldoc = parseString(result)
@@ -617,7 +619,7 @@ class GoogleMapsGeoSearchScreen(InputBox):
             self["infotext"].setText("nothing found with '%s'" % (searchkey))
 
     def onLoadFailed(self, reason):
-        print reason
+        print(reason)
         self["infotext"].setText(str(reason))
 
 ##################################

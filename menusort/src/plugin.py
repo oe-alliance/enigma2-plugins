@@ -27,12 +27,15 @@ from Tools.XMLTools import stringToXML
 
 try:
 	dict.iteritems
-	iteritems = lambda d: d.iteritems()
+	iteritems = lambda d: six.iteritems(d)
 except AttributeError:
 	iteritems = lambda d: d.items()
 
 from operator import itemgetter
 from shutil import copyfile, Error
+
+import six
+
 
 XML_CONFIG = "/etc/enigma2/menusort.xml"
 DEBUG = False

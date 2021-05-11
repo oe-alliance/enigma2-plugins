@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 #######################################################################
 #
 #    Series Plugin for Enigma-2
@@ -17,6 +17,7 @@
 #
 #######################################################################
 
+from __future__ import absolute_import
 import os
 
 
@@ -39,14 +40,14 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Plugins.Plugin import PluginDescriptor
 
 # Plugin internal
-from SeriesPlugin import resetInstance, getInstance
-from SeriesPluginIndependent import startIndependent, stopIndependent
-from FilePatterns import readFilePatterns
-from DirectoryPatterns import readDirectoryPatterns
-from Logger import log
-from ShowLogScreen import ShowLogScreen
-from Channels import getTVBouquets
-from ChannelEditor import ChannelEditor
+from .SeriesPlugin import resetInstance, getInstance
+from .SeriesPluginIndependent import startIndependent, stopIndependent
+from .FilePatterns import readFilePatterns
+from .DirectoryPatterns import readDirectoryPatterns
+from .Logger import log
+from .ShowLogScreen import ShowLogScreen
+from .Channels import getTVBouquets
+from .ChannelEditor import ChannelEditor
 
 
 def checkList(cfg):
@@ -71,7 +72,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		self.skinName = ["SeriesPluginConfiguration"]
 
-		from plugin import NAME, VERSION
+		from .plugin import NAME, VERSION
 		self.setup_title = NAME + " " + _("Configuration") + " " + VERSION
 
 		log.debug("SeriesPluginConfiguration")
@@ -104,9 +105,9 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 
 		# Create temporary identifier config elements
 		identifiers = self.seriesPlugin.modules
-		identifiers_elapsed = [k for k, v in identifiers.items() if v.knowsElapsed()]
-		identifiers_today = [k for k, v in identifiers.items() if v.knowsToday()]
-		identifiers_future = [k for k, v in identifiers.items() if v.knowsFuture()]
+		identifiers_elapsed = [k for k, v in list(identifiers.items()) if v.knowsElapsed()]
+		identifiers_today = [k for k, v in list(identifiers.items()) if v.knowsToday()]
+		identifiers_future = [k for k, v in list(identifiers.items()) if v.knowsFuture()]
 		if config.plugins.seriesplugin.identifier_elapsed.value in identifiers_elapsed:
 			self.cfg_identifier_elapsed = NoSave(ConfigSelection(choices=identifiers_elapsed, default=config.plugins.seriesplugin.identifier_elapsed.value))
 		else:
@@ -305,7 +306,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		self.seriesPlugin.saveXML()
 
 		# Set new configuration
-		from plugin import WHERE_EPGMENU, WHERE_CHANNELMENU, addSeriesPlugin, removeSeriesPlugin, SHOWINFO, RENAMESERIES, CHECKTIMERS, info, sp_extension, channel, movielist_info, movielist_rename, checkTimers
+		from .plugin import WHERE_EPGMENU, WHERE_CHANNELMENU, addSeriesPlugin, removeSeriesPlugin, SHOWINFO, RENAMESERIES, CHECKTIMERS, info, sp_extension, channel, movielist_info, movielist_rename, checkTimers
 
 		if config.plugins.seriesplugin.menu_info.value:
 			addSeriesPlugin(PluginDescriptor.WHERE_EVENTINFO, SHOWINFO, info)
@@ -346,7 +347,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		resetInstance()
 
 		if config.plugins.seriesplugin.autotimer_independent.value:
-			from SeriesPluginIndependent import startIndependent
+			from .SeriesPluginIndependent import startIndependent
 			startIndependent()
 
 		self.close()
@@ -364,7 +365,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 
 	# Overwrite Screen close function
 	def close(self):
-		from plugin import ABOUT
+		from .plugin import ABOUT
 		about = ABOUT.format(**{'lookups': config.plugins.seriesplugin.lookup_counter.value})
 		self.session.openWithCallback(self.closeConfirm, MessageBox, about, MessageBox.TYPE_INFO)
 

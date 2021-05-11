@@ -18,7 +18,7 @@
 #  GNU General Public License for more details.
 #
 
-import urllib
+from __future__ import print_function
 from time import localtime
 from timer import TimerEntry
 from twisted.internet import reactor
@@ -27,7 +27,8 @@ from twisted.web.client import HTTPClientFactory
 from base64 import encodestring
 import xml.etree.cElementTree
 #import urlparse
-from urllib import unquote
+from six.moves.urllib.request import urlopen
+from six.moves.urllib.parse import unquote
 
 CurrentIP = None
 remote_timer_list = None
@@ -79,7 +80,7 @@ def isInTimerList(begin, duration, service, eventid, timer_list):
 					chktimecmp = chktime.tm_wday * 1440 + chktime.tm_hour * 60 + chktime.tm_min
 					chktimecmp_end = chktimecmp + (duration / 60)
 				time = localtime(x.timebegin)
-				for y in range(7):
+				for y in list(range(7)):
 					if x.repeated & (2 ** y):
 						timecmp = y * 1440 + time.tm_hour * 60 + time.tm_min
 						if timecmp <= chktimecmp < (timecmp + ((x.timeend - x.timebegin) / 60)):
@@ -453,8 +454,8 @@ def SetPartnerboxTimerlist(partnerboxentry=None, sreference=None):
 			sCommand = "http://%s:%s@%s:%d/web/timerlist" % (username, password, ip, port)
 		else:
 			sCommand = "http://%s:%s@%s:%d/xml/timers" % (username, password, ip, port)
-		print "[RemoteEPGList] Getting timerlist data from %s..." % ip
-		f = urllib.urlopen(sCommand)
+		print("[RemoteEPGList] Getting timerlist data from %s..." % ip)
+		f = urlopen(sCommand)
 		sxml = f.read()
 		if int(partnerboxentry.enigma.value) == 0:
 			remote_timer_list = FillE2TimerList(sxml, sreference)

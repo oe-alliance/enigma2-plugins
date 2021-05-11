@@ -87,7 +87,7 @@ class RSSWrapper(ElementWrapper):
 		return self
 
 	def __next__(self):
-		return self.next()
+		return next(self)
 
 	def next(self):
 		idx = self.idx

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
+from __future__ import absolute_import
 Version = '$Header$'
 
 from enigma import eConsoleAppContainer, eTPM
@@ -7,8 +9,8 @@ from Plugins.Plugin import PluginDescriptor
 from Components.config import config, ConfigBoolean, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigEnableDisable
 from Components.Network import iNetwork
 from Screens.MessageBox import MessageBox
-from WebIfConfig import WebIfConfigScreen
-from WebChilds.Toplevel import getToplevel
+from .WebIfConfig import WebIfConfigScreen
+from .WebChilds.Toplevel import getToplevel
 from Tools.HardwareInfo import HardwareInfo
 
 from Tools.Directories import copyfile, resolveFilename, SCOPE_PLUGINS, SCOPE_CONFIG, fileExists
@@ -19,19 +21,19 @@ from twisted.internet.error import CannotListenError
 from twisted.web import server, http, util, static, resource
 from twisted import version
 
-from zope.interface import Interface, implements
 from socket import gethostname as socket_gethostname, has_ipv6
 from OpenSSL import SSL, crypto
 from time import gmtime
 from os.path import isfile as os_isfile, exists as os_exists
 
-from __init__ import _, __version__, decrypt_block
-from webif import get_random, validate_certificate
+from .__init__ import _, __version__, decrypt_block
+from .webif import get_random, validate_certificate
 
 import random
 import uuid
 import time
 import hashlib
+import six
 
 tpm = eTPM()
 rootkey = ['\x9f', '|', '\xe4', 'G', '\xc9', '\xb4', '\xf4', '#', '&', '\xce', '\xb3', '\xfe', '\xda', '\xc9', 'U', '`', '\xd8', '\x8c', 's', 'o', '\x90', '\x9b', '\\', 'b', '\xc0', '\x89', '\xd1', '\x8c', '\x9e', 'J', 'T', '\xc5', 'X', '\xa1', '\xb8', '\x13', '5', 'E', '\x02', '\xc9', '\xb2', '\xe6', 't', '\x89', '\xde', '\xcd', '\x9d', '\x11', '\xdd', '\xc7', '\xf4', '\xe4', '\xe4', '\xbc', '\xdb', '\x9c', '\xea', '}', '\xad', '\xda', 't', 'r', '\x9b', '\xdc', '\xbc', '\x18', '3', '\xe7', '\xaf', '|', '\xae', '\x0c', '\xe3', '\xb5', '\x84', '\x8d', '\r', '\x8d', '\x9d', '2', '\xd0', '\xce', '\xd5', 'q', '\t', '\x84', 'c', '\xa8', ')', '\x99', '\xdc', '<', '"', 'x', '\xe8', '\x87', '\x8f', '\x02', ';', 'S', 'm', '\xd5', '\xf0', '\xa3', '_', '\xb7', 'T', '\t', '\xde', '\xa7', '\xf1', '\xc9', '\xae', '\x8a', '\xd7', '\xd2', '\xcf', '\xb2', '.', '\x13', '\xfb', '\xac', 'j', '\xdf', '\xb1', '\x1d', ':', '?']
@@ -92,7 +94,7 @@ class Closer:
 	def stop(self):
 		global running_defered
 		for d in running_defered:
-			print "[Webinterface] stopping interface on ", d.interface, " with port", d.port
+			print("[Webinterface] stopping interface on ", d.interface, " with port", d.port)
 			x = d.stopListening()
 
 			try:
@@ -118,7 +120,7 @@ class Closer:
 def installCertificates(session):
 	if not os_exists(CERT_FILE) \
 			or not os_exists(KEY_FILE):
-		print "[Webinterface].installCertificates :: Generating SSL key pair and CACert"
+		print("[Webinterface].installCertificates :: Generating SSL key pair and CACert")
 		# create a key pair
 		k = crypto.PKey()
 		k.generate_key(crypto.TYPE_RSA, 1024)
@@ -132,18 +134,18 @@ def installCertificates(session):
 		cert.get_subject().OU = "STB"
 		cert.get_subject().CN = socket_gethostname()
 		cert.set_serial_number(random.randint(1000000, 1000000000))
-		cert.set_notBefore("20120101000000Z")
-		cert.set_notAfter("20301231235900Z")
+		cert.set_notBefore(b"20120101000000Z")
+		cert.set_notAfter(b"20301231235900Z")
 		cert.set_issuer(cert.get_subject())
 		cert.set_pubkey(k)
-		print "[Webinterface].installCertificates :: Signing SSL key pair with new CACert"
+		print("[Webinterface].installCertificates :: Signing SSL key pair with new CACert")
 		cert.sign(k, 'sha1')
 
 		try:
-			print "[Webinterface].installCertificates ::  Installing newly generated certificate and key pair"
+			print("[Webinterface].installCertificates ::  Installing newly generated certificate and key pair")
 			saveFile(CERT_FILE, crypto.dump_certificate(crypto.FILETYPE_PEM, cert))
 			saveFile(KEY_FILE, crypto.dump_privatekey(crypto.FILETYPE_PEM, k))
-		except IOError, e:
+		except IOError as e:
 			#Disable https
 			config.plugins.Webinterface.https.enabled.value = False
 			config.plugins.Webinterface.https.enabled.save()
@@ -186,7 +188,7 @@ def startWebserver(session, l2k):
 	errors = ""
 
 	if config.plugins.Webinterface.enabled.value is not True:
-		print "[Webinterface] is disabled!"
+		print("[Webinterface] is disabled!")
 
 	else:
 		# IF SSL is enabled we need to check for the certs first
@@ -292,7 +294,7 @@ def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usess
 		try:
 			d = reactor.listenSSL(port, site, ctx, interface=ipaddress)
 		except CannotListenError:
-			print "[Webinterface] FAILED to listen on %s:%i auth=%s ssl=%s" % (ipaddress, port, useauth, usessl)
+			print("[Webinterface] FAILED to listen on %s:%i auth=%s ssl=%s" % (ipaddress, port, useauth, usessl))
 			return False
 	else:
 		try:
@@ -300,11 +302,11 @@ def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usess
 			if ipaddress == '::1':
 				d = reactor.listenTCP(port, site, interface='::ffff:127.0.0.1')
 		except CannotListenError:
-			print "[Webinterface] FAILED to listen on %s:%i auth=%s ssl=%s" % (ipaddress, port, useauth, usessl)
+			print("[Webinterface] FAILED to listen on %s:%i auth=%s ssl=%s" % (ipaddress, port, useauth, usessl))
 			return False
 
 	running_defered.append(d)
-	print "[Webinterface] started on %s:%i auth=%s ssl=%s" % (ipaddress, port, useauth, usessl)
+	print("[Webinterface] started on %s:%i auth=%s ssl=%s" % (ipaddress, port, useauth, usessl))
 	return True
 
 	#except Exception, e:
@@ -358,13 +360,13 @@ class SimpleSession(object):
 
 
 class HTTPRootResource(resource.Resource):
-	SESSION_PROTECTED_PATHS = ['/web/', '/opkg', '/ipkg']
+	SESSION_PROTECTED_PATHS = [b'/web/', b'/opkg', b'/ipkg']
 	SESSION_EXCEPTIONS = [
-		'/web/epgsearch.rss', '/web/movielist.m3u', '/web/movielist.rss', '/web/services.m3u', '/web/session',
-		'/web/stream.m3u', '/web/stream', '/web/streamcurrent.m3u', '/web/strings.js', '/web/ts.m3u']
+		b'/web/epgsearch.rss', b'/web/movielist.m3u', b'/web/movielist.rss', b'/web/services.m3u', b'/web/session',
+		b'/web/stream.m3u', b'/web/stream', b'/web/streamcurrent.m3u', b'/web/strings.js', b'/web/ts.m3u']
 
 	def __init__(self, res):
-		print "[HTTPRootResource}.__init__"
+		print("[HTTPRootResource}.__init__")
 		resource.Resource.__init__(self)
 		self.resource = res
 		self.sessionInvalidResource = resource.ErrorPage(http.PRECONDITION_FAILED, "Precondition failed!", "sessionid is missing, invalid or expired!")
@@ -373,14 +375,14 @@ class HTTPRootResource(resource.Resource):
 	def getClientToken(self, request):
 		ip = request.getClientIP()
 		ua = request.getHeader("User-Agent") or "Default UA"
-		return hashlib.sha1("%s/%s" % (ip, ua)).hexdigest()
+		return hashlib.sha1(six.ensure_binary("%s/%s" % (ip, ua))).hexdigest()
 
 	def isSessionValid(self, request):
 		session = self._sessions.get(self.getClientToken(request), None)
 		if session is None or session.expired():
 			session = SimpleSession()
 			key = self.getClientToken(request)
-			print "[HTTPRootResource].isSessionValid :: created session with id '%s' for client with token '%s'" % (session.id, key)
+			print("[HTTPRootResource].isSessionValid :: created session with id '%s' for client with token '%s'" % (session.id, key))
 			self._sessions[key] = session
 
 		request.enigma2_session = session
@@ -417,7 +419,7 @@ class HTTPRootResource(resource.Resource):
 		if self.isSessionValid(request):
 			return self.resource.getChildWithDefault(path, request)
 		else:
-			print "[Webinterface.HTTPRootResource.render] !!! session invalid !!!"
+			print("[Webinterface.HTTPRootResource.render] !!! session invalid !!!")
 			return self.sessionInvalidResource
 
 #===============================================================================
@@ -443,7 +445,7 @@ class HTTPAuthResource(HTTPRootResource):
 		#If streamauth is disabled allow all acces from localhost
 		if not config.plugins.Webinterface.streamauth.value:
 			if(host == "::ffff:127.0.0.1" or host == "127.0.0.1" or host == "localhost"):
-				print "[WebInterface.plugin.isAuthenticated] Streaming auth is disabled bypassing authcheck because host is '%s'" % host
+				print("[WebInterface.plugin.isAuthenticated] Streaming auth is disabled bypassing authcheck because host is '%s'" % host)
 				return True
 
 		# get the Session from the Request
@@ -471,7 +473,7 @@ class HTTPAuthResource(HTTPRootResource):
 		if self.isAuthenticated(request) is True:
 			return HTTPRootResource.render(self, request)
 		else:
-			print "[Webinterface.HTTPAuthResource.render] !!! unauthorized !!!"
+			print("[Webinterface.HTTPAuthResource.render] !!! unauthorized !!!")
 			return self.unauthorized(request).render(request)
 
 #===============================================================================
@@ -481,7 +483,7 @@ class HTTPAuthResource(HTTPRootResource):
 		if self.isAuthenticated(request) is True:
 			return HTTPRootResource.getChildWithDefault(self, path, request)
 		else:
-			print "[Webinterface.HTTPAuthResource.getChildWithDefault] !!! unauthorized !!!"
+			print("[Webinterface.HTTPAuthResource.getChildWithDefault] !!! unauthorized !!!")
 			return self.unauthorized(request)
 
 
@@ -531,11 +533,11 @@ def registerBonjourService(protocol, port):
 
 		service = bonjour.buildService(protocol, port)
 		bonjour.registerService(service, True)
-		print "[WebInterface.registerBonjourService] Service for protocol '%s' with port '%i' registered!" % (protocol, port)
+		print("[WebInterface.registerBonjourService] Service for protocol '%s' with port '%i' registered!" % (protocol, port))
 		return True
 
-	except ImportError, e:
-		print "[WebInterface.registerBonjourService] %s" % e
+	except ImportError as e:
+		print("[WebInterface.registerBonjourService] %s" % e)
 		return False
 
 
@@ -544,11 +546,11 @@ def unregisterBonjourService(protocol):
 		from Plugins.Extensions.Bonjour.Bonjour import bonjour
 
 		bonjour.unregisterService(protocol)
-		print "[WebInterface.unregisterBonjourService] Service for protocol '%s' unregistered!" % (protocol)
+		print("[WebInterface.unregisterBonjourService] Service for protocol '%s' unregistered!" % (protocol))
 		return True
 
-	except ImportError, e:
-		print "[WebInterface.unregisterBonjourService] %s" % e
+	except ImportError as e:
+		print("[WebInterface.unregisterBonjourService] %s" % e)
 		return False
 
 
@@ -615,11 +617,11 @@ def configCB(result, session):
 
 	if l2r:
 		if result:
-			print "[WebIf] config changed"
+			print("[WebIf] config changed")
 			restartWebserver(session, l2k)
 			checkBonjour()
 		else:
-			print "[WebIf] config not changed"
+			print("[WebIf] config not changed")
 
 
 def Plugins(**kwargs):

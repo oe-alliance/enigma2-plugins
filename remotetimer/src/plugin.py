@@ -15,6 +15,7 @@
 # $Id$
 #===============================================================================
 
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 
@@ -41,8 +42,8 @@ from Tools.BoundFunction import boundFunction
 from twisted.web.client import getPage
 from xml.etree.cElementTree import fromstring as cElementTree_fromstring
 from base64 import encodestring
-
-import urllib
+from six.moves.urllib.parse import quote
+import six
 
 #------------------------------------------------------------------------------------------
 
@@ -66,7 +67,7 @@ def localGetPage(url):
 	else:
 		headers = {}
 
-	return getPage(url, headers=headers)
+	return getPage(six.ensure_binary(url), headers=headers)
 
 
 class RemoteService:
@@ -136,14 +137,14 @@ class RemoteTimerScreen(Screen):
 		self["text"].setText(info)
 
 	def errorLoad(self, error):
-		print "[RemoteTimer] errorLoad ERROR:", error.getErrorMessage()
+		print("[RemoteTimer] errorLoad ERROR:", error.getErrorMessage())
 
 	def clean(self):
 		try:
 			url = "http://%s/web/timercleanup?cleanup=true" % (self.remoteurl)
 			localGetPage(url).addCallback(self.getInfo).addErrback(self.errorLoad)
 		except:
-			print "[RemoteTimer] ERROR Cleanup"
+			print("[RemoteTimer] ERROR Cleanup")
 
 	def delete(self):
 		sel = self["timerlist"].getCurrent()
@@ -169,8 +170,8 @@ class RemoteTimerScreen(Screen):
 	def generateTimerE2(self, data):
 		try:
 			root = cElementTree_fromstring(data)
-		except Exception, e:
-			print "[RemoteTimer] error: %s", e
+		except Exception as e:
+			print("[RemoteTimer] error: %s", e)
 			self["text"].setText(_("error parsing incoming data."))
 		else:
 			return [
@@ -241,7 +242,7 @@ class RemoteTimerSetup(Screen, ConfigListScreen):
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 
- 		self["SetupActions"] = ActionMap(["SetupActions", "ColorActions"],
+		self["SetupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"ok": self.keySave,
 			"cancel": self.Exit,
@@ -324,7 +325,7 @@ def newnigma2KeyGo(self):
 					ref = self.session.nav.getCurrentlyPlayingServiceReference()
 					parent = service_ref.ref
 					selection = 0
-					for x in range(n):
+					for x in list(range(n)):
 						i = event.getLinkageService(parent, x)
 						if i.toString() == ref.toString():
 							selection = x
@@ -355,13 +356,13 @@ def newnigma2KeyGo(self):
 		if end < begin:
 			end += 86400
 
-		rt_name = urllib.quote(self.timerentry_name.value.decode('utf8').encode('utf8', 'ignore'))
-		rt_description = urllib.quote(self.timerentry_description.value.decode('utf8').encode('utf8', 'ignore'))
+		rt_name = quote(self.timerentry_name.value.decode('utf8').encode('utf8', 'ignore'))
+		rt_description = quote(self.timerentry_description.value.decode('utf8').encode('utf8', 'ignore'))
 		rt_disabled = 0 # XXX: do we really want to hardcode this? why do we offer this option then?
 		rt_repeated = 0 # XXX: same here
 
 		if config.plugins.remoteTimer.remotedir.value:
-			rt_dirname = urllib.quote(self.timerentry_dirname.value.decode('utf8').encode('utf8', 'ignore'))
+			rt_dirname = quote(self.timerentry_dirname.value.decode('utf8').encode('utf8', 'ignore'))
 		else:
 			rt_dirname = "None"
 
@@ -393,7 +394,7 @@ def newnigma2KeyGo(self):
 			rt_repeated,
 			rt_dirname
 		)
-		print "[RemoteTimer] debug remote", remoteurl
+		print("[RemoteTimer] debug remote", remoteurl)
 
 		defer = localGetPage(remoteurl)
 		defer.addCallback(boundFunction(_gotPageLoad, self.session, self))
@@ -447,7 +448,7 @@ def autostart(reason, **kwargs):
 			if config.plugins.remoteTimer.httpip.value:
 				timerInit()
 		except:
-			print "[RemoteTimer] NO remoteTimer.httpip.value"
+			print("[RemoteTimer] NO remoteTimer.httpip.value")
 
 
 def timermenu(menuid, **kwargs):

@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 ############################################################################
 #    Copyright (C) 2008 by Volker Christian                                #
 #    Volker.Christian@fh-hagenberg.at                                      #
@@ -21,7 +22,7 @@
 from Plugins.Extensions.VlcPlayer.VlcPlayer import VlcPlayer
 from Components.ActionMap import ActionMap
 
-from YouTubeContextMenu import YouTubeEntryContextMenu, YouTubeEntryContextMenuList
+from .YouTubeContextMenu import YouTubeEntryContextMenu, YouTubeEntryContextMenuList
 
 
 class YouTubePlayer(VlcPlayer):

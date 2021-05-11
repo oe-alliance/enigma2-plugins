@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -18,7 +19,7 @@ from Components.Sources.StaticText import StaticText
 from Components.config import getConfigListEntry, ConfigSelection, \
 	NoSave
 
-from EPGRefreshService import EPGRefreshService
+from .EPGRefreshService import EPGRefreshService
 
 # Show ServiceName instead of ServiceReference
 from ServiceReference import ServiceReference

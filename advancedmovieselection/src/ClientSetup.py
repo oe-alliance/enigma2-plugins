@@ -19,7 +19,9 @@
 #  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
-from __init__ import _
+from __future__ import print_function
+from __future__ import absolute_import
+from .__init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.Pixmap import Pixmap
@@ -31,10 +33,13 @@ from Components.MultiContent import MultiContentEntryText
 from Components.GUIComponent import GUIComponent
 from Components.Sources.StaticText import StaticText
 from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT
-from Source.Remote.MessageServer import serverInstance, getIpAddress
-from Source.Remote.Client import getClients
+from .Source.Remote.MessageServer import serverInstance, getIpAddress
+from .Source.Remote.Client import getClients
 from time import localtime, strftime
-from Source.Globals import SkinTools
+from .Source.Globals import SkinTools
+
+from six.moves import reload_module
+
 
 staticIP = None
 
@@ -125,11 +130,11 @@ class ClientSetupList(GUIComponent):
         instance.setContent(None)
         instance.selectionChanged.get().remove(self.selectionChanged)
 
-    def reload(self):
+    def reload_module(self):
         self.list = []
         for client in getClients():
             self.list.append((client,))
-            print client.getAddress()
+            print(client.getAddress())
         self.l.setList(self.list)
 
     def remove(self, x):

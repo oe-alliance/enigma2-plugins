@@ -1,3 +1,4 @@
+from __future__ import print_function
 #
 #  3D Settings E2-Plugin
 #
@@ -32,6 +33,7 @@ from enigma import iPlayableService, iServiceInformation, eServiceCenter, eServi
 from ServiceReference import ServiceReference
 from os.path import basename as os_basename
 from boxbranding import getImageDistro
+import six
 
 # for localized messages
 from . import _
@@ -43,7 +45,7 @@ THREE_D_TOP_BOTTOM = 2
 modes = {	THREE_D_OFF: "off",
 			THREE_D_SIDE_BY_SIDE: "sbs",
 			THREE_D_TOP_BOTTOM: "tab"}
-reversemodes = dict((value, key) for key, value in modes.iteritems())
+reversemodes = dict((value, key) for key, value in six.iteritems(modes))
 
 
 def setZOffset(configElement):
@@ -58,10 +60,10 @@ def getmode():
 def toggleDisplay(configElement):
 	from Components.Lcd import LCD
 	if configElement.value == False: # turn display on
-		print "[3D Settings] turning display on"
+		print("[3D Settings] turning display on")
 		LCD().setBright(config.lcd.bright.value)
 	elif (config.plugins.threed.disableDisplay.value == True) and (getmode() != THREE_D_OFF): # turn display off
-		print "[3D Settings] turning display off"
+		print("[3D Settings] turning display off")
 		LCD().setBright(0)
 	eDBoxLCD.getInstance().update()
 
@@ -84,8 +86,8 @@ config.plugins.threed.autothreed = ConfigSelection(default="0", choices=[("0", _
 
 
 def switchmode(mode):
-	if mode in modes.keys():
-		print "[3D Settings] switching to mode ", mode
+	if mode in list(modes.keys()):
+		print("[3D Settings] switching to mode ", mode)
 		open("/proc/stb/fb/primary/3d", "w").write(modes[mode])
 		AutoThreeD.instance.setLastMode(mode)
 		if eDBoxLCD.getInstance().detected(): # display found, update it

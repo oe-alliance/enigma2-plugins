@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 AutoTimer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2017-05-28 22:30+0200\n"
 "Last-Translator: jbleyel\n"
 "Language-Team: none\n"
@@ -408,6 +408,10 @@ msgid "If this is selected, the name of the respective AutoTimer will be added a
 msgstr "Wenn diese Option gewählt wird, dann wird der Name des AutoTimers als Tag zu den erzeugten Timers hinzugefügt."
 
 msgid "If this is selected, the tag \"AutoTimer\" will be given to timers created by this plugin."
+msgstr "Wenn diese Option gewählt ist, dann wird \"AutoTimer\" als Tag zu den erzeugten Timern hinzugefügt."
+
+#, fuzzy
+msgid "If this is selected, the tag 'AutoTimer' will be given to timers created by this plugin."
 msgstr "Wenn diese Option gewählt ist, dann wird \"AutoTimer\" als Tag zu den erzeugten Timern hinzugefügt."
 
 msgid "Import AutoTimer"
@@ -827,6 +831,14 @@ msgstr "Das ist Geschmackssache./nDer Assistent bietet nur die nötigsten Einste
 msgid "This is the delay in %s that the AutoTimer will wait after doing a search before searching the EPG again."
 msgstr "Dies ist die Verzögerung in %s, die der AutoTimer wartet, bis nach einer erfolgten Suche eine neue gestartet wird."
 
+#, fuzzy
+msgid "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
+msgstr "Das ist die Verzögerung in Stunden, die der AutoTimer wartet, bis nach einer erfolgten Suche eine neue gestartet wird."
+
+#, fuzzy
+msgid "This is the delay in minutes that the AutoTimer will wait on initial launch to not delay enigma2 startup time."
+msgstr "Das ist die Verzögerung in Stunden, die der AutoTimer wartet, bis nach einer erfolgten Suche eine neue gestartet wird."
+
 msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
 msgstr "Hiernach wird im Sendungstitel gesucht. Die Suche z.B. nach Umlauten ist etwas komplizierter, da man dazu den Zeichensatz des Sender-EPGs wissen muss."
 
@@ -868,6 +880,10 @@ msgstr "Die"
 
 msgid "Tuesday"
 msgstr "Dienstag"
+
+#, fuzzy
+msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
+msgstr "Der AutoTimer wird nur automatisch nach Sendungen suchen, wenn diese Einstellung aktiviert wird. Ansonsten wird nur beim Verlassen der Übersicht über die grüne Taste gesucht."
 
 msgid "Upper bound of timespan."
 msgstr "Obere Grenze der Zeitspanne."
@@ -917,6 +933,10 @@ msgid "What is this 'control menu' you keep talking about?"
 msgstr "Was ist das 'Kontrollmenü' über das immer geredet wird? "
 
 msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
+msgstr "Durch Aktivieren dieser Option wird der Servicetyp der assoziierten Kanäle ignoriert. Dies wird nur notwendig, wenn tatsächlich \"Fast Scan\" genutzt wird."
+
+#, fuzzy
+msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr "Durch Aktivieren dieser Option wird der Servicetyp der assoziierten Kanäle ignoriert. Dies wird nur notwendig, wenn tatsächlich \"Fast Scan\" genutzt wird."
 
 msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."

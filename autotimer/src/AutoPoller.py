@@ -1,9 +1,11 @@
+from __future__ import print_function
+from __future__ import absolute_import
 # Timer
 from enigma import eTimer
 
 # Config
 from Components.config import config
-from plugin import autotimer
+from .plugin import autotimer
 
 # Notifications
 import NavigationInstance
@@ -33,7 +35,7 @@ class AutoPoller:
 	def query(self):
 		self.timer.stop()
 		from Screens.Standby import inStandby
-		print"[AutoTimer] current auto poll", datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+		print("[AutoTimer] current auto poll", datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 		doparse = True
 		if config.plugins.autotimer.skip_during_records.getValue() and NavigationInstance.instance.RecordTimer.isRecording():
 			print("[AutoTimer] Skip check during running records")
@@ -61,4 +63,4 @@ class AutoPoller:
 				traceback.print_exc(file=sys.stdout)
 		multiplier = config.plugins.autotimer.unit.value == "hour" and 60 or 1
 		self.timer.startLongTimer(config.plugins.autotimer.interval.value * 60 * multiplier)
-		print"[AutoTimer] next auto poll at", (datetime.now() + timedelta(minutes=config.plugins.autotimer.interval.value * multiplier)).strftime('%Y-%m-%d %H:%M:%S')
+		print("[AutoTimer] next auto poll at", (datetime.now() + timedelta(minutes=config.plugins.autotimer.interval.value * multiplier)).strftime('%Y-%m-%d %H:%M:%S'))

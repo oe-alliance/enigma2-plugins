@@ -58,7 +58,7 @@ class Showiframe():
 		try:
 			self.showSinglePic = dlsym(self.showiframe, "showSinglePic")
 			self.finishShowSinglePic = dlsym(self.showiframe, "finishShowSinglePic")
-		except OSError, e:
+		except OSError as e:
 			self.showSinglePic = dlsym(self.showiframe, "_Z13showSinglePicPKc")
 			self.finishShowSinglePic = dlsym(self.showiframe, "_Z19finishShowSinglePicv")
 
@@ -72,7 +72,7 @@ class Showiframe():
 def shortname(movie, showing=None):
 	movielist = movie.split('/')
 	for n in movielist:
-		if n is not "":
+		if n != "":
 			movie = n
 	movie = movie.upper()
 	movieback = movie

@@ -22,6 +22,7 @@ For example, if you distribute copies of such a program, whether gratis or for a
 must pass on to the recipients the same freedoms that you received. You must make sure
 that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 '''
+from __future__ import print_function
 import os
 
 VSR = ["VSR-0", "VSR-6", "VSR-12", "VSR-16", "VSR-18"]
@@ -32,7 +33,7 @@ class AccessRestriction:
         self.access = 18
 
     def setAccess(self, access):
-        print "set VSR:", access
+        print("set VSR:", access)
         self.access = int(access)
 
     def getAccess(self):
@@ -41,8 +42,8 @@ class AccessRestriction:
     def decodeAccess(self, access):
         try:
             return int(access[4:])
-        except Exception, e:
-            print e
+        except Exception as e:
+            print(e)
             return -1 # type as error
 
     def isAccessible(self, tags):
@@ -59,9 +60,9 @@ class AccessRestriction:
         try:
             meta_file = file_name.endswith(".ts") and file_name + ".meta" or file_name + ".ts.meta"
             if not clear_access:
-                print "Set %s to %s" % (access, meta_file)
+                print("Set %s to %s" % (access, meta_file))
             else:
-                print "Clear VSR to", meta_file
+                print("Clear VSR to", meta_file)
             if os.path.exists(meta_file):
                 metafile = open(meta_file, "r")
                 sid = metafile.readline().rstrip()
@@ -92,8 +93,8 @@ class AccessRestriction:
             metafile = open(meta_file, "w")
             metafile.write("%s\n%s\n%s\n%s\n%s\n%s" % (sid, title, descr, time, tags, rest))
             metafile.close()
-        except Exception, e:
-            print e
+        except Exception as e:
+            print(e)
 
 
 accessRestriction = AccessRestriction()

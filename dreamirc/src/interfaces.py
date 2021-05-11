@@ -3,9 +3,10 @@
 
 Stability: incendiary, work in progress.
 """
+from __future__ import absolute_import
 from zope.interface import Interface
 
-import locals
+from . import locals
 #from locals import *
 #from twisted.words.im import locals
 

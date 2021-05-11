@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # for localized messages
-from __init__ import _
+from __future__ import print_function
+from __future__ import absolute_import
+from .__init__ import _
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -10,10 +12,8 @@ from Components.Sources.StaticText import StaticText
 from xml.etree.cElementTree import fromstring as cet_fromstring
 from twisted.internet import defer
 from twisted.web.client import getPage, downloadPage
-from urllib import quote
-from urllib import quote as urllib_quote
 from Components.Pixmap import Pixmap
-from GlobalFunctions import Showiframe
+from .GlobalFunctions import Showiframe
 from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER, ePicLoad, eEnv
 from Tools.Directories import fileExists, pathExists
 from Components.AVSwitch import AVSwitch
@@ -22,6 +22,9 @@ from Components.ConfigList import ConfigList, ConfigListScreen
 import time
 import os
 import commands
+
+from six.moves.urllib.parse import quote
+import six
 
 config.plugins.mc_wi = ConfigSubsection()
 config.plugins.mc_wi.entrycount = ConfigInteger(0)
@@ -59,7 +62,7 @@ class WeatherIconItem:
 
 
 def download(item):
-	return downloadPage(item.url, file(item.filename, 'wb'))
+	return downloadPage(six.ensure_binary(item.url), open(item.filename, 'wb'))
 
 
 class MC_WeatherInfo(Screen):
@@ -116,7 +119,7 @@ class MC_WeatherInfo(Screen):
 		if self.weatherPluginEntry is not None:
 			self["statustext"].text = _("Loading information...")
 			url = "http://weather.service.msn.com/data.aspx?weadegreetype=%s&culture=%s&wealocations=%s" % (self.weatherPluginEntry.degreetype.value, self.language, self.weatherPluginEntry.weatherlocationcode.value)
-			getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
+			getPage(six.ensure_binary(url)).addCallback(self.xmlCallback).addErrback(self.error)
 		else:
 			self["statustext"].text = _("No locations defined...\nPress 'Blue' to do that.")
 
@@ -126,13 +129,13 @@ class MC_WeatherInfo(Screen):
 		stadd = stadt
 		if fileExists(downname):
 			os.system("rm -rf " + downname)
-		downloadPage(downlink, downname).addCallback(self.jpgdown, stadd).addErrback(self.error)
+		downloadPage(six.ensure_binary(downlink), downname).addCallback(self.jpgdown, stadd).addErrback(self.error)
 
 	def jpgdown(self, value, stadd):
 		downlink = commands.getoutput("cat /tmp/.stadtindex | grep \"background-image:url('http://mytown.de/\" | cut -d \"'\" -f2")
 		stadt = stadd
 		downname = "/tmp/" + stadt + ".jpg"
-		downloadPage(downlink, downname).addCallback(self.makemvi, stadt).addErrback(self.error)
+		downloadPage(six.ensure_binary(downlink), downname).addCallback(self.makemvi, stadt).addErrback(self.error)
 
 	def makemvi(self, value, stadt):
 		mviname = "/tmp/" + stadt + ".m1v"
@@ -196,7 +199,7 @@ class MC_WeatherInfo(Screen):
 			self.showIcon(item.index, item.filename)
 
 	def showIcon(self, index, filename):
-		if index <> -1:
+		if index != -1:
 			self["weekday%s_icon" % index].updateIcon(filename)
 			self["weekday%s_icon" % index].show()
 		else:
@@ -479,8 +482,8 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 			language = config.osd.language.value.replace("_", "-")
 			if language == "en-EN": # hack
 				language = "en-US"
-			url = "http://weather.service.msn.com/find.aspx?outputview=search&weasearchstr=%s&culture=%s" % (urllib_quote(self.current.city.value), language)
-			getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
+			url = "http://weather.service.msn.com/find.aspx?outputview=search&weasearchstr=%s&culture=%s" % (quote(self.current.city.value), language)
+			getPage(six.ensure_binary(url)).addCallback(self.xmlCallback).addErrback(self.error)
 		else:
 			self.session.open(MessageBox, _("You need to enter a valid city name before you can search for the location code."), MessageBox.TYPE_ERROR)
 
@@ -527,7 +530,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 
 	def error(self, error=None):
 		if error is not None:
-			print error
+			print(error)
 
 	def searchCallback(self, result):
 		if result:

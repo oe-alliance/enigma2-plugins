@@ -6,6 +6,7 @@
 # This software is licensed as described in the file COPYING, which
 # you should have received as part of this distribution.
 
+from __future__ import print_function
 import time
 
 """stopwatch is a very simple Python module for measuring time.
@@ -15,11 +16,11 @@ Great for finding out how long code takes to execute.
 >>> t = stopwatch.Timer()
 >>> t.elapsed
 3.8274309635162354
->>> print t
+>>> print(t)
 15.9507198334 sec
 >>> t.stop()
 30.153270959854126
->>> print t
+>>> print(t)
 30.1532709599 sec
 
 Decorator exists for printing out execution times:
@@ -27,7 +28,7 @@ Decorator exists for printing out execution times:
 >>> @clockit
     def mult(a, b):
         return a * b
->>> print mult(2, 6)
+>>> print(mult(2, 6))
 mult in 1.38282775879e-05 sec
 6
 
@@ -97,7 +98,7 @@ def clockit(func):
         t = StopWatch()
         retval = func(*args, **kw)
         t.stop()
-        print '%s in %s' % (func.__name__, t)
+        print('%s in %s' % (func.__name__, t))
         del t
         return retval
     return new

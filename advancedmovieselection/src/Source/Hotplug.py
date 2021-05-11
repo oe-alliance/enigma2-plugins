@@ -19,9 +19,11 @@
 #  distributed other than under the conditions noted above.
 #
 
+from __future__ import print_function
+from __future__ import absolute_import
 import os
-from Globals import printStackTrace
-from MovieConfig import MovieConfig
+from .Globals import printStackTrace
+from .MovieConfig import MovieConfig
 from ServiceProvider import eServiceReferenceHotplug
 from enigma import eTimer
 
@@ -40,17 +42,17 @@ class Hotplug():
     def addHotplugNotifier(self):
         from Plugins.SystemPlugins.Hotplug.plugin import hotplugNotifier
         if not self.hotplugNotifier in hotplugNotifier:
-            print "add hotplugNotifier"
+            print("add hotplugNotifier")
             hotplugNotifier.append(self.hotplugNotifier)
 
     def removeHotplugNotifier(self):
         from Plugins.SystemPlugins.Hotplug.plugin import hotplugNotifier
         if self.hotplugNotifier in hotplugNotifier:
-            print "remove hotplugNotifier"
+            print("remove hotplugNotifier")
             hotplugNotifier.remove(self.hotplugNotifier)
 
     def hotplugNotifier(self, dev, media_state):
-        print "[hotplugNotifier]", dev, media_state
+        print("[hotplugNotifier]", dev, media_state)
         if len(dev) > 2 and dev[0:2] in ("sd") and dev[-1].isdigit():
             if media_state == "add":
                 self.hotplugChanged(self.NTFS_3G_DRIVER_DELAY)
@@ -58,18 +60,18 @@ class Hotplug():
                 self.hotplugChanged(200)
 
     def hotplugChanged(self, delay=200):
-        print "[start hotplugNotifier]", str(delay) + "ms"
+        print("[start hotplugNotifier]", str(delay) + "ms")
         self.hotplug_timer.start(delay, True)
 
     def updateHotplugDevices(self):
         self.hotplugServices = []
-        print "[update hutplug]"
+        print("[update hutplug]")
         try:
             from Components.Harddisk import Harddisk
             import commands
             movieConfig = MovieConfig()
             lines = commands.getoutput('mount | grep /dev/sd').split('\n')
-            print lines
+            print(lines)
             for mount in lines:
                 if len(mount) < 2:
                     continue

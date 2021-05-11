@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2012-08-25 12:58+0300\n"
 "Last-Translator: rimas\n"
 "Language-Team: rimas\n"
@@ -31,6 +31,9 @@ msgstr "Tühista"
 
 msgid "Cast: "
 msgstr "Osades: "
+
+msgid "Channel Selection"
+msgstr "Kanalite valik"
 
 msgid "Content:"
 msgstr ""
@@ -119,6 +122,9 @@ msgstr "Vastet ei leitud"
 msgid "IMDb setup"
 msgstr "IMDb seaded"
 
+msgid "Lookup"
+msgstr "Otsing"
+
 msgid "Menu"
 msgstr ""
 
@@ -185,6 +191,9 @@ msgstr "Otsi treilerit"
 #, fuzzy
 msgid "Search for details from the Internet Movie Database"
 msgstr "IMDb päringu üksikasjad"
+
+msgid "Select from EPG"
+msgstr "Vali saatekavast"
 
 #, fuzzy
 msgid "Settings for Internet Movie Database searches"

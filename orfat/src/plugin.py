@@ -1,3 +1,4 @@
+from __future__ import print_function
 ##
 ## ORF.at IPTV
 ## by AliAbdul
@@ -17,8 +18,8 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 from twisted.web.client import downloadPage, getPage
 import re
-import urllib2
-
+from six.moves.urllib.request import urlopen
+import six
 ##########################################################
 
 PNG_PATH = resolveFilename(SCOPE_PLUGINS) + "/Extensions/ORFat/"
@@ -143,7 +144,7 @@ class ORFMain(Screen):
 
 	def getVideoUrl(self, url):
 		try:
-			f = urllib2.urlopen(url)
+			f = urlopen(url)
 			txt = f.read()
 			f.close()
 		except:
@@ -260,10 +261,10 @@ class ORFMain(Screen):
 
 	def downloadList(self):
 		self.working = True
-		getPage(self.mainUrl).addCallback(self.downloadListCallback).addErrback(self.downloadListError)
+		getPage(six.ensure_binary(self.mainUrl)).addCallback(self.downloadListCallback).addErrback(self.downloadListError)
 
 	def downloadListError(self, error=""):
-		print "[ORF.at] Fehler beim Verbindungsversuch:", str(error)
+		print("[ORF.at] Fehler beim Verbindungsversuch:", str(error))
 		self.working = False
 		self.session.open(MessageBox, "Fehler beim Verbindungsversuch!", MessageBox.TYPE_ERROR)
 
@@ -296,7 +297,7 @@ class ORFMain(Screen):
 				self.selectedEntry = len(self.movies) - 1
 			elif self.selectedEntry > len(self.movies) - 1:
 				self.selectedEntry = 0
-			downloadPage(self.pics[self.selectedEntry], self.pic).addCallback(self.downloadPicCallback).addErrback(self.downloadPicError)
+			downloadPage(six.ensure_binary(self.pics[self.selectedEntry]), self.pic).addCallback(self.downloadPicCallback).addErrback(self.downloadPicError)
 		else:
 			self.downloadListError()
 
@@ -315,7 +316,7 @@ class ORFMain(Screen):
 		self.working = False
 
 	def downloadPicError(self, error=""):
-		print str(error)
+		print(str(error))
 		self["pic"].hide()
 		self.working = False
 		self.session.open(MessageBox, "Fehler beim Herunterladen des Eintrags!", MessageBox.TYPE_ERROR)

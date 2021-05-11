@@ -34,6 +34,7 @@
 # unsigned. My thanks to Jerome Poincheval for the fix.
 #
 
+from __future__ import print_function
 import os
 from socket import *
 import struct
@@ -75,7 +76,7 @@ def checksum(str):
 
 def receiveOnePing(mySocket, ID, timeout):
   timeLeft = timeout
-  while 1:
+  while True:
     startedSelect = time.time()
     whatReady = select.select([mySocket], [], [], timeLeft)
     howLongInSelect = (time.time() - startedSelect)
@@ -126,12 +127,12 @@ def doOne(destAddr, timeout=10):
 
 def main():
   if len(sys.argv) < 2:
-    print "Usage: %s hostname" % os.path.basename(sys.argv[0])
+    print("Usage: %s hostname" % os.path.basename(sys.argv[0]))
     sys.exit(1)
 
   dest = gethostbyname(sys.argv[1])
   delay = doOne(dest)
-  print delay
+  print(delay)
   return None
 
 

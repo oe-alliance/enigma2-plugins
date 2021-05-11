@@ -1,3 +1,4 @@
+from __future__ import print_function
 Version = '$Header$'
 
 from Components.Sources.Source import Source
@@ -32,7 +33,7 @@ class WAPfunctions(Source):
 		self.result = ("unknown command (%s)" % (self.func), )
 
 	def handleCommand(self, cmd):
-		print "WAPfunctions: handleCommand", cmd
+		print("WAPfunctions: handleCommand", cmd)
 		if self.func is self.LISTTIME:
 			self.result = self.fillListTime(cmd)
 		elif self.func is self.REPEATED:
@@ -53,7 +54,7 @@ class WAPfunctions(Source):
 			self.result = ("unknown command cmd(%s) self.func(%s)" % (cmd, self.func), )
 
 	def fillListTime(self, param):
-		print "fillListTime", param
+		print("fillListTime", param)
 
 		input = 0
 		start = 1
@@ -117,7 +118,7 @@ class WAPfunctions(Source):
 
 	def fillOptionListAny(self, input, start, end):
 		returnList = []
-		for i in range(start, end + 1, 1):
+		for i in list(range(start, end + 1, 1)):
 			returnList1 = []
 			j = str(i)
 			if len(j) == 1:
@@ -131,7 +132,7 @@ class WAPfunctions(Source):
 		return returnList
 
 	def fillRepeated(self, param):
-		print "fillRepeated", param
+		print("fillRepeated", param)
 		repeated = param or 0
 		repeated = int(repeated)
 
@@ -220,7 +221,7 @@ class WAPfunctions(Source):
 		self.servicelist.setRoot(ref)
 		returnList = []
 		for (ref2, name) in self.servicelist.getServicesAsList():
-			print "ref2: (", ref2, ") name: (", name, ")"
+			print("ref2: (", ref2, ") name: (", name, ")")
 			returnListPart = [
 				name,
 				ref2
@@ -234,7 +235,7 @@ class WAPfunctions(Source):
 		return returnList
 
 	def serviceList(self, param):
-		print "serviceList: ", param
+		print("serviceList: ", param)
 		sRef = str(param["sRef"])
 		bouquet = str(param["bouquet"])
 		self.sRefFound = 0
@@ -270,18 +271,18 @@ class WAPfunctions(Source):
 		self.servicelist.root = ref
 
 	def locationList(self, param):
-		print "locationList", param
+		print("locationList", param)
 		dirname = param
 		lst = config.movielist.videodirs.value
 		if not dirname:
 			dirname = resolveFilename(SCOPE_HDD)
 		if not dirname in lst:
 			lst = [dirname] + lst
-		returnList = [[lst[i], i, dirname == lst[i] and "selected" or ""] for i in range(len(lst))]
+		returnList = [[lst[i], i, dirname == lst[i] and "selected" or ""] for i in list(range(len(lst)))]
 		return returnList
 
 	def tagList(self, param):
-		print "tagList", param
+		print("tagList", param)
 		tag = param
 		try:
 			file = open(resolveFilename(SCOPE_CONFIG, "movietags"))
@@ -289,17 +290,17 @@ class WAPfunctions(Source):
 			while "" in taglist:
 				taglist.remove("")
 			file.close()
-		except IOError, ioe:
+		except IOError as ioe:
 			taglist = []
 		if not tag in taglist:
 			taglist = [tag] + taglist
 		if not "" in taglist:
 			taglist.append("")
-		returnList = [[taglist[i], i, tag == taglist[i] and "selected" or ""] for i in range(len(taglist))]
+		returnList = [[taglist[i], i, tag == taglist[i] and "selected" or ""] for i in list(range(len(taglist)))]
 		return returnList
 
 	def fillOptionList(self, param):
-		print "fillOptionList", param
+		print("fillOptionList", param)
 		if "justplay" in param:
 			number = param["justplay"] or 0
 			number = int(number)
@@ -320,7 +321,7 @@ class WAPfunctions(Source):
 			return ()
 
 	def deleteOldSaved(self, param):
-		print "deleteOldSaved", param
+		print("deleteOldSaved", param)
 		returnList = [
 			("deleteOldOnSave", param["deleteOldOnSave"], ""),
 			("command", param["command"], "")
@@ -334,7 +335,7 @@ class WAPfunctions(Source):
 		return returnList
 
 	def fillValue(self, param):
-		print "fillValue: ", param
+		print("fillValue: ", param)
 		return (("", param, ""),)
 
 	def getText(self):

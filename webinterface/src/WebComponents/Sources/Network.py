@@ -34,14 +34,14 @@ def getAdapterIPv6(interface):
 		if has_ipv6 and version.major >= 12:
 			proc = '/proc/net/if_inet6'
 			tempaddrs = []
-			for line in file(proc).readlines():
+			for line in open(proc).readlines():
 				if line.startswith('fe80'):
 					continue
 
 				tmpaddr = ""
 				tmp = line.split()
 				if interface == tmp[5]:
-					tmpaddr = ":".join([tmp[0][i:i + 4] for i in range(0, len(tmp[0]), 4)])
+					tmpaddr = ":".join([tmp[0][i:i + 4] for i in list(range(0, len(tmp[0]), 4))])
 
 					if tmp[2].lower() != "ff":
 						tmpaddr = "%s/%s" % (tmpaddr, int(tmp[2].lower(), 16))

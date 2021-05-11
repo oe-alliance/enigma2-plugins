@@ -17,12 +17,13 @@
 #
 #######################################################################
 
+from __future__ import absolute_import
 import sys
 from time import time
 
 from Components.config import *
 
-from Logger import log
+from .Logger import log
 
 
 # Global cache

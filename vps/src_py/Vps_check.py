@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import absolute_import
 from . import _
 from enigma import eTimer, eConsoleAppContainer, getBestPlayableServiceReference, eServiceReference, eEPGCache, getDesktop
 from Screens.Screen import Screen
@@ -14,6 +15,7 @@ from Components.config import config
 from .Vps import vps_exe, vps_timers
 import NavigationInstance
 from xml.etree.cElementTree import parse as xml_parse
+import six
 
 check_pdc_interval_available = 3600 * 24 * 30 * 12
 check_pdc_interval_unavailable = 3600 * 24 * 30 * 2
@@ -31,7 +33,7 @@ class VPS_check_PDC:
 
 			if xmlroot is not None:
 				for xml in xmlroot.findall("channel"):
-					serviceref = xml.get("serviceref").encode("utf-8")
+					serviceref = xml.get("serviceref")
 					has_pdc = xml.get("has_pdc")
 					last_check = xml.get("last_check")
 					default_vps = xml.get("default_vps")
@@ -206,6 +208,7 @@ class VPS_check(Screen):
 			self.finish()
 
 	def program_dataAvail(self, str):
+		str = six.ensure_str(str)
 		lines = str.split("\n")
 		for line in lines:
 			if line == "PDC_AVAILABLE" and not self.calledfinished:

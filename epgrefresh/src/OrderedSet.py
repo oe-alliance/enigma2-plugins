@@ -3,7 +3,7 @@
 from __future__ import print_function
 import collections
 
-KEY, PREV, NEXT = range(3)
+KEY, PREV, NEXT = list(range(3))
 
 
 class OrderedSet(collections.MutableSet):

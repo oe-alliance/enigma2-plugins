@@ -1,3 +1,5 @@
+from __future__ import print_function
+from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -16,11 +18,11 @@ from Components.config import config, getConfigListEntry, ConfigSubsection, Conf
 from enigma import eListboxPythonMultiContent, eServiceReference, getDesktop, iPlayableService, eSize, ePicLoad, iServiceInformation
 from ServiceReference import ServiceReference
 from Tools.Directories import SCOPE_PLUGINS, resolveFilename
-from __init__ import _
+from .__init__ import _
 
 
 class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
-	STATE_DISCONNECTED, STATE_CONNECTING, STATE_PLAYING, STATE_PAUSED, STATE_FAILURE = range(5)
+	STATE_DISCONNECTED, STATE_CONNECTING, STATE_PLAYING, STATE_PAUSED, STATE_FAILURE = list(range(5))
 	STATE_NAMES = [_("disconnected"), _("connecting..."), _("LIVE"), _("pause"), _("No Connection")]
 	STREAM_DIM = (768, 576)
 	PIP_DIM = (432, 324)
@@ -129,28 +131,28 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 			self["poster"].show()
 
 	def __streamStarted(self):
-		print "__streamStarted"
+		print("__streamStarted")
 		if self.state != self.STATE_PAUSED:
 			self.setState(self.STATE_PLAYING)
 
 	def __serviceStarted(self):
-		print "__streamStarted"
+		print("__streamStarted")
 		self.setState(self.STATE_CONNECTING)
 
 	def __streamFailed(self):
-		print "__streamFailed"
+		print("__streamFailed")
 		currPlay = self.session.nav.getCurrentService()
 		message = currPlay.info().getInfoString(iServiceInformation.sUser + 12)
 		self.setState(self.STATE_FAILURE)
 		self["connection_label"].setText(_("Streaming error: %s") % message)
 
 	def __evEOF(self):
-		print "__evEOF"
+		print("__evEOF")
 		if self.state != self.STATE_FAILURE:
 			self.setState(self.STATE_DISCONNECTED)
 
 	def keyPass(self):
-		print "keyPass"
+		print("keyPass")
 
 	def keyOK(self):
 		if self.state in (self.STATE_DISCONNECTED, self.STATE_FAILURE):

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 
 # for localized messages
 from . import _
@@ -7,7 +8,7 @@ from . import _
 # Plugins Config
 from xml.etree.cElementTree import parse as cet_parse
 from os import path as os_path
-from AutoTimerConfiguration import parseConfig, buildConfig
+from .AutoTimerConfiguration import parseConfig, buildConfig
 
 # Tasks
 import Components.Task
@@ -38,7 +39,7 @@ from enigma import eEPGCache, eServiceReference, eServiceCenter, iServiceInforma
 # import Queue
 
 # AutoTimer Component
-from AutoTimerComponent import preferredAutoTimerComponent
+from .AutoTimerComponent import preferredAutoTimerComponent
 
 from itertools import chain
 from collections import defaultdict
@@ -53,6 +54,9 @@ except ImportError as ie:
 	renameTimer = None
 
 from . import config, xrange, itervalues
+
+from six.moves import range
+
 
 XML_CONFIG = "/etc/enigma2/autotimer.xml"
 
@@ -622,7 +626,7 @@ class AutoTimer:
 						# We start our search right after our actual index
 						# Attention we have to use a copy of the list, because we have to append the previous older matches
 						lepgm = len(epgmatches)
-						for i in xrange(lepgm):
+						for i in range(lepgm):
 							servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS = epgmatches[(i + idx + 1) % lepgm]
 							if self.checkSimilarity(timer, name, nameS, shortdesc, shortdescS, extdesc, extdescS, force=True):
 								# Check if the similar is already known
@@ -722,7 +726,7 @@ class AutoTimer:
 			print("[AutoTimer] listing of movies in " + dest + " failed")
 		else:
 			append = moviedict[dest].append
-			while 1:
+			while True:
 				movieref = movielist.getNext()
 				if not movieref.valid():
 					break

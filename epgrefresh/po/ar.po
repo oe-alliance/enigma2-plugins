@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 EPGRefresh Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2014-04-12 10:30+CEST\n"
 "PO-Revision-Date: 2020-03-07 10:13+0300\n"
 "Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
 "Language-Team: mosad - مساعد الجعيد\n"
@@ -16,7 +16,6 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#, python-format
 msgid "%d more services"
 msgstr "% d قنوات أكثر"
 
@@ -35,7 +34,6 @@ msgstr "اسأل الافتراضي لا"
 msgid "Ask default Yes"
 msgstr "اسأل الافتراضي نعم"
 
-#, python-format
 msgid "AutoTimer failed with error %s"
 msgstr "فشل التوقيت التلقائي مع الخطأ %s"
 
@@ -59,9 +57,6 @@ msgstr "أغلق وتجاهل التغيرات"
 
 msgid "Close and save changes"
 msgstr "أغلق وأحفظ التغيرات"
-
-msgid "Congratulations"
-msgstr ""
 
 msgid "Delay if not in standby (minutes)"
 msgstr "تأخير إن لم يكن في وضع الاستعداد (دقائق)"
@@ -97,23 +92,8 @@ msgstr "تشغيل تحديث دليل البرامج الإلكترونية ف�
 msgid "EPG refresh starts scanning channels."
 msgstr "تحديث دليل البرامج الإلكترونية يبدأ بالبحث في القنوات."
 
-msgid "EPG-Refresh_Pending Services"
-msgstr "تحديث دليل البرامج الإلكترونية_القنوات المعلقة"
-
-msgid "EPG-Refresh_Refresh now"
-msgstr "تحديث-دليل البرامج الإلكترونية_التحديث الأن"
-
-msgid "EPG-Refresh_SetUp"
-msgstr "تحديث-دليل البرامج الإلكترونية_الضبط"
-
-msgid "EPG-Refresh_Stop Refresh"
-msgstr "تحديث دليل البرامج الإلكترونية_إيقاف التحديث"
-
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr "تحديث دليل البرامج الإلكترونية_تنبيهات_نطاق"
-
-msgid "EPGRefresh"
-msgstr "تحديث دليل البرامج الإلكترونية"
 
 msgid "EPGRefresh Configuration"
 msgstr "إعدادات تحديث دليل البرامج الإلكترونية"
@@ -124,12 +104,14 @@ msgstr "المساعدة في إعدادات تحديث دليل البرامج 
 msgid "EPGRefresh Functions"
 msgstr "وظائف تحديث دليل البرامج الإلكترونية"
 
-#, fuzzy
-msgid "EPGRefresh Help"
-msgstr "تحديث دليل البرامج الإلكترونية"
-
 msgid "EPGRefresh Services"
 msgstr "قنوات تحديث دليل البرامج الإلكترونية"
+
+msgid "EXTENSIONMENU_PREFIX"
+msgstr ""
+
+msgid "EXTENSIONNAME_SETUP"
+msgstr ""
 
 msgid "Edit Services"
 msgstr "تحرير"
@@ -139,13 +121,6 @@ msgstr "تعديل تحديث القنوات"
 
 msgid "Editing"
 msgstr "التحرير"
-
-#, fuzzy
-msgid "Editing the service list"
-msgstr "تحرير"
-
-msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
-msgstr "تمكين هذا العنصر لمسح كافة بيانات دليل البرامج الإلكتروني قبل بدء تحديث دليل البرامج الإلكتروني الجديد"
 
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr "تمكين هذا ليكون قادر على الوصول إلى إعدادات تحديث دليل البرامج الإلكترونية من خلال قائمة الملحقات."
@@ -159,11 +134,17 @@ msgstr "تمكين هذا ليكون قادر على تشغيل تحديث دل�
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr "توسيع قائمة القنوات لتحديث باستخدام المؤقتات التلقائية الخاص بك؟"
 
+msgid "FILELIST_BIGGEST"
+msgstr ""
+
+msgid "FILELIST_FORCED"
+msgstr ""
+
+msgid "FILELIST_YOUNGEST"
+msgstr ""
+
 msgid "Fake recording"
 msgstr "تسجيل وهمي"
-
-msgid "Flush EPG before refresh"
-msgstr "مسح دليل البرامج الإلكتروني قبل التحديث"
 
 msgid "Following Services have to be scanned:"
 msgstr "القنوات التالية يجب أن يتم فحصها:"
@@ -173,6 +154,14 @@ msgstr "التركيز على البحث حتى لو كان الرسيفر مش�
 
 msgid "Foreground also"
 msgstr "المقدمة أيضا"
+
+msgid ""
+"Found a total of %d matching Events.\n"
+"%d Timer were added and\n"
+"%d modified,\n"
+"%d conflicts encountered,\n"
+"%d similars added."
+msgstr ""
 
 msgid "Functions"
 msgstr "الوظائف"
@@ -197,7 +186,6 @@ msgstr "القنوات من المؤقت التلقائي"
 msgid "Key Help"
 msgstr "مفتاح المساعدة"
 
-#, python-format
 msgid "Last refresh was %s"
 msgstr "آخر تحديث كان %s"
 
@@ -216,8 +204,15 @@ msgstr "جديد"
 msgid "No"
 msgstr "لا"
 
+msgid "No Backupfiles found"
+msgstr ""
+
 msgid "OK"
 msgstr "موافق"
+
+#, fuzzy
+msgid "PLUGINNAME_EPGRefresh"
+msgstr "تحديث دليل البرامج الإلكترونية"
 
 msgid "Pending Services"
 msgstr "القنوات المعلقة"
@@ -251,6 +246,9 @@ msgstr "محدث"
 
 msgid "Run AutoTimer after refresh"
 msgstr "تشغيل المؤقت التلقائي بعد التحديث"
+
+msgid "Select a file to force a Backup"
+msgstr ""
 
 msgid "Select bouquet to refresh"
 msgstr "حدد باقة للتحديث"
@@ -294,37 +292,21 @@ msgstr "تخطي حماية القنوات"
 msgid "Start EPGrefresh immediately"
 msgstr "التشغيل الفوري لتحديث دليل البرامج الإلكترونية"
 
+#, fuzzy
+msgid "Stop Refresh"
+msgstr "إضافة إلى تحديث دليل البرامج الإلكترونية"
+
 msgid "Stop Running EPG-refresh"
 msgstr "إيقاف تشغيل تحديث دليل البرامج الإلكترونية"
 
 msgid "Stop running refresh"
 msgstr "إيقاف تشغيل التحديث"
 
-#, fuzzy
-msgid "The configuration menu"
-msgstr "المساعدة في إعدادات تحديث دليل البرامج الإلكترونية"
-
 msgid "There is still a refresh running. The Operation isn't allowed at this moment."
 msgstr "لا يزال هناك تحديثات قيد التشغيل. العملية غير مسموح بها في هذه اللحظة."
 
-msgid ""
-"This help screen is supposed to give you a quick look at everything EPGRefresh has to offer.\n"
-"You can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by pressing the HELP button from the configuration menu (more on that later).\n"
-"\n"
-"\n"
-"But you really should consider to take the few minutes it takes to read these help pages."
-msgstr ""
-
 msgid "This is the duration each service/channel will stay active during a refresh."
 msgstr "هذه هي مدة كل خدمة/القناة ستبقى نشطة أثناء التحديث."
-
-msgid ""
-"This is the entry point of EPGRefresh. From this menu you can configure every aspect of the plugin.\n"
-"The configuration options each have an explaination which is supposed to help you to understand their effects better. Please give reading them a try, they can save you a lot of time.\n"
-"\n"
-"Using the YELLOW button you can start a refresh manually. You also be able to enable the functionalities in the Extensionmenu. The INFO button brings up the date the last refresh was completed successfully. You will also find an Extensionmenu-Entry to stop a running Refresh.\n"
-"The BLUE key opens the service editor (next page)."
-msgstr ""
 
 msgid "This setting controls whether or not an informational message will be shown at start and completion of refresh."
 msgstr "يتحكم في إعداد ما إذا كان سيظهر رسالة معلوماتية في البدء والانتهاء من التحديث."
@@ -342,6 +324,14 @@ msgstr ""
 "لتطبيق التغييرات الخاصة بك يجب إعادة تشغيل واجهة المستخدم الرسومية.\n"
 "هل تريد إعادة تشغيل واجهة المستخدم الرسومية الآن؟"
 
+#, fuzzy
+msgid ""
+"To load the Backupfile the GUI has to be restarted.\n"
+"Do you want to restart the GUI now?"
+msgstr ""
+"لتطبيق التغييرات الخاصة بك يجب إعادة تشغيل واجهة المستخدم الرسومية.\n"
+"هل تريد إعادة تشغيل واجهة المستخدم الرسومية الآن؟"
+
 msgid "Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu."
 msgstr "ما لم يتم تمكين ذلك، لن يتم تشغيل تحديث دليل البرامج الإلكتروني تلقائيًا ولكن يجب أن يتم تشغيله بشكل صريح بواسطة الزر الأصفر في هذه القائمة."
 
@@ -351,28 +341,8 @@ msgstr "الإصدار"
 msgid "Wake up from standby for EPG refresh."
 msgstr "عند تشغيل الجهاز سيبدء تحديث دليل البرامج الإلكتروني."
 
-#, fuzzy
-msgid "Welcome to EPGRefresh"
-msgstr "إضافة إلى تحديث دليل البرامج الإلكترونية"
-
-msgid ""
-"While the screen does not immediately show it, it does have a lot to offer. The topmost line allows you to choose between the editor for channels and bouquets and the following lines contain the channels/bouquets you chose to refresh.\n"
-"\n"
-"You can use the BLUE button to add a new entry to the list or the YELLOW button to remove an existing one.\n"
-"\n"
-"\n"
-"For most people it should be sufficient to add the 'Favourites' bouquet by selecting 'Bouquets' in the first line and by adding it using the BLUE button."
-msgstr ""
-
 msgid "Yes"
 msgstr "نعم"
-
-msgid ""
-"You now know how to do your first steps in EPGRefresh.\n"
-"\n"
-"As a final note I want to hint you at the fact that this plugin will not do anything on its own without YOU telling it to. So if you want the refresh to happen automatically in the background you need to configure the plugin to do so.\n"
-"This was not done to cause you any inconvenience but rather to give you the freedom of choice."
-msgstr ""
 
 msgid "add to EPGRefresh"
 msgstr "إضافة إلى تحديث دليل البرامج الإلكترونية"

@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # GUI (Screens)
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
@@ -61,7 +62,7 @@ class PipzapSetup(Screen, ConfigListScreen):
 		self["key_green"] = StaticText(_("OK"))
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_yellow"] = StaticText("")
-		from plugin import pipzapHelp
+		from .plugin import pipzapHelp
 		if pipzapHelp:
 			self["key_blue"] = StaticText(_("Help"))
 		else:
@@ -104,6 +105,6 @@ class PipzapSetup(Screen, ConfigListScreen):
 		return SetupSummary
 
 	def keyBlue(self):
-		from plugin import pipzapHelp
+		from .plugin import pipzapHelp
 		if pipzapHelp:
 			pipzapHelp.open(self.session)

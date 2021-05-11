@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 # for localized messages
+from __future__ import print_function
+from __future__ import absolute_import
 from . import _x
 
 from Screens.Screen import Screen
 from Components.Button import Button
 from Components.ActionMap import HelpableActionMap, ActionMap
 from Components.MenuList import MenuList
-from MovieList import MovieList
+from .MovieList import MovieList
 from Components.DiskInfo import DiskInfo
 from Components.Pixmap import Pixmap
 from Components.Label import Label
@@ -26,7 +28,7 @@ from Tools.Directories import *
 from Tools.BoundFunction import boundFunction
 
 from enigma import eServiceReference, eServiceCenter, eTimer, eSize, iServiceInformation
-from SerienFilm import EpiSepCfg
+from .SerienFilm import EpiSepCfg
 
 config.movielist.sfmoviesort = ConfigInteger(default=MovieList.SORT_RECORDED)
 config.movielist.sflisttype = ConfigInteger(default=MovieList.LISTTYPE_MINIMAL)
@@ -39,13 +41,13 @@ def setPreferredTagEditor(te):
 	try:
 		if preferredTagEditor == None:
 			preferredTagEditor = te
-			print "Preferred tag editor changed to ", preferredTagEditor
+			print("Preferred tag editor changed to ", preferredTagEditor)
 		else:
-			print "Preferred tag editor already set to ", preferredTagEditor
-			print "ignoring ", te
+			print("Preferred tag editor already set to ", preferredTagEditor)
+			print("ignoring ", te)
 	except:
 		preferredTagEditor = te
-		print "Preferred tag editor set to ", preferredTagEditor
+		print("Preferred tag editor set to ", preferredTagEditor)
 
 
 def getPreferredTagEditor():
@@ -198,7 +200,7 @@ class MovieContextMenu(Screen):
 
 class SelectionEventInfo:
 	def __init__(self):
-		print "[SF-Plugin] SF:SelectionEventInfo init"
+		print("[SF-Plugin] SF:SelectionEventInfo init")
 		self["Service"] = ServiceEvent()
 		self.list.connectSelChanged(self.__selectionChanged)
 		self.timer = eTimer()
@@ -350,7 +352,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 			self.updateDescription()
 
 	def updateHDDData(self):
- 		self.reloadList(self.selectedmovie)
+		self.reloadList(self.selectedmovie)
 		self["waitingtext"].visible = False
 
 	def moveTo(self):
@@ -448,7 +450,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 		self.setTitle(title)
 		self["list"].saveTitle(title)
 #		print "[SF-Plugin] MovieSelection:setTitle(%s)" % (str(title))
- 		if not (sel and self["list"].moveTo(sel)):
+		if not (sel and self["list"].moveTo(sel)):
 			if home:
 				self["list"].moveToIndex(0)
 		self.updateTags()

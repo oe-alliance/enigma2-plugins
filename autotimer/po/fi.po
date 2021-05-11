@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2018-06-03 00:57+0200\n"
 "Last-Translator: Kojo\n"
 "Language-Team: AndyBlac/TimoJ/Kojo_\n"
@@ -416,6 +416,10 @@ msgid "If this is selected, the name of the respective AutoTimer will be added a
 msgstr "Jos valittu, vastaavan Automaattiajastuksen nimi lisätään avainsanaksi tämän lisäosan luomiin ajastuksiin."
 
 msgid "If this is selected, the tag \"AutoTimer\" will be given to timers created by this plugin."
+msgstr "Jos tämä on valittu,  \"Automaattiajastus\" lisätään avainsanaksi tämän lisäosan luomiin ajastuksiin."
+
+#, fuzzy
+msgid "If this is selected, the tag 'AutoTimer' will be given to timers created by this plugin."
 msgstr "Jos tämä on valittu,  \"Automaattiajastus\" lisätään avainsanaksi tämän lisäosan luomiin ajastuksiin."
 
 msgid "Import AutoTimer"
@@ -837,6 +841,12 @@ msgstr "HUOM!! Tämä suomennos löytyy tiedostosta MPHelp.po HUOM!!"
 msgid "This is the delay in %s that the AutoTimer will wait after doing a search before searching the EPG again."
 msgstr "Tämä on viive %s kun Autotimer odottaa ennen seuraavaa EPG-hakua."
 
+msgid "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
+msgstr "Aika (minuutteina) jonka automaattiajastus odottaa haun jälkeen ennen uuden ohjelmatietohaun aloittamista."
+
+msgid "This is the delay in minutes that the AutoTimer will wait on initial launch to not delay enigma2 startup time."
+msgstr "Tämä on viive (minuuttia) jonka automaattiajastus odottaa ensikäynnistyksessä jotta se ei hidasta Enigma2:n käynnistymistä."
+
 msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
 msgstr "Tätä etsitään ohjelmien nimistä. Huomaa, että ääkkösten haku voi olla hankalaa koska sinun pitää tietää kanavan käyttämä merkkikoodaus."
 
@@ -878,6 +888,9 @@ msgstr "Ti"
 
 msgid "Tuesday"
 msgstr "Tiistai"
+
+msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
+msgstr "Jos tätä ei ole valittu päälle, automaattiajastus ei hae automaattiajastettuja ohjelmia, niitä haetaan vain samalla kun poistut käyttöliittymästä vihreällä näppäimellä."
 
 msgid "Upper bound of timespan."
 msgstr "Aikajakson yläraja."
@@ -928,6 +941,10 @@ msgid "What is this 'control menu' you keep talking about?"
 msgstr "Mikä on tämä 'Asetusvalikko'?"
 
 msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
+msgstr "Kun \"Nopeaa hakua\" tuetaan, ei kanavan tyyppiä tarkisteta. Sinun ei tarvitse kytkeä tätä päälle, ellei käyttämäsi ohjelmisto tue \"Nopeaa hakua\" ja käytät sitä."
+
+#, fuzzy
+msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr "Kun \"Nopeaa hakua\" tuetaan, ei kanavan tyyppiä tarkisteta. Sinun ei tarvitse kytkeä tätä päälle, ellei käyttämäsi ohjelmisto tue \"Nopeaa hakua\" ja käytät sitä."
 
 msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."

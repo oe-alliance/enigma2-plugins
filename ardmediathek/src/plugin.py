@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 # ARD Mediathek by AliAbdul
+from __future__ import print_function
 from Components.ActionMap import ActionMap
 from Components.AVSwitch import AVSwitch
 from Components.Label import Label
@@ -20,8 +21,8 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 from twisted.web.client import downloadPage, getPage
 import re
-import urllib2
-
+from six.moves.urllib.request import Request, urlopen
+import six
 ###################################################
 
 MAIN_PAGE = "http://www.ardmediathek.de"
@@ -152,7 +153,7 @@ def getMovies(html):
 
 def getMovieUrls(url):
 	try:
-		f = urllib2.urlopen(url)
+		f = urlopen(url)
 		html = f.read()
 		f.close()
 	except:
@@ -329,10 +330,10 @@ class ARDMediathek(Screen):
 		if not url:
 			self.mainpage = True
 			url = MAIN_PAGE + "/ard/servlet/"
-		getPage(url).addCallback(self.gotPage).addErrback(self.error)
+		getPage(six.ensure_binary(url)).addCallback(self.gotPage).addErrback(self.error)
 
 	def error(self, err=""):
-		print "[ARD Mediathek] Error:", err
+		print("[ARD Mediathek] Error:", err)
 		self.working = False
 		self.deactivateCacheDialog()
 
@@ -370,8 +371,8 @@ class ARDMediathek(Screen):
 			movie = self.movies[0]
 			thumbUrl = movie[4]
 			try:
-				req = urllib2.Request(thumbUrl)
-				url_handle = urllib2.urlopen(req)
+				req = Request(thumbUrl)
+				url_handle = urlopen(req)
 				headers = url_handle.info()
 				contentType = headers.getheader("content-type")
 			except:
@@ -384,12 +385,12 @@ class ARDMediathek(Screen):
 				elif 'image/png' in contentType:
 					self.thumb = "/tmp/ard.png"
 				else:
-					print "[ARD Mediathek] Unknown thumbnail content-type:", contentType
+					print("[ARD Mediathek] Unknown thumbnail content-type:", contentType)
 					self.thumb = None
 			else:
 				self.thumb = None
 			if self.thumb:
-				downloadPage(thumbUrl, self.thumb).addCallback(self.downloadThumbnailCallback).addErrback(self.downloadThumbnailError)
+				downloadPage(six.ensure_binary(thumbUrl), self.thumb).addCallback(self.downloadThumbnailCallback).addErrback(self.downloadThumbnailError)
 			else:
 				self.buildEntry(None)
 		else:
@@ -397,7 +398,7 @@ class ARDMediathek(Screen):
 			self.deactivateCacheDialog()
 
 	def downloadThumbnailError(self, err):
-		print "[ARD Mediathek] Error:", err
+		print("[ARD Mediathek] Error:", err)
 		self.buildEntry(None)
 
 	def downloadThumbnailCallback(self, txt=""):

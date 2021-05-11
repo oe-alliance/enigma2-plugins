@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from enigma import eConsoleAppContainer, eTimer
 from xml.etree.cElementTree import parse as cet_parse
 from xml.etree.ElementTree import ParseError
 from os import path, listdir
 from os import remove as os_remove, fsync
+
+import six
 
 
 class Bonjour:
@@ -28,7 +31,7 @@ class Bonjour:
 				]
 		text = service.get('text', None)
 		if text:
-			if isinstance(text, (basestring)):
+			if isinstance(text, (six.string_types)):
 				lines.append('\t\t<txt-record>%s</txt-record>\n' % (text))
 			else:
 				for txt in text:
@@ -44,7 +47,7 @@ class Bonjour:
 		if not dict:
 			return '\0'
 		parts = []
-		for name, value in dict.iteritems():
+		for name, value in six.iteritems(dict):
 			if value is None:
 				item = name
 			else:
@@ -55,7 +58,7 @@ class Bonjour:
 		return parts
 
 	def __writeService(self, service):
-		print "[Bonjour.__writeService] Creating service file '%s'" % (service['file'])
+		print("[Bonjour.__writeService] Creating service file '%s'" % (service['file']))
 		if 'type' in service and 'port' in service and 'file' in service:
 			filepath = "%s%s" % (self.AVAHI_SERVICES_DIR, service['file'])
 			try:
@@ -68,7 +71,7 @@ class Bonjour:
 			except IOError:
 				pass
 
-		print "[Bonjour.__writeService] Cannot create service file '%s'" % (service['file'])
+		print("[Bonjour.__writeService] Cannot create service file '%s'" % (service['file']))
 		return False
 
 	def __deleteService(self, protocol):
@@ -81,7 +84,7 @@ class Bonjour:
 		return False
 
 	def __parse(self, file):
-		print "[Bonjour.__parse] parsing %s%s" % (self.AVAHI_SERVICES_DIR, file)
+		print("[Bonjour.__parse] parsing %s%s" % (self.AVAHI_SERVICES_DIR, file))
 		try:
 			config = cet_parse(self.AVAHI_SERVICES_DIR + file).getroot()
 		except ParseError: #parsing failed, skip the file
@@ -116,7 +119,7 @@ class Bonjour:
 		self.services = []
 		self.files = {}
 		if path.exists(self.AVAHI_SERVICES_DIR):
-			print "[Bonjour.reloadConfig] reloading config"
+			print("[Bonjour.reloadConfig] reloading config")
 			service_files = filter(lambda x: x.endswith('.service'), listdir(self.AVAHI_SERVICES_DIR))
 			for file in service_files:
 				self.__parse(file)
@@ -124,7 +127,7 @@ class Bonjour:
 		self.registerDefaultServices()
 
 	def registerService(self, service, replace=False):
-		print "[Bonjour.registerService] %s" % service
+		print("[Bonjour.registerService] %s" % service)
 
 		if 'type' in service and 'port' in service and 'file' in service:
 			if (service['file'] not in self.files) or replace:
@@ -141,7 +144,7 @@ class Bonjour:
 				return True
 
 		else:
-			print "[Bonjour.registerService] Missing port or type definition in %s%s" % (self.AVAHI_SERVICES_DIR, service['file'])
+			print("[Bonjour.registerService] Missing port or type definition in %s%s" % (self.AVAHI_SERVICES_DIR, service['file']))
 			return False
 
 	def updateService(self, service):
@@ -149,12 +152,12 @@ class Bonjour:
 
 			filepath = "%s%s" % (self.AVAHI_SERVICES_DIR, service['file'])
 			if not path.exists(filepath):
-				print "[Bonjour.updateService] Cannot update non-existent service file '%s'" % (service['file'])
+				print("[Bonjour.updateService] Cannot update non-existent service file '%s'" % (service['file']))
 				return False
 
 			else:
 				if not self.__writeService(service):
-					print "[Bonjour.updateService] Cannot write service file '%s'" % (service['file'])
+					print("[Bonjour.updateService] Cannot write service file '%s'" % (service['file']))
 					return False
 
 		return True
@@ -191,7 +194,7 @@ class Bonjour:
 				}
 
 	def registerDefaultServices(self):
-		print "[Bonjour.registerDefaultServices] called"
+		print("[Bonjour.registerDefaultServices] called")
 		service = self.buildService('ftp', '21')
 		filepath = "%s%s" % (self.AVAHI_SERVICES_DIR, service['file'])
 		if not path.exists(filepath):

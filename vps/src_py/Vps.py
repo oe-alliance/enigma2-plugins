@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 from enigma import eTimer, eConsoleAppContainer, getBestPlayableServiceReference, eServiceReference, eEPGCache, eEnv
 from time import time, strftime, localtime
 from Components.config import config
@@ -13,6 +14,7 @@ from Components.TimerSanityCheck import TimerSanityCheck
 from Tools.StbHardware import getFPWasTimerWakeup
 import Screens.Standby
 import NavigationInstance
+import six
 
 vps_exe = eEnv.resolve("${libdir}/enigma2/python/Plugins/SystemPlugins/vps/vps")
 if not access(vps_exe, X_OK):
@@ -48,6 +50,7 @@ class vps_timer:
 			self.stop_simulation()
 
 	def program_dataAvail(self, str):
+		str = six.ensure_str(str)
 		if self.timer is None or self.timer.state == TimerEntry.StateEnded or self.timer.cancelled:
 			self.program_abort()
 			self.stop_simulation()
@@ -543,7 +546,7 @@ class vps:
 					elif (timer.begin - now) > 4 * 3600:
 						break
 			except AttributeError:
-				print "[VPS-Plugin] AttributeError in Vps.py"
+				print("[VPS-Plugin] AttributeError in Vps.py")
 				return
 		else:
 			nextExecution = 14400
@@ -561,7 +564,7 @@ class vps:
 			nextExecution = 1
 
 		self.timer.startLongTimer(nextExecution)
-		print "[VPS-Plugin] next execution in " + str(nextExecution) + " sec"
+		print("[VPS-Plugin] next execution in " + str(nextExecution) + " sec")
 
 	def addTimerToList(self, timer):
 		self.vpstimers.append(vps_timer(timer, self.session))

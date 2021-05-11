@@ -23,8 +23,10 @@
 #    that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 #
 
+from __future__ import print_function
+from __future__ import absolute_import
 import os
-import ping
+from . import ping
 
 
 class Network():
@@ -41,17 +43,17 @@ class Network():
                 return True
             for network in self.auto_network:
                 if mount_dir.startswith(network[0]):
-                    print "check mount:", network[1] + ":" + mount_dir
+                    print("check mount:", network[1] + ":" + mount_dir)
                     delay = ping.do_one(network[1], 0.2)
                     if delay:
-                        print "success", delay
+                        print("success", delay)
                         return True
                     else:
-                        print "failed"
+                        print("failed")
                         return False
             return True
-        except Exception, e:
-            print e
+        except Exception as e:
+            print(e)
             return True
 
     def getOnlineMount(self, dirs):
@@ -65,13 +67,13 @@ class Network():
     def updateAutoNetwork(self):
         self.auto_network = []
         try:
-            print "update auto.network"
+            print("update auto.network")
             if os.path.exists(self.AUTO_MASTER):
                 rfile = open(self.AUTO_MASTER, 'r')
                 for x in rfile.readlines():
                     if self.AUTO_NETORK in x:
                         self.mount_path = x.split(" ")[0]
-                        print "update from auto.master:", self.mount_path
+                        print("update from auto.master:", self.mount_path)
             if os.path.exists(self.AUTO_NETORK):
                 rfile = open(self.AUTO_NETORK, 'r')
                 for x in rfile.readlines():
@@ -80,9 +82,9 @@ class Network():
                         val[2] = val[2].replace('://', '').replace(':/', '/', 1) # only for cifs mount
                         dest_addr = val[2].split('/')[0]
                         self.auto_network.append((os.path.join(self.mount_path, val[0]), dest_addr))
-            print self.auto_network
-        except Exception, e:
-            print e
+            print(self.auto_network)
+        except Exception as e:
+            print(e)
 
 
 autoNetwork = Network()

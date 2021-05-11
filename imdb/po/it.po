@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - imdb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2011-09-20 21:42+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -31,6 +31,9 @@ msgstr ""
 
 msgid "Cast: "
 msgstr "Cast: "
+
+msgid "Channel Selection"
+msgstr "Selezione Canale"
 
 msgid "Content:"
 msgstr ""
@@ -115,6 +118,9 @@ msgstr "Nessun riscontro IMDb!"
 msgid "IMDb setup"
 msgstr ""
 
+msgid "Lookup"
+msgstr "Ricerca"
+
 msgid "Menu"
 msgstr ""
 
@@ -181,6 +187,9 @@ msgstr "Ricercare trailer"
 #, fuzzy
 msgid "Search for details from the Internet Movie Database"
 msgstr "Ricerca dettagli da \"Internet Movie Database\""
+
+msgid "Select from EPG"
+msgstr "Selezionare da EPG"
 
 #, fuzzy
 msgid "Settings for Internet Movie Database searches"

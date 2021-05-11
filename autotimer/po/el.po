@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2016-06-18 02:25+0200\n"
 "Last-Translator: MCelliot_g <mcelliot_g@hotmail.com>\n"
 "Language-Team: none\n"
@@ -427,6 +427,10 @@ msgstr "Αν ενεργοποιηθεί, το όνομα του αντίστοι
 msgid "If this is selected, the tag \"AutoTimer\" will be given to timers created by this plugin."
 msgstr "Με αυτό επιλεγμένο, η ετικέτα \"AutoTimer\" θα δίνεται στους χρονοδιακόπτες που δημιουργήθηκαν από το πρόσθετο."
 
+#, fuzzy
+msgid "If this is selected, the tag 'AutoTimer' will be given to timers created by this plugin."
+msgstr "Με αυτό επιλεγμένο, η ετικέτα \"AutoTimer\" θα δίνεται στους χρονοδιακόπτες που δημιουργήθηκαν από το πρόσθετο."
+
 msgid "Import AutoTimer"
 msgstr "Εισαγωγή Αυτ. Χρ/κόπτη"
 
@@ -837,6 +841,13 @@ msgstr ""
 msgid "This is the delay in %s that the AutoTimer will wait after doing a search before searching the EPG again."
 msgstr "Καθυστέρηση σε ώρες όπου ο Αυτ. Χρ/κόπτης θα περιμένει μετά από μία αναζήτηση να ξαναψάξει στο EPG ξανά."
 
+#, fuzzy
+msgid "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
+msgstr "Καθυστέρηση σε ώρες όπου ο Αυτ. Χρ/κόπτης θα περιμένει μετά από μία αναζήτηση να ξαναψάξει στο EPG ξανά."
+
+msgid "This is the delay in minutes that the AutoTimer will wait on initial launch to not delay enigma2 startup time."
+msgstr "Καθυστέρηση σε λεπτά όπου ο Αυτ. Χρ/κόπτης θα περιμένει κατά την αρχική του εκκίνηση να μη καθυστερήσει την ώρα εκκίνησης του enigma2."
+
 msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
 msgstr "Σε αυτό θα γίνεται αναζήτηση στους τίτλους προγραμμάτων. Σημειώστε ότι η αναζήτηση ειδικών χαρακτήρων π.χ διαλυτικά μπορεί να είναι προβληματική καθώς πρέπει να γνωρίζετε την κωδικοποίηση χαρακτήρων του καναλιού."
 
@@ -878,6 +889,9 @@ msgstr "Τρί"
 
 msgid "Tuesday"
 msgstr "Τρίτη"
+
+msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
+msgstr "Εκτός και αν είναι ενεργό, ο Αυτ. Χρ/κόπτης ΔΕΝ θα ψάξει για προγράμματα που ταιριάζουν με τους Αυτόματους Χρονοδιακόπτες, αλλά μόνο εάν φύγεται από το μενού με το πράσινο πλήκτρο."
 
 msgid "Upper bound of timespan."
 msgstr "Μέγιστο όριο χρονικού διαστήματος."
@@ -926,6 +940,10 @@ msgid "What is this 'control menu' you keep talking about?"
 msgstr ""
 
 msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
+msgstr "Όταν υποστηρίζεται η \"Γρήγορη Ανίχνευση\" αγνοείται ο τύπος της υπηρεσίας. Δεν χρειάζεται να είναι ενεργό, εκτός και αν το Image σας υποστηρίζει τη \"Γρήγορη Ανίχνευση\" και τη χρησιμοποιείτε."
+
+#, fuzzy
+msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr "Όταν υποστηρίζεται η \"Γρήγορη Ανίχνευση\" αγνοείται ο τύπος της υπηρεσίας. Δεν χρειάζεται να είναι ενεργό, εκτός και αν το Image σας υποστηρίζει τη \"Γρήγορη Ανίχνευση\" και τη χρησιμοποιείτε."
 
 msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."

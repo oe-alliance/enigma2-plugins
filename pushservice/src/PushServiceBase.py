@@ -1,3 +1,5 @@
+from __future__ import print_function
+from __future__ import absolute_import
 #######################################################################
 #
 #    Push Service for Enigma-2
@@ -34,10 +36,13 @@ from Tools.BoundFunction import boundFunction
 
 # Plugin internal
 from . import _
-from Modules import Modules
-from ConfigFile import ConfigFile
-from ServiceBase import ServiceBase
-from ControllerBase import ControllerBase
+from .Modules import Modules
+from .ConfigFile import ConfigFile
+from .ServiceBase import ServiceBase
+from .ControllerBase import ControllerBase
+
+
+import six
 
 
 # Constants
@@ -81,7 +86,7 @@ class PushServiceBase(Modules, ConfigFile):
 		slist = []
 		if self.servicemodules:
 			serviceclasses = [service.getClass() for service in self.services] if self.services else []
-			for name, module in self.servicemodules.iteritems():
+			for name, module in six.iteritems(self.servicemodules):
 				if module.forceSingle():
 					# We have to check if there is already a plugin instance
 					if name in serviceclasses:
@@ -121,7 +126,7 @@ class PushServiceBase(Modules, ConfigFile):
 		plist = []
 		if self.controllermodules:
 			controllerclasses = [controller.getClass() for controller in self.controllers] if self.controllers else []
-			for name, module in self.controllermodules.iteritems():
+			for name, module in six.iteritems(self.controllermodules):
 				if module.forceSingle():
 					# We have to check if there is already a controller instance
 					if name in controllerclasses:
@@ -217,7 +222,7 @@ class PushServiceBase(Modules, ConfigFile):
 		controllers = self.controllers
 
 		# Build Header
-		from plugin import NAME, VERSION
+		from .plugin import NAME, VERSION
 		root = Element(NAME)
 		root.set('version', VERSION)
 		root.append(Comment(_("Don't edit this manually unless you really know what you are doing")))
@@ -265,7 +270,7 @@ class PushServiceBase(Modules, ConfigFile):
 				controller.end()
 
 	def run(self):
-		print _("PushService started: ") + strftime(_("%d.%m.%Y %H:%M"), localtime())
+		print(_("PushService started: ") + strftime(_("%d.%m.%Y %H:%M"), localtime()))
 
 		controllers = self.controllers
 		self.pushcallbacks = {}
@@ -275,15 +280,15 @@ class PushServiceBase(Modules, ConfigFile):
 		if controllers:
 			for controller in controllers:
 				if controller.getEnable():
-					print _("PushService running: ") + str(controller.getName())
+					print(_("PushService running: ") + str(controller.getName()))
 
 					try:
 						# Run controller
 						ret = controller.run(
 								boundFunction(self.runcallback, controller),
 								boundFunction(self.runcallback, controller))
-					except Exception, e:
-						print _("PushService controller run() exception")
+					except Exception as e:
+						print(_("PushService controller run() exception"))
 						exc_type, exc_value, exc_traceback = sys.exc_info()
 						traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stdout)
 
@@ -307,15 +312,15 @@ class PushServiceBase(Modules, ConfigFile):
 				self.push(controller, subject, body, attachments)
 
 	def runerrback(self, controller, *args):
-		print _("controller %s returned error(s)") % controller.getName()
+		print(_("controller %s returned error(s)") % controller.getName())
 		for arg in args:
 			if isinstance(arg, Exception):
-				print str(arg.type), str(arg.value)
+				print(str(arg.type), str(arg.value))
 			elif arg:
-				print str(arg)
+				print(str(arg))
 
 	def push(self, controller, subject, text="", attachments=[]):
-		print "push"
+		print("push")
 		services = self.services
 		if not services:
 			# Fallback to PopUp
@@ -332,13 +337,13 @@ class PushServiceBase(Modules, ConfigFile):
 								boundFunction(self.pusherrback, service, controller),
 								controller.getName(),
 								subject, text, attachments)
-					except Exception, e:
-						print _("PushService Service push() exception")
+					except Exception as e:
+						print(_("PushService Service push() exception"))
 						exc_type, exc_value, exc_traceback = sys.exc_info()
 						traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stdout)
 
 	def pushcallback(self, service, controller, *args):
-		print "pushcallback"
+		print("pushcallback")
 		key = (service, controller)
 		if key not in self.pushcallbacks:
 			self.pushcallbacks[key] = list(args)
@@ -347,13 +352,13 @@ class PushServiceBase(Modules, ConfigFile):
 		self.pushcheckbacks(key)
 
 	def pusherrback(self, service, controller, *args):
-		print "pusherrback"
-		print _("Service %s returned error(s)") % service.getName()
+		print("pusherrback")
+		print(_("Service %s returned error(s)") % service.getName())
 		for arg in args:
 			if isinstance(arg, Exception):
-				print str(arg.type), str(arg.value)
+				print(str(arg.type), str(arg.value))
 			elif arg:
-				print str(arg)
+				print(str(arg))
 		key = (service, controller)
 		if key not in self.pusherrbacks:
 			self.pusherrbacks[key] = list(args)
@@ -362,7 +367,7 @@ class PushServiceBase(Modules, ConfigFile):
 		self.pushcheckbacks(key)
 
 	def pushcheckbacks(self, key):
-		print "pushcheckbacks"
+		print("pushcheckbacks")
 		callparam = self.pushcallbacks.get(key, [])
 		cntcall = len(callparam)
 		errparam = self.pusherrbacks.get(key, [])
@@ -375,8 +380,8 @@ class PushServiceBase(Modules, ConfigFile):
 			if controller:
 				# Check if no error is logged
 				if (cnterr == 0):
-					print "controller.callback()"
+					print("controller.callback()")
 					controller.callback()
 				else:
 					controller.errback()
-					print "controller.errback()"
+					print("controller.errback()")

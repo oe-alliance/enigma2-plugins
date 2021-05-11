@@ -1,10 +1,12 @@
+from __future__ import absolute_import
+from __future__ import print_function
 # l10n
 from . import _
 
 # GUI (Screens)
 from Screens.WizardLanguage import WizardLanguage
 from Screens.Rc import Rc
-from AutoTimerEditor import AutoTimerEditorBase, AutoTimerServiceEditor, \
+from .AutoTimerEditor import AutoTimerEditorBase, AutoTimerServiceEditor, \
 		AutoTimerFilterEditor
 
 # GUI (Components)

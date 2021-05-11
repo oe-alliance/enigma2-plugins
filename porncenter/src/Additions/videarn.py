@@ -1,7 +1,9 @@
+from __future__ import print_function
+from __future__ import absolute_import
 # videarn plugin by AliAbdul
-from Plugin import Movie, Plugin
+from .Plugin import Movie, Plugin
 import re
-import urllib2
+from six.moves.urllib.request import urlopen
 
 ##################################################
 
@@ -12,7 +14,7 @@ class VidearnMovie(Movie):
 
 	def getVideoUrl(self):
 		try:
-			data = urllib2.urlopen(self.url).read()
+			data = urlopen(self.url).read()
 		except:
 			data = ""
 		reonecat = re.compile(r"<source src='(.+?)' type='video/mp4;'>")
@@ -52,7 +54,7 @@ class VidearnSub(Plugin):
 
 	def getPageError(self, error=None):
 		if error and self.currPage == 1:
-			print "[%s] Error: %s" % (self.name, error)
+			print("[%s] Error: %s" % (self.name, error))
 		else:
 			self.moreEntries = False
 
@@ -81,7 +83,7 @@ class Videarn(Plugin):
 
 	def getPageError(self, error=None):
 		if error:
-			print "[%s] Error: %s" % (self.name, error)
+			print("[%s] Error: %s" % (self.name, error))
 
 ##################################################
 

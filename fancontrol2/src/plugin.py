@@ -1,12 +1,14 @@
+from __future__ import print_function
+from __future__ import absolute_import
 # FanControl2
 # joergm6 IHAD
 # PID-controller by Lukasz S.
 
 import time
 import os
-from __init__ import _
+from .__init__ import _
 
-from globals import *
+from .globals import *
 
 from enigma import eTimer, eSize
 
@@ -19,7 +21,7 @@ from Components.Sources.Progress import Progress
 
 # Startup/shutdown notification
 from Tools import Notifications
-from Sensors import sensors
+from .Sensors import sensors
 from time import gmtime, strftime
 import datetime
 
@@ -40,10 +42,12 @@ from Components.ActionMap import NumberActionMap
 from Components.Harddisk import harddiskmanager
 
 from threading import Thread, Lock
-import Queue
-Briefkasten = Queue.Queue()
+Briefkasten = queue.Queue()
 
 from boxbranding import getBoxType, getImageDistro
+
+
+from six.moves import queue, range
 
 
 def main(session, **kwargs):
@@ -76,7 +80,7 @@ def skal(x, x1, x2, y1, y2):
 
 def FClog(wert):
 	if config.plugins.FanControl.EnableConsoleLog.value:
-		print "[FanControl2]", wert
+		print("[FanControl2]", wert)
 	while len(FC2Log) > config.plugins.FanControl.LogCount.value:
 		del FC2Log[5]
 	FC2Log.append(strftime("%H:%M:%S ") + wert)
@@ -595,7 +599,7 @@ class FanControl2SpezialSetup(Screen, ConfigListScreen):
 			sel = self["config"].getCurrent()[1]
 			if sel == config.plugins.FanControl.LogPath:
 				self.session.openWithCallback(self.dirSelected, LocationBox, text=_("Choose path"), filename="", currDir=self["config"].getCurrent()[1].value, minFree=50)
-		except Exception, e:
+		except Exception as e:
 			self.session.open(MessageBox, "Error:\n" + str(e), MessageBox.TYPE_ERROR)
 
 	def dirSelected(self, dir):
@@ -1086,7 +1090,7 @@ class FanControl2(Screen):
 				if Briefkasten.qsize() <= 3:
 					Briefkasten.put(1)
 				else:
-					FClog("Queue full, Thread hanging?")
+					FClog("queue full, Thread hanging?")
 			else:
 				self.queryRun()
 			if ZielRPM > 0 and AktRPM == 0:
@@ -1296,7 +1300,7 @@ def autostart(reason, **kwargs):
 	if reason == 0 and "session" in kwargs:
 		if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/__init__.pyo") or os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/__init__.py"):
 			from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
-			from FC2webSite import FC2web, FC2webLog, FC2webChart
+			from .FC2webSite import FC2web, FC2webLog, FC2webChart
 			from twisted.web import static
 			root = static.File("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data")
 #			root = FC2web()

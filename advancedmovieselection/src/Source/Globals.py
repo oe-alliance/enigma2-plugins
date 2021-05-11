@@ -19,6 +19,7 @@
 #  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
+from __future__ import print_function
 from enigma import getDesktop
 from Tools.Directories import fileExists, resolveFilename, SCOPE_HDD, SCOPE_CURRENT_SKIN, SCOPE_CURRENT_PLUGIN
 
@@ -26,9 +27,9 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_HDD, SCOPE_CURR
 def printStackTrace():
     import sys
     import traceback
-    print "--- [AdvancedMovieSelection] STACK TRACE ---"
+    print("--- [AdvancedMovieSelection] STACK TRACE ---")
     traceback.print_exc(file=sys.stdout)
-    print '-' * 50
+    print('-' * 50)
 
 
 class SkinResolutionHelper():

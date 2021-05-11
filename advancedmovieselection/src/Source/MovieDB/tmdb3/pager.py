@@ -8,6 +8,8 @@
 
 from collections import Sequence, Iterator
 
+from six.moves import range
+
 
 class PagedIterator(Iterator):
     def __init__(self, parent):
@@ -30,10 +32,10 @@ class UnpagedData(object):
         return self.__class__()
 
     def __mul__(self, other):
-        return (self.copy() for a in range(other))
+        return (self.copy() for a in list(range(other)))
 
     def __rmul__(self, other):
-        return (self.copy() for a in range(other))
+        return (self.copy() for a in list(range(other)))
 
 
 class PagedList(Sequence):
@@ -61,7 +63,7 @@ class PagedList(Sequence):
 
     def __getitem__(self, index):
         if isinstance(index, slice):
-            return [self[x] for x in xrange(*index.indices(len(self)))]
+            return [self[x] for x in list(range(*index.indices(len(self))))]
         if index >= len(self):
             raise IndexError("list index outside range")
         if (index >= len(self._data)) \

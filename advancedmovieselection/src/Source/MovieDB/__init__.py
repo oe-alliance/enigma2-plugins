@@ -1,5 +1,6 @@
+from __future__ import print_function
 import os
-import urllib
+from six.moves.urllib.request import urlretrieve
 #from ..StopWatch import clockit
 
 #@clockit
@@ -8,15 +9,15 @@ import urllib
 def downloadCover(url, filename, overwrite=False):
     try:
         if not os.path.exists(filename) or overwrite:
-            print "Try loading: ", str(url), "->", str(filename)
-            urllib.urlretrieve(url, filename)
+            print("Try loading: ", str(url), "->", str(filename))
+            urlretrieve(url, filename)
         else:
-            print "Download skipped:", str(url), "->", str(filename)
+            print("Download skipped:", str(url), "->", str(filename))
     except:
         import sys
         import traceback
-        print '-' * 50
+        print('-' * 50)
         traceback.print_exc(file=sys.stdout)
-        print '-' * 50
+        print('-' * 50)
         return False
     return True

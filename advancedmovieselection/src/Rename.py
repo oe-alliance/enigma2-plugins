@@ -20,19 +20,21 @@
 #  distributed other than under the conditions noted above.
 #
 # for localized messages
-from __init__ import _
+from __future__ import print_function
+from __future__ import absolute_import
+from .__init__ import _
 from Screens.Screen import Screen
 from Components.config import ConfigText, getConfigListEntry
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from enigma import eServiceReference, iServiceInformation, ePoint
-from Source.ServiceProvider import ServiceCenter, eServiceReferenceVDir
+from .Source.ServiceProvider import ServiceCenter, eServiceReferenceVDir
 import os
 from Components.Label import Label
 from Components.Pixmap import Pixmap
-from Source.MovieConfig import MovieConfig
-from Source.Globals import SkinTools, printStackTrace
+from .Source.MovieConfig import MovieConfig
+from .Source.Globals import SkinTools, printStackTrace
 
 
 class MovieRetitle(Screen, ConfigListScreen):
@@ -197,7 +199,7 @@ class MovieRetitle(Screen, ConfigListScreen):
                 for index, item in enumerate(self.movieConfig.rename):
                     i = item.split("\t")
                     if i[0] == dir_name:
-                        print dir_name + "\t" + name
+                        print(dir_name + "\t" + name)
                         del self.movieConfig.rename[index]
             else:
                 for index, item in enumerate(self.movieConfig.rename):

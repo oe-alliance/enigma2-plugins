@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # by betonme @2012
 
+from __future__ import absolute_import
 import re
 
 import os
@@ -21,7 +22,7 @@ from enigma import eServiceReference, iServiceInformation, eServiceCenter, ePyth
 from ServiceReference import ServiceReference
 
 # Plugin framework
-from Modules import Modules
+from .Modules import Modules
 
 # Tools
 from Tools.BoundFunction import boundFunction
@@ -30,11 +31,15 @@ from Tools.Notifications import AddPopup
 from Screens.MessageBox import MessageBox
 
 # Plugin internal
-from Logger import log
-from Channels import ChannelsBase
-from XMLTVBase import XMLTVBase
-from ThreadQueue import ThreadQueue
+from .Logger import log
+from .Channels import ChannelsBase
+from .XMLTVBase import XMLTVBase
+from .ThreadQueue import ThreadQueue
 from threading import Thread, currentThread, _get_ident
+
+import six
+
+
 #from enigma import ePythonMessagePump
 
 
@@ -70,7 +75,7 @@ def getInstance():
 
 		log.reinit()
 
-		from plugin import VERSION
+		from .plugin import VERSION
 
 		log.debug(" SERIESPLUGIN NEW INSTANCE " + VERSION)
 		log.debug(" ", strftime("%a, %d %b %Y %H:%M:%S", localtime()))
@@ -97,7 +102,7 @@ def getInstance():
 			sys.exc_clear()
 
 		try:
-			for key, value in config.plugins.seriesplugin.dict().iteritems():
+			for key, value in six.iteritems(config.plugins.seriesplugin.dict()):
 				log.debug(" config..%s = %s" % (key, str(value.value)))
 		except Exception as e:
 			sys.exc_clear()
@@ -160,7 +165,7 @@ def resetInstance():
 		instance.stop()
 		instance = None
 
-	from Cacher import clearCache
+	from .Cacher import clearCache
 	clearCache()
 
 
@@ -327,7 +332,7 @@ class SeriesPluginWorker(Thread):
 				result = item.identifier.getEpisode(
 					item.name, item.begin, item.end, item.service
 				)
-			except Exception, e:
+			except Exception as e:
 				log.debug("Worker: Exception:", str(e))
 
 				# Exception finish job with error
@@ -426,7 +431,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 		elif future:
 			identifier = self.identifier_future
 		else:
-			identifier = self.modules and self.instantiateModule(self.modules.itervalues().next())
+			identifier = self.modules and self.instantiateModule(next(six.itervalues(self.modules)))
 
 		if not identifier:
 			msg = _("No identifier available") + "\n\n" + _("Please check Your installation")
@@ -466,7 +471,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 
 				try:
 					result = identifier.getEpisode(name, begin, end, serviceref)
-				except Exception, e:
+				except Exception as e:
 					log.exception("Worker:", str(e))
 
 					# Exception finish job with error
@@ -490,7 +495,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 		if (config.plugins.seriesplugin.lookup_counter.value == 10) \
 			or (config.plugins.seriesplugin.lookup_counter.value == 100) \
 			or (config.plugins.seriesplugin.lookup_counter.value % 1000 == 0):
-			from plugin import ABOUT
+			from .plugin import ABOUT
 			about = ABOUT.format(**{'lookups': config.plugins.seriesplugin.lookup_counter.value})
 			AddPopup(
 				about,

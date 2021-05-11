@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 IMDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2020-06-07 16:07+0200\n"
 "Last-Translator: \n"
 "Language-Team: Danskholdet <dk-translation@pm.me>\n"
@@ -29,6 +29,9 @@ msgstr "Afbryd"
 
 msgid "Cast: "
 msgstr "Rolleliste: "
+
+msgid "Channel Selection"
+msgstr "Kanalvalg"
 
 msgid "Content:"
 msgstr "Indhold:"
@@ -110,6 +113,9 @@ msgstr "Søg i IMDb"
 msgid "IMDb setup"
 msgstr "IMDb opsætning"
 
+msgid "Lookup"
+msgstr "Slå op"
+
 msgid "Menu"
 msgstr "Menu"
 
@@ -174,6 +180,9 @@ msgstr "Søg i Forfilm"
 
 msgid "Search for details from the Internet Movie Database"
 msgstr "Søg efter detaljer i Internet Film Databasen"
+
+msgid "Select from EPG"
+msgstr "Vælg fra EPG"
 
 msgid "Settings for Internet Movie Database searches"
 msgstr "Indstillinger for Internet Film Database søgninger"

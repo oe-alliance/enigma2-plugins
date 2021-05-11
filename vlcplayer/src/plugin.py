@@ -9,11 +9,13 @@
 # version.
 #===============================================================================
 
+from __future__ import print_function
+from __future__ import absolute_import
 from . import _
 from Plugins.Plugin import PluginDescriptor
-from VlcServerList import VlcServerListScreen
-from VlcMediaList import VlcMediaListScreen
-from VlcServerConfig import vlcServerConfig
+from .VlcServerList import VlcServerListScreen
+from .VlcMediaList import VlcMediaListScreen
+from .VlcServerConfig import vlcServerConfig
 from Screens.MessageBox import MessageBox
 import array
 import struct
@@ -28,7 +30,7 @@ testOK = False
 
 class __VlcManager():
 	def __init__(self, session):
-		print "[VLC] VlcManager"
+		print("[VLC] VlcManager")
 		self.session = session
 		self.testThread = None
 		self.testTime = 2.0
@@ -43,7 +45,7 @@ class __VlcManager():
 			self.openMedialist(defaultServer)
 
 	def openServerlist(self):
-		print "[VLC] openServerlist"
+		print("[VLC] openServerlist")
 		defaultServer = vlcServerConfig.getDefaultServer()
 		self.session.openWithCallback(self.serverlistClosed, VlcServerListScreen, defaultServer)
 
@@ -52,7 +54,7 @@ class __VlcManager():
 		self.openMedialist(selectedServer)
 
 	def openMedialist(self, selectedServer):
-		print "[VLC] openMedialist"
+		print("[VLC] openMedialist")
 		if selectedServer is not None:
 			if selectedServer.getPingIp():
 				global testOK
@@ -93,10 +95,10 @@ class __VlcManager():
 		bytelen = struct.unpack('iL', fcntl.ioctl(sck.fileno(), SIOCGIFCONF, struct.pack('iL', BYTES, names.buffer_info()[0])))[0]
 		sck.close()
 		namestr = names.tostring()
-		return [namestr[i:i + 32].split('\0', 1)[0] for i in range(0, bytelen, 32)]
+		return [namestr[i:i + 32].split('\0', 1)[0] for i in list(range(0, bytelen, 32))]
 
 	def medialistClosed(self, proceed=False):
-		print "[VLC] medialistClosed"
+		print("[VLC] medialistClosed")
 		if proceed:
 			self.openServerlist()
 

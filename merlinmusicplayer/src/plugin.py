@@ -21,6 +21,7 @@
 #  distributed other than under the conditions noted above.
 
 # for localized messages
+from __future__ import print_function
 from . import _
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
@@ -40,7 +41,7 @@ from Screens.InfoBar import InfoBar
 from Components.GUIComponent import GUIComponent
 from enigma import ePicLoad
 from xml.etree.cElementTree import fromstring as cet_fromstring
-from urllib import quote
+from six.moves.urllib.parse import quote
 from urlparse import urlparse
 from Components.ScrollLabel import ScrollLabel
 from Components.AVSwitch import AVSwitch
@@ -78,6 +79,7 @@ from Screens.EpgSelection import EPGSelection
 from Screens.EventView import EventViewEPGSelect
 from enigma import ePoint, eEPGCache
 from Screens.InfoBarGenerics import NumberZap
+import six
 try:
 	from Plugins.SystemPlugins.PiPServiceRelation.plugin import getRelationDict, CONFIG_FILE
 	plugin_PiPServiceRelation_installed = True
@@ -379,11 +381,11 @@ def OpenDatabase():
 		try:
 			connection = sqlite.connect(connectstring)
 			if not os_access(connectstring, os_W_OK):
-				print "[MerlinMusicPlayer] Error: database file needs to be writable, can not open %s for writing..." % connectstring
+				print("[MerlinMusicPlayer] Error: database file needs to be writable, can not open %s for writing..." % connectstring)
 				connection.close()
 				return None
 		except:
-			print "[MerlinMusicPlayer] unable to open database file: %s" % connectstring
+			print("[MerlinMusicPlayer] unable to open database file: %s" % connectstring)
 			return None
 		if not db_exists:
 				connection.execute('CREATE TABLE IF NOT EXISTS Songs (song_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, filename TEXT NOT NULL UNIQUE, title TEXT, artist_id INTEGER, album_id INTEGER, genre_id INTEGER, tracknumber INTEGER, bitrate INTEGER, length TEXT, track TEXT, date TEXT, lyrics TEXT);')
@@ -544,7 +546,7 @@ class MerlinMusicPlayerScreenSaver(Screen):
 		self.summaries.setText(text, line)
 
 	def updateCover(self, filename=None, modus=0):
-		print "[MerlinMusicPlayerScreenSaver] updating coverart with filename = %s and modus = %d" % (filename, modus)
+		print("[MerlinMusicPlayerScreenSaver] updating coverart with filename = %s and modus = %d" % (filename, modus))
 		if modus == 0:
 			if filename:
 				self["coverArt"].showCoverFromFile(filename)
@@ -1295,7 +1297,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 	def googleImageCallback(self, artist, album, title, imgsize, result):
 		urls = re.findall("unescapedUrl\":\"(.*?)\",\"url\":\"", result)
 		if (len(urls) == 0):
-			print "[MerlinMusicPlayer] No medium images found. Search for all images"
+			print("[MerlinMusicPlayer] No medium images found. Search for all images")
 			getGoogleCover(artist, album, title, "")
 			return
 		self.coverDownload(urls, album, title)
@@ -1311,17 +1313,17 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			self.currentGoogleCoverFile = filename
 			filename = self.googleDownloadDir + filename
 			if os_path.exists(filename):
-				print "[MerlinMusicPlayer] using cover from %s " % filename
+				print("[MerlinMusicPlayer] using cover from %s " % filename)
 				self["coverArt"].showCoverFromFile(filename)
 				if self.screenSaverScreen:
 					self.screenSaverScreen.updateCover(filename=filename, modus=4)
 			else:
 				urls.pop(0)
-				print "[MerlinMusicPlayer] downloading cover from %s " % url
-				downloadPage(url, filename).addCallback(boundFunction(self.coverDownloadFinished, filename)).addErrback(boundFunction(self.coverDownloadFailed, urls, album, title))
+				print("[MerlinMusicPlayer] downloading cover from %s " % url)
+				downloadPage(six.ensure_binary(url), filename).addCallback(boundFunction(self.coverDownloadFinished, filename)).addErrback(boundFunction(self.coverDownloadFailed, urls, album, title))
 
 	def coverDownloadFailed(self, urls, album, title, result):
-		print "[MerlinMusicPlayer] cover download failed: %s " % result
+		print("[MerlinMusicPlayer] cover download failed: %s " % result)
 		if (len(urls) > 0):
 			self.coverDownload(urls, album, title)
 			return
@@ -1330,7 +1332,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			self.screenSaverScreen.updateCover(modus=1)
 
 	def coverDownloadFinished(self, filename, result):
-		print "[MerlinMusicPlayer] cover download finished"
+		print("[MerlinMusicPlayer] cover download finished")
 		self["coverArt"].showCoverFromFile(filename)
 		if self.screenSaverScreen:
 			self.screenSaverScreen.updateCover(filename=filename, modus=4)
@@ -1338,13 +1340,13 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 	def __evAudioDecodeError(self):
 		currPlay = self.session.nav.getCurrentService()
 		sAudioType = currPlay.info().getInfoString(iServiceInformation.sUser + 10)
-		print "[MerlinMusicPlayer] audio-codec %s can't be decoded by hardware" % (sAudioType)
+		print("[MerlinMusicPlayer] audio-codec %s can't be decoded by hardware" % (sAudioType))
 		self.session.open(MessageBox, _("This Receiver can't decode %s streams!") % sAudioType, type=MessageBox.TYPE_INFO, timeout=20)
 
 	def __evPluginError(self):
 		currPlay = self.session.nav.getCurrentService()
 		message = currPlay.info().getInfoString(iServiceInformation.sUser + 12)
-		print "[MerlinMusicPlayer]", message
+		print("[MerlinMusicPlayer]", message)
 		self.session.open(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=20)
 
 	def doEofInternal(self, playing):
@@ -1585,7 +1587,7 @@ class MerlinMusicPlayerLyrics(Screen):
 
 	def getLyricsFromID3Tag(self, tag):
 		if tag:
-			for frame in tag.values():
+			for frame in list(tag.values()):
 				if frame.FrameID == "USLT":
 					return frame.text
 		url = "http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist=%s&song=%s" % (quote(self.currentSong.artist), quote(self.currentSong.title))
@@ -2786,7 +2788,7 @@ class MerlinMediaPixmap(Pixmap):
 		if self.coverArtFileName != new_coverArtFileName:
 			if new_coverArtFileName:
 				self.coverArtFileName = new_coverArtFileName
-				print "[MerlinMusicPlayer] using cover from %s " % self.coverArtFileName
+				print("[MerlinMusicPlayer] using cover from %s " % self.coverArtFileName)
 				self.picload.startDecode(self.coverArtFileName)
 				back = True
 		else:
@@ -2803,7 +2805,7 @@ class MerlinMediaPixmap(Pixmap):
 		self.picload.startDecode(self.coverArtFileName)
 
 	def embeddedCoverArt(self):
-		print "[embeddedCoverArt] found"
+		print("[embeddedCoverArt] found")
 		self.coverArtFileName = "/tmp/.id3coverart"
 		self.picload.startDecode(self.coverArtFileName)
 
@@ -3250,7 +3252,7 @@ class MerlinMusicPlayerFileList(Screen):
 			count = 0
 			index = 0
 			currentFilename = self["list"].getFilename()
- 			if currentFilename.lower().endswith(".m3u"):
+			if currentFilename.lower().endswith(".m3u"):
 				SongList = self.readM3U(os_path.join(self["list"].getCurrentDirectory(), currentFilename))
 			elif currentFilename.lower().endswith(".pls"):
 				SongList = self.readPLS(os_path.join(self["list"].getCurrentDirectory(), currentFilename))

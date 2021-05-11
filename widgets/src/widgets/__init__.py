@@ -1,3 +1,4 @@
+from __future__ import print_function
 from os import listdir
 from os.path import isdir, isfile
 from os.path import abspath, splitext
@@ -6,7 +7,7 @@ from xml.etree.cElementTree import parse
 
 
 def importSingleWidget(session, widgetdir):
-    print "importing widget from", widgetdir
+    print("importing widget from", widgetdir)
     widgetname = widgetdir.split("/")[-1]
     module_name, ext = splitext(widgetname + ".widget.py") # Handles no-extension files, etc.
     if ext == '.py' and module_name != "__init__":
@@ -19,11 +20,11 @@ def importSingleWidget(session, widgetdir):
             skin = parse(widgetdir + "/" + "widget_skin.xml").getroot()
             return widgetname, w, skin, widgetdir, module_name
 
-        except (ImportError, IOError), e:
-            print 'Could NOT import widget: %s' % (module_name)
-            print 'Exception Caught\n%s' % e
+        except (ImportError, IOError) as e:
+            print('Could NOT import widget: %s' % (module_name))
+            print('Exception Caught\n%s' % e)
     return False
-    print "#" * 20
+    print("#" * 20)
 
 
 def importWidgets(session,):
@@ -37,6 +38,6 @@ def importWidgets(session,):
                 if w is not None:
                     widgets.append(w)
             else:
-                print "found NO widget.py", abs_path + "/widget.py"
+                print("found NO widget.py", abs_path + "/widget.py")
                 continue
     return widgets

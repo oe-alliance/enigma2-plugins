@@ -12,6 +12,9 @@ import os
 import re
 import glob
 
+import six
+
+
 PROC_TCP = "/proc/net/tcp"
 STATE = {
 		'01': 'ESTABLISHED',
@@ -60,7 +63,7 @@ def netstat(getstate=None, getuid=True, getpid=True, readable=True):
 	To get pid of all network process running on system, you must run this script
 	as superuser
 	'''
-	getstate = [key for key, value in STATE.iteritems() if value == getstate]
+	getstate = [key for key, value in six.iteritems(STATE) if value == getstate]
 	if getstate:
 		getstate = getstate[0]
 

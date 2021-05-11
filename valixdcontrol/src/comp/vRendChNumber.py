@@ -48,7 +48,7 @@ class vRendChNumber(Renderer, VariableText):
 				serviceHandler = eServiceCenter.getInstance()
 				mySSS = serviceHandler.list(myRoot)
 				SRVList = mySSS and mySSS.getContent("SN", True)
-				for i in range(len(SRVList)):
+				for i in list(range(len(SRVList))):
 					if chx == i:
 						break
 					testlinet = SRVList[i]

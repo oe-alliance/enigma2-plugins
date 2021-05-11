@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 # for localized messages
+from __future__ import absolute_import
 from . import _
 
 # GUI (Screens)
@@ -1382,9 +1383,9 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 
 
 def addAutotimerFromSearchString(session, match):
-	from AutoTimerComponent import preferredAutoTimerComponent
-	from AutoTimerImporter import AutoTimerImporter
-	from plugin import autotimer
+	from .AutoTimerComponent import preferredAutoTimerComponent
+	from .AutoTimerImporter import AutoTimerImporter
+	from .plugin import autotimer
 
 	autotimer.readXml()
 
@@ -1411,9 +1412,9 @@ def addAutotimerFromSearchString(session, match):
 
 
 def addAutotimerFromEvent(session, evt=None, service=None):
-	from AutoTimerComponent import preferredAutoTimerComponent
-	from AutoTimerImporter import AutoTimerImporter
-	from plugin import autotimer
+	from .AutoTimerComponent import preferredAutoTimerComponent
+	from .AutoTimerImporter import AutoTimerImporter
+	from .plugin import autotimer
 
 	autotimer.readXml()
 
@@ -1464,9 +1465,9 @@ def addAutotimerFromEvent(session, evt=None, service=None):
 
 
 def addAutotimerFromService(session, service=None):
-	from AutoTimerComponent import preferredAutoTimerComponent
-	from AutoTimerImporter import AutoTimerImporter
-	from plugin import autotimer
+	from .AutoTimerComponent import preferredAutoTimerComponent
+	from .AutoTimerImporter import AutoTimerImporter
+	from .plugin import autotimer
 
 	autotimer.readXml()
 
@@ -1535,7 +1536,7 @@ def importerCallback(ret):
 
 
 def addAutotimerFromEventSilent(session, evt=None, service=None):
-	from plugin import autotimer
+	from .plugin import autotimer
 
 	autotimer.readXml()
 
@@ -1588,7 +1589,7 @@ def addAutotimerFromEventSilent(session, evt=None, service=None):
 
 def editorCallback(ret):
 	if ret:
-		from plugin import autotimer
+		from .plugin import autotimer
 
 		autotimer.readXml()
 

@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
 from twisted.web import resource, http
-from globals import *
-from plugin import *
-from Sensors import sensors
-from __init__ import _
+from .globals import *
+from .plugin import *
+from .Sensors import sensors
+from .__init__ import _
 from Components.config import configfile, config
 
 import os
@@ -15,7 +16,7 @@ import datetime
 class FC2web(resource.Resource):
 
 	title = "FanControl2 Webinterface"
- 	isLeaf = False
+	isLeaf = False
 
 	def render(self, req):
 		req.setHeader('Content-type', 'text/html')
@@ -47,7 +48,7 @@ class FC2web(resource.Resource):
 		html += "<a href=\"/fancontrol/log\"><img border=\"0\" src=\"/fancontrol/FC2Setup.png\" width=\"100\" height=\"40\"></a></td></tr></table>\n"
 		html += "<table border=\"1\" width=\"500\" id=\"table1\">\n"
 		html += "<tr>\n"
-		html += "<td>%s: <b><font color=\"#FFCC00\">%4.1f °C</font></b></td>\n" % (_("Temperature"), FC2werte[0])
+		html += "<td>%s: <b><font color=\"#FFCC00\">%4.1f Â°C</font></b></td>\n" % (_("Temperature"), FC2werte[0])
 		html += "<td>%s: <font color=\"#FFCC00\"><b>%4d rpm</b></font></td>\n" % (_("Speed"), FC2werte[1])
 		html += "<td>%s: <font color=\"#FFCC00\"><b>%03d</b></font></td>\n" % (_("Voltage"), FC2werte[2])
 		html += "<td>PWM: <font color=\"#FFCC00\"><b>%03d</b></font></td>\n" % FC2werte[3]
@@ -56,10 +57,10 @@ class FC2web(resource.Resource):
 
 		html += "<table border=\"1\" width=\"500\">\n"
 		html += "<tr>\n"
-		html += "<td>%s °C</td>\n" % _("Sensors")
+		html += "<td>%s Â°C</td>\n" % _("Sensors")
 		templist = sensors.getSensorsList(sensors.TYPE_TEMPERATURE)
 		tempcount = len(templist)
-		for count in range(tempcount):
+		for count in list(range(tempcount)):
 			if sensors.getSensorName(count) == "undefined":
 				N = TempName[count]
 			else:
@@ -72,11 +73,11 @@ class FC2web(resource.Resource):
 
 		html += "<table border=\"1\" width=\"500\">\n"
 		html += "<tr>\n"
-		for count in range(0, 12):
+		for count in list(range(0, 12)):
 			tmp = ("<BR>-" if FC2stunde[count] == "-" else FC2stunde[count])
 			html += "<td><p align=\"center\"><font size=\"1\">%02d:00<br><font color=\"#FFCC00\">%s</font></font></td>\n" % (count, tmp)
 		html += "</tr><tr>\n"
-		for count in range(12, 24):
+		for count in list(range(12, 24)):
 			tmp = ("<BR>-" if FC2stunde[count] == "-" else FC2stunde[count])
 			html += "<td><p align=\"center\"><font size=\"1\">%02d:00<br><font color=\"#FFCC00\">%s</font></font></td>\n" % (count, tmp)
 		html += "</tr></table>\n"
@@ -101,7 +102,7 @@ class FC2web(resource.Resource):
 		html += "<table border=\"1\" width=\"500\">\n"
 		html += "<tr>\n"
 		html += "<td>Version: %s </td>\n" % Version
-		html += "<td>Settings: %s-%s °C</td>\n" % (config.plugins.FanControl.temp.value, config.plugins.FanControl.tempmax.value)
+		html += "<td>Settings: %s-%s Â°C</td>\n" % (config.plugins.FanControl.temp.value, config.plugins.FanControl.tempmax.value)
 		html += "<td>%s-%s rpm</td>\n" % (config.plugins.FanControl.minRPM.value, config.plugins.FanControl.maxRPM.value)
 		html += "</tr>\n"
 		html += "</table>\n"

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import absolute_import
 from . import _
 from RecordTimer import RecordTimerEntry, RecordTimer
 from Screens.TimerEntry import TimerEntry
@@ -105,7 +106,7 @@ def new_RecordTimer_loadTimer(self, *args, **kwargs):
 			for xml in xmlroot.findall("timer"):
 				begin = xml.get("begin")
 				end = xml.get("end")
-				serviceref = xml.get("serviceref").encode("utf-8")
+				serviceref = xml.get("serviceref")
 
 				vps_timers[serviceref + begin + end] = {}
 				vps_overwrite = xml.get("vps_overwrite")

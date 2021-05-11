@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
@@ -10,13 +11,14 @@ from Components.MenuList import MenuList
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import *
 from Components.Console import Console
-from __init__ import _
+from .__init__ import _
 from os import mkdir
+import six
 mcpath = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/"
 #try:
 #	from enigma import evfd
-#except Exception, e:
-#	print "Media Center: Import evfd failed"
+#except Exception as e:
+#	print("Media Center: Import evfd failed")
 
 
 class MC_Settings(Screen):
@@ -69,6 +71,7 @@ class MC_Settings(Screen):
 			self.close()
 
 	def checkNetworkState(self, str, retval, extra_args):
+		result = six.ensure_str(result)
 		if str.find('Collected errors') != -1:
 			self.session.openWithCallback(self.close, MessageBox, _("A background update check is is progress, please wait a few minutes and try again."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 		elif not str:
@@ -81,6 +84,7 @@ class MC_Settings(Screen):
 			self.close()
 
 	def checkNetworkStateFinished(self, result, retval, extra_args=None):
+		result = six.ensure_str(result)
 		if result.find('bad address') != -1:
 			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Your %s %s is not connected to the internet, please check your network settings and try again.") % (getMachineBrand(), getMachineName()), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 		elif result.find('wget returned 1') != -1 or result.find('wget returned 255') != -1 or result.find('404 Not Found') != -1:

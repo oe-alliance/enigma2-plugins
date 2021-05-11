@@ -8,11 +8,12 @@
 
 You will find these useful if you're adding a new protocol to IM.
 """
+from __future__ import absolute_import
 
 # Abstract representation of chat "model" classes
 
-from locals import ONLINE, OFFLINE, OfflineError
-import interfaces
+from .locals import ONLINE, OFFLINE, OfflineError
+from . import interfaces
 
 from twisted.internet.protocol import Protocol
 
@@ -20,8 +21,8 @@ from twisted.python.reflect import prefixedMethods
 from twisted.persisted import styles
 
 from twisted.internet import error
-import dreamIRCTools
-from dreamIRCTools import *
+from . import dreamIRCTools
+from .dreamIRCTools import *
 
 
 class AbstractGroup:
@@ -107,7 +108,7 @@ class AbstractClientMixin:
                 break
         else:
             pass
-        from dreamIRCTools import MessagePipe
+        from .dreamIRCTools import MessagePipe
         self.pipe = MessagePipe()
         self.account = account
         self.chat = chatui

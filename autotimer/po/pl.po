@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AutoTimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2019-09-08 13:26+0100\n"
 "Last-Translator: pololoko\n"
 "Language-Team: \n"
@@ -410,6 +410,10 @@ msgid "If this is selected, the name of the respective AutoTimer will be added a
 msgstr "Jeśli ta opcja jest zaznaczona, nazwa odpowiedniego AutoTimera zostanie dodana jako znacznik do timerów utworzonych przez tę wtyczkę."
 
 msgid "If this is selected, the tag \"AutoTimer\" will be given to timers created by this plugin."
+msgstr "Jeśli ta opcja jest zaznaczona, znacznik „AutoTimer” zostanie przekazany licznikom utworzonym przez tę wtyczkę."
+
+#, fuzzy
+msgid "If this is selected, the tag 'AutoTimer' will be given to timers created by this plugin."
 msgstr "Jeśli ta opcja jest zaznaczona, znacznik „AutoTimer” zostanie przekazany licznikom utworzonym przez tę wtyczkę."
 
 msgid "Import AutoTimer"
@@ -834,6 +838,12 @@ msgstr "Jest to głównie kwestia gustu./nKreator zapewnia ci ograniczony zestaw
 msgid "This is the delay in %s that the AutoTimer will wait after doing a search before searching the EPG again."
 msgstr "Jest to opóźnienie w godzinach, w którym AutoTimer będzie czekać po wyszukiwaniu, aby ponownie wyszukać EPG."
 
+msgid "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
+msgstr "Jest to opóźnienie w minutach, przez które AutoTimer będzie czekać po wyszukiwaniu, aby ponownie wyszukać EPG."
+
+msgid "This is the delay in minutes that the AutoTimer will wait on initial launch to not delay enigma2 startup time."
+msgstr "Jest to opóźnienie w minutach, przez które AutoTimer będzie czekać przy pierwszym uruchomieniu, aby nie opóźniać czasu uruchamiania enigma2."
+
 msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
 msgstr "Tego będzie szukać w tytułach wydarzeń. Pamiętaj, że szukasz np. niemieckie umlauty mogą być trudne, ponieważ musisz znać kodowanie używane przez kanał."
 
@@ -875,6 +885,9 @@ msgstr "Wt"
 
 msgid "Tuesday"
 msgstr "Wtorek"
+
+msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
+msgstr "O ile ta opcja nie jest włączona, AutoTimer NIE będzie automatycznie wyszukiwał zdarzeń pasujących do Twoich AutoTimerów, ale tylko wtedy, gdy wyjdziesz z GUI z zielonym przyciskiem."
 
 msgid "Upper bound of timespan."
 msgstr "Górna granica okresu."
@@ -925,6 +938,10 @@ msgid "What is this 'control menu' you keep talking about?"
 msgstr "O czym jest to „menu sterowania”, o którym ciągle mówisz?"
 
 msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
+msgstr "Podczas obsługi „Szybkiego skanowania” typ usługi jest ignorowany. Nie musisz tego włączać, chyba że obraz obsługuje „Szybkie skanowanie” i używasz go."
+
+#, fuzzy
+msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr "Podczas obsługi „Szybkiego skanowania” typ usługi jest ignorowany. Nie musisz tego włączać, chyba że obraz obsługuje „Szybkie skanowanie” i używasz go."
 
 msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."

@@ -19,13 +19,15 @@
 #  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
-from __init__ import _
+from __future__ import print_function
+from __future__ import absolute_import
+from .__init__ import _
 from Plugins.Plugin import PluginDescriptor
 from Screens.InfoBar import InfoBar
 from Components.config import config
-from AdvancedMovieSelectionSetup import AdvancedMovieSelectionSetup
-from TagEditor import TagEditor
-from Source.Config import initializeConfig
+from .AdvancedMovieSelectionSetup import AdvancedMovieSelectionSetup
+from .TagEditor import TagEditor
+from .Source.Config import initializeConfig
 
 initializeConfig()
 
@@ -35,7 +37,7 @@ def sessionstart(reason, **kwargs):
         session = kwargs["session"]
         if not config.AdvancedMovieSelection.ml_disable.value:
             try:
-                from MoviePlayer import showMovies
+                from .MoviePlayer import showMovies
                 value = config.AdvancedMovieSelection.movie_launch.value
                 if value == "showMovies":
                     InfoBar.showMovies = showMovies
@@ -45,38 +47,38 @@ def sessionstart(reason, **kwargs):
                     InfoBar.showRadio = showMovies
                 elif value == "timeshiftStart":
                     InfoBar.startTimeshift = showMovies
-                from Wastebasket import createWasteTimer
+                from .Wastebasket import createWasteTimer
                 createWasteTimer(session)
-                from Source.Remote.MessageServer import serverInstance
+                from .Source.Remote.MessageServer import serverInstance
                 if config.AdvancedMovieSelection.server_enabled.value:
                     serverInstance.setPort(config.AdvancedMovieSelection.server_port.value)
                     serverInstance.start()
                     serverInstance.setSearchRange(config.AdvancedMovieSelection.start_search_ip.value, config.AdvancedMovieSelection.stop_search_ip.value)
                     serverInstance.startScanForClients()
 
-                from Source.EpgListExtension import epgListExtension
+                from .Source.EpgListExtension import epgListExtension
                 epgListExtension.setEnabled(config.AdvancedMovieSelection.epg_extension.value)
 
-                from Source.MovieScanner import movieScanner
+                from .Source.MovieScanner import movieScanner
                 movieScanner.setEnabled(True)
             except:
-                print '-' * 50
+                print('-' * 50)
                 import traceback
                 import sys
                 traceback.print_exc(file=sys.stdout)
-                print '-' * 50
+                print('-' * 50)
 
 
 def pluginOpen(session, **kwargs):
-    from MoviePlayer import initPlayerChoice
+    from .MoviePlayer import initPlayerChoice
     initPlayerChoice(session)
-    from MovieSelection import MovieSelection
-    from MoviePlayer import playerChoice
+    from .MovieSelection import MovieSelection
+    from .MoviePlayer import playerChoice
     session.openWithCallback(playerChoice.playService, MovieSelection)
 
 
 def openProgress(session, **kwargs):
-    from MoveCopy import MoveCopyProgress
+    from .MoveCopy import MoveCopyProgress
     session.open(MoveCopyProgress)
 
 
@@ -102,8 +104,8 @@ def tmdbInfo(session, eventName="", **kwargs):
         if eventName:
             from SearchTMDb import TMDbMain
             session.open(TMDbMain, eventName)
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
 
 
 def tvdbInfo(session, eventName="", **kwargs):
@@ -118,8 +120,8 @@ def tvdbInfo(session, eventName="", **kwargs):
         if eventName:
             from SearchTVDb import TheTVDBMain
             session.open(TheTVDBMain, None, eventName, shortdescr)
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
 
 
 def Plugins(**kwargs):
@@ -131,9 +133,9 @@ def Plugins(**kwargs):
             from Screens.MovieSelection import setPreferredTagEditor
             setPreferredTagEditor(TagEditor)
         if not config.AdvancedMovieSelection.ml_disable.value and config.AdvancedMovieSelection.useseekbar.value:
-            from Seekbar import Seekbar
-    except Exception, e:
-        print e
+            from .Seekbar import Seekbar
+    except Exception as e:
+        print(e)
 
     descriptors = []
     if not config.AdvancedMovieSelection.ml_disable.value:

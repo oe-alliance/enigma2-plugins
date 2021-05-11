@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os
 import gettext
+
+from six.moves import reduce
+from functools import reduce
+
 
 __version__ = "1.6.6"
 
@@ -17,18 +22,18 @@ def localeInit():
 def _(txt):
 	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		t = gettext.gettext(txt)
 	return t
 
 
 def bin2long(s):
-	return reduce(lambda x, y: (x << 8L) + y, map(ord, s))
+	return reduce(lambda x, y: (x << 8) + y, list(map(ord, s)))
 
 
 def long2bin(l):
 	res = ""
-	for byte in range(128):
+	for byte in list(range(128)):
 		res += chr((l >> (1024 - (byte + 1) * 8)) & 0xff)
 	return res
 

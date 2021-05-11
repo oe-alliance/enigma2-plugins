@@ -19,12 +19,14 @@
 #  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
-from __init__ import _
+from __future__ import print_function
+from __future__ import absolute_import
+from .__init__ import _
 from Tools.Directories import fileExists
 from Screens.Screen import Screen
 from Screens.InputBox import InputBox
 from Screens.ChoiceBox import ChoiceBox
-from MessageBoxEx import MessageBox as MessageBoxEx
+from .MessageBoxEx import MessageBox as MessageBoxEx
 from Components.config import config
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
@@ -33,9 +35,9 @@ from enigma import eServiceReference, iServiceInformation
 from os import path as os_path
 from Screens.Console import eConsoleAppContainer
 from Screens.TimerEntry import TimerEntry
-from Source.ServiceProvider import ServiceCenter
+from .Source.ServiceProvider import ServiceCenter
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN, SCOPE_CONFIG
-from Source.Globals import SkinTools
+from .Source.Globals import SkinTools
 
 
 class TagEditor(Screen):
@@ -168,7 +170,7 @@ class TagEditor(Screen):
                 list = serviceHandler.list(root)
                 if list is None:
                     continue
-                while 1:
+                while True:
                     serviceref = list.getNext()
                     if not serviceref.valid():
                         break
@@ -183,7 +185,7 @@ class TagEditor(Screen):
                     func(serviceref, tags)
 
     def getTagDescription(self, tag):
-        from Source.AccessRestriction import VSR
+        from .Source.AccessRestriction import VSR
         if tag in VSR:
             return _(tag)
         return tag
@@ -325,7 +327,7 @@ class MovieTagEditor(TagEditor):
     def saveTags(self, file, tags):
         try:
             meta_file = file + ".ts.meta"
-            print "saveTags", meta_file
+            print("saveTags", meta_file)
             if os_path.exists(meta_file):
                 metafile = open(meta_file, "r")
                 sid = metafile.readline().strip("\r\n")
@@ -341,7 +343,7 @@ class MovieTagEditor(TagEditor):
                     metafile.write("%s\n%s\n%s\n%s\n%s\n%s" % (sid, title, descr, time, tags, rest))
                     metafile.close()
         except:
-            from Source.Globals import printStackTrace
+            from .Source.Globals import printStackTrace
             printStackTrace()
 
     def cancel(self):

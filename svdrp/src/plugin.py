@@ -1,6 +1,7 @@
+from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 
-from SVDRP import SimpleVDRProtocolAbstraction
+from .SVDRP import SimpleVDRProtocolAbstraction
 
 connection = None
 

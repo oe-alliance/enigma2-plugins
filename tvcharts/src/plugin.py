@@ -1,3 +1,4 @@
+from __future__ import print_function
 #####################################################
 # TVCharts Plugin for Enigma2 Dreamboxes
 # Coded by Homey (c) 2011
@@ -36,8 +37,8 @@ from os import system as os_system
 from time import time, gmtime, strftime
 from twisted.web.client import getPage
 from xml.dom.minidom import parse, parseString
-from urllib import urlencode
-
+from six.moves.urllib.parse import urlencode
+import six
 import timer
 import xml.etree.cElementTree
 import Screens.Standby
@@ -177,7 +178,7 @@ class TVChartsMain(Screen):
 			else:
 				self.session.open(MessageBox, "Sorry, no EPG Info available for this event", type=MessageBox.TYPE_ERROR, timeout=10)
 		elif self.mode == "moviecharts":
-			print "[TVCharts] ToDo: Show Movie Info here ..."
+			print("[TVCharts] ToDo: Show Movie Info here ...")
 			return
 
 	def addTimerCallback(self, answer):
@@ -192,7 +193,7 @@ class TVChartsMain(Screen):
 				if simulTimerList is not None:
 					self.session.openWithCallback(self.finishSanityCorrection, TimerSanityConflict, simulTimerList)
 		else:
-			print "Timeredit aborted"
+			print("Timeredit aborted")
 
 	def finishSanityCorrection(self, answer):
 		self.addTimerCallback(answer)
@@ -241,7 +242,7 @@ class TVChartsMain(Screen):
 					self.eventcache.append((eventinfo[0], eventinfo[7], eventinfo[8], eventinfo[4]))
 
 		except Exception:
-			print "[TVCharts Plugin] Error creating eventcache!"
+			print("[TVCharts Plugin] Error creating eventcache!")
 
 	def switchToTVCharts(self):
 		self.mode = "tvcharts"
@@ -267,12 +268,12 @@ class TVChartsMain(Screen):
 	def downloadList(self):
 		if config.plugins.tvcharts.enabled.value:
 			self["info"].setText("Downloading feeds from server ...")
-			getPage(self.feedurl).addCallback(self.downloadListCallback).addErrback(self.downloadListError)
+			getPage(six.ensure_binary(self.feedurl)).addCallback(self.downloadListCallback).addErrback(self.downloadListError)
 		else:
 			self["info"].setText("Error: Plugin disabled in Settings ...")
 
 	def downloadListError(self, error=""):
-		print str(error)
+		print(str(error))
 		self.session.open(MessageBox, "Error downloading Feed:\n%s" % str(error), type=MessageBox.TYPE_ERROR)
 		self["info"].setText("Error downloading Feed!")
 
@@ -501,7 +502,7 @@ class DBUpdateStatus(Screen):
 				self.DBStatusTimer.stop()
 
 	def updateStatus(self):
-		print "[TVCharts] Status Update ..."
+		print("[TVCharts] Status Update ...")
 		self.DBStatusTimer.stop()
 
 		if not config.plugins.tvcharts.enabled.value or Screens.Standby.inStandby:
@@ -554,7 +555,7 @@ class DBUpdateStatus(Screen):
 					if timer.disabled == 0 and timer.justplay == 0:
 						self.timerlist += "%s|%s|%s|%s|%s|%s|%s\n" % (timer.eit, str(int(timer.begin) + (config.recording.margin_before.getValue() * 60)), str(int(timer.end) - (config.recording.margin_after.getValue() * 60)), str(timer.service_ref), timer.name, timer.service_ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8"), timer.repeated)
 			except Exception:
-				print "[TVCharts] Error loading timers!"
+				print("[TVCharts] Error loading timers!")
 
 		# Get Pluginlist
 		if config.plugins.tvcharts.submitplugins.value and self.pluginlist == "":
@@ -564,10 +565,10 @@ class DBUpdateStatus(Screen):
 					self.pluginlist += plugin[0:plugin.find(' - ')] + "\n"
 				os_system("rm -f /tmp/plugins.txt")
 			except Exception:
-				print "[TVCharts] Error loading plugins!"
+				print("[TVCharts] Error loading plugins!")
 
 		# Status Update
-		getPage(url='http://www.dreambox-plugins.de/feeds/TVCharts/status.php', agent="Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)", timeout=60, method='POST', headers={'Content-Type': 'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid': self.BoxID, 'devicename': self.DeviceName, 'imageversion': self.ImageVersion, 'enigmaversion': self.EnigmaVersion, 'lastchannel': channel_name, 'lastevent': event_name, 'eventdescr': event_description, 'lastbegin': event_begin, 'lastserviceref': self.serviceref, 'timerlist': self.timerlist, 'pluginlist': self.pluginlist})).addErrback(self.updateError)
+		getPage(url=b'http://www.dreambox-plugins.de/feeds/TVCharts/status.php', agent="Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)", timeout=60, method='POST', headers={'Content-Type': 'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid': self.BoxID, 'devicename': self.DeviceName, 'imageversion': self.ImageVersion, 'enigmaversion': self.EnigmaVersion, 'lastchannel': channel_name, 'lastevent': event_name, 'eventdescr': event_description, 'lastbegin': event_begin, 'lastserviceref': self.serviceref, 'timerlist': self.timerlist, 'pluginlist': self.pluginlist})).addErrback(self.updateError)
 
 		# Restart Timer
 		self.DBStatusTimer.start(900000, True)

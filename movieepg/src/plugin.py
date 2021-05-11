@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
 
@@ -147,7 +148,7 @@ MoviePlayer.close = MoviePlayer_close
 
 
 def main(session):
-	from MovieEpgSetup import MovieEpgSetup
+	from .MovieEpgSetup import MovieEpgSetup
 	session.open(MovieEpgSetup)
 
 

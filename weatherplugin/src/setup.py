@@ -21,6 +21,7 @@
 #
 
 # for localized messages
+from __future__ import print_function
 from . import _
 
 from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, \
@@ -35,7 +36,8 @@ from Components.config import ConfigSubsection, ConfigText, ConfigSelection, \
 	getConfigListEntry, config, configfile
 from xml.etree.cElementTree import fromstring as cet_fromstring
 from twisted.web.client import getPage
-from urllib import quote as urllib_quote
+from six.moves.urllib.parse import quote as urllib_quote
+import six
 
 from enigma import RT_HALIGN_RIGHT
 from skin import parameters as skinparameter
@@ -234,7 +236,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 			elif language == "no-NO": # hack
 				language = "nn-NO"
 			url = "http://weather.service.msn.com/find.aspx?src=windows&outputview=search&weasearchstr=%s&culture=%s" % (urllib_quote(self.current.city.value), language)
-			getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
+			getPage(six.ensure_binary(url)).addCallback(self.xmlCallback).addErrback(self.error)
 		else:
 			self.session.open(MessageBox, _("You need to enter a valid city name before you can search for the location code."), MessageBox.TYPE_ERROR)
 
@@ -301,7 +303,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 			root = cet_fromstring(xmlstring)
 			for childs in root:
 				if childs.tag == "weather" and "errormessage" in childs.attrib:
-					errormessage = childs.attrib.get("errormessage").encode("utf-8", 'ignore')
+					errormessage = six.ensure_str(childs.attrib.get("errormessage"), errors='ignore')
 					break
 			if len(errormessage) != 0:
 				self.session.open(MessageBox, errormessage, MessageBox.TYPE_ERROR)
@@ -310,7 +312,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 
 	def error(self, error=None):
 		if error is not None:
-			print error
+			print(error)
 
 	def searchCallback(self, result):
 		if result:
@@ -384,9 +386,9 @@ class MSNWeatherPluginSearchResultList(MenuList):
 		list = []
 		for childs in root:
 			if childs.tag == "weather":
-				searchlocation = childs.attrib.get("weatherlocationname").encode("utf-8", 'ignore')
-				searchresult = childs.attrib.get("weatherfullname").encode("utf-8", 'ignore')
-				weatherlocationcode = childs.attrib.get("weatherlocationcode").encode("utf-8", 'ignore')
+				searchlocation = six.ensure_str(childs.attrib.get("weatherlocationname"), errors='ignore')
+				searchresult = six.ensure_str(childs.attrib.get("weatherfullname"), errors='ignore')
+				weatherlocationcode = six.ensure_str(childs.attrib.get("weatherlocationcode"), errors='ignore')
 
 				x1, y1, w1, h1 = skinparameter.get("WeatherPluginSearchlocation", (5, 0, 500, 20))
 				x2, y2, w2, h2 = skinparameter.get("WeatherPluginSearchresult", (5, 22, 500, 20))

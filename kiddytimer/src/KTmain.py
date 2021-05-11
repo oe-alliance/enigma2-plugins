@@ -1,6 +1,8 @@
+from __future__ import print_function
+from __future__ import absolute_import
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
-from KTMultiPixmap import KTmultiPixmap
+from .KTMultiPixmap import KTmultiPixmap
 from Components.config import config, configfile
 from Components.Pixmap import Pixmap
 from Screens.ChoiceBox import ChoiceBox
@@ -14,8 +16,8 @@ from Tools import Notifications
 from Tools.Directories import resolveFilename, SCOPE_CONFIG
 from enigma import ePoint, eTimer, eDVBLocalTimeHandler
 
-from __init__ import _
-import KTglob
+from .__init__ import _
+from . import KTglob
 import NavigationInstance
 import time
 
@@ -183,7 +185,7 @@ class KiddyTimer():
         self.dialog = None
 
     def resetTimer(self, **kwargs):
-        if "setTime" in kwargs.keys():
+        if "setTime" in list(kwargs.keys()):
             self.setCurrentDayTime(kwargs["setTime"])
         else:
             self.setCurrentDayTime()
@@ -215,14 +217,14 @@ class KiddyTimer():
             iMonitorStart += 86400
 
         iObserveTimerStep = (iMonitorStart - iPluginStart) * 1000 + 1000
-        print "[KiddyTimer] setting plugin idle for ms=", iObserveTimerStep
+        print("[KiddyTimer] setting plugin idle for ms=", iObserveTimerStep)
         self.observeTimer.start(iObserveTimerStep, False)
 
     def stopObserve(self):
         self.observeTimer.stop()
 
     def observeTime(self):
-        print "[KiddyTimer] Observer checking if plugin has to run"
+        print("[KiddyTimer] Observer checking if plugin has to run")
         if (self.timerHasToRun()):
             self.stopObserve()
             self.startTimer()

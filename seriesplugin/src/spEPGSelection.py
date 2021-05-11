@@ -1,4 +1,6 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
+from __future__ import print_function
+from __future__ import absolute_import
 import os
 import sys
 import traceback
@@ -9,7 +11,7 @@ from . import _
 from Components.config import config
 
 # Plugin internal
-from Logger import log
+from .Logger import log
 
 
 #######################################################
@@ -19,7 +21,7 @@ EPGSelection_enterDateTime = None
 
 
 def SPEPGSelectionInit():
-	print "[SeriesPlugin] override EPGSelection"
+	print("[SeriesPlugin] override EPGSelection")
 	global EPGSelection_enterDateTime #, EPGSelection_openOutdatedEPGSelection
 	if EPGSelection_enterDateTime is None: # and EPGSelection_openOutdatedEPGSelection is None:
 		from Screens.EpgSelection import EPGSelection
@@ -31,7 +33,7 @@ def SPEPGSelectionInit():
 
 
 def SPEPGSelectionUndo():
-	print "[SeriesPlugin] undo override EPGSelection"
+	print("[SeriesPlugin] undo override EPGSelection")
 	global EPGSelection_enterDateTime #, EPGSelection_openOutdatedEPGSelection
 	if EPGSelection_enterDateTime: # and EPGSelection_openOutdatedEPGSelection:
 		from Screens.EpgSelection import EPGSelection

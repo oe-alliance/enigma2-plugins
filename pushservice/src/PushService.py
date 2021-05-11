@@ -1,3 +1,5 @@
+from __future__ import print_function
+from __future__ import absolute_import
 #######################################################################
 #
 #    Push Service for Enigma-2
@@ -28,11 +30,11 @@ from Tools.BoundFunction import boundFunction
 
 # Plugin internal
 from . import _
-from PushServiceBase import PushServiceBase
+from .PushServiceBase import PushServiceBase
 
 
 # States
-(PSBOOT, PSBOOTRUN, PSFIRST, PSFIRSTRUN, PSCYCLE) = range(5)
+(PSBOOT, PSBOOTRUN, PSFIRST, PSFIRSTRUN, PSCYCLE) = list(range(5))
 #MABE use an enum http://stackoverflow.com/questions/36932/whats-the-best-way-to-implement-an-enum-in-python
 
 
@@ -57,14 +59,14 @@ class PushService(PushServiceBase):
 	# Statemachine and timer
 
 	def start(self):
-		print "PushService start"
+		print("PushService start")
 		self.stopTimer()
 
 		self.begin()
-		self.next()
+		next(self)
 
 	def stop(self):
-		print "PushService stop"
+		print("PushService stop")
 		self.stopTimer()
 
 		self.end()
@@ -73,7 +75,7 @@ class PushService(PushServiceBase):
 	def next(self, state=None):
 		if state:
 			self.state = state
-		print "PushService next", self.state
+		print("PushService next", self.state)
 
 		if self.state == PSBOOT:
 			self.startTimer(int(config.pushservice.bootdelay.value), PSBOOTRUN)
@@ -95,7 +97,7 @@ class PushService(PushServiceBase):
 
 	def do(self):
 		self.run()
-		self.next()
+		next(self)
 
 	def startTimer(self, seconds, state=None):
 		if state:

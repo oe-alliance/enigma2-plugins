@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2012-03-16 13:20+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -427,6 +427,9 @@ msgstr ""
 msgid "If this is selected, the tag \"AutoTimer\" will be given to timers created by this plugin."
 msgstr ""
 
+msgid "If this is selected, the tag 'AutoTimer' will be given to timers created by this plugin."
+msgstr ""
+
 msgid "Import AutoTimer"
 msgstr "Import AutoTimer"
 
@@ -840,6 +843,13 @@ msgstr "This is mostly a matter of taste./nThe Wizard provides you with a reduce
 msgid "This is the delay in %s that the AutoTimer will wait after doing a search before searching the EPG again."
 msgstr "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
 
+msgid "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
+msgstr "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
+
+#, fuzzy
+msgid "This is the delay in minutes that the AutoTimer will wait on initial launch to not delay enigma2 startup time."
+msgstr "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
+
 msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
 msgstr "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
 
@@ -883,6 +893,9 @@ msgstr "Tuesday"
 
 msgid "Tuesday"
 msgstr "Tuesday"
+
+msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
+msgstr "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
 
 msgid "Upper bound of timespan."
 msgstr "Upper bound of timespan."
@@ -935,6 +948,10 @@ msgid "What is this 'control menu' you keep talking about?"
 msgstr "What is this 'control menu' you keep talking about?"
 
 msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
+msgstr "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
+
+#, fuzzy
+msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
 
 msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."

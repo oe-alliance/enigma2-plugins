@@ -1,3 +1,5 @@
+from __future__ import print_function
+from __future__ import absolute_import
 from Screens.Screen import Screen
 from Screens.ServiceInfo import ServiceInfoList, ServiceInfoListEntry
 from enigma import iPlayableService, eRect, eServiceReference, iServiceInformation
@@ -10,8 +12,8 @@ from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import *
 from Screens.InfoBar import MoviePlayer as OrgMoviePlayer
 from Tools.Directories import resolveFilename, pathExists, fileExists, SCOPE_MEDIA
-from MC_Filelist import FileList
-from GlobalFunctions import shortname, MC_VideoInfoView, Showiframe
+from .MC_Filelist import FileList
+from .GlobalFunctions import shortname, MC_VideoInfoView, Showiframe
 import re
 import os
 config.plugins.mc_vp = ConfigSubsection()
@@ -130,7 +132,7 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 
 	def KeyOk(self):
 		self.filename = self.filelist.getFilename()
-		print self.filename
+		print(self.filename)
 		try:
 			if self.filename.endswith('.img') or self.filename.endswith('.iso') or self.filename.endswith('VIDEO_TS/') and config.plugins.mc_vp.dvd.value == "dvd":
 				self.showiframe.finishStillPicture()
@@ -141,8 +143,8 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 					path = self.filename
 				self.session.open(DVD.DVDPlayer, dvd_filelist=[path])
 				return
-		except Exception, e:
-			print "DVD Player error:", e
+		except Exception as e:
+			print("DVD Player error:", e)
 		if self.filelist.canDescent():
 			self.filelist.descent()
 		else:

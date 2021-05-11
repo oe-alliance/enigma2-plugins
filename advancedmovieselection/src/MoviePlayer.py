@@ -20,15 +20,17 @@
 #  distributed other than under the conditions noted above.
 #
 
+from __future__ import print_function
+from __future__ import absolute_import
 import Screens.Standby
-from __init__ import _
+from .__init__ import _
 from Components.config import config
 from Screens.Screen import Screen
 from Components.ActionMap import HelpableActionMap
-from MovieSelection import MovieSelection, getBeginTimeString, getDateString
-from MovieList import eServiceReferenceDvd
-from Source.ServiceProvider import ServiceCenter, eServiceReferenceBludisc
-from Source.CueSheetSupport import DVDCutListSupport, CutListSupport
+from .MovieSelection import MovieSelection, getBeginTimeString, getDateString
+from .MovieList import eServiceReferenceDvd
+from .Source.ServiceProvider import ServiceCenter, eServiceReferenceBludisc
+from .Source.CueSheetSupport import DVDCutListSupport, CutListSupport
 from Screens.MessageBox import MessageBox
 from Screens.InfoBar import MoviePlayer
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, fileExists
@@ -37,12 +39,12 @@ from Tools import Notifications
 from Components.Sources.ServiceEvent import ServiceEvent
 #from ServiceProvider import ServiceEvent
 from Components.Sources.StaticText import StaticText
-from MoviePreview import MoviePreview
+from .MoviePreview import MoviePreview
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.ServiceEventTracker import ServiceEventTracker
-from Source.Globals import pluginPresent
-from Version import __version__
+from .Source.Globals import pluginPresent
+from .Version import __version__
 
 playerChoice = None
 if fileExists("/etc/grautec/dm8000/tft_dm8000.ko"):
@@ -66,7 +68,7 @@ def showMovies(self):
     self.lastservice = self.session.nav.getCurrentlyPlayingServiceReference()
     self.session.openWithCallback(playerChoice.playService, MovieSelection)
     if config.AdvancedMovieSelection.version.value != __version__:
-        from About import AboutDetails
+        from .About import AboutDetails
         self.session.open(AboutDetails)
         config.AdvancedMovieSelection.version.value = __version__
         config.AdvancedMovieSelection.version.save()
@@ -89,12 +91,12 @@ class MoviePlayerExtended_summary(Screen):
         self["Title"].setText(title)
 
     def showSeperator(self):
-		self["Seperator1"].show()
-		self["Seperator2"].show()
+        self["Seperator1"].show()
+        self["Seperator2"].show()
 
     def hideSeperator(self):
-		self["Seperator1"].hide()
-		self["Seperator2"].hide()
+        self["Seperator1"].hide()
+        self["Seperator2"].hide()
 
 
 class SelectionEventInfo:
@@ -150,14 +152,14 @@ class PlayerBase(MoviePreview, SelectionEventInfo):
 
     def __evServiceEnd(self):
         if not self.is_closing and not self.new_service_started:
-            print "Close on timer switch!!!"
+            print("Close on timer switch!!!")
             self.close()
 
     def openServiceList(self):
         pass
 
     def openInfoView(self):
-        from AdvancedMovieSelectionEventView import EventViewSimple
+        from .AdvancedMovieSelectionEventView import EventViewSimple
         serviceref = self.session.nav.getCurrentlyPlayingServiceReference()
         info = ServiceCenter.getInstance().info(serviceref)
         evt = info.getEvent(serviceref)
@@ -393,7 +395,7 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
             self.endless_loop = not self.endless_loop
 
     def delete(self, service):
-        from Source.Trashcan import Trashcan
+        from .Source.Trashcan import Trashcan
         if config.AdvancedMovieSelection.use_wastebasket.value:
             Trashcan.trash(service.getPath())
         else:
@@ -441,7 +443,7 @@ if pluginPresent.DVDPlayer:
                     #else
                     if self.service:
                         self.service = None
-                    from MovieSelection import MovieSelection
+                    from .MovieSelection import MovieSelection
                     ref = self.session.nav.getCurrentlyPlayingServiceReference()
                     self.session.openWithCallback(self.newServiceSelected, MovieSelection, ref, True)
                     return
@@ -460,7 +462,7 @@ if pluginPresent.DVDPlayer:
 if pluginPresent.BludiscPlayer:
     from Plugins.Extensions.BludiscPlayer.plugin import BludiscPlayer as eBludiscPlayer, BludiscMenu as eBludiscMenu
     from enigma import eServiceReference
-    from Source.CueSheetSupport import BludiscCutListSupport
+    from .Source.CueSheetSupport import BludiscCutListSupport
 
     class BludiscPlayer(BludiscCutListSupport, eBludiscPlayer):
         def __init__(self, session, service, file_name, is_main_movie):
@@ -499,7 +501,7 @@ if pluginPresent.BludiscPlayer:
             return index
 
         def ok(self):
-            if type(self["menu"].getCurrent()) is type(None):
+            if isinstance(self["menu"].getCurrent(), type(None)):
                 self.exit()
                 return
             name = self["menu"].getCurrent()[0]
@@ -507,12 +509,12 @@ if pluginPresent.BludiscPlayer:
             newref = eServiceReference(0x04, 0, "%s:%03d" % (self.bd_mountpoint, idx))
             newref.setData(1, 1)
             newref.setName("Bludisc title %d" % idx)
-            print "[Bludisc] playService: ", name, newref.toString()
+            print("[Bludisc] playService: ", name, newref.toString())
             main_movie = idx == self.getMainMovieIndex()
             self.session.openWithCallback(self.moviefinished, BludiscPlayer, newref, self.file_name, main_movie)
 
         def exit(self):
-            from Source.ISOInfo import ISOInfo
+            from .Source.ISOInfo import ISOInfo
             ISOInfo().umount()
             self.close()
 
@@ -525,7 +527,7 @@ class PlayerChoice():
 
     def getBestPlayableService(self, service):
         if isinstance(service, eServiceReferenceDvd) and service.isIsoImage():
-            from Source.ISOInfo import ISOInfo
+            from .Source.ISOInfo import ISOInfo
             iso = ISOInfo()
             if iso.getFormatISO9660(service) != ISOInfo.DVD:
                 iso_format = iso.getFormat(service)

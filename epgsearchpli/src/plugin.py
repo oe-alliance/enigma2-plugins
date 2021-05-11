@@ -1,10 +1,11 @@
+from __future__ import absolute_import
 # for localized messages
 from . import _
 from enigma import eServiceCenter
 from Screens.EpgSelection import EPGSelection
 from Components.EpgList import EPG_TYPE_SINGLE, EPG_TYPE_MULTI
 from Components.ActionMap import ActionMap
-from EPGSearch import EPGSearch, EPGSearchEPGSelection
+from .EPGSearch import EPGSearch, EPGSearchEPGSelection
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
 from Components.config import config

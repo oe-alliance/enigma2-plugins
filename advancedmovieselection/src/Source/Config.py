@@ -20,10 +20,12 @@
 #  distributed other than under the conditions noted above.
 #
 
-from LocaleInit import _
+from __future__ import print_function
+from __future__ import absolute_import
+from .LocaleInit import _
 from Tools.Directories import resolveFilename, SCOPE_HDD
 from Components.config import config, ConfigSubsection, ConfigText, ConfigYesNo, ConfigInteger, ConfigSelection, ConfigClock, ConfigLocations, ConfigBoolean
-from Globals import printStackTrace
+from .Globals import printStackTrace
 
 # configurations from enigma2 /Components/UsageConfig.py !!!don't edit default values from source!!!
 config.usage.load_length_of_movies_in_moviellist = ConfigYesNo(default=True)
@@ -124,7 +126,7 @@ config.AdvancedMovieSelection.showpreview = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.showrename = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.description = ConfigYesNo(default=True)
 poster_sizes = (u'w92', u'w154', u'w185', u'w342', u'w500', u'original')
-from MovieDB.tmdb import poster_sizes, setPosterSize
+from .MovieDB.tmdb import poster_sizes, setPosterSize
 poster_choices = [
                   (poster_sizes[0], _("Thumb (92x138)")),
                   (poster_sizes[2], _("Cover (185x278)")),
@@ -154,7 +156,7 @@ config.AdvancedMovieSelection.empty_wastebasket_time = ConfigClock(default=10800
 config.AdvancedMovieSelection.empty_wastebasket_min_age = ConfigInteger(default=0, limits=(0, 999))
 config.AdvancedMovieSelection.last_auto_empty_wastebasket = ConfigInteger(default=0)
 config.AdvancedMovieSelection.next_auto_empty_wastebasket = ConfigInteger(default=0)
-config.AdvancedMovieSelection.next_empty_check = ConfigInteger(default=30, limits=(01, 60))
+config.AdvancedMovieSelection.next_empty_check = ConfigInteger(default=30, limits=(0o1, 60))
 config.AdvancedMovieSelection.show_update_genre = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.show_begintime = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.show_date_shortdesc = ConfigYesNo(default=False)
@@ -231,12 +233,12 @@ class QuickButtons():
 
     def updateOldVersion(self):
         try:
-            print "update older config version"
+            print("update older config version")
             self.setFunction('red', config.AdvancedMovieSelection.red.value)
             self.setFunction('green', config.AdvancedMovieSelection.green.value)
             self.setFunction('yellow', config.AdvancedMovieSelection.yellow.value)
             self.setFunction('blue', config.AdvancedMovieSelection.blue.value)
-            print self.qlist
+            print(self.qlist)
         except:
             printStackTrace()
 
@@ -253,13 +255,13 @@ BACKUP_FILE_NAME = "AMS.settings.backup"
 
 
 def getChanges(config_entry, changes):
-    print "get changes for:", config_entry
+    print("get changes for:", config_entry)
     entry = config.content.items[config_entry]
     for item in entry.dict():
         conf = entry.__getattr__(item)
         if conf.default != conf.value:
             txt = "config.%s.%s=%s" % (config_entry, item, conf.saved_value)
-            print txt
+            print(txt)
             changes.append(txt)
 
 
@@ -270,7 +272,7 @@ def createBackup(path="/media/hdd/"):
 
     import os
     file_name = os.path.join(path, BACKUP_FILE_NAME)
-    print "create backup", file_name
+    print("create backup", file_name)
     try:
         backup = open(file_name, 'wb')
         backup.write("\n".join(changes))
@@ -282,14 +284,14 @@ def createBackup(path="/media/hdd/"):
 
 
 def loadBackup(file_name):
-    print "load backup", file_name
+    print("load backup", file_name)
     backup = open(file_name, 'rb')
     for line in backup.readlines():
         try:
             config_entry = line.split(".")[1]
             config_item = line.split(".")[2].split("=")[0]
             value = line.split("=")[-1].strip()
-            print config_entry, config_item, value
+            print(config_entry, config_item, value)
             entry = config.content.items[config_entry]
             conf = entry.__getattr__(config_item)
             conf.saved_value = conf._value = value

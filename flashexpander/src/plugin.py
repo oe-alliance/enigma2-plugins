@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
-from locale import _
+from .locale import _
 
 
 def main(session, **kwargs):
-	from flashexpander import FlashExpander
+	from .flashexpander import FlashExpander
 	session.open(FlashExpander)
 
 

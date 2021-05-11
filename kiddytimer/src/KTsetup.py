@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Button import Button
 from Components.ConfigList import ConfigListScreen
@@ -5,16 +6,16 @@ from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
 from Components.config import config, configfile, getConfigListEntry
-from KTmain import kiddyTimer
-from KTMultiPixmap import KTmultiPixmap
-from MovableScreen import MovableScreen
+from .KTmain import kiddyTimer
+from .KTMultiPixmap import KTmultiPixmap
+from .MovableScreen import MovableScreen
 from Screens.InputBox import PinInput
 from Screens.MessageBox import MessageBox
 from Screens.ParentalControlSetup import ProtectedScreen
 from Screens.Screen import Screen
 from Tools import Notifications
-from __init__ import _
-import KTglob
+from .__init__ import _
+from . import KTglob
 import time
 
 
@@ -57,7 +58,7 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
             getConfigListEntry(_("Style of timer"), config.plugins.KiddyTimer.timerStyle),
             getConfigListEntry(_("Timeout for activation dialog"), config.plugins.KiddyTimer.activationDialogTimeout)
             ]
-        for i in range(0, 7):
+        for i in list(range(0, 7)):
             self.list.append(getConfigListEntry(KTglob.DAYNAMES[i], config.plugins.KiddyTimer.dayTimes[i].timeValue))
 
         ConfigListScreen.__init__(self, self.list)

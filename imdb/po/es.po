@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2018-02-20 19:52+0100\n"
 "Last-Translator: VillaK <soporte@openplus.es>\n"
 "Language-Team: \n"
@@ -32,6 +32,9 @@ msgstr "Cancelar"
 
 msgid "Cast: "
 msgstr "Casting: "
+
+msgid "Channel Selection"
+msgstr "Selección de canal"
 
 msgid "Content:"
 msgstr "Contenido:"
@@ -118,6 +121,9 @@ msgstr "No hay resultados de IMDb."
 msgid "IMDb setup"
 msgstr "IMDb Configuración"
 
+msgid "Lookup"
+msgstr "Buscar"
+
 #, fuzzy
 msgid "Menu"
 msgstr "IMDb Menú"
@@ -184,6 +190,9 @@ msgstr "Buscar Trailer"
 #, fuzzy
 msgid "Search for details from the Internet Movie Database"
 msgstr "Detalles de la consulta de la base de datos de películas en Internet"
+
+msgid "Select from EPG"
+msgstr "Seleccionar desde epg"
 
 #, fuzzy
 msgid "Settings for Internet Movie Database searches"

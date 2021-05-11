@@ -1,5 +1,6 @@
+from __future__ import absolute_import
 # NaughtyAmerica plugin by AliAbdul
-from Podcast import Podcast
+from .Podcast import Podcast
 
 ##################################################
 

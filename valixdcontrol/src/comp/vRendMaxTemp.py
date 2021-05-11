@@ -41,14 +41,14 @@ class vRendMaxTemp(Renderer, VariableText):
 				try:
 					templist = sensors.getSensorsList(sensors.TYPE_TEMPERATURE)
 					tempcount = len(templist)
-					for count in range(tempcount):
+					for count in list(range(tempcount)):
 						id = templist[count]
 						tt = sensors.getSensorValue(id)
 						if tt > maxtemp:
 							maxtemp = tt
 				except:
 					pass
-				self.text = str(maxtemp) + "°C"
+				self.text = str(maxtemp) + "Â°C"
 			else:
 				loada = 0
 				try:

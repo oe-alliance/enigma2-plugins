@@ -40,6 +40,7 @@ Further Example:
   The main function of this file is a sample which downloads a page and
   then uploads it to the W3C validator.
 """
+from __future__ import print_function
 
 import urllib
 import urllib2
@@ -47,7 +48,8 @@ import mimetools
 import mimetypes
 import os
 import stat
-from cStringIO import StringIO
+
+from six.moves import cStringIO as StringIO
 
 
 class Callable:
@@ -65,18 +67,18 @@ class MultipartPostHandler(urllib2.BaseHandler):
 
     def http_request(self, request):
         data = request.get_data()
-        if data is not None and type(data) != str:
+        if data is not None and not isinstance(data, str):
             v_files = []
             v_vars = []
             try:
-                 for(key, value) in data.items():
-                     if type(value) == file:
+                 for(key, value) in list(data.items()):
+                     if isinstance(value, file):
                          v_files.append((key, value))
                      else:
                          v_vars.append((key, value))
             except TypeError:
                 systype, value, traceback = sys.exc_info()
-                raise TypeError, "not a valid non-string sequence or mapping object", traceback
+                raise TypeError("not a valid non-string sequence or mapping object").with_traceback(traceback)
 
             if len(v_files) == 0:
                 data = urllib.urlencode(v_vars, doseq)
@@ -86,7 +88,7 @@ class MultipartPostHandler(urllib2.BaseHandler):
                 contenttype = 'multipart/form-data; boundary=%s' % boundary
                 if(request.has_header('Content-Type')
                    and request.get_header('Content-Type').find('multipart/form-data') != 0):
-                    print "Replacing %s with %s" % (request.get_header('content-type'), 'multipart/form-data')
+                    print("Replacing %s with %s" % (request.get_header('content-type'), 'multipart/form-data'))
                 request.add_unredirected_header('Content-Type', contenttype)
 
             request.add_data(data)
@@ -133,7 +135,7 @@ def main():
         params = {"ss": "0",            # show source
                    "doctype": "Inline",
                    "uploaded_file": open(temp[1], "rb")}
-        print opener.open(validatorURL, params).read()
+        print(opener.open(validatorURL, params).read())
         os.remove(temp[1])
 
     if len(sys.argv[1:]) > 0:

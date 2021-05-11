@@ -8,6 +8,7 @@
 # version.
 #===============================================================================
 
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -19,6 +20,7 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_CURRENT_PLUGIN,
 from enigma import eTimer, gFont, getDesktop, RT_HALIGN_CENTER, RT_VALIGN_CENTER
 import xml.etree.cElementTree
 import random
+from six.moves import range
 
 VERSION = "0.2r0"
 SAVEFILE = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/Schiffe/Schiffe.sav")
@@ -278,7 +280,7 @@ class Schiffe(Screen):
 						cell.setHide(False)
 						cell.paint()
 		else:
-			print "Game over, start new game!"
+			print("Game over, start new game!")
 
 	def up_pressed(self):
 		if self.Focus > XMAX - 1:
@@ -577,7 +579,7 @@ def calcNewField(field):
 
 	lx = -1
 	i = 0
-	while 1:
+	while True:
 		if i + 1 < XYMAX:
 			x = rand() % XMAX
 			y = 2 * (rand() % (YMAX / 2)) + (x % 2)

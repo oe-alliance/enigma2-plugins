@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IMDb v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2018-04-19 17:35+0200\n"
 "Last-Translator: Alec <alex1vagyok@gmail.com>\n"
 "Language-Team: alec <alex1vagyok@gmail.com>\n"
@@ -32,6 +32,9 @@ msgstr "Mégse"
 
 msgid "Cast: "
 msgstr "Szereplők: "
+
+msgid "Channel Selection"
+msgstr "Csatorna kiválasztása"
 
 msgid "Content:"
 msgstr "Tartalom:"
@@ -118,6 +121,9 @@ msgstr "Nincs IMDb egyezőség:"
 msgid "IMDb setup"
 msgstr "IMDb beállítás"
 
+msgid "Lookup"
+msgstr "Lekérdezés"
+
 #, fuzzy
 msgid "Menu"
 msgstr "IMDb bállítás"
@@ -184,6 +190,9 @@ msgstr "Filmelőzetes keresése"
 #, fuzzy
 msgid "Search for details from the Internet Movie Database"
 msgstr "A lekérdezés részletei az Internetes filmadatbázisból"
+
+msgid "Select from EPG"
+msgstr "Válasszon az EPG műsorújságból"
 
 #, fuzzy
 msgid "Settings for Internet Movie Database searches"

@@ -1,4 +1,6 @@
 # -*- coding: UTF-8 -*-
+from __future__ import print_function
+from __future__ import absolute_import
 Version = '$Header$'
 
 # things to improve:
@@ -17,16 +19,19 @@ from xml.sax.handler import ContentHandler, feature_namespaces
 from xml.sax.saxutils import escape as escape_xml
 from twisted.python import util
 from twisted.web import http, resource
-from urllib2 import quote
+from six.moves.urllib.parse import quote
 from time import time
 
 #DO NOT REMOVE THIS IMPORT
 #It IS used (dynamically)
-from WebScreens import *
+from .WebScreens import *
 #DO NOT REMOVE THIS IMPORT
 
-from __init__ import decrypt_block
+from .__init__ import decrypt_block
 from os import urandom
+
+import six
+
 
 # The classes and Function in File handle all ScreenPage-based requests
 # ScreenPages use enigma2 standard functionality to bring contents to a webfrontend
@@ -38,8 +43,6 @@ from os import urandom
 #
 # This is the Standard Element for Rendering a "standard" WebElement
 #===============================================================================
-
-
 class OneTimeElement(Element):
 	def __init__(self, id):
 		Element.__init__(self)
@@ -220,7 +223,7 @@ class SimpleListFiller(Converter):
 		list = []
 		append = list.append
 		for element in conv_args:
-			if isinstance(element, basestring):
+			if isinstance(element, six.string_types):
 				append((element, None))
 			elif isinstance(element, ListItem):
 				append((element, element.filternum))
@@ -265,7 +268,7 @@ class ListFiller(Converter):
 		lutlist = []
 		append = lutlist.append
 		for element in conv_args:
-			if isinstance(element, basestring):
+			if isinstance(element, six.string_types):
 				append((element, None))
 			elif isinstance(element, ListItem):
 				append((lut[element.name], element.filternum))
@@ -379,18 +382,18 @@ class webifHandler(ContentHandler):
 		while len(path) > 1:
 			scr = self.screen.getRelatedScreen(path[0])
 			if scr is None:
-				print "[webif.py] Parent Screen not found!"
-				print wsource
+				print("[webif.py] Parent Screen not found!")
+				print(wsource)
 			path = path[1:]
 
 		source = scr.get(path[0])
 
 		if isinstance(source, ObsoleteSource):
 			# however, if we found an "obsolete source", issue warning, and resolve the real source.
-			print "WARNING: WEBIF '%s' USES OBSOLETE SOURCE '%s', USE '%s' INSTEAD!" % (name, wsource, source.new_source)
-			print "OBSOLETE SOURCE WILL BE REMOVED %s, PLEASE UPDATE!" % (source.removal_date)
+			print("WARNING: WEBIF '%s' USES OBSOLETE SOURCE '%s', USE '%s' INSTEAD!" % (name, wsource, source.new_source))
+			print("OBSOLETE SOURCE WILL BE REMOVED %s, PLEASE UPDATE!" % (source.removal_date))
 			if source.description:
-				print source.description
+				print(source.description)
 
 			wsource = source.new_source
 		else:
@@ -463,7 +466,7 @@ class webifHandler(ContentHandler):
 	def startElement(self, name, attrs):
 		if name == "e2:screen":
 			if "external_module" in attrs:
-				exec "from " + attrs["external_module"] + " import *"
+				exec("from " + attrs["external_module"] + " import *")
 			self.screen = eval(attrs["name"])(self.session, self.request) # fixme
 			self.screens.append(self.screen)
 			return
@@ -472,7 +475,7 @@ class webifHandler(ContentHandler):
 		if n3 == "e2:":
 			self.mode += 1
 
-		tag = '<' + name + ''.join([' %s="%s"' % x for x in attrs.items()]) + '>'
+		tag = '<' + name + ''.join([' %s="%s"' % x for x in list(attrs.items())]) + '>'
 		#tag = tag.encode('utf-8')
 
 		if self.mode == 0:
@@ -528,7 +531,7 @@ class webifHandler(ContentHandler):
 			screen.execBegin()
 
 	def cleanup(self):
-		print "screen cleanup!"
+		print("screen cleanup!")
 		for screen in self.screens:
 			screen.execEnd()
 			screen.doClose()
@@ -566,7 +569,7 @@ def renderPage(request, path, session):
 				if not request._disconnected:
 					request.finish()
 				else:
-					print "[renderPage] request already finished!"
+					print("[renderPage] request already finished!")
 				return
 
 	# first, apply "commands" (aka. URL argument)
@@ -626,7 +629,7 @@ def requestFinish(handler, request, requestAlreadyFinished=False):
 			if not request._disconnected:
 				request.finish()
 			else:
-				print "[requestFinish] request already finished!"
+				print("[requestFinish] request already finished!")
 		except:
 			pass
 

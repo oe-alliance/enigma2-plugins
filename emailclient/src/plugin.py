@@ -5,6 +5,8 @@ $Revision$
 $Date$
 $Id$
 '''
+from __future__ import print_function
+from __future__ import absolute_import
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Screens.MessageBox import MessageBox
@@ -19,18 +21,20 @@ from Screens.Screen import Screen
 from Tools import Notifications
 from enigma import eListboxPythonMultiContent, gFont, eTimer #@UnresolvedImport # pylint: disable-msg=E0611
 from twisted.mail import imap4 #@UnresolvedImport
-from zope.interface import implements
+from zope.interface import implementer
 import email
 import re
 import os
 from email.header import decode_header
 import time
-from TagStrip import strip_readable
-from protocol import createFactory
+from .TagStrip import strip_readable
+from .protocol import createFactory
 
 from . import _, initLog, debug, scaleH, scaleV, DESKTOP_WIDTH, DESKTOP_HEIGHT #@UnresolvedImport # pylint: disable-msg=F0401
 mailAccounts = [] # contains all EmailAccount objects
-from EmailConfig import EmailConfigOptions, EmailConfigAccount
+from .EmailConfig import EmailConfigOptions, EmailConfigAccount
+
+from functools import reduce
 
 config.plugins.emailimap = ConfigSubsection()
 config.plugins.emailimap.showDeleted = ConfigEnableDisable(default=False)
@@ -489,7 +493,7 @@ class EmailAttachment:
 			fp = open(folder + "/" + self.getFilename(), "wb")
 			fp.write(self.data)
 			fp.close()
-		except Exception, e:
+		except Exception as e:
 			debug("[EmailAttachment] save %s" % str(e))
 			return False
 		return True
@@ -629,11 +633,11 @@ class MessageHeader(object):
 		return "<MessageHeader uid=" + str(self.uid) + ", subject=" + self.getSubject() + ">"
 
 
+@implementer(imap4.IMailboxListener)
 class EmailAccount():
 	'''
 	Principal class to hold an account.
 	'''
-	implements(imap4.IMailboxListener)
 
 	def __init__(self, params, afterInit=None):
 		'''
@@ -782,7 +786,7 @@ class EmailAccount():
 				self._proto.fetchFlags('%i:%i' % (rangeToFetch[0], rangeToFetch[1])	#'1:*'
 						   ).addCallback(self._onFlagsList, callback, rangeToFetch)
 
-			except imap4.IllegalServerResponse, e:
+			except imap4.IllegalServerResponse as e:
 				debug("[EmailAccount] _onExamine exception: " + str(e))
 				callback([], [])
 
@@ -900,9 +904,9 @@ class EmailAccount():
 		try:
 			failure.trap(imap4.NoSupportedAuthentication)
 			self._doLoginInsecure()
-		except Exception, e:
+		except Exception as e:
 			debug("[EmailAccount] %s: _onAuthenticationFailed: %s" % (self._name, e.message))
-			print e, e.message
+			print(e, e.message)
 
 	def _doLoginInsecure(self):
 		debug("[EmailAccount] %s: _doLoginInsecure" % (self._name))
@@ -1081,6 +1085,10 @@ class EmailAccountList(Screen):
 
 from Tools.Directories import resolveFilename, SCOPE_SYSETC, SCOPE_CONFIG, SCOPE_PLUGINS
 import csv
+
+from six.moves import reduce
+
+
 MAILCONF = resolveFilename(SCOPE_CONFIG, "EmailClient.csv")
 
 #

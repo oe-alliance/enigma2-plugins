@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 # ZDF Mediathek by AliAbdul
+from __future__ import print_function
 from Components.ActionMap import HelpableActionMap
 from Components.AVSwitch import AVSwitch
 from Components.Label import Label
@@ -25,10 +26,12 @@ from Tools.LoadPixmap import LoadPixmap
 from twisted.web.client import downloadPage, getPage
 import htmlentitydefs
 import re
-import urllib2
-from urllib2 import Request, URLError, urlopen as urlopen2
 from socket import error
-from httplib import HTTPConnection, HTTPException
+from six.moves.urllib.request import Request, urlopen as urlopen2
+from six.moves.http_client import HTTPConnection, HTTPException
+from six.moves.urllib.error import URLError, HTTPError
+import six
+
 
 HTTPConnection.debuglevel = 1
 
@@ -83,23 +86,23 @@ def decode(line):
 	pat = re.compile(r'\\u(....)')
 
 	def sub(mo):
-		return unichr(fromHex(mo.group(1)))
-	return pat.sub(sub, unicode(line))
+		return six.unichr(fromHex(mo.group(1)))
+	return pat.sub(sub, six.text_type(line))
 
 
 def decode2(line):
 	pat = re.compile(r'&#(\d+);')
 
 	def sub(mo):
-		return unichr(int(mo.group(1)))
-	return decode3(pat.sub(sub, unicode(line)))
+		return six.unichr(int(mo.group(1)))
+	return decode3(pat.sub(sub, six.text_type(line)))
 
 
 def decode3(line):
 	dic = htmlentitydefs.name2codepoint
-	for key in dic.keys():
+	for key in list(dic.keys()):
 		entity = "&" + key + ";"
-		line = line.replace(entity, unichr(dic[key]))
+		line = line.replace(entity, six.unichr(dic[key]))
 	return line
 
 
@@ -260,8 +263,8 @@ def getMovieUrl(url):
 	req = Request(url, None, std_headers)
 	try:
 		txt = urlopen2(req).read()
-	except (URLError, HTTPException, error), err:
-		print "[ZDFMediaThek] Error: Unable to retrieve videopage - Error code: ", str(err)
+	except (URLError, HTTPException, error) as err:
+		print("[ZDFMediaThek] Error: Unable to retrieve videopage - Error code: ", str(err))
 		return ""
 
 	if ('rtsp' in txt) and ('.mp4' in txt):
@@ -324,14 +327,14 @@ def getLeftMenu(html):
 
 def getRightMenu(html):
 	list = []
-	print "# Suche Filme..."
+	print("# Suche Filme...")
 	if '" class="play" target="_blank">Abspielen</a></li>' in html:
 		reonecat = re.compile(r'<li>(.+?) <a href="(.+?)" class="play" target="_blank">Abspielen</a></li>', re.DOTALL)
 		for speed, movie in reonecat.findall(html):
 			list.append([speed, movie])
 		if len(list):
 			return [TYPE_MOVIE, list]
-	print "# Suche podcasts..."
+	print("# Suche podcasts...")
 	if '<!-- Start:Podcasts -->' in html:
 		reonecat = re.compile(r'<!-- Start:Podcasts -->(.+?)<!-- Ende:Podcasts -->', re.DOTALL)
 		tmp = reonecat.findall(html)
@@ -342,7 +345,7 @@ def getRightMenu(html):
 				list.append([podcast[0], podcast[1]])
 		if len(list):
 			return [TYPE_PODCAST, list]
-	print "# Suche Videos und Rubriken..."
+	print("# Suche Videos und Rubriken...")
 	start = '<div class="beitragListe">'
 	if '<div class="beitragFooterSuche">' in html:
 		end = '<div class="beitragFooterSuche">'
@@ -541,8 +544,8 @@ class RightMenuList(List):
 			if not thumbUrl.startswith("http://"):
 				thumbUrl = "%s%s" % (MAIN_PAGE, thumbUrl)
 			try:
-				req = urllib2.Request(thumbUrl)
-				url_handle = urllib2.urlopen(req)
+				req = Request(thumbUrl)
+				url_handle = urlopen(req)
 				headers = url_handle.info()
 				contentType = headers.getheader("content-type")
 			except:
@@ -557,19 +560,19 @@ class RightMenuList(List):
 				elif 'image/png' in contentType:
 					thumbFile = "/tmp/" + thumbID + ".png"
 				else:
-					print "[ZDF Mediathek] Unknown thumbnail content-type:", contentType
+					print("[ZDF Mediathek] Unknown thumbnail content-type:", contentType)
 			if thumbFile is not None:
 				if (os_path.exists(thumbFile) == True): #already downloaded
 					self.downloadThumbnailCallback(None, thumbFile, thumbID)
 				else:
 					if self.png_cache.get(thumbID, None) is None:
-						downloadPage(thumbUrl, thumbFile).addCallback(self.downloadThumbnailCallback, thumbFile, thumbID).addErrback(self.downloadThumbnailError, thumbID)
+						downloadPage(six.ensure_binary(thumbUrl), thumbFile).addCallback(self.downloadThumbnailCallback, thumbFile, thumbID).addErrback(self.downloadThumbnailError, thumbID)
 					else:
 						self.updateEntry(thumbID, thumbFile)
 
 	def downloadThumbnailError(self, err, thumbID):
 		self.pixmaps_to_load.remove(thumbID)
-		print "[ZDF Mediathek] downloadThumbnailError:", thumbID, err.getErrorMessage()
+		print("[ZDF Mediathek] downloadThumbnailError:", thumbID, err.getErrorMessage())
 
 	def downloadThumbnailCallback(self, txt, thumbFile, thumbID):
 		if (os_path.exists(thumbFile) == True):
@@ -592,7 +595,7 @@ class RightMenuList(List):
 			os_remove(thumbFile)
 		idx = self.getMovieCategoryIndexByThumbID(thumbID)
 		if idx is not None:
-			print "[ZDF Mediathek] updateEntry", thumbID, thumbFile, idx
+			print("[ZDF Mediathek] updateEntry", thumbID, thumbFile, idx)
 			self.entry_changed(idx)
 
 	def SetList(self, l):
@@ -781,10 +784,10 @@ class ZDFMediathek(Screen, HelpableScreen):
 		if not page:
 			page = "/ZDFmediathek/hauptnavigation/startseite?flash=off"
 		url = "%s%s" % (MAIN_PAGE, page)
-		getPage(url).addCallback(self.gotPage).addErrback(self.error)
+		getPage(six.ensure_binary(url)).addCallback(self.gotPage).addErrback(self.error)
 
 	def error(self, err=""):
-		print "[ZDF Mediathek] Error:", err
+		print("[ZDF Mediathek] Error:", err)
 		self.working = False
 		self.deactivateCacheDialog()
 
@@ -862,7 +865,7 @@ class ZDFMediathek(Screen, HelpableScreen):
 					newurl = getMovieUrl(url)
 					if newurl:
 						url = newurl
-			print "[ZDFMediathek]->PLAY:", url
+			print("[ZDFMediathek]->PLAY:", url)
 			if url:
 				if PLAY_MP4 and url.endswith(".mp4"):
 					ref = eServiceReference(4097, 0, url)
@@ -1032,7 +1035,7 @@ class ZDFMediathek(Screen, HelpableScreen):
 	def down(self):
 		if not self.working:
 			if self.currentList == LIST_LEFT:
-				self["leftList"].next()
+				next(self["leftList"])
 			elif self.currentList == LIST_RIGHT and self["rightList"].active:
 				self["rightList"].selectNext()
 

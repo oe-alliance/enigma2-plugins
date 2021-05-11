@@ -19,20 +19,22 @@
 #  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
-from __init__ import _
+from __future__ import print_function
+from __future__ import absolute_import
+from .__init__ import _
 from Components.config import config
 from Components.ActionMap import HelpableActionMap
 from Components.Button import Button
-from MovieList import MovieList, accessRestriction
+from .MovieList import MovieList, accessRestriction
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
-from MoveCopy import MovieMove
+from .MoveCopy import MovieMove
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
-from Rename import MovieRetitle
-from Wastebasket import Wastebasket
+from .Rename import MovieRetitle
+from .Wastebasket import Wastebasket
 from enigma import eServiceReference
-from Source.Config import qButtons
+from .Source.Config import qButtons
 
 
 def getPluginCaption(pname):
@@ -152,12 +154,12 @@ class QuickButton:
         sort = config.AdvancedMovieSelection.sort_functions.value.split()
         # TODO: remove printout after beta tests
         if len(sort) < 1:
-            print "default sort list"
+            print("default sort list")
             sort = [MovieList.SORT_ALPHANUMERIC, MovieList.SORT_DESCRIPTION, MovieList.SORT_DATE_DESC, MovieList.SORT_DATE_ASC]
-        print "sorting:", sort
-        print "current:", str(config.movielist.moviesort.value)
+        print("sorting:", sort)
+        print("current:", str(config.movielist.moviesort.value))
         newType = int(self.getNextFromList(sort, config.movielist.moviesort.value))
-        print "next:", str(newType)
+        print("next:", str(newType))
         return newType
 
     def findButton(self, function):
@@ -203,19 +205,19 @@ class QuickButton:
         self.startPlugin(qButtons.getFunction("blue"), self["key_blue"])
 
     def redpressedlong(self):
-        print "red long"
+        print("red long")
         self.startPlugin(qButtons.getFunction("red_long"), None)
 
     def greenpressedlong(self):
-        print "green long"
+        print("green long")
         self.startPlugin(qButtons.getFunction("green_long"), None)
 
     def yellowpressedlong(self):
-        print "yellow long"
+        print("yellow long")
         self.startPlugin(qButtons.getFunction("yellow_long"), None)
 
     def bluepressedlong(self):
-        print "blue long"
+        print("blue long")
         self.startPlugin(qButtons.getFunction("blue_long"), None)
 
     def updateGUI(self):
@@ -231,7 +233,7 @@ class QuickButton:
             key_number.setText(caption)
 
     def startPlugin(self, pname, key_number):
-        print "qButtonFX:", str(pname)
+        print("qButtonFX:", str(pname))
         # notify action map
         self["ColorActions"].execEnd()
         self["ColorActions"].execBegin()
@@ -347,12 +349,12 @@ class QuickButton:
                     # TODO: search?
                     if True or not service.flags & eServiceReference.mustDescent:
                         from SearchTMDb import TMDbMain as TMDbMainsave
-                        from Source.ServiceProvider import ServiceCenter
+                        from .Source.ServiceProvider import ServiceCenter
                         searchTitle = ServiceCenter.getInstance().info(service).getName(service)
                         if len(self.list.multiSelection) == 0:
                             self.session.openWithCallback(self.updateCurrentSelection, TMDbMainsave, searchTitle, service)
                         else:
-                            from DownloadMovies import DownloadMovies
+                            from .DownloadMovies import DownloadMovies
                             items = []
                             for item in self.list.multiSelection:
                                 items.append([item, 0])
@@ -370,7 +372,7 @@ class QuickButton:
                             self.setMovieStatus(1)
                             self.setButtonText(key_number, _("Mark as unseen"))
                 elif pname == "Show up to VSR-X":
-                    from Source.AccessRestriction import VSR
+                    from .Source.AccessRestriction import VSR
                     access = "VSR-%d" % (self.list.getAccess())
                     for index, item in enumerate(VSR):
                         if item == access:
@@ -428,10 +430,10 @@ class QuickButton:
             self.reloadList()
 
     def openFilterByDescriptionChoice(self):
-        from Source.ServiceProvider import ServiceCenter, detectDVDStructure, detectBludiscStructure, eServiceReferenceDvd, eServiceReferenceBludisc, eServiceReferenceListAll
-        from Source.MovieScanner import movieScanner
+        from .Source.ServiceProvider import ServiceCenter, detectDVDStructure, detectBludiscStructure, eServiceReferenceDvd, eServiceReferenceBludisc, eServiceReferenceListAll
+        from .Source.MovieScanner import movieScanner
         from enigma import iServiceInformation
-        from MovieSelection import SHOW_ALL_MOVIES
+        from .MovieSelection import SHOW_ALL_MOVIES
         serviceHandler = ServiceCenter.getInstance()
         descr = []
         if isinstance(self.list.root, eServiceReferenceListAll):
@@ -448,9 +450,9 @@ class QuickButton:
         else:
             l = serviceHandler.list(self.list.root)
             if not l:
-                print "list movies for filter failed"
+                print("list movies for filter failed")
                 return
-            while 1:
+            while True:
                 serviceref = l.getNext()
                 if not serviceref.valid():
                     break
@@ -479,17 +481,17 @@ class QuickButton:
             if item[0] == current:
                 selection = index
                 break
-        print "open filter choice", str(selection), str(descr)
+        print("open filter choice", str(selection), str(descr))
         self.session.openWithCallback(self.filterByDescription, ChoiceBox, title=_("Select movie by description:"), list=descr, selection=selection)
 
     def filterByDescription(self, answer):
-        from MovieSelection import SHOW_ALL_MOVIES
+        from .MovieSelection import SHOW_ALL_MOVIES
         if not answer:
             return
         if answer[0] == _(SHOW_ALL_MOVIES):
             self.list.filter_description = None
-            print "clear filter choice"
+            print("clear filter choice")
         else:
             self.list.filter_description = answer[0]
-            print "set filter choice", str(answer[0])
+            print("set filter choice", str(answer[0]))
         self.reloadList()

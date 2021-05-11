@@ -4,6 +4,8 @@
 ## by AliAbdul
 ##
 ##
+from __future__ import print_function
+from __future__ import absolute_import
 from base64 import encodestring
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigClock, ConfigInteger, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry
@@ -15,7 +17,7 @@ from Components.Language import language
 from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.ScrollLabel import ScrollLabel
-from container.decrypt import decrypt
+from .container.decrypt import decrypt
 from enigma import eListboxPythonMultiContent, eTimer, gFont, RT_HALIGN_CENTER, RT_HALIGN_RIGHT
 from os import listdir, remove, system
 from Plugins.Plugin import PluginDescriptor
@@ -31,16 +33,17 @@ from Tools.LoadPixmap import LoadPixmap
 from twisted.internet import reactor
 from twisted.python import failure
 from twisted.web.client import getPage
-from urllib2 import Request
-from urlparse import urlparse, urlunparse
 from xml.etree.cElementTree import parse
 import os
 import gettext
 import re
 import socket
 import sys
-import urllib
-import urllib2
+from six.moves.urllib.parse import urlparse, urlunparse
+from six.moves.urllib.request import Request, urlopen
+
+import six
+
 
 ##############################################################################
 
@@ -91,7 +94,7 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
 
@@ -164,7 +167,7 @@ class ProgressDownload:
 
 def get(url):
 	try:
-		data = urllib2.urlopen(url)
+		data = urlopen(url)
 		return data.read()
 	except:
 		return ""
@@ -172,7 +175,7 @@ def get(url):
 
 def post(url, data):
 	try:
-		return urllib2.urlopen(url, data).read()
+		return urlopen(url, data).read()
 	except:
 		return ""
 
@@ -360,8 +363,8 @@ class RSDownload:
 			if downloadLink:
 				self.status = _("Downloading")
 				writeLog("Downloading video: %s" % downloadLink)
-				req = urllib2.Request(downloadLink)
-				url_handle = urllib2.urlopen(req)
+				req = Request(downloadLink)
+				url_handle = urlopen(req)
 				headers = url_handle.info()
 				if headers.getheader("content-type") == "video/mp4":
 					ext = "mp4"
@@ -478,7 +481,7 @@ class RSDownload:
 		watch_url = "http://www.youtube.com/watch?v=" + video_id
 		watchrequest = Request(watch_url, None, std_headers)
 		try:
-			watchvideopage = urllib2.urlopen(watchrequest).read()
+			watchvideopage = urlopen(watchrequest).read()
 		except:
 			watchvideopage = ""
 		if "isHDAvailable = true" in watchvideopage:
@@ -486,12 +489,12 @@ class RSDownload:
 		info_url = 'http://www.youtube.com/get_video_info?&video_id=%s&el=detailpage&ps=default&eurl=&gl=US&hl=en' % video_id
 		inforequest = Request(info_url, None, std_headers)
 		try:
-			infopage = urllib2.urlopen(inforequest).read()
+			infopage = urlopen(inforequest).read()
 		except:
 			infopage = ""
 		mobj = re.search(r'(?m)&token=([^&]+)(?:&|$)', infopage)
 		if mobj:
-			token = urllib.unquote(mobj.group(1))
+			token = unquote(mobj.group(1))
 			myurl = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en' % (video_id, token)
 			if isHDAvailable is True:
 				mrl = '%s&fmt=%s' % (myurl, '22')
@@ -943,7 +946,7 @@ class RSSearch(Screen):
 				self.session.open(MessageBox, (_("Error while adding %s to the download-list!") % url), MessageBox.TYPE_ERROR)
 
 	def search(self):
-		getPage("http://rapidshare-search-engine.com/index-s_submit=Search&sformval=1&s_type=0&what=1&s=%s&start=%d.html" % (self.searchFor, self.curPage)).addCallback(self.searchCallback).addErrback(self.searchError)
+		getPage(six.ensure_binary("http://rapidshare-search-engine.com/index-s_submit=Search&sformval=1&s_type=0&what=1&s=%s&start=%d.html" % (self.searchFor, self.curPage))).addCallback(self.searchCallback).addErrback(self.searchError)
 
 	def searchCallback(self, html=""):
 		list = []
@@ -1104,10 +1107,11 @@ class UnrarEntry:
 		try:
 			fileName = ("%s/%s_unrar.txt" % (config.plugins.RSDownloader.downloads_directory.value, self.name)).replace("//", "/")
 			f = open(fileName, "w")
+			result = six.ensure_str(result)
 			f.write(result)
 			f.close()
 		except:
-			print "[RS Downloader] Result of unrar:", result
+			print("[RS Downloader] Result of unrar:", result)
 		self.finishCallback(self.name)
 
 	def allDownloaded(self):
@@ -1196,7 +1200,7 @@ class Unrar:
 
 	def decode_charset(self, str, charset):
 		try:
-			uni = unicode(str, charset, 'strict')
+			uni = six.text_type(str, charset, 'strict')
 		except:
 			uni = str
 		return uni

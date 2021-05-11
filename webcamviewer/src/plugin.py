@@ -1,3 +1,5 @@
+from __future__ import print_function
+from __future__ import absolute_import
 from enigma import eListbox
 from enigma import eListboxPythonMultiContent
 from enigma import ePicLoad
@@ -31,9 +33,9 @@ from pyexpat import ExpatError
 import xml.dom.minidom
 
 ### my
-from WebcamViewConfig import WebcamViewerMenu
-from PictureScreen import PictureScreen
-from WebcamTravel import TravelWebcamviewer
+from .WebcamViewConfig import WebcamViewerMenu
+from .PictureScreen import PictureScreen
+from .WebcamTravel import TravelWebcamviewer
 ###
 myname = "Webcam/Picture Viewer"
 myversion = "1.1"
@@ -198,10 +200,10 @@ class Slideshow:
 				self.wbviewer.do()
 			self.currentslideshowitem = currentslideshowitem
 		elif int(config.plugins.pictureviewer.slideshowmode.value) is SLIDESHOWMODE_REPEAT:
-			print "[" + myname + "] restarting slideshow"
+			print("[" + myname + "] restarting slideshow")
 			self.start()
 		else:
-			print "[" + myname + "] slideshow finished"
+			print("[" + myname + "] slideshow finished")
 			self.wbviewer.exit()
 			self.cb()
 
@@ -264,7 +266,7 @@ class PictureViewer(Screen):
 		self.onLayoutFinish.append(self.updateInfoPanel)
 
 	def KeyGreen(self):
-		if self.currList is "filelist":
+		if self.currList == "filelist":
 			# adding all files in current dir to slideshowlist
 			dirname = self["menu"].getCurrentDir()
 			if os.path.isdir(dirname):
@@ -287,13 +289,13 @@ class PictureViewer(Screen):
 						_("select List to load"),
 						list
 				)
-			except IOError, e:
-				print "[" + myname + "] IOError:", e
-			except OSError, e:
-				print "[" + myname + "] OSError:", e
+			except IOError as e:
+				print("[" + myname + "] IOError:", e)
+			except OSError as e:
+				print("[" + myname + "] OSError:", e)
 
 	def KeyRed(self):
-		if self.currList is "filelist":
+		if self.currList == "filelist":
 			#do slideshow
 			self.hide()
 			x = Slideshow(self.session, self.show)
@@ -325,21 +327,21 @@ class PictureViewer(Screen):
 					   if x.startswith("#"):
 						   pass
 					   elif not os.path.exists(file):
-						   print "[" + myname + "] loaded file from filelist isnt avaible! ignoreing ->", file
+						   print("[" + myname + "] loaded file from filelist isnt avaible! ignoreing ->", file)
 					   else:
 						   list.append((_(file.split("/")[-1]), file))
 				   self.slideshowfiles = list
 				   self["slist"].l.setList(self.slideshowfiles)
 				   self.loadedslideshowlistlistname = filename.replace(config.plugins.pictureviewer.slideshowext.value, "")
-			   except IOError, e:
-				   print "[" + myname + "] error:", e
+			   except IOError as e:
+				   print("[" + myname + "] error:", e)
 
 	def fileToSaveFilelistEntered(self, filename):
 		if filename is not None:
-			print "[" + myname + "] saving list to ", config.plugins.pictureviewer.slideshowdir.value + filename + config.plugins.pictureviewer.slideshowext.value
+			print("[" + myname + "] saving list to ", config.plugins.pictureviewer.slideshowdir.value + filename + config.plugins.pictureviewer.slideshowext.value)
 			try:
 				if not os.path.exists(config.plugins.pictureviewer.slideshowdir.value):
-					print "+" * 10, os.path.basename(filename)
+					print("+" * 10, os.path.basename(filename))
 					os.mkdir(config.plugins.pictureviewer.slideshowdir.value)
 				fp = open(config.plugins.pictureviewer.slideshowdir.value + filename + config.plugins.pictureviewer.slideshowext.value, "w")
 				fp.write("# this is a slideshow file for " + myname + " made by V" + myversion + "\n")
@@ -348,11 +350,11 @@ class PictureViewer(Screen):
 				for x in self.slideshowfiles:
 					fp.write(x[1] + "\n")
 				fp.close()
-			except IOError, e:
-				print "[" + myname + "] error:", e
+			except IOError as e:
+				print("[" + myname + "] error:", e)
 
 	def KeyYellow(self):
-		if self.currList is "filelist":
+		if self.currList == "filelist":
 			# add picture to list
 			fullfile = self["menu"].getSelection()[0]
 			if os.path.isfile(fullfile):
@@ -366,7 +368,7 @@ class PictureViewer(Screen):
 				self["slist"].l.setList(self.slideshowfiles)
 
 	def switchList(self):
-		if self.currList is "filelist":
+		if self.currList == "filelist":
 			# Slideshow activieren
 			self.filelist.selectionEnabled(0)
 			self.slideshowlist.selectionEnabled(1)
@@ -386,7 +388,7 @@ class PictureViewer(Screen):
 			self.currList = "filelist"
 
 	def go(self):
-		if self.currList is "filelist":
+		if self.currList == "filelist":
 			selection = self["menu"].getSelection()
 			if self.filelist.canDescent():
 				self.setTitle(selection[0])
@@ -395,44 +397,44 @@ class PictureViewer(Screen):
 				if selection[1] == True: # isDir
 					pass
 				else:
-					print "[" + myname + "] file selected ", selection[0]
+					print("[" + myname + "] file selected ", selection[0])
 					if os.path.isfile(selection[0]):
 						self.session.open(PictureScreen, selection[0].split("/")[-1], selection[0])
 					else:
-						print "[" + myname + "] file not found ", selection[0]
+						print("[" + myname + "] file not found ", selection[0])
 		else:
 			self.updateInfoPanel()
 
 	def up(self):
-		 if self.currList is "filelist":
+		 if self.currList == "filelist":
 			 self.filelist.up()
 			 self.updateInfoPanel()
 		 else:
 			 self.slideshowlist.up()
 
 	def leftUp(self):
-		 if self.currList is "filelist":
+		 if self.currList == "filelist":
 			 self.filelist.pageUp()
 			 self.updateInfoPanel()
 		 else:
 			 self.slideshowlist.pageUp()
 
 	def rightUp(self):
-		if self.currList is "filelist":
+		if self.currList == "filelist":
 			 self.filelist.pageDown()
 			 self.updateInfoPanel()
 		else:
 			 self.slideshowlist.pageDown()
 
 	def down(self):
-		 if self.currList is "filelist":
+		 if self.currList == "filelist":
 			 self.filelist.down()
 			 self.updateInfoPanel()
 		 else:
 			 self.slideshowlist.down()
 
 	def updateInfoPanel(self):
-		if self.currList is "filelist":
+		if self.currList == "filelist":
 			selectedfile = self["menu"].getSelection()[0]
 		else:
 			selectedfile = self["slist"].l.getCurrentSelection()[1]
@@ -450,7 +452,7 @@ class PictureViewer(Screen):
 			pass
 
 	def output(self, str):
-		print "+" * 10, str
+		print("+" * 10, str)
 
 	def openMenu(self):
 		self.session.open(WebcamViewerMenu)

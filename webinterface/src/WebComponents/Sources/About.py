@@ -1,3 +1,4 @@
+from __future__ import print_function
 # Parts of Code and idea by Homey
 from Components.Sources.Source import Source
 from Components.Network import iNetwork
@@ -25,7 +26,7 @@ class About(Source):
 				ConvertIP(iNetwork.getAdapterAttribute(iface, "gateway")),
 			)
 		else:
-			print "[WebComponents.About] no network iface configured!"
+			print("[WebComponents.About] no network iface configured!")
 			l = (
 				"N/A",
 				"N/A",

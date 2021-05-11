@@ -1,9 +1,11 @@
+from __future__ import print_function
+from __future__ import absolute_import
 # Timer
 from enigma import eTimer
 
 # Config
 from Components.config import config
-from plugin import autotimer
+from .plugin import autotimer
 
 # Notifications
 from Tools.FuzzyDate import FuzzyTime
@@ -17,7 +19,7 @@ class AutoPoller:
 
 	def __init__(self):
 		# Init Timer
-		print "[AutoTimer] Auto Poll Enabled"
+		print("[AutoTimer] Auto Poll Enabled")
 		self.timer = eTimer()
 
 	def start(self):
@@ -33,12 +35,12 @@ class AutoPoller:
 	def query(self):
 		self.timer.stop()
 		from Screens.Standby import inStandby
-		print "[AutoTimer] Auto Poll"
+		print("[AutoTimer] Auto Poll")
 		if config.plugins.autotimer.skip_during_records.getValue() and NavigationInstance.instance.RecordTimer.isRecording():
 			print("[AutoTimer] Skip check during running records")
 		else:
 			if config.plugins.autotimer.onlyinstandby.value and inStandby:
-				print "[AutoTimer] Auto Poll Started"
+				print("[AutoTimer] Auto Poll Started")
 				# Ignore any program errors
 				try:
 					ret = autotimer.parseEPG(autoPoll=True)
@@ -48,7 +50,7 @@ class AutoPoller:
 					import sys
 					traceback.print_exc(file=sys.stdout)
 			elif not config.plugins.autotimer.onlyinstandby.value:
-				print "[AutoTimer] Auto Poll Started"
+				print("[AutoTimer] Auto Poll Started")
 				# Ignore any program errors
 				try:
 					ret = autotimer.parseEPG(autoPoll=True)

@@ -77,6 +77,7 @@
 
     [1] http://docs.python.org/library/time.html#time.clock
 """
+from __future__ import print_function
 
 __version__ = "0.1"
 
@@ -87,6 +88,9 @@ import socket
 import struct
 import select
 import time
+
+from six.moves import range
+
 
 # From /usr/include/linux/icmp.h; your milage may vary.
 ICMP_ECHO_REQUEST = 8 # Seems to be the same on Solaris.
@@ -183,7 +187,8 @@ def do_one(dest_addr, timeout):
     icmp = socket.getprotobyname("icmp")
     try:
         my_socket = socket.socket(socket.AF_INET, socket.SOCK_RAW, icmp)
-    except socket.error, (errno, msg):
+    except socket.error as xxx_todo_changeme:
+        (errno, msg) = xxx_todo_changeme.args
         if errno == 1:
             # Operation not permitted
             msg = msg + (
@@ -207,20 +212,20 @@ def verbose_ping(dest_addr, timeout=2, count=4):
     Send >count< ping to >dest_addr< with the given >timeout< and display
     the result.
     """
-    for i in xrange(count):
-        print "ping %s..." % dest_addr,
+    for i in list(range(count)):
+        print("ping %s..." % dest_addr, end=' ')
         try:
             delay = do_one(dest_addr, timeout)
-        except socket.gaierror, e:
-            print "failed. (socket error: '%s')" % e[1]
+        except socket.gaierror as e:
+            print("failed. (socket error: '%s')" % e[1])
             break
 
         if delay == None:
-            print "failed. (timeout within %ssec.)" % timeout
+            print("failed. (timeout within %ssec.)" % timeout)
         else:
             delay = delay * 1000
-            print "get ping in %0.4fms" % delay
-    print
+            print("get ping in %0.4fms" % delay)
+    print()
 
 
 if __name__ == '__main__':

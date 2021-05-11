@@ -143,7 +143,7 @@ def startPlugin(self, pname):
 				from Plugins.Extensions.MediaPlayer.plugin import MediaPlayer
 				self.session.open(MediaPlayer)
 				no_plugin = False
-			except Exception, e:
+			except Exception as e:
 				msgText = _("Error!\nError Text: %s" % e)
 		elif pname == _("Plugin browser"):
 			from Screens.PluginBrowser import PluginBrowser
@@ -182,7 +182,7 @@ def startPlugin(self, pname):
 				try:
 					self.runPlugin(plugin)
 					no_plugin = False
-				except Exception, e:
+				except Exception as e:
 					msgText = _("Error!\nError Text: %s" % e)
 			else:
 				msgText = _("Plugin not found!")

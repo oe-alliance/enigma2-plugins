@@ -90,7 +90,7 @@ class vConvSmartInfo(Poll, Converter, object):
 			try:
 				templist = sensors.getSensorsList(sensors.TYPE_TEMPERATURE)
 				tempcount = len(templist)
-				for count in range(tempcount):
+				for count in list(range(tempcount)):
 					id = templist[count]
 					tt = sensors.getSensorValue(id)
 					if tt > maxtemp:

@@ -9,15 +9,17 @@
 # version.
 #===============================================================================
 
+from __future__ import print_function
+from __future__ import absolute_import
 import re
 import posixpath
 import urllib
-from sys import maxint
+from sys import maxsize
 from random import randint, seed
-from urllib import urlencode, quote_plus
-from urllib2 import urlopen
 from xml.dom.minidom import parse
-from VlcPlayer import VlcPlayer, isDvdUrl
+from .VlcPlayer import VlcPlayer, isDvdUrl
+from six.moves.urllib.parse import urlencode, quote_plus
+from six.moves.urllib.request import urlopen
 
 seed()
 
@@ -207,7 +209,7 @@ class VlcServer:
 		except:
 			resp = None
 		if resp is None:
-			raise IOError, "No response from Server"
+			raise IOError("No response from Server")
 		xml = parse(resp)
 		resp.close()
 		return xml
@@ -354,8 +356,8 @@ class VlcServer:
 			for par in params:
 				sout += "&option=%s" % quote_plus(par.lstrip(':'))
 
-		print "[VLC] playfile", input
-		print "[VLC] sout", sout
+		print("[VLC] playfile", input)
+		print("[VLC] sout", sout)
 
 		xml = self.__xmlRequest("status", [("command", "in_play"), ("input", input)], sout)
 
@@ -365,7 +367,7 @@ class VlcServer:
 			if len(self.lastError) == 0:
 				self.lastError = None
 			else:
-				print "[VLC] VlcControl error:", self.lastError
+				print("[VLC] VlcControl error:", self.lastError)
 			return None
 		else:
 			self.lastError = None
@@ -384,7 +386,7 @@ class VlcServer:
 		self.__xmlRequest("status", [("command", "pl_delete"), ("id", str(id))])
 
 	def deleteCurrentTree(self):
-		print "[VLC] delete current tree"
+		print("[VLC] delete current tree")
 		currentElement = self.getCurrentElement()
 		while currentElement is not None and currentElement.parentNode.getAttribute("ro") != "ro":
 			currentElement = currentElement.parentNode

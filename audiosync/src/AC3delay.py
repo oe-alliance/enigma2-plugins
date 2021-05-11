@@ -1,7 +1,8 @@
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
-from AC3utils import AC3, PCM, AC3GLOB, PCMGLOB, AC3PCM
+from .AC3utils import AC3, PCM, AC3GLOB, PCMGLOB, AC3PCM
 from Components.config import config
 from enigma import eTimer
 from Tools.ISO639 import LanguageCodes
@@ -93,7 +94,7 @@ class AC3delay:
         r = self.iSeek.getPlayPosition()
         if r[0]:
             return None
-        return long(r[1])
+        return int(r[1])
 
     def getSystemDelay(self, sAudio):
         bInitialized = False
@@ -170,7 +171,7 @@ class AC3delay:
         self.selectedAudioIndex = None
         if n > 0:
             self.selectedAudioIndex = oAudioTracks.getCurrentTrack()
-            for x in range(n):
+            for x in list(range(n)):
                 i = oAudioTracks.getTrackInfo(x)
                 language = i.getLanguage()
                 description = i.getDescription()

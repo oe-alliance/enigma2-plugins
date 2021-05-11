@@ -1,3 +1,5 @@
+from __future__ import print_function
+from __future__ import absolute_import
 #
 #  fstabeditor
 #
@@ -35,7 +37,7 @@ from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Tools.Directories import fileExists
-from dirSelect import dirSelectDlg
+from .dirSelect import dirSelectDlg
 from enigma import RT_HALIGN_LEFT, RT_HALIGN_RIGHT, eListboxPythonMultiContent, gFont
 import os
 
@@ -153,7 +155,7 @@ class fstabViewerScreen(Screen, HelpableScreen):
 		if returnvalue != 0:
 			os.system("cp /etc/fstab /etc/fstab.backup")
 			configFile = open('/etc/fstab', 'w')
-			for i in range(len(entryList)):
+			for i in list(range(len(entryList))):
 				line = "%*s %*s %*s %*s %s %s\n" % (int(lengthList[0]) * -1, entryList[i][0], int(lengthList[1]) * -1, entryList[i][1], int(lengthList[2]) * -1, entryList[i][2], int(lengthList[3]) * -1, entryList[i][3], str(entryList[i][4]), str(entryList[i][5]))
 				configFile.write(line)
 			configFile.close()
@@ -281,7 +283,7 @@ class fstabEditorScreen(Screen, ConfigListScreen, HelpableScreen):
 
 	def dirSelectDlgClosed(self, mountpoint):
 		#use print to see in crashlog what's been selected
-		print "mountpoint: ", mountpoint
+		print("mountpoint: ", mountpoint)
 		if mountpoint != False:
 			if self.selectedEntry == 1:
 				self.mountpoint.value = mountpoint

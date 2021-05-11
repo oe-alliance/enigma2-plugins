@@ -21,6 +21,7 @@
 #
 
 # for localized messages
+from __future__ import absolute_import
 from . import _
 
 from Plugins.Plugin import PluginDescriptor
@@ -31,8 +32,8 @@ from Components.Pixmap import Pixmap
 from enigma import ePicLoad, eRect, eSize, gPixmapPtr
 from Components.AVSwitch import AVSwitch
 from Components.config import ConfigSubsection, ConfigSubList, ConfigInteger, config
-from setup import initConfig, MSNWeatherPluginEntriesListConfigScreen
-from MSNWeather import MSNWeather
+from .setup import initConfig, MSNWeatherPluginEntriesListConfigScreen
+from .MSNWeather import MSNWeather
 import time
 
 try:
@@ -187,7 +188,7 @@ class MSNWeatherPlugin(Screen):
 			i += 1
 
 	def showIcon(self, index, filename):
-		if index <> -1:
+		if index != -1:
 			self["weekday%s_icon" % index].updateIcon(filename)
 			self["weekday%s_icon" % index].show()
 		else:
@@ -201,7 +202,7 @@ class MSNWeatherPlugin(Screen):
 		else:
 			self["caption"].text = self.weatherData.city
 			self.webSite = self.weatherData.url
-			for weatherData in self.weatherData.weatherItems.items():
+			for weatherData in list(self.weatherData.weatherItems.items()):
 				item = weatherData[1]
 				if weatherData[0] == "-1": # current
 					self["currentTemp"].text = "%s°%s" % (item.temperature, self.weatherData.degreetype)
