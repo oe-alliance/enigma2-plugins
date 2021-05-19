@@ -49,6 +49,8 @@ from . import config, xrange, itervalues
 
 from six.moves import range
 
+from six import PY2
+
 
 XML_CONFIG = "/etc/enigma2/autotimer.xml"
 
@@ -353,7 +355,8 @@ class AutoTimer:
 		match = removeBad(timer.match)
 		if timer.encoding != 'UTF-8':
 			try:
-				match = match.decode('UTF-8').encode(timer.encoding) #FIXME PY3
+				if PY2:
+					match = match.decode('UTF-8').encode(timer.encoding) #FIXME PY3
 			except UnicodeDecodeError:
 				pass
 
