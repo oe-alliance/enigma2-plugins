@@ -100,7 +100,7 @@ class AutoMountView(Screen):
 			mountentry = iAutoMount.automounts[sharename]
 			self.list.append(self.buildMountViewItem(mountentry))
 		self["config"].setList(self.list)
-		self["config"].list.sort()
+		self["config"].list.sort(key=lambda x: x[1])
 		self["config"].onSelectionChanged.append(self.selectionChanged)
 
 	def buildMountViewItem(self, entry):
