@@ -85,7 +85,6 @@ class AutoTimerSimulateResource(AutoTimerBaseResource):
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 		return ''.join(returnlist)
-#TODO
 
 
 class AutoTimerTestResource(AutoTimerBaseResource):
@@ -97,18 +96,24 @@ class AutoTimerTestResource(AutoTimerBaseResource):
 	def render(self, req):
 		self.req = req
 		# todo timeout / error handling
-		autotimer.parseEPG(simulateOnly=True, callback=self.parsecallback)
+		id = req.args.get("id")
+		if id:
+			id = int(id[0])
+		else:
+			return self.returnResult(req, False, _("missing parameter \"id\""))
+
+		autotimer.parseEPG(simulateOnly=True, uniqueId=id, callback=self.parsecallback)
 		return server.NOT_DONE_YET
 
 	def renderBackground(self, req, timers, skipped):
 
-		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimertest api_version=\"", str(API_VERSION), "\">\n"]
+		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimersimulate api_version=\"", str(API_VERSION), "\">\n"]
 		extend = returnlist.extend
 
 		for (name, begin, end, serviceref, autotimername) in timers:
 			ref = ServiceReference(str(serviceref))
 			extend((
-				'<e2testtimer>\n'
+				'<e2simulatedtimer>\n'
 				'   <e2servicereference>', stringToXML(serviceref), '</e2servicereference>\n',
 				'   <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
 				'   <e2name>', stringToXML(name), '</e2name>\n',
@@ -116,14 +121,14 @@ class AutoTimerTestResource(AutoTimerBaseResource):
 				'   <e2timeend>', str(end), '</e2timeend>\n',
 				'   <e2autotimername>', stringToXML(autotimername), '</e2autotimername>\n',
 				'   <e2state>OK</e2state>\n'
-				'</e2testtimer>\n'
+				'</e2simulatedtimer>\n'
 			))
 
 		if skipped:
 			for (name, begin, end, serviceref, autotimername, message) in skipped:
 				ref = ServiceReference(str(serviceref))
 				extend((
-					'<e2testtimer>\n'
+					'<e2simulatedtimer>\n'
 					'   <e2servicereference>', stringToXML(serviceref), '</e2servicereference>\n',
 					'   <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
 					'   <e2name>', stringToXML(name), '</e2name>\n',
@@ -132,10 +137,10 @@ class AutoTimerTestResource(AutoTimerBaseResource):
 					'   <e2autotimername>', stringToXML(autotimername), '</e2autotimername>\n',
 					'   <e2state>Skip</e2state>\n'
 					'   <e2message>', stringToXML(message), '</e2message>\n'
-					'</e2testtimer>\n'
+					'</e2simulatedtimer>\n'
 				))
 
-		returnlist.append('</e2autotimertest>')
+		returnlist.append('</e2autotimersimulate>')
 
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')
