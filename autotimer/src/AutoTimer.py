@@ -265,9 +265,10 @@ class AutoTimer:
 		return t.deferred
 
 	# Main function
-	def parseEPG(self, autoPoll=False, simulateOnly=False, callback=None):
+	def parseEPG(self, autoPoll=False, simulateOnly=False, uniqueId=None, callback=None):
 		self.autoPoll = autoPoll
 		self.simulateOnly = simulateOnly
+		self.testid = uniqueId
 
 		self.new = 0
 		self.modified = 0
@@ -315,6 +316,10 @@ class AutoTimer:
 
 		# Iterate Timer
 		for timer in self.getEnabledTimerList():
+			# test only timer with specific id
+			if self.testid:
+				if self.testid != timer.id:
+					continue
 			taskname = timer.name + '_%d' % self.timer_count
 			task = Components.Task.PythonTask(job, taskname)
 			self.searchtimer.append((timer, taskname))
