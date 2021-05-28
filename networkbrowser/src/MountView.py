@@ -100,16 +100,19 @@ class AutoMountView(Screen):
 			mountentry = iAutoMount.automounts[sharename]
 			self.list.append(self.buildMountViewItem(mountentry))
 		self["config"].setList(self.list)
-		self["config"].list.sort(key=lambda x: x[1])
+		self["config"].list.sort(key=lambda x: (x[6],x[1]))
 		self["config"].onSelectionChanged.append(self.selectionChanged)
 
 	def buildMountViewItem(self, entry):
+		mode = 2
 		if entry["isMounted"] is True:
+			mode = 0
 			if fileExists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/ok.png")):
 				isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/ok.png"))
 			else:
 				isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/ok.png"))
 		if entry["isMounted"] is False:
+			mode = 1
 			if fileExists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/cancel.png")):
 				isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/cancel.png"))
 			else:
@@ -137,7 +140,7 @@ class AutoMountView(Screen):
 				mounttypepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/i-smb.png"))
 			else:
 				mounttypepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/i-smb.png"))
-		return((isMountedpng, sharename, IPdescription, DIRdescription, activepng, mounttypepng))
+		return((isMountedpng, sharename, IPdescription, DIRdescription, activepng, mounttypepng, mode))
 
 	def exit(self):
 		self.close()
