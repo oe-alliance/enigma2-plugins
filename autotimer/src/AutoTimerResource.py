@@ -85,7 +85,6 @@ class AutoTimerSimulateResource(AutoTimerBaseResource):
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 		return ''.join(returnlist)
-#TODO
 
 
 class AutoTimerTestResource(AutoTimerBaseResource):
@@ -100,6 +99,8 @@ class AutoTimerTestResource(AutoTimerBaseResource):
 		id = req.args.get("id")
 		if id:
 			id = int(id[0])
+		else:
+			return self.returnResult(req, False, _("missing parameter \"id\""))
 
 		autotimer.parseEPG(simulateOnly=True, uniqueId=id, callback=self.parsecallback)
 		return server.NOT_DONE_YET
