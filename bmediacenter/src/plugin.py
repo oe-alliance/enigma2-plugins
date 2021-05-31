@@ -13,7 +13,7 @@ from Plugins.Plugin import PluginDescriptor
 from Tools.Directories import pathExists, fileExists
 from .__init__ import _
 import os
-import commands
+import subprocess
 
 config.plugins.mc_global = ConfigSubsection()
 config.plugins.mc_global.vfd = ConfigSelection(default='off', choices=[('off', 'off'), ('on', 'on')])
@@ -182,9 +182,9 @@ class DMC_MainMenu(Screen):
 		if self.can_osd_alpha:
 			try:
 				if config.plugins.mc_global.vfd.value == "on":
-					trans = commands.getoutput('cat /etc/enigma2/settings | grep config.av.osd_alpha | cut -d "=" -f2')
+					trans = subprocess.getoutput('cat /etc/enigma2/settings | grep config.av.osd_alpha | cut -d "=" -f2')
 				else:
-					trans = commands.getoutput('cat /etc/enigma2/settings | grep config.osd.alpha | cut -d "=" -f2')
+					trans = subprocess.getoutput('cat /etc/enigma2/settings | grep config.osd.alpha | cut -d "=" -f2')
 				open("/proc/stb/video/alpha", "w").write(str(trans))
 			except:
 				print("Set OSD Transparacy failed")

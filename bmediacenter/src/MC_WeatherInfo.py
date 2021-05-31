@@ -21,7 +21,7 @@ from Components.config import ConfigSubsection, getConfigListEntry, ConfigText, 
 from Components.ConfigList import ConfigList, ConfigListScreen
 import time
 import os
-import commands
+import subprocess
 
 from six.moves.urllib.parse import quote
 import six
@@ -132,7 +132,7 @@ class MC_WeatherInfo(Screen):
 		downloadPage(six.ensure_binary(downlink), downname).addCallback(self.jpgdown, stadd).addErrback(self.error)
 
 	def jpgdown(self, value, stadd):
-		downlink = commands.getoutput("cat /tmp/.stadtindex | grep \"background-image:url('http://mytown.de/\" | cut -d \"'\" -f2")
+		downlink = subprocess.getoutput("cat /tmp/.stadtindex | grep \"background-image:url('http://mytown.de/\" | cut -d \"'\" -f2")
 		stadt = stadd
 		downname = "/tmp/" + stadt + ".jpg"
 		downloadPage(six.ensure_binary(downlink), downname).addCallback(self.makemvi, stadt).addErrback(self.error)
