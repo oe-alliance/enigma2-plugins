@@ -1,0 +1,115 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2021-06-03 21:05+0300\n"
+"Last-Translator: Fyry www.huoltovalikko.com\n"
+"Language-Team: Finnish\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.3\n"
+
+msgid "Advanced cut specification..."
+msgstr "Edistynyt leikkausmääritys ..."
+
+msgid "Bad arguments"
+msgstr "Huono argumentti"
+
+msgid "Cancel"
+msgstr "Peruuta"
+
+msgid "Choose target folder"
+msgstr "Valitse kohdekansio"
+
+msgid "Couldn't open input .ap file"
+msgstr "Ei pystytty lukea .ap tiedostoa"
+
+msgid "Couldn't open input .cuts file"
+msgstr "Ei pystytty lukea .cuts tiedostoa"
+
+msgid "Couldn't open input .ts file"
+msgstr "Ei pystytty lukea .ts tiedostoa"
+
+msgid "Couldn't open output .ap file"
+msgstr "Ei pystytty kirjoittaa .ap tiedostoa"
+
+msgid "Couldn't open output .cuts file"
+msgstr "Ei pystytty kirjoittaa .cuts tiedostoa"
+
+msgid "Couldn't open output .ts file"
+msgstr "Ei pystytty kirjoittaa .ts tiedostoa"
+
+msgid "Cut Parameter Input"
+msgstr "Leikkaus parametrin lukeminen"
+
+msgid "Cut source:"
+msgstr "Leikattavan lähde:"
+
+msgid "Cutlist"
+msgstr "Leikkauslista"
+
+msgid "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
+msgstr "Leikkaus (an IN OUT IN OUT ... sequence of hour:min:sec)"
+
+msgid "Cutting failed for movie \"%s\""
+msgstr "Elokuvan leikkaus epäonnistui \"%s\""
+
+msgid "Cutting was aborted for movie \"%s\""
+msgstr "Elokuvan leikkaus keskeytettiin \"%s\""
+
+msgid "Don't cut"
+msgstr "Älä leikkaa"
+
+msgid "Empty .ap file"
+msgstr "Tyhjä .ap tiedosto"
+
+msgid "Execute cuts..."
+msgstr "Suorita leikkaukset..."
+
+msgid "How would you like to cut \"%s\"?"
+msgstr "Kuinka haluat leikata \"%s\"?"
+
+msgid "Manual specification"
+msgstr "Manuaalinen määrittely"
+
+msgid "New description:"
+msgstr "Uusi kuvaus:"
+
+msgid "New filename:"
+msgstr "Uusi tiedostonimi:"
+
+msgid "New location:"
+msgstr "Uusi sijainti:"
+
+msgid "New title:"
+msgstr "Uusi otsikko:"
+
+msgid "No"
+msgstr "Ei"
+
+msgid "No cuts specified"
+msgstr "Ei leikkauksia määritelty"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Place the cut movie in a new file ending with \" cut\""
+msgstr "Lisää leikatun nimen perää \" leikattu\""
+
+msgid "Read/write error (disk full?)"
+msgstr "Luku / kirjoitusvirhe (levy täynnä?)"
+
+msgid "Replace original:"
+msgstr "Vaihda alkuperäinen:"
+
+msgid "Replace the original movie with the cut movie"
+msgstr "Korvaa alkuperäinen leikatulla"
+
+msgid "The movie \"%s\" is successfully cut"
+msgstr "\"%s\" on leikattu onnistuneesti"
+
+msgid "Yes"
+msgstr "Kyllä"
