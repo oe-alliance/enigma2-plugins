@@ -41,9 +41,12 @@ from Tools.BoundFunction import boundFunction
 
 from twisted.web.client import getPage
 from xml.etree.cElementTree import fromstring as cElementTree_fromstring
-from base64 import encodestring
 from six.moves.urllib.parse import quote
 import six
+if six.PY3:
+	from base64 import encodebytes as _encode
+else:
+	from base64 import encodestring as _encode
 
 #------------------------------------------------------------------------------------------
 
@@ -61,7 +64,7 @@ def localGetPage(url):
 	username = config.plugins.remoteTimer.username.value
 	password = config.plugins.remoteTimer.password.value
 	if username and password:
-		basicAuth = encodestring(username + ':' + password)
+		basicAuth = _encode(username + ':' + password)
 		authHeader = "Basic " + basicAuth.strip()
 		headers = {"Authorization": authHeader}
 	else:

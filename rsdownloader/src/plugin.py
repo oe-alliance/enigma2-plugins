@@ -6,7 +6,6 @@
 ##
 from __future__ import print_function
 from __future__ import absolute_import
-from base64 import encodestring
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigClock, ConfigInteger, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
@@ -43,6 +42,10 @@ from six.moves.urllib.parse import urlparse, urlunparse
 from six.moves.urllib.request import Request, urlopen
 
 import six
+if six.PY3:
+	from base64 import encodebytes as _encode
+else:
+	from base64 import encodestring as _encode
 
 
 ##############################################################################
@@ -143,7 +146,7 @@ class ProgressDownload:
 		scheme, host, port, path, username, password = _parse(url)
 		if username and password:
 			url = scheme + '://' + host + ':' + str(port) + path
-			basicAuth = encodestring("%s:%s" % (username, password))
+			basicAuth = _encode("%s:%s" % (username, password))
 			authHeader = "Basic " + basicAuth.strip()
 			AuthHeaders = {"Authorization": authHeader}
 			if "headers" in kwargs:
