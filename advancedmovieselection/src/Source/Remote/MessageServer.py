@@ -24,8 +24,13 @@ that they, too, receive or can get the source code. And you must show them these
 '''
 from __future__ import print_function
 from __future__ import absolute_import
+import six
 
-import SocketServer
+if six.PY2:
+    import SocketServer as socketServer
+else:
+    import socketServer
+
 import socket
 
 serverInstance = None
@@ -52,7 +57,7 @@ def getIpAddress(iface):
     return None
 
 
-class TCPHandler(SocketServer.BaseRequestHandler):
+class TCPHandler(socketServer.BaseRequestHandler):
     """
     The RequestHandler class for our server.
 
@@ -91,7 +96,7 @@ class MessageServer():
             return
         import threading
         self.shutdown()
-        self.server = SocketServer.TCPServer((self.host, self.port), TCPHandler)
+        self.server = socketServer.TCPServer((self.host, self.port), TCPHandler)
         self.t = threading.Thread(target=self.server.serve_forever)
         self.t.setDaemon(True) # don't hang on exit
         self.t.start()
