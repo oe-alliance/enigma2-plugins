@@ -45,7 +45,11 @@ import time
 import xml.etree.cElementTree
 from six.moves.urllib.parse import quote
 from six.moves.urllib.request import urlopen
-import SocketServer
+import six
+if six.PY3:
+	import socketserver
+else:
+	import SocketServer
 ENIGMA_WEBSERVICE_ID = 0x1012
 from Screens.InfoBarGenerics import InfoBarAudioSelection
 from Screens.InfoBar import InfoBar
@@ -66,7 +70,6 @@ from Components.config import ConfigSubsection, ConfigSubList, ConfigIP, ConfigI
 
 from Components.GUIComponent import GUIComponent
 import skin
-import six
 
 SIGN = '°' if six.PY3 else str('\xc2\xb0')
 
