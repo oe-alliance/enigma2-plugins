@@ -24,7 +24,11 @@ from timer import TimerEntry
 from twisted.internet import reactor
 from twisted.web import client
 from twisted.web.client import HTTPClientFactory
-from base64 import encodestring
+import six
+if six.PY3:
+	from base64 import encodebytes as _encode
+else:
+	from base64 import encodestring as _encode
 import xml.etree.cElementTree
 #import urlparse
 from six.moves.urllib.request import urlopen
@@ -389,7 +393,7 @@ def sendPartnerBoxWebCommand(url, contextFactory=None, timeout=60, username="roo
 	scheme = parsed.scheme
 	host = parsed.hostname
 	port = parsed.port or (443 if scheme == 'https' else 80)
-	basicAuth = encodestring(("%s:%s") % (username, password))
+	basicAuth = _encode(("%s:%s") % (username, password))
 	authHeader = "Basic " + basicAuth.strip()
 	AuthHeaders = {"Authorization": authHeader}
 	if "headers" in kwargs:
