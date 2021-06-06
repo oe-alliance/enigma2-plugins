@@ -45,7 +45,6 @@ import time
 import xml.etree.cElementTree
 from six.moves.urllib.parse import quote
 from six.moves.urllib.request import urlopen
-import SocketServer
 ENIGMA_WEBSERVICE_ID = 0x1012
 from Screens.InfoBarGenerics import InfoBarAudioSelection
 from Screens.InfoBar import InfoBar
