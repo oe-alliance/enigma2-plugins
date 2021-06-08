@@ -23,7 +23,6 @@
 
 from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
-from urlparse import urlparse
 from Screens.Screen import Screen
 from Screens.InfoBar import InfoBar
 from Components.SystemInfo import SystemInfo
@@ -47,7 +46,7 @@ from Components.ConfigList import ConfigListScreen
 from Screens.MessageBox import MessageBox
 from Components.GUIComponent import GUIComponent
 from Components.Sources.StaticText import StaticText
-from six.moves.urllib.parse import quote
+from six.moves.urllib.parse import quote, urlparse
 from twisted.web.client import downloadPage
 from Screens.ChoiceBox import ChoiceBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
