@@ -103,14 +103,14 @@ class Favorite:
 
 
 class myHTTPClientFactory(HTTPClientFactory):
-	def __init__(self, url, method='GET', postdata=None, headers=None,
-			agent="Mozilla/5.0 (Windows NT 6.1; rv:17.0) Gecko/20100101 Firefox/17.0", timeout=0, cookies=None,
+	def __init__(self, url, method=b'GET', postdata=None, headers=None,
+			agent=b"Mozilla/5.0 (Windows NT 6.1; rv:17.0) Gecko/20100101 Firefox/17.0", timeout=0, cookies=None,
 			followRedirect=1, lastModified=None, etag=None):
 		HTTPClientFactory.__init__(self, url, method=method, postdata=postdata,
 		headers=headers, agent=agent, timeout=timeout, cookies=cookies, followRedirect=followRedirect)
 
 	def clientConnectionLost(self, connector, reason):
-		lostreason = ("Connection was closed cleanly" in vars(reason))
+		lostreason = (b"Connection was closed cleanly" in vars(reason))
 		if lostreason == None:
 			print("[SHOUTcast] Lost connection, reason: %s ,trying to reconnect!" % reason)
 			connector.connect()
@@ -127,8 +127,9 @@ def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
 	port = parsed.port or (443 if scheme == 'https' else 80)
 	path = parsed.path or '/'
 
+	url = six.ensure_binary(url)
 	factory = myHTTPClientFactory(url, *args, **kwargs)
-	# print "scheme=%s host=%s port=%s path=%s\n" % (scheme, host, port, path)
+	print("scheme=%s host=%s port=%s path=%s\n" % (scheme, host, port, path))
 	reactor.connectTCP(host, port, factory, timeout=timeout)
 	return factory.deferred
 
@@ -561,6 +562,7 @@ class SHOUTcastWidget(Screen):
 		sendUrlCommand(url, None, 10).addCallback(self.callbackGenreList).addErrback(self.callbackGenreListError)
 
 	def callbackGenreList(self, xmlstring):
+		xmlstring = six.ensure_str(xmlstring)
 		self["headertext"].setText(_("SHOUTcast genre list"))
 		self.genreListIndex = 0
 		self.mode = self.GENRELIST
@@ -681,6 +683,7 @@ class SHOUTcastWidget(Screen):
 		self.session.nav.stopService()
 
 	def callbackPLS(self, result):
+		result = six.ensure_str(result)
 		self["headertext"].setText(self.headerTextString)
 		found = False
 		parts = result.split("\n")
@@ -705,13 +708,14 @@ class SHOUTcastWidget(Screen):
 		self["statustext"].setText(_("Getting %s") % self.headerTextString)
 		self["list"].hide()
 		if len(devid) > 8:
-			self.stationListURL = self.SC + "/station/advancedsearch&f=xml&k=%s&search=%s" % (devid, genre)
+			self.stationListURL = self.SC + "/station/advancedsearch&f=xml&k=%s&search=%s" % (devid, quote(genre))
 		else:
-			self.stationListURL = "http://207.200.98.1/sbin/newxml.phtml?genre=%s" % genre
+			self.stationListURL = "http://207.200.98.1/sbin/newxml.phtml?genre=%s" % quote(genre)
 		self.stationListIndex = 0
 		sendUrlCommand(self.stationListURL, None, 10).addCallback(self.callbackStationList).addErrback(self.callbackStationListError)
 
 	def callbackStationList(self, xmlstring):
+		xmlstring = six.ensure_str(xmlstring)
 		self.searchSHOUTcastString = ""
 		self.stationListXML = xmlstring
 		self["headertext"].setText(self.headerTextString)
@@ -923,6 +927,7 @@ class SHOUTcastWidget(Screen):
 			sendUrlCommand(self.currentGoogle, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
 			return
 		self.currentGoogle = None
+		result = six.ensure_str(result)
 		r = re.findall('murl&quot;:&quot;(http.*?)&quot', result, re.S | re.I)
 		if r:
 			url = r[nr]
