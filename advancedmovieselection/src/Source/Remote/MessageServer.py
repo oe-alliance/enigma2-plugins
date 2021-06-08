@@ -27,9 +27,9 @@ from __future__ import absolute_import
 import six
 
 if six.PY2:
-    import SocketServer as socketServer
+    import SocketServer as socketserver
 else:
-    import socketServer
+    import socketserver
 
 import socket
 
@@ -57,7 +57,7 @@ def getIpAddress(iface):
     return None
 
 
-class TCPHandler(socketServer.BaseRequestHandler):
+class TCPHandler(socketserver.BaseRequestHandler):
     """
     The RequestHandler class for our server.
 
@@ -96,7 +96,7 @@ class MessageServer():
             return
         import threading
         self.shutdown()
-        self.server = socketServer.TCPServer((self.host, self.port), TCPHandler)
+        self.server = socketserver.TCPServer((self.host, self.port), TCPHandler)
         self.t = threading.Thread(target=self.server.serve_forever)
         self.t.setDaemon(True) # don't hang on exit
         self.t.start()
