@@ -60,7 +60,7 @@ from . import _
 coverfiles = ("/tmp/.cover.ping", "/tmp/.cover.pong")
 containerStreamripper = None
 config.plugins.shoutcast = ConfigSubsection()
-config.plugins.shoutcast.showcover = ConfigYesNo(default=True)
+config.plugins.shoutcast.showcover = ConfigYesNo(default=False)
 config.plugins.shoutcast.showinextensions = ConfigYesNo(default=False)
 config.plugins.shoutcast.streamingrate = ConfigSelection(default="0", choices=[("0", _("All")), ("64", _(">= 64 kbps")), ("128", _(">= 128 kbps")), ("192", _(">= 192 kbps")), ("256", _(">= 256 kbps"))])
 config.plugins.shoutcast.reloadstationlist = ConfigSelection(default="0", choices=[("0", _("Off")), ("1", _("every minute")), ("3", _("every three minutes")), ("5", _("every five minutes"))])
@@ -73,6 +73,7 @@ config.plugins.shoutcast.cover_height = ConfigNumber(default=300)
 
 devid = "fa1jo93O_raeF0v9"
 
+_VALID_URI = re.compile(br"\A[\x21-\x7e]+\Z")
 
 class SHOUTcastGenre:
 	def __init__(self, name="", id=0, haschilds="false", parentid=0, opened="false"):
@@ -880,7 +881,7 @@ class SHOUTcastWidget(Screen):
 
 	def Error(self, error=None):
 		if error is not None:
-			# print "[SHOUTcast] Error: %s\n" % error
+			print("[SHOUTcast] Error: %s\n" % error)
 			try:
 				self["list"].hide()
 				self["statustext"].setText(str(error.getErrorMessage()))
@@ -931,6 +932,12 @@ class SHOUTcastWidget(Screen):
 		r = re.findall('murl&quot;:&quot;(http.*?)&quot', result, re.S | re.I)
 		if r:
 			url = r[nr]
+			# FIXME loop
+			_url = six.ensure_binary(url)
+			if not _VALID_URI.match(_url):
+				nr += 1
+				url = r[nr]
+			# FIXME nr max
 			print("[SHOUTcast] fetch cover first try:%s" % (url))
 			for link in bad_link:
 				if url.startswith(link):
@@ -965,6 +972,7 @@ class SHOUTcastWidget(Screen):
 				coverfile = coverfiles[self.currentcoverfile]
 				print("[SHOUTcast] downloading cover from %s to %s numer%s" % (url, coverfile, str(nr)))
 				downloadPage(six.ensure_binary(url), coverfile).addCallback(self.coverDownloadFinished, coverfile).addErrback(self.coverDownloadFailed)
+# FIXME [SHOUTcast] cover download failed: [Failure instance: Traceback: <class 'OpenSSL.SSL.Error'>: [('SSL routines', 'ssl3_read_bytes', 'sslv3 alert handshake failure')]
 
 	def coverDownloadFailed(self, result):
 		print("[SHOUTcast] cover download failed:", result)
