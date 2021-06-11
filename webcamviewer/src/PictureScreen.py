@@ -12,8 +12,7 @@ from Components.ActionMap import ActionMap
 from .FTPDownloader import FTPDownloader
 from twisted.web.client import HTTPDownloader
 from twisted.internet import reactor
-from urlparse import urlparse, urlunparse
-
+from six.moves.urllib.parse import urlparse, urlunparse
 
 def _parse(url, defaultPort=None):
 	url = url.strip()
@@ -80,12 +79,16 @@ def download(url, file, contextFactory=None, *args, **kwargs):
 
 	# We force username and password here as we lack a satisfying input method
 	if username and password:
-		from base64 import encodestring
+		import six
+		if six.PY3:
+			from base64 import encodebytes as _encode
+		else:
+			from base64 import encodestring as _encode
 
 		# twisted will crash if we don't rewrite this ;-)
 		url = scheme + '://' + host + ':' + str(port) + path
 
-		basicAuth = encodestring("%s:%s" % (username, password))
+		basicAuth = _encode("%s:%s" % (username, password))
 		authHeader = "Basic " + basicAuth.strip()
 		AuthHeaders = {"Authorization": authHeader}
 

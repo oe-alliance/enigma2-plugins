@@ -17,10 +17,9 @@ import socket
 import httplib
 import re
 import json
-from six.moves.urllib.parse import quote, unquote_plus, unquote, urlencode
+from six.moves.urllib.parse import quote, unquote_plus, unquote, urlencode, parse_qs, parse_qsl
 from six.moves.urllib.request import Request, urlopen, URLError
 
-from urlparse import parse_qs, parse_qsl
 from threading import Thread
 
 import six

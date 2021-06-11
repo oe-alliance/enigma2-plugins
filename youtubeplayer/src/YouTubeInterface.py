@@ -29,10 +29,8 @@ from Tools.LoadPixmap import LoadPixmap
 
 from twisted.web.client import downloadPage
 
-from six.moves.urllib.parse import quote, unquote_plus, unquote
+from six.moves.urllib.parse import quote, unquote_plus, unquote, parse_qs
 from six.moves.urllib.request import urlopen, Request, URLError, HTTPError
-
-from urlparse import parse_qs
 
 from socket import gaierror, error
 
