@@ -40,7 +40,12 @@ except ImportError as ie:
 import os
 import gettext
 import six
-from six.moves.html_parser import HTMLParser
+
+if six.PY2:
+	from HTMLParser import HTMLParser
+	_unescape = HTMLParser().unescape
+else:
+	from html import unescape as _unescape
 
 # Configuration
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo, ConfigText
@@ -50,8 +55,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 
 def transHTML(text):
-	h = HTMLParser()
-	return h.unescape(text)
+	return _unescape(text)
 
 
 config.plugins.imdb = ConfigSubsection()
