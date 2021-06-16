@@ -1,2 +1,2 @@
 Description: Create a backup of your Video-DVD
-Depends: cdrkit, enigma2, libdvdread, dvdbackup
+Depends: enigma2, libdvdread, dvdbackup
