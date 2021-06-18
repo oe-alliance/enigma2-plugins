@@ -12,6 +12,7 @@ from Components.Sources.StaticText import StaticText
 from enigma import iPlayableService, iServiceInformation, eTimer, getDesktop
 from Plugins.Plugin import PluginDescriptor
 from Tools import Notifications
+from Tools.Directories import fileExists
 from . import _
 import os
 
@@ -70,10 +71,16 @@ if have_2160p:
 		('p2160_30', _("Enable 2160p30 Mode")),
 	)
 
+
+HasColorimetry = fileExists("/proc/stb/video/hdmi_colorimetry")
+HasHdrType = fileExists("/proc/stb/video/hdmi_hdrtype")
+
 config.plugins.autoresolution = ConfigSubsection()
 config.plugins.autoresolution.enable = ConfigYesNo(default=False)
 config.plugins.autoresolution.showinfo = ConfigYesNo(default=True)
 config.plugins.autoresolution.testmode = ConfigYesNo(default=False)
+config.plugins.autoresolution.hdmihdrtype = ConfigYesNo(default=False)
+config.plugins.autoresolution.hdmicolorimetry = ConfigSelection(default="no", choices=[("no", _("no")), ("bt2020ncl", "BT 2020 NCL"), ("bt2020cl", "BT 2020 CL")])
 config.plugins.autoresolution.deinterlacer = ConfigSelection(default="auto", choices=[("off", _("off")), ("auto", _("auto")), ("on", _("on")), ("bob", _("bob"))])
 config.plugins.autoresolution.deinterlacer_progressive = ConfigSelection(default="auto", choices=[("off", _("off")), ("auto", _("auto")), ("on", _("on")), ("bob", _("bob"))])
 config.plugins.autoresolution.delay_switch_mode = ConfigSelection(default="1000", choices=[
@@ -89,6 +96,7 @@ config.plugins.autoresolution.auto_24_30_alternative = ConfigYesNo(default=True)
 config.plugins.autoresolution.ask_timeout = ConfigSelection(default="20", choices=[("5", "5 " + _("seconds")), ("10", "10 " + _("seconds")), ("15", "15 " + _("seconds")), ("20", "20 " + _("seconds"))])
 config.plugins.autoresolution.manual_resolution_ext_menu = ConfigYesNo(default=False)
 config.plugins.autoresolution.manual_resolution_ask = ConfigYesNo(default=True)
+config.plugins.autoresolution.force_progressive_mode = ConfigYesNo(default=False)
 
 
 def setDeinterlacer(mode):
@@ -100,8 +108,40 @@ def setDeinterlacer(mode):
 	except:
 		print("[AutoRes] failed switch deinterlacer mode to %s" % mode)
 
+def setHdmiHdrType(mode):
+	try:
+		f = open("/proc/stb/video/hdmi_hdrtype", "r")
+		old_mode = f.read()
+		f.close()
+	except:
+		old_mode = ""
+	if old_mode and old_mode != mode:
+		try:
+			f = open("/proc/stb/video/hdmi_hdrtype", "w")
+			f.write("%s" % mode)
+			f.close()
+			print("[AutoRes] switch hdmi_hdrtype mode to %s" % mode)
+		except:
+			print("[AutoRes] failed switch hdmi_hdrtype mode to %s" % mode)
 
-frqdic = {23976: '24',
+def setColorimetry(mode):
+	try:
+		f = open("/proc/stb/video/hdmi_colorimetry", "r")
+		old_mode = f.read()
+		f.close()
+	except:
+		old_mode = ""
+	if old_mode and old_mode != mode:
+		try:
+			f = open("/proc/stb/video/hdmi_colorimetry", "w")
+			f.write("%s" % mode)
+			f.close()
+			print("[AutoRes] switch hdmi_colorimetry mode to %s" % mode)
+		except:
+			print("[AutoRes] failed switch hdmi_colorimetry mode to %s" % mode)
+
+frqdic = {23000: '24',
+		23976: '24',
 		24000: '24',
 		25000: '25',
 		29970: '30',
@@ -110,6 +150,31 @@ frqdic = {23976: '24',
 		59940: '60',
 		60000: '60'}
 
+codec_data = {
+	-1: "N/A",
+	0: "MPEG2",
+	1: "AVC",
+	2: "H263",
+	3: "VC1",
+	4: "MPEG4-VC",
+	5: "VC1-SM",
+	6: "MPEG1",
+	7: "HEVC",
+	8: "VP8",
+	9: "VP9",
+	10: "XVID",
+	11: "N/A 11",
+	12: "N/A 12",
+	13: "DIVX 3.11",
+	14: "DIVX 4",
+	15: "DIVX 5",
+	16: "AVS",
+	17: "N/A 17",
+	18: "VP6",
+	19: "N/A 19",
+	20: "N/A 20",
+	21: "SPARK",
+}
 
 class AutoRes(Screen):
 	def __init__(self, session):
@@ -121,6 +186,7 @@ class AutoRes(Screen):
 				iPlayableService.evVideoProgressiveChanged: self.__evVideoProgressiveChanged,
 				iPlayableService.evVideoFramerateChanged: self.__evVideoFramerateChanged,
 				iPlayableService.evUpdatedInfo: self.__evUpdatedInfo,
+				iPlayableService.evVideoGammaChanged: self.__evVideoGammaChanged,
 				iPlayableService.evStart: self.__evStart,
 				iPlayableService.evEnd: self.__evEnd
 			})
@@ -129,6 +195,7 @@ class AutoRes(Screen):
 		self.extra_mode720p60 = '720p60' in modes_available
 		self.extra_mode1080p50 = '1080p50' in modes_available
 		self.extra_mode1080p60 = '1080p60' in modes_available
+		self.extra_mode2160p50 = '2160p50' in modes_available
 		if config.av.videoport.value in config.av.videomode:
 			self.lastmode = config.av.videomode[config.av.videoport.value].value
 		config.av.videoport.addNotifier(self.defaultModeChanged)
@@ -198,7 +265,7 @@ class AutoRes(Screen):
 		else: # videomode changed in normal av setup
 			global videoresolution_dictionary
 			print("[AutoRes] mode changed to", configEntry.value)
-			default = (configEntry.value, _("default"))
+			default = (configEntry.value, _("default") + " (%s)" % configEntry.value)
 			preferedmodes = [mode[0] for mode in video_hw.getModeList(port) if mode[0] != default[0]]
 			preferedmodes.append(default)
 			print("[AutoRes] default", default)
@@ -211,6 +278,8 @@ class AutoRes(Screen):
 				preferedmodes.append('1080p50')
 			if self.extra_mode1080p60 and '1080p60' not in preferedmodes:
 				preferedmodes.append('1080p60')
+			if self.extra_mode2160p50 and '2160p50' not in preferedmodes:
+				preferedmodes.append('2160p50')
 			for mode in resolutions:
 				if have_2160p:
 					if mode[0].startswith('p2160'):
@@ -250,6 +319,12 @@ class AutoRes(Screen):
 			usable = False
 			self.changeVideomode()
 
+	def __evVideoGammaChanged(self):
+		if HasHdrType and config.plugins.autoresolution.hdmihdrtype.value and config.av.hdmihdrtype.value == "auto":
+			if not self.timer.isActive() or self.after_switch_delay:
+				print("[AutoRes] got event evVideoGammaChanged")
+				self.timer.start(200, True)
+
 	def __evVideoFramerateChanged(self):
 		print("[AutoRes] got event evFramerateChanged")
 		if not self.timer.isActive() or self.after_switch_delay:
@@ -278,14 +353,24 @@ class AutoRes(Screen):
 			height = info and info.getInfo(iServiceInformation.sVideoHeight)
 			width = info and info.getInfo(iServiceInformation.sVideoWidth)
 			framerate = info and info.getInfo(iServiceInformation.sFrameRate)
-
+			if not framerate:
+				try:
+					framerate = int(open("/proc/stb/vmpeg/0/framerate", "r").read())
+				except:
+					pass
 			if info and height != -1 and width != -1 and framerate != -1:
-				videocodec = ("MPEG2", "AVC", "MPEG1", "MPEG4-VC", "VC1", "VC1-SM", "HEVC", "N/A")[info.getInfo(iServiceInformation.sVideoType)]
+				videocodec = codec_data.get(info.getInfo(iServiceInformation.sVideoType), "N/A")
 				frate = str(framerate)[:2] #fallback?
 				if framerate in frqdic:
 					frate = frqdic[framerate]
 
 				prog = ("i", "p", "")[info.getInfo(iServiceInformation.sProgressive)]
+
+				if config.plugins.autoresolution.force_progressive_mode.value:
+					service = self.session.nav.getCurrentlyPlayingServiceReference()
+					str_service = service and service.toString() or ""
+					if ("%3a//" in str_service or str_service.rsplit(":", 1)[1].startswith("/")) and prog != "p":
+						prog = "p"
 
 				if have_2160p and (height >= 2100 or width >= 3200): # 2160 content
 					if frate in ('24', '25', '30') and prog == 'p':
@@ -318,6 +403,21 @@ class AutoRes(Screen):
 				else:
 					setDeinterlacer("auto")
 
+				gamma_num = info.getInfo(iServiceInformation.sGamma)
+				if HasHdrType and config.plugins.autoresolution.hdmihdrtype.value and config.av.hdmihdrtype.value == "auto":
+					gammas = ("auto", "hdr10", "hdr10", "hlg", "auto")
+					if gamma_num < len(gammas):
+						# Possible gamma values
+						# 0: Traditional gamma - SDR luminance range
+						# 1: Traditional gamma - HDR luminance range
+						# 2: SMPTE ST2084 (aka HDR10)
+						# 3: Hybrid Log-gamma
+						hdrtype = gammas[gamma_num]
+						setHdmiHdrType(hdrtype)
+						if HasColorimetry and config.plugins.autoresolution.hdmicolorimetry.value != "no" and config.av.hdmicolorimetry.value == "auto":
+							colorimetry = hdrtype in ("hdr10", "hlg") and config.plugins.autoresolution.hdmicolorimetry.value or "auto"
+							setColorimetry(colorimetry)
+
 				print("[AutoRes] new content is %sx%s%s%s" % (width, height, prog, frate))
 
 				if new_mode in videoresolution_dictionary:
@@ -325,7 +425,8 @@ class AutoRes(Screen):
 					print('[AutoRes] determined videomode', new_mode)
 					old = resolutionlabel["content"].getText()
 					codec_info = "%s %s" % (videocodec, width)
-					resolutionlabel["content"].setText(_("Videocontent: %sx%s%s %sHZ") % (codec_info, height, prog, frate))
+					gamma = (" SDR", " HDR", " HDR10", " HLG", "")[gamma_num]
+					resolutionlabel["content"].setText(_("Videocontent: %sx%s%s %sHZ") % (codec_info, height, prog, frate) + gamma)
 					if self.lastmode != new_mode:
 						self.lastmode = new_mode
 						self.changeVideomode()
@@ -337,7 +438,7 @@ class AutoRes(Screen):
 			return
 		if usable:
 			mode = self.lastmode
-			if "p24" in mode or "p25" in mode or "p30" in mode or (self.extra_mode1080p50 and "1080p50" in mode) or (self.extra_mode1080p60 and "1080p60" in mode) or (self.extra_mode720p60 and "720p60" in mode) or "720p50" in mode:
+			if "p24" in mode or "p25" in mode or "p30" in mode or (self.extra_mode1080p50 and "1080p50" in mode) or (self.extra_mode1080p60 and "1080p60" in mode) or (self.extra_mode720p60 and "720p60" in mode) or (self.extra_mode2160p50 and "2160p50" in mode) or "720p50" in mode:
 				try:
 					v = open('/proc/stb/video/videomode', "w")
 					v.write("%s\n" % mode)
@@ -465,8 +566,13 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 						getConfigListEntry(_("Delay x seconds after service started"), config.plugins.autoresolution.delay_switch_mode),
 						getConfigListEntry(_("Running in testmode"), config.plugins.autoresolution.testmode),
 						getConfigListEntry(_("Deinterlacer mode for interlaced content"), config.plugins.autoresolution.deinterlacer),
-						getConfigListEntry(_("Deinterlacer mode for progressive content"), config.plugins.autoresolution.deinterlacer_progressive)
+						getConfigListEntry(_("Deinterlacer mode for progressive content"), config.plugins.autoresolution.deinterlacer_progressive),
+						getConfigListEntry(_("Force set progressive for stream/video content"), config.plugins.autoresolution.force_progressive_mode)
 					))
+					if HasHdrType:
+						self.list.append(getConfigListEntry(_("Smart HDR type (set 'auto' HDMI HDR type)"), config.plugins.autoresolution.hdmihdrtype))
+						if HasColorimetry and config.plugins.autoresolution.hdmihdrtype.value:
+							self.list.append(getConfigListEntry(_("Separate colorimetry for HDR (set 'auto' HDMI Colorimetry)"), config.plugins.autoresolution.hdmicolorimetry))
 				else:
 					self.list.append(getConfigListEntry(_("Lock timeout"), config.plugins.autoresolution.lock_timeout))
 					self.list.append(getConfigListEntry(_("Ask before changing videomode"), config.plugins.autoresolution.ask_apply_mode))
@@ -494,13 +600,13 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
 		if self["config"].getCurrent() and len(self["config"].getCurrent()) > 0:
-			if self["config"].getCurrent()[1] in (config.plugins.autoresolution.enable, config.plugins.autoresolution.mode, config.plugins.autoresolution.ask_apply_mode, config.plugins.autoresolution.manual_resolution_ext_menu):
+			if self["config"].getCurrent()[1] in (config.plugins.autoresolution.enable, config.plugins.autoresolution.mode, config.plugins.autoresolution.ask_apply_mode, config.plugins.autoresolution.manual_resolution_ext_menu, config.plugins.autoresolution.hdmihdrtype):
 				self.createSetup()
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
 		if self["config"].getCurrent() and len(self["config"].getCurrent()) > 0:
-			if self["config"].getCurrent()[1] in (config.plugins.autoresolution.enable, config.plugins.autoresolution.mode, config.plugins.autoresolution.ask_apply_mode, config.plugins.autoresolution.manual_resolution_ext_menu):
+			if self["config"].getCurrent()[1] in (config.plugins.autoresolution.enable, config.plugins.autoresolution.mode, config.plugins.autoresolution.ask_apply_mode, config.plugins.autoresolution.manual_resolution_ext_menu, config.plugins.autoresolution.hdmihdrtype):
 				self.createSetup()
 
 	# for summary:
@@ -554,13 +660,18 @@ class AutoFrameRate(Screen):
 						self.framerate_change_is_locked = False
 					info = service and service.info()
 					framerate = info and info.getInfo(iServiceInformation.sFrameRate)
-					if "multi" in config.av.videorate[config.av.videomode[config.av.videoport.value].value].value:
+					if not framerate:
+						try:
+							framerate = int(open("/proc/stb/vmpeg/0/framerate", "r").read())
+						except:
+							pass
+					if config.av.videorate[config.av.videomode[config.av.videoport.value].value].value in ("multi", "auto"):
 						replace_mode = '30'
 						if config.plugins.autoresolution.auto_30_60.value:
 							replace_mode = '60'
 						if framerate in (59940, 60000):
 							self.setVideoFrameRate('60')
-						elif framerate in (23976, 24000):
+						elif framerate in (23000, 23976, 24000):
 							self.setVideoFrameRate('24')
 						elif framerate in (29970, 30000):
 							self.setVideoFrameRate(replace_mode)
