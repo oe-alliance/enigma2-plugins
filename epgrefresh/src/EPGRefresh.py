@@ -359,6 +359,7 @@ class EPGRefresh:
 			from .plugin import AdjustExtensionsmenu, housekeepingExtensionsmenu, extStopDescriptor, extPendingServDescriptor
 			AdjustExtensionsmenu(False, extPendingServDescriptor)
 			AdjustExtensionsmenu(False, extStopDescriptor)
+			AdjustExtensionsmenu(True, extRunDescriptor)
 			housekeepingExtensionsmenu(config.plugins.epgrefresh.show_run_in_extensionsmenu, force=True)
 		except:
 			print("[EPGRefresh] Error while removing 'Stop Running EPG-Refresh' to Extensionmenu:")

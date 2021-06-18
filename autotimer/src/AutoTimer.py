@@ -35,7 +35,7 @@ from .AutoTimerComponent import preferredAutoTimerComponent
 
 from itertools import chain
 from collections import defaultdict
-from difflib import SequenceMatcher
+#from difflib import SequenceMatcher	# Brian was here
 from operator import itemgetter
 
 from Plugins.SystemPlugins.Toolkit.SimpleThread import SimpleThread
@@ -596,8 +596,8 @@ class AutoTimer:
 						existing.append((name, begin, end, serviceref, timer.name))
 						break
 				elif timer.avoidDuplicateDescription >= 1 and not rtimer.disabled:
-					if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc):
-						print("[AutoTimer] We found a timer with similar description, skipping event")
+					if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
+						print("[AutoTimer] We found a timer with the same description, skipping event")	# Brian was here
 						oldExists = True
 						break
 
@@ -855,29 +855,138 @@ class AutoTimer:
 					"extdesc": event.getExtendedDescription() or '' # XXX: does event.getExtendedDescription() actually return None on no description or an empty string?
 				})
 
+# Brian was here...
 	def checkSimilarity(self, timer, name1, name2, shortdesc1, shortdesc2, extdesc1, extdesc2, force=False):
+
+		def prepString(ups): # This lumps all punctuation and spacing together as an underscore, probably only very rarely helps but I wanted to do it since it's not hard
+
+			pSretVal = ""
+			Flag = True
+			for ch in ups:
+				if ch.isalnum():
+					pSretVal += ch.lower()
+					Flag = True
+				elif ch != "'": #completely ignore apostrophe
+					if Flag:
+						pSretVal += "_"
+					Flag = False
+			return pSretVal.strip(" _") # this strips leading/trailing spaces and/or underscores
+
+		def titleMatch(p1, p2): # Tests two titles for a match
+
+			sp1 = p1.strip()
+			sp2 = p2.strip()
+
+			if sp1[0:4].lower() == "new:":	# Yes I know "New:" is English language specific maybe even UK specific
+				sp1 = sp1[4:].lstrip()
+
+			if sp2[0:4].lower() == "new:":	# Yes I know "New:" is English language specific maybe even UK specific
+				sp2 = sp2[4:].lstrip()
+
+			if sp1 and sp2:
+				return prepString(sp1) == prepString(sp2)
+			else:
+				return False # Because two blank strings do not count as a match
+
+		def descMatch(p1, p2): # Tests two descriptions for a match
+
+			ignLeadings = ["New.", "Brand new series", "New series", "Brand new"] # Any of these at the beginning of descriptions will be ignored
+			ignTrailings = ["[S]", "[AD]", "[AD,S]", "[S,AD]", "[HD]", "Also in HD."] # Any of these at the end of descriptions will be ignored (note: I'm NOT currently including [SL] or combinations with SL)
+												# Yes I know all the above are at best very English language specific at worst very UK specific
+
+			def stripLeadings(d):
+				desc = d.strip()
+				done = False
+				while not done:
+					done = True
+					for tr in ignLeadings:
+						tl = len(tr)
+						if desc[0:tl].lower() == tr.lower():
+							desc = desc[tl:].lstrip(" .,-")
+							done = False
+				return desc
+
+			def stripTrailings(d):
+				desc = d.strip()
+				done = False
+				while not done:
+					done = True
+					for tr in ignTrailings:
+						tl = len(tr)
+						if desc[-tl:].lower() == tr.lower():
+							desc = desc[:-tl].rstrip(" -")
+							done = False
+				return desc
+
+			sp1 = stripLeadings(p1)
+			sp2 = stripLeadings(p2)
+
+			sp1 = stripTrailings(sp1)
+			sp2 = stripTrailings(sp2)
+
+			return prepString(sp1) == prepString(sp2) # In this case I decided two blank strings will count as a match because
+					# in the worst case it's kind of equivalent to the case were all descriptions are 100% identical
+
+		# body of checkSimilarity starts here
 		foundTitle = False
 		foundShort = False
-		retValue = False
+
+#		print("[AutoTimer] -BEGIN-")
+#		print(">timer.searc='%s'" % (timer.searchForDuplicateDescription))
+#		print(">name1      ='%s'" % (name1))
+#		print(">name2      ='%s'" % (name2))
+#		print(">shortdesc1 ='%s'" % (shortdesc1))
+#		print(">shortdesc2 ='%s'" % (shortdesc2))
+#		print(">extdesc1   ='%s'" % (extdesc1))
+#		print(">extdesc2   ='%s'" % (extdesc2))
+#		print(">force      ='%s'" % (force))
+#		print("[AutoTimer] -END---")
+
 		if name1 and name2:
-			foundTitle = (0.8 < SequenceMatcher(lambda x: x == " ", name1, name2).ratio())
-		# NOTE: only check extended & short if tile is a partial match
-		if foundTitle:
-			if timer.searchForDuplicateDescription > 0 or force:
-				if shortdesc1 and shortdesc2:
-					# If the similarity percent is higher then 0.7 it is a very close match
-					foundShort = (0.7 < SequenceMatcher(lambda x: x == " ", shortdesc1, shortdesc2).ratio())
-					if foundShort:
-						if timer.searchForDuplicateDescription == 2:
-							if extdesc1 and extdesc2:
-								# Some channels indicate replays in the extended descriptions
-								# If the similarity percent is higher then 0.7 it is a very close match
-								retValue = (0.7 < SequenceMatcher(lambda x: x == " ", extdesc1, extdesc2).ratio())
-						else:
-							retValue = True
-			else:
-				retValue = True
-		return retValue
+			foundTitle = titleMatch(name1, name2)		# Brian was here
+
+		if foundTitle: # NOTE: only check extended & short if tile is a match
+
+			# At this point we have good matching titles (neither one is empty)
+
+			if timer.searchForDuplicateDescription > 0 or force: # if we're comparing descriptions
+
+				if not shortdesc1.strip(): # If there is no shortdesc1
+					shortdesc1 = extdesc1
+					extdesc1 = ""	# we use extdesc1 instead
+
+				if not shortdesc2.strip(): # If there is no shortdesc2
+					shortdesc2 = extdesc2
+					extdesc2 = ""	# we use extdesc2 instead
+
+				if shortdesc1.strip() and shortdesc2.strip():
+					foundShort = descMatch(shortdesc1, shortdesc2)
+				# At this point foundShort indicates if we found a meaningful match in short descriptions (neither one is empty)
+
+				if not foundShort:
+					return False # if we didn't find match stop and say no match
+
+				# At this point short descriptions have matched
+
+				if timer.searchForDuplicateDescription == 2: # If we were asked to compare all descriptions
+
+					if descMatch(shortdesc1, extdesc1): # if extdesc1 is duplicate of shortdesc1
+						extdesc1 = ""			# ignore it
+
+					if descMatch(shortdesc2, extdesc2): # if extdesc2 is duplicate of shortdesc2
+						extdesc2 = ""			# ignore it
+
+					return descMatch(extdesc1, extdesc2) # return match result of extended definitions (two empty strings do count as a match in this case)
+
+				# If we get here we're comparing only short descriptions, and we know they matched
+				return True
+
+			# if we get here we're not concerned with descriptions and know titles matched
+			return True
+
+		#If we get here titles didn't match or one or both are empty
+		return False
+# ...Brian was here
 
 	def checkDoubleTimers(self, timer, name1, name2, starttime1, starttime2, endtime1, endtime2, serviceref1, serviceref2, multiple):
 		foundTitle = name1 == name2
