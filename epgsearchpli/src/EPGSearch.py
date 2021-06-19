@@ -764,7 +764,7 @@ class EPGSearch(EPGSelection):
 			if cur[0] is not None:
 				name2 = cur[0].getEventName() or ''
 				name3 = name2.split("(")[0].strip()
-				eventname = name3.replace('"', '').replace('Õ/Ô', '').replace('Ì/Ô', '').replace('Õ/ô', '').replace('.', '')
+				eventname = name3.replace('"', '').replace('Ã•/Ã”', '').replace('ÃŒ/Ã”', '').replace('Ã•/Ã´', '').replace('.', '')
 				eventname = eventname.replace('0+', '').replace('(0+)', '').replace('6+', '').replace('(6+)', '').replace('7+', '').replace('(7+)', '').replace('12+', '').replace('(12+)', '').replace('16+', '').replace('(16+)', '').replace('18+', '').replace('(18+)', '')
 				try:
 					tmbdsearch = config.plugins.tmbd.profile.value

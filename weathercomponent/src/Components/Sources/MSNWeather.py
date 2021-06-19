@@ -24,6 +24,7 @@ import time
 from Source import Source
 from Components.WeatherMSN import weathermsn
 
+SIGN = u"Â°"
 
 class MSNWeather(Source):
 
@@ -64,7 +65,7 @@ class MSNWeather(Source):
 		if weathermsn.weatherData.weatherItems.has_key(skey):
 			item = weathermsn.weatherData.weatherItems[skey]
 			highTemp = item.high
-			return "%s°%s" % (highTemp, weathermsn.weatherData.degreetype)
+			return "%s%s%s" % (highTemp, SIGN, weathermsn.weatherData.degreetype)
 		else:
 			return _("n/a")
 
@@ -75,7 +76,7 @@ class MSNWeather(Source):
 		if weathermsn.weatherData.weatherItems.has_key(skey):
 			item = weathermsn.weatherData.weatherItems[skey]
 			lowTemp = item.low
-			return "%s°%s" % (lowTemp, weathermsn.weatherData.degreetype)
+			return "%s%s%s" % (lowTemp, SIGN, weathermsn.weatherData.degreetype)
 		else:
 			return _("n/a")
 
@@ -86,7 +87,7 @@ class MSNWeather(Source):
 		if weathermsn.weatherData.weatherItems.has_key(skey):
 			item = weathermsn.weatherData.weatherItems[skey]
 			highTemp = item.high
-			high = "%s°%s" % (highTemp, weathermsn.weatherData.degreetype)
+			high = "%s%s%s" % (highTemp, SIGN, weathermsn.weatherData.degreetype)
 			low = self.getTemperature_Low(key)
 			return "%s - %s" % (high, low)
 		else:
@@ -106,7 +107,7 @@ class MSNWeather(Source):
 	def getTemperature_Current(self):
 		skey = "-1"
 		if weathermsn.weatherData.weatherItems.has_key(skey):
-			return "%s°%s" % (weathermsn.weatherData.weatherItems[skey].temperature, weathermsn.weatherData.degreetype)
+			return "%s%s%s" % (weathermsn.weatherData.weatherItems[skey].temperature, SIGN, weathermsn.weatherData.degreetype)
 		else:
 			return _("n/a")
 
