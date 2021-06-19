@@ -315,7 +315,7 @@ class CompareMovie_and_Subtite_FileData(GuessFileData_from_FileName):
         movie_file_list = []
         movie_extentionds = self.__movie_file_extensions(self.__file_extentions)
         for x in os.listdir(movie_dir):
-            if x.rsplit(".", 1)[-1]in movie_extentionds:
+            if x.rsplit(".", 1)[-1] in movie_extentionds:
                 movie_file_list.append(movie_dir + "/" + x)
 	#USUNAC URL Z NAPISY24
         return movie_file_list

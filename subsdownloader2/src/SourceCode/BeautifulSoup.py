@@ -1847,7 +1847,7 @@ class UnicodeDammit:
 
         # Convert smart quotes to HTML if coming from an encoding
         # that might have them.
-        if self.smartQuotesTo and proposed.lower() in("windows-1252",
+        if self.smartQuotesTo and proposed.lower() in ("windows-1252",
                                                       "iso-8859-1",
                                                       "iso-8859-2"):
             markup = re.compile("([\x80-\x9f])").sub(lambda(x): self._subMSChar(x.group(1)),
