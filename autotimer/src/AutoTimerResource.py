@@ -104,7 +104,7 @@ class AutoTimerTestResource(AutoTimerBaseResource):
 		id = get("id")
 		if id:
 			id = int(id[0])
-		
+
 		autotimer.parseEPG(simulateOnly=True, uniqueId=id, callback=self.parsecallback)
 
 		return server.NOT_DONE_YET
