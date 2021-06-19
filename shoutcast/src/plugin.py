@@ -75,6 +75,7 @@ devid = "fa1jo93O_raeF0v9"
 
 _VALID_URI = re.compile(br"\A[\x21-\x7e]+\Z")
 
+
 class SHOUTcastGenre:
 	def __init__(self, name="", id=0, haschilds="false", parentid=0, opened="false"):
 		self.name = name

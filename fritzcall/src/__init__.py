@@ -33,6 +33,7 @@ warning = logger.warning
 error = logger.error
 exception = logger.exception
 
+
 def _(txt): # pylint: disable=C0103
 	td = gettext.dgettext("FritzCall", txt)
 	if td == txt:
@@ -40,6 +41,8 @@ def _(txt): # pylint: disable=C0103
 	return td
 
 # scramble text
+
+
 def __(text, front=True):  #pylint: disable=unused-argument
 	#===========================================================================
 	# if len(text) > 5:
@@ -60,7 +63,10 @@ def __(text, front=True):  #pylint: disable=unused-argument
 	# debug("__ 5")
 	return out
 
+
 import re
+
+
 def normalizePhoneNumber(intNo):
 	
 	found = re.match(r'^\+' + config.plugins.FritzCall.country.value.replace('00', '') + '(.*)', intNo)

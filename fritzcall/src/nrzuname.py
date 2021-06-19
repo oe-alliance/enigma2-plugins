@@ -105,6 +105,7 @@ def html2unicode(in_html):
 			warning("html2utf8: ValueError %s:%s (%s)", repr(key), repr(codepoint), str(e))
 	return in_html
 
+
 def normalizePhoneNumber(intNo):
 	found = re.match(r'^\+(.*)', intNo)
 	if found:
@@ -115,6 +116,7 @@ def normalizePhoneNumber(intNo):
 		return found.group(1)
 	else:
 		return '0'
+
 
 def out(number, caller):
 	debug("%s: %s", number, caller)
@@ -147,8 +149,10 @@ def out(number, caller):
 
 	print(name)
 
+
 def simpleout(number, caller):  # @UnusedVariable # pylint: disable=W0613
 	print(caller)
+
 
 try:
 	reverseLookupFileName = resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/reverselookup.xml")
@@ -157,6 +161,7 @@ except ImportError:
 
 countries = {}
 reverselookupMtime = 0
+
 
 class ReverseLookupAndNotifier(object):
 
@@ -461,6 +466,7 @@ class ReverseLookupAndNotifier(object):
 			self.outputFunction(self.number, "")
 		if __name__ == '__main__':
 			reactor.stop()  # @UndefinedVariable # pylint: disable=E1101
+
 
 if __name__ == '__main__':
 	cwd = os.path.dirname(sys.argv[0])
