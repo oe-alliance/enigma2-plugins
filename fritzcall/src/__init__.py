@@ -51,11 +51,11 @@ def __(text, front=True):  #pylint: disable=unused-argument
 	#	return '.....' 
 	#===========================================================================
 	# debug("__ 1")
-	out =""
+	out = ""
 	# debug("__ 2")
-	for i in range(len(text)//2):
+	for i in range(len(text) // 2):
 		# debug("__ 3")
-		out = out + text[i*2] + '.'
+		out = out + text[i * 2] + '.'
 		# debug("__ 4: %s", out)
 	# debug("__ 5")
 	return out

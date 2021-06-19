@@ -2172,7 +2172,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			self.list.append(getConfigListEntry(_("Countrycode (e.g. 0044 for UK, 0034 for Spain, etc.)"), config.plugins.FritzCall.countrycode))
 
 			if config.plugins.FritzCall.fwVersion.value is not None:
-				if config.plugins.FritzCall.fwVersion.value == "05.50" or config.plugins.FritzCall.fwVersion.value == "06.35"or config.plugins.FritzCall.fwVersion.value == "upnp":
+				if config.plugins.FritzCall.fwVersion.value == "05.50" or config.plugins.FritzCall.fwVersion.value == "06.35" or config.plugins.FritzCall.fwVersion.value == "upnp":
 					self.list.append(getConfigListEntry(_("User name Accessing FRITZ!Box"), config.plugins.FritzCall.username))
 				self.list.append(getConfigListEntry(_("Password Accessing FRITZ!Box"), config.plugins.FritzCall.password))
 				self.list.append(getConfigListEntry(_("Extension number to initiate call on"), config.plugins.FritzCall.extension))
@@ -2762,7 +2762,7 @@ class FritzProtocol(LineReceiver):  # pylint: disable=W0223
 					if not eDVBVolumecontrol.getInstance().isMuted():
 						globalActionMap.actions["volumeMute"]()
 					# self.pauseEnigma2()
-		if self.event == "DISCONNECT"and (config.plugins.FritzCall.muteOnCall.value or config.plugins.FritzCall.muteOnOutgoingCall.value) and mutedOnConnID == self.connID:
+		if self.event == "DISCONNECT" and (config.plugins.FritzCall.muteOnCall.value or config.plugins.FritzCall.muteOnOutgoingCall.value) and mutedOnConnID == self.connID:
 			debug("[FritzCall] unmute on connID: %s!", self.connID)
 			mutedOnConnID = None
 			# eDVBVolumecontrol.getInstance().volumeUnMute()
