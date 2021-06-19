@@ -22,7 +22,13 @@ $Id: FritzCallFBF.py 1589 2021-04-25 09:48:00Z michael $
 # W1201 logging-not-lazy
 # pylint: disable=C0111,C0103,C0301,W0603,C0302,W0611,F0401,E0611,W1201
 from __future__ import absolute_import
-import re, time, hashlib, logging, csv, json, six
+import re
+import time
+import hashlib
+import logging
+import csv
+import json
+import six
 import xml.etree.ElementTree as ET
 from io import StringIO
 from twisted.python.failure import Failure

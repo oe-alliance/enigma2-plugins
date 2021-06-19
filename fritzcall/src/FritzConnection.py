@@ -34,7 +34,9 @@ Modified to use async communication, content level authentication and plain xml.
 
 __version__ = '0.6'
 
-import logging, re, six
+import logging
+import re
+import six
 from hashlib import md5
 from twisted.web.client import getPage
 import xml.etree.ElementTree as ET
