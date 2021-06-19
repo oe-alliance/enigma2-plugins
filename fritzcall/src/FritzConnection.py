@@ -176,10 +176,10 @@ class FritzAction(object):
 		for h in six.iterkeys(headers):
 			newheaders[six.ensure_binary(h)] = six.ensure_binary(headers[h])
 		getPage(six.ensure_binary(url),
-			method = six.ensure_binary("POST"),
-			agent = six.ensure_binary(USERAGENT),
-			headers = newheaders,
-			postdata = six.ensure_binary(data)).addCallback(self._okExecute, callback, **kwargs).addErrback(self._errorExecute, callback)
+			method=six.ensure_binary("POST"),
+			agent=six.ensure_binary(USERAGENT),
+			headers=newheaders,
+			postdata=six.ensure_binary(data)).addCallback(self._okExecute, callback, **kwargs).addErrback(self._errorExecute, callback)
 
 	def _okExecute(self, content, callback, **kwargs):
 		# self.debug("")
@@ -222,10 +222,10 @@ class FritzAction(object):
 		for h in six.iterkeys(headers):
 			newheaders[six.ensure_binary(h)] = six.ensure_binary(headers[h])
 		getPage(six.ensure_binary(url),
-			method = six.ensure_binary("POST"),
-			agent = six.ensure_binary(USERAGENT),
-			headers = newheaders,
-			postdata = six.ensure_binary(data)).addCallback(self.parse_response, callback).addErrback(self._errorExecute, callback)
+			method=six.ensure_binary("POST"),
+			agent=six.ensure_binary(USERAGENT),
+			headers=newheaders,
+			postdata=six.ensure_binary(data)).addCallback(self.parse_response, callback).addErrback(self._errorExecute, callback)
 
 	def _errorExecute(self, error, callback):
 		# text = _("FRITZ!Box - Error getting status: %s") % error.getErrorMessage()
@@ -337,7 +337,7 @@ class FritzXmlParser(object):
 				source = 'http://{0}:{1}/{2}'.format(address, port, filename)
 			self.debug("source: %s", source)
 			getPage(six.ensure_binary(source),
- 				method = six.ensure_binary("GET"),).addCallback(self._okInit).addErrback(self._errorInit)
+ 				method=six.ensure_binary("GET"),).addCallback(self._okInit).addErrback(self._errorInit)
 
 	def _okInit(self, source):
 		# self.debug("")
@@ -356,7 +356,7 @@ class FritzXmlParser(object):
 		source = 'http://{0}:{1}/{2}'.format(address, port, filename)  # @UndefinedVariable
 		self.debug("source: %s", source)
 		getPage(source,
-				method = "GET",).addCallback(self._okInit).addErrback(self._errorInit)
+				method="GET",).addCallback(self._okInit).addErrback(self._errorInit)
 		
 
 	def nodename(self, name):
