@@ -84,7 +84,7 @@ class FritzAction(object):
 	warn = logger.warn
 	error = logger.error
 	exception = logger.exception
-	
+
 	header = {'soapaction': '',
 			  'content-type': 'text/xml',
 			  'charset': 'utf-8'}
@@ -363,7 +363,7 @@ class FritzXmlParser(object):
 		self.debug("source: %s", source)
 		getPage(source,
 				method="GET",).addCallback(self._okInit).addErrback(self._errorInit)
-		
+
 	def nodename(self, name):
 		#self.debug("name: %s, QName: %s" %(name, ET.QName(self.root, name).text))
 		"""Extends name with the xmlns-prefix to a valid nodename."""

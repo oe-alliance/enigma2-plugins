@@ -51,7 +51,7 @@ def __(text, front=True):  #pylint: disable=unused-argument
 	#	else:
 	#		return text[:-5] + '.....'
 	# else:
-	#	return '.....' 
+	#	return '.....'
 	#===========================================================================
 	# debug("__ 1")
 	out = ""
@@ -68,7 +68,7 @@ import re
 
 
 def normalizePhoneNumber(intNo):
-	
+
 	found = re.match(r'^\+' + config.plugins.FritzCall.country.value.replace('00', '') + '(.*)', intNo)
 	if found:
 		intNo = '0' + found.group(1)
