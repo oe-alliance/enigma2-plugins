@@ -1,0 +1,28 @@
+name: buildbot
+
+on:
+  push:
+    branches: [ python3 ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v2
+        with:
+          ref: 'python3'
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Build python 3.9
+        run: |
+          sudo apt-get -q update
+          sudo apt-get install dos2unix
+          pip3 install --upgrade pip autopep8
+          ./CI/build.sh
