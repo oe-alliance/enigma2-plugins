@@ -53,8 +53,7 @@ class Sensors:
 		import os
 		if os.path.exists("/proc/stb/sensors"):
 			sd = []
-			sd = os.listdir("/proc/stb/sensors")
-			sd.sort()
+			sd = sorted(os.listdir("/proc/stb/sensors"))
 			for dirname in sd:
 				if dirname.find("temp", 0, 4) == 0:
 					f = open("/proc/stb/sensors/%s/name" % dirname, "r")

@@ -269,8 +269,7 @@ class PictureViewer(Screen):
 			# adding all files in current dir to slideshowlist
 			dirname = self["menu"].getCurrentDir()
 			if os.path.isdir(dirname):
-				s = os.listdir(dirname)
-				s.sort()
+				s = sorted(os.listdir(dirname))
 				for file in s:
 					if compile(config.plugins.pictureviewer.matchingPattern.value).search(dirname + file):
 						self.slideshowfiles.append((_(file), dirname + file))
@@ -558,8 +557,7 @@ class PictureList(MenuList):
 
 		directories = []
 		files = []
-		files = os.listdir(directory)
-		files.sort()
+		files = sorted(os.listdir(directory))
 		tmpfiles = files[:]
 		for x in tmpfiles:
 			if os.path.isdir(directory + "/" + x):

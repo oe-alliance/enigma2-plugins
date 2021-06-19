@@ -183,7 +183,7 @@ class MovieScanner():
         tags = set()
         l = []
         dirs = []
-        while 1:
+        while True:
             serviceref = root_list.getNext()
             if not serviceref.valid():
                 break

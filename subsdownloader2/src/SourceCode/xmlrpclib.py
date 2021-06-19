@@ -799,8 +799,8 @@ class Marshaller:
         write("<value><struct>\n")
         for k, v in value.items():
             write("<member>\n")
-            if type(k) is not StringType:
-                if unicode and type(k) is UnicodeType:
+            if not isinstance(k, StringType):
+                if unicode and isinstance(k, UnicodeType):
                     k = k.encode(self.encoding)
                 else:
                     raise TypeError, "dictionary key must be string"
@@ -1030,9 +1030,9 @@ class MultiCallIterator:
 
     def __getitem__(self, i):
         item = self.results[i]
-        if type(item) == type({}):
+        if isinstance(item, type({})):
             raise Fault(item['faultCode'], item['faultString'])
-        elif type(item) == type([]):
+        elif isinstance(item, type([])):
             return item[0]
         else:
             raise ValueError,\
@@ -1415,7 +1415,7 @@ class Transport:
 
         p, u = self.getparser()
 
-        while 1:
+        while True:
             if sock:
                 response = sock.recv(1024)
             else:

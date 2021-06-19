@@ -269,7 +269,7 @@ class EPGRefresh:
 			myref = eServiceReference(bouquet.sref)
 			list = serviceHandler.list(myref)
 			if list is not None:
-				while 1:
+				while True:
 					s = list.getNext()
 					# TODO: I wonder if its sane to assume we get services here (and not just new lists)
 					if s.valid():

@@ -104,6 +104,5 @@ class PortScanner(object):
 		return self._scan_result['scan'][host]
 
 	def all_hosts(self):
-		listh = self._scan_result
-		listh.sort()
+		listh = sorted(self._scan_result)
 		return listh

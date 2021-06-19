@@ -3258,8 +3258,7 @@ class MerlinMusicPlayerFileList(Screen):
 			elif currentFilename.lower().endswith(".cue"):
 				SongList = self.readCUE(os_path.join(self["list"].getCurrentDirectory(), currentFilename))
 			else:
-				files = os_listdir(self["list"].getCurrentDirectory())
-				files.sort()
+				files = sorted(os_listdir(self["list"].getCurrentDirectory()))
 				for filename in files:
 					if filename.lower().endswith(".mp3") or filename.lower().endswith(".flac") or filename.lower().endswith(".m4a") or filename.lower().endswith(".ogg"):
 						SongList.append((Item(text=filename, filename=os_path.join(self["list"].getCurrentDirectory(), filename)),))

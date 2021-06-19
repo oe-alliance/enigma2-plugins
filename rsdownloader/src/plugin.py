@@ -626,8 +626,7 @@ class RS:
 			path = path + "/"
 		writeLog("Directory: " + path)
 		try:
-			file_list = listdir(path)
-			file_list.sort()
+			file_list = sorted(listdir(path))
 			writeLog("Count of lists: " + str(len(file_list)))
 		except:
 			file_list = []

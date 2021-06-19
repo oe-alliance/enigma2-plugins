@@ -165,8 +165,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 	    except:
 		sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
 
-        times = subs.keys()
-        times.sort()
+        times = sorted(subs.keys())
         for i in range(0, len(times)):
             next_time = 1
             while times[i] + next_time not in subs and next_time < 4:

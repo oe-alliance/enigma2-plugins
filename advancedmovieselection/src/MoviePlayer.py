@@ -500,7 +500,7 @@ if pluginPresent.BludiscPlayer:
             return index
 
         def ok(self):
-            if type(self["menu"].getCurrent()) is type(None):
+            if isinstance(self["menu"].getCurrent(), type(None)):
                 self.exit()
                 return
             name = self["menu"].getCurrent()[0]

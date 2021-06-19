@@ -927,14 +927,13 @@ class IRCClient(basic.LineReceiver):
 
         if len(self._pings) > self._MAX_PINGRING:
             # Remove some of the oldest entries.
-            byValue = [(v, k) for (k, v) in self._pings.items()]
-            byValue.sort()
+            byValue = sorted([(v, k) for (k, v) in self._pings.items()])
             excess = self._MAX_PINGRING - len(self._pings)
             for i in xrange(excess):
                 del self._pings[byValue[i][1]]
 
     def dccSend(self, user, file):
-        if type(file) == types.StringType:
+        if isinstance(file, types.StringType):
             file = open(file, 'r')
 
         size = fileSize(file)
@@ -1553,7 +1552,7 @@ class DccSendProtocol(protocol.Protocol, styles.Ephemeral):
     connected = 0
 
     def __init__(self, file):
-        if type(file) is types.StringType:
+        if isinstance(file, types.StringType):
             self.file = open(file, 'r')
 
     def connectionMade(self):

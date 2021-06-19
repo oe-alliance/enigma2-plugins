@@ -451,7 +451,7 @@ class QuickButton:
             if not l:
                 print("list movies for filter failed")
                 return
-            while 1:
+            while True:
                 serviceref = l.getNext()
                 if not serviceref.valid():
                     break

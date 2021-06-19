@@ -209,7 +209,7 @@ class MovieTagger(Screen):
 			if list is None:
 				pass
 			else:
-				while 1:
+				while True:
 					serviceref = list.getNext()
 					if not serviceref.valid():
 						break

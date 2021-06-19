@@ -172,9 +172,9 @@ class EIBObject(object):
 
 	def getKNXvalue(self):
 		value = self.value
-		if type(value) == bool and value == True:
+		if isinstance(value, bool) and value == True:
 			return "on"
-		elif type(value) == bool and value == False:
+		elif isinstance(value, bool) and value == False:
 			return "off"
 		else:
 			return str(value)
@@ -494,9 +494,9 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 			return
 		if EIB_object.object_type not in (EIB_SWITCH, EIB_DIMMER):
 			return
-		if type(EIB_object.value) == bool or EIB_object.value == 0:
+		if isinstance(EIB_object.value, bool) or EIB_object.value == 0:
 			self[EIB_object.object_id].setPixmapNum(int(EIB_object.value))
-		elif type(EIB_object.value) == int and EIB_object.value > 0:
+		elif isinstance(EIB_object.value, int) and EIB_object.value > 0:
 			self[EIB_object.object_id].setPixmapNum(1)
 		if EIB_object.object_type == EIB_DIMMER:
 			self[EIB_object.object_id + "_progress"].value = EIB_object.value

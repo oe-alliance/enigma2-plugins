@@ -303,7 +303,7 @@ class SubsDownloaderApplication(Screen):
 		self.showFilemanagerScreen(("file_info_on_screen_title"))
 
 	def showFilemanagerScreen_without_callback(self):
-		if type(self.showFilemanagerScreen_command) == type(None):
+		if isinstance(self.showFilemanagerScreen_command, type(None)):
 			self.showFilemanagerScreen(("None"))
 		else:
 			order = None
@@ -416,7 +416,7 @@ class SubsDownloaderApplication(Screen):
 				current_dir = self["fileList"].getCurrentDirectory()
 				current_selection = self["fileList"].getCurrentDirectory() + self["fileList"].getSelection()[0]# ('/hdd/Net_HDD/Filmy/Seriale/Boardwalk Empire Season 2/', True)
 
-			if os.path.exists(str(current_selection)) and "/".join(str(current_dir).split("/")[:-2]) + "/" != current_selection and type(current_dir) != type(None):
+			if os.path.exists(str(current_selection)) and "/".join(str(current_dir).split("/")[:-2]) + "/" != current_selection and not isinstance(current_dir, type(None)):
 				self.set_FileManager_enabled()
 				self.setServerAvailableSubtitles_for_dirList(current_dir)
 				self.session.openWithCallback(get_FileManagerCommands_callback, FileManagerCommands, current_selection)
@@ -523,8 +523,7 @@ class SubsDownloaderApplication(Screen):
 
 	def setServerAvailableSubtitles_for_dirList(self, current_dir):
 		if os.path.exists(str(current_dir)):
-			a = os.listdir(current_dir)
-			a.sort()
+			a = sorted(os.listdir(current_dir))
 			self.serverAvailableSubtitles = []
 			self.serverAvailableSubtitles.append(("/..", "/".join(current_dir.split("/")[0:-2]) + "/"))
 			for x in a:
@@ -983,9 +982,9 @@ class SubsDownloaderApplication(Screen):
 						except:
 							print("Can't delete file: %s" % self.subtitles.ZipFilePath)
 
-				if type(subtitle_filename) == type("string"):
+				if isinstance(subtitle_filename, type("string")):
 					self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename)
-				elif type(subtitle_filename) == type([]) or subtitle_filename == None:
+				elif isinstance(subtitle_filename, type([])) or subtitle_filename == None:
 					if len(subtitle_filename) == 1:
 						self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename[0])
 					elif len(subtitle_filename) > 1:
@@ -1039,8 +1038,7 @@ class SubsDownloaderApplication(Screen):
 		slist = []
 		foundIndex = 0
 		index = 0
-		files = os_listdir(self["fileList"].getCurrentDirectory())
-		files.sort()
+		files = sorted(os_listdir(self["fileList"].getCurrentDirectory()))
 		for name in files:
 			testname = name.lower()
 			if testname.endswith(".mp3") or name.endswith(".m4a") or name.endswith(".ogg") or name.endswith(".flac"):

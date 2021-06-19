@@ -232,8 +232,7 @@ class AutoTimer:
 		return [(x,) for x in lst]
 
 	def getSortedTupleTimerList(self):
-		lst = self.timers[:]
-		lst.sort()
+		lst = sorted(self.timers[:])
 		return [(x,) for x in lst]
 
 	def getUniqueId(self):
@@ -832,7 +831,7 @@ class AutoTimer:
 			print("[AutoTimer] listing of movies in " + dest + " failed")
 		else:
 			append = moviedict[dest].append
-			while 1:
+			while True:
 				movieref = movielist.getNext()
 				if not movieref.valid():
 					break

@@ -384,8 +384,7 @@ class EasyMedia(Screen):
 			self.__keys.append("myvideo")
 			MPaskList.append((_("MyVideo"), "MYVIDEO"))
 		plist = os_listdir("/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia")
-		plist = [x[:-5] for x in plist if x.endswith('.plug')]
-		plist.sort()
+		plist = sorted([x[:-5] for x in plist if x.endswith('.plug')])
 		for onePlug in plist:
 			try:
 				inpf = open(("/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/" + onePlug + ".plug"), 'rb')

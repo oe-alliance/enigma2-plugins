@@ -578,7 +578,7 @@ def calcNewField(field):
 
 	lx = -1
 	i = 0
-	while 1:
+	while True:
 		if i + 1 < XYMAX:
 			x = rand() % XMAX
 			y = 2 * (rand() % (YMAX / 2)) + (x % 2)
