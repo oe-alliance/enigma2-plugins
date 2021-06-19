@@ -16,6 +16,7 @@
 #    along with periscope; if not, write to the Free Software
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from __future__ import print_function
 import urllib
 import urllib2
 import logging
@@ -88,7 +89,7 @@ class BierDopje(SubtitleDatabase.SubtitleDB):
 
         try:
             subs = self.query(fname, langs)
-            print str(subs)
+            print(str(subs))
 
             if not subs and fname.rfind(".[") > 0:
                 # Try to remove the [VTV] or [EZTV] at the end of the file

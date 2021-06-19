@@ -7,6 +7,7 @@
 ###############################################################################
 
 # for localized messages
+from __future__ import print_function
 from . import _
 
 # Plugin definition
@@ -195,7 +196,7 @@ class AspectRatioSwitch:
 		for aspectnum, aspect in enumerate(ASPECT):
 			if config.plugins.AspectRatioSwitch.modes[aspect].value:
 				self.enabledaspects.append(aspectnum)
-		print pluginPrintname, "Aspect modes in cycle:", self.enabledaspects
+		print(pluginPrintname, "Aspect modes in cycle:", self.enabledaspects)
 
 	def enable(self):
 		self.change_keymap(config.plugins.AspectRatioSwitch.keymap.value)
@@ -226,7 +227,7 @@ class AspectRatioSwitch:
 		config.av.aspectratio.setValue(ASPECT[newaspectnum])
 		if config.plugins.AspectRatioSwitch.showmsg.value:
 			Notifications.AddPopup(text=_("Aspect ratio switched from:\n   %s\nto:\n   %s") % (ASPECTMSG[ASPECT[aspectnum]], ASPECTMSG[ASPECT[newaspectnum]]), type=MessageBox.TYPE_INFO, timeout=5, id='AspectRatioSwitch')
-			print pluginPrintname, "Aspect ratio switched from %d - %s to %d - %s" % (aspectnum, ASPECT[aspectnum], newaspectnum, ASPECT[newaspectnum])
+			print(pluginPrintname, "Aspect ratio switched from %d - %s to %d - %s" % (aspectnum, ASPECT[aspectnum], newaspectnum, ASPECT[newaspectnum]))
 
 
 def autostart(reason, **kwargs):
@@ -255,7 +256,7 @@ def autostart(reason, **kwargs):
 				keymaptext = keymaptext.replace('<key id="KEY_HELP" mapto="displayHelp" flags="m" />', '<key id="KEY_HELP" mapto="displayHelp" flags="b" />')
 				changed = True
 			if changed:
-				print pluginPrintname, "Preparing keymap.xml..."
+				print(pluginPrintname, "Preparing keymap.xml...")
 				keymapfile = open(keymappath, "w")
 				keymapfile.write(keymaptext)
 				keymapfile.close()
@@ -265,16 +266,16 @@ def autostart(reason, **kwargs):
 		if config.plugins.AspectRatioSwitch.autostart_ratio_enabled.value:
 			iAVSwitch.setAspectRatio(int(config.plugins.AspectRatioSwitch.autostart_ratio.value))
 			config.av.aspectratio.setValue(ASPECT[int(config.plugins.AspectRatioSwitch.autostart_ratio.value)])
-			print pluginPrintname, "startup, keymap =", config.plugins.AspectRatioSwitch.keymap
-			print pluginPrintname, "Initially set to:", ASPECT[int(config.plugins.AspectRatioSwitch.autostart_ratio.value)]
+			print(pluginPrintname, "startup, keymap =", config.plugins.AspectRatioSwitch.keymap)
+			print(pluginPrintname, "Initially set to:", ASPECT[int(config.plugins.AspectRatioSwitch.autostart_ratio.value)])
 		else:
-			print pluginPrintname, "Initiation disabled"
+			print(pluginPrintname, "Initiation disabled")
 
 		if config.plugins.AspectRatioSwitch.enabled.value and aspect_ratio_switch is None:
 			aspect_ratio_switch = AspectRatioSwitch()
 			aspect_ratio_switch.enable()
 	elif reason == 1:
-		print pluginPrintname, "shutdown"
+		print(pluginPrintname, "shutdown")
 		if aspect_ratio_switch is not None:
 			aspect_ratio_switch.disable()
 

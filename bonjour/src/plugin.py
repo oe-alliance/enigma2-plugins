@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 from enigma import eListboxPythonMultiContent, gFont
 
 from Plugins.Plugin import PluginDescriptor
@@ -38,11 +39,11 @@ class BonjourScreen(Screen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
-		print "LAYOUT FINISHED!!"
+		print("LAYOUT FINISHED!!")
 		self.setTitle(_("Bonjour: Overview"))
 
 	def _ok(self):
-		print "OK OK OK OK"
+		print("OK OK OK OK")
 		pass
 
 	def _exit(self):
@@ -58,7 +59,7 @@ class BonjourScreen(Screen):
 		self["menuList"].setList(list)
 
 	def __buildMenuEntry(self, service):
-		print "[Bonjour.__buildMenuEntry] service=%s" % service
+		print("[Bonjour.__buildMenuEntry] service=%s" % service)
 
 		file = "%s" % (service['file'])
 		name = "Name: %s" % (service['name'])
@@ -81,7 +82,7 @@ class BonjourScreen(Screen):
 def opencontrol(session):
 	bonjour.reloadConfig()
 	session.open(BonjourScreen, bonjour.services, bonjour.files)
-	print "[Bonjour.opencontrol] %s" % (bonjour.files)
+	print("[Bonjour.opencontrol] %s" % (bonjour.files))
 	#TODO GUI-Stuff
 
 

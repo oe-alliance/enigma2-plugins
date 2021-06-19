@@ -1,3 +1,4 @@
+from __future__ import print_function
 ############################################################################
 #    Copyright (C) 2008 by Volker Christian                                #
 #    Volker.Christian@fh-hagenberg.at                                      #
@@ -25,7 +26,7 @@ import os
 
 def loadSkinReal(skinPath):
 	if os.path.exists(skinPath):
-		print "[SKLDR] Loading skin ", skinPath
+		print("[SKLDR] Loading skin ", skinPath)
 		loadSkin(skinPath)
 
 

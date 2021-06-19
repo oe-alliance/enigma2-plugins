@@ -19,6 +19,7 @@
 #  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
+from __future__ import print_function
 from __init__ import _
 from enigma import ePoint
 from Screens.Screen import Screen
@@ -133,9 +134,9 @@ class BackupRestore(ConfigListScreen, Screen, SkinResolutionHelper):
         if config.AdvancedMovieSelection.backup_path.value:
             default = config.AdvancedMovieSelection.backup_path.value
             if default not in self.backup_dirs:
-                print "path from config:", default
+                print("path from config:", default)
                 self.backup_dirs.append(default)
-        print "backup dirs:", self.backup_dirs
+        print("backup dirs:", self.backup_dirs)
         self.backup_config_path = ConfigSelection(default=default, choices=self.backup_dirs)
         self.list.append(getConfigListEntry(_("Backup directory path:"), self.backup_config_path))
         ConfigListScreen.__init__(self, self.list, session=self.session)
@@ -166,7 +167,7 @@ class BackupRestore(ConfigListScreen, Screen, SkinResolutionHelper):
         self.session.openWithCallback(self.restoreCallback, FileBrowser, path)
 
     def restoreCallback(self, answer):
-        print answer
+        print(answer)
         if answer:
             from Source.Config import loadBackup
             loadBackup(answer)
@@ -183,7 +184,7 @@ class BackupRestore(ConfigListScreen, Screen, SkinResolutionHelper):
     def dirnameSelected(self, answer):
         if not answer:
             return
-        print "backup path:", answer
+        print("backup path:", answer)
         if answer not in self.backup_dirs:
             self.backup_dirs.append(answer)
         self.backup_config_path.setChoices(self.backup_dirs, default=answer)
@@ -706,9 +707,9 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
 
         self.qbutton_choicelist = []
         for button, function in qButtons.get():
-            print button, function
+            print(button, function)
             if function == "" or not self.checkEntry(function, self.entryguilist):
-                print "[no config entry]", button, function
+                print("[no config entry]", button, function)
                 function = "Nothing"
             csel = (button, ConfigSelection(default=function, choices=self.entryguilist))
             self.qbutton_choicelist.append(csel)
@@ -1218,7 +1219,7 @@ class AdvancedMovieSelectionOwnButtonName(Screen, ConfigListScreen):
         self.close()
 
     def keyCancel(self):
-        print "cancel"
+        print("cancel")
         if self["config"].isChanged():
             self.hideKeypad()
             self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
@@ -1226,5 +1227,5 @@ class AdvancedMovieSelectionOwnButtonName(Screen, ConfigListScreen):
             self.close()
 
     def keySave(self):
-        print "saving"
+        print("saving")
         ConfigListScreen.keySave(self)

@@ -1,3 +1,4 @@
+from __future__ import print_function
 from enigma import eServiceReference, eConsoleAppContainer
 from Components.MediaPlayer import PlayList
 import xml.dom.minidom
@@ -115,20 +116,20 @@ class Query:
 		try:
 			cdinfodom = xml.dom.minidom.parseString(data)
 		except:
-			print "[xml_parse_output] error, could not parse"
+			print("[xml_parse_output] error, could not parse")
 			return False
 		xmldata = cdinfodom.childNodes[0]
 		queries = xmldata.childNodes
 		self.xml_parse_query(queries)
-		print "[xml_parse_output] albuminfo: " + str(self.albuminfo)
-		print "[xml_parse_output] tracklisting: " + str(self.tracklisting)
+		print("[xml_parse_output] albuminfo: " + str(self.albuminfo))
+		print("[xml_parse_output] tracklisting: " + str(self.tracklisting))
 		return True
 
 	def xml_parse_query(self, queries_xml):
 	    for queries in queries_xml:
 		if queries.nodeType == xml.dom.minidom.Element.nodeType:
 		    if queries.tagName == 'query':
-			print "[xml_parse_query] cdinfo source is %s, hit %s of %s" % (queries.getAttribute("source"), queries.getAttribute("match"), queries.getAttribute("num_matches"))
+			print("[xml_parse_query] cdinfo source is %s, hit %s of %s" % (queries.getAttribute("source"), queries.getAttribute("match"), queries.getAttribute("num_matches")))
 			for query in queries.childNodes:
 			    if query.nodeType == xml.dom.minidom.Element.nodeType:
 				if query.tagName == 'albuminfo':
@@ -202,7 +203,7 @@ class Query:
 
 	def cdtext_scan(self):
 		cmd = "cdtextinfo -xalT"
-		print "[cdtext_scan] " + cmd
+		print("[cdtext_scan] " + cmd)
 		self.cdtext_container.appClosed.append(self.cdtext_finished)
 		self.cdtext_container.dataAvail.append(self.cdtext_avail)
 		self.cdtext_container.execute(cmd)
@@ -211,7 +212,7 @@ class Query:
 		cmd = "cdtextinfo -xalD --cddb-port=%d --cddb-server=%s --cddb-timeout=%s" % (config.plugins.CDInfo.CDDB_port.value, config.plugins.CDInfo.CDDB_server.value, config.plugins.CDInfo.CDDB_timeout.value)
 		if not config.plugins.CDInfo.CDDB_cache.value:
 			cmd += " --no-cddb-cache"
-		print "[cddb_scan] " + cmd
+		print("[cddb_scan] " + cmd)
 		self.cddb_container.appClosed.append(self.cddb_finished)
 		self.cddb_container.dataAvail.append(self.cddb_avail)
 		self.cddb_container.execute(cmd)

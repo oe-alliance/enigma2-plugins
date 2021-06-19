@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.LocationBox import MovieLocationBox, TimeshiftLocationBox
 from Screens.MessageBox import MessageBox
@@ -37,7 +38,7 @@ class RecordPathsSettings(Screen, ConfigListScreen):
 		}, -2)
 
 	def checkReadWriteDir(self, configele):
-		print "checkReadWrite: ", configele.value
+		print("checkReadWrite: ", configele.value)
 		if configele.value in [x[0] for x in self.styles] or fileExists(configele.value, "w"):
 			configele.last_value = configele.value
 			return True
@@ -59,28 +60,28 @@ class RecordPathsSettings(Screen, ConfigListScreen):
 		if default not in tmp:
 			tmp = tmp[:]
 			tmp.append(default)
-		print "DefaultPath: ", default, tmp
+		print("DefaultPath: ", default, tmp)
 		self.default_dirname = ConfigSelection(default=default, choices=tmp)
 		tmp = config.movielist.videodirs.value
 		default = config.usage.timer_path.value
 		if default not in tmp and default not in styles_keys:
 			tmp = tmp[:]
 			tmp.append(default)
-		print "TimerPath: ", default, tmp
+		print("TimerPath: ", default, tmp)
 		self.timer_dirname = ConfigSelection(default=default, choices=self.styles + tmp)
 		tmp = config.movielist.videodirs.value
 		default = config.usage.instantrec_path.value
 		if default not in tmp and default not in styles_keys:
 			tmp = tmp[:]
 			tmp.append(default)
-		print "InstantrecPath: ", default, tmp
+		print("InstantrecPath: ", default, tmp)
 		self.instantrec_dirname = ConfigSelection(default=default, choices=self.styles + tmp)
 		default = config.usage.timeshift_path.value
 		tmp = config.usage.allowed_timeshift_paths.value
 		if default not in tmp:
 			tmp = tmp[:]
 			tmp.append(default)
-		print "TimeshiftPath: ", default, tmp
+		print("TimeshiftPath: ", default, tmp)
 		self.timeshift_dirname = ConfigSelection(default=default, choices=tmp)
 		self.timeshift_dirname.last_value = self.timeshift_dirname.value
 		self.default_dirname.addNotifier(self.checkReadWriteDir, initial_call=False, immediate_feedback=False)

@@ -1,3 +1,4 @@
+from __future__ import print_function
 def chardetOutputTranslation(recognizedCoding):
 	"""Function translates recognizet codepage oputputed by getSubtitleCodepade to
 	ISO nanes supported by Python.

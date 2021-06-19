@@ -1,3 +1,4 @@
+from __future__ import print_function
 #  YTTrailer
 #
 #  Coded by Dr.Best (c) 2011
@@ -229,10 +230,10 @@ class YTTrailer:
 		watch_url = 'http://www.youtube.com/watch?v=%s&gl=US&hl=en' % video_id
 		watchrequest = Request(watch_url, None, std_headers)
 		try:
-			print "[YTTrailer] trying to find out if a HD Stream is available", watch_url
+			print("[YTTrailer] trying to find out if a HD Stream is available", watch_url)
 			watchvideopage = urlopen2(watchrequest).read()
 		except (URLError, HTTPException, socket_error), err:
-			print "[YTTrailer] Error: Unable to retrieve watchpage - Error code: ", str(err)
+			print("[YTTrailer] Error: Unable to retrieve watchpage - Error code: ", str(err))
 			return video_url
 
 		# Get video info
@@ -245,16 +246,16 @@ class YTTrailer:
 				if ('url_encoded_fmt_stream_map' or 'fmt_url_map') in videoinfo:
 					break
 			except (URLError, HTTPException, socket_error), err:
-				print "[YTTrailer] Error: unable to download video infopage", str(err)
+				print("[YTTrailer] Error: unable to download video infopage", str(err))
 				return video_url
 
 		if ('url_encoded_fmt_stream_map' or 'fmt_url_map') not in videoinfo:
 			# Attempt to see if YouTube has issued an error message
 			if 'reason' not in videoinfo:
-				print '[YTTrailer] Error: unable to extract "url_encoded_fmt_stream_map" or "fmt_url_map" parameter for unknown reason'
+				print('[YTTrailer] Error: unable to extract "url_encoded_fmt_stream_map" or "fmt_url_map" parameter for unknown reason')
 			else:
 				reason = unquote_plus(videoinfo['reason'][0])
-				print '[YTTrailer] Error: YouTube said: %s' % reason.decode('utf-8')
+				print('[YTTrailer] Error: YouTube said: %s' % reason.decode('utf-8'))
 			return video_url
 
 		video_fmt_map = {}
@@ -270,7 +271,7 @@ class YTTrailer:
 				try:
 					for arg in fmtstring.split('&'):
 						if arg.find('=') >= 0:
-							print arg.split('=')
+							print(arg.split('='))
 							key, value = arg.split('=')
 							if key == 'itag':
 								if len(value) > 3:
@@ -285,14 +286,14 @@ class YTTrailer:
 					fmturl = fmtid = ""
 
 				except:
-					print "error parsing fmtstring:", fmtstring
+					print("error parsing fmtstring:", fmtstring)
 
 			else:
 				(fmtid, fmturl) = fmtstring.split('|')
 			if fmtid in VIDEO_FMT_PRIORITY_MAP and fmtid != "":
 				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
 				fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
-		print "[YTTrailer] got", sorted(fmt_infomap.iterkeys())
+		print("[YTTrailer] got", sorted(fmt_infomap.iterkeys()))
 		if video_fmt_map and len(video_fmt_map):
 			if self.l3cert:
 				l3key = validate_cert(self.l3cert, l2key)
@@ -301,10 +302,10 @@ class YTTrailer:
 					val = etpm.computeSignature(rnd)
 					result = decrypt_block(val, l3key)
 					if result[80:88] == rnd:
-						print "[YTTrailer] found best available video format:", video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
+						print("[YTTrailer] found best available video format:", video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid'])
 						best_video = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]
 						video_url = "%s" % (best_video['fmturl'].split(';')[0])
-						print "[YTTrailer] found best available video url:", video_url
+						print("[YTTrailer] found best available video url:", video_url)
 
 		return video_url
 

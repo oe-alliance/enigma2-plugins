@@ -1,3 +1,4 @@
+from __future__ import print_function
 ##
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -23,7 +24,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 	desk = getDesktop(0)
 	x = int(desk.size().width())
 	y = int(desk.size().height())
-	print "[dreamIRC] setup: current desktop size: %dx%d" % (x, y)
+	print("[dreamIRC] setup: current desktop size: %dx%d" % (x, y))
 
 	if (y >= 720):
 		skin = """
@@ -83,7 +84,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 	def load(self):
 		self.reloadFile()
 		self.accounts = [ircsupport.IRCAccount(self.type, string.atoi(self.nr), str(self.nick), str(self.passwd), str(self.server1), string.atoi(self.port), str(self.channel))]
-		print self.accounts
+		print(self.accounts)
 		return self.accounts
 
 	def reloadFile(self):
@@ -100,7 +101,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 				self.channel = node.getAttribute("channel")
 				self.debug = node.getAttribute("debug")
 			if ((self.nick.lower() == "dreamircuser") or (self.nick == "") or (self.nick[0] == " ") or (self.nick.lower() == "dm8000-vip")):
-				print "[dreamIRC] nickname error... restoring default..."
+				print("[dreamIRC] nickname error... restoring default...")
 				self.nick = self.device + "_" + self.mac_end
 		except IOError:
 			self.type = "IRC"
@@ -187,7 +188,7 @@ class dreamIRCConfig:
 				self.login = node.getAttribute("login")
 				self.nick = node.getAttribute("nick")
 				if ((self.nick.lower() == "dreamircuser") or (self.nick == "") or (self.nick[0] == " ") or (self.nick.lower() == "dm8000-vip")):
-					print "[dreamIRC] nickname error... restoring default..."
+					print("[dreamIRC] nickname error... restoring default...")
 					self.nick = self.device + "_" + self.mac_end
 				self.passwd = node.getAttribute("passwd")
 				self.server1 = node.getAttribute("server1") # atm only ip.. cause of probs with theads and dns..
@@ -219,7 +220,7 @@ class dreamIRCConfig:
 						self.server = self.server3
 						self.status3 = True
 			except:
-				print "unable to resolve hostname %s..." % self.server3
+				print("unable to resolve hostname %s..." % self.server3)
 		if self.server2:
 			try:
 				self.result2 = gethostbyname_ex(self.server2)
@@ -229,7 +230,7 @@ class dreamIRCConfig:
 						self.server = self.server2
 						self.status2 = True
 			except:
-				print "unable to resolve hostname %s..." % self.server2
+				print("unable to resolve hostname %s..." % self.server2)
 		if self.server1:
 			try:
 				self.result1 = gethostbyname_ex(self.server1)
@@ -239,15 +240,15 @@ class dreamIRCConfig:
 						self.server = self.server1
 						self.status1 = True
 			except:
-				print "unable to resolve hostname %s..." % self.server1
+				print("unable to resolve hostname %s..." % self.server1)
 
 		if self.status1 == False and self.status2 == False and self.status3 == False:
 			self.pipe.add("ERROR!!! no irc server was valid... please check settings...")
 			return False
 		else:
-			print " account = type: %s login:%s nick:%s passwd:%s server:%s ip:%s port:%s channel:%s debug:%s " % (self.type, self.login, self.nick, self.passwd, self.server, self.ip, self.port, self.channel, self.debug)
+			print(" account = type: %s login:%s nick:%s passwd:%s server:%s ip:%s port:%s channel:%s debug:%s " % (self.type, self.login, self.nick, self.passwd, self.server, self.ip, self.port, self.channel, self.debug))
 			self.accounts = [ircsupport.IRCAccount(self.type, string.atoi(self.login), str(self.nick), str(self.passwd), str(self.ip), string.atoi(self.port), str(self.channel))]
-			print self.accounts
+			print(self.accounts)
 			return self.accounts
 
 	def channel(self):

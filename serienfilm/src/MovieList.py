@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # for localized messages
+from __future__ import print_function
 from . import _x
 
 from Components.GUIComponent import GUIComponent
@@ -319,7 +320,7 @@ class MovieList(GUIComponent):
 		parent = None
 		info = self.serviceHandler.info(root)
 		pwd = info and info.getName(root)
-		print "[SF-Plugin] MovieList.realDirUp: pwd = >%s<" % (str(pwd))
+		print("[SF-Plugin] MovieList.realDirUp: pwd = >%s<" % (str(pwd)))
 		if pwd and os.path.exists(pwd) and not os.path.samefile(pwd, defaultMoviePath()):
 			parentdir = pwd[:pwd.rfind("/", 0, -1)] + "/"
 			parent = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + parentdir)
@@ -346,7 +347,7 @@ class MovieList(GUIComponent):
 		self.root = root
 		list = self.serviceHandler.list(root)
 		if list is None:
-			print "[SF-Plugin] listing of movies failed"
+			print("[SF-Plugin] listing of movies failed")
 			list = []
 			return
 		tags = set()

@@ -1,3 +1,4 @@
+from __future__ import print_function
 from twisted.web import resource, http, server
 from enigma import eDVBDB
 from Tools.Directories import resolveFilename, SCOPE_CONFIG
@@ -140,7 +141,7 @@ class ServiceListSave(resource.Resource):
 			# reloading *.tv and *.radio
 			db = eDVBDB.getInstance()
 			db.reloadBouquets()
-			print "servicelists reloaded"
+			print("servicelists reloaded")
 			result = """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n
 						<e2simplexmlresult>\n
 							<e2state>True</e2state>
@@ -152,7 +153,7 @@ class ServiceListSave(resource.Resource):
 			request.write(result)
 
 		except Exception, e:
-			print e
+			print(e)
 			result = """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n
 						<e2simplexmlresult>\n
 							<e2state>False</e2state>
@@ -167,11 +168,11 @@ class ServiceListSave(resource.Resource):
 		return server.NOT_DONE_YET
 
 	def parseXML(self, xmldata):
-		print "parsing xmldata with length", len(xmldata)
+		print("parsing xmldata with length", len(xmldata))
 		xmldoc = xml_dom_minidom_parseString(xmldata)
 		blist = xmldoc.getElementsByTagName("e2bouquetlist")[0]
-		print "Num TV Bouquets", len(blist.getElementsByTagName('e2tvbouquetlist')[0].getElementsByTagName('e2bouquet'))
-		print "Num RADIO Bouquets", len(blist.getElementsByTagName('e2radiobouquetlist')[0].getElementsByTagName('e2bouquet'))
+		print("Num TV Bouquets", len(blist.getElementsByTagName('e2tvbouquetlist')[0].getElementsByTagName('e2bouquet')))
+		print("Num RADIO Bouquets", len(blist.getElementsByTagName('e2radiobouquetlist')[0].getElementsByTagName('e2bouquet')))
 
 		bouquets_tv = self.parseBouquets(blist.getElementsByTagName('e2tvbouquetlist')[0])
 		bouquets_radio = self.parseBouquets(blist.getElementsByTagName('e2radiobouquetlist')[0])
@@ -199,7 +200,7 @@ class ServiceListSave(resource.Resource):
 		return list
 
 	def createBouquetFile(self, type, bname, list_services, counter):
-		print "creating file for bouquet", bname, "with", len(list_services), "services for type", type
+		print("creating file for bouquet", bname, "with", len(list_services), "services for type", type)
 		filename = self.getFilenameForBouquet(type, bname, counter)
 		fcontent = "#NAME %s\n" % bname
 		for service in list_services:
@@ -211,7 +212,7 @@ class ServiceListSave(resource.Resource):
 		fp.close()
 
 	def createIndexFile(self, type, bouquets):
-		print "creating Indexfile with", len(bouquets), "num bouquets for type", type
+		print("creating Indexfile with", len(bouquets), "num bouquets for type", type)
 		filename = self.getFilenameForIndex(type)
 		if(type == self.TYPE_TV):
 			fcontent = "#NAME User - bouquets (TV)\n"

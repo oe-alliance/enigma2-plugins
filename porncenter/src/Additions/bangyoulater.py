@@ -1,3 +1,4 @@
+from __future__ import print_function
 # bangyoulater plugin by AliAbdul
 from Plugin import Movie, Plugin
 import re
@@ -32,7 +33,7 @@ class bangYouLaterSub(Plugin):
 
 	def getPageError(self, error=None):
 		if error and self.currPage == 1:
-			print "[%s] Error: %s" % (self.name, error)
+			print("[%s] Error: %s" % (self.name, error))
 		else:
 			self.moreEntries = False
 
@@ -58,7 +59,7 @@ class bangYouLater(Plugin):
 
 	def getPageError(self, error=None):
 		if error:
-			print "[%s] Error: %s" % (self.name, error)
+			print("[%s] Error: %s" % (self.name, error))
 
 ##################################################
 

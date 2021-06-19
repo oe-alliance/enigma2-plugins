@@ -1,3 +1,4 @@
+from __future__ import print_function
 import httplib
 import xml.dom.minidom
 import time
@@ -82,7 +83,7 @@ class Napisy24_pl(XML_to_Dict, zip_extractor):
 	dir_count = 0
 	for x in dir_list:
 	    if x.split(".")[-1].lower() == "nfo":
-		print "find NFO in %i list" % dir_count
+		print("find NFO in %i list" % dir_count)
 		break
 	    dir_count = dir_count + 1
 	try:
@@ -107,7 +108,7 @@ class Napisy24_pl(XML_to_Dict, zip_extractor):
 	    return buffor[IMDB_begining:IMDB_ending]
 	#tutaj trzeba sprawdzienia IMDB numeru jesli jest oka to zwraca informacje jesli jest nie oka to zwraca blad
 	except:
-	    print "blad IMBN"
+	    print("blad IMBN")
 	    return False
 
     def __connect_with_server(self, get_operatoin, server_reuest_type):
@@ -121,14 +122,14 @@ class Napisy24_pl(XML_to_Dict, zip_extractor):
 	    conn = httplib.HTTPConnection(self.NAPISY24_url)
 	    conn.request("GET", get_operatoin)
 	    r1 = conn.getresponse()
-	    print r1.status, r1.reason
+	    print(r1.status, r1.reason)
 	    if what_is_downloaded == "downloada_subtitle_list_by_film_name" or what_is_downloaded == "downloada_subtitle_list_by_IMDB":
 		self.XML_String = r1.read()
 	    elif what_is_downloaded == "download_subtilte_zip":
 		self.zip_string = r1.read()
 	    return r1.status#, r1.reason
 	except (IOError, OSError), e:
-	    print >> sys.stderr, "Napisy24.pl server connection error."
+	    print("Napisy24.pl server connection error.", file=sys.stderr)
 	    time.sleep(0.5)
 
     def getNapisy24_SubtitleListXML(self, subtitle_list_reuest_type):
@@ -154,22 +155,22 @@ class Napisy24_pl(XML_to_Dict, zip_extractor):
             repeat = repeat - 1
 	    r1_status = self.__connect_with_server(request_subtitle_list, "downloada_subtitle_list_by_film_name")
             if r1_status != 200 and r1_status != 400:
-                print "Fetching subtitle list failed, HTTP code: %s" % (str(r1_status))
+                print("Fetching subtitle list failed, HTTP code: %s" % (str(r1_status)))
                 time.sleep(0.5)
                 continue
 	    elif r1_status == 400:
-		print "Fetching subtitle list failed, HTTP code: %s \n Bad request in string: %s." % (str(r1_status), request_subtitle_list)
+		print("Fetching subtitle list failed, HTTP code: %s \n Bad request in string: %s." % (str(r1_status), request_subtitle_list))
 		repeat = -1
             else:
                 repeat = 0
 
             if self.XML_String == ('brak wynikow'):
-                print "Subtitle list NOT FOUND"
+                print("Subtitle list NOT FOUND")
                 repeat = 0
                 continue
 
             if self.XML_String is None or self.XML_String == "":
-                print "Subtitle list download FAILED"
+                print("Subtitle list download FAILED")
                 continue
 
         if r1_status != 200 or self.XML_String == 'brak wynikow' or self.XML_String == "" or self.XML_String is None:
@@ -200,10 +201,10 @@ class Napisy24_pl(XML_to_Dict, zip_extractor):
 	    self.Correct_MultiRoot_XML()
 	    self.subtitle_dict = sorted(self.xmltodict(self.XML_String)['subtitle'], key=itemgetter('imdb', 'cd'))
 	    #self.subtitle_dict = self.xmltodict(self.XML_String)['subtitle']
-	    print "XML subtitle list downloaded and converted to dict"
+	    print("XML subtitle list downloaded and converted to dict")
 	    return True
 	except:
-	    print "XML subtitle list  not downloaded or converterd."
+	    print("XML subtitle list  not downloaded or converterd.")
 	    return False
 
     def return_xml_dict_entry_value(self, dict_entry, dict_entry_position):
@@ -225,11 +226,11 @@ class Napisy24_pl(XML_to_Dict, zip_extractor):
 		zip_file = open(self.ZipFilePath, "wb")
 		zip_file.write(self.zip_string)
 		zip_file.close
-		print "Zipfile: %s saved on hdd." % self.ZipFilePath
+		print("Zipfile: %s saved on hdd." % self.ZipFilePath)
 		del self.zip_string
 		return True
 	    except:
-		print "Problems with Zipfile: %s saveing on hdd." % self.ZipFilePath
+		print("Problems with Zipfile: %s saveing on hdd." % self.ZipFilePath)
 		return False
 
     def download_subtitle_zip(self, dict_entry_to_download):
@@ -243,26 +244,26 @@ class Napisy24_pl(XML_to_Dict, zip_extractor):
 	    #request_subtitle_list = "/libs/webapi.php?title=%s" % self.MovieName
 	    r1_status = self.__connect_with_server(request_subtitle_list, "download_subtilte_zip")
             if r1_status != 302:
-                print "Fetching subtitle failed, HTTP code: %s" % (str(r1_status))
+                print("Fetching subtitle failed, HTTP code: %s" % (str(r1_status)))
                 time.sleep(0.5)
                 continue
             else:
                 repeat = 0
 
             if self.zip_string == None:
-                print "Subtitle NOT DOWNLOADED"
+                print("Subtitle NOT DOWNLOADED")
                 repeat = 0
                 continue
 
             if self.zip_string is None or self.zip_string == "":
-                print "Subtitle NOT DOWNLOADED"
+                print("Subtitle NOT DOWNLOADED")
                 continue
 
         if self.zip_string[0:2] == 'PK':
-	    print "Success to download subtitle zip."
+	    print("Success to download subtitle zip.")
             return True
         else:
-	    print "Feild to download subtitle zip."
+	    print("Feild to download subtitle zip.")
             return False
 
 

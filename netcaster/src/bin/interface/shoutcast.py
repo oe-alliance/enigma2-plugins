@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Plugins.Extensions.NETcaster.StreamInterface import StreamInterface
 from Plugins.Extensions.NETcaster.StreamInterface import Stream
 from Screens.ChoiceBox import ChoiceBox
@@ -72,7 +73,7 @@ def write_cache(cache_file, cache_data):
         try:
             mkdir(dirname(cache_file))
         except OSError:
-            print dirname(cache_file), 'is a file'
+            print(dirname(cache_file), 'is a file')
     fd = open(cache_file, 'w')
     dump(cache_data, fd, -1)
     fd.close()
@@ -151,7 +152,7 @@ class StationParser(ContentHandler):
         if name == 'stationlist':
             self.isStationList = False
             if DEBUG == 1:
-                print 'Parsed ', self.count, ' stations'
+                print('Parsed ', self.count, ' stations')
 
 
 class GenreParse(ContentHandler):
@@ -202,7 +203,7 @@ class GenreFeed:
                 ct = None
         if not ct or (time.time() - ct) > self.cache_ttl:
             if DEBUG == 1:
-                print 'Getting fresh feed'
+                print('Getting fresh feed')
             try:
 	        parseXML = GenreParse()
 	        self.genres = self.fetch_genres()
@@ -210,7 +211,7 @@ class GenreFeed:
 	        self.genre_list = parseXML.genreList
 	        write_cache(self.cache_file, self.genre_list)
 	    except:
-	    	print "Failed to get genres from server, sorry."
+	    	print("Failed to get genres from server, sorry.")
         return self.genre_list
 
 
@@ -248,7 +249,7 @@ class ShoutcastFeed:
             try:
                 self.station_list = load_cache(self.cache_file)
             except:
-            	print "Failed to load cache."
+            	print("Failed to load cache.")
         if not ct or (time.time() - ct) > self.cache_ttl:
             try:
                 parseXML = StationParser(self.min_bitrate)
@@ -257,5 +258,5 @@ class ShoutcastFeed:
                 self.station_list = parseXML.station_list
                 write_cache(self.cache_file, self.station_list)
             except:
-            	print "Failed to get a new station list, sorry."
+            	print("Failed to get a new station list, sorry.")
         return self.station_list

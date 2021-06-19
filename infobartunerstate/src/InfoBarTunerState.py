@@ -1,3 +1,4 @@
+from __future__ import print_function
 #######################################################################
 #
 #    InfoBar Tuner State for Enigma-2
@@ -313,17 +314,17 @@ class InfoBarTunerState(object):
 
 	def __onRecordingEvent(self, timer):
 		if not timer.justplay:
-			print "IBTS Timer Event " + str(timer.state) + ' ' + str(timer.repeated)
+			print("IBTS Timer Event " + str(timer.state) + ' ' + str(timer.repeated))
 #TODO
 # w.processRepeated()
 # w.state = TimerEntry.StateWaiting
 			if timer.state == timer.StatePrepared:
-				print "IBTS StatePrepared"
+				print("IBTS StatePrepared")
 				pass
 
 			elif timer.state == timer.StateRunning:
 				id = getTimerID(timer)
-				print "IBTS Timer running ID", id, id in self.entries
+				print("IBTS Timer running ID", id, id in self.entries)
 				if id not in self.entries:
 					#channel = timer.service_ref.getServiceName()
 					tuner, tunertype = getTuner(timer.record_service)
@@ -380,7 +381,7 @@ class InfoBarTunerState(object):
 
 	def __onStreamingEvent(self, event, stream):
 		if StreamingWebScreen and stream:
-			print "IBTS Stream Event"
+			print("IBTS Stream Event")
 			if event == StreamingWebScreen.EVENT_START:
 
 				try:
@@ -486,7 +487,7 @@ class InfoBarTunerState(object):
 
 	def updateNextTimer(self):
 		number_pending_records = int(config.infobartunerstate.number_pending_records.value)
-		print "IBTS updateNextTimer", number_pending_records
+		print("IBTS updateNextTimer", number_pending_records)
 
 		nextwins = [id for id in self.entries.keys() if id.startswith('next')]
 
@@ -542,7 +543,7 @@ class InfoBarTunerState(object):
 						del self.entries[id]
 
 	def show(self, autohide=False, forceshow=False):
-		print "IBTS show"
+		print("IBTS show")
 		allowclosing = True
 		if self.updateTimer.isActive() and autohide:
 			# Avoid closing if the update timer is active
@@ -570,7 +571,7 @@ class InfoBarTunerState(object):
 				self.hideTimer.stop()
 
 	def tunerShow(self, forceshow=False):
-		print "IBTS tunerShow"
+		print("IBTS tunerShow")
 
 		self.updateNextTimer()
 
@@ -749,19 +750,19 @@ class InfoBarTunerState(object):
 				if not self.info:
 					self.info = self.session.instantiateDialog(TunerStateInfo, _("Nothing running"))
 				self.info.show()
-				print "IBTS self.info.type", self.info.type
+				print("IBTS self.info.type", self.info.type)
 			except Exception, e:
-				print "InfoBarTunerState show exception " + str(e)
+				print("InfoBarTunerState show exception " + str(e))
 
 	def update(self):
-		print "IBTS updating"
+		print("IBTS updating")
 		#for win in self.entries.itervalues():
 		#	#TODO Update also names, width, order, type ...
 		#	win.update()
 		self.tunerShow()
 
 	def hide(self):
-		print "IBTS hide"
+		print("IBTS hide")
 		if self.updateTimer.isActive():
 			self.updateTimer.stop()
 		if self.hideTimer.isActive():
@@ -769,14 +770,14 @@ class InfoBarTunerState(object):
 		self.hideTimer.start(10, True)
 
 	def tunerHide(self):
-		print "IBTS tunerHide"
+		print("IBTS tunerHide")
 		for win in self.entries.itervalues():
 			win.hide()
 		if self.info:
 			self.info.hide()
 
 	def close(self):
-		print "IBTS close"
+		print("IBTS close")
 		recoverInfoBar()
 		removeExtension()
 		self.unbindInfoBar()
@@ -940,7 +941,7 @@ class TunerStateInfo(TunerStateBase):
 		self.onLayoutFinish.append(self.popup)
 
 	def popup(self):
-		print "IBTS popup"
+		print("IBTS popup")
 
 		self["Type"].setPixmapNum(3)
 
@@ -1030,7 +1031,7 @@ class TunerState(TunerStateBase):
 		if self.type != type:
 			self.type = type
 		if self.type == FINISHED:
-			print "IBTS updateType FINISHED"
+			print("IBTS updateType FINISHED")
 			self.tuner = _("-")
 			self.tunertype = _("-")
 			# Check if timer is already started
@@ -1401,7 +1402,7 @@ def getNextPendingRecordTimers():
 
 # Adapted from TimerEntry
 def processRepeated(timer, findRunningEvent=False):
-	print "ProcessRepeated"
+	print("ProcessRepeated")
 
 	def addOneDay(timedatestruct):
 		oldHour = timedatestruct.tm_hour
@@ -1422,17 +1423,17 @@ def processRepeated(timer, findRunningEvent=False):
 		localend = localtime(end)
 		localnow = localtime(now)
 
-		print "localrepeatedbegindate:", strftime("%c", localrepeatedbegindate)
-		print "localbegin:", strftime("%c", localbegin)
-		print "localend:", strftime("%c", localend)
-		print "localnow:", strftime("%c", localnow)
+		print("localrepeatedbegindate:", strftime("%c", localrepeatedbegindate))
+		print("localbegin:", strftime("%c", localbegin))
+		print("localend:", strftime("%c", localend))
+		print("localnow:", strftime("%c", localnow))
 
 		day = []
 		flags = timer.repeated
 		for x in (0, 1, 2, 3, 4, 5, 6):
 			if (flags & 1 == 1):
 				day.append(0)
-				print "Day: " + str(x)
+				print("Day: " + str(x))
 			else:
 				day.append(1)
 			flags = flags >> 1
@@ -1443,8 +1444,8 @@ def processRepeated(timer, findRunningEvent=False):
 			((day[localbegin.tm_wday] == 0) and ((findRunningEvent and localend < localnow) or ((not findRunningEvent) and localbegin < localnow)))):
 			localbegin = addOneDay(localbegin)
 			localend = addOneDay(localend)
-			print "localbegin after addOneDay:", strftime("%c", localbegin)
-			print "localend after addOneDay:", strftime("%c", localend)
+			print("localbegin after addOneDay:", strftime("%c", localbegin))
+			print("localend after addOneDay:", strftime("%c", localend))
 
 		#we now have a struct_time representation of begin and end in localtime, but we have to calculate back to (gmt) seconds since epoch
 		begin = int(mktime(localbegin))
@@ -1452,8 +1453,8 @@ def processRepeated(timer, findRunningEvent=False):
 		if begin == end:
 			end += 1
 
-		print "ProcessRepeated result"
-		print strftime("%c", localtime(begin))
-		print strftime("%c", localtime(end))
+		print("ProcessRepeated result")
+		print(strftime("%c", localtime(begin)))
+		print(strftime("%c", localtime(end)))
 
 	return begin, end

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # for localized messages
 #from __init__ import _
+from __future__ import print_function
 import os
 
 from enigma import eTimer
@@ -21,7 +22,7 @@ def rm_rf(d): # only for removing the ipkg stuff from /media/hdd subdirs
 				os.unlink(path)
 		os.rmdir(d)
 	except Exception, ex:
-		print "AutoMount failed to remove", d, "Error:", ex
+		print("AutoMount failed to remove", d, "Error:", ex)
 
 
 class AutoMount():
@@ -78,7 +79,7 @@ class AutoMount():
 						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
 						self.automounts[data['sharename']] = data
 					except Exception, e:
-						print "[MountManager] Error reading Mounts:", e
+						print("[MountManager] Error reading Mounts:", e)
 			for cifs in autofs.findall("cifs"):
 				for mount in cifs.findall("mount"):
 					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
@@ -97,7 +98,7 @@ class AutoMount():
 						data['password'] = getValue(mount.findall("password"), "").encode("UTF-8")
 						self.automounts[data['sharename']] = data
 					except Exception, e:
-						print "[MountManager] Error reading Mounts:", e
+						print("[MountManager] Error reading Mounts:", e)
 
 		for fstab in tree.findall("fstab"):
 			mountusing = 2
@@ -117,7 +118,7 @@ class AutoMount():
 						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
 						self.automounts[data['sharename']] = data
 					except Exception, e:
-						print "[MountManager] Error reading Mounts:", e
+						print("[MountManager] Error reading Mounts:", e)
 			for cifs in fstab.findall("cifs"):
 				for mount in cifs.findall("mount"):
 					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
@@ -136,7 +137,7 @@ class AutoMount():
 						data['password'] = getValue(mount.findall("password"), "").encode("UTF-8")
 						self.automounts[data['sharename']] = data
 					except Exception, e:
-						print "[MountManager] Error reading Mounts:", e
+						print("[MountManager] Error reading Mounts:", e)
 
 		for enigma2 in tree.findall("enigma2"):
 			mountusing = 3
@@ -156,7 +157,7 @@ class AutoMount():
 						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
 						self.automounts[data['sharename']] = data
 					except Exception, e:
-						print "[MountManager] Error reading Mounts:", e
+						print("[MountManager] Error reading Mounts:", e)
 				# Read out CIFS Mounts
 			for cifs in enigma2.findall("cifs"):
 				for mount in cifs.findall("mount"):
@@ -176,7 +177,7 @@ class AutoMount():
 						data['password'] = getValue(mount.findall("password"), "").encode("UTF-8")
 						self.automounts[data['sharename']] = data
 					except Exception, e:
-						print "[MountManager] Error reading Mounts:", e
+						print("[MountManager] Error reading Mounts:", e)
 
 		if mountusing == 0:
 			for nfs in tree.findall("nfs"):
@@ -195,7 +196,7 @@ class AutoMount():
 						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
 						self.automounts[data['sharename']] = data
 					except Exception, e:
-						print "[MountManager] Error reading Mounts:", e
+						print("[MountManager] Error reading Mounts:", e)
 			for cifs in tree.findall("cifs"):
 				for mount in cifs.findall("mount"):
 					data = {'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
@@ -214,7 +215,7 @@ class AutoMount():
 						data['password'] = getValue(mount.findall("password"), "").encode("UTF-8")
 						self.automounts[data['sharename']] = data
 					except Exception, e:
-						print "[MountManager] Error reading Mounts:", e
+						print("[MountManager] Error reading Mounts:", e)
 
 		self.checkList = self.automounts.keys()
 		if not self.checkList:
@@ -324,7 +325,7 @@ class AutoMount():
 				command.append('sleep 2')
 			if mountcommand is not None:
 				command.append(mountcommand)
-			print 'command', command
+			print('command', command)
 			self.MountConsole.eBatch(command, self.CheckMountPointFinished, [data, callback, restart], debug=True)
 		else:
 			self.CheckMountPointFinished([data, callback, restart])
@@ -369,7 +370,7 @@ class AutoMount():
 							rmtree(path)
 							harddiskmanager.removeMountedPartition(path)
 						except Exception, ex:
-							print "Failed to remove", path, "Error:", ex
+							print("Failed to remove", path, "Error:", ex)
 		if self.checkList:
 			# Go to next item in list...
 			self.CheckMountPoint(self.checkList.pop(), callback, restart)
@@ -495,7 +496,7 @@ class AutoMount():
 			f.close()
 			# print "[NetworkBrowser] Saving Mounts List:"
 		except Exception, e:
-			print "[NetworkBrowser] Error Saving Mounts List:", e
+			print("[NetworkBrowser] Error Saving Mounts List:", e)
 
 	def stopMountConsole(self):
 		if self.MountConsole is not None:
@@ -549,7 +550,7 @@ class AutoMount():
 					os.rmdir(path)
 					harddiskmanager.removeMountedPartition(path)
 				except Exception, ex:
-					print "Failed to remove", path, "Error:", ex
+					print("Failed to remove", path, "Error:", ex)
 		if self.removeConsole:
 			if len(self.removeConsole.appContainers) == 0:
 				if callback is not None:

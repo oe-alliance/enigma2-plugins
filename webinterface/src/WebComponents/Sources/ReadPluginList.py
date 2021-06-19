@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Components.Sources.Source import Source
 from Components.PluginComponent import plugins
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
@@ -9,7 +10,7 @@ class ReadPluginList(Source):
 		self.session = session
 
 	def command(self):
-		print "[WebComponents.ReadPluginList] readPluginList"
+		print("[WebComponents.ReadPluginList] readPluginList")
 
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		return (True, _("List of Plugins has been read"))

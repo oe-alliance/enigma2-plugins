@@ -1,3 +1,4 @@
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -146,10 +147,10 @@ class MovieRetitle(Screen, ConfigListScreen):
 		try:
 			os_rename(fr + ".ts", to + ".ts")
 		except OSError:
-			print "Moving in background"
+			print("Moving in background")
 			global_background_mover.enqueue(self.exitDialog, self.session, fr, to)
 		else:
-			print "Moving in foreground"
+			print("Moving in foreground")
 			for suff in (".ts.meta", ".ts.cuts", ".ts.ap", ".ts.sc", ".eit"):
 				if os_path.exists(fr + suff):
 					os_rename(fr + suff, to + suff)
@@ -281,7 +282,7 @@ class MovieRetitleBackgroundMover:
 			fr = self.ele[2] + self.sufflst[0]
 			to = self.ele[3] + self.sufflst[0]
 			self.sufflst = self.sufflst[1:]
-			print "Moving %s to %s" % (fr, to)
+			print("Moving %s to %s" % (fr, to))
 			if os_path.exists(fr):
 				self.container.execute("/bin/cp", "/bin/cp", fr, to)
 			else:

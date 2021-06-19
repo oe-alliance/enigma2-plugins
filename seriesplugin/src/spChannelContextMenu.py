@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 import os
 import sys
 import traceback
@@ -18,7 +19,7 @@ ChannelContextMenu__init__ = None
 
 
 def SPChannelContextMenuInit():
-	print "[SeriesPlugin] override ChannelContextMenu.__init__"
+	print("[SeriesPlugin] override ChannelContextMenu.__init__")
 	global ChannelContextMenu__init__
 	if ChannelContextMenu__init__ is None:
 		from Screens.ChannelSelection import ChannelContextMenu
@@ -29,7 +30,7 @@ def SPChannelContextMenuInit():
 
 
 def SPChannelContextMenuUndo():
-	print "[SeriesPlugin] override ChannelContextMenu.__init__"
+	print("[SeriesPlugin] override ChannelContextMenu.__init__")
 	global ChannelContextMenu__init__
 	if ChannelContextMenu__init__:
 		from Screens.ChannelSelection import ChannelContextMenu

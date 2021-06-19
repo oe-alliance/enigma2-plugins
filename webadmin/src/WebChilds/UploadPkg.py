@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from os import rename as os_rename,\
 	chmod as os_chmod,\
 	write as os_write,\
@@ -44,9 +45,9 @@ class UploadPkgResource(resource.Resource):
 
 	def render_POST(self, req):
 		data = req.args['file'][0]
-		print "[filename req.args]", req.args['filename'][0]
+		print("[filename req.args]", req.args['filename'][0])
 		filename = mbasename(req.args['filename'][0])
-		print "[filename]", filename
+		print("[filename]", filename)
 		if not filename.endswith(".ipk"):
 			return self.res % (_("wrong filetype!"), _("Close"), _("Add"))
 

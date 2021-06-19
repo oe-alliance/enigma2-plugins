@@ -1,3 +1,4 @@
+from __future__ import print_function
 from enigma import eConsoleAppContainer
 
 from Screens.Screen import Screen
@@ -81,7 +82,7 @@ class ChangePasswdScreen(Screen):
 		return ''.join(Random().sample(passwdChars, passwdLength))
 
 	def SetPasswd(self):
-		print "Changing password for %s to %s" % (self.user, self.password)
+		print("Changing password for %s to %s" % (self.user, self.password))
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
 		self.container.dataAvail.append(self.dataAvail)

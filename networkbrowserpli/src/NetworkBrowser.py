@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # for localized messages
+from __future__ import print_function
 from __init__ import _
 from enigma import eTimer, getDesktop
 from Screens.Screen import Screen
@@ -33,7 +34,7 @@ def write_cache(cache_file, cache_data):
 		try:
 			mkdir(os_path.dirname(cache_file))
 		except OSError:
-			print os_path.dirname(cache_file), '[Networkbrowser] is a file'
+			print(os_path.dirname(cache_file), '[Networkbrowser] is a file')
 	fd = open(cache_file, 'w')
 	dump(cache_data, fd, -1)
 	fd.close()
@@ -103,7 +104,7 @@ class NetworkBrowser(Screen):
 		self.iface = iface
 		if self.iface is None:
 			self.iface = self.GetNetworkInterfaces()
-		print "[Networkbrowser] Using Network Interface: %s" % self.iface
+		print("[Networkbrowser] Using Network Interface: %s" % self.iface)
 		self.networklist = None
 		self.device = None
 		self.mounts = None
@@ -192,7 +193,7 @@ class NetworkBrowser(Screen):
 	def scanIPclosed(self, result):
 		if result[0]:
 			if result[1] == "address":
-				print "[Networkbrowser] got IP:", result[1]
+				print("[Networkbrowser] got IP:", result[1])
 				nwlist = []
 				nwlist.append(netscan.netzInfo(result[0] + "/24"))
 				self.networklist += nwlist[0]
@@ -225,13 +226,13 @@ class NetworkBrowser(Screen):
 		self.inv_cache = 0
 		self.vc = valid_cache(self.cache_file, self.cache_ttl)
 		if self.cache_ttl > 0 and self.vc != 0:
-			print '[Networkbrowser] Loading network cache from ', self.cache_file
+			print('[Networkbrowser] Loading network cache from ', self.cache_file)
 			try:
 				self.networklist = load_cache(self.cache_file)
 			except:
 				self.inv_cache = 1
 		if self.cache_ttl == 0 or self.inv_cache == 1 or self.vc == 0:
-			print '[Networkbrowser] Getting fresh network list'
+			print('[Networkbrowser] Getting fresh network list')
 			self.getNetworkIPs()
 		else:
 			if len(self.networklist) > 0:
@@ -286,7 +287,7 @@ class NetworkBrowser(Screen):
 		self.sharecache_file = None
 		self.sharecache_file = '/etc/enigma2/' + hostname.strip() + '.cache' #Path to cache directory
 		if os_path.exists(self.sharecache_file):
-			print '[Networkbrowser] Loading userinfo from ', self.sharecache_file
+			print('[Networkbrowser] Loading userinfo from ', self.sharecache_file)
 			try:
 				self.hostdata = load_cache(self.sharecache_file)
 				username = self.hostdata['username']
@@ -300,33 +301,33 @@ class NetworkBrowser(Screen):
 
 		if devicetype == 'unix':
 			smblist = netscan.smbShare(hostip, hostname, username, password)
-			print '[Networkbrowser] unix smblist ', smblist
+			print('[Networkbrowser] unix smblist ', smblist)
 			for x in smblist:
 				if len(x) == 6:
 					if x[3] != 'IPC$':
 						sharelist.append(x)
-						print '[Networkbrowser] unix sharelist ', sharelist
+						print('[Networkbrowser] unix sharelist ', sharelist)
 			nfslist = netscan.nfsShare(hostip, hostname)
-			print '[Networkbrowser] unix nfslist ', nfslist
+			print('[Networkbrowser] unix nfslist ', nfslist)
 			for x in nfslist:
 				if len(x) == 6:
 					sharelist.append(x)
-					print '[Networkbrowser] unix sharelist ', sharelist
+					print('[Networkbrowser] unix sharelist ', sharelist)
 		else:
 			smblist = netscan.smbShare(hostip, hostname, username, password)
-			print '[Networkbrowser] smblist ', smblist
+			print('[Networkbrowser] smblist ', smblist)
 			for x in smblist:
 				if len(x) == 6:
 					if x[3] != 'IPC$':
 						sharelist.append(x)
-						print '[Networkbrowser] sharelist ', sharelist
+						print('[Networkbrowser] sharelist ', sharelist)
 			nfslist = netscan.nfsShare(hostip, hostname)
-			print '[Networkbrowser] nfslist ', nfslist
+			print('[Networkbrowser] nfslist ', nfslist)
 			for x in nfslist:
 				if len(x) == 6:
 					sharelist.append(x)
-					print '[Networkbrowser] sharelist ', sharelist
-		print '[Networkbrowser] sharelist final ', sharelist
+					print('[Networkbrowser] sharelist ', sharelist)
+		print('[Networkbrowser] sharelist final ', sharelist)
 		return sharelist
 
 	def updateHostsList(self):
@@ -474,7 +475,7 @@ class NetworkBrowser(Screen):
 
 		self.hostcache_file = None
 		if sel[0][0] == 'host': # host entry selected
-			print '[Networkbrowser] sel host'
+			print('[Networkbrowser] sel host')
 			if selectedhost in self.expanded:
 				self.expanded.remove(selectedhost)
 				self.updateNetworkList()
@@ -482,7 +483,7 @@ class NetworkBrowser(Screen):
 				self.hostcache_file = None
 				self.hostcache_file = '/etc/enigma2/' + selectedhostname.strip() + '.cache' #Path to cache directory
 				if os_path.exists(self.hostcache_file):
-					print '[Networkbrowser] Loading userinfo cache from ', self.hostcache_file
+					print('[Networkbrowser] Loading userinfo cache from ', self.hostcache_file)
 					try:
 						self.hostdata = load_cache(self.hostcache_file)
 						self.passwordQuestion(False)
@@ -492,14 +493,14 @@ class NetworkBrowser(Screen):
 					self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?\n")))
 
 		if sel[0][0] == 'nfsShare': # share entry selected
-			print '[Networkbrowser] sel nfsShare'
+			print('[Networkbrowser] sel nfsShare')
 			self.openMountEdit(sel[0])
 		if sel[0][0] == 'smbShare': # share entry selected
-			print '[Networkbrowser] sel cifsShare'
+			print('[Networkbrowser] sel cifsShare')
 			self.hostcache_file = None
 			self.hostcache_file = '/etc/enigma2/' + selectedhostname.strip() + '.cache' #Path to cache directory
 			if os_path.exists(self.hostcache_file):
-				print '[Networkbrowser] userinfo found from ', self.sharecache_file
+				print('[Networkbrowser] userinfo found from ', self.sharecache_file)
 				self.openMountEdit(sel[0])
 			else:
 				self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?\n")))
@@ -557,7 +558,7 @@ class NetworkBrowser(Screen):
 				self.sharecache_file = None
 				self.sharecache_file = '/etc/enigma2/' + selection[1].strip() + '.cache' #Path to cache directory
 				if os_path.exists(self.sharecache_file):
-					print '[Networkbrowser] Loading userinfo from ', self.sharecache_file
+					print('[Networkbrowser] Loading userinfo from ', self.sharecache_file)
 					try:
 						self.hostdata = load_cache(self.sharecache_file)
 						data['username'] = self.hostdata['username']

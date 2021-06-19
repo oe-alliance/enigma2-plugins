@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Plugins.Extensions.Widgets.Widget import Widget
 from enigma import ePicLoad, ePixmap, getDesktop, eTimer
 from Components.Pixmap import Pixmap
@@ -38,7 +39,7 @@ class WebPixmap(Pixmap):
     def load(self, url=None):
         tmpfile = ''.join((self.cachedir, quote_plus(url), ''))
         if os_path_isdir(self.cachedir) is False:
-            print "cachedir not existing, creating it"
+            print("cachedir not existing, creating it")
             os_mkdir(self.cachedir)
         if os_isfile(tmpfile):
             self.tmpfile = tmpfile
@@ -55,9 +56,9 @@ class WebPixmap(Pixmap):
         self.picload.startDecode(self.tmpfile)
 
     def onLoadFailed(self, error):
-        print "WebPixmap:onLoadFAILED", error
+        print("WebPixmap:onLoadFAILED", error)
         if self.default and self.instance:
-            print "showing 404", self.default
+            print("showing 404", self.default)
             self.picload.startDecode(self.default)
         if os_isfile(self.tmpfile):
             os_remove(self.tmpfile)

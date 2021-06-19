@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 from KTMultiPixmap import KTmultiPixmap
@@ -215,14 +216,14 @@ class KiddyTimer():
             iMonitorStart += 86400
 
         iObserveTimerStep = (iMonitorStart - iPluginStart) * 1000 + 1000
-        print "[KiddyTimer] setting plugin idle for ms=", iObserveTimerStep
+        print("[KiddyTimer] setting plugin idle for ms=", iObserveTimerStep)
         self.observeTimer.start(iObserveTimerStep, False)
 
     def stopObserve(self):
         self.observeTimer.stop()
 
     def observeTime(self):
-        print "[KiddyTimer] Observer checking if plugin has to run"
+        print("[KiddyTimer] Observer checking if plugin has to run")
         if (self.timerHasToRun()):
             self.stopObserve()
             self.startTimer()

@@ -1,3 +1,4 @@
+from __future__ import print_function
 from enigma import eTimer, loadPic, getDesktop
 
 from Screens.Screen import Screen
@@ -367,7 +368,7 @@ class LastFMScreenMain(Screen, HelpableScreen, LastFM):
                 self.resetScreensaverTimer()
 
     def onTextForCustomStationEntered(self, text):
-        print "onTextForCustomStationEntered", text, self.customstationtype
+        print("onTextForCustomStationEntered", text, self.customstationtype)
         if text is not None:
             if self.customstationtype == "artist":
                 self.changeStation(urllib2_qoute("lastfm://artist/%s/similarartists" % text))

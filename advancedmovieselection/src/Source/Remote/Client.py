@@ -22,6 +22,7 @@ For example, if you distribute copies of such a program, whether gratis or for a
 must pass on to the recipients the same freedoms that you received. You must make sure
 that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 '''
+from __future__ import print_function
 
 from MessageServer import serverInstance
 import socket
@@ -51,7 +52,7 @@ class MessageQueue:
                 config.AdvancedMovieSelection.server_port.value = port
                 config.AdvancedMovieSelection.server_port.save()
             except Exception, e:
-                print e
+                print(e)
         elif data == "nextTrashEvent":
             from Components.config import config
             if config.AdvancedMovieSelection.auto_empty_wastebasket.value == "-1":
@@ -79,7 +80,7 @@ def isAnyRecording():
 
 class Client:
     def __init__(self, ip, port):
-        print ip, port
+        print(ip, port)
         self.ip = ip
         self.port = port
         self.device = self.sendData("getDeviceName")
@@ -89,7 +90,7 @@ class Client:
         request = "Error"
         try:
             # Connect to server and send data
-            print "[AdvancedMovieSelection] Send message to: %s:%s" % (self.ip, self.port), data
+            print("[AdvancedMovieSelection] Send message to: %s:%s" % (self.ip, self.port), data)
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(1)
             sock.connect((self.ip, self.port))
@@ -100,7 +101,7 @@ class Client:
             pass
         finally:
             sock.close()
-        print "[AdvancedMovieSelection] Get request:", request
+        print("[AdvancedMovieSelection] Get request:", request)
         return request
 
     def setPort(self, port):
@@ -143,4 +144,4 @@ class Client:
 
 
 if __name__ == "__main__":
-    print Client("192.168.0.97", 20000).isRecording()
+    print(Client("192.168.0.97", 20000).isRecording())

@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+from __future__ import print_function
 from Components.Sources.Source import Source
 from enigma import eServiceCenter, eServiceReference, eEPGCache
 
@@ -26,7 +27,7 @@ class EPG(Source):
 		self.isBouquet = False
 
 	def handleCommand(self, cmd):
-		print "[WebComponents.EPG] setting command to '%s' " % cmd
+		print("[WebComponents.EPG] setting command to '%s' " % cmd)
 		self.command = cmd
 
 	def do_func(self):
@@ -75,7 +76,7 @@ class EPG(Source):
 		return self.getEPGofBouquet(ref, True)
 
 	def getEPGNowNext(self, ref, type, service=False):
-		print "[WebComponents.EPG] getting EPG NOW/NEXT", ref
+		print("[WebComponents.EPG] getting EPG NOW/NEXT", ref)
 
 		if service:
 			events = self.epgcache.lookupEvent(['IBDCTSERNX', (ref, type, -1)])
@@ -106,7 +107,7 @@ class EPG(Source):
 		return events or ()
 
 	def getEPGofService(self, param, options='IBDCTSERN'):
-		print "[WebComponents.EPG] getEPGofService param: ", param
+		print("[WebComponents.EPG] getEPGofService param: ", param)
 
 		if "sRef" in param:
 			service = param["sRef"]
@@ -157,7 +158,7 @@ class EPG(Source):
 		return list
 
 	def getEPGofBouquet(self, param, multi=False):
-		print "[WebComponents.EPG] getting EPG for Bouquet", param
+		print("[WebComponents.EPG] getting EPG for Bouquet", param)
 
 		if 'bRef' not in param:
 			return ()
@@ -197,7 +198,7 @@ class EPG(Source):
 		return ()
 
 	def searchEvent(self, needle):
-		print "[WebComponents.EPG] searching EPG: ", needle
+		print("[WebComponents.EPG] searching EPG: ", needle)
 
 		self.search = True
 
@@ -207,7 +208,7 @@ class EPG(Source):
 		return ()
 
 	def searchSimilarEvent(self, needle):
-		print "[WebComponents.EPG] searching similar eventid: ", needle
+		print("[WebComponents.EPG] searching similar eventid: ", needle)
 
 		events = self.epgcache.search(('IBDCTSERN', 256, eEPGCache.SIMILAR_BROADCASTINGS_SEARCH, needle['sRef'], int(needle['eventid'])))
 		if events:

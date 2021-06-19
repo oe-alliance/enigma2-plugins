@@ -20,6 +20,7 @@
 #  distributed other than under the conditions noted above.
 #
 
+from __future__ import print_function
 from LocaleInit import _
 from Tools.Directories import resolveFilename, SCOPE_HDD
 from Components.config import config, ConfigSubsection, ConfigText, ConfigYesNo, ConfigInteger, ConfigSelection, ConfigClock, ConfigLocations, ConfigBoolean
@@ -231,12 +232,12 @@ class QuickButtons():
 
     def updateOldVersion(self):
         try:
-            print "update older config version"
+            print("update older config version")
             self.setFunction('red', config.AdvancedMovieSelection.red.value)
             self.setFunction('green', config.AdvancedMovieSelection.green.value)
             self.setFunction('yellow', config.AdvancedMovieSelection.yellow.value)
             self.setFunction('blue', config.AdvancedMovieSelection.blue.value)
-            print self.qlist
+            print(self.qlist)
         except:
             printStackTrace()
 
@@ -253,13 +254,13 @@ BACKUP_FILE_NAME = "AMS.settings.backup"
 
 
 def getChanges(config_entry, changes):
-    print "get changes for:", config_entry
+    print("get changes for:", config_entry)
     entry = config.content.items[config_entry]
     for item in entry.dict():
         conf = entry.__getattr__(item)
         if conf.default != conf.value:
             txt = "config.%s.%s=%s" % (config_entry, item, conf.saved_value)
-            print txt
+            print(txt)
             changes.append(txt)
 
 
@@ -270,7 +271,7 @@ def createBackup(path="/media/hdd/"):
 
     import os
     file_name = os.path.join(path, BACKUP_FILE_NAME)
-    print "create backup", file_name
+    print("create backup", file_name)
     try:
         backup = open(file_name, 'wb')
         backup.write("\n".join(changes))
@@ -282,14 +283,14 @@ def createBackup(path="/media/hdd/"):
 
 
 def loadBackup(file_name):
-    print "load backup", file_name
+    print("load backup", file_name)
     backup = open(file_name, 'rb')
     for line in backup.readlines():
         try:
             config_entry = line.split(".")[1]
             config_item = line.split(".")[2].split("=")[0]
             value = line.split("=")[-1].strip()
-            print config_entry, config_item, value
+            print(config_entry, config_item, value)
             entry = config.content.items[config_entry]
             conf = entry.__getattr__(config_item)
             conf.saved_value = conf._value = value

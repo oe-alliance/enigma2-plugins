@@ -1,3 +1,4 @@
+from __future__ import print_function
 #######################################################################
 #
 #    Push Service for Enigma-2
@@ -57,14 +58,14 @@ class PushService(PushServiceBase):
 	# Statemachine and timer
 
 	def start(self):
-		print "PushService start"
+		print("PushService start")
 		self.stopTimer()
 
 		self.begin()
 		self.next()
 
 	def stop(self):
-		print "PushService stop"
+		print("PushService stop")
 		self.stopTimer()
 
 		self.end()
@@ -73,7 +74,7 @@ class PushService(PushServiceBase):
 	def next(self, state=None):
 		if state:
 			self.state = state
-		print "PushService next", self.state
+		print("PushService next", self.state)
 
 		if self.state == PSBOOT:
 			self.startTimer(int(config.pushservice.bootdelay.value), PSBOOTRUN)

@@ -18,6 +18,7 @@
 #  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
+from __future__ import print_function
 from __init__ import _
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
@@ -68,7 +69,7 @@ class FileBrowser(Screen):
         else:
             file_name = self["filelist"].getFilename()
             lastpath = self["filelist"].getCurrentDirectory() or lastpath
-            print "lastpath directory=", lastpath
+            print("lastpath directory=", lastpath)
             self.close(lastpath + file_name)
 
     def exit(self):

@@ -19,6 +19,7 @@
 #    59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             #
 ############################################################################
 
+from __future__ import print_function
 from YouTubeInterface import interface
 
 from Components.ActionMap import ActionMap
@@ -141,7 +142,7 @@ class YouTubeVideoDetailsScreen(Screen):
 		Screen.setTitle(self, self.entry.getTitle())
 		if self.entry.getRatingAverage() != "not available":
 			ratingStars = int(round(20 * float(self.entry.getRatingAverage()), 0))
-			print "[YTB] Rating: ", ratingStars, "    ", self["stars"].getRange()
+			print("[YTB] Rating: ", ratingStars, "    ", self["stars"].getRange())
 			self["stars"].setValue(ratingStars)
 		else:
 			self["stars"].hide()
@@ -258,7 +259,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 			self["list"].down()
 
 	def insertEntry(self, entry):
-		print "[YTB] YouTubeTest::updateFinished()"
+		print("[YTB] YouTubeTest::updateFinished()")
 		self.list.append(YouTubeEntryComponent(entry))
 		self.list.sort(cmp=lambda x, y: cmp(x[0].sequenceNumber, y[0].sequenceNumber))
 		currentlyShown = "%d" % len(self.list)
@@ -291,7 +292,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 			self.historyIndex = self.historyIndex + 1
 
 	def searchFeedReal(self, searchContext):
-		print "[YTB] searchFeedReal"
+		print("[YTB] searchFeedReal")
 		try:
 			feed = interface.search(searchContext.searchTerm.value,
 					orderby=searchContext.orderBy.value,
@@ -563,7 +564,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 # of each YouTube URL.
 
 	def play(self):
-		print "[YTB] Play()"
+		print("[YTB] Play()")
 		youTubeEntry = self["list"].getCurrent()[0]
 		mrl = self.getVideoUrl(youTubeEntry, config.plugins.youtubeplayer.quality.value)
 		if mrl is not None:
@@ -584,10 +585,10 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 			self.currentServer.play(self.session, mrl, youTubeEntry.getTitle(), self,
 								player=boundFunction(YouTubePlayer, contextMenuEntries=entries, infoCallback=self.showVideoInfo, name=self["list"].getCurrent()[0].getTitle()))
 		else:
-			print "[YTB] No valid flv-mrl found"
+			print("[YTB] No valid flv-mrl found")
 
 	def playDirect(self):
-		print "[YTB] PlayDirect()"
+		print("[YTB] PlayDirect()")
 		youTubeEntry = self["list"].getCurrent()[0]
 		mrl = self.getVideoUrl(youTubeEntry, config.plugins.youtubeplayer.quality.value)
 		if mrl is not None:
@@ -609,7 +610,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 
 			self.session.open(DirectYouTubePlayer, mrl, youTubeEntry.getTitle(), self, contextMenuEntries=entries, infoCallback=self.showVideoInfo, name=self["list"].getCurrent()[0].getTitle())
 		else:
-			print "[YTB] No valid flv-mrl found"
+			print("[YTB] No valid flv-mrl found")
 
 	def getNextFile(self):
 		i = self["list"].getSelectedIndex() + 1

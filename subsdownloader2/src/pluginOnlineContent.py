@@ -1,3 +1,4 @@
+from __future__ import print_function
 import threading
 import urllib
 import os
@@ -33,14 +34,14 @@ class IsNewVersionCheck(threading.Thread):
             current_vestion_data = open(self.__installed_version_info_file, "r")
             current_verion = current_vestion_data.readline()
             current_vestion_data.close()
-            print "Current version: %s" % str(current_verion)
+            print("Current version: %s" % str(current_verion))
         except:
             error_detected = 1
         try:
             latest_vestion_data = urllib.urlopen(self.__latest_version_info_url)
             latest_verion = latest_vestion_data.readlines()
             latest_vestion_data.close()
-            print "Latest version: %s" % str(latest_verion[0])
+            print("Latest version: %s" % str(latest_verion[0]))
         except:
             error_detected = 1
 
@@ -48,10 +49,10 @@ class IsNewVersionCheck(threading.Thread):
             return False
         else:
             if latest_verion[0] > current_verion:
-                print "Jest nowa wersja pluginu"
+                print("Jest nowa wersja pluginu")
                 self.session.open(PluginIpkUpdate, latest_verion[1])
             else:
-                print "Posiadasz najnowsza wersje pluginu"
+                print("Posiadasz najnowsza wersje pluginu")
                 return False
 
 
@@ -135,7 +136,7 @@ class CommertialBannerDownload(threading.Thread):
 	    picture_links = URL_file.readlines()
 	    URL_file.close()
 	except:
-	    print "Failed to download picture URLS from online text file"
+	    print("Failed to download picture URLS from online text file")
 	picture_URLS_dict = []
 	for x in picture_links:
 	    if x[0:3] == "\xef\xbb\xbf":
@@ -157,7 +158,7 @@ class CommertialBannerDownload(threading.Thread):
 		picture_file.close()
 		picture_counter = picture_counter + 1
 	    except:
-		print "Failed to download picture no %i", picture_counter
+		print("Failed to download picture no %i", picture_counter)
 	return True
 
     def run(self):

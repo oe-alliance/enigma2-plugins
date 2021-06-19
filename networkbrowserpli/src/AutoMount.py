@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # for localized messages
+from __future__ import print_function
 from __init__ import _
 import os
 from enigma import eTimer
@@ -19,7 +20,7 @@ def rm_rf(d): # only for removing the ipkg stuff from /media/hdd subdirs
 				os.unlink(path)
 		os.rmdir(d)
 	except Exception, ex:
-	        print "AutoMount failed to remove", d, "Error:", ex
+	        print("AutoMount failed to remove", d, "Error:", ex)
 
 
 class AutoMount():
@@ -72,7 +73,7 @@ class AutoMount():
 					data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp").encode("UTF-8")
 					self.automounts[data['sharename']] = data
 				except Exception, e:
-					print "[MountManager] Error reading Mounts:", e
+					print("[MountManager] Error reading Mounts:", e)
 			# Read out CIFS Mounts
 		for nfs in tree.findall("cifs"):
 			for mount in nfs.findall("mount"):
@@ -92,11 +93,11 @@ class AutoMount():
 					data['password'] = getValue(mount.findall("password"), "").encode("UTF-8")
 					self.automounts[data['sharename']] = data
 				except Exception, e:
-					print "[MountManager] Error reading Mounts:", e
+					print("[MountManager] Error reading Mounts:", e)
 
 		self.checkList = self.automounts.keys()
 		if not self.checkList:
-			print "[AutoMount.py] self.automounts without mounts", self.automounts
+			print("[AutoMount.py] self.automounts without mounts", self.automounts)
 			if callback is not None:
 				callback(True)
 		else:
@@ -124,10 +125,10 @@ class AutoMount():
 		command = None
 		path = os.path.join('/media/net', data['sharename'])
 		if self.activeMountsCounter == 0:
-			print "self.automounts without active mounts", self.automounts
+			print("self.automounts without active mounts", self.automounts)
 			if data['active'] == 'False' or data['active'] is False:
 				umountcmd = "umount -fl '%s'" % path
-				print "[AutoMount.py] UMOUNT-CMD--->", umountcmd
+				print("[AutoMount.py] UMOUNT-CMD--->", umountcmd)
 				self.MountConsole.ePopen(umountcmd, self.CheckMountPointFinished, [data, callback])
 		else:
 			if data['active'] == 'False' or data['active'] is False:
@@ -153,16 +154,16 @@ class AutoMount():
 							tmpcmd = "mount -t cifs -o %s '//%s/%s' '%s'" % (options, data['ip'], data['sharedir'], path)
 							command = tmpcmd.encode("UTF-8")
 				except Exception, ex:
-				        print "[AutoMount.py] Failed to create", path, "Error:", ex
+				        print("[AutoMount.py] Failed to create", path, "Error:", ex)
 					command = None
 			if command:
-				print "[AutoMount.py] U/MOUNTCMD--->", command
+				print("[AutoMount.py] U/MOUNTCMD--->", command)
 				self.MountConsole.ePopen(command, self.CheckMountPointFinished, [data, callback])
 			else:
 				self.CheckMountPointFinished(None, None, [data, callback])
 
 	def CheckMountPointFinished(self, result, retval, extra_args):
-		print "[AutoMount.py] CheckMountPointFinished", result, retval
+		print("[AutoMount.py] CheckMountPointFinished", result, retval)
 		(data, callback) = extra_args
 		path = os.path.join('/media/net', data['sharename'])
 		if os.path.exists(path):
@@ -182,7 +183,7 @@ class AutoMount():
 							os.rmdir(path)
 							harddiskmanager.removeMountedPartition(path)
 						except Exception, ex:
-						        print "Failed to remove", path, "Error:", ex
+						        print("Failed to remove", path, "Error:", ex)
 		if self.checkList:
 			# Go to next item in list...
 			self.CheckMountPoint(self.checkList.pop(), callback)
@@ -194,7 +195,7 @@ class AutoMount():
 
 	def makeHDDlink(self, path):
 		hdd_dir = '/media/hdd'
-		print "[AutoMount.py] symlink %s %s" % (path, hdd_dir)
+		print("[AutoMount.py] symlink %s %s" % (path, hdd_dir))
 		if os.path.islink(hdd_dir):
 			if os.readlink(hdd_dir) != path:
 				os.remove(hdd_dir)
@@ -205,19 +206,19 @@ class AutoMount():
 		try:
 			os.symlink(path, hdd_dir)
 		except OSError, ex:
-			print "[AutoMount.py] add symlink fails!", ex
+			print("[AutoMount.py] add symlink fails!", ex)
 		movie = os.path.join(hdd_dir, 'movie')
 		if not os.path.exists(movie):
 		        try:
 				os.mkdir(movie)
 			except Exception, ex:
-				print "[AutoMount.py] Failed to create ", movie, "Error:", ex
+				print("[AutoMount.py] Failed to create ", movie, "Error:", ex)
 
 	def mountTimeout(self):
 		self.timer.stop()
 		if self.MountConsole:
 			if len(self.MountConsole.appContainers) == 0:
-				print "self.automounts after mounting", self.automounts
+				print("self.automounts after mounting", self.automounts)
 				if self.callback is not None:
 					self.callback(True)
 
@@ -262,14 +263,14 @@ class AutoMount():
 		try:
 			open(XML_FSTAB, "w").writelines(list)
 		except Exception, e:
-			print "[AutoMount.py] Error Saving Mounts List:", e
+			print("[AutoMount.py] Error Saving Mounts List:", e)
 
 	def stopMountConsole(self):
 		if self.MountConsole is not None:
 			self.MountConsole = None
 
 	def removeMount(self, mountpoint, callback=None):
-		print "[AutoMount.py] removing mount: ", mountpoint
+		print("[AutoMount.py] removing mount: ", mountpoint)
 		self.newautomounts = {}
 		for sharename, sharedata in self.automounts.items():
 			if sharename is not mountpoint.strip():
@@ -280,11 +281,11 @@ class AutoMount():
 			self.removeConsole = Console()
 		path = '/media/net/' + mountpoint
 		umountcmd = "umount -fl '%s'" % path
-		print "[AutoMount.py] UMOUNT-CMD--->", umountcmd
+		print("[AutoMount.py] UMOUNT-CMD--->", umountcmd)
 		self.removeConsole.ePopen(umountcmd, self.removeMountPointFinished, [path, callback])
 
 	def removeMountPointFinished(self, result, retval, extra_args):
-		print "[AutoMount.py] removeMountPointFinished result", result, "retval", retval
+		print("[AutoMount.py] removeMountPointFinished result", result, "retval", retval)
 		(path, callback) = extra_args
 		if os.path.exists(path):
 			if not os.path.ismount(path):
@@ -292,7 +293,7 @@ class AutoMount():
 					os.rmdir(path)
 					harddiskmanager.removeMountedPartition(path)
 				except Exception, ex:
-				        print "Failed to remove", path, "Error:", ex
+				        print("Failed to remove", path, "Error:", ex)
 		if self.removeConsole:
 			if len(self.removeConsole.appContainers) == 0:
 				if callback is not None:

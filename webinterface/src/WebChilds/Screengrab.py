@@ -1,3 +1,4 @@
+from __future__ import print_function
 from enigma import eConsoleAppContainer
 
 from twisted.web import resource, http, http_headers, server
@@ -102,14 +103,14 @@ class GrabStream:
 		if hasattr(self.request, 'notifyFinish'):
 			self.request.notifyFinish().addErrback(self.connectionLost)
 
-		print '[Screengrab.py] starting AiO grab with cmdline:', cmd
+		print('[Screengrab.py] starting AiO grab with cmdline:', cmd)
 		self.container.execute(*cmd)
 
 	def connectionLost(self, err):
 		self.stillAlive = False
 
 	def cmdFinished(self, data):
-		print '[Screengrab.py] cmdFinished'
+		print('[Screengrab.py] cmdFinished')
 		if self.stillAlive:
 			self.request.setResponseCode(http.OK)
 			if int(data) is 0 and self.target is not None:
@@ -119,7 +120,7 @@ class GrabStream:
 						self.request.write(fp.read())
 					if self.save is False:
 						os_remove(self.target)
-						print '[Screengrab.py] %s removed' % self.target
+						print('[Screengrab.py] %s removed' % self.target)
 				except Exception, e:
 					self.request.write('Internal error while reading target file')
 					self.request.setResponseCode(http.INTERNAL_SERVER_ERROR)
@@ -133,7 +134,7 @@ class GrabStream:
 
 			self.request.finish()
 		else:
-			print '[Screengrab.py] already disconnected!'
+			print('[Screengrab.py] already disconnected!')
 
 	def requestFinished(self, val):
 		pass

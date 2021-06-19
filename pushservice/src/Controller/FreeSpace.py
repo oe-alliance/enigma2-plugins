@@ -1,3 +1,4 @@
+from __future__ import print_function
 #######################################################################
 #
 #    Push Service for Enigma-2
@@ -83,7 +84,7 @@ class FreeSpace(ControllerBase):
 				if hdd is not None:
 					if hdd.isSleeping():
 						# Don't wake up HDD
-						print _("[FreeSpace] HDD is idle: ") + str(path)
+						print(_("[FreeSpace] HDD is idle: ") + str(path))
 						callback()
 
 		# Check free space on path

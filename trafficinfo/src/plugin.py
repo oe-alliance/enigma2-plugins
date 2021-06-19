@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # by 3c5x9@2007
+from __future__ import print_function
 from enigma import eTimer, getDesktop
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
@@ -145,8 +146,8 @@ class TrafficInfoMain(Screen):
                 self.sections.append(TrafficInfoSection(name, link))
             self.onSectionsLoaded()
         except xml.parsers.expat.ExpatError, e:
-            print e
-            print raw
+            print(e)
+            print(raw)
             self.setStatusLabel("loading sections failed")
 
     def onSectionsLoaded(self):
@@ -172,14 +173,14 @@ class TrafficInfoMain(Screen):
 
     ##########
     def getItemsOfSection(self, section):
-        print "loading section", section.name, section.link
+        print("loading section", section.name, section.link)
         self.setStatusLabel("loading messages " + section.name)
         self.loadinginprogress = True
         getPage("http://wap.verkehrsinfo.de" + section.link).addCallback(self.trafficitemsLoaded).addErrback(self.trafficitemsLoadingFaild)
 
     def trafficitemsLoadingFaild(self, raw):
         self.loadinginprogress = False
-        print "loading items faild", raw
+        print("loading items faild", raw)
         self.setStatusLabel("loading messages faild" + raw)
 
     def trafficitemsLoaded(self, raw):
@@ -192,8 +193,8 @@ class TrafficInfoMain(Screen):
                 self.trafficitems.append(self.parseItem(item))
             self.onItemsLoaded()
         except xml.parsers.expat.ExpatError, e:
-            print e
-            print raw
+            print(e)
+            print(raw)
             self.setStatusLabel("loading messages faild! Parsing Error")
 
     def parseItem(self, item):

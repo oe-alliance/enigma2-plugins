@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSelection, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import NumberActionMap
@@ -36,7 +37,7 @@ class AudioRestart():
 
     def startTimer(self):
         self.intDelay = config.plugins.AudioRestart.restartDelay.value * 1000
-        print "[AudioSync] audio restart in ", self.intDelay
+        print("[AudioSync] audio restart in ", self.intDelay)
         self.activateTimer.start(self.intDelay, True)
 
     def restartAudio(self):
@@ -46,7 +47,7 @@ class AudioRestart():
             config.av.downmix_ac3.save()
             config.av.downmix_ac3.value = False
             config.av.downmix_ac3.save()
-            print "[AudioSync] audio restarted"
+            print("[AudioSync] audio restarted")
 
     def audioIsAC3(self):
         service = NavigationInstance.instance.getCurrentService()

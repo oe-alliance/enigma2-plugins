@@ -20,6 +20,7 @@
 #  distributed other than under the conditions noted above.
 #
 # for localized messages
+from __future__ import print_function
 from __init__ import _
 from Screens.Screen import Screen
 from Components.config import ConfigText, getConfigListEntry
@@ -197,7 +198,7 @@ class MovieRetitle(Screen, ConfigListScreen):
                 for index, item in enumerate(self.movieConfig.rename):
                     i = item.split("\t")
                     if i[0] == dir_name:
-                        print dir_name + "\t" + name
+                        print(dir_name + "\t" + name)
                         del self.movieConfig.rename[index]
             else:
                 for index, item in enumerate(self.movieConfig.rename):

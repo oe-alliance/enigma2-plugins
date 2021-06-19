@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.Label import Label
@@ -51,7 +52,7 @@ class DynDNSScreenMain(ConfigListScreen, Screen):
         }, -2)
 
     def save(self):
-        print "[DynDNS] saving config"
+        print("[DynDNS] saving config")
         for x in self["config"].list:
             x[1].save()
         self.close(True)
@@ -85,7 +86,7 @@ class DynDNSService:
 		self.sessions.append(session)
 
 	def checkCurrentIP(self):
-		print "[DynDNS] checking IP"
+		print("[DynDNS] checking IP")
 		try:
 			html = self.getURL("http://checkip.dyndns.org")
 			str = html.split("<body>")[1]
@@ -98,17 +99,17 @@ class DynDNSService:
 				reactor.callLater(1, self.onIPchanged)
 			self.timer.start(int(config.plugins.DynDNS.interval.value) * 60000)
 		except Exception, e:
-			print "[DynDNS]", e
+			print("[DynDNS]", e)
 			str = "coundnotgetip"
 
 	def onIPchanged(self):
-		print "[DynDNS] IP change, setting new one", self.lastip
+		print("[DynDNS] IP change, setting new one", self.lastip)
 		try:
 			url = "http://members.dyndns.org/nic/update?system=dyndns&hostname=%s&myip=%s&wildcard=ON&offline=NO" % (config.plugins.DynDNS.hostname.value, self.lastip)
 			if self.getURL(url).find("good") is not -1:
-				print "[DynDNS] ip changed"
+				print("[DynDNS] ip changed")
 		except Exception, e:
-			print "[DynDNS] ip was not changed", e
+			print("[DynDNS] ip was not changed", e)
 
 	def getURL(self, url):
 		request = Request(url)
@@ -125,7 +126,7 @@ def onPluginStart(session, **kwargs):
 
 
 def onPluginStartCB(changed):
-	print "[DynDNS] config changed=", changed
+	print("[DynDNS] config changed=", changed)
 	global dyndnsservice
 	if changed:
 		dyndnsservice.disable()

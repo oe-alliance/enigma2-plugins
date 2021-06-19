@@ -1,3 +1,4 @@
+from __future__ import print_function
 import zipfile
 
 #from Plugins.Extensions.SubsDownloader2.SourceCode import rarfile
@@ -30,7 +31,7 @@ class zip_extractor():
                return zip_data, zip_file_list
                zip_data.close()
           except:
-               print "There is problem with %s reading" % zip__path
+               print("There is problem with %s reading" % zip__path)
                return False
 
      def zipped_file_list(self, zip_file_temp_list, extraction_filter=None):
@@ -55,14 +56,14 @@ class zip_extractor():
                     extracted_files_path = []
                     for x in extraction_file_list:
                          zip_data.extract(x, destination_dir)
-                         print "Files %s from zip %s extracted to dir: %s.\n" % (x, self.__zip__path, destination_dir)
+                         print("Files %s from zip %s extracted to dir: %s.\n" % (x, self.__zip__path, destination_dir))
                          extracted_files_path.append(destination_dir + "/" + x)
                     return extracted_files_path
                except:
-                    print "Zip %s was not extracted to dir: %s" % (self.__zip__path, destination_dir)
+                    print("Zip %s was not extracted to dir: %s" % (self.__zip__path, destination_dir))
                     return False
           else:
-               print "%s is not a zip file." % zip__path
+               print("%s is not a zip file." % zip__path)
                return False
 
 

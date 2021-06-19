@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 from enigma import eTimer, eConsoleAppContainer, getBestPlayableServiceReference, eServiceReference, eEPGCache, eEnv
 from time import time, strftime, localtime
 from Components.config import config
@@ -543,7 +544,7 @@ class vps:
 					elif (timer.begin - now) > 4 * 3600:
 						break
 			except AttributeError:
-				print "[VPS-Plugin] AttributeError in Vps.py"
+				print("[VPS-Plugin] AttributeError in Vps.py")
 				return
 		else:
 			nextExecution = 14400
@@ -561,7 +562,7 @@ class vps:
 			nextExecution = 1
 
 		self.timer.startLongTimer(nextExecution)
-		print "[VPS-Plugin] next execution in " + str(nextExecution) + " sec"
+		print("[VPS-Plugin] next execution in " + str(nextExecution) + " sec")
 
 	def addTimerToList(self, timer):
 		self.vpstimers.append(vps_timer(timer, self.session))

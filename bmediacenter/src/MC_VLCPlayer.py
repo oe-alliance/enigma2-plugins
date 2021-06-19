@@ -1,3 +1,4 @@
+from __future__ import print_function
 from enigma import eTimer, eWidget, eRect, eServiceReference, iServiceInformation, iPlayableService, eServiceCenter
 from Screens.Screen import Screen
 from Screens.ServiceInfo import ServiceInfoList, ServiceInfoListEntry
@@ -36,7 +37,7 @@ try:
 	from Plugins.Extensions.VlcPlayer.VlcServerList import VlcServerList
 	from Plugins.Extensions.VlcPlayer.VlcPlayer import VlcPlayer
 except Exception, e:
-	print "Media Center: Import VLC Stuff failed"
+	print("Media Center: Import VLC Stuff failed")
 
 
 def addFavoriteVLCFolders():
@@ -345,14 +346,14 @@ class MC_VLCMedialist(Screen):
 			self.filename = self.filelist.getCurrent()[0][0]
 		try:
 			url = self.server.playFile(self.filename, DEFAULT_VIDEO_PID, DEFAULT_AUDIO_PID)
-			print "[VLC] url: " + url
+			print("[VLC] url: " + url)
 		except Exception, e:
 			self.session.open(MessageBox, _("Error with VLC server:\n%s" % e), MessageBox.TYPE_ERROR)
 
 		if url is not None:
 			#self.session.open(MessageBox, _("OPEN URL:\n%s" % url), MessageBox.TYPE_INFO)
 			sref = eServiceReference(ENIGMA_SERVICE_ID, 0, url)
-			print "sref valid=", sref.valid()
+			print("sref valid=", sref.valid())
 			sref.setData(0, DEFAULT_VIDEO_PID)
 			sref.setData(1, DEFAULT_AUDIO_PID)
 			self.session.nav.stopService()
@@ -455,7 +456,7 @@ class MC_VLCMedialist(Screen):
 		self.session.openWithCallback(self.JumpToFolder, MC_VLCFavoriteFolders)
 
 	def changeDir(self, dir):
-		print "[VLC] changeDir ", dir
+		print("[VLC] changeDir ", dir)
 		try:
 			self.currentList.changeDirectory(dir)
 			self.updateFilelist()
@@ -564,18 +565,18 @@ class MC_VLCFavoriteFolders(Screen):
 			try:
 				del(config.plugins.mc_vlc.folders[i])
 			except Exception, e:
-				print "MC_ResetAll-DelaFavFailed"
+				print("MC_ResetAll-DelaFavFailed")
 		config.plugins.mc_vlc.folders.save()
 		try:
 			del(config.plugins.mc_vlc.folders)
 		except Exception, e:
-			print "MC_DELFAVFOLDERS-FAILED"
+			print("MC_DELFAVFOLDERS-FAILED")
 			#self.session.open(MessageBox,("Error: %s\n") % (Exception),  MessageBox.TYPE_INFO)
 		try:
 			del(config.plugins.mc_vlc.folders[0])
 		except Exception, e:
 			#self.session.open(MessageBox,("Error: %s\n") % (Exception),  MessageBox.TYPE_INFO)
-			print "MC_DELFAV0-FAILED"
+			print("MC_DELFAV0-FAILED")
 
 		config.plugins.mc_vlc.folders.save()
 		configfile.save()
@@ -641,7 +642,7 @@ class FavoriteFolderAdd(Screen, ConfigListScreen):
 		try:
 			del(config.plugins.mc_vlc.folders[self.id])
 		except Exception, e:
-			print "MC_Settings_DelaFavFailed"
+			print("MC_Settings_DelaFavFailed")
 		self.close(0)
 #------------------------------------------------------------------------------------------
 
@@ -706,7 +707,7 @@ class FolderOptions(Screen):
 		}, -1)
 
 	def okbuttonClick(self):
-		print "okbuttonClick"
+		print("okbuttonClick")
 		selection = self["menu"].getCurrent()
 		if selection is not None:
 			if selection[1] == "addtofav":

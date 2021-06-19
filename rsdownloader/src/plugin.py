@@ -4,6 +4,7 @@
 ## by AliAbdul
 ##
 ##
+from __future__ import print_function
 from base64 import encodestring
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigClock, ConfigInteger, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry
@@ -91,7 +92,7 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
 
@@ -1107,7 +1108,7 @@ class UnrarEntry:
 			f.write(result)
 			f.close()
 		except:
-			print "[RS Downloader] Result of unrar:", result
+			print("[RS Downloader] Result of unrar:", result)
 		self.finishCallback(self.name)
 
 	def allDownloaded(self):

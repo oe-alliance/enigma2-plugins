@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from enigma import ePicLoad, eTimer, getDesktop
 
 from Screens.Screen import Screen
@@ -178,16 +179,16 @@ class PictureScreen(Screen):
 	def fetchFile(self, url):
 		self.processing = True
 		self.setTitle("loading File")
-		print "fetching URL", url
+		print("fetching URL", url)
 		self.sourcefile = "/tmp/loadedfile"
 		download(url, self.sourcefile).addCallback(self.fetchFinished).addErrback(self.fetchFailed)
 
 	def fetchFailed(self, string):
-		print "fetch failed", string
+		print("fetch failed", string)
 		self.setTitle("fetch failed: " + string)
 
 	def fetchFinished(self, string):
-		print "fetching finished"
+		print("fetching finished")
 		self.setPicture(self.sourcefile)
 
 	def setPicture(self, string):
@@ -209,7 +210,7 @@ class PictureScreen(Screen):
 		elif self.slideshowcallback is not None:
 				self.closetimer = eTimer()
 				self.closetimer.timeout.get().append(self.slideshowcallback)
-				print "waiting", config.plugins.pictureviewer.slideshowtime.value, "seconds for next picture"
+				print("waiting", config.plugins.pictureviewer.slideshowtime.value, "seconds for next picture")
 				if not self.paused:
 					self.closetimer.start(int(config.plugins.pictureviewer.slideshowtime.value))
 

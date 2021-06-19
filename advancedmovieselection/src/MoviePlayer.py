@@ -20,6 +20,7 @@
 #  distributed other than under the conditions noted above.
 #
 
+from __future__ import print_function
 import Screens.Standby
 from __init__ import _
 from Components.config import config
@@ -150,7 +151,7 @@ class PlayerBase(MoviePreview, SelectionEventInfo):
 
     def __evServiceEnd(self):
         if not self.is_closing and not self.new_service_started:
-            print "Close on timer switch!!!"
+            print("Close on timer switch!!!")
             self.close()
 
     def openServiceList(self):
@@ -507,7 +508,7 @@ if pluginPresent.BludiscPlayer:
             newref = eServiceReference(0x04, 0, "%s:%03d" % (self.bd_mountpoint, idx))
             newref.setData(1, 1)
             newref.setName("Bludisc title %d" % idx)
-            print "[Bludisc] playService: ", name, newref.toString()
+            print("[Bludisc] playService: ", name, newref.toString())
             main_movie = idx == self.getMainMovieIndex()
             self.session.openWithCallback(self.moviefinished, BludiscPlayer, newref, self.file_name, main_movie)
 

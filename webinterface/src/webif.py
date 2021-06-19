@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+from __future__ import print_function
 Version = '$Header$'
 
 # things to improve:
@@ -379,18 +380,18 @@ class webifHandler(ContentHandler):
 		while len(path) > 1:
 			scr = self.screen.getRelatedScreen(path[0])
 			if scr is None:
-				print "[webif.py] Parent Screen not found!"
-				print wsource
+				print("[webif.py] Parent Screen not found!")
+				print(wsource)
 			path = path[1:]
 
 		source = scr.get(path[0])
 
 		if isinstance(source, ObsoleteSource):
 			# however, if we found an "obsolete source", issue warning, and resolve the real source.
-			print "WARNING: WEBIF '%s' USES OBSOLETE SOURCE '%s', USE '%s' INSTEAD!" % (name, wsource, source.new_source)
-			print "OBSOLETE SOURCE WILL BE REMOVED %s, PLEASE UPDATE!" % (source.removal_date)
+			print("WARNING: WEBIF '%s' USES OBSOLETE SOURCE '%s', USE '%s' INSTEAD!" % (name, wsource, source.new_source))
+			print("OBSOLETE SOURCE WILL BE REMOVED %s, PLEASE UPDATE!" % (source.removal_date))
 			if source.description:
-				print source.description
+				print(source.description)
 
 			wsource = source.new_source
 		else:
@@ -528,7 +529,7 @@ class webifHandler(ContentHandler):
 			screen.execBegin()
 
 	def cleanup(self):
-		print "screen cleanup!"
+		print("screen cleanup!")
 		for screen in self.screens:
 			screen.execEnd()
 			screen.doClose()
@@ -566,7 +567,7 @@ def renderPage(request, path, session):
 				if not request._disconnected:
 					request.finish()
 				else:
-					print "[renderPage] request already finished!"
+					print("[renderPage] request already finished!")
 				return
 
 	# first, apply "commands" (aka. URL argument)
@@ -626,7 +627,7 @@ def requestFinish(handler, request, requestAlreadyFinished=False):
 			if not request._disconnected:
 				request.finish()
 			else:
-				print "[requestFinish] request already finished!"
+				print("[requestFinish] request already finished!")
 		except:
 			pass
 

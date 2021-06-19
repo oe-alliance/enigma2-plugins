@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # for localized messages
+from __future__ import print_function
 from __init__ import _
 from enigma import eTimer, getDesktop
 from Screens.Screen import Screen
@@ -42,7 +43,7 @@ def write_cache(cache_file, cache_data):
 		try:
 			mkdir(os_path.dirname(cache_file))
 		except OSError:
-			print os_path.dirname(cache_file), '[Networkbrowser] is a file'
+			print(os_path.dirname(cache_file), '[Networkbrowser] is a file')
 	fd = open(cache_file, 'w')
 	dump(cache_data, fd, -1)
 	fd.close()
@@ -114,7 +115,7 @@ class NetworkBrowser(Screen):
 			self.iface = self.GetNetworkInterfaces()
 		if self.iface is None:
 			self.iface = 'eth0'
-		print "[Networkbrowser] Using Network Interface: %s" % self.iface
+		print("[Networkbrowser] Using Network Interface: %s" % self.iface)
 		self.networklist = None
 		self.device = None
 		self.mounts = None
@@ -205,7 +206,7 @@ class NetworkBrowser(Screen):
 	def scanIPclosed(self, result):
 		if result[0]:
 			if result[1] == "address":
-				print "[Networkbrowser] got IP:", result[1]
+				print("[Networkbrowser] got IP:", result[1])
 				nwlist = []
 				nwlist.append(netscan.netzInfo(result[0] + "/24"))
 				self.networklist += nwlist[0]
@@ -256,13 +257,13 @@ class NetworkBrowser(Screen):
 		self.inv_cache = 0
 		self.vc = valid_cache(self.cache_file, self.cache_ttl)
 		if self.cache_ttl > 0 and self.vc != 0:
-			print '[Networkbrowser] Loading network cache from ', self.cache_file
+			print('[Networkbrowser] Loading network cache from ', self.cache_file)
 			try:
 				self.networklist = load_cache(self.cache_file)
 			except:
 				self.inv_cache = 1
 		if self.cache_ttl == 0 or self.inv_cache == 1 or self.vc == 0:
-			print '[Networkbrowser] Getting fresh network list'
+			print('[Networkbrowser] Getting fresh network list')
 			self.networklist = self.getNetworkIPs()
 			if fileExists("/usr/bin/nmap"):
 				strIP = self.makeStrIP()
@@ -324,7 +325,7 @@ class NetworkBrowser(Screen):
 		username = ""
 		password = ""
 		if os_path.exists(self.sharecache_file):
-			print '[Networkbrowser] Loading userinfo from ', self.sharecache_file
+			print('[Networkbrowser] Loading userinfo from ', self.sharecache_file)
 			try:
 				self.hostdata = load_cache(self.sharecache_file)
 				username = self.hostdata['username']
@@ -348,7 +349,7 @@ class NetworkBrowser(Screen):
 				if len(item) == 3 and item[0] == "Disk" and not item[1].endswith("$"):
 					sharelist.append(["smbShare", hostname, hostip, item[1], item[0], item[2]])
 		except OSError as e:
-			print "Running " + str(cmd) + " failed with:" + str(e)
+			print("Running " + str(cmd) + " failed with:" + str(e))
 			pass
 		return sharelist
 
@@ -522,7 +523,7 @@ class NetworkBrowser(Screen):
 			try:
 				self.hostdata = load_cache(self.hostcache_file)
 			except:
-				print 'load cache failed'
+				print('load cache failed')
 				pass
 			self.passwordQuestion(False)
 		else:
@@ -583,7 +584,7 @@ class NetworkBrowser(Screen):
 				data['username'] = ""
 				data['password'] = ""
 				if os_path.exists(self.sharecache_file):
-					print '[Networkbrowser] Loading userinfo from ', self.sharecache_file
+					print('[Networkbrowser] Loading userinfo from ', self.sharecache_file)
 					try:
 						self.hostdata = load_cache(self.sharecache_file)
 						data['username'] = self.hostdata['username']
@@ -653,7 +654,7 @@ class ScanIP(Screen, ConfigListScreen):
 		try:
 			self["summary_description"].text = self.getCurrentEntry()
 		except:
-			print '[ScanIp] no "summary_description" available'
+			print('[ScanIp] no "summary_description" available')
 
 	def goAddress(self):
 		if self.ipAddress.getText() != "0.0.0.0":

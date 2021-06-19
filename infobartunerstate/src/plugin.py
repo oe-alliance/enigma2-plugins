@@ -1,3 +1,4 @@
+from __future__ import print_function
 #######################################################################
 #
 #    InfoBar Tuner State for Enigma-2
@@ -185,7 +186,7 @@ def Plugins(**kwargs):
 #######################################################
 # Plugin # Plugin configuration
 def setup(session, **kwargs):
-	print "InfoBarTunerState setup"
+	print("InfoBarTunerState setup")
 	#TODO config
 	# Overwrite Skin Position
 	# Show Live TV Tuners PiP LiveStream FileStream
@@ -200,13 +201,13 @@ def setup(session, **kwargs):
 	try:
 		session.open(InfoBarTunerStateConfiguration)
 	except Exception, e:
-		print "InfoBarTunerStateMenu exception " + str(e)
+		print("InfoBarTunerStateMenu exception " + str(e))
 
 
 #######################################################
 # Sessionstart
 def start(reason, **kwargs):
-	print "InfoBarTunerState start"
+	print("InfoBarTunerState start")
 	if reason == 0: # start
 		if "session" in kwargs:
 			if config.infobartunerstate.enabled.value:
@@ -215,20 +216,20 @@ def start(reason, **kwargs):
 				try:
 					gInfoBarTunerState = InfoBarTunerState(session)
 				except Exception, e:
-					print "InfoBarTunerState start exception " + str(e)
+					print("InfoBarTunerState start exception " + str(e))
 	# Do not cleanup on session shutdown, it will break the movie player integration
 
 
 #######################################################
 # Extension Menu
 def show(session, **kwargs):
-	print "InfoBarTunerState show"
+	print("InfoBarTunerState show")
 	if gInfoBarTunerState:
 		try:
 			gInfoBarTunerState.show(True, forceshow=True)
 		except Exception, e:
-			print "InfoBarTunerState show exception " + str(e)
+			print("InfoBarTunerState show exception " + str(e))
 	else:
 		# No InfoBarTunerState Instance running
-		print "InfoBarTunerState disabled"
+		print("InfoBarTunerState disabled")
 		session.open(MessageBox, _("InfoBarTunerState is disabled"), MessageBox.TYPE_INFO, 3)

@@ -1,3 +1,4 @@
+from __future__ import print_function
 # mp4porn plugin by AliAbdul
 from Plugin import Movie, Plugin
 import re
@@ -48,7 +49,7 @@ class MP4Porn(Plugin):
 
 	def getPageError(self, error=None):
 		if error and self.currPage == 1:
-			print "[%s] Error: %s" % (self.name, error)
+			print("[%s] Error: %s" % (self.name, error))
 		else:
 			self.moreEntries = False
 

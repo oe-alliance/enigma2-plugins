@@ -23,6 +23,7 @@
 #    that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 #
 
+from __future__ import print_function
 from Tools.Directories import fileExists
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN, SCOPE_CONFIG
 from shutil import copyfile
@@ -86,4 +87,4 @@ class MovieConfig:
                 f.write('%' + x + "\r\n")
             f.close()
         except Exception, e:
-            print e
+            print(e)

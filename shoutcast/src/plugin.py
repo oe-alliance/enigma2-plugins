@@ -21,6 +21,7 @@
 #  distributed other than under the conditions noted above.
 #
 
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from urlparse import urlparse
 from Screens.Screen import Screen
@@ -111,11 +112,11 @@ class myHTTPClientFactory(HTTPClientFactory):
 	def clientConnectionLost(self, connector, reason):
 		lostreason = ("Connection was closed cleanly" in vars(reason))
 		if lostreason == None:
-			print"[SHOUTcast] Lost connection, reason: %s ,trying to reconnect!" % reason
+			print("[SHOUTcast] Lost connection, reason: %s ,trying to reconnect!" % reason)
 			connector.connect()
 
 	def clientConnectionFailed(self, connector, reason):
-		print"[SHOUTcast] connection failed, reason: %s,trying to reconnect!" % reason
+		print("[SHOUTcast] connection failed, reason: %s,trying to reconnect!" % reason)
 		connector.connect()
 
 
@@ -161,7 +162,7 @@ class SHOUTcastWidget(Screen):
 
 	sz_w = getDesktop(0).size().width() - 90
 	sz_h = getDesktop(0).size().height() - 95
-	print "[SHOUTcast] desktop size %dx%d\n" % (sz_w + 90, sz_h + 100)
+	print("[SHOUTcast] desktop size %dx%d\n" % (sz_w + 90, sz_h + 100))
 	if sz_h < 500:
 		sz_h += 4
 	skin = """
@@ -586,7 +587,7 @@ class SHOUTcastWidget(Screen):
 			return []
 		data = root.find("data")
 		if data == None:
-			print "[SHOUTcast] could not find data tag, assume flat listing\n"
+			print("[SHOUTcast] could not find data tag, assume flat listing\n")
 			return [SHOUTcastGenre(name=childs.get("name")) for childs in root.findall("genre")]
 		for glist in data.findall("genrelist"):
 			for childs in glist.findall("genre"):
@@ -733,7 +734,7 @@ class SHOUTcastWidget(Screen):
 		config_bitrate = int(config.plugins.shoutcast.streamingrate.value)
 		data = root.find("data")
 		if data == None:
-			print "[SHOUTcast] could not find data tag\n"
+			print("[SHOUTcast] could not find data tag\n")
 			return []
 		for slist in data.findall("stationlist"):
 			for childs in slist.findall("tunein"):
@@ -924,29 +925,29 @@ class SHOUTcastWidget(Screen):
 		r = re.findall('murl&quot;:&quot;(http.*?)&quot', result, re.S | re.I)
 		if r:
 			url = r[nr]
-			print "[SHOUTcast] fetch cover first try:%s" % (url)
+			print("[SHOUTcast] fetch cover first try:%s" % (url))
 			for link in bad_link:
 				if url.startswith(link):
 					nr += 1
 					url = r[nr]
-					print "[SHOUTcast] fetch cover second try:%s" % (url)
+					print("[SHOUTcast] fetch cover second try:%s" % (url))
 					for link in bad_link:
 						if url.startswith(link):
 							nr += 1
 							url = r[nr]
-							print "[SHOUTcast] fetch cover third try:%s" % (url)
+							print("[SHOUTcast] fetch cover third try:%s" % (url))
 							for link in bad_link:
 								if url.startswith(link):
 									nr += 1
 									url = r[nr]
-									print "[SHOUTcast] fetch cover fourth try:%s" % (url)
+									print("[SHOUTcast] fetch cover fourth try:%s" % (url))
 			if len(url) > 15:
 				url = url.replace(" ", "%20")
-				print "download url: %s " % url
+				print("download url: %s " % url)
 				validurl = True
 			else:
 				validurl = False
-				print "[SHOUTcast] invalid cover url or pictureformat!"
+				print("[SHOUTcast] invalid cover url or pictureformat!")
 				if config.plugins.shoutcast.showcover.value:
 					self["cover"].doHide()
 			if validurl:
@@ -956,30 +957,30 @@ class SHOUTcastWidget(Screen):
 				except:
 					pass
 				coverfile = coverfiles[self.currentcoverfile]
-				print "[SHOUTcast] downloading cover from %s to %s numer%s" % (url, coverfile, str(nr))
+				print("[SHOUTcast] downloading cover from %s to %s numer%s" % (url, coverfile, str(nr)))
 				downloadPage(url, coverfile).addCallback(self.coverDownloadFinished, coverfile).addErrback(self.coverDownloadFailed)
 
 	def coverDownloadFailed(self, result):
-		print "[SHOUTcast] cover download failed:", result
+		print("[SHOUTcast] cover download failed:", result)
 		if config.plugins.shoutcast.showcover.value:
 			self["statustext"].setText(_("Error downloading cover..."))
 			self["cover"].doHide()
 
 	def coverDownloadFinished(self, result, coverfile):
 		if config.plugins.shoutcast.showcover.value:
-			print "[SHOUTcast] cover download finished:", coverfile
+			print("[SHOUTcast] cover download finished:", coverfile)
 			self["statustext"].setText("")
 			self["cover"].updateIcon(coverfile)
 			self["cover"].doShow()
 
 	def __event(self, ev):
 		if ev != 17 and ev != 18:
-			print "[SHOUTcast] EVENT ==>", ev
+			print("[SHOUTcast] EVENT ==>", ev)
 		if ev == 1 or ev == 4:
-			print "[SHOUTcast] Tuned in, playing now!"
+			print("[SHOUTcast] Tuned in, playing now!")
 		elif ev == 3 or ev == 7:
 			self["statustext"].setText(_("Stream stopped playing, playback of stream stopped!"))
-			print "[SHOUTcast] Stream stopped playing, playback of stream stopped!"
+			print("[SHOUTcast] Stream stopped playing, playback of stream stopped!")
 			self.session.nav.stopService()
 		elif ev == 5:
 			if not self.currPlay:
@@ -994,7 +995,7 @@ class SHOUTcastWidget(Screen):
 						url = "http://www.bing.com/images/search?q=%s&FORM=HDRSC2" % quote(searchpara)
 					else:
 						url = "http://www.bing.com/images/search?q=%s&FORM=HDRSC2" % quote('pamela anderson')
-					print "[SHOUTcast] coverurl = %s " % url
+					print("[SHOUTcast] coverurl = %s " % url)
 					if self.currentGoogle:
 						self.nextGoogle = url
 					else:
@@ -1003,11 +1004,11 @@ class SHOUTcastWidget(Screen):
 				if len(sTitle) == 0:
 					sTitle = "n/a"
 				title = _("Title: %s") % sTitle
-				print "[SHOUTcast] Title: %s " % title
+				print("[SHOUTcast] Title: %s " % title)
 				self["titel"].setText(title)
 				self.summaries.setText(title)
 			else:
-				print "[SHOUTcast] Ignoring useless updated info provided by streamengine!"
+				print("[SHOUTcast] Ignoring useless updated info provided by streamengine!")
 
 	def playServiceStream(self, url):
 		self.currPlay = None
@@ -1018,7 +1019,7 @@ class SHOUTcastWidget(Screen):
 		try:
 			self.session.nav.playService(sref, adjust=False)
 		except:
-			print "[SHOUTcast] Could not play %s" % sref
+			print("[SHOUTcast] Could not play %s" % sref)
 		self.currPlay = self.session.nav.getCurrentService()
 		self.currentStreamingURL = url
 		self["titel"].setText(_("Title: n/a"))
@@ -1067,13 +1068,13 @@ class Cover(Pixmap):
 	def doShow(self):
 		if not self.visible:
 			self.visible = True
-			print "[SHOUTcast] cover visible %s self.show" % self.visible
+			print("[SHOUTcast] cover visible %s self.show" % self.visible)
 			self.show()
 
 	def doHide(self):
 		if self.visible:
 			self.visible = False
-			print "[SHOUTcast] cover visible %s self.hide" % self.visible
+			print("[SHOUTcast] cover visible %s self.hide" % self.visible)
 			self.hide()
 
 	def onShow(self):
@@ -1096,7 +1097,7 @@ class Cover(Pixmap):
 			self.decoding = self.decodeNext
 			self.decodeNext = None
 			if self.picload.startDecode(self.decoding) != 0:
-				print "[Shoutcast] Failed to start decoding next image"
+				print("[Shoutcast] Failed to start decoding next image")
 				self.decoding = None
 		else:
 			self.decoding = None
@@ -1108,7 +1109,7 @@ class Cover(Pixmap):
 			if self.picload.startDecode(filename) == 0:
 				self.decoding = filename
 			else:
-				print "[Shoutcast] Failed to start decoding image"
+				print("[Shoutcast] Failed to start decoding image")
 				self.decoding = None
 
 
@@ -1117,7 +1118,7 @@ class SHOUTcastList(GUIComponent, object):
 		width = self.l.getItemSize().width()
 		res = [None]
 		if self.mode == 0: # GENRELIST
-			print "[SHOUTcast] list name=%s haschilds=%s opened=%s\n" % (item.name, item.haschilds, item.opened)
+			print("[SHOUTcast] list name=%s haschilds=%s opened=%s\n" % (item.name, item.haschilds, item.opened))
 			if item.parentid == "0": # main genre
 				if item.haschilds == "true":
 					if item.opened == "true":

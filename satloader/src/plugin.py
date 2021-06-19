@@ -1,3 +1,4 @@
+from __future__ import print_function
 from __init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -78,7 +79,7 @@ class Satloader(Screen):
 		self["info"].setText("%s" % (_("Press ok or green button to install satellites.xml")))
 
 	def btnRed(self):
-		print "\n[Satloader] cancel\n"
+		print("\n[Satloader] cancel\n")
 		self.close(None)
 
 	def btnOK(self):
@@ -182,7 +183,7 @@ class SatloaderBouquet(Screen):
 		downloadPage("http://satellites.satloader.net/bouquet.tar.gz", "/tmp/bouquet.tar.gz").addCallback(self.downloadListBouquetCallback).addErrback(self.downloadListError)
 
 	def btnRed(self):
-		print "\n[SatloaderBouquet] cancel\n"
+		print("\n[SatloaderBouquet] cancel\n")
 		self.close(None)
 
 	def btnOK(self):
@@ -235,7 +236,7 @@ class SatloaderBouquet(Screen):
 				self["info"].setText("%s" % (_("Press ok button to select bouquet")))
 
 		except Exception, e:
-			print "Error:", e
+			print("Error:", e)
 			self["info"].setText("%s\n%s" % (_("Parsing failed!"), e))
 
 	def restart(self, ret):
@@ -305,7 +306,7 @@ class SatloaderMultiSat(Screen):
 		downloadPage(self.saturl, "/tmp/multisat.tar.gz").addCallback(self.downloadListMultiSatCallback).addErrback(self.downloadListError)
 
 	def btnRed(self):
-		print "\n[SatloaderMultiSat] cancel\n"
+		print("\n[SatloaderMultiSat] cancel\n")
 		self.close(None)
 
 	def btnOK(self):
@@ -365,7 +366,7 @@ class SatloaderMultiSat(Screen):
 				self["info"].setText("%s" % (_("Press ok button to select satellite")))
 
 		except Exception, e:
-			print "Error:", e
+			print("Error:", e)
 			self["info"].setText("%s\n%s" % (_("Parsing failed!"), e))
 
 	def restart(self, ret):
@@ -448,7 +449,7 @@ class TransponderSelection(Screen):
 		self["info"].setText("%s" % (self.satname))
 
 	def btnRed(self):
-		print "\n[TransponderSelection] cancel\n"
+		print("\n[TransponderSelection] cancel\n")
 		self.close(None)
 
 	def btnOK(self):
@@ -523,7 +524,7 @@ def SatListEntry(description, value, index, selected):
 
 
 def main(session, **kwargs):
-	print "\n[Satloader] start\n"
+	print("\n[Satloader] start\n")
 	session.open(Satloader)
 
 #######################

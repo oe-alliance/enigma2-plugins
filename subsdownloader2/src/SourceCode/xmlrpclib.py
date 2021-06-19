@@ -135,6 +135,7 @@ Exported functions:
   loads          Convert an XML-RPC packet to unmarshalled data plus a method
                  name (None if not present).
 """
+from __future__ import print_function
 
 import re
 import string
@@ -1422,7 +1423,7 @@ class Transport:
             if not response:
                 break
             if self.verbose:
-                print "body:", repr(response)
+                print("body:", repr(response))
             p.feed(response)
 
         file.close()
@@ -1565,18 +1566,18 @@ if __name__ == "__main__":
     # server = ServerProxy("http://localhost:8000") # local server
     server = ServerProxy("http://time.xmlrpc.com/RPC2")
 
-    print server
+    print(server)
 
     try:
-        print server.currentTime.getCurrentTime()
+        print(server.currentTime.getCurrentTime())
     except Error, v:
-        print "ERROR", v
+        print("ERROR", v)
 
     multi = MultiCall(server)
     multi.currentTime.getCurrentTime()
     multi.currentTime.getCurrentTime()
     try:
         for response in multi():
-            print response
+            print(response)
     except Error, v:
-        print "ERROR", v
+        print("ERROR", v)

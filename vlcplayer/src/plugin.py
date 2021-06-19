@@ -9,6 +9,7 @@
 # version.
 #===============================================================================
 
+from __future__ import print_function
 from . import _
 from Plugins.Plugin import PluginDescriptor
 from VlcServerList import VlcServerListScreen
@@ -28,7 +29,7 @@ testOK = False
 
 class __VlcManager():
 	def __init__(self, session):
-		print "[VLC] VlcManager"
+		print("[VLC] VlcManager")
 		self.session = session
 		self.testThread = None
 		self.testTime = 2.0
@@ -43,7 +44,7 @@ class __VlcManager():
 			self.openMedialist(defaultServer)
 
 	def openServerlist(self):
-		print "[VLC] openServerlist"
+		print("[VLC] openServerlist")
 		defaultServer = vlcServerConfig.getDefaultServer()
 		self.session.openWithCallback(self.serverlistClosed, VlcServerListScreen, defaultServer)
 
@@ -52,7 +53,7 @@ class __VlcManager():
 		self.openMedialist(selectedServer)
 
 	def openMedialist(self, selectedServer):
-		print "[VLC] openMedialist"
+		print("[VLC] openMedialist")
 		if selectedServer is not None:
 			if selectedServer.getPingIp():
 				global testOK
@@ -96,7 +97,7 @@ class __VlcManager():
 		return [namestr[i:i + 32].split('\0', 1)[0] for i in range(0, bytelen, 32)]
 
 	def medialistClosed(self, proceed=False):
-		print "[VLC] medialistClosed"
+		print("[VLC] medialistClosed")
 		if proceed:
 			self.openServerlist()
 

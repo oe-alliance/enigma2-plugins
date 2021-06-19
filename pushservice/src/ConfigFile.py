@@ -1,3 +1,4 @@
+from __future__ import print_function
 #######################################################################
 #
 #    Push Service for Enigma-2
@@ -55,7 +56,7 @@ class ConfigFile(object):
 
 		# Abort if no config found
 		if not os.path.exists(path):
-			print _("PushService No configuration file present")
+			print(_("PushService No configuration file present"))
 			return None
 
 		# Parse if mtime differs from whats saved
@@ -68,7 +69,7 @@ class ConfigFile(object):
 		try:
 			etree = parse(path).getroot()
 		except Exception, e:
-			print _("PushService Exception in readXML: ") + str(e)
+			print(_("PushService Exception in readXML: ") + str(e))
 			etree = None
 			mtime = -1
 
@@ -89,7 +90,7 @@ class ConfigFile(object):
 			if data:
 				f.writelines(data)
 		except Exception, e:
-			print _("PushService Exception in writeXML: ") + str(e)
+			print(_("PushService Exception in writeXML: ") + str(e))
 		finally:
 			if f is not None:
 				f.close()

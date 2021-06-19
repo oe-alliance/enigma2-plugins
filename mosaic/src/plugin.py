@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Mosaic by AliAbdul
+from __future__ import print_function
 from Components.ActionMap import NumberActionMap
 from Components.config import config, ConfigSubsection, ConfigInteger
 from Components.Console import Console
@@ -44,7 +45,7 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
 
@@ -308,7 +309,7 @@ class Mosaic(Screen):
 			self.working = False
 			self.updateTimer.start(1, 1)
 		else:
-			print "[Mosaic] retval: %d result: %s" % (retval, result)
+			print("[Mosaic] retval: %d result: %s" % (retval, result))
 
 			try:
 				f = open(grab_errorlog, "w")

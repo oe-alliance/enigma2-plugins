@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # by 3c5x9@2008
+from __future__ import print_function
 from enigma import eTimer
 
 from Screens.Screen import Screen
@@ -60,13 +61,13 @@ class HTTPProxyConfigScreen(ConfigListScreen, Screen):
         }, -2)
 
     def save(self):
-        print "saving"
+        print("saving")
         for x in self["config"].list:
             x[1].save()
         self.close(True, self.session)
 
     def cancel(self):
-        print "cancel"
+        print("cancel")
         for x in self["config"].list:
             x[1].cancel()
         self.close(False, self.session)
@@ -117,7 +118,7 @@ class myProxyRequest(proxy.ProxyRequest):
         global LOG_TO_STDOUT
         if LOG_TO_STDOUT:
             try:
-                print "[PROXY]", self.client.host, self.uri, status
+                print("[PROXY]", self.client.host, self.uri, status)
             except Exception:
                 ''' now i am quite careful with logging webstuff with E2 '''
                 pass
@@ -146,11 +147,11 @@ def autostart(reason, **kwargs):
                 extip = iNetwork.ifaces[adaptername]['ip']
                 if iNetwork.ifaces[adaptername]['up'] is True:
                     extip = "%i.%i.%i.%i" % (extip[0], extip[1], extip[2], extip[3])
-                    print "starting proxy on ", extip, ":", config.plugins.httpproxy.port.value
+                    print("starting proxy on ", extip, ":", config.plugins.httpproxy.port.value)
                     reactor.listenTCP(int(config.plugins.httpproxy.port.value), ProxyFactory(), interface=extip)
         except Exception, e:
-            print "starting the http proxy failed!"
-            print e
+            print("starting the http proxy failed!")
+            print(e)
 
 
 def Plugins(**kwargs):

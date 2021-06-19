@@ -1,3 +1,4 @@
+from __future__ import print_function
 #
 #  MerlinEPGCenter E2 Plugin
 #
@@ -945,17 +946,17 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		if cur and isinstance(cur, RecordTimerEntry):
 			t = cur
 			if t.disabled:
-				print "try to ENABLE timer"
+				print("try to ENABLE timer")
 				t.enable()
 				timersanitycheck = TimerSanityCheck(self.session.nav.RecordTimer.timer_list, cur)
 				if not timersanitycheck.check():
 					t.disable()
-					print "Sanity check failed"
+					print("Sanity check failed")
 					simulTimerList = timersanitycheck.getSimulTimerList()
 					if simulTimerList is not None:
 						self.session.openWithCallback(self.finishedEdit, TimerSanityConflict, simulTimerList)
 				else:
-					print "Sanity check passed"
+					print("Sanity check passed")
 					if timersanitycheck.doubleCheck():
 						t.disable()
 			else:

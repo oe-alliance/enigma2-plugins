@@ -19,6 +19,7 @@
 #  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
+from __future__ import print_function
 from __init__ import _
 from Components.PluginComponent import plugins
 from Screens.Screen import Screen
@@ -82,7 +83,7 @@ else:
     TFT_8000_Present = False
 
 if "movielist" not in config.content.items:
-    print "e2 config.movielist not exists"
+    print("e2 config.movielist not exists")
     config.movielist = ConfigSubsection()
 # all config.entries from Screens.MovieSelection
 config.movielist.moviesort = ConfigInteger(default=MovieList.SORT_ALPHANUMERIC)
@@ -354,7 +355,7 @@ class MovieContextMenu(Screen):
     def checkConnection(self):
         try:
             import socket
-            print socket.gethostbyname('www.google.com')
+            print(socket.gethostbyname('www.google.com'))
             return True
         except:
             self.session.openWithCallback(self.close, MessageBox, _("No internet connection available!"), MessageBox.TYPE_ERROR)
@@ -420,7 +421,7 @@ class MovieContextMenu(Screen):
 
     def searchCallback(self, retval):
         search = retval
-        print search
+        print(search)
         if search == "" or search is None:
             self.closeafterfinish()
             return
@@ -528,10 +529,10 @@ class MovieContextMenu(Screen):
 
     def execPlugin(self, plugin):
         if not (self.service.flags & eServiceReference.mustDescent):
-            print "Starting plugin:", plugin.description
+            print("Starting plugin:", plugin.description)
             import inspect
             params = inspect.getargspec(plugin.__call__)
-            print "Params:", params
+            print("Params:", params)
             if len(self.csel.list.multiSelection) > 0 and len(params[0]) >= 3:
                 plugin(self.session, self.service, self.csel.list.multiSelection)
             else:
@@ -697,7 +698,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
     LIB_UPDATE_INTERVAL = 250
 
     def __init__(self, session, selectedmovie=None, showLastDir=False):
-        print "enter movieselection"
+        print("enter movieselection")
         self.stopwatch = StopWatch()
         Screen.__init__(self, session)
         HelpableScreen.__init__(self)
@@ -803,7 +804,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
         MovieSearch.__init__(self)
         self.__dbUpdate = eTimer()
         self.__dbUpdate.callback.append(self.libraryUpdateTimerEvent)
-        print "end constructor", str(self.stopwatch.elapsed)
+        print("end constructor", str(self.stopwatch.elapsed))
 
     def createSummary(self):
         return AdvancedMovieSelection_summary
@@ -891,7 +892,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
                 Trashcan.trash(item.getPath())
                 self["list"].removeService(item)
         except Exception, e:
-            print e
+            print(e)
             self.session.open(MessageBox, _("Delete failed!"), MessageBox.TYPE_ERROR)
 
     def deleteConfirmed(self, confirmed):
@@ -1082,7 +1083,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
 
     def go(self):
         if not self.inited:
-            print "on first show", str(self.stopwatch.elapsed)
+            print("on first show", str(self.stopwatch.elapsed))
             self.delayTimer.start(10, True)
             self.inited = True
 
@@ -1092,7 +1093,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
         self.listHeight = listsize.height()
 
     def updateHDDData(self):
-        print "updateHDDData", str(self.stopwatch.elapsed)
+        print("updateHDDData", str(self.stopwatch.elapsed))
         autoNetwork.updateAutoNetwork()
         if not autoNetwork.isMountOnline(config.movielist.last_videodir.value):
             config.movielist.last_videodir.value = "/media/"
@@ -1115,7 +1116,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
             self.__dbUpdate.start(self.LIB_UPDATE_INTERVAL, False)
         self.stopwatch.stop()
         self["waitingtext"].visible = False
-        print "movielist started in", str(self.stopwatch.elapsed)
+        print("movielist started in", str(self.stopwatch.elapsed))
 
     def moveTo(self):
         self["list"].moveTo(self.selectedmovie)
@@ -1256,7 +1257,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
             di = DirectoryInfo(config.movielist.last_videodir.value)
             sort_type = di.sort_type
         if sort_type != -1:
-            print "[AdvancedMovieSelection] Set new sort type:", str(sort_type)
+            print("[AdvancedMovieSelection] Set new sort type:", str(sort_type))
             config.movielist.moviesort.value = sort_type
             self["list"].setSortType(sort_type)
             self.updateSortButtonText()
@@ -1440,9 +1441,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
             movieScanner.reloadMoviesAsync()
 
     def libraryUpdateTimerEvent(self):
-        print "libraryUpdateTimerEvent"
+        print("libraryUpdateTimerEvent")
         if not movieScanner.isWorking:
-            print "update movie list"
+            print("update movie list")
             self.reloadList()
             if not movieScanner.isWorking:
                 self.__dbUpdate.stop()
@@ -1484,7 +1485,7 @@ class MoviebarPositionSetup(Screen):
 
     def red(self):
         self.instance.move(ePoint(self.orgpos.x(), self.orgpos.y()))
-        print "[InfobarPositionSetup] New skin position: x = %d, y = %d" % (self.instance.position().x(), self.instance.position().y())
+        print("[InfobarPositionSetup] New skin position: x = %d, y = %d" % (self.instance.position().x(), self.instance.position().y()))
 
     def go(self):
         config.AdvancedMovieSelection.movieplayer_infobar_position_offset_x.value = self.instance.position().x() - self.orgpos.x()
@@ -1500,7 +1501,7 @@ class MoviebarPositionSetup(Screen):
 
     def moveRelative(self, x=0, y=0):
         self.instance.move(ePoint(self.instance.position().x() + x, self.instance.position().y() + y))
-        print "[InfobarPositionSetup] New skin position: x = %d, y = %d" % (self.instance.position().x() + x, self.instance.position().y() + y)
+        print("[InfobarPositionSetup] New skin position: x = %d, y = %d" % (self.instance.position().x() + x, self.instance.position().y() + y))
 
     def up(self):
         self.moveRelative(y=-2)

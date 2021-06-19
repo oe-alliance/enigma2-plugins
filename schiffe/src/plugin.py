@@ -8,6 +8,7 @@
 # version.
 #===============================================================================
 
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -278,7 +279,7 @@ class Schiffe(Screen):
 						cell.setHide(False)
 						cell.paint()
 		else:
-			print "Game over, start new game!"
+			print("Game over, start new game!")
 
 	def up_pressed(self):
 		if self.Focus > XMAX - 1:

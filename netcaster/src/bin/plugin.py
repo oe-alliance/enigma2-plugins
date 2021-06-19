@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
@@ -168,7 +169,7 @@ class NETcasterScreenBrowser(Screen):
     def stream_stop(self):
         global streamplayer
         if streamplayer.is_playing:
-            print "[", myname, "] stream_startstop -> stop"
+            print("[", myname, "] stream_startstop -> stop")
             streamplayer.stop()
             self.disconnectFromMetadataUpdates()
             self._onStop()

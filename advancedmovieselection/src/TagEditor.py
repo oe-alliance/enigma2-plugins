@@ -19,6 +19,7 @@
 #  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
+from __future__ import print_function
 from __init__ import _
 from Tools.Directories import fileExists
 from Screens.Screen import Screen
@@ -325,7 +326,7 @@ class MovieTagEditor(TagEditor):
     def saveTags(self, file, tags):
         try:
             meta_file = file + ".ts.meta"
-            print "saveTags", meta_file
+            print("saveTags", meta_file)
             if os_path.exists(meta_file):
                 metafile = open(meta_file, "r")
                 sid = metafile.readline().strip("\r\n")

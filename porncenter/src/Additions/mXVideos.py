@@ -1,3 +1,4 @@
+from __future__ import print_function
 # mXVideos plugin by AliAbdul
 from Plugin import Movie, Plugin
 import re
@@ -49,7 +50,7 @@ class mXVideosSub(Plugin):
 
 	def getPageError(self, error=None):
 		if error and self.currPage == 1:
-			print "[%s] Error: %s" % (self.name, error)
+			print("[%s] Error: %s" % (self.name, error))
 		else:
 			self.moreEntries = False
 
@@ -79,7 +80,7 @@ class mXVideos(Plugin):
 
 	def getPageError(self, error=None):
 		if error:
-			print "[%s] Error: %s" % (self.name, error)
+			print("[%s] Error: %s" % (self.name, error))
 
 ##################################################
 

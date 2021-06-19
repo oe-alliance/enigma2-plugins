@@ -19,6 +19,7 @@
 #  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
+from __future__ import print_function
 from __init__ import _
 from Components.GUIComponent import GUIComponent
 from Tools.FuzzyDate import FuzzyTime
@@ -283,9 +284,9 @@ class MovieList(GUIComponent):
     def unmount(self, service):
         from os import system
         cmd = 'umount "%s"' % (service.getPath())
-        print cmd
+        print(cmd)
         res = system(cmd) >> 8
-        print res
+        print(res)
         if res == 0:
             self.hotplugServices.remove(service)
             if movieScanner.enabled:
@@ -805,7 +806,7 @@ class MovieList(GUIComponent):
                 if x == service:
                     del self.multiSelection[i]
         except Exception, e:
-            print e
+            print(e)
         for l in self.list[:]:
             if l[0].serviceref == service:
                 self.list.remove(l)
@@ -815,7 +816,7 @@ class MovieList(GUIComponent):
         return len(self.list)
 
     def loadMovieLibrary(self, root, filter_tags):
-        print "loadMovieLibrary:", root.getPath()
+        print("loadMovieLibrary:", root.getPath())
         self.list = []
         self.multiSelection = []
 
@@ -840,9 +841,9 @@ class MovieList(GUIComponent):
             self.loadMovieLibrary(root, filter_tags)
             return
 
-        print "load:", root.getPath()
+        print("load:", root.getPath())
         if root.type != eServiceReference.idFile:
-            print "current type", root.type, "set to", eServiceReference.idFile
+            print("current type", root.type, "set to", eServiceReference.idFile)
             root.type = eServiceReference.idFile
 
         # this lists our root service, then building a nice list
@@ -853,7 +854,7 @@ class MovieList(GUIComponent):
 
         list = self.serviceHandler.list(root)
         if list is None:
-            print "listing of movies failed"
+            print("listing of movies failed")
             return
         tags = set()
 

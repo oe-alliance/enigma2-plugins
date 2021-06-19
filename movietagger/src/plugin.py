@@ -1,3 +1,4 @@
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -91,13 +92,13 @@ class MovieTagger(Screen):
 			fp.close()
 			self.pretags = t.replace("\n", " ").strip().split(" ")
 			self.pretags.sort()
-			print "pretags loaded ", self.pretags
+			print("pretags loaded ", self.pretags)
 		else:
-			print "pretagsfile", self.pretagfile, " does not exists"
+			print("pretagsfile", self.pretagfile, " does not exists")
 			self.pretags = []
 
 	def updateCurrentTagList(self):
-		print "updating cTagList"
+		print("updating cTagList")
 		self.serviceHandler = eServiceCenter.getInstance()
 		self.info = self.serviceHandler.info(self.service)
 		self.tags = self.info.getInfoString(self.service, iServiceInformation.sTags).split(' ')
@@ -243,7 +244,7 @@ class MovieTagger(Screen):
 			self.removeTag(self["cTaglist"].getCurrent())
 
 		elif self.currList is self["aTaglist"]:
-			print "adding Tag", self["aTaglist"].getCurrent()[0]
+			print("adding Tag", self["aTaglist"].getCurrent()[0])
 			self.addTag(self["aTaglist"].getCurrent()[0])
 
 	def keyGreen(self):

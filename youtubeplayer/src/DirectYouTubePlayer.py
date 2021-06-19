@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from time import time
 
 from enigma import iPlayableServicePtr
@@ -129,7 +130,7 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 		self.play()
 
 	def createSummary(self):
-		print "[YTB] createSummary"
+		print("[YTB] createSummary")
 		return DirectYouTubePlayerSummary
 
 	def __onClose(self):
@@ -138,8 +139,8 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 		self.session.nav.playService(self.oldNavService)
 
 	def __evEOF(self):
-		print "evEOF=%d" % iPlayableService.evEOF
-		print "Event EOF"
+		print("evEOF=%d" % iPlayableService.evEOF)
+		print("Event EOF")
 		self.close()
 
 	def __setHideTimer(self):
@@ -190,24 +191,24 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 #		self.state = self.STATE_IDLE
 
 	def playpauseService(self):
-		print "playpauseService"
+		print("playpauseService")
 		if self.state == self.STATE_PLAYING:
 			self.pauseService()
 		elif self.state == self.STATE_PAUSED:
 			self.unPauseService()
 
 	def pauseService(self):
-		print "pauseService"
+		print("pauseService")
 		if self.state == self.STATE_PLAYING:
 			self.setSeekState(self.STATE_PAUSED)
 
 	def unPauseService(self):
-		print "unPauseService"
+		print("unPauseService")
 		if self.state == self.STATE_PAUSED:
 			self.setSeekState(self.STATE_PLAYING)
 
 	def playNextFile(self):
-		print "[YTB] playNextFile"
+		print("[YTB] playNextFile")
 		if self.currentList != None:
 			media, name = self.currentList.getNextFile()
 			if media is None:
@@ -220,7 +221,7 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 				self.showInfobar()
 
 	def playPrevFile(self):
-		print "[YTB] playPrevFile"
+		print("[YTB] playPrevFile")
 		if self.currentList != None:
 			media, name = self.currentList.getPrevFile()
 			if media is None:
@@ -250,42 +251,42 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 		return True
 
 	def __seekableStatusChanged(self):
-		print "seekable status changed!"
+		print("seekable status changed!")
 		if not self.isSeekable():
 			self.setSeekState(self.STATE_PLAYING)
 		else:
-			print "seekable"
+			print("seekable")
 
 	def __serviceStarted(self):
 		self.state = self.STATE_PLAYING
 		self.__seekableStatusChanged()
 
 	def setSeekState(self, wantstate):
-		print "setSeekState"
+		print("setSeekState")
 		if wantstate == self.STATE_PAUSED:
-			print "trying to switch to Pause- state:", self.STATE_PAUSED
+			print("trying to switch to Pause- state:", self.STATE_PAUSED)
 		elif wantstate == self.STATE_PLAYING:
-			print "trying to switch to playing- state:", self.STATE_PLAYING
+			print("trying to switch to playing- state:", self.STATE_PLAYING)
 		service = self.session.nav.getCurrentService()
 		if service is None:
-			print "No Service found"
+			print("No Service found")
 			return False
 		pauseable = service.pause()
 		if pauseable is None:
-			print "not pauseable."
+			print("not pauseable.")
 			self.state = self.STATE_PLAYING
 
 		if pauseable is not None:
-			print "service is pausable"
+			print("service is pausable")
 			if wantstate == self.STATE_PAUSED:
-				print "WANT TO PAUSE"
+				print("WANT TO PAUSE")
 				pauseable.pause()
 				self.state = self.STATE_PAUSED
 				if not self.shown:
 					self.hidetimer.stop()
 					self.show()
 			elif wantstate == self.STATE_PLAYING:
-				print "WANT TO PLAY"
+				print("WANT TO PLAY")
 				pauseable.unpause()
 				self.state = self.STATE_PLAYING
 				if self.shown:

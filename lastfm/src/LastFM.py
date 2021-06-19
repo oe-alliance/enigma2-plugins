@@ -1,3 +1,4 @@
+from __future__ import print_function
 from urllib import unquote_plus
 from twisted.web.client import getPage
 from md5 import md5 # to encode password
@@ -137,11 +138,11 @@ class LastFM(LastFMHandler):
                 except UnicodeDecodeError:
                     res[x[0]] = "unicodeproblem"
             elif x != [""]:
-                print "(urk?", x, ")"
+                print("(urk?", x, ")")
         return res
 
     def loadPlaylist(self):
-        print "LOADING PLAYLIST"
+        print("LOADING PLAYLIST")
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
@@ -354,7 +355,7 @@ class LastFM(LastFMHandler):
                 data.append(nodex)
             return True, data
         except xml.parsers.expat.ExpatError, e:
-            print e
+            print(e)
             return False, e
 
     def getNeighbours(self, username):
@@ -405,7 +406,7 @@ class LastFM(LastFMHandler):
                 data.append(nodex)
             return True, data
         except xml.parsers.expat.ExpatError, e:
-            print e
+            print(e)
             return False, e
 
     def changeStation(self, url):

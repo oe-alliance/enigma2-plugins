@@ -1,3 +1,4 @@
+from __future__ import print_function
 from enigma import ePicLoad, eTimer, getDesktop, iPlayableService, eServiceReference
 from Screens.Screen import Screen
 from Screens.ServiceInfo import ServiceInfoList, ServiceInfoListEntry
@@ -516,7 +517,7 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 			self.index = self.maxentry
 
 	def slidePic(self):
-		print "slide to next Picture index=" + str(self.lastindex)
+		print("slide to next Picture index=" + str(self.lastindex))
 		if config.plugins.mc_pp.loop.value == False and self.lastindex == self.maxentry:
 			self.PlayPause()
 		self.shownow = True

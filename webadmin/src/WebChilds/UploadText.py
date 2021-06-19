@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from os import statvfs, path as os_path, chmod as os_chmod, write as os_write, \
 		close as os_close, unlink as os_unlink, open as os_open, rename as os_rename, O_WRONLY, \
 		O_CREAT
@@ -12,14 +13,14 @@ class UploadTextResource(resource.Resource):
 
 	def render_POST(self, req):
 		uploaddir = self.default_uploaddir
-		print "[UploadTextResource] req.args ", req.args
+		print("[UploadTextResource] req.args ", req.args)
 		if req.args['path'][0]:
 			if os_path.isdir(req.args['path'][0]):
 				uploaddir = req.args['path'][0]
 				if uploaddir[-1] != "/":
 					uploaddir += "/"
 			else:
-				print "[UploadTextResource] not a dir", req.args['path'][0]
+				print("[UploadTextResource] not a dir", req.args['path'][0])
 				req.setResponseCode(http.OK)
 				req.setHeader('Content-type', 'text/html')
 				return "path '%s' to upload not existing!" % req.args['path'][0]
@@ -37,7 +38,7 @@ class UploadTextResource(resource.Resource):
 			req.setHeader('Content-type', 'text/html')
 			return "filesize was 0, not uploaded"
 		else:
-			print "[UploadTextResource] text:", data
+			print("[UploadTextResource] text:", data)
 
 		filename = req.args['filename'][0]
 

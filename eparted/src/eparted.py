@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # code by GeminiTeam
 
+from __future__ import print_function
 from enigma import eTimer
 
 from Screens.Screen import Screen
@@ -87,7 +88,7 @@ def parseCmd(result):
 							l.insert(0, LIST_TYPE_DEV)
 							entry.append(l)
 	except:
-		print "[eParted] <parse error>"
+		print("[eParted] <parse error>")
 		return []
 	return devlist
 
@@ -100,7 +101,7 @@ def myExecute(cmd, session, test=False):
 	else:
 		res = os_system(cmd)
 		result = (res >> 8)
-	print "[eParted]", result, cmd
+	print("[eParted]", result, cmd)
 	if result != 0 and session is not None:
 		session.open(MessageBox, _("Error command '%s'") % cmd, MessageBox.TYPE_ERROR, timeout=8)
 	return result
@@ -405,7 +406,7 @@ class Cpart(Screen):
 				#	if x[LIST_TYPE]==LIST_TYPE_PAR:
 				#		print x
 			except:
-				print "[eParted] <remove part>"
+				print("[eParted] <remove part>")
 			self.__Filllist()
 
 	def KeyGreen(self):
@@ -532,7 +533,7 @@ class Cpartexe(Screen):
 		self.mountlist = []
 		list = []
 		for x in comlist:
-			print x
+			print(x)
 			list.append((x[1], None, x[0]))
 			if x[2] is not None:
 				self.mountlist.append(x[2])
@@ -553,7 +554,7 @@ class Cpartexe(Screen):
 			else:
 				return (device, device[5:])
 		except:
-			print "[eParted] <error get UUID>"
+			print("[eParted] <error get UUID>")
 		return None
 
 	def __mountDevice(self):

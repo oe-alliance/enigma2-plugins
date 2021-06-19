@@ -18,6 +18,7 @@
 #  GNU General Public License for more details.
 #
 
+from __future__ import print_function
 import urllib
 from time import localtime
 from timer import TimerEntry
@@ -453,7 +454,7 @@ def SetPartnerboxTimerlist(partnerboxentry=None, sreference=None):
 			sCommand = "http://%s:%s@%s:%d/web/timerlist" % (username, password, ip, port)
 		else:
 			sCommand = "http://%s:%s@%s:%d/xml/timers" % (username, password, ip, port)
-		print "[RemoteEPGList] Getting timerlist data from %s..." % ip
+		print("[RemoteEPGList] Getting timerlist data from %s..." % ip)
 		f = urllib.urlopen(sCommand)
 		sxml = f.read()
 		if int(partnerboxentry.enigma.value) == 0:

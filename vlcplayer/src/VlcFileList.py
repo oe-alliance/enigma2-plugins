@@ -9,6 +9,7 @@
 # version.
 #===============================================================================
 
+from __future__ import print_function
 import re
 
 from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, gFont
@@ -134,7 +135,7 @@ class VlcFileList(MenuList):
 				self.currentDirectory = previousDirectory
 				ret = None, None
 		except ExpatError, e:
-			print e
+			print(e)
 			self.currentDirectory = previousDirectory
 			self.update()
 			ret = None, self.currentDirectory

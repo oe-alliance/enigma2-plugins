@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # for localized messages
+from __future__ import print_function
 from __init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -163,36 +164,36 @@ class AutoMountView(Screen):
 		cur = self["config"].getCurrent()
 		if cur:
 			returnValue = cur[1]
-			print 'returnValue', returnValue
+			print('returnValue', returnValue)
 			self.applyConfigRef = self.session.openWithCallback(self.applyConfigfinishedCB, MessageBox, _("Please wait while removing your network mount..."), type=MessageBox.TYPE_INFO, enable_input=False)
 			iAutoMount.removeMount(returnValue, self.removeDataAvail)
 
 	def removeDataAvail(self, data):
-		print '!!!!!!remove mount test1', data
+		print('!!!!!!remove mount test1', data)
 		if data:
 			iAutoMount.writeMountsConfig()
 			iAutoMount.getAutoMountPoints(self.deleteDataAvail)
 
 	def deleteDataAvail(self, data):
-		print '!!!!!!remove mount test2', data
+		print('!!!!!!remove mount test2', data)
 		if data:
-			print 'applyConfigRef', self.applyConfigRef
-			print 'applyConfigRef', self.applyConfigRef.execing
-			print 'applyConfigRef', self.applyConfigRef.shown
+			print('applyConfigRef', self.applyConfigRef)
+			print('applyConfigRef', self.applyConfigRef.execing)
+			print('applyConfigRef', self.applyConfigRef.shown)
 			if self.applyConfigRef.execing:
-				print 'self.applyConfigRef is exeing, close messgae'
+				print('self.applyConfigRef is exeing, close messgae')
 				self.applyConfigRef.close(True)
-				print 'applyConfigRef', self.applyConfigRef.shown
+				print('applyConfigRef', self.applyConfigRef.shown)
 
 	def applyConfigfinishedCB(self, data):
-		print '!!!!!!remove mount test3', data
+		print('!!!!!!remove mount test3', data)
 		if data:
-			print '!!!!!! show removed popup'
+			print('!!!!!! show removed popup')
 			self.session.openWithCallback(self.ConfigfinishedCB, MessageBox, _("Your network mount has been removed."), type=MessageBox.TYPE_INFO, timeout=10)
 
 	def ConfigfinishedCB(self, data):
-		print '!!!!!!remove mount test4', data
+		print('!!!!!!remove mount test4', data)
 		if data is not None:
 			if data:
-				print 'finihed showlist'
+				print('finihed showlist')
 				self.showMountsList()

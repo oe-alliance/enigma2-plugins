@@ -28,6 +28,7 @@
 #
 # thx to <kayshadow@newnigma2.to> for painting the icon
 #
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -119,7 +120,7 @@ class genuineDreambox(Screen):
 			self["resulttext"].setText(_("Updating, please wait..."))
 			getPage(url).addCallback(self._gotPageLoadUpdate).addErrback(self.errorLoad)
 		else:
-			print "not updating"
+			print("not updating")
 
 	def _gotPageLoad(self, data):
 		authcode = data.strip().replace('+', '')
@@ -174,7 +175,7 @@ class genuineDreambox(Screen):
 		self.start()
 
 	def errorLoad(self, error):
-		print str(error)
+		print(str(error))
 		self["resulttext"].setText(_("Invalid response from server. Please report: %s") % str(error))
 
 	def buildUrl(self):
@@ -260,7 +261,7 @@ class genuineDreambox(Screen):
 					else:
 						self.datablock_signed = ''.join([chr(x) for x in value])
 				else:
-					print "unknown tag:", tag
+					print("unknown tag:", tag)
 				pos += 2 + length
 
 			return True

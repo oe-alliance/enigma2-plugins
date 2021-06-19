@@ -9,6 +9,7 @@
 # version.
 #===============================================================================
 
+from __future__ import print_function
 import re
 import posixpath
 import urllib
@@ -354,8 +355,8 @@ class VlcServer:
 			for par in params:
 				sout += "&option=%s" % quote_plus(par.lstrip(':'))
 
-		print "[VLC] playfile", input
-		print "[VLC] sout", sout
+		print("[VLC] playfile", input)
+		print("[VLC] sout", sout)
 
 		xml = self.__xmlRequest("status", [("command", "in_play"), ("input", input)], sout)
 
@@ -365,7 +366,7 @@ class VlcServer:
 			if len(self.lastError) == 0:
 				self.lastError = None
 			else:
-				print "[VLC] VlcControl error:", self.lastError
+				print("[VLC] VlcControl error:", self.lastError)
 			return None
 		else:
 			self.lastError = None
@@ -384,7 +385,7 @@ class VlcServer:
 		self.__xmlRequest("status", [("command", "pl_delete"), ("id", str(id))])
 
 	def deleteCurrentTree(self):
-		print "[VLC] delete current tree"
+		print("[VLC] delete current tree")
 		currentElement = self.getCurrentElement()
 		while currentElement is not None and currentElement.parentNode.getAttribute("ro") != "ro":
 			currentElement = currentElement.parentNode

@@ -1,3 +1,4 @@
+from __future__ import print_function
 import sys
 import urllib
 import tempfile
@@ -79,26 +80,26 @@ class NapiProjekt():
                     self.sub = self.sub.read()
                     self.error_ = 0
             except (IOError, OSError), e:
-                print >> sys.stderr, "%s: %d/%d: Fetching subtitle failed: %s" % (prog, i, i_total, e)
+                print("%s: %d/%d: Fetching subtitle failed: %s" % (prog, i, i_total, e), file=sys.stderr)
                 time.sleep(0.5)
                 self.error_ = 1
                 continue
 
             if http_code != 200:
-                print >> sys.stderr, "%s: %d/%d: Fetching subtitle failed, HTTP code: %s" % (prog, i, i_total, str(http_code))
+                print("%s: %d/%d: Fetching subtitle failed, HTTP code: %s" % (prog, i, i_total, str(http_code)), file=sys.stderr)
                 time.sleep(0.5)
                 self.error_ = 1
                 continue
 
             if self.sub.startswith('NPc'):
-                print >> sys.stderr, "%s: %d/%d: Subtitle NOT FOUND" % (prog, i, i_total)
+                print("%s: %d/%d: Subtitle NOT FOUND" % (prog, i, i_total), file=sys.stderr)
                 repeat = -1
                 self.error_ = 1
                 continue
                 repeat = 0
 
             if self.sub is None or self.sub == "":
-                print >> sys.stderr, "%s: %d/%d: Subtitle download FAILED" % (prog, i, i_total)
+                print("%s: %d/%d: Subtitle download FAILED" % (prog, i, i_total), file=sys.stderr)
                 self.error_ = 1
                 continue
 

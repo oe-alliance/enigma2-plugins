@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # for localized messages
+from __future__ import print_function
 from __init__ import _
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
@@ -527,7 +528,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 
 	def error(self, error=None):
 		if error is not None:
-			print error
+			print(error)
 
 	def searchCallback(self, result):
 		if result:
