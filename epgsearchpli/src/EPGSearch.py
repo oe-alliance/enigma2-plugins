@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 
+from __future__ import print_function
 from . import _
 from enigma import eEPGCache, eServiceReference, eServiceCenter, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, eRect, getDesktop, \
 		RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, eListboxPythonMultiContent, gFont, ePicLoad
@@ -507,7 +508,7 @@ class EPGSearchList(EPGList):
 
 	def applySkin(self, desktop, parent):
 		def warningWrongSkinParameter(string):
-			print "[EPGList] wrong '%s' skin parameters" % string
+			print("[EPGList] wrong '%s' skin parameters" % string)
 
 		def setEventItemFont(value):
 			self.eventItemFont = parseFont(value, ((1, 1), (1, 1)))
