@@ -60,8 +60,12 @@ def get_version():
 
 class FritzConnectionException(Exception):
 	pass
+
+
 class ServiceError(FritzConnectionException):
 	pass
+
+
 class ActionError(FritzConnectionException):
 	pass
 
@@ -305,9 +309,11 @@ class FritzService(object):
 		self.actions = {}
 		self.name = ':'.join(service_type.split(':')[-2:])
 
+
 def namespace(element):
 	m = re.match(r'\{.*\}', element.tag)
 	return m.group(0) if m else ''
+
 
 class FritzXmlParser(object):
 	"""Base class for parsing fritzbox-xml-files."""
@@ -358,7 +364,6 @@ class FritzXmlParser(object):
 		getPage(source,
 				method="GET",).addCallback(self._okInit).addErrback(self._errorInit)
 		
-
 	def nodename(self, name):
 		#self.debug("name: %s, QName: %s" %(name, ET.QName(self.root, name).text))
 		"""Extends name with the xmlns-prefix to a valid nodename."""
