@@ -80,8 +80,8 @@ except:
 
 if six.PY3:
 	import codecs
-	encode = lambda x : codecs.encode(x, "rot13")
-	decode = lambda x : codecs.decode(x, "rot13")
+	encode = lambda x: codecs.encode(x, "rot13")
+	decode = lambda x: codecs.decode(x, "rot13")
 else:
 	def encode(x):
 		return base64.b64encode(''.join(chr(ord(c) ^ ord(k)) for c, k in zip(x, cycle('secret key')))).strip()

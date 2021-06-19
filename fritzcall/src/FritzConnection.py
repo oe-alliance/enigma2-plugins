@@ -164,7 +164,7 @@ class FritzAction(object):
 		headers = self.header.copy()
 		headers['soapaction'] = '%s#%s' % (self.service_type, self.name)
 # 		self.debug("headers: " + repr(headers))
-		data = self.envelope.strip() % ( self.header_initchallenge_template % config.plugins.FritzCall.username.value,
+		data = self.envelope.strip() % (self.header_initchallenge_template % config.plugins.FritzCall.username.value,
 										self._body_builder(kwargs))
 		if config.plugins.FritzCall.useHttps.value:
 			url = 'https://%s:%s%s' % (self.address, self.port, self.control_url)
@@ -209,7 +209,7 @@ class FritzAction(object):
 		headers = self.header.copy()
 		headers['soapaction'] = '%s#%s' % (self.service_type, self.name)
 		# self.debug("headers: " + repr(headers))
-		data = self.envelope.strip() % ( header_clientauth,
+		data = self.envelope.strip() % (header_clientauth,
 										self._body_builder(kwargs))
 
 		if config.plugins.FritzCall.useHttps.value:
