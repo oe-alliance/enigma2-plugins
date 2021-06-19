@@ -396,7 +396,7 @@ class Timer(Source):
 
 				return (False, _("Conflicting Timer(s) detected! %s") % (msg))
 
-		except Exception, e:
+		except Exception as e:
 			#something went wrong, most possibly one of the given paramater-values was wrong
 			print("[WebComponents.Timer] editTimer exception: %s" % (e))
 			return (False, _("Could not add timer '%s'!") % name)

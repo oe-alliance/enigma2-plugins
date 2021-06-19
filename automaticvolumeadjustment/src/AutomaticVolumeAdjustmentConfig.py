@@ -64,11 +64,11 @@ class AutomaticVolumeAdjustmentConfig():
 			try:
 				fd = os_open(self.CONFIG_FILE, os_O_RDWR | os_O_CREAT)
 				os_close(fd)
-			except Exception, e:
+			except Exception as e:
 				print("Error: ", e)
 		try:
 			self.config.loadFromFile(self.CONFIG_FILE)
-		except Exception, e:
+		except Exception as e:
 			print("Error: ", e)
 		self.config.entriescount = ConfigInteger(0)
 		self.config.Entries = ConfigSubList()

@@ -48,7 +48,7 @@ class SuggestionsQueryThread(Thread):
 				suggestions = self.query.getSuggestions(self.param)
 				self.messages.push((suggestions, self.callback))
 				self.messagePump.send(0)
-			except Exception, ex:
+			except Exception as ex:
 				self.messages.push((ex, self.errorback))
 				self.messagePump.send(0)
 

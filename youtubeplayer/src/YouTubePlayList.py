@@ -74,7 +74,7 @@ class YouTubePlaylistScreen(Screen):
 			feed = interface.getPlaylistFeed()
 			for entry in feed.getEntries():
 				self.list.append(YouTubePlaylistEntryComponent(entry))
-		except Exception, e:
+		except Exception as e:
 			self.session.open(MessageBox, _("Error loading playlists:\n%s" %
 					e), MessageBox.TYPE_ERROR)
 		self["list"].setList(self.list)

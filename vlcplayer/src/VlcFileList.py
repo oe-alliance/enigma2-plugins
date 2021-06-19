@@ -134,7 +134,7 @@ class VlcFileList(MenuList):
 			else:
 				self.currentDirectory = previousDirectory
 				ret = None, None
-		except ExpatError, e:
+		except ExpatError as e:
 			print(e)
 			self.currentDirectory = previousDirectory
 			self.update()

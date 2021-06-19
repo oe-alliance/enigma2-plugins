@@ -60,7 +60,7 @@ class Modules(object):
 
 			try:
 				fp, pathname, description = imp.find_module(name, [path])
-			except Exception, e:
+			except Exception as e:
 				print(_("PushService Find module exception: ") + str(e))
 				fp = None
 
@@ -70,7 +70,7 @@ class Modules(object):
 
 			try:
 				module = imp.load_module(name, fp, pathname, description)
-			except Exception, e:
+			except Exception as e:
 				print(_("PushService Load exception: ") + str(e))
 			finally:
 				# Since we may exit via an exception, close fp explicitly.
@@ -106,7 +106,7 @@ class Modules(object):
 			# Create instance
 			try:
 				return module()
-			except Exception, e:
+			except Exception as e:
 				print(_("PushService Instantiate exception: ") + str(module) + "\n" + str(e))
 				if sys.exc_info()[0]:
 					print(_("Unexpected error: "), sys.exc_info()[0])

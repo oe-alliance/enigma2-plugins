@@ -36,7 +36,7 @@ class PkgConfList(Source):
 				else:
 					sh_move("/etc/opkg/" + file + ".off", "/etc/opkg/" + file)
 					return (True, file)
-			except Exception, e:
+			except Exception as e:
 				return (False, str(e))
 
 	def getMem(self):

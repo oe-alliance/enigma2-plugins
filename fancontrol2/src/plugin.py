@@ -596,7 +596,7 @@ class FanControl2SpezialSetup(Screen, ConfigListScreen):
 			sel = self["config"].getCurrent()[1]
 			if sel == config.plugins.FanControl.LogPath:
 				self.session.openWithCallback(self.dirSelected, LocationBox, text=_("Choose path"), filename="", currDir=self["config"].getCurrent()[1].value, minFree=50)
-		except Exception, e:
+		except Exception as e:
 			self.session.open(MessageBox, "Error:\n" + str(e), MessageBox.TYPE_ERROR)
 
 	def dirSelected(self, dir):

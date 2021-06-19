@@ -68,7 +68,7 @@ class TCPHandler(SocketServer.BaseRequestHandler):
             #print str(self.client_address[0]), "wrote"
             #print data
             self.request.send(MessageQueue.getRequest(data))
-        except Exception, e:
+        except Exception as e:
             print(e)
 
 

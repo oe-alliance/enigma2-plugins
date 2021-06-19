@@ -79,7 +79,7 @@ def setup(session, **kwargs):
 		reload(ConfigScreen)
 		###
 		session.open(ConfigScreen.ConfigScreen)
-	except Exception, e:
+	except Exception as e:
 		print(_("PushService setup exception ") + str(e))
 		exc_type, exc_value, exc_traceback = sys.exc_info()
 		traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stdout)
@@ -94,7 +94,7 @@ def autostart(reason, **kwargs):
 				global gPushService
 				gPushService = PushService()
 				gPushService.start()
-			except Exception, e:
+			except Exception as e:
 				print(_("PushService autostart exception ") + str(e))
 				exc_type, exc_value, exc_traceback = sys.exc_info()
 				traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stdout)

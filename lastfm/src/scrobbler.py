@@ -156,7 +156,7 @@ class EventListener:
             track = self.getCurrentServiceType()
             try:
                 self.tracks_checking_for.index(str(track))
-            except ValueError, e:
+            except ValueError as e:
                 if track is not False:
                     self.tracks_checking_for.append(str(track))
                     if track.length < self.time2wait4submit:

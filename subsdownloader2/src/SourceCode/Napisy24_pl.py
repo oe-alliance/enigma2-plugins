@@ -128,7 +128,7 @@ class Napisy24_pl(XML_to_Dict, zip_extractor):
 	    elif what_is_downloaded == "download_subtilte_zip":
 		self.zip_string = r1.read()
 	    return r1.status#, r1.reason
-	except (IOError, OSError), e:
+	except (IOError, OSError) as e:
 	    print("Napisy24.pl server connection error.", file=sys.stderr)
 	    time.sleep(0.5)
 

@@ -327,7 +327,7 @@ class SeriesPluginWorker(Thread):
 				result = item.identifier.getEpisode(
 					item.name, item.begin, item.end, item.service
 				)
-			except Exception, e:
+			except Exception as e:
 				log.debug("Worker: Exception:", str(e))
 
 				# Exception finish job with error
@@ -466,7 +466,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 
 				try:
 					result = identifier.getEpisode(name, begin, end, serviceref)
-				except Exception, e:
+				except Exception as e:
 					log.exception("Worker:", str(e))
 
 					# Exception finish job with error

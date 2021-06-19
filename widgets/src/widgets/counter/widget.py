@@ -28,7 +28,7 @@ class CounterWidget(Widget):
         try:
             self.getElement("counter_title").setText(str(self.counter))
             self.Timer.start(200)
-        except Exception, e:
+        except Exception as e:
             pass
 
 

@@ -1436,7 +1436,7 @@ class MoviePlayer(MP_parent):
 				f.close()
 			else:
 				os.remove(self.moviename + ".cuts")
-		except Exception, ex:
+		except Exception as ex:
 			print(("Exception (ef): " + str(ex), self, "E"))
 
 	def downloadCuesheet(self):
@@ -1453,7 +1453,7 @@ class MoviePlayer(MP_parent):
 				packed = packed[12:]
 				cue = struct.unpack('>QI', packedCue)
 				self.cut_list.append(cue)
-		except Exception, ex:
+		except Exception as ex:
 			print(("Exception (ef): " + str(ex), self, "E"))
 
 	def leavePlayer(self):

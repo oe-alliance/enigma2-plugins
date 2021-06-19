@@ -65,7 +65,7 @@ def addToHistory(instance, ref):
 		tmp.append(ref)
 		try:
 			del instance.history[instance.history_pos + 1:]
-		except Exception, e:
+		except Exception as e:
 			pass
 		if config.plugins.ZapHistoryConfigurator.e1_like_history.value and tmp in instance.history:
 			instance.history.remove(tmp)
@@ -133,7 +133,7 @@ class ZapHistoryConfigurator(ConfigListScreen, Screen):
 			from Screens.InfoBar import InfoBar
 			try:
 				csel = InfoBar.instance.servicelist
-			except AttributeError, e:
+			except AttributeError as e:
 				pass
 			else:
 				config.plugins.ZapHistoryConfigurator.history_tv.value = [[y.toString() for y in x] for x in csel.history_tv]

@@ -98,7 +98,7 @@ class BierDopje(SubtitleDatabase.SubtitleDB):
                 return subs
             else:
                 return subs
-        except Exception, e:
+        except Exception as e:
             log.exception("Error raised by plugin")
             return []
 

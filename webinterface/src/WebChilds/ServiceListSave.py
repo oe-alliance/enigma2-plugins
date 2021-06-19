@@ -39,7 +39,7 @@ class ServiceListReload(resource.Resource):
 							<e2statetext>Servicelist reloaded</e2statetext>
 						</e2simplexmlresult>"""
 
-		except Exception, e:
+		except Exception as e:
 			request.setResponseCode(http.OK)
 
 			return """<?xml version="1.0" encoding="UTF-8"?>
@@ -152,7 +152,7 @@ class ServiceListSave(resource.Resource):
 			request.setResponseCode(http.OK)
 			request.write(result)
 
-		except Exception, e:
+		except Exception as e:
 			print(e)
 			result = """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n
 						<e2simplexmlresult>\n

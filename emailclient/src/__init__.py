@@ -42,7 +42,7 @@ def debug(message):
 			deb = open("/tmp/EmailClient.log", "aw")
 			deb.write(time.ctime() + ': ' + message + "\n")
 			deb.close()
-		except Exception, e:
+		except Exception as e:
 			debug("%s (retried debug: %s)" % (repr(message), str(e)))
 
 

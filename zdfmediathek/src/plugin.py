@@ -261,7 +261,7 @@ def getMovieUrl(url):
 	req = Request(url, None, std_headers)
 	try:
 		txt = urlopen2(req).read()
-	except (URLError, HTTPException, error), err:
+	except (URLError, HTTPException, error) as err:
 		print("[ZDFMediaThek] Error: Unable to retrieve videopage - Error code: ", str(err))
 		return ""
 

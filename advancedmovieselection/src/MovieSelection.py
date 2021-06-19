@@ -891,7 +891,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
                 self.stopRemoveTimer(item.getPath())
                 Trashcan.trash(item.getPath())
                 self["list"].removeService(item)
-        except Exception, e:
+        except Exception as e:
             print(e)
             self.session.open(MessageBox, _("Delete failed!"), MessageBox.TYPE_ERROR)
 

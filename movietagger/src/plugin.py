@@ -310,7 +310,7 @@ class TagMenuList(MenuList):
 def main(session, service, **kwargs):
 	try:
 		session.open(MovieTagger, service)
-	except Exception, e:
+	except Exception as e:
 		raise e
 
 

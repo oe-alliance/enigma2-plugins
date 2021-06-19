@@ -449,7 +449,7 @@ class MyTubeFeedEntry():
 		try:
 			print("[MyTube] trying to find out if a HD Stream is available", watch_url)
 			result = urlopen2(watchrequest).read()
-		except (URLError, HTTPException, socket.error), err:
+		except (URLError, HTTPException, socket.error) as err:
 			print("[MyTube] Error: Unable to retrieve watchpage - Error code: ", str(err))
 			return video_url
 
@@ -462,7 +462,7 @@ class MyTubeFeedEntry():
 				videoinfo = parse_qs(infopage)
 				if ('url_encoded_fmt_stream_map' or 'fmt_url_map') in videoinfo:
 					break
-			except (URLError, HTTPException, socket.error), err:
+			except (URLError, HTTPException, socket.error) as err:
 				print("[MyTube] Error: unable to download video infopage", str(err))
 				return video_url
 
@@ -838,7 +838,7 @@ class YoutubeQueryThread(Thread):
 				feed = self.query(self.param)
 			self.messages.push((True, feed, self.callback))
 			self.messagePump.send(0)
-		except Exception, ex:
+		except Exception as ex:
 			self.messages.push((False, ex, self.errorback))
 			self.messagePump.send(0)
 

@@ -490,7 +490,7 @@ class EmailAttachment:
 			fp = open(folder + "/" + self.getFilename(), "wb")
 			fp.write(self.data)
 			fp.close()
-		except Exception, e:
+		except Exception as e:
 			debug("[EmailAttachment] save %s" % str(e))
 			return False
 		return True
@@ -783,7 +783,7 @@ class EmailAccount():
 				self._proto.fetchFlags('%i:%i' % (rangeToFetch[0], rangeToFetch[1])	#'1:*'
 						   ).addCallback(self._onFlagsList, callback, rangeToFetch)
 
-			except imap4.IllegalServerResponse, e:
+			except imap4.IllegalServerResponse as e:
 				debug("[EmailAccount] _onExamine exception: " + str(e))
 				callback([], [])
 
@@ -901,7 +901,7 @@ class EmailAccount():
 		try:
 			failure.trap(imap4.NoSupportedAuthentication)
 			self._doLoginInsecure()
-		except Exception, e:
+		except Exception as e:
 			debug("[EmailAccount] %s: _onAuthenticationFailed: %s" % (self._name, e.message))
 			print(e, e.message)
 

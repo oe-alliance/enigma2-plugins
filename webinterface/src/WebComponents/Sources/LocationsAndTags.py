@@ -47,7 +47,7 @@ class LocationsAndTags(Source):
 			while "" in tags:
 				tags.remove("")
 			file.close()
-		except IOError, ioe:
+		except IOError as ioe:
 			tags = ()
 		return tags
 

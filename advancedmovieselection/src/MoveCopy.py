@@ -180,7 +180,7 @@ class ProgressList(GUIComponent):
 
             res.append(MultiContentEntryText(pos=(width - 200, 9), size=(195, 26), font=0, flags=RT_HALIGN_RIGHT, text=realSize(copied)))
             #res.append(MultiContentEntryText(pos=(width - 150, 32), size=(145, 22), font=1, flags=RT_HALIGN_RIGHT, text=etime))
-        except Exception, e:
+        except Exception as e:
             print(e)
         return res
 

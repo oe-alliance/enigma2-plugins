@@ -122,7 +122,7 @@ class YouTubeManager():
 def main(session, **kwargs):
 	try:
 		youTubeManager = YouTubeManager(session)
-	except Exception, e:
+	except Exception as e:
 		session.open(MessageBox, _("Error contacting YouTube:\n%s" % e), MessageBox.TYPE_ERROR)
 	else:
 		youTubeManager.openSearchDialog()

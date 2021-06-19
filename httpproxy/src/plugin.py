@@ -149,7 +149,7 @@ def autostart(reason, **kwargs):
                     extip = "%i.%i.%i.%i" % (extip[0], extip[1], extip[2], extip[3])
                     print("starting proxy on ", extip, ":", config.plugins.httpproxy.port.value)
                     reactor.listenTCP(int(config.plugins.httpproxy.port.value), ProxyFactory(), interface=extip)
-        except Exception, e:
+        except Exception as e:
             print("starting the http proxy failed!")
             print(e)
 

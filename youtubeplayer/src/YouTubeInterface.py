@@ -213,7 +213,7 @@ class YouTubeEntry():
 			data.read(1)
 			url = data.geturl()
 			data.close()
-		except (OSError, IOError, URLError, HTTPException, error), err:
+		except (OSError, IOError, URLError, HTTPException, error) as err:
 					return None
 		else:
 			return url
@@ -230,7 +230,7 @@ class YouTubeEntry():
 				video_info = parse_qs(video_info_page)
 				if 'token' in video_info:
 					break
-			except (URLError, HTTPException, error), err:
+			except (URLError, HTTPException, error) as err:
 				return None #, ('ERROR: unable to download video info webpage: %s' % str(err))
 		if 'token' not in video_info:
 			if 'reason' not in video_info:

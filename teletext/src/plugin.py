@@ -266,7 +266,7 @@ class TeleText(Screen):
       if config.plugins.TeleText.debug.value:
         log("... connecting")
       s.connect('/tmp/dbttcd.socket')
-    except socket.error, msg:
+    except socket.error as msg:
       log("couldn't connect to /tmp/dbttcd.socket")
       log(msg)
       return
@@ -285,7 +285,7 @@ class TeleText(Screen):
         totalsent = totalsent + sent
       s.close()
       s = None
-    except socket.error, msg:
+    except socket.error as msg:
       log("couldn't send data to /tmp/dbttcd.socket")
       log(msg)
 

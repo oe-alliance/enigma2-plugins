@@ -127,7 +127,7 @@ def set_mask(mask=None):
 		if MASK2:
 			write_mask(MASK2, mask2)
 
-	except Exception, e:
+	except Exception as e:
 		print("MultiRC failed:", e)
 		return False
 	return True

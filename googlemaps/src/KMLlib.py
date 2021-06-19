@@ -54,7 +54,7 @@ class KmlFolder:
             try: # test if we can handle this coords
                 point.getTile(15)# 15 is just a zoomlevel in the middle :)
                 list.append(point)
-            except ValueError, e:
+            except ValueError as e:
                 print("Import Error: ", point.name, e)
         return list
 

@@ -86,5 +86,5 @@ class MovieConfig:
             for x in self.rename:
                 f.write('%' + x + "\r\n")
             f.close()
-        except Exception, e:
+        except Exception as e:
             print(e)

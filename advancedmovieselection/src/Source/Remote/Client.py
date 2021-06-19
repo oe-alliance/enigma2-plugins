@@ -51,7 +51,7 @@ class MessageQueue:
                 serverInstance.reconnect(port=port)
                 config.AdvancedMovieSelection.server_port.value = port
                 config.AdvancedMovieSelection.server_port.save()
-            except Exception, e:
+            except Exception as e:
                 print(e)
         elif data == "nextTrashEvent":
             from Components.config import config

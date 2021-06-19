@@ -66,7 +66,7 @@ class PkgList(Source):
 			keys = sorted(map.keys())
 
 			return [(name, map[name][0], map[name][1], map[name][2], map[name][3]) for name in keys]
-		except Exception, e:
+		except Exception as e:
 			print("[PkgList] except: ", str(e))
 			return []
 

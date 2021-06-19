@@ -57,7 +57,7 @@ class StreamPlayer:
 	            self.is_playing = False
 	            self.session.nav.stopService()
 	            self.session.nav.playService(self.oldService)
-	        except TypeError, e:
+	        except TypeError as e:
 	            print(" ERROR Z", e)
 	            self.exit()
 

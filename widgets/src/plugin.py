@@ -230,7 +230,7 @@ class WidgetDesktop(Screen):
 		for w in self.imported_widgets:
 			try:
 				w[1].onLoadFinished(self)
-			except Exception, e:
+			except Exception as e:
 				print("Exception in onLoadFinished of widget", w[0], e)
 
 	def _onClose(self):
@@ -241,7 +241,7 @@ class WidgetDesktop(Screen):
 
 				#deleting the instance of the widget
 				#del w
-			except Exception, e:
+			except Exception as e:
 				print("Exception in onClose of widget", w[0], e)
 
 	def key_up(self):

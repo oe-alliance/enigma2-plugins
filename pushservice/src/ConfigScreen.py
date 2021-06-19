@@ -432,7 +432,7 @@ class TestConsole(Screen):
 				test.push(self.callback, self.errback, _("PushService Config"), _("Push test"), _("If You can see this, Your configuration is correct."))
 			elif isinstance(test, ControllerBase):
 				test.run(self.callback, self.errback)
-		except Exception, e:
+		except Exception as e:
 			text = _("PushService Test exception:") + "\n\n"
 			exc_type, exc_value, exc_traceback = sys.exc_info()
 			traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stdout)

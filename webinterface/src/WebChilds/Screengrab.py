@@ -121,7 +121,7 @@ class GrabStream:
 					if self.save is False:
 						os_remove(self.target)
 						print('[Screengrab.py] %s removed' % self.target)
-				except Exception, e:
+				except Exception as e:
 					self.request.write('Internal error while reading target file')
 					self.request.setResponseCode(http.INTERNAL_SERVER_ERROR)
 

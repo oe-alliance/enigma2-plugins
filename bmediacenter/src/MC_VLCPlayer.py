@@ -36,7 +36,7 @@ try:
 	from Plugins.Extensions.VlcPlayer.VlcServerConfig import vlcServerConfig, VlcServerConfigScreen
 	from Plugins.Extensions.VlcPlayer.VlcServerList import VlcServerList
 	from Plugins.Extensions.VlcPlayer.VlcPlayer import VlcPlayer
-except Exception, e:
+except Exception as e:
 	print("Media Center: Import VLC Stuff failed")
 
 
@@ -235,7 +235,7 @@ class MC_VLCMedialist(Screen):
 		try:
 			for id in self.playlistIds:
 				self.server.delete(id)
-		except Exception, e:
+		except Exception as e:
 			pass
 
 	def __onShown(self):
@@ -250,7 +250,7 @@ class MC_VLCMedialist(Screen):
 				self.switchToPlayList()
 			else:
 				self.switchToFileList()
-		except Exception, e:
+		except Exception as e:
 			self.session.open(
 				MessageBox, _("Error updating file- and playlist from server %s:\n%s" % (
 						self.server.getName(), e)
@@ -273,7 +273,7 @@ class MC_VLCMedialist(Screen):
 			self["key_blue"].setText("Filter On")
 		try:
 			self.updateFilelist()
-		except Exception, e:
+		except Exception as e:
 			self.session.open(
 				MessageBox, _("Error updating filelist from server %s:\n%s" % (
 						self.server.getName(), e)
@@ -320,7 +320,7 @@ class MC_VLCMedialist(Screen):
 					if id is not None:
 						self.playlistIds.append(id)
 						self.updatePlaylist()
-				except Exception, e:
+				except Exception as e:
 					self.session.open(
 						MessageBox, _("Error loading playlist %s into server %s:\n%s" % (
 								media, self.server.getName(), e)
@@ -347,7 +347,7 @@ class MC_VLCMedialist(Screen):
 		try:
 			url = self.server.playFile(self.filename, DEFAULT_VIDEO_PID, DEFAULT_AUDIO_PID)
 			print("[VLC] url: " + url)
-		except Exception, e:
+		except Exception as e:
 			self.session.open(MessageBox, _("Error with VLC server:\n%s" % e), MessageBox.TYPE_ERROR)
 
 		if url is not None:
@@ -368,13 +368,13 @@ class MC_VLCMedialist(Screen):
 	def getFilesAndDirsCB(self, currentDirectory, regex):
 		try:
 			return self.server.getFilesAndDirs(currentDirectory, regex)
-		except ExpatError, e:
+		except ExpatError as e:
 			self.session.open(
 				MessageBox, _("Error loading playlist into server %s:\n%s" % (
 						self.server.getName(), e)
 					), MessageBox.TYPE_ERROR)
 			raise ExpatError, e
-		except Exception, e:
+		except Exception as e:
 			self.session.open(
 				MessageBox, _("Error loading filelist into server %s:\n%s" % (
 						self.server.getName(), e)
@@ -384,12 +384,12 @@ class MC_VLCMedialist(Screen):
 	def getPlaylistEntriesCB(self):
 		try:
 			return self.server.getPlaylistEntries()
-		except ExpatError, e:
+		except ExpatError as e:
 			self.session.open(
 				MessageBox, _("Error loading playlist into server %s:\n%s" % (
 						self.server.getName(), e)
 					), MessageBox.TYPE_ERROR)
-		except Exception, e:
+		except Exception as e:
 			self.session.open(
 				MessageBox, _("Error loading playlist into server %s:\n%s" % (
 						self.server.getName(), e)
@@ -460,7 +460,7 @@ class MC_VLCMedialist(Screen):
 		try:
 			self.currentList.changeDirectory(dir)
 			self.updateFilelist()
-		except Exception, e:
+		except Exception as e:
 			self.session.open(MessageBox, _("Error switching directory:\n%s" % (e)), MessageBox.TYPE_ERROR)
 
 	def visibility(self, force=1):
@@ -564,17 +564,17 @@ class MC_VLCFavoriteFolders(Screen):
 		for i in range(0, 100):
 			try:
 				del(config.plugins.mc_vlc.folders[i])
-			except Exception, e:
+			except Exception as e:
 				print("MC_ResetAll-DelaFavFailed")
 		config.plugins.mc_vlc.folders.save()
 		try:
 			del(config.plugins.mc_vlc.folders)
-		except Exception, e:
+		except Exception as e:
 			print("MC_DELFAVFOLDERS-FAILED")
 			#self.session.open(MessageBox,("Error: %s\n") % (Exception),  MessageBox.TYPE_INFO)
 		try:
 			del(config.plugins.mc_vlc.folders[0])
-		except Exception, e:
+		except Exception as e:
 			#self.session.open(MessageBox,("Error: %s\n") % (Exception),  MessageBox.TYPE_INFO)
 			print("MC_DELFAV0-FAILED")
 
@@ -641,7 +641,7 @@ class FavoriteFolderAdd(Screen, ConfigListScreen):
 	def keyCancel(self):
 		try:
 			del(config.plugins.mc_vlc.folders[self.id])
-		except Exception, e:
+		except Exception as e:
 			print("MC_Settings_DelaFavFailed")
 		self.close(0)
 #------------------------------------------------------------------------------------------

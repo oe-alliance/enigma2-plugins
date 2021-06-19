@@ -66,7 +66,7 @@ class UploadPkgResource(resource.Resource):
 		if cnt <= 0: # well, actually we should check against len(data) but lets assume we fail big time or not at all
 			try:
 				os_unlink(fn)
-			except OSError, oe:
+			except OSError as oe:
 				pass
 			req.setResponseCode(http.OK)
 			return self.res % (_("error writing to disk, not uploaded"), _("Close"), _("Add"))

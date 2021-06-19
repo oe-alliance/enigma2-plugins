@@ -51,7 +51,7 @@ class Network():
                         print("failed")
                         return False
             return True
-        except Exception, e:
+        except Exception as e:
             print(e)
             return True
 
@@ -82,7 +82,7 @@ class Network():
                         dest_addr = val[2].split('/')[0]
                         self.auto_network.append((os.path.join(self.mount_path, val[0]), dest_addr))
             print(self.auto_network)
-        except Exception, e:
+        except Exception as e:
             print(e)
 
 

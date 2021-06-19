@@ -254,7 +254,7 @@ class VideoPreview():
                                 self.dvd_preview_timer.start(1000, True)
                                 return
                             self.fwd_timer.start(1000, True)
-                except Exception, e:
+                except Exception as e:
                     print(e)
 
     def fwd(self):

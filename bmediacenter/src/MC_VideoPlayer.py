@@ -142,7 +142,7 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 					path = self.filename
 				self.session.open(DVD.DVDPlayer, dvd_filelist=[path])
 				return
-		except Exception, e:
+		except Exception as e:
 			print("DVD Player error:", e)
 		if self.filelist.canDescent():
 			self.filelist.descent()

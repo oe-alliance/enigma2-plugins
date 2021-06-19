@@ -170,7 +170,7 @@ class RemoteTimerScreen(Screen):
 	def generateTimerE2(self, data):
 		try:
 			root = cElementTree_fromstring(data)
-		except Exception, e:
+		except Exception as e:
 			print("[RemoteTimer] error: %s", e)
 			self["text"].setText(_("error parsing incoming data."))
 		else:

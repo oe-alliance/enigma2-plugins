@@ -93,9 +93,9 @@ class meteoitMain(Screen):
 		req = Request(myurl)
 		try:
     			handler = urlopen(req)
-		except HTTPError, e:
+		except HTTPError as e:
     			maintext = "Error: connection failed !"
-		except URLError, e:
+		except URLError as e:
     			maintext = "Error: Page not available !"
 		else:
 			xml_response = handler.read()

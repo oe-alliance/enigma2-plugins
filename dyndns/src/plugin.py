@@ -98,7 +98,7 @@ class DynDNSService:
 				self.lastip = str
 				reactor.callLater(1, self.onIPchanged)
 			self.timer.start(int(config.plugins.DynDNS.interval.value) * 60000)
-		except Exception, e:
+		except Exception as e:
 			print("[DynDNS]", e)
 			str = "coundnotgetip"
 
@@ -108,7 +108,7 @@ class DynDNSService:
 			url = "http://members.dyndns.org/nic/update?system=dyndns&hostname=%s&myip=%s&wildcard=ON&offline=NO" % (config.plugins.DynDNS.hostname.value, self.lastip)
 			if self.getURL(url).find("good") is not -1:
 				print("[DynDNS] ip changed")
-		except Exception, e:
+		except Exception as e:
 			print("[DynDNS] ip was not changed", e)
 
 	def getURL(self, url):

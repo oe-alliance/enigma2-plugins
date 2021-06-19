@@ -232,7 +232,7 @@ class YTTrailer:
 		try:
 			print("[YTTrailer] trying to find out if a HD Stream is available", watch_url)
 			watchvideopage = urlopen2(watchrequest).read()
-		except (URLError, HTTPException, socket_error), err:
+		except (URLError, HTTPException, socket_error) as err:
 			print("[YTTrailer] Error: Unable to retrieve watchpage - Error code: ", str(err))
 			return video_url
 
@@ -245,7 +245,7 @@ class YTTrailer:
 				videoinfo = parse_qs(infopage)
 				if ('url_encoded_fmt_stream_map' or 'fmt_url_map') in videoinfo:
 					break
-			except (URLError, HTTPException, socket_error), err:
+			except (URLError, HTTPException, socket_error) as err:
 				print("[YTTrailer] Error: unable to download video infopage", str(err))
 				return video_url
 

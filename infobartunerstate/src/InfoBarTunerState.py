@@ -430,7 +430,7 @@ class InfoBarTunerState(object):
 				try:
 					host = ip and socket.gethostbyaddr(ip)
 					client = host and host[0].split('.')[0]
-				except socket.herror, x:
+				except socket.herror as x:
 					pass
 
 				number = service_ref and getNumber(service_ref.ref)
@@ -751,7 +751,7 @@ class InfoBarTunerState(object):
 					self.info = self.session.instantiateDialog(TunerStateInfo, _("Nothing running"))
 				self.info.show()
 				print("IBTS self.info.type", self.info.type)
-			except Exception, e:
+			except Exception as e:
 				print("InfoBarTunerState show exception " + str(e))
 
 	def update(self):

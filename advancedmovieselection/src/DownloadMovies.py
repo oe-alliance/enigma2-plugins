@@ -208,7 +208,7 @@ class DownloadMovies(Screen):
                 sc = AVSwitch().getFramebufferScale()
                 self.picload.setPara((self["poster"].instance.size().width(), self["poster"].instance.size().height(), sc[0], sc[1], False, 1, "#ff000000"))
                 self.picload.startDecode(jpg_file)
-            except Exception, e:
+            except Exception as e:
                 print(e)
 
     def pageUp(self):

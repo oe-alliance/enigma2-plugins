@@ -287,9 +287,9 @@ class PictureViewer(Screen):
 						_("select List to load"),
 						list
 				)
-			except IOError, e:
+			except IOError as e:
 				print("[" + myname + "] IOError:", e)
-			except OSError, e:
+			except OSError as e:
 				print("[" + myname + "] OSError:", e)
 
 	def KeyRed(self):
@@ -331,7 +331,7 @@ class PictureViewer(Screen):
 				   self.slideshowfiles = list
 				   self["slist"].l.setList(self.slideshowfiles)
 				   self.loadedslideshowlistlistname = filename.replace(config.plugins.pictureviewer.slideshowext.value, "")
-			   except IOError, e:
+			   except IOError as e:
 				   print("[" + myname + "] error:", e)
 
 	def fileToSaveFilelistEntered(self, filename):
@@ -348,7 +348,7 @@ class PictureViewer(Screen):
 				for x in self.slideshowfiles:
 					fp.write(x[1] + "\n")
 				fp.close()
-			except IOError, e:
+			except IOError as e:
 				print("[" + myname + "] error:", e)
 
 	def KeyYellow(self):

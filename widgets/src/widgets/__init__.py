@@ -20,7 +20,7 @@ def importSingleWidget(session, widgetdir):
             skin = parse(widgetdir + "/" + "widget_skin.xml").getroot()
             return widgetname, w, skin, widgetdir, module_name
 
-        except (ImportError, IOError), e:
+        except (ImportError, IOError) as e:
             print('Could NOT import widget: %s' % (module_name))
             print('Exception Caught\n%s' % e)
     return False

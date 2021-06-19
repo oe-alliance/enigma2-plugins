@@ -636,7 +636,7 @@ class InfoBar(InfoBarOrg):
 						statinfo = os_stat("%s/%s" % (config.usage.timeshift_path.value, filename))
 						if statinfo.st_mtime > (time() - 5.0):
 							savefilename = filename
-					except Exception, errormsg:
+					except Exception as errormsg:
 						Notifications.AddNotification(MessageBox, _("PTS Plugin Error: %s" % (errormsg)), MessageBox.TYPE_ERROR)
 
 		if savefilename is None:
@@ -666,7 +666,7 @@ class InfoBar(InfoBarOrg):
 								ptsfilename = "%s - %s - %s - %s" % (strftime("%Y%m%d %H%M", localtime(self.pts_starttime)), self.pts_curevent_station, self.pts_curevent_name, self.pts_curevent_description)
 							elif config.recording.filename_composition.value == "short":
 								ptsfilename = "%s - %s" % (strftime("%Y%m%d", localtime(self.pts_starttime)), self.pts_curevent_name)
-					except Exception, errormsg:
+					except Exception as errormsg:
 						print("PTS-Plugin: Using default filename")
 
 					if config.recording.ascii_filenames.value:
@@ -694,7 +694,7 @@ class InfoBar(InfoBarOrg):
 								ptsfilename = "%s - %s - %s - %s" % (strftime("%Y%m%d %H%M", localtime(int(begintime))), self.pts_curevent_station, eventname, description)
 							elif config.recording.filename_composition.value == "short":
 								ptsfilename = "%s - %s" % (strftime("%Y%m%d", localtime(int(begintime))), eventname)
-					except Exception, errormsg:
+					except Exception as errormsg:
 						print("PTS-Plugin: Using default filename")
 
 					if config.recording.ascii_filenames.value:
@@ -716,7 +716,7 @@ class InfoBar(InfoBarOrg):
 				if not mergelater:
 					self.ptsCreateAPSCFiles(fullname + ".ts")
 
-			except Exception, errormsg:
+			except Exception as errormsg:
 				timeshift_saved = False
 				timeshift_saveerror1 = errormsg
 
@@ -779,7 +779,7 @@ class InfoBar(InfoBarOrg):
 						timeshift_saveerror1 = ""
 						timeshift_saveerror2 = _("Not enough free Diskspace!\n\nFilesize: %sMB\nFree Space: %sMB\nPath: %s" % (filesize, freespace, config.usage.default_path.value))
 
-				except Exception, errormsg:
+				except Exception as errormsg:
 					timeshift_saved = False
 					timeshift_saveerror2 = errormsg
 
@@ -823,7 +823,7 @@ class InfoBar(InfoBarOrg):
 			service = self.session.nav.getCurrentService()
 			info = service and service.info()
 			event = info and info.getEvent(0)
-		except Exception, errormsg:
+		except Exception as errormsg:
 			Notifications.AddNotification(MessageBox, _("Getting Event Info failed!") + "\n\n%s" % errormsg, MessageBox.TYPE_ERROR, timeout=10)
 
 		if event is not None:
@@ -853,7 +853,7 @@ class InfoBar(InfoBarOrg):
 					open("/proc/stb/fp/led_set_pattern", "w").write("0")
 				elif fileExists("/proc/stb/fp/led0_pattern"):
 					open("/proc/stb/fp/led0_pattern", "w").write("0")
-		except Exception, errormsg:
+		except Exception as errormsg:
 			print("PTS Plugin: %s" % (errormsg))
 
 	def ptsCreateHardlink(self):
@@ -865,7 +865,7 @@ class InfoBar(InfoBarOrg):
 						try:
 							self.BgFileEraser.erase("%s/pts_livebuffer.%s" % (config.usage.timeshift_path.value, self.pts_eventcount))
 							self.BgFileEraser.erase("%s/pts_livebuffer.%s.meta" % (config.usage.timeshift_path.value, self.pts_eventcount))
-						except Exception, errormsg:
+						except Exception as errormsg:
 							print("PTS Plugin: %s" % (errormsg))
 
 						try:
@@ -876,7 +876,7 @@ class InfoBar(InfoBarOrg):
 							metafile = open("%s/pts_livebuffer.%s.meta" % (config.usage.timeshift_path.value, self.pts_eventcount), "w")
 							metafile.write("%s\n%s\n%s\n%i\n" % (self.pts_curevent_servicerefname, self.pts_curevent_name.replace("\n", ""), self.pts_curevent_description.replace("\n", ""), int(self.pts_starttime)))
 							metafile.close()
-						except Exception, errormsg:
+						except Exception as errormsg:
 							Notifications.AddNotification(MessageBox, _("Creating Hardlink to Timeshift file failed!") + "\n" + _("The Filesystem on your Timeshift-Device does not support hardlinks.\nMake sure it is formated in EXT2 or EXT3!") + "\n\n%s" % errormsg, MessageBox.TYPE_ERROR)
 
 						# Create EIT File
@@ -891,9 +891,9 @@ class InfoBar(InfoBarOrg):
 								metafile = open("%s.ts.meta" % (fullname), "w")
 								metafile.write("%s\n%s\n%s\n%i\nautosaved\n" % (self.pts_curevent_servicerefname, self.pts_curevent_name.replace("\n", ""), self.pts_curevent_description.replace("\n", ""), int(self.pts_starttime)))
 								metafile.close()
-							except Exception, errormsg:
+							except Exception as errormsg:
 								print("PTS Plugin: %s" % (errormsg))
-				except Exception, errormsg:
+				except Exception as errormsg:
 					errormsg = str(errormsg)
 					if errormsg.find('Input/output error') != -1:
 						errormsg += _("\nAn Input/output error usually indicates a corrupted filesystem! Please check the filesystem of your timeshift-device!")
@@ -993,7 +993,7 @@ class InfoBar(InfoBarOrg):
 				import eitsave
 				serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).ref.toString()
 				eitsave.SaveEIT(serviceref, filename + ".eit", self.pts_curevent_eventid, -1, -1)
-			except Exception, errormsg:
+			except Exception as errormsg:
 				print("PTS Plugin: %s" % (errormsg))
 
 	def ptsCopyFilefinished(self, srcfile, destfile):
@@ -1210,7 +1210,7 @@ class InfoBar(InfoBarOrg):
 					self.pvrStateDialog["eventname"].setText(eventname)
 				else:
 					self.pvrStateDialog["eventname"].setText("")
-			except Exception, errormsg:
+			except Exception as errormsg:
 				self.pvrStateDialog["eventname"].setText("")
 
 		# Get next pts file ...

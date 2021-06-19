@@ -75,7 +75,7 @@ class SubtitleDB(object):
         fname = self.getFileName(filepath)
         try:
             return self.query(fname, langs)
-        except Exception, e:
+        except Exception as e:
             log.exception("Error occured")
             return []
 
@@ -119,9 +119,9 @@ class SubtitleDB(object):
             content = f.read()
             f.close()
             return content
-        except urllib2.HTTPError, e:
+        except urllib2.HTTPError as e:
             log.warning("HTTP Error: %s - %s" % (e.code, url))
-        except urllib2.URLError, e:
+        except urllib2.URLError as e:
             log.warning("URL Error: %s - %s" % (e.reason, url))
 
     def downloadFile(self, url, filename):
@@ -136,14 +136,14 @@ class SubtitleDB(object):
         ''' Returns the short (two-character) representation of the long language name'''
         try:
             return self.revertlangs[language]
-        except KeyError, e:
+        except KeyError as e:
             log.warn("Ooops, you found a missing language in the config file of %s: %s. Send a bug report to have it added." % (self.__class__.__name__, language))
 
     def getLanguage(self, lg):
         ''' Returns the long naming of the language on a two character code '''
         try:
             return self.langs[lg]
-        except KeyError, e:
+        except KeyError as e:
             log.warn("Ooops, you found a missing language in the config file of %s: %s. Send a bug report to have it added." % (self.__class__.__name__, lg))
 
     def query(self, token):

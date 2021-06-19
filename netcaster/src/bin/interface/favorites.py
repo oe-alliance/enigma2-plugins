@@ -89,7 +89,7 @@ class SHOUTcasterFavorites:
         print("[" + myname + "] adding " + stream.getName() + " to config")
         try:
             self.configparser.add_section(stream.getName())
-        except DuplicateSectionError, e:
+        except DuplicateSectionError as e:
             print("[" + myname + "] error while adding stream to config:", e)
             return False, e
         else:

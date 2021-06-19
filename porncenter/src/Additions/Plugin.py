@@ -122,7 +122,7 @@ class Plugin:
 def getPlugins():
 	try:
 		files = sorted(listdir(resolveFilename(SCOPE_PLUGINS) + "/Extensions/PornCenter/Additions"))
-	except Exception, exc:
+	except Exception as exc:
 		print("[PornCenter] failed to search for plugins:", exc)
 		files = []
 	plugins = []
@@ -136,7 +136,7 @@ def getPlugins():
 				p = plugin.getPlugin()
 				if p:
 					plugins.append(p)
-			except Exception, exc:
+			except Exception as exc:
 				print("Plugin %s failed to load: %s" % (file, exc))
 				continue
 	return plugins

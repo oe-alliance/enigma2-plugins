@@ -805,7 +805,7 @@ class MovieList(GUIComponent):
             for i, x in enumerate(self.multiSelection):
                 if x == service:
                     del self.multiSelection[i]
-        except Exception, e:
+        except Exception as e:
             print(e)
         for l in self.list[:]:
             if l[0].serviceref == service:

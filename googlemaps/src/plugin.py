@@ -43,7 +43,7 @@ def applySkinVars(skin, dict):
     for key in dict.keys():
         try:
             skin = skin.replace('{' + key + '}', dict[key])
-        except Exception, e:
+        except Exception as e:
             print(e, "@key=", key)
     return skin
 

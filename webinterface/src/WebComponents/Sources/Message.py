@@ -36,7 +36,7 @@ class Message(Source):
 
 		try:
 			typeint = int(self.cmd['type'])
-		except (ValueError, TypeError), e:
+		except (ValueError, TypeError) as e:
 			return (False, _("type %s is not a number") % self.cmd['type'])
 
 		if typeint == MessageBox.TYPE_YESNO:
@@ -53,7 +53,7 @@ class Message(Source):
 
 		try:
 			mtimeout = int(self.cmd['timeout'])
-		except (ValueError, TypeError), e:
+		except (ValueError, TypeError) as e:
 			mtimeout = -1
 
 		if typeint == MessageBox.TYPE_YESNO:

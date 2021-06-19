@@ -268,7 +268,7 @@ class LastFM(LastFMHandler):
                 nodex['url'] = node.getAttribute("url").encode("utf-8")
                 data.append(nodex)
             self.onGlobalTagsLoaded(data)
-        except xml.parsers.expat.ExpatError, e:
+        except xml.parsers.expat.ExpatError as e:
             self.onCommandFailed(e)
 
     def getTopTracks(self, username):
@@ -354,7 +354,7 @@ class LastFM(LastFMHandler):
                 nodex['_display'] = nodex['artist'] + " - " + nodex['name']
                 data.append(nodex)
             return True, data
-        except xml.parsers.expat.ExpatError, e:
+        except xml.parsers.expat.ExpatError as e:
             print(e)
             return False, e
 
@@ -405,7 +405,7 @@ class LastFM(LastFMHandler):
                 nodex['_display'] = nodex['name']
                 data.append(nodex)
             return True, data
-        except xml.parsers.expat.ExpatError, e:
+        except xml.parsers.expat.ExpatError as e:
             print(e)
             return False, e
 
