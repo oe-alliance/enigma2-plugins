@@ -21,7 +21,16 @@ $Id: plugin.py 1591 2021-04-29 14:52:10Z michael $
 # pylint: disable=C0111,C0103,C0301,W0603,C0302
 
 from __future__ import division, absolute_import
-import re, time, os, traceback, json, base64, six, logging, binascii, locale
+import re
+import time
+import os
+import traceback
+import json
+import base64
+import six
+import logging
+import binascii
+import locale
 from itertools import cycle
 from logging import NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL
 from xml.dom.minidom import parse
