@@ -26,6 +26,7 @@ from Components.WeatherMSN import weathermsn
 
 SIGN = u"°"
 
+
 class MSNWeather(Source):
 
 	def __init__(self):

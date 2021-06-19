@@ -13,6 +13,7 @@ import datetime
 
 SIGN = u"°"
 
+
 class FC2web(resource.Resource):
 
 	title = "FanControl2 Webinterface"
