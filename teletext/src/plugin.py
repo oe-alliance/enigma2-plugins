@@ -1750,7 +1750,7 @@ class TeleTextFavoritesMenu(Screen):
     self.session.openWithCallback(
       self.addFavorite,
       NTIVirtualKeyBoard,
-      title =_("Enter text for page %s") % page,
+      title=_("Enter text for page %s") % page,
       text=value
     )
 

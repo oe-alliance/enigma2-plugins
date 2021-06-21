@@ -14,6 +14,7 @@ from twisted.web.client import HTTPDownloader
 from twisted.internet import reactor
 from six.moves.urllib.parse import urlparse, urlunparse
 
+
 def _parse(url, defaultPort=None):
 	url = url.strip()
 	parsed = urlparse(url)

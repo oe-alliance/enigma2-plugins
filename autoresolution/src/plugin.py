@@ -108,6 +108,7 @@ def setDeinterlacer(mode):
 	except:
 		print("[AutoRes] failed switch deinterlacer mode to %s" % mode)
 
+
 def setHdmiHdrType(mode):
 	try:
 		f = open("/proc/stb/video/hdmi_hdrtype", "r")
@@ -124,6 +125,7 @@ def setHdmiHdrType(mode):
 		except:
 			print("[AutoRes] failed switch hdmi_hdrtype mode to %s" % mode)
 
+
 def setColorimetry(mode):
 	try:
 		f = open("/proc/stb/video/hdmi_colorimetry", "r")
@@ -139,6 +141,7 @@ def setColorimetry(mode):
 			print("[AutoRes] switch hdmi_colorimetry mode to %s" % mode)
 		except:
 			print("[AutoRes] failed switch hdmi_colorimetry mode to %s" % mode)
+
 
 frqdic = {23000: '24',
 		23976: '24',
@@ -175,6 +178,7 @@ codec_data = {
 	20: "N/A 20",
 	21: "SPARK",
 }
+
 
 class AutoRes(Screen):
 	def __init__(self, session):

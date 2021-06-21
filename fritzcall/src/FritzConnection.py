@@ -34,7 +34,9 @@ Modified to use async communication, content level authentication and plain xml.
 
 __version__ = '0.6'
 
-import logging, re, six
+import logging
+import re
+import six
 from hashlib import md5
 from twisted.web.client import getPage
 import xml.etree.ElementTree as ET
@@ -56,9 +58,16 @@ def get_version():
 	return __version__
 
 
-class FritzConnectionException(Exception): pass
-class ServiceError(FritzConnectionException): pass
-class ActionError(FritzConnectionException): pass
+class FritzConnectionException(Exception):
+	pass
+
+
+class ServiceError(FritzConnectionException):
+	pass
+
+
+class ActionError(FritzConnectionException):
+	pass
 
 
 class FritzAction(object):
@@ -75,7 +84,7 @@ class FritzAction(object):
 	warn = logger.warn
 	error = logger.error
 	exception = logger.exception
-	
+
 	header = {'soapaction': '',
 			  'content-type': 'text/xml',
 			  'charset': 'utf-8'}
@@ -159,7 +168,7 @@ class FritzAction(object):
 		headers = self.header.copy()
 		headers['soapaction'] = '%s#%s' % (self.service_type, self.name)
 # 		self.debug("headers: " + repr(headers))
-		data = self.envelope.strip() % ( self.header_initchallenge_template % config.plugins.FritzCall.username.value,
+		data = self.envelope.strip() % (self.header_initchallenge_template % config.plugins.FritzCall.username.value,
 										self._body_builder(kwargs))
 		if config.plugins.FritzCall.useHttps.value:
 			url = 'https://%s:%s%s' % (self.address, self.port, self.control_url)
@@ -171,10 +180,10 @@ class FritzAction(object):
 		for h in six.iterkeys(headers):
 			newheaders[six.ensure_binary(h)] = six.ensure_binary(headers[h])
 		getPage(six.ensure_binary(url),
-			method = six.ensure_binary("POST"),
-			agent = six.ensure_binary(USERAGENT),
-			headers = newheaders,
-			postdata = six.ensure_binary(data)).addCallback(self._okExecute, callback, **kwargs).addErrback(self._errorExecute, callback)
+			method=six.ensure_binary("POST"),
+			agent=six.ensure_binary(USERAGENT),
+			headers=newheaders,
+			postdata=six.ensure_binary(data)).addCallback(self._okExecute, callback, **kwargs).addErrback(self._errorExecute, callback)
 
 	def _okExecute(self, content, callback, **kwargs):
 		# self.debug("")
@@ -204,7 +213,7 @@ class FritzAction(object):
 		headers = self.header.copy()
 		headers['soapaction'] = '%s#%s' % (self.service_type, self.name)
 		# self.debug("headers: " + repr(headers))
-		data = self.envelope.strip() % ( header_clientauth,
+		data = self.envelope.strip() % (header_clientauth,
 										self._body_builder(kwargs))
 
 		if config.plugins.FritzCall.useHttps.value:
@@ -217,10 +226,10 @@ class FritzAction(object):
 		for h in six.iterkeys(headers):
 			newheaders[six.ensure_binary(h)] = six.ensure_binary(headers[h])
 		getPage(six.ensure_binary(url),
-			method = six.ensure_binary("POST"),
-			agent = six.ensure_binary(USERAGENT),
-			headers = newheaders,
-			postdata = six.ensure_binary(data)).addCallback(self.parse_response, callback).addErrback(self._errorExecute, callback)
+			method=six.ensure_binary("POST"),
+			agent=six.ensure_binary(USERAGENT),
+			headers=newheaders,
+			postdata=six.ensure_binary(data)).addCallback(self.parse_response, callback).addErrback(self._errorExecute, callback)
 
 	def _errorExecute(self, error, callback):
 		# text = _("FRITZ!Box - Error getting status: %s") % error.getErrorMessage()
@@ -300,9 +309,11 @@ class FritzService(object):
 		self.actions = {}
 		self.name = ':'.join(service_type.split(':')[-2:])
 
+
 def namespace(element):
 	m = re.match(r'\{.*\}', element.tag)
 	return m.group(0) if m else ''
+
 
 class FritzXmlParser(object):
 	"""Base class for parsing fritzbox-xml-files."""
@@ -332,7 +343,7 @@ class FritzXmlParser(object):
 				source = 'http://{0}:{1}/{2}'.format(address, port, filename)
 			self.debug("source: %s", source)
 			getPage(six.ensure_binary(source),
- 				method = six.ensure_binary("GET"),).addCallback(self._okInit).addErrback(self._errorInit)
+ 				method=six.ensure_binary("GET"),).addCallback(self._okInit).addErrback(self._errorInit)
 
 	def _okInit(self, source):
 		# self.debug("")
@@ -351,8 +362,7 @@ class FritzXmlParser(object):
 		source = 'http://{0}:{1}/{2}'.format(address, port, filename)  # @UndefinedVariable
 		self.debug("source: %s", source)
 		getPage(source,
-				method = "GET",).addCallback(self._okInit).addErrback(self._errorInit)
-		
+				method="GET",).addCallback(self._okInit).addErrback(self._errorInit)
 
 	def nodename(self, name):
 		#self.debug("name: %s, QName: %s" %(name, ET.QName(self.root, name).text))
