@@ -648,6 +648,7 @@ class EPGSearch(EPGSelection):
 
 		search_type = {
 			"partial": eEPGCache.PARTIAL_TITLE_SEARCH,
+			"partialdes": eEPGCache.PARTIAL_DESCRIPTION_SEARCH,
 			"exact": eEPGCache.EXAKT_TITLE_SEARCH,
 			"start": eEPGCache.START_TITLE_SEARCH,
 		}.get(config.plugins.epgsearch.search_type.value, eEPGCache.PARTIAL_TITLE_SEARCH)
