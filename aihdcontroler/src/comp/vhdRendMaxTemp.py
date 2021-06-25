@@ -48,7 +48,7 @@ class vhdRendMaxTemp(Renderer, VariableText):
 							maxtemp = tt
 				except:
 					pass
-				self.text = str(maxtemp) + u"°C"
+				self.text = str(maxtemp) + str('\xc2\xb0') + "C"
 			else:
 				loada = 0
 				try:

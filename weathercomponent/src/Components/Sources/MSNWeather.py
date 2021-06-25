@@ -24,7 +24,7 @@ import time
 from Source import Source
 from Components.WeatherMSN import weathermsn
 
-SIGN = u"°"
+SIGN = str('\xc2\xb0')
 
 
 class MSNWeather(Source):
