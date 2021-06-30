@@ -9,7 +9,6 @@ from Components.ActionMap import HelpableActionMap, ActionMap, NumberActionMap
 from Components.ScrollLabel import ScrollLabel
 from Components.Input import Input
 from Components.Label import Label
-from Components.HTMLComponent import *
 from Components.GUIComponent import *
 from Plugins.Plugin import PluginDescriptor
 
