@@ -21,7 +21,6 @@ from Tools.NumericalTextInput import *
 from Tools.Directories import *
 
 import skin
-from Components.HTMLComponent import *
 from Components.GUIComponent import *
 from enigma import eLabel, eWidget, eSlider, fontRenderClass, ePoint, eSize
 
