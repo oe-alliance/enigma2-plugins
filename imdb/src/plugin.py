@@ -233,7 +233,7 @@ class IMDB(Screen, HelpableScreen):
 		self["key_yellow"] = Button("")
 		self["key_blue"] = Button("")
 		self["key_help"] = Boolean(True) # for auto buttons
-		self["key_menu"] = Boolean(True) # for auto buttons		
+		self["key_menu"] = Boolean(True) # for auto buttons
 
 		# 0 = multiple query selection menu page
 		# 1 = movie info page
@@ -735,7 +735,7 @@ class IMDB(Screen, HelpableScreen):
 				if six.PY2:
 					cp = cp.encode('latin-1', 'ignore')
 				in_html = in_html.replace(key, cp)
-#			print("[IMDB][html2utf8] decode html ")				
+#			print("[IMDB][html2utf8] decode html ")
 			if six.PY2:
 				self.inhtml = in_html.decode('latin-1').encode('utf8')
 			else:
