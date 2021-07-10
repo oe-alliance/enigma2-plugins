@@ -877,7 +877,7 @@ class IMDB(Screen, HelpableScreen):
 									txt = ', '.join(re.split('\|+', self.htmltags.sub('|', extrainfos.group(category).replace("\n", ' ').replace("<br>", '\n').replace("<br />", '\n')).strip('|').replace(' |' + self.NBSP, '').replace(self.NBSP, ' ')))
 							else:
 								txt = ' '.join(self.htmltags.sub('', extrainfos.group(category).replace("\n", ' ').replace("<br>", '\n').replace("<br />", '\n')).replace(' |' + self.NBSP, '').replace(self.NBSP, ' ').split())
-							Extratext += sep + txt + "\n" + extraspace if category in ("outline", "synopsis") else sep + txt + "\n" 
+							Extratext += sep + txt + "\n" + extraspace if category in ("outline", "synopsis") else sep + txt + "\n"
 					except IndexError:
 						pass
 				try:
