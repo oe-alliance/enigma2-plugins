@@ -1,0 +1,314 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-27 06:11+0200\n"
+"PO-Revision-Date: 2017-05-29 20:23+0800\n"
+"Last-Translator: 孤独之剑 <haotzyy1970@163.com>\n"
+"Language-Team: none\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.7\n"
+
+msgid "%ssearch EPG"
+msgstr "%s搜索EPG"
+
+msgid "%ssearch EPG from history..."
+msgstr "%sEPG搜索历史..."
+
+msgid "Add AutoTimer"
+msgstr "添加自动定时器 "
+
+msgid "Add Timer"
+msgstr "添加定时器"
+
+msgid "Add a record timer for highlighted event"
+msgstr "添加突出事件记录定时器 "
+
+msgid "Add a zap timer for highlighted event"
+msgstr "添加一个ZAP为突出事件计时器 "
+
+msgid "Add an AutoTimer for highlighted event"
+msgstr "为突出事件添加自动计时器"
+
+msgid "Add/remove/edit timer for highlighted event"
+msgstr "添加/删除/编辑突出事件的定时器 "
+
+msgid "All bouquets"
+msgstr "所有分组"
+
+msgid "All services"
+msgstr "所有频道"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Channel Selection"
+msgstr "频道选择 "
+
+msgid "Choose the encoding type for searches, helpful for foreign languages."
+msgstr "选择搜索的编码类型，对外语很有帮助."
+
+msgid "Close dialog"
+msgstr "关闭对话框"
+
+msgid ""
+"Control where to search in the EPG. When 'all bouquets' is set, all bouquets "
+"are searched, even if 'Enable multiple bouquets' is disabled."
+msgstr ""
+"控制在EPG中搜索的地方.当'所有花束'设置，所有花束搜索，即使'启用多分组'被禁用"
+
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "无法读取自动计时器定时器列表: %s"
+
+msgid "Current bouquet"
+msgstr "目前分组"
+
+msgid "Current service"
+msgstr "目前频道"
+
+msgid "DVB-C"
+msgstr "DVB-C"
+
+msgid "DVB-C Cable services"
+msgstr "DVB-C有线电视频道"
+
+msgid "DVB-T"
+msgstr "DVB-T"
+
+msgid "DVB-T Terrestrial services"
+msgstr "DVB-T地面频道"
+
+msgid "Default scope when asked"
+msgstr "询问时默认范围"
+
+msgid "EPG Search"
+msgstr "EPG搜索"
+
+msgid "EPG Search setup"
+msgstr "EPG搜索设置 "
+
+msgid "EPG-Selection"
+msgstr "EPG选择 "
+
+msgid "EPGSearch"
+msgstr "EPG搜索"
+
+msgid "EPGSearch Setup"
+msgstr "EPG搜索设置 "
+
+msgid ""
+"Enable this to allow access to EPG Search from within the plugin browser."
+msgstr "启用此允许从插件浏览器中访问EPG搜索."
+
+msgid "End Time:"
+msgstr "结束时间: "
+
+msgid "Enter new search"
+msgstr "输入新搜索 "
+
+msgid "Enter text to search for"
+msgstr "输入要搜索的文本"
+
+msgid "Exclude results from"
+msgstr "排除结果 "
+
+msgid "Exit EPG Search"
+msgstr "退出EPG搜索"
+
+msgid "Filter results by source"
+msgstr "由源过滤结果 "
+
+msgid "IMDB search for highlighted event"
+msgstr "IMDB搜索突出事件 "
+
+msgid "IMDb Search"
+msgstr "IMDB搜索"
+
+msgid "Import from AutoTimer"
+msgstr "导入自动计时器"
+
+msgid "Import from EPG"
+msgstr "导入EPG "
+
+msgid "Import from Timer"
+msgstr "导入计时器"
+
+msgid ""
+"Include or exclude results depending on their source (e.g. by satellite)"
+msgstr "包含或排除取决于其来源的结果（例如通过卫星） "
+
+msgid "Include results from"
+msgstr "包括结果 "
+
+msgid "Include/exclude search results from this type of source"
+msgstr "搜索结果包括/排除在本类型的源 "
+
+msgid "Include/exclude sources"
+msgstr "包括/排除源 "
+
+msgid "Is the search case-sensitive or case-insensitive"
+msgstr "搜索情况是否敏感或不区分大小写 "
+
+msgid "Length of history"
+msgstr "历史长度 "
+
+msgid ""
+"Maximum number of entries in the search history. Set this to 0 to disable "
+"search history."
+msgstr "搜索历史中的最大条目数.设置为0来禁用搜索历史. "
+
+msgid "Move down"
+msgstr "向下移动 "
+
+msgid "Move down a page"
+msgstr "向下移动一页"
+
+msgid "Move up"
+msgstr "移动启动 "
+
+msgid "Move up a page"
+msgstr "向上移动页面 "
+
+msgid "New Search"
+msgstr "新的搜索 "
+
+msgid "No history"
+msgstr "没有历史 "
+
+msgid "Number of filters for inclusion/exclusion of results"
+msgstr "包含/排除结果的过滤器数 "
+
+msgid "Number of inclusions/exclusions"
+msgstr "包含/排除数 "
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Open selected in IMDb"
+msgstr "打开选定的互联网电视(IMDb) "
+
+msgid "Save search as AutoTimer"
+msgstr "另存为自动计时器"
+
+msgid "Search"
+msgstr "搜索"
+
+msgid "Search EPG"
+msgstr "搜索EPG "
+
+msgid "Search encoding"
+msgstr "搜索编码 "
+
+msgid "Search in..."
+msgstr "搜索..."
+
+msgid "Search scope"
+msgstr "搜索范围 "
+
+msgid "Search strictness"
+msgstr "搜索精度 "
+
+msgid "Search type"
+msgstr "搜索类型"
+
+msgid "Searching..."
+msgstr "搜索..."
+
+msgid "Select a timer to search"
+msgstr "选择要搜索的计时器 "
+
+msgid "Select text to search for"
+msgstr "选择要搜索的文本"
+
+msgid "Set type of match used to compare program titles with the search string"
+msgstr "设置用于比较程序标题与搜索字符串的匹配类型 "
+
+msgid "Sets the default search scope when the user is asked."
+msgstr "设置默认搜索范围时,用户被要求."
+
+msgid "Setup"
+msgstr "设置 "
+
+msgid "Setup menu"
+msgstr "设置菜单"
+
+msgid "Show AutoTimer list"
+msgstr "显示自动定时器列表"
+
+msgid "Show detailed event information"
+msgstr "显示详细的事件信息 "
+
+msgid "Show in plugin browser"
+msgstr "显示在插件浏览器"
+
+msgid "Show orbital position"
+msgstr "显示卫星轨道位置 "
+
+msgid "Show satellite orbital positions in the search results."
+msgstr "在搜索结果中显示卫星轨道位置。"
+
+msgid "Show search history"
+msgstr "显示搜索历史 "
+
+msgid "Start Time:"
+msgstr "开始时间: "
+
+msgid "Stream"
+msgstr "流 "
+
+msgid ""
+"Use source restrictions below to only include results from the sources, or "
+"exclude them."
+msgstr "使用下面的源限制只包含源的结果,或排除它们."
+
+msgid "Zap to channel"
+msgstr "切换频道 "
+
+msgid "all bouquets"
+msgstr "所有分组"
+
+msgid "all services"
+msgstr "所有频道"
+
+msgid "ask user"
+msgstr "询问用户 "
+
+msgid "case-insensitive search"
+msgstr "不区分大小写搜索 "
+
+msgid "case-sensitive search"
+msgstr "区分大小写搜索 "
+
+msgid "current bouquet"
+msgstr "目前分组"
+
+msgid "current service"
+msgstr "目前频道 "
+
+msgid "disabled"
+msgstr "禁用 "
+
+msgid "exact match"
+msgstr "精确匹配 "
+
+msgid "exclude"
+msgstr "排除 "
+
+msgid "include"
+msgstr "包括 "
+
+msgid "partial match"
+msgstr "部分匹配 "
+
+msgid "search EPG"
+msgstr "搜索EPG "
+
+msgid "search EPG from history..."
+msgstr "从历史搜索EPG..."
+
+msgid "title starts with"
+msgstr "标题开始 "

@@ -1,0 +1,231 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma 2 IMDb Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-27 03:51+0200\n"
+"PO-Revision-Date: 2018-04-28 02:05+0800\n"
+"Last-Translator: 孤独之剑 <haotzyy1970@163.com>\n"
+"Language-Team: none\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+msgid " as "
+msgstr " 作为 "
+
+msgid "* = Restart Required"
+msgstr "* = 需要重新启动"
+
+msgid "Ambiguous results"
+msgstr "模糊结果"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Cast: "
+msgstr "演员: "
+
+msgid "Channel Selection"
+msgstr "频道选择"
+
+msgid "Content:"
+msgstr "内容:"
+
+msgid "Could't get event name"
+msgstr "无法获取事件名称 "
+
+msgid "Details"
+msgstr "详情 "
+
+msgid "Downloading Movie Poster: %s..."
+msgstr "下载电影海报: %s..."
+
+msgid ""
+"Enable this to be able to access IMDb search setup from within the plugin "
+"browser."
+msgstr "使其能够在插件浏览器中访问IMDB搜索设置."
+
+msgid ""
+"Enable this to be able to access IMDb searches from within the movie list."
+msgstr "使其能够从电影列表中访问IMDB搜索."
+
+msgid ""
+"Enable this to be able to access IMDb searches from within the plugin "
+"browser."
+msgstr "使其能够在插件浏览器中访问IMDB搜索."
+
+msgid "Enter search"
+msgstr "输入搜索"
+
+msgid "Enter text to search for"
+msgstr "输入要搜索的文本"
+
+msgid "Exit"
+msgstr "退出"
+
+msgid "Exit IMDb search"
+msgstr "退出IMDB搜索 "
+
+msgid "Extra Info"
+msgstr "附加信息 "
+
+msgid "IMDb Details parsed"
+msgstr "IMDB细节解析"
+
+msgid "IMDb Download completed"
+msgstr "下载完成"
+
+msgid "IMDb Download failed"
+msgstr "IMDB下载失败"
+
+msgid "IMDb Menu"
+msgstr "IMDB菜单"
+
+msgid "IMDb Plugin"
+msgstr "IMDB插件"
+
+msgid "IMDb Re-Download completed"
+msgstr "IMDB重新下载完成"
+
+msgid "IMDb Setup"
+msgstr "IMDB设置"
+
+msgid "IMDb query failed!"
+msgstr "IMDB查询失败!"
+
+msgid "IMDb search"
+msgstr "IMDB搜索"
+
+msgid "IMDb setup"
+msgstr "IMDB设置"
+
+msgid "Internet Movie Database Details Plugin"
+msgstr "互联网电影数据库细节插件"
+
+msgid "Lookup"
+msgstr "查找"
+
+msgid "Menu"
+msgstr "菜单"
+
+msgid "No IMDb match."
+msgstr "没有IMDB匹配."
+
+msgid "No IMDb match:"
+msgstr "没有IMDB匹配:"
+
+msgid "No cast list found in the database."
+msgstr "数据库中未找到CAST列表."
+
+msgid "No details found."
+msgstr "没有找到详细信息."
+
+msgid "Page down"
+msgstr "下页"
+
+msgid "Page up"
+msgstr "上页 "
+
+msgid "Play Trailer"
+msgstr "游戏预告片"
+
+msgid "Please select the matching entry"
+msgstr "请选择匹配的条目"
+
+msgid "Production Countries:"
+msgstr "发布国家:"
+
+msgid "Re-Query IMDb: %s..."
+msgstr "重新查询IMDB: %s..."
+
+msgid "Release Date:"
+msgstr "发布日期:"
+
+msgid "Runtime:"
+msgstr "运行时间:"
+
+msgid "Save current Details as .html for offline use"
+msgstr "将当前细节保存为.html用于脱机使用"
+
+msgid "Save current Details as .txt"
+msgstr "保存当前的细节.txt "
+
+msgid "Save current Poster and Details as .txt"
+msgstr "保存当前的海报和细节.txt "
+
+msgid "Search Trailer"
+msgstr "搜索预告片"
+
+msgid "Search for details from the Internet Movie Database"
+msgstr "从互联网电影数据库中搜索细节"
+
+msgid "Select from EPG"
+msgstr "从EPG中选择 "
+
+msgid "Settings for Internet Movie Database searches"
+msgstr "Internet电影数据库检索设置 "
+
+msgid "Setup"
+msgstr "设置"
+
+msgid ""
+"Show episode and year information for cast when available. Takes effect "
+"after the next fetch of show details."
+msgstr "可用时显示节目和年报信息.在下一次获取显示细节之后生效."
+
+msgid "Show episode and year information in cast list"
+msgstr "在列表中显示事件和年份信息"
+
+msgid "Show full movie or series name in title menu"
+msgstr "在标题菜单中显示完整的电影或系列名称"
+
+msgid "Show in movie list"
+msgstr "在电影列表中显示"
+
+msgid "Show list of matched movies an series"
+msgstr "显示匹配的电影系列 "
+
+msgid "Show movie and series basic details"
+msgstr "显示电影和系列基本细节 "
+
+msgid "Show movie and series extra details"
+msgstr "显示电影和系列额外细节"
+
+msgid "Show search in plugin browser"
+msgstr "在插件浏览器中显示搜索"
+
+msgid "Show setup in plugin browser"
+msgstr "显示在浏览器安装插件"
+
+msgid ""
+"Show the whole IMDb title information for a movie or series, including, for "
+"example, alternative names and whether it's a series. Takes effect after the "
+"next search of IMDb for a show name."
+msgstr ""
+"显示整个IMDB标题信息的电影或系列,包括,例如,替代名称,它是否是一系列.在下一次搜"
+"索IMDB以显示名称之后生效."
+
+msgid "The Internet Movie Database"
+msgstr "互联网电影数据库 "
+
+msgid ""
+"This option allows you add words/phrases for IMDb to ignore when searching. "
+"Please separate the words/phrases with commas."
+msgstr "此选项允许您添加IMDB在搜索时忽略的单词/短语.请用逗号分隔单词/短语."
+
+msgid "Title Menu"
+msgstr "标题菜单 "
+
+msgid "User Rating"
+msgstr "用户评级 "
+
+msgid "Words / phrases to ignore "
+msgstr "忽略单词/句子"
+
+msgid "no user rating yet"
+msgstr "还没有用户评级 "
