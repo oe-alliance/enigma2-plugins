@@ -91,6 +91,18 @@ msgstr "EPG Aktualisierung wurde im Hintergrund gestartet"
 msgid "EPG refresh starts scanning channels."
 msgstr "EPG Aktualisierung startet den Kanalscan."
 
+msgid "EPG-Refresh_Pending Services"
+msgstr "EPG-Refresh ausstehende Kanäle"
+
+msgid "EPG-Refresh_Refresh now"
+msgstr "EPG-Refresh jetzt aktualisieren"
+
+msgid "EPG-Refresh_SetUp"
+msgstr "EPG-Refresh Konfiguration"
+
+msgid "EPG-Refresh_Stop Refresh"
+msgstr "EPG-Refresh Aktualisierung stoppen"
+
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr "EPGRefresh"
 
@@ -114,6 +126,12 @@ msgstr ""
 
 msgid "Edit Services"
 msgstr "Kanäle"
+
+msgid "Flush EPG before refresh"
+msgstr "EPG-Daten vor dem Aktualisieren löschen"
+
+msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
+msgstr "Aktivieren Sie diese Option, wenn vor der EPG-Aktualisierung, die kompletten EPG-Daten gelöscht werden sollen."
 
 msgid "Edit Services to refresh"
 msgstr "Sender zur Aktualisierung auswählen"
