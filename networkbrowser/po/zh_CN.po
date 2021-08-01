@@ -1,0 +1,318 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-25 12:31+0200\n"
+"PO-Revision-Date: 2021-07-20 23:10+0800\n"
+"Last-Translator: 孤独之剑 <haotzyy1970@163.com>\n"
+"Language-Team: 孤独之剑 <haotzyy1970@163.com>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.3\n"
+
+msgid ""
+"A mount entry with this name already exists!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+"具有此名称的挂载项已存在!\n"
+"更新现有的条目并继续?\n"
+
+msgid "AUTOFS (mount as needed)"
+msgstr "自动挂载 (挂载所需的)"
+
+msgid "Active"
+msgstr "主动 "
+
+msgid ""
+"Active/\n"
+"Inactive"
+msgstr ""
+"主动/\n"
+"无效 "
+
+msgid "Add a new NFS or CIFS mount point to your Receiver."
+msgstr "添加一个新的NFS和CIFS挂载点到您的接收器."
+
+msgid "Add new network mount point"
+msgstr "添加新的网络挂载点 "
+
+msgid "Adding schedule..."
+msgstr "添加日程..."
+
+msgid "Are you sure you want to remove your network mount ?"
+msgstr "你确定要删除网络挂载吗?"
+
+msgid ""
+"Are you sure you want to save this network mount?\n"
+"\n"
+msgstr ""
+"确实要保存此网络挂载吗?\n"
+"\n"
+
+msgid "Attempt to mount shares again"
+msgstr "尝试再次挂载共享"
+
+msgid "Attempt to recover lost mounts (in background)"
+msgstr "试图恢复丢失的挂载（后台）"
+
+msgid "Browse network neighbourhood"
+msgstr "浏览网上邻居 "
+
+msgid "CIFS share"
+msgstr "CIFS共享 "
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Change hostname"
+msgstr "更改主机名 "
+
+msgid "Change the hostname of your Receiver."
+msgstr "更改接收机的主机名."
+
+msgid "Close"
+msgstr "关闭 "
+
+msgid "Delete"
+msgstr "删除"
+
+msgid "Delete mount"
+msgstr "删除挂载"
+
+msgid "Dir:"
+msgstr "目录:"
+
+msgid "Do you want to enter a username and password for this host?"
+msgstr "是否要为该主机输入用户名和密码?"
+
+msgid "Enigma2 (mount using enigma2)"
+msgstr "enigma2（挂载使用enigma2） "
+
+msgid "Enigma2 old format (mount using linux)"
+msgstr "enigma2旧格式（挂载使用Linux） "
+
+msgid "Enter IP to scan..."
+msgstr "输入IP扫描..."
+
+msgid "Enter new hostname for your Receiver"
+msgstr "输入接收新的主机名"
+
+msgid "Enter options:"
+msgstr "输入选项:"
+
+msgid "Enter password:"
+msgstr "输入密码:"
+
+msgid "Enter share directory:"
+msgstr "输入共享目录:"
+
+msgid "Enter share name:"
+msgstr "输入共享名称:"
+
+msgid "Enter user and password for host: "
+msgstr "输入主机的用户名和密码 : "
+
+msgid "Enter username:"
+msgstr "输入用户名:"
+
+msgid "Expert"
+msgstr "高级"
+
+msgid "FSTAB (mount at boot)"
+msgstr "fstab 挂载 (添加到启动 )"
+
+msgid "Finished restarting your network"
+msgstr "挂载完成重新启动网络"
+
+msgid "IP Address"
+msgstr "IP地址"
+
+msgid "IP:"
+msgstr "IP:"
+
+msgid "Local share name"
+msgstr "本地共享名 "
+
+msgid "Manage network shares"
+msgstr "管理网络共享 "
+
+msgid "Manage your network shares..."
+msgstr "管理您的网络共享..."
+
+msgid "Mount Again"
+msgstr "再次挂载"
+
+msgid "Mount Manager"
+msgstr "挂载管理"
+
+msgid "Mount Viewer"
+msgstr "挂载查看器"
+
+msgid "Mount again"
+msgstr "再次挂载"
+
+msgid "Mount informations"
+msgstr "挂载信息 "
+
+msgid "Mount manager"
+msgstr "挂载管理"
+
+msgid "Mount options"
+msgstr "挂载选项 "
+
+msgid "Mount type"
+msgstr "挂载类型 "
+
+msgid "Mount using"
+msgstr "挂载使用"
+
+msgid ""
+"Mounted/\n"
+"Unmounted"
+msgstr ""
+"挂载/\n"
+"卸载"
+
+msgid "Mounting network shares..."
+msgstr "挂载网络共..."
+
+msgid "Mountpoints management"
+msgstr "挂载点管理 "
+
+msgid "Mounts editor"
+msgstr "挂载编辑"
+
+msgid "NFS share"
+msgstr "NFS共享"
+
+msgid "Network Browser"
+msgstr "网络浏览器 "
+
+msgid "No network devices found!"
+msgstr "没有找到网络设备!"
+
+msgid "Password"
+msgstr "密码 "
+
+msgid "Please wait for activation of your network mount..."
+msgstr "请稍等,激活您的网络挂载..."
+
+msgid "Please wait while removing your network mount..."
+msgstr "请稍候,删除网络挂载..."
+
+msgid "Please wait while updating your network mount..."
+msgstr "请稍候,更新网络挂载..."
+
+msgid "Please wait while your network is restarting..."
+msgstr "正在重新启动网络,请稍候..."
+
+msgid "Press OK to activate the settings."
+msgstr "按OK键激活设置."
+
+msgid "Press OK to collapse this host"
+msgstr "按确定以删除此主机"
+
+msgid "Press OK to edit selected settings."
+msgstr "按OK键编辑选定的设置."
+
+msgid "Press OK to edit the settings."
+msgstr "按“确定”编辑设置."
+
+msgid "Press OK to expand this host"
+msgstr "按OK键以扩展此主机"
+
+msgid "Press OK to mount this share!"
+msgstr "按OK键挂载此共享!"
+
+msgid "Press OK to mount!"
+msgstr "按OK键挂载"
+
+msgid "Press OK to save settings."
+msgstr "按OK键保存设置."
+
+msgid "Press OK to select."
+msgstr "按OK键选择."
+
+msgid "Re-mount network shares every (in hours)"
+msgstr "重新挂载网络共享（每小时） "
+
+msgid "Really close without saving settings?"
+msgstr "真的关闭而不保存设置？"
+
+msgid "Rescan"
+msgstr "重新扫描 "
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Scan NFS share"
+msgstr "扫描NFS共享 "
+
+msgid "Scan range"
+msgstr "扫描范围 "
+
+msgid "Schedule MountAgain"
+msgstr "再次挂载"
+
+msgid "Schedule a auto remount of your network shares."
+msgstr "将你的网络共享自动重新挂载."
+
+msgid "Search for network shares"
+msgstr "网络共享搜索 "
+
+msgid "Search for network shares..."
+msgstr "搜索网络共享..."
+
+msgid "Searching your network. Please wait..."
+msgstr "搜索您的网络.请稍等..."
+
+msgid "Server IP"
+msgstr "服务器IP "
+
+msgid "Server share"
+msgstr "服务器共享 "
+
+msgid "Setup Mount Again"
+msgstr "设置再次挂载"
+
+msgid "Umstellen"
+msgstr "重置 "
+
+msgid "Use as HDD replacement"
+msgstr "用作硬盘替换"
+
+msgid "User management"
+msgstr "用户管理 "
+
+msgid "Usermanager"
+msgstr "用户管理器"
+
+msgid "Username"
+msgstr "用户名 "
+
+msgid "View, edit or delete mountpoints on your Receiver."
+msgstr "查看,编辑或删除您的接收器的挂载点."
+
+msgid "View, edit or delete usernames and passwords for your network."
+msgstr "查看,编辑或删除您的网络用户名和密码."
+
+msgid ""
+"You have changed the share name!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+"您已更改了共享名称!\n"
+"更新现有的条目并继续吗?\n"
+
+msgid "Your network mount has been activated."
+msgstr "您的网络挂载已被激活."
+
+msgid "Your network mount has been removed."
+msgstr "您的网络挂载已被删除."
+
+msgid "Your network mount has been updated."
+msgstr "您的网络挂载已更新."
+
+msgid "use as HDD replacement"
+msgstr "用作硬盘替换"

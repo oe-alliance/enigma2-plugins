@@ -1,0 +1,1150 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-03 04:58+0200\n"
+"PO-Revision-Date: 2021-07-20 23:04+0800\n"
+"Last-Translator: 孤独之剑 <haotzyy1970@163.com>\n"
+"Language-Team: none\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.7.3\n"
+
+msgid "  Any time"
+msgstr "  任何时间"
+
+msgid " (if services are enabled, bouquets are ignored.)."
+msgstr " (如果启用服务,分组将被忽略.)."
+
+msgid ""
+"%d conflict(s) encountered when trying to add new timers:\n"
+"%s"
+msgstr ""
+"%d 试图添加新的计时器时,会遇到冲突:\n"
+"%s"
+
+msgid ""
+"%d conflict(s) solved with similar timer(s):\n"
+"%s"
+msgstr ""
+"%d类似计时器（的）解决冲突：\n"
+"%s"
+
+msgid "%d.%B %Y"
+msgstr "%d.%B %Y"
+
+msgid "%s: %s at %s"
+msgstr "%s: %s at %s"
+
+msgid "Abort this Wizard."
+msgstr "中止这个向导."
+
+msgid "Activate VPS"
+msgstr "激活VPS"
+
+msgid "Add"
+msgstr "添加"
+
+msgid "Add AutoTimer"
+msgstr "添加自动计时器"
+
+msgid "Add filters"
+msgstr "添加过滤器"
+
+msgid "Add new AutoTimer"
+msgstr "添加新的自动计时器"
+
+msgid "Add services"
+msgstr "添加服务"
+
+msgid "Add similar timer on conflict"
+msgstr "在冲突中添加类似计时器"
+
+msgid "Add timer as disabled on conflict"
+msgstr "在冲突中添加计时器"
+
+msgid "Add zap timer instead of record timer?"
+msgstr "添加活力而不是记录定时器定时器？"
+
+msgid "After event"
+msgstr "事件后"
+
+msgid "All non-repeating timers"
+msgstr "所有非重复定时器"
+
+msgid "Amount of recordings left"
+msgstr "留下的录音量"
+
+msgid "Any service/recording"
+msgstr "任何服务/录音"
+
+msgid "Auto Timer"
+msgstr "自动定时器"
+
+msgid "Auto Timers"
+msgstr "自动定时器"
+
+msgid "AutoTimer"
+msgstr "自动计时器"
+
+msgid "AutoTimer Context Menu"
+msgstr "自动定时器上下文菜单 "
+
+msgid "AutoTimer Editor"
+msgstr "自动计时器编辑"
+
+msgid "AutoTimer FAQ"
+msgstr "自动开关的常见问题"
+
+msgid "AutoTimer Filters"
+msgstr "自动定时开关器"
+
+msgid "AutoTimer Help"
+msgstr "自动计时器帮助"
+
+msgid "AutoTimer Services"
+msgstr "自动计时器服务"
+
+msgid "AutoTimer Settings"
+msgstr "自动定时器设置"
+
+msgid "AutoTimer overview"
+msgstr "自动定时开关概述"
+
+msgid "AutoTimer was added successfully"
+msgstr "自动计时器添加成功"
+
+msgid "AutoTimer was changed successfully"
+msgstr "自动计时器已经更改成功"
+
+msgid "AutoTimer was removed"
+msgstr "自动计时器被删除"
+
+msgid "AutoTimers"
+msgstr "自动定时器"
+
+msgid "Begin of \"after event\" timespan"
+msgstr "从“事后”的时间跨度"
+
+msgid "Begin of timespan"
+msgstr "开始时间"
+
+msgid "Bouquets"
+msgstr "分组"
+
+msgid ""
+"By enabling this events will not be matched if they don't occur on certain "
+"dates."
+msgstr "通过启用此事件将不匹配,如果它们不发生在特定日期."
+
+msgid ""
+"By enabling this you will be notified about similar timers added during "
+"automated polling. There is no intelligence involved, so it might bother you "
+"about the same conflict over and over."
+msgstr ""
+"通过启用此您将被通知在自动轮询期间添加类似的计时器.没有涉及情报,所以它可能会"
+"打扰你的相同的冲突."
+
+msgid ""
+"By enabling this you will be notified about timer conflicts found during "
+"automated polling. There is no intelligence involved, so it might bother you "
+"about the same conflict over and over."
+msgstr ""
+"通过启用此您将被通知在自动轮询期间发现的计时器冲突.没有涉及情报,所以它可能会"
+"打扰你的相同的冲突."
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Change default recording offset?"
+msgstr "更改默认记录偏移？"
+
+msgid "Channel Selection"
+msgstr "频道选择"
+
+msgid "Channels"
+msgstr "频道"
+
+msgid "Check for uniqueness in"
+msgstr "检查的唯一性"
+
+msgid "Choose target folder"
+msgstr "选择目标文件夹"
+
+msgid "Classic"
+msgstr "经典"
+
+msgid "Clone selected timer"
+msgstr "复制选定的定时器"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Close and forget changes"
+msgstr "关闭和忘记变化"
+
+msgid "Close and save changes"
+msgstr "关闭并保存更改"
+
+msgid "Configure AutoTimer behavior"
+msgstr "配置自动开关行为"
+
+msgid "Congratulations"
+msgstr "恭喜你"
+
+msgid "Control recording completely by service"
+msgstr "完全由服务控制记录"
+
+msgid "Create a new AutoTimer."
+msgstr "创建一个新的自动计时器."
+
+msgid "Create a new timer using the classic editor"
+msgstr "创建一个新的自动计时器."
+
+msgid "Create a new timer using the wizard"
+msgstr "使用向导创建一个新的计时器"
+
+msgid "Custom (%s)"
+msgstr "自定义(%s)"
+
+msgid "Custom location"
+msgstr "自定义位置"
+
+msgid "Custom offset"
+msgstr "自定义偏移"
+
+msgid ""
+"Defines where to search for duplicates (only title, short description or "
+"even extended description)"
+msgstr "定义在搜索重复（只读标题,描述或甚至短扩展描述）"
+
+msgid "Delete"
+msgstr "删除"
+
+msgid "Description"
+msgstr "描述"
+
+msgid "EPG encoding"
+msgstr "EPG编码"
+
+msgid "Edit AutoTimer"
+msgstr "编辑自动计时器"
+
+msgid "Edit AutoTimer filters"
+msgstr "编辑自动定时开关器"
+
+msgid "Edit AutoTimer services"
+msgstr "编辑自动计时器服务"
+
+msgid "Edit Timers and scan for new Events"
+msgstr "编辑定时器和新事件的扫描"
+
+msgid "Edit filters"
+msgstr "编辑滤波器"
+
+msgid "Edit new timer defaults"
+msgstr "编辑新的定时器默认值"
+
+msgid "Edit selected AutoTimer"
+msgstr "编辑选定的自动计时器"
+
+msgid "Edit services"
+msgstr "编辑服务"
+
+msgid "Editing"
+msgstr "编辑"
+
+msgid "Editor for new AutoTimers"
+msgstr "新自动计时器的编辑器"
+
+msgid "Enable Filtering"
+msgstr "启用过滤"
+
+msgid "Enable Service Restriction"
+msgstr "启用服务限制"
+
+msgid ""
+"Enable this to be able to access the AutoTimer Overview from within the "
+"extension menu."
+msgstr "使这能够从扩展菜单中访问自动计时器概述."
+
+msgid ""
+"Enable this to be able to access the AutoTimer Overview from within the "
+"plugin browser."
+msgstr "使本可以在插件的浏览器访问自动计时器概述."
+
+msgid "Enabled"
+msgstr "启用"
+
+msgid ""
+"Encoding the channel uses for it's EPG data. You only need to change this if "
+"you're searching for special characters like the german umlauts."
+msgstr ""
+"编码信道使用的EPG数据.你只需要改变这个如果你正在寻找你的特殊字符,如德国的变"
+"音."
+
+msgid "End of \"after event\" timespan"
+msgstr "结束“事后”的时间跨度"
+
+msgid "End of timespan"
+msgstr "结束时间"
+
+msgid "Exact match"
+msgstr "精确匹配"
+
+msgid "Exclude"
+msgstr "排除"
+
+msgid "Execute \"after event\" during timespan"
+msgstr "事件”期间内后执行”"
+
+msgid "FAQ"
+msgstr "常见问题解答"
+
+msgid "Filter"
+msgstr "滤波器"
+
+msgid ""
+"Filters are another powerful tool when matching events. An AutoTimer can be "
+"restricted to certain Weekdays or only match an event with a text inside eg "
+"it's Description.\n"
+"Press BLUE to add a new restriction and YELLOW to remove the selected one."
+msgstr ""
+"过滤器是另一个强大的工具,当匹配事件.自动定时开关可以限制某些平日或只与文中的"
+"描述一个事件,如.\n"
+"按蓝色添加新的限制和黄色来删除选定的一个."
+
+msgid ""
+"First day to match events. No event that begins before this date will be "
+"matched."
+msgstr "匹配事件的第一天.在这个日期之前,没有任何事件将匹配."
+
+msgid ""
+"Found a total of %d matching Events.\n"
+"%d Timer were added and\n"
+"%d modified,\n"
+"%d conflicts encountered,\n"
+"%d similars added."
+msgstr ""
+"发现了总的匹配事件.\n"
+"%d 定时添加和\n"
+"%d 修改,\n"
+"%d 遇到的冲突,\n"
+"%d 相似的添加."
+
+msgid "Frequently asked questions"
+msgstr "常见问题"
+
+msgid "Frequently asked questions about the AutoTimer"
+msgstr "常见的自动计时器的问题"
+
+msgid "Friday"
+msgstr "星期五"
+
+msgid "Generic setup"
+msgstr "通用设置"
+
+msgid "Guess existing timer based on begin/end"
+msgstr "基于现有的定时器一开始/结束"
+
+msgid "Help"
+msgstr "帮助"
+
+msgid "IMDb Search"
+msgstr "IMDB搜索"
+
+msgid ""
+"If a timer conflict occurs, AutoTimer will search outside the timespan for a "
+"similar event and add it."
+msgstr "如果定时器发生冲突,自动计时器将搜索以外的类似事件的时间跨度和添加."
+
+msgid "Import AutoTimer"
+msgstr "导入自动计时器"
+
+msgid "Import existing Timer"
+msgstr "导入现有的定时器"
+
+msgid "Import from EPG"
+msgstr "导入EPG"
+
+msgid "Include"
+msgstr "包括"
+
+msgid ""
+"It's possible to restrict an AutoTimer to certain Services or Bouquets or to "
+"deny specific ones.\n"
+"An Event will only match this AutoTimer if it's on a specific and not denied "
+"Service (inside a Bouquet).\n"
+"Press BLUE to add a new restriction and YELLOW to remove the selected one."
+msgstr ""
+"一种自动计时器限制某些服务或分组或拒绝特定的可能.\n"
+"一个事件只会匹配自动计时器如果它是在一个特定的和不拒绝服务（里面的气味）.\n"
+"按蓝色添加新的限制和黄色来删除选定的一个."
+
+msgid ""
+"Last day to match events. Events have to begin before this date to be "
+"matched."
+msgstr "到最后一天的比赛项目.事件必须在这个日期之前开始匹配."
+
+msgid "Location"
+msgstr "位置"
+
+msgid "Lower bound of timespan."
+msgstr "下界的时间跨度."
+
+msgid ""
+"Lower bound of timespan. Nothing before this time will be matched. Offsets "
+"are not taken into account!"
+msgstr "下界的时间跨度.没有什么之前,这一次将匹配.不考虑偏移量！"
+
+msgid "Match Timespan: %02d:%02d - %02d:%02d"
+msgstr "匹配时间: %02d:%02d - %02d:%02d"
+
+msgid "Match title"
+msgstr "匹配标题"
+
+msgid "Match title: %s"
+msgstr "匹配标题： %s"
+
+msgid "Maximum duration (in m)"
+msgstr "最大持续时间（米）"
+
+msgid ""
+"Maximum event duration to match. If an event is longer than this amount of "
+"time (without offset) it won't be matched."
+msgstr ""
+"最大事件持续时间匹配.如果一个事件的时间比这个时间长（没有偏移量）就不匹配."
+
+msgid "Modify existing timers"
+msgstr "修改现有定时器"
+
+msgid "Monday"
+msgstr "星期一"
+
+msgid "Monthly"
+msgstr "月"
+
+msgid "Never"
+msgstr "绝不"
+
+msgid "New"
+msgstr "新的"
+
+msgid "New Search"
+msgstr "全新搜索"
+
+msgid "No"
+msgstr "否"
+
+msgid "No, remove them."
+msgstr "不,删除."
+
+msgid "None"
+msgstr "无 "
+
+msgid "Not after"
+msgstr "没有经过"
+
+msgid "Not before"
+msgstr "之前没有"
+
+msgid "Number of scheduled recordings left."
+msgstr "预定的录音数量."
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Offset after recording (in m)"
+msgstr "检测到输入为:英语偏置后的记录（米）"
+
+msgid "Offset before recording (in m)"
+msgstr "在记录的偏移量（米）"
+
+msgid "On any service"
+msgstr "在任何服务"
+
+msgid "On same service"
+msgstr "在同一服务"
+
+msgid "Only AutoTimers created during this session"
+msgstr "只有自动定时器创建过程中"
+
+msgid "Only add timer for next x days"
+msgstr "只添加下X天计时器"
+
+msgid "Only match during timespan"
+msgstr "只有在时间跨度匹配"
+
+msgid "Only on Service: %s"
+msgstr "我们的服务：%s"
+
+msgid "Only on Weekday: %s"
+msgstr "检测到输入为:西班牙语只有在周日：%s"
+
+msgid "Only poll while in standby"
+msgstr "只有在待机时才调查"
+
+msgid "Open Context Menu"
+msgstr "打开上下文菜单"
+
+msgid "Please provide a Text to match"
+msgstr "请提供文本以匹配"
+
+msgid "Poll Interval (in mins)"
+msgstr "调查时间（分钟）"
+
+msgid "Poll automatically"
+msgstr "自动调查"
+
+msgid ""
+"Power state to change to after recordings. Select \"standard\" to not change "
+"the default behavior of enigma2 or values changed by yourself."
+msgstr ""
+"功率状态改变后的录音.选择“标准”,以不改变默认的行为或价值观改变自己enigma2."
+
+msgid "Preview"
+msgstr "预览"
+
+msgid "Preview AutoTimer"
+msgstr "预览自动计时器"
+
+msgid ""
+"Question: I found a problem with the AutoTimer, can you fix it?/nAnswer: "
+"First try the AutoTimer version in a recent (experimental) Image to see if "
+"the problem was fixed. Then read the Help again and the upcoming FAQs to "
+"make sure that this is actually a problem and not expected behavior./nIf you "
+"still think there is something wrong with the AutoTimer, please visit http://"
+"www.dream-multimedia-tv.de/board and post your problem there./n/nQ: The "
+"plugin only adds timers when leaving the configuration, not automatically. "
+"What can I do?/nA: From the Overview press MENU and enter the 'Setup'. In "
+"this screen enable 'Poll automatically' and you should be good to go."
+msgstr ""
+"问：我发现与自动计时器的一个问题,你能修吗？/n答：首先尝试自动计时器版本在最近"
+"的（实验）图像看问题是固定的.然后读的帮助并确保这是一个问题而不是行为预期即将"
+"到来的问题.如果你还是觉得有什么不对的自动开关,请访问http://www.dream-"
+"multimedia-tv.de/board和张贴您的问题.如果你还是觉得有什么不对的自动开关,请访"
+"问http://www.dream-multimedia-tv.de/board和张贴您的问题./n/n问：该插件只会增"
+"加配置时,不会自动添加计时器.我能做什么？/n从“概述”菜单中输入“安装”.在这个屏幕"
+"上启用“自动投票”,你应该是好的."
+
+msgid ""
+"Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: "
+"Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: "
+"The show I'm trying to record contains umlauts in its title. AutoTimer does "
+"not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For "
+"german stations 'UTF-8' should be selected./n/nQ: I seem to be unable to "
+"record two subsequent events. There is only a single timer created that "
+"spans (part of) both events./nA: From the Overview press MENU and enter the "
+"'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
+msgstr ""
+"问：我的“新闻”不记录的晚新闻自动计时器./ nanswer：检查“搜索型”和“严”搜索为给"
+"定的自动计时器./n/n问：显示我想记录包含在标题的变音.自动计时器不找到它./n答："
+"检查“EPG编码为给定的自动计时器.德国站使用应选择./n/n问：我似乎无法记录下2个随"
+"后发生的事件.只有一个定时器创建的时间跨度（一部分）这两个事件./n从“概述”菜单"
+"中输入“安装”.在这个屏幕上禁用“猜测现有计时器基于开始/结束”."
+
+msgid ""
+"Question: You keep talking about help being provided for each parameter. I'm "
+"unable to read it (in part or in full)./nAnswer: Try using the default skin "
+"and if it works ask the creator of your regular skin. If it still does not "
+"work your image might not provide the actual default skin so contact the "
+"creator of your image."
+msgstr ""
+"问题：你一直在谈论关于每个参数的帮助.我不能读它（在部分或全部）./n答：尝试使"
+"用默认的皮肤,如果它的作品问你的正常皮肤的创造者.如果它仍然不工作你的形象可能"
+"不会提供实际的默认皮肤,所以联系你的形象的创造者."
+
+msgid "Really close without saving settings?"
+msgstr "真的关闭不保存设置？"
+
+msgid "Record a maximum of x times"
+msgstr "记录最大X次"
+
+msgid "Record on"
+msgstr "记录"
+
+msgid "Remove selected AutoTimer"
+msgstr "删除选定的自动计时器"
+
+msgid "Require description to be unique"
+msgstr "需要描述的是独特的"
+
+msgid "Reset count"
+msgstr "重置计数"
+
+msgid "Restrict \"after event\" to a certain timespan?"
+msgstr "限制“事后”到一定的时间？"
+
+msgid ""
+"Restrict autotimer to bouquets.\n"
+"Use the blue key to edit the bouquet filter."
+msgstr ""
+"将自动定时器限制为分组.\n"
+"使用蓝色键编辑分组滤波器."
+
+msgid ""
+"Restrict autotimer to specific days.\n"
+"Use the yellow key to edit the day filter."
+msgstr ""
+"将自动定时器限制为特定日期.\n"
+"使用黄色键编辑日滤波器."
+
+msgid ""
+"Restrict autotimer to specific services, channels.\n"
+"Use the blue key to edit the service filter."
+msgstr ""
+"限制自动计时器到特定的服务频道.\n"
+"使用蓝色键编辑服务滤波器 ."
+
+msgid "Restrict to days"
+msgstr "限制天数"
+
+msgid "Restrict to events on certain dates"
+msgstr "限制在特定日期的事件"
+
+msgid "Restrict to specific bouquets"
+msgstr "限制特定分组"
+
+msgid "Restrict to specific services"
+msgstr "限制特定频道"
+
+msgid "Saturday"
+msgstr "星期六"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Search strictness"
+msgstr "搜索信息"
+
+msgid "Search type"
+msgstr "搜索类型"
+
+msgid ""
+"Select \"exact match\" to enforce \"Match title\" to match exactly, "
+"\"partial match\" if you only want to search for a part of the event title "
+"or \"description match\" if you only want to search for a part of the event "
+"description."
+msgstr ""
+"如果只想搜索事件标题的一部分,请选择'精确匹配'强制'匹配标题'精确匹配, 如果只想"
+"搜索事件描述的一部分,请选择'部分匹配'."
+
+msgid "Select a timer to import"
+msgstr "选择一个计时器导入"
+
+msgid "Select bouquet to record on"
+msgstr "选择一个分组来记录"
+
+msgid "Select channel to record on"
+msgstr "选择频道记录"
+
+msgid "Select the location to save the recording to."
+msgstr "选择要保存记录的位置."
+
+msgid "Select type of Filter"
+msgstr "选择过滤器类型"
+
+msgid "Select whether or not you want to enforce case correctness."
+msgstr "选择是否要执行正确的案例."
+
+msgid "Set End Time"
+msgstr "设置结束时间"
+
+msgid ""
+"Set an end time for the timer. If you do, the timespan of the event might be "
+"blocked for recordings."
+msgstr "设置定时器的结束时间.如果你这样做,事件的时间跨度可能被录音."
+
+msgid "Set maximum duration"
+msgstr "设置最大持续时间"
+
+msgid "Set this NO to disable this AutoTimer."
+msgstr "设置这个没有关闭这个自动计时器."
+
+msgid ""
+"Set timer type: zap, simple record, zap+record (always zap to service before "
+"start record)."
+msgstr "设置计时器类型:ZAP,简单记录,ZAP+记录(在开始录制之前总是服务于ZAP)."
+
+msgid "Setup"
+msgstr "安装程序"
+
+msgid "Should this AutoTimer be restricted to a timespan?"
+msgstr "这应该自动计时器被限制在一个时间？"
+
+msgid "Should this AutoTimer only match up to a certain event duration?"
+msgstr "这应该自动计时器只匹配到一个特定的事件的持续时间？"
+
+msgid ""
+"Should timers created by this AutoTimer be recorded to a custom location?"
+msgstr "该定时器由这个自动计时器被记录到一个自定义的位置吗？"
+
+msgid "Show in extension menu"
+msgstr "显示在扩展菜单"
+
+msgid "Show in plugin browser"
+msgstr "显示插件浏览器"
+
+msgid "Show notification on conflicts"
+msgstr "显示冲突通知"
+
+msgid "Show notification on similars"
+msgstr "通知上显示相似"
+
+msgid "Sort AutoTimer"
+msgstr "排序自动计时器"
+
+msgid "Sort Time"
+msgstr "排序时间"
+
+msgid "Sunday"
+msgstr "星期日"
+
+msgid "Support \"Fast Scan\"?"
+msgstr "支持 \"快速扫描\"?"
+
+msgid "Tags"
+msgstr "标签"
+
+msgid "Tags the Timer/Recording will have."
+msgstr "标签将定时器/录制"
+
+msgid ""
+"Thank you for using the wizard. Your new AutoTimer has been added to the "
+"List.\n"
+"Please press OK to continue."
+msgstr ""
+"感谢您使用该向导.你的新的自动计时器已被添加到列表中.\n"
+"请按“确定”继续."
+
+msgid "The 'Overview'"
+msgstr "“概述”"
+
+msgid ""
+"The AutoTimer overview is the standard entry point to this plugin./n/nIf "
+"AutoTimers are configured you can choose them from a list to change them (OK "
+"button on your remove) or remove them (YELLOW button on your remote)./nNew "
+"Timers can be added by pressing the BLUE button and the control menu can be "
+"opened using the MENU button./n/nWhen leaving the plugin using the GREEN "
+"button it will search the EPG for matching events ONCE. To configure a "
+"regular search interval of the plugin to search for events open the control "
+"menu and enter the plugin setup."
+msgstr ""
+"自动计时器概述是标准的切入点这个插件./n/n如果autotimers配置,你可以选择从一个"
+"列表来改变他们（你的删除确定按钮）或删除（黄色的遥控器上的按钮）./n可按“蓝”按"
+"钮添加新的计时器,并且可以使用菜单按钮打开控制菜单./n/n当离开插件使用绿色按钮,"
+"它会搜索EPG匹配事件一旦.要配置一个普通的搜索间隔,搜索事件打开控制菜单,进入插"
+"件设置."
+
+msgid "The Book of John Gray"
+msgstr "匹配属性是强制的."
+
+msgid ""
+"The Timer will not be added to the List.\n"
+"Please press OK to close this Wizard."
+msgstr ""
+"计时器将不被添加到列表中.\n"
+"请按“确定”以关闭该向导."
+
+msgid ""
+"The Timespan of an AutoTimer is the first 'advanced' attribute. If a "
+"timespan is specified an event will only match this AutoTimer if it lies "
+"inside of this timespan."
+msgstr ""
+"一个自动计时器的时间是第一个高级属性.如果一个TimeSpan指定事件只会匹配自动计时"
+"器如果藏在这个时间跨度."
+
+msgid ""
+"The control menu hides less frequently used options of the plugin, including "
+"the configuration and default settings for new AutoTimers./n/nWhile you can "
+"just open the menu and take a look for yourself, let's go through the "
+"available options:/n - Help:/n   What you are looking at right now/n - "
+"Preview:/n   Simulate EPG search, helps finding errors in your setup./n - "
+"Import existing Timer:/n   Create a new AutoTimer based on an existing "
+"regular timer./n - Import from EPG:/n   Create an AutoTimer based on an EPG "
+"event./n - Setup:/n   Generic configuration of the plugin./n - Edit new "
+"timer defaults:/n   Configure default values for new AutoTimers./n - Create "
+"a new timer using the wizard/classic editor:/n   Use the non-default editor "
+"to create a new AutoTimer."
+msgstr ""
+"控制菜单隐藏不经常使用的插件的选项,包括新的自动定时器的配置和默认设置./n/n当"
+"你打开菜单,自己去看一看,让我们去通过可用的选项：/n-帮助：/n  你现在正在看的是"
+"什么/n -预览：/n  模拟EPG搜索,帮助您设置发现错误./n - 导入现有计时器：/n  创"
+"建一个基于现有的定时自动开关的新./n -导入EPG：:/n  创建基于EPG的事件自动定时"
+"开关./n - 安装程序/n   插件的一般配置./n -编辑新的定时器默认值：/n  配置新的"
+"自动计时器的默认值./n - 使用向导/经典编辑器创建一个新的计时器：/n  使用非默认"
+"的编辑器来创建一个新的自动计时器."
+
+msgid ""
+"The counter can automatically be reset to the limit at certain intervals."
+msgstr "该计数器可以在特定的时间间隔自动重置为限制."
+
+msgid ""
+"The editor to be used for new AutoTimers. This can either be the Wizard or "
+"the classic editor."
+msgstr "用于新的自动计时器的编辑器.这可以是向导或经典的编辑器."
+
+msgid "The match attribute is mandatory."
+msgstr "匹配属性是强制的."
+
+msgid ""
+"This FAQ is supposed to help everyone unwilling to help themselves by "
+"reading all the provided help available, and those who did not find a "
+"solution to their problems within the provided documentation./n/nTo make "
+"these hints a little easier to read, they are split up on multiple pages. "
+"You can go to the next page using the BLUE button on your remote control and "
+"back using the YELLOW one. Pressing the RED button or EXIT will close the "
+"FAQ."
+msgstr ""
+"This FAQ is supposed to help everyone unwilling to help themselves by "
+"reading all the 这个问题应该是帮助每个人都不愿意帮助自己通过阅读所有提供的帮"
+"助,和那些没有找到问题的解决方案在提供的文件./n/n为了使这些提示更容易阅读,他们"
+"被分割在多页.你可以去下一个页面使用蓝色按钮在你的遥控器和背面使用黄色的.按下"
+"红色按钮,将关闭或退出的问题."
+
+msgid ""
+"This allows you to apply other filters.\n"
+"Use the yellow key to edit other filters."
+msgstr ""
+"这允许您应用其他筛选器.\n"
+"使用黄色键编辑其他筛选器."
+
+msgid ""
+"This help screen is supposed to give you a quick look at everything the "
+"AutoTimer has to offer./nYou can abort it at any time by pressing the RED or "
+"EXIT button on your remote control or bring it up at a later point by "
+"selecting it from the control menu using the MENU button from the regular "
+"entry point of the plugin (more on that later)./n/n/nBut you really should "
+"consider to take the few minutes it takes to read these help pages."
+msgstr ""
+"这帮助屏幕应该是给你一切的自动计时器所提供的快速查找./n您可以随时中止它在您的"
+"遥控器上的红色或退出按钮,或在稍后的一个点,通过选择它从控制菜单中使用的菜单按"
+"钮,从常规入口点的插件（更多的是稍后）./n/n/n你真的应该考虑采取几分钟的时间来"
+"阅读这些帮助页面."
+
+msgid ""
+"This is a name you can give the AutoTimer. It will be shown in the Overview "
+"and the Preview."
+msgstr "这是一个名字,你可以把自动计时器.它将显示在概述和预览."
+
+msgid ""
+"This is mostly a matter of taste./nThe Wizard provides you with a reduced "
+"set of options and presents them in smaller sets at a time. It is mostly "
+"aimed at users not very experienced with this plugin or the 'expert' level "
+"features of enigma2./n/nYou can check out the 'classic' editor by opening an "
+"existing timer from the overview and if you prefer this view over the wizard "
+"you can change the default editor in the setup dialog."
+msgstr ""
+"这是一个品味问题./该向导为您提供了一个简化的设置选项,并介绍了他们在一次小集."
+"它主要是针对不太熟悉这个插件或“专家”级功能的Enigma2用户./n/n你可以通过打开一"
+"个现有的计时器来检查“经典”编辑器,如果你更喜欢这个视图,你可以在设置对话框中更"
+"改默认编辑器."
+
+msgid ""
+"This is the delay in minutes that the AutoTimer will wait after a search to "
+"search the EPG again."
+msgstr "这是在几分钟的时间,自动计时器将等待搜索又搜索EPG在延迟."
+
+msgid ""
+"This is what will be looked for in event titles. Note that looking for e.g. "
+"german umlauts can be tricky as you have to know the encoding the channel "
+"uses."
+msgstr ""
+"这是什么将在事件标题中寻找.注意寻找德语变音可能会非常棘手,你需要知道的信道编"
+"码采用."
+
+msgid ""
+"This screen should be pretty straight-forward. If the option name does not "
+"give its meaning away there should be an explanation for each of them when "
+"you select them. If there is no visible explanation this is most likely a "
+"skin issue and please try if the default skin fixes the issue./n/nA lot of "
+"effort has been put in making the parameters as easy to understand as "
+"possible, so give reading them a try ;-)."
+msgstr ""
+"这一幕应该是很漂亮的.如果选项名称没有给出它的意思,当您选择时,应该有一个解释."
+"如果没有任何明显的解释,这很可能是一个皮肤问题,请尝试,如果默认的皮肤修复的问"
+"题./或大量的努力已经把参数尽可能容易理解,所以给读他们一试；-）."
+
+msgid "This setting controls the behavior when a timer matches a found event."
+msgstr "此设置控制计时器匹配某个事件时的行为."
+
+msgid ""
+"This toggles the behavior on timer conflicts. If an AutoTimer matches an "
+"event that conflicts with an existing timer it will not ignore this event "
+"but add it disabled."
+msgstr ""
+"这将触发定时器冲突的行为.如果一个自动计时器比赛事件与现有定时器不会忽视这一事"
+"件,但它添加禁用冲突."
+
+msgid "Thursday"
+msgstr "星期四"
+
+msgid "Time in minutes to append to recording."
+msgstr "时间在几分钟内附加到记录."
+
+msgid "Time in minutes to prepend to recording."
+msgstr "时间在分钟前记录."
+
+msgid "Timer type"
+msgstr "计时器类型"
+
+msgid "Title"
+msgstr "标题"
+
+msgid "Title and Short description"
+msgstr "标题和简短描述"
+
+msgid "Title and all descriptions"
+msgstr "标题和所有的描述"
+
+msgid "Tuesday"
+msgstr "星期二"
+
+msgid ""
+"Unless this is enabled AutoTimer will NOT automatically look for events "
+"matching your AutoTimers but only when you leave the GUI with the green "
+"button."
+msgstr ""
+"除非这是启用自动计时器会自动寻找匹配你的自动计时器事件,但只有当你离开桂与绿色"
+"按钮."
+
+msgid "Upper bound of timespan."
+msgstr "上界的时间跨度."
+
+msgid ""
+"Upper bound of timespan. Nothing after this time will be matched. Offsets "
+"are not taken into account!"
+msgstr "上界的时间跨度.这段时间之后没有什么可以匹配.不考虑偏移量！"
+
+msgid "Use a custom location"
+msgstr "使用自定义位置"
+
+msgid "Use automatic selection of alternates."
+msgstr "使用时自动选择."
+
+msgid "Use other filters"
+msgstr "使用其他滤波器"
+
+msgid "Version:\n"
+msgstr "版本:\n"
+
+msgid "Wed"
+msgstr "周三"
+
+msgid "Wednesday"
+msgstr "星期三"
+
+msgid "Weekday"
+msgstr "周日"
+
+msgid "Weekend"
+msgstr "周末"
+
+msgid "Weekly (Monday)"
+msgstr "每周（星期一）"
+
+msgid "Weekly (Sunday)"
+msgstr "每周（星期日）"
+
+msgid "Welcome to the AutoTimer-Plugin"
+msgstr "欢迎来到自动计时器插件"
+
+msgid ""
+"Welcome.\n"
+"\n"
+"This Wizard will help you to create a new AutoTimer by providing "
+"descriptions for common settings."
+msgstr ""
+"欢迎光临\n"
+"\n"
+"此向导将帮助您通过提供常用设置描述创建一个新的自动计时器."
+
+msgid "What is this 'control menu' you keep talking about?"
+msgstr "你一直在说什么“控制菜单”？"
+
+msgid ""
+"When supporting \"Fast Scan\" the service type is ignored. You don't need to "
+"enable this unless your Image supports \"Fast Scan\" and you are using it."
+msgstr ""
+"当支持 \"快速扫描\" 被忽略的服务类型.除非你的图像支持,你不需要启用这个\"快速"
+"扫描\" 你也在使用它."
+
+msgid ""
+"When this is enabled AutoTimer will ONLY check for new events whilst in "
+"stanadby."
+msgstr "当启用自动计时器只会检查新的事件,而在stanadby."
+
+msgid ""
+"When this option is enabled the AutoTimer won't match events where another "
+"timer with the same description already exists in the timer list."
+msgstr ""
+"当启用此选项的自动计时器不匹配的事件在另一个定时器在定时器列表已经存在相同的"
+"描述."
+
+msgid ""
+"With this option enabled the channel to record will be selected automaticliy "
+"using your list of alternates."
+msgstr "如果启用将自动从频道接收选择."
+
+msgid ""
+"With this option you can restrict the AutoTimer to a certain amount of "
+"scheduled recordings. Set this to 0 to disable this functionality."
+msgstr "使用此选项可以限制自动计时器一定数量的预定记录.设置为0禁用此功能."
+
+msgid "Wizard"
+msgstr "向导"
+
+msgid "Wizard or Classic Editor?"
+msgstr "向导还是经典编辑器？"
+
+msgid "Yes"
+msgstr "是"
+
+msgid "Yes, keep them."
+msgstr "是的,保持"
+
+msgid ""
+"You can control for how many days in the future timers are added. Set this "
+"to 0 to disable this feature."
+msgstr "你可以控制未来的定时器有多少天被添加.设置此为0以禁用此功能."
+
+msgid ""
+"You can set the basic properties of an AutoTimer here.\n"
+"While 'Name' is just a human-readable name displayed in the Overview, 'Match "
+"in title' is what is looked for in the EPG."
+msgstr ""
+"你可以在这里设置一个自动开关的基本性质.\n"
+"而“名”只是一个人类可读的名称显示在概述,在标题的匹配是寻找在EPG."
+
+msgid ""
+"You did not provide a valid 'Match in title' Attribute for your new "
+"AutoTimer.\n"
+"As this is a mandatory Attribute you cannot continue without doing so."
+msgstr ""
+"你没有为你的新的自动计时器在标题属性提供一个有效的匹配.\n"
+"因为这是一个强制性的属性,你不能继续这样做."
+
+msgid ""
+"You entered \"%s\" as Text to match.\n"
+"Do you want to remove trailing whitespaces?"
+msgstr ""
+"你进入 \"%s\" 作为文本匹配.\n"
+"你想去掉尾部空格？"
+
+msgid ""
+"You now know almost everything there is to know about the AutoTimer-Plugin./"
+"n/nAs a final hint I can't stress how important it is to take a look at the "
+"help texts that are shown in the setup dialogs as they cover the most "
+"frequently asked questions. Surprisingly even after the hints were added ;-)."
+msgstr ""
+"你现在知道的一切关于自动计时器插件./n/n最后一点我不能强调必须是在设置对话框显"
+"示为他们盖的最常见问题的帮助文本一看是多么的重要.令人惊讶的是,即使在暗示被添"
+"加；-）."
+
+msgid ""
+"You successfully configured a new AutoTimer. Do you want to add it to the "
+"list?\n"
+"\n"
+"You can go back a step by pressing EXIT on your remote."
+msgstr ""
+"你成功地配置了一个新的自动计时器.你想把它添加到列表中吗？\n"
+"\n"
+"你可以按你的遥控器上的一步一步走."
+
+msgid ""
+"Your 'Match in title' Attribute ends with a Whitespace.\n"
+"Please confirm if this was intentional, if not they will be removed."
+msgstr ""
+"你的“标题”属性匹配结尾空白.\n"
+"请确认这是否是有意的,如果不是他们将被删除."
+
+msgid ""
+"Your config file is not well-formed:\n"
+"%s"
+msgstr ""
+"配置文件格式不完善：\n"
+"%s"
+
+msgid "add AutoTimer"
+msgstr "添加自动计时器"
+
+msgid "add AutoTimer..."
+msgstr "添加自动计时器…"
+
+msgid "auto"
+msgstr "自动"
+
+msgid "autotimers need a match attribute"
+msgstr "自动计时器需要一个匹配属性"
+
+msgid "case-insensitive search"
+msgstr "不区分大小写"
+
+msgid "case-sensitive search"
+msgstr "区分大小写的搜索"
+
+msgid "config changed."
+msgstr "配置改变."
+
+msgid "description match"
+msgstr "描述匹配"
+
+msgid "disable"
+msgstr "禁用"
+
+msgid "disabled"
+msgstr "禁用"
+
+msgid "do nothing"
+msgstr "什么也不做"
+
+msgid "enable"
+msgstr "启用"
+
+msgid "enabled"
+msgstr "启用"
+
+msgid "exact match"
+msgstr "精确匹配"
+
+msgid "go to deep standby"
+msgstr "深度待机"
+
+msgid "go to standby"
+msgstr "进入待机状态"
+
+msgid "in Description"
+msgstr "描述"
+
+msgid "in Shortdescription"
+msgstr "简短描述"
+
+msgid "in Title"
+msgstr "标题"
+
+msgid "mins"
+msgstr "分钟"
+
+msgid "missing parameter \"id\""
+msgstr "缺少参数 \"ID\""
+
+msgid "on Weekday"
+msgstr "周日"
+
+msgid "partial match"
+msgstr "部分匹配"
+
+msgid "record"
+msgstr "记录"
+
+msgid "standard"
+msgstr "标准"
+
+msgid "unable to find timer with id %i"
+msgstr "无法找到带标识的计时器%i"
+
+msgid "zap"
+msgstr "切换"
