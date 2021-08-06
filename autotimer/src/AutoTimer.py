@@ -596,7 +596,7 @@ class AutoTimer:
 						existing.append((name, begin, end, serviceref, timer.name))
 						break
 				elif timer.avoidDuplicateDescription >= 1 and not rtimer.disabled:
-					if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
+					if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc):
 						print("[AutoTimer] We found a timer with the same description, skipping event")	# Brian was here
 						oldExists = True
 						break
