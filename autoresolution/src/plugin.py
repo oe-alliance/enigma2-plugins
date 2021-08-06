@@ -648,7 +648,6 @@ class AutoFrameRate(Screen):
 		self.init = False
 
 	def AutoVideoFramerateChanged(self):
-		print "[AutoFrameRate] got event evFramerateChanged"
 		if usable and config.plugins.autoresolution.mode.value == "auto":
 			if config.av.videoport.value in config.av.videomode:
 				if config.av.videomode[config.av.videoport.value].value in config.av.videorate:
