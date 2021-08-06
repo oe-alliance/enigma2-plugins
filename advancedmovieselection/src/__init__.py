@@ -28,5 +28,5 @@ def _(txt):
 		return gettext.gettext(txt)
 
 
-language.addCallback(localeInit())
+language.addCallback(localeInit)
 # Andy Blackburn: [Translation] end
