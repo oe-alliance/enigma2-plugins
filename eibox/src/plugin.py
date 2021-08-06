@@ -42,7 +42,7 @@ def _(txt):
 		return gettext.gettext(txt)
 
 
-language.addCallback(localeInit())
+language.addCallback(localeInit)
 
 config.eib = ConfigSubsection()
 config.eib.xmlfile = ConfigText(default="design.xml")
