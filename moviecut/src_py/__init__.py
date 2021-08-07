@@ -21,4 +21,4 @@ def _(txt):
 		return gettext.gettext(txt)
 
 
-language.addCallback(localeInit)
+language.addCallback(localeInit())
