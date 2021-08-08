@@ -572,7 +572,7 @@ def MPcallbackFunc(answer):
 			except:
 				pass
 		else:
-				EMsession.open(MessageBox, text=_('MyTube Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
+			EMsession.open(MessageBox, text=_('MyTube Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "INTERNETRADIO":
 		if isPluginInstalled("InternetRadio"):
 			try:
