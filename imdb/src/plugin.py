@@ -267,7 +267,7 @@ class IMDB(Screen, HelpableScreen):
 			self.castmask = [re.compile('<td>\s*<a href=.*?>(?P<actor>.*?)\s*</a>\s*</td>.*?<td class="character">(?P<character>.*?)(?:<a href="#"\s+class="toggle-episodes".*?>(?P<episodes>.*?)</a>.*?)?</td>', re.DOTALL),
 			re.compile('StyledComponents__ActorName.*?>(?P<actor>.*?)</a><div.*?<ul.*?>(?P<character>.*?)</span.*?</ul></div>(?:<a.*?><span><span.*?>(?P<episodes>.*?)</span></span>)?', re.DOTALL)]
 			self.postermask = [re.compile('<div class="poster">.*?<img .*?src=\"(http.*?)\"', re.DOTALL),
-			re.compile('"hero-media__poster"><div.*?<img.*?ipc-image.*?src="(http.*?)"', re.DOTALL)]
+			re.compile('"hero-media__poster".*?><div.*?<img.*?ipc-image.*?src="(http.*?)"', re.DOTALL)]
 
 		self.htmltags = re.compile('<.*?>', re.DOTALL)
 		self.allhtmltags = re.compile('<.*>', re.DOTALL)
