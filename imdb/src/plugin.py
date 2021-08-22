@@ -338,7 +338,7 @@ class IMDB(Screen, HelpableScreen):
 			title = self["menu"].getCurrent()[0]
 			self["statusbar"].setText(_("Re-Query IMDb: %s...") % (title))
 			localfile = "/tmp/imdbquery2.html"
-			fetchurl = "http://imdb.com/title/" + link
+			fetchurl = "https://www.imdb.com/title/" + link
 			print("[IMDB] showDetails() downloading query " + fetchurl + " to " + localfile)
 			download = downloadWithProgress(fetchurl, localfile)
 			download.start().addCallback(self.IMDBquery2).addErrback(self.http_failed)
@@ -596,7 +596,7 @@ class IMDB(Screen, HelpableScreen):
 			if self.eventName:
 				self["statusbar"].setText(_("Query IMDb: %s") % (self.eventName))
 				localfile = "/tmp/imdbquery.html"
-				fetchurl = "http://imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
+				fetchurl = "https://www.imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
 #				print("[IMDB] getIMDB() Downloading Query " + fetchurl + " to " + localfile)
 				download = downloadWithProgress(fetchurl, localfile)
 				download.start().addCallback(self.IMDBquery).addErrback(self.http_failed)
@@ -675,7 +675,7 @@ class IMDB(Screen, HelpableScreen):
 					self["statusbar"].setText(_("Re-Query IMDb: %s...") % (self.resultlist[0][0],))
 					self.eventName = self.resultlist[0][1]
 					localfile = "/tmp/imdbquery.html"
-					fetchurl = "http://imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
+					fetchurl = "https://www.imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
 					download = downloadWithProgress(fetchurl, localfile)
 					download.start().addCallback(self.IMDBquery).addErrback(self.http_failed)
 				elif Len > 1:
@@ -691,7 +691,7 @@ class IMDB(Screen, HelpableScreen):
 					self["statusbar"].setText(_("Re-Query IMDb: %s...") % (self.eventName))
 					# event_quoted = quoteEventName(self.eventName)
 					localfile = "/tmp/imdbquery.html"
-					fetchurl = "http://imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
+					fetchurl = "https://www.imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
 					download = downloadWithProgress(fetchurl, localfile)
 					download.start().addCallback(self.IMDBquery).addErrback(self.http_failed)
 				else:
