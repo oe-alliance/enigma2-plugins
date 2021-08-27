@@ -844,8 +844,12 @@ class IMDB(Screen, HelpableScreen):
 									extraspace = ''
 							Extratext += extraspace
 							if category == "outline":
+								outline = extrainfos.group("outline")
+								outline = outline and self.htmltags.sub('', outline) or ''
+								if outline.endswith("... Read all"):
+									outline = outline[:-12]
 								if ("Add a Plot" in extrainfos.group(category) or
-										self.htmltags.sub('', extrainfos.group("synopsis")).startswith(self.htmltags.sub('', extrainfos.group("outline")))):
+										self.htmltags.sub('', extrainfos.group("synopsis")).startswith(outline)):
 									Extratext = Extratext[:-len(extraspace)]
 									continue
 								Extratext += _("Plot Outline")
