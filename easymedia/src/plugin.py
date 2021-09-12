@@ -52,7 +52,7 @@ PluginsDir = resolveFilename(SCOPE_PLUGINS) + 'Extensions/'	# /usr/lib/enigma2/p
 
 
 config.plugins.easyMedia = ConfigSubsection()
-config.plugins.easyMedia.music = ConfigSelection(default="mediaplayer", choices=[("no", _("Disabled")), ("mediaplayer", _("MediaPlayer")), ("merlinmp", _("MerlinMusicPlayer"))])
+config.plugins.easyMedia.music = ConfigSelection(default="mediaplayer", choices=[("no", _("Disabled")), ("mediaplayer", _("MediaPlayer")), ("merlinmp", _("MerlinMusicPlayer")), ("shoutcast", _("SHOUTcast"))])
 config.plugins.easyMedia.files = ConfigSelection(default="filecommander", choices=[("no", _("Disabled")), ("filebrowser", _("Filebrowser")), ("filecommander", _("FileCommander")), ("dreamexplorer", _("DreamExplorer")), ("tuxcom", _("TuxCom"))])
 config.plugins.easyMedia.videodb = ConfigSelection(default="no", choices=[("no", _("Disabled")), ("yes", _("Enabled"))])
 config.plugins.easyMedia.bookmarks = ConfigSelection(default="no", choices=[("no", _("Disabled")), ("yes", _("Enabled"))])
@@ -254,7 +254,6 @@ class AddPlug(Screen):
 	def save(self):
 		plugin = self["pluginlist"].getCurrent()[0]
 		print(plugin)
-		plugin.icon = None
 		if not fileExists(PluginsDir + 'EasyMedia/' + plugin.name + '.plug'):
 			try:
 				outf = open((PluginsDir + 'EasyMedia/' + plugin.name + '.plug'), 'wb')
@@ -572,9 +571,15 @@ def MPcallbackFunc(answer):
 			except:
 				pass
 		else:
-			EMsession.open(MessageBox, text=_('MyTube Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
+				EMsession.open(MessageBox, text=_('MyTube Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "INTERNETRADIO":
-		if isPluginInstalled("InternetRadio"):
+		if isPluginInstalled("SHOUTcast"): # and (config.plugins.easyMedia.music.value == "shoutcast")
+			try:
+				from Plugins.Extensions.SHOUTcast.plugin import SHOUTcastWidget
+				EMsession.open(SHOUTcastWidget)
+			except:
+				pass
+		elif isPluginInstalled("InternetRadio"):
 			try:
 				from Plugins.Extensions.InternetRadio.InternetRadioScreen import InternetRadioScreen
 				EMsession.open(InternetRadioScreen)
@@ -589,6 +594,12 @@ def MPcallbackFunc(answer):
 				EMsession.open(ZDFMediathek)
 			except:
 				pass
+		elif isPluginInstalled("QtHbbtv"):
+#			try:
+			from Plugins.Extensions.QtHbbtv.plugin import HBBTVParser
+			EMsession.open(HBBTVParser)
+#			except:
+#				pass
 		else:
 			EMsession.open(MessageBox, text=_('ZDFmediathek Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "VLC":
