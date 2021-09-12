@@ -31,7 +31,7 @@ from Components.MenuList import MenuList
 from Components.Label import Label
 from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
-from Components.PluginList import *
+from Components.PluginList import PluginList, PluginEntryComponent
 from Components.Sources.StaticText import StaticText
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSelection
 from Tools.Directories import fileExists, pathExists, resolveFilename, SCOPE_PLUGINS
