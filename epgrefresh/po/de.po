@@ -36,7 +36,7 @@ msgstr "Fragen default Ja"
 
 #, python-format
 msgid "AutoTimer failed with error %s"
-msgstr "Parsen des EPGs durch den AutoTimer hat einen Fehler verursacht %s"
+msgstr "Parsen des EPGs durch den AutoTimer hat einen Fehler verursacht: %s"
 
 msgid "Automatically refresh EPG"
 msgstr "Automatisierte EPG Aktualisierung"
@@ -60,7 +60,7 @@ msgid "Close and save changes"
 msgstr "Schließen und Änderungen speichern"
 
 msgid "Congratulations"
-msgstr ""
+msgstr "Gratulation"
 
 msgid "Delay if not in standby (minutes)"
 msgstr "Verzögerung, sofern nicht im Standby (Minuten)"
@@ -69,7 +69,7 @@ msgid "Delete"
 msgstr "Löschen"
 
 msgid "Display more Options"
-msgstr "Mehr Optionen anzeigen"
+msgstr "Mehr Optionen anzeigen?"
 
 msgid "Duration to stay on service (seconds)"
 msgstr "Verbleibe auf Sender für (Sekunden)"
@@ -91,29 +91,29 @@ msgstr ""
 "Soll AutoTimer nach neuen Ereignissen suchen?"
 
 msgid "EPG refresh started in background."
-msgstr "EPG Aktualisierung wurde im Hintergrund gestartet"
+msgstr "EPG Aktualisierung wurde im Hintergrund gestartet."
 
 msgid "EPG refresh starts scanning channels."
 msgstr "EPG Aktualisierung startet den Kanalscan."
 
 msgid "EPG-Refresh_Pending Services"
-msgstr "EPG-Refresh ausstehende Kanäle"
+msgstr "EPGRefresh ausstehende Kanäle"
 
 msgid "EPG-Refresh_Refresh now"
-msgstr "EPG-Refresh jetzt aktualisieren"
+msgstr "EPGRefresh jetzt aktualisieren"
 
 msgid "EPG-Refresh_SetUp"
-msgstr "EPG-Refresh Konfiguration"
+msgstr "EPGRefresh Konfiguration"
 
 msgid "EPG-Refresh_Stop Refresh"
-msgstr "EPG-Refresh Aktualisierung stoppen"
+msgstr "EPGRefresh Aktualisierung stoppen"
 
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr "EPGRefresh"
 
 #, fuzzy
 msgid "EPGRefresh"
-msgstr "EPGRefresh Aktualisierung stoppen"
+msgstr "EPGRefresh"
 
 msgid "EPGRefresh Configuration"
 msgstr "EPGRefresh Konfiguration"
@@ -126,7 +126,7 @@ msgstr "EPGRefresh Funktionen"
 
 #, fuzzy
 msgid "EPGRefresh Help"
-msgstr "EPGRefresh Aktualisierung stoppen"
+msgstr "EPGRefresh Hilfe"
 
 msgid "EPGRefresh Services"
 msgstr "EPGRefresh Sender"
@@ -142,10 +142,10 @@ msgstr "Bearbeite"
 
 #, fuzzy
 msgid "Editing the service list"
-msgstr "Kanäle"
+msgstr "Kanäle bearbeiten"
 
 msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
-msgstr "Aktivieren Sie diese Option, wenn vor der EPG-Aktualisierung, die kompletten EPG-Daten gelöscht werden sollen."
+msgstr "Sollen vor der EPG-Aktualisierung die kompletten EPG-Daten gelöscht werden?"
 
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr "Soll die Konfiguration direkt aus dem Erweiterungsmenü heraus aufgerufen werden können?"
@@ -184,10 +184,10 @@ msgid "If the receiver currently isn't in standby, this is the duration which EP
 msgstr "Ist der Receiver zum Startzeitpunkt des Starts nicht im Standby, pausiert das Plugin für die hier eingetragene Zeit, bevor es einen erneuten Versuch startet."
 
 msgid "If this is enabled, the plugin will wake up the receiver from standby if possible. Otherwise it needs to be switched on already."
-msgstr "Bei aktivierter Option weckt das Plugin den Receiver aus dem Standby auf - sofern möglich. Andernfalls muss die Box schon eingeschaltet sein."
+msgstr "Bei aktivierter Option weckt das Plugin den Receiver aus dem Deep-Standby auf - sofern möglich. Andernfalls muss er schon eingeschaltet sein."
 
 msgid "If you want to refresh the EPG in background, you can choose the method which best suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture."
-msgstr "Wählen Sie hier die Methode für die Aktualisierung im Hintergrund, die am besten Ihren Anforderungen entspricht: versteckt, Pseudoaufnahme oder normales Bild im Bild."
+msgstr "Wählen Sie hier die Methode für die Aktualisierung im Hintergrund, die am besten Ihren Anforderungen entspricht: Versteckt, Pseudoaufnahme oder normales Bild im Bild."
 
 msgid "Inherit Services from AutoTimer"
 msgstr "Zusätzlich Sender vom AutoTimer verwenden"
@@ -242,7 +242,7 @@ msgid "Refresh EPG using"
 msgstr "Aktualisiere unter Verwendung von"
 
 msgid "Refresh now"
-msgstr " Jetzt aktualisieren"
+msgstr "Jetzt aktualisieren"
 
 msgid "Refreshing"
 msgstr "Aktualisiere"
@@ -300,7 +300,7 @@ msgstr "Laufende Aktualisierung stoppen"
 
 #, fuzzy
 msgid "The configuration menu"
-msgstr "EPGRefresh Konfiguration Hilfe"
+msgstr "EPGRefresh Konfiguration"
 
 msgid "There is still a refresh running. The Operation isn't allowed at this moment."
 msgstr "Zurzeit läuft gerade eine Aktualisierung. Die Aktion ist im Moment nicht erlaubt."
@@ -328,7 +328,7 @@ msgid "This setting controls whether or not an informational message will be sho
 msgstr "Soll zum Start und Ende der Aktualisierung eine Informationsmeldung angezeigt werden?"
 
 msgid "This setting controls whether or not the refresh will be initiated even though the receiver is active (either not in standby or currently recording)."
-msgstr "Aktualisierung auch starten, wenn die Box gerade in Verwendung ist (also nicht im Standby oder bei aktiver Aufnahme)?"
+msgstr "Aktualisierung auch starten, wenn der Receiver gerade in Verwendung ist (also nicht im (Deep) Standby oder bei aktiver Aufnahme)?"
 
 msgid "This setting controls whether the receiver should be set to standby after refresh is completed."
 msgstr "Soll der Receiver nach vollständiger Aktualisierung in den Standby versetzt werden?"
@@ -341,7 +341,7 @@ msgstr ""
 "Wollen Sie die GUI jetzt neu starten?"
 
 msgid "Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu."
-msgstr "Solange diese Option nicht aktiviert ist, wird EPGRefresh nicht automatisch laufen, sondern muss explizit mittels gelbem Button hier im Menü gestartet werden."
+msgstr "Solange diese Option nicht aktiviert ist, wird EPGRefresh nicht automatisch laufen, sondern muss explizit mit der Taste GELB gestartet werden."
 
 msgid "Version"
 msgstr "Version"
@@ -351,7 +351,7 @@ msgstr "Aus dem Standby hochfahren"
 
 #, fuzzy
 msgid "Welcome to EPGRefresh"
-msgstr "Zu EPGRefresh hinzufügen"
+msgstr "Wilkommen bei EPGRefresh"
 
 msgid ""
 "While the screen does not immediately show it, it does have a lot to offer. The topmost line allows you to choose between the editor for channels and bouquets and the following lines contain the channels/bouquets you chose to refresh.\n"
