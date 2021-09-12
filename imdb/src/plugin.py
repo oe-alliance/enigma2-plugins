@@ -267,7 +267,7 @@ class IMDB(Screen, HelpableScreen):
 			self.castmask = [re.compile('<td>\s*<a href=.*?>(?P<actor>.*?)\s*</a>\s*</td>.*?<td class="character">(?P<character>.*?)(?:<a href="#"\s+class="toggle-episodes".*?>(?P<episodes>.*?)</a>.*?)?</td>', re.DOTALL),
 			re.compile('StyledComponents__ActorName.*?>(?P<actor>.*?)</a><div.*?<ul.*?>(?P<character>.*?)</span.*?</ul></div>(?:<a.*?><span><span.*?>(?P<episodes>.*?)</span></span>)?', re.DOTALL)]
 			self.postermask = [re.compile('<div class="poster">.*?<img .*?src=\"(http.*?)\"', re.DOTALL),
-			re.compile('"hero-media__poster"><div.*?<img.*?ipc-image.*?src="(http.*?)"', re.DOTALL)]
+			re.compile('"hero-media__poster".*?><div.*?<img.*?ipc-image.*?src="(http.*?)"', re.DOTALL)]
 
 		self.htmltags = re.compile('<.*?>', re.DOTALL)
 		self.allhtmltags = re.compile('<.*>', re.DOTALL)
@@ -338,7 +338,7 @@ class IMDB(Screen, HelpableScreen):
 			title = self["menu"].getCurrent()[0]
 			self["statusbar"].setText(_("Re-Query IMDb: %s...") % (title))
 			localfile = "/tmp/imdbquery2.html"
-			fetchurl = "http://imdb.com/title/" + link
+			fetchurl = "https://www.imdb.com/title/" + link
 			print("[IMDB] showDetails() downloading query " + fetchurl + " to " + localfile)
 			download = downloadWithProgress(fetchurl, localfile)
 			download.start().addCallback(self.IMDBquery2).addErrback(self.http_failed)
@@ -596,7 +596,7 @@ class IMDB(Screen, HelpableScreen):
 			if self.eventName:
 				self["statusbar"].setText(_("Query IMDb: %s") % (self.eventName))
 				localfile = "/tmp/imdbquery.html"
-				fetchurl = "http://imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
+				fetchurl = "https://www.imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
 #				print("[IMDB] getIMDB() Downloading Query " + fetchurl + " to " + localfile)
 				download = downloadWithProgress(fetchurl, localfile)
 				download.start().addCallback(self.IMDBquery).addErrback(self.http_failed)
@@ -675,7 +675,7 @@ class IMDB(Screen, HelpableScreen):
 					self["statusbar"].setText(_("Re-Query IMDb: %s...") % (self.resultlist[0][0],))
 					self.eventName = self.resultlist[0][1]
 					localfile = "/tmp/imdbquery.html"
-					fetchurl = "http://imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
+					fetchurl = "https://www.imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
 					download = downloadWithProgress(fetchurl, localfile)
 					download.start().addCallback(self.IMDBquery).addErrback(self.http_failed)
 				elif Len > 1:
@@ -691,7 +691,7 @@ class IMDB(Screen, HelpableScreen):
 					self["statusbar"].setText(_("Re-Query IMDb: %s...") % (self.eventName))
 					# event_quoted = quoteEventName(self.eventName)
 					localfile = "/tmp/imdbquery.html"
-					fetchurl = "http://imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
+					fetchurl = "https://www.imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
 					download = downloadWithProgress(fetchurl, localfile)
 					download.start().addCallback(self.IMDBquery).addErrback(self.http_failed)
 				else:
@@ -844,8 +844,12 @@ class IMDB(Screen, HelpableScreen):
 									extraspace = ''
 							Extratext += extraspace
 							if category == "outline":
+								outline = extrainfos.group("outline")
+								outline = outline and self.htmltags.sub('', outline) or ''
+								if outline.endswith("... Read all"):
+									outline = outline[:-12]
 								if ("Add a Plot" in extrainfos.group(category) or
-										self.htmltags.sub('', extrainfos.group("synopsis")).startswith(self.htmltags.sub('', extrainfos.group("outline")))):
+										self.htmltags.sub('', extrainfos.group("synopsis")).startswith(outline)):
 									Extratext = Extratext[:-len(extraspace)]
 									continue
 								Extratext += _("Plot Outline")
