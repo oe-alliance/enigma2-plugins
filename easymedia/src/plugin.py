@@ -19,7 +19,7 @@ from __future__ import print_function
 #######################################################################
 
 
-from __init__ import _
+from . __init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.InfoBarGenerics import InfoBarPlugins
@@ -41,17 +41,19 @@ from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, gFont, getDesktop
 import pickle
 from os import system as os_system
 from os import listdir as os_listdir
+from Tools.Directories import isPluginInstalled, resolveFilename, SCOPE_PLUGINS
 
 
 EMbaseInfoBarPlugins__init__ = None
 EMStartOnlyOneTime = False
 EMsession = None
 InfoBar_instance = None
+PluginsDir = resolveFilename(SCOPE_PLUGINS) + 'Extensions/'	# /usr/lib/enigma2/python/Plugins/
 
 
 config.plugins.easyMedia = ConfigSubsection()
-config.plugins.easyMedia.music = ConfigSelection(default="mediaplayer", choices=[("no", _("Disabled")), ("mediaplayer", _("MediaPlayer")), ("merlinmp", _("MerlinMusicPlayer"))])
-config.plugins.easyMedia.files = ConfigSelection(default="dreamexplorer", choices=[("no", _("Disabled")), ("filebrowser", _("Filebrowser")), ("dreamexplorer", _("DreamExplorer")), ("tuxcom", _("TuxCom"))])
+config.plugins.easyMedia.music = ConfigSelection(default="mediaplayer", choices=[("no", _("Disabled")), ("mediaplayer", _("MediaPlayer")), ("merlinmp", _("MerlinMusicPlayer")), ("shoutcast", _("SHOUTcast"))])
+config.plugins.easyMedia.files = ConfigSelection(default="filecommander", choices=[("no", _("Disabled")), ("filebrowser", _("Filebrowser")), ("filecommander", _("FileCommander")), ("dreamexplorer", _("DreamExplorer")), ("tuxcom", _("TuxCom"))])
 config.plugins.easyMedia.videodb = ConfigSelection(default="no", choices=[("no", _("Disabled")), ("yes", _("Enabled"))])
 config.plugins.easyMedia.bookmarks = ConfigSelection(default="no", choices=[("no", _("Disabled")), ("yes", _("Enabled"))])
 config.plugins.easyMedia.pictures = ConfigSelection(default="yes", choices=[("no", _("Disabled")), ("yes", _("Enabled"))])
@@ -109,7 +111,7 @@ def MPanelEntryComponent(key, text, cell):
 	res = [text]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 150, 17, 300, 60, 0, RT_HALIGN_LEFT, text[0]))
 	if cell < 5:
-		bpng = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/key-' + str(cell) + ".png")
+		bpng = LoadPixmap(PluginsDir + 'EasyMedia/key-' + str(cell) + ".png")
 		if bpng is not None:
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 0, 5, 5, 50, bpng))
 	png = LoadPixmap(EasyMedia.EMiconspath + key + '.png')
@@ -252,17 +254,16 @@ class AddPlug(Screen):
 	def save(self):
 		plugin = self["pluginlist"].getCurrent()[0]
 		print(plugin)
-		plugin.icon = None
-		if not fileExists("/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/" + plugin.name + ".plug"):
+		if not fileExists(PluginsDir + 'EasyMedia/' + plugin.name + '.plug'):
 			try:
-				outf = open(("/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/" + plugin.name + ".plug"), 'wb')
+				outf = open((PluginsDir + 'EasyMedia/' + plugin.name + '.plug'), 'wb')
 				pickle.dump(plugin, outf)
 				outf.close()
 				self.session.open(MessageBox, text=(plugin.name + _(" added to EasyMedia")), type=MessageBox.TYPE_INFO)
 			except:
 				self.session.open(MessageBox, text="Write Error!", type=MessageBox.TYPE_WARNING)
 		else:
-			order = 'rm -f \"' + '/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/' + plugin.name + '.plug' + '\"'
+			order = 'rm -f \"' + PluginsDir + 'EasyMedia/' + plugin.name + '.plug' + '\"'
 			try:
 				os_system(order)
 				self.session.open(MessageBox, text=(plugin.name + _(" removed from EasyMedia")), type=MessageBox.TYPE_INFO)
@@ -383,11 +384,11 @@ class EasyMedia(Screen):
 		if config.plugins.easyMedia.myvideo.value != "no":
 			self.__keys.append("myvideo")
 			MPaskList.append((_("MyVideo"), "MYVIDEO"))
-		plist = os_listdir("/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia")
+		plist = os_listdir(PluginsDir + 'EasyMedia')
 		plist = sorted([x[:-5] for x in plist if x.endswith('.plug')])
 		for onePlug in plist:
 			try:
-				inpf = open(("/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/" + onePlug + ".plug"), 'rb')
+				inpf = open((PluginsDir + 'EasyMedia/' + onePlug + '.plug'), 'rb')
 				binPlug = pickle.load(inpf)
 				inpf.close()
 				self.__keys.append(binPlug.name)
@@ -493,95 +494,164 @@ def MPcallbackFunc(answer):
 				askBM.append((s, s))
 			EMsession.openWithCallback(BookmarksCallback, ChoiceBox, title=_("Select bookmark..."), list=askBM)
 	elif answer == "PICTURES":
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/PicturePlayer/plugin.pyo"):
-			from Plugins.Extensions.PicturePlayer.plugin import picshow
-			EMsession.open(picshow)
+		if isPluginInstalled("PicturePlayer"):
+			try:
+				from Plugins.Extensions.PicturePlayer.plugin import picshow
+				EMsession.open(picshow)
+			except:
+				pass
 		else:
 			EMsession.open(MessageBox, text=_('Picture-player is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "MUSIC":
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/plugin.pyo") and (config.plugins.easyMedia.music.value == "merlinmp"):
-			from Plugins.Extensions.MerlinMusicPlayer.plugin import MerlinMusicPlayerFileList
-			servicelist = None
-			EMsession.open(MerlinMusicPlayerFileList, servicelist)
-		elif fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MediaPlayer/plugin.pyo") and (config.plugins.easyMedia.music.value == "mediaplayer"):
-			from Plugins.Extensions.MediaPlayer.plugin import MediaPlayer
-			EMsession.open(MediaPlayer)
+		if isPluginInstalled("MerlinMusicPlayer") and (config.plugins.easyMedia.music.value == "merlinmp"):
+			try:
+				from Plugins.Extensions.MerlinMusicPlayer.plugin import MerlinMusicPlayerFileList
+				servicelist = None
+				EMsession.open(MerlinMusicPlayerFileList, servicelist)
+			except:
+				pass
+		elif isPluginInstalled("MediaPlayer") and (config.plugins.easyMedia.music.value == "mediaplayer"):
+			try:
+				from Plugins.Extensions.MediaPlayer.plugin import MediaPlayer
+				EMsession.open(MediaPlayer)
+			except:
+				pass
 		else:
 			EMsession.open(MessageBox, text=_('No Music-Player installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "FILES":
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/Tuxcom/plugin.pyo") and (config.plugins.easyMedia.files.value == "tuxcom"):
-			from Plugins.Extensions.Tuxcom.plugin import TuxComStarter
-			EMsession.open(TuxComStarter)
-		elif fileExists("/usr/lib/enigma2/python/Plugins/Extensions/DreamExplorer/plugin.pyo") and (config.plugins.easyMedia.files.value == "dreamexplorer"):
-			from Plugins.Extensions.DreamExplorer.plugin import DreamExplorerII
-			EMsession.open(DreamExplorerII)
-		elif fileExists("/usr/lib/enigma2/python/Plugins/Extensions/Filebrowser/plugin.pyo") and (config.plugins.easyMedia.files.value == "filebrowser"):
-			from Plugins.Extensions.Filebrowser.plugin import FilebrowserScreen
-			EMsession.open(FilebrowserScreen)
+		if isPluginInstalled("FileCommander") and (config.plugins.easyMedia.files.value == "filecommander"):
+			try:
+				from Plugins.Extensions.FileCommander.plugin import start_from_pluginmenu
+				start_from_pluginmenu(EMsession)
+			except:
+				pass
+		elif isPluginInstalled("Tuxcom") and (config.plugins.easyMedia.files.value == "tuxcom"):
+			try:
+				from Plugins.Extensions.Tuxcom.plugin import TuxComStarter
+				EMsession.open(TuxComStarter)
+			except:
+				pass
+		elif isPluginInstalled("DreamExplorer") and (config.plugins.easyMedia.files.value == "dreamexplorer"):
+			try:
+				from Plugins.Extensions.DreamExplorer.plugin import DreamExplorerII
+				EMsession.open(DreamExplorerII)
+			except:
+				pass
+		elif isPluginInstalled("Filebrowser") and (config.plugins.easyMedia.files.value == "filebrowser"):
+			try:
+				from Plugins.Extensions.Filebrowser.plugin import FilebrowserScreen
+				EMsession.open(FilebrowserScreen)
+			except:
+				pass
 		else:
 			EMsession.open(MessageBox, text=_('No File-Manager installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "WEATHER":
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/WeatherPlugin/plugin.pyo"):
-			from Plugins.Extensions.WeatherPlugin.plugin import MSNWeatherPlugin
-			EMsession.open(MSNWeatherPlugin)
+		if isPluginInstalled("WeatherPlugin"):
+			try:
+				from Plugins.Extensions.WeatherPlugin.plugin import MSNWeatherPlugin
+				EMsession.open(MSNWeatherPlugin)
+			except:
+				pass
 		else:
 			EMsession.open(MessageBox, text=_('Weather Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "DVD":
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/DVDPlayer/plugin.pyo"):
-			from Plugins.Extensions.DVDPlayer.plugin import DVDPlayer
-			EMsession.open(DVDPlayer)
+		if isPluginInstalled("DVDPlayer"):
+			try:
+				from Plugins.Extensions.DVDPlayer.plugin import DVDPlayer
+				EMsession.open(DVDPlayer)
+			except:
+				pass
 		else:
 			EMsession.open(MessageBox, text=_('DVDPlayer Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "MYTUBE":
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MyTube/plugin.pyo"):
-			from Plugins.Extensions.MyTube.plugin import *
-			MyTubeMain(EMsession)
+		if isPluginInstalled("MyTube"):
+			try:
+				from Plugins.Extensions.MyTube.plugin import MyTubeMain
+				MyTubeMain(EMsession)
+			except:
+				pass
 		else:
-			EMsession.open(MessageBox, text=_('MyTube Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
+				EMsession.open(MessageBox, text=_('MyTube Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "INTERNETRADIO":
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/InternetRadio/plugin.pyo"):
-			from Plugins.Extensions.InternetRadio.InternetRadioScreen import InternetRadioScreen
-			EMsession.open(InternetRadioScreen)
+		if isPluginInstalled("SHOUTcast"): # and (config.plugins.easyMedia.music.value == "shoutcast")
+			try:
+				from Plugins.Extensions.SHOUTcast.plugin import SHOUTcastWidget
+				EMsession.open(SHOUTcastWidget)
+			except:
+				pass
+		elif isPluginInstalled("InternetRadio"):
+			try:
+				from Plugins.Extensions.InternetRadio.InternetRadioScreen import InternetRadioScreen
+				EMsession.open(InternetRadioScreen)
+			except:
+				pass
 		else:
-			EMsession.open(MessageBox, text=_('SHOUTcast Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
+			EMsession.open(MessageBox, text=_('InternetRadio Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "ZDF":
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/ZDFMediathek/plugin.pyo"):
-			from Plugins.Extensions.ZDFMediathek.plugin import ZDFMediathek
-			EMsession.open(ZDFMediathek)
+		if isPluginInstalled("ZDFMediathek"):
+			try:
+				from Plugins.Extensions.ZDFMediathek.plugin import ZDFMediathek
+				EMsession.open(ZDFMediathek)
+			except:
+				pass
+		elif isPluginInstalled("QtHbbtv"):
+#			try:
+			from Plugins.Extensions.QtHbbtv.plugin import HBBTVParser
+			EMsession.open(HBBTVParser)
+#			except:
+#				pass
 		else:
 			EMsession.open(MessageBox, text=_('ZDFmediathek Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "VLC":
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/VlcPlayer/plugin.pyo"):
-			from Plugins.Extensions.VlcPlayer.plugin import *
-			main(EMsession)
+		if isPluginInstalled("VlcPlayer"):
+			try:
+				from Plugins.Extensions.VlcPlayer.plugin import main
+				main(EMsession)
+			except:
+				pass
 		else:
 			EMsession.open(MessageBox, text=_('VLC Player is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "IDREAM":
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/plugin.pyo"):
-			from Plugins.Extensions.MerlinMusicPlayer.plugin import iDreamMerlin
-			servicelist = None
-			EMsession.open(iDreamMerlin, servicelist)
+		if isPluginInstalled("MerlinMusicPlayer"):
+			try:
+				from Plugins.Extensions.MerlinMusicPlayer.plugin import iDreamMerlin
+				servicelist = None
+				EMsession.open(iDreamMerlin, servicelist)
+			except:
+				pass
 		else:
 			EMsession.open(MessageBox, text=_('Merlin iDream is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "MYVIDEO":
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MyVideoPlayer/plugin.pyo"):
-			from Plugins.Extensions.MyVideoPlayer.plugin import Vidtype
-			EMsession.open(Vidtype)
+		if isPluginInstalled("MyVideoPlayer"):
+			try:
+				from Plugins.Extensions.MyVideoPlayer.plugin import Vidtype
+				EMsession.open(Vidtype)
+			except:
+				pass
 		else:
 			EMsession.open(MessageBox, text=_('MyVideo Player is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "VIDEODB":
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/VideoDB/plugin.pyo"):
-			from Plugins.Extensions.VideoDB.plugin import main as vdbmain
-			vdbmain(EMsession)
+		if isPluginInstalled("VideoDB"):
+			try:
+				from Plugins.Extensions.VideoDB.plugin import main as vdbmain
+				vdbmain(EMsession)
+			except:
+				pass
 		else:
 			EMsession.open(MessageBox, text=_('VideoDB is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "TIMERS":
-		from Screens.TimerEdit import TimerEditList
-		EMsession.open(TimerEditList)
+		if isPluginInstalled("TimerEdit"):
+			try:
+				from Screens.TimerEdit import TimerEditList
+				EMsession.open(TimerEditList)
+			except:
+				pass
+		else:
+			EMsession.open(MessageBox, text=_('TimerEdit is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer is not None and "++++" in answer:
 		plugToRun = answer[4:]
 		try:
-			inpf = open(("/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/" + plugToRun + ".plug"), 'rb')
+			inpf = open((PluginsDir + 'EasyMedia/' + plugToRun + '.plug'), 'rb')
 			runPlug = pickle.load(inpf)
 			inpf.close()
 			runPlug(session=EMsession)
