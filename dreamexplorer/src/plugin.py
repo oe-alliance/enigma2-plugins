@@ -681,8 +681,7 @@ class DreamExplorerII(Screen):
 		slist = []
 		foundIndex = 0
 		index = 0
-		files = os_listdir(self["filelist"].getCurrentDirectory())
-		files.sort()
+		files = sorted(os_listdir(self["filelist"].getCurrentDirectory()))
 		for name in files:
 			testname = name.lower()
 			if testname.endswith(".mp3") or name.endswith(".m4a") or name.endswith(".ogg") or name.endswith(".flac"):
