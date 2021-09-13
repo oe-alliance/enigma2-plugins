@@ -33,6 +33,7 @@ from enigma import iPlayableService, iServiceInformation, eServiceCenter, eServi
 from ServiceReference import ServiceReference
 from os.path import basename as os_basename
 from boxbranding import getImageDistro
+import six
 
 # for localized messages
 from . import _
@@ -44,7 +45,7 @@ THREE_D_TOP_BOTTOM = 2
 modes = {	THREE_D_OFF: "off",
 			THREE_D_SIDE_BY_SIDE: "sbs",
 			THREE_D_TOP_BOTTOM: "tab"}
-reversemodes = dict((value, key) for key, value in modes.iteritems())
+reversemodes = dict((value, key) for key, value in six.iteritems(modes))
 
 
 def setZOffset(configElement):
@@ -85,7 +86,7 @@ config.plugins.threed.autothreed = ConfigSelection(default="0", choices=[("0", _
 
 
 def switchmode(mode):
-	if mode in modes.keys():
+	if mode in list(modes.keys()):
 		print("[3D Settings] switching to mode ", mode)
 		open("/proc/stb/fb/primary/3d", "w").write(modes[mode])
 		AutoThreeD.instance.setLastMode(mode)
