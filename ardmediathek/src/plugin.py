@@ -21,8 +21,8 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 from twisted.web.client import downloadPage, getPage
 import re
-import urllib2
-
+from six.moves.urllib.request import Request, urlopen
+import six
 ###################################################
 
 MAIN_PAGE = "http://www.ardmediathek.de"
@@ -153,7 +153,7 @@ def getMovies(html):
 
 def getMovieUrls(url):
 	try:
-		f = urllib2.urlopen(url)
+		f = urlopen(url)
 		html = f.read()
 		f.close()
 	except:
@@ -330,7 +330,7 @@ class ARDMediathek(Screen):
 		if not url:
 			self.mainpage = True
 			url = MAIN_PAGE + "/ard/servlet/"
-		getPage(url).addCallback(self.gotPage).addErrback(self.error)
+		getPage(six.ensure_binary(url)).addCallback(self.gotPage).addErrback(self.error)
 
 	def error(self, err=""):
 		print("[ARD Mediathek] Error:", err)
@@ -371,8 +371,8 @@ class ARDMediathek(Screen):
 			movie = self.movies[0]
 			thumbUrl = movie[4]
 			try:
-				req = urllib2.Request(thumbUrl)
-				url_handle = urllib2.urlopen(req)
+				req = Request(thumbUrl)
+				url_handle = urlopen(req)
 				headers = url_handle.info()
 				contentType = headers.getheader("content-type")
 			except:
@@ -390,7 +390,7 @@ class ARDMediathek(Screen):
 			else:
 				self.thumb = None
 			if self.thumb:
-				downloadPage(thumbUrl, self.thumb).addCallback(self.downloadThumbnailCallback).addErrback(self.downloadThumbnailError)
+				downloadPage(six.ensure_binary(thumbUrl), self.thumb).addCallback(self.downloadThumbnailCallback).addErrback(self.downloadThumbnailError)
 			else:
 				self.buildEntry(None)
 		else:

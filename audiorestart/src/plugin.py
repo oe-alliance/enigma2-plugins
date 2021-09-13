@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSelection, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import NumberActionMap
@@ -9,8 +10,11 @@ from enigma import eTimer
 from Plugins.Plugin import PluginDescriptor
 from Screens import Standby
 from Screens.Screen import Screen
-from __init__ import _
+from .__init__ import _
 import NavigationInstance
+
+from six.moves import reload_module
+
 
 config.plugins.AudioRestart = ConfigSubsection()
 config.plugins.AudioRestart.restartSelection = ConfigSelection(default="disabled", choices=[("disabled", _("disabled")), ("restart", _("after restart")), ("standby", _("after standby")), ("both", _("after restart/standby"))])
@@ -138,7 +142,7 @@ def sessionstart(reason, **kwargs):
 
 
 def setup(session, **kwargs):
-#    reload(AC3setup)
+#    reload_module(AC3setup)
     session.open(AudioRestartSetup, plugin_path)
 
 
@@ -146,7 +150,7 @@ def Plugins(path, **kwargs):
     global plugin_path
     plugin_path = path
     pluginList = [PluginDescriptor(name=_("Audio restart Setup"), description=_("Setup for the AudioRestart Plugin"), icon="AudioRestart.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=setup)]
-    if config.plugins.AudioRestart.restartSelection.value <> "disabled":
+    if config.plugins.AudioRestart.restartSelection.value != "disabled":
         pluginAutoStart = PluginDescriptor(name="Audio restart", description=_("Restart audio"), where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart)
         pluginList.append(pluginAutoStart)
     return pluginList

@@ -648,7 +648,6 @@ class AutoFrameRate(Screen):
 		self.init = False
 
 	def AutoVideoFramerateChanged(self):
-		print("[AutoFrameRate] got event evFramerateChanged")
 		if usable and config.plugins.autoresolution.mode.value == "auto":
 			if config.av.videoport.value in config.av.videomode:
 				if config.av.videomode[config.av.videoport.value].value in config.av.videorate:
@@ -754,7 +753,7 @@ class AutoFrameRate(Screen):
 		seekable = self.getSeek()
 		if seekable is None:
 			return
- 		seekable.seekRelative(pts < 0 and -1 or 1, abs(pts))
+		seekable.seekRelative(pts < 0 and -1 or 1, abs(pts))
 
 
 class ManualResolution(Screen):
@@ -815,7 +814,7 @@ class ManualResolution(Screen):
 			except:
 				print("[ManualResolution] Error open /proc/stb/video/videomode")
 		if self.old_mode:
-			for x in range(len(tlist)):
+			for x in list(range(len(tlist))):
 				if tlist[x][1] == self.old_mode:
 					selection = x
 		self.session.openWithCallback(self.resolutionSelected, ChoiceBox, title=_("Please select a resolution..."), list=tlist, selection=selection, keys=keys, windowTitle=_("Manual resolution"))

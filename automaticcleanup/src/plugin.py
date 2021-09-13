@@ -429,7 +429,7 @@ class AutomaticCleanup:
 			if len(moviePath) == 0:
 				print(pluginPrintname, "No movies found!")
 			else:
-				for f in range(len(excludePath)):
+				for f in list(range(len(excludePath))):
 					if excludePath[f].startswith("/hdd"):
 						excludePath[f] = "/media" + excludePath[f]
 				print(pluginPrintname, "Movie path:", moviePath)
