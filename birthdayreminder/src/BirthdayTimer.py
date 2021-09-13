@@ -24,8 +24,9 @@
 
 # OWN IMPORTS
 from __future__ import print_function
-from BirthdayNetworking import BroadcastProtocol, TransferServerFactory, TransferClientFactory
-from BirthdayReminder import BirthdayStore, getAge
+from __future__ import absolute_import
+from .BirthdayNetworking import BroadcastProtocol, TransferServerFactory, TransferClientFactory
+from .BirthdayReminder import BirthdayStore, getAge
 
 # PYTHON IMPORTS
 from datetime import datetime, date, timedelta, time as dt_time

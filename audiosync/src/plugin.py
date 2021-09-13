@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -5,8 +6,11 @@ from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSub
 from boxbranding import getImageDistro
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
-import AC3main
-import AC3setup
+from . import AC3main
+from . import AC3setup
+
+from six.moves import reload_module
+
 
 config.plugins.AC3LipSync = ConfigSubsection()
 config.plugins.AC3LipSync.outerBounds = ConfigInteger(default=1000, limits=(-10000, 10000))
@@ -23,7 +27,7 @@ config.plugins.AC3LipSync.position_y = ConfigInteger(default=0)
 
 
 def main(session, **kwargs):
-#	 reload(AC3main)
+#	 reload_module(AC3main)
 	session.open(AC3main.AC3LipSync, plugin_path)
 
 
@@ -46,12 +50,12 @@ def startSetup(menuid, **kwargs):
 
 
 def setup(session, **kwargs):
-#	 reload(AC3setup)
+#	 reload_module(AC3setup)
 	session.open(AC3setup.AC3LipSyncSetup, plugin_path)
 
 
 def audioMenu(session, **kwargs):
-#	 reload(AC3setup)
+#	 reload_module(AC3setup)
 	session.open(AC3main.AC3LipSync, plugin_path)
 
 

@@ -3,9 +3,10 @@
 # Copyright (C) 2011 Christian Weiske <cweiske@cweiske.de>
 # License: GPLv3 or later
 
+from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 
-import CurlyTx
+from . import CurlyTx
 from . import config
 from Components.config import config
 

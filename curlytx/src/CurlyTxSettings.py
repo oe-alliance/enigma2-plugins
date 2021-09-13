@@ -3,6 +3,7 @@
 # Copyright (C) 2011 Christian Weiske <cweiske@cweiske.de>
 # License: GPLv3 or later
 
+from __future__ import absolute_import
 from . import _
 
 from Screens.Screen import Screen
@@ -12,7 +13,7 @@ from Components.Sources.StaticText import StaticText
 from Screens.MessageBox import MessageBox
 
 from . import config
-from config import createPage, loadDefaultPageOptions
+from .config import createPage, loadDefaultPageOptions
 from Components.config import config, getConfigListEntry, ConfigSelection
 from Components.ConfigList import ConfigList, ConfigListScreen
 
@@ -123,7 +124,7 @@ class CurlyTxSettings(ConfigListScreen, HelpableScreen, Screen):
         self["config"].setList(self.getConfigList())
 
     def newPage(self):
-        from CurlyTxSettings import CurlyTxSettings
+        from .CurlyTxSettings import CurlyTxSettings
         self.session.openWithCallback(self.pageEdited, CurlyTxPageEdit, createPage(), True)
 
     def editPage(self):
@@ -134,7 +135,7 @@ class CurlyTxSettings(ConfigListScreen, HelpableScreen, Screen):
                 config.plugins.CurlyTx.pages[id], False
                 )
         elif config.plugins.CurlyTx.feedUrl.value:
-            from AtomFeed import AtomFeed
+            from .AtomFeed import AtomFeed
             AtomFeed(
                 config.plugins.CurlyTx.feedUrl.value,
                 self.feedPagesReceived, self.feedPagesFail
@@ -176,7 +177,7 @@ class CurlyTxSettings(ConfigListScreen, HelpableScreen, Screen):
             )
 
     def keySave(self):
-        for i in range(0, len(config.plugins.CurlyTx.pages)):
+        for i in list(range(0, len(config.plugins.CurlyTx.pages))):
             config.plugins.CurlyTx.pages[i].save()
 
         config.plugins.CurlyTx.pages.save()

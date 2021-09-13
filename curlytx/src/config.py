@@ -5,6 +5,8 @@
 
 from Components.config import config, ConfigYesNo, ConfigSelection, ConfigNumber, ConfigText, ConfigSubsection, ConfigSubList, ConfigInteger
 
+import six
+
 
 def createPage():
     """ Create and return a configuration page object """
@@ -20,7 +22,7 @@ def createPage():
 
 def loadDefaultPageOptions():
     defaults = []
-    for i in range(0, len(config.plugins.CurlyTx.pages)):
+    for i in list(range(0, len(config.plugins.CurlyTx.pages))):
         defaults.append((str(i), config.plugins.CurlyTx.pages[i].title.value))
     if hasattr(config.plugins.CurlyTx, "defaultPage"):
         config.plugins.CurlyTx.defaultPage.setChoices(defaults, "0")
@@ -35,6 +37,6 @@ config.plugins.CurlyTx.menuExtensions = ConfigYesNo(default=False)
 config.plugins.CurlyTx.menuTitle = ConfigText(default="CurlyTx", fixed_size=False)
 config.plugins.CurlyTx.feedUrl = ConfigText(default="", fixed_size=False)
 config.plugins.CurlyTx.pages = ConfigSubList()
-for id, value in config.plugins.CurlyTx.pages.stored_values.iteritems():
+for id, value in six.iteritems(config.plugins.CurlyTx.pages.stored_values):
     config.plugins.CurlyTx.pages.append(createPage())
 loadDefaultPageOptions()

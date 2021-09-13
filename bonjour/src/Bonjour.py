@@ -6,6 +6,8 @@ from xml.etree.ElementTree import ParseError
 from os import path, listdir
 from os import remove as os_remove, fsync
 
+import six
+
 
 class Bonjour:
 	AVAHI_SERVICES_DIR = '/etc/avahi/services/'
@@ -29,7 +31,7 @@ class Bonjour:
 				]
 		text = service.get('text', None)
 		if text:
-			if isinstance(text, (basestring)):
+			if isinstance(text, (six.string_types)):
 				lines.append('\t\t<txt-record>%s</txt-record>\n' % (text))
 			else:
 				for txt in text:
@@ -45,7 +47,7 @@ class Bonjour:
 		if not dict:
 			return '\0'
 		parts = []
-		for name, value in dict.iteritems():
+		for name, value in six.iteritems(dict):
 			if value is None:
 				item = name
 			else:

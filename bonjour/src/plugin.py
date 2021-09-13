@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import print_function
+from __future__ import absolute_import
 from enigma import eListboxPythonMultiContent, gFont
 
 from Plugins.Plugin import PluginDescriptor
-from Bonjour import bonjour
+from .Bonjour import bonjour
 
 from Screens.Screen import Screen
 from Components.MenuList import MenuList

@@ -98,7 +98,7 @@ class BirthdayStore:
 		tmpList = []
 		if isfile(fileName):
 			try:
-				f = open(fileName, "r")
+				f = open(fileName, "rb")
 				tmpList = pickle_load(f)
 				f.close()
 			except IOError as xxx_todo_changeme1:

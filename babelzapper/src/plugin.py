@@ -160,12 +160,12 @@ class BabelZapperStartup(Screen):
 		if babelkey == -1:
 			print("[BABELZAPPER] now starts from beginning\n")
 			self.nextKeyTimer.start(200, True)
- 		elif babeldone == -1:
- 			print("[BABELZAPPER] now starts with last key\n")
+		elif babeldone == -1:
+			print("[BABELZAPPER] now starts with last key\n")
 			babeldone = 0
-   			babelkey = babelkey - 1
- 			self.nextKeyTimer.start(config.plugins.babelzapper.changetime.value, True)
-# 			self.nextKeyTimer.start(200, True)
+			babelkey = babelkey - 1
+			self.nextKeyTimer.start(config.plugins.babelzapper.changetime.value, True)
+#			self.nextKeyTimer.start(200, True)
 		else:
 			self.babelDialog.hide()
 			cmdlen = len(babelmenu[babelkey])
@@ -206,10 +206,10 @@ class BabelZapperStartup(Screen):
 					print("[BABELZAPPER] OFF\n")
 					babelon = 0
 				elif cmdname.startswith("GOTO"):
- 					try:
+					try:
 						babelkey = int(cmdname.replace("GOTO", ""))
 						print("[BABELZAPPER] GOTO %i \n" % babelkey)
- 					except:
+					except:
 						babelkey = 0
 					# skip rest of commandline
 					i = cmdlen
@@ -249,7 +249,7 @@ class BabelZapperStartup(Screen):
 						bz = line.split(";")
 						if len(bz) < 2:
 							print("[BABELZAPPER] wrong line %s in babelzapper.zbb" % line)
- 							babelmenu.append(("????", "PRINT ???? %s" % line))
+							babelmenu.append(("????", "PRINT ???? %s" % line))
 						else:
 							babelmenu.append((bz))
 						line = f.readline().replace("\r", "").replace("\n", "")
@@ -349,9 +349,9 @@ class BabelZapperStartup(Screen):
 			currentkey = split[0]
 			currentbg = 0
 			currentfg = 1
-                        if len(split) > 1:
+			if len(split) > 1:
 				currentbg = int(split[1])
-                        if len(split) > 2:
+			if len(split) > 2:
 				currentfg = int(split[2])
 			self.babelDialog.updateKey(currentkey, currentbg, currentfg)
 			self.babelDialog.show()
@@ -360,8 +360,8 @@ class BabelZapperStartup(Screen):
 		elif cmdname.startswith("RUN"):
 			i = len(babelmenu)
 			while i > 1:
- 				i = i - 1
- 				babelmenu.pop(i)
+				i = i - 1
+				babelmenu.pop(i)
 			babelfile = "%s/%s.zbb" % (babelzapper_menus, cmdname.replace("RUN", "").replace(" ", "").replace("	", ""))
 			print("[BABELZAPPER] RUNs: %s\n" % babelfile)
 			if os.path.exists(babelfile):
@@ -373,7 +373,7 @@ class BabelZapperStartup(Screen):
 				bz = line.split(";")
 				if len(bz) < 2:
 					print("[BABELZAPPER] wrong line %s in babelzapper.zbb" % line)
- 					babelmenu.append(("????", "PRINT ???? %s" % line))
+					babelmenu.append(("????", "PRINT ???? %s" % line))
 				else:
 					babelmenu.append((bz))
 				line = f.readline().replace("\r", "").replace("\n", "")
@@ -390,9 +390,9 @@ class BabelZapperStartup(Screen):
 		currentkey = split[0]
 		currentbg = 0
 		currentfg = 1
-                if len(split) > 1:
+		if len(split) > 1:
 			currentbg = int(split[1])
-                if len(split) > 2:
+		if len(split) > 2:
 			currentfg = int(split[2])
 		self.babelDialog.updateKey(currentkey, currentbg, currentfg)
 		self.babelDialog.show()
@@ -400,7 +400,7 @@ class BabelZapperStartup(Screen):
 
 
 class BabelZapper(Screen):
- 	skin = """
+	skin = """
 		<screen position="center,60" size="180,30" flags="wfNoBorder">
 		<widget name="babelzapper" position="1,1" size="180,30" font="Regular;26" valign="center" halign="center" backgroundColors="black,white,#00AAAAAA,red,green,yellow,blue" foregroundColors="black,white,#00AAAAAA,red,green,yellow,blue">
 		</widget>
@@ -409,11 +409,11 @@ class BabelZapper(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skin = BabelZapper.skin
-	        global babelmenu
+		global babelmenu
 		print("[BABELZAPPER] loading %s/babelzapper.zbb" % babelzapper_menus)
 		global babelkey
 		babelmenu = []
- 		babelmenu.append(("NONE", "END"))
+		babelmenu.append(("NONE", "END"))
 		if os.path.exists("%s/babelzapper.zbb" % babelzapper_menus):
 			f = open("%s/babelzapper.zbb" % babelzapper_menus, 'r')
 			line = f.readline().replace("\r", "").replace("\n", "")
@@ -421,7 +421,7 @@ class BabelZapper(Screen):
 				bz = line.split(";")
 				if len(bz) < 2:
 					print("[BABELZAPPER] wrong line %s in babelzapper.zbb" % line)
- 					babelmenu.append(("????", "PRINT ???? %s" % line))
+					babelmenu.append(("????", "PRINT ???? %s" % line))
 
 				else:
 					babelmenu.append((bz))
@@ -429,24 +429,24 @@ class BabelZapper(Screen):
 			f.close()
 		babelkey = -1
 		self["babelzapper"] = MultiColorLabel(babelmenu[babelkey][0])
-                self["babelzapper"].setForegroundColorNum(0)
-                self["babelzapper"].setBackgroundColorNum(1)
+		elf["babelzapper"].setForegroundColorNum(0)
+	self["babelzapper"].setBackgroundColorNum(1)
 
 	def updateKey(self, keyname, keybg=0, keyfg=1):
 		self["babelzapper"].setText(keyname)
-                self["babelzapper"].setForegroundColorNum(keyfg)
-                self["babelzapper"].setBackgroundColorNum(keybg)
+		self["babelzapper"].setForegroundColorNum(keyfg)
+		self["babelzapper"].setBackgroundColorNum(keybg)
 
 	def executeKey(self, keyname):
 		keyname = keyname.replace("$", "").replace(" ", "").replace("\n", "")
 		long = False
-	        if keyname.startswith("KEY_EXIT") and config.plugins.babelzapper.exit2escape.value:
-	        	keyname = keyname.replace("KEY_EXIT", "KEY_ESC")
-	        if keyname.startswith("KEY_"):
-		        if keyname.endswith("_LONG"):
+		if keyname.startswith("KEY_EXIT") and config.plugins.babelzapper.exit2escape.value:
+			keyname = keyname.replace("KEY_EXIT", "KEY_ESC")
+		if keyname.startswith("KEY_"):
+			if keyname.endswith("_LONG"):
 				long = True
 				keyname = keyname.replace("_LONG", "")
-	        	try:
+			try:
 				keycode = KEYIDS[keyname]
 				print("[BABELZAPPER] found key %i" % keycode)
 			except:
@@ -459,7 +459,7 @@ class BabelZapper(Screen):
 			fp = open("/dev/input/event2", 'wb')
 		else:
 			fp = open("/dev/input/event1", 'wb')
-		if int:
+		if long:
 			dataon = pack('iiHHi', 0, 0, 1, keycode, 1)
 			fp.write(dataon)
 			dataon = pack('iiHHi', 0, 0, 1, keycode, 2)

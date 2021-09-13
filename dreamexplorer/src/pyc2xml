@@ -79,7 +79,7 @@ def indent(elem, level=0):
 
 
 magic = "".join(random.choice(string.letters + string.digits)
-                for i in xrange(40))
+                for i in list(range(40)))
 
 hex_pat = re.compile(r'0x[0-9a-fA-F]{2,}')
 

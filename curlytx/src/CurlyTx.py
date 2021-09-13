@@ -3,6 +3,7 @@
 # Copyright (C) 2011 Christian Weiske <cweiske@cweiske.de>
 # License: GPLv3 or later
 
+from __future__ import absolute_import
 from . import _
 
 from Screens.Screen import Screen
@@ -12,12 +13,14 @@ from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
+from six.moves import reload_module
 from twisted.web import client
 from twisted.web.client import _makeGetterFactory, HTTPClientFactory
 from enigma import gFont
 
 from . import config
 from Components.config import config
+import six
 
 
 class CurlyTx(Screen, HelpableScreen):
@@ -147,7 +150,7 @@ class CurlyTx(Screen, HelpableScreen):
             pageId = 0
         self.loadUrl(pageId)
 
-    def reload(self):
+    def reload_module(self):
         if self.currentPage == None:
             return
 
@@ -182,13 +185,14 @@ class CurlyTx(Screen, HelpableScreen):
         self.setTextFont()
         self["text"].setText(_("Loading ...") + "\n" + url)
 
-        self.getPageWebClient(url).addCallback(self.urlLoaded).addErrback(self.urlFailed, url)
+        self.getPageWebClient(six.ensure_binary(url)).addCallback(self.urlLoaded).addErrback(self.urlFailed, url)
 
     def setTextFont(self):
         if self["text"].long_text is not None:
             self["text"].long_text.setFont(gFont("Console", self.currentFontSize))
 
     def urlLoaded(self, html):
+        html = six.ensure_str(html)
         self["text"].setText(html)
 
     def urlFailed(self, error, url):
@@ -207,14 +211,14 @@ class CurlyTx(Screen, HelpableScreen):
             self.showingHeaders = False
         elif self.httpGetterFactory.response_headers:
             headers = _("HTTP response headers for") + "\n" + self.currentUrl + "\n\n"
-            for (k, v) in self.httpGetterFactory.response_headers.items():
+            for (k, v) in list(self.httpGetterFactory.response_headers.items()):
                 headers += k + ": " + ("\n" + k + ": ").join(v) + "\n"
             self.pageContent = self["text"].getText()
             self["text"].setText(headers)
             self.showingHeaders = True
 
     def showSettings(self):
-        from CurlyTxSettings import CurlyTxSettings
+        from .CurlyTxSettings import CurlyTxSettings
         self.session.openWithCallback(self.onSettingsChanged, CurlyTxSettings)
 
     def onSettingsChanged(self):
