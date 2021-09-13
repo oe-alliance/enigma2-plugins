@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Screens
+from __future__ import absolute_import
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Components.Label import Label
@@ -20,6 +21,8 @@ from Components.ConfigList import ConfigListScreen
 from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER
 from Components.MenuList import MenuList
 from Tools.BoundFunction import boundFunction
+
+import six
 
 
 class AdvHdmiCecSetup(Screen, ConfigListScreen):
@@ -135,7 +138,7 @@ class AdvHdmiCecSetup(Screen, ConfigListScreen):
 		infoMsg = _("Version: ") + ADVHDMI_VERSION + "\n\n"
 		if advhdmiHooks:
 			infoMsg += _("Registered HDMI-Cec-Hooks:") + "\n"
-			for hookKey, hook in advhdmiHooks.iteritems():
+			for hookKey, hook in six.iteritems(advhdmiHooks):
 				infoMsg += _("Hook") + " '" + str(hookKey) + "':\n"
 				infoMsg += str(hook.hookDescription) + "\n\n"
 		else:
@@ -291,7 +294,7 @@ class TimeSpanConfigScreen(Screen, ConfigListScreen):
 		</screen>"""
 
 	def __init__(self, session, entry, callbackfnc=None):
-		from plugin import TimeSpanEntryInit
+		from .plugin import TimeSpanEntryInit
 		self.session = session
 		Screen.__init__(self, session)
 
