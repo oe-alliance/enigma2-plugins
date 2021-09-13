@@ -459,7 +459,7 @@ class BabelZapper(Screen):
 			fp = open("/dev/input/event2", 'wb')
 		else:
 			fp = open("/dev/input/event1", 'wb')
-		if long:
+		if int:
 			dataon = pack('iiHHi', 0, 0, 1, keycode, 1)
 			fp.write(dataon)
 			dataon = pack('iiHHi', 0, 0, 1, keycode, 2)
