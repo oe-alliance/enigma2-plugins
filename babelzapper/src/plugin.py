@@ -439,12 +439,12 @@ class BabelZapper(Screen):
 
 	def executeKey(self, keyname):
 		keyname = keyname.replace("$", "").replace(" ", "").replace("\n", "")
-		long = False
+		_long = False
 		if keyname.startswith("KEY_EXIT") and config.plugins.babelzapper.exit2escape.value:
 			keyname = keyname.replace("KEY_EXIT", "KEY_ESC")
 		if keyname.startswith("KEY_"):
 			if keyname.endswith("_LONG"):
-				long = True
+				_long = True
 				keyname = keyname.replace("_LONG", "")
 			try:
 				keycode = KEYIDS[keyname]
@@ -459,7 +459,7 @@ class BabelZapper(Screen):
 			fp = open("/dev/input/event2", 'wb')
 		else:
 			fp = open("/dev/input/event1", 'wb')
-		if int:
+		if _long:
 			dataon = pack('iiHHi', 0, 0, 1, keycode, 1)
 			fp.write(dataon)
 			dataon = pack('iiHHi', 0, 0, 1, keycode, 2)
