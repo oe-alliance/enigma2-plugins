@@ -104,22 +104,22 @@ msgid "EPG-Refresh_Stop Refresh"
 msgstr "EPG-Refresh Aktualisierung stoppen"
 
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
-msgstr "EPGRefresh"
+msgstr "EPG-Refresh"
 
 msgid "EPGRefresh Configuration"
-msgstr "EPGRefresh Konfiguration"
+msgstr "EPG-Refresh Konfiguration"
 
 msgid "EPGRefresh Configuration Help"
-msgstr "EPGRefresh Konfiguration Hilfe"
+msgstr "EPG-Refresh Konfiguration Hilfe"
 
 msgid "EPGRefresh Functions"
-msgstr "EPGRefresh Funktionen"
+msgstr "EPG-Refresh Funktionen"
 
 msgid "EPGRefresh Services"
-msgstr "EPGRefresh Sender"
+msgstr "EPG-Refresh Sender"
 
 msgid "EXTENSIONMENU_PREFIX"
-msgstr "EPGRefresh"
+msgstr "EPG-Refresh"
 
 msgid "EXTENSIONNAME_SETUP"
 msgstr ""
@@ -146,7 +146,7 @@ msgid "Enable this to be able to access the EPGRefresh configuration from within
 msgstr "Soll die Konfiguration direkt von den Plugins aus aufgerufen werden können?"
 
 msgid "Enable this to be able to start the EPGRefresh from within the extension menu."
-msgstr "Soll der Menüpunkt \"EPGRefresh jetzt aktualisieren\" direkt aus dem Erweiterungsmenü heraus aufgerufen werden können?"
+msgstr "Soll der Menüpunkt \"EPG-Refresh jetzt aktualisieren\" direkt aus dem Erweiterungsmenü heraus aufgerufen werden können?"
 
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr "Liste der Kanäle automatisch um die Kanäle des AutoTimers erweitern?"
@@ -231,22 +231,22 @@ msgid "OK"
 msgstr "OK"
 
 msgid "PLUGINNAME_EPGRefresh"
-msgstr "EPGRefresh"
+msgstr "EPG-Refresh"
 
 msgid "Pending Services"
 msgstr "Ausstehende Kanäle"
 
 msgid "PiP available now."
-msgstr "Bild im Bild (PiP) ist wieder verfügbar."
+msgstr "Bild im Bild ist wieder verfügbar."
 
 msgid "Picture in Picture"
-msgstr "Bild im Bild (PiP)"
+msgstr "Bild im Bild"
 
 msgid "Picture in Picture (hidden)"
-msgstr "Bild im Bild (PiP) (versteckt)"
+msgstr "Bild im Bild (versteckt)"
 
 msgid "Please don't use PiP meanwhile!"
-msgstr "Bitte Bild im Bild (PiP) in der Zwischenzeit nicht verwenden!"
+msgstr "Bitte Bild im Bild in der Zwischenzeit nicht verwenden!"
 
 msgid "Really close without saving settings?"
 msgstr "Wirklich beenden ohne zu speichern?"
@@ -350,7 +350,7 @@ msgstr ""
 "Wollen Sie die GUI jetzt neu starten?"
 
 msgid "Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu."
-msgstr "Solange diese Option nicht aktiviert ist, wird EPGRefresh nicht automatisch laufen, sondern muss explizit mittels gelbem Button hier im Menü gestartet werden."
+msgstr "Solange diese Option nicht aktiviert ist, wird EPG-Refresh nicht automatisch laufen, sondern muss explizit mittels der Taste GELB hier im Menü gestartet werden."
 
 msgid "Version"
 msgstr "Version"
@@ -362,7 +362,7 @@ msgid "Yes"
 msgstr "Ja"
 
 msgid "add to EPGRefresh"
-msgstr "Zu EPGRefresh hinzufügen"
+msgstr "Zu EPG-Refresh hinzufügen"
 
 msgid "never"
 msgstr "niemals"
