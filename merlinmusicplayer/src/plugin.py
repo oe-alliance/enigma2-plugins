@@ -41,8 +41,7 @@ from Screens.InfoBar import InfoBar
 from Components.GUIComponent import GUIComponent
 from enigma import ePicLoad
 from xml.etree.cElementTree import fromstring as cet_fromstring
-from urllib import quote
-from urlparse import urlparse
+from six.moves.urllib.parse import quote, urlparse
 from Components.ScrollLabel import ScrollLabel
 from Components.AVSwitch import AVSwitch
 from Tools.Directories import fileExists, resolveFilename, SCOPE_CURRENT_SKIN
@@ -79,6 +78,7 @@ from Screens.EpgSelection import EPGSelection
 from Screens.EventView import EventViewEPGSelect
 from enigma import ePoint, eEPGCache
 from Screens.InfoBarGenerics import NumberZap
+import six
 try:
 	from Plugins.SystemPlugins.PiPServiceRelation.plugin import getRelationDict, CONFIG_FILE
 	plugin_PiPServiceRelation_installed = True
@@ -1319,7 +1319,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			else:
 				urls.pop(0)
 				print("[MerlinMusicPlayer] downloading cover from %s " % url)
-				downloadPage(url, filename).addCallback(boundFunction(self.coverDownloadFinished, filename)).addErrback(boundFunction(self.coverDownloadFailed, urls, album, title))
+				downloadPage(six.ensure_binary(url), filename).addCallback(boundFunction(self.coverDownloadFinished, filename)).addErrback(boundFunction(self.coverDownloadFailed, urls, album, title))
 
 	def coverDownloadFailed(self, urls, album, title, result):
 		print("[MerlinMusicPlayer] cover download failed: %s " % result)
@@ -1586,7 +1586,7 @@ class MerlinMusicPlayerLyrics(Screen):
 
 	def getLyricsFromID3Tag(self, tag):
 		if tag:
-			for frame in tag.values():
+			for frame in list(tag.values()):
 				if frame.FrameID == "USLT":
 					return frame.text
 		url = "http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist=%s&song=%s" % (quote(self.currentSong.artist), quote(self.currentSong.title))
@@ -3251,14 +3251,15 @@ class MerlinMusicPlayerFileList(Screen):
 			count = 0
 			index = 0
 			currentFilename = self["list"].getFilename()
- 			if currentFilename.lower().endswith(".m3u"):
+			if currentFilename.lower().endswith(".m3u"):
 				SongList = self.readM3U(os_path.join(self["list"].getCurrentDirectory(), currentFilename))
 			elif currentFilename.lower().endswith(".pls"):
 				SongList = self.readPLS(os_path.join(self["list"].getCurrentDirectory(), currentFilename))
 			elif currentFilename.lower().endswith(".cue"):
 				SongList = self.readCUE(os_path.join(self["list"].getCurrentDirectory(), currentFilename))
 			else:
-				files = sorted(os_listdir(self["list"].getCurrentDirectory()))
+				files = os_listdir(self["list"].getCurrentDirectory())
+				files.sort()
 				for filename in files:
 					if filename.lower().endswith(".mp3") or filename.lower().endswith(".flac") or filename.lower().endswith(".m4a") or filename.lower().endswith(".ogg"):
 						SongList.append((Item(text=filename, filename=os_path.join(self["list"].getCurrentDirectory(), filename)),))

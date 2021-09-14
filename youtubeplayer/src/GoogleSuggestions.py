@@ -19,15 +19,16 @@ from __future__ import print_function
 #    59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             #
 ############################################################################
 
-import urllib
-import httplib
 import socket
+
+from six.moves.urllib.parse import quote
+from six.moves import http_client
 
 
 class GoogleSuggestions():
 	def __init__(self, callback, ds=None, json=None, hl=None):
 		self.callback = callback
-		self.conn = httplib.HTTPConnection("google.com")
+		self.conn = http_client.HTTPConnection("google.com")
 		self.prepQuerry = "/complete/search?"
 		if ds is not None:
 			self.prepQuerry = self.prepQuerry + "ds=" + ds + "&"
@@ -41,17 +42,17 @@ class GoogleSuggestions():
 		self.callback(suggestslist)
 
 	def getSuggestions(self, querryString):
-		if querryString is not "":
-			querry = self.prepQuerry + urllib.quote(querryString)
+		if querryString != "":
+			querry = self.prepQuerry + quote(querryString)
 			try:
 				self.conn.request("GET", querry)
-			except (httplib.CannotSendRequest, socket.gaierror, socket.error):
+			except (http_client.CannotSendRequest, socket.gaierror, socket.error):
 				print("[YTB] Can not send request for suggestions")
 				self.callback(None)
 			else:
 				try:
 					response = self.conn.getresponse()
-				except httplib.BadStatusLine:
+				except http_client.BadStatusLine:
 					print("[YTB] Can not get a response from google")
 					self.callback(None)
 				else:

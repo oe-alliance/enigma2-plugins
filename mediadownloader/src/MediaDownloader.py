@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 
 # for localized messages
 from . import _
@@ -13,13 +14,10 @@ from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 
 # Download
-from VariableProgressSource import VariableProgressSource
+from .VariableProgressSource import VariableProgressSource
 
 from Components.config import config
-try:
-	from urlparse import urlparse, urlunparse
-except ImportError as ie:
-	from urllib.parse import urlparse, urlunparse
+from six.moves.urllib.parse import urlparse, urlunparse
 
 import time
 
@@ -74,7 +72,7 @@ def download(url, file, writeProgress=None, contextFactory=None,
 	scheme, host, port, path, username, password = _parse(url)
 
 	if scheme == 'ftp':
-		from FTPProgressDownloader import FTPProgressDownloader
+		from .FTPProgressDownloader import FTPProgressDownloader
 
 		if not (username and password):
 			username = 'anonymous'
@@ -95,12 +93,16 @@ def download(url, file, writeProgress=None, contextFactory=None,
 
 	# We force username and password here as we lack a satisfying input method
 	if username and password:
-		from base64 import encodestring
+		import six
+		if six.PY3:
+			from base64 import encodebytes as _encode
+		else:
+			from base64 import encodestring as _encode
 
 		# twisted will crash if we don't rewrite this ;-)
 		url = scheme + '://' + host + ':' + str(port) + path
 
-		basicAuth = encodestring("%s:%s" % (username, password))
+		basicAuth = _encode("%s:%s" % (username, password))
 		authHeader = "Basic " + basicAuth.strip()
 		AuthHeaders = {"Authorization": authHeader}
 
@@ -109,7 +111,7 @@ def download(url, file, writeProgress=None, contextFactory=None,
 		else:
 			kwargs["headers"] = AuthHeaders
 
-	from HTTPProgressDownloader import HTTPProgressDownloader
+	from .HTTPProgressDownloader import HTTPProgressDownloader
 	from twisted.internet import reactor
 
 	factory = HTTPProgressDownloader(url, file, writeProgress, *args, **kwargs)

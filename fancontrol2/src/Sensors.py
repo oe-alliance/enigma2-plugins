@@ -21,7 +21,7 @@ class Sensors:
 	# returns a list of sensorids of type "type"
 	def getSensorsList(self, type=None):
 		if type is None:
-			return range(len(self.sensors_list))
+			return list(range(len(self.sensors_list)))
 		list = []
 		for sensorid in range(len(self.sensors_list)):
 			if self.sensors_list[sensorid][0] == type:
@@ -53,7 +53,8 @@ class Sensors:
 		import os
 		if os.path.exists("/proc/stb/sensors"):
 			sd = []
-			sd = sorted(os.listdir("/proc/stb/sensors"))
+			sd = os.listdir("/proc/stb/sensors")
+			sd.sort()
 			for dirname in sd:
 				if dirname.find("temp", 0, 4) == 0:
 					f = open("/proc/stb/sensors/%s/name" % dirname, "r")

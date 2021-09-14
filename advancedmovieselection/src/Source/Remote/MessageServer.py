@@ -23,8 +23,14 @@ must pass on to the recipients the same freedoms that you received. You must mak
 that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 '''
 from __future__ import print_function
+from __future__ import absolute_import
+import six
 
-import SocketServer
+if six.PY2:
+    import SocketServer as socketserver
+else:
+    import socketserver
+
 import socket
 
 serverInstance = None
@@ -34,7 +40,7 @@ def getIpAddress(iface):
     interfaces = []
     # parse the interfaces-file
     try:
-        fp = file('/etc/network/interfaces', 'r')
+        fp = open('/etc/network/interfaces', 'r')
         interfaces = fp.readlines()
         fp.close()
     except:
@@ -51,7 +57,7 @@ def getIpAddress(iface):
     return None
 
 
-class TCPHandler(SocketServer.BaseRequestHandler):
+class TCPHandler(socketserver.BaseRequestHandler):
     """
     The RequestHandler class for our server.
 
@@ -62,11 +68,11 @@ class TCPHandler(SocketServer.BaseRequestHandler):
 
     def handle(self):
         try:
-            from Client import MessageQueue
+            from .Client import MessageQueue
             # self.request is the TCP socket connected to the client
             data = self.request.recv(1024).strip()
             #print str(self.client_address[0]), "wrote"
-            #print data
+            #print(data)
             self.request.send(MessageQueue.getRequest(data))
         except Exception as e:
             print(e)
@@ -90,7 +96,7 @@ class MessageServer():
             return
         import threading
         self.shutdown()
-        self.server = SocketServer.TCPServer((self.host, self.port), TCPHandler)
+        self.server = socketserver.TCPServer((self.host, self.port), TCPHandler)
         self.t = threading.Thread(target=self.server.serve_forever)
         self.t.setDaemon(True) # don't hang on exit
         self.t.start()
@@ -118,7 +124,7 @@ class MessageServer():
         self.port = port
 
     def findClients(self):
-        from Client import Client
+        from .Client import Client
         self.active_clients = []
         ip = self.host.split(".")
         ip = "%s.%s.%s" % (ip[0], ip[1], ip[2])

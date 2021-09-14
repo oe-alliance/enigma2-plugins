@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from Components.ActionMap import ActionMap
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
@@ -10,9 +11,9 @@ from Screens.Screen import Screen
 from Components.Pixmap import Pixmap
 from Plugins.Plugin import PluginDescriptor
 from Tools.Directories import pathExists, fileExists
-from __init__ import _
+from .__init__ import _
 import os
-import commands
+import subprocess
 
 config.plugins.mc_global = ConfigSubsection()
 config.plugins.mc_global.vfd = ConfigSelection(default='off', choices=[('off', 'off'), ('on', 'on')])
@@ -23,7 +24,7 @@ loadSkin("/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultH
 #	config.plugins.mc_global.vfd.value = 'on'
 #	config.plugins.mc_global.save()
 #except Exception as e:
-#	print 'Media Center: Import evfd failed'
+#	print('Media Center: Import evfd failed')
 try:
 	from Plugins.Extensions.DVDPlayer.plugin import *
 	dvdplayer = True
@@ -139,7 +140,7 @@ class DMC_MainMenu(Screen):
 		selection = self["menu"].getCurrent()
 		if selection is not None:
 			if selection[1] == "MC_VideoPlayer":
-				from MC_VideoPlayer import MC_VideoPlayer
+				from .MC_VideoPlayer import MC_VideoPlayer
 				self.session.open(MC_VideoPlayer)
 			elif selection[1] == "MC_DVDPlayer":
 				if dvdplayer:
@@ -147,25 +148,25 @@ class DMC_MainMenu(Screen):
 				else:
 					self.session.open(MessageBox, "Error: DVD-Player Plugin not installed ...", MessageBox.TYPE_INFO)
 			elif selection[1] == "MC_PictureViewer":
-				from MC_PictureViewer import MC_PictureViewer
+				from .MC_PictureViewer import MC_PictureViewer
 				self.session.open(MC_PictureViewer)
 			elif selection[1] == "MC_AudioPlayer":
-				from MC_AudioPlayer import MC_AudioPlayer
+				from .MC_AudioPlayer import MC_AudioPlayer
 				self.session.open(MC_AudioPlayer)
 			elif selection[1] == "MC_WebRadio":
-				from MC_AudioPlayer import MC_WebRadio
+				from .MC_AudioPlayer import MC_WebRadio
 				self.session.open(MC_WebRadio)
 			elif selection[1] == "MC_VLCPlayer":
 				if pathExists("/usr/lib/enigma2/python/Plugins/Extensions/VlcPlayer/") == True:
-					from MC_VLCPlayer import MC_VLCServerlist
+					from .MC_VLCPlayer import MC_VLCServerlist
 					self.session.open(MC_VLCServerlist)
 				else:
 					self.session.open(MessageBox, "Error: VLC-Player Plugin not installed ...", MessageBox.TYPE_INFO)
 			elif selection[1] == "MC_WeatherInfo":
-				from MC_WeatherInfo import MC_WeatherInfo
+				from .MC_WeatherInfo import MC_WeatherInfo
 				self.session.open(MC_WeatherInfo)
 			elif selection[1] == "MC_Settings":
-				from MC_Settings import MC_Settings
+				from .MC_Settings import MC_Settings
 				self.session.open(MC_Settings)
 			else:
 				self.session.open(MessageBox, ("Error: Could not find plugin %s\ncoming soon ... :)") % (selection[1]), MessageBox.TYPE_INFO)
@@ -181,9 +182,9 @@ class DMC_MainMenu(Screen):
 		if self.can_osd_alpha:
 			try:
 				if config.plugins.mc_global.vfd.value == "on":
-					trans = commands.getoutput('cat /etc/enigma2/settings | grep config.av.osd_alpha | cut -d "=" -f2')
+					trans = subprocess.getoutput('cat /etc/enigma2/settings | grep config.av.osd_alpha | cut -d "=" -f2')
 				else:
-					trans = commands.getoutput('cat /etc/enigma2/settings | grep config.osd.alpha | cut -d "=" -f2')
+					trans = subprocess.getoutput('cat /etc/enigma2/settings | grep config.osd.alpha | cut -d "=" -f2')
 				open("/proc/stb/video/alpha", "w").write(str(trans))
 			except:
 				print("Set OSD Transparacy failed")

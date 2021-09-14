@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
-from __future__ import print_function
 import Plugins.Plugin
 from Components.Language import language
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
-import os
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 import gettext
 import hashlib
 
@@ -20,7 +17,7 @@ def localeInit():
 def _(txt):
 	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
-		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
+		print("[%s] fallback to default translation for %s" % (PluginLanguageDomain, txt))
 		t = gettext.gettext(txt)
 	return t
 

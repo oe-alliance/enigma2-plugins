@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 # for localized messages
 from . import _
 
@@ -5,6 +7,7 @@ from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
+import six
 
 
 class HelpPage:
@@ -85,8 +88,8 @@ class MPHelp(Screen):
 			title = "Invalid Help Page"
 			text = "You managed to jump to an invalid page. Stop it :-)"
 			newPage = self.curPage
-		self["title"].text = _(title).encode('utf-8', 'ignore')
-		self["detailtext"].setText(_(text).encode('utf-8', 'ignore'))
+		self["title"].text = six.ensure_str(_(title), errors='ignore')
+		self["detailtext"].setText(six.ensure_str(_(text), errors='ignore'))
 		self.curPage = newPage
 
 	def pageUp(self):
