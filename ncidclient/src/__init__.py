@@ -1,11 +1,6 @@
-# -*- coding: utf-8 -*-
-from __future__ import print_function
 from Components.Language import language
-from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE #@UnresolvedImport
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 import gettext
-import os
-import re
-from enigma import eBackgroundFileEraser
 
 PluginLanguageDomain = "NcidClient"
 PluginLanguagePath = "Extensions/NcidClient/locale/"
@@ -19,11 +14,12 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
+		print("[%s] fallback to default translation for %s" % (PluginLanguageDomain, txt))
 		return gettext.gettext(txt)
 
 
-language.addCallback(localeInit())
+localeInit()
+language.addCallback(localeInit)
 
 
 def debug(message):

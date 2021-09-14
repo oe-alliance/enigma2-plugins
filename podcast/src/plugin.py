@@ -28,8 +28,8 @@ from xml.etree.cElementTree import parse
 from xml.dom.minidom import parseString as xmlparseString, parse as xmlparse
 import gettext
 import re
-import urllib2
-
+from six.moves.urllib.request import urlopen
+import six
 ###################################################
 
 configDir = eEnv.resolve("${sysconfdir}") + "/podcast/"
@@ -46,11 +46,12 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
+		print("[%s] fallback to default translation for %s" % (PluginLanguageDomain, txt))
 		return gettext.gettext(txt)
 
 
-language.addCallback(localeInit())
+localeInit()
+language.addCallback(localeInit)
 
 ###################################################
 
@@ -111,10 +112,10 @@ def encodeUrl(url):
 
 
 def getText(nodelist):
-    	rc = []
+	rc = []
 	for node in nodelist:
-        	if node.nodeType == node.TEXT_NODE:
-                	rc.append(node.data)
+		if node.nodeType == node.TEXT_NODE:
+			rc.append(node.data)
 	return ''.join(rc)
 
 ###################################################
@@ -277,7 +278,7 @@ class PodcastMovies(Screen):
 			self.close()
 
 	def downloadMovies(self):
-		getPage(self.url).addCallback(self.showMovies).addErrback(self.error)
+		getPage(six.ensure_binary(self.url)).addCallback(self.showMovies).addErrback(self.error)
 
 	def showMovies(self, page):
 		if '<item>' in page:
@@ -418,7 +419,7 @@ class PodcastXML(Screen):
 				print("open url")
 				file.close
 				try:
-					source = urllib2.urlopen(head)
+					source = urlopen(head)
 				except:
 					pass
 			else:
@@ -427,7 +428,7 @@ class PodcastXML(Screen):
 
 			if source:
 				try:
-			 		xml = parse(source).getroot()
+					xml = parse(source).getroot()
 					for language in xml.findall("language"):
 						name = language.get("name") or None
 						name = name.encode("UTF-8") or name
@@ -483,7 +484,7 @@ class PodcastFeedly(Screen):
 			try:
 				if head.startswith("http"):
 					file.close
-					source = urllib2.urlopen(head)
+					source = urlopen(head)
 				else:
 					file.close
 					source = open(fileName)
@@ -500,10 +501,10 @@ class PodcastFeedly(Screen):
 
 		self["list"] = MenuList(list)
 
-        def ok(self):
+	def ok(self):
 		if len(self.urls) > 0:
-                	cur = self.urls[self["list"].getSelectedIndex()]
-                        self.session.open(PodcastMovies, cur)
+			cur = self.urls[self["list"].getSelectedIndex()]
+			self.session.open(PodcastMovies, cur)
 
 ###################################################
 
@@ -653,8 +654,8 @@ class Podcast(Screen):
 		cur = self["list"].getCurrent()
 		if cur == _("from xml"):
 			self.session.open(PodcastXML)
-                elif cur == _("Feedly OPML"):
-                        self.session.open(PodcastFeedly)
+		elif cur == _("Feedly OPML"):
+			self.session.open(PodcastFeedly)
 		else:
 			self.session.open(PodcastConfig)
 

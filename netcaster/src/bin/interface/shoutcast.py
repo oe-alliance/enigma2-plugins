@@ -52,14 +52,16 @@ class Interface(StreamInterface):
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-from cPickle import dump, load
-from urllib import FancyURLopener
+from six.moves.urllib.request import FancyURLopener
 from xml.sax import parseString
 from xml.sax.handler import ContentHandler
 from os import stat, mkdir
 from os.path import dirname, isdir
 import time
 from stat import ST_MTIME
+
+from six.moves.cPickle import dump, load
+
 
 tmpxml = 'shout.xml'
 DEBUG = 0
@@ -74,7 +76,7 @@ def write_cache(cache_file, cache_data):
             mkdir(dirname(cache_file))
         except OSError:
             print(dirname(cache_file), 'is a file')
-    fd = open(cache_file, 'w')
+    fd = open(cache_file, 'wb')
     dump(cache_data, fd, -1)
     fd.close()
 
@@ -94,7 +96,7 @@ def load_cache(cache_file):
     """
     Does a cPickle load
     """
-    fd = open(cache_file)
+    fd = open(cache_file, 'rb')
     cache_data = load(fd)
     fd.close()
     return cache_data
@@ -180,7 +182,7 @@ class GenreFeed:
     def __init__(self, cache_ttl=3600, cache_dir='/tmp/pyshout_cache'):
         self.cache_ttl = cache_ttl
         self.cache_file = cache_dir + '/genres.cache'
-	self.genre_list = ['Sorry, failed to load', '...try again later', 'Rock', 'Pop', 'Alternative']
+    self.genre_list = ['Sorry, failed to load', '...try again later', 'Rock', 'Pop', 'Alternative']
 
     def fetch_genres(self):
         """
@@ -205,13 +207,13 @@ class GenreFeed:
             if DEBUG == 1:
                 print('Getting fresh feed')
             try:
-	        parseXML = GenreParse()
-	        self.genres = self.fetch_genres()
-	        parseString(self.genres, parseXML)
-	        self.genre_list = parseXML.genreList
-	        write_cache(self.cache_file, self.genre_list)
-	    except:
-	    	print("Failed to get genres from server, sorry.")
+                parseXML = GenreParse()
+                self.genres = self.fetch_genres()
+                parseString(self.genres, parseXML)
+                self.genre_list = parseXML.genreList
+                write_cache(self.cache_file, self.genre_list)
+            except:
+                print("Failed to get genres from server, sorry.")
         return self.genre_list
 
 
@@ -242,8 +244,8 @@ class ShoutcastFeed:
         return self.stations
 
     def parse_stations(self):
-    	ct = None
-    	if self.cache_ttl:
+        ct = None
+        if self.cache_ttl:
             ct = cacheTime(self.cache_file)
         if ct:
             try:

@@ -20,6 +20,9 @@ from xml.etree.cElementTree import parse
 import os
 import gettext
 
+import six
+
+
 ###########################################################
 
 PluginLanguageDomain = "ZapStatistic"
@@ -34,18 +37,19 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
+		print("[%s] fallback to default translation for %s" % (PluginLanguageDomain, txt))
 		return gettext.gettext(txt)
 
 
-language.addCallback(localeInit())
+localeInit()
+language.addCallback(localeInit)
 
 ###########################################################
 
 
 def decode_charset(str, charset):
 	try:
-		uni = unicode(str, charset, 'strict')
+		uni = six.text_type(str, charset, 'strict')
 	except:
 		uni = str
 	return uni

@@ -37,8 +37,8 @@ from os import system as os_system
 from time import time, gmtime, strftime
 from twisted.web.client import getPage
 from xml.dom.minidom import parse, parseString
-from urllib import urlencode
-
+from six.moves.urllib.parse import urlencode
+import six
 import timer
 import xml.etree.cElementTree
 import Screens.Standby
@@ -268,7 +268,7 @@ class TVChartsMain(Screen):
 	def downloadList(self):
 		if config.plugins.tvcharts.enabled.value:
 			self["info"].setText("Downloading feeds from server ...")
-			getPage(self.feedurl).addCallback(self.downloadListCallback).addErrback(self.downloadListError)
+			getPage(six.ensure_binary(self.feedurl)).addCallback(self.downloadListCallback).addErrback(self.downloadListError)
 		else:
 			self["info"].setText("Error: Plugin disabled in Settings ...")
 
@@ -568,7 +568,7 @@ class DBUpdateStatus(Screen):
 				print("[TVCharts] Error loading plugins!")
 
 		# Status Update
-		getPage(url='http://www.dreambox-plugins.de/feeds/TVCharts/status.php', agent="Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)", timeout=60, method='POST', headers={'Content-Type': 'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid': self.BoxID, 'devicename': self.DeviceName, 'imageversion': self.ImageVersion, 'enigmaversion': self.EnigmaVersion, 'lastchannel': channel_name, 'lastevent': event_name, 'eventdescr': event_description, 'lastbegin': event_begin, 'lastserviceref': self.serviceref, 'timerlist': self.timerlist, 'pluginlist': self.pluginlist})).addErrback(self.updateError)
+		getPage(url=b'http://www.dreambox-plugins.de/feeds/TVCharts/status.php', agent="Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)", timeout=60, method='POST', headers={'Content-Type': 'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid': self.BoxID, 'devicename': self.DeviceName, 'imageversion': self.ImageVersion, 'enigmaversion': self.EnigmaVersion, 'lastchannel': channel_name, 'lastevent': event_name, 'eventdescr': event_description, 'lastbegin': event_begin, 'lastserviceref': self.serviceref, 'timerlist': self.timerlist, 'pluginlist': self.pluginlist})).addErrback(self.updateError)
 
 		# Restart Timer
 		self.DBStatusTimer.start(900000, True)

@@ -3,9 +3,10 @@ from Plugins.Extensions.Widgets.Widget import Widget
 from enigma import ePicLoad, ePixmap, getDesktop, eTimer
 from Components.Pixmap import Pixmap
 from twisted.web.client import downloadPage
-from urllib import quote_plus
+from six.moves.urllib.parse import quote_plus
 from os import remove as os_remove, mkdir as os_mkdir
 from os.path import isdir as os_path_isdir, isfile as os_isfile
+import six
 
 from Components.AVSwitch import AVSwitch
 
@@ -48,7 +49,7 @@ class WebPixmap(Pixmap):
             self.tmpfile = tmpfile
             head = {}
             agt = "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.0.2) Gecko/2008091620 Firefox/3.0.2"
-            downloadPage(url, self.tmpfile, headers=head, agent=agt).addCallback(self.onLoadFinished).addErrback(self.onLoadFailed)
+            downloadPage(six.ensure_binary(url), self.tmpfile, headers=head, agent=agt).addCallback(self.onLoadFinished).addErrback(self.onLoadFailed)
         elif self.default:
             self.picload.startDecode(self.default)
 

@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -10,7 +11,7 @@ from Screens import InfoBarGenerics
 from Screens.InfoBar import InfoBar
 from Components.config import config, ConfigSubsection, ConfigSelection
 
-from NamezapSetup import NamezapSetup
+from .NamezapSetup import NamezapSetup
 from boxbranding import getImageDistro
 
 config.plugins.namezap = ConfigSubsection()

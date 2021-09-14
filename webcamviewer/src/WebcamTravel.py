@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 from Screens.Screen import Screen
 from Components.Sources.List import List
 from Components.Button import Button
@@ -14,7 +15,7 @@ from Tools.BoundFunction import boundFunction
 
 from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, ePicLoad, eTimer
 
-from PictureScreen import PictureScreen
+from .PictureScreen import PictureScreen
 
 from twisted.web.client import getPage, downloadPage
 #from twisted.internet import reactor
@@ -25,7 +26,8 @@ from os import remove as os_remove
 from os.path import exists as os_path_exists
 from datetime import datetime
 
-from urllib import quote as urllib_quote
+from six.moves.urllib.parse import quote as urllib_quote
+import six
 #########################################
 
 
@@ -160,7 +162,7 @@ class TravelWebcamviewer(Screen):
 	def downloadThumbnails(self):
 		for cam in self.list:
 			self.pixmaps_to_load.append(cam.webcamid)
-			downloadPage(cam.thumbnail_url, "/tmp/" + str(cam.webcamid) + "_thumb.jpg").addCallback(self.fetchFinished, cam.webcamid).addErrback(self.fetchFailed, cam.webcamid)
+			downloadPage(six.ensure_binary(cam.thumbnail_url), "/tmp/" + str(cam.webcamid) + "_thumb.jpg").addCallback(self.fetchFinished, cam.webcamid).addErrback(self.fetchFailed, cam.webcamid)
 
 	def fetchFailed(self, string, webcamid):
 		print("fetchFailed", webcamid, string.getErrorMessage())
@@ -282,7 +284,7 @@ class WebcamTravelerAPI:
 			print(key, kwargs[key])
 			url += "&" + str(key) + "=" + str(kwargs[key])
 		print(url)
-		cb = getPage(url).addCallback(callback)
+		cb = getPage(six.ensure_binary(url)).addCallback(callback)
 		if errorback != None:
 			cb.addErrback(errorback)
 		else:

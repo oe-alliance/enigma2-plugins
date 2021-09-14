@@ -2,6 +2,7 @@
 '''
 $Author: sreichholf $
 '''
+from __future__ import absolute_import
 from enigma import eTimer, eSize, ePoint, getDesktop, eDVBVolumecontrol, eBackgroundFileEraser
 
 from Screens.Screen import Screen
@@ -37,7 +38,7 @@ import os
 from datetime import datetime
 
 from . import debug, _
-from reverselookup import ReverseLookupAndNotify
+from .reverselookup import ReverseLookupAndNotify
 
 my_global_session = None
 
@@ -95,7 +96,7 @@ def getMountedDevices():
 	mountedDevs = [(resolveFilename(SCOPE_CONFIG), _("Flash")),
 				   (resolveFilename(SCOPE_MEDIA, "cf"), _("Compact Flash")),
 				   (resolveFilename(SCOPE_MEDIA, "usb"), _("USB Device"))]
-	mountedDevs += map(lambda p: (p.mountpoint, (_(p.description) if p.description else "")), harddiskmanager.getMountedPartitions(True))
+	mountedDevs += [(p.mountpoint, (_(p.description) if p.description else "")) for p in harddiskmanager.getMountedPartitions(True)]
 	mediaDir = resolveFilename(SCOPE_MEDIA)
 	for p in os.listdir(mediaDir):
 		if os.path.join(mediaDir, p) not in [path[0] for path in mountedDevs]:
@@ -105,8 +106,8 @@ def getMountedDevices():
 	# put this after the write/executable check, that is far too slow...
 	netDir = resolveFilename(SCOPE_MEDIA, "net")
 	if os.path.isdir(netDir):
-		mountedDevs += map(lambda p: (os.path.join(netDir, p), _("Network mount")), os.listdir(netDir))
-	mountedDevs = map(handleMountpoint, mountedDevs)
+		mountedDevs += [(os.path.join(netDir, p), _("Network mount")) for p in os.listdir(netDir)]
+	mountedDevs = list(map(handleMountpoint, mountedDevs))
 	return mountedDevs
 
 
@@ -167,7 +168,7 @@ def resolveNumberWithAvon(number, countrycode):
 		return ""
 
 	# debug('normNumer: ' + normNumber)
-	for i in reversed(range(min(10, len(number)))):
+	for i in reversed(list(range(min(10, len(number))))):
 		if normNumber[:i] in avon:
 			return '[' + avon[normNumber[:i]].strip() + ']'
 	return ""
@@ -203,6 +204,11 @@ def handleReverseLookupResult(name):
 
 
 from xml.dom.minidom import parse
+
+import six
+from six.moves import reload_module
+
+
 cbcInfos = {}
 
 
@@ -267,7 +273,7 @@ class NcidClientPhonebook:
 		self.phonebook = {}
 		self.reload()
 
-	def reload(self):
+	def reload_module(self):
 		debug("[NcidClientPhonebook] reload")
 		# Beware: strings in phonebook.phonebook have to be in utf-8!
 		self.phonebook = {}
@@ -311,7 +317,7 @@ class NcidClientPhonebook:
 					os.rename(phonebookFilename, phonebookFilename + ".bck")
 					fNew = open(phonebookFilename, 'w')
 					# Beware: strings in phonebook.phonebook are utf-8!
-					for (number, name) in self.phonebook.iteritems():
+					for (number, name) in six.iteritems(self.phonebook):
 						# Beware: strings in PhoneBook.txt have to be in utf-8!
 						fNew.write(number + "#" + name.encode("utf-8"))
 					fNew.close()
@@ -488,7 +494,7 @@ class NcidClientPhonebook:
 			debug("[NcidClientPhonebook] displayPhonebook/display")
 			self.sortlist = []
 			# Beware: strings in phonebook.phonebook are utf-8!
-			sortlistHelp = sorted((name.lower(), name, number) for (number, name) in phonebook.phonebook.iteritems())
+			sortlistHelp = sorted((name.lower(), name, number) for (number, name) in six.iteritems(phonebook.phonebook))
 			for (low, name, number) in sortlistHelp:
 				if number == "01234567890":
 					continue
@@ -1014,17 +1020,17 @@ class NcidLineReceiver(LineReceiver):
 				self.line = items[i + 1]
 			elif item == 'NMBR':
 				self.number = items[i + 1]
-                        elif item == 'NAME':
-                                self.myName = items[i + 1]
+			elif item == 'NAME':
+				self.myName = items[i + 1]
 
-                if not self.myName:
-                        self.myName = _("UNKNOWN")
+			if not self.myName:
+				self.myName = _("UNKNOWN")
 
-                date = None
-                try:
-                        date = datetime.strptime("%s - %s" % (self.date, self.time), "%d%m%Y - %H%M")
-                except:
-                        date = datetime.strptime("%s - %s" % (self.date, self.time), "%m%d%Y - %H%M")
+			date = None
+			try:
+				date = datetime.strptime("%s - %s" % (self.date, self.time), "%d%m%Y - %H%M")
+			except:
+				date = datetime.strptime("%s - %s" % (self.date, self.time), "%m%d%Y - %H%M")
 
 		self.date = date.strftime("%d.%m.%Y - %H:%M")
 

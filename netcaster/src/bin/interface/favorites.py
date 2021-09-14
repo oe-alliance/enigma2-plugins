@@ -2,12 +2,13 @@ from __future__ import print_function
 from Plugins.Extensions.NETcaster.StreamInterface import StreamInterface
 from Plugins.Extensions.NETcaster.StreamInterface import Stream
 from Plugins.Extensions.NETcaster.plugin import myname
-from ConfigParser import ConfigParser, DuplicateSectionError
 
 from Tools.BoundFunction import boundFunction
 
-####################################################################
+from six.moves.configparser import ConfigParser, DuplicateSectionError
 
+
+####################################################################
 
 class Interface(StreamInterface):
     name = "Your saved Favorites"

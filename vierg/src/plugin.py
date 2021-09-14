@@ -21,6 +21,7 @@ from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN
 from enigma import eTimer
 import xml.etree.cElementTree
 import random
+from six.moves import range
 
 #good old C function :D
 
@@ -254,14 +255,14 @@ class vierg(Screen):
 		# test: eigener sieg in 1nem zug
 		for x in range(7):
 			idx = self.vFall(x, 6)
-			if idx is not -1:
+			if idx != -1:
 				if self.testGameOver(2): # great ! - choose it
 					self.maze[idx] = 0   # remove virt. chip
 					self.cPlay(x)
 					return
 
 				k = self.vFall(x, 5) # put playerchip over me
-				if k is not -1:
+				if k != -1:
 					if self.testGameOver(1): # fault - this field is ugly
 						tst[x] -= 50
 					else:
@@ -276,7 +277,7 @@ class vierg(Screen):
 		# test: player sieg in 1-2 zuegen
 		for x in range(7):
 			idx = self.vFall(x, 5)
-			if idx is not -1:
+			if idx != -1:
 				if self.testGameOver(1): # great ! - choose it
 					tst[x] += 50
 				else:
@@ -284,7 +285,7 @@ class vierg(Screen):
 						if k == x:
 							continue
 						idx2 = self.vFall(k, 5)
-						if idx2 is not -1:
+						if idx2 != -1:
 							if self.testGameOver(1): # great ! - choose it
 								tst[x] += 10
 							self.maze[idx2] = 0 # remove virt. chip

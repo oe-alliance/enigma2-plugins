@@ -26,10 +26,12 @@ from Tools.LoadPixmap import LoadPixmap
 from twisted.web.client import downloadPage, getPage
 import htmlentitydefs
 import re
-import urllib2
-from urllib2 import Request, URLError, urlopen as urlopen2
 from socket import error
-from httplib import HTTPConnection, HTTPException
+from six.moves.urllib.request import Request, urlopen as urlopen2
+from six.moves.http_client import HTTPConnection, HTTPException
+from six.moves.urllib.error import URLError, HTTPError
+import six
+
 
 HTTPConnection.debuglevel = 1
 
@@ -84,23 +86,23 @@ def decode(line):
 	pat = re.compile(r'\\u(....)')
 
 	def sub(mo):
-		return unichr(fromHex(mo.group(1)))
-	return pat.sub(sub, unicode(line))
+		return six.unichr(fromHex(mo.group(1)))
+	return pat.sub(sub, six.text_type(line))
 
 
 def decode2(line):
 	pat = re.compile(r'&#(\d+);')
 
 	def sub(mo):
-		return unichr(int(mo.group(1)))
-	return decode3(pat.sub(sub, unicode(line)))
+		return six.unichr(int(mo.group(1)))
+	return decode3(pat.sub(sub, six.text_type(line)))
 
 
 def decode3(line):
 	dic = htmlentitydefs.name2codepoint
-	for key in dic.keys():
+	for key in list(dic.keys()):
 		entity = "&" + key + ";"
-		line = line.replace(entity, unichr(dic[key]))
+		line = line.replace(entity, six.unichr(dic[key]))
 	return line
 
 
@@ -542,8 +544,8 @@ class RightMenuList(List):
 			if not thumbUrl.startswith("http://"):
 				thumbUrl = "%s%s" % (MAIN_PAGE, thumbUrl)
 			try:
-				req = urllib2.Request(thumbUrl)
-				url_handle = urllib2.urlopen(req)
+				req = Request(thumbUrl)
+				url_handle = urlopen(req)
 				headers = url_handle.info()
 				contentType = headers.getheader("content-type")
 			except:
@@ -564,7 +566,7 @@ class RightMenuList(List):
 					self.downloadThumbnailCallback(None, thumbFile, thumbID)
 				else:
 					if self.png_cache.get(thumbID, None) is None:
-						downloadPage(thumbUrl, thumbFile).addCallback(self.downloadThumbnailCallback, thumbFile, thumbID).addErrback(self.downloadThumbnailError, thumbID)
+						downloadPage(six.ensure_binary(thumbUrl), thumbFile).addCallback(self.downloadThumbnailCallback, thumbFile, thumbID).addErrback(self.downloadThumbnailError, thumbID)
 					else:
 						self.updateEntry(thumbID, thumbFile)
 
@@ -782,7 +784,7 @@ class ZDFMediathek(Screen, HelpableScreen):
 		if not page:
 			page = "/ZDFmediathek/hauptnavigation/startseite?flash=off"
 		url = "%s%s" % (MAIN_PAGE, page)
-		getPage(url).addCallback(self.gotPage).addErrback(self.error)
+		getPage(six.ensure_binary(url)).addCallback(self.gotPage).addErrback(self.error)
 
 	def error(self, err=""):
 		print("[ZDF Mediathek] Error:", err)
@@ -1033,7 +1035,7 @@ class ZDFMediathek(Screen, HelpableScreen):
 	def down(self):
 		if not self.working:
 			if self.currentList == LIST_LEFT:
-				self["leftList"].next()
+				next(self["leftList"])
 			elif self.currentList == LIST_RIGHT and self["rightList"].active:
 				self["rightList"].selectNext()
 

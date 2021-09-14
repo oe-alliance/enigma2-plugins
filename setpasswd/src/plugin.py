@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from enigma import eConsoleAppContainer
 
 from Screens.Screen import Screen
@@ -16,12 +17,13 @@ from Components.Sources.StaticText import StaticText
 from Components.Sources.List import List
 from Plugins.Plugin import PluginDescriptor
 
-from __init__ import _
+from .__init__ import _
 
 import string
 import sys
 import time
 from random import Random
+import six
 
 from boxbranding import getImageDistro
 title = _("Change Root Password")
@@ -95,6 +97,7 @@ class ChangePasswdScreen(Screen):
 			self.session.open(MessageBox, message, MessageBox.TYPE_ERROR)
 
 	def dataAvail(self, data):
+		data = six.ensure_str(data)
 		self.output_line += data
 		while True:
 			i = self.output_line.find('\n')

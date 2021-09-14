@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -11,7 +12,7 @@ from enigma import eTimer, eServiceCenter, iServiceInformation, eConsoleAppConta
 from Components.Task import Task, Job, job_manager as JobManager
 from os import access, chmod, X_OK
 from os.path import getsize
-from __init__ import _
+from .__init__ import _
 
 mcut_path = eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/MovieCut/bin/mcut")
 

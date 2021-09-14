@@ -1,4 +1,5 @@
-from __init__ import _, _debug, _log
+from __future__ import absolute_import
+from .__init__ import _, _debug, _log
 
 from enigma import iServiceInformation, iPlayableService, eSocketNotifier, getDesktop, ePoint, eSize, eServiceReference
 

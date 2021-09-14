@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
@@ -11,7 +12,7 @@ from enigma import eListboxPythonMultiContent, eListbox, gFont
 
 from Plugins.Plugin import PluginDescriptor
 from os import path as os_path, listdir as os_listdir
-from StreamPlayer import StreamPlayer
+from .StreamPlayer import StreamPlayer
 from Tools.Import import my_import
 
 ###############################################################################
@@ -130,10 +131,10 @@ class NETcasterScreenBrowser(Screen):
                 self.pluginlist.append(plugin.Interface(self.session, cbListLoaded=self.onStreamlistLoaded))
 
     def updateTitle(self):
-		try:
-			self.setTitle("%s (%s)" % (myname, self.currentPlugin.nameshort))
-		except:
-			pass
+        try:
+            self.setTitle("%s (%s)" % (myname, self.currentPlugin.nameshort))
+        except:
+            pass
 
     def selectPlugin(self):
         glist = []

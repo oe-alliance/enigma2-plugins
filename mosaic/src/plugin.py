@@ -17,6 +17,7 @@ from Tools.Directories import resolveFilename, SCOPE_SKIN_IMAGE, SCOPE_LANGUAGE,
 from Tools.LoadPixmap import LoadPixmap
 import os
 import gettext
+import six
 
 ################################################
 
@@ -45,11 +46,12 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
+		print("[%s] fallback to default translation for %s" % (PluginLanguageDomain, txt))
 		return gettext.gettext(txt)
 
 
-language.addCallback(localeInit())
+localeInit()
+language.addCallback(localeInit)
 
 ################################################
 
@@ -309,6 +311,7 @@ class Mosaic(Screen):
 			self.working = False
 			self.updateTimer.start(1, 1)
 		else:
+			result = six.ensure_str(result)
 			print("[Mosaic] retval: %d result: %s" % (retval, result))
 
 			try:

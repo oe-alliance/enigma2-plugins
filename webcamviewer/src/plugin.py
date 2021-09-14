@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from enigma import eListbox
 from enigma import eListboxPythonMultiContent
 from enigma import ePicLoad
@@ -32,9 +33,9 @@ from pyexpat import ExpatError
 import xml.dom.minidom
 
 ### my
-from WebcamViewConfig import WebcamViewerMenu
-from PictureScreen import PictureScreen
-from WebcamTravel import TravelWebcamviewer
+from .WebcamViewConfig import WebcamViewerMenu
+from .PictureScreen import PictureScreen
+from .WebcamTravel import TravelWebcamviewer
 ###
 myname = "Webcam/Picture Viewer"
 myversion = "1.1"
@@ -265,11 +266,12 @@ class PictureViewer(Screen):
 		self.onLayoutFinish.append(self.updateInfoPanel)
 
 	def KeyGreen(self):
-		if self.currList is "filelist":
+		if self.currList == "filelist":
 			# adding all files in current dir to slideshowlist
 			dirname = self["menu"].getCurrentDir()
 			if os.path.isdir(dirname):
-				s = sorted(os.listdir(dirname))
+				s = os.listdir(dirname)
+				s.sort()
 				for file in s:
 					if compile(config.plugins.pictureviewer.matchingPattern.value).search(dirname + file):
 						self.slideshowfiles.append((_(file), dirname + file))
@@ -293,7 +295,7 @@ class PictureViewer(Screen):
 				print("[" + myname + "] OSError:", e)
 
 	def KeyRed(self):
-		if self.currList is "filelist":
+		if self.currList == "filelist":
 			#do slideshow
 			self.hide()
 			x = Slideshow(self.session, self.show)
@@ -352,7 +354,7 @@ class PictureViewer(Screen):
 				print("[" + myname + "] error:", e)
 
 	def KeyYellow(self):
-		if self.currList is "filelist":
+		if self.currList == "filelist":
 			# add picture to list
 			fullfile = self["menu"].getSelection()[0]
 			if os.path.isfile(fullfile):
@@ -366,7 +368,7 @@ class PictureViewer(Screen):
 				self["slist"].l.setList(self.slideshowfiles)
 
 	def switchList(self):
-		if self.currList is "filelist":
+		if self.currList == "filelist":
 			# Slideshow activieren
 			self.filelist.selectionEnabled(0)
 			self.slideshowlist.selectionEnabled(1)
@@ -386,7 +388,7 @@ class PictureViewer(Screen):
 			self.currList = "filelist"
 
 	def go(self):
-		if self.currList is "filelist":
+		if self.currList == "filelist":
 			selection = self["menu"].getSelection()
 			if self.filelist.canDescent():
 				self.setTitle(selection[0])
@@ -404,35 +406,35 @@ class PictureViewer(Screen):
 			self.updateInfoPanel()
 
 	def up(self):
-		 if self.currList is "filelist":
+		 if self.currList == "filelist":
 			 self.filelist.up()
 			 self.updateInfoPanel()
 		 else:
 			 self.slideshowlist.up()
 
 	def leftUp(self):
-		 if self.currList is "filelist":
+		 if self.currList == "filelist":
 			 self.filelist.pageUp()
 			 self.updateInfoPanel()
 		 else:
 			 self.slideshowlist.pageUp()
 
 	def rightUp(self):
-		if self.currList is "filelist":
+		if self.currList == "filelist":
 			 self.filelist.pageDown()
 			 self.updateInfoPanel()
 		else:
 			 self.slideshowlist.pageDown()
 
 	def down(self):
-		 if self.currList is "filelist":
+		 if self.currList == "filelist":
 			 self.filelist.down()
 			 self.updateInfoPanel()
 		 else:
 			 self.slideshowlist.down()
 
 	def updateInfoPanel(self):
-		if self.currList is "filelist":
+		if self.currList == "filelist":
 			selectedfile = self["menu"].getSelection()[0]
 		else:
 			selectedfile = self["slist"].l.getCurrentSelection()[1]
@@ -557,7 +559,8 @@ class PictureList(MenuList):
 
 		directories = []
 		files = []
-		files = sorted(os.listdir(directory))
+		files = os.listdir(directory)
+		files.sort()
 		tmpfiles = files[:]
 		for x in tmpfiles:
 			if os.path.isdir(directory + "/" + x):

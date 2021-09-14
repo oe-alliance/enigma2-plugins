@@ -1,9 +1,10 @@
 # -*- coding: iso-8859-1 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config, ConfigSubsection, ConfigEnableDisable
 from Screens.Standby import Standby, inStandby
-from StartupToStandbyConfiguration import StartupToStandbyConfiguration
+from .StartupToStandbyConfiguration import StartupToStandbyConfiguration
 from Tools import Notifications
 
 config.plugins.startuptostandby = ConfigSubsection()
