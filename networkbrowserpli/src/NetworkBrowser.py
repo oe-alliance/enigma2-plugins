@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # for localized messages
 from __future__ import print_function
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 from enigma import eTimer, getDesktop
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -16,16 +17,18 @@ from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.Console import Console
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_ACTIVE_SKIN, fileExists
 from Tools.LoadPixmap import LoadPixmap
-from cPickle import dump, load
 from os import path as os_path, stat, mkdir, remove
 from time import time
 from stat import ST_MTIME
 
 import netscan
-from MountManager import AutoMountManager
-from AutoMount import iAutoMount
-from MountEdit import AutoMountEdit
-from UserDialog import UserDialog
+from .MountManager import AutoMountManager
+from .AutoMount import iAutoMount
+from .MountEdit import AutoMountEdit
+from .UserDialog import UserDialog
+
+from six.moves.cPickle import dump, load
+import six
 
 
 def write_cache(cache_file, cache_data):
@@ -261,6 +264,7 @@ class NetworkBrowser(Screen):
 	def Stage1SettingsComplete(self, result, retval, extra_args):
 		import xml.dom.minidom
 
+		result = six.ensure_str(result)
 		dom = xml.dom.minidom.parseString(result)
 		scan_result = []
 		for dhost in dom.getElementsByTagName('host'):
@@ -338,7 +342,7 @@ class NetworkBrowser(Screen):
 				self.network[x[2]] = []
 			self.network[x[2]].append((NetworkDescriptor(name=x[1], description=x[2]), x))
 
-		for x in self.network.keys():
+		for x in list(self.network.keys()):
 			hostentry = self.network[x][0][1]
 			name = hostentry[2] + " ( " + hostentry[1].strip() + " )"
 			if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png")):
@@ -364,8 +368,8 @@ class NetworkBrowser(Screen):
 			if x[2] not in self.network:
 				self.network[x[2]] = []
 			self.network[x[2]].append((NetworkDescriptor(name=x[1], description=x[2]), x))
-		self.network.keys().sort()
-		for x in self.network.keys():
+		list(self.network.keys()).sort()
+		for x in list(self.network.keys()):
 			if self.network[x][0][1][3] == '00:00:00:00:00:00':
 				self.device = 'unix'
 			else:
@@ -426,7 +430,7 @@ class NetworkBrowser(Screen):
 				newpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/i-smb.png"))
 
 		self.isMounted = False
-		for sharename, sharedata in self.mounts.items():
+		for sharename, sharedata in list(self.mounts.items()):
 			if sharedata['ip'] == sharehost:
 				if sharetype == 'nfsShare' and sharedata['mounttype'] == 'nfs':
 					sharedir = sharedir.replace('/', '')
@@ -541,7 +545,7 @@ class NetworkBrowser(Screen):
 				data['sharedir'] = selection[4]
 				data['options'] = "rw,nolock,tcp"
 
-				for sharename, sharedata in mounts.items():
+				for sharename, sharedata in list(mounts.items()):
 					if sharedata['ip'] == selection[2] and sharedata['sharedir'] == selection[4]:
 						data = sharedata
 				self.session.openWithCallback(self.MountEditClosed, AutoMountEdit, self.skin_path, data)
@@ -570,7 +574,7 @@ class NetworkBrowser(Screen):
 					data['username'] = "username"
 					data['password'] = "password"
 
-				for sharename, sharedata in mounts.items():
+				for sharename, sharedata in list(mounts.items()):
 					if sharedata['ip'] == selection[2].strip() and sharedata['sharedir'] == selection[3].strip():
 						data = sharedata
 				self.session.openWithCallback(self.MountEditClosed, AutoMountEdit, self.skin_path, data)

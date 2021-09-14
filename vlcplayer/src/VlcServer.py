@@ -10,15 +10,16 @@
 #===============================================================================
 
 from __future__ import print_function
+from __future__ import absolute_import
 import re
 import posixpath
 import urllib
-from sys import maxint
+from sys import maxsize
 from random import randint, seed
-from urllib import urlencode, quote_plus
-from urllib2 import urlopen
 from xml.dom.minidom import parse
-from VlcPlayer import VlcPlayer, isDvdUrl
+from .VlcPlayer import VlcPlayer, isDvdUrl
+from six.moves.urllib.parse import urlencode, quote_plus
+from six.moves.urllib.request import urlopen
 
 seed()
 
@@ -208,7 +209,7 @@ class VlcServer:
 		except:
 			resp = None
 		if resp is None:
-			raise IOError, "No response from Server"
+			raise IOError("No response from Server")
 		xml = parse(resp)
 		resp.close()
 		return xml

@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 #######################################################################
 #
 #    Push Service for Enigma-2
@@ -40,15 +41,15 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 # Plugin internal
 from . import _
-from PushService import PushService
-from PushServiceBase import PushServiceBase
-from ModuleBase import ModuleBase
-from ServiceBase import ServiceBase
-from ControllerBase import ControllerBase
+from .PushService import PushService
+from .PushServiceBase import PushServiceBase
+from .ModuleBase import ModuleBase
+from .ServiceBase import ServiceBase
+from .ControllerBase import ControllerBase
 
 
 # States
-(MAIN, SERVICES, CONTROLLERS) = range(3)
+(MAIN, SERVICES, CONTROLLERS) = list(range(3))
 #IDEA combine into one screen
 #(MAIN, SERVICES, ADDSERVICE, REMOVESERVICE, CONTROLLERS, ADDCONTROLLER, REMOVECONTROLLER) = range(7)
 
@@ -65,7 +66,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 		HelpableScreen.__init__(self)
 		self.skinName = ["ConfigScreen", "ConfigListScreen"]
 
-		from plugin import NAME, VERSION, gPushService
+		from .plugin import NAME, VERSION, gPushService
 		self.setup_title = NAME + " " + _("Configuration") + " " + VERSION
 
 		PushServiceBase.__init__(self)
@@ -320,7 +321,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 
 		# If we need assign / "write" access import the plugin
 		# global won't work across module scope
-		import plugin
+		from . import plugin
 		if config.pushservice.enable.value:
 			if plugin.gPushService:
 				plugin.gPushService.copyfrom(self)
@@ -343,7 +344,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 
 	# Overwrite ConfigListScreen cancelConfirm function
 	def cancelConfirm(self, result):
-		from plugin import gPushService
+		from .plugin import gPushService
 		if gPushService:
 			# Make sure the configuration is still consistent
 			gPushService.load()
@@ -355,7 +356,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 	# Overwrite Screen close function
 	def close(self):
 		self.hideHelpWindow()
-		from plugin import ABOUT
+		from .plugin import ABOUT
 		self.session.openWithCallback(self.closeConfirm, MessageBox, ABOUT, MessageBox.TYPE_INFO)
 
 	def closeConfirm(self, dummy=None):

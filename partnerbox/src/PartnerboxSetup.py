@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 #
 #  Partnerbox E2
 #
@@ -221,7 +222,7 @@ class PartnerboxEntriesListConfigScreen(Screen):
 			sel = None
 		nr = int(config.plugins.Partnerbox.entriescount.value)
 		if nr > 1 and self.what == 2 or nr >= 1 and self.what == None:
-				from plugin import RemoteTimer
+				from .plugin import RemoteTimer
 				self.session.open(RemoteTimer, sel)
 		else:
 			self.close(self.session, self.what, sel)
@@ -309,7 +310,7 @@ class PartnerboxEntriesListConfigScreen(Screen):
 			sCommand += "1"
 		else:
 			return
-		from PartnerboxFunctions import sendPartnerBoxWebCommand
+		from .PartnerboxFunctions import sendPartnerBoxWebCommand
 		sendPartnerBoxWebCommand(sCommand, None, 3, username, password)
 
 

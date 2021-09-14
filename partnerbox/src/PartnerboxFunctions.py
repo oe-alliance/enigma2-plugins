@@ -19,16 +19,19 @@
 #
 
 from __future__ import print_function
-import urllib
 from time import localtime
 from timer import TimerEntry
 from twisted.internet import reactor
 from twisted.web import client
 from twisted.web.client import HTTPClientFactory
-from base64 import encodestring
+import six
+if six.PY3:
+	from base64 import encodebytes as _encode
+else:
+	from base64 import encodestring as _encode
 import xml.etree.cElementTree
-#import urlparse
-from urllib import unquote
+from six.moves.urllib.request import urlopen
+from six.moves.urllib.parse import unquote, urlparse, urlunparse
 
 CurrentIP = None
 remote_timer_list = None
@@ -366,9 +369,9 @@ class myHTTPClientFactory(HTTPClientFactory):
 
 
 def url_parse(url, defaultPort=None):
-	parsed = urlparse.urlparse(url)
+	parsed = urlparse(url)
 	scheme = parsed[0]
-	path = urlparse.urlunparse(('', '') + parsed[2:])
+	path = urlunparse(('', '') + parsed[2:])
 	if defaultPort is None:
 		if scheme == 'https':
 			defaultPort = 443
@@ -384,12 +387,11 @@ def url_parse(url, defaultPort=None):
 def sendPartnerBoxWebCommand(url, contextFactory=None, timeout=60, username="root", password="", *args, **kwargs):
 	#scheme, host, port, path = client._parse(url)
 	#scheme, host, port, path = url_parse(url)
-	from urlparse import urlparse
 	parsed = urlparse(url)
 	scheme = parsed.scheme
 	host = parsed.hostname
 	port = parsed.port or (443 if scheme == 'https' else 80)
-	basicAuth = encodestring(("%s:%s") % (username, password))
+	basicAuth = _encode(("%s:%s") % (username, password))
 	authHeader = "Basic " + basicAuth.strip()
 	AuthHeaders = {"Authorization": authHeader}
 	if "headers" in kwargs:
@@ -455,7 +457,7 @@ def SetPartnerboxTimerlist(partnerboxentry=None, sreference=None):
 		else:
 			sCommand = "http://%s:%s@%s:%d/xml/timers" % (username, password, ip, port)
 		print("[RemoteEPGList] Getting timerlist data from %s..." % ip)
-		f = urllib.urlopen(sCommand)
+		f = urlopen(sCommand)
 		sxml = f.read()
 		if int(partnerboxentry.enigma.value) == 0:
 			remote_timer_list = FillE2TimerList(sxml, sreference)

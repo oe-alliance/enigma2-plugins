@@ -25,7 +25,7 @@ class GrabResource(resource.Resource):
 		videoOnly = False
 		save = False
 
-		for key, value in request.args.items():
+		for key, value in list(request.args.items()):
 			if key in GrabResource.SPECIAL_ARGS:
 				if key == 'format':
 					format = value[0]
@@ -113,21 +113,21 @@ class GrabStream:
 		print('[Screengrab.py] cmdFinished')
 		if self.stillAlive:
 			self.request.setResponseCode(http.OK)
-			if int(data) is 0 and self.target is not None:
+			if int(data) == 0 and self.target != None:
 				try:
 					self.request.setHeader('Content-Length', '%i' % os_path_getsize(self.target))
 					with open(self.target) as fp:
 						self.request.write(fp.read())
-					if self.save is False:
+					if self.save == False:
 						os_remove(self.target)
 						print('[Screengrab.py] %s removed' % self.target)
 				except Exception as e:
 					self.request.write('Internal error while reading target file')
 					self.request.setResponseCode(http.INTERNAL_SERVER_ERROR)
 
-			elif int(data) is 0 and self.target is None:
+			elif int(data) == 0 and self.target == None:
 				self.request.write(self.output)
-			elif int(data) is 1:
+			elif int(data) == 1:
 				self.request.write(self.output)
 			else:
 				self.request.setResponseCode(http.INTERNAL_SERVER_ERROR)

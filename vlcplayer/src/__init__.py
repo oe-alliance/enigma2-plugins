@@ -1,4 +1,3 @@
-# -*- coding: ISO-8859-1 -*-
 #===============================================================================
 # VLC Player Plugin by A. Latsch 2007
 #                   modified by Volker Christian 2008
@@ -8,11 +7,7 @@
 # Software Foundation; either version 2, or (at your option) any later
 # version.
 #===============================================================================
-
-from __future__ import print_function
-from Components.Language import language
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
-import os
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 import gettext
 
 

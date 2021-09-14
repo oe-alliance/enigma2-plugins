@@ -34,7 +34,7 @@ def getAdapterIPv6(interface):
 		if has_ipv6 and version.major >= 12:
 			proc = '/proc/net/if_inet6'
 			tempaddrs = []
-			for line in file(proc).readlines():
+			for line in open(proc).readlines():
 				if line.startswith('fe80'):
 					continue
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
 import os
 import sys
 import traceback
@@ -15,15 +16,15 @@ from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 
 # Plugin internal
-from SeriesPluginTimer import SeriesPluginTimer
-from SeriesPluginInfoScreen import SeriesPluginInfoScreen
-from SeriesPluginRenamer import SeriesPluginRenamer
-from SeriesPluginIndependent import startIndependent, runIndependent
-from SeriesPluginConfiguration import SeriesPluginConfiguration
-from Logger import log
+from .SeriesPluginTimer import SeriesPluginTimer
+from .SeriesPluginInfoScreen import SeriesPluginInfoScreen
+from .SeriesPluginRenamer import SeriesPluginRenamer
+from .SeriesPluginIndependent import startIndependent, runIndependent
+from .SeriesPluginConfiguration import SeriesPluginConfiguration
+from .Logger import log
 
-from spEPGSelection import SPEPGSelectionInit, SPEPGSelectionUndo
-from spChannelContextMenu import SPChannelContextMenuInit, SPChannelContextMenuUndo
+from .spEPGSelection import SPEPGSelectionInit, SPEPGSelectionUndo
+from .spChannelContextMenu import SPChannelContextMenuInit, SPChannelContextMenuUndo
 
 
 #######################################################
@@ -121,7 +122,7 @@ def start(reason, **kwargs):
 
 		# Shutdown
 		elif reason == 1:
-			from SeriesPlugin import resetInstance
+			from .SeriesPlugin import resetInstance
 			resetInstance()
 
 
@@ -218,7 +219,7 @@ def movielist_info(session, service, *args, **kwargs):
 # Synchronous call, blocks until we have the information
 def getSeasonEpisode4(service_ref, name, begin, end, description, path, *args, **kwargs):
 	if config.plugins.seriesplugin.enabled.value:
-		from SeriesPluginBare import bareGetEpisode
+		from .SeriesPluginBare import bareGetEpisode
 		try:
 			return bareGetEpisode(service_ref, name, begin, end, description, path, True, False, False)
 		except Exception as e:
@@ -228,7 +229,7 @@ def getSeasonEpisode4(service_ref, name, begin, end, description, path, *args, *
 
 def showResult(*args, **kwargs):
 	if config.plugins.seriesplugin.enabled.value:
-		from SeriesPluginBare import bareShowResult
+		from .SeriesPluginBare import bareShowResult
 		bareShowResult()
 
 
@@ -295,7 +296,7 @@ def getSeasonAndEpisode(timer, *args, **kwargs):
 def getSeasonEpisode(service_ref, name, begin, end, description, path, *args, **kwargs):
 	if config.plugins.seriesplugin.enabled.value:
 		log.debug("SeriesPlugin getSeasonEpisode is deprecated - Update Your AutoTimer!")
-		from SeriesPluginBare import bareGetEpisode
+		from .SeriesPluginBare import bareGetEpisode
 		try:
 			result = bareGetEpisode(service_ref, name, begin, end, description, path)
 			if result and isinstance(result, dict):

@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 
 from Components.config import config
 
 # Internal
-from Logger import log
-from TimeoutServerProxy import TimeoutServerProxy
+from .Logger import log
+from .TimeoutServerProxy import TimeoutServerProxy
 
 
 class WebChannels(object):

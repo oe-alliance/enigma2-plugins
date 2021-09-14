@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
 from Plugins.Extensions.WebInterface.WebChilds.Screenpage import ScreenPage
-from WebChilds.UploadPkg import UploadPkgResource
-from WebChilds.UploadText import UploadTextResource
-from WebChilds.PKG import PKGResource
-from WebChilds.Script import Script
+from .WebChilds.UploadPkg import UploadPkgResource
+from .WebChilds.UploadText import UploadTextResource
+from .WebChilds.PKG import PKGResource
+from .WebChilds.Script import Script
 from twisted.web import static
 from twisted.python import util
 from enigma import eEnv

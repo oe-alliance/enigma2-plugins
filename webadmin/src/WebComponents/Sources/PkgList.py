@@ -63,7 +63,8 @@ class PkgList(Source):
 					map[package[PKG_NAME]][0] = package[PKG_REL].replace("experimental-", "exp. ") + " -> " + package[PKG_INFO][:-1].replace("experimental-", "exp. ")
 					map[package[PKG_NAME]][3] = "1"
 
-			keys = sorted(map.keys())
+			keys = list(map.keys())
+			keys.sort()
 
 			return [(name, map[name][0], map[name][1], map[name][2], map[name][3]) for name in keys]
 		except Exception as e:

@@ -10,11 +10,12 @@
 #===============================================================================
 
 from __future__ import print_function
+from __future__ import absolute_import
 from . import _
 from Plugins.Plugin import PluginDescriptor
-from VlcServerList import VlcServerListScreen
-from VlcMediaList import VlcMediaListScreen
-from VlcServerConfig import vlcServerConfig
+from .VlcServerList import VlcServerListScreen
+from .VlcMediaList import VlcMediaListScreen
+from .VlcServerConfig import vlcServerConfig
 from Screens.MessageBox import MessageBox
 import array
 import struct

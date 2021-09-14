@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 #######################################################################
 #
 #    Push Service for Enigma-2
@@ -35,10 +36,13 @@ from Tools.BoundFunction import boundFunction
 
 # Plugin internal
 from . import _
-from Modules import Modules
-from ConfigFile import ConfigFile
-from ServiceBase import ServiceBase
-from ControllerBase import ControllerBase
+from .Modules import Modules
+from .ConfigFile import ConfigFile
+from .ServiceBase import ServiceBase
+from .ControllerBase import ControllerBase
+
+
+import six
 
 
 # Constants
@@ -82,7 +86,7 @@ class PushServiceBase(Modules, ConfigFile):
 		slist = []
 		if self.servicemodules:
 			serviceclasses = [service.getClass() for service in self.services] if self.services else []
-			for name, module in self.servicemodules.iteritems():
+			for name, module in six.iteritems(self.servicemodules):
 				if module.forceSingle():
 					# We have to check if there is already a plugin instance
 					if name in serviceclasses:
@@ -122,7 +126,7 @@ class PushServiceBase(Modules, ConfigFile):
 		plist = []
 		if self.controllermodules:
 			controllerclasses = [controller.getClass() for controller in self.controllers] if self.controllers else []
-			for name, module in self.controllermodules.iteritems():
+			for name, module in six.iteritems(self.controllermodules):
 				if module.forceSingle():
 					# We have to check if there is already a controller instance
 					if name in controllerclasses:
@@ -218,7 +222,7 @@ class PushServiceBase(Modules, ConfigFile):
 		controllers = self.controllers
 
 		# Build Header
-		from plugin import NAME, VERSION
+		from .plugin import NAME, VERSION
 		root = Element(NAME)
 		root.set('version', VERSION)
 		root.append(Comment(_("Don't edit this manually unless you really know what you are doing")))

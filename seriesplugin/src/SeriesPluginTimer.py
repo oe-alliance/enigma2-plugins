@@ -17,6 +17,7 @@
 #
 #######################################################################
 
+from __future__ import absolute_import
 import os
 
 # for localized messages
@@ -34,8 +35,8 @@ from Tools.Notifications import AddPopup
 from Tools.BoundFunction import boundFunction
 
 # Plugin internal
-from SeriesPlugin import getInstance, refactorTitle, refactorDescription, refactorDirectory
-from Logger import log
+from .SeriesPlugin import getInstance, refactorTitle, refactorDescription, refactorDirectory
+from .Logger import log
 
 TAG = "SeriesPlugin"
 
@@ -183,7 +184,7 @@ class SeriesPluginTimer(object):
 		SeriesPluginTimer.counter = SeriesPluginTimer.counter + 1
 
 		# Maybe there is a better way to avoid multiple Popups
-		from SeriesPlugin import getInstance
+		from .SeriesPlugin import getInstance
 
 		instance = getInstance()
 

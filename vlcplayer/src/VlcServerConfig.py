@@ -10,6 +10,7 @@
 #===============================================================================
 
 
+from __future__ import absolute_import
 from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.ConfigList import ConfigListScreen
@@ -25,7 +26,7 @@ from Components.config import ConfigYesNo
 from Components.config import config
 from Components.config import getConfigListEntry
 from Screens.Screen import Screen
-from VlcServer import VlcServer
+from .VlcServer import VlcServer
 from . import _
 
 
@@ -356,7 +357,7 @@ class __VlcServerConfig():
 
 	# Edit has been canceled
 	def cancel(self, server):
-		for element in server.getCfg().dict().values():
+		for element in list(server.getCfg().dict().values()):
 			element.cancel()
 
 	def getServerlist(self):

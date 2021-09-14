@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 #######################################################################
 #
 #    Push Service for Enigma-2
@@ -23,7 +24,7 @@ try:
 	#Python >= 2.7
 	from collections import OrderedDict
 except:
-	from OrderedDict import OrderedDict
+	from .OrderedDict import OrderedDict
 
 
 # Module base class
@@ -110,10 +111,10 @@ class ModuleBase(object):
 		return str(self.enable.value)
 
 	def getStringOptions(self):
-		return [(str(key), str(option.value), str(description)) for (key, (option, description)) in self.options.items()]
+		return [(str(key), str(option.value), str(description)) for (key, (option, description)) in list(self.options.items())]
 
 	def getConfigOptions(self):
-		return [(key, option, description) for (key, (option, description)) in self.options.items()]
+		return [(key, option, description) for (key, (option, description)) in list(self.options.items())]
 
 	################################################
 	# Functions to be implemented in the plugin

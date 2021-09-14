@@ -17,6 +17,7 @@
 #
 #######################################################################
 
+from __future__ import absolute_import
 import os
 import json
 
@@ -27,7 +28,7 @@ from . import _
 from Components.config import *
 
 # Plugin internal
-from Logger import log
+from .Logger import log
 
 
 scheme_fallback = [

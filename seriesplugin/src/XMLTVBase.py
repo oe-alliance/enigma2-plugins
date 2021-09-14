@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # by betonme @2015
 
+from __future__ import absolute_import
 import os
 import re
 
@@ -13,8 +14,8 @@ from Tools.XMLTools import stringToXML
 
 # Plugin internal
 from . import _
-from XMLFile import XMLFile, indent
-from Logger import log
+from .XMLFile import XMLFile, indent
+from .Logger import log
 
 
 class XMLTVBase(object):
@@ -66,7 +67,7 @@ class XMLTVBase(object):
 			return
 
 		# Build Header
-		from plugin import NAME, VERSION
+		from .plugin import NAME, VERSION
 		root = Element("sources")
 		root.set('version', VERSION)
 		root.set('created_by', NAME)

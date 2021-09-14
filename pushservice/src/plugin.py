@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 #######################################################################
 #
 #    Push Service for Enigma-2
@@ -31,8 +32,12 @@ from Components.config import config, ConfigSubsection, ConfigNothing, ConfigEna
 #from Components.Language import language
 
 # Plugin internal
-from __init__ import _
-from PushService import PushService
+from .__init__ import _
+from .PushService import PushService
+
+from six.moves import reload_module
+
+
 #from ConfigScreen import ConfigScreen
 
 
@@ -75,8 +80,8 @@ config.pushservice.period = ConfigSelectionNumber(0, 1000, 1, default=24)
 def setup(session, **kwargs):
 	try:
 		### For testing only
-		import ConfigScreen
-		reload(ConfigScreen)
+		from . import ConfigScreen
+		reload_module(ConfigScreen)
 		###
 		session.open(ConfigScreen.ConfigScreen)
 	except Exception as e:

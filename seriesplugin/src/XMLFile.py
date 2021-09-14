@@ -17,6 +17,7 @@
 #
 #######################################################################
 
+from __future__ import absolute_import
 import os
 import re
 
@@ -30,7 +31,7 @@ from Tools.XMLTools import stringToXML
 
 # Plugin internal
 from . import _
-from Logger import log
+from .Logger import log
 
 
 def indent(elem, level=0):

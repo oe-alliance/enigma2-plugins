@@ -17,6 +17,7 @@
 #
 #######################################################################
 
+from __future__ import absolute_import
 import os
 import re
 from glob import glob #Py3 ,escape
@@ -37,8 +38,11 @@ from enigma import eServiceCenter, iServiceInformation, eServiceReference
 from ServiceReference import ServiceReference
 
 # Plugin internal
-from SeriesPlugin import getInstance, refactorTitle, refactorDescription, refactorDirectory
-from Logger import log
+from .SeriesPlugin import getInstance, refactorTitle, refactorDescription, refactorDirectory
+from .Logger import log
+
+import six
+
 
 CompiledRegexpGlobEscape = re.compile('([\[\]\?*])')  # "[\\1]"
 
@@ -293,7 +297,7 @@ class SeriesPluginRenamer(object):
 		if data and isinstance(data, dict):
 			result = rename(servicepath, name, short, data)
 
-		elif data and isinstance(data, basestring):
+		elif data and isinstance(data, six.string_types):
 			msg = _("Failed: %s." % (str(data)))
 			log.debug(msg)
 			self.data.append(name + ": " + msg)
@@ -306,7 +310,7 @@ class SeriesPluginRenamer(object):
 		self.counter = self.counter + 1
 
 		# Maybe there is a better way to avoid multiple Popups
-		from SeriesPlugin import getInstance
+		from .SeriesPlugin import getInstance
 
 		instance = getInstance()
 

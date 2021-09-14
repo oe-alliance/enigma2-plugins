@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 from time import time
 
 from enigma import iPlayableServicePtr
@@ -19,7 +20,7 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ActionMap import ActionMap
 from Components.config import config
 
-from YouTubeContextMenu import YouTubeEntryContextMenu, YouTubeEntryContextMenuList
+from .YouTubeContextMenu import YouTubeEntryContextMenu, YouTubeEntryContextMenuList
 
 
 class DirectYouTubePlayerSummary(Screen):
