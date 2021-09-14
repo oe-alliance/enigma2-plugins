@@ -404,7 +404,7 @@ class DreamExplorerII(Screen):
 				newbooklist.close()
 		elif answer == "DELLINK":
 			temp_book = []
-			for bidx in list(range(len(self.booklines) - 1)):
+			for bidx in range(len(self.booklines) - 1):
 				if not(self.selectedDir in self.booklines[bidx]):
 					temp_book.append(self.booklines[bidx])
 			self.booklines = []
@@ -681,7 +681,8 @@ class DreamExplorerII(Screen):
 		slist = []
 		foundIndex = 0
 		index = 0
-		files = sorted(os_listdir(self["filelist"].getCurrentDirectory()))
+		files = os_listdir(self["filelist"].getCurrentDirectory())
+		files.sort()
 		for name in files:
 			testname = name.lower()
 			if testname.endswith(".mp3") or name.endswith(".m4a") or name.endswith(".ogg") or name.endswith(".flac"):
@@ -1033,7 +1034,7 @@ def ScanSysem_str():
 		ret = ret + "at" + out_line + "\n"
 		out_lines = []
 		out_lines = os_popen("cat /proc/meminfo").readlines()
-		for lidx in list(range(len(out_lines) - 1)):
+		for lidx in range(len(out_lines) - 1):
 			tstLine = out_lines[lidx].split()
 			if "MemTotal:" in tstLine:
 				ret = ret + out_lines[lidx]
@@ -1041,7 +1042,7 @@ def ScanSysem_str():
 				ret = ret + out_lines[lidx] + "\n"
 		out_lines = []
 		out_lines = os_popen("cat /proc/stat").readlines()
-		for lidx in list(range(len(out_lines) - 1)):
+		for lidx in range(len(out_lines) - 1):
 			tstLine = out_lines[lidx].split()
 			if "procs_running" in tstLine:
 				ret = ret + "Running processes: " + tstLine[1]

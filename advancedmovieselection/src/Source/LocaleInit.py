@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 from os import environ
@@ -14,9 +15,9 @@ def localeInit():
     gettext.bindtextdomain("AdvancedMovieSelection", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/AdvancedMovieSelection/locale/"))
 
     ln = language.lang[language.activeLanguage][1]
-    from AboutParser import AboutParser
+    from .AboutParser import AboutParser
     AboutParser.setLocale(ln)
-    from MovieDB import tmdb, tvdb
+    from .MovieDB import tmdb, tvdb
     tmdb.setLocale(ln)
     tvdb.setLocale(ln)
 

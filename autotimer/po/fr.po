@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2015-02-02 22:44+0100\n"
 "Last-Translator: mimi74\n"
 "Language-Team: french-EGAMI\n"
@@ -418,6 +418,10 @@ msgstr "Si ceci est sélectionné, le nom de la ProgAuto respective sera ajouté
 msgid "If this is selected, the tag \"AutoTimer\" will be given to timers created by this plugin."
 msgstr "Si ceci est sélectionné, le tag \"AutoTimer\" sera donné aux programmations créées par ce plugiciel."
 
+#, fuzzy
+msgid "If this is selected, the tag 'AutoTimer' will be given to timers created by this plugin."
+msgstr "Si ceci est sélectionné, le tag \"AutoTimer\" sera donné aux programmations créées par ce plugiciel."
+
 msgid "Import AutoTimer"
 msgstr "Importer ProgAuto"
 
@@ -825,6 +829,12 @@ msgstr ""
 msgid "This is the delay in %s that the AutoTimer will wait after doing a search before searching the EPG again."
 msgstr "Ceci est le délai en heures que la ProgAuto  attendra après une recherche pour rechercher à nouveau le EPG."
 
+msgid "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
+msgstr "Ceci est le délai en minutes que le AutoTimer attendra après une recheche dans l'EPG avant de refaire une recherche."
+
+msgid "This is the delay in minutes that the AutoTimer will wait on initial launch to not delay enigma2 startup time."
+msgstr "Ceci est le délai en minutes que la ProgAuto attendra sur le lancement initial pour ne pas retarder le démarrage de enigma2."
+
 msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
 msgstr "Voilà ce qui sera recherchée dans les titres d'événements. On notera que par exemple la recherche de trémas allemands peuvent être difficile car vous devez connaître le codage que le canal utilise."
 
@@ -866,6 +876,9 @@ msgstr "Mar"
 
 msgid "Tuesday"
 msgstr "Mardi"
+
+msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
+msgstr "Sauf si cela est permis ProgAuto ne va PAS automatiquement regarder les événements correspondants à vos ProgAutos mais seulement lorsque vous quittez l'interface graphique avec le bouton vert."
 
 msgid "Upper bound of timespan."
 msgstr "Limite supérieure du laps de temps."
@@ -914,6 +927,10 @@ msgid "What is this 'control menu' you keep talking about?"
 msgstr ""
 
 msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
+msgstr "Si \"Analyse rapide\" est supporté, le type de service est ignoré. Inutile d'activer si votre image ne supporte pas \"Balayage rapide\" et que vous l'utilisiez."
+
+#, fuzzy
+msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr "Si \"Analyse rapide\" est supporté, le type de service est ignoré. Inutile d'activer si votre image ne supporte pas \"Balayage rapide\" et que vous l'utilisiez."
 
 msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."

@@ -1,15 +1,17 @@
 # -*- coding: UTF-8 -*-
+from __future__ import absolute_import
 from __future__ import print_function
 
 # for localized messages
-from . import _
+from . import _, removeBad
 
-from AutoTimerComponent import preferredAutoTimerComponent, getDefaultEncoding
+from .AutoTimerComponent import preferredAutoTimerComponent, getDefaultEncoding
 from RecordTimer import AFTEREVENT
 from Tools.XMLTools import stringToXML
 from ServiceReference import ServiceReference
 
 from enigma import eServiceReference
+import six
 
 """
 Configuration Version.
@@ -75,7 +77,7 @@ def parseConfig(configuration, list, version=None, uniqueTimerId=0, defaultTimer
 def parseEntry(element, baseTimer, defaults=False):
 	if not defaults:
 		# Read out match
-		baseTimer.match = element.get("match", "").encode("UTF-8")
+		baseTimer.match = six.ensure_str(element.get("match", ""))
 		if not baseTimer.match:
 			print('[AutoTimer] Erroneous config is missing attribute "match", skipping entry')
 			return False
@@ -86,7 +88,7 @@ def parseEntry(element, baseTimer, defaults=False):
 			baseTimer.id = id
 
 		# Read out name
-		baseTimer.name = element.get("name", "").encode("UTF-8")
+		baseTimer.name = six.ensure_str(element.get("name", ""))
 		if not baseTimer.name:
 			print('[AutoTimer] Timer is missing attribute "name", defaulting to match')
 			baseTimer.name = baseTimer.match
@@ -147,7 +149,7 @@ def parseEntry(element, baseTimer, defaults=False):
 
 	# Read out recording path
 	default = baseTimer.destination or ""
-	baseTimer.destination = element.get("location", default).encode("UTF-8") or None
+	baseTimer.destination = six.ensure_str(element.get("location", default)) or None
 
 	# Read out offset
 	offset = element.get("offset")
@@ -248,7 +250,7 @@ def parseEntry(element, baseTimer, defaults=False):
 				continue
 
 			if where in idx:
-				excludes[idx[where]].append(value.encode("UTF-8"))
+				excludes[idx[where]].append(six.ensure_str(value))
 		baseTimer.exclude = excludes
 
 	# Read out includes (use same idx)
@@ -262,7 +264,7 @@ def parseEntry(element, baseTimer, defaults=False):
 				continue
 
 			if where in idx:
-				includes[idx[where]].append(value.encode("UTF-8"))
+				includes[idx[where]].append(six.ensure_str(value))
 		baseTimer.include = includes
 
 	# Read out recording tags
@@ -274,7 +276,7 @@ def parseEntry(element, baseTimer, defaults=False):
 			if not value:
 				continue
 
-			tags.append(value.encode("UTF-8"))
+			tags.append(six.ensure_str(value))
 		baseTimer.tags = tags
 
 	return True
@@ -291,11 +293,11 @@ def parseConfigOld(configuration, list, uniqueTimerId=0):
 		# Get name (V2+)
 		name = timer.get("name")
 		if name:
-			name = name.encode("UTF-8")
+			name = six.ensure_str(name)
 		# Get name (= match) (V1)
 		else:
 			# Read out name
-			name = getValue(timer.findall("name"), "").encode("UTF-8")
+			name = six.ensure_str(getValue(timer.findall("name"), ""))
 
 		if not name:
 			print('[AutoTimer] Erroneous config is missing attribute "name", skipping entry')
@@ -305,7 +307,7 @@ def parseConfigOld(configuration, list, uniqueTimerId=0):
 		match = timer.get("match")
 		if match:
 			# Read out match
-			match = match.encode("UTF-8")
+			match = six.ensure_str(match)
 			if not match:
 				print('[AutoTimer] Erroneous config contains empty attribute "match", skipping entry')
 				continue
@@ -466,7 +468,7 @@ def parseConfigOld(configuration, list, uniqueTimerId=0):
 				continue
 
 			if where in idx:
-				excludes[idx[where]].append(value.encode("UTF-8"))
+				excludes[idx[where]].append(six.ensure_str(value))
 
 		# Read out includes (use same idx) (V4+ feature, should not harm V3-)
 		includes = ([], [], [], [])
@@ -477,7 +479,7 @@ def parseConfigOld(configuration, list, uniqueTimerId=0):
 				continue
 
 			if where in idx:
-				includes[idx[where]].append(value.encode("UTF-8"))
+				includes[idx[where]].append(six.ensure_str(value))
 
 		# Read out max length (V4+)
 		maxlen = timer.get("maxduration")
@@ -494,7 +496,7 @@ def parseConfigOld(configuration, list, uniqueTimerId=0):
 				maxlen = None
 
 		# Read out recording path
-		destination = timer.get("destination", "").encode("UTF-8") or None
+		destination = six.ensure_str(timer.get("destination", "")) or None
 
 		# Read out recording tags
 		tags = []
@@ -503,7 +505,7 @@ def parseConfigOld(configuration, list, uniqueTimerId=0):
 			if not value:
 				continue
 
-			tags.append(value.encode("UTF-8"))
+			tags.append(six.ensure_str(value))
 
 		# Finally append timer
 		list.append(preferredAutoTimerComponent(
@@ -619,7 +621,7 @@ def buildConfig(defaultTimer, timers, webif=False):
 			extend((
 				'  <e2service>\n',
 				'   <e2servicereference>', str(serviceref), '</e2servicereference>\n',
-				'   <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
+				'   <e2servicename>', stringToXML(removeBad(ref.getServiceName())), '</e2servicename>\n',
 				'  </e2service>\n',
 			))
 	else:
@@ -627,14 +629,14 @@ def buildConfig(defaultTimer, timers, webif=False):
 		for serviceref in defaultTimer.services:
 			ref = ServiceReference(str(serviceref))
 			extend(('  <serviceref>', serviceref, '</serviceref>',
-						' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n',
+						' <!-- ', stringToXML(removeBad(ref.getServiceName())), ' -->\n',
 			))
 
 		# Bouquets
 		for bouquet in defaultTimer.bouquets:
 			ref = ServiceReference(str(bouquet))
 			extend(('  <bouquet>', str(bouquet), '</bouquet>',
-						' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n',
+						' <!-- ', stringToXML(removeBad(ref.getServiceName())), ' -->\n',
 			))
 
 	# AfterEvent
@@ -776,7 +778,7 @@ def buildConfig(defaultTimer, timers, webif=False):
 				extend((
 					'  <e2service>\n',
 					'   <e2servicereference>', str(serviceref), '</e2servicereference>\n',
-					'   <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
+					'   <e2servicename>', stringToXML(removeBad(ref.getServiceName())), '</e2servicename>\n',
 					'  </e2service>\n',
 				))
 		else:
@@ -784,14 +786,14 @@ def buildConfig(defaultTimer, timers, webif=False):
 			for serviceref in timer.services:
 				ref = ServiceReference(str(serviceref))
 				extend(('  <serviceref>', serviceref, '</serviceref>',
-							' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n',
+							' <!-- ', stringToXML(removeBad(ref.getServiceName())), ' -->\n',
 				))
 
 			# Bouquets
 			for bouquet in timer.bouquets:
 				ref = ServiceReference(str(bouquet))
 				extend(('  <bouquet>', str(bouquet), '</bouquet>',
-							' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n',
+							' <!-- ', stringToXML(removeBad(ref.getServiceName())), ' -->\n',
 				))
 
 		# AfterEvent
@@ -844,7 +846,7 @@ def buildConfig(defaultTimer, timers, webif=False):
 	# End of Configuration
 	append('</autotimer>\n')
 
-	from plugin import autotimer
+	from .plugin import autotimer
 	list[3] = str(autotimer.nextTimerId)
 
 	return list

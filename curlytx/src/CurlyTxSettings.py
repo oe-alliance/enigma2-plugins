@@ -177,7 +177,7 @@ class CurlyTxSettings(ConfigListScreen, HelpableScreen, Screen):
             )
 
     def keySave(self):
-        for i in list(range(0, len(config.plugins.CurlyTx.pages))):
+        for i in range(0, len(config.plugins.CurlyTx.pages)):
             config.plugins.CurlyTx.pages[i].save()
 
         config.plugins.CurlyTx.pages.save()

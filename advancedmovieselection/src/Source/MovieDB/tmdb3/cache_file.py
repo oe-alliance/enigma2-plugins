@@ -9,6 +9,7 @@
 #          access.
 #-----------------------
 
+from __future__ import absolute_import
 import struct
 import errno
 import json
@@ -16,10 +17,12 @@ import time
 import os
 import io
 
-from cStringIO import StringIO
 
-from tmdb_exceptions import *
-from cache_engine import CacheEngine, CacheObject
+from .tmdb_exceptions import *
+from .cache_engine import CacheEngine, CacheObject
+
+from six.moves import cStringIO as StringIO
+
 
 ####################
 # Cache File Format
@@ -126,7 +129,7 @@ except ImportError:
         if filename.startswith('~'):
             # check for home directory
             return os.path.expanduser(filename)
-        elif (ord(filename[0]) in (range(65, 91) + range(99, 123))) \
+        elif (ord(filename[0]) in (list(range(65, 91)) + list(range(99, 123)))) \
                 and (filename[1:3] == ':\\'):
             # check for absolute drive path (e.g. C:\...)
             return filename
@@ -372,7 +375,7 @@ class FileEngine(CacheEngine):
         else:
             # rewrite cache file from scratch
             # pull data from parent cache
-            data.extend(self.parent()._data.values())
+            data.extend(list(self.parent()._data.values()))
             data.sort(key=lambda x: x.creation)
             # write header
             size = len(data) + self.preallocate

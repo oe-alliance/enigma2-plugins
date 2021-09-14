@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -41,6 +42,8 @@ from Tools import Directories
 
 # Tags
 from Screens.MovieSelection import getPreferredTagEditor
+
+import six
 
 weekdays = [
 	("0", _("Monday")),
@@ -206,18 +209,18 @@ class AutoTimerEditorBase:
 			default = True
 			now[3] = timer.timespan[0][0]
 			now[4] = timer.timespan[0][1]
-			begin = mktime(now)
+			begin = mktime(tuple(now))
 			now[3] = timer.timespan[1][0]
 			now[4] = timer.timespan[1][1]
-			end = mktime(now)
+			end = mktime(tuple(now))
 		else:
 			default = False
 			now[3] = 20
 			now[4] = 15
-			begin = mktime(now)
+			begin = mktime(tuple(now))
 			now[3] = 23
 			now[4] = 15
-			end = mktime(now)
+			end = mktime(tuple(now))
 		self.timespan = NoSave(ConfigEnableDisable(default=default))
 		self.timespanbegin = NoSave(ConfigClock(default=begin))
 		self.timespanend = NoSave(ConfigClock(default=end))
@@ -232,7 +235,7 @@ class AutoTimerEditorBase:
 			now = [x for x in localtime()]
 			now[3] = 0
 			now[4] = 0
-			begin = mktime(now)
+			begin = mktime(tuple(now))
 			end = begin + 604800 # today + 7d
 		self.timeframe = NoSave(ConfigEnableDisable(default=default))
 		self.timeframebegin = NoSave(ConfigDateTime(begin, _("%d.%B %Y"), increment=86400))
@@ -275,18 +278,18 @@ class AutoTimerEditorBase:
 			default = True
 			now[3] = timer.afterevent[0][1][0][0]
 			now[4] = timer.afterevent[0][1][0][1]
-			begin = mktime(now)
+			begin = mktime(tuple(now))
 			now[3] = timer.afterevent[0][1][1][0]
 			now[4] = timer.afterevent[0][1][1][1]
-			end = mktime(now)
+			end = mktime(tuple(now))
 		else:
 			default = False
 			now[3] = 23
 			now[4] = 15
-			begin = mktime(now)
+			begin = mktime(tuple(now))
 			now[3] = 7
 			now[4] = 0
-			end = mktime(now)
+			end = mktime(tuple(now))
 		self.afterevent_timespan = NoSave(ConfigEnableDisable(default=default))
 		self.afterevent_timespanbegin = NoSave(ConfigClock(default=begin))
 		self.afterevent_timespanend = NoSave(ConfigClock(default=end))
@@ -1179,9 +1182,9 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 			if item[1].value == "" or idx < 2:
 				continue
 			elif idx < self.lenExcludes:
-				self.excludes[self.idx].append(item[1].value.encode("UTF-8"))
+				self.excludes[self.idx].append(six.ensure_str(item[1].value))
 			else:
-				self.includes[self.idx].append(item[1].value.encode("UTF-8"))
+				self.includes[self.idx].append(six.ensure_str(item[1].value))
 
 	def refresh(self, *args, **kwargs):
 		self.saveCurrent()
@@ -1473,9 +1476,9 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 
 
 def addAutotimerFromSearchString(session, match):
-	from AutoTimerComponent import preferredAutoTimerComponent
-	from AutoTimerImporter import AutoTimerImporter
-	from plugin import autotimer
+	from .AutoTimerComponent import preferredAutoTimerComponent
+	from .AutoTimerImporter import AutoTimerImporter
+	from .plugin import autotimer
 
 	autotimer.readXml()
 
@@ -1502,9 +1505,9 @@ def addAutotimerFromSearchString(session, match):
 
 
 def addAutotimerFromEvent(session, evt=None, service=None):
-	from AutoTimerComponent import preferredAutoTimerComponent
-	from AutoTimerImporter import AutoTimerImporter
-	from plugin import autotimer
+	from .AutoTimerComponent import preferredAutoTimerComponent
+	from .AutoTimerImporter import AutoTimerImporter
+	from .plugin import autotimer
 
 	autotimer.readXml()
 
@@ -1555,9 +1558,9 @@ def addAutotimerFromEvent(session, evt=None, service=None):
 
 
 def addAutotimerFromTimer(session, timer):
-	from AutoTimerComponent import preferredAutoTimerComponent
-	from AutoTimerImporter import AutoTimerImporter
-	from plugin import autotimer
+	from .AutoTimerComponent import preferredAutoTimerComponent
+	from .AutoTimerImporter import AutoTimerImporter
+	from .plugin import autotimer
 
 	autotimer.readXml()
 
@@ -1592,9 +1595,9 @@ def addAutotimerFromTimer(session, timer):
 
 
 def addAutotimerFromService(session, service=None):
-	from AutoTimerComponent import preferredAutoTimerComponent
-	from AutoTimerImporter import AutoTimerImporter
-	from plugin import autotimer
+	from .AutoTimerComponent import preferredAutoTimerComponent
+	from .AutoTimerImporter import AutoTimerImporter
+	from .plugin import autotimer
 
 	autotimer.readXml()
 
@@ -1652,7 +1655,7 @@ def addAutotimerFromService(session, service=None):
 
 
 def editAutotimerFromTimer(session, timer):
-	from plugin import autotimer
+	from .plugin import autotimer
 
 	autotimer.readXml()
 
@@ -1674,7 +1677,7 @@ def importerCallback(ret):
 
 
 def addAutotimerFromEventSilent(session, evt=None, service=None):
-	from plugin import autotimer
+	from .plugin import autotimer
 
 	autotimer.readXml()
 
@@ -1727,7 +1730,7 @@ def addAutotimerFromEventSilent(session, evt=None, service=None):
 
 def editorCallback(ret):
 	if ret:
-		from plugin import autotimer
+		from .plugin import autotimer
 
 		autotimer.readXml()
 

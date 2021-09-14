@@ -20,20 +20,21 @@
 #  distributed other than under the conditions noted above.
 #
 from __future__ import print_function
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 from Components.config import config
 from Components.ActionMap import HelpableActionMap
 from Components.Button import Button
-from MovieList import MovieList, accessRestriction
+from .MovieList import MovieList, accessRestriction
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
-from MoveCopy import MovieMove
+from .MoveCopy import MovieMove
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
-from Rename import MovieRetitle
-from Wastebasket import Wastebasket
+from .Rename import MovieRetitle
+from .Wastebasket import Wastebasket
 from enigma import eServiceReference
-from Source.Config import qButtons
+from .Source.Config import qButtons
 
 
 def getPluginCaption(pname):
@@ -348,12 +349,12 @@ class QuickButton:
                     # TODO: search?
                     if True or not service.flags & eServiceReference.mustDescent:
                         from SearchTMDb import TMDbMain as TMDbMainsave
-                        from Source.ServiceProvider import ServiceCenter
+                        from .Source.ServiceProvider import ServiceCenter
                         searchTitle = ServiceCenter.getInstance().info(service).getName(service)
                         if len(self.list.multiSelection) == 0:
                             self.session.openWithCallback(self.updateCurrentSelection, TMDbMainsave, searchTitle, service)
                         else:
-                            from DownloadMovies import DownloadMovies
+                            from .DownloadMovies import DownloadMovies
                             items = []
                             for item in self.list.multiSelection:
                                 items.append([item, 0])
@@ -371,7 +372,7 @@ class QuickButton:
                             self.setMovieStatus(1)
                             self.setButtonText(key_number, _("Mark as unseen"))
                 elif pname == "Show up to VSR-X":
-                    from Source.AccessRestriction import VSR
+                    from .Source.AccessRestriction import VSR
                     access = "VSR-%d" % (self.list.getAccess())
                     for index, item in enumerate(VSR):
                         if item == access:
@@ -429,10 +430,10 @@ class QuickButton:
             self.reloadList()
 
     def openFilterByDescriptionChoice(self):
-        from Source.ServiceProvider import ServiceCenter, detectDVDStructure, detectBludiscStructure, eServiceReferenceDvd, eServiceReferenceBludisc, eServiceReferenceListAll
-        from Source.MovieScanner import movieScanner
+        from .Source.ServiceProvider import ServiceCenter, detectDVDStructure, detectBludiscStructure, eServiceReferenceDvd, eServiceReferenceBludisc, eServiceReferenceListAll
+        from .Source.MovieScanner import movieScanner
         from enigma import iServiceInformation
-        from MovieSelection import SHOW_ALL_MOVIES
+        from .MovieSelection import SHOW_ALL_MOVIES
         serviceHandler = ServiceCenter.getInstance()
         descr = []
         if isinstance(self.list.root, eServiceReferenceListAll):
@@ -484,7 +485,7 @@ class QuickButton:
         self.session.openWithCallback(self.filterByDescription, ChoiceBox, title=_("Select movie by description:"), list=descr, selection=selection)
 
     def filterByDescription(self, answer):
-        from MovieSelection import SHOW_ALL_MOVIES
+        from .MovieSelection import SHOW_ALL_MOVIES
         if not answer:
             return
         if answer[0] == _(SHOW_ALL_MOVIES):

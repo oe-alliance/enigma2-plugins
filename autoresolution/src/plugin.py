@@ -814,7 +814,7 @@ class ManualResolution(Screen):
 			except:
 				print("[ManualResolution] Error open /proc/stb/video/videomode")
 		if self.old_mode:
-			for x in list(range(len(tlist))):
+			for x in range(len(tlist)):
 				if tlist[x][1] == self.old_mode:
 					selection = x
 		self.session.openWithCallback(self.resolutionSelected, ChoiceBox, title=_("Please select a resolution..."), list=tlist, selection=selection, keys=keys, windowTitle=_("Manual resolution"))

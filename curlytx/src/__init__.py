@@ -1,12 +1,5 @@
-# -*- coding: utf-8 -*-
-# CurlyTx translation initialization
-# Copyright (C) 2011 Christian Weiske <cweiske@cweiske.de>
-# License: GPLv3 or later
-
-from __future__ import print_function
 from Components.Language import language
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
-import os
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 import gettext
 
 PluginLanguageDomain = "CurlyTx"
@@ -21,7 +14,7 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
+		print("[%s] fallback to default translation for %s" % (PluginLanguageDomain, txt))
 		return gettext.gettext(txt)
 
 

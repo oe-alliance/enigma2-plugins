@@ -20,12 +20,13 @@
 #
 
 from __future__ import print_function
+from __future__ import absolute_import
 import os
-from LocaleInit import _
+from .LocaleInit import _
 from ServiceUtils import diskUsage, getDirSize, realSize
-from Globals import printStackTrace
+from .Globals import printStackTrace
 from enigma import eServiceReference, iServiceInformation
-from Config import config
+from .Config import config
 
 
 class MovieInfo():
@@ -195,7 +196,7 @@ class DirectoryEvent(DirectoryInfo):
         if isinstance(serviceref, eServiceReferenceListAll):
             self.is_movielibrary = True
         elif serviceref is not None:
-            from MovieScanner import movieScanner
+            from .MovieScanner import movieScanner
             dbinfo = movieScanner.movielibrary.getInfo(serviceref.getPath())
             if dbinfo is not None:
                 self.mov_count = dbinfo[0]
@@ -209,7 +210,7 @@ class DirectoryEvent(DirectoryInfo):
         return self.dir_path
 
     def getDBDescription(self):
-        from MovieScanner import movieScanner
+        from .MovieScanner import movieScanner
         self.dir_size = movieScanner.movielibrary.getSize()
         self.dir_count, self.mov_count = movieScanner.movielibrary.getFullCount()
         text1 = []

@@ -89,6 +89,9 @@ import struct
 import select
 import time
 
+from six.moves import range
+
+
 # From /usr/include/linux/icmp.h; your milage may vary.
 ICMP_ECHO_REQUEST = 8 # Seems to be the same on Solaris.
 
@@ -209,7 +212,7 @@ def verbose_ping(dest_addr, timeout=2, count=4):
     Send >count< ping to >dest_addr< with the given >timeout< and display
     the result.
     """
-    for i in xrange(count):
+    for i in range(count):
         print("ping %s..." % dest_addr, end=' ')
         try:
             delay = do_one(dest_addr, timeout)

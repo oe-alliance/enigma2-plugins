@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AutoTimer v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2018-04-09 09:14+0200\n"
 "Last-Translator: Alec <alex1vagyok@gmail.com>\n"
 "Language-Team: alec <alex1vagyok@gmail.com>\n"
@@ -417,6 +417,10 @@ msgid "If this is selected, the name of the respective AutoTimer will be added a
 msgstr "Ha ez be van jelölve, az adott AutoTimer neve hozzáadódik a plugin által létrehozott időzítők címkéjéhez."
 
 msgid "If this is selected, the tag \"AutoTimer\" will be given to timers created by this plugin."
+msgstr "Ha ez be van jelölve, akkor az \"AutoTimer\" címkét kapja a bővítmény által létrehozott időzítők."
+
+#, fuzzy
+msgid "If this is selected, the tag 'AutoTimer' will be given to timers created by this plugin."
 msgstr "Ha ez be van jelölve, akkor az \"AutoTimer\" címkét kapja a bővítmény által létrehozott időzítők."
 
 msgid "Import AutoTimer"
@@ -841,6 +845,12 @@ msgstr "Ez többnyire ízlés kérdése./nA varázsló csökkentett opciókat k�
 msgid "This is the delay in %s that the AutoTimer will wait after doing a search before searching the EPG again."
 msgstr "Ez az óra késleltetése, amely az AutoTimer a keresést követően újra keresni fogja az EPG-t."
 
+msgid "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
+msgstr "Ez az a perc késleltetés, amelyet az AutoTimer várakozik a keresés után az EPG újra keresésére."
+
+msgid "This is the delay in minutes that the AutoTimer will wait on initial launch to not delay enigma2 startup time."
+msgstr "Ez az a perc késleltetés, amelyet az AutoTimer a kezdeti indításkor vár, hogy ne késleltesse az enigma2 indítási idejét."
+
 msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
 msgstr "Ezt keresi a műsorok címében. Vegye figyelembe az ékezetes karakterek kódolását is."
 
@@ -882,6 +892,9 @@ msgstr "Ked"
 
 msgid "Tuesday"
 msgstr "Kedd"
+
+msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
+msgstr "Hacsak ez nem engedélyezett, az AutoTimer automatikusan nem keresi az AutoTimer időzítéseknek megfelelő eseményeket, csak akkor, ha a GUI-t a zöld gombbal hagyja el."
 
 msgid "Upper bound of timespan."
 msgstr "A határidő felső határa."
@@ -932,6 +945,10 @@ msgid "What is this 'control menu' you keep talking about?"
 msgstr "Mi ez a 'vezérlő menü', amiről beszélünk?"
 
 msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
+msgstr "A \"Gyors keresés\" támogatásakor a szolgáltatás típusát figyelmen kívül hagyja. Ezt nem szükséges engedélyezni, hacsak a lemezkép nem támogatja a \"Gyors keresés\" funkciót, és Ön nem használja azt."
+
+#, fuzzy
+msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr "A \"Gyors keresés\" támogatásakor a szolgáltatás típusát figyelmen kívül hagyja. Ezt nem szükséges engedélyezni, hacsak a lemezkép nem támogatja a \"Gyors keresés\" funkciót, és Ön nem használja azt."
 
 msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."

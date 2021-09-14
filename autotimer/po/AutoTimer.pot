@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -934,6 +934,9 @@ msgstr ""
 msgid "Autotimer Settings"
 msgstr ""
 
+msgid "If this is selected, the tag 'AutoTimer' will be given to timers created by this plugin."
+msgstr ""
+
 msgid "Include 'AutoTimer' in tags"
 msgstr ""
 
@@ -941,6 +944,18 @@ msgid "Poll Interval (in mins)"
 msgstr ""
 
 msgid "Support 'Fast Scan'?"
+msgstr ""
+
+msgid "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
+msgstr ""
+
+msgid "This is the delay in minutes that the AutoTimer will wait on initial launch to not delay enigma2 startup time."
+msgstr ""
+
+msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
+msgstr ""
+
+msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr ""
 
 msgid "AutoTimer Help"

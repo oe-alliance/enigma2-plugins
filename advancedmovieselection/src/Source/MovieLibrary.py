@@ -20,12 +20,13 @@
 #
 
 from __future__ import print_function
+from __future__ import absolute_import
 import os
 from ServiceProvider import ServiceCenter, eServiceReferenceMarker
-from ServiceDescriptor import MovieInfo
+from .ServiceDescriptor import MovieInfo
 from enigma import iServiceInformation
-from AccessRestriction import accessRestriction
-from Globals import printStackTrace
+from .AccessRestriction import accessRestriction
+from .Globals import printStackTrace
 from Components.config import config
 from CueSheetSupport import hasLastPosition
 
@@ -130,7 +131,7 @@ class MovieLibrary(dict, SortProvider):
             file_name = isinstance(file_service_list, str) and service or service.getPath()
             file_name = os.path.realpath(file_name)
             print("try remove from movielibrary:", file_name)
-            for key, item in self["db"].iteritems():
+            for key, item in six.iteritems(self["db"]):
                 if not file_name.startswith(key):
                     continue
                 for index, movie_info in enumerate(item["movies"]):
@@ -233,7 +234,7 @@ class MovieLibrary(dict, SortProvider):
 
     def getDirectoryList(self, sort=False):
         if not sort:
-            return self["db"].keys()
+            return list(self["db"].keys())
         return sorted(self["db"].keys())
 
     def getMissingLocations(self, dir_list):
@@ -250,14 +251,14 @@ class MovieLibrary(dict, SortProvider):
         l = []
         if location not in self["db"]:
             return l
-        for key, item in self["db"].iteritems():
+        for key, item in six.iteritems(self["db"]):
             if key.startswith(location):
                 l.append(key)
         return sorted(l)
 
     def findMovies(self, name):
         l = []
-        for key, item in self["db"].iteritems():
+        for key, item in six.iteritems(self["db"]):
             for index, movie_info in enumerate(item["movies"]):
                 if movie_info.name == name:
                     l.append(movie_info)
@@ -267,7 +268,7 @@ class MovieLibrary(dict, SortProvider):
         if not serviceref:
             return
         movie_path = serviceref.getPath()
-        for key, item in self["db"].iteritems():
+        for key, item in six.iteritems(self["db"]):
             if not movie_path.startswith(key):
                 continue
             for index, movie_info in enumerate(item["movies"]):
@@ -295,7 +296,7 @@ class MovieLibrary(dict, SortProvider):
         directories = 0
         movies = 0
         try:
-            for km in self["db"].iteritems():
+            for km in six.iteritems(self["db"]):
                 directories += 1
                 movies += len(km[1]["movies"])
         except:
@@ -314,7 +315,7 @@ class MovieLibrary(dict, SortProvider):
             if cnt == 0:
                 return -1
             return size
-        for km in self["db"].iteritems():
+        for km in six.iteritems(self["db"]):
             cnt += 1
             size += km[1]["dir_size"]
         if cnt == 0:
@@ -324,12 +325,14 @@ class MovieLibrary(dict, SortProvider):
 
 from xml.dom.minidom import Document
 
+import six
+
 
 class dict2xml(object):
     def __init__(self, structure):
         if len(structure) == 1:
             self.doc = Document()
-            rootName = str(structure.keys()[0])
+            rootName = str(list(structure.keys())[0])
             self.root = self.doc.createElement(rootName)
 
             self.doc.appendChild(self.root)

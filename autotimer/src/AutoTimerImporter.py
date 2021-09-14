@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -19,7 +20,7 @@ from RecordTimer import AFTEREVENT
 
 # Needed to convert our timestamp back and forth
 from time import localtime
-from AutoTimerEditor import weekdays
+from .AutoTimerEditor import weekdays
 
 from enigma import eServiceReference, getDesktop
 
@@ -139,7 +140,7 @@ class AutoTimerImporter(Screen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 		self["key_yellow"] = StaticText()
- 		self["key_blue"] = StaticText()
+		self["key_blue"] = StaticText()
 
 		entries = []
 		append = entries.append

@@ -20,23 +20,24 @@
 #
 
 from __future__ import print_function
+from __future__ import absolute_import
 import os
 from datetime import datetime
 from ServiceProvider import ServiceCenter, eServiceReferenceDvd, eServiceReferenceBludisc
 from ServiceProvider import detectDVDStructure, detectBludiscStructure
-from ServiceDescriptor import MovieInfo
+from .ServiceDescriptor import MovieInfo
 from ServiceUtils import serviceUtil, diskUsage, getDirSize
-from AutoNetwork import autoNetwork
-from MovieConfig import MovieConfig
-from Globals import printStackTrace
-from Trashcan import TRASH_NAME
+from .AutoNetwork import autoNetwork
+from .MovieConfig import MovieConfig
+from .Globals import printStackTrace
+from .Trashcan import TRASH_NAME
 from enigma import eServiceReference, iServiceInformation
 from ISOInfo import ISOInfo
 from Components.config import config
-from StopWatch import clockit
-from RecordTimerEvent import recordTimerEvent
-from MovieLibrary import MovieLibrary
-from Hotplug import hotplug
+from .StopWatch import clockit
+from .RecordTimerEvent import recordTimerEvent
+from .MovieLibrary import MovieLibrary
+from .Hotplug import hotplug
 
 SCAN_EXCLUDE = (ISOInfo.MOUNT_PATH, "DUMBO", "TIMOTHY", "/media/swap", "/media/ram", "/media/ba")
 AUDIO_EXCLUDE = ("mp3", "ogg", "wav", "m4a")
@@ -140,7 +141,7 @@ class MovieScanner():
     def updateMovieList(self, dir_list=None, delay=0):
         print("[AdvancedMovieSelection] Start scanning movies")
         try:
-            # print dir_list
+            # print(dir_list)
             self.isWorking = True
             if delay > 0:
                 print("waiting", str(delay))
@@ -153,7 +154,7 @@ class MovieScanner():
 
             # print "-" * 80
             # for p in dir_list:
-            #    print p
+            #    print(p)
             # print "-" * 80
 
             for p in dir_list:
@@ -188,7 +189,7 @@ class MovieScanner():
             if not serviceref.valid():
                 break
             dvd = None
-            # print serviceref.getPath()
+            # print(serviceref.getPath())
             # dvd structure
             if serviceref.flags & eServiceReference.mustDescent:
                 dvd = detectDVDStructure(serviceref.getPath())

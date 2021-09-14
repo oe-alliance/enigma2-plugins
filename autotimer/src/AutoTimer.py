@@ -1,12 +1,11 @@
-from __future__ import print_function
-
+from __future__ import print_function, absolute_import, division
 # for localized messages
-from . import _
+from . import _, removeBad
 
 # Plugins Config
 from xml.etree.cElementTree import parse as cet_parse, fromstring as cet_fromstring
 from os import path as os_path, rename as os_rename
-from AutoTimerConfiguration import parseConfig, buildConfig
+from .AutoTimerConfiguration import parseConfig, buildConfig
 
 # Tasks
 import Components.Task
@@ -32,7 +31,7 @@ from Tools.FuzzyDate import FuzzyTime
 from enigma import eEPGCache, eServiceReference, eServiceCenter, iServiceInformation
 
 # AutoTimer Component
-from AutoTimerComponent import preferredAutoTimerComponent
+from .AutoTimerComponent import preferredAutoTimerComponent
 
 from itertools import chain
 from collections import defaultdict
@@ -47,6 +46,11 @@ except ImportError as ie:
 	renameTimer = None
 
 from . import config, xrange, itervalues
+
+from six.moves import range
+
+from six import PY2
+
 
 XML_CONFIG = "/etc/enigma2/autotimer.xml"
 
@@ -80,11 +84,11 @@ def timeSimilarityPercent(rtimer, evtBegin, evtEnd, timer=None):
 	else:
 		commonTime = 0
 	if evtBegin != evtEnd:
-		commonTime_percent = 100 * commonTime / (evtEnd - evtBegin)
+		commonTime_percent = 100 * commonTime // (evtEnd - evtBegin)
 	else:
 		return 0
 	if rtimerEnd != rtimerBegin:
-		durationMatch_percent = 100 * (evtEnd - evtBegin) / (rtimerEnd - rtimerBegin)
+		durationMatch_percent = 100 * (evtEnd - evtBegin) // (rtimerEnd - rtimerBegin)
 	else:
 		return 0
 	#print("commonTime_percent = ",commonTime_percent,", durationMatch_percent = ",durationMatch_percent)
@@ -232,7 +236,8 @@ class AutoTimer:
 		return [(x,) for x in lst]
 
 	def getSortedTupleTimerList(self):
-		lst = sorted(self.timers[:])
+		lst = self.timers[:]
+		lst.sort()
 		return [(x,) for x in lst]
 
 	def getUniqueId(self):
@@ -352,10 +357,11 @@ class AutoTimer:
 		dest = timer.destination or config.usage.default_path.value
 
 		# Workaround to allow search for umlauts if we know the encoding
-		match = timer.match.replace('\xc2\x86', '').replace('\xc2\x87', '')
+		match = removeBad(timer.match)
 		if timer.encoding != 'UTF-8':
 			try:
-				match = match.decode('UTF-8').encode(timer.encoding)
+				if PY2:
+					match = match.decode('UTF-8').encode(timer.encoding) #FIXME PY3
 			except UnicodeDecodeError:
 				pass
 
@@ -702,7 +708,7 @@ class AutoTimer:
 						# We start our search right after our actual index
 						# Attention we have to use a copy of the list, because we have to append the previous older matches
 						lepgm = len(epgmatches)
-						for i in xrange(lepgm):
+						for i in range(lepgm):
 							servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS = epgmatches[(i + idx + 1) % lepgm]
 							if self.checkSimilarity(timer, name, nameS, shortdesc, shortdescS, extdesc, extdescS, force=True):
 								# Check if the similar is already known

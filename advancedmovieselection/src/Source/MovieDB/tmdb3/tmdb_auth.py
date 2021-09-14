@@ -8,6 +8,7 @@
 #          calls against the TMDB v3 API
 #-----------------------
 
+from __future__ import absolute_import
 from datetime import datetime as _pydatetime, \
                      tzinfo as _pytzinfo
 import re
@@ -63,8 +64,8 @@ class datetime(_pydatetime):
         return cls(*dt)
 
 
-from request import Request
-from tmdb_exceptions import *
+from .request import Request
+from .tmdb_exceptions import *
 
 syssession = None
 

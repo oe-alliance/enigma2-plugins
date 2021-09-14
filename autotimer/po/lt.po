@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AutoTimer-VTI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2017-07-10 14:15+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -420,6 +420,10 @@ msgid "If this is selected, the name of the respective AutoTimer will be added a
 msgstr "Jei čia įjungta, laikmačiams, sukurtiems šio įskiepio, kaip žymė, bus duotas atininkamo autolaikmačio pavadinimas."
 
 msgid "If this is selected, the tag \"AutoTimer\" will be given to timers created by this plugin."
+msgstr "Jei čia įjungta, laikmačiams, sukurtiems šio įskiepio, bus duota \"autolaikmačio\" žymė."
+
+#, fuzzy
+msgid "If this is selected, the tag 'AutoTimer' will be given to timers created by this plugin."
 msgstr "Jei čia įjungta, laikmačiams, sukurtiems šio įskiepio, bus duota \"autolaikmačio\" žymė."
 
 msgid "Import AutoTimer"
@@ -903,6 +907,12 @@ msgstr ""
 msgid "This is the delay in %s that the AutoTimer will wait after doing a search before searching the EPG again."
 msgstr "Tai yra užlaikymas valandomis, kiek autolaikmatis lauks po paieškos, kad ieškotų EPG vėl."
 
+msgid "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
+msgstr "Tai intervalas minutėmis, kiek autolaikmatis lauks po paieškos, kad ieškotų EPG vėl."
+
+msgid "This is the delay in minutes that the AutoTimer will wait on initial launch to not delay enigma2 startup time."
+msgstr "Tai yra delsa minutėmis, kiek autolaikmatis lauks po pradinio įjungimo, kad neuždelsti enigma2 paleisties."
+
 msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
 msgstr "Tai, kas bus ieškoma įvykių pavadinimuose. Žinokite, kad pvz. vokiškų umliautų ieškojimas gali būti sudėtingas, nes turite žinoti kanalo naudojamą rašmenų kodavimą."
 
@@ -948,6 +958,9 @@ msgstr "Ant"
 
 msgid "Tuesday"
 msgstr "antradienis"
+
+msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
+msgstr "Kol neįjungta, autolaikmatis automatiškai NEieškos įvykių, atitinkančių jūsų autolaikmačius, bet tiktai, jei jūs išeinate iš GUI su 'ŽALIU' mygtuku."
 
 msgid "Upper bound of timespan."
 msgstr "Viršutinė laikotarpio riba."
@@ -998,6 +1011,10 @@ msgid "What is this 'control menu' you keep talking about?"
 msgstr "Kas per 'valdymo meniu', apie kurį nuolat kalbama?"
 
 msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
+msgstr "'Greitoje paieškoje', kanalų tipas yra ignoruojamas. Neverta čia įjungti, nebent šis atvaizdas palaiko 'Greitą paiešką' ir jūs ją naudojate."
+
+#, fuzzy
+msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr "'Greitoje paieškoje', kanalų tipas yra ignoruojamas. Neverta čia įjungti, nebent šis atvaizdas palaiko 'Greitą paiešką' ir jūs ją naudojate."
 
 msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."

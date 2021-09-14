@@ -22,7 +22,7 @@ def createPage():
 
 def loadDefaultPageOptions():
     defaults = []
-    for i in list(range(0, len(config.plugins.CurlyTx.pages))):
+    for i in range(0, len(config.plugins.CurlyTx.pages)):
         defaults.append((str(i), config.plugins.CurlyTx.pages[i].title.value))
     if hasattr(config.plugins.CurlyTx, "defaultPage"):
         config.plugins.CurlyTx.defaultPage.setChoices(defaults, "0")

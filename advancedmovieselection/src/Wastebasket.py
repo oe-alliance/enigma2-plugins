@@ -26,17 +26,18 @@ must pass on to the recipients the same freedoms that you received. You must mak
 that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 '''
 from __future__ import print_function
+from __future__ import absolute_import
 
-from __init__ import _
+from .__init__ import _
 import os
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
-from Source.Trashcan import Trashcan, eServiceReferenceTrash
+from .Source.Trashcan import Trashcan, eServiceReferenceTrash
 from Components.config import config
 from Components.ActionMap import HelpableActionMap
 from Components.Button import Button
 from Components.Label import Label
-from Source.ServiceProvider import detectDVDStructure
+from .Source.ServiceProvider import detectDVDStructure
 from Screens.MessageBox import MessageBox
 from enigma import eTimer
 from Tools.Directories import fileExists
@@ -48,11 +49,11 @@ from Components.MultiContent import MultiContentEntryText
 from datetime import datetime
 from Tools.Directories import getSize as getServiceSize
 from time import time, strftime, localtime
-from Source.Remote.MessageServer import getIpAddress
-from Source.Remote.Client import getClients
-from ClientSetup import ClientSetup
+from .Source.Remote.MessageServer import getIpAddress
+from .Source.Remote.Client import getClients
+from .ClientSetup import ClientSetup
 from Components.Pixmap import Pixmap
-from Source.Globals import SkinTools
+from .Source.Globals import SkinTools
 
 
 class TrashMovieList(GUIComponent):
@@ -139,7 +140,7 @@ class TrashMovieList(GUIComponent):
         for service in trash:
             self.list.append((service, None, -1, -1))
 
-    def reload(self, root=None):
+    def reload_module(self, root=None):
         self.load(root)
         self.l.setList(self.list)
 
@@ -399,6 +400,8 @@ import Screens.Standby
 from time import mktime, strftime
 from datetime import timedelta
 
+from six.moves import reload_module
+
 
 class WastebasketTimer():
     def __init__(self, session):
@@ -472,7 +475,7 @@ class WastebasketTimer():
         self.startTimer()
 
     def autoDeleteAllMovies(self):
-        from Source.Remote.Client import isAnyRecording
+        from .Source.Remote.Client import isAnyRecording
         remote_recordings = isAnyRecording()
 
         retryvalue = "%s minutes" % int(config.AdvancedMovieSelection.next_empty_check.value)

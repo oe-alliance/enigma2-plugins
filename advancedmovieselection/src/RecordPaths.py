@@ -20,9 +20,10 @@
 #  distributed other than under the conditions noted above.
 #
 from __future__ import print_function
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 # Topfi: use local eRecordPaths instead of Screens.RecordPaths
-from eRecordPaths import RecordPathsSettings as eRecordPathsSettings
+from .eRecordPaths import RecordPathsSettings as eRecordPathsSettings
 from Screens.LocationBox import MovieLocationBox
 from Components.config import config, ConfigSelection, getConfigListEntry
 from Components.UsageConfig import preferredPath

@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
-from __future__ import print_function
 from Components.Language import language
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
-import os
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 import gettext
 
 from boxbranding import getImageDistro
+import six
 
 # Config
 from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
@@ -13,6 +11,13 @@ from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
 
 PluginLanguageDomain = "AutoTimer"
 PluginLanguagePath = "Extensions/AutoTimer/locale"
+
+
+def removeBad(val):
+	if six.PY3:
+		return val.replace('\x86', '').replace('\x87', '')
+	else:
+		return val.replace('\xc2\x86', '').replace('\xc2\x87', '')
 
 
 def localeInit():
@@ -23,11 +28,12 @@ def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
+		print("[%s] fallback to default translation for %s" % (PluginLanguageDomain, txt))
 		return gettext.gettext(txt)
 
 
-language.addCallback(localeInit())
+localeInit()
+language.addCallback(localeInit)
 
 config.plugins.autotimer = ConfigSubsection()
 config.plugins.autotimer.autopoll = ConfigEnableDisable(default=True)
@@ -89,8 +95,8 @@ config.plugins.autotimer.skip_during_epgrefresh = ConfigYesNo(default=False)
 
 try:
 	xrange = xrange
-	iteritems = lambda d: d.iteritems()
-	itervalues = lambda d: d.itervalues()
+	iteritems = lambda d: six.iteritems(d)
+	itervalues = lambda d: six.itervalues(d)
 except NameError:
 	xrange = range
 	iteritems = lambda d: d.items()

@@ -171,7 +171,7 @@ class AC3delay:
         self.selectedAudioIndex = None
         if n > 0:
             self.selectedAudioIndex = oAudioTracks.getCurrentTrack()
-            for x in list(range(n)):
+            for x in range(n):
                 i = oAudioTracks.getTrackInfo(x)
                 language = i.getLanguage()
                 description = i.getDescription()
