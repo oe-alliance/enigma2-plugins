@@ -1,11 +1,10 @@
 from __future__ import print_function
-from urllib import unquote_plus
 from twisted.web.client import getPage
 from md5 import md5 # to encode password
 from string import split, rstrip
-
+from six.moves.urllib.parse import unquote_plus
 from xml.dom.minidom import parseString
-
+import six
 # for localized messages
 from . import _
 
@@ -107,7 +106,7 @@ class LastFM(LastFMHandler):
 #                            ,"/radio/handshake.php?version=" + self.version + "&platform=" + self.platform + "&username=" + username + "&passwordmd5=" + self.hexify(md5(password).digest())
 #                            ,callback=self.connectCB,errorback=self.onConnectFailed)
         url = "http://" + self.host + ":" + str(self.port) + "/radio/handshake.php?version=" + self.version + "&platform=" + self.platform + "&username=" + username + "&passwordmd5=" + self.hexify(md5(password).digest())
-        getPage(url).addCallback(self.connectCB).addErrback(self.onConnectFailed)
+        getPage(six.ensure_binary(url)).addCallback(self.connectCB).addErrback(self.onConnectFailed)
 
     def connectCB(self, data):
         self.info = self._parselines(data)
@@ -150,7 +149,7 @@ class LastFM(LastFMHandler):
 #                            ,self.info["base_path"] + "/xspf.php?sk=" + self.info["session"]+"&discovery=0&desktop=1.3.1.1"
 #                            ,callback=self.loadPlaylistCB,errorback=self.onCommandFailed)
             url = "http://" + self.info["base_url"] + ":80" + self.info["base_path"] + "/xspf.php?sk=" + self.info["session"] + "&discovery=0&desktop=2.0"
-            getPage(url).addCallback(self.loadPlaylistCB).addErrback(self.onCommandFailed)
+            getPage(six.ensure_binary(url)).addCallback(self.loadPlaylistCB).addErrback(self.onCommandFailed)
 
     def loadPlaylistCB(self, xmlsource):
         self.playlist = LastFMPlaylist(xmlsource)
@@ -192,7 +191,7 @@ class LastFM(LastFMHandler):
 #                            ,self.info["base_path"] + "/control.php?command=" + cmd + "&session=" + self.info["session"]
 #                            ,callback=callback,errorback=self.onCommandFailed)
             url = "http://" + self.info["base_url"] + ":80" + self.info["base_path"] + "/control.php?command=" + cmd + "&session=" + self.info["session"]
-            getPage(url).addCallback(callback).addErrback(self.onCommandFailed)
+            getPage(six.ensure_binary(url)).addCallback(callback).addErrback(self.onCommandFailed)
 
     def onTrackLovedCB(self, response):
         res = self._parselines(response)
@@ -254,7 +253,7 @@ class LastFM(LastFMHandler):
 #                            ,"/1.0/tag/toptags.xml"
 #                            ,callback=self.getGlobalTagsCB,errorback=self.onCommandFailed)
             url = "http://" + self.info["base_url"] + ":80" + "/1.0/tag/toptags.xml"
-            getPage(url).addCallback(self.getGlobalTagsCB).addErrback(self.onCommandFailed)
+            getPage(six.ensure_binary(url)).addCallback(self.getGlobalTagsCB).addErrback(self.onCommandFailed)
 
     def getGlobalTagsCB(self, result):
         try:
@@ -279,7 +278,7 @@ class LastFM(LastFMHandler):
 #                            ,"/1.0/user/%s/toptracks.xml"%username
 #                            ,callback=self.getTopTracksCB,errorback=self.onCommandFailed)
             url = "http://" + self.info["base_url"] + "/1.0/user/" + username + "/toptracks.xml"
-            getPage(url).addCallback(self.getTopTracksCB).addErrback(self.onCommandFailed)
+            getPage(six.ensure_binary(url)).addCallback(self.getTopTracksCB).addErrback(self.onCommandFailed)
 
     def getTopTracksCB(self, result):
         re, rdata = self._parseTracks(result)
@@ -296,7 +295,7 @@ class LastFM(LastFMHandler):
 #                            ,"/1.0/user/%s/recenttracks.xml"%username
 #                            ,callback=self.getRecentTracksCB,errorback=self.onCommandFailed)
             url = "http://" + self.info["base_url"] + "/1.0/user/" + username + "/recenttracks.xml"
-            getPage(url).addCallback(self.getRecentTracksCB).addErrback(self.onCommandFailed)
+            getPage(six.ensure_binary(url)).addCallback(self.getRecentTracksCB).addErrback(self.onCommandFailed)
 
     def getRecentTracksCB(self, result):
         re, rdata = self._parseTracks(result)
@@ -313,7 +312,7 @@ class LastFM(LastFMHandler):
 #                            ,"/1.0/user/%s/recentlovedtracks.xml"%username
 #                            ,callback=self.getRecentLovedTracksCB,errorback=self.onCommandFailed)
             url = "http://" + self.info["base_url"] + "/1.0/user/" + username + "/recentlovedtracks.xml"
-            getPage(url).addCallback(self.getRecentLovedTracksCB).addErrback(self.onCommandFailed)
+            getPage(six.ensure_binary(url)).addCallback(self.getRecentLovedTracksCB).addErrback(self.onCommandFailed)
 
     def getRecentLovedTracksCB(self, result):
         re, rdata = self._parseTracks(result)
@@ -330,7 +329,7 @@ class LastFM(LastFMHandler):
 #                            ,"/1.0/user/%s/recentbannedtracks.xml"%username
 #                            ,callback=self.getRecentBannedTracksCB,errorback=self.onCommandFailed)
             url = "http://" + self.info["base_url"] + "/1.0/user/" + username + "/recentbannedtracks.xml"
-            getPage(url).addCallback(self.getRecentBannedTracksCB).addErrback(self.onCommandFailed)
+            getPage(six.ensure_binary(url)).addCallback(self.getRecentBannedTracksCB).addErrback(self.onCommandFailed)
 
     def getRecentBannedTracksCB(self, result):
         re, rdata = self._parseTracks(result)
@@ -366,7 +365,7 @@ class LastFM(LastFMHandler):
 #                            ,"/1.0/user/%s/neighbours.xml"%username
 #                            ,callback=self.getNeighboursCB,errorback=self.onCommandFailed)
             url = "http://" + self.info["base_url"] + "/1.0/user/" + username + "/neighbours.xml"
-            getPage(url).addCallback(self.getNeighboursCB).addErrback(self.onCommandFailed)
+            getPage(six.ensure_binary(url)).addCallback(self.getNeighboursCB).addErrback(self.onCommandFailed)
 
     def getNeighboursCB(self, result):
         re, rdata = self._parseUser(result)
@@ -383,7 +382,7 @@ class LastFM(LastFMHandler):
 #                            ,"/1.0/user/%s/friends.xml"%username
 #                            ,callback=self.getFriendsCB,errorback=self.onCommandFailed)
             url = "http://" + self.info["base_url"] + "/1.0/user/" + username + "/friends.xml"
-            getPage(url).addCallback(self.getFriendsCB).addErrback(self.onCommandFailed)
+            getPage(six.ensure_binary(url)).addCallback(self.getFriendsCB).addErrback(self.onCommandFailed)
 
     def getFriendsCB(self, result):
         re, rdata = self._parseUser(result)
@@ -417,7 +416,7 @@ class LastFM(LastFMHandler):
 #                            ,self.info["base_path"] + "/adjust.php?session=" + self.info["session"] + "&url=" + url
 #                            ,callback=self.changeStationCB,errorback=self.onCommandFailed)
             url = "http://" + self.info["base_url"] + ":80" + self.info["base_path"] + "/adjust.php?session=" + self.info["session"] + "&url=" + url
-            getPage(url).addCallback(self.changeStationCB).addErrback(self.onCommandFailed)
+            getPage(six.ensure_binary(url)).addCallback(self.changeStationCB).addErrback(self.onCommandFailed)
 
     def changeStationCB(self, result):
         res = self._parselines(result)

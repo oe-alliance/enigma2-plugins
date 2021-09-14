@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 from Tools.BoundFunction import boundFunction
 from Screens.MessageBox import MessageBox
@@ -24,7 +25,7 @@ from time import time
 
 from Screens.InfoBarGenerics import InfoBarShowHide, InfoBarSeek, InfoBarNotifications, InfoBarServiceNotifications
 
-from ServiceXML import iWebTVStations
+from .ServiceXML import iWebTVStations
 
 config.plugins.dreamMediathek = ConfigSubsection()
 config.plugins.dreamMediathek.general = ConfigSubsection()

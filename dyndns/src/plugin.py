@@ -7,10 +7,16 @@ from Components.ActionMap import ActionMap
 from enigma import eTimer
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, getConfigListEntry, ConfigText, ConfigSelection, ConfigSubsection, ConfigYesNo
-from urllib2 import Request, urlopen
-from base64 import encodestring
 global sessions
 from twisted.internet import reactor
+
+from six.moves.urllib.request import Request, urlopen
+import six
+if six.PY3:
+	from base64 import encodebytes as _encode
+else:
+	from base64 import encodestring as _encode
+
 
 sessions = []
 
@@ -106,19 +112,19 @@ class DynDNSService:
 		print("[DynDNS] IP change, setting new one", self.lastip)
 		try:
 			url = "http://members.dyndns.org/nic/update?system=dyndns&hostname=%s&myip=%s&wildcard=ON&offline=NO" % (config.plugins.DynDNS.hostname.value, self.lastip)
-			if self.getURL(url).find("good") is not -1:
+			if self.getURL(url).find("good") != -1:
 				print("[DynDNS] ip changed")
 		except Exception as e:
 			print("[DynDNS] ip was not changed", e)
 
 	def getURL(self, url):
 		request = Request(url)
-   		base64string = encodestring('%s:%s' % (config.plugins.DynDNS.user.value, config.plugins.DynDNS.password.value))[:-1]
-   		request.add_header("Authorization", "Basic %s" % base64string)
-   		htmlFile = urlopen(request)
-   		htmlData = htmlFile.read()
-   		htmlFile.close()
-   		return htmlData
+		base64string = _encode('%s:%s' % (config.plugins.DynDNS.user.value, config.plugins.DynDNS.password.value))[:-1]
+		request.add_header("Authorization", "Basic %s" % base64string)
+		htmlFile = urlopen(request)
+		htmlData = htmlFile.read()
+		htmlFile.close()
+		return htmlData
 
 
 def onPluginStart(session, **kwargs):

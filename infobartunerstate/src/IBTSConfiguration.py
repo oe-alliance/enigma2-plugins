@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 #######################################################################
 #
 #    InfoBar Tuner State for Enigma-2
@@ -30,7 +31,10 @@ from Screens.Screen import Screen
 from Screens.Setup import SetupSummary
 
 # Plugin internal
-from InfoBarTunerState import InfoBarTunerState, addExtension, removeExtension, overwriteInfoBar, recoverInfoBar
+from .InfoBarTunerState import InfoBarTunerState, addExtension, removeExtension, overwriteInfoBar, recoverInfoBar
+
+
+import six
 
 
 #######################################################
@@ -98,11 +102,11 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 			(separator, config.infobartunerstate.about),
 		]
 
-		for i, configinfobartunerstatefield in enumerate(config.infobartunerstate.fields.dict().itervalues()):
+		for i, configinfobartunerstatefield in enumerate(six.itervalues(config.infobartunerstate.fields.dict())):
 			self.config.append(
 			(_("Field %d content") % (i), configinfobartunerstatefield)
 			)
-		for i, configinfobartunerstatefieldwidth in enumerate(config.infobartunerstate.fieldswidth.dict().itervalues()):
+		for i, configinfobartunerstatefieldwidth in enumerate(six.itervalues(config.infobartunerstate.fieldswidth.dict())):
 			self.config.append(
 			(_("Field %d width") % (i), configinfobartunerstatefieldwidth)
 			)
@@ -168,7 +172,7 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 		fieldicon = []
 		fieldprogress = []
 		text = ""
-		for i, c in enumerate(config.infobartunerstate.fields.dict().itervalues()):
+		for i, c in enumerate(six.itervalues(config.infobartunerstate.fields.dict())):
 			if c.value == "Name":
 				fieldname.append(i)
 			if c.value == "TypeIcon":
@@ -201,7 +205,7 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 
 		# We need assign / "write" access import the plugin module
 		# global won't work across module scope
-		import plugin
+		from . import plugin
 		if config.infobartunerstate.enabled.value:
 			# Plugin should be enabled
 			#TODO use a separate init function similar to the close
@@ -258,7 +262,7 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 
 	# Overwrite Screen close function
 	def close(self):
-		from plugin import ABOUT
+		from .plugin import ABOUT
 		self.session.openWithCallback(self.closeConfirm, MessageBox, ABOUT, MessageBox.TYPE_INFO)
 
 	def closeConfirm(self, dummy=None):

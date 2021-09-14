@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 #
 # Power Save Plugin by gutemine
 #
@@ -25,7 +26,7 @@ from __future__ import print_function
 #
 
 
-from __init__ import _
+from .__init__ import _
 
 from Screens.InfoBarGenerics import *
 
@@ -56,7 +57,7 @@ from Components.config import configfile, getConfigListEntry, ConfigEnableDisabl
 # Startup/shutdown notification
 from Tools import Notifications
 
-import ping
+from . import ping
 import os
 
 # Timer, etc
@@ -65,6 +66,7 @@ from time import localtime, asctime, time, gmtime, sleep
 # Enigma system functions
 from enigma import quitMainloop, eTimer
 
+from six.moves import range
 
 ###############################################################################
 
@@ -405,13 +407,13 @@ class ElektroProfile(ConfigListScreen, Screen):
 		}, -2)
 
 	def save(self):
-		#print "saving"
+		#print("saving")
 		for x in self["config"].list:
 			x[1].save()
 		self.close(False, self.session)
 
 	def cancel(self):
-		#print "cancel"
+		#print("cancel")
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close(False, self.session)
@@ -452,13 +454,13 @@ class ElektroIP(ConfigListScreen, Screen):
 		}, -2)
 
 	def save(self):
-		#print "saving"
+		#print("saving")
 		for x in self["config"].list:
 			x[1].save()
 		self.close(False, self.session)
 
 	def cancel(self):
-		#print "cancel"
+		#print("cancel")
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close(False, self.session)
@@ -538,13 +540,13 @@ class ElektroNAS(ConfigListScreen, Screen):
 		self.session.open(ElektroNASrun)
 
 	def save(self):
-		#print "saving"
+		#print("saving")
 		for x in self["config"].list:
 			x[1].save()
 		self.close(False, self.session)
 
 	def cancel(self):
-		#print "cancel"
+		#print("cancel")
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close(False, self.session)

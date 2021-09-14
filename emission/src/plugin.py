@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config, ConfigSubsection, ConfigText, \
 	ConfigNumber, ConfigYesNo, ConfigSelection
 
 from . import EmissionOverview
-from EmissionOverview import LIST_TYPE_ALL, SORT_TYPE_ADDED
+from .EmissionOverview import LIST_TYPE_ALL, SORT_TYPE_ADDED
 
 config.plugins.emission = ConfigSubsection()
 config.plugins.emission.hostname = ConfigText(default="localhost", fixed_size=False)
@@ -108,7 +109,7 @@ config.plugins.emission.autodownload_from_simplerss.addNotifier(simplerss_handle
 
 
 def main(session, **kwargs):
-	#reload(EmissionOverview)
+	#reload_module(EmissionOverview)
 	session.open(
 		EmissionOverview.EmissionOverview
 	)
@@ -144,6 +145,10 @@ def filescan_open(item, session, **kwargs):
 
 
 from mimetypes import add_type
+
+from six.moves import reload_module
+
+
 add_type("application/x-bittorrent", ".tor")
 add_type("application/x-bittorrent", ".torrent")
 

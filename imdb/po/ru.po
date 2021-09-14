@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 IMDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2020-12-09 10:21+0200\n"
 "Last-Translator: litvcom\n"
 "Language-Team: \n"
@@ -28,6 +28,9 @@ msgstr "Отменить"
 
 msgid "Cast: "
 msgstr "В ролях: "
+
+msgid "Channel Selection"
+msgstr "Выбор канала"
 
 msgid "Content:"
 msgstr "Содержание:"
@@ -108,6 +111,9 @@ msgstr "IMDb поиск"
 msgid "IMDb setup"
 msgstr "Настройка IMDb"
 
+msgid "Lookup"
+msgstr "Поиск"
+
 msgid "Menu"
 msgstr "Меню"
 
@@ -172,6 +178,9 @@ msgstr "Поиск трейлера"
 
 msgid "Search for details from the Internet Movie Database"
 msgstr "Поиск сведений из базы данных IMDb"
+
+msgid "Select from EPG"
+msgstr "Выбор из EPG"
 
 msgid "Settings for Internet Movie Database searches"
 msgstr "Настройка поиска в базе данных IMDb"

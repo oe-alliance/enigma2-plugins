@@ -91,7 +91,7 @@ class PictureApi:
 		maxSize *= 1048576 # input size is assumed to be in mb, but we work with bytes internally
 
 		files = [(f, stat(f)) for f in list_recursive(self.cache)]
-		curSize = sum(map(lambda x: x[1].st_size, files))
+		curSize = sum([x[1].st_size for x in files])
 		if curSize > maxSize:
 			files.sort(key=lambda x: x[1].st_mtime)
 			while curSize > maxSize:

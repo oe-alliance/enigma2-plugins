@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
 from Components.config import config
 from Tools import Notifications
 from Screens.MessageBox import MessageBox
@@ -83,19 +84,19 @@ class GrowleeConnection:
 
 			proto = host.protocol.value
 			if proto == "prowl":
-				from Prowl import ProwlAPI
+				from .Prowl import ProwlAPI
 				connection = ProwlAPI(host)
 			elif proto == "growl":
-				from GrowlTalk import GrowlTalkAbstraction
+				from .GrowlTalk import GrowlTalkAbstraction
 				connection = GrowlTalkAbstraction(host)
 			elif proto == "gntp":
-				from GNTP import GNTPAbstraction
+				from .GNTP import GNTPAbstraction
 				connection = GNTPAbstraction(host)
 			elif proto == "snarl":
-				from SNP import SnarlNetworkProtocolAbstraction
+				from .SNP import SnarlNetworkProtocolAbstraction
 				connection = SnarlNetworkProtocolAbstraction(host)
 			else: # proto == "syslog":
-				from Syslog import SyslogAbstraction
+				from .Syslog import SyslogAbstraction
 				connection = SyslogAbstraction(host)
 
 			self.connections.append((connection, host))

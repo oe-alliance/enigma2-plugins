@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2016-09-29 04:52+0300\n"
 "Last-Translator: MCelliot_g <mcelliot_g@hotmail.com>\n"
 "Language-Team: \n"
@@ -32,6 +32,9 @@ msgstr "Ακύρωση"
 
 msgid "Cast: "
 msgstr "Πρωταγωνιστές: "
+
+msgid "Channel Selection"
+msgstr "Επιλογή Καναλιών"
 
 msgid "Content:"
 msgstr "Περιεχόμενο:"
@@ -118,6 +121,9 @@ msgstr "Χωρίς συσχέτιση στο IMDb."
 msgid "IMDb setup"
 msgstr "Ρυθμίσεις IMDb"
 
+msgid "Lookup"
+msgstr "Αναζήτηση"
+
 #, fuzzy
 msgid "Menu"
 msgstr "IMDb Μενού"
@@ -184,6 +190,9 @@ msgstr "Αναζήτηση Τρέιλερ"
 #, fuzzy
 msgid "Search for details from the Internet Movie Database"
 msgstr "Αναζήτηση λεπτομερειών από τη Διαδικτυακή Βάση Δεδομένων Ταινιών"
+
+msgid "Select from EPG"
+msgstr "Επιλογή από το EPG"
 
 #, fuzzy
 msgid "Settings for Internet Movie Database searches"

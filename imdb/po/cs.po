@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2012-03-15 14:10+0000\n"
 "Last-Translator: jerry\n"
 "Language-Team: jerry\n"
@@ -31,6 +31,9 @@ msgstr "Zrušit"
 
 msgid "Cast: "
 msgstr ""
+
+msgid "Channel Selection"
+msgstr "Výběr stanice"
 
 msgid "Content:"
 msgstr ""
@@ -119,6 +122,9 @@ msgstr "IMDb-Žádná shoda"
 msgid "IMDb setup"
 msgstr "Nastavení IMDb"
 
+msgid "Lookup"
+msgstr "Vyhledat"
+
 msgid "Menu"
 msgstr ""
 
@@ -185,6 +191,9 @@ msgstr "Najít upoutávku"
 #, fuzzy
 msgid "Search for details from the Internet Movie Database"
 msgstr "Dotaz na podrobnosti z internetové filmové databáze"
+
+msgid "Select from EPG"
+msgstr "Vybrat z EPG"
 
 #, fuzzy
 msgid "Settings for Internet Movie Database searches"

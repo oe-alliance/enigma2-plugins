@@ -16,6 +16,8 @@ from enigma import eTimer
 
 from . import EmissionBandwidth
 
+from six.moves import reload_module
+
 
 class EmissionDetailview(Screen, HelpableScreen):
 	skin = """<screen name="EmissionDetailview" title="Torrent View" position="75,75" size="565,450">
@@ -125,7 +127,7 @@ class EmissionDetailview(Screen, HelpableScreen):
 		self.updateList()
 
 	def bandwidth(self):
-		#reload(EmissionBandwidth)
+		#reload_module(EmissionBandwidth)
 		self.timer.stop()
 		id = self.torrentid
 		try:
@@ -262,7 +264,7 @@ class EmissionDetailview(Screen, HelpableScreen):
 
 			l = []
 			files = torrent.files()
-			for id, x in files.items():
+			for id, x in list(files.items()):
 				completed = x['completed']
 				size = x['size'] or 1 # to avoid division by zero ;-)
 				l.append((id, x['priority'], str(completed / 1048576) + " MB",
@@ -291,7 +293,7 @@ class EmissionDetailview(Screen, HelpableScreen):
 				if cur[3]:
 					files[cur[0]]['selected'] = False
 					atLeastOneSelected = False
-					for file in files.values():
+					for file in list(files.values()):
 						if file['selected']:
 							atLeastOneSelected = True
 							break

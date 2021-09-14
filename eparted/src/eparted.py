@@ -2,6 +2,7 @@
 # code by GeminiTeam
 
 from __future__ import print_function
+from __future__ import absolute_import
 from enigma import eTimer
 
 from Screens.Screen import Screen
@@ -25,9 +26,9 @@ from Components.ConfigList import ConfigListScreen
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigSelection, NoSave
 config.plugins.eparted = ConfigSubsection()
 
-from locale import _
+from .locale import _
 from os import system as os_system, path as os_path, listdir
-
+import six
 #from Plugins.Bp.geminimain.gTools import cleanexit
 
 LIST_TYPE_DEV = 0
@@ -170,6 +171,7 @@ class Ceparted(Screen):
 		#cleanexit(__name__)
 
 	def __FinishedConsole(self, result, retval, extra_args=None):
+		result = six.ensure_str(result)
 		if retval == 0 and '\n' in result:
 			list = []
 			for x in parseCmd(result):
@@ -317,7 +319,7 @@ class Cpart(Screen):
 		index = self["list"].getIndex()
 		for x in self.__new_part_list:
 			if x[LIST_TYPE] == LIST_TYPE_PAR:
-				#print x
+				#print(x)
 				p0 = "%s: %s" % (_("Nr"), x[PA_NR])
 				p1 = "%s: %d%s" % (_("Start"), x[PA_START], self.__unit)
 				p2 = "%s: %d%s" % (_("End"), x[PA_END], self.__unit)
@@ -349,6 +351,7 @@ class Cpart(Screen):
 		plist.append(x)
 
 	def __FinishedConsole(self, result, retval, extra_args=None):
+		result = six.ensure_str(result)
 		if retval == 0 and '\n' in result:
 			tlist = parseCmd(result)
 			if len(tlist):
@@ -404,7 +407,7 @@ class Cpart(Screen):
 					self.__addFreePart(self.__new_part_list, lastPartEnd)
 				#for x in self.__new_part_list:
 				#	if x[LIST_TYPE]==LIST_TYPE_PAR:
-				#		print x
+				#		print(x)
 			except:
 				print("[eParted] <remove part>")
 			self.__Filllist()
@@ -431,7 +434,7 @@ class Cpart(Screen):
 			self.__Filllist()
 
 	def __addPart2Comlist(self, list, val, mkpart=True):
-		#print val
+		#print(val)
 		partnr = val[PA_NR]
 		if mkpart:
 			fs = val[PA_FS]

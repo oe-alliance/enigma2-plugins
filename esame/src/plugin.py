@@ -9,6 +9,7 @@
 # version.
 #===============================================================================
 
+from __future__ import absolute_import
 from enigma import ePicLoad, eTimer, getDesktop
 
 from Screens.Screen import Screen
@@ -22,7 +23,7 @@ from Components.Button import Button
 
 from Tools.LoadPixmap import LoadPixmap
 
-from stonefield import StoneField
+from .stonefield import StoneField
 
 import time
 

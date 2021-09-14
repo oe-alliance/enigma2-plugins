@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: imdb Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2012-07-25 22:59+0330\n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -32,6 +32,9 @@ msgstr ""
 
 msgid "Cast: "
 msgstr "پخش کردن :"
+
+msgid "Channel Selection"
+msgstr "انتخاب کانال"
 
 msgid "Content:"
 msgstr ""
@@ -116,6 +119,9 @@ msgstr "IMDb سازگار نیست"
 msgid "IMDb setup"
 msgstr ""
 
+msgid "Lookup"
+msgstr "مراجعه"
+
 msgid "Menu"
 msgstr ""
 
@@ -182,6 +188,9 @@ msgstr ""
 #, fuzzy
 msgid "Search for details from the Internet Movie Database"
 msgstr "پرس و جو از بانک اطلاعاتی فیلم های اینترنتی "
+
+msgid "Select from EPG"
+msgstr ""
 
 #, fuzzy
 msgid "Settings for Internet Movie Database searches"

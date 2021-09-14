@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from __future__ import print_function
+from __future__ import print_function, absolute_import
 
 # To check if in Standby
 import Screens.Standby
@@ -13,12 +13,12 @@ from ServiceReference import ServiceReference
 from Components.ParentalControl import parentalControl
 
 # Timer
-from EPGRefreshTimer import epgrefreshtimer, EPGRefreshTimerEntry, checkTimespan
+from .EPGRefreshTimer import epgrefreshtimer, EPGRefreshTimerEntry, checkTimespan
 
 # To calculate next timer execution
 from time import time
 
-# Error-print
+# Error-print()
 from traceback import print_exc
 from sys import stdout
 
@@ -28,9 +28,9 @@ from Tools.XMLTools import stringToXML
 from os import path as path
 
 # We want a list of unique services
-from EPGRefreshService import EPGRefreshService
+from .EPGRefreshService import EPGRefreshService
 
-from OrderedSet import OrderedSet
+from .OrderedSet import OrderedSet
 
 # Configuration
 from Components.config import config
@@ -42,9 +42,9 @@ from Tools.BoundFunction import boundFunction
 
 # ... II
 from . import _, ENDNOTIFICATIONID, NOTIFICATIONDOMAIN
-from MainPictureAdapter import MainPictureAdapter
-from PipAdapter import PipAdapter
-from RecordAdapter import RecordAdapter
+from .MainPictureAdapter import MainPictureAdapter
+from .PipAdapter import PipAdapter
+from .RecordAdapter import RecordAdapter
 
 # Path to configuration
 CONFIG = "/etc/enigma2/epgrefresh.xml"
@@ -335,7 +335,7 @@ class EPGRefresh:
 		self.refreshAdapter = refreshAdapter
 
 		try:
-			from plugin import AdjustExtensionsmenu, extStopDescriptor, extPendingServDescriptor, extRunDescriptor
+			from .plugin import AdjustExtensionsmenu, extStopDescriptor, extPendingServDescriptor, extRunDescriptor
 			AdjustExtensionsmenu(True, extPendingServDescriptor)
 			AdjustExtensionsmenu(True, extStopDescriptor)
 			AdjustExtensionsmenu(False, extRunDescriptor)
@@ -356,7 +356,7 @@ class EPGRefresh:
 		self.doStopRunningRefresh = False
 
 		try:
-			from plugin import AdjustExtensionsmenu, housekeepingExtensionsmenu, extStopDescriptor, extPendingServDescriptor
+			from .plugin import AdjustExtensionsmenu, housekeepingExtensionsmenu, extStopDescriptor, extPendingServDescriptor
 			AdjustExtensionsmenu(False, extPendingServDescriptor)
 			AdjustExtensionsmenu(False, extStopDescriptor)
 			housekeepingExtensionsmenu(config.plugins.epgrefresh.show_run_in_extensionsmenu, force=True)
@@ -437,7 +437,7 @@ class EPGRefresh:
 		self._nextTodo()
 
 	def _callFinishNotifiers(self, *args, **kwargs):
-		for notifier in self.finishNotifiers.keys():
+		for notifier in list(self.finishNotifiers.keys()):
 			print("[EPGRefresh] Debug: call " + str(notifier))
 			self.finishNotifiers[notifier]()
 		self._nextTodo()

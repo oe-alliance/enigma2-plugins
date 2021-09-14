@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -17,11 +18,11 @@ from Components.config import config, getConfigListEntry, ConfigSubsection, Conf
 from enigma import eListboxPythonMultiContent, eServiceReference, getDesktop, iPlayableService, eSize, ePicLoad, iServiceInformation
 from ServiceReference import ServiceReference
 from Tools.Directories import SCOPE_PLUGINS, resolveFilename
-from __init__ import _
+from .__init__ import _
 
 
 class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
-	STATE_DISCONNECTED, STATE_CONNECTING, STATE_PLAYING, STATE_PAUSED, STATE_FAILURE = range(5)
+	STATE_DISCONNECTED, STATE_CONNECTING, STATE_PLAYING, STATE_PAUSED, STATE_FAILURE = list(range(5))
 	STATE_NAMES = [_("disconnected"), _("connecting..."), _("LIVE"), _("pause"), _("No Connection")]
 	STREAM_DIM = (768, 576)
 	PIP_DIM = (432, 324)

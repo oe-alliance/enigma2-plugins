@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+from __future__ import division
 # for localized messages
 from . import _, allowShowOrbital, getOrbposConfList
 
@@ -9,7 +11,7 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from Tools.Alternatives import GetWithAlternative
 from ServiceReference import ServiceReference
 
-from EPGSearchSetup import EPGSearchSetup
+from .EPGSearchSetup import EPGSearchSetup
 from Screens.InfoBar import MoviePlayer
 from Screens.ChannelSelection import ChannelSelection, SimpleChannelSelection, MODE_RADIO
 from Screens.ChoiceBox import ChoiceBox
@@ -35,6 +37,13 @@ from operator import itemgetter
 from collections import defaultdict
 
 from skin import parameters as skinparameter
+
+import six
+from six.moves import reduce
+from functools import reduce
+
+SIGN = '°' if six.PY3 else str('\xc2\xb0')
+
 
 # Partnerbox installed and icons in epglist enabled?
 try:
@@ -189,7 +198,7 @@ class EPGSearchList(EPGList):
 		if op > 1800:
 			op = 3600 - op
 			direction = "W"
-		return ("%d.%d\xc2\xb0%s") % (op // 10, op % 10, direction)
+		return ("%d.%d" + SIGN + "%s") % (op // 10, op % 10, direction)
 
 # main class of plugin
 
@@ -569,7 +578,7 @@ class EPGSearch(EPGSelection):
 			self.searchEPG(ret[1])
 
 	def searchEPG(self, searchString=None, searchSave=True, lastAsk=None):
-		if isinstance(searchString, basestring) and searchString:
+		if isinstance(searchString, six.string_types) and searchString:
 			if searchSave:
 				# Maintain history
 				history = config.plugins.epgsearch.history.value
@@ -612,7 +621,7 @@ class EPGSearch(EPGSelection):
 		l.instance.setSelectionEnable(False)
 		# Match an RIBDT search for dummy entries
 		invalSref = eServiceReference().toString()
-		searching = [(invalSref, -1, -1, -1, "")] * (config.epgselection.enhanced_itemsperpage.value / 2)
+		searching = [(invalSref, -1, -1, -1, "")] * (config.epgselection.enhanced_itemsperpage.value // 2)
 		searching.append((invalSref, -1, -1, -1, _("Searching...")))
 		l.list = searching
 		l.l.setList(searching)
@@ -706,7 +715,7 @@ class EPGSearch(EPGSelection):
 		if titleEntry < 0:
 			return []
 
-		searchFilter = reduce(lambda acc, val: acc.union(val), searchFilter.itervalues(), set())
+		searchFilter = reduce(lambda acc, val: acc.union(val), six.itervalues(searchFilter), set())
 
 		partialMatchFunc = lambda s: searchString in s
 		matchFunc = {
@@ -734,14 +743,14 @@ class EPGSearch(EPGSelection):
 	def _processBouquetServiceRefMap(self, tempServiceRefMap):
 		serviceHandler = eServiceCenter.getInstance()
 		bouquetServiceRefMap = defaultdict(set)
-		for srefId, srefDict in tempServiceRefMap.iteritems():
+		for srefId, srefDict in six.iteritems(tempServiceRefMap):
 			if len(srefDict) > 1 and "" in srefDict:
 				noName = srefDict[""]
 				info = serviceHandler.info(noName)
 				name = info and info.getName(noName) or ""
 				if name and name in srefDict:
 					del srefDict[""]
-			bouquetServiceRefMap[srefId[2:5]].update(sref.toString() for sref in srefDict.itervalues())
+			bouquetServiceRefMap[srefId[2:5]].update(sref.toString() for sref in six.itervalues(srefDict))
 		return bouquetServiceRefMap
 
 	def _addBouquetTempServiceRefMap(self, bouquet, tempServiceRefMap):

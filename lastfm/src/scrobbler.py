@@ -8,7 +8,8 @@ from enigma import iServiceInformation, iPlayableService
 from Components.config import config
 from twisted.web.client import getPage
 
-from urllib import urlencode as urllib_urlencode
+from six.moves.urllib.parse import urlencode as urllib_urlencode
+import six
 
 # for localized messages
 from . import _
@@ -41,7 +42,7 @@ class LastFMScrobbler(object):
             "v": self.version,
             "u": self.user
             })
-        getPage(url).addCallback(self.handshakeCB).addErrback(self.handshakeCBError)
+        getPage(six.ensure_binary(url)).addCallback(self.handshakeCB).addErrback(self.handshakeCBError)
 
     def handshakeCBError(self, data):
         self.failed(data.split("\n"))
@@ -85,11 +86,11 @@ class LastFMScrobbler(object):
         (host, port) = self.submiturl.split("/")[2].split(":")
         url = "http://" + host + ":" + port + "/" + "/".join(self.submiturl.split("/")[3:])
         data = self.encode(post)
-        getPage(url, method="POST", headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(data))}, postdata=data).addCallback(self.submitCB).addErrback(self.submitCBError)
+        getPage(six.ensure_binary(url), method="POST", headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(data))}, postdata=data).addCallback(self.submitCB).addErrback(self.submitCBError)
 
     def encode(self, postdict):
         result = []
-        for key, value in postdict.items():
+        for key, value in list(postdict.items()):
             result.append(key + "=" + value)
         return "&".join(result)
 

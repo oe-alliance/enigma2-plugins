@@ -1,5 +1,5 @@
-from __future__ import print_function
-
+# -*- coding: UTF-8 -*-
+from __future__ import print_function, absolute_import
 # for localized messages
 from . import _, NOTIFICATIONDOMAIN
 
@@ -14,7 +14,7 @@ from boxbranding import getImageDistro
 from Components.SystemInfo import SystemInfo
 from Components.NimManager import nimmanager
 
-# Error-print
+# Error-print()
 from traceback import print_exc
 from sys import stdout
 
@@ -22,7 +22,7 @@ from sys import stdout
 from time import time, localtime, mktime
 now = localtime()
 begin = mktime((
-	now.tm_year, now.tm_mon, now.tm_mday, 07, 30,
+	now.tm_year, now.tm_mon, now.tm_mday, 0o7, 30,
 	0, now.tm_wday, now.tm_yday, now.tm_isdst)
 )
 end = mktime((
@@ -91,7 +91,8 @@ if config.plugins.epgrefresh.interval.value != 2:
 #pragma mark - Help
 try:
 	from Components.Language import language
-	from Plugins.SystemPlugins.MPHelp import registerHelp, XMLHelpReader
+	from Plugins.SystemPlugins.MPHelp import XMLHelpReader
+	from Plugins.SystemPlugins.MPHelp.plugin import registerHelp
 	from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileExists
 	lang = language.getLanguage()[:2]
 
@@ -117,8 +118,8 @@ except Exception as e:
 	#print("[EPGRefresh] Error registering Notification-Domain:", e)
 
 # Plugin
-from EPGRefresh import epgrefresh
-from EPGRefreshService import EPGRefreshService
+from .EPGRefresh import epgrefresh
+from .EPGRefreshService import EPGRefreshService
 
 # Plugins
 from Components.PluginComponent import plugins
@@ -197,7 +198,7 @@ def setConfigWakeupTime(value):
 
 def main(session, **kwargs):
 	try:
-		from EPGRefreshConfiguration import EPGRefreshConfiguration
+		from .EPGRefreshConfiguration import EPGRefreshConfiguration
 		session.openWithCallback(
 			doneConfiguring,
 			EPGRefreshConfiguration

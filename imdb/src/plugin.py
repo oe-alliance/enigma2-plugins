@@ -52,7 +52,7 @@ config.plugins.imdb.showlongmenuinfo = ConfigYesNo(default=False)
 config.plugins.imdb.showepisodeinfo = ConfigYesNo(default=False)
 
 
-def quoteEventName(eventName, safe="/()" + ''.join(map(chr, range(192, 255)))):
+def quoteEventName(eventName, safe="/()" + ''.join(map(chr, list(range(192, 255))))):
 	# BBC uses '\x86' markers in program names, remove them
 	try:
 		text = eventName.decode('utf8').replace(u'\x86', u'').replace(u'\x87', u'').encode('utf8')
@@ -87,9 +87,13 @@ class IMDB(Screen, HelpableScreen):
 		</screen>"""
 
 	# Some HTML entities as utf-8
-	NBSP = unichr(htmlentitydefs.name2codepoint['nbsp']).encode("utf8")
-	RAQUO = unichr(htmlentitydefs.name2codepoint['raquo']).encode("utf8")
-	HELLIP = unichr(htmlentitydefs.name2codepoint['hellip']).encode("utf8")
+	NBSP = six.unichr(htmlentitydefs.name2codepoint['nbsp'])
+	RAQUO = six.unichr(htmlentitydefs.name2codepoint['raquo'])
+	HELLIP = six.unichr(htmlentitydefs.name2codepoint['hellip'])
+	if six.PY2:
+		NBSP = NBSP.encode("utf8")
+		RAQUO = RAQUO.encode("utf8")
+		HELLIP = HELLIP.encode("utf8")
 
 	def __init__(self, session, eventName, callbackNeeded=False, save=False, savepath=None, localpath=None):
 		Screen.__init__(self, session)
@@ -302,7 +306,7 @@ class IMDB(Screen, HelpableScreen):
 			self["extralabel"].pageDown()
 
 	def showMenu(self):
-		if (self.Page is 1 or self.Page is 2) and self.resultlist:
+		if (self.Page == 1 or self.Page == 2) and self.resultlist:
 			self["menu"].show()
 			self["stars"].hide()
 			self["starsbg"].hide()
@@ -414,7 +418,7 @@ class IMDB(Screen, HelpableScreen):
 			if self.savingpath is not None:
 				getTXT = self.IMDBsavetxt()
 				if getTXT is not None:
-					file(self.savingpath + ".txt", 'w').write(getTXT)
+					open(self.savingpath + ".txt", 'w').write(getTXT)
 				else:
 					from Screens.MessageBox import MessageBox
 					self.session.open(MessageBox, (_('IMDb can not get Movie Information to write to .txt file!')), MessageBox.TYPE_INFO, 10)
@@ -426,7 +430,7 @@ class IMDB(Screen, HelpableScreen):
 			if self.savingpath is not None:
 				getTXT = self.IMDBsavetxt(True)
 				if getTXT is not None:
-					file(self.savingpath + ".txt", 'w').write(getTXT)
+					open(self.savingpath + ".txt", 'w').write(getTXT)
 				else:
 					from Screens.MessageBox import MessageBox
 					self.session.open(MessageBox, (_('IMDb can not get Movie Information to write to .jpg and .txt files!')), MessageBox.TYPE_INFO, 10)
@@ -569,7 +573,7 @@ class IMDB(Screen, HelpableScreen):
 
 	def getIMDB(self, search=False):
 		self.resetLabels()
-		if not isinstance(self.eventName, basestring):
+		if not isinstance(self.eventName, six.string_types):
 			self["statusbar"].setText("")
 			return
 		if not self.eventName:

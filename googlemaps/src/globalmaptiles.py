@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 ###############################################################################
 # $Id$
 #
@@ -354,15 +355,15 @@ if __name__ == "__main__":
     import sys, os
 
     def Usage(s = ""):
-        print "Usage: globalmaptiles.py [-profile 'mercator'|'geodetic'] zoomlevel lat lon [latmax lonmax]"
-        print
+        print("Usage: globalmaptiles.py [-profile 'mercator'|'geodetic'] zoomlevel lat lon [latmax lonmax]")
+        print()
         if s:
-            print s
-            print
-        print "This utility prints for given WGS84 lat/lon coordinates (or bounding box) the list of tiles"
-        print "covering specified area. Tiles are in the given 'profile' (default is Google Maps 'mercator')"
-        print "and in the given pyramid 'zoomlevel'."
-        print "For each tile several information is printed including bonding box in EPSG:900913 and WGS84."
+            print(s)
+            print()
+        print("This utility prints for given WGS84 lat/lon coordinates (or bounding box) the list of tiles")
+        print("covering specified area. Tiles are in the given 'profile' (default is Google Maps 'mercator')")
+        print("and in the given pyramid 'zoomlevel'.")
+        print("For each tile several information is printed including bonding box in EPSG:900913 and WGS84.")
         sys.exit(1)
 
     profile = 'mercator'
@@ -413,14 +414,14 @@ if __name__ == "__main__":
     mercator = GlobalMercator()
 
     mx, my = mercator.LatLonToMeters( lat, lon )
-    print "Spherical Mercator (ESPG:900913) coordinates for lat/lon: "
-    print (mx, my)
+    print("Spherical Mercator (ESPG:900913) coordinates for lat/lon: ")
+    print((mx, my))
     tminx, tminy = mercator.MetersToTile( mx, my, tz )
 
     if boundingbox:
         mx, my = mercator.LatLonToMeters( latmax, lonmax )
-        print "Spherical Mercator (ESPG:900913) cooridnate for maxlat/maxlon: "
-        print (mx, my)
+        print("Spherical Mercator (ESPG:900913) cooridnate for maxlat/maxlon: ")
+        print((mx, my))
         tmaxx, tmaxy = mercator.MetersToTile( mx, my, tz )
     else:
         tmaxx, tmaxy = tminx, tminy
@@ -435,11 +436,11 @@ if __name__ == "__main__":
             quadkey = mercator.QuadTree(tx, ty, tz)
             print "\tQuadkey:", quadkey, '(',int(quadkey, 4),')'
             bounds = mercator.TileBounds( tx, ty, tz)
-            print
+            print()
             print "\tEPSG:900913 Extent: ", bounds
             wgsbounds = mercator.TileLatLonBounds( tx, ty, tz)
             print "\tWGS84 Extent:", wgsbounds
             print "\tgdalwarp -ts 256 256 -te %s %s %s %s %s %s_%s_%s.tif" % (
                 bounds[0], bounds[1], bounds[2], bounds[3], "<your-raster-file-in-epsg900913.ext>", tz, tx, ty)
-            print
+            print()
 """

@@ -1,4 +1,5 @@
-from __future__ import print_function
+# -*- coding: UTF-8 -*-
+from __future__ import print_function, absolute_import
 
 # for localized messages
 from . import _
@@ -9,7 +10,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Components.ConfigList import ConfigListScreen
 from Components.config import KEY_OK
 from Screens.LocationBox import LocationBox
-from EPGRefreshChannelEditor import EPGRefreshServiceEditor
+from .EPGRefreshChannelEditor import EPGRefreshServiceEditor
 
 # GUI (Summary)
 from Screens.Setup import SetupSummary
@@ -24,11 +25,11 @@ from Components.config import config, getConfigListEntry, configfile, NoSave, Co
 from Screens.FixedMenu import FixedMenu
 from Tools.BoundFunction import boundFunction
 
-from EPGRefresh import epgrefresh
+from .EPGRefresh import epgrefresh
 from Components.NimManager import nimmanager
 from Screens.MessageBox import MessageBox
 
-# Error-print
+# Error-print()
 from traceback import print_exc
 from sys import stdout
 import os
@@ -69,7 +70,7 @@ class EPGFunctionMenu(FixedMenu):
 class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 	"""Configuration of EPGRefresh"""
 
-        skin = """<screen name="EPGRefreshConfiguration" position="center,center" size="700,450">
+	skin = """<screen name="EPGRefreshConfiguration" position="center,center" size="700,450">
 		<ePixmap position="0,5" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap position="140,5" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<ePixmap position="280,5" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
@@ -190,7 +191,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 		self["config"].setList(self.list)
 
 	def firstExec(self):
-		from plugin import epgrefreshHelp
+		from .plugin import epgrefreshHelp
 		if config.plugins.epgrefresh.show_help.value and epgrefreshHelp:
 			config.plugins.epgrefresh.show_help.value = False
 			config.plugins.epgrefresh.show_help.save()
@@ -238,7 +239,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 			self._showKeyhelp()
 
 	def _showMainHelp(self):
-		from plugin import epgrefreshHelp
+		from .plugin import epgrefreshHelp
 		if epgrefreshHelp:
 			epgrefreshHelp.open(self.session)
 

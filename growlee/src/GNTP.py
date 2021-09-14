@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 
 from twisted.internet.protocol import Protocol, ReconnectingClientFactory, ServerFactory
 from twisted.internet.defer import Deferred
@@ -10,13 +11,16 @@ import re
 import threading
 import collections
 
+import six
+
+
 our_print = lambda *args, **kwargs: print("[growlee.GNTP]", *args, **kwargs)
 
 try:
 	from Screens.MessageBox import MessageBox
 	from Tools import Notifications
 
-	from GrowleeConnection import emergencyDisable
+	from .GrowleeConnection import emergencyDisable
 	from . import NOTIFICATIONID
 except ImportError:
 	def emergencyDisable():
@@ -27,7 +31,7 @@ GNTP_TCP_PORT = 23053
 
 try:
 	dict.iteritems
-	iteritems = lambda d: d.iteritems()
+	iteritems = lambda d: six.iteritems(d)
 except AttributeError:
 	iteritems = lambda d: d.items()
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2016-10-31 20:36+0000\n"
 "Last-Translator: nunigaia\n"
 "Language-Team: BH Team\n"
@@ -32,6 +32,9 @@ msgstr "Cancelar"
 
 msgid "Cast: "
 msgstr "Elenco: "
+
+msgid "Channel Selection"
+msgstr "Seleção de Canais"
 
 msgid "Content:"
 msgstr "Conteúdo:"
@@ -118,6 +121,9 @@ msgstr "Nenhuma correspondência de IMDb."
 msgid "IMDb setup"
 msgstr "Definição IMDb"
 
+msgid "Lookup"
+msgstr "Pesquisa"
+
 #, fuzzy
 msgid "Menu"
 msgstr "Menu IMDb "
@@ -184,6 +190,9 @@ msgstr "Procurar Excerto"
 #, fuzzy
 msgid "Search for details from the Internet Movie Database"
 msgstr "Consultar detalhes da Base de dados de filmes da Internet"
+
+msgid "Select from EPG"
+msgstr "Seleccione do EPG"
 
 #, fuzzy
 msgid "Settings for Internet Movie Database searches"

@@ -5,6 +5,10 @@ from os import path as os_path, symlink, listdir, unlink, readlink, remove
 
 from xml.etree.cElementTree import parse as cet_parse
 from Tools.Directories import pathExists, fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_HDD, SCOPE_CURRENT_PLUGIN, SCOPE_CURRENT_SKIN
+
+import six
+
+
 #WEBTV_STATIONS = "/etc/enigma2/webtv_stations.xml"
 WEBTV_STATIONS = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/dreamMediathek/webtv_stations.xml")
 
@@ -42,7 +46,7 @@ class WebTVStations():
 				print("[WebTVStations] Error reading Stations:", e)
 
 	def getWebTVStationsList(self):
-		return sorted(self.webtv_stations.iterkeys())
+		return sorted(six.iterkeys(self.webtv_stations))
 
 
 iWebTVStations = WebTVStations()

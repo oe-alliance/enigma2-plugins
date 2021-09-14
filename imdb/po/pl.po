@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2019-11-13 17:07+0000\n"
 "Last-Translator: @Kos\n"
 "Language-Team: Special for OpenATV\n"
@@ -27,6 +27,9 @@ msgstr "Anuluj"
 
 msgid "Cast: "
 msgstr "Obsada:"
+
+msgid "Channel Selection"
+msgstr "Wybór Kanału"
 
 msgid "Content:"
 msgstr "Skład:"
@@ -110,6 +113,9 @@ msgstr "IMDb Szukaj"
 msgid "IMDb setup"
 msgstr "IMDb Ustawienia"
 
+msgid "Lookup"
+msgstr "Wyszukaj"
+
 msgid "Menu"
 msgstr ""
 
@@ -174,6 +180,9 @@ msgstr "Szukaj Zwiastun"
 
 msgid "Search for details from the Internet Movie Database"
 msgstr "Wyszukaj szczegóły w internetowej bazie danych filmów"
+
+msgid "Select from EPG"
+msgstr "Wybierz z EPG"
 
 msgid "Settings for Internet Movie Database searches"
 msgstr "Ustawienia przeszukiwania internetowej bazy danych filmów"

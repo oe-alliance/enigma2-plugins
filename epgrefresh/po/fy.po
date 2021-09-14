@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: epgrefresh_fy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2014-04-12 10:30+CEST\n"
 "PO-Revision-Date: 2009-01-09 20:46+0100\n"
 "Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
 "Language-Team: gerrit <fy@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#, fuzzy, python-format
+#, fuzzy
 msgid "%d more services"
 msgstr "Bewurkje services"
 
@@ -36,7 +36,6 @@ msgstr ""
 msgid "Ask default Yes"
 msgstr ""
 
-#, python-format
 msgid "AutoTimer failed with error %s"
 msgstr ""
 
@@ -59,9 +58,6 @@ msgid "Close and forget changes"
 msgstr ""
 
 msgid "Close and save changes"
-msgstr ""
-
-msgid "Congratulations"
 msgstr ""
 
 msgid "Delay if not in standby (minutes)"
@@ -96,28 +92,8 @@ msgstr ""
 msgid "EPG refresh starts scanning channels."
 msgstr ""
 
-#, fuzzy
-msgid "EPG-Refresh_Pending Services"
-msgstr "EPGRefresh Services"
-
-#, fuzzy
-msgid "EPG-Refresh_Refresh now"
-msgstr "EPGRefresh Services"
-
-#, fuzzy
-msgid "EPG-Refresh_SetUp"
-msgstr "EPGRefresh Services"
-
-#, fuzzy
-msgid "EPG-Refresh_Stop Refresh"
-msgstr "EPGRefresh Services"
-
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr ""
-
-#, fuzzy
-msgid "EPGRefresh"
-msgstr "Oan it ferfaskjen"
 
 msgid "EPGRefresh Configuration"
 msgstr "EPGRefresh ynstellingen"
@@ -130,11 +106,14 @@ msgstr "EPGRefresh ynstellingen"
 msgid "EPGRefresh Functions"
 msgstr "EPGRefresh ynstellingen"
 
-msgid "EPGRefresh Help"
-msgstr ""
-
 msgid "EPGRefresh Services"
 msgstr "EPGRefresh Services"
+
+msgid "EXTENSIONMENU_PREFIX"
+msgstr ""
+
+msgid "EXTENSIONNAME_SETUP"
+msgstr ""
 
 msgid "Edit Services"
 msgstr "Bewurkje services"
@@ -144,12 +123,6 @@ msgstr "Bewurkje de te ferfaskjen services"
 
 msgid "Editing"
 msgstr "Oan it bewurkjen"
-
-msgid "Editing the service list"
-msgstr ""
-
-msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
-msgstr ""
 
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr ""
@@ -163,12 +136,17 @@ msgstr ""
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr ""
 
-msgid "Fake recording"
+msgid "FILELIST_BIGGEST"
 msgstr ""
 
-#, fuzzy
-msgid "Flush EPG before refresh"
-msgstr "Ferfaskje EPG foar"
+msgid "FILELIST_FORCED"
+msgstr ""
+
+msgid "FILELIST_YOUNGEST"
+msgstr ""
+
+msgid "Fake recording"
+msgstr ""
 
 msgid "Following Services have to be scanned:"
 msgstr ""
@@ -177,6 +155,14 @@ msgid "Force scan even if receiver is in use."
 msgstr "Sykje ek at untfanger yn gebrûk is."
 
 msgid "Foreground also"
+msgstr ""
+
+msgid ""
+"Found a total of %d matching Events.\n"
+"%d Timer were added and\n"
+"%d modified,\n"
+"%d conflicts encountered,\n"
+"%d similars added."
 msgstr ""
 
 msgid "Functions"
@@ -200,7 +186,6 @@ msgstr ""
 msgid "Key Help"
 msgstr ""
 
-#, python-format
 msgid "Last refresh was %s"
 msgstr ""
 
@@ -219,8 +204,14 @@ msgstr "Nij"
 msgid "No"
 msgstr ""
 
+msgid "No Backupfiles found"
+msgstr ""
+
 msgid "OK"
 msgstr "Ok"
+
+msgid "PLUGINNAME_EPGRefresh"
+msgstr ""
 
 #, fuzzy
 msgid "Pending Services"
@@ -254,6 +245,9 @@ msgid "Refreshing"
 msgstr "Oan it ferfaskjen"
 
 msgid "Run AutoTimer after refresh"
+msgstr ""
+
+msgid "Select a file to force a Backup"
 msgstr ""
 
 msgid "Select bouquet to refresh"
@@ -301,6 +295,10 @@ msgid "Start EPGrefresh immediately"
 msgstr ""
 
 #, fuzzy
+msgid "Stop Refresh"
+msgstr "Oan it ferfaskjen"
+
+#, fuzzy
 msgid "Stop Running EPG-refresh"
 msgstr "EPGRefresh ynstelle"
 
@@ -308,29 +306,10 @@ msgstr "EPGRefresh ynstelle"
 msgid "Stop running refresh"
 msgstr "Ofslúte nei it ferfaskjen"
 
-msgid "The configuration menu"
-msgstr ""
-
 msgid "There is still a refresh running. The Operation isn't allowed at this moment."
 msgstr ""
 
-msgid ""
-"This help screen is supposed to give you a quick look at everything EPGRefresh has to offer.\n"
-"You can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by pressing the HELP button from the configuration menu (more on that later).\n"
-"\n"
-"\n"
-"But you really should consider to take the few minutes it takes to read these help pages."
-msgstr ""
-
 msgid "This is the duration each service/channel will stay active during a refresh."
-msgstr ""
-
-msgid ""
-"This is the entry point of EPGRefresh. From this menu you can configure every aspect of the plugin.\n"
-"The configuration options each have an explaination which is supposed to help you to understand their effects better. Please give reading them a try, they can save you a lot of time.\n"
-"\n"
-"Using the YELLOW button you can start a refresh manually. You also be able to enable the functionalities in the Extensionmenu. The INFO button brings up the date the last refresh was completed successfully. You will also find an Extensionmenu-Entry to stop a running Refresh.\n"
-"The BLUE key opens the service editor (next page)."
 msgstr ""
 
 msgid "This setting controls whether or not an informational message will be shown at start and completion of refresh."
@@ -347,6 +326,11 @@ msgid ""
 "Do you want to restart the GUI now?"
 msgstr ""
 
+msgid ""
+"To load the Backupfile the GUI has to be restarted.\n"
+"Do you want to restart the GUI now?"
+msgstr ""
+
 msgid "Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu."
 msgstr ""
 
@@ -357,26 +341,7 @@ msgstr ""
 msgid "Wake up from standby for EPG refresh."
 msgstr "Ut de djippe sliipstand komme om de EPG te ferfaskjen."
 
-msgid "Welcome to EPGRefresh"
-msgstr ""
-
-msgid ""
-"While the screen does not immediately show it, it does have a lot to offer. The topmost line allows you to choose between the editor for channels and bouquets and the following lines contain the channels/bouquets you chose to refresh.\n"
-"\n"
-"You can use the BLUE button to add a new entry to the list or the YELLOW button to remove an existing one.\n"
-"\n"
-"\n"
-"For most people it should be sufficient to add the 'Favourites' bouquet by selecting 'Bouquets' in the first line and by adding it using the BLUE button."
-msgstr ""
-
 msgid "Yes"
-msgstr ""
-
-msgid ""
-"You now know how to do your first steps in EPGRefresh.\n"
-"\n"
-"As a final note I want to hint you at the fact that this plugin will not do anything on its own without YOU telling it to. So if you want the refresh to happen automatically in the background you need to configure the plugin to do so.\n"
-"This was not done to cause you any inconvenience but rather to give you the freedom of choice."
 msgstr ""
 
 msgid "add to EPGRefresh"
