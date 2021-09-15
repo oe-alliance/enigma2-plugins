@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
 from . import _
 from RecordTimer import RecordTimerEntry, RecordTimer
 from Screens.TimerEntry import TimerEntry
@@ -15,6 +14,7 @@ from time import time
 from enigma import getBestPlayableServiceReference, eServiceReference
 import xml.etree.cElementTree
 from .Vps_setup import VPS_show_info
+import six
 
 vps_already_registered = False
 
@@ -76,7 +76,7 @@ def new_RecordTimer_saveTimer(self, *args, **kwargs):
 			file.write(x)
 		file.close()
 	except Exception as exc:
-		print(("[VPS] new_RecordTimer_saveTimer : ", exc))
+		print("[VPS] new_RecordTimer_saveTimer : %s" % repr(exc))
 		pass
 	# added by VPS-Plugin
 
@@ -91,7 +91,7 @@ def new_RecordTimer_loadTimer(self, *args, **kwargs):
 		doc = xml.etree.cElementTree.parse(Directories.resolveFilename(Directories.SCOPE_CONFIG, "timers_vps.xml"))
 		xmlroot = doc.getroot()
 	except Exception as exc:
-		print(("[VPS] new_RecordTimer_loadTimer : ", exc))
+		print("[VPS] new_RecordTimer_loadTimer : %s" % repr(exc))
 		pass
 	# added by VPS-Plugin
 
@@ -106,8 +106,8 @@ def new_RecordTimer_loadTimer(self, *args, **kwargs):
 			for xml in xmlroot.findall("timer"):
 				begin = xml.get("begin")
 				end = xml.get("end")
-				serviceref = xml.get("serviceref").encode("utf-8")
-
+				serviceref = xml.get("serviceref")
+				serviceref = six.ensure_str(serviceref)
 				vps_timers[serviceref + begin + end] = {}
 				vps_overwrite = xml.get("vps_overwrite")
 				if vps_overwrite and vps_overwrite == "1":
@@ -135,7 +135,7 @@ def new_RecordTimer_loadTimer(self, *args, **kwargs):
 					timer.vpsplugin_enabled = False
 					timer.vpsplugin_overwrite = False
 	except Exception as exc:
-		print(("[VPS] new_RecordTimer_loadTimer : ", exc))
+		print("[VPS] new_RecordTimer_loadTimer : %s" % repr(exc))
 		pass
 	# added by VPS-Plugin
 
@@ -177,7 +177,7 @@ def new_TimerEntry_createConfig(self, *args, **kwargs):
 			self.timerentry_vpsplugin_time_date = ConfigDateTime(default=self.timer.begin, formatstring=_("%d.%B %Y"), increment=86400)
 			self.timerentry_vpsplugin_time_clock = ConfigClock(default=self.timer.begin)
 	except Exception as exc:
-		print(("[VPS] new_TimerEntry_createConfig : ", exc))
+		print("[VPS] new_TimerEntry_createConfig : %s" % repr(exc))
 		pass
 	# added by VPS-Plugin
 
@@ -242,7 +242,7 @@ def new_TimerEntry_createSetup(self, widget="config"):
 						config.plugins.vps.infotext.save()
 						VPS_show_info(self.session)
 	except Exception as exc:
-		print(("[VPS] new_TimerEntry_createSetup : ", exc))
+		print("[VPS] new_TimerEntry_createSetup : %s" % repr(exc))
 		pass
 	# added by VPS-Plugin
 	self[widget].list = self.list
@@ -294,7 +294,7 @@ def new_TimerEntry_keySave(self, *args, **kwargs):
 						self.timerentry_date.value = self.timerentry_vpsplugin_time_date.value
 						self.timerentry_starttime.value = self.timerentry_vpsplugin_time_clock.value
 	except Exception as exc:
-		print(("[VPS] new_TimerEntry_keySave : ", exc))
+		print("[VPS] new_TimerEntry_keySave : %s" % repr(exc))
 		pass
 	# added by VPS-Plugin
 
@@ -314,7 +314,7 @@ def new_TimerEntry_finishedChannelSelection(self, *args, **kwargs):
 			self.timerentry_vpsplugin_dontcheck_pdc = False
 			self.createSetup("config")
 	except Exception as exc:
-		print(("[VPS] new_TimerEntry_finishedChannelSelection : ", exc))
+		print("[VPS] new_TimerEntry_finishedChannelSelection : %s" % repr(exc))
 		pass
 
 
@@ -380,7 +380,7 @@ def new_InfoBarInstantRecord_recordQuestionCallback(self, answer, *args, **kwarg
 				self.session.open(VPS_check_on_instanttimer, rec_ref, self.recording[entry])
 
 	except Exception as exc:
-		print(("[VPS] new_InfoBarInstantRecord_recordQuestionCallback : ", exc))
+		print("[VPS] new_InfoBarInstantRecord_recordQuestionCallback : %s" % repr(exc))
 		pass
 
 # VPS-Plugin in Enigma-Klassen einhängen

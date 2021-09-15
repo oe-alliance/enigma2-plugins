@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
 from twisted.web import resource, http
-from globals import *
-from plugin import *
-from Sensors import sensors
-from __init__ import _
+from .globals import *
+from .plugin import *
+from .Sensors import sensors
+from .__init__ import _
 from Components.config import configfile, config
 
 import os
@@ -11,13 +12,14 @@ import datetime
 
 ########################################################
 
-SIGN = str('\xc2\xb0')
+import six
+SIGN = '°' if six.PY3 else str('\xc2\xb0')
 
 
 class FC2web(resource.Resource):
 
 	title = "FanControl2 Webinterface"
- 	isLeaf = False
+	isLeaf = False
 
 	def render(self, req):
 		req.setHeader('Content-type', 'text/html')

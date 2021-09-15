@@ -3,6 +3,8 @@ from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 import gettext
 import hashlib
+from functools import reduce
+
 
 __version__ = "1.9.0"
 
@@ -23,7 +25,7 @@ def _(txt):
 
 
 def bin2long(s):
-	return reduce(lambda x, y: (x << 8L) + y, map(ord, s))
+	return reduce(lambda x, y: (x << 8) + y, list(map(ord, s)))
 
 
 def long2bin(l):

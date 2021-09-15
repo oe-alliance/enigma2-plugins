@@ -1,29 +1,30 @@
 # -*- coding: iso-8859-1 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 from enigma import ePythonMessagePump
 
-from __init__ import decrypt_block
-from ThreadQueue import ThreadQueue
+from .__init__ import decrypt_block
+from .ThreadQueue import ThreadQueue
 import gdata.youtube
 import gdata.youtube.service
 from gdata.service import BadAuthentication
 
 from twisted.web import client
 from twisted.internet import reactor
-from urllib2 import Request, URLError, urlopen as urlopen2
 from socket import gaierror, error
 import os
 import socket
 import httplib
-import urllib
-import urllib2
 import re
 import json
-from urllib import quote, unquote_plus, unquote, urlencode
-from httplib import HTTPConnection, CannotSendRequest, BadStatusLine, HTTPException
+from six.moves.urllib.parse import quote, unquote_plus, unquote, urlencode, parse_qs, parse_qsl
+from six.moves.urllib.request import Request, urlopen, URLError
 
-from urlparse import parse_qs, parse_qsl
 from threading import Thread
+
+import six
+from six.moves.http_client import HTTPConnection, CannotSendRequest, BadStatusLine, HTTPException
+
 
 HTTPConnection.debuglevel = 1
 
@@ -132,9 +133,9 @@ class CVevoSignAlgoExtractor:
         # use algoCache
         if playerUrl not in self.algoCache:
             # get player HTML 5 sript
-            request = urllib2.Request(playerUrl)
+            request = Request(playerUrl)
             try:
-                self.playerData = urllib2.urlopen(request).read()
+                self.playerData = urlopen(request).read()
                 self.playerData = self.playerData.decode('utf-8', 'ignore')
             except:
                 printDBG('Unable to download playerUrl webpage')
@@ -243,7 +244,7 @@ class GoogleSuggestions():
 
 	def getSuggestions(self, queryString):
 		self.prepareQuery()
-		if queryString is not "":
+		if queryString != "":
 			query = self.prepQuerry + quote(queryString)
 			self.conn = HTTPConnection("google.com")
 			try:
@@ -448,7 +449,7 @@ class MyTubeFeedEntry():
 
 		try:
 			print("[MyTube] trying to find out if a HD Stream is available", watch_url)
-			result = urlopen2(watchrequest).read()
+			result = urlopen(watchrequest).read()
 		except (URLError, HTTPException, socket.error) as err:
 			print("[MyTube] Error: Unable to retrieve watchpage - Error code: ", str(err))
 			return video_url
@@ -458,7 +459,7 @@ class MyTubeFeedEntry():
 			info_url = ('http://www.youtube.com/get_video_info?&video_id=%s%s&ps=default&eurl=&gl=US&hl=en' % (video_id, el))
 			request = Request(info_url, None, std_headers)
 			try:
-				infopage = urlopen2(request).read()
+				infopage = urlopen(request).read()
 				videoinfo = parse_qs(infopage)
 				if ('url_encoded_fmt_stream_map' or 'fmt_url_map') in videoinfo:
 					break
@@ -508,10 +509,10 @@ class MyTubeFeedEntry():
 			if fmtid in VIDEO_FMT_PRIORITY_MAP and fmtid != "":
 				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
 				fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
-		print("[MyTube] got", sorted(fmt_infomap.iterkeys()))
+		print("[MyTube] got", sorted(six.iterkeys(fmt_infomap)))
 		if video_fmt_map and len(video_fmt_map):
-			print("[MyTube] found best available video format:", video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid'])
-			best_video = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]
+			print("[MyTube] found best available video format:", video_fmt_map[sorted(six.iterkeys(video_fmt_map))[0]]['fmtid'])
+			best_video = video_fmt_map[sorted(six.iterkeys(video_fmt_map))[0]]
 			video_url = "%s" % (best_video['fmturl'].split(';')[0])
 			print("[MyTube] found best available video url:", video_url)
 

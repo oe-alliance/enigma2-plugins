@@ -23,7 +23,6 @@
 
 from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
-from urlparse import urlparse
 from Screens.Screen import Screen
 from Screens.InfoBar import InfoBar
 from Components.SystemInfo import SystemInfo
@@ -47,20 +46,21 @@ from Components.ConfigList import ConfigListScreen
 from Screens.MessageBox import MessageBox
 from Components.GUIComponent import GUIComponent
 from Components.Sources.StaticText import StaticText
-from urllib import quote
+from six.moves.urllib.parse import quote, urlparse
 from twisted.web.client import downloadPage
 from Screens.ChoiceBox import ChoiceBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.Input import Input
 from Screens.InputBox import InputBox
 from Components.FileList import FileList
+import six
 # for localized messages
 from . import _
 
 coverfiles = ("/tmp/.cover.ping", "/tmp/.cover.pong")
 containerStreamripper = None
 config.plugins.shoutcast = ConfigSubsection()
-config.plugins.shoutcast.showcover = ConfigYesNo(default=True)
+config.plugins.shoutcast.showcover = ConfigYesNo(default=False)
 config.plugins.shoutcast.showinextensions = ConfigYesNo(default=False)
 config.plugins.shoutcast.streamingrate = ConfigSelection(default="0", choices=[("0", _("All")), ("64", _(">= 64 kbps")), ("128", _(">= 128 kbps")), ("192", _(">= 192 kbps")), ("256", _(">= 256 kbps"))])
 config.plugins.shoutcast.reloadstationlist = ConfigSelection(default="0", choices=[("0", _("Off")), ("1", _("every minute")), ("3", _("every three minutes")), ("5", _("every five minutes"))])
@@ -72,6 +72,8 @@ config.plugins.shoutcast.cover_width = ConfigNumber(default=200)
 config.plugins.shoutcast.cover_height = ConfigNumber(default=300)
 
 devid = "fa1jo93O_raeF0v9"
+
+_VALID_URI = re.compile(br"\A[\x21-\x7e]+\Z")
 
 
 class SHOUTcastGenre:
@@ -103,14 +105,14 @@ class Favorite:
 
 
 class myHTTPClientFactory(HTTPClientFactory):
-	def __init__(self, url, method='GET', postdata=None, headers=None,
-			agent="Mozilla/5.0 (Windows NT 6.1; rv:17.0) Gecko/20100101 Firefox/17.0", timeout=0, cookies=None,
+	def __init__(self, url, method=b'GET', postdata=None, headers=None,
+			agent=b"Mozilla/5.0 (Windows NT 6.1; rv:17.0) Gecko/20100101 Firefox/17.0", timeout=0, cookies=None,
 			followRedirect=1, lastModified=None, etag=None):
 		HTTPClientFactory.__init__(self, url, method=method, postdata=postdata,
 		headers=headers, agent=agent, timeout=timeout, cookies=cookies, followRedirect=followRedirect)
 
 	def clientConnectionLost(self, connector, reason):
-		lostreason = ("Connection was closed cleanly" in vars(reason))
+		lostreason = (b"Connection was closed cleanly" in vars(reason))
 		if lostreason == None:
 			print("[SHOUTcast] Lost connection, reason: %s ,trying to reconnect!" % reason)
 			connector.connect()
@@ -127,8 +129,9 @@ def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
 	port = parsed.port or (443 if scheme == 'https' else 80)
 	path = parsed.path or '/'
 
+	url = six.ensure_binary(url)
 	factory = myHTTPClientFactory(url, *args, **kwargs)
-	# print "scheme=%s host=%s port=%s path=%s\n" % (scheme, host, port, path)
+	print("scheme=%s host=%s port=%s path=%s\n" % (scheme, host, port, path))
 	reactor.connectTCP(host, port, factory, timeout=timeout)
 	return factory.deferred
 
@@ -433,6 +436,7 @@ class SHOUTcastWidget(Screen):
 		self["key_red"].setText(_("Record"))
 
 	def streamripperDataAvail(self, data):
+		data = six.ensure_str(data)
 		sData = data.replace('\n', '')
 		self["console"].setText(sData)
 
@@ -560,6 +564,7 @@ class SHOUTcastWidget(Screen):
 		sendUrlCommand(url, None, 10).addCallback(self.callbackGenreList).addErrback(self.callbackGenreListError)
 
 	def callbackGenreList(self, xmlstring):
+		xmlstring = six.ensure_str(xmlstring)
 		self["headertext"].setText(_("SHOUTcast genre list"))
 		self.genreListIndex = 0
 		self.mode = self.GENRELIST
@@ -680,12 +685,13 @@ class SHOUTcastWidget(Screen):
 		self.session.nav.stopService()
 
 	def callbackPLS(self, result):
+		result = six.ensure_str(result)
 		self["headertext"].setText(self.headerTextString)
 		found = False
-		parts = string.split(result, "\n")
+		parts = result.split("\n")
 		for lines in parts:
 			if lines.find("File1=") != -1:
-				line = string.split(lines, "File1=")
+				line = lines.split("File1=")
 				found = True
 				self.playServiceStream(line[-1].rstrip().strip())
 
@@ -704,13 +710,14 @@ class SHOUTcastWidget(Screen):
 		self["statustext"].setText(_("Getting %s") % self.headerTextString)
 		self["list"].hide()
 		if len(devid) > 8:
-			self.stationListURL = self.SC + "/station/advancedsearch&f=xml&k=%s&search=%s" % (devid, genre)
+			self.stationListURL = self.SC + "/station/advancedsearch&f=xml&k=%s&search=%s" % (devid, quote(genre))
 		else:
-			self.stationListURL = "http://207.200.98.1/sbin/newxml.phtml?genre=%s" % genre
+			self.stationListURL = "http://207.200.98.1/sbin/newxml.phtml?genre=%s" % quote(genre)
 		self.stationListIndex = 0
 		sendUrlCommand(self.stationListURL, None, 10).addCallback(self.callbackStationList).addErrback(self.callbackStationListError)
 
 	def callbackStationList(self, xmlstring):
+		xmlstring = six.ensure_str(xmlstring)
 		self.searchSHOUTcastString = ""
 		self.stationListXML = xmlstring
 		self["headertext"].setText(self.headerTextString)
@@ -875,7 +882,7 @@ class SHOUTcastWidget(Screen):
 
 	def Error(self, error=None):
 		if error is not None:
-			# print "[SHOUTcast] Error: %s\n" % error
+			print("[SHOUTcast] Error: %s\n" % error)
 			try:
 				self["list"].hide()
 				self["statustext"].setText(str(error.getErrorMessage()))
@@ -922,9 +929,16 @@ class SHOUTcastWidget(Screen):
 			sendUrlCommand(self.currentGoogle, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
 			return
 		self.currentGoogle = None
+		result = six.ensure_str(result)
 		r = re.findall('murl&quot;:&quot;(http.*?)&quot', result, re.S | re.I)
 		if r:
 			url = r[nr]
+			# FIXME loop
+			_url = six.ensure_binary(url)
+			if not _VALID_URI.match(_url):
+				nr += 1
+				url = r[nr]
+			# FIXME nr max
 			print("[SHOUTcast] fetch cover first try:%s" % (url))
 			for link in bad_link:
 				if url.startswith(link):
@@ -958,7 +972,8 @@ class SHOUTcastWidget(Screen):
 					pass
 				coverfile = coverfiles[self.currentcoverfile]
 				print("[SHOUTcast] downloading cover from %s to %s numer%s" % (url, coverfile, str(nr)))
-				downloadPage(url, coverfile).addCallback(self.coverDownloadFinished, coverfile).addErrback(self.coverDownloadFailed)
+				downloadPage(six.ensure_binary(url), coverfile).addCallback(self.coverDownloadFinished, coverfile).addErrback(self.coverDownloadFailed)
+# FIXME [SHOUTcast] cover download failed: [Failure instance: Traceback: <class 'OpenSSL.SSL.Error'>: [('SSL routines', 'ssl3_read_bytes', 'sslv3 alert handshake failure')]
 
 	def coverDownloadFailed(self, result):
 		print("[SHOUTcast] cover download failed:", result)

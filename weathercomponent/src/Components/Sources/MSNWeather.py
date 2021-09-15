@@ -21,10 +21,11 @@
 #
 
 import time
-from Source import Source
+from Components.Sources.Source import Source
 from Components.WeatherMSN import weathermsn
 
-SIGN = str('\xc2\xb0')
+import six
+SIGN = '°' if six.PY3 else str('\xc2\xb0')
 
 
 class MSNWeather(Source):

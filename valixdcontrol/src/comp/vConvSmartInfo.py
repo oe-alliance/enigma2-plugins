@@ -23,7 +23,8 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.Sensors import sensors
 from Poll import Poll
-
+import six
+SIGN = '°' if six.PY3 else str('\xc2\xb0')
 
 class vConvSmartInfo(Poll, Converter, object):
 	SMART_LABEL = 0
@@ -98,7 +99,7 @@ class vConvSmartInfo(Poll, Converter, object):
 						sensotN = sensors.getSensorName(id)
 						if sensotN == "undefined":
 							sensotN = "sensor-" + str(id)
-				Ret_Text = "max. Box-Temp:  " + str(maxtemp) + "°C / " + sensotN + "\n" + Ret_Text
+				Ret_Text = "max. Box-Temp:  " + str(maxtemp) + SIGN + "C / " + sensotN + "\n" + Ret_Text
 			except:
 				pass
 			return Ret_Text

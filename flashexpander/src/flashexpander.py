@@ -19,6 +19,7 @@ from .locale import _
 from enigma import quitMainloop
 from os import system, listdir, path, statvfs, remove, popen as os_popen
 import re
+from six import PY3
 
 #Topfi begin
 from subprocess import Popen, PIPE
@@ -269,7 +270,10 @@ class FEconf(Screen):
 		if retval == True:
 			try:
 				devPath = val[0]
-				uuidPath = val[1]
+				if PY3:
+					uuidPath = val[1].decode('utf-8')
+				else:
+					uuidPath = val[1]
 				fstype = val[2]
 
 				#fstab editieren

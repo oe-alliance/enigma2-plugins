@@ -19,10 +19,11 @@
 #  distributed other than under the conditions noted above.
 #
 from __future__ import print_function
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 from Components.config import config
 from Plugins.Plugin import PluginDescriptor
-from VideoColorSpace import VideoColorSpace, initializeConfig
+from .VideoColorSpace import VideoColorSpace, initializeConfig
 from boxbranding import getImageDistro
 
 

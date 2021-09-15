@@ -23,7 +23,7 @@ import socket
 
 from six.moves.urllib.parse import quote
 from six.moves import http_client
-
+import six
 
 class GoogleSuggestions():
 	def __init__(self, callback, ds=None, json=None, hl=None):
@@ -58,7 +58,7 @@ class GoogleSuggestions():
 				else:
 					if response.status == 200:
 						data = response.read()
-						exec data
+						six.exec_(data)
 					else:
 						self.callback(None)
 			self.conn.close()

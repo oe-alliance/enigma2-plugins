@@ -373,7 +373,7 @@ class MC_VLCMedialist(Screen):
 				MessageBox, _("Error loading playlist into server %s:\n%s" % (
 						self.server.getName(), e)
 					), MessageBox.TYPE_ERROR)
-			raise ExpatError, e
+			raise ExpatError
 		except Exception as e:
 			self.session.open(
 				MessageBox, _("Error loading filelist into server %s:\n%s" % (

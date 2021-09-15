@@ -22,6 +22,8 @@ from Components.Sensors import sensors
 from Tools.HardwareInfo import HardwareInfo
 from enigma import eLabel
 from Renderer import Renderer
+import six
+SIGN = '°' if six.PY3 else str('\xc2\xb0')
 
 
 class vRendMaxTemp(Renderer, VariableText):
@@ -48,7 +50,7 @@ class vRendMaxTemp(Renderer, VariableText):
 							maxtemp = tt
 				except:
 					pass
-				self.text = str(maxtemp) + u"°" + "C"
+				self.text = "%s%sC" % (str(maxtemp), SIGN)
 			else:
 				loada = 0
 				try:

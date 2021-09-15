@@ -48,7 +48,8 @@ import mimetools
 import mimetypes
 import os
 import stat
-from cStringIO import StringIO
+
+from six.moves import cStringIO as StringIO
 
 
 class Callable:
@@ -70,14 +71,14 @@ class MultipartPostHandler(urllib2.BaseHandler):
             v_files = []
             v_vars = []
             try:
-                 for(key, value) in data.items():
+                 for(key, value) in list(data.items()):
                      if isinstance(value, file):
                          v_files.append((key, value))
                      else:
                          v_vars.append((key, value))
             except TypeError:
                 systype, value, traceback = sys.exc_info()
-                raise TypeError, "not a valid non-string sequence or mapping object", traceback
+                raise TypeError("not a valid non-string sequence or mapping object").with_traceback(traceback)
 
             if len(v_files) == 0:
                 data = urllib.urlencode(v_vars, doseq)

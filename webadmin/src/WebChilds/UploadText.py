@@ -45,7 +45,7 @@ class UploadTextResource(resource.Resource):
 		fd, fn = mkstemp(dir=uploaddir)
 		cnt = os_write(fd, data)
 		os_close(fd)
-		os_chmod(fn, 0755)
+		os_chmod(fn, 0o755)
 
 		if cnt <= 0: # well, actually we should check against len(data) but lets assume we fail big time or not at all
 			try:

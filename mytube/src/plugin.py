@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from . import _
 
 from Components.AVSwitch import AVSwitch
@@ -16,8 +17,8 @@ from Components.Sources.List import List
 from Components.Task import Task, Job, job_manager
 from Components.config import config, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry, ConfigPassword
 #, ConfigIP, ConfigNumber, ConfigLocations
-from MyTubeSearch import ConfigTextWithGoogleSuggestions, MyTubeSettingsScreen, MyTubeTasksScreen, MyTubeHistoryScreen
-from MyTubeService import validate_cert, get_rnd, myTubeService
+from .MyTubeSearch import ConfigTextWithGoogleSuggestions, MyTubeSettingsScreen, MyTubeTasksScreen, MyTubeHistoryScreen
+from .MyTubeService import validate_cert, get_rnd, myTubeService
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
 from Screens.InfoBarGenerics import InfoBarNotifications, InfoBarSeek
@@ -28,12 +29,12 @@ from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_HDD, SCOPE_CURRENT_PLUGIN
 from Tools.Downloader import downloadWithProgress
 
-from __init__ import decrypt_block
+from .__init__ import decrypt_block
 
 from enigma import eTPM, eTimer, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, gFont, ePicLoad, eServiceReference, iPlayableService
 from os import path as os_path, remove as os_remove
 from twisted.web import client
-
+import six
 etpm = eTPM()
 rootkey = ['\x9f', '|', '\xe4', 'G', '\xc9', '\xb4', '\xf4', '#', '&', '\xce', '\xb3', '\xfe', '\xda', '\xc9', 'U', '`', '\xd8', '\x8c', 's', 'o', '\x90', '\x9b', '\\', 'b', '\xc0', '\x89', '\xd1', '\x8c', '\x9e', 'J', 'T', '\xc5', 'X', '\xa1', '\xb8', '\x13', '5', 'E', '\x02', '\xc9', '\xb2', '\xe6', 't', '\x89', '\xde', '\xcd', '\x9d', '\x11', '\xdd', '\xc7', '\xf4', '\xe4', '\xe4', '\xbc', '\xdb', '\x9c', '\xea', '}', '\xad', '\xda', 't', 'r', '\x9b', '\xdc', '\xbc', '\x18', '3', '\xe7', '\xaf', '|', '\xae', '\x0c', '\xe3', '\xb5', '\x84', '\x8d', '\r', '\x8d', '\x9d', '2', '\xd0', '\xce', '\xd5', 'q', '\t', '\x84', 'c', '\xa8', ')', '\x99', '\xdc', '<', '"', 'x', '\xe8', '\x87', '\x8f', '\x02', ';', 'S', 'm', '\xd5', '\xf0', '\xa3', '_', '\xb7', 'T', '\t', '\xde', '\xa7', '\xf1', '\xc9', '\xae', '\x8a', '\xd7', '\xd2', '\xcf', '\xb2', '.', '\x13', '\xfb', '\xac', 'j', '\xdf', '\xb1', '\x1d', ':', '?']
 
@@ -399,7 +400,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			current[1].help_window.instance.hide()
 
 		l3cert = etpm.getData(eTPM.DT_LEVEL3_CERT)
-		if l3cert is None or l3cert is "":
+		if l3cert is None or l3cert == "":
 			self["videoactions"].setEnabled(False)
 			self["searchactions"].setEnabled(False)
 			self["config_actions"].setEnabled(False)
@@ -457,7 +458,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self["config"].l.setList(self.searchContextEntries)
 
 	def tryUserLogin(self):
-		if config.plugins.mytube.general.username.value is "" or config.plugins.mytube.general.password.value is "":
+		if config.plugins.mytube.general.username.value == "" or config.plugins.mytube.general.password.value == "":
 			return
 
 		try:
@@ -1190,17 +1191,17 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		Description = entry.getDescription()
 		myTubeID = TubeID
 		PublishedDate = entry.getPublishedDate()
-		if PublishedDate is not "unknown":
+		if PublishedDate != "unknown":
 			published = PublishedDate.split("T")[0]
 		else:
 			published = "unknown"
 		Views = entry.getViews()
-		if Views is not "not available":
+		if Views != "not available":
 			views = Views
 		else:
 			views = "not available"
 		Duration = entry.getDuration()
-		if Duration is not 0:
+		if Duration != 0:
 			durationInSecs = int(Duration)
 			mins = int(durationInSecs / 60)
 			secs = durationInSecs - mins * 60
@@ -1208,7 +1209,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		else:
 			duration = "not available"
 		Ratings = entry.getNumRaters()
-		if Ratings is not "":
+		if Ratings != "":
 			ratings = Ratings
 		else:
 			ratings = ""
@@ -1284,7 +1285,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 							if (os_path.exists(thumbnailFile) == True):
 								self.fetchFinished(False, tubeid)
 							else:
-								client.downloadPage(thumbnailUrl, thumbnailFile).addCallback(self.fetchFinished, str(tubeid)).addErrback(self.fetchFailed, str(tubeid))
+								client.downloadPage(six.ensure_binary(thumbnailUrl), thumbnailFile).addCallback(self.fetchFinished, str(tubeid)).addErrback(self.fetchFailed, str(tubeid))
 					else:
 						if tubeid not in self.pixmaps_to_load:
 							self.pixmaps_to_load.append(tubeid)
@@ -1435,30 +1436,30 @@ class MyTubeVideoInfoScreen(Screen):
 		if Description is not None:
 			self["detailtext"].setText(Description.strip())
 
-		if self.videoinfo["RatingAverage"] is not 0:
+		if self.videoinfo["RatingAverage"] != 0:
 			ratingStars = int(round(20 * float(self.videoinfo["RatingAverage"]), 0))
 			self["stars"].setValue(ratingStars)
 		else:
 			self["stars"].hide()
 			self["starsbg"].hide()
 
-		if self.videoinfo["Duration"] is not 0:
+		if self.videoinfo["Duration"] != 0:
 			durationInSecs = int(self.videoinfo["Duration"])
 			mins = int(durationInSecs / 60)
 			secs = durationInSecs - mins * 60
 			duration = "%d:%02d" % (mins, secs)
 			self["duration"].setText(_("Duration: ") + str(duration))
 
-		if self.videoinfo["Author"] is not None or '':
+		if self.videoinfo["Author"] != None or '':
 			self["author"].setText(_("Author: ") + self.videoinfo["Author"])
 
-		if self.videoinfo["Published"] is not "unknown":
+		if self.videoinfo["Published"] != "unknown":
 			self["published"].setText(_("Added: ") + self.videoinfo["Published"].split("T")[0])
 
-		if self.videoinfo["Views"] is not "not available":
+		if self.videoinfo["Views"] != "not available":
 			self["views"].setText(_("Views: ") + str(self.videoinfo["Views"]))
 
-		if self.videoinfo["Tags"] is not "not available":
+		if self.videoinfo["Tags"] != "not available":
 			self["tags"].setText(_("Tags: ") + str(self.videoinfo["Tags"]))
 
 	def setWindowTitle(self):
@@ -1489,7 +1490,7 @@ class MyTubeVideoInfoScreen(Screen):
 				thumbnailUrl = None
 				thumbnailUrl = entry
 				if thumbnailUrl is not None:
-					client.downloadPage(thumbnailUrl, thumbnailFile).addCallback(self.fetchFinished, currindex, ThumbID).addErrback(self.fetchFailed, currindex, ThumbID)
+					client.downloadPage(six.ensure_binary(thumbnailUrl), thumbnailFile).addCallback(self.fetchFinished, currindex, ThumbID).addErrback(self.fetchFailed, currindex, ThumbID)
 				currindex += 1
 		else:
 			pass

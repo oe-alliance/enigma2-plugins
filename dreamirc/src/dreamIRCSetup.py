@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 ##
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -16,7 +17,7 @@ from Tools.XMLTools import elementsWithTag, mergeText
 
 from socket import gethostbyname_ex
 
-from dreamIRCTools import *
+from .dreamIRCTools import *
 
 
 class dreamIRCSetupScreen(ConfigListScreen, Screen):
@@ -139,7 +140,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 		self.channel = self.dreamIRCconf.channel.value
 		self.debug = self.dreamIRCconf.debug.value
 		global accounts_xml
-		fp = file(accounts_xml, 'w')
+		fp = open(accounts_xml, 'w')
 		fp.write("<?xml version=\"1.0\" encoding=\"iso-8859-1\" ?>\n")
 		fp.write("<accounts>\n")
 		fp.write("    <account type=\"%s\" login=\"%s\" nick=\"%s\" passwd=\"%s\" server1=\"%s\" server2=\"%s\" server3=\"%s\" port=\"%s\" channel=\"%s\" debug=\"%s\" />\n" % (self.type, self.login, self.nick, self.passwd, self.server1, self.server2, self.server3, self.port, self.channel, self.debug))

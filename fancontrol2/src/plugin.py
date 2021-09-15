@@ -1,13 +1,14 @@
 from __future__ import print_function
+from __future__ import absolute_import
 # FanControl2
 # joergm6 IHAD
 # PID-controller by Lukasz S.
 
 import time
 import os
-from __init__ import _
+from .__init__ import _
 
-from globals import *
+from .globals import *
 
 from enigma import eTimer, eSize
 
@@ -20,7 +21,7 @@ from Components.Sources.Progress import Progress
 
 # Startup/shutdown notification
 from Tools import Notifications
-from Sensors import sensors
+from .Sensors import sensors
 from time import gmtime, strftime
 import datetime
 
@@ -41,10 +42,12 @@ from Components.ActionMap import NumberActionMap
 from Components.Harddisk import harddiskmanager
 
 from threading import Thread, Lock
-import Queue
-Briefkasten = Queue.Queue()
+Briefkasten = queue.Queue()
 
 from boxbranding import getBoxType, getImageDistro
+
+
+from six.moves import queue, range
 
 
 def main(session, **kwargs):
@@ -1297,7 +1300,7 @@ def autostart(reason, **kwargs):
 	if reason == 0 and "session" in kwargs:
 		if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/__init__.pyo") or os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/__init__.py"):
 			from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
-			from FC2webSite import FC2web, FC2webLog, FC2webChart
+			from .FC2webSite import FC2web, FC2webLog, FC2webChart
 			from twisted.web import static
 			root = static.File("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data")
 #			root = FC2web()

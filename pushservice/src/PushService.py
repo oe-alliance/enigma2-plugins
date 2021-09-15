@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 #######################################################################
 #
 #    Push Service for Enigma-2
@@ -29,11 +30,11 @@ from Tools.BoundFunction import boundFunction
 
 # Plugin internal
 from . import _
-from PushServiceBase import PushServiceBase
+from .PushServiceBase import PushServiceBase
 
 
 # States
-(PSBOOT, PSBOOTRUN, PSFIRST, PSFIRSTRUN, PSCYCLE) = range(5)
+(PSBOOT, PSBOOTRUN, PSFIRST, PSFIRSTRUN, PSCYCLE) = list(range(5))
 #MABE use an enum http://stackoverflow.com/questions/36932/whats-the-best-way-to-implement-an-enum-in-python
 
 
