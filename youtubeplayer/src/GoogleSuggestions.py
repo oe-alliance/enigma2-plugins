@@ -25,6 +25,7 @@ from six.moves.urllib.parse import quote
 from six.moves import http_client
 import six
 
+
 class GoogleSuggestions():
 	def __init__(self, callback, ds=None, json=None, hl=None):
 		self.callback = callback

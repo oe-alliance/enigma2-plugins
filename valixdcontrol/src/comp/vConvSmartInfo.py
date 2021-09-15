@@ -26,6 +26,7 @@ from Poll import Poll
 import six
 SIGN = '°' if six.PY3 else str('\xc2\xb0')
 
+
 class vConvSmartInfo(Poll, Converter, object):
 	SMART_LABEL = 0
 	SMART_INFO_H = 1

@@ -4,6 +4,7 @@ from os.path import abspath, splitext
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 import six
 
+
 def importExternalModules():
 	dir = abspath(resolveFilename(SCOPE_PLUGINS) + "Extensions/WebInterface/WebChilds/External/")
 	for file in listdir(dir):
