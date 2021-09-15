@@ -1,8 +1,8 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
+from __future__ import print_function
 import sys
 import os
-import six
+import string
 import re
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler, property_lexical_handler
@@ -23,13 +23,13 @@ class parseXML(ContentHandler, LexicalHandler):
 		self.ishex = re.compile('#[0-9a-fA-F]+\Z')
 
 	def comment(self, comment):
-		if "TRANSLATORS:" in comment:
+		if comment.find("TRANSLATORS:") != -1:
 			self.last_comment = comment
 
 	def startElement(self, name, attrs):
-		for x in ["text", "title", "value", "caption", "summary", "description"]:
+		for x in ["text", "title", "value", "caption", "summary"]:
 			try:
-				k = six.ensure_str(attrs[x])
+				k = str(attrs[x])
 				if k.strip() != "" and not self.ishex.match(k):
 					attrlist.add((attrs[x], self.last_comment))
 					self.last_comment = None
@@ -60,11 +60,11 @@ for arg in sys.argv[1:]:
 	for (k, c) in attrlist:
 		print()
 		print('#: ' + arg)
-		k.replace("\\n", "\"\n\"")
+		string.replace(k, "\\n", "\"\n\"")
 		if c:
 			for l in c.split('\n'):
-				print("#. %s" % l)
-		print('msgid "' + six.ensure_str(k) + '"')
+				print("#. ", l)
+		print('msgid "' + str(k) + '"')
 		print('msgstr ""')
 
 	attrlist = set()
