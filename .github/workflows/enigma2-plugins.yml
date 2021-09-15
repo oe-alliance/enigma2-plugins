@@ -35,6 +35,7 @@ jobs:
           CC: "gcc-${{ matrix.gcc }}"
           CXX: "g++-${{ matrix.gcc }}"
         run: |
+          pip install six
           sed -i '/PKG_CHECK_MODULES(ENIGMA2, enigma2)/d' ./configure.ac
           sed -i '/PKG_CHECK_MODULES(GSTREAMER, gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR)/d' ./configure.ac
           sed -i '/PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)/d' ./configure.ac
@@ -48,9 +49,9 @@ jobs:
           ref: 'python3'
       - uses: actions/setup-python@v2
         with:
-          python-version: '3.8'
+          python-version: '3.9'
 
-      - name: Build plugins, gcc-${{ matrix.gcc }}, python 3.8
+      - name: Build plugins, gcc-${{ matrix.gcc }}, python 3.9
         env:
           CC: "gcc-${{ matrix.gcc }}"
           CXX: "g++-${{ matrix.gcc }}"
