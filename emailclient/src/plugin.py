@@ -21,7 +21,7 @@ from Screens.Screen import Screen
 from Tools import Notifications
 from enigma import eListboxPythonMultiContent, gFont, eTimer #@UnresolvedImport # pylint: disable-msg=E0611
 from twisted.mail import imap4 #@UnresolvedImport
-from zope.interface import implements
+from zope.interface import implementer
 import email
 import re
 import os
@@ -633,11 +633,11 @@ class MessageHeader(object):
 		return "<MessageHeader uid=" + str(self.uid) + ", subject=" + self.getSubject() + ">"
 
 
+@implementer(imap4.IMailboxListener)
 class EmailAccount():
 	'''
 	Principal class to hold an account.
 	'''
-	implements(imap4.IMailboxListener)
 
 	def __init__(self, params, afterInit=None):
 		'''
