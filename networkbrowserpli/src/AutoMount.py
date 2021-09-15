@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # for localized messages
 from __future__ import print_function
-from __init__ import _
+from __future__ import absolute_import
+from .__init__ import _
 import os
 from enigma import eTimer
 from Components.Console import Console
@@ -95,7 +96,7 @@ class AutoMount():
 				except Exception as e:
 					print("[MountManager] Error reading Mounts:", e)
 
-		self.checkList = self.automounts.keys()
+		self.checkList = list(self.automounts.keys())
 		if not self.checkList:
 			print("[AutoMount.py] self.automounts without mounts", self.automounts)
 			if callback is not None:
@@ -135,7 +136,7 @@ class AutoMount():
 				command = "umount -fl '%s'" % path
 
 			elif data['active'] == 'True' or data['active'] is True:
-			        try:
+				try:
 					if not os.path.exists(path):
 						os.makedirs(path)
 					if data['mounttype'] == 'nfs':
@@ -154,7 +155,7 @@ class AutoMount():
 							tmpcmd = "mount -t cifs -o %s '//%s/%s' '%s'" % (options, data['ip'], data['sharedir'], path)
 							command = tmpcmd.encode("UTF-8")
 				except Exception as ex:
-				        print("[AutoMount.py] Failed to create", path, "Error:", ex)
+					print("[AutoMount.py] Failed to create", path, "Error:", ex)
 					command = None
 			if command:
 				print("[AutoMount.py] U/MOUNTCMD--->", command)
@@ -179,7 +180,7 @@ class AutoMount():
 					self.automounts[data['sharename']]['isMounted'] = False
 				if os.path.exists(path):
 					if not os.path.ismount(path):
-					        try:
+						try:
 							os.rmdir(path)
 							harddiskmanager.removeMountedPartition(path)
 						except Exception as ex:
@@ -209,7 +210,7 @@ class AutoMount():
 			print("[AutoMount.py] add symlink fails!", ex)
 		movie = os.path.join(hdd_dir, 'movie')
 		if not os.path.exists(movie):
-		        try:
+			try:
 				os.mkdir(movie)
 			except Exception as ex:
 				print("[AutoMount.py] Failed to create ", movie, "Error:", ex)
@@ -238,7 +239,7 @@ class AutoMount():
 	def writeMountsConfig(self):
 		# Generate List in RAM
 		list = ['<?xml version="1.0" ?>\n<mountmanager>\n']
-		for sharename, sharedata in self.automounts.items():
+		for sharename, sharedata in list(self.automounts.items()):
 			mtype = sharedata['mounttype']
 			list.append('<' + mtype + '>\n')
 			list.append(' <mount>\n')
@@ -272,7 +273,7 @@ class AutoMount():
 	def removeMount(self, mountpoint, callback=None):
 		print("[AutoMount.py] removing mount: ", mountpoint)
 		self.newautomounts = {}
-		for sharename, sharedata in self.automounts.items():
+		for sharename, sharedata in list(self.automounts.items()):
 			if sharename is not mountpoint.strip():
 				self.newautomounts[sharename] = sharedata
 		self.automounts.clear()
@@ -289,7 +290,7 @@ class AutoMount():
 		(path, callback) = extra_args
 		if os.path.exists(path):
 			if not os.path.ismount(path):
-			        try:
+				try:
 					os.rmdir(path)
 					harddiskmanager.removeMountedPartition(path)
 				except Exception as ex:

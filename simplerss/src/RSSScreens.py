@@ -180,7 +180,7 @@ class RSSEntryView(RSSBaseView):
 	def nextFeed(self):
 		# Show next Feed
 		if self.parent is not None:
-			result = self.parent.next()
+			result = next(self.parent)
 			self.feedTitle = result[0]
 			self.entries = len(result[1])
 			if self.entries:

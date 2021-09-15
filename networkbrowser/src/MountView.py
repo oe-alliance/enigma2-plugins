@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # for localized messages
+from __future__ import absolute_import
 from __future__ import print_function
-from __init__ import _
+from .__init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.Sources.StaticText import StaticText
@@ -10,8 +11,8 @@ from Components.Network import iNetwork
 from Components.Sources.List import List
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_ACTIVE_SKIN, fileExists
-from AutoMount import iAutoMount, AutoMount
-from MountEdit import AutoMountEdit
+from .AutoMount import iAutoMount, AutoMount
+from .MountEdit import AutoMountEdit
 
 
 class AutoMountView(Screen):
@@ -48,7 +49,7 @@ class AutoMountView(Screen):
 		self.skin_path = plugin_path
 		self.session = session
 		Screen.__init__(self, session)
- 		Screen.setTitle(self, _("Mount Viewer"))
+		Screen.setTitle(self, _("Mount Viewer"))
 		self.mounts = None
 		self.applyConfigRef = None
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
@@ -95,20 +96,23 @@ class AutoMountView(Screen):
 	def showMountsList(self):
 		self.list = []
 		self.mounts = iAutoMount.getMountsList()
-		for sharename in self.mounts.keys():
+		for sharename in list(self.mounts.keys()):
 			mountentry = iAutoMount.automounts[sharename]
 			self.list.append(self.buildMountViewItem(mountentry))
 		self["config"].setList(self.list)
-		self["config"].list.sort()
+		self["config"].list.sort(key=lambda x: (x[6], x[1]))
 		self["config"].onSelectionChanged.append(self.selectionChanged)
 
 	def buildMountViewItem(self, entry):
+		mode = 2
 		if entry["isMounted"] is True:
+			mode = 0
 			if fileExists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/ok.png")):
 				isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/ok.png"))
 			else:
 				isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/ok.png"))
 		if entry["isMounted"] is False:
+			mode = 1
 			if fileExists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/cancel.png")):
 				isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/cancel.png"))
 			else:
@@ -136,7 +140,7 @@ class AutoMountView(Screen):
 				mounttypepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/i-smb.png"))
 			else:
 				mounttypepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/i-smb.png"))
-		return((isMountedpng, sharename, IPdescription, DIRdescription, activepng, mounttypepng))
+		return((isMountedpng, sharename, IPdescription, DIRdescription, activepng, mounttypepng, mode))
 
 	def exit(self):
 		self.close()
