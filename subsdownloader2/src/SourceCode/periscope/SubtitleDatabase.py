@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 #   This file is part of periscope.
@@ -18,7 +19,6 @@
 
 import os
 import shutil
-import urllib2
 import sys
 import logging
 import traceback
@@ -26,6 +26,8 @@ import zipfile
 import struct
 import socket # For timeout purposes
 import re
+from six.moves.urllib.request import urlopen, Request
+from six.moves.urllib.error import HTTPError, URLError
 
 global tvshowRegex
 global tvshowRegex2
@@ -112,16 +114,16 @@ class SubtitleDB(object):
         ''' Downloads the given url and returns its contents.'''
         try:
             log.debug("Downloading %s" % url)
-            req = urllib2.Request(url, headers={'Referer': url, 'User-Agent': USER_AGENT})
+            req = Request(url, headers={'Referer': url, 'User-Agent': USER_AGENT})
             if timeout:
                 socket.setdefaulttimeout(timeout)
-            f = urllib2.urlopen(req)
+            f = urlopen(req)
             content = f.read()
             f.close()
             return content
-        except urllib2.HTTPError as e:
+        except HTTPError as e:
             log.warning("HTTP Error: %s - %s" % (e.code, url))
-        except urllib2.URLError as e:
+        except URLError as e:
             log.warning("URL Error: %s - %s" % (e.reason, url))
 
     def downloadFile(self, url, filename):

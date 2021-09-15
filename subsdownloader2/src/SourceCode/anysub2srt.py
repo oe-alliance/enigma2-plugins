@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from __future__ import print_function
 import os
 import re
@@ -16,9 +18,9 @@ modification by 2011-05-20 SileliS <silelis@tlen.pl>
 class SubConv():
     #def __init__(self, subtitle_path):
     def __init__(self, subtitle_path, encoding):
-	self.encodeing = encoding
-	self.subtitle = subtitle_path
-	file = codecs.open(self.subtitle, 'r', self.encodeing, errors="ignore")
+        self.encodeing = encoding
+        self.subtitle = subtitle_path
+        file = codecs.open(self.subtitle, 'r', self.encodeing, errors="ignore")
         self.subs_file = file.readlines()
         file.close()
 
@@ -34,19 +36,14 @@ class SubConv():
             line = list.pop(0)
             if re_mdvd.match(line):
                 return "mdvd"
-                break
-	    elif re_srt.match(line):
+            elif re_srt.match(line):
                 return "srt"
-	        break
             elif re_tmp.match(line):
                 return "tmp"
-	        break
             elif re_sub2.match(line):
                 return "sub2"
-	        break
             elif re_mpl2.match(line):
                 return "mpl2"
-	        break
 	    #becouse file is saved as mdvd returns mdvd value
         print("Unsupported subtitle format appears. Please send this subtitle to developer.")
         ####################################################
@@ -63,19 +60,19 @@ class SubConv():
         re1 = re.compile("^\{(\d+)\}\{(\d*)\}\s*(.*)")
         subtitles = []
         while len(list) > 0:
-	    try:
-		m = re1.match(list.pop(0), 0)
-		if m:
-		    subt = [int(m.group(1)) / float(fps)]
-		    if m.group(2):
-			subt.append(int(m.group(2)) / float(fps))
-		    else:
-			subt.append(int(m.group(1)) / float(fps) + 3)
-		    subt.extend(m.group(3).strip().split("|"))
-		    subtitles.append(subt)
-	    except:
-		sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
-        return subtitles
+            try:
+                m = re1.match(list.pop(0), 0)
+                if m:
+                    subt = [int(m.group(1)) / float(fps)]
+                if m.group(2):
+                    subt.append(int(m.group(2)) / float(fps))
+                else:
+                    subt.append(int(m.group(1)) / float(fps) + 3)
+                    subt.extend(m.group(3).strip().split("|"))
+                    subtitles.append(subt)
+            except:
+                sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
+                return subtitles
 
     def read_sub2(self, list):
         """
@@ -87,8 +84,8 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 """
         re1 = re.compile("^(\d+):(\d+):(\d+)\.(\d+)\s*\,\s*(\d+):(\d+):(\d+)\.(\d+).*$")
         subtitles = []
-	while len(list) > 0:
-	    try:
+        while len(list) > 0:
+            try:
                 m = re1.match(list.pop(0), 0)
                 if m:
                     subt = [int(m.group(1)) * 3600 + int(m.group(2)) * 60 + int(m.group(3)) + int(m.group(4)) / 100.0]
@@ -97,10 +94,10 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
                     lines = l.split("[br]")
                     for i in range(0, len(lines)):
                         subt.append(lines[i])
-                    subtitles.append(subt)
-	    except:
-		sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
-	return subtitles
+                        subtitles.append(subt)
+            except:
+                sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
+        return subtitles
 
 #    try:
 #            while len(list)>0:
@@ -119,30 +116,30 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 
     def read_srt(self, list):
         """
-Reads srt subtitles.
-input: contents of a file as list
-returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep, time_end, line1, ...],....]
-"""
+        Reads srt subtitles.
+        input: contents of a file as list
+        returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep, time_end, line1, ...],....]
+        """
         re1 = re.compile("^(\d+)\s*$")
         re2 = re.compile("^(\d+):(\d+):(\d+),(\d+)\s*-->\s*(\d+):(\d+):(\d+),(\d+).*$")
         re3 = re.compile("^\s*$")
         subtitles = []
         while len(list) > 0:
-	    try:
+            try:
                 if re1.match(list.pop(0), 0):
                     m = re2.match(list.pop(0), 0)
-                    if m:
-                        subt = [int(m.group(1)) * 3600 + int(m.group(2)) * 60 + int(m.group(3)) + int(m.group(4)) / 1000.0]
-                        subt.append(int(m.group(5)) * 3600 + int(m.group(6)) * 60 + int(m.group(7)) + int(m.group(8)) / 1000.0)
+                if m:
+                    subt = [int(m.group(1)) * 3600 + int(m.group(2)) * 60 + int(m.group(3)) + int(m.group(4)) / 1000.0]
+                    subt.append(int(m.group(5)) * 3600 + int(m.group(6)) * 60 + int(m.group(7)) + int(m.group(8)) / 1000.0)
+                    l = list.pop(0)
+                    while not re3.match(l, 0):
+                        subt.append(l.strip())
                         l = list.pop(0)
-                        while not re3.match(l, 0):
-                            subt.append(l.strip())
-                            l = list.pop(0)
                         subtitles.append(subt)
-        #except IndexError:
-	    except:
-		sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
-	return subtitles
+                    #except IndexError:
+            except:
+                sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
+        return subtitles
 
     def read_tmp(self, list):
         """
@@ -155,15 +152,15 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
         subs = {}
         while len(list) > 0:
             try:
-		m = re1.match(list.pop(0), 0)
-		if m:
-		    time = int(m.group(1)) * 3600 + int(m.group(2)) * 60 + int(m.group(3))
-		    if time in subs:
-			subs[time].extend(m.group(4).strip().split("|"))
-		    else:
-			subs[time] = m.group(4).strip().split("|")
-	    except:
-		sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
+                m = re1.match(list.pop(0), 0)
+                if m:
+                    time = int(m.group(1)) * 3600 + int(m.group(2)) * 60 + int(m.group(3))
+                if time in subs:
+                    subs[time].extend(m.group(4).strip().split("|"))
+                else:
+                    subs[time] = m.group(4).strip().split("|")
+            except:
+                    sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
 
         times = sorted(subs.keys())
         for i in range(0, len(times)):
@@ -176,21 +173,21 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
         return subtitles
 
     def read_mpl2(self, list):
-	    MPL2LINE = re.compile("\[(?P<start>\d+)\]\[(?P<stop>\d+)\](?P<line>.*)", re.S)
-	    #FRAMERATE = float(fps)
-	    subtitles = []
-	    while len(list) > 0:
-	    #for line in list:
-		try:
-		    group = MPL2LINE.match(list.pop(0)).groupdict()
-		    start = float(float(group["start"]) / 10) #*0.1*FRAMERATE) or 1
-		    stop = float(float(group["stop"]) / 10)#*0.1*FRAMERATE)
-		    rest = group["line"]
-		    temp = [float(start), float(stop), str(rest).replace('|', '\n')]
-		    subtitles.append(temp)
-		except:
-		    sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
-	    return subtitles
+        MPL2LINE = re.compile("\[(?P<start>\d+)\]\[(?P<stop>\d+)\](?P<line>.*)", re.S)
+        #FRAMERATE = float(fps)
+        subtitles = []
+        #for line in list:
+        while len(list) > 0:
+            try:
+                group = MPL2LINE.match(list.pop(0)).groupdict()
+                start = float(float(group["start"]) / 10) #*0.1*FRAMERATE) or 1
+                stop = float(float(group["stop"]) / 10)#*0.1*FRAMERATE)
+                rest = group["line"]
+                temp = [float(start), float(stop), str(rest).replace('|', '\n')]
+                subtitles.append(temp)
+            except:
+                sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
+        return subtitles
 
     def check_subs_long(self, subtitles_standard_list, fps):
         """takes list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep, time_end, line1, ...],....]
@@ -227,7 +224,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
             s2 = int(secs2 % 60)
             f2 = (secs2 - int(secs2)) * 1000
             outl.append("%d\n%.2d:%.2d:%.2d,%.3d --> %.2d:%.2d:%.2d,%.3d\n%s\n\n" % (count, h1, m1, s1, f1, h2, m2, s2, f2, "\n".join(l[2:])))
-	    count = count + 1
+            count = count + 1
         return outl
 
 #    def fileData_to_utf_8(self, input_coding):
@@ -263,30 +260,30 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 #        return temporary_list
 
     def ___utf8_to_utf_8_BOM(self):
-	"""Function write 3 bytes xEF xBB xBF at the begining of UTF-8 srt file.
-	This bytes are written by Windows Notepad for UTF-8 code page.
-	Probably it means that codepage is UTF-8 BOM (I'm not sure).
-	But without this 3 bytes polish chars are displayed badly after
-	few minutes of movie watching
-	http://www.howtofixcomputers.com/forums/windows-xp/extra-characters-beginning-file-ef-bb-bf-263070.html
-	"""
-	file_in = open(self.subtitle, 'rb')
-	buffor = file_in.read()
-	file_in.close()
-	file_out = open(self.subtitle, 'wb')
-	file_out.write("\xef\xbb\xbf" + buffor)
-	file_out.close()
+        """Function write 3 bytes xEF xBB xBF at the begining of UTF-8 srt file.
+        This bytes are written by Windows Notepad for UTF-8 code page.
+        Probably it means that codepage is UTF-8 BOM (I'm not sure).
+        But without this 3 bytes polish chars are displayed badly after
+        few minutes of movie watching
+        http://www.howtofixcomputers.com/forums/windows-xp/extra-characters-beginning-file-ef-bb-bf-263070.html
+        """
+        file_in = open(self.subtitle, 'rb')
+        buffor = file_in.read()
+        file_in.close()
+        file_out = open(self.subtitle, 'wb')
+        file_out.write("\xef\xbb\xbf" + buffor)
+        file_out.close()
 
     def save_subtitle(self, list):
         """Save subtitle list in file"""
         sub_list = [list]
-	try:
-	    #dst = codecs.open(self.subtitle, 'w','UTF-8')
-	    dst = codecs.open(self.subtitle, 'w', 'utf-8-sig')
-	    for nsub in sub_list:
-		s = self.to_srt(nsub)
-		dst.writelines(s)
-	    dst.close()
-	    #self.___utf8_to_utf_8_BOM()
-	except:
-	    print("Can't save subtitles in file: %s" % file)
+        try:
+            #dst = codecs.open(self.subtitle, 'w','UTF-8')
+            dst = codecs.open(self.subtitle, 'w', 'utf-8-sig')
+            for nsub in sub_list:
+                s = self.to_srt(nsub)
+                dst.writelines(s)
+                dst.close()
+                #self.___utf8_to_utf_8_BOM()
+        except:
+            print("Can't save subtitles in file: %s" % file)
