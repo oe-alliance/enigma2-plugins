@@ -1311,7 +1311,7 @@ class IRCClient(basic.LineReceiver):
     def dcc_ACCEPT(self, user, channel, data):
         data = text.splitQuoted(data)
         if len(data) < 3:
-            rais IRCBadMessage("malformed DCC SEND ACCEPT request: %r" % (data,))
+            raise IRCBadMessage("malformed DCC SEND ACCEPT request: %r" % (data,))
         (filename, port, resumePos) = data[:3]
         try:
             port = int(port)

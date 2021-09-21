@@ -35,3 +35,4 @@ stamp-h1
 *.*~
 .kdev4/
 *.kdev4
+*.pyc
