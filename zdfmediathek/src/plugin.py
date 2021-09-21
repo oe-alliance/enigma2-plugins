@@ -545,7 +545,7 @@ class RightMenuList(List):
 				thumbUrl = "%s%s" % (MAIN_PAGE, thumbUrl)
 			try:
 				req = Request(thumbUrl)
-				url_handle = urlopen(req)
+				url_handle = urlopen2(req)
 				headers = url_handle.info()
 				contentType = headers.getheader("content-type")
 			except:
