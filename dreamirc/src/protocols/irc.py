@@ -29,7 +29,6 @@ Test coverage needs to be better.
 <http://www.irchelp.org/irchelp/rfc/ctcpspec.html>}
 """
 
-from future.utils import raise_
 __version__ = '$Revision$'[11:-2]
 
 from twisted.internet import reactor, protocol
@@ -151,7 +150,7 @@ class IRC(protocol.Protocol):
         if ' ' in command or command[0] == ':':
             # Not the ONLY way to screw up, but provides a little
             # sanity checking to catch likely dumb mistakes.
-            raise_(ValueError, "Somebody screwed up, 'cuz this doesn't"
+            raise ValueError("Somebody screwed up, 'cuz this doesn't"
                   " look like a command to me: %s" % command)
 
         line = string.join([command] + list(parameter_list))
@@ -1289,7 +1288,7 @@ class IRCClient(basic.LineReceiver):
         # Use splitQuoted for those who send files with spaces in the names.
         data = text.splitQuoted(data)
         if len(data) < 3:
-            raise_(IRCBadMessage, "malformed DCC SEND request: %r" % (data,))
+            raise IRCBadMessage("malformed DCC SEND request: %r" % (data,))
 
         (filename, address, port) = data[:3]
 
@@ -1297,7 +1296,7 @@ class IRCClient(basic.LineReceiver):
         try:
             port = int(port)
         except ValueError:
-            raise_(IRCBadMessage, "Indecipherable port %r" % (port,))
+            raise IRCBadMessage("Indecipherable port %r" % (port,))
 
         size = -1
         if len(data) >= 4:
@@ -1312,7 +1311,7 @@ class IRCClient(basic.LineReceiver):
     def dcc_ACCEPT(self, user, channel, data):
         data = text.splitQuoted(data)
         if len(data) < 3:
-            raise_(IRCBadMessage, "malformed DCC SEND ACCEPT request: %r" % (data,))
+            rais IRCBadMessage("malformed DCC SEND ACCEPT request: %r" % (data,))
         (filename, port, resumePos) = data[:3]
         try:
             port = int(port)
@@ -1325,7 +1324,7 @@ class IRCClient(basic.LineReceiver):
     def dcc_RESUME(self, user, channel, data):
         data = text.splitQuoted(data)
         if len(data) < 3:
-            raise_(IRCBadMessage, "malformed DCC SEND RESUME request: %r" % (data,))
+            raise IRCBadMessage("malformed DCC SEND RESUME request: %r" % (data,))
         (filename, port, resumePos) = data[:3]
         try:
             port = int(port)
@@ -1337,7 +1336,7 @@ class IRCClient(basic.LineReceiver):
     def dcc_CHAT(self, user, channel, data):
         data = text.splitQuoted(data)
         if len(data) < 3:
-            raise_(IRCBadMessage, "malformed DCC CHAT request: %r" % (data,))
+            raise IRCBadMessage("malformed DCC CHAT request: %r" % (data,))
 
         (filename, address, port) = data[:3]
 
@@ -1345,7 +1344,7 @@ class IRCClient(basic.LineReceiver):
         try:
             port = int(port)
         except ValueError:
-            raise_(IRCBadMessage, "Indecipherable port %r" % (port,))
+            raise IRCBadMessage("Indecipherable port %r" % (port,))
 
         self.dccDoChat(user, channel, address, port, data)
 
@@ -1430,8 +1429,7 @@ class IRCClient(basic.LineReceiver):
     def ctcpReply_PING(self, user, channel, data):
         nick = user.split('!', 1)[0]
         if (not self._pings) or ((nick, data) not in self._pings):
-            raise_(IRCBadMessage,
-                  "Bogus PING response from %s: %s" % (user, data))
+            raise IRCBadMessage("Bogus PING response from %s: %s" % (user, data))
 
         t0 = self._pings[(nick, data)]
         self.pong(user, time.time() - t0)
@@ -1510,8 +1508,7 @@ def dccParseAddress(address):
         try:
             address = int(address)
         except ValueError:
-            raise_(IRCBadMessage,
-                  "Indecipherable address %r" % (address,))
+            raise IRCBadMessage("Indecipherable address %r" % (address,))
         else:
             address = (
                 (address >> 24) & 0xFF,

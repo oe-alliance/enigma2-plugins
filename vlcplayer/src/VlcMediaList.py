@@ -10,7 +10,6 @@
 #===============================================================================
 
 from __future__ import absolute_import
-from future.utils import raise_
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Button import Button
