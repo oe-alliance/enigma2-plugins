@@ -24,7 +24,7 @@ from __future__ import absolute_import
 import os
 from .Globals import printStackTrace
 from .MovieConfig import MovieConfig
-from ServiceProvider import eServiceReferenceHotplug
+from .ServiceProvider import eServiceReferenceHotplug
 from enigma import eTimer
 
 

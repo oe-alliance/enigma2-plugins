@@ -23,8 +23,8 @@ from __future__ import print_function
 from __future__ import absolute_import
 import os
 from datetime import datetime
-from ServiceProvider import ServiceCenter, eServiceReferenceDvd, eServiceReferenceBludisc
-from ServiceProvider import detectDVDStructure, detectBludiscStructure
+from .ServiceProvider import ServiceCenter, eServiceReferenceDvd, eServiceReferenceBludisc
+from .ServiceProvider import detectDVDStructure, detectBludiscStructure
 from .ServiceDescriptor import MovieInfo
 from .ServiceUtils import serviceUtil, diskUsage, getDirSize
 from .AutoNetwork import autoNetwork
@@ -32,7 +32,7 @@ from .MovieConfig import MovieConfig
 from .Globals import printStackTrace
 from .Trashcan import TRASH_NAME
 from enigma import eServiceReference, iServiceInformation
-from ISOInfo import ISOInfo
+from .ISOInfo import ISOInfo
 from Components.config import config
 from .StopWatch import clockit
 from .RecordTimerEvent import recordTimerEvent

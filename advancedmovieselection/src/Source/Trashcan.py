@@ -212,7 +212,7 @@ class Trashcan:
             if os.path.isfile(filename):
                 os.rename(filename, original_name)
                 filename = original_name
-                from ServiceProvider import ServiceCenter, eServiceReference
+                from .ServiceProvider import ServiceCenter, eServiceReference
                 service = eServiceReference(eServiceReference.idDVB, 0, filename)
                 print("[erase file]", filename)
                 serviceHandler = ServiceCenter.getInstance()

@@ -192,7 +192,7 @@ class DirectoryEvent(DirectoryInfo):
     def __init__(self, serviceref):
         DirectoryInfo.__init__(self, serviceref.getPath())
         self.is_movielibrary = False
-        from ServiceProvider import eServiceReferenceListAll
+        from .ServiceProvider import eServiceReferenceListAll
         if isinstance(serviceref, eServiceReferenceListAll):
             self.is_movielibrary = True
         elif serviceref is not None:
