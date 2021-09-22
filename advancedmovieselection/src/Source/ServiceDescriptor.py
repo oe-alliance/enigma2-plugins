@@ -23,7 +23,7 @@ from __future__ import print_function
 from __future__ import absolute_import
 import os
 from .LocaleInit import _
-from ServiceUtils import diskUsage, getDirSize, realSize
+from .ServiceUtils import diskUsage, getDirSize, realSize
 from .Globals import printStackTrace
 from enigma import eServiceReference, iServiceInformation
 from .Config import config

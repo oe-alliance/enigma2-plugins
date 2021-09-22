@@ -26,7 +26,7 @@ from datetime import datetime
 from ServiceProvider import ServiceCenter, eServiceReferenceDvd, eServiceReferenceBludisc
 from ServiceProvider import detectDVDStructure, detectBludiscStructure
 from .ServiceDescriptor import MovieInfo
-from ServiceUtils import serviceUtil, diskUsage, getDirSize
+from .ServiceUtils import serviceUtil, diskUsage, getDirSize
 from .AutoNetwork import autoNetwork
 from .MovieConfig import MovieConfig
 from .Globals import printStackTrace

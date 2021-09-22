@@ -31,7 +31,7 @@ from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformat
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN
 import os
-from .skin import parseColor
+from skin import parseColor
 import NavigationInstance
 from timer import TimerEntry
 from stat import ST_MTIME as stat_ST_MTIME

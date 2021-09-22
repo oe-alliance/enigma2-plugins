@@ -108,7 +108,7 @@ def updateInfo(path):
     if os.path.isfile(path):
         trash_size += os.path.getsize(path)
     else:
-        from ServiceUtils import getFolderSize
+        from .ServiceUtils import getFolderSize
         trash_size += getFolderSize(os.path.dirname(path))
 
 
