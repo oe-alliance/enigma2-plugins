@@ -132,7 +132,7 @@ class MC_WeatherInfo(Screen):
 		downloadPage(six.ensure_binary(downlink), downname).addCallback(self.jpgdown, stadd).addErrback(self.error)
 
 	def jpgdown(self, value, stadd):
-		downlink = subprocess.getoutput("cat /tmp/.stadtindex | grep \"background-image:url('http://mytown.de/\" | cut -d \"'\" -f2")
+		downlink = subprocess.check_output("cat /tmp/.stadtindex | grep \"background-image:url('http://mytown.de/\" | cut -d \"'\" -f2")
 		stadt = stadd
 		downname = "/tmp/" + stadt + ".jpg"
 		downloadPage(six.ensure_binary(downlink), downname).addCallback(self.makemvi, stadt).addErrback(self.error)

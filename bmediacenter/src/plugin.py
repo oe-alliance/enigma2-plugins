@@ -182,9 +182,9 @@ class DMC_MainMenu(Screen):
 		if self.can_osd_alpha:
 			try:
 				if config.plugins.mc_global.vfd.value == "on":
-					trans = subprocess.getoutput('cat /etc/enigma2/settings | grep config.av.osd_alpha | cut -d "=" -f2')
+					trans = subprocess.check_output('cat /etc/enigma2/settings | grep config.av.osd_alpha | cut -d "=" -f2')
 				else:
-					trans = subprocess.getoutput('cat /etc/enigma2/settings | grep config.osd.alpha | cut -d "=" -f2')
+					trans = subprocess.check_output('cat /etc/enigma2/settings | grep config.osd.alpha | cut -d "=" -f2')
 				open("/proc/stb/video/alpha", "w").write(str(trans))
 			except:
 				print("Set OSD Transparacy failed")

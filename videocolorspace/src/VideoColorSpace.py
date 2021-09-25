@@ -32,7 +32,7 @@ from Screens.Screen import Screen
 
 
 def getColorSpace():
-    mode = subprocess.getoutput('cat /proc/stb/video/hdmi_colorspace')
+    mode = subprocess.check_output('cat /proc/stb/video/hdmi_colorspace')
     print("[VideoColorSpace] current hdmi_colorspace:", mode)
     return mode
 
@@ -46,7 +46,7 @@ def setColorSpace(mode):
 
 
 def initializeConfig():
-    modes = subprocess.getoutput('cat /proc/stb/video/hdmi_colorspace_choices').split()
+    modes = subprocess.check_output('cat /proc/stb/video/hdmi_colorspace_choices').split()
     config.VideoColorSpace = ConfigSubsection()
     config.VideoColorSpace.color_space = ConfigSelection(modes, "None")
     value = config.VideoColorSpace.color_space.value
