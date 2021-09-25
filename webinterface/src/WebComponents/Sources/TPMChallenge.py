@@ -1,10 +1,12 @@
-from enigma import eTPM
-
 from Components.Sources.Source import Source
 
 from base64 import b64encode, b64decode
 
-tpm = eTPM()
+try:
+	from enigma import eTPM
+	tpm = eTPM()
+except ImportError:
+	tpm = None
 
 
 class TPMChallenge(Source):
@@ -23,13 +25,13 @@ class TPMChallenge(Source):
 		l3cert = None
 		cmd = self.cmd.get('cmd', self.CERTIFICATES)
 
-		if cmd == self.CERTIFICATES:
+		if cmd == self.CERTIFICATES and tpm != None:
 			l2cert = tpm.getData(eTPM.DT_LEVEL2_CERT)
 			l3cert = tpm.getData(eTPM.DT_LEVEL3_CERT)
 
 			return (b64encode(l2cert), b64encode(l3cert), None, True, _('LEVEL2 and LEVEL3 Certifcates (Base64-encoded)'))
 
-		elif cmd == self.CHALLENGE:
+		elif cmd == self.CHALLENGE and tpm != None:
 			random = self.cmd.get('random', None)
 
 			if random != None:
