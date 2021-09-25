@@ -55,8 +55,6 @@ from .Source.ServiceDescriptor import MovieInfo
 from .Source.MovieConfig import MovieConfig
 from .Source.PicLoader import PicLoader
 
-from six.moves import reload_module
-
 
 IMAGE_PATH = "Extensions/AdvancedMovieSelection/images/"
 
@@ -796,7 +794,7 @@ class MovieList(GUIComponent):
         instance.setContent(None)
         instance.selectionChanged.get().remove(self.selectionChanged)
 
-    def reload_module(self, root=None, filter_tags=None):
+    def reload(self, root=None, filter_tags=None):
         self.movieConfig.readDMconf()
         if root is not None:
             self.load(root, filter_tags)

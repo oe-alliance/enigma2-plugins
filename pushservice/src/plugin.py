@@ -35,9 +35,6 @@ from Components.config import config, ConfigSubsection, ConfigNothing, ConfigEna
 from .__init__ import _
 from .PushService import PushService
 
-from six.moves import reload_module
-
-
 #from ConfigScreen import ConfigScreen
 
 
@@ -80,6 +77,7 @@ config.pushservice.period = ConfigSelectionNumber(0, 1000, 1, default=24)
 def setup(session, **kwargs):
 	try:
 		### For testing only
+		from six.moves import reload_module
 		from . import ConfigScreen
 		reload_module(ConfigScreen)
 		###

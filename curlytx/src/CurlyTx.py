@@ -13,7 +13,6 @@ from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
-from six.moves import reload_module
 from twisted.web import client
 from twisted.web.client import _makeGetterFactory, HTTPClientFactory
 from enigma import gFont
@@ -150,7 +149,7 @@ class CurlyTx(Screen, HelpableScreen):
             pageId = 0
         self.loadUrl(pageId)
 
-    def reload_module(self):
+    def reload(self):
         if self.currentPage == None:
             return
 

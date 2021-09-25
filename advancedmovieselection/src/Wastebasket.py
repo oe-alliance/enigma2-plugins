@@ -140,7 +140,7 @@ class TrashMovieList(GUIComponent):
         for service in trash:
             self.list.append((service, None, -1, -1))
 
-    def reload_module(self, root=None):
+    def reload(self, root=None):
         self.load(root)
         self.l.setList(self.list)
 
@@ -399,9 +399,6 @@ class Wastebasket(Screen, HelpableScreen):
 import Screens.Standby
 from time import mktime, strftime
 from datetime import timedelta
-
-from six.moves import reload_module
-
 
 class WastebasketTimer():
     def __init__(self, session):

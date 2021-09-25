@@ -38,9 +38,6 @@ from .Source.Remote.Client import getClients
 from time import localtime, strftime
 from .Source.Globals import SkinTools
 
-from six.moves import reload_module
-
-
 staticIP = None
 
 
@@ -130,7 +127,7 @@ class ClientSetupList(GUIComponent):
         instance.setContent(None)
         instance.selectionChanged.get().remove(self.selectionChanged)
 
-    def reload_module(self):
+    def reload(self):
         self.list = []
         for client in getClients():
             self.list.append((client,))
