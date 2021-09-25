@@ -669,7 +669,7 @@ class IMDB(Screen, HelpableScreen):
 				pos = self.inhtml.find('<table class="findList">')
 				pos2 = self.inhtml.find("</table>", pos)
 				findlist = self.inhtml[pos:pos2]
-				searchresultmask = re.compile('<tr class="findResult (?:odd|even)">.*?<td class="result_text"> (<a href="/title/(tt\d{7,7})/.*?"\s?>(.*?)</a>.*?)</td>', re.DOTALL)
+				searchresultmask = re.compile('<tr class="findResult (?:odd|even)">.*?<td class="result_text"> (<a href="/title/(tt\d{7,8}/).*?"\s?>(.*?)</a>.*?)</td>', re.DOTALL)
 				searchresults = searchresultmask.finditer(findlist)
 				titlegroup = 1 if config.plugins.imdb.showlongmenuinfo.value else 3
 				self.resultlist = [(' '.join(self.htmltags.sub('', x.group(titlegroup)).replace(self.NBSP, " ").split()), x.group(2)) for x in searchresults]
@@ -677,11 +677,12 @@ class IMDB(Screen, HelpableScreen):
 				self["menu"].l.setList(self.resultlist)
 				if Len == 1:
 					self["statusbar"].setText(_("Re-Query IMDb: %s...") % (self.resultlist[0][0],))
-					self.eventName = self.resultlist[0][1]
-					localfile = "/tmp/imdbquery.html"
-					fetchurl = "https://www.imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
+					self.eventName = self.resultlist[0][0]
+					localfile = "/tmp/imdbquery2.html"
+					fetchurl = "https://www.imdb.com/title/" + self.resultlist[0][1]
+					self.fetchurl = fetchurl
 					download = downloadWithProgress(fetchurl, localfile)
-					download.start().addCallback(self.IMDBquery).addErrback(self.http_failed)
+					download.start().addCallback(self.IMDBquery2).addErrback(self.http_failed)
 				elif Len > 1:
 					self.Page = 1
 					self.showMenu()
