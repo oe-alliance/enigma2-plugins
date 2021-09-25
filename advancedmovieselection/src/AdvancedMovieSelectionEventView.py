@@ -130,13 +130,13 @@ class EventViewBase:
     def red_button(self):
         name = self.getEventName()
         if name:
-            from SearchTVDb import TheTVDBMain
+            from .SearchTVDb import TheTVDBMain
             self.session.open(TheTVDBMain, self.currentService)
 
     def green_button(self):
         name = self.getEventName()
         if name:
-            from SearchTMDb import TMDbMain
+            from .SearchTMDb import TMDbMain
             self.session.open(TMDbMain, name, self.currentService)
 
     def yellow_button(self):

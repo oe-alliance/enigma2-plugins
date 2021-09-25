@@ -45,7 +45,7 @@ from enigma import eServiceReference, eSize, ePoint, eTimer, iServiceInformation
 from Screens.Console import eConsoleAppContainer
 from .MoveCopy import MovieMove
 from .Rename import MovieRetitle
-from SearchTMDb import TMDbMain as TMDbMainsave
+from .SearchTMDb import TMDbMain as TMDbMainsave
 from .MoviePreview import MoviePreview, VideoPreview
 from .DownloadMovies import DownloadMovies
 from .Source.ServiceProvider import eServiceReferenceDvd
@@ -319,7 +319,7 @@ class MovieContextMenu(Screen):
         self.close()
 
     def thetvdbsearch(self):
-        from SearchTVDb import TheTVDBMain
+        from .SearchTVDb import TheTVDBMain
         self.session.openWithCallback(self.closeafterfinish, TheTVDBMain, self.service)
 
     def updateMetaFromEit(self):

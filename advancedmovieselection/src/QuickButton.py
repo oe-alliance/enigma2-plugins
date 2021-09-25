@@ -343,12 +343,12 @@ class QuickButton:
                 elif pname == "TheTVDB Info & D/L":
                     # TODO: search?
                     if True or not service.flags & eServiceReference.mustDescent:
-                        from SearchTVDb import TheTVDBMain
+                        from .SearchTVDb import TheTVDBMain
                         self.session.open(TheTVDBMain, service)
                 elif pname == "TMDb Info & D/L":
                     # TODO: search?
                     if True or not service.flags & eServiceReference.mustDescent:
-                        from SearchTMDb import TMDbMain as TMDbMainsave
+                        from .SearchTMDb import TMDbMain as TMDbMainsave
                         from .Source.ServiceProvider import ServiceCenter
                         searchTitle = ServiceCenter.getInstance().info(service).getName(service)
                         if len(self.list.multiSelection) == 0:

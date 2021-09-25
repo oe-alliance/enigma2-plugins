@@ -102,7 +102,7 @@ def tmdbInfo(session, eventName="", **kwargs):
         if event:
             eventName = event.getEventName()
         if eventName:
-            from SearchTMDb import TMDbMain
+            from .SearchTMDb import TMDbMain
             session.open(TMDbMain, eventName)
     except Exception as e:
         print(e)
@@ -118,7 +118,7 @@ def tvdbInfo(session, eventName="", **kwargs):
             eventName = event.getEventName()
             shortdescr = event.getShortDescription()
         if eventName:
-            from SearchTVDb import TheTVDBMain
+            from .SearchTVDb import TheTVDBMain
             session.open(TheTVDBMain, None, eventName, shortdescr)
     except Exception as e:
         print(e)
