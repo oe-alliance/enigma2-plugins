@@ -7,7 +7,7 @@ try:
 except:
 	is_libmediainfo = False
 	from Plugins.Extensions.SubsDownloader2.SourceCode.GetFPS import GetFPS
-from Plugins.Extensions.SubsDownloader2.SourceCode import chardet
+import chardet
 
 from Plugins.Extensions.SubsDownloader2.SourceCode.anysub2srt import SubConv
 # jak zmienie sciezke SubsDownloader2 (nazwe katalogu to trzeba ja tez zmienic w pliku OpenSubtitles.py
