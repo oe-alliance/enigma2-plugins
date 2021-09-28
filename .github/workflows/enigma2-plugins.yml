@@ -37,7 +37,6 @@ jobs:
         run: |
           pip install six
           sed -i '/PKG_CHECK_MODULES(ENIGMA2, enigma2)/d' ./configure.ac
-          sed -i '/PKG_CHECK_MODULES(GSTREAMER, gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR)/d' ./configure.ac
           sed -i '/PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)/d' ./configure.ac
           autoreconf -i
           ./configure --without-debug --with-po
@@ -59,7 +58,6 @@ jobs:
           sudo apt-get install python3.9-dev  
           pip3 install six
           sed -i '/PKG_CHECK_MODULES(ENIGMA2, enigma2)/d' ./configure.ac
-          sed -i '/PKG_CHECK_MODULES(GSTREAMER, gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR)/d' ./configure.ac
           sed -i '/PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)/d' ./configure.ac
           autoreconf -i
           ./configure --without-debug --with-po
