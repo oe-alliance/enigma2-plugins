@@ -24,7 +24,7 @@ import logging
 import traceback
 import httplib
 import re
-from Plugins.Extensions.SubsDownloader2.SourceCode.BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 from Plugins.Extensions.SubsDownloader2.SourceCode.periscope import SubtitleDatabase
 from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities import languageTranslate #toOpenSubtitles_two
 
