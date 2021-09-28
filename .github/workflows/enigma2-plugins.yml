@@ -62,4 +62,5 @@ jobs:
           autoreconf -i
           ./configure --without-debug --with-po
           make
+          rm -rf ./subsdownloader2
           python -m compileall .
