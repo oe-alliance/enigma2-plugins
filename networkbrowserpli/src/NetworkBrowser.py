@@ -21,7 +21,7 @@ from os import path as os_path, stat, mkdir, remove
 from time import time
 from stat import ST_MTIME
 
-import netscan
+from . import netscan
 from .MountManager import AutoMountManager
 from .AutoMount import iAutoMount
 from .MountEdit import AutoMountEdit
