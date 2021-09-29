@@ -570,7 +570,7 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 
 		if config.plugins.autotimer.autopoll.value:
 			if plugin.autopoller is None:
-				from AutoPoller import AutoPoller
+				from .AutoPoller import AutoPoller
 				plugin.autopoller = AutoPoller()
 			plugin.autopoller.start()
 		else:
