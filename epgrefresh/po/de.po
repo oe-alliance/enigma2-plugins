@@ -19,13 +19,13 @@ msgid "%d more services"
 msgstr "%d weitere Kanäle"
 
 msgid "After a successful refresh the AutoTimer will automatically search for new matches if this is enabled. The options 'Ask*' has only affect on a manually refresh. If EPG-Refresh was called in background the default-Answer will be executed!"
-msgstr "Bei aktivierter Option sucht das AutoTimer Plugin nach der EPG-Aktualisierung automatisch nach neuen Sendungen. Die Option \"Fragen\" ist nur für manuelle Aktualisierungen relevant. Im Hintergrund wird die Default-Antwort ausgeführt."
+msgstr "Bei aktivierter Option sucht das AutoTimer Plugin nach der Aktualisierung automatisch nach neuen Sendungen. Die Option \"Fragen\" ist nur für manuelle Aktualisierungen relevant. Im Hintergrund wird die Default-Antwort ausgeführt."
 
 msgid "An automated refresh will start after this time of day, but before the time specified in next setting."
-msgstr "Die automatische EPG-Aktualisierung wird nach dieser Uhrzeit und vor der Uhrzeit im nächsten Feld durchgeführt."
+msgstr "Die automatische Aktualisierung wird nach dieser Uhrzeit und vor der Uhrzeit im nächsten Feld durchgeführt."
 
 msgid "An automated refresh will start before this time of day, but after the time specified in previous setting."
-msgstr "Die automatische EPG-Aktualisierung wird vor dieser Uhrzeit und nach der Uhrzeit im vorherigen Feld durchgeführt."
+msgstr "Die automatische Aktualisierung wird vor dieser Uhrzeit und nach der Uhrzeit im vorherigen Feld durchgeführt."
 
 msgid "Ask default No"
 msgstr "Fragen default Nein"
@@ -37,7 +37,7 @@ msgid "AutoTimer failed with error %s"
 msgstr "Parsen des EPGs durch den AutoTimer hat einen Fehler verursacht %s"
 
 msgid "Automatically refresh EPG"
-msgstr "Automatisierte EPG-Aktualisierung"
+msgstr "Automatische Aktualisierung"
 
 msgid "Background only"
 msgstr "Nur im Hintergrund"
@@ -58,7 +58,7 @@ msgid "Close and save changes"
 msgstr "Schließen und Änderungen speichern"
 
 msgid "Delay if not in standby (minutes)"
-msgstr "Verzögerung, sofern nicht im Standby (Minuten)"
+msgstr "Verzögerung in Minuten, sofern nicht im Standby"
 
 msgid "Delete"
 msgstr "Löschen"
@@ -67,29 +67,30 @@ msgid "Display more Options"
 msgstr "Mehr Optionen anzeigen?"
 
 msgid "Duration to stay on service (seconds)"
-msgstr "Verbleibe auf Sender für (Sekunden)"
+msgstr "Verbleibe auf dem Sender für x Sekunden"
 
+# (hh:mm) nicht nötig, da ja eh die Uhrzeit verlangt wird
 msgid "EPG refresh auto-start earliest (hh:mm)"
-msgstr "Früheste Uhrzeit für die Aktualisierung (hh:mm)"
+msgstr "Früheste Uhrzeit für die Aktualisierung"
 
 msgid "EPG refresh auto-start latest (hh:mm)"
-msgstr "Späteste Uhrzeit für die Aktualisierung (hh:mm)"
+msgstr "Späteste Uhrzeit für die Aktualisierung"
 
 msgid "EPG refresh finished."
-msgstr "EPG-Aktualisierung beendet."
+msgstr "Aktualisierung beendet."
 
 msgid ""
 "EPG refresh finished.\n"
 "Should AutoTimer be search for new matches?"
 msgstr ""
-"EPG-Aktualisierung abgeschlossen.\n"
+"Aktualisierung abgeschlossen.\n"
 "Soll AutoTimer nach neuen Ereignissen suchen?"
 
 msgid "EPG refresh started in background."
-msgstr "EPG-Aktualisierung wurde im Hintergrund gestartet"
+msgstr "Aktualisierung wurde im Hintergrund gestartet."
 
 msgid "EPG refresh starts scanning channels."
-msgstr "EPG-Aktualisierung startet den Kanalscan."
+msgstr "Aktualisierung startet den Kanalscan."
 
 msgid "EPG-Refresh_Pending Services"
 msgstr "EPG-Refresh ausstehende Kanäle"
@@ -101,7 +102,7 @@ msgid "EPG-Refresh_SetUp"
 msgstr "EPG-Refresh Konfiguration"
 
 msgid "EPG-Refresh_Stop Refresh"
-msgstr "EPG-Aktualisierung stoppen"
+msgstr "Aktualisierung stoppen"
 
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr "EPG-Refresh"
@@ -132,7 +133,7 @@ msgid "Flush EPG before refresh"
 msgstr "EPG-Daten vor dem Aktualisieren löschen"
 
 msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
-msgstr "Sollen vor der EPG-Aktualisierung alte EPG-Daten gelöscht werden?"
+msgstr "Sollen vor der Aktualisierung alte EPG-Daten gelöscht werden?"
 
 msgid "Edit Services to refresh"
 msgstr "Sender zur Aktualisierung auswählen"
@@ -196,11 +197,11 @@ msgid "If the receiver currently isn't in standby, this is the duration which EP
 msgstr "Ist die Box zum Startzeitpunkt nicht im Standby, pausiert EPG-Refresh für die hier eingetragene Zeit, bevor es einen erneuten Versuch startet."
 
 msgid "If this is enabled, the plugin will wake up the receiver from standby if possible. Otherwise it needs to be switched on already."
-msgstr "Bei aktivierter Option weckt EPG-Refresh die Box, sofern möglich, aus dem Standby auf. Andernfalls muss sie schon eingeschaltet sein."
+msgstr "Wenn aktiviert weckt EPG-Refresh, sofern möglich, die Box aus dem Standby auf. Andernfalls muss sie schon eingeschaltet sein."
 
 # Die Optionen selbst stehen ja schon in der Menüpunkt Auswahl
 msgid "If you want to refresh the EPG in background, you can choose the method which best suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture."
-msgstr "Wählen Sie die Methode für die Aktualisierung im Hintergrund, die am besten Ihren Anforderungen entspricht."
+msgstr "Die Methode für die Aktualisierung im Hintergrund wählen, die Ihren Anforderungen am ehesten entspricht."
 
 msgid "Inherit Services from AutoTimer"
 msgstr "Zusätzlich Sender vom AutoTimer verwenden"
@@ -266,7 +267,7 @@ msgid "Refreshing"
 msgstr "Aktualisiere"
 
 msgid "Run AutoTimer after refresh"
-msgstr "AutoTimer nach Aktualisierung starten"
+msgstr "AutoTimer nach der Aktualisierung starten"
 
 msgid "Select a file to force a Backup"
 msgstr "Eine Datei auswählen, um ein Backup zu starten"
@@ -293,19 +294,19 @@ msgid "Show Setup in plugins"
 msgstr "\"Einstellungen\" bei den Plugins anzeigen"
 
 msgid "Show last EPGRefresh - Time"
-msgstr "Letzte EPG-Aktualisierung zeigen"
+msgstr "Letzte Aktualisierung zeigen"
 
 msgid "Show more Functions"
 msgstr "Mehr Funktionen anzeigen"
 
 msgid "Show popup when refresh starts and ends."
-msgstr "Meldung zeigen, wenn die Aktualisierung startet oder endet?"
+msgstr "Meldung zeigen, wenn die Aktualisierung startet und endet?"
 
 msgid "Show the pending Services for refresh"
 msgstr "Ausstehende Sender einer laufenden Aktualisierung ansehen"
 
 msgid "Shutdown after EPG refresh."
-msgstr "Nach EPG-Aktualisierung herunterfahren"
+msgstr "Nach der Aktualisierung herunterfahren"
 
 msgid "Skip protected Services"
 msgstr "überspringe geschützte Kanäle"
@@ -314,7 +315,7 @@ msgid "Start EPGrefresh immediately"
 msgstr "Eine Aktualisierung sofort starten"
 
 msgid "Stop Refresh"
-msgstr "Refresh anhalten"
+msgstr "Aktualisierung stoppen"
 
 msgid "Stop Running EPG-refresh"
 msgstr "Laufende Aktualisierung stoppen"
@@ -323,7 +324,7 @@ msgid "Stop running refresh"
 msgstr "Laufende Aktualisierung stoppen"
 
 msgid "There is still a refresh running. The Operation isn't allowed at this moment."
-msgstr "Zurzeit läuft gerade eine Aktualisierung. Die Aktion ist im Moment nicht erlaubt."
+msgstr "Die Aktion ist im Moment nicht erlaubt, denn es läuft gerade eine Aktualisierung!"
 
 msgid "This is the duration each service/channel will stay active during a refresh."
 msgstr "Anzahl Sekunden, für die die einzelnen Kanäle aktiviert werden."
@@ -352,7 +353,7 @@ msgstr ""
 "Wollen Sie die GUI jetzt neu starten?"
 
 msgid "Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu."
-msgstr "Solange diese Option nicht aktiviert ist, wird EPG-Refresh nicht automatisch laufen, sondern muss explizit mittels der Taste GELB hier im Menü gestartet werden."
+msgstr "Ist diese Option nicht aktiviert, wird EPG-Refresh nicht automatisch laufen, sondern muss explizit mittels der Taste GELB hier im Menü gestartet werden."
 
 msgid "Version"
 msgstr "Version"
