@@ -3,7 +3,7 @@
 $Author: sreichholf $
 '''
 from __future__ import absolute_import
-from enigma import eTimer, eSize, ePoint, getDesktop, eDVBVolumecontrol, eBackgroundFileEraser
+from enigma import getDesktop, eDVBVolumecontrol, eBackgroundFileEraser
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -14,9 +14,7 @@ from Screens.HelpMenu import HelpableScreen
 
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigEnableDisable, getConfigListEntry, ConfigText, ConfigInteger
 from Components.ActionMap import ActionMap
-from Components.Label import Label
 from Components.Button import Button
-from Components.Pixmap import Pixmap
 from Components.Sources.List import List
 from Components.ConfigList import ConfigListScreen
 from Components.Harddisk import harddiskmanager
@@ -24,8 +22,7 @@ from Components.Harddisk import harddiskmanager
 from Plugins.Plugin import PluginDescriptor
 from Tools import Notifications
 from Tools.NumericalTextInput import NumericalTextInput
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_CONFIG, SCOPE_MEDIA
-from Tools.LoadPixmap import LoadPixmap
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CONFIG, SCOPE_MEDIA
 from GlobalActions import globalActionMap # for muting
 
 from twisted.internet import reactor

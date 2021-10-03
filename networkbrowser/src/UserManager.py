@@ -4,12 +4,11 @@ from __future__ import absolute_import
 from .__init__ import _
 from Screens.Screen import Screen
 from Components.Sources.StaticText import StaticText
-from Components.Pixmap import Pixmap
 from Components.ActionMap import ActionMap
 from Components.Sources.List import List
 
 from Tools.LoadPixmap import LoadPixmap
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_ACTIVE_SKIN, fileExists
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_ACTIVE_SKIN, fileExists
 from .UserDialog import UserDialog
 from os import unlink, listdir, path as os_path
 

@@ -3,19 +3,17 @@
 from __future__ import print_function
 from __future__ import absolute_import
 from .__init__ import _
-from enigma import eTimer, getDesktop
+from enigma import eTimer
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from Components.Label import Label
-from Components.ActionMap import ActionMap, NumberActionMap
+from Components.ActionMap import ActionMap
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from Components.Network import iNetwork
-from Components.Input import Input
-from Components.config import getConfigListEntry, NoSave, config, ConfigIP
-from Components.ConfigList import ConfigList, ConfigListScreen
+from Components.config import getConfigListEntry, ConfigIP
+from Components.ConfigList import ConfigListScreen
 from Components.Console import Console
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_ACTIVE_SKIN, fileExists
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_ACTIVE_SKIN, fileExists
 from Tools.LoadPixmap import LoadPixmap
 from os import path as os_path, stat, mkdir, remove
 from time import time

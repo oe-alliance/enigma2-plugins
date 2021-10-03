@@ -9,8 +9,8 @@ from __future__ import print_function
 from Components.About import about
 from Components.ActionMap import ActionMap
 from Components.Button import Button
-from Components.config import config, configfile, getConfigListEntry, ConfigSubsection, ConfigYesNo, ConfigInteger, ConfigSelection
-from Components.ConfigList import ConfigList, ConfigListScreen
+from Components.config import config, configfile, getConfigListEntry, ConfigSubsection, ConfigYesNo, ConfigInteger
+from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
@@ -18,8 +18,7 @@ from Components.Network import iNetwork
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.Sources.StaticText import StaticText
 from Components.UsageConfig import preferredTimerPath
-from Components.Pixmap import Pixmap
-from RecordTimer import RecordTimer, RecordTimerEntry, parseEvent
+from RecordTimer import RecordTimerEntry, parseEvent
 from ServiceReference import ServiceReference
 from Screens.EventView import EventViewSimple
 from Screens.MessageBox import MessageBox
@@ -27,7 +26,7 @@ from Screens.Screen import Screen
 from Screens.Setup import SetupSummary
 from Screens.TimerEntry import TimerEntry
 from Screens.TimerEdit import TimerSanityConflict
-from Tools.Directories import fileExists, pathExists, SCOPE_SKIN_IMAGE, SCOPE_ACTIVE_SKIN, resolveFilename
+from Tools.Directories import fileExists, SCOPE_ACTIVE_SKIN, resolveFilename
 from Tools.HardwareInfo import HardwareInfo
 from Plugins.Plugin import PluginDescriptor
 
