@@ -300,7 +300,7 @@ msgid "Show more Functions"
 msgstr "Mehr Funktionen anzeigen"
 
 msgid "Show popup when refresh starts and ends."
-msgstr "Meldung zeigen, wenn die Aktualisierung startet und endet?"
+msgstr "Eine Meldung zum Start und Ende der Aktualisierung zeigen"
 
 msgid "Show the pending Services for refresh"
 msgstr "Ausstehende Sender einer laufenden Aktualisierung ansehen"
