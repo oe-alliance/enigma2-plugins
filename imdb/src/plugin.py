@@ -247,7 +247,7 @@ class IMDB(Screen, HelpableScreen):
 			'(?:.*?<h4 class="inline">(?P<g_aspect>Seitenverh\S*?ltnis|Aspect Ratio):</h4>\s*(?P<aspect>.+?)(?:Mehr|See more</a>|</div>))?', re.DOTALL),
 			re.compile(
 			'(?:.*?<div.*?class="GenresAndPlot__TextContainerBreakpointXL.*?>(?P<outline>.+?)</div>)?'
-			'(?:.*?<section.*?<div.*?<div.*?<hgroup.*?<h3.*?>(?P<g_synopsis>Storyline)</h3>.*?<div.*?<div.*?<div.*?<div.*?>(?P<synopsis>.+?)</div)?'
+			'(?:.*?<section.*?<div.*?<div.*?<hgroup.*?<h3.*?>(?P<g_synopsis>Storyline)</h3>.*?<div class="Story.*?>(?:<ul|<div.*?<div.*?<div.*?>(?P<synopsis>.+?)</div))?'
 			'(?:.*?Keywords__PlotKeywords.*?>(?P<keywords>.+?)(?:\d+ (?:Mehr|more)</span|</div>))?'
 			'(?:.*?>(?P<g_tagline>Werbezeile|Taglines?)</a>.*?<div.*?<ul.*?<li.*?<span.*?>(?P<tagline>.*?)</span>)?'
 			'(?:.*?>(?P<g_cert>Altersfreigabe|Certificate|Motion Picture Rating \(MPAA\))</a>.*?<div.*?<ul.*?<li.*?<span.*?>(?P<cert>.*?)</span>)?'
@@ -258,7 +258,7 @@ class IMDB(Screen, HelpableScreen):
 			'(?:.*?<h3.*?>(?P<g_comments>Nutzerkommentare|User review)s.*?</h3>.*?<span.*?UserReviewSummary__Summary.*?><span.*?>(?P<commenttitle>.*?)</span></div><div.*?<div.*?<div.*?>(?P<comment>.+?)</div>.*?<div.*?UserReviewAuthor__AuthorContainer.*?>.*?<ul.*?<li.*?>(?P<commenter>.+?)</li>)?'
 			'(?:.*?>(?P<g_language>Sprachen?|Languages?)</span>.*?<div.*?<ul.*?>(?P<language>.*?)</ul>)?'
 			'(?:.*?>(?P<g_locations>Drehorte?|Filming locations?)</a>.*?<div.*?<ul.*?>(?P<locations>.*?)</ul>)?'
-			'(?:.*?>(?P<g_company>Firm\S*?|Production compan.*?)</a>.*?<div.*?<ul.*?>(?P<company>.*?)</ul>)?'
+			'(?:.*?>(?P<g_company>Firm\S*?|Production compan.*?)</.*?<div.*?<ul.*?>(?P<company>.*?)</ul>)?'
 			'(?:.*?>(?P<g_runtime>L\S*?nge|Runtime)</span>.*?<div.*?<ul.*?>(?P<runtime>.*?)</ul>)?'
 			'(?:.*?>(?P<g_color>Farbe|Color)</span>.*?<div.*?<ul.*?>(?P<color>.*?)</ul>)?'
 			'(?:.*?>(?P<g_sound>Tonverfahren|Sound mix)</span>.*?<div.*?<ul.*?>(?P<sound>.*?)</ul>)?'
@@ -269,7 +269,7 @@ class IMDB(Screen, HelpableScreen):
 			self.ratingmask = [re.compile('<div class="ratingValue">.*?<span itemprop="ratingValue">(?P<rating>.*?)</span>', re.DOTALL),
 			re.compile('AggregateRatingButton__RatingScore.*?>(?P<rating>.*?)</span>', re.DOTALL)]
 			self.castmask = [re.compile('<td>\s*<a href=.*?>(?P<actor>.*?)\s*</a>\s*</td>.*?<td class="character">(?P<character>.*?)(?:<a href="#"\s+class="toggle-episodes".*?>(?P<episodes>.*?)</a>.*?)?</td>', re.DOTALL),
-			re.compile('StyledComponents__ActorName.*?>(?P<actor>.*?)</a><div.*?<ul.*?>(?P<character>.*?)</span.*?</ul></div>(?:<a.*?><span><span.*?>(?P<episodes>.*?)</span></span>)?', re.DOTALL)]
+			re.compile('StyledComponents__ActorName.*?>(?P<actor>.*?)</a>(?:<div.*?<ul.*?>(?P<character>.*?)</span.*?</ul></div>)?(?:<a.*?><span><span.*?>(?P<episodes>.*?)</span></span>)?', re.DOTALL)]
 			self.postermask = [re.compile('<div class="poster">.*?<img .*?src=\"(http.*?)\"', re.DOTALL),
 			re.compile('"hero-media__poster".*?><div.*?<img.*?ipc-image.*?src="(http.*?)"', re.DOTALL)]
 
@@ -617,7 +617,7 @@ class IMDB(Screen, HelpableScreen):
 			start = in_html.find('<nav id="imdbHeader"')
 			if start == -1:
 				start = 0
-			end = in_html.find('title-news-header')
+			end = in_html.find('<section data-testid="contribution"')
 			if end == -1:
 				end = len(in_html)
 			in_html = in_html[start:end]  # speed up re searches by trimming irrelevant text
@@ -796,11 +796,11 @@ class IMDB(Screen, HelpableScreen):
 					if x.group('character'):
 						chartext = self.htmltags.sub('', x.group('character').replace('/ ...', '')).replace('\n', ' ').replace(self.NBSP, ' ')
 						Casttext += _(" as ") + chartext.strip()
-						try:
-							if config.plugins.imdb.showepisodeinfo.value and x.group('episodes'):
-								Casttext += ' [' + self.htmltags.sub('', re.sub(r"[0-9]+ ep(?:s|\b)", "", x.group('episodes')).replace(' • ', ', ')).strip() + ']'
-						except IndexError:
-							pass
+					try:
+						if config.plugins.imdb.showepisodeinfo.value and x.group('episodes'):
+							Casttext += ' [' + self.htmltags.sub('', re.sub(r"[0-9]+ ep(?:s|\b)", "", x.group('episodes')).replace(' • ', ', ')).strip() + ']'
+					except IndexError:
+						pass
 				if Casttext:
 					Casttext = _("Cast: ") + self.fontescapes.sub(self.fontescsub, Casttext)
 				else:
@@ -853,8 +853,9 @@ class IMDB(Screen, HelpableScreen):
 								outline = outline and self.htmltags.sub('', outline) or ''
 								if outline.endswith("... Read all"):
 									outline = outline[:-12]
+								synopsis = extrainfos.group("synopsis") or ''
 								if ("Add a Plot" in extrainfos.group(category) or
-										self.htmltags.sub('', extrainfos.group("synopsis")).startswith(outline)):
+										self.htmltags.sub('', synopsis).startswith(outline)):
 									Extratext = Extratext[:-len(extraspace)]
 									continue
 								Extratext += _("Plot Outline")
