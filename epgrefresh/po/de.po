@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: ../src\n"
 
 msgid "%d more services"
-msgstr "%d weitere Kanäle"
+msgstr "%d weitere Sender"
 
 msgid "After a successful refresh the AutoTimer will automatically search for new matches if this is enabled. The options 'Ask*' has only affect on a manually refresh. If EPG-Refresh was called in background the default-Answer will be executed!"
 msgstr "Bei aktivierter Option sucht das AutoTimer Plugin nach der Aktualisierung automatisch nach neuen Sendungen. Die Option \"Fragen\" ist nur für manuelle Aktualisierungen relevant. Im Hintergrund wird die Default-Antwort ausgeführt."
@@ -67,7 +67,7 @@ msgid "Display more Options"
 msgstr "Mehr Optionen anzeigen?"
 
 msgid "Duration to stay on service (seconds)"
-msgstr "Verbleibe auf dem Sender für x Sekunden"
+msgstr "Wieviele Sekunden auf dem Sender verbleiben"
 
 # (hh:mm) nicht nötig, da ja eh die Uhrzeit verlangt wird
 msgid "EPG refresh auto-start earliest (hh:mm)"
@@ -90,10 +90,10 @@ msgid "EPG refresh started in background."
 msgstr "Aktualisierung wurde im Hintergrund gestartet."
 
 msgid "EPG refresh starts scanning channels."
-msgstr "Aktualisierung startet den Kanalscan."
+msgstr "EPG-Refresh startet den Senderscan."
 
 msgid "EPG-Refresh_Pending Services"
-msgstr "EPG-Refresh ausstehende Kanäle"
+msgstr "EPG-Refresh ausstehende Sender"
 
 msgid "EPG-Refresh_Refresh now"
 msgstr "EPG-Refresh jetzt aktualisieren"
@@ -109,7 +109,7 @@ msgstr "EPG-Refresh"
 
 # sonst Versionsnummer in Überschrift nicht sichtbar
 msgid "EPGRefresh Configuration"
-msgstr "EPG-Refresh "
+msgstr "EPG-Refresh   "
 
 msgid "EPGRefresh Configuration Help"
 msgstr "EPG-Refresh Konfiguration Hilfe"
@@ -127,7 +127,7 @@ msgid "EXTENSIONNAME_SETUP"
 msgstr ""
 
 msgid "Edit Services"
-msgstr "Kanäle"
+msgstr "Sender"
 
 msgid "Flush EPG before refresh"
 msgstr "EPG-Daten vor dem Aktualisieren löschen"
@@ -151,7 +151,7 @@ msgid "Enable this to be able to start the EPGRefresh from within the extension 
 msgstr "Soll der Menüpunkt \"EPG-Refresh jetzt aktualisieren\" direkt aus dem Erweiterungsmenü heraus aufgerufen werden können?"
 
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
-msgstr "Liste der Kanäle automatisch um die Kanäle des AutoTimers erweitern?"
+msgstr "Liste der Sender automatisch um die des AutoTimers erweitern?"
 
 msgid "FILELIST_BIGGEST"
 msgstr "Größtes"
@@ -163,7 +163,7 @@ msgid "FILELIST_YOUNGEST"
 msgstr "Jüngstes"
 
 msgid "Fake recording"
-msgstr "Pseudoaufnahme"
+msgstr "Pseudo-Aufnahme"
 
 msgid "Following Services have to be scanned:"
 msgstr "Folgende Sender werden noch gescannt:"
@@ -237,7 +237,7 @@ msgid "PLUGINNAME_EPGRefresh"
 msgstr "EPG-Refresh"
 
 msgid "Pending Services"
-msgstr "Ausstehende Kanäle"
+msgstr "Ausstehende Sender"
 
 msgid "PiP available now."
 msgstr "Bild im Bild ist wieder verfügbar."
@@ -279,7 +279,7 @@ msgid "Select channel to refresh"
 msgstr "Zu aktualisierenden Sender auswählen"
 
 msgid "Should protected services be skipped if refresh was started in interactive-mode?"
-msgstr "Sollen geschützte Kanäle bei einer manuellen Aktualisierung übersprungen werden?"
+msgstr "Sollen geschützte Sender bei einer manuellen Aktualisierung übersprungen werden?"
 
 msgid "Show 'EPGRefresh Start now' in extension menu."
 msgstr "\"Aktualisierung starten\" im Erweiterungsmenü anzeigen"
@@ -309,7 +309,7 @@ msgid "Shutdown after EPG refresh."
 msgstr "Nach der Aktualisierung herunterfahren"
 
 msgid "Skip protected Services"
-msgstr "überspringe geschützte Kanäle"
+msgstr "überspringe geschützte Sender"
 
 msgid "Start EPGrefresh immediately"
 msgstr "Eine Aktualisierung sofort starten"
@@ -327,7 +327,7 @@ msgid "There is still a refresh running. The Operation isn't allowed at this mom
 msgstr "Die Aktion ist im Moment nicht erlaubt, denn es läuft gerade eine Aktualisierung!"
 
 msgid "This is the duration each service/channel will stay active during a refresh."
-msgstr "Anzahl Sekunden, für die die einzelnen Kanäle aktiviert werden."
+msgstr "Anzahl Sekunden, für die die einzelnen Sender aktiviert werden."
 
 msgid "This setting controls whether or not an informational message will be shown at start and completion of refresh."
 msgstr "Soll zum Start und Ende der Aktualisierung eine Informationsmeldung angezeigt werden?"
