@@ -49,6 +49,7 @@ from six.moves import queue, range
 
 Briefkasten = queue.Queue()
 
+
 def main(session, **kwargs):
 	try:
 		session.open(FanControl2Plugin)
