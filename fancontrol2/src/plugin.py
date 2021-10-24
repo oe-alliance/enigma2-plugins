@@ -42,13 +42,12 @@ from Components.ActionMap import NumberActionMap
 from Components.Harddisk import harddiskmanager
 
 from threading import Thread, Lock
-Briefkasten = queue.Queue()
 
 from boxbranding import getBoxType, getImageDistro
 
-
 from six.moves import queue, range
 
+Briefkasten = queue.Queue()
 
 def main(session, **kwargs):
 	try:
