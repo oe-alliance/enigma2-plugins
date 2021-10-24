@@ -28,5 +28,5 @@ class ParentControl(Source):
 		return list
 
 	list = property(command)
-	lut = {"ServiceReference": 0			, "ServiceName": 1
+	lut = {"ServiceReference": 0, "ServiceName": 1
 			}

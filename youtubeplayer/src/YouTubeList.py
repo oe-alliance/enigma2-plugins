@@ -122,12 +122,12 @@ class YouTubeVideoDetailsScreen(Screen):
 
 		self["actions"] = ActionMap(["YouTubeVideoDetailsScreenActions"],
 		{
-			"ok"		: self.close,
-			"cancel"	: self.close,
-			"up"		: self.pageUp,
-			"down"		: self.pageDown,
-			"left"		: self.pageUp,
-			"right"		: self.pageDown
+			"ok": self.close,
+			"cancel": self.close,
+			"up": self.pageUp,
+			"down": self.pageDown,
+			"left": self.pageUp,
+			"right": self.pageDown
 		})
 
 		self.onFirstExecBegin.append(self.setPixmap)
@@ -227,18 +227,18 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 
 		self["actions"] = ActionMap(["YouTubeVideoListActions"],
 		{
-			"play"			: self.tryToPlay,
-			"select"		: self.justSelectServer,
-			"search"		: self.searchAgain,
-			"menu"			: self.openContextMenu,
-			"forward"		: self.forwardInHistory,
-			"backward"		: self.backInHistory,
-			"left"			: self.keyLeft,
-			"right"			: self.keyRight,
-			"up"			: self.keyUp,
-			"down"			: self.keyDown,
-			"info"			: self.showVideoInfo,
-			"cancel"		: self.close
+			"play": self.tryToPlay,
+			"select": self.justSelectServer,
+			"search": self.searchAgain,
+			"menu": self.openContextMenu,
+			"forward": self.forwardInHistory,
+			"backward": self.backInHistory,
+			"left": self.keyLeft,
+			"right": self.keyRight,
+			"up": self.keyUp,
+			"down": self.keyDown,
+			"info": self.showVideoInfo,
+			"cancel": self.close
 		}, -1)
 
 	def keyLeft(self):

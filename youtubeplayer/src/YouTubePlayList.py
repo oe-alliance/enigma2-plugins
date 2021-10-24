@@ -63,10 +63,10 @@ class YouTubePlaylistScreen(Screen):
 
 		self["actions"] = ActionMap(["YouTubePlaylistScreenActions"],
 		{
-			"ok"		: self.choosePlaylist,
-			"delete"	: self.deletePlaylist,
-			"add"		: self.addPlaylist,
-			"cancel"	: self.close
+			"ok": self.choosePlaylist,
+			"delete": self.deletePlaylist,
+			"add": self.addPlaylist,
+			"cancel": self.close
 		}, -1)
 
 	def loadPlaylist(self):

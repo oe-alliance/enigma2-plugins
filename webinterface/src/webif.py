@@ -446,17 +446,17 @@ class webifHandler(ContentHandler):
 	def parse_item(self, attrs):
 		if "name" in attrs:
 			filter = {
-				""					: webifHandler.FILTER_NONE,
-				"javascript_escape"	: webifHandler.FILTER_JAVASCRIPT,
-				"xml"				: webifHandler.FILTER_XML,
-				"uri"				: webifHandler.FILTER_URI,
-				"urlencode"			: webifHandler.FILTER_URLENCODE,
-				"date"				: webifHandler.FILTER_DATE,
-				"time"				: webifHandler.FILTER_TIME,
-				"minutes"			: webifHandler.FILTER_MINUTES,
-				"uriAttribute"		: webifHandler.FILTER_URI_ATTRIB,
-				"html"				: webifHandler.FILTER_HTML,
-				"attribute" 		: webifHandler.FILTER_ATTRIBUTE
+				"": webifHandler.FILTER_NONE,
+				"javascript_escape": webifHandler.FILTER_JAVASCRIPT,
+				"xml": webifHandler.FILTER_XML,
+				"uri": webifHandler.FILTER_URI,
+				"urlencode": webifHandler.FILTER_URLENCODE,
+				"date": webifHandler.FILTER_DATE,
+				"time": webifHandler.FILTER_TIME,
+				"minutes": webifHandler.FILTER_MINUTES,
+				"uriAttribute": webifHandler.FILTER_URI_ATTRIB,
+				"html": webifHandler.FILTER_HTML,
+				"attribute": webifHandler.FILTER_ATTRIBUTE
 			}[attrs.get("filter", "")]
 			self.sub.append(ListItem(attrs["name"], filter))
 		else:

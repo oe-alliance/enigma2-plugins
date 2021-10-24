@@ -48,5 +48,5 @@ class WebScriptList(Source):
 	result = property(getResult)
 
 	list = property(getList)
-	lut = {"Name": 0			, "Text": 1
+	lut = {"Name": 0, "Text": 1
 		}

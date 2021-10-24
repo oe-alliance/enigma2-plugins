@@ -241,5 +241,5 @@ class Movie(Source):
 
 	simplelist = property(getMovieSubdirs)
 	list = property(getMovieList)
-	lut = {"ServiceReference": 0			, "Title": 1			, "Description": 2			, "Time": 3			, "TimeString": 4			, "Length": 5			, "ServiceName": 6			, "Tags": 7			, "DescriptionExtended": 8			, "Filename": 9			, "Filesize": 10
+	lut = {"ServiceReference": 0, "Title": 1, "Description": 2, "Time": 3, "TimeString": 4, "Length": 5, "ServiceName": 6, "Tags": 7, "DescriptionExtended": 8, "Filename": 9, "Filesize": 10
 		}

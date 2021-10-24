@@ -42,7 +42,7 @@ THREE_D_OFF = 0
 THREE_D_SIDE_BY_SIDE = 1
 THREE_D_TOP_BOTTOM = 2
 
-modes = {	THREE_D_OFF: "off",
+modes = {THREE_D_OFF: "off",
 			THREE_D_SIDE_BY_SIDE: "sbs",
 			THREE_D_TOP_BOTTOM: "tab"}
 reversemodes = dict((value, key) for key, value in six.iteritems(modes))
