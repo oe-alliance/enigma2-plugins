@@ -17,7 +17,7 @@ from skin import applyAllAttributes, dom_skins
 from .Widget import Widget
 from .widgets import importWidgets, importSingleWidget
 from six.moves import range
-
+from six import PY2
 
 SIBbase__init__ = None
 SIB_StartOnlyOneTime = False
@@ -144,7 +144,8 @@ class WidgetDesktop(Screen):
 
 		cfg = lookupWidgetConfig()
 		if cfg is not False:
-			for config in cfg.getchildren():
+			cfgs = cfg.getchildren() if PY2 else cfg
+			for config in cfgs:
 				if config.tag == "num_widgets":
 					self.num_widgets_x = int(config.get("x"))
 					self.num_widgets_y = int(config.get("y"))
@@ -192,13 +193,15 @@ class WidgetDesktop(Screen):
 
 	def importWidgetSkin(self, scr, widget, wname):
 		x, y = self.getPositionOfBackgroundElement(scr, wname)
-		for screenelement in widget[2].find("desktopwidget").getchildren():
+		screenelements = widget[2].find("desktopwidget").getchildren() if PY2 else widget[2].find("desktopwidget")
+		for screenelement in screenelements:
 			element = self.patchWidgetElementSkinPosition(screenelement, x, y, wname)
 			self.original_screen_newchilds.append(element)
 			scr.append(element)
 
 	def getPositionOfBackgroundElement(self, screen, elementname):
-		for w in screen.getchildren():
+		screens = screen.getchildren() if PY2 else screen
+		for w in screens:
 			if w.get("name") == elementname:
 				xy = w.get("position").split(",")
 				return int(xy[0]), int(xy[1])
