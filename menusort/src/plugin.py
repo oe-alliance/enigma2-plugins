@@ -323,11 +323,10 @@ def autostart(reason, *args, **kwargs):
 	if reason == 0:
 		try:
 			baseMethods.Menu__init__
-		except AttributeError as ae:
-			pass
-		else:
 			print("[MenuSort] Initialized more than once, ignoring request.")
 			return
+		except AttributeError as ae:
+			pass
 
 		baseMethods.Menu__init__ = Menu.__init__
 		Menu.__init__ = Menu__init__
