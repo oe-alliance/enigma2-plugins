@@ -25,16 +25,8 @@ except ImportError as ie:
 	ParseError = SyntaxError
 from Tools.XMLTools import stringToXML
 
-try:
-	dict.iteritems
-	iteritems = lambda d: six.iteritems(d)
-except AttributeError:
-	iteritems = lambda d: d.items()
-
 from operator import itemgetter
 from shutil import copyfile, Error
-
-import six
 
 
 XML_CONFIG = "/etc/enigma2/menusort.xml"
@@ -87,7 +79,7 @@ class MenuWeights:
 		append = list.append
 		extend = list.extend
 
-		for text, values in iteritems(self.weights):
+		for text, values in self.weights.items():
 			weight, hidden = values
 			extend((' <entry text="', stringToXML(str(text)), '" weight="', str(weight), '" hidden="', "yes" if hidden else "no", '"/>\n'))
 		append('\n</menusort>\n')
@@ -227,25 +219,8 @@ class SortableMenu(Menu, HelpableScreen):
 		l[idx] = (x[0], x[1], x[2], x[3], not x[4])
 		self["menu"].setList(l)
 
-	# copied from original Menu for simplicity
 	def addMenu(self, destList, node):
-		requires = node.get("requires")
-		if requires:
-			if requires[0] == '!':
-				if SystemInfo.get(requires[1:], False):
-					return
-			elif not SystemInfo.get(requires, False):
-				return
-		MenuTitle = _(node.get("text", "??").encode("UTF-8"))
-		entryID = node.get("entryID", "undefined")
-		weight = node.get("weight", 50)
-		x = node.get("flushConfigOnClose")
-		if x:
-			a = boundFunction(self.session.openWithCallback, self.menuClosedWithConfigFlush, SortableMenu, node)
-		else:
-			a = boundFunction(self.session.openWithCallback, self.menuClosed, SortableMenu, node)
-		#TODO add check if !empty(node.childNodes)
-		destList.append((MenuTitle, a, entryID, weight))
+		Menu.addMenu(self, destList, node)
 
 	def close(self, *args, **kwargs):
 		for entry in self["menu"].list:
