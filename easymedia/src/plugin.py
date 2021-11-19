@@ -641,7 +641,7 @@ def MPcallbackFunc(answer):
 			from Plugins.Extensions.Kodi.plugin import startLauncher
 			startLauncher(EMsession)
 		else:
-			EMsession.open(MessageBox, text=_('MyVideo Player is not installed!'), type=MessageBox.TYPE_ERROR)
+			EMsession.open(MessageBox, text=_('Kodi is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "VIDEODB":
 		if isPluginInstalled("VideoDB"):
 			try:
