@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 from __future__ import print_function
+
 #######################################################################
 #
 #    EasyMedia for Dreambox-Enigma2
@@ -17,7 +19,6 @@ from __future__ import print_function
 #  distributed other than under the conditions noted above.
 #
 #######################################################################
-
 
 from . __init__ import _
 from Screens.Screen import Screen
@@ -38,7 +39,7 @@ from Tools.Directories import fileExists, pathExists, resolveFilename, SCOPE_PLU
 from Tools.LoadPixmap import LoadPixmap
 from Tools.HardwareInfo import HardwareInfo
 from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, gFont, getDesktop
-import pickle
+from pickle import dump, load
 from os import system as os_system
 from os import listdir as os_listdir
 from Tools.Directories import isPluginInstalled, resolveFilename, SCOPE_PLUGINS
@@ -66,6 +67,7 @@ config.plugins.easyMedia.idream = ConfigSelection(default="no", choices=[("no", 
 config.plugins.easyMedia.zdfmedia = ConfigSelection(default="no", choices=[("no", _("Disabled")), ("yes", _("Enabled"))])
 config.plugins.easyMedia.radio = ConfigSelection(default="yes", choices=[("no", _("Disabled")), ("yes", _("Enabled"))])
 config.plugins.easyMedia.myvideo = ConfigSelection(default="no", choices=[("no", _("Disabled")), ("yes", _("Enabled"))])
+config.plugins.easyMedia.kodi = ConfigSelection(default="no", choices=[("no", _("Disabled")), ("yes", _("Enabled"))])
 config.plugins.easyMedia.timers = ConfigSelection(default="no", choices=[("no", _("Disabled")), ("yes", _("Enabled"))])
 
 
@@ -184,6 +186,7 @@ class ConfigEasyMedia(ConfigListScreen, Screen):
 		list.append(getConfigListEntry(_("Show Merlin-iDream:"), config.plugins.easyMedia.idream))
 		list.append(getConfigListEntry(_("ZDFmediathek player:"), config.plugins.easyMedia.zdfmedia))
 		list.append(getConfigListEntry(_("MyVideo player:"), config.plugins.easyMedia.myvideo))
+		list.append(getConfigListEntry(_("Kodi:"), config.plugins.easyMedia.kodi))
 		ConfigListScreen.__init__(self, list)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], {"green": self.save, "red": self.exit, "cancel": self.exit, "yellow": self.plug}, -1)
 
@@ -257,7 +260,7 @@ class AddPlug(Screen):
 		if not fileExists(PluginsDir + 'EasyMedia/' + plugin.name + '.plug'):
 			try:
 				outf = open((PluginsDir + 'EasyMedia/' + plugin.name + '.plug'), 'wb')
-				pickle.dump(plugin, outf)
+				dump(plugin, outf)
 				outf.close()
 				self.session.open(MessageBox, text=(plugin.name + _(" added to EasyMedia")), type=MessageBox.TYPE_INFO)
 			except:
@@ -384,12 +387,15 @@ class EasyMedia(Screen):
 		if config.plugins.easyMedia.myvideo.value != "no":
 			self.__keys.append("myvideo")
 			MPaskList.append((_("MyVideo"), "MYVIDEO"))
+		if config.plugins.easyMedia.kodi.value != "no":
+			self.__keys.append("kodi")
+			MPaskList.append((_("Kodi"), "KODI"))
 		plist = os_listdir(PluginsDir + 'EasyMedia')
 		plist = sorted([x[:-5] for x in plist if x.endswith('.plug')])
 		for onePlug in plist:
 			try:
 				inpf = open((PluginsDir + 'EasyMedia/' + onePlug + '.plug'), 'rb')
-				binPlug = pickle.load(inpf)
+				binPlug = load(inpf)
 				inpf.close()
 				self.__keys.append(binPlug.name)
 				MPaskList.append((binPlug.name, ("++++" + binPlug.name)))
@@ -595,11 +601,11 @@ def MPcallbackFunc(answer):
 			except:
 				pass
 		elif isPluginInstalled("QtHbbtv"):
-#			try:
-			from Plugins.Extensions.QtHbbtv.plugin import HBBTVParser
-			EMsession.open(HBBTVParser)
-#			except:
-#				pass
+			try:
+				from Plugins.Extensions.QtHbbtv.plugin import HBBTVParser
+				EMsession.open(HBBTVParser)
+			except:
+				pass
 		else:
 			EMsession.open(MessageBox, text=_('ZDFmediathek Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "VLC":
@@ -630,6 +636,12 @@ def MPcallbackFunc(answer):
 				pass
 		else:
 			EMsession.open(MessageBox, text=_('MyVideo Player is not installed!'), type=MessageBox.TYPE_ERROR)
+	elif answer == "KODI":
+		if isPluginInstalled("Kodi"):
+			from Plugins.Extensions.Kodi.plugin import startLauncher
+			startLauncher(EMsession)
+		else:
+			EMsession.open(MessageBox, text=_('MyVideo Player is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "VIDEODB":
 		if isPluginInstalled("VideoDB"):
 			try:
@@ -640,19 +652,13 @@ def MPcallbackFunc(answer):
 		else:
 			EMsession.open(MessageBox, text=_('VideoDB is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "TIMERS":
-		if isPluginInstalled("TimerEdit"):
-			try:
-				from Screens.TimerEdit import TimerEditList
-				EMsession.open(TimerEditList)
-			except:
-				pass
-		else:
-			EMsession.open(MessageBox, text=_('TimerEdit is not installed!'), type=MessageBox.TYPE_ERROR)
+		from Screens.TimerEdit import TimerEditList
+		EMsession.open(TimerEditList)
 	elif answer is not None and "++++" in answer:
 		plugToRun = answer[4:]
 		try:
 			inpf = open((PluginsDir + 'EasyMedia/' + plugToRun + '.plug'), 'rb')
-			runPlug = pickle.load(inpf)
+			runPlug = load(inpf)
 			inpf.close()
 			runPlug(session=EMsession)
 		except:
