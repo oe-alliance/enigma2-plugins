@@ -283,6 +283,7 @@ easymedia/Makefile
 easymedia/meta/Makefile
 easymedia/po/Makefile
 easymedia/src/Makefile
+easymedia/src/icons/Makefile
 
 ecasa/Makefile
 ecasa/meta/Makefile
