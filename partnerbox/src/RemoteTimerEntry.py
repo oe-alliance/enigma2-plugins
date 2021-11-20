@@ -21,21 +21,13 @@ from __future__ import absolute_import
 # for localized messages
 from . import _
 from Screens.Screen import Screen
-import Screens.ChannelSelection
-from ServiceReference import ServiceReference
 from Components.config import config, ConfigSelection, ConfigText, ConfigSubList, ConfigDateTime, ConfigClock, ConfigYesNo, getConfigListEntry
 from Components.ActionMap import NumberActionMap
 from Components.ConfigList import ConfigListScreen
-from Components.MenuList import MenuList
-from Components.Button import Button
 from Components.Label import Label
 from Components.Pixmap import Pixmap
-from Screens.MovieSelection import getPreferredTagEditor
-from Screens.LocationBox import MovieLocationBox
-from Screens.ChoiceBox import ChoiceBox
 from RecordTimer import AFTEREVENT
-from Tools.Directories import resolveFilename, SCOPE_HDD
-from enigma import eEPGCache, getDesktop
+from enigma import getDesktop
 from time import localtime, mktime, time, strftime
 from datetime import datetime
 from Screens.TimerEntry import TimerEntry
@@ -43,9 +35,9 @@ from Screens.MessageBox import MessageBox
 from Tools.BoundFunction import boundFunction
 from six.moves.urllib.parse import quote
 from six.moves.urllib.request import urlopen
+from six import PY2
 
-import xml.etree.cElementTree
-from Components.ActionMap import ActionMap
+from xml.etree.cElementTree import fromstring
 
 from .PartnerboxFunctions import PlaylistEntry, SetPartnerboxTimerlist, sendPartnerBoxWebCommand, getServiceRef
 from . import PartnerboxFunctions as partnerboxfunctions
@@ -353,21 +345,23 @@ def getLocations(self, url, check):
 
 def getLocationsCallback(self, xmlstring, check=False):
 	try:
-		root = xml.etree.cElementTree.fromstring(xmlstring)
+		root = fromstring(xmlstring)
 	except:
 		return
 	for location in root.findall("e2location"):
 		add = True
+		loc = location.text.decode("utf-8").encode("utf-8", 'ignore') if PY2 else location.text
 		if check:
-			add = location.text.decode("utf-8").encode("utf-8", 'ignore') not in self.Locations
+			add = loc not in self.Locations
 		if add:
-			self.Locations.append(location.text.decode("utf-8").encode("utf-8", 'ignore'))
+			self.Locations.append(loc)
 	for location in root.findall("e2simplexmlitem"):
 		add = True
+		loc = location.text.decode("utf-8").encode("utf-8", 'ignore') if PY2 else location.text
 		if check:
-			add = location.text.decode("utf-8").encode("utf-8", 'ignore') not in self.Locations
+			add = loc not in self.Locations
 		if add:
-			self.Locations.append(location.text.decode("utf-8").encode("utf-8", 'ignore'))
+			self.Locations.append(loc)
 
 
 def createRemoteTimerSetup(self, widget):
@@ -612,13 +606,13 @@ def RemoteTimerGo(self):
 def AddTimerE2Callback(self, session, answer):
 	text = ""
 	try:
-		root = xml.etree.cElementTree.fromstring(answer)
+		root = fromstring(answer)
 	except:
 		pass
 	statetext = root.findtext("e2statetext")
 	state = root.findtext("e2state")
 	if statetext:
-		text = statetext.encode("utf-8", 'ignore')
+		text = statetext.encode("utf-8", 'ignore') if PY2 else statetext
 	ok = state == "True"
 	session.open(MessageBox, _("Partnerbox Answer: \n%s") % _(text), MessageBox.TYPE_INFO, timeout=10)
 	if ok:

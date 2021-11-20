@@ -62,6 +62,7 @@ def Partnerbox_EPGListInit():
 
 
 def Partnerbox_EPGList__init__(self, type=0, selChangedCB=None, timer=None, time_epoch=120, overjump_empty=False, graphic=False):
+	global sf
 	baseEPGList__init__(self, type, selChangedCB, timer, time_epoch, overjump_empty, graphic)
 
 	self.clocks = [LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, 'icons/epgclock_add.png')),
@@ -159,7 +160,6 @@ def Partnerbox_EPGList__init__(self, type=0, selChangedCB=None, timer=None, time
 	self.eventFontNameInfobar = "Regular"
 
 	if self.screenwidth and self.screenwidth == 1920:
-		global sf
 		sf = 1.5
 		self.posx, self.posy, self.picx, self.picy, self.gap = skinparameter.get("EpgListIcon", (2, 13, 25, 25, 2))
 	else:
