@@ -7,7 +7,7 @@ an option to do the processing automatically in the background.
 Mike Griffin  8/02/2015
 '''
 
-__version__ = "1.10"
+__version__ = "1.11dev1"
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
@@ -34,10 +34,7 @@ from collections import defaultdict
 from os.path import isfile, isdir, splitext, join as joinpath, split as splitpath, lexists
 import os
 
-try:
-    from Plugins.Extensions.FileCommander import FileCommanderScreen, FileCommanderScreenFileSelect
-except:
-    FileCommanderScreen = FileCommanderScreenFileSelect = type(None)
+from FileScreens import activeFileScreens
 
 _autoSeries2Folder = None
 _session = None
@@ -45,11 +42,11 @@ _session = None
 def menu(session, service, **kwargs):
     session.open(Series2Folder, service)
 
-def buttonSeries2Folder(session, service, **kwargs):
+def buttonSeries2Folder(session, service, *args, **kwargs):
     actions = Series2FolderActions(session)
     actions.doMoves(service)
 
-def buttonSelSeries2Folder(session, service, **kwargs):
+def buttonSelSeries2Folder(session, service, *args, **kwargs):
     actions = Series2FolderActions(session)
     actions.doMoves(service, selectedOnly=True)
 
@@ -165,9 +162,6 @@ class Series2FolderActionsBase(object):
 
         # Selection if called on a specific recording
         self.moveSelection = None
-
-        # MovieSelection screen if current dialog, otherwise None
-        self.movieSelection = self.session.current_dialog if isinstance(self.session.current_dialog, MovieSelection) else None
 
         # Information about moves and errors
         self.moves = []
@@ -288,11 +282,11 @@ class Series2FolderActionsBase(object):
         self.moves = []
         self.errMess = []
 
-    def MsgBox(self, msg, timeout=30, notification=False):
+    def MsgBox(self, msg, timeout=30, notification=False, msgType=MessageBox.TYPE_INFO):
         if notification:
-            Notifications.AddNotification(MessageBox, msg, MessageBox.TYPE_INFO, timeout=timeout)
+            Notifications.AddNotification(MessageBox, msg, msgType, timeout=timeout)
         else:
-            self.session.open(MessageBox, msg, type=MessageBox.TYPE_INFO, timeout=timeout)
+            self.session.open(MessageBox, msg, type=msgType, timeout=timeout)
 
     def isPlaying(self, fullpath):
         playing = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
@@ -440,11 +434,23 @@ class Series2FolderActions(Series2FolderActionsBase):
         while self.shows:
             self.processRecording()
 
-        if self.moves and self.movieSelection:
-                self.movieSelection.reloadList()
+        self.updateCallerScreen()
 
         self.finish()
 
+    def updateCallerScreen(self):
+        fails = False
+        if self.moves:
+            for (dialog, action) in activeFileScreens(self.session, False):
+                try:
+                    getattr(dialog, action)()
+                except Exception as e:
+                    fails = True
+                    pass
+            if fails:
+                msg = "Series2Folder doesn't know how to update some of your active file screens after moving recordings to folders.\nPlease refresh the screens manually."
+                self.MsgBox(msg, msgType=MessageBox.TYPE_WARNING)
+        return not fails
 
 class Series2FolderAutoActions(Series2FolderActionsBase):
 
@@ -558,8 +564,7 @@ class Series2FolderAutoActions(Series2FolderActionsBase):
             return -1
         if JobManager.getPendingJobs():
             return self.TASK_DEFER
-        current_dialog = self.session.current_dialog
-        if current_dialog is not None and isinstance(current_dialog, (MovieSelection, FileCommanderScreen, FileCommanderScreenFileSelect)):
+        if activeFileScreens(self.session, True):
             return self.FILESCREEN_DEFER
         if config.timeshift.isRecording.value:
             return self.TSRECORD_DEFER

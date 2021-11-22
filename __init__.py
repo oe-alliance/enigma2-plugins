@@ -15,7 +15,7 @@ config.plugins.seriestofolder.autofolder = ConfigSelection([
     ("10", _("10 recordings")),
 ], default="2")
 config.plugins.seriestofolder.movies = ConfigEnableDisable(default=False)
-# Some images (e.g. OpenATV don't support a show_help parameter for ConfigText
+# Some images don't support a show_help parameter for ConfigText
 __defaultMoviesStr = "Movies"
 try:
     config.plugins.seriestofolder.moviesfolder = ConfigText(default=__defaultMoviesStr, show_help=False)

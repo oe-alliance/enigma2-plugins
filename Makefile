@@ -1,6 +1,6 @@
 PACKAGE=enigma2-plugin-extensions-series2folder
-SOURCES=__init__.py plugin.py
-OBJECTS=__init__.pyo plugin.pyo
+SOURCES=__init__.py plugin.py FileScreens.py
+OBJECTS=__init__.pyo plugin.pyo FileScreens.pyo
 CONTROL=CONTROL
 INSTALL-PATH=usr/lib/enigma2/python/Plugins/Extensions/Series2Folder
 BUILD-DIR=build
@@ -9,7 +9,7 @@ CP=cp
 SCP=scp
 SSH=ssh
 IPKG-BUILD=../ipkg-build
-BUILD-HOST=beyonwizu4
+BUILD-HOST=beyonwizv2
 
 package: clean
 	${MKDIR} -p ${BUILD-DIR}/${INSTALL-PATH}
