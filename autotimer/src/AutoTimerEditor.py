@@ -41,7 +41,11 @@ from enigma import eServiceCenter, eServiceReference, iServiceInformation, getDe
 from Tools import Directories
 
 # Tags
-from Screens.MovieSelection import getPreferredTagEditor
+try:
+	from Screens.TagEditor import TagEditor
+except ImportError:
+	TagEditor = None
+	from Screens.MovieSelection import getPreferredTagEditor
 
 import six
 
@@ -395,13 +399,20 @@ class AutoTimerEditorBase:
 			self.tags.setChoices([len(ret) == 0 and _("None") or ' '.join(ret)])
 
 	def chooseTags(self):
-		preferredTagEditor = getPreferredTagEditor()
-		if preferredTagEditor:
+		if TagEditor is not None:
 			self.session.openWithCallback(
 				self.tagEditFinished,
-				preferredTagEditor,
-				self.timerentry_tags
+				TagEditor,
+				tags=self.timerentry_tags
 			)
+		else:
+			preferredTagEditor = getPreferredTagEditor()
+			if preferredTagEditor:
+				self.session.openWithCallback(
+					self.tagEditFinished,
+					preferredTagEditor,
+					self.timerentry_tags
+				)
 
 
 HD = False
