@@ -26,7 +26,6 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.InfoBar import InfoBar
 from Components.config import config
 from .AdvancedMovieSelectionSetup import AdvancedMovieSelectionSetup
-from .TagEditor import TagEditor
 from .Source.Config import initializeConfig
 
 initializeConfig()
@@ -125,13 +124,22 @@ def tvdbInfo(session, eventName="", **kwargs):
 
 
 def Plugins(**kwargs):
+    if not config.AdvancedMovieSelection.ml_disable.value:
+        try:
+            from Screens.TagEditor import TagEditor
+        except ImportError:
+            # only set adv TagEditor if the internal TagEditor not available
+            from .TagEditor import TagEditor
+            try:
+                from Screens.MovieSelection import setPreferredTagEditor
+                setPreferredTagEditor(TagEditor)
+            except Exception as e:
+                print(e)
+
     try:
         if config.AdvancedMovieSelection.debug.value:
             config.AdvancedMovieSelection.debug.value = False
             config.AdvancedMovieSelection.debug.save()
-        if not config.AdvancedMovieSelection.ml_disable.value:
-            from Screens.MovieSelection import setPreferredTagEditor
-            setPreferredTagEditor(TagEditor)
         if not config.AdvancedMovieSelection.ml_disable.value and config.AdvancedMovieSelection.useseekbar.value:
             from .Seekbar import Seekbar
     except Exception as e:

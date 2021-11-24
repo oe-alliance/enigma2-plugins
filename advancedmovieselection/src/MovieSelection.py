@@ -49,7 +49,6 @@ from .SearchTMDb import TMDbMain as TMDbMainsave
 from .MoviePreview import MoviePreview, VideoPreview
 from .DownloadMovies import DownloadMovies
 from .Source.ServiceProvider import eServiceReferenceDvd
-from .TagEditor import MovieTagEditor
 from .QuickButton import QuickButton
 from os import path
 import os
@@ -69,6 +68,12 @@ from .Source.AutoNetwork import autoNetwork
 from .Source.MovieScanner import movieScanner
 from .Source.ServiceDescriptor import DirectoryInfo
 from .Source.StopWatch import StopWatch, clockit
+
+try:
+    from Screens.TagEditor import TagEditor
+except ImportError:
+    from .TagEditor import MovieTagEditor as TagEditor
+
 
 if pluginPresent.IMDb:
     from Plugins.Extensions.IMDb.plugin import IMDB
@@ -409,7 +414,7 @@ class MovieContextMenu(Screen):
             self.session.open(MessageBox, _("Move/Copy not possible here!"), MessageBox.TYPE_INFO)
 
     def movietags(self):
-        self.session.open(MovieTagEditor, service=self.service, parent=self.session.current_dialog)
+        self.session.open(TagEditor, service=self.service, parent=self.session.current_dialog)
 
     def filterbytags(self):
         self.csel.showTagsSelect()
@@ -1431,7 +1436,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
 
     def movietags(self):
         service = self.getCurrent()
-        self.session.openWithCallback(self.reloadList, MovieTagEditor, service, parent=self.session.current_dialog)
+        self.session.openWithCallback(self.reloadList, TagEditor, service=service, parent=self.session.current_dialog)
 
     def selectScanLocations(self):
         self.session.openWithCallback(self.rescan, ScanLocationBox, _("Please select the search path(s) for movies..."), config.movielist.last_videodir.value)
