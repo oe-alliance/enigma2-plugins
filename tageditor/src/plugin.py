@@ -20,13 +20,17 @@ def main(session, service, **kwargs):
 
 def Plugins(**kwargs):
 	try:
-		from Screens.MovieSelection import setPreferredTagEditor
-		setPreferredTagEditor(TagEditor)
-	except Exception:
-		pass
-	# TRANSLATORS: this is the string used in the movie context menu for TagEditor
-	return PluginDescriptor(name="TagEditor", description=_("edit tags"), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart=False)
-
+		from Screens.TagEditor import TagEditor
+	except ImportError:
+		# disable TagEditor plugin if the new internal TagEditor is available
+		try:
+			from Screens.MovieSelection import setPreferredTagEditor
+			setPreferredTagEditor(TagEditor)
+		except Exception:
+			pass
+		# TRANSLATORS: this is the string used in the movie context menu for TagEditor
+		return PluginDescriptor(name="TagEditor", description=_("edit tags"), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart=False)
+	return []
 
 class TagEditor(Screen):
 	skin = """
