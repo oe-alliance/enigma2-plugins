@@ -32,6 +32,7 @@ def Plugins(**kwargs):
 		return PluginDescriptor(name="TagEditor", description=_("edit tags"), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart=False)
 	return []
 
+
 class TagEditor(Screen):
 	skin = """
 	<screen name="TagEditor" position="center,center" size="600,310">
