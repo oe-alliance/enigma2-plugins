@@ -45,7 +45,7 @@ if six.PY3:
 	from urllib.parse import urlparse, urlunparse, quote
 else:
 	from urlparse import urlparse, urlunparse, quote
-import requests	
+import requests
 from base64 import b64encode
 #------------------------------------------------------------------------------------------
 
@@ -83,12 +83,12 @@ def getPage(url, callback, errback):
 		Headers = {"Authorization": authHeader}
 	else:
 		Headers = {}
-	print("[remotetimer] Headers=%s" % (Headers))		
+	print("[remotetimer] Headers=%s" % (Headers))
 	try:
 		r = requests.get(url, headers=Headers)
-		print("[remotetimer] statuscode=%s" % (r.status_code))		  
+		print("[remotetimer] statuscode=%s" % (r.status_code))
 		if r.status_code == 200:
-			data = six.ensure_str(r.content)		
+			data = six.ensure_str(r.content)
 			callback(data)
 		else:
 			errormsg = "[CCcamInfo][getPage] incorrect response: %d" % r.status_code
@@ -151,12 +151,12 @@ class RemoteTimerScreen(Screen):
 		self.onLayoutFinish.append(self.getInfo)
 
 	def getInfo(self, *args):
-		print("[remotetimer] getInfo remoteurl=%s" % self.remoteurl)	
+		print("[remotetimer] getInfo remoteurl=%s" % self.remoteurl)
 		info = _("fetching remote data...")
-		self["text"].setText(info)	
+		self["text"].setText(info)
 		try:
 			url = "http://%s/web/timerlist" % (self.remoteurl)
-			print("[remotetimer] url=%s" % (url))		
+			print("[remotetimer] url=%s" % (url))
 			getPage(url, self._gotPageLoad, self.errorLoad)
 			info = _("fetched remote data...")
 		except:
@@ -164,7 +164,7 @@ class RemoteTimerScreen(Screen):
 		self["text"].setText(info)
 
 	def _gotPageLoad(self, data):
-		# print("[remotetimer] data=%s" % (data))		
+		# print("[remotetimer] data=%s" % (data))
 			# this call is not optimized so it is easier to extend this functionality to support other kinds of receiver
 		self["timerlist"].l.setList(self.generateTimerE2(data))
 		info = _("finish fetching remote data...")
@@ -324,7 +324,7 @@ def createNewnigma2Setup(self, widget="config"):
 	try:
 		baseTimerEntrySetup(self, widget)
 	except TypeError: # for distros that do not use the "widget" argument in Setup.createSetup
-		# print("[RemoteTimer] createNewnigma2Setup no widget")	
+		# print("[RemoteTimer] createNewnigma2Setup no widget")
 		baseTimerEntrySetup(self)
 	self.timerentry_remote = ConfigYesNo(default=config.plugins.remoteTimer.default.value)
 	self.list.insert(0, getConfigListEntry(_("Remote Timer"), self.timerentry_remote))
