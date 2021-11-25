@@ -71,6 +71,7 @@ def localGetPage(url):
 
 	return deferPage(six.ensure_binary(url), headers=headers)
 
+
 def getPage(url, callback, errback):
 	errormsg = ""
 	username = config.plugins.remoteTimer.username.value
@@ -96,7 +97,6 @@ def getPage(url, callback, errback):
 		print("%s: '%s'" % (type(err).__name__, err))
 		import traceback
 		traceback.print_exc()
-
 
 
 class RemoteService:
