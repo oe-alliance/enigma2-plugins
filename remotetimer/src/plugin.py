@@ -16,38 +16,37 @@
 #===============================================================================
 
 from __future__ import print_function
-from Plugins.Plugin import PluginDescriptor
-from Screens.Screen import Screen
+import six
 
-from Components.ActionMap import ActionMap
-from Components.Button import Button
-from Components.Pixmap import Pixmap
-from Components.Label import Label
-from Components.TimerList import TimerList
-
-from Components.ConfigList import ConfigList, ConfigListScreen
-from Components.config import getConfigListEntry, config, \
-	ConfigSubsection, ConfigText, ConfigIP, ConfigYesNo, \
-	ConfigPassword, ConfigNumber, KEY_LEFT, KEY_RIGHT, KEY_0
-
-from Screens.TimerEntry import TimerEntry
-from Screens.MessageBox import MessageBox
-from RecordTimer import AFTEREVENT
+from twisted.web.client import getPage as deferPage
+from xml.etree.cElementTree import fromstring as cElementTree_fromstring
 
 from enigma import eEPGCache
 from boxbranding import getImageDistro
 
+from Components.ActionMap import ActionMap
+from Components.Button import Button
+from Components.config import getConfigListEntry, config, \
+	ConfigSubsection, ConfigText, ConfigIP, ConfigYesNo, \
+	ConfigPassword, ConfigNumber, KEY_LEFT, KEY_RIGHT, KEY_0
+from Components.ConfigList import ConfigList, ConfigListScreen
+from Components.Pixmap import Pixmap
+from Components.Label import Label
+from Components.TimerList import TimerList
+from Plugins.Plugin import PluginDescriptor
+from RecordTimer import AFTEREVENT
+from Screens.MessageBox import MessageBox
+from Screens.Screen import Screen
+from Screens.TimerEntry import TimerEntry
 from Tools.BoundFunction import boundFunction
 
-from twisted.web.client import getPage
-from xml.etree.cElementTree import fromstring as cElementTree_fromstring
-from six.moves.urllib.parse import quote
-import six
-if six.PY3:
-	from base64 import encodebytes as _encode
-else:
-	from base64 import encodestring as _encode
 
+if six.PY3:
+	from urllib.parse import urlparse, urlunparse, quote
+else:
+	from urlparse import urlparse, urlunparse, quote
+import requests	
+from base64 import b64encode
 #------------------------------------------------------------------------------------------
 
 config.plugins.remoteTimer = ConfigSubsection()
@@ -64,13 +63,40 @@ def localGetPage(url):
 	username = config.plugins.remoteTimer.username.value
 	password = config.plugins.remoteTimer.password.value
 	if username and password:
-		basicAuth = _encode(username + ':' + password)
-		authHeader = "Basic " + basicAuth.strip()
+		basicAuth = six.ensure_str(b64encode(six.ensure_binary('%s:%s' % (username, password))))
+		authHeader = "Basic " + basicAuth
 		headers = {"Authorization": authHeader}
 	else:
 		headers = {}
 
-	return getPage(six.ensure_binary(url), headers=headers)
+	return deferPage(six.ensure_binary(url), headers=headers)
+
+def getPage(url, callback, errback):
+	errormsg = ""
+	username = config.plugins.remoteTimer.username.value
+	password = config.plugins.remoteTimer.password.value
+	print("[remotetimer] username=%s password=%s" % (username, password))
+	if username and password:
+		basicAuth = six.ensure_str(b64encode(six.ensure_binary('%s:%s' % (username, password))))
+		authHeader = "Basic " + basicAuth
+		Headers = {"Authorization": authHeader}
+	else:
+		Headers = {}
+	print("[remotetimer] Headers=%s" % (Headers))		
+	try:
+		r = requests.get(url, headers=Headers)
+		print("[remotetimer] statuscode=%s" % (r.status_code))		  
+		if r.status_code == 200:
+			data = six.ensure_str(r.content)		
+			callback(data)
+		else:
+			errormsg = "[CCcamInfo][getPage] incorrect response: %d" % r.status_code
+			errback(errormsg)
+	except Exception as err:
+		print("%s: '%s'" % (type(err).__name__, err))
+		import traceback
+		traceback.print_exc()
+
 
 
 class RemoteService:
@@ -125,27 +151,32 @@ class RemoteTimerScreen(Screen):
 		self.onLayoutFinish.append(self.getInfo)
 
 	def getInfo(self, *args):
+		print("[remotetimer] getInfo remoteurl=%s" % self.remoteurl)	
+		info = _("fetching remote data...")
+		self["text"].setText(info)	
 		try:
-			info = _("fetching remote data...")
 			url = "http://%s/web/timerlist" % (self.remoteurl)
-			localGetPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)
+			print("[remotetimer] url=%s" % (url))		
+			getPage(url, self._gotPageLoad, self.errorLoad)
+			info = _("fetched remote data...")
 		except:
 			info = _("not configured yet. please do so in the settings.")
 		self["text"].setText(info)
 
 	def _gotPageLoad(self, data):
-		# XXX: this call is not optimized away so it is easier to extend this functionality to support other kinds of receiver
+		# print("[remotetimer] data=%s" % (data))		
+			# this call is not optimized so it is easier to extend this functionality to support other kinds of receiver
 		self["timerlist"].l.setList(self.generateTimerE2(data))
 		info = _("finish fetching remote data...")
 		self["text"].setText(info)
 
 	def errorLoad(self, error):
-		print("[RemoteTimer] errorLoad ERROR:", error.getErrorMessage())
+		print("[RemoteTimer] errorLoad ERROR:", error)
 
 	def clean(self):
 		try:
 			url = "http://%s/web/timercleanup?cleanup=true" % (self.remoteurl)
-			localGetPage(url).addCallback(self.getInfo).addErrback(self.errorLoad)
+			getPage(url, self.getInfo, self.errorLoad)
 		except:
 			print("[RemoteTimer] ERROR Cleanup")
 
@@ -165,7 +196,7 @@ class RemoteTimerScreen(Screen):
 			if not sel:
 				return
 			url = "http://%s/web/timerdelete?sRef=%s&begin=%s&end=%s" % (self.remoteurl, sel.service_ref.sref, sel.begin, sel.end)
-			localGetPage(url).addCallback(self.getInfo).addErrback(self.errorLoad)
+			getPage(url, self.getInfo, self.errorLoad)
 
 	def settings(self):
 		self.session.open(RemoteTimerSetup)
@@ -180,9 +211,9 @@ class RemoteTimerScreen(Screen):
 			return [
 				(
 					E2Timer(
-						sref=str(timer.findtext("e2servicereference", '').encode("utf-8", 'ignore')),
-						sname=str(timer.findtext("e2servicename", 'n/a').encode("utf-8", 'ignore')),
-						name=str(timer.findtext("e2name", '').encode("utf-8", 'ignore')),
+						sref=str(timer.findtext("e2servicereference", '').encode("utf-8", 'ignore')) if six.PY2 else str(timer.findtext("e2servicereference", '')),
+						sname=str(timer.findtext("e2servicename", 'n/a').encode("utf-8", 'ignore')) if six.PY2 else str(timer.findtext("e2servicename", 'n/a')),
+						name=str(timer.findtext("e2name", '').encode("utf-8", 'ignore')) if six.PY2 else str(timer.findtext("e2name", '')),
 						disabled=int(timer.findtext("e2disabled", 0)),
 						failed=int(timer.findtext("e2failed", 0)),
 						timebegin=int(timer.findtext("e2timebegin", 0)),
@@ -194,8 +225,8 @@ class RemoteTimerScreen(Screen):
 						justplay=int(timer.findtext("e2justplay", 0)),
 						eventId=int(timer.findtext("e2eit", -1)),
 						afterevent=int(timer.findtext("e2afterevent", 0)),
-						dirname=str(timer.findtext("e2dirname", '').encode("utf-8", 'ignore')),
-						description=str(timer.findtext("e2description", '').encode("utf-8", 'ignore'))
+						dirname=str(timer.findtext("e2dirname", '').encode("utf-8", 'ignore')) if six.PY2 else str(timer.findtext("e2dirname", '')),
+						description=str(timer.findtext("e2description", '').encode("utf-8", 'ignore')) if six.PY2 else str(timer.findtext("e2description", ''))
 					),
 					False
 				)
@@ -289,9 +320,11 @@ def timerInit():
 
 
 def createNewnigma2Setup(self, widget="config"):
+	# print("[RemoteTimer] createNewnigma2Setup widget: %s" % widget)
 	try:
 		baseTimerEntrySetup(self, widget)
 	except TypeError: # for distros that do not use the "widget" argument in Setup.createSetup
+		# print("[RemoteTimer] createNewnigma2Setup no widget")	
 		baseTimerEntrySetup(self)
 	self.timerentry_remote = ConfigYesNo(default=config.plugins.remoteTimer.default.value)
 	self.list.insert(0, getConfigListEntry(_("Remote Timer"), self.timerentry_remote))
@@ -301,6 +334,7 @@ def createNewnigma2Setup(self, widget="config"):
 
 
 def newnigma2SubserviceSelected(self, service):
+	print("[RemoteTimer] newnigma2SubserviceSelected entered service: %s" % service)
 	if service is not None:
 		# ouch, this hurts a little
 		service_ref = timerentry_service_ref
@@ -315,6 +349,7 @@ def newnigma2SubserviceSelected(self, service):
 
 
 def newnigma2KeyGo(self):
+	print("[RemoteTimer] newnigma2KeyGo entered self.timerentry_remote.value: %s" % self.timerentry_remote.value)
 	if not self.timerentry_remote.value:
 		baseTimerEntryGo(self)
 	else:
@@ -405,14 +440,14 @@ def newnigma2KeyGo(self):
 
 
 def _gotPageLoadCb(timerEntry, doClose, *args):
+	print("[RemoteTimer] _gotPageLoadCb:%s" % doClose)
 	if doClose:
 		timerEntry.keyCancel()
 
 
 def _gotPageLoad(session, timerEntry, html):
 	remoteresponse = parseXml(html)
-	#print "print _gotPageLoad remoteresponse:", remoteresponse
-	# XXX: should be improved...
+	print("[RemoteTimer] _gotPageLoad remoteresponse:%s" % remoteresponse)
 	doClose = remoteresponse == "Timer added successfully!"
 	session.openWithCallback(
 		boundFunction(_gotPageLoadCb, timerEntry, doClose),
@@ -423,7 +458,7 @@ def _gotPageLoad(session, timerEntry, html):
 
 
 def errorLoad(session, error):
-	#print "[RemoteTimer] errorLoad ERROR:", error
+	print("[RemoteTimer] errorLoad ERROR:%s" % error)
 	session.open(
 		MessageBox,
 		_("ERROR - Set Timer on Remote Receiver via WebIf:\n%s") % (error),
@@ -432,11 +467,12 @@ def errorLoad(session, error):
 
 
 def parseXml(string):
+	# print("[RemoteTimer] parseXML:%s" % string)
 	try:
 		dom = cElementTree_fromstring(string)
 		entry = dom.findtext('e2statetext')
 		if entry:
-			return entry.encode("utf-8", 'ignore')
+			return entry.encode("utf-8", 'ignore') if six.PY2 else entry
 		return "No entry in XML from the webserver"
 	except:
 		return "ERROR XML PARSE"
