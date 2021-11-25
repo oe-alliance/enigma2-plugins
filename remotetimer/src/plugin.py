@@ -63,13 +63,15 @@ def localGetPage(url):
 	username = config.plugins.remoteTimer.username.value
 	password = config.plugins.remoteTimer.password.value
 	if username and password:
-		basicAuth = six.ensure_str(b64encode(six.ensure_binary('%s:%s' % (username, password))))
-		authHeader = "Basic " + basicAuth
-		headers = {"Authorization": authHeader}
+		base64string = "%s:%s" % (username, password)
+		base64string = b64encode(base64string.encode('utf-8'))
+		if six.PY3:
+			base64string.decode()
+		AuthHeaders = {"Authorization": "Basic %s" % base64string}
 	else:
-		headers = {}
+		AuthHeaders = {}
 
-	return deferPage(six.ensure_binary(url), headers=headers)
+	return deferPage(six.ensure_binary(url), headers=AuthHeaders)
 
 
 def getPage(url, callback, errback):
@@ -78,14 +80,16 @@ def getPage(url, callback, errback):
 	password = config.plugins.remoteTimer.password.value
 	print("[remotetimer] username=%s password=%s" % (username, password))
 	if username and password:
-		basicAuth = six.ensure_str(b64encode(six.ensure_binary('%s:%s' % (username, password))))
-		authHeader = "Basic " + basicAuth
-		Headers = {"Authorization": authHeader}
+		base64string = "%s:%s" % (username, password)
+		base64string = b64encode(base64string.encode('utf-8'))
+		if six.PY3:
+			base64string.decode()
+		AuthHeaders = {"Authorization": "Basic %s" % base64string}
 	else:
-		Headers = {}
-	print("[remotetimer] Headers=%s" % (Headers))
+		AuthHeaders = {}
+	print("[remotetimer] Headers=%s" % (AuthHeaders))
 	try:
-		r = requests.get(url, headers=Headers)
+		r = requests.get(url, headers=AuthHeaders)
 		print("[remotetimer] statuscode=%s" % (r.status_code))
 		if r.status_code == 200:
 			data = six.ensure_str(r.content)

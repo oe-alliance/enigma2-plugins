@@ -11,11 +11,8 @@ global sessions
 from twisted.internet import reactor
 
 from six.moves.urllib.request import Request, urlopen
-import six
-if six.PY3:
-	from base64 import encodebytes as _encode
-else:
-	from base64 import encodestring as _encode
+from six import PY3
+from base64 import b64encode
 
 
 sessions = []
@@ -119,7 +116,10 @@ class DynDNSService:
 
 	def getURL(self, url):
 		request = Request(url)
-		base64string = _encode('%s:%s' % (config.plugins.DynDNS.user.value, config.plugins.DynDNS.password.value))[:-1]
+		base64string = '%s:%s' % (config.plugins.DynDNS.user.value, config.plugins.DynDNS.password.value)
+		base64string = b64encode(base64string.encode('utf-8'))
+		if PY3:
+			base64string.decode()
 		request.add_header("Authorization", "Basic %s" % base64string)
 		htmlFile = urlopen(request)
 		htmlData = htmlFile.read()
