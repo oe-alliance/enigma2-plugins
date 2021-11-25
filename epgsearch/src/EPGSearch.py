@@ -641,11 +641,8 @@ class EPGSearch(EPGSelection):
 		encoding = config.plugins.epgsearch.encoding.value
 		searchString = searchString.replace("\xc2\x86", "").replace("\xc2\x87", "")
 		if encoding != "UTF-8":
-			try:
-				searchString = searchString.decode("UTF-8").encode(encoding)
-			except (UnicodeDecodeError, UnicodeEncodeError):
-				pass
-
+			print("[EPGSearch] encoding = %s" % encoding)		
+			searchString = searchString.decode("UTF-8").encode(encoding) if six.PY2 else searchString.encode(encoding).decode("UTF-8")
 		search_type = {
 			"partial": eEPGCache.PARTIAL_TITLE_SEARCH,
 			"partialdes": eEPGCache.PARTIAL_DESCRIPTION_SEARCH,
