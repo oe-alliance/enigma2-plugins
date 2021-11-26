@@ -315,4 +315,8 @@ def main(session, service, **kwargs):
 
 
 def Plugins(path, **kwargs):
- 	return PluginDescriptor(name="Movie Tagger", description=_("Movie Tagger..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main)
+	try:
+		from Screens.TagEditor import TagEditor
+		return []
+	except ImportError:
+		return PluginDescriptor(name="Movie Tagger", description=_("Movie Tagger..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main)
