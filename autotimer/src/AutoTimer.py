@@ -535,30 +535,30 @@ class AutoTimer:
 					timer.checkTimespan(timestamp)
 					or timer.checkTimeframe(begin)
 				)) or timer.checkFilter(name, shortdesc, extdesc, dayofweek):
-				msg = "[AutoTimer] Skipping an event because of filter check"
+				msg="[AutoTimer] Skipping an event because of filter check"
 #				print(msg)
 				skipped.append((name, begin, end, serviceref, timer.name, msg))
 				continue
 
 			if timer.hasOffset():
 				# Apply custom Offset
-				begin, end = timer.applyOffset(begin, end)
-				offsetBegin = timer.offset[0]
-				offsetEnd = timer.offset[1]
+				begin, end=timer.applyOffset(begin, end)
+				offsetBegin=timer.offset[0]
+				offsetEnd=timer.offset[1]
 			else:
 				# Apply E2 Offset
 				begin -= config.recording.margin_before.value * 60
 				end += config.recording.margin_after.value * 60
-				offsetBegin = config.recording.margin_before.value * 60
-				offsetEnd = config.recording.margin_after.value * 60
+				offsetBegin=config.recording.margin_before.value * 60
+				offsetEnd=config.recording.margin_after.value * 60
 
 			# Overwrite endtime if requested
 			if timer.justplay and not timer.setEndtime:
-				end = begin
+				end=begin
 
 			# Eventually change service to alternative
 			if timer.overrideAlternatives:
-				serviceref = timer.getAlternative(serviceref)
+				serviceref=timer.getAlternative(serviceref)
 
 			# Append to timerlist and abort if simulating
 			timers.append((name, begin, end, serviceref, timer.name))
@@ -568,31 +568,31 @@ class AutoTimer:
 			# Check for existing recordings in directory
 			if timer.avoidDuplicateDescription == 3:
 				# Reset movie Exists
-				movieExists = False
+				movieExists=False
 
 				if dest and dest not in moviedict:
 					self.addDirectoryToMovieDict(moviedict, dest, serviceHandler)
 				for movieinfo in moviedict.get(dest, ()):
 					if self.checkSimilarity(timer, name, movieinfo.get("name"), shortdesc, movieinfo.get("shortdesc"), extdesc, movieinfo.get("extdesc")):
 						print("[AutoTimer] We found a matching recorded movie, skipping event:", name)
-						movieExists = True
+						movieExists=True
 						break
 				if movieExists:
-					msg = "[AutoTimer] Skipping an event because movie already exists"
+					msg="[AutoTimer] Skipping an event because movie already exists"
 #					print(msg)
 					skipped.append((name, begin, end, serviceref, timer.name, msg))
 					continue
 
 			# Initialize
-			newEntry = None
-			oldExists = False
+			newEntry=None
+			oldExists=False
 
 			# Check for double Timers
 			# We first check eit and if user wants us to guess event based on time
 			# we try this as backup. The allowed diff should be configurable though.
 			for rtimer in timerdict.get(serviceref, ()):
 				if rtimer.eit == eit or (config.plugins.autotimer.try_guessing.getValue() and timeSimilarityPercent(rtimer, evtBegin, evtEnd, timer) > 80):
-					oldExists = True
+					oldExists=True
 
 					# Abort if we don't want to modify timers or timer is repeated
 					if config.plugins.autotimer.refresh.value == "none" or rtimer.repeated:
@@ -602,20 +602,20 @@ class AutoTimer:
 					if eit == preveit:
 						break
 					try: # protect against vps plugin not being present
-						vps_changed = rtimer.vpsplugin_enabled != timer.vps_enabled or rtimer.vpsplugin_overwrite != timer.vps_overwrite
+						vps_changed=rtimer.vpsplugin_enabled != timer.vps_enabled or rtimer.vpsplugin_overwrite != timer.vps_overwrite
 					except AttributeError:
-						vps_changed = False
+						vps_changed=False
 					if (evtBegin - offsetBegin != rtimer.begin) or (evtEnd + offsetEnd != rtimer.end) or (shortdesc != rtimer.description) or vps_changed:
 						if rtimer.isAutoTimer and eit == rtimer.eit:
 							print("[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
 							# rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
-							preveit = eit
+							preveit=eit
 						else:
 							if config.plugins.autotimer.refresh.getValue() != "all":
 								print("[AutoTimer] Won't modify existing timer because it's no timer set by us")
 								break
 							rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it: %s ." % (timer.name, rtimer.name))
-						newEntry = rtimer
+						newEntry=rtimer
 						modified += 1
 						self.modifyTimer(rtimer, name, shortdesc, begin, end, serviceref, eit)
 						# rtimer.log(501, "[AutoTimer] AutoTimer modified timer: %s ." % (rtimer.name))
@@ -627,7 +627,7 @@ class AutoTimer:
 				elif timer.avoidDuplicateDescription >= 1 and not rtimer.disabled:
 					if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc):
 						print("[AutoTimer] We found a timer with similar description, skipping event")
-						oldExists = True
+						oldExists=True
 						break
 
 			# We found no timer we want to edit
@@ -640,12 +640,12 @@ class AutoTimer:
 				for rtimer in chain.from_iterable(itervalues(timerdict)):
 					if not rtimer.disabled:
 						if self.checkDoubleTimers(timer, name, rtimer.name, begin, rtimer.begin, end, rtimer.end, serviceref, str(rtimer.service_ref), enable_multiple_timer):
-							oldExists = True
+							oldExists=True
 							print("[AutoTimer] We found a timer with same StartTime, skipping event")
 							break
 						if timer.avoidDuplicateDescription >= 2:
 							if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc):
-								oldExists = True
+								oldExists=True
 								# print("[AutoTimer] We found a timer (any service) with same description, skipping event")
 								break
 				if oldExists:
@@ -655,40 +655,40 @@ class AutoTimer:
 					print("[AutoTimer] Not adding new timer because counter is depleted.")
 					continue
 
-				newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, shortdesc, eit)
+				newEntry=RecordTimerEntry(ServiceReference(serviceref), begin, end, name, shortdesc, eit)
 				newEntry.log(500, "[AutoTimer] Try to add new timer based on AutoTimer %s." % (timer.name))
 				newEntry.log(509, "[AutoTimer] Timer start on: %s" % ctime(begin))
 
 				# Mark this entry as AutoTimer (only AutoTimers will have this Attribute set)
-				newEntry.isAutoTimer = True
-				newEntry.autoTimerId = timer.id
+				newEntry.isAutoTimer=True
+				newEntry.autoTimerId=timer.id
 
 			# Apply afterEvent
 			if timer.hasAfterEvent():
-				afterEvent = timer.getAfterEventTimespan(localtime(end))
+				afterEvent=timer.getAfterEventTimespan(localtime(end))
 				if afterEvent is None:
-					afterEvent = timer.getAfterEvent()
+					afterEvent=timer.getAfterEvent()
 				if afterEvent is not None:
-					newEntry.afterEvent = afterEvent
+					newEntry.afterEvent=afterEvent
 
-			newEntry.dirname = timer.destination
-			newEntry.justplay = timer.justplay
-			newEntry.vpsplugin_enabled = timer.vps_enabled
-			newEntry.vpsplugin_overwrite = timer.vps_overwrite
+			newEntry.dirname=timer.destination
+			newEntry.justplay=timer.justplay
+			newEntry.vpsplugin_enabled=timer.vps_enabled
+			newEntry.vpsplugin_overwrite=timer.vps_overwrite
 
 			if hasattr(timer, 'always_zap') and hasattr(newEntry, 'always_zap'):
-				newEntry.always_zap = timer.always_zap
-			tags = timer.tags[:]
+				newEntry.always_zap=timer.always_zap
+			tags=timer.tags[:]
 			if config.plugins.autotimer.add_autotimer_to_tags.value:
 				if TAG not in tags:
 					tags.append(TAG)
 			if config.plugins.autotimer.add_name_to_tags.value:
-				tagname = timer.name.strip()
+				tagname=timer.name.strip()
 				if tagname:
-					tagname = tagname[0].upper() + tagname[1:].replace(" ", "_")
+					tagname=tagname[0].upper() + tagname[1:].replace(" ", "_")
 					if tagname not in tags:
 						tags.append(tagname)
-			newEntry.tags = tags
+			newEntry.tags=tags
 
 			if oldExists:
 				# XXX: this won't perform a sanity check, but do we actually want to do so?
@@ -698,28 +698,28 @@ class AutoTimer:
 					renameTimer(newEntry, name, evtBegin, evtEnd)
 
 			else:
-				conflictString = ""
+				conflictString=""
 				if similarTimer:
-					conflictString = similardict[eit].conflictString
-					msg = "[AutoTimer] Try to add similar Timer because of conflicts with %s." % (conflictString)
+					conflictString=similardict[eit].conflictString
+					msg="[AutoTimer] Try to add similar Timer because of conflicts with %s." % (conflictString)
 					print(msg)
 					newEntry.log(504, msg)
 
 				# Try to add timer
-				conflicts = recordHandler.record(newEntry)
+				conflicts=recordHandler.record(newEntry)
 
 				if conflicts and not timer.hasOffset() and not config.recording.margin_before.value and not config.recording.margin_after.value and len(conflicts) > 1:
-					change_end = change_begin = False
-					conflict_begin = conflicts[1].begin
-					conflict_end = conflicts[1].end
+					change_end=change_begin=False
+					conflict_begin=conflicts[1].begin
+					conflict_end=conflicts[1].end
 					if conflict_begin == newEntry.end:
 						newEntry.end -= 30
-						change_end = True
+						change_end=True
 					elif newEntry.begin == conflict_end:
 						newEntry.begin += 30
-						change_begin = True
+						change_begin=True
 					if change_end or change_begin:
-						conflicts = recordHandler.record(newEntry)
+						conflicts=recordHandler.record(newEntry)
 						if conflicts:
 							if change_end:
 								newEntry.end += 30
@@ -736,32 +736,32 @@ class AutoTimer:
 					if config.plugins.autotimer.addsimilar_on_conflict.value:
 						# We start our search right after our actual index
 						# Attention we have to use a copy of the list, because we have to append the previous older matches
-						lepgm = len(epgmatches)
+						lepgm=len(epgmatches)
 						for i in range(lepgm):
-							servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS = epgmatches[(i + idx + 1) % lepgm]
+							servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS=epgmatches[(i + idx + 1) % lepgm]
 							if self.checkSimilarity(timer, name, nameS, shortdesc, shortdescS, extdesc, extdescS, force=True):
 								# Check if the similar is already known
 								if eitS not in similardict:
 									print("[AutoTimer] Found similar Timer: " + name)
 
 									# Store the actual and similar eit and conflictString, so it can be handled later
-									newEntry.conflictString = conflictString
-									similardict[eit] = newEntry
-									similardict[eitS] = newEntry
-									similarTimer = True
+									newEntry.conflictString=conflictString
+									similardict[eit]=newEntry
+									similardict[eitS]=newEntry
+									similarTimer=True
 									if beginS <= evtBegin:
 										# Event is before our actual epgmatch so we have to append it to the epgmatches list
 										epgmatches.append((servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS))
 									# If we need a second similar it will be found the next time
 								else:
-									similarTimer = False
-									newEntry = similardict[eitS]
+									similarTimer=False
+									newEntry=similardict[eitS]
 								break
 
 				if conflicts is None:
 					timer.decrementCounter()
 					new += 1
-					newEntry.extdesc = extdesc
+					newEntry.extdesc=extdesc
 					timerdict[serviceref].append(newEntry)
 
 					if renameTimer is not None and timer.series_labeling:
@@ -777,13 +777,13 @@ class AutoTimer:
 					conflicting.append((name, begin, end, serviceref, timer.name))
 
 					if config.plugins.autotimer.disabled_on_conflict.value:
-						msg = "[AutoTimer] Timer disabled because of conflicts with %s." % (conflictString)
+						msg="[AutoTimer] Timer disabled because of conflicts with %s." % (conflictString)
 						print(msg)
 						newEntry.log(503, msg)
-						newEntry.disabled = True
+						newEntry.disabled=True
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
-						conflicts = recordHandler.record(newEntry)
-		self.result = (new, modified)
+						conflicts=recordHandler.record(newEntry)
+		self.result=(new, modified)
 		self.completed.append(taskname)
 		sleep(0.5)
 
@@ -792,8 +792,8 @@ class AutoTimer:
 			if self.simulateOnly == True:
 				self.callback(self.autotimers, self.skipped)
 			else:
-				total = (self.new + self.modified + len(self.conflicting) + len(self.existing) + len(self.similars))
-				_result = (total, self.new, self.modified, self.autotimers, self.conflicting, self.similars, self.existing, self.skipped)
+				total=(self.new + self.modified + len(self.conflicting) + len(self.existing) + len(self.similars))
+				_result=(total, self.new, self.modified, self.autotimers, self.conflicting, self.similars, self.existing, self.skipped)
 				self.callback(_result)
 		elif self.autoPoll:
 			if self.conflicting and config.plugins.autotimer.notifconflict.value:
@@ -825,14 +825,14 @@ class AutoTimer:
 		for timer in chain(recordHandler.timer_list, recordHandler.processed_timers):
 			if timer and timer.service_ref:
 				if timer.eit is not None:
-					event = epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
+					event=epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
 					if event:
-						timer.extdesc = event.getExtendedDescription() or ''
+						timer.extdesc=event.getExtendedDescription() or ''
 					else:
-						timer.extdesc = ''
+						timer.extdesc=''
 #						remove.append(timer)
 				elif not hasattr(timer, 'extdesc'):
-					timer.extdesc = ''
+					timer.extdesc=''
 #				else:
 #					remove.append(timer)
 #					continue
@@ -854,28 +854,28 @@ class AutoTimer:
 	def modifyTimer(self, timer, name, shortdesc, begin, end, serviceref, eit):
 		# Don't update the name, it will overwrite the name of the SeriesPlugin
 		#timer.name = name
-		timer.description = shortdesc
-		timer.begin = int(begin)
-		timer.end = int(end)
-		timer.service_ref = ServiceReference(serviceref)
-		timer.eit = eit
+		timer.description=shortdesc
+		timer.begin=int(begin)
+		timer.end=int(end)
+		timer.service_ref=ServiceReference(serviceref)
+		timer.eit=eit
 
 	def addDirectoryToMovieDict(self, moviedict, dest, serviceHandler):
-		movielist = serviceHandler.list(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + dest))
+		movielist=serviceHandler.list(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + dest))
 		if movielist is None:
 			print("[AutoTimer] listing of movies in " + dest + " failed")
 		else:
-			append = moviedict[dest].append
+			append=moviedict[dest].append
 			while True:
-				movieref = movielist.getNext()
+				movieref=movielist.getNext()
 				if not movieref.valid():
 					break
 				if movieref.flags & eServiceReference.mustDescent:
 					continue
-				info = serviceHandler.info(movieref)
+				info=serviceHandler.info(movieref)
 				if info is None:
 					continue
-				event = info.getEvent(movieref)
+				event=info.getEvent(movieref)
 				if event is None:
 					continue
 				append({
@@ -885,32 +885,32 @@ class AutoTimer:
 				})
 
 	def checkSimilarity(self, timer, name1, name2, shortdesc1, shortdesc2, extdesc1, extdesc2, force=False):
-		foundTitle = False
-		foundShort = False
-		retValue = False
+		foundTitle=False
+		foundShort=False
+		retValue=False
 		if name1 and name2:
-			foundTitle = (0.8 < SequenceMatcher(lambda x: x == " ", name1, name2).ratio())
+			foundTitle=(0.8 < SequenceMatcher(lambda x: x == " ", name1, name2).ratio())
 		# NOTE: only check extended & short if tile is a partial match
 		if foundTitle:
 			if timer.searchForDuplicateDescription > 0 or force:
 				if shortdesc1 and shortdesc2:
 					# If the similarity percent is higher then 0.7 it is a very close match
-					foundShort = (0.7 < SequenceMatcher(lambda x: x == " ", shortdesc1, shortdesc2).ratio())
+					foundShort=(0.7 < SequenceMatcher(lambda x: x == " ", shortdesc1, shortdesc2).ratio())
 					if foundShort:
 						if timer.searchForDuplicateDescription == 2:
 							if extdesc1 and extdesc2:
 								# Some channels indicate replays in the extended descriptions
 								# If the similarity percent is higher then 0.7 it is a very close match
-								retValue = (0.7 < SequenceMatcher(lambda x: x == " ", extdesc1, extdesc2).ratio())
+								retValue=(0.7 < SequenceMatcher(lambda x: x == " ", extdesc1, extdesc2).ratio())
 						else:
-							retValue = True
+							retValue=True
 			else:
-				retValue = True
+				retValue=True
 		return retValue
 
 	def checkDoubleTimers(self, timer, name1, name2, starttime1, starttime2, endtime1, endtime2, serviceref1, serviceref2, multiple):
-		foundTitle = name1 == name2
-		foundstart = starttime1 == starttime2
-		foundend = endtime1 == endtime2
-		foundref = serviceref1 == serviceref2
+		foundTitle=name1 == name2
+		foundstart=starttime1 == starttime2
+		foundend=endtime1 == endtime2
+		foundref=serviceref1 == serviceref2
 		return foundTitle and foundstart and foundend and (foundref or not multiple)
