@@ -496,7 +496,7 @@ class AutoTimer:
 						skipped.append((name, begin, end, serviceref, timer.name, msg))
 						continue
 
-<<<<<<< HEAD
+<< << << < HEAD
 # If the timer actually has a timespan set it will be:
 #   start[[hr], [min]], end[[hr], [min]], daySpan
 # (if it has none the timespan will be (None,))
@@ -523,9 +523,9 @@ class AutoTimer:
 					if begin_offset < timer_offset:
 						tdow = (tdow - 1) % 7
 				dayofweek = str(tdow)
-=======
+== == == =
 				dayofweek = str(timestamp.tm_wday)
->>>>>>> parent of b3bd4992(Handle AutoTimer timespans that cross midnight and also have a Day filter applied. (#481))
+>>>>>> > parent of b3bd4992(Handle AutoTimer timespans that cross midnight and also have a Day filter applied. (#481))
 
 			# Check timer conditions
 			# NOTE: similar matches do not care about the day/time they are on, so ignore them
