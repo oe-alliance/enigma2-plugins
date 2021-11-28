@@ -574,7 +574,8 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.setEndtime: _("Set an end time for the timer. If you do, the timespan of the event might be blocked for recordings."),
 			self.overrideAlternatives: _("With this option enabled the channel to record will be selected automaticliy using your list of alternates."),
 			self.timespan: _("Should this AutoTimer be restricted to a timespan?"),
-			self.timespanbegin: _("Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into account!"),
+			self.timespanbegin: _("Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into account!")
+				+ "\n" + _("Any Day filter refers to the day of the timespan start, even if the timespan crosses midnight.")),
 			self.timespanend: _("Upper bound of timespan. Nothing after this time will be matched. Offsets are not taken into account!"),
 			self.timeframe: _("By enabling this events will not be matched if they don't occur on certain dates."),
 			self.timeframebegin: _("First day to match events. No event that begins before this date will be matched."),
