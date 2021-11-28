@@ -496,7 +496,32 @@ class AutoTimer:
 						skipped.append((name, begin, end, serviceref, timer.name, msg))
 						continue
 
-				dayofweek = str(timestamp.tm_wday)
+# If the timer actually has a timespan set it will be:
+#   start[[hr], [min]], end[[hr], [min]], daySpan
+# (if it has none the timespan will be (None,))
+# (see calculateDayspan() in AutoTimerComponent.py) where daySpan is
+# True if the timespan "ends before it starts" (so passes over
+# midnight).
+# If we have a timer for which daySpan is true and the day-offset of the
+# begin time for the programme/broadcast we are checking is before that
+# of the autotimer timespan start then we need to bring the dayofweek
+# check forward by 1 day when checking it. (i.e. we pretend the
+# recording starts a day before it does, but *just* for the dayofweek
+# filter check).
+#   e.g.
+#       Monday AT for 23:00 to 02:00 should match a programme on
+#       Tuesday at 01:00.
+# The rest of the checks stay the same (which is why we don't need to
+# check for the autotimer timespan end being after the begin time for
+# the programme).
+#
+				tdow = timestamp.tm_wday
+				if (timer.timespan[0] != None) and timer.timespan[2]:
+					begin_offset = 60*timestamp.tm_hour + timestamp.tm_min
+					timer_offset = 60*timer.timespan[0][0] + timer.timespan[0][1]
+					if begin_offset < timer_offset:
+						tdow = (tdow - 1) % 7
+				dayofweek = str(tdow)
 
 			# Check timer conditions
 			# NOTE: similar matches do not care about the day/time they are on, so ignore them
