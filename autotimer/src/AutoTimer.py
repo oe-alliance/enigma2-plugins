@@ -517,8 +517,8 @@ class AutoTimer:
 #
 				tdow = timestamp.tm_wday
 				if (timer.timespan[0] != None) and timer.timespan[2]:
-					begin_offset = 60*timestamp.tm_hour + timestamp.tm_min
-					timer_offset = 60*timer.timespan[0][0] + timer.timespan[0][1]
+					begin_offset = 60 * timestamp.tm_hour + timestamp.tm_min
+					timer_offset = 60 * timer.timespan[0][0] + timer.timespan[0][1]
 					if begin_offset < timer_offset:
 						tdow = (tdow - 1) % 7
 				dayofweek = str(tdow)
