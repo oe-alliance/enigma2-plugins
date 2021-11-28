@@ -220,7 +220,7 @@ class AutoTimerComponent(object):
 ### Helper
 
 	"""
-	 Returns a tulple of (input begin, input end, end earlier than begin)
+	 Returns a tulple of (input begin, input end, begin earlier than end)
 	"""
 
 	def calculateDayspan(self, begin, end, ignore=None):
