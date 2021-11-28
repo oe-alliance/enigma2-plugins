@@ -727,9 +727,9 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 	def editFilterCallback(self, ret):
 		if ret:
-			self.filterSet=ret[0]
-			self.excludes=ret[1]
-			self.includes=ret[2]
+			self.filterSet = ret[0]
+			self.excludes = ret[1]
+			self.includes = ret[2]
 			self.renameFilterButton()
 
 	def editServices(self):
@@ -743,30 +743,30 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 	def editServicesCallback(self, ret):
 		if ret:
-			self.serviceRestriction=ret[0]
-			self.services=ret[1][0]
-			self.bouquets=ret[1][1]
+			self.serviceRestriction = ret[0]
+			self.services = ret[1][0]
+			self.bouquets = ret[1][1]
 			self.renameServiceButton()
 
 	def keyLeft(self):
-		cur=self["config"].getCurrent()
-		cur=cur and cur[1]
+		cur = self["config"].getCurrent()
+		cur = cur and cur[1]
 		if cur == self.tags:
 			self.chooseTags()
 		else:
 			ConfigListScreen.keyLeft(self)
 
 	def keyRight(self):
-		cur=self["config"].getCurrent()
-		cur=cur and cur[1]
+		cur = self["config"].getCurrent()
+		cur = cur and cur[1]
 		if cur == self.tags:
 			self.chooseTags()
 		else:
 			ConfigListScreen.keyRight(self)
 
 	def ok(self):
-		cur=self["config"].getCurrent()
-		cur=cur and cur[1]
+		cur = self["config"].getCurrent()
+		cur = cur and cur[1]
 		if cur == self.destination:
 			self.chooseDestination()
 		elif cur == self.tags:
@@ -783,14 +783,14 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 	def SearchNameCallback(self, callback=None):
 		if callback:
-			self.name.value=callback
+			self.name.value = callback
 
 	def matchKeyboard(self):
 		self.session.openWithCallback(self.SearchMatchCallback, VirtualKeyBoard, title=_("Enter or edit match title"), text=self.match.value)
 
 	def SearchMatchCallback(self, callback=None):
 		if callback:
-			self.match.value=callback
+			self.match.value = callback
 			#ConfigListScreen.keyOK(self)
 
 	def cancel(self):
