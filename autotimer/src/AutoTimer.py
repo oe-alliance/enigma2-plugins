@@ -525,7 +525,7 @@ class AutoTimer:
 				dayofweek = str(tdow)
 =======
 				dayofweek = str(timestamp.tm_wday)
->>>>>>> parent of b3bd4992 (Handle AutoTimer timespans that cross midnight and also have a Day filter applied. (#481))
+>>>>>>> parent of b3bd4992(Handle AutoTimer timespans that cross midnight and also have a Day filter applied. (#481))
 
 			# Check timer conditions
 			# NOTE: similar matches do not care about the day/time they are on, so ignore them
