@@ -779,16 +779,16 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			ConfigListScreen.keyOK(self)
 
 	def nameKeyboard(self):
-		self.session.openWithCallback(self.SearchNameCallback, VirtualKeyBoard, title=_("Enter or edit description"), text=self.name.value)
+		self.session.openWithCallback(self.SearchNameCallback, VirtualKeyBoard, title = _("Enter or edit description"), text = self.name.value)
 
-	def SearchNameCallback(self, callback=None):
+	def SearchNameCallback(self, callback = None):
 		if callback:
 			self.name.value=callback
 
 	def matchKeyboard(self):
-		self.session.openWithCallback(self.SearchMatchCallback, VirtualKeyBoard, title=_("Enter or edit match title"), text=self.match.value)
+		self.session.openWithCallback(self.SearchMatchCallback, VirtualKeyBoard, title = _("Enter or edit match title"), text = self.match.value)
 
-	def SearchMatchCallback(self, callback=None):
+	def SearchMatchCallback(self, callback = None):
 		if callback:
 			self.match.value=callback
 			#ConfigListScreen.keyOK(self)
