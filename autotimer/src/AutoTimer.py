@@ -496,6 +496,7 @@ class AutoTimer:
 						skipped.append((name, begin, end, serviceref, timer.name, msg))
 						continue
 
+
 << << << < HEAD
 # If the timer actually has a timespan set it will be:
 #   start[[hr], [min]], end[[hr], [min]], daySpan
