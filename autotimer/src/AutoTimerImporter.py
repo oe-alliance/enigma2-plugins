@@ -144,6 +144,7 @@ class AutoTimerImporter(Screen):
 
 		entries = []
 		append = entries.append
+		self["list"] = SelectionList()
 
 		if disabled is not None:
 			append(
@@ -233,7 +234,7 @@ class AutoTimerImporter(Screen):
 					True
 			))
 
-		self["list"] = SelectionList(entries)
+		self["list"].setList(entries)
 
 		# Define Actions
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
