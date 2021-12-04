@@ -339,12 +339,17 @@ class NetworkBrowser(Screen):
 				if len(x) == 6:
 					sharelist.append(x)
 		cmd = "/usr/bin/smbclient -m SMB3 -g -N -U Guest -L {0}".format(hostip).split()
-		if username != "" or password != "":
-			cmd = ["/usr/bin/smbclient", "-m SMB3", "-g", "-U", username, "-L", hostip, "\\\\IPC\\", password]
+		if username and password:
+			cmd = ["/usr/bin/smbclient", "-m SMB3", "-g", "-U", username, "-L", hostip, "\\\\IPC\\"]
 		try:
-			p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+			if six.PY3:
+				p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE, stdin=subprocess.PIPE, text=True)
+			else:
+				p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+			if username and password:
+				p.stdin.write(password + '\n')
+				p.stdin.flush()
 			(out, err) = p.communicate()
-			out = six.ensure_str(out)
 			for line in out.split('\n'):
 				item = line.split('|')
 				if len(item) == 3 and item[0] == "Disk" and not item[1].endswith("$"):
