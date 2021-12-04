@@ -40,11 +40,7 @@ from Screens.Screen import Screen
 from Screens.TimerEntry import TimerEntry
 from Tools.BoundFunction import boundFunction
 
-
-if six.PY3:
-	from urllib.parse import urlparse, urlunparse, quote
-else:
-	from urlparse import urlparse, urlunparse, quote
+from six.moves.urllib.parse import urlparse, urlunparse, quote
 import requests
 from base64 import b64encode
 #------------------------------------------------------------------------------------------
