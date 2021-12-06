@@ -238,31 +238,31 @@ class AutoMount():
 
 	def writeMountsConfig(self):
 		# Generate List in RAM
-		list = ['<?xml version="1.0" ?>\n<mountmanager>\n']
+		self.list = ['<?xml version="1.0" ?>\n<mountmanager>\n']
 		for sharename, sharedata in list(self.automounts.items()):
 			mtype = sharedata['mounttype']
-			list.append('<' + mtype + '>\n')
-			list.append(' <mount>\n')
-			list.append("  <active>" + str(sharedata['active']) + "</active>\n")
-			list.append("  <hdd_replacement>" + str(sharedata['hdd_replacement']) + "</hdd_replacement>\n")
-			list.append("  <ip>" + sharedata['ip'] + "</ip>\n")
-			list.append("  <sharename>" + sharedata['sharename'] + "</sharename>\n")
-			list.append("  <sharedir>" + sharedata['sharedir'] + "</sharedir>\n")
-			list.append("  <options>" + sharedata['options'] + "</options>\n")
+			self.list.append('<' + mtype + '>\n')
+			self.list.append(' <mount>\n')
+			self.list.append("  <active>" + str(sharedata['active']) + "</active>\n")
+			self.list.append("  <hdd_replacement>" + str(sharedata['hdd_replacement']) + "</hdd_replacement>\n")
+			self.list.append("  <ip>" + sharedata['ip'] + "</ip>\n")
+			self.list.append("  <sharename>" + sharedata['sharename'] + "</sharename>\n")
+			self.list.append("  <sharedir>" + sharedata['sharedir'] + "</sharedir>\n")
+			self.list.append("  <options>" + sharedata['options'] + "</options>\n")
 
 			if sharedata['mounttype'] == 'cifs':
-				list.append("  <username>" + sharedata['username'] + "</username>\n")
-				list.append("  <password>" + sharedata['password'] + "</password>\n")
+				self.list.append("  <username>" + sharedata['username'] + "</username>\n")
+				self.list.append("  <password>" + sharedata['password'] + "</password>\n")
 
-			list.append(' </mount>\n')
-			list.append('</' + mtype + '>\n')
+			self.list.append(' </mount>\n')
+			self.list.append('</' + mtype + '>\n')
 
 		# Close Mountmanager Tag
-		list.append('</mountmanager>\n')
+		self.list.append('</mountmanager>\n')
 
 		# Try Saving to Flash
 		try:
-			open(XML_FSTAB, "w").writelines(list)
+			open(XML_FSTAB, "w").writelines(self.list)
 		except Exception as e:
 			print("[AutoMount.py] Error Saving Mounts List:", e)
 
