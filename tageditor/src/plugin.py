@@ -14,25 +14,6 @@ from enigma import eServiceReference, eServiceCenter, iServiceInformation
 from os import path as os_path
 
 
-def main(session, service, **kwargs):
-	session.open(MovieTagEditor, service, session.current_dialog, **kwargs)
-
-
-def Plugins(**kwargs):
-	try:
-		from Screens.TagEditor import TagEditor
-	except ImportError:
-		# disable TagEditor plugin if the new internal TagEditor is available
-		try:
-			from Screens.MovieSelection import setPreferredTagEditor
-			setPreferredTagEditor(TagEditor)
-		except Exception:
-			pass
-		# TRANSLATORS: this is the string used in the movie context menu for TagEditor
-		return PluginDescriptor(name="TagEditor", description=_("edit tags"), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart=False)
-	return []
-
-
 class TagEditor(Screen):
 	skin = """
 	<screen name="TagEditor" position="center,center" size="600,310">
@@ -310,16 +291,17 @@ class MovieTagEditor(TagEditor):
 	def saveTags(self, file, tags):
 		if os_path.exists(file + ".ts.meta"):
 			metafile = open(file + ".ts.meta", "r")
-			sid = metafile.readline()
-			title = metafile.readline()
-			descr = metafile.readline()
-			time = metafile.readline()
-			oldtags = metafile.readline().rstrip()
+			sid = metafile.readline().strip("\r\n")
+			title = metafile.readline().strip("\r\n")
+			descr = metafile.readline().strip("\r\n")
+			time = metafile.readline().strip("\r\n")
+			oldtags = metafile.readline().rstrip("\r\n")
+			rest = metafile.read()
 			metafile.close()
 			tags = " ".join(tags)
 			if tags != oldtags:
 				metafile = open(file + ".ts.meta", "w")
-				metafile.write("%s%s%s%s%s" % (sid, title, descr, time, tags))
+				metafile.write("%s\n%s\n%s\n%s\n%s\n%s" % (sid, title, descr, time, tags, rest))
 				metafile.close()
 
 	def cancel(self):
@@ -346,3 +328,23 @@ class MovieTagEditor(TagEditor):
 			parentscreen.close()
 		except AttributeError:
 			pass
+
+
+def main(session, service, **kwargs):
+	session.open(MovieTagEditor, service, session.current_dialog, **kwargs)
+
+
+def Plugins(**kwargs):
+	try:
+		from Screens.TagEditor import TagEditor as NewTagEditor
+	except ImportError:
+		# disable TagEditor plugin if the new internal TagEditor is available
+		try:
+			from Screens.MovieSelection import setPreferredTagEditor
+			setPreferredTagEditor(TagEditor)
+		except Exception:
+			pass
+		# TRANSLATORS: this is the string used in the movie context menu for TagEditor
+		return PluginDescriptor(name="TagEditor", description=_("edit tags"), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart=False)
+	return []
+
