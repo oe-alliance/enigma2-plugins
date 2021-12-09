@@ -10,8 +10,13 @@ from Components.MenuList import MenuList
 from Components.ActionMap import ActionMap
 from enigma import quitMainloop
 from Screens.MessageBox import MessageBox
-from Screens.Ipkg import Ipkg
-from Components.Ipkg import IpkgComponent
+try:
+    from Components.Opkg import OpkgComponent as IpkgComponent
+    from Screens.Opkg import Opkg as Ipkg
+except ImportError:
+    from Components.Ipkg import IpkgComponent
+    from Screens.Ipkg import Ipkg
+
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 zlib_link = "http://subs-downloader.googlecode.com/files/libzen_0.4.22-0.0_all.ipk"

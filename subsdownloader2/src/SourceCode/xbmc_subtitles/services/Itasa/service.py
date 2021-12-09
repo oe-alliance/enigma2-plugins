@@ -199,8 +199,13 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
                             subs_file = new_file_in_directory(files_before_unrar, files_after_unrar)
                             os.remove(local_tmp_file)
                         else:
-                            from Components.Ipkg import IpkgComponent
-                            from Screens.Ipkg import Ipkg
+                            try:
+                                from Components.Opkg import OpkgComponent as IpkgComponent
+                                from Screens.Opkg import Opkg as Ipkg
+                            except ImportError:
+                                from Components.Ipkg import IpkgComponent
+                                from Screens.Ipkg import Ipkg
+
                             __cmdList = []
                             __cmdList.append((IpkgComponent.CMD_INSTALL, {"package": 'unrar'}))
                             screen_session.openWithCallback(__restartMessage__(screen_session, callback=None), Ipkg, cmdList=__cmdList)
