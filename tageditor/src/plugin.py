@@ -347,4 +347,3 @@ def Plugins(**kwargs):
 		# TRANSLATORS: this is the string used in the movie context menu for TagEditor
 		return PluginDescriptor(name="TagEditor", description=_("edit tags"), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart=False)
 	return []
-
