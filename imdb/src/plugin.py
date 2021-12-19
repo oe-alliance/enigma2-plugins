@@ -867,11 +867,11 @@ class IMDB(Screen, HelpableScreen):
 										Extratext += _("Plot Keywords")
 									else:
 										Extratext += _("Unknown category")
-							if self.re_index == 1 and category in ("quotes", "keywords", "language", "locations", "company"):
+							if self.re_index == 1 and category in ("quotes", "keywords", "language", "sound", "locations", "company"):
 								if category == "quotes":
 									txt = self.htmltags.sub('', extrainfos.group(category).replace("\n", ' ').replace("<p>", '\n').replace("<br>", '\n').replace("<br />", '\n'))
 								else:
-									txt = re.sub(r'\|+', category == "keywords" and ' | ' or ', ', self.htmltags.sub('|', extrainfos.group(category).replace("\n", ' ').replace("<br>", '\n').replace("<br />", '\n')).strip('|').replace(' |' + self.NBSP, '').replace(self.NBSP, ' '))
+									txt = re.sub(r'\|+', category in ("keywords", "sound") and ' | ' or ', ', self.htmltags.sub('|', extrainfos.group(category).replace("\n", ' ').replace("<br>", '\n').replace("<br />", '\n')).strip('|').replace(' |' + self.NBSP, '').replace(self.NBSP, ' '))
 							else:
 								txt = ' '.join(self.htmltags.sub('', extrainfos.group(category).replace("\n", ' ').replace("<br>", '\n').replace("<br />", '\n')).replace(' |' + self.NBSP, '').replace(self.NBSP, ' ').split())
 							Extratext += sep + txt + "\n"
