@@ -619,6 +619,8 @@ class IMDB(Screen, HelpableScreen):
 				start = 0
 			end = in_html.find('<section data-testid="contribution"')
 			if end == -1:
+				end = in_html.find('<div id="taboola_wrapper">')
+			if end == -1:
 				end = len(in_html)
 			in_html = in_html[start:end]  # speed up re searches by trimming irrelevant text
 		else:
