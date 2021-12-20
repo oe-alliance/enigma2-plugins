@@ -52,6 +52,7 @@ class AutoMount():
 		if not os.path.exists(XML_FSTAB):
 			return
 		tree = cet_parse(XML_FSTAB).getroot()
+
 		def enc(val):
 			if six.PY2:
 				return val.encode("UTF-8")
