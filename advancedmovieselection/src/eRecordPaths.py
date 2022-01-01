@@ -8,6 +8,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
 from Tools.Directories import fileExists
 from Components.UsageConfig import preferredPath
+from Components.Sources.StaticText import StaticText
 
 
 class RecordPathsSettings(Screen, ConfigListScreen):
@@ -21,7 +22,6 @@ class RecordPathsSettings(Screen, ConfigListScreen):
 		</screen>"""
 
 	def __init__(self, session):
-		from Components.Sources.StaticText import StaticText
 		Screen.__init__(self, session)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))

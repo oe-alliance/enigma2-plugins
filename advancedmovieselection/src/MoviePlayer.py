@@ -354,14 +354,12 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
 
             if answer == "quitanddelete":
                 if config.AdvancedMovieSelection.askdelete.value:
-                    from Screens.MessageBox import MessageBox
                     self.session.openWithCallback(self.deleteConfirmed, MessageBox, _("Do you really want to delete %s?") % name)
                     return
                 else:
                     self.deleteConfirmed(True)
             elif answer == "returnanddelete":
                 if config.AdvancedMovieSelection.askdelete.value:
-                    from Screens.MessageBox import MessageBox
                     self.session.openWithCallback(self.returnanddeleteConfirmed, MessageBox, _("Do you really want to delete %s?") % name)
                     return
                 else:
