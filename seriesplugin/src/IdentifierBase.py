@@ -2,9 +2,6 @@
 # by betonme @2012
 
 from __future__ import absolute_import
-from collections import defaultdict
-
-from thread import start_new_thread
 
 #TODO Implement Twisted handler
 #Twisted 12.x
@@ -21,7 +18,6 @@ from time import time
 from datetime import datetime, timedelta
 
 from Components.config import config
-from Tools.BoundFunction import boundFunction
 
 # Internal
 from .ModuleBase import ModuleBase

@@ -27,8 +27,6 @@ from Components.config import config
 from enigma import eServiceReference, eServiceCenter
 from ServiceReference import ServiceReference
 
-from Tools.BoundFunction import boundFunction
-
 # XML
 from xml.etree.cElementTree import ElementTree, parse, Element, SubElement, Comment
 from Tools.XMLTools import stringToXML
@@ -40,12 +38,7 @@ from .Logger import log
 
 import six
 
-
-try:
-	#Python >= 2.7
-	from collections import OrderedDict
-except:
-	from .OrderedDict import OrderedDict
+from collections import OrderedDict
 
 
 ChannelReplaceDict = OrderedDict([
