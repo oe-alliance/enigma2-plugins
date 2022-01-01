@@ -9,7 +9,7 @@ import hashlib
 import uuid
 import re
 import threading
-import collections
+from collections import deque
 
 import six
 
@@ -156,7 +156,7 @@ class GNTP(Protocol):
 		self.__buffer = ''
 		self.defer = None
 		self.messageLock = threading.Lock()
-		self.messageQueue = collections.deque()
+		self.messageQueue = deque()
 
 	def connectionMade(self):
 		if self.client and not self.registered:
