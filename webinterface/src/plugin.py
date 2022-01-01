@@ -320,7 +320,7 @@ def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usess
 
 
 class ChainedOpenSSLContextFactory(ssl.DefaultOpenSSLContextFactory):
-	def __init__(self, privateKeyFileName, certificateChainFileName, sslmethod=SSL.SSLv23_METHOD):
+	def __init__(self, privateKeyFileName, certificateChainFileName, sslmethod=SSL.TLSv1_2_METHOD):
 		self.privateKeyFileName = privateKeyFileName
 		self.certificateChainFileName = certificateChainFileName
 		self.sslmethod = sslmethod
