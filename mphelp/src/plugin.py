@@ -6,7 +6,10 @@ from . import _
 #from Plugins.Plugin import PluginDescriptor
 from .MPHelp import MPHelp
 
-from collections import Callable
+try:
+	from collections.abc import Callable
+except ImportError:
+	from collections import Callable
 
 helpList = []
 
