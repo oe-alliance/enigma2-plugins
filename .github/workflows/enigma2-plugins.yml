@@ -83,6 +83,7 @@ jobs:
           pip3 install six
           sed -i '/PKG_CHECK_MODULES(ENIGMA2, enigma2)/d' ./configure.ac
           sed -i '/PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)/d' ./configure.ac
+          sed -i 's/$PYTHON -c \"import distutils\"/$PYTHON -c \"import sys\"/g' ./m4/ax_python_devel.m4
           autoreconf -i
           ./configure --without-debug --with-po
           make
