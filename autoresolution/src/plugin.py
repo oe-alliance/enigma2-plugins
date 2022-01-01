@@ -41,11 +41,11 @@ resolutionlabel = None
 manualResolution = None
 
 resolutions = (
-	('sd_i_50', _("SD 25/50HZ Interlace Mode")),
-	('sd_i_60', _("SD 30/60HZ Interlace Mode")),
-	('sd_p_24', _("SD 24HZ Progressive mode")),
-	('sd_p_50', _("SD 25/50HZ Progressive Mode")),
-	('sd_p_60', _("SD 30/60HZ Progressive Mode")),
+	('sd_i_50', _("SD 25/50Hz Interlace Mode")),
+	('sd_i_60', _("SD 30/60Hz Interlace Mode")),
+	('sd_p_24', _("SD 24Hz Progressive mode")),
+	('sd_p_50', _("SD 25/50Hz Progressive Mode")),
+	('sd_p_60', _("SD 30/60Hz Progressive Mode")),
 	('hd_i', _("HD Interlace Mode")),
 	('hd_p', _("HD Progressive Mode")),
 	('p720_24', _("Enable 720p24 Mode")),
@@ -58,7 +58,7 @@ resolutions = (
 have_1080p = config.av.videorate.get("1080p", False)
 if have_1080p:
 	resolutions += (
-		('fhd_p', _("FHD 50/60HZ Progressive Mode")),
+		('fhd_p', _("FHD 50/60Hz Progressive Mode")),
 	)
 
 have_2160p = config.av.videorate.get("2160p", False)
@@ -430,7 +430,7 @@ class AutoRes(Screen):
 					old = resolutionlabel["content"].getText()
 					codec_info = "%s %s" % (videocodec, width)
 					gamma = (" SDR", " HDR", " HDR10", " HLG", "")[gamma_num]
-					resolutionlabel["content"].setText(_("Videocontent: %sx%s%s %sHZ") % (codec_info, height, prog, frate) + gamma)
+					resolutionlabel["content"].setText(_("Videocontent: %sx%s%s %sHz") % (codec_info, height, prog, frate) + gamma)
 					if self.lastmode != new_mode:
 						self.lastmode = new_mode
 						self.changeVideomode()
@@ -582,7 +582,7 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 					self.list.append(getConfigListEntry(_("Ask before changing videomode"), config.plugins.autoresolution.ask_apply_mode))
 					if config.plugins.autoresolution.ask_apply_mode.value:
 						self.list.append(getConfigListEntry(_("Message timeout"), config.plugins.autoresolution.ask_timeout))
-					self.list.append(getConfigListEntry(_("Use 60HZ instead 30HZ"), config.plugins.autoresolution.auto_30_60))
+					self.list.append(getConfigListEntry(_("Use 60Hz instead 30Hz"), config.plugins.autoresolution.auto_30_60))
 					self.list.append(getConfigListEntry(_("Alternative resolution when native not supported"), config.plugins.autoresolution.auto_24_30_alternative))
 			else:
 				self.list.append(getConfigListEntry(_("Autoresolution is not working in Scart/DVI-PC Mode"), ConfigNothing()))

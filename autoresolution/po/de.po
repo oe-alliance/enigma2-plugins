@@ -95,8 +95,8 @@ msgstr "Auto-Auflösung einschalten"
 msgid "Exit"
 msgstr "Beenden"
 
-msgid "FHD 50/60HZ Progressive Mode"
-msgstr "FHD 50/60HZ Progressiv Modus"
+msgid "FHD 50/60Hz Progressive Mode"
+msgstr "FHD 50/60Hz Progressiv Modus"
 
 msgid "HD Interlace Mode"
 msgstr "HD Interlace Modus"
@@ -134,20 +134,20 @@ msgstr "Ohne Bestätigung nach 10 Sekunden zurück."
 msgid "Running in testmode"
 msgstr "Läuft im Testmodus"
 
-msgid "SD 24HZ Progressive mode"
-msgstr "SD 24HZ Progressiv Modus"
+msgid "SD 24Hz Progressive mode"
+msgstr "SD 24Hz Progressiv Modus"
 
-msgid "SD 25/50HZ Interlace Mode"
-msgstr "SD 25/50HZ Interlace Modus"
+msgid "SD 25/50Hz Interlace Mode"
+msgstr "SD 25/50Hz Interlace Modus"
 
-msgid "SD 25/50HZ Progressive Mode"
-msgstr "SD 25/50HZ Progressiv Modus"
+msgid "SD 25/50Hz Progressive Mode"
+msgstr "SD 25/50Hz Progressiv Modus"
 
-msgid "SD 30/60HZ Interlace Mode"
-msgstr "SD 30/60HZ Interlace Modus"
+msgid "SD 30/60Hz Interlace Mode"
+msgstr "SD 30/60Hz Interlace Modus"
 
-msgid "SD 30/60HZ Progressive Mode"
-msgstr "SD 30/60HZ Progressiv Modus"
+msgid "SD 30/60Hz Progressive Mode"
+msgstr "SD 30/60Hz Progressiv Modus"
 
 msgid "Show 'Manual resolution' in extensions menu"
 msgstr "Zeige 'Manuelle Aufl.' im Erweiterten Menü"
@@ -164,15 +164,15 @@ msgstr "UHD Interlace Modus"
 msgid "UHD Progressive Mode"
 msgstr "UHD Progressiv Modus"
 
-msgid "Use 60HZ instead 30HZ"
-msgstr "Verwende 60HZ statt 30HZ"
+msgid "Use 60Hz instead 30Hz"
+msgstr "Verwende 60Hz statt 30Hz"
 
 msgid "Video: "
 msgstr "Video: "
 
 #, python-format
-msgid "Videocontent: %sx%s%s %sHZ"
-msgstr "Videoinhalt: %sx%s%s %sHZ"
+msgid "Videocontent: %sx%s%s %sHz"
+msgstr "Videoinhalt: %sx%s%s %sHz"
 
 #, python-format
 msgid "Videomode: %s"

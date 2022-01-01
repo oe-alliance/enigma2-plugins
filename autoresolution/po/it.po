@@ -96,8 +96,8 @@ msgid "Exit"
 msgstr ""
 
 #, fuzzy
-msgid "FHD 50/60HZ Progressive Mode"
-msgstr "Modalità SD 30/60HZ Progressive"
+msgid "FHD 50/60Hz Progressive Mode"
+msgstr "Modalità SD 30/60Hz Progressive"
 
 msgid "HD Interlace Mode"
 msgstr "Modalità HD Interlacciata"
@@ -136,20 +136,20 @@ msgstr ""
 msgid "Running in testmode"
 msgstr "Funzionamento in modalità test"
 
-msgid "SD 24HZ Progressive mode"
-msgstr "Modalità SD 24HZ Progressive"
+msgid "SD 24Hz Progressive mode"
+msgstr "Modalità SD 24Hz Progressive"
 
-msgid "SD 25/50HZ Interlace Mode"
-msgstr "Modalità SD 25/50HZ Interlacciata"
+msgid "SD 25/50Hz Interlace Mode"
+msgstr "Modalità SD 25/50Hz Interlacciata"
 
-msgid "SD 25/50HZ Progressive Mode"
-msgstr "Modalità SD 25/50HZ Progressive"
+msgid "SD 25/50Hz Progressive Mode"
+msgstr "Modalità SD 25/50Hz Progressive"
 
-msgid "SD 30/60HZ Interlace Mode"
-msgstr "Modalità SD 30/60HZ Interlacciata"
+msgid "SD 30/60Hz Interlace Mode"
+msgstr "Modalità SD 30/60Hz Interlacciata"
 
-msgid "SD 30/60HZ Progressive Mode"
-msgstr "Modalità SD 30/60HZ Progressive"
+msgid "SD 30/60Hz Progressive Mode"
+msgstr "Modalità SD 30/60Hz Progressive"
 
 msgid "Show 'Manual resolution' in extensions menu"
 msgstr ""
@@ -168,14 +168,14 @@ msgstr "Modalità HD Interlacciata"
 msgid "UHD Progressive Mode"
 msgstr "Modalità HD Progressive"
 
-msgid "Use 60HZ instead 30HZ"
+msgid "Use 60Hz instead 30Hz"
 msgstr ""
 
 msgid "Video: "
 msgstr ""
 
 #, python-format
-msgid "Videocontent: %sx%s%s %sHZ"
+msgid "Videocontent: %sx%s%s %sHz"
 msgstr ""
 
 #, python-format

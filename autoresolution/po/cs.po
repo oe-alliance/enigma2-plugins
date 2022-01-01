@@ -98,8 +98,8 @@ msgid "Exit"
 msgstr ""
 
 #, fuzzy
-msgid "FHD 50/60HZ Progressive Mode"
-msgstr "SD 30/60HZ progresivní režim"
+msgid "FHD 50/60Hz Progressive Mode"
+msgstr "SD 30/60Hz progresivní režim"
 
 msgid "HD Interlace Mode"
 msgstr "HD prokládaný režim"
@@ -138,20 +138,20 @@ msgstr ""
 msgid "Running in testmode"
 msgstr "Spustit v testovacím režimu"
 
-msgid "SD 24HZ Progressive mode"
-msgstr "SD 24HZ prograsivní režim"
+msgid "SD 24Hz Progressive mode"
+msgstr "SD 24Hz prograsivní režim"
 
-msgid "SD 25/50HZ Interlace Mode"
-msgstr "SD 25/50HZ prokládaný režim"
+msgid "SD 25/50Hz Interlace Mode"
+msgstr "SD 25/50Hz prokládaný režim"
 
-msgid "SD 25/50HZ Progressive Mode"
+msgid "SD 25/50Hz Progressive Mode"
 msgstr ""
 
-msgid "SD 30/60HZ Interlace Mode"
-msgstr "SD 30/60HZ prokládaný režim"
+msgid "SD 30/60Hz Interlace Mode"
+msgstr "SD 30/60Hz prokládaný režim"
 
-msgid "SD 30/60HZ Progressive Mode"
-msgstr "SD 30/60HZ progresivní režim"
+msgid "SD 30/60Hz Progressive Mode"
+msgstr "SD 30/60Hz progresivní režim"
 
 msgid "Show 'Manual resolution' in extensions menu"
 msgstr ""
@@ -170,14 +170,14 @@ msgstr "HD prokládaný režim"
 msgid "UHD Progressive Mode"
 msgstr "HD progresivní režim"
 
-msgid "Use 60HZ instead 30HZ"
+msgid "Use 60Hz instead 30Hz"
 msgstr ""
 
 msgid "Video: "
 msgstr ""
 
 #, python-format
-msgid "Videocontent: %sx%s%s %sHZ"
+msgid "Videocontent: %sx%s%s %sHz"
 msgstr ""
 
 #, python-format
