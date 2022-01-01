@@ -447,7 +447,7 @@ table.contentHd {
 
 #contentHdExt {
 	background: #000;
-	dipslay: block
+	display: block
 }
 
 #contentHdExt input {
@@ -584,7 +584,7 @@ a.sListSLink:hover {
 }
 
 #contentTable {
-	scrollbar: auto;
+	overflow: auto;
 	width: 785px;
 	margin: 0 auto 0 auto;
 }
@@ -595,7 +595,7 @@ a.sListSLink:hover {
 }
 
 #contentServices table {
-	scrollbar: auto
+	overflow: auto;
 }
 
 #bouquetTable {

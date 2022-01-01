@@ -106,11 +106,11 @@
 }
 
 #contentServices table {
-	scrollbar: auto;
+	overflow: auto;
 }
 
 #contentTable {
-	scrollbar: auto;
+	overflow: auto;
 	width: 785px;
 	margin: 0 auto;
 }
