@@ -285,7 +285,8 @@
 }
 
 #timerEditForm table {
-	cell-spacing: 1px;
+	border-spacing: 1px;
+	border-collapse: separate;
 }
 
 #tools h1, #about h1 {

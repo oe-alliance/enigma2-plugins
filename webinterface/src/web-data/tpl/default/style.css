@@ -952,7 +952,8 @@ a.tListEdit:hover {
 }
 
 #timerEditForm table {
-	cell-spacing: 1px
+	border-spacing: 1px;
+	border-collapse: separate;
 }
 
 a.tEditTag {
