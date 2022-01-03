@@ -944,7 +944,7 @@ msgstr "Podczas obsługi „Szybkiego skanowania” typ usługi jest ignorowany.
 msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr "Podczas obsługi „Szybkiego skanowania” typ usługi jest ignorowany. Nie musisz tego włączać, chyba że obraz obsługuje „Szybkie skanowanie” i używasz go."
 
-msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."
+msgid "When this is enabled AutoTimer will ONLY check for new events whilst in standby."
 msgstr "Gdy ta opcja jest włączona, AutoTimer sprawdza TYLKO nowe zdarzenia w stanie gotowości."
 
 msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."

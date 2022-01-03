@@ -947,7 +947,7 @@ msgstr "Kun \"Nopeaa hakua\" tuetaan, ei kanavan tyyppiä tarkisteta. Sinun ei t
 msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr "Kun \"Nopeaa hakua\" tuetaan, ei kanavan tyyppiä tarkisteta. Sinun ei tarvitse kytkeä tätä päälle, ellei käyttämäsi ohjelmisto tue \"Nopeaa hakua\" ja käytät sitä."
 
-msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."
+msgid "When this is enabled AutoTimer will ONLY check for new events whilst in standby."
 msgstr "Jos tämä on päällä, automaattiajastus hakee uusia ohjelmia vain valmiustilassa."
 
 msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."

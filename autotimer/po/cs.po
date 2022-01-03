@@ -961,7 +961,7 @@ msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to
 msgstr "Při podpoře Fast Scan se ignoruje typ programu. Tuto funkci nemusíte zapínat, jestliže máte a používáte image s podporou Fast Scan."
 
 #
-msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."
+msgid "When this is enabled AutoTimer will ONLY check for new events whilst in standby."
 msgstr "Jestliže je toto povoleno, AutoČasovač vyhledá JEN nové události během Stanby."
 
 msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."

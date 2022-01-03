@@ -949,7 +949,7 @@ msgstr "Olemasoleva \"Fast Scan\" toetuse puhul teenuse liiki ei kontrollita. Lu
 msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr "Olemasoleva \"Fast Scan\" toetuse puhul teenuse liiki ei kontrollita. Luba valik juhul kui \"Fast Scan\" on toetatud ja sa seda ka kasutad."
 
-msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."
+msgid "When this is enabled AutoTimer will ONLY check for new events whilst in standby."
 msgstr "Kui lubatud, otsib Autotaimer uusi saateid ainult ooteseisundis."
 
 msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."

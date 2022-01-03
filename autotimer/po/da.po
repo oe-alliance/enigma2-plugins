@@ -948,7 +948,7 @@ msgstr "Kanaltype ignoreres når \"Hurtigsøgning\" understøttes. Du behøver i
 msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr "Kanaltype ignoreres når \"Hurtigsøgning\" understøttes. Du behøver ikke at aktivere dette, med mindre dit Image understøtter \"Hurtigsøgning\" og du bruger det."
 
-msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."
+msgid "When this is enabled AutoTimer will ONLY check for new events whilst in standby."
 msgstr "Når dette er aktiveret vil AutoTimer KUN kikke efter nye begivenheder mens i Standby."
 
 msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."

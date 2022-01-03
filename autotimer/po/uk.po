@@ -946,7 +946,7 @@ msgstr "При підтримці «Швидке сканування» тип �
 msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr "При підтримці «Швидке сканування» тип каналу ігнорується. Вам необхідно включити його, якщо Ваш імідж не підтримує \"Швидке сканування\", і ви використовуєте його."
 
-msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."
+msgid "When this is enabled AutoTimer will ONLY check for new events whilst in standby."
 msgstr "Коли ця опція включена автотаймер буде ТІЛЬКИ перевірити наявність нових подій в режимі очікування."
 
 msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."

@@ -960,7 +960,7 @@ msgstr "عندما يتم دعم \"البحث السريع\" يتم تجاهل �
 msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr "عندما يتم دعم \"البحث السريع\" يتم تجاهل نوع الخدمة. لاتحتاج لتمكين هذا مالم تدعم صورة الخاص بك داخل خاصية \"البحث السريع\" وتقوم بإستخدمها."
 
-msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."
+msgid "When this is enabled AutoTimer will ONLY check for new events whilst in standby."
 msgstr "عندما يتم تمكين هذه المؤقت التلقائي سوف تحقق فقط عن أحداث جديدة بينما الجهاز في وضع الإستعداد."
 
 msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."

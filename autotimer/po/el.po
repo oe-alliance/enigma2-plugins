@@ -946,7 +946,7 @@ msgstr "Όταν υποστηρίζεται η \"Γρήγορη Ανίχνευσ
 msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr "Όταν υποστηρίζεται η \"Γρήγορη Ανίχνευση\" αγνοείται ο τύπος της υπηρεσίας. Δεν χρειάζεται να είναι ενεργό, εκτός και αν το Image σας υποστηρίζει τη \"Γρήγορη Ανίχνευση\" και τη χρησιμοποιείτε."
 
-msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."
+msgid "When this is enabled AutoTimer will ONLY check for new events whilst in standby."
 msgstr "Με αυτή την επιλογή, ο Αυτ. Χρ/κόπτης θα ελέγχει ΜΟΝΟ για νέα προγράμματα κατά την αναμονή."
 
 msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."

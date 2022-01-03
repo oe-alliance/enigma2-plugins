@@ -939,7 +939,7 @@ msgstr "Als het ondersteunen van \"Fast Scan\" is ingeschakeld, wordt het zender
 msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr "Als het ondersteunen van \"Fast Scan\" is ingeschakeld, wordt het zender type genegeerd. U hoeft dit niet te activeren, tenzij uw ontvanger \"Fast Scan\" ondersteunt en u het ook gebruikt."
 
-msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."
+msgid "When this is enabled AutoTimer will ONLY check for new events whilst in standby."
 msgstr "Als deze optie is ingeschakeld zal AutoTimer alleen tijdens standby naar nieuwe events zoeken."
 
 msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."

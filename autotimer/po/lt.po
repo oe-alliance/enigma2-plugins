@@ -1017,7 +1017,7 @@ msgstr "'Greitoje paieškoje', kanalų tipas yra ignoruojamas. Neverta čia įju
 msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr "'Greitoje paieškoje', kanalų tipas yra ignoruojamas. Neverta čia įjungti, nebent šis atvaizdas palaiko 'Greitą paiešką' ir jūs ją naudojate."
 
-msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."
+msgid "When this is enabled AutoTimer will ONLY check for new events whilst in standby."
 msgstr "Kai čia įjungta, budėjimo režime autolaikmatis žiūrės TIK naujų įvykių."
 
 msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."
