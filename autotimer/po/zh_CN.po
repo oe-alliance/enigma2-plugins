@@ -974,8 +974,8 @@ msgstr ""
 
 msgid ""
 "When this is enabled AutoTimer will ONLY check for new events whilst in "
-"stanadby."
-msgstr "当启用自动计时器只会检查新的事件,而在stanadby."
+"standby."
+msgstr "当启用自动计时器只会检查新的事件,而在standby."
 
 msgid ""
 "When this option is enabled the AutoTimer won't match events where another "
