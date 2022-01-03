@@ -36,7 +36,7 @@ def getAutoTimerSettingsDefinitions():
 	hours_minutes = config.plugins.autotimer.unit.value == "hour" and _("hours") or _("minutes")
 	return [
 		[_("Poll automatically"), config.plugins.autotimer.autopoll, "autopoll", _("If this is disabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button.")],
-		[_("Only poll while in standby"), config.plugins.autotimer.onlyinstandby, "onlyinstandby", _("When this is enabled AutoTimer will ONLY check for new events whilst in stanadby.")],
+		[_("Only poll while in standby"), config.plugins.autotimer.onlyinstandby, "onlyinstandby", _("When this is enabled AutoTimer will ONLY check for new events whilst in standby.")],
 		#TODO integrate this setting or leave commentted out
 		#[_("Delay after editing (in sec)"), config.plugins.autotimer.editdelay,"editdelay", _("This is the delay in seconds that the AutoTimer will wait after editing the AutoTimers.")],
 		[_("Startup delay (in min)"), config.plugins.autotimer.delay, "delay", _("Startup delay is the number of minutes before polling after a reboot, so as to not delay enigma2 startup time.")],
