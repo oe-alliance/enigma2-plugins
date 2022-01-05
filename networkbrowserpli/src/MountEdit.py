@@ -17,6 +17,19 @@ from enigma import ePoint
 from .AutoMount import iAutoMount, AutoMount
 from re import sub as re_sub
 
+# helper function to convert ips from a sring to a list of ints
+
+
+def convertIP(ip):
+	try:
+		strIP = ip.split('.')
+		ip = []
+		for x in strIP:
+			ip.append(int(x))
+	except:
+		ip = [0, 0, 0, 0]
+	return ip
+
 
 class AutoMountEdit(Screen, ConfigListScreen):
 	skin = """
@@ -40,7 +53,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		self.mountinfo = mountinfo
 		if self.mountinfo is None:
 			#Initialize blank mount enty
-			self.mountinfo = {'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
+			self.mountinfo = {'isMounted': False, 'active': False, 'ip': False, 'host': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 
 		self.applyConfigRef = None
 		self.updateConfigRef = None
@@ -92,6 +105,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		self.mounttypeEntry = None
 		self.activeEntry = None
 		self.ipEntry = None
+		self.hostEntry = None
 		self.sharedirEntry = None
 		self.optionsEntry = None
 		self.usernameEntry = None
@@ -99,54 +113,27 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		self.hdd_replacementEntry = None
 		self.sharetypelist = [("nfs", _("NFS share")), ("cifs", _("CIFS share"))]
 
-		if 'mounttype' in self.mountinfo:
-			mounttype = self.mountinfo['mounttype']
-			if not mounttype:
-				mounttype = "nfs"
-		else:
+		mounttype = self.mountinfo.get('mounttype')
+		if not mounttype:
 			mounttype = "nfs"
-
-		if 'active' in self.mountinfo:
-			active = self.mountinfo['active']
-			if active == 'True':
-				active = True
-			if active == 'False':
-				active = False
-		else:
-			active = True
-		if 'ip' in self.mountinfo:
-			if self.mountinfo['ip'] is False:
-				ip = [192, 168, 0, 0]
-			else:
-				ip = self.convertIP(self.mountinfo['ip'])
-		else:
-			ip = [192, 168, 0, 0]
-		if 'sharename' in self.mountinfo:
-			sharename = self.mountinfo['sharename']
-		else:
-			sharename = "Sharename"
-		if 'sharedir' in self.mountinfo:
-			sharedir = self.mountinfo['sharedir']
-		else:
-			sharedir = "/export/hdd"
-		if 'options' in self.mountinfo:
-			options = self.mountinfo['options']
-		else:
-			options = "rw,nolock,soft"
-		if 'username' in self.mountinfo:
-			username = self.mountinfo['username']
-		else:
-			username = ""
-		if 'password' in self.mountinfo:
-			password = self.mountinfo['password']
-		else:
-			password = ""
-		if 'hdd_replacement' in self.mountinfo:
-			hdd_replacement = self.mountinfo['hdd_replacement']
-			if hdd_replacement == 'True':
-				hdd_replacement = True
-			if hdd_replacement == 'False':
-				hdd_replacement = False
+		active = self.mountinfo.get('active', 'True') == 'True'
+		# Not that "host" takes precedence over "ip"
+		host = self.mountinfo.get('host', "")
+		if not host:
+			# In case host is something funky like False or None
+			host = ''
+		try:
+			ip = convertIP(self.mountinfo['ip'])
+		except Exception as ex:
+			print("[NWB] Invalid IP", ex)
+			ip = [0, 0, 0, 0]
+		sharename = self.mountinfo.get('sharename', "Sharename")
+		sharedir = self.mountinfo.get('sharedir', "/media/hdd")
+		username = self.mountinfo.get('username', "")
+		password = self.mountinfo.get('password', "")
+		hdd_replacement = self.mountinfo.get('hdd_replacement', False)
+		if hdd_replacement == 'True':
+			hdd_replacement = True
 		else:
 			hdd_replacement = False
 		if sharename is False:
@@ -161,9 +148,11 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			username = ""
 		if password is False:
 			password = ""
+		options = self.mountinfo.get('options', defaultOptions)
 
 		self.activeConfigEntry = NoSave(ConfigEnableDisable(default=active))
 		self.ipConfigEntry = NoSave(ConfigIP(default=ip))
+		self.hostConfigEntry = NoSave(ConfigText(default=host, visible_width=50, fixed_size=False))
 		self.sharenameConfigEntry = NoSave(ConfigText(default=sharename, visible_width=50, fixed_size=False))
 		self.sharedirConfigEntry = NoSave(ConfigText(default=sharedir, visible_width=50, fixed_size=False))
 		self.optionsConfigEntry = NoSave(ConfigText(default=defaultOptions, visible_width=50, fixed_size=False))
@@ -184,6 +173,8 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		self.list.append(self.mounttypeEntry)
 		self.ipEntry = getConfigListEntry(_("Server IP"), self.ipConfigEntry)
 		self.list.append(self.ipEntry)
+		self.hostEntry = getConfigListEntry(_("Host name"), self.hostConfigEntry)
+		self.list.append(self.hostEntry)
 		self.sharedirEntry = getConfigListEntry(_("Server share"), self.sharedirConfigEntry)
 		self.list.append(self.sharedirEntry)
 		self.hdd_replacementEntry = getConfigListEntry(_("use as HDD replacement"), self.hdd_replacementConfigEntry)
@@ -281,6 +272,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 				sharedir = self.sharedirConfigEntry.value
 			iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "sharename", self.sharenameConfigEntry.value)
 			iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "active", self.activeConfigEntry.value)
+			iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "host", self.hostConfigEntry.getText())
 			iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "ip", self.ipConfigEntry.getText())
 			iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "sharedir", sharedir)
 			iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "mounttype", self.mounttypeConfigEntry.value)
@@ -314,6 +306,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			data = {'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False,
 					'username': False, 'password': False, 'mounttype': False, 'options': False, 'hdd_replacement': False}
 			data['active'] = self.activeConfigEntry.value
+			data['host'] = self.hostConfigEntry.getText()
 			data['ip'] = self.ipConfigEntry.getText()
 			data['sharename'] = re_sub("\W", "", self.sharenameConfigEntry.value)
 			# "\W" matches everything that is "not numbers, letters, or underscores",where the alphabet defaults to ASCII.
