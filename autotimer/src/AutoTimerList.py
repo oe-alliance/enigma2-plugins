@@ -184,19 +184,19 @@ class AutoTimerList(MenuList):
 			timespan = (("  %s ... %s") % (FuzzyTime(begintime)[1], FuzzyTime(endtime)[1]))
 		else:
 			timespan = _("  Any time")
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, float(width) / 10 * 4.5, 2, width - float(width) / 10 * 4.5, rowHeight, 1, RT_HALIGN_RIGHT | RT_VALIGN_BOTTOM, timespan))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, int(float(width) / 10 * 4.5), 2, int(width - float(width) / 10 * 4.5), rowHeight, 1, RT_HALIGN_RIGHT | RT_VALIGN_BOTTOM, timespan))
 
 		if TextBoundary:
 			timespanWidth = getTextBoundarySize(self.instance, self.EventNameFont, self.l.getItemSize(), timespan).width()
 		else:
 			timespanWidth = float(width) / 10 * 2
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, statusIconWidth + typeIconWidth + iconMargin * 3, 2, width - statusIconWidth - typeIconWidth - iconMargin * 3 - timespanWidth, rowHeight, 1, RT_HALIGN_LEFT | RT_VALIGN_BOTTOM, timer.name))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, int(statusIconWidth + typeIconWidth + iconMargin * 3), 2, int(width - statusIconWidth - typeIconWidth - iconMargin * 3 - timespanWidth), rowHeight, 1, RT_HALIGN_LEFT | RT_VALIGN_BOTTOM, timer.name))
 
 		if timer.hasTimeframe():
 			begin = strftime("%a, %d %b", localtime(timer.getTimeframeBegin()))
 			end = strftime("%a, %d %b", localtime(timer.getTimeframeEnd()))
 			timeframe = (("%s ... %s") % (begin, end))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, iconMargin, rowSplit1, float(width) / 10 * 4.5, rowHeight, 2, RT_HALIGN_LEFT | RT_VALIGN_TOP, timeframe))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, iconMargin, rowSplit1, int(float(width) / 10 * 4.5), rowHeight, 2, RT_HALIGN_LEFT | RT_VALIGN_TOP, timeframe))
 
 		if timer.include[3]:
 			total = len(timer.include[3])
@@ -220,8 +220,8 @@ class AutoTimerList(MenuList):
 			days = ', '.join(days)
 		else:
 			days = _("Everyday")
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, float(width) / 10 * 5.5, rowSplit1, width - float(width) / 10 * 5.5, rowHeight, 2, RT_HALIGN_RIGHT | RT_VALIGN_TOP, days))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, iconMargin, rowSplit2, width - (iconMargin * 2), rowHeight, 0, RT_HALIGN_LEFT | RT_VALIGN_TOP, channel))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, int(float(width) / 10 * 5.5), rowSplit1, int(width - float(width) / 10 * 5.5), rowHeight, 2, RT_HALIGN_RIGHT | RT_VALIGN_TOP, days))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, iconMargin, rowSplit2, int(width - (iconMargin * 2)), rowHeight, 0, RT_HALIGN_LEFT | RT_VALIGN_TOP, channel))
 		try:
 			devide = LoadPixmap(resolveFilename(SCOPE_ACTIVE_SKIN, "div-h.png"))
 		except:
