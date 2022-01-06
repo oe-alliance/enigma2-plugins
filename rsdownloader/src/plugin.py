@@ -33,14 +33,13 @@ from twisted.internet import reactor
 from twisted.python import failure
 from twisted.web.client import getPage
 from xml.etree.cElementTree import parse
-import os
-import gettext
-import re
-import socket
-import sys
+from gettext import bindtextdomain, dgettext, gettext
+from re search, re.compile, DOTALL
+from socket import socket, AF_INET, SOCK_STREAM
+from sys import exc_info
 from six.moves.urllib.parse import urlparse, urlunparse
 from six.moves.urllib.request import Request, urlopen
-import six
+from six import PY3, ensure_binary, ensure_str, text_type
 from base64 import b64encode
 
 
@@ -86,15 +85,15 @@ PluginLanguagePath = "Extensions/RSDownloader/locale/"
 
 
 def localeInit():
-	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+	bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
 
 def _(txt):
-	if gettext.dgettext(PluginLanguageDomain, txt):
-		return gettext.dgettext(PluginLanguageDomain, txt)
+	if dgettext(PluginLanguageDomain, txt):
+		return dgettext(PluginLanguageDomain, txt)
 	else:
 		print("[%s] fallback to default translation for %s" % (PluginLanguageDomain, txt))
-		return gettext.gettext(txt)
+		return gettext(txt)
 
 
 localeInit()
@@ -144,8 +143,8 @@ class ProgressDownload:
 		if username and password:
 			url = scheme + '://' + host + ':' + str(port) + path
 			base64string = "%s:%s" % (username, password)
-			base64string = b64encode(base64string.encode('utf-8'))
-			if six.PY3:
+			base64string = b64encode(ensure_binary(base64string))
+			if PY3:
 				base64string.decode()
 			AuthHeaders = {"Authorization": "Basic %s" % base64string}
 			if "headers" in kwargs:
@@ -213,12 +212,12 @@ def reconnect(host='fritz.box', port=49000):
 		'',
 		http_body))
 	try:
-		s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		s = socket(AF_INET, SOCK_STREAM)
 		s.connect((host, port))
 		s.send(http_data)
 		s.close()
 	except:
-		writeLog("Error while reconnecting fritz.Box: " + str(sys.exc_info()))
+		writeLog("Error while reconnecting fritz.Box: " + str(exc_info()))
 
 ##############################################################################
 
@@ -635,7 +634,7 @@ class RS:
 			writeLog("Count of lists: " + str(len(file_list)))
 		except:
 			file_list = []
-			writeLog("Could not find any list: " + str(sys.exc_info()))
+			writeLog("Could not find any list: " + str(exc_info()))
 		added_downloads = 0
 		for x in file_list:
 			list = path + x
@@ -671,7 +670,7 @@ class RS:
 			file_list = listdir(path)
 		except:
 			file_list = []
-			writeLog("Error while searching for lists: " + str(sys.exc_info()))
+			writeLog("Error while searching for lists: " + str(exc_info()))
 
 		finished_downloads = []
 		for download in self.downloads:
@@ -692,7 +691,7 @@ class RS:
 					f.write(content)
 					f.close()
 				except:
-					writeLog("Error while cleaning list %s: %s" % (list, str(sys.exc_info())))
+					writeLog("Error while cleaning list %s: %s" % (list, str(exc_info())))
 		self.startDownloading()
 
 	def removeDownload(self, url):
@@ -714,7 +713,7 @@ class RS:
 			file_list = listdir(path)
 		except:
 			file_list = []
-			writeLog("Error while searching for lists: " + str(sys.exc_info()))
+			writeLog("Error while searching for lists: " + str(exc_info()))
 		for x in file_list:
 			list = path + x
 			try:
@@ -728,7 +727,7 @@ class RS:
 				f.write(content)
 				f.close()
 			except:
-				writeLog("Error while removing link from list: " + str(sys.exc_info()))
+				writeLog("Error while removing link from list: " + str(exc_info()))
 
 	def clearFinishedDownload(self, url):
 		idx = 0
@@ -948,7 +947,7 @@ class RSSearch(Screen):
 				self.session.open(MessageBox, (_("Error while adding %s to the download-list!") % url), MessageBox.TYPE_ERROR)
 
 	def search(self):
-		getPage(six.ensure_binary("http://rapidshare-search-engine.com/index-s_submit=Search&sformval=1&s_type=0&what=1&s=%s&start=%d.html" % (self.searchFor, self.curPage))).addCallback(self.searchCallback).addErrback(self.searchError)
+		getPage(ensure_binary("http://rapidshare-search-engine.com/index-s_submit=Search&sformval=1&s_type=0&what=1&s=%s&start=%d.html" % (self.searchFor, self.curPage))).addCallback(self.searchCallback).addErrback(self.searchError)
 
 	def searchCallback(self, html=""):
 		list = []
@@ -1088,7 +1087,7 @@ class UnrarEntry:
 						break
 				f.close()
 			except:
-				writeLog("Error while reading rar archive from list: " + str(sys.exc_info()))
+				writeLog("Error while reading rar archive from list: " + str(exc_info()))
 		if package:
 			self.package = package
 			if self.password:
@@ -1109,7 +1108,7 @@ class UnrarEntry:
 		try:
 			fileName = ("%s/%s_unrar.txt" % (config.plugins.RSDownloader.downloads_directory.value, self.name)).replace("//", "/")
 			f = open(fileName, "w")
-			result = six.ensure_str(result)
+			result = ensure_str(result)
 			f.write(result)
 			f.close()
 		except:
@@ -1202,7 +1201,7 @@ class Unrar:
 
 	def decode_charset(self, str, charset):
 		try:
-			uni = six.text_type(str, charset, 'strict')
+			uni = text_type(str, charset, 'strict')
 		except:
 			uni = str
 		return uni
@@ -1517,7 +1516,7 @@ class RSMain(ChangedScreen):
 			file_list = listdir(config.plugins.RSDownloader.lists_directory.value)
 		except:
 			file_list = []
-			writeLog("Error while searching for container files: " + str(sys.exc_info()))
+			writeLog("Error while searching for container files: " + str(exc_info()))
 		list = []
 		for file in file_list:
 			if file.lower().endswith(".ccf") or file.lower().endswith(".dlc") or file.lower().endswith(".rsdf"):
@@ -1542,7 +1541,7 @@ class RSMain(ChangedScreen):
 					f.close()
 					remove(file)
 				except:
-					writeLog("Error while writing list file: " + str(sys.exc_info()))
+					writeLog("Error while writing list file: " + str(exc_info()))
 				self.refreshTimer.stop()
 				rapidshare.startDownloading()
 				self.updateList()
