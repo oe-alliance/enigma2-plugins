@@ -37,13 +37,13 @@ from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.Label import Label
 
-import socket
-import struct
-import base64
-import os
+from socket import socket, AF_UNIX, SOCK_STREAM, timeout
+from struct import pack
+from base64 import b64decode, decodestring, b64encode
+from os import system
 
 from twisted.web.client import getPage
-import six
+from six import ensure_binary, ensure_str
 
 TPMD_DT_RESERVED = 0x00
 TPMD_DT_PROTOCOL_VERSION = 0x01
@@ -96,7 +96,7 @@ class genuineDreambox(Screen):
 		self.isStart = True
 		try:
 			self["resulttext"].setText("Please wait (Step 1)")
-			self.uds = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+			self.uds = socket(AF_UNIX, SOCK_STREAM)
 			self.uds.connect(("/var/run/tpmd_socket"))
 			self.uds.settimeout(5.0)
 		except:
@@ -106,7 +106,7 @@ class genuineDreambox(Screen):
 			if (self.stepFirst(TPMD_CMD_GET_DATA, [TPMD_DT_PROTOCOL_VERSION, TPMD_DT_TPM_VERSION, TPMD_DT_SERIAL])):
 				try:
 					url = ("https://www.dream-multimedia-tv.de/verify/challenge?serial=%s&version=%s" % (self.serial, self.tpmdVersion))
-					getPage(six.ensure_binary(url)).addCallback(self._gotPageLoadRandom).addErrback(self.errorLoad)
+					getPage(ensure_binary(url)).addCallback(self._gotPageLoadRandom).addErrback(self.errorLoad)
 				except:
 					self["resulttext"].setText(_("Can't connect to server. Please check your network!"))
 
@@ -119,7 +119,7 @@ class genuineDreambox(Screen):
 			url = self.buildUrlUpdate()
 			#url = ("https://www.dream-multimedia-tv.de/verify/challenge?serial=%s&version=%s" % (self.serial,self.tpmdVersion))
 			self["resulttext"].setText(_("Updating, please wait..."))
-			getPage(six.ensure_binary(url)).addCallback(self._gotPageLoadUpdate).addErrback(self.errorLoad)
+			getPage(ensure_binary(url)).addCallback(self._gotPageLoadUpdate).addErrback(self.errorLoad)
 		else:
 			print("not updating")
 
@@ -139,16 +139,16 @@ class genuineDreambox(Screen):
 	def _gotPageLoadRandom(self, data):
 		self["resulttext"].setText(_("Please wait (Step 2)"))
 		self.back = data.strip()
-		self.random = (self.formatList(base64.b64decode(self.back)))
+		self.random = (self.formatList(ensure_str(b64decode(self.back))))
 		self.level2_cert = None
 		self.level3_cert = None
 		if (self.stepSecond(TPMD_CMD_GET_DATA, [TPMD_DT_PROTOCOL_VERSION, TPMD_DT_TPM_VERSION, TPMD_DT_SERIAL, TPMD_DT_LEVEL2_CERT,
 				TPMD_DT_LEVEL3_CERT, TPMD_DT_FAB_CA_CERT, TPMD_DT_DATABLOCK_SIGNED])):
 			url = self.buildUrl()
-			getPage(six.ensure_binary(url)).addCallback(self._gotPageLoad).addErrback(self.errorLoad)
+			getPage(ensure_binary(url)).addCallback(self._gotPageLoad).addErrback(self.errorLoad)
 
 	def _gotPageLoadUpdate(self, data):
-		updatedata = base64.decodestring(data)
+		updatedata = decodestring(data)
 		if len(updatedata) != 409:
 			self["resulttext"].setText(_("Updating failed. Nothing is broken, just the update couldn't be applied."))
 			self.isStart = False
@@ -156,7 +156,7 @@ class genuineDreambox(Screen):
 			udsError = False
 
 			try:
-				self.uds = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+				self.uds = socket(AF_UNIX, SOCK_STREAM)
 				self.uds.connect(("/var/run/tpmd_socket"))
 				self.uds.settimeout(5.0)
 			except:
@@ -182,14 +182,14 @@ class genuineDreambox(Screen):
 	def buildUrl(self):
 		# NOTE: this is a modified base64 which uses -_ instead of +/ to avoid the need for escpaing + when using urlencode
 		tmpra = ("random=%s" % self.back.replace('+', '-').replace('/', '_'))
-		tmpl2 = ("&l2=%s" % base64.b64encode(self.level2_cert).replace('+', '-').replace('/', '_'))
+		tmpl2 = ("&l2=%s" % b64encode(ensure_binary(self.level2_cert.replace('+', '-').replace('/', '_'))))
 		if self.level3_cert is not None:
-			tmpl3 = ("&l3=%s" % base64.b64encode(self.level3_cert).replace('+', '-').replace('/', '_'))
+			tmpl3 = ("&l3=%s" % b64encode(ensure_binary(self.level3_cert.replace('+', '-').replace('/', '_'))))
 		else:
 			tmpl3 = ""
-		tmpfa = ("&fab=%s" % base64.b64encode(self.fab_ca_cert).replace('+', '-').replace('/', '_'))
-		tmpda = ("&data=%s" % base64.b64encode(self.datablock_signed).replace('+', '-').replace('/', '_'))
-		tmpr = ("&r=%s" % base64.b64encode(self.r).replace('+', '-').replace('/', '_'))
+		tmpfa = ("&fab=%s" % b64encode(ensure_binary(self.fab_ca_cert.replace('+', '-').replace('/', '_'))))
+		tmpda = ("&data=%s" % b64encode(ensure_binary(self.datablock_signed.replace('+', '-').replace('/', '_'))))
+		tmpr = ("&r=%s" % b64encode(ensure_binary(self.r)).replace('+', '-').replace('/', '_'))
 		return("https://www.dream-multimedia-tv.de/verify/challenge?%s%s%s%s%s%s&serial=%s" % (tmpra, tmpl2, tmpl3, tmpfa, tmpda, tmpr, self.serial))
 
 	def buildUrlUpdate(self):
@@ -280,16 +280,16 @@ class genuineDreambox(Screen):
 		udsError = False
 		sbuf = [(cmdTyp >> 8) & 0xff, (cmdTyp >> 0) & 0xff, (length >> 8) & 0xff, (length >> 0) & 0xff]
 		sbuf.extend(data[:length])
-		sbuf = struct.pack(str((length + 4)) + "B", *sbuf)
+		sbuf = pack(str((length + 4)) + "B", *sbuf)
 		try:
 			self.uds.send(sbuf)
 			udsError = False
-		except socket.timeout:
+		except timeout:
 			udsError = True
 		try:
 			rbuf = self.uds.recv(4)
 			udsError = False
-		except socket.timeout:
+		except timeout:
 			udsError = True
 
 		res = -1
@@ -299,13 +299,13 @@ class genuineDreambox(Screen):
 			if (leng != 4):
 				try:
 					res = self.uds.recv(leng[0])
-				except socket.timeout:
+				except timeout:
 					udsError = True
 			else:
 				return -1
 		else:
 			self["resulttext"].setText(_("Invalid response from Security service pls restart again"))
-			os.system("kill -9 $(pidof tpmd)")
+			system("kill -9 $(pidof tpmd)")
 			return -1
 		return res
 
