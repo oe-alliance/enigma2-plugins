@@ -34,7 +34,7 @@ from twisted.python import failure
 from twisted.web.client import getPage
 from xml.etree.cElementTree import parse
 from gettext import bindtextdomain, dgettext, gettext
-from re search, re.compile, DOTALL
+from re import search, compile, DOTALL
 from socket import socket, AF_INET, SOCK_STREAM
 from sys import exc_info
 from six.moves.urllib.parse import urlparse, urlunparse
@@ -182,7 +182,7 @@ def post(url, data):
 
 
 def matchGet(rex, string):
-	match = re.search(rex, string)
+	match = search(rex, string)
 	if match:
 		if len(match.groups()) == 0:
 			return string[match.span()[0]:match.span()[1]]
@@ -336,7 +336,7 @@ class RSDownload:
 					reconnect_script()
 					sleep(3)
 			data = get(self.url)
-			tmp = re.search(r"Or wait (\d+) minutes", data)
+			tmp = search(r"Or wait (\d+) minutes", data)
 			if tmp:
 				minutes = tmp.group(1)
 				writeLog("Free Uploaded.to-Download... must wait %s minutes: %s" % (minutes, self.url))
@@ -346,11 +346,11 @@ class RSDownload:
 				self.freeDownloadTimer.start((int(minutes) + 1) * 60000, 1)
 			else:
 				try:
-					url = re.search(r".*<form name=\"download_form\" method=\"post\" action=\"(.*)\">", data).group(1)
+					url = search(r".*<form name=\"download_form\" method=\"post\" action=\"(.*)\">", data).group(1)
 				except:
 					url = None
 				if url:
-					self.name = re.search(r"<td><b>\s+(.+)\s", data).group(1) + re.search(r"</td><td>(\..+)</td></tr>", data).group(1)
+					self.name = search(r"<td><b>\s+(.+)\s", data).group(1) + search(r"</td><td>(\..+)</td></tr>", data).group(1)
 					self.status = _("Downloading")
 					self.download = ProgressDownload(url, ("%s/%s" % (config.plugins.RSDownloader.downloads_directory.value, self.name)).replace("//", "/"))
 					self.download.addProgress(self.httpProgress)
@@ -469,7 +469,7 @@ class RSDownload:
 	def getYoutubeDownloadLink(self):
 		html = get(self.url)
 		if html != "":
-			reonecat = re.compile(r'<title>(.+?)</title>', re.DOTALL)
+			reonecat = compile(r'<title>(.+?)</title>', DOTALL)
 			titles = reonecat.findall(html)
 			if titles:
 				self.name = titles[0]
@@ -493,7 +493,7 @@ class RSDownload:
 			infopage = urlopen(inforequest).read()
 		except:
 			infopage = ""
-		mobj = re.search(r'(?m)&token=([^&]+)(?:&|$)', infopage)
+		mobj = search(r'(?m)&token=([^&]+)(?:&|$)', infopage)
 		if mobj:
 			token = unquote(mobj.group(1))
 			myurl = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en' % (video_id, token)
