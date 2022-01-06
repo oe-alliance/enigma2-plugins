@@ -16,7 +16,7 @@
 #===============================================================================
 
 from __future__ import print_function
-import six
+from six import PY2, PY3, ensure_binary, ensure_str
 
 from twisted.web.client import getPage as deferPage
 from xml.etree.cElementTree import fromstring as cElementTree_fromstring
@@ -41,7 +41,7 @@ from Screens.TimerEntry import TimerEntry
 from Tools.BoundFunction import boundFunction
 
 from six.moves.urllib.parse import urlparse, urlunparse, quote
-import requests
+from requests import get
 from base64 import b64encode
 #------------------------------------------------------------------------------------------
 
@@ -60,14 +60,14 @@ def localGetPage(url):
 	password = config.plugins.remoteTimer.password.value
 	if username and password:
 		base64string = "%s:%s" % (username, password)
-		base64string = b64encode(base64string.encode('utf-8'))
-		if six.PY3:
+		base64string = b64encode(ensure_binary(base64string))
+		if PY3:
 			base64string.decode()
 		AuthHeaders = {"Authorization": "Basic %s" % base64string}
 	else:
 		AuthHeaders = {}
 
-	return deferPage(six.ensure_binary(url), headers=AuthHeaders)
+	return deferPage(ensure_binary(url), headers=AuthHeaders)
 
 
 def getPage(url, callback, errback):
@@ -78,17 +78,17 @@ def getPage(url, callback, errback):
 	if username and password:
 		base64string = "%s:%s" % (username, password)
 		base64string = b64encode(base64string.encode('utf-8'))
-		if six.PY3:
+		if PY3:
 			base64string.decode()
 		AuthHeaders = {"Authorization": "Basic %s" % base64string}
 	else:
 		AuthHeaders = {}
 	print("[remotetimer] Headers=%s" % (AuthHeaders))
 	try:
-		r = requests.get(url, headers=AuthHeaders)
+		r = get(url, headers=AuthHeaders)
 		print("[remotetimer] statuscode=%s" % (r.status_code))
 		if r.status_code == 200:
-			data = six.ensure_str(r.content)
+			data = ensure_str(r.content)
 			callback(data)
 		else:
 			errormsg = "[CCcamInfo][getPage] incorrect response: %d" % r.status_code
@@ -211,9 +211,9 @@ class RemoteTimerScreen(Screen):
 			return [
 				(
 					E2Timer(
-						sref=str(timer.findtext("e2servicereference", '').encode("utf-8", 'ignore')) if six.PY2 else str(timer.findtext("e2servicereference", '')),
-						sname=str(timer.findtext("e2servicename", 'n/a').encode("utf-8", 'ignore')) if six.PY2 else str(timer.findtext("e2servicename", 'n/a')),
-						name=str(timer.findtext("e2name", '').encode("utf-8", 'ignore')) if six.PY2 else str(timer.findtext("e2name", '')),
+						sref=str(timer.findtext("e2servicereference", '').encode("utf-8", 'ignore')) if PY2 else str(timer.findtext("e2servicereference", '')),
+						sname=str(timer.findtext("e2servicename", 'n/a').encode("utf-8", 'ignore')) if PY2 else str(timer.findtext("e2servicename", 'n/a')),
+						name=str(timer.findtext("e2name", '').encode("utf-8", 'ignore')) if PY2 else str(timer.findtext("e2name", '')),
 						disabled=int(timer.findtext("e2disabled", 0)),
 						failed=int(timer.findtext("e2failed", 0)),
 						timebegin=int(timer.findtext("e2timebegin", 0)),
@@ -225,8 +225,8 @@ class RemoteTimerScreen(Screen):
 						justplay=int(timer.findtext("e2justplay", 0)),
 						eventId=int(timer.findtext("e2eit", -1)),
 						afterevent=int(timer.findtext("e2afterevent", 0)),
-						dirname=str(timer.findtext("e2dirname", '').encode("utf-8", 'ignore')) if six.PY2 else str(timer.findtext("e2dirname", '')),
-						description=str(timer.findtext("e2description", '').encode("utf-8", 'ignore')) if six.PY2 else str(timer.findtext("e2description", ''))
+						dirname=str(timer.findtext("e2dirname", '').encode("utf-8", 'ignore')) if PY2 else str(timer.findtext("e2dirname", '')),
+						description=str(timer.findtext("e2description", '').encode("utf-8", 'ignore')) if PY2 else str(timer.findtext("e2description", ''))
 					),
 					False
 				)
@@ -472,7 +472,7 @@ def parseXml(string):
 		dom = cElementTree_fromstring(string)
 		entry = dom.findtext('e2statetext')
 		if entry:
-			return entry.encode("utf-8", 'ignore') if six.PY2 else entry
+			return entry.encode("utf-8", 'ignore') if PY2 else entry
 		return "No entry in XML from the webserver"
 	except:
 		return "ERROR XML PARSE"
