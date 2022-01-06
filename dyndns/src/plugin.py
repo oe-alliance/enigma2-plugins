@@ -117,7 +117,7 @@ class DynDNSService:
 	def getURL(self, url):
 		request = Request(url)
 		base64string = '%s:%s' % (config.plugins.DynDNS.user.value, config.plugins.DynDNS.password.value)
-		base64string = b64encode(base64string.encode('utf-8'))
+		base64string = b64encode(ensure_binary(base64string))
 		if PY3:
 			base64string.decode()
 		request.add_header("Authorization", "Basic %s" % base64string)
