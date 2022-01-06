@@ -21,16 +21,16 @@ $Id: plugin.py 1591 2021-04-29 14:52:10Z michael $
 # pylint: disable=C0111,C0103,C0301,W0603,C0302
 
 from __future__ import division, absolute_import
-import re
-import time
-import os
-import traceback
-import json
-import base64
-import six
-import logging
-import binascii
-import locale
+from re import match, escape
+from time import ctime
+from os import path, remove, rename, getpid, listdir, access, X_OK
+from traceback import format_exc
+from json import loads, dump
+from base64 import b64encode, b64decode
+from six import PY3, ensure_text, ensure_str, ensure_binary, iteritems
+from logging import getLogger, FileHandler, Formatter
+from binascii import Error
+from locale import strxfrm
 from itertools import cycle
 from logging import NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL
 from xml.dom.minidom import parse
@@ -78,16 +78,16 @@ try:
 except:
 	from . import _  # @UnresolvedImport
 
-if six.PY3:
+if PY3:
 	import codecs
 	encode = lambda x: codecs.encode(x, "rot13")
 	decode = lambda x: codecs.decode(x, "rot13")
 else:
 	def encode(x):
-		return base64.b64encode(''.join(chr(ord(c) ^ ord(k)) for c, k in zip(x, cycle('secret key')))).strip()
+		return b64encode(ensure_binary(''.join(chr(ord(c) ^ ord(k)) for c, k in zip(x, cycle('secret key'))))).strip()
 
 	def decode(x):
-		return ''.join(chr(ord(c) ^ ord(k)) for c, k in zip(base64.b64decode(x), cycle('secret key')))
+		return ''.join(chr(ord(c) ^ ord(k)) for c, k in zip(ensure_str(b64decode(x)), cycle('secret key')))
 
 DESKTOP_WIDTH = getDesktop(0).size().width()
 DESKTOP_HEIGHT = getDesktop(0).size().height()
@@ -209,10 +209,10 @@ config.plugins.FritzCall.name = ConfigText(default="", fixed_size=False)
 config.plugins.FritzCall.number = ConfigText(default="", fixed_size=False)
 config.plugins.FritzCall.number.setUseableChars('0123456789')
 
-logger = logging.getLogger("FritzCall")
+logger = getLogger("FritzCall")
 logger.setLevel(int(config.plugins.FritzCall.debug.value))
-fileHandler = logging.FileHandler('/tmp/FritzDebug.log', mode='w')
-fileHandler.setFormatter(logging.Formatter('%(asctime)s %(levelname)-8s %(name)-26s %(funcName)s %(message)-15s', '%Y-%m-%d %H:%M:%S'))
+fileHandler = FileHandler('/tmp/FritzDebug.log', mode='w')
+fileHandler.setFormatter(Formatter('%(asctime)s %(levelname)-8s %(name)-26s %(funcName)s %(message)-15s', '%Y-%m-%d %H:%M:%S'))
 logger.addHandler(fileHandler)
 
 debug = logger.debug
@@ -229,12 +229,12 @@ avon = {}
 
 def initAvon():
 	avonFileName = resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/avon.dat")
-	if os.path.exists(avonFileName):
+	if path.exists(avonFileName):
 		for line in open(avonFileName):
 			try:
-				line = six.ensure_text(line)
+				line = ensure_text(line)
 			except UnicodeDecodeError:
-				line = six.ensure_text(line, "iso-8859-1")  # to deal with old avon.dat
+				line = ensure_text(line, "iso-8859-1")  # to deal with old avon.dat
 			if line[0] == '#':
 				continue
 			parts = line.split(':')
@@ -262,8 +262,8 @@ def resolveNumberWithAvon(number, countrycode):
 
 
 def handleReverseLookupResult(name):
-	name = six.ensure_text(name)
-	found = re.match("NA: ([^;]*);VN: ([^;]*);STR: ([^;]*);HNR: ([^;]*);PLZ: ([^;]*);ORT: ([^;]*)", name)
+	name = ensure_text(name)
+	found = match("NA: ([^;]*);VN: ([^;]*);STR: ([^;]*);HNR: ([^;]*);PLZ: ([^;]*);ORT: ([^;]*)", name)
 	if found:
 		(name, firstname, street, streetno, zipcode, city) = (found.group(1),
 												found.group(2),
@@ -296,7 +296,7 @@ cbcInfos = {}
 
 def initCbC():
 	callbycallFileName = resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/callbycall_world.xml")
-	if os.path.exists(callbycallFileName):
+	if path.exists(callbycallFileName):
 		dom = parse(callbycallFileName)
 		for top in dom.getElementsByTagName("callbycalls"):
 			for cbc in top.getElementsByTagName("country"):
@@ -317,7 +317,7 @@ def stripCbCPrefix(number, countrycode):
 				return number
 			length = int(cbc.getElementsByTagName("length")[0].childNodes[0].data)
 			prefix = cbc.getElementsByTagName("prefix")[0].childNodes[0].data
-			# if re.match('^'+prefix, number):
+			# if match('^'+prefix, number):
 			if number[:len(prefix)] == prefix:
 				return number[length:]
 	return number
@@ -886,19 +886,19 @@ class FritzMenu(Screen, HelpableScreen):
 				self["FBFInfo"].setText(_("Refreshing..."))
 			else:
 				if boxInfo:
-					self["FBFInfo"].setText(six.ensure_str(boxInfo))
+					self["FBFInfo"].setText(ensure_str(boxInfo))
 				else:
 					self["FBFInfo"].setText('BoxInfo ' + _('Status not available'))
 
 			if ipAddress:
 				if upTime:
-					self["FBFInternet"].setText('Internet ' + _('IP Address:') + ' ' + ipAddress + '\n' + _('Connected since') + ' ' + six.ensure_str(upTime))
+					self["FBFInternet"].setText('Internet ' + _('IP Address:') + ' ' + ipAddress + '\n' + _('Connected since') + ' ' + ensure_str(upTime))
 				else:
 					self["FBFInternet"].setText('Internet ' + _('IP Address:') + ' ' + ipAddress)
 				self["internet_inactive"].hide()
 				self["internet_active"].show()
 			elif upTime:
-				self["FBFInternet"].setText(_('Connected since') + ' ' + six.ensure_str(upTime))
+				self["FBFInternet"].setText(_('Connected since') + ' ' + ensure_str(upTime))
 				self["internet_inactive"].hide()
 				self["internet_active"].show()
 			else:
@@ -915,7 +915,7 @@ class FritzMenu(Screen, HelpableScreen):
 						message = "DSL"
 					if dslState[1]:
 						message = message + ' ' + dslState[1]
-					self["FBFDsl"].setText(six.ensure_str(message))
+					self["FBFDsl"].setText(ensure_str(message))
 				else:
 					self["dsl_active"].hide()
 					self["dsl_inactive"].show()
@@ -942,7 +942,7 @@ class FritzMenu(Screen, HelpableScreen):
 							message = message + ', ' + wlanState[2] + ' ' + _('devices active')
 					if len(wlanState) == 4:
 						message = message + ", " + wlanState[3]
-					self["FBFWlan"].setText(six.ensure_str(message))
+					self["FBFWlan"].setText(ensure_str(message))
 				else:
 					self["wlan_active"].hide()
 					self["wlan_inactive"].show()
@@ -1028,7 +1028,7 @@ class FritzMenu(Screen, HelpableScreen):
 				self["key_yellow"].setText(_("Activate WLAN guest access"))
 
 		except KeyError:
-			error("[FritzCallFBF] _fillMenu: %s", traceback.format_exc())
+			error("[FritzCallFBF] _fillMenu: %s", format_exc())
 
 	def _toggleWlan(self, callback=None):
 		self["FBFInfo"].setText(_("Setting...") + " WLAN")
@@ -1274,7 +1274,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 			return direct
 
 		# debug("[FritzDisplayCalls] %s" %repr(listOfCalls))
-		self.list = [(number, date[:6] + ' ' + date[9:14], pixDir(direct), six.ensure_str(remote), length, six.ensure_str(here)) for (number, date, direct, remote, length, here) in listOfCalls]
+		self.list = [(number, date[:6] + ' ' + date[9:14], pixDir(direct), ensure_str(remote), length, ensure_str(here)) for (number, date, direct, remote, length, here) in listOfCalls]
 		# debug("[FritzDisplayCalls] %s" %repr(self.list))
 		self["entries"].setList(self.list)
 		#=======================================================================
@@ -1296,7 +1296,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 				fullname = phonebook.search(cur[0])
 				if fullname:
 					# we have a name for this number
-					name = six.ensure_str(fullname)
+					name = ensure_str(fullname)
 					self.session.open(FritzOfferAction, self, number, name)
 				elif cur[3]:
 					name = cur[3]
@@ -1305,7 +1305,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 					# we don't
 					fullname = resolveNumberWithAvon(number, config.plugins.FritzCall.countrycode.value)
 					if fullname:
-						name = six.ensure_str(fullname)
+						name = ensure_str(fullname)
 						self.session.open(FritzOfferAction, self, number, name)
 					else:
 						self.session.open(FritzOfferAction, self, number)
@@ -1492,7 +1492,7 @@ class FritzCallPhonebook(object):
 		self.reload()
 
 	def reload(self):
-		debug("[FritzCallPhonebook] %s", time.ctime())
+		debug("[FritzCallPhonebook] %s", ctime())
 
 		# Beware: strings in phonebook.phonebook have to be in utf-8!
 		self.phonebook = {}
@@ -1500,15 +1500,15 @@ class FritzCallPhonebook(object):
 		if not config.plugins.FritzCall.enable.value:
 			return
 
-		phonebookFilenameOld = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.txt")
-		phonebookFilename = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.json")
+		phonebookFilenameOld = path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.txt")
+		phonebookFilename = path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.json")
 		if config.plugins.FritzCall.phonebook.value:
-			if os.path.exists(phonebookFilename):
+			if path.exists(phonebookFilename):
 				# read json
 				debug("[FritzCallPhonebook] read %s", phonebookFilename)
 
 				try:
-					for k, v in json.loads(six.ensure_text(open(phonebookFilename).read())).items():
+					for k, v in loads(ensure_text(open(phonebookFilename).read())).items():
 						# TODO if we change the value to a list of lines, we have to adapt this here
 						self.phonebook[k] = v
 				except (ValueError, UnicodeError, IOError) as e:
@@ -1575,20 +1575,20 @@ class FritzCallPhonebook(object):
 # 					name = name.strip() + "\n"
 # 					string = "%s#%s" % (number, name)
 # 					# Beware: strings in Phonebook.json have to be in utf-8!
-# 					f = open(os.path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.txt"), 'a')
+# 					f = open(path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.txt"), 'a')
 # 					f.write(string)
 # 					f.close()
-					phonebookFilename = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.json")
+					phonebookFilename = path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.json")
 					# check whether PhoneBook.json exists, if not drop empty JSOn file
-					if not os.path.isfile(phonebookFilename):
-						json.dump({}, open(phonebookFilename, "w"), ensure_ascii=False, indent=0, separators=(',', ': '), sort_keys=True)
+					if not path.isfile(phonebookFilename):
+						dump({}, open(phonebookFilename, "w"), ensure_ascii=False, indent=0, separators=(',', ': '), sort_keys=True)
 						info("[FritzCallPhonebook] empty Phonebook.json created")
 
 					phonebookTmp = {}
-					for k, v in json.loads(six.ensure_text(open(phonebookFilename).read())).items():
+					for k, v in loads(ensure_text(open(phonebookFilename).read())).items():
 						phonebookTmp[k] = v
 					phonebookTmp[number] = name
-					json.dump(phonebookTmp, open(phonebookFilename, "w"), ensure_ascii=False, indent=0, separators=(',', ': '), sort_keys=True)
+					dump(phonebookTmp, open(phonebookFilename, "w"), ensure_ascii=False, indent=0, separators=(',', ': '), sort_keys=True)
 					info("[FritzCallPhonebook] added %s with %s to Phonebook.json", number, name.strip())
 					return True
 				except IOError:
@@ -1600,10 +1600,10 @@ class FritzCallPhonebook(object):
 			del self.phonebook[number]
 			if config.plugins.FritzCall.phonebook.value:
 				try:
-# 					phonebookFilename = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.json")
+# 					phonebookFilename = path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.json")
 # 					debug("[FritzCallPhonebook] remove entry in Phonebook.json")
 # 					fOld = open(phonebookFilename, 'r')
-# 					fNew = open(phonebookFilename + str(os.getpid()), 'w')
+# 					fNew = open(phonebookFilename + str(getpid()), 'w')
 # 					line = fOld.readline()
 # 					while line:
 # 						elems = line.split('#')
@@ -1612,22 +1612,22 @@ class FritzCallPhonebook(object):
 # 						line = fOld.readline()
 # 					fOld.close()
 # 					fNew.close()
-# 					# os.remove(phonebookFilename)
+# 					# remove(phonebookFilename)
 # 					eBackgroundFileEraser.getInstance().erase(phonebookFilename)
-# 					os.rename(phonebookFilename + str(os.getpid()), 	phonebookFilename)
-					phonebookFilename = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.json")
+# 					rename(phonebookFilename + str(getpid()), 	phonebookFilename)
+					phonebookFilename = path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.json")
 					# check whether PhoneBook.json exists, if not drop empty JSOn file
-					if not os.path.isfile(phonebookFilename):
-						json.dump({}, open(phonebookFilename, "w"), ensure_ascii=False, indent=0, separators=(',', ': '), sort_keys=True)
+					if not path.isfile(phonebookFilename):
+						dump({}, open(phonebookFilename, "w"), ensure_ascii=False, indent=0, separators=(',', ': '), sort_keys=True)
 						info("[FritzCallPhonebook] empty Phonebook.json created")
 						return True
 
 					phonebookTmp = {}
-					for k, v in json.loads(six.ensure_text(open(phonebookFilename).read())).items():
+					for k, v in loads(ensure_text(open(phonebookFilename).read())).items():
 						phonebookTmp[k] = v
 					if number in phonebookTmp:
 						del phonebookTmp[number]
-						json.dump(phonebookTmp, open(phonebookFilename, "w"), ensure_ascii=False, indent=0, separators=(',', ': '), sort_keys=True)
+						dump(phonebookTmp, open(phonebookFilename, "w"), ensure_ascii=False, indent=0, separators=(',', ': '), sort_keys=True)
 						info("[FritzCallPhonebook] removed %s from Phonebook.json", number)
 					return True
 
@@ -1790,13 +1790,13 @@ class FritzCallPhonebook(object):
 			debug("[FritzDisplayPhonebook]")
 			self.sortlist = []
 			# Beware: strings in phonebook.phonebook are utf-8!
-			sortlistHelp = sorted(((name.lower(), name, number) for (number, name) in six.iteritems(phonebook.phonebook)), key=lambda x: locale.strxfrm(x[0]))
+			sortlistHelp = sorted(((name.lower(), name, number) for (number, name) in iteritems(phonebook.phonebook)), key=lambda x: strxfrm(x[0]))
 			for (low, name, number) in sortlistHelp:
 				if number == "01234567890":
 					continue
-				low = six.ensure_str(low)
-				name = six.ensure_str(name).strip()
-				number = six.ensure_str(number).strip()
+				low = ensure_str(low)
+				name = ensure_str(name).strip()
+				number = ensure_str(number).strip()
 
 				if filterNumber:
 					filterNumber = filterNumber.lower()
@@ -2143,11 +2143,11 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 		try:
 			config.plugins.FritzCall.guestPassword.value = decode(config.plugins.FritzCall.guestPassword.value)
-		except binascii.Error:
+		except Error:
 			config.plugins.FritzCall.guestPassword.value = ""
 		try:
 			config.plugins.FritzCall.password.value = decode(config.plugins.FritzCall.password.value)
-		except binascii.Error:
+		except Error:
 			config.plugins.FritzCall.password.value = ""
 
 		# get new list of locations for Phonebook.json
@@ -2426,35 +2426,35 @@ def findFace(number, name):
 		name = _("UNKNOWN")
 	# debug("[FritzCall] looking for: %s" %name)
 
-	facesDir = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallFaces")
+	facesDir = path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallFaces")
 	# debug("[FritzCall] looking in: %s" %facesDir)
 	facesFile = None
 
-	if not os.path.isdir(facesDir):
+	if not path.isdir(facesDir):
 		info("[FritzCall] findFace facesdir does not exist: %s", facesDir)
 	else:
-		files = os.listdir(facesDir)
+		files = listdir(facesDir)
 		# debug("[FritzCall] listdir: %s" %repr(files))
-		myFiles = [f for f in files if re.match(re.escape(number) + r"\.[png|PNG]", f)]
+		myFiles = [f for f in files if match(escape(number) + r"\.[png|PNG]", f)]
 		if not myFiles:
-			myFiles = [f for f in files if re.match(re.escape(name) + r"\.[png|PNG]", f)]
+			myFiles = [f for f in files if match(escape(name) + r"\.[png|PNG]", f)]
 
 		if not myFiles:
 			sep = name.find(' (')
 			if sep != -1:
 				name = name[:sep]
-			myFiles = [f for f in files if re.match(re.escape(name) + r"\.[png|PNG]", f)]
+			myFiles = [f for f in files if match(escape(name) + r"\.[png|PNG]", f)]
 
 		if myFiles:
 			# debug("[FritzCall] found: %s" %repr(myFiles))
-			facesFile = os.path.join(facesDir, myFiles[0])
+			facesFile = path.join(facesDir, myFiles[0])
 
 		if not facesFile and config.plugins.FritzCall.FritzExtendedSearchFaces.value:
 			for k in range(len(number) - 1, 0, -1):
 				# debug("[FritzCall] extended search: %s" %number[:k])
-				myFiles = [f for f in files if re.match(re.escape(number[:k]) + r"\.[png|PNG]", f)]
+				myFiles = [f for f in files if match(escape(number[:k]) + r"\.[png|PNG]", f)]
 				if myFiles:
-					facesFile = os.path.join(facesDir, myFiles[0])
+					facesFile = path.join(facesDir, myFiles[0])
 					break
 
 	if not facesFile:
@@ -2601,8 +2601,8 @@ def runUserActionScript(event, date, number, caller, phone):
 	# telephone number which is calling/is called
 	# caller's name and address, format Name\n Street\n ZIP City
 	# line/number which is called/which is used for calling
-	userActionScript = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallUserAction.sh")
-	if os.path.exists(userActionScript) and os.access(userActionScript, os.X_OK):
+	userActionScript = path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallUserAction.sh")
+	if path.exists(userActionScript) and access(userActionScript, X_OK):
 		cmd = userActionScript + ' "' + event + '" "' + date + '" "' + number + '" "' + caller + '" "' + phone + '"'
 		info("[FritzCall] calling: %s", cmd)
 		eConsoleAppContainer().execute(cmd)
@@ -2634,12 +2634,12 @@ mutedOnConnID = None
 
 
 def notifyCall(event, date, number, caller, phone, connID): # @UnusedVariable # pylint: disable=W0613
-	event = six.ensure_str(event)
-	date = six.ensure_str(date)
-	number = six.ensure_str(number)
-	caller = six.ensure_str(caller)
-	phone = six.ensure_str(phone)
-	connID = six.ensure_str(connID)
+	event = ensure_str(event)
+	date = ensure_str(date)
+	number = ensure_str(number)
+	caller = ensure_str(caller)
+	phone = ensure_str(phone)
+	connID = ensure_str(connID)
 	if Standby.inStandby is None or config.plugins.FritzCall.afterStandby.value == "each":
 		if event == "RING":
 			text = _("Incoming Call on %(date)s at %(time)s from\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nto: %(phone)s") % {'date': date[:8], 'time': date[9:], 'number': number, 'caller': caller, 'phone': phone}
@@ -2769,7 +2769,7 @@ class FritzProtocol(LineReceiver):  # pylint: disable=W0223
 # 15.07.06 00:38:58;DISCONNECT;1;0;
 # 15.07.06 00:39:22;RING;0;<from/extern>;<to/our msn>;
 # 15.07.06 00:39:27;DISCONNECT;0;0;
-		anEvent = six.ensure_str(line).split(';')
+		anEvent = ensure_str(line).split(';')
 		(self.date, self.event) = anEvent[0:2]
 		self.connID = anEvent[2]
 
@@ -2912,13 +2912,13 @@ class FritzClientFactory(ReconnectingClientFactory):
 
 		try:
 			decode(config.plugins.FritzCall.password.value)
-		except binascii.Error:
+		except Error:
 			Notifications.AddNotification(MessageBox, _("There might be a problem with your FritzCall %spassword.\nCheck in the configuration.") % "", type=MessageBox.TYPE_WARNING)
 			config.plugins.FritzCall.password.value = encode(config.plugins.FritzCall.password.value)
 			config.plugins.FritzCall.password.save()
 		try:
 			decode(config.plugins.FritzCall.guestPassword.value)
-		except binascii.Error:
+		except Error:
 			Notifications.AddNotification(MessageBox, _("There might be a problem with your FritzCall %spassword.\nCheck in the configuration.") % _("guest "), type=MessageBox.TYPE_WARNING)
 			config.plugins.FritzCall.guestPassword.value = encode(config.plugins.FritzCall.guestPassword.value)
 			config.plugins.FritzCall.guestPassword.save()
