@@ -11,7 +11,7 @@ global sessions
 from twisted.internet import reactor
 
 from six.moves.urllib.request import Request, urlopen
-from six import PY3
+from six import PY3, ensure_binary
 from base64 import b64encode
 
 

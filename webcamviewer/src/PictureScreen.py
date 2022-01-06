@@ -82,12 +82,13 @@ def download(url, file, contextFactory=None, *args, **kwargs):
 	if username and password:
 		from six import PY3
 		from base64 import b64encode
+		from six import ensure_binary
 
 		# twisted will crash if we don't rewrite this ;-)
 		url = scheme + '://' + host + ':' + str(port) + path
 
 		base64string = "%s:%s" % (username, password)
-		base64string = b64encode(base64string.encode('utf-8'))
+		base64string = b64encode(ensure_binary(base64string))
 		if PY3:
 			base64string.decode()
 		AuthHeaders = {"Authorization": "Basic %s" % base64string}
