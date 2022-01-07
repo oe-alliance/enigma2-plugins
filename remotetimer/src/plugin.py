@@ -16,7 +16,7 @@
 #===============================================================================
 
 from __future__ import print_function
-import six
+from six import PY3, ensure_binary, ensure_str
 
 from twisted.web.client import getPage as deferPage
 from xml.etree.cElementTree import fromstring as cElementTree_fromstring
@@ -26,9 +26,7 @@ from boxbranding import getImageDistro
 
 from Components.ActionMap import ActionMap
 from Components.Button import Button
-from Components.config import getConfigListEntry, config, \
-	ConfigSubsection, ConfigText, ConfigIP, ConfigYesNo, \
-	ConfigPassword, ConfigNumber, KEY_LEFT, KEY_RIGHT, KEY_0
+from Components.config import getConfigListEntry, config, ConfigSubsection, ConfigText, ConfigIP, ConfigYesNo, ConfigPassword, ConfigNumber, KEY_LEFT, KEY_RIGHT, KEY_0
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.Pixmap import Pixmap
 from Components.Label import Label
@@ -60,14 +58,14 @@ def localGetPage(url):
 	password = config.plugins.remoteTimer.password.value
 	if username and password:
 		base64string = "%s:%s" % (username, password)
-		base64string = b64encode(base64string.encode('utf-8'))
-		if six.PY3:
+		base64string = b64encode(ensure_binary(base64string))
+		if PY3:
 			base64string.decode()
 		AuthHeaders = {"Authorization": "Basic %s" % base64string}
 	else:
 		AuthHeaders = {}
 
-	return deferPage(six.ensure_binary(url), headers=AuthHeaders)
+	return deferPage(ensure_binary(url), headers=AuthHeaders)
 
 
 def getPage(url, callback, errback):
@@ -77,8 +75,8 @@ def getPage(url, callback, errback):
 	print("[remotetimer] username=%s password=%s" % (username, password))
 	if username and password:
 		base64string = "%s:%s" % (username, password)
-		base64string = b64encode(base64string.encode('utf-8'))
-		if six.PY3:
+		base64string = b64encode(ensure_binary(base64string))
+		if PY3:
 			base64string.decode()
 		AuthHeaders = {"Authorization": "Basic %s" % base64string}
 	else:
@@ -88,7 +86,7 @@ def getPage(url, callback, errback):
 		r = requests.get(url, headers=AuthHeaders)
 		print("[remotetimer] statuscode=%s" % (r.status_code))
 		if r.status_code == 200:
-			data = six.ensure_str(r.content)
+			data = ensure_str(r.content)
 			callback(data)
 		else:
 			errormsg = "[CCcamInfo][getPage] incorrect response: %d" % r.status_code
