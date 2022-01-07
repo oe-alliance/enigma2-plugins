@@ -84,10 +84,10 @@ if PY3:
 	decode = lambda x: codecs.decode(x, "rot13")
 else:
 	def encode(x):
-		return b64encode(ensure_binary(''.join(chr(ord(c) ^ ord(k)) for c, k in zip(x, cycle('secret key'))))).strip()
+		return b64encode(''.join(chr(ord(c) ^ ord(k)) for c, k in zip(x, cycle('secret key')))).strip()
 
 	def decode(x):
-		return ''.join(chr(ord(c) ^ ord(k)) for c, k in zip(ensure_str(b64decode(x)), cycle('secret key')))
+		return ''.join(chr(ord(c) ^ ord(k)) for c, k in zip(b64decode(x), cycle('secret key')))
 
 DESKTOP_WIDTH = getDesktop(0).size().width()
 DESKTOP_HEIGHT = getDesktop(0).size().height()
