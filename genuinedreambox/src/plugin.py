@@ -39,11 +39,11 @@ from Components.Label import Label
 
 import socket
 import struct
-import base64
 import os
 
+from six import ensure_binary
+from base64 import b64encode, b64decode
 from twisted.web.client import getPage
-import six
 
 TPMD_DT_RESERVED = 0x00
 TPMD_DT_PROTOCOL_VERSION = 0x01
@@ -139,7 +139,7 @@ class genuineDreambox(Screen):
 	def _gotPageLoadRandom(self, data):
 		self["resulttext"].setText(_("Please wait (Step 2)"))
 		self.back = data.strip()
-		self.random = (self.formatList(base64.b64decode(self.back)))
+		self.random = (self.formatList(ensure_str(base64.b64decode(self.back))))
 		self.level2_cert = None
 		self.level3_cert = None
 		if (self.stepSecond(TPMD_CMD_GET_DATA, [TPMD_DT_PROTOCOL_VERSION, TPMD_DT_TPM_VERSION, TPMD_DT_SERIAL, TPMD_DT_LEVEL2_CERT,
@@ -182,14 +182,14 @@ class genuineDreambox(Screen):
 	def buildUrl(self):
 		# NOTE: this is a modified base64 which uses -_ instead of +/ to avoid the need for escpaing + when using urlencode
 		tmpra = ("random=%s" % self.back.replace('+', '-').replace('/', '_'))
-		tmpl2 = ("&l2=%s" % base64.b64encode(self.level2_cert).replace('+', '-').replace('/', '_'))
+		tmpl2 = ("&l2=%s" % base64.b64encode(ensure_binary(self.level2_cert)).replace('+', '-').replace('/', '_'))
 		if self.level3_cert is not None:
-			tmpl3 = ("&l3=%s" % base64.b64encode(self.level3_cert).replace('+', '-').replace('/', '_'))
+			tmpl3 = ("&l3=%s" % base64.b64encode(ensure_binary(self.level3_cert)).replace('+', '-').replace('/', '_'))
 		else:
 			tmpl3 = ""
-		tmpfa = ("&fab=%s" % base64.b64encode(self.fab_ca_cert).replace('+', '-').replace('/', '_'))
-		tmpda = ("&data=%s" % base64.b64encode(self.datablock_signed).replace('+', '-').replace('/', '_'))
-		tmpr = ("&r=%s" % base64.b64encode(self.r).replace('+', '-').replace('/', '_'))
+		tmpfa = ("&fab=%s" % base64.b64encode(ensure_binary(self.fab_ca_cert)).replace('+', '-').replace('/', '_'))
+		tmpda = ("&data=%s" % base64.b64encode(ensure_binary(self.datablock_signed)).replace('+', '-').replace('/', '_'))
+		tmpr = ("&r=%s" % base64.b64encode(ensure_binary(self.r)).replace('+', '-').replace('/', '_'))
 		return("https://www.dream-multimedia-tv.de/verify/challenge?%s%s%s%s%s%s&serial=%s" % (tmpra, tmpl2, tmpl3, tmpfa, tmpda, tmpr, self.serial))
 
 	def buildUrlUpdate(self):
