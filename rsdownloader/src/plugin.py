@@ -40,7 +40,7 @@ import socket
 import sys
 from six.moves.urllib.parse import urlparse, urlunparse
 from six.moves.urllib.request import Request, urlopen
-from six import , ensure_binary, ensure_str, text_type
+from six import ensure_binary, ensure_str, text_type
 from base64 import b64encode
 
 
