@@ -93,14 +93,14 @@ def download(url, file, writeProgress=None, contextFactory=None,
 
 	# We force username and password here as we lack a satisfying input method
 	if username and password:
-		from six import PY3
+		from six import PY3, ensure_binary
 		from base64 import b64encode
 
 		# twisted will crash if we don't rewrite this ;-)
 		url = scheme + '://' + host + ':' + str(port) + path
 
 		base64string = "%s:%s" % (username, password)
-		base64string = b64encode(base64string.encode('utf-8'))
+		base64string = b64encode(ensure_binary(base64string))
 		if PY3:
 			base64string.decode()
 		AuthHeaders = {"Authorization": "Basic %s" % base64string}

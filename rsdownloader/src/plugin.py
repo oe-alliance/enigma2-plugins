@@ -40,7 +40,7 @@ import socket
 import sys
 from six.moves.urllib.parse import urlparse, urlunparse
 from six.moves.urllib.request import Request, urlopen
-import six
+from six import , ensure_binary, ensure_str, text_type
 from base64 import b64encode
 
 
@@ -144,8 +144,8 @@ class ProgressDownload:
 		if username and password:
 			url = scheme + '://' + host + ':' + str(port) + path
 			base64string = "%s:%s" % (username, password)
-			base64string = b64encode(base64string.encode('utf-8'))
-			if six.PY3:
+			base64string = b64encode(ensure_binary(base64string))
+			if PY3:
 				base64string.decode()
 			AuthHeaders = {"Authorization": "Basic %s" % base64string}
 			if "headers" in kwargs:
@@ -948,7 +948,7 @@ class RSSearch(Screen):
 				self.session.open(MessageBox, (_("Error while adding %s to the download-list!") % url), MessageBox.TYPE_ERROR)
 
 	def search(self):
-		getPage(six.ensure_binary("http://rapidshare-search-engine.com/index-s_submit=Search&sformval=1&s_type=0&what=1&s=%s&start=%d.html" % (self.searchFor, self.curPage))).addCallback(self.searchCallback).addErrback(self.searchError)
+		getPage(ensure_binary("http://rapidshare-search-engine.com/index-s_submit=Search&sformval=1&s_type=0&what=1&s=%s&start=%d.html" % (self.searchFor, self.curPage))).addCallback(self.searchCallback).addErrback(self.searchError)
 
 	def searchCallback(self, html=""):
 		list = []
@@ -1109,7 +1109,7 @@ class UnrarEntry:
 		try:
 			fileName = ("%s/%s_unrar.txt" % (config.plugins.RSDownloader.downloads_directory.value, self.name)).replace("//", "/")
 			f = open(fileName, "w")
-			result = six.ensure_str(result)
+			result = ensure_str(result)
 			f.write(result)
 			f.close()
 		except:
@@ -1202,7 +1202,7 @@ class Unrar:
 
 	def decode_charset(self, str, charset):
 		try:
-			uni = six.text_type(str, charset, 'strict')
+			uni = text_type(str, charset, 'strict')
 		except:
 			uni = str
 		return uni
