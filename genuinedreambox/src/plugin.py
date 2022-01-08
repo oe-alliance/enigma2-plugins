@@ -41,8 +41,8 @@ import socket
 import struct
 import os
 
-from six import ensure_binary
-from base64 import b64encode, b64decode
+from six import ensure_binary, ensure_str
+from base64 import b64encode, b64decode, decodestring
 from twisted.web.client import getPage
 
 TPMD_DT_RESERVED = 0x00
@@ -106,7 +106,7 @@ class genuineDreambox(Screen):
 			if (self.stepFirst(TPMD_CMD_GET_DATA, [TPMD_DT_PROTOCOL_VERSION, TPMD_DT_TPM_VERSION, TPMD_DT_SERIAL])):
 				try:
 					url = ("https://www.dream-multimedia-tv.de/verify/challenge?serial=%s&version=%s" % (self.serial, self.tpmdVersion))
-					getPage(six.ensure_binary(url)).addCallback(self._gotPageLoadRandom).addErrback(self.errorLoad)
+					getPage(ensure_binary(url)).addCallback(self._gotPageLoadRandom).addErrback(self.errorLoad)
 				except:
 					self["resulttext"].setText(_("Can't connect to server. Please check your network!"))
 
@@ -119,7 +119,7 @@ class genuineDreambox(Screen):
 			url = self.buildUrlUpdate()
 			#url = ("https://www.dream-multimedia-tv.de/verify/challenge?serial=%s&version=%s" % (self.serial,self.tpmdVersion))
 			self["resulttext"].setText(_("Updating, please wait..."))
-			getPage(six.ensure_binary(url)).addCallback(self._gotPageLoadUpdate).addErrback(self.errorLoad)
+			getPage(ensure_binary(url)).addCallback(self._gotPageLoadUpdate).addErrback(self.errorLoad)
 		else:
 			print("not updating")
 
@@ -145,10 +145,10 @@ class genuineDreambox(Screen):
 		if (self.stepSecond(TPMD_CMD_GET_DATA, [TPMD_DT_PROTOCOL_VERSION, TPMD_DT_TPM_VERSION, TPMD_DT_SERIAL, TPMD_DT_LEVEL2_CERT,
 				TPMD_DT_LEVEL3_CERT, TPMD_DT_FAB_CA_CERT, TPMD_DT_DATABLOCK_SIGNED])):
 			url = self.buildUrl()
-			getPage(six.ensure_binary(url)).addCallback(self._gotPageLoad).addErrback(self.errorLoad)
+			getPage(ensure_binary(url)).addCallback(self._gotPageLoad).addErrback(self.errorLoad)
 
 	def _gotPageLoadUpdate(self, data):
-		updatedata = base64.decodestring(data)
+		updatedata = decodestring(data)
 		if len(updatedata) != 409:
 			self["resulttext"].setText(_("Updating failed. Nothing is broken, just the update couldn't be applied."))
 			self.isStart = False
@@ -182,14 +182,14 @@ class genuineDreambox(Screen):
 	def buildUrl(self):
 		# NOTE: this is a modified base64 which uses -_ instead of +/ to avoid the need for escpaing + when using urlencode
 		tmpra = ("random=%s" % self.back.replace('+', '-').replace('/', '_'))
-		tmpl2 = ("&l2=%s" % b64encode(ensure_binary(self.level2_cert)).replace('+', '-').replace('/', '_'))
+		tmpl2 = ("&l2=%s" % ensure_str(b64encode(ensure_binary(self.level2_cert))).replace('+', '-').replace('/', '_'))
 		if self.level3_cert is not None:
-			tmpl3 = ("&l3=%s" % b64encode(ensure_binary(self.level3_cert)).replace('+', '-').replace('/', '_'))
+			tmpl3 = ("&l3=%s" % ensure_str(b64encode(ensure_binary(self.level3_cert))).replace('+', '-').replace('/', '_'))
 		else:
 			tmpl3 = ""
-		tmpfa = ("&fab=%s" % b64encode(ensure_binary(self.fab_ca_cert)).replace('+', '-').replace('/', '_'))
-		tmpda = ("&data=%s" % b64encode(ensure_binary(self.datablock_signed)).replace('+', '-').replace('/', '_'))
-		tmpr = ("&r=%s" % b64encode(ensure_binary(self.r)).replace('+', '-').replace('/', '_'))
+		tmpfa = ("&fab=%s" % ensure_str(b64encode(ensure_binary(self.fab_ca_cert))).replace('+', '-').replace('/', '_'))
+		tmpda = ("&data=%s" % ensure_str(b64encode(ensure_binary(self.datablock_signed))).replace('+', '-').replace('/', '_'))
+		tmpr = ("&r=%s" % ensure_str(b64encode(ensure_binary(self.r))).replace('+', '-').replace('/', '_'))
 		return("https://www.dream-multimedia-tv.de/verify/challenge?%s%s%s%s%s%s&serial=%s" % (tmpra, tmpl2, tmpl3, tmpfa, tmpda, tmpr, self.serial))
 
 	def buildUrlUpdate(self):
