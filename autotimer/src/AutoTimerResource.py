@@ -455,7 +455,7 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 
 		# Always zap
 		if hasattr(timer, 'always_zap'):
-			timer.always_zap = get("always_zap", timer.always_zap)
+			timer.always_zap = int(get("always_zap", "0"))
 
 		if newTimer:
 			autotimer.add(timer)
