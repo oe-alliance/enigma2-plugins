@@ -73,28 +73,27 @@ def getPage(url, callback, errback):
 	username = config.plugins.remoteTimer.username.value
 	password = config.plugins.remoteTimer.password.value
 	print("[remotetimer] username=%s password=%s" % (username, password))
+	AuthHeaders = {}
 	if username and password:
 		base64string = "%s:%s" % (username, password)
 		base64string = b64encode(ensure_binary(base64string))
 		if PY3:
 			base64string.decode()
 		AuthHeaders = {"Authorization": "Basic %s" % base64string}
-	else:
-		AuthHeaders = {}
-	print("[remotetimer] Headers=%s" % (AuthHeaders))
-	try:
-		r = requests.get(url, headers=AuthHeaders)
-		print("[remotetimer] statuscode=%s" % (r.status_code))
-		if r.status_code == 200:
-			data = ensure_str(r.content)
-			callback(data)
-		else:
-			errormsg = "[CCcamInfo][getPage] incorrect response: %d" % r.status_code
-			errback(errormsg)
-	except Exception as err:
-		print("%s: '%s'" % (type(err).__name__, err))
-		import traceback
-		traceback.print_exc()
+		print("[remotetimer] Headers=%s" % (AuthHeaders))
+		try:
+			r = requests.get(url, headers=AuthHeaders)
+			print("[remotetimer] statuscode=%s" % (r.status_code))
+			if r.status_code == 200:
+				data = ensure_str(r.content)
+				callback(data)
+			else:
+				errormsg = "[CCcamInfo][getPage] incorrect response: %d" % r.status_code
+				errback(errormsg)
+		except Exception as err:
+			print("%s: '%s'" % (type(err).__name__, err))
+			import traceback
+			traceback.print_exc()
 
 
 class RemoteService:
