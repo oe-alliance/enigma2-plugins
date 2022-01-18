@@ -111,13 +111,13 @@ class PluginIpkUpdate(Screen): #, IsNewVersionCheck):
     def go(self):
         returnValue = self["myMenu"].l.getCurrentSelection()[1]
         if returnValue is not None:
-            if returnValue is "install":
+            if returnValue == "install":
                 if self.new_wersion_url != False:
                     self.libmediaInfoInstallation = InstallDownloadableContent(self.session, [self.new_wersion_url])
                     self.libmediaInfoInstallation.__install__()
                 else:
                     self.session.openWithCallback(self.__close_screen__, MessageBox, _("There is problem with server connection. \n Please try again later."), MessageBox.TYPE_INFO)
-            elif returnValue is "exit":
+            elif returnValue == "exit":
                 self.__close_screen__()
 
     def __close_screen__(self, callback=None):
