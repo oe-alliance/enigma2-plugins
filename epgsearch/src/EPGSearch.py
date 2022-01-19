@@ -7,7 +7,7 @@ from enigma import eEPGCache, eTimer, eServiceReference, eServiceCenter, RT_HALI
 import NavigationInstance
 
 from Tools.LoadPixmap import LoadPixmap
-from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, isPluginInstalled
 from Tools.Alternatives import GetWithAlternative
 from ServiceReference import ServiceReference
 
@@ -471,7 +471,7 @@ class EPGSearch(EPGSelection):
 				(_("Import from AutoTimer"), self.importFromAutoTimer),
 				(_("Save search as AutoTimer"), self.addAutoTimer),
 			))
-		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/IMDb/plugin.py")):
+		if isPluginInstalled("IMDb"):
 			options.append((_("Open selected in IMDb"), self.openImdb))
 		options.append((_("Setup"), self.setup))
 

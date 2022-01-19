@@ -14,9 +14,8 @@ from enigma import eTimer
 from keyids import KEYIDS
 from Screens.InfoBar import MoviePlayer
 from Screens.Screen import Screen
-from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, isPluginInstalled
 from Tools.KeyBindings import addKeyBinding
-import os
 import gettext
 import keymapparser
 
@@ -200,16 +199,14 @@ def seekbarBack(instance):
 MoviePlayer.seekFwdManual = seekbar
 MoviePlayer.seekBackManual = seekbarBack
 
-dvdPlayer = "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/DVDPlayer/plugin.py")
-if fileExists(dvdPlayer) or fileExists("%sc" % dvdPlayer):
+if isPluginInstalled("DVDPlayer"):
 	from Plugins.Extensions.DVDPlayer.plugin import DVDPlayer
 	DVDPlayer.seekFwdManual = seekbar
 	DVDPlayer.seekBackManual = seekbarBack
 else:
 	DVDPlayer = None
 
-videodb = "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/VideoDB/plugin.py")
-if fileExists(videodb):
+if isPluginInstalled("VideoDB"):
 	from Plugins.Extensions.VideoDB.Player import VideoDBPlayer
 	VideoDBPlayer.seekFwdManual = seekbar
 	VideoDBPlayer.seekBackManual = seekbarBack

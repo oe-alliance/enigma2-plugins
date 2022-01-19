@@ -125,7 +125,7 @@ class NETcasterScreenBrowser(Screen):
         global plugin_path, myname
         interfacepath = plugin_path + "/interface"
         for iface in os_listdir(interfacepath):
-            if iface.endswith(".py") and not iface.startswith("_"):
+            if iface.endswith(".py") and not iface.startswith("_"): # FIXME pyc/pyo
                 pluginp = '.'.join(["Plugins", "Extensions", myname, "interface", iface.replace(".py", "")])
                 plugin = my_import(pluginp)
                 self.pluginlist.append(plugin.Interface(self.session, cbListLoaded=self.onStreamlistLoaded))

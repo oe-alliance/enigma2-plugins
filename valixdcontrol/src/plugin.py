@@ -128,7 +128,7 @@ class XDsetup(ConfigListScreen, Screen):
 									}, -1)
 		self.onLayoutFinish.append(self.UpdateComponents)
 
-	def UpdateComponents(self):
+	def UpdateComponents(self): # FIXME pyc/pyo
 		system('cp ' + self.komponente + 'vRendVolumeText.py /usr/lib/enigma2/python/Components/Renderer/vRendVolumeText.py')
 		system('cp ' + self.komponente + 'vRendMaxTemp.py /usr/lib/enigma2/python/Components/Renderer/vRendMaxTemp.py')
 		system('cp ' + self.komponente + 'vRendChNumber.py /usr/lib/enigma2/python/Components/Renderer/vRendChNumber.py')
@@ -137,7 +137,7 @@ class XDsetup(ConfigListScreen, Screen):
 		system('cp ' + self.komponente + 'vConvSmartInfo.py /usr/lib/enigma2/python/Components/Converter/vConvSmartInfo.py')
 		system('cp ' + self.komponente + 'vConvClockToText.py /usr/lib/enigma2/python/Components/Converter/vConvClockToText.py')
 
-	def save(self):
+	def save(self): # FIXME pyc/pyo
 		CompsAreOK = False
 		if fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendChNumber.py") \
 			and fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendMaxTemp.py") \

@@ -10,7 +10,7 @@ from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Components.PluginComponent import PluginComponent, plugins
 from Components.Label import Label
-from Tools.Directories import resolveFilename, fileExists, SCOPE_SKIN_IMAGE, SCOPE_PLUGINS
+from Tools.Directories import resolveFilename, fileExists, SCOPE_SKIN_IMAGE, SCOPE_PLUGINS, isPluginInstalled
 from Tools.BoundFunction import boundFunction
 from Screens.InfoBarGenerics import InfoBarPlugins
 from Components.config import config, ConfigSubsection, ConfigYesNo
@@ -542,7 +542,7 @@ def autostart(reason, *args, **kwargs):
 				fixed.append(plugin)
 
 			# let movieepg fix extensions list sorting if installed, else do this ourselves
-			if not fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/MovieEPG/plugin.py")):
+			if not isPluginInstalled("MovieEPG"):
 				def InfoBarPlugins_getPluginList(self, *args, **kwargs):
 					l = InfoBarPlugins.pluginSort_baseGetPluginList(self, *args, **kwargs)
 					try:

@@ -31,7 +31,7 @@ from Screens.Standby import Standby, TryQuitMainloop
 from Screens.PVRState import TimeshiftState
 from ServiceReference import ServiceReference
 from Tools import Directories, ASCIItranslit, Notifications
-from Tools.Directories import fileExists, copyfile, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
+from Tools.Directories import fileExists, copyfile, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS, isPluginInstalled
 from Plugins.Plugin import PluginDescriptor
 from RecordTimer import RecordTimer, RecordTimerEntry, parseEvent
 
@@ -1770,7 +1770,7 @@ class PermanentTimeShiftSetup(Screen, ConfigListScreen):
 			))
 
 		# Permanent Recording Hack
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/HouseKeeping/plugin.py"):
+		if isPluginInstalled("HouseKeeping"):
 			self.list.append(getConfigListEntry(_("Beta: Enable Permanent Recording?"), config.plugins.pts.permanentrecording))
 
 		self["config"].list = self.list

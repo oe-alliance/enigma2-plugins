@@ -58,7 +58,7 @@ class Modules(object):
 				sys.path.append(root)
 
 		# List files
-		files = [fname[:-3] for fname in os.listdir(path) if fname.endswith(".py") and not fname.startswith("__")]
+		files = [fname[:-3] for fname in os.listdir(path) if fname.endswith(".py") and not fname.startswith("__")]  # FIXME pyc
 		log.debug(files)
 		if not files:
 			files = [fname[:-4] for fname in os.listdir(path) if fname.endswith(".pyo")]

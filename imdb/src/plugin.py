@@ -22,7 +22,7 @@ from Components.ProgressBar import ProgressBar
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
 from Components.MovieList import KNOWN_EXTENSIONS
-from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, isPluginInstalled
 import os
 import re
 import six
@@ -387,7 +387,7 @@ class IMDB(Screen, HelpableScreen):
 					(_("Save current Poster and Details as .txt"), self.savePosterTxtDetails),
 				))
 
-		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/YTTrailer/plugin.py")):
+		if isPluginInstalled("YTTrailer"):
 			list.extend((
 				(_("Play Trailer"), self.openYttrailer),
 				(_("Search Trailer"), self.searchYttrailer),

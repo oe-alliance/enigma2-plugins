@@ -6,7 +6,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from xml.etree.cElementTree import parse
 
 
-def importSingleWidget(session, widgetdir):
+def importSingleWidget(session, widgetdir):  # FIXME pyc/pyo
     print("importing widget from", widgetdir)
     widgetname = widgetdir.split("/")[-1]
     module_name, ext = splitext(widgetname + ".widget.py") # Handles no-extension files, etc.
@@ -27,7 +27,7 @@ def importSingleWidget(session, widgetdir):
     print("#" * 20)
 
 
-def importWidgets(session,):
+def importWidgets(session,):  # FIXME pyc/pyo
     widgets = []
     dir = abspath(resolveFilename(SCOPE_PLUGINS) + "Extensions/Widgets/widgets/")
     for widgetdir in listdir(dir):
