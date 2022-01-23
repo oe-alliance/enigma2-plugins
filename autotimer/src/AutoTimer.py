@@ -893,11 +893,10 @@ class AutoTimer:
 					# If the similarity percent is higher then 0.7 it is a very close match
 					foundShort = (0.7 < SequenceMatcher(lambda x: x == " ", shortdesc1, shortdesc2).ratio())
 					if foundShort:
-						if timer.searchForDuplicateDescription == 2:
-							if extdesc1 and extdesc2:
-								# Some channels indicate replays in the extended descriptions
-								# If the similarity percent is higher then 0.7 it is a very close match
-								retValue = (0.7 < SequenceMatcher(lambda x: x == " ", extdesc1, extdesc2).ratio())
+						if (timer.searchForDuplicateDescription == 2) and (extdesc1 and extdesc2):
+							# Some channels indicate replays in the extended descriptions
+							# If the similarity percent is higher then 0.7 it is a very close match
+							retValue = (0.7 < SequenceMatcher(lambda x: x == " ", extdesc1, extdesc2).ratio())
 						else:
 							retValue = True
 			else:
