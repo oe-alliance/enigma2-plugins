@@ -898,6 +898,8 @@ class AutoTimer:
 								# Some channels indicate replays in the extended descriptions
 								# If the similarity percent is higher then 0.7 it is a very close match
 								retValue = (0.7 < SequenceMatcher(lambda x: x == " ", extdesc1, extdesc2).ratio())
+							else:
+								retValue = (extdesc1 == extdesc2)
 						else:
 							retValue = True
 			else:
