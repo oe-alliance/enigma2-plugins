@@ -7,6 +7,7 @@ from Plugins.Plugin import PluginDescriptor
 from Tools.Downloader import downloadWithProgress
 from enigma import ePicLoad, eServiceCenter
 from Screens.Screen import Screen
+from Screens.Setup import Setup
 from Screens.HelpMenu import HelpableScreen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
@@ -930,7 +931,35 @@ class IMDbLCDScreen(Screen):
 		self["headline"] = Label(_("IMDb Plugin"))
 
 
-class IMDbSetup(Screen, ConfigListScreen):
+class IMDbSetup(Setup):
+	skin = """
+		<screen position="340,70" size="600,620">
+			<widget source="key_red" render="Label" position="0,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" backgroundColor="#9f1313" font="Regular;18" transparent="1"/>
+			<widget source="key_green" render="Label" position="150,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" backgroundColor="#1f771f" font="Regular;18" transparent="1"/>
+			<widget name="HelpWindow" pixmap="skin_default/buttons/vkey_icon.png" position="450,550" zPosition="1" size="541,720" transparent="1" alphatest="on"/>
+			<ePixmap name="red" position="0,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on"/>
+			<ePixmap name="green" position="150,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on"/>
+			<widget name="config" position="10,50" size="580,350" scrollbarMode="showOnDemand"/>
+			<widget name="description" position="50,385" size="500,80" font="Regular;18" halign="center" valign="top" transparent="0" zPosition="1"/>
+		</screen>"""
+
+	def __init__(self, session):
+		Setup.__init__(self, session, "imdb", plugin="Extensions/IMDb", PluginLanguageDomain="IMDb")
+		self.setTitle(_("IMDb Setup"))
+
+	def keySave(self):
+		self.saveAll()
+		for pl in pluginlist:
+			if not pl[0].value:
+				for plugin in plugins.getPlugins(pl[1].where):
+					if plugin is pl[1]:
+						plugins.removePlugin(plugin)
+
+		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+		self.close()
+
+
+class _IMDbSetup(Screen, ConfigListScreen):
 	skin = """<screen name="EPGSearchSetup" position="center,center" size="565,370">
 		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
@@ -1094,7 +1123,11 @@ def main(session, eventName="", **kwargs):
 
 
 def setup(session, **kwargs):
-	session.open(IMDbSetup)
+	# TODO test the new code on old images
+	if six.PY2:
+		session.open(_IMDbSetup)
+	else:
+		session.open(IMDbSetup)
 
 
 def movielistSearch(session, serviceref, **kwargs):
