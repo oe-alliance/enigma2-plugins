@@ -11,7 +11,7 @@ from Screens.Setup import Setup
 from Screens.HelpMenu import HelpableScreen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
-from Components.ActionMap import ActionMap, HelpableActionMap
+from Components.ActionMap import HelpableActionMap
 from Components.Pixmap import Pixmap
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
@@ -38,8 +38,7 @@ except ImportError as ie:
 
 
 # Configuration
-from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo, ConfigText
-from Components.ConfigList import ConfigListScreen
+from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText
 from Components.PluginComponent import plugins
 
 
@@ -932,17 +931,6 @@ class IMDbLCDScreen(Screen):
 
 
 class IMDbSetup(Setup):
-	skin = """
-		<screen position="340,70" size="600,620">
-			<widget source="key_red" render="Label" position="0,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" backgroundColor="#9f1313" font="Regular;18" transparent="1"/>
-			<widget source="key_green" render="Label" position="150,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" backgroundColor="#1f771f" font="Regular;18" transparent="1"/>
-			<widget name="HelpWindow" pixmap="skin_default/buttons/vkey_icon.png" position="450,550" zPosition="1" size="541,720" transparent="1" alphatest="on"/>
-			<ePixmap name="red" position="0,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on"/>
-			<ePixmap name="green" position="150,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on"/>
-			<widget name="config" position="10,50" size="580,350" scrollbarMode="showOnDemand"/>
-			<widget name="description" position="50,385" size="500,80" font="Regular;18" halign="center" valign="top" transparent="0" zPosition="1"/>
-		</screen>"""
-
 	def __init__(self, session):
 		Setup.__init__(self, session, "imdb", plugin="Extensions/IMDb", PluginLanguageDomain="IMDb")
 		self.setTitle(_("IMDb Setup"))
@@ -957,155 +945,6 @@ class IMDbSetup(Setup):
 
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		self.close()
-
-
-class _IMDbSetup(Screen, ConfigListScreen):
-	skin = """<screen name="EPGSearchSetup" position="center,center" size="565,370">
-		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-		<widget name="config" position="5,50" size="555,250" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="skin_default/div-h.png" position="0,301" zPosition="1" size="565,2" />
-		<widget source="help" render="Label" position="5,305" size="555,63" font="Regular;21" />
-	</screen>"""
-
-	def __init__(self, session):
-		Screen.__init__(self, session)
-		self.skinName = ["Setup"]
-
-		self['footnote'] = Label(_("* = Restart Required"))
-		self["HelpWindow"] = Pixmap()
-		self["HelpWindow"].hide()
-		self["VKeyIcon"] = Boolean(False)
-
-		# Summary
-		self.setup_title = _("IMDb Setup")
-		self.onChangedEntry = []
-
-		# Initialize widgets
-		self["key_green"] = StaticText(_("OK"))
-		self["key_red"] = StaticText(_("Cancel"))
-		self["description"] = Label("")
-
-		# Define Actions
-		self["actions"] = ActionMap(["SetupActions"],
-			{
-				"cancel": self.keyCancel,
-				"save": self.keySave,
-			}, -2)
-
-		self["VirtualKB"] = ActionMap(["VirtualKeyboardActions"],
-		{
-			"showVirtualKeyboard": self.KeyText,
-		}, -2)
-		self["VirtualKB"].setEnabled(False)
-
-		self.list = []
-		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
-		self.createSetup()
-		if not self.handleInputHelpers in self["config"].onSelectionChanged:
-			self["config"].onSelectionChanged.append(self.handleInputHelpers)
-		self.changedEntry()
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def createSetup(self):
-		self.list = []
-		self.list.append(getConfigListEntry(_("Show search in plugin browser"), config.plugins.imdb.showinplugins, _("Enable this to be able to access IMDb searches from within the plugin browser.")))
-		self.list.append(getConfigListEntry(_("Show setup in plugin browser"), config.plugins.imdb.showsetupinplugins, _("Enable this to be able to access IMDb search setup from within the plugin browser.")))
-		self.list.append(getConfigListEntry(_("Show in movie list"), config.plugins.imdb.showinmovielist, _("Enable this to be able to access IMDb searches from within the movie list."))),
-		self.list.append(getConfigListEntry(_("Words / phrases to ignore "), config.plugins.imdb.ignore_tags, _("This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas.")))
-		self.list.append(getConfigListEntry(_("Show full movie or series name in title menu"), config.plugins.imdb.showlongmenuinfo, _("Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name.")))
-		self.list.append(getConfigListEntry(_("Show episode and year information in cast list"), config.plugins.imdb.showepisodeinfo, _("Show episode and year information for cast when available. Takes effect after the next fetch of show details.")))
-		self["config"].list = self.list
-		self["config"].l.setList(self.list)
-
-	def handleInputHelpers(self):
-		if self["config"].getCurrent() is not None:
-			try:
-				if isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword):
-					if "VKeyIcon" in self:
-						self["VirtualKB"].setEnabled(True)
-						self["VKeyIcon"].boolean = True
-					if "HelpWindow" in self:
-						if self["config"].getCurrent()[1].help_window.instance is not None:
-							helpwindowpos = self["HelpWindow"].getPosition()
-							from enigma import ePoint
-							self["config"].getCurrent()[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
-				else:
-					if "VKeyIcon" in self:
-						self["VirtualKB"].setEnabled(False)
-						self["VKeyIcon"].boolean = False
-			except:
-				if "VKeyIcon" in self:
-					self["VirtualKB"].setEnabled(False)
-					self["VKeyIcon"].boolean = False
-		else:
-			if "VKeyIcon" in self:
-				self["VirtualKB"].setEnabled(False)
-				self["VKeyIcon"].boolean = False
-
-	def HideHelp(self):
-		try:
-			if isinstance(self["config"].getCurrent()[1], ConfigText):
-				if self["config"].getCurrent()[1].help_window.instance is not None:
-					self["config"].getCurrent()[1].help_window.hide()
-		except:
-			pass
-
-	def KeyText(self):
-		if isinstance(self["config"].getCurrent()[1], ConfigText):
-			if self["config"].getCurrent()[1].help_window.instance is not None:
-				self["config"].getCurrent()[1].help_window.hide()
-		self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title=self["config"].getCurrent()[0], text=self["config"].getCurrent()[1].getValue())
-
-	def VirtualKeyBoardCallback(self, callback=None):
-		if callback is not None and len(callback):
-			self["config"].getCurrent()[1].setValue(callback)
-			self["config"].invalidate(self["config"].getCurrent())
-
-	def layoutFinished(self):
-		self.setTitle(_(self.setup_title))
-
-	# for summary:
-	def changedEntry(self):
-		self.item = self["config"].getCurrent()
-		for x in self.onChangedEntry:
-			x()
-		try:
-			if isinstance(self["config"].getCurrent()[1], ConfigYesNo) or isinstance(self["config"].getCurrent()[1], ConfigSelection):
-				self.createSetup()
-		except:
-			pass
-
-	def getCurrentEntry(self):
-		return self["config"].getCurrent() and self["config"].getCurrent()[0] or ""
-
-	def getCurrentValue(self):
-		return self["config"].getCurrent() and str(self["config"].getCurrent()[1].getText()) or ""
-
-	def getCurrentDescription(self):
-		return self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or ""
-
-	def createSummary(self):
-		from Screens.Setup import SetupSummary
-		return SetupSummary
-
-	def keySave(self):
-		self.saveAll()
-
-		for pl in pluginlist:
-			if not pl[0].value:
-				for plugin in plugins.getPlugins(pl[1].where):
-					if plugin is pl[1]:
-						plugins.removePlugin(plugin)
-
-		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
-		self.close()
-
-	def createSummary(self):
-		from Screens.Setup import SetupSummary
-		return SetupSummary
 
 
 def eventinfo(session, eventName="", **kwargs):
@@ -1123,11 +962,7 @@ def main(session, eventName="", **kwargs):
 
 
 def setup(session, **kwargs):
-	# TODO test the new code on old images
-	if six.PY2:
-		session.open(_IMDbSetup)
-	else:
-		session.open(IMDbSetup)
+	session.open(IMDbSetup)
 
 
 def movielistSearch(session, serviceref, **kwargs):
