@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 # for localized messages
-from . import _, allowShowOrbital, updateOrbposConfig, purgeOrbposConfig, getOrbposConfList, orbposChoicelist
+from . import _, allowShowOrbital, updateOrbposConfig, purgeOrbposConfig, getOrbposConfList
 
 # GUI (Screens)
 from Screens.Screen import Screen
@@ -8,6 +8,7 @@ from Components.ConfigList import ConfigListScreen
 
 # GUI (Summary)
 from Screens.Setup import SetupSummary
+from Screens.Setup import Setup
 
 # GUI (Components)
 from Components.ActionMap import ActionMap
@@ -20,15 +21,77 @@ from Components.Sources.Boolean import Boolean
 from Components.config import config, getConfigListEntry
 from Components.PluginComponent import plugins
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-from Tools.BoundFunction import boundFunction
 
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
 
-from collections import defaultdict
+
+class EPGSearchSetup(Setup):
+	def __init__(self, session):
+		nChoices = updateOrbposConfig(save=True)
+		if nChoices <= 2:
+			config.plugins.epgsearch.enableorbpos.value = False
+		self.allowShowOrbital = allowShowOrbital
+		Setup.__init__(self, session, "epgsearch", plugin="Extensions/EPGSearch", PluginLanguageDomain="EPGSearch")
+		self.setTitle(_("EPGSearch Setup"))
+		self.notifiers = (
+			config.plugins.epgsearch.scope,
+			config.plugins.epgsearch.enableorbpos,
+			config.plugins.epgsearch.invertorbpos,
+			config.plugins.epgsearch.numorbpos,
+		)
+		self.onClose.append(self.clearNotifiers)
+		self.updateConfig()
+		self.addNotifiers()
+
+	def addNotifiers(self):
+		for n in self.notifiers:
+			n.addNotifier(self.updateConfig, initial_call=False)
+
+	def clearNotifiers(self):
+		for n in self.notifiers:
+			n.removeNotifier(self.updateConfig)
+
+	def createSetup(self):
+		Setup.createSetup(self)
+		for configListItem in self.createOrbposConfig():
+			self.list.append(configListItem)
+
+	def updateConfig(self, configElement=None):
+		self.createSetup()
+
+	def createOrbposConfig(self):
+		# Only show source/orbpos choices if there is more than
+		# one choice (not including "disabled")
+		nChoices = updateOrbposConfig()
+		if nChoices > 2:
+			configList = [getConfigListEntry(_("Filter results by source"), config.plugins.epgsearch.enableorbpos, _("Include or exclude results depending on their source (e.g. by satellite)"))]
+			if config.plugins.epgsearch.enableorbpos.value:
+				configList += [
+					getConfigListEntry(_("Include/exclude sources"), config.plugins.epgsearch.invertorbpos, _("Use source restrictions below to only include results from the sources, or exclude them.")),
+					getConfigListEntry(_("Number of inclusions/exclusions"), config.plugins.epgsearch.numorbpos, _("Number of filters for inclusion/exclusion of results")),
+				]
+				restrictionName = _("Include results from") if config.plugins.epgsearch.invertorbpos.value == _("include") else _("Exclude results from")
+				restrictionDesc = _("Include/exclude search results from this type of source")
+				configList += [
+					getConfigListEntry(restrictionName, confItem, restrictionDesc)
+					for confItem in getOrbposConfList(includeDisabled=True)
+				]
+			return configList
+		return []
+
+	def keySave(self):
+		purgeOrbposConfig()
+		if not config.plugins.epgsearch.showinplugins.value:
+			for plugin in plugins.getPlugins(PluginDescriptor.WHERE_PLUGINMENU):
+				if plugin.name == _("EPGSearch"):
+					plugins.removePlugin(plugin)
+
+		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+		Setup.keySave(self)
 
 
-class EPGSearchSetup(Screen, ConfigListScreen):
+class _EPGSearchSetup(Screen, ConfigListScreen):
 	skin = """<screen name="EPGSearchSetup" position="center,center" size="565,370">
 		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />

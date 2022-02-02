@@ -23,7 +23,7 @@ def main(session, *args, **kwargs):
 		event = info.getEvent(0) # 0 = now, 1 = next
 		name = event and event.getEventName() or ''
 	else:
-		name = self.session.nav.getCurrentlyPlayingServiceReference().toString()
+		name = session.nav.getCurrentlyPlayingServiceReference().toString()
 		name = name.split('/')
 		name = name[-1]
 		name = name.replace('.', ' ')

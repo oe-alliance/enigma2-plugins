@@ -1,0 +1,12 @@
+<setupxml>
+	<setup key="epgsearch" title="EPGSearch Setup">
+		<item level="0" text="Search scope" description="Control where to search in the EPG. When 'all bouquets' is set, all bouquets are searched, even if 'Enable multiple bouquets' is disabled.">config.plugins.epgsearch.scope</item>
+		<item level="0" conditional="config.plugins.epgsearch.scope.value == 'ask'" text="Default scope when asked" description="Sets the default search scope when the user is asked.">config.plugins.epgsearch.defaultscope</item>
+		<item level="0" conditional="self.allowShowOrbital == True" text="Show orbital position" description="Show satellite orbital positions in the search results.">config.plugins.epgsearch.showorbital</item>
+		<item level="0" text="Search type" description="Set type of match used to compare program titles with the search string.">config.plugins.epgsearch.search_type</item>
+		<item level="0" text="Search strictness" description="Is the search case-sensitive or case-insensitive?">config.plugins.epgsearch.search_case</item>
+		<item level="0" text="Show in plugin browser" description="Enable this to allow access to EPG Search from within the plugin browser.">config.plugins.epgsearch.showinplugins</item>
+		<item level="0" text="Length of history" description="Maximum number of entries in the search history. Set this to 0 to disable search history.">config.plugins.epgsearch.history_length</item>
+		<item level="0" text="Search encoding" description="Choose the encoding type for searches, helpful for foreign languages.">config.plugins.epgsearch.encoding</item>
+	</setup>
+</setupxml>
