@@ -31,6 +31,7 @@ from os import path as os_path
 from os.path import isfile
 from pickle import dump as pickle_dump, load as pickle_load
 from time import mktime, strptime
+from functools import cmp_to_key
 
 # ENIGMA IMPORTS
 from Components.ActionMap import HelpableActionMap, ActionMap
@@ -381,12 +382,14 @@ class BirthdayReminder(Screen, HelpableScreen):
 			self["name"].instance.setForegroundColor(parseColor("white"))
 			self["birthday"].instance.setForegroundColor(parseColor("yellow"))
 			self["age"].instance.setForegroundColor(parseColor("white"))
-			self.birthdaytimer.bDayList.sort(key=itemgetter(1), cmp=self.compareDates)
+			#self.birthdaytimer.bDayList.sort(key=itemgetter(1), cmp=self.compareDates)
+			self.birthdaytimer.bDayList.sort(key=cmp_to_key(self.compareDates))
 		else: # sort by age
 			self["name"].instance.setForegroundColor(parseColor("white"))
 			self["birthday"].instance.setForegroundColor(parseColor("white"))
 			self["age"].instance.setForegroundColor(parseColor("yellow"))
-			self.birthdaytimer.bDayList.sort(key=itemgetter(1), cmp=self.compareAges)
+			#self.birthdaytimer.bDayList.sort(key=itemgetter(1), cmp=self.compareAges)
+			self.birthdaytimer.bDayList.sort(key=cmp_to_key(self.compareAges))
 
 		self["list"].setList(self.birthdaytimer.getBirthdayList())
 
@@ -395,6 +398,8 @@ class BirthdayReminder(Screen, HelpableScreen):
 			self["list"].setIndex(newIdx)
 
 	def compareDates(self, x, y):
+		x = x[1]
+		y = y[1]
 		today = date.today()
 
 		try:
@@ -424,6 +429,8 @@ class BirthdayReminder(Screen, HelpableScreen):
 		return ts1 - ts2
 
 	def compareAges(self, x, y):
+		x = x[1]
+		y = y[1]
 		ageX = getAge(x)
 		ageY = getAge(y)
 
