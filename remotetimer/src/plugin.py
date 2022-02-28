@@ -9,7 +9,7 @@
 #
 # Copyright (C) 2009 by nixkoenner@newnigma2.to
 # http://newnigma2.to
-# 
+#
 # Copyright (C) 2020 by Mr.Servo, jbleyel
 #
 # License: GPL
