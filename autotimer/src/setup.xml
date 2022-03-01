@@ -1,5 +1,5 @@
 <setupxml>
-	<setup key="autotimer" title="Autotimer Settings" showOpenWebIF="1">
+	<setup key="autotimer" title="Autotimer Settings" showOpenWebIf="1">
 		<item level="0" text="Poll automatically" description="Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button.">config.plugins.autotimer.autopoll</item>
 		<item level="0" text="Only poll while in standby" description="When this is enabled AutoTimer will ONLY check for new events whilst in standby.">config.plugins.autotimer.onlyinstandby</item>
 		<item level="0" text="Startup delay (in min)" description="This is the delay in minutes that the AutoTimer will wait on initial launch to not delay enigma2 startup time.">config.plugins.autotimer.delay</item>
