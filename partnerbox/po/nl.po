@@ -8,37 +8,36 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 19:06+0430\n"
-"PO-Revision-Date: 2013-07-25 17:48+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"PO-Revision-Date: 2022-03-02 22:10+0100\n"
+"Last-Translator: Snoete\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: NETHERLANDS\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, python-format
 msgid "%02d.%02d - %02d.%02d"
-msgstr ""
+msgstr "%02d.%02d - %02d.%02d"
 
 msgid "%a"
-msgstr ""
+msgstr "%a"
 
 #, python-format
 msgid "%d min"
-msgstr ""
+msgstr "%d min"
 
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
 msgid "%e/%m, %-H:%M"
-msgstr ""
+msgstr "%e/%m, %-H:%M"
 
 #, python-format
 msgid "%s%d min"
-msgstr ""
+msgstr "%s%d min"
 
 msgid "(ZAP)"
 msgstr "(ZAP)"
@@ -47,68 +46,67 @@ msgid "<unknown>"
 msgstr "<onbekend>"
 
 msgid "Abort"
-msgstr "Breek af"
+msgstr "Annuleren"
 
 msgid "Activate Picture in Picture"
-msgstr ""
+msgstr "Activeer Picture in Picture"
 
 msgid "Add"
-msgstr "Voeg toe"
+msgstr "Toevoegen"
 
-#, fuzzy
 msgid "Add internal timer"
-msgstr "Voeg timer toe"
+msgstr "Interne timer toevoegen"
 
 msgid "Add timer"
-msgstr "Voeg timer toe"
+msgstr "Timer toevoegen"
 
 msgid "After event"
-msgstr "Na event"
+msgstr "Na opname"
 
 msgid "Alternative"
-msgstr ""
+msgstr "Alternatieven"
 
 msgid "Alternative services are not supported!"
-msgstr ""
+msgstr "Alternatieve zenders worden niet ondersteund!"
 
 msgid "Apply"
-msgstr "Pas toe"
+msgstr "Bevestigen"
 
 msgid "Attention, this is repeated timer!\n"
-msgstr ""
+msgstr "Let op, dit is een herhalende timer!\n"
 
 msgid "Bouquet List"
-msgstr ""
+msgstr "Favorietenlijst"
 
 msgid "Cancel"
-msgstr "Annuleer"
+msgstr "Annuleren"
 
 msgid "Change pin code"
-msgstr "Verander PIN"
+msgstr "PIN wijzigen"
 
 msgid "Channel"
-msgstr "Kanaal"
+msgstr "Zender"
 
 msgid "Choice list Partnerbox"
-msgstr ""
+msgstr "Keuzelijst Partnerbox"
 
 msgid "Choose action:"
-msgstr ""
+msgstr "Maak uw keuze:"
 
 msgid "Choose bouquet"
-msgstr ""
+msgstr "Kies favorietenlijst"
 
 msgid "Clean up"
-msgstr "Opschonen"
+msgstr "Opruimen"
 
 msgid "Cleaning up finished timer entries..."
-msgstr "Bezig met opschonen afgewerkte timers..."
+msgstr "Bezig met opruimen van uitgevoerde timers..."
 
 msgid "DVB-C"
-msgstr ""
+msgstr "DVB-C"
 
 msgid "DVB-T"
-msgstr ""
+msgstr "DVB-T"
 
 msgid "DVR"
 msgstr "PVR"
@@ -116,31 +114,28 @@ msgstr "PVR"
 msgid "Date"
 msgstr "Datum"
 
-#, fuzzy
 msgid "Deep Standby"
-msgstr "ga naar deep standby"
+msgstr "Deep Stand-by"
 
 msgid "Delete"
 msgstr "Verwijder"
 
-#, fuzzy
 msgid "Delete timer"
-msgstr "Verwijder timer"
+msgstr "Timer verwijderen"
 
 msgid "Description"
 msgstr "Beschrijving"
 
 msgid "Disable Picture in Picture"
-msgstr ""
+msgstr "Picture in Picture uitschakelen"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Do you really want to delete the remote timer \n"
 "%s ?"
 msgstr ""
-"Wilt u echt de timer \n"
-"%s  \n"
-"verwijderen?"
+"Wilt u echt deze remote timer verwijderen \n"
+"%s ?"
 
 #, python-format
 msgid ""
@@ -155,38 +150,34 @@ msgid "EPG Selection"
 msgstr "EPG Selectie"
 
 msgid "Edit"
-msgstr "Bewerk:"
+msgstr "Wijzigen:"
 
 msgid "Edit internal timer"
-msgstr ""
+msgstr "Interne timer wijzigen"
 
-#, fuzzy
 msgid "Edit remote timer"
-msgstr "Remote Timer"
+msgstr "Remote timer wijzigen"
 
-#, fuzzy
 msgid "Enable Partnerbox-Function in Channel Selector"
-msgstr "Schakel Partnerbox-Functie in TimerEvent in"
+msgstr "Partnerbox in de Zenderlijst activeren"
 
 msgid "Enable Partnerbox-Function in EPGList"
-msgstr "Schakel Partnerbox-Functie in EPG-Lijst in"
+msgstr "Partnerbox in de EPG activeren"
 
 msgid "Enable Partnerbox-Function in TimerEvent"
-msgstr "Schakel Partnerbox-Functie in TimerEvent in"
+msgstr "Partnerbox in de Timer invoer activeren"
 
-#, fuzzy
 msgid "Enable Red Button-Function in single/multi EPG"
-msgstr "Schakel Partnerbox-Functie in EPG-Lijst in"
+msgstr "Rode knop in de Single of Multi EPG activeren"
 
 msgid "Enable VPS"
-msgstr ""
+msgstr "VPS inschakelen"
 
-#, fuzzy
 msgid "Enable VPS-Function in TimerEvent"
-msgstr "Schakel Partnerbox-Functie in TimerEvent in"
+msgstr "VPS-functie in het timermenu inschakelen"
 
 msgid "Enable first Partnerbox-entry in Timeredit as default"
-msgstr "Schakel eerst de Partnerbox-entry in Timeredit in als default"
+msgstr "Een Remotetimer als default instellen"
 
 msgid "EndTime"
 msgstr "Eindtijd"
@@ -203,9 +194,8 @@ msgstr "Enigma Type"
 msgid "Enter the service pin"
 msgstr "Voer de service PIN in"
 
-#, fuzzy
 msgid "Error: "
-msgstr "Fout: Achterhaald"
+msgstr "Fout:"
 
 msgid "Error: No space left"
 msgstr "Fout: geen ruimte genoeg"
@@ -220,7 +210,7 @@ msgid "Error: Zap failed"
 msgstr "Fout: ZAP mislukt"
 
 msgid "Eventview"
-msgstr ""
+msgstr "Programma overzicht"
 
 msgid "Fri"
 msgstr "vr"
@@ -234,9 +224,8 @@ msgstr "Bezig kanaal informatie te verkrijgen..."
 msgid "Getting EPG Information..."
 msgstr "Bezig EPG informatie te verkrijgen..."
 
-#, fuzzy
 msgid "Getting EPG data..."
-msgstr "Bezig EPG informatie te verkrijgen..."
+msgstr "EPG informatie laden..."
 
 msgid "Getting Partnerbox Bouquet Information..."
 msgstr "Bezig Partnerbox boeket informatie te verkrijgen..."
@@ -245,10 +234,10 @@ msgid "Getting Partnerbox Information..."
 msgstr "Bezig Partnerbox informatie te verkrijgen..."
 
 msgid "Getting timerlist data..."
-msgstr ""
+msgstr "Timeroverzicht gegevens laden..."
 
 msgid "Give Enigma time to fill epg cache..."
-msgstr ""
+msgstr "Even geduld, bezig met het vullen van de EPG cache..."
 
 msgid "IP"
 msgstr "IP"
@@ -257,17 +246,16 @@ msgid "Info"
 msgstr "Informatie"
 
 msgid "Internet services are not supported!"
-msgstr ""
+msgstr "Internet streams worden niet ondersteund!"
 
 msgid "Location"
 msgstr "Lokatie"
 
-#, fuzzy
 msgid "Manage timer for other dreamboxes in network"
 msgstr "Beheer timers voor andere ontvangers in uw netwerk"
 
 msgid "Menu PiP"
-msgstr ""
+msgstr "Menu PiP"
 
 msgid "Mon"
 msgstr "ma"
@@ -276,7 +264,7 @@ msgid "Monday"
 msgstr "maandag"
 
 msgid "Move Picture in Picture"
-msgstr ""
+msgstr "Picture in Picture verplaatsen"
 
 msgid "NGRAB"
 msgstr "NGRAB"
@@ -290,13 +278,11 @@ msgstr "Nee"
 msgid "OK"
 msgstr "OK"
 
-#, fuzzy
 msgid "Partnerbox"
-msgstr "Partnerbox entries"
+msgstr "Partnerbox"
 
-#, fuzzy
 msgid "Partnerbox - RemotePlayer"
-msgstr "Partnerbox entries"
+msgstr "Partnerbox - RemotePlayer"
 
 #, python-format
 msgid ""
@@ -307,67 +293,61 @@ msgstr ""
 "%s"
 
 msgid "Partnerbox Entries"
-msgstr "Partnerbox entries"
+msgstr "Partnerbox ontvangers"
 
-#, fuzzy
 msgid "Partnerbox RemoteTimer"
-msgstr "Partnerbox entries"
+msgstr "Partnerbox RemoteTimer"
 
-#, fuzzy
 msgid "Partnerbox Setup"
-msgstr "Partnerbox entries"
+msgstr "Partnerbox Instellingen"
 
 msgid "Partnerbox: Edit Entry"
-msgstr "Partnerbox: bewerk entry"
+msgstr "Partnerbox: bewerk ontvanger"
 
 msgid "Partnerbox: List of Entries"
-msgstr "Partnerbox: Lijst met entries"
+msgstr "Partnerbox: ontvanger overzicht"
 
-#, fuzzy
 msgid "Partnerbox: RemoteTV Player"
-msgstr "Partnerbox: bewerk entry"
+msgstr "Partnerbox: RemoteTV Player"
 
-#, fuzzy
 msgid "Partnerbox: RemoteTimer"
-msgstr "Partnerbox entries"
+msgstr "Partnerbox: RemoteTimer"
 
 msgid "Password"
 msgstr "Wachtwoord"
 
 msgid "Port"
-msgstr "Port"
+msgstr "Poort"
 
 msgid "Power"
-msgstr ""
+msgstr "Power"
 
 msgid "Press OK to edit timer..."
-msgstr ""
+msgstr "Druk op OK om de timer te wijzigen..."
 
 msgid "Really delete this Partnerbox Entry?"
-msgstr "Deze Partnerbox entry echt verwijderen?"
+msgstr "Deze Partnerbox ontvanger verwijderen?"
 
-#, fuzzy
 msgid "Remote Player"
-msgstr "Remote Timer"
+msgstr "Remote Player"
 
 msgid "Remote Timer"
 msgstr "Remote Timer"
 
-#, fuzzy
 msgid "RemoteTimer Timerlist"
-msgstr "Remote Timer"
+msgstr "RemoteTimer Timeroverzicht"
 
 msgid "Remove timer"
-msgstr "Verwijder timer"
+msgstr "Timer verwijderen"
 
 msgid "Repeated Timer are not supported!"
-msgstr ""
+msgstr "Herhalende timers worden niet ondersteund!"
 
 msgid "Restart"
-msgstr ""
+msgstr "Herstarten"
 
 msgid "Restart enigma"
-msgstr ""
+msgstr "Herstart Enigma2"
 
 msgid "Sat"
 msgstr "za"
@@ -377,75 +357,69 @@ msgstr "zaterdag"
 
 #, python-format
 msgid "Select action for remote timer '%s':"
-msgstr ""
+msgstr "Selecteer actie voor remote timer '%s':"
 
 #, python-format
 msgid "Select action for timer '%s':"
-msgstr ""
+msgstr "Selecteer actie voor timer '%s':"
 
-#, fuzzy
 msgid "Select action:"
-msgstr "EPG Selectie"
+msgstr "Actie kiezen:"
 
-#, fuzzy
 msgid "Select operation for partnerbox"
-msgstr "Partnerbox instellingen"
+msgstr "Selecteer een functie voor Partnerbox"
 
 msgid "Servicelists/EPG"
-msgstr "Servicelijsten/EPG"
+msgstr "Zenderlijsten/EPG"
 
 msgid "Show 'RemoteTV Player' in E-Menu"
-msgstr "Toon 'RemoteTV Player' in extensie-menu"
+msgstr "Toon 'RemoteTV Player' in het extensie-menu"
 
 msgid "Show 'RemoteTimer' in E-Menu"
-msgstr "Toon 'RemoteTimer' in extensie-menu"
+msgstr "Toon 'RemoteTimer' in het extensie-menu"
 
-#, fuzzy
 msgid "Show 'RemoteTimer' in Event View context menu"
-msgstr "Toon 'RemoteTimer' in extensie-menu"
+msgstr "Toon 'RemoteTimer' in het programma overzicht context menu"
 
-#, fuzzy
 msgid "Show 'RemoteTimer' in Eventinfo menu"
-msgstr "Toon 'RemoteTimer' in extensie-menu"
+msgstr "Toon 'RemoteTimer' in het programma info menu"
 
 msgid "Show 'Stream current Service' in E-Menu"
-msgstr "Toon Stream current Service' in extensie-menu"
+msgstr "Toon 'Stream huidige zender' in het extensie-menu"
 
 msgid "Show all icon for event in EPGList"
-msgstr ""
+msgstr "Toon alle icons voor programma in de EPG"
 
 msgid "Show duration time for event"
-msgstr ""
+msgstr "Toon de tijdsduur van een programma"
 
 msgid "Shutdown"
-msgstr ""
+msgstr "Uitschakelen"
 
 msgid "Standard Zap"
-msgstr ""
+msgstr "Standaard Zap"
 
-#, fuzzy
 msgid "Standby"
-msgstr "ga naar standby"
+msgstr "Standby"
 
 msgid "StartTime"
 msgstr "Starttijd"
 
 #, python-format
 msgid "Starting Remote Player (IP = %s)"
-msgstr ""
+msgstr "Remote Player starten (IP = %s)"
 
 msgid "Stream"
-msgstr ""
+msgstr "Stream"
 
 msgid "Stream TV from your Partnerbox"
 msgstr "Stream TV van uw Partnerbox"
 
-#, fuzzy
 msgid "Stream current Service from Partnerbox"
-msgstr "Stream huidige service van Partnerbox"
+msgstr "Stream de huidige zender van de Partnerbox"
 
 msgid "Stream current service from partnerbox"
-msgstr "Stream huidige service van Partnerbox"
+msgstr "Stream huidige zender van de Partnerbox"
 
 msgid "Sun"
 msgstr "zo"
@@ -454,7 +428,7 @@ msgid "Sunday"
 msgstr "zondag"
 
 msgid "The pin code you entered is wrong."
-msgstr "U voerde een verkeerde PIN in."
+msgstr "De ingevoerde PIN is fout."
 
 msgid "Thu"
 msgstr "do"
@@ -463,33 +437,33 @@ msgid "Thursday"
 msgstr "donderdag"
 
 msgid "Timer Overview"
-msgstr ""
+msgstr "Timeroverzicht"
 
 msgid "Timer Type"
-msgstr "Timer Type"
+msgstr "Timersoort"
 
 msgid "Timer can not be added...no locations on partnerbox available."
-msgstr "Timer kan niet worden toegevoegd...geen ruimte op de partnerbox beschikbaar."
+msgstr ""
+"Timer wordt niet toegevoegd...geen opname locatie op de Partnerbox "
+"beschikbaar."
 
-#, fuzzy
 msgid "Timer entry"
-msgstr "Timer Type"
+msgstr "Timer invoer"
 
 msgid "Timer event deleted successfully."
-msgstr ""
+msgstr "Deze timer is verwijderd. "
 
 msgid "Timer event was created successfully."
-msgstr ""
+msgstr "Het instellen van de timer is gelukt."
 
-#, fuzzy
 msgid "Timer menu"
-msgstr "Timer Type"
+msgstr "Timer menu"
 
 msgid "Toggle Standby"
-msgstr ""
+msgstr "Standby In- of Uitschakelen"
 
 msgid "Toggle status (on/off)"
-msgstr ""
+msgstr "Status (aan of uit)"
 
 msgid "Tue"
 msgstr "di"
@@ -498,7 +472,7 @@ msgid "Tuesday"
 msgstr "dinsdag"
 
 msgid "Wakeup"
-msgstr ""
+msgstr "Inschakelen"
 
 msgid "Wed"
 msgstr "wo"
@@ -507,43 +481,47 @@ msgid "Wednesday"
 msgstr "woensdag"
 
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 msgid "Yes (safe mode)"
-msgstr ""
+msgstr "Ja (veilige modus)"
 
-msgid "You can not add services or bouquets from Enigma1-receivers into the channellist..."
-msgstr "U kunt geen zenders en favorieten van Enigma1-ontvangers toevoegen aan de kanaallijst..."
+msgid ""
+"You can not add services or bouquets from Enigma1-receivers into the "
+"channellist..."
+msgstr ""
+"U kunt geen zenders en favorieten van Enigma1-ontvangers toevoegen aan de "
+"kanaallijst..."
 
 msgid "Zap"
 msgstr "Zap"
 
 msgid "Zap focus to Picture in Picture"
-msgstr ""
+msgstr "Naar Picture in Picture zappen"
 
 msgid "Zap focus to main screen"
-msgstr ""
+msgstr "Naar hoofdscherm zappen"
 
 msgid "Zap to service when streaming"
-msgstr "Zap naar service tijdens streamen"
+msgstr "Zap naar zender tijdens het streamen"
 
 msgid "Zap/"
-msgstr ""
+msgstr "Zap/"
 
 msgid "Zapping to "
-msgstr ""
+msgstr "Zappen naar"
 
 msgid "about to start"
-msgstr "op het punt te beginnen"
+msgstr "gaat bijna beginnen"
 
 msgid "add Partnerbox bouquet"
-msgstr "voeg Partnerbox favoriet toe"
+msgstr "voeg favorietenlijst van partnerbox toe"
 
 msgid "add Partnerbox service"
-msgstr "voeg Partnerbox zender toe"
+msgstr "voeg zender van Partnerbox toe"
 
 msgid "auto"
-msgstr "auto"
+msgstr "automatisch"
 
 msgid "disabled"
 msgstr "uitgeschakeld"
@@ -555,10 +533,10 @@ msgid "done!"
 msgstr "uitgevoerd!"
 
 msgid "go to deep standby"
-msgstr "ga naar deep standby"
+msgstr "ga naar deep stand-by"
 
 msgid "go to standby"
-msgstr "ga naar standby"
+msgstr "ga naar stand-by"
 
 msgid "mins"
 msgstr "min"
@@ -567,13 +545,13 @@ msgid "record"
 msgstr "opname"
 
 msgid "recording..."
-msgstr "aan het opnemen..."
+msgstr "opnemen..."
 
 msgid "setup for partnerbox"
 msgstr "Partnerbox instellingen"
 
 msgid "unknown service"
-msgstr "onbekende service"
+msgstr "onbekende zender"
 
 msgid "use external"
 msgstr "gebruik extern"
@@ -582,10 +560,10 @@ msgid "use internal"
 msgstr "gebruik intern"
 
 msgid "waiting"
-msgstr "aan het wachten"
+msgstr "wachten..."
 
 msgid "zap"
 msgstr "zap"
 
 msgid "zapped"
-msgstr "gezapd"
+msgstr "gezapt"
