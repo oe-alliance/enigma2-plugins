@@ -1,0 +1,108 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - weatherplugin\n"
+"Report-Msgid-Bugs-To: Spaeleus <spaeleus@croci.org>\n"
+"POT-Creation-Date: 2012-10-25 14:49+0100\n"
+"PO-Revision-Date: 2021-12-12 11:34+0000\n"
+"Last-Translator: zeberil <pfrodrigues@sapo.pt>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .../enigma2-plugins/weatherplugin\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-SearchPath-0: .../enigma2-plugins/weatherplugin\n"
+
+msgid "Add"
+msgstr "Adicionar"
+
+msgid "Back"
+msgstr "Retroceder"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "City"
+msgstr "Cidade"
+
+msgid "Delete"
+msgstr "Apagar"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Feels like %s"
+msgstr "Feels like %s"
+
+msgid "Getting weather information..."
+msgstr "Recuperar informação meteorológica em curso..."
+
+msgid "Humidity: %s %%"
+msgstr "Humidade: %s %%"
+
+msgid "Location code"
+msgstr "Código de localidade"
+
+msgid "MSN location search result"
+msgstr "Resultado da busca da localização MSN"
+
+msgid ""
+"No locations defined...\n"
+"Press 'Menu' to do that."
+msgstr ""
+"Nenhuma localidade defenida...\n"
+"Primir 'Menu' para efectuar a escolha."
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "Observation point: %s"
+msgstr "Ponto de observação: %s"
+
+msgid "Observation time: %s"
+msgstr "Hora de observação: %s"
+
+msgid "Please enter a valid city name."
+msgstr "Inserir um nome de cidade válido."
+
+msgid "Please enter a valid location code for the city."
+msgstr "Inserir um código de localização válido para a cidade."
+
+msgid "Really delete this WeatherPlugin Entry?"
+msgstr "Remover esta entrada do WeatherPlugin?"
+
+msgid "Search Code"
+msgstr "Procurar código"
+
+msgid "Show Weather Forecast"
+msgstr "Previsão meteorológica"
+
+msgid "System"
+msgstr "Sistema"
+
+msgid "Weather Plugin"
+msgstr "Weather Plugin"
+
+msgid "WeatherPlugin: Edit Entry"
+msgstr "WeatherPlugin: Editar entrada"
+
+msgid "WeatherPlugin: List of Entries"
+msgstr "WeatherPlugin: Lista de Entradas"
+
+msgid "You need to enter a valid city name before you can search for the location code."
+msgstr ""
+"Tem que inserir um nome válido de uma cidade antes de procurar o código da localização "
+"código da localidade."
+
+msgid "imperial system"
+msgstr "Sistema imperial"
+
+msgid "metric system"
+msgstr "Sistema métrico"
+
+msgid "Change,edit,add,delete locations"
+msgstr "Mudar, editar, adicionar e apagar localizações"
