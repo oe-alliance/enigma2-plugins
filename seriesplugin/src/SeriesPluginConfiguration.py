@@ -180,6 +180,12 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 				self.changesMade = True
 				config.plugins.seriesplugin.xmltvimport.value = False
 
+			if os.path.exists("/etc/crossepg"):
+				log.debug("Config: Found crossepg")
+				self.list.append(getConfigListEntry(_("Enable support for crossepg"), config.plugins.seriesplugin.crossepg))
+			elif config.plugins.seriesplugin.crossepg.value:
+				self.changesMade = True
+				config.plugins.seriesplugin.crossepg.value = False
 			self.list.append(getConfigListEntry(_("Show in info menu"), config.plugins.seriesplugin.menu_info))
 			self.list.append(getConfigListEntry(_("Show in extensions menu"), config.plugins.seriesplugin.menu_extensions))
 			self.list.append(getConfigListEntry(_("Show in epg menu"), config.plugins.seriesplugin.menu_epg))
@@ -205,6 +211,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Default episode"), config.plugins.seriesplugin.default_episode))
 
 			self.list.append(getConfigListEntry(_("Replace special characters in title"), config.plugins.seriesplugin.replace_chars))
+			self.list.append(getConfigListEntry(_("Cut series title on dash"), config.plugins.seriesplugin.cut_series_title))
 
 			self.list.append(getConfigListEntry(_("Main bouquet for channel editor"), self.cfg_bouquet_main))
 
@@ -227,9 +234,11 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Add tag 'SeriesPlugin' to timer"), config.plugins.seriesplugin.timer_add_tag))
 
 			self.list.append(getConfigListEntry(_("Socket timeout"), config.plugins.seriesplugin.socket_timeout))
+			self.list.append(getConfigListEntry(_("Stop on ProtocolError"), config.plugins.seriesplugin.stop_on_protocol_error))
 
 			self.list.append(getConfigListEntry(_("Timeout for Success Popups"), config.plugins.seriesplugin.popups_success_timeout))
 			self.list.append(getConfigListEntry(_("Timeout for Warnings Popups"), config.plugins.seriesplugin.popups_warning_timeout))
+			self.list.append(getConfigListEntry(_("Timeout for Error Popups"), config.plugins.seriesplugin.popups_error_timeout))
 
 			#self.list.append( getConfigListEntry(  _("Use local caching")                         , config.plugins.seriesplugin.caching ) )
 			#if config.plugins.seriesplugin.caching.value:
@@ -238,6 +247,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Channel matching file"), config.plugins.seriesplugin.channel_file))
 			self.list.append(getConfigListEntry(_("Episode pattern file"), config.plugins.seriesplugin.pattern_file))
 			self.list.append(getConfigListEntry(_("Directory pattern file"), config.plugins.seriesplugin.pattern_file_directories))
+			self.list.append(getConfigListEntry(_("SerienServer API"), config.plugins.seriesplugin.serienserver_url))
 
 			try:
 				self.list.append(getConfigListEntry("AT: " + _("Poll automatically"), config.plugins.autotimer.autopoll))

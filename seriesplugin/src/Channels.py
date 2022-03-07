@@ -112,6 +112,7 @@ def getServicesOfBouquet(bouquet):
 		elif (eServiceReference(serviceref).flags & eServiceReference.isGroup):
 			# handle group services
 			log.debug("SPC: found group %s" % (serviceref))
+#			chlist.append((servicename, re.sub('::.*', ':', serviceref), unifyChannel(servicename)))
 			chlist.extend(getServicesOfBouquet(serviceref))
 
 		elif not (eServiceReference(serviceref).flags & eServiceReference.isMarker):
@@ -334,5 +335,12 @@ class ChannelsBase(XMLFile):
 					except Exception as e:
 						log.exception("Exception in write XML: " + str(e))
 
+				if config.plugins.seriesplugin.crossepg.value:
+					log.debug("Write: xml channels for crossepg")
+					try:
+						path = "/etc/crossepg/wunschliste.channels.xml"
+						etree.write(path, encoding='utf-8', xml_declaration=True)
+					except Exception as e:
+						log.exception("Exception in write XML: " + str(e))
 		except Exception as e:
 			log.exception("Exception in writeXML: " + str(e))

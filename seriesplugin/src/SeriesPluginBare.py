@@ -22,7 +22,7 @@ loop_data = []
 loop_counter = 0
 
 
-def bareGetEpisode(service_ref, name, begin, end, description, path, future=True, today=False, elapsed=False):
+def bareGetEpisode(service_ref, name, begin, end, description, path, future=True, today=False, elapsed=False, returnData=False):
 	result = _("SeriesPlugin is deactivated")
 	if config.plugins.seriesplugin.enabled.value:
 
@@ -45,7 +45,10 @@ def bareGetEpisode(service_ref, name, begin, end, description, path, future=True
 			description = str(refactorDescription(description, data))
 			path = refactorDirectory(path, data)
 			log.info("Bare: Success", name, description, path)
-			return (name, description, path, log.get())
+			if returnData:
+				return (name, description, path, log.get(), data)
+			else:
+				return (name, description, path, log.get())
 
 		elif data and isinstance(data, six.string_types):
 			msg = _("Failed: %s." % (str(data)))

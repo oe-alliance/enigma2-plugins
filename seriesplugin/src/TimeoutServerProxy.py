@@ -22,9 +22,13 @@ reduced_timeout = 3.0		# in seconds
 class TimeoutServerProxy(xmlrpc_client.ServerProxy):
 	def __init__(self, *args, **kwargs):
 
+		self.stopped = False
 		from Plugins.Extensions.SeriesPlugin.plugin import REQUEST_PARAMETER
 		uri = config.plugins.seriesplugin.serienserver_url.value + REQUEST_PARAMETER
 
+		import ssl
+		if hasattr(ssl, '_create_unverified_context'):
+			ssl._create_default_https_context = ssl._create_unverified_context
 		xmlrpc_client.ServerProxy.__init__(self, uri, verbose=False, *args, **kwargs)
 
 		timeout = config.plugins.seriesplugin.socket_timeout.value
@@ -43,6 +47,8 @@ class TimeoutServerProxy(xmlrpc_client.ServerProxy):
 	def getSeasonEpisode(self, name, webChannel, unixtime, max_time_drift):
 		result = None
 
+		if self.stopped == True:
+			return result
 		skipped = self.skip.get(name, None)
 		if skipped:
 			if (time() - skipped) < skip_expiration:
@@ -54,6 +60,12 @@ class TimeoutServerProxy(xmlrpc_client.ServerProxy):
 		try:
 			result = self.sp.cache.getSeasonEpisode(name, webChannel, unixtime, max_time_drift)
 			log.debug("SerienServer getSeasonEpisode result:", result)
+		except xmlrpc_client.ProtocolError as e:
+			if config.plugins.seriesplugin.stop_on_protocol_error.value == True:
+				self.stopped = True
+				log.info(_("ProtocolError:") + "\n" + _("Stop is enabled. To reactivate SeriesPlugin, just open the setup"))
+			else:
+				log.exception("Exception in xmlrpc: " + str(e) + ' - ' + str(result))
 		except Exception as e:
 			msg = "Exception in xmlrpc: \n" + str(e) + ' - ' + str(result) + "\n\nfor" + name + " (" + webChannel + ")"
 			if not config.plugins.seriesplugin.autotimer_independent.value:

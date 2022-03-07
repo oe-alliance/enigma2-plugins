@@ -15,6 +15,7 @@ config.plugins.seriesplugin.enabled = ConfigOnOff(default=False)
 
 config.plugins.seriesplugin.epgimport = ConfigYesNo(default=False)
 config.plugins.seriesplugin.xmltvimport = ConfigYesNo(default=False)
+config.plugins.seriesplugin.crossepg = ConfigYesNo(default=False)
 
 config.plugins.seriesplugin.menu_info = ConfigYesNo(default=True)
 config.plugins.seriesplugin.menu_extensions = ConfigYesNo(default=False)
@@ -40,7 +41,8 @@ config.plugins.seriesplugin.pattern_directory = ConfigText(default="Disabled", f
 config.plugins.seriesplugin.default_season = ConfigSelectionNumber(0, 1, 1, default=1)
 config.plugins.seriesplugin.default_episode = ConfigSelectionNumber(0, 1, 1, default=1)
 
-config.plugins.seriesplugin.replace_chars = ConfigText(default=":\!\\,\(\)'\?", fixed_size=False)
+config.plugins.seriesplugin.replace_chars = ConfigText(default=":\!\\,\(\)'\?/", fixed_size=False)
+config.plugins.seriesplugin.cut_series_title = ConfigYesNo(default=False)
 
 config.plugins.seriesplugin.channel_file = ConfigText(default="/etc/enigma2/seriesplugin_channels.xml", fixed_size=False)
 
@@ -65,9 +67,11 @@ config.plugins.seriesplugin.timer_eit_check = ConfigYesNo(default=True)
 config.plugins.seriesplugin.timer_add_tag = ConfigYesNo(default=True)
 
 config.plugins.seriesplugin.socket_timeout = ConfigSelectionNumber(0, 600, 1, default=10)
+config.plugins.seriesplugin.stop_on_protocol_error = ConfigYesNo(default=False)
 
 config.plugins.seriesplugin.popups_success_timeout = ConfigSelectionNumber(-1, 20, 1, default=3)
 config.plugins.seriesplugin.popups_warning_timeout = ConfigSelectionNumber(-1, 20, 1, default=-1)
+config.plugins.seriesplugin.popups_error_timeout = ConfigSelectionNumber(-1, 20, 1, default=-1)
 
 config.plugins.seriesplugin.caching = ConfigYesNo(default=True)
 config.plugins.seriesplugin.caching_expiration = ConfigSelectionNumber(0, 48, 1, default=6)
@@ -82,8 +86,14 @@ config.plugins.seriesplugin.log_reply_mail = ConfigText(default="myemail@home.co
 config.plugins.seriesplugin.lookup_counter = ConfigNumber(default=0)
 #config.plugins.seriesplugin.uid                       = ConfigText(default = str(time()), fixed_size = False)
 
-config.plugins.seriesplugin.proxy_url = ConfigText(default='http://www.serienserver.de/proxy/proxy.php', fixed_size=False)
-config.plugins.seriesplugin.serienserver_url = ConfigText(default='http://www.serienserver.de/cache/cache.php', fixed_size=False)
+url_choices = [
+					("https://www.serienserver.de/cache/cache.php", "Stable"),
+					("http://www.serienserver.de/cache/cache.php", "Stable (HTTP)"),
+					("http://www.serienserver.de/proxy/proxy.php", "Proxy"),
+				]
+
+config.plugins.seriesplugin.serienserver_url = ConfigSelection(choices=url_choices, default=url_choices[0][0])
+#config.plugins.seriesplugin.serienserver_url = ConfigText(default='http://www.serienserver.de/cache/cache.php', fixed_size=False)
 config.plugins.seriesplugin.xmltv_url = ConfigText(default='http://www.serienserver.de/xmltv/wunschliste.xml', fixed_size=False)
 
 

@@ -31,6 +31,7 @@ from Components.config import config
 from Tools.Notifications import AddPopup
 from Screens.MessageBox import MessageBox
 
+from threading import currentThread
 
 log = None
 
@@ -48,6 +49,8 @@ class Logger(object):
 	def reinit(self):
 		self.instance.handlers = []
 
+		if not hasattr(config.plugins, "seriesplugin"):
+			return
 		if config.plugins.seriesplugin.debug_prints.value:
 			shandler = logging.StreamHandler(sys.stdout)
 			shandler.setLevel(logging.DEBUG)
@@ -98,12 +101,13 @@ class Logger(object):
 			print(strargs)
 
 		if int(config.plugins.seriesplugin.popups_success_timeout.value) != 0:
-			AddPopup(
-					strargs,
-					MessageBox.TYPE_INFO,
-					int(config.plugins.seriesplugin.popups_success_timeout.value),
-					'SP_PopUp_ID_Success_' + strargs
-				)
+			if currentThread().getName() == 'MainThread':
+				AddPopup(
+						strargs,
+						MessageBox.TYPE_INFO,
+						int(config.plugins.seriesplugin.popups_success_timeout.value),
+						'SP_PopUp_ID_Success_' + strargs
+					)
 
 	def info(self, *args):
 		strargs = " ".join([str(arg) for arg in args])
@@ -160,10 +164,12 @@ class Logger(object):
 		elif config.plugins.seriesplugin.debug_prints.value:
 			print(strargs)
 
-		AddPopup(
+		if int(config.plugins.seriesplugin.popups_error_timeout.value) != 0:
+			if currentThread().getName() == 'MainThread':
+				AddPopup(
 					strargs,
 					MessageBox.TYPE_ERROR,
-					-1,
+					int(config.plugins.seriesplugin.popups_error_timeout.value),
 					'SP_PopUp_ID_Error_' + strargs
 				)
 
@@ -178,10 +184,12 @@ class Logger(object):
 		elif config.plugins.seriesplugin.debug_prints.value:
 			print(strargs)
 
-		AddPopup(
+		if int(config.plugins.seriesplugin.popups_error_timeout.value) != 0:
+			if currentThread().getName() == 'MainThread':
+				AddPopup(
 					strargs,
 					MessageBox.TYPE_ERROR,
-					-1,
+					int(config.plugins.seriesplugin.popups_error_timeout.value),
 					'SP_PopUp_ID_Exception_' + strargs
 				)
 

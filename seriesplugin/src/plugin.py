@@ -30,7 +30,7 @@ from .spChannelContextMenu import SPChannelContextMenuInit, SPChannelContextMenu
 #######################################################
 # Constants
 NAME = "SeriesPlugin"
-VERSION = "5.6"
+VERSION = "5.9.8"
 DESCRIPTION = _("SeriesPlugin")
 SHOWINFO = _("Show series info (SP)")
 RENAMESERIES = _("Rename serie(s) (SP)")
@@ -217,11 +217,11 @@ def movielist_info(session, service, *args, **kwargs):
 # Timer renaming
 
 # Synchronous call, blocks until we have the information
-def getSeasonEpisode4(service_ref, name, begin, end, description, path, *args, **kwargs):
+def getSeasonEpisode4(service_ref, name, begin, end, description, path, returnData=False, *args, **kwargs):
 	if config.plugins.seriesplugin.enabled.value:
 		from .SeriesPluginBare import bareGetEpisode
 		try:
-			return bareGetEpisode(service_ref, name, begin, end, description, path, True, False, False)
+			return bareGetEpisode(service_ref, name, begin, end, description, path, True, False, False, returnData)
 		except Exception as e:
 			log.exception("SeriesPlugin getSeasonEpisode4 exception " + str(e))
 			return str(e)

@@ -6,7 +6,6 @@ import re
 
 import os
 import sys
-import traceback
 
 from time import localtime, strftime
 from datetime import datetime
@@ -18,14 +17,12 @@ from datetime import datetime
 
 from Components.config import config
 
-from enigma import eServiceReference, iServiceInformation, eServiceCenter, ePythonMessagePump
-from ServiceReference import ServiceReference
+from enigma import eServiceCenter, ePythonMessagePump
 
 # Plugin framework
 from .Modules import Modules
 
 # Tools
-from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.Notifications import AddPopup
 from Screens.MessageBox import MessageBox
@@ -35,7 +32,7 @@ from .Logger import log
 from .Channels import ChannelsBase
 from .XMLTVBase import XMLTVBase
 from .ThreadQueue import ThreadQueue
-from threading import Thread, currentThread, _get_ident
+from threading import Thread
 
 import six
 
@@ -60,7 +57,7 @@ instance = None
 
 CompiledRegexpNonDecimal = re.compile(r'[^\d]')
 CompiledRegexpReplaceChars = None
-CompiledRegexpReplaceDirChars = re.compile('[^/\w\-_\. ]')
+CompiledRegexpReplaceDirChars = re.compile('[^/\wäöüß\-_\. ]')
 
 
 def dump(obj):
@@ -181,6 +178,14 @@ def refactorTitle(org_, data):
 			cust_ = config.plugins.seriesplugin.pattern_title.value.strip().format(**data)
 			cust = cust_.replace('&amp;', '&').replace('&apos;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&quot;', '"').replace('  ', ' ')
 			log.debug(" refactor title", cust_, cust)
+			#check if new title already exist in org on use org in pattern to avoid rename loop
+			if "{org:s}" in config.plugins.seriesplugin.pattern_title.value:
+				data["org"] = ""
+				cust1_ = config.plugins.seriesplugin.pattern_title.value.strip().format(**data)
+				cust1 = cust1_.replace('&amp;', '&').replace('&apos;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&quot;', '"').replace('  ', ' ')
+				log.debug(" refactor title without org", cust1)
+				if cust1 in org:
+					cust = org
 			return cust
 		else:
 			return org
@@ -188,18 +193,38 @@ def refactorTitle(org_, data):
 		return org
 
 
+def checkIfTitleExistInDescription(org, data):
+	#check if use 'org' and 'title' in pattern and series-title already exist in org-description, then remove from org
+	if ("{org:s}" in config.plugins.seriesplugin.pattern_description.value) and ("{title:s}" in config.plugins.seriesplugin.pattern_description.value):
+		if isinstance(org, str) and isinstance(data["title"], unicode):
+			#convert org to unicode for compare with data["title"] if data["title"] has umlauts
+			org = unicode(org)
+		if data["title"].upper() in org.upper():
+			title_str = re.compile(data["title"], re.IGNORECASE)
+			org = title_str.sub("", org)
+	return org
+
+
 def refactorDescription(org_, data):
 	if CompiledRegexpReplaceChars:
 		org = CompiledRegexpReplaceChars.sub('', org_)
-		log.debug(" refactor desc", org_, org)
+		log.debug(" refactor desc org_, org", org_, org)
 	else:
 		org = org_
 	if data:
 		if config.plugins.seriesplugin.pattern_description.value and not config.plugins.seriesplugin.pattern_description.value == "Off" and not config.plugins.seriesplugin.pattern_description.value == "Disabled":
-			data["org"] = org
+			data["org"] = checkIfTitleExistInDescription(org, data)
 			cust_ = config.plugins.seriesplugin.pattern_description.value.strip().format(**data)
 			cust = cust_.replace("\n", " ").replace('&amp;', '&').replace('&apos;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&quot;', '"').replace('  ', ' ')
-			log.debug(" refactor desc", cust_, cust)
+			log.debug(" refactor desc cust_, cust", cust_, cust)
+			#check if new description already exist in org on use org in pattern to avoid rename loop
+			if "{org:s}" in config.plugins.seriesplugin.pattern_description.value:
+				data["org"] = ""
+				cust1_ = config.plugins.seriesplugin.pattern_description.value.strip().format(**data)
+				cust1 = cust1_.replace("\n", " ").replace('&amp;', '&').replace('&apos;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&quot;', '"').replace('  ', ' ')
+				log.debug(" refactor desc without org", cust1)
+				if cust1 in org:
+					cust = org
 			return cust
 		else:
 			return org
@@ -212,6 +237,7 @@ def refactorDirectory(org, data):
 	if data:
 		if config.plugins.seriesplugin.pattern_directory.value and not config.plugins.seriesplugin.pattern_directory.value == "Off" and not config.plugins.seriesplugin.pattern_directory.value == "Disabled":
 			data["org"] = org
+			data["home"] = "/media/hdd/movie"
 			cust_ = config.plugins.seriesplugin.pattern_directory.value.strip().format(**data)
 			cust_ = cust_.replace("\n", "").replace('&amp;', '&').replace('&apos;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&quot;', '"').replace("  ", " ").replace("//", "/")
 			dir = CompiledRegexpReplaceDirChars.sub(' ', cust_)
@@ -232,6 +258,8 @@ def normalizeResult(result):
 		season_ = result['season']
 		episode_ = result['episode']
 
+		if config.plugins.seriesplugin.cut_series_title.value and " - " in series_:
+			series_, sub_series_title = series_.split(" - ", 1)
 		result['rawseason'] = season_ or config.plugins.seriesplugin.default_season.value
 		result['rawepisode'] = episode_ or config.plugins.seriesplugin.default_episode.value
 		if season_:

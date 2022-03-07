@@ -130,6 +130,25 @@ scheme_fallback = [
 		("{series:s} - {rawseason:s}{rawepisode:s} - {title:s}", "Series - RawRaw - Title"),
 
 
+		("{org:s} S{season:02d} E{rawepisode:s}", "Org S01 ERaw"),
+		("{org:s} S{season:02d}E{rawepisode:s}", "Org S01ERaw"),
+		("{org:s} {season:02d} {rawepisode:s}", "Org 01 Raw"),
+		("{org:s} {season:02d}{rawepisode:s}", "Org 01Raw"),
+
+		("{org:s} - S{season:02d} E{rawepisode:s}", "Org - S01 ERaw"),
+		("{org:s} - S{season:02d}E{rawepisode:s}", "Org - S01ERaw"),
+		("{org:s} - {season:02d} {rawepisode:s}", "Org - 01 Raw"),
+		("{org:s} - {season:02d}{rawepisode:s}", "Org - 01Raw"),
+
+		("{series:s} S{season:02d} E{rawepisode:s}", "Series S01 ERaw"),
+		("{series:s} S{season:02d}E{rawepisode:s}", "Series S01ERaw"),
+		("{series:s} {season:02d} {rawepisode:s}", "Series 01 Raw"),
+		("{series:s} {season:02d}{rawepisode:s}", "Series 01Raw"),
+
+		("{series:s} - S{season:02d} E{rawepisode:s}", "Series - S01 ERaw"),
+		("{series:s} - S{season:02d}E{rawepisode:s}", "Series - S01ERaw"),
+		("{series:s} - {season:02d} {rawepisode:s}", "Series - 01 Raw"),
+		("{series:s} - {season:02d}{rawepisode:s}", "Series - 01Raw"),
 		("{channel:s} {series:s} S{season:02d} E{rawepisode:s} {title:s}", "Channel Series S01 ERaw Title"),
 		("{service:s} {series:s} S{season:02d}E{rawepisode:s} {title:s}", "Service Series S01ERaw Title"),
 
