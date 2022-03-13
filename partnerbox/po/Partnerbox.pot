@@ -128,16 +128,19 @@ msgstr ""
 msgid "Disable Picture in Picture"
 msgstr ""
 
+msgid "Do you really want to clean up the finished timer entries?"
+msgstr ""
+
 #, python-format
 msgid ""
 "Do you really want to delete the remote timer \n"
-"%s ?"
+"%s?"
 msgstr ""
 
 #, python-format
 msgid ""
 "Do you really want to delete the timer \n"
-"%s ?"
+"%s?"
 msgstr ""
 
 msgid "EPG Selection"

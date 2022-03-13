@@ -1,0 +1,174 @@
+<skin>
+	<screen name="CurrentRemoteTV" position="center,center" size="800,400" title="Remote Player">
+		<widget name="text" position="10,10" size="780,325" zPosition="1" font="Regular;30" halign="center" valign="center" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
+	</screen>
+	<!-- plugin erster screen -->
+	<screen name= "PartnerboxSetup" position="center,80" size="1250,620" titel="Partnerbox Setup" >
+		<widget name="config" font="Regular;25" position="10,10" size="1250,480" foregroundColorSelected="#00fff000" backgroundColorSelected="#00000000" scrollbarMode="showOnDemand" itemHeight="40" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
+		<widget name="key_red" position="50,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_green" position="350,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_yellow" position="650,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_blue" position="950,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<ePixmap name="red" pixmap="{picpath}red.png" position="0,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="green" pixmap="{picpath}green.png" position="300,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="yellow" pixmap="{picpath}yellow.png" position="600,575" size="280,45" zPosition="4" backgroundColor="#00000000" transparent="0" alphatest="blend" />
+		<ePixmap name="blue" pixmap="{picpath}blue.png" position="900,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="red" pixmap="{picpath}red1.png" position="50,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="green" pixmap="{picpath}green1.png" position="350,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="yellow" pixmap="{picpath}yellow1.png" position="650,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="blue" pixmap="{picpath}blue1.png" position="950,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<eLabel name="background" position="0,0" size="1240,720" backgroundColor="#00000000" zPosition="0" transparent="0" />
+	</screen>
+	<!-- plugin erster screen hier gelb -->
+	<screen name= "PartnerboxEntriesListConfigScreen" position="center,80" size="1250,620" title="Partnerbox: List of Entries" >
+		<widget name="name" position="5,0" size="200,50" font="Regular;25" halign="left" zPosition="2" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
+		<widget name="ip" position="215,0" size="140,50" font="Regular;25" halign="left" zPosition="2" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
+		<widget name="port" position="400,0" size="80,50" font="Regular;25" halign="left" zPosition="2" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
+		<widget name="type" position="550,0" size="220,50" font="Regular;25" halign="left" zPosition="2" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
+		<widget name="entrylist" position="0,50" size="1220,500" font="Regular;25" foregroundColorSelected="#00fff000" backgroundColorSelected="#00000000" itemHeight="40" scrollbarMode="showOnDemand" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
+		<widget name="key_red" position="50,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_green" position="350,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_yellow" position="650,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_blue" position="950,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<ePixmap name="red" pixmap="{picpath}red.png" position="0,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="green" pixmap="{picpath}green.png" position="300,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="yellow" pixmap="{picpath}yellow.png" position="600,575" size="280,45" zPosition="4" backgroundColor="#00000000" transparent="0" alphatest="blend" />
+		<ePixmap name="blue" pixmap="{picpath}blue.png" position="900,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="red" pixmap="{picpath}red1.png" position="50,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="green" pixmap="{picpath}green1.png" position="350,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="yellow" pixmap="{picpath}yellow1.png" position="650,570" size="240,40" zPosition="3" backgroundColor="#00000000" transparent="0" alphatest="blend" />
+		<ePixmap name="blue" pixmap="{picpath}blue1.png" position="950,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<eLabel name="background" position="0,0" size="1240,720" backgroundColor="#00000000" zPosition="0" transparent="0" />
+	</screen>
+	<!-- dann hinzufügen bearbeiten-->
+	<screen name="PartnerboxEntryConfigScreen" position="center,80" size="1250,620" title="Partnerbox: Edit Entry">
+		<widget name="config" position="20,10" size="1220,500" foregroundColorSelected="#00fff000" backgroundColorSelected="#00000000" scrollbarMode="showOnDemand" font="Regular;28" itemHeight="40" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
+		<widget name="key_red" position="50,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_green" position="350,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_yellow" position="650,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_blue" position="950,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<ePixmap name="red" pixmap="{picpath}red.png" position="0,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="green" pixmap="{picpath}green.png" position="300,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="yellow" pixmap="{picpath}yellow.png" position="600,575" size="280,45" zPosition="4" backgroundColor="#00000000" transparent="0" alphatest="blend" />
+		<ePixmap name="blue" pixmap="{picpath}blue.png" position="900,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="red" pixmap="{picpath}red1.png" position="50,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="green" pixmap="{picpath}green1.png" position="350,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="yellow" pixmap="{picpath}yellow1.png" position="650,570" size="240,40" zPosition="3" backgroundColor="#00000000" transparent="0" alphatest="blend" />
+		<ePixmap name="blue" pixmap="{picpath}blue1.png" position="950,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<eLabel name="background" position="0,0" size="1240,720" backgroundColor="#00000000" zPosition="0" transparent="0" />
+	</screen>
+	<!-- auf den partnerbox eintrag ok drücken -->
+	<screen name="RemoteTimer" position="center,80" size="1250,620" title="RemoteTimer Timerlist">
+		<widget name="text" position="0,440" size="1220,40" font="Regular;28" halign="center" valign="center" backgroundColor="#00000000" zPosition="1" transparent="0" />
+		<widget name="textok" position="0,490" size="1220,40" font="Regular; 28" halign="center" valign="center" backgroundColor="#00000000" zPosition="1" transparent="0" />
+		<widget name="timerlist" position="0,10" size="1220,400" font="Regular;28" itemHeight="80" scrollbarMode="showOnDemand" foregroundColorSelected="#00fff000" backgroundColorSelected="#00000000" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
+		<widget name="key_red" position="50,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_green" position="315,570" size="320,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;22" />
+		<widget name="key_yellow" position="650,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_blue" position="950,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<ePixmap name="red" pixmap="{picpath}red.png" position="0,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="green" pixmap="{picpath}green.png" position="300,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="yellow" pixmap="{picpath}yellow.png" position="600,575" size="280,45" zPosition="4" backgroundColor="#00000000" transparent="0" alphatest="blend" />
+		<ePixmap name="blue" pixmap="{picpath}blue.png" position="900,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="red" pixmap="{picpath}red1.png" position="50,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="green" pixmap="{picpath}green1.png" position="350,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="yellow" pixmap="{picpath}yellow1.png" position="650,570" size="240,40" zPosition="3" backgroundColor="#00000000" transparent="0" alphatest="blend" />
+		<ePixmap name="blue" pixmap="{picpath}blue1.png" position="950,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<eLabel name="background" position="0,0" size="1240,720" backgroundColor="#00000000" zPosition="0" transparent="0" />
+	</screen>
+	<!-- auf den timer eintag ok drücken -->
+	<screen name="RemoteTimerEntry" position="center,80" size="1250,620" title="Timer entry">
+		<widget name="config" font="Regular;25" itemHeight="40" position="10,10" size="1220,500" scrollbarMode="showOnDemand" foregroundColorSelected="#00fff000" backgroundColorSelected="#00000000" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
+		<widget name="canceltext" position="50,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="oktext" position="350,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<ePixmap name="red" pixmap="{picpath}red.png" position="0,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="green" pixmap="{picpath}green.png" position="300,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="yellow" pixmap="{picpath}yellow.png" position="600,575" size="280,45" zPosition="4" backgroundColor="#00000000" transparent="0" alphatest="blend" />
+		<ePixmap name="blue" pixmap="{picpath}blue.png" position="900,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="red" pixmap="{picpath}red1.png" position="50,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="green" pixmap="{picpath}green1.png" position="350,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="yellow" pixmap="{picpath}yellow1.png" position="650,570" size="240,40" zPosition="3" backgroundColor="#00000000" transparent="0" alphatest="blend" />
+		<ePixmap name="blue" pixmap="{picpath}blue1.png" position="950,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<eLabel name="background" position="0,0" size="1240,720" backgroundColor="#00000000" zPosition="0" transparent="0" />
+	</screen>
+	<!-- epg auswahl oder bouquets hinzufügen -->
+	<screen name="RemoteTimerBouquetList" position="center,80" size="1250,620" title="Choose bouquet">
+		<widget name="text" position="10,510" size="1220,40" zPosition="1" font="Regular;25" halign="center" valign="center" />
+		<widget name="bouquetlist" position="10,10" size="1220,480" itemHeight="80" font="Regular;25" scrollbarMode="showOnDemand" foregroundColorSelected="#00fff000" backgroundColorSelected="#00000000" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
+		<widget name="key_red" position="50,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_green" position="350,570" size="320,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_yellow" position="650,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_blue" position="950,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<ePixmap name="red" pixmap="{picpath}red.png" position="0,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="green" pixmap="{picpath}green.png" position="300,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="yellow" pixmap="{picpath}yellow.png" position="600,575" size="280,45" zPosition="4" backgroundColor="#00000000" transparent="0" alphatest="blend" />
+		<ePixmap name="blue" pixmap="{picpath}blue.png" position="900,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="red" pixmap="{picpath}red1.png" position="50,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="green" pixmap="{picpath}green1.png" position="350,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="yellow" pixmap="{picpath}yellow1.png" position="650,570" size="240,40" zPosition="3" backgroundColor="#00000000" transparent="0" alphatest="blend" />
+		<ePixmap name="blue" pixmap="{picpath}blue1.png" position="950,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<eLabel name="background" position="0,0" size="1240,720" backgroundColor="#00000000" zPosition="0" transparent="0" />
+	</screen>
+	<!-- sender hinzufügen -->
+	<screen name="RemoteTimerChannelList" position="center,80" size="1250,620" title="Bouquet List">
+		<widget name="text" position="0,500" size="1220,50" font="Regular;25" halign="center" valign="center" backgroundColor="#00000000" zPosition="1" transparent="0" />
+		<widget name="channellist" position="0,10" size="1220,480" font="Regular;25" itemHeight="80" scrollbarMode="showOnDemand" foregroundColorSelected="#00fff000" backgroundColorSelected="#00000000" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
+		<widget name="key_red" position="50,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_green" position="350,570" size="320,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_yellow" position="650,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_blue" position="950,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<ePixmap name="red" pixmap="{picpath}red.png" position="0,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="green" pixmap="{picpath}green.png" position="300,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="yellow" pixmap="{picpath}yellow.png" position="600,575" size="280,45" zPosition="4" backgroundColor="#00000000" transparent="0" alphatest="blend" />
+		<ePixmap name="blue" pixmap="{picpath}blue.png" position="900,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="red" pixmap="{picpath}red1.png" position="50,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="green" pixmap="{picpath}green1.png" position="350,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="yellow" pixmap="{picpath}yellow1.png" position="650,570" size="240,40" zPosition="3" backgroundColor="#00000000" transparent="0" alphatest="blend" />
+		<ePixmap name="blue" pixmap="{picpath}blue1.png" position="950,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<eLabel name="background" position="0,0" size="1240,720" backgroundColor="#00000000" zPosition="0" transparent="0" />
+	</screen>
+
+	<screen name="RemoteTimerEPGList" position="center,80" size="1250,620" title="EPG Selection">
+		<widget name="epglist" position="0,10" size="1220,480" font="Regular;25" itemHeight="80" scrollbarMode="showOnDemand" foregroundColorSelected="#00fff000" backgroundColorSelected="#00000000" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
+		<widget name="key_red" position="50,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_green" position="350,570" size="320,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_yellow" position="650,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_blue" position="950,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<ePixmap name="red" pixmap="{picpath}red.png" position="0,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="green" pixmap="{picpath}green.png" position="300,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="yellow" pixmap="{picpath}yellow.png" position="600,575" size="280,45" zPosition="4" backgroundColor="#00000000" transparent="0" alphatest="blend" />
+		<ePixmap name="blue" pixmap="{picpath}blue.png" position="900,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="red" pixmap="{picpath}red1.png" position="50,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="green" pixmap="{picpath}green1.png" position="350,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="yellow" pixmap="{picpath}yellow1.png" position="650,570" size="240,40" zPosition="3" backgroundColor="#00000000" transparent="0" alphatest="blend" />
+		<ePixmap name="blue" pixmap="{picpath}blue1.png" position="950,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<eLabel name="background" position="0,0" size="1240,720" backgroundColor="#00000000" zPosition="0" transparent="0" />
+	</screen>
+
+	<screen name="RemoteTimerEventView" position="center,80" size="1250,620" title="Eventview">
+		<widget name="epg_description" position="10,10" size="1220,480" itemHeight="40" font="Regular; 25" foregroundColorSelected="#00fff000" backgroundColorSelected="#00000000" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
+		<widget name="datetime" position="10,490" size="230,40" font="Regular; 25" backgroundColor="#00000000" zPosition="1" transparent="0" />
+		<widget name="duration" position="240,490" size="200,40" font="Regular;25" backgroundColor="#00000000" zPosition="1" transparent="0" />
+		<widget name="channel" position="440,490" size="305,40" font="Regular; 25" halign="right" backgroundColor="#00000000" zPosition="1" transparent="0" />
+		<widget name="key_red" position="50,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_green" position="350,570" size="320,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_yellow" position="650,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<widget name="key_blue" position="950,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
+		<ePixmap name="red" pixmap="{picpath}red.png" position="0,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="green" pixmap="{picpath}green.png" position="300,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="yellow" pixmap="{picpath}yellow.png" position="600,575" size="280,45" zPosition="4" backgroundColor="#00000000" transparent="0" alphatest="blend" />
+		<ePixmap name="blue" pixmap="{picpath}blue.png" position="900,575" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
+		<ePixmap name="red" pixmap="{picpath}red1.png" position="50,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="green" pixmap="{picpath}green1.png" position="350,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<ePixmap name="yellow" pixmap="{picpath}yellow1.png" position="650,570" size="240,40" zPosition="3" backgroundColor="#00000000" transparent="0" alphatest="blend" />
+		<ePixmap name="blue" pixmap="{picpath}blue1.png" position="950,570" size="240,40" zPosition="3" transparent="0" alphatest="blend" />
+		<eLabel name="background" position="0,0" size="1240,720" backgroundColor="#00000000" zPosition="0" transparent="0" />
+	</screen>
+
+	<screen name="RemotePlayer" flags="wfNoBorder" position="3,30" size="720,576" title="Partnerbox - RemotePlayer" backgroundColor="#FFFFFFFF">
+		<ePixmap pixmap="{picpath}ExPlayer.png" position="41,388" size="630,130" zPosition="-1" alphatest="off" transparent="1"/>
+		<widget name="ServiceName" zPosition="1" position="50,404" size="610,59" valign="center" halign="center" font="Regular;21" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" />
+		<widget name="DateTime" zPosition="1" position="52,473" size="500,30" halign="left" font="Regular;16" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" transparent="1" />
+		<widget name="IP" zPosition="2" position="361,473" size="300,30" halign="right" font="Regular;16" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" transparent="1" />
+	</screen>
+</skin>

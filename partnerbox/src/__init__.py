@@ -1,19 +1,20 @@
+# -*- coding: utf-8 -*-
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from os import environ as os_environ
-import gettext
+from gettext import bindtextdomain, gettext, dgettext
 
 
 def localeInit():
-	gettext.bindtextdomain("Partnerbox", resolveFilename(SCOPE_PLUGINS, "Extensions/Partnerbox/locale"))
+    bindtextdomain("Partnerbox", resolveFilename(SCOPE_PLUGINS, "Extensions/Partnerbox/locale"))
 
 
 def _(txt):
-	t = gettext.dgettext("Partnerbox", txt)
-	if t == txt:
-		#print "[Partnerbox] fallback to default translation for", txt
-		t = gettext.gettext(txt)
-	return t
+    t = dgettext("Partnerbox", txt)
+    if t == txt:
+        # print "[Partnerbox] fallback to default translation for", txt
+        t = gettext(txt)
+    return t
 
 
 localeInit()

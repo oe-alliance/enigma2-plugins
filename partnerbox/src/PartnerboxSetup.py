@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+# -*- coding: utf-8 -*-
 #
 #  Partnerbox E2
 #
@@ -17,9 +17,10 @@ from __future__ import absolute_import
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 #
-
-from enigma import eListboxPythonMultiContent, eListbox, gFont, \
-	RT_HALIGN_LEFT, RT_VALIGN_CENTER, getDesktop
+# for localized messages
+from __future__ import absolute_import
+from . import _
+from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER, getDesktop
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.MenuList import MenuList
@@ -28,11 +29,10 @@ from Components.config import config
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import ConfigSubsection, ConfigSubList, ConfigIP, ConfigInteger, ConfigSelection, ConfigText, ConfigYesNo, getConfigListEntry, configfile
-import skin
-
-# for localized messages
-from . import _
-
+from xml.etree.cElementTree import tostring, parse
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+from skin import fonts, parameters
+from .PartnerboxFunctions import readSkin, applySkinVars, FHD, SCALE, SKINFILE, PLUGINPATH
 
 def initPartnerboxEntryConfig():
 	config.plugins.Partnerbox.Entries.append(ConfigSubsection())
@@ -56,40 +56,17 @@ def initConfig():
 			i += 1
 
 
-HD = False
-if getDesktop(0).size().width() >= 1280:
-	HD = True
-
-
 class PartnerboxSetup(ConfigListScreen, Screen):
-	if HD:
-		skin = """ <screen position="center,center" size="700,400" title="Partnerbox Setup" >
-				<widget name="config" position="10,10" size="680,330" scrollbarMode="showOnDemand" />
-				<widget name="key_red" position="10,350" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;17"/>
-				<widget name="key_green" position="300,350" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;17"/>
-				<widget name="key_yellow" position="550,350" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;17"/>
-				<ePixmap name="red" pixmap="skin_default/buttons/red.png" position="10,350" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
-				<ePixmap name="green" pixmap="skin_default/buttons/green.png" position="300,350" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
-				<ePixmap name="yellow" pixmap="skin_default/buttons/yellow.png" position="550,350" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
-			</screen>"""
-	else:
-		skin = """ <screen position="center,center" size="550,400" title="Partnerbox Setup" >
-				<widget name="config" position="20,10" size="510,330" scrollbarMode="showOnDemand" />
-				<widget name="key_red" position="0,350" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/>
-				<widget name="key_green" position="140,350" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/>
-				<widget name="key_yellow" position="280,350" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/>
-				<ePixmap name="red" pixmap="skin_default/buttons/red.png" position="0,350" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
-				<ePixmap name="green" pixmap="skin_default/buttons/green.png" position="140,350" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
-				<ePixmap name="yellow" pixmap="skin_default/buttons/yellow.png" position="280,350" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
-			</screen>"""
+	skin = readSkin("PartnerboxSetup")
 
 	def __init__(self, session, args=None):
+		self.skin = applySkinVars(PartnerboxSetup.skin, {'picpath': PLUGINPATH + 'buttons/'})
 		Screen.__init__(self, session)
 		self.setTitle(_("Partnerbox Setup"))
-
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("OK"))
 		self["key_yellow"] = Button(_("Partnerbox Entries"))
+		self["key_blue"] = Button("")
 		ConfigListScreen.__init__(self, [])
 		self.initConfig()
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -156,35 +133,18 @@ class PartnerboxSetup(ConfigListScreen, Screen):
 
 	def refreshPlugins(self):
 		from Components.PluginComponent import plugins
-		from Tools.Directories import SCOPE_PLUGINS, resolveFilename
 		plugins.clearPluginList()
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 
 
 class PartnerboxEntriesListConfigScreen(Screen):
-	skin = """
-		<screen position="center,center" size="550,400" title="Partnerbox: List of Entries" >
-			<widget name="name" position="5,0" size="200,50" font="Regular;20" halign="left"/>
-			<widget name="ip" position="215,0" size="140,50" font="Regular;20" halign="left"/>
-			<widget name="port" position="350,0" size="80,50" font="Regular;20" halign="left"/>
-			<widget name="type" position="430,0" size="120,50" font="Regular;20" halign="left"/>
-			<widget name="entrylist" position="0,50" size="550,300" scrollbarMode="showOnDemand"/>
-
-			<widget name="key_red" position="0,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_yellow" position="280,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="yellow" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_green" position="140,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="green" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_blue" position="420,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<ePixmap name="red" position="0,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="280,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap name="green" position="140,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue" position="420,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		</screen>"""
+	skin = readSkin("PartnerboxEntriesListConfigScreen")
 
 	def __init__(self, session, what=None):
+		self.skin = applySkinVars(PartnerboxEntriesListConfigScreen.skin, {'picpath': PLUGINPATH + 'buttons/'})
 		Screen.__init__(self, session)
 		self.session = session
 		self.setTitle(_("Partnerbox: List of Entries"))
-
 		self["name"] = Button(_("Name"))
 		self["ip"] = Button(_("IP"))
 		self["port"] = Button(_("Port"))
@@ -195,16 +155,16 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		self["key_blue"] = Button(_("Delete"))
 		self["entrylist"] = PartnerboxEntryList([])
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
-			{
-			 "ok": self.keyOK,
-			 "back": self.keyClose,
-			 "red": self.keyRed,
-			 "yellow": self.keyYellow,
-			 "blue": self.keyDelete,
-			 "green": self.powerMenu,
-			 }, -1)
+		{
+			"ok": self.keyOK,
+			"back": self.keyClose,
+			"red": self.keyRed,
+			"yellow": self.keyYellow,
+			"blue": self.keyDelete,
+			"green": self.powerMenu,
+		}, -1)
 		self.what = what
-		self.updateList()
+		self.onLayoutFinish.append(self.updateList)
 
 	def updateList(self):
 		self["entrylist"].buildList()
@@ -222,8 +182,8 @@ class PartnerboxEntriesListConfigScreen(Screen):
 			sel = None
 		nr = int(config.plugins.Partnerbox.entriescount.value)
 		if nr > 1 and self.what == 2 or nr >= 1 and self.what == None:
-				from .plugin import RemoteTimer
-				self.session.open(RemoteTimer, sel)
+			from .plugin import RemoteTimer
+			self.session.open(RemoteTimer, sel)
 		else:
 			self.close(self.session, self.what, sel)
 
@@ -317,10 +277,10 @@ class PartnerboxEntriesListConfigScreen(Screen):
 class PartnerboxEntryList(MenuList):
 	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		font = skin.fonts.get("PartnerBoxEntryList0", ("Regular", 20, 20))
+		font = fonts.get("PartnerBoxEntryList0", ("Regular", int(20 * SCALE), int(20 * SCALE)))
 		self.l.setFont(0, gFont(font[0], font[1]))
 		self.ItemHeight = int(font[2])
-		font = skin.fonts.get("PartnerBoxEntryList1", ("Regular", 18))
+		font = fonts.get("PartnerBoxEntryList1", ("Regular", int(18 * SCALE)))
 		self.l.setFont(1, gFont(font[0], font[1]))
 
 	def postWidgetCreate(self, instance):
@@ -331,19 +291,19 @@ class PartnerboxEntryList(MenuList):
 		self.list = []
 		for c in config.plugins.Partnerbox.Entries:
 			res = [c]
-			x, y, w, h = skin.parameters.get("PartnerBoxEntryListName", (5, 0, 150, 20))
+			x, y, w, h = parameters.get("PartnerBoxEntryListName", (int(5 * SCALE), 0, int(200 * SCALE), int(24 * SCALE)))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(c.name.value)))
 			ip = "%d.%d.%d.%d" % tuple(c.ip.value)
-			x, y, w, h = skin.parameters.get("PartnerBoxEntryListIP", (120, 0, 150, 20))
+			x, y, w, h = parameters.get("PartnerBoxEntryListIP", (int(214 * SCALE), 0, int(230 * SCALE), int(24 * SCALE)))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(ip)))
 			port = "%d" % (c.port.value)
-			x, y, w, h = skin.parameters.get("PartnerBoxEntryListPort", (270, 0, 100, 20))
+			x, y, w, h = parameters.get("PartnerBoxEntryListPort", (int(400 * SCALE), 0, int(70 * SCALE), int(24 * SCALE)))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(port)))
 			if int(c.enigma.value) == 0:
 				e_type = "Enigma2"
 			else:
 				e_type = "Enigma1"
-			x, y, w, h = skin.parameters.get("PartnerBoxEntryListType", (410, 0, 100, 20))
+			x, y, w, h = parameters.get("PartnerBoxEntryListType", (int(550 * SCALE), 0, int(100 * SCALE), int(24 * SCALE)))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(e_type)))
 			self.list.append(res)
 		self.l.setList(self.list)
@@ -351,23 +311,13 @@ class PartnerboxEntryList(MenuList):
 
 
 class PartnerboxEntryConfigScreen(ConfigListScreen, Screen):
-	skin = """
-		<screen name="PartnerboxEntryConfigScreen" position="center,center" size="550,400" title="Partnerbox: Edit Entry">
-			<widget name="config" position="20,10" size="520,330" scrollbarMode="showOnDemand" />
-			<ePixmap name="red"	position="0,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green" position="140,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue" position="420,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-
-			<widget name="key_red" position="0,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_green" position="140,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_blue" position="420,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		</screen>"""
+	skin = readSkin("PartnerboxEntryConfigScreen")
 
 	def __init__(self, session, entry):
 		self.session = session
+		self.skin = applySkinVars(PartnerboxEntryConfigScreen.skin, {'picpath': PLUGINPATH + 'buttons/'})
 		Screen.__init__(self, session)
 		self.setTitle(_("Partnerbox: Edit Entry"))
-
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"green": self.keySave,
