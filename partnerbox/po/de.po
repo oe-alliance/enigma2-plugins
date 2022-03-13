@@ -4,94 +4,92 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Dr.Best <dr.best@dreambox-tools.info>\n"
+"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: Dr. Best <dr.best@dreambox-tools.info>\n"
-"Language: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: German\n"
-"X-Poedit-Country: Germany\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 3.0\n"
 
 #, python-format
 msgid "%02d.%02d - %02d.%02d"
-msgstr ""
+msgstr "%02d.%02d - %02d.%02d"
 
 msgid "%a"
-msgstr ""
+msgstr "%a"
 
 #, python-format
 msgid "%d min"
-msgstr ""
+msgstr "%d min"
 
 msgid "%d.%B %Y"
-msgstr ""
+msgstr "%d.%B %Y"
 
 msgid "%e/%m, %-H:%M"
-msgstr ""
+msgstr "%e/%m, %-H:%M"
 
 #, python-format
 msgid "%s%d min"
-msgstr ""
+msgstr "%s%d min"
 
 msgid "(ZAP)"
-msgstr ""
+msgstr "(ZAP)"
 
 msgid "<unknown>"
 msgstr "<unbekannt>"
 
 msgid "Abort"
-msgstr ""
+msgstr "Abbruch"
 
 msgid "Activate Picture in Picture"
-msgstr ""
+msgstr "Aktiviere Bild in Bild"
 
 msgid "Add"
 msgstr "Hinzufügen"
 
-#, fuzzy
 msgid "Add internal timer"
-msgstr "Hinzufügen"
+msgstr "Internen Timer hinzufügen"
 
 msgid "Add timer"
-msgstr "Hinzufügen"
+msgstr "Timer hinzufügen"
 
 msgid "After event"
 msgstr "Nach dem Ereignis"
 
 msgid "Alternative"
-msgstr ""
+msgstr "Alternative"
 
 msgid "Alternative services are not supported!"
-msgstr ""
+msgstr "Alternative Services werden nicht unterstützt!"
 
 msgid "Apply"
-msgstr ""
+msgstr "Anwenden"
 
 msgid "Attention, this is repeated timer!\n"
-msgstr ""
+msgstr "Achtung, dies ist ein wiederholender Timer\n"
 
 msgid "Bouquet List"
-msgstr ""
+msgstr "Bouquet Liste"
 
 msgid "Cancel"
 msgstr "Abbrechen"
 
 msgid "Change pin code"
-msgstr ""
+msgstr "Ändere Pin Code"
 
 msgid "Channel"
-msgstr "Sender"
+msgstr "Kanal"
 
 msgid "Choice list Partnerbox"
-msgstr ""
+msgstr "Auswahlliste Partnerbox"
 
 msgid "Choose action:"
-msgstr ""
+msgstr "Wähle Aktion:"
 
 msgid "Choose bouquet"
-msgstr ""
+msgstr "Wähle Bouquet"
 
 msgid "Clean up"
 msgstr "Aufräumen"
@@ -100,25 +98,23 @@ msgid "Cleaning up finished timer entries..."
 msgstr "Vollendete Timer aufräumen..."
 
 msgid "DVB-C"
-msgstr ""
+msgstr "DVB-C"
 
 msgid "DVB-T"
-msgstr ""
+msgstr "DVB-T"
 
 msgid "DVR"
-msgstr ""
+msgstr "DVR"
 
 msgid "Date"
 msgstr "Datum"
 
-#, fuzzy
 msgid "Deep Standby"
 msgstr "Box abschalten"
 
 msgid "Delete"
 msgstr "Löschen"
 
-#, fuzzy
 msgid "Delete timer"
 msgstr "Timer entfernen"
 
@@ -126,21 +122,24 @@ msgid "Description"
 msgstr "Beschreibung"
 
 msgid "Disable Picture in Picture"
-msgstr ""
+msgstr "Deaktiviere Bild in Bild"
 
-#, fuzzy, python-format
+msgid "Do you really want to clean up the finished timer entries?"
+msgstr "Sollen die vollendeten Timereinträge wirklich aufgeräumt werden?"
+
+#, python-format
 msgid ""
 "Do you really want to delete the remote timer \n"
-"%s ?"
+"%s?"
 msgstr ""
-"Soll der Timereintrag\n"
+"Soll der Timereintrag \n"
 "%s\n"
-" wirklich gelöscht werden?"
+"wirklich gelöscht werden?"
 
 #, python-format
 msgid ""
 "Do you really want to delete the timer \n"
-"%s ?"
+"%s?"
 msgstr ""
 "Soll der Timereintrag\n"
 "%s\n"
@@ -153,54 +152,49 @@ msgid "Edit"
 msgstr "Bearbeiten"
 
 msgid "Edit internal timer"
-msgstr ""
+msgstr "Editiere internen Timer"
 
-#, fuzzy
 msgid "Edit remote timer"
-msgstr "Timer entfernen"
+msgstr "Timer ändern"
 
-#, fuzzy
 msgid "Enable Partnerbox-Function in Channel Selector"
-msgstr "Partnerbox-Funktion in TimerEvent aktivieren"
+msgstr "Aktiviere Partnerbox-Funktion in der Kanalliste"
 
 msgid "Enable Partnerbox-Function in EPGList"
 msgstr "Partnerbox-Funktion in EPG Liste aktivieren"
 
 msgid "Enable Partnerbox-Function in TimerEvent"
-msgstr "Partnerbox-Funktion in TimerEvent aktivieren"
+msgstr "Partnerbox-Funktion im TimerEvent aktivieren"
 
-#, fuzzy
 msgid "Enable Red Button-Function in single/multi EPG"
-msgstr "Partnerbox-Funktion in EPG Liste aktivieren"
+msgstr "Aktiviere Roter-Knopf-Funktion in single/multi EPG Liste"
 
 msgid "Enable VPS"
-msgstr ""
+msgstr "Aktiviere VPS"
 
 msgid "Enable VPS-Function in TimerEvent"
-msgstr ""
+msgstr "Aktiviere VPS-Funktion in TimerEvent"
 
-#, fuzzy
 msgid "Enable first Partnerbox-entry in Timeredit as default"
-msgstr "Partnerbox-Funktion in TimerEvent aktivieren"
+msgstr "Aktiviere Partnerbox-Einträge im Timeredit als Standard"
 
 msgid "EndTime"
 msgstr "Endzeit"
 
 msgid "Enigma 1"
-msgstr ""
+msgstr "Enigma 1"
 
 msgid "Enigma 2"
-msgstr ""
+msgstr "Enigma 2"
 
 msgid "Enigma Type"
 msgstr "Enigma Typ"
 
 msgid "Enter the service pin"
-msgstr ""
+msgstr "Gebe den Service Pin ein"
 
-#, fuzzy
 msgid "Error: "
-msgstr "Fehler: Veraltet"
+msgstr "Fehler: "
 
 msgid "Error: No space left"
 msgstr "Fehler: Kein Platz frei"
@@ -215,10 +209,10 @@ msgid "Error: Zap failed"
 msgstr "Fehler: Umschalten fehlgeschlagen"
 
 msgid "Eventview"
-msgstr ""
+msgstr "Eventview"
 
 msgid "Fri"
-msgstr "Frei"
+msgstr "Fr"
 
 msgid "Friday"
 msgstr "Freitag"
@@ -229,30 +223,29 @@ msgstr "Hole Sender Informationen..."
 msgid "Getting EPG Information..."
 msgstr "Hole EPG Informationen..."
 
-#, fuzzy
 msgid "Getting EPG data..."
 msgstr "Hole EPG Informationen..."
 
 msgid "Getting Partnerbox Bouquet Information..."
-msgstr "Hole Partnerbox Bouquet Informationen"
+msgstr "Hole Partnerbox Bouquet Informationen..."
 
 msgid "Getting Partnerbox Information..."
 msgstr "Hole Partnerbox Infomationen..."
 
 msgid "Getting timerlist data..."
-msgstr ""
+msgstr "Hole Timerlist Daten..."
 
 msgid "Give Enigma time to fill epg cache..."
-msgstr ""
+msgstr "Gebe Enigma Zeit um EPG zu füllen..."
 
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 msgid "Internet services are not supported!"
-msgstr ""
+msgstr "Internet Services werden nicht unterstützt!"
 
 msgid "Location"
 msgstr "Ort"
@@ -261,7 +254,7 @@ msgid "Manage timer for other dreamboxes in network"
 msgstr "Verwaltung der Timer für andere Dreamboxen im Netzwerk"
 
 msgid "Menu PiP"
-msgstr ""
+msgstr "Menü PiP"
 
 msgid "Mon"
 msgstr "Mo"
@@ -270,27 +263,25 @@ msgid "Monday"
 msgstr "Montag"
 
 msgid "Move Picture in Picture"
-msgstr ""
+msgstr "Verschiebe Bild in Bild"
 
 msgid "NGRAB"
-msgstr ""
+msgstr "NGRAB"
 
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 msgid "No"
 msgstr "Nein"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
-#, fuzzy
 msgid "Partnerbox"
-msgstr "Partnerbox Einträge"
+msgstr "Partnerbox"
 
-#, fuzzy
 msgid "Partnerbox - RemotePlayer"
-msgstr "Partnerbox Einträge"
+msgstr "Partnerbox - Remoteplayer"
 
 #, python-format
 msgid ""
@@ -303,13 +294,11 @@ msgstr ""
 msgid "Partnerbox Entries"
 msgstr "Partnerbox Einträge"
 
-#, fuzzy
 msgid "Partnerbox RemoteTimer"
-msgstr "Partnerbox Einträge"
+msgstr "Partnerbox RemoteTimer"
 
-#, fuzzy
 msgid "Partnerbox Setup"
-msgstr "Partnerbox Einträge"
+msgstr "Partnerbox Setup"
 
 msgid "Partnerbox: Edit Entry"
 msgstr "Partnerbox: Eintrag bearbeiten"
@@ -317,51 +306,47 @@ msgstr "Partnerbox: Eintrag bearbeiten"
 msgid "Partnerbox: List of Entries"
 msgstr "Liste der Partnerboxen"
 
-#, fuzzy
 msgid "Partnerbox: RemoteTV Player"
-msgstr "Partnerbox: Eintrag bearbeiten"
+msgstr "Partnerbox: RemoteTV Player"
 
-#, fuzzy
 msgid "Partnerbox: RemoteTimer"
-msgstr "Partnerbox Einträge"
+msgstr "Partnerbox RemoteTimer"
 
 msgid "Password"
 msgstr "Passwort"
 
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 msgid "Power"
-msgstr ""
+msgstr "Power"
 
 msgid "Press OK to edit timer..."
-msgstr ""
+msgstr "Drücke OK um den Timer zu editieren..."
 
 msgid "Really delete this Partnerbox Entry?"
 msgstr "Soll der Partnerbox-Eintrag wirklich gelöscht werden?"
 
-#, fuzzy
 msgid "Remote Player"
-msgstr "Timer entfernen"
+msgstr "Remote Player"
 
 msgid "Remote Timer"
-msgstr ""
+msgstr "Remote Timer"
 
-#, fuzzy
 msgid "RemoteTimer Timerlist"
-msgstr "Timer entfernen"
+msgstr "RemoteTimer Timerlist"
 
 msgid "Remove timer"
 msgstr "Timer entfernen"
 
 msgid "Repeated Timer are not supported!"
-msgstr ""
+msgstr "Wiederholende Timer werden nicht unterstützt!"
 
 msgid "Restart"
-msgstr ""
+msgstr "Neustart"
 
 msgid "Restart enigma"
-msgstr ""
+msgstr "Enigma Neustart"
 
 msgid "Sat"
 msgstr "Sa"
@@ -371,19 +356,17 @@ msgstr "Samstag"
 
 #, python-format
 msgid "Select action for remote timer '%s':"
-msgstr ""
+msgstr "Wähle Aktion für Remote Timer '%s':"
 
 #, python-format
 msgid "Select action for timer '%s':"
-msgstr ""
+msgstr "Wähle Aktion für Timer '%s':"
 
-#, fuzzy
 msgid "Select action:"
-msgstr "EPG Auswahl"
+msgstr "Wähle Aktion:"
 
-#, fuzzy
 msgid "Select operation for partnerbox"
-msgstr "Setup für Partnerbox"
+msgstr "Wähle Betriebsart der Partnerbox"
 
 msgid "Servicelists/EPG"
 msgstr "Servicelisten/EPG"
@@ -394,49 +377,45 @@ msgstr "'RemoteTV Player' im E-Menu anzeigen"
 msgid "Show 'RemoteTimer' in E-Menu"
 msgstr "'RemoteTimer' im E-Menu anzeigen"
 
-#, fuzzy
 msgid "Show 'RemoteTimer' in Event View context menu"
-msgstr "'RemoteTimer' im E-Menu anzeigen"
+msgstr "Zeige 'RemoteTimer' im EventView Kontextmenü"
 
-#, fuzzy
 msgid "Show 'RemoteTimer' in Eventinfo menu"
-msgstr "'RemoteTimer' im E-Menu anzeigen"
+msgstr "Zeige 'RemoteTimer' im Eventinfo-Menü"
 
 msgid "Show 'Stream current Service' in E-Menu"
 msgstr "'Aktuellen Sender Streamen' in E-Menu anzeigen"
 
 msgid "Show all icon for event in EPGList"
-msgstr ""
+msgstr "Zeige alle Icons für Ereignis in EPG-Liste"
 
 msgid "Show duration time for event"
-msgstr ""
+msgstr "Zeige Zeitdauer für Ereignis"
 
 msgid "Shutdown"
-msgstr ""
+msgstr "Herunterfahren"
 
 msgid "Standard Zap"
-msgstr ""
+msgstr "Standard Zap"
 
-#, fuzzy
 msgid "Standby"
-msgstr "schalte in Standby"
+msgstr "Standby"
 
 msgid "StartTime"
 msgstr "Startzeit"
 
 #, python-format
 msgid "Starting Remote Player (IP = %s)"
-msgstr ""
+msgstr "Starte Remote Player (IP = %s)"
 
 msgid "Stream"
-msgstr ""
+msgstr "Stream"
 
 msgid "Stream TV from your Partnerbox"
 msgstr "TV-Bild der Partnerbox anzeigen"
 
-#, fuzzy
 msgid "Stream current Service from Partnerbox"
-msgstr "Aktuelles TV-Bild der Partnerbox anzeigen"
+msgstr "Streame den aktuellen Service der Partnerbox"
 
 msgid "Stream current service from partnerbox"
 msgstr "Aktuelles TV-Bild der Partnerbox anzeigen"
@@ -448,7 +427,7 @@ msgid "Sunday"
 msgstr "Sonntag"
 
 msgid "The pin code you entered is wrong."
-msgstr ""
+msgstr "Der eingegebene Pin Code ist falsch."
 
 msgid "Thu"
 msgstr "Do"
@@ -457,33 +436,33 @@ msgid "Thursday"
 msgstr "Donnerstag"
 
 msgid "Timer Overview"
-msgstr ""
+msgstr "Timerübersicht"
 
 msgid "Timer Type"
 msgstr "Timer-Art"
 
 msgid "Timer can not be added...no locations on partnerbox available."
 msgstr ""
+"Timer konnte nicht hinzugefügt werden... kein Speicherort auf der Partnerbox "
+"verfügbar."
 
-#, fuzzy
 msgid "Timer entry"
-msgstr "Timer-Art"
+msgstr "Timer Eintrag"
 
 msgid "Timer event deleted successfully."
-msgstr ""
+msgstr "Timer Ereignis wurde erfolgreich gelöscht."
 
 msgid "Timer event was created successfully."
-msgstr ""
+msgstr "Timer Ereignis wurde erfolgreich erzeugt."
 
-#, fuzzy
 msgid "Timer menu"
-msgstr "Timer-Art"
+msgstr "Timer Menü"
 
 msgid "Toggle Standby"
-msgstr ""
+msgstr "Umschalten auf Standby"
 
 msgid "Toggle status (on/off)"
-msgstr ""
+msgstr "Umschalten (ein/aus)"
 
 msgid "Tue"
 msgstr "Di"
@@ -492,7 +471,7 @@ msgid "Tuesday"
 msgstr "Dienstag"
 
 msgid "Wakeup"
-msgstr ""
+msgstr "Aufwecken"
 
 msgid "Wed"
 msgstr "Mi"
@@ -501,45 +480,47 @@ msgid "Wednesday"
 msgstr "Mittwoch"
 
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 msgid "Yes (safe mode)"
-msgstr ""
+msgstr "Ja (abgesicherter Modus)"
 
-msgid "You can not add services or bouquets from Enigma1-receivers into the channellist..."
+msgid ""
+"You can not add services or bouquets from Enigma1-receivers into the "
+"channellist..."
 msgstr ""
+"Sie können keine Services oder Bouquets von Enigma1-Receivern in die "
+"Kanalliste eintragen..."
 
 msgid "Zap"
 msgstr "Umschalten"
 
 msgid "Zap focus to Picture in Picture"
-msgstr ""
+msgstr "Zap führt zu Bild in Bild"
 
 msgid "Zap focus to main screen"
-msgstr ""
+msgstr "Zap führt zum Hauptbildschirm"
 
 msgid "Zap to service when streaming"
 msgstr "Beim Streamen auf Sender zappen"
 
 msgid "Zap/"
-msgstr ""
+msgstr "Zap/"
 
 msgid "Zapping to "
-msgstr ""
+msgstr "Zappe zu "
 
 msgid "about to start"
 msgstr "startet gleich"
 
-#, fuzzy
 msgid "add Partnerbox bouquet"
-msgstr "Partnerbox Einträge"
+msgstr "Partnerbox Bouquet hinzufügen"
 
-#, fuzzy
 msgid "add Partnerbox service"
-msgstr "Partnerbox Einträge"
+msgstr "Partnerbox Service hinzufügen"
 
 msgid "auto"
-msgstr ""
+msgstr "Auto"
 
 msgid "disabled"
 msgstr "abgeschaltet"
@@ -572,13 +553,13 @@ msgid "unknown service"
 msgstr "Unbekannter Service"
 
 msgid "use external"
-msgstr "extern"
+msgstr "nutze extern"
 
 msgid "use internal"
-msgstr "intern"
+msgstr "nutze intern"
 
 msgid "waiting"
-msgstr "wartend"
+msgstr "warte"
 
 msgid "zap"
 msgstr "umschalten"
