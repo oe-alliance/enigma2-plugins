@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 19:06+0430\n"
-"PO-Revision-Date: 2022-03-02 22:10+0100\n"
+"PO-Revision-Date: 2022-03-13 20:23+0100\n"
 "Last-Translator: Snoete\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl\n"
@@ -129,18 +129,21 @@ msgstr "Beschrijving"
 msgid "Disable Picture in Picture"
 msgstr "Picture in Picture uitschakelen"
 
+msgid "Do you really want to clean up the finished timer entries?"
+msgstr "Wilt u de uitgevoerde timers nu opruimen?"
+
 #, python-format
 msgid ""
 "Do you really want to delete the remote timer \n"
-"%s ?"
+"%s?"
 msgstr ""
 "Wilt u echt deze remote timer verwijderen \n"
-"%s ?"
+"%s?"
 
 #, python-format
 msgid ""
 "Do you really want to delete the timer \n"
-"%s ?"
+"%s?"
 msgstr ""
 "Wilt u echt de timer \n"
 "%s  \n"
@@ -219,22 +222,22 @@ msgid "Friday"
 msgstr "vrijdag"
 
 msgid "Getting Channel Information..."
-msgstr "Bezig kanaal informatie te verkrijgen..."
+msgstr "Bezig met het laden van zender informatie..."
 
 msgid "Getting EPG Information..."
-msgstr "Bezig EPG informatie te verkrijgen..."
+msgstr "Bezig met het laden van EPG informatie..."
 
 msgid "Getting EPG data..."
-msgstr "EPG informatie laden..."
+msgstr "Bezig met het laden van EPG gegevens..."
 
 msgid "Getting Partnerbox Bouquet Information..."
-msgstr "Bezig Partnerbox boeket informatie te verkrijgen..."
+msgstr "Bezig met het laden van Partnerbox Favorietenlijst informatie..."
 
 msgid "Getting Partnerbox Information..."
-msgstr "Bezig Partnerbox informatie te verkrijgen..."
+msgstr "Bezig met laden van Partnerbox informatie..."
 
 msgid "Getting timerlist data..."
-msgstr "Timeroverzicht gegevens laden..."
+msgstr "Bezig met het laden van het Timeroverzicht..."
 
 msgid "Give Enigma time to fill epg cache..."
 msgstr "Even geduld, bezig met het vullen van de EPG cache..."
@@ -335,7 +338,7 @@ msgid "Remote Timer"
 msgstr "Remote Timer"
 
 msgid "RemoteTimer Timerlist"
-msgstr "RemoteTimer Timeroverzicht"
+msgstr "RemoteTimer Overzicht"
 
 msgid "Remove timer"
 msgstr "Timer verwijderen"
@@ -515,10 +518,10 @@ msgid "about to start"
 msgstr "gaat bijna beginnen"
 
 msgid "add Partnerbox bouquet"
-msgstr "voeg favorietenlijst van partnerbox toe"
+msgstr "Favorietenlijst van een Partnerbox toevoegen"
 
 msgid "add Partnerbox service"
-msgstr "voeg zender van Partnerbox toe"
+msgstr "Zender van een Partnerbox toevoegen"
 
 msgid "auto"
 msgstr "automatisch"
