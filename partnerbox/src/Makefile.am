@@ -14,4 +14,6 @@ plugin_PYTHON = \
 plugin_DATA = \
 	ExPlayer.png \
 	maintainer.info \
-	Setup_Partnerbox.png
+	Setup_Partnerbox.png \
+	skin_FHD.xml \
+	skin_HD.xml
