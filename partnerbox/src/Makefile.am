@@ -1,4 +1,4 @@
-SUBDIRS = icons, buttons
+SUBDIRS = icons buttons
 plugindir = $(libdir)/enigma2/python/Plugins/Extensions/Partnerbox
 
 plugin_PYTHON = \
