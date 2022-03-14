@@ -44,7 +44,7 @@ msgid "Abort"
 msgstr "Abbruch"
 
 msgid "Activate Picture in Picture"
-msgstr "Aktiviere Bild in Bild"
+msgstr "Aktiviere Bild im Bild"
 
 msgid "Add"
 msgstr "Hinzufügen"
@@ -122,7 +122,7 @@ msgid "Description"
 msgstr "Beschreibung"
 
 msgid "Disable Picture in Picture"
-msgstr "Deaktiviere Bild in Bild"
+msgstr "Deaktiviere Bild im Bild"
 
 msgid "Do you really want to clean up the finished timer entries?"
 msgstr "Sollen die vollendeten Timereinträge wirklich aufgeräumt werden?"
@@ -263,7 +263,7 @@ msgid "Monday"
 msgstr "Montag"
 
 msgid "Move Picture in Picture"
-msgstr "Verschiebe Bild in Bild"
+msgstr "Verschiebe Bild im Bild"
 
 msgid "NGRAB"
 msgstr "NGRAB"
@@ -496,7 +496,7 @@ msgid "Zap"
 msgstr "Umschalten"
 
 msgid "Zap focus to Picture in Picture"
-msgstr "Zap führt zu Bild in Bild"
+msgstr "Zap führt zu Bild im Bild"
 
 msgid "Zap focus to main screen"
 msgstr "Zap führt zum Hauptbildschirm"
