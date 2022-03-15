@@ -304,13 +304,13 @@ msgid "Partnerbox: Edit Entry"
 msgstr "Partnerbox: Eintrag bearbeiten"
 
 msgid "Partnerbox: List of Entries"
-msgstr "Liste der Partnerboxen"
+msgstr "Partnerbox: Liste der Einträge"
 
 msgid "Partnerbox: RemoteTV Player"
 msgstr "Partnerbox: RemoteTV Player"
 
 msgid "Partnerbox: RemoteTimer"
-msgstr "Partnerbox RemoteTimer"
+msgstr "Partnerbox: RemoteTimer"
 
 msgid "Password"
 msgstr "Passwort"
