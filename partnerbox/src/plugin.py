@@ -53,7 +53,7 @@ from six.moves.urllib.parse import quote
 from six.moves.urllib.request import urlopen
 from .RemoteTimerEntry import RemoteTimerEntry, RemoteTimerInit
 from .PartnerboxEPGSelection import Partnerbox_EPGSelectionInit
-from .PartnerboxFunctions import PlaylistEntry, FillE1TimerList, E2Timer, FillE2TimerList, SetPartnerboxTimerlist, sendPartnerBoxWebCommand, isInTimerList, readSkin, applySkinVars,  FHD, SCALE, SKINFILE, PLUGINPATH
+from .PartnerboxFunctions import PlaylistEntry, FillE1TimerList, E2Timer, FillE2TimerList, SetPartnerboxTimerlist, sendPartnerBoxWebCommand, isInTimerList, readSkin, applySkinVars, FHD, SCALE, SKINFILE, PLUGINPATH
 from .PartnerboxEPGList import Partnerbox_EPGListInit
 from .PartnerboxSetup import PartnerboxSetup, PartnerboxEntriesListConfigScreen, PartnerboxEntryList, PartnerboxEntryConfigScreen, initPartnerboxEntryConfig, initConfig
 from .Services import Services, E2EPGListAllData, E2ServiceList
