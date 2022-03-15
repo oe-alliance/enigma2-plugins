@@ -74,16 +74,8 @@
 	<!-- epg auswahl oder bouquets hinzufügen -->
 	<screen name="RemoteTimerBouquetList" position="center,80" size="1250,620" title="Choose bouquet">
 		<widget name="text" position="10,510" size="1220,40" zPosition="1" font="Regular;25" halign="center" valign="center" />
-		<widget name="bouquetlist" position="10,10" size="1220,480" itemHeight="80" font="Regular;25" scrollbarMode="showOnDemand" foregroundColorSelected="#00fff000" backgroundColorSelected="#00000000" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
-		<widget name="key_red" position="50,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
-		<widget name="key_green" position="350,570" size="320,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
-		<widget name="key_yellow" position="650,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
-		<widget name="key_blue" position="950,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
-		<ePixmap name="red" pixmap="{picpath}red.png" position="50,570" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
-		<ePixmap name="green" pixmap="{picpath}green.png" position="350,570" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
-		<ePixmap name="yellow" pixmap="{picpath}yellow.png" position="650,570" size="280,45" zPosition="4" backgroundColor="#00000000" transparent="0" alphatest="blend" />
-		<ePixmap name="blue" pixmap="{picpath}blue.png" position="950,570" size="280,45" zPosition="4" transparent="0" alphatest="blend" />
-		<eLabel name="background" position="0,0" size="1240,720" backgroundColor="#00000000" zPosition="0" transparent="0" />
+		<widget name="bouquetlist" position="10,10" size="1220,480" itemHeight="26" font="Regular;25" scrollbarMode="showOnDemand" foregroundColorSelected="#00fff000" backgroundColorSelected="#00000000" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
+		<eLabel name="background" position="0,0" size="1250,620" backgroundColor="#00000000" zPosition="0" transparent="0" />
 	</screen>
 	<!-- sender hinzufügen -->
 	<screen name="RemoteTimerChannelList" position="center,80" size="1250,620" title="Bouquet List">
