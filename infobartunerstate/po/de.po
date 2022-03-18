@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Enigma2 InfoBarTunerState Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 19:06+0430\n"
-"PO-Revision-Date: 2022-03-18 10:14+0100\n"
+"PO-Revision-Date: 2022-03-18 11:52+0100\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: none\n"
 "Language: de_DE\n"
@@ -128,7 +128,7 @@ msgstr "Feld %d Inhalt"
 
 #, python-format
 msgid "Field %d width"
-msgstr "Field %d width"
+msgstr "Feld %d Breite"
 
 msgid "File Size"
 msgstr "Dateigröße"
