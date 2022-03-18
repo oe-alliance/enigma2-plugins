@@ -214,7 +214,7 @@ class IMDB(Screen, HelpableScreen):
 			'(?:.*?<h4 class="inline">\s*(?P<g_premiere>Premiere|Release Date).*?</h4>\s+(?P<premiere>.*?)\s*<span)?'
 			'(?:.*?<h4 class="inline">\s*(?P<g_alternativ>Auch bekannt als|Also Known As):\s*</h4>\s*(?P<alternativ>.*?)\s*<span)?', re.DOTALL),
 			re.compile(
-			'<h1.*?class="TitleHeader__TitleText.*?>(?P<title>.*?)</h1>'
+			'<h1.*?hero-title-block__title" class=.*?>(?P<title>.*?)</h1>'
 			'(?:.*?>(?P<g_episodes>Episodes)<span.*?>(?P<episodes>.*?)</span>)?'
 			'(?:.*?>(?P<seasons>\d+) (?P<g_seasons>[Ss]easons?)<)?'
 			'(?:.*?>(?P<g_director>Regisseur|Directors?)</span><div.*?<ul.*?>(?P<director>.*?)</ul>)?'
@@ -246,16 +246,16 @@ class IMDB(Screen, HelpableScreen):
 			'(?:.*?<h4 class="inline">(?P<g_color>Farbe|Color):</h4>\s*(?P<color>.+?)</div>)?'
 			'(?:.*?<h4 class="inline">(?P<g_aspect>Seitenverh\S*?ltnis|Aspect Ratio):</h4>\s*(?P<aspect>.+?)(?:Mehr|See more</a>|</div>))?', re.DOTALL),
 			re.compile(
-			'(?:.*?<div.*?class="GenresAndPlot__TextContainerBreakpointXL.*?>(?P<outline>.+?)</div>)?'
-			'(?:.*?<section.*?<div.*?<div.*?<hgroup.*?<h3.*?>(?P<g_synopsis>Storyline)</h3>.*?<div class="Story.*?>(?:<ul|<div.*?<div.*?<div.*?>(?P<synopsis>.+?)</div))?'
-			'(?:.*?Keywords__PlotKeywords.*?>(?P<keywords>.+?)(?:\d+ (?:Mehr|more)</span|</div>))?'
+			'(?:.*?<span[^>]*?"plot-xl".*?>(?P<outline>.+?)</div>)?'
+			'(?:.*?<section.*?<div.*?<div.*?<hgroup.*?<h3.*?>(?P<g_synopsis>Storyline)</h3>.*?<div.*?<div.*?>(?:<ul|<div.*?<div.*?<div.*?>(?P<synopsis>.+?)</div))?'
+			'(?:.*?storyline-plot-keywords.*?>(?P<keywords>.+?)(?:\d+ (?:Mehr|more)</span|</div>))?'
 			'(?:.*?>(?P<g_tagline>Werbezeile|Taglines?)</a>.*?<div.*?<ul.*?<li.*?<span.*?>(?P<tagline>.*?)</span>)?'
 			'(?:.*?>(?P<g_cert>Altersfreigabe|Certificate|Motion Picture Rating \(MPAA\))</a>.*?<div.*?<ul.*?<li.*?<span.*?>(?P<cert>.*?)</span>)?'
 			'(?:.*?>(?P<g_trivia>Dies und das|Trivia)</a><div.*?<div.*?<div.*?<div.*?>(?P<trivia>.+?)</div>)?'
 			'(?:.*?>(?P<g_goofs>Pannen|Goofs)</a><div.*?<div.*?<div.*?<div.*?>(?P<goofs>.+?)</div>)?'
 			'(?:.*?>(?P<g_quotes>Dialogzitate|Quotes)</a><div.*?<div.*?<div.*?<div.*?>(?P<quotes>.+?)</div>)?'
 			'(?:.*?>(?P<g_connections>Bez\S*?ge zu anderen Titeln|Connections)</a><div.*?<div.*?<div.*?<div.*?>(?P<connections>.+?)</div>)?'
-			'(?:.*?<h3.*?>(?P<g_comments>Nutzerkommentare|User review)s.*?</h3>.*?<span.*?UserReviewSummary__Summary.*?><span.*?>(?P<commenttitle>.*?)</span></div><div.*?<div.*?<div.*?>(?P<comment>.+?)</div>.*?<div.*?UserReviewAuthor__AuthorContainer.*?>.*?<ul.*?<li.*?>(?P<commenter>.+?)</li>)?'
+			'(?:.*?<h3.*?>(?P<g_comments>Nutzerkommentare|User review)s.*?</h3>.*?<span.*?review-summary.*?>(?P<commenttitle>.*?)</span></div><div.*?<div.*?<div.*?>(?P<comment>.+?)</div>.*?<div.*?reviews-author.*?>.*?<ul.*?<li.*?>(?P<commenter>.+?)</li>)?'
 			'(?:.*?>(?P<g_language>Sprachen?|Languages?)</span>.*?<div.*?<ul.*?>(?P<language>.*?)</ul>)?'
 			'(?:.*?>(?P<g_locations>Drehorte?|Filming locations?)</a>.*?<div.*?<ul.*?>(?P<locations>.*?)</ul>)?'
 			'(?:.*?>(?P<g_company>Firm\S*?|Production compan.*?)</.*?<div.*?<ul.*?>(?P<company>.*?)</ul>)?'
@@ -267,9 +267,9 @@ class IMDB(Screen, HelpableScreen):
 			self.genreblockmask = [re.compile('<h4 class="inline">(Genres?:</h4>\s*?.*?)\s+?(?:Mehr|See more|</p|<a class|</div>)', re.DOTALL),
 			re.compile('storyline-genres.*?><span.*?>(Genres?</span><div.*?><ul.*?>.*?)</ul>', re.DOTALL)]
 			self.ratingmask = [re.compile('<div class="ratingValue">.*?<span itemprop="ratingValue">(?P<rating>.*?)</span>', re.DOTALL),
-			re.compile('AggregateRatingButton__RatingScore.*?>(?P<rating>.*?)</span>', re.DOTALL)]
+			re.compile('aggregate-rating__score.*?><span.*?>(?P<rating>.*?)</span>', re.DOTALL)]
 			self.castmask = [re.compile('<td>\s*<a href=.*?>(?P<actor>.*?)\s*</a>\s*</td>.*?<td class="character">(?P<character>.*?)(?:<a href="#"\s+class="toggle-episodes".*?>(?P<episodes>.*?)</a>.*?)?</td>', re.DOTALL),
-			re.compile('StyledComponents__ActorName.*?>(?P<actor>.*?)</a>(?:<div.*?<ul.*?>(?P<character>.*?)</span.*?</ul></div>)?(?:<a.*?><span><span.*?>(?P<episodes>.*?)</span></span>)?', re.DOTALL)]
+			re.compile('title-cast-item__actor.*?>(?P<actor>.*?)</a>(?:<div.*?<ul.*?>(?P<character>.*?)</span.*?</ul></div>)?(?:<a.*?><span><span.*?>(?P<episodes>.*?)</span></span>)?', re.DOTALL)]
 			self.postermask = [re.compile('<div class="poster">.*?<img .*?src=\"(http.*?)\"', re.DOTALL),
 			re.compile('"hero-media__poster".*?><div.*?<img.*?ipc-image.*?src="(http.*?)"', re.DOTALL)]
 
@@ -612,7 +612,7 @@ class IMDB(Screen, HelpableScreen):
 		utf8 = ('charSet="utf-8"' in in_html or 'charset="utf-8"' in in_html or
 				'charSet=utf-8' in in_html or 'charset=utf-8' in in_html)
 
-		if 'TitleHeader__TitleText' in in_html:
+		if 'hero-title-block__title' in in_html:
 			self.re_index = 1
 			start = in_html.find('<nav id="imdbHeader"')
 			if start == -1:
