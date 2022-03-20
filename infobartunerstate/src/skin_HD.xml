@@ -1,9 +1,9 @@
 <screen name="TunerState" title="Tuner State" flags="wfNoBorder" position="0,50" size="1000,32" zPosition="5" padding="20" spacing="15" backgroundColor="#ff000000">
-	<widget name="Background" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/background.png" position="0,0" size="1280,32" zPosition="-1" transparent="1" alphatest="off"/>
+	<widget name="Background" pixmap="{picpath}background.png" position="0,0" size="1280,32" zPosition="-1" transparent="1" alphatest="off"/>
 	<!-- Type Icons: Record, Stream, Finished -->
-	<widget name="Type" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/record.png,/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/stream.png,/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/finished.png,/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/info.png" position="0,0" size="32,32" zPosition="1" transparent="1" alphatest="on"/>
+	<widget name="Type" pixmaps="{picpath}record.png,{picpath}stream.png,{picpath}finished.png,{picpath}info.png" position="0,0" size="32,32" zPosition="1" transparent="1" alphatest="on"/>
 	<!-- Progress -->
-	<widget name="Progress" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/progress.png" position="0,00" size="80,10" zPosition="1" borderWidth="2" borderColor="#000000" backgroundColor="#141415" transparent="1"/>
+	<widget name="Progress" pixmap="{picpath}InfoBarTunerState/progress.png" position="0,00" size="80,10" zPosition="1" borderWidth="2" borderColor="#000000" backgroundColor="#141415" transparent="1"/>
 	<!-- Field information -->
 	<!-- nowrap=1 is essential for calculateSize -->
 	<!-- Default field: Tuner -->

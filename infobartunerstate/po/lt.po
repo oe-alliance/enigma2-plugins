@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: InfoBarTunerState\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
-"PO-Revision-Date: 2017-07-10 17:25+0300\n"
-"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"POT-Creation-Date: 2022-03-20 09:29+0320\n"
+"PO-Revision-Date: 2022-03-20 11:50+0100\n"
+"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -17,8 +17,9 @@ msgstr ""
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: .../enigma2-plugins/infobartunerstate\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/infobartunerstate\n"
 
 msgid ""
@@ -63,14 +64,13 @@ msgstr "%d MB"
 
 #, python-format
 msgid "%d Min"
-msgstr "%d min."
+msgstr "%d min"
 
 msgid "-"
 msgstr "-"
 
-#, fuzzy
 msgid "-    HH:MM"
-msgstr "HH:MM"
+msgstr "-    HH:MM"
 
 #, fuzzy
 msgid "Add Setup to extension menu"
@@ -101,9 +101,8 @@ msgstr "Konfigūracija"
 msgid "DD.MM HH:MM"
 msgstr "MM.DD HH:MM"
 
-#, fuzzy
 msgid "DD.MM. HH:MM"
-msgstr "MM.DD HH:MM"
+msgstr "DD.MM. HH:MM"
 
 msgid "DD.MM.YYYY HH:MM"
 msgstr "YYYY.MM.DD HH:MM"
@@ -199,14 +198,18 @@ msgstr "Joks"
 msgid "Nothing running"
 msgstr "Niekas neveikia"
 
-msgid "Number of finished records in list"
+#, fuzzy
+#| msgid "Number of finished records in list"
+msgid "Number of finished recordings in list"
 msgstr "Baigtų įrašų skaičius sąraše"
 
 #, fuzzy
-msgid "Number of pending records in list"
+msgid "Number of pending recordings in list"
 msgstr "Baigtų įrašų skaičius sąraše"
 
-msgid "Number of seconds for displaying finished records"
+#, fuzzy
+#| msgid "Number of seconds for displaying finished records"
+msgid "Number of seconds for displaying finished recordings"
 msgstr "Kiek sekundžių rodyti baigto įrašo pranešimą"
 
 msgid "OK"
@@ -305,10 +308,6 @@ msgstr "Laikmačio eiga (tekstinė)"
 msgid "Tuner"
 msgstr "Imtuvas"
 
-#, fuzzy
-msgid "Tuner State"
-msgstr "Imtuvo stovis infojuostoje"
-
 msgid "Tuner Type"
 msgstr "Imtuvo tipas"
 
@@ -327,11 +326,9 @@ msgstr ""
 msgid "Vertical offset in pixel"
 msgstr "Vertikalus poslinkis pikseliais"
 
-#, fuzzy
 msgid "WD DD.MM. HH:MM"
 msgstr "MM.DD HH:MM"
 
-#, fuzzy
 msgid "WD, DD.MM. HH:MM"
 msgstr "MM.DD HH:MM"
 
@@ -340,3 +337,7 @@ msgstr "YYYY.MM.DD HH:MM"
 
 msgid "configuration"
 msgstr "konfigūracija"
+
+#, fuzzy
+msgid "Tuner State"
+msgstr "Imtuvo stovis infojuostoje"
