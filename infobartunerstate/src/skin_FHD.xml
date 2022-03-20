@@ -1,0 +1,29 @@
+<screen name="TunerState" title="Tuner State" flags="wfNoBorder" position="0,75" size="1500,48" zPosition="5" padding="20" spacing="15" backgroundColor="#ff000000">
+	<widget name="Background" pixmap="{picpath}background.png" position="0,0" size="1920,48" zPosition="-1" transparent="1" alphatest="off"/>
+	<!-- Type Icons: Record, Stream, Finished -->
+	<widget name="Type" pixmaps="{picpath}record.png,{picpath}stream.png,{picpath}finished.png,{picpath}info.png" position="0,0" size="48,48" zPosition="1" transparent="1" alphatest="on"/>
+	<!-- Progress -->
+	<widget name="Progress" pixmap="{picpath}InfoBarTunerState/progress.png" position="0,0" size="120,15" zPosition="1" borderWidth="2" borderColor="#000000" backgroundColor="#141415" transparent="1"/>
+	<!-- Field information -->
+	<!-- nowrap=1 is essential for calculateSize -->
+	<!-- Default field: Tuner -->
+	<widget name="Field0" font="Regular;33" noWrap="1" halign="left" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1" zPosition="1"/>
+	<!-- Default field: Channel Number -->
+	<widget name="Field1" font="Regular;33" noWrap="1" halign="left" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1" zPosition="1"/>
+	<!-- Default field: Channel Name -->
+	<widget name="Field2" font="Regular;33" noWrap="1" halign="left" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1" zPosition="1"/>
+	<!-- Default field: Timer Name -->
+	<widget name="Field3" font="Regular;33" noWrap="1" halign="left" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1" zPosition="1"/>
+	<!-- Default field: Time Left -->
+	<widget name="Field4" font="Regular;33" noWrap="1" halign="left" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1" zPosition="1"/>
+	<!-- Default field: None -->
+	<widget name="Field5" font="Regular;33" noWrap="1" halign="left" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1" zPosition="1"/>
+	<!-- Default field: None -->
+	<widget name="Field6" font="Regular;33" noWrap="1" halign="left" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1" zPosition="1"/>
+	<!-- Default field: None -->
+	<widget name="Field7" font="Regular;33" noWrap="1" halign="left" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1" zPosition="1"/>
+	<!-- Default field: None -->
+	<widget name="Field8" font="Regular;33" noWrap="1" halign="left" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1" zPosition="1"/>
+	<!-- Default field: None -->
+	<widget name="Field9" font="Regular;33" noWrap="1" halign="left" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1" zPosition="1"/>
+</screen>

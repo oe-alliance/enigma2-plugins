@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - InfoBarTunerState\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
-"PO-Revision-Date: 2015-10-18 15:23+0300\n"
-"Last-Translator: Hasan Kiran <Sunder67@hotmail.com>\n"
+"POT-Creation-Date: 2022-03-20 09:29+0320\n"
+"PO-Revision-Date: 2022-03-20 11:49+0100\n"
+"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: Turkish <Sunder67@hotmail.com>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Poedit-Basepath: .../enigma2-plugins/infobartunerstate\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 3.0\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/infobartunerstate\n"
 
 msgid ""
@@ -197,13 +197,13 @@ msgstr "Hiçbiri"
 msgid "Nothing running"
 msgstr ""
 
-msgid "Number of finished records in list"
+msgid "Number of finished recordings in list"
 msgstr ""
 
-msgid "Number of pending records in list"
+msgid "Number of pending recordings in list"
 msgstr ""
 
-msgid "Number of seconds for displaying finished records"
+msgid "Number of seconds for displaying finished recordings"
 msgstr ""
 
 msgid "OK"
@@ -301,10 +301,6 @@ msgstr ""
 msgid "Tuner"
 msgstr "Tuner"
 
-#, fuzzy
-msgid "Tuner State"
-msgstr "Tuner tipi"
-
 msgid "Tuner Type"
 msgstr "Tuner tipi"
 
@@ -336,3 +332,7 @@ msgstr "YYYY/AA/GG SS:DD"
 
 msgid "configuration"
 msgstr "yapılandırma"
+
+#, fuzzy
+msgid "Tuner State"
+msgstr "Tuner tipi"

@@ -1,5 +1,4 @@
-from __future__ import print_function
-from __future__ import absolute_import
+# -*- coding: utf-8 -*-
 #######################################################################
 #
 #    InfoBar Tuner State for Enigma-2
@@ -18,20 +17,21 @@ from __future__ import absolute_import
 #
 #######################################################################
 
+from __future__ import print_function
+
 # for localized messages
 from . import _
-
-import math
-import os
-import NavigationInstance
-import socket
-import sys
-
+from math import ceil
+from six.moves import range
+from six import itervalues, PY2
+from os import path, statvfs, stat
+from socket import gethostbyaddr, herror
 from collections import defaultdict
 from operator import attrgetter, itemgetter
-try:
+import NavigationInstance
+if PY2:
 	from itertools import izip_longest as zip_longest # py2x
-except:
+else:
 	from itertools import zip_longest # py3k
 
 # Plugin
@@ -49,27 +49,14 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from Screens.Screen import Screen
 from Screens.InfoBar import InfoBar
 from Screens.InfoBarGenerics import InfoBarShowHide
-from Screens.Screen import Screen
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-
 from ServiceReference import ServiceReference
 from time import strftime, time, localtime, mktime
 from datetime import datetime, timedelta
-
-from enigma import iServiceInformation, ePoint, eSize, getDesktop, iFrontendInformation
-from enigma import eTimer
-from enigma import iPlayableService, iRecordableService
-from enigma import eDVBResourceManager, eActionMap, eListboxPythonMultiContent, eListboxPythonStringContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, eEPGCache, eServiceCenter, eServiceReference
-
-from skin import parseColor, parseFont
+from enigma import ePoint, eSize, getDesktop, eTimer, iPlayableService, iRecordableService, eEPGCache, eServiceCenter, eServiceReference
 
 # Plugin internal
 from .netstat import netstat
-
-
-import six
-from six.moves import range
-
 
 # Extenal plugins: WebInterface
 try:
@@ -88,7 +75,7 @@ INFO, RECORD, STREAM, FINISHED = list(range(4))
 
 
 # Constants
-INFINITY = u"\u221E".encode("utf-8")
+INFINITY = '∞'
 
 
 #######################################################
@@ -107,8 +94,6 @@ def overwriteInfoBar():
 		InfoBarShowHide._InfoBarShowHide__onHide = InfoBarHideTunerState
 
 # InfoBar Events
-
-
 def recoverInfoBar():
 	global InfoBarShow, InfoBarHide
 	if InfoBarShow:
@@ -180,9 +165,19 @@ def removeExtension():
 			if p.name == IBTSSETUP:
 				plugins.plugins[PluginDescriptor.WHERE_EXTENSIONSMENU].remove(p)
 				break
-
 #######################################################
 # Logical background task
+
+#######################################################
+# Skin handling
+def applySkinVars(skin, dict):
+	for key in dict.keys():
+		try:
+			skin = skin.replace('{' + key + '}', dict[key])
+		except Exception as e:
+			print(e, '@key=', key)
+	return skin
+#######################################################
 
 
 class InfoBarTunerState(object):
@@ -407,7 +402,7 @@ class InfoBarTunerState(object):
 
 #				# Workaround to retrieve the client ip
 #				# Change later and use the WebScreens getActiveStreamingClients if implemented
-#				ipports = [ (win.ip, win.port) for win in six.itervalues(self.entries) ]
+#				ipports = [ (win.ip, win.port) for win in itervalues(self.entries) ]
 #				for conn in netstat(getstate='ESTABLISHED', getuid=False, getpid=False, readable=False):
 #					# Check if it is a streaming connection
 #					if conn[3] == '8001':
@@ -433,9 +428,9 @@ class InfoBarTunerState(object):
 				filename = "" #TODO file streaming - read meta eit
 
 				try:
-					host = ip and socket.gethostbyaddr(ip)
+					host = ip and gethostbyaddr(ip)
 					client = host and host[0].split('.')[0]
-				except socket.herror as x:
+				except herror as x:
 					pass
 
 				number = service_ref and getNumber(service_ref.ref)
@@ -613,7 +608,6 @@ class InfoBarTunerState(object):
 
 			# Update windows
 			# Dynamic column resizing and repositioning
-			widths = []
 			for id, win in list(self.entries.items()):
 				if win.type == RECORD:
 					#TODO Avolid blocking - avoid using getTimer to update the timer times use timer.time_changed if possible
@@ -700,6 +694,7 @@ class InfoBarTunerState(object):
 					win.update()
 
 				# Calculate field width
+				widths = [0] * len(win.widths)
 				widths = [max(w1_w2[0], w1_w2[1]) for w1_w2 in zip_longest(widths, win.widths)]
 
 		#if self.entries:
@@ -724,10 +719,10 @@ class InfoBarTunerState(object):
 			#print "IBTS overwidth", overwidth
 
 			# Order windows
-			#wins = sorted( six.itervalues(self.entries), key=lambda x: (x.type, x.endless, x.timeleft, x.begin), reverse=False )
+			#wins = sorted( itervalues(self.entries), key=lambda x: (x.type, x.endless, x.timeleft, x.begin), reverse=False )
 
 			#TEST 1
-			#wins = sorted( six.itervalues(self.entries), key=lambda x: (x.type, x.endless, x.timeleft, x.begin), reverse=config.infobartunerstate.list_goesup.value )
+			#wins = sorted( itervalues(self.entries), key=lambda x: (x.type, x.endless, x.timeleft, x.begin), reverse=config.infobartunerstate.list_goesup.value )
 
 			#TEST 2
 			#wins = []
@@ -739,7 +734,7 @@ class InfoBarTunerState(object):
 			#	wins.reverse()
 
 			#TEST 3
-			wins = sorted(six.itervalues(self.entries), key=lambda x: (x.type, x.endless, x.begin), reverse=config.infobartunerstate.list_goesup.value)
+			wins = sorted(itervalues(self.entries), key=lambda x: (x.type, x.endless, x.begin), reverse=config.infobartunerstate.list_goesup.value)
 
 			# Resize, move and show windows
 			for win in wins:
@@ -761,7 +756,7 @@ class InfoBarTunerState(object):
 
 	def update(self):
 		print("IBTS updating")
-		#for win in six.itervalues(self.entries):
+		#for win in itervalues(self.entries):
 		#	#TODO Update also names, width, order, type ...
 		#	win.update()
 		self.tunerShow()
@@ -776,7 +771,7 @@ class InfoBarTunerState(object):
 
 	def tunerHide(self):
 		print("IBTS tunerHide")
-		for win in six.itervalues(self.entries):
+		for win in itervalues(self.entries):
 			win.hide()
 		if self.info:
 			self.info.hide()
@@ -799,20 +794,25 @@ class InfoBarTunerState(object):
 #######################################################
 # Base screen class, contains all skin relevant parts
 class TunerStateBase(Screen):
-	# Skin will only be read once
-	skinfile = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/InfoBarTunerState/skin.xml")
-	skin = open(skinfile).read()
 
 	def __init__(self, session):
+		pluginpath = path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/InfoBarTunerState/")
+		if getDesktop(0).size().width() > 1280:
+			skinfile = pluginpath + "skin_FHD.xml"
+		else:
+			skinfile = pluginpath + "skin_HD.xml"
+		skin = open(skinfile).read()
 		Screen.__init__(self, session)
+		dic = {}
+		dic['picpath'] = pluginpath
+		self.skin = applySkinVars(skin, dic)
 		self.skinName = "TunerState"
-
 		self["Background"] = Pixmap()
 		self["Type"] = MultiPixmap()
 		self["Progress"] = ProgressBar()
 
 		for i in range(len(config.infobartunerstate.fields.dict())):
-		#for i, c in enumerate( six.itervalues(config.infobartunerstate.fields.dict()) ):
+		#for i, c in enumerate( itervalues(config.infobartunerstate.fields.dict()) ):
 			label = Label()
 			#fieldid = "Field"+str(i)
 			self["Field" + str(i)] = label
@@ -935,7 +935,7 @@ class TunerStateInfo(TunerStateBase):
 
 		self["Progress"].hide()
 
-		#for i, c in enumerate( six.itervalues(config.infobartunerstate.fields.dict()) ):
+		#for i, c in enumerate( itervalues(config.infobartunerstate.fields.dict()) ):
 		for i in range(len(config.infobartunerstate.fields.dict())):
 			fieldid = "Field" + str(i)
 
@@ -955,7 +955,7 @@ class TunerStateInfo(TunerStateBase):
 
 		height = self.instance.size().height()
 
-		#for i, c in enumerate( six.itervalues(config.infobartunerstate.fields.dict()) ):
+		#for i, c in enumerate( itervalues(config.infobartunerstate.fields.dict()) ):
 		for i in range(len(config.infobartunerstate.fields.dict())):
 			fieldid = "Field" + str(i)
 
@@ -1005,7 +1005,7 @@ class TunerState(TunerStateBase):
 		self.channel = channel
 
 		self.filename = filename + ".ts"
-		self.destination = filename and os.path.dirname(filename)
+		self.destination = filename and path.dirname(filename)
 
 		self.filesize = None
 		self.freespace = None
@@ -1091,7 +1091,7 @@ class TunerState(TunerStateBase):
 			if timeelapsed and duration:
 				# Adjust the watched movie length (98% of movie length)
 				# else we will never see the 100%
-				# Alternative using math.ceil but then we won't see 0
+				# Alternative using ceil but then we won't see 0
 				length = duration / 100.0 * 98.0
 				# Calculate progress and round up
 				progress = timeelapsed / length * 100.0
@@ -1103,22 +1103,22 @@ class TunerState(TunerStateBase):
 			else:
 				progress = None
 
-		self.duration = duration and duration is not None and math.ceil((duration) / 60.0)
-		self.timeleft = timeleft and timeleft is not None and math.ceil((timeleft) / 60.0)
-		self.timeelapsed = timeelapsed and timeelapsed is not None and math.ceil((timeelapsed) / 60.0)
+		self.duration = duration and duration is not None and ceil((duration) / 60.0)
+		self.timeleft = timeleft and timeleft is not None and ceil((timeleft) / 60.0)
+		self.timeelapsed = timeelapsed and timeelapsed is not None and ceil((timeelapsed) / 60.0)
 		self.progress = progress and progress is not None and int(progress)
 		#print "IBTS duration, timeleft, timeelapsed, progress", self.duration, self.timeleft, self.timeelapsed, self.progress
 
 		# File site and free disk space
 		filename = self.filename
-		if filename and os.path.exists(filename):
-			filesize = os.path.getsize(filename)
+		if filename and path.exists(filename):
+			filesize = path.getsize(filename)
 			self.filesize = filesize / (1024 * 1024)
 
 			try:
-				stat = os.statvfs(filename)
+				stat = statvfs(filename)
 				self.freespace = (stat.f_bfree / 1000 * stat.f_bsize / 1000) / 1024
-				#free = os.stat(path).st_size/1048576)
+				#free = stat(path).st_size/1048576)
 			except OSError:
 				pass
 
@@ -1137,7 +1137,7 @@ class TunerState(TunerStateBase):
 		self["Type"].hide()
 		self["Progress"].hide()
 
-		for i, c in enumerate(six.itervalues(config.infobartunerstate.fields.dict())):
+		for i, c in enumerate(itervalues(config.infobartunerstate.fields.dict())):
 			fieldid = "Field" + str(i)
 			field = c.value
 			text = ""
