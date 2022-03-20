@@ -94,6 +94,8 @@ def overwriteInfoBar():
 		InfoBarShowHide._InfoBarShowHide__onHide = InfoBarHideTunerState
 
 # InfoBar Events
+
+
 def recoverInfoBar():
 	global InfoBarShow, InfoBarHide
 	if InfoBarShow:
@@ -170,6 +172,8 @@ def removeExtension():
 
 #######################################################
 # Skin handling
+
+
 def applySkinVars(skin, dict):
 	for key in dict.keys():
 		try:
