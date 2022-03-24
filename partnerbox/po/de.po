@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, python-format
 msgid "%02d.%02d - %02d.%02d"
@@ -514,10 +514,10 @@ msgid "about to start"
 msgstr "startet gleich"
 
 msgid "add Partnerbox bouquet"
-msgstr "Partnerbox Bouquet hinzufügen"
+msgstr "Partnerbox: Bouquet hinzufügen"
 
 msgid "add Partnerbox service"
-msgstr "Partnerbox Service hinzufügen"
+msgstr "Partnerbox: Service hinzufügen"
 
 msgid "auto"
 msgstr "Auto"
