@@ -73,13 +73,13 @@
 	</screen>
 	<!-- epg auswahl oder bouquets hinzufügen -->
 	<screen name="RemoteTimerBouquetList" position="center,280" size="1250,620" title="Choose bouquet">
-		<widget name="text" position="10,510" size="1220,40" zPosition="1" font="Regular;25" halign="center" valign="center" />
+		<widget name="text" position="15,515" size="1220,40" zPosition="1" font="Regular;25" halign="center" valign="center" />
 		<widget name="bouquetlist" position="10,10" size="1220,480" itemHeight="39" font="Regular;37" scrollbarMode="showOnDemand" foregroundColorSelected="#00fff000" backgroundColorSelected="#00000000" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
 		<eLabel name="background" position="0,0" size="1250,620" backgroundColor="#00000000" zPosition="0" transparent="0" />
 	</screen>
 	<!-- sender hinzufügen -->
 	<screen name="RemoteTimerChannelList" position="center,280" size="1250,620" title="Bouquet List">
-		<widget name="text" position="0,500" size="1220,50" font="Regular;25" halign="center" valign="center" backgroundColor="#00000000" zPosition="1" transparent="0" />
+		<widget name="text" position="15,515" size="1220,50" font="Regular;25" halign="center" valign="center" backgroundColor="#00000000" zPosition="1" transparent="0" />
 		<widget name="channellist" position="0,10" size="1220,480" font="Regular;25" itemHeight="80" scrollbarMode="showOnDemand" foregroundColorSelected="#00fff000" backgroundColorSelected="#00000000" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
 		<widget name="key_red" position="50,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
 		<widget name="key_green" position="350,570" size="320,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
@@ -121,10 +121,10 @@
 		<eLabel name="background" position="0,0" size="1240,720" backgroundColor="#00000000" zPosition="0" transparent="0" />
 	</screen>
 
-	<screen name="RemotePlayer" flags="wfNoBorder" position="5,45" size="1080,864" title="Partnerbox - RemotePlayer" backgroundColor="#FFFFFFFF">
-		<ePixmap pixmap="{picpath}ExPlayerFHD.png" position="61,582" size="945,195" zPosition="-1" alphatest="off" transparent="1"/>
-		<widget name="ServiceName" zPosition="1" position="74,606" size="915,88" valign="center" halign="center" font="Regular;31" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" />
-		<widget name="DateTime" zPosition="1" position="78,709" size="750,45" halign="left" font="Regular;24" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" transparent="1" />
-		<widget name="IP" zPosition="2" position="541,709" size="450,45" halign="right" font="Regular;24" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" transparent="1" />
+	<screen name="RemotePlayer" flags="wfNoBorder" position="center,center" size="945,195" title="Partnerbox - RemotePlayer" backgroundColor="#FFFFFFFF">
+		<ePixmap pixmap="{picpath}ExPlayerFHD.png" position="0,0" size="945,195" zPosition="-1" alphatest="off" transparent="1"/>
+		<widget name="ServiceName" zPosition="1" position="13,24" size="915,88" valign="center" halign="center" font="Regular;31" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" />
+		<widget name="DateTime" zPosition="1" position="17,127" size="750,45" halign="left" font="Regular;24" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" transparent="1" />
+		<widget name="IP" zPosition="2" position="480,127" size="450,45" halign="right" font="Regular;24" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" transparent="1" />
 	</screen>
 </skin>

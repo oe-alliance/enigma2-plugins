@@ -79,7 +79,7 @@
 	</screen>
 	<!-- sender hinzufügen -->
 	<screen name="RemoteTimerChannelList" position="center,80" size="1250,620" title="Bouquet List">
-		<widget name="text" position="0,500" size="1220,50" font="Regular;25" halign="center" valign="center" backgroundColor="#00000000" zPosition="1" transparent="0" />
+		<widget name="text" position="10,510" size="1220,50" font="Regular;25" halign="center" valign="center" backgroundColor="#00000000" zPosition="1" transparent="0" />
 		<widget name="channellist" position="0,10" size="1220,480" font="Regular;25" itemHeight="80" scrollbarMode="showOnDemand" foregroundColorSelected="#00fff000" backgroundColorSelected="#00000000" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="0" />
 		<widget name="key_red" position="50,570" size="240,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
 		<widget name="key_green" position="350,570" size="320,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;25" />
@@ -121,10 +121,10 @@
 		<eLabel name="background" position="0,0" size="1240,720" backgroundColor="#00000000" zPosition="0" transparent="0" />
 	</screen>
 
-	<screen name="RemotePlayer" flags="wfNoBorder" position="3,30" size="720,576" title="Partnerbox - RemotePlayer" backgroundColor="#FFFFFFFF">
-		<ePixmap pixmap="{picpath}ExPlayer.png" position="41,388" size="630,130" zPosition="-1" alphatest="off" transparent="1"/>
-		<widget name="ServiceName" zPosition="1" position="50,404" size="610,59" valign="center" halign="center" font="Regular;21" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" />
-		<widget name="DateTime" zPosition="1" position="52,473" size="500,30" halign="left" font="Regular;16" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" transparent="1" />
-		<widget name="IP" zPosition="2" position="361,473" size="300,30" halign="right" font="Regular;16" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" transparent="1" />
+	<screen name="RemotePlayer" flags="wfNoBorder" position="center,center" size="630,130" title="Partnerbox - RemotePlayer" backgroundColor="#FFFFFFFF">
+		<ePixmap pixmap="{picpath}ExPlayer.png" position="0,0" size="630,130" zPosition="-1" alphatest="off" transparent="1"/>
+		<widget name="ServiceName" zPosition="1" position="9,16" size="610,59" valign="center" halign="center" font="Regular;21" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" />
+		<widget name="DateTime" zPosition="1" position="11,85" size="500,30" halign="left" font="Regular;16" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" transparent="1" />
+		<widget name="IP" zPosition="2" position="320,85" size="300,30" halign="right" font="Regular;16" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" transparent="1" />
 	</screen>
 </skin>
