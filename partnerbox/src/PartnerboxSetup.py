@@ -34,7 +34,6 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from skin import fonts, parameters
 from .PartnerboxFunctions import readSkin, applySkinVars, FHD, SCALE, SKINFILE, PLUGINPATH
 
-
 def initPartnerboxEntryConfig():
 	config.plugins.Partnerbox.Entries.append(ConfigSubsection())
 	i = len(config.plugins.Partnerbox.Entries) - 1
