@@ -185,11 +185,11 @@ def FillLocationList(xmlstring):
 
 
 class CurrentRemoteTV(Screen):
-	skin = readSkin("CurrentRemoteTV")
 
 	def __init__(self, session, partnerboxentry):
+		skin = readSkin("CurrentRemoteTV")
 		self.session = session
-		self.skin = applySkinVars(CurrentRemoteTV.skin, {'picpath': PLUGINPATH + 'buttons/'})
+		self.skin = applySkinVars(skin, {'picpath': PLUGINPATH + 'buttons/'})
 		Screen.__init__(self, session)
 		self.setTitle(_("Remote Player"))
 		self.CurrentService = self.session.nav.getCurrentlyPlayingServiceReference()
@@ -246,12 +246,12 @@ class CurrentRemoteTV(Screen):
 
 
 class RemoteTimer(Screen):
-	skin = readSkin("RemoteTimer")
 	timerlist = []
 
 	def __init__(self, session, partnerboxentry, not_epg=False):
+		skin = readSkin("RemoteTimer")
 		self.session = session
-		self.skin = applySkinVars(RemoteTimer.skin, {'picpath': PLUGINPATH + 'buttons/'})
+		self.skin = applySkinVars(skin, {'picpath': PLUGINPATH + 'buttons/'})
 		Screen.__init__(self, session)
 		self.not_epg = not_epg
 		self["key_red"] = Label()
@@ -459,11 +459,11 @@ class RemoteTimer(Screen):
 
 
 class RemoteTimerBouquetList(Screen):
-	skin = readSkin("RemoteTimerBouquetList")
 
 	def __init__(self, session, E2Timerlist, partnerboxentry, playeronly):
+		skin = readSkin("RemoteTimerBouquetList")
 		self.session = session
-		self.skin = applySkinVars(RemoteTimerBouquetList.skin, {'picpath': PLUGINPATH + 'buttons/'})
+		self.skin = applySkinVars(skin, {'picpath': PLUGINPATH + 'buttons/'})
 		Screen.__init__(self, session)
 		self.setTitle(_("Choose bouquet"))
 		self["bouquetlist"] = E2BouquetList([])
@@ -542,7 +542,6 @@ class RemoteTimerBouquetList(Screen):
 
 
 class RemoteTimerChannelList(Screen):
-	skin = readSkin("RemoteTimerChannelList")
 	EMPTY = 0
 	ADD_TIMER = 1
 	REMOVE_TIMER = 2
@@ -550,8 +549,9 @@ class RemoteTimerChannelList(Screen):
 	REMOTE_TV_MODE = 1
 
 	def __init__(self, session, E2Timerlist, ServiceReference, ServiceName, partnerboxentry, E1XMLString, playeronly):
+		skin = readSkin("RemoteTimerChannelList")
 		self.session = session
-		self.skin = applySkinVars(RemoteTimerChannelList.skin, {'picpath': PLUGINPATH + 'buttons/'})
+		self.skin = applySkinVars(skin, {'picpath': PLUGINPATH + 'buttons/'})
 		Screen.__init__(self, session)
 		self.setTitle(_("Bouquet List"))
 		self["channellist"] = E2ChannelList([], selChangedCB=self.onSelectionChanged)
@@ -633,10 +633,7 @@ class RemoteTimerChannelList(Screen):
 			self.EPGSelection()
 
 	def Zap(self):
-		try:
-			sel = self["channellist"].l.getCurrentSelection()[0]
-		except:
-			sel = None
+		sel = self["channellist"].l.getCurrentSelection()[0]
 		if sel is None:
 			return
 		self["channellist"].instance.hide()
@@ -692,8 +689,7 @@ class RemoteTimerChannelList(Screen):
 		self.session.nav.stopService()
 		sref = eServiceReference(ENIGMA_WEBSERVICE_ID, 0, connectstring)
 		self.session.nav.playService(sref, adjust=False)
-		self.session.openWithCallback(self.PlayRemoteStream, RemotePlayer, self["channellist"].l.getCurrentSelection()[0].servicename, self["channellist"].l.getCurrentSelection()[0].eventtitle, self["channellist"].l.getCurrentSelection()[
-			0].eventstart, self["channellist"].l.getCurrentSelection()[0].eventduration, self.PartnerboxEntry, self["channellist"].l.getCurrentSelection()[0].servicereference, self.session.current_dialog)
+		self.session.openWithCallback(self.PlayRemoteStream, RemotePlayer, self["channellist"].l.getCurrentSelection()[0].servicename, self["channellist"].l.getCurrentSelection()[0].eventtitle, self["channellist"].l.getCurrentSelection()[0].eventstart, self["channellist"].l.getCurrentSelection()[0].eventduration, self.PartnerboxEntry, self["channellist"].l.getCurrentSelection()[0].servicereference, self.session.current_dialog)
 
 	def EPGEvent(self):
 		sel = self["channellist"].l.getCurrentSelection()[0]
@@ -848,11 +844,11 @@ class RemoteTimerChannelList(Screen):
 
 
 class RemotePlayer(Screen, InfoBarAudioSelection):
-	skin = readSkin("RemotePlayer")
 
 	def __init__(self, session, ServiceName, EventTitle, eventstart, eventduration, partnerboxentry, servicereference, parent=None):
+		skin = readSkin("RemotePlayer")
 		self.session = session
-		self.skin = applySkinVars(RemotePlayer.skin, {'picpath': PLUGINPATH})
+		self.skin = applySkinVars(skin, {'picpath': PLUGINPATH})
 		Screen.__init__(self, session)
 		self.setTitle(_("Partnerbox - RemotePlayer"))
 		InfoBarAudioSelection.__init__(self)
@@ -1129,14 +1125,14 @@ class RemotePlayer(Screen, InfoBarAudioSelection):
 
 
 class RemoteTimerEPGList(Screen):
-	skin = readSkin("RemoteTimerEPGList")
 	EMPTY = 0
 	ADD_TIMER = 1
 	REMOVE_TIMER = 2
 
 	def __init__(self, session, E2Timerlist, ServiceReference, ServiceName, partnerboxentry):
+		skin = readSkin("RemoteTimerEPGList")
 		self.session = session
-		self.skin = applySkinVars(RemoteTimerEPGList.skin, {'picpath': PLUGINPATH + 'buttons/'})
+		self.skin = applySkinVars(skin, {'picpath': PLUGINPATH + 'buttons/'})
 		Screen.__init__(self, session)
 		self.setTitle(_("EPG Selection"))
 		self.E2TimerList = E2Timerlist
@@ -1653,7 +1649,7 @@ class E2BouquetList(MenuList):
 		for bouquets in listnew:
 			res = [bouquets]
 			x, y, h = parameters.get("PartnerBoxBouquetListName", (0, 0, int(30 * SCALE)))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, bouquets.servicename))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, bouquets.servicename))
 			self.list.append(res)
 		self.l.setList(self.list)
 		self.moveToIndex(0)
@@ -1928,14 +1924,14 @@ class E2EPGList(MenuList):
 
 
 class RemoteTimerEventView(Screen):
-	skin = readSkin("RemoteTimerEventView")
 	EMPTY = 0
 	ADD_TIMER = 1
 	REMOVE_TIMER = 2
 
 	def __init__(self, session, E2Timerlist, epgdata, partnerboxentry):
+		skin = readSkin("RemoteTimerEventView")
 		self.session = session
-		self.skin = applySkinVars(RemoteTimerEventView.skin, {'picpath': PLUGINPATH + 'buttons/'})
+		self.skin = applySkinVars(skin, {'picpath': PLUGINPATH + 'buttons/'})
 		Screen.__init__(self, session)
 		self.setTitle(_("Eventview"))
 		self["epg_description"] = ScrollLabel()
