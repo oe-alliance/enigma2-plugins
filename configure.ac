@@ -664,6 +664,10 @@ simplerss/meta/Makefile
 simplerss/po/Makefile
 simplerss/src/Makefile
 
+startuptostandby/Makefile
+startuptostandby/meta/Makefile
+startuptostandby/src/Makefile
+
 subsdownloader2/Makefile
 subsdownloader2/meta/Makefile
 subsdownloader2/src/Makefile
