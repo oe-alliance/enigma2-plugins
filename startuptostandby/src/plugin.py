@@ -3,7 +3,6 @@ from __future__ import print_function
 from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config, ConfigSubsection, ConfigEnableDisable
-from Screens.Standby import Standby, inStandby
 from .StartupToStandbyConfiguration import StartupToStandbyConfiguration
 from Tools import Notifications
 
@@ -15,11 +14,10 @@ def main(session, **kwargs):
 	print("[StartupToStandby] Open Config Screen")
 	session.open(StartupToStandbyConfiguration)
 
-# sessionstart
-
 
 def sessionstart(reason, session=None):
 	print("[StartupToStandby] autostart")
+	from Screens.Standby import Standby, inStandby
 	if config.plugins.startuptostandby.enabled.value and reason == 0 and not inStandby:
 		Notifications.AddNotificationWithID("Standby", Standby)
 
