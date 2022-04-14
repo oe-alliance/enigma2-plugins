@@ -3,13 +3,15 @@ from Plugins.Plugin import PluginDescriptor
 from Components.config import config, ConfigSubList, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, getConfigListEntry
 from Components.FileList import FileList
 from Components.ConfigList import ConfigListScreen
+from Components.Sources.StaticText import StaticText
 from Screens.Console import Console
 from Screens.ChoiceBox import ChoiceBox
+from Screens.HelpMenu import HelpableScreen
 from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
 from Components.Label import Label
 from Screens.Screen import Screen
-from Components.ActionMap import ActionMap
+from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.Scanner import openFile
 from os.path import isdir as os_path_isdir
 from mimetypes import guess_type
@@ -48,15 +50,13 @@ class FilebrowserConfigScreen(ConfigListScreen, Screen):
         self.list.append(getConfigListEntry(_("Filesystemposition list right"), config.plugins.filebrowser.path_right))
 
         ConfigListScreen.__init__(self, self.list)
-        self["buttonred"] = Label(_("cancel"))
-        self["buttongreen"] = Label(_("ok"))
+        self["key_red"] = self["buttonred"] = Label(_("Cancel"))
+        self["key_green"] = self["buttongreen"] = Label(_("Save"))
         self["setupActions"] = ActionMap(["SetupActions"],
         {
-            "green": self.save,
-            "red": self.cancel,
             "save": self.save,
             "cancel": self.cancel,
-            "ok": self.save,
+            "ok": getattr(self, "keySelect", None) or self.save,
         }, -2)
         self.onLayoutFinish.append(self.onLayout)
 
@@ -77,7 +77,7 @@ class FilebrowserConfigScreen(ConfigListScreen, Screen):
 
 
 ##################################
-class FilebrowserScreen(Screen):
+class FilebrowserScreen(Screen, HelpableScreen):
     skin = """
         <screen position="110,83" size="530,430" title="">
             <widget name="list_left" position="0,0" size="265,380" scrollbarMode="showOnDemand" />
@@ -109,31 +109,34 @@ class FilebrowserScreen(Screen):
 
         self.session = session
         Screen.__init__(self, session)
+        HelpableScreen.__init__(self)
 
         self["list_left"] = FileList(path_left, matchingPattern="^.*")
         self["list_right"] = FileList(path_right, matchingPattern="^.*")
-        self["red"] = Label(_("delete"))
-        self["green"] = Label(_("move"))
-        self["yellow"] = Label(_("copy"))
-        self["blue"] = Label(_("rename"))
+        self["key_red"] = self["red"] = Label(_("Delete"))
+        self["key_green"] = self["green"] = Label(_("Move"))
+        self["key_yellow"] = self["yellow"] = Label(_("Copy"))
+        self["key_blue"] = self["blue"] = Label(_("Rename"))
+        self["key_menu"] = StaticText(_("MENU"))
+        self["key_help"] = StaticText(_("HELP"))
 
-        self["actions"] = ActionMap(["ChannelSelectBaseActions", "WizardActions", "DirectionActions", "MenuActions", "NumberActions", "ColorActions"],
+        self["actions"] = HelpableActionMap(self, ["WizardActions", "DirectionActions", "MenuActions", "NumberActions", "ColorActions"],
             {
-             "ok": self.ok,
-             "back": self.exit,
-             "menu": self.goMenu,
-             "nextMarker": self.listRight,
-             "prevMarker": self.listLeft,
-             "up": self.goUp,
-             "down": self.goDown,
-             "left": self.goLeft,
-             "right": self.goRight,
-             "red": self.goRed,
-             "green": self.goGreen,
-             "yellow": self.goYellow,
-             "blue": self.goBlue,
-             "0": self.doRefresh,
-             }, -1)
+             "ok": (self.ok, "Select item"),
+             "back": (self.exit, "Exit"),
+             "menu": (self.goMenu, "Open setup options"),
+             "shiftDown": (self.listRight, "Select right list"),
+             "shiftUp": (self.listLeft, "Select left list"),
+             "up": (self.goUp, "Navigate up"),
+             "down": (self.goDown, "Navigate down"),
+             "left": (self.goLeft, "Page up"),
+             "right": (self.goRight, "Page down"),
+             "red": (self.goRed, "Delete"),
+             "green": (self.goGreen, "Move"),
+             "yellow": (self.goYellow, "Copy"),
+             "blue": (self.goBlue, "Rename"),
+             "0": (self.doRefresh, "Refresh"),
+             }, prio=-1, description=_("filebrowser buttons"))
         self.onLayoutFinish.append(self.listLeft)
 
     def exit(self):
@@ -289,7 +292,7 @@ def start_from_filescan(**kwargs):
 
 def start_from_mainmenu(menuid, **kwargs):
     #starting from main menu
-    if menuid == "mainmenu":
+    if config.plugins.filebrowser.add_mainmenu_entry.value and menuid == "mainmenu":
         return [(pname, start_from_pluginmenu, "filecommand", 46)]
     return []
 
@@ -308,6 +311,5 @@ def Plugins(path, **kwargs):
     #buggie list.append(desc_filescan)
     if config.plugins.filebrowser.add_extensionmenu_entry.value:
         list.append(desc_extensionmenu)
-    if config.plugins.filebrowser.add_mainmenu_entry.value:
-        list.append(desc_mainmenu)
+    list.append(desc_mainmenu)
     return list
