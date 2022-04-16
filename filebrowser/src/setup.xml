@@ -1,0 +1,9 @@
+<setupxml>
+	<setup key="filebrowser" title="Filebrowser Settings">
+		<item level="0" text="add Plugin to Mainmenu" description="add Plugin to Mainmenu">config.plugins.filebrowser.add_mainmenu_entry</item>
+		<item level="0" text="add Plugin to Extensionmenu" description="add Plugin to Extensionmenu">config.plugins.filebrowser.add_extensionmenu_entry</item>
+		<item level="0" text="save Filesystemposition on exit" description="save Filesystemposition on exit">config.plugins.filebrowser.savedirs</item>
+		<item level="0" text="Filesystemposition list left" description="Filesystemposition list left">config.plugins.filebrowser.path_left</item>
+		<item level="0" text="Filesystemposition list right" description="Filesystemposition list right">config.plugins.filebrowser.path_right</item>
+	</setup>
+</setupxml>

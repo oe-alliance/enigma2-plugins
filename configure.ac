@@ -365,6 +365,7 @@ fancontrol2/src/data/Makefile
 filebrowser/Makefile
 filebrowser/meta/Makefile
 filebrowser/src/Makefile
+filebrowser/po/Makefile
 
 flashexpander/Makefile
 flashexpander/meta/Makefile

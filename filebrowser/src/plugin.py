@@ -1,8 +1,7 @@
 from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
-from Components.config import config, ConfigSubList, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, getConfigListEntry
+from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText
 from Components.FileList import FileList
-from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from Screens.Console import Console
 from Screens.ChoiceBox import ChoiceBox
@@ -11,7 +10,8 @@ from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
 from Components.Label import Label
 from Screens.Screen import Screen
-from Components.ActionMap import ActionMap, HelpableActionMap
+from Screens.Setup import Setup
+from Components.ActionMap import HelpableActionMap
 from Components.Scanner import openFile
 from os.path import isdir as os_path_isdir
 from mimetypes import guess_type
@@ -29,51 +29,9 @@ config.plugins.filebrowser.path_right = ConfigText(default="/")
 
 
 ##################################
-class FilebrowserConfigScreen(ConfigListScreen, Screen):
-    skin = """
-        <screen position="100,100" size="550,400" title="" >
-            <widget name="config" position="0,0" size="550,360" scrollbarMode="showOnDemand" />
-            <widget name="buttonred" position="10,360" size="100,40" valign="center" halign="center" zPosition="1"  transparent="1" foregroundColor="white" font="Regular;18"/>
-            <widget name="buttongreen" position="120,360" size="100,40" valign="center" halign="center" zPosition="1"  transparent="1" foregroundColor="white" font="Regular;18"/>
-            <ePixmap name="pred" position="10,360" size="100,40" zPosition="0" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on"/>
-            <ePixmap name="pgreen" position="120,360" size="100,40" zPosition="0" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on"/>
-        </screen>"""
-
+class FilebrowserConfigScreen(Setup):
     def __init__(self, session):
-        self.session = session
-        Screen.__init__(self, session)
-        self.list = []
-        self.list.append(getConfigListEntry(_("add Plugin to Mainmenu"), config.plugins.filebrowser.add_mainmenu_entry))
-        self.list.append(getConfigListEntry(_("add Plugin to Extensionmenu"), config.plugins.filebrowser.add_extensionmenu_entry))
-        self.list.append(getConfigListEntry(_("save Filesystemposition on exit"), config.plugins.filebrowser.savedirs))
-        self.list.append(getConfigListEntry(_("Filesystemposition list left"), config.plugins.filebrowser.path_left))
-        self.list.append(getConfigListEntry(_("Filesystemposition list right"), config.plugins.filebrowser.path_right))
-
-        ConfigListScreen.__init__(self, self.list)
-        self["key_red"] = self["buttonred"] = Label(_("Cancel"))
-        self["key_green"] = self["buttongreen"] = Label(_("Save"))
-        self["setupActions"] = ActionMap(["SetupActions"],
-        {
-            "save": self.save,
-            "cancel": self.cancel,
-            "ok": getattr(self, "keySelect", None) or self.save,
-        }, -2)
-        self.onLayoutFinish.append(self.onLayout)
-
-    def onLayout(self):
-        self.setTitle(pname + " " + _("Settings"))
-
-    def save(self):
-        print("saving")
-        for x in self["config"].list:
-            x[1].save()
-        self.close(True)
-
-    def cancel(self):
-        print("cancel")
-        for x in self["config"].list:
-            x[1].cancel()
-        self.close(False)
+        Setup.__init__(self, session, "filebrowser", plugin="Extensions/Filebrowser", PluginLanguageDomain="Filebrowser")
 
 
 ##################################

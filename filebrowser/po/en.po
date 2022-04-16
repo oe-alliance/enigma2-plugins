@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-16 18:40+0000\n"
+"PO-Revision-Date: 2022-04-16 18:40+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "Copy"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Filebrowser"
+msgstr ""
+
+msgid "Filebrowser Settings"
+msgstr ""
+
+msgid "Filesystemposition list left"
+msgstr ""
+
+msgid "Filesystemposition list right"
+msgstr ""
+
+msgid "HELP"
+msgstr ""
+
+msgid "MENU"
+msgstr ""
+
+msgid "Move"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "add Plugin to Extensionmenu"
+msgstr ""
+
+msgid "add Plugin to Mainmenu"
+msgstr ""
+
+msgid "copy file"
+msgstr ""
+
+msgid "copying file ..."
+msgstr ""
+
+msgid "delete file"
+msgstr ""
+
+msgid "deleting file ..."
+msgstr ""
+
+msgid "filebrowser buttons"
+msgstr ""
+
+msgid "manage local Files"
+msgstr ""
+
+msgid "move file"
+msgstr ""
+
+msgid "moving file ..."
+msgstr ""
+
+msgid "no"
+msgstr ""
+
+msgid "no Viewer installed for this mimetype!"
+msgstr ""
+
+msgid "rename file"
+msgstr ""
+
+msgid "renaming file ..."
+msgstr ""
+
+msgid "save Filesystemposition on exit"
+msgstr ""
+
+msgid "yes"
+msgstr ""
