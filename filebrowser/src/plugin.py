@@ -15,6 +15,7 @@ from Components.ActionMap import HelpableActionMap
 from Components.Scanner import openFile
 from os.path import isdir as os_path_isdir
 from mimetypes import guess_type
+from . import _
 
 ##################################
 pname = _("Filebrowser")
