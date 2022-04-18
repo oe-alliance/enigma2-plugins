@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-16 18:40+0000\n"
+"PO-Revision-Date: 2022-04-18 16:04+0200\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "Copy"
+msgstr "Kopieer"
+
+msgid "Delete"
+msgstr "Verwijder"
+
+msgid "Filebrowser"
+msgstr "Filebrowser"
+
+msgid "Filebrowser Settings"
+msgstr "Filebrowser instellingen"
+
+msgid "Filesystemposition list left"
+msgstr "Bestandssysteempositie linker lijst"
+
+msgid "Filesystemposition list right"
+msgstr "Bestandssysteempositie rechter lijst"
+
+msgid "HELP"
+msgstr "HELP"
+
+msgid "MENU"
+msgstr "MENU"
+
+msgid "Move"
+msgstr "Verplaats"
+
+msgid "Rename"
+msgstr "Hernoem"
+
+msgid "add Plugin to Extensionmenu"
+msgstr "toon plugin in extensies"
+
+msgid "add Plugin to Mainmenu"
+msgstr "toon plugin in hoofdmenu"
+
+msgid "copy file"
+msgstr "kopieer bestand"
+
+msgid "copying file ..."
+msgstr "kopieert bestand..."
+
+msgid "delete file"
+msgstr "verwijder bestand"
+
+msgid "deleting file ..."
+msgstr "verwijdert bestand..."
+
+msgid "filebrowser buttons"
+msgstr "filebrowser toetsen"
+
+msgid "manage local Files"
+msgstr "beheer lokale bestanden"
+
+msgid "move file"
+msgstr "verlaats bestand"
+
+msgid "moving file ..."
+msgstr "verplaatst bestand..."
+
+msgid "no"
+msgstr "nee"
+
+msgid "no Viewer installed for this mimetype!"
+msgstr "geen viewer geïnstalleerd voor dit minetype!"
+
+msgid "rename file"
+msgstr "hernoem bestand"
+
+msgid "renaming file ..."
+msgstr "hernoemt bestand..."
+
+msgid "save Filesystemposition on exit"
+msgstr "bewaar bestandssysteempositie bij afsluiten"
+
+msgid "yes"
+msgstr "ja"
