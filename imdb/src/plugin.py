@@ -974,9 +974,10 @@ def movielistSearch(session, serviceref, **kwargs):
 	if ext in KNOWN_EXTENSIONS or ext in KNOWN_EXTENSIONS2:
 		if six.PY2:
 			root = root.decode("utf8")
-		eventName = re.sub(r"[\W_]+", ' ', root, 0, re.LOCALE | re.UNICODE)
-		if six.PY2:
+			eventName = re.sub(r"[\W_]+", ' ', root, 0, re.LOCALE | re.UNICODE)
 			eventName = eventName.encode("utf8")
+		else:
+			eventName = re.sub(r"[\W_]+", ' ', root, 0)
 	session.open(IMDB, eventName)
 
 
