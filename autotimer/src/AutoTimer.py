@@ -437,9 +437,9 @@ class AutoTimer:
 						sname = service.toString()
 						pos = sname.rfind(':')
 						if pos != -1:
-							if sname[pos - 1] == ':':
+							if sname[pos-1] == ':':
 								pos -= 1
-							sname = sname[:pos + 1]
+							sname = sname[:pos+1]
 						test.append((sname, 0, -1, -1))
 					service = services.getNext()
 			getNonSearchableEvents(test)
