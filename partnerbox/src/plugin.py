@@ -1150,7 +1150,7 @@ class RemoteTimerEPGList(Screen):
 			"ok": self.EPGEvent,
 			"back": self.close,
 			"green": self.GreenPressed,
-			"blue": self.EPGEvent,}, -1)
+			"blue": self.EPGEvent, }, -1)
 		self.PartnerboxEntry = partnerboxentry
 		self.password = partnerboxentry.password.value
 		self.username = "root"
