@@ -1146,12 +1146,11 @@ class RemoteTimerEPGList(Screen):
 		self.onLayoutFinish.append(self.startRun)
 		self.servicereference = ServiceReference
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions"],
-									{
+			{
 			"ok": self.EPGEvent,
 			"back": self.close,
 			"green": self.GreenPressed,
-			"blue": self.EPGEvent,
-		}, -1)
+			"blue": self.EPGEvent,}, -1)
 		self.PartnerboxEntry = partnerboxentry
 		self.password = partnerboxentry.password.value
 		self.username = "root"
@@ -1259,8 +1258,7 @@ class RemoteTimerEPGList(Screen):
 				eventdescriptionextended = str(events.findtext("details", ''))
 			except:
 				eventdescriptionextended = ""
-			E1ListEPG.append(E2EPGListAllData(servicereference=servicereference, servicename=servicename, eventid=1, eventstart=eventstart,
-											  eventduration=eventduration, eventtitle=eventtitle, eventdescription=eventdescription, eventdescriptionextended=eventdescriptionextended))
+			E1ListEPG.append(E2EPGListAllData(servicereference=servicereference, servicename=servicename, eventid=1, eventstart=eventstart, eventduration=eventduration, eventtitle=eventtitle, eventdescription=eventdescription, eventdescriptionextended=eventdescriptionextended))
 		self["epglist"].buildList(E1ListEPG, self.E2TimerList)
 		if self.ListCurrentIndex != 0:
 			sel = self["epglist"].moveSelectionTo(self.ListCurrentIndex)
@@ -1779,22 +1777,18 @@ class E2EPGList(MenuList):
 			esize = self.l.getItemSize()
 			width = esize.width()
 			height = esize.height()
-			r1 = Rect(0, 0, width / 20 * 2 - 10, height)
-			r2 = Rect(width / 20 * 2, 0, width / 20 * 5 - 15, height)
-			r3 = Rect(width / 20 * 7, 0, width / 20 * 13, height)
+			r1 = Rect(0, 0, width / 40 * 2, height)
+			r2 = Rect(width / 40 * 2, 0, width / 40 * 9, height)
+			r3 = Rect(width / 40 * 12, 0, width / 40 * 28, height)
 			t = localtime(epgdata.eventstart)
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, int(r1.left() * SCALE), int(r1.top() * SCALE), int(r1.width() * SCALE), int(r1.height() * SCALE), 0, RT_HALIGN_RIGHT, self.days[t[6]]))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, int(r2.left() * SCALE), int(r2.top() * SCALE), int(r2.width() * SCALE),
-						int(r1.height() * SCALE), 0, RT_HALIGN_RIGHT, "%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4])))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, self.days[t[6]]))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 0, RT_HALIGN_RIGHT, "%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4])))
 			if rec:
 				clock_pic = self.getClockPixmap(epgdata.servicereference, epgdata.eventstart, epgdata.eventduration, epgdata.eventid)
-				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, int(r3.left() * SCALE), int((r3.top() + 2) * SCALE), 40, 40, clock_pic))
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, int((r3.left() + 25) * SCALE), int(r3.top() * SCALE),
-							int(r3.width() * SCALE), int(r3.height() * SCALE), 0, RT_HALIGN_LEFT, epgdata.eventtitle))
+				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left(), r3.top() + 2, 40, 40, clock_pic))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left() + 25, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, epgdata.eventtitle))
 			else:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, int(r3.left() * SCALE), int(r3.top() * SCALE),
-							int(r3.width() * SCALE), int(r3.height() * SCALE), 0, RT_HALIGN_LEFT, epgdata.eventtitle))
-
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left(), r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, epgdata.eventtitle))
 			self.list.append(res)
 		self.l.setList(self.list)
 		self.moveToIndex(0)
@@ -1946,14 +1940,12 @@ class RemoteTimerEventView(Screen):
 		self.onLayoutFinish.append(self.startRun)
 		self.E2TimerList = E2Timerlist
 		self.epgdata = epgdata
-
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EventViewActions"],
-									{
+		{
 			"back": self.close,
 			"pageUp": self.pageUp,
 			"pageDown": self.pageDown,
 		}, -1)
-
 		self.PartnerboxEntry = partnerboxentry
 		self.password = partnerboxentry.password.value
 		self.username = "root"
