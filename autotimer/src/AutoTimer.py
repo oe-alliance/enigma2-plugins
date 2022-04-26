@@ -383,7 +383,7 @@ class AutoTimer:
 							service = services.getNext()
 							if not service.valid():
 								break
-							playable = not (service.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)) or (service.flags & eServiceReference.isNumberedMarker)
+							playable = not (service.flags & (eServiceReference.isMarker | eServiceReference.isDirectory))
 							if playable:
 								test.append((service.toString(), 0, -1, -1))
 			else: # Get all bouquets
@@ -417,7 +417,7 @@ class AutoTimer:
 									service = services.getNext()
 									if not service.valid():
 										break
-									playable = not (service.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)) or (service.flags & eServiceReference.isNumberedMarker)
+									playable = not (service.flags & (eServiceReference.isMarker | eServiceReference.isDirectory))
 									if playable:
 										test.append((service.toString(), 0, -1, -1))
 
