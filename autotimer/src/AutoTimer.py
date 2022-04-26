@@ -460,7 +460,7 @@ class AutoTimer:
 
 		# Remove duplicates
 		epgmatches = removeDuplicates(epgmatches)
-		
+
 		# Remove streams
 		if not config.plugins.autotimer.include_streams.value:
 			epgmatches = removeStreams(epgmatches)
