@@ -8,6 +8,7 @@ from enigma import eTimer
 
 from six import PY2
 
+
 class MovingLabel(Label):
 	"""Simple Label which allows to display badly scrolling text."""
 
