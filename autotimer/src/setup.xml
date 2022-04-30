@@ -6,7 +6,6 @@
 		<item level="0" text="Poll Interval (in mins)" description="This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again.">config.plugins.autotimer.interval</item>
 		<item level="0" text="Only add timer for next x days" description="You can control for how many days in the future timers are added. Set this to 0 to disable this feature.">config.plugins.autotimer.maxdaysinfuture</item>
 		<item level="0" text="Allow double timer for different services" description="Here you can specify whether simultaneous timers of the same program can be created. This allows simultaneous recording of a program with different resolutions. (e.g. SD service and HD service)">config.plugins.autotimer.enable_multiple_timer</item>
-		<item level="0" text="Include streams in search" description="Select 'yes' to include IPTV streams in the search.">config.plugins.autotimer.include_streams</item>
 		<item level="0" text="Show in plugin browser" description="Enable this to be able to access the AutoTimer Overview from within the plugin browser.">config.plugins.autotimer.show_in_plugins</item>
 		<item level="0" text="Show in extension menu" description="Enable this to be able to access the AutoTimer Overview from within the extension menu.">config.plugins.autotimer.show_in_extensionsmenu</item>
 		<item level="0" text="Modify existing timers" description="This setting controls the behavior when a timer matches a found event.">config.plugins.autotimer.refresh</item>

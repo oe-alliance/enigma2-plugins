@@ -89,7 +89,6 @@ config.plugins.autotimer.enable_multiple_timer = ConfigSelection(choices=[
 		("sb", _("If specified services or bouquets"))
 	], default="0"
 )
-config.plugins.autotimer.include_streams = ConfigYesNo(default=True)
 config.plugins.autotimer.show_help = ConfigYesNo(default=True)
 config.plugins.autotimer.skip_during_records = ConfigYesNo(default=False)
 config.plugins.autotimer.skip_during_epgrefresh = ConfigYesNo(default=False)

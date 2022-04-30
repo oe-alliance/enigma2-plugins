@@ -350,9 +350,6 @@ class AutoTimer:
 		def removeDuplicates(lst):
 			return [t for t in (set(tuple(i) for i in lst))]
 
-		def removeStreams(lst):
-			return [x for x in lst if "http" not in x[0]]
-
 		def getNonSearchableEvents(servicelist):
 			servicelist.insert(0, 'RITBDSE')
 			try:
@@ -460,10 +457,6 @@ class AutoTimer:
 
 		# Remove duplicates
 		epgmatches = removeDuplicates(epgmatches)
-		
-		# Remove streams
-		if not config.plugins.autotimer.include_streams.value:
-			epgmatches = removeStreams(epgmatches)
 
 		# Sort list of tuples by begin time 'B'
 		epgmatches.sort(key=itemgetter(3))
