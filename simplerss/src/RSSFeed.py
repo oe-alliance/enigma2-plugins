@@ -1,5 +1,6 @@
 from Plugins.SystemPlugins.Toolkit.TagStrip import strip, strip_readable
 from Components.Scanner import ScanFile
+from six import PY2
 
 NS_RDF = "{http://www.w3.org/1999/02/22-rdf-syntax-ns#}"
 NS_RSS_09 = "{http://my.netscape.com/rdf/simple/0.9/}"
@@ -87,9 +88,16 @@ class RSSWrapper(ElementWrapper):
 		return self
 
 	def __next__(self):
-		return next(self)
+		if PY2:
+			return next(self)
+		else:
+			idx = self.idx
+			if idx > self.len:
+				raise StopIteration
+			self.idx = idx + 1
+			return self[idx]
 
-	def next(self):
+	def _next(self): # FIXME py2
 		idx = self.idx
 		if idx > self.len:
 			raise StopIteration
@@ -154,7 +162,7 @@ class BaseFeed:
 		self.uri = uri
 
 		# Initialize
-		self.title = title or uri.encode("UTF-8")
+		self.title = title or uri.encode("UTF-8") if PY2 else uri
 		self.description = description
 		self.logoUrl = ''
 		self.history = []
@@ -182,6 +190,7 @@ class UniversalFeed(BaseFeed):
 		self.ns = ""
 
 	def gotWrapper(self, wrapper):
+
 		updated = wrapper.updated
 		if updated and self.last_update == updated:
 			return []
@@ -206,12 +215,20 @@ class UniversalFeed(BaseFeed):
 			summary = strip_readable(item.summary or "")
 
 			# Update Lists
-			self.history.insert(idx, (
-					title.encode("UTF-8"),
-					link.encode("UTF-8"),
-					summary.encode("UTF-8"),
-					item.enclosures
-			))
+			if PY2:
+				self.history.insert(idx, (
+						title.encode("UTF-8"),
+						link.encode("UTF-8"),
+						summary.encode("UTF-8"),
+						item.enclosures
+				))
+			else:
+				self.history.insert(idx, (
+						title,
+						link,
+						summary,
+						item.enclosures
+				))
 			ids.add(id)
 
 			idx += 1
@@ -243,8 +260,11 @@ class UniversalFeed(BaseFeed):
 
 			wrapper = self.wrapper(feed, self.ns)
 
-			self.title = strip(wrapper.title).encode("UTF-8")
-			self.description = strip_readable(wrapper.description or "").encode("UTF-8")
+			self.title = strip(wrapper.title)
+			self.description = strip_readable(wrapper.description or "")
+			if PY2:
+				self.title = self.title.encode("UTF-8")
+				self.description = self.description.encode("UTF-8")
 			self.logoUrl = wrapper.logo
 
 		return self.gotWrapper(wrapper)
