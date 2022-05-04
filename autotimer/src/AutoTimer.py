@@ -365,7 +365,10 @@ class AutoTimer:
 			except UnicodeDecodeError:
 				pass
 
-		if timer.searchType == "description":
+		self.isIPTV = bool([service for service in timer.services if ":http" in service])
+
+		# As well as description, also allow timers on individual IPTV streams
+		if timer.searchType == "description" or self.isIPTV:
 			epgmatches = []
 
 			casesensitive = timer.searchCase == "sensitive"
@@ -429,8 +432,14 @@ class AutoTimer:
 
 				# Filter events
 				for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
-					if match in (shortdesc if casesensitive else shortdesc.lower()) or match in (extdesc if casesensitive else extdesc.lower()):
-						epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
+					if timer.searchType == "description":
+						if match in (shortdesc if casesensitive else shortdesc.lower()) or match in (extdesc if casesensitive else extdesc.lower()):
+							epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
+					else: # IPTV streams (if not "description" search)
+						if timer.searchType == 'exact' and match == (name if casesensitive else name.lower()) or \
+							timer.searchType == 'partial' and match in (name if casesensitive else name.lower()) or \
+							timer.searchType == 'start' and (name if casesensitive else name.lower()).startswith(match):
+							epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
 
 		else:
 			# Search EPG, default to empty list
