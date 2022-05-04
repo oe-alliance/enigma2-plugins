@@ -7,7 +7,7 @@ an option to do the processing automatically in the background.
 Mike Griffin  8/02/2015
 '''
 
-__version__ = "1.11dev1"
+__version__ = "1.11dev2"
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
@@ -26,6 +26,7 @@ from Components.Task import job_manager as JobManager
 from Components.UsageConfig import defaultMoviePath
 from Components.config import config, ConfigText, getConfigListEntry
 from Tools import Notifications
+from Tools.BoundFunction import boundFunction
 import NavigationInstance
 from enigma import eTimer, iRecordableService, iPlayableService, ePoint
 from time import time, localtime, strftime
@@ -34,21 +35,21 @@ from collections import defaultdict
 from os.path import isfile, isdir, splitext, join as joinpath, split as splitpath, lexists
 import os
 
-from FileScreens import activeFileScreens
+from .FileScreens import activeFileScreens
 
 _autoSeries2Folder = None
 _session = None
 
-def menu(session, service, **kwargs):
-    session.open(Series2Folder, service)
+def menu(session, service, serviceList=None, **kwargs):
+    session.open(Series2Folder, service, serviceList=serviceList)
 
 def buttonSeries2Folder(session, service, *args, **kwargs):
     actions = Series2FolderActions(session)
     actions.doMoves(service)
 
-def buttonSelSeries2Folder(session, service, *args, **kwargs):
+def buttonSelSeries2Folder(session, service, serviceList=None, *args, **kwargs):
     actions = Series2FolderActions(session)
-    actions.doMoves(service, selectedOnly=True)
+    actions.doMoves(service, selectedOnly=True, serviceList=serviceList)
 
 def autoSeries2Folder(reason, session, **kwargs):
     global _autoSeries2Folder
@@ -72,21 +73,30 @@ def __autoSwitched(conf):
 
 config.plugins.seriestofolder.auto.addNotifier(__autoSwitched, initial_call=False, immediate_feedback=False, extra_args=None)
 
-pluginSeries2Folder = PluginDescriptor(
+def multiPluginDescriptor(name="Plugin", where=None, description="", icon=None, fnc=None, wakeupfnc=None, needsRestart=None, internal=False, weight=0, multi=False):
+    try:
+        return PluginDescriptor(name=name, where=where, description=description, icon=icon, fnc=fnc, wakeupfnc=wakeupfnc, needsRestart=needsRestart, internal=internal, weight=weight, multi=multi)
+    except TypeError:
+        return PluginDescriptor(name=name, where=where, description=description, icon=icon, fnc=fnc, wakeupfnc=wakeupfnc, needsRestart=needsRestart, internal=internal, weight=weight)
+
+pluginSeries2Folder = multiPluginDescriptor(
     name=_('Series2Folder'),
     description=_('Series to Folder'),
     where=PluginDescriptor.WHERE_MOVIELIST,
     needsRestart=False,
-    fnc=buttonSeries2Folder
+    fnc=buttonSeries2Folder,
+    multi=True
 )
 
-pluginSelSeries2Folder = PluginDescriptor(
+pluginSelSeries2Folder = multiPluginDescriptor(
     name=_('SelSeries2Folder'),
     description=_('Sel Series to Folder'),
     where=PluginDescriptor.WHERE_MOVIELIST,
     needsRestart=False,
-    fnc=buttonSelSeries2Folder
+    fnc=buttonSelSeries2Folder,
+    multi=True
 )
+
 
 def Plugins(**kwargs):
     plugins = [
@@ -97,12 +107,13 @@ def Plugins(**kwargs):
             needsRestart=False,
             fnc=autoSeries2Folder
         ),
-        PluginDescriptor(
+        multiPluginDescriptor(
             name=_('Series2Folder...'),
             description=_('Series to Folder...'),
             where=PluginDescriptor.WHERE_MOVIELIST,
             needsRestart=True,
-            fnc=menu
+            fnc=menu,
+            multi=True
         ),
     ]
     if config.plugins.seriestofolder.showmovebutton.value:
@@ -146,7 +157,7 @@ class Series2FolderActionsBase(object):
         self.moves = []
         self.errMess = []
 
-    def prepare(self, service, selectedOnly=False):
+    def prepare(self, service, selectedOnly=False, serviceList=None):
         # Get local copies of config variables in case they change during a run
         self.conf_autofolder = config.plugins.seriestofolder.autofolder.value
         self.conf_movies = config.plugins.seriestofolder.movies.value
@@ -160,22 +171,26 @@ class Series2FolderActionsBase(object):
 
         self.rootdir = defaultMoviePath()
 
-        # Selection if called on a specific recording
-        self.moveSelection = None
+        # Selection if called on specific recordings
+        self.moveSelection = set()
 
         # Information about moves and errors
         self.moves = []
         self.errMess = []
 
-        if service is not None:
-            dir, fullname = splitpath(service.getPath())
-            self.rootdir = dir
-            if fullname and selectedOnly:
-                showname, __, date_time, err = self.getShowInfo(self.rootdir, fullname)
-                if showname:
-                    self.moveSelection = self.cleanName(self.stripRepeat(showname))
-                elif err:
-                    self.errMess.append(err)
+        if serviceList is None and service is not None:
+                serviceList = [service]
+
+        if serviceList is not None:
+            for serv in serviceList:
+                dir, fullname = splitpath(serv.getPath())
+                self.rootdir = dir
+                if fullname and selectedOnly:
+                    showname, __, __, err = self.getShowInfo(self.rootdir, fullname)
+                    if showname:
+                        self.moveSelection.add(self.cleanName(self.stripRepeat(showname)))
+                    elif err:
+                        self.errMess.append(err)
 
         # Full pathnames of current recordings' .ts files
         self.isRecording = set([timer.Filename + self.TS for timer in self.session.nav.RecordTimer.timer_list if timer.state in (timer.StatePrepared, timer.StateRunning) and not timer.justplay and hasattr(timer, "Filename")])
@@ -195,7 +210,7 @@ class Series2FolderActionsBase(object):
             origShowname, pending_merge, date_time, err = self.getShowInfo(self.rootdir, f)
             noRepeatName = self.stripRepeat(origShowname)
             showname = self.cleanName(noRepeatName)
-            if showname and (not self.moveSelection or showname == self.moveSelection) and not pending_merge:
+            if showname and (not self.moveSelection or showname in self.moveSelection) and not pending_merge:
                 if not self.isPlaying(fullpath):
                     if self.moviesFolder and noRepeatName.lower().startswith("movie: "):
                         self.shows[self.moviesFolder].append((origShowname, f, date_time))
@@ -225,7 +240,7 @@ class Series2FolderActionsBase(object):
                 try:
                     os.renames(fromPath, toPath)
                     print "[Series2Folder] rename", fromPath, "to", toPath
-                except Exception, e:
+                except Exception as e:
                     self.errMess.append(e.__str__())
                     nerrors += 1
                     errorText = ngettext(" - Error", " - Errors", nerrors)
@@ -401,7 +416,7 @@ class Series2FolderActions(Series2FolderActionsBase):
     def __init__(self, session):
         super(Series2FolderActions, self).__init__(session)
 
-    def doMoves(self, service=None, selectedOnly=False):
+    def doMoves(self, service=None, selectedOnly=False, serviceList=None):
 
         if Screens.Standby.inTryQuitMainloop:
             self.MsgBox(_("Your %s %s is trying to shut down. No recordings moved.") % (getMachineBrand(), getMachineName()), timeout=10)
@@ -415,7 +430,7 @@ class Series2FolderActions(Series2FolderActionsBase):
             self.MsgBox(_("Series to Folder is already running in the background."), timeout=10)
             return
 
-        self.prepare(service, selectedOnly=selectedOnly)
+        self.prepare(service, selectedOnly=selectedOnly, serviceList=serviceList)
 
         try:
             contents = os.listdir(self.rootdir)
@@ -585,20 +600,17 @@ class Series2FolderAutoActions(Series2FolderActionsBase):
 
 
 class Series2Folder(ChoiceBox):
-    def __init__(self, session, service):
+    def __init__(self, session, service, serviceList=None):
         list = [
+            (ngettext("Move selected series recording to folder", "Move selected series recordings to folder", int(serviceList is None or len(serviceList))), "CALLFUNC", boundFunction(self.doMoves, selectedOnly=True, serviceList=serviceList), service),
             (_("Move series recordings to folders"), "CALLFUNC", self.doMoves, service),
-            (_("Move selected series recording to folder"), "CALLFUNC", self.doMovesSel, service),
             (_("Configure move series recordings to folders"), "CALLFUNC", self.doConfig),
         ]
-        super(Series2Folder, self).__init__(session, _("Series to Folder"), list=list, selection=0)
+        super(Series2Folder, self).__init__(session, _("Series to Folder actions"), list=list, selection=0)
         self.actions = Series2FolderActions(session)
 
-    def doMovesSel(self, service):
-        self.doMoves(service, selectedOnly=True)
-
-    def doMoves(self, service, selectedOnly=False):
-        self.actions.doMoves(service, selectedOnly)
+    def doMoves(self, service, selectedOnly=False, serviceList=None):
+        self.actions.doMoves(service, selectedOnly=selectedOnly, serviceList=serviceList)
         self.close()
 
     def doConfig(self, arg):
