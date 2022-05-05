@@ -7,7 +7,7 @@ an option to do the processing automatically in the background.
 Mike Griffin  8/02/2015
 '''
 
-__version__ = "1.11dev2"
+__version__ = "1.11dev3"
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
@@ -606,7 +606,10 @@ class Series2Folder(ChoiceBox):
             (_("Move series recordings to folders"), "CALLFUNC", self.doMoves, service),
             (_("Configure move series recordings to folders"), "CALLFUNC", self.doConfig),
         ]
-        super(Series2Folder, self).__init__(session, _("Series to Folder actions"), list=list, selection=0)
+        try:
+            super(Series2Folder, self).__init__(session, _("Series to Folder actions:"), titlebartext=_("Series to Folder"), list=list, selection=0)
+        except TypeError:
+            super(Series2Folder, self).__init__(session, _("Series to Folder actions"), list=list, selection=0)
         self.actions = Series2FolderActions(session)
 
     def doMoves(self, service, selectedOnly=False, serviceList=None):

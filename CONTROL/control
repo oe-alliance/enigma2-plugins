@@ -1,5 +1,5 @@
 Package: enigma2-plugin-extensions-series2folder
-Version: 1.11dev2
+Version: 1.11dev3
 Description: Move series recordings to folders
 Section: extra
 Priority: optional
