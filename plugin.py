@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 __doc__ = '''
 Beyonwiz T series Plugin
 For any recorded series (configurable number of episodes with same name)
@@ -7,7 +9,7 @@ an option to do the processing automatically in the background.
 Mike Griffin  8/02/2015
 '''
 
-__version__ = "1.11dev3"
+__version__ = "1.11dev4"
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
@@ -239,7 +241,7 @@ class Series2FolderActionsBase(object):
             for fromPath, toPath in renameList:
                 try:
                     os.renames(fromPath, toPath)
-                    print "[Series2Folder] rename", fromPath, "to", toPath
+                    print("[Series2Folder] rename", fromPath, "to", toPath)
                 except Exception as e:
                     self.errMess.append(e.__str__())
                     nerrors += 1
