@@ -16,11 +16,17 @@ from .plugin import autotimer, AUTOTIMER_VERSION
 
 from .AutoTimerSettings import getAutoTimerSettingsDefinitions
 
-API_VERSION = "1.6"
+API_VERSION = "1.7"
 
 
 class AutoTimerBaseResource(resource.Resource):
-	def returnResult(self, req, state, statetext):
+
+	def _get(self, req, name, default=None):
+		name = six.ensure_binary(name)
+		ret = req.args.get(name)
+		return six.ensure_str(ret[0]) if ret else default
+
+	def returnResult(self, req, state, statetext, stateid=""):
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
@@ -29,7 +35,8 @@ class AutoTimerBaseResource(resource.Resource):
 <e2simplexmlresult>
 	<e2state>%s</e2state>
 	<e2statetext>%s</e2statetext>
-</e2simplexmlresult>\n""" % ('True' if state else 'False', statetext))
+	<e2id>%s</e2id>
+</e2simplexmlresult>\n""" % ('True' if state else 'False', statetext, stateid))
 
 
 class AutoTimerDoParseResource(AutoTimerBaseResource):
@@ -41,7 +48,10 @@ class AutoTimerDoParseResource(AutoTimerBaseResource):
 	def render(self, req):
 		self.req = req
 		# todo timeout / error handling
-		autotimer.parseEPG(callback=self.parsecallback)
+		id = self._get(req, "id")
+		if id:
+			id = int(id)
+		autotimer.parseEPG(callback=self.parsecallback, uniqueId=id)
 		return server.NOT_DONE_YET
 
 	def renderBackground(self, req, ret):
@@ -51,17 +61,20 @@ class AutoTimerDoParseResource(AutoTimerBaseResource):
 
 class AutoTimerSimulateResource(AutoTimerBaseResource):
 	def parsecallback(self, timers, skipped):
-		rets = self.renderBackground(self.req, timers)
+		rets = self.renderBackground(self.req, timers, skipped)
 		self.req.write(six.ensure_binary(rets))
 		self.req.finish()
 
 	def render(self, req):
 		self.req = req
 		# todo timeout / error handling
-		autotimer.parseEPG(simulateOnly=True, callback=self.parsecallback)
+		id = self._get(req, "id")
+		if id:
+			id = int(id)
+		autotimer.parseEPG(simulateOnly=True, uniqueId=id, callback=self.parsecallback)
 		return server.NOT_DONE_YET
 
-	def renderBackground(self, req, timers):
+	def renderBackground(self, req, timers, skipped):
 
 		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimersimulate api_version=\"", str(API_VERSION), "\">\n"]
 		extend = returnlist.extend
@@ -78,6 +91,23 @@ class AutoTimerSimulateResource(AutoTimerBaseResource):
 				'   <e2autotimername>', stringToXML(autotimername), '</e2autotimername>\n'
 				'</e2simulatedtimer>\n'
 			))
+
+		if skipped:
+			for (name, begin, end, serviceref, autotimername, message) in skipped:
+				ref = ServiceReference(str(serviceref))
+				extend((
+					'<e2simulatedtimer>\n'
+					'   <e2servicereference>', stringToXML(serviceref), '</e2servicereference>\n',
+					'   <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
+					'   <e2name>', stringToXML(name), '</e2name>\n',
+					'   <e2timebegin>', str(begin), '</e2timebegin>\n',
+					'   <e2timeend>', str(end), '</e2timeend>\n',
+					'   <e2autotimername>', stringToXML(autotimername), '</e2autotimername>\n',
+					'   <e2state>Skip</e2state>\n'
+					'   <e2message>', stringToXML(message), '</e2message>\n'
+					'</e2simulatedtimer>\n'
+				))
+
 		returnlist.append('</e2autotimersimulate>')
 
 		req.setResponseCode(http.OK)
@@ -93,17 +123,12 @@ class AutoTimerTestResource(AutoTimerBaseResource):
 		self.req.finish()
 
 	def render(self, req):
-		def get(name, default=None):
-			name = six.ensure_binary(name)
-			ret = req.args.get(name)
-			return six.ensure_str(ret[0]) if ret else default
 
 		self.req = req
 		# todo timeout / error handling
-
-		id = get("id")
+		id = self._get(req, "id")
 		if id:
-			id = int(id[0])
+			id = int(id)
 
 		autotimer.parseEPG(simulateOnly=True, uniqueId=id, callback=self.parsecallback)
 
@@ -466,7 +491,9 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		if config.plugins.autotimer.always_write_config.value:
 			autotimer.writeXml()
 
-		return self.returnResult(req, True, message)
+		resultid = str(timer.id)
+
+		return self.returnResult(req, True, message, resultid)
 
 
 class AutoTimerChangeResource(AutoTimerBaseResource):
