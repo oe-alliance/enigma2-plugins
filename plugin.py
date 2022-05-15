@@ -9,7 +9,7 @@ an option to do the processing automatically in the background.
 Mike Griffin  8/02/2015
 '''
 
-__version__ = "1.11dev4"
+__version__ = "1.11dev5"
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
@@ -73,6 +73,7 @@ def autoSeries2Folder(reason, session, **kwargs):
 def __autoSwitched(conf):
     autoSeries2Folder(int(not config.plugins.seriestofolder.auto.value), _session)
 
+
 config.plugins.seriestofolder.auto.addNotifier(__autoSwitched, initial_call=False, immediate_feedback=False, extra_args=None)
 
 def multiPluginDescriptor(name="Plugin", where=None, description="", icon=None, fnc=None, wakeupfnc=None, needsRestart=None, internal=False, weight=0, multi=False):
@@ -80,6 +81,7 @@ def multiPluginDescriptor(name="Plugin", where=None, description="", icon=None, 
         return PluginDescriptor(name=name, where=where, description=description, icon=icon, fnc=fnc, wakeupfnc=wakeupfnc, needsRestart=needsRestart, internal=internal, weight=weight, multi=multi)
     except TypeError:
         return PluginDescriptor(name=name, where=where, description=description, icon=icon, fnc=fnc, wakeupfnc=wakeupfnc, needsRestart=needsRestart, internal=internal, weight=weight)
+
 
 pluginSeries2Folder = multiPluginDescriptor(
     name=_('Series2Folder'),
@@ -132,6 +134,7 @@ def addRemovePlugin(configElement, plugin):
         if plugin in plugins.pluginList:
             plugins.removePlugin(plugin)
 
+
 config.plugins.seriestofolder.showmovebutton.addNotifier(
     lambda conf: addRemovePlugin(conf, pluginSeries2Folder),
     initial_call=False,
@@ -181,7 +184,7 @@ class Series2FolderActionsBase(object):
         self.errMess = []
 
         if serviceList is None and service is not None:
-                serviceList = [service]
+            serviceList = [service]
 
         if serviceList is not None:
             for serv in serviceList:
@@ -311,17 +314,17 @@ class Series2FolderActionsBase(object):
 
     def recFileList(self, rootdir, fullname):
         base, ext = splitext(fullname)
-        l = [fullname]
+        recFiles = [fullname]
         for e in self.BAREEXTS:
             f = base + e
             if isfile(joinpath(rootdir, f)):
-                l.append(f)
+                recFiles.append(f)
         base = fullname
         for e in self.TSEXTS:
             f = base + e
             if isfile(joinpath(rootdir, f)):
-                l.append(f)
-        return l
+                recFiles.append(f)
+        return recFiles
 
     def stripRepeat(self, name):
         name = name.strip()
@@ -359,7 +362,7 @@ class Series2FolderActionsBase(object):
             filebase = splitext(fullname)[0]
             if filebase[-4:-3] == "_" and filebase[-3:].isdigit():
                 date_time += '#' + filebase[-3:]
-        except:
+        except Exception:
             showname, date_time, pending_merge, err_mess = self.recSplit(fullname)
 
         if showname:
@@ -381,9 +384,9 @@ class Series2FolderActionsBase(object):
             if len(parts) > 1:
                 t = parts[0]
                 if len(t) == 8 and isDate(t[0:8]):
-                        return "short"
+                    return "short"
                 elif len(t) == 13 and isDate(t[0:8]) and t[8] == ' ' and isHHMM(t[9:13]):
-                        return "long" if len(parts) >= 4 else "standard"
+                    return "long" if len(parts) >= 4 else "standard"
                 else:
                     t = parts[-1]
                     if len(t) >= 14 and isDate(t[0:8]) and t[8] == ' ' and isHHMM(t[9:13]) and t[13] == '_':
@@ -769,7 +772,7 @@ class Series2FolderConfig(ConfigListScreen, Screen):
         self.title += " v" + __version__
         screen_size = self.session.desktop.size()
         if self.noShowHelp:
-                self["HelpWindow"].instance.move(ePoint(screen_size.width(), screen_size.height()))
+            self["HelpWindow"].instance.move(ePoint(screen_size.width(), screen_size.height()))
 
     def keyLeft(self):
         ConfigListScreen.keyLeft(self)

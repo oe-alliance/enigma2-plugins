@@ -10,13 +10,12 @@ import six
 #    or self.session.dialog_stack is an instance of any class in any
 #    value part of fileScreens, any background run of Series2Folder
 #    will be deferred until none of those screens is in the current
-#    set of active screens.
+#    stack of active screens.
 #
 #  * When run manually, the keys in fileScreens are the names of the
-#  refresh
-#      methods to run in the listed classes in the value tuple in
-#      order to refresh the selection list after Series2Folder does
-#      the manual update.
+#    refresh methods to run in the listed classes in the value tuple
+#    in order to refresh the selection list after Series2Folder does
+#    the manual update.
 
 # fileScreenTemplates is used to create fileScreens.  It is a tuple
 # of tuples in the form:
@@ -48,7 +47,7 @@ for moduleName, classNames, refreshMethod in __fileScreenTemplates:
 # When called with allScreens as True, it returns a list of all
 # fileScreen entries that are currently active (for plugin background
 # mode).
-# When called with allScreens as False, it returns alist of all
+# When called with allScreens as False, it returns a list of all
 # currently active fileScreen entries that have a non-None
 # refreshMethodName (for plugin manual mode).
 
