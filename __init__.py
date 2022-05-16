@@ -22,8 +22,8 @@ try:
 except TypeError:
     config.plugins.seriestofolder.moviesfolder = ConfigText(default=__defaultMoviesStr)
 config.plugins.seriestofolder.portablenames = ConfigYesNo(default=True)
-config.plugins.seriestofolder.showmovebutton = ConfigYesNo(default=True)
-config.plugins.seriestofolder.showselmovebutton = ConfigYesNo(default=True)
+config.plugins.seriestofolder.showmovebutton = ConfigYesNo(default=False)
+config.plugins.seriestofolder.showselmovebutton = ConfigYesNo(default=False)
 config.plugins.seriestofolder.striprepeattags = ConfigYesNo(default=False)
 __defaultRepeatStr = "[R]"
 try:

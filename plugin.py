@@ -9,7 +9,7 @@ an option to do the processing automatically in the background.
 Mike Griffin  8/02/2015
 '''
 
-__version__ = "1.11dev5"
+__version__ = "1.11dev6"
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
@@ -666,7 +666,7 @@ class Series2FolderConfig(ConfigListScreen, Screen):
         self._confAutofolder = getConfigListEntry(
             _("Automatically create folders"),
             config.plugins.seriestofolder.autofolder,
-            _("Create a folder for a series automatically if there are this number of recordings or more. If set to \"no autocreate\" only move recordings if a folder already exists for them.")
+            _('Create a folder for a series automatically if there are this number of recordings or more. If set to "no autocreate", only move recordings if a folder already exists for them.')
         )
         self._confPortableNames = getConfigListEntry(
             _("Use portable folder names"),
@@ -696,12 +696,12 @@ class Series2FolderConfig(ConfigListScreen, Screen):
         self._confShowmovebutton = getConfigListEntry(
             _("Show move series option"),
             config.plugins.seriestofolder.showmovebutton,
-            _("Single-action move series to folder shown in menu and as button option. Requires restart if changed.")
+            _('Single-action move series to folder shown in menu and as button option. Displays in menu and buttons as "%s". Requires restart if changed.' % pluginSeries2Folder.description)
         )
         self._confShowselmovebutton = getConfigListEntry(
             _("Show move selected series option"),
             config.plugins.seriestofolder.showselmovebutton,
-            _("Single-action move selected series to folder shown in menu and as button option. Requires restart if changed.")
+            _('Single-action move selected series to folder shown in menu and as button option. Displays in menu and buttons as "%s". Requires restart if changed.' % pluginSelSeries2Folder.description)
         )
 
         self._confAuto = getConfigListEntry(
