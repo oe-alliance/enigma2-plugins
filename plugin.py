@@ -9,7 +9,7 @@ an option to do the processing automatically in the background.
 Mike Griffin  8/02/2015
 '''
 
-__version__ = "1.11dev7"
+__version__ = "1.11dev8"
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
@@ -716,6 +716,8 @@ class Series2FolderConfig(ConfigListScreen, Screen):
             _("Configure which notification popups will be shown by Series to Folder when run in the background")
         )
 
+        self.haveConditionals = set()
+
         ConfigListScreen.__init__(self, self.list, session)
 
         self["Conf"] = ActionMap(contexts=["SetupActions", "ColorActions"], actions={
@@ -734,8 +736,10 @@ class Series2FolderConfig(ConfigListScreen, Screen):
     def createConfig(self, configList):
         list = []
         disabled = []
+        self.haveConditionals.clear()
 
         def addConditional(cond, item):
+            self.haveConditionals.add(cond)
             (list if cond[1].value else disabled).append(item)
 
         list += [
@@ -765,7 +769,7 @@ class Series2FolderConfig(ConfigListScreen, Screen):
 
     def updateConfig(self):
         currConf = self["config"].getCurrent()
-        if currConf in (self._confStripRepeats, self._confMovies, self._confAuto):
+        if currConf in self.haveConditionals:
             self.createConfig(self["config"])
 
     def __layoutFinished(self):
