@@ -9,7 +9,7 @@ an option to do the processing automatically in the background.
 Mike Griffin  8/02/2015
 '''
 
-__version__ = "1.11dev6"
+__version__ = "1.11dev7"
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
@@ -719,9 +719,9 @@ class Series2FolderConfig(ConfigListScreen, Screen):
         ConfigListScreen.__init__(self, self.list, session)
 
         self["Conf"] = ActionMap(contexts=["SetupActions", "ColorActions"], actions={
-            "cancel": self.cancel,
-            "red": self.cancel,
-            "green": self.save,
+            "cancel": self.keyCancel,
+            "red": self.keyCancel,
+            "green": self.keySave,
             "blue": self.keyboard,
             "ok": self.keyboard,
         }, prio=-2)
@@ -786,12 +786,3 @@ class Series2FolderConfig(ConfigListScreen, Screen):
         selection = self["config"].getCurrent()
         if isinstance(selection[1], ConfigText):
             self.KeyText()
-
-    def cancel(self):
-        for x in self["config"].list:
-            x[1].cancel()
-        self.close(False)
-
-    def save(self):
-        self.saveAll()
-        self.close()
