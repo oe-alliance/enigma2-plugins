@@ -9,7 +9,7 @@ an option to do the processing automatically in the background.
 Mike Griffin  8/02/2015
 '''
 
-__version__ = "1.11dev8"
+__version__ = "1.11dev9"
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
@@ -611,10 +611,17 @@ class Series2Folder(ChoiceBox):
             (_("Move series recordings to folders"), "CALLFUNC", self.doMoves, service),
             (_("Configure move series recordings to folders"), "CALLFUNC", self.doConfig),
         ]
+        if config.plugins.seriestofolder.auto.value or not config.plugins.seriestofolder.autoreminder.value:
+            text = ""
+        else:
+            if config.plugins.seriestofolder.autoreminder.value:
+                config.plugins.seriestofolder.autoreminder.value -= 1
+                config.plugins.seriestofolder.autoreminder.save()
+            text = _('\nTo allow Series to Folder to run automatically in the background, configure it to enable "Allow Series to Folder to run in the background"')
         try:
-            super(Series2Folder, self).__init__(session, _("Series to Folder actions:"), titlebartext=_("Series to Folder"), list=list, selection=0)
+            super(Series2Folder, self).__init__(session, title=_("Series to Folder actions:%s") % text, titlebartext=_("Series to Folder"), list=list, selection=0)
         except TypeError:
-            super(Series2Folder, self).__init__(session, _("Series to Folder actions"), list=list, selection=0)
+            super(Series2Folder, self).__init__(session, title=_("Series to Folder actions%s") % text, list=list, selection=0)
         self.actions = Series2FolderActions(session)
 
     def doMoves(self, service, selectedOnly=False, serviceList=None):

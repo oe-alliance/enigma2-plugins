@@ -1,4 +1,4 @@
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigEnableDisable, ConfigText, ConfigYesNo
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigEnableDisable, ConfigText, ConfigYesNo, ConfigInteger
 
 config.plugins.seriestofolder = ConfigSubsection()
 config.plugins.seriestofolder.autofolder = ConfigSelection([
@@ -37,3 +37,12 @@ config.plugins.seriestofolder.autonotifications = ConfigSelection([
     ("error", _("error")),
     ("none", _("none")),
 ], default="error")
+config.plugins.seriestofolder.autoreminder = ConfigInteger(default=5)
+
+def onAutoChange(conf):
+    if conf.value and config.plugins.seriestofolder.autoreminder.value:
+        config.plugins.seriestofolder.autoreminder.value = 0
+        config.plugins.seriestofolder.autoreminder.save()
+
+
+config.plugins.seriestofolder.auto.addNotifier(onAutoChange, immediate_feedback=False)
