@@ -1146,12 +1146,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					self.videolist.append(self.buildEntryComponent(entry, TubeID))
 				if len(self.videolist):
 					self["feedlist"].style = "default"
-					self["feedlist"].disable_callbacks = True
-					self["feedlist"].list = self.videolist
-					self["feedlist"].disable_callbacks = False
-					self["feedlist"].setIndex(0)
-					self["feedlist"].setList(self.videolist)
 					self["feedlist"].updateList(self.videolist)
+					self["feedlist"].setIndex(0)
 					if self.FirstRun and not config.plugins.mytube.general.loadFeedOnOpen.value:
 						self.switchToConfigList()
 					else:
@@ -1170,12 +1166,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				if len(self.videolist):
 					self["feedlist"].style = "default"
 					old_index = self["feedlist"].index
-					self["feedlist"].disable_callbacks = True
-					self["feedlist"].list = self.videolist
-					self["feedlist"].disable_callbacks = False
-					self["feedlist"].setList(self.videolist)
-					self["feedlist"].setIndex(old_index)
 					self["feedlist"].updateList(self.videolist)
+					self["feedlist"].setIndex(old_index)
 					self["feedlist"].selectNext()
 					self.switchToFeedList(True)
 			if not self.timer_startDownload.isActive():
@@ -1553,12 +1545,8 @@ class MyTubeVideoInfoScreen(Screen):
 		self.infolist.append((Thumbail0, Thumbail1, Thumbail2, Thumbail3))
 		if len(self.infolist):
 			self["infolist"].style = "default"
-			self["infolist"].disable_callbacks = True
-			self["infolist"].list = self.infolist
-			self["infolist"].disable_callbacks = False
-			self["infolist"].setIndex(0)
-			self["infolist"].setList(self.infolist)
 			self["infolist"].updateList(self.infolist)
+			self["infolist"].setIndex(0)
 
 
 class MyTubeVideoHelpScreen(Screen):

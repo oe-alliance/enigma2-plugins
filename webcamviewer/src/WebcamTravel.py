@@ -199,12 +199,8 @@ class TravelWebcamviewer(Screen):
 		statuslist.append(self.buildEntryStatus("loading data"))
 
 		self["list"].style = "status"
-		self["list"].disable_callbacks = True
-		self["list"].list = statuslist
-		self["list"].disable_callbacks = False
-		self["list"].setIndex(0)
-		self["list"].setList(statuslist)
 		self["list"].updateList(statuslist)
+		self["list"].setIndex(0)
 
 	def buildCamList(self):
 		if len(self.picloads) != 0:
@@ -220,12 +216,8 @@ class TravelWebcamviewer(Screen):
 				pass
 
 		self["list"].style = "default"
-		self["list"].disable_callbacks = True
-		self["list"].list = statuslist
-		self["list"].disable_callbacks = False
-		self["list"].setIndex(0)
-		self["list"].setList(statuslist)
 		self["list"].updateList(statuslist)
+		self["list"].setIndex(0)
 		self.timer_labels.start(1)
 
 	def refreshLabels(self):
