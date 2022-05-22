@@ -506,16 +506,9 @@ class BirthdayReminder(Screen, HelpableScreen):
 
 
 class BirthdayList(List):
-	def __init__(self, list=[], enableWrapAround=False, item_height=25, fonts=[]):
-		List.__init__(self, list=[], enableWrapAround=False, item_height=25, fonts=[])
-		Source.__init__(self)
+	def __init__(self, list=[]):
+		List.__init__(self, list=[])
 		self.__list = list
-		self.onSelectionChanged = []
-		self.item_height = item_height
-		self.fonts = fonts
-		self.disable_callbacks = False
-		self.enableWrapAround = enableWrapAround
-		self.__style = "default" # style might be an optional string which can be used to define different visualisations in the skin
 
 	def setList(self, list):
 		self.__list = list
