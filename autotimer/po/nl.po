@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: enigma - autotimer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-04 15:44+0000\n"
-"PO-Revision-Date: 2022-05-06 15:59+0200\n"
+"PO-Revision-Date: 2022-05-24 15:40+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
 "Language: nl_NL\n"
@@ -406,7 +406,7 @@ msgstr "Als dit is uitgeschakeld zal Autotimer NIET automatisch naar overeenkome
 
 #, python-format
 msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80% of the it."
-msgstr "Als dit is ingeschakeld, zal een bestaande timer worden beschouwd als overeenkomend als deze tenminste 80% van het programma opneemt."
+msgstr "Als dit is ingeschakeld, zal een bestaande timer worden beschouwd als overeenkomend als deze tenminste 80% opneemt van het programma."
 
 msgid "If this is selected, the name of the respective AutoTimer will be added as a tag to timers created by this plugin."
 msgstr "Als dit is geselecteerd zal de naam van de autotimer toegevoegd worden als tag aan de timers die gecreëerd worden."
