@@ -8,136 +8,139 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-03 15:01+0000\n"
-"PO-Revision-Date: 2012-12-03 15:01+0000\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-05-24 16:54+0200\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: none\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 msgid "Add new page"
-msgstr ""
+msgstr "Voeg nieuwe pagina toe"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleer"
 
 msgid "Close window"
-msgstr ""
+msgstr "Sluit venster"
 
 msgid "Default page"
-msgstr ""
+msgstr "Standaard pagina"
 
 msgid "Delete"
-msgstr ""
+msgstr "Verwijder"
 
 msgid "Delete selected page"
-msgstr ""
+msgstr "Verwijder geselecteerde pagina"
 
 msgid "Dismiss all setting changes"
-msgstr ""
+msgstr "Annuleer alle veranderde instellingen"
 
 msgid "Edit selected page"
-msgstr ""
+msgstr "Bewrk geselecteerde pagina"
 
 msgid "Error fetching URL:"
-msgstr ""
+msgstr "Fout bij binnenhalen URL:"
 
 msgid "Error loading page feed:"
-msgstr ""
+msgstr "Fout bij laden pagina feed:"
 
 msgid "Font size"
-msgstr ""
+msgstr "Lettergrootte"
 
 msgid "Go and add a page in the settings"
-msgstr ""
+msgstr "Voef een pagina toe in de instellingen"
 
 msgid "HTTP response headers for"
-msgstr ""
+msgstr "HTTP antwoord koppen voor"
 
 msgid "Invalid page"
-msgstr ""
+msgstr "Ongeldige pagina"
 
 msgid "Load pages from feed"
-msgstr ""
+msgstr "Laad pagina's van de feed"
 
 msgid "Loading ..."
-msgstr ""
+msgstr "Bezig met laden..."
 
 msgid "Menu title"
-msgstr ""
+msgstr "Menu titel"
 
 msgid "New"
-msgstr ""
+msgstr "Nieuw"
 
 msgid "Next"
-msgstr ""
+msgstr "Volgende"
 
 msgid "No page feed URL defined"
-msgstr ""
+msgstr "Geen pagina feed URL gedefinieerd"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Page URL"
-msgstr ""
+msgstr "Pagina URL"
 
 msgid "Page feed URL"
-msgstr ""
+msgstr "Pagina feed URL"
 
 msgid "Page:"
-msgstr ""
+msgstr "Pagina:"
 
 msgid "Prev"
-msgstr ""
+msgstr "Vorige"
 
 msgid ""
 "Really delete this page?\n"
 "It cannot be recovered!"
 msgstr ""
+"Deze pagina echt verwijderen?\n"
+"Dit kan niet ongedaan worden gemaakt!"
 
 msgid "Reload"
-msgstr ""
+msgstr "Herlaad"
 
 msgid "Reload current page URL"
-msgstr ""
+msgstr "Herlaad huidige pagina URL"
 
 msgid "Save settings and close screen"
-msgstr ""
+msgstr "Sla instellingen op en sluit scherm"
 
 msgid "Scroll page contents down"
-msgstr ""
+msgstr "Scoll pagina omhoog"
 
 msgid "Scroll page contents up"
-msgstr ""
+msgstr "Scroll pagina omlaag"
 
 msgid "Settings"
-msgstr ""
+msgstr "Instellingen"
 
 msgid "Show HTTP response headers"
-msgstr ""
+msgstr "Toon HTTP antwoord koppen"
 
 msgid "Show in extensions menu"
-msgstr ""
+msgstr "Toon in extensies"
 
 msgid "Show in main menu"
-msgstr ""
+msgstr "Toon in hoofdmen"
 
 msgid "Show program settings"
-msgstr ""
+msgstr "Toon in programma-instellingen"
 
 msgid "Show this help screen"
-msgstr ""
+msgstr "Toon dit helpscherm"
 
 msgid "Switch to next configured page URL"
-msgstr ""
+msgstr "Ga naar de volgende geconfigureerde pagina URL"
 
 msgid "Switch to previous configured page URL"
-msgstr ""
+msgstr "Ga naar de voorheen geconfigureerde pagina URL"
 
 msgid "Title"
-msgstr ""
+msgstr "Title"
 
 msgid "View remote text files"
-msgstr ""
+msgstr "Bekijk remote tekstbestanden"
