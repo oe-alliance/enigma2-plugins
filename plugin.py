@@ -9,7 +9,7 @@ an option to do the processing automatically in the background.
 Mike Griffin  8/02/2015
 '''
 
-__version__ = "1.11dev9"
+__version__ = "1.11dev10"
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
@@ -44,6 +44,7 @@ _session = None
 
 def menu(session, service, serviceList=None, **kwargs):
     session.open(Series2Folder, service, serviceList=serviceList)
+
 
 def buttonSeries2Folder(session, service, *args, **kwargs):
     actions = Series2FolderActions(session)
@@ -780,7 +781,19 @@ class Series2FolderConfig(ConfigListScreen, Screen):
             self.createConfig(self["config"])
 
     def __layoutFinished(self):
-        self.title += " v" + __version__
+        title = self.title
+
+        # On OpenATV, self.title and self.getTitle() return an
+        # empty string unless self.title has been explicitly
+        # assigned to or self.setTitle() has been explicitly
+        # called (e.g. an empty string is returned if the
+        # title is set only by the skin).
+        if not title:
+            try:
+                title = self["Title"].text
+            except (IndexError, AttributeError):
+                pass
+        self.title = _("%s v%s") % (title, __version__)
         screen_size = self.session.desktop.size()
         if self.noShowHelp:
             self["HelpWindow"].instance.move(ePoint(screen_size.width(), screen_size.height()))
