@@ -124,7 +124,7 @@ class board:
 	def checkSquare(self, square):
 		found = []
 		xoffset = (3 * (square % 3))
-		yoffset = int(square / 3) * 3
+		yoffset = int(square // 3) * 3
 		for j in range(0, 3):
 			for i in range(0, 3):
 				if not self.boardlist[xoffset + i][yoffset + j] == 0:
@@ -211,8 +211,8 @@ class Sudoku(Screen):
 		h = int(desk.size().height())
 
 		# display window in center...
-		x = (w - 520) / 2
-		y = (h - 390) / 2
+		x = (w - 520) // 2
+		y = (h - 390) // 2
 
 		# set skin...
 		# ToDo: change for HD Skins...
@@ -245,7 +245,7 @@ class Sudoku(Screen):
 				color = get_attr("value")
 				if name and color:
 					colorNames[name] = color
-					#print "Color:", name, color
+					#print("Color:", name, color)
 
 		# find colors for skinned window...
 		for windowstyle in actualSkin.findall("windowstyle"):
@@ -259,7 +259,7 @@ class Sudoku(Screen):
 					if color[0] != '#':
 						# is "named" color, have to look in dictionary...
 						color = colorNames[color]
-					#print type, color
+					#print(type, color)
 					# at least get the background color...
 					if type == "Background":
 						bgcolor = int(color[1:], 0x10)
@@ -322,8 +322,8 @@ class Sudoku(Screen):
 			tmp = []
 			for i in range(9):
 				cell = SudokuCell(self["Canvas"],
-								  j * (CELL_SIZE + CELL_OFFSET) + (j / 3) * (GROUP_SIZE - 3 * CELL_SIZE),
-								  i * (CELL_SIZE + CELL_OFFSET) + (i / 3) * (GROUP_SIZE - 3 * CELL_SIZE),
+								  j * (CELL_SIZE + CELL_OFFSET) + (j // 3) * (GROUP_SIZE - 3 * CELL_SIZE),
+								  i * (CELL_SIZE + CELL_OFFSET) + (i // 3) * (GROUP_SIZE - 3 * CELL_SIZE),
 								  CELL_SIZE, CELL_SIZE)
 				tmp.append(cell)
 			self.board_cells.append(tmp)
