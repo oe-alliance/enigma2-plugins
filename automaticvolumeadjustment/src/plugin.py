@@ -45,7 +45,7 @@ def autoend(reason, **kwargs):
 				saveVolumeDict(AutomaticVolumeAdjustment.instance.serviceList)
 
 
-def setup(session, **kwargs):
+def setupAVA(session, **kwargs):
 	session.open(AutomaticVolumeAdjustmentConfigScreen) # start setup
 
 
@@ -53,10 +53,13 @@ def startSetup(menuid):
 	if getImageDistro() in ('openhdf', 'openatv'):
 		if menuid != "audio_menu":
 			return []
+	elif getImageDistro() in ('openvix',):
+		if menuid != "av":
+			return []
 	else:
 		if menuid != "system": # show setup only in system level menu
 			return []
-	return [(_("Automatic Volume Adjustment"), setup, "AutomaticVolumeAdjustment", 46)]
+	return [(_("Automatic Volume Adjustment"), setupAVA, "AutomaticVolumeAdjustment", 46)]
 
 
 def Plugins(**kwargs):

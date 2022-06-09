@@ -75,6 +75,7 @@ class AutomaticVolumeAdjustmentConfigScreen(ConfigListScreen, Screen):
 		self.list = []
 		self.config_enable = getConfigListEntry(_("Enable"), self.configVA.config.enable)
 		self.list.append(self.config_enable)
+		self["key_blue"].text = ""
 		if self.configVA.config.enable.value:
 			self.config_modus = getConfigListEntry(_("Modus"), self.configVA.config.modus)
 			self.list.append(self.config_modus)
@@ -82,8 +83,6 @@ class AutomaticVolumeAdjustmentConfigScreen(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry(_("Default volume adjustment value for AC3/DTS"), self.configVA.config.adustvalue))
 				self.list.append(getConfigListEntry(_("Max. volume for mpeg audio"), self.configVA.config.mpeg_max_volume))
 				self["key_blue"].text = _("Services")
-			else:
-				self["key_blue"].text = ""
 			self.list.append(getConfigListEntry(_("Show volumebar when volume-value was changed"), self.configVA.config.show_volumebar))
 		else:
 			self.config_modus = None
@@ -103,7 +102,7 @@ class AutomaticVolumeAdjustmentConfigScreen(ConfigListScreen, Screen):
 			self.newConfig()
 
 	def blue(self):
-		if self.configVA.config.modus.value == "0":
+		if self.configVA.config.enable.value and self.configVA.config.modus.value == "0":
 			self.session.open(AutomaticVolumeAdjustmentEntriesListConfigScreen, self.configVA)
 
 	def keySave(self):
