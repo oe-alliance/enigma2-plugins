@@ -72,6 +72,7 @@ class AutomaticVolumeAdjustment(Screen):
 		self.enabled = configVA.config.enable.value
 		self.maxMPEGVolume = configVA.config.mpeg_max_volume.value
 		self.showVolumeBar = configVA.config.show_volumebar.value
+		self.type_audio = configVA.config.type_audio.value
 		if self.modus == "0": # Automatic volume adjust mode
 			VolumeControlInit(self.enabled, self.maxMPEGVolume) # overwrite VolumeControl Class, when max MPEG Volume was set (<> 100)
 		if not self.pluginStarted and self.enabled and fromOutside:
@@ -165,8 +166,12 @@ class AutomaticVolumeAdjustment(Screen):
 				tracknr = audio.getCurrentTrack()
 				i = audio.getTrackInfo(tracknr)
 				description = i.getDescription()
-				if description and description.split()[0] in ("AC3", "AC-3", "A_AC3", "A_AC-3", "A-AC-3", "E-AC-3", "A_EAC3", "DTS", "DTS-HD", "AC4", "LPCM", "Dolby", "AAC-HE"):
-					return True
+				if self.type_audio:
+					if "AC3" in description or "DTS" in description:
+						return True
+				else:
+					if description and description.split()[0] in ("AC3", "AC-3", "A_AC3", "A_AC-3", "A-AC-3", "E-AC-3", "A_EAC3", "DTS", "DTS-HD", "AC4", "AAC-HE"):
+						return True
 			except:
 				pass
 		return False

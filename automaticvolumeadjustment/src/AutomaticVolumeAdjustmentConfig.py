@@ -77,6 +77,7 @@ class AutomaticVolumeAdjustmentConfig():
 		self.config.adustvalue = ConfigSelectionNumber(-50, 50, 5, default=25)
 		self.config.mpeg_max_volume = ConfigSelectionNumber(10, 100, 5, default=100)
 		self.config.show_volumebar = ConfigYesNo(default=False)
+		self.config.type_audio = ConfigYesNo(default=True)
 		self.initConfig()
 
 	def initConfig(self):
