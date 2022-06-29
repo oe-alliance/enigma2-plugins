@@ -359,7 +359,7 @@ def Plugins(**kwargs):
 
 def main(session, **kwargs):
 	try:
-	 	session.open(Elektro)
+		session.open(Elektro)
 	except:
 		print(pluginPrintname, "Pluginexecution failed")
 
