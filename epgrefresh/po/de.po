@@ -37,7 +37,7 @@ msgid "AutoTimer failed with error %s"
 msgstr "Parsen des EPGs durch den AutoTimer hat einen Fehler verursacht %s"
 
 msgid "Automatically refresh EPG"
-msgstr "Automatische Aktualisierung"
+msgstr "Automatische EPG Aktualisierung."
 
 msgid "Background only"
 msgstr "Nur im Hintergrund"
