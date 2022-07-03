@@ -149,6 +149,7 @@ def Plugins(**kwargs):
 		PluginDescriptor(
 			name="RSS Reader",
 			description=_("A simple to use RSS reader"),
+			icon="plugin.png",
 			where=PluginDescriptor.WHERE_PLUGINMENU,
 			fnc=main,
 			needsRestart=False,
