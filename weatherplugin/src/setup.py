@@ -24,7 +24,7 @@
 from __future__ import print_function
 from . import _
 
-from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, \
+from enigma import eListboxPythonMultiContent, getDesktop, gFont, RT_HALIGN_LEFT, \
 	RT_VALIGN_CENTER
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -43,6 +43,7 @@ from enigma import RT_HALIGN_RIGHT
 from skin import parameters as skinparameter
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 
+HD = getDesktop(0).size()
 
 def initWeatherPluginEntryConfig():
 	s = ConfigSubsection()
@@ -150,8 +151,10 @@ class WeatherPluginEntryList(MenuList):
 	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 
-		font1, size1 = skinparameter.get("WeatherPluginEntryListFont1", ('Regular', 20))
-		font2, size2 = skinparameter.get("WeatherPluginEntryListFont2", ('Regular', 18))
+		fs1 = 20 if HD.width() < 1920 else 30
+		fs2 = 18 if HD.width() < 1920 else 28
+		font1, size1 = skinparameter.get("WeatherPluginEntryListFont1", ('Regular',fs1))
+		font2, size2 = skinparameter.get("WeatherPluginEntryListFont2", ('Regular',fs2))
 		self.l.setFont(0, gFont(font1, size1))
 		self.l.setFont(1, gFont(font2, size2))
 
@@ -165,15 +168,17 @@ class WeatherPluginEntryList(MenuList):
 	def buildList(self):
 		list = []
 		for c in config.plugins.WeatherPlugin.Entry:
-
-			x1, y1, w1, h1 = skinparameter.get("WeatherPluginCity", (5, 0, 400, 20))
-			x2, y2, w2, h2 = skinparameter.get("WeatherPluginDegreetype", (410, 0, 80, 20))
+			if HD.width() < 1920:
+				x1, y1, w1, h1 = skinparameter.get("WeatherPluginCity", (5, 0, 400, 20))
+				x2, y2, w2, h2 = skinparameter.get("WeatherPluginDegreetype", (410, 0, 80, 20))
+			else:
+				x1, y1, w1, h1 = skinparameter.get("WeatherPluginCity", (10, 0, 700, 50))
+				x2, y2, w2, h2 = skinparameter.get("WeatherPluginDegreetype", (770, 0, 100, 50))
 			res = [
 				c,
-				(eListboxPythonMultiContent.TYPE_TEXT, x1, y1, w1, h1, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(c.city.value)),
-				(eListboxPythonMultiContent.TYPE_TEXT, x2, y2, w2, h2, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(c.degreetype .value)),
-			]
-
+				(eListboxPythonMultiContent.TYPE_TEXT, x1, y1, w1, h1, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(c.city.value)),
+				(eListboxPythonMultiContent.TYPE_TEXT, x2, y2, w2, h2, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(c.degreetype .value)),
+				]
 			list.append(res)
 		self.list = list
 		self.l.setList(list)
@@ -366,14 +371,16 @@ class MSNWeatherPluginSearchResultList(MenuList):
 	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 
-		font1, size1 = skinparameter.get("WeatherPluginSearchResultListFont1", ('Regular', 20))
-		font2, size2 = skinparameter.get("WeatherPluginSearchResultListFont2", ('Regular', 18))
+		fs1 = 20 if HD.width() < 1920 else 30
+		fs2 = 18 if HD.width() < 1920 else 28
+		font1, size1 = skinparameter.get("WeatherPluginSearchResultListFont1", ('Regular',fs1))
+		font2, size2 = skinparameter.get("WeatherPluginSearchResultListFont2", ('Regular',fs2))
 		self.l.setFont(0, gFont(font1, size1))
 		self.l.setFont(1, gFont(font2, size2))
 
 	def postWidgetCreate(self, instance):
 		MenuList.postWidgetCreate(self, instance)
-		instance.setItemHeight(44)
+		instance.setItemHeight(60)
 
 	def getCurrentIndex(self):
 		return self.instance.getCurrentIndex()
@@ -389,15 +396,17 @@ class MSNWeatherPluginSearchResultList(MenuList):
 				searchlocation = six.ensure_str(childs.attrib.get("weatherlocationname"), errors='ignore')
 				searchresult = six.ensure_str(childs.attrib.get("weatherfullname"), errors='ignore')
 				weatherlocationcode = six.ensure_str(childs.attrib.get("weatherlocationcode"), errors='ignore')
-
-				x1, y1, w1, h1 = skinparameter.get("WeatherPluginSearchlocation", (5, 0, 500, 20))
-				x2, y2, w2, h2 = skinparameter.get("WeatherPluginSearchresult", (5, 22, 500, 20))
+				if HD.width() < 1920:
+					x1, y1, w1, h1 = skinparameter.get("WeatherPluginSearchlocation", (5, 0, 500, 20))
+					x2, y2, w2, h2 = skinparameter.get("WeatherPluginSearchresult", (5, 22, 500, 20))
+				else:
+					x1, y1, w1, h1 = skinparameter.get("WeatherPluginSearchlocation", (10, 0, 650, 50))
+					x2, y2, w2, h2 = skinparameter.get("WeatherPluginSearchresult", (630, 0, 600, 50))
 				res = [
-					(weatherlocationcode, searchlocation),
-					(eListboxPythonMultiContent.TYPE_TEXT, x1, y1, w1, h1, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, searchlocation),
-					(eListboxPythonMultiContent.TYPE_TEXT, x2, y2, w2, h2, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, searchresult),
-				]
-
+						(weatherlocationcode, searchlocation),
+						(eListboxPythonMultiContent.TYPE_TEXT, x1, y1, w1, h1, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, searchlocation),
+						(eListboxPythonMultiContent.TYPE_TEXT, x2, y2, w2, h2, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, searchresult),
+					]
 				list.append(res)
 		self.list = list
 		self.l.setList(list)
