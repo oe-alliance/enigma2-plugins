@@ -1,19 +1,17 @@
-from __future__ import print_function
 from __future__ import absolute_import
-from Components.ActionMap import ActionMap
-from Components.Sources.List import List
-from Components.Sources.StaticText import StaticText
-from Components.ConfigList import ConfigList
-from Components.config import *
-from skin import loadSkin
-from Components.Label import Label
-from Screens.Screen import Screen
-from Components.Pixmap import Pixmap
-from Plugins.Plugin import PluginDescriptor
-from Tools.Directories import pathExists, fileExists
-from .__init__ import _
 import os
 import subprocess
+from Components.ActionMap import ActionMap
+from Components.config import *
+from Components.Pixmap import Pixmap
+from Components.Sources.List import List
+from Components.Label import Label
+from Plugins.Plugin import PluginDescriptor
+from Screens.Screen import Screen
+from Screens.MessageBox import MessageBox
+from skin import loadSkin
+from Tools.Directories import pathExists, fileExists
+from .__init__ import _
 
 config.plugins.mc_global = ConfigSubsection()
 config.plugins.mc_global.vfd = ConfigSelection(default='off', choices=[('off', 'off'), ('on', 'on')])
@@ -28,12 +26,30 @@ loadSkin("/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultH
 try:
 	from Plugins.Extensions.DVDPlayer.plugin import *
 	dvdplayer = True
-except:
+except ImportError:
 	print("Media Center: Import DVDPlayer failed")
 	dvdplayer = False
 
 mcpath = '/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/'
 
+# Subclass of List to support horizontal menu
+class DMC_List(List):
+	def __init__(self, list=[]):
+		List.__init__(self, list)
+
+	def selectPrevious(self):
+		if self.getIndex() - 1 < 0:
+			self.index = self.count() - 1
+		else:
+			self.index -= 1
+		self.setIndex(self.index)
+
+	def selectNext(self):
+		if self.getIndex() + 1 >= self.count():
+			self.index = 0
+		else:
+			self.index += 1
+		self.setIndex(self.index)
 
 class DMC_MainMenu(Screen):
 	def __init__(self, session):
@@ -52,18 +68,18 @@ class DMC_MainMenu(Screen):
 		if self.can_osd_alpha:
 			open("/proc/stb/video/alpha", "w").write(str("255"))
 		open("/proc/sys/vm/drop_caches", "w").write(str("3"))
-		list = []
-		list.append((_("My Music"), "MC_AudioPlayer", "menu_music", "50"))
-		list.append((_("My Music"), "MC_AudioPlayer", "menu_music", "50"))
-		list.append((_("My Videos"), "MC_VideoPlayer", "menu_video", "50"))
-		list.append((_("DVD Player"), "MC_DVDPlayer", "menu_video", "50"))
-		list.append((_("My Pictures"), "MC_PictureViewer", "menu_pictures", "50"))
-		list.append((_("Web Radio"), "MC_WebRadio", "menu_radio", "50"))
-		list.append((_("VLC Player"), "MC_VLCPlayer", "menu_vlc", "50"))
-		list.append((_("Weather Info"), "MC_WeatherInfo", "menu_weather", "50"))
-		list.append((_("Settings"), "MC_Settings", "menu_settings", "50"))
-		list.append(("Exit", "Exit", "menu_exit", "50"))
-		self["menu"] = List(list)
+		menulist = []
+		menulist.append((_("My Music"), "MC_AudioPlayer", "menu_music", "50"))
+		menulist.append((_("My Music"), "MC_AudioPlayer", "menu_music", "50"))
+		menulist.append((_("My Videos"), "MC_VideoPlayer", "menu_video", "50"))
+		menulist.append((_("DVD Player"), "MC_DVDPlayer", "menu_video", "50"))
+		menulist.append((_("My Pictures"), "MC_PictureViewer", "menu_pictures", "50"))
+		menulist.append((_("Web Radio"), "MC_WebRadio", "menu_radio", "50"))
+		menulist.append((_("VLC Player"), "MC_VLCPlayer", "menu_vlc", "50"))
+		menulist.append((_("Weather Info"), "MC_WeatherInfo", "menu_weather", "50"))
+		menulist.append((_("Settings"), "MC_Settings", "menu_settings", "50"))
+		menulist.append(("Exit", "Exit", "menu_exit", "50"))
+		self["menu"] = DMC_List(menulist)
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"],
 		{
 			"cancel": self.Exit,
@@ -136,7 +152,6 @@ class DMC_MainMenu(Screen):
 		self["text"].setText(self["menu"].getCurrent()[0])
 
 	def okbuttonClick(self):
-		from Screens.MessageBox import MessageBox
 		selection = self["menu"].getCurrent()
 		if selection is not None:
 			if selection[1] == "MC_VideoPlayer":
@@ -172,7 +187,6 @@ class DMC_MainMenu(Screen):
 				self.session.open(MessageBox, ("Error: Could not find plugin %s\ncoming soon ... :)") % (selection[1]), MessageBox.TYPE_INFO)
 
 	def error(self, error):
-		from Screens.MessageBox import MessageBox
 		self.session.open(MessageBox, ("UNEXPECTED ERROR:\n%s") % (error), MessageBox.TYPE_INFO)
 
 	def Exit(self):
