@@ -33,6 +33,8 @@ except ImportError:
 mcpath = '/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/'
 
 # Subclass of List to support horizontal menu
+
+
 class DMC_List(List):
 	def __init__(self, list=[]):
 		List.__init__(self, list)
@@ -50,6 +52,7 @@ class DMC_List(List):
 		else:
 			self.index += 1
 		self.setIndex(self.index)
+
 
 class DMC_MainMenu(Screen):
 	def __init__(self, session):
