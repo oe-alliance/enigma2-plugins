@@ -26,14 +26,14 @@ def isFHD():
 class Tile(object):
 
     shapes = {
-        " ": [ "                " ],
-        "I": [ "    IIII        ", " I   I   I   I  ", "    IIII        ", " I   I   I   I  " ],
-        "J": [ " J   JJJ        ", "  J   J  JJ     ", "     JJJ   J    ", "  JJ  J   J     " ],
-        "L": [ "  L LLL         ", "LL   L   L      ", "    LLL L       ", " L   L   LL     " ],
-        "O": [ " OO  OO         ", " OO  OO         ", " OO  OO         ", " OO  OO         " ],
-        "S": [ " SS SS          ", "S   SS   S      ", " SS SS          ", "S   SS   S      " ],
-        "T": [ " TTT  T         ", "  T   TT  T     ", "  T  TTT        ", "   T  TT   T    " ],
-        "Z": [ " ZZ   ZZ        ", "  Z  ZZ  Z      ", " ZZ   ZZ        ", "  Z  ZZ  Z      " ]
+        " ": ["                "],
+        "I": ["    IIII        ", " I   I   I   I  ", "    IIII        ", " I   I   I   I  "],
+        "J": [" J   JJJ        ", "  J   J  JJ     ", "     JJJ   J    ", "  JJ  J   J     "],
+        "L": ["  L LLL         ", "LL   L   L      ", "    LLL L       ", " L   L   LL     "],
+        "O": [" OO  OO         ", " OO  OO         ", " OO  OO         ", " OO  OO         "],
+        "S": [" SS SS          ", "S   SS   S      ", " SS SS          ", "S   SS   S      "],
+        "T": [" TTT  T         ", "  T   TT  T     ", "  T  TTT        ", "   T  TT   T    "],
+        "Z": [" ZZ   ZZ        ", "  Z  ZZ  Z      ", " ZZ   ZZ        ", "  Z  ZZ  Z      "]
     }
 
     def __init__(self, shape):
@@ -60,7 +60,7 @@ class TetrisBoard(object):
         "Z": argb(0, 0x00, 0xFF, 0x00), #green
     }
 
-    levels = [ 1000, 800, 720, 630, 540, 470, 370, 300, 220, 150 ]
+    levels = [1000, 800, 720, 630, 540, 470, 370, 300, 220, 150]
 
     def __init__(self, canvas):
         self.canvas = canvas
@@ -285,7 +285,7 @@ class Board(Screen):
         self["level"].setText("Level: 0")
         self["points"].setText("Points: 0")
         # end edit
-        self.tetrominos = [ "I", "J", "L", "O", "S", "T", "Z" ]
+        self.tetrominos = ["I", "J", "L", "O", "S", "T", "Z"]
         shuffle(self.tetrominos)
         self.nexttile = self.tetrominos[0]
         self.updatePreview(" ")
