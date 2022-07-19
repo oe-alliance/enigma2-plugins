@@ -12,7 +12,7 @@ from random import shuffle
 from os import system
 VERSION = "7.1r0"
 
-def argb(a,r,g,b):
+def argb(a, r, g, b):
     return (a << 24) | (r << 16) | (g << 8) | b
 
 def getDesktopSize():
@@ -64,7 +64,7 @@ class TetrisBoard(object):
 
     def __init__(self, canvas):
         self.canvas = canvas
-        self.canvas.fill(0,0,430,860, argb(0, 0, 0, 0))
+        self.canvas.fill(0, 0, 430, 860, argb(0, 0, 0, 0))
         self.setupBoard()
         self.drawBoard(self.board)
         self.moveTimer = eTimer()
@@ -77,7 +77,7 @@ class TetrisBoard(object):
         self.timeout = self.levels[self.level]
         self.accelerate = False
         self.board = "WWWWWWWWWWWW"
-        for i in range(0,20):
+        for i in range(0, 20):
             self.board += "W          W"
         self.board += "WWWWWWWWWWWW"
 
@@ -146,7 +146,7 @@ class TetrisBoard(object):
             self.drawBoard(layer)
             timeout = self.timeout
             if self.accelerate:
-                timeout = min(self.timeout,100)
+                timeout = min(self.timeout, 100)
             self.moveTimer.start(timeout, True)
         else:
             self.tile.y -= 1
@@ -155,7 +155,7 @@ class TetrisBoard(object):
 
     def eliminateLines(self):
         eliminated = 0
-        for line in range(1,21):
+        for line in range(1, 21):
             start = line * 12
             end = start + 12
             segment = self.board[start:end]
@@ -168,7 +168,7 @@ class TetrisBoard(object):
                         self.level += 1
                         if len(self.levels) > self.level:
                                 self.timeout = self.levels[self.level]
-        self.points += [0,100,300,500,800][eliminated] * (self.level + 1)
+        self.points += [0, 100, 300, 500, 800][eliminated] * (self.level + 1)
 
     def buildLayer(self):
         shape = self.tile.shape[self.tile.face]
@@ -193,7 +193,7 @@ class PreviewBoard(TetrisBoard):
 
     def __init__(self, canvas):
         self.canvas = canvas
-        self.canvas.fill(0,0,196,196, argb(33,255,255,255))
+        self.canvas.fill(0, 0, 196, 196, argb(33, 255, 255, 255))
 
     def drawBoard(self, piece):
         pos = 0
