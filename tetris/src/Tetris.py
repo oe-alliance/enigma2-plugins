@@ -12,16 +12,20 @@ from random import shuffle
 from os import system
 VERSION = "7.1r0"
 
+
 def argb(a, r, g, b):
     return (a << 24) | (r << 16) | (g << 8) | b
+
 
 def getDesktopSize():
     s = getDesktop(0).size()
     return (s.width(), s.height())
 
+
 def isFHD():
     desktopSize = getDesktopSize()
     return desktopSize[0] == 1920
+
 
 class Tile(object):
 
@@ -189,6 +193,7 @@ class TetrisBoard(object):
         self.board = self.buildLayer()
         self.eliminateLines()
 
+
 class PreviewBoard(TetrisBoard):
 
     def __init__(self, canvas):
@@ -203,6 +208,7 @@ class PreviewBoard(TetrisBoard):
                 self.drawPiece(x, y, c)
                 pos += 1
         self.canvas.flush()
+
 
 class Board(Screen):
     if isFHD():
