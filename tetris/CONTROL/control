@@ -1,0 +1,11 @@
+Package: enigma2-plugin-extensions-tetris
+Version: 7.1r0
+Section: extra
+Priority: optional
+Architecture: all
+Maintainer: <robert.damas@byom.de>
+Description: Tetris-Clone HD/FHD modded by Lululla
+Source: /
+Homepage: *
+OE: enigma2-plugin-extensions-tetris
+License: MIT
