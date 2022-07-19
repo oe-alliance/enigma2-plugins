@@ -153,8 +153,8 @@ class WeatherPluginEntryList(MenuList):
 
 		fs1 = 20 if HD.width() < 1920 else 30
 		fs2 = 18 if HD.width() < 1920 else 28
-		font1, size1 = skinparameter.get("WeatherPluginEntryListFont1", ('Regular',fs1))
-		font2, size2 = skinparameter.get("WeatherPluginEntryListFont2", ('Regular',fs2))
+		font1, size1 = skinparameter.get("WeatherPluginEntryListFont1", ('Regular', fs1))
+		font2, size2 = skinparameter.get("WeatherPluginEntryListFont2", ('Regular', fs2))
 		self.l.setFont(0, gFont(font1, size1))
 		self.l.setFont(1, gFont(font2, size2))
 
@@ -373,8 +373,8 @@ class MSNWeatherPluginSearchResultList(MenuList):
 
 		fs1 = 20 if HD.width() < 1920 else 30
 		fs2 = 18 if HD.width() < 1920 else 28
-		font1, size1 = skinparameter.get("WeatherPluginSearchResultListFont1", ('Regular',fs1))
-		font2, size2 = skinparameter.get("WeatherPluginSearchResultListFont2", ('Regular',fs2))
+		font1, size1 = skinparameter.get("WeatherPluginSearchResultListFont1", ('Regular', fs1))
+		font2, size2 = skinparameter.get("WeatherPluginSearchResultListFont2", ('Regular', fs2))
 		self.l.setFont(0, gFont(font1, size1))
 		self.l.setFont(1, gFont(font2, size2))
 
