@@ -1,30 +1,20 @@
 from __future__ import print_function
-from enigma import eTimer, eWidget, eRect, eServiceReference, iServiceInformation, iPlayableService, eServiceCenter
+from enigma import eServiceReference, iPlayableService, eServiceCenter
 from Screens.Screen import Screen
-from Screens.ServiceInfo import ServiceInfoList, ServiceInfoListEntry
 from Components.ActionMap import ActionMap, NumberActionMap
-from Components.Pixmap import Pixmap, MovingPixmap
 from Components.Label import Label
 from Components.Button import Button
 from Components.Sources.StaticText import StaticText
 from Components.Sources.List import List
 from Components.ServiceEventTracker import ServiceEventTracker
-from Components.ServicePosition import ServicePositionGauge
-
-from Components.FileList import FileEntryComponent
 
 from Screens.MessageBox import MessageBox
 
-from Components.ConfigList import ConfigList, ConfigListScreen
+from Components.ConfigList import ConfigListScreen
 from Components.config import *
-
-from Tools.Directories import resolveFilename, fileExists, pathExists, createDir, SCOPE_MEDIA
-from Components.FileList import FileList
-from Screens.InfoBar import MoviePlayer
 
 from pyexpat import ExpatError
 
-import os
 from os import path as os_path
 
 path = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/"
