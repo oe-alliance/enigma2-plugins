@@ -141,6 +141,8 @@ else
 SUBDIRS += networkbrowser epgsearch
 endif
 
+SUBDIRS += tetris
+
 metadir = $(datadir)/meta
 meta_DATA = index-enigma2-plugins.xml
 CLEANFILES = index-enigma2-plugins.xml
