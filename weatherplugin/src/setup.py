@@ -45,6 +45,7 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 
 HD = getDesktop(0).size()
 
+
 def initWeatherPluginEntryConfig():
 	s = ConfigSubsection()
 	s.city = ConfigText(default="Heidelberg", visible_width=100, fixed_size=False)
