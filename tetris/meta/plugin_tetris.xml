@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="Software" />
+	  </prerequisites>
+          <info>
+                    <author>robert.damas@byom.de</author>
+                    <name>tetris</name>
+                    <packagename>enigma2-plugin-extensions-tetris</packagename>
+                    <shortdescription>Tetris</shortdescription>
+                    <description>Tetris game for enigma2</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-tetris" />
+	  </files>
+</default>

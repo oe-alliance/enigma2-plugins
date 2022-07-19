@@ -1,11 +1,11 @@
 Package: enigma2-plugin-extensions-schiffe
-Version: 0.2-r0
-Description: Battleship Game
+Version: 7.1r0
 Section: extra
 Priority: optional
+Architecture: all
 Maintainer: DarkVolli
-License: GPL
-Architecture: mipsel
+Description: Schiffe Battleship Game FHD Modded by Lululla
+Source: /
+Homepage: *
 OE: enigma2-plugin-extensions-schiffe
-Homepage: http://www.dreambox-tools.info
-Source: file://*.py file://*.png
+License: *

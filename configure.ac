@@ -705,6 +705,10 @@ teletext/meta/Makefile
 teletext/po/Makefile
 teletext/src/Makefile
 
+tetris/Makefile
+tetris/meta/Makefile
+tetris/src/Makefile
+
 toolkit/Makefile
 toolkit/src/Makefile
 
