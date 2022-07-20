@@ -44,7 +44,7 @@ def isFHD():
 
 
 def main(session, **kwargs):
-    session.open(Schiffe)    
+    session.open(Schiffe)
 
 
 def Plugins(**kwargs):
@@ -360,7 +360,7 @@ class Schiffe(Screen):
     def timerHandler(self):
             if isFHD():
                 self["result"].setText("%10d shots" % self.moves)
-                self["movex"].setText("%10d sec" % self.cnt)            
+                self["movex"].setText("%10d sec" % self.cnt)
             else:
                 self.instance.setTitle("Schiffe versenken %s %10d shots %10d sec" % (VERSION, self.moves, self.cnt))
             self.cnt += 1
@@ -435,12 +435,12 @@ class Schiffe(Screen):
     # load game from file...
 
     def load_game(self):
-        try:    
+        try:
             if fileExists(SAVEFILE, "r"):
                 sav = open(SAVEFILE, "r")
                 inp = sav.readline().strip()
                 inplist = inp.split()
-                
+
                 self.moves = int(float(inplist[0]))
                 self.cnt = int(float(inplist[1]))
                 # self.moves = int(inplist[0])
@@ -467,8 +467,8 @@ class Schiffe(Screen):
                 self.new_game()
         except Exception as e:
             print('error: ', str(e))
-            pass           
-            
+            pass
+
     def quit_game(self):
         self.timer.stop()
         self.save_game()
@@ -642,4 +642,3 @@ def calcNewField(field):
             lx = x
             ly = y
             return
-
