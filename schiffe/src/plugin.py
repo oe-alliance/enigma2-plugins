@@ -43,7 +43,7 @@ def main(session,**kwargs):
     session.open(Schiffe)    
 
 def Plugins(**kwargs):
-    return [PluginDescriptor(name="Schiffe versenken", description=_("Battleship Game"), where = [PluginDescriptor.WHERE_PLUGINMENU],
+    return [PluginDescriptor(name="Schiffe versenken", description=_("Battleship Game"), where=[PluginDescriptor.WHERE_PLUGINMENU],
             icon="Schiffe.png", fnc=main)]
 
 # Game cell...
@@ -357,7 +357,7 @@ class Schiffe(Screen):
             self.cnt += 1
 
     # create new game...
-    def new_game(self, loadFromFile = False):
+    def new_game(self, loadFromFile=False):
         self["message"].setText("")
         self.gameover = False
         self.Focus = 0
