@@ -27,26 +27,33 @@ XMAX = 10
 YMAX = 10
 XYMAX = 100
 
+
 def RGB(r, g, b):
     return (r << 16) | (g << 8) | b
+
 
 def getDesktopSize():
     from enigma import getDesktop
     s = getDesktop(0).size()
     return (s.width(), s.height())
 
+
 def isFHD():
     desktopSize = getDesktopSize()
     return desktopSize[0] == 1920
 
+
 def main(session, **kwargs):
     session.open(Schiffe)    
+
 
 def Plugins(**kwargs):
     return [PluginDescriptor(name="Schiffe versenken", description=_("Battleship Game"), where=[PluginDescriptor.WHERE_PLUGINMENU],
             icon="Schiffe.png", fnc=main)]
 
 # Game cell...
+
+
 class GameCell:
     def __init__(self, canvas, x, y, w, h):
         self.canvas = canvas
@@ -109,6 +116,8 @@ class GameCell:
         self.canvas.flush()
 
 # mainwindow...
+
+
 class Schiffe(Screen):
     def __init__(self, session):
         # get framebuffer resolution...
@@ -423,7 +432,6 @@ class Schiffe(Screen):
         except IOError:
             pass
 
-
     # load game from file...
 
     def load_game(self):
@@ -468,10 +476,14 @@ class Schiffe(Screen):
 ###### enigma2 stuff ends here... ######
 
 #good old C function :D
+
+
 def rand():
     return randint(0, 32767)
 
 # ships is derived from C++ source code by Stephan Dobretsberger 2001
+
+
 def ships(field):
     # init shadow map...
     shadow = []
@@ -531,6 +543,8 @@ def ships(field):
     return True
 
 # calcNewField is derived from C++ source code by Stephan Dobretsberger 2001
+
+
 def calcNewField(field):
     for i in range(XYMAX):
         if field[i] == 4:
