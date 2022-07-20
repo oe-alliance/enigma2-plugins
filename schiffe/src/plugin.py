@@ -27,7 +27,7 @@ XMAX = 10
 YMAX = 10
 XYMAX = 100
 
-def RGB(r,g,b):
+def RGB(r, g, b):
     return (r << 16) | (g << 8) | b
 
 def getDesktopSize():
@@ -39,7 +39,7 @@ def isFHD():
     desktopSize = getDesktopSize()
     return desktopSize[0] == 1920
 
-def main(session,**kwargs):
+def main(session, **kwargs):
     session.open(Schiffe)    
 
 def Plugins(**kwargs):
@@ -74,10 +74,10 @@ class GameCell:
         self.hide_ = f
 
     def paint(self):
-        fg = RGB(255,255,255) # foreground
-        blue = RGB(0, 0,255) # background water
-        focus = RGB(192,192, 0) # background focus
-        green = RGB(0,255, 0) # background Ship
+        fg = RGB(255, 255, 255) # foreground
+        blue = RGB(0, 0, 255) # background water
+        focus = RGB(192, 192, 0) # background focus
+        green = RGB(0, 255, 0) # background Ship
         red = RGB(255, 0, 0) # background Ship hit
 
         if self.value_ == 0:
