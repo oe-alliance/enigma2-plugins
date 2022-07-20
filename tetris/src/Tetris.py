@@ -104,8 +104,8 @@ class TetrisBoard(object):
 		x = x * self.cellwidth
 		y = y * self.cellwidth
 
-		self.canvas.fill(x,   y,   self.cellwidth,   self.cellwidth,   frameColor)
-		self.canvas.fill(x+1, y+1, self.cellwidth-2, self.cellwidth-2, color)
+		self.canvas.fill(x, y, self.cellwidth, self.cellwidth, frameColor)
+		self.canvas.fill(x + 1, y + 1, self.cellwidth - 2, self.cellwidth - 2, color)
 
 	def spawn(self, tile, callback):
 		self.onDown = callback
@@ -175,7 +175,7 @@ class TetrisBoard(object):
 					self.level += 1
 					if len(self.levels) > self.level:
 						self.timeout = self.levels[self.level]
-		self.points += [0, 100, 300, 500, 800][eliminated] * (self.level+1)
+		self.points += [0, 100, 300, 500, 800][eliminated] * (self.level + 1)
 
 	def buildLayer(self):
 		shape = self.tile.shape[self.tile.face]
@@ -185,9 +185,9 @@ class TetrisBoard(object):
 		offset = 0
 		for c in shape:
 			if c != ' ':
-				if layer[pos+offset] != ' ':
+				if layer[pos + offset] != ' ':
 					return False
-				layer[pos+offset] = c
+				layer[pos + offset] = c
 			cpos += 1
 			offset = (cpos % 4) + (cpos // 4) * 12
 		return ''.join(layer)
@@ -262,16 +262,16 @@ class Board(Screen):
 			self.skinName = "Tetrishd"
 		self.setTitle("Tetris %s" % VERSION)
 		self["actions"] = ActionMap(["TetrisActions"], {
-			"cancel":   self.cancel,
-			"up":       self.up,
-			"down":     self.down,
-			"left":     self.left,
-			"right":    self.right,
-			"ok":       self.ok,
-			"red":      self.red,
-			"green":    self.green,
-			"yellow":   self.yellow,
-			"blue":     self.blue,
+			"cancel": self.cancel,
+			"up": self.up,
+			"down": self.down,
+			"left": self.left,
+			"right": self.right,
+			"ok": self.ok,
+			"red": self.red,
+			"green": self.green,
+			"yellow": self.yellow,
+			"blue": self.blue,
 		}, -1)
 
 		self["canvas"] = CanvasSource()
@@ -305,7 +305,7 @@ class Board(Screen):
 
 	def eventLoop(self, state):
 		self["lines"].setText("Lines: %d" % self.board.lines)
-		self["level"].setText("Level: %d" % (self.board.level+1))
+		self["level"].setText("Level: %d" % (self.board.level + 1))
 		self["points"].setText("Points: %d" % (self.board.points))
 		if not state:
 			self.gameOver()
