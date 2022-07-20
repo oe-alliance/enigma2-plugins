@@ -85,7 +85,7 @@ class StoneField:
 		return x + y * self.sizex
 
 	def mark1(self, x, y, force=False):
-		index = self.Map(x, y)
+		index = int(self.Map(x, y))
 
 		if index < 0:
 			self.unmark()
