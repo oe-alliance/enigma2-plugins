@@ -1,15 +1,15 @@
-Mit den Tasten Ñ<ì und Ñ>ì kann die Spielst‰rke ver‰ndert werden
-Durch Dr¸cken der "0" wird das aktuelle Feld gelˆscht.
-Verwenden Sie CH + / CH-, um den Pegel zu ‰ndern
-Wenn Sie das Spiel beenden, wird der Spielstand im Plugin-Verzeichnis gespeichert
-und beim n‰chsten Start automatisch neu geladen ...
-viel Spaﬂ!
+Mit den Tasten '<' und '>' kann die Spielst√§rke ver√§ndert werden.
+Durch Dr√ºcken der '0' wird das aktuelle Feld gel√∂scht.
+Verwenden Sie 'CH+' / 'CH-', um den Pegel zu √§ndern.
+Wenn Sie das Spiel beenden, wird der Spielstand im Plugin-Verzeichnis
+gespeichert und beim n√§chsten Start automatisch wieder geladen.
+Viel Spa√ü!
 Dark Volli - von Robert Wohleb
-Modifiziert von Lululla ñ Skin von MMark unter 20220714
+Modifiziert von Lululla ‚Äì Skin von MMark unter 20220714
 
 
 
-La forza di gioco puÚ essere cambiata con i tasti "<" e ">"
+La forza di gioco pu√≤ essere cambiata con i tasti "<" e ">"
 premendo lo "0" il campo corrente viene cancellato.
 Utilizza CH + / CH- per cambiare livello
 Quando esci dal gioco, lo stato del gioco viene salvato nella directory del plugin
