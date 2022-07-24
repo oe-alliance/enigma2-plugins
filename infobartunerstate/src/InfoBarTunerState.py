@@ -612,6 +612,7 @@ class InfoBarTunerState(object):
 
 			# Update windows
 			# Dynamic column resizing and repositioning
+			widths = [0]
 			for id, win in list(self.entries.items()):
 				if win.type == RECORD:
 					#TODO Avolid blocking - avoid using getTimer to update the timer times use timer.time_changed if possible
