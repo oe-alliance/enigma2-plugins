@@ -193,7 +193,7 @@ class FritzAction(object):
 			linkP.write(content)
 			linkP.close()
 		root = ET.fromstring(content)
-		if root.find(".//Nonce") != None and root.find(".//Realm") != None:
+		if root.find(".//Nonce") is not None and root.find(".//Realm") is not None:
 			nonce = root.find(".//Nonce").text
 			realm = root.find(".//Realm").text
 			secret = md5(six.ensure_binary(config.plugins.FritzCall.username.value + ":" +
@@ -617,7 +617,7 @@ class FritzConnection(object):
 		':1' will get added by default.
 		"""
 		# self.debug("")
-		if not ':' in service_name:
+		if ':' not in service_name:
 			service_name += ':1'
 		action = self._get_action(service_name, action_name)
 		action.execute(callback, **kwargs)

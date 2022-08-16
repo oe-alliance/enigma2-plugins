@@ -823,26 +823,12 @@ $Date: 2021-04-23 12:19:26 +0200 (Fri, 23 Apr 2021) $
 		</website>
 	</country>
 	<country code="+43">
-		<website name="herold.at (Privat)" url="https://www.herold.at/telefonbuch/telefon_$NUMBER" prefix="0">
+		<website name="herold.at" url="https://www.herold.at/telefonbuch/suche/?term=$NUMBER" prefix="0">
 			<entry>
-				<name>&lt;h2&gt;&lt;span itemprop=&quot;name&quot;&gt;([^&lt;]+)&lt;/span&gt;&lt;/h2&gt;</name>
-				<street>&lt;div class=&quot;address&quot;&gt;([^,]+(?:, [^,]+)?), \d+ [^&lt;]+&lt;/div&gt;</street>
-				<city>&lt;div class=&quot;address&quot;&gt;[^,]+(?:, [^,]+)?, \d+ ([^&lt;]+)&lt;/div&gt;</city>
-				<zipcode>&lt;div class=&quot;address&quot;&gt;[^,]+(?:, [^,]+)?, (\d+) [^&lt;]+&lt;/div&gt;</zipcode>
-			</entry>
-			<entry>
-				<name>"title": "([^"]+)"</name>
-				<street>"address": "([^,]+), \d+ [^"]+"</street>
-				<city>"address": "[^,]+, \d+ ([^"]+)"</city>
-				<zipcode>"address": "[^,]+, (\d+) [^"]+"</zipcode>
-			</entry>
-		</website>
-		<website name="herold.at (Firma)" url="https://www.herold.at/gelbe-seiten/telefon_$NUMBER/" prefix="0">
-			<entry>
-				<name>"title": "([^"]+)"</name>
-				<street>"address": "([^,]+), \d+ [^"]+"</street>
-				<city>"address": "[^,]+, \d+ ([^"]+)"</city>
-				<zipcode>"address": "[^,]+, (\d+) [^"]+"</zipcode>
+				<name>"name":"([^"]+)"</name>
+				<street>"street":"([^"]+)"</street>
+				<city>"city":"([^"]+)"</city>
+				<zipcode>"zip":"([^"]+)"</zipcode>
 			</entry>
 		</website>
 	</country>
@@ -926,38 +912,26 @@ $Date: 2021-04-23 12:19:26 +0200 (Fri, 23 Apr 2021) $
 	<country code="+49">
 	    <website name="www.dasoertliche.de" url="https://www.dasoertliche.de/Controller?form_name=search_inv&amp;ph=$NUMBER" prefix="0" numLines="1">
 	        <entry>
-	        	<name>&lt;span class=&quot;st-treff-name&quot;&gt;([^&lt;]+)&lt;</name>
-	        	<street>&lt;address&gt;\s+([^,]+), \d+ </street>
-	        	<city>ci: "([^"]+)"</city>
-	        	<zipcode>&lt;address&gt;\s+(?:[^,]+, )?(\d+) </zipcode>
-	        </entry>
-	        <entry>
-	        	<name>na: "([^"]+)"</name>
-	        	<street>&lt;address&gt;\s+([^,]+),&amp;nbsp;\d+ &lt;span class=""&gt;</street>
-	        	<city>ci: "([^"]+)"</city>
-	        	<zipcode>&lt;address&gt;\s+[^,]+,&amp;nbsp;(\d+) &lt;span class=""&gt;</zipcode>
+	        	<name>&quot;name&quot;:&quot;([^&quot;]+)&quot;</name>
+	        	<street>&quot;streetAddress&quot;:&quot;([^&quot;]+)&quot;</street>
+	        	<city>&quot;addressLocality&quot;:&quot;([^&quot;]+)&quot;</city>
+	        	<zipcode>&quot;postalCode&quot;:&quot;([^&quot;]+)&quot;</zipcode>
 	        </entry>
 	    </website>
    		<website name="www.dastelefonbuch.de" url="https://www.dastelefonbuch.de/Suche/$NUMBER" prefix="0">
 			<entry>	
 				<name>&lt;div class=&quot;name&quot; title=&quot;([^&quot;]+)&quot;&gt;</name>
-				<street>class="addr"(?: rel=&quot;nofollow&quot;)? title="([^,]*), \d+ [^&lt;]*"</street>
-				<city>class="addr"(?: rel=&quot;nofollow&quot;)? title="[^,]*, \d+ (\w+)</city>
-				<zipcode>class="addr"(?: rel=&quot;nofollow&quot;)? title="[^,]*, (\d+) [^&lt;]*"</zipcode>
+				<street>&lt;span itemprop=&quot;streetAddress&quot;&gt;\s*([^&lt;]+)&lt;/span&gt;</street>
+				<city>&lt;span itemprop=&quot;addressLocality&quot;&gt;([^&lt;]+)&lt;/span&gt;</city>
+				<zipcode>&lt;span itemprop=&quot;postalCode&quot;&gt;\s*([^&lt;]+)\s*&lt;/span&gt;</zipcode>
 			</entry>
 		</website>
 		<website name="www.goyellow.de" url="https://www.goyellow.de/suche/$NUMBER/-" prefix="0">
 	        <entry>
 	        	<name>na: "([^"]+)",</name>
-		  		<street>&lt;meta itemprop="streetAddress" content="([^"]+)" /&gt;</street>
-	        	<city>&lt;meta itemprop="addressLocality" content="([^"]+)" /&gt;</city>
-	        	<zipcode>&lt;meta itemprop="postalCode" content="([^"]+)" /&gt;</zipcode>
-	        </entry>
-	        <entry>
-	        	<name>&lt;h2 itemprop=&quot;name&quot; class=&quot;headline2&quot; target=&quot;_self&quot;&gt;\s+&lt;a itemprop[^&gt;]+&gt; &lt;span[^&gt;]+&gt;([^&lt;]+)&lt;/span&gt;&lt;/a&gt;</name>
-		  		<street>&lt;meta itemprop="streetAddress" content="([^"]+)" /&gt;</street>
-	        	<city>&lt;meta itemprop="addressLocality" content="([^"]+)" /&gt;</city>
-	        	<zipcode>&lt;meta itemprop="postalCode" content="([^"]+)" /&gt;</zipcode>
+		  		<street>&lt;span alt=&quot;Adresse&quot; class=&quot;address-icon ic_address svg-icon&quot;&gt;&lt;/span&gt;([^,]+), \d+ [^&lt;]+&lt;/div&gt;</street>
+	        	<city>&lt;span alt=&quot;Adresse&quot; class=&quot;address-icon ic_address svg-icon&quot;&gt;&lt;/span&gt;[^,]+, \d+ ([^&lt;]+)&lt;/div&gt;</city>
+	        	<zipcode>&lt;span alt=&quot;Adresse&quot; class=&quot;address-icon ic_address svg-icon&quot;&gt;&lt;/span&gt;[^,]+, (\d+) [^&lt;]+&lt;/div&gt;</zipcode>
 	        </entry>
 		</website>
 <!--    <website name="www.11880.com" url="https://www.11880.com/rueckwaertssuche/$NUMBER" prefix="0">
