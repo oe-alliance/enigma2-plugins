@@ -123,4 +123,4 @@ class MovableScreen():
     def setEnableMoveKeymap(self, enabled):
         self["MovableScreenActions"].setEnabled(enabled)
         for keymap in self.disableKeymaps:
-            keymap.setEnabled(not(enabled))
+            keymap.setEnabled(not (enabled))

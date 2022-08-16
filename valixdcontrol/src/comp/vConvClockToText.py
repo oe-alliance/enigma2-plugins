@@ -82,7 +82,7 @@ class vConvClockToText(Converter, object):
 				return strftime(self.fmt_string, t)
 		elif self.type == self.LOCDE:
 			spos = self.fmt_string.find('%')
-			if not(spos < 0):
+			if not (spos < 0):
 				s1 = (strftime(self.fmt_string[spos:], t))
 				iAll = s1.split(" ")
 				iTag = iAll[0]
@@ -93,7 +93,7 @@ class vConvClockToText(Converter, object):
 				return strftime(self.fmt_string, t)
 		elif self.type == self.LOCFULL:
 			spos = self.fmt_string.find('%')
-			if not(spos < 0):
+			if not (spos < 0):
 				s1 = (strftime(self.fmt_string[spos:], t))
 				iAll = s1.split(" ")
 				iTag = iAll[0]

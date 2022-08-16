@@ -527,7 +527,7 @@ class RightMenuList(List):
 				menupng = RightMenuEntryPixmap(thumbid, self.png_cache)
 		else:
 			menupng = RightMenuEntryPixmap(thumbid, self.png_cache)
-		return((vurl, txt1, title, turl, txt2, thumbid, menupng))
+		return ((vurl, txt1, title, turl, txt2, thumbid, menupng))
 
 	def getMovieCategoryIndexByThumbID(self, ThumbID):
 		idx = 0

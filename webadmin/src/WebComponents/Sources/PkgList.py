@@ -84,7 +84,7 @@ class PkgList(Source):
 			if len(self.cmd) == 1:
 				return [p for p in PKGCACHE if p[0].startswith(self.cmd)]
 			# static parameter "filter=installed"
-			elif(self.cmd == "installed"):
+			elif (self.cmd == "installed"):
 				return [(p[0],
 						p[1],
 						p[2],
@@ -92,7 +92,7 @@ class PkgList(Source):
 						(_("Yes") if p[4] == "1" else _("No"))
 						) for p in PKGCACHE if p[3] == "1"]
 			# static parameter "filter=upgradable"
-			elif(self.cmd == "upgradable"):
+			elif (self.cmd == "upgradable"):
 				return [(p[0],
 						p[1],
 						p[2],

@@ -76,7 +76,7 @@ class RemoteControl(Source):
 			remotetype = self.remotetype
 
 		#If type=="long" we need to press send FLAG_MAKE first
-		if(flag == self.FLAG_LONG):
+		if (flag == self.FLAG_LONG):
 			self.eam.keyPressed(remotetype, key, self.FLAG_MAKE)
 
 		#press the key with the desired flag

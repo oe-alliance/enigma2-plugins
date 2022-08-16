@@ -357,7 +357,7 @@ class Merlin_PGII(Screen):
 			service = self.session.nav.getCurrentService()
 			info = service and service.info()
 			nameROH = info and info.getName().replace('\xc2\x86', '').replace('\xc2\x87', '')
-		if (nameROH is not None) and not(config.plugins.MerlinEPG.StartFirst.value):
+		if (nameROH is not None) and not (config.plugins.MerlinEPG.StartFirst.value):
 		#
 			for idx in range(1, len(self.list)):
 				name = str(idx) + ". " + nameROH
@@ -786,7 +786,7 @@ class Merlin_PGd(Screen):
 			service = self.session.nav.getCurrentService()
 			info = service and service.info()
 			nameROH = info and info.getName().replace('\xc2\x86', '').replace('\xc2\x87', '')
-		if (nameROH is not None) and not(config.plugins.MerlinEPG.StartFirst.value):
+		if (nameROH is not None) and not (config.plugins.MerlinEPG.StartFirst.value):
 		#
 			for idx in range(1, len(self.list)):
 				name = str(idx) + ". " + nameROH

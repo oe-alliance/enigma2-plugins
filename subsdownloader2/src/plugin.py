@@ -1396,7 +1396,7 @@ class MoviePlayer(MP_parent):
 		elif (self.moviename.endswith(".mpg")) or (self.moviename.endswith(".mpeg")) or (self.moviename.endswith(".mkv")) or (self.moviename.endswith(".m2ts")) or (self.moviename.endswith(".vob")) or (self.moviename.endswith(".mod")):
 			fileRef = eServiceReference("4097:0:0:0:0:0:0:0:0:0:" + self.moviename)
 		elif (self.moviename.endswith(".avi")) or (self.moviename.endswith(".mp4")) or (self.moviename.endswith(".divx")) or (self.moviename.endswith(".mov")) or (self.moviename.endswith(".flv")) or (self.moviename.endswith(".3gp")):
-			if not(HardwareInfo().get_device_name() == "dm7025"):
+			if not (HardwareInfo().get_device_name() == "dm7025"):
 				fileRef = eServiceReference("4097:0:0:0:0:0:0:0:0:0:" + self.moviename)
 		self.session = session
 		self.WithoutStopClose = False
@@ -1480,7 +1480,7 @@ class MoviePlayer(MP_parent):
 		self.leavePlayer(self.de_instance)
 
 	def __onClose(self):
-		if not(self.WithoutStopClose):
+		if not (self.WithoutStopClose):
 			self.session.nav.playService(self.lastservice)
 
 

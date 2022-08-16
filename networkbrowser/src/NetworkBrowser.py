@@ -477,7 +477,7 @@ class NetworkBrowser(Screen):
 			else:
 				isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/cancel.png"))
 
-		return((share, verticallineIcon, None, sharedir, sharedescription, newpng, isMountedpng, self.isMounted))
+		return ((share, verticallineIcon, None, sharedir, sharedescription, newpng, isMountedpng, self.isMounted))
 
 	def createSummary(self):
 		from Screens.PluginBrowser import PluginBrowserSummary

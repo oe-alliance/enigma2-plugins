@@ -187,7 +187,7 @@ class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 		webif = True
 		p = req.args.get(b'webif')
 		if p:
-			webif = not(p[0] == b"false")
+			webif = not (p[0] == b"false")
 		# show xml
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')

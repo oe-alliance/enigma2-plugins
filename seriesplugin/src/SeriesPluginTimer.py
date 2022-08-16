@@ -99,7 +99,7 @@ class SeriesPluginTimer(object):
 		if timer.eit:
 			event = epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
 			log.debug("lookupEventId", timer.eit, event)
-		if not(event):
+		if not (event):
 			if config.plugins.seriesplugin.timer_eit_check.value:
 				event = epgcache.lookupEventTime(timer.service_ref.ref, timer.begin + ((timer.end - timer.begin) // 2))
 				log.debug("lookupEventTime", event)

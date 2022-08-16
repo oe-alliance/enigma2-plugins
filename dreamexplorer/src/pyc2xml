@@ -315,7 +315,7 @@ def main():
         print 'Command line incorrect !\nUsage: pyc2xml /tmp/YOURFILE.PYC'
         exit()
 
-    if not((filein.endswith('.pyc')) or (filein.endswith('.pyo'))):
+    if not ((filein.endswith('.pyc')) or (filein.endswith('.pyo'))):
         filein = "noFile"
         print 'File-extension incorrect !\nUsage: pyc2xml /tmp/YOURFILE.PYC'
         exit()

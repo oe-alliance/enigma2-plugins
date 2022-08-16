@@ -96,7 +96,7 @@ def ChannelSelection_channelSelected(self, *args, **kwargs):
 
 
 def ChannelSelection_togglePipzap(self):
-	assert(self.session.pip)
+	assert (self.session.pip)
 	title = self.instance.getTitle()
 	pos = title.find(" (")
 	if pos != -1:

@@ -190,7 +190,7 @@ class genuineDreambox(Screen):
 		tmpfa = ("&fab=%s" % ensure_str(b64encode(ensure_binary(self.fab_ca_cert))).replace('+', '-').replace('/', '_'))
 		tmpda = ("&data=%s" % ensure_str(b64encode(ensure_binary(self.datablock_signed))).replace('+', '-').replace('/', '_'))
 		tmpr = ("&r=%s" % ensure_str(b64encode(ensure_binary(self.r))).replace('+', '-').replace('/', '_'))
-		return("https://www.dream-multimedia-tv.de/verify/challenge?%s%s%s%s%s%s&serial=%s" % (tmpra, tmpl2, tmpl3, tmpfa, tmpda, tmpr, self.serial))
+		return ("https://www.dream-multimedia-tv.de/verify/challenge?%s%s%s%s%s%s&serial=%s" % (tmpra, tmpl2, tmpl3, tmpfa, tmpda, tmpr, self.serial))
 
 	def buildUrlUpdate(self):
 		return self.buildUrl() + "&getupdate=true"

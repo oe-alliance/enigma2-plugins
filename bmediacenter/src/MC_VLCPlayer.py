@@ -553,17 +553,17 @@ class MC_VLCFavoriteFolders(Screen):
 		#for i in range(0, len(config.plugins.mc_vlc.folders)):
 		for i in range(0, 100):
 			try:
-				del(config.plugins.mc_vlc.folders[i])
+				del (config.plugins.mc_vlc.folders[i])
 			except Exception as e:
 				print("MC_ResetAll-DelaFavFailed")
 		config.plugins.mc_vlc.folders.save()
 		try:
-			del(config.plugins.mc_vlc.folders)
+			del (config.plugins.mc_vlc.folders)
 		except Exception as e:
 			print("MC_DELFAVFOLDERS-FAILED")
 			#self.session.open(MessageBox,("Error: %s\n") % (Exception),  MessageBox.TYPE_INFO)
 		try:
-			del(config.plugins.mc_vlc.folders[0])
+			del (config.plugins.mc_vlc.folders[0])
 		except Exception as e:
 			#self.session.open(MessageBox,("Error: %s\n") % (Exception),  MessageBox.TYPE_INFO)
 			print("MC_DELFAV0-FAILED")
@@ -630,7 +630,7 @@ class FavoriteFolderAdd(Screen, ConfigListScreen):
 
 	def keyCancel(self):
 		try:
-			del(config.plugins.mc_vlc.folders[self.id])
+			del (config.plugins.mc_vlc.folders[self.id])
 		except Exception as e:
 			print("MC_Settings_DelaFavFailed")
 		self.close(0)

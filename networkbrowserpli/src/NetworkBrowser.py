@@ -456,7 +456,7 @@ class NetworkBrowser(Screen):
 			else:
 				isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/cancel.png"))
 
-		return((share, verticallineIcon, None, sharedir, sharedescription, newpng, isMountedpng))
+		return ((share, verticallineIcon, None, sharedir, sharedescription, newpng, isMountedpng))
 
 	def selectionChanged(self):
 		current = self["list"].getCurrent()

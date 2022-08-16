@@ -449,7 +449,7 @@ class HTTPAuthResource(HTTPRootResource):
 		host = request.getHost().host
 		#If streamauth is disabled allow all acces from localhost
 		if not config.plugins.Webinterface.streamauth.value:
-			if(host == "::ffff:127.0.0.1" or host == "127.0.0.1" or host == "localhost"):
+			if (host == "::ffff:127.0.0.1" or host == "127.0.0.1" or host == "localhost"):
 				print("[WebInterface.plugin.isAuthenticated] Streaming auth is disabled bypassing authcheck because host is '%s'" % host)
 				return True
 

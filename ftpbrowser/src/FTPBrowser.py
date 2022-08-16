@@ -338,7 +338,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 			self.ftpclient.rename(absRemoteFile, newRemoteFile).addCallback(callback).addErrback(errback)
 		else:
-			assert(self.currlist == "local")
+			assert (self.currlist == "local")
 			absLocalFile, fileName = self.getLocalFile()
 			if not fileName:
 				return
@@ -365,7 +365,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			if not fileName:
 				return
 		else:
-			assert(self.currlist == "local")
+			assert (self.currlist == "local")
 			absLocalFile, fileName = self.getLocalFile()
 			if not fileName:
 				return
@@ -394,7 +394,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 			self.ftpclient.removeFile(absRemoteFile).addCallback(callback).addErrback(errback)
 		else:
-			assert(self.currlist == "local")
+			assert (self.currlist == "local")
 			absLocalFile, fileName = self.getLocalFile()
 			if not fileName:
 				return
@@ -426,7 +426,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			if not fileName:
 				return
 		else:
-			assert(self.currlist == "local")
+			assert (self.currlist == "local")
 			if self["local"].canDescent():
 				self.session.open(
 					MessageBox,
@@ -496,7 +496,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 				d = self.ftpclient.list(absRemoteFile, filelist)
 				d.addCallback(self.transferListRcvd, filelist).addErrback(self.transferListFailed)
 		else:
-			assert(self.currlist == "local")
+			assert (self.currlist == "local")
 			# single file transfer is implemented in self.ok
 			if not self["local"].canDescent():
 				return self.ok()
@@ -607,7 +607,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 				self.getFile(absRemoteFile, absLocalFile, fileSize)
 		else:
 			# Put file/change directory
-			assert(self.currlist == "local")
+			assert (self.currlist == "local")
 			if self["local"].canDescent():
 				self["local"].descent()
 			else:

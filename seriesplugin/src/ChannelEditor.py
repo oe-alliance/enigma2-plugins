@@ -310,7 +310,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 
 	def getIndexOfWebSender(self, webSender):
 		for pos, webCh in enumerate(self.webChlist):
-			if(webCh[0] == webSender):
+			if (webCh[0] == webSender):
 				return pos
 		return 0
 
@@ -330,7 +330,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 
 	def getIndexOfServiceref(self, serviceref):
 		for pos, stbWebChl in enumerate(self.stbToWebChlist):
-			if(stbWebChl[2] == serviceref):
+			if (stbWebChl[2] == serviceref):
 				return pos
 		return False
 

@@ -50,7 +50,7 @@ def getTodaysTimeInSeconds():
     dayNr = int(time.strftime("%w", time.localtime()))
     # Number of seconds for the current day
     iDayTime = getSecondsFromClock(config.plugins.KiddyTimer.dayTimes[dayNr].timeValue.value)
-    return(iDayTime)
+    return (iDayTime)
 
 
 def getSecondsFromClock(aClock):
@@ -63,7 +63,7 @@ def getTimeFromSeconds(iSecondsLeft, bReturnSeconds):
         iHourRest = iSecondsLeft - (iHours * 3600)
         iMinutes = int(iHourRest // 60)
         if bReturnSeconds == False:
-            return(("00" + str(iHours))[-2:] + ":" + ("00" + str(iMinutes))[-2:])
+            return (("00" + str(iHours))[-2:] + ":" + ("00" + str(iMinutes))[-2:])
         else:
             iSeconds = int(iHourRest - (iMinutes * 60))
-            return(("00" + str(iHours))[-2:] + ":" + ("00" + str(iMinutes))[-2:] + ":" + ("00" + str(iSeconds))[-2:])
+            return (("00" + str(iHours))[-2:] + ":" + ("00" + str(iMinutes))[-2:] + ":" + ("00" + str(iSeconds))[-2:])

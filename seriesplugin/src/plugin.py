@@ -390,9 +390,9 @@ def Plugins(**kwargs):
 
 def addSeriesPlugin(menu, title, fnc=None):
 	# Add to menu
-	if(menu == WHERE_EPGMENU):
+	if (menu == WHERE_EPGMENU):
 		SPEPGSelectionInit()
-	elif(menu == WHERE_CHANNELMENU):
+	elif (menu == WHERE_CHANNELMENU):
 		try:
 			addSeriesPlugin(PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU, SHOWINFO, fnc)
 		except:
@@ -419,9 +419,9 @@ def addSeriesPlugin(menu, title, fnc=None):
 
 def removeSeriesPlugin(menu, title):
 	# Remove from menu
-	if(menu == WHERE_EPGMENU):
+	if (menu == WHERE_EPGMENU):
 		SPEPGSelectionUndo()
-	elif(menu == WHERE_CHANNELMENU):
+	elif (menu == WHERE_CHANNELMENU):
 		try:
 			removeSeriesPlugin(PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU, SHOWINFO)
 		except:

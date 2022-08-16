@@ -214,7 +214,7 @@ class ServiceListSave(resource.Resource):
 	def createIndexFile(self, type, bouquets):
 		print("creating Indexfile with", len(bouquets), "num bouquets for type", type)
 		filename = self.getFilenameForIndex(type)
-		if(type == self.TYPE_TV):
+		if (type == self.TYPE_TV):
 			fcontent = "#NAME User - bouquets (TV)\n"
 		else:
 			fcontent = "#NAME User - bouquets (Radio)\n"

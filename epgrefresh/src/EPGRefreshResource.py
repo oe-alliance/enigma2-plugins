@@ -50,7 +50,7 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 	TYPE_DEL = 1
 
 	def __init__(self, type):
-		assert(type in (self.TYPE_ADD, self.TYPE_DEL))
+		assert (type in (self.TYPE_ADD, self.TYPE_DEL))
 		self.type = type
 
 	def render(self, req):

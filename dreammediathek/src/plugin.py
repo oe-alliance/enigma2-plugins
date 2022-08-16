@@ -165,7 +165,7 @@ class dreamMediathekStationsScreen(Screen):
 			title = iWebTVStations.webtv_stations[station]["title"]
 		if "streamurl" in iWebTVStations.webtv_stations[station]:
 			streamurl = iWebTVStations.webtv_stations[station]["streamurl"]
-		return((provider, title, streamurl))
+		return ((provider, title, streamurl))
 
 	def buildStationsList(self):
 		self.tvstations = None

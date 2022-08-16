@@ -52,7 +52,7 @@ class AsynchTrash(Thread):
 
     def run(self):
         self.cancel = False
-        if(self.wait_ms > 0):
+        if (self.wait_ms > 0):
             seconds = self.wait_ms / 1000.0
             time.sleep(seconds)
         for service in self.items:
@@ -70,7 +70,7 @@ class eServiceReferenceTrash():
     def __init__(self, path):
         self.path = path
         p = path.replace(TRASH_NAME, "")
-        if(p.endswith(".ts")):
+        if (p.endswith(".ts")):
             meta_path = p[:-3] + ".ts.meta"
         else:
             meta_path = p + ".ts.meta"

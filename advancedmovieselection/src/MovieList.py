@@ -709,7 +709,7 @@ class MovieList(GUIComponent):
                     offsetServiceName = tag_size
                 res.append(MultiContentEntryText(pos=(0 + offset, 2), size=(width - (0 + offset + offsetServiceName), 25), font=0, flags=RT_HALIGN_LEFT, text=displaytext, color=color, color_sel=color)) #Topfi: added color_sel
             else:
-                assert(self.list_type == MovieList.LISTTYPE_MINIMAL)
+                assert (self.list_type == MovieList.LISTTYPE_MINIMAL)
                 if png is not None: # self.show_folders:
                     res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 0, 3, 20, 20, png))
 

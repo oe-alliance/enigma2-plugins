@@ -233,7 +233,7 @@ class DreamExplorerII(Screen):
 					fileRef = eServiceReference("4097:0:0:0:0:0:0:0:0:0:" + filename)
 					self.session.open(MoviePlayer, fileRef)
 				elif (testFileName.endswith(".avi")) or (testFileName.endswith(".mp4")) or (testFileName.endswith(".divx")) or (testFileName.endswith(".wmv")) or (testFileName.endswith(".mov")) or (testFileName.endswith(".flv")) or (testFileName.endswith(".3gp")):
-					if not(self.MyBox == "dm7025"):
+					if not (self.MyBox == "dm7025"):
 						fileRef = eServiceReference("4097:0:0:0:0:0:0:0:0:0:" + filename)
 						self.session.open(MoviePlayer, fileRef)
 				elif (testFileName.endswith(".mp3")) or (testFileName.endswith(".wav")) or (testFileName.endswith(".ogg")) or (testFileName.endswith(".m4a")) or (testFileName.endswith(".mp2")) or (testFileName.endswith(".flac")):
@@ -405,7 +405,7 @@ class DreamExplorerII(Screen):
 		elif answer == "DELLINK":
 			temp_book = []
 			for bidx in range(len(self.booklines) - 1):
-				if not(self.selectedDir in self.booklines[bidx]):
+				if not (self.selectedDir in self.booklines[bidx]):
 					temp_book.append(self.booklines[bidx])
 			self.booklines = []
 			self.booklines = temp_book
@@ -450,7 +450,7 @@ class DreamExplorerII(Screen):
 			dei = self.session.open(MessageBox, _(hilfe), MessageBox.TYPE_INFO)
 			dei.setTitle(_("Info..."))
 		elif answer == "SOFTLINK":
-			if not(self.MediaFilter):
+			if not (self.MediaFilter):
 				self.session.openWithCallback(self.callbackCPmaniger, SoftLinkScreen, self["filelist"].getCurrentDirectory())
 		elif answer == "CHMOD644":
 			os_system("chmod 644 " + self["filelist"].getCurrentDirectory() + self["filelist"].getFilename())
@@ -530,7 +530,7 @@ class DreamExplorerII(Screen):
 			dei = self.session.open(MessageBox, _('Turn off the media-filter first.'), MessageBox.TYPE_INFO)
 			dei.setTitle(_("Dream-Explorer..."))
 			return
-		if not(self["filelist"].canDescent()):
+		if not (self["filelist"].canDescent()):
 			DELfilename = self["filelist"].getCurrentDirectory() + self["filelist"].getFilename()
 			dei = self.session.openWithCallback(self.callbackExecDelete, MessageBox, _("Do you realy want to DELETE:\n" + DELfilename), MessageBox.TYPE_YESNO)
 			dei.setTitle(_("Dream-Explorer - DELETE file..."))
@@ -568,7 +568,7 @@ class DreamExplorerII(Screen):
 			dei = self.session.open(MessageBox, _('Turn off the media-filter first.'), MessageBox.TYPE_INFO)
 			dei.setTitle(_("Dream-Explorer..."))
 			return
-		if not(self["filelist"].canDescent()):
+		if not (self["filelist"].canDescent()):
 			RENfilename = self["filelist"].getFilename()
 			self.session.openWithCallback(self.callbackExecRename, vInputBox, title=_("old:  " + RENfilename), windowTitle=_("Rename file..."), text=RENfilename)
 		elif (self["filelist"].getSelectionIndex() != 0) and (self["filelist"].canDescent()):
@@ -642,7 +642,7 @@ class DreamExplorerII(Screen):
 			dei = self.session.open(MessageBox, _('Turn off the media-filter first.'), MessageBox.TYPE_INFO)
 			dei.setTitle(_("Dream-Explorer..."))
 			return
-		if not(self["filelist"].canDescent()):
+		if not (self["filelist"].canDescent()):
 			source = self["filelist"].getCurrentDirectory() + self["filelist"].getFilename()
 			self.session.openWithCallback(self.callbackCPmaniger, CPmaniger, source)
 		elif (self["filelist"].getSelectionIndex() != 0) and (self["filelist"].canDescent()): #NEW
@@ -959,7 +959,7 @@ class MoviePlayer(MP_parent):
 		self.leavePlayer(self.de_instance)
 
 	def __onClose(self):
-		if not(self.WithoutStopClose):
+		if not (self.WithoutStopClose):
 			self.session.nav.playService(self.lastservice)
 
 
