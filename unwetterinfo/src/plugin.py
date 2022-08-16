@@ -6,11 +6,10 @@
 # Author: barabas
 #
 
-import xml.sax.saxutils as util
-
+from xml.sax.saxutils import unescape
 from Plugins.Plugin import PluginDescriptor
-from twisted.web.client import getPage
-from twisted.internet import reactor
+from requests import get, exceptions
+from twisted.internet.reactor import callLater, callInThread
 from Screens.Screen import Screen
 from Screens.Console import Console
 from Components.ActionMap import ActionMap
@@ -21,7 +20,8 @@ from Components.Pixmap import Pixmap
 from enigma import eTimer, ePicLoad
 from re import sub, search, findall
 from os import unlink
-import six
+from os.path import isfile
+from six import ensure_binary, ensure_str
 ###############################################################################
 
 
@@ -134,16 +134,15 @@ class HelpPictureView(Screen):
 class UnwetterMain(Screen):
 	skin = """
 		<screen position="center,center" size="530,430" title="Unwetterzentrale" >
-			<widget name="hmenu" position="5,0" zPosition="1" size="530,220" scrollbarMode="showOnDemand" />
+			<widget name="hmenu" position="5,0" zPosition="1" size="530,225" scrollbarMode="showOnDemand" />
 			<widget name="thumbnail" position="185,250" zPosition="2" size="140,150" />
 			<widget name="thumbland" position="435,390" zPosition="2" size="90,40" />
-			<ePixmap position="20,380" zPosition="2" size="36,20" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
+			<ePixmap position="10,360" zPosition="2" size="45,44" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
 			<widget name="statuslabel" position="5,410" zPosition="2" size="530,20" font="Regular;16" halign="left"/>
 		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-
 		self["statuslabel"] = Label()
 		self["thumbland"] = Pixmap()
 		self["thumbnail"] = Pixmap()
@@ -163,21 +162,16 @@ class UnwetterMain(Screen):
 		self.picfile = "/tmp/uwz.png"
 		self.picweatherfile = pluginpath + "/wetterreport.jpg"
 		self.reportfile = "/tmp/uwz.report"
-
 		self.picload = ePicLoad()
-
 #		self.onLayoutFinish.append(self.go)
-
 		self.ThumbTimer = eTimer()
 		self.ThumbTimer.callback.append(self.showThumb)
-
 		self.switchDeA(load=True)
 
 	def hauptmenu(self, output):
 		self.loadinginprogress = False
 		trans = {'&szlig;': 'ß', '&auml;': 'ä', '&ouml;': 'ö', '&uuml;': 'ü', '&Auml;': 'Ä', '&Ouml;': 'Ö', '&Uuml;': 'Ü'}
-		output = util.unescape(output, trans)
-
+		output = unescape(ensure_str(output), trans)
 		if self.land == "de":
 			startpos = output.find('<div id="navigation">')
 			endpos = output.find('<a class="section-link" title="FAQ"', startpos)
@@ -196,7 +190,6 @@ class UnwetterMain(Screen):
 		else:
 			self.menueintrag.append("Lagebericht")
 			self.link.append(self.weatherreporturl)
-
 			startpos = output.find('<div id="select_dropdownprovinces"')
 			endpos = output.find('</div>', startpos)
 			bereich = output[startpos:endpos]
@@ -220,7 +213,7 @@ class UnwetterMain(Screen):
 	def ok(self):
 		self.go()
 		c = self["hmenu"].getCurrent()
-		if c is not None:
+		if c is not None and self.menueintrag:
 			x = self.menueintrag.index(c)
 			if x != 0:
 				self.session.open(PictureView)
@@ -228,15 +221,14 @@ class UnwetterMain(Screen):
 				self.downloadWeatherReport()
 
 	def go(self):
-		c = self["hmenu"].getCurrent()
-		if c is not None:
-			x = self.menueintrag.index(c)
-			# Wetterlagebericht ist Index 0
-			if x != 0:
-				url = self.link[x]
-				self["statuslabel"].setText("Loading Data")
-				self.downloadPicUrl(url)
-			self.ThumbTimer.start(1500, True)
+	 c = self["hmenu"].getCurrent()
+	 if c is not None and self.menueintrag:
+		 x = self.menueintrag.index(c)
+		 if x != 0:  # Wetterlagebericht ist Index 0
+			 url = self.link[x]
+			 self["statuslabel"].setText("Loading Data")
+			 self.downloadPicUrl(url)
+		 self.ThumbTimer.start(1500, True)
 
 	def up(self):
 		self["hmenu"].up()
@@ -282,7 +274,7 @@ class UnwetterMain(Screen):
 			width = 142
 			height = 135
 		c = self["hmenu"].getCurrent()
-		if c is not None:
+		if c is not None and self.menueintrag:
 			x = self.menueintrag.index(c)
 			if x != 0:
 				picture = self.picfile
@@ -308,6 +300,7 @@ class UnwetterMain(Screen):
 			self["thumbnail"].hide()
 
 	def getPicUrl(self, output):
+		output = ensure_str(output)
 		self.loadinginprogress = False
 		if self.land == "de":
 			startpos = output.find('<!-- Anfang msg_Box Content -->')
@@ -329,7 +322,7 @@ class UnwetterMain(Screen):
 	def getWeatherReport(self, output):
 		self.loadinginprogress = False
 		trans = {'&szlig;': 'ß', '&auml;': 'ä', '&ouml;': 'ö', '&uuml;': 'ü', '&Auml;': 'Ä', '&Ouml;': 'Ö', '&Uuml;': 'Ü'}
-		output = util.unescape(output, trans)
+		output = unescape(output, trans)
 		if self.land == "de":
 			startpos = output.find('<!-- Anfang msg_Box Content -->')
 			endpos = output.find('<!-- Ende msg_Box Content -->')
@@ -357,11 +350,11 @@ class UnwetterMain(Screen):
 
 	def downloadMenu(self):
 		self.loadinginprogress = True
-		getPage(six.ensure_binary(self.menuurl)).addCallback(self.hauptmenu).addErrback(self.downloadError)
+		callInThread(self.threadGetPage, self.menuurl, self.hauptmenu, self.downloadError)
 
 	def downloadPicUrl(self, url):
 		self.loadinginprogress = True
-		getPage(six.ensure_binary(url)).addCallback(self.getPicUrl).addErrback(self.downloadError)
+		callInThread(self.threadGetPage, url, self.getPicUrl, self.downloadError)
 
 	def downloadPic(self, picurl):
 		headers = {}
@@ -371,25 +364,33 @@ class UnwetterMain(Screen):
 			c = self["hmenu"].getCurrent()
 			x = self.menueintrag.index(c)
 			headers["Referer"] = self.link[x]
-		getPage(six.ensure_binary(picurl), headers=headers).addCallback(self.getPic).addErrback(self.downloadError)
+#		getPage(ensure_binary(picurl), headers=headers).addCallback(self.getPic).addErrback(self.downloadError)
+		callInThread(self.threadGetPage, picurl, self.getPic, self.downloadError)
 
 	def downloadWeatherReport(self):
 		self.loadinginprogress = True
 #		self["statuslabel"].setText("Lade Report: %s" % self.weatherreporturl)
-		getPage(six.ensure_binary(self.weatherreporturl)).addCallback(self.getWeatherReport).addErrback(self.downloadError)
+		callInThread(self.threadGetPage, self.weatherreporturl, self.getWeatherReport, self.downloadError)
+
+	def threadGetPage(self, link, success, fail):
+		try:
+			response = get(ensure_binary(link))
+			response.raise_for_status()
+		except exceptions.RequestException as error:
+			fail(error)
+		else:
+			success(response.content)
 
 	def switchDeA(self, load=False):
+		cfgfile = pluginpath + "/last.cfg"
 		if load:
-			try:
-				f = open(pluginpath + "/last.cfg", "r")
-				self.land = f.read()
-				f.close
-			except:
+			if isfile(cfgfile):
+				with open(cfgfile, "r") as f:
+					self.land = f.read().lower()
+			else:
 				self.land = "a"
-
 		self.menueintrag = []
 		self.link = []
-
 		if self.land == "de":
 			self.land = "a"
 			self.baseurl = "http://www.uwz.at/"
@@ -400,18 +401,17 @@ class UnwetterMain(Screen):
 			self.baseurl = "http://www.unwetterzentrale.de/uwz/"
 			self.menuurl = self.baseurl + "index.html"
 			self.weatherreporturl = self.baseurl + "lagebericht.html"
-
 		if not load:
-			f = open(pluginpath + "/last.cfg", "w")
-			f.write(self.land)
-			f.close
-
+			with open(pluginpath + "/last.cfg", "w") as f:
+				f.write(self.land.lower())
+		self.showThumbLand()
 		self.downloadMenu()
+		self["hmenu"].l.setList(self.menueintrag)
 		self.ThumbTimer.start(1500, True)
 
 	def exit(self):
 		if self.loadinginprogress:
-			reactor.callLater(1, self.exit)
+			callLater(1, self.exit)
 		else:
 			try:
 				unlink(self.picfile)
