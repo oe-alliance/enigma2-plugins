@@ -18,9 +18,9 @@ jobs:
 
       - uses: actions/setup-python@v2
         with:
-          python-version: '2.7'
+          python-version: '3.9'
 
-      - name: Build python 2.7
+      - name: Build CI
         run: |
           sudo apt-get -q update
           sudo apt-get install dos2unix
