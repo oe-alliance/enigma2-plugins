@@ -47,7 +47,7 @@ def hashFile(filename):
         (l2, l1) = struct.unpack(longlongformat, buffer)
         l_value = (int(l1) << 32) | int(l2)
         hash += l_value
-        hash = hash & 0xFFFFFFFFFFFFFFFF #to remain as 64bit number
+        hash = hash & 0xFFFFFFFFFFFFFFFF  # to remain as 64bit number
 
       f.seek(max(0, filesize - 65536), 0)
       b = f.read(65536)

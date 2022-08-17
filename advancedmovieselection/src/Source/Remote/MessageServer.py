@@ -51,7 +51,7 @@ def getIpAddress(iface):
         split = i.strip().split(' ')
         if (split[0] == "iface"):
             currif = split[1]
-        if (currif == iface): #read information only for available interfaces
+        if (currif == iface):  # read information only for available interfaces
             if (split[0] == "address"):
                 return split[1]
     return None
@@ -98,7 +98,7 @@ class MessageServer():
         self.shutdown()
         self.server = socketserver.TCPServer((self.host, self.port), TCPHandler)
         self.t = threading.Thread(target=self.server.serve_forever)
-        self.t.setDaemon(True) # don't hang on exit
+        self.t.setDaemon(True)  # don't hang on exit
         self.t.start()
         print("[AdvancedMovieSelection] Server started:", self.host, self.port)
 

@@ -44,7 +44,7 @@ class AccessRestriction:
             return int(access[4:])
         except Exception as e:
             print(e)
-            return -1 # type as error
+            return -1  # type as error
 
     def isAccessible(self, tags):
         if not tags:

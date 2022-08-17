@@ -325,7 +325,7 @@ class SeriesPluginWorker(Thread):
 
 		if not self.__running:
 			self.__running = True
-			self.start() # Start blocking code in Thread
+			self.start()  # Start blocking code in Thread
 
 	def gotThreadMsg(self, msg=None):
 

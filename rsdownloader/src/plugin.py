@@ -264,9 +264,9 @@ class RSDownload:
 		minute_start = start[1]
 		hour_end = end[0]
 		minute_end = end[1]
-		if start == end: # Same start and end-time
+		if start == end:  # Same start and end-time
 			return True
-		elif hour_end < hour_start: # Different days!!!
+		elif hour_end < hour_start:  # Different days!!!
 			if hour_now > hour_start or hour_now < hour_end:
 				return True
 			elif hour_now == hour_start and minute_now > minute_start:
@@ -275,11 +275,11 @@ class RSDownload:
 				return True
 			else:
 				return False
-		elif hour_now > hour_start and hour_now < hour_end: # Same day...
+		elif hour_now > hour_start and hour_now < hour_end:  # Same day...
 			return True
-		elif hour_now == hour_start and minute_now > minute_start: # Same day, same start-hour...
+		elif hour_now == hour_start and minute_now > minute_start:  # Same day, same start-hour...
 			return True
-		elif hour_now == hour_end and minute_now < minute_end: # Same day, same end-hour...
+		elif hour_now == hour_end and minute_now < minute_end:  # Same day, same end-hour...
 			return True
 		else:
 			return False
@@ -433,7 +433,7 @@ class RSDownload:
 		self.execFinishCallbacks()
 
 	def restartFailedCheck(self):
-		if self.status == _("Failed"): # check if user didn't restart already
+		if self.status == _("Failed"):  # check if user didn't restart already
 			self.download = None
 			self.status = _("Waiting")
 
@@ -546,9 +546,9 @@ class RS:
 				minute_start = start[1]
 				hour_end = end[0]
 				minute_end = end[1]
-				if start == end: # Same start and end-time
+				if start == end:  # Same start and end-time
 					return True
-				elif hour_end < hour_start: # Different days!!!
+				elif hour_end < hour_start:  # Different days!!!
 					if hour_now > hour_start or hour_now < hour_end:
 						return True
 					elif hour_now == hour_start and minute_now > minute_start:
@@ -557,11 +557,11 @@ class RS:
 						return True
 					else:
 						return False
-				elif hour_now > hour_start and hour_now < hour_end: # Same day...
+				elif hour_now > hour_start and hour_now < hour_end:  # Same day...
 					return True
-				elif hour_now == hour_start and minute_now > minute_start: # Same day, same start-hour...
+				elif hour_now == hour_start and minute_now > minute_start:  # Same day, same start-hour...
 					return True
-				elif hour_now == hour_end and minute_now < minute_end: # Same day, same end-hour...
+				elif hour_now == hour_end and minute_now < minute_end:  # Same day, same end-hour...
 					return True
 				else:
 					return False
@@ -581,7 +581,7 @@ class RS:
 			downloadCount = 0
 			for download in self.downloads:
 				if download.downloading == True:
-					downloadCount += 1 # Count the downloaded files
+					downloadCount += 1  # Count the downloaded files
 			# Get next download
 			download = None
 			for next in self.downloads:
@@ -601,7 +601,7 @@ class RS:
 					if config.plugins.Netload.username.value != "" and config.plugins.Netload.password.value != "":
 						onlyOneAllowed = False
 				if onlyOneAllowed and downloadCount == 0:
-					download.start() # Start only first download in the list
+					download.start()  # Start only first download in the list
 				elif onlyOneAllowed == False:
 					mayDownloadCount = config.plugins.RSDownloader.count_downloads.value - downloadCount
 					for download in self.downloads:

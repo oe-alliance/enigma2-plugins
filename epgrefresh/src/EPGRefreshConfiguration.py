@@ -378,7 +378,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 
 		self.close(self.session, self.needsEnigmaRestart)
 
-	def keySelect(self): # used by OpenViX
+	def keySelect(self):  # used by OpenViX
 		ConfigListScreen.keySelect(self)
 		if self["config"].getCurrent() and isinstance(self["config"].getCurrent()[1], (ConfigBoolean, ConfigSelection)):
 			self._getConfig()

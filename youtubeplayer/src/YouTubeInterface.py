@@ -219,7 +219,7 @@ class YouTubeEntry():
 	def getVideoUrl(self, fmt):
 		video_id = str(self.getYouTubeId())
 		if video_id is None:
-			return None #, no video_id
+			return None  # , no video_id
 		for el_type in ['detailpage', 'embedded', 'vevo']:
 			video_info_url = ('http://www.youtube.com/get_video_info?&video_id=%s&el=%s&ps=default&eurl=&gl=DE&hl=en' % (video_id, el_type))
 			request = Request(video_info_url, None, std_headers)
@@ -229,13 +229,13 @@ class YouTubeEntry():
 				if 'token' in video_info:
 					break
 			except (URLError, HTTPException, error) as err:
-				return None #, ('ERROR: unable to download video info webpage: %s' % str(err))
+				return None  # , ('ERROR: unable to download video info webpage: %s' % str(err))
 		if 'token' not in video_info:
 			if 'reason' not in video_info:
 				reason = 'Unable to extract "t" parameter for unknown reason'
 			else:
 				reason = unquote_plus(video_info['reason'][0])
-			return None #, reason
+			return None  # , reason
 		else:
 			quality_fallback_dict = dict({"22": "18", "18": "6", "6": "1"})
 			token = video_info['token'][0]
@@ -253,7 +253,7 @@ class YouTubeEntry():
 				else:
 					print("[YTB] found")
 					break
-			return video_real_url #, 'OK'
+			return video_real_url  # , 'OK'
 
 	def getDuration(self):
 		if self.entry.media is not None and self.entry.media.duration is not None:

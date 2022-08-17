@@ -22,7 +22,7 @@ from Components.Button import Button
 from Components.FileList import FileList
 
 
-class dirSelectDlg(Screen): # 90,140
+class dirSelectDlg(Screen):  # 90,140
 	skin = """
 		<screen name="dirSelectDlg" position="center,center" size="560,360">
 			<widget name="filelist" position="10,10" size="540,210" scrollbarMode="showOnDemand" />

@@ -43,7 +43,7 @@ import time
 import sys
 
 # From /usr/include/linux/icmp.h; your milage may vary.
-ICMP_ECHO_REQUEST = 8 # Seems to be the same on Solaris.
+ICMP_ECHO_REQUEST = 8  # Seems to be the same on Solaris.
 
 # I'm not too confident that this is right but testing seems
 # to suggest that it gives the same answers as in_cksum in ping.c
@@ -56,12 +56,12 @@ def checksum(str):
   while count < countTo:
     thisVal = ord(str[count + 1]) * 256 + ord(str[count])
     sum = sum + thisVal
-    sum = sum & 0xffffffff # Necessary?
+    sum = sum & 0xffffffff  # Necessary?
     count = count + 2
 
   if countTo < len(str):
     sum = sum + ord(str[len(str) - 1])
-    sum = sum & 0xffffffff # Necessary?
+    sum = sum & 0xffffffff  # Necessary?
 
   sum = (sum >> 16) + (sum & 0xffff)
   sum = sum + (sum >> 16)
@@ -80,7 +80,7 @@ def receiveOnePing(mySocket, ID, timeout):
     startedSelect = time.time()
     whatReady = select.select([mySocket], [], [], timeLeft)
     howLongInSelect = (time.time() - startedSelect)
-    if whatReady[0] == []: # Timeout
+    if whatReady[0] == []:  # Timeout
       return None
     timeReceived = time.time()
     recPacket, addr = mySocket.recvfrom(1024)
@@ -110,7 +110,7 @@ def sendOnePing(mySocket, destAddr, ID):
   # to make up a new header than to stuff it into the dummy.
   header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, htons(myChecksum), ID, 1)
   packet = header + data
-  mySocket.sendto(packet, (destAddr, 1)) # Don't know about the 1
+  mySocket.sendto(packet, (destAddr, 1))  # Don't know about the 1
   return None
 
 

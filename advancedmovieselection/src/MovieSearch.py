@@ -71,7 +71,7 @@ class MovieSearch():
             "8": self.keyNumberPressed,
             "9": self.keyNumberPressed,
             "0": self.keyNumberPressed,
-        }, -1) # to prevent left/right overriding the listbox
+        }, -1)  # to prevent left/right overriding the listbox
         # we use extra actions to disable them
         self["SetupActions"] = NumberActionMap(["SetupActions"],
         {

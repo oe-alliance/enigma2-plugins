@@ -500,11 +500,11 @@ class VirtualZap(Screen):
 
 	def setServicelistSelection(self, bouquet, service):
 		# we need to select the old service with bouquet
-		if self.servicelist.getRoot() != bouquet: #already in correct bouquet?
+		if self.servicelist.getRoot() != bouquet:  # already in correct bouquet?
 			self.servicelist.clearPath()
 			self.servicelist.enterPath(self.servicelist.bouquet_root)
 			self.servicelist.enterPath(bouquet)
-		self.servicelist.setCurrentSelection(service) #select the service in servicelist
+		self.servicelist.setCurrentSelection(service)  # select the service in servicelist
 
 	def closing(self):
 		if self.pipAvailable:
@@ -532,7 +532,7 @@ class VirtualZap(Screen):
 		self.pipservice = None
 		# save current selected service for standard PiP
 		service = ServiceReference(self.servicelist.getCurrentSelection()).ref
-		servicePath = self.servicelist.getCurrentServicePath() # same bug as in channelselection
+		servicePath = self.servicelist.getCurrentServicePath()  # same bug as in channelselection
 		# save last used service and bouqet ref
 		self.saveLastService(self.servicelist.getCurrentSelection().toString(), self.servicelist.getRoot().toString())
 		# select running service in servicelist
@@ -569,9 +569,9 @@ class VirtualZap(Screen):
 
 	# if available play service in PiP
 	def playService(self, service):
-		if parentalControl.getProtectionLevel(service.toCompareString()) == -1 or (parentalControl.configInitialized and parentalControl.sessionPinCached and parentalControl.sessionPinCachedValue): # check parentalControl, only play a protected service when Pin-Cache is activated and still valid
+		if parentalControl.getProtectionLevel(service.toCompareString()) == -1 or (parentalControl.configInitialized and parentalControl.sessionPinCached and parentalControl.sessionPinCachedValue):  # check parentalControl, only play a protected service when Pin-Cache is activated and still valid
 			current_service = service
-			n_service = self.pipServiceRelation.get(service.toString(), None) # PiPServiceRelation
+			n_service = self.pipServiceRelation.get(service.toString(), None)  # PiPServiceRelation
 			if n_service is not None:
 				service = eServiceReference(n_service)
 			if service and (service.flags & eServiceReference.isGroup):
@@ -604,12 +604,12 @@ class VirtualZap(Screen):
 		if not servicelist is None:
 			while num:
 				serviceIterator = servicelist.getNext()
-				if not serviceIterator.valid(): #check end of list
+				if not serviceIterator.valid():  # check end of list
 					break
 				playable = not (serviceIterator.flags & (eServiceReference.isMarker | eServiceReference.isDirectory))
 				if playable:
 					num -= 1
-			if not num: #found service with searched number ?
+			if not num:  # found service with searched number ?
 				return serviceIterator, 0
 		return None, num
 
@@ -621,7 +621,7 @@ class VirtualZap(Screen):
 		if not bouquetlist is None:
 			while number:
 				bouquet = bouquetlist.getNext()
-				if not bouquet.valid(): #check end of list
+				if not bouquet.valid():  # check end of list
 					break
 				if bouquet.flags & eServiceReference.isDirectory:
 					service, number = self.searchNumberHelper(serviceHandler, number, bouquet)

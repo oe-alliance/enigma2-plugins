@@ -206,7 +206,7 @@ class FritzAction(object):
 																response,
 																config.plugins.FritzCall.username.value,
 																realm)
-		else: # Anmeldung im Heimnetz ohne Passwort
+		else:  # Anmeldung im Heimnetz ohne Passwort
 			self.debug("Anmeldung im Heimnetz ohne Passwort!")
 			header_clientauth = ""
 

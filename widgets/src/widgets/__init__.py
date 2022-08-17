@@ -9,7 +9,7 @@ from xml.etree.cElementTree import parse
 def importSingleWidget(session, widgetdir):  # FIXME pyc/pyo
     print("importing widget from", widgetdir)
     widgetname = widgetdir.split("/")[-1]
-    module_name, ext = splitext(widgetname + ".widget.py") # Handles no-extension files, etc.
+    module_name, ext = splitext(widgetname + ".widget.py")  # Handles no-extension files, etc.
     if ext == '.py' and module_name != "__init__":
         try:
             #import python part

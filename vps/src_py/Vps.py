@@ -71,13 +71,13 @@ class vps_timer:
 			self.timer.log(0, "[VPS] " + line)
 
 			if data[0] == "RUNNING_STATUS":
-				if data[1] == "0": # undefined
+				if data[1] == "0":  # undefined
 					if data[2] == "FOLLOWING":
 						data[1] = "1"
 					else:
 						data[1] = "4"
 
-				if data[1] == "1": # not running
+				if data[1] == "1":  # not running
 					# Wenn der Eintrag im Following (Section_Number = 1) ist,
 					# dann nicht beenden (Sendung begann noch gar nicht)
 					if data[2] == "FOLLOWING":
@@ -96,16 +96,16 @@ class vps_timer:
 							self.dont_restart_program = True
 							self.program_abort()
 
-				elif data[1] == "2": # starts in a few seconds
+				elif data[1] == "2":  # starts in a few seconds
 					self.activate_autoincrease()
 					if self.timer.state == TimerEntry.StateWaiting:
 						self.session.nav.RecordTimer.doActivate(self.timer)
 
-				elif data[1] == "3": # pausing
+				elif data[1] == "3":  # pausing
 					if self.timer.state == TimerEntry.StateRunning:
 						self.activate_autoincrease()
 
-				elif data[1] == "4": # running
+				elif data[1] == "4":  # running
 					if self.timer.state == TimerEntry.StateRunning:
 						self.activate_autoincrease()
 					elif self.timer.state == TimerEntry.StateWaiting or self.timer.state == TimerEntry.StatePrepared:
@@ -116,9 +116,9 @@ class vps_timer:
 						self.activate_autoincrease()
 						self.program_abort()
 						self.stop_simulation()
-						vps_timers.checksoon(2000) # Programm neu starten
+						vps_timers.checksoon(2000)  # Programm neu starten
 
-				elif data[1] == "5": # service off-air
+				elif data[1] == "5":  # service off-air
 					self.timer.vpsplugin_overwrite = False
 					if self.activated_auto_increase:
 						self.timer.autoincrease = False
@@ -399,10 +399,10 @@ class vps_timer:
 								# ansonsten versuchen auf dem aktuellen Transponder/Kanal nach Infos zu suchen
 								if not self.program_try_search_running:
 									self.program_do_start(1)
-						else: # Simulation hat geklappt
+						else:  # Simulation hat geklappt
 							if 1 < self.nextExecution:
 								self.nextExecution = 1
-			else: # Simulation läuft schon
+			else:  # Simulation läuft schon
 				# hole Demux
 				stream = self.simulate_recordService.stream()
 				if stream:

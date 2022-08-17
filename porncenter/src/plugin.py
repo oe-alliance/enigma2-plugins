@@ -405,7 +405,7 @@ class PornCenterSub(Screen, ProtectedScreen):
 			self.session.openWithCallback(self.delete, ChangedMoviePlayer, ref)
 
 	def delete(self, callback=None):
-		if bufferThread.downloading: #still downloading?
+		if bufferThread.downloading:  # still downloading?
 			bufferThread.stop()
 		if config.plugins.PornCenter.keepStored.value == "delete":
 			remove(self.file)

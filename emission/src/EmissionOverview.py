@@ -307,7 +307,7 @@ class EmissionOverview(Screen, HelpableScreen):
 			self["seeding_sel"].hide()
 			self["key_yellow"].setText(_("All"))
 			self["key_blue"].setText(_("Seeding"))
-		else: #if list_type == LIST_TYPE_SEEDING:
+		else:  # if list_type == LIST_TYPE_SEEDING:
 			self["all_sel"].hide()
 			self["downloading_sel"].hide()
 			self["seeding_sel"].show()
@@ -321,7 +321,7 @@ class EmissionOverview(Screen, HelpableScreen):
 			self.list_type = LIST_TYPE_SEEDING
 		elif list_type == LIST_TYPE_DOWNLOADING:
 			self.list_type = LIST_TYPE_ALL
-		else: #if list_type == LIST_TYPE_SEEDING:
+		else:  # if list_type == LIST_TYPE_SEEDING:
 			self.list_type = LIST_TYPE_DOWNLOADING
 		self.showHideSetTextMagic()
 		self.updateList()
@@ -333,7 +333,7 @@ class EmissionOverview(Screen, HelpableScreen):
 			self.list_type = LIST_TYPE_DOWNLOADING
 		elif list_type == LIST_TYPE_DOWNLOADING:
 			self.list_type = LIST_TYPE_SEEDING
-		else: #if list_type == LIST_TYPE_SEEDING:
+		else:  # if list_type == LIST_TYPE_SEEDING:
 			self.list_type = LIST_TYPE_ALL
 		self.showHideSetTextMagic()
 		self.updateList()
@@ -443,7 +443,7 @@ class EmissionOverview(Screen, HelpableScreen):
 					int(x.progress))
 					for x in lst if x.status == "downloading"
 				]
-			else: #if list_type == LIST_TYPE_SEEDING:
+			else:  # if list_type == LIST_TYPE_SEEDING:
 				lst = [
 					(x, x.name.encode('utf-8', 'ignore'),
 					str(x.eta or '?:??:??').encode('utf-8'),

@@ -36,7 +36,7 @@ class MerlinEPGActions():
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ShortcutActions", "TimerEditActions", "YttrailerActions"],
 		{
 			"ok": self.openEdit,
-			"cancel": self.keyExit, # overwritten to use our own exit function
+			"cancel": self.keyExit,  # overwritten to use our own exit function
 			"green": self.addCurrentTimer,
 			"log": self.showLog,
 			"left": self.left,

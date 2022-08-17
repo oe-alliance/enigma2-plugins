@@ -8,7 +8,7 @@ import six
 def importExternalModules():
 	dir = abspath(resolveFilename(SCOPE_PLUGINS) + "Extensions/WebInterface/WebChilds/External/")
 	for file in listdir(dir):
-		module_name, ext = splitext(file) # Handles no-extension files, etc.
+		module_name, ext = splitext(file)  # Handles no-extension files, etc.
 
 		if ext == '.py' and module_name != "__init__":
 			try:

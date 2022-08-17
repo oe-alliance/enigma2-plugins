@@ -24,7 +24,7 @@ import logging
 import traceback
 import zipfile
 import struct
-import socket # For timeout purposes
+import socket  # For timeout purposes
 import re
 from six.moves.urllib.request import urlopen, Request
 from six.moves.urllib.error import HTTPError, URLError
@@ -69,7 +69,7 @@ class SubtitleDB(object):
         except:
             log.exception("Error occured")
             subs = []
-        queue.put(subs, True) # Each plugin must write as the caller periscopy.py waits for an result on the queue
+        queue.put(subs, True)  # Each plugin must write as the caller periscopy.py waits for an result on the queue
 
     def process(self, filepath, langs):
         ''' main method to call on the plugin, pass the filename and the wished
@@ -169,7 +169,7 @@ class SubtitleDB(object):
     def guessFileData(self, filename):
         filename = unicode(self.getFileName(filename).lower())
         matches_tvshow = self.tvshowRegex.match(filename)
-        if matches_tvshow: # It looks like a tv show
+        if matches_tvshow:  # It looks like a tv show
             (tvshow, season, episode, teams) = matches_tvshow.groups()
             tvshow = tvshow.replace(".", " ").strip()
             teams = teams.split('.')
@@ -218,7 +218,7 @@ class SubtitleDB(object):
         longlongs = struct.unpack(format, buffer)
         hash += sum(longlongs)
 
-        f.seek(-65536, os.SEEK_END) # size is always > 131072
+        f.seek(-65536, os.SEEK_END)  # size is always > 131072
         buffer = f.read(65536)
         longlongs = struct.unpack(format, buffer)
         hash += sum(longlongs)

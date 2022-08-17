@@ -64,7 +64,7 @@ class FileBrowser(Screen):
 
     def ok(self):
         global lastpath
-        if self["filelist"].canDescent(): # isDir
+        if self["filelist"].canDescent():  # isDir
             self["filelist"].descent()
             lastpath = self["filelist"].getCurrentDirectory() or lastpath
         else:

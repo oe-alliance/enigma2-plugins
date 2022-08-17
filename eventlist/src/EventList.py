@@ -67,7 +67,7 @@ class EventList(Converter, object):
 					now = localtime(time())
 					dt = datetime(now.tm_year, now.tm_mon, now.tm_mday, 20, 15)
 					if time() > mktime(dt.timetuple()):
-						dt += timedelta(days=1) # skip to next day...
+						dt += timedelta(days=1)  # skip to next day...
 					primeTime = int(mktime(dt.timetuple()))
 					if not self.epgcache.startTimeQuery(eServiceReference(ref.toString()), primeTime):
 						event = self.epgcache.getNextTimeEntry()

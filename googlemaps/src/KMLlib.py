@@ -25,7 +25,7 @@ class KmlPlace:
         mercator = GlobalMercator()
         mx, my = mercator.LatLonToMeters(self.lat, self.lon)
         tminx, tminy = mercator.MetersToTile(mx, my, zoomlevel)
-        gx, gy = mercator.GoogleTile(tminx, tminy, zoomlevel)#+1?
+        gx, gy = mercator.GoogleTile(tminx, tminy, zoomlevel)  # +1?
         return gx, gy, zoomlevel
 
     def __str__(self):
@@ -52,8 +52,8 @@ class KmlFolder:
         list = []
         for i in self.kmlnode.getElementsByTagName('Placemark'):
             point = KmlPlace(i)
-            try: # test if we can handle this coords
-                point.getTile(15)# 15 is just a zoomlevel in the middle :)
+            try:  # test if we can handle this coords
+                point.getTile(15)  # 15 is just a zoomlevel in the middle :)
                 list.append(point)
             except ValueError as e:
                 print("Import Error: ", point.name, e)

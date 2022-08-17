@@ -16,7 +16,7 @@ config.plugins.KiddyTimer.position_x = ConfigInteger(default=590)
 config.plugins.KiddyTimer.position_y = ConfigInteger(default=35)
 config.plugins.KiddyTimer.timerStyle = ConfigSelection(choices=[("clock", _("Clock")), ("smiley", _("Smiley")), ("noimage", _("no Image"))])
 config.plugins.KiddyTimer.lastStartDay = ConfigText(default="")
-config.plugins.KiddyTimer.lastStatus = ConfigText(default="") # Used for cheat detection
+config.plugins.KiddyTimer.lastStatus = ConfigText(default="")  # Used for cheat detection
 config.plugins.KiddyTimer.monitorStartTime = ConfigClock(default=KTglob.FOUROCLOCK)
 config.plugins.KiddyTimer.monitorEndTime = ConfigClock(default=KTglob.EIGHTOCLOCKNOON)
 config.plugins.KiddyTimer.activationDialogTimeout = ConfigInteger(default=10)

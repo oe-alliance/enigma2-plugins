@@ -150,10 +150,10 @@ class FEconf(Screen):
 	def Ok(self):
 		sel = self["list"].getCurrent()
 		if sel and sel[1]:
-			if len(sel[1]) == 3:#Device
+			if len(sel[1]) == 3:  # Device
 				tstr = _("Are you sure want to create FlashExpander on\n%s\nPartition %d") % (sel[1][0].model(), sel[1][1])
 				self.session.openWithCallback(boundFunction(self.__startFE_device, sel[1]), MessageBox, tstr)
-			if len(sel[1]) == 2:#Server
+			if len(sel[1]) == 2:  # Server
 				tstr = _("Are you sure want to create FlashExpander on \nServer: %s\nPath: %s") % (sel[1][0], sel[1][1])
 				self.session.openWithCallback(boundFunction(self.__startFE_server, sel[1]), MessageBox, tstr)
 
@@ -280,7 +280,7 @@ class FEconf(Screen):
 				mounts = open('/etc/fstab').read().split('\n')
 				newlines = []
 				for x in mounts:
-					if x.startswith(devPath) or x.startswith("/dev/hdc1"):#/dev/hdc1 wegen 7025+
+					if x.startswith(devPath) or x.startswith("/dev/hdc1"):  # /dev/hdc1 wegen 7025+
 						continue
 					if uuidPath and x.startswith(uuidPath):
 						continue

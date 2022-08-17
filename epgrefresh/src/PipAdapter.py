@@ -58,7 +58,7 @@ class PipAdapter:
 		self.session.pip.show()
 		if self.hide:
 			self.hidePiP()
-		self.session.pipshown = True # Always pretends it's shown (since the ressources are present)
+		self.session.pipshown = True  # Always pretends it's shown (since the ressources are present)
 		newservice = self.session.nav.getCurrentlyPlayingServiceReference()
 		if self.session.pip.playService(newservice):
 			self.session.pip.servicePath = newservice.getPath()
@@ -68,7 +68,7 @@ class PipAdapter:
 		if not self.pipAvail:
 			return False
 
-		if not self.session.pipshown: # make sure pip still exists
+		if not self.session.pipshown:  # make sure pip still exists
 			self.initPiP()
 
 		if self.session.pip.playService(service):

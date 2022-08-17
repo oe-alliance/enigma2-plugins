@@ -180,8 +180,8 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
         while len(list) > 0:
             try:
                 group = MPL2LINE.match(list.pop(0)).groupdict()
-                start = float(float(group["start"]) / 10) #*0.1*FRAMERATE) or 1
-                stop = float(float(group["stop"]) / 10)#*0.1*FRAMERATE)
+                start = float(float(group["start"]) / 10)  # *0.1*FRAMERATE) or 1
+                stop = float(float(group["stop"]) / 10)  # *0.1*FRAMERATE)
                 rest = group["line"]
                 temp = [float(start), float(stop), str(rest).replace('|', '\n')]
                 subtitles.append(temp)

@@ -49,7 +49,7 @@ EMbaseInfoBarPlugins__init__ = None
 EMStartOnlyOneTime = False
 EMsession = None
 InfoBar_instance = None
-PluginsDir = resolveFilename(SCOPE_PLUGINS) + 'Extensions/'	# /usr/lib/enigma2/python/Plugins/
+PluginsDir = resolveFilename(SCOPE_PLUGINS) + 'Extensions/'  # /usr/lib/enigma2/python/Plugins/
 
 
 config.plugins.easyMedia = ConfigSubsection()
@@ -579,7 +579,7 @@ def MPcallbackFunc(answer):
 		else:
 				EMsession.open(MessageBox, text=_('MyTube Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
 	elif answer == "INTERNETRADIO":
-		if isPluginInstalled("SHOUTcast"): # and (config.plugins.easyMedia.music.value == "shoutcast")
+		if isPluginInstalled("SHOUTcast"):  # and (config.plugins.easyMedia.music.value == "shoutcast")
 			try:
 				from Plugins.Extensions.SHOUTcast.plugin import SHOUTcastWidget
 				EMsession.open(SHOUTcastWidget)

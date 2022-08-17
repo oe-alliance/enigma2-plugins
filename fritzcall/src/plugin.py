@@ -2364,7 +2364,7 @@ class FritzCallList(object):
 		# build screen from call list
 		text = "\n"
 
-		if not self.callList: # why is this happening at all?!?!
+		if not self.callList:  # why is this happening at all?!?!
 			text = _("no calls")
 			debug("[FritzCallList] %s", text)
 			return
@@ -2645,7 +2645,7 @@ def registerUserAction(fun):
 mutedOnConnID = None
 
 
-def notifyCall(event, date, number, caller, phone, connID): # @UnusedVariable # pylint: disable=W0613
+def notifyCall(event, date, number, caller, phone, connID):  # @UnusedVariable # pylint: disable=W0613
 	event = six.ensure_str(event)
 	date = six.ensure_str(date)
 	number = six.ensure_str(number)

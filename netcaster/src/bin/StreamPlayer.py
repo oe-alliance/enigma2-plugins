@@ -16,7 +16,7 @@ class StreamPlayer:
 
 	def __event(self, ev):
 		print("[NETcaster.StreamPlayer] EVENT ==>", ev)
-		if ev == 5: # can we use a constant here instead of just 5?
+		if ev == 5:  # can we use a constant here instead of just 5?
 			currentServiceRef = self.session.nav.getCurrentService()
 			if currentServiceRef is not None:
 				#it seems, that only Title is avaible for now

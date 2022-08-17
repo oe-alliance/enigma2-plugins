@@ -1,4 +1,4 @@
-from enigma import eDVBVolumecontrol #this is not nice
+from enigma import eDVBVolumecontrol  # this is not nice
 from Components.Sources.Source import Source
 from GlobalActions import globalActionMap
 from Components.VolumeControl import VolumeControl
@@ -7,9 +7,9 @@ from Components.VolumeControl import VolumeControl
 class Volume(Source):
 	def __init__(self, session):
 		Source.__init__(self)
-		global globalActionMap # hackalert :)
+		global globalActionMap  # hackalert :)
 		self.actionmap = globalActionMap
-		self.volctrl = eDVBVolumecontrol.getInstance() # this is not nice
+		self.volctrl = eDVBVolumecontrol.getInstance()  # this is not nice
 		self.vol = (True, "State", self.volctrl.getVolume(), self.volctrl.isMuted())
 
 	def handleCommand(self, cmd):
@@ -36,7 +36,7 @@ class Volume(Source):
 				self.volctrl.setVolume(targetvol, targetvol)
 
 				l.extend((True, _("Volume set to %i") % targetvol))
-			except ValueError: # if cmd was set12NotInt
+			except ValueError:  # if cmd was set12NotInt
 				l.extend((False, _("Wrong parameter format 'set=%s'. Use set=set15") % cmd))
 		else:
 			l.extend((False, _("Unknown Volume command %s") % cmd))

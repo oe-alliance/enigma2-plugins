@@ -90,9 +90,9 @@ class FreeSpace(ControllerBase):
 		# Check free space on path
 		if os.path.exists(path):
 			stat = os.statvfs(path)
-			free = (stat.f_bavail if stat.f_bavail != 0 else stat.f_bfree) * stat.f_bsize / 1024 / 1024 # MB
-			if limit > (free / 1024): #GB
-				if free >= 10 * 1024:	#MB
+			free = (stat.f_bavail if stat.f_bavail != 0 else stat.f_bfree) * stat.f_bsize / 1024 / 1024  # MB
+			if limit > (free / 1024):  # GB
+				if free >= 10 * 1024:  # MB
 					free = "%d GB" % (free / 1024)
 				else:
 					free = "%d MB" % (free)

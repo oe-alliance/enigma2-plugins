@@ -23,7 +23,7 @@ class Backup(Source):
 	RESTORE = 1
 
 	BACKUP_PATH = "/tmp"
-	BACKUP_FILENAME = "backup.tar" # XXX: better default name?
+	BACKUP_FILENAME = "backup.tar"  # XXX: better default name?
 
 	def __init__(self, func=BACKUP):
 		Source.__init__(self)

@@ -322,7 +322,7 @@ class InfoBar(InfoBarOrg):
 
 		# Init PTS Infobar
 		self.pts_seekpointer_MinX = 8
-		self.pts_seekpointer_MaxX = 396 # make sure you can divide this through 2
+		self.pts_seekpointer_MaxX = 396  # make sure you can divide this through 2
 
 	def __evStart(self):
 		self.service_changed = 1
@@ -1251,7 +1251,7 @@ class InfoBar(InfoBarOrg):
 			return
 
 		self.setSeekState(self.SEEK_STATE_PAUSE)
-		self.doSeek(-90000 * 4) # seek ~4s before end
+		self.doSeek(-90000 * 4)  # seek ~4s before end
 		self.pts_SeekBack_timer.start(1000, True)
 
 	def ptsSeekBackTimer(self):

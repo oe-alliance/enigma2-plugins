@@ -320,7 +320,7 @@ def getLeftMenu(html):
 			else:
 				active = False
 				name = name[1:]
-			if (name != "Hilfe") and (not 'Podcasts' in name): # TODO: Podcasts brauchen noch etwas Arbeit... derzeit deaktiviert
+			if (name != "Hilfe") and (not 'Podcasts' in name):  # TODO: Podcasts brauchen noch etwas Arbeit... derzeit deaktiviert
 				list.append([url, name, active])
 	return list
 
@@ -562,7 +562,7 @@ class RightMenuList(List):
 				else:
 					print("[ZDF Mediathek] Unknown thumbnail content-type:", contentType)
 			if thumbFile is not None:
-				if (os_path.exists(thumbFile) == True): #already downloaded
+				if (os_path.exists(thumbFile) == True):  # already downloaded
 					self.downloadThumbnailCallback(None, thumbFile, thumbID)
 				else:
 					if self.png_cache.get(thumbID, None) is None:
@@ -879,7 +879,7 @@ class ZDFMediathek(Screen, HelpableScreen):
 				elif PLAY_WMV and url.startswith("mms") and "reflector:" in url:
 					ref = eServiceReference(4097, 0, url)
 					self.session.open(ChangedMoviePlayer, ref)
-				else: # Die Hardware kann das Format nicht direkt abspielen, mit Stream2Dream oder vlc Server probieren...
+				else:  # Die Hardware kann das Format nicht direkt abspielen, mit Stream2Dream oder vlc Server probieren...
 					if self.transcodeServer is not None:
 						if self.transcodeServer == "LT Stream2Dream":
 							r = streamplayer.play(url)
@@ -902,7 +902,7 @@ class ZDFMediathek(Screen, HelpableScreen):
 			f.close()
 			list = content.split("-")
 			cacheMB = int(list[0])
-			if cacheMB > 10: # Starte nach 10 MB Bufferung
+			if cacheMB > 10:  # Starte nach 10 MB Bufferung
 				self.cacheTimer.stop()
 				self.playCachedFile()
 		except:

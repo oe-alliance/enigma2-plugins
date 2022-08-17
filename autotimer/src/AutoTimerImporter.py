@@ -185,7 +185,7 @@ class AutoTimerImporter(Screen):
 			))
 			append(
 				SelectionEntryComponent(
-					_("Only on Weekday: %s") % (weekdays[begin.tm_wday][1],), # XXX: the lookup is dirty but works :P
+					_("Only on Weekday: %s") % (weekdays[begin.tm_wday][1],),  # XXX: the lookup is dirty but works :P
 					str(begin.tm_wday),
 					9,
 					True
@@ -294,13 +294,13 @@ class AutoTimerImporter(Screen):
 		autotimer = self.autotimer
 
 		for item in list:
-			if item[2] == 0: # Enable
+			if item[2] == 0:  # Enable
 				autotimer.enabled = item[1]
-			elif item[2] == 1: # Match
+			elif item[2] == 1:  # Match
 				autotimer.match = item[1]
-			elif item[2] == 2: # Timespan
+			elif item[2] == 2:  # Timespan
 				autotimer.timespan = item[1]
-			elif item[2] == 3: # Service
+			elif item[2] == 3:  # Service
 				value = item[1]
 
 				myref = eServiceReference(value)
@@ -313,18 +313,18 @@ class AutoTimerImporter(Screen):
 						value = value[:pos + 1]
 
 				autotimer.services = [value]
-			elif item[2] == 4: # AfterEvent
+			elif item[2] == 4:  # AfterEvent
 				autotimer.afterevent = [(item[1], None)]
-			elif item[2] == 5: # Justplay
+			elif item[2] == 5:  # Justplay
 				autotimer.justplay = item[1]
-			elif item[2] == 6: # Location
+			elif item[2] == 6:  # Location
 				autotimer.destination = item[1]
-			elif item[2] == 7: # Tags
+			elif item[2] == 7:  # Tags
 				autotimer.tags = item[1]
-			elif item[2] == 8: # Exact match
+			elif item[2] == 8:  # Exact match
 				autotimer.searchType = "exact"
 				autotimer.searchCase = "sensitive"
-			elif item[2] == 9: # Weekday
+			elif item[2] == 9:  # Weekday
 				includes = [
 						autotimer.getIncludedTitle(),
 						autotimer.getIncludedShort(),

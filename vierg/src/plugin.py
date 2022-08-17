@@ -106,7 +106,7 @@ class vierg(Screen):
 		if k == 0:
 			return False
 		self.aniFall()
-		if k == 2: # patt
+		if k == 2:  # patt
 			self["message"].setText(_("good game!"))
 		elif mask == 1:
 			self["message"].setText(_("You won!"))
@@ -208,31 +208,31 @@ class vierg(Screen):
 		idx = 0
 		for y in range(3):
 			for x in range(7):
-				if self.maze[idx] & mask: # start-point
+				if self.maze[idx] & mask:  # start-point
 					if (x < 4):
 						# vertikal nach rechts testen
 						if self.maze[idx + 1] & mask and self.maze[idx + 2] & mask and self.maze[idx + 3] & mask:
-							return 1 # game over
+							return 1  # game over
 						# diagonale nach rechts testen
 						if self.maze[idx + 8] & mask and self.maze[idx + 16] & mask and self.maze[idx + 24] & mask:
-							return 1 # game over
+							return 1  # game over
 					if (x > 2):
 						# diagonale nach links testen
 						if self.maze[idx + 6] & mask and self.maze[idx + 12] & mask and self.maze[idx + 18] & mask:
-							return 1 # game over
+							return 1  # game over
 					# nach oben testen
 					if self.maze[idx + 7] & mask and self.maze[idx + 14] & mask and self.maze[idx + 21] & mask:
-						return 1 # game over
+						return 1  # game over
 				idx += 1
 
 		# der rest wird nur auf waagerecht untersucht
 		for y in range(3, 6):
 			#for( x=0; x<7; x++, idx++ )
 			for x in range(7):
-				if x < 4 and self.maze[idx] & mask: # start-point
+				if x < 4 and self.maze[idx] & mask:  # start-point
 					# vertikal nach rechts testen
 					if self.maze[idx + 1] & mask and self.maze[idx + 2] & mask and self.maze[idx + 3] & mask:
-						return 1 # game over
+						return 1  # game over
 				idx += 1
 
 		# test auf patt
@@ -256,29 +256,29 @@ class vierg(Screen):
 		for x in range(7):
 			idx = self.vFall(x, 6)
 			if idx != -1:
-				if self.testGameOver(2): # great ! - choose it
+				if self.testGameOver(2):  # great ! - choose it
 					self.maze[idx] = 0   # remove virt. chip
 					self.cPlay(x)
 					return
 
-				k = self.vFall(x, 5) # put playerchip over me
+				k = self.vFall(x, 5)  # put playerchip over me
 				if k != -1:
-					if self.testGameOver(1): # fault - this field is ugly
+					if self.testGameOver(1):  # fault - this field is ugly
 						tst[x] -= 50
 					else:
 						tst[x] += 1
-					self.maze[k] = 0 # remove virt. chip
+					self.maze[k] = 0  # remove virt. chip
 				else:
 					tst[x] += 1
-				self.maze[idx] = 0 # remove virt. chip
+				self.maze[idx] = 0  # remove virt. chip
 			else:
-				tst[x] = -999999 # neg val
+				tst[x] = -999999  # neg val
 
 		# test: player sieg in 1-2 zuegen
 		for x in range(7):
 			idx = self.vFall(x, 5)
 			if idx != -1:
-				if self.testGameOver(1): # great ! - choose it
+				if self.testGameOver(1):  # great ! - choose it
 					tst[x] += 50
 				else:
 					for k in range(7):
@@ -286,10 +286,10 @@ class vierg(Screen):
 							continue
 						idx2 = self.vFall(k, 5)
 						if idx2 != -1:
-							if self.testGameOver(1): # great ! - choose it
+							if self.testGameOver(1):  # great ! - choose it
 								tst[x] += 10
-							self.maze[idx2] = 0 # remove virt. chip
-				self.maze[idx] = 0 # remove virt. chip
+							self.maze[idx2] = 0  # remove virt. chip
+				self.maze[idx] = 0  # remove virt. chip
 
 		# search highest val
 		for x in range(7):
@@ -301,7 +301,7 @@ class vierg(Screen):
 				vidx[idx] = x
 				idx += 1
 
-		if not idx: # never reached
+		if not idx:  # never reached
 			return
 
 		if idx > 1:
@@ -313,10 +313,10 @@ class vierg(Screen):
 					i2 = self.vFall(x, 5)
 					if i2 == -1:
 						continue
-					if self.testGameOver(2): # great ! - choose it
+					if self.testGameOver(2):  # great ! - choose it
 						tst[vidx[k]] += 5
-					self.maze[i2] = 0 # remove virt. chip
-				self.maze[i1] = 0 # remove virt. chip
+					self.maze[i2] = 0  # remove virt. chip
+				self.maze[i1] = 0  # remove virt. chip
 
 		# search highest val again
 		max = 0
@@ -329,7 +329,7 @@ class vierg(Screen):
 				vidx[idx] = x
 				idx += 1
 
-		if not idx: # never reached
+		if not idx:  # never reached
 			return
 
 		idx = rand() % idx

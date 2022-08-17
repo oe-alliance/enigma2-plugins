@@ -46,7 +46,7 @@ def autoend(reason, **kwargs):
 
 
 def setupAVA(session, **kwargs):
-	session.open(AutomaticVolumeAdjustmentConfigScreen) # start setup
+	session.open(AutomaticVolumeAdjustmentConfigScreen)  # start setup
 
 
 def startSetup(menuid):
@@ -57,7 +57,7 @@ def startSetup(menuid):
 		if menuid != "av":
 			return []
 	else:
-		if menuid != "system": # show setup only in system level menu
+		if menuid != "system":  # show setup only in system level menu
 			return []
 	return [(_("Automatic Volume Adjustment"), setupAVA, "AutomaticVolumeAdjustment", 46)]
 

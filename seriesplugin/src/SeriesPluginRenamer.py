@@ -20,7 +20,7 @@
 from __future__ import absolute_import
 import os
 import re
-from glob import glob #Py3 ,escape
+from glob import glob  # Py3 ,escape
 
 # for localized messages
 from . import _

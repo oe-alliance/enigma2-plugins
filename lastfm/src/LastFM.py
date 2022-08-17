@@ -1,6 +1,6 @@
 from __future__ import print_function
 from twisted.web.client import getPage
-from md5 import md5 # to encode password
+from md5 import md5  # to encode password
 from string import split, rstrip
 from six.moves.urllib.parse import unquote_plus
 from xml.dom.minidom import parseString
@@ -82,9 +82,9 @@ class LastFMHandler:
 
 class LastFM(LastFMHandler):
     DEFAULT_NAMESPACES = (
-        None, # RSS 0.91, 0.92, 0.93, 0.94, 2.0
-        'http://purl.org/rss/1.0/', # RSS 1.0
-        'http://my.netscape.com/rdf/simple/0.9/' # RSS 0.90
+        None,  # RSS 0.91, 0.92, 0.93, 0.94, 2.0
+        'http://purl.org/rss/1.0/',  # RSS 1.0
+        'http://my.netscape.com/rdf/simple/0.9/'  # RSS 0.90
     )
     DUBLIN_CORE = ('http://purl.org/dc/elements/1.1/',)
 
@@ -99,7 +99,7 @@ class LastFM(LastFMHandler):
 
     def __init__(self):
         LastFMHandler.__init__(self)
-        self.state = False # if logged in
+        self.state = False  # if logged in
 
     def connect(self, username, password):
 #        getPage(self.host,self.port
@@ -348,7 +348,7 @@ class LastFM(LastFMHandler):
                 nodex['name'] = self.XMLget_txt(node, "name", "N/A")
                 nodex['artist'] = self.XMLget_txt(node, "artist", "N/A")
                 nodex['playcount'] = self.XMLget_txt(node, "playcount", "N/A")
-                nodex['stationurl'] = "lastfm://artist/" + nodex['artist'].replace(" ", "%20") + "/similarartists"#+nodex['name'].replace(" ","%20")
+                nodex['stationurl'] = "lastfm://artist/" + nodex['artist'].replace(" ", "%20") + "/similarartists"  # +nodex['name'].replace(" ","%20")
                 nodex['url'] = self.XMLget_txt(node, "url", "N/A")
                 nodex['_display'] = nodex['artist'] + " - " + nodex['name']
                 data.append(nodex)
@@ -433,7 +433,7 @@ class LastFMPlaylist:
         this is the new way last.fm handles streams with metadata
     """
     DEFAULT_NAMESPACES = (None,)
-    DUBLIN_CORE = ('http://purl.org/dc/elements/1.1/',) #why do i need this?
+    DUBLIN_CORE = ('http://purl.org/dc/elements/1.1/',)  # why do i need this?
 
     name = "N/A"
     creator = "N/A"

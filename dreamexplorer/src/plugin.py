@@ -645,7 +645,7 @@ class DreamExplorerII(Screen):
 		if not (self["filelist"].canDescent()):
 			source = self["filelist"].getCurrentDirectory() + self["filelist"].getFilename()
 			self.session.openWithCallback(self.callbackCPmaniger, CPmaniger, source)
-		elif (self["filelist"].getSelectionIndex() != 0) and (self["filelist"].canDescent()): #NEW
+		elif (self["filelist"].getSelectionIndex() != 0) and (self["filelist"].canDescent()):  # NEW
 			source = self["filelist"].getSelection()[0]
 			self.session.openWithCallback(self.callbackCPmaniger, CPmaniger, source)
 

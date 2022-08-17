@@ -36,7 +36,7 @@ class XMLHelpReader:
 			elif index == 1:
 				return lambda: [XMLHelpPage(x) for x in self.__dom.findall('page')]
 			elif index == 2:
-				return self.__dom.get('skin', "") # additional skin name
+				return self.__dom.get('skin', "")  # additional skin name
 			raise IndexError('no more indices')
 		raise RuntimeError('no valid dom')
 

@@ -20,7 +20,7 @@ def main(session, *args, **kwargs):
 	s = session.nav.getCurrentService()
 	if s:
 		info = s.info()
-		event = info.getEvent(0) # 0 = now, 1 = next
+		event = info.getEvent(0)  # 0 = now, 1 = next
 		name = event and event.getEventName() or ''
 	else:
 		name = session.nav.getCurrentlyPlayingServiceReference().toString()
@@ -44,7 +44,7 @@ def eventinfo(session, eventName="", **kwargs):
 		s = session.nav.getCurrentService()
 		if s:
 			info = s.info()
-			event = info.getEvent(0) # 0 = now, 1 = next
+			event = info.getEvent(0)  # 0 = now, 1 = next
 			eventName = event and event.getEventName() or ''
 	session.open(EPGSearch, eventName)
 

@@ -3,7 +3,7 @@ from __future__ import print_function
 from twisted.internet import reactor
 from twisted.web import client
 import six
-valid_types = ("MP3", "PLS") #list of playable mediatypes
+valid_types = ("MP3", "PLS")  # list of playable mediatypes
 
 
 def getPage(url, contextFactory=None, *args, **kwargs):
@@ -70,7 +70,7 @@ class StreamInterface:
         self.session = session
         self.cbListLoaded = cbListLoaded
 
-        self.list = [] # contains the streams in this iface
+        self.list = []  # contains the streams in this iface
 
     def getList(self):
         #loads a list auf Streams into self.list

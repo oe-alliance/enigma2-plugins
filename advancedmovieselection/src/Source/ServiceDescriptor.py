@@ -31,8 +31,8 @@ from .Config import config
 
 class MovieInfo():
     idDVB = eServiceReference.idDVB
-    idDVD = 0x1111 # 4369
-    idMP3 = 0x1001 # 4097
+    idDVD = 0x1111  # 4369
+    idMP3 = 0x1001  # 4097
     idBD = 0x0004
 
     def __init__(self, name, serviceref, info=None, begin=-1, length=-1, file_name=None):

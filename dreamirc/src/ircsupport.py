@@ -189,7 +189,7 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
         group = params[2][1:].lower()
         users = params[3].split()
         for ui in range(len(users)):
-            while users[ui][0] in ["@", "+"]: # channel modes
+            while users[ui][0] in ["@", "+"]:  # channel modes
                 users[ui] = users[ui][1:]
         if group not in self._namreplies:
             self._namreplies[group] = []

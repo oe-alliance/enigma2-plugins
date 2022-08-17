@@ -7,7 +7,7 @@ import os
 
 from enigma import eTimer
 from Components.Console import Console
-from Components.Harddisk import harddiskmanager #global harddiskmanager
+from Components.Harddisk import harddiskmanager  # global harddiskmanager
 from xml.etree.cElementTree import parse as cet_parse
 from shutil import rmtree
 import six
@@ -15,7 +15,7 @@ import six
 XML_FSTAB = "/etc/enigma2/automounts.xml"
 
 
-def rm_rf(d): # only for removing the ipkg stuff from /media/hdd subdirs
+def rm_rf(d):  # only for removing the ipkg stuff from /media/hdd subdirs
 	try:
 		for path in (os.path.join(d, f) for f in os.listdir(d)):
 			if os.path.isdir(path):
@@ -69,7 +69,7 @@ class AutoMount():
 			else:
 				return Len > 0 and definitions[Len - 1].text or default
 
-		mountusing = 0 # 0=old_enigma2, 1 =fstab, 2=enigma2
+		mountusing = 0  # 0=old_enigma2, 1 =fstab, 2=enigma2
 		# Config is stored in "mountmanager" element
 		# Read out NFS Mounts
 		for autofs in tree.findall("autofs"):
@@ -464,7 +464,7 @@ class AutoMount():
 			mounttype = sharedata['mounttype']
 			mountusing = sharedata['mountusing']
 
-			if sharedata['hdd_replacement'] == 'True' or sharedata['hdd_replacement'] is True: #hdd replacement hack
+			if sharedata['hdd_replacement'] == 'True' or sharedata['hdd_replacement'] is True:  # hdd replacement hack
 				path = os.path.join('/media/hdd')
 				sharepath = os.path.join('/media/net', sharedata['sharename'])
 			else:

@@ -4214,7 +4214,7 @@ class FritzCallFBF_upnp():
 					self.info("Ignoring entry with empty number for '''%s'''", (__(thisname)))
 					continue
 				else:
-					dummy = _("fax_work") + _("fax_home") + _("pager") # this is just to trigger localisation; WTF?!?!
+					dummy = _("fax_work") + _("fax_home") + _("pager")  # this is just to trigger localisation; WTF?!?!
 					thisType = number.attrib["type"]
 					# self.debug("thisType: %s",  thisType)
 					if thisType.startswith('label:'):

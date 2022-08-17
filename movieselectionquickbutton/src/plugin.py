@@ -169,7 +169,7 @@ def startPlugin(self, pname, index):
 
 
 def noUpdateTages(self):
-	pass #nothing to do here, just ovewrite the method
+	pass  # nothing to do here, just ovewrite the method
 
 
 class MovieSelectionButtonSetup(ConfigListScreen, Screen):

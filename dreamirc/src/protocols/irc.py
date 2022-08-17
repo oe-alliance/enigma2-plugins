@@ -551,7 +551,7 @@ class IRCClient(basic.LineReceiver):
     _queue = None
     _queueEmptying = None
 
-    delimiter = '\n' # '\r\n' will also work (see dataReceived)
+    delimiter = '\n'  # '\r\n' will also work (see dataReceived)
 
     __pychecker__ = 'unusednames=params,prefix,channel'
 
@@ -1023,7 +1023,7 @@ class IRCClient(basic.LineReceiver):
         message = params[-1]
 
         if not message:
-            return # don't raise an exception if some idiot sends us a blank message
+            return  # don't raise an exception if some idiot sends us a blank message
 
         if message[0] == X_DELIM:
             m = ctcpExtract(message)
@@ -1866,7 +1866,7 @@ class DccFileReceive(DccFileReceiveBasic):
             logmsg = ("%s  %d/%d bytes received"
                       % (logmsg, self.bytesReceived, self.fileSize))
             if self.bytesReceived == self.fileSize:
-                pass # Hooray!
+                pass  # Hooray!
             elif self.bytesReceived < self.fileSize:
                 logmsg = ("%s (Warning: %d bytes short)"
                           % (logmsg, self.fileSize - self.bytesReceived))

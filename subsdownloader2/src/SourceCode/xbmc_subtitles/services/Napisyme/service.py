@@ -53,7 +53,7 @@ def getallsubs(content, title, subtitles_list, file_original_path):
 #def search_subtitles( file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack ): #standard input
 
 
-def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack, screen_sessiom): #standard input
+def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack, screen_sessiom):  # standard input
     subtitles_list = []
     msg = ""
     if len(tvshow) > 0:
@@ -74,7 +74,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
         episode_full = str(episode)
       url = '%s%s+%sx%s' % (main_url, tvshow_plus, season_full, episode_full)
     else:
-      original_title = title #xbmc.getInfoLabel("VideoPlayer.OriginalTitle")
+      original_title = title  # xbmc.getInfoLabel("VideoPlayer.OriginalTitle")
       log(__name__, "Original title: [%s]" % (original_title))
       movie_title_plus = original_title.replace(" ", "+")
       url = '%s%s' % (main_url, movie_title_plus)
@@ -82,7 +82,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     response = urllib2.urlopen(url)
     content = response.read()
     getallsubs(content, title, subtitles_list, file_original_path)
-    return subtitles_list, "", "" #standard output
+    return subtitles_list, "", ""  # standard output
 
 #def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id): #standard input
 
@@ -101,4 +101,4 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     zipped_file = zip_extractor(zip_subs, destination_dir=tmp_sub_dir)
     subs_file = zipped_file.extract_zipped_file()
     os.remove(zip_subs)
-    return True, language, subs_file #standard output
+    return True, language, subs_file  # standard output

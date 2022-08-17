@@ -122,7 +122,7 @@ class MovieList(GUIComponent):
 #			self.l.setFont(1, gFont("Regular", 14))
 #			self.l.setItemHeight(37)
 		else:
-			self.l.setFont(0, gFont("Regular", 20))	# MINIMAL
+			self.l.setFont(0, gFont("Regular", 20))  # MINIMAL
 			self.l.setFont(1, gFont("Regular", 16))
 			self.l.setItemHeight(25)
 
@@ -135,14 +135,14 @@ class MovieList(GUIComponent):
 		width = self.l.getItemSize().width()
 		len = tinfo[5]			#tinfo = [type, pixmap, txt, description, service, len]
 
-		if len <= 0: #recalc len when not already done
+		if len <= 0:  # recalc len when not already done
 			cur_idx = self.l.getCurrentSelectionIndex()
 			x = self.list[cur_idx]
 			if config.usage.load_length_of_movies_in_moviellist.value:
-				len = x[1].getLength(x[0]) #recalc the movie length...
+				len = x[1].getLength(x[0])  # recalc the movie length...
 			else:
 				len = 0		#dont recalc movielist to speedup loading the list
-			self.list[cur_idx][3][5] = len	#update entry in list... so next time we don't need to recalc
+			self.list[cur_idx][3][5] = len  # update entry in list... so next time we don't need to recalc
 
 		if len > 0:
 			len = "%d:%02d" % (len / 60, len % 60)
@@ -157,7 +157,7 @@ class MovieList(GUIComponent):
 		typ = tinfo[0]
 		service = None
 		if typ & (self.VIRT_UP | self.REAL_UP):
-			txt = tinfo[3]	# [2] == " " for alpha-sort to top
+			txt = tinfo[3]  # [2] == " " for alpha-sort to top
 		else:
 			txt = tinfo[2]
 			if begin > 0:
@@ -273,7 +273,7 @@ class MovieList(GUIComponent):
 				self.list.remove(l)
 				break
 		self.l.setList(self.list)
-		if len(self.list) == 1 and self.list[0][3][0] & self.VIRT_UP:	# last movie of a series is gone
+		if len(self.list) == 1 and self.list[0][3][0] & self.VIRT_UP:  # last movie of a series is gone
 			service = self.list[0][0]
 			self.moveTo(service, True)
 			assert service.flags == eServiceReference.canDescent
@@ -298,7 +298,7 @@ class MovieList(GUIComponent):
 				if rc == 0:
 					ele0 = i
 		if ele0 > 0 and repeats == 1:
-			self.list[ele0][3][1] = None	# remove "#0" from only lonely surviving movie
+			self.list[ele0][3][1] = None  # remove "#0" from only lonely surviving movie
 #			print "[SF-Plugin] removeService: remove #0 from " + self.list[ele0][3][2]
 
 	def __len__(self):
@@ -328,12 +328,12 @@ class MovieList(GUIComponent):
 			info = self.serviceHandler.info(parent)
 			if info is not None:
 				txt = info.getName(parent)																# Titel
-				service = ServiceReference(info.getInfoString(parent, iServiceInformation.sServiceref)).getServiceName()	# Sender
+				service = ServiceReference(info.getInfoString(parent, iServiceInformation.sServiceref)).getServiceName()  # Sender
 				description = info.getInfoString(parent, iServiceInformation.sDescription)				# Beschreibung
 #				begin = info.getInfo(root, iServiceInformation.sTimeCreate)
 				begin = self.MAXTIME
 				parent.flags = eServiceReference.flagDirectory | eServiceReference.sort1
-				tinfo = [self.REAL_DIR | self.REAL_UP, self.fupMap, "  0", txt, service, 1]	# "  0" sorts before VIRT_UP
+				tinfo = [self.REAL_DIR | self.REAL_UP, self.fupMap, "  0", txt, service, 1]  # "  0" sorts before VIRT_UP
 				return ((parent, info, begin, tinfo))
 
 	def load(self, root, filter_tags):
@@ -384,7 +384,7 @@ class MovieList(GUIComponent):
 				continue
 
 			txt = info.getName(serviceref)
-			service = ServiceReference(info.getInfoString(serviceref, iServiceInformation.sServiceref)).getServiceName()	# Sender
+			service = ServiceReference(info.getInfoString(serviceref, iServiceInformation.sServiceref)).getServiceName()  # Sender
 			description = info.getInfoString(serviceref, iServiceInformation.sDescription)
 			tinfo = [type, pixmap, txt, description, service, -1]
 

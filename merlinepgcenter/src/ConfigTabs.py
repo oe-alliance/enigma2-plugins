@@ -41,7 +41,7 @@ STYLE_PERCENT_TEXT_LIST_OFF = "7"
 
 SKINDIR = "Extensions/MerlinEPGCenter/skins/"
 
-SKINLIST = [ # order is important (HD_BORDER, XD_BORDER, SD, HD, XD)!
+SKINLIST = [  # order is important (HD_BORDER, XD_BORDER, SD, HD, XD)!
 		(resolveFilename(SCOPE_CURRENT_PLUGIN, ''.join([SKINDIR, "HD_border.xml"])), "HD_border.xml"),
 		(resolveFilename(SCOPE_CURRENT_PLUGIN, ''.join([SKINDIR, "XD_border.xml"])), "XD_border.xml"),
 		(resolveFilename(SCOPE_CURRENT_PLUGIN, ''.join([SKINDIR, "SD_default.xml"])), "SD_default.xml"),

@@ -350,7 +350,7 @@ class RSSFeedView(RSSBaseView):
 			self["content"].list = self.feed.history
 			self["content"].index = 0
 			self.updateInfo()
-			self.setConditionalTitle() # Update title
+			self.setConditionalTitle()  # Update title
 			return (self.feed.title, self.feed.history, self.id)
 		return (self.feed.title, self.feed.history, self.id)
 
@@ -361,7 +361,7 @@ class RSSFeedView(RSSBaseView):
 			self["content"].list = self.feed.history
 			self["content"].index = 0
 			self.updateInfo()
-			self.setConditionalTitle() # Update title
+			self.setConditionalTitle()  # Update title
 			return (self.feed.title, self.feed.history, self.id)
 		return (self.feed.title, self.feed.history, self.id)
 
@@ -371,7 +371,7 @@ class RSSFeedView(RSSBaseView):
 
 	def showCurrentEntry(self):
 		current_entry = self["content"].current
-		if not current_entry: # empty list
+		if not current_entry:  # empty list
 			return
 
 		self.session.openWithCallback(
@@ -386,7 +386,7 @@ class RSSFeedView(RSSBaseView):
 
 	def selectEnclosure(self):
 		current_entry = self["content"].current
-		if not current_entry: # empty list
+		if not current_entry:  # empty list
 			return
 
 		RSSBaseView.selectEnclosure(self, current_entry[3])

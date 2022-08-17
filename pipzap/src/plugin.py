@@ -167,7 +167,7 @@ def ChannelSelection_cancel(self, *args, **kwargs):
 	if self.revertMode is None and self.dopipzap:
 		# This unfortunately won't work with subservices
 		self.setCurrentSelection(self.session.pip.getCurrentService())
-		self.revertMode = 1337 # not in (None, MODE_TV, MODE_RADIO)
+		self.revertMode = 1337  # not in (None, MODE_TV, MODE_RADIO)
 	baseMethods.ChannelSelection_cancel(self, *args, **kwargs)
 
 #pragma mark -
@@ -384,10 +384,10 @@ def InfoBarPiP_swapPiP(self):
 				else:
 					slist.servicelist.setCurrent(pipref)
 
-				slist.addToHistory(pipref) # add service to history
-				slist.lastservice.value = pipref.toString() # save service as last playing one
-			self.session.nav.stopService() # stop portal
-			self.session.nav.playService(pipref) # start subservice
+				slist.addToHistory(pipref)  # add service to history
+				slist.lastservice.value = pipref.toString()  # save service as last playing one
+			self.session.nav.stopService()  # stop portal
+			self.session.nav.playService(pipref)  # start subservice
 
 #pragma mark -
 #pragma mark Picture in Picture
@@ -568,7 +568,7 @@ def activate(session, *args, **kwargs):
 	infobar = InfoBar.instance
 	if not infobar:
 		session.open(MessageBox, _("Unable to access InfoBar.\npipzap not available."), MessageBox.TYPE_ERROR)
-	elif hasattr(infobar, 'togglePipzap'): # check if plugin is already hooked into enigma2
+	elif hasattr(infobar, 'togglePipzap'):  # check if plugin is already hooked into enigma2
 		infobar.togglePipzap()
 	else:
 		session.open(MessageBox, _("pipzap not properly installed.\nPlease restart Enigma2."), MessageBox.TYPE_ERROR)
@@ -601,7 +601,7 @@ def showHideNotifier(el):
 		return
 	session = infobar.session
 	slist = infobar.servicelist
-	if slist and hasattr(slist, 'dopipzap'): # check if plugin is already hooked into enigma2
+	if slist and hasattr(slist, 'dopipzap'):  # check if plugin is already hooked into enigma2
 		if session.pipshown:
 			if el.value and slist.dopipzap:
 				session.pip.active()
@@ -621,7 +621,7 @@ def Plugins(**kwargs):
 		PluginDescriptor(
 			where=PluginDescriptor.WHERE_AUTOSTART,
 			fnc=autostart,
-			needsRestart=True, # XXX: force restart for now as I don't think the plugin will work properly without one
+			needsRestart=True,  # XXX: force restart for now as I don't think the plugin will work properly without one
 		),
 		PluginDescriptor(
 			where=PluginDescriptor.WHERE_MENU,

@@ -26,18 +26,18 @@ class GrowlTalk(DatagramProtocol):
 		self.addr = (ip, GROWL_UDP_PORT)
 		if self.host.enable_outgoing.value:
 			p = pack("!BBHBB",
-					1, # version
-					0, # registration
-					7, # length of application name == len("growlee")
-					1, # one notification
-					1, # one of them default
+					1,  # version
+					0,  # registration
+					7,  # length of application name == len("growlee")
+					1,  # one notification
+					1,  # one of them default
 			)
-			p += "growlee" # application name
+			p += "growlee"  # application name
 			p += pack("!H",
-					32, # length of first notification type name
+					32,  # length of first notification type name
 			)
-			p += "Notifications from your Dreambox" # first notification type name
-			p += "\x00" # index of default notifications
+			p += "Notifications from your Dreambox"  # first notification type name
+			p += "\x00"  # index of default notifications
 
 			password = self.host.password.value
 			checksum = md5()
@@ -60,13 +60,13 @@ class GrowlTalk(DatagramProtocol):
 			return
 
 		p = pack("!BBHHHHH",
-				1, # version
-				1, # notification
-				flags, # 3-bit signed priority, 1 bit sticky in rightmost nibble
-				32, # len("Notifications from your Dreambox")
+				1,  # version
+				1,  # notification
+				flags,  # 3-bit signed priority, 1 bit sticky in rightmost nibble
+				32,  # len("Notifications from your Dreambox")
 				len(title),
 				len(description),
-				7, # len("growlee")
+				7,  # len("growlee")
 		)
 		p += "Notifications from your Dreambox"
 		p += title

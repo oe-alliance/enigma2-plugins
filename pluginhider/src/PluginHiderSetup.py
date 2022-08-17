@@ -85,7 +85,7 @@ class PluginHiderSetup(Screen, HelpableScreen):
 
 			if self.selectedList == LIST_PLUGINS:
 				plugin(session=self.session)
-			else: #if self.selectedList == LIST_EXTENSIONS or self.selectedList == LIST_EVENTINFO:
+			else:  # if self.selectedList == LIST_EXTENSIONS or self.selectedList == LIST_EVENTINFO:
 				from Screens.InfoBar import InfoBar
 				instance = InfoBar.instance
 				args = inspect.getargspec(plugin.__call__)[0]
@@ -135,7 +135,7 @@ class PluginHiderSetup(Screen, HelpableScreen):
 		elif self.selectedList == LIST_EXTENSIONS:
 			list = fnc([PluginDescriptor.WHERE_EXTENSIONSMENU])
 			selected = config.plugins.pluginhider.hideextensions.value
-		else: #if self.selectedList == LIST_EVENTINFO:
+		else:  # if self.selectedList == LIST_EVENTINFO:
 			list = fnc([PluginDescriptor.WHERE_EVENTINFO])
 			selected = config.plugins.pluginhider.hideeventinfo.value
 		self["tabbar"].setPixmapNum(self.selectedList)
@@ -165,5 +165,5 @@ class PluginHiderSetup(Screen, HelpableScreen):
 			config.plugins.pluginhider.hideplugins.value = [x[1].name for x in selected]
 		elif self.selectedList == LIST_EXTENSIONS:
 			config.plugins.pluginhider.hideextensions.value = [x[1].name for x in selected]
-		else: #if self.selectedList == LIST_EVENTINFO:
+		else:  # if self.selectedList == LIST_EVENTINFO:
 			config.plugins.pluginhider.hideeventinfo.value = [x[1].name for x in selected]

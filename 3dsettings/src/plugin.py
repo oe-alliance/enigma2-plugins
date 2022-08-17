@@ -59,10 +59,10 @@ def getmode():
 
 def toggleDisplay(configElement):
 	from Components.Lcd import LCD
-	if configElement.value == False: # turn display on
+	if configElement.value == False:  # turn display on
 		print("[3D Settings] turning display on")
 		LCD().setBright(config.lcd.bright.value)
-	elif (config.plugins.threed.disableDisplay.value == True) and (getmode() != THREE_D_OFF): # turn display off
+	elif (config.plugins.threed.disableDisplay.value == True) and (getmode() != THREE_D_OFF):  # turn display off
 		print("[3D Settings] turning display off")
 		LCD().setBright(0)
 	eDBoxLCD.getInstance().update()
@@ -90,7 +90,7 @@ def switchmode(mode):
 		print("[3D Settings] switching to mode ", mode)
 		open("/proc/stb/fb/primary/3d", "w").write(modes[mode])
 		AutoThreeD.instance.setLastMode(mode)
-		if eDBoxLCD.getInstance().detected(): # display found, update it
+		if eDBoxLCD.getInstance().detected():  # display found, update it
 			config.plugins.threed.toggleState.setValue(getmode() != THREE_D_OFF)
 			toggleDisplay(config.plugins.threed.toggleState)
 
@@ -120,14 +120,14 @@ class AutoThreeD(Screen):
 		self.newService = False
 		self.lastmode = getmode()
 		assert not AutoThreeD.instance, "only one AutoThreeD instance is allowed!"
-		AutoThreeD.instance = self # set instance
+		AutoThreeD.instance = self  # set instance
 
-		if eDBoxLCD.getInstance().detected(): # display found
+		if eDBoxLCD.getInstance().detected():  # display found
 			from Components.config import NoSave
 			config.plugins.threed.disableDisplay = ConfigYesNo(default=False)
 			config.plugins.threed.disableDisplay.addNotifier(toggleDisplay, initial_call=False)
 			from Components.config import NoSave
-			config.plugins.threed.toggleState = NoSave(ConfigYesNo(default=True)) # True = display on, False = display off
+			config.plugins.threed.toggleState = NoSave(ConfigYesNo(default=True))  # True = display on, False = display off
 			config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
 	def __evStart(self):
@@ -147,9 +147,9 @@ class AutoThreeD(Screen):
 					if info:
 						name = ServiceReference(info.getInfoString(r, iServiceInformation.sServiceref)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
 					else:
-						name = os_basename(spath) # filename
+						name = os_basename(spath)  # filename
 				else:
-					name = serviceRef.getName() # partnerbox servicename
+					name = serviceRef.getName()  # partnerbox servicename
 			else:
 				name = ServiceReference(ref.info().getInfoString(iServiceInformation.sServiceref)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
 			if "3d" in name.lower():
@@ -222,7 +222,7 @@ class ThreeDSettings(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("Show side by side option in extension menu"), config.plugins.threed.showSBSmenu))
 		self.list.append(getConfigListEntry(_("Show top/bottom option in extension menu"), config.plugins.threed.showTBmenu))
 		self.list.append(getConfigListEntry(_("Switch OSD automatically"), config.plugins.threed.autothreed))
-		if eDBoxLCD.getInstance().detected(): # display found
+		if eDBoxLCD.getInstance().detected():  # display found
 			self.list.append(getConfigListEntry(_("Turn off display"), config.plugins.threed.disableDisplay))
 		currentmode = getmode()
 		if currentmode in [THREE_D_SIDE_BY_SIDE, THREE_D_TOP_BOTTOM]:

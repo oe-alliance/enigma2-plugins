@@ -120,8 +120,8 @@ class NetworkBrowser(Screen):
 		self.mounts = None
 		self.onChangedEntry = []
 		self.expanded = []
-		self.cache_ttl = 604800 #Seconds cache is considered valid, 7 Days should be ok
-		self.cache_file = '/etc/enigma2/networkbrowser.cache' #Path to cache directory
+		self.cache_ttl = 604800  # Seconds cache is considered valid, 7 Days should be ok
+		self.cache_file = '/etc/enigma2/networkbrowser.cache'  # Path to cache directory
 		self.Console = Console()
 
 		self["key_red"] = StaticText(_("Close"))
@@ -321,7 +321,7 @@ class NetworkBrowser(Screen):
 	def getNetworkShares(self, hostip, hostname, devicetype):
 		sharelist = []
 		self.sharecache_file = None
-		self.sharecache_file = '/etc/enigma2/' + hostname.strip() + '.cache' #Path to cache directory
+		self.sharecache_file = '/etc/enigma2/' + hostname.strip() + '.cache'  # Path to cache directory
 		username = ""
 		password = ""
 		if os_path.exists(self.sharecache_file):
@@ -388,7 +388,7 @@ class NetworkBrowser(Screen):
 	def updateNetworkList(self):
 		self.list = []
 		self.network = {}
-		self.mounts = iAutoMount.getMountsList() # reloading mount list
+		self.mounts = iAutoMount.getMountsList()  # reloading mount list
 		for x in self.networklist:
 			if x[2] not in self.network:
 				self.network[x[2]] = []
@@ -410,7 +410,7 @@ class NetworkBrowser(Screen):
 				self.list.append((hostentry, expandedIcon, name, None, None, None, None, None))
 				for share in networkshares:
 					self.list.append(self.BuildNetworkShareEntry(share))
-			else: # HOSTLIST - VIEW
+			else:  # HOSTLIST - VIEW
 				hostentry = self.network[x][0][1]
 				name = hostentry[2] + " ( " + hostentry[1].strip() + " )"
 				if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png")):
@@ -524,7 +524,7 @@ class NetworkBrowser(Screen):
 		selectedhost = sel[0][2]
 		selectedhostname = sel[0][1]
 
-		self.hostcache_file = '/etc/enigma2/' + selectedhostname.strip() + '.cache' #Path to cache directory
+		self.hostcache_file = '/etc/enigma2/' + selectedhostname.strip() + '.cache'  # Path to cache directory
 		if os_path.exists(self.hostcache_file):
 			try:
 				self.hostdata = load_cache(self.hostcache_file)
@@ -542,13 +542,13 @@ class NetworkBrowser(Screen):
 		if (ret == True):
 			self.session.openWithCallback(self.UserDialogClosed, UserDialog, self.skin_path, selectedhostname.strip())
 		else:
-			if sel[0][0] == 'host': # host entry selected
+			if sel[0][0] == 'host':  # host entry selected
 				if selectedhost in self.expanded:
 					self.expanded.remove(selectedhost)
 				else:
 					self.expanded.append(selectedhost)
 				self.updateNetworkList()
-			elif sel[0][0] in ('nfsShare', 'smbShare'): # share entry selected
+			elif sel[0][0] in ('nfsShare', 'smbShare'):  # share entry selected
 				self.openMountEdit(sel[0])
 
 	def UserDialogClosed(self, *ret):
@@ -559,7 +559,7 @@ class NetworkBrowser(Screen):
 		if selection is not None and len(selection):
 			mounts = iAutoMount.getMountsList()
 			newmount = True
-			if selection[0] == 'nfsShare': # share entry selected
+			if selection[0] == 'nfsShare':  # share entry selected
 				#Initialize blank mount enty
 				data = {'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False}
 				# add data
@@ -575,7 +575,7 @@ class NetworkBrowser(Screen):
 					if sharedata['ip'] == selection[2] and sharedata['sharedir'] in selection[4]:
 						data = sharedata
 						newmount = False
-			elif selection[0] == 'smbShare': # share entry selected
+			elif selection[0] == 'smbShare':  # share entry selected
 				#Initialize blank mount enty
 				data = {'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False}
 				# add data
@@ -586,7 +586,7 @@ class NetworkBrowser(Screen):
 				data['sharedir'] = selection[3]
 				data['options'] = "rw,utf8,vers=2.0"
 				self.sharecache_file = None
-				self.sharecache_file = '/etc/enigma2/' + selection[1].strip() + '.cache' #Path to cache directory
+				self.sharecache_file = '/etc/enigma2/' + selection[1].strip() + '.cache'  # Path to cache directory
 				data['username'] = ""
 				data['password'] = ""
 				if os_path.exists(self.sharecache_file):

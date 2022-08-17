@@ -42,7 +42,7 @@ class BroadcastProtocol(DatagramProtocol):
 		self.parent = parent
 		self.port = config.plugins.birthdayreminder.broadcastPort.value
 		# self.uuid = str(getnode()) # sent with broadcasts to identify ourselves when receiving our own broascast :o
-		self.uuid = self.getNodeHack() # sent with broadcasts to identify ourselves when receiving our own broascast :o
+		self.uuid = self.getNodeHack()  # sent with broadcasts to identify ourselves when receiving our own broascast :o
 
 	def startProtocol(self):
 		self.transport.socket.setsockopt(SOL_SOCKET, SO_BROADCAST, True)
@@ -52,15 +52,15 @@ class BroadcastProtocol(DatagramProtocol):
 		self.transport.write(newMessage, ("255.255.255.255", self.port))
 
 	def datagramReceived(self, data, addr):
-		parts = data.split() # filter unknown data. we expect two parts, a uuid and a "command"
+		parts = data.split()  # filter unknown data. we expect two parts, a uuid and a "command"
 		if len(parts) != 2:
 			return
-		if parts[0] == self.uuid: # ignore our own package
+		if parts[0] == self.uuid:  # ignore our own package
 			return
-		elif parts[1] == "offeringList": # a box is offering to send a list
+		elif parts[1] == "offeringList":  # a box is offering to send a list
 			print("[Birthday Reminder] received a list offer from", addr[0])
 			self.parent.requestBirthdayList(addr)
-		elif parts[1] == "ping": # are we there?
+		elif parts[1] == "ping":  # are we there?
 			print("[Birthday Reminder] received ping from", addr[0])
 			self.parent.sendPingResponse(addr)
 
@@ -87,9 +87,9 @@ class TransferServerProtocol(Protocol):
 			data = self.parent.readRawFile()
 			if data:
 				self.transport.write(data)
-		else: # should be a pickled birthday list...
+		else:  # should be a pickled birthday list...
 			receivedList = None
-			try: # let's see if it's pickled data
+			try:  # let's see if it's pickled data
 				receivedList = pickle_loads(data)
 				print("[Birthday Reminder] received birthday list from", peer)
 			except:

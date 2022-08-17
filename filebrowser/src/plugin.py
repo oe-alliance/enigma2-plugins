@@ -110,9 +110,9 @@ class FilebrowserScreen(Screen, HelpableScreen):
         self.close()
 
     def ok(self):
-        if self.SOURCELIST.canDescent(): # isDir
+        if self.SOURCELIST.canDescent():  # isDir
             self.SOURCELIST.descent()
-            if self.SOURCELIST.getCurrentDirectory(): #??? when is it none
+            if self.SOURCELIST.getCurrentDirectory():  # ??? when is it none
                 self.setTitle(self.SOURCELIST.getCurrentDirectory())
         else:
             self.onFileAction()

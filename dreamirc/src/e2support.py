@@ -265,7 +265,7 @@ class AbstractAccount(styles.Versioned):
         @returntype: Failure
         """
         self._isConnecting = 0
-        self._isOnline = 0 # just in case
+        self._isOnline = 0  # just in case
         return reason
 
     def _clientLost(self, client, reason):

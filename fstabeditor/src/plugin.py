@@ -279,7 +279,7 @@ class fstabEditorScreen(Screen, ConfigListScreen, HelpableScreen):
 		if self.selectedEntry == 1:
 			self.session.openWithCallback(self.dirSelectDlgClosed, dirSelectDlg, "/media/dummy/", False)  # just add any (not even existing) subdir to start in /media
 		elif self.selectedEntry == 0:
-			self.session.openWithCallback(self.dirSelectDlgClosed, dirSelectDlg, "/dev/dummy/", True) # just add any (not even existing) subdir to start in /dev
+			self.session.openWithCallback(self.dirSelectDlgClosed, dirSelectDlg, "/dev/dummy/", True)  # just add any (not even existing) subdir to start in /dev
 
 	def dirSelectDlgClosed(self, mountpoint):
 		#use print to see in crashlog what's been selected

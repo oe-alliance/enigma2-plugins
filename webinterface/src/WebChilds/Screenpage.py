@@ -53,7 +53,7 @@ class ScreenPage(resource.Resource):
 				request.setHeader('Content-Type', 'application/xhtml+xml; charset=UTF-8')
 			# now go and write the Output
 			# request.finish() is called inside webif.py (requestFinish() which is called via renderPage())
-			webif.renderPage(request, path, self.session) # login?
+			webif.renderPage(request, path, self.session)  # login?
 			request.setResponseCode(http.OK)
 
 		elif os_path.isdir(path) and self.addSlash is True:

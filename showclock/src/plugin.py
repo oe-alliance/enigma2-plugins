@@ -68,7 +68,7 @@ VERSION = "0.6"
 # 0.5 Minor code optimization
 # 0.6 Simplify translation code: Setting the os LANGUAGE variable isn't needed anymore
 pluginPrintname = "[ShowClock Ver. %s]" % VERSION
-debug = False # If set True, plugin will print some additional status info to track logic flow
+debug = False  # If set True, plugin will print some additional status info to track logic flow
 ###############################################################################
 
 config.plugins.ShowClock = ConfigSubsection()
@@ -87,7 +87,7 @@ if debug:
 ##############################################################################
 
 
-class ShowClockSetup(Screen, ConfigListScreen): # config
+class ShowClockSetup(Screen, ConfigListScreen):  # config
 
 	skin = """
 		<screen name="ShowClock" position="center,center" size="600,290" title="Show Clock Setup" >
@@ -186,11 +186,11 @@ class ShowClockSetup(Screen, ConfigListScreen): # config
 		return str(self["config"].getCurrent()[1].getText())
 
 	def keyCancel(self):
-		self.hideKeypad() # close help window if open
+		self.hideKeypad()  # close help window if open
 		ConfigListScreen.keyCancel(self)
 
 	def keySave(self):
-		self.hideKeypad() # close help window if open
+		self.hideKeypad()  # close help window if open
 		ConfigListScreen.keySave(self)
 
 	def hideKeypad(self):
@@ -203,7 +203,7 @@ class ShowClockSetup(Screen, ConfigListScreen): # config
 		return SetupSummary
 
 	def keyHelp(self):
-		self.hideKeypad() # close help window if open
+		self.hideKeypad()  # close help window if open
 		self.session.open(MessageBox,
 			_('Modify the settings to match your preferences. To change the clock position, select "Move clock" and relocate using the direction keys. Press OK to store current position and return to the setup menu or EXIT to cancel the moving.\n\nPush key "Exit long" to show the clock while watching TV. Clock will disappear after the specified timeout or by pushing key "Exit long" again.\n\nIf GP3 is installed, weekday shows up in selected language, otherwise always in english.'),
 			MessageBox.TYPE_INFO)
@@ -211,7 +211,7 @@ class ShowClockSetup(Screen, ConfigListScreen): # config
 	def keyMove(self):
 		if debug:
 			print(pluginPrintname, "Move Clock")
-		self.hideKeypad() # close help window if open
+		self.hideKeypad()  # close help window if open
 		self.session.openWithCallback(
 			self.startPositioner, MessageBox,
 			_("Please use direction keys to move the clock.\n\nPress OK to store current position and return to the setup menu or EXIT to cancel the moving."),
@@ -245,7 +245,7 @@ class ShowClockPositioner(Screen):
 		self.limit = (width - self.instance.size().width(), height - self.instance.size().height())
 		if debug:
 			print(pluginPrintname, "Clock X,Y limit: %d,%d" % (self.limit[0], self.limit[1]))
-		self.instance.move(ePoint(min(self.pos[0], self.limit[0]), min(self.pos[1], self.limit[1]))) # ensure clock visabilty even if resolution has changed
+		self.instance.move(ePoint(min(self.pos[0], self.limit[0]), min(self.pos[1], self.limit[1])))  # ensure clock visabilty even if resolution has changed
 
 	def moveRelative(self, x=0, y=0):
 		self.pos = (clip(self.pos[0] + x, 0, self.limit[0]), clip(self.pos[1] + y, 0, self.limit[1]))
@@ -287,7 +287,7 @@ class ShowClock(Screen):
 		self.instance.move(ePoint(
 			min(config.plugins.ShowClock.position_x.value, width - self.instance.size().width()),
 			min(config.plugins.ShowClock.position_y.value, height - self.instance.size().height())
-			)) # ensure clock visabilty even if resolution has changed
+			))  # ensure clock visabilty even if resolution has changed
 
 ##############################################################################
 
@@ -298,7 +298,7 @@ class ShowClockMain():
 		self.clockShown = False
 
 	def gotSession(self, session):
-		self.timer = eTimer() # check timer
+		self.timer = eTimer()  # check timer
 		self.timer.callback.append(self.ShowHide)
 		global globalActionMap
 		readKeymap("/usr/lib/enigma2/python/Plugins/Extensions/ShowClock/keymap.xml")
@@ -307,7 +307,7 @@ class ShowClockMain():
 
 	def ShowHide(self):
 		if self.clockShown:
-			if self.timer.isActive(): # stop timer if running
+			if self.timer.isActive():  # stop timer if running
 				self.timer.stop()
 			self.clockShown = False
 			showClock.dialog.hide()
@@ -325,7 +325,7 @@ showClock = ShowClockMain()
 
 def clockSkin():
 	if width < 1280:
-		if width < 1024: # SD
+		if width < 1024:  # SD
 			currentSkin = """
 				<screen name="ShowClock" size="190,60" zPosition="10" backgroundColor="#50202020" flags="wfNoBorder">
 					<widget source="global.CurrentTime" render="Label" position="55,12" size="58,17" font="Regular;21" halign="left" valign="center" transparent="1">
@@ -338,7 +338,7 @@ def clockSkin():
 						<convert type="ClockToText">Format:%A, %d.%m.%Y</convert>
 					</widget>
 				</screen>"""
-		else: # XD
+		else:  # XD
 			currentSkin = """
 				<screen name="ShowClock" size="250,70" zPosition="10" backgroundColor="#50202020" flags="wfNoBorder">
 					<widget source="global.CurrentTime" render="Label" position="80,10" size="80,25" font="Regular;24" halign="left" valign="center" transparent="1">
@@ -351,7 +351,7 @@ def clockSkin():
 						<convert type="ClockToText">Format:%A, %d.%m.%Y</convert>
 					</widget>
 				</screen>"""
-	else: # HD
+	else:  # HD
 		currentSkin = """
 				<screen name="ShowClock" size="280,80" zPosition="10" backgroundColor="#50202020" flags="wfNoBorder">
 					<widget source="global.CurrentTime" render="Label" position="85,15" size="80,25" font="Regular;30" halign="left" valign="center" transparent="1">
@@ -365,8 +365,8 @@ def clockSkin():
 					</widget>
 				</screen>"""
 
-	try: # try to import DateToText converter (GP3 component) to check for its existence
-		from Components.Converter.DateToText import DateToText # change converter to obtain localized weekdays
+	try:  # try to import DateToText converter (GP3 component) to check for its existence
+		from Components.Converter.DateToText import DateToText  # change converter to obtain localized weekdays
 		currentSkin = currentSkin.replace('<convert type="ClockToText">Format:%A, %d.%m.%Y</convert>', '<convert type="DateToText">NNNN, DD.MM.YYYY</convert>')
 	except ImportError as ie:
 		print(pluginPrintname, "DateToText converter not installed:", ie)

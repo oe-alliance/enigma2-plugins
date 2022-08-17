@@ -238,10 +238,10 @@ class EmissionDetailview(Screen, HelpableScreen):
 			status = torrent.status
 			progressText = ''
 			if status == 'check pending':
-				peerText = _("check pending") # ???
+				peerText = _("check pending")  # ???
 			elif status == 'checking':
 				peerText = _("checking")
-				progressText = str(torrent.recheckProgress) # XXX: what is this? :D
+				progressText = str(torrent.recheckProgress)  # XXX: what is this? :D
 			elif status == 'downloading':
 				peerText = _("Downloading from %d of %d peers") % (torrent.peersSendingToUs, torrent.peersConnected)
 				progressText = _("Downloaded %d of %d MB (%d%%)") % (torrent.downloadedEver / 1048576, torrent.sizeWhenDone / 1048576, torrent.progress)
@@ -266,7 +266,7 @@ class EmissionDetailview(Screen, HelpableScreen):
 			files = torrent.files()
 			for id, x in list(files.items()):
 				completed = x['completed']
-				size = x['size'] or 1 # to avoid division by zero ;-)
+				size = x['size'] or 1  # to avoid division by zero ;-)
 				l.append((id, x['priority'], str(completed / 1048576) + " MB",
 					x['selected'], str(x['name']), str(size / 1048576) + " MB",
 					x['selected'] and _("downloading") or _("skipping"),

@@ -73,7 +73,7 @@ class Request(urllib.request.Request):
 
         urllib.request.Request.__init__(self, url)
         self.add_header('Accept', 'application/json')
-        self.lifetime = 3600 # 1hr
+        self.lifetime = 3600  # 1hr
 
     def new(self, **kwargs):
         """Create a new instance of the request, with tweaked arguments."""

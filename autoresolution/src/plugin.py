@@ -21,7 +21,7 @@ from boxbranding import getImageDistro, getBoxType
 try:
 	from Components.AVSwitch import iAVSwitch as video_hw
 except:
-	from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw # depends on Videomode Plugin
+	from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw  # depends on Videomode Plugin
 
 # modes_available used to be a member variable, but that was removed and
 # the value can now only be accessed using an accessor function.
@@ -266,7 +266,7 @@ class AutoRes(Screen):
 			if port in config.av.videomode:
 				config.av.videomode[port].addNotifier(self.defaultModeChanged)
 			usable = config.plugins.autoresolution.enable.value and not port in ('DVI-PC', 'Scart')
-		else: # videomode changed in normal av setup
+		else:  # videomode changed in normal av setup
 			global videoresolution_dictionary
 			print("[AutoRes] mode changed to", configEntry.value)
 			default = (configEntry.value, _("default") + " (%s)" % configEntry.value)
@@ -332,17 +332,17 @@ class AutoRes(Screen):
 	def __evVideoFramerateChanged(self):
 		print("[AutoRes] got event evFramerateChanged")
 		if not self.timer.isActive() or self.after_switch_delay:
-			self.timer.start(200, True) # give other pending events a chance..
+			self.timer.start(200, True)  # give other pending events a chance..
 
 	def __evVideoSizeChanged(self):
 		print("[AutoRes] got event evVideoSizeChanged")
 		if not self.timer.isActive() or self.after_switch_delay:
-			self.timer.start(200, True) # give other pending events a chance..
+			self.timer.start(200, True)  # give other pending events a chance..
 
 	def __evVideoProgressiveChanged(self):
 		print("[AutoRes] got event evVideoProgressiveChanged")
 		if not self.timer.isActive() or self.after_switch_delay:
-			self.timer.start(200, True) # give other pending events a chance..
+			self.timer.start(200, True)  # give other pending events a chance..
 
 	def determineContent(self):
 		if config.plugins.autoresolution.mode.value != "manual":
@@ -364,7 +364,7 @@ class AutoRes(Screen):
 					pass
 			if info and height != -1 and width != -1 and framerate != -1:
 				videocodec = codec_data.get(info.getInfo(iServiceInformation.sVideoType), "N/A")
-				frate = str(framerate)[:2] #fallback?
+				frate = str(framerate)[:2]  # fallback?
 				if framerate in frqdic:
 					frate = frqdic[framerate]
 
@@ -376,26 +376,26 @@ class AutoRes(Screen):
 					if ("%3a//" in str_service or str_service.rsplit(":", 1)[1].startswith("/")) and prog != "p":
 						prog = "p"
 
-				if have_2160p and (height >= 2100 or width >= 3200): # 2160 content
+				if have_2160p and (height >= 2100 or width >= 3200):  # 2160 content
 					if frate in ('24', '25', '30') and prog == 'p':
 						new_mode = 'p2160_%s' % frate
 					elif frate in ('50', '60') and prog == 'p':
 						new_mode = 'uhd_p'
 					else:
-						new_mode = 'uhd_i' # 2160i content
-				elif (height >= 900 or width >= 1600) and frate in ('24', '25', '30') and prog == 'p': # 1080p content
+						new_mode = 'uhd_i'  # 2160i content
+				elif (height >= 900 or width >= 1600) and frate in ('24', '25', '30') and prog == 'p':  # 1080p content
 					new_mode = 'p1080_%s' % frate
-				elif (576 < height < 900 or 720 < width < 1600) and frate == '24' and prog == 'p': # 720p24 content
+				elif (576 < height < 900 or 720 < width < 1600) and frate == '24' and prog == 'p':  # 720p24 content
 					new_mode = 'p720_24'
-				elif frate in ('24'): # always 1080p24 content
+				elif frate in ('24'):  # always 1080p24 content
 					new_mode = 'p1080_24'
-				elif (576 < height < 900 or 720 < width < 1600) and frate == '50' and prog == 'p': # 720p50 content
+				elif (576 < height < 900 or 720 < width < 1600) and frate == '50' and prog == 'p':  # 720p50 content
 					new_mode = 'p720_50'
 				elif (height <= 576) and (width <= 720) and frate in ('25', '50'):
 					new_mode = 'sd_%s_50' % prog
 				elif (height <= 480) and (width <= 720) and frate in ('24', '30', '60'):
 					new_mode = 'sd_%s_60' % prog
-				elif have_1080p and (height >= 900 or width >= 1600) and frate in ('50', '60') and prog == 'p': # 1080p50/60 content
+				elif have_1080p and (height >= 900 or width >= 1600) and frate in ('50', '60') and prog == 'p':  # 1080p50/60 content
 					new_mode = 'fhd_p'
 				else:
 					new_mode = 'hd_%s' % prog

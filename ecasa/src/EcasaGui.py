@@ -575,7 +575,7 @@ class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 		cur = self['list'].getCurrent()
 		if cur and cur[-1]:
 			album = cur[-1]
-			title = cur[0] # NOTE: retrieve from array to be independent of underlaying API as the flickr and picasa albums are not compatible here
+			title = cur[0]  # NOTE: retrieve from array to be independent of underlaying API as the flickr and picasa albums are not compatible here
 			thread = SimpleThread(lambda: self.api.getAlbum(album))
 			self.session.open(EcasaFeedview, thread, api=self.api, title=title)
 
@@ -763,7 +763,7 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		# is slideshow currently running?
 		if self.nextPhoto is not None:
 			self.timer.stop()
-			self.previous() # we already moved forward in our parent view, so move back
+			self.previous()  # we already moved forward in our parent view, so move back
 			self.nextPhoto = None
 		else:
 			self.timer.start(config.plugins.ecasa.slideshow_interval.value * 1000, True)

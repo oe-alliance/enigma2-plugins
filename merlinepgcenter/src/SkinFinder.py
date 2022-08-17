@@ -77,7 +77,7 @@ class SkinFinder(object):
 
 	@staticmethod
 	def getSkinData(skinList, skinDir, currentSkinValue):
-		SkinFinder.skinList = skinList[:] # we don't want the passed list to be modified, let's use a copy instead
+		SkinFinder.skinList = skinList[:]  # we don't want the passed list to be modified, let's use a copy instead
 		SkinFinder.skinDir = skinDir
 
 		if currentSkinValue == "":

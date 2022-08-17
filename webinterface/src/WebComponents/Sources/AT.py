@@ -46,9 +46,9 @@ class AT(Source):
 			]
 
 			if timer.hasAfterEvent():
-				innerList.append(timer.getAfterEvent()) # 2
+				innerList.append(timer.getAfterEvent())  # 2
 			else:
-				innerList.append("") # 2
+				innerList.append("")  # 2
 
 			#excludes
 			innerList.extend((
@@ -68,57 +68,57 @@ class AT(Source):
 
 			# services
 			innerList.extend((
-				timer.getServices(), # 11
-				timer.getBouquets() # 12
+				timer.getServices(),  # 11
+				timer.getBouquets()  # 12
 												))
 
 			if timer.hasTimespan():
 				innerList.extend((
-					timer.getTimespanBegin(), # 13
-					timer.getTimespanEnd() # 14
+					timer.getTimespanBegin(),  # 13
+					timer.getTimespanEnd()  # 14
 												))
 			else:
-				innerList.extend(("", "")) # 13, 14
+				innerList.extend(("", ""))  # 13, 14
 
 			if timer.hasDuration():
-				innerList.append(timer.getDuration()) # 15
+				innerList.append(timer.getDuration())  # 15
 			else:
-				innerList.append("") # 15
+				innerList.append("")  # 15
 
 			if timer.hasCounter():
 				innerList.extend((
-					timer.getCounter(), # 16
-					timer.getCounterLeft() # 17
+					timer.getCounter(),  # 16
+					timer.getCounterLeft()  # 17
 												))
 			else:
-				innerList.extend((0, 0)) # 16, 17
+				innerList.extend((0, 0))  # 16, 17
 
-			innerList.append(timer.getCounterLimit()) # 18
+			innerList.append(timer.getCounterLimit())  # 18
 
 			if timer.hasDestination():
-				innerList.append(timer.destination) # 19
+				innerList.append(timer.destination)  # 19
 			else:
-				innerList.append(resolveFilename(SCOPE_HDD)) # 19
+				innerList.append(resolveFilename(SCOPE_HDD))  # 19
 
 			if timer.hasCounterFormatString():
-				innerList.append(timer.getCounterFormatString()) # 20
+				innerList.append(timer.getCounterFormatString())  # 20
 			else:
-				innerList.append("") # 20
+				innerList.append("")  # 20
 
 			innerList.extend((
-				timer.getLastBegin(), # 21
-				timer.getJustplay(), # 22
-				timer.getAvoidDuplicateDescription() # 23
+				timer.getLastBegin(),  # 21
+				timer.getJustplay(),  # 22
+				timer.getAvoidDuplicateDescription()  # 23
 												))
 
 			if timer.hasTags():
-				innerList.append(timer.getTags()) # 24
+				innerList.append(timer.getTags())  # 24
 			else:
-				innerList.append("") # 24
+				innerList.append("")  # 24
 
 			print("Enabled", timer.getEnabled())
-			innerList.append(timer.getEnabled()) # 25
-			innerList.append("off") # 26
+			innerList.append(timer.getEnabled())  # 25
+			innerList.append("off")  # 26
 
 			returnList.append(innerList)
 

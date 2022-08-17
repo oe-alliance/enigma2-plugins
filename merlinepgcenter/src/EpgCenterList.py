@@ -193,7 +193,7 @@ class EpgCenterList(GUIComponent):
 				self.itemHeight = self.overallFontHeight + int(config.plugins.merlinEpgCenter.listItemHeight.value)
 			else:
 				self.itemHeight = self.baseHeight + int(config.plugins.merlinEpgCenter.listItemHeight.value)
-		elif self.videoMode == MODE_HD and config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT: # HD skin adjustment for text size
+		elif self.videoMode == MODE_HD and config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT:  # HD skin adjustment for text size
 			self.itemHeight = self.baseHeight + int(config.plugins.merlinEpgCenter.listItemHeight.value) + 4
 		else:
 			self.itemHeight = self.baseHeight + int(config.plugins.merlinEpgCenter.listItemHeight.value)
@@ -204,8 +204,8 @@ class EpgCenterList(GUIComponent):
 		columnSpace = config.plugins.merlinEpgCenter.columnSpace.getValue()
 		progressPixmap = None
 		offsetLeft = 5
-		offsetRight = self.maxWidth - 5 - 8 # 8 = timer pixmap width, 5 = border
-		secondLineColor = 0x00909090 # grey
+		offsetRight = self.maxWidth - 5 - 8  # 8 = timer pixmap width, 5 = border
+		secondLineColor = 0x00909090  # grey
 		border = int(config.plugins.merlinEpgCenter.listItemHeight.value) / 2
 		percent = 0
 
@@ -272,7 +272,7 @@ class EpgCenterList(GUIComponent):
 			duraString = ""
 			remainBeginString = ""
 
-		if remainBeginString.endswith('>'): # KEEP_OUTDATED_TIME
+		if remainBeginString.endswith('>'):  # KEEP_OUTDATED_TIME
 			outdated = True
 			try:
 				progColor = parseColor("eventNotAvailable").argb()
@@ -280,19 +280,19 @@ class EpgCenterList(GUIComponent):
 				progColor = 0x777777
 		elif config.plugins.merlinEpgCenter.showBeginRemainTime.value and config.plugins.merlinEpgCenter.showColoredEpgTimes.value:
 			outdated = False
-			if remainBeginString.endswith('h'): # begins in... hours
-				progColor = 0x00ef7f1a # brown
-			elif remainBeginString.endswith('d'): # begins in... days
-				progColor = 0x00e31e24 # red
-			elif remainBeginString.startswith(' I +') or remainBeginString.startswith('+'): # already running
-				progColor = 0x0074de0a # green
-			elif remainBeginString.startswith(' I -') or remainBeginString.startswith('-'): # begins in... minutes
-				progColor = 0x00ffed00 # yellow
-			else: # undefined, shouldn't happen
-				progColor = 0x00ffffff # white
+			if remainBeginString.endswith('h'):  # begins in... hours
+				progColor = 0x00ef7f1a  # brown
+			elif remainBeginString.endswith('d'):  # begins in... days
+				progColor = 0x00e31e24  # red
+			elif remainBeginString.startswith(' I +') or remainBeginString.startswith('+'):  # already running
+				progColor = 0x0074de0a  # green
+			elif remainBeginString.startswith(' I -') or remainBeginString.startswith('-'):  # begins in... minutes
+				progColor = 0x00ffed00  # yellow
+			else:  # undefined, shouldn't happen
+				progColor = 0x00ffffff  # white
 		else:
 			outdated = False
-			progColor = 0x00ffed00 # yellow
+			progColor = 0x00ffed00  # yellow
 
 		if outdated:
 			textColor = progColor
@@ -372,9 +372,9 @@ class EpgCenterList(GUIComponent):
 				width = self.maxWidth * (14 + extraWidth) / 100
 			progressHeight = 6
 
-			if config.plugins.merlinEpgCenter.listProgressStyle.value < STYLE_SIMPLE_BAR_LIST_OFF: # show progress in lists
+			if config.plugins.merlinEpgCenter.listProgressStyle.value < STYLE_SIMPLE_BAR_LIST_OFF:  # show progress in lists
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, border, width, self.halfItemHeight - border + (self.singleLineBorder * 2), 1, RT_HALIGN_CENTER | RT_VALIGN_TOP, timeString))
-			else: # don't show progress in lists
+			else:  # don't show progress in lists
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_CENTER | RT_VALIGN_CENTER, timeString))
 
 			if config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP and progressPixmap is not None:
@@ -392,7 +392,7 @@ class EpgCenterList(GUIComponent):
 					progressOffset = 0
 				res.append((eListboxPythonMultiContent.TYPE_PROGRESS_PIXMAP, offsetLeft + progressOffset, self.halfItemHeight + (self.halfItemHeight - progressHeight) / 2 + self.singleLineBorder, width, progressHeight, percent, progressPixmap, 0))
 			elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT:
-				if self.videoMode == MODE_SD: # we need a bigger font for SD skins
+				if self.videoMode == MODE_SD:  # we need a bigger font for SD skins
 					font = 2
 				else:
 					font = 3
@@ -638,7 +638,7 @@ class EpgCenterList(GUIComponent):
 			else:
 				tmpList = self.list
 
-			servicelist = [x[3] and (x[2], 1, x[3]) or (x[2], 1, 0) for x in tmpList] # build servicelist with "event after given start_time" and set the start time
+			servicelist = [x[3] and (x[2], 1, x[3]) or (x[2], 1, 0) for x in tmpList]  # build servicelist with "event after given start_time" and set the start time
 			servicelist.insert(0, returnTuples)
 
 		if self.listStyle == STYLE_SINGLE_LINE:
@@ -663,7 +663,7 @@ class EpgCenterList(GUIComponent):
 		if self.listStyle == STYLE_SINGLE_LINE:
 			self.changeHeight()
 		if showOutdated:
-			self.list.sort(key=lambda x: x[3], reverse=True) # sort by time
+			self.list.sort(key=lambda x: x[3], reverse=True)  # sort by time
 		self.l.setList(self.list)
 
 	def fillSimilar(self, sRef, eventId):
@@ -681,7 +681,7 @@ class EpgCenterList(GUIComponent):
 			if self.listStyle == STYLE_SINGLE_LINE:
 				self.changeHeight()
 
-			self.list.sort(key=lambda x: x[3]) # sort by time
+			self.list.sort(key=lambda x: x[3])  # sort by time
 			self.l.setList(self.list)
 
 	def fillEpgSearch(self, searchString, mode):
@@ -697,7 +697,7 @@ class EpgCenterList(GUIComponent):
 				for item in self.list[:]:
 					if not item[2] in EpgCenterList.allServicesNameDict:
 						self.list.remove(item)
-			self.list.sort(key=lambda x: x[3]) # sort by time
+			self.list.sort(key=lambda x: x[3])  # sort by time
 
 		if self.listStyle == STYLE_SINGLE_LINE:
 			self.changeHeight()
@@ -710,9 +710,9 @@ class EpgCenterList(GUIComponent):
 		if not servicelist is None:
 			while True:
 				service = servicelist.getNext()
-				if not service.valid(): # check if end of list
+				if not service.valid():  # check if end of list
 					break
-				if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker): # ignore non playable services
+				if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker):  # ignore non playable services
 					continue
 				# alternative service?
 				if service.flags & (eServiceReference.isGroup):
@@ -738,16 +738,16 @@ class EpgCenterList(GUIComponent):
 		allServices = {}
 		index = 1
 		EpgCenterList.lenChannelDigits = 0
-		totalServices = 0 # the number of services in all bouquets
+		totalServices = 0  # the number of services in all bouquets
 		for bouquetEntry in EpgCenterList.bouquetList:
 			servicelist = eServiceCenter.getInstance().list(bouquetEntry[1])
 			if not servicelist is None:
 				numServices = 0
 				while True:
 					service = servicelist.getNext()
-					if not service.valid(): # check if end of list
+					if not service.valid():  # check if end of list
 						break
-					if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker): # ignore non playable services
+					if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker):  # ignore non playable services
 						continue
 					info = EpgCenterList.eServiceCenterInstance.info(service)
 					serviceName = info.getName(service) or ServiceReference(service).getServiceName() or ""
@@ -781,15 +781,15 @@ class EpgCenterList(GUIComponent):
 		for timer in self.recordTimer.timer_list:
 			if timer.service_ref.ref.toString() == sRef:
 				end = begin + duration
-				if timer.begin > begin and timer.end < end: # the timer is inside the events bounds
+				if timer.begin > begin and timer.end < end:  # the timer is inside the events bounds
 					if timer.justplay:
 						zapPixmaps |= TIMER_TYPE_INSIDE_EVENT
 					else:
 						timerPixmaps |= TIMER_TYPE_INSIDE_EVENT
 						if timer.isRunning():
 							isRunning |= TIMER_TYPE_INSIDE_EVENT
-				elif end >= timer.begin and begin <= timer.end: # this event touches the timer
-					if eventId == timer.eit: # exact event match
+				elif end >= timer.begin and begin <= timer.end:  # this event touches the timer
+					if eventId == timer.eit:  # exact event match
 						if timer.repeated:
 							if timer.justplay:
 								zapPixmaps |= TIMER_TYPE_EID_REPEATED
@@ -804,28 +804,28 @@ class EpgCenterList(GUIComponent):
 								timerPixmaps |= TIMER_TYPE_EID_MATCH
 								if timer.isRunning():
 									isRunning |= TIMER_TYPE_EID_MATCH
-					elif begin < timer.begin and end > timer.begin: # this event overlaps the end of the timer
+					elif begin < timer.begin and end > timer.begin:  # this event overlaps the end of the timer
 						if timer.justplay:
 							zapPixmaps |= TIMER_TYPE_COVERS_END
 						else:
 							timerPixmaps |= TIMER_TYPE_COVERS_END
 							if timer.isRunning():
 								isRunning |= TIMER_TYPE_COVERS_END
-					elif end > timer.end and begin < timer.end: # this event overlaps the begin of the timer
+					elif end > timer.end and begin < timer.end:  # this event overlaps the begin of the timer
 						if timer.justplay:
 							zapPixmaps |= TIMER_TYPE_COVERS_BEGIN
 						else:
 							timerPixmaps |= TIMER_TYPE_COVERS_BEGIN
 							if timer.isRunning():
 								isRunning |= TIMER_TYPE_COVERS_BEGIN
-					elif end > timer.begin and begin < timer.end: # this event fully overlaps the timer but itsn't nor the timer event
+					elif end > timer.begin and begin < timer.end:  # this event fully overlaps the timer but itsn't nor the timer event
 						if timer.justplay:
 							zapPixmaps |= TIMER_TYPE_COVERS_FULL
 						else:
 							timerPixmaps |= TIMER_TYPE_COVERS_FULL
 							if timer.isRunning():
 								isRunning |= TIMER_TYPE_COVERS_FULL
-				elif timerPixmaps == 0 and zapPixmaps == 0 and self.recordTimer.isInTimer(eventId, begin, duration, sRef): # timer repetition
+				elif timerPixmaps == 0 and zapPixmaps == 0 and self.recordTimer.isInTimer(eventId, begin, duration, sRef):  # timer repetition
 					# TODO do we need to care about local times?
 
 					timerBegin = datetime.fromtimestamp(timer.begin).time()
@@ -835,27 +835,27 @@ class EpgCenterList(GUIComponent):
 					eventBegin = datetime.fromtimestamp(begin).time()
 					eventEnd = datetime.fromtimestamp(end).time()
 
-					if netTimerBegin == eventBegin and netTimerEnd == eventEnd: # the main timer entry
+					if netTimerBegin == eventBegin and netTimerEnd == eventEnd:  # the main timer entry
 						if timer.justplay:
 							zapPixmaps |= TIMER_TYPE_ADD
 						else:
 							timerPixmaps |= TIMER_TYPE_ADD
-					elif netTimerBegin >= eventBegin and netTimerEnd <= eventEnd: # the timer is inside the events bounds
+					elif netTimerBegin >= eventBegin and netTimerEnd <= eventEnd:  # the timer is inside the events bounds
 						if timer.justplay:
 							zapPixmaps |= TIMER_TYPE_ADD_INSIDE_EVENT
 						else:
 							timerPixmaps |= TIMER_TYPE_ADD_INSIDE_EVENT
-					elif eventBegin < timerBegin and eventEnd > timerBegin: # this event overlaps the end of the timer
+					elif eventBegin < timerBegin and eventEnd > timerBegin:  # this event overlaps the end of the timer
 						if timer.justplay:
 							zapPixmaps |= TIMER_TYPE_ADD_COVERS_END
 						else:
 							timerPixmaps |= TIMER_TYPE_ADD_COVERS_END
-					elif eventEnd > timerEnd and eventBegin < timerEnd: # this event overlaps the begin of the timer
+					elif eventEnd > timerEnd and eventBegin < timerEnd:  # this event overlaps the begin of the timer
 						if timer.justplay:
 							zapPixmaps |= TIMER_TYPE_ADD_COVERS_BEGIN
 						else:
 							timerPixmaps |= TIMER_TYPE_ADD_COVERS_BEGIN
-					elif eventEnd > timerBegin and eventBegin < timerEnd: # this event fully overlaps the timer but itsn't nor the timer event
+					elif eventEnd > timerBegin and eventBegin < timerEnd:  # this event fully overlaps the timer but itsn't nor the timer event
 						if timer.justplay:
 							zapPixmaps |= TIMER_TYPE_ADD_COVERS_FULL
 						else:
@@ -940,16 +940,16 @@ class EpgCenterTimerlist(TimerList):
 	def buildTimerEntry(self, timer, processed):
 		columnSpace = config.plugins.merlinEpgCenter.columnSpace.getValue()
 		width = self.l.getItemSize().width()
-		offsetLeft = 5 # 5 = left border
-		offsetRight = self.maxWidth - 5 # 5 = right border
-		secondLineColor = 0x00909090 # grey
+		offsetLeft = 5  # 5 = left border
+		offsetRight = self.maxWidth - 5  # 5 = right border
+		secondLineColor = 0x00909090  # grey
 		border = int(config.plugins.merlinEpgCenter.listItemHeight.value) / 2
 		timeString = strftime("%H:%M", localtime(timer.begin)) + "-" + strftime("%H:%M", localtime(timer.end))
 
 		if not processed:
 			if timer.state == TimerEntry.StateWaiting:
 				state = _("waiting")
-				color = 0x00ffed00 # yellow
+				color = 0x00ffed00  # yellow
 			elif timer.state == TimerEntry.StatePrepared:
 				state = _("about to start")
 				color = parseColor("red").argb()
@@ -1008,7 +1008,7 @@ class EpgCenterTimerlist(TimerList):
 
 			if isinstance(timer, RecordTimerEntry):
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, timer.service_ref.getServiceName()))
-			else: # AutoTimer entry
+			else:  # AutoTimer entry
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, "AutoTimer"))
 			offsetLeft = offsetLeft + width + columnSpace
 
@@ -1025,7 +1025,7 @@ class EpgCenterTimerlist(TimerList):
 
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, border, width, self.halfItemHeight - border, 1, RT_HALIGN_LEFT | RT_VALIGN_TOP, timeString))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, self.halfItemHeight, width, self.halfItemHeight - border, 2, RT_HALIGN_CENTER | RT_VALIGN_TOP, fd, secondLineColor))
-		else: # AutoTimer entry
+		else:  # AutoTimer entry
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_CENTER | RT_VALIGN_CENTER, timeString))
 
 		offsetLeft = offsetLeft + width + columnSpace

@@ -340,7 +340,7 @@ class EPGSearchList(EPGList):
 					prefix = ""
 				remaining = _(" (%s%d min)") % (prefix, total)
 		t = localtime(beginTime)
-		serviceref = ServiceReference(service) # for Servicename
+		serviceref = ServiceReference(service)  # for Servicename
 		if config.plugins.epgsearch.picons.value:
 			if getPiconsName:
 				picon = getPiconName(service)
@@ -352,20 +352,20 @@ class EPGSearchList(EPGList):
 				png = self.picon.getData()
 				dy = int((self.height - self.piconSize[1]) / 2.)
 				res = [
-					None, # no private data needed
+					None,  # no private data needed
 					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r1.left(), r1.top() + dy, self.piconSize[0], self.piconSize[1], png),
 					(eListboxPythonMultiContent.TYPE_TEXT, r1.left() + dx, r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, self.days[t[6]]),
 					(eListboxPythonMultiContent.TYPE_TEXT, r2.left() + dx, r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4]))
 				]
 			else:
 				res = [
-					None, # no private data needed
+					None,  # no private data needed
 					(eListboxPythonMultiContent.TYPE_TEXT, r1.left() + dx, r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, self.days[t[6]]),
 					(eListboxPythonMultiContent.TYPE_TEXT, r2.left() + dx, r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4]))
 				]
 		else:
 			res = [
-				None, # no private data needed
+				None,  # no private data needed
 				(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, self.days[t[6]]),
 				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4]))
 			]
@@ -482,7 +482,7 @@ class EPGSearchList(EPGList):
 				xpos += w
 				w = width / 10 * 5
 				self.descr_rect = Rect(xpos, 0, width, height)
-		else: # EPG_TYPE_SIMILAR
+		else:  # EPG_TYPE_SIMILAR
 			if self.skinColumns:
 				x = 0
 				self.weekday_rect = Rect(0, 0, self.gap(self.col[0]), height)
@@ -576,7 +576,7 @@ class EPGSearch(EPGSelection):
 # begin stripped copy of EPGSelection.__init__
 		self.bouquetChangeCB = None
 		self.serviceChangeCB = None
-		self.ask_time = -1 #now
+		self.ask_time = -1  # now
 		self["key_red"] = Button("")
 		self.closeRecursive = False
 		self.saved_title = None
@@ -599,11 +599,11 @@ class EPGSearch(EPGSelection):
 				"yellow": self.yellowButtonPressed,
 				"blue": self.blueButtonPressed,
 				"info": self.infoKeyPressed,
-				"red": self.zapToselect, # needed --> Partnerbox
-				"nextBouquet": self.nextBouquet, # just used in multi epg yet
-				"prevBouquet": self.prevBouquet, # just used in multi epg yet
-				"nextService": self.nextService, # just used in single epg yet
-				"prevService": self.prevService, # just used in single epg yet
+				"red": self.zapToselect,  # needed --> Partnerbox
+				"nextBouquet": self.nextBouquet,  # just used in multi epg yet
+				"prevBouquet": self.prevBouquet,  # just used in multi epg yet
+				"nextService": self.nextService,  # just used in single epg yet
+				"prevService": self.prevService,  # just used in single epg yet
 			})
 
 		self["actions"].csel = self
@@ -1004,11 +1004,11 @@ class EPGSearch(EPGSelection):
 					pass
 
 			# Search EPG, default to empty list
-			epgcache = eEPGCache.getInstance() # XXX: the EPGList also keeps an instance of the cache but we better make sure that we get what we want :-)
+			epgcache = eEPGCache.getInstance()  # XXX: the EPGList also keeps an instance of the cache but we better make sure that we get what we want :-)
 			ret = epgcache.search(('RIBDT', 1500, GetTypeMap(), searchString, GetCaseMap())) or []
-			ret.sort(key=itemgetter(2)) # sort by time
+			ret.sort(key=itemgetter(2))  # sort by time
 			if config.plugins.epgsearch.bouquet.value:
-				ret = self.sortEPGList(ret) # sort only user bouquets
+				ret = self.sortEPGList(ret)  # sort only user bouquets
 
 			# Update List
 			l = self["list"]

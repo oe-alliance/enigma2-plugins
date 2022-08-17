@@ -60,7 +60,7 @@ class UploadResource(resource.Resource):
 		os_close(fd)
 		os_chmod(fn, 0o755)
 
-		if cnt <= 0: # well, actually we should check against len(data) but lets assume we fail big time or not at all
+		if cnt <= 0:  # well, actually we should check against len(data) but lets assume we fail big time or not at all
 			try:
 				os_unlink(fn)
 			except OSError as oe:

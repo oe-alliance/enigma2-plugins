@@ -685,8 +685,8 @@ def buildConfig(defaultTimer, timers, webif=False):
 
 	# Keep the list clean
 	if len(list) == 7:
-		list.pop() # >
-		list.pop() # <defaults
+		list.pop()  # >
+		list.pop()  # <defaults
 	else:
 		append(' </defaults>\n\n')
 

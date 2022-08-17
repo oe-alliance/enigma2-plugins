@@ -180,7 +180,7 @@ class SortableMenu(Menu, HelpableScreen):
 		</screen>"""
 
 	def __init__(self, *args, **kwargs):
-		baseMethods.Menu__init__(self, *args, **kwargs) # using the base initializer saves us a few cycles
+		baseMethods.Menu__init__(self, *args, **kwargs)  # using the base initializer saves us a few cycles
 		HelpableScreen.__init__(self)
 		self.skinName = "SortableMenu"
 
@@ -201,7 +201,7 @@ class SortableMenu(Menu, HelpableScreen):
 
 		self["MenuSortActions"] = HelpableActionMap(self, "MenuSortActions",
 			{
-				"ignore": lambda: None, # we need to overwrite some regular actions :-)
+				"ignore": lambda: None,  # we need to overwrite some regular actions :-)
 				"toggleSelection": (self.toggleSelection, _("toggle selection")),
 				"selectEntry": (self.okbuttonClick, _("enter menu")),
 				"hideEntry": (self.hideEntry, _("hide entry")),

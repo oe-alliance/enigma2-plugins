@@ -292,8 +292,8 @@ class RSSPoller:
 				if x.uri.value == feed.uri:
 					# Update possibly different autoupdate value
 					feed.autoupdate = x.autoupdate.value
-					newfeeds.append(feed) # Append to new Feeds
-					oldfeeds.remove(feed) # Remove from old Feeds
+					newfeeds.append(feed)  # Append to new Feeds
+					oldfeeds.remove(feed)  # Remove from old Feeds
 					found = True
 					break
 			if not found:

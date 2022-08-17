@@ -13,8 +13,8 @@ import re
 import sys
 import os
 from xml.dom.minidom import parse
-from twisted.web.client import getPage #@UnresolvedImport
-from twisted.internet import reactor #@UnresolvedImport
+from twisted.web.client import getPage  # @UnresolvedImport
+from twisted.internet import reactor  # @UnresolvedImport
 from . import debug
 
 import six
@@ -99,7 +99,7 @@ def out(number, caller):
 	print(name)
 
 
-def simpleout(number, caller): #@UnusedVariable # pylint: disable-msg=W0613
+def simpleout(number, caller):  # @UnusedVariable # pylint: disable-msg=W0613
 	print(caller)
 
 
@@ -302,7 +302,7 @@ class ReverseLookupAndNotify:
 					name = item.strip()
 					firstNameFirst = entry.getElementsByTagName('name')[0].getAttribute('swapFirstAndLastName')
 					# debug("[ReverseLookupAndNotify] _gotPage: swapFirstAndLastName: " + firstNameFirst)
-					if firstNameFirst == 'true': # that means, the name is of the form "firstname lastname"
+					if firstNameFirst == 'true':  # that means, the name is of the form "firstname lastname"
 						found = re.match('(.*?)\s+(.*)', name)
 						if found:
 							firstname = found.group(1)
@@ -402,7 +402,7 @@ class ReverseLookupAndNotify:
 		else:
 			self.notificationCallback(self.number, "")
 		if __name__ == '__main__':
-			reactor.stop() #@UndefinedVariable # pylint: disable-msg=E1101
+			reactor.stop()  # @UndefinedVariable # pylint: disable-msg=E1101
 
 
 if __name__ == '__main__':
@@ -410,9 +410,9 @@ if __name__ == '__main__':
 	if (len(sys.argv) == 2):
 		# nrzuname.py Nummer
 		ReverseLookupAndNotify(sys.argv[1], simpleout)
-		reactor.run() #@UndefinedVariable # pylint: disable-msg=E1101
+		reactor.run()  # @UndefinedVariable # pylint: disable-msg=E1101
 	elif (len(sys.argv) == 3):
 		# nrzuname.py Nummer Charset
 		setDebug(False)
 		ReverseLookupAndNotify(sys.argv[1], out, sys.argv[2])
-		reactor.run() #@UndefinedVariable # pylint: disable-msg=E1101
+		reactor.run()  # @UndefinedVariable # pylint: disable-msg=E1101

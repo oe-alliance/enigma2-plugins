@@ -232,7 +232,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 					import NavigationInstance
 					from RecordTimer import RecordTimerEntry
 					recordHandler = NavigationInstance.instance.RecordTimer
-					for timer in recordHandler.timer_list[:]: # '[:]' for working on a copy, avoid processing a changing list
+					for timer in recordHandler.timer_list[:]:  # '[:]' for working on a copy, avoid processing a changing list
 						#print '[AutoTimerOverview] checking whether timer should be deleted: ', timer
 						if timer:
 							for entry in timer.log_entries:
@@ -336,7 +336,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 				newTimer.id = self.autotimer.getUniqueId()
 
 				self.session.openWithCallback(
-					self.addCallback, # XXX: we could also use importCallback... dunno what seems more natural
+					self.addCallback,  # XXX: we could also use importCallback... dunno what seems more natural
 					AutoTimerWizard,
 					newTimer
 				)

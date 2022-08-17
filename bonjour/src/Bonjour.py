@@ -87,7 +87,7 @@ class Bonjour:
 		print("[Bonjour.__parse] parsing %s%s" % (self.AVAHI_SERVICES_DIR, file))
 		try:
 			config = cet_parse(self.AVAHI_SERVICES_DIR + file).getroot()
-		except ParseError: #parsing failed, skip the file
+		except ParseError:  # parsing failed, skip the file
 			return
 
 		name = config.find('name').text

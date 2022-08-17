@@ -84,7 +84,7 @@ class InstallDownloadableContent():
             pass
 
 
-class PluginIpkUpdate(Screen): #, IsNewVersionCheck):
+class PluginIpkUpdate(Screen):  # , IsNewVersionCheck):
     skin = """
 		<screen position="150,200" size="460,250" title="New plugin version is avaliable." >
 			<widget name="myMenu" position="10,10" size="420,240" scrollbarMode="showOnDemand" />
@@ -103,7 +103,7 @@ class PluginIpkUpdate(Screen): #, IsNewVersionCheck):
         self["myMenu"] = MenuList(list)
         self["myActionMap"] = ActionMap(["SetupActions"],
         {
-            "ok": self.go#,
+            "ok": self.go  # ,
 			#"cancel": self.close(None)
 		}, -1)
         #self.new_wersion_url = self.autoupdate.run()

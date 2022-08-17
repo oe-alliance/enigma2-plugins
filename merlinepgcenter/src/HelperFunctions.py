@@ -77,9 +77,9 @@ class EmbeddedVolumeControl():
 		vol = self.volctrl.getVolume()
 		self["volume"].show()
 		if is_muted:
-			self.volMute() # unmute
+			self.volMute()  # unmute
 		elif not vol:
-			self.volMute(False, True) # mute but dont show mute symbol
+			self.volMute(False, True)  # mute but dont show mute symbol
 		if self.volctrl.isMuted():
 			self["volume"].setValue(0)
 		else:
@@ -119,7 +119,7 @@ class ResizeScrollLabel(ScrollLabel):
 	def resize(self, s):
 		lineheight = fontRenderClass.getInstance().getLineHeight(self.long_text.getFont())
 		if not lineheight:
-			lineheight = 30 # assume a random lineheight if nothing is visible
+			lineheight = 30  # assume a random lineheight if nothing is visible
 		lines = (int)(s.height() / lineheight)
 		self.pageHeight = (int)(lines * lineheight)
 		self.instance.resize(eSize(s.width(), self.pageHeight + (int)(lineheight / 6)))
@@ -145,9 +145,9 @@ class PiconLoader():
 			pngname = self.findPicon(sRef)
 			if pngname != "":
 				self.nameCache[sRef] = pngname
-			if pngname == "": # no picon for service found
+			if pngname == "":  # no picon for service found
 				pngname = self.nameCache.get("default", "")
-				if pngname == "": # no default yet in cache..
+				if pngname == "":  # no default yet in cache..
 					pngname = self.findPicon("picon_default")
 					if pngname == "":
 						pngname = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MerlinEPGCenter/images/PiconMissing_small.png")
@@ -208,9 +208,9 @@ def getFuzzyDay(t):
 class BlinkTimer():
 	def __init__(self, session):
 		self.session = session
-		self.state = False # blinking state
-		self.lists = [] # epg list, upcoming list
-		self.listSets = [set(), set()] # 1st set for epg list, 2nd for upcoming list
+		self.state = False  # blinking state
+		self.lists = []  # epg list, upcoming list
+		self.listSets = [set(), set()]  # 1st set for epg list, 2nd for upcoming list
 		self.delay = 0
 		self.stopping = False
 		self.timerRunning = False
@@ -243,7 +243,7 @@ class BlinkTimer():
 			self.timerRunning = False
 
 	def resume(self):
-		self.timer.callback.insert(0, self.changeBlinkState) # order is important, this callback must be called first!
+		self.timer.callback.insert(0, self.changeBlinkState)  # order is important, this callback must be called first!
 		self.session.nav.record_event.append(self.gotRecordEvent)
 		if self.session.nav.RecordTimer.isRecording():
 			self.gotRecordEvent(None, None)
@@ -322,7 +322,7 @@ class TimerListObject(object):
 		self.justplay = justplay
 		self.disabled = disabled
 		self.autoTimerId = autoTimerId
-		self.state = 0 # TimerEntry.StateWaiting
+		self.state = 0  # TimerEntry.StateWaiting
 
 		# additional information
 		self.match = match

@@ -407,6 +407,6 @@ def loadSkinReal(skinPath):
 
 
 def loadPluginSkin(pluginPath):
-    pass #loadSkinReal(pluginPath + "/skin.xml")
+    pass  # loadSkinReal(pluginPath + "/skin.xml")
                                                                           #
 ############################################################################

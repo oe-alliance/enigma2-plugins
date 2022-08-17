@@ -92,7 +92,7 @@ class ConfigListScreen(eConfigList.ConfigListScreen):
             "8": self.keyNumberGlobal,
             "9": self.keyNumberGlobal,
             "0": self.keyNumberGlobal
-        }, -1) # to prevent left/right overriding the listbox
+        }, -1)  # to prevent left/right overriding the listbox
 
         self["VirtualKB"] = ActionMap(["VirtualKeyboardActions"],
         {
@@ -614,7 +614,7 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
         Screen.__init__(self, session)
         self.csel = csel
         self.skinName = SkinTools.appendResolution("AdvancedMovieSelectionButtonSetup")
-        self["important"] = StaticText() # TODO: deprecated - backward patch for oe1.6 compatibility
+        self["important"] = StaticText()  # TODO: deprecated - backward patch for oe1.6 compatibility
         self["key_red"] = Button(_("Cancel"))
         self["key_green"] = Button(_("Save/Close"))
         self["key_yellow"] = Button(_("Own button description"))

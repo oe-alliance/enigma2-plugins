@@ -90,20 +90,20 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 		{
 			"pageUp": (self.pageUp, _("Page up")),
 			"pageDown": (self.pageDown, _("Page down")),
-		}, -2) # higher priority
+		}, -2)  # higher priority
 
 		self["main_actions"] = HelpableActionMap(self, "PushServiceConfigActions",
 		{
 			"red": (self.keyCancel, _("Exit without saving")),
 			"green": (self.keySave, _("Save and exit")),
-		}, -2) # higher priority
+		}, -2)  # higher priority
 		self["main_actions"].setEnabled(False)
 
 		self["main_actions_enabled"] = HelpableActionMap(self, "PushServiceConfigActions",
 		{
 			"yellow": (self.showServices, _("Show Services")),
 			"blue": (self.showControllers, _("Show Controllers")),
-		}, -2) # higher priority
+		}, -2)  # higher priority
 		self["main_actions_enabled"].setEnabled(False)
 
 		self["service_actions"] = HelpableActionMap(self, "PushServiceConfigActions",
@@ -112,7 +112,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 			"green": (self.testService, _("Test selected Service")),
 			"yellow": (self.addServices, _("Add Service")),
 			"blue": (self.removeServices, _("Remove Service")),
-		}, -2) # higher priority
+		}, -2)  # higher priority
 		self["service_actions"].setEnabled(False)
 
 		self["controller_actions"] = HelpableActionMap(self, "PushServiceConfigActions",
@@ -121,7 +121,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 			"green": (self.testController, _("Test selected Controller")),
 			"yellow": (self.addControllers, _("Add Controller")),
 			"blue": (self.removeControllers, _("Remove Controller")),
-		}, -2) # higher priority
+		}, -2)  # higher priority
 		self["controller_actions"].setEnabled(False)
 
 		# Initialize Configuration part

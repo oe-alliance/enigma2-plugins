@@ -30,9 +30,9 @@ from collections import defaultdict
 from operator import attrgetter, itemgetter
 import NavigationInstance
 if PY2:
-	from itertools import izip_longest as zip_longest # py2x
+	from itertools import izip_longest as zip_longest  # py2x
 else:
-	from itertools import zip_longest # py3k
+	from itertools import zip_longest  # py3k
 
 # Plugin
 from Plugins.Plugin import PluginDescriptor
@@ -429,7 +429,7 @@ class InfoBarTunerState(object):
 					#TODO check file streaming
 
 				service_ref = ServiceReference(ref)
-				filename = "" #TODO file streaming - read meta eit
+				filename = ""  # TODO file streaming - read meta eit
 
 				try:
 					host = ip and gethostbyaddr(ip)
@@ -1075,7 +1075,7 @@ class TunerState(TunerStateBase):
 
 		if self.type == FINISHED:
 			# Finished events
-			timeelapsed = None #duration
+			timeelapsed = None  # duration
 		elif begin and end and begin < now:
 			timeelapsed = min(now - begin, duration)
 		else:
@@ -1086,7 +1086,7 @@ class TunerState(TunerStateBase):
 
 			if self.type == FINISHED:
 				# Finished events
-				timeleft = None #0
+				timeleft = None  # 0
 			elif begin and end and begin < now:
 				timeleft = max(end - now, 0)
 			else:
@@ -1278,7 +1278,7 @@ class TunerState(TunerStateBase):
 
 			# Set horizontal alignment
 			if field == 'Number' or field == 'TimeLeftDuration' or field == 'TimeLeft' or field == 'TimeElapsed' or field == 'Duration' or field == 'TimerProgressText' or field == 'FileSize' or field == 'FreeSpace':
-				self[fieldid].instance.setHAlign(2) # import _enigma # alignRight = _enigma.eLabel_alignRight
+				self[fieldid].instance.setHAlign(2)  # import _enigma # alignRight = _enigma.eLabel_alignRight
 
 			#Workaround#1
 			self[fieldid].instance.resize(eSize(1000, height))
@@ -1372,14 +1372,14 @@ def getNumber(actservice):
 		actbouquet = Servicelist.getRoot()
 		serviceHandler = eServiceCenter.getInstance()
 		for name, bouquet in bouquets:
-			if not bouquet.valid(): #check end of list
+			if not bouquet.valid():  # check end of list
 				break
 			if bouquet.flags & eServiceReference.isDirectory:
 				servicelist = serviceHandler.list(bouquet)
 				if not servicelist is None:
 					while True:
 						service = servicelist.getNext()
-						if not service.valid(): #check end of list
+						if not service.valid():  # check end of list
 							break
 						playable = not (service.flags & mask)
 						if playable:

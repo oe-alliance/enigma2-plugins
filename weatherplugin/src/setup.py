@@ -237,9 +237,9 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 	def searchLocation(self):
 		if self.current.city.value != "":
 			language = config.osd.language.value.replace("_", "-")
-			if language == "en-EN": # hack
+			if language == "en-EN":  # hack
 				language = "en-US"
-			elif language == "no-NO": # hack
+			elif language == "no-NO":  # hack
 				language = "nn-NO"
 			url = "http://weather.service.msn.com/find.aspx?src=windows&outputview=search&weasearchstr=%s&culture=%s" % (urllib_quote(self.current.city.value), language)
 			getPage(six.ensure_binary(url)).addCallback(self.xmlCallback).addErrback(self.error)

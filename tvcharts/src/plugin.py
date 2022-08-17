@@ -231,7 +231,7 @@ class TVChartsMain(Screen):
 				services = list and list.getContent('S')
 				search = ['IBDCTSERNX']
 
-				if services: # It's a Bouquet
+				if services:  # It's a Bouquet
 					search.extend([(service, 0, -1) for service in services])
 
 				events = self.epgcache.lookupEvent(search)

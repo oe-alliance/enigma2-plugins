@@ -153,7 +153,7 @@ class MediaDownloader(Screen):
 		# Inform user about whats currently done
 		self["wait"] = StaticText(_("Downloading..."))
 		self["progress"] = VariableProgressSource()
-		self["eta"] = StaticText(_("ETA ??:?? h")) # XXX: we could just leave eta and speed empty
+		self["eta"] = StaticText(_("ETA ??:?? h"))  # XXX: we could just leave eta and speed empty
 		self["speed"] = StaticText(_("?? kb/s"))
 
 		# Set Limit if we know it already (Server might not tell it)

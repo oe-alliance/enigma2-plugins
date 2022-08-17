@@ -44,7 +44,7 @@ def _getCutsLength(filename, len_sec):
 				if cutType == 0:  # In cut
 					if not in_pts:
 						in_pts = pts
-				elif cutType == 1: # Out cut
+				elif cutType == 1:  # Out cut
 					if in_pts is not None:
 						len_pts += pts - in_pts
 						in_pts = None
@@ -170,7 +170,7 @@ class CutTask(Task):
 		if self.inlen and self.outlen:
 			try:
 				self.end = getsize(self.inpath) * self.outlen / self.inlen
-				self.end += self.end / 50	# add 2% for a bit of leeway
+				self.end += self.end / 50  # add 2% for a bit of leeway
 				self.progressTimer.start(1000)
 			except:
 				pass

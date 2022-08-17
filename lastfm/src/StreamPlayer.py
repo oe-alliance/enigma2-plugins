@@ -78,7 +78,7 @@ class StreamPlayer:
             self.is_playing = True
 
     def _delayedPlay(self, sref):
-        if self.is_playing: # making sure, that no one presses stop while we had wait
+        if self.is_playing:  # making sure, that no one presses stop while we had wait
             self.session.nav.playService(sref)
 
     def skip(self):

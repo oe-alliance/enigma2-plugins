@@ -45,7 +45,7 @@ class MerlinEPGCenterStarter(object):
 	def __init__(self, session):
 		self.session = session
 		assert not MerlinEPGCenterStarter.instance, "only one MerlinEPGCenterStarter instance is allowed!"
-		MerlinEPGCenterStarter.instance = self # set instance
+		MerlinEPGCenterStarter.instance = self  # set instance
 
 	def openMerlinEPGCenter(self, startTab=None, doSearch=False):
 		servicelist, currentBouquet, bouquetList, currentIndex = getBouquetInformation()
@@ -70,7 +70,7 @@ def startMerlinEPGCenterSingle(self):
 # open "multi epg now" tab
 
 
-def startMerlinEPGCenterMulti(self, withCallback=None): # withCallback is an extra parameter which is passed when called form a service without EPG data
+def startMerlinEPGCenterMulti(self, withCallback=None):  # withCallback is an extra parameter which is passed when called form a service without EPG data
 	MerlinEPGCenterStarter.instance.openMerlinEPGCenter(MULTI_EPG_NOW)
 
 
@@ -82,12 +82,12 @@ class InfoBarFunctionSaver:
 		config.plugins.merlinEpgCenter.replaceInfobarEpg.addNotifier(self.changeFunctions, initial_call=True)
 
 	def changeFunctions(self, configElement):
-		if configElement.value: # replace InfoBar EPG functions
-			InfoBar.openSingleServiceEPG = startMerlinEPGCenterSingle # Info -> yellow
-			InfoBar.openMultiServiceEPG = startMerlinEPGCenterMulti # Info -> blue
-		else: # revert functions
-			InfoBar.openSingleServiceEPG = self.infoBarSingleEpg # Info -> yellow
-			InfoBar.openMultiServiceEPG = self.infoBarMultiEpg # Info -> blue
+		if configElement.value:  # replace InfoBar EPG functions
+			InfoBar.openSingleServiceEPG = startMerlinEPGCenterSingle  # Info -> yellow
+			InfoBar.openMultiServiceEPG = startMerlinEPGCenterMulti  # Info -> blue
+		else:  # revert functions
+			InfoBar.openSingleServiceEPG = self.infoBarSingleEpg  # Info -> yellow
+			InfoBar.openMultiServiceEPG = self.infoBarMultiEpg  # Info -> blue
 
 	def saveInfoBarChannelFunctions(self):
 		self.infoBarSwitchChannelUp = InfoBar.instance["ChannelSelectActions"].actions["switchChannelUp"]
@@ -99,7 +99,7 @@ class InfoBarFunctionSaver:
 	def setInfoBarActionMap(self, configElement=None):
 		if configElement == config.plugins.merlinEpgCenter.replaceInfobarChannelUp:
 			value = int(config.plugins.merlinEpgCenter.replaceInfobarChannelUp.value)
-			if value == -1: # disabled
+			if value == -1:  # disabled
 				if InfoBar.instance["ChannelSelectActions"].actions["switchChannelUp"] is not self.infoBarSwitchChannelUp:
 					InfoBar.instance["ChannelSelectActions"].actions["switchChannelUp"] = self.infoBarSwitchChannelUp
 			else:
@@ -165,7 +165,7 @@ def networkconfigread(reason=None):
 
 def getBouquetInformation():
 	# get current bouquet and bouquetlist from channelselection
-	from Screens.InfoBar import InfoBar # if installed, nasty PTS Plugin overides Infobar class, so global import may not working to get instance, because maybe this plugin was imported from enigma2 before PTS ...import InfoBar now (just to be sure...) to get the correct instance member
+	from Screens.InfoBar import InfoBar  # if installed, nasty PTS Plugin overides Infobar class, so global import may not working to get instance, because maybe this plugin was imported from enigma2 before PTS ...import InfoBar now (just to be sure...) to get the correct instance member
 	infoBarInstance = InfoBar.instance
 	if infoBarInstance is not None:
 		servicelist = infoBarInstance.servicelist
@@ -173,12 +173,12 @@ def getBouquetInformation():
 		bouquetList = servicelist.getBouquetList()
 		currentIndex = -1
 		cnt = 0
-		for bouquet in bouquetList: # is current bouquet in bouquetlist?
+		for bouquet in bouquetList:  # is current bouquet in bouquetlist?
 			if bouquet[1].toString() == currentBouquet.toString():
-				currentIndex = cnt # yeah, set index
+				currentIndex = cnt  # yeah, set index
 				break
 			cnt += 1
-		if currentIndex == -1: # current bouquet is not in bouquetlist (e.g. provider, new services a.s.o) --> set current bouquet to first boquet in bouquetlist
+		if currentIndex == -1:  # current bouquet is not in bouquetlist (e.g. provider, new services a.s.o) --> set current bouquet to first boquet in bouquetlist
 			currentBouquet = bouquetList[0][1]
 			currentIndex = 0
 

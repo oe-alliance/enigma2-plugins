@@ -35,14 +35,14 @@ class EmissionBandwidth(Screen, ConfigListScreen):
 			else:
 				downloadLimitMode = val.downloadLimited
 				uploadLimitMode = val.uploadLimited
-				modelist = [(0, _("Global Setting")), (1, _("Limit"))] # XXX: this is a pure guess...
+				modelist = [(0, _("Global Setting")), (1, _("Limit"))]  # XXX: this is a pure guess...
 
 			self.downloadLimitMode = NoSave(ConfigSelection(choices=modelist, default=downloadLimitMode))
 			self.downloadLimit = NoSave(ConfigNumber(default=val.downloadLimit))
 			self.uploadLimitMode = NoSave(ConfigSelection(choices=modelist, default=uploadLimitMode))
 			self.uploadLimit = NoSave(ConfigNumber(default=val.uploadLimit))
 			self.maxConnectedPeers = NoSave(ConfigNumber(default=val.maxConnectedPeers))
-		else: #if not isTorrent:
+		else:  # if not isTorrent:
 			if rpc_version < 5:
 				peerLimit = val.peer_limit
 				port = val.port

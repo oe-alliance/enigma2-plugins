@@ -39,7 +39,7 @@ class ServicePlayable(Source):
 	def getPlayableServices(self, refToPlay, refPlaying=None):
 		list = []
 
-		if self.type == self.BOUQUET: #Bouquet
+		if self.type == self.BOUQUET:  # Bouquet
 			slist = self.sci.list(refToPlay)
 			services = slist and slist.getContent('S', True)
 
@@ -48,7 +48,7 @@ class ServicePlayable(Source):
 					(service, self.isServicePlayable(eServiceReference(service), refPlaying)) for service in services
 				])
 
-		else: #Single service
+		else:  # Single service
 			playable = self.isServicePlayable(refToPlay, refPlaying)
 			list.append((refToPlay.toString(), playable))
 

@@ -76,7 +76,7 @@ class Message(Source):
 		system(cmdstr)
 
 	def getYesNoAnswer(self, param):
-		print("getYesNoAnswer")#,self.session.messageboxanswer
+		print("getYesNoAnswer")  # ,self.session.messageboxanswer
 		yesnoFile = self.yesnoFile
 		if path.exists(yesnoFile) == True:
 			file = open(yesnoFile, "r")

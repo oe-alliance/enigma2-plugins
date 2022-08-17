@@ -421,7 +421,7 @@ class ARDMediathek(Screen):
 			f.close()
 			list = content.split("-")
 			cacheMB = int(list[0])
-			if cacheMB > 5: # Starte nach 5 MB Bufferung
+			if cacheMB > 5:  # Starte nach 5 MB Bufferung
 				self.cacheTimer.stop()
 				self.playCachedFile()
 		except:

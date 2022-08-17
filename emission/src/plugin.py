@@ -33,7 +33,7 @@ def simplerss_update_callback(id=None):
 	try:
 		from Plugins.Extensions.SimpleRSS.plugin import rssPoller
 	except ImportError:
-		pass # should not happen since the poller has to be active for us to be called :-)
+		pass  # should not happen since the poller has to be active for us to be called :-)
 	else:
 		errors = 0
 		# we only check the "new items" feed currently since we do not keep track of the files we downloaded

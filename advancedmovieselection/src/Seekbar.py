@@ -116,7 +116,7 @@ class Seekbar(ConfigListScreen, Screen):
         sel = self["config"].getCurrent()[1]
         if sel == self.positionEntry:
             if self.length:
-                if self.dvd: # seekTo() doesn't work for DVD Player
+                if self.dvd:  # seekTo() doesn't work for DVD Player
                     oldPosition = self.seek.getPlayPosition()[1]
                     newPosition = int(float(self.length[1]) / 100.0 * self.percent)
                     if newPosition > oldPosition:

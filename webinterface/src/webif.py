@@ -150,7 +150,7 @@ class ListMacroItem:
 #===============================================================================
 class TextToHTML(Converter):
 	def getHTML(self, id):
-		return self.source.text.replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8") # encode & etc. here!
+		return self.source.text.replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8")  # encode & etc. here!
 
 #===============================================================================
 # TextToXML
@@ -239,7 +239,7 @@ class SimpleListFiller(Converter):
 				item = ""
 			else:
 				#filter out "non-displayable" Characters - at the very end, do it the hard way...
-				item = str(item)#.replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
+				item = str(item)  # .replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
 
 			for (element, filternum) in list:
 				if not filternum:
@@ -425,7 +425,7 @@ class webifHandler(ContentHandler):
 		ctype = attrs["type"]
 
 		# TODO: we need something better here
-		if ctype[:4] == "web:": # for now
+		if ctype[:4] == "web:":  # for now
 			self.converter = eval(ctype[4:])
 		else:
 			try:
@@ -467,7 +467,7 @@ class webifHandler(ContentHandler):
 		if name == "e2:screen":
 			if "external_module" in attrs:
 				exec("from " + attrs["external_module"] + " import *")
-			self.screen = eval(attrs["name"])(self.session, self.request) # fixme
+			self.screen = eval(attrs["name"])(self.session, self.request)  # fixme
 			self.screens.append(self.screen)
 			return
 
@@ -480,10 +480,10 @@ class webifHandler(ContentHandler):
 
 		if self.mode == 0:
 			self.res.append(tag)
-		elif self.mode == 1: # expect "<e2:element>"
+		elif self.mode == 1:  # expect "<e2:element>"
 			assert name == "e2:element", "found %s instead of e2:element" % name
 			self.start_element(attrs)
-		elif self.mode == 2: # expect "<e2:convert>"
+		elif self.mode == 2:  # expect "<e2:convert>"
 			if n3 == "e2:":
 				assert name == "e2:convert"
 				self.start_convert(attrs)
@@ -504,11 +504,11 @@ class webifHandler(ContentHandler):
 		if self.mode == 0:
 			self.res.append(tag)
 		elif self.mode == 2:
-			if n3 == "e2:": # closed 'convert' -> sub
+			if n3 == "e2:":  # closed 'convert' -> sub
 				self.end_convert()
 			else:
 				self.sub.append(tag)
-		elif self.mode == 1: # closed 'element'
+		elif self.mode == 1:  # closed 'element'
 			self.end_element()
 		if n3 == "e2:":
 			self.mode -= 1

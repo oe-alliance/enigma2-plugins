@@ -111,7 +111,7 @@ class EPGRefresh:
 		version = configuration.get("version", None)
 		if version is None:
 			factor = 60
-		else: #if version == "1"
+		else:  # if version == "1"
 			factor = 1
 
 		# Add References
@@ -225,9 +225,9 @@ class EPGRefresh:
 				continue
 
 			channelID = '%08x%04x%04x' % (
-				service.getUnsignedData(4), # NAMESPACE
-				service.getUnsignedData(2), # TSID
-				service.getUnsignedData(3), # ONID
+				service.getUnsignedData(4),  # NAMESPACE
+				service.getUnsignedData(2),  # TSID
+				service.getUnsignedData(3),  # ONID
 			)
 
 			if channelID not in channelIds:

@@ -7,7 +7,7 @@ import time
 import re
 import os
 from six.moves.urllib.parse import quote
-from operator import itemgetter#, attrgetter
+from operator import itemgetter  # , attrgetter
 from Plugins.Extensions.SubsDownloader2.SourceCode.archives_extractor import zip_extractor
 from Plugins.Extensions.SubsDownloader2.SourceCode.periscope import SubtitleDatabase
 
@@ -129,7 +129,7 @@ class Napisy24_pl(XML_to_Dict, zip_extractor):
                 self.XML_String = r1.read()
             elif what_is_downloaded == "download_subtilte_zip":
                 self.zip_string = r1.read()
-            return r1.status#, r1.reason
+            return r1.status  # , r1.reason
         except (IOError, OSError) as e:
             print("Napisy24.pl server connection error.", file=sys.stderr)
             time.sleep(0.5)
@@ -412,7 +412,7 @@ class CompareMovie_and_Subtite_FileData(GuessFileData_from_FileName):
 
         """Filtering by subtitle name - if there is no multiple subtitles"""
         preliminary_movie_subtitle_list = final_movie_subtitle_list
-        temp_movieList = [] #now subtile
+        temp_movieList = []  # now subtile
         for x in preliminary_movie_subtitle_list:
             """Check what movies are still in registry"""
             if x['subtitle'] not in temp_movieList:
@@ -420,7 +420,7 @@ class CompareMovie_and_Subtite_FileData(GuessFileData_from_FileName):
 
         final_movie_subtitle_list = []
         matching_movie = False
-        for x in temp_movieList: #now subtile
+        for x in temp_movieList:  # now subtile
             """For all subtitles in temp_movieList which now is subtitle checks best movie
             This makes that one subtitle don't belong to multi movies.
             """

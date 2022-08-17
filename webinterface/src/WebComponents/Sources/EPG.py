@@ -86,9 +86,9 @@ class EPG(Source):
 			services = lst and lst.getContent('S', True)
 			search = ['IBDCTSERNX']
 
-			if services: # It's a Bouquet
+			if services:  # It's a Bouquet
 				self.isBouquet = True
-				if type == -1: #Now AND Next at once!
+				if type == -1:  # Now AND Next at once!
 					append = search.append
 					for service in services:
 						append((service, 0, -1))

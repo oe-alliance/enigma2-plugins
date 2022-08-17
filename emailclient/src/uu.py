@@ -126,7 +126,7 @@ def decode(in_file, out_file=None, mode=None, quiet=0):
     elif isinstance(out_file, six.string_types):
         fp = open(out_file, 'wb')
         try:
-            os.path.chmod(out_file, mode) #@UndefinedVariable
+            os.path.chmod(out_file, mode)  # @UndefinedVariable
         except AttributeError:
             pass
         out_file = fp

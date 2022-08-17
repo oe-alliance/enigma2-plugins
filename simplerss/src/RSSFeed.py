@@ -113,7 +113,7 @@ class RSS1Wrapper(RSSWrapper):
 		RSSWrapper.__init__(self, feed.find(ns + 'channel'), feed.findall(ns + 'item'), ns)
 
 	def __getattr__(self, tag):
-		if tag == 'logo': # XXX: afaik not officially part of older rss, but can't hurt
+		if tag == 'logo':  # XXX: afaik not officially part of older rss, but can't hurt
 			tag = 'image'
 		return ElementWrapper.__getattr__(self, tag)
 

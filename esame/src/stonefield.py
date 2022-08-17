@@ -211,7 +211,7 @@ class StoneField:
 				nextfullcol += 1
 
 			if nextfullcol > self.sizex - 1:
-				break # we're ready
+				break  # we're ready
 
 			#for (int row=0; row < sizey; row++) {
 			for row in range(self.sizey):

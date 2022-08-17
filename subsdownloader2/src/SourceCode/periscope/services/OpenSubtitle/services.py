@@ -17,7 +17,7 @@
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
-import socket # For timeout purposes
+import socket  # For timeout purposes
 from Plugins.Extensions.SubsDownloader2.SourceCode import xmlrpclib
 import os
 import struct
@@ -176,7 +176,7 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
             buffer = f.read(bytesize)
             (l_value,) = struct.unpack(longlongformat, buffer)
             hash += l_value
-            hash = hash & 0xFFFFFFFFFFFFFFFF #to remain as 64bit number
+            hash = hash & 0xFFFFFFFFFFFFFFFF  # to remain as 64bit number
 
         f.seek(max(0, filesize - 65536), 0)
         for x in range(65536 / bytesize):
@@ -229,7 +229,7 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
             return []
 
         # Search
-        self.filename = filename #Used to order the results
+        self.filename = filename  # Used to order the results
         sublinks += self.get_results(token, search)
 
         # Logout
@@ -262,7 +262,7 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
                 result["link"] = r['SubDownloadLink']
                 result["page"] = r['SubDownloadLink']
                 result["lang"] = self.getLG(r['SubLanguageID'])
-                if "query" in search: #We are using the guessed file name, let's remove some results
+                if "query" in search:  # We are using the guessed file name, let's remove some results
                     if r["MovieReleaseName"].startswith(self.filename):
                         sublinks.append(result)
                     else:

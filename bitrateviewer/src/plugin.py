@@ -73,13 +73,13 @@ class BitrateCalculator(Screen):
 			onid = ref.getData(3)
 			dvbnamespace = ref.getData(4)
 		if vpid:
-			self.videoBitrate = eBitrateCalculator(vpid, dvbnamespace, tsid, onid, 1000, 1024 * 1024) # pid, dvbnamespace, tsid, onid, refresh intervall, buffer size
+			self.videoBitrate = eBitrateCalculator(vpid, dvbnamespace, tsid, onid, 1000, 1024 * 1024)  # pid, dvbnamespace, tsid, onid, refresh intervall, buffer size
 			self.videoBitrate.callback.append(self.getVideoBitrateData)
 		if apid:
 			self.audioBitrate = eBitrateCalculator(apid, dvbnamespace, tsid, onid, 1000, 64 * 1024)
 			self.audioBitrate.callback.append(self.getAudioBitrateData)
 
-	def getVideoBitrateData(self, value, status): # value = rate in kbit/s, status ( 1  = ok || 0 = nok (zapped?))
+	def getVideoBitrateData(self, value, status):  # value = rate in kbit/s, status ( 1  = ok || 0 = nok (zapped?))
 		if status:
 			self["video"].text = "%d kbit/s" % value
 		else:

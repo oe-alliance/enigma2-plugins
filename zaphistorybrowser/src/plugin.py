@@ -234,9 +234,9 @@ class ZapHistoryBrowser(Screen, ProtectedScreen):
 	def buildList(self):
 		list = []
 		for x in self.servicelist.history:
-			if len(x) == 2: # Single-Bouquet
+			if len(x) == 2:  # Single-Bouquet
 				ref = x[1]
-			else: # Multi-Bouquet
+			else:  # Multi-Bouquet
 				ref = x[2]
 			info = self.serviceHandler.info(ref)
 			if info:
@@ -278,9 +278,9 @@ class ZapHistoryBrowser(Screen, ProtectedScreen):
 				currRef = self.session.nav.getCurrentlyPlayingServiceReference()
 				idx = 0
 				for x in self.servicelist.history:
-					if len(x) == 2: # Single-Bouquet
+					if len(x) == 2:  # Single-Bouquet
 						ref = x[1]
-					else: # Multi-Bouquet
+					else:  # Multi-Bouquet
 						ref = x[2]
 					if ref == currRef:
 						self.servicelist.history_pos = idx

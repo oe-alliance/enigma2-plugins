@@ -1356,7 +1356,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
         )
 
     def gotFilename(self, res):
-        if res is not None:# and res is not config.movielist.last_videodir.value:
+        if res is not None:  # and res is not config.movielist.last_videodir.value:
             if fileExists(res):
                 selection = None
                 current = self.getCurrent()

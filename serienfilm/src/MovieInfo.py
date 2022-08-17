@@ -7,10 +7,10 @@ from .MovieList import MovieList
 
 
 class MovieInfo(Converter, object):
-	MOVIE_SHORT_DESCRIPTION = 0 # meta description when available.. when not .eit short description
-	MOVIE_META_DESCRIPTION = 1 # just meta description when available
-	MOVIE_REC_SERVICE_NAME = 2 # name of recording service
-	MOVIE_REC_FILESIZE = 3 # filesize of recording
+	MOVIE_SHORT_DESCRIPTION = 0  # meta description when available.. when not .eit short description
+	MOVIE_META_DESCRIPTION = 1  # just meta description when available
+	MOVIE_REC_SERVICE_NAME = 2  # name of recording service
+	MOVIE_REC_FILESIZE = 3  # filesize of recording
 
 	def __init__(self, type):
 		if type == "ShortDescription":

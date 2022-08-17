@@ -174,7 +174,7 @@ class VPS_check(Screen):
 							NavigationInstance.instance.playService(None)
 							self.check.start(1500, True)
 							return
-				else: # hat geklappt
+				else:  # hat geklappt
 					self.check.start(1000, True)
 					return
 		else:
@@ -251,15 +251,15 @@ class VPS_check_PDC_Screen(VPS_check):
 
 	def ask_user(self):
 		if self.manual_timer:
-			if self.has_pdc == 1: # PDC vorhanden
+			if self.has_pdc == 1:  # PDC vorhanden
 				self.close()
-			elif self.has_pdc == 0: # kein PDC
+			elif self.has_pdc == 0:  # kein PDC
 				#nachfragen
 				self.session.openWithCallback(self.finish_callback, MessageBox, _("The selected channel doesn't support VPS for manually programmed timers!\n Do you really want to enable VPS?"), default=False)
-			else: # konnte nicht ermitteln
+			else:  # konnte nicht ermitteln
 				self.session.openWithCallback(self.finish_callback, MessageBox, _("The VPS-Plugin couldn't check if the selected channel supports VPS for manually programmed timers!\n Do you really want to enable VPS?"), default=False)
 		else:
-			if self.has_pdc == 1: # PDC vorhanden
+			if self.has_pdc == 1:  # PDC vorhanden
 				self.close()
 			else:
 				choiceList = [(_("No"), 0), (_("Yes"), 1), (_("Yes, don't ask again"), 2)]
@@ -280,7 +280,7 @@ class VPS_check_PDC_Screen(VPS_check):
 			return
 
 		elif result[1] == 2:
-			Check_PDC.setServicePDC(self.service, self.has_pdc, 1) # nicht mehr nachfragen
+			Check_PDC.setServicePDC(self.service, self.has_pdc, 1)  # nicht mehr nachfragen
 
 		self.close()
 

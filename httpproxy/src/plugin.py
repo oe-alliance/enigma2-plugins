@@ -26,8 +26,8 @@ config.plugins.httpproxy.filter_uri = ConfigYesNo(default=False)
 
 global ALLOWED_CLIENTS, LOG_TO_STDOUT, URI_BLACKLIST
 LOG_TO_STDOUT = False
-ALLOWED_CLIENTS = ['192.168.1.3'] # only clients listed here with ther IP Adress passed
-URI_BLACKLIST = ['microsoft', 'teen', 'porn'] # all uri s containig this words will be blocked
+ALLOWED_CLIENTS = ['192.168.1.3']  # only clients listed here with ther IP Adress passed
+URI_BLACKLIST = ['microsoft', 'teen', 'porn']  # all uri s containig this words will be blocked
 
 
 ###############################################################################

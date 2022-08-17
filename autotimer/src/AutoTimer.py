@@ -170,7 +170,7 @@ class AutoTimer:
 					0,		# Id
 					"",		# Name
 					"",		# Match
-					True	# Enabled
+					True  # Enabled
 				)
 
 				try:
@@ -361,7 +361,7 @@ class AutoTimer:
 		if timer.encoding != 'UTF-8':
 			try:
 				if PY2:
-					match = match.decode('UTF-8').encode(timer.encoding) #FIXME PY3
+					match = match.decode('UTF-8').encode(timer.encoding)  # FIXME PY3
 			except UnicodeDecodeError:
 				pass
 
@@ -389,7 +389,7 @@ class AutoTimer:
 							playable = not (service.flags & (eServiceReference.isMarker | eServiceReference.isDirectory))
 							if playable:
 								test.append((service.toString(), 0, -1, -1))
-			else: # Get all bouquets
+			else:  # Get all bouquets
 				bouquetlist = []
 				refstr = '1:134:1:0:0:0:0:0:0:0:FROM BOUQUET \"bouquets.tv\" ORDER BY bouquet'
 				bouquetroot = eServiceReference(refstr)
@@ -435,7 +435,7 @@ class AutoTimer:
 					if timer.searchType == "description":
 						if match in (shortdesc if casesensitive else shortdesc.lower()) or match in (extdesc if casesensitive else extdesc.lower()):
 							epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
-					else: # IPTV streams (if not "description" search)
+					else:  # IPTV streams (if not "description" search)
 						if timer.searchType == 'exact' and match == (name if casesensitive else name.lower()) or \
 							timer.searchType == 'partial' and match in (name if casesensitive else name.lower()) or \
 							timer.searchType == 'start' and (name if casesensitive else name.lower()).startswith(match):
@@ -495,7 +495,7 @@ class AutoTimer:
 			similarTimer = False
 			if eit in similardict:
 				similarTimer = True
-				dayofweek = None # NOTE: ignore day on similar timer
+				dayofweek = None  # NOTE: ignore day on similar timer
 			else:
 				# If maximum days in future is set then check time
 				if checkEvtLimit:
@@ -606,7 +606,7 @@ class AutoTimer:
 
 					if eit == preveit:
 						break
-					try: # protect against vps plugin not being present
+					try:  # protect against vps plugin not being present
 						vps_changed = rtimer.vpsplugin_enabled != timer.vps_enabled or rtimer.vpsplugin_overwrite != timer.vps_overwrite
 					except AttributeError:
 						vps_changed = False
@@ -886,7 +886,7 @@ class AutoTimer:
 				append({
 					"name": info.getName(movieref),
 					"shortdesc": info.getInfoString(movieref, iServiceInformation.sDescription),
-					"extdesc": event.getExtendedDescription() or '' # XXX: does event.getExtendedDescription() actually return None on no description or an empty string?
+					"extdesc": event.getExtendedDescription() or ''  # XXX: does event.getExtendedDescription() actually return None on no description or an empty string?
 				})
 
 	def checkSimilarity(self, timer, name1, name2, shortdesc1, shortdesc2, extdesc1, extdesc2, force=False):

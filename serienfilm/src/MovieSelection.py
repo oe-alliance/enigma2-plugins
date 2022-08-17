@@ -111,7 +111,7 @@ class MovieContextMenu(Screen):
 	def sortBy(self, newType):
 		config.movielist.sfmoviesort.value = newType
 		self.csel.setSortType(newType)
-		if not self.csel["list"].sortLists():	# no reload required if sflists sorted
+		if not self.csel["list"].sortLists():  # no reload required if sflists sorted
 			self.csel.reloadList()
 		self.close()
 
@@ -172,7 +172,7 @@ class MovieContextMenu(Screen):
 #			for l in self.virtlist[1:]:
 #				print "[SF-Plugin] MovieSelectin:deleteVirtDirConfirmed would delete " + l[3][2]
 			return self.close()
-		self.csel["list"].moveTo(self.service)	# put removeService in virtual Directory
+		self.csel["list"].moveTo(self.service)  # put removeService in virtual Directory
 		for l in self.virtlist[1:]:
 #			print "[SF-Plugin] MovieSelectin:deleteVirtDirConfirmed deletes " + (l[3][2])
 			self.service = l[0]
@@ -268,7 +268,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 
 		self["freeDiskSpace"] = self.diskinfo = DiskInfo(config.movielist.last_videodir.value, DiskInfo.FREE, update=False)
 
-		if config.usage.setup_level.index >= 2: # expert+
+		if config.usage.setup_level.index >= 2:  # expert+
 			self["InfobarActions"] = HelpableActionMap(self, "InfobarActions",
 				{
 					"showMovies": (self.doPathSelect, _("select the movie path")),
@@ -364,12 +364,12 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 	def movieSelected(self):
 		current = self.getCurrent()
 		if current is not None:
-			dirname = self["list"].playDirectory(current)	# dont feed dirs to MoviePlayer
+			dirname = self["list"].playDirectory(current)  # dont feed dirs to MoviePlayer
 			if dirname is None:
 				self.saveconfig()
 				self.close(current)			# and play movie
 			elif dirname:
-				self.gotFilename(dirname)	# change to existing directory
+				self.gotFilename(dirname)  # change to existing directory
 
 	def doContext(self):
 		current = self.getCurrent()
@@ -443,7 +443,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 			sel = self.getCurrent()
 		self["list"].reload(self.current_ref, self.selected_tags)
 		title = _("Recorded files...")
-		if config.usage.setup_level.index >= 2: # expert+
+		if config.usage.setup_level.index >= 2:  # expert+
 			title += "  " + config.movielist.last_videodir.value
 		if self.selected_tags is not None:
 			title += " - " + ','.join(self.selected_tags)

@@ -216,17 +216,17 @@ class YTTrailer:
 		}
 
 		VIDEO_FMT_PRIORITY_MAP = {
-			'18': 4, #MP4 360p
-			'35': 5, #FLV 480p
-			'34': 6, #FLV 360p
+			'18': 4,  # MP4 360p
+			'35': 5,  # FLV 480p
+			'34': 6,  # FLV 360p
 		}
 
 		if int(config.plugins.yttrailer.best_resolution.value) <= 1:
-			VIDEO_FMT_PRIORITY_MAP["38"] = 1 #MP4 Original (HD)
-			VIDEO_FMT_PRIORITY_MAP["22"] = 3 #MP4 720p (HD)
+			VIDEO_FMT_PRIORITY_MAP["38"] = 1  # MP4 Original (HD)
+			VIDEO_FMT_PRIORITY_MAP["22"] = 3  # MP4 720p (HD)
 
 			if int(config.plugins.yttrailer.best_resolution.value) == 0:
-				VIDEO_FMT_PRIORITY_MAP["37"] = 2 #MP4 1080p (HD)
+				VIDEO_FMT_PRIORITY_MAP["37"] = 2  # MP4 1080p (HD)
 
 		video_url = None
 		video_id = str(self.getTubeId(entry))

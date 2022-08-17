@@ -266,7 +266,7 @@ class BirthdayReminder(Screen, HelpableScreen):
 
 	# set the state of the buttons depending on the list size
 	def setButtonState(self):
-		if not self.birthdaytimer.getSize(): # no entries in list
+		if not self.birthdaytimer.getSize():  # no entries in list
 			self["EditActions"].setEnabled(False)
 			self["key_green"].setText("")
 			self["key_yellow"].setText("")
@@ -373,18 +373,18 @@ class BirthdayReminder(Screen, HelpableScreen):
 		if not self.birthdaytimer.getSize():
 			return
 
-		if config.plugins.birthdayreminder.sortby.value == "1": # sort by name
+		if config.plugins.birthdayreminder.sortby.value == "1":  # sort by name
 			self["name"].instance.setForegroundColor(parseColor("yellow"))
 			self["birthday"].instance.setForegroundColor(parseColor("white"))
 			self["age"].instance.setForegroundColor(parseColor("white"))
 			self.birthdaytimer.bDayList.sort(key=lambda t: tuple(t[0].lower()))
-		elif config.plugins.birthdayreminder.sortby.value == "2": # sort by upcoming birthday
+		elif config.plugins.birthdayreminder.sortby.value == "2":  # sort by upcoming birthday
 			self["name"].instance.setForegroundColor(parseColor("white"))
 			self["birthday"].instance.setForegroundColor(parseColor("yellow"))
 			self["age"].instance.setForegroundColor(parseColor("white"))
 			#self.birthdaytimer.bDayList.sort(key=itemgetter(1), cmp=self.compareDates)
 			self.birthdaytimer.bDayList.sort(key=cmp_to_key(self.compareDates))
-		else: # sort by age
+		else:  # sort by age
 			self["name"].instance.setForegroundColor(parseColor("white"))
 			self["birthday"].instance.setForegroundColor(parseColor("white"))
 			self["age"].instance.setForegroundColor(parseColor("yellow"))
@@ -404,25 +404,25 @@ class BirthdayReminder(Screen, HelpableScreen):
 
 		try:
 			bDay1 = x.replace(year=today.year)
-		except ValueError: # raised on feb 29th
+		except ValueError:  # raised on feb 29th
 			bDay1 = x.replace(year=today.year, day=x.day - 1)
 
-		if bDay1 < today: # next birthday in next year
+		if bDay1 < today:  # next birthday in next year
 			try:
 				bDay1 = x.replace(year=today.year + 1)
-			except ValueError: # raised on feb 29th
+			except ValueError:  # raised on feb 29th
 				bDay1 = x.replace(year=today.year + 1, day=x.day - 1)
 		ts1 = int(mktime(bDay1.timetuple()))
 
 		try:
 			bDay2 = y.replace(year=today.year)
-		except ValueError: # raised on feb 29th
+		except ValueError:  # raised on feb 29th
 			bDay2 = y.replace(year=today.year, day=y.day - 1)
 
-		if bDay2 < today: # next birthday in next year
+		if bDay2 < today:  # next birthday in next year
 			try:
 				bDay2 = y.replace(year=today.year + 1)
-			except ValueError: # raised on feb 29th
+			except ValueError:  # raised on feb 29th
 				bDay2 = y.replace(year=today.year + 1, day=y.day - 1)
 		ts2 = int(mktime(bDay2.timetuple()))
 
@@ -434,7 +434,7 @@ class BirthdayReminder(Screen, HelpableScreen):
 		ageX = getAge(x)
 		ageY = getAge(y)
 
-		if ageX == ageY: # ages are the same, sort by birthday
+		if ageX == ageY:  # ages are the same, sort by birthday
 			tX = int(mktime(x.timetuple()))
 			tY = int(mktime(y.timetuple()))
 			return tX - tY
@@ -723,9 +723,9 @@ class BirthdayReminderSettings(Screen, ConfigListScreen, HelpableScreen):
 
 		if config.plugins.birthdayreminder.preremind.value != self.preremind:
 			if self.preremind == "-1":
-				config.plugins.birthdayreminder.preremindChanged.setValue(True) # there are no preremind timers, add new timers
+				config.plugins.birthdayreminder.preremindChanged.setValue(True)  # there are no preremind timers, add new timers
 			else:
-				config.plugins.birthdayreminder.preremindChanged.setValue(False) # change existing preremind timers
+				config.plugins.birthdayreminder.preremindChanged.setValue(False)  # change existing preremind timers
 
 		if config.plugins.birthdayreminder.notificationTime.value != self.notificationTime:
 			config.plugins.birthdayreminder.notificationTimeChanged.setValue(True)
@@ -819,7 +819,7 @@ def getAge(birthday):
 	# take care of feb 29th, use feb 28th if necessary
 	try:
 		bDay = birthday.replace(year=today.year)
-	except ValueError: # raised on feb 29th
+	except ValueError:  # raised on feb 29th
 		bDay = birthday.replace(year=today.year, day=birthday.day - 1)
 
 	age = today.year - birthday.year

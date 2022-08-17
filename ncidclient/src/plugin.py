@@ -23,7 +23,7 @@ from Plugins.Plugin import PluginDescriptor
 from Tools import Notifications
 from Tools.NumericalTextInput import NumericalTextInput
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CONFIG, SCOPE_MEDIA
-from GlobalActions import globalActionMap # for muting
+from GlobalActions import globalActionMap  # for muting
 
 from twisted.internet import reactor
 from twisted.internet.protocol import ReconnectingClientFactory
@@ -161,7 +161,7 @@ def resolveNumberWithAvon(number, countrycode):
 		normNumber = '+' + number[2:]
 	elif number[:1] == '0':
 		normNumber = countrycode + number[1:]
-	else: # this should can not happen, but safety first
+	else:  # this should can not happen, but safety first
 		return ""
 
 	# debug('normNumer: ' + normNumber)
@@ -287,7 +287,7 @@ class NcidClientPhonebook:
 				try:
 					# Beware: strings in phonebook.phonebook have to be in utf-8!
 					line = line.decode("utf-8")
-				except UnicodeDecodeError: # this is just for the case, somebody wrote latin1 chars into PhoneBook.txt
+				except UnicodeDecodeError:  # this is just for the case, somebody wrote latin1 chars into PhoneBook.txt
 					try:
 						line = line.decode("iso-8859-1")
 						debug("[NcidClientPhonebook] Fallback to ISO-8859-1 in %s" % line)
@@ -300,7 +300,7 @@ class NcidClientPhonebook:
 				if len(elems) == 2:
 					try:
 						self.phonebook[elems[0]] = elems[1]
-					except ValueError: # how could this possibly happen?!?!
+					except ValueError:  # how could this possibly happen?!?!
 						debug("[NcidClientPhonebook] Could not parse internal Phonebook Entry %s" % line)
 						phonebookTxtCorrupt = True
 				else:
@@ -351,7 +351,7 @@ class NcidClientPhonebook:
 		@param name: name of entry, has to be in utf-8
 		'''
 		debug("[NcidClientPhonebook] add")
-		name = name.replace("\n", ", ").replace('#', '') # this is just for safety reasons. add should only be called with newlines converted into commas
+		name = name.replace("\n", ", ").replace('#', '')  # this is just for safety reasons. add should only be called with newlines converted into commas
 		self.remove(number)
 		self.phonebook[number] = name
 		if number and number != 0:
@@ -433,24 +433,24 @@ class NcidClientPhonebook:
 					<widget name="key_blue" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				</screen>""" % (
 						# scaleH(90, 75), scaleV(100, 73), # position
-						self.entriesWidth, self.height, # size
-						self.entriesWidth, # eLabel width
-						scaleH(40, 5), scaleV(20, 5), # entries position
-						self.entriesWidth - scaleH(40, 5), self.height - scaleV(20, 5) - 5 - 5 - 40, # entries size
-						0, 0, fieldWidth, scaleH(24, 20), # name pos/size
-						fieldWidth + 5, 0, numberFieldWidth, scaleH(24, 20), # dir pos/size
-						fontSize, # fontsize
-						fontHeight, # itemHeight
-						self.height - 40 - 5, # eLabel position vertical
-						self.entriesWidth, # eLabel width
-						buttonGap, self.height - 40, "skin_default/buttons/red.png", # ePixmap red
-						2 * buttonGap + 140, self.height - 40, "skin_default/buttons/green.png", # ePixmap green
-						3 * buttonGap + 2 * 140, self.height - 40, "skin_default/buttons/yellow.png", # ePixmap yellow
-						4 * buttonGap + 3 * 140, self.height - 40, "skin_default/buttons/blue.png", # ePixmap blue
-						buttonGap, self.height - 40, scaleV(22, 21), # widget red
-						2 * buttonGap + 140, self.height - 40, scaleV(22, 21), # widget green
-						3 * buttonGap + 2 * 140, self.height - 40, scaleV(22, 21), # widget yellow
-						4 * buttonGap + 3 * 140, self.height - 40, scaleV(22, 21), # widget blue
+						self.entriesWidth, self.height,  # size
+						self.entriesWidth,  # eLabel width
+						scaleH(40, 5), scaleV(20, 5),  # entries position
+						self.entriesWidth - scaleH(40, 5), self.height - scaleV(20, 5) - 5 - 5 - 40,  # entries size
+						0, 0, fieldWidth, scaleH(24, 20),  # name pos/size
+						fieldWidth + 5, 0, numberFieldWidth, scaleH(24, 20),  # dir pos/size
+						fontSize,  # fontsize
+						fontHeight,  # itemHeight
+						self.height - 40 - 5,  # eLabel position vertical
+						self.entriesWidth,  # eLabel width
+						buttonGap, self.height - 40, "skin_default/buttons/red.png",  # ePixmap red
+						2 * buttonGap + 140, self.height - 40, "skin_default/buttons/green.png",  # ePixmap green
+						3 * buttonGap + 2 * 140, self.height - 40, "skin_default/buttons/yellow.png",  # ePixmap yellow
+						4 * buttonGap + 3 * 140, self.height - 40, "skin_default/buttons/blue.png",  # ePixmap blue
+						buttonGap, self.height - 40, scaleV(22, 21),  # widget red
+						2 * buttonGap + 140, self.height - 40, scaleV(22, 21),  # widget green
+						3 * buttonGap + 2 * 140, self.height - 40, scaleV(22, 21),  # widget yellow
+						4 * buttonGap + 3 * 140, self.height - 40, scaleV(22, 21),  # widget blue
 						)
 
 			# debug("[NcidDisplayCalls] skin: " + self.skin)
@@ -572,7 +572,7 @@ class NcidClientPhonebook:
 					#
 					noButtons = 2
 					width = max(scaleH(-1, 570), noButtons * 140)
-					height = scaleV(-1, 100) # = 5 + 126 + 40 + 5; 6 lines of text possible
+					height = scaleV(-1, 100)  # = 5 + 126 + 40 + 5; 6 lines of text possible
 					buttonsGap = (width - noButtons * 140) / (noButtons + 1)
 					buttonsVPos = height - 40 - 5
 					self.skin = """
@@ -681,7 +681,7 @@ phonebook = NcidClientPhonebook()
 
 class NcidClientSetup(Screen, ConfigListScreen):
 
-	def __init__(self, session, args=None): #@UnusedVariable # pylint: disable=W0613
+	def __init__(self, session, args=None):  # @UnusedVariable # pylint: disable=W0613
 		self.width = scaleH(20 + 4 * (140 + 90) + 2 * (35 + 40) + 20, 4 * 140 + 2 * 35)
 		width = self.width
 		debug("[NcidClientSetup] width: " + str(self.width))
@@ -697,18 +697,18 @@ class NcidClientSetup(Screen, ConfigListScreen):
 			<widget name="key_green" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			</screen>""" % (
 						# (DESKTOP_WIDTH-width)/2, scaleV(100, 73), # position
-						width, scaleV(560, 430), # size
-						width, # eLabel width
-						scaleV(40, 50), # eLabel position vertical
-						width, # eLabel width
-						scaleH(40, 5), scaleV(60, 57), # config position
-						scaleH(width - 80, width - 10), scaleV(453, 328), # config size
-						scaleV(518, 390), # eLabel position vertical
-						width, # eLabel width
-						scaleH(20, 0), scaleV(525, 395), "skin_default/buttons/red.png", # pixmap red
-						scaleH(20 + 140 + 90, 140), scaleV(525, 395), "skin_default/buttons/green.png", # pixmap green
-						scaleH(20, 0), scaleV(525, 395), scaleV(21, 21), # widget red
-						scaleH(20 + (140 + 90), 140), scaleV(525, 395), scaleV(21, 21), # widget green
+						width, scaleV(560, 430),  # size
+						width,  # eLabel width
+						scaleV(40, 50),  # eLabel position vertical
+						width,  # eLabel width
+						scaleH(40, 5), scaleV(60, 57),  # config position
+						scaleH(width - 80, width - 10), scaleV(453, 328),  # config size
+						scaleV(518, 390),  # eLabel position vertical
+						width,  # eLabel width
+						scaleH(20, 0), scaleV(525, 395), "skin_default/buttons/red.png",  # pixmap red
+						scaleH(20 + 140 + 90, 140), scaleV(525, 395), "skin_default/buttons/green.png",  # pixmap green
+						scaleH(20, 0), scaleV(525, 395), scaleV(21, 21),  # widget red
+						scaleH(20 + (140 + 90), 140), scaleV(525, 395), scaleV(21, 21),  # widget green
 													)
 
 		Screen.__init__(self, session)
@@ -909,11 +909,11 @@ def notifyCall(date, number, caller):
 		global standbyMode
 		if not standbyMode:
 			standbyMode = True
-			Standby.inStandby.onHide.append(callList.display) #@UndefinedVariable
+			Standby.inStandby.onHide.append(callList.display)  # @UndefinedVariable
 		# add text/timeout to call list
 		callList.add(date, number, caller)
 		debug("[NcidClient] notifyCall: added to callList")
-	else: # this is the "None" case
+	else:  # this is the "None" case
 		debug("[NcidClient] notifyCall: standby and no show")
 
 
@@ -1066,11 +1066,11 @@ class NcidClientFactory(ReconnectingClientFactory):
 	def __init__(self):
 		self.hangup_ok = False
 
-	def startedConnecting(self, connector): #@UnusedVariable # pylint: disable=W0613
+	def startedConnecting(self, connector):  # @UnusedVariable # pylint: disable=W0613
 		if config.plugins.NcidClient.connectionVerbose.value:
 			Notifications.AddNotification(MessageBox, _("Connecting to NCID Server..."), type=MessageBox.TYPE_INFO, timeout=2)
 
-	def buildProtocol(self, addr): #@UnusedVariable # pylint: disable=W0613
+	def buildProtocol(self, addr):  # @UnusedVariable # pylint: disable=W0613
 		global ncidsrv, phonebook
 		if config.plugins.NcidClient.connectionVerbose.value:
 			Notifications.AddNotification(MessageBox, _("Connected to NCID Server"), type=MessageBox.TYPE_INFO, timeout=4)
@@ -1145,7 +1145,7 @@ def autostart(reason, **kwargs):
 		ncid_call = None
 
 
-def Plugins(**kwargs): #@UnusedVariable # pylint: disable=W0613,C0103
+def Plugins(**kwargs):  # @UnusedVariable # pylint: disable=W0613,C0103
 	what = _("Display Fon calls on screen")
 	return [PluginDescriptor(name="NCID Client", description=what, where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main),
 		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]

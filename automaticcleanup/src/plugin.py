@@ -84,7 +84,7 @@ VERSION = "0.1.9"
 #		Simplify translation code: Setting the os LANGUAGE variable isn't needed anymore
 ###############################################################################
 pluginPrintname = "[AutomaticCleanup Ver. %s]" % VERSION
-DEBUG = False # If set True, plugin won't remove any file physically, instead prints file names in log for verification purposes
+DEBUG = False  # If set True, plugin won't remove any file physically, instead prints file names in log for verification purposes
 ###############################################################################
 
 config.plugins.AutomaticCleanup = ConfigSubsection()
@@ -101,7 +101,7 @@ config.plugins.AutomaticCleanup.deleteTimersOlderThan = ConfigSelection(default=
 config.plugins.AutomaticCleanup.deleteOrphanedMovieFiles = ConfigYesNo(default=False)
 
 
-class AutomaticCleanupSetup(Screen, ConfigListScreen): # config
+class AutomaticCleanupSetup(Screen, ConfigListScreen):  # config
 
 	skin = """
 		<screen name="SystemCleanup" position="center,center" size="630,315" title="Automatic System Cleanup Setup" >
@@ -149,9 +149,9 @@ class AutomaticCleanupSetup(Screen, ConfigListScreen): # config
 			print(pluginPrintname, "EMC not installed:", ie)
 			self.EMC_timer_autocln = False
 
-		if self.EMC_timer_autocln: # Timer cleanup enabled in EMC plugin?
+		if self.EMC_timer_autocln:  # Timer cleanup enabled in EMC plugin?
 			self.list.append(getConfigListEntry(_("Delete timerlist entries"), config.plugins.AutomaticCleanup.deleteTimersOlderThan,
-				_("Timerlist cleanup is enabled in EMC plugin! To avoid crashes, we won't delete entries whilst this option is enabled in EMC."))) # Avoid duplicate cleanup
+				_("Timerlist cleanup is enabled in EMC plugin! To avoid crashes, we won't delete entries whilst this option is enabled in EMC.")))  # Avoid duplicate cleanup
 		else:
 			self.list.append(getConfigListEntry(_("Delete timerlist entries"), config.plugins.AutomaticCleanup.deleteTimersOlderThan,
 				_("Specify, how long expired timer list entries shall be kept at most. Deactivated repeat timer entries won't be deleted ever.")))
@@ -223,9 +223,9 @@ class AutomaticCleanupSetup(Screen, ConfigListScreen): # config
 
 class AutomaticCleanup:
 	if DEBUG:
-		checkInterval = 60 * 3 # check timerlist every 3 minutes
+		checkInterval = 60 * 3  # check timerlist every 3 minutes
 	else:
-		checkInterval = 60 * 60 * 24 # check timerlist every 24 hours
+		checkInterval = 60 * 60 * 24  # check timerlist every 24 hours
 
 	def __init__(self, session):
 		self.session = session
@@ -233,10 +233,10 @@ class AutomaticCleanup:
 			print(pluginPrintname, "Starting in debugging mode...")
 		else:
 			print(pluginPrintname, "Starting AutomaticCleanup...")
-		self.timer = eTimer() # check timer
+		self.timer = eTimer()  # check timer
 		self.timer.callback.append(self.doCleanup)
 		self.initialState = True
-		self.doCleanup() # always check immediately after starting plugin
+		self.doCleanup()  # always check immediately after starting plugin
 		self.initialState = False
 		config.plugins.AutomaticCleanup.deleteSettingsOlderThan.addNotifier(self.configChange, initial_call=False)
 		config.plugins.AutomaticCleanup.keepSettings.addNotifier(self.configChange, initial_call=False)
@@ -246,29 +246,29 @@ class AutomaticCleanup:
 
 	def configChange(self, configElement=None):
 		# config was changed in setup
-		if self.timer.isActive(): # stop timer if running
+		if self.timer.isActive():  # stop timer if running
 			self.timer.stop()
 		print(pluginPrintname, "Setup values have changed")
-		if self.cleanupEnabled(): # check only if feature is enabled
+		if self.cleanupEnabled():  # check only if feature is enabled
 			print(pluginPrintname, "Next automatic timerlist cleanup at ", strftime("%c", localtime(time() + 120)))
-			self.timer.startLongTimer(120) # check timerlist in 2 minutes after changing
+			self.timer.startLongTimer(120)  # check timerlist in 2 minutes after changing
 		else:
 			print(pluginPrintname, "Cleanup disabled")
 
 	def doCleanup(self):
-		if self.timer.isActive(): # stop timer if running
+		if self.timer.isActive():  # stop timer if running
 			self.timer.stop()
-		if self.cleanupEnabled(): # check only if feature is enabled
+		if self.cleanupEnabled():  # check only if feature is enabled
 			self.cleanupSettings()
 			self.cleanupMovies()
 			self.cleanupTimerlist()
 			print(pluginPrintname, "Next automatic cleanup at", strftime("%c", localtime(time() + self.checkInterval)))
-			self.timer.startLongTimer(self.checkInterval) # check again after x secs
+			self.timer.startLongTimer(self.checkInterval)  # check again after x secs
 		else:
 			print(pluginPrintname, "Cleanup disabled")
 
 	def cleanupSettings(self):
-		if int(config.plugins.AutomaticCleanup.keepSettings.value) > -1 or int(config.plugins.AutomaticCleanup.deleteSettingsOlderThan.value) > -1: # check only if feature is enabled
+		if int(config.plugins.AutomaticCleanup.keepSettings.value) > -1 or int(config.plugins.AutomaticCleanup.deleteSettingsOlderThan.value) > -1:  # check only if feature is enabled
 			print(pluginPrintname, "Cleaning up setting backups")
 			self.backupPath = self.getBackupPath()
 			if (path.exists(self.backupPath) == False):
@@ -288,14 +288,14 @@ class AutomaticCleanup:
 		self.deleteList = []
 
 		keep = int(config.plugins.AutomaticCleanup.keepSettings.value)
-		if keep > -1: # don't keep all setting backups
+		if keep > -1:  # don't keep all setting backups
 			if keep > self.numSettings:
-				print(pluginPrintname, "Found %i setting backup(s), keeping max %i" % (self.numSettings + 1, keep)) # increment for uncounted latest
+				print(pluginPrintname, "Found %i setting backup(s), keeping max %i" % (self.numSettings + 1, keep))  # increment for uncounted latest
 			else:
 				print(pluginPrintname, "Keeping the %i latest settings" % keep)
 				# add all settings > config.plugins.AutomaticCleanup.keepSettings.value
 				# to a new list. the settings in this new list will be deleted later.
-				self.deleteList = self.settingList[0: self.numSettings - keep + 1] # increment for uncounted latest
+				self.deleteList = self.settingList[0: self.numSettings - keep + 1]  # increment for uncounted latest
 
 		if int(config.plugins.AutomaticCleanup.deleteSettingsOlderThan.value) > -1:
 			print(pluginPrintname, "Searching for outdated setting backup(s)")
@@ -303,10 +303,10 @@ class AutomaticCleanup:
 			# 86400 = one day in seconds
 			deleteOlderThan = now - 86400 * int(config.plugins.AutomaticCleanup.deleteSettingsOlderThan.value)
 
-			if keep > -1: # don't keep all settings
+			if keep > -1:  # don't keep all settings
 				# start checking the range in self.settingList which wasn't copied to
 				# self.deleteList
-				i = self.numSettings - keep + 1 # increment for uncounted latest
+				i = self.numSettings - keep + 1  # increment for uncounted latest
 				# if there are less settings than we want to keep, check the
 				# whole settings list
 				if i < 0:
@@ -359,23 +359,23 @@ class AutomaticCleanup:
 			self.EMC_timer_autocln = False
 
 		if int(config.plugins.AutomaticCleanup.deleteTimersOlderThan.value) > -1:  # check only if feature is enabled
-			if self.EMC_timer_autocln:	# Duplicate cleanup?
-				print(pluginPrintname, "Timerlist cleanup skipped because it is already enabled in EMC") # we skip check to avoid crash
+			if self.EMC_timer_autocln:  # Duplicate cleanup?
+				print(pluginPrintname, "Timerlist cleanup skipped because it is already enabled in EMC")  # we skip check to avoid crash
 			else:
-				expiration = time() - int(config.plugins.AutomaticCleanup.deleteTimersOlderThan.value) * 86400 # calculate end time for comparison with processed timers
+				expiration = time() - int(config.plugins.AutomaticCleanup.deleteTimersOlderThan.value) * 86400  # calculate end time for comparison with processed timers
 				print(pluginPrintname, "Cleaning up timerlist-entries older than", strftime("%c", localtime(expiration)))
 				if not DEBUG:
-					self.session.nav.RecordTimer.processed_timers = [timerentry for timerentry in self.session.nav.RecordTimer.processed_timers if timerentry.repeated or (timerentry.end and timerentry.end > expiration)] # cleanup timerlist
+					self.session.nav.RecordTimer.processed_timers = [timerentry for timerentry in self.session.nav.RecordTimer.processed_timers if timerentry.repeated or (timerentry.end and timerentry.end > expiration)]  # cleanup timerlist
 		else:
 			print(pluginPrintname, "Timerlist cleanup disabled")
 
 	def timerentryOnStateChange(self, timer):
-		if int(config.plugins.AutomaticCleanup.deleteTimersOlderThan.value) == 0 and timer.state == TimerEntry.StateEnded and timer.cancelled is not True: #if enabled, timerentry ended and it was not cancelled by user
+		if int(config.plugins.AutomaticCleanup.deleteTimersOlderThan.value) == 0 and timer.state == TimerEntry.StateEnded and timer.cancelled is not True:  # if enabled, timerentry ended and it was not cancelled by user
 			print(pluginPrintname, "Timerentry has been changed to StateEnd")
-			self.cleanupTimerlist() # and check if entries have to be cleaned up in the timerlist
+			self.cleanupTimerlist()  # and check if entries have to be cleaned up in the timerlist
 
 	def cleanupMovies(self):
-		if config.plugins.AutomaticCleanup.deleteOrphanedMovieFiles.value: # check only if feature is enabled
+		if config.plugins.AutomaticCleanup.deleteOrphanedMovieFiles.value:  # check only if feature is enabled
 			print(pluginPrintname, "Cleaning up orphaned movies")
 			moviePath = []
 			excludePath = []
@@ -403,8 +403,8 @@ class AutomaticCleanup:
 						path += "/"
 					if path not in moviePath:
 						moviePath.append(path)
-				try: # with v3 name
-					if len(config.EMC.movie_trashcan_path.value) > 1:	# Trashpath specified?
+				try:  # with v3 name
+					if len(config.EMC.movie_trashcan_path.value) > 1:  # Trashpath specified?
 						if DEBUG:
 							print(pluginPrintname, "EMC v3 trashcan path is", config.EMC.movie_trashcan_path.value)
 						if config.EMC.movie_trashcan_path.value.endswith('/'):
@@ -413,8 +413,8 @@ class AutomaticCleanup:
 							excludePath.append(config.EMC.movie_trashcan_path.value + "/")
 				except KeyError as ke:
 					print(pluginPrintname, "EMC v3 trashcan path not specified", ke)
-					try: # else with v2 name
-						if len(config.EMC.movie_trashpath.value) > 1:	# Trashpath specified?
+					try:  # else with v2 name
+						if len(config.EMC.movie_trashpath.value) > 1:  # Trashpath specified?
 							if DEBUG:
 								print(pluginPrintname, "EMC v2 trashcan path is", config.EMC.movie_trashpath.value)
 							if config.EMC.movie_trashpath.value.endswith('/'):
@@ -450,7 +450,7 @@ class AutomaticCleanup:
 			print(pluginPrintname, "Checking moviepath:", scanPath)
 
 		if self.initialState:
-			extensions = [".ts.ap", ".ts.cuts", ".ts.cutsr", ".ts.gm", ".ts.meta", ".ts.sc", ".eit", ".png", ".ts_mp.jpg", ".ts.del", ".ts.ap.del", ".ts.cuts.del", ".ts.cutsr.del", ".ts.gm.del", ".ts.meta.del", ".ts.sc.del", ".eit.del"] # include orphaned files marked for E2 smooth deletion
+			extensions = [".ts.ap", ".ts.cuts", ".ts.cutsr", ".ts.gm", ".ts.meta", ".ts.sc", ".eit", ".png", ".ts_mp.jpg", ".ts.del", ".ts.ap.del", ".ts.cuts.del", ".ts.cutsr.del", ".ts.gm.del", ".ts.meta.del", ".ts.sc.del", ".eit.del"]  # include orphaned files marked for E2 smooth deletion
 		else:
 			extensions = [".ts.ap", ".ts.cuts", ".ts.cutsr", ".ts.gm", ".ts.meta", ".ts.sc", ".eit", ".png", ".ts_mp.jpg"]
 
@@ -482,11 +482,11 @@ class AutomaticCleanup:
 
 
 def autostart(session, **kwargs):
-	AutomaticCleanup(session) # start plugin at sessionstart
+	AutomaticCleanup(session)  # start plugin at sessionstart
 
 
 def setup(session, **kwargs):
-	session.open(AutomaticCleanupSetup) # start setup
+	session.open(AutomaticCleanupSetup)  # start setup
 
 
 def startSetup(menuid):

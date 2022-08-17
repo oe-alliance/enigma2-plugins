@@ -204,7 +204,7 @@ class MSNWeatherPlugin(Screen):
 			self.webSite = self.weatherData.url
 			for weatherData in list(self.weatherData.weatherItems.items()):
 				item = weatherData[1]
-				if weatherData[0] == "-1": # current
+				if weatherData[0] == "-1":  # current
 					self["currentTemp"].text = "%s°%s" % (item.temperature, self.weatherData.degreetype)
 					self["condition"].text = item.skytext
 					self["humidity"].text = _("Humidity: %s %%") % item.humidity
@@ -253,7 +253,7 @@ class MSNWeatherPlugin(Screen):
 			if self.webSite:
 				self.session.open(Browser, config.plugins.WebBrowser.fullscreen.value, self.webSite, False)
 		except:
-			pass # I dont care if browser is installed or not...
+			pass  # I dont care if browser is installed or not...
 
 
 class WeatherIcon(Pixmap):

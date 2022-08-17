@@ -271,5 +271,5 @@ class FetchingMovies(Thread):
         current = total
         #print("Movie download finished")
         if is_hidden == True:
-            this_session.open(MessageBox, (_("Download and save from movie infos and covers complete.")), MessageBox.TYPE_INFO) # Topfi: removed last parameter
+            this_session.open(MessageBox, (_("Download and save from movie infos and covers complete.")), MessageBox.TYPE_INFO)  # Topfi: removed last parameter
             this_session = None

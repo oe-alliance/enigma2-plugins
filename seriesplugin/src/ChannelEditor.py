@@ -178,7 +178,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 			"green": (self.keySave, _("Save and close")),
 			"blue": (self.keyRemove, _("Remove channel")),
 			"yellow": (self.tryToMatchChannels, _("Auto match")),
-		}, -2) # higher priority
+		}, -2)  # higher priority
 
 		self.helpList[0][2].sort()
 

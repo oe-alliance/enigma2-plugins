@@ -78,7 +78,7 @@ class BirthdayTimerEntry(TimerEntry):
 		# set timer to feb 28th for birthdays on feb 29th
 		try:
 			bDayNextYear = date(now.year + 1, bDay.month, bDay.day)
-		except ValueError: # raised on feb 29th
+		except ValueError:  # raised on feb 29th
 			bDayNextYear = date(now.year + 1, bDay.month, bDay.day - 1)
 
 		self.begin = int(mktime(bDayNextYear.timetuple()))
@@ -188,24 +188,24 @@ class BirthdayTimer(Timer, BirthdayStore):
 			# set timer to feb 28th for birthdays on feb 29th
 			try:
 				dateThisYear = date(now.year, bDay.month, bDay.day) - timedelta(numDays)
-			except ValueError: # raised on feb 29th
+			except ValueError:  # raised on feb 29th
 				dateThisYear = date(now.year, bDay.month, bDay.day - 1) - timedelta(numDays)
 		else:
 			# set timer to feb 28th for birthdays on feb 29th
 			try:
 				dateThisYear = date(now.year, bDay.month, bDay.day)
-			except ValueError: # raised on feb 29th
+			except ValueError:  # raised on feb 29th
 				dateThisYear = date(now.year, bDay.month, bDay.day - 1)
 
 		dateTimeThisYear = datetime.combine(dateThisYear, notifyTime)
 
-		if dateThisYear >= now: # check if the birthday is in this year
+		if dateThisYear >= now:  # check if the birthday is in this year
 			begin = int(mktime(dateTimeThisYear.timetuple()))
-		else: # birthday is in the past, we need a timer for the next year
+		else:  # birthday is in the past, we need a timer for the next year
 			# set timer to feb 28th for birthdays on feb 29th
 			try:
 				bDayNextYear = dateTimeThisYear.replace(year=dateThisYear.year + 1)
-			except ValueError: # raised on feb 29th
+			except ValueError:  # raised on feb 29th
 				bDayNextYear = dateTimeThisYear.replace(year=dateThisYear.year + 1, day=dateThisYear.day - 1)
 
 			begin = int(mktime(bDayNextYear.timetuple()))
@@ -249,14 +249,14 @@ class BirthdayTimer(Timer, BirthdayStore):
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO)
 
 	def cbPreremindChanged(self, configElement=None):
-		if config.plugins.birthdayreminder.preremind.value == "-1": # remove all preremind timers
+		if config.plugins.birthdayreminder.preremind.value == "-1":  # remove all preremind timers
 			self.removePreremindTimers()
-		else: # we need to add or change timers
-			if config.plugins.birthdayreminder.preremindChanged.value: # there are no preremind timers, add new timers
+		else:  # we need to add or change timers
+			if config.plugins.birthdayreminder.preremindChanged.value:  # there are no preremind timers, add new timers
 				print("[Birthday Reminder] Adding new preremind timers...")
 				for timer in self.timer_list[:]:
 					self.addTimer(timer.bDay, preremind=True)
-			else: # change existing preremind timers
+			else:  # change existing preremind timers
 				print("[Birthday Reminder] Changing date of preremind timers...")
 				self.removePreremindTimers()
 

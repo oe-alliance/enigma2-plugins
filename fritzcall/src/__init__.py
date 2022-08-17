@@ -14,9 +14,9 @@ import os
 from logging import NOTSET
 from six.moves import range
 
-from Components.config import config #@UnresolvedImport
+from Components.config import config  # @UnresolvedImport
 from Components.Language import language
-from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE #@UnresolvedImport
+from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE  # @UnresolvedImport
 from enigma import eBackgroundFileEraser
 
 lang = language.getLanguage()
@@ -34,7 +34,7 @@ error = logger.error
 exception = logger.exception
 
 
-def _(txt): # pylint: disable=C0103
+def _(txt):  # pylint: disable=C0103
 	td = gettext.dgettext("FritzCall", txt)
 	if td == txt:
 		td = gettext.gettext(txt)
@@ -76,7 +76,7 @@ def normalizePhoneNumber(intNo):
 	if found:
 		intNo = '00' + found.group(1)
 	intNo = intNo.replace('(', '').replace(')', '').replace(' ', '').replace('/', '').replace('-', '')
-	found = re.match(r'^49(.*)', intNo) # this is most probably an error
+	found = re.match(r'^49(.*)', intNo)  # this is most probably an error
 	if found:
 		intNo = '0' + found.group(1)
 	found = re.match('.*?([0-9]+)', intNo)

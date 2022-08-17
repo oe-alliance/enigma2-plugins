@@ -179,7 +179,7 @@ class OFDB(Screen):
 		if "de" not in syslang:
 			self.OFDBlanguage = ""  # set to empty ("") for english version
 		else:
-			self.OFDBlanguage = "german." # it's a subdomain, so add a '.' at the end
+			self.OFDBlanguage = "german."  # it's a subdomain, so add a '.' at the end
 
 		self.htmltags = re.compile('<.*?>')
 
@@ -297,7 +297,7 @@ class OFDB(Screen):
 		if self.eventName == "":
 			s = self.session.nav.getCurrentService()
 			info = s and s.info()
-			event = info and info.getEvent(0) # 0 = now, 1 = next
+			event = info and info.getEvent(0)  # 0 = now, 1 = next
 			if event:
 				self.eventName = event.getEventName()
 
@@ -500,7 +500,7 @@ def eventinfo(session, eventName="", **kwargs):
 		s = session.nav.getCurrentService()
 		if s:
 			info = s.info()
-			event = info.getEvent(0) # 0 = now, 1 = next
+			event = info.getEvent(0)  # 0 = now, 1 = next
 			eventName = event and event.getEventName() or ''
 	session.open(OFDB, eventName)
 

@@ -94,7 +94,7 @@ class TravelWebcamviewer(Screen):
 		self["key_yellow"] = Button(_("search"))
 		self["key_blue"] = Button(_("hdkfjhg"))
 
-		self["key_blue"].hide() #not used at the moment
+		self["key_blue"].hide()  # not used at the moment
 
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "DirectionActions", "ShortcutActions"],
 			{

@@ -6,7 +6,7 @@ from Screens.MessageBox import MessageBox
 from enigma import eServiceCenter, eServiceReference, \
 		iStaticServiceInformationPtr
 
-titleCmp = lambda x, y: x.lower() in y.lower() # force case-insensitive for now
+titleCmp = lambda x, y: x.lower() in y.lower()  # force case-insensitive for now
 
 
 def vkCallback(movieContextMenu, searchString=None):
@@ -16,7 +16,7 @@ def vkCallback(movieContextMenu, searchString=None):
 	else:
 		if hasattr(movieContextMenu, 'csel'):
 			csel = movieContextMenu.csel
-		else: #if hasattr(cur_dialog, 'mlist'):
+		else:  # if hasattr(cur_dialog, 'mlist'):
 			csel = movieContextMenu.mlist
 			isEmc = True
 	if not searchString:
@@ -55,7 +55,7 @@ def vkCallback(movieContextMenu, searchString=None):
 			if len(movie) < 2:
 				newList.append(movie)
 			else:
-				if len(movie) == 4 and isinstance(movie[3], list): # assume serienfilm-plugin
+				if len(movie) == 4 and isinstance(movie[3], list):  # assume serienfilm-plugin
 					tinfo = movie[3]
 					type = tinfo[0]
 					if type == 0:

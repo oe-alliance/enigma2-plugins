@@ -121,7 +121,7 @@ class EPGBackupSupport:
 		try:
 			if configentry == None:
 				configentry = config.plugins.epgbackup.backupSaveInterval
-			self.timerInterval = int(configentry.value) * 60 # minutes
+			self.timerInterval = int(configentry.value) * 60  # minutes
 			if self.timerInterval > 0:
 				debugOut("backuptimer-Interval: " + str(self.timerInterval) + " seconds")
 				self.backuptimer.startLongTimer(self.timerInterval)

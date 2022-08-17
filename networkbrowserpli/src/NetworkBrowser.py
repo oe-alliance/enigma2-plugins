@@ -113,8 +113,8 @@ class NetworkBrowser(Screen):
 		self.device = None
 		self.mounts = None
 		self.expanded = []
-		self.cache_ttl = 604800 #Seconds cache is considered valid, 7 Days should be ok
-		self.cache_file = '/etc/enigma2/networkbrowser.cache' #Path to cache directory
+		self.cache_ttl = 604800  # Seconds cache is considered valid, 7 Days should be ok
+		self.cache_file = '/etc/enigma2/networkbrowser.cache'  # Path to cache directory
 		self.Console = Console()
 
 		self["key_red"] = StaticText(_("Close"))
@@ -290,7 +290,7 @@ class NetworkBrowser(Screen):
 	def getNetworkShares(self, hostip, hostname, devicetype):
 		sharelist = []
 		self.sharecache_file = None
-		self.sharecache_file = '/etc/enigma2/' + hostname.strip() + '.cache' #Path to cache directory
+		self.sharecache_file = '/etc/enigma2/' + hostname.strip() + '.cache'  # Path to cache directory
 		if os_path.exists(self.sharecache_file):
 			print('[Networkbrowser] Loading userinfo from ', self.sharecache_file)
 			try:
@@ -367,7 +367,7 @@ class NetworkBrowser(Screen):
 	def updateNetworkList(self):
 		self.list = []
 		self.network = {}
-		self.mounts = iAutoMount.getMountsList() # reloading mount list
+		self.mounts = iAutoMount.getMountsList()  # reloading mount list
 		for x in self.networklist:
 			if x[2] not in self.network:
 				self.network[x[2]] = []
@@ -389,7 +389,7 @@ class NetworkBrowser(Screen):
 				self.list.append((hostentry, expandedIcon, name, None, None, None, None))
 				for share in networkshares:
 					self.list.append(self.BuildNetworkShareEntry(share))
-			else: # HOSTLIST - VIEW
+			else:  # HOSTLIST - VIEW
 				hostentry = self.network[x][0][1]
 				name = hostentry[2] + " ( " + hostentry[1].strip() + " )"
 				if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png")):
@@ -482,14 +482,14 @@ class NetworkBrowser(Screen):
 		selectedhostname = sel[0][1]
 
 		self.hostcache_file = None
-		if sel[0][0] == 'host': # host entry selected
+		if sel[0][0] == 'host':  # host entry selected
 			print('[Networkbrowser] sel host')
 			if selectedhost in self.expanded:
 				self.expanded.remove(selectedhost)
 				self.updateNetworkList()
 			else:
 				self.hostcache_file = None
-				self.hostcache_file = '/etc/enigma2/' + selectedhostname.strip() + '.cache' #Path to cache directory
+				self.hostcache_file = '/etc/enigma2/' + selectedhostname.strip() + '.cache'  # Path to cache directory
 				if os_path.exists(self.hostcache_file):
 					print('[Networkbrowser] Loading userinfo cache from ', self.hostcache_file)
 					try:
@@ -500,13 +500,13 @@ class NetworkBrowser(Screen):
 				else:
 					self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?\n")))
 
-		if sel[0][0] == 'nfsShare': # share entry selected
+		if sel[0][0] == 'nfsShare':  # share entry selected
 			print('[Networkbrowser] sel nfsShare')
 			self.openMountEdit(sel[0])
-		if sel[0][0] == 'smbShare': # share entry selected
+		if sel[0][0] == 'smbShare':  # share entry selected
 			print('[Networkbrowser] sel cifsShare')
 			self.hostcache_file = None
-			self.hostcache_file = '/etc/enigma2/' + selectedhostname.strip() + '.cache' #Path to cache directory
+			self.hostcache_file = '/etc/enigma2/' + selectedhostname.strip() + '.cache'  # Path to cache directory
 			if os_path.exists(self.hostcache_file):
 				print('[Networkbrowser] userinfo found from ', self.sharecache_file)
 				self.openMountEdit(sel[0])
@@ -520,15 +520,15 @@ class NetworkBrowser(Screen):
 		if (ret == True):
 			self.session.openWithCallback(self.UserDialogClosed, UserDialog, self.skin_path, selectedhostname.strip())
 		else:
-			if sel[0][0] == 'host': # host entry selected
+			if sel[0][0] == 'host':  # host entry selected
 				if selectedhost in self.expanded:
 					self.expanded.remove(selectedhost)
 				else:
 					self.expanded.append(selectedhost)
 				self.updateNetworkList()
-			if sel[0][0] == 'nfsShare': # share entry selected
+			if sel[0][0] == 'nfsShare':  # share entry selected
 				self.openMountEdit(sel[0])
-			if sel[0][0] == 'smbShare': # share entry selected
+			if sel[0][0] == 'smbShare':  # share entry selected
 				self.openMountEdit(sel[0])
 
 	def UserDialogClosed(self, *ret):
@@ -538,7 +538,7 @@ class NetworkBrowser(Screen):
 	def openMountEdit(self, selection):
 		if selection is not None and len(selection):
 			mounts = iAutoMount.getMountsList()
-			if selection[0] == 'nfsShare': # share entry selected
+			if selection[0] == 'nfsShare':  # share entry selected
 				#Initialize blank mount enty
 				data = {'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False}
 				# add data
@@ -553,7 +553,7 @@ class NetworkBrowser(Screen):
 					if sharedata['ip'] == selection[2] and sharedata['sharedir'] == selection[4]:
 						data = sharedata
 				self.session.openWithCallback(self.MountEditClosed, AutoMountEdit, self.skin_path, data)
-			if selection[0] == 'smbShare': # share entry selected
+			if selection[0] == 'smbShare':  # share entry selected
 				#Initialize blank mount enty
 				data = {'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype': False, 'options': False}
 				# add data
@@ -564,7 +564,7 @@ class NetworkBrowser(Screen):
 				data['sharedir'] = selection[3]
 				data['options'] = "rw"
 				self.sharecache_file = None
-				self.sharecache_file = '/etc/enigma2/' + selection[1].strip() + '.cache' #Path to cache directory
+				self.sharecache_file = '/etc/enigma2/' + selection[1].strip() + '.cache'  # Path to cache directory
 				if os_path.exists(self.sharecache_file):
 					print('[Networkbrowser] Loading userinfo from ', self.sharecache_file)
 					try:

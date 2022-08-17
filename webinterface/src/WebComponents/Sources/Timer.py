@@ -278,7 +278,7 @@ class Timer(Source):
 			else:
 				print("[WebComponents.Sources.Timer] event not found, will be ignored")
 
-		disabled = False #Default to: Enabled
+		disabled = False  # Default to: Enabled
 		if 'disabled' in param:
 			if param['disabled'] == "1":
 				disabled = True
@@ -286,12 +286,12 @@ class Timer(Source):
 				#TODO - maybe we can give the user some useful hint here
 				pass
 
-		justplay = False #Default to: Record
+		justplay = False  # Default to: Record
 		if 'justplay' in param:
 			if param['justplay'] == "1":
 				justplay = True
 
-		afterEvent = 3 #Default to Afterevent: Auto
+		afterEvent = 3  # Default to Afterevent: Auto
 		if 'afterevent' in param:
 			if (param['afterevent'] == "0") or (param['afterevent'] == "1") or (param['afterevent'] == "2"):
 				afterEvent = int(param['afterevent'])
@@ -330,7 +330,7 @@ class Timer(Source):
 				for timer in self.recordtimer.timer_list + self.recordtimer.processed_timers:
 					if str(timer.service_ref) == str(channelOld):
 						if int(timer.begin) == beginOld:
-							if int(timer.end) == endOld: #we've found the timer we've been searching for
+							if int(timer.end) == endOld:  # we've found the timer we've been searching for
 								#set the new data
 								timer.service_ref = service_ref
 								timer.begin = begin
@@ -359,7 +359,7 @@ class Timer(Source):
 											conflicts = timersanitycheck.getSimulTimerList()
 
 								if conflicts is None:
-									self.recordtimer.timeChanged(timer) #go and save it
+									self.recordtimer.timeChanged(timer)  # go and save it
 									print("[WebComponents.Timer] editTimer: Timer changed!")
 									return (True, "Timer '%s' changed" % (timer.name))
 								else:

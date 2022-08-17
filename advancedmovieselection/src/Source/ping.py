@@ -93,7 +93,7 @@ from six.moves import range
 
 
 # From /usr/include/linux/icmp.h; your milage may vary.
-ICMP_ECHO_REQUEST = 8 # Seems to be the same on Solaris.
+ICMP_ECHO_REQUEST = 8  # Seems to be the same on Solaris.
 
 
 def checksum(source_string):
@@ -107,12 +107,12 @@ def checksum(source_string):
     while count < countTo:
         thisVal = ord(source_string[count + 1]) * 256 + ord(source_string[count])
         sum = sum + thisVal
-        sum = sum & 0xffffffff # Necessary?
+        sum = sum & 0xffffffff  # Necessary?
         count = count + 2
 
     if countTo < len(source_string):
         sum = sum + ord(source_string[len(source_string) - 1])
-        sum = sum & 0xffffffff # Necessary?
+        sum = sum & 0xffffffff  # Necessary?
 
     sum = (sum >> 16) + (sum & 0xffff)
     sum = sum + (sum >> 16)
@@ -134,7 +134,7 @@ def receive_one_ping(my_socket, ID, timeout):
         startedSelect = time.time()
         whatReady = select.select([my_socket], [], [], timeLeft)
         howLongInSelect = (time.time() - startedSelect)
-        if whatReady[0] == []: # Timeout
+        if whatReady[0] == []:  # Timeout
             return
 
         timeReceived = time.time()
@@ -177,7 +177,7 @@ def send_one_ping(my_socket, dest_addr, ID):
         "bbHHh", ICMP_ECHO_REQUEST, 0, socket.htons(my_checksum), ID, 1
     )
     packet = header + data
-    my_socket.sendto(packet, (dest_addr, 1)) # Don't know about the 1
+    my_socket.sendto(packet, (dest_addr, 1))  # Don't know about the 1
 
 
 def do_one(dest_addr, timeout):
@@ -196,7 +196,7 @@ def do_one(dest_addr, timeout):
                 " running as root."
             )
             raise socket.error(msg)
-        raise # raise the original error
+        raise  # raise the original error
 
     my_ID = os.getpid() & 0xFFFF
 

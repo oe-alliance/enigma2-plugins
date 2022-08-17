@@ -141,7 +141,7 @@ def main(session, **kwargs):
 
 
 def Plugins(**kwargs):
-	list = [PluginDescriptor(name="SHOUTcast", description=_("listen to shoutcast internet-radio"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=main)] # always show in plugin menu
+	list = [PluginDescriptor(name="SHOUTcast", description=_("listen to shoutcast internet-radio"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=main)]  # always show in plugin menu
 	if config.plugins.shoutcast.showinextensions.value:
 		list.append(PluginDescriptor(name="SHOUTcast", description=_("listen to shoutcast internet-radio"), where=[PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main))
 	return list
@@ -188,18 +188,18 @@ class SHOUTcastWidget(Screen):
 			<widget name="cover" zPosition="2" position="5,%d" size="102,110" alphatest="blend" />
 			<ePixmap position="%d,41" zPosition="4" size="120,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/shoutcast-logo1-fs8.png" transparent="1" alphatest="on" />
 		</screen>""" % (
-			sz_w, sz_h, # size
-			sz_w - 135, # size headertext
-			sz_w - 100, # size statustext
-			sz_w - 10, sz_h - 205, # size list
-			sz_h - 105, # position titel
-			sz_w - 125, # size titel
-			sz_h - 70, # position station
-			sz_w - 125, # size station
-			sz_h - 25, # position console
-			sz_w - 125, # size console
-			sz_h - 105, # position cover
-			sz_w - 125, # position logo
+			sz_w, sz_h,  # size
+			sz_w - 135,  # size headertext
+			sz_w - 100,  # size statustext
+			sz_w - 10, sz_h - 205,  # size list
+			sz_h - 105,  # position titel
+			sz_w - 125,  # size titel
+			sz_h - 70,  # position station
+			sz_w - 125,  # size station
+			sz_h - 25,  # position console
+			sz_w - 125,  # size console
+			sz_h - 105,  # position cover
+			sz_w - 125,  # position logo
 			)
 
 	def __init__(self, session):
@@ -1132,9 +1132,9 @@ class SHOUTcastList(GUIComponent, object):
 	def buildEntry(self, item):
 		width = self.l.getItemSize().width()
 		res = [None]
-		if self.mode == 0: # GENRELIST
+		if self.mode == 0:  # GENRELIST
 			print("[SHOUTcast] list name=%s haschilds=%s opened=%s\n" % (item.name, item.haschilds, item.opened))
-			if item.parentid == "0": # main genre
+			if item.parentid == "0":  # main genre
 				if item.haschilds == "true":
 					if item.opened == "true":
 						iname = "- %s" % item.name
@@ -1145,12 +1145,12 @@ class SHOUTcastList(GUIComponent, object):
 			else:
 				iname = "     %s" % item.name
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, self.pard, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, iname))
-		elif self.mode == 1: # STATIONLIST
+		elif self.mode == 1:  # STATIONLIST
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width, self.para, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, item.name))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, self.parb, width, self.para, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, item.ct))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, self.parc, width / 2, self.para, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, _("Audio: %s") % item.mt))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, width / 2, self.parc, width / 2, self.para, 1, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, _("Bit rate: %s kbps") % item.br))
-		elif self.mode == 2: # FAVORITELIST
+		elif self.mode == 2:  # FAVORITELIST
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width, self.para, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, item.configItem.name.value))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, self.parb, width, self.para, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, "%s (%s)" % (item.configItem.text.value, item.configItem.type.value)))
 			if len(item.configItem.audio.value) != 0:
@@ -1168,9 +1168,9 @@ class SHOUTcastList(GUIComponent, object):
 
 	def setMode(self, mode):
 		self.mode = mode
-		if mode == 0: # GENRELIST
+		if mode == 0:  # GENRELIST
 			self.l.setItemHeight(self.cenrylist)
-		elif mode == 1 or mode == 2: # STATIONLIST OR FAVORITELIST
+		elif mode == 1 or mode == 2:  # STATIONLIST OR FAVORITELIST
 			self.l.setItemHeight(self.favlist)
 
 	def connectSelChanged(self, fnc):

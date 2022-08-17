@@ -139,7 +139,7 @@ def startPlugin(self, pname):
 				self.openMultiServiceEPG()
 			no_plugin = False
 		elif pname == _("MediaPlayer"):
-			try: # falls es nicht installiert ist
+			try:  # falls es nicht installiert ist
 				from Plugins.Extensions.MediaPlayer.plugin import MediaPlayer
 				self.session.open(MediaPlayer)
 				no_plugin = False

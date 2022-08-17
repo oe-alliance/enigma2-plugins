@@ -30,7 +30,7 @@ class SimpleBouquetSelection(SimpleChannelSelection):
 		SimpleChannelSelection.__init__(self, session, title)
 		self.skinName = "SimpleChannelSelection"
 
-	def channelSelected(self): # just return selected service
+	def channelSelected(self):  # just return selected service
 		ref = self.getCurrentSelection()
 		if (ref.flags & 7) == 7:
 			self.close(ref)
@@ -125,7 +125,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 
 		if self.typeSelection.value == "channels":
 			self.idx = 0
-		else: # self.typeSelection.value == "bouquets":
+		else:  # self.typeSelection.value == "bouquets":
 			self.idx = 1
 
 		self.list.extend([
@@ -166,7 +166,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 				SimpleChannelSelection,
 				_("Select channel to refresh")
 			)
-		else: # self.typeSelection.value == "bouquets":
+		else:  # self.typeSelection.value == "bouquets":
 			self.session.openWithCallback(
 				self.finishedServiceSelection,
 				SimpleBouquetSelection,

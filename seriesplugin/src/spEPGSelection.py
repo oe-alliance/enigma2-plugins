@@ -22,8 +22,8 @@ EPGSelection_enterDateTime = None
 
 def SPEPGSelectionInit():
 	print("[SeriesPlugin] override EPGSelection")
-	global EPGSelection_enterDateTime #, EPGSelection_openOutdatedEPGSelection
-	if EPGSelection_enterDateTime is None: # and EPGSelection_openOutdatedEPGSelection is None:
+	global EPGSelection_enterDateTime  # , EPGSelection_openOutdatedEPGSelection
+	if EPGSelection_enterDateTime is None:  # and EPGSelection_openOutdatedEPGSelection is None:
 		from Screens.EpgSelection import EPGSelection
 		EPGSelection_enterDateTime = EPGSelection.enterDateTime
 		EPGSelection.enterDateTime = enterDateTime
@@ -34,8 +34,8 @@ def SPEPGSelectionInit():
 
 def SPEPGSelectionUndo():
 	print("[SeriesPlugin] undo override EPGSelection")
-	global EPGSelection_enterDateTime #, EPGSelection_openOutdatedEPGSelection
-	if EPGSelection_enterDateTime: # and EPGSelection_openOutdatedEPGSelection:
+	global EPGSelection_enterDateTime  # , EPGSelection_openOutdatedEPGSelection
+	if EPGSelection_enterDateTime:  # and EPGSelection_openOutdatedEPGSelection:
 		from Screens.EpgSelection import EPGSelection
 		EPGSelection.enterDateTime = EPGSelection_enterDateTime
 		EPGSelection_enterDateTime = None

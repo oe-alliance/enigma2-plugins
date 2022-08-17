@@ -12,10 +12,10 @@ class Widget:
         self.version = version
         self.homepage = homepage
         self.session = session
-        self.dir = "" # the directory the widget is saved in the filesystem
-        self.elements = {} # contains all Labels etc.
-        self.prefix = "" # the prefix of the name of the elements after it is patched into the main screen skin depending on its place in the widgetdesktop
-        self.wname = "" # the place name, the widget is placed and running in
+        self.dir = ""  # the directory the widget is saved in the filesystem
+        self.elements = {}  # contains all Labels etc.
+        self.prefix = ""  # the prefix of the name of the elements after it is patched into the main screen skin depending on its place in the widgetdesktop
+        self.wname = ""  # the place name, the widget is placed and running in
 
     def setDir(self, directory):
         """ called after the import """

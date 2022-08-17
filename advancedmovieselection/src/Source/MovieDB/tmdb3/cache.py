@@ -93,7 +93,7 @@ class Cache(object):
                 self.__doc__ = func.__doc__
 
         def __call__(self, *args, **kwargs):
-            if self.func is None: # decorator is waiting to be given a function
+            if self.func is None:  # decorator is waiting to be given a function
                 if len(kwargs) or (len(args) != 1):
                     raise TMDBCacheError('Cache.Cached decorator must be called ' +
                                          'a single callable argument before it ' +

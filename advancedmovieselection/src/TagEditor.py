@@ -111,7 +111,7 @@ class TagEditor(Screen):
             while "" in tags:
                 tags.remove("")
             file.close()
-        except IOError: #, ioe:
+        except IOError:  # , ioe:
             tags = []
         return tags
 
@@ -120,7 +120,7 @@ class TagEditor(Screen):
             file = open(resolveFilename(SCOPE_CONFIG, "movietags"), "w")
             file.write("\n".join(tags) + "\n")
             file.close()
-        except IOError: #, ioe:
+        except IOError:  # , ioe:
             pass
 
     def joinTags(self, taglist, newtags):

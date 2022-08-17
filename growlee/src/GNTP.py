@@ -139,7 +139,7 @@ class GNTPNotice(GNTPPacket):
 		base = GNTPPacket.encode(self)
 		base += u"Application-Name: %s\r\n" % self.applicationName
 		base += u"Notification-Name: %s\r\n" % self.name
-		base += u"Notification-Text: %s\r\n" % self.text.replace('\r\n', '\n') # NOTE: just in case replace CRLF by LF so we don't break protocol
+		base += u"Notification-Text: %s\r\n" % self.text.replace('\r\n', '\n')  # NOTE: just in case replace CRLF by LF so we don't break protocol
 		base += u"Notification-Title: %s\r\n" % self.title
 		base += u"Notification-Sticky: %s\r\n" % self.sticky
 		base += u"Notification-Priority: %s\r\n" % self.priority

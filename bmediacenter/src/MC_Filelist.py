@@ -442,7 +442,7 @@ class MultiFileSelectList(FileList):
 		self.current_directory = directory
 		directories = []
 		files = []
-		if directory is None and self.showMountpoints: # present available mountpoints
+		if directory is None and self.showMountpoints:  # present available mountpoints
 			for p in harddiskmanager.getMountedPartitions():
 				path = os_path.join(p.mountpoint, "")
 				if path not in self.inhibitMounts and not self.inParentDirs(path, self.inhibitDirs):

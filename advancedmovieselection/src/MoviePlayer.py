@@ -55,7 +55,7 @@ else:
 
 def cutlist_changed(self):
     if playerChoice and playerChoice.isPlaying():
-        self.cutlist = [] # we need to update the property
+        self.cutlist = []  # we need to update the property
     self.cutlist = self.source.cutlist or []
 
 
@@ -80,8 +80,8 @@ class MoviePlayerExtended_summary(Screen):
         Screen.__init__(self, session, parent)
         self["Title"] = Label("")
         self["ShortDesc"] = Label("")
-        self["Seperator1"] = Pixmap() #StaticText("")
-        self["Seperator2"] = Pixmap() #StaticText("")
+        self["Seperator1"] = Pixmap()  # StaticText("")
+        self["Seperator2"] = Pixmap()  # StaticText("")
         self.hideSeperator()
 
     def updateShortDescription(self, desc):
@@ -234,7 +234,7 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
             self.firstime = False
 
     def standbyCounterChanged(self, configElement):
-        pass # prevent merlin crash, Select last played movie is disabled
+        pass  # prevent merlin crash, Select last played movie is disabled
 
     def openServiceList(self):
         if pluginPresent.AdvancedProgramGuide:
@@ -289,7 +289,7 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
 
     def showMovies(self):
         ref = self.session.nav.getCurrentlyPlayingServiceReference()
-        self.playingservice = ref # movie list may change the currently playing
+        self.playingservice = ref  # movie list may change the currently playing
         self.session.openWithCallback(self.newServiceSelected, MovieSelection, ref, True)
 
     def newServiceSelected(self, service):
@@ -303,7 +303,7 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
             else:
                 self.playNewService(service)
 
-    def doEofInternal(self, playing): # Override method in MoviePlayer
+    def doEofInternal(self, playing):  # Override method in MoviePlayer
         if not self.endless_loop:
             return MoviePlayer.doEofInternal(self, playing)
 
@@ -317,7 +317,7 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
         self.playerClosed()
         self.is_closing = True
         if how == "ask":
-            if config.usage.setup_level.index < 2: # -expert
+            if config.usage.setup_level.index < 2:  # -expert
                 list = (
                     (_("Yes"), "quit"),
                     (_("No"), "continue")
@@ -383,7 +383,7 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
             ref = self.session.nav.getCurrentlyPlayingServiceReference()
             self.returning = True
             self.session.nav.stopService()
-            self.session.nav.playService(self.lastservice) # Fix busy tuner after stby with playing service
+            self.session.nav.playService(self.lastservice)  # Fix busy tuner after stby with playing service
             playerChoice.playing = False
             self.session.openWithCallback(playerChoice.playService, MovieSelection, ref, True)
         elif answer == "restart":
@@ -546,12 +546,12 @@ class PlayerChoice():
                 if pluginPresent.DVDPlayer:
                     player = DVDPlayer
                 else:
-                    self.session.open(MessageBox, _("No DVD-PlayerChoice found!"), MessageBox.TYPE_ERROR) # Topfi: removed last parameter
+                    self.session.open(MessageBox, _("No DVD-PlayerChoice found!"), MessageBox.TYPE_ERROR)  # Topfi: removed last parameter
             elif isinstance(service, eServiceReferenceBludisc):
                 if pluginPresent.BludiscPlayer:
                     player = BludiscMenu
                 else:
-                    self.session.open(MessageBox, _("No BludiscPlayer found!"), MessageBox.TYPE_ERROR) # Topfi: removed last parameter
+                    self.session.open(MessageBox, _("No BludiscPlayer found!"), MessageBox.TYPE_ERROR)  # Topfi: removed last parameter
             else:
                 player = MoviePlayerExtended
         return player

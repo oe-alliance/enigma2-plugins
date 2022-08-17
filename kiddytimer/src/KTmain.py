@@ -52,7 +52,7 @@ class KiddyTimerScreen(Screen):
     def renderScreen(self):
         self["TimerSlider"].setValue(int(kiddyTimer.remainingPercentage * 100))
         self["TimerGraph"].setPixmapNum(kiddyTimer.curImg)
-        self.sTimeLeft = KTglob.getTimeFromSeconds((kiddyTimer.remainingTime + 59), False) # Add 59 Seconds to show one minute if less than 1 minute left...
+        self.sTimeLeft = KTglob.getTimeFromSeconds((kiddyTimer.remainingTime + 59), False)  # Add 59 Seconds to show one minute if less than 1 minute left...
         self["TimerText"].setText(self.sTimeLeft)
         self["TimerSliderText"].setText(self.sTimeLeft)
         self["TimerTransparentText"].setText(self.sTimeLeft)
@@ -109,7 +109,7 @@ class KiddyTimer():
         self.loopTimer = eTimer()
         self.loopTimer.callback.append(self.calculateTimes)
 
-        self.observeTimerStep = 60000 # Check every minute, if the time to acitivate the timer has come
+        self.observeTimerStep = 60000  # Check every minute, if the time to acitivate the timer has come
         self.observeTimer = eTimer()
         self.observeTimer.callback.append(self.observeTime)
 

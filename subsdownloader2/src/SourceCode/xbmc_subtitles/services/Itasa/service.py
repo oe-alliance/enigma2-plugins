@@ -83,7 +83,7 @@ def login(username, password):
 
 
 #def search_subtitles( file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack ): #standard input
-def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack, screen_session): #standard input
+def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack, screen_session):  # standard input
     subtitles_list = []
     subtitles_list = []
     msg = ""
@@ -144,11 +144,11 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
             msg = "Won't work, Itasa is only for Italian subtitles."
     else:
         msg = "Won't work, Itasa is only for tv shows."
-    return subtitles_list, "", msg #standard output
+    return subtitles_list, "", msg  # standard output
 
 
 #def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id): #standard input
-def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id, screen_session): #standard input
+def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id, screen_session):  # standard input
     #username = __settings__.getSetting( "ITuser" )
     #password = __settings__.getSetting( "ITpass" )
     username = config.plugins.subsdownloader.ItasaUser.value
@@ -174,8 +174,8 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
                 elif header == 'PK':
                     local_tmp_file = os.path.join(tmp_sub_dir, "undertexter.zip")
                     packed = True
-                else: # never found/downloaded an unpacked subtitles file, but just to be sure ...
-                    local_tmp_file = os.path.join(tmp_sub_dir, "undertexter.srt") # assume unpacked subtitels file is an '.srt'
+                else:  # never found/downloaded an unpacked subtitles file, but just to be sure ...
+                    local_tmp_file = os.path.join(tmp_sub_dir, "undertexter.srt")  # assume unpacked subtitels file is an '.srt'
                     subs_file = local_tmp_file
                     packed = False
                 log(__name__, " Saving subtitles to '%s'" % (local_tmp_file))
@@ -210,7 +210,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
                             __cmdList.append((IpkgComponent.CMD_INSTALL, {"package": 'unrar'}))
                             screen_session.openWithCallback(__restartMessage__(screen_session, callback=None), Ipkg, cmdList=__cmdList)
 
-                return False, language, subs_file #standard output
+                return False, language, subs_file  # standard output
     #log( __name__ ," Login to Itasa failed. Check your username/password at the addon configuration.")
     screen_session.open(MessageBox, _(" Login to Itasa failed. Check your username/password at the configuration menu."), MessageBox.TYPE_INFO, timeout=5)
     return False, "None", []

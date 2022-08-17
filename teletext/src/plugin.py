@@ -940,9 +940,9 @@ class TeleText(Screen):
     else:
       pos = service_types_tv.rfind(':')
       refstr = '%s (channelID == %08x%04x%04x) && %s ORDER BY name' % (service_types_tv[:pos + 1],
-          cur_ref.getUnsignedData(4), # NAMESPACE
-          cur_ref.getUnsignedData(2), # TSID
-          cur_ref.getUnsignedData(3), # ONID
+          cur_ref.getUnsignedData(4),  # NAMESPACE
+          cur_ref.getUnsignedData(2),  # TSID
+          cur_ref.getUnsignedData(3),  # ONID
           service_types_tv[pos + 1:])
       ref = eServiceReference(refstr)
       self.pid_list = self.ttx.getTextPidsAndName(ref)

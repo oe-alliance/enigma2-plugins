@@ -804,7 +804,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		host = server.getAddress()
 		passive = server.getPassive()
 		port = server.getPort()
-		timeout = 30 # TODO: make configurable
+		timeout = 30  # TODO: make configurable
 
 		# XXX: we might want to add a guard so we don't try to connect to another host while a previous attempt is not timed out
 

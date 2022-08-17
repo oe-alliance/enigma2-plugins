@@ -12,14 +12,14 @@ import chardet
 from Plugins.Extensions.SubsDownloader2.SourceCode.anysub2srt import SubConv
 # jak zmienie sciezke SubsDownloader2 (nazwe katalogu to trzeba ja tez zmienic w pliku OpenSubtitles.py
 #from Plugins.Extensions.SubsDownloader2.SourceCode.periscope.services.OpenSubtitle.services import OpenSubtitle
-from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.XBMC_search import list_XBMC_Periscope_plugins#, XBMCSubtitle
+from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.XBMC_search import list_XBMC_Periscope_plugins  # , XBMCSubtitle
 
 from Plugins.Extensions.SubsDownloader2.SourceCode.periscope import SubtitleDatabase
-from Plugins.Extensions.SubsDownloader2.SourceCode.NapiProjekt import NapiProjekt #*
+from Plugins.Extensions.SubsDownloader2.SourceCode.NapiProjekt import NapiProjekt  # *
 from Plugins.Extensions.SubsDownloader2.SourceCode.Napisy24_pl import Napisy24_pl, GuessFileData_from_FileName, CompareMovie_and_Subtite_FileData
 from Plugins.Extensions.SubsDownloader2.SourceCode.chardet_OutpuyTranslation import chardetOutputTranslation
-from Plugins.Extensions.SubsDownloader2.SourceCode.myFileList import EXTENSIONS, FileList #*
-from Plugins.Extensions.SubsDownloader2.pluginOnlineContent import IsNewVersionCheck, zlib_link, libmediainfo_link, unrar_link, Subtitle_Downloader_temp_dir, PluginIpkUpdate, InstallDownloadableContent, CommertialBannerDownload #flagcounetr,
+from Plugins.Extensions.SubsDownloader2.SourceCode.myFileList import EXTENSIONS, FileList  # *
+from Plugins.Extensions.SubsDownloader2.pluginOnlineContent import IsNewVersionCheck, zlib_link, libmediainfo_link, unrar_link, Subtitle_Downloader_temp_dir, PluginIpkUpdate, InstallDownloadableContent, CommertialBannerDownload  # flagcounetr,
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from os import system as os_system
 from os import stat as os_stat
@@ -96,7 +96,7 @@ if os.path.exists('/usr/lib/enigma2/python/Plugins/Extensions/DMnapi/DMnapi.py')
 		pass
 
 
-from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities import LANGUAGES #, languageTranslate #toScriptLang
+from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities import LANGUAGES  # , languageTranslate #toScriptLang
 SubsDownloaderLangs = []
 SubsDownloaderLangs.append(getConfigListEntry("None", "None"))
 for x in LANGUAGES:
@@ -121,10 +121,10 @@ class SubsDownloaderApplication(Screen):
 		#global Subtitle_Downloader_temp_dir
 		#Subtitle_Downloader_temp_dir = '/tmp/SubsDownloader_cache/'
 
-		Screen_width = getDesktop(0).size().width() #1280
-		Screen_height = getDesktop(0).size().height() #720
-		Skin_width = int(0.9 * Screen_width) # 1152
-		Skin_height = int(0.9 * Screen_height) #648
+		Screen_width = getDesktop(0).size().width()  # 1280
+		Screen_height = getDesktop(0).size().height()  # 720
+		Skin_width = int(0.9 * Screen_width)  # 1152
+		Skin_height = int(0.9 * Screen_height)  # 648
 		widget_name_height = int(0.3 * Skin_height)
 		widget_name_width = int(0.74827 * Skin_width)
 		widget_name_x_position = int(0.0087 * Skin_width)
@@ -219,7 +219,7 @@ class SubsDownloaderApplication(Screen):
 	                "down": self.goDown,
 	                "left": self.goLeft,
 	                "right": self.goRight,
-	                "info": self.showFilemanagerScreen_file_info_on_screen_title, #self.FM_file_Info,
+	                "info": self.showFilemanagerScreen_file_info_on_screen_title,  # self.FM_file_Info,
 	                "localConv": self.localConvertionSublist,
 	                "0": self.skinVisibility,
 	                #"red": self.goRed,
@@ -396,7 +396,7 @@ class SubsDownloaderApplication(Screen):
 
 			if self.fileManagerEnabled == True:
 				if self.showFilemanagerScreen_command[0] == "copy" or self.showFilemanagerScreen_command[0] == "move":
-					pass #do nothing execute command during blue button press
+					pass  # do nothing execute command during blue button press
 				elif self.showFilemanagerScreen_command[0] == "rename":
 					if os.path.isdir(self.showFilemanagerScreen_command[1]):
 						self.session.openWithCallback(VirtualKeyboart_dir_rename_Callback, VirtualKeyBoard, title=_("Oryginal dir name: %s" % self.showFilemanagerScreen_command[1].split("/")[-2]), text=self.showFilemanagerScreen_command[1].split("/")[-2])
@@ -414,7 +414,7 @@ class SubsDownloaderApplication(Screen):
 				current_selection = self["fileList"].getSelection()[0]
 			else:
 				current_dir = self["fileList"].getCurrentDirectory()
-				current_selection = self["fileList"].getCurrentDirectory() + self["fileList"].getSelection()[0]# ('/hdd/Net_HDD/Filmy/Seriale/Boardwalk Empire Season 2/', True)
+				current_selection = self["fileList"].getCurrentDirectory() + self["fileList"].getSelection()[0]  # ('/hdd/Net_HDD/Filmy/Seriale/Boardwalk Empire Season 2/', True)
 
 			if os.path.exists(str(current_selection)) and "/".join(str(current_dir).split("/")[:-2]) + "/" != current_selection and not isinstance(current_dir, type(None)):
 				self.set_FileManager_enabled()
@@ -543,7 +543,7 @@ class SubsDownloaderApplication(Screen):
 			self.serverAvailableSubtitles.append((str(x['language']).replace("u'", "").replace("'", "") + "_"
 			                                      + str(x['cd']).replace("u'", "").replace("'", "") + "cd__"
 			                                      + str(x['title']).replace("u'", "").replace("'", "") + " "
-			                                      + str(x['release']).replace("u'", "").replace("'", ""), position)) #makes list of subtitles
+			                                      + str(x['release']).replace("u'", "").replace("'", ""), position))  # makes list of subtitles
 			position = position + 1
 		self.subsListDownloaded = 1
 		self["subsList"].setList(self.serverAvailableSubtitles)
@@ -602,7 +602,7 @@ class SubsDownloaderApplication(Screen):
 		try:
 			choosen_movie = GetFPS(movie)
 			#return float(str(round(choosen_movie.fps(),3))[0:-1])
-			return round(choosen_movie.fps(), 3) #JESLI NAPISY NIE BEDA W CZASIE PADSOWAC TO POKOMBINOWAC Z TA LINIJKA
+			return round(choosen_movie.fps(), 3)  # JESLI NAPISY NIE BEDA W CZASIE PADSOWAC TO POKOMBINOWAC Z TA LINIJKA
 		except:
 			self.session.open(MessageBox, _("I can't detect movie FPS!!!"), MessageBox.TYPE_INFO, timeout=5)
 			return "None"
@@ -626,13 +626,13 @@ class SubsDownloaderApplication(Screen):
 			self.movie_filename = selected_movie_dir + selected_movie_file
 			file_list = self["fileList"].getFileList()
 			for x in file_list:
-				if x[0][-1] != True: #not directory
-					if self.return_media_kind(self.return_extention(x[0][0])) == "text":# and LocalConvertedSubtitle.detect_format(LocalConvertedSubtitle.subs_file) != "None":
+				if x[0][-1] != True:  # not directory
+					if self.return_media_kind(self.return_extention(x[0][0])) == "text":  # and LocalConvertedSubtitle.detect_format(LocalConvertedSubtitle.subs_file) != "None":
 						#localCodePageDecoded= self.chardetOutputTranslation(self.getSubtitleCodepade(selected_movie_dir+x[0][0]))
 						self.subtitle_codepade = localCodePageDecoded = chardetOutputTranslation(self.getSubtitleCodepade(selected_movie_dir + x[0][0]))
 						LocalConvertedSubtitle = SubConv((selected_movie_dir + x[0][0]), localCodePageDecoded)
 						if LocalConvertedSubtitle.detect_format(LocalConvertedSubtitle.subs_file) != "None":
-							local_subtitle.append((x[0][0], str(selected_movie_dir + x[0][0]))) #makes list of subtitles"""
+							local_subtitle.append((x[0][0], str(selected_movie_dir + x[0][0])))  # makes list of subtitles"""
 							self.subsListDownloaded = 1
 			self["subsList"].setList(local_subtitle)
 			self.set_listSubs_enabled()
@@ -668,7 +668,7 @@ class SubsDownloaderApplication(Screen):
 		else:
 			self.movie_filename = self["fileList"].getCurrentDirectory() + self["fileList"].getFilename()
 			if self.return_media_kind(self.return_extention(self.movie_filename)) == "movie":
-				if config.plugins.subsdownloader.subtitleserver.value in PERISCOPE_PLUGINS: #== "OpenSubtitle":
+				if config.plugins.subsdownloader.subtitleserver.value in PERISCOPE_PLUGINS:  # == "OpenSubtitle":
 					exec('from Plugins.Extensions.SubsDownloader2.SourceCode.periscope.services.%s.services import %s as SERVICE') % (config.plugins.subsdownloader.subtitleserver.value, config.plugins.subsdownloader.subtitleserver.value)
 					self.subtitles = SERVICE(None, Subtitle_Downloader_temp_dir)
 					#try:
@@ -958,19 +958,19 @@ class SubsDownloaderApplication(Screen):
 			subtitle_filename = []
 			if self.localConvertion == False:
 				#download subtitle from server\
-				if config.plugins.subsdownloader.subtitleserver.value in PERISCOPE_PLUGINS: #== "OpenSubtitle":
+				if config.plugins.subsdownloader.subtitleserver.value in PERISCOPE_PLUGINS:  # == "OpenSubtitle":
 					whichSubtitleDownload = self["subsList"].getCurrent()[1]
 					subtitle_filename = self.subtitles.createFile(self.subtitle_database[int(whichSubtitleDownload)], self.movie_filename)
 				if config.plugins.subsdownloader.subtitleserver.value == "NapiProjekt":
-					pass #PASS BECAUSE NAPI PROJECT DOWNLOAD ONLY PL FILE AND IT'S DIRECTLY IN DOWNLOAD SUBTITLE FUNCTION.
+					pass  # PASS BECAUSE NAPI PROJECT DOWNLOAD ONLY PL FILE AND IT'S DIRECTLY IN DOWNLOAD SUBTITLE FUNCTION.
 				if config.plugins.subsdownloader.subtitleserver.value == "DMnapi":
-					pass #PASS BECAUSE DMnapi DOWNLOAD ONLY PL FILE AND IT'S DIRECTLY IN DOWNLOAD SUBTITLE FUNCTION.
+					pass  # PASS BECAUSE DMnapi DOWNLOAD ONLY PL FILE AND IT'S DIRECTLY IN DOWNLOAD SUBTITLE FUNCTION.
 				if config.plugins.subsdownloader.subtitleserver.value in XBMC_PLUGINS:
 					exec('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import *' % config.plugins.subsdownloader.subtitleserver.value)
 					exec('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import service as SERVICE' % config.plugins.subsdownloader.subtitleserver.value)
 					pos = self["subsList"].getCurrent()[1]
 					tmp_sub_dir = sub_folder = self.movie_filename.rsplit("/", 1)[0]
-					zipped_subs_path = self.movie_filename.rsplit(".", 1)[0] + ".zip" #for some plugins
+					zipped_subs_path = self.movie_filename.rsplit(".", 1)[0] + ".zip"  # for some plugins
 					TRUE_FALSE, language, subtitle_filename = SERVICE.download_subtitles(self.subtitle_database, pos, zipped_subs_path, tmp_sub_dir, sub_folder, self.__session_id, self.session)
 
 				if config.plugins.subsdownloader.subtitleserver.value == "Napisy24":
@@ -978,7 +978,7 @@ class SubsDownloaderApplication(Screen):
 					if self.subtitles.save_downloaded_zip(whichSubtitleDownload) == True:
 						subtitle_filename = self.subtitles.extract_zip_file()
 						try:
-							os.remove(self.subtitles.ZipFilePath) #remove downloaded zip file
+							os.remove(self.subtitles.ZipFilePath)  # remove downloaded zip file
 						except:
 							print("Can't delete file: %s" % self.subtitles.ZipFilePath)
 
@@ -1124,7 +1124,7 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 		        "right": self.keyRight,
 		        "ok": self.saveConfig,
 		        "yellow": self.installLibMediaInfo,
-			"cancel": self.cancelWithoutSave # add the RC Command "cancel" to close your Screen
+			"cancel": self.cancelWithoutSave  # add the RC Command "cancel" to close your Screen
 		}, -1)
 		self.createConfigMenu()
 
@@ -1144,18 +1144,18 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 		else:
 			self.session.open(MessageBox, _("Mipsel architecture not detected.\n\nPlease supplie requires binaries by Yourself."), MessageBox.TYPE_ERROR)
 
-	def keyLeft(self): #ABY DZIALALA AUTOMATYCZNA ZMIANA LIST WYSWIETLANEJ TA FUNKCJA MUSI SIE TAK NAZYWAC
+	def keyLeft(self):  # ABY DZIALALA AUTOMATYCZNA ZMIANA LIST WYSWIETLANEJ TA FUNKCJA MUSI SIE TAK NAZYWAC
 		ConfigListScreen.keyLeft(self)
 		self.createConfigMenu()
 
-	def keyRight(self): #ABY DZIALALA AUTOMATYCZNA ZMIANA LIST WYSWIETLANEJ TA FUNKCJA MUSI SIE TAK NAZYWAC
+	def keyRight(self):  # ABY DZIALALA AUTOMATYCZNA ZMIANA LIST WYSWIETLANEJ TA FUNKCJA MUSI SIE TAK NAZYWAC
 		ConfigListScreen.keyRight(self)
 		self.createConfigMenu()
 
 	def createConfigMenu(self):
 		self.list = []
 		self.list.append(getConfigListEntry(_("Choose subtitle server:"), config.plugins.subsdownloader.subtitleserver))
-		if config.plugins.subsdownloader.subtitleserver.value in PERISCOPE_PLUGINS or config.plugins.subsdownloader.subtitleserver.value in XBMC_PLUGINS: #== "OpenSubtitle":
+		if config.plugins.subsdownloader.subtitleserver.value in PERISCOPE_PLUGINS or config.plugins.subsdownloader.subtitleserver.value in XBMC_PLUGINS:  # == "OpenSubtitle":
 			if config.plugins.subsdownloader.subtitleserver.value == "Itasa":
 				self.list.append(getConfigListEntry(_("Itasa server user:"), config.plugins.subsdownloader.ItasaUser))
 				self.list.append(getConfigListEntry(_("Itasa server password:"), config.plugins.subsdownloader.ItasaPassword))
@@ -1525,7 +1525,7 @@ class MusicExplorer(MoviePlayer_4_MusicExploret):
 			os_system("/usr/bin/showiframe /usr/lib/enigma2/python/Plugins/Extensions/DreamExplorer/res/music.mvi")
 			#TODO DAC wlasna
 		except:
-			pass #TU DOROBIC WLASNA TAPETE
+			pass  # TU DOROBIC WLASNA TAPETE
 
 	def searchMusic(self):
 		midx = 0

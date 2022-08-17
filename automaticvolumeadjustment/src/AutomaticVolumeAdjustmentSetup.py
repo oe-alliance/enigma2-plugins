@@ -112,7 +112,7 @@ class AutomaticVolumeAdjustmentConfigScreen(ConfigListScreen, Screen):
 			x[1].save()
 		self.configVA.save()
 		if self.automaticVolumeAdjustmentInstance is not None:
-			self.automaticVolumeAdjustmentInstance.initializeConfigValues(self.configVA, True) # submit config values
+			self.automaticVolumeAdjustmentInstance.initializeConfigValues(self.configVA, True)  # submit config values
 		self.close()
 
 	def keyCancel(self):
@@ -198,7 +198,7 @@ class AutomaticVolumeAdjustmentEntriesListConfigScreen(Screen):
 		sel = self["entrylist"].l.getCurrentSelection()[0]
 		self["entrylist"].configVA.remove(sel)
 		if self.automaticVolumeAdjustmentInstance is not None:
-			self.automaticVolumeAdjustmentInstance.initializeConfigValues(self["entrylist"].configVA, True) # submit config values
+			self.automaticVolumeAdjustmentInstance.initializeConfigValues(self["entrylist"].configVA, True)  # submit config values
 		self.updateList()
 
 
@@ -301,7 +301,7 @@ class AutomaticVolumeAdjustmentEntryConfigScreen(ConfigListScreen, Screen):
 				x[1].save()
 			self.configVA.save()
 			if self.automaticVolumeAdjustmentInstance is not None:
-				self.automaticVolumeAdjustmentInstance.initializeConfigValues(self.configVA, True) # submit config values
+				self.automaticVolumeAdjustmentInstance.initializeConfigValues(self.configVA, True)  # submit config values
 			self.close()
 		else:
 			self.session.open(MessageBox, _("You must select a valid service!"), type=MessageBox.TYPE_INFO)

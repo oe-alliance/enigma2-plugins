@@ -330,7 +330,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 			self.filelist.descent()
 			self["currentfolder"].setText(str(self.filelist.getCurrentDirectory()))
 		else:
-			if self.filelist.getServiceRef().type == 4098: # playlist
+			if self.filelist.getServiceRef().type == 4098:  # playlist
 				ServiceRef = self.filelist.getServiceRef()
 				extension = ServiceRef.getPath()[ServiceRef.getPath().rfind('.') + 1:]
 				if extension in self.playlistparsers:
@@ -491,7 +491,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 			if x == "..":
 				return
 			self.addDirtoPls(self.filelist.getSelection()[0])
-		elif self.filelist.getServiceRef().type == 4098: # playlist
+		elif self.filelist.getServiceRef().type == 4098:  # playlist
 			ServiceRef = self.filelist.getServiceRef()
 			extension = ServiceRef.getPath()[ServiceRef.getPath().rfind('.') + 1:]
 			if extension in self.playlistparsers:
@@ -509,7 +509,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 			return
 		filelist = FileList(directory, useServiceRef=True, showMountpoints=False, isTop=True)
 		for x in filelist.getFileList():
-			if x[0][1] == True: #isDir
+			if x[0][1] == True:  # isDir
 				#if recursive:
 				#	if x[0][0] != directory:
 				#		self.playlist.addFile(x[0][1])

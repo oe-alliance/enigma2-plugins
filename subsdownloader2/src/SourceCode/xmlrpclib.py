@@ -150,7 +150,7 @@ from types import *
 try:
     unicode
 except NameError:
-    unicode = None # unicode support not available
+    unicode = None  # unicode support not available
 
 try:
     import datetime
@@ -563,7 +563,7 @@ try:
     if not hasattr(sgmlop, "XMLParser"):
         raise ImportError
 except ImportError:
-    SgmlopParser = None # sgmlop accelerator not available
+    SgmlopParser = None  # sgmlop accelerator not available
 else:
     class SgmlopParser:
         def __init__(self, target):
@@ -587,7 +587,7 @@ else:
             try:
                 self.parser.close()
             finally:
-                self.parser = self.feed = None # nuke circular reference
+                self.parser = self.feed = None  # nuke circular reference
 
         def handle_proc(self, tag, attr):
             m = re.search("encoding\s*=\s*['\"]([^\"']+)[\"']", attr)
@@ -606,7 +606,7 @@ try:
     if not hasattr(expat, "ParserCreate"):
         raise ImportError
 except ImportError:
-    ExpatParser = None # expat not available
+    ExpatParser = None  # expat not available
 else:
     class ExpatParser:
         # fast expat parser for Python 2.0 and later.  this is about
@@ -626,8 +626,8 @@ else:
             self._parser.Parse(data, 0)
 
         def close(self):
-            self._parser.Parse("", 1) # end of data
-            del self._target, self._parser # get rid of circular references
+            self._parser.Parse("", 1)  # end of data
+            del self._target, self._parser  # get rid of circular references
 
 
 class SlowParser:
@@ -636,7 +636,7 @@ class SlowParser:
     # testing.
 
     def __init__(self, target):
-        import xmllib # lazy subclassing (!)
+        import xmllib  # lazy subclassing (!)
         if xmllib.XMLParser not in SlowParser.__bases__:
             SlowParser.__bases__ = (xmllib.XMLParser,)
         self.handle_xml = target.xml
@@ -647,7 +647,7 @@ class SlowParser:
         try:
             xmllib.XMLParser.__init__(self, accept_utf8=1)
         except TypeError:
-            xmllib.XMLParser.__init__(self) # pre-2.0
+            xmllib.XMLParser.__init__(self)  # pre-2.0
 
 # --------------------------------------------------------------------
 # XML-RPC marshalling and unmarshalling code
@@ -892,7 +892,7 @@ class Unmarshaller:
         try:
             f = self.dispatch[tag]
         except KeyError:
-            pass # unknown tag ?
+            pass  # unknown tag ?
         else:
             return f(self, join(self._data, ""))
 
@@ -904,7 +904,7 @@ class Unmarshaller:
         try:
             f = self.dispatch[tag]
         except KeyError:
-            pass # unknown tag ?
+            pass  # unknown tag ?
         else:
             return f(self, data)
 
@@ -946,7 +946,7 @@ class Unmarshaller:
         self.append(_stringify(data))
         self._value = 0
     dispatch["string"] = end_string
-    dispatch["name"] = end_string # struct keys are always strings
+    dispatch["name"] = end_string  # struct keys are always strings
 
     def end_array(self, data):
         mark = self._marks.pop()
@@ -1000,7 +1000,7 @@ class Unmarshaller:
         if self._encoding:
             data = _decode(data, self._encoding)
         self._methodname = data
-        self._type = "methodName" # no params
+        self._type = "methodName"  # no params
     dispatch["methodName"] = end_methodName
 
 ## Multicall support
@@ -1169,7 +1169,7 @@ def dumps(params, methodname=None, methodresponse=None, encoding=None,
     if encoding != "utf-8":
         xmlheader = "<?xml version='1.0' encoding='%s'?>\n" % str(encoding)
     else:
-        xmlheader = "<?xml version='1.0'?>\n" # utf-8 is default
+        xmlheader = "<?xml version='1.0'?>\n"  # utf-8 is default
 
     # standard XML-RPC wrappings
     if methodname:
@@ -1192,7 +1192,7 @@ def dumps(params, methodname=None, methodresponse=None, encoding=None,
             "</methodResponse>\n"
             )
     else:
-        return data # return as is
+        return data  # return as is
     return string.join(data, "")
 
 ##
@@ -1322,7 +1322,7 @@ class Transport:
         if auth:
             import base64
             auth = base64.encodestring(urllib.unquote(auth))
-            auth = string.join(string.split(auth), "") # get rid of whitespace
+            auth = string.join(string.split(auth), "")  # get rid of whitespace
             extra_headers = [
                 ("Authorization", "Basic " + auth)
                 ]

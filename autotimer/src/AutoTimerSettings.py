@@ -113,7 +113,7 @@ class AutoTimerSettings(ConfigListScreen, Screen):
 		# The embedded skin could be removed.
 		# Plugin will use "Setup" screen from default skin if no skin available.
 		self["description"] = StaticText("")
-		self["help"] = StaticText("") # for backwards compatibility
+		self["help"] = StaticText("")  # for backwards compatibility
 
 		self.createSetup()
 
@@ -134,10 +134,10 @@ class AutoTimerSettings(ConfigListScreen, Screen):
 
 	def selectionChanged(self):
 		self["description"].setText(self["config"].getCurrent()[2])
-		self["help"].setText(self["config"].getCurrent()[2]) # for backwards compatibility
+		self["help"].setText(self["config"].getCurrent()[2])  # for backwards compatibility
 
 	def changedEntry(self):
-		if self["config"].getCurrent() in (self.pollUnitEntry,): # do screen refresh if current entry requires this
+		if self["config"].getCurrent() in (self.pollUnitEntry,):  # do screen refresh if current entry requires this
 			self.createSetup()
 		for x in self.onChangedEntry:
 			x()

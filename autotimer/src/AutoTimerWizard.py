@@ -112,24 +112,24 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, ShowRemoteControl):
 			])
 
 	def getConfigList(self):
-		if self.currStep == AutoTimerWizard.STEP_ID_BASIC: # Basic
+		if self.currStep == AutoTimerWizard.STEP_ID_BASIC:  # Basic
 			return [
 				getConfigListEntry(_("Enabled"), self.enabled),
 				getConfigListEntry(_("Description"), self.name),
 				getConfigListEntry(_("Match title"), self.match),
 				getConfigListEntry(_("Timer type"), self.justplay),
 			]
-		elif self.currStep == AutoTimerWizard.STEP_ID_TIMESPAN: # Timespan
+		elif self.currStep == AutoTimerWizard.STEP_ID_TIMESPAN:  # Timespan
 			return self.timespanList
-		elif self.currStep == AutoTimerWizard.STEP_ID_SERVICES: # Services
+		elif self.currStep == AutoTimerWizard.STEP_ID_SERVICES:  # Services
 			return self.servicesDlg["config"].getList()
-		elif self.currStep == AutoTimerWizard.STEP_ID_FILTER: # Filters
+		elif self.currStep == AutoTimerWizard.STEP_ID_FILTER:  # Filters
 			return self.filterDlg["config"].getList()
 		return []
 
 	def selectionMade(self):
 		timer = self.timer
-		if self.currStep == AutoTimerWizard.STEP_ID_BASIC: # Basic
+		if self.currStep == AutoTimerWizard.STEP_ID_BASIC:  # Basic
 			timer.enabled = self.enabled.value
 			timer.name = self.name.value.strip() or self.match.value
 			timer.match = self.match.value
@@ -137,14 +137,14 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, ShowRemoteControl):
 			self.timer.always_zap = self.justplay.value == "zap+record"
 			self.emptyMatch = not timer.match.strip()
 			self.trailingWhitespacesMatch = (timer.match[-1:] == " ")
-		elif self.currStep == AutoTimerWizard.STEP_ID_TIMESPAN: # Timespan
+		elif self.currStep == AutoTimerWizard.STEP_ID_TIMESPAN:  # Timespan
 			if self.timespan.value:
 				start = self.timespanbegin.value
 				end = self.timespanend.value
 				timer.timespan = (start, end)
 			else:
 				timer.timespan = None
-		elif self.currStep == AutoTimerWizard.STEP_ID_SERVICES: # Services
+		elif self.currStep == AutoTimerWizard.STEP_ID_SERVICES:  # Services
 			self.servicesDlg.refresh()
 
 			if self.servicesDlg.enabled.value:
@@ -153,7 +153,7 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, ShowRemoteControl):
 			else:
 				timer.services = []
 				timer.bouquets = []
-		elif self.currStep == AutoTimerWizard.STEP_ID_FILTER: # Filters
+		elif self.currStep == AutoTimerWizard.STEP_ID_FILTER:  # Filters
 			self.filterDlg.refresh()
 
 			if self.filterDlg.enabled.value:

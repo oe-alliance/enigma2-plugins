@@ -99,7 +99,7 @@ class PortScanner(object):
 				hostname = hostname[0]
 				host = dhost.getElementsByTagName('address')[0].getAttributeNode('addr').value
 				scan_result.append(['host', str(hostname).upper(), str(host), '00:00:00:00:00:00'])
-		self._scan_result = scan_result # store for later use
+		self._scan_result = scan_result  # store for later use
 		return scan_result
 
 	def __getitem__(self, host):

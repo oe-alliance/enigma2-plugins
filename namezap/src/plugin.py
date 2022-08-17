@@ -59,12 +59,12 @@ class NameZap(NumberZap):
 		if not servicelist is None:
 			while num:
 				serviceIterator = servicelist.getNext()
-				if not serviceIterator.valid(): #check end of list
+				if not serviceIterator.valid():  # check end of list
 					break
 				playable = not (serviceIterator.flags & (eServiceReference.isMarker | eServiceReference.isDirectory))
 				if playable:
 					num -= 1
-			if not num: #found service with searched number ?
+			if not num:  # found service with searched number ?
 				return serviceIterator, 0
 		return None, num
 
@@ -79,7 +79,7 @@ class NameZap(NumberZap):
 			if not bouquetlist is None:
 				while number:
 					bouquet = bouquetlist.getNext()
-					if not bouquet.valid(): #check end of list
+					if not bouquet.valid():  # check end of list
 						break
 					if bouquet.flags & eServiceReference.isDirectory:
 						service, number = self.searchNumberHelper(serviceHandler, number, bouquet)

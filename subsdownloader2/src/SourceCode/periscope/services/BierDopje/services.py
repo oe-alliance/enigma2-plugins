@@ -23,7 +23,7 @@ import logging
 import os
 import pickle
 from xml.dom import minidom
-from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities import languageTranslate#, toOpenSubtitles_two
+from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities import languageTranslate  # , toOpenSubtitles_two
 
 from Plugins.Extensions.SubsDownloader2.SourceCode.periscope import SubtitleDatabase
 
@@ -53,7 +53,7 @@ class BierDopje(SubtitleDatabase.SubtitleDB):
         #http://api.bierdopje.com/23459DC262C0A742/GetAllSubsFor/94/5/1/en (30 rock, season 5, episode 1)
         #key = '112C8204D6754A2A'
         #key = '369C2ED4261DE9C3'
-        key = 'ED7DCFCDEC22045A' #SubsDownloader APIKey
+        key = 'ED7DCFCDEC22045A'  # SubsDownloader APIKey
 
         self.api = "http://api.bierdopje.com/%s/" % key
         self.cache_path = os.path.join(cache_folder_path, "bierdopje.cache")
@@ -116,7 +116,7 @@ class BierDopje(SubtitleDatabase.SubtitleDB):
         guessedData = self.guessFileData(token)
         if "tvshow" != guessedData['type']:
             return []
-        elif langs and not set(langs).intersection((['en', 'nl'])): # lang is given but does not include nl or en
+        elif langs and not set(langs).intersection((['en', 'nl'])):  # lang is given but does not include nl or en
             return []
 
         if not langs:

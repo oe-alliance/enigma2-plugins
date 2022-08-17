@@ -394,7 +394,7 @@ class PictureViewer(Screen):
 				self.setTitle(selection[0])
 				self.filelist.descent()
 			else:
-				if selection[1] == True: # isDir
+				if selection[1] == True:  # isDir
 					pass
 				else:
 					print("[" + myname + "] file selected ", selection[0])
@@ -625,9 +625,9 @@ class PictureList(MenuList):
 ##################
 class XMLloader:
 	DEFAULT_NAMESPACES = (
-		  None, # RSS 0.91, 0.92, 0.93, 0.94, 2.0
-		  'http://purl.org/rss/1.0/', # RSS 1.0
-		  'http://my.netscape.com/rdf/simple/0.9/' # RSS 0.90
+		  None,  # RSS 0.91, 0.92, 0.93, 0.94, 2.0
+		  'http://purl.org/rss/1.0/',  # RSS 1.0
+		  'http://my.netscape.com/rdf/simple/0.9/'  # RSS 0.90
 		)
 	DUBLIN_CORE = ('http://purl.org/dc/elements/1.1/',)
 

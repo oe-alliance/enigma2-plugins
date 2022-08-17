@@ -139,7 +139,7 @@ class LastFMScreenMain(Screen, HelpableScreen, LastFM):
             <ePixmap pixmap="skin_default/buttons/blue.png" position="420,360" zPosition="2" size="140,40" transparent="1" alphatest="on" />
             <ePixmap position="570,370" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
             <widget name="infolabel" position="10,410" size="500,20" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;16\" />
-        </screen>""" % (config.plugins.LastFM.name.value + " " + _("Ver.") + " " + lastfm_pluginversion) # title
+        </screen>""" % (config.plugins.LastFM.name.value + " " + _("Ver.") + " " + lastfm_pluginversion)  # title
 
     noCoverArtPNG = "/usr/share/enigma2/skin_default/no_coverArt.png"
 
@@ -149,7 +149,7 @@ class LastFMScreenMain(Screen, HelpableScreen, LastFM):
         HelpableScreen.__init__(self)
         LastFM.__init__(self)
         self.session = session
-        self.streamplayer = streamplayer#StreamPlayer(session)
+        self.streamplayer = streamplayer  # StreamPlayer(session)
         self.streamplayer.onStateChanged.append(self.onStreamplayerStateChanged)
         self.imageconverter = ImageConverter(116, 116, self.setCoverArt)
         Screen.__init__(self, session)
@@ -385,7 +385,7 @@ class LastFMScreenMain(Screen, HelpableScreen, LastFM):
         else:
             self.setInfoLabel(_("Starting stream"), timeout=True)
             self.loadPlaylist()
-            self.updateGUI() #forcing guiupdate, so we dont wait till guiupdatetimer fired
+            self.updateGUI()  # forcing guiupdate, so we dont wait till guiupdatetimer fired
             self.guiupdatetimer.start(config.plugins.LastFM.metadatarefreshinterval.value * 1000)
 
     def setInfoLabel(self, text, timeout=True):
@@ -591,7 +591,7 @@ class LastFMSaveScreen(Screen):
             self.lastcreator = self.streamplayer.getMetadata("creator")
             self.setTitle(self.lastcreator + " - " + self.streamplayer.getMetadata("title"))
             if config.plugins.LastFM.sreensaver.showcoverart.value is not True:
-                pass#do nothing
+                pass  # do nothing
             elif self.streamplayer.getMetadata("image").startswith("http") and config.plugins.LastFM.showcoverart.value:
                 self.imageconverter.convert(self.streamplayer.getMetadata("image"))
             else:

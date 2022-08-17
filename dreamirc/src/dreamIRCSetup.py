@@ -58,17 +58,17 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 		self.reloadFile()
 		list = []
 		list.append(getConfigListEntry(_('Nickname'), self.dreamIRCconf.nick))
-		if config.usage.setup_level.index > 1: # advanced
+		if config.usage.setup_level.index > 1:  # advanced
 			list.append(getConfigListEntry(_('Passwd'), self.dreamIRCconf.passwd))
-		if config.usage.setup_level.index >= 1: # intermediate+
+		if config.usage.setup_level.index >= 1:  # intermediate+
 			list.append(getConfigListEntry(_('Server1'), self.dreamIRCconf.server1))
-		if config.usage.setup_level.index > 1: # advanced
+		if config.usage.setup_level.index > 1:  # advanced
 			list.append(getConfigListEntry(_('Server2'), self.dreamIRCconf.server2))
 			list.append(getConfigListEntry(_('Server3'), self.dreamIRCconf.server3))
-		if config.usage.setup_level.index >= 1: # intermediate+
+		if config.usage.setup_level.index >= 1:  # intermediate+
 			list.append(getConfigListEntry(_('Port'), self.dreamIRCconf.port))
 		list.append(getConfigListEntry(_('Channel'), self.dreamIRCconf.channel))
-		if config.usage.setup_level.index > 1: # i
+		if config.usage.setup_level.index > 1:  # i
 			list.append(getConfigListEntry(_('Debug'), self.dreamIRCconf.debug))
 
 		self["key_red"] = StaticText(_("Cancel"))
@@ -192,12 +192,12 @@ class dreamIRCConfig:
 					print("[dreamIRC] nickname error... restoring default...")
 					self.nick = self.device + "_" + self.mac_end
 				self.passwd = node.getAttribute("passwd")
-				self.server1 = node.getAttribute("server1") # atm only ip.. cause of probs with theads and dns..
+				self.server1 = node.getAttribute("server1")  # atm only ip.. cause of probs with theads and dns..
 				self.server2 = node.getAttribute("server2")
 				self.server3 = node.getAttribute("server3")
 				self.port = node.getAttribute("port")
 				self.channel = node.getAttribute("channel")
-				self.debug = node.getAttribute("debug") # not used yet.. later will enable/disable console debug out..
+				self.debug = node.getAttribute("debug")  # not used yet.. later will enable/disable console debug out..
 		except IOError:
 			self.type = "IRC"
 			self.login = "1"

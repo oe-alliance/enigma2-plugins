@@ -710,9 +710,9 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 			check = ':'.join(check_service.split(':')[3:])
 			for service in services:
 				if service == check:
-					return False # included
-			return True # not included
-		return False # no restriction
+					return False  # included
+			return True  # not included
+		return False  # no restriction
 
 	def getAlternative(self, override_service):
 		services = self.services

@@ -53,7 +53,7 @@ PA_NAME = 7
 
 def getInt_epart(val):
 	try:
-		return int(float(val[0:-2]))#Einheit abschneiden
+		return int(float(val[0:-2]))  # Einheit abschneiden
 	except:
 		return 0
 
@@ -67,7 +67,7 @@ def parseCmd(result):
 			#if x=="BYT;":#start
 			if x.find("BYT;") >= 0:
 				addok = True
-			elif x == "":#end
+			elif x == "":  # end
 				if addok and len(entry):
 					devlist.append(entry)
 				addok = False
@@ -75,7 +75,7 @@ def parseCmd(result):
 			else:
 				if addok and len(x) > 1 and x[len(x) - 1] == ';':
 					l = x.split(':')
-					if len(l) == 7:#Part
+					if len(l) == 7:  # Part
 						l.insert(0, LIST_TYPE_PAR)
 						l[PA_START] = getInt_epart(l[PA_START])
 						l[PA_END] = getInt_epart(l[PA_END])
@@ -84,7 +84,7 @@ def parseCmd(result):
 						if l[PA_FS].find("linux-swap") == 0:
 							l[PA_FS] = "linux-swap"
 						entry.append(l)
-					elif len(l) == 8:#Device
+					elif len(l) == 8:  # Device
 						if l[0].find("/dev/mtd") < 0:
 							l.insert(0, LIST_TYPE_DEV)
 							entry.append(l)
@@ -222,7 +222,7 @@ class AddPart(Screen, ConfigListScreen):
 		config.plugins.eparted.size = NoSave(ConfigInteger(default=maxsize, limits=[1, maxsize]))
 
 		list = []
-		if countpart < 4:#nur 4 parts möglich bei primary
+		if countpart < 4:  # nur 4 parts möglich bei primary
 			list.append(getConfigListEntry(_("size in %s (max %d %s):") % (unit, maxsize, unit), config.plugins.eparted.size))
 		list.append(getConfigListEntry(_("filesystem:"), config.plugins.eparted.fs))
 		ConfigListScreen.__init__(self, list, session=session)
@@ -371,11 +371,11 @@ class Cpart(Screen):
 				else:
 					lastPartEnd = x[PA_END]
 					x[PA_TYPE] = self.PA_TYPE_USE
-					if count == len(self.__old_part_list):#is letzte part
+					if count == len(self.__old_part_list):  # is letzte part
 						x[PA_TYPE] |= self.PA_TYPE_LAST
 					count += 1
 
-			if lastPartEnd < self.__fullsize:#Wenn noch Frei, Part erstellen
+			if lastPartEnd < self.__fullsize:  # Wenn noch Frei, Part erstellen
 				self.__addFreePart(self.__old_part_list, lastPartEnd)
 				self.__addFreePart(self.__new_part_list, lastPartEnd)
 
@@ -389,21 +389,21 @@ class Cpart(Screen):
 		sel = self["list"].getCurrent()
 		if sel and sel[1] and sel[5][PA_TYPE] & self.PA_TYPE_LAST and bool(sel[5][PA_TYPE] & self.PA_TYPE_FREE) == False:
 			try:
-				self.__new_part_list.remove(sel[5])#aktuelle part löschen
+				self.__new_part_list.remove(sel[5])  # aktuelle part löschen
 				for x in self.__new_part_list:
 					if x[LIST_TYPE] == LIST_TYPE_PAR:
-						if x[PA_TYPE] & self.PA_TYPE_FREE:#letzte Freie suchen und auch löschen
+						if x[PA_TYPE] & self.PA_TYPE_FREE:  # letzte Freie suchen und auch löschen
 							self.__new_part_list.remove(x)
 							break
 						else:
 							x[PA_TYPE] = self.PA_TYPE_USE
 
 				lastPartEnd = 0
-				if len(self.__new_part_list) > 1:#von letzter Part, TYp setzen und Ende ermitteln
+				if len(self.__new_part_list) > 1:  # von letzter Part, TYp setzen und Ende ermitteln
 					self.__new_part_list[len(self.__new_part_list) - 1][PA_TYPE] = self.PA_TYPE_USE | self.PA_TYPE_LAST
 					lastPartEnd = self.__new_part_list[len(self.__new_part_list) - 1][PA_END]
 
-				if lastPartEnd < self.__fullsize:#Wenn noch Frei, Part erstellen
+				if lastPartEnd < self.__fullsize:  # Wenn noch Frei, Part erstellen
 					self.__addFreePart(self.__new_part_list, lastPartEnd)
 				#for x in self.__new_part_list:
 				#	if x[LIST_TYPE]==LIST_TYPE_PAR:
@@ -426,7 +426,7 @@ class Cpart(Screen):
 						x[PA_FS] = val[1]
 						x[PA_END] = x[PA_START] + x[PA_SIZE]
 						x[PA_TYPE] = self.PA_TYPE_USE | self.PA_TYPE_LAST
-						if x[PA_END] < self.__fullsize:#Wenn noch Frei, Part erstellen
+						if x[PA_END] < self.__fullsize:  # Wenn noch Frei, Part erstellen
 							self.__addFreePart(self.__new_part_list, x[PA_END])
 						break
 					else:
@@ -589,7 +589,7 @@ class Cpartexe(Screen):
 			if res == 0:
 				self.__state += 1
 			else:
-				self.__state = len(self["list"].list)#bei fehler ans Ende der liste
+				self.__state = len(self["list"].list)  # bei fehler ans Ende der liste
 				self["PixmapButton"].setPixmapNum(0)
 				self["LabelButton"].setText(_("quit"))
 

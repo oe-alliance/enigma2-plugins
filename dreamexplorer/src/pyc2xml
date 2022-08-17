@@ -204,7 +204,7 @@ def xml_pyc(filename):
 # ------------
 
 def assemble(text):
-    lst = [] # list of integers 0..255 representing the bytecode
+    lst = []  # list of integers 0..255 representing the bytecode
     for inst in text.splitlines():
         if inst.count('\t'):
             print 'Warning: Found tabs in assembly section.'

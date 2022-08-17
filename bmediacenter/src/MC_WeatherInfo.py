@@ -106,7 +106,7 @@ class MC_WeatherInfo(Screen):
 		else:
 			self.weatherPluginEntry = None
 		self.language = config.osd.language.value.replace("_", "-")
-		if self.language == "en-EN": # hack
+		if self.language == "en-EN":  # hack
 			self.language = "en-US"
 		self.webSite = ""
 		self.onLayoutFinish.append(self.startRun)
@@ -221,7 +221,7 @@ class MC_WeatherInfo(Screen):
 				if errormessage:
 					self["statustext"].text = errormessage.encode("utf-8", 'ignore')
 					break
-				self["CurrentCity"].text = self.weatherPluginEntry.city.value #childs.attrib.get("weatherlocationname").encode("utf-8", 'ignore')
+				self["CurrentCity"].text = self.weatherPluginEntry.city.value  # childs.attrib.get("weatherlocationname").encode("utf-8", 'ignore')
 				degreetype = childs.attrib.get("degreetype").encode("utf-8", 'ignore')
 				imagerelativeurl = "%slaw/" % childs.attrib.get("imagerelativeurl").encode("utf-8", 'ignore')
 				self.webSite = childs.attrib.get("url").encode("utf-8", 'ignore')
@@ -480,7 +480,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 	def searchLocation(self):
 		if self.current.city.value != "":
 			language = config.osd.language.value.replace("_", "-")
-			if language == "en-EN": # hack
+			if language == "en-EN":  # hack
 				language = "en-US"
 			url = "http://weather.service.msn.com/find.aspx?outputview=search&weasearchstr=%s&culture=%s" % (quote(self.current.city.value), language)
 			getPage(six.ensure_binary(url)).addCallback(self.xmlCallback).addErrback(self.error)

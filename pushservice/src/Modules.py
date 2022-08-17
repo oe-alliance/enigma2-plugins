@@ -52,7 +52,7 @@ class Modules(object):
 				sys.path.append(root)
 
 		# Import PushService modules
-		files = [fname[:-3] for fname in os.listdir(path) if fname.endswith(".py")] # FIXME pyc/pyo
+		files = [fname[:-3] for fname in os.listdir(path) if fname.endswith(".py")]  # FIXME pyc/pyo
 		for name in files:
 			module = None
 

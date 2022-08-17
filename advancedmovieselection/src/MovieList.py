@@ -548,16 +548,16 @@ class MovieList(GUIComponent):
 
                     if self.show_progressbar:
                         top = int((self.l.getItemSize().height() - 6) / 2) + 1
-                        res.append(MultiContentEntryProgress(pos=(0 + offset, top), size=(50, 6), percent=perc, borderWidth=1, foreColor=color, backColorSelected=color)) #Topfi: added backColorSelected
+                        res.append(MultiContentEntryProgress(pos=(0 + offset, top), size=(50, 6), percent=perc, borderWidth=1, foreColor=color, backColorSelected=color))  # Topfi: added backColorSelected
                         offset = offset + 55
 
                     if self.show_percent:
                         perc_txt = "%d" % (perc) + ' % - '
                         if self.list_type == MovieList.LISTTYPE_MINIMAL_AdvancedMovieSelection:
-                            res.append(MultiContentEntryText(pos=(offset, 2), size=(60, 25), font=0, flags=RT_HALIGN_RIGHT, text=perc_txt, color=color, color_sel=color)) #Topfi: added color_sel
+                            res.append(MultiContentEntryText(pos=(offset, 2), size=(60, 25), font=0, flags=RT_HALIGN_RIGHT, text=perc_txt, color=color, color_sel=color))  # Topfi: added color_sel
                             offset = offset + 65
                         else:
-                            res.append(MultiContentEntryText(pos=(offset, 2), size=(70, 25), font=0, flags=RT_HALIGN_RIGHT, text=perc_txt, color=color, color_sel=color)) #Topfi: added color_sel
+                            res.append(MultiContentEntryText(pos=(offset, 2), size=(70, 25), font=0, flags=RT_HALIGN_RIGHT, text=perc_txt, color=color, color_sel=color))  # Topfi: added color_sel
                             offset = offset + 75
 
             begin_string = ""
@@ -611,69 +611,69 @@ class MovieList(GUIComponent):
                     new_offset = new_offset + 24
 
                 # Line 1: Movie Text, service name
-                res.append(MultiContentEntryText(pos=(new_offset + offset, 0), size=(width - 265, 30), font=0, flags=RT_HALIGN_LEFT, text=txt, color=color, color_sel=color)) #Topfi: added color_sel
-                res.append(MultiContentEntryText(pos=(width - 185, 0), size=(180, 30), font=2, flags=RT_HALIGN_RIGHT, text=service.getServiceName(), color=color, color_sel=color)) #Topfi: added color_sel
+                res.append(MultiContentEntryText(pos=(new_offset + offset, 0), size=(width - 265, 30), font=0, flags=RT_HALIGN_LEFT, text=txt, color=color, color_sel=color))  # Topfi: added color_sel
+                res.append(MultiContentEntryText(pos=(width - 185, 0), size=(180, 30), font=2, flags=RT_HALIGN_RIGHT, text=service.getServiceName(), color=color, color_sel=color))  # Topfi: added color_sel
                 # line 2: description, file size
-                res.append(MultiContentEntryText(pos=(0 + offset, 28), size=(width, 25), font=1, flags=RT_HALIGN_LEFT, text=description, color=color, color_sel=color)) #Topfi: added color_sel
+                res.append(MultiContentEntryText(pos=(0 + offset, 28), size=(width, 25), font=1, flags=RT_HALIGN_LEFT, text=description, color=color, color_sel=color))  # Topfi: added color_sel
                 if filesize:
                     if filesize <= 999:
                         filesize = "%d MB" % (filesize)
                     else:
                         filesize = "%s GB" % (round(filesize / 1000, 2))
-                    res.append(MultiContentEntryText(pos=(width - 185, 28), size=(180, 30), font=2, flags=RT_HALIGN_RIGHT, text=filesize, color=color, color_sel=color)) #Topfi: added color_sel
+                    res.append(MultiContentEntryText(pos=(width - 185, 28), size=(180, 30), font=2, flags=RT_HALIGN_RIGHT, text=filesize, color=color, color_sel=color))  # Topfi: added color_sel
                 # Line 3: begin_string, progress bar, percent, tags, movie length
-                res.append(MultiContentEntryText(pos=(0 + offset, 55), size=(100, 20), font=1, flags=RT_HALIGN_LEFT, text=begin_string, color=color, color_sel=color)) #Topfi: added color_sel
-                res.append(MultiContentEntryProgress(pos=(130 + offset, 63), size=(50, 6), percent=perc, borderWidth=1, foreColor=color, backColorSelected=color)) #Topfi: added backColorSelected
-                res.append(MultiContentEntryText(pos=(190 + offset, 55), size=(60, 20), font=1, flags=RT_HALIGN_LEFT, text=prec_text, color=color, color_sel=color)) #Topfi: added color_sel
+                res.append(MultiContentEntryText(pos=(0 + offset, 55), size=(100, 20), font=1, flags=RT_HALIGN_LEFT, text=begin_string, color=color, color_sel=color))  # Topfi: added color_sel
+                res.append(MultiContentEntryProgress(pos=(130 + offset, 63), size=(50, 6), percent=perc, borderWidth=1, foreColor=color, backColorSelected=color))  # Topfi: added backColorSelected
+                res.append(MultiContentEntryText(pos=(190 + offset, 55), size=(60, 20), font=1, flags=RT_HALIGN_LEFT, text=prec_text, color=color, color_sel=color))  # Topfi: added color_sel
                 if tags:
-                    res.append(MultiContentEntryText(pos=(250 + offset, 55), size=(500, 20), font=1, flags=RT_HALIGN_LEFT, text=self.arrangeTags(tags), color=color, color_sel=color)) #Topfi: added color_sel
-                res.append(MultiContentEntryText(pos=(width - 105, 55), size=(100, 20), font=1, flags=RT_HALIGN_RIGHT, text=_len, color=color, color_sel=color)) #Topfi: added color_sel
+                    res.append(MultiContentEntryText(pos=(250 + offset, 55), size=(500, 20), font=1, flags=RT_HALIGN_LEFT, text=self.arrangeTags(tags), color=color, color_sel=color))  # Topfi: added color_sel
+                res.append(MultiContentEntryText(pos=(width - 105, 55), size=(100, 20), font=1, flags=RT_HALIGN_RIGHT, text=_len, color=color, color_sel=color))  # Topfi: added color_sel
 
             elif self.list_type == MovieList.LISTTYPE_ORIGINAL:
-                if png is not None: # self.show_folders:
+                if png is not None:  # self.show_folders:
                     res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 0, 29, 20, 20, png))
-                res.append(MultiContentEntryText(pos=(0 + offset, 0), size=(width - 265, 30), font=0, flags=RT_HALIGN_LEFT, text=txt, color=color, color_sel=color)) #Topfi: added color_sel
+                res.append(MultiContentEntryText(pos=(0 + offset, 0), size=(width - 265, 30), font=0, flags=RT_HALIGN_LEFT, text=txt, color=color, color_sel=color))  # Topfi: added color_sel
                 if tags and self.show_tags == MovieList.SHOW_TAGS:
-                    res.append(MultiContentEntryText(pos=(width - 255, 0), size=(250, 30), font=2, flags=RT_HALIGN_RIGHT, text=self.arrangeTags(tags), color=color, color_sel=color)) #Topfi: added color_sel
+                    res.append(MultiContentEntryText(pos=(width - 255, 0), size=(250, 30), font=2, flags=RT_HALIGN_RIGHT, text=self.arrangeTags(tags), color=color, color_sel=color))  # Topfi: added color_sel
                     if service is not None:
-                        res.append(MultiContentEntryText(pos=(300, 55), size=(200, 25), font=1, flags=RT_HALIGN_LEFT, text=service.getServiceName(), color=color, color_sel=color)) #Topfi: added color_sel
+                        res.append(MultiContentEntryText(pos=(300, 55), size=(200, 25), font=1, flags=RT_HALIGN_LEFT, text=service.getServiceName(), color=color, color_sel=color))  # Topfi: added color_sel
                 else:
                     if service is not None:
-                        res.append(MultiContentEntryText(pos=(width - 185, 0), size=(180, 30), font=2, flags=RT_HALIGN_RIGHT, text=service.getServiceName(), color=color, color_sel=color)) #Topfi: added color_sel
-                    res.append(MultiContentEntryText(pos=(0 + offset, 28), size=(width, 25), font=1, flags=RT_HALIGN_LEFT, text=description, color=color, color_sel=color)) #Topfi: added color_sel
+                        res.append(MultiContentEntryText(pos=(width - 185, 0), size=(180, 30), font=2, flags=RT_HALIGN_RIGHT, text=service.getServiceName(), color=color, color_sel=color))  # Topfi: added color_sel
+                    res.append(MultiContentEntryText(pos=(0 + offset, 28), size=(width, 25), font=1, flags=RT_HALIGN_LEFT, text=description, color=color, color_sel=color))  # Topfi: added color_sel
                 if self.show_date == MovieList.SHOW_DATE:
-                    res.append(MultiContentEntryText(pos=(0 + offset, 55), size=(200, 20), font=1, flags=RT_HALIGN_LEFT, text=begin_string, color=color, color_sel=color)) #Topfi: added color_sel
+                    res.append(MultiContentEntryText(pos=(0 + offset, 55), size=(200, 20), font=1, flags=RT_HALIGN_LEFT, text=begin_string, color=color, color_sel=color))  # Topfi: added color_sel
                 if self.show_time == MovieList.SHOW_TIME:
-                    res.append(MultiContentEntryText(pos=(width - 205, 55), size=(200, 20), font=1, flags=RT_HALIGN_RIGHT, text=_len, color=color, color_sel=color)) #Topfi: added color_sel
+                    res.append(MultiContentEntryText(pos=(width - 205, 55), size=(200, 20), font=1, flags=RT_HALIGN_RIGHT, text=_len, color=color, color_sel=color))  # Topfi: added color_sel
 
             elif self.list_type == MovieList.LISTTYPE_COMPACT_DESCRIPTION:
-                if png is not None: # self.show_folders:
+                if png is not None:  # self.show_folders:
                     res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 0, 9, 20, 20, png))
-                res.append(MultiContentEntryText(pos=(0 + offset, 0), size=(width, 23), font=0, flags=RT_HALIGN_LEFT, text=txt, color=color, color_sel=color)) #Topfi: added color_sel
+                res.append(MultiContentEntryText(pos=(0 + offset, 0), size=(width, 23), font=0, flags=RT_HALIGN_LEFT, text=txt, color=color, color_sel=color))  # Topfi: added color_sel
                 res.append(MultiContentEntryText(pos=(0 + offset, 22), size=(width - 212, 17), font=1, flags=RT_HALIGN_LEFT, text=description, color=color, color_sel=color))
                 if self.show_date == MovieList.SHOW_DATE:
-                    res.append(MultiContentEntryText(pos=(width - 135, 4), size=(130, 20), font=1, flags=RT_HALIGN_RIGHT, text=begin_string, color=color, color_sel=color)) #Topfi: added color_sel
+                    res.append(MultiContentEntryText(pos=(width - 135, 4), size=(130, 20), font=1, flags=RT_HALIGN_RIGHT, text=begin_string, color=color, color_sel=color))  # Topfi: added color_sel
                 if self.show_time == MovieList.SHOW_TIME:
                     dr = service.getServiceName() + " " + _len
-                    res.append(MultiContentEntryText(pos=(width - 215, 22), size=(210, 17), font=1, flags=RT_HALIGN_RIGHT, text=dr, color=color, color_sel=color)) #Topfi: added color_sel
+                    res.append(MultiContentEntryText(pos=(width - 215, 22), size=(210, 17), font=1, flags=RT_HALIGN_RIGHT, text=dr, color=color, color_sel=color))  # Topfi: added color_sel
                 else:
-                    res.append(MultiContentEntryText(pos=(width - 155, 22), size=(150, 17), font=1, flags=RT_HALIGN_RIGHT, text=service.getServiceName(), color=color, color_sel=color)) #Topfi: added color_sel
+                    res.append(MultiContentEntryText(pos=(width - 155, 22), size=(150, 17), font=1, flags=RT_HALIGN_RIGHT, text=service.getServiceName(), color=color, color_sel=color))  # Topfi: added color_sel
 
             elif self.list_type == MovieList.LISTTYPE_COMPACT:
-                if png is not None: # self.show_folders:
+                if png is not None:  # self.show_folders:
                     res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 0, 9, 20, 20, png))
-                res.append(MultiContentEntryText(pos=(offset, 0), size=(width, 25), font=0, flags=RT_HALIGN_LEFT, text=txt, color=color, color_sel=color)) #Topfi: added color_sel
+                res.append(MultiContentEntryText(pos=(offset, 0), size=(width, 25), font=0, flags=RT_HALIGN_LEFT, text=txt, color=color, color_sel=color))  # Topfi: added color_sel
                 if self.show_date == MovieList.SHOW_DATE:
-                    res.append(MultiContentEntryText(pos=(offset, 22), size=(200, 17), font=1, flags=RT_HALIGN_LEFT, text=begin_string, color=color, color_sel=color)) #Topfi: added color_sel
+                    res.append(MultiContentEntryText(pos=(offset, 22), size=(200, 17), font=1, flags=RT_HALIGN_LEFT, text=begin_string, color=color, color_sel=color))  # Topfi: added color_sel
                 if self.show_time == MovieList.SHOW_TIME:
-                    res.append(MultiContentEntryText(pos=(width - 80, 0), size=(75, 20), font=0, flags=RT_HALIGN_RIGHT, text=_len, color=color, color_sel=color)) #Topfi: added color_sel
+                    res.append(MultiContentEntryText(pos=(width - 80, 0), size=(75, 20), font=0, flags=RT_HALIGN_RIGHT, text=_len, color=color, color_sel=color))  # Topfi: added color_sel
                 if tags and self.show_tags == MovieList.SHOW_TAGS:
-                    res.append(MultiContentEntryText(pos=(width - 205, 22), size=(200, 17), font=1, flags=RT_HALIGN_RIGHT, text=self.arrangeTags(tags), color=color, color_sel=color)) #Topfi: added color_sel
+                    res.append(MultiContentEntryText(pos=(width - 205, 22), size=(200, 17), font=1, flags=RT_HALIGN_RIGHT, text=self.arrangeTags(tags), color=color, color_sel=color))  # Topfi: added color_sel
                     if service is not None:
-                        res.append(MultiContentEntryText(pos=(250, 22), size=(200, 17), font=1, flags=RT_HALIGN_LEFT, text=service.getServiceName(), color=color, color_sel=color)) #Topfi: added color_sel
+                        res.append(MultiContentEntryText(pos=(250, 22), size=(200, 17), font=1, flags=RT_HALIGN_LEFT, text=service.getServiceName(), color=color, color_sel=color))  # Topfi: added color_sel
                 else:
                     if service is not None:
-                        res.append(MultiContentEntryText(pos=(width - 205, 22), size=(200, 17), font=1, flags=RT_HALIGN_RIGHT, text=service.getServiceName(), color=color, color_sel=color)) #Topfi: added color_sel
+                        res.append(MultiContentEntryText(pos=(width - 205, 22), size=(200, 17), font=1, flags=RT_HALIGN_RIGHT, text=service.getServiceName(), color=color, color_sel=color))  # Topfi: added color_sel
 
             elif self.list_type == MovieList.LISTTYPE_MINIMAL_AdvancedMovieSelection:
                 if selection_index > -1:
@@ -693,24 +693,24 @@ class MovieList(GUIComponent):
                 if _len and self.show_time == MovieList.SHOW_TIME:
                     displaytext = displaytext + ' ' + "(" + _len + ")"
 
-                if png is not None: # self.show_folders:
+                if png is not None:  # self.show_folders:
                     res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 0, 3, 20, 20, png))
                 offsetServiceName = 0
                 if self.show_service == MovieList.SHOW_SERVICE:
                     servicename = service.getServiceName()
-                    res.append(MultiContentEntryText(pos=(width - 175, 2), size=(170, 20), font=0, flags=RT_HALIGN_RIGHT, text=servicename, color=color, color_sel=color)) #Topfi: added color_sel
+                    res.append(MultiContentEntryText(pos=(width - 175, 2), size=(170, 20), font=0, flags=RT_HALIGN_RIGHT, text=servicename, color=color, color_sel=color))  # Topfi: added color_sel
                     if servicename:
                         offsetServiceName = 175
                 if tags and self.show_tags == MovieList.SHOW_TAGS and self.show_service == MovieList.HIDE_SERVICE:
                     tag_size = 250
                     if len(tags) < 7:
                         tag_size = 80
-                    res.append(MultiContentEntryText(pos=(width - tag_size - 5, 2), size=(tag_size, 20), font=0, flags=RT_HALIGN_RIGHT, text=self.arrangeTags(tags, False), color=color, color_sel=color)) #Topfi: added color_sel
+                    res.append(MultiContentEntryText(pos=(width - tag_size - 5, 2), size=(tag_size, 20), font=0, flags=RT_HALIGN_RIGHT, text=self.arrangeTags(tags, False), color=color, color_sel=color))  # Topfi: added color_sel
                     offsetServiceName = tag_size
-                res.append(MultiContentEntryText(pos=(0 + offset, 2), size=(width - (0 + offset + offsetServiceName), 25), font=0, flags=RT_HALIGN_LEFT, text=displaytext, color=color, color_sel=color)) #Topfi: added color_sel
+                res.append(MultiContentEntryText(pos=(0 + offset, 2), size=(width - (0 + offset + offsetServiceName), 25), font=0, flags=RT_HALIGN_LEFT, text=displaytext, color=color, color_sel=color))  # Topfi: added color_sel
             else:
                 assert (self.list_type == MovieList.LISTTYPE_MINIMAL)
-                if png is not None: # self.show_folders:
+                if png is not None:  # self.show_folders:
                     res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 0, 3, 20, 20, png))
 
                 w = 0
@@ -722,13 +722,13 @@ class MovieList(GUIComponent):
 
                     if self.show_time == MovieList.HIDE_TIME:
                         w = 155
-                        res.append(MultiContentEntryText(pos=(width - w, 4), size=(w - 5, 20), font=1, flags=RT_HALIGN_RIGHT, text=begin_string, color=color, color_sel=color)) #Topfi: added color_sel
+                        res.append(MultiContentEntryText(pos=(width - w, 4), size=(w - 5, 20), font=1, flags=RT_HALIGN_RIGHT, text=begin_string, color=color, color_sel=color))  # Topfi: added color_sel
                 elif self.show_date == MovieList.HIDE_DATE:
                     if self.show_time == MovieList.SHOW_TIME:
                         w = 75
-                        res.append(MultiContentEntryText(pos=(width - 75, 2), size=(70, 20), font=1, flags=RT_HALIGN_RIGHT, text=_len, color=color, color_sel=color)) #Topfi: added color_sel
+                        res.append(MultiContentEntryText(pos=(width - 75, 2), size=(70, 20), font=1, flags=RT_HALIGN_RIGHT, text=_len, color=color, color_sel=color))  # Topfi: added color_sel
 
-                res.append(MultiContentEntryText(pos=(0 + offset, 0), size=(width - w - offset, 25), font=0, flags=RT_HALIGN_LEFT, text=txt, color=color, color_sel=color)) #Topfi: added color_sel
+                res.append(MultiContentEntryText(pos=(0 + offset, 0), size=(width - w - offset, 25), font=0, flags=RT_HALIGN_LEFT, text=txt, color=color, color_sel=color))  # Topfi: added color_sel
 
             return res
         except:

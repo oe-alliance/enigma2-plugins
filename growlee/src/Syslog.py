@@ -90,7 +90,7 @@ class SyslogNetworkProtocol(DatagramProtocol):
 		# read prio field
 		prio, data = data.split('>', 1)
 		prio = int(prio[1:])
-		facility, severity = divmod(prio, 8) # just the ids
+		facility, severity = divmod(prio, 8)  # just the ids
 		#facility = reverse(FACILITY)[facility]
 		type = reverse(SEVERITYMAP).get(severity, MessageBox.TYPE_ERROR)
 
@@ -111,7 +111,7 @@ class SyslogNetworkProtocol(DatagramProtocol):
 			MessageBox,
 			text=message,
 			type=type,
-			timeout=10, # XXX: un-hardcode timeout?
+			timeout=10,  # XXX: un-hardcode timeout?
 			close_on_any_key=True,
 		)
 

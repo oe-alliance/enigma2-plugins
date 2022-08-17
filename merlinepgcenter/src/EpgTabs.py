@@ -146,7 +146,7 @@ class EpgSingleTab(EpgBaseTab):
 				service = servicelist.getNext()
 				if service.valid():
 					return service.toString()
-				if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker | eServiceReference.isGroup): # ignore non playable services
+				if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker | eServiceReference.isGroup):  # ignore non playable services
 					continue
 		else:
 			return ""
@@ -157,7 +157,7 @@ class EpgSingleTab(EpgBaseTab):
 			sRef = NavigationInstance.instance.getCurrentlyPlayingServiceReference().toString()
 		else:
 			if oldMode == TIMERLIST:
-				cur = self.parentInstance["timerlist"].getCurrent() # this could be solved better...
+				cur = self.parentInstance["timerlist"].getCurrent()  # this could be solved better...
 			else:
 				cur = self.tabList.getCurrent()
 
@@ -180,7 +180,7 @@ class EpgSingleTab(EpgBaseTab):
 
 		self.sortMode = self.SORT_MODE_TIME
 
-		if timerListMode == LIST_MODE_AUTOTIMER: # we don't have a service ref from autotimers, let's get the first one in bouquets
+		if timerListMode == LIST_MODE_AUTOTIMER:  # we don't have a service ref from autotimers, let's get the first one in bouquets
 			self.__sRef = self.getFirstServiceRef(firstBouquet)
 		elif sRef == None:
 			self.__sRef = self.getServiceRef(oldMode, firstBouquet)
@@ -221,8 +221,8 @@ class EpgSingleTab(EpgBaseTab):
 		else:
 			self.tabList.l.invalidate()
 
-	def changeService(self, direction): # +1 = next service, -1 = previous service
-		self.sortMode = self.SORT_MODE_TIME # reset sorting
+	def changeService(self, direction):  # +1 = next service, -1 = previous service
+		self.sortMode = self.SORT_MODE_TIME  # reset sorting
 
 		numChannels = len(EpgCenterList.bouquetServices[self.__currentBouquetIndex])
 
@@ -266,9 +266,9 @@ class EpgSingleTab(EpgBaseTab):
 			cur = self.tabList.getCurrent()
 			eventId = cur[1]
 
-		if self.sortMode == self.SORT_MODE_TIME: # sort by time (default)
+		if self.sortMode == self.SORT_MODE_TIME:  # sort by time (default)
 			self.tabList.list.sort(key=lambda x: x[3])
-		elif self.sortMode == self.SORT_MODE_NAME: # sort by name and time
+		elif self.sortMode == self.SORT_MODE_NAME:  # sort by name and time
 			self.tabList.list.sort(key=lambda x: (x[5] and x[5].lower(), x[3]))
 
 		self.tabList.setList(self.tabList.list)

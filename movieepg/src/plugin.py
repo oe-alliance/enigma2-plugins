@@ -44,7 +44,7 @@ def InfoBarPlugins_getPluginList(self, *args, **kwargs):
 		args = inspect.getargspec(p.__call__)[0]
 		if len(args) == 1 or len(args) == 2 and showSlistPlugins:
 			l.append(p)
-	l.sort(key=attrgetter('weight', 'name')) # sort first by weight, then by name
+	l.sort(key=attrgetter('weight', 'name'))  # sort first by weight, then by name
 
 	# "tranform" into weird internal format
 	l = [((boundFunction(self.getPluginName, p.name), boundFunction(self.runPlugin, p), lambda: True), None, p.name) for p in l]
@@ -159,6 +159,6 @@ def Plugins(**kwargs):
 			description=_("Configure Movie-EPG Plugin"),
 			where=PluginDescriptor.WHERE_PLUGINMENU,
 			fnc=main,
-			needsRestart=True, # XXX: force restart for now as I don't think it will work properly without doing so
+			needsRestart=True,  # XXX: force restart for now as I don't think it will work properly without doing so
 		),
 	]

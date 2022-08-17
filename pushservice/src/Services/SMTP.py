@@ -82,10 +82,10 @@ class SMTP(ServiceBase):
 			body = subject
 		subject = MAIL_HEADER_TEMPLATE.format(**{'box': config.pushservice.boxname.value, 'name': NAME, 'plugin': pluginname, 'subject': subject})
 		body = MAIL_BODY_TEMPLATE.format(**{'body': str(body), 'name': NAME, 'version': VERSION, 'plugin': pluginname, 'support': SUPPORT, 'donate': DONATE})
-		message = Message(from_addr, to_addrs, subject, body) #TODO change mime="text/plain", charset="utf-8")
+		message = Message(from_addr, to_addrs, subject, body)  # TODO change mime="text/plain", charset="utf-8")
 		if attachments:
 			for attachment in attachments:
-				message.attach(attachment) #TODO change mime=None, charset=None, content=None):
+				message.attach(attachment)  # TODO change mime=None, charset=None, content=None):
 
 		# Send message
 		print(_("PushService PushMail: Sending message: %s") % subject)

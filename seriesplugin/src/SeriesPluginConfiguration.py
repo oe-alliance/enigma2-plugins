@@ -97,7 +97,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 			"ok": self.keyOK,
 			"left": self.keyLeft,
 			"right": self.keyRight,
-		}, -2) # higher priority
+		}, -2)  # higher priority
 
 		stopIndependent()
 		#resetInstance()

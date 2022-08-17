@@ -118,8 +118,8 @@ def set_mask(mask=None):
 			mask = "0f0f0f"
 		v = "000000" + mask
 		mask0 = v[-2:]		# last two digits
-		mask1 = v[-4:-2] + "00"	# four digits (WTF?)
-		mask2 = v[-6:-4]	# first two, if available
+		mask1 = v[-4:-2] + "00"  # four digits (WTF?)
+		mask2 = v[-6:-4]  # first two, if available
 
 		write_mask(MASK, mask0)
 		if MASK1:

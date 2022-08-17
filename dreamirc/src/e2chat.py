@@ -278,7 +278,7 @@ class ChatUI:
 
     def __init__(self):
         self.conversations = {}      # cache of all direct windows
-        self.groupConversations = {} # cache of all group windows
+        self.groupConversations = {}  # cache of all group windows
         self.persons = {}            # keys are (name, client)
         self.groups = {}             # cache of all groups
         self.onlineClients = []      # list of message sources currently online

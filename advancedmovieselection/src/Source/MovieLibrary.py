@@ -377,7 +377,7 @@ class dict2xml(object):
 
     def write(self, file_name):
         try:
-            xmlstr = self.doc.toprettyxml() #self.doc.toxml('utf-8')
+            xmlstr = self.doc.toprettyxml()  # self.doc.toxml('utf-8')
             f = open(file_name, 'w')
             f.write(xmlstr)
             f.close()

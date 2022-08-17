@@ -72,14 +72,14 @@ from six.moves import range
 
 # Globals
 pluginPrintname = "[Elektro]"
-debug = False # If set True, plugin will print some additional status info to track logic flow
+debug = False  # If set True, plugin will print some additional status info to track logic flow
 session = None
 ElektroWakeUpTime = -1
 elektro_pluginversion = "3.4.6"
 elektrostarttime = 60
 elektrosleeptime = 5
-elektroTimerWakeupThreshold = 60 * 14 + 45 # any wakeup from sleep within 14.75 minutes around the wakeup time/a recording timer is regarded to be automatic (as opposed to manual)
-elektroShutdownThreshold = 60 * 20 # we only go to sleep if and only if we won't need to wake up for a timer within the next 20 minutes
+elektroTimerWakeupThreshold = 60 * 14 + 45  # any wakeup from sleep within 14.75 minutes around the wakeup time/a recording timer is regarded to be automatic (as opposed to manual)
+elektroShutdownThreshold = 60 * 20  # we only go to sleep if and only if we won't need to wake up for a timer within the next 20 minutes
 ###############################################################################
 
 #Configuration
@@ -812,10 +812,10 @@ class DoElektro(Screen):
 
 		# let's see if we should be sleeping
 		trysleep = False
-		if time_s < (wakeuptime - elektroShutdownThreshold): # Wakeup is in the future -> sleep!
+		if time_s < (wakeuptime - elektroShutdownThreshold):  # Wakeup is in the future -> sleep!
 			trysleep = True
 			print(pluginPrintname, "Wakeup is in the future -> Sleep:", str(time_s), " <", str(wakeuptime))
-		if sleeptime < time_s: #Sleep is in the past -> sleep!
+		if sleeptime < time_s:  # Sleep is in the past -> sleep!
 			trysleep = True
 			print(pluginPrintname, "Sleep is in the past -> Sleep:", str(sleeptime), " <", str(time_s))
 
@@ -924,7 +924,7 @@ class DoElektro(Screen):
 				if config.plugins.elektro.NASenable.value == "true" or config_NASenable:
 					ret = NASpowerdown(config.plugins.elektro.NASname.value, config.plugins.elektro.NASuser.value, config.plugins.elektro.NASpass.value, config.plugins.elektro.NAScommand.value, config.plugins.elektro.NASport.value)
 				configfile.save()
-				self.session.open(Standby.TryQuitMainloop, 1) # <- This might not work reliably
+				self.session.open(Standby.TryQuitMainloop, 1)  # <- This might not work reliably
 				#quitMainloop(1)
 		else:
 			# Dont try to sleep until next wakeup

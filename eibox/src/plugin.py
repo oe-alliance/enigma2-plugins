@@ -307,7 +307,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 			<widget name="config" position="10,420" size="530,26" zPosition="1" transparent="1" scrollbarMode="showNever" />
 			<ePixmap pixmap="%s" position="0,0" size="550,400" zPosition="-1" alphatest="on" />\n""" % (img_prefix + EIB_objects.zone_img)
 
-		offset = [12, 10] # fix up browser css spacing
+		offset = [12, 10]  # fix up browser css spacing
 		iconsize = [32, 32]
 
 		self.setup_title = "E.I.B.ox"
@@ -659,13 +659,13 @@ class EIBox(Screen, ConfigListScreen):
 						object_id = item.nodeValue
 					#if key == "switch": # dimmer on/off (1 bit)
 						#object_id = item.nodeValue
-					if key == "value": # dimmer brightness value (8 bit)
+					if key == "value":  # dimmer brightness value (8 bit)
 						object_id = item.nodeValue
-					if key == "target": # goto target
+					if key == "target":  # goto target
 						object_id = item.nodeValue
-					if key == "temp": # thermostat actual value
+					if key == "temp":  # thermostat actual value
 						temp_id = item.nodeValue
-					if key == "setpoint": # thermostat set point
+					if key == "setpoint":  # thermostat set point
 						setpoint_id = item.nodeValue
 					if key == "type":
 						if item.nodeValue in ("dimmer", "switch", "goto", "thermostat", "text"):

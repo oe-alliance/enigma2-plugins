@@ -234,7 +234,7 @@ class AspectRatioSwitch:
 def autostart(reason, **kwargs):
 	#STANDARD beim Systemstart
 	global aspect_ratio_switch
-	if reason == 0: # startup
+	if reason == 0:  # startup
 		keymappath = "/usr/share/enigma2/keymap.xml"
 		if os.path.exists(keymappath):
 			keymapfile = open(keymappath, "r")

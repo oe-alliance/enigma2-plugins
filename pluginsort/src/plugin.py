@@ -19,7 +19,7 @@ from Components.Converter.TemplatedMultiContent import TemplatedMultiContent
 from Components.Renderer.Listbox import Listbox as ListboxRenderer
 
 from Components.ActionMap import ActionMap, NumberActionMap
-from operator import attrgetter # python 2.5+
+from operator import attrgetter  # python 2.5+
 
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 
@@ -255,7 +255,7 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 			self.where = PluginDescriptor.WHERE_PLUGINMENU
 
 		OriginalPluginBrowser.__init__(self, *args, **kwargs)
-		self.skinName = ["SortingPluginBrowser", "PluginBrowser"] # XXX: fallback is evil because it makes moving more confusing :P
+		self.skinName = ["SortingPluginBrowser", "PluginBrowser"]  # XXX: fallback is evil because it makes moving more confusing :P
 
 		self["pluginlist"] = MyPluginList(self.list)
 
@@ -334,8 +334,8 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 	def updateList(self):
 		self.pluginlist = plugins.getPlugins(self.where)
 		if self.where in (PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU):
-			self.pluginlist.sort(key=attrgetter('weight', 'name')) # sort first by weight, then by name; we get pretty much a weight sorted but otherwise random list
-		else: #if self.where in (PluginDescriptor.WHERE_EVENTINFO, PluginDescriptor.WHERE_MOVIELIST):
+			self.pluginlist.sort(key=attrgetter('weight', 'name'))  # sort first by weight, then by name; we get pretty much a weight sorted but otherwise random list
+		else:  # if self.where in (PluginDescriptor.WHERE_EVENTINFO, PluginDescriptor.WHERE_MOVIELIST):
 			self.pluginlist.sort(key=attrgetter('weight'))
 		self.list = [MyPluginEntryComponent(plugin) for plugin in self.pluginlist]
 		self["pluginlist"].list = self.list
@@ -515,7 +515,7 @@ def autostart(reason, *args, **kwargs):
 			fixed = []
 			for plugin in pluginlist:
 				if plugin in fixed:
-					continue # skip double entries
+					continue  # skip double entries
 
 				# create individual entries for multiple wheres, this is potentially harmful!
 				if len(plugin.where) > 1:
@@ -526,7 +526,7 @@ def autostart(reason, *args, **kwargs):
 					else:
 						hadAutostart = False
 					plugins.removePlugin(plugin)
-					plugins.addPlugin(plugin) # this is our own addPlugin now, which automatically creates copies
+					plugins.addPlugin(plugin)  # this is our own addPlugin now, which automatically creates copies
 
 					# HACK: re-add autostart entry to internal list inside PluginComponent
 					if hadAutostart:

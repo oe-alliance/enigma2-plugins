@@ -27,9 +27,9 @@ class ServiceListReload(resource.Resource):
 		try:
 			db = eDVBDB.getInstance()
 			#db.reloadServicelist() # reloading only lamedb
-			db.reloadBouquets() # reloading *.tv and *.radio
+			db.reloadBouquets()  # reloading *.tv and *.radio
 
-			Components.ParentalControl.parentalControl.open() # reload whitelist and blacklist
+			Components.ParentalControl.parentalControl.open()  # reload whitelist and blacklist
 
 			request.setResponseCode(http.OK)
 

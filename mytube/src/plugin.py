@@ -564,7 +564,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 						(_("Add to favorites"), "favorite"),
 					))
 
-			if config.usage.setup_level.index >= 2: # expert+
+			if config.usage.setup_level.index >= 2:  # expert+
 				menulist.extend((
 					(_("Download Video"), "download"),
 					(_("View active downloads"), "downview")

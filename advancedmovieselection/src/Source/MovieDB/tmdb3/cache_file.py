@@ -141,7 +141,7 @@ except ImportError:
 
 
 class FileCacheObject(CacheObject):
-    _struct = struct.Struct('dII') # double and two ints
+    _struct = struct.Struct('dII')  # double and two ints
                                    # timestamp, lifetime, position
 
     @classmethod
@@ -213,7 +213,7 @@ class FileCacheObject(CacheObject):
 class FileEngine(CacheEngine):
     """Simple file-backed engine."""
     name = 'file'
-    _struct = struct.Struct('HH') # two shorts for version and count
+    _struct = struct.Struct('HH')  # two shorts for version and count
     _version = 2
 
     def __init__(self, parent):
@@ -271,7 +271,7 @@ class FileEngine(CacheEngine):
         self._init_cache()
         self._open('r+b')
 
-        with Flock(self.cachefd, Flock.LOCK_SH): # lock for shared access
+        with Flock(self.cachefd, Flock.LOCK_SH):  # lock for shared access
             # return any new objects in the cache
             return self._read(date)
 
@@ -279,7 +279,7 @@ class FileEngine(CacheEngine):
         self._init_cache()
         self._open('r+b')
 
-        with Flock(self.cachefd, Flock.LOCK_EX): # lock for exclusive access
+        with Flock(self.cachefd, Flock.LOCK_EX):  # lock for exclusive access
             newobjs = self._read(self.age)
             newobjs.append(FileCacheObject(key, value, lifetime))
 
@@ -298,7 +298,7 @@ class FileEngine(CacheEngine):
                 self.cachefd.seek(0)
                 return
         except:
-            pass # catch issue of no cachefile yet opened
+            pass  # catch issue of no cachefile yet opened
         self.cachefd = io.open(self.cachefile, mode)
 
     def _read(self, date):

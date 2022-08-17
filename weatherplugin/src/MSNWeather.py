@@ -121,9 +121,9 @@ class MSNWeather:
 	def getWeatherData(self, degreetype, locationcode, city, callback, callbackShowIcon, callbackAllIconsDownloaded=None):
 		self.initialize()
 		language = config.osd.language.value.replace("_", "-")
-		if language == "en-EN": # hack
+		if language == "en-EN":  # hack
 			language = "en-US"
-		elif language == "no-NO": # hack
+		elif language == "no-NO":  # hack
 			language = "nn-NO"
 		self.city = city
 		self.callback = callback
@@ -151,7 +151,7 @@ class MSNWeather:
 
 	def errorIconDownload(self, error=None, item=None):
 		item.error = True
-		if os_path.exists(item.filename): # delete 0 kb file
+		if os_path.exists(item.filename):  # delete 0 kb file
 			os_remove(item.filename)
 
 	def finishedIconDownload(self, result, item):

@@ -118,7 +118,7 @@ def startUpService__init__(self, session, csel):
 	baseChannelContextMenu__init__(self, session, csel)
 	current = csel.getCurrentSelection()
 	current_root = csel.getRoot()
-	inBouquetRootList = current_root and current_root.getPath().find('FROM BOUQUET "bouquets.') != -1 #FIXME HACK
+	inBouquetRootList = current_root and current_root.getPath().find('FROM BOUQUET "bouquets.') != -1  # FIXME HACK
 	if csel.bouquet_mark_edit == 0 and not csel.movemode:
 		if not inBouquetRootList:
 			if not (current.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)):

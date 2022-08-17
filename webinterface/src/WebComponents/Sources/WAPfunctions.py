@@ -139,13 +139,13 @@ class WAPfunctions(Source):
 		self.lut = {"Name": 0, "Value": 1, "Description": 2, "Selected": 3
 		}
 
-		mo = ["mo", 1, "Mo "]#"Monday"]
-		tu = ["tu", 2, "Tu "]#"Tuesday"]
-		we = ["we", 4, "We "]#"Wednesday"]
-		th = ["th", 8, "Th "]#"Thursday"]
-		fr = ["fr", 16, "Fr "]#"Friday"]
-		sa = ["sa", 32, "Sa "]#"Saturday"]
-		su = ["su", 64, "Su "]#"Sunday"]
+		mo = ["mo", 1, "Mo "]  # "Monday"]
+		tu = ["tu", 2, "Tu "]  # "Tuesday"]
+		we = ["we", 4, "We "]  # "Wednesday"]
+		th = ["th", 8, "Th "]  # "Thursday"]
+		fr = ["fr", 16, "Fr "]  # "Friday"]
+		sa = ["sa", 32, "Sa "]  # "Saturday"]
+		su = ["su", 64, "Su "]  # "Sunday"]
 		mf = ["mf", 31, "Mo-Fr"]
 		ms = ["ms", 127, "Mo-Su"]
 

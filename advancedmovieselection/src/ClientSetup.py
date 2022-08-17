@@ -243,7 +243,7 @@ class ClientSetup(ConfigListScreen, Screen):
         if self.staticIP:
             if config.AdvancedMovieSelection.server_port.isChanged():
                 self.setPort()
-            self["status"].setText(_("Searching for clients, please wait ...")) #TODO: status wird nicht angezeigt ;(
+            self["status"].setText(_("Searching for clients, please wait ..."))  # TODO: status wird nicht angezeigt ;(
             serverInstance.setSearchRange(config.AdvancedMovieSelection.start_search_ip.value, config.AdvancedMovieSelection.stop_search_ip.value)
             serverInstance.findClients()
             self.finishedState()

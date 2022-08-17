@@ -95,7 +95,7 @@ class GrowleeConnection:
 			elif proto == "snarl":
 				from .SNP import SnarlNetworkProtocolAbstraction
 				connection = SnarlNetworkProtocolAbstraction(host)
-			else: # proto == "syslog":
+			else:  # proto == "syslog":
 				from .Syslog import SyslogAbstraction
 				connection = SyslogAbstraction(host)
 

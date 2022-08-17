@@ -8,7 +8,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 
-from . import _, initLog, debug, scaleV, DESKTOP_WIDTH, DESKTOP_HEIGHT #@UnresolvedImport# pylint: disable-msg=C0103,F0401
+from . import _, initLog, debug, scaleV, DESKTOP_WIDTH, DESKTOP_HEIGHT  # @UnresolvedImport# pylint: disable-msg=C0103,F0401
 
 
 class EmailConfigOptions(ConfigListScreen, Screen):

@@ -147,8 +147,8 @@ class IMDB(Screen, HelpableScreen):
 		self["key_green"] = Button("")
 		self["key_yellow"] = Button("")
 		self["key_blue"] = Button("")
-		self["key_help"] = Boolean(True) # for auto buttons
-		self["key_menu"] = Boolean(True) # for auto buttons
+		self["key_help"] = Boolean(True)  # for auto buttons
+		self["key_menu"] = Boolean(True)  # for auto buttons
 
 		# 0 = multiple query selection menu page
 		# 1 = movie info page
@@ -202,7 +202,7 @@ class IMDB(Screen, HelpableScreen):
 
 	def dictionary_init(self):
 		syslang = language.getLanguage()
-		if 1: #"de" not in syslang or config.plugins.imdb.force_english.value is True:
+		if 1:  # "de" not in syslang or config.plugins.imdb.force_english.value is True:
 			self.generalinfomask = [re.compile(
 			'<h1 class="".*?>(?P<title>.*?)</h1>'
 			'(?:.*?<h4 class="inline">\s*(?P<g_director>Regisseur|Directors?):\s*</h4>(?P<director>.*?)</div>)?'
@@ -255,7 +255,7 @@ class IMDB(Screen, HelpableScreen):
 			'(?:.*?<a.*?>(?P<g_goofs>Pannen|Goofs)</a><div.*?<div.*?<div.*?<div.*?>(?P<goofs>.+?)</div>)?'
 			'(?:.*?<a.*?>(?P<g_quotes>Dialogzitate|Quotes)</a><div.*?<div.*?<div.*?<div.*?>(?P<quotes>.+?)</div>)?'
 			'(?:.*?<a.*?>(?P<g_connections>Bez\S*?ge zu anderen Titeln|Connections)</a><div.*?<div.*?<div.*?<div.*?>(?P<connections>.+?)</div>)?'
-			'(?:.*?<h3.*?>(?P<g_comments>Nutzerkommentare|User reviews).*?</h3>(?:.*?</svg>(?P<g_rating>[0-9]+?)<span class="ipc-rating-star--maxRating">/.*?(?P<g_maxrating>[0-9]+?)</span>)?.*?<span.*?review-summary.*?>(?P<commenttitle>.*?)</span>.*?<div class="ipc-html-content-inner-div">(?P<comment>.+?)</div>.*?<a.*?"author-link">(?P<commenter>.+?)</a>)?' # no match, slow
+			'(?:.*?<h3.*?>(?P<g_comments>Nutzerkommentare|User reviews).*?</h3>(?:.*?</svg>(?P<g_rating>[0-9]+?)<span class="ipc-rating-star--maxRating">/.*?(?P<g_maxrating>[0-9]+?)</span>)?.*?<span.*?review-summary.*?>(?P<commenttitle>.*?)</span>.*?<div class="ipc-html-content-inner-div">(?P<comment>.+?)</div>.*?<a.*?"author-link">(?P<commenter>.+?)</a>)?'  # no match, slow
 			'(?:.*?<span.*?>(?P<g_language>Sprachen?|Languages?)</span>.*?<div.*?<ul.*?>(?P<language>.*?)</ul>)?'
 			'(?:.*?<a.*?>(?P<g_locations>Drehorte?|Filming locations?)</a>.*?<div.*?<ul.*?>(?P<locations>.*?)</ul>)?'
 			'(?:.*?<a.*?>(?P<g_company>Firm\S*?|Production compan.*?)</a>.*?<div.*?<ul.*?>(?P<company>.*?)</ul>)?'
@@ -579,7 +579,7 @@ class IMDB(Screen, HelpableScreen):
 		if not self.eventName:
 			s = self.session.nav.getCurrentService()
 			info = s and s.info()
-			event = info and info.getEvent(0) # 0 = now, 1 = next
+			event = info and info.getEvent(0)  # 0 = now, 1 = next
 			if event:
 				self.eventName = event.getEventName()
 			else:
@@ -955,7 +955,7 @@ def eventinfo(session, eventName="", **kwargs):
 		s = session.nav.getCurrentService()
 		if s:
 			info = s.info()
-			event = info.getEvent(0) # 0 = now, 1 = next
+			event = info.getEvent(0)  # 0 = now, 1 = next
 			eventName = event and event.getEventName() or ''
 	session.open(IMDB, eventName)
 

@@ -88,7 +88,7 @@ RUNPLUGIN = 1
 def autostart(reason, **kwargs):
 	if RUNPLUGIN != 1:
 		return
-	if reason == 0: # start
+	if reason == 0:  # start
 		if "session" in kwargs:
 			global gLeavePlayerConfirmed
 			Session = kwargs["session"]

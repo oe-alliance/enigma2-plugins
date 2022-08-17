@@ -88,7 +88,7 @@ class PictureApi:
 		maxSize: maximum size of cache im MB.
 		"""
 		stat = os.stat
-		maxSize *= 1048576 # input size is assumed to be in mb, but we work with bytes internally
+		maxSize *= 1048576  # input size is assumed to be in mb, but we work with bytes internally
 
 		files = [(f, stat(f)) for f in list_recursive(self.cache)]
 		curSize = sum([x[1].st_size for x in files])

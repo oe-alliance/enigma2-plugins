@@ -22,7 +22,7 @@ class Movie(Source):
 		if func != self.DIRS:
 			self.tagfilter = []
 			self.root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + resolveFilename(SCOPE_HDD))
-			self.movielist = movielist #MovieList(self.root)
+			self.movielist = movielist  # MovieList(self.root)
 		self.res = (False, _("Missing or Wrong Argument"))
 
 	def handleCommand(self, cmd):

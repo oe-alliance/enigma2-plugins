@@ -253,7 +253,7 @@ class GlobalMercator(object):
 
         for i in range(30):
             if pixelSize > self.Resolution(i):
-                return i - 1 if i != 0 else 0 # We don't want to scale up
+                return i - 1 if i != 0 else 0  # We don't want to scale up
 
     def GoogleTile(self, tx, ty, zoom):
         "Converts TMS tile coordinates to Google Tile coordinates"

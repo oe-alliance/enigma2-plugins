@@ -53,7 +53,7 @@ config.plugins.Webinterface.allowzapping = ConfigYesNo(default=True)
 config.plugins.Webinterface.includemedia = ConfigYesNo(default=False)
 config.plugins.Webinterface.autowritetimer = ConfigYesNo(default=False)
 config.plugins.Webinterface.loadmovielength = ConfigYesNo(default=True)
-config.plugins.Webinterface.version = ConfigText(__version__) # used to make the versioninfo accessible enigma2-wide, not confgurable in GUI.
+config.plugins.Webinterface.version = ConfigText(__version__)  # used to make the versioninfo accessible enigma2-wide, not confgurable in GUI.
 
 config.plugins.Webinterface.http = ConfigSubsection()
 config.plugins.Webinterface.http.enabled = ConfigYesNo(default=True)
@@ -631,7 +631,7 @@ def configCB(result, session):
 
 def Plugins(**kwargs):
 	p = PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart)
-	p.weight = 100 #webif should start as last plugin
+	p.weight = 100  # webif should start as last plugin
 	list = [p,
 #			PluginDescriptor(where=[PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc=networkstart),
 			PluginDescriptor(name=_("Webinterface"), description=_("Configuration for the Webinterface"),

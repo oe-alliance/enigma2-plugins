@@ -94,7 +94,7 @@ class EpiSepCfg(Screen):
 			if self.level == 1:
 				self.close(self.currentsep)
 			else:
-				self.newsep = self.currentsep	# discard changes
+				self.newsep = self.currentsep  # discard changes
 				self.level = 1
 				self.secondlevel[0] = self.secondformat % (self.currentsep, len(self.currentsep))
 				self.sfsetLabel()
@@ -103,7 +103,7 @@ class EpiSepCfg(Screen):
 		if self.level == 1:
 			self.close(self.newsep)
 		else:
-			self.gotGreen()	# save and back to level 1
+			self.gotGreen()  # save and back to level 1
 
 	def gotEdit(self):
 		if self.level == 1:
@@ -120,9 +120,9 @@ class EpiSepCfg(Screen):
 
 	def gotGreen(self):
 		if self.level == 1:
-			self.currentsep = self.newsep = self.defaultsep	# set default
+			self.currentsep = self.newsep = self.defaultsep  # set default
 		else:
-			self.currentsep = self.newsep	# save
+			self.currentsep = self.newsep  # save
 			self.level = 1		# and back to level 1
 			self.sfsetLabel()
 
@@ -133,10 +133,10 @@ class EpiSepCfg(Screen):
 				self.currentsep = ""
 			else:
 				self.firstlevel[4] = _x("Disable ")
-				self.currentsep = self.defaultsep	# set default
+				self.currentsep = self.defaultsep  # set default
 			self.setSeparator(self.currentsep)
 		else:
-			self.session.openWithCallback(self.setSeparatorSize,	# set size
+			self.session.openWithCallback(self.setSeparatorSize,  # set size
 				InputBox,
 				title=_x("Number of characters"),
 				windowTitle=_x("Length of the title:episode separator"),

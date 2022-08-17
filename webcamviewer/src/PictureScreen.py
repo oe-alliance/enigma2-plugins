@@ -111,7 +111,7 @@ def download(url, file, contextFactory=None, *args, **kwargs):
 
 class PictureScreen(Screen):
 	skin = ""
-	processing = False # if fetching or converting is active
+	processing = False  # if fetching or converting is active
 	autoreload = False
 
 	def __init__(self, session, title, filename, slideshowcallback=None, args=0):
@@ -177,7 +177,7 @@ class PictureScreen(Screen):
 		try:
 			if os.path.exists("/tmp/loadedfile"):
 				os.remove("/tmp/loadedfile")
-		except:## OSerror??
+		except:  # OSerror??
 			pass
 
 	def fetchFile(self, url):

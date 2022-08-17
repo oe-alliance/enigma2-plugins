@@ -16,11 +16,11 @@ from . import _
 
 
 class LastFMScrobbler(object):
-    client = "tst" # this must be changed to a own ID
+    client = "tst"  # this must be changed to a own ID
     version = "1.0"
     host = "post.audioscrobbler.com"
     port = 80
-    loggedin = False # indicates, if we are logged in
+    loggedin = False  # indicates, if we are logged in
 
     def __init__(self):
         self.user = config.plugins.LastFM.username.value

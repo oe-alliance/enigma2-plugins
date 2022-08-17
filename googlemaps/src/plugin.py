@@ -32,7 +32,7 @@ config.plugins.GoogleMaps.position.y = ConfigInteger(21)
 config.plugins.GoogleMaps.position.z = ConfigInteger(6)
 config.plugins.GoogleMaps.last_searchkey = ConfigText(default="New York")
 config.plugins.GoogleMaps.show_preview_on_searchresults = ConfigYesNo(default=True)
-config.plugins.GoogleMaps.default_zoomlevel_for_searchresults = ConfigInteger(18, (1, 99)) #zoomlevel previewpic
+config.plugins.GoogleMaps.default_zoomlevel_for_searchresults = ConfigInteger(18, (1, 99))  # zoomlevel previewpic
 
 global plugin_path, not_found_pic, not_found_pic_overlay
 plugin_path = ""
@@ -285,7 +285,7 @@ class GoogleMapsMainScreen(Screen, HelpableScreen):
 
     def getRandomNumber(self):
         """ returning a real random number """
-        return 4 # fairly choosen by using a dice
+        return 4  # fairly choosen by using a dice
 
     def openSearchScreen(self):
         self.session.openWithCallback(self.searchCB, GoogleMapsGeoSearchScreen)
@@ -557,7 +557,7 @@ class GoogleMapsGeoSearchScreen(InputBox):
             self.do_preview_timer.timeout.get().append(lambda: self.loadPreview(lon, lat))
             self.do_preview_timer.start(1500)
         else:
-            pass #print("nothing selected")
+            pass  # print("nothing selected")
 
     def loadPreview(self, lon, lat):
         self.do_preview_timer.stop()

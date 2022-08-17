@@ -357,7 +357,7 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 			self.searchContextEntries.append(getConfigListEntry(_("HTTP Proxy Server Port:"), config.plugins.mytube.general.ProxyPort))"""
 		# disabled until i have time for some proper tests
 		self.VideoDirname = getConfigListEntry(_("Download location"), config.plugins.mytube.general.videodir)
-		if config.usage.setup_level.index >= 2: # expert+
+		if config.usage.setup_level.index >= 2:  # expert+
 			self.searchContextEntries.append(self.VideoDirname)
 		self.searchContextEntries.append(getConfigListEntry(_("Clear history on Exit:"), config.plugins.mytube.general.clearHistoryOnClose))
 		self.searchContextEntries.append(getConfigListEntry(_("Auto paginate on last entry:"), config.plugins.mytube.general.AutoLoadFeeds))
@@ -386,7 +386,7 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 				MovieLocationBox,
 				_("Choose target folder"),
 				config.plugins.mytube.general.videodir.value,
-				minFree=100 # We require at least 100MB free space
+				minFree=100  # We require at least 100MB free space
 			)
 		else:
 			self.keySave()

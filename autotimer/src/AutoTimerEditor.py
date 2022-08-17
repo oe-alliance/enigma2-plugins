@@ -242,7 +242,7 @@ class AutoTimerEditorBase:
 			now[3] = 0
 			now[4] = 0
 			begin = mktime(tuple(now))
-			end = begin + 604800 # today + 7d
+			end = begin + 604800  # today + 7d
 		self.timeframe = NoSave(ConfigEnableDisable(default=default))
 		self.timeframebegin = NoSave(ConfigDateTime(begin, _("%d.%B %Y"), increment=86400))
 		self.timeframeend = NoSave(ConfigDateTime(end, _("%d.%B %Y"), increment=86400))
@@ -392,7 +392,7 @@ class AutoTimerEditorBase:
 			MovieLocationBox,
 			_("Choose target folder"),
 			self.destination.value,
-			minFree=100 # Same requirement as in Screens.TimerEntry
+			minFree=100  # Same requirement as in Screens.TimerEntry
 		)
 
 	def tagEditFinished(self, ret):
@@ -1238,7 +1238,7 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 			self.idx = 0
 		elif self.typeSelection.value == "short":
 			self.idx = 1
-		else: # self.typeSelection.value == "desc":
+		else:  # self.typeSelection.value == "desc":
 			self.idx = 2
 
 		self.list.extend([
@@ -1390,8 +1390,8 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 		# Warning, accessing a ConfigListEntry directly might be considered evil!
 
 		myl = self["config"].getList()[:]
-		myl.pop(0) # Enabled
-		myl.pop(0) # Type
+		myl.pop(0)  # Enabled
+		myl.pop(0)  # Type
 		for item in myl:
 			self.services[self.idx].append(item[1].value)
 
@@ -1409,7 +1409,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 
 		if self.typeSelection.value == "channels":
 			self.idx = 0
-		else: # self.typeSelection.value == "bouquets":
+		else:  # self.typeSelection.value == "bouquets":
 			self.idx = 1
 
 		self.list.extend([
@@ -1447,7 +1447,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 				SimpleChannelSelection,
 				_("Select channel to record on")
 			)
-		else: # self.typeSelection.value == "bouquets":
+		else:  # self.typeSelection.value == "bouquets":
 			self.session.openWithCallback(
 				self.finishedServiceSelection,
 				SimpleBouquetSelection,

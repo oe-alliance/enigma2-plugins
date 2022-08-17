@@ -433,12 +433,12 @@ class MyTubeFeedEntry():
 	# link resolving from xbmc youtube plugin
 	def getVideoUrl(self):
 		VIDEO_FMT_PRIORITY_MAP = {
-			'38': 1, #MP4 Original (HD)
-			'37': 2, #MP4 1080p (HD)
-			'22': 3, #MP4 720p (HD)
-			'18': 4, #MP4 360p
-			'35': 5, #FLV 480p
-			'34': 6, #FLV 360p
+			'38': 1,  # MP4 Original (HD)
+			'37': 2,  # MP4 1080p (HD)
+			'22': 3,  # MP4 720p (HD)
+			'18': 4,  # MP4 360p
+			'35': 5,  # FLV 480p
+			'34': 6,  # FLV 360p
 		}
 		video_url = None
 		video_id = str(self.getTubeId())

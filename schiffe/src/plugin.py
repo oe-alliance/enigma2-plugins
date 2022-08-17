@@ -81,11 +81,11 @@ class GameCell:
         self.hide_ = f
 
     def paint(self):
-        fg = RGB(255, 255, 255) # foreground
-        blue = RGB(0, 0, 255) # background water
-        focus = RGB(192, 192, 0) # background focus
-        green = RGB(0, 255, 0) # background Ship
-        red = RGB(255, 0, 0) # background Ship hit
+        fg = RGB(255, 255, 255)  # foreground
+        blue = RGB(0, 0, 255)  # background water
+        focus = RGB(192, 192, 0)  # background focus
+        green = RGB(0, 255, 0)  # background Ship
+        red = RGB(255, 0, 0)  # background Ship hit
 
         if self.value_ == 0:
             bg = blue
@@ -135,7 +135,7 @@ class Schiffe(Screen):
         # calculate skindata...
         CELL_OFFSET = 2
         cellfield = XMAX * CELL_SIZE + (XMAX - 1) * CELL_OFFSET
-        CW = 2 * cellfield + 150 # canvas w
+        CW = 2 * cellfield + 150  # canvas w
         CH = cellfield         # canvas h
         X0_OFFSET = 0                 # xoffset cellfield box
         X1_OFFSET = cellfield + 150   # xoffset cellfield you
@@ -625,11 +625,11 @@ def calcNewField(field):
             x = rand() % XMAX
             y = rand() % YMAX
 
-        if field[x + y * XMAX] == 0: #fail (water)
+        if field[x + y * XMAX] == 0:  # fail (water)
             field[x + y * XMAX] = 2
             return
 
-        if field[x + y * XMAX] == 3: #hit ship
+        if field[x + y * XMAX] == 3:  # hit ship
             field[x + y * XMAX] = 4
             if x > 0 and y > 0:
                 field[x + y * XMAX - 1 - XMAX] = 1

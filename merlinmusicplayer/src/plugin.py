@@ -223,7 +223,7 @@ class PathToDatabase(Thread):
 									self.__messages.push((THREAD_WORKING, _("%s\n already exists in database!") % os_path.join(root, filename)))
 									mp.send(0)
 								audio = None
-						elif time() - checkTime >= 0.1: # update interval for gui
+						elif time() - checkTime >= 0.1:  # update interval for gui
 							self.__messages.push((THREAD_WORKING, _("%s\n already exists in database!") % os_path.join(root, filename)))
 							mp.send(0)
 							checkTime = time()
@@ -1454,7 +1454,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		return str(text)
 
 	def shuffleList(self):
-		if self.songList[self.currentIndex][0].PTS is None: # not implemented for cue files yet
+		if self.songList[self.currentIndex][0].PTS is None:  # not implemented for cue files yet
 			self.shuffle = not self.shuffle
 			if self.shuffle:
 				self["shuffle"].setPixmapNum(1)
@@ -1474,7 +1474,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		self.resetScreenSaverTimer()
 
 	def repeatSong(self):
-		if self.songList[self.currentIndex][0].PTS is None: # not implemented for cue files yet
+		if self.songList[self.currentIndex][0].PTS is None:  # not implemented for cue files yet
 			self.repeat = not self.repeat
 			if self.repeat:
 				self["repeat"].setPixmapNum(1)
@@ -1670,7 +1670,7 @@ class MerlinMusicPlayerSongList(Screen):
 
 	def startRun(self):
 		if self.iDreamMode:
-			self["list"].setMode(10) # songlist
+			self["list"].setMode(10)  # songlist
 		self["list"].setList(self.songList)
 		self["list"].moveToIndex(self.index)
 
@@ -2098,11 +2098,11 @@ class iDreamMerlin(Screen):
 				if self.mode == 19:
 					self.setButtons(red=True, green=True, blue=True)
 				if not sel.navigator:
-					self.red_pressed() # back to main menu --> normally that can not be happened
+					self.red_pressed()  # back to main menu --> normally that can not be happened
 			elif self.mode == 20:
 				self.setButtons(red=True, green=True, yellow=True, blue=True)
 				if not sel.navigator:
-					self.red_pressed() # back to main menu --> normally that can not be happened
+					self.red_pressed()  # back to main menu --> normally that can not be happened
 
 	def buildPlaylistList(self, addToCache):
 		if addToCache:
@@ -3141,7 +3141,7 @@ class MerlinMusicPlayerFileList(Screen):
 		performer = ""
 		title = ""
 		pts = 0
-		state = 0 # header
+		state = 0  # header
 		for line in cuefile.readlines():
 			entry = line.strip()
 			m = filename_re.search(entry)
@@ -3161,7 +3161,7 @@ class MerlinMusicPlayerFileList(Screen):
 				performer = m.group('performer')
 			m = track_re.search(entry)
 			if m:
-				state = 1 # tracks
+				state = 1  # tracks
 			m = index_re.search(entry)
 			if m:
 				if int(m.group('index_nr')) == 1:

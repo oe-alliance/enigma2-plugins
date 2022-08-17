@@ -120,7 +120,7 @@ class SimpleVDRProtocol(LineReceiver):
 					sref = ServiceReference(service[0])
 					info = sref.info()
 					# XXX: how to get this?! o0
-					feinfo = None #sref.ref.frontendInfo()
+					feinfo = None  # sref.ref.frontendInfo()
 					fedata = feinfo.getAll(True) if feinfo else {}
 					prov = getServiceInfoValue(info, sref, iServiceInformation.sProvider)
 					frequency = fedata.get("frequency", 0) / 1000
@@ -139,7 +139,7 @@ class SimpleVDRProtocol(LineReceiver):
 					line = "%d%s%d %s,%s;%s:%d:%s:%s:%d:%s:%s:%d:%s:%d:%d:%d:%d" % (CODE_OK, '-' if not last else ' ', counter, service[1], service[2], prov, frequency, param, source, srate, vpid, apid, tpid, ca, sid, nid, tid, rid)
 				self.sendLine(line)
 
-			self.channelList = [x[0] for x in services] # always refresh cache b/c this is what the user works with from now on
+			self.channelList = [x[0] for x in services]  # always refresh cache b/c this is what the user works with from now on
 			lastItem = services.pop()
 			idx = 1
 			for service in services:
@@ -233,7 +233,7 @@ class SimpleVDRProtocol(LineReceiver):
 			return self.sendLine(payload)
 
 		if end < begin:
-			end += 86400 # Add 1 day, beware - this is evil and might not work correctly due to dst
+			end += 86400  # Add 1 day, beware - this is evil and might not work correctly due to dst
 		timer = RecordTimerEntry(service_ref, begin, end, name, description, 0, disabled=flags & 1 == 0)
 		if oldTimer:
 			recordTimer.removeEntry(oldTimer)
@@ -395,7 +395,7 @@ class SimpleVDRProtocol(LineReceiver):
 
 		def sendMovieLine(sref, info, begin, counter, last=False):
 			# <number> <date> <begin> <name>
-			ctime = info.getInfo(serviceref, iServiceInformation.sTimeCreate) # XXX: difference to begin? just copied this from webif ;-)
+			ctime = info.getInfo(serviceref, iServiceInformation.sTimeCreate)  # XXX: difference to begin? just copied this from webif ;-)
 			datestring = strftime('%d.%m.%y', localtime(ctime))
 			beginstring = strftime('%H:%M', localtime(ctime))
 			servicename = ServiceReference(sref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')

@@ -9,6 +9,6 @@ class StartupToStandbyConfiguration(Setup):
 		self.skinName = ["StartupToStandbyConfiguration", "Setup"]
 
 	def createSetup(self):
-		if not self.list: # only load once as is a single item
+		if not self.list:  # only load once as is a single item
 			self.list = [getConfigListEntry(_("Enable"), config.plugins.startuptostandby.enabled)]
 			self["config"].list = self.list
