@@ -900,7 +900,7 @@ class IMDB(Screen, HelpableScreen):
 
 	def IMDBPoster(self, string):
 		self["statusbar"].setText(_("IMDb Details parsed") + ('.' if self.re_index == 1 else ''))
-		if self.postered :
+		if self.postered:
 			filename = "/tmp/poster.jpg"
 		else:
 			filename = resolveFilename(SCOPE_PLUGINS, "Extensions/IMDb/no_poster.png")
