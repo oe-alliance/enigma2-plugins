@@ -706,7 +706,7 @@ class IMDB(Screen, HelpableScreen):
 
 	def http_failed(self, failure_instance=None, error_message=""):
 		text = _("IMDb Download failed")
-		self.postered = False 
+		self.postered = False
 		if error_message == "" and failure_instance is not None:
 			error_message = failure_instance.getErrorMessage()
 			text += ": " + error_message
