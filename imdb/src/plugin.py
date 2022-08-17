@@ -706,7 +706,7 @@ class IMDB(Screen, HelpableScreen):
 
 	def http_failed(self, failure_instance=None, error_message=""):
 		text = _("IMDb Download failed")
-		self.postered  = False 
+		self.postered = False 
 		if error_message == "" and failure_instance is not None:
 			error_message = failure_instance.getErrorMessage()
 			text += ": " + error_message
@@ -811,9 +811,9 @@ class IMDB(Screen, HelpableScreen):
 				self["castlabel"].setText(Casttext)
 
 			posterurl = self.postermask[self.re_index].search(self.inhtml)
-			self.postered  = False
+			self.postered = False
 			if posterurl and posterurl.group(1).find("jpg") > 0:
-				self.postered  = True
+				self.postered = True
 				posterurl = posterurl.group(1)
 				self["statusbar"].setText(_("Downloading Movie Poster: %s...") % (posterurl))
 				localfile = "/tmp/poster.jpg"
