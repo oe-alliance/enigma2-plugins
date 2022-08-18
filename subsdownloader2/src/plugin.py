@@ -1456,7 +1456,7 @@ class MoviePlayer(MP_parent):
 		except Exception as ex:
 			print(("Exception (ef): " + str(ex), self, "E"))
 
-	def leavePlayer(self):
+	def leavePlayer(self, inst=None):
 		self.addLastPosition()
 		self.uploadCuesheet()
 		self.is_closing = True

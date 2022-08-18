@@ -38,7 +38,7 @@ def initLog():
 def debug(message):
 	if config.plugins.emailimap.debug.value:
 		try:
-			deb = open("/tmp/EmailClient.log", "aw")
+			deb = open("/tmp/EmailClient.log", "a")
 			deb.write(time.ctime() + ': ' + message + "\n")
 			deb.close()
 		except Exception as e:

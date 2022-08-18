@@ -69,7 +69,7 @@ def getNamespaces(namespaces):
 
 def orbposChoicelist():
 	choiceList = [(orbposDisabled, _('disabled'), 0)]
-	nsDVBT = 0xeeee << 16
+	nsDVBT = 0xeeee << 16  # NOSONAR
 	nsDVBC = 0xffff << 16
 	namespaces = set()
 	if nimmanager.hasNimType("DVB-T") and nimmanager.terrestrialsList:

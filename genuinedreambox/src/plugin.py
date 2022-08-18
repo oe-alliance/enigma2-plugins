@@ -294,9 +294,9 @@ class genuineDreambox(Screen):
 
 		res = -1
 
-		if (udsError == False):
+		if udsError is False:
 			leng = [ord(rbuf[2]) << 8 | ord(rbuf[3])]
-			if (leng != 4):
+			if (leng[0] != 4):
 				try:
 					res = self.uds.recv(leng[0])
 				except socket.timeout:

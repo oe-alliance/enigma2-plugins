@@ -86,7 +86,7 @@ def filescan_open(items, session, **kwargs):
 			[(item, item) for item in items]
 		)
 	elif Len:
-		filescan_chosen(items[0])
+		filescan_chosen(session, items[0])
 
 
 def filescan(**kwargs):

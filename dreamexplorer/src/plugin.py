@@ -937,7 +937,7 @@ class MoviePlayer(MP_parent):
 		self.WithoutStopClose = False
 		MP_parent.__init__(self, self.session, service)
 
-	def leavePlayer(self):
+	def leavePlayer(self, inst=None):
 		self.is_closing = True
 		self.close()
 
