@@ -21,20 +21,20 @@ from sys import stdout
 # Calculate default begin/end
 from time import time, localtime, mktime
 now = localtime()
-begin = mktime((
+begin = int(mktime((
 	now.tm_year, now.tm_mon, now.tm_mday, 0o7, 30,
 	0, now.tm_wday, now.tm_yday, now.tm_isdst)
-)
-end = mktime((
+))
+end = int(mktime((
 	now.tm_year, now.tm_mon, now.tm_mday, 20, 00,
 	0, now.tm_wday, now.tm_yday, now.tm_isdst)
-)
+))
 
 #Configuration
 config.plugins.epgrefresh = ConfigSubsection()
 config.plugins.epgrefresh.enabled = ConfigYesNo(default=False)
-config.plugins.epgrefresh.begin = ConfigClock(default=int(begin))
-config.plugins.epgrefresh.end = ConfigClock(default=int(end))
+config.plugins.epgrefresh.begin = ConfigClock(default=begin)
+config.plugins.epgrefresh.end = ConfigClock(default=end)
 config.plugins.epgrefresh.interval_seconds = ConfigNumber(default=120)
 config.plugins.epgrefresh.delay_standby = ConfigNumber(default=10)
 config.plugins.epgrefresh.inherit_autotimer = ConfigYesNo(default=False)
@@ -151,7 +151,7 @@ def autostart(reason, **kwargs):
 
 		if config.plugins.epgrefresh.enabled.value:
 			# check if box was woken up by a timer, if so, check if epgrefresh set this timer
-			if session.nav.wasTimerWakeup() and abs(config.plugins.epgrefresh.wakeup_time.getValue() - time()) <= 360:
+			if session.nav.wasTimerWakeup() and abs(config.plugins.epgrefresh.wakeup_time.getValue() - int(time())) <= 360:
 				# if box is not in idle mode, do that
 				from Screens.Standby import Standby, inStandby
 				if not inStandby:
@@ -180,7 +180,7 @@ def getNextWakeup():
 	))
 
 	# todays timespan has not yet begun
-	if begin > time():
+	if begin > int(time()):
 		setConfigWakeupTime(begin)
 		return begin
 

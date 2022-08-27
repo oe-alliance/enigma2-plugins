@@ -68,7 +68,7 @@ class EPGRefreshTimerEntry(timer.TimerEntry):
 					print("[EPGRefresh] Box still in use, rescheduling")
 
 					# Recheck later
-					self.begin = time() + config.plugins.epgrefresh.delay_standby.value * 60
+					self.begin = int(time()) + config.plugins.epgrefresh.delay_standby.value * 60
 					return False
 			else:
 				print("[EPGRefresh] Not in timespan, ending timer")
@@ -129,17 +129,17 @@ class EPGRefreshTimer(timer.Timer):
 	def setRefreshTimer(self, tocall):
 		# Add refresh Timer
 		now = localtime()
-		begin = mktime(
+		begin = int(mktime(
 			(now.tm_year, now.tm_mon, now.tm_mday,
 			config.plugins.epgrefresh.begin.value[0],
 			config.plugins.epgrefresh.begin.value[1],
 			0, now.tm_wday, now.tm_yday, now.tm_isdst)
-		)
+		))
 
 		# If the last scan was finished before our timespan begins/began and
 		# timespan began in the past fire the timer once (timer wouldn't do so
 		# by itself)
-		if config.plugins.epgrefresh.lastscan.value < begin and begin < time():
+		if config.plugins.epgrefresh.lastscan.value < begin and begin < int(time()):
 			tocall()
 
 		refreshTimer = EPGRefreshTimerEntry(begin, tocall, nocheck=True)

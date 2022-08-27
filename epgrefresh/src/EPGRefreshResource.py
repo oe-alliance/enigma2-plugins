@@ -280,15 +280,15 @@ class EPGRefreshSettingsResource(resource.Resource):
 		from time import time, localtime, mktime
 		now = localtime()
 		begin_h = config.plugins.epgrefresh.begin.value
-		begin = mktime((
+		begin = int(mktime((
 			now.tm_year, now.tm_mon, now.tm_mday, begin_h[0], begin_h[1],
 			0, now.tm_wday, now.tm_yday, now.tm_isdst)
-		)
+		))
 		end_h = config.plugins.epgrefresh.end.value
-		end = mktime((
+		end = int(mktime((
 			now.tm_year, now.tm_mon, now.tm_mday, end_h[0], end_h[1],
 			0, now.tm_wday, now.tm_yday, now.tm_isdst)
-		)
+		))
 
 		canDoBackgroundRefresh = len(nimmanager.nim_slots) > 1
 		hasAutoTimer = False

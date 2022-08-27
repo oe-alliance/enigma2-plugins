@@ -491,16 +491,16 @@ class EPGRefresh:
 
 					# Recheck later
 					epgrefreshtimer.add(EPGRefreshTimerEntry(
-							time() + config.plugins.epgrefresh.delay_standby.value * 60,
+							int(time()) + config.plugins.epgrefresh.delay_standby.value * 60,
 							self.refresh,
 							nocheck=True)
 					)
 
 	def createWaitTimer(self):
-		self.beginOfTimespan = time()
+		self.beginOfTimespan = int(time())
 
 		# Add wait timer to epgrefreshtimer
-		epgrefreshtimer.add(EPGRefreshTimerEntry(time() + 30, self.prepareRefresh))
+		epgrefreshtimer.add(EPGRefreshTimerEntry(int(time()) + 30, self.prepareRefresh))
 
 	def isServiceProtected(self, service):
 		if not config.ParentalControl.servicepinactive.value:
@@ -544,7 +544,7 @@ class EPGRefresh:
 			# Start Timer
 			delay = service.duration or config.plugins.epgrefresh.interval_seconds.value
 			epgrefreshtimer.add(EPGRefreshTimerEntry(
-				time() + delay,
+				int(time()) + delay,
 				self.refresh,
 				nocheck=True)
 			)
