@@ -852,5 +852,10 @@ zdfmediathek/Makefile
 zdfmediathek/meta/Makefile
 zdfmediathek/src/Makefile
 
+ardmediathek/Makefile
+ardmediathek/meta/Makefile
+ardmediathek/src/Makefile
+ardmediathek/src/img/Makefile
+
 ])
 AC_OUTPUT

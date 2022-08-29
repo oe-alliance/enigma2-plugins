@@ -1,14 +1,13 @@
 <default>
 	  <prerequisites>
-                    <tag type="Multimedia" />
+          <tag type="Multimedia" />
 	  </prerequisites>
           <info>
-                    <author>AliAbdul</author>
+                    <author>CommanderData</author>
                     <name>ARD Mediathek</name>
                     <packagename>enigma2-plugin-extensions-ardmediathek</packagename>
                     <shortdescription>Access to the ARD-Mediathek</shortdescription>
                     <description>Access to the ARD-Mediathek online video database.</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_ardmediathek_en.jpg" />	
           </info>
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-ardmediathek" />
