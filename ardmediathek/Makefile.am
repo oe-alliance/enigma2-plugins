@@ -1,1 +1,1 @@
-SUBDIRS = meta src img
+SUBDIRS = meta src
