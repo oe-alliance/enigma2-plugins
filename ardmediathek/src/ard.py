@@ -17,7 +17,8 @@ from socket import setdefaulttimeout
 from twisted.internet.reactor import callInThread
 from os.path import exists, join as pathjoin
 from requests import get
-import os, re
+import os
+import re
 PLUGINPATH = '/usr/lib/enigma2/python/Plugins/Extensions/ArdMediathek/'
 setdefaulttimeout(2)
 FHD = getDesktop(0).size().height() > 720
