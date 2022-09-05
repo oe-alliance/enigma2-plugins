@@ -13,7 +13,7 @@ BUILD-HOST=beyonwizv2
 
 package: clean
 	${MKDIR} -p ${BUILD-DIR}/${INSTALL-PATH}
-	${SCP} ${BUILD-HOST}:/${INSTALL-PATH}/*.pyo ${BUILD-DIR}/${INSTALL-PATH}
+	${SCP} ${BUILD-HOST}:/${INSTALL-PATH}/*.py[co] ${BUILD-DIR}/${INSTALL-PATH}
 	${CP} -r ${CONTROL} ${BUILD-DIR}/${CONTROL}
 	${IPKG-BUILD} build
 
