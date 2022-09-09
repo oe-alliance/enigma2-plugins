@@ -857,5 +857,9 @@ ardmediathek/meta/Makefile
 ardmediathek/src/Makefile
 ardmediathek/src/img/Makefile
 
+netzkino/Makefile
+netzkino/meta/Makefile
+netzkino/src/Makefile
+
 ])
 AC_OUTPUT

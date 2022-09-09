@@ -1,0 +1,13 @@
+<screen position="center,center" size="1150,550" flags="wfNoBorder">
+<eLabel position="0,0" size="1150,1" backgroundColor="white"/>
+<eLabel position="0,549" size="1150,1" backgroundColor="white"/>
+<eLabel position="0,0" size="1,550" backgroundColor="white"/>
+<eLabel position="1149,1" size="1,550" backgroundColor="white"/>
+<eLabel position="0,340" size="737,1" backgroundColor="white"/>
+<eLabel position="737,1" size="1,549" backgroundColor="white"/>
+<widget source="movielist" render="Listbox" position="4,4" size="730,330" scrollbarMode="showOnDemand">
+<convert type="TemplatedMultiContent">{"template": [ MultiContentEntryText(pos=(10,0), size=(620,40), font=0, text=0, flags=RT_HALIGN_LEFT | RT_HALIGN_CENTER), MultiContentEntryText(pos=(640,0), size=(80,40), font=0, text=4, flags=RT_HALIGN_LEFT | RT_HALIGN_CENTER) ], "fonts": [gFont("Regular",20)], "itemHeight": 30 }</convert>
+</widget>
+<widget name="handlung" position="4,347" size="730,200" font="Regular; 20" halign="center"/>
+<widget name="cover" position="740,2" size="407,545" alphatest="blend"/>
+</screen>

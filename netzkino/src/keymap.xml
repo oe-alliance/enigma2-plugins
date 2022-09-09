@@ -1,0 +1,8 @@
+<keymap>
+	<map context="MoviePlayer2">
+		<key id="KEY_OK" mapto="ok" flags="m" />
+		<key id="KEY_ENTER" mapto="ok" flags="m" />
+		<key id="KEY_EXIT" mapto="cancel" flags="m" />
+		<key id="KEY_ESC" mapto="stop" flags="m" />
+	</map>
+</keymap>

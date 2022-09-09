@@ -1,0 +1,15 @@
+<default>
+	  <prerequisites>
+          <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>CommanderData</author>
+                    <name>Netzkino</name>
+                    <packagename>enigma2-plugin-extensions-netzkino</packagename>
+                    <shortdescription>Access to the Netzkino</shortdescription>
+                    <description>Access to the Netzkino online video database.</description>
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-netzkino" />
+	  </files>
+</default>

@@ -141,7 +141,7 @@ else
 SUBDIRS += networkbrowser epgsearch
 endif
 
-SUBDIRS += tetris ardmediathek
+SUBDIRS += tetris ardmediathek netzkino
 
 metadir = $(datadir)/meta
 meta_DATA = index-enigma2-plugins.xml

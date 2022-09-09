@@ -1,0 +1,30 @@
+NetzKino v0.7
+- fix for Openvix
+- Code optimiert
+- neue Bildanzeige Funktion
+
+NetzKino v0.6
+- komplett neu geschrieben auf eine Liste umgestellt usw.
+- Skin’s überarbeitet
+- Fehler Sonderzeichen in suche behoben
+Dank an @MR.Servo & @jbleyel
+
+NetzKino v0.5
+- fix Fehler bei OK klick in movieliste wenn keine inet. Verbindung besteht
+- FHD Skin optimiert
+
+NetzKino v0.4
+- Fehler abfangen. wenn Bild nicht vorhanden
+
+NetzKino v0.3
+- neues logo thanks E2WORLD
+- benutzen von six modul für Python 2 & 3 thanks Mr.Servo
+- Importe geändert nach Mr.Servo Anweisungen
+- FHD Skin hinzugefügt
+- Plug-in Struktur angepasst
+
+NetzKino Beta v0.2
+- fix typeError: 'NoneType' object is not subscriptable thanks E2WORLD
+
+NetzKino Beta v0.1
+- first version
