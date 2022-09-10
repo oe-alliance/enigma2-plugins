@@ -149,9 +149,9 @@ class ConfigTextWithSuggestions(ConfigText):
 		else:
 			self.suggestions.getSuggestions(self.value)
 
-	def handleKey(self, key):
+	def handleKey(self, key, *args, **kwargs):
 		if not self.suggestionsListActivated:
-			ConfigText.handleKey(self, key)
+			ConfigText.handleKey(self, key, *args, **kwargs)
 			if key in [KEY_DELETE, KEY_BACKSPACE, KEY_ASCII, KEY_TIMEOUT]:
 				self.getSuggestions()
 

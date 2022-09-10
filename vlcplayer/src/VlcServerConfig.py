@@ -108,8 +108,8 @@ class ConfigMutable(ConfigElement):
 	def onDeselect(self, session):
 		self.currentConfig.onDeselect(session)
 
-	def handleKey(self, key):
-		self.currentConfig.handleKey(key)
+	def handleKey(self, key, *args, **kwargs):
+		self.currentConfig.handleKey(key, *args, **kwargs)
 
 	def getHTML(self, id):
 		return self.currentConfig.getHTML(id)
