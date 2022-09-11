@@ -11,7 +11,7 @@
 
 
 from __future__ import absolute_import
-from Components.ActionMap import ActionMap
+from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Button import Button
 from Components.ConfigList import ConfigListScreen
 from Components.config import ConfigElement
@@ -414,6 +414,20 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 			"cancel": self.keyCancel
 		}, -2)
 
+		self["ConfigMutableActions"] = NumberActionMap(["NumberActions"], {
+			"1": self.keyNumberGlobal,
+			"2": self.keyNumberGlobal,
+			"3": self.keyNumberGlobal,
+			"4": self.keyNumberGlobal,
+			"5": self.keyNumberGlobal,
+			"6": self.keyNumberGlobal,
+			"7": self.keyNumberGlobal,
+			"8": self.keyNumberGlobal,
+			"9": self.keyNumberGlobal,
+			"0": self.keyNumberGlobal,
+		}, -2)
+		self["ConfigMutableActions"].setEnabled(False)
+
 		self.setTitle(_("Edit VLC Server"))
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("OK"))
@@ -460,6 +474,14 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 		server.langInputType().addNotifier(self.switchlangInputType, False)
 
 		self.onClose.append(self.__onClose)
+
+	def handleInputHelpers(self):
+		ConfigListScreen.handleInputHelpers(self)
+		currConfig = self["config"].getCurrent()
+		if currConfig is not None and isinstance(currConfig[1], (ConfigMutable,)):
+			self["ConfigMutableActions"].setEnabled(True)
+		else:
+			self["ConfigMutableActions"].setEnabled(False)
 
 	def __onClose(self):
 		self.server.addressType().deleteNotifier(self.switchAddressType)
