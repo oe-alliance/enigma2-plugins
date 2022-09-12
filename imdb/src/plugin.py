@@ -280,7 +280,7 @@ class IMDB(Screen, HelpableScreen):
 			"contextMenu": (self.contextMenuPressed, _("Menu")),
 			"showEventInfo": (self.showDetails, _("Show movie and series basic details")),
 		}, -1)
-		self["actionsInfobar"] = HelpableActionMap(self, ("InfobarActions", "InfobarTeletextActions"),
+		self["actionsInfobar"] = HelpableActionMap(self, ["InfobarActions", "InfobarTeletextActions"],
 		{
 			"showMovies": (self.bigPoster, _("Show a bigger poster")),
 			"startTeletext": (self.showSynopsis, _("Show movie and series synopsis")),
