@@ -1,0 +1,282 @@
+# Move series recordings into folders.
+# Copyright (C) 2022 THE Series2Folder package's COPYRIGHT HOLDER
+# This file is distributed under the same license as the Series2Folder package.
+# Automatically generated, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Series2Folder v1.11\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-22 10:30+1000\n"
+"PO-Revision-Date: 2022-09-19 12:48+1000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: plugin.py:622
+msgid ""
+"\n"
+"To allow Series to Folder to run automatically in the background, configure it to enable \"Allow Series to Folder to run in the background\""
+msgstr ""
+
+#: plugin.py:253 plugin.py:256
+msgid " - Error"
+msgid_plural " - Errors"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugin.py:291
+msgid " - with an error"
+msgid_plural " - with errors"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugin.py:797
+#, python-format
+msgid "%s v%s"
+msgstr ""
+
+#: __init__.py:37
+msgid "1 recording"
+msgstr ""
+
+#: __init__.py:46
+msgid "10 recordings"
+msgstr ""
+
+#: __init__.py:38
+msgid "2 recordings"
+msgstr ""
+
+#: __init__.py:39
+msgid "3 recordings"
+msgstr ""
+
+#: __init__.py:40
+msgid "4 recordings"
+msgstr ""
+
+#: __init__.py:41
+msgid "5 recordings"
+msgstr ""
+
+#: __init__.py:42
+msgid "6 recordings"
+msgstr ""
+
+#: __init__.py:43
+msgid "7 recordings"
+msgstr ""
+
+#: __init__.py:44
+msgid "8 recordings"
+msgstr ""
+
+#: __init__.py:45
+msgid "9 recordings"
+msgstr ""
+
+#: plugin.py:717
+msgid "Allow Series to Folder to run in the background"
+msgstr ""
+
+#: plugin.py:112
+msgid "Auto Series to Folder"
+msgstr ""
+
+#: plugin.py:676
+msgid "Automatically create folders"
+msgstr ""
+
+#: plugin.py:401
+#, python-format
+msgid "Can not extract show name for: %s"
+msgstr ""
+
+#: plugin.py:665
+msgid "Cancel"
+msgstr ""
+
+#: plugin.py:614
+msgid "Configure move series recordings to folders"
+msgstr ""
+
+#: plugin.py:725
+msgid "Configure which notification popups will be shown by Series to Folder when run in the background"
+msgstr ""
+
+#: plugin.py:678
+msgid "Create a folder for a series automatically if there are this number of recordings or more. If set to \"no autocreate\", only move recordings if a folder already exists for them."
+msgstr ""
+
+#: plugin.py:701
+msgid "Folder for movies"
+msgstr ""
+
+#: plugin.py:719
+msgid "If enabled, Series to Folder will run automatically in the background shortly after startup and after each recording finishes."
+msgstr ""
+
+#: plugin.py:659
+msgid "Keyboard"
+msgstr ""
+
+#: plugin.py:698
+msgid "Move recordings whose names start with \"Movie: \" (case insensitive) to a folder for movies."
+msgstr ""
+
+#: plugin.py:612
+msgid "Move selected series recording to folder"
+msgid_plural "Move selected series recordings to folder"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugin.py:613
+msgid "Move series recordings to folders"
+msgstr ""
+
+#: plugin.py:696
+msgid "Put movies into folder"
+msgstr ""
+
+#: plugin.py:693
+msgid "Repeat tag to be stripped from from series titles when creating directory names."
+msgstr ""
+
+#: plugin.py:691
+msgid "Repeat tag to strip"
+msgstr ""
+
+#: plugin.py:666
+msgid "Save"
+msgstr ""
+
+#: plugin.py:99
+msgid "Sel Series to Folder"
+msgstr ""
+
+#: plugin.py:98
+msgid "SelSeries2Folder"
+msgstr ""
+
+#: plugin.py:90 plugin.py:624
+msgid "Series to Folder"
+msgstr ""
+
+#: plugin.py:626
+#, python-format
+msgid "Series to Folder actions%s"
+msgstr ""
+
+#: plugin.py:624
+#, python-format
+msgid "Series to Folder actions:%s"
+msgstr ""
+
+#: plugin.py:293
+#, python-format
+msgid "Series to Folder did not find anything to move in %s"
+msgstr ""
+
+#: plugin.py:437
+msgid "Series to Folder is already running in the background."
+msgstr ""
+
+#: plugin.py:289
+msgid "Series to Folder moved the following recording"
+msgid_plural "Series to Folder moved the following recordings"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugin.py:723
+msgid "Series to Folder notifications"
+msgstr ""
+
+#: plugin.py:118
+msgid "Series to Folder..."
+msgstr ""
+
+#: plugin.py:89
+msgid "Series2Folder"
+msgstr ""
+
+#: plugin.py:117
+msgid "Series2Folder..."
+msgstr ""
+
+#: plugin.py:711
+msgid "Show move selected series option"
+msgstr ""
+
+#: plugin.py:706
+msgid "Show move series option"
+msgstr ""
+
+#: plugin.py:713
+#, python-format
+msgid "Single-action move selected series to folder shown in menu and as button option. Displays in menu and buttons as \"%s\". Requires restart if changed."
+msgstr ""
+
+#: plugin.py:708
+#, python-format
+msgid "Single-action move series to folder shown in menu and as button option. Displays in menu and buttons as \"%s\". Requires restart if changed."
+msgstr ""
+
+#: plugin.py:688
+msgid "Strip repeat tagging from series titles when creating directory names."
+msgstr ""
+
+#: plugin.py:686
+msgid "Strip repeat tags from series names"
+msgstr ""
+
+#: plugin.py:703
+msgid "The name of the folder for movies."
+msgstr ""
+
+#: plugin.py:255
+#, python-format
+msgid "Too many recordings with similar filenames: %s"
+msgstr ""
+
+#: plugin.py:683
+msgid "Use more portable (Windows-friendly) names for folders."
+msgstr ""
+
+#: plugin.py:681
+msgid "Use portable folder names"
+msgstr ""
+
+#: plugin.py:433
+#, python-format
+msgid "Your %s %s is running tasks that may be accessing the recordings. No recordings moved."
+msgstr ""
+
+#: plugin.py:429
+#, python-format
+msgid "Your %s %s is trying to shut down. No recordings moved."
+msgstr ""
+
+#: __init__.py:66
+msgid "all"
+msgstr ""
+
+#: __init__.py:68
+msgid "error"
+msgstr ""
+
+#: __init__.py:67
+msgid "error and \"moved\""
+msgstr ""
+
+#: __init__.py:36
+msgid "no autocreate"
+msgstr ""
+
+#: __init__.py:69
+msgid "none"
+msgstr ""

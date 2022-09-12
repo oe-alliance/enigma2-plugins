@@ -1,0 +1,17 @@
+<default>
+	<prerequisites>
+	<tag type="Recording" />
+	</prerequisites>
+	<info>
+		<author>prl (prl@ozemail.com.au)</author>
+		<name>Series2Folder</name>
+		<packagename>enigma2-plugin-extensions-series2folder</packagename>
+		<shortdescription>File series recordings into folders</shortdescription>
+		<description>Series2Folder can automatically, or under manual control, move series recordings into folders named for the series.</description>
+		<!--<screenshot src="http://www.dreamboxupdate.com/preview/plugin_series2folder_en.jpg" />-->
+	</info>
+
+	<files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-series2folder" />
+	</files>
+</default>

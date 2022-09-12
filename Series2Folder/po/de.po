@@ -1,0 +1,228 @@
+# Move series recordings into folders.
+# Copyright (C) 2022 THE Series2Folder package's COPYRIGHT HOLDER
+# This file is distributed under the same license as the Series2Folder package.
+# Automatically generated, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-19 12:48+1000\n"
+"PO-Revision-Date: 2022-09-12 14:20+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-SearchPath-0: __init__.py\n"
+"X-Poedit-SearchPath-1: FileScreens.py\n"
+"X-Poedit-SearchPath-2: plugin.py\n"
+
+msgid ""
+"\n"
+"To allow Series to Folder to run automatically in the background, configure it to enable \"Allow Series to Folder to run in the background\""
+msgstr ""
+"\n"
+"Damit Series to Folder automatisch im Hintergrund ausgeführt werden kann, konfigurieren Sie es so, dass \"Series to Folder im Hintergrund ausgeführt wird\" aktiviert ist."
+
+msgid " - Error"
+msgid_plural " - Errors"
+msgstr[0] " - Fehler"
+msgstr[1] ""
+
+msgid " - with an error"
+msgid_plural " - with errors"
+msgstr[0] " - mit einem Fehler"
+msgstr[1] ""
+
+#, python-format
+msgid "%s v%s"
+msgstr "%s v%s"
+
+msgid "1 recording"
+msgstr "1 Aufnahme"
+
+msgid "10 recordings"
+msgstr "10 Aufnahmen"
+
+msgid "2 recordings"
+msgstr "2 Aufnahmen"
+
+msgid "3 recordings"
+msgstr "3 Aufnahmen"
+
+msgid "4 recordings"
+msgstr "4 Aufnahmen"
+
+msgid "5 recordings"
+msgstr "5 Aufnahmen"
+
+msgid "6 recordings"
+msgstr "6 Aufnahmen"
+
+msgid "7 recordings"
+msgstr "7 Aufnahmen"
+
+msgid "8 recordings"
+msgstr "8 Aufnahmen"
+
+msgid "9 recordings"
+msgstr "9 Aufnahmen"
+
+msgid "Allow Series to Folder to run in the background"
+msgstr "Zulassen, dass Series to Folder im Hintergrund ausgeführt wird"
+
+msgid "Auto Series to Folder"
+msgstr "Auto Series in Ordner"
+
+msgid "Automatically create folders"
+msgstr "Ordner automatisch erstellen"
+
+#, python-format
+msgid "Can not extract show name for: %s"
+msgstr "Showname kann nicht extrahiert werden für: %s"
+
+msgid "Cancel"
+msgstr "Beenden"
+
+msgid "Configure move series recordings to folders"
+msgstr "Konfigurieren von Serienaufzeichnungen in Ordner verschieben"
+
+msgid "Configure which notification popups will be shown by Series to Folder when run in the background"
+msgstr "Konfigurieren Sie, welche Benachrichtigungs-Popups von Series to Folder angezeigt werden, wenn sie im Hintergrund ausgeführt werden"
+
+msgid "Create a folder for a series automatically if there are this number of recordings or more. If set to \"no autocreate\", only move recordings if a folder already exists for them."
+msgstr "Erstellen Sie automatisch einen Ordner für eine Serie, wenn es diese oder mehr Aufnahmen gibt. Wenn auf \"keine automatische Erstellung\" gesetzt, verschieben Sie Aufnahmen nur, wenn bereits ein Ordner für sie vorhanden ist."
+
+msgid "Folder for movies"
+msgstr "Ordner für Filme"
+
+msgid "If enabled, Series to Folder will run automatically in the background shortly after startup and after each recording finishes."
+msgstr "Wenn diese Option aktiviert ist, wird Series to Folder kurz nach dem Start und nach Abschluss jeder Aufzeichnung automatisch im Hintergrund ausgeführt."
+
+msgid "Keyboard"
+msgstr "Externe Tastatur"
+
+msgid "Move recordings whose names start with \"Movie: \" (case insensitive) to a folder for movies."
+msgstr "Verschieben Sie Aufnahmen, deren Namen mit \"Film: \" beginnen (Groß-/Kleinschreibung wird nicht beachtet), in einen Ordner für Filme."
+
+msgid "Move selected series recording to folder"
+msgid_plural "Move selected series recordings to folder"
+msgstr[0] "Ausgewählte Serienaufzeichnung in Ordner verschieben"
+msgstr[1] ""
+
+msgid "Move series recordings to folders"
+msgstr "Verschieben von Serienaufzeichnungen in Ordner"
+
+msgid "Put movies into folder"
+msgstr "Legen Sie Filme in Ordner"
+
+msgid "Repeat tag to be stripped from from series titles when creating directory names."
+msgstr "Wiederholen Sie das Tag, das beim Erstellen von Verzeichnisnamen aus Serientiteln entfernt werden soll."
+
+msgid "Repeat tag to strip"
+msgstr "Wiederholen des zu entfernenden Tags"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Sel Series to Folder"
+msgstr "Sel Series in Ordner"
+
+msgid "SelSeries2Folder"
+msgstr "SelSeries2Ordner"
+
+msgid "Series to Folder"
+msgstr "Serie in Ordner"
+
+#, python-format
+msgid "Series to Folder actions%s"
+msgstr "Serien-zu-Ordner-Aktionen%s"
+
+#, python-format
+msgid "Series to Folder actions:%s"
+msgstr "Serien-zu-Ordner-Aktionen:%s"
+
+#, python-format
+msgid "Series to Folder did not find anything to move in %s"
+msgstr "Serie in Ordner hat nichts gefunden, um in %s zu verschieben"
+
+msgid "Series to Folder is already running in the background."
+msgstr "Series to Folder wird bereits im Hintergrund ausgeführt."
+
+msgid "Series to Folder moved the following recording"
+msgid_plural "Series to Folder moved the following recordings"
+msgstr[0] "Serie in Ordner verschoben die folgende Aufzeichnung"
+msgstr[1] ""
+
+msgid "Series to Folder notifications"
+msgstr "Benachrichtigungen über Serien in Ordner"
+
+msgid "Series to Folder..."
+msgstr "Serie in Ordner..."
+
+msgid "Series2Folder"
+msgstr "Series2Ordner"
+
+msgid "Series2Folder..."
+msgstr "Series2Ordner..."
+
+msgid "Show move selected series option"
+msgstr "Option \"Ausgewählte Reihen verschieben\" anzeigen"
+
+msgid "Show move series option"
+msgstr "Option \"Serien verschieben\" anzeigen"
+
+#, python-format
+msgid "Single-action move selected series to folder shown in menu and as button option. Displays in menu and buttons as \"%s\". Requires restart if changed."
+msgstr "Ausgewählte Serien mit einer Aktion in einen Ordner verschieben, der im Menü und als Schaltflächenoption angezeigt wird. Wird im Menü und in den Schaltflächen als \"%s\" angezeigt. Erfordert einen Neustart, falls geändert."
+
+#, python-format
+msgid "Single-action move series to folder shown in menu and as button option. Displays in menu and buttons as \"%s\". Requires restart if changed."
+msgstr "Einzelaktions-Verschieben von Serien in Ordner, die im Menü und als Schaltflächenoption angezeigt werden. Wird im Menü und in den Schaltflächen als \"%s\" angezeigt. Erfordert einen Neustart, falls geändert."
+
+msgid "Strip repeat tagging from series titles when creating directory names."
+msgstr "Entfernen Sie beim Erstellen von Verzeichnisnamen wiederholte Tags aus Serientiteln."
+
+msgid "Strip repeat tags from series names"
+msgstr "Entfernen von Wiederholungstags aus Seriennamen"
+
+msgid "The name of the folder for movies."
+msgstr "Der Name des Ordners für Filme."
+
+#, python-format
+msgid "Too many recordings with similar filenames: %s"
+msgstr "Zu viele Aufnahmen mit ähnlichen Dateinamen: %s"
+
+msgid "Use more portable (Windows-friendly) names for folders."
+msgstr "Verwenden Sie portablere (Windows-freundliche) Namen für Ordner."
+
+msgid "Use portable folder names"
+msgstr "Portable Ordnernamen verwenden"
+
+#, python-format
+msgid "Your %s %s is running tasks that may be accessing the recordings. No recordings moved."
+msgstr "Ihr %s %s führt Aufgaben aus, die möglicherweise auf die Aufzeichnungen zugreifen. Es wurden keine Aufnahmen verschoben."
+
+#, python-format
+msgid "Your %s %s is trying to shut down. No recordings moved."
+msgstr "Ihr %s %s versucht herunterzufahren. Es wurden keine Aufnahmen verschoben."
+
+msgid "all"
+msgstr "alle"
+
+msgid "error"
+msgstr "Fehler"
+
+msgid "error and \"moved\""
+msgstr "Fehler und \"verschoben\""
+
+msgid "no autocreate"
+msgstr "keine automatische Erstellung"
+
+msgid "none"
+msgstr "Keine"

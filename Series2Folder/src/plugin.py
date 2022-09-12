@@ -1,7 +1,7 @@
 from __future__ import print_function
 
 __doc__ = '''
-Beyonwiz T series Plugin
+Enigma2 Plugin
 For any recorded series (configurable number of episodes with same name)
 create a sub-directory and move the series episodes into it, with
 an option to do the processing automatically in the background.
@@ -9,7 +9,7 @@ an option to do the processing automatically in the background.
 Mike Griffin  8/02/2015
 '''
 
-__version__ = "1.11"
+__version__ = "2.0dev1"
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
@@ -38,6 +38,7 @@ from os.path import isfile, isdir, splitext, join as joinpath, split as splitpat
 import os
 
 from .FileScreens import activeFileScreens
+from . import _, ngettext
 
 _autoSeries2Folder = None
 _session = None
@@ -704,12 +705,12 @@ class Series2FolderConfig(ConfigListScreen, Screen):
         self._confShowmovebutton = getConfigListEntry(
             _("Show move series option"),
             config.plugins.seriestofolder.showmovebutton,
-            _('Single-action move series to folder shown in menu and as button option. Displays in menu and buttons as "%s". Requires restart if changed.' % pluginSeries2Folder.description)
+            _('Single-action move series to folder shown in menu and as button option. Displays in menu and buttons as "%s". Requires restart if changed.') % pluginSeries2Folder.description
         )
         self._confShowselmovebutton = getConfigListEntry(
             _("Show move selected series option"),
             config.plugins.seriestofolder.showselmovebutton,
-            _('Single-action move selected series to folder shown in menu and as button option. Displays in menu and buttons as "%s". Requires restart if changed.' % pluginSelSeries2Folder.description)
+            _('Single-action move selected series to folder shown in menu and as button option. Displays in menu and buttons as "%s". Requires restart if changed.') % pluginSelSeries2Folder.description
         )
 
         self._confAuto = getConfigListEntry(
