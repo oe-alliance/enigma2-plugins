@@ -266,7 +266,10 @@ def RemoteTimerInit():
 	if baseTimerEntrySetup is None:
 		baseTimerEntrySetup = TimerEntry.createSetup
 	if baseTimerEntryGo is None:
-		baseTimerEntryGo = TimerEntry.keyGo
+		if hasattr(TimerEntry, "keyGo"):
+			baseTimerEntryGo = TimerEntry.keyGo
+		else:
+			baseTimerEntryGo = TimerEntry.keySave
 	if baseTimerEntrynewConfig is None:
 		baseTimerEntrynewConfig = TimerEntry.newConfig
 	if baseTimerkeyLeft is None:
@@ -284,7 +287,10 @@ def RemoteTimerInit():
 	TimerEntry.keyRight = RemoteTimerkeyRight
 	TimerEntry.keySelect = RemoteTimerkeySelect
 	TimerEntry.createSetup = createRemoteTimerSetup
-	TimerEntry.keyGo = RemoteTimerGo
+	if hasattr(TimerEntry, "keyGo"):
+		TimerEntry.keyGo = RemoteTimerGo
+	else:
+		TimerEntry.keySave = RemoteTimerGo
 	TimerEntry.newConfig = RemoteTimernewConfig
 	TimerEntry.__init__ = RemoteTimer__init__
 
