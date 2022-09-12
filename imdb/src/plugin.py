@@ -170,7 +170,7 @@ def LingUI(s, **keywords):
 		end += len(plural) + 2
 		data = plural.split(", ")
 		one = extract(data[2][4:])
-		other = extract(data[2][4+len(one)+2+7:])
+		other = extract(data[2][4 + len(one) + 2 + 7:])
 		fmt = keywords[data[0]] == 1 and one or other
 		r += fmt.format(**keywords)
 
@@ -687,7 +687,7 @@ class IMDB(Screen, HelpableScreen):
 		Detailstext = _("No details found.")
 		start = self.html.find('pageProps":')
 		if start != -1:
-			pageProps = json.JSONDecoder().raw_decode(self.html, start+11)[0]
+			pageProps = json.JSONDecoder().raw_decode(self.html, start + 11)[0]
 			fold = pageProps['aboveTheFoldData']
 			main = pageProps['mainColumnData']
 			i18n = pageProps['translationContext']['i18n']['translations']['resources']
