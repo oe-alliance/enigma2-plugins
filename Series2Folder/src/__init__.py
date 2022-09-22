@@ -1,4 +1,35 @@
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigEnableDisable, ConfigText, ConfigYesNo, ConfigInteger
+from Components.Language import language
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+import gettext
+
+PluginLanguageDomain = "Series2Folder"
+PluginLanguagePath = "Extensions/Series2Folder/locale"
+
+
+def localeInit():
+    gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
+
+def _(txt):
+    trans = gettext.dgettext(PluginLanguageDomain, txt)
+    if trans:
+        return trans
+    else:
+        print("[%s] fallback to default translation for %s" % (PluginLanguageDomain, txt))
+        return gettext.gettext(txt)
+
+def ngettext(singular, plural, n):
+    trans = gettext.dngettext(PluginLanguageDomain, singular, plural, n)
+    if trans:
+        return trans
+    else:
+        print("[%s] fallback to default translation for %s, %s" % (PluginLanguageDomain, singular, plural))
+        return gettext.ngettext(singular, plural, n)
+
+
+localeInit()
+language.addCallback(localeInit)
 
 config.plugins.seriestofolder = ConfigSubsection()
 config.plugins.seriestofolder.autofolder = ConfigSelection([
