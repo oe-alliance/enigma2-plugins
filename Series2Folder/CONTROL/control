@@ -1,0 +1,11 @@
+Package: enigma2-plugin-extensions-series2folder
+Version: 2.0
+Description: Move series recordings to folders
+Section: extra
+Priority: optional
+Maintainer: prl <prl@ozemail.com.au>
+License: CC-BY-NC-SA-3.0
+Architecture: all
+OE: enigma2-plugin-extensions-series2folder
+Depends: enigma2
+Source: https://bitbucket.org/prl/series2folder
