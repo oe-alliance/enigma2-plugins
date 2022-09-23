@@ -861,5 +861,10 @@ netzkino/Makefile
 netzkino/meta/Makefile
 netzkino/src/Makefile
 
+Series2Folder/Makefile
+Series2Folder/meta/Makefile
+Series2Folder/po/Makefile
+Series2Folder/src/Makefile
+
 ])
 AC_OUTPUT
