@@ -19,6 +19,7 @@ def _(txt):
         print("[%s] fallback to default translation for %s" % (PluginLanguageDomain, txt))
         return gettext.gettext(txt)
 
+
 def ngettext(singular, plural, n):
     trans = gettext.dngettext(PluginLanguageDomain, singular, plural, n)
     if trans:
@@ -69,6 +70,7 @@ config.plugins.seriestofolder.autonotifications = ConfigSelection([
     ("none", _("none")),
 ], default="error")
 config.plugins.seriestofolder.autoreminder = ConfigInteger(default=5)
+
 
 def onAutoChange(conf):
     if conf.value and config.plugins.seriestofolder.autoreminder.value:

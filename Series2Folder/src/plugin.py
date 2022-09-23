@@ -43,6 +43,7 @@ from . import _, ngettext
 _autoSeries2Folder = None
 _session = None
 
+
 def menu(session, service, serviceList=None, **kwargs):
     session.open(Series2Folder, service, serviceList=serviceList)
 
@@ -51,9 +52,11 @@ def buttonSeries2Folder(session, service, *args, **kwargs):
     actions = Series2FolderActions(session)
     actions.doMoves(service)
 
+
 def buttonSelSeries2Folder(session, service, serviceList=None, *args, **kwargs):
     actions = Series2FolderActions(session)
     actions.doMoves(service, selectedOnly=True, serviceList=serviceList)
+
 
 def autoSeries2Folder(reason, session, **kwargs):
     global _autoSeries2Folder
@@ -72,11 +75,13 @@ def autoSeries2Folder(reason, session, **kwargs):
             _autoSeries2Folder.autoStop()
             _autoSeries2Folder = None
 
+
 def __autoSwitched(conf):
     autoSeries2Folder(int(not config.plugins.seriestofolder.auto.value), _session)
 
 
 config.plugins.seriestofolder.auto.addNotifier(__autoSwitched, initial_call=False, immediate_feedback=False, extra_args=None)
+
 
 def multiPluginDescriptor(name="Plugin", where=None, description="", icon=None, fnc=None, wakeupfnc=None, needsRestart=None, internal=False, weight=0, multi=False):
     try:
@@ -128,6 +133,7 @@ def Plugins(**kwargs):
         plugins.append(pluginSelSeries2Folder)
     return plugins
 
+
 def addRemovePlugin(configElement, plugin):
     if configElement.value:
         if plugin not in plugins.pluginList:
@@ -147,6 +153,7 @@ config.plugins.seriestofolder.showselmovebutton.addNotifier(
     initial_call=False,
     immediate_feedback=False
 )
+
 
 class Series2FolderActionsBase(object):
     TS = ".ts"
@@ -474,6 +481,7 @@ class Series2FolderActions(Series2FolderActionsBase):
                 self.MsgBox(msg, msgType=MessageBox.TYPE_WARNING)
         return not fails
 
+
 class Series2FolderAutoActions(Series2FolderActionsBase):
 
     ITER_STEP = 20  # ms Time to wait between search and processing steps
@@ -638,6 +646,7 @@ class ErrorBox(TextBox):
     skin = """<screen name="Series2Folder" backgroundColor="background" position="90,150" size="1100,450" title="Log">
         <widget font="Regular;18" name="text" position="0,4" size="1100,446"/>
 </screen>"""
+
 
 class Series2FolderConfig(ConfigListScreen, Screen):
     skin = """

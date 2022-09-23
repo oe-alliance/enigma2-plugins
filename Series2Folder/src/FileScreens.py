@@ -51,6 +51,7 @@ for moduleName, classNames, refreshMethod in __fileScreenTemplates:
 # currently active fileScreen entries that have a non-None
 # refreshMethodName (for plugin manual mode).
 
+
 def activeFileScreens(session, allScreens):
     current_dialog = session.current_dialog
     activeScreens = []
