@@ -1,6 +1,5 @@
 from __future__ import print_function
-from enigma import eServiceReference, eConsoleAppContainer
-from Components.MediaPlayer import PlayList
+from enigma import eConsoleAppContainer
 import xml.dom.minidom
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import ActionMap
