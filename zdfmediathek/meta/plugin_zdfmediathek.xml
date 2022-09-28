@@ -3,11 +3,11 @@
                     <tag type="Multimedia" />
 	  </prerequisites>
           <info>
-                    <author>AliAbdul</author>
-                    <name>ZDFMediathek</name>
+                    <author>CommanderData</author>
+                    <name>ZDF Mediathek</name>
                     <packagename>enigma2-plugin-extensions-zdfmediathek</packagename>
-                    <shortdescription>Watch streams from ZDF Mediathek</shortdescription>
-                    <description>ZDFMediathek allows you to watch streams from ZDF Mediathek.</description>
+                    <shortdescription>Access to the ZDF-Mediathek</shortdescription>
+                    <description>Access to the ZDF-Mediathek online video database.</description>
           </info>
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-zdfmediathek" />
