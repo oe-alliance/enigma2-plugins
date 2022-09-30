@@ -851,6 +851,7 @@ zapstatistic/src/Makefile
 zdfmediathek/Makefile
 zdfmediathek/meta/Makefile
 zdfmediathek/src/Makefile
+zdfmediathek/src/img/Makefile
 
 ardmediathek/Makefile
 ardmediathek/meta/Makefile
