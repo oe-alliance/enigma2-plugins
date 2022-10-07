@@ -18,7 +18,7 @@ from twisted.internet.reactor import callInThread
 from os.path import exists, join as pathjoin
 from requests import get
 import os
-PLUGINPATH = '/usr/lib/enigma2/python/Plugins/Extensions/zdfmediathek/'
+PLUGINPATH = '/usr/lib/enigma2/python/Plugins/Extensions/ZDFMediathek/'
 setdefaulttimeout(2)
 FHD = getDesktop(0).size().height() > 720
 if FHD:
@@ -42,7 +42,7 @@ def cleanurl(t):
     return t.replace('ä', '%C3%A4').replace('ö', '%C3%B6').replace('ü', '%C3%BC').replace('ß', '%C3%9F').replace('\\', '/').replace(' ', '%20').strip()
 
 
-class zdfmediathek(Screen):
+class ZDFMediathek(Screen):
     def __init__(self, session):
         self.skin = open(skin, 'r').read()
         Screen.__init__(self, session)

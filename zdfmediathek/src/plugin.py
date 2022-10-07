@@ -6,7 +6,7 @@ from . import zdf
 
 def main(session, **kwargs):
     reload_module(zdf)
-    session.open(zdf.zdfmediathek)
+    session.open(zdf.ZDFMediathek)
 
 
 def Plugins(**kwargs):
