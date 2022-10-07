@@ -79,7 +79,7 @@ class FilebrowserScreen(Screen, HelpableScreen):
         self["key_menu"] = StaticText(_("MENU"))
         self["key_help"] = StaticText(_("HELP"))
 
-        self["actions"] = HelpableActionMap(self, ["WizardActions", "DirectionActions", "MenuActions", "NumberActions", "ColorActions"],
+        self["actions"] = HelpableActionMap(self, ["FilebrowserPluginActions"],
             {
              "ok": (self.ok, "Select item"),
              "back": (self.exit, "Exit"),
