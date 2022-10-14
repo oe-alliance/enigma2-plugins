@@ -52,6 +52,7 @@ config.plugins.imdb.showinmovielist = ConfigYesNo(default=True)
 config.plugins.imdb.force_english = ConfigYesNo(default=False)
 config.plugins.imdb.ignore_tags = ConfigText(visible_width=50, fixed_size=False)
 config.plugins.imdb.showlongmenuinfo = ConfigYesNo(default=False)
+config.plugins.imdb.showepisoderesults = ConfigYesNo(default=False)
 config.plugins.imdb.showepisodeinfo = ConfigYesNo(default=False)
 
 
@@ -263,6 +264,8 @@ class IMDB(Screen, HelpableScreen):
 		# 3 = synopsis page
 		self.Page = 0
 
+		self.cookie = {"lc-main": language.getLanguage()}
+
 		self["actionsOk"] = HelpableActionMap(self, "OkCancelActions",
 		{
 			"ok": (self.showDetails, _("Show movie and series basic details")),
@@ -379,16 +382,15 @@ class IMDB(Screen, HelpableScreen):
 		self["statusbar"].setText(_("Re-Query IMDb: %s...") % title or titleId)
 		fetchurl = "https://www.imdb.com/title/" + titleId + "/"
 #		print("[IMDB] downloadTitle()", fetchurl)
-		cookie = {"lc-main": language.getLanguage()}
 		params = {
 			"operationName": 'TMD_Storyline',
 			"variables": '{"titleId":"%s"}' % titleId,
 			"extensions": '{"persistedQuery":{"sha256Hash":"87f41463a48af95ebba3129889d17181402622bfd30c8dc9216d99ac984f0091","version":1}}'
 		}
 		self.haveTMD = self.haveHTML = False
-		tmd = getPage("https://caching.graphql.imdb.com/", params=params, headers={"content-type": "application/json"}, cookies=cookie)
+		tmd = getPage("https://caching.graphql.imdb.com/", params=params, headers={"content-type": "application/json"}, cookies=self.cookie)
 		tmd.addBoth(self.gotTMD)
-		download = getPage(fetchurl, cookies=cookie)
+		download = getPage(fetchurl, cookies=self.cookie)
 		download.addCallback(self.IMDBquery2).addErrback(self.http_failed)
 
 	def showDetails(self):
@@ -623,9 +625,9 @@ class IMDB(Screen, HelpableScreen):
 
 		if self.eventName:
 			self["statusbar"].setText(_("Query IMDb: %s") % self.eventName)
-			fetchurl = "https://www.imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
+			fetchurl = "https://www.imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt"
 #			print("[IMDB] getIMDB() Downloading Query", fetchurl)
-			download = getPage(fetchurl)
+			download = getPage(fetchurl, cookies=self.cookie)
 			download.addCallback(self.IMDBquery).addErrback(self.http_failed)
 
 		else:
@@ -636,14 +638,83 @@ class IMDB(Screen, HelpableScreen):
 		html = response.content
 		if six.PY3:
 			html = html.decode("utf8")
-		if "<title>Find - IMDb</title>" in html:
-			pos = html.find('<table class="findList">')
-			pos2 = html.find("</table>", pos)
-			findlist = html[pos:pos2]
-			searchresultmask = re.compile(r'<tr class="findResult (?:odd|even)">.*?<td class="result_text"> (<a href="/title/(tt\d{7,8})/.*?"\s?>(.*?)</a>.*?)</td>', re.DOTALL)
-			searchresults = searchresultmask.finditer(findlist)
-			titlegroup = 1 if config.plugins.imdb.showlongmenuinfo.value else 3
-			self.resultlist = [(' '.join(html2text(x.group(titlegroup)).split()), x.group(2)) for x in searchresults]
+		start = html.find('"titleResults":{"results":')
+		if start != -1:
+			searchresults = json.JSONDecoder().raw_decode(html, start + 26)[0]
+			self.resultlist = []
+			titles = {}
+			for x in searchresults:
+				series = get(x, 'seriesId')
+				if series:
+					if not config.plugins.imdb.showepisoderesults.value:
+						continue
+					if series in titles:
+						i = titles[series]
+						for t in titles:
+							if titles[t] >= i:
+								titles[t] += 1
+					else:
+						title = get(x, 'seriesNameText')
+						year = get(x, 'seriesReleaseText')
+						typ = config.plugins.imdb.showlongmenuinfo.value and get(x, 'seriesTypeText') or ""
+						if year or typ:
+							title += " ("
+							if year:
+								title += year
+							if typ:
+								if year:
+									title += "; "
+								title += typ
+							title += ")"
+						self.resultlist.append((title, series))
+						i = titles[series] = len(self.resultlist)
+					title = "- "
+					s = get(x, 'seriesSeasonText')
+					if s == "Unknown":  # not translated
+						s = ""
+					e = get(x, 'seriesEpisodeText')
+					if e == "Unknown":
+						e = ""
+				else:
+					title = s = e = ""
+					i = len(self.resultlist)
+				title += get(x, 'titleNameText')
+				year = get(x, 'titleReleaseText')
+				if config.plugins.imdb.showlongmenuinfo.value:
+					typ = not series and get(x, 'titleTypeText') or ""
+					cast = get(x, 'topCredits')
+				else:
+					typ = cast = ""
+				if year or typ or cast or s or e:
+					title += " ("
+					semicolon = False
+					if year:
+						title += year
+						semicolon = True
+					if typ:
+						if semicolon:
+							title += "; "
+						semicolon = True
+						title += typ
+					if s:
+						if semicolon:
+							title += "; "
+						semicolon = True
+						title += _("S") + s
+					if e:
+						if s:
+							title += " "
+						elif semicolon:
+							title += "; "
+						semicolon = True
+						title += _("E") + e
+					if cast:
+						if semicolon:
+							title += "; "
+						semicolon = True
+						title += six.ensure_str(", ".join(cast))
+					title += ")"
+				self.resultlist.insert(i, (title, get(x, 'id')))
 			Len = len(self.resultlist)
 			self["menu"].l.setList(self.resultlist)
 			if Len == 1:
