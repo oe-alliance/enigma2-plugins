@@ -8,17 +8,15 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-25 08:17+0100\n"
-"PO-Revision-Date: 2018-07-05 15:22+0200\n"
-"Last-Translator: Kojo\n"
-"Language-Team: Samzan/Kojo\n"
+"PO-Revision-Date: 2022-10-15 17:32+0300\n"
+"Last-Translator: Orlandox\n"
+"Language-Team: Samzan/Kojo/Orlandox\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.7\n"
-"X-Poedit-Language: Finnish\n"
-"X-Poedit-Country: FINLAND\n"
+"X-Generator: Poedit 3.1.1\n"
 
 msgid " as "
 msgstr " roolissa "
@@ -33,7 +31,7 @@ msgid "Cancel"
 msgstr "Peruuta"
 
 msgid "Cast: "
-msgstr "Pääosissa:"
+msgstr "Pääosissa: "
 
 msgid "Channel Selection"
 msgstr "Kanavavalinta"
@@ -55,7 +53,7 @@ msgid "Enable this to be able to access IMDb search setup from within the plugin
 msgstr "Näytä IMDb-hakuasetukset Plugin-lisäosat -valikossa."
 
 msgid "Enable this to be able to access IMDb searches from within the movie list."
-msgstr "Näytä IMDb-haku tallennettujen ohjelmien hakemistossa painamalla Menu-näppäintä"
+msgstr "Näytä IMDb-haku tallennettujen ohjelmien hakemistossa painamalla Menu-näppäintä."
 
 msgid "Enable this to be able to access IMDb searches from within the plugin browser."
 msgstr "Näytä IMDb-hakutulokset Plugin-lisäosat -valikossa."
@@ -130,10 +128,10 @@ msgid "No IMDb match:"
 msgstr "Ei IMDb hakuosumaa!"
 
 msgid "No cast list found in the database."
-msgstr "Ei löytynyt näyttelijätietoja"
+msgstr "Ei löytynyt näyttelijätietoja."
 
 msgid "No details found."
-msgstr "Ei löytynyt tietoja"
+msgstr "Ei löytynyt tietoja."
 
 msgid "OK"
 msgstr "OK"
@@ -210,7 +208,7 @@ msgid "Show list of matched movies an series"
 msgstr "Näytä osuvimmat elokuvat ja sarjat"
 
 msgid "Show movie and series basic details"
-msgstr "Näytä elokuvan ja sarjan perustiedot"
+msgstr "Näytä elokuvien ja sarjojen perustiedot"
 
 msgid "Show movie and series extra details"
 msgstr "Näytä elokuvien ja sarjojen lisätiedot"
@@ -222,13 +220,13 @@ msgid "Show setup in plugin browser"
 msgstr "Näytä asetukset Plugin-lisäosat-valikossa"
 
 msgid "Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name."
-msgstr "Näytä nimikkeen kaikki tiedot, esimerkiksi vaihtoehtoinen nimi, tai onko kyseessa sarja. Tämä astuu voimaan seuraavassa haussa."
+msgstr "Näytä nimikkeen kaikki tiedot, esimerkiksi vaihtoehtoinen nimi, tai onko kyseessa sarja. Astuu voimaan, kun seuraavan kerran haetaan IMDb:sta ohjelman nimeä."
 
 msgid "The Internet Movie Database"
 msgstr "The Internet Movie Database"
 
 msgid "This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas."
-msgstr "Syötä sanoja tai lauseita joita ei oteta huomioon hauissa. Eroittele ehdot pilkulla."
+msgstr "Syötä sanoja tai lauseita joita ei oteta huomioon hauissa. Erottele ehdot pilkulla."
 
 msgid "Title Menu"
 msgstr "Nimivalikko"
@@ -240,7 +238,19 @@ msgid "User Rating"
 msgstr "Arvostelut"
 
 msgid "Words / phrases to ignore "
-msgstr "Hylättävät sanat / lauseet"
+msgstr "Hylättävät sanat / lauseet "
 
 msgid "no user rating yet"
 msgstr "Ei arvostelua vielä"
+
+msgid "Show extra information in title menu"
+msgstr "Näytä lisätiedot nimivalikossa"
+
+msgid "Show the type of the title and top cast. Takes effect after the next search of IMDb for a show name."
+msgstr "Näytä otsikon tyyppi ja huippunäyttelijät. Astuu voimaan, kun seuraavan kerran haetaan IMDb:sta ohjelman nimeä."
+
+msgid "Show episodes in title menu"
+msgstr "Näytä jaksot nimivalikossa"
+
+msgid "Include episodes in the results. Takes effect after the next search of IMDb for a show name."
+msgstr "Sisällytä jaksot tuloksiin. Astuu voimaan, kun seuraavan kerran haetaan IMDb:sta ohjelman nimeä."
