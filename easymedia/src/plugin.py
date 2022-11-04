@@ -207,21 +207,7 @@ class ConfigEasyMedia(ConfigListScreen, Screen):
 class AddPlug(Screen):
 	skin = """
 		<screen name="AddPlug" position="center,center" size="440,420" title="EasyMedia...">
-		<widget source="pluginlist" render="Listbox" position="10,10" size="420,400" scrollbarMode="showOnDemand">
-			<convert type="TemplatedMultiContent">
-			{"templates":
-				{"default": (50,[
-						MultiContentEntryText(pos = (120, 5), size = (320, 25), font = 0, text = 1), # index 1 is the plugin.name
-						MultiContentEntryText(pos = (120, 26), size = (320, 17), font = 1, text = 2), # index 2 is the plugin.description
-						MultiContentEntryPixmapAlphaTest(pos = (10, 5), size = (100, 40), png = 3), # index 3 is the icon
-
-					]),
-				},
-				"fonts": [gFont("Regular", 20), gFont("Regular", 14)],
-				"itemHeight": 50
-			}
-			</convert>
-		</widget>
+			<widget name="pluginlist" position="10,10" size="420,400" scrollbarMode="showOnDemand" itemHeight="50" />
 		</screen>"""
 
 	def __init__(self, session):
