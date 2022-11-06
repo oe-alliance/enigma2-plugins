@@ -21,7 +21,12 @@ from Components.config import config
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 
+import sys
 import inspect
+if sys.version_info[0] == 2:  # getargspec is deprecated in Py3 in favour of getfullargspec
+	__getargs = inspect.getargspec
+else:
+	__getargs = inspect.getfullargspec
 
 LIST_PLUGINS = 0
 LIST_EXTENSIONS = 1
@@ -88,13 +93,13 @@ class PluginHiderSetup(Screen, HelpableScreen):
 			else:  # if self.selectedList == LIST_EXTENSIONS or self.selectedList == LIST_EVENTINFO:
 				from Screens.InfoBar import InfoBar
 				instance = InfoBar.instance
-				args = inspect.getargspec(plugin.__call__)[0]
+				args = __getargs(plugin.__call__)[0]
 				if len(args) == 1:
 					plugin(session=self.session)
 				elif instance and instance.servicelist:
 					plugin(session=self.session, servicelist=instance.servicelist)
 				else:
-					session.open(MessageBox, _("Could not start Plugin:") + "\n" + _("Unable to access InfoBar."), type=MessageBox.TYPE_ERROR)
+					self.session.open(MessageBox, _("Could not start Plugin:") + "\n" + _("Unable to access InfoBar."), type=MessageBox.TYPE_ERROR)
 
 	def cancel(self):
 		config.plugins.pluginhider.hideplugins.cancel()

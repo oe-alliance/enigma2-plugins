@@ -10,7 +10,14 @@ from Screens.InfoBar import InfoBar, MoviePlayer
 from Screens.MessageBox import MessageBox
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo
 from operator import attrgetter
+
+import sys
 import inspect
+if sys.version_info[0] == 2:  # getargspec is deprecated in Py3 in favour of getfullargspec
+	__getargs = inspect.getargspec
+else:
+	__getargs = inspect.getfullargspec
+
 
 config.plugins.movieepg = ConfigSubsection()
 config.plugins.movieepg.show_epg_entry = ConfigSelection(choices=[
@@ -41,7 +48,7 @@ def InfoBarPlugins_getPluginList(self, *args, **kwargs):
 	l = []
 	showSlistPlugins = (config.plugins.movieepg.show_servicelist_plugins_in_movieplayer.value and hasattr(self, 'servicelist')) or isinstance(self, InfoBarChannelSelection)
 	for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EXTENSIONSMENU):
-		args = inspect.getargspec(p.__call__)[0]
+		args = __getargs(p.__call__)[0]
 		if len(args) == 1 or len(args) == 2 and showSlistPlugins:
 			l.append(p)
 	l.sort(key=attrgetter('weight', 'name'))  # sort first by weight, then by name
