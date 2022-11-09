@@ -483,7 +483,7 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 			self.lastindex = self.currPic[1]
 			self["pic"].instance.setPixmap(self.currPic[2].__deref__())
 			self.currPic = []
-			next(self)
+			self.next()
 			self.start_decode()
 
 	def finish_decode(self, picInfo=""):
