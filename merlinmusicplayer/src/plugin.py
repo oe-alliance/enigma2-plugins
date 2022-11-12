@@ -23,64 +23,60 @@
 # for localized messages
 from __future__ import print_function
 from . import _
-from Plugins.Plugin import PluginDescriptor
-from Screens.Screen import Screen
-from Components.ActionMap import ActionMap, NumberActionMap
-from Components.Label import Label
-from enigma import RT_VALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, gFont, eListbox, ePoint, eListboxPythonMultiContent
-from Components.FileList import FileList
-from enigma import eServiceReference, eTimer
-from os import path as os_path, mkdir as os_mkdir, listdir as os_listdir, walk as os_walk, access as os_access, W_OK as os_W_OK
-from Components.ProgressBar import ProgressBar
-from twisted.internet import reactor, defer
-from twisted.web import client
-from twisted.web.client import HTTPClientFactory, downloadPage
-from enigma import getDesktop
-from Screens.MessageBox import MessageBox
-from Screens.InfoBar import InfoBar
-from Components.GUIComponent import GUIComponent
-from enigma import ePicLoad
-from xml.etree.cElementTree import fromstring as cet_fromstring
-from six.moves.urllib.parse import quote, urlparse
-from Components.ScrollLabel import ScrollLabel
-from Components.AVSwitch import AVSwitch
-from Tools.Directories import fileExists, resolveFilename, SCOPE_CURRENT_SKIN
-from Tools.LoadPixmap import LoadPixmap
-from Components.Pixmap import Pixmap, MultiPixmap
-from Components.ServicePosition import ServicePositionGauge
-from Screens.InfoBarGenerics import InfoBarSeek, InfoBarNotifications
-from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
-from enigma import iPlayableService, iServiceInformation
-from Components.Sources.StaticText import StaticText
-from Screens.ChoiceBox import ChoiceBox
-from Screens.VirtualKeyBoard import VirtualKeyBoard
-from Tools.BoundFunction import boundFunction
-from sqlite3 import dbapi2 as sqlite
 from mutagen.flac import FLAC
 from mutagen.mp3 import MP3
-from mutagen.id3 import ID3, USLT
+from mutagen.id3 import ID3
 from mutagen.easyid3 import EasyID3
 from mutagen.easymp4 import EasyMP4
 from mutagen.oggvorbis import OggVorbis
-from datetime import timedelta as datetime_timedelta
 from time import time
+from datetime import timedelta as datetime_timedelta
+from os import path, mkdir, listdir, walk, access, W_OK
 from random import shuffle, randrange
-import re
-import skin
-from Components.config import config, ConfigSubsection, ConfigDirectory, ConfigYesNo, ConfigInteger, getConfigListEntry, configfile
-from Components.ConfigList import ConfigListScreen
-
-from Components.SystemInfo import SystemInfo
-from enigma import eServiceCenter, getBestPlayableServiceReference
+from re import findall, sub, compile, DOTALL
+from requests import get, exceptions
+from six import ensure_binary
+from six.moves.urllib.parse import quote
+from skin import fonts
+from twisted.web import client
+from twisted.web.client import HTTPClientFactory
+from twisted.internet.reactor import callInThread, connectTCP
+from xml.etree.cElementTree import fromstring as cet_fromstring
+from enigma import eServiceReference, eTimer, eListbox, ePoint, eListboxPythonMultiContent, getDesktop, gFont, ePicLoad
+from enigma import RT_VALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, iPlayableService, iServiceInformation
+from enigma import ePoint, eEPGCache, eServiceCenter, getBestPlayableServiceReference
+from sqlite3 import dbapi2 as sqlite
 from Components.VideoWindow import VideoWindow
-from ServiceReference import ServiceReference
+from Components.Label import Label
+from Components.AVSwitch import AVSwitch
+from Components.FileList import FileList
+from Components.SystemInfo import SystemInfo
+from Components.ScrollLabel import ScrollLabel
+from Components.GUIComponent import GUIComponent
+from Components.Pixmap import Pixmap, MultiPixmap
+from Components.Sources.StaticText import StaticText
+from Components.ConfigList import ConfigListScreen
+from Components.ActionMap import ActionMap, NumberActionMap
+from Components.ServicePosition import ServicePositionGauge
+from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
+from Components.config import config, ConfigSubsection, ConfigDirectory, ConfigYesNo, ConfigInteger, getConfigListEntry, configfile
+from Plugins.Plugin import PluginDescriptor
+from Screens.Screen import Screen
+from Screens.InfoBar import InfoBar
+from Screens.ChoiceBox import ChoiceBox
+from Screens.MessageBox import MessageBox
+from Screens.InfoBarGenerics import NumberZap
 from Screens.EpgSelection import EPGSelection
 from Screens.EventView import EventViewEPGSelect
-from enigma import ePoint, eEPGCache
-from Screens.InfoBarGenerics import NumberZap
-import six
+from Screens.VirtualKeyBoard import VirtualKeyBoard
+from Screens.InfoBarGenerics import InfoBarSeek, InfoBarNotifications
+from ServiceReference import ServiceReference
+from Tools.LoadPixmap import LoadPixmap
+from Tools.BoundFunction import boundFunction
+from Tools.Directories import fileExists, resolveFilename, SCOPE_CURRENT_SKIN
+
 try:
-	from Plugins.SystemPlugins.PiPServiceRelation.plugin import getRelationDict, CONFIG_FILE
+	from Plugins.SystemPlugins.PiPServiceRelation.plugin import getRelationDict
 	plugin_PiPServiceRelation_installed = True
 except:
 	plugin_PiPServiceRelation_installed = False
@@ -172,13 +168,13 @@ class PathToDatabase(Thread):
 				cursor = connection.cursor()
 				counter = 0
 				checkTime = 0
-				for root, subFolders, files in os_walk(self.__path):
+				for root, subFolders, files in walk(self.__path):
 					if self.__cancel:
 						break
 					for filename in files:
 						if self.__cancel:
 							break
-						cursor.execute('SELECT song_id FROM Songs WHERE filename = "%s";' % os_path.join(root, filename))
+						cursor.execute('SELECT song_id FROM Songs WHERE filename = "%s";' % path.join(root, filename))
 						row = cursor.fetchone()
 						if row is None:
 							audio, isAudio, title, genre, artist, album, tracknr, track, date, length, bitrate = getID3Tags(root, filename)
@@ -215,16 +211,16 @@ class PathToDatabase(Thread):
 
 								# 4. Songs
 								try:
-									cursor.execute("INSERT INTO Songs (filename,title,artist_id,album_id,genre_id,tracknumber, bitrate, length, track, date) VALUES(?,?,?,?,?,?,?,?,?,?);", (os_path.join(root, filename), title, artistID, albumID, genreID, tracknr, bitrate, length, track, date))
-									self.__messages.push((THREAD_WORKING, _("%s\n added to database") % os_path.join(root, filename)))
+									cursor.execute("INSERT INTO Songs (filename,title,artist_id,album_id,genre_id,tracknumber, bitrate, length, track, date) VALUES(?,?,?,?,?,?,?,?,?,?);", (path.join(root, filename), title, artistID, albumID, genreID, tracknr, bitrate, length, track, date))
+									self.__messages.push((THREAD_WORKING, _("%s\n added to database") % path.join(root, filename)))
 									mp.send(0)
 									counter += 1
 								except sqlite.IntegrityError:
-									self.__messages.push((THREAD_WORKING, _("%s\n already exists in database!") % os_path.join(root, filename)))
+									self.__messages.push((THREAD_WORKING, _("%s\n already exists in database!") % path.join(root, filename)))
 									mp.send(0)
 								audio = None
 						elif time() - checkTime >= 0.1:  # update interval for gui
-							self.__messages.push((THREAD_WORKING, _("%s\n already exists in database!") % os_path.join(root, filename)))
+							self.__messages.push((THREAD_WORKING, _("%s\n already exists in database!") % path.join(root, filename)))
 							mp.send(0)
 							checkTime = time()
 
@@ -316,7 +312,7 @@ def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
 		port = uri.port
 		path = uri.path
 	factory = myHTTPClientFactory(url, *args, **kwargs)
-	reactor.connectTCP(host, port, factory, timeout=timeout)
+	connectTCP(host, port, factory, timeout=timeout)
 	return factory.deferred
 
 
@@ -373,13 +369,13 @@ class Item:
 
 
 def OpenDatabase():
-		connectstring = os_path.join(config.plugins.merlinmusicplayer.databasepath.value, "iDream.db")
+		connectstring = path.join(config.plugins.merlinmusicplayer.databasepath.value, "iDream.db")
 		db_exists = False
-		if os_path.exists(connectstring):
+		if path.exists(connectstring):
 			db_exists = True
 		try:
 			connection = sqlite.connect(connectstring)
-			if not os_access(connectstring, os_W_OK):
+			if not access(connectstring, W_OK):
 				print("[MerlinMusicPlayer] Error: database file needs to be writable, can not open %s for writing..." % connectstring)
 				connection.close()
 				return None
@@ -427,23 +423,23 @@ def getID3Tags(root, filename):
 	bitrate = None
 	if filename.lower().endswith(".mp3"):
 		try:
-			audio = MP3(os_path.join(root, filename), ID3=EasyID3)
+			audio = MP3(path.join(root, filename), ID3=EasyID3)
 		except:
 			audio = None
 	elif filename.lower().endswith(".flac"):
 		try:
-			audio = FLAC(os_path.join(root, filename))
+			audio = FLAC(path.join(root, filename))
 			isFlac = True
 		except:
 			audio = None
 	elif filename.lower().endswith(".m4a"):
 		try:
-			audio = EasyMP4(os_path.join(root, filename))
+			audio = EasyMP4(path.join(root, filename))
 		except:
 			audio = None
 	elif filename.lower().endswith(".ogg"):
 		try:
-			audio = OggVorbis(os_path.join(root, filename))
+			audio = OggVorbis(path.join(root, filename))
 		except:
 			audio = None
 	else:
@@ -473,7 +469,7 @@ def getID3Tags(root, filename):
 			bitrate = None
 	else:
 		if isAudio:
-			title = os_path.splitext(os_path.basename(filename))[0]
+			title = path.splitext(path.basename(filename))[0]
 			genre = "n/a"
 			artist = "n/a"
 			album = "n/a"
@@ -1009,10 +1005,10 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		self.repeat = False
 		self.currentFilename = ""
 		self.currentGoogleCoverFile = ""
-		self.googleDownloadDir = os_path.join(config.plugins.merlinmusicplayer.googleimagepath.value, "downloaded_covers/")
-		if not os_path.exists(self.googleDownloadDir):
+		self.googleDownloadDir = path.join(config.plugins.merlinmusicplayer.googleimagepath.value, "downloaded_covers/")
+		if not path.exists(self.googleDownloadDir):
 			try:
-				os_mkdir(self.googleDownloadDir)
+				mkdir(self.googleDownloadDir)
 			except:
 				self.googleDownloadDir = "/tmp/"
 
@@ -1100,10 +1096,10 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 
 	def setupFinished(self, result):
 		if result:
-			self.googleDownloadDir = os_path.join(config.plugins.merlinmusicplayer.googleimagepath.value, "downloaded_covers/")
-			if not os_path.exists(self.googleDownloadDir):
+			self.googleDownloadDir = path.join(config.plugins.merlinmusicplayer.googleimagepath.value, "downloaded_covers/")
+			if not path.exists(self.googleDownloadDir):
 				try:
-					os_mkdir(self.googleDownloadDir)
+					mkdir(self.googleDownloadDir)
 				except:
 					self.googleDownloadDir = "/tmp/"
 		self.resetScreenSaverTimer()
@@ -1187,7 +1183,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			if sYear:
 				sYear = "(%s)" % sYear
 			if not sTitle:
-				sTitle = os_path.splitext(os_path.basename(self.currentFilename))[0]
+				sTitle = path.splitext(path.basename(self.currentFilename))[0]
 
 			if self.songList[self.currentIndex][0].PTS is None:
 				self.updateMusicInformation(sArtist, sTitle, sAlbum, sGenre, sYear, clear=True)
@@ -1294,7 +1290,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			sendUrlCommand(url, None, 10).addCallback(boundFunction(self.googleImageCallback, artist, album, title, imagesize)).addErrback(boundFunction(self.coverDownloadFailed, [], album, title))
 
 	def googleImageCallback(self, artist, album, title, imgsize, result):
-		urls = re.findall("unescapedUrl\":\"(.*?)\",\"url\":\"", result)
+		urls = findall("unescapedUrl\":\"(.*?)\",\"url\":\"", result)
 		if (len(urls) == 0):
 			print("[MerlinMusicPlayer] No medium images found. Search for all images")
 			getGoogleCover(artist, album, title, "")
@@ -1305,13 +1301,13 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		url = urls[0]
 		parts = urls[0].split("/")
 		if (title != "" and title != "n/a"):
-			filename = re.sub(r'[^A-Za-z0-9_-]', r'', title) + "_" + parts[-1]
+			filename = sub(r'[^A-Za-z0-9_-]', r'', title) + "_" + parts[-1]
 		else:
-			filename = re.sub(r'[^A-Za-z0-9_-]', r'', album) + "_" + parts[-1]
+			filename = sub(r'[^A-Za-z0-9_-]', r'', album) + "_" + parts[-1]
 		if filename != self.currentGoogleCoverFile:
 			self.currentGoogleCoverFile = filename
 			filename = self.googleDownloadDir + filename
-			if os_path.exists(filename):
+			if path.exists(filename):
 				print("[MerlinMusicPlayer] using cover from %s " % filename)
 				self["coverArt"].showCoverFromFile(filename)
 				if self.screenSaverScreen:
@@ -1319,7 +1315,19 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			else:
 				urls.pop(0)
 				print("[MerlinMusicPlayer] downloading cover from %s " % url)
-				downloadPage(six.ensure_binary(url), filename).addCallback(boundFunction(self.coverDownloadFinished, filename)).addErrback(boundFunction(self.coverDownloadFailed, urls, album, title))
+				callInThread(self.threadDownloadPage, url, filename, boundFunction(self.coverDownloadFinished, filename), boundFunction(self.coverDownloadFailed, urls, album, title))
+
+	def threadDownloadPage(self, link, file, success, fail=None):
+		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
+		try:
+			response = get(link)
+			response.raise_for_status()
+			with open(file, "wb") as f:
+				f.write(response.content)
+			success(file)
+		except exceptions.RequestException as error:
+			if fail is not None:
+				fail(error)
 
 	def coverDownloadFailed(self, urls, album, title, result):
 		print("[MerlinMusicPlayer] cover download failed: %s " % result)
@@ -1437,8 +1445,8 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			if self.songList[index][0].filename.lower().startswith("http://"):
 				text = self.songList[index][0].filename
 			else:
-				path, filename = os_path.split(self.songList[index][0].filename)
-				audio, isAudio, title, genre, artist, album, tracknr, track, date, length, bitrate = getID3Tags(path, filename)
+				filepath, filename = path.split(self.songList[index][0].filename)
+				audio, isAudio, title, genre, artist, album, tracknr, track, date, length, bitrate = getID3Tags(filepath, filename)
 				if audio:
 					if artist:
 						text = "%s - %s" % (title, artist)
@@ -2499,7 +2507,7 @@ class iDreamMerlin(Screen):
 			SongList = []
 			cursor.execute("select song_id, filename, title, artist, album, genre, bitrate, length,  track, date, PTS from CurrentSongList;")
 			for row in cursor:
-				SongList.append((Item(songID=row[0], text=os_path.basename(row[1]), filename=row[1], title=row[2], artist=row[3], album=row[4], genre=row[5], bitrate=row[6], length=row[7], track=row[8], date=row[9], PTS=row[10], join=False),))
+				SongList.append((Item(songID=row[0], text=path.basename(row[1]), filename=row[1], title=row[2], artist=row[3], album=row[4], genre=row[5], bitrate=row[6], length=row[7], track=row[8], date=row[9], PTS=row[10], join=False),))
 				if row[0] != 0:
 					iDreamMode = True
 			cursor.close()
@@ -2661,16 +2669,16 @@ class iDreamList(GUIComponent, object):
 		self.l = eListboxPythonMultiContent()
 		self.l.setBuildFunc(self.buildEntry)
 		if DESKTOP_WIDTH <= 1280:
-			font = skin.fonts.get('iDreamListFont0', ('Regular', 22))
+			font = fonts.get('iDreamListFont0', ('Regular', 22))
 			self.l.setFont(0, gFont(font[0], font[1]))
-			font = skin.fonts.get('iDreamListFont1', ('Regular', 22))
+			font = fonts.get('iDreamListFont1', ('Regular', 22))
 			self.l.setFont(1, gFont(font[0], font[1]))
 			self.item = 30
 			self.item1 = 90
 		else:
-			font = skin.fonts.get('iDreamListFont0', ('Regular', 32))
+			font = fonts.get('iDreamListFont0', ('Regular', 32))
 			self.l.setFont(0, gFont(font[0], font[1]))
-			font = skin.fonts.get('iDreamListFont1', ('Regular', 32))
+			font = fonts.get('iDreamListFont1', ('Regular', 32))
 			self.l.setFont(1, gFont(font[0], font[1]))
 			self.item = 45
 			self.item1 = 135
@@ -2754,7 +2762,6 @@ class MerlinMediaPixmap(Pixmap):
 		self.coverFileNames = ["folder.png", "folder.jpg", "cover.jpg", "cover.png", "coverArt.jpg"]
 
 	def applySkin(self, desktop, screen):
-		from Tools.LoadPixmap import LoadPixmap
 		noCoverFile = None
 		if self.skinAttributes is not None:
 			for (attrib, value) in self.skinAttributes:
@@ -3104,7 +3111,7 @@ class MerlinMusicPlayerFileList(Screen):
 			SongList = []
 			cursor.execute("select song_id, filename, title, artist, album, genre, bitrate, length,  track, date, PTS from CurrentSongList;")
 			for row in cursor:
-				SongList.append((Item(songID=row[0], text=os_path.basename(row[1]), filename=row[1], title=row[2], artist=row[3], album=row[4], genre=row[5], bitrate=row[6], length=row[7], track=row[8], date=row[9], PTS=row[10], join=False),))
+				SongList.append((Item(songID=row[0], text=path.basename(row[1]), filename=row[1], title=row[2], artist=row[3], album=row[4], genre=row[5], bitrate=row[6], length=row[7], track=row[8], date=row[9], PTS=row[10], join=False),))
 				if row[0] != 0:
 					iDreamMode = True
 			cursor.close()
@@ -3130,12 +3137,12 @@ class MerlinMusicPlayerFileList(Screen):
 		except IOError:
 			return None
 		import re
-		performer_re = re.compile(r"""PERFORMER "(?P<performer>.*?)"(?:=\r\n|\r|\n|$)""")
-		title_re = re.compile(r"""TITLE "(?P<title>.*?)"(?:=\r\n|\r|\n|$)""")
-		filename_re = re.compile(r"""FILE "(?P<filename>.+?)".*(?:=\r\n|\r|\n|$)""", re.DOTALL)
-		track_re = re.compile(r"""TRACK (?P<track_number>[^ ]+?)(?:[ ]+.*?)(?:=\r\n|\r|\n|$)""")
-		index_re = re.compile(r"""INDEX (?P<index_nr>[^ ]+?)[ ]+(?P<track_index>[^ ]+?)(?:=\r\n|\r|\n|$)""")
-		msts_re = re.compile("""^(?P<mins>[0-9]{1,}):(?P<secs>[0-9]{2}):(?P<ms>[0-9]{2})$""")
+		performer_re = compile(r"""PERFORMER "(?P<performer>.*?)"(?:=\r\n|\r|\n|$)""")
+		title_re = compile(r"""TITLE "(?P<title>.*?)"(?:=\r\n|\r|\n|$)""")
+		filename_re = compile(r"""FILE "(?P<filename>.+?)".*(?:=\r\n|\r|\n|$)""", DOTALL)
+		track_re = compile(r"""TRACK (?P<track_number>[^ ]+?)(?:[ ]+.*?)(?:=\r\n|\r|\n|$)""")
+		index_re = compile(r"""INDEX (?P<index_nr>[^ ]+?)[ ]+(?P<track_index>[^ ]+?)(?:=\r\n|\r|\n|$)""")
+		msts_re = compile("""^(?P<mins>[0-9]{1,}):(?P<secs>[0-9]{2}):(?P<ms>[0-9]{2})$""")
 		songfilename = ""
 		album = ""
 		performer = ""
@@ -3149,7 +3156,7 @@ class MerlinMusicPlayerFileList(Screen):
 				if m.group('filename')[0] == "/":
 					songfilename = m.group('filename')
 				else:
-					songfilename = os_path.join(os_path.dirname(filename), m.group('filename'))
+					songfilename = path.join(path.dirname(filename), m.group('filename'))
 			m = title_re.search(entry)
 			if m:
 				if state == 0:
@@ -3190,7 +3197,7 @@ class MerlinMusicPlayerFileList(Screen):
 					if entry[0] == "/":
 						songfilename = entry
 					else:
-						songfilename = os_path.join(os_path.dirname(filename), entry)
+						songfilename = path.join(path.dirname(filename), entry)
 					if displayname:
 						text = displayname
 						displayname = None
@@ -3225,11 +3232,11 @@ class MerlinMusicPlayerFileList(Screen):
 	def green_pressed(self):
 		SongList = []
 		count = 0
-		for root, subFolders, files in os_walk(self["list"].getCurrentDirectory()):
+		for root, subFolders, files in walk(self["list"].getCurrentDirectory()):
 			files.sort()
 			for filename in files:
 				if filename.lower().endswith(".mp3") or filename.lower().endswith(".flac") or filename.lower().endswith(".m4a") or filename.lower().endswith(".ogg"):
-					SongList.append((Item(text=filename, filename=os_path.join(root, filename)),))
+					SongList.append((Item(text=filename, filename=path.join(root, filename)),))
 		if self.player is not None:
 			self.player.doClose()
 			self.player = None
@@ -3252,17 +3259,17 @@ class MerlinMusicPlayerFileList(Screen):
 			index = 0
 			currentFilename = self["list"].getFilename()
 			if currentFilename.lower().endswith(".m3u"):
-				SongList = self.readM3U(os_path.join(self["list"].getCurrentDirectory(), currentFilename))
+				SongList = self.readM3U(path.join(self["list"].getCurrentDirectory(), currentFilename))
 			elif currentFilename.lower().endswith(".pls"):
-				SongList = self.readPLS(os_path.join(self["list"].getCurrentDirectory(), currentFilename))
+				SongList = self.readPLS(path.join(self["list"].getCurrentDirectory(), currentFilename))
 			elif currentFilename.lower().endswith(".cue"):
-				SongList = self.readCUE(os_path.join(self["list"].getCurrentDirectory(), currentFilename))
+				SongList = self.readCUE(path.join(self["list"].getCurrentDirectory(), currentFilename))
 			else:
-				files = os_listdir(self["list"].getCurrentDirectory())
+				files = listdir(self["list"].getCurrentDirectory())
 				files.sort()
 				for filename in files:
 					if filename.lower().endswith(".mp3") or filename.lower().endswith(".flac") or filename.lower().endswith(".m4a") or filename.lower().endswith(".ogg"):
-						SongList.append((Item(text=filename, filename=os_path.join(self["list"].getCurrentDirectory(), filename)),))
+						SongList.append((Item(text=filename, filename=path.join(self["list"].getCurrentDirectory(), filename)),))
 						if self["list"].getFilename() == filename:
 							foundIndex = index
 						index += 1
@@ -3310,7 +3317,7 @@ class MerlinMusicPlayerFileList(Screen):
 		filename = self["list"].getFilename()
 		if filename.lower().endswith(".mp3") or filename.lower().endswith(".flac") or filename.lower().endswith(".m4a") or filename.lower().endswith(".ogg"):
 			SongList = []
-			a = Item(text=filename, filename=os_path.join(self["list"].getCurrentDirectory(), filename))
+			a = Item(text=filename, filename=path.join(self["list"].getCurrentDirectory(), filename))
 			if playerAvailable:
 				self.player.songList.append((a,))
 				self.player.origSongList.append((a,))
@@ -3333,7 +3340,7 @@ class MerlinMusicPlayerFileList(Screen):
 			index = self.player.currentIndex
 			filename = self["list"].getFilename()
 			if filename.lower().endswith(".mp3") or filename.lower().endswith(".flac") or filename.lower().endswith(".m4a") or filename.lower().endswith(".ogg"):
-				a = Item(text=filename, filename=os_path.join(self["list"].getCurrentDirectory(), filename))
+				a = Item(text=filename, filename=path.join(self["list"].getCurrentDirectory(), filename))
 				self.player.songList.insert(index + 1, (a,))
 				self.player.origSongList.insert(index + 1, (a,))
 				self.player["nextTitle"].setText(self.player.getNextTitle())
