@@ -3,23 +3,25 @@ from __future__ import print_function
 ## ORF.at IPTV
 ## by AliAbdul
 ##
+
+from re import compile, DOTALL
+from os import listdir
+from requests import get, exceptions
+from six.moves.urllib.request import urlopen
+from six import ensure_binary
+from time import sleep
+from twisted.internet.reactor import callInThread
+from enigma import ePoint, eServiceReference, eSize, eTimer
 from Components.ActionMap import ActionMap
 from Components.Pixmap import MovingPixmap, Pixmap
-from enigma import ePoint, eServiceReference, eSize, eTimer
-from os import listdir
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
 from Screens.InfoBar import MoviePlayer
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from time import sleep
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
-from twisted.web.client import downloadPage, getPage
-import re
-from six.moves.urllib.request import urlopen
-import six
 ##########################################################
 
 PNG_PATH = resolveFilename(SCOPE_PLUGINS) + "/Extensions/ORFat/"
@@ -151,7 +153,7 @@ class ORFMain(Screen):
 			txt = ""
 		ret = None
 		if 'flashVars="vidUrl=' in txt:
-			reonecat = re.compile(r'flashVars="vidUrl=(.+?).flv', re.DOTALL)
+			reonecat = compile(r'flashVars="vidUrl=(.+?).flv', DOTALL)
 			urls = reonecat.findall(txt)
 			if len(urls):
 				ret = urls[0] + ".flv"
@@ -261,7 +263,17 @@ class ORFMain(Screen):
 
 	def downloadList(self):
 		self.working = True
-		getPage(six.ensure_binary(self.mainUrl)).addCallback(self.downloadListCallback).addErrback(self.downloadListError)
+		callInThread(self.threadGetPage, self.mainUrl, self.downloadListCallback, self.downloadListError)
+
+	def threadGetPage(self, link, success, fail=None):
+		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
+		try:
+			response = get(ensure_binary(link))
+			response.raise_for_status()
+			success(response.content)
+		except exceptions.RequestException as error:
+			if fail is not None:
+				fail(error)
 
 	def downloadListError(self, error=""):
 		print("[ORF.at] Fehler beim Verbindungsversuch:", str(error))
@@ -269,12 +281,12 @@ class ORFMain(Screen):
 		self.session.open(MessageBox, "Fehler beim Verbindungsversuch!", MessageBox.TYPE_ERROR)
 
 	def downloadListCallback(self, page=""):
-		if '<div class="griditem' in page:
-			reonecat = re.compile(r'<div class="griditem(.+?)</div>', re.DOTALL)
+		if ensure_binary('<div class="griditem') in page:
+			reonecat = compile(r'<div class="griditem(.+?)</div>', DOTALL)
 			divs = reonecat.findall(page)
 			for div in divs:
 				if ('href="' in div) and ('<img src="' in div):
-					reonecat = re.compile(r'href="(.+?)">.+?<img src="(.+?)".+?alt="(.+?)"', re.DOTALL)
+					reonecat = compile(r'href="(.+?)">.+?<img src="(.+?)".+?alt="(.+?)"', DOTALL)
 					for url, picUrl, name in reonecat.findall(div):
 						self.movies.append(self.mainUrl + url)
 						self.pics.append(self.mainUrl + picUrl)
@@ -297,9 +309,21 @@ class ORFMain(Screen):
 				self.selectedEntry = len(self.movies) - 1
 			elif self.selectedEntry > len(self.movies) - 1:
 				self.selectedEntry = 0
-			downloadPage(six.ensure_binary(self.pics[self.selectedEntry]), self.pic).addCallback(self.downloadPicCallback).addErrback(self.downloadPicError)
+			callInThread(self.threadDownloadPage, self.pics[self.selectedEntry], self.pic, self.downloadPicCallback, self.downloadPicError)
 		else:
 			self.downloadListError()
+
+	def threadDownloadPage(self, link, file, success, fail=None):
+		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
+		try:
+			response = get(link)
+			response.raise_for_status()
+			with open(file, "wb") as f:
+				f.write(response.content)
+			success(file)
+		except exceptions.RequestException as error:
+			if fail is not None:
+				fail(error)
 
 	def downloadPicCallback(self, page=""):
 		picture = LoadPixmap(self.pic)
