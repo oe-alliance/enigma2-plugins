@@ -22,40 +22,36 @@
 #
 
 from __future__ import print_function
+from os import path, mkdir, unlink
+from re import compile, findall, S, I
+from requests import get, exceptions
+from skin import parameters
+from six import ensure_binary, ensure_str
+from six.moves.urllib.parse import quote, urlparse
+from twisted.internet import reactor
+from twisted.web.client import HTTPClientFactory
+from twisted.internet.reactor import callInThread
+from xml.etree.cElementTree import fromstring
+from enigma import eServiceReference, eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, getDesktop, iPlayableService, iServiceInformation, eTimer, eConsoleAppContainer, ePicLoad
+from Components.Label import Label
+from Components.Input import Input
+from Components.Pixmap import Pixmap
+from Components.FileList import FileList
+from Components.ActionMap import ActionMap
+from Components.SystemInfo import SystemInfo
+from Components.GUIComponent import GUIComponent
+from Components.ConfigList import ConfigListScreen
+from Components.Sources.StaticText import StaticText
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigDirectory, ConfigYesNo, Config, ConfigInteger, ConfigSubList, ConfigText, ConfigNumber, getConfigListEntry, configfile
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.InfoBar import InfoBar
-from Components.SystemInfo import SystemInfo
-from Components.ActionMap import ActionMap
-from Components.Label import Label
-from enigma import eServiceReference, eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, getDesktop, iPlayableService, iServiceInformation, eTimer, eConsoleAppContainer, ePicLoad
-from Tools.LoadPixmap import LoadPixmap
-from Tools.Directories import fileExists
-import xml.etree.cElementTree
-from twisted.internet import reactor, defer
-from twisted.web import client
-from twisted.web.client import HTTPClientFactory
-from Components.Pixmap import Pixmap
-from Components.ScrollLabel import ScrollLabel
-import string
-import os
-import re
-import skin
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigDirectory, ConfigYesNo, Config, ConfigInteger, ConfigSubList, ConfigText, ConfigNumber, getConfigListEntry, configfile
-from Components.ConfigList import ConfigListScreen
-from Screens.MessageBox import MessageBox
-from Components.GUIComponent import GUIComponent
-from Components.Sources.StaticText import StaticText
-from six.moves.urllib.parse import quote, urlparse
-from twisted.web.client import downloadPage
-from Screens.ChoiceBox import ChoiceBox
-from Screens.VirtualKeyBoard import VirtualKeyBoard
-from Components.Input import Input
 from Screens.InputBox import InputBox
-from Components.FileList import FileList
-import six
-# for localized messages
-from . import _
+from Screens.ChoiceBox import ChoiceBox
+from Screens.MessageBox import MessageBox
+from Screens.VirtualKeyBoard import VirtualKeyBoard
+from Tools.Directories import fileExists
+from . import _  # for localized messages
 
 coverfiles = ("/tmp/.cover.ping", "/tmp/.cover.pong")
 containerStreamripper = None
@@ -73,7 +69,7 @@ config.plugins.shoutcast.cover_height = ConfigNumber(default=300)
 
 devid = "fa1jo93O_raeF0v9"
 
-_VALID_URI = re.compile(br"\A[\x21-\x7e]+\Z")
+_VALID_URI = compile(br"\A[\x21-\x7e]+\Z")
 
 
 class SHOUTcastGenre:
@@ -129,7 +125,7 @@ def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
 	port = parsed.port or (443 if scheme == 'https' else 80)
 	path = parsed.path or '/'
 
-	url = six.ensure_binary(url)
+	url = ensure_binary(url)
 	factory = myHTTPClientFactory(url, *args, **kwargs)
 	print("scheme=%s host=%s port=%s path=%s\n" % (scheme, host, port, path))
 	reactor.connectTCP(host, port, factory, timeout=timeout)
@@ -242,9 +238,9 @@ class SHOUTcastWidget(Screen):
 		self.favoriteListIndex = 0
 
 		self.favoriteConfig = Config()
-		if os.path.exists(self.FAVORITE_FILE):
+		if path.exists(self.FAVORITE_FILE):
 			self.favoriteConfig.loadFromFile(self.FAVORITE_FILE)
-		elif os.path.exists(self.FAVORITE_FILE_OLD):
+		elif path.exists(self.FAVORITE_FILE_OLD):
 			self.favoriteConfig.loadFromFile(self.FAVORITE_FILE_OLD)
 		else:
 			self.favoriteConfig.loadFromFile(self.FAVORITE_FILE_DEFAULT)
@@ -436,7 +432,7 @@ class SHOUTcastWidget(Screen):
 		self["key_red"].setText(_("Record"))
 
 	def streamripperDataAvail(self, data):
-		data = six.ensure_str(data)
+		data = ensure_str(data)
 		sData = data.replace('\n', '')
 		self["console"].setText(sData)
 
@@ -453,9 +449,9 @@ class SHOUTcastWidget(Screen):
 	def InputBoxStartRecordingCallback(self, returnValue=None):
 		if returnValue:
 			recordingLength = int(returnValue) * 60
-			if not os.path.exists(config.plugins.shoutcast.dirname.value):
+			if not path.exists(config.plugins.shoutcast.dirname.value):
 				try:
-					os.mkdir(config.plugins.shoutcast.dirname.value)
+					mkdir(config.plugins.shoutcast.dirname.value)
 				except:
 					self.session.open(MessageBox, _("Error create directory %s!") % config.plugins.shoutcast.dirname.value, MessageBox.TYPE_ERROR, timeout=10)
 					return
@@ -564,7 +560,7 @@ class SHOUTcastWidget(Screen):
 		sendUrlCommand(url, None, 10).addCallback(self.callbackGenreList).addErrback(self.callbackGenreListError)
 
 	def callbackGenreList(self, xmlstring):
-		xmlstring = six.ensure_str(xmlstring)
+		xmlstring = ensure_str(xmlstring)
 		self["headertext"].setText(_("SHOUTcast genre list"))
 		self.genreListIndex = 0
 		self.mode = self.GENRELIST
@@ -587,7 +583,7 @@ class SHOUTcastWidget(Screen):
 		genreList = []
 		# print "[SHOUTcast] fillGenreList\n%s" % xmlstring
 		try:
-			root = xml.etree.cElementTree.fromstring(xmlstring)
+			root = fromstring(xmlstring)
 		except:
 			return []
 		data = root.find("data")
@@ -685,7 +681,7 @@ class SHOUTcastWidget(Screen):
 		self.session.nav.stopService()
 
 	def callbackPLS(self, result):
-		result = six.ensure_str(result)
+		result = ensure_str(result)
 		self["headertext"].setText(self.headerTextString)
 		found = False
 		parts = result.split("\n")
@@ -717,7 +713,7 @@ class SHOUTcastWidget(Screen):
 		sendUrlCommand(self.stationListURL, None, 10).addCallback(self.callbackStationList).addErrback(self.callbackStationListError)
 
 	def callbackStationList(self, xmlstring):
-		xmlstring = six.ensure_str(xmlstring)
+		xmlstring = ensure_str(xmlstring)
 		self.searchSHOUTcastString = ""
 		self.stationListXML = xmlstring
 		self["headertext"].setText(self.headerTextString)
@@ -735,7 +731,7 @@ class SHOUTcastWidget(Screen):
 	def fillStationList(self, xmlstring):
 		stationList = []
 		try:
-			root = xml.etree.cElementTree.fromstring(xmlstring)
+			root = fromstring(xmlstring)
 		except:
 			return []
 		config_bitrate = int(config.plugins.shoutcast.streamingrate.value)
@@ -899,7 +895,7 @@ class SHOUTcastWidget(Screen):
 		global coverfiles
 		for f in coverfiles:
 			try:
-				os.unlink(f)
+				unlink(f)
 			except:
 				pass
 		self.stopReloadStationListTimer()
@@ -929,12 +925,12 @@ class SHOUTcastWidget(Screen):
 			sendUrlCommand(self.currentGoogle, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
 			return
 		self.currentGoogle = None
-		result = six.ensure_str(result)
-		r = re.findall('murl&quot;:&quot;(http.*?)&quot', result, re.S | re.I)
+		result = ensure_str(result)
+		r = findall('murl&quot;:&quot;(http.*?)&quot', result, S | I)
 		if r:
 			url = r[nr]
 			# FIXME loop
-			_url = six.ensure_binary(url)
+			_url = ensure_binary(url)
 			if not _VALID_URI.match(_url):
 				nr += 1
 				url = r[nr]
@@ -967,13 +963,26 @@ class SHOUTcastWidget(Screen):
 			if validurl:
 				self.currentcoverfile = (self.currentcoverfile + 1) % len(coverfiles)
 				try:
-					os.unlink(coverfiles[self.currentcoverfile - 1])
+					unlink(coverfiles[self.currentcoverfile - 1])
 				except:
 					pass
 				coverfile = coverfiles[self.currentcoverfile]
 				print("[SHOUTcast] downloading cover from %s to %s numer%s" % (url, coverfile, str(nr)))
-				downloadPage(six.ensure_binary(url), coverfile).addCallback(self.coverDownloadFinished, coverfile).addErrback(self.coverDownloadFailed)
+				callInThread(self.threadDownloadPage, url, coverfile, (self.coverDownloadFinished, coverfile), self.coverDownloadFailed)
+
 # FIXME [SHOUTcast] cover download failed: [Failure instance: Traceback: <class 'OpenSSL.SSL.Error'>: [('SSL routines', 'ssl3_read_bytes', 'sslv3 alert handshake failure')]
+
+	def threadDownloadPage(self, link, file, success, fail=None):
+		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
+		try:
+			response = get(link)
+			response.raise_for_status()
+			with open(file, "wb") as f:
+				f.write(response.content)
+			success(file)
+		except exceptions.RequestException as error:
+			if fail is not None:
+				fail(error)
 
 	def coverDownloadFailed(self, result):
 		print("[SHOUTcast] cover download failed:", result)
@@ -1162,7 +1171,7 @@ class SHOUTcastList(GUIComponent, object):
 	def __init__(self):
 		GUIComponent.__init__(self)
 		self.l = eListboxPythonMultiContent()
-		self.fontsize0, self.fontsize1, self.cenrylist, self.favlist, self.para, self.parb, self.parc, self.pard = skin.parameters.get("SHOUTcastListItem", (20, 18, 22, 69, 20, 23, 43, 22))
+		self.fontsize0, self.fontsize1, self.cenrylist, self.favlist, self.para, self.parb, self.parc, self.pard = parameters.get("SHOUTcastListItem", (20, 18, 22, 69, 20, 23, 43, 22))
 		self.onSelectionChanged = []
 		self.mode = 0
 
