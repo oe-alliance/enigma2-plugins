@@ -1,22 +1,21 @@
 from __future__ import print_function
 from enigma import ePicLoad, eTimer, getDesktop, iPlayableService, eServiceReference
-from Screens.Screen import Screen
-from Screens.ServiceInfo import ServiceInfoList, ServiceInfoListEntry
-from Components.ActionMap import ActionMap, HelpableActionMap
-from Components.Pixmap import Pixmap, MovingPixmap
 from Components.Label import Label
 from Components.Button import Button
+from Components.FileList import FileList
 from Components.Sources.List import List
+from Components.AVSwitch import AVSwitch
+from Components.ActionMap import ActionMap, HelpableActionMap
+from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
+from Components.Pixmap import Pixmap, MovingPixmap
+from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSelection, ConfigEnableDisable, ConfigText
+from Components.ConfigList import ConfigListScreen
+from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.HelpMenu import HelpableScreen
-from Components.ConfigList import ConfigList, ConfigListScreen
-from Components.config import *
-from Tools.Directories import resolveFilename, fileExists, pathExists, createDir, SCOPE_MEDIA
-from Components.FileList import FileList
-from Components.AVSwitch import AVSwitch
-import os
-from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
 from Screens.InfoBarGenerics import InfoBarSeek, InfoBarNotifications
+from Tools.Directories import resolveFilename, pathExists, SCOPE_MEDIA
+
 config.plugins.mc_pp = ConfigSubsection()
 config.plugins.mc_pp.slidetime = ConfigInteger(default=10, limits=(5, 60))
 config.plugins.mc_pp.resize = ConfigSelection(default="0", choices=[("0", _("simple")), ("1", _("better"))])

@@ -1,30 +1,27 @@
 # -*- coding: utf-8 -*-
-# for localized messages
-from __future__ import print_function
-from __future__ import absolute_import
-from .__init__ import _
-from Plugins.Plugin import PluginDescriptor
-from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
+from __future__ import print_function, absolute_import
+from .__init__ import _  # for localized messages
+from os import system
+from requests import get, exceptions
+from subprocess import check_output, Popen
+from six.moves.urllib.parse import quote
+from six import ensure_binary
+from time import strptime, strftime
+from twisted.internet import defer
+from twisted.internet.reactor import callInThread
+from xml.etree.cElementTree import fromstring as cet_fromstring
+from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER, ePicLoad, eEnv
+from Components.Pixmap import Pixmap
+from Components.AVSwitch import AVSwitch
 from Components.MenuList import MenuList
 from Components.ActionMap import ActionMap
+from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
-from xml.etree.cElementTree import fromstring as cet_fromstring
-from twisted.internet import defer
-from twisted.web.client import getPage, downloadPage
-from Components.Pixmap import Pixmap
-from .GlobalFunctions import Showiframe
-from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER, ePicLoad, eEnv
-from Tools.Directories import fileExists, pathExists
-from Components.AVSwitch import AVSwitch
 from Components.config import ConfigSubsection, getConfigListEntry, ConfigText, ConfigSelection, ConfigSubList, configfile, ConfigInteger, config
-from Components.ConfigList import ConfigList, ConfigListScreen
-import time
-import os
-import subprocess
-
-from six.moves.urllib.parse import quote
-import six
+from Screens.Screen import Screen
+from Screens.MessageBox import MessageBox
+from Tools.Directories import fileExists, pathExists
+from .GlobalFunctions import Showiframe
 
 config.plugins.mc_wi = ConfigSubsection()
 config.plugins.mc_wi.entrycount = ConfigInteger(0)
@@ -62,7 +59,27 @@ class WeatherIconItem:
 
 
 def download(item):
-	return downloadPage(six.ensure_binary(item.url), open(item.filename, 'wb'))
+	return callInThread(threadDownloadPage, item.url, open(item.filename, 'wb'))
+
+def threadDownloadPage(self, link, file):
+	link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
+	try:
+		response = get(link)
+		response.raise_for_status()
+		with open(file, "wb") as f:
+			f.write(response.content)
+	except exceptions.RequestException as error:
+		pass
+
+def threadGetPage(self, link, success, fail=None):
+	link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
+	try:
+		response = get(ensure_binary(link))
+		response.raise_for_status()
+		success(response.content)
+	except exceptions.RequestException as error:
+		if fail is not None:
+			fail(error)
 
 
 class MC_WeatherInfo(Screen):
@@ -119,7 +136,8 @@ class MC_WeatherInfo(Screen):
 		if self.weatherPluginEntry is not None:
 			self["statustext"].text = _("Loading information...")
 			url = "http://weather.service.msn.com/data.aspx?weadegreetype=%s&culture=%s&wealocations=%s" % (self.weatherPluginEntry.degreetype.value, self.language, self.weatherPluginEntry.weatherlocationcode.value)
-			getPage(six.ensure_binary(url)).addCallback(self.xmlCallback).addErrback(self.error)
+			callInThread(threadGetPage, url, self.xmlCallback, self.error)
+
 		else:
 			self["statustext"].text = _("No locations defined...\nPress 'Blue' to do that.")
 
@@ -128,15 +146,14 @@ class MC_WeatherInfo(Screen):
 		downname = "/tmp/.stadtindex"
 		stadd = stadt
 		if fileExists(downname):
-			os.system("rm -rf " + downname)
-		downloadPage(six.ensure_binary(downlink), downname).addCallback(self.jpgdown, stadd).addErrback(self.error)
-
+			system("rm -rf " + downname)
+		callInThread(self.threadDownloadPage, downlink, downname, (self.jpgdown, stadd), elf.error)
 	def jpgdown(self, value, stadd):
-		downlink = subprocess.check_output("cat /tmp/.stadtindex | grep \"background-image:url('http://mytown.de/\" | cut -d \"'\" -f2")
+		downlink = check_output("cat /tmp/.stadtindex | grep \"background-image:url('http://mytown.de/\" | cut -d \"'\" -f2")
 		stadt = stadd
 		downname = "/tmp/" + stadt + ".jpg"
-		downloadPage(six.ensure_binary(downlink), downname).addCallback(self.makemvi, stadt).addErrback(self.error)
-
+		callInThread(self.threadDownloadPage, downlink, downname, (self.makemvi, stadt), self.error)
+	
 	def makemvi(self, value, stadt):
 		mviname = "/tmp/" + stadt + ".m1v"
 		if fileExists(mviname) is False:
@@ -147,7 +164,7 @@ class MC_WeatherInfo(Screen):
 				ffmpeg = "/usr/bin/ffmpeg"
 			if fileExists("/sbin/ffmpeg") or fileExists("/sbin/ffmpeg"):
 				cmd = [ffmpeg, "-f", "image2", "-i", "/tmp/" + stadt + ".jpg", mviname]
-				subprocess.Popen(cmd).wait()
+				Popen(cmd).wait()
 			if fileExists(mviname):
 				self.showiframe.showStillpicture(mviname)
 
@@ -231,8 +248,8 @@ class MC_WeatherInfo(Screen):
 					self["condition"].text = items.attrib.get("skytext").encode("utf-8", 'ignore')
 					self["humidity"].text = _("Humidity: %s %%") % items.attrib.get("humidity").encode("utf-8", 'ignore')
 					self["wind_condition"].text = items.attrib.get("winddisplay").encode("utf-8", 'ignore')
-					c = time.strptime(items.attrib.get("observationtime").encode("utf-8", 'ignore'), "%H:%M:%S")
-					self["observationtime"].text = _("Observation time: %s") % time.strftime("%H:%M", c)
+					c = strptime(items.attrib.get("observationtime").encode("utf-8", 'ignore'), "%H:%M:%S")
+					self["observationtime"].text = _("Observation time: %s") % strftime("%H:%M", c)
 					self["observationpoint"].text = _("Observation point: %s") % items.attrib.get("observationpoint").encode("utf-8", 'ignore')
 					self["feelsliketemp"].text = _("Feels like %s") % items.attrib.get("feelslike").encode("utf-8", 'ignore') + "°" + degreetype
 					skycode = "%s.gif" % items.attrib.get("skycode").encode("utf-8", 'ignore')
@@ -247,8 +264,8 @@ class MC_WeatherInfo(Screen):
 						self.showIcon(-1, filenamepng)
 				elif items.tag == "forecast" and index <= 4:
 					index += 1
-					c = time.strptime(items.attrib.get("date").encode("utf-8", 'ignore'), "%Y-%m-%d")
-					self["weekday%s" % index].text = "%s\n%s" % (items.attrib.get("day").encode("utf-8", 'ignore'), time.strftime("%d. %b", c))
+					c = strptime(items.attrib.get("date").encode("utf-8", 'ignore'), "%Y-%m-%d")
+					self["weekday%s" % index].text = "%s\n%s" % (items.attrib.get("day").encode("utf-8", 'ignore'), strftime("%d. %b", c))
 					lowTemp = items.attrib.get("low").encode("utf-8", 'ignore')
 					highTemp = items.attrib.get("high").encode("utf-8", 'ignore')
 					self["weekday%s_temp" % index].text = "Min: %s°%s \n Max: %s°%s" % (lowTemp, degreetype, highTemp, degreetype)
@@ -483,7 +500,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 			if language == "en-EN":  # hack
 				language = "en-US"
 			url = "http://weather.service.msn.com/find.aspx?outputview=search&weasearchstr=%s&culture=%s" % (quote(self.current.city.value), language)
-			getPage(six.ensure_binary(url)).addCallback(self.xmlCallback).addErrback(self.error)
+			callInThread(threadGetPage, url, self.xmlCallback, self.error)
 		else:
 			self.session.open(MessageBox, _("You need to enter a valid city name before you can search for the location code."), MessageBox.TYPE_ERROR)
 

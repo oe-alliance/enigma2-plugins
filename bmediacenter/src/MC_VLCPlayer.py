@@ -1,21 +1,16 @@
 from __future__ import print_function
+from pyexpat import ExpatError
 from enigma import eServiceReference, iPlayableService, eServiceCenter
-from Screens.Screen import Screen
-from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Label import Label
 from Components.Button import Button
-from Components.Sources.StaticText import StaticText
 from Components.Sources.List import List
-from Components.ServiceEventTracker import ServiceEventTracker
-
-from Screens.MessageBox import MessageBox
-
+from Components.config import config, ConfigSubsection, ConfigText
 from Components.ConfigList import ConfigListScreen
-from Components.config import *
-
-from pyexpat import ExpatError
-
-from os import path as os_path
+from Components.Sources.StaticText import StaticText
+from Components.ActionMap import ActionMap, NumberActionMap
+from Components.ServiceEventTracker import ServiceEventTracker
+from Screens.Screen import Screen
+from Screens.MessageBox import MessageBox
 
 path = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/"
 

@@ -1,33 +1,31 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-from __future__ import absolute_import
+from __future__ import print_function, absolute_import
+from os import system, remove, path, remove, listdir, walk
 from enigma import eTimer, iServiceInformation, iPlayableService, ePicLoad, RT_VALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, gFont, eListbox, ePoint, eListboxPythonMultiContent, eServiceCenter
-from Components.MenuList import MenuList
-from Screens.Screen import Screen
-from Screens.ServiceInfo import ServiceInfoList, ServiceInfoListEntry
-from Components.ActionMap import ActionMap, NumberActionMap, HelpableActionMap
-from Components.Pixmap import Pixmap
 from Components.Label import Label
-from Screens.ChoiceBox import ChoiceBox
-from ServiceReference import ServiceReference
 from Components.Button import Button
-from Components.ScrollLabel import ScrollLabel
+from Components.Pixmap import Pixmap
+from Components.MenuList import MenuList
 from Components.Sources.List import List
+from Components.ConfigList import ConfigList
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, ConfigText
+from Components.ScrollLabel import ScrollLabel
+from Components.ServiceEventTracker import ServiceEventTracker
+from Components.ActionMap import ActionMap, NumberActionMap, HelpableActionMap
+from Components.Playlist import PlaylistIOInternal, PlaylistIOM3U, PlaylistIOPLS
+from ServiceReference import ServiceReference
+from Screens.Screen import Screen
+from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.HelpMenu import HelpableScreen
-from twisted.internet import reactor, defer
-from twisted.web import client
-from twisted.web.client import HTTPClientFactory, downloadPage
-from Components.ServiceEventTracker import ServiceEventTracker
-from Components.Playlist import PlaylistIOInternal, PlaylistIOM3U, PlaylistIOPLS
-from Components.ConfigList import ConfigList, ConfigListScreen
-from Components.config import *
-from Tools.Directories import resolveFilename, fileExists, pathExists, createDir, SCOPE_MEDIA, SCOPE_PLAYLIST, SCOPE_SKIN_IMAGE
-from .MC_Filelist import FileList
 from Screens.InfoBarGenerics import InfoBarSeek
-import os
-from os import path as os_path, remove as os_remove, listdir as os_listdir
-from .__init__ import _
+from Tools.Directories import resolveFilename, fileExists, pathExists, SCOPE_MEDIA, SCOPE_PLAYLIST, SCOPE_SKIN_IMAGE
+from twisted.internet import reactor
+from twisted.web import client
+from twisted.web.client import HTTPClientFactory
+from .MC_Filelist import FileList
+from .__init__ import _  # for localized messages
+
 config.plugins.mc_ap = ConfigSubsection()
 sorts = [('default', _("default")), ('alpha', _("alphabet")), ('alphareverse', _("alphabet backward")), ('date', _("date")), ('datereverse', _("date backward")), ('size', _("size")), ('sizereverse', _("size backward"))]
 config.plugins.mc_ap_sortmode = ConfigSubsection()
@@ -36,10 +34,11 @@ config.plugins.mc_ap.showJpg = ConfigYesNo(default=True)
 config.plugins.mc_ap.jpg_delay = ConfigInteger(default=10, limits=(5, 999))
 config.plugins.mc_ap.repeat = ConfigSelection(default="off", choices=[("off", "off"), ("single", "single"), ("all", "all")])
 config.plugins.mc_ap.lastDir = ConfigText(default=resolveFilename(SCOPE_MEDIA))
+
 screensaverlist = [('default', _("default"))]
 hddpath = "/hdd/saver/"
 if pathExists(hddpath):
-	files = os_listdir(hddpath)
+	files = listdir(hddpath)
 	for x in files:
 		if pathExists(hddpath + x):
 			screensaverlist += [(hddpath + '%s/' % (x), _("%s") % (x))]
@@ -78,7 +77,7 @@ class myHTTPClientFactory(HTTPClientFactory):
 
 def sendUrlCommand(url, contextFactory=None, timeout=50, *args, **kwargs):
 	if hasattr(client, '_parse'):
-		scheme, host, port, path = client._parse(url)
+		scheme, host, port, filepath = client._parse(url)
 	else:
 		# _URI class renamed to URI in 15.0.0
 		try:
@@ -89,7 +88,7 @@ def sendUrlCommand(url, contextFactory=None, timeout=50, *args, **kwargs):
 		scheme = uri.scheme
 		host = uri.host
 		port = uri.port
-		path = uri.path
+		filepath = uri.path
 	factory = myHTTPClientFactory(url, *args, **kwargs)
 	reactor.connectTCP(host, port, factory, timeout=timeout)
 	return factory.deferred
@@ -102,7 +101,7 @@ def PlaylistEntryComponent(serviceref, state=None):
 	res = [serviceref]
 	text = serviceref.getName()
 	if text == "":
-		text = os_path.split(serviceref.getPath().split('/')[-1])[1]
+		text = path.split(serviceref.getPath().split('/')[-1])[1]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 25, 1, 470, 22, 0, RT_VALIGN_CENTER, text))
 	return res
 
@@ -206,7 +205,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 			if config.av.downmix_ac3.value == False:
 				config.av.downmix_ac3.value = True
 				config.av.downmix_ac3.save()
-				os.system("touch /tmp/.ac3on")
+				system("touch /tmp/.ac3on")
 		except Exception as e:
 			print("Media Center: no ac3")
 		self["play"] = Pixmap()
@@ -528,7 +527,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 	def deleteFileConfirmed(self, confirmed):
 		if confirmed:
 			delfile = self["filelist"].getFilename()
-			os.remove(delfile)
+			remove(delfile)
 			sort = config.plugins.mc_ap_sortmode.enabled.value
 			self.filelist.refresh(sort)
 
@@ -548,7 +547,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 			path = mcpath + "saver/"
 		else:
 			path = config.plugins.mc_ap.whichjpg.value
-		for root, dirs, files in os.walk(path):
+		for root, dirs, files in walk(path):
 			for name in files:
 				if name.endswith(".jpg"):
 					self.jpgList.append(name)
@@ -647,7 +646,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 			MC_AudioPlayer.currPlaying = len(self.playlist) - 1
 			self.PlayServicepls()
 		elif choice[1] == "copyfiles":
-			self.addDirtoPls(os_path.dirname(self.filelist.getSelection()[0].getPath()) + "/", recursive=False)
+			self.addDirtoPls(path.dirname(self.filelist.getSelection()[0].getPath()) + "/", recursive=False)
 		elif choice[1] == "deletefile":
 			self.deleteFile()
 		elif choice[1] == "shuffle":
@@ -667,10 +666,10 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		self.FileInfoTimer.stop()
 		del self["coverArt"].picload
 		del self["screensaver"].picload
-		if os.path.isfile("/tmp/.ac3on"):
+		if path.isfile("/tmp/.ac3on"):
 			config.av.downmix_ac3.value = False
 			config.av.downmix_ac3.save()
-			os.remove("/tmp/.ac3on")
+			remove("/tmp/.ac3on")
 		config.plugins.mc_ap.save()
 		if self.session.nav.getCurrentService() is not None:
 			self.session.nav.stopService()
@@ -704,7 +703,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 			if config.av.downmix_ac3.value == False:
 				config.av.downmix_ac3.value = True
 				config.av.downmix_ac3.save()
-				os.system("touch /tmp/.ac3on")
+				system("touch /tmp/.ac3on")
 		except Exception as e:
 			print("Media Center: no ac3")
 		self["play"] = Pixmap()
@@ -894,7 +893,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 	def deleteFileConfirmed(self, confirmed):
 		if confirmed:
 			delfile = self["filelist"].getFilename()
-			os.remove(delfile)
+			remove(delfile)
 			sort = config.plugins.mc_ap_sortmode.enabled.value
 			self.filelist.refresh(sort)
 
@@ -903,7 +902,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 			path = mcpath + "saver/"
 		else:
 			path = config.plugins.mc_ap.whichjpg.value
-		for root, dirs, files in os.walk(path):
+		for root, dirs, files in walk(path):
 			for name in files:
 				if name.endswith(".jpg"):
 					self.jpgList.append(name)
@@ -954,10 +953,10 @@ class MC_WebRadio(Screen, HelpableScreen):
 			return
 		self.FileInfoTimer.stop()
 		del self["screensaver"].picload
-		if os.path.isfile("/tmp/.ac3on"):
+		if path.isfile("/tmp/.ac3on"):
 			config.av.downmix_ac3.value = False
 			config.av.downmix_ac3.save()
-			os.remove("/tmp/.ac3on")
+			remove("/tmp/.ac3on")
 		if self.session.nav.getCurrentService() is not None:
 			self.session.nav.stopService()
 		MC_AudioPlayer.STATE = "NONE"
@@ -971,7 +970,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 
 	def showMenu(self):
 		if fileExists("/tmp/index.html"):
-			os.remove("/tmp/index.html")
+			remove("/tmp/index.html")
 		menu = []
 		menu.append((_("70-80er"), "70-80er/"))
 		menu.append((_("Alternative"), "Alternative/"))
@@ -1001,7 +1000,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 	def menuCallback(self, choice):
 		if choice is None:
 			return
-		os.system("echo " + choice[1] + " > /tmp/.webselect | wget -O /tmp/index.html " + radirl + "" + choice[1])
+		system("echo " + choice[1] + " > /tmp/.webselect | wget -O /tmp/index.html " + radirl + "" + choice[1])
 		self.session.openWithCallback(self.updd, MC_WebDown)
 
 
@@ -1024,12 +1023,12 @@ class MC_WebDown(Screen):
 		selection = self["menu"].getCurrent()
 		if selection is not None:
 			gen = open("/tmp/.webselect").read().split('\n')
-			os.system("wget -O '" + mcpath + "radio/" + selection[1] + "' '" + radirl + "" + gen[0] + "" + selection[1].replace(" ", "%20") + "'")
-			os.remove("/tmp/index.html")
+			system("wget -O '" + mcpath + "radio/" + selection[1] + "' '" + radirl + "" + gen[0] + "" + selection[1].replace(" ", "%20") + "'")
+			remove("/tmp/index.html")
 			self.close()
 
 	def exit(self):
-		os.remove("/tmp/index.html")
+		remove("/tmp/index.html")
 		self.close()
 
 
@@ -1258,7 +1257,7 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 		listpath = []
 		playlistdir = resolveFilename(SCOPE_PLAYLIST)
 		try:
-			for i in os_listdir(playlistdir):
+			for i in listdir(playlistdir):
 				listpath.append((i, playlistdir + i))
 		except IOError as e:
 			print("Error while scanning subdirs ", e)
@@ -1279,7 +1278,7 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 		listpath = []
 		playlistdir = resolveFilename(SCOPE_PLAYLIST)
 		try:
-			for i in os_listdir(playlistdir):
+			for i in listdir(playlistdir):
 				listpath.append((i, playlistdir + i))
 		except IOError as e:
 			print("Error while scanning subdirs ", e)
@@ -1293,7 +1292,7 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 	def delete_saved_pls_conf(self, confirmed):
 		if confirmed:
 			try:
-				os_remove(self.delname)
+				remove(self.delname)
 			except OSError as e:
 				self.session.open(MessageBox, _("Delete failed!"), MessageBox.TYPE_ERROR)
 
@@ -1329,7 +1328,7 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 			path = mcpath + "saver/"
 		else:
 			path = config.plugins.mc_ap.whichjpg.value
-		for root, dirs, files in os.walk(path):
+		for root, dirs, files in walk(path):
 			for name in files:
 				if name.endswith(".jpg"):
 					self.jpgList.append(name)
@@ -1379,7 +1378,7 @@ class Lyrics(Screen):
 		curPlay = self.session.nav.getCurrentService()
 		if curPlay is not None:
 			title = curPlay.info().getInfoString(iServiceInformation.sTagTitle)
-			os.system("echo '" + str(title) + "' > /tmp/.oldplaying | echo '" + str(title) + "' > /tmp/.curplaying ")
+			system("echo '" + str(title) + "' > /tmp/.oldplaying | echo '" + str(title) + "' > /tmp/.curplaying ")
 		self.RFTimer = eTimer()
 		self.RFTimer.callback.append(self.refresh)
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
@@ -1402,7 +1401,7 @@ class Lyrics(Screen):
 		self.RFTimer.start(time, True)
 		curPlay = self.session.nav.getCurrentService()
 		title = curPlay.info().getInfoString(iServiceInformation.sTagTitle)
-		os.system("echo '" + str(title) + "' > /tmp/.curplaying")
+		system("echo '" + str(title) + "' > /tmp/.curplaying")
 		old = open("/tmp/.oldplaying").read()
 		oldtitle = old.split('\r\n')
 		tit = open("/tmp/.curplaying").read()
@@ -1411,7 +1410,7 @@ class Lyrics(Screen):
 			return
 		else:
 			self.startRun()
-			os.system("echo '" + str(title) + "' > /tmp/.oldplaying")
+			system("echo '" + str(title) + "' > /tmp/.oldplaying")
 
 	def startRun(self):
 		text = getEncodedString(self.getLyricsFromID3Tag()).replace("\r\n", "\n")
@@ -1446,7 +1445,7 @@ class Lyrics(Screen):
 		title = root.findtext("{http://api.chartlyrics.com/}LyricSong").encode("utf-8", 'ignore')
 		artist = root.findtext("{http://api.chartlyrics.com/}LyricArtist").encode("utf-8", 'ignore')
 		coverly = root.findtext("{http://api.chartlyrics.com/}LyricCovertArtUrl").encode("utf-8", 'ignore')
-		os.system("wget -O /tmp/.onlinecover " + coverly + "")
+		system("wget -O /tmp/.onlinecover " + coverly + "")
 		self["coverly"].coverlyrics()
 		result = _("Response -> lyrics for: %s (%s)") % (title, artist)
 		self["resulttext"].setText(result)
@@ -1464,9 +1463,9 @@ class Lyrics(Screen):
 	def Exit(self):
 		del self["coverly"].picload
 		if fileExists("/tmp/.onlinecover"):
-			os.remove("/tmp/.onlinecover")
+			remove("/tmp/.onlinecover")
 		if fileExists("/tmp/.curplaying") and fileExists("/tmp/.oldplaying"):
-			os.system("rm -rf /tmp/.*playing")
+			system("rm -rf /tmp/.*playing")
 		self.RFTimer.stop()
 		self.close()
 
