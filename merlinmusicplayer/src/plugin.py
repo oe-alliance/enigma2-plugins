@@ -35,7 +35,7 @@ from os import path, mkdir, listdir, walk, access, W_OK
 from random import shuffle, randrange
 from re import findall, sub, compile, DOTALL
 from requests import get, exceptions
-from six import ensure_binary
+from six import ensure_binary, PY3
 from six.moves.urllib.parse import quote
 from skin import fonts
 from twisted.web import client
@@ -394,18 +394,23 @@ def OpenDatabase():
 
 
 def getEncodedString(value):
-	returnValue = ""
-	try:
-		returnValue = value.encode("utf-8", 'ignore')
-	except UnicodeDecodeError:
-		try:
-			returnValue = value.encode("iso8859-1", 'ignore')
-		except UnicodeDecodeError:
-			try:
-				returnValue = value.decode("cp1252").encode("utf-8")
-			except UnicodeDecodeError:
-				returnValue = "n/a"
-	return returnValue
+    returnValue = ""
+    if PY3:
+        returnValue = value
+        return returnValue
+        return
+    else:
+        try:
+            returnValue = value.encode("utf-8", 'ignore')
+        except UnicodeDecodeError:
+            try:
+                returnValue = value.encode("iso8859-1", 'ignore')
+            except UnicodeDecodeError:
+                try:
+                    returnValue = value.decode("cp1252").encode("utf-8")
+                except UnicodeDecodeError:
+                    returnValue = "n/a"
+    return returnValue
 
 
 def getID3Tags(root, filename):
@@ -1370,7 +1375,11 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			self["dvrStatus"].setPixmapNum(0)
 
 	def pauseEntry(self):
-		self.pauseService()
+		self.updatedSeekState()
+		if self.seekstate == self.SEEK_STATE_PAUSE:
+			self.unPauseService()
+		else:
+			self.pauseService()
 		self.resetScreenSaverTimer()
 
 	def play(self):
@@ -1384,7 +1393,8 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		self.resetScreenSaverTimer()
 
 	def unPauseService(self):
-		self.setSeekState(self.SEEK_STATE_PLAY)
+		if self.seekstate == self.SEEK_STATE_PAUSE:
+			self.setSeekState(self.SEEK_STATE_PLAY)
 
 	def stopEntry(self):
 		self.seek = None
