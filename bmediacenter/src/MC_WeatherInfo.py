@@ -61,6 +61,7 @@ class WeatherIconItem:
 def download(item):
 	return callInThread(threadDownloadPage, item.url, open(item.filename, 'wb'))
 
+
 def threadDownloadPage(self, link, file):
 	link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
 	try:
@@ -70,6 +71,7 @@ def threadDownloadPage(self, link, file):
 			f.write(response.content)
 	except exceptions.RequestException as error:
 		pass
+
 
 def threadGetPage(self, link, success, fail=None):
 	link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
@@ -148,6 +150,7 @@ class MC_WeatherInfo(Screen):
 		if fileExists(downname):
 			system("rm -rf " + downname)
 		callInThread(self.threadDownloadPage, downlink, downname, (self.jpgdown, stadd), elf.error)
+
 	def jpgdown(self, value, stadd):
 		downlink = check_output("cat /tmp/.stadtindex | grep \"background-image:url('http://mytown.de/\" | cut -d \"'\" -f2")
 		stadt = stadd
