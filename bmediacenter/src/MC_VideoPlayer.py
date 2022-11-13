@@ -1,21 +1,17 @@
-from __future__ import print_function
-from __future__ import absolute_import
-from Screens.Screen import Screen
-from Screens.ServiceInfo import ServiceInfoList, ServiceInfoListEntry
-from enigma import iPlayableService, eRect, eServiceReference, iServiceInformation
-from Screens.HelpMenu import HelpableScreen
-from Components.ActionMap import ActionMap, NumberActionMap, HelpableActionMap
-from Components.Pixmap import Pixmap
+from __future__ import print_function, absolute_import
+from re import sub
+from os import system, path, remove
 from Components.Label import Label
 from Components.Button import Button
-from Components.ConfigList import ConfigList, ConfigListScreen
-from Components.config import *
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigText
+from Components.ConfigList import ConfigListScreen
+from Components.ActionMap import NumberActionMap, HelpableActionMap
+from Screens.Screen import Screen
+from Screens.HelpMenu import HelpableScreen
 from Screens.InfoBar import MoviePlayer as OrgMoviePlayer
 from Tools.Directories import resolveFilename, pathExists, fileExists, SCOPE_MEDIA
 from .MC_Filelist import FileList
 from .GlobalFunctions import shortname, MC_VideoInfoView, Showiframe
-import re
-import os
 config.plugins.mc_vp = ConfigSubsection()
 config.plugins.mc_vp_sortmode = ConfigSubsection()
 sorts = [('default', _("default")), ('alpha', _("alphabet")), ('alphareverse', _("alphabet backward")), ('date', _("date")), ('datereverse', _("date backward")), ('size', _("size")), ('sizereverse', _("size backward"))]
@@ -50,7 +46,7 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 		self.showiframe = Showiframe()
 		self.mvion = False
 		self.curfavfolder = -1
-		os.system("touch /tmp/bmcmovie")
+		system("touch /tmp/bmcmovie")
 		self["actions"] = HelpableActionMap(self, "MC_VideoPlayerActions",
 			{
 				"ok": (self.KeyOk, "Play selected file"),
@@ -138,10 +134,10 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 				self.showiframe.finishStillPicture()
 				from Screens import DVD
 				if self.filename.endswith('VIDEO_TS/'):
-					path = os.path.split(self.filename.rstrip('/'))[0]
+					filepath = path.split(self.filename.rstrip('/'))[0]
 				else:
-					path = self.filename
-				self.session.open(DVD.DVDPlayer, dvd_filelist=[path])
+					filepath = self.filename
+				self.session.open(DVD.DVDPlayer, dvd_filelist=[filepath])
 				return
 		except Exception as e:
 			print("DVD Player error:", e)
@@ -156,7 +152,7 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 		short = shortname(filename)
 		newshort = short.lower()
 		newshort = newshort.replace(" ", "")
-		movienameserie = re.sub("e[0-9]{2}", "", newshort.lower())
+		movienameserie = sub("e[0-9]{2}", "", newshort.lower())
 		covername = "/hdd/bmcover/" + str(movienameserie) + "/backcover.mvi"
 		if fileExists(covername):
 			self.showiframe.showStillpicture(covername)
@@ -190,7 +186,7 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 			config.plugins.mc_vp.lastDir.value = self.filelist.getCurrentDirectory()
 		config.plugins.mc_vp.save()
 		try:
-			os.remove("/tmp/bmcmovie")
+			remove("/tmp/bmcmovie")
 		except:
 			pass
 		self.showiframe.finishStillPicture()

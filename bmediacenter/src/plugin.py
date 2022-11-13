@@ -1,17 +1,17 @@
 from __future__ import absolute_import
-import os
-import subprocess
+from os import mkdir, system
+from skin import loadSkin
+from subprocess import check_output
 from Components.ActionMap import ActionMap
-from Components.config import *
 from Components.Pixmap import Pixmap
 from Components.Sources.List import List
 from Components.Label import Label
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from skin import loadSkin
 from Tools.Directories import pathExists, fileExists
-from .__init__ import _
+from .__init__ import _  # for localized messages
 
 config.plugins.mc_global = ConfigSubsection()
 config.plugins.mc_global.vfd = ConfigSelection(default='off', choices=[('off', 'off'), ('on', 'on')])
@@ -100,8 +100,8 @@ class DMC_MainMenu(Screen):
 #			evfd.getInstance().vfd_write_string(_("My Music"))
 		if config.plugins.mc_globalsettings.upnp_enable.getValue():
 			if fileExists("/media/upnp") is False:
-				os.mkdir("/media/upnp")
-			os.system('djmount /media/upnp &')
+				mkdir("/media/upnp")
+			system('djmount /media/upnp &')
 
 	def next(self):
 		self["menu"].selectNext()
@@ -199,15 +199,15 @@ class DMC_MainMenu(Screen):
 		if self.can_osd_alpha:
 			try:
 				if config.plugins.mc_global.vfd.value == "on":
-					trans = subprocess.check_output('cat /etc/enigma2/settings | grep config.av.osd_alpha | cut -d "=" -f2')
+					trans = check_output('cat /etc/enigma2/settings | grep config.av.osd_alpha | cut -d "=" -f2')
 				else:
-					trans = subprocess.check_output('cat /etc/enigma2/settings | grep config.osd.alpha | cut -d "=" -f2')
+					trans = check_output('cat /etc/enigma2/settings | grep config.osd.alpha | cut -d "=" -f2')
 				open("/proc/stb/video/alpha", "w").write(str(trans))
 			except:
 				print("Set OSD Transparacy failed")
 #		if config.plugins.mc_global.vfd.value == "on":
 #			evfd.getInstance().vfd_write_string(_("Media Center"))
-		os.system('umount /media/upnp')
+		system('umount /media/upnp')
 		self.session.nav.playService(self.oldbmcService)
 		self.close()
 

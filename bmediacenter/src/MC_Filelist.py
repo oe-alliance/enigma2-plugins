@@ -1,13 +1,11 @@
 from re import compile as re_compile
-from os import path as os_path, listdir
-import os
-import time
-import random
+from random import shuffle
+from os import path as os_path, listdir, stat
+from time import localtime
+from enigma import RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, eServiceReference, eServiceCenter, gFont
 from Components.MenuList import MenuList
 from Components.Harddisk import harddiskmanager
 from Tools.Directories import SCOPE_CURRENT_SKIN, resolveFilename, pathExists, fileExists
-from enigma import RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, \
-	eServiceReference, eServiceCenter, gFont
 from Tools.LoadPixmap import LoadPixmap
 EXTENSIONS = {
 		"m4a": "music",
@@ -141,9 +139,9 @@ class FileList(MenuList):
 		isDir = False
 		if sort == "shuffle":
 			sort = "default"
-			shuffle = True
+			shuffleplay = True
 		else:
-			shuffle = False
+			shuffleplay = False
 		self.list = []
 		if self.current_directory is None:
 			if directory and self.showMountpoints:
@@ -205,9 +203,9 @@ class FileList(MenuList):
 					file = x
 					path = x
 					if pathExists(path):
-						stats = os.stat(path)
+						stats = stat(path)
 						size = stats[6]
-						lastmod_date = time.localtime(stats[8])
+						lastmod_date = localtime(stats[8])
 					else:
 						size = 0
 						lastmod_date = 0
@@ -226,9 +224,9 @@ class FileList(MenuList):
 					name = path.split('/')[-1]
 					file = x
 					if pathExists(path):
-						stats = os.stat(path)
+						stats = stat(path)
 						size = stats[6]
-						lastmod_date = time.localtime(stats[8])
+						lastmod_date = localtime(stats[8])
 					else:
 						size = 0
 						lastmod_date = 0
@@ -254,8 +252,8 @@ class FileList(MenuList):
 			date_file_list.sort()
 		if sort == "date" or sort == "alphareverse" or sort == "size":
 			date_file_list.reverse()
-		if shuffle == True:
-			random.shuffle(date_file_list)
+		if shuffleplay == True:
+			shuffle(date_file_list)
 		for x in date_file_list:
 			if sort == "size" or sort == "sizereverse":
 				size = x[0]

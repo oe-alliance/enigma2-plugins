@@ -1,19 +1,15 @@
 from __future__ import absolute_import
+from os import mkdir
+from six import ensure_str
+from boxbranding import getMachineBrand, getMachineName
+from Components.Console import Console
+from Components.ConfigList import ConfigList
+from Components.config import config, getConfigListEntry
+from Components.ActionMap import NumberActionMap
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
-from boxbranding import getMachineBrand, getMachineName
-from Components.ActionMap import ActionMap, NumberActionMap
-from Components.Label import Label
-from Components.Sources.List import List
-from Components.Sources.StaticText import StaticText
-from Components.MenuList import MenuList
-from Components.ConfigList import ConfigList, ConfigListScreen
-from Components.config import *
-from Components.Console import Console
-from .__init__ import _
-from os import mkdir
-import six
+from .__init__ import _  # for localized messages
 mcpath = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/"
 #try:
 #	from enigma import evfd
@@ -71,7 +67,7 @@ class MC_Settings(Screen):
 			self.close()
 
 	def checkNetworkState(self, str, retval, extra_args):
-		result = six.ensure_str(result)
+		result = ensure_str(result)
 		if str.find('Collected errors') != -1:
 			self.session.openWithCallback(self.close, MessageBox, _("A background update check is is progress, please wait a few minutes and try again."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 		elif not str:
@@ -84,7 +80,7 @@ class MC_Settings(Screen):
 			self.close()
 
 	def checkNetworkStateFinished(self, result, retval, extra_args=None):
-		result = six.ensure_str(result)
+		result = sensure_str(result)
 		if result.find('bad address') != -1:
 			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Your %s %s is not connected to the internet, please check your network settings and try again.") % (getMachineBrand(), getMachineName()), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 		elif result.find('wget returned 1') != -1 or result.find('wget returned 255') != -1 or result.find('404 Not Found') != -1:

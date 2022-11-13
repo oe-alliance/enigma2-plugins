@@ -1,23 +1,10 @@
-from enigma import eRect, eServiceReference, iServiceInformation, iPlayableService
+from re import sub
+from enigma import iServiceInformation
+from Components.ActionMap import ActionMap
 from Screens.Screen import Screen
 from Screens.ServiceInfo import ServiceInfoList, ServiceInfoListEntry
-from Components.ActionMap import ActionMap, NumberActionMap
-from Components.Pixmap import Pixmap
-from Components.Label import Label
-from Components.ScrollLabel import ScrollLabel
-from Tools.Directories import resolveFilename, pathExists, fileExists, SCOPE_MEDIA
-from Components.Sources.List import List
-from Components.ServicePosition import ServicePositionGauge
-from Components.ServiceEventTracker import ServiceEventTracker
-from Components.Sources.StaticText import StaticText
-from Components.ConfigList import ConfigList, ConfigListScreen
-from Components.config import *
-from Components.FileList import FileList
-from _ctypes import *
-import os
-import re
-from os import path as os_path
-#------------------------------------------------------------------------------------------
+from Tools.Directories import fileExists
+from _ctypes import dlopen, dlsym, call_function
 
 
 class MC_VideoInfoView(Screen):
@@ -76,35 +63,35 @@ def shortname(movie, showing=None):
 			movie = n
 	movie = movie.upper()
 	movieback = movie
-	movie = re.sub("\W720P(.*[^.]+).", "", movie)
-	movie = re.sub("\W1080I(.*[^.]+).", "", movie)
-	movie = re.sub("\W1080P(.*[^.]+).", "", movie)
-	movie = re.sub("\W[(].*?[)](.*[^.]+).", "", movie)
-	movie = re.sub("\W[[].*?[]](.*[^.]+).", "", movie)
-	movie = re.sub("\W[0-9]{4}", "", movie)
+	movie = sub("\W720P(.*[^.]+).", "", movie)
+	movie = sub("\W1080I(.*[^.]+).", "", movie)
+	movie = sub("\W1080P(.*[^.]+).", "", movie)
+	movie = sub("\W[(].*?[)](.*[^.]+).", "", movie)
+	movie = sub("\W[[].*?[]](.*[^.]+).", "", movie)
+	movie = sub("\W[0-9]{4}", "", movie)
 	if not showing:
-		movie = re.sub("\WDVDRIP(.*[^.]+).", "", movie)
-		movie = re.sub("\WAC3D(.*[^.]+).", "", movie)
-		movie = re.sub("\WAC3(.*[^.]+).", "", movie)
-		movie = re.sub("\WX264(.*[^.]+).", "", movie)
-		movie = re.sub("\WXVID(.*[^.]+).", "", movie)
-		movie = re.sub("\WBLURAY(.*[^.]+).", "", movie)
-		movie = re.sub("\WGERMAN(.*[^.]+).", "", movie)
-		movie = re.sub("\WCD[0-9]{2}", "", movie)
-		movie = re.sub("\WCD[0-9]", "", movie)
-		movie = re.sub("\WDVD[0-9]{2}", "", movie)
-		movie = re.sub("\WDVD[0-9]", "", movie)
-		movie = re.sub("\WDISC[0-9]{2}", "", movie)
-		movie = re.sub("\WDISC[0-9]", "", movie)
-		movie = re.sub("\W[0-9]{2}DISC", "", movie)
-		movie = re.sub("\W[0-9]DISC", "", movie)
-#		movie = re.sub("\WS[0-9]{2}","",movie)
-#		movie = re.sub("\WE[0-9]{2}","",movie)
-		movie = re.sub("\WSEASON[0-9]{2}", "", movie)
-		movie = re.sub("\WSEASON[0-9]", "", movie)
+		movie = sub("\WDVDRIP(.*[^.]+).", "", movie)
+		movie = sub("\WAC3D(.*[^.]+).", "", movie)
+		movie = sub("\WAC3(.*[^.]+).", "", movie)
+		movie = sub("\WX264(.*[^.]+).", "", movie)
+		movie = sub("\WXVID(.*[^.]+).", "", movie)
+		movie = sub("\WBLURAY(.*[^.]+).", "", movie)
+		movie = sub("\WGERMAN(.*[^.]+).", "", movie)
+		movie = sub("\WCD[0-9]{2}", "", movie)
+		movie = sub("\WCD[0-9]", "", movie)
+		movie = sub("\WDVD[0-9]{2}", "", movie)
+		movie = sub("\WDVD[0-9]", "", movie)
+		movie = sub("\WDISC[0-9]{2}", "", movie)
+		movie = sub("\WDISC[0-9]", "", movie)
+		movie = sub("\W[0-9]{2}DISC", "", movie)
+		movie = sub("\W[0-9]DISC", "", movie)
+#		movie = sub("\WS[0-9]{2}","",movie)
+#		movie = sub("\WE[0-9]{2}","",movie)
+		movie = sub("\WSEASON[0-9]{2}", "", movie)
+		movie = sub("\WSEASON[0-9]", "", movie)
 
-	movie = re.sub("[0-9]{8} ", "", movie)
-	movie = re.sub(" -", "-", movie)
+	movie = sub("[0-9]{8} ", "", movie)
+	movie = sub(" -", "-", movie)
 	if len(movie) != 0:
 		if movie[0] == '-':
 			moviesplit = movie.split('-')[2:]
