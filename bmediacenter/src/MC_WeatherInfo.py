@@ -156,7 +156,7 @@ class MC_WeatherInfo(Screen):
 		stadt = stadd
 		downname = "/tmp/" + stadt + ".jpg"
 		callInThread(self.threadDownloadPage, downlink, downname, (self.makemvi, stadt), self.error)
-	
+
 	def makemvi(self, value, stadt):
 		mviname = "/tmp/" + stadt + ".m1v"
 		if fileExists(mviname) is False:
