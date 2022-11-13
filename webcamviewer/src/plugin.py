@@ -25,12 +25,14 @@ from Components.Pixmap import Pixmap
 from Plugins.Plugin import PluginDescriptor
 from Tools.Notifications import AddPopup
 ### System
-import os
+from os import path, listdir, mkdir
+from os.path import isdir, isfile, exists, basename
 from re import compile
 from itertools import chain
+from six import ensure_binary, ensure_str
 ## XML
 from pyexpat import ExpatError
-import xml.dom.minidom
+from xml.dom.minidom import parse, Element
 
 ### my
 from .WebcamViewConfig import WebcamViewerMenu
@@ -78,13 +80,13 @@ def startWebcamviewer(session, **kwargs):
 	warnmsgs = []
 	errmsgs = []
 	while xmlpaths:
-		path = xmlpaths.pop(0)
-		if not os.path.isfile(path):
-			warnmsgs.append(_("Config file %s not found.") % (path))
+		filepath = xmlpaths.pop(0)
+		if not isfile(filepath):
+			warnmsgs.append(_("Config file %s not found.") % filepath)
 			continue
-		with open(path) as fp:
+		with open(filepath) as fp:
 			try:
-				xmlnode = xml.dom.minidom.parse(fp)
+				xmlnode = parse(fp)
 				session.openWithCallback(mainCB, WebcamViewer, xmlnode.childNodes[1])
 
 				# show errors in a popup and cleanup pending messages
@@ -98,7 +100,7 @@ def startWebcamviewer(session, **kwargs):
 				del warnmsgs[:]
 				break
 			except ExpatError as e:
-				errmsgs.append(_("Loading config file %s failed: %s") % (path, e))
+				errmsgs.append(_("Loading config file %s failed: %s") % (filepath, e))
 	if errmsgs or warnmsgs:
 		session.open(
 			MessageBox,
@@ -269,8 +271,8 @@ class PictureViewer(Screen):
 		if self.currList == "filelist":
 			# adding all files in current dir to slideshowlist
 			dirname = self["menu"].getCurrentDir()
-			if os.path.isdir(dirname):
-				s = os.listdir(dirname)
+			if isdir(dirname):
+				s = listdir(dirname)
 				s.sort()
 				for file in s:
 					if compile(config.plugins.pictureviewer.matchingPattern.value).search(dirname + file):
@@ -280,7 +282,7 @@ class PictureViewer(Screen):
 			#loading list
 			list = []
 			try:
-				for file in os.listdir(config.plugins.pictureviewer.slideshowdir.value):
+				for file in listdir(config.plugins.pictureviewer.slideshowdir.value):
 					if file.endswith(config.plugins.pictureviewer.slideshowext.value):
 						list.append((_(file.split("/")[-1]), file))
 				self.session.openWithCallback(
@@ -326,7 +328,7 @@ class PictureViewer(Screen):
 					   file = x.replace("\n", "")
 					   if x.startswith("#"):
 						   pass
-					   elif not os.path.exists(file):
+					   elif not exists(file):
 						   print("[" + myname + "] loaded file from filelist isnt avaible! ignoreing ->", file)
 					   else:
 						   list.append((_(file.split("/")[-1]), file))
@@ -340,9 +342,9 @@ class PictureViewer(Screen):
 		if filename is not None:
 			print("[" + myname + "] saving list to ", config.plugins.pictureviewer.slideshowdir.value + filename + config.plugins.pictureviewer.slideshowext.value)
 			try:
-				if not os.path.exists(config.plugins.pictureviewer.slideshowdir.value):
-					print("+" * 10, os.path.basename(filename))
-					os.mkdir(config.plugins.pictureviewer.slideshowdir.value)
+				if not exists(config.plugins.pictureviewer.slideshowdir.value):
+					print("+" * 10, basename(filename))
+					mkdir(config.plugins.pictureviewer.slideshowdir.value)
 				fp = open(config.plugins.pictureviewer.slideshowdir.value + filename + config.plugins.pictureviewer.slideshowext.value, "w")
 				fp.write("# this is a slideshow file for " + myname + " made by V" + myversion + "\n")
 				fp.write("# you can make your own... each line with full path of the imagefile\n")
@@ -357,7 +359,7 @@ class PictureViewer(Screen):
 		if self.currList == "filelist":
 			# add picture to list
 			fullfile = self["menu"].getSelection()[0]
-			if os.path.isfile(fullfile):
+			if isfile(fullfile):
 				self.slideshowfiles.append((_(fullfile.split("/")[-1]), fullfile))
 				self["slist"].l.setList(self.slideshowfiles)
 		else:
@@ -398,7 +400,7 @@ class PictureViewer(Screen):
 					pass
 				else:
 					print("[" + myname + "] file selected ", selection[0])
-					if os.path.isfile(selection[0]):
+					if isfile(selection[0]):
 						self.session.open(PictureScreen, selection[0].split("/")[-1], selection[0])
 					else:
 						print("[" + myname + "] file not found ", selection[0])
@@ -499,7 +501,7 @@ class WebcamViewer(Screen, InfoBarNotifications):
 		if menuitemtitle.startswith("webcam.travel"):
 			self.session.openWithCallback(self.cb, TravelWebcamviewer)
 		elif type.startswith("cam"):
-			self.session.open(PictureScreen, menuitemtitle, data)
+			self.session.open(PictureScreen, ensure_binary(menuitemtitle), ensure_binary(data))
 		else:
 			self.hide()
 			self.session.openWithCallback(self.cb, WebcamViewer, data)
@@ -514,14 +516,14 @@ class WebcamViewer(Screen, InfoBarNotifications):
 		if self.menutitle == "Mainmenu":
 			data.append((_("webcam.travel"), "webcam.travel"))
 		for node in self.xmlnode.childNodes:
-			if node.nodeType != xml.dom.minidom.Element.nodeType or node.tagName != 'menu':
+			if node.nodeType != Element.nodeType or node.tagName != 'menu':
 				continue
 			nodex = {}
 			nodex['name'] = xloader.get_txt(node, "name", "no name")
 			data.append((_("*" + nodex['name']), ["node", node]))
 
 		for node in self.xmlnode.childNodes:
-			if node.nodeType != xml.dom.minidom.Element.nodeType or node.tagName != 'cam':
+			if node.nodeType != Element.nodeType or node.tagName != 'cam':
 				continue
 			nodex = {}
 			nodex['name'] = xloader.get_txt(node, "name", "no name")
@@ -559,11 +561,11 @@ class PictureList(MenuList):
 
 		directories = []
 		files = []
-		files = os.listdir(directory)
+		files = listdir(directory)
 		files.sort()
 		tmpfiles = files[:]
 		for x in tmpfiles:
-			if os.path.isdir(directory + "/" + x):
+			if isdir(directory + "/" + x):
 				directories.append(x)
 				files.remove(x)
 		directories.sort()
@@ -578,11 +580,11 @@ class PictureList(MenuList):
 
 		if self.showFiles:
 			for x in files:
-				path = directory + x
+				filepath = "%s%s" % (directory, x)
 				name = x
 				if self.matchingPattern is not None:
-					if compile(self.matchingPattern).search(path):
-						self.list.append(self.getPictureEntryComponent(name, path, False))
+					if compile(self.matchingPattern).search(filepath):
+						self.list.append(self.getPictureEntryComponent(name, filepath, False))
 				else:
 					pass
 
@@ -641,7 +643,7 @@ class XMLloader:
 	def node_data(self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES):
 		children = self.getElementsByTagName(node, tagName, possibleNamespaces)
 		node = len(children) and children[0] or None
-		return node and "".join([child.data.encode("utf-8") for child in node.childNodes]) or None
+		return node and "".join([ensure_str(child.data.encode("utf-8")) for child in node.childNodes]) or None
 
 	def get_txt(self, node, tagName, default_txt=""):
 		"""
