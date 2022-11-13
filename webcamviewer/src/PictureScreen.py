@@ -12,6 +12,7 @@ from Components.ActionMap import ActionMap
 from Screens.Screen import Screen
 from .FTPDownloader import FTPDownloader
 
+
 def _parse(url, defaultPort=None):
 	url = url.strip()
 	parsed = urlparse(url)
