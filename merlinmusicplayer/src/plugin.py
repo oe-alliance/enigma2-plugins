@@ -397,8 +397,6 @@ def getEncodedString(value):
     returnValue = ""
     if PY3:
         returnValue = value
-        return returnValue
-        return
     else:
         try:
             returnValue = value.encode("utf-8", 'ignore')
