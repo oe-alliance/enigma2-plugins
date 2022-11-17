@@ -1,8 +1,5 @@
 from Components.MenuList import MenuList
-
-from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, \
-	RT_WRAP
-
+from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_WRAP
 from skin import parseFont
 
 

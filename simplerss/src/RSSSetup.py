@@ -1,11 +1,7 @@
-from __future__ import print_function
-from __future__ import absolute_import
-# for localized messages
-from . import _
-
+from __future__ import print_function, absolute_import
+from . import _  # for localized messages
 from Screens.Screen import Screen
-from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
-	ConfigText, getConfigListEntry
+from Components.config import config, ConfigSubsection, ConfigEnableDisable, ConfigText, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from Components.ActionMap import ActionMap
@@ -147,19 +143,16 @@ class RSSSetup(ConfigListScreen, Screen):
 
 	def delete(self):
 		from Screens.MessageBox import MessageBox
-
-		self.session.openWithCallback(
-			self.deleteConfirm,
-			MessageBox,
-			_("Really delete this entry?\nIt cannot be recovered!")
-		)
+		self.session.openWithCallback(self.deleteConfirm, MessageBox, _("Really delete this entry?\nIt cannot be recovered!"))
 
 	def deleteConfirm(self, result):
 		if result:
-			id = self["config"].getCurrentIndex()
-			del config.plugins.simpleRSS.feed[id]
-			config.plugins.simpleRSS.feedcount.value -= 1
-
+			try:
+				id = self["config"].getCurrentIndex()
+				del config.plugins.simpleRSS.feed[id]
+				config.plugins.simpleRSS.feedcount.value -= 1
+			except Exception:
+				pass
 			self.createSetup()
 			self["config"].setList(self.list)
 
