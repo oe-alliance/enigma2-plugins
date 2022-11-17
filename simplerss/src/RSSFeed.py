@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from Plugins.SystemPlugins.Toolkit.TagStrip import strip, strip_readable
-from Components.Scanner import ScanFile
 from six import PY3
+from Components.Scanner import ScanFile
+from Plugins.SystemPlugins.Toolkit.TagStrip import strip, strip_readable
+
 NS_RDF = "{http://www.w3.org/1999/02/22-rdf-syntax-ns#}"
 NS_RSS_09 = "{http://my.netscape.com/rdf/simple/0.9/}"
 NS_RSS_10 = "{http://purl.org/rss/1.0/}"
@@ -99,13 +100,6 @@ class RSSWrapper(ElementWrapper):
 
 	def __getitem__(self, index):
 		return RSSEntryWrapper(self._items[index], self._ns)
-
-	def next(self):
-		idx = self.idx
-		if idx > self.len:
-			raise StopIteration
-		self.idx = idx + 1
-		return self[idx]
 
 
 class RSS1Wrapper(RSSWrapper):
