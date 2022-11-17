@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
-from twisted.web.client import getPage
-from twisted.internet.defer import Deferred
-from twisted.internet import reactor
-
+from requests import get, exceptions
 from six.moves.urllib.parse import urlencode
+from twisted.internet.reactor import callInThread
+from Tools.BoundFunction import boundFunction
 from .GrowleeConnection import emergencyDisable
-from . import NOTIFICATIONID
 
 
 class ProwlAPI:
@@ -26,8 +24,16 @@ class ProwlAPI:
 			'description': description,
 			'priority': priority,
 		}
+		callInThread(self.threadGetPage, boundFunction(b'https://prowl.weks.net/publicapi/add/', method='POST', headers=headers, postdata=urlencode(data)), emergencyDisable)
 
-		getPage(b'https://prowl.weks.net/publicapi/add/', method='POST', headers=headers, postdata=urlencode(data)).addErrback(emergencyDisable)
+	def threadGetPage(self, link, fail=None):
+		link = link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', '')
+		try:
+			response = get(link)
+			response.raise_for_status()
+		except exceptions.RequestException as error:
+			if fail is not None:
+				fail(error)
 
 	def stop(self):
 		defer = Deferred()
