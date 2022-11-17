@@ -348,7 +348,7 @@ class Item:
 				self.bitrate = bitrate
 		else:
 			self.bitrate = ""
-		self.length = length
+		self.length = repr(length)[2:-1]
 		self.genre = genre
 		if track is not None:
 			self.track = _("Track %s") % track
@@ -464,6 +464,7 @@ def getID3Tags(root, filename):
 		date = getEncodedString(audio.get('date', ['n/a'])[0])
 		try:
 			length = str(datetime_timedelta(seconds=int(audio.info.length))).encode("utf-8", 'ignore')
+			length = repr(length)[2:-1]
 		except:
 			length = -1
 		if not isFlac:
