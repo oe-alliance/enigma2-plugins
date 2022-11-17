@@ -265,7 +265,7 @@ class EPGSearch(EPGSelection):
 		}, -1)
 		self["okactions"].csel = self
 
-		self["colouractions"] = HelpableActionMap(self, "ColorActions", {
+		self["coloractions"] = HelpableActionMap(self, "ColorActions", {
 			"red": (self.redButtonPressed, _("IMDB search for highlighted event")),
 			"green": (self.timerAdd, _("Add/remove/edit timer for highlighted event")),
 			"yellow": (self.yellowButtonPressed, _("Enter new search")),
@@ -273,7 +273,7 @@ class EPGSearch(EPGSelection):
 			"blue": (self.exportAutoTimer, _("Add an AutoTimer for highlighted event")),
 			"bluelong": (self.blueButtonPressedLong, _("Show AutoTimer list"))
 		}, -1)
-		self["colouractions"].csel = self
+		self["coloractions"].csel = self
 
 		self["recordingactions"] = HelpableActionMap(self, "InfobarInstantRecord", {
 			"ShortRecord": (self.doRecordTimer, _("Add a record timer for highlighted event")),
@@ -381,8 +381,8 @@ class EPGSearch(EPGSelection):
 			self["okactions"].setEnabled(True)
 		if "epgcursoractions" in self:
 			self["epgcursoractions"].setEnabled(True)
-		if "colouractions" in self:
-			self["colouractions"].setEnabled(True)
+		if "coloractions" in self:
+			self["coloractions"].setEnabled(True)
 		if "recordingactions" in self:
 			self["recordingactions"].setEnabled(True)
 		if "epgactions" in self:
