@@ -73,8 +73,6 @@ from .tmdb_exceptions import *
 import json
 import datetime
 
-from six.moves import urllib
-
 
 DEBUG = False
 
