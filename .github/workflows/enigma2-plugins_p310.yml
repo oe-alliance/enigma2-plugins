@@ -37,13 +37,13 @@ jobs:
           CC: "gcc-${{ matrix.gcc }}"
           CXX: "g++-${{ matrix.gcc }}"
         run: |
-          sudo apt-get install python3.10-dev  
+          # sudo apt-get install python3.10-dev  
           pip3 install six
-          sed -i '/PKG_CHECK_MODULES(ENIGMA2, enigma2)/d' ./configure.ac
-          sed -i '/PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)/d' ./configure.ac
-          sed -i '/AX_PYTHON_DEVEL/d' ./configure.ac
-          autoreconf -i
-          ./configure --without-debug --with-po
-          make
+          # sed -i '/PKG_CHECK_MODULES(ENIGMA2, enigma2)/d' ./configure.ac
+          # sed -i '/PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)/d' ./configure.ac
+          # sed -i '/AX_PYTHON_DEVEL/d' ./configure.ac
+          # autoreconf -i
+          # ./configure --without-debug --with-po
+          # make
           rm -rf ./subsdownloader2
           python -m compileall .
