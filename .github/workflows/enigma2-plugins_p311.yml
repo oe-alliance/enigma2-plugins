@@ -1,4 +1,4 @@
-name: enigma2-plugins build 3.10
+name: enigma2-plugins build 3.11
 
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        gcc: [11]
+        gcc: [12]
     steps:
       - name: Install prerequisites
         run: |
@@ -30,18 +30,18 @@ jobs:
 
       - uses: actions/setup-python@v2
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
-      - name: Build plugins, gcc-${{ matrix.gcc }}, python 3.10
+      - name: Build plugins, gcc-${{ matrix.gcc }}, python 3.11
         env:
           CC: "gcc-${{ matrix.gcc }}"
           CXX: "g++-${{ matrix.gcc }}"
         run: |
-          sudo apt-get install python3.10-dev  
+          sudo apt-get install python3.11-dev  
           pip3 install six
-          sed -i '/PKG_CHECK_MODULES(ENIGMA2, enigma2)/d' ./configure.ac
-          sed -i '/PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)/d' ./configure.ac
-          sed -i '/AX_PYTHON_DEVEL/d' ./configure.ac
+          # sed -i '/PKG_CHECK_MODULES(ENIGMA2, enigma2)/d' ./configure.ac
+          # sed -i '/PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)/d' ./configure.ac
+          # sed -i '/AX_PYTHON_DEVEL/d' ./configure.ac
           autoreconf -i
           ./configure --without-debug --with-po
           make
