@@ -57,6 +57,8 @@ config.plugins.imdb.showepisodeinfo = ConfigYesNo(default=False)
 
 
 def getPage(url, params=None, headers=None, cookies=None):
+	headers = headers or {}
+	headers["user-agent"] = "Mozilla/5.0 Gecko/20100101 Firefox/100.0"
 	return deferToThread(requests.get, url, params=params, headers=headers, cookies=cookies, timeout=30.05)
 
 
@@ -264,7 +266,10 @@ class IMDB(Screen, HelpableScreen):
 		# 3 = synopsis page
 		self.Page = 0
 
-		self.cookie = {"lc-main": language.getLanguage()}
+		self.cookie = {
+			"lc-main": language.getLanguage(),
+			"session-id": "000-0000000-0000000",
+		}
 
 		self["actionsOk"] = HelpableActionMap(self, "OkCancelActions",
 		{
