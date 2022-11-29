@@ -1,0 +1,25 @@
+<screen name="iDreamAddToDatabase" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="#FF000000" title="Create iDream DB">
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/mplist.png" position="0,0" size="1920,1080" transparent="0" zPosition="-3" />
+		<!--Time -->
+		<widget source="global.CurrentTime" render="Label" position="870,60" size="860,110" font="Regular;50" halign="right" foregroundColor="#606060" backgroundColor="#000000" noWrap="1" transparent="1" zPosition="2">
+			<convert type="ClockToText">Format:%-H:%M:%S</convert>
+		</widget>
+		<eLabel position="20,135" size="1700,3" backgroundColor="#001b3c85" />
+		<widget name="output" position="20,160" size="1420,500" itemHeight="50" foregroundColor="#d0d0d0" backgroundColor="#20000000" transparent="1" backgroundColorSelected="#001b3c85" scrollbarSliderBorderWidth="1" scrollbarWidth="3" scrollbarSliderForegroundColor="ltbluette" scrollbarSliderBorderColor="#202020" scrollbarMode="showOnDemand" zPosition="2" />
+		
+		<ePixmap pixmap="skin_default/buttons/red.png" zPosition="0" position="30,810" size="80,40" transparent="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/green.png" zPosition="0" position="30,860" size="80,40" transparent="1" alphatest="on" />
+		<!-- 			
+		<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+		 -->
+		 
+		<!-- 		 
+		<ePixmap pixmap="buttons/80/key_red.png" position="30,810"  size="80,40"  zPosition="1" alphatest="blend"/>
+		<ePixmap pixmap="buttons/80/key_green.png"   position="30,860" size="80,40"  zPosition="1" alphatest="blend"/>
+		 -->
+		<widget source="key_red" render="Label" position="130,810" size="300,40" font="Regular;32" halign="left" valign="center" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="2" />
+		<widget source="key_green" render="Label" position="130,860" size="300,40" font="Regular;32" halign="left" valign="center" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="2" />
+		<eLabel position="20,930" size="1168,2" backgroundColor="#001b3c85" />
+		<ePixmap position="530,804" size="500,267" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/mplogo.png" alphatest="blend" zPosition="1" />
+	</screen>

@@ -1,0 +1,7 @@
+<screen name="MerlinMusicPlayerSongList" position="0,0" size="1024,576" flags="wfNoBorder" backgroundColor="#00000000" title="Songlist">
+            <eLabel backgroundColor="#999999" position="50,40" size="924,2" zPosition="1"/>
+            <eLabel backgroundColor="#999999" font="Regular;16" foregroundColor="#0f0f0f" halign="center" position="50,32" size="250,20" text="MERLIN  MUSIC  PLAYER" valign="center" zPosition="2"/>
+            <eLabel backgroundColor="#999999" font="Regular;16" foregroundColor="#0f0f0f" halign="center" position="724,32" size="250,20" text="WWW.DREAMBOX-TOOLS.INFO" valign="center" zPosition="2"/>
+            <widget name="headertext" position="50,73" zPosition="1" size="900,23" font="Regular;20" transparent="1"  foregroundColor="#fcc000" backgroundColor="#00000000"/>
+            <widget name="list" position="50,110" zPosition="2" size="940,350" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
+            </screen>

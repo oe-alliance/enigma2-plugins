@@ -1,0 +1,4 @@
+<screen name="MerlinMusicPlayerScreenSaver" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="#00000000" title="MerlinMusicPlayerScreenSaver">
+	<widget name="coverArt" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/mplogo.png" position="0,0" size="500,267" />
+	<widget name="display" position="0,30" size="500,100" font="Regular;28" foregroundColor="yellow" halign="center" backgroundColor="#000000" zPosition="1" />
+</screen>

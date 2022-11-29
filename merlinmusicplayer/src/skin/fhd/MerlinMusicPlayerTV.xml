@@ -1,0 +1,4 @@
+<screen name="MerlinMusicPlayerTV" backgroundColor="transparent" flags="wfNoBorder" position="0,0" size="1920,1080" title="MerlinMusicPlayerTV">
+		<widget name="video" position="0,0" size="1920,1080" backgroundColor="#FF000000" zPosition="1"/>
+		<widget name="display" position="0,1000" size="1920,80" zPosition="2" foregroundColor="ltbluette" backgroundColor="#33000000" font="Regular;34" halign="center" valign="center" />
+	</screen>
