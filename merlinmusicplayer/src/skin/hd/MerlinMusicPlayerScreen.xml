@@ -1,0 +1,23 @@
+<screen name="MerlinMusicPlayerScreen" position="0,0" size="1024,576" flags="wfNoBorder" backgroundColor="#00000000" title="iDream">
+            <eLabel backgroundColor="#999999" position="50,40" size="924,2" zPosition="1"/>
+            <eLabel backgroundColor="#999999" font="Regular;16" foregroundColor="#0f0f0f" halign="center" position="50,32" size="250,20" text="MERLIN  MUSIC  PLAYER" valign="center" zPosition="2"/>
+            <eLabel backgroundColor="#999999" font="Regular;16" foregroundColor="#0f0f0f" halign="center" position="724,32" size="250,20" text="WWW.DREAMBOX-TOOLS.INFO" valign="center" zPosition="2"/>
+            <ePixmap alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/mmp3pHD.png" position="0,0" size="1024,576"/>
+            <widget name="coverArt" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/no_coverArt.png" position="200,77" size="238,238" transparent="1" alphatest="blend" />
+            <ePixmap alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/dvr.png" position="560,160" size="150,20" transparent="1" zPosition="1"/>
+            <widget name="title" position="234,343" size="600,28" zPosition="1" transparent="1" font="Regular;24" foregroundColor="#fcc000" />
+            <widget name="album" position="234,390" size="600,22" zPosition="1" transparent="1" font="Regular;18" foregroundColor="#999999" />
+            <widget name="artist" position="234,420" size="600,22" zPosition="1" transparent="1" font="Regular;18" foregroundColor="#999999" />
+            <widget name="genre" position="234,450" size="600,22" zPosition="1" transparent="1" font="Regular;18" foregroundColor="#999999" />
+            <widget name="nextTitle" position="234,490" size="600,22" zPosition="1" transparent="1" font="Regular;16" foregroundColor="#f0f0f0" />
+            <widget name="PositionGauge" position="536,197" size="198,14" pointer="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/progressbar.png:198,0" seek_pointer="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/progressbar.png:198,0" transparent="1"/>
+            <widget source="session.CurrentService" render="Label" position="745,195" size="116,18" zPosition="1" font="Regular;18" halign="left" foregroundColor="#999999" transparent="1" >
+                    <convert type="ServicePosition">Length,ShowHours</convert>
+            </widget>
+            <widget source="session.CurrentService" render="Label" position="556,220" size="198,20" zPosition="1" font="Regular;20" halign="left" foregroundColor="#fcc000" transparent="1" >
+                    <convert type="ServicePosition">Position,ShowHours</convert>
+            </widget>
+            <widget name="shuffle" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/placeholder1.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/dvr_shuf.png" position="470,203" size="53,34" transparent="1" alphatest="on"/>
+            <widget name="repeat" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/placeholder1.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/dvr_rep.png" position="470,167" size="53,34" transparent="1" alphatest="on"/>
+            <widget name="dvrStatus" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/dvr_pl.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/dvr_pau.png" position="555,155" size="160,39" transparent="1" alphatest="on"/>
+            </screen>

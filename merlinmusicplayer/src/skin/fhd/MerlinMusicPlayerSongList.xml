@@ -1,0 +1,13 @@
+<screen name="MerlinMusicPlayerSongList" position="0,0" size="1920,1080" flags="wfNoBorder" title="MusicPlayer">
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/mplist.png" position="0,0" size="1920,1080" transparent="0" zPosition="-3" />
+		<!-- ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/overlay.png" position="0,0" size="1530,1080" zPosition="-2" transparent="1" alphatest="blend" scale="1" /-->
+		<widget name="headertext" position="20,10" size="1200,110" font="LCD;100" foregroundColor="yellow" backgroundColor="#00000000" transparent="1" zPosition="1" />
+		<!--Time -->
+		<widget source="global.CurrentTime" render="Label" position="870,60" size="860,110" font="Regular;50" halign="right" foregroundColor="#606060" backgroundColor="#000000" noWrap="1" transparent="1" zPosition="2">
+			<convert type="ClockToText">Format:%-H:%M:%S</convert>
+		</widget>
+		<eLabel position="20,135" size="1700,3" backgroundColor="barColor" />
+		<widget name="list" position="20,160" size="1170,750" itemHeight="50" foregroundColor="#d0d0d0" backgroundColor="#20000000" transparent="1" backgroundColorSelected="barColor" scrollbarSliderBorderWidth="1" scrollbarWidth="3" scrollbarSliderForegroundColor="#007fcfff" scrollbarSliderBorderColor="#202020" scrollbarMode="showOnDemand" zPosition="2" />
+		<eLabel position="20,930" size="1168,2" backgroundColor="barColor" />
+		<ePixmap position="1196,157" size="500,267" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/mplogo.png" alphatest="blend" zPosition="1" />
+	</screen>
