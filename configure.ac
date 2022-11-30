@@ -466,6 +466,10 @@ merlinmusicplayer/meta/Makefile
 merlinmusicplayer/po/Makefile
 merlinmusicplayer/src/Makefile
 merlinmusicplayer/src/images/Makefile
+merlinmusicplayer/src/skin/Makefile
+merlinmusicplayer/src/skin/fhd/Makefile
+merlinmusicplayer/src/skin/hd/Makefile
+merlinmusicplayer/src/skin/sd/Makefile
 
 mosaic/Makefile
 mosaic/meta/Makefile
