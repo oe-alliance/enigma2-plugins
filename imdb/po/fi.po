@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-25 08:17+0100\n"
-"PO-Revision-Date: 2022-10-16 13:10+0300\n"
+"PO-Revision-Date: 2022-12-01 12:43+0200\n"
 "Last-Translator: Orlandox\n"
 "Language-Team: Samzan/Kojo/Orlandox\n"
 "Language: fi\n"
@@ -254,3 +254,9 @@ msgstr "Näytä jaksot nimivalikossa"
 
 msgid "Include episodes in the results. Takes effect after the next search of IMDb for a show name."
 msgstr "Sisällytä jaksot tuloksiin. Astuu voimaan, kun seuraavan kerran haetaan IMDb:sta ohjelman nimeä."
+
+msgid "Show a bigger poster"
+msgstr "Näytä isompi juliste"
+
+msgid "Show movie and series synopsis"
+msgstr "Näytä elokuvan ja sarjan tiivistelmä"
