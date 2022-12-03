@@ -249,7 +249,7 @@ class iDreamAddToDatabase(Screen):
     def __init__(self, session, initDir):
         Screen.__init__(self, session)
         self.setTitle(_("Add music files to iDream database"))
-        skin = '%siDreamAddToDatabase.xml' % skin_path
+        skin = os_path.join(skin_path, 'iDreamAddToDatabase.xml')
         with open(skin, 'r') as f:
             self.skin = f.read()
         self["actions"] = ActionMap(["WizardActions", "ColorActions"],
@@ -508,7 +508,7 @@ class MerlinMusicPlayerScreenSaver(Screen):
     def __init__(self, session):
         self.session = session
         Screen.__init__(self, session)
-        skin = '%sMerlinMusicPlayerScreenSaver.xml' % skin_path
+        skin = os_path.join(skin_path, 'MerlinMusicPlayerScreenSaver.xml')
         with open(skin, 'r') as f:
             self.skin = f.read()
         self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EventViewActions"],
@@ -575,12 +575,8 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
         Screen.__init__(self, session)
         w = getDesktop(0).size().width()
         h = getDesktop(0).size().height()
-        if w == 1920:
-            skin = '%sMerlinMusicPlayerTV.xml' % skin_path
-            with open(skin, 'r') as f:
-                self.skin = f.read()
-        elif w == 1280:
-            skin = '%sMerlinMusicPlayerTV.xml' % skin_path
+        if w == 1920 or w == 1280:
+            skin = os_path.join(skin_path, 'MerlinMusicPlayerTV.xml')
             with open(skin, 'r') as f:
                 self.skin = f.read()
         else:
@@ -890,7 +886,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
     def __init__(self, session, songlist, index, idreammode, currentservice, servicelist):
         self.session = session
         Screen.__init__(self, session)
-        skin = '%sMerlinMusicPlayerScreen.xml' % skin_path
+        skin = os_path.join(skin_path, 'MerlinMusicPlayerScreen.xml')
         with open(skin, 'r') as f:
             self.skin = f.read()
         InfoBarNotifications.__init__(self)
@@ -1471,7 +1467,7 @@ class MerlinMusicPlayerLyrics(Screen):
         self.session = session
         Screen.__init__(self, session)
         self.setTitle(_("Lyrics"))
-        skin = '%sMerlinMusicPlayerLyrics.xml' % skin_path
+        skin = os_path.join(skin_path, 'MerlinMusicPlayerLyrics.xml')
         with open(skin, 'r') as f:
             self.skin = f.read()
         self["headertext"] = Label(_("Merlin Music Player Lyrics"))
@@ -1580,7 +1576,7 @@ class MerlinMusicPlayerSongList(Screen):
     def __init__(self, session, songlist, index, idreammode):
         self.session = session
         Screen.__init__(self, session)
-        skin = '%sMerlinMusicPlayerSongList.xml' % skin_path
+        skin = os_path.join(skin_path, 'MerlinMusicPlayerSongList.xml')
         with open(skin, 'r') as f:
             self.skin = f.read()
         self["headertext"] = Label(_("Merlin Music Player Songlist"))
@@ -1647,7 +1643,7 @@ class iDreamMerlin(Screen):
     def __init__(self, session, servicelist):
         self.session = session
         Screen.__init__(self, session)
-        skin = '%siDreamMerlin.xml' % skin_path
+        skin = os_path.join(skin_path, 'iDreamMerlin.xml')
         with open(skin, 'r') as f:
             self.skin = f.read()
         self["list"] = iDreamList()
@@ -2703,7 +2699,7 @@ class SelectPath(Screen):
 
     def __init__(self, session, initDir):
         Screen.__init__(self, session)
-        skin = '%sSelectPath.xml' % skin_path
+        skin = os_path.join(skin_path, 'SelectPath.xml')
         with open(skin, 'r') as f:
             self.skin = f.read()
         self.setTitle(_("Select path"))
@@ -2812,7 +2808,7 @@ class MerlinMusicPlayerSetup(Screen, ConfigListScreen):
     def __init__(self, session, databasePath):
         Screen.__init__(self, session)
         self.setTitle(_("Merlin Music Player Setup"))
-        skin = '%sMerlinMusicPlayerSetup.xml' % skin_path
+        skin = os_path.join(skin_path, 'MerlinMusicPlayerSetup.xml')
         with open(skin, 'r') as f:
             self.skin = f.read()
         self["key_red"] = StaticText(_("Cancel"))
@@ -2880,7 +2876,7 @@ class MerlinMusicPlayerFileList(Screen):
     def __init__(self, session, servicelist):
         self.session = session
         Screen.__init__(self, session)
-        skin = '%sMerlinMusicPlayerFileList.xml' % skin_path
+        skin = os_path.join(skin_path, 'MerlinMusicPlayerFileList.xml')
         with open(skin, 'r') as f:
             self.skin = f.read()
         self["list"] = FileList(config.plugins.merlinmusicplayer.defaultfilebrowserpath.value, showDirectories=True, showFiles=True, matchingPattern="(?i)^.*\.(mp3|m4a|flac|ogg|m3u|pls|cue)", useServiceRef=False)
