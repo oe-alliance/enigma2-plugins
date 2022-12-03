@@ -799,7 +799,13 @@ class IMDB(Screen, HelpableScreen):
 
 			# Format a date using the full format.
 			def makedate(date):
-				return strftime(config.usage.date.full.value, (date['year'], date['month'], date['day'], 0, 0, 0, 0, 0, 0))
+				if date['day']:
+					fmt = config.usage.date.full.value
+				elif date['month']:
+					fmt = "%B %Y"
+				else:
+					fmt = "%Y"
+				return strftime(fmt, (date['year'], date['month'] or 0, date['day'] or 0, 0, 0, 0, 0, 0, 0))
 
 			categories_i18n = {
 				'director': get(main, ('directors', 'category', 'text')),
