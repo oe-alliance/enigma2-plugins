@@ -1,3 +1,3 @@
-installdir = $(libdir)/enigma2/python/Plugins/Extensions/skin/sd
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/skin/sd
 
 install_DATA = *.xml
