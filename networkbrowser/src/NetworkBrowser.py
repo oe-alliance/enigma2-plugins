@@ -289,7 +289,10 @@ class NetworkBrowser(Screen):
 		nwlist = []
 		strIP = self.makeStrIP()
 		if strIP:
-			nwlist = netscan.netzInfo(strIP)
+			try:
+				nwlist = netscan.netzInfo(strIP)
+			except:
+				pass
 		return nwlist
 
 	def Stage1SettingsComplete(self, result, retval, extra_args):
