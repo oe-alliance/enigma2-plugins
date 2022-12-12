@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build enigma2-plugins
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         gcc: [11]
