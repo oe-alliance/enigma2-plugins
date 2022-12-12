@@ -1,11 +1,13 @@
 # -*- coding: UTF-8 -*-
 from __future__ import print_function
+from re import compile, search, DOTALL
+from gettext import bindtextdomain
+import gettext
 from Plugins.Plugin import PluginDescriptor
-from twisted.web.client import downloadPage
+from requests import get, exceptions
+from twisted.internet.reactor import callInThread
+from six.moves.urllib.parse import quote
 from enigma import ePicLoad, eServiceReference
-from Screens.Screen import Screen
-from Screens.EpgSelection import EPGSelection
-from Screens.ChannelSelection import SimpleChannelSelection
 from Components.ActionMap import ActionMap
 from Components.Pixmap import Pixmap
 from Components.Label import Label
@@ -15,22 +17,21 @@ from Components.AVSwitch import AVSwitch
 from Components.MenuList import MenuList
 from Components.Language import language
 from Components.ProgressBar import ProgressBar
+from Screens.Screen import Screen
+from Screens.EpgSelection import EPGSelection
+from Screens.ChannelSelection import SimpleChannelSelection
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-import re
-from six.moves.urllib.parse import quote
-import os
-import gettext
-
-import six
-from six.moves import html_entities
-
 
 PluginLanguageDomain = "OFDb"
 PluginLanguagePath = "Extensions/OFDb/locale"
 
 
 def localeInit():
-	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+	bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
+
+localeInit()
+language.addCallback(localeInit)
 
 
 def _(txt):
@@ -41,32 +42,18 @@ def _(txt):
 		return gettext.gettext(txt)
 
 
-localeInit()
-language.addCallback(localeInit)
-
-
 class OFDBChannelSelection(SimpleChannelSelection):
 	def __init__(self, session):
 		SimpleChannelSelection.__init__(self, session, _("Channel Selection"))
 		self.skinName = "SimpleChannelSelection"
-
-		self["ChannelSelectEPGActions"] = ActionMap(["ChannelSelectEPGActions"],
-			{
-				"showEPGList": self.channelSelected
-			}
-		)
+		self["ChannelSelectEPGActions"] = ActionMap(["ChannelSelectEPGActions"], {"showEPGList": self.channelSelected})
 
 	def channelSelected(self):
 		ref = self.getCurrentSelection()
 		if (ref.flags & 7) == 7:
 			self.enterPath(ref)
 		elif not (ref.flags & eServiceReference.isMarker):
-			self.session.openWithCallback(
-				self.epgClosed,
-				OFDBEPGSelection,
-				ref,
-				openPlugin=False
-			)
+			self.session.openWithCallback(self.epgClosed, OFDBEPGSelection, ref, openPlugin=False)
 
 	def epgClosed(self, ret=None):
 		if ret:
@@ -89,12 +76,8 @@ class OFDBEPGSelection(EPGSelection):
 		sref = cur[1]
 		if not evt:
 			return
-
 		if self.openPlugin:
-			self.session.open(
-				OFDB,
-				evt.getEventName()
-			)
+			self.session.open(OFDB, evt.getEventName())
 		else:
 			self.close(evt.getEventName())
 
@@ -104,26 +87,26 @@ class OFDBEPGSelection(EPGSelection):
 
 class OFDB(Screen):
 	skin = """
-		<screen name="OFDb" position="center,center" size="600,420" title="Online-Filmdatenbank Details Plugin" >
-			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/key_menu.png" position="565,5" zPosition="0" size="35,25" alphatest="on" />
-			<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#9f1313" transparent="1" />
-			<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#a08500" transparent="1" />
-			<widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#18188b" transparent="1" />
-			<widget name="titellabel" position="10,40" size="330,45" valign="center" font="Regular;22"/>
-			<widget name="detailslabel" position="105,90" size="485,140" font="Regular;18" />
-			<widget name="castlabel" position="10,235" size="580,155" font="Regular;18" />
-			<widget name="extralabel" position="10,40" size="580,350" font="Regular;18" />
-			<widget name="ratinglabel" position="340,62" size="250,20" halign="center" font="Regular;18" foregroundColor="#f0b400"/>
-			<widget name="statusbar" position="10,404" size="580,16" font="Regular;16" foregroundColor="#cccccc" />
-			<widget name="poster" position="4,90" size="96,140" alphatest="on" />
-			<widget name="menu" position="10,115" size="580,275" zPosition="3" scrollbarMode="showOnDemand" />
-			<widget name="starsbg" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OFDb/starsbar_empty.png" position="340,40" zPosition="0" size="250,21" transparent="1" alphatest="on" />
-			<widget name="stars" position="340,40" size="250,21" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OFDb/starsbar_filled.png" transparent="1" />
+		<screen name="OFDb" position="center,center" size="780,600" title="Online-Filmdatenbank Details Plugin" >
+			<ePixmap pixmap="skin_default/buttons/red.png" position="20,0" zPosition="0" size="180,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="200,0" zPosition="0" size="180,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="380,0" zPosition="0" size="180,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="560,0" zPosition="0" size="180,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/key_menu.png" position="725,5" zPosition="0" size="55,55" alphatest="on" />
+			<widget name="key_red" position="20,0" zPosition="1" size="140,40" font="Regular;22" valign="center" halign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget name="key_green" position="200,0" zPosition="1" size="140,40" font="Regular;22" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget name="key_yellow" position="380,0" zPosition="1" size="140,40" font="Regular;22" valign="center" halign="center" backgroundColor="#a08500" transparent="1" />
+			<widget name="key_blue" position="560,0" zPosition="1" size="140,40" font="Regular;22" valign="center" halign="center" backgroundColor="#18188b" transparent="1" />
+			<widget name="titellabel" position="10,55" size="400,60" valign="center" font="Regular;22"/>
+			<widget name="detailslabel" position="10,130" size="660,140" font="Regular;20" />
+			<widget name="castlabel" position="10,260" size="760,300" font="Regular;20" />
+			<widget name="extralabel" position="10,40" size="760,350" font="Regular;20" />
+			<widget name="ratinglabel" position="470,85" size="210,24" halign="center" font="Regular;20" foregroundColor="#f0b400"/>
+			<widget name="statusbar" position="10,570" size="580,24" font="Regular;20" foregroundColor="#cccccc" />
+			<widget name="poster" position="680,60" size="96,140" alphatest="on" />
+			<widget name="menu" position="10,115" size="760,275" zPosition="3" scrollbarMode="showOnDemand" />
+			<widget name="starsbg" position="460,60" size="210,21" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OFDb/starsbar_empty.png" transparent="1" zPosition="0" alphatest="on" />
+			<widget name="stars" position="460,60" size="210,21" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OFDb/starsbar_filled.png" transparent="1" />
 		</screen>"""
 
 	def __init__(self, session, eventName, args=None):
@@ -134,7 +117,6 @@ class OFDB(Screen):
 		self["poster"] = Pixmap()
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.paintPosterPixmapCB)
-
 		self["stars"] = ProgressBar()
 		self["starsbg"] = Pixmap()
 		self["stars"].hide()
@@ -153,11 +135,7 @@ class OFDB(Screen):
 		self["key_green"] = Button("")
 		self["key_yellow"] = Button("")
 		self["key_blue"] = Button("")
-		# 0 = multiple query selection menu page
-		# 1 = movie info page
-		# 2 = extra infos page
-		self.Page = 0
-
+		self.Page = 0  # 0 = multiple query selection menu page, 1 = movie info page, 2 = extra infos page
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "MovieSelectionActions", "DirectionActions"],
 		{
 			"ok": self.showDetails,
@@ -171,7 +149,6 @@ class OFDB(Screen):
 			"contextMenu": self.openChannelSelection,
 			"showEventInfo": self.showDetails
 		}, -1)
-
 		self.getOFDB()
 
 	def dictionary_init(self):
@@ -180,22 +157,19 @@ class OFDB(Screen):
 			self.OFDBlanguage = ""  # set to empty ("") for english version
 		else:
 			self.OFDBlanguage = "german."  # it's a subdomain, so add a '.' at the end
-
-		self.htmltags = re.compile('<.*?>')
-
-		self.generalinfomask = re.compile(
+		self.htmltags = compile('<.*?>')
+		self.generalinfomask = compile(
 		'<title>OFDb - (?P<title>.*?)</title>.*?'
 		'(?P<g_original>Originaltitel):[\s\S]*?class=\"Daten\">(?P<original>.*?)</td>'
 		'(?:.*?(?P<g_country>Herstellungsland):[\s\S]*?class="Daten">(?P<country>.*?)(?:\.\.\.|</td>))*'
 		'(?:.*?(?P<g_year>Erscheinungsjahr):[\s\S]*?class="Daten">(?P<year>.*?)</td>)*'
-		'(?:.*?(?P<g_director>Regie):[\s\S]*?class="Daten">(?P<director>.*?)(?:\.\.\.|</td>))*', re.DOTALL)
+		'(?:.*?(?P<g_director>Regie):[\s\S]*?class="Daten">(?P<director>.*?)(?:\.\.\.|</td>))*', DOTALL)
 
 	def resetLabels(self):
 		self["detailslabel"].setText("")
 		self["ratinglabel"].setText("")
 		self["titellabel"].setText("")
 		self["castlabel"].setText("")
-		self["titellabel"].setText("")
 		self["extralabel"].setText("")
 		self.ratingstars = -1
 
@@ -238,19 +212,17 @@ class OFDB(Screen):
 		self["ratinglabel"].show()
 		self["castlabel"].show()
 		self["detailslabel"].show()
-
 		if self.resultlist and self.Page == 0:
 			link = self["menu"].getCurrent()[1]
 			title = self["menu"].getCurrent()[0]
 			self["statusbar"].setText(_("Re-Query OFDb: %s...") % (title))
 			localfile = "/tmp/ofdbquery2.html"
 			fetchurl = "http://www.ofdb.de/film/" + link
-			print("[OFDb] downloading query " + fetchurl + " to " + localfile)
-			downloadPage(six.ensure_binary(fetchurl), localfile).addCallback(self.OFDBquery2).addErrback(self.fetchFailed)
+			print("[OFDb] downloading query %s to %s" % (fetchurl, localfile))
+			callInThread(self.threadDownloadPage, fetchurl, localfile, self.OFDBquery2, self.fetchFailed)
 			self["menu"].hide()
 			self.resetLabels()
 			self.Page = 1
-
 		if self.Page == 2:
 			self["extralabel"].hide()
 			self["poster"].show()
@@ -258,7 +230,6 @@ class OFDB(Screen):
 				self["starsbg"].show()
 				self["stars"].show()
 				self["stars"].setValue(self.ratingstars)
-
 			self.Page = 1
 
 	def showExtras(self):
@@ -273,10 +244,7 @@ class OFDB(Screen):
 			self.Page = 2
 
 	def openChannelSelection(self):
-		self.session.openWithCallback(
-			self.channelSelectionClosed,
-			OFDBChannelSelection
-		)
+		self.session.openWithCallback(self.channelSelectionClosed, OFDBChannelSelection)
 
 	def channelSelectionClosed(self, ret=None):
 		if ret:
@@ -311,8 +279,7 @@ class OFDB(Screen):
 				self.eventName = self.eventName[:-3]
 			for article in ["The", "Der", "Die", "Das"]:
 				if self.eventName[:4].capitalize() == article + " ":
-					self.eventName = self.eventName[4:] + ", " + article
-
+					self.eventName = "%s, %s" % (self.eventName[4:], article)
 			self["statusbar"].setText(_("Query OFDb: %s...") % (self.eventName))
 			try:
 				self.eventName = quote(self.eventName)
@@ -320,51 +287,25 @@ class OFDB(Screen):
 				self.eventName = quote(self.eventName.decode('utf8').encode('ascii', 'ignore'))
 			localfile = "/tmp/ofdbquery.html"
 			fetchurl = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=DTitel&SText=" + self.eventName
-			print("[OFDb] Downloading Query " + fetchurl + " to " + localfile)
-			downloadPage(six.ensure_binary(fetchurl), localfile).addCallback(self.OFDBquery).addErrback(self.fetchFailed)
+			print("[OFDb] Downloading Query %s to %s" % (fetchurl, localfile))
+			callInThread(self.threadDownloadPage, fetchurl, localfile, self.OFDBquery, self.fetchFailed)
 		else:
 			self["statusbar"].setText(_("Could't get Eventname"))
 
 	def fetchFailed(self, string):
-		print("[OFDb] fetch failed " + string)
+		print("[OFDb] fetch failed %s" % string)
 		self["statusbar"].setText(_("OFDb Download failed"))
-
-	def html2utf8(self, in_html):
-		htmlentitynumbermask = re.compile('(&#(\d{1,5}?);)')
-		htmlentitynamemask = re.compile('(&(\D{1,5}?);)')
-
-		entities = htmlentitynamemask.finditer(in_html)
-		entitydict = {}
-
-		for x in entities:
-			entitydict[x.group(1)] = x.group(2)
-
-		for key, name in list(entitydict.items()):
-			entitydict[key] = html_entities.name2codepoint[name]
-
-		entities = htmlentitynumbermask.finditer(in_html)
-
-		for x in entities:
-			entitydict[x.group(1)] = x.group(2)
-
-		for key, codepoint in list(entitydict.items()):
-			in_html = in_html.replace(key, (six.unichr(int(codepoint)).encode('utf8')))
-
-		self.inhtml = in_html
 
 	def OFDBquery(self, string):
 		print("[OFDBquery]")
 		self["statusbar"].setText(_("OFDb Download completed"))
-
-		self.html2utf8(open("/tmp/ofdbquery.html", "r").read())
-
+		self.inhtml = open("/tmp/ofdbquery.html", "rb").read().decode('utf-8', 'ignore')
 		self.generalinfos = self.generalinfomask.search(self.inhtml)
-
 		if self.generalinfos:
 			self.OFDBparse()
 		else:
-			if re.search("<title>OFDb - Suchergebnis</title>", self.inhtml):
-				searchresultmask = re.compile("<br>(\d{1,3}\.) <a href=\"film/(.*?)\"(?:.*?)\)\">(.*?)</a>", re.DOTALL)
+			if search("<title>OFDb - Suchergebnis</title>", self.inhtml):
+				searchresultmask = compile("<br>(\d{1,3}\.) <a href=\"film/(.*?)\"(?:.*?)\)\">(.*?)</a>", DOTALL)
 				searchresults = searchresultmask.finditer(self.inhtml)
 				self.resultlist = [(self.htmltags.sub('', x.group(3)), x.group(2)) for x in searchresults]
 				self["menu"].l.setList(self.resultlist)
@@ -383,7 +324,7 @@ class OFDB(Screen):
 
 	def OFDBquery2(self, string):
 		self["statusbar"].setText(_("OFDb Re-Download completed"))
-		self.html2utf8(open("/tmp/ofdbquery2.html", "r").read())
+		self.inhtml = open("/tmp/ofdbquery2.html", "rb").read().decode('utf-8', 'ignore')
 		self.generalinfos = self.generalinfomask.search(self.inhtml)
 		self.OFDBparse()
 
@@ -394,79 +335,76 @@ class OFDB(Screen):
 		if self.generalinfos:
 			self["key_yellow"].setText(_("Details"))
 			self["statusbar"].setText(_("OFDb Details parsed"))
-
 			Titeltext = self.generalinfos.group("title")
 			if len(Titeltext) > 57:
-				Titeltext = Titeltext[0:54] + "..."
+				Titeltext = "%s%s" & (Titeltext[0:54], "…")
 			self["titellabel"].setText(Titeltext)
-
 			Detailstext = ""
-
-			genreblockmask = re.compile('Genre\(s\):(?:[\s\S]*?)class=\"Daten\">(.*?)</tr>', re.DOTALL)
+			genreblockmask = compile('Genre\(s\):(?:[\s\S]*?)class=\"Daten\">(.*?)</tr>', DOTALL)
 			genreblock = genreblockmask.findall(self.inhtml)
-			genremask = re.compile('\">(.*?)</a')
+			genremask = compile('\">(.*?)</a')
 			if genreblock:
 				genres = genremask.finditer(genreblock[0])
 				if genres:
 					Detailstext += "Genre: "
 					for x in genres:
-						Detailstext += self.htmltags.sub('', x.group(1)) + " "
-
+						Detailstext += self.htmltags.sub('', "%s " % x.group(1))
 			for category in ("director", "year", "country", "original"):
-				if self.generalinfos.group('g_' + category):
-					Detailstext += "\n" + self.generalinfos.group('g_' + category) + ": " + self.htmltags.sub('', self.generalinfos.group(category).replace("<br>", ' '))
-
-			self["detailslabel"].setText(Detailstext)
-
-			#if self.generalinfos.group("alternativ"):
-				#Detailstext += "\n" + self.generalinfos.group("g_alternativ") + ": " + self.htmltags.sub('',(self.generalinfos.group("alternativ").replace('\n','').replace("<br>",'\n').replace("	 ",' ')))
-
-			ratingmask = re.compile('<td>[\s\S]*notenskala.*(?P<g_rating>Note: )(?P<rating>\d.\d{2,2})[\s\S]*</td>', re.DOTALL)
+				if self.generalinfos.group('g_%s' % category):
+					Detailstext += "\n%s: %s" % (self.generalinfos.group('g_' + category).encode('latin-1').decode('utf-8'), self.htmltags.sub('', self.generalinfos.group(category).replace("<br>", ' ')))
+				self["detailslabel"].setText(Detailstext)
+			ratingmask = compile('<td>[\s\S]*notenskala.*(?P<g_rating>Note: )(?P<rating>\d.\d{2,2})[\s\S]*</td>', DOTALL)
 			rating = ratingmask.search(self.inhtml)
 			Ratingtext = _("no user rating yet")
 			if rating:
-				Ratingtext = rating.group("g_rating") + rating.group("rating") + " / 10"
+				Ratingtext = "%s%s / 10" % (rating.group("g_rating"), rating.group("rating"))
 				self.ratingstars = int(10 * round(float(rating.group("rating")), 1))
 				self["stars"].show()
 				self["stars"].setValue(self.ratingstars)
 				self["starsbg"].show()
 			self["ratinglabel"].setText(Ratingtext)
-
-			castblockmask = re.compile('Darsteller:[\s\S]*?class=\"Daten\">(.*?)(?:\.\.\.|\xbb)', re.DOTALL)
+			castblockmask = compile('Darsteller:[\s\S]*?class=\"Daten\">(.*?)(?:\.\.\.|\xbb)', DOTALL)
 			castblock = castblockmask.findall(self.inhtml)
-			castmask = re.compile('\">(.*?)</a')
+			castmask = compile('\">(.*?)</a')
 			Casttext = ""
 			if castblock:
 				cast = castmask.finditer(castblock[0])
 				if cast:
 					for x in cast:
-						Casttext += "\n" + self.htmltags.sub('', x.group(1))
+						Casttext += "\n%s" % self.htmltags.sub('', x.group(1))
 					if Casttext != "":
-						Casttext = _("Cast: ") + Casttext
+						Casttext = _("Cast: %s" % Casttext)
 					else:
 						Casttext = _("No cast list found in the database.")
 					self["castlabel"].setText(Casttext)
-
-			postermask = re.compile('<img src=\"(http://img.ofdb.de/film.*?)\" alt', re.DOTALL)
+			postermask = compile('<img src=\"(http://img.ofdb.de/film.*?)\" alt', DOTALL)
 			posterurl = postermask.search(self.inhtml)
 			if posterurl and posterurl.group(1).find("jpg") > 0:
 				posterurl = posterurl.group(1)
 				self["statusbar"].setText(_("Downloading Movie Poster: %s...") % (posterurl))
 				localfile = "/tmp/poster.jpg"
-				print("[OFDb] downloading poster " + posterurl + " to " + localfile)
-				downloadPage(six.ensure_binary(posterurl), localfile).addCallback(self.OFDBPoster).addErrback(self.fetchFailed)
+				print("[OFDb] downloading poster %s to " % (posterurl, localfile))
+				callInThread(self.threadDownloadPage, posterurl, localfile, self.OFDBPoster, self.fetchFailed)
 			else:
 				print("no jpg poster!")
 				self.OFDBPoster(noPoster=True)
-
 		self["detailslabel"].setText(Detailstext)
+
+	def threadDownloadPage(self, link, file, success, fail=None):
+		link = link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', '').encode('utf-8')
+		try:
+			response = get(link)
+			response.raise_for_status()
+			with open(file, "wb") as f:
+				f.write(response.content)
+			success(file)
+		except exceptions.RequestException as error:
+			if fail is not None:
+				fail(error)
 
 	def OFDBPoster(self, noPoster=False):
 		self["statusbar"].setText(_("OFDb Details parsed"))
-		if not noPoster:
-			filename = "/tmp/poster.jpg"
-		else:
-			filename = resolveFilename(SCOPE_PLUGINS, "Extensions/OFDb/no_poster.png")
+		filename = resolveFilename(SCOPE_PLUGINS, "Extensions/OFDb/no_poster.png") if noPoster else "/tmp/poster.jpg"
 		sc = AVSwitch().getFramebufferScale()
 		self.picload.setPara((self["poster"].instance.size().width(), self["poster"].instance.size().height(), sc[0], sc[1], False, 1, "#00000000"))
 		self.picload.startDecode(filename)
@@ -523,8 +461,4 @@ def Plugins(**kwargs):
 				]
 	except AttributeError:
 		wherelist = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]
-		return PluginDescriptor(name="OFDb Details",
-				description=_("Query details from the Online-Filmdatenbank"),
-				icon="ofdb.png",
-				where=wherelist,
-				fnc=main)
+		return PluginDescriptor(name="OFDb Details", description=_("Query details from the Online-Filmdatenbank"), icon="ofdb.png", where=wherelist, fnc=main)
