@@ -67,4 +67,4 @@ def scaleV(y2, y1):
 
 
 def scale(y2, y1, x2, x1, x):
-	return (y2 - y1) * (x - x1) / (x2 - x1) + y1
+	return int((y2 - y1) * (x - x1) / (x2 - x1) + y1)

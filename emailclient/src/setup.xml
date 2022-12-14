@@ -1,0 +1,19 @@
+<setupxml>
+	<setup key="emailconfig" title="Email setup">
+		<item level="0" text="show deleted entries" description="show deleted entries">config.plugins.emailimap.showDeleted</item>
+		<item level="0" text="display timeout (seconds)" description="display timeout (seconds)">config.plugins.emailimap.timeout</item>
+		<item level="0" text="display connection errors" description="display connection errors">config.plugins.emailimap.verbose</item>
+		<item level="0" text="debug" description="debug">config.plugins.emailimap.debug</item>
+	</setup>
+
+	<setup key="emailconfigaccount" title="Account Setup">
+		<item level="0" text="account name" description="account name">self._cName</item>
+		<item level="0" text="IMAP Server" description="IMAP Server">self._cServer</item>
+		<item level="0" text="IMAP Port" description="IMAP Port">self._cPort</item>
+		<item level="0" text="user name" description="user name">self._cUser</item>
+		<item level="0" text="password" description="password">self._cPassword</item>
+		<item level="0" text="mail check interval (minutes)" description="mail check interval (minutes)">self._cInterval</item>
+		<item level="0" text="maximum mail size to fetch" description="maximum mail size to fetch">self._cMaxmail</item>
+		<item level="0" text="list all mailboxes" description="list all mailboxes">self._cListall</item>
+	</setup>
+</setupxml>
