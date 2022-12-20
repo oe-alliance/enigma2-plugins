@@ -1,15 +1,20 @@
-from __future__ import print_function, absolute_import
+from __future__ import absolute_import
 from re import sub
-from os import system, path, remove
+from os import system, remove
+from os.path import basename, split
+from glob import glob
+from enigma import getDesktop, eTimer
 from Components.Label import Label
 from Components.Button import Button
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigText
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigText, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import NumberActionMap, HelpableActionMap
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Screens.InfoBar import MoviePlayer as OrgMoviePlayer
 from Tools.Directories import resolveFilename, pathExists, fileExists, SCOPE_MEDIA
+from Components.Sources.ServiceEvent import ServiceEvent
+from Screens.MessageBox import MessageBox
 from .MC_Filelist import FileList
 from .GlobalFunctions import shortname, MC_VideoInfoView, Showiframe
 config.plugins.mc_vp = ConfigSubsection()
@@ -38,7 +43,7 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
-		self["key_red"] = Button(_("Favorites"))
+		self["key_red"] = Button(_("Delete Movie"))
 		self["key_yellow"] = Button("")
 		self["key_blue"] = Button(_("Settings"))
 		self["currentfolder"] = Label("")
@@ -56,10 +61,11 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 				"up": (self.up, "List up"),
 				"down": (self.down, "List down"),
 				"menu": (self.KeyMenu, "File / Folder Options"),
-				"info": (self.showFileInfo, "Show File Info"),
+# TODO			"info": (self.showFileInfo, "Show File Info"),
 				"nextBouquet": (self.NextFavFolder, "Next Favorite Folder"),
 				"prevBouquet": (self.PrevFavFolder, "Previous Favorite Folder"),
 #				"red": (self.FavoriteFolders, "Favorite Folders"),
+				"red": (self.SelDelete, "Delete Movie"),
 				"blue": (self.KeySettings, "Settings"),
 			}, -2)
 
@@ -68,12 +74,24 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 			currDir = "/"
 		self["currentfolder"].setText(str(currDir))
 		sort = config.plugins.mc_vp_sortmode.enabled.value
-		self.filelist = []
-		self["filelist"] = []
 		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib", "/proc", "/ram", "/root", "/sbin", "/sys", "/tmp", "/usr", "/var"]
 		self.filelist = FileList(currDir, useServiceRef=True, showDirectories=True, showFiles=True, matchingPattern="(?i)^.*\.(ts|vob|mpg|mpeg|avi|mkv|dat|iso|img|mp4|wmv|flv|divx|mov|ogm|m2ts)", additionalExtensions=None, sort=sort)
 		self["filelist"] = self.filelist
 		self["filelist"].show()
+		self["Service"] = ServiceEvent()
+		self.filelist.onSelectionChanged.append(self.__selectionChanged)
+		self.detailtimer = eTimer()
+		self.detailtimer.callback.append(self.updateEventInfo)
+
+	def __selectionChanged(self):
+		self.detailtimer.start(500, True)
+
+	def updateEventInfo(self):
+		if self.filelist.canDescent():
+			return
+		serviceref = self.filelist.getServiceRef()
+		if serviceref:
+			self["Service"].newService(serviceref)
 
 	def up(self):
 		self["filelist"].up()
@@ -115,7 +133,32 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 			self.cover()
 
 	def NextFavFolder(self):
-		return
+		pass
+
+	def SelDelete(self):
+		self.filename = self.filelist.getFilename()
+		path = self.filename
+		self.session.openWithCallback(self.selremove, MessageBox, _('Do you really want to delete\n%s ?') % path, MessageBox.TYPE_YESNO)
+
+	def selremove(self, ret):
+		if ret is True:
+			self.filename = self.filelist.getFilename()
+			if self.filename.endswith('.ts'):
+				path = self.filename.replace('.ts', '')
+				for fdelete in glob(path + '.*'):
+					remove(fdelete)
+
+			elif self.filename.endswith('.vob'):
+				path = self.filename.replace('.vob', '')
+				print('path: %s' % path)
+				for fdelete in glob(path + '.*'):
+					print('fdelete: %s' % fdelete)
+					remove(fdelete)
+
+			else:
+				path = self.filename
+				remove(path)
+			self.updd()
 
 	def PrevFavFolder(self):
 		return
@@ -123,24 +166,23 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 	def showFileInfo(self):
 		if self["filelist"].canDescent():
 			return
-		else:
-			self.session.open(MC_VideoInfoView, self["filelist"].getCurrentDirectory() + self["filelist"].getFilename(), self["filelist"].getFilename(), self["filelist"].getServiceRef())
+		else:  # TODO
+			self.session.open(MC_VideoInfoView, self["filelist"].getFilename(), basename(self["filelist"].getFilename()), self["filelist"].getServiceRef())
 
 	def KeyOk(self):
 		self.filename = self.filelist.getFilename()
-		print(self.filename)
 		try:
 			if self.filename.endswith('.img') or self.filename.endswith('.iso') or self.filename.endswith('VIDEO_TS/') and config.plugins.mc_vp.dvd.value == "dvd":
 				self.showiframe.finishStillPicture()
 				from Screens import DVD
 				if self.filename.endswith('VIDEO_TS/'):
-					filepath = path.split(self.filename.rstrip('/'))[0]
+					filepath = split(self.filename.rstrip('/'))[0]
 				else:
 					filepath = self.filename
 				self.session.open(DVD.DVDPlayer, dvd_filelist=[filepath])
 				return
 		except Exception as e:
-			print("DVD Player error:", e)
+			print("DVD Player error: %s" % str(e))
 		if self.filelist.canDescent():
 			self.filelist.descent()
 		else:
@@ -180,10 +222,8 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 		self.session.openWithCallback(self.updd, VideoPlayerSettings)
 
 	def Exit(self):
-		if self.filelist.getCurrentDirectory() is None:
-			config.plugins.mc_vp.lastDir.value = "/"
-		else:
-			config.plugins.mc_vp.lastDir.value = self.filelist.getCurrentDirectory()
+		directory = self.filelist.getCurrentDirectory()
+		config.plugins.mc_vp.lastDir.value = directory if directory else "/"
 		config.plugins.mc_vp.save()
 		try:
 			remove("/tmp/bmcmovie")
@@ -194,10 +234,16 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 
 
 class VideoPlayerSettings(Screen, ConfigListScreen):
-	skin = """
-		<screen position="160,220" size="400,120" title="Media Center - VideoPlayer Settings" >
-			<widget name="config" position="10,10" size="380,100" />
-		</screen>"""
+	if getDesktop(0).size().width() == 1920:
+		skin = """
+			<screen position="160,220" size="800,240" title="Media Center - VideoPlayer Settings" >
+				<widget name="config" position="10,10" size="760,200" />
+			</screen>"""
+	else:
+		skin = """
+			<screen position="160,220" size="400,120" title="Media Center - VideoPlayer Settings" >
+				<widget name="config" position="10,10" size="380,100" />
+			</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)

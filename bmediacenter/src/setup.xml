@@ -1,0 +1,16 @@
+<setupxml>
+	<setup key="MC_PicSetup" title="Picture Settings">
+		<item level="0" text="Slideshow Interval (sec.)" description="Slideshow Interval (sec.)">config.plugins.mc_pp.slidetime</item>
+		<item level="0" text="Scaling Mode" description="Scaling Mode">config.plugins.mc_pp.resize</item>
+		<item level="0" text="Cache Thumbnails" description="Cache Thumbnails">config.plugins.mc_pp.cache</item>
+		<item level="0" text="Thumbnail Width" description="Thumbnail Width">config.plugins.mc_pp.ThumbWidth</item>
+		<item level="0" text="Thumbnail Height" description="Thumbnail Height">config.plugins.mc_pp.ThumbHeight</item>
+		<item level="0" text="show Infoline" description="show Infoline">config.plugins.mc_pp.infoline</item>
+		<item level="0" text="Frame size in full view" description="Frame size in full view">config.plugins.mc_pp.framesize</item>
+		<item level="0" text="slide picture in loop" description="slide picture in loop">config.plugins.mc_pp.loop</item>
+		<item level="0" text="backgroundcolor" description="backgroundcolor">config.plugins.mc_pp.bgcolor</item>
+		<item level="0" text="textcolor" description="textcolor">config.plugins.mc_pp.textcolor</item>
+		<item level="0" text="Music" description="Music">config.plugins.mc_pp.musicenable</item>
+		<item level="0" text="Select music" description="Select music" conditional="config.plugins.mc_pp.musicenable.value">config.plugins.mc_pp.music</item>
+	</setup>
+</setupxml>

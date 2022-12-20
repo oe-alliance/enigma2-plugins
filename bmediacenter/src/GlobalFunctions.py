@@ -1,5 +1,5 @@
 from re import sub
-from enigma import iServiceInformation
+from enigma import iServiceInformation, getDesktop
 from Components.ActionMap import ActionMap
 from Screens.Screen import Screen
 from Screens.ServiceInfo import ServiceInfoList, ServiceInfoListEntry
@@ -8,10 +8,16 @@ from _ctypes import dlopen, dlsym, call_function
 
 
 class MC_VideoInfoView(Screen):
-	skin = """
-		<screen position="80,130" size="560,320" title="View Video Info" >
-			<widget name="infolist" position="5,5" size="550,310" selectionDisabled="1" />
-		</screen>"""
+	if getDesktop(0).size().width() == 1920:
+		skin = """
+			<screen position="80,130" size="840,480" title="View Video Info" >
+				<widget name="infolist" position="5,5" size="810,460" selectionDisabled="1" />
+			</screen>"""
+	else:
+		skin = """
+			<screen position="80,130" size="560,320" title="View Video Info" >
+				<widget name="infolist" position="5,5" size="550,310" selectionDisabled="1" />
+			</screen>"""
 
 	def __init__(self, session, fullname, name, ref):
 		self.skin = MC_VideoInfoView.skin

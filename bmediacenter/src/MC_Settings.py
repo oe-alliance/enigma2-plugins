@@ -4,17 +4,15 @@ from six import ensure_str
 from boxbranding import getMachineBrand, getMachineName
 from Components.Console import Console
 from Components.ConfigList import ConfigList
+from Components.config import KEY_LEFT, KEY_RIGHT, KEY_0
 from Components.config import config, getConfigListEntry
 from Components.ActionMap import NumberActionMap
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
+from Tools.Directories import fileExists
 from .__init__ import _  # for localized messages
 mcpath = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/"
-#try:
-#	from enigma import evfd
-#except Exception as e:
-#	print("Media Center: Import evfd failed")
 
 
 class MC_Settings(Screen):
@@ -57,8 +55,6 @@ class MC_Settings(Screen):
 
 	def keyOK(self):
 		config.plugins.mc_globalsettings.save()
-#		if config.plugins.mc_global.vfd.value == "on":
-#			evfd.getInstance().vfd_write_string(_("Settings"))
 		if config.plugins.mc_globalsettings.upnp_enable.getValue():
 			if fileExists("/media/upnp") is False:
 				mkdir("/media/upnp")
@@ -80,7 +76,7 @@ class MC_Settings(Screen):
 			self.close()
 
 	def checkNetworkStateFinished(self, result, retval, extra_args=None):
-		result = sensure_str(result)
+		result = ensure_str(result)
 		if result.find('bad address') != -1:
 			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Your %s %s is not connected to the internet, please check your network settings and try again.") % (getMachineBrand(), getMachineName()), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 		elif result.find('wget returned 1') != -1 or result.find('wget returned 255') != -1 or result.find('404 Not Found') != -1:
