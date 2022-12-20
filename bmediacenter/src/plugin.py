@@ -1,7 +1,6 @@
 from __future__ import absolute_import
 from os import mkdir, system
 from skin import loadSkin
-from subprocess import check_output
 from Components.ActionMap import ActionMap
 from Components.Pixmap import Pixmap
 from Components.Sources.List import List
@@ -11,18 +10,18 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Tools.Directories import pathExists, fileExists
+
+from .MC_VideoPlayer import MC_VideoPlayer
+from .MC_PictureViewer import MC_PictureViewer
+from .MC_AudioPlayer import MC_AudioPlayer, MC_WebRadio
+from .MC_VLCPlayer import MC_VLCServerlist
+from .MC_Settings import MC_Settings
 from .__init__ import _  # for localized messages
 
 config.plugins.mc_global = ConfigSubsection()
 config.plugins.mc_global.vfd = ConfigSelection(default='off', choices=[('off', 'off'), ('on', 'on')])
 config.plugins.mc_globalsettings.upnp_enable = ConfigYesNo(default=False)
 loadSkin("/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/skin.xml")
-#try:
-#	from enigma import evfd
-#	config.plugins.mc_global.vfd.value = 'on'
-#	config.plugins.mc_global.save()
-#except Exception as e:
-#	print('Media Center: Import evfd failed')
 try:
 	from Plugins.Extensions.DVDPlayer.plugin import *
 	dvdplayer = True
@@ -31,10 +30,10 @@ except ImportError:
 	dvdplayer = False
 
 mcpath = '/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/'
+PNAME = "Media Center"
+
 
 # Subclass of List to support horizontal menu
-
-
 class DMC_List(List):
 	def __init__(self, list=[]):
 		List.__init__(self, list)
@@ -73,15 +72,12 @@ class DMC_MainMenu(Screen):
 		open("/proc/sys/vm/drop_caches", "w").write(str("3"))
 		menulist = []
 		menulist.append((_("My Music"), "MC_AudioPlayer", "menu_music", "50"))
-		menulist.append((_("My Music"), "MC_AudioPlayer", "menu_music", "50"))
 		menulist.append((_("My Videos"), "MC_VideoPlayer", "menu_video", "50"))
-		menulist.append((_("DVD Player"), "MC_DVDPlayer", "menu_video", "50"))
+#		menulist.append((_("DVD Player"), "MC_DVDPlayer", "menu_video", "50"))
 		menulist.append((_("My Pictures"), "MC_PictureViewer", "menu_pictures", "50"))
 		menulist.append((_("Web Radio"), "MC_WebRadio", "menu_radio", "50"))
-		menulist.append((_("VLC Player"), "MC_VLCPlayer", "menu_vlc", "50"))
-		menulist.append((_("Weather Info"), "MC_WeatherInfo", "menu_weather", "50"))
+#		menulist.append((_("VLC Player"), "MC_VLCPlayer", "menu_vlc", "50"))
 		menulist.append((_("Settings"), "MC_Settings", "menu_settings", "50"))
-		menulist.append(("Exit", "Exit", "menu_exit", "50"))
 		self["menu"] = DMC_List(menulist)
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"],
 		{
@@ -96,8 +92,6 @@ class DMC_MainMenu(Screen):
 			"up": self.prev,
 			"left": self.prev
 		}, -1)
-#		if config.plugins.mc_global.vfd.value == "on":
-#			evfd.getInstance().vfd_write_string(_("My Music"))
 		if config.plugins.mc_globalsettings.upnp_enable.getValue():
 			if fileExists("/media/upnp") is False:
 				mkdir("/media/upnp")
@@ -105,60 +99,26 @@ class DMC_MainMenu(Screen):
 
 	def next(self):
 		self["menu"].selectNext()
-		if self["menu"].getIndex() == 1:
-			self["menu"].setIndex(2)
-		if self["menu"].getIndex() == 9:
-			self["menu"].setIndex(1)
 		self.update()
 
 	def prev(self):
 		self["menu"].selectPrevious()
-		if self["menu"].getIndex() == 0:
-			self["menu"].setIndex(8)
 		self.update()
 
 	def update(self):
-		if self["menu"].getIndex() == 1:
-			self["left"].instance.setPixmapFromFile(mcpath + "MenuIconSettingssw.png")
-			self["middle"].instance.setPixmapFromFile(mcpath + "MenuIconMusic.png")
-			self["right"].instance.setPixmapFromFile(mcpath + "MenuIconVideosw.png")
-		elif self["menu"].getIndex() == 2:
-			self["left"].instance.setPixmapFromFile(mcpath + "MenuIconMusicsw.png")
-			self["middle"].instance.setPixmapFromFile(mcpath + "MenuIconVideo.png")
-			self["right"].instance.setPixmapFromFile(mcpath + "MenuIconDVDsw.png")
-		elif self["menu"].getIndex() == 3:
-			self["left"].instance.setPixmapFromFile(mcpath + "MenuIconVideosw.png")
-			self["middle"].instance.setPixmapFromFile(mcpath + "MenuIconDVD.png")
-			self["right"].instance.setPixmapFromFile(mcpath + "MenuIconPicturesw.png")
-		elif self["menu"].getIndex() == 4:
-			self["left"].instance.setPixmapFromFile(mcpath + "MenuIconDVDsw.png")
-			self["middle"].instance.setPixmapFromFile(mcpath + "MenuIconPicture.png")
-			self["right"].instance.setPixmapFromFile(mcpath + "MenuIconRadiosw.png")
-		elif self["menu"].getIndex() == 5:
-			self["left"].instance.setPixmapFromFile(mcpath + "MenuIconPicturesw.png")
-			self["middle"].instance.setPixmapFromFile(mcpath + "MenuIconRadio.png")
-			self["right"].instance.setPixmapFromFile(mcpath + "MenuIconVLCsw.png")
-		elif self["menu"].getIndex() == 6:
-			self["left"].instance.setPixmapFromFile(mcpath + "MenuIconRadiosw.png")
-			self["middle"].instance.setPixmapFromFile(mcpath + "MenuIconVLC.png")
-			self["right"].instance.setPixmapFromFile(mcpath + "MenuIconWeathersw.png")
-		elif self["menu"].getIndex() == 7:
-			self["left"].instance.setPixmapFromFile(mcpath + "MenuIconVLCsw.png")
-			self["middle"].instance.setPixmapFromFile(mcpath + "MenuIconWeather.png")
-			self["right"].instance.setPixmapFromFile(mcpath + "MenuIconSettingssw.png")
-		elif self["menu"].getIndex() == 8:
-			self["left"].instance.setPixmapFromFile(mcpath + "MenuIconWeathersw.png")
-			self["middle"].instance.setPixmapFromFile(mcpath + "MenuIconSettings.png")
-			self["right"].instance.setPixmapFromFile(mcpath + "MenuIconMusicsw.png")
-#		if config.plugins.mc_global.vfd.value == "on":
-#			evfd.getInstance().vfd_write_string(self["menu"].getCurrent()[0])
+		menus = ["Settings", "Music", "Video", "Picture", "Radio", "Settings", "Music"]
+#		menus = ["Settings", "Music", "Video", "DVD", "Picture", "Radio", "VLC", "Settings", "Music"]
+		idx = self["menu"].getIndex()
+		print(idx)
+		self["middle"].instance.setPixmapFromFile(mcpath + "MenuIcon%s.png" % menus[idx + 1])
+		self["left"].instance.setPixmapFromFile(mcpath + "MenuIcon%ssw.png" % menus[idx])
+		self["right"].instance.setPixmapFromFile(mcpath + "MenuIcon%ssw.png" % menus[idx + 2])
 		self["text"].setText(self["menu"].getCurrent()[0])
 
 	def okbuttonClick(self):
 		selection = self["menu"].getCurrent()
 		if selection is not None:
 			if selection[1] == "MC_VideoPlayer":
-				from .MC_VideoPlayer import MC_VideoPlayer
 				self.session.open(MC_VideoPlayer)
 			elif selection[1] == "MC_DVDPlayer":
 				if dvdplayer:
@@ -166,25 +126,17 @@ class DMC_MainMenu(Screen):
 				else:
 					self.session.open(MessageBox, "Error: DVD-Player Plugin not installed ...", MessageBox.TYPE_INFO)
 			elif selection[1] == "MC_PictureViewer":
-				from .MC_PictureViewer import MC_PictureViewer
 				self.session.open(MC_PictureViewer)
 			elif selection[1] == "MC_AudioPlayer":
-				from .MC_AudioPlayer import MC_AudioPlayer
 				self.session.open(MC_AudioPlayer)
 			elif selection[1] == "MC_WebRadio":
-				from .MC_AudioPlayer import MC_WebRadio
 				self.session.open(MC_WebRadio)
 			elif selection[1] == "MC_VLCPlayer":
 				if pathExists("/usr/lib/enigma2/python/Plugins/Extensions/VlcPlayer/") == True:
-					from .MC_VLCPlayer import MC_VLCServerlist
 					self.session.open(MC_VLCServerlist)
 				else:
 					self.session.open(MessageBox, "Error: VLC-Player Plugin not installed ...", MessageBox.TYPE_INFO)
-			elif selection[1] == "MC_WeatherInfo":
-				from .MC_WeatherInfo import MC_WeatherInfo
-				self.session.open(MC_WeatherInfo)
 			elif selection[1] == "MC_Settings":
-				from .MC_Settings import MC_Settings
 				self.session.open(MC_Settings)
 			else:
 				self.session.open(MessageBox, ("Error: Could not find plugin %s\ncoming soon ... :)") % (selection[1]), MessageBox.TYPE_INFO)
@@ -199,14 +151,12 @@ class DMC_MainMenu(Screen):
 		if self.can_osd_alpha:
 			try:
 				if config.plugins.mc_global.vfd.value == "on":
-					trans = check_output('cat /etc/enigma2/settings | grep config.av.osd_alpha | cut -d "=" -f2')
+					trans = config.av.osd_alpha.value
 				else:
-					trans = check_output('cat /etc/enigma2/settings | grep config.osd.alpha | cut -d "=" -f2')
+					trans = config.osd.alpha.value
 				open("/proc/stb/video/alpha", "w").write(str(trans))
 			except:
 				print("Set OSD Transparacy failed")
-#		if config.plugins.mc_global.vfd.value == "on":
-#			evfd.getInstance().vfd_write_string(_("Media Center"))
 		system('umount /media/upnp')
 		self.session.nav.playService(self.oldbmcService)
 		self.close()
@@ -217,25 +167,14 @@ def main(session, **kwargs):
 
 
 def menu(menuid, **kwargs):
-	if menuid == "mainmenu":
-		return [(_("Media Center"), main, "dmc_mainmenu", 44)]
-	return []
+	return [(PNAME, main, "dmc_mainmenu", 44)] if menuid == "mainmenu" else []
 
 
 def Plugins(**kwargs):
-	if config.plugins.mc_globalsettings.showinmainmenu.value == True and config.plugins.mc_globalsettings.showinextmenu.value == True:
-		return [
-			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
-			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", where=PluginDescriptor.WHERE_MENU, fnc=menu),
-			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", icon="plugin.png", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)]
-	elif config.plugins.mc_globalsettings.showinmainmenu.value == True and config.plugins.mc_globalsettings.showinextmenu.value == False:
-		return [
-			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
-			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", where=PluginDescriptor.WHERE_MENU, fnc=menu)]
-	elif config.plugins.mc_globalsettings.showinmainmenu.value == False and config.plugins.mc_globalsettings.showinextmenu.value == True:
-		return [
-			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
-			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", icon="plugin.png", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)]
-	else:
-		return [
-			PluginDescriptor(name="Media Center", description="Media Center Plugin for your STB_BOX", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)]
+	PDESC = "Media Center Plugin for your STB_BOX"
+	plist = [PluginDescriptor(name=PNAME, description=PDESC, icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)]
+	if config.plugins.mc_globalsettings.showinmainmenu.value:
+		plist.append(PluginDescriptor(name=PNAME, description=PDESC, where=PluginDescriptor.WHERE_MENU, fnc=menu))
+	if config.plugins.mc_globalsettings.showinextmenu.value:
+		plist.append(PluginDescriptor(name=PNAME, description=PDESC, icon="plugin.png", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main))
+	return plist

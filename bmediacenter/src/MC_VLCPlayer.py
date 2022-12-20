@@ -4,7 +4,7 @@ from enigma import eServiceReference, iPlayableService, eServiceCenter
 from Components.Label import Label
 from Components.Button import Button
 from Components.Sources.List import List
-from Components.config import config, ConfigSubsection, ConfigText
+from Components.config import config, ConfigSubsection, ConfigText, getConfigListEntry, configfile
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from Components.ActionMap import ActionMap, NumberActionMap
@@ -331,14 +331,14 @@ class MC_VLCMedialist(Screen):
 			self.filename = self.filelist.getCurrent()[0][0]
 		try:
 			url = self.server.playFile(self.filename, DEFAULT_VIDEO_PID, DEFAULT_AUDIO_PID)
-			print("[VLC] url: " + url)
+			print("[VLC] url: %s" % url)
 		except Exception as e:
 			self.session.open(MessageBox, _("Error with VLC server:\n%s" % e), MessageBox.TYPE_ERROR)
 
 		if url is not None:
 			#self.session.open(MessageBox, _("OPEN URL:\n%s" % url), MessageBox.TYPE_INFO)
 			sref = eServiceReference(ENIGMA_SERVICE_ID, 0, url)
-			print("sref valid=", sref.valid())
+			print("sref valid=%s" % sref.valid())
 			sref.setData(0, DEFAULT_VIDEO_PID)
 			sref.setData(1, DEFAULT_AUDIO_PID)
 			self.session.nav.stopService()
@@ -441,7 +441,7 @@ class MC_VLCMedialist(Screen):
 		self.session.openWithCallback(self.JumpToFolder, MC_VLCFavoriteFolders)
 
 	def changeDir(self, dir):
-		print("[VLC] changeDir ", dir)
+		print("[VLC] changeDir %s" % dir)
 		try:
 			self.currentList.changeDirectory(dir)
 			self.updateFilelist()

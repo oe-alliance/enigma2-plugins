@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function, absolute_import
-from os import system, remove, path, remove, listdir, walk
-from enigma import eTimer, iServiceInformation, iPlayableService, ePicLoad, RT_VALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, gFont, eListbox, ePoint, eListboxPythonMultiContent, eServiceCenter
+from os import system, remove, remove, listdir, walk
+from os.path import split, dirname
+from enigma import eTimer, iServiceInformation, iPlayableService, ePicLoad, RT_VALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, gFont, eListbox, ePoint, eListboxPythonMultiContent, eServiceCenter, getDesktop
 from Components.Label import Label
 from Components.Button import Button
 from Components.Pixmap import Pixmap
 from Components.MenuList import MenuList
 from Components.Sources.List import List
 from Components.ConfigList import ConfigList
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, ConfigText
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, ConfigText, KEY_LEFT, KEY_RIGHT, KEY_0, getConfigListEntry
 from Components.ScrollLabel import ScrollLabel
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ActionMap import ActionMap, NumberActionMap, HelpableActionMap
@@ -20,11 +21,15 @@ from Screens.MessageBox import MessageBox
 from Screens.HelpMenu import HelpableScreen
 from Screens.InfoBarGenerics import InfoBarSeek
 from Tools.Directories import resolveFilename, fileExists, pathExists, SCOPE_MEDIA, SCOPE_PLAYLIST, SCOPE_SKIN_IMAGE
-from twisted.internet import reactor
-from twisted.web import client
-from twisted.web.client import HTTPClientFactory
+from six import ensure_str
+from requests import get, exceptions
+from twisted.internet.reactor import callInThread
+from re import sub
+from six.moves.urllib.parse import quote
+from xml.etree.cElementTree import fromstring as cet_fromstring
 from .MC_Filelist import FileList
 from .__init__ import _  # for localized messages
+from time import strftime
 
 config.plugins.mc_ap = ConfigSubsection()
 sorts = [('default', _("default")), ('alpha', _("alphabet")), ('alphareverse', _("alphabet backward")), ('date', _("date")), ('datereverse', _("date backward")), ('size', _("size")), ('sizereverse', _("size backward"))]
@@ -44,15 +49,21 @@ if pathExists(hddpath):
 			screensaverlist += [(hddpath + '%s/' % (x), _("%s") % (x))]
 config.plugins.mc_ap.whichjpg = ConfigSelection(screensaverlist)
 playlist = []
-#try:
-#	from enigma import evfd
-#except Exception as e:
-#	print("Media Center: Import evfd failed")
-radirl = "http://ipkserver.hdmedia-universe.com/bmcradio/"
-#for lyrics
+radirl = "http://radio.pervii.com/top_radio_"
+
+FHD = getDesktop(0).size().width() == 1920
+
+STATE_PLAY = 0
+STATE_PAUSE = 1
+STATE_STOP = 2
+STATE_REWIND = 3
+STATE_FORWARD = 4
+STATE_NONE = 5
 
 
 def getEncodedString(value):
+	print("getEncodedString")
+	print(value)
 	returnValue = ""
 	try:
 		returnValue = value.encode("utf-8", 'ignore')
@@ -67,33 +78,6 @@ def getEncodedString(value):
 	return returnValue
 
 
-class myHTTPClientFactory(HTTPClientFactory):
-	def __init__(self, url, method='GET', postdata=None, headers=None,
-	agent="SHOUTcast", timeout=0, cookies=None,
-	followRedirect=1, lastModified=None, etag=None):
-		HTTPClientFactory.__init__(self, url, method=method, postdata=postdata,
-		headers=headers, agent=agent, timeout=timeout, cookies=cookies, followRedirect=followRedirect)
-
-
-def sendUrlCommand(url, contextFactory=None, timeout=50, *args, **kwargs):
-	if hasattr(client, '_parse'):
-		scheme, host, port, filepath = client._parse(url)
-	else:
-		# _URI class renamed to URI in 15.0.0
-		try:
-			from twisted.web.client import _URI as URI
-		except ImportError:
-			from twisted.web.client import URI
-		uri = URI.fromBytes(url)
-		scheme = uri.scheme
-		host = uri.host
-		port = uri.port
-		filepath = uri.path
-	factory = myHTTPClientFactory(url, *args, **kwargs)
-	reactor.connectTCP(host, port, factory, timeout=timeout)
-	return factory.deferred
-
-
 mcpath = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/"
 
 
@@ -101,16 +85,19 @@ def PlaylistEntryComponent(serviceref, state=None):
 	res = [serviceref]
 	text = serviceref.getName()
 	if text == "":
-		text = path.split(serviceref.getPath().split('/')[-1])[1]
-	res.append((eListboxPythonMultiContent.TYPE_TEXT, 25, 1, 470, 22, 0, RT_VALIGN_CENTER, text))
+		text = split(serviceref.getPath().split('/')[-1])[1]
+	if FHD:
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, 5, 3, 760, 32, 0, RT_VALIGN_CENTER, text))
+	else:
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, 5, 2, 510, 22, 0, RT_VALIGN_CENTER, text))
 	return res
 
 
 class PlayList(MenuList):
 	def __init__(self, enableWrapAround=False):
 		MenuList.__init__(self, playlist, enableWrapAround, eListboxPythonMultiContent)
-		self.l.setFont(0, gFont("Regular", 15))
-		self.l.setItemHeight(23)
+		self.l.setFont(0, gFont('Regular', 28 if FHD else 15))
+		self.l.setItemHeight(40 if FHD else 23)
 		MC_AudioPlayer.currPlaying = -1
 		self.oldCurrPlaying = -1
 		self.serviceHandler = eServiceCenter.getInstance()
@@ -167,8 +154,8 @@ class PlayList(MenuList):
 	def updateList(self):
 		self.l.setList(self.list)
 
-	def getCurrentIndex(self):
-		return MC_AudioPlayer.currPlaying
+#	def getCurrentIndex(self):
+#		return MC_AudioPlayer.currPlaying
 
 	def getCurrentEvent(self):
 		l = self.l.getCurrentSelection()
@@ -201,11 +188,12 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		self["currentfolder"] = Label()
 		self["currentfavname"] = Label()
 		self.standardInfoBar = False
+		self.ac3ON = False
 		try:
 			if config.av.downmix_ac3.value == False:
 				config.av.downmix_ac3.value = True
 				config.av.downmix_ac3.save()
-				system("touch /tmp/.ac3on")
+				self.ac3ON = True
 		except Exception as e:
 			print("Media Center: no ac3")
 		self["play"] = Pixmap()
@@ -296,29 +284,21 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 
 	def up(self):
 		self["filelist"].up()
-#		if config.plugins.mc_global.vfd.value == "on":
-#			evfd.getInstance().vfd_write_string(self["filelist"].getName())
 		if MC_AudioPlayer.STATE != "NONE" and config.plugins.mc_ap.showJpg.getValue():
 			self.screensavercheckup()
 
 	def down(self):
 		self["filelist"].down()
-#		if config.plugins.mc_global.vfd.value == "on":
-#			evfd.getInstance().vfd_write_string(self["filelist"].getName())
 		if MC_AudioPlayer.STATE != "NONE" and config.plugins.mc_ap.showJpg.getValue():
 			self.screensavercheckup()
 
 	def leftUp(self):
 		self["filelist"].pageUp()
-#		if config.plugins.mc_global.vfd.value == "on":
-#			evfd.getInstance().vfd_write_string(self["filelist"].getName())
 		if MC_AudioPlayer.STATE != "NONE" and config.plugins.mc_ap.showJpg.getValue():
 			self.screensavercheckup()
 
 	def rightDown(self):
 		self["filelist"].pageDown()
-#		if config.plugins.mc_global.vfd.value == "on":
-#			evfd.getInstance().vfd_write_string(self["filelist"].getName())
 		if MC_AudioPlayer.STATE != "NONE" and config.plugins.mc_ap.showJpg.getValue():
 			self.screensavercheckup()
 
@@ -447,7 +427,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		if config.plugins.mc_ap.showJpg.getValue():
 			time = config.plugins.mc_ap.jpg_delay.getValue() * 1000
 			self.JpgTimer.start(time, True)
-		#path = self["filelist"].getCurrentDirectory() + self["filelist"].getFilename()
+		#path = self["filelist"].getFilename()
 		#self["coverArt"].updateCoverArt(path)
 
 	def StopPlayback(self):
@@ -646,7 +626,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 			MC_AudioPlayer.currPlaying = len(self.playlist) - 1
 			self.PlayServicepls()
 		elif choice[1] == "copyfiles":
-			self.addDirtoPls(path.dirname(self.filelist.getSelection()[0].getPath()) + "/", recursive=False)
+			self.addDirtoPls(dirname(self.filelist.getSelection()[0].getPath()) + "/", recursive=False)
 		elif choice[1] == "deletefile":
 			self.deleteFile()
 		elif choice[1] == "shuffle":
@@ -666,16 +646,13 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		self.FileInfoTimer.stop()
 		del self["coverArt"].picload
 		del self["screensaver"].picload
-		if path.isfile("/tmp/.ac3on"):
+		if self.ac3ON:
 			config.av.downmix_ac3.value = False
 			config.av.downmix_ac3.save()
-			remove("/tmp/.ac3on")
 		config.plugins.mc_ap.save()
 		if self.session.nav.getCurrentService() is not None:
 			self.session.nav.stopService()
 		MC_AudioPlayer.STATE = "NONE"
-#		if config.plugins.mc_global.vfd.value == "on":
-#			evfd.getInstance().vfd_write_string(_("My Music"))
 		self.close()
 
 	def screensavercheckup(self):
@@ -699,11 +676,12 @@ class MC_WebRadio(Screen, HelpableScreen):
 		self.isVisible = True
 		self["key_blue"] = Button(_("Settings"))
 		self["fileinfo"] = Label()
+		self.ac3ON = False
 		try:
 			if config.av.downmix_ac3.value == False:
 				config.av.downmix_ac3.value = True
 				config.av.downmix_ac3.save()
-				system("touch /tmp/.ac3on")
+				self.ac3ON = True
 		except Exception as e:
 			print("Media Center: no ac3")
 		self["play"] = Pixmap()
@@ -953,10 +931,9 @@ class MC_WebRadio(Screen, HelpableScreen):
 			return
 		self.FileInfoTimer.stop()
 		del self["screensaver"].picload
-		if path.isfile("/tmp/.ac3on"):
+		if self.ac3ON:
 			config.av.downmix_ac3.value = False
 			config.av.downmix_ac3.save()
-			remove("/tmp/.ac3on")
 		if self.session.nav.getCurrentService() is not None:
 			self.session.nav.stopService()
 		MC_AudioPlayer.STATE = "NONE"
@@ -969,50 +946,131 @@ class MC_WebRadio(Screen, HelpableScreen):
 		self.JpgTimer.start(time, True)
 
 	def showMenu(self):
-		if fileExists("/tmp/index.html"):
-			remove("/tmp/index.html")
+		if fileExists("/tmp/pl.m3u"):
+			remove("/tmp/pl.m3u")
 		menu = []
-		menu.append((_("70-80er"), "70-80er/"))
-		menu.append((_("Alternative"), "Alternative/"))
-		menu.append((_("Ambient"), "Ambient/"))
-		menu.append((_("Artist"), "Artist/"))
-		menu.append((_("Big Band"), "Big%20Band/"))
-		menu.append((_("Blues"), "Blues/"))
-		menu.append((_("Bluegrass"), "Bluegrass/"))
-		menu.append((_("Chillout"), "Chillout/"))
-		menu.append((_("Classic"), "classical/"))
-		menu.append((_("Classic Rock"), "classic%20rock/"))
-		menu.append((_("Countrymusic"), "Countrymusik/"))
-		menu.append((_("Hip Hop"), "HipHop/"))
-		menu.append((_("Hits"), "Hits/"))
-		menu.append((_("Moviemusic"), "Moviemusik/"))
-		menu.append((_("Oldies"), "Oldies/"))
-		menu.append((_("Party"), "Party/"))
-		menu.append((_("Reggae"), "Reggae/"))
-		menu.append((_("Rock"), "Rock/"))
-		menu.append((_("Rundfunk"), "Rundfunk/"))
-		menu.append((_("Smooth"), "Smooth/"))
-		menu.append((_("Soul"), "Soul/"))
-		menu.append((_("Techno/House"), "Techno/"))
-		menu.append((_("Worldmusic"), "Worldmusik/"))
+		menu.append((_("Top_40"), "top_40"))
+		menu.append((_("Pop"), "pop"))
+		menu.append((_("Rock"), "rock"))
+		menu.append((_("60s"), "60s"))
+		menu.append((_("70s"), "70s"))
+		menu.append((_("80s"), "80s"))
+		menu.append((_("90s"), "90s"))
+		menu.append((_("Acid_jazz"), "acid_jazz"))
+		menu.append((_("African"), "african"))
+		menu.append((_("Alternative"), "alternative"))
+		menu.append((_("Ambient"), "ambient"))
+		menu.append((_("Americana"), "americana"))
+		menu.append((_("Anime"), "anime"))
+		menu.append((_("Arabic"), "arabic"))
+		menu.append((_("Asian"), "asian"))
+		menu.append((_("Bigband"), "big_band"))
+		menu.append((_("Bluegrass"), "bluegrass"))
+		menu.append((_("Blues"), "blues"))
+		menu.append((_("Breakbeat"), "breakbeat"))
+		menu.append((_("Chillout"), "chillout"))
+		menu.append((_("Christian"), "christian"))
+		menu.append((_("Classical"), "classical"))
+		menu.append((_("Club"), "club"))
+		menu.append((_("College"), "college"))
+		menu.append((_("Comedy"), "comedy"))
+		menu.append((_("Country"), "country"))
+		menu.append((_("Dance"), "dance"))
+		menu.append((_("Deutsch"), "deutsch"))
+		menu.append((_("Disco"), "disco"))
+		menu.append((_("Discofox"), "discofox"))
+		menu.append((_("Downtempo"), "downtempo"))
+		menu.append((_("Drum'n'bass"), "drum_and_bass"))
+		menu.append((_("Easylistening"), "easy_listening"))
+		menu.append((_("Ebm"), "ebm"))
+		menu.append((_("Electronic"), "electronic"))
+		menu.append((_("Eurodance"), "eurodance"))
+		menu.append((_("Film"), "film"))
+		menu.append((_("Folk"), "folk"))
+		menu.append((_("France"), "france"))
+		menu.append((_("Funk"), "funk"))
+		menu.append((_("Gay"), "gay"))
+		menu.append((_("Goa"), "goa"))
+		menu.append((_("Gospel"), "gospel"))
+		menu.append((_("Gothic"), "gothic"))
+		menu.append((_("Greek"), "greek"))
+		menu.append((_("Hardcore"), "hardcore"))
+		menu.append((_("Hardrock"), "hardrock"))
+		menu.append((_("Hiphop"), "hip_hop"))
+		menu.append((_("House"), "house"))
+		menu.append((_("India"), "india"))
+		menu.append((_("Indie"), "indie"))
+		menu.append((_("Industrial"), "industrial"))
+		menu.append((_("Instrumental"), "instrumental"))
+		menu.append((_("Italian"), "italian"))
+		menu.append((_("Jazz"), "jazz"))
+		menu.append((_("Jpop"), "jpop"))
+		menu.append((_("Jungle"), "jungle"))
+		menu.append((_("Latin"), "latin"))
+		menu.append((_("Lounge"), "lounge"))
+		menu.append((_("Metal"), "metal"))
+		menu.append((_("Mixed"), "mixed"))
+		menu.append((_("Musical"), "musical"))
+		menu.append((_("Oldies"), "oldies"))
+		menu.append((_("Opera"), "opera"))
+		menu.append((_("Polish"), "polish"))
+		menu.append((_("Polka"), "polka"))
+		menu.append((_("Portugal"), "portugal"))
+		menu.append((_("Progressive"), "progressive"))
+		menu.append((_("Punk"), "punk"))
+		menu.append((_("Quran"), "quran"))
+		menu.append((_("Rap"), "rap"))
+		menu.append((_("Reggae"), "reggae"))
+		menu.append((_("Retro"), "retro"))
+		menu.append((_("Rnb"), "rnb"))
+		menu.append((_("Romanian"), "romanian"))
+		menu.append((_("Salsa"), "salsa"))
+		menu.append((_("Schlager"), "schlager"))
+		menu.append((_("Ska"), "ska"))
+		menu.append((_("Smooth_jazz"), "smooth_jazz"))
+		menu.append((_("Soul"), "soul"))
+		menu.append((_("Soundtrack"), "soundtrack"))
+		menu.append((_("Spain"), "spain"))
+		menu.append((_("Spiritual"), "spiritual"))
+		menu.append((_("Sport"), "sport"))
+		menu.append((_("Swing"), "swing"))
+		menu.append((_("Symphonic"), "symphonic"))
+		menu.append((_("Talk"), "talk"))
+		menu.append((_("Techno"), "techno"))
+		menu.append((_("Trance"), "trance"))
+		menu.append((_("Turk"), "turk"))
+		menu.append((_("Urban"), "urban"))
+		menu.append((_("Usa"), "usa"))
+		menu.append((_("Various"), "various"))
+		menu.append((_("Wave"), "wave"))
+		menu.append((_("Worldmusic"), "world"))
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title="", list=menu)
 
 	def menuCallback(self, choice):
 		if choice is None:
 			return
-		system("echo " + choice[1] + " > /tmp/.webselect | wget -O /tmp/index.html " + radirl + "" + choice[1])
+		system("wget -O /tmp/pl.m3u " + radirl + choice[1] + ".m3u")
 		self.session.openWithCallback(self.updd, MC_WebDown)
 
 
 class MC_WebDown(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		list = []
-		if fileExists("/tmp/index.html"):
-			names = open("/tmp/index.html").read().split('\n')
+		channels = []
+		if fileExists("/tmp/pl.m3u"):
+			names = open("/tmp/pl.m3u").read().split('\n')
+			lnk = ""
+			name = ""
 			for x in names:
-				list.append((x, _(x)))
-		self["menu"] = List(list)
+				if x.startswith("#EXTINF:"):
+					name = x.split("radio.pervii.com\", ")[1]
+				elif x.startswith("http"):
+					lnk = x
+				if name and lnk:
+					channels.append((name, lnk))
+					name = ""
+					lnk = ""
+		self["menu"] = List(channels)
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"],
 		{
 			"cancel": self.exit,
@@ -1022,13 +1080,16 @@ class MC_WebDown(Screen):
 	def okbuttonClick(self):
 		selection = self["menu"].getCurrent()
 		if selection is not None:
-			gen = open("/tmp/.webselect").read().split('\n')
-			system("wget -O '" + mcpath + "radio/" + selection[1] + "' '" + radirl + "" + gen[0] + "" + selection[1].replace(" ", "%20") + "'")
-			remove("/tmp/index.html")
+			fn = sub("[^a-zA-Z0-9\n\.]", "_", selection[0])
+			with open(mcpath + "radio/" + fn + ".m3u", "w") as f:
+				f.write(selection[1])
+			if fileExists("/tmp/pl.m3u"):
+				remove("/tmp/pl.m3u")
 			self.close()
 
 	def exit(self):
-		remove("/tmp/index.html")
+		if fileExists("/tmp/pl.m3u"):
+			remove("/tmp/pl.m3u")
 		self.close()
 
 
@@ -1122,6 +1183,7 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 
 	def KeyOK(self):
 		if len(self.playlist.getServiceRefList()):
+			print(self.playlist.getSelectionIndex())
 			x = self.playlist.getSelectionIndex()
 			self.playlist.setCurrentPlaying(self.playlist.getSelectionIndex())
 			x = self.playlist.getCurrentIndex()
@@ -1364,7 +1426,7 @@ class Lyrics(Screen):
 		<screen name="Lyrics" position="0,0" size="720,576" flags="wfNoBorder" backgroundColor="#00000000" title="Lyrics">
 		<eLabel backgroundColor="#999999" position="50,50" size="620,2" zPosition="1"/>
 		<widget name="headertext" position="50,73" zPosition="1" size="620,23" font="Regular;20" transparent="1"  foregroundColor="#fcc000" backgroundColor="#00000000"/>
-		<widget name="coverly" position="700,120" size="160,133" zPosition="9" valign="center" halign="center" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/no_coverArt.png" transparent="1" alphatest="blend" />
+		<widget name="coverly" position="700,120" size="160,200" zPosition="9" valign="center" halign="center" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/no_cover.png" transparent="1" alphatest="blend" />
 		<widget name="resulttext" position="50,100" zPosition="1" size="620,20" font="Regular;16" transparent="1"   backgroundColor="#00000000"/>
 		<widget name="lyric_text" position="50,150" zPosition="2" size="620,350" font="Regular;18" transparent="0"  backgroundColor="#00000000"/>
 		</screen>"""
@@ -1376,9 +1438,14 @@ class Lyrics(Screen):
 		self["resulttext"] = Label()
 		self["coverly"] = MediaPixmap()
 		curPlay = self.session.nav.getCurrentService()
+		self.oldplaying = ""
+		self.curplaying = ""
 		if curPlay is not None:
 			title = curPlay.info().getInfoString(iServiceInformation.sTagTitle)
-			system("echo '" + str(title) + "' > /tmp/.oldplaying | echo '" + str(title) + "' > /tmp/.curplaying ")
+			self.oldplaying = str(title)
+			self.curplaying = str(title)
+#			system("echo '" + str(title) + "' > /tmp/.oldplaying | echo '" + str(title) + "' > /tmp/.curplaying ")
+
 		self.RFTimer = eTimer()
 		self.RFTimer.callback.append(self.refresh)
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
@@ -1401,21 +1468,23 @@ class Lyrics(Screen):
 		self.RFTimer.start(time, True)
 		curPlay = self.session.nav.getCurrentService()
 		title = curPlay.info().getInfoString(iServiceInformation.sTagTitle)
-		system("echo '" + str(title) + "' > /tmp/.curplaying")
-		old = open("/tmp/.oldplaying").read()
-		oldtitle = old.split('\r\n')
-		tit = open("/tmp/.curplaying").read()
-		titlee = tit.split('\r\n')
-		if oldtitle == titlee:
+		self.curplaying = str(title)
+		#system("echo '" + str(title) + "' > /tmp/.curplaying")
+		#old = open("/tmp/.oldplaying").read()
+		#oldtitle = old.split('\r\n')
+		#tit = open("/tmp/.curplaying").read()
+		#titlee = tit.split('\r\n')
+		if self.oldplaying == self.curplaying:
 			return
 		else:
 			self.startRun()
-			system("echo '" + str(title) + "' > /tmp/.oldplaying")
+			self.oldplaying = str(title)
+			#system("echo '" + str(title) + "' > /tmp/.oldplaying")
 
 	def startRun(self):
-		text = getEncodedString(self.getLyricsFromID3Tag()).replace("\r\n", "\n")
-		text = text.replace("\r", "\n")
+		text = "No lyrics found in id3-tag, trying api.chartlyrics.com..."
 		self["lyric_text"].setText(text)
+		self.getLyricsFromID3Tag()
 
 	def getLyricsFromID3Tag(self):
 		curPlay = self.session.nav.getCurrentService()
@@ -1426,10 +1495,18 @@ class Lyrics(Screen):
 				titlely = curPlay.info().getName().split('/')[-1]
 			if artistly == "":
 				artistly = titlely
-		from six.moves.urllib.parse import quote
 		url = "http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist=%s&song=%s" % (quote(artistly), quote(titlely))
-		sendUrlCommand(url, None, 10).addCallback(self.gotLyrics).addErrback(self.urlError)
-		return "No lyrics found in id3-tag, trying api.chartlyrics.com..."
+		url = url.replace("%21", "%13")  # . dont ask me why
+		callInThread(self.threadGetPage, url, self.gotLyrics, self.urlError)
+
+	def threadGetPage(self, link, success, fail=None):
+		try:
+			response = get(link)
+			response.raise_for_status()
+			success(ensure_str(response.content))
+		except exceptions.RequestException as error:
+			if fail is not None:
+				fail(error)
 
 	def urlError(self, error=None):
 		if error is not None:
@@ -1437,18 +1514,19 @@ class Lyrics(Screen):
 			self["lyric_text"].setText("")
 
 	def gotLyrics(self, xmlstring):
-		from xml.etree.cElementTree import fromstring as cet_fromstring
 		root = cet_fromstring(xmlstring)
-		lyrictext = ""
-		lyrictext = root.findtext("{http://api.chartlyrics.com/}Lyric").encode("utf-8", 'ignore')
-		self["lyric_text"].setText(lyrictext)
-		title = root.findtext("{http://api.chartlyrics.com/}LyricSong").encode("utf-8", 'ignore')
-		artist = root.findtext("{http://api.chartlyrics.com/}LyricArtist").encode("utf-8", 'ignore')
-		coverly = root.findtext("{http://api.chartlyrics.com/}LyricCovertArtUrl").encode("utf-8", 'ignore')
-		system("wget -O /tmp/.onlinecover " + coverly + "")
-		self["coverly"].coverlyrics()
-		result = _("Response -> lyrics for: %s (%s)") % (title, artist)
-		self["resulttext"].setText(result)
+		try:
+			lyrictext = root.findtext("{http://api.chartlyrics.com/}Lyric")
+			self["lyric_text"].setText(lyrictext)
+			title = root.findtext("{http://api.chartlyrics.com/}LyricSong")
+			artist = root.findtext("{http://api.chartlyrics.com/}LyricArtist")
+			coverly = root.findtext("{http://api.chartlyrics.com/}LyricCovertArtUrl")
+			system("wget -O /tmp/.onlinecover " + coverly + "")
+			self["coverly"].coverlyrics()
+			result = _("Response -> lyrics for: %s (%s)") % (title, artist)
+			self["resulttext"].setText(result)
+		except:
+			pass
 		if not lyrictext:
 			self["resulttext"].setText(_("No lyrics found"))
 			self["lyric_text"].setText("")
@@ -1464,8 +1542,8 @@ class Lyrics(Screen):
 		del self["coverly"].picload
 		if fileExists("/tmp/.onlinecover"):
 			remove("/tmp/.onlinecover")
-		if fileExists("/tmp/.curplaying") and fileExists("/tmp/.oldplaying"):
-			system("rm -rf /tmp/.*playing")
+		#if fileExists("/tmp/.curplaying") and fileExists("/tmp/.oldplaying"):
+		#	system("rm -rf /tmp/.*playing")
 		self.RFTimer.stop()
 		self.close()
 
@@ -1476,7 +1554,12 @@ class MediaPixmap(Pixmap):
 		self.coverArtFileName = ""
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.paintCoverArtPixmapCB)
-		self.coverFileNames = ["cover.jpg", "folder.png", "folder.jpg"]
+		self.coverFileNames = ['cover.jpg',
+			'folder.png',
+			'folder.jpg',
+			'Cover.jpg',
+			'Folder.png',
+			'Folder.jpg']
 
 	def applySkin(self, desktop, screen):
 		from Tools.LoadPixmap import LoadPixmap
