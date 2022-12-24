@@ -985,12 +985,12 @@ class EmailAccountList(Screen):
 		self["buttonyellow"] = Label(_("edit"))
 		self["setupActions"] = ActionMap(["ColorActions", "OkCancelActions", "MenuActions"],
 		{
-			"menu": self._config,
-			"red": self._remove,
-			"green": self._add,
-			"yellow": self._edit,
-			"cancel": self._exit,
-			"ok": self._action,
+			"menu": self.keyMenu,
+			"red": self.keyRed,
+			"green": self.keyGreen,
+			"yellow": self.keyYellow,
+			"cancel": self.keyCancel,
+			"ok": self.keyOK,
 		}, -2)
 		for acc in mailAccounts:
 			if not acc.isConnected():
@@ -1011,13 +1011,13 @@ class EmailAccountList(Screen):
 			accList.append([acc, MultiContentEntryText(pos=(0, 0), size=(self.width, scaleV(20, 18) + 5), text=acc._name, color=color, color_sel=color)])
 		self["accounts"].l.setList(accList)
 
-	def _config(self):
-		debug("[EmailAccountList] _config")
-		self.session.open(EmailConfigOptions, "Rev " + "$Revision$"[11: - 1] + "$Date$"[7:23])
+	def keyMenu(self):
+		debug("[EmailAccountList] keyMenu")
+		self.session.open(EmailConfigOptions)
 
-	def _action(self):
+	def keyOK(self):
 		if self["accounts"].getCurrent():
-			debug("[EmailAccountList] _action: %s" % self["accounts"].getCurrent()[0]._name)
+			debug("[EmailAccountList] keyOK: %s" % self["accounts"].getCurrent()[0]._name)
 			account = self["accounts"].getCurrent()[0]
 			if account and account.isConnected():
 				self.session.open(EmailScreen, account)
@@ -1028,14 +1028,14 @@ class EmailAccountList(Screen):
 								type=MessageBox.TYPE_INFO,
 								timeout=config.plugins.emailimap.timeout.value)
 		else:
-			debug("[EmailAccountList] _action: no account selected")
+			debug("[EmailAccountList] keyOK: no account selected")
 			self.session.open(MessageBox,
 							_("no account selected"),
 							type=MessageBox.TYPE_ERROR,
 							timeout=config.plugins.emailimap.timeout.value)
 
-	def _add(self):
-		debug("[EmailAccountList] _add")
+	def keyGreen(self):
+		debug("[EmailAccountList] keyGreen")
 		self.session.openWithCallback(self._cbAdd, EmailConfigAccount)
 
 	def _cbAdd(self, params):
@@ -1044,8 +1044,8 @@ class EmailAccountList(Screen):
 			EmailAccount(params, writeAccounts)
 		self.close()
 
-	def _edit(self):
-		debug("[EmailAccountList] _edit")
+	def keyYellow(self):
+		debug("[EmailAccountList] keyYellow")
 		if self["accounts"].getCurrent():
 			self.session.openWithCallback(self._cbEdit, EmailConfigAccount, self["accounts"].getCurrent()[0].getConfig())
 		else:
@@ -1058,8 +1058,8 @@ class EmailAccountList(Screen):
 			EmailAccount(params, writeAccounts)
 		self.close()
 
-	def _remove(self):
-		debug("[EmailAccountList] _remove")
+	def keyRed(self):
+		debug("[EmailAccountList] keyRed")
 		if self["accounts"].getCurrent():
 			self.session.openWithCallback(
 				self._cbRemove,
@@ -1077,7 +1077,7 @@ class EmailAccountList(Screen):
 			writeAccounts()
 		self._layoutFinish()
 
-	def _exit(self):
+	def keyCancel(self):
 		for acc in mailAccounts:
 			acc.removeCallback()
 		self.close()
