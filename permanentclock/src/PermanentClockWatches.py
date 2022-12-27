@@ -2,6 +2,9 @@ import math
 from Components.Renderer.Renderer import Renderer
 from skin import parseColor
 from enigma import eCanvas, eSize, gRGB, eRect
+from sys import version_info
+
+PY3 = version_info[0] == 3
 
 
 class PermanentClockWatches(Renderer):
@@ -35,7 +38,10 @@ class PermanentClockWatches(Renderer):
 	def hand(self):
 		width = self.instance.size().width()
 		height = self.instance.size().height()
-		r = (min(width, height) / 2)
+		if PY3:
+			r = (min(width, height) // 2)
+		else:
+			r = (min(width, height) / 2)
 		(endX, endY,) = self.calculate(self.numval, r, r)
 		self.draw_line(r, r, endX, endY)
 

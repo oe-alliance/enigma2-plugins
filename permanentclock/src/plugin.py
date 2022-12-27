@@ -17,12 +17,27 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 import gettext
-import os
+from os import system, path
 from boxbranding import getImageDistro
-if not os.path.exists('/usr/lib/enigma2/python/Components/Converter/PermanentClockTime.pyo'):
-	os.system('cp /usr/lib/enigma2/python/Plugins/Extensions/PermanentClock/PermanentClockTime.pyo /usr/lib/enigma2/python/Components/Converter/PermanentClockTime.pyo')
-if not os.path.exists('/usr/lib/enigma2/python/Components/Renderer/PermanentClockWatches.pyo'):
-	os.system('cp /usr/lib/enigma2/python/Plugins/Extensions/PermanentClock/PermanentClockWatches.pyo /usr/lib/enigma2/python/Components/Renderer/PermanentClockWatches.pyo')
+from sys import version_info
+
+PY3 = version_info[0] == 3
+
+if PY3:
+	PTime = "/usr/lib/enigma2/python/Plugins/Extensions/PermanentClock/PermanentClockTime.pyc"
+	ConverterTime = "/usr/lib/enigma2/python/Components/Converter/PermanentClockTime.pyc"
+	PWatches = "/usr/lib/enigma2/python/Plugins/Extensions/PermanentClock/PermanentClockWatches.pyc"
+	RendererWatches = "/usr/lib/enigma2/python/Components/Renderer/PermanentClockWatches.pyc"
+else:
+	PTime = "/usr/lib/enigma2/python/Plugins/Extensions/PermanentClock/PermanentClockTime.pyo"
+	ConverterTime = "/usr/lib/enigma2/python/Components/Converter/PermanentClockTime.pyo"
+	PWatches = "/usr/lib/enigma2/python/Plugins/Extensions/PermanentClock/PermanentClockWatches.pyo"
+	RendererWatches = "/usr/lib/enigma2/python/Components/Renderer/PermanentClockWatches.pyo"
+
+if not path.exists(ConverterTime):
+	system("cp " + PTime + " " + ConverterTime)
+if not path.exists(RendererWatches):
+	system("cp " + PWatches + " " + RendererWatches)
 
 _session = None
 
