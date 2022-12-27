@@ -3,9 +3,9 @@ msgstr ""
 "Project-Id-Version: enigma2 - permanentclock\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 19:06+0430\n"
-"PO-Revision-Date: 2009-05-31 02:27+0100\n"
-"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
-"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"PO-Revision-Date: 2022-12-28 00:48+0100\n"
+"Last-Translator: Madhouse <anonm4d@gmail.com>\n"
+"Language-Team: www.smart-shell.com <anonm4d@gmail.com>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Basepath: /home/dario/Plugins/permanentclock\n"
-"X-Poedit-SearchPath-0: /home/dario/Plugins/permanentclock\n"
+"X-Poedit-Basepath: /home/madhouse/Plugins/permanentclock\n"
+"X-Poedit-SearchPath-0: /home/madhouse/Plugins/permanentclock\n"
 
 msgid "Activate permanent clock"
 msgstr "Attivare l'orologio permanente"
@@ -24,74 +24,74 @@ msgid "Change permanent clock position"
 msgstr "Cambiare la posizione dell'orologio"
 
 msgid "Choice color clock:"
-msgstr ""
+msgstr "Scegli il colore dell'orologio:"
 
 msgid "Color analog clock"
-msgstr ""
+msgstr "Colore orologio analogico"
 
 msgid "Color digital clock"
-msgstr ""
+msgstr "Colore orologio digitale"
 
 msgid "Deactivate permanent clock"
 msgstr "Disattivare l'orologio permanente"
 
 msgid "Disable key 'long EXIT' show/hide"
-msgstr ""
+msgstr "Disabilita il tasto 'pressione lunga Exit' mostra/nascondi"
 
 msgid "Enable key 'long EXIT' show/hide"
-msgstr ""
+msgstr "Abilitare il tasto 'pressione lunga Exit' mostra/nascondi"
 
 msgid "PLi-transparent"
-msgstr ""
+msgstr "PLi-trasparente"
 
 msgid "Permanent Clock"
-msgstr "Permanent Clock"
+msgstr "Orologio Permanente"
 
 #, fuzzy
 msgid "Permanent Clock Setup"
-msgstr "Permanent Clock"
+msgstr "Impostazioni Permanent Clock"
 
 msgid "Save"
-msgstr ""
+msgstr "Salva"
 
 msgid "Set slider"
-msgstr ""
+msgstr "Imposta lo step"
 
 msgid "Set slider step (1 - 20):"
-msgstr ""
+msgstr "Imposta lo step (1 - 20):"
 
 msgid "Show analog clock"
-msgstr ""
+msgstr "Mostra orologio analogico"
 
 msgid "Show digital clock"
-msgstr ""
+msgstr "Mostra orologio digitale"
 
 msgid "Shows the clock permanent on the screen"
 msgstr "Mostrare sullo schermo un orologio permanente"
 
 msgid "black-blue"
-msgstr ""
+msgstr "nero-blu"
 
 msgid "black-white"
-msgstr ""
+msgstr "nero-bianco"
 
 msgid "black-yellow"
-msgstr ""
+msgstr "nero-giallo"
 
 msgid "blue"
-msgstr ""
+msgstr "blu"
 
 msgid "large white"
-msgstr ""
+msgstr "grande bianco"
 
 msgid "large yellow"
-msgstr ""
+msgstr "grande giallo"
 
 msgid "transparent"
-msgstr ""
+msgstr "trasparente"
 
 msgid "white"
-msgstr ""
+msgstr "bianco"
 
 msgid "yellow"
-msgstr ""
+msgstr "giallo"
