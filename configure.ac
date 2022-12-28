@@ -231,6 +231,7 @@ bmediacenter/Makefile
 bmediacenter/meta/Makefile
 bmediacenter/po/Makefile
 bmediacenter/src/Makefile
+bmediacenter/src/tmdbsimple/Makefile
 bmediacenter/src/icons/Makefile
 bmediacenter/src/radio/Makefile
 bmediacenter/src/saver/Makefile

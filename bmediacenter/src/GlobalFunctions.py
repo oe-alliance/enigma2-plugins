@@ -1,46 +1,6 @@
 from re import sub
-from enigma import iServiceInformation, getDesktop
-from Components.ActionMap import ActionMap
-from Screens.Screen import Screen
-from Screens.ServiceInfo import ServiceInfoList, ServiceInfoListEntry
 from Tools.Directories import fileExists
 from _ctypes import dlopen, dlsym, call_function
-
-
-class MC_VideoInfoView(Screen):
-	if getDesktop(0).size().width() == 1920:
-		skin = """
-			<screen position="80,130" size="840,480" title="View Video Info" >
-				<widget name="infolist" position="5,5" size="810,460" selectionDisabled="1" />
-			</screen>"""
-	else:
-		skin = """
-			<screen position="80,130" size="560,320" title="View Video Info" >
-				<widget name="infolist" position="5,5" size="550,310" selectionDisabled="1" />
-			</screen>"""
-
-	def __init__(self, session, fullname, name, ref):
-		self.skin = MC_VideoInfoView.skin
-		Screen.__init__(self, session)
-		self["actions"] = ActionMap(["OkCancelActions"],
-		{
-			"cancel": self.close,
-			"ok": self.close
-		}, -1)
-		tlist = []
-		self["infolist"] = ServiceInfoList(tlist)
-		currPlay = self.session.nav.getCurrentService()
-		if currPlay is not None:
-			stitle = currPlay.info().getInfoString(iServiceInformation.sTitle)
-			if stitle == "":
-				stitle = currPlay.info().getName().split('/')[-1]
-			tlist.append(ServiceInfoListEntry("Title: ", stitle))
-			tlist.append(ServiceInfoListEntry("sNamespace: ", currPlay.info().getInfoString(iServiceInformation.sNamespace)))
-			tlist.append(ServiceInfoListEntry("sProvider: ", currPlay.info().getInfoString(iServiceInformation.sProvider)))
-			tlist.append(ServiceInfoListEntry("sTimeCreate: ", currPlay.info().getInfoString(iServiceInformation.sTimeCreate)))
-			tlist.append(ServiceInfoListEntry("sVideoWidth: ", currPlay.info().getInfoString(iServiceInformation.sVideoWidth)))
-			tlist.append(ServiceInfoListEntry("sVideoHeight: ", currPlay.info().getInfoString(iServiceInformation.sVideoHeight)))
-			tlist.append(ServiceInfoListEntry("sDescription: ", currPlay.info().getInfoString(iServiceInformation.sDescription)))
 
 
 class Showiframe():
@@ -54,12 +14,20 @@ class Showiframe():
 		except OSError as e:
 			self.showSinglePic = dlsym(self.showiframe, "_Z13showSinglePicPKc")
 			self.finishShowSinglePic = dlsym(self.showiframe, "_Z19finishShowSinglePicv")
+		except Exception as e:
+			pass
 
 	def showStillpicture(self, pic):
-		call_function(self.showSinglePic, (pic, ))
+		try:
+			call_function(self.showSinglePic, (pic, ))
+		except:
+			pass
 
 	def finishStillPicture(self):
-		call_function(self.finishShowSinglePic, ())
+		try:
+			call_function(self.finishShowSinglePic, ())
+		except:
+			pass
 
 
 def shortname(movie, showing=None):

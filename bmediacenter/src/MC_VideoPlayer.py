@@ -1,28 +1,140 @@
-from __future__ import absolute_import
-from re import sub
+from re import sub, I
 from os import system, remove
-from os.path import basename, split
+from os.path import basename, split, splitext, exists
+from requests import get, exceptions
 from glob import glob
+from shutil import move
+from . import tmdbsimple as tmdb
 from enigma import getDesktop, eTimer
 from Components.Label import Label
 from Components.Button import Button
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigText, getConfigListEntry
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigText, getConfigListEntry, ConfigYesNo
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import NumberActionMap, HelpableActionMap
+from Components.Language import language
+from Screens.ChoiceBox import ChoiceBox
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Screens.InfoBar import MoviePlayer as OrgMoviePlayer
 from Tools.Directories import resolveFilename, pathExists, fileExists, SCOPE_MEDIA
 from Components.Sources.ServiceEvent import ServiceEvent
 from Screens.MessageBox import MessageBox
+from twisted.internet.reactor import callInThread
 from .MC_Filelist import FileList
-from .GlobalFunctions import shortname, MC_VideoInfoView, Showiframe
+from .GlobalFunctions import shortname, Showiframe
 config.plugins.mc_vp = ConfigSubsection()
 config.plugins.mc_vp_sortmode = ConfigSubsection()
 sorts = [('default', _("default")), ('alpha', _("alphabet")), ('alphareverse', _("alphabet backward")), ('date', _("date")), ('datereverse', _("date backward")), ('size', _("size")), ('sizereverse', _("size backward"))]
 config.plugins.mc_vp_sortmode.enabled = ConfigSelection(sorts)
 config.plugins.mc_vp.dvd = ConfigSelection(default="dvd", choices=[("dvd", "dvd"), ("movie", "movie")])
 config.plugins.mc_vp.lastDir = ConfigText(default=resolveFilename(SCOPE_MEDIA))
+config.plugins.mc_vp.themoviedb_coversize = ConfigSelection(default="w185", choices=["w92", "w185", "w500", "original"])
+config.plugins.mc_vp.themoviedb_fullinfo = ConfigYesNo(default=False)
+
+tmdb.API_KEY = 'd42e6b820a1541cc69ce789671feba39'
+COVERTMP = "/tmp/bmc.jpg"
+INFOTMP = "/tmp/bmc.txt"
+
+
+class TMDB():
+	def __init__(self):
+		self.coverSize = config.plugins.mc_vp.themoviedb_coversize.value
+		self.lang = language.getLanguage().split("_", 1)[0]
+		if len(self.lang) < 2:
+			self.lang = "en"
+		self.coverFilename = None
+
+	def cleanFile(self, text):
+		cutlist = ['x264', '720p', '1080p', '1080i', 'PAL', 'GERMAN', 'ENGLiSH', 'WS', 'DVDRiP', 'UNRATED', 'RETAIL', 'Web-DL', 'DL', 'LD', 'MiC', 'MD', 'DVDR', 'BDRiP', 'BLURAY', 'DTS', 'UNCUT', 'ANiME',
+					'AC3MD', 'AC3', 'AC3D', 'TS', 'DVDSCR', 'COMPLETE', 'INTERNAL', 'DTSD', 'XViD', 'DIVX', 'DUBBED', 'LINE.DUBBED', 'DD51', 'DVDR9', 'DVDR5', 'h264', 'AVC',
+					'WEBHDTVRiP', 'WEBHDRiP', 'WEBRiP', 'WEBHDTV', 'WebHD', 'HDTVRiP', 'HDRiP', 'HDTV', 'ITUNESHD', 'REPACK', 'SYNC']
+		#text = text.replace('.wmv', '').replace('.flv', '').replace('.ts', '').replace('.m2ts', '').replace('.mkv', '').replace('.avi', '').replace('.mpeg', '').replace('.mpg', '').replace('.iso', '')
+
+		for word in cutlist:
+			text = sub('(\_|\-|\.|\+)' + word + '(\_|\-|\.|\+)', '+', text, flags=I)
+		text = text.replace('.', ' ').replace('-', ' ').replace('_', ' ').replace('+', '')
+		return text
+
+	def threadDownloadPage(self, link, getCoverCallback):
+		try:
+			response = get(link)
+			response.raise_for_status()
+			with open(COVERTMP, "wb") as f:
+				f.write(response.content)
+			getCoverCallback()
+		except exceptions.RequestException as error:
+			print("[TMDb] Download cover Error: %s" % str(error))
+
+	def tmdbGetCover(self, coverUrl, getCoverCallback):
+		callInThread(self.threadDownloadPage, coverUrl, getCoverCallback)
+
+	def tmdbMovie(self, movieID, callback):
+		try:
+			movie = tmdb.Movies(int(movieID))
+			callback(movie.info(language=self.lang))
+		except Exception as error:
+			print("[TMDb] Movies Error: %s" % str(error))
+
+	def tmdbSearch(self, fileName, session, selectCallback):
+		fileName = splitext(basename(fileName))[0]
+		text = self.cleanFile(fileName)
+		res = []
+		try:
+			search = tmdb.Search()
+			json_data = search.multi(query=text, language=self.lang)
+			for IDs in json_data['results']:
+				try:
+					media = str(IDs['media_type'])
+				except:
+					media = ""
+				try:
+					id = str(IDs['id'])
+				except:
+					id = ""
+
+				title = ""
+				try:
+					title = str(IDs['title'])
+				except:
+					pass
+				try:
+					title = str(IDs['name'])
+				except:
+					pass
+
+				date = ""
+				try:
+					date = str(IDs['release_date'])[:4]
+				except:
+					pass
+
+				coverUrl = ""
+				try:
+					coverPath = str(IDs['poster_path'])
+					coverUrl = "http://image.tmdb.org/t/p/%s/%s" % (self.coverSize, coverPath)
+				except:
+					pass
+
+				if id and title and media:
+					if media == "movie":
+						mediasubst = _("Movie")
+					else:
+						mediasubst = _("Series")
+					choice = "%s: %s (%s)" % (mediasubst, title, date)
+					res.append((choice, coverUrl, id, IDs))
+
+			if len(res) > 1:
+				title = _("Please select")
+				session.openWithCallback(selectCallback, ChoiceBox, title=title, list=res)
+			elif len(res) == 0:
+				session.open(MessageBox, "Nothing found", MessageBox.TYPE_INFO, windowTitle="")
+			else:
+				selectCallback(res[0])
+				# show info
+		except Exception as error:
+			import traceback
+			traceback.print_exc()
+			session.open(MessageBox, "[TMDb] Error: %s" % str(error), MessageBox.TYPE_ERROR, windowTitle="")
 
 
 class MoviePlayer(OrgMoviePlayer):
@@ -39,10 +151,11 @@ class MoviePlayer(OrgMoviePlayer):
 		self.close()
 
 
-class MC_VideoPlayer(Screen, HelpableScreen):
+class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
+		TMDB.__init__(self)
 		self["key_red"] = Button(_("Delete Movie"))
 		self["key_yellow"] = Button("")
 		self["key_blue"] = Button(_("Settings"))
@@ -61,7 +174,7 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 				"up": (self.up, "List up"),
 				"down": (self.down, "List down"),
 				"menu": (self.KeyMenu, "File / Folder Options"),
-# TODO			"info": (self.showFileInfo, "Show File Info"),
+				"info": (self.showFileInfo, "Show File Info"),
 				"nextBouquet": (self.NextFavFolder, "Next Favorite Folder"),
 				"prevBouquet": (self.PrevFavFolder, "Previous Favorite Folder"),
 #				"red": (self.FavoriteFolders, "Favorite Folders"),
@@ -166,8 +279,40 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 	def showFileInfo(self):
 		if self["filelist"].canDescent():
 			return
-		else:  # TODO
-			self.session.open(MC_VideoInfoView, self["filelist"].getFilename(), basename(self["filelist"].getFilename()), self["filelist"].getServiceRef())
+		self.coverFilename = "%s.jpg" % splitext(self["filelist"].getFilename())[0]
+		self.tmdbSearch(self["filelist"].getFilename(), self.session, self.showFileInfoCallback)
+
+	def showFileInfoCallback(self, answer):
+		if answer is not None:
+			if exists(COVERTMP):
+				remove(COVERTMP)
+			self.tmdbGetCover(answer[1], self.tmdbGetCoverCallback)
+			if config.plugins.mc_vp.themoviedb_fullinfo.value:  # TODO
+				self.tmdbMovie(answer[2], self.tmdbSaveMovieInfo)
+			else:
+				self.tmdbSaveMovieInfo(answer[3])
+
+	def tmdbSaveMovieInfo(self, movieInfo):
+		try:
+			txt = "%s\n\n%s" % (movieInfo["overview"], movieInfo["release_date"])
+			with open(INFOTMP, "w", encoding="utf-8") as f:
+				f.write(txt)
+			movieInfoFile = "%stxt" % self.coverFilename[:-3]
+			move(INFOTMP, movieInfoFile)
+		except:
+			import traceback
+			traceback.print_exc()
+			print("Error write movie info file")
+		self.updateEventInfo()
+
+	def tmdbGetCoverCallback(self):
+		if exists(COVERTMP) and not exists(self.coverFilename):
+			try:
+				move(COVERTMP, self.coverFilename)
+			except:
+				print("Error move cover file")
+				pass
+			self.updateEventInfo()
 
 	def KeyOk(self):
 		self.filename = self.filelist.getFilename()

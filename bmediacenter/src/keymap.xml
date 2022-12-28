@@ -22,6 +22,8 @@
 		<key id="KEY_BLUE" mapto="blue" flags="m" />
 		<key id="KEY_NEXT" mapto="next" flags="m" />
 		<key id="KEY_PREVIOUS" mapto="previous" flags="m" />
+		<key id="KEY_ENTER" mapto="ok" flags="m" />
+		<key id="KEY_ESC" mapto="cancel" flags="m" />
 	</map>
 	<map context="MC_VideoPlayerActions">
 		<key id="KEY_OK" mapto="ok" flags="m" />
@@ -40,11 +42,14 @@
 		<key id="KEY_YELLOW" mapto="yellow" flags="m" />
 		<key id="KEY_GREEN" mapto="green" flags="m" />
 		<key id="KEY_BLUE" mapto="blue" flags="m" />
+		<key id="KEY_ENTER" mapto="ok" flags="m" />
+		<key id="KEY_ESC" mapto="cancel" flags="m" />
 	</map>
 	<map context="MC_BonkelPlayerActions">
 		<key id="KEY_VIDEO" mapto="resolution" flags="m" />
 		<key id="KEY_EXIT" mapto="leavePlayer" flags="m" />
 		<key id="KEY_STOP" mapto="leavePlayer" flags="m" />
+		<key id="KEY_ESC" mapto="leavePlayer" flags="m" />
 	</map>
 	<map context="MC_PictureViewerActions">
 		<key id="KEY_OK" mapto="ok" flags="m" />
@@ -64,5 +69,7 @@
 		<key id="KEY_YELLOW" mapto="yellow" flags="m" />
 		<key id="KEY_GREEN" mapto="green" flags="m" />
 		<key id="KEY_BLUE" mapto="blue" flags="m" />
+		<key id="KEY_ENTER" mapto="ok" flags="m" />
+		<key id="KEY_ESC" mapto="cancel" flags="m" />
 	</map>
 </keymap>
