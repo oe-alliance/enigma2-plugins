@@ -1,30 +1,4 @@
-# -*- coding: utf-8 -*-
-#
-#  Birthday Reminder E2 Plugin
-#
-#  $Id: BirthdayTimer.py,v 1.0 2011-08-29 00:00:00 Shaderman Exp $
-#
-#  Coded by Shaderman (c) 2011
-#  Support: www.dreambox-tools.info
-#
-#  This plugin is licensed under the Creative Commons
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported
-#  License. To view a copy of this license, visit
-#  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
-#  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
-#
-#  Alternatively, this plugin may be distributed and executed on hardware which
-#  is licensed by Dream Multimedia GmbH.
-
-#  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially
-#  distributed other than under the conditions noted above.
-#
-
-
 # OWN IMPORTS
-from __future__ import print_function
-from __future__ import absolute_import
 from .BirthdayNetworking import BroadcastProtocol, TransferServerFactory, TransferClientFactory
 from .BirthdayReminder import BirthdayStore, getAge
 
@@ -147,7 +121,7 @@ class BirthdayTimer(Timer, BirthdayStore):
 			self.transferServerPort = reactor.listenTCP(port, self.transferServerProtocol)
 			self.broadcastPort = reactor.listenUDP(port, self.broadcastProtocol)
 		except:
-			print("[Birthday Reminder] can't listen on port", port)
+			print("[Birthday Reminder] can't listen on port %s" % port)
 
 	def stopNetworking(self):
 		print("[Birthday Reminder] stopping network communication...")
@@ -155,15 +129,15 @@ class BirthdayTimer(Timer, BirthdayStore):
 		self.transferServerPort and self.transferServerPort.stopListening()
 
 	def requestBirthdayList(self, addr):
-		print("[Birthday Reminder] requesting birthday list from", addr[0])
+		print("[Birthday Reminder] requesting birthday list from %s" % addr[0])
 		reactor.connectTCP(addr[0], 7374, TransferClientFactory(self, "requestingList"))
 
 	def sendPingResponse(self, addr):
-		print("[Birthday Reminder] sending ping response to", addr[0])
+		print("[Birthday Reminder] sending ping response to %s" % addr[0])
 		reactor.connectTCP(addr[0], 7374, TransferClientFactory(self, "pong"))
 
 	def updateTimer(self, oldBirthday, newBirthday):
-		print("[Birthday Reminder] updating timer for", oldBirthday[0])
+		print("[Birthday Reminder] updating timer for %s" % oldBirthday[0])
 
 		self.removeTimersForEntry(oldBirthday)
 		self.addTimer(newBirthday)
@@ -174,9 +148,9 @@ class BirthdayTimer(Timer, BirthdayStore):
 
 	def addTimer(self, entry, preremind=False):
 		if preremind:
-			print("[Birthday Reminder] Adding preremind timer for", entry[0])
+			print("[Birthday Reminder] Adding preremind timer for %s" % entry[0])
 		else:
-			print("[Birthday Reminder] Adding birthday timer for", entry[0])
+			print("[Birthday Reminder] Adding birthday timer for %s" % entry[0])
 
 		timeList = config.plugins.birthdayreminder.notificationTime.value
 		notifyTime = dt_time(timeList[0], timeList[1])
@@ -219,9 +193,9 @@ class BirthdayTimer(Timer, BirthdayStore):
 		for timer in self.timer_list[:]:
 			if timer.bDay == entry:
 				if timer.preremind:
-					print("[Birthday Reminder] Removing preremind timer for", entry[0])
+					print("[Birthday Reminder] Removing preremind timer for %s" % entry[0])
 				else:
-					print("[Birthday Reminder] Removing birthday timer for", entry[0])
+					print("[Birthday Reminder] Removing birthday timer for %s" % entry[0])
 				self.timer_list.remove(timer)
 
 		self.calcNextActivation()

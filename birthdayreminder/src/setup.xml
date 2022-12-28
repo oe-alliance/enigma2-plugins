@@ -1,0 +1,22 @@
+<setupxml>
+	<setup key="BirthdayReminderSettings" title="Birthday Reminder Settings">
+		<item level="0" text="Path to birthday file:" description="Path to birthday file:">self.path</item>
+		<item level="0" text="Birthday filename:" description="Birthday filename:">self.filename</item>
+		<item level="0" text="Date format:" description="Date format:">config.plugins.birthdayreminder.dateFormat</item>
+		<item level="0" text="Remind before birthday:" description="Remind before birthday:">config.plugins.birthdayreminder.preremind</item>
+		<item level="0" text="Notification time:" description="Notification time:">config.plugins.birthdayreminder.notificationTime</item>
+		<item level="0" text="Sort birthdays by:" description="Sort birthdays by:">config.plugins.birthdayreminder.sortby</item>
+		<item level="0" text="Show plugin in extensions menu:" description="Show plugin in extensions menu:">config.plugins.birthdayreminder.showInExtensions</item>
+		<item level="0" text="Networking port (default: 7374):" description="Networking port (default: 7374):">config.plugins.birthdayreminder.broadcastPort</item>
+	</setup>
+	<setup key="EditBirthdaySetting" title="Edit Birthday Settings">
+		<item level="0" text="Name:" description="Name:">config.plugins.birthdayreminder.name</item>
+		<if conditional="config.plugins.birthdayreminder.dateFormat.value == 'mmddyyyy'">
+    		<item level="0" text="Month:" description="Month:">config.plugins.birthdayreminder.month</item>
+    		<item level="0" text="Day:" description="Day:">config.plugins.birthdayreminder.day</item>
+		<else />
+    		<item level="0" text="Day:" description="Day:">config.plugins.birthdayreminder.day</item>
+    		<item level="0" text="Month:" description="Month:">config.plugins.birthdayreminder.month</item>
+		</if>
+	</setup>
+</setupxml>
