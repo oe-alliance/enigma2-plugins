@@ -69,7 +69,10 @@ class DMC_MainMenu(Screen):
 			self.can_osd_alpha = False
 		if self.can_osd_alpha:
 			open("/proc/stb/video/alpha", "w").write(str("255"))
-		open("/proc/sys/vm/drop_caches", "w").write(str("3"))
+		try:
+			open("/proc/sys/vm/drop_caches", "w").write(str("3"))
+		except:
+			pass
 		menulist = []
 		menulist.append((_("My Music"), "MC_AudioPlayer", "menu_music", "50"))
 		menulist.append((_("My Videos"), "MC_VideoPlayer", "menu_video", "50"))
@@ -147,7 +150,10 @@ class DMC_MainMenu(Screen):
 	def Exit(self):
 #		self.session.nav.stopService()
 		# Restore OSD Transparency Settings
-		open("/proc/sys/vm/drop_caches", "w").write(str("3"))
+		try:
+			open("/proc/sys/vm/drop_caches", "w").write(str("3"))
+		except:
+			pass
 		if self.can_osd_alpha:
 			try:
 				if config.plugins.mc_global.vfd.value == "on":
