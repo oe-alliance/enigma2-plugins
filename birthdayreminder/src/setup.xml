@@ -18,5 +18,6 @@
     		<item level="0" text="Day:" description="Day:">config.plugins.birthdayreminder.day</item>
     		<item level="0" text="Month:" description="Month:">config.plugins.birthdayreminder.month</item>
 		</if>
+    	<item level="0" text="Year:" description="Year:">config.plugins.birthdayreminder.year</item>
 	</setup>
 </setupxml>
