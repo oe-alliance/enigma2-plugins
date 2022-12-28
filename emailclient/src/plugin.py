@@ -56,7 +56,7 @@ def decodeHeader(text, default=''):
 		if isinstance(content, bytes):
 			textNew += content.decode(charset)
 		else:
-			textNew += textNew
+			textNew += content
 
 	return textNew
 
