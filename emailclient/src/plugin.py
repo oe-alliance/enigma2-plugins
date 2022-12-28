@@ -56,7 +56,7 @@ def decodeHeader(text, default=''):
 		if isinstance(content, bytes):
 			textNew += content.decode(charset)
 		else:
-			textNew += charset
+			textNew += textNew
 
 	return textNew
 
@@ -81,7 +81,7 @@ class EmailScreen(Screen):
 	messagelistWidth = width - boxlistWidth
 	infolabelHeight = scaleV(-1, 30)
 	skin = """
-		<screen position="%d,%d" size="%d,%d" title="Email" >
+		<screen position="%d,%d" size="%d,%d" title="Email">
 			<widget name="boxlist" position="0,0" size="%d,%d" scrollbarMode="showOnDemand" />
 			<widget name="messagelist" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" />
 			<widget name="infolabel" position="%d,%d" size="%d,%d"   foregroundColor=\"white\" font=\"Regular;%d\" />
@@ -899,7 +899,7 @@ class EmailAccount():
 
 	def _doLoginInsecure(self):
 		debug("[EmailAccount] %s: _doLoginInsecure" % (self._name))
-		self._proto.login(self._user, self._password).addCallback(self._onAuthentication).addErrback(self._onInsecureAuthenticationFailed)
+		self._proto.login(self._user.encode('ascii'), self._password.encode('ascii')).addCallback(self._onAuthentication).addErrback(self._onInsecureAuthenticationFailed)
 
 	def _onInsecureAuthenticationFailed(self, failure):
 		debug("[EmailAccount] %s: _onInsecureAuthenticationFailed: %s" % (self._name, failure.getErrorMessage()))
