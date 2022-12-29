@@ -1,3 +1,4 @@
+from datetime import datetime
 from re import sub, I
 from os import system, remove
 from os.path import basename, split, splitext, exists
@@ -22,6 +23,11 @@ from Screens.MessageBox import MessageBox
 from twisted.internet.reactor import callInThread
 from .MC_Filelist import FileList
 from .GlobalFunctions import shortname, Showiframe
+try:
+	from Tools.EITFile import EITFile
+except ImportError:
+	EITFile = None
+
 config.plugins.mc_vp = ConfigSubsection()
 config.plugins.mc_vp_sortmode = ConfigSubsection()
 sorts = [('default', _("default")), ('alpha', _("alphabet")), ('alphareverse', _("alphabet backward")), ('date', _("date")), ('datereverse', _("date backward")), ('size', _("size")), ('sizereverse', _("size backward"))]
@@ -29,7 +35,7 @@ config.plugins.mc_vp_sortmode.enabled = ConfigSelection(sorts)
 config.plugins.mc_vp.dvd = ConfigSelection(default="dvd", choices=[("dvd", "dvd"), ("movie", "movie")])
 config.plugins.mc_vp.lastDir = ConfigText(default=resolveFilename(SCOPE_MEDIA))
 config.plugins.mc_vp.themoviedb_coversize = ConfigSelection(default="w185", choices=["w92", "w185", "w500", "original"])
-config.plugins.mc_vp.themoviedb_fullinfo = ConfigYesNo(default=False)
+config.plugins.mc_vp.themoviedb_fullinfo = ConfigYesNo(default=True)
 
 tmdb.API_KEY = 'd42e6b820a1541cc69ce789671feba39'
 COVERTMP = "/tmp/bmc.jpg"
@@ -287,17 +293,32 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 			if exists(COVERTMP):
 				remove(COVERTMP)
 			self.tmdbGetCover(answer[1], self.tmdbGetCoverCallback)
-			if config.plugins.mc_vp.themoviedb_fullinfo.value:  # TODO
+			movieInfoFile = "%seit" % self.coverFilename[:-3]
+			if EITFile and exists(movieInfoFile):
+				print("'%s' already exists" % movieInfoFile)
+				return
+			if config.plugins.mc_vp.themoviedb_fullinfo.value:
 				self.tmdbMovie(answer[2], self.tmdbSaveMovieInfo)
 			else:
 				self.tmdbSaveMovieInfo(answer[3])
 
 	def tmdbSaveMovieInfo(self, movieInfo):
 		try:
-			txt = "%s\n\n%s" % (movieInfo["overview"], movieInfo["release_date"])
-			with open(INFOTMP, "w", encoding="utf-8") as f:
-				f.write(txt)
-			movieInfoFile = "%stxt" % self.coverFilename[:-3]
+			movieInfoFile = "%seit" % self.coverFilename[:-3]
+			genres = movieInfo.get("genres", [])
+			if genres:
+				genres = [genre["name"] for genre in genres]
+			overview = "%s\n\n%s\n%s\n" % (movieInfo["overview"], ",".join(genres), movieInfo["release_date"])
+			if EITFile:
+				runtime = 60 * int(movieInfo.get("runtime", "0"))
+				title = movieInfo.get("title", "")
+				lang = "DEU" if self.lang == "de" else "ENG"  # TODO LANG
+				eitFile = EITFile(INFOTMP, lang, 0, datetime.now(), runtime, title, "", overview)
+				eitFile.save()
+			else:
+				with open(INFOTMP, "w", encoding="utf-8") as f:
+					f.write(overview)
+				movieInfoFile = "%stxt" % self.coverFilename[:-3]
 			move(INFOTMP, movieInfoFile)
 		except:
 			import traceback
