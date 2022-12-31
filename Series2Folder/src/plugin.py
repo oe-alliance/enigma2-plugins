@@ -819,4 +819,7 @@ class Series2FolderConfig(ConfigListScreen, Screen):
     def keyboard(self):
         selection = self["config"].getCurrent()
         if isinstance(selection[1], ConfigText):
-            self.keyText()
+            try:
+                self.keyText()
+            except:
+                self.KeyText()
