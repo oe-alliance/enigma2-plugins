@@ -6,19 +6,21 @@ from requests import get, exceptions
 from glob import glob
 from shutil import move
 from . import tmdbsimple as tmdb
-from enigma import getDesktop, eTimer
+from enigma import getDesktop, eTimer, eServiceCenter
 from Components.Label import Label
 from Components.Button import Button
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigText, getConfigListEntry, ConfigYesNo
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import NumberActionMap, HelpableActionMap
 from Components.Language import language
+from Components.Sources.ServiceEvent import ServiceEvent
+from Components.Sources.StaticText import StaticText
+from Components.ScrollLabel import ScrollLabel
 from Screens.ChoiceBox import ChoiceBox
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Screens.InfoBar import MoviePlayer as OrgMoviePlayer
 from Tools.Directories import resolveFilename, pathExists, fileExists, SCOPE_MEDIA
-from Components.Sources.ServiceEvent import ServiceEvent
 from Screens.MessageBox import MessageBox
 from twisted.internet.reactor import callInThread
 from .MC_Filelist import FileList
@@ -81,9 +83,16 @@ class TMDB():
 		except Exception as error:
 			print("[TMDb] Movies Error: %s" % str(error))
 
-	def tmdbSearch(self, fileName, session, selectCallback):
-		fileName = splitext(basename(fileName))[0]
-		text = self.cleanFile(fileName)
+	def tmdbSearch(self, fileName, serviceref, session, selectCallback):
+		text = None
+		if serviceref:
+			info = eServiceCenter.getInstance().info(serviceref)
+			event = info and info.getEvent(serviceref)
+			if event:
+				text = event.getEventName()
+		if not text:
+			fileName = splitext(basename(fileName))[0]
+			text = self.cleanFile(fileName)
 		res = []
 		try:
 			search = tmdb.Search()
@@ -127,7 +136,7 @@ class TMDB():
 					else:
 						mediasubst = _("Series")
 					choice = "%s: %s (%s)" % (mediasubst, title, date)
-					res.append((choice, coverUrl, id, IDs))
+					res.append((choice, coverUrl, id, IDs, fileName.endswith('.ts')))
 
 			if len(res) > 1:
 				title = _("Please select")
@@ -162,31 +171,45 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		TMDB.__init__(self)
-		self["key_red"] = Button(_("Delete Movie"))
-		self["key_yellow"] = Button("")
-		self["key_blue"] = Button(_("Settings"))
+		self["key_red"] = StaticText(_("Delete Movie"))
+		self["key_green"] = StaticText("")
+		self["key_yellow"] = StaticText("Info")
+		self["moviedetailsbg"] = StaticText("")
 		self["currentfolder"] = Label("")
 		self["currentfavname"] = Label("")
+		self["moviedetails"] = ScrollLabel()
+		self["moviedetails"].hide()
 		self.showiframe = Showiframe()
 		self.mvion = False
 		self.curfavfolder = -1
+		self.isTS = False
 		system("touch /tmp/bmcmovie")
 		self["actions"] = HelpableActionMap(self, "MC_VideoPlayerActions",
-			{
-				"ok": (self.KeyOk, "Play selected file"),
-				"cancel": (self.Exit, "Exit Video Player"),
-				"left": (self.leftUp, "List Top"),
-				"right": (self.rightDown, "List Bottom"),
-				"up": (self.up, "List up"),
-				"down": (self.down, "List down"),
-				"menu": (self.KeyMenu, "File / Folder Options"),
-				"info": (self.showFileInfo, "Show File Info"),
-				"nextBouquet": (self.NextFavFolder, "Next Favorite Folder"),
-				"prevBouquet": (self.PrevFavFolder, "Previous Favorite Folder"),
-#				"red": (self.FavoriteFolders, "Favorite Folders"),
-				"red": (self.SelDelete, "Delete Movie"),
-				"blue": (self.KeySettings, "Settings"),
-			}, -2)
+		{
+			"ok": (self.KeyOk, "Play selected file"),
+			"cancel": (self.Exit, "Exit Video Player"),
+			"left": (self.leftUp, "List Top"),
+			"right": (self.rightDown, "List Bottom"),
+			"up": (self.up, "List up"),
+			"down": (self.down, "List down"),
+			"nextBouquet": (self.NextFavFolder, "Next Favorite Folder"),
+			"prevBouquet": (self.PrevFavFolder, "Previous Favorite Folder"),
+			"menu": (self.keySettings, _("Settings"))
+		}, -2)
+
+		self["moviefileactions"] = HelpableActionMap(self, "MC_VideoPlayerActions",
+		{
+			"yellow": (self.keyMovieInfo, _("Show Movie Info")),
+			"red": (self.keyDeleteMovie, _("Delete Movie"))
+		}, -2)
+		self["moviefileactions"].setEnabled(True)
+
+		self["movieinfoactions"] = HelpableActionMap(self, "MC_VideoPlayerActions",
+		{
+			"green": (self.keySave, _("Save Movie Info")),
+			"red": (self.keyCloseMovieInfo, _("Close"))
+		}, -2)
+		self["movieinfoactions"].setEnabled(False)
 
 		currDir = config.plugins.mc_vp.lastDir.value
 		if not pathExists(currDir):
@@ -203,6 +226,14 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 		self.detailtimer.callback.append(self.updateEventInfo)
 
 	def __selectionChanged(self):
+		if self.filelist.canDescent():
+			self["moviefileactions"].setEnabled(False)
+			self["key_yellow"].setText("")
+			self["key_red"].setText("")
+			return
+		self["key_yellow"].setText("Info")
+		self["key_red"].setText(_("Delete Movie"))
+		self["moviefileactions"].setEnabled(True)
 		self.detailtimer.start(500, True)
 
 	def updateEventInfo(self):
@@ -254,80 +285,120 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 	def NextFavFolder(self):
 		pass
 
-	def SelDelete(self):
+	def keyCloseMovieInfo(self):
+		if self.movieInfo:
+			self["movieinfoactions"].setEnabled(False)
+			self["moviefileactions"].setEnabled(True)
+			self["moviedetails"].setText("")
+			self["moviedetails"].hide()
+			self["filelist"].show()
+			self["filelist"].selectionEnabled(True)
+			self["key_red"].setText(_("Delete Movie"))
+			self["key_green"].setText("")
+			self["key_yellow"].setText(_("Show Movie Info"))
+			self["moviedetailsbg"].setText("")
+			self.movieInfo = None
+
+	def keyDeleteMovie(self):
+		def keyDeleteMovieCallback(ret):
+			if ret is True:
+				self.filename = self.filelist.getFilename()
+				if self.filename.endswith('.ts'):
+					path = self.filename.replace('.ts', '')
+					for fdelete in glob(path + '.*'):
+						remove(fdelete)
+
+				elif self.filename.endswith('.vob'):
+					path = self.filename.replace('.vob', '')
+					print('path: %s' % path)
+					for fdelete in glob(path + '.*'):
+						print('fdelete: %s' % fdelete)
+						remove(fdelete)
+
+				else:
+					path = self.filename
+					remove(path)
+				self.refreshList()
+
 		self.filename = self.filelist.getFilename()
-		path = self.filename
-		self.session.openWithCallback(self.selremove, MessageBox, _('Do you really want to delete\n%s ?') % path, MessageBox.TYPE_YESNO)
-
-	def selremove(self, ret):
-		if ret is True:
-			self.filename = self.filelist.getFilename()
-			if self.filename.endswith('.ts'):
-				path = self.filename.replace('.ts', '')
-				for fdelete in glob(path + '.*'):
-					remove(fdelete)
-
-			elif self.filename.endswith('.vob'):
-				path = self.filename.replace('.vob', '')
-				print('path: %s' % path)
-				for fdelete in glob(path + '.*'):
-					print('fdelete: %s' % fdelete)
-					remove(fdelete)
-
-			else:
-				path = self.filename
-				remove(path)
-			self.updd()
+		self.session.openWithCallback(keyDeleteMovieCallback, MessageBox, _('Do you really want to delete\n%s ?') % self.filename, MessageBox.TYPE_YESNO)
 
 	def PrevFavFolder(self):
 		return
 
-	def showFileInfo(self):
+	def keyMovieInfo(self):
 		if self["filelist"].canDescent():
 			return
+		self.movieInfo = None
 		self.coverFilename = "%s.jpg" % splitext(self["filelist"].getFilename())[0]
-		self.tmdbSearch(self["filelist"].getFilename(), self.session, self.showFileInfoCallback)
+		self.tmdbSearch(self["filelist"].getFilename(), self["filelist"].getServiceRef(), self.session, self.showMovieInfoCallback)
 
-	def showFileInfoCallback(self, answer):
+	def showMovieInfoCallback(self, answer):
 		if answer is not None:
 			if exists(COVERTMP):
 				remove(COVERTMP)
+			self.isTS = answer[4]
 			self.tmdbGetCover(answer[1], self.tmdbGetCoverCallback)
-			movieInfoFile = "%seit" % self.coverFilename[:-3]
-			if EITFile and exists(movieInfoFile):
-				print("'%s' already exists" % movieInfoFile)
-				return
 			if config.plugins.mc_vp.themoviedb_fullinfo.value:
-				self.tmdbMovie(answer[2], self.tmdbSaveMovieInfo)
+				self.tmdbMovie(answer[2], self.showMovieInfoPanel)
 			else:
-				self.tmdbSaveMovieInfo(answer[3])
+				self.showMovieInfoPanel(answer[3])
 
-	def tmdbSaveMovieInfo(self, movieInfo):
-		try:
+	def keySave(self):
+		if self.movieInfo:
+			try:
+				movieInfoFile = "%seit" % self.coverFilename[:-3]
+				genres = self.movieInfo.get("genres", [])
+				if genres:
+					genres = [genre["name"] for genre in genres]
+				overview = "%s\n\n%s\n%s\n" % (self.movieInfo["overview"], ",".join(genres), self.movieInfo["release_date"])
+				if EITFile and not self.isTS:
+					runtime = 60 * int(self.movieInfo.get("runtime", "0"))
+					title = self.movieInfo.get("title", "")
+					lang = "DEU" if self.lang == "de" else "ENG"  # TODO LANG
+					eitFile = EITFile(INFOTMP, lang, 0, datetime.now(), runtime, title, "", overview)
+					eitFile.save()
+				else:
+					with open(INFOTMP, "w", encoding="utf-8") as f:
+						f.write(overview)
+					movieInfoFile = "%stxt" % self.coverFilename[:-3]
+				move(INFOTMP, movieInfoFile)
+			except:
+				import traceback
+				traceback.print_exc()
+				print("Error write movie info file")
+			self.keyCloseMovieInfo()
+
+	def showMovieInfoPanel(self, movieInfo):
+		self.movieInfo = movieInfo
+		details = "%s|%s\n" % (_("Overview"), self.movieInfo["overview"])
+		details += "\n"
+		genres = self.movieInfo.get("genres", [])
+		if genres:
+			genres = [genre["name"] for genre in genres]
+		details += "%s|%s\n" % (_("Genres"), ",".join(genres))
+		self["moviedetails"].setText(details)
+		self["moviedetails"].show()
+		self["movieinfoactions"].setEnabled(True)
+		self["moviefileactions"].setEnabled(False)
+		self["filelist"].hide()
+		self["key_red"].setText(_("Close"))
+		self["moviedetailsbg"].setText("_")
+		if self.isTS:
+			self["key_green"].setText(_("Save as TXT"))
+			movieInfoTXTFile = "%stxt" % self.coverFilename[:-3]
+			if exists(movieInfoTXTFile):
+				self["key_green"].setText(_("Overwrite TXT"))
+		else:
+			self["key_green"].setText(_("Save as EIT"))
 			movieInfoFile = "%seit" % self.coverFilename[:-3]
-			genres = movieInfo.get("genres", [])
-			if genres:
-				genres = [genre["name"] for genre in genres]
-			overview = "%s\n\n%s\n%s\n" % (movieInfo["overview"], ",".join(genres), movieInfo["release_date"])
-			if EITFile:
-				runtime = 60 * int(movieInfo.get("runtime", "0"))
-				title = movieInfo.get("title", "")
-				lang = "DEU" if self.lang == "de" else "ENG"  # TODO LANG
-				eitFile = EITFile(INFOTMP, lang, 0, datetime.now(), runtime, title, "", overview)
-				eitFile.save()
-			else:
-				with open(INFOTMP, "w", encoding="utf-8") as f:
-					f.write(overview)
-				movieInfoFile = "%stxt" % self.coverFilename[:-3]
-			move(INFOTMP, movieInfoFile)
-		except:
-			import traceback
-			traceback.print_exc()
-			print("Error write movie info file")
-		self.updateEventInfo()
+			if exists(movieInfoFile):
+				self["key_green"].setText("Overwrite EIT")
+		self["key_yellow"].setText("")
+		self["filelist"].selectionEnabled(False)
 
 	def tmdbGetCoverCallback(self):
-		if exists(COVERTMP) and not exists(self.coverFilename):
+		if exists(COVERTMP):  # and not exists(self.coverFilename):
 			try:
 				move(COVERTMP, self.coverFilename)
 			except:
@@ -370,7 +441,7 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 				self.showiframe.showStillpicture("/usr/share/enigma2/black.mvi")
 				self.mvion = False
 
-	def KeyMenu(self):
+#	def KeyMenu(self):
 #		if self["filelist"].canDescent():
 #			if self.filelist.getCurrent()[0][1]:
 #				self.currentDirectory = self.filelist.getCurrent()[0][0]
@@ -378,14 +449,13 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 #					foldername = self.currentDirectory.split('/')
 #					foldername = foldername[-2]
 #					self.session.open(MC_FolderOptions,self.currentDirectory, foldername)
-		return
+#		return
 
-	def updd(self):
-		sort = config.plugins.mc_vp_sortmode.enabled.value
-		self.filelist.refresh(sort)
+	def refreshList(self):
+		self.filelist.refresh(config.plugins.mc_vp_sortmode.enabled.value)
 
-	def KeySettings(self):
-		self.session.openWithCallback(self.updd, VideoPlayerSettings)
+	def keySettings(self):
+		self.session.openWithCallback(self.refreshList, VideoPlayerSettings)
 
 	def Exit(self):
 		directory = self.filelist.getCurrentDirectory()
@@ -416,7 +486,7 @@ class VideoPlayerSettings(Screen, ConfigListScreen):
 		self["actions"] = NumberActionMap(["SetupActions", "OkCancelActions"],
 		{
 			"ok": self.keyOK,
-			"cancel": self.keyOK
+			"cancel": self.close
 		}, -1)
 		self.list = []
 		self.list.append(getConfigListEntry(_("Play DVD as:"), config.plugins.mc_vp.dvd))

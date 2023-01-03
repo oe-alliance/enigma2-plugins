@@ -13,6 +13,33 @@
 	</output>
 -->
   <!-- DMC Main Menu -->
+  <screen name="ColorButtons">
+    <widget source="key_red" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/key_red.png" position="23,1018" size="35,35" alphatest="blend" objectTypes="key_red,StaticText" transparent="1" scale="1">
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="key_red" render="Label" position="70,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" objectTypes="key_red,StaticText" transparent="1" />
+    <widget source="key_green" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/key_green.png" position="323,1018" size="35,35" alphatest="blend" objectTypes="key_green,StaticText" transparent="1" scale="1">
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="key_green" render="Label" position="370,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" objectTypes="key_green,StaticText" transparent="1" />
+    <widget source="key_yellow" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/key_yellow.png" position="623,1018" size="35,35" alphatest="blend" objectTypes="key_yellow,StaticText" transparent="1" scale="1">
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="key_yellow" render="Label" position="670,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" objectTypes="key_yellow,StaticText" transparent="1" />
+    <widget source="key_blue" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/key_blue.png" position="923,1018" size="35,35" alphatest="blend" objectTypes="key_blue,StaticText" transparent="1" scale="1">
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="key_blue" render="Label" position="970,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" objectTypes="key_blue,StaticText" transparent="1" />
+    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/key_red.png" position="23,1018" size="35,35" alphatest="blend" scale="1" objectTypes="key_red,Label,Button"/>
+    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/key_green.png" position="323,1018" size="35,35" alphatest="blend" scale="1" objectTypes="key_green,Label,Button"/>
+    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/key_yellow.png" position="623,1018" size="35,35" alphatest="blend" scale="1" objectTypes="key_yellow,Label,Button"/>
+    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/key_blue.png" position="923,1018" size="35,35" alphatest="blend" scale="1" objectTypes="key_blue,Label,Button"/>
+    <widget name="key_red" position="70,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" objectTypes="key_red,Label,Button"/>
+    <widget name="key_green" position="370,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" objectTypes="key_green,Label,Button"/>
+    <widget name="key_yellow" position="670,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" objectTypes="key_yellow,Label,Button"/>
+    <widget name="key_blue" position="970,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" objectTypes="key_blue,Label,Button"/>
+  </screen>
+
   <screen name="DMC_MainMenu" position="0,0" size="1920,1080" resolution="1920,1080" title="Home" flags="wfNoBorder" backgroundColor="black">
     <eLabel text="BMedia Center Menu" position="120,25" size="720,50" font="Regular; 36" halign="left" valign="center" foregroundColor="#0050bbff" backgroundColor="black" transparent="1" zPosition="1" />
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/Browser.png" position="0,0" zPosition="-20" size="1920,1080" scale="1" />
@@ -263,13 +290,11 @@
     <ePixmap name="mb_bgdockapsettings" position="20,12" zPosition="3" size="80,80" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/dock_video.png" transparent="1" alphatest="on" scale="1" />
     <widget name="filelist" font="Regular; 32" itemHeight="45" transparent="1" enableWrapAround="1" position="40,140" zPosition="5" size="1179,760" scrollbarMode="showOnDemand" />
   <!--  <widget name="new widget" position="0, 0" size="10, 10" /> -->
-    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/key_red.png" position="23,1018" size="35,35" alphatest="blend" scale="1" />
-    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/key_blue.png" position="323,1018" size="35,35" alphatest="blend" scale="1" />
-    <widget name="key_red" position="70,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
-    <widget name="key_blue" position="370,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
-    <ePixmap position="623,1018" zPosition="4" size="32,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/play_enabled.png" transparent="1" alphatest="blend" scale="1" />
     <ePixmap name="mb_bgdockapsettings" position="420,15" zPosition="3" size="64,64" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/folder_path.png" transparent="1" alphatest="on" scale="1" />
-    <eLabel text="OK / Play" position="670,1000" size="240,70" font="Regular; 27" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="1" />
+
+
+    <ePixmap position="923,1018" zPosition="4" size="32,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/play_enabled.png" transparent="1" alphatest="blend" scale="1" />
+    <eLabel text="OK / Play" position="970,1000" size="240,70" font="Regular; 27" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="1" />
     <widget source="Service" render="RunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=900,always=0" position="50,917" size="1140,36" zPosition="2" font="Regular; 32" halign="left" valign="center" transparent="1" foregroundColor="white" backgroundColor="black"> 
     <convert type="MovieInfo">ShortDescription</convert>
     </widget>
@@ -293,6 +318,11 @@
     <widget source="Service" font="Regular; 32" position="1260,190" render="RunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=900,always=0" size="620,37" transparent="1" zPosition="1" halign="left">
       <convert type="EventName">Name</convert>
     </widget>
+    <panel name="ColorButtons"/>
+   <widget source="moviedetailsbg" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/Bg_moviedetails.png" position="22,122" size="1177,787" transparent="0" alphatest="on" scale="1" zPosition="-17" objectTypes="moviedetailsbg,StaticText">
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget name="moviedetails" position="52,152" size="1116,724" font="Regular;32" splitPosition="200" transparent="1" />  
   </screen>
     <!-- DMC Picture Player -->
   <screen name="MC_PictureViewer" position="0,0" size="1920,1080" resolution="1920,1080" title="Pic Viewer" flags="wfNoBorder" backgroundColor="black">
