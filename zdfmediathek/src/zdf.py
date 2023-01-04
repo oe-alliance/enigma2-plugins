@@ -24,6 +24,7 @@ from Screens.InfoBar import MoviePlayer
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
+from Tools.Downloader import DownloadWithProgress
 config.plugins.ardzdf = ConfigSubsection()
 config.plugins.ardzdf.savetopath = ConfigDirectory(default='/media/hdd/movie/')
 PLUGINPATH = '/usr/lib/enigma2/python/Plugins/Extensions/ZDFMediathek/'
@@ -537,65 +538,3 @@ class DirBrowser(Screen):
 
     def cancel(self):
         self.close(False)
-
-
-class DownloadWithProgress:
-    def __init__(self, url, filname):
-        self.url = url
-        self.filname = filname
-        self.totalSize = 0
-        self.progress = 0
-        self.blockSize = 0
-        self.progressCallback = None
-        self.endCallback = None
-        self.errorCallback = None
-        self.stopFlag = False
-        self.timer = eTimer()
-        self.timer.callback.append(self.reportProgress)
-
-    def start(self):
-        try:
-            response = requests.head(self.url, headers=HEADERS, timeout=10)
-            if response.status_code == 200:
-                self.totalSize = int(response.headers.get('Content-Length', 0))
-                self.blockSize = max(min(self.totalSize // 100, 1024), 131071) if self.totalSize else 65536
-                callInThread(self.run)
-            else:
-                raise Exception('File not found')
-        except Exception as err:
-            if self.errorCallback:
-                self.errorCallback(str(err))
-
-    def run(self):
-        try:
-            response = requests.get(self.url, headers=HEADERS, stream=True, timeout=60)
-            with open(self.filname, 'wb') as fd:
-                for buffer in response.iter_content(self.blockSize):
-                    if self.stopFlag:
-                        response.close()
-                        fd.close()
-                        os.unlink(self.filname)
-                    self.progress += len(buffer)
-                    if self.progressCallback:
-                        self.timer.start(0, True)
-                    fd.write(buffer)
-            if self.endCallback:
-                self.endCallback(self.filname)
-        except Exception as err:
-            if self.errorCallback:
-                self.errorCallback(str(err))
-
-    def stop(self):
-        self.stopFlag = True
-
-    def reportProgress(self):
-        self.progressCallback(self.progress, self.totalSize)
-
-    def addProgress(self, progressCallback):
-        self.progressCallback = progressCallback
-
-    def addEnd(self, endCallback):
-        self.endCallback = endCallback
-
-    def addError(self, errorCallback):
-        self.errorCallback = errorCallback
