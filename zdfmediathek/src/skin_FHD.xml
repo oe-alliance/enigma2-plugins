@@ -1,10 +1,29 @@
-<screen position="center,center" size="1920,1080" flags="wfNoBorder">
-<widget source="global.CurrentTime" render="Label" position="1760,15" size="140,60" font="Regular; 50" halign="right" backgroundColor="metrixBackground" transparent="1">
-<convert type="ClockToText">Default</convert>
-</widget>
-<widget source="movielist" render="Listbox" position="600,115" size="1300,864" scrollbarMode="showOnDemand" zPosition="0">
-<convert type="TemplatedMultiContent">{"template": [MultiContentEntryText(pos=(15,0), size=(1125,72), font=0, text=1, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER), MultiContentEntryText(pos=(1170,0), size=(120,72), font=0, text=5, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER) ], "fonts": [gFont("Regular",30)], "itemHeight": 72 }</convert>
-</widget>
-<widget name="cover" position="30,115" size="540,305" zPosition="1" alphatest="blend" transparent="1"/>
-<widget name="handlung" position="30,450" size="540,550" zPosition="0" font="Regular; 30" halign="center"/>
+<screen position="center,center" size="1920,1080" flags="wfNoBorder" backgroundColor="#1a104485">
+	<eLabel position="45,9" size="450,60" text="ZDF Mediathek" font="Regular; 38" foregroundColor="#FFFFFF" backgroundColor="#1a104485" valign="center"/>
+	<widget source="global.CurrentTime" render="Label" position="1230,8" size="660,60" font="Regular; 38" foregroundColor="#FFFFFF" backgroundColor="#1a104485" halign="right" valign="center">
+		<convert type="ClockToText">Format %a.%e %b. %Y %H:%M</convert>
+	</widget>
+	<widget source="movielist" render="Listbox" position="30,90" size="1290,900" scrollbarMode="showOnDemand" foregroundColor="#FFFFFF" foregroundColorSelected="#FFFFFF" backgroundColor="#3D104485" backgroundColorSelected="#2967AA" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/ZDFMediathek/img/sel_blue.png" scrollbarWidth="12" scrollbarSliderForegroundColor="#FFFFFF" scrollbarSliderBorderColor="#FFFFFF">
+		<convert type="TemplatedMultiContent">{"template": [MultiContentEntryText(pos=(15,1), size=(1110,41), font=0, text=1, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER ), MultiContentEntryText(pos=(1125,1), size=(144,41), font=0, text=5, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER )], "fonts": [gFont("Regular",32)], "itemHeight": 45 }</convert>
+	</widget>
+	<widget name="cover" position="1350,90" size="540,305" alphatest="blend"/>
+	<widget name="handlung" position="1350,450" size="540,525" font="Regular; 30" foregroundColor="#FFFFFF" backgroundColor="#1a104485" halign="center"/>
+	<widget name="progress" position="1350,420" size="540,22" foregroundColor="#FFFFFF" backgroundColor="#101428" borderColor="#FFFFFF" borderWidth="2"/>
+	<widget name="DownloadLabel" position="1350,397" size="540,22" font="Regular; 17" foregroundColor="#FFFFFF" backgroundColor="#1a104485" halign="center" valign="center"/>
+	<eLabel position="30,78" size="1860,3" backgroundColor="#C0C0C0"/>
+	<eLabel position="30,999" size="1860,3" backgroundColor="#C0C0C0"/>
+	<eLabel position="1335,90" size="3,900" backgroundColor="#C0C0C0"/>
+	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ZDFMediathek/img/key_menu.png" position="1608,1020" size="84,36" alphatest="blend"/>
+	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ZDFMediathek/img/key_ok.png" position="1707,1020" size="84,36" alphatest="blend"/>
+	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ZDFMediathek/img/key_exit.png" position="1806,1020" size="84,36" alphatest="blend"/>
+	
+	
+	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ZDFMediathek/img/key_red.png" position="75,1020" size="39,39" alphatest="blend"/>
+	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ZDFMediathek/img/key_green.png" position="420,1020" size="39,39" alphatest="blend"/>
+	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ZDFMediathek/img/key_yellow.png" position="765,1020" size="39,39" alphatest="blend"/>
+	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ZDFMediathek/img/key_blue.png" position="1110,1020" size="39,39" alphatest="blend"/>
+	<eLabel position="126,1017" size="276,45" text="Beenden" font="Regular; 30" foregroundColor="#FFFFFF" backgroundColor="#1a104485" valign="center"/>
+	<eLabel position="471,1017" size="276,45" text="Download" font="Regular; 30" foregroundColor="#FFFFFF" backgroundColor="#1a104485" valign="center"/>
+	<eLabel position="816,1017" size="276,45" text=" " font="Regular; 30" foregroundColor="#FFFFFF" backgroundColor="#1a104485" valign="center"/>
+	<eLabel position="1161,1017" size="276,45" text="Home" font="Regular; 30" foregroundColor="#FFFFFF" backgroundColor="#1a104485" valign="center"/>
 </screen>
