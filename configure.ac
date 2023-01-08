@@ -228,7 +228,6 @@ bitrateviewer/src/Makefile
 bitrateviewer/src/bitratecalc/Makefile
 
 bmediacenter/Makefile
-bmediacenter/meta/Makefile
 bmediacenter/po/Makefile
 bmediacenter/src/Makefile
 bmediacenter/src/tmdbsimple/Makefile

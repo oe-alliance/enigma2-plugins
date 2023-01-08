@@ -1,16 +1,16 @@
 from datetime import datetime
-from re import sub, I
+from re import match, sub, I
 from os import system, remove
 from os.path import basename, split, splitext, exists
 from requests import get, exceptions
 from glob import glob
 from shutil import move
-from . import tmdbsimple as tmdb
+import tmdbsimple as tmdb
 from enigma import getDesktop, eTimer, eServiceCenter
 from Components.Label import Label
-from Components.Button import Button
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigText, getConfigListEntry, ConfigYesNo
 from Components.ConfigList import ConfigListScreen
+from Components.FileList import FileList
 from Components.ActionMap import NumberActionMap, HelpableActionMap
 from Components.Language import language
 from Components.Sources.ServiceEvent import ServiceEvent
@@ -23,7 +23,6 @@ from Screens.InfoBar import MoviePlayer as OrgMoviePlayer
 from Tools.Directories import resolveFilename, pathExists, fileExists, SCOPE_MEDIA
 from Screens.MessageBox import MessageBox
 from twisted.internet.reactor import callInThread
-from .MC_Filelist import FileList
 from .GlobalFunctions import shortname, Showiframe
 try:
 	from Tools.EITFile import EITFile
@@ -31,13 +30,22 @@ except ImportError:
 	EITFile = None
 
 config.plugins.mc_vp = ConfigSubsection()
-config.plugins.mc_vp_sortmode = ConfigSubsection()
-sorts = [('default', _("default")), ('alpha', _("alphabet")), ('alphareverse', _("alphabet backward")), ('date', _("date")), ('datereverse', _("date backward")), ('size', _("size")), ('sizereverse', _("size backward"))]
-config.plugins.mc_vp_sortmode.enabled = ConfigSelection(sorts)
 config.plugins.mc_vp.dvd = ConfigSelection(default="dvd", choices=[("dvd", "dvd"), ("movie", "movie")])
 config.plugins.mc_vp.lastDir = ConfigText(default=resolveFilename(SCOPE_MEDIA))
 config.plugins.mc_vp.themoviedb_coversize = ConfigSelection(default="w185", choices=["w92", "w185", "w500", "original"])
 config.plugins.mc_vp.themoviedb_fullinfo = ConfigYesNo(default=True)
+
+choiceList = [
+	("0.0", _("Name ascending")),
+	("0.1", _("Name descending")),
+	("1.0", _("Date ascending")),
+	("1.1", _("Date descending"))
+]
+choiceList = choiceList + [
+	("2.0", _("Size ascending")),
+	("2.1", _("Size descending"))
+]
+config.plugins.mc_vp_sortmode = ConfigSelection(default="0.0", choices=choiceList)
 
 tmdb.API_KEY = 'd42e6b820a1541cc69ce789671feba39'
 COVERTMP = "/tmp/bmc.jpg"
@@ -93,10 +101,18 @@ class TMDB():
 		if not text:
 			fileName = splitext(basename(fileName))[0]
 			text = self.cleanFile(fileName)
+		# splitname year
+		m = match(r'^(.*) \((19\d\d|20\d\d)\)$', text)
+		year = None
+		if m:
+			text, year = m.groups()
 		res = []
 		try:
 			search = tmdb.Search()
-			json_data = search.multi(query=text, language=self.lang)
+			if year:
+				json_data = search.multi(query=text, language=self.lang, year=year)
+			else:
+				json_data = search.multi(query=text, language=self.lang)
 			for IDs in json_data['results']:
 				try:
 					media = str(IDs['media_type'])
@@ -215,9 +231,8 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 		if not pathExists(currDir):
 			currDir = "/"
 		self["currentfolder"].setText(str(currDir))
-		sort = config.plugins.mc_vp_sortmode.enabled.value
 		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib", "/proc", "/ram", "/root", "/sbin", "/sys", "/tmp", "/usr", "/var"]
-		self.filelist = FileList(currDir, useServiceRef=True, showDirectories=True, showFiles=True, matchingPattern="(?i)^.*\.(ts|vob|mpg|mpeg|avi|mkv|dat|iso|img|mp4|wmv|flv|divx|mov|ogm|m2ts)", additionalExtensions=None, sort=sort)
+		self.filelist = FileList(currDir, useServiceRef=True, showDirectories=True, showFiles=True, matchingPattern="(?i)^.*\.(ts|vob|mpg|mpeg|avi|mkv|dat|iso|img|mp4|wmv|flv|divx|mov|ogm|m2ts)", additionalExtensions=None, sortDirs="0.0", sortFiles=config.plugins.mc_vp_sortmode.value, inhibitDirs=inhibitDirs)
 		self["filelist"] = self.filelist
 		self["filelist"].show()
 		self["Service"] = ServiceEvent()
@@ -452,7 +467,7 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 #		return
 
 	def refreshList(self):
-		self.filelist.refresh(config.plugins.mc_vp_sortmode.enabled.value)
+		self.filelist.refresh()
 
 	def keySettings(self):
 		self.session.openWithCallback(self.refreshList, VideoPlayerSettings)
@@ -490,7 +505,7 @@ class VideoPlayerSettings(Screen, ConfigListScreen):
 		}, -1)
 		self.list = []
 		self.list.append(getConfigListEntry(_("Play DVD as:"), config.plugins.mc_vp.dvd))
-		self.list.append(getConfigListEntry(_("Filelist Sorting:"), config.plugins.mc_vp_sortmode.enabled))
+		self.list.append(getConfigListEntry(_("Filelist Sorting:"), config.plugins.mc_vp_sortmode))
 		ConfigListScreen.__init__(self, self.list, session)
 
 	def keyOK(self):
