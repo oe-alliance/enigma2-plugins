@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 1626 $
-$Date: 2022-05-29 12:35:38 +0200 (Sun, 29 May 2022) $
-$Id: FritzCallFBF.py 1626 2022-05-29 10:35:38Z michael $
+$Revision: 1634 $
+$Date: 2023-01-07 16:45:19 +0100 (Sat, 07 Jan 2023) $
+$Id: FritzCallFBF.py 1634 2023-01-07 15:45:19Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -23,32 +23,33 @@ $Id: FritzCallFBF.py 1626 2022-05-29 10:35:38Z michael $
 # pylint: disable=C0111,C0103,C0301,W0603,C0302,W0611,F0401,E0611,W1201
 from __future__ import absolute_import
 import re
-import time
-import hashlib
 import logging
-import csv
 import json
 import six
 import xml.etree.ElementTree as ET
-from io import StringIO
 from twisted.python.failure import Failure
 from six.moves.urllib.parse import urlencode
-from six.moves import map, range
 
 from Tools import Notifications
 from Screens.MessageBox import MessageBox
-from twisted.web.client import getPage
-from enigma import eTimer  #@UnresolvedImport
+from enigma import eTimer  # @UnresolvedImport
 
-from . import __  # @UnresolvedImport # pylint: disable=W0611,F0401
+# from twisted.web.client import getPage  # deprecated
+from . import __, getPage  # @UnresolvedImport # pylint: disable=W0611,F0401
 from datetime import datetime
+import time
+import hashlib
+from .nrzuname import html2unicode
+import csv
+from io import StringIO
 try:
 	from enigma import eMediaDatabase  # @UnresolvedImport @UnusedImport
-except:
+except ImportError as ie:
 	from . import _  # @UnresolvedImport
-from .plugin import config, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS, FBF_BLOCKED_CALLS, decode  #@UnresolvedImport
-from .nrzuname import html2unicode  #@UnresolvedImport
-from .FritzConnection import FritzConnection  #@UnresolvedImport
+from .plugin import config, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS, FBF_BLOCKED_CALLS, decode  # @UnresolvedImport
+from .FritzConnection import FritzConnection  # @UnresolvedImport
+
+USERAGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
 
 FBF_boxInfo = 0
 FBF_upTime = 1
@@ -59,8 +60,6 @@ FBF_tamActive = 5
 FBF_dectActive = 6
 FBF_faxActive = 7
 FBF_rufumlActive = 8
-
-USERAGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
 
 
 def resolveNumber(number, default=None, phonebook=None, debug=logging.debug):
@@ -3564,7 +3563,7 @@ class FritzCallFBF_upnp():
 			self._timeout = TIMEOUT
 
 	def _getInfo(self, result):
-		self.debug(repr(result))
+		# self.debug(repr(result))
 		if isinstance(result, Failure):
 			text = _("FRITZ!Box - Error getting status: ") + _("wrong user or password?")
 			self._loginFailure = True
@@ -3597,13 +3596,14 @@ class FritzCallFBF_upnp():
 			newheaders[six.ensure_binary(h)] = six.ensure_binary(headers[h])
 		getPage(six.ensure_binary(url),
 			method=six.ensure_binary("POST"),
-			agent=six.ensure_binary(USERAGENT),
+			# agent=six.ensure_binary(USERAGENT),
 			headers=newheaders,
-			postdata=six.ensure_binary(parms)).addCallback(self._okGetInfo)
+			postdata=six.ensure_binary(parms)).addBoth(self._okGetInfo)
 
-	def _okGetInfo(self, html):
+	def _okGetInfo(self, result):
 		self.debug("")
-		html = six.ensure_str(html)
+		html = six.ensure_str(result.content)
+		self.debug("html: " + html)
 
 		if self.logger.getEffectiveLevel() == logging.DEBUG:
 			self.debug("dumping info to /tmp/FritzCall_okGetInfo.json")
@@ -3694,18 +3694,19 @@ class FritzCallFBF_upnp():
 			if "connections" in boxData["internet"]:  # since 07.39
 				for connData in boxData["internet"]["connections"]:
 					self.debug("2")
-					if provider:
-						provider = provider + ", " + connData["provider"]
-					else:
-						provider = connData["provider"]
-					self.debug("3")
+					if "provider" in connData:
+						if provider:
+							provider = provider + ", " + connData["provider"]
+						else:
+							provider = connData["provider"]
+					self.debug("3: provider " + provider)
 					if "downstream" in connData and "upstream" in connData:
 						if internetSpeed:
 							internetSpeed = internetSpeed + ", " + str(connData["downstream"] / 1000) + " Mbit/s / " + str(connData["upstream"] / 1000) + " Mbit/s"
 						else:
 							internetSpeed = str(connData["downstream"] / 1000) + " Mbit/s / " + str(connData["upstream"] / 1000) + " Mbit/s"
-					self.debug("4")
-					if connData["ipv4"]["connected"]:
+					self.debug("4: internetSpeed " + internetSpeed)
+					if "ipv4" in connData and connData["ipv4"]["connected"]:
 						if upTime:
 							upTime = upTime + ", " + datetime.fromtimestamp(connData["ipv4"]["since"]).strftime('%d.%m.%Y, %H:%M')
 						else:
@@ -3714,8 +3715,8 @@ class FritzCallFBF_upnp():
 							ipAddress = ipAddress + ", " + connData["ipv4"]["ip"]
 						else:
 							ipAddress = connData["ipv4"]["ip"]
-					self.debug("5")
-					if connData["ipv6"]["connected"]:
+					self.debug("5 upTime " + upTime + " ipAddrss " + ipAddress)
+					if "ipv6" in connData and connData["ipv6"]["connected"]:
 						if upTime6:
 							upTime6 = upTime6 + ", " + datetime.fromtimestamp(connData["ipv6"]["since"]).strftime('%d.%m.%Y, %H:%M')
 						else:
@@ -4032,7 +4033,7 @@ class FritzCallFBF_upnp():
 		getPage(six.ensure_binary(url)).addCallback(self._getCalls_cb2, callback)
 
 	def _getCalls_cb2(self, result, callback):
-		result = six.ensure_text(result)
+		result = six.ensure_text(result.content)
 		# self.debug("")
 		if self.logger.getEffectiveLevel() == logging.DEBUG:
 			self.debug("dumping calls to /tmp/FritzCall_getCalls_cb2.xml")
@@ -4182,7 +4183,7 @@ class FritzCallFBF_upnp():
 			getPage(six.ensure_binary(result["NewPhonebookURL"])).addCallback(self._loadFritzBoxPhonebook_cb3)
 
 	def _loadFritzBoxPhonebook_cb3(self, result):
-		result = six.ensure_text(result)
+		result = six.ensure_text(result.content)
 		root = ET.fromstring(result)
 		thisName = root.find(".//phonebook").attrib["name"]
 		self.debug("Phonebook: %s", thisName)
@@ -4390,6 +4391,8 @@ class FritzCallFBF_upnp():
 			self._notify(text)
 			return
 
+		result = result.content
+
 		if self.logger.getEffectiveLevel() == logging.DEBUG:
 			self.debug("dumping result to /tmp/FritzCall_readBlacklist_cb2.xml")
 			linkP = open("/tmp/FritzCall_readBlacklist_cb2.xml", "w")
@@ -4424,7 +4427,7 @@ class FritzCallFBF_upnp():
 			getPage(six.ensure_binary(result["NewPhonebookURL"])).addCallback(_readPhonebookForBlacklist_cb)
 
 		def _readPhonebookForBlacklist_cb(result):
-			result = six.ensure_text(result)
+			result = six.ensure_text(result.content)
 			root = ET.fromstring(result)
 			thisName = root.find(".//phonebook").attrib["name"]
 			self.debug("Phonebook: %s", thisName)

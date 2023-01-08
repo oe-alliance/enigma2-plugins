@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 1627 $
-$Date: 2022-05-29 12:35:58 +0200 (Sun, 29 May 2022) $
-$Id: plugin.py 1627 2022-05-29 10:35:58Z michael $
+$Revision: 1632 $
+$Date: 2023-01-07 15:51:00 +0100 (Sat, 07 Jan 2023) $
+$Id: plugin.py 1632 2023-01-07 14:51:00Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -75,7 +75,7 @@ from .nrzuname import ReverseLookupAndNotifier  # @UnresolvedImport
 from . import __  # @UnresolvedImport # pylint: disable=W0611,F0401
 try:
 	from enigma import eMediaDatabase  # @UnresolvedImport @UnusedImport
-except:
+except ImportError as ie:
 	from . import _  # @UnresolvedImport
 
 if six.PY3:
@@ -386,8 +386,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 1627 $"[1:-2] + "\n" +
-							"$Date: 2022-05-29 12:35:58 +0200 (Sun, 29 May 2022) $"[1:23] + "\n"
+							"$Revision: 1632 $"[1:-2] + "\n" +
+							"$Date: 2023-01-07 15:51:00 +0100 (Sat, 07 Jan 2023) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -2168,7 +2168,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1627 $"[1:-1] + "$Date: 2022-05-29 12:35:58 +0200 (Sun, 29 May 2022) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1632 $"[1:-1] + "$Date: 2023-01-07 15:51:00 +0100 (Sat, 07 Jan 2023) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2742,7 +2742,7 @@ class FritzReverseLookupAndNotifier(object):
 
 class FritzProtocol(LineReceiver):  # pylint: disable=W0223
 	def __init__(self):
-		info("[FritzProtocol] %s%s starting", "$Revision: 1627 $"[1:-1], "$Date: 2022-05-29 12:35:58 +0200 (Sun, 29 May 2022) $"[7:23])
+		info("[FritzProtocol] %s%s starting", "$Revision: 1632 $"[1:-1], "$Date: 2023-01-07 15:51:00 +0100 (Sat, 07 Jan 2023) $"[7:23])
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'

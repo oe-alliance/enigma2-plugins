@@ -2,10 +2,10 @@
 '''
 general functions for FritzCall plugin
 
-$Id: __init__.py 1589 2021-04-25 09:48:00Z michael $
+$Id: __init__.py 1632 2023-01-07 14:51:00Z michael $
 $Author: michael $
-$Revision: 1589 $
-$Date: 2021-04-25 11:48:00 +0200 (Sun, 25 Apr 2021) $
+$Revision: 1632 $
+$Date: 2023-01-07 15:51:00 +0100 (Sat, 07 Jan 2023) $
 '''
 
 from __future__ import division
@@ -32,6 +32,17 @@ info = logger.info
 warning = logger.warning
 error = logger.error
 exception = logger.exception
+
+from twisted.internet.threads import deferToThread
+import requests
+USERAGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+def getPage(url, agent=USERAGENT, method="GET", postdata=None, headers={}):
+	# debug(repr(method))
+	headers["user-agent"] = agent
+	if method == "POST":
+		return deferToThread(requests.post, url, params=postdata, headers=headers, timeout=30.05, verify=False)
+	else:
+		return deferToThread(requests.get, url, params=postdata, headers=headers, timeout=30.05, verify=False)
 
 
 def _(txt):  # pylint: disable=C0103
