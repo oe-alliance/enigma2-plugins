@@ -18,8 +18,8 @@ GNU General Public License for more details.
 For more information on the GNU General Public License see:
 <http://www.gnu.org/licenses/>.
 
-For example, if you distribute copies of such a program, whether gratis or for a fee, you 
-must pass on to the recipients the same freedoms that you received. You must make sure 
+For example, if you distribute copies of such a program, whether gratis or for a fee, you
+must pass on to the recipients the same freedoms that you received. You must make sure
 that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 """
 from __future__ import print_function
@@ -53,7 +53,7 @@ def realSize(bytes, digits=1, factor=1024):
 
 def diskUsage(path):
     """Return disk usage statistics about the given path.
-    
+
     Returned valus is a named tuple with attributes 'total', 'used' and
     'free', which are the amount of total, used and free space, in bytes.
     """
