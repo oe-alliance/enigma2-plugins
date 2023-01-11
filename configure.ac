@@ -370,7 +370,6 @@ flashexpander/po/Makefile
 flashexpander/src/Makefile
 
 fritzcall/Makefile
-fritzcall/meta/Makefile
 fritzcall/po/Makefile
 fritzcall/src/Makefile
 fritzcall/src/images/Makefile

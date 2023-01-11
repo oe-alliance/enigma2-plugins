@@ -167,6 +167,7 @@ class FritzAction(object):
 		# self.debug("")
 		headers = self.header.copy()
 		headers['soapaction'] = '%s#%s' % (self.service_type, self.name)
+# 		self.debug("headers: " + repr(headers))
 		data = self.envelope.strip() % (self.header_initchallenge_template % config.plugins.FritzCall.username.value,
 										self._body_builder(kwargs))
 		if config.plugins.FritzCall.useHttps.value:
@@ -175,21 +176,18 @@ class FritzAction(object):
 			url = 'http://%s:%s%s' % (self.address, self.port, self.control_url)
 
 		# self.debug("url: " + url + "\n" + data)
-		self.debug("url: " + url)
 		newheaders = {}
 		for h in six.iterkeys(headers):
-			newheaders[six.ensure_text(h)] = six.ensure_text(headers[h])
-		self.debug("headers: " + repr(newheaders))
+			newheaders[six.ensure_binary(h)] = six.ensure_binary(headers[h])
 		getPage(six.ensure_binary(url),
-			method="POST",
+			method=six.ensure_binary("POST"),
 			agent=six.ensure_binary(USERAGENT),
 			headers=newheaders,
 			postdata=six.ensure_binary(data)).addCallback(self._okExecute, callback, **kwargs).addErrback(self._errorExecute, callback)
 
-	def _okExecute(self, response, callback, **kwargs):
-		# self.debug(repr(response))
-		# self.debug(repr(dir(response)))
-		content = six.ensure_text(response.content)
+	def _okExecute(self, content, callback, **kwargs):
+		# self.debug("")
+		content = six.ensure_text(content.content)
 		if self.logger.getEffectiveLevel() == logging.DEBUG:
 			linkP = open("/tmp/FritzCall_okExecute.xml", "w")
 			linkP.write(content)
@@ -228,7 +226,7 @@ class FritzAction(object):
 		for h in six.iterkeys(headers):
 			newheaders[six.ensure_binary(h)] = six.ensure_binary(headers[h])
 		getPage(six.ensure_binary(url),
-			method="POST",
+			method=six.ensure_binary("POST"),
 			agent=six.ensure_binary(USERAGENT),
 			headers=newheaders,
 			postdata=six.ensure_binary(data)).addCallback(self.parse_response, callback).addErrback(self._errorExecute, callback)
@@ -348,9 +346,9 @@ class FritzXmlParser(object):
 			getPage(six.ensure_binary(source),
 				method=six.ensure_binary("GET"),).addCallback(self._okInit).addErrback(self._errorInit)
 
-	def _okInit(self, response):
+	def _okInit(self, source):
 		# self.debug("")
-		self.root = ET.fromstring(response.content)
+		self.root = ET.fromstring(source.content)
 		self.namespace = namespace(self.root)
 		if self.service:
 			self.callback(self.service, self)
