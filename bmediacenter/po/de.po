@@ -1,20 +1,20 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: BMediaCenter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 19:06+0430\n"
-"PO-Revision-Date: 2023-01-11 11:03+0100\n"
+"PO-Revision-Date: 2023-01-11 14:55+0100\n"
 "Last-Translator: Masta2002\n"
 "Language-Team: bonkel\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: C:/Users/Benny/Documents/HDMU/git/plugins/Extensions/BMediaCenter\n"
-"X-Poedit-SourceCharset: utf-8\n"
 "X-Generator: Poedit 3.2.2\n"
-"X-Poedit-SearchPath-0: C:/Users/Benny/Documents/HDMU/git/plugins/Extensions/BMediaCenter\n"
 
 msgid ""
 "\n"
@@ -58,26 +58,24 @@ msgstr "%s"
 msgid "70-80er"
 msgstr "70-80er"
 
-msgid "A background update check is is progress, please wait a few minutes and try again."
-msgstr "Es wird eine Hintergrundaktualisierung durchgeführt. Bitte warten Sie ein paar Minuten und versuchen Sie es erneut."
+msgid ""
+"A background update check is is progress, please wait a few minutes and try "
+"again."
+msgstr ""
+"Es wird eine Hintergrundaktualisierung durchgeführt. Bitte warten Sie ein "
+"paar Minuten und versuchen Sie es erneut."
 
 msgid "Add"
 msgstr "Hinzufügen"
 
 msgid "Alternative"
-msgstr ""
+msgstr "Alternative"
 
 msgid "Ambient"
-msgstr ""
+msgstr "Ambient"
 
 msgid "Artist"
 msgstr "Interpret"
-
-msgid "Audio Player"
-msgstr "Audio Player"
-
-msgid "Audioplayer Settings"
-msgstr ""
 
 msgid "Back"
 msgstr "Zurück"
@@ -98,7 +96,7 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 msgid "Checking Feeds"
-msgstr ""
+msgstr "Überprüfe Feeds"
 
 msgid "Chillout"
 msgstr "Chillout"
@@ -172,6 +170,8 @@ msgid ""
 "Error switching directory:\n"
 "%s"
 msgstr ""
+"Fehler beim Wechseln des Verzeichnisses:\n"
+"%s"
 
 #, python-format
 msgid ""
@@ -197,24 +197,21 @@ msgstr ""
 "Fehler mit dem VLC Server :\n"
 "%s"
 
-msgid "Favorite Folders"
-msgstr "Favoriten verzeichniss"
-
 msgid "Favorites"
 msgstr "Favoriten"
 
 #, python-format
 msgid "Feels like %s"
-msgstr ""
+msgstr "Fühlt sich an wie %s"
 
 msgid "File Browser"
 msgstr "Dateibrowser"
 
 msgid "Filelist Sorting:"
-msgstr ""
+msgstr "Dateilisten Sortierung:"
 
 msgid "Frame size in full view"
-msgstr ""
+msgstr "Rahmengröße in Vollansicht"
 
 msgid "Hip Hop"
 msgstr "Hip Hop"
@@ -222,55 +219,39 @@ msgstr "Hip Hop"
 msgid "Hits"
 msgstr "Hits"
 
-msgid "Home"
-msgstr ""
-
 #, python-format
 msgid "Humidity: %s %%"
-msgstr ""
-
-msgid "InfoBar"
-msgstr "InfoBar"
+msgstr "Feuchtigkeit: %s %%"
 
 msgid "Installing Service"
-msgstr ""
+msgstr "Dienst installieren"
 
 msgid "List of Storage Devices"
 msgstr "Liste der Speichergeräte"
 
-#, fuzzy
 msgid "List of storage Devices"
 msgstr "Liste der Speichergeräte"
 
 msgid "Loading information..."
-msgstr ""
+msgstr "Informationen werden geladen..."
 
 msgid "Location code"
-msgstr ""
+msgstr "Standortcode"
 
 msgid "Lyrics"
 msgstr "Songtexte"
 
 msgid "MSN location search result"
-msgstr ""
+msgstr "Ergebnis der MSN-Standortsuche"
 
 msgid "Media Center"
-msgstr ""
-
-msgid "Media Center - VLC Favorites"
-msgstr ""
-
-msgid "Media Center - VLC Player - Serverlist"
-msgstr ""
+msgstr "Medien Center"
 
 msgid "Moviemusic"
 msgstr "Filmmusik"
 
 msgid "Music"
 msgstr "Musik"
-
-msgid "Music Playlist"
-msgstr "Musik Wiedergabeliste"
 
 msgid "My Music"
 msgstr "Meine Musik"
@@ -291,6 +272,8 @@ msgid ""
 "No locations defined...\n"
 "Press 'Blue' to do that."
 msgstr ""
+"Keine Orte definiert...\n"
+"Drücken Sie dazu „Blau“."
 
 msgid "No lyrics found"
 msgstr "Keine Songtexte gefunden"
@@ -300,11 +283,11 @@ msgstr "OK"
 
 #, python-format
 msgid "Observation point: %s"
-msgstr ""
+msgstr "Beobachtungspunkt: %s"
 
 #, python-format
 msgid "Observation time: %s"
-msgstr ""
+msgstr "Beobachtungszeit: %s"
 
 msgid "Oldies"
 msgstr "Oldies"
@@ -318,17 +301,14 @@ msgstr "Übergeordnetes Verzeichnis"
 msgid "Party"
 msgstr "Party"
 
-msgid "Pic Viewer"
-msgstr ""
-
 msgid "Play DVD as:"
-msgstr ""
+msgstr "DVD abspielen als:"
 
 msgid "Please enter a valid city name."
-msgstr ""
+msgstr "Bitte gebe einen gültigen Städtenamen ein."
 
 msgid "Please enter a valid location code for the city."
-msgstr ""
+msgstr "Bitte gebe einen gültigen Standortcode für die Stadt ein."
 
 msgid "Please enter filename (empty = use current date)"
 msgstr "Bitte gib den Dateinamen ein (leer= benutz aktuelles Datum)"
@@ -340,7 +320,7 @@ msgid "Please select a playlist..."
 msgstr "Bitte wählen Sie eine Wiedergabeliste..."
 
 msgid "Please wait whilst feeds state is checked."
-msgstr ""
+msgstr "Bitte warte während der Status des Feeds überprüft wird."
 
 msgid "Really delete this Entry?"
 msgstr "Diesen Eintrag wirklich löschen?"
@@ -371,7 +351,7 @@ msgid "Save Playlist"
 msgstr "Wiedergabeliste speichern"
 
 msgid "Scaling Mode"
-msgstr ""
+msgstr "Skalierungsmodus"
 
 msgid "Screensaver Enable:"
 msgstr "Bildschirmschoner aktivieren:"
@@ -383,37 +363,39 @@ msgid "Screensaver Style:"
 msgstr "Bildschirmschoner Stil:"
 
 msgid "Search Code"
-msgstr ""
+msgstr "Suchcode"
 
 msgid "Select music"
-msgstr ""
+msgstr "Musik auswählen"
 
 msgid "Settings"
 msgstr "Einstellungen"
 
 msgid "Show MC in Extension-Menu"
-msgstr ""
+msgstr "Zeige MC im Erweiterungsmenü"
 
 msgid "Show MC in Main-Menu"
-msgstr ""
+msgstr "Zeige MC im Hauptmenü"
 
 msgid "Slideshow Interval (sec.)"
 msgstr "Slideshow Intervall (sek.)"
 
 msgid "Smooth"
-msgstr ""
+msgstr "Smooth"
 
 msgid "Sorry feeds are down for maintenance, please try again later."
 msgstr ""
+"Entschuldigung, die Feeds sind wegen Wartungsarbeiten nicht verfügbar. Bitte "
+"versuche es später erneut."
 
 msgid "Soul"
-msgstr ""
+msgstr "Soul"
 
 msgid "System"
-msgstr ""
+msgstr "System"
 
 msgid "Techno/House"
-msgstr ""
+msgstr "Techno/House"
 
 #, python-format
 msgid "This Dreambox can't decode %s video streams!"
@@ -429,50 +411,62 @@ msgid "Title: "
 msgstr "Titel: "
 
 msgid "UPNP Enabled"
-msgstr ""
+msgstr "UPNP aktiviert"
 
 msgid "VLC Player"
 msgstr "VLC Player"
-
-msgid "VLC Player - Medialist"
-msgstr "VLC Player - Medienliste"
-
-msgid "Video Player"
-msgstr "Video Player"
 
 msgid "Weather Info"
 msgstr "Wetter Infos"
 
 msgid "WeatherPlugin: Edit Entry"
-msgstr ""
+msgstr "WetterPlugin: Eintrag bearbeiten"
 
 msgid "WeatherPlugin: List of Entries"
-msgstr ""
+msgstr "WetterPlugin: Liste der Einträge"
 
 msgid "Web Radio"
 msgstr "Web Radio"
 
 msgid "Worldmusic"
+msgstr "Weltmusik"
+
+msgid ""
+"You have to close playlist before you can go to the next song while playing "
+"from file browser."
 msgstr ""
+"Du musst die Wiedergabeliste schließen, bevor du den nächsten Song aus dem "
+"Filebrowser abspielen kannst."
 
-msgid "You have to close playlist before you can go to the next song while playing from file browser."
-msgstr "Du musst die Wiedergabeliste schließen, bevor du den nächsten Song aus dem Filebrowser abspielen kannst."
-
-msgid "You have to close playlist before you can go to the previous song while playing from file browser."
-msgstr "Du musst die Wiedergabeliste schließen, bevor du den vorhergehenden Song aus dem Filebrowser abspielen kannst."
-
-msgid "You need to enter a valid city name before you can search for the location code."
+msgid ""
+"You have to close playlist before you can go to the previous song while "
+"playing from file browser."
 msgstr ""
+"Du musst die Wiedergabeliste schließen, bevor du den vorhergehenden Song aus "
+"dem Filebrowser abspielen kannst."
+
+msgid ""
+"You need to enter a valid city name before you can search for the location "
+"code."
+msgstr ""
+"Sie müssen einen gültigen Städtenamen eingeben, bevor Sie nach dem "
+"Standortcode suchen können."
 
 #, python-format
-msgid "Your %s %s is not connected to the internet, please check your network settings and try again."
+msgid ""
+"Your %s %s is not connected to the internet, please check your network "
+"settings and try again."
 msgstr ""
+"Ihr %s %s ist nicht mit dem Internet verbunden, bitte überprüfen Sie Ihre "
+"Netzwerkeinstellungen und versuchen Sie es erneut."
 
 #, python-format
 msgid ""
 "Your %s %s will be restarted after the installation of service\n"
 "Ready to install %s ?"
 msgstr ""
+"Ihr %s %s wird nach der Installation des Dienstes neu gestartet\n"
+"Bereit, %s zu installieren?"
 
 msgid "add all files in directory to playlist"
 msgstr "Alle Dateien im Ordner zur Wiedergabeliste hinzufügen"
@@ -487,10 +481,10 @@ msgid "add file to playlist and play"
 msgstr "Datei zur Wiedergabeliste hinzufügen und abspielen"
 
 msgid "alphabet"
-msgstr ""
+msgstr "Alphabet"
 
 msgid "alphabet backward"
-msgstr ""
+msgstr "Alphabet rückwärts"
 
 msgid "backgroundcolor"
 msgstr "Hintergrundfarbe"
@@ -505,7 +499,7 @@ msgid "blue"
 msgstr "blau"
 
 msgid "by Exif"
-msgstr ""
+msgstr "von Exif"
 
 msgid "clear playlist"
 msgstr "Wiedergabeliste leeren"
@@ -538,7 +532,7 @@ msgid "green"
 msgstr "grün"
 
 msgid "imperial system"
-msgstr ""
+msgstr "Imperiales System"
 
 msgid "load playlist"
 msgstr "Wiedergabeliste laden"
@@ -547,10 +541,10 @@ msgid "manual"
 msgstr "manuell"
 
 msgid "metric system"
-msgstr ""
+msgstr "metrisches System"
 
 msgid "none"
-msgstr ""
+msgstr "keiner"
 
 msgid "nothing connected"
 msgstr "Keine Verbindung"
@@ -571,7 +565,7 @@ msgid "show Infoline"
 msgstr "Information anzeigen"
 
 msgid "shuffle"
-msgstr ""
+msgstr "shuffle"
 
 msgid "simple"
 msgstr "Einfach"
@@ -590,3 +584,36 @@ msgstr "Textfarbe"
 
 msgid "yellow"
 msgstr "gelb"
+
+msgid "Audio Player"
+msgstr "Audioplayer"
+
+msgid "Audioplayer Settings"
+msgstr "Audioplayer Einstellungen"
+
+msgid "Favorite Folders"
+msgstr "Favoriten verzeichniss"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "InfoBar"
+msgstr "InfoBar"
+
+msgid "Media Center - VLC Favorites"
+msgstr "Media Center - VLC Favoriten"
+
+msgid "Media Center - VLC Player - Serverlist"
+msgstr "Media Center - VLC Player - Serverliste"
+
+msgid "Music Playlist"
+msgstr "Musik Wiedergabeliste"
+
+msgid "Pic Viewer"
+msgstr "Bildbetrachter"
+
+msgid "VLC Player - Medialist"
+msgstr "VLC Player - Medienliste"
+
+msgid "Video Player"
+msgstr "Videoplayer"
