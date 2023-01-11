@@ -3,24 +3,25 @@ msgstr ""
 "Project-Id-Version: BMediaCenter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 19:06+0430\n"
-"PO-Revision-Date: 2013-01-26 22:29+0100\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2023-01-11 11:03+0100\n"
+"Last-Translator: Masta2002\n"
 "Language-Team: bonkel\n"
-"Language: \n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: C:\\Users\\Benny\\Documents\\HDMU\\git\\plugins\\Extensions\\BMediaCenter\n"
-"X-Poedit-Language: German\n"
-"X-Poedit-Country: GERMANY\n"
+"X-Poedit-Basepath: C:/Users/Benny/Documents/HDMU/git/plugins/Extensions/BMediaCenter\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: C:\\Users\\Benny\\Documents\\HDMU\\git\\plugins\\Extensions\\BMediaCenter\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-SearchPath-0: C:/Users/Benny/Documents/HDMU/git/plugins/Extensions/BMediaCenter\n"
 
 msgid ""
 "\n"
 "Album: "
 msgstr ""
+"\n"
+"Album: "
 
 msgid ""
 "\n"
@@ -40,26 +41,28 @@ msgid ""
 "\n"
 "Genre: "
 msgstr ""
+"\n"
+"Genre: "
 
 msgid ""
 "\n"
 "Year: "
 msgstr ""
 "\n"
-"Jahr:"
+"Jahr: "
 
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 msgid "70-80er"
-msgstr ""
+msgstr "70-80er"
 
 msgid "A background update check is is progress, please wait a few minutes and try again."
-msgstr ""
+msgstr "Es wird eine Hintergrundaktualisierung durchgeführt. Bitte warten Sie ein paar Minuten und versuchen Sie es erneut."
 
 msgid "Add"
-msgstr ""
+msgstr "Hinzufügen"
 
 msgid "Alternative"
 msgstr ""
@@ -67,63 +70,59 @@ msgstr ""
 msgid "Ambient"
 msgstr ""
 
-#, fuzzy
 msgid "Artist"
-msgstr ""
-"\n"
-"Interpret: "
+msgstr "Interpret"
 
 msgid "Audio Player"
-msgstr ""
+msgstr "Audio Player"
 
 msgid "Audioplayer Settings"
 msgstr ""
 
 msgid "Back"
-msgstr ""
+msgstr "Zurück"
 
 msgid "Big Band"
-msgstr ""
+msgstr "Big Band"
 
 msgid "Bluegrass"
-msgstr ""
+msgstr "Bluegrass"
 
 msgid "Blues"
-msgstr ""
+msgstr "Blues"
 
 msgid "Cache Thumbnails"
 msgstr "Vorschau cachen"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 msgid "Checking Feeds"
 msgstr ""
 
 msgid "Chillout"
-msgstr ""
+msgstr "Chillout"
 
 msgid "City"
 msgstr "Stadt"
 
 msgid "Classic"
-msgstr ""
+msgstr "Classic"
 
 msgid "Classic Rock"
-msgstr ""
+msgstr "Classic Rock"
 
 msgid "Countrymusic"
-msgstr ""
+msgstr "Countrymusic"
 
 msgid "DVD Player"
-msgstr ""
+msgstr "DVD Player"
 
-#, fuzzy
 msgid "Delete"
-msgstr "Löschen fehlgeschlagen"
+msgstr "Löschen"
 
 msgid "Delete failed!"
-msgstr "Löschen fehlgeschlagen"
+msgstr "Löschen fehlgeschlagen!"
 
 msgid "Directory"
 msgstr "Ordner"
@@ -142,7 +141,7 @@ msgid "Do you really want to delete this file ?"
 msgstr "Willst du die Datei wirklich löschen?"
 
 msgid "Edit"
-msgstr ""
+msgstr "Bearbeiten"
 
 #, python-format
 msgid ""
@@ -168,13 +167,11 @@ msgstr ""
 "Fehler beim Laden der Wiedergabeliste in den Server %s:\n"
 "%s"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Error switching directory:\n"
 "%s"
 msgstr ""
-"Fehler mit dem VLC Server :\n"
-"%s"
 
 #, python-format
 msgid ""
@@ -200,9 +197,8 @@ msgstr ""
 "Fehler mit dem VLC Server :\n"
 "%s"
 
-#, fuzzy
 msgid "Favorite Folders"
-msgstr "Favoriten"
+msgstr "Favoriten verzeichniss"
 
 msgid "Favorites"
 msgstr "Favoriten"
@@ -212,7 +208,7 @@ msgid "Feels like %s"
 msgstr ""
 
 msgid "File Browser"
-msgstr ""
+msgstr "Dateibrowser"
 
 msgid "Filelist Sorting:"
 msgstr ""
@@ -221,10 +217,10 @@ msgid "Frame size in full view"
 msgstr ""
 
 msgid "Hip Hop"
-msgstr ""
+msgstr "Hip Hop"
 
 msgid "Hits"
-msgstr ""
+msgstr "Hits"
 
 msgid "Home"
 msgstr ""
@@ -234,7 +230,7 @@ msgid "Humidity: %s %%"
 msgstr ""
 
 msgid "InfoBar"
-msgstr ""
+msgstr "InfoBar"
 
 msgid "Installing Service"
 msgstr ""
@@ -268,15 +264,13 @@ msgid "Media Center - VLC Player - Serverlist"
 msgstr ""
 
 msgid "Moviemusic"
-msgstr ""
+msgstr "Filmmusik"
 
-#, fuzzy
 msgid "Music"
-msgstr "Meine Musik"
+msgstr "Musik"
 
-#, fuzzy
 msgid "Music Playlist"
-msgstr "Wiedergabeliste speichern"
+msgstr "Musik Wiedergabeliste"
 
 msgid "My Music"
 msgstr "Meine Musik"
@@ -288,10 +282,10 @@ msgid "My Videos"
 msgstr "Meine Videos"
 
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 msgid "Name:"
-msgstr ""
+msgstr "Name:"
 
 msgid ""
 "No locations defined...\n"
@@ -302,7 +296,7 @@ msgid "No lyrics found"
 msgstr "Keine Songtexte gefunden"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #, python-format
 msgid "Observation point: %s"
@@ -313,18 +307,16 @@ msgid "Observation time: %s"
 msgstr ""
 
 msgid "Oldies"
-msgstr ""
+msgstr "Oldies"
 
-#, fuzzy
 msgid "Parent Directory"
-msgstr "Ordner"
+msgstr "Übergeordnetes Verzeichnis"
 
-#, fuzzy
 msgid "Parent directory"
-msgstr "Ordner löschen"
+msgstr "Übergeordnetes Verzeichnis"
 
 msgid "Party"
-msgstr ""
+msgstr "Party"
 
 msgid "Pic Viewer"
 msgstr ""
@@ -350,32 +342,30 @@ msgstr "Bitte wählen Sie eine Wiedergabeliste..."
 msgid "Please wait whilst feeds state is checked."
 msgstr ""
 
-#, fuzzy
 msgid "Really delete this Entry?"
-msgstr "Willst du diesen Server wirklich löschen?"
+msgstr "Diesen Eintrag wirklich löschen?"
 
 msgid "Really delete this Server?"
 msgstr "Willst du diesen Server wirklich löschen?"
 
-#, fuzzy
 msgid "Really delete this WeatherPlugin Entry?"
-msgstr "Willst du diesen Favoriten wirklich löschen?"
+msgstr "Willst du diesen WetterPlugin eintrag wirklich löschen?"
 
 msgid "Really delete this favorite?"
 msgstr "Willst du diesen Favoriten wirklich löschen?"
 
 msgid "Reggae"
-msgstr ""
+msgstr "Reggae"
 
 #, python-format
 msgid "Response -> lyrics for: %s (%s)"
 msgstr "Rückmeldung -> Songtexte für %s (%s)"
 
 msgid "Rock"
-msgstr ""
+msgstr "Rock"
 
 msgid "Rundfunk"
-msgstr ""
+msgstr "Rundfunk"
 
 msgid "Save Playlist"
 msgstr "Wiedergabeliste speichern"
@@ -383,16 +373,14 @@ msgstr "Wiedergabeliste speichern"
 msgid "Scaling Mode"
 msgstr ""
 
-#, fuzzy
 msgid "Screensaver Enable:"
-msgstr "Bildschirmschoner Intervall"
+msgstr "Bildschirmschoner aktivieren:"
 
 msgid "Screensaver Interval"
 msgstr "Bildschirmschoner Intervall"
 
-#, fuzzy
 msgid "Screensaver Style:"
-msgstr "Bildschirmschoner Intervall"
+msgstr "Bildschirmschoner Stil:"
 
 msgid "Search Code"
 msgstr ""
@@ -438,19 +426,19 @@ msgid "Thumbnail Width"
 msgstr "Vorschau Breite"
 
 msgid "Title: "
-msgstr "Titel:"
+msgstr "Titel: "
 
 msgid "UPNP Enabled"
 msgstr ""
 
 msgid "VLC Player"
-msgstr ""
+msgstr "VLC Player"
 
 msgid "VLC Player - Medialist"
-msgstr ""
+msgstr "VLC Player - Medienliste"
 
 msgid "Video Player"
-msgstr ""
+msgstr "Video Player"
 
 msgid "Weather Info"
 msgstr "Wetter Infos"
@@ -462,7 +450,7 @@ msgid "WeatherPlugin: List of Entries"
 msgstr ""
 
 msgid "Web Radio"
-msgstr ""
+msgstr "Web Radio"
 
 msgid "Worldmusic"
 msgstr ""
@@ -523,13 +511,13 @@ msgid "clear playlist"
 msgstr "Wiedergabeliste leeren"
 
 msgid "date"
-msgstr ""
+msgstr "Datum"
 
 msgid "date backward"
-msgstr ""
+msgstr "Datum rückwärts"
 
 msgid "default"
-msgstr ""
+msgstr "Standard"
 
 msgid "delete directory"
 msgstr "Ordner löschen"
@@ -547,7 +535,7 @@ msgid "filename"
 msgstr "Dateiname"
 
 msgid "green"
-msgstr "grÃ¼n"
+msgstr "grün"
 
 msgid "imperial system"
 msgstr ""
@@ -570,9 +558,8 @@ msgstr "Keine Verbindung"
 msgid "please wait, loading picture..."
 msgstr "Bitte warten während das Bild geladen wird..."
 
-#, fuzzy
 msgid "please wait..."
-msgstr "Bitte warten während das Bild geladen wird..."
+msgstr "Bitte warten..."
 
 msgid "red"
 msgstr "rot"
@@ -590,10 +577,10 @@ msgid "simple"
 msgstr "Einfach"
 
 msgid "size"
-msgstr ""
+msgstr "Größe"
 
 msgid "size backward"
-msgstr ""
+msgstr "Größe rückwärts"
 
 msgid "slide picture in loop"
 msgstr ""
