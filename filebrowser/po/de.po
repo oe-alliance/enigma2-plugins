@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-16 18:40+0000\n"
+"PO-Revision-Date: 2023-01-11 10:41+0100\n"
+"Last-Translator: Masta2002\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+msgid "Copy"
+msgstr "Kopieren"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Filebrowser"
+msgstr "Dateibrowser"
+
+msgid "Filebrowser Settings"
+msgstr "Dateibrowser Einstellungen"
+
+msgid "Filesystemposition list left"
+msgstr "Dateisystempositionsliste links"
+
+msgid "Filesystemposition list right"
+msgstr "Dateisystempositionsliste rechts"
+
+msgid "HELP"
+msgstr "HILFE"
+
+msgid "MENU"
+msgstr "MENÜ"
+
+msgid "Move"
+msgstr "Verschieben"
+
+msgid "Rename"
+msgstr "Umbenennen"
+
+msgid "add Plugin to Extensionmenu"
+msgstr "plugin zum Erweiterungsmenü hinzufügen"
+
+msgid "add Plugin to Mainmenu"
+msgstr "plugin zum Hauptmenü hinzufügen"
+
+msgid "copy file"
+msgstr "datei kopieren"
+
+msgid "copying file ..."
+msgstr "Kopiere Datei ..."
+
+msgid "delete file"
+msgstr "Datei löschen"
+
+msgid "deleting file ..."
+msgstr "lösche Datei ..."
+
+msgid "filebrowser buttons"
+msgstr "Dateibrowser Schaltflächen"
+
+msgid "manage local Files"
+msgstr "lokale Dateien verwalten"
+
+msgid "move file"
+msgstr "Datei verschieben"
+
+msgid "moving file ..."
+msgstr "verschiebe Datei ..."
+
+msgid "no"
+msgstr "nein"
+
+msgid "no Viewer installed for this mimetype!"
+msgstr "kein Viewer für diesen Mimetyp installiert!"
+
+msgid "rename file"
+msgstr "Datei umbennen"
+
+msgid "renaming file ..."
+msgstr "bennene Datei um ..."
+
+msgid "save Filesystemposition on exit"
+msgstr "dateisystemposition beim Beenden speichern"
+
+msgid "yes"
+msgstr "ja"
