@@ -8,7 +8,7 @@ from shutil import move
 import tmdbsimple as tmdb
 from enigma import getDesktop, eTimer, eServiceCenter
 from Components.Label import Label
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigText, getConfigListEntry, ConfigYesNo
+from Components.config import config, configfile, ConfigSubsection, ConfigSelection, ConfigText, getConfigListEntry, ConfigYesNo
 from Components.ConfigList import ConfigListScreen
 from Components.FileList import FileList
 from Components.ActionMap import NumberActionMap, HelpableActionMap
@@ -38,10 +38,8 @@ config.plugins.mc_vp.themoviedb_fullinfo = ConfigYesNo(default=True)
 choiceList = [
 	("0.0", _("Name ascending")),
 	("0.1", _("Name descending")),
-	("1.0", _("Date ascending")),
-	("1.1", _("Date descending"))
-]
-choiceList = choiceList + [
+#	("1.0", _("Date ascending")),
+#	("1.1", _("Date descending"))
 	("2.0", _("Size ascending")),
 	("2.1", _("Size descending"))
 ]
@@ -467,6 +465,7 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 #		return
 
 	def refreshList(self):
+		self.filelist.setSortBy("0.0,%s" % config.plugins.mc_vp_sortmode.value)
 		self.filelist.refresh()
 
 	def keySettings(self):
@@ -476,6 +475,7 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 		directory = self.filelist.getCurrentDirectory()
 		config.plugins.mc_vp.lastDir.value = directory if directory else "/"
 		config.plugins.mc_vp.save()
+		configfile.save()
 		try:
 			remove("/tmp/bmcmovie")
 		except:
@@ -498,16 +498,27 @@ class VideoPlayerSettings(Screen, ConfigListScreen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self["actions"] = NumberActionMap(["SetupActions", "OkCancelActions"],
+		self["actions"] = NumberActionMap(["ColorActions", "OkCancelActions"],
 		{
 			"ok": self.keyOK,
-			"cancel": self.close
+			"green": self.keyOK,
+			"cancel": self.keyCancel,
+			"red": self.keyCancel
 		}, -1)
 		self.list = []
 		self.list.append(getConfigListEntry(_("Play DVD as:"), config.plugins.mc_vp.dvd))
 		self.list.append(getConfigListEntry(_("Filelist Sorting:"), config.plugins.mc_vp_sortmode))
 		ConfigListScreen.__init__(self, self.list, session)
 
+	def keyCancel(self):
+		for item in self["config"].list:
+			if len(item) > 1:
+				item[1].cancel()
+		self.close()
+
 	def keyOK(self):
-		config.plugins.mc_vp.save()
+		for item in self["config"].list:
+			if len(item) > 1:
+				item[1].save()
+		configfile.save()
 		self.close()
