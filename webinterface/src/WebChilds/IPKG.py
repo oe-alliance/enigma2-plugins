@@ -61,7 +61,7 @@ class IPKGResource(resource.Resource):
 			return self.execCmd(request, [file])
 
 		else:
-			return self.doErrorPage("Missing parameter: file")
+			return self.doErrorPage(request, "Missing parameter: file")
 
 	def doIndexPage(self, request):
 		html = "<html><body>"

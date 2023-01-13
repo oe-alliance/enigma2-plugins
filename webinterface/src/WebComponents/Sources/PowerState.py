@@ -76,7 +76,7 @@ class PowerState(Source):
 				return "true"
 
 			else:
-				print("[PowerState.py] cmd unknown" % type)
+				print("[PowerState.py] cmd unknown")
 				return "error"
 
 		except ValueError:

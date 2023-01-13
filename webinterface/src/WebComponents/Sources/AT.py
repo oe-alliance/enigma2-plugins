@@ -20,7 +20,7 @@ class AT(Source):
 		if cmd is not None:
 			self.cmd = cmd
 			if self.func is self.LIST:
-				self.result = self.timerList(cmd)
+				self.result = self.timerList()
 			elif self.func is self.WRITE:
 				self.result = self.writeTimer(cmd)
 

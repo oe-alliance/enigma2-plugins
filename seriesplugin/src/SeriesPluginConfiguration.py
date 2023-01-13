@@ -136,7 +136,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		tvbouquets = getTVBouquets()
 		for bouquet in tvbouquets:
 			bouquetList.append((bouquet[1], bouquet[1]))
-		self.cfg_bouquet_main = NoSave(ConfigSelection(choices=bouquetList, default=config.plugins.seriesplugin.bouquet_main.value or str(list(zip(*bouquetList)[1]))))
+		self.cfg_bouquet_main = NoSave(ConfigSelection(choices=bouquetList, default=config.plugins.seriesplugin.bouquet_main.value))
 
 		checkList(self.cfg_pattern_title)
 		checkList(self.cfg_pattern_description)
