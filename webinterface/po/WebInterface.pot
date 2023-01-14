@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-01-14 08:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,6 +49,21 @@ msgstr ""
 msgid "'%s' removed from playlist"
 msgstr ""
 
+msgid "0"
+msgstr ""
+
+msgid "1"
+msgstr ""
+
+msgid "15"
+msgstr ""
+
+msgid "2"
+msgstr ""
+
+msgid "3"
+msgstr ""
+
 msgid "AC3 Downmix disabled"
 msgstr ""
 
@@ -76,6 +91,9 @@ msgid "Add Timer"
 msgstr ""
 
 msgid "Add Zap Timer"
+msgstr ""
+
+msgid "Add/Save"
 msgstr ""
 
 msgid "After event"
@@ -941,6 +959,9 @@ msgstr ""
 msgid "sec"
 msgstr ""
 
+msgid "submit-message"
+msgstr ""
+
 msgid "the command was not > 0"
 msgstr ""
 
@@ -956,25 +977,4 @@ msgstr ""
 
 #, python-format
 msgid "unknown command (%s)"
-msgstr ""
-
-msgid "0"
-msgstr ""
-
-msgid "Add/Save"
-msgstr ""
-
-msgid "1"
-msgstr ""
-
-msgid "15"
-msgstr ""
-
-msgid "2"
-msgstr ""
-
-msgid "3"
-msgstr ""
-
-msgid "submit-message"
 msgstr ""

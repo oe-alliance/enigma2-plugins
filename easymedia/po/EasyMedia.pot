@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2023-01-14 08:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,6 +54,9 @@ msgstr ""
 msgid "Enabled"
 msgstr ""
 
+msgid "FileCommander"
+msgstr ""
+
 msgid "Filebrowser"
 msgstr ""
 
@@ -66,7 +69,19 @@ msgstr ""
 msgid "InternetRadio"
 msgstr ""
 
+msgid "InternetRadio Plugin is not installed!"
+msgstr ""
+
 msgid "InternetRadio player:"
+msgstr ""
+
+msgid "Kodi"
+msgstr ""
+
+msgid "Kodi is not installed!"
+msgstr ""
+
+msgid "Kodi:"
 msgstr ""
 
 msgid "MediaPlayer"
@@ -129,7 +144,7 @@ msgstr ""
 msgid "Radio-mode"
 msgstr ""
 
-msgid "SHOUTcast Plugin is not installed!"
+msgid "SHOUTcast"
 msgstr ""
 
 msgid "Select bookmark..."
