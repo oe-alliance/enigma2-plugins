@@ -36,6 +36,8 @@ exception = logger.exception
 from twisted.internet.threads import deferToThread
 import requests
 USERAGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+
+
 def getPage(url, agent=USERAGENT, method="GET", postdata=None, headers={}):
 	# debug(repr(method))
 	# headers["user-agent"] = agent
