@@ -1,2 +1,5 @@
 Description: Show Incoming and Outgoing Calls on your TV Screen with a Fritz!Box
 Depends: enigma2, python-twisted-web, python-html, python-textutils
+Section: network/communication
+Maintainer: DrMichael
+Source: https://github.com/DrMichael/FritzCall
