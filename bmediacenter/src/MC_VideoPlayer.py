@@ -38,8 +38,8 @@ config.plugins.mc_vp.themoviedb_fullinfo = ConfigYesNo(default=True)
 choiceList = [
 	("0.0", _("Name ascending")),
 	("0.1", _("Name descending")),
-#	("1.0", _("Date ascending")),
-#	("1.1", _("Date descending"))
+	("1.0", _("Date ascending")),
+	("1.1", _("Date descending")),
 	("2.0", _("Size ascending")),
 	("2.1", _("Size descending"))
 ]
