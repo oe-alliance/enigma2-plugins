@@ -1,10 +1,66 @@
-<screen position="center,center" size="1920,1080" flags="wfNoBorder">
-<widget source="global.CurrentTime" render="Label" position="1760,15" size="140,60" font="Regular; 50" halign="right" backgroundColor="metrixBackground" transparent="1">
-<convert type="ClockToText">Default</convert>
-</widget>
-<widget source="movielist" render="Listbox" position="600,115" size="1300,864" scrollbarMode="showOnDemand" zPosition="0">
-<convert type="TemplatedMultiContent">{"template": [MultiContentEntryText(pos=(15,0), size=(1125,72), font=0, text=1, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER), MultiContentEntryText(pos=(1170,0), size=(120,72), font=0, text=5, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER) ], "fonts": [gFont("Regular",30)], "itemHeight": 72 }</convert>
-</widget>
-<widget name="cover" position="30,115" size="540,305" zPosition="1" alphatest="blend" transparent="1"/>
-<widget name="handlung" position="30,450" size="540,550" zPosition="0" font="Regular; 30" halign="center"/>
-</screen>
+<skin>
+	<screen name="default" position="center,center" size="1920,1080" flags="wfNoBorder" backgroundColor="#050a1232">
+		<eLabel position="45,11" size="450,60" text="ARD Mediathek" font="SRegular; 39" foregroundColor="#FFFFFF" backgroundColor="#050a1232" valign="center"/>
+		<widget source="global.CurrentTime" render="Label" position="1230,11" size="660,60" font="SRegular; 39" foregroundColor="#FFFFFF" backgroundColor="#050a1232" halign="right" valign="center">
+			<convert type="ClockToText">Format %a.%e %b. %Y %H:%M</convert>
+		</widget>
+		<widget source="movielist" render="Listbox" position="30,98" size="1155,900" scrollbarMode="showOnDemand" foregroundColor="#FFFFFF" foregroundColorSelected="#FFFFFF" backgroundColor="#1502050e" backgroundColorSelected="#050a1232" scrollbarWidth="15" scrollbarSliderForegroundColor="#050a1232" scrollbarSliderBorderColor="#FFFFFF" selectionPixmap="{picpath}sel_1155.png">
+			<convert type="TemplatedMultiContent">{"template": [ MultiContentEntryText(pos=(15,3), size=(975,39), font=0, text=1, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER ), MultiContentEntryText(pos=(1005,3), size=(150,39), font=0, text=5, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER )], "fonts": [gFont("SRegular",32)], "itemHeight": 50 }</convert>
+		</widget>
+		<widget name="cover" position="1215,96" size="660,372" alphatest="blend"/>
+		<widget name="handlung" position="1215,510" size="660,398" font="SRegular; 32" foregroundColor="#FFFFFF" backgroundColor="#1502050e" halign="left" scrollbarWidth="15" scrollbarSliderForegroundColor="#050a1232" scrollbarSliderBorderColor="#FFFFFF"/>
+		<widget name="progress" position="1215,923" size="660,23" foregroundColor="#05192d7c" backgroundColor="#1502050e" borderColor="#FFFFFF" borderWidth="2"/>
+		<widget name="DownloadLabel" position="1215,960" size="660,23" font="SRegular; 18" foregroundColor="#FFFFFF" backgroundColor="#1502050e" halign="center"/>
+		<eLabel position="30,86" size="1860,915" zPosition="-1" backgroundColor="#1502050e"/>
+		<eLabel position="1215,488" size="660,2" backgroundColor="#C0C0C0"/>
+		<eLabel position="30,78" size="1860,3" backgroundColor="#C0C0C0"/>
+		<eLabel position="30,1005" size="1860,3" backgroundColor="#C0C0C0"/>
+		<eLabel position="1199,86" size="3,915" backgroundColor="#C0C0C0"/>
+		<ePixmap pixmap="{picpath}key_menu.png" position="1608,1029" size="84,36" alphatest="blend"/>
+		<ePixmap pixmap="{picpath}key_ok.png" position="1707,1029" size="84,36" alphatest="blend"/>
+		<ePixmap pixmap="{picpath}key_exit.png" position="1806,1029" size="84,36" alphatest="blend"/>
+		<ePixmap pixmap="{picpath}key_red.png" position="75,1028" size="39,39" alphatest="blend"/>
+		<ePixmap pixmap="{picpath}key_green.png" position="420,1028" size="39,39" alphatest="blend"/>
+		<ePixmap pixmap="{picpath}key_yellow.png" position="765,1028" size="39,39" alphatest="blend"/>
+		<ePixmap pixmap="{picpath}key_blue.png" position="1110,1028" size="39,39" alphatest="blend"/>
+		<eLabel position="126,1028" size="276,39" text="Beenden" font="SRegular; 29" foregroundColor="#FFFFFF" backgroundColor="#050a1232" valign="center"/>
+		<eLabel position="471,1028" size="276,39" text="Download" font="SRegular; 29" foregroundColor="#FFFFFF" backgroundColor="#050a1232" valign="center"/>
+		<eLabel position="816,1028" size="276,39" text=" " font="SRegular; 29" foregroundColor="#FFFFFF" backgroundColor="#050a1232" valign="center"/>
+		<eLabel position="1161,1028" size="276,39" text="Home" font="SRegular; 29" foregroundColor="#FFFFFF" backgroundColor="#050a1232" valign="center"/>
+	</screen>
+	<screen name="MiniTV" position="center,center" size="1920,1080" flags="wfNoBorder" backgroundColor="#050a1232">
+		<eLabel position="45,11" size="450,60" text="ARD Mediathek" font="SRegular; 39" foregroundColor="#FFFFFF" backgroundColor="#050a1232" valign="center"/>
+		<widget source="global.CurrentTime" render="Label" position="1230,11" size="660,60" font="SRegular; 39" foregroundColor="#FFFFFF" backgroundColor="#050a1232" halign="right" valign="center">
+			<convert type="ClockToText">Format %a.%e %b. %Y %H:%M</convert>
+		</widget>
+		<widget source="movielist" render="Listbox" position="30,98" size="1155,675" scrollbarMode="showOnDemand" foregroundColor="#FFFFFF" foregroundColorSelected="#FFFFFF" backgroundColor="#1502050e" backgroundColorSelected="#050a1232" scrollbarWidth="15" scrollbarSliderForegroundColor="#050a1232" scrollbarSliderBorderColor="#FFFFFF" selectionPixmap="{picpath}sel_1155.png">
+			<convert type="TemplatedMultiContent">{"template": [ MultiContentEntryText(pos=(15,2), size=(975,39), font=0, text=1, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER ), MultiContentEntryText(pos=(1005,2), size=(150,39), font=0, text=5, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER )], "fonts": [gFont("SRegular",32)], "itemHeight": 48 }</convert>
+		</widget>
+		<widget source="session.VideoPicture" render="Pig" position="1215,555" size="660,372" backgroundColor="#ff000000"/>
+		<widget position="1215,501" size="660,41" source="session.CurrentService" render="Label" font="SRegular;32" transparent="1" valign="center" halign="center" backgroundColor="#1502050e" foregroundColor="#FFFFFF">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget name="cover" position="1215,96" size="660,372" alphatest="blend"/>
+		<widget name="handlung" position="45,780" size="1140,210" font="SRegular; 32" foregroundColor="#FFFFFF" backgroundColor="#1502050e" halign="left" scrollbarWidth="15" scrollbarSliderForegroundColor="#050a1232" scrollbarSliderBorderColor="#FFFFFF"/>
+		<widget name="progress" position="1215,938" size="660,23" foregroundColor="#05192d7c" backgroundColor="#1502050e" borderColor="#FFFFFF" borderWidth="2"/>
+		<widget name="DownloadLabel" position="1215,968" size="660,30" font="SRegular; 18" foregroundColor="#FFFFFF" backgroundColor="#1502050e" halign="center"/>
+		<eLabel position="30,86" size="1860,915" zPosition="-1" backgroundColor="#1502050e"/>
+		<eLabel position="1215,480" size="660,3" backgroundColor="#C0C0C0"/>
+		<eLabel position="1218,948" size="654,3" backgroundColor="#C0C0C0"/>
+		<eLabel position="30,78" size="1860,3" backgroundColor="#C0C0C0"/>
+		<eLabel position="30,1005" size="1860,3" backgroundColor="#C0C0C0"/>
+		<eLabel position="30,773" size="1155,3" backgroundColor="#C0C0C0"/>
+		<eLabel position="1199,86" size="3,915" backgroundColor="#C0C0C0"/>
+		<ePixmap pixmap="{picpath}key_menu.png" position="1608,1029" size="84,36" alphatest="blend"/>
+		<ePixmap pixmap="{picpath}key_ok.png" position="1707,1029" size="84,36" alphatest="blend"/>
+		<ePixmap pixmap="{picpath}key_exit.png" position="1806,1029" size="84,36" alphatest="blend"/>
+		<ePixmap pixmap="{picpath}key_red.png" position="75,1028" size="39,39" alphatest="blend"/>
+		<ePixmap pixmap="{picpath}key_green.png" position="420,1028" size="39,39" alphatest="blend"/>
+		<ePixmap pixmap="{picpath}key_yellow.png" position="765,1028" size="39,39" alphatest="blend"/>
+		<ePixmap pixmap="{picpath}key_blue.png" position="1110,1028" size="39,39" alphatest="blend"/>
+		<eLabel position="126,1028" size="276,39" text="Beenden" font="SRegular; 29" foregroundColor="#FFFFFF" backgroundColor="#050a1232" valign="center"/>
+		<eLabel position="471,1028" size="276,39" text="Download" font="SRegular; 29" foregroundColor="#FFFFFF" backgroundColor="#050a1232" valign="center"/>
+		<eLabel position="816,1028" size="276,39" text=" " font="SRegular; 29" foregroundColor="#FFFFFF" backgroundColor="#050a1232" valign="center"/>
+		<eLabel position="1161,1028" size="276,39" text="Home" font="SRegular; 29" foregroundColor="#FFFFFF" backgroundColor="#050a1232" valign="center"/>
+	</screen>
+</skin>
