@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-01-14 08:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,6 +32,15 @@ msgstr ""
 msgid "Visualization for European Installation Bus"
 msgstr ""
 
+msgid "beleuchtung:helligkeitswerte:esstisch"
+msgstr ""
+
+msgid "beleuchtung:helligkeitswerte:schlafen_decke"
+msgstr ""
+
+msgid "beleuchtung:helligkeitswerte:wohnzimmer_decke_1"
+msgstr ""
+
 msgid "down"
 msgstr ""
 
@@ -42,13 +51,4 @@ msgid "parser error"
 msgstr ""
 
 msgid "up"
-msgstr ""
-
-msgid "beleuchtung:helligkeitswerte:esstisch"
-msgstr ""
-
-msgid "beleuchtung:helligkeitswerte:schlafen_decke"
-msgstr ""
-
-msgid "beleuchtung:helligkeitswerte:wohnzimmer_decke_1"
 msgstr ""

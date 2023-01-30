@@ -337,7 +337,7 @@ class OFDB(Screen):
 			self["statusbar"].setText(_("OFDb Details parsed"))
 			Titeltext = self.generalinfos.group("title")
 			if len(Titeltext) > 57:
-				Titeltext = "%s%s" & (Titeltext[0:54], "…")
+				Titeltext = "%s%s" % (Titeltext[0:54], "…")
 			self["titellabel"].setText(Titeltext)
 			Detailstext = ""
 			genreblockmask = compile('Genre\(s\):(?:[\s\S]*?)class=\"Daten\">(.*?)</tr>', DOTALL)
@@ -383,7 +383,7 @@ class OFDB(Screen):
 				posterurl = posterurl.group(1)
 				self["statusbar"].setText(_("Downloading Movie Poster: %s...") % (posterurl))
 				localfile = "/tmp/poster.jpg"
-				print("[OFDb] downloading poster %s to " % (posterurl, localfile))
+				print("[OFDb] downloading poster %s to %s" % (posterurl, localfile))
 				callInThread(self.threadDownloadPage, posterurl, localfile, self.OFDBPoster, self.fetchFailed)
 			else:
 				print("no jpg poster!")

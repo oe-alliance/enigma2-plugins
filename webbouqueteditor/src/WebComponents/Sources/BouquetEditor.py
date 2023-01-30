@@ -201,6 +201,7 @@ class BouquetEditor(Source):
 			self.setRoot(self.bouquet_rootstr)
 			return (True, "Bouquet %s moved." % self.getName(ref))
 		else:
+			ref = eServiceReference(sBouquetRef)
 			return (False, "Bouquet %s can not be moved." % self.getName(ref))
 
 	def removeService(self, param):

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-01-14 08:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,35 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid " as "
-msgstr ""
-
-msgid "* = Restart Required"
-msgstr ""
-
 msgid "Ambiguous results"
 msgstr ""
 
-msgid "Cancel"
-msgstr ""
-
-msgid "Cast: "
-msgstr ""
-
-msgid "Channel Selection"
-msgstr ""
-
-msgid "Content:"
-msgstr ""
-
-msgid "Could't get event name"
+msgid "Couldn't get event name"
 msgstr ""
 
 msgid "Details"
 msgstr ""
 
-#, python-format
-msgid "Downloading Movie Poster: %s..."
+msgid "Downloading Movie Poster..."
+msgstr ""
+
+msgid "E"
 msgstr ""
 
 msgid "Enable this to be able to access IMDb search setup from within the plugin browser."
@@ -72,7 +56,7 @@ msgstr ""
 msgid "Extra Info"
 msgstr ""
 
-msgid "Genre:"
+msgid "IMDB Exception"
 msgstr ""
 
 msgid "IMDb Details parsed"
@@ -93,13 +77,7 @@ msgstr ""
 msgid "IMDb Re-Download completed"
 msgstr ""
 
-msgid "IMDb Save - Download completed"
-msgstr ""
-
 msgid "IMDb Setup"
-msgstr ""
-
-msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
 msgstr ""
 
 msgid "IMDb can not get Movie Information to write to .txt file!"
@@ -108,13 +86,24 @@ msgstr ""
 msgid "IMDb query failed!"
 msgstr ""
 
+msgid "IMDb save completed"
+msgstr ""
+
 msgid "IMDb search"
 msgstr ""
 
 msgid "IMDb setup"
 msgstr ""
 
-msgid "Lookup"
+#, python-format
+msgid "Ignoring invalid imdbId: %s"
+msgstr ""
+
+msgid "Include episodes in the results. Takes effect after the next search of IMDb for a show name."
+msgstr ""
+
+#, python-format
+msgid "Local file does not exist: %s"
 msgstr ""
 
 msgid "Menu"
@@ -132,9 +121,6 @@ msgstr ""
 msgid "No details found."
 msgstr ""
 
-msgid "OK"
-msgstr ""
-
 msgid "Page down"
 msgstr ""
 
@@ -147,12 +133,6 @@ msgstr ""
 msgid "Please select the matching entry"
 msgstr ""
 
-msgid "Plot Outline"
-msgstr ""
-
-msgid "Production Countries:"
-msgstr ""
-
 #, python-format
 msgid "Query IMDb: %s"
 msgstr ""
@@ -161,10 +141,7 @@ msgstr ""
 msgid "Re-Query IMDb: %s..."
 msgstr ""
 
-msgid "Release Date:"
-msgstr ""
-
-msgid "Runtime:"
+msgid "S"
 msgstr ""
 
 msgid "Save current Details as .html for offline use"
@@ -182,13 +159,13 @@ msgstr ""
 msgid "Search for details from the Internet Movie Database"
 msgstr ""
 
-msgid "Select from EPG"
-msgstr ""
-
 msgid "Settings for Internet Movie Database searches"
 msgstr ""
 
 msgid "Setup"
+msgstr ""
+
+msgid "Show a bigger poster"
 msgstr ""
 
 msgid "Show episode and year information for cast when available. Takes effect after the next fetch of show details."
@@ -197,7 +174,10 @@ msgstr ""
 msgid "Show episode and year information in cast list"
 msgstr ""
 
-msgid "Show full movie or series name in title menu"
+msgid "Show episodes in title menu"
+msgstr ""
+
+msgid "Show extra information in title menu"
 msgstr ""
 
 msgid "Show in movie list"
@@ -212,13 +192,19 @@ msgstr ""
 msgid "Show movie and series extra details"
 msgstr ""
 
+msgid "Show movie and series synopsis"
+msgstr ""
+
 msgid "Show search in plugin browser"
 msgstr ""
 
 msgid "Show setup in plugin browser"
 msgstr ""
 
-msgid "Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name."
+msgid "Show the type of the title and top cast. Takes effect after the next search of IMDb for a show name."
+msgstr ""
+
+msgid "Synopsis"
 msgstr ""
 
 msgid "The Internet Movie Database"
@@ -230,14 +216,14 @@ msgstr ""
 msgid "Title Menu"
 msgstr ""
 
-msgid "Unknown category"
-msgstr ""
-
-msgid "User Rating"
-msgstr ""
-
 msgid "Words / phrases to ignore "
 msgstr ""
 
+msgid "connection error"
+msgstr ""
+
 msgid "no user rating yet"
+msgstr ""
+
+msgid "timeout"
 msgstr ""

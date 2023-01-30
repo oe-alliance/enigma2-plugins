@@ -1,7 +1,13 @@
-# -*- coding: utf-8 -*-
-from __future__ import print_function, absolute_import
 from os import system, remove, remove, listdir, walk
 from os.path import split, dirname
+from re import sub
+from requests import get, exceptions
+from six import ensure_str
+from time import strftime
+from twisted.internet.reactor import callInThread
+from urllib.parse import quote
+from xml.etree.ElementTree import fromstring as cet_fromstring
+
 from enigma import eTimer, iServiceInformation, iPlayableService, ePicLoad, RT_VALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, gFont, eListbox, ePoint, eListboxPythonMultiContent, eServiceCenter, getDesktop
 from Components.Label import Label
 from Components.Button import Button
@@ -9,6 +15,7 @@ from Components.Pixmap import Pixmap
 from Components.MenuList import MenuList
 from Components.Sources.List import List
 from Components.ConfigList import ConfigList
+from Components.FileList import FileList
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, ConfigText, KEY_LEFT, KEY_RIGHT, KEY_0, getConfigListEntry
 from Components.ScrollLabel import ScrollLabel
 from Components.ServiceEventTracker import ServiceEventTracker
@@ -21,24 +28,26 @@ from Screens.MessageBox import MessageBox
 from Screens.HelpMenu import HelpableScreen
 from Screens.InfoBarGenerics import InfoBarSeek
 from Tools.Directories import resolveFilename, fileExists, pathExists, SCOPE_MEDIA, SCOPE_PLAYLIST, SCOPE_SKIN_IMAGE
-from six import ensure_str
-from requests import get, exceptions
-from twisted.internet.reactor import callInThread
-from re import sub
-from six.moves.urllib.parse import quote
-from xml.etree.cElementTree import fromstring as cet_fromstring
-from .MC_Filelist import FileList
 from .__init__ import _  # for localized messages
-from time import strftime
 
 config.plugins.mc_ap = ConfigSubsection()
-sorts = [('default', _("default")), ('alpha', _("alphabet")), ('alphareverse', _("alphabet backward")), ('date', _("date")), ('datereverse', _("date backward")), ('size', _("size")), ('sizereverse', _("size backward"))]
-config.plugins.mc_ap_sortmode = ConfigSubsection()
-config.plugins.mc_ap_sortmode.enabled = ConfigSelection(sorts)
 config.plugins.mc_ap.showJpg = ConfigYesNo(default=True)
 config.plugins.mc_ap.jpg_delay = ConfigInteger(default=10, limits=(5, 999))
 config.plugins.mc_ap.repeat = ConfigSelection(default="off", choices=[("off", "off"), ("single", "single"), ("all", "all")])
 config.plugins.mc_ap.lastDir = ConfigText(default=resolveFilename(SCOPE_MEDIA))
+
+choiceList = [
+	("0.0", _("Name ascending")),
+	("0.1", _("Name descending")),
+	("1.0", _("Date ascending")),
+	("1.1", _("Date descending"))
+]
+choiceList = choiceList + [
+	("2.0", _("Size ascending")),
+	("2.1", _("Size descending"))
+]
+config.plugins.mc_ap_sortmode = ConfigSelection(default="0.0", choices=choiceList)
+
 
 screensaverlist = [('default', _("default"))]
 hddpath = "/hdd/saver/"
@@ -241,12 +250,11 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		currDir = config.plugins.mc_ap.lastDir.value
 		if not pathExists(currDir):
 			currDir = "/"
-		sort = config.plugins.mc_ap_sortmode.enabled.value
 		self["currentfolder"].setText(str(currDir))
 		self.filelist = []
 		self["filelist"] = []
 		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib", "/proc", "/ram", "/root", "/sbin", "/sys", "/tmp", "/usr", "/var"]
-		self.filelist = FileList(currDir, useServiceRef=True, showDirectories=True, showFiles=True, matchingPattern="(?i)^.*\.(mp2|mp3|wav|wave|wma|m4a|ogg|ra|flac|m3u|pls|e2pls)", inhibitDirs=inhibitDirs, sort=sort)
+		self.filelist = FileList(currDir, useServiceRef=True, showDirectories=True, showFiles=True, matchingPattern="(?i)^.*\.(mp2|mp3|wav|wave|wma|m4a|ogg|ra|flac|m3u|pls|e2pls)", additionalExtensions=None, sortDirs="0.0", sortFiles=config.plugins.mc_ap_sortmode.value, inhibitDirs=inhibitDirs)
 		self["filelist"] = self.filelist
 		self["filelist"].show()
 		self.JpgTimer = eTimer()
@@ -388,8 +396,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 
 	def updd(self):
 		self.updateFileInfo()
-		sort = config.plugins.mc_ap_sortmode.enabled.value
-		self.filelist.refresh(sort)
+		self.filelist.refresh()
 		if MC_AudioPlayer.STATE == "PLAY":
 			self["play"].instance.setPixmapFromFile(mcpath + "icons/play_enabled.png")
 			if config.plugins.mc_ap.showJpg.getValue():
@@ -508,8 +515,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		if confirmed:
 			delfile = self["filelist"].getFilename()
 			remove(delfile)
-			sort = config.plugins.mc_ap_sortmode.enabled.value
-			self.filelist.refresh(sort)
+			self.filelist.refresh()
 
 	def deleteDir(self):
 		self.session.openWithCallback(self.deleteDirConfirmed, MessageBox, _("Do you really want to delete this directory and it's content ?"))
@@ -519,8 +525,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 			import shutil
 			deldir = self.filelist.getSelection()[0]
 			shutil.rmtree(deldir)
-			sort = config.plugins.mc_ap_sortmode.enabled.value
-			self.filelist.refresh(sort)
+			self.filelist.refresh()
 
 	def getJPG(self):
 		if config.plugins.mc_ap.whichjpg.value == "default":
@@ -538,7 +543,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 				self.jpgIndex += 1
 			else:
 				self.jpgIndex = 0
-			print("MediaCenter: Last JPG Index: " + str(self.jpgLastIndex))
+			print("MediaCenter: Last JPG Index: %s" % str(self.jpgLastIndex))
 			if self.jpgLastIndex != self.jpgIndex or self.jpgLastIndex == -1:
 				if config.plugins.mc_ap.whichjpg.value == "default":
 					path = mcpath + "saver/" + self.jpgList[self.jpgIndex]
@@ -590,15 +595,9 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 	def addPlaylistParser(self, parser, extension):
 		self.playlistparsers[extension] = parser
 
-	def Shuffle(self):
-		if self.currPlaying == 1:
-			return
-		sort = "shuffle"
-		self.filelist.refresh(sort)
-
 	def showMenu(self):
 		menu = []
-		menu.append((_("shuffle"), "shuffle"))
+		#menu.append((_("shuffle"), "shuffle")) # TOOD
 		if self.filelist.canDescent():
 			x = self.filelist.getName()
 			if x == "..":
@@ -629,8 +628,8 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 			self.addDirtoPls(dirname(self.filelist.getSelection()[0].getPath()) + "/", recursive=False)
 		elif choice[1] == "deletefile":
 			self.deleteFile()
-		elif choice[1] == "shuffle":
-			self.Shuffle()
+#		elif choice[1] == "shuffle":
+#			self.Shuffle()
 
 	def Settings(self):
 		self.session.openWithCallback(self.updd, AudioPlayerSettings)
@@ -805,8 +804,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 
 	def updd(self):
 		self.updateFileInfo()
-		sort = config.plugins.mc_ap_sortmode.enabled.value
-		self.filelist.refresh(sort)
+		self.filelist.refresh()
 		if MC_AudioPlayer.STATE == "PLAY":
 			self["play"].instance.setPixmapFromFile(mcpath + "icons/play_enabled.png")
 			if config.plugins.mc_ap.showJpg.getValue():
@@ -872,8 +870,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 		if confirmed:
 			delfile = self["filelist"].getFilename()
 			remove(delfile)
-			sort = config.plugins.mc_ap_sortmode.enabled.value
-			self.filelist.refresh(sort)
+			self.filelist.refresh()
 
 	def getJPG(self):
 		if config.plugins.mc_ap.whichjpg.value == "default":
@@ -1321,8 +1318,8 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 		try:
 			for i in listdir(playlistdir):
 				listpath.append((i, playlistdir + i))
-		except IOError as e:
-			print("Error while scanning subdirs ", e)
+		except OSError as e:
+			print("Error while scanning subdirs: %s" % str(e))
 		self.session.openWithCallback(self.load_pls, ChoiceBox, title=_("Please select a playlist..."), list=listpath)
 
 	def load_pls(self, path):
@@ -1342,8 +1339,8 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 		try:
 			for i in listdir(playlistdir):
 				listpath.append((i, playlistdir + i))
-		except IOError as e:
-			print("Error while scanning subdirs ", e)
+		except OSError as e:
+			print("Error while scanning subdirs: %s" % str(e))
 		self.session.openWithCallback(self.delete_saved_pls, ChoiceBox, title=_("Please select a playlist to delete..."), list=listpath)
 
 	def delete_saved_pls(self, path):
@@ -1641,7 +1638,7 @@ class AudioPlayerSettings(Screen):
 		self.list.append(getConfigListEntry(_("Screensaver Enable:"), config.plugins.mc_ap.showJpg))
 		self.list.append(getConfigListEntry(_("Screensaver Interval"), config.plugins.mc_ap.jpg_delay))
 		self.list.append(getConfigListEntry(_("Screensaver Style:"), config.plugins.mc_ap.whichjpg))
-		self.list.append(getConfigListEntry(_("Filelist Sorting:"), config.plugins.mc_ap_sortmode.enabled))
+		self.list.append(getConfigListEntry(_("Filelist Sorting:"), config.plugins.mc_ap_sortmode))
 
 	def keyLeft(self):
 		self["configlist"].handleKey(KEY_LEFT)

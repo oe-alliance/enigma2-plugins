@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-01-12 19:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,9 +28,6 @@ msgid "1 week"
 msgstr ""
 
 msgid "3 days"
-msgstr ""
-
-msgid "Accept changes"
 msgstr ""
 
 msgid "Add"
@@ -79,15 +76,6 @@ msgstr ""
 msgid "Can't write CSV file %s."
 msgstr ""
 
-msgid "Cancel"
-msgstr ""
-
-msgid "Change path"
-msgstr ""
-
-msgid "Choose the filename:"
-msgstr ""
-
 msgid "Date format:"
 msgstr ""
 
@@ -107,6 +95,9 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+msgid "Edit Birthday Settings"
+msgstr ""
+
 msgid "Edit birthday"
 msgstr ""
 
@@ -114,9 +105,6 @@ msgid "Edit birthdays"
 msgstr ""
 
 msgid "Edit the selected entry"
-msgstr ""
-
-msgid "Enter the name of the person:"
 msgstr ""
 
 #, python-format
@@ -148,9 +136,6 @@ msgstr ""
 msgid "Import CSV file"
 msgstr ""
 
-msgid "Invalid Location"
-msgstr ""
-
 msgid "Invalid date!"
 msgstr ""
 
@@ -172,9 +157,6 @@ msgstr ""
 msgid "Notification time:"
 msgstr ""
 
-msgid "OK"
-msgstr ""
-
 msgid "Open the extras menu"
 msgstr ""
 
@@ -190,7 +172,7 @@ msgstr ""
 msgid "Remove the selected entry"
 msgstr ""
 
-msgid "Save"
+msgid "Select a path for the birthday file"
 msgstr ""
 
 msgid "Show plugin in extensions menu:"
@@ -210,9 +192,6 @@ msgid ""
 "Today is %s's birthday!\n"
 "\n"
 "She/he was born on %s and is now %s year(s) old."
-msgstr ""
-
-msgid "VirtualKeyBoard"
 msgstr ""
 
 msgid "What do you want to do?"

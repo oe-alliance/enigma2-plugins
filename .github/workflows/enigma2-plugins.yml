@@ -1,4 +1,4 @@
-name: enigma2-plugins build 2.7
+name: enigma2-plugins build
 
 on:
   push:
@@ -9,36 +9,39 @@ on:
 jobs:
   build:
     name: Build enigma2-plugins
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
-        gcc: [9, 11]
+        gcc: [11,12]
+        python: ['3.10','3.11']
     steps:
       - name: Install prerequisites
         run: |
           sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
           sudo apt-get -q update
-          sudo apt-get install automake
-          sudo apt-get install build-essential
-          sudo apt-get install gettext
-          sudo apt-get install g++-${{ matrix.gcc }}
-
+          sudo apt remove -y libunwind-14-dev
+          sudo apt-get install -y g++-${{ matrix.gcc }} build-essential autoconf autotools-dev gettext python${{ matrix.python }}-dev libntirpc-dev
+          
       - uses: actions/checkout@v2
         with:
           ref: 'master'
+
       - uses: actions/setup-python@v2
         with:
-          python-version: '2.7'
+          python-version: ${{ matrix.python }}
 
-      - name: Build plugins, gcc-${{ matrix.gcc }}, python 2.7
+      - name: Build plugins, gcc-${{ matrix.gcc }}, python ${{ matrix.python }}
         env:
           CC: "gcc-${{ matrix.gcc }}"
           CXX: "g++-${{ matrix.gcc }}"
         run: |
-          pip install six
+          pip3 install six
           sed -i '/PKG_CHECK_MODULES(ENIGMA2, enigma2)/d' ./configure.ac
           sed -i '/PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)/d' ./configure.ac
+          sudo cp /usr/include/tirpc/rpc/* /usr/include/rpc/
+          sudo cp /usr/include/tirpc/netconfig.h /usr/include/
           autoreconf -i
           ./configure --without-debug --with-po
           make
+          rm -rf ./subsdownloader2
           python -m compileall .

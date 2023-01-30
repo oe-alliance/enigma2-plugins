@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-01-14 08:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -132,6 +132,9 @@ msgstr ""
 msgid "Configuration"
 msgstr ""
 
+msgid "Cut series title on dash"
+msgstr ""
+
 msgid "Debug: Log file path"
 msgstr ""
 
@@ -170,6 +173,9 @@ msgid "Enable support for EPGImport"
 msgstr ""
 
 msgid "Enable support for XMLTVImport"
+msgstr ""
+
+msgid "Enable support for crossepg"
 msgstr ""
 
 msgid "Episode pattern file"
@@ -281,6 +287,9 @@ msgstr ""
 msgid "Problem during loading Webchannels"
 msgstr ""
 
+msgid "ProtocolError:"
+msgstr ""
+
 msgid "Reading log file...\n"
 msgstr ""
 
@@ -356,10 +365,16 @@ msgstr ""
 msgid "Send debug messages to shell"
 msgstr ""
 
+msgid "SerienServer API"
+msgstr ""
+
 msgid "SeriesPlugin"
 msgstr ""
 
 msgid "SeriesPlugin Info"
+msgstr ""
+
+msgid "SeriesPlugin Setup"
 msgstr ""
 
 msgid "SeriesPlugin extension exception "
@@ -471,6 +486,12 @@ msgstr ""
 msgid "Startup delay (in min)"
 msgstr ""
 
+msgid "Stop is enabled. To reactivate SeriesPlugin, just open the setup"
+msgstr ""
+
+msgid "Stop on ProtocolError"
+msgstr ""
+
 #, python-format
 msgid "Success: %s"
 msgstr ""
@@ -479,6 +500,9 @@ msgid "Successfully renamed"
 msgstr ""
 
 msgid "Timeout (in min)"
+msgstr ""
+
+msgid "Timeout for Error Popups"
 msgstr ""
 
 msgid "Timeout for Success Popups"
@@ -511,7 +535,4 @@ msgid "Your pattern file is corrupt"
 msgstr ""
 
 msgid "{title:s}"
-msgstr ""
-
-msgid "SeriesPlugin Setup"
 msgstr ""

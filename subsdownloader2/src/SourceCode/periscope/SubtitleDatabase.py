@@ -148,7 +148,7 @@ class SubtitleDB(object):
         except KeyError as e:
             log.warn("Ooops, you found a missing language in the config file of %s: %s. Send a bug report to have it added." % (self.__class__.__name__, lg))
 
-    def query(self, token):
+    def query(self, token, langs):
         raise TypeError("%s has not implemented method '%s'" % (self.__class__.__name__, sys._getframe().f_code.co_name))
 
     def fileExtension(self, filename):

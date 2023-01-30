@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-01-14 08:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,6 +33,12 @@ msgid ""
 "The timer for %s will be delete for stop the recording and after this the movie will be move to trashcan.\n"
 "\n"
 "Do you really want to continue?"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"Last modified at TheTVDB.com: %s"
 msgstr ""
 
 #, python-format
@@ -91,6 +97,10 @@ msgstr ""
 msgid "About Advanced Movie Selection"
 msgstr ""
 
+#, python-format
+msgid "Actors: %s\n"
+msgstr ""
+
 msgid "Add Tag(s) for Recordings/Timer or AutoTimer"
 msgstr ""
 
@@ -127,6 +137,14 @@ msgstr ""
 msgid "Advanced movielist menu"
 msgstr ""
 
+#, python-format
+msgid "Air Day: %s"
+msgstr ""
+
+#, python-format
+msgid "Air Time: %s"
+msgstr ""
+
 msgid "All directorys below '/media'"
 msgstr ""
 
@@ -148,6 +166,10 @@ msgstr ""
 
 #, python-format
 msgid "Another %s are required to move the data."
+msgstr ""
+
+#, python-format
+msgid "Appeared: %s"
 msgstr ""
 
 #, python-format
@@ -311,6 +333,10 @@ msgstr ""
 msgid "Branch:"
 msgstr ""
 
+#, python-format
+msgid "Broadcast TV network: %s"
+msgstr ""
+
 msgid "Button caption"
 msgstr ""
 
@@ -321,6 +347,10 @@ msgid "Cancel"
 msgstr ""
 
 msgid "Cancelled"
+msgstr ""
+
+#, python-format
+msgid "Certification: %s"
 msgstr ""
 
 msgid "Change Bookmarkname"
@@ -414,6 +444,9 @@ msgstr ""
 msgid "Daily"
 msgstr ""
 
+msgid "Data already exists! Should anything be updated?"
+msgstr ""
+
 msgid "Default movie location"
 msgstr ""
 
@@ -465,9 +498,17 @@ msgstr ""
 msgid "Destination carrier"
 msgstr ""
 
+#, python-format
+msgid "Details for: %s"
+msgstr ""
+
 msgid ""
 "Developer:\n"
 "  JackDaniel, cmikula"
+msgstr ""
+
+#, python-format
+msgid "Director: %s"
 msgstr ""
 
 msgid "Directories"
@@ -718,10 +759,25 @@ msgstr ""
 msgid "Enter Home button descrition:"
 msgstr ""
 
+msgid "Enter new movie name for search:"
+msgstr ""
+
 msgid "Enter new moviename to search for"
 msgstr ""
 
 msgid "Enter text to search for"
+msgstr ""
+
+#, python-format
+msgid "Episode details for: %s"
+msgstr ""
+
+#, python-format
+msgid "Episode: %s"
+msgstr ""
+
+#, python-format
+msgid "Episodes for: %s"
 msgstr ""
 
 msgid "Error"
@@ -734,6 +790,12 @@ msgid "Error loading ISO image!"
 msgstr ""
 
 msgid "Error occurred during unmounting device!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Error!\n"
+"%s"
 msgstr ""
 
 msgid "Error:"
@@ -770,6 +832,10 @@ msgstr ""
 msgid "Finished"
 msgstr ""
 
+#, python-format
+msgid "First Aired: %s"
+msgstr ""
+
 msgid "Foldername:"
 msgstr ""
 
@@ -782,6 +848,10 @@ msgstr ""
 msgid "From:"
 msgstr ""
 
+#, python-format
+msgid "Genre: %s\n"
+msgstr ""
+
 msgid "German (with Starttime)"
 msgstr ""
 
@@ -791,6 +861,22 @@ msgstr ""
 msgid "German (without Year)"
 msgstr ""
 
+#, python-format
+msgid "Getting episodes details for ' %s ', please wait ..."
+msgstr ""
+
+#, python-format
+msgid "Getting episodes list for ' %s ', please wait ..."
+msgstr ""
+
+#, python-format
+msgid "Getting search result for ' %s ', please wit ..."
+msgstr ""
+
+#, python-format
+msgid "Getting show details for ' %s ', please wait ..."
+msgstr ""
+
 msgid "Go manual to position (OK for seek):"
 msgstr ""
 
@@ -798,6 +884,10 @@ msgid "Green"
 msgstr ""
 
 msgid "Grey"
+msgstr ""
+
+#, python-format
+msgid "Guest Stars: %s\n"
 msgstr ""
 
 msgid "Here you can adjust the manually jump length relative to the film length in percent."
@@ -918,6 +1008,10 @@ msgstr ""
 msgid "How to proceed '%s'"
 msgstr ""
 
+#, python-format
+msgid "ID: %s"
+msgstr ""
+
 msgid "IMDB search"
 msgstr ""
 
@@ -1002,11 +1096,17 @@ msgstr ""
 msgid "If you enable this function, your recorded movies will be marked in epg list."
 msgstr ""
 
+msgid "Info/Cover save"
+msgstr ""
+
 #, python-format
 msgid "Infos for: %s"
 msgstr ""
 
 msgid "Initial location in new timers"
+msgstr ""
+
+msgid "Input"
 msgstr ""
 
 msgid "Instant record location"
@@ -1137,7 +1237,13 @@ msgstr ""
 msgid "Move Copy Progress"
 msgstr ""
 
+msgid "Move down"
+msgstr ""
+
 msgid "Move of"
+msgstr ""
+
+msgid "Move up"
 msgstr ""
 
 msgid "Move-Copy"
@@ -1265,6 +1371,20 @@ msgstr ""
 msgid "No Helptext available!"
 msgstr ""
 
+#, python-format
+msgid "No data found for ' %s ' at themoviedb.org!"
+msgstr ""
+
+#, python-format
+msgid ""
+"No data found for ' %s ' at themoviedb.org!\n"
+"Do you want to edit the search name?"
+msgstr ""
+
+#, python-format
+msgid "No description for ' %s ' at themoviedb.org found!"
+msgstr ""
+
 msgid "No internet connection available!"
 msgstr ""
 
@@ -1281,6 +1401,9 @@ msgid "No plugin assigned!"
 msgstr ""
 
 msgid "No tags are set on these movies."
+msgstr ""
+
+msgid "No user voted!"
 msgstr ""
 
 msgid "No, but restart from begin"
@@ -1331,6 +1454,9 @@ msgstr ""
 msgid "Only last three digits from the IP must be set."
 msgstr ""
 
+msgid "Only those, which are not available!"
+msgstr ""
+
 msgid "Open servicelist"
 msgstr ""
 
@@ -1341,6 +1467,15 @@ msgid "Orange"
 msgstr ""
 
 msgid "Original (1400x2100)"
+msgstr ""
+
+msgid "Overwrite both (description & cover)"
+msgstr ""
+
+msgid "Overwrite movie cover"
+msgstr ""
+
+msgid "Overwrite movie description"
 msgstr ""
 
 msgid "Own button description"
@@ -1416,6 +1551,10 @@ msgstr ""
 msgid "Processing: %s"
 msgstr ""
 
+#, python-format
+msgid "Production: %s\n"
+msgstr ""
+
 msgid "Provider Logo path:"
 msgstr ""
 
@@ -1426,6 +1565,10 @@ msgid "REC"
 msgstr ""
 
 msgid "Radio-button"
+msgstr ""
+
+#, python-format
+msgid "Rating: %s\n"
 msgstr ""
 
 msgid "Really close without saving settings?"
@@ -1462,6 +1605,10 @@ msgid "Records"
 msgstr ""
 
 msgid "Red"
+msgstr ""
+
+#, python-format
+msgid "Regie: %s"
 msgstr ""
 
 msgid "Remaining elements:"
@@ -1509,7 +1656,22 @@ msgstr ""
 msgid "Return to previous service"
 msgstr ""
 
+#, python-format
+msgid "Runtime: %s minutes"
+msgstr ""
+
+#, python-format
+msgid "Runtime: %s minutes\n"
+msgstr ""
+
 msgid "Save"
+msgstr ""
+
+#, python-format
+msgid "Save Info/Cover for ' %s ', please wait ..."
+msgstr ""
+
+msgid "Save info/cover"
 msgstr ""
 
 msgid "Save infos/cover"
@@ -1526,10 +1688,26 @@ msgid "Search for %s, please wait..."
 msgstr ""
 
 #, python-format
+msgid "Search result for: %s"
+msgstr ""
+
+#, python-format
 msgid "Search result(s) for %s"
 msgstr ""
 
+#, python-format
+msgid "Search trailer for ' %s ', please wait ..."
+msgstr ""
+
 msgid "Search:"
+msgstr ""
+
+#, python-format
+msgid "Searching for ' %s ' on TMDb, please wait ..."
+msgstr ""
+
+#, python-format
+msgid "Searching for ' %s ' on TheTVDB.com, please wait ..."
 msgstr ""
 
 msgid "Searching for clients, please wait ..."
@@ -1537,6 +1715,10 @@ msgstr ""
 
 #, python-format
 msgid "Searchtitle: %s"
+msgstr ""
+
+#, python-format
+msgid "Season: %s"
 msgstr ""
 
 msgid "Second"
@@ -1699,6 +1881,12 @@ msgstr ""
 msgid "Show disk usage in description:"
 msgstr ""
 
+msgid "Show episode detail"
+msgstr ""
+
+msgid "Show episodes overview"
+msgstr ""
+
 msgid "Show event details"
 msgstr ""
 
@@ -1744,6 +1932,9 @@ msgstr ""
 msgid "Show movie color status in movielist"
 msgstr ""
 
+msgid "Show movie detail"
+msgstr ""
+
 msgid "Show movie library symbol in movielist:"
 msgstr ""
 
@@ -1762,6 +1953,9 @@ msgstr ""
 msgid "Show new recordings icon:"
 msgstr ""
 
+msgid "Show next cover"
+msgstr ""
+
 msgid "Show path marker within movie library movies:"
 msgstr ""
 
@@ -1772,6 +1966,9 @@ msgid "Show percent in movielist"
 msgstr ""
 
 msgid "Show plugin config in extensions menu from movielist:"
+msgstr ""
+
+msgid "Show previous cover"
 msgstr ""
 
 msgid "Show progress of move or copy job"
@@ -1789,10 +1986,16 @@ msgstr ""
 msgid "Show runtime entry in movielist"
 msgstr ""
 
+msgid "Show search result"
+msgstr ""
+
 msgid "Show search trailer on web in extensions menu from movielist:"
 msgstr ""
 
 msgid "Show seen movies"
+msgstr ""
+
+msgid "Show serie detail"
 msgstr ""
 
 msgid "Show sort options in extensions menu from movielist:"
@@ -1845,6 +2048,26 @@ msgid ""
 msgstr ""
 
 msgid "Some settings changes require close/reopen the movielist to take effect."
+msgstr ""
+
+msgid "Sorry, no data found at TheTVDB.com!"
+msgstr ""
+
+#, python-format
+msgid "Sorry, no description for ' %s ' at TheTVDB.com found!"
+msgstr ""
+
+msgid "Sorry, no description for this episode at TheTVDB.com available!"
+msgstr ""
+
+msgid "Sorry, no description found at www.thetvdb.com!"
+msgstr ""
+
+msgid "Sorry, no episode titel available!"
+msgstr ""
+
+#, python-format
+msgid "Sorry, no info/cover found for title: %s"
 msgstr ""
 
 msgid "Sort"
@@ -1911,6 +2134,10 @@ msgid "Stop playing this movie?"
 msgstr ""
 
 msgid "Stop search IP:"
+msgstr ""
+
+#, python-format
+msgid "Studio: %s"
 msgstr ""
 
 msgid "Switch library/movielist"
@@ -2023,10 +2250,17 @@ msgstr ""
 msgid "To:"
 msgstr ""
 
+msgid "Toggle detail and list view"
+msgstr ""
+
 msgid "Toggle seen"
 msgstr ""
 
 msgid "Toggle selected"
+msgstr ""
+
+#, python-format
+msgid "Total %s"
 msgstr ""
 
 msgid "Total size:"
@@ -2059,6 +2293,9 @@ msgid "Unknown"
 msgstr ""
 
 msgid "Unknown error!"
+msgstr ""
+
+msgid "Unknown error!!"
 msgstr ""
 
 msgid "Unknown service"
@@ -2157,7 +2394,14 @@ msgstr ""
 msgid "Virtual"
 msgstr ""
 
+msgid "Virtual KeyBoard"
+msgstr ""
+
 msgid "Virtual and Numerical"
+msgstr ""
+
+#, python-format
+msgid "Voted: %s"
 msgstr ""
 
 msgid "Waiting"
@@ -2233,6 +2477,10 @@ msgstr ""
 msgid "Would you really abort current job?"
 msgstr ""
 
+#, python-format
+msgid "Writer: %s\n"
+msgstr ""
+
 msgid "YTTrailer plugin NOT installed. Search for trailers on the Web is NOT possible."
 msgstr ""
 
@@ -2269,6 +2517,12 @@ msgstr ""
 msgid "be moved/copied?"
 msgstr ""
 
+msgid "episode found"
+msgstr ""
+
+msgid "episodes found"
+msgstr ""
+
 #, python-format
 msgid "from %s"
 msgstr ""
@@ -2279,10 +2533,25 @@ msgstr ""
 msgid "movie"
 msgstr ""
 
+msgid "movie found"
+msgstr ""
+
 msgid "movies"
 msgstr ""
 
+msgid "movies found"
+msgstr ""
+
+msgid "show found"
+msgstr ""
+
+msgid "shows found"
+msgstr ""
+
 msgid "this recording"
+msgstr ""
+
+msgid "times"
 msgstr ""
 
 #, python-format
@@ -2290,10 +2559,4 @@ msgid "to %s"
 msgstr ""
 
 msgid "to:"
-msgstr ""
-
-msgid "Input"
-msgstr ""
-
-msgid "Virtual KeyBoard"
 msgstr ""

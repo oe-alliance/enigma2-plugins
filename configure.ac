@@ -228,10 +228,8 @@ bitrateviewer/src/Makefile
 bitrateviewer/src/bitratecalc/Makefile
 
 bmediacenter/Makefile
-bmediacenter/meta/Makefile
 bmediacenter/po/Makefile
 bmediacenter/src/Makefile
-bmediacenter/src/tmdbsimple/Makefile
 bmediacenter/src/icons/Makefile
 bmediacenter/src/radio/Makefile
 bmediacenter/src/saver/Makefile
@@ -371,7 +369,6 @@ flashexpander/po/Makefile
 flashexpander/src/Makefile
 
 fritzcall/Makefile
-fritzcall/meta/Makefile
 fritzcall/po/Makefile
 fritzcall/src/Makefile
 fritzcall/src/images/Makefile

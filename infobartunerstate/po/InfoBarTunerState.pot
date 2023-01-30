@@ -8,28 +8,218 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-20 19:08+0100\n"
+"POT-Creation-Date: 2023-01-14 08:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "Configuration"
+msgid ""
+"  (C) 2012 by betonme @ IHAD \n"
+"\n"
 msgstr ""
 
-msgid "Usage"
+msgid "  If You like this plugin and want to support it,\n"
 msgstr ""
 
-msgid "Enable InfoBarTunerState"
+msgid "  SUPPORT: "
+msgstr ""
+
+msgid ""
+"  Thanks a lot ! \n"
+"  PayPal: "
+msgstr ""
+
+msgid ""
+"  feel free to donate via PayPal. \n"
+"\n"
+msgstr ""
+
+msgid "  or if just want to say ''thanks'',\n"
+msgstr ""
+
+#, python-format
+msgid "%d"
+msgstr ""
+
+#, python-format
+msgid "%d %%"
+msgstr ""
+
+#, python-format
+msgid "%d GB"
+msgstr ""
+
+#, python-format
+msgid "%d MB"
+msgstr ""
+
+#, python-format
+msgid "%d Min"
+msgstr ""
+
+msgid "-"
+msgstr ""
+
+msgid "-    HH:MM"
+msgstr ""
+
+msgid "Add Setup to extension menu"
 msgstr ""
 
 msgid "Add Show to extension menu"
 msgstr ""
 
-msgid "Add Setup to extension menu"
+msgid "Background transparency"
+msgstr ""
+
+msgid "Begin"
+msgstr ""
+
+msgid "Channel Name"
+msgstr ""
+
+msgid "Channel Number"
+msgstr ""
+
+msgid "Configuration"
+msgstr ""
+
+msgid "DD.MM HH:MM"
+msgstr ""
+
+msgid "DD.MM. HH:MM"
+msgstr ""
+
+msgid "DD.MM.YYYY HH:MM"
+msgstr ""
+
+msgid "Destination"
+msgstr ""
+
+msgid "Destination / Client"
+msgstr ""
+
+msgid "Duration"
+msgstr ""
+
+msgid "Enable InfoBarTunerState"
+msgstr ""
+
+msgid "End"
+msgstr ""
+
+msgid "End record"
+msgstr ""
+
+#, python-format
+msgid "Field %d content"
+msgstr ""
+
+#, python-format
+msgid "Field %d width"
+msgstr ""
+
+msgid "File Size"
+msgstr ""
+
+msgid "Finished"
+msgstr ""
+
+msgid "Free Space"
+msgstr ""
+
+msgid "HH:MM"
+msgstr ""
+
+msgid "HH:MM DD.MM"
+msgstr ""
+
+msgid "HH:MM DD.MM.YYYY"
+msgstr ""
+
+msgid "HH:MM MM/DD"
+msgstr ""
+
+msgid "HH:MM YYYY/MM/DD"
+msgstr ""
+
+msgid "Horizontal offset left in pixel"
+msgstr ""
+
+msgid "Horizontal offset right in pixel"
+msgstr ""
+
+msgid "InfoBarTunerState"
+msgstr ""
+
+msgid "InfoBarTunerState Setup"
+msgstr ""
+
+msgid "InfoBarTunerState is disabled"
+msgstr ""
+
+msgid "Infobar timeout"
+msgstr ""
+
+msgid "List goes up"
+msgstr ""
+
+msgid "MM/DD HH:MM"
+msgstr ""
+
+msgid "MoviePlayer integration"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Nothing running"
+msgstr ""
+
+msgid "Number of finished recordings in list"
+msgstr ""
+
+msgid "Number of pending recordings in list"
+msgstr ""
+
+msgid "Number of seconds for displaying finished recordings"
+msgstr ""
+
+msgid "Only one Graphical Progress field allowed:"
+msgstr ""
+
+msgid "Only one Icon field allowed:"
+msgstr ""
+
+msgid "Only one Name field allowed:"
+msgstr ""
+
+msgid "Overwrite Infobar timeout"
+msgstr ""
+
+msgid "Placeholder for Progressbar"
+msgstr ""
+
+msgid "Prepare / Start / End record"
+msgstr ""
+
+msgid "Prepare record"
+msgstr ""
+
+msgid "Record"
+msgstr ""
+
+msgid "Show InfoBarTunerState"
+msgstr ""
+
+msgid "Show Message when Recording starts"
 msgstr ""
 
 msgid "Show and hide with InfoBar"
@@ -41,191 +231,13 @@ msgstr ""
 msgid "Show streams"
 msgstr ""
 
-msgid "MoviePlayer integration"
+msgid "Start / End record"
 msgstr ""
 
-msgid "Time format begin"
-msgstr ""
-
-msgid "Time format end"
-msgstr ""
-
-msgid "Number of pending recordings in list"
-msgstr ""
-
-msgid "Number of finished recordings in list"
-msgstr ""
-
-msgid "Number of seconds for displaying finished recordings"
-msgstr ""
-
-#, python-format
-msgid "Field %d content"
-msgstr ""
-
-#, python-format
-msgid "Field %d width"
-msgstr ""
-
-msgid "Horizontal offset left in pixel"
-msgstr ""
-
-msgid "Horizontal offset right in pixel"
-msgstr ""
-
-msgid "Vertical offset in pixel"
-msgstr ""
-
-msgid "Text padding offset in pixel"
-msgstr ""
-
-msgid "Text spacing offset in pixel"
-msgstr ""
-
-msgid "Variable field width"
-msgstr ""
-
-msgid "Placeholder for Progressbar"
-msgstr ""
-
-msgid "List goes up"
-msgstr ""
-
-msgid "Background transparency"
-msgstr ""
-
-msgid "Overwrite Infobar timeout"
-msgstr ""
-
-msgid "Infobar timeout"
-msgstr ""
-
-msgid "Show Message when Recording starts"
-msgstr ""
-
-msgid "Only one Name field allowed:"
-msgstr ""
-
-msgid "Only one Icon field allowed:"
-msgstr ""
-
-msgid "Only one Graphical Progress field allowed:"
-msgstr ""
-
-msgid "Nothing running"
-msgstr ""
-
-msgid "-"
-msgstr ""
-
-msgid "Record"
+msgid "Start record"
 msgstr ""
 
 msgid "Stream"
-msgstr ""
-
-msgid "Finished"
-msgstr ""
-
-#, python-format
-msgid "%d"
-msgstr ""
-
-#, python-format
-msgid "%d Min"
-msgstr ""
-
-#, python-format
-msgid "%d %%"
-msgstr ""
-
-#, python-format
-msgid "%d MB"
-msgstr ""
-
-#, python-format
-msgid "%d GB"
-msgstr ""
-
-msgid "InfoBarTunerState"
-msgstr ""
-
-msgid "Show InfoBarTunerState"
-msgstr ""
-
-msgid "InfoBarTunerState Setup"
-msgstr ""
-
-msgid ""
-"  (C) 2012 by betonme @ IHAD \n"
-"\n"
-msgstr ""
-
-msgid "  If You like this plugin and want to support it,\n"
-msgstr ""
-
-msgid "  or if just want to say ''thanks'',\n"
-msgstr ""
-
-msgid ""
-"  feel free to donate via PayPal. \n"
-"\n"
-msgstr ""
-
-msgid ""
-"  Thanks a lot ! \n"
-"  PayPal: "
-msgstr ""
-
-msgid "  SUPPORT: "
-msgstr ""
-
-msgid "Type (Icon)"
-msgstr ""
-
-msgid "Type (Text)"
-msgstr ""
-
-msgid "Tuner"
-msgstr ""
-
-msgid "Tuner Type"
-msgstr ""
-
-msgid "Channel Number"
-msgstr ""
-
-msgid "Channel Name"
-msgstr ""
-
-msgid "Name"
-msgstr ""
-
-msgid "Time Left / Duration"
-msgstr ""
-
-msgid "Time Left"
-msgstr ""
-
-msgid "Time Elapsed"
-msgstr ""
-
-msgid "Begin"
-msgstr ""
-
-msgid "End"
-msgstr ""
-
-msgid "Duration"
-msgstr ""
-
-msgid "Timer Progress (Graphical)"
-msgstr ""
-
-msgid "Timer Progress (Text)"
-msgstr ""
-
-msgid "Destination"
 msgstr ""
 
 msgid "Stream Client"
@@ -234,46 +246,55 @@ msgstr ""
 msgid "Stream Client with Port"
 msgstr ""
 
-msgid "Destination / Client"
+msgid "Text padding offset in pixel"
 msgstr ""
 
-msgid "File Size"
+msgid "Text spacing offset in pixel"
 msgstr ""
 
-msgid "Free Space"
+msgid "Time Elapsed"
 msgstr ""
 
-msgid "None"
+msgid "Time Left"
 msgstr ""
 
-msgid "HH:MM"
+msgid "Time Left / Duration"
 msgstr ""
 
-msgid "DD.MM HH:MM"
+msgid "Time format begin"
 msgstr ""
 
-msgid "DD.MM. HH:MM"
+msgid "Time format end"
 msgstr ""
 
-msgid "MM/DD HH:MM"
+msgid "Timer Progress (Graphical)"
 msgstr ""
 
-msgid "DD.MM.YYYY HH:MM"
+msgid "Timer Progress (Text)"
 msgstr ""
 
-msgid "YYYY/MM/DD HH:MM"
+msgid "Tuner"
 msgstr ""
 
-msgid "HH:MM DD.MM"
+msgid "Tuner State"
 msgstr ""
 
-msgid "HH:MM MM/DD"
+msgid "Tuner Type"
 msgstr ""
 
-msgid "HH:MM DD.MM.YYYY"
+msgid "Type (Icon)"
 msgstr ""
 
-msgid "HH:MM YYYY/MM/DD"
+msgid "Type (Text)"
+msgstr ""
+
+msgid "Usage"
+msgstr ""
+
+msgid "Variable field width"
+msgstr ""
+
+msgid "Vertical offset in pixel"
 msgstr ""
 
 msgid "WD DD.MM. HH:MM"
@@ -282,26 +303,8 @@ msgstr ""
 msgid "WD, DD.MM. HH:MM"
 msgstr ""
 
-msgid "-    HH:MM"
-msgstr ""
-
-msgid "Prepare record"
-msgstr ""
-
-msgid "Start record"
-msgstr ""
-
-msgid "End record"
-msgstr ""
-
-msgid "Start / End record"
-msgstr ""
-
-msgid "Prepare / Start / End record"
+msgid "YYYY/MM/DD HH:MM"
 msgstr ""
 
 msgid "configuration"
-msgstr ""
-
-msgid "InfoBarTunerState is disabled"
 msgstr ""
