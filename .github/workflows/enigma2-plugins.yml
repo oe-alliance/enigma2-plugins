@@ -22,11 +22,11 @@ jobs:
           sudo apt remove -y libunwind-14-dev
           sudo apt-get install -y g++-${{ matrix.gcc }} build-essential autoconf autotools-dev gettext python${{ matrix.python }}-dev libntirpc-dev
           
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: 'master'
 
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
 
