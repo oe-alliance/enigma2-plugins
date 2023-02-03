@@ -197,7 +197,7 @@ msgid "If the receiver currently isn't in standby, this is the duration which EP
 msgstr "Ist die Box zum Startzeitpunkt nicht im Standby, pausiert EPG-Refresh für die hier eingetragene Zeit, bevor es einen erneuten Versuch startet."
 
 msgid "If this is enabled, the plugin will wake up the receiver from standby if possible. Otherwise it needs to be switched on already."
-msgstr "Wenn aktiviert weckt EPG-Refresh, sofern möglich, die Box aus dem Standby auf. Andernfalls muss sie schon eingeschaltet sein."
+msgstr "Wenn aktiviert, weckt EPG-Refresh, sofern möglich, die Box aus dem Deep-Standby auf. Andernfalls muss sie schon eingeschaltet sein."
 
 # Die Optionen selbst stehen ja schon in der Menüpunkt Auswahl
 msgid "If you want to refresh the EPG in background, you can choose the method which best suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture."
@@ -306,7 +306,7 @@ msgid "Show the pending Services for refresh"
 msgstr "Ausstehende Sender einer laufenden Aktualisierung ansehen"
 
 msgid "Shutdown after EPG refresh."
-msgstr "Nach der Aktualisierung herunterfahren"
+msgstr "Nach der Aktualisierung in Deep-Standby herunterfahren"
 
 msgid "Skip protected Services"
 msgstr "überspringe geschützte Sender"
@@ -336,7 +336,7 @@ msgid "This setting controls whether or not the refresh will be initiated even t
 msgstr "Aktualisierung auch starten, wenn die Box gerade in Verwendung ist, also nicht im Standby oder bei aktiver Aufnahme?"
 
 msgid "This setting controls whether the receiver should be set to standby after refresh is completed."
-msgstr "Soll die Box nach der Aktualisierung in den Standby versetzt werden?"
+msgstr "Soll die Box nach der Aktualisierung in den Deep-Standby versetzt werden?"
 
 msgid ""
 "To apply your Changes the GUI has to be restarted.\n"
@@ -359,7 +359,7 @@ msgid "Version"
 msgstr "Version"
 
 msgid "Wake up from standby for EPG refresh."
-msgstr "Aus dem Standby hochfahren"
+msgstr "Aus dem Deep-Standby hochfahren"
 
 msgid "Yes"
 msgstr "Ja"
