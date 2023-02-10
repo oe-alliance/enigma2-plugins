@@ -129,7 +129,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 			self.idx = 1
 
 		self.list.extend([
-			getConfigListEntry(_("Refreshing"), NoSave(ConfigSelection(choices=[(x, ServiceReference(x.sref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))])))
+			getConfigListEntry(_("Refresh using"), NoSave(ConfigSelection(choices=[(x, ServiceReference(x.sref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))])))
 				for x in self.services[self.idx]
 		])
 
@@ -177,7 +177,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 		if args:
 			list = self["config"].getList()
 			list.append(getConfigListEntry(
-				_("Refreshing"),
+				_("Refresh using"),
 				NoSave(ConfigSelection(choices=[(
 					EPGRefreshService(str(args[0].toString()), None),
 					ServiceReference(args[0]).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
