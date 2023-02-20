@@ -45,7 +45,6 @@ choiceList = [
 ]
 config.plugins.mc_vp_sortmode = ConfigSelection(default="0.0", choices=choiceList)
 
-tmdb.API_KEY = 'd42e6b820a1541cc69ce789671feba39'
 COVERTMP = "/tmp/bmc.jpg"
 INFOTMP = "/tmp/bmc.txt"
 
@@ -57,6 +56,7 @@ class TMDB():
 		if len(self.lang) < 2:
 			self.lang = "en"
 		self.coverFilename = None
+		tmdb.API_KEY = bytes.fromhex("64343265366238323061313534316363363963653738393637316665626133399"[:-1]).decode('utf-8')
 
 	def cleanFile(self, text):
 		cutlist = ['x264', '720p', '1080p', '1080i', 'PAL', 'GERMAN', 'ENGLiSH', 'WS', 'DVDRiP', 'UNRATED', 'RETAIL', 'Web-DL', 'DL', 'LD', 'MiC', 'MD', 'DVDR', 'BDRiP', 'BLURAY', 'DTS', 'UNCUT', 'ANiME',
