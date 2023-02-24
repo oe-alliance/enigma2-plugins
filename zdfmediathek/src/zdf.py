@@ -38,8 +38,7 @@ if not path.exists(FONT):
     FONT = "/usr/share/fonts/nmsbd.ttf"
 addFont(FONT, "SRegular", 100, False)
 API_URL = "https://zdf-cdn.live.cellular.de/mediathekV2/"
-ColorList = [("default,#1a104485,#3D104485,#1a104485", "Trans-BrightBlue"),
-("default,#050a1232,#1502050e,#05192d7c", "Trans-DarkBlue"), ("default,#05000000,#15000000,#05000000", "Trans-Black"), ("default,#1a746962,#1502050e,#1a746962", "Trans-BrownBlue"), ("MiniTV,#104485,#0c366a,#104485", "BrightBlue MiniTV"), ("MiniTV,#0a1232,#02050e,#192d7c", "DarkBlue MiniTV"), ("MiniTV,#000000,#080808,#000000", "Black MiniTV"), ("MiniTV,#746962,#02050e,#746962", "BrownBlue MiniTV")]
+ColorList = [("default,#1a104485,#3D104485,#1aC0C0C0", "Trans-BrightBlue"), ("default,#050a1232,#1502050e,#05192d7c", "Trans-DarkBlue"), ("default,#05000000,#15000000,#43464B", "Trans-Black"), ("default,#1a746962,#1502050e,#1a746962", "Trans-BrownBlue"), ("MiniTV,#104485,#0c366a,#C0C0C0", "BrightBlue MiniTV"), ("MiniTV,#0a1232,#02050e,#192d7c", "DarkBlue MiniTV"), ("MiniTV,#000000,#080808,#43464B", "Black MiniTV"), ("MiniTV,#746962,#02050e,#746962", "BrownBlue MiniTV")]
 config.plugins.ZDF.SkinColor = ConfigSelection(default="default,#050a1232,#1502050e,#05192d7c", choices=ColorList)
 
 
