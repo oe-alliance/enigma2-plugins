@@ -38,7 +38,7 @@ if not path.exists(FONT):
     FONT = "/usr/share/fonts/nmsbd.ttf"
 addFont(FONT, "SRegular", 100, False)
 API_URL = "https://zdf-cdn.live.cellular.de/mediathekV2/"
-ColorList = [("default,#1a104485,#3D104485,#1aC0C0C0", "Trans-BrightBlue"), ("default,#050a1232,#1502050e,#05192d7c", "Trans-DarkBlue"), ("default,#05000000,#15000000,#43464B", "Trans-Black"), ("default,#1a746962,#1502050e,#1a746962", "Trans-BrownBlue"), ("MiniTV,#104485,#0c366a,#C0C0C0", "BrightBlue MiniTV"), ("MiniTV,#0a1232,#02050e,#192d7c", "DarkBlue MiniTV"), ("MiniTV,#000000,#080808,#43464B", "Black MiniTV"), ("MiniTV,#746962,#02050e,#746962", "BrownBlue MiniTV")]
+ColorList = [("default,#1a104485,#3D104485,#1aC0C0C0", "Trans-BrightBlue"), ("default,#050a1232,#1502050e,#05192d7c", "Trans-DarkBlue"), ("default,#05000000,#15000000,#606060", "Trans-BlackGray"), ("default,#05000000,#15000000,#ffff00", "Trans-BlackYellow"), ("default,#1a746962,#1502050e,#1a746962", "Trans-BrownBlue"), ("MiniTV,#104485,#0c366a,#C0C0C0", "BrightBlue MiniTV"), ("MiniTV,#0a1232,#02050e,#192d7c", "DarkBlue MiniTV"), ("MiniTV,#000000,#080808,#606060", "BlackGray MiniTV"), ("MiniTV,#000000,#080808,#ffff00", "BlackYellow MiniTV"), ("MiniTV,#746962,#02050e,#746962", "BrownBlue MiniTV")]
 config.plugins.ZDF.SkinColor = ConfigSelection(default="default,#050a1232,#1502050e,#05192d7c", choices=ColorList)
 
 
@@ -144,10 +144,10 @@ class ZDFMediathek(Screen):
                     url = js.get("url")
                     if ".m3u8" in url:
                         continue
-                    url = js.get("url").replace("1628k_p13v15", "3360k_p36v15").replace("808k_p11v15", "2360k_p35v15").replace("508k_p9v15", "808k_p11v15")
+                    url = js.get("url").replace("1628k_p13v", "3360k_p36v").replace("808k_p11v", "2360k_p35v").replace("508k_p9v", "808k_p11v")
                     q = filename
                     if js.get("language"):
-                        q += "(" + str(js.get("language").upper()) + ")"
+                        q += " (" + str(js.get("language").upper()) + ")"
                     if js.get("class", "") == "ad":
                         q += "(AD)"
                     if js.get("quality"):
@@ -329,7 +329,7 @@ class ZDFMediathek(Screen):
         if js.get("type") == "externalUrl" or js.get("currentVideoType") in ["novideo", "live"]:
             return None
         if js.get("seasonNumber"):
-            title = "%s - S%sE%s%s" % (js.get("headline"), js.get("seasonNumber", "0"), js.get("episodeNumber", "0"), (" - " + js.get("titel") if not "Episode" in js.get("titel") else ""))
+            title = "%s - S%sE%s%s" % (js.get("headline"), js.get("seasonNumber", "0"), js.get("episodeNumber", "0"), (" - " + js.get("titel") if "Episode" not in js.get("titel") else ""))
         else:
             title = js.get("titel")
         img = ImageUrl(js)
@@ -396,7 +396,7 @@ class ZDFMediathek(Screen):
                     if ".m3u8" in url:
                         q += "(M3U8)"
                     elif ".mp4" in url:
-                        url = js.get("url").replace("1628k_p13v15", "3360k_p36v15").replace("808k_p11v15", "2360k_p35v15").replace("508k_p9v15", "808k_p11v15")
+                        url = js.get("url").replace("1628k_p13v", "3360k_p36v").replace("808k_p11v", "2360k_p35v").replace("508k_p9v", "808k_p11v")
                         q += "(MP4)"
                     if js.get("language"):
                         q += " " + js.get("language").upper()
@@ -462,7 +462,7 @@ class ZDFMediathek(Screen):
     def getimage(self, url):
         try:
             data = geturl(url)
-            img = "/tmp/cover/bild"
+            img = "/tmp/cover/bild.jpg"
             with open(img, "wb") as f:
                 f.write(data)
             self.get_cover(img)
