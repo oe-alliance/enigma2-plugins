@@ -478,7 +478,7 @@ class ArdMediathek(Screen):
     def getimage(self, url):
         try:
             data = geturl(url)
-            img = "/tmp/cover/bild"
+            img = "/tmp/cover/bild.jpg"
             with open(img, "wb") as f:
                 f.write(data)
             self.get_cover(img)
