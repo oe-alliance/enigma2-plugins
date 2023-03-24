@@ -278,8 +278,7 @@ class ArdMediathek(Screen):
                 im = {}
             if im.get("aspect16x9"):
                 im = im.get("aspect16x9")
-            if im.get("src"):
-                img = im.get("src").replace("{width}", "360")
+            img = im.get("src", "").replace("{width}", "360")
             if js.get("links"):
                 li = js.get("links")
                 if li.get("target"):
