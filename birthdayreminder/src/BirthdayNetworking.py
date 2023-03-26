@@ -1,5 +1,6 @@
 # PYTHON IMPORTS
 from pickle import loads as pickle_loads
+from six import ensure_binary
 from socket import SOL_SOCKET, SO_BROADCAST
 from twisted.internet.error import ConnectionDone
 from twisted.internet.protocol import DatagramProtocol, ServerFactory, ClientFactory, Protocol
@@ -19,11 +20,13 @@ class BroadcastProtocol(DatagramProtocol):
 		self.uuid = self.getNodeHack()  # sent with broadcasts to identify ourselves when receiving our own broascast :o
 
 	def startProtocol(self):
-		self.transport.socket.setsockopt(SOL_SOCKET, SO_BROADCAST, True)
+		if self.transport:
+			self.transport.socket.setsockopt(SOL_SOCKET, SO_BROADCAST, True)
 
 	def sendBroadcast(self, message):
-		newMessage = ''.join([self.uuid, " ", message])
-		self.transport.write(newMessage, ("255.255.255.255", self.port))
+		if self.transport:
+			newMessage = ensure_binary(''.join([self.uuid, " ", message]))
+			self.transport.write(newMessage, ("255.255.255.255", self.port))
 
 	def datagramReceived(self, data, addr):
 		parts = data.split()  # filter unknown data. we expect two parts, a uuid and a "command"
@@ -40,7 +43,7 @@ class BroadcastProtocol(DatagramProtocol):
 
 	def getNodeHack(self):
 		from os import urandom
-		return urandom(16)
+		return str(urandom(16))
 
 
 # the server classes are used to send and receive birthday lists
@@ -49,23 +52,24 @@ class TransferServerProtocol(Protocol):
 		self.parent = parent
 
 	def connectionMade(self):
-		print("[Birthday Reminder] client %s connected" % self.transport.getPeer().host)
+		if self.transport:
+			print("[Birthday Reminder] client %s connected" % self.transport.getPeer().host)
 
 	def dataReceived(self, data):
-		peer = self.transport.getPeer().host
+		peer = self.transport.getPeer().host if self.transport else None
 
 		if data == "requestingList":
 			print("[Birthday Reminder] sending birthday list to client %s" % peer)
 
 			data = self.parent.readRawFile()
-			if data:
+			if data and self.transport:
 				self.transport.write(data)
 		else:  # should be a pickled birthday list...
 			receivedList = None
 			try:  # let's see if it's pickled data
 				receivedList = pickle_loads(data)
 				print("[Birthday Reminder] received birthday list from %s" % peer)
-			except:
+			except Exception as err:
 				print("[Birthday Reminder] received unknown package from %s" % peer)
 
 			if receivedList is None:
@@ -76,13 +80,15 @@ class TransferServerProtocol(Protocol):
 			self.parent.addAllTimers()
 			self.parent.showReceivedMessage(len(receivedList), peer)
 
-		self.transport.loseConnection()
+		if self.transport:
+			self.transport.loseConnection()
 
 	def connectionLost(self, reason):
-		if reason.type == ConnectionDone:
-			print("[Birthday Reminder] closed connection to client %s" % self.transport.getPeer().host)
-		else:
-			print("[Birthday Reminder] lost connection to client %s. Reason: %s" % (self.transport.getPeer().host, str(reason.value)))
+		if self.transport:
+			if reason.type == ConnectionDone:
+				print("[Birthday Reminder] closed connection to client %s" % self.transport.getPeer().host)
+			else:
+				print("[Birthday Reminder] lost connection to client %s. Reason: %s" % (self.transport.getPeer().host, str(reason.value)))
 
 
 class TransferServerFactory(ServerFactory):
@@ -100,13 +106,12 @@ class TransferClientProtocol(Protocol):
 		self.data = data
 
 	def dataReceived(self, data):
-		peer = self.transport.getPeer().host
-
+		peer = self.transport.getPeer().host if self.transport else None
 		receivedList = None
 		try:
 			receivedList = pickle_loads(data)
 			print("[Birthday Reminder] received birthday list from %s" % peer)
-		except:
+		except Exception as err:
 			print("[Birthday Reminder] received unknown package from %s" % peer)
 
 		if receivedList is None:
@@ -119,7 +124,8 @@ class TransferClientProtocol(Protocol):
 		self.parent.showReceivedMessage(len(receivedList), peer)
 
 	def connectionMade(self):
-		self.transport.write(self.data)
+		if self.transport:
+			self.transport.write(self.data)
 
 
 class TransferClientFactory(ClientFactory):
