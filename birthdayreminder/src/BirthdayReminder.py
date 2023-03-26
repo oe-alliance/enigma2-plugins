@@ -52,7 +52,7 @@ class BirthdayStore:
 	def writeRawFile(self, data):
 		fileName = config.plugins.birthdayreminder.file.value
 		try:
-			f = open(fileName, "wb")
+			f = open(fileName, "w")
 			f.write(data)
 			f.close()
 		except IOError as xxx_todo_changeme2:
@@ -407,7 +407,7 @@ class BirthdayReminder(Screen, HelpableScreen):
 	def saveCSV(self):
 		print("[Birthday Reminder] exporting CSV file %s" % CSVFILE)
 		try:
-			csvFile = open(CSVFILE, "wb")
+			csvFile = open(CSVFILE, "w")
 			writer = csv_writer(csvFile)
 			writer.writerows(self.birthdaytimer.getBirthdayList())
 			csvFile.close()
@@ -453,7 +453,7 @@ class BirthdayReminder(Screen, HelpableScreen):
 		# the critical part is done, now update the lists and timers
 
 		self.birthdaytimer.bDayList = copy(csvList)
-		self.birthdaytimer.save()
+		self.birthdaytimer.saveStore()
 		self["list"].setList(self.birthdaytimer.getBirthdayList())
 		self.setListSorted()
 		self.setButtonState()
