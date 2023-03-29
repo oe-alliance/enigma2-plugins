@@ -1002,14 +1002,15 @@ class IMDB(Screen, HelpableScreen):
 				for char in lines:
 					stageDirection = get(char, 'stageDirection')
 					character = get(char, ('characters', 'character'))
+					text = get(char, 'text') or ""
 					line = ""
 					if character:
 						line += character + ": "
-						if stageDirection:
-							line += "[%s] " % stageDirection
-						line += get(char, 'text')
-					elif stageDirection:
+					if stageDirection:
 						line += "[%s]" % stageDirection
+						if text:
+							line += " "
+					line += text
 					q.append(line)
 				return "\n".join(q)
 
