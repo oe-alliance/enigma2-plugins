@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 19:06+0430\n"
-"PO-Revision-Date: 2014-10-29 12:40+0100\n"
-"Last-Translator: OEA\n"
+"PO-Revision-Date: 2023-03-30 11:46+0200\n"
+"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: french\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, python-format
 msgid "%s will turn %s in %s!"
@@ -86,9 +86,8 @@ msgstr "Annuler"
 msgid "Change path"
 msgstr "Changer le chemin"
 
-#, fuzzy
 msgid "Choose the filename:"
-msgstr "Nom du fichier Anniversaire:"
+msgstr "Choisissez le nom du fichier:"
 
 msgid "Date format:"
 msgstr "Format date:"
@@ -100,7 +99,7 @@ msgid "Disabled"
 msgstr "Désactivé"
 
 msgid "Distribute birthdays to other Dreamboxes"
-msgstr "Distribuer les anniversaires aux autres récepteurs."
+msgstr "Distribuer les anniversaires aux autres récepteurs"
 
 #, python-format
 msgid "Do you really want to delete the entry for %s?"
@@ -119,7 +118,7 @@ msgid "Edit the selected entry"
 msgstr "Éditer l'entrée sélectionnée"
 
 msgid "Enter the name of the person:"
-msgstr ""
+msgstr "Saisissez le nom de la personne:"
 
 #, python-format
 msgid ""
@@ -224,7 +223,7 @@ msgstr ""
 "Il/Elle est né(e) en %s et a donc %s an(s)."
 
 msgid "VirtualKeyBoard"
-msgstr ""
+msgstr "VirtualKeyBoard"
 
 msgid "What do you want to do?"
 msgstr "Que voulez-vous faire?"
