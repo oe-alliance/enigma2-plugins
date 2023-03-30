@@ -1,0 +1,215 @@
+# Portuguese translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-12 19:10+0100\n"
+"PO-Revision-Date: 2023-03-30 21:37+0100\n"
+"Last-Translator: NUNIGAIA <nunigaia via GitHub.com>\n"
+"Language-Team: \n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#, python-format
+msgid "%s will turn %s in %s!"
+msgstr "%s vai-se %s transformar em %s!"
+
+msgid "1 day"
+msgstr "1 dia"
+
+msgid "1 week"
+msgstr "1 semana"
+
+msgid "3 days"
+msgstr "3 dias"
+
+msgid "Add"
+msgstr "Adicionar"
+
+msgid "Add a birthday"
+msgstr "Adicionar um aniversário"
+
+msgid "Add birthday"
+msgstr "Adicionar aniversário"
+
+msgid "Age"
+msgstr "Idade"
+
+msgid "Birthday"
+msgstr "Aniversário"
+
+msgid "Birthday Reminder"
+msgstr "Lembrete de aniversário"
+
+msgid "Birthday Reminder Settings"
+msgstr "Definições do lembrete de aniversário"
+
+#, python-format
+msgid "Birthday Reminder received %s birthdays from %s."
+msgstr "Lembrete de aniversário recebido %s aniversários de %s."
+
+msgid "Birthday filename:"
+msgstr "Nome do arquivo de aniversário:"
+
+msgid "Birthdays"
+msgstr "Aniversários"
+
+msgid "CSV import successful!"
+msgstr "Importação de CSV bem-sucedida!"
+
+#, python-format
+msgid "Can't find CSV file %s!"
+msgstr "Não é possível encontrar o arquivo CSV %s!"
+
+#, python-format
+msgid "Can't import CSV data from file %s."
+msgstr "Não é possível importar dados CSV do arquivo %s."
+
+#, python-format
+msgid "Can't write CSV file %s."
+msgstr "Não é possível gravar o arquivo CSV %s."
+
+msgid "Date format:"
+msgstr "Formato da Data:"
+
+msgid "Day:"
+msgstr "Dia:"
+
+msgid "Disabled"
+msgstr "Inativo"
+
+msgid "Distribute birthdays to other Dreamboxes"
+msgstr "Distribuir aniversários para outros receptores"
+
+#, python-format
+msgid "Do you really want to delete the entry for %s?"
+msgstr "Você realmente deseja excluir a entrada para %s?"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Edit Birthday Settings"
+msgstr "Editar configurações de aniversário"
+
+msgid "Edit birthday"
+msgstr "Editar aniversário"
+
+msgid "Edit birthdays"
+msgstr "Editar aniversários"
+
+msgid "Edit the selected entry"
+msgstr "Editar a entrada selecionada"
+
+#, python-format
+msgid ""
+"Error reading file %s.\n"
+"\n"
+"Error: %s, %s"
+msgstr ""
+"Erro ao ler %s do arquivo.\n"
+"\n"
+"Erro: %s, %s"
+
+#, python-format
+msgid ""
+"Error writing file %s.\n"
+"\n"
+"Error: %s, %s"
+msgstr ""
+"Erro ao gravar %s de arquivo.\n"
+"\n"
+"Erro: %s, %s"
+
+msgid "Exit the plugin"
+msgstr "Sair do plugin"
+
+msgid "Export CSV file"
+msgstr "Exportar arquivo CSV"
+
+msgid "Extras"
+msgstr "Extras"
+
+msgid "Helps to remind of birthdays"
+msgstr "Ajuda a lembrar de aniversários"
+
+msgid "Import CSV file"
+msgstr "Importar arquivo CSV"
+
+msgid "Invalid date!"
+msgstr "Data inválida!"
+
+msgid "Month:"
+msgstr "Mês:"
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "Name:"
+msgstr "Nome:"
+
+msgid "Networking port (default: 7374):"
+msgstr "Porta de rede (padrão: 7374):"
+
+msgid "Next birthday"
+msgstr "Próximo aniversário"
+
+msgid "Notification time:"
+msgstr "Hora da notificação:"
+
+msgid "Open the extras menu"
+msgstr "Abrir o menu de extras"
+
+msgid "Path to birthday file:"
+msgstr "Caminho para o arquivo de aniversário:"
+
+msgid "Remind before birthday:"
+msgstr "Lembrar antes do aniversário:"
+
+msgid "Remove"
+msgstr "Remover"
+
+msgid "Remove the selected entry"
+msgstr "Remover a entrada selecionada"
+
+msgid "Select a path for the birthday file"
+msgstr "Selecione um caminho para o arquivo de aniversário"
+
+msgid "Show plugin in extensions menu:"
+msgstr "Mostrar plugin no menu de extensões:"
+
+msgid "Sort birthdays by:"
+msgstr "Ordenar aniversários por:"
+
+msgid "Sorting next"
+msgstr "Ordenação seguinte"
+
+msgid "Sorting previous"
+msgstr "Ordenação anterior"
+
+#, python-format
+msgid ""
+"Today is %s's birthday!\n"
+"\n"
+"She/he was born on %s and is now %s year(s) old."
+msgstr ""
+"Hoje é aniversário de %s!\n"
+"\n"
+"Ele / ela nasceu em %s e agora tem %s ano (s) de idade."
+
+msgid "What do you want to do?"
+msgstr "O que pretende fazer?"
+
+#, python-format
+msgid "Wrote CSV file %s."
+msgstr "Escreveu o arquivo CSV %s."
+
+msgid "Year:"
+msgstr "Ano:"
