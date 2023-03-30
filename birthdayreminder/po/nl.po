@@ -8,20 +8,19 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 19:06+0430\n"
-"PO-Revision-Date: 2013-07-25 16:38+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"PO-Revision-Date: 2023-03-30 11:41+0200\n"
+"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: The Netherlands\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, python-format
 msgid "%s will turn %s in %s!"
-msgstr "%s zal worden gewijzigd in %s!"
+msgstr "%s zal worden gewijzigd %s in %s!"
 
 msgid "1 day"
 msgstr "1 dag"
@@ -58,7 +57,7 @@ msgstr "Verjaardagsherinnering instellingen"
 
 #, python-format
 msgid "Birthday Reminder received %s birthdays from %s."
-msgstr "Verjaardagsherinnering ontvangen %s verjaardagen van %s"
+msgstr "Verjaardagsherinnering ontvangen %s verjaardagen van %s."
 
 msgid "Birthday filename:"
 msgstr "Verjaardagen bestandsnaam:"
@@ -87,9 +86,8 @@ msgstr "Annuleer"
 msgid "Change path"
 msgstr "Verander pad"
 
-#, fuzzy
 msgid "Choose the filename:"
-msgstr "Verjaardagen bestandsnaam:"
+msgstr "Kies de bestandsnaam:"
 
 msgid "Date format:"
 msgstr "Datum formaat:"
@@ -120,7 +118,7 @@ msgid "Edit the selected entry"
 msgstr "Bewerk de geselecteerde waarde"
 
 msgid "Enter the name of the person:"
-msgstr ""
+msgstr "Geef de naam van de persoon:"
 
 #, python-format
 msgid ""
@@ -203,7 +201,7 @@ msgid "Save"
 msgstr "Sla op"
 
 msgid "Show plugin in extensions menu:"
-msgstr "Toon plugin in extensies"
+msgstr "Toon plugin in extensies:"
 
 msgid "Sort birthdays by:"
 msgstr "Sorteer verjaardagen volgens:"
@@ -225,14 +223,14 @@ msgstr ""
 "Hij/Zij is geboren op %s en is nu %s jaar oud."
 
 msgid "VirtualKeyBoard"
-msgstr ""
+msgstr "VirtualKeyBoard"
 
 msgid "What do you want to do?"
 msgstr "Wat wilt u doen?"
 
 #, python-format
 msgid "Wrote CSV file %s."
-msgstr "CSV bestand %s geschreven"
+msgstr "CSV bestand %s geschreven."
 
 msgid "Year:"
 msgstr "Jaar:"

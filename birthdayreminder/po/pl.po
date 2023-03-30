@@ -1,0 +1,196 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Birthday Reminder\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2023-03-30 09:32+0200\n"
+"Last-Translator: paps\n"
+"Language-Team: paps\n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+msgid "%s will turn %s in %s!"
+msgstr "%s będzie miał/a %s urodziny za %s!"
+
+msgid "1 day"
+msgstr "1 dzień"
+
+msgid "1 week"
+msgstr "tydzień"
+
+msgid "3 days"
+msgstr "3 dni"
+
+msgid "Add"
+msgstr "Dodaj"
+
+msgid "Add a birthday"
+msgstr "Dodaj urodziny"
+
+msgid "Add birthday"
+msgstr "Dodaj urodziny"
+
+msgid "Age"
+msgstr "Wiek"
+
+msgid "Birthday"
+msgstr "Urodziny"
+
+msgid "Birthday Reminder"
+msgstr "Przypomnienie o urodzinach"
+
+msgid "Birthday Reminder Settings"
+msgstr "Ustawienia Birthday Reminder"
+
+msgid "Birthday Reminder received %s birthdays from %s."
+msgstr "Birthday Remainder odebrał %s wpisów urodzin od %s."
+
+msgid "Birthday filename:"
+msgstr "Nazwa pliku z urodzinami:"
+
+msgid "Birthdays"
+msgstr "Lista urodzin"
+
+msgid "CSV import successful!"
+msgstr "Pomyślnie zaimportowano plik CSV!"
+
+msgid "Can't find CSV file %s!"
+msgstr "Nie można znaleźć pliku CSV: %s!"
+
+msgid "Can't import CSV data from file %s."
+msgstr "Nie można zaimportować danych z pliku CSV: %s."
+
+msgid "Can't write CSV file %s."
+msgstr "Nie można zapisać pliku CSV: %s."
+
+msgid "Date format:"
+msgstr "Format daty:"
+
+msgid "Day:"
+msgstr "Dzień:"
+
+msgid "Disabled"
+msgstr "Wyłączone"
+
+msgid "Distribute birthdays to other Dreamboxes"
+msgstr "Wysyłanie pliku z urodzinami do innych STB"
+
+msgid "Do you really want to delete the entry for %s?"
+msgstr "Czy na pewno chcesz usunąć wpis '%s'?"
+
+msgid "Edit"
+msgstr "Edycja"
+
+msgid "Edit birthday"
+msgstr "Edycja urodzin"
+
+msgid "Edit birthdays"
+msgstr "Edycja urodzin"
+
+msgid "Edit the selected entry"
+msgstr "Edycja zaznaczonego wpisu"
+
+msgid ""
+"Error reading file %s.\n"
+"\n"
+"Error: %s, %s"
+msgstr ""
+"Błąd odczytu pliku: %s.\n"
+"\n"
+"Błąd: %s, %s"
+
+msgid ""
+"Error writing file %s.\n"
+"\n"
+"Error: %s, %s"
+msgstr ""
+"Błąd zapisu pliku: %s.\n"
+"\n"
+"Błąd: %s, %s"
+
+msgid "Exit the plugin"
+msgstr "Wyjście"
+
+msgid "Export CSV file"
+msgstr "Eksport pliku CSV"
+
+msgid "Extras"
+msgstr "Dodatki"
+
+msgid "Helps to remind of birthdays"
+msgstr "Przypomienie o urodzinach"
+
+msgid "Import CSV file"
+msgstr "Import pliku CSV"
+
+msgid "Invalid date!"
+msgstr "Niepoprawna data!"
+
+msgid "Month:"
+msgstr "Miesiąc:"
+
+msgid "Name"
+msgstr "Nazwisko"
+
+msgid "Name:"
+msgstr "Nazwisko:"
+
+msgid "Networking port (default: 7374):"
+msgstr "Port sieciowy (domyślnie: 7374)"
+
+msgid "Next birthday"
+msgstr "Następne urodziny"
+
+msgid "Notification time:"
+msgstr "Godzina przypomnienia:"
+
+msgid "Open the extras menu"
+msgstr "Otwórz dodatkowe menu"
+
+msgid "Path to birthday file:"
+msgstr "Ścieżka do pliku z urodzinami:"
+
+msgid "Remind before birthday:"
+msgstr "Przypomnij przed urodzinami:"
+
+msgid "Remove"
+msgstr "Usuń"
+
+msgid "Remove the selected entry"
+msgstr "Usuń zaznaczony wpis"
+
+msgid "Show plugin in extensions menu:"
+msgstr "Pokaż wtyczkę w rozszerzonym menu:"
+
+msgid "Sort birthdays by:"
+msgstr ""
+"Sortowanie listy \n"
+"urodzin:"
+
+msgid "Sorting next"
+msgstr "Następne"
+
+msgid "Sorting previous"
+msgstr "Poprzednie"
+
+msgid ""
+"Today is %s's birthday!\n"
+"\n"
+"She/he was born on %s and is now %s year(s) old."
+msgstr ""
+"Dzisiaj %s ma urodziny!\n"
+"\n"
+"Urodził/a się w %s i ma %s lat/a."
+
+msgid "What do you want to do?"
+msgstr "Co chcesz zrobić?"
+
+msgid "Wrote CSV file %s."
+msgstr "Zapisano plik CSV: %s."
+
+msgid "Year:"
+msgstr "Rok:"
