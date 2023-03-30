@@ -475,6 +475,11 @@ class AutoTimer:
 				i = evt.getLinkageService(eserviceref, n - 1)
 				serviceref = i.toString()
 
+			# If event is expired skip it
+			if end < time():
+			#	print("[AutoTimer] Skipping expired timer")
+				continue
+
 			# If event starts in less than 60 seconds skip it
 			# if begin < time() + 60:
 			# 	print ("[AutoTimer] Skipping " + name + " because it starts in less than 60 seconds")
