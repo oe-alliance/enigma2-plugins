@@ -622,7 +622,7 @@ class AutoTimer:
 							rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it: %s ." % (timer.name, rtimer.name))
 						newEntry = rtimer
 						modified += 1
-						self.modifyTimer(rtimer, name, shortdesc, begin, end, serviceref, eit)
+						self.modifyTimer(rtimer, name, shortdesc, begin, end, serviceref, eit, offsetBegin, offsetEnd)
 						# rtimer.log(501, "[AutoTimer] AutoTimer modified timer: %s ." % (rtimer.name))
 						break
 					else:
@@ -667,6 +667,13 @@ class AutoTimer:
 				# Mark this entry as AutoTimer (only AutoTimers will have this Attribute set)
 				newEntry.isAutoTimer = True
 				newEntry.autoTimerId = timer.id
+
+				# set the correct margins
+				if hasattr(newEntry, "marginBefore"):
+					newEntry.marginBefore = offsetBegin
+					newEntry.marginAfter = offsetEnd
+					newEntry.eventBegin = newEntry.begin + offsetBegin
+					newEntry.eventEnd = newEntry.end - offsetEnd
 
 			# Apply afterEvent
 			if timer.hasAfterEvent():
@@ -856,14 +863,21 @@ class AutoTimer:
 #						pass
 #		del remove
 
-	def modifyTimer(self, timer, name, shortdesc, begin, end, serviceref, eit):
+	def modifyTimer(self, timer, name, shortdesc, begin, end, serviceref, eit, offsetBegin, offsetEnd):
 		# Don't update the name, it will overwrite the name of the SeriesPlugin
 		#timer.name = name
+
 		timer.description = shortdesc
 		timer.begin = int(begin)
 		timer.end = int(end)
 		timer.service_ref = ServiceReference(serviceref)
 		timer.eit = eit
+
+		if hasattr(timer, "marginBefore"):
+			timer.marginBefore = offsetBegin
+			timer.marginAfter = offsetEnd
+			timer.eventBegin = timer.begin + offsetBegin
+			timer.eventEnd = timer.end - offsetEnd
 
 	def addDirectoryToMovieDict(self, moviedict, dest, serviceHandler):
 		movielist = serviceHandler.list(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + dest))
