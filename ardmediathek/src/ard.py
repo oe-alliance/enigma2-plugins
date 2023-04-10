@@ -432,9 +432,12 @@ class ArdMediathek(Screen):
         self.session.open(MessageBox, "Download-Fehler %s" % error, MessageBox.TYPE_INFO)
 
     def DL_progress(self, recvbytes, totalbytes):
-        if recvbytes and totalbytes:
+        try:
             self["DownloadLabel"].setText(str(recvbytes // 1024 // 1024) + "MB/" + str(totalbytes // 1024 // 1024) + "MB")
             self["progress"].setValue(int(100 * recvbytes // totalbytes))
+        except KeyError:
+            pass
+
 
     def Play(self):
         url = self["movielist"].getCurrent()[2]
