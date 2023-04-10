@@ -438,7 +438,6 @@ class ArdMediathek(Screen):
         except KeyError:
             pass
 
-
     def Play(self):
         url = self["movielist"].getCurrent()[2]
         html = ensure_str(geturl(url))
