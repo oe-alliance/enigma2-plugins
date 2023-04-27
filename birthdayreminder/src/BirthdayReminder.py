@@ -540,7 +540,7 @@ class BirthdayReminderSettings(Setup):
 
 	def keySelect(self):
 		if self.getCurrentItem() == self.path:
-			self.session.openWithCallback(self.keySelectCallback, BirthdayReminderLocationBox, currDir=self.path.value)
+			self.session.openWithCallback(self.keySelectCallback, BirthdayReminderLocationBox, initDir=self.path.value)
 			return
 		Setup.keySelect(self)
 
